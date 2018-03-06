@@ -6,7 +6,6 @@
 //
 // -------------------------------------------------------------------------
 
-//#include <crtdbg.h>
 #include <time.h>
 #include <stdio.h>
 #include <iostream>
@@ -16,7 +15,6 @@
 #include <future>
 #include <functional>
 #include <atomic>
-#include "NFCCellManager.h"
 #include "NFCPluginManager.h"
 #include "NFComm/NFPluginModule/NFPlatform.h"
 
@@ -108,7 +106,7 @@ void CreateBackThread()
 
 void InitDaemon()
 {
-#if NF_PLATFORM == NF_PLATFORM_LINUX
+#if NF_PLATFORM != NF_PLATFORM_WIN
     daemon(1, 0);
 
     // ignore signals
@@ -138,7 +136,7 @@ void PrintfLogo()
     std::cout << "************************************************" << std::endl;
     std::cout << "\n" << std::endl;
 	std::cout << "-d Run itas daemon mode, only on linux" << std::endl;
-	std::cout << "-x Closethe 'X' button, only on windows" << std::endl;
+	std::cout << "-x Close the 'X' button, only on windows" << std::endl;
 	std::cout << "Instance: name.xml File's name to instead of \"Plugin.xml\" when programs be launched, all platform" << std::endl;
 	std::cout << "Instance: \"ID=number\", \"Server=GameServer\"  when programs be launched, all platform" << std::endl;
 	std::cout << "\n" << std::endl;
@@ -161,7 +159,7 @@ void ProcessParameter(int argc, char* argv[])
 	{
 		CloseXButton();
 	}
-#elif NF_PLATFORM == NF_PLATFORM_LINUX
+#else
     //run it as a daemon process
 	if (strArgvList.find("-d") != string::npos)
 	{
@@ -171,6 +169,25 @@ void ProcessParameter(int argc, char* argv[])
     signal(SIGPIPE, SIG_IGN);
     signal(SIGCHLD, SIG_IGN);
 #endif
+
+    if (strArgvList.find("Path=") != string::npos)
+    {
+        for (int i = 0; i < argc; i++)
+        {
+            strDataPath = argv[i];
+            if (strDataPath.find("Path=") != string::npos)
+            {
+                strDataPath.erase(0, 5);
+                break;
+            }
+        }
+
+        NFCPluginManager::GetSingletonPtr()->SetConfigPath(strDataPath);
+    }
+    else
+    {
+        NFCPluginManager::GetSingletonPtr()->SetConfigPath("../");
+    }
 
 	if (strArgvList.find(".xml") != string::npos)
 	{
@@ -220,21 +237,6 @@ void ProcessParameter(int argc, char* argv[])
         }
 	}
 
-	if (strArgvList.find("Path=") != string::npos)
-	{
-		for (int i = 0; i < argc; i++)
-		{
-			strDataPath = argv[i];
-			if (strDataPath.find("Path=") != string::npos)
-			{
-				strDataPath.erase(0, 5);
-				break;
-			}
-		}
-
-		NFCPluginManager::GetSingletonPtr()->SetConfigPath(strDataPath);
-	}
-
 	strTitleName = strAppName + strAppID;// +" PID" + NFGetPID();
 	strTitleName.replace(strTitleName.find("Server"), 6, "");
 	strTitleName = "NF" + strTitleName;
@@ -256,7 +258,7 @@ int main(int argc, char* argv[])
     ProcessParameter(argc, argv);
 
 	PrintfLogo();
-	CreateBackThread();
+	//CreateBackThread();
 
 	NFCPluginManager::GetSingletonPtr()->Awake();
 	NFCPluginManager::GetSingletonPtr()->Init();
@@ -268,29 +270,27 @@ int main(int argc, char* argv[])
 	uint64_t nIndex = 0;
     while (!bExitApp)
     {
-        while (true)
+		nIndex++;
+
+		std::this_thread::sleep_for(std::chrono::milliseconds(1));
+
+        if (bExitApp)
         {
-			nIndex++;
-
-			std::this_thread::sleep_for(std::chrono::milliseconds(1));
-
-            if (bExitApp)
-            {
-                break;
-            }
-
-#if NF_PLATFORM == NF_PLATFORM_WIN
-            __try
-            {
-#endif
-				NFCPluginManager::GetSingletonPtr()->Execute();
-#if NF_PLATFORM == NF_PLATFORM_WIN
-            }
-            __except (ApplicationCrashHandler(GetExceptionInformation()))
-            {
-            }
-#endif
+            break;
         }
+
+#if NF_PLATFORM == NF_PLATFORM_WIN
+        __try
+        {
+#endif
+		//NFCPluginManager::GetSingletonPtr()->Execute();
+		NFCPluginManager::Instance()->ExecuteCoScheduler();
+#if NF_PLATFORM == NF_PLATFORM_WIN
+        }
+        __except (ApplicationCrashHandler(GetExceptionInformation()))
+        {
+        }
+#endif
     }
 
 	NFCPluginManager::GetSingletonPtr()->BeforeShut();

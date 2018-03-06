@@ -32,6 +32,9 @@ TO
 #define EVBUFFER_MAX_READ	65536
 */
 
+//1048576 = 1024 * 1024
+#define NF_BUFFER_MAX_READ	1048576
+
 void NFCNet::conn_writecb(struct bufferevent* bev, void* user_data)
 {
     
@@ -94,9 +97,9 @@ void NFCNet::listener_cb(struct evconnlistener* listener, evutil_socket_t fd, st
         return;
     }
 
-    struct event_base* base = pNet->base;
+    struct event_base* mxBase = pNet->mxBase;
     
-    struct bufferevent* bev = bufferevent_socket_new(base, fd, BEV_OPT_CLOSE_ON_FREE);
+    struct bufferevent* bev = bufferevent_socket_new(mxBase, fd, BEV_OPT_CLOSE_ON_FREE);
     if (!bev)
     {
         
@@ -150,15 +153,22 @@ void NFCNet::conn_readcb(struct bufferevent* bev, void* user_data)
 
     //////////////////////////////////////////////////////////////////////////
 
-    
-    char* strMsg = new char[len];
+	static char* mstrTempBuffData = nullptr;
+	if (mstrTempBuffData == nullptr)
+	{
+		mstrTempBuffData = new char[NF_BUFFER_MAX_READ];
+	}
 
-    if (evbuffer_remove(input, strMsg, len) > 0)
+	int nDataLen = len;
+	if (len > NF_BUFFER_MAX_READ)
+	{
+		nDataLen = NF_BUFFER_MAX_READ;
+	}
+
+    if (evbuffer_remove(input, mstrTempBuffData, nDataLen) > 0)
     {
-        pObject->AddBuff(strMsg, len);
+        pObject->AddBuff(mstrTempBuffData, nDataLen);
     }
-
-    delete[] strMsg;
 
     while (1)
     {
@@ -175,9 +185,9 @@ bool NFCNet::Execute()
 {
     ExecuteClose();
 
-    if (base)
+    if (mxBase)
     {
-        event_base_loop(base, EVLOOP_ONCE | EVLOOP_NONBLOCK);
+        event_base_loop(mxBase, EVLOOP_ONCE | EVLOOP_NONBLOCK);
     }
 
     return true;
@@ -221,19 +231,16 @@ bool NFCNet::Final()
         listener = NULL;
     }
 
-    if (!mbServer)
+    if (mxBase)
     {
-        if (base)
-        {
-            event_base_free(base);
-            base = NULL;
-        }
+        event_base_free(mxBase);
+        mxBase = NULL;
     }
 
     return true;
 }
 
-bool NFCNet::SendMsgToAllClient(const char* msg, const uint32_t nLen)
+bool NFCNet::SendMsgToAllClient(const char* msg, const size_t nLen)
 {
     if (nLen <= 0)
     {
@@ -260,7 +267,7 @@ bool NFCNet::SendMsgToAllClient(const char* msg, const uint32_t nLen)
 }
 
 
-bool NFCNet::SendMsg(const char* msg, const uint32_t nLen, const NFSOCK nSockIndex)
+bool NFCNet::SendMsg(const char* msg, const size_t nLen, const NFSOCK nSockIndex)
 {
     if (nLen <= 0)
     {
@@ -287,7 +294,7 @@ bool NFCNet::SendMsg(const char* msg, const uint32_t nLen, const NFSOCK nSockInd
     return false;
 }
 
-bool NFCNet::SendMsg(const char* msg, const uint32_t nLen, const std::list<NFSOCK>& fdList)
+bool NFCNet::SendMsg(const char* msg, const size_t nLen, const std::list<NFSOCK>& fdList)
 {
     std::list<NFSOCK>::const_iterator it = fdList.begin();
     for (; it != fdList.end(); ++it)
@@ -384,14 +391,14 @@ int NFCNet::InitClientNet()
         return -1;
     }
 
-    base = event_base_new();
-    if (base == NULL)
+    mxBase = event_base_new();
+    if (mxBase == NULL)
     {
         printf("event_base_new ");
         return -1;
     }
 
-    bev = bufferevent_socket_new(base, -1, BEV_OPT_CLOSE_ON_FREE);
+    bev = bufferevent_socket_new(mxBase, -1, BEV_OPT_CLOSE_ON_FREE);
     if (bev == NULL)
     {
         printf("bufferevent_socket_new ");
@@ -424,7 +431,7 @@ int NFCNet::InitClientNet()
 	int nSizeRead = (int)bufferevent_get_max_to_read(bev);
 	int nSizeWrite = (int)bufferevent_get_max_to_write(bev);
 
-	std::cout << "SizeRead: " << nSizeRead << std::endl;
+	std::cout << "want to connect " << mstrIP << " SizeRead: " << nSizeRead << std::endl;
 	std::cout << "SizeWrite: " << nSizeWrite << std::endl;
 
 	//bufferevent_set_max_single_read(bev, 0);
@@ -451,7 +458,7 @@ int NFCNet::InitServerNet()
 
 #if NF_PLATFORM == NF_PLATFORM_WIN
 
-    base = event_base_new_with_config(cfg);
+    mxBase = event_base_new_with_config(cfg);
 
 #else
 
@@ -467,14 +474,14 @@ int NFCNet::InitServerNet()
         return -1;
     }
 
-    base = event_base_new_with_config(cfg);//event_base_new()
+    mxBase = event_base_new_with_config(cfg);//event_base_new()
 
 #endif
     event_config_free(cfg);
 
     //////////////////////////////////////////////////////////////////////////
 
-    if (!base)
+    if (!mxBase)
     {
         fprintf(stderr, "Could not initialize libevent!\n");
         Final();
@@ -488,7 +495,7 @@ int NFCNet::InitServerNet()
 
     printf("server started with %d\n", nPort);
 
-    listener = evconnlistener_new_bind(base, listener_cb, (void*)this,
+    listener = evconnlistener_new_bind(mxBase, listener_cb, (void*)this,
                                        LEV_OPT_REUSEABLE | LEV_OPT_CLOSE_ON_FREE, -1,
                                        (struct sockaddr*)&sin,
                                        sizeof(sin));
@@ -580,7 +587,7 @@ bool NFCNet::Log(int severity, const char* msg)
     return true;
 }
 
-bool NFCNet::SendMsgWithOutHead(const int16_t nMsgID, const char* msg, const uint32_t nLen, const NFSOCK nSockIndex /*= 0*/)
+bool NFCNet::SendMsgWithOutHead(const int16_t nMsgID, const char* msg, const size_t nLen, const NFSOCK nSockIndex /*= 0*/)
 {
     std::string strOutData;
     int nAllLen = EnCode(nMsgID, msg, nLen, strOutData);
@@ -593,7 +600,7 @@ bool NFCNet::SendMsgWithOutHead(const int16_t nMsgID, const char* msg, const uin
     return false;
 }
 
-bool NFCNet::SendMsgWithOutHead(const int16_t nMsgID, const char* msg, const uint32_t nLen, const std::list<NFSOCK>& fdList)
+bool NFCNet::SendMsgWithOutHead(const int16_t nMsgID, const char* msg, const size_t nLen, const std::list<NFSOCK>& fdList)
 {
     std::string strOutData;
     int nAllLen = EnCode(nMsgID, msg, nLen, strOutData);
@@ -606,7 +613,7 @@ bool NFCNet::SendMsgWithOutHead(const int16_t nMsgID, const char* msg, const uin
     return false;
 }
 
-bool NFCNet::SendMsgToAllClientWithOutHead(const int16_t nMsgID, const char* msg, const uint32_t nLen)
+bool NFCNet::SendMsgToAllClientWithOutHead(const int16_t nMsgID, const char* msg, const size_t nLen)
 {
     std::string strOutData;
     int nAllLen = EnCode(nMsgID, msg, nLen, strOutData);

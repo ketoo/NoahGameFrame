@@ -5,7 +5,7 @@
 #include "NFComm/NFPluginModule/NFPlatform.h"
 #include "NFComm/NFPluginModule/NFIKernelModule.h"
 #include "NFComm/NFPluginModule/NFIElementModule.h"
-#include "NFComm/NFPluginModule/NFIHttpNetModule.h"
+#include "NFComm/NFPluginModule/NFIHttpServerModule.h"
 #include "NFComm/NFPluginModule/NFIMasterNet_ServerModule.h"
 #include "NFComm/NFPluginModule/NFIMasterNet_HttpServerModule.h"
 
@@ -25,9 +25,9 @@ public:
 	virtual bool Execute();
 
 protected:
-	void OnCommandQuery(const NFHttpRequest& req, const std::string& strCommand, const std::string& strUrl);
+	bool OnCommandQuery(const NFHttpRequest& req);
 
-	void OnCommonQuery(const NFHttpRequest& req, const std::string& strCommand, const std::string& strUrl);
+	bool OnCommonQuery(const NFHttpRequest& req);
 
 private:
 	NFIKernelModule* m_pKernelModule;

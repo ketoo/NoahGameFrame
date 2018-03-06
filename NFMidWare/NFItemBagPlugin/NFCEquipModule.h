@@ -64,15 +64,7 @@ protected:
 
 protected:
     bool Ramdom(const int nNowLevel, const int nMaxLevel);
-	//Equip
-	void OnReqWearEquipMsg(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
-	void OnTakeOffEquipMsg(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
-
-	void OnIntensifylevelToEquipMsg(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
-	void OnHoleToEquipMsg(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
-	void OnInlaystoneToEquipMsg(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
-	void OnElementlevelToEquipMsg(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
-
+	
 private:
 	NFINetModule* m_pNetModule;
     NFIKernelModule* m_pKernelModule;

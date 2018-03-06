@@ -12,22 +12,20 @@
 #ifdef _MSC_VER
 #pragma warning(disable: 4244 4267 4101 4390)
 #endif
-#include "Dependencies/redis-cplusplus-client/redisclient.h"
-#ifdef _MSC_VER
-#pragma warning(default: 4244 4267 4101 4390)
-#endif
 
+#include "Dependencies/redis-cplusplus-client/redisclient.h"
 #include "NFComm/NFPluginModule/NFINoSqlModule.h"
 
 class  NFCNoSqlDriver : public NFINoSqlDriver
 {
 public:
-    NFCNoSqlDriver();
-    virtual ~NFCNoSqlDriver();
+	NFCNoSqlDriver();
+	virtual ~NFCNoSqlDriver();
 
 	virtual const bool Connect(const std::string& strDns, const int nPort = 6379, const std::string& strAuthKey = "");
 	virtual const bool ReConnect();
 	virtual const bool Enable();
+	virtual const bool Busy();
 
 	virtual const std::string& GetIP();
 	virtual const int GetPort();
@@ -64,23 +62,23 @@ public:
 	virtual const bool HGetAll(const std::string& strKey, std::vector<std::pair<std::string, std::string> >& valueVec);
 
 	/////////////
-	
+
 	virtual const bool ZAdd(const std::string& strKey, const double nScore, const std::string& strMember);
 	virtual const bool ZIncrBy(const std::string& strKey, const std::string& strMember, const double nIncrement);
-	
+
 	virtual const bool ZRem(const std::string& strKey, const std::string& strMember);
 	virtual const bool ZRemRangeByRank(const std::string& strKey, const int nStart, const int nStop);
 	virtual const bool ZRemRangeByScore(const std::string& strKey, const int nMin, const int nMax);
 
-	
+
 	virtual const bool ZScore(const std::string& strKey, const std::string& strMember, double& nScore);
 
-	
+
 	virtual const bool ZCard(const std::string& strKey, int& nCount);
 	virtual const bool ZRank(const std::string& strKey, const std::string& strMember, int& nRank);
 	virtual const bool ZCount(const std::string& strKey, const int nMin, const int nMax, int& nCount);
 
-	
+
 	virtual const bool ZRevRange(const std::string& strKey, const int nStart, const int nStop, std::vector<std::pair<std::string, double> >& memberScoreVec);
 	virtual const bool ZRevRank(const std::string& strKey, const std::string& strMember, int& nRank);
 	virtual const bool ZRange(const std::string& strKey, const int nStartIndex, const int nEndIndex, std::vector<std::pair<std::string, double> >& memberScoreVec);
@@ -103,10 +101,12 @@ public:
 
 protected:
 
+	bool  CheckValue(const std::string & strValue);
+
 private:
 	std::string mstrNoExistKey;
 	bool mbEnable;
-    redis::client* m_pNoSqlClient;
+	redis::client* m_pNoSqlClient;
 
 	int nPort;
 	std::string strIP;

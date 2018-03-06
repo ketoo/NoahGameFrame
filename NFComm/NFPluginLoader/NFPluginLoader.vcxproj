@@ -21,6 +21,7 @@
     <UseDebugLibraries>true</UseDebugLibraries>
     <CharacterSet>MultiByte</CharacterSet>
     <PlatformToolset>v140</PlatformToolset>
+    <PlatformToolset Condition="'$(VisualStudioVersion)' == '12.0'">v120</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
@@ -28,6 +29,7 @@
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>MultiByte</CharacterSet>
     <PlatformToolset>v140</PlatformToolset>
+    <PlatformToolset Condition="'$(VisualStudioVersion)' == '12.0'">v120</PlatformToolset>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ImportGroup Label="ExtensionSettings">
@@ -92,15 +94,13 @@
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="NFCCell.h" />
-    <ClInclude Include="NFCCellManager.h" />
     <ClInclude Include="NFCDynLib.h" />
+    <ClInclude Include="NFCoroutineManager.h" />
     <ClInclude Include="NFCPluginManager.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="NFCCell.cpp" />
-    <ClCompile Include="NFCCellManager.cpp" />
     <ClCompile Include="NFCDynLib.cpp" />
+    <ClCompile Include="NFCoroutineManager.cpp" />
     <ClCompile Include="NFCPluginManager.cpp" />
     <ClCompile Include="NFPluginLoader.cpp" />
   </ItemGroup>

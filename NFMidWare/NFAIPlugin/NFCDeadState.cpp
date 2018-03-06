@@ -33,7 +33,6 @@ bool NFCDeadState::Execute(const NFGUID& self, NFIStateMachine* pStateMachine)
 {
     if (!NFIState::Execute(self, pStateMachine))
     {
-        //¼¸ÃëºóÉ¾³ýÊ¬Ìå
         m_pKernelModule->DestroyObject(self);
     }
 

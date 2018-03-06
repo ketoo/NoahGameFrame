@@ -19,72 +19,60 @@ public:
     virtual ~NFIHttpClientModule() {};
 
     template<typename BaseType>
-    bool PerformGet ( const std::string& strUri,
+    bool DoGet ( const std::string& strUri,BaseType* pBase,
+						void ( BaseType::*handleRecieve ) (const NFGUID id, const int state_code, const std::string& strRespData ) )
+    {
+        HTTP_RESP_FUNCTOR_PTR pd ( new HTTP_RESP_FUNCTOR ( std::bind ( handleRecieve, pBase, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3) ) );
+        return DoGet ( strUri, std::map<std::string, std::string>(), pd );
+    }
+    template<typename BaseType>
+    bool DoGet ( const std::string& strUri, const std::map<std::string, std::string>& xHeaders,
                       BaseType* pBase,
-                      void ( BaseType::*handleRecieve ) ( const int state_code, const std::string& strRespData, const std::string& strUserData ) )
+                      void ( BaseType::*handleRecieve ) (const NFGUID id, const int state_code, const std::string& strRespData) )
     {
-        HTTP_RESP_FUNCTOR_PTR pd ( new HTTP_RESP_FUNCTOR ( std::bind ( handleRecieve, pBase, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3 ) ) );
-        return PerformGet ( strUri, std::map<std::string, std::string>(), pd, std::string() );
+        HTTP_RESP_FUNCTOR_PTR pd ( new HTTP_RESP_FUNCTOR ( std::bind ( handleRecieve, pBase, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3) ) );
+        return DoGet( strUri, xHeaders, pd );
     }
 
-    template<typename BaseType>
-    bool PerformGet ( const std::string& strUri, const std::string& strUserData,
-                      BaseType* pBase,
-                      void ( BaseType::*handleRecieve ) ( const int state_code, const std::string& strRespData, const std::string& strUserData ) )
-    {
-        HTTP_RESP_FUNCTOR_PTR pd ( new HTTP_RESP_FUNCTOR ( std::bind ( handleRecieve, pBase, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3 ) ) );
-        return PerformGet ( strUri, std::map<std::string, std::string>(), pd, strUserData );
-    }
 
     template<typename BaseType>
-    bool PerformGet ( const std::string& strUri, const std::string& strUserData, const std::map<std::string, std::string>& xHeaders,
-                      BaseType* pBase,
-                      void ( BaseType::*handleRecieve ) ( const int state_code, const std::string& strRespData, const std::string& strUserData ) )
-    {
-        HTTP_RESP_FUNCTOR_PTR pd ( new HTTP_RESP_FUNCTOR ( std::bind ( handleRecieve, pBase, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3 ) ) );
-        return PerformGet ( strUri, xHeaders, pd, strUserData );
-    }
-
-    template<typename BaseType>
-    bool PerformPost ( const std::string& strUri, const std::string& strPostData,
+    bool DoPost ( const std::string& strUri, const std::string& strPostData,
                        BaseType* pBase,
-                       void ( BaseType::*handleRecieve ) ( const int state_code, const std::string& strRespData, const std::string& strUserData ) )
+                       void ( BaseType::*handleRecieve ) (const NFGUID id, const int state_code, const std::string& strRespData ) )
     {
-        HTTP_RESP_FUNCTOR_PTR pd ( new HTTP_RESP_FUNCTOR ( std::bind ( handleRecieve, pBase, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3 ) ) );
-        return PerformPost ( strUri, std::map<std::string, std::string>(), strPostData, pd, std::string() );
+        HTTP_RESP_FUNCTOR_PTR pd ( new HTTP_RESP_FUNCTOR ( std::bind ( handleRecieve, pBase, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3) ) );
+        return DoPost( strUri, std::map<std::string, std::string>(), strPostData, pd );
     }
 
 
     template<typename BaseType>
-    bool PerformPost ( const std::string& strUri, const std::string& strPostData, const std::string& strUserData,
+    bool DoPost( const std::string& strUri, const std::string& strPostData, const std::map<std::string, std::string>& xHeaders,
                        BaseType* pBase,
-                       void ( BaseType::*handleRecieve ) ( const int state_code, const std::string& strRespData, const std::string& strUserData ) )
+                       void ( BaseType::*handleRecieve ) (const NFGUID id, const int state_code, const std::string& strRespData ) )
     {
-        HTTP_RESP_FUNCTOR_PTR pd ( new HTTP_RESP_FUNCTOR ( std::bind ( handleRecieve, pBase, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3 ) ) );
-        return PerformPost ( strUri, std::map<std::string, std::string>(), strPostData, pd, strUserData );
+        HTTP_RESP_FUNCTOR_PTR pd ( new HTTP_RESP_FUNCTOR ( std::bind ( handleRecieve, pBase, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3) ) );
+        return DoPost( strUri, xHeaders, strPostData, pd );
     }
 
-
-    template<typename BaseType>
-    bool PerformPost ( const std::string& strUri, const std::string& strPostData, const std::string& strUserData, const std::map<std::string, std::string>& xHeaders,
-                       BaseType* pBase,
-                       void ( BaseType::*handleRecieve ) ( const int state_code, const std::string& strRespData, const std::string& strUserData ) )
-    {
-        HTTP_RESP_FUNCTOR_PTR pd ( new HTTP_RESP_FUNCTOR ( std::bind ( handleRecieve, pBase, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3 ) ) );
-        return PerformPost ( strUri, xHeaders, strPostData, pd, strUserData );
-    }
+	//actually, sync post method
+	//NFWebStatus
+	virtual int Post(const std::string& strUri, const std::string& strData, std::string& strResData) = 0;
+	virtual int Post(const std::string& strUri, const std::map<std::string, std::string>& xHeaders, const std::string& strData, std::string& strResData) = 0;
+	
+	//actually, sync get method
+	//NFWebStatus
+	virtual int Get(const std::string& strUri, std::string& strResData) = 0;
+	virtual int Get(const std::string& strUri, const std::map<std::string, std::string>& xHeaders, std::string& strResData) = 0;
 
 protected:
-    virtual bool PerformGet ( const std::string& strUrl,
+    virtual bool DoGet( const std::string& strUrl,
                               const std::map<std::string, std::string>& xHeaders,
-                              HTTP_RESP_FUNCTOR_PTR pCB,
-                              const std::string& strUserData) = 0 ;
+                              HTTP_RESP_FUNCTOR_PTR pCB) = 0 ;
 
-    virtual bool PerformPost ( const std::string& strUrl,
+    virtual bool DoPost( const std::string& strUrl,
                                const std::map<std::string, std::string>& xHeaders,
                                const std::string& strPostData,
-                               HTTP_RESP_FUNCTOR_PTR pCB,
-                               const std::string& strUserData) = 0;
+                               HTTP_RESP_FUNCTOR_PTR pCB) = 0;
 };
 
 #endif
