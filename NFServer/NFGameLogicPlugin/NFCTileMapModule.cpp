@@ -152,7 +152,7 @@ void NFCTileMapModule::LoadStaticTileData(const std::string& strSceneIDName)
 		std::string strTileName = pSeedFileNode->first_attribute("tileType")->value();
 		int x = lexical_cast<int>(pSeedFileNode->first_attribute("X")->value());
 		int y = lexical_cast<int>(pSeedFileNode->first_attribute("Y")->value());
-		int z = lexical_cast<int>(pSeedFileNode->first_attribute("Y")->value());
+		int z = lexical_cast<int>(pSeedFileNode->first_attribute("Z")->value());
 
 		NF_SHARE_PTR<NFMapEx<TileKey, TileData>> xTileMap = mxStaticTileData.GetElement(nSceneID);
 		if (xTileMap != nullptr)

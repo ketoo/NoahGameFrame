@@ -1,43 +1,53 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 using NFSDK;
+using UnityStandardAssets.Characters.ThirdPerson;
 
+[RequireComponent(typeof(UnityEngine.AI.NavMeshAgent))]
+[RequireComponent(typeof(ThirdPersonCharacter))]
 public class OtherPlayer : MonoBehaviour {
 
 	// Use this for initialization
-    private float m_speed = 5.0f;
-    public Vector3 targetPos;
-    public bool mNewPos;
+    public UnityEngine.AI.NavMeshAgent agent { get; private set; }             // the navmesh agent required for the path finding
+    public ThirdPersonCharacter character { get; private set; } // the character we are controlling
+    public Transform target;                                    // target to aim for
+    public Vector3 targetPos;                                    // target to aim for
 
-	void Start () 
+	void Start ()
     {
+        // get the components on the object we need ( should not be null due to require component so no need to check )
+        agent = GetComponentInChildren<UnityEngine.AI.NavMeshAgent>();
+        character = GetComponent<ThirdPersonCharacter>();
+
+        agent.updateRotation = false;
+        agent.updatePosition = true;
+        // 其他玩家移动速度减慢
+        agent.speed = 0.9f;
 	}
 
     public void MoveTo(Vector3 pos)
     {
+        if (target != null)
+            target.position = pos;
         targetPos = pos;
-        mNewPos = true;
     }
-	
-	// Update is called once per frame
-    void Update()
-    {
-        if (!mNewPos)
-            return;
 
-        //获取当前物体到目标物体的距离
-        float distance = Vector3.Distance(targetPos, transform.position);
- 
-         //判断是否超出距离
-        if (distance > 0.1f)
-        {
-            Vector3 dir = targetPos - transform.position;
-            dir.Normalize();
-            transform.Translate(dir * m_speed * Time.deltaTime);
-        }
+    private void Update()
+    {
+        if (target != null)
+            agent.SetDestination(target.position);
         else
-        {
-            mNewPos = false;
-        }
-	}
+            agent.SetDestination(targetPos);
+
+        if (agent.remainingDistance > agent.stoppingDistance)
+            character.Move(agent.desiredVelocity, false, false);
+        else
+            character.Move(Vector3.zero, false, false);
+    }
+
+    public void SetTarget(Transform target)
+    {
+        this.target = target;
+    }
 }
