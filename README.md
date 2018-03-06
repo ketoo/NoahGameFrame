@@ -29,9 +29,9 @@ The features:
 
 ## Tutorial--English
 
-https://github.com/ketoo/NoahGameFrame/wiki/Tutorial
+https://github.com/ketoo/NoahGameFrame/wiki/Tutorial-&-Concept
 
-## Docs--English
+## Documents--English
 
 https://github.com/ketoo/NoahGameFrame/wiki/Documentation
 
@@ -50,8 +50,11 @@ https://github.com/ketoo/NoahGameFrame/wiki/Documentation
 ### App Architecture:
 ![App Architecture](https://github.com/ketoo/NoahGameFrame/blob/develop/Introduce/img/NF_app_arch.png)
 
+
 ### Server Architecture
 ![Server Architecture](https://github.com/ketoo/NoahGameFrame/blob/develop/Introduce/img/NF_server_arch.png)
+
+
 
 ## Get the Sources:
 
@@ -112,19 +115,13 @@ WebSite:  https://github.com/NFGameTeam/NFrame-java
 WebSite:  https://github.com/ketoo/NFrame
 
 
-
-## Documents & Tutorial
-[English](https://github.com/ketoo/NoahGameFrame/blob/develop/doc_EN_US.md)
-
-[Mandarin](https://github.com/ketoo/NoahGameFrame/blob/develop/doc_ZH_CN.md)
-
 ## License
 The NFrame project is currently available under the [Apache License](https://github.com/ketoo/NoahGameFrame/blob/develop/LICENSE).
 
 
 Tutorial:
 -------------------
-### [01-Hello world, add a module](https://github.com/ketoo/NoahGameFrame/tree/develop/Tutorial/Tutorial1)
+### [01-Hello world, add a module](https://github.com/ketoo/NoahGameFrame/tree/master/Tutorial/Tutorial1)
 
 
 ```cpp
@@ -217,17 +214,17 @@ bool HelloWorld1::Shut()
 
 
 -------------------
-### [02-Hello world, test data driver](https://github.com/ketoo/NoahGameFrame/tree/develop/Tutorial/Tutorial2)
+### [02-Hello world, test data driver](https://github.com/ketoo/NoahGameFrame/tree/master/Tutorial/Tutorial2)
 
 * how to use the world's most advanced data engine 
 
 -------------------
-### [03-Hello world, test heartbeat and event system](https://github.com/ketoo/NoahGameFrame/tree/develop/Tutorial/Tutorial3)
+### [03-Hello world, test heartbeat and event system](https://github.com/ketoo/NoahGameFrame/tree/master/Tutorial/Tutorial3)
 
 * how to use the synchronous events
 
 -------------------
-### [04-Hello actor, test actor model(async event system)](https://github.com/ketoo/NoahGameFrame/tree/develop/Tutorial/Tutorial4ActorPlugin)
+### [04-Hello actor, test actor model(async event system)](https://github.com/ketoo/NoahGameFrame/tree/master/Tutorial/Tutorial4)
 
 * how to use the asynchronous events
 * use multiple cpus to get high performance
@@ -238,11 +235,6 @@ bool HelloWorld1::Shut()
 
 * Mail: 342006@qq.com
 * BBS: http://bbs.noahframe.com
-
-
-### WELCOME DONATE/欢迎捐赠(支付宝):
-
-![donation](https://github.com/ketoo/NoahGameFrame/blob/develop/Introduce/donation.png)
 
 -------------------
 
