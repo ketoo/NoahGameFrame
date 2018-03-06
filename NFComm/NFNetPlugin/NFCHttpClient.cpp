@@ -6,6 +6,9 @@
 ////////////////////////////////////////////
 #include "NFCHttpClient.h"
 
+#if _MSC_VER
+#define snprintf _snprintf
+#endif
 
 bool NFCHttpClient::Execute()
 {
@@ -91,10 +94,10 @@ bool NFCHttpClient::Final()
 
 bool NFCHttpClient::MakeRequest(const std::string& strUri,
                                 HTTP_RESP_FUNCTOR_PTR pCB,
-                                const std::string& strUserData,
                                 const std::string& strPostData,
                                 const std::map<std::string, std::string>& xHeaders,
-                                bool bPost)
+                                const bool bPost,
+								const NFGUID id)
 {
     struct evhttp_uri* http_uri = NULL;
     const char* scheme, * host, * path, * query;
@@ -213,7 +216,7 @@ bool NFCHttpClient::MakeRequest(const std::string& strUri,
         evhttp_connection_set_timeout(evcon, m_nTimeOut);
     }
 
-    HttpObject* pHttpObj = new HttpObject(this, bev, strUserData, pCB);
+    HttpObject* pHttpObj = new HttpObject(this, bev, pCB, id);
 
     // Fire off the request
     struct evhttp_request* req = evhttp_request_new(OnHttpReqDone, pHttpObj);
@@ -258,18 +261,16 @@ bool NFCHttpClient::MakeRequest(const std::string& strUri,
     return true;
 }
 
-bool NFCHttpClient::PerformGet(const std::string& strUri, HTTP_RESP_FUNCTOR_PTR pCB,
-                               const std::string& strUserData,
-                               const std::map<std::string, std::string>& xHeaders)
+bool NFCHttpClient::DoGet(const std::string& strUri, HTTP_RESP_FUNCTOR_PTR pCB,
+                               const std::map<std::string, std::string>& xHeaders, const NFGUID id)
 {
-    return MakeRequest(strUri, pCB, strUserData, "", xHeaders, false);
+    return MakeRequest(strUri, pCB, "", xHeaders, false);
 }
 
-bool NFCHttpClient::PerformPost(const std::string& strUri, const std::string& strPostData, HTTP_RESP_FUNCTOR_PTR pCB,
-                                const std::string& strUserData,
-                                const std::map<std::string, std::string>& xHeaders)
+bool NFCHttpClient::DoPost(const std::string& strUri, const std::string& strPostData, HTTP_RESP_FUNCTOR_PTR pCB,
+                                const std::map<std::string, std::string>& xHeaders, const NFGUID id)
 {
-    return MakeRequest(strUri, pCB, strPostData, strUserData, xHeaders, true);
+    return MakeRequest(strUri, pCB, strPostData, xHeaders, true);
 }
 
 void NFCHttpClient::OnHttpReqDone(struct evhttp_request* req, void* ctx)
@@ -318,7 +319,7 @@ void NFCHttpClient::OnHttpReqDone(struct evhttp_request* req, void* ctx)
             if (pHttpObj->m_pCB.get())
             {
                 HTTP_RESP_FUNCTOR fun(*pHttpObj->m_pCB.get());
-                fun(-1, strErrMsg, pHttpObj->m_strUserData);
+                fun(pHttpObj ->mID, -1, strErrMsg);
             }
         }
         return;
@@ -362,7 +363,7 @@ void NFCHttpClient::OnHttpReqDone(struct evhttp_request* req, void* ctx)
         if (pHttpObj->m_pCB.get())
         {
             HTTP_RESP_FUNCTOR fun(*pHttpObj->m_pCB.get());
-            fun(nRespCode, strResp, pHttpObj->m_strUserData);
+            fun(pHttpObj->mID, nRespCode, strResp);
         }
     }
 }

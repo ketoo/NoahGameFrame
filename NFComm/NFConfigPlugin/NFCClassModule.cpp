@@ -98,14 +98,16 @@ bool NFCClassModule::AddPropertys(rapidxml::xml_node<>* pPropertyRootNode, NF_SH
             const char* pstrPrivate = pPropertyNode->first_attribute("Private")->value();
             const char* pstrSave = pPropertyNode->first_attribute("Save")->value();
             const char* pstrCache = pPropertyNode->first_attribute("Cache")->value();
-            const char* pstrRef = pPropertyNode->first_attribute("Ref")->value();
+			const char* pstrRef = pPropertyNode->first_attribute("Ref")->value();
+			const char* pstrForce = pPropertyNode->first_attribute("Force")->value();
 			const char* pstrUpload = pPropertyNode->first_attribute("Upload")->value();
 
             bool bPublic = lexical_cast<bool>(pstrPublic);
             bool bPrivate = lexical_cast<bool>(pstrPrivate);
             bool bSave = lexical_cast<bool>(pstrSave);
             bool bCache = lexical_cast<bool>(pstrCache);
-            bool bRef = lexical_cast<bool>(pstrRef);
+			bool bRef = lexical_cast<bool>(pstrRef);
+			bool bForce = lexical_cast<bool>(pstrForce);
 			bool bUpload = lexical_cast<bool>(pstrUpload);
 
             NFData varProperty;
@@ -123,7 +125,8 @@ bool NFCClassModule::AddPropertys(rapidxml::xml_node<>* pPropertyRootNode, NF_SH
             xProperty->SetPrivate(bPrivate);
             xProperty->SetSave(bSave);
             xProperty->SetCache(bCache);
-            xProperty->SetRef(bRef);
+			xProperty->SetRef(bRef);
+			xProperty->SetForce(bForce);
 			xProperty->SetUpload(bUpload);
 
         }
@@ -155,7 +158,9 @@ bool NFCClassModule::AddRecords(rapidxml::xml_node<>* pRecordRootNode, NF_SHARE_
             const char* pstrPublic = pRecordNode->first_attribute("Public")->value();
             const char* pstrPrivate = pRecordNode->first_attribute("Private")->value();
             const char* pstrSave = pRecordNode->first_attribute("Save")->value();
-            const char* pstrCache = pRecordNode->first_attribute("Cache")->value();
+			const char* pstrCache = pRecordNode->first_attribute("Cache")->value();
+			const char* pstrRef = pRecordNode->first_attribute("Ref")->value();
+			const char* pstrForce = pRecordNode->first_attribute("Force")->value();
 			const char* pstrUpload = pRecordNode->first_attribute("Upload")->value();
 
             std::string strView;
@@ -167,7 +172,9 @@ bool NFCClassModule::AddRecords(rapidxml::xml_node<>* pRecordRootNode, NF_SHARE_
             bool bPublic = lexical_cast<bool>(pstrPublic);
             bool bPrivate = lexical_cast<bool>(pstrPrivate);
             bool bSave = lexical_cast<bool>(pstrSave);
-            bool bCache = lexical_cast<bool>(pstrCache);
+			bool bCache = lexical_cast<bool>(pstrCache);
+			bool bRef = lexical_cast<bool>(pstrCache);
+			bool bForce = lexical_cast<bool>(pstrCache);
 			bool bUpload = lexical_cast<bool>(pstrUpload);
 
 			NF_SHARE_PTR<NFDataList> recordVar(NF_NEW NFDataList());
@@ -199,10 +206,12 @@ bool NFCClassModule::AddRecords(rapidxml::xml_node<>* pRecordRootNode, NF_SHARE_
 
             NF_SHARE_PTR<NFIRecord> xRecord = pClass->GetRecordManager()->AddRecord(NFGUID(), pstrRecordName, recordVar, recordTag, atoi(pstrRow));
 
-            xRecord->SetPublic(bPublic);
+			xRecord->SetPublic(bPublic);
             xRecord->SetPrivate(bPrivate);
             xRecord->SetSave(bSave);
             xRecord->SetCache(bCache);
+			xRecord->SetRef(bRef);
+			xRecord->SetForce(bForce);
 			xRecord->SetUpload(bUpload);
         }
     }

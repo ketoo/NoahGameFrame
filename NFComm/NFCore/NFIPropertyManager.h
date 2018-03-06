@@ -11,7 +11,6 @@
 
 #include "NFMap.hpp"
 #include "NFIProperty.h"
-#include <map>
 #include "NFComm/NFPluginModule/NFPlatform.h"
 
 class _NFExport NFIPropertyManager

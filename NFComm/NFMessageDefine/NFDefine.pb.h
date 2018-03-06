@@ -167,6 +167,7 @@ enum EGameMsgID {
   EGMI_ACK_SWAP_HOME_SCENE = 158,
   EGMI_REQ_ENTER_GAME_FINISH = 159,
   EGMI_ACK_ENTER_GAME_FINISH = 160,
+  EGMI_REQ_ACK_RELIVE = 180,
   EGMI_ACK_OBJECT_ENTRY = 200,
   EGMI_ACK_OBJECT_LEAVE = 201,
   EGMI_ACK_OBJECT_PROPERTY_ENTRY = 202,
@@ -195,6 +196,7 @@ enum EGameMsgID {
   EGMI_ACK_END_OPPNENT = 1223,
   EGMI_REQ_SEARCH_OPPNENT = 1224,
   EGMI_ACK_SEARCH_OPPNENT = 1225,
+  EGMI_REQ_ADJUST_GAMBLE = 1226,
   EGMI_REQ_MOVE = 1230,
   EGMI_ACK_MOVE = 1231,
   EGMI_REQ_MOVE_IMMUNE = 1232,
@@ -440,11 +442,12 @@ enum EGameItemSubType {
   EGIT_ITEM_HP = 4,
   EGIT_ITEM_MP = 5,
   EGIT_ITEM_SP = 6,
-  EGIT_ITEM_PACK = 7
+  EGIT_ITEM_PACK = 7,
+  EGIT_ITEM_MEMORY_POS = 8
 };
 LIBPROTOC_EXPORT bool EGameItemSubType_IsValid(int value);
 const EGameItemSubType EGameItemSubType_MIN = EGIT_ITEM_WATER;
-const EGameItemSubType EGameItemSubType_MAX = EGIT_ITEM_PACK;
+const EGameItemSubType EGameItemSubType_MAX = EGIT_ITEM_MEMORY_POS;
 const int EGameItemSubType_ARRAYSIZE = EGameItemSubType_MAX + 1;
 
 LIBPROTOC_EXPORT const ::google::protobuf::EnumDescriptor* EGameItemSubType_descriptor();
@@ -608,24 +611,28 @@ inline bool ETaskType_Parse(
   return ::google::protobuf::internal::ParseNamedEnum<ETaskType>(
     ETaskType_descriptor(), name, value);
 }
-enum EBattleType {
-  BATTLE_SINGLE = 0,
-  BATTLE_PVE_TEAM = 1
+enum EPVPType {
+  PVP_HOME = 0,
+  PVP_INDIVIDUAL = 1,
+  PVP_DOTA = 2,
+  PVP_SURVIVAL = 3,
+  PVP_GUILD_WAR = 4,
+  PVP_GUILD_DUNGEON = 5
 };
-LIBPROTOC_EXPORT bool EBattleType_IsValid(int value);
-const EBattleType EBattleType_MIN = BATTLE_SINGLE;
-const EBattleType EBattleType_MAX = BATTLE_PVE_TEAM;
-const int EBattleType_ARRAYSIZE = EBattleType_MAX + 1;
+LIBPROTOC_EXPORT bool EPVPType_IsValid(int value);
+const EPVPType EPVPType_MIN = PVP_HOME;
+const EPVPType EPVPType_MAX = PVP_GUILD_DUNGEON;
+const int EPVPType_ARRAYSIZE = EPVPType_MAX + 1;
 
-LIBPROTOC_EXPORT const ::google::protobuf::EnumDescriptor* EBattleType_descriptor();
-inline const ::std::string& EBattleType_Name(EBattleType value) {
+LIBPROTOC_EXPORT const ::google::protobuf::EnumDescriptor* EPVPType_descriptor();
+inline const ::std::string& EPVPType_Name(EPVPType value) {
   return ::google::protobuf::internal::NameOfEnum(
-    EBattleType_descriptor(), value);
+    EPVPType_descriptor(), value);
 }
-inline bool EBattleType_Parse(
-    const ::std::string& name, EBattleType* value) {
-  return ::google::protobuf::internal::ParseNamedEnum<EBattleType>(
-    EBattleType_descriptor(), name, value);
+inline bool EPVPType_Parse(
+    const ::std::string& name, EPVPType* value) {
+  return ::google::protobuf::internal::ParseNamedEnum<EPVPType>(
+    EPVPType_descriptor(), name, value);
 }
 enum EShopType {
   EST_BUILDING = 1,
@@ -691,6 +698,26 @@ inline bool ENPCType_Parse(
     const ::std::string& name, ENPCType* value) {
   return ::google::protobuf::internal::ParseNamedEnum<ENPCType>(
     ENPCType_descriptor(), name, value);
+}
+enum ETARGETType {
+  ETARGETTYPE_ENEMY = 0,
+  ETARGETTYPE_SELF = 1,
+  ETARGETTYPE_FRIEND = 2
+};
+LIBPROTOC_EXPORT bool ETARGETType_IsValid(int value);
+const ETARGETType ETARGETType_MIN = ETARGETTYPE_ENEMY;
+const ETARGETType ETARGETType_MAX = ETARGETTYPE_FRIEND;
+const int ETARGETType_ARRAYSIZE = ETARGETType_MAX + 1;
+
+LIBPROTOC_EXPORT const ::google::protobuf::EnumDescriptor* ETARGETType_descriptor();
+inline const ::std::string& ETARGETType_Name(ETARGETType value) {
+  return ::google::protobuf::internal::NameOfEnum(
+    ETARGETType_descriptor(), value);
+}
+inline bool ETARGETType_Parse(
+    const ::std::string& name, ETARGETType* value) {
+  return ::google::protobuf::internal::ParseNamedEnum<ETARGETType>(
+    ETARGETType_descriptor(), name, value);
 }
 enum EPropertyType {
   EPT_STRENGTH = 1,
@@ -812,8 +839,8 @@ inline const EnumDescriptor* GetEnumDescriptor< ::NFMsg::ETaskType>() {
   return ::NFMsg::ETaskType_descriptor();
 }
 template <>
-inline const EnumDescriptor* GetEnumDescriptor< ::NFMsg::EBattleType>() {
-  return ::NFMsg::EBattleType_descriptor();
+inline const EnumDescriptor* GetEnumDescriptor< ::NFMsg::EPVPType>() {
+  return ::NFMsg::EPVPType_descriptor();
 }
 template <>
 inline const EnumDescriptor* GetEnumDescriptor< ::NFMsg::EShopType>() {
@@ -826,6 +853,10 @@ inline const EnumDescriptor* GetEnumDescriptor< ::NFMsg::ERankType>() {
 template <>
 inline const EnumDescriptor* GetEnumDescriptor< ::NFMsg::ENPCType>() {
   return ::NFMsg::ENPCType_descriptor();
+}
+template <>
+inline const EnumDescriptor* GetEnumDescriptor< ::NFMsg::ETARGETType>() {
+  return ::NFMsg::ETARGETType_descriptor();
 }
 template <>
 inline const EnumDescriptor* GetEnumDescriptor< ::NFMsg::EPropertyType>() {

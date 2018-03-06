@@ -20,7 +20,12 @@
 #include "NFComm/NFPluginModule/NFISceneAOIModule.h"
 #include "NFComm/NFPluginModule/NFIPropertyModule.h"
 #include "NFComm/NFPluginModule/NFITileModule.h"
+#include "NFComm/NFPluginModule/NFINoSqlModule.h"
 #include "NFComm/NFPluginModule/NFIGameServerNet_ServerModule.h"
+#include "NFComm/NFPluginModule/NFICommonRedisModule.h"
+#include "NFComm/NFPluginModule/NFILevelModule.h"
+#include "NFComm/NFPluginModule/NFIHeroModule.h"
+#include "NFComm/NFPluginModule/NFIScheduleModule.h"
 
 class NFCPVPModule
     : public NFIPVPModule
@@ -43,10 +48,12 @@ public:
 
 protected:
 
-	void OnReqSearchOppnentProcess(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+	void OnReqSearchOpponentProcess(const NFSOCK nSockIndex, const int nMsgID, const char *msg, const uint32_t nLen);
 	void OnReqSwapHomeSceneProcess(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
-	void OnReqStartPVPOppnentProcess(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
-	void OnReqEndPVPOppnentProcess(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+	void OnReqStartPVPOpponentProcess(const NFSOCK nSockIndex, const int nMsgID, const char *msg, const uint32_t nLen);
+	void OnReqEndPVPOpponentProcess(const NFSOCK nSockIndex, const int nMsgID, const char *msg, const uint32_t nLen);
+	
+    void OnReqAddGambleProcess(const NFSOCK nSockIndex, const int nMsgID, const char *msg, const uint32_t nLen);
 
 protected:
 	void FindAllTileScene();
@@ -61,8 +68,27 @@ protected:
 	int BeforeLeaveSceneGroupEvent(const NFGUID& self, const int nSceneID, const int nGroupID, const int nType, const NFDataList& argList);
 	int AfterLeaveSceneGroupEvent(const NFGUID& self, const int nSceneID, const int nGroupID, const int nType, const NFDataList& argList);
 
+protected:
+	int OnDeadSwapHeroHeart(const NFGUID& self, const std::string& strHeartBeat, const float fTime, const int nCount);
+
+	bool ProcessOpponentData(const NFGUID & self, const NFGUID& opponent);
+	bool SearchOpponent(const NFGUID & self);
+
+	void ResetPVPData(const NFGUID & self);
+	void RecordPVPData(const NFGUID & self, const int nStar, const int nGold, const int nDiamond);
+
+	int OnNPCClassEvent(const NFGUID& self, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFDataList& var);
+	int OnNPCHPEvent(const NFGUID& self, const std::string& strPropertyName, const NFData& oldVar, const NFData& newVar);
+
+	int OnPlayerClassEvent(const NFGUID& self, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFDataList& var);
+	int OnPlayerHPEvent(const NFGUID& self, const std::string& strPropertyName, const NFData& oldVar, const NFData& newVar);
+
+	void EndTheBattle(const NFGUID& self);
 private:
+	
+	NFIScheduleModule* m_pScheduleModule;
 	NFITileModule* m_pTileModule;
+	NFIHeroModule* m_pHeroModule;
 	NFIPropertyModule* m_pPropertyModule;
 	NFIClassModule* m_pClassModule;
 	NFIElementModule* m_pElementModule;
@@ -73,6 +99,9 @@ private:
 	NFISceneProcessModule* m_pSceneProcessModule;
 	NFISceneAOIModule* m_pSceneAOIModule;
 	NFIGameServerNet_ServerModule* m_pGameServerNet_ServerModule;
+	NFINoSqlModule* m_pNoSqlModule;
+	NFICommonRedisModule* m_pCommonRedisModule;
+	NFILevelModule* m_pLevelModule;
 
 	std::vector<int> mxTileSceneIDList;
 };

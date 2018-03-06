@@ -19,6 +19,7 @@ public:
     enum NFPropertyGroup
     {
 		NPG_JOBLEVEL,
+		NPG_FIGHTING_HERO,
 		NPG_EFFECTVALUE,
 		NPG_REBIRTH_ADD,
 		NPG_EQUIP,

@@ -47,8 +47,7 @@
 #include <WinSock2.h>
 #endif
 
-typedef std::function<void(const int state_code, const std::string& strRespData,
-                           const std::string& strUserData)> HTTP_RESP_FUNCTOR;
+typedef std::function<void(const NFGUID id, const int state_code, const std::string& strRespData)> HTTP_RESP_FUNCTOR;
 typedef std::shared_ptr<HTTP_RESP_FUNCTOR> HTTP_RESP_FUNCTOR_PTR;
 
 class NFIHttpClient
@@ -63,13 +62,12 @@ public:
 
     virtual bool Final() = 0;
 
-    virtual bool PerformGet(const std::string& strUri, HTTP_RESP_FUNCTOR_PTR pCB,
-                            const std::string& strUserData,
-                            const std::map<std::string, std::string>& xHeaders) = 0;
+    virtual bool DoGet(const std::string& strUri, HTTP_RESP_FUNCTOR_PTR pCB,
+                            const std::map<std::string, std::string>& xHeaders, const NFGUID id = NFGUID()) = 0;
 
-    virtual bool PerformPost(const std::string& strUri, const std::string& strPostData, HTTP_RESP_FUNCTOR_PTR pCB,
-                             const std::string& strUserData,
-                             const std::map<std::string, std::string>& xHeaders) = 0;
+    virtual bool DoPost(const std::string& strUri, const std::string& strPostData, HTTP_RESP_FUNCTOR_PTR pCB,
+                             const std::map<std::string, std::string>& xHeaders, const NFGUID id = NFGUID()) = 0;
+
 
 };
 

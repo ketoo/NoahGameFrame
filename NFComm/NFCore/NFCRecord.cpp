@@ -18,6 +18,8 @@ NFCRecord::NFCRecord()
     mbPublic = false;
     mbPrivate = false;
     mbCache = false;
+	mbRef = false;
+	mbForce = false;
 	mbUpload = false;
 
     mstrRecordName = "";
@@ -177,6 +179,50 @@ int NFCRecord::AddRow(const int nRow, const NFDataList& var)
     OnEventHandler(mSelf, xEventData, tData, tData); //FIXME:RECORD
 
     return nFindRow;
+}
+
+bool NFCRecord::SetRow(const int nRow, const NFDataList & var)
+{
+	if (var.GetCount() != GetCols())
+	{
+		return false;
+	}
+
+	if (!IsUsed(nRow))
+	{
+		return false;
+	}
+
+	for (int i = 0; i < GetCols(); ++i)
+	{
+		if (var.Type(i) != GetColType(i))
+		{
+			return false;
+		}
+	}
+
+	for (int i = 0; i < GetCols(); ++i)
+	{
+		NF_SHARE_PTR<NFData>& pVar = mtRecordVec.at(GetPos(nRow, i));
+		if (nullptr == pVar)
+		{
+			pVar = NF_SHARE_PTR<NFData>(NF_NEW NFData(var.Type(i)));
+		}
+
+		NFData oldValue = *pVar;
+
+		pVar->variantData = var.GetStack(i)->variantData;
+
+		RECORD_EVENT_DATA xEventData;
+		xEventData.nOpType = RECORD_EVENT_DATA::Update;
+		xEventData.nRow = nRow;
+		xEventData.nCol = i;
+		xEventData.strRecordName = mstrRecordName;
+
+		OnEventHandler(mSelf, xEventData, oldValue, *pVar);
+	}
+
+	return false;
 }
 
 bool NFCRecord::SetInt(const int nRow, const int nCol, const NFINT64 value)
@@ -1298,6 +1344,16 @@ const bool NFCRecord::GetCache()
     return mbCache;
 }
 
+const bool NFCRecord::GetRef()
+{
+	return mbRef;
+}
+
+const bool NFCRecord::GetForce()
+{
+	return mbForce;
+}
+
 const bool NFCRecord::GetUpload()
 {
 	return mbUpload;
@@ -1331,6 +1387,16 @@ void NFCRecord::SetSave(const bool bSave)
 void NFCRecord::SetCache(const bool bCache)
 {
     mbCache = bCache;
+}
+
+void NFCRecord::SetRef(const bool bRef)
+{
+	mbRef = bRef;
+}
+
+void NFCRecord::SetForce(const bool bForce)
+{
+	mbForce = bForce;
 }
 
 void NFCRecord::SetUpload(const bool bUpload)

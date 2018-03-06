@@ -193,7 +193,7 @@ NF_SHARE_PTR<NFIRecordManager> NFCCommonRedisModule::GetCacheRecordInfo(const NF
     return pRecordManager;
 }
 
-bool NFCCommonRedisModule::SaveCachePropertyInfo(const NFGUID& self, NF_SHARE_PTR<NFIPropertyManager> pPropertyManager)
+bool NFCCommonRedisModule::SaveCachePropertyInfo(const NFGUID& self, NF_SHARE_PTR<NFIPropertyManager> pPropertyManager, const int nExpireSecond)
 {
     if (self.IsNull())
     {
@@ -230,10 +230,15 @@ bool NFCCommonRedisModule::SaveCachePropertyInfo(const NFGUID& self, NF_SHARE_PT
         return false;
     }
 
+	if (nExpireSecond > 0)
+	{
+		pDriver->Expire(strKey, nExpireSecond);
+	}
+
     return true;
 }
 
-bool NFCCommonRedisModule::SaveCacheRecordInfo(const NFGUID& self, NF_SHARE_PTR<NFIRecordManager> pRecordManager)
+bool NFCCommonRedisModule::SaveCacheRecordInfo(const NFGUID& self, NF_SHARE_PTR<NFIRecordManager> pRecordManager, const int nExpireSecond)
 {
     if (self.IsNull())
     {
@@ -267,6 +272,11 @@ bool NFCCommonRedisModule::SaveCacheRecordInfo(const NFGUID& self, NF_SHARE_PTR<
 	if (!pDriver->HMSet(strKey, vKeyList, vValueList))
 	{
 		return false;
+	}
+
+	if (nExpireSecond > 0)
+	{
+		pDriver->Expire(strKey, nExpireSecond);
 	}
 
     return true;

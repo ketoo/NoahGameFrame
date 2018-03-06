@@ -12,9 +12,14 @@
 #include <map>
 #include <string>
 #include <time.h>
+#include <thread>
 #include "NFCDynLib.h"
+#include "NFCoroutineManager.h"
 #include "NFComm/NFCore/NFSingleton.hpp"
+#include "NFComm/NFPluginModule/NFIModule.h"
 #include "NFComm/NFPluginModule/NFIPluginManager.h"
+
+void CoroutineExecute(void* arg);
 
 class NFCPluginManager
     : public NFIPluginManager,
@@ -24,68 +29,78 @@ public:
     NFCPluginManager();
     virtual ~NFCPluginManager();
 
-	virtual bool Awake();
+	virtual bool Awake() override;
 
-	virtual bool Init();
+	virtual bool Init() override;
 
-    virtual bool AfterInit();
+    virtual bool AfterInit() override;
 
-    virtual bool CheckConfig();
+    virtual bool CheckConfig() override;
 
-    virtual bool ReadyExecute();
+    virtual bool ReadyExecute() override;
 
-    virtual bool BeforeShut();
+    virtual bool BeforeShut() override;
 
-	virtual bool Shut();
+	virtual bool Shut() override;
 
-	virtual bool Finalize();
+	virtual bool Finalize() override;
 
-
-    //////////////////////////////////////////////////////////////////////////
-
-    virtual void Registered(NFIPlugin* pPlugin);
-
-    virtual void UnRegistered(NFIPlugin* pPlugin);
 
     //////////////////////////////////////////////////////////////////////////
 
-	virtual bool ReLoadPlugin(const std::string& strPluginDLLName);
+    virtual void Registered(NFIPlugin* pPlugin) override;
 
-    virtual NFIPlugin* FindPlugin(const std::string& strPluginName);
+    virtual void UnRegistered(NFIPlugin* pPlugin) override;
 
-    virtual void AddModule(const std::string& strModuleName, NFIModule* pModule);
+    //////////////////////////////////////////////////////////////////////////
 
-    virtual void RemoveModule(const std::string& strModuleName);
+	virtual bool ReLoadPlugin(const std::string& strPluginDLLName) override;
 
-    virtual NFIModule* FindModule(const std::string& strModuleName);
+    virtual NFIPlugin* FindPlugin(const std::string& strPluginName) override;
 
-    virtual bool Execute();
+    virtual void AddModule(const std::string& strModuleName, NFIModule* pModule) override;
 
-	virtual int GetAppID() const;
+    virtual void RemoveModule(const std::string& strModuleName) override;
 
-    virtual void SetAppID(const int nAppID);
+    virtual NFIModule* FindModule(const std::string& strModuleName) override;
 
-	virtual NFINT64 GetInitTime() const;
+    virtual bool Execute() override;
 
-	virtual NFINT64 GetNowTime() const;
+	virtual int GetAppID() const override;
 
-	virtual const std::string& GetConfigPath() const;
-	virtual void SetConfigPath(const std::string & strPath);
+    virtual void SetAppID(const int nAppID) override;
 
-	virtual void SetConfigName(const std::string& strFileName);
-	virtual const std::string& GetConfigName() const;
+	virtual NFINT64 GetInitTime() const override;
 
-	virtual const std::string& GetAppName() const;
+	virtual NFINT64 GetNowTime() const override;
 
-	virtual void SetAppName(const std::string& strAppName);
+	virtual const std::string& GetConfigPath() const override;
+	virtual void SetConfigPath(const std::string & strPath) override;
 
-	virtual const std::string& GetLogConfigName() const;
+	virtual void SetConfigName(const std::string& strFileName) override;
+	virtual const std::string& GetConfigName() const override;
 
-	virtual void SetLogConfigName(const std::string& strName);
+	virtual const std::string& GetAppName() const override;
 
-	virtual void SetGetFileContentFunctor(GET_FILECONTENT_FUNCTOR fun);
+	virtual void SetAppName(const std::string& strAppName) override;
 
-	virtual bool GetFileContent(const std::string &strFileName, std::string &strContent);
+	virtual const std::string& GetLogConfigName() const override;
+
+	virtual void SetLogConfigName(const std::string& strName) override;
+
+	virtual void SetGetFileContentFunctor(GET_FILECONTENT_FUNCTOR fun) override;
+
+	virtual bool GetFileContent(const std::string &strFileName, std::string &strContent) override;
+
+	virtual void ExecuteCoScheduler() override;
+
+	virtual void StartCoroutine();
+
+	virtual void StartCoroutine(CoroutineFunction func) override;
+
+	virtual void YieldCo(const float nSecond) override;
+
+	virtual void YieldCo() override;
 
 protected:
 	bool LoadPluginConfig();

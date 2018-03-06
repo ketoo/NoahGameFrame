@@ -1,30 +1,25 @@
 // -------------------------------------------------------------------------
-//    @FileName			:   NFMshDefine.cphp
+//    @FileName			:   NFMsgDefine.cphp
 //    @Author           :   LvSheng.Huang
 //    @Date             :   2013-10-02
-//    @Module           :   NFMshDefine
+//    @Module           :   NFMsgDefine
 // -------------------------------------------------------------------------
 
-#ifndef NF_MSGDEFINE_H
-#define NF_MSGDEFINE_H
+#ifndef NF_MSG_DEFINE_H
+#define NF_MSG_DEFINE_H
 
 #include "NFComm/NFPluginModule/NFPlatform.h"
 #include "NFComm/NFCore/NFIRecordManager.h"
 #include "NFComm/NFCore/NFIPropertyManager.h"
 #include "NFComm/NFCore/NFList.hpp"
 #include "NFLimit.h"
-
-#ifdef _MSC_VER
-#pragma warning(disable: 4244 4267)
-#endif
 #include "NFDefine.pb.h"
 #include "NFMsgBase.pb.h"
-#include "NFMsgBaseEx.pb.h"
 #include "NFMsgPreGame.pb.h"
 #include "NFMsgShare.pb.h"
-#include "NFMsgURl.pb.h"
-#include "NFMsgMysql.pb.h"
+#include "NFMsgExtra.pb.h"
 #include "NFProtocolDefine.hpp"
+
 #ifdef _MSC_VER
 #pragma warning(default: 4244 4267)
 #endif

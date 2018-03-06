@@ -6,36 +6,14 @@
 //
 // -------------------------------------------------------------------------
 
-#ifndef NFI_LOGIC_MODULE_H
-#define NFI_LOGIC_MODULE_H
+#ifndef NFI_MODULE_H
+#define NFI_MODULE_H
 
 #include <string>
+#include "NFIPluginManager.h"
 #include "NFComm/NFCore/NFMap.hpp"
 #include "NFComm/NFCore/NFList.hpp"
 #include "NFComm/NFCore/NFDataList.hpp"
-#include "NFComm/NFCore/NFIRecord.h"
-
-template<typename DerivedType, typename BaseType>
-class TIsDerived
-{
-public:
-    static int AnyFunction(BaseType* base)
-    {
-        return 1;
-    }
-
-    static  char AnyFunction(void* t2)
-    {
-        return 0;
-    }
-
-    enum
-    {
-        Result = (sizeof(int) == sizeof(AnyFunction((DerivedType*)NULL))),
-    };
-};
-
-class NFIPluginManager;
 
 class NFIModule
 {
@@ -101,6 +79,26 @@ public:
     virtual NFIPluginManager* GetPluginManager() const
     {
         return pPluginManager;
+    }
+
+	virtual void StartCoroutine()
+	{
+		pPluginManager->StartCoroutine();
+	}
+
+    virtual void StartCoroutine(CoroutineFunction func)
+    {
+        pPluginManager->StartCoroutine(func);
+    }
+
+	virtual void YieldCo(const float fSecond)
+	{
+		pPluginManager->YieldCo(fSecond);
+	}
+
+	virtual void YieldCo()
+	{
+        pPluginManager->YieldCo();
     }
 
     std::string strName;

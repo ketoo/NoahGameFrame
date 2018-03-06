@@ -146,13 +146,11 @@ protected:
 
     
     virtual bool RegisterCommonClassEvent(const CLASS_EVENT_FUNCTOR_PTR& cb);
-
-    
     virtual bool RegisterCommonPropertyEvent(const PROPERTY_EVENT_FUNCTOR_PTR& cb);
-
-    
     virtual bool RegisterCommonRecordEvent(const RECORD_EVENT_FUNCTOR_PTR& cb);
 
+	virtual bool RegisterClassPropertyEvent(const std::string& strClassName, const PROPERTY_EVENT_FUNCTOR_PTR& cb);
+	virtual bool RegisterClassRecordEvent(const std::string& strClassName, const RECORD_EVENT_FUNCTOR_PTR& cb);
 protected:
 
     virtual bool AddClassCallBack(const std::string& strClassName, const CLASS_EVENT_FUNCTOR_PTR& cb);
@@ -172,15 +170,11 @@ protected:
     //////////////////////////////////////////////////////////////////////////
     
     std::list<CLASS_EVENT_FUNCTOR_PTR> mtCommonClassCallBackList;
-    
     std::list<PROPERTY_EVENT_FUNCTOR_PTR> mtCommonPropertyCallBackList;
-    
     std::list<RECORD_EVENT_FUNCTOR_PTR> mtCommonRecordCallBackList;
 
-private:
-    
-    //     std::map<std::string,std::map<TData, NFList<NFGUID>>>
-    //     std::map<"Scene", std::map<10, NFList<NFGUID>>>
+	std::map<std::string, std::list<PROPERTY_EVENT_FUNCTOR_PTR>> mtClassPropertyCallBackList;
+	std::map<std::string, std::list<RECORD_EVENT_FUNCTOR_PTR>> mtClassRecordCallBackList;
 
 private:
     std::vector<float> mvRandom;

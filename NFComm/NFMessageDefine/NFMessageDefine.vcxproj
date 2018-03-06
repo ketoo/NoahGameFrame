@@ -21,6 +21,7 @@
     <UseDebugLibraries>true</UseDebugLibraries>
     <CharacterSet>MultiByte</CharacterSet>
     <PlatformToolset>v140</PlatformToolset>
+    <PlatformToolset Condition="'$(VisualStudioVersion)' == '12.0'">v120</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>DynamicLibrary</ConfigurationType>
@@ -28,6 +29,7 @@
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>MultiByte</CharacterSet>
     <PlatformToolset>v140</PlatformToolset>
+    <PlatformToolset Condition="'$(VisualStudioVersion)' == '12.0'">v120</PlatformToolset>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ImportGroup Label="ExtensionSettings">
@@ -98,22 +100,18 @@
     <ClInclude Include="NFFleetingDefine.pb.h" />
     <ClInclude Include="NFLimit.h" />
     <ClInclude Include="NFMsgBase.pb.h" />
-    <ClInclude Include="NFMsgBaseEx.pb.h" />
-    <ClInclude Include="NFMsgMysql.pb.h" />
+    <ClInclude Include="NFMsgExtra.pb.h" />
     <ClInclude Include="NFMsgPreGame.pb.h" />
     <ClInclude Include="NFMsgShare.pb.h" />
-    <ClInclude Include="NFMsgURl.pb.h" />
     <ClInclude Include="NFProtocolDefine.hpp" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="NFDefine.pb.cc" />
     <ClCompile Include="NFFleetingDefine.pb.cc" />
     <ClCompile Include="NFMsgBase.pb.cc" />
-    <ClCompile Include="NFMsgBaseEx.pb.cc" />
-    <ClCompile Include="NFMsgMysql.pb.cc" />
+    <ClCompile Include="NFMsgExtra.pb.cc" />
     <ClCompile Include="NFMsgPreGame.pb.cc" />
     <ClCompile Include="NFMsgShare.pb.cc" />
-    <ClCompile Include="NFMsgURl.pb.cc" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

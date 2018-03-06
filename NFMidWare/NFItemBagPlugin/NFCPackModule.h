@@ -9,6 +9,7 @@
 #ifndef NFC_PACK_MODULE_H
 #define NFC_PACK_MODULE_H
 
+#include "NFComm/NFMessageDefine/NFProtocolDefine.hpp"
 #include "NFComm/NFPluginModule/NFIKernelModule.h"
 #include "NFComm/NFPluginModule/NFIPackModule.h"
 #include "NFComm/NFPluginModule/NFIElementModule.h"
@@ -16,7 +17,7 @@
 #include "NFComm/NFPluginModule/NFIPropertyModule.h"
 #include "NFComm/NFPluginModule/NFILogModule.h"
 #include "NFComm/NFPluginModule/NFIPluginManager.h"
-#include "NFComm/NFMessageDefine/NFProtocolDefine.hpp"
+#include "NFComm/NFPluginModule/NFIPVPModule.h"
 
 class NFCPackModule
     : public NFIPackModule
@@ -41,6 +42,10 @@ public:
 	virtual bool DeleteEquip(const NFGUID& self, const NFGUID& id);
     virtual bool DeleteItem(const NFGUID& self, const std::string& strItemConfigID, const int nCount);
     virtual bool EnoughItem(const NFGUID& self, const std::string& strItemConfigID, const int nCount);
+
+protected:
+	bool CreateItemInNormalBag(const NFGUID& self, const std::string& strConfigName, const int nCount);
+	bool CreateItemInTempBag(const NFGUID& self, const std::string& strConfigName, const int nCount);
 
 private:
     NFIKernelModule* m_pKernelModule;

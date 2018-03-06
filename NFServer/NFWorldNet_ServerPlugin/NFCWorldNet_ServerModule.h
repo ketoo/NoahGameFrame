@@ -42,12 +42,6 @@ public:
     virtual bool SendMsgToGame(const NFDataList& argObjectVar, const NFDataList& argGameID,  const NFMsg::EGameMsgID eMsgID, google::protobuf::Message& xData);
     virtual bool SendMsgToPlayer(const NFMsg::EGameMsgID eMsgID, google::protobuf::Message& xData, const NFGUID nPlayer);
 
-    virtual int OnObjectListEnter(const NFDataList& self, const NFDataList& argVar);
-    virtual int OnObjectListLeave(const NFDataList& self, const NFDataList& argVar);
-    virtual int OnPropertyEnter(const NFDataList& argVar, const NFDataList& argGameID, const NFGUID& self);
-    virtual int OnRecordEnter(const NFDataList& argVar, const NFDataList& argGameID, const NFGUID& self);
-    virtual bool OnRecordEnterPack(NF_SHARE_PTR<NFIRecord> pRecord, NFMsg::ObjectRecordBase* pObjectRecordBase);
-
     virtual NF_SHARE_PTR<ServerData> GetSuitProxyForEnter();
 
     virtual int GetPlayerGameID(const NFGUID self);
@@ -79,11 +73,6 @@ protected:
     void OnProxyServerUnRegisteredProcess(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
     void OnRefreshProxyServerInfoProcess(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
 
-	void OnAIServerRegisteredProcess(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
-	void OnAIServerUnRegisteredProcess(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
-	void OnRefreshAIServerInfoProcess(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
-
-
     void SynGameToProxy();
     void SynGameToProxy(const NFSOCK nFD);
 
@@ -95,7 +84,7 @@ private:
 
     //serverid,data
     NFConsistentHashMapEx<int, ServerData> mGameMap;
-    NFConsistentHashMapEx<int, ServerData> mProxyMap;
+	NFConsistentHashMapEx<int, ServerData> mProxyMap;
 
     NFIElementModule* m_pElementModule;
     NFIClassModule* m_pClassModule;

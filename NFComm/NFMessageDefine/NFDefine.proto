@@ -122,9 +122,10 @@ enum EGameMsgID
 	EGMI_ACK_SWAP_SCENE							= 156;			//
 	EGMI_REQ_SWAP_HOME_SCENE					= 157;			//
 	EGMI_ACK_SWAP_HOME_SCENE					= 158;			//
-
 	EGMI_REQ_ENTER_GAME_FINISH					= 159;			//
 	EGMI_ACK_ENTER_GAME_FINISH					= 160;			//
+	
+	EGMI_REQ_ACK_RELIVE							= 180;			//
 	
 	EGMI_ACK_OBJECT_ENTRY						= 200;			//
 	EGMI_ACK_OBJECT_LEAVE						= 201;			//
@@ -163,6 +164,7 @@ enum EGameMsgID
 	EGMI_ACK_END_OPPNENT						= 1223;
 	EGMI_REQ_SEARCH_OPPNENT                     = 1224;
 	EGMI_ACK_SEARCH_OPPNENT                     = 1225;
+	EGMI_REQ_ADJUST_GAMBLE                      = 1226;
 	
 	EGMI_REQ_MOVE								= 1230;
 	EGMI_ACK_MOVE								= 1231;
@@ -269,19 +271,19 @@ enum EGameMsgID
 	EGMI_ACK_CLONE_PROPERTY_INT						= 1810;			//
 	EGMI_ACK_CLONE_PROPERTY_FLOAT					= 1811;			//
 	EGMI_ACK_CLONE_PROPERTY_STRING					= 1812;			//
-	//EGMI_ACK_CLONE_PROPERTY_DOUBLE				= 813;			//
+	//EGMI_ACK_CLONE_PROPERTY_DOUBLE				= 1813;			//
 	EGMI_ACK_CLONE_PROPERTY_OBJECT					= 1814;			//
             
-	//EGMI_ACK_CLONE_ADD_ROW						= 820;
+	//EGMI_ACK_CLONE_ADD_ROW						= 1820;
 	//EGMI_ACK_CLONE_REMOVE_ROW						= 1821;
-	//EGMI_ACK_CLONE_SWAP_ROW						= 822;
+	//EGMI_ACK_CLONE_SWAP_ROW						= 1822;
 	//EGMI_ACK_CLONE_RECORD_INT						= 1823;
-	//EGMI_ACK_CLONE_RECORD_FLOAT					= 824;
+	//EGMI_ACK_CLONE_RECORD_FLOAT					= 1824;
 	//EGMI_ACK_CLONE_RECORD_DOUBLE					= 1825;
 	//EGMI_ACK_CLONE_RECORD_STRING					= 1826;
 	//EGMI_ACK_CLONE_RECORD_OBJECT					= 1827;
-	//EGMI_ACK_CLONE_RECORD_CLEAR					= 828;
-	//EGMI_ACK_CLONE_RECORD_SORT					= 829;
+	//EGMI_ACK_CLONE_RECORD_CLEAR					= 1828;
+	//EGMI_ACK_CLONE_RECORD_SORT					= 1829;
 	
 	EGMI_REQSWICHSERVER								= 1840;		//
 	EGMI_ACKSWICHSERVER								= 1841;		//
@@ -318,6 +320,9 @@ enum EGameMsgID
 	EGMI_REQ_MAP_GRID_KING_WAR					= 1918; 	//
 	EGMI_ACK_MAP_GRID_KING_WAR					= 1919; 	//
     
+	
+	
+	
 	/////////////////////GM MSG/////////////////////////////////////
 	EGMI_REQ_CMD_PROPERTY_INT					= 10000;			//
 	EGMI_REQ_CMD_PROPERTY_STR					= 10001;			//
@@ -354,11 +359,11 @@ enum EGameMsgID
 //PropertyType
 enum ESkillType
 {
-	EST_BRIEF_SINGLE 		= 0;//??0???
-	EST_BRIEF_GROUP 		= 1;//
-	EST_BULLET_SINGLE		= 2;//?????(???)
-	EST_BULLET_REBOUND		= 3;//??????
-	EST_BULLET_BOMB			= 4;//
+	EST_BRIEF_SINGLE 		= 0;//this kind of skill just can damage one object
+	EST_BRIEF_GROUP 		= 1;//this kind of skill can damage multiple objects
+	EST_BULLET_SINGLE		= 2;//this kind of bullet just can damage one object
+	EST_BULLET_REBOUND		= 3;//this kind of bullet can damage multiple objects via rebound
+	EST_BULLET_BOMB			= 4;//this kind of bullet can damage multiple objects when touch the target object(position)
 	EST_TARGET_SINGLE		= 5;//???????
 	EST_TARGET_GROUP		= 6;//????????
 	EST_POSITION_GROUP		= 7;//??????(????????position)
@@ -366,14 +371,14 @@ enum ESkillType
 
 enum EItemType
 {
-    EIT_EQUIP   			= 0; //
-	EIT_GEM   				= 1; //
-	EIT_ITEM   				= 2; //
-	EIT_CARD   				= 3; //
-	EIT_TOKEN	   			= 4; //
+    EIT_EQUIP   			= 0; //the equipment which can add props
+	EIT_GEM   				= 1; //the gem ca be embed to the equipment
+	EIT_ITEM   				= 2; //expendable items for player, such as a medicine that cures
+	EIT_CARD   				= 3; //special items that can call a hero or others
+	EIT_TOKEN	   			= 4; //special items can do what you want to do
 }
 
-//
+//the sub items type of EIT_EQUIP
 enum EGameEquipSubType
 {
 	EQUIPTYPE_WEAPON            = 0;    //
@@ -384,7 +389,7 @@ enum EGameEquipSubType
 	EQUIPTYPE_BOOT              = 5;   	//
 };
 
-//
+//the sub items type of EIT_GEM
 enum EGameGemSubType
 {
 	EGGSTYPE_GEM_ATK           	= 0;    //
@@ -398,7 +403,7 @@ enum EGameGemSubType
 	
 };
 
-
+//the sub items type of EIT_ITEM
 enum EGameItemSubType
 {
 	EGIT_ITEM_WATER				= 0; 	//
@@ -409,8 +414,10 @@ enum EGameItemSubType
 	EGIT_ITEM_MP				= 5;	//
 	EGIT_ITEM_SP				= 6;	//
 	EGIT_ITEM_PACK				= 7;	//
+	EGIT_ITEM_MEMORY_POS		= 8;	//
 };
 
+//the sub items type of EIT_CARD
 enum EGameCardSubType
 {
 	EGCST_STRENGTH 				= 1;//	
@@ -418,13 +425,14 @@ enum EGameCardSubType
 	EGCST_INTELLIGENCE			= 3;//
 };
 
+//the sub items type of EIT_TOKEN
 enum EGameTokenSubType
 {
 	EGTST_TOKEN_REBORN					= 0; 	//
 	EGTST_TOKEN_POSITION				= 1;	//
 	EGTST_TOKEN_BOUNTY   				= 2; 	//
-	EGTST_TOKEN_ACTIVITY				= 3;	//
-	EGTST_TOKEN_BUILD					= 4;	//
+	EGTST_TOKEN_ACTIVITY				= 3;	//a token that can join a activity
+	EGTST_TOKEN_BUILD					= 4;	//a token that can call a building or power
 };
 
 
@@ -481,10 +489,14 @@ enum ETaskType
 }
 
 //
-enum EBattleType
+enum EPVPType
 {
-	BATTLE_SINGLE        = 0; //
-	BATTLE_PVE_TEAM      = 1; //
+    PVP_HOME = 0;
+    PVP_INDIVIDUAL = 1;
+    PVP_DOTA = 2;
+    PVP_SURVIVAL = 3;
+    PVP_GUILD_WAR = 4;
+    PVP_GUILD_DUNGEON = 5;
 }
 
 enum EShopType
@@ -511,12 +523,21 @@ enum ERankType
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 
-//NCPTypenpc
+//NPCTypenpc
 enum ENPCType
 {
     ENPCTYPE_NORMAL	= 0;			  //
     ENPCTYPE_HERO 	= 1;              //
     ENPCTYPE_TURRET = 2;              //
+    
+};
+
+
+enum ETARGETType
+{
+    ETARGETTYPE_ENEMY	= 0;			  //
+    ETARGETTYPE_SELF 	= 1;              //
+    ETARGETTYPE_FRIEND  = 2;              //
     
 };
 
@@ -536,6 +557,7 @@ enum EGameElementType
 	EELEMENTTYPE_WIND              	= 2;    //
 	EELEMENTTYPE_ICE          		= 3;    //
 	EELEMENTTYPE_POISON          	= 4;    //
+	EELEMENTTYPE_DARK          		= 5;    //
 };
 
 

@@ -19,27 +19,29 @@ public:
     enum EConstDefine_Hero
     {
         ECONSTDEFINE_HERO_MAXLEVEL = 100,
-        ECONSTDEFINE_HERO_MAXSTAR = 100,
 		ECONSTDEFINE_HERO_ONCELEVEEXP = 100,
-		ECONSTDEFINE_HERO_MAXFIGHT_POS = 3,
+		ECONSTDEFINE_HERO_MAX_STAR = 20,
     };
+	
+	enum EConsHero_Pos
+	{
+		ECONSt_HERO_UNKNOW = 0,
+		ECONSt_HERO_POS1 = 1,
+		ECONSt_HERO_POS2 = 2,
+		ECONSt_HERO_POS3 = 3,
+		ECONSt_HERO_MAX = 4,
+	};
 
     virtual NFGUID AddHero(const NFGUID& self, const std::string& strID) = 0;
-	virtual NFGUID ActiviteHero(const NFGUID& self, const string& strID) = 0;
-	virtual bool ActiviteHero(const NFGUID& self, const NFGUID& hero) = 0;
+	virtual bool AddHeroExp(const NFGUID& self, const int64_t nExp) = 0;
     virtual bool AddHeroExp(const NFGUID& self, const NFGUID& xHeroID, const int64_t nExp) = 0;
-    virtual bool HeroStarUp(const NFGUID& self, const NFGUID& xHeroID) = 0;
-    virtual bool HeroSkillUp(const NFGUID& self, const NFGUID& xHeroID, const int nIndex) = 0;
-	virtual bool HeroTalentUp(const NFGUID& self, const NFGUID& xHeroID, const int nIndex) = 0;
 
-	virtual bool HeroWearSkill(const NFGUID& self, const NFGUID& xHeroID, const std::string& xEquipID) = 0;
-	virtual bool SetFightHero(const NFGUID& self, const NFGUID& xHeroID, const int nPos) = 0;
+	virtual bool SetFightHero(const NFGUID& self, const NFGUID& xHeroID, const EConsHero_Pos nPos) = 0;
 	virtual bool SwitchFightHero(const NFGUID& self, const NFGUID& xHeroID) = 0;
 
-	virtual bool CreateHero(const NFGUID& self, const NFGUID& xHeroID) = 0;
-	virtual bool DestroyHero(const NFGUID& self, const NFGUID& xHeroID) = 0;
 	virtual NFGUID GetHeroGUID(const NFGUID& self, const std::string& strID) = 0;
 
+	virtual EConsHero_Pos GetFightPos(const NFGUID& self, const NFGUID& xHeroID) = 0;
 };
 
 #endif

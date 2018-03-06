@@ -321,6 +321,9 @@ namespace NFMsg
       [global::ProtoBuf.ProtoEnum(Name=@"EGMI_ACK_ENTER_GAME_FINISH", Value=160)]
       EGMI_ACK_ENTER_GAME_FINISH = 160,
             
+      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_REQ_ACK_RELIVE", Value=180)]
+      EGMI_REQ_ACK_RELIVE = 180,
+            
       [global::ProtoBuf.ProtoEnum(Name=@"EGMI_ACK_OBJECT_ENTRY", Value=200)]
       EGMI_ACK_OBJECT_ENTRY = 200,
             
@@ -404,6 +407,9 @@ namespace NFMsg
             
       [global::ProtoBuf.ProtoEnum(Name=@"EGMI_ACK_SEARCH_OPPNENT", Value=1225)]
       EGMI_ACK_SEARCH_OPPNENT = 1225,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_REQ_ADJUST_GAMBLE", Value=1226)]
+      EGMI_REQ_ADJUST_GAMBLE = 1226,
             
       [global::ProtoBuf.ProtoEnum(Name=@"EGMI_REQ_MOVE", Value=1230)]
       EGMI_REQ_MOVE = 1230,
@@ -911,7 +917,10 @@ namespace NFMsg
       EGIT_ITEM_SP = 6,
             
       [global::ProtoBuf.ProtoEnum(Name=@"EGIT_ITEM_PACK", Value=7)]
-      EGIT_ITEM_PACK = 7
+      EGIT_ITEM_PACK = 7,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EGIT_ITEM_MEMORY_POS", Value=8)]
+      EGIT_ITEM_MEMORY_POS = 8
     }
   
     [global::ProtoBuf.ProtoContract(Name=@"EGameCardSubType")]
@@ -1045,15 +1054,27 @@ namespace NFMsg
       TASK_KILL_SOME_MONSTER_COUNT = 9
     }
   
-    [global::ProtoBuf.ProtoContract(Name=@"EBattleType")]
-    public enum EBattleType
+    [global::ProtoBuf.ProtoContract(Name=@"EPVPType")]
+    public enum EPVPType
     {
             
-      [global::ProtoBuf.ProtoEnum(Name=@"BATTLE_SINGLE", Value=0)]
-      BATTLE_SINGLE = 0,
+      [global::ProtoBuf.ProtoEnum(Name=@"PVP_HOME", Value=0)]
+      PVP_HOME = 0,
             
-      [global::ProtoBuf.ProtoEnum(Name=@"BATTLE_PVE_TEAM", Value=1)]
-      BATTLE_PVE_TEAM = 1
+      [global::ProtoBuf.ProtoEnum(Name=@"PVP_INDIVIDUAL", Value=1)]
+      PVP_INDIVIDUAL = 1,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"PVP_DOTA", Value=2)]
+      PVP_DOTA = 2,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"PVP_SURVIVAL", Value=3)]
+      PVP_SURVIVAL = 3,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"PVP_GUILD_WAR", Value=4)]
+      PVP_GUILD_WAR = 4,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"PVP_GUILD_DUNGEON", Value=5)]
+      PVP_GUILD_DUNGEON = 5
     }
   
     [global::ProtoBuf.ProtoContract(Name=@"EShopType")]
@@ -1111,6 +1132,20 @@ namespace NFMsg
             
       [global::ProtoBuf.ProtoEnum(Name=@"ENPCTYPE_TURRET", Value=2)]
       ENPCTYPE_TURRET = 2
+    }
+  
+    [global::ProtoBuf.ProtoContract(Name=@"ETARGETType")]
+    public enum ETARGETType
+    {
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"ETARGETTYPE_ENEMY", Value=0)]
+      ETARGETTYPE_ENEMY = 0,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"ETARGETTYPE_SELF", Value=1)]
+      ETARGETTYPE_SELF = 1,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"ETARGETTYPE_FRIEND", Value=2)]
+      ETARGETTYPE_FRIEND = 2
     }
   
     [global::ProtoBuf.ProtoContract(Name=@"EPropertyType")]

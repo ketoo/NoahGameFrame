@@ -19,6 +19,7 @@ bool NFCTileModule::Init()
 	m_pGuildRedisModule = pPluginManager->FindModule<NFIGuildRedisModule>();
 	m_pGameServerNet_ServerModule = pPluginManager->FindModule<NFIGameServerNet_ServerModule>();
 	m_pPlayerRedisModule = pPluginManager->FindModule<NFIPlayerRedisModule>();
+	m_pSceneAOIModule = pPluginManager->FindModule<NFISceneAOIModule>();
 	
     return true;
 }
@@ -37,7 +38,12 @@ bool NFCTileModule::AfterInit()
 {
 	m_pKernelModule->AddClassCallBack(NFrame::Player::ThisName(), this, &NFCTileModule::OnObjectClassEvent);
 
-	if (!m_pNetModule->AddReceiveCallBack(NFMsg::EGameMsgID::EGEC_REQ_MINING_TITLE, this, &NFCTileModule::ReqMineTile)) { return false; }
+	m_pSceneAOIModule->AddBeforeEnterSceneGroupCallBack(this, &NFCTileModule::BeforeEnterSceneGroupEvent);
+	m_pSceneAOIModule->AddAfterEnterSceneGroupCallBack(this, &NFCTileModule::AfterEnterSceneGroupEvent);
+	m_pSceneAOIModule->AddBeforeLeaveSceneGroupCallBack(this, &NFCTileModule::BeforeLeaveSceneGroupEvent);
+	m_pSceneAOIModule->AddAfterLeaveSceneGroupCallBack(this, &NFCTileModule::AfterLeaveSceneGroupEvent);
+
+	if (!m_pNetModule->AddReceiveCallBack(NFMsg::EGameMsgID::EGEC_REQ_MINING_TITLE, this, &NFCTileModule::OnReqMineTileProcess)) { return false; }
     return true;
 }
 
@@ -118,13 +124,13 @@ bool NFCTileModule::GetOnlinePlayerTileData(const NFGUID& self, std::string& str
 	return false;
 }
 
-void NFCTileModule::ReqMineTile(const NFSOCK nSockIndex, const int nMsgID, const char * msg, const uint32_t nLen)
+void NFCTileModule::OnReqMineTileProcess(const NFSOCK nSockIndex, const int nMsgID, const char * msg, const uint32_t nLen)
 {
 	CLIENT_MSG_PROCESS( nMsgID, msg, nLen, NFMsg::ReqMiningTitle);
 
-	NFGUID xViewOppnentID = m_pKernelModule->GetPropertyObject(nPlayerID, NFrame::Player::ViewOppnent());
-	NFGUID xFightOppnentID = m_pKernelModule->GetPropertyObject(nPlayerID, NFrame::Player::FightOppnent());
-	if (!xViewOppnentID.IsNull() || !xFightOppnentID.IsNull())
+	NFGUID xViewOpponentID = m_pKernelModule->GetPropertyObject(nPlayerID, NFrame::Player::ViewOpponent());
+	NFGUID xFightOpponentID = m_pKernelModule->GetPropertyObject(nPlayerID, NFrame::Player::FightingOpponent());
+	if (!xViewOpponentID.IsNull() || !xFightOpponentID.IsNull())
 	{
 		return;
 	}
@@ -152,7 +158,6 @@ void NFCTileModule::ReqMineTile(const NFSOCK nSockIndex, const int nMsgID, const
 		pTile->set_opr(nOpr);
 	}
 
-	SaveTileData(nPlayerID);
 	m_pGameServerNet_ServerModule->SendMsgPBToGate(NFMsg::EGEC_ACK_MINING_TITLE, xData, nPlayerID);
 }
 
@@ -333,85 +338,12 @@ bool NFCTileModule::RemoveNPC(const NFGUID & self, const int nX, const int nY, c
 
 bool NFCTileModule::SaveTileData(const NFGUID & self)
 {
-	NF_SHARE_PTR<TileData> xTileData = mxTileData.GetElement(self);
-	if (!xTileData)
-	{
-		return false;
-	}
-
-	NFMsg::AckMiningTitle xData;
-	NF_SHARE_PTR<NFMapEx<int, TileState>> xStateDataMap = xTileData->mxTileState.First();
-	for (; xStateDataMap; xStateDataMap = xTileData->mxTileState.Next())
-	{
-		NF_SHARE_PTR<TileState> xStateData = xStateDataMap->First();
-		for (; xStateData; xStateData = xStateDataMap->Next())
-		{
-			//pb
-			//xStateData
-			NFMsg::TileState* pTile = xData.add_tile();
-			if (pTile)
-			{
-				pTile->set_x(xStateData->x);
-				pTile->set_y(xStateData->y);
-				pTile->set_opr(xStateData->state);
-			}
-		}
-	}
-
-	NF_SHARE_PTR<NFMapEx<int, TileBuilding>> xTileBuildingMap = xTileData->mxTileBuilding.First();
-	for (; xTileBuildingMap; xTileBuildingMap = xTileData->mxTileBuilding.Next())
-	{
-		NF_SHARE_PTR<TileBuilding> xStateData = xTileBuildingMap->First();
-		for (; xStateData; xStateData = xTileBuildingMap->Next())
-		{
-			//pb
-			//xStateData
-			NFMsg::TileBuilding* pTile = xData.add_building();
-			if (pTile)
-			{
-				pTile->set_x(xStateData->x);
-				pTile->set_y(xStateData->y);
-				pTile->set_configid(xStateData->configID);
-				*pTile->mutable_guid() = NFINetModule::NFToPB(xStateData->ID);
-			}
-
-
-		}
-	}
-
-	NF_SHARE_PTR<NFMapEx<int, TileNPC>> xTileNPCMap = xTileData->mxTileNPC.First();
-	for (; xTileNPCMap; xTileNPCMap = xTileData->mxTileNPC.Next())
-	{
-		NF_SHARE_PTR<TileNPC> xStateData = xTileNPCMap->First();
-		for (; xStateData; xStateData = xTileNPCMap->Next())
-		{
-			//pb
-			//xStateData
-			NFMsg::TileNPC* pTile = xData.add_npc();
-			if (pTile)
-			{
-				pTile->set_x(xStateData->x);
-				pTile->set_y(xStateData->y);
-				pTile->set_configid(xStateData->configID);
-				*pTile->mutable_guid() = NFINetModule::NFToPB(xStateData->ID);
-			}
-		}
-	}
-
-	const int nSceneID = m_pKernelModule->GetPropertyInt32(self, NFrame::Player::HomeSceneID());
 	std::string strData;
-	if (xData.SerializeToString(&strData))
+	if (GetOnlinePlayerTileData(self, strData))
 	{
+		const int nSceneID = m_pKernelModule->GetPropertyInt32(self, NFrame::Player::HomeSceneID());
 		return m_pPlayerRedisModule->SavePlayerTile(nSceneID, self, strData);
 	}
-
-	return false;
-}
-
-bool NFCTileModule::LoadTileData(const NFGUID & self)
-{
-	const int nSceneID = m_pKernelModule->GetPropertyInt32(self, NFrame::Player::HomeSceneID());
-	LoadTileData(self, nSceneID);
 
 	return false;
 }
@@ -452,96 +384,59 @@ bool NFCTileModule::LoadTileData(const NFGUID & self, const int nSceneID)
 
 bool NFCTileModule::SendTileData(const NFGUID & self)
 {
-	NF_SHARE_PTR<TileData> xTileData = mxTileData.GetElement(self);
-	if (!xTileData)
+	std::string strData;
+	if (GetOnlinePlayerTileData(self, strData))
 	{
-		return false;
+		m_pGameServerNet_ServerModule->SendMsgPBToGate(NFMsg::EGEC_ACK_MINING_TITLE, strData, self);
 	}
 
-	bool bNeedSend = false;
-	NFMsg::AckMiningTitle xData;
-	NF_SHARE_PTR<NFMapEx<int, TileState>> xStateDataMap = xTileData->mxTileState.First();
-	for (; xStateDataMap; xStateDataMap = xTileData->mxTileState.Next())
-	{
-		NF_SHARE_PTR<TileState> xStateData = xStateDataMap->First();
-		for (; xStateData; xStateData = xStateDataMap->Next())
-		{
-			//pb
-			//xStateData
-			NFMsg::TileState* pTile = xData.add_tile();
-			if (pTile)
-			{
-				bNeedSend = true;
-
-				pTile->set_x(xStateData->x);
-				pTile->set_y(xStateData->y);
-				pTile->set_opr(xStateData->state);
-			}
-		}
-
-
-	}
-
-	NF_SHARE_PTR<NFMapEx<int, TileBuilding>> xStateDataBuilding = xTileData->mxTileBuilding.First();
-	for (; xStateDataBuilding; xStateDataBuilding = xTileData->mxTileBuilding.Next())
-	{
-		NF_SHARE_PTR<TileBuilding> xStateData = xStateDataBuilding->First();
-		for (; xStateData; xStateData = xStateDataBuilding->Next())
-		{
-			//pb
-			//xStateData
-			NFMsg::TileBuilding* pBuilding = xData.add_building();
-			if (pBuilding)
-			{
-				bNeedSend = true;
-
-				pBuilding->set_x(xStateData->x);
-				pBuilding->set_y(xStateData->y);
-				pBuilding->set_configid(xStateData->configID);
-				*pBuilding->mutable_guid() = NFINetModule::NFToPB(xStateData->ID);
-			}
-		}
-	}
-
-	NF_SHARE_PTR<NFMapEx<int, TileNPC>> xStateDataNPC = xTileData->mxTileNPC.First();
-	for (; xStateDataNPC; xStateDataNPC = xTileData->mxTileNPC.Next())
-	{
-		NF_SHARE_PTR<TileNPC> xStateData = xStateDataNPC->First();
-		for (; xStateData; xStateData = xStateDataNPC->Next())
-		{
-			//pb
-			//xStateData
-			NFMsg::TileNPC* pNpc = xData.add_npc();
-			if (pNpc)
-			{
-				bNeedSend = true;
-
-				pNpc->set_x(xStateData->x);
-				pNpc->set_y(xStateData->y);
-				pNpc->set_configid(xStateData->configID);
-				*pNpc->mutable_guid() = NFINetModule::NFToPB(xStateData->ID);
-			}
-		}
-
-	}
-
-	if (bNeedSend)
-	{
-		m_pGameServerNet_ServerModule->SendMsgPBToGate(NFMsg::EGEC_ACK_MINING_TITLE, xData, self);
-	}
 	return true;
+}
+
+bool NFCTileModule::CreateTileBuilding(const NFGUID & self)
+{
+	NF_SHARE_PTR<NFIRecord> xRecord = m_pKernelModule->FindRecord(self, NFrame::Player::BuildingList::ThisName());
+	if (xRecord)
+	{
+		const int nSceneID = m_pKernelModule->GetPropertyInt32(self, NFrame::Player::SceneID());
+		const int nHomeSceneID = m_pKernelModule->GetPropertyInt32(self, NFrame::Player::HomeSceneID());
+		const int nGroupID = m_pKernelModule->GetPropertyInt32(self, NFrame::Player::GroupID());
+
+		for (int i = 0; i < xRecord->GetRows(); ++i)
+		{
+			if (xRecord->IsUsed(i))
+			{
+				NFGUID xBuildingID = m_pKernelModule->GetRecordObject(self, NFrame::Player::BuildingList::ThisName(), i, NFrame::Player::BuildingList::BuildingGUID);
+				const std::string& strCnfID = m_pKernelModule->GetRecordString(self, NFrame::Player::BuildingList::ThisName(), i, NFrame::Player::BuildingList::BuildingCnfID);
+				const NFVector3& vPos = m_pKernelModule->GetRecordVector3(self, NFrame::Player::BuildingList::ThisName(), i, NFrame::Player::BuildingList::Pos);
+				
+				NFDataList xDataArg;
+				xDataArg.AddString(NFrame::NPC::Position());
+				xDataArg.AddVector3(vPos);
+				xDataArg.AddString(NFrame::NPC::MasterID());
+				xDataArg.AddObject(self);
+				xDataArg.AddString(NFrame::NPC::NPCType());
+				xDataArg.AddInt(NFMsg::ENPCType::ENPCTYPE_TURRET);
+
+				m_pKernelModule->CreateObject(xBuildingID, nHomeSceneID, nGroupID, NFrame::NPC::ThisName(), strCnfID, xDataArg);
+			}
+		}
+	}
+
+	return false;
 }
 
 int NFCTileModule::OnObjectClassEvent(const NFGUID & self, const std::string & strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFDataList & var)
 {
-	if (CLASS_OBJECT_EVENT::COE_DESTROY == eClassEvent)
+	if (CLASS_OBJECT_EVENT::COE_BEFOREDESTROY == eClassEvent)
 	{
-		//cannot save tile here, because player maybe offline in other people scene
+		SaveTileData(self);
 	}
 	else if (CLASS_OBJECT_EVENT::COE_CREATE_BEFORE_EFFECT == eClassEvent)
 	{
 		//preload at first, then attach
-		LoadTileData(self);
+		const int nSceneID = m_pKernelModule->GetPropertyInt32(self, NFrame::Player::HomeSceneID());
+		LoadTileData(self, nSceneID);
 	}
 	else if (CLASS_OBJECT_EVENT::COE_CREATE_CLIENT_FINISH == eClassEvent)
 	{
@@ -564,8 +459,21 @@ int NFCTileModule::OnRecordEvent(const NFGUID& self, const RECORD_EVENT_DATA& xE
 		NFGUID xBuildingID = m_pKernelModule->GetRecordObject(self, xEventData.strRecordName, xEventData.nRow, NFrame::Player::BuildingList::BuildingGUID);
 		const std::string& strCnfID = m_pKernelModule->GetRecordString(self, xEventData.strRecordName, xEventData.nRow, NFrame::Player::BuildingList::BuildingCnfID);
 		const NFVector3& vPos = m_pKernelModule->GetRecordVector3(self, xEventData.strRecordName, xEventData.nRow, NFrame::Player::BuildingList::Pos);
-	
+		const int nSceneID = m_pKernelModule->GetPropertyInt32(self, NFrame::Player::SceneID());
+		const int nHomeSceneID = m_pKernelModule->GetPropertyInt32(self, NFrame::Player::HomeSceneID());
+		const int nGroupID = m_pKernelModule->GetPropertyInt32(self, NFrame::Player::GroupID());
+
 		AddBuilding(self, vPos.X(), vPos.Y(), xBuildingID, strCnfID);
+
+		NFDataList xDataArg;
+		xDataArg.AddString(NFrame::NPC::Position());
+		xDataArg.AddVector3(vPos);
+		xDataArg.AddString(NFrame::NPC::MasterID());
+		xDataArg.AddObject(self);
+		xDataArg.AddString(NFrame::NPC::NPCType());
+		xDataArg.AddInt(NFMsg::ENPCType::ENPCTYPE_TURRET);
+
+		m_pKernelModule->CreateObject(xBuildingID, nHomeSceneID, nGroupID, NFrame::NPC::ThisName(), strCnfID, xDataArg);
 	}
 		break;
 	case RECORD_EVENT_DATA::Del:
@@ -575,11 +483,45 @@ int NFCTileModule::OnRecordEvent(const NFGUID& self, const RECORD_EVENT_DATA& xE
 		const NFVector3& vPos = m_pKernelModule->GetRecordVector3(self, xEventData.strRecordName, xEventData.nRow, NFrame::Player::BuildingList::Pos);
 
 		RemoveBuilding(self, vPos.X(), vPos.Y(), xBuildingID);
+
+		m_pKernelModule->DestroyObject(xBuildingID);
 	}
 		break;
 	default:
 		break;
 	}
 
+	return 0;
+}
+
+
+int NFCTileModule::BeforeEnterSceneGroupEvent(const NFGUID & self, const int nSceneID, const int nGroupID, const int nType, const NFDataList & argList)
+{
+	return 0;
+}
+
+int NFCTileModule::AfterEnterSceneGroupEvent(const NFGUID & self, const int nSceneID, const int nGroupID, const int nType, const NFDataList & argList)
+{
+	//create building if the player back home
+	//create building if the player wants attack the others
+	int nPVPType = m_pKernelModule->GetPropertyInt32(self, NFrame::Player::PVPType());
+	if (nPVPType == NFMsg::EPVPType::PVP_HOME)
+	{
+		SendTileData(self);
+
+		//create your building for yourself
+		CreateTileBuilding(self);
+	}
+
+	return 0;
+}
+
+int NFCTileModule::BeforeLeaveSceneGroupEvent(const NFGUID & self, const int nSceneID, const int nGroupID, const int nType, const NFDataList & argList)
+{
+	return 0;
+}
+
+int NFCTileModule::AfterLeaveSceneGroupEvent(const NFGUID & self, const int nSceneID, const int nGroupID, const int nType, const NFDataList & argList)
+{
 	return 0;
 }

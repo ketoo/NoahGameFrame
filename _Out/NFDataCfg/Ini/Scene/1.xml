@@ -1,6 +1,6 @@
 <!-- edited with XMLSpy v2011 (http://www.altova.com) by tom (acer) -->
 <XML>   
-	<Object ID="NEW_Attack1" ConfigID="AttackNpc1" X="90.5" Y="103" Z="0"  Weight="90" />
-	<Object ID="NEW_Attack2" ConfigID="AttackNpc2" X="94.5" Y="103" Z="0" Weight="90" />
-	<Object ID="NEW_Attack3" ConfigID="AttackNpc3" X="97.5" Y="103" Z="0" Weight="90" />
+	<Object ID="NEW_Attack1" ConfigID="NPC_PlantMonster-Red" X="66.5" Y="95" Z="0"  Weight="100" />
+	<Object ID="NEW_Attack2" ConfigID="NPC_HERO_Wererat_Soldier" X="77.5" Y="95" Z="0" Weight="100" />
+	<Object ID="NEW_Attack3" ConfigID="NPC_Magma_Demon-Orange" X="55.5" Y="95" Z="0" Weight="100" />
 </XML>

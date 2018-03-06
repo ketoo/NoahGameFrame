@@ -16,6 +16,7 @@ NFCProperty::NFCProperty()
 	mbSave = false;
 	mbCache = false;
 	mbRef = false;
+	mbForce = false;
 	mbUpload = false;
 
 	mSelf = NFGUID();
@@ -132,6 +133,11 @@ const bool NFCProperty::GetRef() const
 	return mbRef;
 }
 
+const bool NFCProperty::GetForce() const
+{
+	return mbForce;
+}
+
 const bool NFCProperty::GetUpload() const
 {
 	return mbUpload;
@@ -160,6 +166,11 @@ void NFCProperty::SetCache(bool bCache)
 void NFCProperty::SetRef(bool bRef)
 {
 	mbRef = bRef;
+}
+
+void NFCProperty::SetForce(bool bRef)
+{
+	mbForce = bRef;
 }
 
 void NFCProperty::SetUpload(bool bUpload)

@@ -56,7 +56,7 @@ bool NFCScheduleModule::Execute()
 		NF_SHARE_PTR<NFCScheduleElement> pSchedule = xObjectSchedule->First();
 		while (pSchedule)
 		{
-			NFINT64 nNow = NFGetTime();
+			NFINT64 nNow = NFGetTimeMS();
 			if (nNow > pSchedule->mnNextTriggerTime)
 			{
 				if (pSchedule->mnRemainCount > 0 || pSchedule->mbForever == true)
@@ -126,7 +126,7 @@ bool NFCScheduleModule::Execute()
 	NF_SHARE_PTR< NFCScheduleElement > xModuleSchedule = mModuleScheduleMap.First();
 	while (xModuleSchedule)
 	{
-		NFINT64 nNow = NFGetTime();
+		NFINT64 nNow = NFGetTimeMS();
 		if (nNow > xModuleSchedule->mnNextTriggerTime)
 		{
 			if (xModuleSchedule->mnRemainCount > 0 || xModuleSchedule->mbForever == true)
@@ -183,8 +183,8 @@ bool NFCScheduleModule::AddSchedule(const std::string & strScheduleName, const M
 	NFCScheduleElement xSchedule;
 	xSchedule.mstrScheduleName = strScheduleName;
 	xSchedule.mfIntervalTime = fTime;
-	xSchedule.mnNextTriggerTime = NFGetTime() + (NFINT64)(fTime * 1000);
-	xSchedule.mnStartTime = NFGetTime();
+	xSchedule.mnNextTriggerTime = NFGetTimeMS() + (NFINT64)(fTime * 1000);
+	xSchedule.mnStartTime = NFGetTimeMS();
 	xSchedule.mnRemainCount = nCount;
 	xSchedule.mnAllCount = nCount;
 	xSchedule.self = NFGUID();
@@ -222,8 +222,8 @@ bool NFCScheduleModule::AddSchedule(const NFGUID self, const std::string& strSch
 	NFCScheduleElement xSchedule;
 	xSchedule.mstrScheduleName = strScheduleName;
 	xSchedule.mfIntervalTime = fTime;
-	xSchedule.mnNextTriggerTime = NFGetTime() + (NFINT64)(fTime * 1000);
-	xSchedule.mnStartTime = NFGetTime();
+	xSchedule.mnNextTriggerTime = NFGetTimeMS() + (NFINT64)(fTime * 1000);
+	xSchedule.mnStartTime = NFGetTimeMS();
 	xSchedule.mnRemainCount = nCount;
 	xSchedule.mnAllCount = nCount;
 	xSchedule.self = self;

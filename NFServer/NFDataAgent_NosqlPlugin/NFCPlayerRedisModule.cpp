@@ -20,7 +20,64 @@ bool NFCPlayerRedisModule::Init()
 	m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>();
 	m_pLogModule = pPluginManager->FindModule<NFILogModule>();
 	
+	m_pKernelModule->RegisterCommonPropertyEvent(this, &NFCPlayerRedisModule::OnPropertyCommonEvent);
+	m_pKernelModule->RegisterCommonRecordEvent(this, &NFCPlayerRedisModule::OnRecordCommonEvent);
+
 	return true;
+}
+
+int NFCPlayerRedisModule::OnPropertyCommonEvent(const NFGUID & self, const std::string & strPropertyName, const NFData & oldVar, const NFData & newVar)
+{
+	const std::string& strClassName = m_pKernelModule->GetPropertyString(self, NFrame::IObject::ClassName());
+	if (strClassName == NFrame::Player::ThisName())
+	{
+		NF_SHARE_PTR<NFIObject> pObject = m_pKernelModule->GetObject(self);
+		if (pObject)
+		{
+			NF_SHARE_PTR<NFIPropertyManager> pPropertyManager = pObject->GetPropertyManager();
+			if (pPropertyManager)
+			{
+				NF_SHARE_PTR<NFIProperty> pPropertyInfo = pPropertyManager->GetElement(strPropertyName);
+				if (pPropertyInfo)
+				{
+					if (pPropertyInfo->GetForce())
+					{
+						//save data with real-time
+					}
+				}
+			}
+		}
+		
+	}
+
+	return 0;
+}
+
+int NFCPlayerRedisModule::OnRecordCommonEvent(const NFGUID & self, const RECORD_EVENT_DATA & xEventData, const NFData & oldVar, const NFData & newVar)
+{
+	const std::string& strClassName = m_pKernelModule->GetPropertyString(self, NFrame::IObject::ClassName());
+	if (strClassName == NFrame::Player::ThisName())
+	{
+		NF_SHARE_PTR<NFIObject> pObject = m_pKernelModule->GetObject(self);
+		if (pObject)
+		{
+			NF_SHARE_PTR<NFIRecordManager> pRecordManager = pObject->GetRecordManager();
+			if (pRecordManager)
+			{
+				NF_SHARE_PTR<NFIRecord> pRecordInfo = pRecordManager->GetElement(xEventData.strRecordName);
+				if (pRecordInfo)
+				{
+					if (pRecordInfo->GetForce())
+					{
+						//save data with real-time
+					}
+				}
+			}
+		}
+
+	}
+
+	return 0;
 }
 
 bool NFCPlayerRedisModule::Shut()
@@ -45,7 +102,7 @@ bool NFCPlayerRedisModule::LoadPlayerData(const NFGUID & self)
 {
 	mxObjectDataCache.RemoveElement(self);
 
-	m_pLogModule->LogNormal(NFILogModule::NF_LOG_LEVEL::NLL_DEBUG_NORMAL, self, "Start to load data ", NFGetTime());
+	m_pLogModule->LogNormal(NFILogModule::NF_LOG_LEVEL::NLL_DEBUG_NORMAL, self, "Start to load data ", NFGetTimeMS());
 
 	NF_SHARE_PTR<PlayerDataCache> xPlayerDataCache(NF_NEW PlayerDataCache());
 	mxObjectDataCache.AddElement(self, xPlayerDataCache);
@@ -64,7 +121,7 @@ bool NFCPlayerRedisModule::LoadPlayerData(const NFGUID & self)
 		}
 	}
 
-	m_pLogModule->LogNormal(NFILogModule::NF_LOG_LEVEL::NLL_DEBUG_NORMAL, self, "loaded data ", NFGetTime());
+	m_pLogModule->LogNormal(NFILogModule::NF_LOG_LEVEL::NLL_DEBUG_NORMAL, self, "loaded data ", NFGetTimeMS());
 
 
 	return true;
@@ -150,6 +207,137 @@ bool NFCPlayerRedisModule::LoadPlayerTileRandomCache(const NFGUID & xPlayer, std
 	return false;
 }
 
+NFINT64 NFCPlayerRedisModule::GetPropertyInt(const NFGUID & self, const std::string & strPropertyName)
+{
+	NF_SHARE_PTR<NFINoSqlDriver> pDriver = m_pNoSqlModule->GetDriverBySuit(self.ToString());
+	if (!pDriver)
+	{
+		return 0;
+	}
+
+	std::string strValue;
+	std::string strCacheKey = m_pCommonRedisModule->GetPropertyCacheKey(self);
+	if (!pDriver->HGet(strCacheKey, strPropertyName, strValue))
+	{
+		return 0;
+	}
+
+	return lexical_cast<NFINT64>(strValue);
+}
+
+int NFCPlayerRedisModule::GetPropertyInt32(const NFGUID & self, const std::string & strPropertyName)
+{
+	NF_SHARE_PTR<NFINoSqlDriver> pDriver = m_pNoSqlModule->GetDriverBySuit(self.ToString());
+	if (!pDriver)
+	{
+		return 0;
+	}
+
+	std::string strValue;
+	std::string strCacheKey = m_pCommonRedisModule->GetPropertyCacheKey(self);
+	if (!pDriver->HGet(strCacheKey, strPropertyName, strValue))
+	{
+		return 0;
+	}
+
+	return lexical_cast<NFINT64>(strValue);
+}
+
+double NFCPlayerRedisModule::GetPropertyFloat(const NFGUID & self, const std::string & strPropertyName)
+{
+	NF_SHARE_PTR<NFINoSqlDriver> pDriver = m_pNoSqlModule->GetDriverBySuit(self.ToString());
+	if (!pDriver)
+	{
+		return 0;
+	}
+
+	std::string strValue;
+	std::string strCacheKey = m_pCommonRedisModule->GetPropertyCacheKey(self);
+	if (!pDriver->HGet(strCacheKey, strPropertyName, strValue))
+	{
+		return 0;
+	}
+
+	return lexical_cast<double>(strValue);
+}
+
+std::string NFCPlayerRedisModule::GetPropertyString(const NFGUID & self, const std::string & strPropertyName)
+{
+	NF_SHARE_PTR<NFINoSqlDriver> pDriver = m_pNoSqlModule->GetDriverBySuit(self.ToString());
+	if (!pDriver)
+	{
+		return "";
+	}
+
+	std::string strValue;
+	std::string strCacheKey = m_pCommonRedisModule->GetPropertyCacheKey(self);
+	if (!pDriver->HGet(strCacheKey, strPropertyName, strValue))
+	{
+		return "";
+	}
+
+	return strValue;
+}
+
+NFGUID NFCPlayerRedisModule::GetPropertyObject(const NFGUID & self, const std::string & strPropertyName)
+{
+	NF_SHARE_PTR<NFINoSqlDriver> pDriver = m_pNoSqlModule->GetDriverBySuit(self.ToString());
+	if (!pDriver)
+	{
+		return NFGUID();
+	}
+
+	std::string strValue;
+	std::string strCacheKey = m_pCommonRedisModule->GetPropertyCacheKey(self);
+	if (!pDriver->HGet(strCacheKey, strPropertyName, strValue))
+	{
+		return NFGUID();
+	}
+	NFGUID xID;
+	xID.FromString(strValue);
+	return xID;
+}
+
+NFVector2 NFCPlayerRedisModule::GetPropertyVector2(const NFGUID & self, const std::string & strPropertyName)
+{
+	NF_SHARE_PTR<NFINoSqlDriver> pDriver = m_pNoSqlModule->GetDriverBySuit(self.ToString());
+	if (!pDriver)
+	{
+		return NFVector2();
+	}
+
+	std::string strValue;
+	std::string strCacheKey = m_pCommonRedisModule->GetPropertyCacheKey(self);
+	if (!pDriver->HGet(strCacheKey, strPropertyName, strValue))
+	{
+		return NFVector2();
+	}
+
+	NFVector2 xValue;
+	xValue.FromString(strValue);
+	return xValue;
+}
+
+NFVector3 NFCPlayerRedisModule::GetPropertyVector3(const NFGUID & self, const std::string & strPropertyName)
+{
+	NF_SHARE_PTR<NFINoSqlDriver> pDriver = m_pNoSqlModule->GetDriverBySuit(self.ToString());
+	if (!pDriver)
+	{
+		return NFVector3();
+	}
+
+	std::string strValue;
+	std::string strCacheKey = m_pCommonRedisModule->GetPropertyCacheKey(self);
+	if (!pDriver->HGet(strCacheKey, strPropertyName, strValue))
+	{
+		return NFVector3();
+	}
+
+	NFVector3 xValue;
+	xValue.FromString(strValue);
+	return xValue;
+}
+
 bool NFCPlayerRedisModule::SavePlayerData(const NFGUID & self)
 {
 	m_pCommonRedisModule->SaveCachePropertyInfo(self, m_pKernelModule->GetObject(self)->GetPropertyManager());
@@ -198,21 +386,21 @@ int NFCPlayerRedisModule::OnObjectPlayerEvent(const NFGUID & self, const std::st
 	{
 		OnOffline(self);
 		
-		m_pLogModule->LogNormal(NFILogModule::NF_LOG_LEVEL::NLL_INFO_NORMAL, self, "start to save data", NFGetTime());
+		m_pLogModule->LogNormal(NFILogModule::NF_LOG_LEVEL::NLL_INFO_NORMAL, self, "start to save data", NFGetTimeMS());
 
 		SavePlayerData(self);
 
-		m_pLogModule->LogNormal(NFILogModule::NF_LOG_LEVEL::NLL_INFO_NORMAL, self, "saved data", NFGetTime());
+		m_pLogModule->LogNormal(NFILogModule::NF_LOG_LEVEL::NLL_INFO_NORMAL, self, "saved data", NFGetTimeMS());
 	}
 	else if (CLASS_OBJECT_EVENT::COE_CREATE_LOADDATA == eClassEvent)
 	{
 		OnOnline(self);
 
-		m_pLogModule->LogNormal(NFILogModule::NF_LOG_LEVEL::NLL_INFO_NORMAL, self, "start to attach data", NFGetTime());
+		m_pLogModule->LogNormal(NFILogModule::NF_LOG_LEVEL::NLL_INFO_NORMAL, self, "start to attach data", NFGetTimeMS());
 
 		AttachData(self);
 
-		m_pLogModule->LogNormal(NFILogModule::NF_LOG_LEVEL::NLL_INFO_NORMAL, self, "attached data", NFGetTime());
+		m_pLogModule->LogNormal(NFILogModule::NF_LOG_LEVEL::NLL_INFO_NORMAL, self, "attached data", NFGetTimeMS());
 	}
 	else if (CLASS_OBJECT_EVENT::COE_CREATE_FINISH == eClassEvent)
 	{
