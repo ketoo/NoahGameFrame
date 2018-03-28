@@ -32,7 +32,7 @@ bool NFCLevelModule::AfterInit()
     m_pLogModule = pPluginManager->FindModule<NFILogModule>();
     m_pPropertyConfigModule = pPluginManager->FindModule<NFIPropertyConfigModule>();
 	m_pElementModule = pPluginManager->FindModule<NFIElementModule>();
-	m_pHeroModule = pPluginManager->FindModule<NFIHeroModule>();
+	//m_pHeroModule = pPluginManager->FindModule<NFIHeroModule>();
 	
     return true;
 }
@@ -41,7 +41,7 @@ int NFCLevelModule::AddExp(const NFGUID& self, const int64_t nExp)
 {
 	if (mbExpForHero)
 	{
-		m_pHeroModule->AddHeroExp(self, nExp);
+		//m_pHeroModule->AddHeroExp(self, nExp);
 		return 0;
 	}
 

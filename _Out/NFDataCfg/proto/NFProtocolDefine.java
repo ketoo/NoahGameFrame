@@ -1018,7 +1018,8 @@ package nframe;
 			public static final int Activated = 2;//int
 			public static final int Level = 3;//int
 			public static final int Exp = 4;//int
-			public static final int Star = 6;//int
+			public static final int Star = 5;//int
+			public static final int Ice_Talent = 6;//int
 			public static final int Fire_Talent = 7;//int
 			public static final int Light_Talent = 8;//int
 			public static final int Wind_Talent = 9;//int

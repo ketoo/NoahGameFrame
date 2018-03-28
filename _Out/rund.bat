@@ -21,7 +21,7 @@ start "NFGameServer" "NFPluginLoader_d.exe" "Server=GameServer" "ID=6"
 choice /t 4 /d y /n >nul
 
 echo Starting NFProxyServer...
-start "NFProxyServer" "NFPluginLoader.exe" "Server=ProxyServer" "ID=5"
+start "NFProxyServer" "NFPluginLoader_d.exe" "Server=ProxyServer" "ID=5"
 
 
 

@@ -391,7 +391,8 @@ int NFCProxyServerNet_ServerModule::Transpond(const NFSOCK nSockIndex, const int
     //send message to one player
     if (xMsg.player_client_list_size() <= 0)
     {
-        NF_SHARE_PTR<NFSOCK> pFD = mxClientIdent.GetElement(NFINetModule::PBToNF(xMsg.player_id()));
+		NFGUID xClientIdent = NFINetModule::PBToNF(xMsg.player_id());
+        NF_SHARE_PTR<NFSOCK> pFD = mxClientIdent.GetElement(xClientIdent);
         if (pFD)
         {
             if (xMsg.has_hash_ident())
@@ -405,13 +406,16 @@ int NFCProxyServerNet_ServerModule::Transpond(const NFSOCK nSockIndex, const int
 
 			m_pNetModule->GetNet()->SendMsgWithOutHead(nMsgID, msg, nLen, *pFD);
         }
+		else if(xClientIdent.IsNull())
+		{
+			//send this msessage to all clientss
+			m_pNetModule->GetNet()->SendMsgToAllClientWithOutHead(nMsgID, msg, nLen);
+		}
 		//pFD is empty means end of connection, no need to send message to this client any more. And,
 		//we should never send a message that specified to a player to all clients here.
-		//else
-		//{
-		//	//send this msessage to all clientss
-		//	m_pNetModule->GetNet()->SendMsgToAllClientWithOutHead(nMsgID, msg, nLen);
-		//}
+		else
+		{
+		}
     }
 
     return true;
