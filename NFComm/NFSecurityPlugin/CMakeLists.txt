@@ -12,7 +12,7 @@ add_library(NFSecurityPlugin SHARED
 set_target_properties( NFSecurityPlugin PROPERTIES OUTPUT_NAME_DEBUG "NFSecurityPlugin_d")
 set_target_properties( NFSecurityPlugin PROPERTIES PREFIX "")
 set_target_properties( NFSecurityPlugin PROPERTIES 
-	FOLDER "NFMidWare/NFSecurityPlugin"
+	FOLDER "NFComm/NFSecurityPlugin"
 	ARCHIVE_OUTPUT_DIRECTORY ${NFOutPutDir}
 	RUNTIME_OUTPUT_DIRECTORY ${NFOutPutDir}
 	LIBRARY_OUTPUT_DIRECTORY ${NFOutPutDir} )

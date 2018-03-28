@@ -16,8 +16,8 @@ public class UILogin : UIDialog
         
         mLogin.onClick.AddListener(onLoginClick);
 
-        NFCNetLogic.Instance().ConnectServer("104.160.35.67", 14001);
-        //NFCNetLogic.Instance().ConnectServer("127.0.0.1", 14001);
+        //NFCNetLogic.Instance().ConnectServer("104.160.35.67", 14001);
+        NFCNetLogic.Instance().ConnectServer("127.0.0.1", 14001);
 
         NFCLoginLogic.Instance().RegisterCallback((int)NFCLoginLogic.Event.LoginSuccess, OnLoginSuccess);
 	}
