@@ -46,6 +46,8 @@ void NFCNet::conn_eventcb(struct bufferevent* bev, short events, void* user_data
     NetObject* pObject = (NetObject*)user_data;
     NFCNet* pNet = (NFCNet*)pObject->GetNet();
 
+	printf("%d net event: %d\n", pObject->GetRealFD(), events);
+
     if (events & BEV_EVENT_CONNECTED)
     {
         //must to set it's state before the "EventCB" functional be called[maybe user will send msg in the callback function]
@@ -117,7 +119,7 @@ void NFCNet::listener_cb(struct evconnlistener* listener, evutil_socket_t fd, st
     bufferevent_setcb(bev, conn_readcb, conn_writecb, conn_eventcb, (void*)pObject);
 
     
-    bufferevent_enable(bev, EV_READ | EV_WRITE);
+    bufferevent_enable(bev, EV_READ | EV_WRITE | EV_CLOSED | EV_TIMEOUT);
 
     
     conn_eventcb(bev, BEV_EVENT_CONNECTED, (void*)pObject);
