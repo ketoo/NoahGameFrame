@@ -1,6 +1,7 @@
 echo Building dependencies...
 
-
+#sudo apt-get install automake
+#sudo apt-get install zip unzip
 
 mkdir -p lib/Debug/
 mkdir -p lib/Release/
