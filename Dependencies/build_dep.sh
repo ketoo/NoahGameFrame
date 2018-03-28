@@ -1,11 +1,6 @@
 echo Building dependencies...
 
-unzip --version
-if [ $? -ne 0 ]; then
-    echo "[ERROR] Please install cmake first."
-    echo "apt-get install zip unzip"
-    exit 1
-fi
+
 
 mkdir -p lib/Debug/
 mkdir -p lib/Release/
