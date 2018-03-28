@@ -189,7 +189,7 @@ bool NFRedisClient::LRANGE(const std::string &key, const int start, const int en
 {
 	if (end - start <= 0)
 	{
-		return nullptr;
+		return false;
 	}
 
 	NFRedisCommand cmd(GET_NAME(LRANGE));
