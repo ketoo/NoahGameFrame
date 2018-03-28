@@ -73,7 +73,13 @@ svn checkout https://github.com/ketoo/NoahGameFrame
 - google protobuf 2.5.0
 - redis-cpp-client 
 - Theron 6.00.01
-- curl 7.37.1
+
+## IF YOU CAN NOT BUILD THE DEPENDENCIES THAN PLEASE RUN THE CMDS BELOW TO SET UP THE ENVIRONMENT:
+
+#sudo apt-get g++
+#sudo apt-get cmake
+#sudo apt-get install automake
+#sudo apt-get install zip unzip
 
 ## Supported Compilers
 
@@ -97,6 +103,8 @@ svn checkout https://github.com/ketoo/NoahGameFrame
 4. Run Dependencies/build_dep.sh
 5. Run **install4cmake.bat** or **install4cmake.sh** to build NF
 6. Run the binary file by **_Out/rund.bat** or **_Out/rund.sh**
+
+
 
 ### JAVA Project
 WebSite:  https://github.com/NFGameTeam/NFrame-java
