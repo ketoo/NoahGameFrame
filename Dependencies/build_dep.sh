@@ -1,6 +1,7 @@
 echo Building dependencies...
 
-
+#sudo apt-get install automake
+#sudo apt-get install zip unzip
 
 mkdir -p lib/Debug/
 mkdir -p lib/Release/
@@ -53,13 +54,13 @@ cd ../
 
 
 # TODO: other libs
-unzip -o gperftools-2.5.zip -d ./
-cd gperftools-2.5
-chmod -R 755 *
-./configure --enable-frame-pointers
-make
-make install
-cd ../
+#unzip -o gperftools-2.5.zip -d ./
+#cd gperftools-2.5
+#chmod -R 755 *
+#./configure --enable-frame-pointers
+#make
+#make install
+#cd ../
 
 
 # back to main dir
