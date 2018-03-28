@@ -58,10 +58,24 @@ cd ../
 #cd gperftools-2.5
 #chmod -R 755 *
 #./configure --enable-frame-pointers
-#make
-#make install
+#make && make install
+
+#cp -R -f ./.libs/*.a ../lib/Debug/
+#cp -R -f ./.libs/*.a ../lib/Release/
+
+#cp -r -f ./.libs/*.so ../../_Out/Debug/
+#cp -r -f ./.libs/*.so.* ../../_Out/Debug/
+#cp -r -f ./.libs/*.so ../../_Out/Release/
+#cp -r -f ./.libs/*.so.* ../../_Out/Release/
+
+#cp -r -f ./.libs/*.dylib ../../_Out/Debug/
+#cp -r -f ./.libs/*.dylib.* ../../_Out/Debug/
+#cp -r -f ./.libs/*.dylib ../../_Out/Release/
+#cp -r -f ./.libs/*.dylib.* ../../_Out/Release/
 #cd ../
 
+#-ltcmalloc
+#-lprofiler
 
 # back to main dir
 pwd
