@@ -584,7 +584,7 @@ public:
 
 	virtual const NF_SHARE_PTR<NFData> GetStack(const int index) const
 	{
-		if (index < mvList.size())
+		if (index < (int)mvList.size())
 		{
 			return mvList[index];
 		}
