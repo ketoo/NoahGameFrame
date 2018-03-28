@@ -43,9 +43,13 @@ typedef void (* CoroutineFunction)(void* arg);
 #include <ucontext.h>
 #endif
 
-
-#define MAX_COROUTINE_STACK_SIZE (1024 * 128)
-#define MAX_COROUTINE_CAPACITY   (1024 * 1)
+#ifdef _DEBUG
+#define MAX_COROUTINE_STACK_SIZE (1024 * 512)
+#define MAX_COROUTINE_CAPACITY   (128 * 1)
+#else
+#define MAX_COROUTINE_STACK_SIZE (1024 * 256)
+#define MAX_COROUTINE_CAPACITY   (512 * 1)
+#endif
 
 enum CoroutineState
 {
