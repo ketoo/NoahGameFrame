@@ -90,7 +90,7 @@ svn checkout https://github.com/ketoo/NoahGameFrame
 5. Build the solution(if u build failed, please build again(not rebuild))
 6. Run the binary file by **_Out/rund.bat**
 
-### CMake
+### CMake ---- please use administrator(or sudo) to do these:
 1. Git pull all source
 2. Install cmake[>= 3.1] please choose options for installing: **Add CMake to the system PATH for all users and restart your computer**
 3. Install VS2015 or gcc[>= 4.8]
