@@ -73,7 +73,9 @@ cd ../
 #cp -r -f ./.libs/*.dylib ../../_Out/Release/
 #cp -r -f ./.libs/*.dylib.* ../../_Out/Release/
 #cd ../
+
 #-ltcmalloc
+#-lprofiler
 
 # back to main dir
 pwd
