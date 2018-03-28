@@ -74,12 +74,12 @@ svn checkout https://github.com/ketoo/NoahGameFrame
 - redis-cpp-client 
 - Theron 6.00.01
 
-## IF YOU CAN NOT BUILD THE DEPENDENCIES THAN PLEASE RUN THE CMDS BELOW TO SET UP THE ENVIRONMENT:
+## IF YOU CAN NOT BUILD THE DEPENDENCIES THEN PLEASE RUN THE CMDS BELOW TO SET UP THE ENVIRONMENT:
 
-#sudo apt-get g++
-#sudo apt-get cmake
-#sudo apt-get install automake
-#sudo apt-get install zip unzip
+* sudo apt-get g++
+* sudo apt-get cmake
+* sudo apt-get install automake
+* sudo apt-get install zip unzip
 
 ## Supported Compilers
 
