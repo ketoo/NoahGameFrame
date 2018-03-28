@@ -29,6 +29,8 @@ chmod -R 755 *
 make
 make check
 
+cp -r -f ./src/.libs/*.a ../lib/Debug/
+cp -r -f ./src/.libs/*.a ../lib/Release/
 
 cp -r -f ./src/.libs/*.so ../../_Out/Debug/
 cp -r -f ./src/.libs/*.so.* ../../_Out/Debug/
