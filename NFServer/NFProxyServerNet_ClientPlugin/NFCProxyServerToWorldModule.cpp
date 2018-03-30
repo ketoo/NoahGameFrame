@@ -174,6 +174,7 @@ void NFCProxyServerToWorldModule::ServerReport()
 
 				reqMsg.set_server_id(nServerID);
 				reqMsg.set_server_name(strName);
+                ////////cur count
 				reqMsg.set_server_cur_count(0);
 				reqMsg.set_server_ip(strIP);
 				reqMsg.set_server_port(nPort);
