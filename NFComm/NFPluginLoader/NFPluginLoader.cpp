@@ -154,6 +154,7 @@ void ProcessParameter(int argc, char* argv[])
 		strArgvList += argv[i];
 	}
 
+	CloseXButton();
 #if NF_PLATFORM == NF_PLATFORM_WIN
 	if (strArgvList.find("-x") != string::npos)
 	{
