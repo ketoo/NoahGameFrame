@@ -133,6 +133,8 @@ private:
     ModuleInstanceMap mModuleInstanceMap;
 
 	GET_FILECONTENT_FUNCTOR mGetFileContentFunctor;
+
+	//NFCoroutineManager mxCoroutineManager;
 };
 
 #endif
