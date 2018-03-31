@@ -58,7 +58,7 @@ void NFCProxyServerToWorldModule::OnServerInfoProcess(const NFSOCK nSockIndex, c
         xServerData.strIP = xData.server_ip();
         xServerData.nPort = xData.server_port();
         xServerData.strName = xData.server_name();
-        //xServerData.eState = pData->server_state();
+		xServerData.nWorkLoad = xData.server_cur_count();
         xServerData.eServerType = (NF_SERVER_TYPES)xData.server_type();
 
         switch (xServerData.eServerType)
