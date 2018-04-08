@@ -43,37 +43,6 @@ bool NFCProxyServerToGameModule::AfterInit()
 	m_pNetClientModule->AddEventCallBack(NF_SERVER_TYPES::NF_ST_GAME, this, &NFCProxyServerToGameModule::OnSocketGSEvent);
 	m_pNetClientModule->ExpandBufferSize();
 
-    NF_SHARE_PTR<NFIClass> xLogicClass = m_pClassModule->GetElement(NFrame::Server::ThisName());
-    if (xLogicClass)
-    {
-		const std::vector<std::string>& strIdList = xLogicClass->GetIDList();
-		for (int i = 0; i < strIdList.size(); ++i)
-		{
-			const std::string& strId = strIdList[i];
-
-            const int nServerType = m_pElementModule->GetPropertyInt32(strId, NFrame::Server::Type());
-            const int nServerID = m_pElementModule->GetPropertyInt32(strId, NFrame::Server::ServerID());
-            if (nServerType == NF_SERVER_TYPES::NF_ST_GAME)
-            {
-                const int nPort = m_pElementModule->GetPropertyInt32(strId, NFrame::Server::Port());
-                //const int nMaxConnect = m_pElementModule->GetPropertyInt32(strId, NFrame::Server::MaxOnline());
-                //const int nCpus = m_pElementModule->GetPropertyInt32(strId, NFrame::Server::CpuCount());
-                const std::string& strName = m_pElementModule->GetPropertyString(strId, NFrame::Server::Name());
-                const std::string& strIP = m_pElementModule->GetPropertyString(strId, NFrame::Server::IP());
-
-                ConnectData xServerData;
-
-                xServerData.nGameID = nServerID;
-                xServerData.eServerType = (NF_SERVER_TYPES)nServerType;
-                xServerData.strIP = strIP;
-                xServerData.nPort = nPort;
-                xServerData.strName = strName;
-
-				m_pNetClientModule->AddServer(xServerData);
-            }
-        }
-    }
-
     return true;
 }
 
