@@ -5,7 +5,7 @@
 //    @Module           :    NFPluginLoader
 //
 // -------------------------------------------------------------------------
-
+#include <stdlib.h>
 #include <time.h>
 #include <stdio.h>
 #include <iostream>
@@ -35,9 +35,35 @@ std::string strAppName;
 std::string strAppID;
 std::string strTitleName;
 
+void ReleaseNF()
+{
+	NFCPluginManager::GetSingletonPtr()->BeforeShut();
+	NFCPluginManager::GetSingletonPtr()->Shut();
+	NFCPluginManager::GetSingletonPtr()->Finalize();
+
+	NFCPluginManager::GetSingletonPtr()->ReleaseInstance();
+}
+
 #if NF_PLATFORM == NF_PLATFORM_WIN
 
 #pragma comment( lib, "DbgHelp" )
+bool ApplicationCtrlHandler(DWORD fdwctrltype)
+{
+	switch (fdwctrltype)
+	{
+	case CTRL_C_EVENT:
+	case CTRL_CLOSE_EVENT:
+	case CTRL_BREAK_EVENT:
+	case CTRL_LOGOFF_EVENT:
+	case CTRL_SHUTDOWN_EVENT:
+	{
+		bExitApp = true;
+	}
+		return true;
+	default:
+		return false;
+	}
+}
 
 void CreateDumpFile(const std::string& strDumpFilePathName, EXCEPTION_POINTERS* pException)
 {
@@ -146,6 +172,7 @@ void PrintfLogo()
 #endif
 }
 
+
 void ProcessParameter(int argc, char* argv[])
 {
     for (int i = 0; i < argc; i++)
@@ -155,6 +182,8 @@ void ProcessParameter(int argc, char* argv[])
 	}
 
 #if NF_PLATFORM == NF_PLATFORM_WIN
+	SetConsoleCtrlHandler((PHANDLER_ROUTINE)ApplicationCtrlHandler, true);
+
 	if (strArgvList.find("-x") != string::npos)
 	{
 		CloseXButton();
@@ -254,11 +283,12 @@ int main(int argc, char* argv[])
     SetUnhandledExceptionFilter((LPTOP_LEVEL_EXCEPTION_FILTER)ApplicationCrashHandler);
 #elif NF_PLATFORM == NF_PLATFORM_LINUX
 #endif
+	//atexit(ReleaseNF);
 
     ProcessParameter(argc, argv);
 
 	PrintfLogo();
-	//CreateBackThread();
+	CreateBackThread();
 
 	NFCPluginManager::GetSingletonPtr()->Awake();
 	NFCPluginManager::GetSingletonPtr()->Init();
@@ -274,17 +304,12 @@ int main(int argc, char* argv[])
 
 		std::this_thread::sleep_for(std::chrono::milliseconds(1));
 
-        if (bExitApp)
-        {
-            break;
-        }
-
 #if NF_PLATFORM == NF_PLATFORM_WIN
         __try
         {
 #endif
-		//NFCPluginManager::GetSingletonPtr()->Execute();
-		NFCPluginManager::Instance()->ExecuteCoScheduler();
+		NFCPluginManager::GetSingletonPtr()->Execute();
+		//NFCPluginManager::Instance()->ExecuteCoScheduler();
 #if NF_PLATFORM == NF_PLATFORM_WIN
         }
         __except (ApplicationCrashHandler(GetExceptionInformation()))
@@ -293,11 +318,7 @@ int main(int argc, char* argv[])
 #endif
     }
 
-	NFCPluginManager::GetSingletonPtr()->BeforeShut();
-	NFCPluginManager::GetSingletonPtr()->Shut();
-	NFCPluginManager::GetSingletonPtr()->Finalize();
-
-	NFCPluginManager::GetSingletonPtr()->ReleaseInstance();
+	ReleaseNF();
 
     return 0;
 }
