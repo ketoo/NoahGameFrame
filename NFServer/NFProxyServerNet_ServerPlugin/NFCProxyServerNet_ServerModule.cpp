@@ -275,6 +275,36 @@ void NFCProxyServerNet_ServerModule::OnSelectServerProcess(const NFSOCK nSockInd
         }
     }
 
+    //actually, if you want the game server working with a good performance then we need to find the game server with lowest workload
+	int nWorkload = 999999;
+	int nGameID = 0;
+    NFMapEx<int, ConnectData>& xServerList = m_pNetClientModule->GetServerList();
+    ConnectData* pGameData = xServerList.FirstNude();
+    while (pGameData && NF_SERVER_TYPES::NF_ST_GAME == pGameData->eServerType)
+    {
+        if (ConnectDataState::NORMAL == pGameData->eState)
+        {
+			if (pGameData->nWorkLoad < nWorkload)
+			{
+				nWorkload = pGameData->nWorkLoad;
+				nGameID = pGameData->nGameID;
+			}
+        }
+
+        pGameData = xServerList.NextNude();
+    }
+
+	if (nGameID > 0)
+	{
+		pNetObject->SetGameID(nGameID);
+
+		NFMsg::AckEventResult xMsg;
+		xMsg.set_event_code(NFMsg::EGameEventCode::EGEC_SELECTSERVER_SUCCESS);
+		m_pNetModule->SendMsgPB(NFMsg::EGameMsgID::EGMI_ACK_SELECT_SERVER, xMsg, nSockIndex);
+		return;
+	}
+	
+
     NFMsg::AckEventResult xSendMsg;
     xSendMsg.set_event_code(NFMsg::EGameEventCode::EGEC_SELECTSERVER_FAIL);
 	m_pNetModule->SendMsgPB(NFMsg::EGameMsgID::EGMI_ACK_SELECT_SERVER, xMsg, nSockIndex);
