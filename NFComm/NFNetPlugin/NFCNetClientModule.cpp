@@ -525,6 +525,10 @@ void NFCNetClientModule::ProcessAddNetConnect()
 
             mxServerMap.AddElement(xInfo.nGameID, xServerData);
         }
+		else
+		{
+			xServerData->nWorkLoad = xInfo.nWorkLoad;
+		}
     }
 
     mxTempNetList.clear();
