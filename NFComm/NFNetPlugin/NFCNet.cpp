@@ -152,25 +152,9 @@ void NFCNet::conn_readcb(struct bufferevent* bev, void* user_data)
     }
 
     size_t len = evbuffer_get_length(input);
-
-    //////////////////////////////////////////////////////////////////////////
-
-	static char* mstrTempBuffData = nullptr;
-	if (mstrTempBuffData == nullptr)
-	{
-		mstrTempBuffData = new char[NF_BUFFER_MAX_READ];
-	}
-
-	int nDataLen = len;
-	if (nDataLen > NF_BUFFER_MAX_READ)
-	{
-		nDataLen = NF_BUFFER_MAX_READ;
-	}
-
-    if (evbuffer_remove(input, mstrTempBuffData, nDataLen) > 0)
-    {
-        pObject->AddBuff(mstrTempBuffData, nDataLen);
-    }
+    unsigned char *pData = evbuffer_pullup(input, len);
+    pObject->AddBuff(pData, len);
+    evbuffer_drain(input, len);
 
     while (1)
     {
