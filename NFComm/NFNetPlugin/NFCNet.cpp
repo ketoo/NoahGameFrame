@@ -162,7 +162,7 @@ void NFCNet::conn_readcb(struct bufferevent* bev, void* user_data)
 	}
 
 	int nDataLen = len;
-	if (len > NF_BUFFER_MAX_READ)
+	if (nDataLen > NF_BUFFER_MAX_READ)
 	{
 		nDataLen = NF_BUFFER_MAX_READ;
 	}
