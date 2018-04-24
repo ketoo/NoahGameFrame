@@ -45,8 +45,7 @@ void NFCNet::conn_eventcb(struct bufferevent* bev, short events, void* user_data
 {
     NetObject* pObject = (NetObject*)user_data;
     NFCNet* pNet = (NFCNet*)pObject->GetNet();
-
-	printf("%d net event: %d\n", pObject->GetRealFD(), events);
+	std::cout << "Thread ID = " << std::this_thread::get_id() << " FD = " << pObject->GetRealFD() << " Event ID =" << events <<std::endl;
 
     if (events & BEV_EVENT_CONNECTED)
     {
