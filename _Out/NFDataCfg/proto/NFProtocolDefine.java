@@ -305,24 +305,6 @@ package nframe;
 		// Record
 
 	}
-	public class HttpServer
-	{
-		//Class name
-		public static final String ThisName = "HttpServer";
-		// IObject
-		public static final String ClassName = "ClassName";// string
-		public static final String ConfigID = "ConfigID";// string
-		public static final String GroupID = "GroupID";// int
-		public static final String ID = "ID";// string
-		public static final String Position = "Position";// vector3
-		public static final String SceneID = "SceneID";// int
-		// Property
-		public static final String ServerID = "ServerID";// int
-		public static final String WebPort = "WebPort";// int
-		public static final String WebRootPath = "WebRootPath";// string
-		// Record
-
-	}
 	public class IObject
 	{
 		//Class name
@@ -1125,6 +1107,7 @@ package nframe;
 		public static final String Port = "Port";// int
 		public static final String ServerID = "ServerID";// int
 		public static final String Type = "Type";// int
+		public static final String WebPort = "WebPort";// int
 		// Record
 
 	}
