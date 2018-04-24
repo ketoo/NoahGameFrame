@@ -25,7 +25,7 @@
 #include <atomic>
 
 /*
-if any one upgurade the networking library(libevent), the evbuffer size must be changed
+if any one upgrade the networking library(libEvent), please change the size of evbuffer as below:
 *MODIFY--libevent/buffer.c
 #define EVBUFFER_MAX_READ	4096
 TO
@@ -142,7 +142,7 @@ void NFCNet::conn_readcb(struct bufferevent* bev, void* user_data)
     if (pObject->NeedRemove())
     {
         return;
-    }
+}
 
     struct evbuffer* input = bufferevent_get_input(bev);
     if (!input)
@@ -151,25 +151,9 @@ void NFCNet::conn_readcb(struct bufferevent* bev, void* user_data)
     }
 
     size_t len = evbuffer_get_length(input);
-
-    //////////////////////////////////////////////////////////////////////////
-
-	static char* mstrTempBuffData = nullptr;
-	if (mstrTempBuffData == nullptr)
-	{
-		mstrTempBuffData = new char[NF_BUFFER_MAX_READ];
-	}
-
-	int nDataLen = len;
-	if (len > NF_BUFFER_MAX_READ)
-	{
-		nDataLen = NF_BUFFER_MAX_READ;
-	}
-
-    if (evbuffer_remove(input, mstrTempBuffData, nDataLen) > 0)
-    {
-        pObject->AddBuff(mstrTempBuffData, nDataLen);
-    }
+    unsigned char *pData = evbuffer_pullup(input, len);
+    pObject->AddBuff((const char *)pData, len);
+    evbuffer_drain(input, len);
 
     while (1)
     {
