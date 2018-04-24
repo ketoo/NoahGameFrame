@@ -34,10 +34,10 @@ bool NFCMasterNet_HttpServerModule::Shut()
 bool NFCMasterNet_HttpServerModule::AfterInit()
 {
     //http://127.0.0.1/json
-	m_pHttpNetModule->AddReceiveCallBack("json", this, &NFCMasterNet_HttpServerModule::OnCommandQuery);
+	m_pHttpNetModule->AddReceiveCallBack("/json", this, &NFCMasterNet_HttpServerModule::OnCommandQuery);
 	m_pHttpNetModule->AddNetCommonReceiveCallBack(this, &NFCMasterNet_HttpServerModule::OnCommonQuery);
 
-	NF_SHARE_PTR<NFIClass> xLogicClass = m_pLogicClassModule->GetElement(NFrame::HttpServer::ThisName());
+	NF_SHARE_PTR<NFIClass> xLogicClass = m_pLogicClassModule->GetElement(NFrame::Server::ThisName());
 	if (xLogicClass)
 	{
 		const std::vector<std::string>& strIdList = xLogicClass->GetIDList();
@@ -45,8 +45,8 @@ bool NFCMasterNet_HttpServerModule::AfterInit()
 		{
 			const std::string& strId = strIdList[i];
 
-			int nJsonPort = m_pElementModule->GetPropertyInt32(strId, NFrame::HttpServer::WebPort());
-			int nWebServerAppID = m_pElementModule->GetPropertyInt32(strId, NFrame::HttpServer::ServerID());
+			int nJsonPort = m_pElementModule->GetPropertyInt32(strId, NFrame::Server::WebPort());
+			int nWebServerAppID = m_pElementModule->GetPropertyInt32(strId, NFrame::Server::ServerID());
 
 			//webserver only run one instance in each server
 			if (pPluginManager->GetAppID() == nWebServerAppID)
@@ -69,14 +69,13 @@ bool NFCMasterNet_HttpServerModule::Execute()
 
 bool NFCMasterNet_HttpServerModule::OnCommandQuery(const NFHttpRequest& req)
 {
-	std::string str = m_pMasterServerModule->GetServersStatus();
-	m_pHttpNetModule->ResponseMsg(req, str, NFWebStatus::WEB_OK);
-
 
 	std::cout << "url: " << req.url << std::endl;
 	std::cout << "path: " << req.path << std::endl;
 	std::cout << "type: " << req.type << std::endl;
 	std::cout << "body: " << req.body << std::endl;
+
+	std::cout << "params: " << std::endl;
 
 	for (auto item : req.params)
 	{
@@ -90,18 +89,20 @@ bool NFCMasterNet_HttpServerModule::OnCommandQuery(const NFHttpRequest& req)
 		std::cout << item.first << ":" << item.second << std::endl;
 	}
 
-	return true;
+	std::string str = m_pMasterServerModule->GetServersStatus();
+	return m_pHttpNetModule->ResponseMsg(req, str, NFWebStatus::WEB_OK);
 }
 
 bool NFCMasterNet_HttpServerModule::OnCommonQuery(const NFHttpRequest& req)
 {
 
-    m_pHttpNetModule->ResponseMsg(req, "NFCMasterNet_HttpServerModule", NFWebStatus::WEB_OK);
 
 	std::cout << "url: " << req.url << std::endl;
 	std::cout << "path: " << req.path << std::endl;
 	std::cout << "type: " << req.type << std::endl;
 	std::cout << "body: " << req.body << std::endl;
+
+	std::cout << "params: " << std::endl;
 
     for (auto item : req.params)
     {
@@ -115,5 +116,5 @@ bool NFCMasterNet_HttpServerModule::OnCommonQuery(const NFHttpRequest& req)
 		std::cout << item.first << ":" << item.second << std::endl;
 	}
 
-	return true;
+	return m_pHttpNetModule->ResponseMsg(req, "NFCMasterNet_HttpServerModule", NFWebStatus::WEB_OK);
 }
