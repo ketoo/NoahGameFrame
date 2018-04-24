@@ -152,7 +152,7 @@ bool NFCGuildModule::DemotionMember(const NFGUID& self, const NFGUID& xGuildID, 
 			if (nRow >= 0)
 			{
 				eMemberLevel = MEMBER_TYPE(eMemberLevel - 1);
-				if (eMemberLevel = MEMBER_TYPE::MT_NONE)
+				if (eMemberLevel == MEMBER_TYPE::MT_NONE)
 				{
 					eMemberLevel = MEMBER_TYPE::MT_MEMBER;
 				}
