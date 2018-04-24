@@ -76,7 +76,6 @@ public:
 
     virtual bool ResponseMsg(const NFHttpRequest& req, const std::string& strMsg, NFWebStatus code, const std::string& strReason = "OK") = 0;
 
-private:
 	virtual void AddFilter(const HTTP_RECEIVE_FUNCTOR_PTR& ptr) = 0;
 
 };
