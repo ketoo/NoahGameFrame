@@ -1,21 +1,6 @@
 #include "NFCMasterNet_HttpServerModule.h"
 #include "NFComm/NFMessageDefine/NFProtocolDefine.hpp"
 
-#if NF_PLATFORM == NF_PLATFORM_WIN
-#include <winsock2.h>
-#include <ws2tcpip.h>
-#include <windows.h>
-#include <io.h>
-#include <fcntl.h>
-#else
-#include <sys/stat.h>
-#include <sys/socket.h>
-#include <signal.h>
-#include <fcntl.h>
-#include <unistd.h>
-#include <dirent.h>
-#endif
-
 bool NFCMasterNet_HttpServerModule::Init()
 {
 	m_pHttpNetModule = pPluginManager->FindModule<NFIHttpServerModule>();
@@ -34,8 +19,13 @@ bool NFCMasterNet_HttpServerModule::Shut()
 bool NFCMasterNet_HttpServerModule::AfterInit()
 {
     //http://127.0.0.1/json
-	m_pHttpNetModule->AddReceiveCallBack("/json", this, &NFCMasterNet_HttpServerModule::OnCommandQuery);
-	m_pHttpNetModule->AddNetCommonReceiveCallBack(this, &NFCMasterNet_HttpServerModule::OnCommonQuery);
+	m_pHttpNetModule->AddRequestHandler("/json", NFHttpType::NF_HTTP_REQ_GET, this, &NFCMasterNet_HttpServerModule::OnCommandQuery);
+	m_pHttpNetModule->AddRequestHandler("/json", NFHttpType::NF_HTTP_REQ_POST, this, &NFCMasterNet_HttpServerModule::OnCommandQuery);
+	m_pHttpNetModule->AddRequestHandler("/json", NFHttpType::NF_HTTP_REQ_DELETE, this, &NFCMasterNet_HttpServerModule::OnCommandQuery);
+	m_pHttpNetModule->AddRequestHandler("/json", NFHttpType::NF_HTTP_REQ_PUT, this, &NFCMasterNet_HttpServerModule::OnCommandQuery);
+
+	m_pHttpNetModule->AddNetDefaultHandler(this, &NFCMasterNet_HttpServerModule::OnCommonQuery);
+	m_pHttpNetModule->AddNetFilter(this, &NFCMasterNet_HttpServerModule::OnFilter);
 
 	NF_SHARE_PTR<NFIClass> xLogicClass = m_pLogicClassModule->GetElement(NFrame::Server::ThisName());
 	if (xLogicClass)
@@ -69,7 +59,6 @@ bool NFCMasterNet_HttpServerModule::Execute()
 
 bool NFCMasterNet_HttpServerModule::OnCommandQuery(const NFHttpRequest& req)
 {
-
 	std::cout << "url: " << req.url << std::endl;
 	std::cout << "path: " << req.path << std::endl;
 	std::cout << "type: " << req.type << std::endl;
@@ -116,5 +105,31 @@ bool NFCMasterNet_HttpServerModule::OnCommonQuery(const NFHttpRequest& req)
 		std::cout << item.first << ":" << item.second << std::endl;
 	}
 
-	return m_pHttpNetModule->ResponseMsg(req, "NFCMasterNet_HttpServerModule", NFWebStatus::WEB_OK);
+	return m_pHttpNetModule->ResponseMsg(req, "OnCommonQuery", NFWebStatus::WEB_OK);
+}
+
+NFWebStatus NFCMasterNet_HttpServerModule::OnFilter(const NFHttpRequest & req)
+{
+	std::cout << "OnFilter: " << std::endl;
+
+	std::cout << "url: " << req.url << std::endl;
+	std::cout << "path: " << req.path << std::endl;
+	std::cout << "type: " << req.type << std::endl;
+	std::cout << "body: " << req.body << std::endl;
+
+	std::cout << "params: " << std::endl;
+
+	for (auto item : req.params)
+	{
+		std::cout << item.first << ":" << item.second << std::endl;
+	}
+
+	std::cout << "headers: " << std::endl;
+
+	for (auto item : req.headers)
+	{
+		std::cout << item.first << ":" << item.second << std::endl;
+	}
+
+	return NFWebStatus::WEB_OK;
 }

@@ -16,6 +16,21 @@
 #include <vector>
 #include <assert.h>
 
+#if NF_PLATFORM == NF_PLATFORM_WIN
+#include <winsock2.h>
+#include <ws2tcpip.h>
+#include <windows.h>
+#include <io.h>
+#include <fcntl.h>
+#else
+#include <sys/stat.h>
+#include <sys/socket.h>
+#include <signal.h>
+#include <fcntl.h>
+#include <unistd.h>
+#include <dirent.h>
+#endif
+
 #include "NFINet.h"
 #include "NFComm/NFPluginModule/NFPlatform.h"
 
@@ -28,7 +43,8 @@ enum NFWebStatus
 };
 
 
-enum NFHttpType {
+enum NFHttpType
+{
 	NF_HTTP_REQ_GET = 1 << 0,
 	NF_HTTP_REQ_POST = 1 << 1,
 	NF_HTTP_REQ_HEAD = 1 << 2,
@@ -57,14 +73,17 @@ public:
 typedef std::function<bool(const NFHttpRequest& req)> HTTP_RECEIVE_FUNCTOR;
 typedef std::shared_ptr<HTTP_RECEIVE_FUNCTOR> HTTP_RECEIVE_FUNCTOR_PTR;
 
+typedef std::function<NFWebStatus(const NFHttpRequest& req)> HTTP_FILTER_FUNCTOR;
+typedef std::shared_ptr<HTTP_FILTER_FUNCTOR> HTTP_FILTER_FUNCTOR_PTR;
+
 class NFIHttpServer
 {
 public:
 	template<typename BaseType>
-	void AddFilter(BaseType* pBaseType, bool (BaseType::*handleRecieve)(const NFHttpRequest& req))
+	void AddFilter(BaseType* pBaseType, NFWebStatus (BaseType::*handleRecieve)(const NFHttpRequest& req))
 	{
-		HTTP_RECEIVE_FUNCTOR functor = std::bind(handleRecieve, pBaseType, std::placeholders::_1);
-		HTTP_RECEIVE_FUNCTOR_PTR functorPtr(new HTTP_RECEIVE_FUNCTOR(functor));
+		HTTP_FILTER_FUNCTOR functor = std::bind(handleRecieve, pBaseType, std::placeholders::_1);
+		HTTP_FILTER_FUNCTOR_PTR functorPtr(new HTTP_FILTER_FUNCTOR(functor));
 		return AddFilter(functorPtr);
 	}
 
@@ -76,7 +95,7 @@ public:
 
     virtual bool ResponseMsg(const NFHttpRequest& req, const std::string& strMsg, NFWebStatus code, const std::string& strReason = "OK") = 0;
 
-	virtual void AddFilter(const HTTP_RECEIVE_FUNCTOR_PTR& ptr) = 0;
+	virtual void AddFilter(const HTTP_FILTER_FUNCTOR_PTR& ptr) = 0;
 
 };
 
