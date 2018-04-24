@@ -99,9 +99,9 @@ public:
 
     void RemoveRunningID(int id);
 
-    void Yield();
+    void YieldCo();
 
-    void Yield(const int64_t nSecond);
+    void YieldCo(const int64_t nSecond);
 
     void ScheduleJob();
 
