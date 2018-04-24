@@ -94,10 +94,6 @@ public:
 
 	virtual void ExecuteCoScheduler() override;
 
-	virtual void StartCoroutine();
-
-	virtual void StartCoroutine(CoroutineFunction func) override;
-
 	virtual void YieldCo(const float nSecond) override;
 
 	virtual void YieldCo() override;
@@ -134,7 +130,7 @@ private:
 
 	GET_FILECONTENT_FUNCTOR mGetFileContentFunctor;
 
-	//NFCoroutineManager mxCoroutineManager;
+	NFCoroutineManager mxCoroutineManager;
 };
 
 #endif

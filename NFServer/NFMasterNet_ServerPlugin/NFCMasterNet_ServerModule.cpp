@@ -389,7 +389,7 @@ void NFCMasterNet_ServerModule::SynWorldToLogin()
 
 void NFCMasterNet_ServerModule::LogGameServer()
 {
-	if (mnLastLogTime + 10 > GetPluginManager()->GetNowTime())
+	if (mnLastLogTime + 60 > GetPluginManager()->GetNowTime())
 	{
 		return;
 	}
