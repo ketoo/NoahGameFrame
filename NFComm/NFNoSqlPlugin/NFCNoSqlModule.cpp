@@ -29,7 +29,7 @@ void YieldFunction()
 
 void StartFunction()
 {
-    xPluginManager->StartCoroutine();
+    //xPluginManager->StartCoroutine();
 }
 
 bool NFCNoSqlModule::Init()

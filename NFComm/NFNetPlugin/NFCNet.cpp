@@ -25,7 +25,7 @@
 #include <atomic>
 
 /*
-if any one upgurade the networking library(libevent), the evbuffer size must be changed
+if any one upgrade the networking library(libEvent), please change the size of evbuffer as below:
 *MODIFY--libevent/buffer.c
 #define EVBUFFER_MAX_READ	4096
 TO

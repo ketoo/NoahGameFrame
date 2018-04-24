@@ -156,7 +156,7 @@ void PrintfLogo()
     std::cout << "************************************************" << std::endl;
     std::cout << "**                                            **" << std::endl;
     std::cout << "**                 NoahFrame                  **" << std::endl;
-    std::cout << "**   Copyright (c) 2011, LvSheng.Huang        **" << std::endl;
+    std::cout << "**   Copyright (c) 2011-2018, LvSheng.Huang   **" << std::endl;
     std::cout << "**             All rights reserved.           **" << std::endl;
     std::cout << "**                                            **" << std::endl;
     std::cout << "************************************************" << std::endl;
@@ -308,8 +308,8 @@ int main(int argc, char* argv[])
         __try
         {
 #endif
-		NFCPluginManager::GetSingletonPtr()->Execute();
-		//NFCPluginManager::Instance()->ExecuteCoScheduler();
+		//NFCPluginManager::GetSingletonPtr()->Execute();
+		NFCPluginManager::Instance()->ExecuteCoScheduler();
 #if NF_PLATFORM == NF_PLATFORM_WIN
         }
         __except (ApplicationCrashHandler(GetExceptionInformation()))
