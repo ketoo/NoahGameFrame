@@ -182,7 +182,7 @@ bool NFCHttpServer::ResponseMsg(const NFHttpRequest& req, const std::string& str
     struct evbuffer* eventBuffer = evbuffer_new();
     //send data
     evbuffer_add_printf(eventBuffer, strMsg.c_str());
-    evhttp_add_header(evhttp_request_get_output_headers(pHttpReq), "Content-Type", "text/html");
+    evhttp_add_header(evhttp_request_get_output_headers(pHttpReq), "Content-Type", "application/json");
     evhttp_send_reply(pHttpReq, code, strReason.c_str(), eventBuffer);
 
     //free
