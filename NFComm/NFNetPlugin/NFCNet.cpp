@@ -143,7 +143,7 @@ void NFCNet::conn_readcb(struct bufferevent* bev, void* user_data)
     if (pObject->NeedRemove())
     {
         return;
-    }
+}
 
     struct evbuffer* input = bufferevent_get_input(bev);
     if (!input)
@@ -153,7 +153,7 @@ void NFCNet::conn_readcb(struct bufferevent* bev, void* user_data)
 
     size_t len = evbuffer_get_length(input);
     unsigned char *pData = evbuffer_pullup(input, len);
-    pObject->AddBuff(pData, len);
+    pObject->AddBuff((const char *)pData, len);
     evbuffer_drain(input, len);
 
     while (1)
