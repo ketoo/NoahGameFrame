@@ -29,14 +29,14 @@ protected:
 
 	bool OnCommonQuery(const NFHttpRequest& req);
 
+	NFWebStatus OnFilter(const NFHttpRequest& req);
+
 private:
 	NFIKernelModule* m_pKernelModule;
 	NFIHttpServerModule* m_pHttpNetModule;
 	NFIMasterNet_ServerModule* m_pMasterServerModule;
 	NFIClassModule* m_pLogicClassModule;
 	NFIElementModule* m_pElementModule;
-
-	std::string m_strWebRootPath;
 };
 
 #endif

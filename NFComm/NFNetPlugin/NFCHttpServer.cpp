@@ -1,10 +1,9 @@
-#include <thread>
+﻿#include <thread>
 #include "NFCHttpServer.h"
 #include <sys/stat.h>
 
-const int mnHttpBuffLen = 1024 * 1024 * 2;
 
-void NFCHttpServer::AddFilter(const HTTP_RECEIVE_FUNCTOR_PTR& ptr)
+void NFCHttpServer::AddFilter(const HTTP_FILTER_FUNCTOR_PTR& ptr)
 {
 	mFilter = ptr;
 }
@@ -22,8 +21,12 @@ bool NFCHttpServer::Execute()
 
 int NFCHttpServer::InitServer(const unsigned short port)
 {
-	mstrBuff = new char[mnHttpBuffLen];
-	memset(mstrBuff, 0, mnHttpBuffLen);
+	/*
+    event_init();  
+    struct evhttp *httpserv = evhttp_start(addr,port);  
+	evhttp_set_gencb(httpserv, reqHandler,NULL);
+	event_dispatch();
+	*/
 
     //struct event_base *base;
     struct evhttp* http;
@@ -87,18 +90,19 @@ void NFCHttpServer::listener_cb(struct evhttp_request* req, void* arg)
 	request.url = uri;
 	request.remoteHost = evhttp_request_get_host(req);
 	request.type = (NFHttpType)evhttp_request_get_command(req);
+
     //get decodeUri
     struct evhttp_uri* decoded = evhttp_uri_parse(uri);
     if (!decoded)
     {
-        printf("It's not a good URI. Sending BADREQUEST\n");
+		std::cout << "It's not a good URI. Sending BADREQUEST" << std::endl;
         evhttp_send_error(req, HTTP_BADREQUEST, 0);
         return;
     }
     
 	//path
 	request.path = evhttp_uri_get_path(decoded);
-
+	evhttp_uri_free(decoded);
 
 	//std::cout << "Got a GET request:" << uri << std::endl;
 	if (evhttp_request_get_command(req) == evhttp_cmd_type::EVHTTP_REQ_GET)
@@ -116,35 +120,29 @@ void NFCHttpServer::listener_cb(struct evhttp_request* req, void* arg)
 			kv = kv->next.tqe_next;
 		}
 	}
-	else if (evhttp_request_get_command(req) == evhttp_cmd_type::EVHTTP_REQ_POST)
+
+	struct evbuffer *in_evb = evhttp_request_get_input_buffer(req);
+	size_t len = evbuffer_get_length(in_evb);
+	if (len > 0)
 	{
-		std::cout << "EVHTTP_REQ_POST" << std::endl;
-		struct evbuffer *in_evb = evhttp_request_get_input_buffer(req);
-		size_t len = evbuffer_get_length(in_evb);
-		if (len > mnHttpBuffLen)
-		{
-			char *data = new char[len];
-			evbuffer_copyout(in_evb, data, len);
-			request.body = std::string(data, len);
-			delete[] data;
-		}
-		else
-		{
-			evbuffer_copyout(in_evb, pNet->mstrBuff, len);
-			request.body = std::string(pNet->mstrBuff, len);
-		}
+		unsigned char *pData = evbuffer_pullup(in_evb, len);
+		request.body.clear();
+		request.body.append((const char *)pData, len);
 	}
 
 	if (pNet->mFilter)
 	{
-        HTTP_RECEIVE_FUNCTOR* pFunc = pNet->mFilter.get();
-
-		if (pFunc && !pFunc->operator()(request))
+        HTTP_FILTER_FUNCTOR_PTR pFunc = pNet->mFilter;
+		if (pFunc)
 		{
 			//return 401
-
-			pNet->ResponseMsg(request, "AUTH", NFWebStatus::WEB_AUTH);
-			return;
+			NFWebStatus xWebStatus = pFunc->operator()(request);
+			if (xWebStatus != NFWebStatus::WEB_OK)
+			{
+				//401
+				pNet->ResponseMsg(request, "Filter error", xWebStatus);
+				return;
+			}
 		}
 	}
 
@@ -157,21 +155,6 @@ void NFCHttpServer::listener_cb(struct evhttp_request* req, void* arg)
     {
         pNet->ResponseMsg(request, "NO PROCESSER", NFWebStatus::WEB_ERROR);
     }
-
-	if (decoded)
-	{
-		evhttp_uri_free(decoded);
-	}
-
-    //close
-    /*{
-    if (decoded)
-    evhttp_uri_free(decoded);
-    if (decodeUri)
-    free(decodeUri);
-    if (eventBuffer)
-    evbuffer_free(eventBuffer);
-    }*/
 }
 
 bool NFCHttpServer::ResponseMsg(const NFHttpRequest& req, const std::string& strMsg, NFWebStatus code,
@@ -180,13 +163,17 @@ bool NFCHttpServer::ResponseMsg(const NFHttpRequest& req, const std::string& str
     evhttp_request* pHttpReq = (evhttp_request*) req.req;
     //create buffer
     struct evbuffer* eventBuffer = evbuffer_new();
+
     //send data
     evbuffer_add_printf(eventBuffer, strMsg.c_str());
+
     evhttp_add_header(evhttp_request_get_output_headers(pHttpReq), "Content-Type", "application/json");
-    evhttp_send_reply(pHttpReq, code, strReason.c_str(), eventBuffer);
+	
+	evhttp_send_reply(pHttpReq, code, strReason.c_str(), eventBuffer);
 
     //free
     evbuffer_free(eventBuffer);
+
     return true;
 }
 
