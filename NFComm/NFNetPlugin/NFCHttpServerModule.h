@@ -38,6 +38,7 @@ public:
 private:
 	virtual bool OnReceiveNetPack(const NFHttpRequest& req);
 	virtual bool AddComMsgCB(const HTTP_RECEIVE_FUNCTOR_PTR& cb);
+	virtual bool AddFilterCB(const HTTP_RECEIVE_FUNCTOR_PTR& cb);
 
 private:
     NFILogModule* mLogModule;
