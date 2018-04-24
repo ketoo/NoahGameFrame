@@ -60,6 +60,7 @@ public:
     {
 		if (data == nullptr)
 		{
+			std::cout << "AddElement failed : " << std::endl;
 			return false;
 		}
 
