@@ -47,8 +47,8 @@ typedef void (* CoroutineFunction)(void* arg);
 #define MAX_COROUTINE_STACK_SIZE (1024 * 512)
 #define MAX_COROUTINE_CAPACITY   (128 * 1)
 #else
-#define MAX_COROUTINE_STACK_SIZE (1024 * 256)
-#define MAX_COROUTINE_CAPACITY   (512 * 1)
+#define MAX_COROUTINE_STACK_SIZE (1024 * 512)
+#define MAX_COROUTINE_CAPACITY   (1024 * 1)
 #endif
 
 enum CoroutineState
@@ -75,7 +75,7 @@ public:
     }
 
     CoroutineFunction func;
-    uint64_t nYieldTime;
+    int64_t nYieldTime;
     void* arg;
     enum CoroutineState state;
     int nID;
@@ -84,7 +84,6 @@ public:
 #if NF_PLATFORM != NF_PLATFORM_WIN
     ucontext_t ctx;
 #endif
-
     char stack[MAX_COROUTINE_STACK_SIZE];
 };
 
@@ -98,14 +97,11 @@ public:
 
     void Init(CoroutineFunction func);
 
-    void StartCoroutine();
-    void StartCoroutine(CoroutineFunction func);
-
     void RemoveRunningID(int id);
 
-    void YieldCo(const float fSecond);
+    void Yield();
 
-    void YieldCo();
+    void Yield(const int64_t nSecond);
 
     void ScheduleJob();
 
@@ -115,13 +111,12 @@ protected:
 
     void Resume(int id);
 
-    int GetRunningID();
-    void SetRunningID(int id);
-
     NFCoroutine* AllotCoroutine();
 
     NFCoroutine* GetCoroutine(int id);
     NFCoroutine* GetRunningCoroutine();
+
+
 
 protected:
     CoroutineFunction mxMainFunc;
@@ -130,14 +125,12 @@ protected:
 #if NF_PLATFORM != NF_PLATFORM_WIN
     ucontext_t mxMainCtx;
 #endif
-
     int mnRunningCoroutineID;
+    int mnMainID;
 
     std::vector<NFCoroutine*> mxCoroutineList;
     std::list<int> mxRunningList;
 
-    int mnMaxIndex;
-    int mnMainCoID;
 
 };
 
