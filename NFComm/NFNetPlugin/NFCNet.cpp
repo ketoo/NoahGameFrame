@@ -238,7 +238,7 @@ bool NFCNet::SendMsgToAllClient(const char* msg, const size_t nLen)
         NetObject* pNetObject = (NetObject*)it->second;
         if (pNetObject && !pNetObject->NeedRemove())
         {
-            bufferevent* bev = pNetObject->GetBuffEvent();
+            bufferevent* bev = (bufferevent*)pNetObject->GetUserData();
             if (NULL != bev && mbWorking )
             {
                 bufferevent_write(bev, msg, nLen);
@@ -265,7 +265,7 @@ bool NFCNet::SendMsg(const char* msg, const size_t nLen, const NFSOCK nSockIndex
         NetObject* pNetObject = (NetObject*)it->second;
         if (pNetObject)
         {
-            bufferevent* bev = pNetObject->GetBuffEvent();
+            bufferevent* bev = (bufferevent*)pNetObject->GetUserData();
             if (NULL != bev && mbWorking)
             {
                 bufferevent_write(bev, msg, nLen);
@@ -534,7 +534,7 @@ void NFCNet::CloseObject(const NFSOCK nSockIndex)
     {
         NetObject* pObject = it->second;
 
-        struct bufferevent* bev = pObject->GetBuffEvent();
+        struct bufferevent* bev = (bufferevent*)pObject->GetUserData();
 
         bufferevent_free(bev);
 

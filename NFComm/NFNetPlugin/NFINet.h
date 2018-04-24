@@ -244,7 +244,7 @@ typedef std::shared_ptr<NET_EVENT_LOG_FUNCTOR> NET_EVENT_LOG_FUNCTOR_PTR;
 class NetObject
 {
 public:
-    NetObject(NFINet* pNet, NFSOCK fd, sockaddr_in& addr, struct bufferevent* pBev)
+    NetObject(NFINet* pNet, NFSOCK fd, sockaddr_in& addr, void* pBev)
     {
         mnLogicState = 0;
         mnGameID = 0;
@@ -253,7 +253,7 @@ public:
 
         m_pNet = pNet;
 
-        bev = pBev;
+        m_pUserData = pBev;
         memset(&sin, 0, sizeof(sin));
         sin = addr;
     }
@@ -303,9 +303,9 @@ public:
         return (int) mstrBuff.length();
     }
 
-    bufferevent* GetBuffEvent()
+    void* GetUserData()
     {
-        return bev;
+        return m_pUserData;
     }
 
     NFINet* GetNet()
@@ -401,7 +401,7 @@ public:
 
 private:
     sockaddr_in sin;
-    bufferevent* bev;
+    void* m_pUserData;
     std::string mstrBuff;
     std::string mstrUserData;
     std::string mstrSecurityKey;
