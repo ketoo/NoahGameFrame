@@ -47,7 +47,6 @@ bool NFCMasterNet_HttpServerModule::AfterInit()
 
 			int nJsonPort = m_pElementModule->GetPropertyInt32(strId, NFrame::HttpServer::WebPort());
 			int nWebServerAppID = m_pElementModule->GetPropertyInt32(strId, NFrame::HttpServer::ServerID());
-			m_strWebRootPath = m_pElementModule->GetPropertyString(strId, NFrame::HttpServer::WebRootPath());
 
 			//webserver only run one instance in each server
 			if (pPluginManager->GetAppID() == nWebServerAppID)
@@ -73,11 +72,48 @@ bool NFCMasterNet_HttpServerModule::OnCommandQuery(const NFHttpRequest& req)
 	std::string str = m_pMasterServerModule->GetServersStatus();
 	m_pHttpNetModule->ResponseMsg(req, str, NFWebStatus::WEB_OK);
 
+
+	std::cout << "url: " << req.url << std::endl;
+	std::cout << "path: " << req.path << std::endl;
+	std::cout << "type: " << req.type << std::endl;
+	std::cout << "body: " << req.body << std::endl;
+
+	for (auto item : req.params)
+	{
+		std::cout << item.first << ":" << item.second << std::endl;
+	}
+
+    std::cout << "headers: " << std::endl;
+
+	for (auto item : req.headers)
+	{
+		std::cout << item.first << ":" << item.second << std::endl;
+	}
+
 	return true;
 }
 
 bool NFCMasterNet_HttpServerModule::OnCommonQuery(const NFHttpRequest& req)
 {
+
+    m_pHttpNetModule->ResponseMsg(req, "NFCMasterNet_HttpServerModule", NFWebStatus::WEB_OK);
+
+	std::cout << "url: " << req.url << std::endl;
+	std::cout << "path: " << req.path << std::endl;
+	std::cout << "type: " << req.type << std::endl;
+	std::cout << "body: " << req.body << std::endl;
+
+    for (auto item : req.params)
+    {
+		std::cout << item.first << ":" << item.second << std::endl;
+    }
+
+    std::cout << "headers: " << std::endl;
+
+	for (auto item : req.headers)
+	{
+		std::cout << item.first << ":" << item.second << std::endl;
+	}
 
 	return true;
 }
