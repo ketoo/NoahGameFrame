@@ -11,20 +11,19 @@
 
 #####QQ Group：341159815
 
-## What is it?
+## What is NoahGameFrame?
 
-NF is a lightweight, fast, scalable, distributed plugin framework.Greatly inspired by OGRE and Bigworld.
+NoahGameFrame (NF) is a lightweight, fast, scalable, distributed plugin framework. NF is greatly inspired by OGRE and Bigworld.
 
 ## Features
-- Easy to use interface oriented design minimise the effort
-- Extensible plugin framework makes getting your application running is quick and simple
-- Clean, uncluttered design, stable engine used in several commercial products
-- Using the actor model has very high performance(by Theron)
-- Based on the event-driven and attribute-driver can make business more clearly and easy to maintenance
-- Based on the standard c + + development, cross-platform support
-- With existing c++, c# game client for rapid development
-- Cross-platform
-The features:
+- Easy-to-use, interface-oriented design
+- An extensible plugin framework that makes getting your application running quick and easy
+- A clean, uncluttered design and stable engine that has been used in several commercial products
+- A high performance actor model (by Theron)
+- Event and attribute-driven, making it clear and easy to maintain your business
+- Based on standard C++ development, ensuring cross-platform support
+- An existing C++ and C# game client for rapid development
+- Cross-platform support
 
 
 ## Tutorial--English
@@ -35,11 +34,11 @@ https://github.com/ketoo/NoahGameFrame/wiki/Tutorial-&-Concept
 
 https://github.com/ketoo/NoahGameFrame/wiki/Documentation
 
-## Toturial--中文
+## Tutorial--中文
 
-[Toturial](http://bbs.noahframe.com/forum.php?mod=forumdisplay&fid=39) : http://bbs.noahframe.com/forum.php?mod=forumdisplay&fid=39
+[Tutorial](http://bbs.noahframe.com/forum.php?mod=forumdisplay&fid=39) : http://bbs.noahframe.com/forum.php?mod=forumdisplay&fid=39
 
-### FAQ OR DISCUSS
+### FAQ OR DISCUSSIONS
 [FAQ](http://blog.noahframe.com/?p=229) : http://blog.noahframe.com/?p=229
 
 ### Unity3D client
@@ -74,12 +73,12 @@ svn checkout https://github.com/ketoo/NoahGameFrame
 - redis-cpp-client 
 - Theron 6.00.01
 
-## IF YOU CAN NOT BUILD THE DEPENDENCIES THAN PLEASE RUN THE CMDS BELOW TO SET UP THE ENVIRONMENT:
+## IF YOU CAN NOT BUILD THE DEPENDENCIES THEN PLEASE RUN THE CMDS BELOW TO SET UP THE ENVIRONMENT:
 
-#sudo apt-get g++
-#sudo apt-get cmake
-#sudo apt-get install automake
-#sudo apt-get install zip unzip
+* sudo apt-get g++
+* sudo apt-get cmake
+* sudo apt-get install automake
+* sudo apt-get install zip unzip
 
 ## Supported Compilers
 

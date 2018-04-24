@@ -15,41 +15,40 @@ void ExecuteBody(NFCoroutine* co)
     co->func(co->arg);
 
     co->state = FREE;
+
+
     co->pSchdule->RemoveRunningID(co->nID);
 
+    //std::cout << "Free " << co->nID << std::endl;
 
-
-    //std::cout << "func finished -- swap " << co->nID << " to -1" << std::endl;
+    co->pSchdule->Yield();
 }
 
 NFCoroutineManager::NFCoroutineManager()
 {
-    std::cout << "threadid " << std::this_thread::get_id() << std::endl;
-
-    mnMainCoID = -1;
     mnRunningCoroutineID = -1;
-    mnMaxIndex = 0;
+    mnMainID = -1;
 
     for (int i = 0; i < MAX_COROUTINE_CAPACITY; i++)
     {
         mxCoroutineList.push_back(new NFCoroutine(this, i));
     }
-
-    std::cout << "created Coroutine number: " << MAX_COROUTINE_CAPACITY <<std::endl;
 }
 
 NFCoroutineManager::~NFCoroutineManager()
 {
-    for (int i = 0; i < MAX_COROUTINE_CAPACITY; i++)
+    for (int i = 0; i < mxCoroutineList.size(); i++)
     {
         delete mxCoroutineList[i];
     }
+
+    mxCoroutineList.clear();
 }
 
 void NFCoroutineManager::Resume(int id)
 {
 #if NF_PLATFORM != NF_PLATFORM_WIN
-    if (id < 0 || id >= this->mnMaxIndex)
+    if (id < 0 || id >= this->mxCoroutineList.size())
     {
         return;
     }
@@ -57,25 +56,26 @@ void NFCoroutineManager::Resume(int id)
     NFCoroutine* t = GetCoroutine(id);
     if (t->state == SUSPEND)
     {
-        std::cout << this->mnRunningCoroutineID << " swap to " << id << std::endl;
-
+        //std::cout << this->mnRunningCoroutineID << " swap to " << id << std::endl;
         this->mnRunningCoroutineID = id;
-
         swapcontext(&(this->mxMainCtx), &(t->ctx));
     }
-
 #endif
 }
 
-void NFCoroutineManager::YieldCo()
+void NFCoroutineManager::Yield()
 {
 #if NF_PLATFORM != NF_PLATFORM_WIN
     if (this->mnRunningCoroutineID != -1)
     {
         NFCoroutine* t = GetRunningCoroutine();
-        t->state = SUSPEND;
 
-        std::cout << "Yield " << this->mnRunningCoroutineID << " to -1" << std::endl;
+        if (mnMainID == t->nID)
+        {
+            mnMainID = -1;
+        }
+
+        //std::cout << "Yield " << this->mnRunningCoroutineID << " to -1" << std::endl;
 
         this->mnRunningCoroutineID = -1;
 
@@ -84,6 +84,34 @@ void NFCoroutineManager::YieldCo()
 #endif
 }
 
+void NFCoroutineManager::Yield(const int64_t nSecond)
+{
+#if NF_PLATFORM == NF_PLATFORM_WIN
+    NFSLEEP(fSecond);
+#else
+
+    if (this->mnRunningCoroutineID != -1)
+    {
+        NFCoroutine* t = GetRunningCoroutine();
+        int64_t nTimeMS = NFGetTimeMS();
+        t->nYieldTime = nSecond + nTimeMS;
+        //std::cout << nTimeMS << std::endl;
+        while (1)
+        {
+            nTimeMS = NFGetTimeMS();
+            if (nTimeMS >= t->nYieldTime)
+            {
+                //std::cout << nTimeMS << std::endl;
+                break;
+            }
+            else
+            {
+                Yield();
+            }
+        }
+    }
+#endif
+}
 void NFCoroutineManager::Init(CoroutineFunction func)
 {
     mxMainFunc = func;
@@ -92,21 +120,12 @@ void NFCoroutineManager::Init(CoroutineFunction func)
     NewMainCoroutine();
 }
 
-void NFCoroutineManager::StartCoroutine()
-{
-    NewMainCoroutine();
-}
-
-void NFCoroutineManager::StartCoroutine(CoroutineFunction func)
-{
-    NewMainCoroutine();
-    func(this);
-}
-
 void NFCoroutineManager::ScheduleJob()
 {
 #if NF_PLATFORM != NF_PLATFORM_WIN
-    if (mxRunningList.size() > 0)
+    //std::cout << "ScheduleJob, mainID = " << mnMainID << std::endl;
+
+    if (mxRunningList.size() > 0 && mnMainID >= 0)
     {
         int id = mxRunningList.front();
         mxRunningList.pop_front();
@@ -129,24 +148,22 @@ void NFCoroutineManager::ScheduleJob()
 #endif
 }
 
-int NFCoroutineManager::GetRunningID()
-{
-    return mnRunningCoroutineID;
-}
-
-void NFCoroutineManager::SetRunningID(int id)
-{
-    mnRunningCoroutineID = id;
-}
-
 void NFCoroutineManager::RemoveRunningID(int id)
 {
-    mxRunningList.remove(id);
+    const int lastID = mxRunningList.back();
+    if (lastID == id)
+    {
+        mxRunningList.pop_back();
+    }
+    else
+    {
+        mxRunningList.remove(id);
+    }
 }
 
 NFCoroutine* NFCoroutineManager::GetCoroutine(int id)
 {
-    if (id >= 0 && id < mnMaxIndex)
+    if (id >= 0 && id < mxCoroutineList.size())
     {
         return mxCoroutineList[id];
     }
@@ -167,9 +184,8 @@ NFCoroutine* NFCoroutineManager::GetRunningCoroutine()
 
 NFCoroutine* NFCoroutineManager::AllotCoroutine()
 {
-
     int id = 0;
-    for (; id < mnMaxIndex; ++id)
+    for (; id < this->mxCoroutineList.size(); ++id)
     {
         if (mxCoroutineList[id]->state == FREE)
         {
@@ -177,12 +193,12 @@ NFCoroutine* NFCoroutineManager::AllotCoroutine()
         }
     }
 
-    if (id == mnMaxIndex)
+    if (id == this->mxCoroutineList.size())
     {
-        mnMaxIndex++;
+        this->mxCoroutineList[id] = new NFCoroutine(this, id);
     }
 
-    return mxCoroutineList[id];
+    return this->mxCoroutineList[id];
 }
 
 void NFCoroutineManager::NewMainCoroutine()
@@ -196,12 +212,14 @@ void NFCoroutineManager::NewMainCoroutine()
     }
 
     mxRunningList.push_back(newCo->nID);
+    mnMainID = newCo->nID;
+
     //std::cout << "create NewMainCoroutine " << newCo->nID << std::endl;
-    mnMainCoID = newCo->nID;
 
     newCo->state = CoroutineState::SUSPEND;
     newCo->func = mxMainFunc;
     newCo->arg = mpMainArg;
+    newCo->nYieldTime = 0;
 
     getcontext(&(newCo->ctx));
 
@@ -211,31 +229,5 @@ void NFCoroutineManager::NewMainCoroutine()
     newCo->ctx.uc_link = &(this->mxMainCtx);
 
     makecontext(&(newCo->ctx), (void (*)(void)) (ExecuteBody), 1, newCo);
-
-#endif
-}
-
-void NFCoroutineManager::YieldCo(const float fSecond)
-{
-#if NF_PLATFORM == NF_PLATFORM_WIN
-    NFSLEEP(fSecond);
-#else
-    if (this->mnRunningCoroutineID != -1)
-    {
-        NFCoroutine* t = GetRunningCoroutine();
-        t->nYieldTime = fSecond * 1000 + NFGetTimeMS();
-
-        while (1)
-        {
-            if (NFGetTimeMS() >= t->nYieldTime)
-            {
-                break;
-            }
-            else
-            {
-                YieldCo();
-            }
-        }
-    }
 #endif
 }
