@@ -106,7 +106,7 @@ void NFCoroutineManager::YieldCo(const int64_t nSecond)
             }
             else
             {
-                Yield();
+                YieldCo();
             }
         }
     }
