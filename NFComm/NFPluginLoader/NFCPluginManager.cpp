@@ -617,10 +617,10 @@ void NFCPluginManager::ExecuteCoScheduler()
 
 void NFCPluginManager::YieldCo(const float nSecond)
 {
-	mxCoroutineManager.Yield(nSecond);
+	mxCoroutineManager.YieldCo(nSecond);
 }
 
 void NFCPluginManager::YieldCo()
 {
-   mxCoroutineManager.Yield();
+   mxCoroutineManager.YieldCo();
 }

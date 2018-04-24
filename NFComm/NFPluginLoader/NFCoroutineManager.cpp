@@ -21,7 +21,7 @@ void ExecuteBody(NFCoroutine* co)
 
     //std::cout << "Free " << co->nID << std::endl;
 
-    co->pSchdule->Yield();
+    co->pSchdule->YieldCo();
 }
 
 NFCoroutineManager::NFCoroutineManager()
@@ -63,7 +63,7 @@ void NFCoroutineManager::Resume(int id)
 #endif
 }
 
-void NFCoroutineManager::Yield()
+void NFCoroutineManager::YieldCo()
 {
 #if NF_PLATFORM != NF_PLATFORM_WIN
     if (this->mnRunningCoroutineID != -1)
@@ -84,10 +84,10 @@ void NFCoroutineManager::Yield()
 #endif
 }
 
-void NFCoroutineManager::Yield(const int64_t nSecond)
+void NFCoroutineManager::YieldCo(const int64_t nSecond)
 {
 #if NF_PLATFORM == NF_PLATFORM_WIN
-    NFSLEEP(fSecond);
+    NFSLEEP(nSecond);
 #else
 
     if (this->mnRunningCoroutineID != -1)

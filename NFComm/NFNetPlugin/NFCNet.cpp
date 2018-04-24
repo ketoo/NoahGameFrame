@@ -45,8 +45,7 @@ void NFCNet::conn_eventcb(struct bufferevent* bev, short events, void* user_data
 {
     NetObject* pObject = (NetObject*)user_data;
     NFCNet* pNet = (NFCNet*)pObject->GetNet();
-
-	printf("%d net event: %d\n", pObject->GetRealFD(), events);
+	std::cout << "Thread ID = " << std::this_thread::get_id() << " FD = " << pObject->GetRealFD() << " Event ID =" << events <<std::endl;
 
     if (events & BEV_EVENT_CONNECTED)
     {
@@ -239,7 +238,7 @@ bool NFCNet::SendMsgToAllClient(const char* msg, const size_t nLen)
         NetObject* pNetObject = (NetObject*)it->second;
         if (pNetObject && !pNetObject->NeedRemove())
         {
-            bufferevent* bev = pNetObject->GetBuffEvent();
+            bufferevent* bev = (bufferevent*)pNetObject->GetUserData();
             if (NULL != bev && mbWorking )
             {
                 bufferevent_write(bev, msg, nLen);
@@ -266,7 +265,7 @@ bool NFCNet::SendMsg(const char* msg, const size_t nLen, const NFSOCK nSockIndex
         NetObject* pNetObject = (NetObject*)it->second;
         if (pNetObject)
         {
-            bufferevent* bev = pNetObject->GetBuffEvent();
+            bufferevent* bev = (bufferevent*)pNetObject->GetUserData();
             if (NULL != bev && mbWorking)
             {
                 bufferevent_write(bev, msg, nLen);
@@ -535,7 +534,7 @@ void NFCNet::CloseObject(const NFSOCK nSockIndex)
     {
         NetObject* pObject = it->second;
 
-        struct bufferevent* bev = pObject->GetBuffEvent();
+        struct bufferevent* bev = (bufferevent*)pObject->GetUserData();
 
         bufferevent_free(bev);
 
