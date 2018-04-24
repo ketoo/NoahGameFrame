@@ -87,6 +87,12 @@ bool NFCHttpServerModule::AddComMsgCB(const HTTP_RECEIVE_FUNCTOR_PTR& cb)
     return true;
 }
 
+bool NFCHttpServerModule::AddFilterCB(const HTTP_RECEIVE_FUNCTOR_PTR& cb)
+{
+    m_pHttpServer->AddFilter(cb);
+    return true;
+}
+
 bool NFCHttpServerModule::ResponseMsg(const NFHttpRequest& req, const std::string& strMsg, NFWebStatus code,
                                       const std::string& strReason)
 {

@@ -166,8 +166,6 @@ public:
 	virtual bool GetFileContent(const std::string &strFileName, std::string &strContent) = 0;
 
 	virtual void ExecuteCoScheduler() = 0;
-	virtual void StartCoroutine() = 0;
-	virtual void StartCoroutine(CoroutineFunction func) = 0;
 	virtual void YieldCo(const float nSecond) = 0;
 	virtual void YieldCo() = 0;
 };
