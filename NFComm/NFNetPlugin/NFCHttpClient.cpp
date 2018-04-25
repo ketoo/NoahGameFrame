@@ -148,7 +148,8 @@ bool NFCHttpClient::MakeRequest(const std::string& strUri,
     if (query == NULL)
     {
         snprintf(uri, sizeof(uri) - 1, "%s", path);
-    } else
+    }
+	else
     {
         snprintf(uri, sizeof(uri) - 1, "%s?%s", path, query);
     }
@@ -178,7 +179,8 @@ bool NFCHttpClient::MakeRequest(const std::string& strUri,
     if (!isHttps)
     {
         bev = bufferevent_socket_new(m_pBase, -1, BEV_OPT_CLOSE_ON_FREE);
-    } else
+    } 
+	else
     {
 #if NF_ENABLE_SSL
         bev = bufferevent_openssl_socket_new(m_pBase, -1, pSSL,
@@ -366,4 +368,7 @@ void NFCHttpClient::OnHttpReqDone(struct evhttp_request* req, void* ctx)
             fun(pHttpObj->mID, nRespCode, strResp);
         }
     }
+
+
+	delete pHttpObj;
 }

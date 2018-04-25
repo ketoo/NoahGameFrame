@@ -7,31 +7,37 @@
 #ifndef NFI_HTTP_CLIENT_H
 #define NFI_HTTP_CLIENT_H
 
-#include <vector>
-#include <functional>
-#include <memory>
-#include <list>
-#include <iostream>
-#include <map>
 #include <cstring>
 #include <errno.h>
 #include <stdio.h>
 #include <signal.h>
 #include <stdint.h>
+#include <iostream>
+#include <map>
+#include <vector>
+#include <functional>
+#include <memory>
+#include <list>
+#include <vector>
 #include <assert.h>
 
-#include "NFComm/NFPluginModule/NFGUID.h"
+#include "NFINet.h"
+#include "NFComm/NFPluginModule/NFPlatform.h"
 
-#include <event2/bufferevent.h>
-#include <event2/buffer.h>
-#include <event2/listener.h>
-#include <event2/util.h>
-#include <event2/http.h>
-#include <event2/thread.h>
-#include <event2/event_compat.h>
-#include <event2/bufferevent_struct.h>
-#include <event2/http_struct.h>
-#include <event2/event.h>
+#if NF_PLATFORM == NF_PLATFORM_WIN
+#include <winsock2.h>
+#include <ws2tcpip.h>
+#include <windows.h>
+#include <io.h>
+#include <fcntl.h>
+#else
+#include <sys/stat.h>
+#include <sys/socket.h>
+#include <signal.h>
+#include <fcntl.h>
+#include <unistd.h>
+#include <dirent.h>
+#endif
 
 #if NF_ENABLE_SSL
 
@@ -40,11 +46,6 @@
 #include <openssl/err.h>
 #include <openssl/rand.h>
 
-#endif
-
-#if NF_PLATFORM == NF_PLATFORM_WIN
-#include <windows.h>
-#include <WinSock2.h>
 #endif
 
 typedef std::function<void(const NFGUID id, const int state_code, const std::string& strRespData)> HTTP_RESP_FUNCTOR;
