@@ -9,28 +9,23 @@
 #include "NFCActorModule.h"
 
 NFCActorModule::NFCActorModule(NFIPluginManager* p)
+	:mFramework(NF_ACTOR_THREAD_COUNT)
 {
 	pPluginManager = p;
 
     srand((unsigned)time(NULL));
 
-    m_pFramework = NF_NEW Theron::Framework(NF_ACTOR_THREAD_COUNT);
-
-    m_pMainActor = NF_SHARE_PTR<NFIActor>(NF_NEW NFCActor(*m_pFramework, this));
+    m_pMainActor = NF_SHARE_PTR<NFIActor>(NF_NEW NFCActor(mFramework, this));
 }
 
 NFCActorModule::~NFCActorModule()
 {
-    m_pMainActor.reset();
-    m_pMainActor = nullptr;
-
-    delete m_pFramework;
-    m_pFramework = NULL;
+	m_pMainActor.reset();
+	m_pMainActor = nullptr;
 }
 
 bool NFCActorModule::Init()
 {
-
     return true;
 }
 
@@ -61,7 +56,7 @@ bool NFCActorModule::Execute()
 
 int NFCActorModule::RequireActor()
 {
-    NF_SHARE_PTR<NFIActor> pActor(NF_NEW NFCActor(*m_pFramework, this));
+    NF_SHARE_PTR<NFIActor> pActor(NF_NEW NFCActor(mFramework, this));
 	mxActorMap.AddElement(pActor->GetAddress().AsInteger(), pActor);
 
     return pActor->GetAddress().AsInteger();
@@ -117,7 +112,7 @@ bool NFCActorModule::SendMsgToActor(const int nActorIndex, const NFGUID& objectI
         xMessage.nFormActor = m_pMainActor->GetAddress().AsInteger();
         xMessage.self = objectID;
 
-        return m_pFramework->Send(xMessage, m_pMainActor->GetAddress(), pActor->GetAddress());
+        return mFramework.Send(xMessage, m_pMainActor->GetAddress(), pActor->GetAddress());
     }
 
     return false;
