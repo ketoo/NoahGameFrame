@@ -81,7 +81,7 @@ public:
         return pPluginManager;
     }
 
-	virtual void YieldCo(const float fSecond)
+	virtual void YieldCo(const int64_t fSecond)
 	{
 		pPluginManager->YieldCo(fSecond);
 	}

@@ -74,5 +74,13 @@
 		<Plugin Name="NFSecurityPlugin" />	
 		<Plugin Name="NFGuildPlugin" />	
 	</WorldServer>
-	
+		
+	<TutorialServer>
+		<Plugin Name="NFKernelPlugin" />
+		<Plugin Name="NFConfigPlugin" />
+		
+		<Plugin Name="NFActorPlugin" />
+		<Plugin Name="NFLogPlugin" />
+		<Plugin Name="Tutorial5" />	
+	</TutorialServer>
 </XML>

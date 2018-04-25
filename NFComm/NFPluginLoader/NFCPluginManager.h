@@ -94,7 +94,7 @@ public:
 
 	virtual void ExecuteCoScheduler() override;
 
-	virtual void YieldCo(const float nSecond) override;
+	virtual void YieldCo(const int64_t nSecond) override;
 
 	virtual void YieldCo() override;
 

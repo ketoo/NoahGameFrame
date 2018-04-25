@@ -14,10 +14,29 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-struct NFGUID
+class NFGUID
 {
+private:
+	static NFINT64 nInstanceID;
+	static NFINT64 nGUIDIndex;
+
+public:
+
     NFINT64 nData64;
     NFINT64 nHead64;
+
+	static void SetInstanceID(NFINT64 id)
+	{
+		/*
+		if (nInstanceID != 0)
+		{
+			std::cout << "ERROR-------------------- set instance id again!!!" << std::endl;
+			return;
+		}
+		*/
+		nInstanceID = id;
+		nGUIDIndex = 0;
+	}
 
     NFGUID()
     {
@@ -36,6 +55,32 @@ struct NFGUID
         nHead64 = xData.nHead64;
         nData64 = xData.nData64;
     }
+
+	static NFGUID CreateID()
+	{
+		int64_t value = 0;
+		uint64_t time = std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now().time_since_epoch()).count();
+
+
+		//value = time << 16;
+		value = time * 1000000;
+
+
+		//value |= nGUIDIndex++;
+		value += nGUIDIndex++;
+
+		//if (sequence_ == 0x7FFF)
+		if (nGUIDIndex == 999999)
+		{
+			nGUIDIndex = 0;
+		}
+
+		NFGUID xID;
+		xID.nHead64 = nInstanceID;
+		xID.nData64 = value;
+
+		return xID;
+	}
 
     NFGUID& operator=(const NFGUID& xData)
     {
@@ -124,5 +169,8 @@ struct NFGUID
         }
     }
 };
-
+/*
+NFINT64 NFGUID::nInstanceID = 0;
+NFINT64 NFGUID::nGUIDIndex = 0;
+*/
 #endif

@@ -1,6 +1,5 @@
 ﻿#include <thread>
 #include "NFCHttpServer.h"
-#include <sys/stat.h>
 
 
 void NFCHttpServer::AddFilter(const HTTP_FILTER_FUNCTOR_PTR& ptr)
