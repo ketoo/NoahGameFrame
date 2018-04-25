@@ -166,7 +166,7 @@ public:
 	virtual bool GetFileContent(const std::string &strFileName, std::string &strContent) = 0;
 
 	virtual void ExecuteCoScheduler() = 0;
-	virtual void YieldCo(const float nSecond) = 0;
+	virtual void YieldCo(const int64_t nSecond) = 0;
 	virtual void YieldCo() = 0;
 };
 

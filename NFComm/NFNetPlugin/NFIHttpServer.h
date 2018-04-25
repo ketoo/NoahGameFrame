@@ -1,4 +1,9 @@
-
+////////////////////////////////////////////
+//  Filename NFIHttpClient.h
+//  Copyright (C) 2017  Stonexin
+//  CreateTime 2017/07/05
+//
+////////////////////////////////////////////
 #ifndef NFI_HTTP_SERVER_H
 #define NFI_HTTP_SERVER_H
 
@@ -16,6 +21,9 @@
 #include <vector>
 #include <assert.h>
 
+#include "NFINet.h"
+#include "NFComm/NFPluginModule/NFPlatform.h"
+
 #if NF_PLATFORM == NF_PLATFORM_WIN
 #include <winsock2.h>
 #include <ws2tcpip.h>
@@ -30,9 +38,6 @@
 #include <unistd.h>
 #include <dirent.h>
 #endif
-
-#include "NFINet.h"
-#include "NFComm/NFPluginModule/NFPlatform.h"
 
 enum NFWebStatus
 {

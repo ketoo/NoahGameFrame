@@ -10,14 +10,15 @@
 #define NFC_HTTP_CLIENT_MODULE_H
 
 #include <iostream>
+#include "NFComm/NFCore/NFMapEx.hpp"
+#include "NFComm/NFNetPlugin/NFIHttpClient.h"
+#include "NFComm/NFPluginModule/NFIKernelModule.h"
 #include "NFComm/NFPluginModule/NFIHttpClientModule.h"
 #include "NFComm/NFPluginModule/NFILogModule.h"
-#include "NFComm/NFPluginModule/NFIKernelModule.h"
 
 class NFCHttpClientModule
         : public NFIHttpClientModule
 {
-
 public:
     NFCHttpClientModule(NFIPluginManager* p);
 
@@ -73,7 +74,7 @@ protected:
 
 private:
 	NFIKernelModule* m_pKernelModule;
-    NFIHttpClient* m_pHttpClient;
+	NFIHttpClient* m_pHttpClient;
     std::map<std::string, std::string> m_xDefaultHttpHeaders;
 	NFMapEx<NFGUID, RespData> mxRespDataMap;
 };

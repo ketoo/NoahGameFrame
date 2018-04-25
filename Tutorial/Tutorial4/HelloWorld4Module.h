@@ -39,6 +39,8 @@ public:
 
 		std::cout << "Thread: " << std::this_thread::get_id() << " " << self.ToString() << " MsgID: " << event << " Data:" << arg << std::endl;
 
+
+
 		return 0;
 	}
 
