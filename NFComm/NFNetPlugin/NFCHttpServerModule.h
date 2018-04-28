@@ -10,7 +10,8 @@
 #define NFC_HTTP_SERVER_MODULE_H
 
 #include <iostream>
-#include "NFComm/NFNetPlugin/NFCHttpServer.h"
+#include "NFComm/NFCore/NFMapEx.hpp"
+#include "NFComm/NFNetPlugin/NFIHttpServer.h"
 #include "NFComm/NFPluginModule/NFIHttpServerModule.h"
 #include "NFComm/NFPluginModule/NFILogModule.h"
 
@@ -29,7 +30,7 @@ public:
 
     virtual bool Execute();
 
-    virtual bool AddMsgCB(const std::string& strCommand, const HTTP_RECEIVE_FUNCTOR_PTR& cb);
+    virtual bool AddMsgCB(const std::string& strCommand, const NFHttpType eRequestType, const HTTP_RECEIVE_FUNCTOR_PTR& cb);
 
 
     virtual bool ResponseMsg(const NFHttpRequest& req, const std::string& strMsg, NFWebStatus code = NFWebStatus::WEB_OK,
@@ -38,12 +39,15 @@ public:
 private:
 	virtual bool OnReceiveNetPack(const NFHttpRequest& req);
 	virtual bool AddComMsgCB(const HTTP_RECEIVE_FUNCTOR_PTR& cb);
+	virtual bool AddFilterCB(const HTTP_FILTER_FUNCTOR_PTR& cb);
 
 private:
-    NFILogModule* mLogModule;
-    NFIHttpServer* m_pHttpServer;
+	NFIHttpServer* m_pHttpServer;
+	NFILogModule* mLogModule;
+	HTTP_FILTER_FUNCTOR_PTR mFilter;
 
-    std::map<std::string, HTTP_RECEIVE_FUNCTOR_PTR> mMsgCBMap;
+	NFMapEx<NFHttpType, std::map<std::string, HTTP_RECEIVE_FUNCTOR_PTR>> mMsgCBMap;
+
     std::list<HTTP_RECEIVE_FUNCTOR_PTR> mComMsgCBList;
 };
 

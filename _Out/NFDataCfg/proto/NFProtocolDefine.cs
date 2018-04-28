@@ -311,24 +311,6 @@ namespace NFrame
 		// Record
 
 	}
-	public class HttpServer
-	{
-		//Class name
-		public static readonly String ThisName = "HttpServer";
-		// IObject
-		public static readonly String ClassName = "ClassName";// string
-		public static readonly String ConfigID = "ConfigID";// string
-		public static readonly String GroupID = "GroupID";// int
-		public static readonly String ID = "ID";// string
-		public static readonly String Position = "Position";// vector3
-		public static readonly String SceneID = "SceneID";// int
-		// Property
-		public static readonly String ServerID = "ServerID";// int
-		public static readonly String WebPort = "WebPort";// int
-		public static readonly String WebRootPath = "WebRootPath";// string
-		// Record
-
-	}
 	public class IObject
 	{
 		//Class name
@@ -1024,7 +1006,8 @@ namespace NFrame
 			public const int Activated = 2;//int
 			public const int Level = 3;//int
 			public const int Exp = 4;//int
-			public const int Star = 6;//int
+			public const int Star = 5;//int
+			public const int Ice_Talent = 6;//int
 			public const int Fire_Talent = 7;//int
 			public const int Light_Talent = 8;//int
 			public const int Wind_Talent = 9;//int
@@ -1130,6 +1113,7 @@ namespace NFrame
 		public static readonly String Port = "Port";// int
 		public static readonly String ServerID = "ServerID";// int
 		public static readonly String Type = "Type";// int
+		public static readonly String WebPort = "WebPort";// int
 		// Record
 
 	}

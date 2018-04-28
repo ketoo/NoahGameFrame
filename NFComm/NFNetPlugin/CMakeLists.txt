@@ -38,11 +38,11 @@ elseif(UNIX)
 	if (CMAKE_BUILD_TYPE MATCHES "Release")
 		target_link_libraries(NFNetPlugin libevent.a)
 		target_link_libraries(NFNetPlugin libevent_core.a)
-		target_link_libraries(NFNetPlugin libprotobuf.so)
+		target_link_libraries(NFNetPlugin libprotobuf.a)
 	else()
 		target_link_libraries(NFNetPlugin libevent.a)
 		target_link_libraries(NFNetPlugin libevent_core.a)
-		target_link_libraries(NFNetPlugin libprotobuf.so)
+		target_link_libraries(NFNetPlugin libprotobuf.a)
 	endif()
 	add_definitions(
 		-D_USRDLL

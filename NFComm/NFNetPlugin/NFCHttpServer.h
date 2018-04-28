@@ -68,17 +68,15 @@ public:
 
     virtual bool ResponseMsg(const NFHttpRequest& req, const std::string& strMsg, NFWebStatus code, const std::string& strReason = "OK");
 
-private:
-	virtual void AddFilter(const HTTP_RECEIVE_FUNCTOR_PTR& ptr);
+	virtual void AddFilter(const HTTP_FILTER_FUNCTOR_PTR& ptr);
 
 private:
     static void listener_cb(struct evhttp_request* req, void* arg);
 
 private:
-	char* mstrBuff;
     struct event_base* mxBase;
 	HTTP_RECEIVE_FUNCTOR mReceiveCB;
-	HTTP_RECEIVE_FUNCTOR_PTR mFilter;
+	HTTP_FILTER_FUNCTOR_PTR mFilter;
 };
 
 #endif

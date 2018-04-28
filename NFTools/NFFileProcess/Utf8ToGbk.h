@@ -91,20 +91,12 @@ extern "C" {
 				indexUtf8++;
 				continue;
 			}
-			gbk = uni2gbk[unicode];
-			if (lenTmp == 3) {
-				strgbk[indexGbk++] = gbk >> 8;
-				strgbk[indexGbk++] = gbk & 0xFF;
-			}
-			else if (lenTmp == 1) {
-				strgbk[indexGbk++] = gbk & 0xFF;
-			}
-			else if (lenTmp == 2) {
-				strgbk[indexGbk++] = gbk >> 8;
-				strgbk[indexGbk++] = gbk & 0xFF;
-			}
-			else if (lenTmp == 4) {
-				strgbk[indexGbk++] = gbk >> 8;
+			if (unicode >= sizeof uni2gbk / sizeof *uni2gbk) {}
+			else
+			{
+				gbk = uni2gbk[unicode];
+				if (lenTmp > 1)
+					strgbk[indexGbk++] = gbk >> 8;
 				strgbk[indexGbk++] = gbk & 0xFF;
 			}
 			indexUtf8 += lenTmp;
