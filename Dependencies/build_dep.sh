@@ -1,5 +1,8 @@
 echo Building dependencies...
 
+#sudo apt-get install automake
+#sudo apt-get install zip unzip
+
 mkdir -p lib/Debug/
 mkdir -p lib/Release/
 
@@ -22,6 +25,8 @@ chmod -R 755 *
 make
 make check
 
+cp -r -f ./src/.libs/*.a ../lib/Debug/
+cp -r -f ./src/.libs/*.a ../lib/Release/
 
 cp -r -f ./src/.libs/*.so ../../_Out/Debug/
 cp -r -f ./src/.libs/*.so.* ../../_Out/Debug/
@@ -49,14 +54,28 @@ cd ../
 
 
 # TODO: other libs
-unzip -o gperftools-2.5.zip -d ./
-cd gperftools-2.5
-chmod -R 755 *
-./configure --enable-frame-pointers
-make
-make install
-cd ../
+#unzip -o gperftools-2.5.zip -d ./
+#cd gperftools-2.5
+#chmod -R 755 *
+#./configure --enable-frame-pointers
+#make && make install
 
+#cp -R -f ./.libs/*.a ../lib/Debug/
+#cp -R -f ./.libs/*.a ../lib/Release/
+
+#cp -r -f ./.libs/*.so ../../_Out/Debug/
+#cp -r -f ./.libs/*.so.* ../../_Out/Debug/
+#cp -r -f ./.libs/*.so ../../_Out/Release/
+#cp -r -f ./.libs/*.so.* ../../_Out/Release/
+
+#cp -r -f ./.libs/*.dylib ../../_Out/Debug/
+#cp -r -f ./.libs/*.dylib.* ../../_Out/Debug/
+#cp -r -f ./.libs/*.dylib ../../_Out/Release/
+#cp -r -f ./.libs/*.dylib.* ../../_Out/Release/
+#cd ../
+
+#-ltcmalloc
+#-lprofiler
 
 # back to main dir
 pwd

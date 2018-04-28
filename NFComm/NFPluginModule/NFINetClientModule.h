@@ -33,12 +33,14 @@ struct ConnectData
 		eServerType = NF_ST_NONE;
 		eState = ConnectDataState::DISCONNECT;
 		mnLastActionTime = 0;
+		nWorkLoad = 0;
 	}
 
 	int nGameID;
 	NF_SERVER_TYPES eServerType;
 	std::string strIP;
 	int nPort;
+	int nWorkLoad;
 	std::string strName;
 	ConnectDataState eState;
 	NFINT64 mnLastActionTime;

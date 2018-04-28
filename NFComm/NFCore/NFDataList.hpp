@@ -584,7 +584,7 @@ public:
 
 	virtual const NF_SHARE_PTR<NFData> GetStack(const int index) const
 	{
-		if (index < mvList.size())
+		if (index < (int)mvList.size())
 		{
 			return mvList[index];
 		}
@@ -773,7 +773,7 @@ public:
     
 	virtual bool Add(const NFINT64 value)
 	{
-		if (GetCount() == mvList.size())
+		if (GetCount() == (int)(mvList.size()))
 		{
 			AddStatck();
 		}
@@ -792,7 +792,7 @@ public:
 
 	virtual bool Add(const double value)
 	{
-		if (GetCount() == mvList.size())
+		if (GetCount() == (int)(mvList.size()))
 		{
 			AddStatck();
 		}
@@ -811,7 +811,7 @@ public:
 
 	virtual bool Add(const std::string& value)
 	{
-		if (GetCount() == mvList.size())
+		if (GetCount() == (int)(mvList.size()))
 		{
 			AddStatck();
 		}
@@ -830,7 +830,7 @@ public:
 
 	virtual bool Add(const NFGUID& value)
 	{
-		if (GetCount() == mvList.size())
+		if (GetCount() == (int)(mvList.size()))
 		{
 			AddStatck();
 		}
@@ -849,7 +849,7 @@ public:
 
 	virtual bool Add(const NFVector2& value)
 	{
-		if (GetCount() == mvList.size())
+		if (GetCount() == (int)(mvList.size()))
 		{
 			AddStatck();
 		}
@@ -868,7 +868,7 @@ public:
 
 	virtual bool Add(const NFVector3& value)
 	{
-		if (GetCount() == mvList.size())
+		if (GetCount() == (int)(mvList.size()))
 		{
 			AddStatck();
 		}

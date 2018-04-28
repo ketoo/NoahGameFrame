@@ -6,6 +6,7 @@
     <ClInclude Include="NFCKernelModule.h" />
     <ClInclude Include="NFCScheduleModule.h" />
     <ClInclude Include="NFCSceneAOIModule.h" />
+    <ClInclude Include="NFCErrorBusModule.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="NFKernelPlugin.cpp" />
@@ -14,5 +15,6 @@
     <ClCompile Include="NFCEventModule.cpp" />
     <ClCompile Include="NFCScheduleModule.cpp" />
     <ClCompile Include="NFCSceneAOIModule.cpp" />
+    <ClCompile Include="NFCErrorBusModule.cpp" />
   </ItemGroup>
 </Project>
