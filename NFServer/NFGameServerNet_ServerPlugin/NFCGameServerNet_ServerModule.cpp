@@ -947,7 +947,7 @@ int NFCGameServerNet_ServerModule::OnRecordEvent(const NFGUID & self, const std:
 			{
 				NFGUID identOther = argVar.Object(i);
 
-				SendMsgPBToGate(NFMsg::EGMI_ACK_PROPERTY_FLOAT, xRecordChanged, identOther);
+				SendMsgPBToGate(NFMsg::EGMI_ACK_RECORD_FLOAT, xRecordChanged, identOther);
 			}
 		}
 		break;
@@ -1023,7 +1023,7 @@ int NFCGameServerNet_ServerModule::OnRecordEvent(const NFGUID & self, const std:
 			{
 				NFGUID identOther = argVar.Object(i);
 
-				SendMsgPBToGate(NFMsg::EGMI_ACK_RECORD_VECTOR2, xRecordChanged, identOther);
+				SendMsgPBToGate(NFMsg::EGMI_ACK_RECORD_VECTOR3, xRecordChanged, identOther);
 			}
 		}
 		break;

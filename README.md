@@ -11,25 +11,34 @@
 
 #####QQ Group：341159815
 
-## What is it?
+## What is NoahGameFrame?
 
-NF is a lightweight, fast, scalable, distributed plugin framework.Greatly inspired by OGRE and Bigworld.
+NoahGameFrame (NF) is a lightweight, fast, scalable, distributed plugin framework. NF is greatly inspired by OGRE and Bigworld.
 
 ## Features
-- Easy to use interface oriented design minimise the effort
-- Extensible plugin framework makes getting your application running is quick and simple
-- Clean, uncluttered design, stable engine used in several commercial products
-- Using the actor model has very high performance(by Theron)
-- Based on the event-driven and attribute-driver can make business more clearly and easy to maintenance
-- Based on the standard c + + development, cross-platform support
-- With existing c++, c# game client for rapid development
-- Cross-platform
+- Easy-to-use, interface-oriented design
+- An extensible plugin framework that makes getting your application running quick and easy
+- A clean, uncluttered design and stable engine that has been used in several commercial products
+- A high performance actor model (by Theron)
+- Event and attribute-driven, making it clear and easy to maintain your business
+- Based on standard C++ development, ensuring cross-platform support
+- An existing C++ and C# game client for rapid development
+- Cross-platform support
 
-## Toturial 
 
-[Toturial](http://bbs.noahframe.com/forum.php?mod=forumdisplay&fid=39) : http://bbs.noahframe.com/forum.php?mod=forumdisplay&fid=39
+## Tutorial--English
 
-### FAQ OR DISCUSS
+https://github.com/ketoo/NoahGameFrame/wiki/Tutorial-&-Concept
+
+## Documents--English
+
+https://github.com/ketoo/NoahGameFrame/wiki/Documentation
+
+## Tutorial--中文
+
+[Tutorial](http://bbs.noahframe.com/forum.php?mod=forumdisplay&fid=39) : http://bbs.noahframe.com/forum.php?mod=forumdisplay&fid=39
+
+### FAQ OR DISCUSSIONS
 [FAQ](http://blog.noahframe.com/?p=229) : http://blog.noahframe.com/?p=229
 
 ### Unity3D client
@@ -40,8 +49,11 @@ NF is a lightweight, fast, scalable, distributed plugin framework.Greatly inspir
 ### App Architecture:
 ![App Architecture](https://github.com/ketoo/NoahGameFrame/blob/develop/Introduce/img/NF_app_arch.png)
 
+
 ### Server Architecture
 ![Server Architecture](https://github.com/ketoo/NoahGameFrame/blob/develop/Introduce/img/NF_server_arch.png)
+
+
 
 ## Get the Sources:
 
@@ -60,7 +72,13 @@ svn checkout https://github.com/ketoo/NoahGameFrame
 - google protobuf 2.5.0
 - redis-cpp-client 
 - Theron 6.00.01
-- curl 7.37.1
+
+## IF YOU CAN NOT BUILD THE DEPENDENCIES THEN PLEASE RUN THE CMDS BELOW TO SET UP THE ENVIRONMENT:
+
+* sudo apt-get g++
+* sudo apt-get cmake
+* sudo apt-get install automake
+* sudo apt-get install zip unzip
 
 ## Supported Compilers
 
@@ -71,29 +89,21 @@ svn checkout https://github.com/ketoo/NoahGameFrame
 ### MSVC >= 2015
 
 1. Git pull all source
-2. Run **install4vs.bat**
-3. Open the solution: **NoahFrame.sln**, build FileProcessTool project
-4. Run **GenerateConfigXML.bat** to generate configuration files
-5. Open the solution: **NoahFrame.sln**
-6. Build the solution(if u build failed, please build again(not rebuild))
-7. Run the binary file by **_Out/rund.bat**
+2. Open the solution: **NoahFrame.sln**, build FileProcessTool project
+3. Run **GenerateConfigXML.bat** to generate configuration files
+4. Open the solution: **NoahFrame.sln**
+5. Build the solution(if u build failed, please build again(not rebuild))
+6. Run the binary file by **_Out/rund.bat**
 
-### CodeBlocks >= 13.1(Only in linux)
-
-1. Git pull all source
-2. Run **install.sh**
-3. Open the solution with CodeBlocks: **NF.workspace**
-4. Check **C++11** option in CodeBlocks compiler setting
-5. Build **NF.workspace**
-6. Run **sh ./GenerateConfigXML.sh** to generate configuration files
-7. Run the binary file by **_Out/rund.sh**
-
-### CMake
+### CMake ---- please use administrator(or sudo) to do these:
 1. Git pull all source
 2. Install cmake[>= 3.1] please choose options for installing: **Add CMake to the system PATH for all users and restart your computer**
 3. Install VS2015 or gcc[>= 4.8]
-4. Run **install4cmake.bat** or **install4cmake.sh** to build NF
-5. Run the binary file by **_Out/rund.bat** or **_Out/rund.sh**
+4. Run Dependencies/build_dep.sh
+5. Run **install4cmake.bat** or **install4cmake.sh** to build NF
+6. Run the binary file by **_Out/rund.bat** or **_Out/rund.sh**
+
+
 
 ### JAVA Project
 WebSite:  https://github.com/NFGameTeam/NFrame-java
@@ -102,19 +112,13 @@ WebSite:  https://github.com/NFGameTeam/NFrame-java
 WebSite:  https://github.com/ketoo/NFrame
 
 
-
-## Documents & Tutorial
-[English](https://github.com/ketoo/NoahGameFrame/blob/develop/doc_EN_US.md)
-
-[Mandarin](https://github.com/ketoo/NoahGameFrame/blob/develop/doc_ZH_CN.md)
-
 ## License
 The NFrame project is currently available under the [Apache License](https://github.com/ketoo/NoahGameFrame/blob/develop/LICENSE).
 
 
 Tutorial:
 -------------------
-### [01-Hello world, add a module](https://github.com/ketoo/NoahGameFrame/tree/develop/Tutorial/Tutorial1)
+### [01-Hello world, add a module](https://github.com/ketoo/NoahGameFrame/tree/master/Tutorial/Tutorial1)
 
 
 ```cpp
@@ -207,17 +211,17 @@ bool HelloWorld1::Shut()
 
 
 -------------------
-### [02-Hello world, test data driver](https://github.com/ketoo/NoahGameFrame/tree/develop/Tutorial/Tutorial2)
+### [02-Hello world, test data driver](https://github.com/ketoo/NoahGameFrame/tree/master/Tutorial/Tutorial2)
 
 * how to use the world's most advanced data engine 
 
 -------------------
-### [03-Hello world, test heartbeat and event system](https://github.com/ketoo/NoahGameFrame/tree/develop/Tutorial/Tutorial3)
+### [03-Hello world, test heartbeat and event system](https://github.com/ketoo/NoahGameFrame/tree/master/Tutorial/Tutorial3)
 
 * how to use the synchronous events
 
 -------------------
-### [04-Hello actor, test actor model(async event system)](https://github.com/ketoo/NoahGameFrame/tree/develop/Tutorial/Tutorial4ActorPlugin)
+### [04-Hello actor, test actor model(async event system)](https://github.com/ketoo/NoahGameFrame/tree/master/Tutorial/Tutorial4)
 
 * how to use the asynchronous events
 * use multiple cpus to get high performance
@@ -228,11 +232,6 @@ bool HelloWorld1::Shut()
 
 * Mail: 342006@qq.com
 * BBS: http://bbs.noahframe.com
-
-
-### WELCOME DONATE/欢迎捐赠(支付宝):
-
-![donation](https://github.com/ketoo/NoahGameFrame/blob/develop/Introduce/donation.png)
 
 -------------------
 

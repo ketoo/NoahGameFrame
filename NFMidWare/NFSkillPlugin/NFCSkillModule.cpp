@@ -87,12 +87,22 @@ void NFCSkillModule::OnClienUseSkill(const NFSOCK nSockIndex, const int nMsgID, 
 {
 	CLIENT_MSG_PROCESS(nMsgID, msg, nLen, NFMsg::ReqAckUseSkill)
 
-	//bc
+		//bc
+	NFGUID xUser = NFINetModule::PBToNF(xMsg.user());
 	const std::string& strSkillID = xMsg.skill_id();
-
-	if (m_pSkillCooldownModule->ExistSkillCD(nPlayerID, strSkillID))
+	if (xUser != nPlayerID)
 	{
-		m_pLogModule->LogError(nPlayerID, "ExistSkillCD " + strSkillID);
+		NFGUID xAIOnwer = m_pKernelModule->GetPropertyObject(xUser, NFrame::NPC::AIOwnerID());
+		if (xAIOnwer != nPlayerID)
+		{
+			m_pLogModule->LogError(xUser, "AIOwnerID " + xAIOnwer.ToString() + " not " + nPlayerID.ToString());
+			return;
+		}
+	}
+
+	if (m_pSkillCooldownModule->ExistSkillCD(xUser, strSkillID))
+	{
+		m_pLogModule->LogError(xUser, "ExistSkillCD " + strSkillID);
 		return;
 	}
 
@@ -109,18 +119,18 @@ void NFCSkillModule::OnClienUseSkill(const NFSOCK nSockIndex, const int nMsgID, 
 			xList.Add(nTarget);
 		}
 
-		if (xProcessModule->ConsumeLegal(nPlayerID, strSkillID, xList) == 0)
+		if (xProcessModule->ConsumeLegal(xUser, strSkillID, xList) == 0)
 		{
 			//once the skill consume than add CD time
-			m_pSkillCooldownModule->AddSkillCD(nPlayerID, strSkillID);
+			m_pSkillCooldownModule->AddSkillCD(xUser, strSkillID);
 
 			NFDataList xDamageList;
 			NFDataList xResultList;
-			if (xProcessModule->ConsumeProcess(nPlayerID, strSkillID, xList, xDamageList, xResultList) == 0)
+			if (xProcessModule->ConsumeProcess(xUser, strSkillID, xList, xDamageList, xResultList) == 0)
 			{
 				NFMsg::ReqAckUseSkill xReqAckUseSkill;
 				xReqAckUseSkill.set_skill_id(strSkillID);
-				*xReqAckUseSkill.mutable_user() = NFINetModule::NFToPB(nPlayerID);
+				*xReqAckUseSkill.mutable_user() = NFINetModule::NFToPB(xUser);
 				xReqAckUseSkill.set_use_index(xMsg.use_index());
 
 				for (int i = 0; i < xList.GetCount(); ++i)

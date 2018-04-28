@@ -53,9 +53,9 @@ protected:
 
 	virtual bool ExecuteEvent();
 private:
+	NF_SHARE_PTR<NFIActor> m_pMainActor;
 
-    Theron::Framework* m_pFramework;
-    NF_SHARE_PTR<NFIActor> m_pMainActor;
+    Theron::Framework mFramework;
     NFMapEx<int, NFIActor> mxActorMap;
 
 	NFQueue<NFIActorMessage> mxQueue;
