@@ -30,6 +30,7 @@
     <ClInclude Include="NFCNetClientModule.h" />
     <ClInclude Include="NFCNetModule.h" />
     <ClInclude Include="NFIHttpClient.h" />
+    <ClInclude Include="NFIHttpServer.h" />
     <ClInclude Include="NFINet.h" />
     <ClInclude Include="NFNetPlugin.h" />
   </ItemGroup>

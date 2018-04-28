@@ -275,6 +275,36 @@ void NFCProxyServerNet_ServerModule::OnSelectServerProcess(const NFSOCK nSockInd
         }
     }
 
+    //actually, if you want the game server working with a good performance then we need to find the game server with lowest workload
+	int nWorkload = 999999;
+	int nGameID = 0;
+    NFMapEx<int, ConnectData>& xServerList = m_pNetClientModule->GetServerList();
+    ConnectData* pGameData = xServerList.FirstNude();
+    while (pGameData && NF_SERVER_TYPES::NF_ST_GAME == pGameData->eServerType)
+    {
+        if (ConnectDataState::NORMAL == pGameData->eState)
+        {
+			if (pGameData->nWorkLoad < nWorkload)
+			{
+				nWorkload = pGameData->nWorkLoad;
+				nGameID = pGameData->nGameID;
+			}
+        }
+
+        pGameData = xServerList.NextNude();
+    }
+
+	if (nGameID > 0)
+	{
+		pNetObject->SetGameID(nGameID);
+
+		NFMsg::AckEventResult xMsg;
+		xMsg.set_event_code(NFMsg::EGameEventCode::EGEC_SELECTSERVER_SUCCESS);
+		m_pNetModule->SendMsgPB(NFMsg::EGameMsgID::EGMI_ACK_SELECT_SERVER, xMsg, nSockIndex);
+		return;
+	}
+	
+
     NFMsg::AckEventResult xSendMsg;
     xSendMsg.set_event_code(NFMsg::EGameEventCode::EGEC_SELECTSERVER_FAIL);
 	m_pNetModule->SendMsgPB(NFMsg::EGameMsgID::EGMI_ACK_SELECT_SERVER, xMsg, nSockIndex);
@@ -367,7 +397,8 @@ int NFCProxyServerNet_ServerModule::Transpond(const NFSOCK nSockIndex, const int
     //send message to one player
     if (xMsg.player_client_list_size() <= 0)
     {
-        NF_SHARE_PTR<NFSOCK> pFD = mxClientIdent.GetElement(NFINetModule::PBToNF(xMsg.player_id()));
+		NFGUID xClientIdent = NFINetModule::PBToNF(xMsg.player_id());
+        NF_SHARE_PTR<NFSOCK> pFD = mxClientIdent.GetElement(xClientIdent);
         if (pFD)
         {
             if (xMsg.has_hash_ident())
@@ -381,13 +412,16 @@ int NFCProxyServerNet_ServerModule::Transpond(const NFSOCK nSockIndex, const int
 
 			m_pNetModule->GetNet()->SendMsgWithOutHead(nMsgID, msg, nLen, *pFD);
         }
+		else if(xClientIdent.IsNull())
+		{
+			//send this msessage to all clientss
+			m_pNetModule->GetNet()->SendMsgToAllClientWithOutHead(nMsgID, msg, nLen);
+		}
 		//pFD is empty means end of connection, no need to send message to this client any more. And,
 		//we should never send a message that specified to a player to all clients here.
-		//else
-		//{
-		//	//send this msessage to all clientss
-		//	m_pNetModule->GetNet()->SendMsgToAllClientWithOutHead(nMsgID, msg, nLen);
-		//}
+		else
+		{
+		}
     }
 
     return true;

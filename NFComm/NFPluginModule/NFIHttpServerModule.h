@@ -20,28 +20,37 @@ public:
 
 	// register msg callback
 	template<typename BaseType>
-	bool AddReceiveCallBack(const std::string& strPath, BaseType* pBase, bool (BaseType::*handleRecieve)(const NFHttpRequest& req))
+	bool AddRequestHandler(const std::string& strPath, const NFHttpType eRequestType, BaseType* pBase, bool (BaseType::*handleRecieve)(const NFHttpRequest& req))
 	{
 		HTTP_RECEIVE_FUNCTOR functor = std::bind(handleRecieve, pBase, std::placeholders::_1);
 		HTTP_RECEIVE_FUNCTOR_PTR functorPtr(new HTTP_RECEIVE_FUNCTOR(functor));
-		return AddMsgCB(strPath, functorPtr);
+		return AddMsgCB(strPath, eRequestType, functorPtr);
 	}
 	template<typename BaseType>
-	bool AddNetCommonReceiveCallBack(BaseType* pBase, bool (BaseType::*handleRecieve)(const NFHttpRequest& req))
+	bool AddNetDefaultHandler(BaseType* pBase, bool (BaseType::*handleRecieve)(const NFHttpRequest& req))
 	{
 		HTTP_RECEIVE_FUNCTOR functor = std::bind(handleRecieve, pBase, std::placeholders::_1);
 		HTTP_RECEIVE_FUNCTOR_PTR functorPtr(new HTTP_RECEIVE_FUNCTOR(functor));
 
 		return AddComMsgCB(functorPtr);
 	}
-	
+	template<typename BaseType>
+	bool AddNetFilter(BaseType* pBase, NFWebStatus (BaseType::*handleRecieve)(const NFHttpRequest& req))
+	{
+		HTTP_FILTER_FUNCTOR functor = std::bind(handleRecieve, pBase, std::placeholders::_1);
+		HTTP_FILTER_FUNCTOR_PTR functorPtr(new HTTP_FILTER_FUNCTOR(functor));
+
+		return AddFilterCB(functorPtr);
+	}
 public:
 	virtual int InitServer(const unsigned short nPort) = 0;
 
 	virtual bool ResponseMsg(const NFHttpRequest& req, const std::string& strMsg, NFWebStatus code = NFWebStatus::WEB_OK, const std::string& reason = "OK") = 0;
 
-	virtual bool AddMsgCB(const std::string& strPath, const HTTP_RECEIVE_FUNCTOR_PTR& cb) = 0;	
-	virtual bool AddComMsgCB(const HTTP_RECEIVE_FUNCTOR_PTR& cb) = 0;	
+private:
+	virtual bool AddMsgCB(const std::string& strPath, const NFHttpType eRequestType, const HTTP_RECEIVE_FUNCTOR_PTR& cb) = 0;
+	virtual bool AddComMsgCB(const HTTP_RECEIVE_FUNCTOR_PTR& cb) = 0;
+	virtual bool AddFilterCB(const HTTP_FILTER_FUNCTOR_PTR& cb) = 0;
 };
 
 #endif

@@ -25,7 +25,7 @@
 #include <atomic>
 
 /*
-if any one upgurade the networking library(libevent), the evbuffer size must be changed
+if any one upgrade the networking library(libEvent), please change the size of evbuffer as below:
 *MODIFY--libevent/buffer.c
 #define EVBUFFER_MAX_READ	4096
 TO
@@ -45,6 +45,7 @@ void NFCNet::conn_eventcb(struct bufferevent* bev, short events, void* user_data
 {
     NetObject* pObject = (NetObject*)user_data;
     NFCNet* pNet = (NFCNet*)pObject->GetNet();
+	std::cout << "Thread ID = " << std::this_thread::get_id() << " FD = " << pObject->GetRealFD() << " Event ID =" << events <<std::endl;
 
     if (events & BEV_EVENT_CONNECTED)
     {
@@ -117,7 +118,7 @@ void NFCNet::listener_cb(struct evconnlistener* listener, evutil_socket_t fd, st
     bufferevent_setcb(bev, conn_readcb, conn_writecb, conn_eventcb, (void*)pObject);
 
     
-    bufferevent_enable(bev, EV_READ | EV_WRITE);
+    bufferevent_enable(bev, EV_READ | EV_WRITE | EV_CLOSED | EV_TIMEOUT);
 
     
     conn_eventcb(bev, BEV_EVENT_CONNECTED, (void*)pObject);
@@ -141,7 +142,7 @@ void NFCNet::conn_readcb(struct bufferevent* bev, void* user_data)
     if (pObject->NeedRemove())
     {
         return;
-    }
+}
 
     struct evbuffer* input = bufferevent_get_input(bev);
     if (!input)
@@ -150,25 +151,9 @@ void NFCNet::conn_readcb(struct bufferevent* bev, void* user_data)
     }
 
     size_t len = evbuffer_get_length(input);
-
-    //////////////////////////////////////////////////////////////////////////
-
-	static char* mstrTempBuffData = nullptr;
-	if (mstrTempBuffData == nullptr)
-	{
-		mstrTempBuffData = new char[NF_BUFFER_MAX_READ];
-	}
-
-	int nDataLen = len;
-	if (len > NF_BUFFER_MAX_READ)
-	{
-		nDataLen = NF_BUFFER_MAX_READ;
-	}
-
-    if (evbuffer_remove(input, mstrTempBuffData, nDataLen) > 0)
-    {
-        pObject->AddBuff(mstrTempBuffData, nDataLen);
-    }
+    unsigned char *pData = evbuffer_pullup(input, len);
+    pObject->AddBuff((const char *)pData, len);
+    evbuffer_drain(input, len);
 
     while (1)
     {
@@ -253,7 +238,7 @@ bool NFCNet::SendMsgToAllClient(const char* msg, const size_t nLen)
         NetObject* pNetObject = (NetObject*)it->second;
         if (pNetObject && !pNetObject->NeedRemove())
         {
-            bufferevent* bev = pNetObject->GetBuffEvent();
+            bufferevent* bev = (bufferevent*)pNetObject->GetUserData();
             if (NULL != bev && mbWorking )
             {
                 bufferevent_write(bev, msg, nLen);
@@ -280,7 +265,7 @@ bool NFCNet::SendMsg(const char* msg, const size_t nLen, const NFSOCK nSockIndex
         NetObject* pNetObject = (NetObject*)it->second;
         if (pNetObject)
         {
-            bufferevent* bev = pNetObject->GetBuffEvent();
+            bufferevent* bev = (bufferevent*)pNetObject->GetUserData();
             if (NULL != bev && mbWorking)
             {
                 bufferevent_write(bev, msg, nLen);
@@ -549,7 +534,7 @@ void NFCNet::CloseObject(const NFSOCK nSockIndex)
     {
         NetObject* pObject = it->second;
 
-        struct bufferevent* bev = pObject->GetBuffEvent();
+        struct bufferevent* bev = (bufferevent*)pObject->GetUserData();
 
         bufferevent_free(bev);
 

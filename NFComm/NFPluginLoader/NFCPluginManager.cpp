@@ -40,8 +40,6 @@
 
 #endif
 
-NFCoroutineManager mxCoroutineManager;
-
 void CoroutineExecute(void* arg)
 {
 	NFCPluginManager::Instance()->Execute();
@@ -101,7 +99,7 @@ inline bool NFCPluginManager::Init()
 		itInstance->second->Init();
 	}
 
-    mxCoroutineManager.Init(CoroutineExecute);
+   mxCoroutineManager.Init(CoroutineExecute);
 
 	return true;
 }
@@ -196,7 +194,7 @@ bool NFCPluginManager::ReLoadPlugin(const std::string & strPluginDLLName)
 		pModule->BeforeShut();
 		pModule->Shut();
 		pModule->Finalize();
-		
+
 		pModule = pPlugin->Next();
 	}
 
@@ -614,26 +612,15 @@ bool NFCPluginManager::UnLoadStaticPlugin(const std::string & strPluginDLLName)
 
 void NFCPluginManager::ExecuteCoScheduler()
 {
-    //NFCPluginManager::Instance()->Execute();
     mxCoroutineManager.ScheduleJob();
 }
 
-void NFCPluginManager::StartCoroutine()
-{
-    mxCoroutineManager.StartCoroutine();
-}
-
-void NFCPluginManager::StartCoroutine(CoroutineFunction func)
-{
-    mxCoroutineManager.StartCoroutine(func);
-}
-
-void NFCPluginManager::YieldCo(const float nSecond)
+void NFCPluginManager::YieldCo(const int64_t nSecond)
 {
 	mxCoroutineManager.YieldCo(nSecond);
 }
 
 void NFCPluginManager::YieldCo()
 {
-    mxCoroutineManager.YieldCo();
+   mxCoroutineManager.YieldCo();
 }

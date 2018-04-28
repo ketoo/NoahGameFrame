@@ -81,17 +81,7 @@ public:
         return pPluginManager;
     }
 
-	virtual void StartCoroutine()
-	{
-		pPluginManager->StartCoroutine();
-	}
-
-    virtual void StartCoroutine(CoroutineFunction func)
-    {
-        pPluginManager->StartCoroutine(func);
-    }
-
-	virtual void YieldCo(const float fSecond)
+	virtual void YieldCo(const int64_t fSecond)
 	{
 		pPluginManager->YieldCo(fSecond);
 	}

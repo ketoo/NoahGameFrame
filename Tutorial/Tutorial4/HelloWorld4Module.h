@@ -9,6 +9,7 @@
 #ifndef NFC_HELLO_WORLD4_H
 #define NFC_HELLO_WORLD4_H
 
+#include <thread>
 #include "NFComm/NFPluginModule/NFIKernelModule.h"
 #include "NFComm/NFPluginModule/NFIActorModule.h"
 #include "NFComm/NFPluginModule/NFIComponent.h"
@@ -35,14 +36,17 @@ public:
 
 	virtual int OnMsgEvent(const NFGUID& self, const int from, const int event, std::string& arg)
 	{
-		std::cout << "iddd: " << self.ToString() << " MsgID: " << event << " Data:" << arg << std::endl;
+
+		std::cout << "Thread: " << std::this_thread::get_id() << " " << self.ToString() << " MsgID: " << event << " Data:" << arg << std::endl;
+
+
 
 		return 0;
 	}
 
 	virtual int OnASyncEvent(const NFGUID& self, const int from, const int event, std::string& arg)
 	{
-		std::cout << "Hello, welcome to actor thread: " << self.ToString() << " MsgID: " << event << " Data:" << arg << std::endl;
+		std::cout << "------Actor thread: " << std::this_thread::get_id() << " " << self.ToString() << " MsgID: " << event << " Data:" << arg << std::endl;
 
 		return 0;
 	}

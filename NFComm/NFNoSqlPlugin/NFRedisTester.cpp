@@ -300,11 +300,11 @@ void NFRedisTester::TestString()
 	assert(mxRedisClient.GET(strKey, strGET) == true);
 	assert(strGET == strValue);
 
-	int nAPPEND;
+	int nAPPEND = 0;
 	assert(mxRedisClient.APPEND(strKey, strValue, nAPPEND) == true);
 	assert(nAPPEND == strValue.length() * 2);
 
-	int nSTRLEN;
+	int nSTRLEN = 0;
 	assert(mxRedisClient.STRLEN(strKey, nSTRLEN) == true);
 	assert(nSTRLEN == strValue.length() * 2);
 
