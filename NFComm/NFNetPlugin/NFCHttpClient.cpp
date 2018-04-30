@@ -115,6 +115,11 @@ bool NFCHttpClient::MakeRequest(const std::string& strUri,
     std::transform(lowwerScheme.begin(), lowwerScheme.end(), lowwerScheme.begin(), (int (*)(int)) std::tolower);
     if (scheme == NULL || (lowwerScheme.compare("https") != 0 && lowwerScheme.compare("http") != 0))
     {
+        if (http_uri)
+        {
+            evhttp_uri_free(http_uri);
+        }
+
         return false;
     }
 
@@ -127,6 +132,10 @@ bool NFCHttpClient::MakeRequest(const std::string& strUri,
     if (host == NULL)
     {
         printf("url must have a host \n");
+        if (http_uri)
+        {
+            evhttp_uri_free(http_uri);
+        }
         return false;
     }
 
@@ -170,8 +179,14 @@ bool NFCHttpClient::MakeRequest(const std::string& strUri,
 
 #if NF_ENABLE_SSL
     SSL *pSSL = SSL_new(m_pSslCtx);
-    if (pSSL == NULL) {
+    if (pSSL == NULL)
+    {
         printf("SSL_new err.");
+        if (http_uri)
+        {
+            evhttp_uri_free(http_uri);
+        }
+
         return false;
     }
 #endif
@@ -192,6 +207,12 @@ bool NFCHttpClient::MakeRequest(const std::string& strUri,
     if (bev == NULL)
     {
         fprintf(stderr, "bufferevent_socket_new() failed\n");
+
+        if (http_uri)
+        {
+            evhttp_uri_free(http_uri);
+        }
+
         return false;
     }
 
@@ -206,6 +227,12 @@ bool NFCHttpClient::MakeRequest(const std::string& strUri,
     if (evcon == NULL)
     {
         fprintf(stderr, "evhttp_connection_base_bufferevent_new() failed\n");
+
+        if (http_uri)
+        {
+            evhttp_uri_free(http_uri);
+        }
+
         return false;
     }
 
@@ -225,6 +252,12 @@ bool NFCHttpClient::MakeRequest(const std::string& strUri,
     if (req == NULL)
     {
         fprintf(stderr, "evhttp_request_new() failed\n");
+
+        if (http_uri)
+        {
+            evhttp_uri_free(http_uri);
+        }
+
         return false;
     }
 
@@ -252,6 +285,12 @@ bool NFCHttpClient::MakeRequest(const std::string& strUri,
     if (r_ != 0)
     {
         fprintf(stderr, "evhttp_make_request() failed\n");
+
+        if (http_uri)
+        {
+            evhttp_uri_free(http_uri);
+        }
+
         return false;
     }
 
