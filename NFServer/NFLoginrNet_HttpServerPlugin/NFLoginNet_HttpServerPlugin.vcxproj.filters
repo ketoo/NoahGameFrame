@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="dllmain.cpp" />
+    <ClCompile Include="NFCLoginNet_HttpServerModule.cpp" />
+    <ClCompile Include="NFLoginNet_HttpServerPlugin.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="NFCLoginNet_HttpServerModule.h" />
+    <ClInclude Include="NFLoginNet_HttpServerPlugin.h" />
+    <ClInclude Include="NFRequestLogin.h">
+      <Filter>NFResponse</Filter>
+    </ClInclude>
+    <ClInclude Include="NFResponseLogin.h">
+      <Filter>NFRequest</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="NFResponse">
+      <UniqueIdentifier>{517c322a-1fe7-4460-a794-f492014e6fcd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="NFRequest">
+      <UniqueIdentifier>{dc99b931-c729-4130-8828-518d74b4c82d}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>
