@@ -356,6 +356,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "NFTester", "NFTester", "{79
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "NFNoSqlTester", "NFComm\NFNoSqlPlugin\NFNoSqlTester.vcxproj", "{C627AAF0-CC57-4933-813E-916FEE450511}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "NFLoginNet_HttpServerPlugin", "NFServer\NFLoginrNet_HttpServerPlugin\NFLoginNet_HttpServerPlugin.vcxproj", "{5EBB5D6A-5C7B-4A18-8F60-4094173771BD}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -712,6 +714,12 @@ Global
 		{C627AAF0-CC57-4933-813E-916FEE450511}.Release|x64.ActiveCfg = Release|x64
 		{C627AAF0-CC57-4933-813E-916FEE450511}.Release|x64.Build.0 = Release|x64
 		{C627AAF0-CC57-4933-813E-916FEE450511}.Release|x86.ActiveCfg = Release|x64
+		{5EBB5D6A-5C7B-4A18-8F60-4094173771BD}.Debug|x64.ActiveCfg = Debug|x64
+		{5EBB5D6A-5C7B-4A18-8F60-4094173771BD}.Debug|x64.Build.0 = Debug|x64
+		{5EBB5D6A-5C7B-4A18-8F60-4094173771BD}.Debug|x86.ActiveCfg = Debug|x64
+		{5EBB5D6A-5C7B-4A18-8F60-4094173771BD}.Release|x64.ActiveCfg = Release|x64
+		{5EBB5D6A-5C7B-4A18-8F60-4094173771BD}.Release|x64.Build.0 = Release|x64
+		{5EBB5D6A-5C7B-4A18-8F60-4094173771BD}.Release|x86.ActiveCfg = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -779,6 +787,7 @@ Global
 		{2BAF285D-1AAE-451F-A096-830A5D122CCD} = {E78C3B11-6914-488A-B068-B3BF4F5150F5}
 		{5B999220-7D01-48C4-8892-C601E3B91847} = {410C8A08-63DC-45B2-ADB9-08CD991861F0}
 		{C627AAF0-CC57-4933-813E-916FEE450511} = {799B1E29-07FC-4D54-96D3-EDBB4C40CF21}
+		{5EBB5D6A-5C7B-4A18-8F60-4094173771BD} = {9F68A20B-2B35-4C33-9C36-872C1CA2D5BE}
 	EndGlobalSection
 	GlobalSection(DPCodeReviewSolutionGUID) = preSolution
 		DPCodeReviewSolutionGUID = {00000000-0000-0000-0000-000000000000}

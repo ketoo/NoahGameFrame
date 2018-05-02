@@ -6,7 +6,7 @@
     <LocalDebuggerWorkingDirectory>$(SolutionDir)\_Out\$(Configuration)\</LocalDebuggerWorkingDirectory>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <LocalDebuggerCommandArguments>Server=MasterServer ID=7 PluginX.xml</LocalDebuggerCommandArguments>
+    <LocalDebuggerCommandArguments>Server=TutorialServer ID=0 PluginX.xml</LocalDebuggerCommandArguments>
     <LocalDebuggerWorkingDirectory>..\..\_Out\Debug</LocalDebuggerWorkingDirectory>
     <DebuggerFlavor>WindowsLocalDebugger</DebuggerFlavor>
   </PropertyGroup>

@@ -6,6 +6,7 @@
 //
 // -------------------------------------------------------------------------
 
+#include "NFCHttpServer.h"
 #include "NFCHttpServerModule.h"
 
 NFCHttpServerModule::NFCHttpServerModule(NFIPluginManager* p)
@@ -38,29 +39,41 @@ int NFCHttpServerModule::InitServer(const unsigned short nPort)
 {
     m_pHttpServer = new NFCHttpServer(this, &NFCHttpServerModule::OnReceiveNetPack);
     std::cout << "Open http port:" << nPort << std::endl;
+
+	if (mFilter)
+	{
+		m_pHttpServer->AddFilter(mFilter);
+	}
+
     return m_pHttpServer->InitServer(nPort);
 }
 
 bool NFCHttpServerModule::OnReceiveNetPack(const NFHttpRequest& req)
 {
-    auto it = mMsgCBMap.find(req.path);
-    if (mMsgCBMap.end() != it)
-    {
-        HTTP_RECEIVE_FUNCTOR_PTR& pFunPtr = it->second;
-        HTTP_RECEIVE_FUNCTOR* pFunc = pFunPtr.get();
-        pFunc->operator()(req);
-    }
-    else
+	bool bHandled = false;
+	auto it = mMsgCBMap.GetElement(req.type);
+	if (it)
+	{
+		auto itPath = it->find(req.path);
+		if (it->end() != itPath)
+		{
+			HTTP_RECEIVE_FUNCTOR_PTR& pFunPtr = itPath->second;
+			HTTP_RECEIVE_FUNCTOR* pFunc = pFunPtr.get();
+			pFunc->operator()(req);
+
+			bHandled = true;
+		}
+	}
+
+    if (!bHandled)
     {
         if (mComMsgCBList.size() > 0)
         {
-            for (std::list<HTTP_RECEIVE_FUNCTOR_PTR>::iterator it = mComMsgCBList.begin();
-                 it != mComMsgCBList.end(); ++it)
-            {
-                HTTP_RECEIVE_FUNCTOR_PTR& pFunPtr = *it;
-                HTTP_RECEIVE_FUNCTOR* pFunc = pFunPtr.get();
-                pFunc->operator()(req);
-            }
+			for (auto it : mComMsgCBList)
+			{
+				HTTP_RECEIVE_FUNCTOR* pFunc = it.get();
+				pFunc->operator()(req);
+			}
         }
 		else
         {
@@ -71,13 +84,27 @@ bool NFCHttpServerModule::OnReceiveNetPack(const NFHttpRequest& req)
 	return true;
 }
 
-bool NFCHttpServerModule::AddMsgCB(const std::string& strCommand, const HTTP_RECEIVE_FUNCTOR_PTR& cb)
+bool NFCHttpServerModule::AddMsgCB(const std::string& strCommand, const NFHttpType eRequestType, const HTTP_RECEIVE_FUNCTOR_PTR& cb)
 {
-    if (mMsgCBMap.find(strCommand) == mMsgCBMap.end())
-    {
-        mMsgCBMap.insert(std::map<std::string, HTTP_RECEIVE_FUNCTOR_PTR>::value_type(strCommand, cb));
-        return true;
-    }
+	auto it = mMsgCBMap.GetElement(eRequestType);
+	if (!it)
+	{
+		mMsgCBMap.AddElement(eRequestType, NF_SHARE_PTR<std::map<std::string, HTTP_RECEIVE_FUNCTOR_PTR>>(NF_NEW std::map<std::string, HTTP_RECEIVE_FUNCTOR_PTR>()));
+	}
+
+	it = mMsgCBMap.GetElement(eRequestType);
+	auto itPath = it->find(strCommand);
+	if (it->end() == itPath)
+	{
+		it->insert(std::map<std::string, HTTP_RECEIVE_FUNCTOR_PTR>::value_type(strCommand, cb));
+
+		return true;
+	}
+	else
+	{
+		std::cout << eRequestType << " " << strCommand << "" << std::endl;
+	}
+
     return false;
 }
 
@@ -87,9 +114,14 @@ bool NFCHttpServerModule::AddComMsgCB(const HTTP_RECEIVE_FUNCTOR_PTR& cb)
     return true;
 }
 
-bool NFCHttpServerModule::AddFilterCB(const HTTP_RECEIVE_FUNCTOR_PTR& cb)
+bool NFCHttpServerModule::AddFilterCB(const HTTP_FILTER_FUNCTOR_PTR& cb)
 {
-    m_pHttpServer->AddFilter(cb);
+	mFilter = cb;
+	if (m_pHttpServer)
+	{
+		m_pHttpServer->AddFilter(cb);
+	}
+
     return true;
 }
 

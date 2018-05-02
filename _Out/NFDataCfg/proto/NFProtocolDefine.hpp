@@ -314,24 +314,6 @@ namespace NFrame
 		// Record
 
 	};
-	class HttpServer
-	{
-	public:
-		//Class name
-		static const std::string& ThisName(){ static std::string x = "HttpServer"; return x; };		// IObject
-		static const std::string& ClassName(){ static std::string x = "ClassName"; return x; };// string
-		static const std::string& ConfigID(){ static std::string x = "ConfigID"; return x; };// string
-		static const std::string& GroupID(){ static std::string x = "GroupID"; return x; };// int
-		static const std::string& ID(){ static std::string x = "ID"; return x; };// string
-		static const std::string& Position(){ static std::string x = "Position"; return x; };// vector3
-		static const std::string& SceneID(){ static std::string x = "SceneID"; return x; };// int
-		// Property
-		static const std::string& ServerID(){ static std::string x = "ServerID"; return x; };// int
-		static const std::string& WebPort(){ static std::string x = "WebPort"; return x; };// int
-		static const std::string& WebRootPath(){ static std::string x = "WebRootPath"; return x; };// string
-		// Record
-
-	};
 	class IObject
 	{
 	public:
@@ -1154,6 +1136,7 @@ namespace NFrame
 		static const std::string& Port(){ static std::string x = "Port"; return x; };// int
 		static const std::string& ServerID(){ static std::string x = "ServerID"; return x; };// int
 		static const std::string& Type(){ static std::string x = "Type"; return x; };// int
+		static const std::string& WebPort(){ static std::string x = "WebPort"; return x; };// int
 		// Record
 
 	};
