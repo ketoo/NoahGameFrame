@@ -23,8 +23,7 @@ bool NFCHelloWorld::AfterInit()
 	m_pHttpNetModule->AddRequestHandler("/json", NFHttpType::NF_HTTP_REQ_DELETE, this, &NFCHelloWorld::OnCommandQuery);
 	m_pHttpNetModule->AddRequestHandler("/json", NFHttpType::NF_HTTP_REQ_PUT, this, &NFCHelloWorld::OnCommandQuery);
 
-	m_pHttpNetModule->AddNetDefaultHandler(this, &NFCHelloWorld::OnCommonQuery);
-	m_pHttpNetModule->AddNetFilter(this, &NFCHelloWorld::OnFilter);
+	m_pHttpNetModule->AddNetFilter("/json", this, &NFCHelloWorld::OnFilter);
 
 	m_pHttpNetModule->InitServer(8080);
 
