@@ -16,7 +16,7 @@ class NFIHttpServerModule
 	: public NFIModule
 {
 public:
-	virtual ~NFIHttpServerModule() {};	
+	virtual ~NFIHttpServerModule() {};
 
 	// register msg callback
 	template<typename BaseType>
@@ -35,12 +35,12 @@ public:
 		return AddComMsgCB(functorPtr);
 	}
 	template<typename BaseType>
-	bool AddNetFilter(BaseType* pBase, NFWebStatus (BaseType::*handleRecieve)(const NFHttpRequest& req))
+	bool AddNetFilter(const std::string& strPath, BaseType* pBase, NFWebStatus(BaseType::*handleFilter)(const NFHttpRequest& req))
 	{
-		HTTP_FILTER_FUNCTOR functor = std::bind(handleRecieve, pBase, std::placeholders::_1);
+		HTTP_FILTER_FUNCTOR functor = std::bind(handleFilter, pBase, std::placeholders::_1);
 		HTTP_FILTER_FUNCTOR_PTR functorPtr(new HTTP_FILTER_FUNCTOR(functor));
 
-		return AddFilterCB(functorPtr);
+		return AddFilterCB(strPath, functorPtr);
 	}
 public:
 	virtual int InitServer(const unsigned short nPort) = 0;
@@ -49,8 +49,9 @@ public:
 
 private:
 	virtual bool AddMsgCB(const std::string& strPath, const NFHttpType eRequestType, const HTTP_RECEIVE_FUNCTOR_PTR& cb) = 0;
-	virtual bool AddComMsgCB(const HTTP_RECEIVE_FUNCTOR_PTR& cb) = 0;
-	virtual bool AddFilterCB(const HTTP_FILTER_FUNCTOR_PTR& cb) = 0;
-};
+	virtual bool AddFilterCB(const std::string& strPath, const HTTP_FILTER_FUNCTOR_PTR& cb) = 0;
 
+	virtual bool AddComMsgCB(const HTTP_RECEIVE_FUNCTOR_PTR& cb) = 0;
+
+};
 #endif

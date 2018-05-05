@@ -19,7 +19,6 @@ NFCHttpServerModule::~NFCHttpServerModule()
 {
     if (m_pHttpServer)
     {
-        m_pHttpServer->Final();
         delete m_pHttpServer;
         m_pHttpServer = NULL;
     }
@@ -37,20 +36,14 @@ bool NFCHttpServerModule::Execute()
 
 int NFCHttpServerModule::InitServer(const unsigned short nPort)
 {
-    m_pHttpServer = new NFCHttpServer(this, &NFCHttpServerModule::OnReceiveNetPack);
+	m_pHttpServer = new NFCHttpServer(this, &NFCHttpServerModule::OnReceiveNetPack, &NFCHttpServerModule::OnFilterPack);
     std::cout << "Open http port:" << nPort << std::endl;
-
-	if (mFilter)
-	{
-		m_pHttpServer->AddFilter(mFilter);
-	}
 
     return m_pHttpServer->InitServer(nPort);
 }
 
 bool NFCHttpServerModule::OnReceiveNetPack(const NFHttpRequest& req)
 {
-	bool bHandled = false;
 	auto it = mMsgCBMap.GetElement(req.type);
 	if (it)
 	{
@@ -60,28 +53,26 @@ bool NFCHttpServerModule::OnReceiveNetPack(const NFHttpRequest& req)
 			HTTP_RECEIVE_FUNCTOR_PTR& pFunPtr = itPath->second;
 			HTTP_RECEIVE_FUNCTOR* pFunc = pFunPtr.get();
 			pFunc->operator()(req);
-
-			bHandled = true;
+			return true;
 		}
 	}
 
-    if (!bHandled)
-    {
-        if (mComMsgCBList.size() > 0)
-        {
-			for (auto it : mComMsgCBList)
-			{
-				HTTP_RECEIVE_FUNCTOR* pFunc = it.get();
-				pFunc->operator()(req);
-			}
-        }
-		else
-        {
-            std::cout << "no http receiver:" << req.path << std::endl;
-        }
-    }
+		//bHandled.get()->operator()(req);
 
 	return true;
+}
+
+NFWebStatus NFCHttpServerModule::OnFilterPack(const NFHttpRequest & req)
+{
+	auto itPath = mMsgFliterMap.find(req.path);
+	if (mMsgFliterMap.end() != itPath)
+	{
+		HTTP_FILTER_FUNCTOR_PTR& pFunPtr = itPath->second;
+		HTTP_FILTER_FUNCTOR* pFunc = pFunPtr.get();
+		return pFunc->operator()(req);
+	}
+
+	return NFWebStatus::WEB_OK;
 }
 
 bool NFCHttpServerModule::AddMsgCB(const std::string& strCommand, const NFHttpType eRequestType, const HTTP_RECEIVE_FUNCTOR_PTR& cb)
@@ -110,16 +101,16 @@ bool NFCHttpServerModule::AddMsgCB(const std::string& strCommand, const NFHttpTy
 
 bool NFCHttpServerModule::AddComMsgCB(const HTTP_RECEIVE_FUNCTOR_PTR& cb)
 {
-    mComMsgCBList.push_back(cb);
+    mComMsgCBList = cb;
     return true;
 }
 
-bool NFCHttpServerModule::AddFilterCB(const HTTP_FILTER_FUNCTOR_PTR& cb)
+bool NFCHttpServerModule::AddFilterCB(const std::string& strCommand, const HTTP_FILTER_FUNCTOR_PTR& cb)
 {
-	mFilter = cb;
-	if (m_pHttpServer)
+	auto it = mMsgFliterMap.find(strCommand);
+	if (it == mMsgFliterMap.end())
 	{
-		m_pHttpServer->AddFilter(cb);
+		mMsgFliterMap.insert(std::map<std::string, HTTP_FILTER_FUNCTOR_PTR>::value_type(strCommand, cb));
 	}
 
     return true;

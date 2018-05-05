@@ -84,24 +84,11 @@ typedef std::shared_ptr<HTTP_FILTER_FUNCTOR> HTTP_FILTER_FUNCTOR_PTR;
 class NFIHttpServer
 {
 public:
-	template<typename BaseType>
-	void AddFilter(BaseType* pBaseType, NFWebStatus (BaseType::*handleRecieve)(const NFHttpRequest& req))
-	{
-		HTTP_FILTER_FUNCTOR functor = std::bind(handleRecieve, pBaseType, std::placeholders::_1);
-		HTTP_FILTER_FUNCTOR_PTR functorPtr(new HTTP_FILTER_FUNCTOR(functor));
-		return AddFilter(functorPtr);
-	}
-
     virtual bool Execute() = 0;
 
     virtual int InitServer(const unsigned short nPort) = 0;
 
-	virtual bool Final() = 0;
-
     virtual bool ResponseMsg(const NFHttpRequest& req, const std::string& strMsg, NFWebStatus code, const std::string& strReason = "OK") = 0;
-
-	virtual void AddFilter(const HTTP_FILTER_FUNCTOR_PTR& ptr) = 0;
-
 };
 
 #endif

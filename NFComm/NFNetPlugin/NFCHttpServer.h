@@ -51,24 +51,27 @@ public:
     }
 
     template<typename BaseType>
-    NFCHttpServer(BaseType* pBaseType, bool (BaseType::*handleRecieve)(const NFHttpRequest& req))
+    NFCHttpServer(BaseType* pBaseType, bool (BaseType::*handleRecieve)(const NFHttpRequest& req), NFWebStatus (BaseType::*handleFilter)(const NFHttpRequest& req))
     {
         mxBase = NULL;
-        mReceiveCB = std::bind(handleRecieve, pBaseType, std::placeholders::_1);
+		mReceiveCB = std::bind(handleRecieve, pBaseType, std::placeholders::_1);
+		mFilter = std::bind(handleFilter, pBaseType, std::placeholders::_1);
     }
 
-    virtual ~NFCHttpServer(){};
-
+    virtual ~NFCHttpServer()
+	{
+		if (mxBase)
+		{
+			event_base_free(mxBase);
+			mxBase = NULL;
+		}
+	};
 
     virtual bool Execute();
 
     virtual int InitServer(const unsigned short nPort);
 
-    virtual bool Final();
-
     virtual bool ResponseMsg(const NFHttpRequest& req, const std::string& strMsg, NFWebStatus code, const std::string& strReason = "OK");
-
-	virtual void AddFilter(const HTTP_FILTER_FUNCTOR_PTR& ptr);
 
 private:
     static void listener_cb(struct evhttp_request* req, void* arg);
@@ -76,7 +79,7 @@ private:
 private:
     struct event_base* mxBase;
 	HTTP_RECEIVE_FUNCTOR mReceiveCB;
-	HTTP_FILTER_FUNCTOR_PTR mFilter;
+	HTTP_FILTER_FUNCTOR mFilter;
 };
 
 #endif
