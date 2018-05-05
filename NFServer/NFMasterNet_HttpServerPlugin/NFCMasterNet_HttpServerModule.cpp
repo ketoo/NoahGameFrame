@@ -25,7 +25,7 @@ bool NFCMasterNet_HttpServerModule::AfterInit()
 	m_pHttpNetModule->AddRequestHandler("/json", NFHttpType::NF_HTTP_REQ_PUT, this, &NFCMasterNet_HttpServerModule::OnCommandQuery);
 
 	m_pHttpNetModule->AddNetDefaultHandler(this, &NFCMasterNet_HttpServerModule::OnCommonQuery);
-	m_pHttpNetModule->AddNetFilter(this, &NFCMasterNet_HttpServerModule::OnFilter);
+	m_pHttpNetModule->AddNetFilter("/json", this, &NFCMasterNet_HttpServerModule::OnFilter);
 
 	NF_SHARE_PTR<NFIClass> xLogicClass = m_pLogicClassModule->GetElement(NFrame::Server::ThisName());
 	if (xLogicClass)

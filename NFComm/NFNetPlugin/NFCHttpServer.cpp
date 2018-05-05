@@ -1,12 +1,6 @@
 ﻿#include <thread>
 #include "NFCHttpServer.h"
 
-
-void NFCHttpServer::AddFilter(const HTTP_FILTER_FUNCTOR_PTR& ptr)
-{
-	mFilter = ptr;
-}
-
 bool NFCHttpServer::Execute()
 {
     if (mxBase)
@@ -16,7 +10,6 @@ bool NFCHttpServer::Execute()
 
     return true;
 }
-
 
 int NFCHttpServer::InitServer(const unsigned short port)
 {
@@ -65,40 +58,39 @@ int NFCHttpServer::InitServer(const unsigned short port)
     return 0;
 }
 
-
 void NFCHttpServer::listener_cb(struct evhttp_request* req, void* arg)
 {
 	std::cout << "threadid " << std::this_thread::get_id() << std::endl;
 
-    NFCHttpServer* pNet = (NFCHttpServer*) arg;
-    NFHttpRequest request;
-    request.req = req;
+	NFCHttpServer* pNet = (NFCHttpServer*)arg;
+	NFHttpRequest request;
+	request.req = req;
 
 	//headers
 	struct evkeyvalq * header = evhttp_request_get_input_headers(req);
 	struct evkeyval* kv = header->tqh_first;
-	while (kv) 
+	while (kv)
 	{
 		request.headers.insert(std::map<std::string, std::string>::value_type(kv->key, kv->value));
 
 		kv = kv->next.tqe_next;
 	}
 
-    //uri
-    const char* uri = evhttp_request_get_uri(req);
+	//uri
+	const char* uri = evhttp_request_get_uri(req);
 	request.url = uri;
 	request.remoteHost = evhttp_request_get_host(req);
 	request.type = (NFHttpType)evhttp_request_get_command(req);
 
-    //get decodeUri
-    struct evhttp_uri* decoded = evhttp_uri_parse(uri);
-    if (!decoded)
-    {
+	//get decodeUri
+	struct evhttp_uri* decoded = evhttp_uri_parse(uri);
+	if (!decoded)
+	{
 		std::cout << "It's not a good URI. Sending BADREQUEST" << std::endl;
-        evhttp_send_error(req, HTTP_BADREQUEST, 0);
-        return;
-    }
-    
+		evhttp_send_error(req, HTTP_BADREQUEST, 0);
+		return;
+	}
+
 	//path
 	request.path = evhttp_uri_get_path(decoded);
 	evhttp_uri_free(decoded);
@@ -131,35 +123,31 @@ void NFCHttpServer::listener_cb(struct evhttp_request* req, void* arg)
 
 	if (pNet->mFilter)
 	{
-        HTTP_FILTER_FUNCTOR_PTR pFunc = pNet->mFilter;
-		if (pFunc)
+		//return 401
+		NFWebStatus xWebStatus = pNet->mFilter(request);
+		if (xWebStatus != NFWebStatus::WEB_OK)
 		{
-			//return 401
-			NFWebStatus xWebStatus = pFunc->operator()(request);
-			if (xWebStatus != NFWebStatus::WEB_OK)
-			{
-				//401
-				pNet->ResponseMsg(request, "Filter error", xWebStatus);
-				return;
-			}
+			//401
+			pNet->ResponseMsg(request, "Filter error", xWebStatus);
+			return;
+		}
+
+		// call cb
+		if (pNet->mReceiveCB)
+		{
+			pNet->mReceiveCB(request);
+		}
+		else
+		{
+			pNet->ResponseMsg(request, "NO PROCESSER", NFWebStatus::WEB_ERROR);
 		}
 	}
-
-    // call cb
-    if (pNet->mReceiveCB)
-    {
-        pNet->mReceiveCB(request);
-    }
-	else
-    {
-        pNet->ResponseMsg(request, "NO PROCESSER", NFWebStatus::WEB_ERROR);
-    }
 }
 
 bool NFCHttpServer::ResponseMsg(const NFHttpRequest& req, const std::string& strMsg, NFWebStatus code,
                                 const std::string& strReason)
 {
-    evhttp_request* pHttpReq = (evhttp_request*) req.req;
+	evhttp_request* pHttpReq = (evhttp_request*)req.req;
     //create buffer
     struct evbuffer* eventBuffer = evbuffer_new();
 
@@ -172,17 +160,6 @@ bool NFCHttpServer::ResponseMsg(const NFHttpRequest& req, const std::string& str
 
     //free
     evbuffer_free(eventBuffer);
-
-    return true;
-}
-
-bool NFCHttpServer::Final()
-{
-    if (mxBase)
-    {
-        event_base_free(mxBase);
-        mxBase = NULL;
-    }
 
     return true;
 }

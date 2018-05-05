@@ -31,7 +31,7 @@ bool NFCLoginNet_HttpServerModule::AfterInit()
 	m_pHttpNetModule->AddRequestHandler("/login", NFHttpType::NF_HTTP_REQ_POST, this, &NFCLoginNet_HttpServerModule::OnLogin);
 
 	m_pHttpNetModule->AddNetDefaultHandler(this, &NFCLoginNet_HttpServerModule::OnCommonQuery);
-	m_pHttpNetModule->AddNetFilter(this, &NFCLoginNet_HttpServerModule::OnFilter);
+	m_pHttpNetModule->AddNetFilter("/login", this, &NFCLoginNet_HttpServerModule::OnFilter);
 
 	NF_SHARE_PTR<NFIClass> xLogicClass = m_pLogicClassModule->GetElement(NFrame::Server::ThisName());
 	if (xLogicClass)
