@@ -53,25 +53,22 @@ NFCNoSqlDriver::~NFCNoSqlDriver()
 
 const bool NFCNoSqlDriver::Connect(const std::string & strDns, const int nPort, const std::string & strAuthKey)
 {
-
-		if (m_pNoSqlClient)
-		{
-			delete m_pNoSqlClient;
-			m_pNoSqlClient = NULL;
-		}
-
-		this->strIP = strDns;
-		this->nPort = nPort;
-		this->strAuthKey = strAuthKey;
-		m_pNoSqlClient = redisAsyncConnect(strDns.c_str(), nPort);
-		//m_pNoSqlClient = new redis::client(strDns, nPort, strAuthKey);
-
-		//redisAsyncSetConnectCallback(m_pNoSqlClient, connectCallback);//设置连接回调  
-		//redisAsyncSetDisconnectCallback(m_pNoSqlClient, disconnectCallback);//设置断开连接回调  
-
-		mbEnable = true;
+	if (m_pNoSqlClient)
+	{
+		delete m_pNoSqlClient;
+		m_pNoSqlClient = NULL;
 	}
 
+	this->strIP = strDns;
+	this->nPort = nPort;
+	this->strAuthKey = strAuthKey;
+	//m_pNoSqlClient = redisAsyncConnect(strDns.c_str(), nPort);
+	m_pNoSqlClient = new redis::client(strDns, nPort, strAuthKey);
+
+	//redisAsyncSetConnectCallback(m_pNoSqlClient, connectCallback);//设置连接回调  
+	//redisAsyncSetDisconnectCallback(m_pNoSqlClient, disconnectCallback);//设置断开连接回调  
+
+	mbEnable = true;
 	return mbEnable;
 }
 
