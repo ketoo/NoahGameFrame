@@ -1,4 +1,4 @@
-// -------------------------------------------------------------------------
+﻿// -------------------------------------------------------------------------
 //    @FileName			:    NFCNoSqlDriver.cpp
 //    @Author           :    LvSheng.Huang
 //    @Date             :    2010-12-19 11:05
@@ -53,8 +53,7 @@ NFCNoSqlDriver::~NFCNoSqlDriver()
 
 const bool NFCNoSqlDriver::Connect(const std::string & strDns, const int nPort, const std::string & strAuthKey)
 {
-	try
-	{
+
 		if (m_pNoSqlClient)
 		{
 			delete m_pNoSqlClient;
@@ -64,14 +63,14 @@ const bool NFCNoSqlDriver::Connect(const std::string & strDns, const int nPort, 
 		this->strIP = strDns;
 		this->nPort = nPort;
 		this->strAuthKey = strAuthKey;
-		m_pNoSqlClient = new redis::client(strDns, nPort, strAuthKey);
+		m_pNoSqlClient = redisAsyncConnect(strDns.c_str(), nPort);
+		//m_pNoSqlClient = new redis::client(strDns, nPort, strAuthKey);
 
+		//redisAsyncSetConnectCallback(m_pNoSqlClient, connectCallback);//设置连接回调  
+		//redisAsyncSetDisconnectCallback(m_pNoSqlClient, disconnectCallback);//设置断开连接回调  
 
 		mbEnable = true;
 	}
-
-
-	REDIS_CATCH(__FUNCTION__, __LINE__);
 
 	return mbEnable;
 }
@@ -161,13 +160,7 @@ const bool NFCNoSqlDriver::Expireat(const std::string & strKey, unsigned int nUn
 		return false;
 	}
 
-	try
-	{
-		//m_pRedisClient->expire(strKey, nUnixTime);
-		//return true;
-	}
-	REDIS_CATCH(__FUNCTION__, __LINE__);
-
+	
 	return false;
 }
 

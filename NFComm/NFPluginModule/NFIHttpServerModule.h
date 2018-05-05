@@ -26,14 +26,7 @@ public:
 		HTTP_RECEIVE_FUNCTOR_PTR functorPtr(new HTTP_RECEIVE_FUNCTOR(functor));
 		return AddMsgCB(strPath, eRequestType, functorPtr);
 	}
-	template<typename BaseType>
-	bool AddNetDefaultHandler(BaseType* pBase, bool (BaseType::*handleRecieve)(const NFHttpRequest& req))
-	{
-		HTTP_RECEIVE_FUNCTOR functor = std::bind(handleRecieve, pBase, std::placeholders::_1);
-		HTTP_RECEIVE_FUNCTOR_PTR functorPtr(new HTTP_RECEIVE_FUNCTOR(functor));
 
-		return AddComMsgCB(functorPtr);
-	}
 	template<typename BaseType>
 	bool AddNetFilter(const std::string& strPath, BaseType* pBase, NFWebStatus(BaseType::*handleFilter)(const NFHttpRequest& req))
 	{
@@ -50,8 +43,6 @@ public:
 private:
 	virtual bool AddMsgCB(const std::string& strPath, const NFHttpType eRequestType, const HTTP_RECEIVE_FUNCTOR_PTR& cb) = 0;
 	virtual bool AddFilterCB(const std::string& strPath, const HTTP_FILTER_FUNCTOR_PTR& cb) = 0;
-
-	virtual bool AddComMsgCB(const HTTP_RECEIVE_FUNCTOR_PTR& cb) = 0;
 
 };
 #endif

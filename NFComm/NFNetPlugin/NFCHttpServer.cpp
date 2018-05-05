@@ -131,16 +131,16 @@ void NFCHttpServer::listener_cb(struct evhttp_request* req, void* arg)
 			pNet->ResponseMsg(request, "Filter error", xWebStatus);
 			return;
 		}
+	}
 
-		// call cb
-		if (pNet->mReceiveCB)
-		{
-			pNet->mReceiveCB(request);
-		}
-		else
-		{
-			pNet->ResponseMsg(request, "NO PROCESSER", NFWebStatus::WEB_ERROR);
-		}
+	// call cb
+	if (pNet->mReceiveCB)
+	{
+		pNet->mReceiveCB(request);
+	}
+	else
+	{
+		pNet->ResponseMsg(request, "NO PROCESSER", NFWebStatus::WEB_ERROR);
 	}
 }
 
