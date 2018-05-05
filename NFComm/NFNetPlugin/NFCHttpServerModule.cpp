@@ -113,3 +113,13 @@ bool NFCHttpServerModule::ResponseMsg(const NFHttpRequest& req, const std::strin
 {
     return m_pHttpServer->ResponseMsg(req, strMsg, code, strReason);
 }
+
+/*
+bool NFCHttpServerModule::ResponseMsg(const NFHttpRequest & req, const NFIResponse & xResponse)
+{
+	ajson::string_stream ss;
+	ajson::save_to(ss, xResponse);
+
+	return m_pHttpServer->ResponseMsg(req, ss.str(), NFWebStatus::WEB_OK);
+}
+*/

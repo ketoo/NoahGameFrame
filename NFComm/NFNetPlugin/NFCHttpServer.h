@@ -48,6 +48,7 @@ class NFCHttpServer : public NFIHttpServer
 public:
     NFCHttpServer()
     {
+		mnIndex = 0;
     }
 
     template<typename BaseType>
@@ -76,10 +77,16 @@ public:
 private:
     static void listener_cb(struct evhttp_request* req, void* arg);
 
+	NFHttpRequest* AllowHttpRequest();
+
 private:
     struct event_base* mxBase;
 	HTTP_RECEIVE_FUNCTOR mReceiveCB;
 	HTTP_FILTER_FUNCTOR mFilter;
+
+	int64_t mnIndex;
+	std::map<int64_t, NFHttpRequest*> mxHttpRequestMap;
+	std::list<NFHttpRequest*> mxHttpRequestPool;
 };
 
 #endif
