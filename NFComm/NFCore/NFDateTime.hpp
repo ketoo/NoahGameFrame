@@ -221,22 +221,47 @@ public:
 
 	NFDateTime(int day, int month, int year)
 	{
+		InitStaticData();
+
 		Init(day, month, year, 0, 0, 0, 0);
 	}
 
 	NFDateTime(int day, int month, int year, int hour, int minute, int second)
 	{
+		InitStaticData();
+
 		Init(day, month, year, hour, minute, second, 0);
 	}
 
 	NFDateTime(int day, int month, int year, int hour, int minute, int second, int millisecond)
 	{
+		InitStaticData();
+
 		Init(day, month, year, hour, minute, second, millisecond);
 	}
 
 	NFDateTime(time_t timestamp)
 	{
+		InitStaticData();
+
 		SetWithTimestamp(timestamp);
+	}
+
+	NFDateTime()
+	{
+		InitStaticData();
+
+		this->day = 0;
+		this->month = 0;
+		this->year = 0;
+
+		this->hour = 0;
+		this->minute = 0;
+		this->second = 0;
+		this->millisecond = 0;
+
+		SetNow();
+
 	}
 
 	~NFDateTime() 
@@ -487,29 +512,11 @@ public:
 	}
 
 protected:
-	NFDateTime()
-	{
-		this->day = 0;
-		this->month = 0;
-		this->year = 0;
-
-		this->hour = 0;
-		this->minute = 0;
-		this->second = 0;
-		this->millisecond = 0;
-
-		InitMonths();
-		InitMonthNames();
-		InitDayNames();
-	}
-
 	void Init(int day, int month, int year, int hour, int minute, int second, int millisecond)
 	{
 		this->year = year;
 
-		InitMonths();
-		InitMonthNames();
-		InitDayNames();
+		InitStaticData();
 
 		if (!IsValidMonth(month))
 		{
@@ -548,6 +555,13 @@ protected:
 		this->minute = minute;
 		this->second = second;
 		this->millisecond = millisecond;
+	}
+
+	void InitStaticData()
+	{
+		InitMonths();
+		InitMonthNames();
+		InitDayNames();
 	}
 
 	void InitMonths()

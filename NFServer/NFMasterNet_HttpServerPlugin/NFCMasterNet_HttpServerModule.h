@@ -27,8 +27,6 @@ public:
 protected:
 	bool OnCommandQuery(const NFHttpRequest& req);
 
-	bool OnCommonQuery(const NFHttpRequest& req);
-
 	NFWebStatus OnFilter(const NFHttpRequest& req);
 
 private:

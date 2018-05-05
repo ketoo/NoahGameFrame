@@ -11,9 +11,12 @@
 
 #ifdef _MSC_VER
 #pragma warning(disable: 4244 4267 4101 4390)
+#include "Dependencies/hiredis/deps/hiredis/async.h"
 #endif
 
-#include "Dependencies/redis-cplusplus-client/redisclient.h"
+#include "Dependencies/hiredis/deps/hiredis/hiredis.h"
+#include "Dependencies/hiredis/deps/hiredis/async.h"
+#include "Dependencies/hiredis/deps/hiredis/adapters/libevent.h"
 #include "NFComm/NFPluginModule/NFINoSqlModule.h"
 
 class  NFCNoSqlDriver : public NFINoSqlDriver
@@ -106,7 +109,7 @@ protected:
 private:
 	std::string mstrNoExistKey;
 	bool mbEnable;
-	redis::client* m_pNoSqlClient;
+	redisAsyncContext* m_pNoSqlClient;
 
 	int nPort;
 	std::string strIP;
