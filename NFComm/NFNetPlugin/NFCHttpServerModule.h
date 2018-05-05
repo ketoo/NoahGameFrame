@@ -39,7 +39,6 @@ private:
 
 	virtual bool AddMsgCB(const std::string& strCommand, const NFHttpType eRequestType, const HTTP_RECEIVE_FUNCTOR_PTR& cb);
 	virtual bool AddFilterCB(const std::string& strCommand, const HTTP_FILTER_FUNCTOR_PTR& cb);
-	virtual bool AddComMsgCB(const HTTP_RECEIVE_FUNCTOR_PTR& cb);
 
 private:
 	NFIHttpServer* m_pHttpServer;

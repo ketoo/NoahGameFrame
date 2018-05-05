@@ -24,7 +24,6 @@ bool NFCMasterNet_HttpServerModule::AfterInit()
 	m_pHttpNetModule->AddRequestHandler("/json", NFHttpType::NF_HTTP_REQ_DELETE, this, &NFCMasterNet_HttpServerModule::OnCommandQuery);
 	m_pHttpNetModule->AddRequestHandler("/json", NFHttpType::NF_HTTP_REQ_PUT, this, &NFCMasterNet_HttpServerModule::OnCommandQuery);
 
-	m_pHttpNetModule->AddNetDefaultHandler(this, &NFCMasterNet_HttpServerModule::OnCommonQuery);
 	m_pHttpNetModule->AddNetFilter("/json", this, &NFCMasterNet_HttpServerModule::OnFilter);
 
 	NF_SHARE_PTR<NFIClass> xLogicClass = m_pLogicClassModule->GetElement(NFrame::Server::ThisName());
@@ -80,32 +79,6 @@ bool NFCMasterNet_HttpServerModule::OnCommandQuery(const NFHttpRequest& req)
 
 	std::string str = m_pMasterServerModule->GetServersStatus();
 	return m_pHttpNetModule->ResponseMsg(req, str, NFWebStatus::WEB_OK);
-}
-
-bool NFCMasterNet_HttpServerModule::OnCommonQuery(const NFHttpRequest& req)
-{
-
-
-	std::cout << "url: " << req.url << std::endl;
-	std::cout << "path: " << req.path << std::endl;
-	std::cout << "type: " << req.type << std::endl;
-	std::cout << "body: " << req.body << std::endl;
-
-	std::cout << "params: " << std::endl;
-
-    for (auto item : req.params)
-    {
-		std::cout << item.first << ":" << item.second << std::endl;
-    }
-
-    std::cout << "headers: " << std::endl;
-
-	for (auto item : req.headers)
-	{
-		std::cout << item.first << ":" << item.second << std::endl;
-	}
-
-	return m_pHttpNetModule->ResponseMsg(req, "OnCommonQuery", NFWebStatus::WEB_OK);
 }
 
 NFWebStatus NFCMasterNet_HttpServerModule::OnFilter(const NFHttpRequest & req)
