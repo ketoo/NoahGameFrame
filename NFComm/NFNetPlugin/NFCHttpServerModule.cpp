@@ -57,9 +57,7 @@ bool NFCHttpServerModule::OnReceiveNetPack(const NFHttpRequest& req)
 		}
 	}
 
-		//bHandled.get()->operator()(req);
-
-	return true;
+	return ResponseMsg(req, "", NFWebStatus::WEB_ERROR);
 }
 
 NFWebStatus NFCHttpServerModule::OnFilterPack(const NFHttpRequest & req)
@@ -97,12 +95,6 @@ bool NFCHttpServerModule::AddMsgCB(const std::string& strCommand, const NFHttpTy
 	}
 
     return false;
-}
-
-bool NFCHttpServerModule::AddComMsgCB(const HTTP_RECEIVE_FUNCTOR_PTR& cb)
-{
-    mComMsgCBList = cb;
-    return true;
 }
 
 bool NFCHttpServerModule::AddFilterCB(const std::string& strCommand, const HTTP_FILTER_FUNCTOR_PTR& cb)
