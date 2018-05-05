@@ -64,6 +64,25 @@ enum NFHttpType
 class NFHttpRequest
 {
 public:
+	NFHttpRequest()
+	{
+		Reset();
+	}
+
+	void Reset()
+	{
+		id = 0;
+		url.clear();
+		path.clear();
+		remoteHost.clear();
+		//type
+		body.clear();
+		params.clear();
+		headers.clear();
+	}
+
+	int64_t id;
+
     void* req;
 	std::string url;
 	std::string path;

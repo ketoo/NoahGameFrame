@@ -33,6 +33,8 @@ public:
     virtual bool ResponseMsg(const NFHttpRequest& req, const std::string& strMsg, NFWebStatus code = NFWebStatus::WEB_OK,
                 const std::string& reason = "OK");
 
+	//virtual bool ResponseMsg(const NFHttpRequest& req, const NFIResponse& xResponse);
+
 private:
 	virtual bool OnReceiveNetPack(const NFHttpRequest& req);
 	virtual NFWebStatus OnFilterPack(const NFHttpRequest& req);
