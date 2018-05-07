@@ -178,8 +178,6 @@ void NFCCreateRoleModule::OnClienEnterGameProcess(const NFSOCK nSockIndex, const
 		{
 			nHomeSceneID = m_pPVPModule->RandomTileScene();
 		}
-		// test scene one
-		nHomeSceneID = 1;
 
 		NFDataList var;
 		var.AddString(NFrame::Player::Name());
@@ -206,7 +204,7 @@ void NFCCreateRoleModule::OnClienEnterGameProcess(const NFSOCK nSockIndex, const
 		}
 
 		//get data first then create player
-		m_pSceneProcessModule->RequestEnterScene(pObject->Self(), nHomeSceneID, -1, 0, NFDataList());
+		m_pSceneProcessModule->RequestEnterScene(pObject->Self(), 1, -1, 0, NFDataList());
 	}
 }
 
