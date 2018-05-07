@@ -198,8 +198,8 @@ void NFCPVPModule::FindAllTileScene()
 		{
 			const std::string& strId = strIdList[i];
 
-			const int nServerType = m_pElementModule->GetPropertyInt32(strId, NFrame::Scene::Tile());
-			if (nServerType == 1)
+			const int nSceneType = m_pElementModule->GetPropertyInt32(strId, NFrame::Scene::Tile());
+			if (nSceneType == 1 && strId != "1")
 			{
 				mxTileSceneIDList.push_back(lexical_cast<int>(strId));
 			}
