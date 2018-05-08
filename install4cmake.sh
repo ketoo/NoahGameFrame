@@ -6,7 +6,7 @@ if [ $? -ne 0 ]; then
     exit 1
 fi
 
-unzip --version
+unzip -v
 if [ $? -ne 0 ]; then
     echo "[ERROR] Please install unzip first."
     echo "[ubuntu] sudo apt-get install unzip or [centos] yum install unzip or [mac] brew install unzip"
