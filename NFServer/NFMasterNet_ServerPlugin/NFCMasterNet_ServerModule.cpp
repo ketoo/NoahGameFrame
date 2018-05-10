@@ -59,7 +59,7 @@ void NFCMasterNet_ServerModule::OnWorldRegisteredProcess(const NFSOCK nSockIndex
 	}
 
 
-	SynWorldToLogin();
+	SynWorldToLoginAndWorld();
 }
 
 void NFCMasterNet_ServerModule::OnWorldUnRegisteredProcess(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
@@ -80,7 +80,7 @@ void NFCMasterNet_ServerModule::OnWorldUnRegisteredProcess(const NFSOCK nSockInd
 		m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFGUID(0, xData.server_id()), xData.server_name(), "WorldUnRegistered");
 	}
 
-	SynWorldToLogin();
+	SynWorldToLoginAndWorld();
 }
 
 void NFCMasterNet_ServerModule::OnRefreshWorldInfoProcess(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
@@ -109,7 +109,7 @@ void NFCMasterNet_ServerModule::OnRefreshWorldInfoProcess(const NFSOCK nSockInde
 
 	}
 
-	SynWorldToLogin();
+	SynWorldToLoginAndWorld();
 }
 
 void NFCMasterNet_ServerModule::OnLoginRegisteredProcess(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
@@ -137,7 +137,7 @@ void NFCMasterNet_ServerModule::OnLoginRegisteredProcess(const NFSOCK nSockIndex
 		m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFGUID(0, xData.server_id()), xData.server_name(), "LoginRegistered");
 	}
 
-	SynWorldToLogin();
+	SynWorldToLoginAndWorld();
 }
 
 void NFCMasterNet_ServerModule::OnLoginUnRegisteredProcess(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
@@ -334,7 +334,7 @@ void NFCMasterNet_ServerModule::OnClientDisconnect(const NFSOCK nAddress)
 			pServerData->pData->set_server_state(NFMsg::EST_CRASH);
 			pServerData->nFD = 0;
 
-			SynWorldToLogin();
+			SynWorldToLoginAndWorld();
 			return;
 		}
 
@@ -364,7 +364,7 @@ void NFCMasterNet_ServerModule::OnClientConnected(const NFSOCK nAddress)
 {
 }
 
-void NFCMasterNet_ServerModule::SynWorldToLogin()
+void NFCMasterNet_ServerModule::SynWorldToLoginAndWorld()
 {
 	NFMsg::ServerInfoReportList xData;
 
@@ -385,6 +385,16 @@ void NFCMasterNet_ServerModule::SynWorldToLogin()
 
 		pServerData = mLoginMap.Next();
 	}
+
+	//world server
+	pServerData = mWorldMap.First();
+	while (pServerData)
+	{
+		m_pNetModule->SendMsgPB(NFMsg::EGameMsgID::EGMI_STS_NET_INFO, xData, pServerData->nFD);
+
+		pServerData = mWorldMap.Next();
+	}
+	
 }
 
 void NFCMasterNet_ServerModule::LogGameServer()
@@ -448,49 +458,62 @@ void NFCMasterNet_ServerModule::OnServerReport(const NFSOCK nFd, const int msgId
 	}
 
 	std::shared_ptr<ServerData> pServerData;
-	if (msg.server_type() == NF_SERVER_TYPES::NF_ST_LOGIN)
+	switch (msg.server_type())
 	{
-		pServerData = mLoginMap.GetElement(msg.server_id());
-		if (!pServerData)
+		case NF_SERVER_TYPES::NF_ST_LOGIN:
 		{
-			pServerData = std::shared_ptr<ServerData>(new ServerData());
-			mLoginMap.AddElement(msg.server_id(), pServerData);
+			pServerData = mLoginMap.GetElement(msg.server_id());
+			if (!pServerData)
+			{
+				pServerData = std::shared_ptr<ServerData>(new ServerData());
+				mLoginMap.AddElement(msg.server_id(), pServerData);
+			}
 		}
-	}
-	else if (msg.server_type() == NF_SERVER_TYPES::NF_ST_WORLD)
-	{
-		pServerData = mWorldMap.GetElement(msg.server_id());
-		if (!pServerData)
+		break;
+		case NF_SERVER_TYPES::NF_ST_WORLD:
 		{
-			pServerData = std::shared_ptr<ServerData>(new ServerData());
-			mWorldMap.AddElement(msg.server_id(), pServerData);
+			pServerData = mWorldMap.GetElement(msg.server_id());
+			if (!pServerData)
+			{
+				pServerData = std::shared_ptr<ServerData>(new ServerData());
+				mWorldMap.AddElement(msg.server_id(), pServerData);
+			}
 		}
-	}
-	else if (msg.server_type() == NF_SERVER_TYPES::NF_ST_PROXY)
-	{
-		pServerData = mProxyMap.GetElement(msg.server_id());
-		if (!pServerData)
+		break;
+		case NF_SERVER_TYPES::NF_ST_PROXY:
 		{
-			pServerData = std::shared_ptr<ServerData>(new ServerData());
-			mProxyMap.AddElement(msg.server_id(), pServerData);
+			pServerData = mProxyMap.GetElement(msg.server_id());
+			if (!pServerData)
+			{
+				pServerData = std::shared_ptr<ServerData>(new ServerData());
+				mProxyMap.AddElement(msg.server_id(), pServerData);
+			}
 		}
-	}
-	else if (msg.server_type() == NF_SERVER_TYPES::NF_ST_GAME)
-	{
-		pServerData = mGameMap.GetElement(msg.server_id());
-		if (!pServerData)
+		break;
+		case NF_SERVER_TYPES::NF_ST_GAME:
 		{
-			pServerData = std::shared_ptr<ServerData>(new ServerData());
-			mGameMap.AddElement(msg.server_id(), pServerData);
+			pServerData = mGameMap.GetElement(msg.server_id());
+			if (!pServerData)
+			{
+				pServerData = std::shared_ptr<ServerData>(new ServerData());
+				mGameMap.AddElement(msg.server_id(), pServerData);
+			}
 		}
+		break;
+
+		default:
+		{
+			//m_pLogModule->LogError("UNKNOW SERVER TYPE", msg.server_type());
+		}
+		break;
 	}
 
 	//udate status
-	pServerData->nFD = nFd;
-	*(pServerData->pData) = msg;
-
-	//std::cout << "ServerReport:"<<msg.server_name() << std::endl;
-
+	if (pServerData)
+	{
+		pServerData->nFD = nFd;
+		*(pServerData->pData) = msg;
+	}
 }
 
 std::string NFCMasterNet_ServerModule::GetServersStatus()

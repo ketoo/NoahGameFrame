@@ -37,6 +37,8 @@ bool NFCWorldToMasterModule::AfterInit()
 	m_pNetClientModule->AddReceiveCallBack(NF_SERVER_TYPES::NF_ST_MASTER, NFMsg::EGMI_REQ_KICK_CLIENT_INWORLD, this, &NFCWorldToMasterModule::OnKickClientProcess);
 	m_pNetClientModule->AddReceiveCallBack(NF_SERVER_TYPES::NF_ST_MASTER, this, &NFCWorldToMasterModule::InvalidMessage);
 
+	m_pNetClientModule->AddReceiveCallBack(NF_SERVER_TYPES::NF_ST_MASTER, NFMsg::EGMI_STS_NET_INFO, this, &NFCWorldToMasterModule::OnServerInfoProcess);
+
 	m_pNetClientModule->AddEventCallBack(NF_SERVER_TYPES::NF_ST_MASTER, this, &NFCWorldToMasterModule::OnSocketMSEvent);
 	m_pNetClientModule->ExpandBufferSize();
 
@@ -263,4 +265,9 @@ bool NFCWorldToMasterModule::BeforeShut()
 void NFCWorldToMasterModule::LogServerInfo(const std::string& strServerInfo)
 {
 	m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFGUID(), strServerInfo, "");
+}
+
+void NFCWorldToMasterModule::OnServerInfoProcess(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
+{
+	m_pWorldNet_ServerModule->OnServerInfoProcess(nSockIndex, nMsgID, msg, nLen);
 }
