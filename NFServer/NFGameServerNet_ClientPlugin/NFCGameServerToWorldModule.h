@@ -43,10 +43,11 @@ protected:
 protected:
     void Register(NFINet* pNet);
 	void ServerReport();
-    void RefreshWorldInfo();
     void TransPBToProxy(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
 
     int OnObjectClassEvent(const NFGUID& self, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFDataList& var);
+	
+	void OnServerInfoProcess(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
 
 private:
     void SendOnline(const NFGUID& self);
