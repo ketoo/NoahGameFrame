@@ -124,31 +124,14 @@ void NFCGameServerToWorldModule::ServerReport()
 	}
 }
 
-
-void NFCGameServerToWorldModule::RefreshWorldInfo()
-{
-	//     _tagPT_KEY_BASE_MSG baseMsg;
-	//     NFMsg::ServerInfoReport xMsg;
-	//
-	//     xMsg.set_server_id(m_pGameLogicModule->GetGameID());
-	//     xMsg.set_server_port(m_pGameServerModule->GetServerPort());
-	//     xMsg.set_server_cur_count(0);
-	//     xMsg.set_server_max_online(50000);
-	//
-	//     if (xMsg.SerializeToString(&baseMsg.strSyncInfo))
-	//     {
-	//         baseMsg._unMsgID = GTW_GAME_REFRESH;
-	//         RakNet::BitStream oBitStream;
-	//         baseMsg.EnCode(&oBitStream);
-	//         SendBitStream(&oBitStream);
-	//     }
-}
-
 bool NFCGameServerToWorldModule::AfterInit()
 {
-	m_pNetClientModule->AddReceiveCallBack(NF_SERVER_TYPES::NF_ST_WORLD, this, &NFCGameServerToWorldModule::TransPBToProxy);
-	m_pNetClientModule->AddEventCallBack(NF_SERVER_TYPES::NF_ST_WORLD, this, &NFCGameServerToWorldModule::OnSocketWSEvent);
+	m_pNetClientModule->AddReceiveCallBack(NF_SERVER_TYPES::NF_ST_WORLD, NFMsg::EGMI_STS_NET_INFO, this, &NFCGameServerToWorldModule::OnServerInfoProcess);
 
+	m_pNetClientModule->AddReceiveCallBack(NF_SERVER_TYPES::NF_ST_WORLD, this, &NFCGameServerToWorldModule::TransPBToProxy);
+	
+	m_pNetClientModule->AddEventCallBack(NF_SERVER_TYPES::NF_ST_WORLD, this, &NFCGameServerToWorldModule::OnSocketWSEvent);
+	
 	m_pKernelModule->AddClassCallBack(NFrame::Player::ThisName(), this, &NFCGameServerToWorldModule::OnObjectClassEvent);
 
 	m_pNetClientModule->ExpandBufferSize();
@@ -205,6 +188,36 @@ bool NFCGameServerToWorldModule::AfterInit()
 	}
 
 	return true;
+}
+
+void NFCGameServerToWorldModule::OnServerInfoProcess(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
+{
+	NFGUID nPlayerID;
+	NFMsg::ServerInfoReportList xMsg;
+	if (!NFINetModule::ReceivePB(nMsgID, msg, nLen, xMsg, nPlayerID))
+	{
+		return;
+	}
+
+	for (int i = 0; i < xMsg.server_list_size(); ++i)
+	{
+		const NFMsg::ServerInfoReport& xData = xMsg.server_list(i);
+
+		//type
+		ConnectData xServerData;
+
+		xServerData.nGameID = xData.server_id();
+		xServerData.strIP = xData.server_ip();
+		xServerData.nPort = xData.server_port();
+		xServerData.strName = xData.server_name();
+		xServerData.nWorkLoad = xData.server_cur_count();
+		xServerData.eServerType = (NF_SERVER_TYPES)xData.server_type();
+
+		if (NF_SERVER_TYPES::NF_ST_WORLD == xServerData.eServerType)
+		{
+			m_pNetClientModule->AddServer(xServerData);
+		}
+	}
 }
 
 void NFCGameServerToWorldModule::OnSocketWSEvent(const NFSOCK nSockIndex, const NF_NET_EVENT eEvent, NFINet* pNet)

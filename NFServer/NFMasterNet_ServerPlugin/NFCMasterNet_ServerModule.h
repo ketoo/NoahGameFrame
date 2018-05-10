@@ -62,7 +62,7 @@ protected:
 
     //////////////////////////////////////////////////////////////////////////
 
-    void SynWorldToLogin();
+    void SynWorldToLoginAndWorld();
     void LogGameServer();
 
 	void OnHeartBeat(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
