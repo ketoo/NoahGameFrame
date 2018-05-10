@@ -19,6 +19,8 @@ class NFIWorldNet_ServerModule
 {
 
 public:
+	virtual void OnServerInfoProcess(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen) = 0;
+
 	virtual bool SendMsgToGame(const int nGameID, const NFMsg::EGameMsgID eMsgID, google::protobuf::Message& xData, const NFGUID nPlayer = NFGUID()) = 0;
 	virtual bool SendMsgToGame(const NFDataList& argObjectVar, const NFDataList& argGameID, const NFMsg::EGameMsgID eMsgID, google::protobuf::Message& xData) = 0;
 	virtual bool SendMsgToPlayer(const NFMsg::EGameMsgID eMsgID, google::protobuf::Message& xData, const NFGUID nPlayer) = 0;
