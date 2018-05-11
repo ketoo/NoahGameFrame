@@ -37,6 +37,7 @@ public:
     virtual bool Execute();
 
     virtual bool AfterInit();
+	virtual void OnServerInfoProcess(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
 
     virtual bool SendMsgToGame(const int nGameID, const NFMsg::EGameMsgID eMsgID, google::protobuf::Message& xData, const NFGUID nPlayer = NFGUID());
     virtual bool SendMsgToGame(const NFDataList& argObjectVar, const NFDataList& argGameID,  const NFMsg::EGameMsgID eMsgID, google::protobuf::Message& xData);
@@ -73,8 +74,14 @@ protected:
     void OnProxyServerUnRegisteredProcess(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
     void OnRefreshProxyServerInfoProcess(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
 
-    void SynGameToProxy();
+	void SynGameToProxy();
     void SynGameToProxy(const NFSOCK nFD);
+
+	void SynWorldToProxy();
+	void SynWorldToProxy(const NFSOCK nFD);
+
+	void SynWorldToGame();
+	void SynWorldToGame(const NFSOCK nFD);
 
     void LogGameServer();
 
@@ -83,7 +90,8 @@ private:
     NFINT64 mnLastCheckTime;
 
     //serverid,data
-    NFConsistentHashMapEx<int, ServerData> mGameMap;
+	NFConsistentHashMapEx<int, ServerData> mWorldMap;
+	NFConsistentHashMapEx<int, ServerData> mGameMap;
 	NFConsistentHashMapEx<int, ServerData> mProxyMap;
 
     NFIElementModule* m_pElementModule;
@@ -92,7 +100,6 @@ private:
     NFILogModule* m_pLogModule;
 	NFINetModule* m_pNetModule;
 	NFINetClientModule* m_pNetClientModule;
-
 };
 
 #endif
