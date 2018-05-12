@@ -27,11 +27,6 @@ void YieldFunction()
 	xPluginManager->YieldCo();
 }
 
-void StartFunction()
-{
-    //xPluginManager->StartCoroutine();
-}
-
 bool NFCNoSqlModule::Init()
 {
 	mLastCheckTime = 0;
