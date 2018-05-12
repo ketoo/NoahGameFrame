@@ -18,6 +18,8 @@
 #include <random>
 
 #include "NFRedisCommand.h"
+#include "NFRedisClientSocket.h"
+
 #ifdef _MSC_VER
 #include "Dependencies/hiredis/hiredis_win/deps/hiredis/hiredis.h"
 #else

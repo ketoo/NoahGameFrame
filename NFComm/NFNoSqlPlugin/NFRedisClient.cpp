@@ -67,7 +67,7 @@ redisReply* NFRedisClient::BuildSendCmd(const NFRedisCommand& cmd)
 		const int nFrontIndex = mnIndexList.front();
 		if (nFrontIndex == index)
 		{
-			int ret = redisReaderGetReply(m_pRedisClientSocket, &reply);
+			int ret = redisReaderGetReply(m_pRedisClientSocket->GetRedisReader(), &reply);
 			if (ret == REDIS_OK)
 			{
 				mnIndexList.pop_front();
@@ -128,9 +128,8 @@ bool NFRedisClient::AUTH(const std::string & auth)
 	NFRedisCommand cmd(GET_NAME(AUTH));
 	cmd << auth;
 
-	NF_SHARE_PTR<NFRedisResult> pRedisResult = BuildSendCmd(cmd);
+	redisReply* reply = BuildSendCmd(cmd);
 	
-	WaitingResult(pRedisResult);
 
-	return pRedisResult->IsOKRespStatus();
+	return false;
 }
