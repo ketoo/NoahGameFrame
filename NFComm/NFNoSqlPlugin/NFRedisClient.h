@@ -29,13 +29,6 @@
 #include "Dependencies/hiredis/hiredis_linux/hiredis/hiredis.h"
 #endif
 
-typedef std::string string_type;
-typedef std::vector<string_type> string_vector;
-typedef std::pair<string_type, string_type> string_pair;
-typedef std::vector<string_pair> string_pair_vector;
-typedef std::pair<string_type, double> string_score_pair;
-typedef std::vector<string_score_pair> string_score_vector;
-typedef std::set<string_type> string_set;
 
 typedef void(*CoroutineYieldFunction)();
 typedef void(*CoroutineStartFunction)();
@@ -479,7 +472,7 @@ public:
 	* @param value [out] the value of the last element
 	* @return true when cmd success, false when key does not exist or not a list key.
 	*/
-	bool RPOP(const std::string& key, std::string& value);
+	virtual bool RPOP(const std::string& key, std::string& value);
 	//NF_SHARE_PTR<NFRedisResult> RPOPLPUSH(const std::string& key, string_vector& values);
 
 	/**
@@ -609,7 +602,7 @@ public:
 	* @param max [in]
 	* @return true if cmd removed success, false when the key is not a z key.
 	*/
-	bool ZREMRANGEBYSCORE(const std::string& key, const double min, const double max);
+	virtual bool ZREMRANGEBYSCORE(const std::string& key, const double min, const double max);
 
 	/**
 	* @brief Returns the specified range of elements in the sorted set stored at key.
