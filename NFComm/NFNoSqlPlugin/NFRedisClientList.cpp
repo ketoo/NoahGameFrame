@@ -39,7 +39,7 @@ bool NFRedisClient::LLEN(const std::string &key, int& length)
 
 	if (pReply->type == REDIS_REPLY_INTEGER)
 	{
-		length = (int)pReply->integer;
+		length = pReply->integer;
 	}
 
 	freeReplyObject(pReply);
@@ -80,7 +80,7 @@ int NFRedisClient::LPUSH(const std::string &key, const std::string &value)
 		return false;
 	}
 
-	int list_len = (int)pReply->integer;
+	int list_len = pReply->integer;
 
 	freeReplyObject(pReply);
 
@@ -99,7 +99,7 @@ int NFRedisClient::LPUSHX(const std::string &key, const std::string &value)
 		return false;
 	}
 
-	int list_len = (int)pReply->integer;
+	int list_len = pReply->integer;
 
 	freeReplyObject(pReply);
 
@@ -192,7 +192,7 @@ int NFRedisClient::RPUSH(const std::string &key, const std::string &value)
 		return false;
 	}
 
-	int list_len = (int)pReply->integer;
+	int list_len = pReply->integer;
 
 	freeReplyObject(pReply);
 
@@ -212,7 +212,7 @@ int NFRedisClient::RPUSHX(const std::string &key, const std::string &value)
 		return false;
 	}
 
-	int list_len = (int)pReply->integer;
+	int list_len = pReply->integer;
 
 	freeReplyObject(pReply);
 

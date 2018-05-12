@@ -6,7 +6,9 @@
 #include "NFRedisClientSocket.h"
 
 #if NF_PLATFORM == NF_PLATFORM_WIN
-
+#include <WS2tcpip.h>
+#include <winsock2.h>
+#pragma  comment(lib,"Ws2_32.lib")
 #ifndef LIBEVENT_SRC
 #pragma  comment(lib,"libevent.lib")
 #pragma  comment(lib,"libevent_core.lib")
@@ -103,7 +105,7 @@ int NFRedisClientSocket::Close()
     return 0;
 }
 
-int NFRedisClientSocket::Write(const char *buf, size_t count)
+int NFRedisClientSocket::Write(const char *buf, int count)
 {
 	if (buf == NULL || count <= 0)
 	{
