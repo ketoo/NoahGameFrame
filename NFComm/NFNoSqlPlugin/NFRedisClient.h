@@ -5,6 +5,7 @@
 #ifndef NFREDISPLUGIN_NFREDISCLIENT_H
 #define NFREDISPLUGIN_NFREDISCLIENT_H
 
+#define GET_NAME(functionName)   (#functionName)
 
 #include <string>
 #include <string>
