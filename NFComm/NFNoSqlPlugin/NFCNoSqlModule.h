@@ -9,7 +9,7 @@
 #ifndef NFC_DATANOSQL_MODULE_H
 #define NFC_DATANOSQL_MODULE_H
 
-#include "NFCNoSqlDriver.h"
+#include "NFRedisClient.h"
 #include "NFComm/NFPluginModule/NFPlatform.h"
 #include "NFComm/NFPluginModule/NFIPluginManager.h"
 #include "NFComm/NFPluginModule/NFINoSqlModule.h"
@@ -37,10 +37,10 @@ public:
 	virtual bool AddConnectSql(const std::string& strID, const std::string& strIP, const int nPort, const std::string& strPass);
 
 	virtual NFList<std::string> GetDriverIdList();
-	virtual NF_SHARE_PTR<NFINoSqlDriver> GetDriver(const std::string& strID);
-	virtual NF_SHARE_PTR<NFINoSqlDriver> GetDriverBySuitRandom();
-	virtual NF_SHARE_PTR<NFINoSqlDriver> GetDriverBySuitConsistent();
-	virtual NF_SHARE_PTR<NFINoSqlDriver> GetDriverBySuit(const std::string& strHash);
+	virtual NF_SHARE_PTR<NFRedisClient> GetDriver(const std::string& strID);
+	virtual NF_SHARE_PTR<NFRedisClient> GetDriverBySuitRandom();
+	virtual NF_SHARE_PTR<NFRedisClient> GetDriverBySuitConsistent();
+	virtual NF_SHARE_PTR<NFRedisClient> GetDriverBySuit(const std::string& strHash);
 	//virtual NF_SHARE_PTR<NFINoSqlDriver> GetDriverBySuit(const int nHash);
     virtual bool RemoveConnectSql(const std::string& strID);
 
@@ -119,7 +119,7 @@ protected:
 	NFIElementModule* m_pElementModule;
 	NFILogModule* m_pLogModule;
 
-	NFConsistentHashMapEx<std::string, NFINoSqlDriver> mxNoSqlDriver;
+	NFConsistentHashMapEx<std::string, NFRedisClient> mxNoSqlDriver;
 
 };
 

@@ -45,9 +45,13 @@ class NFRedisClient
 public:
     NFRedisClient();
 
+	bool Enable();
+	bool ReConnect();
+	bool Busy();
+
     bool Execute();
 
-    bool ConnectTo(const std::string& ip, const int port, const std::string& auth);
+    bool Connect(const std::string& ip, const int port, const std::string& auth);
 
     bool KeepLive();
 
