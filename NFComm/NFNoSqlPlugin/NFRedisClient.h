@@ -9,6 +9,7 @@
 #include <string>
 #include <string>
 #include <vector>
+#include <list>
 #include <map>
 #include <set>
 #include <ctime>
@@ -662,6 +663,7 @@ public:
 
 private:
 	int64_t mnIndex;
+	std::list<int64_t> mnIndexList;
 	int64_t BuildSendCmd(const NFRedisCommand& cmd);
     NFRedisClientSocket* m_pRedisClientSocket;
 };
