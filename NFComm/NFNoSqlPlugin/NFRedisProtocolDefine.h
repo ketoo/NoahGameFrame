@@ -4,7 +4,12 @@
 
 #ifndef NFREDISPLUGIN_NFREDISPROTOCOLDEFINE_H
 #define NFREDISPLUGIN_NFREDISPROTOCOLDEFINE_H
-
+#include <string>
+#include <string>
+#include <vector>
+#include <list>
+#include <map>
+#include <set>
 
 /*
 状态回复（status reply）的第一个字节是 "+"           //For Simple Strings the first byte of the reply is "+"
