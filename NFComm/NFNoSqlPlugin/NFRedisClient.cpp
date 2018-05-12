@@ -44,7 +44,7 @@ bool NFRedisClient::Execute()
     return false;
 }
 
-int64_t NFRedisClient::BuildSendCmd(const NFRedisCommand& cmd)
+redisReply* NFRedisClient::BuildSendCmd(const NFRedisCommand& cmd)
 {
 	std::string msg = cmd.Serialize();
 	int nRet = m_pRedisClientSocket->Write(msg.data(), msg.length());
@@ -52,7 +52,7 @@ int64_t NFRedisClient::BuildSendCmd(const NFRedisCommand& cmd)
 	{
 		//lost net
 		//do some thing
-		return 0;
+		return nullptr;
 	}
 
 	mnIndex++;
@@ -90,8 +90,7 @@ int64_t NFRedisClient::BuildSendCmd(const NFRedisCommand& cmd)
 
 	if (reply == nullptr)
 	{
-		printf("redisReply is NULL!\n");
-		return 0;
+		return nullptr;
 	}
 
 	struct redisReply* r = (struct redisReply*)reply;
@@ -101,7 +100,7 @@ int64_t NFRedisClient::BuildSendCmd(const NFRedisCommand& cmd)
 		freeReplyObject(reply);
 		//redisReaderFree(reader);
 		//reader = NULL;
-		return 0;
+		return nullptr;
 	}
 
 	if (REDIS_REPLY_STATUS != r->type)
@@ -110,10 +109,10 @@ int64_t NFRedisClient::BuildSendCmd(const NFRedisCommand& cmd)
 		freeReplyObject(reply);
 		//redisReaderFree(reader);
 		//reader = NULL;
-		return 0;
+		return nullptr;
 	}
 
-	return mnIndex;
+	return nullptr;
 }
 
 bool NFRedisClient::AUTH(const std::string & auth)
