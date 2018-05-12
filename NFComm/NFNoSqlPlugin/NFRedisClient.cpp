@@ -15,11 +15,6 @@ bool NFRedisClient::Enable()
 	return true;
 }
 
-bool NFRedisClient::ReConnect()
-{
-	return false;
-}
-
 bool NFRedisClient::Busy()
 {
 	return true;
