@@ -22,9 +22,7 @@
 #include "NFComm/NFPluginModule/NFGUID.h"
 
 #if NF_PLATFORM == NF_PLATFORM_WIN
-#include <WinSock2.h>
-#include <windows.h>
-#pragma comment(lib, "Ws2_32.lib")
+
 #elif NF_PLATFORM == NF_PLATFORM_APPLE || NF_PLATFORM == NF_PLATFORM_LINUX || NF_PLATFORM == NF_PLATFORM_ANDROID
 
 #if NF_PLATFORM == NF_PLATFORM_APPLE
@@ -76,7 +74,7 @@ public:
 
 	int64_t Connect(const std::string& ip, const int port);
     int Close();
-    int Write(const char *buf, int count);
+    int Write(const char *buf, size_t count);
 
     int Execute();
 	redisReader* GetRedisReader();
