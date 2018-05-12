@@ -95,6 +95,11 @@ int NFRedisClientSocket::Execute()
 	return 0;
 }
 
+redisReader * NFRedisClientSocket::GetRedisReader()
+{
+	return m_pRedisReader;
+}
+
 int NFRedisClientSocket::Close()
 {
     return 0;
