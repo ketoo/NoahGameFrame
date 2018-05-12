@@ -6,7 +6,7 @@
 
 NFRedisTester::NFRedisTester()
 {
-    mxRedisClient.ConnectTo("127.0.0.1", 6379, "NoahGameFrame");
+    mxRedisClient.Connect("127.0.0.1", 6379, "NoahGameFrame");
 }
 
 void NFRedisTester::RunTester()
