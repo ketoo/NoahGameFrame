@@ -234,15 +234,15 @@ bool NFRedisClient::SETNX(const std::string &key, const std::string &value)
 		return false;
 	}
 
-	bool success = false;
+	int success = 0;
 	if (pReply->type == REDIS_REPLY_INTEGER)
 	{
-		success = (bool)pReply->integer;
+		success = pReply->integer;
 	}
 
 	freeReplyObject(pReply);
 
-	return success;
+	return bool(success);
 }
 
 bool NFRedisClient::STRLEN(const std::string &key, int& length)
