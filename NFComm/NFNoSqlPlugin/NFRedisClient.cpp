@@ -58,17 +58,34 @@ int64_t NFRedisClient::BuildSendCmd(const NFRedisCommand& cmd)
 	mnIndex++;
 
 	int64_t index = mnIndex;
+	mnIndexList.push_back(index);
 
 	void* reply = nullptr;
 	while (true)
 	{
 		//get reply
-		int ret = redisReaderGetReply(m_pRedisClientSocket, &reply);
-		if (ret != REDIS_OK)
+		const int nFrontIndex = mnIndexList.front();
+		if (nFrontIndex == index)
 		{
-			continue;
+			int ret = redisReaderGetReply(m_pRedisClientSocket, &reply);
+			if (ret == REDIS_OK)
+			{
+				break;
+			}
+			else
+			{
+				if (YieldFunction)
+				{
+					YieldFunction();
+				}
+				else
+				{
+					Execute();
+				}
+			}
 		}
 
+		continue;
 	}
 
 	if (reply == nullptr)
@@ -84,7 +101,7 @@ int64_t NFRedisClient::BuildSendCmd(const NFRedisCommand& cmd)
 		freeReplyObject(reply);
 		//redisReaderFree(reader);
 		//reader = NULL;
-		return -6;
+		return 0;
 	}
 
 	if (REDIS_REPLY_STATUS != r->type)
@@ -93,8 +110,9 @@ int64_t NFRedisClient::BuildSendCmd(const NFRedisCommand& cmd)
 		freeReplyObject(reply);
 		//redisReaderFree(reader);
 		//reader = NULL;
-		return -7;
+		return 0;
 	}
+
 	return mnIndex;
 }
 
