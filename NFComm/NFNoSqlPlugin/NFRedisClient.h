@@ -21,7 +21,7 @@
 #include "NFRedisCommand.h"
 #include "NFRedisClientSocket.h"
 
-#include "NFComm/NFPluginModule/NFIRedisClient.h"
+#include "NFComm/NFPluginModule/NFINoSqlModule.h"
 
 #ifdef _MSC_VER
 #include "Dependencies/hiredis/hiredis_win/deps/hiredis/hiredis.h"
