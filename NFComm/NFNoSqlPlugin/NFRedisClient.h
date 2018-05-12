@@ -476,7 +476,7 @@ public:
 	* @param value [out] the value of the last element
 	* @return true when cmd success, false when key does not exist or not a list key.
 	*/
-	bool RPOP(const std::string& key, std::string& value);
+	virtual bool RPOP(const std::string& key, std::string& value);
 	//NF_SHARE_PTR<NFRedisResult> RPOPLPUSH(const std::string& key, string_vector& values);
 
 	/**
@@ -606,7 +606,7 @@ public:
 	* @param max [in]
 	* @return true if cmd removed success, false when the key is not a z key.
 	*/
-	bool ZREMRANGEBYSCORE(const std::string& key, const double min, const double max);
+	virtual bool ZREMRANGEBYSCORE(const std::string& key, const double min, const double max);
 
 	/**
 	* @brief Returns the specified range of elements in the sorted set stored at key.
