@@ -17,7 +17,7 @@
 #include "NFComm/NFPluginModule/NFIElementModule.h"
 #include "NFComm/NFPluginModule/NFILogModule.h"
 
-void YieldFunction();
+void YieldFun();
 
 class NFCNoSqlModule
     : public NFINoSqlModule
@@ -65,7 +65,7 @@ public:
 
 	virtual const bool HSet(const std::string& strKey, const std::string& strField, const std::string& strValue);
 	virtual const bool HGet(const std::string& strKey, const std::string& strField, std::string& strValue);
-	virtual const bool HMSet(const std::string& strKey, const std::vector<std::string>& fieldVec, const std::vector<std::string>& valueVec);
+	virtual const bool HMSet(const std::string& strKey, const std::vector<string_pair>& fieldVec);
 	virtual const bool HMGet(const std::string& strKey, const std::vector<std::string>& fieldVec, std::vector<std::string>& valueVec);
 
 	virtual const bool HExists(const std::string& strKey, const std::string& strField);
@@ -79,7 +79,7 @@ public:
 	/////////////
 
 	virtual const bool ZAdd(const std::string& strKey, const double nScore, const std::string& strMember);
-	virtual const bool ZIncrBy(const std::string& strKey, const std::string& strMember, const double nIncrement);
+	virtual const bool ZIncrBy(const std::string& strKey, const std::string& strMember, double score, double& nIncrement);
 
 	virtual const bool ZRem(const std::string& strKey, const std::string& strMember);
 	virtual const bool ZRemRangeByRank(const std::string& strKey, const int nStart, const int nStop);
