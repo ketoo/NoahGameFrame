@@ -8,8 +8,8 @@
 #include <iostream>
 #include <vector>
 #include <sstream>
-#include "NFRedisProtocolDefine.h"
 
+#include "NFRedisProtocolDefine.h"
 
 class NFRedisCommand
 {
