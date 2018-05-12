@@ -10,8 +10,23 @@ NFRedisClient::NFRedisClient()
     m_pRedisClientSocket = new NFRedisClientSocket();
 }
 
+bool NFRedisClient::Enable()
+{
+	return true;
+}
 
-bool NFRedisClient::ConnectTo(const std::string &ip, const int port, const std::string &auth)
+bool NFRedisClient::ReConnect()
+{
+	return false;
+}
+
+bool NFRedisClient::Busy()
+{
+	return true;
+}
+
+
+bool NFRedisClient::Connect(const std::string &ip, const int port, const std::string &auth)
 {
     int64_t nFD = m_pRedisClientSocket->Connect(ip, port);
 	if (nFD > 0)
