@@ -70,6 +70,7 @@ redisReply* NFRedisClient::BuildSendCmd(const NFRedisCommand& cmd)
 			int ret = redisReaderGetReply(m_pRedisClientSocket, &reply);
 			if (ret == REDIS_OK)
 			{
+				mnIndexList.pop_front();
 				break;
 			}
 			else
@@ -85,7 +86,14 @@ redisReply* NFRedisClient::BuildSendCmd(const NFRedisCommand& cmd)
 			}
 		}
 
-		continue;
+		if (YieldFunction)
+		{
+			YieldFunction();
+		}
+		else
+		{
+			Execute();
+		}
 	}
 
 	if (reply == nullptr)
