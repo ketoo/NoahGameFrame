@@ -31,7 +31,7 @@ bool NFCNoSqlModule::Init()
 {
 	mLastCheckTime = 0;
 
-    //redis::YieldFunction = &YieldFunction;
+	//redis::YieldFunction = &YieldFunction;
 	//redis::StartFunction = &StartFunction;
 
 	return true;
@@ -94,7 +94,7 @@ bool NFCNoSqlModule::Execute()
 	{
 		if (!xNosqlDriver->Enable())
 		{
-			//m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFGUID(), xNosqlDriver->GetIP(), xNosqlDriver->GetAuthKey(), __FUNCTION__, __LINE__);
+			m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFGUID(), xNosqlDriver->GetIP(), xNosqlDriver->GetAuthKey(), __FUNCTION__, __LINE__);
 
 			//xNosqlDriver->ReConnect();
 		}
@@ -209,9 +209,8 @@ bool NFCNoSqlModule::RemoveConnectSql(const std::string& strID)
 	return mxNoSqlDriver.RemoveElement(strID);
 }
 
-bool NFCNoSqlModule::AUTH(const std::string & auth)
+const bool NFCNoSqlModule::Del(const std::string &strKey)
 {
-<<<<<<< HEAD
 	NF_SHARE_PTR<NFRedisClient> xNoSqlDriver = GetDriverBySuit(strKey);
 	if (xNoSqlDriver && xNoSqlDriver->Enable())
 	{
@@ -223,14 +222,11 @@ bool NFCNoSqlModule::AUTH(const std::string & auth)
 		return xNoSqlDriver->DEL(strKey);
 	}
 
-=======
->>>>>>> dc70e7b2547cbeb43a753941b1d7db99c08083cd
 	return false;
 }
 
-bool NFCNoSqlModule::SelectDB(int dbnum)
+const bool NFCNoSqlModule::Exists(const std::string &strKey)
 {
-<<<<<<< HEAD
 	NF_SHARE_PTR<NFRedisClient> xNoSqlDriver = GetDriverBySuit(strKey);
 	if (xNoSqlDriver && xNoSqlDriver->Enable())
 	{
@@ -242,14 +238,11 @@ bool NFCNoSqlModule::SelectDB(int dbnum)
 		return xNoSqlDriver->EXISTS(strKey);
 	}
 
-=======
->>>>>>> dc70e7b2547cbeb43a753941b1d7db99c08083cd
 	return false;
 }
 
-bool NFCNoSqlModule::DEL(const std::string & key)
+const bool NFCNoSqlModule::Expire(const std::string &strKey, unsigned int nSecs)
 {
-<<<<<<< HEAD
 	NF_SHARE_PTR<NFRedisClient> xNoSqlDriver = GetDriverBySuit(strKey);
 	if (xNoSqlDriver && xNoSqlDriver->Enable())
 	{
@@ -261,14 +254,11 @@ bool NFCNoSqlModule::DEL(const std::string & key)
 		return xNoSqlDriver->EXPIRE(strKey, nSecs);
 	}
 
-=======
->>>>>>> dc70e7b2547cbeb43a753941b1d7db99c08083cd
 	return false;
 }
 
-bool NFCNoSqlModule::EXISTS(const std::string & key)
+const bool NFCNoSqlModule::Expireat(const std::string &strKey, unsigned int nUnixTime)
 {
-<<<<<<< HEAD
 	NF_SHARE_PTR<NFRedisClient> xNoSqlDriver = GetDriverBySuit(strKey);
 	if (xNoSqlDriver && xNoSqlDriver->Enable())
 	{
@@ -280,24 +270,43 @@ bool NFCNoSqlModule::EXISTS(const std::string & key)
 		return xNoSqlDriver->EXPIREAT(strKey, nUnixTime);
 	}
 
-=======
->>>>>>> dc70e7b2547cbeb43a753941b1d7db99c08083cd
 	return false;
 }
 
-bool NFCNoSqlModule::EXPIRE(const std::string & key, const unsigned int secs)
+const bool NFCNoSqlModule::Set(const std::string &strKey, const std::string &strValue)
 {
+	NF_SHARE_PTR<NFRedisClient> xNoSqlDriver = GetDriverBySuit(strKey);
+	if (xNoSqlDriver && xNoSqlDriver->Enable())
+	{
+		while (xNoSqlDriver->Busy())
+		{
+			YieldCo();
+		}
+
+		return xNoSqlDriver->SET(strKey, strValue);
+	}
+
 	return false;
 }
 
-bool NFCNoSqlModule::EXPIREAT(const std::string & key, const int64_t unixTime)
+const bool NFCNoSqlModule::Get(const std::string &strKey, std::string &strValue)
 {
+	NF_SHARE_PTR<NFRedisClient> xNoSqlDriver = GetDriverBySuit(strKey);
+	if (xNoSqlDriver && xNoSqlDriver->Enable())
+	{
+		while (xNoSqlDriver->Busy())
+		{
+			YieldCo();
+		}
+
+		return xNoSqlDriver->GET(strKey, strValue);
+	}
+
 	return false;
 }
 
-bool NFCNoSqlModule::PERSIST(const std::string & key)
+const bool NFCNoSqlModule::SetNX(const std::string &strKey, const std::string &strValue)
 {
-<<<<<<< HEAD
 	NF_SHARE_PTR<NFRedisClient> xNoSqlDriver = GetDriverBySuit(strKey);
 	if (xNoSqlDriver && xNoSqlDriver->Enable())
 	{
@@ -309,37 +318,57 @@ bool NFCNoSqlModule::PERSIST(const std::string & key)
 		return xNoSqlDriver->SETNX(strKey, strValue);
 	}
 
-=======
->>>>>>> dc70e7b2547cbeb43a753941b1d7db99c08083cd
 	return false;
 }
 
-int NFCNoSqlModule::TTL(const std::string & key)
+const bool NFCNoSqlModule::SetEX(const std::string &strKey, const std::string &strValue, const unsigned int nSeconds)
 {
-	return 0;
-}
+	NF_SHARE_PTR<NFRedisClient> xNoSqlDriver = GetDriverBySuit(strKey);
+	if (xNoSqlDriver && xNoSqlDriver->Enable())
+	{
+		while (xNoSqlDriver->Busy())
+		{
+			YieldCo();
+		}
 
-std::string NFCNoSqlModule::TYPE(const std::string & key)
-{
-	return std::string();
-}
+		return xNoSqlDriver->SETEX(strKey, strValue, nSeconds);
+	}
 
-bool NFCNoSqlModule::APPEND(const std::string & key, const std::string & value, int & length)
-{
 	return false;
 }
 
-bool NFCNoSqlModule::DECR(const std::string & key, int64_t & value)
+const bool NFCNoSqlModule::HSet(const std::string &strKey, const std::string &strField, const std::string &strValue)
 {
+	NF_SHARE_PTR<NFRedisClient> xNoSqlDriver = GetDriverBySuit(strKey);
+	if (xNoSqlDriver && xNoSqlDriver->Enable())
+	{
+		while (xNoSqlDriver->Busy())
+		{
+			YieldCo();
+		}
+
+		return xNoSqlDriver->HSET(strKey, strValue, strValue);
+	}
+
 	return false;
 }
 
-bool NFCNoSqlModule::DECRBY(const std::string & key, const int64_t decrement, int64_t & value)
+const bool NFCNoSqlModule::HGet(const std::string &strKey, const std::string &strField, std::string &strValue)
 {
+	NF_SHARE_PTR<NFRedisClient> xNoSqlDriver = GetDriverBySuit(strKey);
+	if (xNoSqlDriver && xNoSqlDriver->Enable())
+	{
+		while (xNoSqlDriver->Busy())
+		{
+			YieldCo();
+		}
+
+		return xNoSqlDriver->HGET(strKey, strValue, strValue);
+	}
+
 	return false;
 }
 
-<<<<<<< HEAD
 const bool NFCNoSqlModule::HMSet(const std::string &strKey, const std::vector<string_pair> &fieldVec)
 {
 	NF_SHARE_PTR<NFRedisClient> xNoSqlDriver = GetDriverBySuit(strKey);
@@ -353,55 +382,125 @@ const bool NFCNoSqlModule::HMSet(const std::string &strKey, const std::vector<st
 		return xNoSqlDriver->HMSET(strKey, fieldVec);
 	}
 
-=======
-bool NFCNoSqlModule::GET(const std::string & key, std::string & value)
-{
->>>>>>> dc70e7b2547cbeb43a753941b1d7db99c08083cd
 	return false;
 }
 
-bool NFCNoSqlModule::GETSET(const std::string & key, const std::string & value, std::string & oldValue)
+const bool NFCNoSqlModule::HMGet(const std::string &strKey, const std::vector<std::string> &fieldVec,
+	std::vector<std::string> &valueVec)
 {
+	NF_SHARE_PTR<NFRedisClient> xNoSqlDriver = GetDriverBySuit(strKey);
+	if (xNoSqlDriver && xNoSqlDriver->Enable())
+	{
+		while (xNoSqlDriver->Busy())
+		{
+			YieldCo();
+		}
+
+		return xNoSqlDriver->HMGET(strKey, fieldVec, valueVec);
+	}
+
 	return false;
 }
 
-bool NFCNoSqlModule::INCR(const std::string & key, int64_t & value)
+const bool NFCNoSqlModule::HExists(const std::string &strKey, const std::string &strField)
 {
+	NF_SHARE_PTR<NFRedisClient> xNoSqlDriver = GetDriverBySuit(strKey);
+	if (xNoSqlDriver && xNoSqlDriver->Enable())
+	{
+		while (xNoSqlDriver->Busy())
+		{
+			YieldCo();
+		}
+
+		return xNoSqlDriver->HEXISTS(strKey, strField);
+	}
+
 	return false;
 }
 
-bool NFCNoSqlModule::INCRBY(const std::string & key, const int64_t increment, int64_t & value)
+const bool NFCNoSqlModule::HDel(const std::string &strKey, const std::string &strField)
 {
+	NF_SHARE_PTR<NFRedisClient> xNoSqlDriver = GetDriverBySuit(strKey);
+	if (xNoSqlDriver && xNoSqlDriver->Enable())
+	{
+		while (xNoSqlDriver->Busy())
+		{
+			YieldCo();
+		}
+
+		return xNoSqlDriver->HDEL(strKey, strField);
+	}
+
 	return false;
 }
 
-bool NFCNoSqlModule::INCRBYFLOAT(const std::string & key, const float increment, float & value)
+const bool NFCNoSqlModule::HLength(const std::string &strKey, int &nLen)
 {
+	NF_SHARE_PTR<NFRedisClient> xNoSqlDriver = GetDriverBySuit(strKey);
+	if (xNoSqlDriver && xNoSqlDriver->Enable())
+	{
+		while (xNoSqlDriver->Busy())
+		{
+			YieldCo();
+		}
+
+		return xNoSqlDriver->HLEN(strKey, nLen);
+	}
+
 	return false;
 }
 
-bool NFCNoSqlModule::MGET(const string_vector & keys, string_vector & values)
+const bool NFCNoSqlModule::HKeys(const std::string &strKey, std::vector<std::string> &fieldVec)
 {
+	NF_SHARE_PTR<NFRedisClient> xNoSqlDriver = GetDriverBySuit(strKey);
+	if (xNoSqlDriver && xNoSqlDriver->Enable())
+	{
+		while (xNoSqlDriver->Busy())
+		{
+			YieldCo();
+		}
+
+		return xNoSqlDriver->HKEYS(strKey, fieldVec);
+	}
+
 	return false;
 }
 
-void NFCNoSqlModule::MSET(const string_pair_vector & values)
+const bool NFCNoSqlModule::HValues(const std::string &strKey, std::vector<std::string> &valueVec)
 {
-}
+	NF_SHARE_PTR<NFRedisClient> xNoSqlDriver = GetDriverBySuit(strKey);
+	if (xNoSqlDriver && xNoSqlDriver->Enable())
+	{
+		while (xNoSqlDriver->Busy())
+		{
+			YieldCo();
+		}
 
-bool NFCNoSqlModule::SET(const std::string & key, const std::string & value)
-{
+		return xNoSqlDriver->HVALS(strKey, valueVec);
+	}
+
 	return false;
 }
 
-bool NFCNoSqlModule::SETEX(const std::string & key, const std::string & value, int time)
+const bool
+NFCNoSqlModule::HGetAll(const std::string &strKey, std::vector<std::pair<std::string, std::string> > &valueVec)
 {
+	NF_SHARE_PTR<NFRedisClient> xNoSqlDriver = GetDriverBySuit(strKey);
+	if (xNoSqlDriver && xNoSqlDriver->Enable())
+	{
+		while (xNoSqlDriver->Busy())
+		{
+			YieldCo();
+		}
+
+		return xNoSqlDriver->HGETALL(strKey, valueVec);
+	}
+
 	return false;
 }
 
-bool NFCNoSqlModule::SETNX(const std::string & key, const std::string & value)
+const bool NFCNoSqlModule::ZAdd(const std::string &strKey, const double nScore, const std::string &strMember)
 {
-<<<<<<< HEAD
 	NF_SHARE_PTR<NFRedisClient> xNoSqlDriver = GetDriverBySuit(strKey);
 	if (xNoSqlDriver && xNoSqlDriver->Enable())
 	{
@@ -429,194 +528,271 @@ const bool NFCNoSqlModule::ZIncrBy(const std::string &strKey, const std::string 
 		return xNoSqlDriver->ZINCRBY(strKey, strMember, score, nIncrement);
 	}
 
-=======
 	return false;
 }
 
-bool NFCNoSqlModule::STRLEN(const std::string & key, int & length)
+const bool NFCNoSqlModule::ZRem(const std::string &strKey, const std::string &strMember)
 {
->>>>>>> dc70e7b2547cbeb43a753941b1d7db99c08083cd
+	NF_SHARE_PTR<NFRedisClient> xNoSqlDriver = GetDriverBySuit(strKey);
+	if (xNoSqlDriver && xNoSqlDriver->Enable())
+	{
+		while (xNoSqlDriver->Busy())
+		{
+			YieldCo();
+		}
+
+		return xNoSqlDriver->ZREM(strKey, strMember);
+	}
+
 	return false;
 }
 
-int NFCNoSqlModule::HDEL(const std::string & key, const std::string & field)
+const bool NFCNoSqlModule::ZRemRangeByRank(const std::string &strKey, const int nStart, const int nStop)
 {
-	return 0;
-}
+	NF_SHARE_PTR<NFRedisClient> xNoSqlDriver = GetDriverBySuit(strKey);
+	if (xNoSqlDriver && xNoSqlDriver->Enable())
+	{
+		while (xNoSqlDriver->Busy())
+		{
+			YieldCo();
+		}
 
-int NFCNoSqlModule::HDEL(const std::string & key, const string_vector & fields)
-{
-	return 0;
-}
+		return xNoSqlDriver->ZREMRANGEBYRANK(strKey, nStart, nStop);
+	}
 
-bool NFCNoSqlModule::HEXISTS(const std::string & key, const std::string & field)
-{
 	return false;
 }
 
-bool NFCNoSqlModule::HGET(const std::string & key, const std::string & field, std::string & value)
+const bool NFCNoSqlModule::ZRemRangeByScore(const std::string &strKey, const int nMin, const int nMax)
 {
+	NF_SHARE_PTR<NFRedisClient> xNoSqlDriver = GetDriverBySuit(strKey);
+	if (xNoSqlDriver && xNoSqlDriver->Enable())
+	{
+		while (xNoSqlDriver->Busy())
+		{
+			YieldCo();
+		}
+
+		return xNoSqlDriver->ZREMRANGEBYSCORE(strKey, nMin, nMax);
+	}
+
 	return false;
 }
 
-bool NFCNoSqlModule::HGETALL(const std::string & key, std::vector<string_pair>& values)
+const bool NFCNoSqlModule::ZScore(const std::string &strKey, const std::string &strMember, double &nScore)
 {
+	NF_SHARE_PTR<NFRedisClient> xNoSqlDriver = GetDriverBySuit(strKey);
+	if (xNoSqlDriver && xNoSqlDriver->Enable())
+	{
+		while (xNoSqlDriver->Busy())
+		{
+			YieldCo();
+		}
+
+		return xNoSqlDriver->ZSCORE(strKey, strMember, nScore);
+	}
+
 	return false;
 }
 
-bool NFCNoSqlModule::HINCRBY(const std::string & key, const std::string & field, const int by, int64_t & value)
+const bool NFCNoSqlModule::ZCard(const std::string &strKey, int &nCount)
 {
+	NF_SHARE_PTR<NFRedisClient> xNoSqlDriver = GetDriverBySuit(strKey);
+	if (xNoSqlDriver && xNoSqlDriver->Enable())
+	{
+		while (xNoSqlDriver->Busy())
+		{
+			YieldCo();
+		}
+
+		return xNoSqlDriver->ZCARD(strKey, nCount);
+	}
+
 	return false;
 }
 
-bool NFCNoSqlModule::HINCRBYFLOAT(const std::string & key, const std::string & field, const float by, float & value)
+const bool NFCNoSqlModule::ZRank(const std::string &strKey, const std::string &strMember, int &nRank)
 {
+	NF_SHARE_PTR<NFRedisClient> xNoSqlDriver = GetDriverBySuit(strKey);
+	if (xNoSqlDriver && xNoSqlDriver->Enable())
+	{
+		while (xNoSqlDriver->Busy())
+		{
+			YieldCo();
+		}
+
+		return xNoSqlDriver->ZRANK(strKey, strMember, nRank);
+	}
+
 	return false;
 }
 
-bool NFCNoSqlModule::HKEYS(const std::string & key, std::vector<std::string>& fields)
+const bool NFCNoSqlModule::ZCount(const std::string &strKey, const int nMin, const int nMax, int &nCount)
 {
+	NF_SHARE_PTR<NFRedisClient> xNoSqlDriver = GetDriverBySuit(strKey);
+	if (xNoSqlDriver && xNoSqlDriver->Enable())
+	{
+		while (xNoSqlDriver->Busy())
+		{
+			YieldCo();
+		}
+
+		return xNoSqlDriver->ZCOUNT(strKey, nMin, nMax, nCount);
+	}
+
 	return false;
 }
 
-bool NFCNoSqlModule::HLEN(const std::string & key, int & number)
-{
-	return false;
-}
-
-<<<<<<< HEAD
 const bool NFCNoSqlModule::ZRevRange(const std::string &strKey, const int nStart, const int nStop,
-								std::vector<std::pair<std::string, double>> &memberScoreVec)
-=======
-bool NFCNoSqlModule::HMGET(const std::string & key, const string_vector & fields, string_vector & values)
->>>>>>> dc70e7b2547cbeb43a753941b1d7db99c08083cd
+	std::vector<std::pair<std::string, double>> &memberScoreVec)
 {
+	NF_SHARE_PTR<NFRedisClient> xNoSqlDriver = GetDriverBySuit(strKey);
+	if (xNoSqlDriver && xNoSqlDriver->Enable())
+	{
+		while (xNoSqlDriver->Busy())
+		{
+			YieldCo();
+		}
+
+		return xNoSqlDriver->ZREVRANGE(strKey, nStart, nStop, memberScoreVec);
+	}
+
 	return false;
 }
 
-bool NFCNoSqlModule::HMSET(const std::string & key, const std::vector<string_pair>& values)
+const bool NFCNoSqlModule::ZRevRank(const std::string &strKey, const std::string &strMember, int &nRank)
 {
+	NF_SHARE_PTR<NFRedisClient> xNoSqlDriver = GetDriverBySuit(strKey);
+	if (xNoSqlDriver && xNoSqlDriver->Enable())
+	{
+		while (xNoSqlDriver->Busy())
+		{
+			YieldCo();
+		}
+
+		return xNoSqlDriver->ZREVRANK(strKey, strMember, nRank);
+	}
+
 	return false;
 }
 
-bool NFCNoSqlModule::HSET(const std::string & key, const std::string & field, const std::string & value)
-{
-	return false;
-}
-
-<<<<<<< HEAD
 const bool NFCNoSqlModule::ZRange(const std::string &strKey, const int nStartIndex, const int nEndIndex,
-							std::vector<std::pair<std::string, double>> &memberScoreVec)
-=======
-bool NFCNoSqlModule::HSETNX(const std::string & key, const std::string & field, const std::string & value)
->>>>>>> dc70e7b2547cbeb43a753941b1d7db99c08083cd
+	std::vector<std::pair<std::string, double>> &memberScoreVec)
 {
+	NF_SHARE_PTR<NFRedisClient> xNoSqlDriver = GetDriverBySuit(strKey);
+	if (xNoSqlDriver && xNoSqlDriver->Enable())
+	{
+		while (xNoSqlDriver->Busy())
+		{
+			YieldCo();
+		}
+
+		return xNoSqlDriver->ZRANGE(strKey, nStartIndex, nEndIndex, memberScoreVec);
+	}
+
 	return false;
 }
 
-bool NFCNoSqlModule::HVALS(const std::string & key, string_vector & values)
-{
-	return false;
-}
-
-bool NFCNoSqlModule::HSTRLEN(const std::string & key, const std::string & field, int & length)
-{
-	return false;
-}
-
-<<<<<<< HEAD
 const bool NFCNoSqlModule::ZRangeByScore(const std::string &strKey, const int nMin, const int nMax,
-										 std::vector<std::pair<std::string, double>> &memberScoreVec)
-=======
-bool NFCNoSqlModule::LINDEX(const std::string & key, const int index, std::string & value)
->>>>>>> dc70e7b2547cbeb43a753941b1d7db99c08083cd
+	std::vector<std::pair<std::string, double>> &memberScoreVec)
 {
+	NF_SHARE_PTR<NFRedisClient> xNoSqlDriver = GetDriverBySuit(strKey);
+	if (xNoSqlDriver && xNoSqlDriver->Enable())
+	{
+		while (xNoSqlDriver->Busy())
+		{
+			YieldCo();
+		}
+
+		return xNoSqlDriver->ZRANGEBYSCORE(strKey, nMin, nMax, memberScoreVec);
+	}
+
 	return false;
 }
 
-bool NFCNoSqlModule::LLEN(const std::string & key, int & length)
+const bool NFCNoSqlModule::ListPush(const std::string &strKey, const std::string &strValue)
 {
+	NF_SHARE_PTR<NFRedisClient> xNoSqlDriver = GetDriverBySuit(strKey);
+	if (xNoSqlDriver && xNoSqlDriver->Enable())
+	{
+		while (xNoSqlDriver->Busy())
+		{
+			YieldCo();
+		}
+
+		return xNoSqlDriver->LPUSH(strKey, strValue);
+	}
+
 	return false;
 }
 
-bool NFCNoSqlModule::LPOP(const std::string & key, std::string & value)
+const bool NFCNoSqlModule::ListPop(const std::string &strKey, std::string &strValue)
 {
+	NF_SHARE_PTR<NFRedisClient> xNoSqlDriver = GetDriverBySuit(strKey);
+	if (xNoSqlDriver && xNoSqlDriver->Enable())
+	{
+		while (xNoSqlDriver->Busy())
+		{
+			YieldCo();
+		}
+
+		return xNoSqlDriver->LPOP(strKey, strValue);
+	}
+
 	return false;
 }
 
-int NFCNoSqlModule::LPUSH(const std::string & key, const std::string & value)
+const bool
+NFCNoSqlModule::ListRange(const std::string &strKey, const int nStar, const int nEnd, std::vector<std::string> &xList)
 {
-	return 0;
-}
+	NF_SHARE_PTR<NFRedisClient> xNoSqlDriver = GetDriverBySuit(strKey);
+	if (xNoSqlDriver && xNoSqlDriver->Enable())
+	{
+		while (xNoSqlDriver->Busy())
+		{
+			YieldCo();
+		}
 
-int NFCNoSqlModule::LPUSHX(const std::string & key, const std::string & value)
-{
-	return 0;
-}
+		return xNoSqlDriver->LRANGE(strKey, nStar, nEnd, xList);
+	}
 
-bool NFCNoSqlModule::LRANGE(const std::string & key, const int start, const int end, string_vector & values)
-{
 	return false;
 }
 
-bool NFCNoSqlModule::LSET(const std::string & key, const int index, const std::string & value)
+const bool NFCNoSqlModule::ListLen(const std::string &strKey, int &nLength)
 {
+	NF_SHARE_PTR<NFRedisClient> xNoSqlDriver = GetDriverBySuit(strKey);
+	if (xNoSqlDriver && xNoSqlDriver->Enable())
+	{
+		while (xNoSqlDriver->Busy())
+		{
+			YieldCo();
+		}
+
+		return xNoSqlDriver->LLEN(strKey, nLength);
+	}
+
 	return false;
 }
 
-bool NFCNoSqlModule::RPOP(const std::string & key, std::string & value)
+const bool NFCNoSqlModule::ListIndex(const std::string &strKey, const int nIndex, std::string &strValue)
 {
+	NF_SHARE_PTR<NFRedisClient> xNoSqlDriver = GetDriverBySuit(strKey);
+	if (xNoSqlDriver && xNoSqlDriver->Enable())
+	{
+		while (xNoSqlDriver->Busy())
+		{
+			YieldCo();
+		}
+
+		return xNoSqlDriver->LINDEX(strKey, nIndex, strValue);
+	}
+
 	return false;
 }
 
-int NFCNoSqlModule::RPUSH(const std::string & key, const std::string & value)
+const bool NFCNoSqlModule::ListRem(const std::string &strKey, const int nCount, const std::string &strValue)
 {
-	return 0;
-}
-
-int NFCNoSqlModule::RPUSHX(const std::string & key, const std::string & value)
-{
-	return 0;
-}
-
-int NFCNoSqlModule::ZADD(const std::string & key, const std::string & member, const double score)
-{
-	return 0;
-}
-
-int NFCNoSqlModule::ZCARD(const std::string & key)
-{
-	return 0;
-}
-
-int NFCNoSqlModule::ZCOUNT(const std::string & key, const double start, const double end)
-{
-	return 0;
-}
-
-bool NFCNoSqlModule::ZINCRBY(const std::string & key, const std::string & member, const double score, double & newScore)
-{
-	return false;
-}
-
-bool NFCNoSqlModule::ZRANGE(const std::string & key, const int start, const int end, string_vector & values)
-{
-	return false;
-}
-
-bool NFCNoSqlModule::ZRANGEBYSCORE(const std::string & key, const double start, const double end, string_vector & values)
-{
-	return false;
-}
-
-bool NFCNoSqlModule::ZRANK(const std::string & key, const std::string & member, int & rank)
-{
-	return false;
-}
-
-bool NFCNoSqlModule::ZREM(const std::string & key, const std::string & member)
-{
-<<<<<<< HEAD
 	//NF_SHARE_PTR<NFRedisClient> xNoSqlDriver = GetDriverBySuit(strKey);
 	//if (xNoSqlDriver && xNoSqlDriver->Enable())
 	//{
@@ -627,24 +803,12 @@ bool NFCNoSqlModule::ZREM(const std::string & key, const std::string & member)
 
 	//	return xNoSqlDriver->LISTREM(strKey, nCount, strValue);
 	//}
-=======
+
 	return false;
 }
 
-bool NFCNoSqlModule::ZREMRANGEBYRANK(const std::string & key, const int start, const int end)
+const bool NFCNoSqlModule::ListSet(const std::string &strKey, const int nCount, const std::string &strValue)
 {
-	return false;
-}
->>>>>>> dc70e7b2547cbeb43a753941b1d7db99c08083cd
-
-bool NFCNoSqlModule::ZREMRANGEBYSCORE(const std::string & key, const double min, const double max)
-{
-	return false;
-}
-
-bool NFCNoSqlModule::ZREVRANGE(const std::string & key, const int start, const int end, string_vector & values)
-{
-<<<<<<< HEAD
 	NF_SHARE_PTR<NFRedisClient> xNoSqlDriver = GetDriverBySuit(strKey);
 	if (xNoSqlDriver && xNoSqlDriver->Enable())
 	{
@@ -655,43 +819,22 @@ bool NFCNoSqlModule::ZREVRANGE(const std::string & key, const int start, const i
 
 		return xNoSqlDriver->LSET(strKey, nCount, strValue);
 	}
-=======
+
 	return false;
 }
 
-bool NFCNoSqlModule::ZREVRANGEBYSCORE(const std::string & key, const double start, const double end, string_vector & values)
+const bool NFCNoSqlModule::ListTrim(const std::string &strKey, const int nStar, const int nEnd)
 {
-	return false;
-}
->>>>>>> dc70e7b2547cbeb43a753941b1d7db99c08083cd
-
-bool NFCNoSqlModule::ZREVRANK(const std::string & key, const std::string & member, int & rank)
-{
-	return false;
-}
-
-bool NFCNoSqlModule::ZSCORE(const std::string & key, const std::string & member, double & score)
-{
-<<<<<<< HEAD
 	/*NF_SHARE_PTR<NFRedisClient> xNoSqlDriver = GetDriverBySuit(strKey);
 	if (xNoSqlDriver && xNoSqlDriver->Enable())
 	{
-		while (xNoSqlDriver->Busy())
-		{
-			YieldCo();
-		}
+	while (xNoSqlDriver->Busy())
+	{
+	YieldCo();
+	}
 
-		return xNoSqlDriver->ListTrim(strKey, nStar, nEnd);
+	return xNoSqlDriver->ListTrim(strKey, nStar, nEnd);
 	}*/
-=======
+
 	return false;
-}
-
-void NFCNoSqlModule::FLUSHALL()
-{
-}
->>>>>>> dc70e7b2547cbeb43a753941b1d7db99c08083cd
-
-void NFCNoSqlModule::FLUSHDB()
-{
 }

@@ -17,23 +17,6 @@ typedef std::pair<string_type, double> string_score_pair;
 typedef std::vector<string_score_pair> string_score_vector;
 typedef std::set<string_type> string_set;
 
-typedef std::string string_type;
-typedef std::vector<string_type> string_vector;
-typedef std::pair<string_type, string_type> string_pair;
-typedef std::vector<string_pair> string_pair_vector;
-typedef std::pair<string_type, double> string_score_pair;
-typedef std::vector<string_score_pair> string_score_vector;
-typedef std::set<string_type> string_set;
-
-
-typedef std::string string_type;
-typedef std::vector<string_type> string_vector;
-typedef std::pair<string_type, string_type> string_pair;
-typedef std::vector<string_pair> string_pair_vector;
-typedef std::pair<string_type, double> string_score_pair;
-typedef std::vector<string_score_pair> string_score_vector;
-typedef std::set<string_type> string_set;
-
 
 class NFIRedisClient
 {
