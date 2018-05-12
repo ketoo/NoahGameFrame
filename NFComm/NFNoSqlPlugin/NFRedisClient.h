@@ -661,10 +661,13 @@ public:
     */
     void FLUSHDB();
 
+protected:
+	redisReply* BuildSendCmd(const NFRedisCommand& cmd);
+
+
 private:
 	int64_t mnIndex;
 	std::list<int64_t> mnIndexList;
-	int64_t BuildSendCmd(const NFRedisCommand& cmd);
     NFRedisClientSocket* m_pRedisClientSocket;
 };
 
