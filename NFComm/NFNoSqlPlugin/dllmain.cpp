@@ -5,6 +5,8 @@
 #pragma comment( lib, "redisclient_d.lib" )
 #pragma comment( lib, "NFCore_d.lib" )
 #pragma comment( lib, "Theron_d.lib" )
+#pragma comment( lib, "hiredis_d.lib") 
+//#pragma comment( lib, "Win32_Interop_d.lib") 
 #else
 #pragma comment( lib, "redisclient_d.a" )
 #pragma comment( lib, "libtherond.a")
