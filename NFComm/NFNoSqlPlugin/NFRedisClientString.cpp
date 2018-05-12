@@ -22,7 +22,8 @@ bool NFRedisClient::APPEND(const std::string &key, const std::string &value, int
 	}
 
 	freeReplyObject(pReply);
-	return false;
+
+	return true;
 }
 
 bool NFRedisClient::DECR(const std::string& key, int64_t& value)
@@ -36,7 +37,10 @@ bool NFRedisClient::DECR(const std::string& key, int64_t& value)
 		return false;
 	}
 
-	value = pReply->integer;
+	if (pReply->type == REDIS_REPLY_INTEGER)
+	{
+		value = pReply->integer;
+	}
 
 	freeReplyObject(pReply);
 
@@ -55,8 +59,12 @@ bool NFRedisClient::DECRBY(const std::string &key, const int64_t decrement, int6
 		return false;
 	}
 
-	value = pReply->integer;
+	if (pReply->type == REDIS_REPLY_INTEGER)
+	{
+		value = pReply->integer;
+	}
 
+	freeReplyObject(pReply);
 	return true;
 }
 
@@ -72,7 +80,10 @@ bool NFRedisClient::GETSET(const std::string &key, const std::string &value, std
 		return false;
 	}
 
-	oldValue = pReply->str;
+	if (pReply->type == REDIS_REPLY_STRING)
+	{
+		oldValue = pReply->str;
+	}
 
 	freeReplyObject(pReply);
 
@@ -90,7 +101,10 @@ bool NFRedisClient::INCR(const std::string &key, int64_t& value)
 		return false;
 	}
 
-	value = pReply->integer;
+	if (pReply->type == REDIS_REPLY_INTEGER)
+	{
+		value = pReply->integer;
+	}
 
 	freeReplyObject(pReply);
 
@@ -109,7 +123,10 @@ bool NFRedisClient::INCRBY(const std::string &key, const int64_t increment, int6
 		return false;
 	}
 
-	value = pReply->integer;
+	if (pReply->type == REDIS_REPLY_INTEGER)
+	{
+		value = pReply->integer;
+	}
 
 	freeReplyObject(pReply);
 
@@ -128,16 +145,15 @@ bool NFRedisClient::INCRBYFLOAT(const std::string &key, const float increment, f
 		return false;
 	}
 
-	if (!NF_StrTo<float>(pReply->str, value))
+	bool success = false;
+	if (pReply->type == REDIS_REPLY_STRING)
 	{
-		value = 0.f;
-		freeReplyObject(pReply);
-		return false;
+		success = NF_StrTo<float>(pReply->str, value);
 	}
 
 	freeReplyObject(pReply);
 
-	return true;
+	return success;
 }
 
 bool NFRedisClient::MGET(const string_vector &keys, string_vector &values)
@@ -218,23 +234,15 @@ bool NFRedisClient::SETNX(const std::string &key, const std::string &value)
 		return false;
 	}
 
+	int success = 0;
 	if (pReply->type == REDIS_REPLY_INTEGER)
 	{
-		if (0 == pReply->integer)
-		{
-			freeReplyObject(pReply);
-			return false;
-		}
-		else
-		{
-			freeReplyObject(pReply);
-			return true;
-		}
+		success = pReply->integer;
 	}
 
 	freeReplyObject(pReply);
 
-	return false;
+	return bool(success);
 }
 
 bool NFRedisClient::STRLEN(const std::string &key, int& length)
