@@ -29,13 +29,6 @@
 #include "Dependencies/hiredis/hiredis_linux/hiredis/hiredis.h"
 #endif
 
-//typedef std::string string_type;
-//typedef std::vector<string_type> string_vector;
-//typedef std::pair<string_type, string_type> string_pair;
-//typedef std::vector<string_pair> string_pair_vector;
-//typedef std::pair<string_type, double> string_score_pair;
-//typedef std::vector<string_score_pair> string_score_vector;
-//typedef std::set<string_type> string_set;
 
 typedef void(*CoroutineYieldFunction)();
 typedef void(*CoroutineStartFunction)();
@@ -46,7 +39,7 @@ static CoroutineStartFunction StartFunction = NULL;
 class NFRedisClient : public NFIRedisClient
 {
 public:
-    NFRedisClient();
+	NFRedisClient();
 
 	virtual bool Connect(const std::string& ip, const int port, const std::string& auth);
 
@@ -674,7 +667,7 @@ public:
 	virtual void FLUSHDB();
 
 protected:
-	redisReply* BuildSendCmd(const NFRedisCommand& cmd);
+	redisReply * BuildSendCmd(const NFRedisCommand& cmd);
 
 
 private:
@@ -684,7 +677,7 @@ private:
 	std::string authKey_;
 	int64_t mnIndex;
 	std::list<int64_t> mnIndexList;
-    NFRedisClientSocket* m_pRedisClientSocket;
+	NFRedisClientSocket* m_pRedisClientSocket;
 };
 
 
