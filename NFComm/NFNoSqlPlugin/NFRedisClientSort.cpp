@@ -28,7 +28,7 @@ int NFRedisClient::ZADD(const std::string & key, const std::string & member, con
 	return add_new_num;
 }
 
-int NFRedisClient::ZCARD(const std::string & key)
+bool NFRedisClient::ZCARD(const std::string & key, int &nCount)
 {
 	NFRedisCommand cmd(GET_NAME(ZCARD));
 	cmd << key;
@@ -39,18 +39,17 @@ int NFRedisClient::ZCARD(const std::string & key)
 		return false;
 	}
 
-	int num = 0;
 	if (pReply->type == REDIS_REPLY_INTEGER)
 	{
-		num = (int)pReply->integer;
+		nCount = (int)pReply->integer;
 	}
 
 	freeReplyObject(pReply);
 
-	return num;
+	return true;
 }
 
-int NFRedisClient::ZCOUNT(const std::string & key, const double start, const double end)
+bool NFRedisClient::ZCOUNT(const std::string & key, const double start, const double end, int &nCount)
 {
 	NFRedisCommand cmd(GET_NAME(ZCOUNT));
 	cmd << key;
@@ -63,10 +62,9 @@ int NFRedisClient::ZCOUNT(const std::string & key, const double start, const dou
 		return false;
 	}
 
-	int num = 0;
 	if (pReply->type == REDIS_REPLY_INTEGER)
 	{
-		num = (int)pReply->integer;
+		nCount = (int)pReply->integer;
 	}
 
 	freeReplyObject(pReply);
@@ -98,7 +96,7 @@ bool NFRedisClient::ZINCRBY(const std::string & key, const std::string & member,
 	return success;
 }
 
-bool NFRedisClient::ZRANGE(const std::string & key, const int start, const int end, string_vector& values)
+bool NFRedisClient::ZRANGE(const std::string & key, const int start, const int end, string_score_vector& values)
 {
 	NFRedisCommand cmd(GET_NAME(ZINCRBY));
 	cmd << key;
@@ -112,15 +110,25 @@ bool NFRedisClient::ZRANGE(const std::string & key, const int start, const int e
 		return false;
 	}
 
-	if (pReply->type == REDIS_REPLY_ARRAY)
+	try
 	{
-		for (size_t k = 0; k < pReply->elements; k = k + 2)
+		if (pReply->type == REDIS_REPLY_ARRAY)
 		{
-			if (pReply->element[k]->type == REDIS_REPLY_STRING)
+			for (size_t k = 0; k < pReply->elements; k = k + 2)
 			{
-				values.emplace_back(std::move(std::string(pReply->element[k]->str, pReply->element[k]->len)));
+				if (pReply->element[k]->type == REDIS_REPLY_STRING)
+				{
+					string_score_pair vecPair;
+					vecPair.first = std::string(pReply->element[k]->str, pReply->element[k]->len);
+					vecPair.second = lexical_cast<double>(pReply->element[k + 1]->str);
+					values.emplace_back(vecPair);
+				}
 			}
 		}
+	}
+	catch (...)
+	{
+
 	}
 
 	freeReplyObject(pReply);
@@ -128,7 +136,7 @@ bool NFRedisClient::ZRANGE(const std::string & key, const int start, const int e
 	return true;
 }
 
-bool NFRedisClient::ZRANGEBYSCORE(const std::string & key, const double start, const double end, string_pair_vector& values)
+bool NFRedisClient::ZRANGEBYSCORE(const std::string & key, const double start, const double end, string_score_vector& values)
 {
 	NFRedisCommand cmd(GET_NAME(ZRANGEBYSCORE));
 	cmd << key;
@@ -143,24 +151,25 @@ bool NFRedisClient::ZRANGEBYSCORE(const std::string & key, const double start, c
 		return false;
 	}
 
-	redisReply* pReply = BuildSendCmd(cmd);
-	if (pReply == nullptr)
+	try
 	{
-		return false;
-	}
-
-	if (pReply->type == REDIS_REPLY_ARRAY)
-	{
-		for (size_t k = 0; k < pReply->elements; k = k + 2)
+		if (pReply->type == REDIS_REPLY_ARRAY)
 		{
-			if (pReply->element[k]->type == REDIS_REPLY_STRING)
+			for (size_t k = 0; k < pReply->elements; k = k + 2)
 			{
-				values.emplace_back(std::move(
-					string_pair(std::string(pReply->element[k]->str, pReply->element[k]->len),
-						std::string(pReply->element[k + 1]->str, pReply->element[k + 1]->len))
-				));
+				if (pReply->element[k]->type == REDIS_REPLY_STRING)
+				{
+					string_score_pair vecPair;
+					vecPair.first = std::string(pReply->element[k]->str, pReply->element[k]->len);
+					vecPair.second = lexical_cast<double>(pReply->element[k + 1]->str);
+					values.emplace_back(vecPair);
+				}
 			}
 		}
+	}
+	catch (...)
+	{
+
 	}
 
 	freeReplyObject(pReply);
@@ -262,7 +271,7 @@ bool NFRedisClient::ZREMRANGEBYSCORE(const std::string & key, const double start
 	return (bool)del_num;
 }
 
-bool NFRedisClient::ZREVRANGE(const std::string& key, const int start, const int end, string_vector& values)
+bool NFRedisClient::ZREVRANGE(const std::string& key, const int start, const int end, string_score_vector& values)
 {
 	NFRedisCommand cmd(GET_NAME(ZREVRANGE));
 	cmd << key;
@@ -275,15 +284,25 @@ bool NFRedisClient::ZREVRANGE(const std::string& key, const int start, const int
 		return false;
 	}
 
-	if (pReply->type == REDIS_REPLY_ARRAY)
+	try
 	{
-		for (size_t k = 0; k < pReply->elements; k = k + 2)
+		if (pReply->type == REDIS_REPLY_ARRAY)
 		{
-			if (pReply->element[k]->type == REDIS_REPLY_STRING)
+			for (size_t k = 0; k < pReply->elements; k = k + 2)
 			{
-				values.emplace_back(std::move(std::string(pReply->element[k]->str, pReply->element[k]->len)));
+				if (pReply->element[k]->type == REDIS_REPLY_STRING)
+				{
+					string_score_pair vecPair;
+					vecPair.first = std::string(pReply->element[k]->str, pReply->element[k]->len);
+					vecPair.second = lexical_cast<double>(pReply->element[k + 1]->str);
+					values.emplace_back(vecPair);
+				}
 			}
 		}
+	}
+	catch (...)
+	{
+
 	}
 
 	freeReplyObject(pReply);
@@ -291,7 +310,7 @@ bool NFRedisClient::ZREVRANGE(const std::string& key, const int start, const int
 	return true;
 }
 
-bool NFRedisClient::ZREVRANGEBYSCORE(const std::string & key, const double start, const double end, string_vector& values)
+bool NFRedisClient::ZREVRANGEBYSCORE(const std::string & key, const double start, const double end, string_score_vector& values)
 {
 	NFRedisCommand cmd(GET_NAME(ZREVRANGEBYSCORE));
 	cmd << key;
@@ -306,15 +325,25 @@ bool NFRedisClient::ZREVRANGEBYSCORE(const std::string & key, const double start
 		return false;
 	}
 
-	if (pReply->type == REDIS_REPLY_ARRAY)
+	try
 	{
-		for (size_t k = 0; k < pReply->elements; k = k + 2)
+		if (pReply->type == REDIS_REPLY_ARRAY)
 		{
-			if (pReply->element[k]->type == REDIS_REPLY_STRING)
+			for (size_t k = 0; k < pReply->elements; k = k + 2)
 			{
-				values.emplace_back(std::move(std::string(pReply->element[k]->str, pReply->element[k]->len)));
+				if (pReply->element[k]->type == REDIS_REPLY_STRING)
+				{
+					string_score_pair vecPair;
+					vecPair.first = std::string(pReply->element[k]->str, pReply->element[k]->len);
+					vecPair.second = lexical_cast<double>(pReply->element[k + 1]->str);
+					values.emplace_back(vecPair);
+				}
 			}
 		}
+	}
+	catch (...)
+	{
+
 	}
 
 	freeReplyObject(pReply);
