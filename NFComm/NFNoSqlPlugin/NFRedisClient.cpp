@@ -7,7 +7,6 @@
 NFRedisClient::NFRedisClient()
 {
 	mnIndex = 0;
-	port_ = 0;
     m_pRedisClientSocket = new NFRedisClientSocket();
 }
 
@@ -31,9 +30,6 @@ bool NFRedisClient::Connect(const std::string &ip, const int port, const std::st
 			return AUTH(auth);
 		}
 
-		ip_ = ip;
-		port_ = port;
-		authKey_ = auth;
 		return true;
 	}
 
@@ -48,21 +44,6 @@ bool NFRedisClient::SelectDB(int dbnum)
 bool NFRedisClient::KeepLive()
 {
     return false;
-}
-
-const std::string& NFRedisClient::GetIP()
-{
-	return ip_;
-}
-
-const int NFRedisClient::GetPort()
-{
-	return port_;
-}
-
-const std::string& NFRedisClient::GetAuthKey()
-{
-	return authKey_;
 }
 
 bool NFRedisClient::Execute()
@@ -92,7 +73,7 @@ redisReply* NFRedisClient::BuildSendCmd(const NFRedisCommand& cmd)
 	while (true)
 	{
 		//get reply
-		int64_t nFrontIndex = mnIndexList.front();
+		const int nFrontIndex = mnIndexList.front();
 		if (nFrontIndex == index)
 		{
 			int ret = redisReaderGetReply(m_pRedisClientSocket->GetRedisReader(), &reply);
