@@ -25,7 +25,6 @@ bool NFRedisClient::Busy()
 	return true;
 }
 
-
 bool NFRedisClient::Connect(const std::string &ip, const int port, const std::string &auth)
 {
     int64_t nFD = m_pRedisClientSocket->Connect(ip, port);
