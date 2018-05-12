@@ -8,20 +8,20 @@ void NFRedisClient::FLUSHALL()
 {
     NFRedisCommand cmd(GET_NAME(FLUSHALL));
 
-
-	NF_SHARE_PTR<NFRedisResult> pRedisResult = BuildSendCmd(cmd);
-
-	WaitingResult(pRedisResult);
-
+	redisReply* pReply = BuildSendCmd(cmd);
+	if (pReply != nullptr)
+	{
+		freeReplyObject(pReply);
+	}
 }
 
 void NFRedisClient::FLUSHDB()
 {
     NFRedisCommand cmd(GET_NAME(FLUSHDB));
 
-
-	NF_SHARE_PTR<NFRedisResult> pRedisResult = BuildSendCmd(cmd);
-
-	WaitingResult(pRedisResult);
-
+	redisReply* pReply = BuildSendCmd(cmd);
+	if (pReply != nullptr)
+	{
+		freeReplyObject(pReply);
+	}
 }
