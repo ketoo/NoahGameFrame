@@ -74,19 +74,17 @@ public:
 
 	//NF_SHARE_PTR<NFRedisResult> DUMP(const std::string& key, std::string& out);
 
-<<<<<<< HEAD
 	virtual const bool HSet(const std::string& strKey, const std::string& strField, const std::string& strValue);
 	virtual const bool HGet(const std::string& strKey, const std::string& strField, std::string& strValue);
 	virtual const bool HMSet(const std::string& strKey, const std::vector<string_pair>& fieldVec);
 	virtual const bool HMGet(const std::string& strKey, const std::vector<std::string>& fieldVec, std::vector<std::string>& valueVec);
-=======
+
 	/**
 	* @brie Returns if key exists.
 	* @param key's name
 	* @return true if the key exists, false if the key does not exist.
 	*/
 	virtual bool EXISTS(const std::string& key);
->>>>>>> dc70e7b2547cbeb43a753941b1d7db99c08083cd
 
 	/**
 	* @brief Set a timeout on key. After the timeout has expired, the key will automatically be deleted
