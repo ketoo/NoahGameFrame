@@ -107,7 +107,6 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
       </PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="NFCNoSqlDriver.cpp" />
     <ClCompile Include="NFCNoSqlModule.cpp" />
     <ClCompile Include="NFNoSqlPlugin.cpp" />
     <ClCompile Include="NFRedisClient.cpp" />
@@ -120,18 +119,15 @@
     <ClCompile Include="NFRedisClientSort.cpp" />
     <ClCompile Include="NFRedisClientString.cpp" />
     <ClCompile Include="NFRedisCommand.cpp" />
-    <ClCompile Include="NFRedisResult.cpp" />
     <ClCompile Include="NFRedisTester.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="NFCNoSqlDriver.h" />
     <ClInclude Include="NFCNoSqlModule.h" />
     <ClInclude Include="NFNoSqlPlugin.h" />
     <ClInclude Include="NFRedisClient.h" />
     <ClInclude Include="NFRedisClientSocket.h" />
     <ClInclude Include="NFRedisCommand.h" />
     <ClInclude Include="NFRedisProtocolDefine.h" />
-    <ClInclude Include="NFRedisResult.h" />
     <ClInclude Include="NFRedisTester.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
