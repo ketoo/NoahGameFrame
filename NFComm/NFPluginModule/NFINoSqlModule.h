@@ -10,12 +10,12 @@
 #define NFI_NOSQL_MODULE_H
 
 #include "NFComm/NFPluginModule/NFIModule.h"
-#include "NFComm/NFPluginModule/NFINoSqlDriver.h"
+#include "NFComm/NFPluginModule/NFIRedisClient.h"
 
 
 class NFINoSqlModule
 	: public NFIModule,
-public NoSqlInterface
+public NFIRedisClient
 {
 public:
 
@@ -24,10 +24,10 @@ public:
 	virtual bool AddConnectSql(const std::string& strID, const std::string& strIP, const int nPort, const std::string& strPass) = 0;
 
 	virtual NFList<std::string> GetDriverIdList() = 0;
-	virtual NF_SHARE_PTR<NFINoSqlDriver>  GetDriver(const std::string& strID) = 0;
-	virtual NF_SHARE_PTR<NFINoSqlDriver>  GetDriverBySuitRandom() = 0;
-	virtual NF_SHARE_PTR<NFINoSqlDriver>  GetDriverBySuitConsistent() = 0;
-	virtual NF_SHARE_PTR<NFINoSqlDriver>  GetDriverBySuit(const std::string& strHash) = 0;
+	virtual NF_SHARE_PTR<NFIRedisClient>  GetDriver(const std::string& strID) = 0;
+	virtual NF_SHARE_PTR<NFIRedisClient>  GetDriverBySuitRandom() = 0;
+	virtual NF_SHARE_PTR<NFIRedisClient>  GetDriverBySuitConsistent() = 0;
+	virtual NF_SHARE_PTR<NFIRedisClient>  GetDriverBySuit(const std::string& strHash) = 0;
 	//virtual NF_SHARE_PTR<NFINoSqlDriver>  GetDriverBySuit(const int nHash) = 0;
 	virtual bool RemoveConnectSql(const std::string& strID) = 0;
 };
