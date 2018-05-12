@@ -53,6 +53,11 @@
 #include <event2/bufferevent_struct.h>
 #include <event2/event.h>
 
+#ifdef _MSC_VER
+#include "Dependencies/hiredis/hiredis_win/deps/hiredis/hiredis.h"
+#else
+#include "Dependencies/hiredis/hiredis_linux/hiredis/hiredis.h"
+#endif
 
 class NFRedisClientSocket
 {
@@ -73,16 +78,7 @@ public:
     int Close();
     int Write(const char *buf, int count);
 
-	int GetLineNum();
-	bool TryPredictType(char& eType);
-	bool ReadLine(std::string& line);
-
-    int ClearBuff();
-    int BuffLength();
     int Execute();
-
-private:
-	bool ReadLineFromBuff(std::string& line);
 
 protected:
 	static void listener_cb(struct evconnlistener* listener, evutil_socket_t fd, struct sockaddr* sa, int socklen, void* user_data);
@@ -95,10 +91,10 @@ private:
 	struct event_base* base;
 	struct bufferevent* bev;
 	struct evconnlistener* listener;
+
 	NF_NET_EVENT mNetStatus;
+	redisReader* m_pRedisReader;
     int64_t fd;
-    std::string mstrBuff;
-	std::list<std::string> mLineList;
 };
 
 

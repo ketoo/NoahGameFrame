@@ -16,8 +16,12 @@
 #include <iostream>
 #include <random>
 
-#include "NFRedisResult.h"
 #include "NFRedisCommand.h"
+#ifdef _MSC_VER
+#include "Dependencies/hiredis/hiredis_win/deps/hiredis/hiredis.h"
+#else
+#include "Dependencies/hiredis/hiredis_linux/hiredis/hiredis.h"
+#endif
 
 typedef std::string string_type;
 typedef std::vector<string_type> string_vector;
@@ -657,16 +661,8 @@ public:
     void FLUSHDB();
 
 private:
-
-	NF_SHARE_PTR<NFRedisResult> GetUnuseResult();
-	NF_SHARE_PTR<NFRedisResult> BuildSendCmd(const NFRedisCommand& cmd);
-	void WaitingResult(NF_SHARE_PTR<NFRedisResult> xRedisResult);
-
-private:
-	std::list<NF_SHARE_PTR<NFRedisResult>> mlCmdResultList;
-	std::list<NF_SHARE_PTR<NFRedisResult>> mlUnusedResultList;
-
-private:
+	int64_t mnIndex;
+	int64_t BuildSendCmd(const NFRedisCommand& cmd);
     NFRedisClientSocket* m_pRedisClientSocket;
 };
 
