@@ -29,13 +29,13 @@
 #include "Dependencies/hiredis/hiredis_linux/hiredis/hiredis.h"
 #endif
 
-typedef std::string string_type;
-typedef std::vector<string_type> string_vector;
-typedef std::pair<string_type, string_type> string_pair;
-typedef std::vector<string_pair> string_pair_vector;
-typedef std::pair<string_type, double> string_score_pair;
-typedef std::vector<string_score_pair> string_score_vector;
-typedef std::set<string_type> string_set;
+//typedef std::string string_type;
+//typedef std::vector<string_type> string_vector;
+//typedef std::pair<string_type, string_type> string_pair;
+//typedef std::vector<string_pair> string_pair_vector;
+//typedef std::pair<string_type, double> string_score_pair;
+//typedef std::vector<string_score_pair> string_score_vector;
+//typedef std::set<string_type> string_set;
 
 typedef void(*CoroutineYieldFunction)();
 typedef void(*CoroutineStartFunction)();
@@ -56,7 +56,11 @@ public:
 	virtual bool Execute();
 	virtual bool KeepLive();
 
+	const std::string& GetIP();
 
+	const int GetPort();
+
+	const std::string& GetAuthKey();
 
 	/**
 	* @brie if you have setted a password for Redis, you much use AUTH cmd to connect to the server than you can use other cmds
@@ -532,7 +536,7 @@ public:
 	* @param key [in] name of key
 	* @return return the number( of elements) of the sorted set, or 0 if key does not exist or not a z key
 	*/
-	virtual int ZCARD(const std::string& key);
+	virtual bool ZCARD(const std::string& key, int &nCount);
 
 	/**
 	* @brief Returns the number of elements in the sorted set at key with a score between min and max.
@@ -541,7 +545,7 @@ public:
 	* @param end [in]
 	* @return the number of elements in the specified score range, or 0 if key does not exist or not a z key
 	*/
-	virtual int ZCOUNT(const std::string& key, const double start, const double end);
+	virtual bool ZCOUNT(const std::string& key, const double start, const double end, int &nCount);
 
 	/**
 	* @brief Increments the score of member in the sorted set stored at key by increment
@@ -563,7 +567,7 @@ public:
 	* @param values [out] the members of this range
 	* @return true when cmd success, false when key does not exist or not a z key.
 	*/
-	virtual bool ZRANGE(const std::string& key, const int start, const int end, string_vector& values);
+	virtual bool ZRANGE(const std::string& key, const int start, const int end, string_score_vector& values);
 
 	/**
 	* @brief Returns all the elements in the sorted set at key with a score between min and max
@@ -574,7 +578,7 @@ public:
 	* @param values [out] the members of this range
 	* @return true when cmd success, false when key does not exist or not a z key.
 	*/
-	virtual bool ZRANGEBYSCORE(const std::string & key, const double start, const double end, string_vector& values);
+	virtual bool ZRANGEBYSCORE(const std::string & key, const double start, const double end, string_score_vector& values);
 
 	/**
 	* @brief Returns the rank of member in the sorted set stored at key, with the scores ordered from low to high
@@ -620,7 +624,7 @@ public:
 	* @param values [out] the members of this range
 	* @return true when cmd success, false when key does not exist or not a z key.
 	*/
-	virtual bool ZREVRANGE(const std::string& key, const int start, const int end, string_vector& values);
+	virtual bool ZREVRANGE(const std::string& key, const int start, const int end, string_score_vector& values);
 
 	/**
 	* @brief Returns all the elements in the sorted set at key with a score between max and min
@@ -631,7 +635,7 @@ public:
 	* @param values [out] the members of this range
 	* @return true when cmd success, false when key does not exist or not a z key.
 	*/
-	virtual bool ZREVRANGEBYSCORE(const std::string & key, const double start, const double end, string_vector& values);
+	virtual bool ZREVRANGEBYSCORE(const std::string & key, const double start, const double end, string_score_vector& values);
 
 
 	/**
@@ -674,6 +678,10 @@ protected:
 
 
 private:
+
+	std::string ip_;
+	int port_;
+	std::string authKey_;
 	int64_t mnIndex;
 	std::list<int64_t> mnIndexList;
     NFRedisClientSocket* m_pRedisClientSocket;

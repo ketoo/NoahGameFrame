@@ -14,15 +14,15 @@ bool NFRedisClient::DEL(const std::string &key)
 		return false;
 	}
 
-	int del_key_num = 0;
+	bool del_key_num = false;
 	if (pReply->type == REDIS_REPLY_INTEGER)
 	{
-		del_key_num = pReply->integer;
+		del_key_num = (bool)pReply->integer;
 	}
 
 	freeReplyObject(pReply);
 
-	return bool(del_key_num);
+	return del_key_num;
 }
 
 bool NFRedisClient::EXISTS(const std::string &key)
