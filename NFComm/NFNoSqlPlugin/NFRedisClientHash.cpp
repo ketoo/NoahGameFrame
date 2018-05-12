@@ -16,7 +16,7 @@ int NFRedisClient::HDEL(const std::string &key, const std::string &field)
 		return false;
 	}
 
-	int del_num = pReply->integer;
+	int del_num = (int)pReply->integer;
 
 	freeReplyObject(pReply);
 
@@ -39,7 +39,7 @@ int NFRedisClient::HDEL(const std::string &key, const string_vector& fields)
 		return false;
 	}
 
-	int del_num = pReply->integer;
+	int del_num = (int)pReply->integer;
 
 	freeReplyObject(pReply);
 
@@ -200,7 +200,7 @@ bool NFRedisClient::HLEN(const std::string &key, int& number)
 
 	if (pReply->type == REDIS_REPLY_INTEGER)
 	{
-		number = pReply->integer;
+		number = (int)pReply->integer;
 	}
 
 	freeReplyObject(pReply);
@@ -223,14 +223,16 @@ bool NFRedisClient::HMGET(const std::string &key, const string_vector &fields, s
 		return false;
 	}
 
-
-	/*if (pReply->type == REDIS_REPLY_ARRAY)
+	if (pReply->type == REDIS_REPLY_ARRAY)
 	{
 		for (int k = 0; k < (int)pReply->elements; k++)
 		{
-			fields.emplace_back(std::move(std::string(pReply->element[k]->str, pReply->element[k]->len)));
+			if (pReply->element[k]->type == REDIS_REPLY_STRING)
+			{
+				values.emplace_back(std::move(std::string(pReply->element[k]->str, pReply->element[k]->len)));
+			}
 		}
-	}*/
+	}
 
 	freeReplyObject(pReply);
 
@@ -271,15 +273,15 @@ bool NFRedisClient::HSET(const std::string &key, const std::string &field, const
 		return false;
 	}
 
-	int success = 0;
+	bool success = false;
 	if (pReply->type == REDIS_REPLY_INTEGER)
 	{
-		success = pReply->integer;
+		success = (bool)pReply->integer;
 	}
 
 	freeReplyObject(pReply);
 
-	return (bool)success;
+	return success;
 }
 
 bool NFRedisClient::HSETNX(const std::string &key, const std::string &field, const std::string &value)
@@ -295,15 +297,15 @@ bool NFRedisClient::HSETNX(const std::string &key, const std::string &field, con
 		return false;
 	}
 
-	int success = 0;
+	bool success = false;
 	if (pReply->type == REDIS_REPLY_INTEGER)
 	{
-		success = pReply->integer;
+		success = (bool)pReply->integer;
 	}
 
 	freeReplyObject(pReply);
 
-	return (bool)success;
+	return success;
 }
 
 bool NFRedisClient::HVALS(const std::string &key, string_vector &values)
@@ -344,7 +346,7 @@ bool NFRedisClient::HSTRLEN(const std::string &key, const std::string &field, in
 
 	if (pReply->type == REDIS_REPLY_INTEGER)
 	{
-		length = pReply->integer;
+		length = (int)pReply->integer;
 	}
 
 	freeReplyObject(pReply);
