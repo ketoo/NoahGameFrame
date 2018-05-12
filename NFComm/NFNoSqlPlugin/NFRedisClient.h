@@ -572,7 +572,7 @@ public:
     * @param values [out] the members of this range
     * @return true when cmd success, false when key does not exist or not a z key.
     */
-    bool ZRANGEBYSCORE(const std::string & key, const double start, const double end, string_vector& values);
+    bool ZRANGEBYSCORE(const std::string & key, const double start, const double end, string_pair_vector& values);
 
     /**
     * @brief Returns the rank of member in the sorted set stored at key, with the scores ordered from low to high
