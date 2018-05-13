@@ -120,7 +120,7 @@ link.exe -dll -noentry resources/EventLog.res -out:$(TargetDir)EventLog.dll
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v141</PlatformToolset>
+    <PlatformToolset>v140</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
@@ -133,7 +133,7 @@ link.exe -dll -noentry resources/EventLog.res -out:$(TargetDir)EventLog.dll
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
-    <PlatformToolset>v141</PlatformToolset>
+    <PlatformToolset>v140</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
@@ -172,8 +172,7 @@ link.exe -dll -noentry resources/EventLog.res -out:$(TargetDir)EventLog.dll
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
-      <PrecompiledHeader>
-      </PrecompiledHeader>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>USE_STATIC;USE_JEMALLOC;_OFF_T_DEFINED;WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions);LACKS_STDLIB_H;_CRT_SECURE_NO_WARNINGS;PSAPI_VERSION=1</PreprocessorDefinitions>

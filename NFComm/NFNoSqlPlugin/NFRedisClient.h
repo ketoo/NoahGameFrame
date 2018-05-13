@@ -25,6 +25,7 @@
 
 #ifdef _MSC_VER
 #include "Dependencies/hiredis/hiredis_win/deps/hiredis/hiredis.h"
+//#include "Dependencies/hiredis/hiredis_win/src/Win32_Interop/WS2tcpip.h"
 #else
 #include "Dependencies/hiredis/hiredis_linux/hiredis/hiredis.h"
 #endif
