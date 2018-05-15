@@ -87,7 +87,7 @@ int NFCRankModule::GetRankListCount(const NFIRankModule::RANK_TYPE type)
 void NFCRankModule::AddValue(const int64_t nAreaID, const NFGUID& self, const RANK_TYPE type, NFINT64 value)
 {
     std::string strRankKey = MakeRanKey(type, nAreaID);
-    NF_SHARE_PTR<NFINoSqlDriver> xNoSqlDriver = m_pNoSqlModule->GetDriver(strRankKey);
+    NF_SHARE_PTR<NFIRedisClient> xNoSqlDriver = m_pNoSqlModule->GetDriver(strRankKey);
     if (xNoSqlDriver)
     {
         xNoSqlDriver->ZIncrBy(strRankKey, self.ToString(), value);
@@ -97,7 +97,7 @@ void NFCRankModule::AddValue(const int64_t nAreaID, const NFGUID& self, const RA
 void NFCRankModule::SetValue(const int64_t nAreaID, const NFGUID& self, const RANK_TYPE type, NFINT64 value)
 {
     std::string strRankKey = MakeRanKey(type, nAreaID);
-    NF_SHARE_PTR<NFINoSqlDriver> xNoSqlDriver = m_pNoSqlModule->GetDriver(strRankKey);
+    NF_SHARE_PTR<NFIRedisClient> xNoSqlDriver = m_pNoSqlModule->GetDriver(strRankKey);
     if (xNoSqlDriver)
     {
         xNoSqlDriver->ZAdd(self.ToString(), value, strRankKey);
@@ -107,7 +107,7 @@ void NFCRankModule::SetValue(const int64_t nAreaID, const NFGUID& self, const RA
 void NFCRankModule::SubValue(const int64_t nAreaID, const NFGUID& self, const RANK_TYPE type, NFINT64 value)
 {
     std::string strRankKey = MakeRanKey(type, nAreaID);
-    NF_SHARE_PTR<NFINoSqlDriver> xNoSqlDriver = m_pNoSqlModule->GetDriver(strRankKey);
+    NF_SHARE_PTR<NFIRedisClient> xNoSqlDriver = m_pNoSqlModule->GetDriver(strRankKey);
     if (xNoSqlDriver)
     {
         xNoSqlDriver->ZIncrBy(strRankKey, self.ToString(), -value);
@@ -117,7 +117,7 @@ void NFCRankModule::SubValue(const int64_t nAreaID, const NFGUID& self, const RA
 void NFCRankModule::RemoveValue(const int64_t nAreaID, const NFGUID& self, const NFIRankModule::RANK_TYPE type)
 {
     std::string strRankKey = MakeRanKey(type, nAreaID);
-    NF_SHARE_PTR<NFINoSqlDriver> xNoSqlDriver = m_pNoSqlModule->GetDriver(strRankKey);
+    NF_SHARE_PTR<NFIRedisClient> xNoSqlDriver = m_pNoSqlModule->GetDriver(strRankKey);
     if (xNoSqlDriver)
     {
         xNoSqlDriver->ZRem(strRankKey, self.ToString());
@@ -129,7 +129,7 @@ NFIRankModule::RankValue NFCRankModule::GetIndex(const int64_t nAreaID, const NF
     NFCRankModule::RankValue xRankValue;
     std::string strRankKey = MakeRanKey(type, nAreaID);
 
-    NF_SHARE_PTR<NFINoSqlDriver> xNoSqlDriver = m_pNoSqlModule->GetDriver(strRankKey);
+    NF_SHARE_PTR<NFIRedisClient> xNoSqlDriver = m_pNoSqlModule->GetDriver(strRankKey);
     if (xNoSqlDriver)
     {
         double value = 0;
@@ -149,7 +149,7 @@ int NFCRankModule::RangeByIndex(const int64_t nAreaID, const NFINT64 startIndex,
 {
     std::string strRankKey = MakeRanKey(type, nAreaID);
 
-    NF_SHARE_PTR<NFINoSqlDriver> xNoSqlDriver = m_pNoSqlModule->GetDriver(strRankKey);
+    NF_SHARE_PTR<NFIRedisClient> xNoSqlDriver = m_pNoSqlModule->GetDriver(strRankKey);
     if (xNoSqlDriver)
     {
         std::vector<std::pair<std::string, double> > memberScoreVec;
@@ -173,7 +173,7 @@ int NFCRankModule::RangeByScore(const int64_t nAreaID, const NFINT64 startScore,
 {
     std::string strRankKey = MakeRanKey(type, nAreaID);
 
-    NF_SHARE_PTR<NFINoSqlDriver> xNoSqlDriver = m_pNoSqlModule->GetDriver(strRankKey);
+    NF_SHARE_PTR<NFIRedisClient> xNoSqlDriver = m_pNoSqlModule->GetDriver(strRankKey);
     if (xNoSqlDriver)
     {
         std::vector<std::pair<std::string, double> > memberScoreVec;
@@ -200,7 +200,7 @@ int NFCRankModule::GetRankListCount(const int64_t nAreaID, const NFIRankModule::
 {
     std::string strRankKey = MakeRanKey(type, nAreaID);
 
-    NF_SHARE_PTR<NFINoSqlDriver> xNoSqlDriver = m_pNoSqlModule->GetDriver(strRankKey);
+    NF_SHARE_PTR<NFIRedisClient> xNoSqlDriver = m_pNoSqlModule->GetDriver(strRankKey);
     if (xNoSqlDriver)
     {
         int nCount = 0;

@@ -36,11 +36,11 @@ bool NFCAccountRedisModule::AfterInit()
 int NFCAccountRedisModule::VerifyAccount(const std::string& strAccount, const std::string& strPwd)
 {
 	std::string strAccountKey = m_pCommonRedisModule->GetAccountCacheKey(strAccount);
-	NF_SHARE_PTR<NFINoSqlDriver> xNoSqlDriver = m_pNoSqlModule->GetDriverBySuit(strAccount);
+	NF_SHARE_PTR<NFIRedisClient> xNoSqlDriver = m_pNoSqlModule->GetDriverBySuit(strAccount);
 	if (xNoSqlDriver)
 	{
 		std::string strPassword;
-		if (xNoSqlDriver->HGet(strAccountKey, "Password", strPassword) && strPassword == strPwd)
+		if (xNoSqlDriver->HGET(strAccountKey, "Password", strPassword) && strPassword == strPwd)
 		{
 			return 0;
 		}
@@ -52,10 +52,10 @@ int NFCAccountRedisModule::VerifyAccount(const std::string& strAccount, const st
 bool NFCAccountRedisModule::AddAccount(const std::string & strAccount, const std::string & strPwd)
 {
 	std::string strAccountKey = m_pCommonRedisModule->GetAccountCacheKey(strAccount);
-	NF_SHARE_PTR<NFINoSqlDriver> xNoSqlDriver = m_pNoSqlModule->GetDriverBySuit(strAccount);
+	NF_SHARE_PTR<NFIRedisClient> xNoSqlDriver = m_pNoSqlModule->GetDriverBySuit(strAccount);
 	if (xNoSqlDriver)
 	{
-		return xNoSqlDriver->HSet(strAccountKey, "Password", strPwd);
+		return xNoSqlDriver->HSET(strAccountKey, "Password", strPwd);
 	}
 	return false;
 }
@@ -63,10 +63,10 @@ bool NFCAccountRedisModule::AddAccount(const std::string & strAccount, const std
 bool NFCAccountRedisModule::ExistAccount(const std::string & strAccount)
 {
 	std::string strAccountKey = m_pCommonRedisModule->GetAccountCacheKey(strAccount);
-	NF_SHARE_PTR<NFINoSqlDriver> xNoSqlDriver = m_pNoSqlModule->GetDriverBySuit(strAccount);
+	NF_SHARE_PTR<NFIRedisClient> xNoSqlDriver = m_pNoSqlModule->GetDriverBySuit(strAccount);
 	if (xNoSqlDriver)
 	{
-		return xNoSqlDriver->Exists(strAccountKey);
+		return xNoSqlDriver->EXISTS(strAccountKey);
 	}
 
 	return false;
@@ -74,10 +74,10 @@ bool NFCAccountRedisModule::ExistAccount(const std::string & strAccount)
 
 bool NFCAccountRedisModule::ExistRoleName(const std::string & strRoleName)
 {
-	NF_SHARE_PTR<NFINoSqlDriver> xNoSqlDriver = m_pNoSqlModule->GetDriverBySuitConsistent();
+	NF_SHARE_PTR<NFIRedisClient> xNoSqlDriver = m_pNoSqlModule->GetDriverBySuitConsistent();
 	if (xNoSqlDriver)
 	{
-		return xNoSqlDriver->Exists(strRoleName);
+		return xNoSqlDriver->EXISTS(strRoleName);
 	}
 
 	return false;
@@ -86,18 +86,18 @@ bool NFCAccountRedisModule::ExistRoleName(const std::string & strRoleName)
 bool NFCAccountRedisModule::CreateRole(const std::string & strAccount, const std::string & strRoleName, const NFGUID & id)
 {
 	const std::string strAccountKey = m_pCommonRedisModule->GetAccountCacheKey(strAccount);
-	NF_SHARE_PTR<NFINoSqlDriver> xNoSqlDriver = m_pNoSqlModule->GetDriverBySuit(strAccount);
+	NF_SHARE_PTR<NFIRedisClient> xNoSqlDriver = m_pNoSqlModule->GetDriverBySuit(strAccount);
 	if (xNoSqlDriver)
 	{
-		if (xNoSqlDriver->Exists(strAccountKey) && !xNoSqlDriver->Exists(strRoleName))
+		if (xNoSqlDriver->EXISTS(strAccountKey) && !xNoSqlDriver->EXISTS(strRoleName))
 		{
-			xNoSqlDriver->HSet(strAccountKey, NFrame::Player::Name(), strRoleName);
-			xNoSqlDriver->HSet(strAccountKey, NFrame::Player::ID(), id.ToString());
+			xNoSqlDriver->HSET(strAccountKey, NFrame::Player::Name(), strRoleName);
+			xNoSqlDriver->HSET(strAccountKey, NFrame::Player::ID(), id.ToString());
 
-            NF_SHARE_PTR<NFINoSqlDriver> xRoleNameNoSqlDriver = m_pNoSqlModule->GetDriverBySuitConsistent();
+            NF_SHARE_PTR<NFIRedisClient> xRoleNameNoSqlDriver = m_pNoSqlModule->GetDriverBySuitConsistent();
             if (xRoleNameNoSqlDriver)
             {
-                xRoleNameNoSqlDriver->HSet(strRoleName, NFrame::Player::ID(), id.ToString());
+                xRoleNameNoSqlDriver->HSET(strRoleName, NFrame::Player::ID(), id.ToString());
             }
 			
 			std::vector<std::string> vKey;
@@ -105,7 +105,7 @@ bool NFCAccountRedisModule::CreateRole(const std::string & strAccount, const std
 			vKey.push_back(NFrame::Player::Account());
 			vValue.push_back(strAccount);
 
-			xNoSqlDriver->HMSet(m_pCommonRedisModule->GetPropertyCacheKey(id), vKey, vValue);
+			xNoSqlDriver->HMSET(m_pCommonRedisModule->GetPropertyCacheKey(id), vKey, vValue);
 			//xNoSqlDriver->HMSet(m_pCommonRedisModule->GetRecordCacheKey(id), vKey, vValue);
 
 			return true;
@@ -118,14 +118,14 @@ bool NFCAccountRedisModule::CreateRole(const std::string & strAccount, const std
 bool NFCAccountRedisModule::GetRoleInfo(const std::string & strAccount, std::string & strRoleName, NFGUID & id)
 {
 	std::string strAccountKey = m_pCommonRedisModule->GetAccountCacheKey(strAccount);
-	NF_SHARE_PTR<NFINoSqlDriver> xNoSqlDriver = m_pNoSqlModule->GetDriverBySuit(strAccount);
+	NF_SHARE_PTR<NFIRedisClient> xNoSqlDriver = m_pNoSqlModule->GetDriverBySuit(strAccount);
 	if (xNoSqlDriver)
 	{
-		if (xNoSqlDriver->Exists(strAccountKey))
+		if (xNoSqlDriver->EXISTS(strAccountKey))
 		{
 			std::string strID;
-			bool bRoleNameRet = xNoSqlDriver->HGet(strAccountKey, NFrame::Player::Name(), strRoleName);
-			bool bRoleIDRet = xNoSqlDriver->HGet(strAccountKey, NFrame::Player::ID(), strID);
+			bool bRoleNameRet = xNoSqlDriver->HGET(strAccountKey, NFrame::Player::Name(), strRoleName);
+			bool bRoleIDRet = xNoSqlDriver->HGET(strAccountKey, NFrame::Player::ID(), strID);
 			if (bRoleNameRet && bRoleIDRet
 				&& !strRoleName .empty() && !strID.empty())
 			{
