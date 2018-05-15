@@ -4,6 +4,9 @@
 #include "NFRedisTester.h"
 #include "NFRedisTester.h"
 
+#pragma comment( lib, "ws2_32" )
+#pragma comment( lib, "hiredis_d.lib") 
+
 int main()
 {
 	NFRedisTester xRedisTester;
