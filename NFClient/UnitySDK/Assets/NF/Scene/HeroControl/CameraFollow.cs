@@ -3,95 +3,87 @@ using System.Collections;
 
 public class CameraFollow : MonoBehaviour
 {
+	[Header("Camera")]
+    [Tooltip("Reference to the target GameObject.")]
+    public Transform target;
+    [Tooltip("Multiplier for camera sensitivity.")]
+    [Range(0f, 300)]
+    public float sensitivity = 120f;
+    [Tooltip("Current relative offset to the target.")]
+    public Vector3 offset;
+    [Tooltip("Minimum relative offset to the target GameObject.")]
+    public Vector3 minOffset;
+    [Tooltip("Maximum relative offset to the target GameObject.")]
+    public Vector3 maxOffset;
+    [Tooltip("Rotation limits for the X-axis in degrees. X represents the lowest and Y the highest value.")]
+    public Vector2 rotationLimitsX;
+    [Tooltip("Rotation limits for the Y-axis in degrees. X represents the lowest and Y the highest value.")]
+    public Vector2 rotationLimitsY;
+    [Tooltip("Whether the rotation on the X-axis should be limited.")]
+    public bool limitXRotation = false;
+    [Tooltip("Whether the rotation on the Y-axis should be limited.")]
+    public bool limitYRotation = false;
 
-	public Transform target;
-    private Vector3 offsetPosition;
-    private bool isRotating = false;
+    private Transform cameraTransform;
+    private Vector2 cameraRotation;
 
-    public float distance;
-    public float scrollSpeed = 3;
-    public float rotareSpeed = 2;
-
-
-
-    void Start()
+    void Awake()
     {
-		DontDestroyOnLoad(this.gameObject);
+        DontDestroyOnLoad(this.gameObject);
+    }
+       
+    
+    // Use this for initialization
+    private void Start()
+    {
+        if (target == null)
+        {
+            Debug.LogWarning(gameObject.name + ": No target found!");
+        }
 
-		if (target == null)
-		{
-			return;
-		}
+        cameraTransform = transform;
+    }
 
-		transform.LookAt(target.position);
-		offsetPosition = transform.position - target.position;//得到偏移量
+    // Update is called once per frame
+    private void Update()
+    {
 
     }
 
-
-    void Update()
+    // LateUpdate is called every frame, if the Behaviour is enabled
+    private void LateUpdate()
     {
-		if (target == null)
+        cameraRotation.x = 0;
+        cameraRotation.y = 45;
+
+        if (target && Input.GetMouseButton(1))
         {
-            return;
-        }
+            /*
+            cameraRotation.x += Input.GetAxis("Mouse X") * sensitivity * Time.deltaTime;
+            cameraRotation.y -= Input.GetAxis("Mouse Y") * sensitivity * Time.deltaTime;
 
-		transform.position = offsetPosition + target.position;
-        RotateView();
-        ScrollView();
-
-    }
-
-    //处理视野的拉近和拉远效果
-    void ScrollView()
-    {
-        // print(Input.GetAxis("Mouse ScrollWheel"));//鼠标向后滑动返回负数（拉近视野），向前正数（拉远视野）
-        distance = offsetPosition.magnitude;
-        distance += Input.GetAxis("Mouse ScrollWheel") * scrollSpeed;
-        distance = Mathf.Clamp(distance, 2, 18);
-        offsetPosition = offsetPosition.normalized * distance;//改变位置便移
-    }
-
-
-    //控制视野左右上下旋转
-
-    void RotateView()
-    {
-        //Input.GetAxis("Mouse X");//得到鼠标水平方向的滑动
-        //Input.GetAxis("Mouse Y");//得到鼠标在垂直方向的滑动
-        if (Input.GetMouseButtonDown(1))
-        {
-            isRotating = true;
-
-        }
-
-        if (Input.GetMouseButtonUp(1))
-        {
-            isRotating = false;
-
-        }
-
-        if (isRotating)
-        {
-
-			transform.RotateAround(target.position, target.up, rotareSpeed * Input.GetAxis("Mouse X"));//围捞角色滑动 左右
-
-            Vector3 originalPos = transform.position;
-            Quaternion originalRotation = transform.rotation;
-
-			transform.RotateAround(target.position, transform.right, -rotareSpeed * Input.GetAxis("Mouse Y"));//上下 (会影响到的属性一个是Position,一个是rotation)
-                                                                                                              //限制上下滑动的度数大小
-            float x = transform.eulerAngles.x;
-            if (x < 10 || x > 80)//当超出范围之后，我们将属性归位，让旋转无效
+            if(limitXRotation)
             {
-                transform.position = originalPos;
-                transform.rotation = originalRotation;
-
+                cameraRotation.x = Mathf.Clamp(cameraRotation.x, rotationLimitsX.x, rotationLimitsX.y);
             }
+            if(limitYRotation)
+            {
+                cameraRotation.y = Mathf.Clamp(cameraRotation.y, rotationLimitsY.x, rotationLimitsY.y);
+            }
+            */
+        }
+        if (target)
+        {
+            offset.z -= Input.GetAxis("Mouse ScrollWheel") * sensitivity * Time.deltaTime;
+            offset.z = Mathf.Clamp(offset.z, minOffset.z, maxOffset.z);
 
+            Quaternion rotation = Quaternion.Euler(cameraRotation.y, cameraRotation.x, 0);
+            Vector3 position = rotation * new Vector3(offset.x, offset.y, offset.z) + target.position;
+
+            cameraTransform.rotation = rotation;
+            cameraTransform.position = position;
         }
 
-		offsetPosition = transform.position - target.position;
-
     }
+ 
 }
