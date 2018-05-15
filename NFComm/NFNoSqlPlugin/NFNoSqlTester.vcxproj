@@ -60,7 +60,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>_X64;_DEBUG;_LIB;WIN32;WIN;NF_NONCLIENT_BUILD;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>$(SolutionDir)\Dependencies\protobuf\src\;$(SolutionDir);$(SolutionDir)\Dependencies\;$(SolutionDir)\Dependencies\libevent\;$(SolutionDir)\Dependencies\libevent\WIN32-Code\nmake;$(SolutionDir)\Dependencies\libevent\WIN32-Code\;$(SolutionDir)\Dependencies\libevent\include\;$(SolutionDir)\Dependencies\libevent\compat\;$(SolutionDir)\Dependencies\openssl\include;$(SolutionDir)\Dependencies\websocketpp;$(SolutionDir)\Dependencies\asio;$(SolutionDir)\Dependencies\redis-cplusplus-client\msvc\anet_win32\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)\Dependencies\hiredis\hiredis_win;$(SolutionDir)\Dependencies\protobuf\src\;$(SolutionDir);$(SolutionDir)\Dependencies\;$(SolutionDir)\Dependencies\libevent\;$(SolutionDir)\Dependencies\libevent\WIN32-Code\nmake;$(SolutionDir)\Dependencies\libevent\WIN32-Code\;$(SolutionDir)\Dependencies\libevent\include\;$(SolutionDir)\Dependencies\libevent\compat\;$(SolutionDir)\Dependencies\openssl\include;$(SolutionDir)\Dependencies\websocketpp;$(SolutionDir)\Dependencies\asio;$(SolutionDir)\Dependencies\redis-cplusplus-client\msvc\anet_win32\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
       <BrowseInformation>false</BrowseInformation>
     </ClCompile>
@@ -111,7 +111,6 @@
     <ClCompile Include="NFRedisClientSort.cpp" />
     <ClCompile Include="NFRedisClientString.cpp" />
     <ClCompile Include="NFRedisCommand.cpp" />
-    <ClCompile Include="NFRedisResult.cpp" />
     <ClCompile Include="NFRedisTester.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -119,7 +118,6 @@
     <ClInclude Include="NFRedisClientSocket.h" />
     <ClInclude Include="NFRedisCommand.h" />
     <ClInclude Include="NFRedisProtocolDefine.h" />
-    <ClInclude Include="NFRedisResult.h" />
     <ClInclude Include="NFRedisTester.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
