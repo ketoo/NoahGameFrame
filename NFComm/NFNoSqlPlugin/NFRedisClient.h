@@ -671,9 +671,9 @@ protected:
 
 private:
 
-	std::string ip_;
-	int port_;
-	std::string authKey_;
+	std::string mstrIP;
+	int mnPort;
+	std::string mstrAuthKey;
 
 	bool bBusy;
 	NFRedisClientSocket* m_pRedisClientSocket;
