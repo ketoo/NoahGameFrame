@@ -51,11 +51,8 @@
 #include <event2/bufferevent_struct.h>
 #include <event2/event.h>
 
-#ifdef _MSC_VER
-#include "Dependencies/hiredis/hiredis_win/deps/hiredis/hiredis.h"
-#else
-#include "Dependencies/hiredis/hiredis_linux/hiredis/hiredis.h"
-#endif
+#include <hiredis/hiredis.h>
+
 
 class NFRedisClientSocket
 {

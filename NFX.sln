@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+# Visual Studio 15
+VisualStudioVersion = 15.0.27428.2002
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "NFSDK", "NFSDK", "{410C8A08-63DC-45B2-ADB9-08CD991861F0}"
 EndProject
@@ -355,9 +355,7 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "NFNoSqlTester", "NFComm\NFN
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "NFLoginNet_HttpServerPlugin", "NFServer\NFLoginrNet_HttpServerPlugin\NFLoginNet_HttpServerPlugin.vcxproj", "{5EBB5D6A-5C7B-4A18-8F60-4094173771BD}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Win32_Interop", "Dependencies\hiredis\hiredis_win\src\Win32_Interop\Win32_Interop.vcxproj", "{8C07F811-C81C-432C-B334-1AE6FAECF951}"
-EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "hiredis", "Dependencies\hiredis\hiredis_win\msvs\hiredis\hiredis.vcxproj", "{13E85053-54B3-487B-8DDB-3430B1C1B3BF}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "hiredis", "Dependencies\hiredis\hiredis_win\hiredis\msvc\msvc.vcxproj", "{B45000FF-F17A-4F1C-89E5-14C513B20DC9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -715,22 +713,14 @@ Global
 		{5EBB5D6A-5C7B-4A18-8F60-4094173771BD}.Release|x64.ActiveCfg = Release|x64
 		{5EBB5D6A-5C7B-4A18-8F60-4094173771BD}.Release|x64.Build.0 = Release|x64
 		{5EBB5D6A-5C7B-4A18-8F60-4094173771BD}.Release|x86.ActiveCfg = Release|x64
-		{8C07F811-C81C-432C-B334-1AE6FAECF951}.Debug|x64.ActiveCfg = Debug|x64
-		{8C07F811-C81C-432C-B334-1AE6FAECF951}.Debug|x64.Build.0 = Debug|x64
-		{8C07F811-C81C-432C-B334-1AE6FAECF951}.Debug|x86.ActiveCfg = Debug|Win32
-		{8C07F811-C81C-432C-B334-1AE6FAECF951}.Debug|x86.Build.0 = Debug|Win32
-		{8C07F811-C81C-432C-B334-1AE6FAECF951}.Release|x64.ActiveCfg = Release|x64
-		{8C07F811-C81C-432C-B334-1AE6FAECF951}.Release|x64.Build.0 = Release|x64
-		{8C07F811-C81C-432C-B334-1AE6FAECF951}.Release|x86.ActiveCfg = Release|Win32
-		{8C07F811-C81C-432C-B334-1AE6FAECF951}.Release|x86.Build.0 = Release|Win32
-		{13E85053-54B3-487B-8DDB-3430B1C1B3BF}.Debug|x64.ActiveCfg = Debug|x64
-		{13E85053-54B3-487B-8DDB-3430B1C1B3BF}.Debug|x64.Build.0 = Debug|x64
-		{13E85053-54B3-487B-8DDB-3430B1C1B3BF}.Debug|x86.ActiveCfg = Debug|Win32
-		{13E85053-54B3-487B-8DDB-3430B1C1B3BF}.Debug|x86.Build.0 = Debug|Win32
-		{13E85053-54B3-487B-8DDB-3430B1C1B3BF}.Release|x64.ActiveCfg = Release|x64
-		{13E85053-54B3-487B-8DDB-3430B1C1B3BF}.Release|x64.Build.0 = Release|x64
-		{13E85053-54B3-487B-8DDB-3430B1C1B3BF}.Release|x86.ActiveCfg = Release|Win32
-		{13E85053-54B3-487B-8DDB-3430B1C1B3BF}.Release|x86.Build.0 = Release|Win32
+		{B45000FF-F17A-4F1C-89E5-14C513B20DC9}.Debug|x64.ActiveCfg = Debug|x64
+		{B45000FF-F17A-4F1C-89E5-14C513B20DC9}.Debug|x64.Build.0 = Debug|x64
+		{B45000FF-F17A-4F1C-89E5-14C513B20DC9}.Debug|x86.ActiveCfg = Debug|Win32
+		{B45000FF-F17A-4F1C-89E5-14C513B20DC9}.Debug|x86.Build.0 = Debug|Win32
+		{B45000FF-F17A-4F1C-89E5-14C513B20DC9}.Release|x64.ActiveCfg = Release|x64
+		{B45000FF-F17A-4F1C-89E5-14C513B20DC9}.Release|x64.Build.0 = Release|x64
+		{B45000FF-F17A-4F1C-89E5-14C513B20DC9}.Release|x86.ActiveCfg = Release|Win32
+		{B45000FF-F17A-4F1C-89E5-14C513B20DC9}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -798,8 +788,7 @@ Global
 		{5B999220-7D01-48C4-8892-C601E3B91847} = {410C8A08-63DC-45B2-ADB9-08CD991861F0}
 		{C627AAF0-CC57-4933-813E-916FEE450511} = {799B1E29-07FC-4D54-96D3-EDBB4C40CF21}
 		{5EBB5D6A-5C7B-4A18-8F60-4094173771BD} = {9F68A20B-2B35-4C33-9C36-872C1CA2D5BE}
-		{8C07F811-C81C-432C-B334-1AE6FAECF951} = {E78C3B11-6914-488A-B068-B3BF4F5150F5}
-		{13E85053-54B3-487B-8DDB-3430B1C1B3BF} = {E78C3B11-6914-488A-B068-B3BF4F5150F5}
+		{B45000FF-F17A-4F1C-89E5-14C513B20DC9} = {E78C3B11-6914-488A-B068-B3BF4F5150F5}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {0FB8E2D6-BCE5-48BD-93AE-A041C5B39F3D}
