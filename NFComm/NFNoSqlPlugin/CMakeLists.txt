@@ -22,9 +22,9 @@ link_NFSDK("NFNoSqlPlugin")
 
 if(UNIX)
 	if (CMAKE_BUILD_TYPE MATCHES "Release")
-		target_link_libraries(NFNoSqlPlugin redisclient)
+		target_link_libraries(NFNoSqlPlugin hiredis)
 	else()
-		target_link_libraries(NFNoSqlPlugin redisclient)
+		target_link_libraries(NFNoSqlPlugin hiredis)
 	endif()
 
 	add_definitions(
@@ -34,9 +34,9 @@ if(UNIX)
 
 else()
 	if (CMAKE_BUILD_TYPE MATCHES "Release")
-		target_link_libraries(NFNoSqlPlugin redisclient)
+		target_link_libraries(NFNoSqlPlugin hiredis)
 	else()
-		target_link_libraries(NFNoSqlPlugin redisclient)
+		target_link_libraries(NFNoSqlPlugin hiredis_d)
 	endif()
 
 	add_definitions(
