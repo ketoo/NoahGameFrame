@@ -52,6 +52,12 @@ cp -r -f ./Lib/*.a ../lib/Release/
 make clean
 cd ../
 
+# compiling hiredis
+echo Building hiredis...
+chmod 777 build_hiredis.sh
+./build_hiredis.sh
+echo Building hiredis finish...
+
 
 # TODO: other libs
 #unzip -o gperftools-2.5.zip -d ./
