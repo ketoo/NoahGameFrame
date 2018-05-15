@@ -90,7 +90,8 @@ void NFCRankModule::AddValue(const int64_t nAreaID, const NFGUID& self, const RA
     NF_SHARE_PTR<NFIRedisClient> xNoSqlDriver = m_pNoSqlModule->GetDriver(strRankKey);
     if (xNoSqlDriver)
     {
-        xNoSqlDriver->ZIncrBy(strRankKey, self.ToString(), value);
+		double newValue;
+        xNoSqlDriver->ZINCRBY(strRankKey, self.ToString(), value, newValue);
     }
 }
 
@@ -100,7 +101,7 @@ void NFCRankModule::SetValue(const int64_t nAreaID, const NFGUID& self, const RA
     NF_SHARE_PTR<NFIRedisClient> xNoSqlDriver = m_pNoSqlModule->GetDriver(strRankKey);
     if (xNoSqlDriver)
     {
-        xNoSqlDriver->ZAdd(self.ToString(), value, strRankKey);
+        xNoSqlDriver->ZADD(self.ToString(), strRankKey, value);
     }
 }
 
@@ -110,7 +111,8 @@ void NFCRankModule::SubValue(const int64_t nAreaID, const NFGUID& self, const RA
     NF_SHARE_PTR<NFIRedisClient> xNoSqlDriver = m_pNoSqlModule->GetDriver(strRankKey);
     if (xNoSqlDriver)
     {
-        xNoSqlDriver->ZIncrBy(strRankKey, self.ToString(), -value);
+		double newValue;
+		xNoSqlDriver->ZINCRBY(strRankKey, self.ToString(), -value, newValue);
     }
 }
 
@@ -120,7 +122,7 @@ void NFCRankModule::RemoveValue(const int64_t nAreaID, const NFGUID& self, const
     NF_SHARE_PTR<NFIRedisClient> xNoSqlDriver = m_pNoSqlModule->GetDriver(strRankKey);
     if (xNoSqlDriver)
     {
-        xNoSqlDriver->ZRem(strRankKey, self.ToString());
+        xNoSqlDriver->ZREM(strRankKey, self.ToString());
     }
 }
 
@@ -133,12 +135,12 @@ NFIRankModule::RankValue NFCRankModule::GetIndex(const int64_t nAreaID, const NF
     if (xNoSqlDriver)
     {
         double value = 0;
-        if (xNoSqlDriver->ZScore(strRankKey, self.ToString(), value))
+        if (xNoSqlDriver->ZSCORE(strRankKey, self.ToString(), value))
         {
             xRankValue.id = self;
             xRankValue.score = value;
 
-            xNoSqlDriver->ZRank(strRankKey, self.ToString(), xRankValue.index);
+            xNoSqlDriver->ZRANK(strRankKey, self.ToString(), xRankValue.index);
         }
     }
 
@@ -153,7 +155,7 @@ int NFCRankModule::RangeByIndex(const int64_t nAreaID, const NFINT64 startIndex,
     if (xNoSqlDriver)
     {
         std::vector<std::pair<std::string, double> > memberScoreVec;
-        if (xNoSqlDriver->ZRange(strRankKey, startIndex, endIndex, memberScoreVec))
+        if (xNoSqlDriver->ZRANGE(strRankKey, startIndex, endIndex, memberScoreVec))
         {
             for (int i = 0; i < memberScoreVec.size(); ++i)
             {
@@ -177,7 +179,7 @@ int NFCRankModule::RangeByScore(const int64_t nAreaID, const NFINT64 startScore,
     if (xNoSqlDriver)
     {
         std::vector<std::pair<std::string, double> > memberScoreVec;
-        if (xNoSqlDriver->ZRangeByScore(strRankKey, startScore, endScore, memberScoreVec))
+        if (xNoSqlDriver->ZRANGEBYSCORE(strRankKey, startScore, endScore, memberScoreVec))
         {
             for (int i = 0; i < memberScoreVec.size(); ++i)
             {
@@ -204,7 +206,7 @@ int NFCRankModule::GetRankListCount(const int64_t nAreaID, const NFIRankModule::
     if (xNoSqlDriver)
     {
         int nCount = 0;
-        xNoSqlDriver->ZCard(strRankKey, nCount);
+        xNoSqlDriver->ZCARD(strRankKey, nCount);
         return nCount;
     }
 
