@@ -84,21 +84,12 @@ bool NFRedisClient::Execute()
 
 redisReply* NFRedisClient::BuildSendCmd(const NFRedisCommand& cmd)
 {
-	if (bBusy)
-	{
-		while (true)
-		{
-			std::this_thread::sleep_for(std::chrono::milliseconds(1));
 
-			if (YieldFunction)
-			{
-				YieldFunction();
-			}
-			else
-			{
-				Execute();
-			}
-		}
+	while (bBusy)
+	{
+		std::this_thread::sleep_for(std::chrono::milliseconds(1));
+		//you can not use build send cmd funciton again if you are not using coroutine
+		YieldFunction();
 	}
 
 	std::string msg = cmd.Serialize();
@@ -109,6 +100,14 @@ redisReply* NFRedisClient::BuildSendCmd(const NFRedisCommand& cmd)
 		//do some thing
 		return nullptr;
 	}
+	
+	bBusy = true;
+
+	return ParseForReply();
+}
+
+redisReply * NFRedisClient::ParseForReply()
+{
 
 	struct redisReply* reply = nullptr;
 	while (true)
@@ -118,6 +117,7 @@ redisReply* NFRedisClient::BuildSendCmd(const NFRedisCommand& cmd)
 		int ret = redisReaderGetReply(m_pRedisClientSocket->GetRedisReader(), (void**)&reply);
 		if (ret == REDIS_OK && reply != nullptr)
 		{
+			bBusy = false;
 			break;
 		}
 
@@ -130,6 +130,8 @@ redisReply* NFRedisClient::BuildSendCmd(const NFRedisCommand& cmd)
 			Execute();
 		}
 	}
+
+	bBusy = false;
 
 	if (reply == nullptr)
 	{
