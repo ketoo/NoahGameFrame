@@ -65,6 +65,16 @@ const std::string& NFRedisClient::GetAuthKey()
 	return authKey_;
 }
 
+bool NFRedisClient::IsConnect()
+{
+	if (m_pRedisClientSocket)
+	{
+		return m_pRedisClientSocket->IsConnect();
+	}
+
+	return false;
+}
+
 bool NFRedisClient::Execute()
 {
     m_pRedisClientSocket->Execute();
@@ -88,15 +98,15 @@ redisReply* NFRedisClient::BuildSendCmd(const NFRedisCommand& cmd)
 	int64_t index = mnIndex;
 	mnIndexList.push_back(index);
 
-	void* reply = nullptr;
+	struct redisReply* reply = nullptr;
 	while (true)
 	{
 		//get reply
 		int64_t nFrontIndex = mnIndexList.front();
 		if (nFrontIndex == index)
 		{
-			int ret = redisReaderGetReply(m_pRedisClientSocket->GetRedisReader(), &reply);
-			if (ret == REDIS_OK)
+			int ret = redisReaderGetReply(m_pRedisClientSocket->GetRedisReader(), (void**)&reply);
+			if (ret == REDIS_OK && reply != nullptr)
 			{
 				mnIndexList.pop_front();
 				break;
@@ -132,23 +142,12 @@ redisReply* NFRedisClient::BuildSendCmd(const NFRedisCommand& cmd)
 	struct redisReply* r = (struct redisReply*)reply;
 	if (REDIS_REPLY_ERROR == r->type)
 	{
-		printf("redisReply return REDIS_REPLY_ERROR!\n");
+		// write log
 		freeReplyObject(reply);
-		//redisReaderFree(reader);
-		//reader = NULL;
 		return nullptr;
 	}
 
-	if (REDIS_REPLY_STATUS != r->type)
-	{
-		printf("redisReply return is't REDIS_REPLY_STATUS!\n");
-		freeReplyObject(reply);
-		//redisReaderFree(reader);
-		//reader = NULL;
-		return nullptr;
-	}
-
-	return nullptr;
+	return reply;
 }
 
 bool NFRedisClient::AUTH(const std::string & auth)

@@ -20,7 +20,7 @@
 
 NFRedisClientSocket::NFRedisClientSocket()
 {
-	mNetStatus = NF_NET_EVENT::NF_NET_EVENT_CONNECTED;
+	mNetStatus = NF_NET_EVENT::NF_NET_EVENT_NONE;
 	m_pRedisReader = redisReaderCreate();
 }
 
@@ -91,6 +91,11 @@ int NFRedisClientSocket::Execute()
 	}
 
 	return 0;
+}
+
+bool NFRedisClientSocket::IsConnect()
+{
+	return mNetStatus == NF_NET_EVENT::NF_NET_EVENT_CONNECTED;
 }
 
 redisReader * NFRedisClientSocket::GetRedisReader()

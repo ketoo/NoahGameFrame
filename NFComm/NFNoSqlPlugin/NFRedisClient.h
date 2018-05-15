@@ -35,7 +35,7 @@ class NFRedisClient : public NFIRedisClient
 public:
 	NFRedisClient();
 
-	virtual bool Connect(const std::string& ip, const int port, const std::string& auth);
+	virtual bool Connect(const std::string& ip, const int port, const std::string& auth = "");
 
 	virtual bool Enable();
 	virtual bool Busy();
@@ -46,6 +46,8 @@ public:
 	const std::string& GetIP();
 
 	const int GetPort();
+
+	bool IsConnect();
 
 	const std::string& GetAuthKey();
 
