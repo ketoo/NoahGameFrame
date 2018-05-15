@@ -74,6 +74,8 @@ public:
     int Write(const char *buf, size_t count);
 
     int Execute();
+
+	bool IsConnect();
 	redisReader* GetRedisReader();
 protected:
 	static void listener_cb(struct evconnlistener* listener, evutil_socket_t fd, struct sockaddr* sa, int socklen, void* user_data);

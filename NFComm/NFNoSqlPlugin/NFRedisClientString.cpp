@@ -18,7 +18,7 @@ bool NFRedisClient::APPEND(const std::string &key, const std::string &value, int
 
 	if (pReply->type == REDIS_REPLY_INTEGER)
 	{
-		length = pReply->len;
+		length = pReply->integer;
 	}
 
 	freeReplyObject(pReply);
@@ -40,11 +40,13 @@ bool NFRedisClient::DECR(const std::string& key, int64_t& value)
 	if (pReply->type == REDIS_REPLY_INTEGER)
 	{
 		value = pReply->integer;
+		freeReplyObject(pReply);
+		return true;
 	}
 
 	freeReplyObject(pReply);
 
-	return true;
+	return false;
 }
 
 bool NFRedisClient::DECRBY(const std::string &key, const int64_t decrement, int64_t& value)
@@ -62,10 +64,13 @@ bool NFRedisClient::DECRBY(const std::string &key, const int64_t decrement, int6
 	if (pReply->type == REDIS_REPLY_INTEGER)
 	{
 		value = pReply->integer;
+		freeReplyObject(pReply);
+		return true;
 	}
 
 	freeReplyObject(pReply);
-	return true;
+
+	return false;
 }
 
 bool NFRedisClient::GETSET(const std::string &key, const std::string &value, std::string &oldValue)
@@ -83,11 +88,13 @@ bool NFRedisClient::GETSET(const std::string &key, const std::string &value, std
 	if (pReply->type == REDIS_REPLY_STRING)
 	{
 		oldValue = pReply->str;
+		freeReplyObject(pReply);
+		return true;
 	}
 
 	freeReplyObject(pReply);
 
-	return true;
+	return false;
 }
 
 bool NFRedisClient::INCR(const std::string &key, int64_t& value)
@@ -104,11 +111,13 @@ bool NFRedisClient::INCR(const std::string &key, int64_t& value)
 	if (pReply->type == REDIS_REPLY_INTEGER)
 	{
 		value = pReply->integer;
+		freeReplyObject(pReply);
+		return true;
 	}
 
 	freeReplyObject(pReply);
 
-	return true;
+	return false;
 }
 
 bool NFRedisClient::INCRBY(const std::string &key, const int64_t increment, int64_t& value)
@@ -126,11 +135,13 @@ bool NFRedisClient::INCRBY(const std::string &key, const int64_t increment, int6
 	if (pReply->type == REDIS_REPLY_INTEGER)
 	{
 		value = pReply->integer;
+		freeReplyObject(pReply);
+		return true;
 	}
 
 	freeReplyObject(pReply);
 
-	return true;
+	return false;
 }
 
 bool NFRedisClient::INCRBYFLOAT(const std::string &key, const float increment, float& value)
@@ -180,11 +191,14 @@ bool NFRedisClient::MGET(const string_vector &keys, string_vector &values)
 				values.emplace_back(std::move(std::string(pReply->element[k]->str)));
 			}
 		}
+
+		freeReplyObject(pReply);
+		return true;
 	}
 
 	freeReplyObject(pReply);
 
-	return true;
+	return false;
 }
 
 void NFRedisClient::MSET(const string_pair_vector &values)
@@ -260,14 +274,13 @@ bool NFRedisClient::STRLEN(const std::string &key, int& length)
 	{
 		length = (int)pReply->integer;
 		freeReplyObject(pReply);
-		return true;
+		return length != 0;
 	}
 
 	freeReplyObject(pReply);
 
 	return false;
 }
-
 
 bool NFRedisClient::SET(const std::string &key, const std::string &value)
 {
@@ -300,9 +313,11 @@ bool NFRedisClient::GET(const std::string& key, std::string & value)
 	if (pReply->type == REDIS_REPLY_STRING)
 	{
 		value.append(pReply->str, pReply->len);
+		freeReplyObject(pReply);
+		return true;
 	}
 
 	freeReplyObject(pReply);
 
-	return true;
+	return false;
 }

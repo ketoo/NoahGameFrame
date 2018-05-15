@@ -12,10 +12,11 @@
 class NFRedisTester
 {
 public:
-    NFRedisTester();
+    NFRedisTester(const std::string& ip, int port);
 
-    void RunTester();
+    bool RunTester();
     void Execute();
+	bool IsConnect();
 private:
 
     void TestHash();
