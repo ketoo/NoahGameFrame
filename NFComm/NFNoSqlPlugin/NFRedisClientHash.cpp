@@ -260,6 +260,32 @@ bool NFRedisClient::HMSET(const std::string &key, const std::vector<string_pair>
 	return true;
 }
 
+bool NFRedisClient::HMSET(const std::string & key, const string_vector & fields, const string_vector & values)
+{
+	if (fields.size() != values.size())
+	{
+		return false;
+	}
+
+	NFRedisCommand cmd(GET_NAME(HMSET));
+	cmd << key;
+	for (int i = 0; i < values.size(); ++i)
+	{
+		cmd << fields[i];
+		cmd << values[i];
+	}
+
+	redisReply* pReply = BuildSendCmd(cmd);
+	if (pReply == nullptr)
+	{
+		return false;
+	}
+
+	freeReplyObject(pReply);
+
+	return true;
+}
+
 bool NFRedisClient::HSET(const std::string &key, const std::string &field, const std::string &value)
 {
     NFRedisCommand cmd(GET_NAME(HSET));

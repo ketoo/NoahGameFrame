@@ -146,7 +146,7 @@ NF_SHARE_PTR<NFIRedisClient> NFCNoSqlModule::GetDriverBySuit(const std::string& 
 }
 
 /*
-NF_SHARE_PTR<NFINoSqlDriver> NFCNoSqlModule::GetDriverBySuit(const int nHash)
+NF_SHARE_PTR<NFIRedisClient> NFCNoSqlModule::GetDriverBySuit(const int nHash)
 {
 return mxNoSqlDriver.GetElementBySuit(nHash);
 }
@@ -381,6 +381,11 @@ bool NFCNoSqlModule::HMGET(const std::string & key, const string_vector & fields
 }
 
 bool NFCNoSqlModule::HMSET(const std::string & key, const std::vector<string_pair>& values)
+{
+	return false;
+}
+
+bool NFCNoSqlModule::HMSET(const std::string & key, const string_vector & fields, const string_vector & values)
 {
 	return false;
 }

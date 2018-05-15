@@ -17,6 +17,7 @@
 #include <sstream>
 #include <iostream>
 #include <random>
+#include <thread>
 
 #include "NFRedisCommand.h"
 #include "NFRedisClientSocket.h"
@@ -359,6 +360,7 @@ public:
 	* If the key does not exist, a new key holding a hash is created
 	*/
 	virtual bool HMSET(const std::string& key, const std::vector<string_pair>& values);
+	virtual bool HMSET(const std::string& key, const string_vector& fields, const string_vector& values);
 
 	/**
 	* @brief Sets the specified field to their respective values in the hash stored at key
@@ -671,8 +673,8 @@ private:
 	std::string ip_;
 	int port_;
 	std::string authKey_;
-	int64_t mnIndex;
-	std::list<int64_t> mnIndexList;
+
+	bool bBusy;
 	NFRedisClientSocket* m_pRedisClientSocket;
 };
 
