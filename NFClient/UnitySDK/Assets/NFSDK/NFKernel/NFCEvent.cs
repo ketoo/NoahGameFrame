@@ -7,9 +7,8 @@ namespace NFSDK
 {
 	class NFCEvent : NFIEvent
 	{
-		public NFCEvent(NFGUID self, int nEventID, NFIDataList valueList)
+		public NFCEvent(int nEventID, NFIDataList valueList)
 		{
-			mSelf = self;
 			mnEventID = nEventID;
             mArgValueList = valueList;
 		}
@@ -23,7 +22,8 @@ namespace NFSDK
 		{
 			if (null != mHandlerDel)
 			{
-				mHandlerDel(mSelf, mnEventID, mArgValueList, valueList);
+				//mHandlerDel(mSelf, mnEventID, mArgValueList, valueList);
+				mHandlerDel(valueList);
 			}
 		}
 

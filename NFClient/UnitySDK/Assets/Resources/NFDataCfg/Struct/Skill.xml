@@ -1,0 +1,49 @@
+<?xml version='1.0' encoding='utf-8' ?>
+<XML>
+	<Propertys>
+		<Property Id="AnimaState" Cache="0" Desc="技能对应的客户端动作状态" Force="0" Private="0" Public="0" Ref="0" Save="0" Type="string" Upload="0" />
+		<Property Id="AtkDis" Cache="0" Desc="与目标最合适的攻击距离" Force="0" Private="0" Public="0" Ref="0" Save="0" Type="float" Upload="0" />
+		<Property Id="ConsumeProperty" Cache="0" Desc="消耗属性" Force="0" Private="0" Public="0" Ref="0" Save="0" Type="string" Upload="0" />
+		<Property Id="ConsumeType" Cache="0" Desc="消耗类型
+0为绝对值1
+为当前值百分比
+2为最大值百分比" Force="0" Private="0" Public="0" Ref="0" Save="0" Type="int" Upload="0" />
+		<Property Id="ConsumeValue" Cache="0" Desc="消耗值" Force="0" Private="0" Public="0" Ref="0" Save="0" Type="string" Upload="0" />
+		<Property Id="CoolDownTime" Cache="0" Desc="使用冷却CD" Force="0" Private="0" Public="0" Ref="0" Save="0" Type="float" Upload="0" />
+		<Property Id="DamageCount" Cache="0" Desc="伤害count" Force="0" Private="0" Public="0" Ref="0" Save="0" Type="int" Upload="0" />
+		<Property Id="DamageDistance" Cache="0" Desc="伤害距离--群伤需要" Force="0" Private="0" Public="0" Ref="0" Save="0" Type="float" Upload="0" />
+		<Property Id="DamageIntervalTime" Cache="0" Desc="only be used when damage count > 1" Force="0" Private="0" Public="0" Ref="0" Save="0" Type="float" Upload="0" />
+		<Property Id="DamageProperty" Cache="0" Desc="伤害属性" Force="0" Private="0" Public="0" Ref="0" Save="0" Type="string" Upload="0" />
+		<Property Id="DamageType" Cache="0" Desc="伤害类型
+0为绝对值
+1为当前值百分比
+2为最大值百分比" Force="0" Private="0" Public="0" Ref="0" Save="0" Type="int" Upload="0" />
+		<Property Id="DamageValue" Cache="0" Desc="伤害值" Force="0" Private="0" Public="0" Ref="0" Save="0" Type="int" Upload="0" />
+		<Property Id="DefaultHitTime" Cache="0" Desc="缺省打击时间
+（本来应该打到但是物理没碰撞到或者其他原因）" Force="0" Private="0" Public="0" Ref="0" Save="0" Type="string" Upload="0" />
+		<Property Id="Desc" Cache="0" Desc="描述字符串索引" Force="0" Private="0" Public="0" Ref="0" Save="0" Type="string" Upload="0" />
+		<Property Id="GetBuffList" Cache="0" Desc="使用后获得的BUFF" Force="0" Private="0" Public="0" Ref="0" Save="0" Type="string" Upload="0" />
+		<Property Id="Icon" Cache="0" Desc="ICON" Force="0" Private="0" Public="0" Ref="0" Save="0" Type="string" Upload="0" />
+		<Property Id="NewObject" Cache="0" Desc="产生新的对象--召唤" Force="0" Private="0" Public="0" Ref="0" Save="0" Type="string" Upload="0" />
+		<Property Id="NextID" Cache="0" Desc="" Force="0" Private="0" Public="0" Ref="0" Save="0" Type="string" Upload="0" />
+		<Property Id="PlayerSkill" Cache="0" Desc="是否玩家技能" Force="0" Private="0" Public="0" Ref="0" Save="0" Type="int" Upload="0" />
+		<Property Id="RequireDistance" Cache="0" Desc="释放要求目标距离" Force="0" Private="0" Public="0" Ref="0" Save="0" Type="float" Upload="0" />
+		<Property Id="SendBuffList" Cache="0" Desc="使用后对方获得的BUFF" Force="0" Private="0" Public="0" Ref="0" Save="0" Type="string" Upload="0" />
+		<Property Id="ShowName" Cache="0" Desc="名字字符串索引" Force="0" Private="0" Public="0" Ref="0" Save="0" Type="string" Upload="0" />
+		<Property Id="SkillType" Cache="0" Desc=" EST_BRIEF_SINGLE   = 0;//普通0短刃类
+ EST_BRIEF_GROUP   = 1;//qunti
+ EST_BULLET_SINGLE  = 2;//普通子弹类(不穿透)
+ EST_BULLET_REBOUND  = 3;//普通子弹类穿
+ EST_BULLET_BOMB   = 4;//
+ EST_TARGET_SINGLE  = 5;//人头顶闪电那样
+ EST_TARGET_GROUP  = 6;//每人头顶闪电那样
+ EST_POSITION_GROUP  = 7;//爆炸目标范围(火矛从天而降那样position)" Force="0" Private="0" Public="0" Ref="0" Save="0" Type="int" Upload="0" />
+		<Property Id="SpriteFile" Cache="0" Desc="图集" Force="0" Private="0" Public="0" Ref="0" Save="0" Type="string" Upload="0" />
+		<Property Id="TargetType" Cache="0" Desc="目标类别
+0敌人
+1自己
+2队友(include self)" Force="0" Private="0" Public="0" Ref="0" Save="0" Type="int" Upload="0" />
+	</Propertys>
+	<Records>
+	</Records>
+</XML>

@@ -1,0 +1,223 @@
+fileFormatVersion: 2
+guid: 325d5bf5e3989f144b52e256abd1ac29
+timeCreated: 1461940856
+licenseType: Store
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: UIButton_0
+    21300002: UIButton_1
+    21300004: UIButton_2
+    21300006: UIButton_3
+    21300008: UIButton_4
+    21300010: UIButton_5
+    21300012: UIButton_6
+    21300014: UIButton_7
+    21300016: UIButton_8
+  serializedVersion: 2
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    linearTexture: 0
+    correctGamma: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 0
+  cubemapConvolution: 0
+  cubemapConvolutionSteps: 7
+  cubemapConvolutionExponent: 1.5
+  seamlessCubemap: 0
+  textureFormat: -1
+  maxTextureSize: 2048
+  textureSettings:
+    filterMode: -1
+    aniso: 1
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  rGBM: 0
+  compressionQuality: 50
+  allowsAlphaSplitting: 0
+  spriteMode: 1
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spriteBorder: {x: 50, y: 50, z: 50, w: 50}
+  spritePixelsToUnits: 300
+  alphaIsTransparency: 1
+  textureType: 8
+  buildTargetSettings: []
+  spriteSheet:
+    sprites:
+    - name: UIButton_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 341.3333
+        width: 170.66667
+        height: 170.66669
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -59.5, y: 85.83331}
+        - {x: -68.5, y: 85.83331}
+        - {x: -75.5, y: 80.83331}
+        - {x: -82.5, y: 73.83331}
+        - {x: -85.5, y: 65.83331}
+        - {x: -85.5, y: 56.833313}
+        - {x: -84.5, y: 55.833313}
+        - {x: -84.5, y: -85.16669}
+        - {x: 85.5, y: -85.16669}
+        - {x: 85.5, y: 84.83331}
+        - {x: -59.5, y: 84.83331}
+    - name: UIButton_1
+      rect:
+        serializedVersion: 2
+        x: 170
+        y: 341.3333
+        width: 170.66669
+        height: 170.66669
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -85.5, y: -85.16669}
+        - {x: 85.5, y: -85.16669}
+        - {x: 85.5, y: 84.83331}
+        - {x: -85.5, y: 84.83331}
+    - name: UIButton_2
+      rect:
+        serializedVersion: 2
+        x: 340
+        y: 341.3333
+        width: 170.66667
+        height: 170.66667
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 80.5, y: 74.83331}
+        - {x: 74.5, y: 81.83331}
+        - {x: 71.5, y: 84.83331}
+        - {x: 67.5, y: 84.83331}
+        - {x: 66.5, y: 85.83331}
+        - {x: 57.5, y: 85.83331}
+        - {x: 56.5, y: 84.83331}
+        - {x: -85.5, y: 84.83331}
+        - {x: -85.5, y: -85.16669}
+        - {x: 85.5, y: -85.16669}
+        - {x: 85.5, y: 62.833313}
+        - {x: 80.5, y: 72.83331}
+    - name: UIButton_3
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 171.33333
+        width: 170.66667
+        height: 170.66667
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -84.5, y: 85.83333}
+        - {x: -84.5, y: -85.16667}
+        - {x: 85.5, y: -85.16667}
+        - {x: 85.5, y: 85.83333}
+    - name: UIButton_4
+      rect:
+        serializedVersion: 2
+        x: 170
+        y: 171.33333
+        width: 170.66667
+        height: 170.66667
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -85.5, y: 85.83333}
+        - {x: -85.5, y: -85.16667}
+        - {x: 85.5, y: -85.16667}
+        - {x: 85.5, y: 85.83333}
+    - name: UIButton_5
+      rect:
+        serializedVersion: 2
+        x: 340
+        y: 171.33333
+        width: 170.66667
+        height: 170.66667
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -85.5, y: 85.83333}
+        - {x: -85.5, y: -85.16667}
+        - {x: 85.5, y: -85.16667}
+        - {x: 85.5, y: 85.83333}
+    - name: UIButton_6
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1.3333282
+        width: 170.66667
+        height: 170.66667
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -79.5, y: 85.83333}
+        - {x: -79.5, y: -71.16667}
+        - {x: -75.5, y: -77.16667}
+        - {x: -73.5, y: -77.16667}
+        - {x: -70.5, y: -80.16667}
+        - {x: 85.5, y: -80.16667}
+        - {x: 85.5, y: 85.83333}
+    - name: UIButton_7
+      rect:
+        serializedVersion: 2
+        x: 170
+        y: 1.3333282
+        width: 170.66667
+        height: 170.66667
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -85.5, y: 85.83333}
+        - {x: -85.5, y: -85.16667}
+        - {x: 85.5, y: -85.16667}
+        - {x: 85.5, y: 85.83333}
+    - name: UIButton_8
+      rect:
+        serializedVersion: 2
+        x: 340
+        y: 1.3333282
+        width: 170.66667
+        height: 170.66667
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 74.5, y: -80.16667}
+        - {x: 80.5, y: -75.16667}
+        - {x: 85.5, y: -64.16667}
+        - {x: 85.5, y: 85.83333}
+        - {x: -85.5, y: 85.83333}
+        - {x: -85.5, y: -85.16667}
+        - {x: 65.5, y: -85.16667}
+        - {x: 72.5, y: -82.16667}
+    outline: []
+  spritePackingTag: 
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

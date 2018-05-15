@@ -2,7 +2,12 @@
 using System.Collections;
 using NFSDK;
 
-public class NFCRoot : MonoBehaviour {
+public class NFCRoot : MonoBehaviour 
+{
+
+	NFILogicClassModule mLogicClassModule;
+	NFNetModule mNetModule;
+	NFUIModule mUIModule;
 
     private NFCPluginManager mPluginManager;
     private static NFCRoot _instance = null;
@@ -10,6 +15,7 @@ public class NFCRoot : MonoBehaviour {
     {
         return _instance;
     }
+
     void Start()
     {
         _instance = this;
@@ -17,19 +23,27 @@ public class NFCRoot : MonoBehaviour {
         Debug.Log("Root Start");
         mPluginManager = new NFCPluginManager();
         mPluginManager.Registered(new NFCSDKPlugin(mPluginManager));
-        mPluginManager.Registered(new NFCLogicPlugin(mPluginManager));
-        mPluginManager.Registered(new NFCUIPlugin(mPluginManager));
+        mPluginManager.Registered(new NFLogicPlugin(mPluginManager));
+		mPluginManager.Registered(new NFUIPlugin(mPluginManager));
+		mPluginManager.Registered(new NFScenePlugin(mPluginManager));
 
-#if UNITY_EDITOR
-        mPluginManager.FindModule<NFILogicClassModule>().SetDataPath("../../_Out/");
-#else
-        mPluginManager.FindModule<NFILogicClassModule>().SetDataPath("./");
-#endif
+
+		mLogicClassModule = mPluginManager.FindModule<NFILogicClassModule>();
+		mNetModule = mPluginManager.FindModule<NFNetModule>();
+		mUIModule = mPluginManager.FindModule<NFUIModule>();
+
+		mLogicClassModule.SetDataPath("../../_Out/");
+
+		if (RuntimePlatform.Android == Application.platform
+		    ||RuntimePlatform.IPhonePlayer == Application.platform)
+		{
+			mPluginManager.FindModule<NFILogicClassModule>().SetDataPath("./");
+		}
 
         mPluginManager.Init();
         mPluginManager.AfterInit();
 
-        NFCUIManager.Instance().ShowUI<UILogin>();
+		mUIModule.ShowUI<UILogin>();
 
         DontDestroyOnLoad(gameObject);
 	}
@@ -44,6 +58,6 @@ public class NFCRoot : MonoBehaviour {
 	
 	void Update () 
     {
-        mPluginManager.Execute();
+		mPluginManager.Execute();
 	}
 }

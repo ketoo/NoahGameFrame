@@ -1,0 +1,191 @@
+fileFormatVersion: 2
+guid: 4b14b4b275040064fb2dbb9768d883eb
+timeCreated: 1461059758
+licenseType: Store
+ModelImporter:
+  serializedVersion: 19
+  fileIDToRecycleName:
+    100000: Controls
+    100002: EyeLidDown
+    100004: EyelidUp
+    100006: Head
+    100008: HeadEnd
+    100010: Hips
+    100012: LeftArm
+    100014: LeftEye
+    100016: LeftFoot
+    100018: LeftForearm
+    100020: LeftHand
+    100022: LeftIndex1
+    100024: LeftIndex2
+    100026: LeftIndexEnd
+    100028: LeftLeg
+    100030: LeftMiddle1
+    100032: LeftMiddle2
+    100034: LeftMiddleEnd
+    100036: LeftPinky1
+    100038: LeftPinky2
+    100040: LeftPinkyEnd
+    100042: LeftShoulder
+    100044: LeftThumb1
+    100046: LeftThumb2
+    100048: LeftThumbEnd
+    100050: LeftToe
+    100052: LeftToeEnd
+    100054: LeftUpLeg
+    100056: Mesh
+    100058: Mouth
+    100060: Neck
+    100062: RightArm
+    100064: RightEye
+    100066: RightFoot
+    100068: RightForearm
+    100070: RightHand
+    100072: RightIndex1
+    100074: RightIndex2
+    100076: RightIndexEnd
+    100078: RightLeg
+    100080: RightMiddle1
+    100082: RightMiddle2
+    100084: RightMiddleEnd
+    100086: RightPinky1
+    100088: RightPinky2
+    100090: RightPinkyEnd
+    100092: RightShoulder
+    100094: RightThumb1
+    100096: RightThumb2
+    100098: RightThumbEnd
+    100100: RightToe
+    100102: RightToeEnd
+    100104: RightUpLeg
+    100106: //RootNode
+    100108: SecondHandSalesman
+    100110: Skeleton
+    100112: Spine1
+    100114: Spine2
+    400000: Controls
+    400002: EyeLidDown
+    400004: EyelidUp
+    400006: Head
+    400008: HeadEnd
+    400010: Hips
+    400012: LeftArm
+    400014: LeftEye
+    400016: LeftFoot
+    400018: LeftForearm
+    400020: LeftHand
+    400022: LeftIndex1
+    400024: LeftIndex2
+    400026: LeftIndexEnd
+    400028: LeftLeg
+    400030: LeftMiddle1
+    400032: LeftMiddle2
+    400034: LeftMiddleEnd
+    400036: LeftPinky1
+    400038: LeftPinky2
+    400040: LeftPinkyEnd
+    400042: LeftShoulder
+    400044: LeftThumb1
+    400046: LeftThumb2
+    400048: LeftThumbEnd
+    400050: LeftToe
+    400052: LeftToeEnd
+    400054: LeftUpLeg
+    400056: Mesh
+    400058: Mouth
+    400060: Neck
+    400062: RightArm
+    400064: RightEye
+    400066: RightFoot
+    400068: RightForearm
+    400070: RightHand
+    400072: RightIndex1
+    400074: RightIndex2
+    400076: RightIndexEnd
+    400078: RightLeg
+    400080: RightMiddle1
+    400082: RightMiddle2
+    400084: RightMiddleEnd
+    400086: RightPinky1
+    400088: RightPinky2
+    400090: RightPinkyEnd
+    400092: RightShoulder
+    400094: RightThumb1
+    400096: RightThumb2
+    400098: RightThumbEnd
+    400100: RightToe
+    400102: RightToeEnd
+    400104: RightUpLeg
+    400106: SecondHandSalesman
+    400108: //RootNode
+    400110: Skeleton
+    400112: Spine1
+    400114: Spine2
+    4300000: SecondHandSalesman
+    7400000: Take 001
+    9500000: //RootNode
+    13700000: SecondHandSalesman
+  materials:
+    importMaterials: 0
+    materialName: 1
+    materialSearch: 2
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleRotations: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

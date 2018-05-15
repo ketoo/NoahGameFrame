@@ -7,9 +7,18 @@ namespace NFSDK
 {
     public class NFCPluginManager : NFIPluginManager
     {
+
+		private static NFIPluginManager _instance = null;
+		public static NFIPluginManager Instance()
+        {
+			return _instance;
+        }
+
+
         public NFCPluginManager()
         {
             mPluginManager = this;
+			_instance = this;
         }
         //------------- ½Ó¿Ú -------------------//
 
@@ -57,7 +66,7 @@ namespace NFSDK
             {
                 if (plugin != null)
                 {
-                    plugin.Execute();
+					plugin.Execute();
                 }
             }
             return true;

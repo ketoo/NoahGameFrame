@@ -12,6 +12,7 @@ namespace NFSDK
         public abstract bool Execute();
         public abstract bool BeforeShut();
         public abstract bool Shut();
+
         public T FindModule<T>() where T : NFIModule
         {
             return mPluginManager._FindModule<T>();

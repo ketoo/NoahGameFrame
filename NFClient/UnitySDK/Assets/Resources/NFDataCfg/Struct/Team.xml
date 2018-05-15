@@ -1,0 +1,30 @@
+<?xml version='1.0' encoding='utf-8' ?>
+<XML>
+	<Propertys>
+		<Property Id="Captain" Cache="0" Desc="队长ID" Force="0" Private="1" Public="1" Ref="0" Save="1" Type="object" Upload="0" />
+		<Property Id="PresidentName" Cache="0" Desc="会长名" Force="0" Private="1" Public="1" Ref="0" Save="1" Type="string" Upload="0" />
+	</Propertys>
+	<Records>
+		<Record Id="ApplyList" Cache="0"	 Col="7"	 Force="0"	 Private="1"	 Public="1"	 Ref="0"	 Row="50"	 Save="1"	 Upload="0"	 >
+			<Col Type ="object"	Tag="GUID"/><!--- Desc-->
+			<Col Type ="string"	Tag="Name"/><!--- TeamApply-->
+			<Col Type ="int"	Tag="Level"/>
+			<Col Type ="int"	Tag="Job"/>
+			<Col Type ="int"	Tag="Donation"/>
+			<Col Type ="int"	Tag="VIP"/>
+			<Col Type ="int"	Tag="Power"/>
+		</Record>
+		<Record Id="MemberList" Cache="0"	 Col="10"	 Force="0"	 Private="1"	 Public="1"	 Ref="0"	 Row="50"	 Save="1"	 Upload="0"	 >
+			<Col Type ="object"	Tag="GUID"/><!--- Desc-->
+			<Col Type ="string"	Tag="Name"/><!--- guild-->
+			<Col Type ="int"	Tag="Level"/>
+			<Col Type ="int"	Tag="Job"/>
+			<Col Type ="int"	Tag="Donation"/>
+			<Col Type ="int"	Tag="Receive"/>
+			<Col Type ="int"	Tag="VIP"/>
+			<Col Type ="int"	Tag="Online"/>
+			<Col Type ="int"	Tag="Title"/>
+			<Col Type ="int"	Tag="GameID"/>
+		</Record>
+	</Records>
+</XML>
