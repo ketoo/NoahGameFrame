@@ -357,6 +357,7 @@ public:
 	* If the key does not exist, a new key holding a hash is created
 	*/
 	virtual bool HMSET(const std::string& key, const std::vector<string_pair>& values);
+	virtual bool HMSET(const std::string& key, const string_vector& fields, const string_vector& values);
 
 	/**
 	* @brief Sets the specified field to their respective values in the hash stored at key
