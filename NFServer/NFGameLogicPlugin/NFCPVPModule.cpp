@@ -352,7 +352,7 @@ bool NFCPVPModule::ProcessOpponentData(const NFGUID & self, const NFGUID& oppone
 
 	//try
 	const std::string& strPlayerKey = m_pCommonRedisModule->GetPropertyCacheKey(opponent);
-	if (m_pNoSqlModule->HMGet(strPlayerKey, vKeyList, vValueList))
+	if (m_pNoSqlModule->HMGET(strPlayerKey, vKeyList, vValueList))
 	{
 		int nGold = lexical_cast<int>(vValueList.at(0));
 		int nDiamond = lexical_cast<int>(vValueList.at(1));
