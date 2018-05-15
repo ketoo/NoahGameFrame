@@ -666,6 +666,7 @@ public:
 
 protected:
 	redisReply * BuildSendCmd(const NFRedisCommand& cmd);
+	redisReply * ParseForReply();
 
 
 private:
