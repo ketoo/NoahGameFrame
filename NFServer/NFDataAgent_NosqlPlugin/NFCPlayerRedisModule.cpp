@@ -141,10 +141,10 @@ int NFCPlayerRedisModule::GetPlayerHomeSceneID(const NFGUID & self)
 bool NFCPlayerRedisModule::SavePlayerTile(const int nSceneID, const NFGUID & self, const std::string & strTileData)
 {
 	std::string strTileKey = m_pCommonRedisModule->GetTileCacheKey(nSceneID);
-	NF_SHARE_PTR<NFINoSqlDriver> xNoSqlDriver = m_pNoSqlModule->GetDriverBySuit(self.ToString());
+	NF_SHARE_PTR<NFIRedisClient> xNoSqlDriver = m_pNoSqlModule->GetDriverBySuit(self.ToString());
 	if (xNoSqlDriver)
 	{
-		return xNoSqlDriver->HSet(strTileKey, self.ToString(), strTileData);
+		return xNoSqlDriver->HSET(strTileKey, self.ToString(), strTileData);
 	}
 
 	return false;
@@ -153,10 +153,10 @@ bool NFCPlayerRedisModule::SavePlayerTile(const int nSceneID, const NFGUID & sel
 bool NFCPlayerRedisModule::LoadPlayerTile(const int nSceneID, const NFGUID & self, std::string & strTileData)
 {
 	std::string strTileKey = m_pCommonRedisModule->GetTileCacheKey(nSceneID);
-	NF_SHARE_PTR<NFINoSqlDriver> xNoSqlDriver = m_pNoSqlModule->GetDriverBySuit(self.ToString());
-	if (xNoSqlDriver && xNoSqlDriver->Exists(strTileKey))
+	NF_SHARE_PTR<NFIRedisClient> xNoSqlDriver = m_pNoSqlModule->GetDriverBySuit(self.ToString());
+	if (xNoSqlDriver && xNoSqlDriver->EXISTS(strTileKey))
 	{
-		return xNoSqlDriver->HGet(strTileKey, self.ToString(), strTileData);
+		return xNoSqlDriver->HGET(strTileKey, self.ToString(), strTileData);
 	}
 
 	return false;
@@ -165,16 +165,16 @@ bool NFCPlayerRedisModule::LoadPlayerTile(const int nSceneID, const NFGUID & sel
 bool NFCPlayerRedisModule::LoadPlayerTileRandom(const int nSceneID, NFGUID& xPlayer, std::string & strTileData)
 {
 	std::string strTileKey = m_pCommonRedisModule->GetTileCacheKey(nSceneID);
-	NF_SHARE_PTR<NFINoSqlDriver> xNoSqlDriver = m_pNoSqlModule->GetDriverBySuit(xPlayer.ToString());
-	if (xNoSqlDriver && xNoSqlDriver->Exists(strTileKey))
+	NF_SHARE_PTR<NFIRedisClient> xNoSqlDriver = m_pNoSqlModule->GetDriverBySuit(xPlayer.ToString());
+	if (xNoSqlDriver && xNoSqlDriver->EXISTS(strTileKey))
 	{
 		//need to cache this keys
 		std::vector<std::string> vKeys;
-		if (xNoSqlDriver->HKeys(strTileKey, vKeys))
+		if (xNoSqlDriver->HKEYS(strTileKey, vKeys))
 		{
 			int nKeyIndex = m_pKernelModule->Random(0, (int)vKeys.size());
 			std::string strKey = vKeys[nKeyIndex];
-			if (xPlayer.FromString(strKey) && xNoSqlDriver->HGet(strTileKey, strKey, strTileData))
+			if (xPlayer.FromString(strKey) && xNoSqlDriver->HGET(strTileKey, strKey, strTileData))
 			{
 				if (mxObjectTileCache.ExistElement(xPlayer))
 				{
@@ -209,7 +209,7 @@ bool NFCPlayerRedisModule::LoadPlayerTileRandomCache(const NFGUID & xPlayer, std
 
 NFINT64 NFCPlayerRedisModule::GetPropertyInt(const NFGUID & self, const std::string & strPropertyName)
 {
-	NF_SHARE_PTR<NFINoSqlDriver> pDriver = m_pNoSqlModule->GetDriverBySuit(self.ToString());
+	NF_SHARE_PTR<NFIRedisClient> pDriver = m_pNoSqlModule->GetDriverBySuit(self.ToString());
 	if (!pDriver)
 	{
 		return 0;
@@ -217,7 +217,7 @@ NFINT64 NFCPlayerRedisModule::GetPropertyInt(const NFGUID & self, const std::str
 
 	std::string strValue;
 	std::string strCacheKey = m_pCommonRedisModule->GetPropertyCacheKey(self);
-	if (!pDriver->HGet(strCacheKey, strPropertyName, strValue))
+	if (!pDriver->HGET(strCacheKey, strPropertyName, strValue))
 	{
 		return 0;
 	}
@@ -227,7 +227,7 @@ NFINT64 NFCPlayerRedisModule::GetPropertyInt(const NFGUID & self, const std::str
 
 int NFCPlayerRedisModule::GetPropertyInt32(const NFGUID & self, const std::string & strPropertyName)
 {
-	NF_SHARE_PTR<NFINoSqlDriver> pDriver = m_pNoSqlModule->GetDriverBySuit(self.ToString());
+	NF_SHARE_PTR<NFIRedisClient> pDriver = m_pNoSqlModule->GetDriverBySuit(self.ToString());
 	if (!pDriver)
 	{
 		return 0;
@@ -235,7 +235,7 @@ int NFCPlayerRedisModule::GetPropertyInt32(const NFGUID & self, const std::strin
 
 	std::string strValue;
 	std::string strCacheKey = m_pCommonRedisModule->GetPropertyCacheKey(self);
-	if (!pDriver->HGet(strCacheKey, strPropertyName, strValue))
+	if (!pDriver->HGET(strCacheKey, strPropertyName, strValue))
 	{
 		return 0;
 	}
@@ -245,7 +245,7 @@ int NFCPlayerRedisModule::GetPropertyInt32(const NFGUID & self, const std::strin
 
 double NFCPlayerRedisModule::GetPropertyFloat(const NFGUID & self, const std::string & strPropertyName)
 {
-	NF_SHARE_PTR<NFINoSqlDriver> pDriver = m_pNoSqlModule->GetDriverBySuit(self.ToString());
+	NF_SHARE_PTR<NFIRedisClient> pDriver = m_pNoSqlModule->GetDriverBySuit(self.ToString());
 	if (!pDriver)
 	{
 		return 0;
@@ -253,7 +253,7 @@ double NFCPlayerRedisModule::GetPropertyFloat(const NFGUID & self, const std::st
 
 	std::string strValue;
 	std::string strCacheKey = m_pCommonRedisModule->GetPropertyCacheKey(self);
-	if (!pDriver->HGet(strCacheKey, strPropertyName, strValue))
+	if (!pDriver->HGET(strCacheKey, strPropertyName, strValue))
 	{
 		return 0;
 	}
@@ -263,7 +263,7 @@ double NFCPlayerRedisModule::GetPropertyFloat(const NFGUID & self, const std::st
 
 std::string NFCPlayerRedisModule::GetPropertyString(const NFGUID & self, const std::string & strPropertyName)
 {
-	NF_SHARE_PTR<NFINoSqlDriver> pDriver = m_pNoSqlModule->GetDriverBySuit(self.ToString());
+	NF_SHARE_PTR<NFIRedisClient> pDriver = m_pNoSqlModule->GetDriverBySuit(self.ToString());
 	if (!pDriver)
 	{
 		return "";
@@ -271,7 +271,7 @@ std::string NFCPlayerRedisModule::GetPropertyString(const NFGUID & self, const s
 
 	std::string strValue;
 	std::string strCacheKey = m_pCommonRedisModule->GetPropertyCacheKey(self);
-	if (!pDriver->HGet(strCacheKey, strPropertyName, strValue))
+	if (!pDriver->HGET(strCacheKey, strPropertyName, strValue))
 	{
 		return "";
 	}
@@ -281,7 +281,7 @@ std::string NFCPlayerRedisModule::GetPropertyString(const NFGUID & self, const s
 
 NFGUID NFCPlayerRedisModule::GetPropertyObject(const NFGUID & self, const std::string & strPropertyName)
 {
-	NF_SHARE_PTR<NFINoSqlDriver> pDriver = m_pNoSqlModule->GetDriverBySuit(self.ToString());
+	NF_SHARE_PTR<NFIRedisClient> pDriver = m_pNoSqlModule->GetDriverBySuit(self.ToString());
 	if (!pDriver)
 	{
 		return NFGUID();
@@ -289,7 +289,7 @@ NFGUID NFCPlayerRedisModule::GetPropertyObject(const NFGUID & self, const std::s
 
 	std::string strValue;
 	std::string strCacheKey = m_pCommonRedisModule->GetPropertyCacheKey(self);
-	if (!pDriver->HGet(strCacheKey, strPropertyName, strValue))
+	if (!pDriver->HGET(strCacheKey, strPropertyName, strValue))
 	{
 		return NFGUID();
 	}
@@ -300,7 +300,7 @@ NFGUID NFCPlayerRedisModule::GetPropertyObject(const NFGUID & self, const std::s
 
 NFVector2 NFCPlayerRedisModule::GetPropertyVector2(const NFGUID & self, const std::string & strPropertyName)
 {
-	NF_SHARE_PTR<NFINoSqlDriver> pDriver = m_pNoSqlModule->GetDriverBySuit(self.ToString());
+	NF_SHARE_PTR<NFIRedisClient> pDriver = m_pNoSqlModule->GetDriverBySuit(self.ToString());
 	if (!pDriver)
 	{
 		return NFVector2();
@@ -308,7 +308,7 @@ NFVector2 NFCPlayerRedisModule::GetPropertyVector2(const NFGUID & self, const st
 
 	std::string strValue;
 	std::string strCacheKey = m_pCommonRedisModule->GetPropertyCacheKey(self);
-	if (!pDriver->HGet(strCacheKey, strPropertyName, strValue))
+	if (!pDriver->HGET(strCacheKey, strPropertyName, strValue))
 	{
 		return NFVector2();
 	}
@@ -320,7 +320,7 @@ NFVector2 NFCPlayerRedisModule::GetPropertyVector2(const NFGUID & self, const st
 
 NFVector3 NFCPlayerRedisModule::GetPropertyVector3(const NFGUID & self, const std::string & strPropertyName)
 {
-	NF_SHARE_PTR<NFINoSqlDriver> pDriver = m_pNoSqlModule->GetDriverBySuit(self.ToString());
+	NF_SHARE_PTR<NFIRedisClient> pDriver = m_pNoSqlModule->GetDriverBySuit(self.ToString());
 	if (!pDriver)
 	{
 		return NFVector3();
@@ -328,7 +328,7 @@ NFVector3 NFCPlayerRedisModule::GetPropertyVector3(const NFGUID & self, const st
 
 	std::string strValue;
 	std::string strCacheKey = m_pCommonRedisModule->GetPropertyCacheKey(self);
-	if (!pDriver->HGet(strCacheKey, strPropertyName, strValue))
+	if (!pDriver->HGET(strCacheKey, strPropertyName, strValue))
 	{
 		return NFVector3();
 	}

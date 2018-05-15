@@ -116,7 +116,7 @@ NF_SHARE_PTR<NFIPropertyManager> NFCCommonRedisModule::GetCachePropertyInfo(cons
         return nullptr;
     }
 
-	NF_SHARE_PTR<NFINoSqlDriver> pDriver = m_pNoSqlModule->GetDriverBySuit(self.ToString());
+	NF_SHARE_PTR<NFIRedisClient> pDriver = m_pNoSqlModule->GetDriverBySuit(self.ToString());
     if (!pDriver)
     {
         return nullptr;
@@ -137,7 +137,7 @@ NF_SHARE_PTR<NFIPropertyManager> NFCCommonRedisModule::GetCachePropertyInfo(cons
 
 	//cache
 	std::string strCacheKey = GetPropertyCacheKey(self);
-    if (!pDriver->HMGet(strCacheKey, vKeyCacheList, vValueCacheList))
+    if (!pDriver->HMGET(strCacheKey, vKeyCacheList, vValueCacheList))
     {
         return nullptr;
     }
@@ -158,7 +158,7 @@ NF_SHARE_PTR<NFIRecordManager> NFCCommonRedisModule::GetCacheRecordInfo(const NF
         return nullptr;
     }
 
-	NF_SHARE_PTR<NFINoSqlDriver> pDriver = m_pNoSqlModule->GetDriverBySuit(self.ToString());
+	NF_SHARE_PTR<NFIRedisClient> pDriver = m_pNoSqlModule->GetDriverBySuit(self.ToString());
     if (!pDriver)
     {
         return nullptr;
@@ -180,7 +180,7 @@ NF_SHARE_PTR<NFIRecordManager> NFCCommonRedisModule::GetCacheRecordInfo(const NF
 
 	//cache
 	std::string strCacheKey = GetRecordCacheKey(self);
-	if (!pDriver->HMGet(strCacheKey, vKeyCacheList, vValueCacheList))
+	if (!pDriver->HMGET(strCacheKey, vKeyCacheList, vValueCacheList))
 	{
 		return nullptr;
 	}
@@ -205,7 +205,7 @@ bool NFCCommonRedisModule::SaveCachePropertyInfo(const NFGUID& self, NF_SHARE_PT
         return false;
     }
 
-	NF_SHARE_PTR<NFINoSqlDriver> pDriver = m_pNoSqlModule->GetDriverBySuit(self.ToString());
+	NF_SHARE_PTR<NFIRedisClient> pDriver = m_pNoSqlModule->GetDriverBySuit(self.ToString());
     if (!pDriver)
     {
         return false;
@@ -225,14 +225,14 @@ bool NFCCommonRedisModule::SaveCachePropertyInfo(const NFGUID& self, NF_SHARE_PT
 
 	std::string strKey= GetPropertyCacheKey(self);
 
-    if (!pDriver->HMSet(strKey, vKeyList, vValueList))
+    if (!pDriver->HMSET(strKey, vKeyList, vValueList))
     {
         return false;
     }
 
 	if (nExpireSecond > 0)
 	{
-		pDriver->Expire(strKey, nExpireSecond);
+		pDriver->EXPIRE(strKey, nExpireSecond);
 	}
 
     return true;
@@ -250,7 +250,7 @@ bool NFCCommonRedisModule::SaveCacheRecordInfo(const NFGUID& self, NF_SHARE_PTR<
         return false;
     }
 
-	NF_SHARE_PTR<NFINoSqlDriver> pDriver = m_pNoSqlModule->GetDriverBySuit(self.ToString());
+	NF_SHARE_PTR<NFIRedisClient> pDriver = m_pNoSqlModule->GetDriverBySuit(self.ToString());
     if (!pDriver)
     {
         return false;
@@ -269,14 +269,14 @@ bool NFCCommonRedisModule::SaveCacheRecordInfo(const NFGUID& self, NF_SHARE_PTR<
 	}
 
 	std::string strKey = GetRecordCacheKey(self);
-	if (!pDriver->HMSet(strKey, vKeyList, vValueList))
+	if (!pDriver->HMSET(strKey, vKeyList, vValueList))
 	{
 		return false;
 	}
 
 	if (nExpireSecond > 0)
 	{
-		pDriver->Expire(strKey, nExpireSecond);
+		pDriver->EXPIRE(strKey, nExpireSecond);
 	}
 
     return true;

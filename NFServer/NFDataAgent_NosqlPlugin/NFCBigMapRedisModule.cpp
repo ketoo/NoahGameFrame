@@ -73,12 +73,12 @@ bool NFCBigMapRedisModule::GetGridBaseInfo(const std::string&strGridID, NFMsg::B
 		return false;
 	}
 	
-	NF_SHARE_PTR<NFINoSqlDriver> pNoSqlDriver = m_pNoSqlModule->GetDriverBySuit(strGridID);
+	NF_SHARE_PTR<NFIRedisClient> pNoSqlDriver = m_pNoSqlModule->GetDriverBySuit(strGridID);
 	if (pNoSqlDriver)
 	{
 		std::string strKey = GetGridBaseKey();
 		std::string strData;
-		if (pNoSqlDriver->HGet(strKey, strGridID, strData))
+		if (pNoSqlDriver->HGET(strKey, strGridID, strData))
 		{
 			if (xBaseInfo.ParseFromString(strData))
 			{
@@ -92,13 +92,13 @@ bool NFCBigMapRedisModule::GetGridBaseInfo(const std::string&strGridID, NFMsg::B
 
 bool NFCBigMapRedisModule::GetGridBaseInfo(const std::vector<std::string>& strGridID, std::vector<NFMsg::BigMapGridBaseInfo>& xBaseInfoList)
 {
-	NF_SHARE_PTR<NFINoSqlDriver> pNoSqlDriver = m_pNoSqlModule->GetDriverBySuitConsistent();
+	NF_SHARE_PTR<NFIRedisClient> pNoSqlDriver = m_pNoSqlModule->GetDriverBySuitConsistent();
 	if (pNoSqlDriver)
 	{
 		std::vector<std::string> vValues;
 		std::string strKey = GetGridBaseKey();
 		std::string strData;
-		if (pNoSqlDriver->HMGet(strKey, strGridID, vValues))
+		if (pNoSqlDriver->HMGET(strKey, strGridID, vValues))
 		{
 			for (int i = 0; i < vValues.size(); ++i)
 			{
@@ -134,12 +134,12 @@ bool NFCBigMapRedisModule::GetGridBaseInfo(std::vector<NFMsg::BigMapGridBaseInfo
 
 bool NFCBigMapRedisModule::GetGridLeaveMsgInfo(const std::string&strGridID, std::vector<NFMsg::BigMapLeaveMsg>& xLeaveMsgList)
 {
-	NF_SHARE_PTR<NFINoSqlDriver> pNoSqlDriver = m_pNoSqlModule->GetDriverBySuitConsistent();
+	NF_SHARE_PTR<NFIRedisClient> pNoSqlDriver = m_pNoSqlModule->GetDriverBySuitConsistent();
 	if (pNoSqlDriver)
 	{
 		std::string strKey = GetGridLeaveMsgKey(strGridID);
 		std::vector<std::string> xValues;
-		if (pNoSqlDriver->ListRange(strKey, 0, 10, xValues))
+		if (pNoSqlDriver->LRANGE(strKey, 0, 10, xValues))
 		{
 			for (int i = 0; i< xValues.size(); ++i)
 			{
@@ -158,12 +158,12 @@ bool NFCBigMapRedisModule::GetGridLeaveMsgInfo(const std::string&strGridID, std:
 
 bool NFCBigMapRedisModule::GetGridWarHistoryInfo(const std::string&strGridID, std::vector<NFMsg::BigMapWarHistory>& xWarHistoryList)
 {
-	NF_SHARE_PTR<NFINoSqlDriver> pNoSqlDriver = m_pNoSqlModule->GetDriverBySuitConsistent();
+	NF_SHARE_PTR<NFIRedisClient> pNoSqlDriver = m_pNoSqlModule->GetDriverBySuitConsistent();
 	if (pNoSqlDriver)
 	{
 		std::string strKey = GetGridWarHistoryKey(strGridID);
 		std::vector<std::string> xValues;
-		if (pNoSqlDriver->ListRange(strKey, 0, 10, xValues))
+		if (pNoSqlDriver->LRANGE(strKey, 0, 10, xValues))
 		{
 			for (int i = 0; i< xValues.size(); ++i)
 			{
@@ -189,7 +189,7 @@ bool NFCBigMapRedisModule::GetGridStationInfo(const std::string& strGridID, std:
 		return false;
 	}
 
-	NF_SHARE_PTR<NFINoSqlDriver> pNoSqlDriver = m_pNoSqlModule->GetDriverBySuitConsistent();
+	NF_SHARE_PTR<NFIRedisClient> pNoSqlDriver = m_pNoSqlModule->GetDriverBySuitConsistent();
 	if (pNoSqlDriver)
 	{
 		std::string strKey = GetGridStationHistoryKey(strGridID);
@@ -241,14 +241,14 @@ bool NFCBigMapRedisModule::SetGridBaseInfo(const std::string&strGridID, const NF
 		return false;
 	}
 
-	NF_SHARE_PTR<NFINoSqlDriver> pNoSqlDriver = m_pNoSqlModule->GetDriverBySuitConsistent();
+	NF_SHARE_PTR<NFIRedisClient> pNoSqlDriver = m_pNoSqlModule->GetDriverBySuitConsistent();
 	if (pNoSqlDriver)
 	{
 		std::string strKey = GetGridBaseKey();
 		std::string strData;
 		if (xBaseInfo.SerializeToString(&strData))
 		{
-			return pNoSqlDriver->HSet(strKey, strGridID, strData);
+			return pNoSqlDriver->HSET(strKey, strGridID, strData);
 		}
 	}
 
@@ -263,14 +263,14 @@ bool NFCBigMapRedisModule::AddGridLeaveMsgInfo(const std::string&strGridID, cons
 	}
 
 	
-	NF_SHARE_PTR<NFINoSqlDriver> pNoSqlDriver = m_pNoSqlModule->GetDriverBySuitConsistent();
+	NF_SHARE_PTR<NFIRedisClient> pNoSqlDriver = m_pNoSqlModule->GetDriverBySuitConsistent();
 	if (pNoSqlDriver)
 	{
 		std::string strKey = GetGridLeaveMsgKey(strGridID);
 		std::string strData;
 		if (xLeaveMsg.SerializeToString(&strData))
 		{
-			return pNoSqlDriver->ListPush(strKey, strData);
+			return pNoSqlDriver->LPUSH(strKey, strData);
 		}
 	}
 
@@ -285,7 +285,7 @@ bool NFCBigMapRedisModule::AddGridWarHistoryInfo(const std::string&strGridID, co
 	}
 
 	
-	NF_SHARE_PTR<NFINoSqlDriver> pNoSqlDriver = m_pNoSqlModule->GetDriverBySuitConsistent();
+	NF_SHARE_PTR<NFIRedisClient> pNoSqlDriver = m_pNoSqlModule->GetDriverBySuitConsistent();
 	if (pNoSqlDriver)
 	{
 		std::string strKey = GetGridWarHistoryKey(strGridID);
@@ -293,7 +293,7 @@ bool NFCBigMapRedisModule::AddGridWarHistoryInfo(const std::string&strGridID, co
 		if (xWarHistory.SerializeToString(&strData))
 		{
 			//
-			return pNoSqlDriver->ListPush(strKey, strData);
+			return pNoSqlDriver->LPUSH(strKey, strData);
 		}
 	}
 
@@ -308,11 +308,11 @@ bool NFCBigMapRedisModule::AddGridStationInfo(const std::string& strGridID, cons
 	}
 
 	
-	NF_SHARE_PTR<NFINoSqlDriver> pNoSqlDriver = m_pNoSqlModule->GetDriverBySuitConsistent();
+	NF_SHARE_PTR<NFIRedisClient> pNoSqlDriver = m_pNoSqlModule->GetDriverBySuitConsistent();
 	if (pNoSqlDriver)
 	{
 		std::string strKey = GetGridStationHistoryKey(strGridID);
-		return pNoSqlDriver->ZAdd(strKey, nResource, self.ToString());
+		return pNoSqlDriver->ZADD(strKey, self.ToString(), nResource);
 	}
 
 	return false;
@@ -326,11 +326,11 @@ bool NFCBigMapRedisModule::RemoveGridStationInfo(const std::string& strGridID, c
 	}
 
 	
-	NF_SHARE_PTR<NFINoSqlDriver> pNoSqlDriver = m_pNoSqlModule->GetDriverBySuitConsistent();
+	NF_SHARE_PTR<NFIRedisClient> pNoSqlDriver = m_pNoSqlModule->GetDriverBySuitConsistent();
 	if (pNoSqlDriver)
 	{
 		std::string strKey = GetGridStationHistoryKey(strGridID);
-		return pNoSqlDriver->ZRem(strKey, self.ToString());
+		return pNoSqlDriver->ZREM(strKey, self.ToString());
 	}
 
 	return false;

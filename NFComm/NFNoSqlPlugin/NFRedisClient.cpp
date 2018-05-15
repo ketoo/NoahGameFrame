@@ -6,8 +6,8 @@
 
 NFRedisClient::NFRedisClient()
 {
-	mnIndex = 0;
 	port_ = 0;
+	bBusy = false;
     m_pRedisClientSocket = new NFRedisClientSocket();
 }
 
@@ -18,7 +18,7 @@ bool NFRedisClient::Enable()
 
 bool NFRedisClient::Busy()
 {
-	return true;
+	return bBusy;
 }
 
 bool NFRedisClient::Connect(const std::string &ip, const int port, const std::string &auth)
@@ -84,6 +84,23 @@ bool NFRedisClient::Execute()
 
 redisReply* NFRedisClient::BuildSendCmd(const NFRedisCommand& cmd)
 {
+	if (bBusy)
+	{
+		while (true)
+		{
+			std::this_thread::sleep_for(std::chrono::milliseconds(1));
+
+			if (YieldFunction)
+			{
+				YieldFunction();
+			}
+			else
+			{
+				Execute();
+			}
+		}
+	}
+
 	std::string msg = cmd.Serialize();
 	int nRet = m_pRedisClientSocket->Write(msg.data(), msg.length());
 	if (nRet != 0)
@@ -93,35 +110,15 @@ redisReply* NFRedisClient::BuildSendCmd(const NFRedisCommand& cmd)
 		return nullptr;
 	}
 
-	mnIndex++;
-
-	int64_t index = mnIndex;
-	mnIndexList.push_back(index);
-
 	struct redisReply* reply = nullptr;
 	while (true)
 	{
-		//get reply
-		int64_t nFrontIndex = mnIndexList.front();
-		if (nFrontIndex == index)
+		std::this_thread::sleep_for(std::chrono::milliseconds(1));
+
+		int ret = redisReaderGetReply(m_pRedisClientSocket->GetRedisReader(), (void**)&reply);
+		if (ret == REDIS_OK && reply != nullptr)
 		{
-			int ret = redisReaderGetReply(m_pRedisClientSocket->GetRedisReader(), (void**)&reply);
-			if (ret == REDIS_OK && reply != nullptr)
-			{
-				mnIndexList.pop_front();
-				break;
-			}
-			else
-			{
-				if (YieldFunction)
-				{
-					YieldFunction();
-				}
-				else
-				{
-					Execute();
-				}
-			}
+			break;
 		}
 
 		if (YieldFunction)
