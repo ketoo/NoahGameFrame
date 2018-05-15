@@ -4,12 +4,12 @@
 #include <assert.h>
 #include "NFRedisTester.h"
 
-NFRedisTester::NFRedisTester()
+NFRedisTester::NFRedisTester(const std::string& ip, int port)
 {
-    mxRedisClient.Connect("127.0.0.1", 6379, "NoahGameFrame");
+    mxRedisClient.Connect(ip, port);
 }
 
-void NFRedisTester::RunTester()
+bool NFRedisTester::RunTester()
 {
     mxRedisClient.FLUSHDB();
 	TestKey();
@@ -18,6 +18,8 @@ void NFRedisTester::RunTester()
     TestHash();
     TestSet();
     TestSort();
+
+	return true;
 }
 
 void NFRedisTester::TestHash()
@@ -153,9 +155,9 @@ void NFRedisTester::TestKey()
 	assert(mxRedisClient.SET(strKey, strValue) == true);
 	assert(mxRedisClient.EXISTS(strKey) == true);
 
-	assert(mxRedisClient.EXPIRE(strKey, 5) == true);
+	assert(mxRedisClient.EXPIRE(strKey, 2) == true);
 
-	NFSLEEP(6000);
+	NFSLEEP(3000);
 	std::string strGET;
 	assert(mxRedisClient.GET(strKey, strGET) == false);
 	assert(strGET == "");
@@ -163,7 +165,7 @@ void NFRedisTester::TestKey()
 	//pRedisResult = mxRedisClient.EXPIREAT(strKey, const int64_t unixTime);
 	assert(mxRedisClient.PERSIST(strKey) == false);
 	assert(mxRedisClient.TTL(strKey) == -2);
-	assert(mxRedisClient.TYPE(strKey) == "");
+	assert(mxRedisClient.TYPE(strKey) == "none");
 
 }
 
@@ -275,7 +277,7 @@ void NFRedisTester::TestString()
 	std::string strValu11e = "111";
 
 	int64_t nValueDECR;
-	assert(mxRedisClient.DECR(strKey11, nValueDECR) == false);
+	assert(mxRedisClient.DECR(strKey11, nValueDECR) == true);
 	assert(mxRedisClient.SET(strKey11, strValu11e) == true);
 	assert(mxRedisClient.DECR(strKey11, nValueDECR) == true);
 	assert(nValueDECR == 110);
@@ -286,10 +288,10 @@ void NFRedisTester::TestString()
 	assert(oldGETSET == "100");
 
 	assert(mxRedisClient.INCR(strKey11, nValueDECR) == true);
-	assert(nValueDECR == 101);
+	assert(nValueDECR == 201);
 
 	assert(mxRedisClient.INCRBY(strKey11, 100, nValueDECR) == true);
-	assert(nValueDECR == 201);
+	assert(nValueDECR == 301);
 
 	std::string strKey = "TestString";
 	std::string strValue = "1232TestString234";
@@ -350,4 +352,9 @@ void NFRedisTester::TestString()
 void NFRedisTester::Execute()
 {
     mxRedisClient.Execute();
+}
+
+bool NFRedisTester::IsConnect()
+{
+	return mxRedisClient.IsConnect();
 }
