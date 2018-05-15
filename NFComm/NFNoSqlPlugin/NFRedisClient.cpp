@@ -6,14 +6,14 @@
 
 NFRedisClient::NFRedisClient()
 {
-	port_ = 0;
+	mnPort = 0;
 	bBusy = false;
     m_pRedisClientSocket = new NFRedisClientSocket();
 }
 
 bool NFRedisClient::Enable()
 {
-	return true;
+	return m_pRedisClientSocket->IsConnect();
 }
 
 bool NFRedisClient::Busy()
@@ -31,9 +31,9 @@ bool NFRedisClient::Connect(const std::string &ip, const int port, const std::st
 			return AUTH(auth);
 		}
 
-		ip_ = ip;
-		port_ = port;
-		authKey_ = auth;
+		mstrIP = ip;
+		mnPort = port;
+		mstrAuthKey = auth;
 		return true;
 	}
 
@@ -52,17 +52,17 @@ bool NFRedisClient::KeepLive()
 
 const std::string& NFRedisClient::GetIP()
 {
-	return ip_;
+	return mstrIP;
 }
 
 const int NFRedisClient::GetPort()
 {
-	return port_;
+	return mnPort;
 }
 
 const std::string& NFRedisClient::GetAuthKey()
 {
-	return authKey_;
+	return mstrAuthKey;
 }
 
 bool NFRedisClient::IsConnect()
