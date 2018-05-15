@@ -1,2 +1,0 @@
-/usr/bin/ar cr ../../../_Out/Debug/redisclient_d.a  CMakeFiles/redisclient.dir/anet.o
-/usr/bin/ranlib ../../../_Out/Debug/redisclient_d.a
