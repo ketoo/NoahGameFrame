@@ -115,12 +115,12 @@ int NFRedisClientSocket::Write(const char *buf, size_t count)
 		return 0;
 	}
 
-	if (NULL != bev && mNetStatus == NF_NET_EVENT::NF_NET_EVENT_CONNECTED)
+	if (bev == nullptr || mNetStatus != NF_NET_EVENT::NF_NET_EVENT_CONNECTED)
 	{
-		return bufferevent_write(bev, buf, count);
+		return -1;
 	}
 
-    return 0;
+	return bufferevent_write(bev, buf, count);
 }
 
 void NFRedisClientSocket::listener_cb(evconnlistener * listener, evutil_socket_t fd, sockaddr * sa, int socklen, void * user_data)
