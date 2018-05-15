@@ -1,0 +1,1 @@
+/mnt/hgfs/OSP/NoahGameFrame-Develop/NoahGameFrame/build/NFComm/NFRedisPlugin/CMakeFiles/NFRedisPlugin.dir
