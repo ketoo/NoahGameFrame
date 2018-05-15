@@ -60,10 +60,7 @@ ${SolutionDir}/Dependencies/websocketpp/
 if (UNIX)
 	include_directories(${SolutionDir}/Dependencies/hiredis/hiredis_linux)
 else()
-	include_directories(
-	${SolutionDir}/Dependencies/hiredis/hiredis_win/src
-	${SolutionDir}/Dependencies/hiredis/hiredis_win/deps
-	)
+	include_directories(${SolutionDir}/Dependencies/hiredis/hiredis_win)
 endif()
 
 
