@@ -17,7 +17,7 @@ namespace NFSDK
             LoginFailure,
             WorldList,
             ServerList,
-            SelectServerSuccess,
+			SelectServerSuccess,
         };
    
         public override bool Awake() { return true; }

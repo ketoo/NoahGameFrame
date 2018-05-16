@@ -14,9 +14,9 @@ namespace NFSDK
     {
         public enum Event : int
         {
-            RoleList,
+            RoleList = 10000,
             PlayerMove,
-            PlayerJump,
+			PlayerJump,
         };
 
 
@@ -24,7 +24,8 @@ namespace NFSDK
 		private NFNetModule mNetModule;
 		private NFLoginModule mLoginModule;
 		private NFIEventModule mEventModule;
-        
+		private NFUIModule mUIModule;
+
 
         public override bool Awake()
         {
@@ -62,6 +63,8 @@ namespace NFSDK
 			mLoginModule = mPluginManager.FindModule<NFLoginModule>();
 			mNetModule = mPluginManager.FindModule<NFNetModule>();
 			mEventModule = mPluginManager.FindModule<NFIEventModule>();
+			mUIModule = mPluginManager.FindModule<NFUIModule>();
+
 
 			mNetModule.AddReceiveCallBack(NFMsg.EGameMsgID.EGMI_ACK_ROLE_LIST, OnRoleList);
 			mNetModule.AddReceiveCallBack(NFMsg.EGameMsgID.EGMI_ACK_OBJECT_ENTRY, OnObjectEntry);
@@ -184,7 +187,7 @@ namespace NFSDK
 				NFIObject xGO = NFCKernelModule.Instance().CreateObject(mHelpModule.PBToNF(xInfo.object_guid), xInfo.scene_id, 0, System.Text.Encoding.Default.GetString(xInfo.class_id), System.Text.Encoding.Default.GetString(xInfo.config_id), var);
                 if (null == xGO)
                 {
-                    Debug.LogError("ID��ͻ: " + xInfo.object_guid + "  ConfigID:" + System.Text.Encoding.Default.GetString(xInfo.config_id));
+                    Debug.LogError("ID: " + xInfo.object_guid + "  ConfigID:" + System.Text.Encoding.Default.GetString(xInfo.config_id));
                     continue;
                 }
             }
@@ -210,6 +213,8 @@ namespace NFSDK
 
 			NFMsg.ReqAckSwapScene xData = new NFMsg.ReqAckSwapScene();
 			xData = Serializer.Deserialize<NFMsg.ReqAckSwapScene>(new MemoryStream(xMsg.msg_data));
+
+			mUIModule.ShowUI<UIMain>();
 		}
 
 	    private void OnObjectMove(UInt16 id, MemoryStream stream)
@@ -235,8 +240,9 @@ namespace NFSDK
             pos.SetY(fTemp);
             var.AddVector3(pos);
 
-            //DoEvent((int)Event.PlayerMove, var);
+			mEventModule.DoEvent((int)Event.PlayerMove, var);
         }
+
 	    private void OnObjectJump(UInt16 id, MemoryStream stream)
         {
             NFMsg.MsgBase xMsg = new NFMsg.MsgBase();
@@ -254,6 +260,8 @@ namespace NFSDK
 			var.AddObject(mHelpModule.PBToNF(xData.mover));
             var.AddFloat(fSpeed);
 			var.AddVector3(mHelpModule.PBToNF(xData.target_pos[0]));
+
+			mEventModule.DoEvent((int)Event.PlayerJump, var);
             //DoEvent((int)Event.PlayerJump, var);
         }
 

@@ -10,9 +10,9 @@ public class UILogin : UIDialog
 	private NFUIModule mUIModule;
 	private NFIEventModule mEventModule;
 
-    private InputField mAccount;
-    private InputField mPassword;
-    private Button mLogin;
+	public InputField mAccount;
+	public InputField mPassword;
+	public Button mLogin;
 	// Use this for initialization
 	void Start () 
 	{
@@ -21,15 +21,9 @@ public class UILogin : UIDialog
 		mUIModule = NFCPluginManager.Instance().FindModule<NFUIModule>();
 		mEventModule = NFCPluginManager.Instance().FindModule<NFIEventModule>();
 
-
-        mAccount = transform.Find("Panel/Account").GetComponent<InputField>();
-        mPassword = transform.Find("Panel/Password").GetComponent<InputField>();
-        mLogin = transform.Find("Panel/Login").GetComponent<Button>();
-        
         mLogin.onClick.AddListener(onLoginClick);
 
         mNetModule.ConnectServer("104.160.35.67", 14001);
-        //NFCNetLogic.Instance().ConnectServer("127.0.0.1", 14001);
 
 		mEventModule.RegisterCallback((int)NFUIModule.Event.LoginSuccess, OnLoginSuccess);
 	}
