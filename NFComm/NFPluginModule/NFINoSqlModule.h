@@ -650,8 +650,7 @@ public:
 };
 
 class NFINoSqlModule
-	: public NFIModule,
-	public NFIRedisClient
+	: public NFIModule
 {
 public:
 
