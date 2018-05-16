@@ -66,34 +66,28 @@ namespace NFSDK
             return xData;
         }
 
-		public override bool Awake()
+		public override void Awake()
 		{
-			return true;
 		}
 
-		public override bool Init()
+		public override void Init()
 		{
-            return true;
 		}
 
-		public override bool AfterInit()
+		public override void AfterInit()
 		{
-            return true;
 		}
 
-		public override bool Execute()
+		public override void Execute()
 		{
-            return true;
 		}
 
-		public override bool BeforeShut()
+		public override void BeforeShut()
 		{
-            return true;
 		}
 
-		public override bool Shut()
+		public override void Shut()
 		{
-            return true;
 		}
 	}
 

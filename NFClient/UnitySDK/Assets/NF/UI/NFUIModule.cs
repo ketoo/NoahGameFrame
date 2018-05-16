@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Linq;
 using System.Text;
 using System.Collections;
@@ -20,23 +20,22 @@ namespace NFSDK
 			SelectServerSuccess,
         };
    
-        public override bool Awake() { return true; }
-        public override bool AfterInit() { return true; }
-        public override bool Execute() { return true; }
-        public override bool BeforeShut() { return true; }
-        public override bool Shut() { return true; }
+        public override void Awake() {}
+        public override void AfterInit() {}
+        public override void Execute() { }
+        public override void BeforeShut() {}
+        public override void Shut() { }
 
         public NFUIModule(NFIPluginManager pluginManager)
         {
             mPluginManager = pluginManager;
 		}
         
-        public override bool Init() 
+        public override void Init() 
         { 
-            return true;
         }
 
-        public void ShowUI<T>(bool bPushHistory = true, NFIDataList varList = null) where T : UIDialog
+        public void ShowUI<T>(bool bPushHistory = true, NFDataList varList = null) where T : UIDialog
         {
             if (mCurrentDialog != null)
             {

@@ -35,7 +35,7 @@ public class UILogin : UIDialog
     }
     
     // Logic Event
-	public void OnLoginSuccess(NFIDataList valueList)
+	public void OnLoginSuccess(NFDataList valueList)
     {
 		mUIModule.ShowUI<UISelectServer>();
     }

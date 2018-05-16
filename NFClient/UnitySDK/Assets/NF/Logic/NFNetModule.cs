@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Linq;
 using System.Text;
 using System.Collections;
@@ -15,31 +15,25 @@ namespace NFSDK
 
 
 
-        public override bool Awake()
+        public override void Awake()
         {
-            return true;
         }
 
-        public override bool Init()
+        public override void Init()
         {
-            return true;
         }
 
-        public override bool Execute()
+        public override void Execute()
         {
-			NFCNet.Instance().doUpdate();
-
-            return true;
+			NFCNet.Instance().Execute();
         }
 
-        public override bool BeforeShut()
+        public override void BeforeShut()
         {
-            return true;
         }
 
-        public override bool Shut()
+        public override void Shut()
         {
-            return true;
         }
 
 
@@ -48,11 +42,10 @@ namespace NFSDK
             mPluginManager = pluginManager;
 		}
 
-        public override bool AfterInit()
+        public override void AfterInit()
         {
 			mHelpModule = mPluginManager.FindModule<NFHelpModule>();
 
-            return true;
         }
 
          

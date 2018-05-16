@@ -1,3 +1,8 @@
+//-----------------------------------------------------------------------
+// <copyright file="NFCClassModule.cs">
+//     Copyright (C) 2015-2015 lvsheng.huang <https://github.com/ketoo/NFrame>
+// </copyright>
+//-----------------------------------------------------------------------
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -9,51 +14,26 @@ using UnityEngine;
 
 namespace NFSDK
 {
-    public class NFCLogicClassModule : NFILogicClassModule
+    public class NFCClassModule : NFIClassModule
     {
-        private static NFCLogicClassModule _instance = null;
-        public static NFCLogicClassModule Instance()
-        {
-            return _instance;
-        }
 
-        public NFCLogicClassModule(NFIPluginManager pluginManager)
+		public NFCClassModule(NFIPluginManager pluginManager)
         {
-            _instance = this;
             mPluginManager = pluginManager;
         }
 
-        public override bool Awake()
+		public override void Awake() { }
+
+
+        public override void Init()
         {
-            return true;
-        }
-        public override bool Init()
-        {
-            Debug.LogFormat("NFILogicClassModule Init");
-            mbEncrypt = false;
             Load();
-            return true;
         }
 
-        public override bool AfterInit()
-        {
-            return true;
-        }
-
-        public override bool BeforeShut()
-        {
-            return true;
-        }
-
-        public override bool Shut()
-        {
-            return true;
-        }
-
-        public override bool Execute()
-        {
-            return true;
-        }
+		public override void AfterInit() { }
+        public override void Execute() { }
+        public override void BeforeShut() { }
+        public override void Shut() { }
 
         public override void SetDataPath(string strDataPath)
         {
@@ -69,48 +49,15 @@ namespace NFSDK
         {
             ClearLogicClass();
             
-            XmlDocument xmldoc = new XmlDocument();
 
-            if (System.IO.File.Exists(mstrPath + "/NFDataCfg/Struct/LogicClass.xml"))
-            {
-                mbEncrypt = false;
-                
-            }
-            else
-            {
-                mbEncrypt = true;
-            }
+            string strLogicPath = mstrPath + "NFDataCfg/Struct/LogicClass";
 
-            if (!mbEncrypt)
-            {
-                string strLogicPath = mstrPath + "/NFDataCfg/Struct/LogicClass.xml";
+			Debug.Log(strLogicPath);
 
-                try
-                {
-                    xmldoc.Load(strLogicPath);
-                    Debug.LogFormat("Load Success");
-                }
-                catch(Exception e)
-                {
-                    Debug.LogFormat("Load Config Error {0}", e.ToString());
-                }
-            }
-            else
-            {
-                //加密了
-                string strLogicPath = mstrPath + "/NFDataCfg/Struct/LogicClass.NF";
+			TextAsset textAsset = (TextAsset) Resources.Load(strLogicPath); 
 
-                ///////////////////////////////////////////////////////////////////////////////////////
-                StreamReader cepherReader = new StreamReader(strLogicPath); ;
-                string strContent = cepherReader.ReadToEnd();
-                cepherReader.Close();
-
-                byte[] data = Convert.FromBase64String(strContent);
-                string res = System.Text.ASCIIEncoding.Default.GetString(data);
-
-                xmldoc.LoadXml(res);
-            }
-
+			XmlDocument xmldoc = new XmlDocument ();
+			xmldoc.LoadXml ( textAsset.text );
             XmlNode root = xmldoc.SelectSingleNode("XML");
 
             LoadLogicClass(root);
@@ -135,9 +82,9 @@ namespace NFSDK
         {
             if (!mhtObject.ContainsKey(strName))
             {
-                NFILogicClass xElement = new NFCLogicClass();
+                NFIClass xElement = new NFCClass();
                 xElement.SetName(strName);
-                xElement.SetEncrypt(mbEncrypt);
+                xElement.SetEncrypt(false);
 
                 mhtObject.Add(strName, xElement);
 
@@ -147,11 +94,11 @@ namespace NFSDK
             return false;
         }
 
-        public override NFILogicClass GetElement(string strClassName)
+        public override NFIClass GetElement(string strClassName)
         {
             if (mhtObject.ContainsKey(strClassName))
             {
-                return (NFILogicClass)mhtObject[strClassName];
+                return (NFIClass)mhtObject[strClassName];
             }
 
             return null;
@@ -167,13 +114,13 @@ namespace NFSDK
                 XmlAttribute strPath = xNodeClass.Attributes["Path"];
                 XmlAttribute strInstancePath = xNodeClass.Attributes["InstancePath"];
 
-                NFILogicClass xLogicClass = new NFCLogicClass();
+                NFIClass xLogicClass = new NFCClass();
                 mhtObject.Add(strID.Value, xLogicClass);
 
                 xLogicClass.SetName(strID.Value);
                 xLogicClass.SetPath(strPath.Value);
                 xLogicClass.SetInstance(strInstancePath.Value);
-                xLogicClass.SetEncrypt(mbEncrypt);
+                xLogicClass.SetEncrypt(false);
 
                 XmlNodeList xNodeSubClassList = xNodeClass.SelectNodes("Class");
                 if (xNodeSubClassList.Count > 0)
@@ -190,14 +137,14 @@ namespace NFSDK
 
         private void LoadLogicClassProperty()
         {
-            Dictionary<string, NFILogicClass> xTable = GetElementList();
-            foreach (KeyValuePair<string, NFILogicClass> kv in xTable)
+            Dictionary<string, NFIClass> xTable = GetElementList();
+            foreach (KeyValuePair<string, NFIClass> kv in xTable)
             {
                 LoadLogicClassProperty((string)kv.Key);
             }
 
             //再为每个类加载iobject的属性
-            foreach (KeyValuePair<string, NFILogicClass> kv in xTable)
+            foreach (KeyValuePair<string, NFIClass> kv in xTable)
             {
                 if (kv.Key != "IObject")
                 {
@@ -208,8 +155,8 @@ namespace NFSDK
 
         private void LoadLogicClassRecord()
         {
-            Dictionary<string, NFILogicClass> xTable = GetElementList();
-            foreach (KeyValuePair<string, NFILogicClass> kv in xTable)
+            Dictionary<string, NFIClass> xTable = GetElementList();
+            foreach (KeyValuePair<string, NFIClass> kv in xTable)
             {
                 LoadLogicClassRecord(kv.Key);
             }
@@ -217,31 +164,19 @@ namespace NFSDK
 
         private void LoadLogicClassProperty(string strName)
         {
-            NFILogicClass xLogicClass = GetElement(strName);
+            NFIClass xLogicClass = GetElement(strName);
             if (null != xLogicClass)
             {
                 string strLogicPath = mstrPath + xLogicClass.GetPath();
 
-                XmlDocument xmldoc = new XmlDocument();
-                if (mbEncrypt)
-                {
-                    ///////////////////////////////////////////////////////////////////////////////////////
-                    StreamReader cepherReader = new StreamReader(strLogicPath); ;
-                    string strContent = cepherReader.ReadToEnd();
-                    cepherReader.Close();
+				strLogicPath = strLogicPath.Replace (".xml", "");
 
-                    byte[] data = Convert.FromBase64String(strContent);
-                    string res = System.Text.ASCIIEncoding.Default.GetString(data);
+				TextAsset textAsset = (TextAsset) Resources.Load(strLogicPath); 
 
-                    xmldoc.LoadXml(res);
-                    /////////////////////////////////////////////////////////////////
-                }
-                else
-                {
-                    xmldoc.Load(strLogicPath);
-                }
+				XmlDocument xmldoc = new XmlDocument ();
+				xmldoc.LoadXml ( textAsset.text );
+				XmlNode xRoot = xmldoc.SelectSingleNode("XML");
 
-                XmlNode xRoot = xmldoc.SelectSingleNode("XML");
                 XmlNode xNodePropertys = xRoot.SelectSingleNode("Propertys");
                 XmlNodeList xNodeList = xNodePropertys.SelectNodes("Property");
                 for (int i = 0; i < xNodeList.Count; ++i)
@@ -256,7 +191,7 @@ namespace NFSDK
                     {
                         case "int":
                             {
-                                NFIDataList xValue = new NFCDataList();
+                                NFDataList xValue = new NFDataList();
                                 xValue.AddInt(0);
                                 NFIProperty xProperty = xLogicClass.GetPropertyManager().AddProperty(strID.Value, xValue);
                                 xProperty.SetUpload(bUpload);
@@ -264,7 +199,7 @@ namespace NFSDK
                             break;
                         case "float":
                             {
-                                NFIDataList xValue = new NFCDataList();
+                                NFDataList xValue = new NFDataList();
                                 xValue.AddFloat(0.0);
                                 NFIProperty xProperty = xLogicClass.GetPropertyManager().AddProperty(strID.Value, xValue);
                                 xProperty.SetUpload(bUpload);
@@ -272,7 +207,7 @@ namespace NFSDK
                             break;
                         case "string":
                             {
-                                NFIDataList xValue = new NFCDataList();
+                                NFDataList xValue = new NFDataList();
                                 xValue.AddString("");
                                 NFIProperty xProperty = xLogicClass.GetPropertyManager().AddProperty(strID.Value, xValue);
                                 xProperty.SetUpload(bUpload);
@@ -280,7 +215,7 @@ namespace NFSDK
                             break;
                         case "object":
                             {
-                                NFIDataList xValue = new NFCDataList();
+                                NFDataList xValue = new NFDataList();
                                 xValue.AddObject(new NFGUID(0, 0));
                                 NFIProperty xProperty = xLogicClass.GetPropertyManager().AddProperty(strID.Value, xValue);
                                 xProperty.SetUpload(bUpload);
@@ -296,32 +231,18 @@ namespace NFSDK
 
         private void LoadLogicClassRecord(string strName)
         {
-            NFILogicClass xLogicClass = GetElement(strName);
+            NFIClass xLogicClass = GetElement(strName);
             if (null != xLogicClass)
             {
-                string strLogicPath = mstrPath + xLogicClass.GetPath();
+				string strLogicPath = mstrPath + xLogicClass.GetPath();
+				strLogicPath = strLogicPath.Replace (".xml", "");
 
-                XmlDocument xmldoc = new XmlDocument();
+				TextAsset textAsset = (TextAsset) Resources.Load(strLogicPath); 
 
-                if(mbEncrypt)
-                {
-                    ///////////////////////////////////////////////////////////////////////////////////////
-                    StreamReader cepherReader = new StreamReader(strLogicPath); ;
-                    string strContent = cepherReader.ReadToEnd();
-                    cepherReader.Close();
+				XmlDocument xmldoc = new XmlDocument ();
+				xmldoc.LoadXml ( textAsset.text );
+				XmlNode xRoot = xmldoc.SelectSingleNode("XML");
 
-                    byte[] data = Convert.FromBase64String(strContent);
-                    string res = System.Text.ASCIIEncoding.Default.GetString(data);
-
-                    xmldoc.LoadXml(res);
-                    /////////////////////////////////////////////////////////////////
-                }
-                else
-                {
-                    xmldoc.Load(strLogicPath);
-                }
-
-                XmlNode xRoot = xmldoc.SelectSingleNode("XML");
                 XmlNode xNodePropertys = xRoot.SelectSingleNode("Records");
                 if (null != xNodePropertys)
                 {
@@ -336,7 +257,8 @@ namespace NFSDK
                             string strRow = xRecordNode.Attributes["Row"].Value;
                             string strUpload = xRecordNode.Attributes["Upload"].Value;
                             bool bUpload = strUpload.Equals("1");
-                            NFIDataList xValue = new NFCDataList();
+							NFDataList xValue = new NFDataList();
+                            NFDataList xTag = new NFDataList();
 
                             XmlNodeList xTagNodeList = xRecordNode.SelectNodes("Col");
                             for (int j = 0; j < xTagNodeList.Count; ++j)
@@ -346,6 +268,7 @@ namespace NFSDK
                                 XmlAttribute strTagID = xColTagNode.Attributes["Tag"];
                                 XmlAttribute strTagType = xColTagNode.Attributes["Type"];
 
+								xTag.AddString (strTagID.Value);
 
                                 switch (strTagType.Value)
                                 {
@@ -369,12 +292,22 @@ namespace NFSDK
                                             xValue.AddObject(new NFGUID(0, 0));
                                         }
                                         break;
+										case "vector2":
+										{
+											xValue.AddVector2(NFVector2.Zero());
+										}
+										break;
+										case "vector3":
+										{
+											xValue.AddVector3(NFVector3.Zero());
+										}
+										break;
                                     default:
                                         break;
 
                                 }
                             }
-                            NFIRecord xRecord = xLogicClass.GetRecordManager().AddRecord(strID, int.Parse(strRow), xValue);
+							NFIRecord xRecord = xLogicClass.GetRecordManager().AddRecord(strID, int.Parse(strRow), xValue, xTag);
                             xRecord.SetUpload(bUpload);
                         }
                     }
@@ -384,11 +317,11 @@ namespace NFSDK
 
         void AddBasePropertyFormOther(string strName, string strOther)
         {
-            NFILogicClass xOtherClass = GetElement(strOther);
-            NFILogicClass xLogicClass = GetElement(strName);
+            NFIClass xOtherClass = GetElement(strOther);
+            NFIClass xLogicClass = GetElement(strName);
             if (null != xLogicClass && null != xOtherClass)
             {
-                NFIDataList xValue = xOtherClass.GetPropertyManager().GetPropertyList();
+                NFDataList xValue = xOtherClass.GetPropertyManager().GetPropertyList();
                 for (int i = 0; i < xValue.Count(); ++i)
                 {
                     NFIProperty xProperty = xOtherClass.GetPropertyManager().GetProperty(xValue.StringVal(i));
@@ -397,13 +330,12 @@ namespace NFSDK
             }
         }
 
-        public override Dictionary<string, NFILogicClass> GetElementList()
+        public override Dictionary<string, NFIClass> GetElementList()
         {
             return mhtObject;
         }
         /////////////////////////////////////////
-        private Dictionary<string, NFILogicClass> mhtObject = new Dictionary<string, NFILogicClass>();
+        private Dictionary<string, NFIClass> mhtObject = new Dictionary<string, NFIClass>();
         private string mstrPath = "";
-        private bool mbEncrypt;
     }
 }

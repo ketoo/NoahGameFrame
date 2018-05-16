@@ -5,7 +5,7 @@ using NFSDK;
 public class NFCRoot : MonoBehaviour 
 {
 
-	NFILogicClassModule mLogicClassModule;
+	NFIClassModule mClassModule;
 	NFNetModule mNetModule;
 	NFUIModule mUIModule;
 
@@ -28,16 +28,16 @@ public class NFCRoot : MonoBehaviour
 		mPluginManager.Registered(new NFScenePlugin(mPluginManager));
 
 
-		mLogicClassModule = mPluginManager.FindModule<NFILogicClassModule>();
+		mClassModule = mPluginManager.FindModule<NFIClassModule>();
 		mNetModule = mPluginManager.FindModule<NFNetModule>();
 		mUIModule = mPluginManager.FindModule<NFUIModule>();
 
-		mLogicClassModule.SetDataPath("../../_Out/");
+		mClassModule.SetDataPath("../../_Out/");
 
 		if (RuntimePlatform.Android == Application.platform
 		    ||RuntimePlatform.IPhonePlayer == Application.platform)
 		{
-			mPluginManager.FindModule<NFILogicClassModule>().SetDataPath("./");
+			mPluginManager.FindModule<NFIClassModule>().SetDataPath("./");
 		}
 
         mPluginManager.Init();

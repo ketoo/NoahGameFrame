@@ -7,9 +7,9 @@ namespace NFSDK
 {
 	public abstract class NFIEvent
 	{
-		public delegate void EventHandler(NFIDataList valueList);
+		public delegate void EventHandler(NFDataList valueList);
 
 		public abstract void RegisterCallback(NFIEvent.EventHandler handler);
-		public abstract void DoEvent(NFIDataList valueList);
+		public abstract void DoEvent(NFDataList valueList);
 	}
 }

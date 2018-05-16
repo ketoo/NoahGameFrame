@@ -20,30 +20,33 @@ namespace NFSDK
         }
   
 
-		public override bool Awake() { return true; }
-		public override bool Init() { return true; }
+		public override void Awake() 
+		{ 
+		}
+		public override void Init()
+		{ 
+		}
 
-		public override bool AfterInit() 
+		public override void AfterInit() 
 		{
 			mPlayerModule = FindModule<NFPlayerModule>();
 			mNetModule = FindModule<NFNetModule>();
 			mKernelModule = FindModule<NFIKernelModule>();
 			mEventModule = FindModule<NFIEventModule>();
 
-            NFCKernelModule.Instance().RegisterClassCallBack(NFrame.Player.ThisName, OnClassPlayerEventHandler);
-            NFCKernelModule.Instance().RegisterClassCallBack(NFrame.NPC.ThisName, OnClassNPCEventHandler);
+            mKernelModule.RegisterClassCallBack(NFrame.Player.ThisName, OnClassPlayerEventHandler);
+            mKernelModule.RegisterClassCallBack(NFrame.NPC.ThisName, OnClassNPCEventHandler);
 
 			mEventModule.RegisterCallback((int)NFPlayerModule.Event.SwapScene, SwapSceneEventHandler);
 			mEventModule.RegisterCallback((int)NFPlayerModule.Event.PlayerMove, OnPlayerMove);
 
-			return true;
 		}
 
-		public override bool Execute() { return true; }
-		public override bool BeforeShut() { return true; }
-		public override bool Shut() { return true; }
+		public override void Execute() {}
+		public override void BeforeShut() {  }
+		public override void Shut() {}
 
-		protected void SwapSceneEventHandler(NFIDataList valueList)
+		protected void SwapSceneEventHandler(NFDataList valueList)
 		{
 			string strSceneID = valueList.StringVal(0);
 			NFVector3 vPos = valueList.Vector3Val(1);
@@ -61,7 +64,7 @@ namespace NFSDK
 		}
   
 
-		public void OnPlayerMove(NFIDataList valueList)
+		public void OnPlayerMove(NFDataList valueList)
         {
             NFGUID tar = valueList.ObjectVal(0);
 
@@ -93,11 +96,11 @@ namespace NFSDK
             {
                 Debug.Log("OBJECT_CREATE:" + self.ToString());
 
-                string strConfigID = NFCKernelModule.Instance().QueryPropertyString(self, "ConfigID");
+                string strConfigID = mKernelModule.QueryPropertyString(self, "ConfigID");
                 Vector3 vec = new Vector3();
-                vec.x = (float)NFCKernelModule.Instance().QueryPropertyFloat(self, "X");
-                vec.y = (float)NFCKernelModule.Instance().QueryPropertyFloat(self, "Y");
-                vec.z = (float)NFCKernelModule.Instance().QueryPropertyFloat(self, "Z");
+                vec.x = (float)mKernelModule.QueryPropertyFloat(self, "X");
+                vec.y = (float)mKernelModule.QueryPropertyFloat(self, "Y");
+                vec.z = (float)mKernelModule.QueryPropertyFloat(self, "Z");
 
                 //MainPlayer
                 string strPrefabPath = "Player/AIThirdPersonController";
@@ -154,11 +157,11 @@ namespace NFSDK
         {
             if (eType == NFIObject.CLASS_EVENT_TYPE.OBJECT_CREATE)
             {
-                string strConfigID = NFCKernelModule.Instance().QueryPropertyString(self, "ConfigID");
+                string strConfigID = mKernelModule.QueryPropertyString(self, "ConfigID");
                 Vector3 vec = new Vector3();
-                vec.x = (float)NFCKernelModule.Instance().QueryPropertyFloat(self, "X");
-                vec.y = (float)NFCKernelModule.Instance().QueryPropertyFloat(self, "Y");
-                vec.z = (float)NFCKernelModule.Instance().QueryPropertyFloat(self, "Z");
+                vec.x = (float)mKernelModule.QueryPropertyFloat(self, "X");
+                vec.y = (float)mKernelModule.QueryPropertyFloat(self, "Y");
+                vec.z = (float)mKernelModule.QueryPropertyFloat(self, "Z");
 
                 string strPrefabPath = "";
             //    if (strConfigID.Length <= 0)

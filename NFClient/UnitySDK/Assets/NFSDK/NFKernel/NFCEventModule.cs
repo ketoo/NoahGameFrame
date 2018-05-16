@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Linq;
 using System.Text;
 using System.Collections;
@@ -8,12 +8,12 @@ namespace NFSDK
 {
 	public class NFCEventModule : NFIEventModule
     {
-        public override bool Awake() { return true; }
-        public override bool Init() { return true; }
-        public override bool AfterInit() { return true; }
-        public override bool Execute() { return true; }
-        public override bool BeforeShut() { return true; }
-        public override bool Shut() { return true; }
+        public override void Awake() {}
+        public override void Init() {}
+        public override void AfterInit() {}
+        public override void Execute() { }
+        public override void BeforeShut() { }
+        public override void Shut() {  }
 
         private static NFCEventModule _instance = null;
         public static NFCEventModule Instance()
@@ -33,14 +33,14 @@ namespace NFSDK
         {
             if (!mhtEvent.ContainsKey(nEventID))
             {
-				mhtEvent.Add(nEventID, new NFCEvent(nEventID, new NFCDataList()));
+				mhtEvent.Add(nEventID, new NFCEvent(nEventID, new NFDataList()));
             }
 
 			NFIEvent identEvent = (NFIEvent)mhtEvent[nEventID];
             identEvent.RegisterCallback(handler);
         }
 
-        public override void DoEvent(int nEventID, NFIDataList valueList)
+        public override void DoEvent(int nEventID, NFDataList valueList)
         {
             if (mhtEvent.ContainsKey(nEventID))
             {
@@ -51,7 +51,7 @@ namespace NFSDK
 
         public override void DoEvent(int nEventID)
         {
-			NFIDataList valueList = new NFCDataList();
+			NFDataList valueList = new NFDataList();
 			if (mhtEvent.ContainsKey(nEventID))
             {
 				NFIEvent identEvent = (NFIEvent)mhtEvent[nEventID];

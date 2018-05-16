@@ -48,7 +48,7 @@ namespace NFSDK
                 return xProperty.QueryString();
             }
 
-            return NFIDataList.NULL_STRING;
+            return NFDataList.NULL_STRING;
         }
 
         public override NFGUID QueryObject(string strName)
@@ -59,7 +59,7 @@ namespace NFSDK
                 return xProperty.QueryObject();
             }
 
-            return NFIDataList.NULL_OBJECT;
+            return NFDataList.NULL_OBJECT;
         }
 
         private NFIPropertyManager mxPropertyManager;

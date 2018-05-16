@@ -125,7 +125,7 @@ namespace NFSDK
             return m_curState;
         }
 
-        public void doUpdate()
+        public void Execute()
         {
             if (m_curState == State.CONNECT_FAILED)
             {

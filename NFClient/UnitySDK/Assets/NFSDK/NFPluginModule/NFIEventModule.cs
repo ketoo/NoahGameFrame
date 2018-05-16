@@ -15,6 +15,6 @@ namespace NFSDK
 
 		public abstract void RegisterCallback(int nEventID, NFIEvent.EventHandler handler);
 		public abstract void DoEvent(int nEventID);
-		public abstract void DoEvent(int nEventID, NFIDataList valueList);
+		public abstract void DoEvent(int nEventID, NFDataList valueList);
 	}
 }

@@ -25,32 +25,28 @@ namespace NFSDK
 		private NFNetModule mNetModule;
 		private NFLoginModule mLoginModule;
 		private NFIEventModule mEventModule;
+		private NFIKernelModule mKernelModule;
 		private NFUIModule mUIModule;
 
 
-        public override bool Awake()
+        public override void Awake()
         {
-            return true;
         }
 
-        public override bool Init()
+        public override void Init()
         {
-            return true;
         }
 
-        public override bool Execute()
+        public override void Execute()
         {
-            return true;
         }
 
-        public override bool BeforeShut()
+        public override void BeforeShut()
         {
-            return true;
         }
 
-        public override bool Shut()
+        public override void Shut()
         {
-            return true;
         }
 
         public NFPlayerModule(NFIPluginManager pluginManager)
@@ -58,7 +54,7 @@ namespace NFSDK
             mPluginManager = pluginManager;
 		}
         
-        public override bool AfterInit()
+        public override void AfterInit()
         {
 			mHelpModule = mPluginManager.FindModule<NFHelpModule>();
 			mLoginModule = mPluginManager.FindModule<NFLoginModule>();
@@ -70,13 +66,31 @@ namespace NFSDK
 			mNetModule.AddReceiveCallBack(NFMsg.EGameMsgID.EGMI_ACK_ROLE_LIST, OnRoleList);
 			mNetModule.AddReceiveCallBack(NFMsg.EGameMsgID.EGMI_ACK_OBJECT_ENTRY, OnObjectEntry);
 			mNetModule.AddReceiveCallBack(NFMsg.EGameMsgID.EGMI_ACK_OBJECT_LEAVE, OnObjectLeave);
+
 			mNetModule.AddReceiveCallBack(NFMsg.EGameMsgID.EGMI_ACK_MOVE, OnObjectMove);
-			mNetModule.AddReceiveCallBack(NFMsg.EGameMsgID.EGMI_ACK_MOVE_IMMUNE, OnObjectJump); 
+			mNetModule.AddReceiveCallBack(NFMsg.EGameMsgID.EGMI_ACK_MOVE_IMMUNE, OnObjectJump);
+			mNetModule.AddReceiveCallBack(NFMsg.EGameMsgID.EGMI_ACK_STATE_SYNC, OnObjectStatusSync);
+
 			mNetModule.AddReceiveCallBack(NFMsg.EGameMsgID.EGMI_ACK_SWAP_SCENE, OnSwapScene);
-            return true;
+			mNetModule.AddReceiveCallBack(NFMsg.EGameMsgID.EGMI_ACK_ENTER_GAME, OnEnterGame);
+			mNetModule.AddReceiveCallBack(NFMsg.EGameMsgID.EGMI_ACK_ENTER_GAME_FINISH, OnEnterGameFinish);
+			mNetModule.AddReceiveCallBack(NFMsg.EGameMsgID.EGMI_ACK_DATA_FINISHED, OnLoadDataFinish);
+
+			mNetModule.AddReceiveCallBack(NFMsg.EGameMsgID.EGMI_EVENT_RESULT, OnEventResult);
+            
+            /*
+            mxNetListener.RegisteredDelegation(NFMsg.EGameMsgID.EGMI_ACK_SKILL_OBJECTX, EGMI_ACK_SKILL_OBJECTX);
+            mxNetListener.RegisteredDelegation(NFMsg.EGameMsgID.EGMI_ACK_CHAT, EGMI_ACK_CHAT);
+            mxNetListener.RegisteredDelegation(NFMsg.EGameMsgID.EGMI_REQ_ACK_RELIVE, EGMI_REQ_ACK_RELIVE);
+
+
+            mxNetListener.RegisteredDelegation(NFMsg.EGameMsgID.EGEC_ACK_MINING_TITLE, EGEC_ACK_MINING_TITLE);
+            mxNetListener.RegisteredDelegation(NFMsg.EGameMsgID.EGMI_ACK_SEARCH_OPPNENT, EGMI_ACK_SEARCH_OPPNENT);
+            mxNetListener.RegisteredDelegation(NFMsg.EGameMsgID.EGMI_ACK_START_OPPNENT, EGMI_ACK_START_OPPNENT);
+            mxNetListener.RegisteredDelegation(NFMsg.EGameMsgID.EGMI_ACK_END_OPPNENT, EGMI_ACK_END_OPPNENT);
+             */
         }
-        
-        // ������Ϣ
+ 
         public void RequireRoleList()
         {
             NFMsg.ReqRoleList xData = new NFMsg.ReqRoleList();
@@ -197,7 +211,7 @@ namespace NFSDK
             {
                 NFMsg.PlayerEntryInfo xInfo = xData.object_list[i];
 
-                NFIDataList var = new NFCDataList();
+                NFDataList var = new NFDataList();
                 var.AddString("X");
                 var.AddFloat(xInfo.x);
                 var.AddString("Y");
@@ -206,7 +220,7 @@ namespace NFSDK
                 var.AddFloat(xInfo.y);
 
                 Debug.LogWarning("Object Enter: " + mHelpModule.PBToNF(xInfo.object_guid).ToString() + "  ConfigID:" + System.Text.Encoding.Default.GetString(xInfo.class_id));
-				NFIObject xGO = NFCKernelModule.Instance().CreateObject(mHelpModule.PBToNF(xInfo.object_guid), xInfo.scene_id, 0, System.Text.Encoding.Default.GetString(xInfo.class_id), System.Text.Encoding.Default.GetString(xInfo.config_id), var);
+				NFIObject xGO = mKernelModule.CreateObject(mHelpModule.PBToNF(xInfo.object_guid), xInfo.scene_id, 0, System.Text.Encoding.Default.GetString(xInfo.class_id), System.Text.Encoding.Default.GetString(xInfo.config_id), var);
                 if (null == xGO)
                 {
                     Debug.LogError("ID: " + xInfo.object_guid + "  ConfigID:" + System.Text.Encoding.Default.GetString(xInfo.config_id));
@@ -224,7 +238,7 @@ namespace NFSDK
 
             for (int i = 0; i < xData.object_list.Count; ++i)
             {
-				NFCKernelModule.Instance().DestroyObject(mHelpModule.PBToNF(xData.object_list[i]));
+				mKernelModule.DestroyObject(mHelpModule.PBToNF(xData.object_list[i]));
             }
         }
 
@@ -238,7 +252,7 @@ namespace NFSDK
 
 			mUIModule.ShowUI<UIMain>();
 
-			NFIDataList var = new NFCDataList();
+			NFDataList var = new NFDataList();
 			NFVector3 v = new NFVector3(xData.x, xData.y, xData.z);
 
 			var.AddInt(xData.scene_id);
@@ -246,6 +260,28 @@ namespace NFSDK
 
 			mEventModule.DoEvent((int)Event.SwapScene, var);
 		}
+
+
+		private void OnEnterGame(UInt16 id, MemoryStream stream)
+        {
+
+        }
+
+		private void OnEnterGameFinish(UInt16 id, MemoryStream stream)
+        {
+     
+        }
+
+		private void OnLoadDataFinish(UInt16 id, MemoryStream stream)
+        {
+
+        }
+
+		private void OnEventResult(UInt16 id, MemoryStream stream)
+        {
+
+        }
+
 
 	    private void OnObjectMove(UInt16 id, MemoryStream stream)
         {
@@ -258,11 +294,11 @@ namespace NFSDK
             {
                 return;
             }
-			float fSpeed = NFCKernelModule.Instance().QueryPropertyInt(mHelpModule.PBToNF(xData.mover), "MOVE_SPEED") / 10000.0f;
+			float fSpeed = mKernelModule.QueryPropertyInt(mHelpModule.PBToNF(xData.mover), "MOVE_SPEED") / 10000.0f;
 
 			Debug.LogWarning("Object Move: " + mHelpModule.PBToNF(xData.mover).ToString());
 
-            NFIDataList var = new NFCDataList();
+            NFDataList var = new NFDataList();
 
 			var.AddObject(mHelpModule.PBToNF(xData.mover));
 			var.AddFloat(fSpeed);
@@ -278,6 +314,10 @@ namespace NFSDK
 			mEventModule.DoEvent((int)Event.PlayerMove, var);
         }
 
+		private void OnObjectStatusSync(UInt16 id, MemoryStream stream)
+		{
+		}
+
 	    private void OnObjectJump(UInt16 id, MemoryStream stream)
         {
             NFMsg.MsgBase xMsg = new NFMsg.MsgBase();
@@ -289,9 +329,9 @@ namespace NFSDK
             {
                 return;
             }
-			float fSpeed = NFCKernelModule.Instance().QueryPropertyInt(mHelpModule.PBToNF(xData.mover), "MOVE_SPEED") / 10000.0f;
+			float fSpeed = mKernelModule.QueryPropertyInt(mHelpModule.PBToNF(xData.mover), "MOVE_SPEED") / 10000.0f;
 
-            NFIDataList var = new NFCDataList();
+            NFDataList var = new NFDataList();
 			var.AddObject(mHelpModule.PBToNF(xData.mover));
             var.AddFloat(fSpeed);
 			var.AddVector3(mHelpModule.PBToNF(xData.target_pos[0]));

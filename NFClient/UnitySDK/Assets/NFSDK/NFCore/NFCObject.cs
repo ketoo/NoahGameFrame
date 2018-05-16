@@ -1,3 +1,8 @@
+//-----------------------------------------------------------------------
+// <copyright file="NFCObject.cs">
+//     Copyright (C) 2015-2015 lvsheng.huang <https://github.com/ketoo/NFrame>
+// </copyright>
+//-----------------------------------------------------------------------
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,67 +12,67 @@ namespace NFSDK
 {
     public class NFCObject : NFIObject
     {
-		public NFCObject(NFGUID self, int nContainerID, int nGroupID, string strClassName, string strConfigIndex)
-		{
-			mSelf = self;
+        public NFCObject(NFGUID self, int nContainerID, int nGroupID, string strClassName, string strConfigIndex)
+        {
+            mSelf = self;
             mstrClassName = strClassName;
             mstrConfigIndex = strConfigIndex;
-			mnContainerID = nContainerID;
-			mnGroupID = nGroupID;
-			Init();
-		}
+            mnContainerID = nContainerID;
+            mnGroupID = nGroupID;
+            Init();
+        }
 
-		~NFCObject()
-		{
-			Shut();
-		}
+        ~NFCObject()
+        {
+            Shut();
+        }
 
         public override void Init()
         {
-			mRecordManager = new NFCRecordManager(mSelf);
-			mPropertyManager = new NFCPropertyManager(mSelf);
+            mRecordManager = new NFCRecordManager(mSelf);
+            mPropertyManager = new NFCPropertyManager(mSelf);
+
             return;
         }
 
         public override void Shut()
         {
-            NFIDataList xRecordList = mRecordManager.GetRecordList();
+            NFDataList xRecordList = mRecordManager.GetRecordList();
             if (null != xRecordList)
             {
-                for(int i = 0; i < xRecordList.Count(); ++i)
+                for (int i = 0; i < xRecordList.Count(); ++i)
                 {
                     string strRecordName = xRecordList.StringVal(i);
                     NFIRecord xRecord = mRecordManager.GetRecord(strRecordName);
-                    if (null !=  xRecord)
+                    if (null != xRecord)
                     {
                         xRecord.Clear();
                     }
                 }
             }
 
-			mRecordManager = null;
-			mPropertyManager = null;
+            mRecordManager = null;
+            mPropertyManager = null;
 
             return;
         }
 
-
         ///////////////////////////////////////////////////////////////////////
         public override NFGUID Self()
         {
-			return mSelf;
+            return mSelf;
         }
-		
-		public override int ContainerID()
+
+        public override int ContainerID()
         {
-			return mnContainerID;
+            return mnContainerID;
         }
-		
-		public override int GroupID()
+
+        public override int GroupID()
         {
-			return mnGroupID;
+            return mnGroupID;
         }
-		
+
         public override string ClassName()
         {
             return mstrClassName;
@@ -80,68 +85,68 @@ namespace NFSDK
 
         public override bool FindProperty(string strPropertyName)
         {
-			if (null != mPropertyManager.GetProperty(strPropertyName))
-			{
-				return true;
-			}
+            if (null != mPropertyManager.GetProperty(strPropertyName))
+            {
+                return true;
+            }
 
             return false;
         }
 
         public override bool SetPropertyInt(string strPropertyName, Int64 nValue)
         {
-			NFIProperty property = mPropertyManager.GetProperty(strPropertyName);
-			if (null == property)
-			{
-                NFIDataList valueList = new NFCDataList();
+            NFIProperty property = mPropertyManager.GetProperty(strPropertyName);
+            if (null == property)
+            {
+                NFDataList valueList = new NFDataList();
                 valueList.AddInt(0);
                 property = mPropertyManager.AddProperty(strPropertyName, valueList);
             }
 
-			property.SetInt(nValue);
-			return true;
+            property.SetInt(nValue);
+            return true;
         }
 
         public override bool SetPropertyFloat(string strPropertyName, double fValue)
         {
-			NFIProperty property = mPropertyManager.GetProperty(strPropertyName);
-			if (null == property)
-			{
-                NFIDataList valueList = new NFCDataList();
+            NFIProperty property = mPropertyManager.GetProperty(strPropertyName);
+            if (null == property)
+            {
+                NFDataList valueList = new NFDataList();
                 valueList.AddFloat(0.0f);
                 property = mPropertyManager.AddProperty(strPropertyName, valueList);
             }
-				
+
             property.SetFloat(fValue);
-			return true;
+            return true;
         }
 
         public override bool SetPropertyString(string strPropertyName, string strValue)
         {
-			NFIProperty property = mPropertyManager.GetProperty(strPropertyName);
-			if (null == property)
-			{
-                NFIDataList valueList = new NFCDataList();
+            NFIProperty property = mPropertyManager.GetProperty(strPropertyName);
+            if (null == property)
+            {
+                NFDataList valueList = new NFDataList();
                 valueList.AddString("");
                 property = mPropertyManager.AddProperty(strPropertyName, valueList);
             }
 
-			property.SetString(strValue);
-			return true;
+            property.SetString(strValue);
+            return true;
         }
 
         public override bool SetPropertyObject(string strPropertyName, NFGUID obj)
         {
-			NFIProperty property = mPropertyManager.GetProperty(strPropertyName);
-			if (null == property)
-			{
-                NFIDataList valueList = new NFCDataList();
+            NFIProperty property = mPropertyManager.GetProperty(strPropertyName);
+            if (null == property)
+            {
+                NFDataList valueList = new NFDataList();
                 valueList.AddObject(new NFGUID());
                 property = mPropertyManager.AddProperty(strPropertyName, valueList);
             }
 
-			property.SetObject(obj);
-			return true;
+            property.SetObject(obj);
+            return true;
 
         }
 
@@ -150,7 +155,7 @@ namespace NFSDK
             NFIProperty property = mPropertyManager.GetProperty(strPropertyName);
             if (null == property)
             {
-                NFIDataList valueList = new NFCDataList();
+                NFDataList valueList = new NFDataList();
                 valueList.AddVector2(new NFVector2());
                 property = mPropertyManager.AddProperty(strPropertyName, valueList);
             }
@@ -165,7 +170,7 @@ namespace NFSDK
             NFIProperty property = mPropertyManager.GetProperty(strPropertyName);
             if (null == property)
             {
-                NFIDataList valueList = new NFCDataList();
+                NFDataList valueList = new NFDataList();
                 valueList.AddVector3(new NFVector3());
                 property = mPropertyManager.AddProperty(strPropertyName, valueList);
             }
@@ -177,46 +182,46 @@ namespace NFSDK
 
         public override Int64 QueryPropertyInt(string strPropertyName)
         {
-			NFIProperty property = mPropertyManager.GetProperty(strPropertyName);
-			if (null != property)
-			{
-				return property.QueryInt();
-			}
+            NFIProperty property = mPropertyManager.GetProperty(strPropertyName);
+            if (null != property)
+            {
+                return property.QueryInt();
+            }
 
             return 0;
         }
 
         public override double QueryPropertyFloat(string strPropertyName)
         {
-			NFIProperty property = mPropertyManager.GetProperty(strPropertyName);
-			if (null != property)
-			{
-				return property.QueryFloat();
-			}
+            NFIProperty property = mPropertyManager.GetProperty(strPropertyName);
+            if (null != property)
+            {
+                return property.QueryFloat();
+            }
 
             return 0.0;
         }
 
         public override string QueryPropertyString(string strPropertyName)
         {
-			NFIProperty property = mPropertyManager.GetProperty(strPropertyName);
-			if (null != property)
-			{
-				return property.QueryString();
-			}
+            NFIProperty property = mPropertyManager.GetProperty(strPropertyName);
+            if (null != property)
+            {
+                return property.QueryString();
+            }
 
-            return NFIDataList.NULL_STRING;
+            return NFDataList.NULL_STRING;
         }
 
         public override NFGUID QueryPropertyObject(string strPropertyName)
         {
-			NFIProperty property = mPropertyManager.GetProperty(strPropertyName);
-			if (null != property)
-			{
-				return property.QueryObject();
-			}
+            NFIProperty property = mPropertyManager.GetProperty(strPropertyName);
+            if (null != property)
+            {
+                return property.QueryObject();
+            }
 
-            return NFIDataList.NULL_OBJECT;
+            return NFDataList.NULL_OBJECT;
         }
 
         public override NFVector2 QueryPropertyVector2(string strPropertyName)
@@ -227,7 +232,7 @@ namespace NFSDK
                 return property.QueryVector2();
             }
 
-            return NFIDataList.NULL_VECTOR2;
+            return NFDataList.NULL_VECTOR2;
         }
 
         public override NFVector3 QueryPropertyVector3(string strPropertyName)
@@ -238,65 +243,65 @@ namespace NFSDK
                 return property.QueryVector3();
             }
 
-            return NFIDataList.NULL_VECTOR3;
+            return NFDataList.NULL_VECTOR3;
         }
 
         public override bool FindRecord(string strRecordName)
         {
-			NFIRecord record = mRecordManager.GetRecord(strRecordName);
-			if (null != record)
-			{
-				return true;
-			}
+            NFIRecord record = mRecordManager.GetRecord(strRecordName);
+            if (null != record)
+            {
+                return true;
+            }
             return false;
         }
 
         public override bool SetRecordInt(string strRecordName, int nRow, int nCol, Int64 nValue)
         {
-			NFIRecord record = mRecordManager.GetRecord(strRecordName);
-			if (null != record)
-			{
-				record.SetInt(nRow, nCol, nValue);
-				return true;
-			}
+            NFIRecord record = mRecordManager.GetRecord(strRecordName);
+            if (null != record)
+            {
+                record.SetInt(nRow, nCol, nValue);
+                return true;
+            }
 
-			return false;
+            return false;
         }
 
         public override bool SetRecordFloat(string strRecordName, int nRow, int nCol, double fValue)
         {
-			NFIRecord record = mRecordManager.GetRecord(strRecordName);
-			if (null != record)
-			{
-				record.SetFloat(nRow, nCol, fValue);
-				return true;
-			}
+            NFIRecord record = mRecordManager.GetRecord(strRecordName);
+            if (null != record)
+            {
+                record.SetFloat(nRow, nCol, fValue);
+                return true;
+            }
 
-			return false;
+            return false;
         }
 
         public override bool SetRecordString(string strRecordName, int nRow, int nCol, string strValue)
         {
-			NFIRecord record = mRecordManager.GetRecord(strRecordName);
-			if (null != record)
-			{
-				record.SetString(nRow, nCol, strValue);
-				return true;
-			}
+            NFIRecord record = mRecordManager.GetRecord(strRecordName);
+            if (null != record)
+            {
+                record.SetString(nRow, nCol, strValue);
+                return true;
+            }
 
-			return false;
+            return false;
         }
 
         public override bool SetRecordObject(string strRecordName, int nRow, int nCol, NFGUID obj)
         {
-			NFIRecord record = mRecordManager.GetRecord(strRecordName);
-			if (null != record)
-			{
-				record.SetObject(nRow, nCol, obj);
-				return true;
-			}
+            NFIRecord record = mRecordManager.GetRecord(strRecordName);
+            if (null != record)
+            {
+                record.SetObject(nRow, nCol, obj);
+                return true;
+            }
 
-			return false;
+            return false;
         }
 
         public override bool SetRecordVector2(string strRecordName, int nRow, int nCol, NFVector2 obj)
@@ -325,44 +330,44 @@ namespace NFSDK
 
         public override Int64 QueryRecordInt(string strRecordName, int nRow, int nCol)
         {
-			NFIRecord record = mRecordManager.GetRecord(strRecordName);
-			if (null != record)
-			{
-				return record.QueryInt(nRow, nCol);
-			}
+            NFIRecord record = mRecordManager.GetRecord(strRecordName);
+            if (null != record)
+            {
+                return record.QueryInt(nRow, nCol);
+            }
 
             return 0;
         }
 
         public override double QueryRecordFloat(string strRecordName, int nRow, int nCol)
         {
-			NFIRecord record = mRecordManager.GetRecord(strRecordName);
-			if (null != record)
-			{
-				return record.QueryFloat(nRow, nCol);
-			}
+            NFIRecord record = mRecordManager.GetRecord(strRecordName);
+            if (null != record)
+            {
+                return record.QueryFloat(nRow, nCol);
+            }
 
             return 0.0;
         }
 
         public override string QueryRecordString(string strRecordName, int nRow, int nCol)
         {
-			NFIRecord record = mRecordManager.GetRecord(strRecordName);
-			if (null != record)
-			{
-				return record.QueryString(nRow, nCol);
-			}
+            NFIRecord record = mRecordManager.GetRecord(strRecordName);
+            if (null != record)
+            {
+                return record.QueryString(nRow, nCol);
+            }
 
-            return NFIDataList.NULL_STRING;
+            return NFDataList.NULL_STRING;
         }
 
         public override NFGUID QueryRecordObject(string strRecordName, int nRow, int nCol)
         {
-			NFIRecord record = mRecordManager.GetRecord(strRecordName);
-			if (null != record)
-			{
-				return record.QueryObject(nRow, nCol);
-			}
+            NFIRecord record = mRecordManager.GetRecord(strRecordName);
+            if (null != record)
+            {
+                return record.QueryObject(nRow, nCol);
+            }
 
             return null;
         }
@@ -391,23 +396,22 @@ namespace NFSDK
 
         public override NFIRecordManager GetRecordManager()
         {
-			return mRecordManager;
+            return mRecordManager;
         }
-
 
         public override NFIPropertyManager GetPropertyManager()
         {
-			return mPropertyManager;
+            return mPropertyManager;
         }
 
-		NFGUID mSelf;
-		int mnContainerID;
-		int mnGroupID;
-		
-		string mstrClassName;
-		string mstrConfigIndex;
+        NFGUID mSelf;
+        int mnContainerID;
+        int mnGroupID;
 
-		NFIRecordManager mRecordManager;
-		NFIPropertyManager mPropertyManager;
-	}
+        string mstrClassName;
+        string mstrConfigIndex;
+
+        NFIRecordManager mRecordManager;
+        NFIPropertyManager mPropertyManager;
+    }
 }

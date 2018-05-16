@@ -43,7 +43,7 @@ public class UISelectServer : UIDialog
     }
 
     // Logic Event
-    public void OnWorldList(NFIDataList valueList)
+    public void OnWorldList(NFDataList valueList)
     {
         ArrayList serverList = mLoginModule.mWorldServerList;
 
@@ -61,7 +61,7 @@ public class UISelectServer : UIDialog
             });
         }
     }
-	public void OnServerList(NFIDataList valueList)
+	public void OnServerList(NFDataList valueList)
     {
         ArrayList serverList = mLoginModule.mGameServerList;
 
@@ -89,7 +89,7 @@ public class UISelectServer : UIDialog
             });
         }
     }
-	public void OnSelectServer(NFIDataList valueList)
+	public void OnSelectServer(NFDataList valueList)
     {
 		mUIModule.ShowUI<UISelectRole>();
     }

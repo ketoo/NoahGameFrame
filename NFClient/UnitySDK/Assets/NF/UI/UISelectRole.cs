@@ -61,7 +61,7 @@ public class UISelectRole : UIDialog {
     }
 
     // Logic Event
-    public void OnRoleList(NFIDataList valueList)
+    public void OnRoleList(NFDataList valueList)
     {
 		ArrayList roleList = mPlayerModule.mRoleList;
 

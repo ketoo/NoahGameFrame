@@ -6,12 +6,12 @@ namespace NFSDK
     public abstract class NFIModule
     {
         //------------- ½Ó¿Ú -------------------//
-        public abstract bool Awake();
-        public abstract bool Init();
-        public abstract bool AfterInit();
-        public abstract bool Execute();
-        public abstract bool BeforeShut();
-        public abstract bool Shut();
+        public abstract void Awake();
+		public abstract void Init();
+		public abstract void AfterInit();
+		public abstract void Execute();
+		public abstract void BeforeShut();
+		public abstract void Shut();
 
         public T FindModule<T>() where T : NFIModule
         {

@@ -1,4 +1,9 @@
-﻿using System;
+﻿//-----------------------------------------------------------------------
+// <copyright file="NFCLogicClass.cs">
+//     Copyright (C) 2015-2015 lvsheng.huang <https://github.com/ketoo/NFrame>
+// </copyright>
+//-----------------------------------------------------------------------
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,9 +14,9 @@ using System.IO;
 
 namespace NFSDK
 {
-    public class NFCLogicClass : NFILogicClass
+    public class NFCClass : NFIClass
 	{
-        public NFCLogicClass()
+        public NFCClass()
         {
             mbEncrypt = false;
         }

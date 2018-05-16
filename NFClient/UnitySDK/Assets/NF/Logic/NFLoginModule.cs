@@ -1,4 +1,4 @@
-using System;
+锘縰sing System;
 using System.Linq;
 using System.Text;
 using System.Collections;
@@ -20,7 +20,7 @@ namespace NFSDK
             mPluginManager = pluginManager;
 		}
 
-        public override bool AfterInit()
+        public override void AfterInit()
         {
 			mNetModule = FindModule<NFNetModule>();
 			mEventModule = FindModule<NFIEventModule>();
@@ -31,10 +31,9 @@ namespace NFSDK
             mNetModule.AddReceiveCallBack(NFMsg.EGameMsgID.EGMI_ACK_CONNECT_KEY, OnConnectKey);
             mNetModule.AddReceiveCallBack(NFMsg.EGameMsgID.EGMI_ACK_SELECT_SERVER, OnSelectServer);
 
-            return true;
         }
         
-        // 请求消息
+        // 璇锋眰娑堟伅
 	    public void LoginPB(string strAccount, string strPwd, string strKey)
         {
             Debug.Log("LoginPB:" + strAccount);
@@ -116,7 +115,7 @@ namespace NFSDK
 
 			mNetModule.SendToServerByPB(NFMsg.EGameMsgID.EGMI_REQ_SELECT_SERVER, stream);
         }
-        // 接收消息
+        // 鎺ユ敹娑堟伅
 	    private void OnLoginProcess(UInt16 id, MemoryStream stream)
         {
             Debug.Log("OnLoginProcess1");
@@ -136,7 +135,7 @@ namespace NFSDK
             else
             {
                 Debug.Log("Login Faild,Code: " + xData.event_code);
-                NFCDataList varList = new NFCDataList();
+                NFDataList varList = new NFDataList();
                 varList.AddInt((Int64)xData.event_code);
 				mEventModule.DoEvent((int)NFUIModule.Event.LoginFailure);
             }
@@ -223,29 +222,24 @@ namespace NFSDK
             }
         }
 
-		public override bool Awake()
+		public override void Awake()
 		{
-			return true;
 		}
 
-		public override bool Init()
+		public override void Init()
 		{
-            return true;
 		}
 
-		public override bool Execute()
+		public override void Execute()
 		{
-            return true;
 		}
 
-		public override bool BeforeShut()
+		public override void BeforeShut()
 		{
-            return true;
 		}
 
-		public override bool Shut()
+		public override void Shut()
 		{
-            return true;
 		}
 
 		public string mAccount;
