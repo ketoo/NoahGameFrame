@@ -139,25 +139,7 @@ namespace NFSDK
             strLogicPath += xLogicClass.GetInstance();
 
             XmlDocument xmldoc = new XmlDocument();
-
-            if (xLogicClass.GetEncrypt())
-            {
-                ///////////////////////////////////////////////////////////////////////////////////////
-                StreamReader cepherReader = new StreamReader(strLogicPath); ;
-                string strContent = cepherReader.ReadToEnd();
-                cepherReader.Close();
-
-                byte[] data = Convert.FromBase64String(strContent);
-
-                string res = System.Text.ASCIIEncoding.Default.GetString(data);
-
-                xmldoc.LoadXml(res);
-                /////////////////////////////////////////////////////////////////
-            }
-            else
-            {
-                xmldoc.Load(strLogicPath);
-            }
+            xmldoc.Load(strLogicPath);
 
             XmlNode xRoot = xmldoc.SelectSingleNode("XML");
 

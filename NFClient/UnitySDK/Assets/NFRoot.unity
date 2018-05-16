@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657868, g: 0.49641263, b: 0.57481706, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657856, g: 0.49641234, b: 0.57481724, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -331,8 +331,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   target: {fileID: 0}
   sensitivity: 120
-  offset: {x: 0, y: 1, z: -4}
-  minOffset: {x: 0, y: 0, z: -5}
+  offset: {x: 0, y: 1, z: -5}
+  minOffset: {x: 0, y: 0, z: -6}
   maxOffset: {x: 0, y: 0, z: -2}
   rotationLimitsX: {x: 0, y: 0}
   rotationLimitsY: {x: 0, y: 0}

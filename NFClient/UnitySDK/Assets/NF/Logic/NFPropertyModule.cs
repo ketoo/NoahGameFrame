@@ -45,7 +45,8 @@ namespace NFSDK
         {
 			mHelpModule = FindModule<NFHelpModule>();
 			mNetModule = FindModule<NFNetModule>();
-			
+			mKernelModule = FindModule<NFIKernelModule>();
+
             mNetModule.AddReceiveCallBack(NFMsg.EGameMsgID.EGMI_ACK_PROPERTY_INT, OnPropertyInt);
             mNetModule.AddReceiveCallBack(NFMsg.EGameMsgID.EGMI_ACK_PROPERTY_FLOAT, OnPropertyFloat);
             mNetModule.AddReceiveCallBack(NFMsg.EGameMsgID.EGMI_ACK_PROPERTY_STRING, OnPropertyString);

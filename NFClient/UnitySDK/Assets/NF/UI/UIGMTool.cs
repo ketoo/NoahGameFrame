@@ -9,7 +9,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using NFSDK;
 
-public class UIGMTool : MonoBehaviour 
+public class UIGMTool : UIDialog 
 {
 
     private NFGUID xTargetIdent = new NFGUID();
@@ -30,9 +30,9 @@ public class UIGMTool : MonoBehaviour
     }
 
     GUIStyle buttonLeft;
-    public void OnGUI(int nHeight, int nWidth)
-    {
-        if (buttonLeft == null)
+	void OnGMGUI(int nHeight, int nWidth)
+	{
+		if (buttonLeft == null)
         {
 
             buttonLeft = GUI.skin.button;
@@ -55,7 +55,7 @@ public class UIGMTool : MonoBehaviour
         GUI.color = Color.white;
 
 
-		NFDataList objectList = mKernelModule.GetObjectList();
+        NFDataList objectList = mKernelModule.GetObjectList();
 
         scrollPositionFirst = GUI.BeginScrollView(new Rect(0, nElementHeight, nElementWidth / 2 + 20, nHeight - 100), scrollPositionFirst, new Rect(0, 0, nElementWidth, objectList.Count() * (nElementHeight)));
 
@@ -79,7 +79,7 @@ public class UIGMTool : MonoBehaviour
         ////////////////
         if (!xTargetIdent.IsNull())
         {
-			NFIObject go = mKernelModule.GetObject(xTargetIdent);
+            NFIObject go = mKernelModule.GetObject(xTargetIdent);
             if (null != go)
             {
                 NFDataList recordLlist = go.GetRecordManager().GetRecordList();
@@ -265,5 +265,9 @@ public class UIGMTool : MonoBehaviour
                 }
             }
         }
+	}
+    public void OnGUI()
+    {
+		OnGMGUI(800, 600);
     }
 }

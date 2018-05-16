@@ -61,6 +61,7 @@ namespace NFSDK
 			mNetModule = mPluginManager.FindModule<NFNetModule>();
 			mEventModule = mPluginManager.FindModule<NFIEventModule>();
 			mUIModule = mPluginManager.FindModule<NFUIModule>();
+			mKernelModule = mPluginManager.FindModule<NFIKernelModule>();
 
 
 			mNetModule.AddReceiveCallBack(NFMsg.EGameMsgID.EGMI_ACK_ROLE_LIST, OnRoleList);

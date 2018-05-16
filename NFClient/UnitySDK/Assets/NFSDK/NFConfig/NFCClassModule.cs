@@ -50,14 +50,32 @@ namespace NFSDK
             ClearLogicClass();
             
 
-            string strLogicPath = mstrPath + "NFDataCfg/Struct/LogicClass";
+            string strLogicPath = mstrPath + "NFDataCfg/Struct/LogicClass.xml";
 
 			Debug.Log(strLogicPath);
 
-			TextAsset textAsset = (TextAsset) Resources.Load(strLogicPath); 
+			XmlDocument xmldoc = new XmlDocument();
 
-			XmlDocument xmldoc = new XmlDocument ();
-			xmldoc.LoadXml ( textAsset.text );
+            if (RuntimePlatform.Android == Application.platform
+                || RuntimePlatform.IPhonePlayer == Application.platform)
+            {
+                strLogicPath = strLogicPath.Replace(".xml", "");
+                TextAsset textAsset = (TextAsset)Resources.Load(strLogicPath);
+                xmldoc.LoadXml(textAsset.text);
+
+            }
+            else
+            {
+				try
+                {
+                    xmldoc.Load(strLogicPath);
+                }
+                catch (Exception e)
+                {
+                    Debug.LogFormat("Load Config Error {0}", e.ToString());
+                }
+            }
+            
             XmlNode root = xmldoc.SelectSingleNode("XML");
 
             LoadLogicClass(root);
@@ -167,14 +185,30 @@ namespace NFSDK
             NFIClass xLogicClass = GetElement(strName);
             if (null != xLogicClass)
             {
+            
+				XmlDocument xmldoc = new XmlDocument();
                 string strLogicPath = mstrPath + xLogicClass.GetPath();
 
-				strLogicPath = strLogicPath.Replace (".xml", "");
+                if (RuntimePlatform.Android == Application.platform
+                    || RuntimePlatform.IPhonePlayer == Application.platform)
+                {
+                    strLogicPath = strLogicPath.Replace(".xml", "");
+                    TextAsset textAsset = (TextAsset)Resources.Load(strLogicPath);
+                    xmldoc.LoadXml(textAsset.text);
 
-				TextAsset textAsset = (TextAsset) Resources.Load(strLogicPath); 
+                }
+                else
+                {
+					try
+                    {
+                        xmldoc.Load(strLogicPath);
+                    }
+                    catch (Exception e)
+                    {
+                        Debug.LogFormat("Load Config Error {0}", e.ToString());
+                    }
 
-				XmlDocument xmldoc = new XmlDocument ();
-				xmldoc.LoadXml ( textAsset.text );
+                }
 				XmlNode xRoot = xmldoc.SelectSingleNode("XML");
 
                 XmlNode xNodePropertys = xRoot.SelectSingleNode("Propertys");
@@ -234,13 +268,29 @@ namespace NFSDK
             NFIClass xLogicClass = GetElement(strName);
             if (null != xLogicClass)
             {
-				string strLogicPath = mstrPath + xLogicClass.GetPath();
-				strLogicPath = strLogicPath.Replace (".xml", "");
+				XmlDocument xmldoc = new XmlDocument();
+                string strLogicPath = mstrPath + xLogicClass.GetPath();
 
-				TextAsset textAsset = (TextAsset) Resources.Load(strLogicPath); 
+                if (RuntimePlatform.Android == Application.platform
+                    || RuntimePlatform.IPhonePlayer == Application.platform)
+                {
+                    strLogicPath = strLogicPath.Replace(".xml", "");
+                    TextAsset textAsset = (TextAsset)Resources.Load(strLogicPath);
+                    xmldoc.LoadXml(textAsset.text);
 
-				XmlDocument xmldoc = new XmlDocument ();
-				xmldoc.LoadXml ( textAsset.text );
+                }
+                else
+                {
+					try
+                    {
+                        xmldoc.Load(strLogicPath);
+                    }
+                    catch (Exception e)
+                    {
+                        Debug.LogFormat("Load Config Error {0}", e.ToString());
+                    }
+
+                }
 				XmlNode xRoot = xmldoc.SelectSingleNode("XML");
 
                 XmlNode xNodePropertys = xRoot.SelectSingleNode("Records");
