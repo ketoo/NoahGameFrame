@@ -6,7 +6,12 @@
 using namespace std;
 
 #pragma comment( lib, "ws2_32" )
+
+#ifdef _DEBUG
 #pragma comment( lib, "hiredis_d.lib") 
+#else
+#pragma comment( lib, "hiredis.lib") 
+#endif
 
 #define _IP_ "127.0.0.1"
 #define _PORT_ 6379
