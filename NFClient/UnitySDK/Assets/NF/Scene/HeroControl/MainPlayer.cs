@@ -17,12 +17,14 @@ public class MainPlayer : MonoBehaviour {
     private bool grounded = false;
 
 	private CharacterController mController;
+	private Animator mAnimation;
 	private bool mbMoved = false;
 	void Start()
     {
         mPlayerModule = NFCPluginManager.Instance().FindModule<NFPlayerModule>();
 
         mController = GetComponent<CharacterController>();
+		mAnimation = GetComponent<Animator>();
 
         // get the transform of the main camera
         if (Camera.main != null)
@@ -54,12 +56,19 @@ public class MainPlayer : MonoBehaviour {
 			if (moveDirection.sqrMagnitude > 0.01f)
 			{
 				mbMoved = true;
+				mAnimation.Play("run");
+			}
+			else
+			{
+                mAnimation.Play("idle");
 			}
 
             if (Input.GetButton("Jump")) //跳跃
             {
-                moveDirection.y = jumpSpeed;
-                //mPlayerModule.RequireMove(transform.position);
+				moveDirection.y = jumpSpeed;
+                mAnimation.Play("jump");
+                
+				mPlayerModule.RequireJump(transform.position);
             }
 
         }
@@ -69,13 +78,16 @@ public class MainPlayer : MonoBehaviour {
 
 		CollisionFlags flags = mController.Move(moveDirection * Time.deltaTime);
         grounded = (flags & CollisionFlags.CollidedBelow) != 0; //当controller处在空中间，grounded为false，即跳动和行走都无效
+
+
+
     }
 
     void Sync()
 	{
 		mSyncTimeTick += Time.deltaTime;
 
-		if (mSyncTimeTick > mSyncTime)
+		if (grounded && mSyncTimeTick > mSyncTime)
         {
             mPlayerModule.RequireMove(transform.position);
             mSyncTimeTick = 0.0f;

@@ -71,9 +71,18 @@ namespace NFSDK
 			GameObject player = GetObject(tar);
 			OtherPlayer otherPlayer = player.GetComponent<OtherPlayer>();
 
-            double fSpeed = valueList.FloatVal(1);
-            NFVector3 pos = valueList.Vector3Val(2);
-			otherPlayer.MoveTo(new Vector3(pos.X(), pos.Y(), pos.Z()));
+			double fSpeed = valueList.FloatVal(1);
+			long nType = valueList.IntVal(2);
+            NFVector3 pos = valueList.Vector3Val(3);
+
+			if (nType > 0)
+			{
+				otherPlayer.JumpTo(new Vector3(pos.X(), pos.Y(), pos.Z()));
+			}
+			else
+			{
+				otherPlayer.MoveTo(new Vector3(pos.X(), pos.Y(), pos.Z()));
+			}
 
             Debug.Log("Player Move:" + new Vector3(pos.X(), pos.Y(), pos.Z()).ToString());
         }

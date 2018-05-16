@@ -127,6 +127,27 @@ namespace NFSDK
 
             mNetModule.SendToServerByPB(NFMsg.EGameMsgID.EGMI_REQ_ENTER_GAME, stream);
         }
+
+
+        public void RequireJump(UnityEngine.Vector3 pos)
+        {
+            NFMsg.ReqAckPlayerMove xData = new NFMsg.ReqAckPlayerMove();
+            xData.mover = mHelpModule.NFToPB(mRoleID);
+            xData.moveType = 1;
+            xData.speed = 2f;
+            xData.time = 0;
+            NFMsg.Vector3 xTargetPos = new NFMsg.Vector3();
+            xTargetPos.x = pos.x;
+            xTargetPos.y = pos.z;
+            xTargetPos.z = pos.y;
+            xData.target_pos.Add(xTargetPos);
+
+            MemoryStream stream = new MemoryStream();
+            Serializer.Serialize<NFMsg.ReqAckPlayerMove>(stream, xData);
+
+            mNetModule.SendToServerByPB(NFMsg.EGameMsgID.EGMI_REQ_MOVE, stream);
+        }
+
 	    public void RequireMove(UnityEngine.Vector3 pos)
         {
             NFMsg.ReqAckPlayerMove xData = new NFMsg.ReqAckPlayerMove();
@@ -240,13 +261,18 @@ namespace NFSDK
 			float fSpeed = NFCKernelModule.Instance().QueryPropertyInt(mHelpModule.PBToNF(xData.mover), "MOVE_SPEED") / 10000.0f;
 
 			Debug.LogWarning("Object Move: " + mHelpModule.PBToNF(xData.mover).ToString());
+
             NFIDataList var = new NFCDataList();
+
 			var.AddObject(mHelpModule.PBToNF(xData.mover));
-            var.AddFloat(fSpeed);
+			var.AddFloat(fSpeed);
+			var.AddInt(xData.moveType);
+
 			NFVector3 pos = mHelpModule.PBToNF(xData.target_pos[0]);
             float fTemp = pos.Z();
             pos.SetZ(pos.Y());
             pos.SetY(fTemp);
+
             var.AddVector3(pos);
 
 			mEventModule.DoEvent((int)Event.PlayerMove, var);
