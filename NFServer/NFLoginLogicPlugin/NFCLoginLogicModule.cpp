@@ -9,7 +9,7 @@
 #include "NFLoginLogicPlugin.h"
 #include "NFCLoginLogicModule.h"
 
-
+//test modify
 bool NFCLoginLogicModule::Init()
 {
 	m_pAccountRedisModule = pPluginManager->FindModule<NFIAccountRedisModule>();
