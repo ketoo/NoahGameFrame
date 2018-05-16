@@ -4,23 +4,26 @@ using System.Collections.Generic;
 using NFSDK;
 using UnityStandardAssets.Characters.ThirdPerson;
 
-[RequireComponent(typeof(UnityEngine.AI.NavMeshAgent))]
 public class OtherPlayer : MonoBehaviour {
 
 	// Use this for initialization
-    public UnityEngine.AI.NavMeshAgent agent { get; private set; }             // the navmesh agent required for the path finding
-    public Transform target;                                    // target to aim for
-    public Vector3 targetPos;                                    // target to aim for
+	private Transform target;                                    // target to aim for
+    private Vector3 targetPos;                                    // target to aim for
 
     private CharacterController mController;
 	private Animator mAnimation;
-
+	private UnityEngine.AI.NavMeshAgent agent;            // the navmesh agent required for the path finding
+    
 	void Start ()
     {
         // get the components on the object we need ( should not be null due to require component so no need to check )
-        agent = GetComponentInChildren<UnityEngine.AI.NavMeshAgent>();
 		mAnimation = GetComponent<Animator>();
-			
+		agent = GetComponentInChildren<UnityEngine.AI.NavMeshAgent>();
+		if (agent == null)
+		{
+			agent = transform.gameObject.AddComponent<UnityEngine.AI.NavMeshAgent>();
+		}
+
         agent.updateRotation = false;
         agent.updatePosition = true;
         // 其他玩家移动速度减慢
@@ -38,8 +41,10 @@ public class OtherPlayer : MonoBehaviour {
             target.position = pos;
         targetPos = pos;
 
-
-        mAnimation.Play("run");
+		if (mAnimation)
+		{
+			mAnimation.Play("run");
+		}
     }
 
     private void Update()
@@ -54,7 +59,7 @@ public class OtherPlayer : MonoBehaviour {
 			mAnimation.Play("idle");
 		}
 
-		//mController.Move(agent.desiredVelocity);
+		//mController.mo(agent.desiredVelocity);
     }
 
     public void SetTarget(Transform target)
