@@ -9,6 +9,10 @@ namespace NFSDK
 		private NFIKernelModule mKernelModule;
 		private NFNetModule mNetModule;
 		private NFPlayerModule mPlayerModule;
+		private NFIEventModule mEventModule;
+
+
+		private Dictionary<NFGUID, GameObject> mGameObjectMap = new Dictionary<NFGUID, GameObject>();
 
         public NFSceneModule(NFIPluginManager pluginManager)
         {
@@ -24,11 +28,13 @@ namespace NFSDK
 			mPlayerModule = FindModule<NFPlayerModule>();
 			mNetModule = FindModule<NFNetModule>();
 			mKernelModule = FindModule<NFIKernelModule>();
+			mEventModule = FindModule<NFIEventModule>();
 
             NFCKernelModule.Instance().RegisterClassCallBack(NFrame.Player.ThisName, OnClassPlayerEventHandler);
             NFCKernelModule.Instance().RegisterClassCallBack(NFrame.NPC.ThisName, OnClassNPCEventHandler);
 
-			//mPlayerModule.RegisterCallback((int)NFPlayerModule.Event.PlayerMove, OnPlayerMove);
+			mEventModule.RegisterCallback((int)NFPlayerModule.Event.SwapScene, SwapSceneEventHandler);
+			mEventModule.RegisterCallback((int)NFPlayerModule.Event.PlayerMove, OnPlayerMove);
 
 			return true;
 		}
@@ -37,30 +43,39 @@ namespace NFSDK
 		public override bool BeforeShut() { return true; }
 		public override bool Shut() { return true; }
 
+		protected void SwapSceneEventHandler(NFIDataList valueList)
+		{
+			string strSceneID = valueList.StringVal(0);
+			NFVector3 vPos = valueList.Vector3Val(1);
+
+            //TODO
+			Application.LoadLevel(1);
+		}
 
 		GameObject GetObject(NFGUID id)
 		{
-			return null;
+			GameObject gameObject = null;
+			mGameObjectMap.TryGetValue(id, out gameObject);
+
+			return gameObject;
 		}
   
 
-        public bool OnPlayerMove(NFIDataList valueList)
+		public void OnPlayerMove(NFIDataList valueList)
         {
-			/*
             NFGUID tar = valueList.ObjectVal(0);
 
-            if (tar == NFPlayerModule.Instance().mRoleID)
-                return true;
+			if (tar == mPlayerModule.mRoleID)
+                return;
 
-            OtherPlayer player = transform.Find(tar.ToString()).GetComponent<OtherPlayer>();
+			GameObject player = GetObject(tar);
+			OtherPlayer otherPlayer = player.GetComponent<OtherPlayer>();
 
             double fSpeed = valueList.FloatVal(1);
             NFVector3 pos = valueList.Vector3Val(2);
+			otherPlayer.MoveTo(new Vector3(pos.X(), pos.Y(), pos.Z()));
 
-            player.MoveTo(new Vector3(pos.X(), pos.Y(), pos.Z()));
             Debug.Log("Player Move:" + new Vector3(pos.X(), pos.Y(), pos.Z()).ToString());
-*/
-            return true;
         }
 
         private void OnClassPlayerEventHandler(NFGUID self, int nContainerID, int nGroupID, NFIObject.CLASS_EVENT_TYPE eType, string strClassName, string strConfigIndex)
@@ -95,12 +110,14 @@ namespace NFSDK
                 GameObject perfb = Resources.Load<GameObject>(strPrefabPath);
                 GameObject player = GameObject.Instantiate(perfb);
 
-				//DontDestroyOnLoad(player);
+				mGameObjectMap.Add(self, player);
+
+				GameObject.DontDestroyOnLoad(player);
 
                 player.name = self.ToString();
                 player.transform.position = vec;
 
-                //　MainPlayer
+                //MainPlayer
 				if (self == mPlayerModule.mRoleID)
                 {
                     player.AddComponent<MainPlayer>();
@@ -113,21 +130,28 @@ namespace NFSDK
             }
             else if (eType == NFIObject.CLASS_EVENT_TYPE.OBJECT_DESTROY)
             {
-                //DestroyObject(transform.Find(self.ToString()));
+				//DestroyObject(transform.Find(self.ToString()));
+				GameObject go = GetObject(self);
+				if (go != null)
+				{
+					mGameObjectMap.Remove(self);
+
+					GameObject.DestroyObject(go);
+				}
             }
 		}
 
         private void OnClassNPCEventHandler(NFGUID self, int nContainerID, int nGroupID, NFIObject.CLASS_EVENT_TYPE eType, string strClassName, string strConfigIndex)
         {
-            //if (eType == NFIObject.CLASS_EVENT_TYPE.OBJECT_CREATE)
-            //{
-            //    string strConfigID = NFCKernelModule.Instance().QueryPropertyString(self, "ConfigID");
-            //    Vector3 vec = new Vector3();
-            //    vec.x = (float)NFCKernelModule.Instance().QueryPropertyFloat(self, "X");
-            //    vec.y = (float)NFCKernelModule.Instance().QueryPropertyFloat(self, "Y");
-            //    vec.z = (float)NFCKernelModule.Instance().QueryPropertyFloat(self, "Z");
+            if (eType == NFIObject.CLASS_EVENT_TYPE.OBJECT_CREATE)
+            {
+                string strConfigID = NFCKernelModule.Instance().QueryPropertyString(self, "ConfigID");
+                Vector3 vec = new Vector3();
+                vec.x = (float)NFCKernelModule.Instance().QueryPropertyFloat(self, "X");
+                vec.y = (float)NFCKernelModule.Instance().QueryPropertyFloat(self, "Y");
+                vec.z = (float)NFCKernelModule.Instance().QueryPropertyFloat(self, "Z");
 
-            //    string strPrefabPath = "";
+                string strPrefabPath = "";
             //    if (strConfigID.Length <= 0)
             //    {
             //        strPrefabPath = NFCElementModule.Instance().QueryPropertyString("Player", "Prefab");
@@ -137,17 +161,24 @@ namespace NFSDK
             //        strPrefabPath = NFCElementModule.Instance()..QueryPropertyString(strConfigID, "Prefab");
             //    }
 
-            //    strPrefabPath = "Player/MainPlayer";
-            //    GameObject playerPerf = Resources.Load<GameObject>(strPrefabPath);
-            //    GameObject player = Instantiate(playerPerf);
+                strPrefabPath = "Player/MainPlayer";
+                GameObject playerPerf = Resources.Load<GameObject>(strPrefabPath);
+				GameObject player = GameObject.Instantiate(playerPerf);
 
 
+                mGameObjectMap.Add(self, player);
 
-            //}
-            //else if (eType == NFIObject.CLASS_EVENT_TYPE.OBJECT_DESTROY)
-            //{
-            //    //DestroyObject(self);
-            //}
+            }
+            else if (eType == NFIObject.CLASS_EVENT_TYPE.OBJECT_DESTROY)
+            {
+				GameObject go = GetObject(self);
+                if (go != null)
+                {
+                    mGameObjectMap.Remove(self);
+
+                    GameObject.DestroyObject(go);
+                }
+            }
 
         }
 	}

@@ -12,7 +12,8 @@ public class UISelectRole : UIDialog {
 
     private Transform mContentList;
     private GameObject mItemModle;
-    private Button mCreateRole;
+	public Button mCreateRole;
+	public Button mEnterGameRole;
 
 	// Use this for initialization
 	void Start ()
@@ -29,8 +30,8 @@ public class UISelectRole : UIDialog {
         mItemModle = mContentList.Find("Item").gameObject;
         mItemModle.transform.SetParent(null);
 
-        mCreateRole = transform.Find("Panel/CreateRole").GetComponent<Button>();
-        mCreateRole.onClick.AddListener(onCreateRoleClick);
+		mCreateRole.onClick.AddListener(onCreateRoleClick);
+		mEnterGameRole.onClick.AddListener(onEnterGameClick);
 
 		mEventModule.RegisterCallback((int)NFPlayerModule.Event.RoleList, OnRoleList);
 
@@ -40,16 +41,23 @@ public class UISelectRole : UIDialog {
     // UI Event
     private void onCreateRoleClick()
     {
-        string strRoleName = "TestRole" + Random.Range(0, 1000);
+        string strRoleName = "TestRole" + Random.Range(0, 10000);
 		mPlayerModule.RequireCreateRole(strRoleName, 1, 1);
+    }
+
+	private void onEnterGameClick()
+    {
+		ArrayList roleList = mPlayerModule.mRoleList;
+		if (roleList.Count > 0)
+		{
+			OnRoleClick(0);
+		}
     }
 
     private void OnRoleClick(int nIndex)
     {
 		mPlayerModule.RequireEnterGameServer(nIndex);
 		mUIModule.CloseUI();
-
-        Application.LoadLevel(1);
     }
 
     // Logic Event

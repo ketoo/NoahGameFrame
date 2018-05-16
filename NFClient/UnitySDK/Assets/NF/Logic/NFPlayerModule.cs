@@ -17,6 +17,7 @@ namespace NFSDK
             RoleList = 10000,
             PlayerMove,
 			PlayerJump,
+			SwapScene,
         };
 
 
@@ -215,6 +216,14 @@ namespace NFSDK
 			xData = Serializer.Deserialize<NFMsg.ReqAckSwapScene>(new MemoryStream(xMsg.msg_data));
 
 			mUIModule.ShowUI<UIMain>();
+
+			NFIDataList var = new NFCDataList();
+			NFVector3 v = new NFVector3(xData.x, xData.y, xData.z);
+
+			var.AddInt(xData.scene_id);
+			var.AddVector3(v);
+
+			mEventModule.DoEvent((int)Event.SwapScene, var);
 		}
 
 	    private void OnObjectMove(UInt16 id, MemoryStream stream)

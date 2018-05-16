@@ -240,13 +240,13 @@ namespace NFSDK
                 length = ConvertUint32(length);
                 nMsgID = ConvertUint16(nMsgID);
 
-                Debug.LogFormat("RecvData {0} \t {1}", length, nMsgID);
+                //Debug.LogFormat("RecvData {0} \t {1}", length, nMsgID);
                 if (nReadSize < length)
                     break;
 
                 m_recvPool.ReadPos += (int)length;
 
-                Debug.LogFormat("Recv:{0}", nMsgID);
+                //Debug.LogFormat("Recv:{0}", nMsgID);
 
                 nReadPos += (int)ConstDefine.NF_PACKET_HEAD_SIZE;
                 length -= ConstDefine.NF_PACKET_HEAD_SIZE;

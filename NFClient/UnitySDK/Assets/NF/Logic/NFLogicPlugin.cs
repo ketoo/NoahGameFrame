@@ -29,11 +29,11 @@ namespace NFSDK
 			Debug.Log("NFLogicPlugin Uninstall");
 
 			mPluginManager.RemoveModule("NFHelpModule");
-            mPluginManager.RemoveModule("NFNetLogic");
-            mPluginManager.RemoveModule("NFLoginLogic");
-            mPluginManager.RemoveModule("NFPlayerLogic");
-            mPluginManager.RemoveModule("NFPropertyLogic");
-            mPluginManager.RemoveModule("NFRecordyLogic");
+			mPluginManager.RemoveModule("NFNetModule");
+			mPluginManager.RemoveModule("NFLoginModule");
+			mPluginManager.RemoveModule("NFPlayerModule");
+			mPluginManager.RemoveModule("NFPropertyModule");
+			mPluginManager.RemoveModule("NFRecordyModule");
             mModules.Clear();
         }
     }
