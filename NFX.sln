@@ -361,6 +361,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "NFLuaScriptPlugin", "NFComm
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "luaintf", "Dependencies\LuaIntf\luaintf.vcxproj", "{CB6CDCBF-35F7-4248-8BE6-21B051884204}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "lua", "Dependencies\lua\lua.vcxproj", "{98ACA029-C914-474E-80A8-7FF3080343E4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -739,6 +741,12 @@ Global
 		{CB6CDCBF-35F7-4248-8BE6-21B051884204}.Release|x64.Build.0 = Release|x64
 		{CB6CDCBF-35F7-4248-8BE6-21B051884204}.Release|x86.ActiveCfg = Release|Win32
 		{CB6CDCBF-35F7-4248-8BE6-21B051884204}.Release|x86.Build.0 = Release|Win32
+		{98ACA029-C914-474E-80A8-7FF3080343E4}.Debug|x64.ActiveCfg = Debug|x64
+		{98ACA029-C914-474E-80A8-7FF3080343E4}.Debug|x64.Build.0 = Debug|x64
+		{98ACA029-C914-474E-80A8-7FF3080343E4}.Debug|x86.ActiveCfg = Debug|x64
+		{98ACA029-C914-474E-80A8-7FF3080343E4}.Release|x64.ActiveCfg = Release|x64
+		{98ACA029-C914-474E-80A8-7FF3080343E4}.Release|x64.Build.0 = Release|x64
+		{98ACA029-C914-474E-80A8-7FF3080343E4}.Release|x86.ActiveCfg = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -809,6 +817,7 @@ Global
 		{B45000FF-F17A-4F1C-89E5-14C513B20DC9} = {E78C3B11-6914-488A-B068-B3BF4F5150F5}
 		{0D7E27F4-11C2-4F1D-8900-CC24297E4397} = {410C8A08-63DC-45B2-ADB9-08CD991861F0}
 		{CB6CDCBF-35F7-4248-8BE6-21B051884204} = {E78C3B11-6914-488A-B068-B3BF4F5150F5}
+		{98ACA029-C914-474E-80A8-7FF3080343E4} = {E78C3B11-6914-488A-B068-B3BF4F5150F5}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {0FB8E2D6-BCE5-48BD-93AE-A041C5B39F3D}
