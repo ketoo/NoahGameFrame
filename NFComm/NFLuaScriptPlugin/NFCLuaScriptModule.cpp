@@ -30,10 +30,10 @@ bool NFCLuaScriptModule::Init()
 	
 	Regisger();
 
+	std::string strRootFileh = pPluginManager->GetConfigPath() + "NFDataCfg/ScriptModule/script_init.lua";
+    //TRY_ADD_PACKAGE_PATH(strPath.c_str()); //Add Search Path to Lua
 
-    //TRY_ADD_PACKAGE_PATH(pPluginManager->GetConfigPath() + "NFDataCfg/ScriptModule"); //Add Search Path to Lua
-
-    TRY_LOAD_SCRIPT_FLE("script_init.lua");
+    TRY_LOAD_SCRIPT_FLE(strRootFileh.c_str());
 
     TRY_RUN_GLOBAL_SCRIPT_FUN2("init_script_system", pPluginManager, this);
 
