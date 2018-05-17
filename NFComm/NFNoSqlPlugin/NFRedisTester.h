@@ -12,7 +12,7 @@
 class NFRedisTester
 {
 public:
-    NFRedisTester(const std::string& ip, int port);
+    NFRedisTester(const std::string& ip, int port, const std::string& auth = "");
 
     bool RunTester();
     void Execute();
