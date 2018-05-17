@@ -26,11 +26,6 @@ bool NFRedisClient::Connect(const std::string &ip, const int port, const std::st
     int64_t nFD = m_pRedisClientSocket->Connect(ip, port);
 	if (nFD > 0)
 	{
-		if (!auth.empty())
-		{
-			return AUTH(auth);
-		}
-
 		mstrIP = ip;
 		mnPort = port;
 		mstrAuthKey = auth;
@@ -82,12 +77,12 @@ bool NFRedisClient::Execute()
     return false;
 }
 
-redisReply* NFRedisClient::BuildSendCmd(const NFRedisCommand& cmd)
+NF_SHARE_PTR<redisReply> NFRedisClient::BuildSendCmd(const NFRedisCommand& cmd)
 {
-
 	while (bBusy)
 	{
 		std::this_thread::sleep_for(std::chrono::milliseconds(1));
+
 		//you can not use build send cmd funciton again if you are not using coroutine
 		YieldFunction();
 	}
@@ -106,18 +101,17 @@ redisReply* NFRedisClient::BuildSendCmd(const NFRedisCommand& cmd)
 	return ParseForReply();
 }
 
-redisReply * NFRedisClient::ParseForReply()
+NF_SHARE_PTR<redisReply> NFRedisClient::ParseForReply()
 {
-
 	struct redisReply* reply = nullptr;
 	while (true)
 	{
 		std::this_thread::sleep_for(std::chrono::milliseconds(1));
 
+		// When the buffer is empty, reply will be null
 		int ret = redisReaderGetReply(m_pRedisClientSocket->GetRedisReader(), (void**)&reply);
 		if (ret == REDIS_OK && reply != nullptr)
 		{
-			bBusy = false;
 			break;
 		}
 
@@ -138,24 +132,37 @@ redisReply * NFRedisClient::ParseForReply()
 		return nullptr;
 	}
 
-	struct redisReply* r = (struct redisReply*)reply;
-	if (REDIS_REPLY_ERROR == r->type)
+	if (REDIS_REPLY_ERROR == reply->type)
 	{
 		// write log
 		freeReplyObject(reply);
 		return nullptr;
 	}
 
-	return reply;
+	return NF_SHARE_PTR<redisReply>(reply, [](redisReply* r) { if (r) freeReplyObject(r); });
 }
 
-bool NFRedisClient::AUTH(const std::string & auth)
+bool NFRedisClient::AUTH(const std::string& auth)
 {
 	NFRedisCommand cmd(GET_NAME(AUTH));
 	cmd << auth;
 
-	redisReply* reply = BuildSendCmd(cmd);
-	
+	// if password error, redis will return REDIS_REPLY_ERROR
+	// pReply will be null
+	NF_SHARE_PTR<redisReply> pReply = BuildSendCmd(cmd);
+	if (pReply == nullptr)
+	{
+		return false;
+	}
 
+	if (pReply->type == REDIS_REPLY_STATUS)
+	{
+		if (std::string("OK") == std::string(pReply->str, pReply->len) ||
+			std::string("ok") == std::string(pReply->str, pReply->len))
+		{
+			return true;
+		}
+	}
+	
 	return false;
 }

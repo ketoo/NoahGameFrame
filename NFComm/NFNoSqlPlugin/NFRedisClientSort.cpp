@@ -11,7 +11,7 @@ int NFRedisClient::ZADD(const std::string & key, const std::string & member, con
 	cmd << member;
 	cmd << score;
 
-	redisReply* pReply = BuildSendCmd(cmd);
+	NF_SHARE_PTR<redisReply> pReply = BuildSendCmd(cmd);
 	if (pReply == nullptr)
 	{
 		return false;
@@ -23,8 +23,6 @@ int NFRedisClient::ZADD(const std::string & key, const std::string & member, con
 		add_new_num = (int)pReply->integer;
 	}
 
-	freeReplyObject(pReply);
-
 	return add_new_num;
 }
 
@@ -33,7 +31,7 @@ bool NFRedisClient::ZCARD(const std::string & key, int &nCount)
 	NFRedisCommand cmd(GET_NAME(ZCARD));
 	cmd << key;
 
-	redisReply* pReply = BuildSendCmd(cmd);
+	NF_SHARE_PTR<redisReply> pReply = BuildSendCmd(cmd);
 	if (pReply == nullptr)
 	{
 		return false;
@@ -43,8 +41,6 @@ bool NFRedisClient::ZCARD(const std::string & key, int &nCount)
 	{
 		nCount = (int)pReply->integer;
 	}
-
-	freeReplyObject(pReply);
 
 	return true;
 }
@@ -56,7 +52,7 @@ bool NFRedisClient::ZCOUNT(const std::string & key, const double start, const do
 	cmd << start;
 	cmd << end;
 
-	redisReply* pReply = BuildSendCmd(cmd);
+	NF_SHARE_PTR<redisReply> pReply = BuildSendCmd(cmd);
 	if (pReply == nullptr)
 	{
 		return false;
@@ -66,8 +62,6 @@ bool NFRedisClient::ZCOUNT(const std::string & key, const double start, const do
 	{
 		nCount = (int)pReply->integer;
 	}
-
-	freeReplyObject(pReply);
 
 	return true;
 }
@@ -79,7 +73,7 @@ bool NFRedisClient::ZINCRBY(const std::string & key, const std::string & member,
 	cmd << member;
 	cmd << score;
 
-	redisReply* pReply = BuildSendCmd(cmd);
+	NF_SHARE_PTR<redisReply> pReply = BuildSendCmd(cmd);
 	if (pReply == nullptr)
 	{
 		return false;
@@ -90,8 +84,6 @@ bool NFRedisClient::ZINCRBY(const std::string & key, const std::string & member,
 	{
 		success = NF_StrTo<double>(pReply->str, newScore);
 	}
-
-	freeReplyObject(pReply);
 
 	return success;
 }
@@ -104,7 +96,7 @@ bool NFRedisClient::ZRANGE(const std::string & key, const int start, const int e
 	cmd << end;
 	cmd << "WITHSCORES";
 	
-	redisReply* pReply = BuildSendCmd(cmd);
+	NF_SHARE_PTR<redisReply> pReply = BuildSendCmd(cmd);
 	if (pReply == nullptr)
 	{
 		return false;
@@ -128,10 +120,8 @@ bool NFRedisClient::ZRANGE(const std::string & key, const int start, const int e
 	}
 	catch (...)
 	{
-
+		return false;
 	}
-
-	freeReplyObject(pReply);
 
 	return true;
 }
@@ -145,7 +135,7 @@ bool NFRedisClient::ZRANGEBYSCORE(const std::string & key, const double start, c
 	cmd << end;
 	cmd << "WITHSCORES";
 
-	redisReply* pReply = BuildSendCmd(cmd);
+	NF_SHARE_PTR<redisReply> pReply = BuildSendCmd(cmd);
 	if (pReply == nullptr)
 	{
 		return false;
@@ -169,10 +159,8 @@ bool NFRedisClient::ZRANGEBYSCORE(const std::string & key, const double start, c
 	}
 	catch (...)
 	{
-
+		return false;
 	}
-
-	freeReplyObject(pReply);
 
 	return true;
 }
@@ -183,7 +171,7 @@ bool NFRedisClient::ZRANK(const std::string & key, const std::string & member, i
 	cmd << key;
 	cmd << member;
 
-	redisReply* pReply = BuildSendCmd(cmd);
+	NF_SHARE_PTR<redisReply> pReply = BuildSendCmd(cmd);
 	if (pReply == nullptr)
 	{
 		return false;
@@ -194,8 +182,6 @@ bool NFRedisClient::ZRANK(const std::string & key, const std::string & member, i
 		rank = (int)pReply->integer;
 	}
 
-	freeReplyObject(pReply);
-
 	return true;
 }
 
@@ -205,7 +191,7 @@ bool NFRedisClient::ZREM(const std::string & key, const std::string & member)
 	cmd << key;
 	cmd << member;
 
-	redisReply* pReply = BuildSendCmd(cmd);
+	NF_SHARE_PTR<redisReply> pReply = BuildSendCmd(cmd);
 	if (pReply == nullptr)
 	{
 		return false;
@@ -216,8 +202,6 @@ bool NFRedisClient::ZREM(const std::string & key, const std::string & member)
 	{
 		del_num = (int)pReply->integer;
 	}
-
-	freeReplyObject(pReply);
 
 	return (bool)del_num;
 }
@@ -229,7 +213,7 @@ bool NFRedisClient::ZREMRANGEBYRANK(const std::string & key, const int start, co
 	cmd << start;
 	cmd << end;
 
-	redisReply* pReply = BuildSendCmd(cmd);
+	NF_SHARE_PTR<redisReply> pReply = BuildSendCmd(cmd);
 	if (pReply == nullptr)
 	{
 		return false;
@@ -240,8 +224,6 @@ bool NFRedisClient::ZREMRANGEBYRANK(const std::string & key, const int start, co
 	{
 		del_num = (int)pReply->integer;
 	}
-
-	freeReplyObject(pReply);
 
 	return (bool)del_num;
 }
@@ -253,7 +235,7 @@ bool NFRedisClient::ZREMRANGEBYSCORE(const std::string & key, const double start
 	cmd << start;
 	cmd << end;
 
-	redisReply* pReply = BuildSendCmd(cmd);
+	NF_SHARE_PTR<redisReply> pReply = BuildSendCmd(cmd);
 	if (pReply == nullptr)
 	{
 		return false;
@@ -266,8 +248,6 @@ bool NFRedisClient::ZREMRANGEBYSCORE(const std::string & key, const double start
 		del_num = (int)pReply->integer;
 	}
 
-	freeReplyObject(pReply);
-
 	return (bool)del_num;
 }
 
@@ -278,7 +258,7 @@ bool NFRedisClient::ZREVRANGE(const std::string& key, const int start, const int
 	cmd << start;
 	cmd << end;
 
-	redisReply* pReply = BuildSendCmd(cmd);
+	NF_SHARE_PTR<redisReply> pReply = BuildSendCmd(cmd);
 	if (pReply == nullptr)
 	{
 		return false;
@@ -302,10 +282,8 @@ bool NFRedisClient::ZREVRANGE(const std::string& key, const int start, const int
 	}
 	catch (...)
 	{
-
+		return false;
 	}
-
-	freeReplyObject(pReply);
 
 	return true;
 }
@@ -319,7 +297,7 @@ bool NFRedisClient::ZREVRANGEBYSCORE(const std::string & key, const double start
 	cmd << end;
 	cmd << "WITHSCORES";
 
-	redisReply* pReply = BuildSendCmd(cmd);
+	NF_SHARE_PTR<redisReply> pReply = BuildSendCmd(cmd);
 	if (pReply == nullptr)
 	{
 		return false;
@@ -343,10 +321,8 @@ bool NFRedisClient::ZREVRANGEBYSCORE(const std::string & key, const double start
 	}
 	catch (...)
 	{
-
+		return false;
 	}
-
-	freeReplyObject(pReply);
 
 	return true;
 }
@@ -357,7 +333,7 @@ bool NFRedisClient::ZREVRANK(const std::string & key, const std::string & member
 	cmd << key;
 	cmd << member;
 
-	redisReply* pReply = BuildSendCmd(cmd);
+	NF_SHARE_PTR<redisReply> pReply = BuildSendCmd(cmd);
 	if (pReply == nullptr)
 	{
 		return false;
@@ -367,8 +343,6 @@ bool NFRedisClient::ZREVRANK(const std::string & key, const std::string & member
 	{
 		rank = (int)pReply->integer;
 	}
-
-	freeReplyObject(pReply);
 
 	return true;
 }
@@ -380,7 +354,7 @@ bool NFRedisClient::ZSCORE(const std::string & key, const std::string & member, 
 	cmd << member;
 
 
-	redisReply* pReply = BuildSendCmd(cmd);
+	NF_SHARE_PTR<redisReply> pReply = BuildSendCmd(cmd);
 	if (pReply == nullptr)
 	{
 		return false;
@@ -391,8 +365,6 @@ bool NFRedisClient::ZSCORE(const std::string & key, const std::string & member, 
 	{
 		success = NF_StrTo<double>(pReply->str, score);
 	}
-
-	freeReplyObject(pReply);
 
 	return success;
 }
