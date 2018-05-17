@@ -10,7 +10,7 @@ bool NFRedisClient::APPEND(const std::string &key, const std::string &value, int
     cmd << key;
     cmd << value;
 
-	redisReply* pReply = BuildSendCmd(cmd);
+	NF_SHARE_PTR<redisReply> pReply = BuildSendCmd(cmd);
 	if (pReply == nullptr)
 	{
 		return false;
@@ -21,8 +21,6 @@ bool NFRedisClient::APPEND(const std::string &key, const std::string &value, int
 		length = pReply->integer;
 	}
 
-	freeReplyObject(pReply);
-
 	return true;
 }
 
@@ -31,7 +29,7 @@ bool NFRedisClient::DECR(const std::string& key, int64_t& value)
 	NFRedisCommand cmd(GET_NAME(DECR));
     cmd << key;
 
-	redisReply* pReply = BuildSendCmd(cmd);
+	NF_SHARE_PTR<redisReply> pReply = BuildSendCmd(cmd);
 	if (pReply == nullptr)
 	{
 		return false;
@@ -40,11 +38,9 @@ bool NFRedisClient::DECR(const std::string& key, int64_t& value)
 	if (pReply->type == REDIS_REPLY_INTEGER)
 	{
 		value = pReply->integer;
-		freeReplyObject(pReply);
+		
 		return true;
 	}
-
-	freeReplyObject(pReply);
 
 	return false;
 }
@@ -55,7 +51,7 @@ bool NFRedisClient::DECRBY(const std::string &key, const int64_t decrement, int6
     cmd << key;
     cmd << decrement;
 
-	redisReply* pReply = BuildSendCmd(cmd);
+	NF_SHARE_PTR<redisReply> pReply = BuildSendCmd(cmd);
 	if (pReply == nullptr)
 	{
 		return false;
@@ -64,11 +60,9 @@ bool NFRedisClient::DECRBY(const std::string &key, const int64_t decrement, int6
 	if (pReply->type == REDIS_REPLY_INTEGER)
 	{
 		value = pReply->integer;
-		freeReplyObject(pReply);
+		
 		return true;
 	}
-
-	freeReplyObject(pReply);
 
 	return false;
 }
@@ -79,7 +73,7 @@ bool NFRedisClient::GETSET(const std::string &key, const std::string &value, std
     cmd << key;
     cmd << value;
 
-	redisReply* pReply = BuildSendCmd(cmd);
+	NF_SHARE_PTR<redisReply> pReply = BuildSendCmd(cmd);
 	if (pReply == nullptr)
 	{
 		return false;
@@ -88,11 +82,9 @@ bool NFRedisClient::GETSET(const std::string &key, const std::string &value, std
 	if (pReply->type == REDIS_REPLY_STRING)
 	{
 		oldValue = pReply->str;
-		freeReplyObject(pReply);
+		
 		return true;
 	}
-
-	freeReplyObject(pReply);
 
 	return false;
 }
@@ -102,7 +94,7 @@ bool NFRedisClient::INCR(const std::string &key, int64_t& value)
     NFRedisCommand cmd(GET_NAME(INCR));
     cmd << key;
 
-	redisReply* pReply = BuildSendCmd(cmd);
+	NF_SHARE_PTR<redisReply> pReply = BuildSendCmd(cmd);
 	if (pReply == nullptr)
 	{
 		return false;
@@ -111,11 +103,9 @@ bool NFRedisClient::INCR(const std::string &key, int64_t& value)
 	if (pReply->type == REDIS_REPLY_INTEGER)
 	{
 		value = pReply->integer;
-		freeReplyObject(pReply);
+		
 		return true;
 	}
-
-	freeReplyObject(pReply);
 
 	return false;
 }
@@ -126,7 +116,7 @@ bool NFRedisClient::INCRBY(const std::string &key, const int64_t increment, int6
     cmd << key;
     cmd << increment;
 
-	redisReply* pReply = BuildSendCmd(cmd);
+	NF_SHARE_PTR<redisReply> pReply = BuildSendCmd(cmd);
 	if (pReply == nullptr)
 	{
 		return false;
@@ -135,11 +125,9 @@ bool NFRedisClient::INCRBY(const std::string &key, const int64_t increment, int6
 	if (pReply->type == REDIS_REPLY_INTEGER)
 	{
 		value = pReply->integer;
-		freeReplyObject(pReply);
+		
 		return true;
 	}
-
-	freeReplyObject(pReply);
 
 	return false;
 }
@@ -150,7 +138,7 @@ bool NFRedisClient::INCRBYFLOAT(const std::string &key, const float increment, f
     cmd << key;
     cmd << increment;
 
-	redisReply* pReply = BuildSendCmd(cmd);
+	NF_SHARE_PTR<redisReply> pReply = BuildSendCmd(cmd);
 	if (pReply == nullptr)
 	{
 		return false;
@@ -161,8 +149,6 @@ bool NFRedisClient::INCRBYFLOAT(const std::string &key, const float increment, f
 	{
 		success = NF_StrTo<float>(pReply->str, value);
 	}
-
-	freeReplyObject(pReply);
 
 	return success;
 }
@@ -176,7 +162,7 @@ bool NFRedisClient::MGET(const string_vector &keys, string_vector &values)
         cmd << keys[i];
     }
 
-	redisReply* pReply = BuildSendCmd(cmd);
+	NF_SHARE_PTR<redisReply> pReply = BuildSendCmd(cmd);
 	if (pReply == nullptr)
 	{
 		return false;
@@ -191,12 +177,9 @@ bool NFRedisClient::MGET(const string_vector &keys, string_vector &values)
 				values.emplace_back(std::move(std::string(pReply->element[k]->str)));
 			}
 		}
-
-		freeReplyObject(pReply);
+	
 		return true;
 	}
-
-	freeReplyObject(pReply);
 
 	return false;
 }
@@ -211,10 +194,10 @@ void NFRedisClient::MSET(const string_pair_vector &values)
         cmd << values[i].second;
     }
 
-	redisReply* pReply = BuildSendCmd(cmd);
+	NF_SHARE_PTR<redisReply> pReply = BuildSendCmd(cmd);
 	if (pReply != nullptr)
 	{
-		freeReplyObject(pReply);
+		
 	}
 }
 
@@ -225,13 +208,11 @@ bool NFRedisClient::SETEX(const std::string &key, const std::string &value, int 
     cmd << value;
     cmd << time;
 
-	redisReply* pReply = BuildSendCmd(cmd);
+	NF_SHARE_PTR<redisReply> pReply = BuildSendCmd(cmd);
 	if (pReply == nullptr)
 	{
 		return false;
 	}
-
-	freeReplyObject(pReply);
 
 	return true;
 }
@@ -242,7 +223,7 @@ bool NFRedisClient::SETNX(const std::string &key, const std::string &value)
     cmd << key;
     cmd << value;
 
-	redisReply* pReply = BuildSendCmd(cmd);
+	NF_SHARE_PTR<redisReply> pReply = BuildSendCmd(cmd);
 	if (pReply == nullptr)
 	{
 		return false;
@@ -254,8 +235,6 @@ bool NFRedisClient::SETNX(const std::string &key, const std::string &value)
 		success = (bool)pReply->integer;
 	}
 
-	freeReplyObject(pReply);
-
 	return success;
 }
 
@@ -264,7 +243,7 @@ bool NFRedisClient::STRLEN(const std::string &key, int& length)
     NFRedisCommand cmd(GET_NAME(STRLEN));
     cmd << key;
 
-	redisReply* pReply = BuildSendCmd(cmd);
+	NF_SHARE_PTR<redisReply> pReply = BuildSendCmd(cmd);
 	if (pReply == nullptr)
 	{
 		return false;
@@ -273,11 +252,9 @@ bool NFRedisClient::STRLEN(const std::string &key, int& length)
 	if (pReply->type == REDIS_REPLY_INTEGER)
 	{
 		length = (int)pReply->integer;
-		freeReplyObject(pReply);
+		
 		return length != 0;
 	}
-
-	freeReplyObject(pReply);
 
 	return false;
 }
@@ -288,13 +265,11 @@ bool NFRedisClient::SET(const std::string &key, const std::string &value)
     cmd << key;
     cmd << value;
 
-	redisReply* pReply = BuildSendCmd(cmd);
+	NF_SHARE_PTR<redisReply> pReply = BuildSendCmd(cmd);
 	if (pReply == nullptr)
 	{
 		return false;
 	}
-
-	freeReplyObject(pReply);
 
 	return true;
 }
@@ -304,7 +279,7 @@ bool NFRedisClient::GET(const std::string& key, std::string & value)
     NFRedisCommand cmd(GET_NAME(GET));
     cmd << key;
 
-	redisReply* pReply = BuildSendCmd(cmd);
+	NF_SHARE_PTR<redisReply> pReply = BuildSendCmd(cmd);
 	if (pReply == nullptr)
 	{
 		return false;
@@ -313,11 +288,9 @@ bool NFRedisClient::GET(const std::string& key, std::string & value)
 	if (pReply->type == REDIS_REPLY_STRING)
 	{
 		value.append(pReply->str, pReply->len);
-		freeReplyObject(pReply);
+		
 		return true;
 	}
-
-	freeReplyObject(pReply);
 
 	return false;
 }
