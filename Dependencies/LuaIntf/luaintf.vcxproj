@@ -19,14 +19,6 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="impl\CppArg.h" />
-    <ClInclude Include="impl\CppBindClass.h" />
-    <ClInclude Include="impl\CppBindModule.h" />
-    <ClInclude Include="impl\CppFunction.h" />
-    <ClInclude Include="impl\CppInvoke.h" />
-    <ClInclude Include="impl\CppObject.h" />
-    <ClInclude Include="impl\LuaException.h" />
-    <ClInclude Include="impl\LuaType.h" />
     <ClInclude Include="LuaCompat.h" />
     <ClInclude Include="LuaContext.h" />
     <ClInclude Include="LuaIntf.h" />
