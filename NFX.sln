@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.27428.2002
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "NFSDK", "NFSDK", "{410C8A08-63DC-45B2-ADB9-08CD991861F0}"
 EndProject
@@ -356,6 +356,8 @@ EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "NFLoginNet_HttpServerPlugin", "NFServer\NFLoginrNet_HttpServerPlugin\NFLoginNet_HttpServerPlugin.vcxproj", "{5EBB5D6A-5C7B-4A18-8F60-4094173771BD}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "hiredis", "Dependencies\hiredis\hiredis_win\hiredis\msvc\msvc.vcxproj", "{B45000FF-F17A-4F1C-89E5-14C513B20DC9}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "NFLuaScriptPlugin", "NFComm\NFLuaScriptPlugin\NFLuaScriptPlugin.vcxproj", "{0D7E27F4-11C2-4F1D-8900-CC24297E4397}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -721,6 +723,12 @@ Global
 		{B45000FF-F17A-4F1C-89E5-14C513B20DC9}.Release|x64.Build.0 = Release|x64
 		{B45000FF-F17A-4F1C-89E5-14C513B20DC9}.Release|x86.ActiveCfg = Release|Win32
 		{B45000FF-F17A-4F1C-89E5-14C513B20DC9}.Release|x86.Build.0 = Release|Win32
+		{0D7E27F4-11C2-4F1D-8900-CC24297E4397}.Debug|x64.ActiveCfg = Debug|x64
+		{0D7E27F4-11C2-4F1D-8900-CC24297E4397}.Debug|x64.Build.0 = Debug|x64
+		{0D7E27F4-11C2-4F1D-8900-CC24297E4397}.Debug|x86.ActiveCfg = Debug|x64
+		{0D7E27F4-11C2-4F1D-8900-CC24297E4397}.Release|x64.ActiveCfg = Release|x64
+		{0D7E27F4-11C2-4F1D-8900-CC24297E4397}.Release|x64.Build.0 = Release|x64
+		{0D7E27F4-11C2-4F1D-8900-CC24297E4397}.Release|x86.ActiveCfg = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -789,6 +797,7 @@ Global
 		{C627AAF0-CC57-4933-813E-916FEE450511} = {799B1E29-07FC-4D54-96D3-EDBB4C40CF21}
 		{5EBB5D6A-5C7B-4A18-8F60-4094173771BD} = {9F68A20B-2B35-4C33-9C36-872C1CA2D5BE}
 		{B45000FF-F17A-4F1C-89E5-14C513B20DC9} = {E78C3B11-6914-488A-B068-B3BF4F5150F5}
+		{0D7E27F4-11C2-4F1D-8900-CC24297E4397} = {410C8A08-63DC-45B2-ADB9-08CD991861F0}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {0FB8E2D6-BCE5-48BD-93AE-A041C5B39F3D}
