@@ -25,6 +25,7 @@ private:
     void TestSet();
     void TestSort();
     void TestString();
+	void TestPubSub();
 
 private:
     NFRedisClient mxRedisClient;
