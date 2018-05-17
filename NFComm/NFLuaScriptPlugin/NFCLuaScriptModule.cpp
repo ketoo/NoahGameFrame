@@ -129,7 +129,7 @@ bool NFCLuaScriptModule::AddPropertyCallBack(const NFGUID& self, std::string& st
     return true;
 }
 
-int NFCLuaScriptModule::OnLuaPropertyCB(const NFGUID& self, const std::string& strPropertyName, const NFDataList::TData& oldVar, const NFDataList::TData& newVar)
+int NFCLuaScriptModule::OnLuaPropertyCB(const NFGUID& self, const std::string& strPropertyName, const NFData& oldVar, const NFData& newVar)
 {
     return CallLuaFuncFromMap(m_luaPropertyCallBackFuncMap, strPropertyName, self, strPropertyName, oldVar, newVar);
 }
@@ -143,7 +143,7 @@ bool NFCLuaScriptModule::AddRecordCallBack(const NFGUID& self, std::string& strR
     return true;
 }
 
-int NFCLuaScriptModule::OnLuaRecordCB(const NFGUID& self, const RECORD_EVENT_DATA& xEventData, const NFDataList::TData& oldVar, const NFDataList::TData& newVar)
+int NFCLuaScriptModule::OnLuaRecordCB(const NFGUID& self, const RECORD_EVENT_DATA& xEventData, const NFData& oldVar, const NFData& newVar)
 {
     return CallLuaFuncFromMap(m_luaRecordCallBackFuncMap, xEventData.strRecordName, self, xEventData.strRecordName, xEventData.nOpType, xEventData.nRow, xEventData.nCol, oldVar, newVar);
 }

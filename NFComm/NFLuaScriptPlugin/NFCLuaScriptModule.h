@@ -9,13 +9,13 @@
 #ifndef NFC_LUA_SCRIPT_MODULE_H
 #define NFC_LUA_SCRIPT_MODULE_H
 
-#define LUAINTF_LINK_LUA_COMPILED_IN_CXX 0
+//just using it if you want to use luaintf with C
+//#define LUAINTF_LINK_LUA_COMPILED_IN_CXX 0
 
 #include "Dependencies/LuaIntf/LuaIntf.h"
 #include "NFComm/NFPluginModule/NFIKernelModule.h"
 #include "NFComm/NFPluginModule/NFIClassModule.h"
 #include "NFComm/NFPluginModule/NFILuaScriptModule.h"
-#include "NFComm/NFPluginModule/NFIScriptModule.h"
 #include "NFComm/NFPluginModule/NFIEventModule.h"
 #include "NFComm/NFPluginModule/NFIScheduleModule.h"
 #include "NFComm/NFPluginModule/NFIEventModule.h"
@@ -50,8 +50,8 @@ protected:
     template<typename T1, typename... T2>
     bool CallLuaFuncFromMap(NFMap<T1, NFMap<NFGUID, NFList<string>>>& funcMap, T1 key, const NFGUID& self, T2... arg);
 
-    int OnLuaPropertyCB(const NFGUID& self, const std::string& strPropertyName, const NFDataList::TData& oldVar, const NFDataList::TData& newVar);
-    int OnLuaRecordCB(const NFGUID& self, const RECORD_EVENT_DATA& xEventData, const NFDataList::TData& oldVar, const NFDataList::TData& newVar);
+    int OnLuaPropertyCB(const NFGUID& self, const std::string& strPropertyName, const NFData& oldVar, const NFData& newVar);
+    int OnLuaRecordCB(const NFGUID& self, const RECORD_EVENT_DATA& xEventData, const NFData& oldVar, const NFData& newVar);
     int OnLuaHeartBeatCB(const NFGUID& self, const std::string& strHeartBeatName, const float fTime, const int nCount);
     int OnLuaEventCB(const NFGUID& self, const NFEventDefine nEventID, const NFDataList& argVar);
 
