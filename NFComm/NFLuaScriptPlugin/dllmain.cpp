@@ -4,7 +4,6 @@
 
 #if NF_PLATFORM == NF_PLATFORM_WIN
 #pragma comment( lib, "ws2_32" )
-#pragma comment( lib, "NFCore_d.lib" )
 #pragma comment( lib, "lua_d.lib" )
 
 #elif NF_PLATFORM == NF_PLATFORM_LINUX || NF_PLATFORM == NF_PLATFORM_ANDROID
