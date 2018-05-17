@@ -1,7 +1,3 @@
-//
-// Author: LUSHENG HUANG Created on 17/11/17.
-//
-
 #include "NFRedisClient.h"
 
 bool NFRedisClient::LINDEX(const std::string &key, const int index, std::string& value)
