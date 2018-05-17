@@ -104,7 +104,7 @@ int NFCLuaScriptModule::OnClassEventCB(const NFGUID& self, const std::string& st
         try
         {
             LuaIntf::LuaRef func(l, funcName->c_str());
-            func.call(self, strClassName, (int)eClassEvent, (NFCDataList)var);
+            func.call(self, strClassName, (int)eClassEvent, (NFDataList)var);
         }
         catch (LuaIntf::LuaException& e)
         {
@@ -159,7 +159,7 @@ bool NFCLuaScriptModule::AddEventCallBack(const NFGUID& self, const NFEventDefin
 
 int NFCLuaScriptModule::OnLuaEventCB(const NFGUID& self, const NFEventDefine nEventID, const NFDataList& argVar)
 {
-    return CallLuaFuncFromMap(m_luaEventCallBackFuncMap, (int)nEventID, self, nEventID, (NFCDataList&)argVar);
+    return CallLuaFuncFromMap(m_luaEventCallBackFuncMap, (int)nEventID, self, nEventID, (NFDataList&)argVar);
 }
 
 bool NFCLuaScriptModule::AddHeartBeat(const NFGUID& self, std::string& strHeartBeatName, std::string& luaFunc, const float fTime, const int nCount)
@@ -286,7 +286,7 @@ bool NFCLuaScriptModule::Regisger()
     .addFunction("CreateScene", &NFIKernelModule::CreateScene)
     .addFunction("CreateObject", &NFIKernelModule::CreateObject)
     .addFunction("DoEvent", (bool (NFIKernelModule::*)(const NFGUID&, const int, const NFDataList&))&NFIKernelModule::DoEvent)
-    .addFunction("ExistContainer", &NFIKernelModule::ExistContainer)
+    //.addFunction("ExistContainer", &NFIKernelModule::ExistContainer)
     .addFunction("SetPropertyInt", &NFIKernelModule::SetPropertyInt)
     .addFunction("SetPropertyFloat", &NFIKernelModule::SetPropertyFloat)
     .addFunction("SetPropertyString", &NFIKernelModule::SetPropertyString)
@@ -316,38 +316,38 @@ bool NFCLuaScriptModule::Regisger()
     LuaIntf::LuaBinding(l).beginClass<NFDataList>("NFDataList")
     .endClass();
 
-    LuaIntf::LuaBinding(l).beginExtendClass<NFCDataList, NFDataList>("NFCDataList")
+    LuaIntf::LuaBinding(l).beginExtendClass<NFDataList, NFDataList>("NFDataList")
     .addConstructor(LUA_ARGS())
-    .addFunction("IsEmpty", &NFCDataList::IsEmpty)
-    .addFunction("GetCount", &NFCDataList::GetCount)
-    .addFunction("Type", &NFCDataList::Type)
-    .addFunction("AddInt", &NFCDataList::AddInt)
-    .addFunction("AddFloat", &NFCDataList::AddFloat)
-    .addFunction("AddString", &NFCDataList::AddStringFromChar)
-    .addFunction("AddObject", &NFCDataList::AddObject)
-    .addFunction("SetInt", &NFCDataList::SetInt)
-    .addFunction("SetFloat", &NFCDataList::SetFloat)
-    .addFunction("SetString", &NFCDataList::SetString)
-    .addFunction("SetObject", &NFCDataList::SetObject)
-    .addFunction("Int", &NFCDataList::Int)
-    .addFunction("Float", &NFCDataList::Float)
-    .addFunction("String", &NFCDataList::String)
-    .addFunction("Object", &NFCDataList::Object)
+    .addFunction("IsEmpty", &NFDataList::IsEmpty)
+    .addFunction("GetCount", &NFDataList::GetCount)
+    .addFunction("Type", &NFDataList::Type)
+    .addFunction("AddInt", &NFDataList::AddInt)
+    .addFunction("AddFloat", &NFDataList::AddFloat)
+    .addFunction("AddString", &NFDataList::AddStringFromChar)
+    .addFunction("AddObject", &NFDataList::AddObject)
+    .addFunction("SetInt", &NFDataList::SetInt)
+    .addFunction("SetFloat", &NFDataList::SetFloat)
+    .addFunction("SetString", &NFDataList::SetString)
+    .addFunction("SetObject", &NFDataList::SetObject)
+    .addFunction("Int", &NFDataList::Int)
+    .addFunction("Float", &NFDataList::Float)
+    .addFunction("String", &NFDataList::String)
+    .addFunction("Object", &NFDataList::Object)
     .endClass();
 
-    LuaIntf::LuaBinding(l).beginClass<NFCDataList::TData>("TData")
+    LuaIntf::LuaBinding(l).beginClass<NFData>("TData")
     .addConstructor(LUA_ARGS())
-    .addFunction("GetFloat", &NFCDataList::TData::GetFloat)
-    .addFunction("GetInt", &NFCDataList::TData::GetInt)
-    .addFunction("GetObject", &NFCDataList::TData::GetObject)
-    .addFunction("GetString", &NFCDataList::TData::GetCharArr)
-    .addFunction("GetType", &NFCDataList::TData::GetType)
-    .addFunction("IsNullValue", &NFCDataList::TData::IsNullValue)
-    .addFunction("SetFloat", &NFCDataList::TData::SetFloat)
-    .addFunction("SetInt", &NFCDataList::TData::SetInt)
-    .addFunction("SetObject", &NFCDataList::TData::SetObject)
-    .addFunction("SetString", &NFCDataList::TData::SetString)
-    .addFunction("StringValEx", &NFCDataList::TData::StringValEx)
+    .addFunction("GetFloat", &NFData::GetFloat)
+    .addFunction("GetInt", &NFData::GetInt)
+    .addFunction("GetObject", &NFData::GetObject)
+    .addFunction("GetString", &NFData::GetCharArr)
+    .addFunction("GetType", &NFData::GetType)
+    .addFunction("IsNullValue", &NFData::IsNullValue)
+    .addFunction("SetFloat", &NFData::SetFloat)
+    .addFunction("SetInt", &NFData::SetInt)
+    .addFunction("SetObject", &NFData::SetObject)
+    .addFunction("SetString", &NFData::SetString)
+    //.addFunction("StringValEx", &NFData::StringValEx)
     .endClass();
 
     LuaIntf::LuaBinding(l).beginClass<NFCLuaScriptModule>("NFCLuaScriptModule")

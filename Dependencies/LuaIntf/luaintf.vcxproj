@@ -41,7 +41,6 @@
     <ClCompile Include="src\LuaCompat.cpp" />
     <ClCompile Include="src\LuaRef.cpp" />
     <ClCompile Include="src\LuaState.cpp" />
-    <ClCompile Include="src\QtLuaIntf.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{CB6CDCBF-35F7-4248-8BE6-21B051884204}</ProjectGuid>
@@ -126,7 +125,7 @@
       </PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_DEBUG;_LIB;LUAINTF_LINK_LUA_COMPILED_IN_CXX;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <BufferSecurityCheck>false</BufferSecurityCheck>
