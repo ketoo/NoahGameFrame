@@ -6,7 +6,7 @@ public class MainPlayer : MonoBehaviour {
 
 	NFPlayerModule mPlayerModule;
 
-    private float mSyncTime = 0.2f;
+    private float mSyncTime = 0.3f;
     private float mSyncTimeTick = 0.0f;
     
 	public float speed = 0.6f;
@@ -25,6 +25,8 @@ public class MainPlayer : MonoBehaviour {
 
         mController = GetComponent<CharacterController>();
 		mAnimation = GetComponent<Animator>();
+
+		mController.detectCollisions = false;
 
         // get the transform of the main camera
         if (Camera.main != null)

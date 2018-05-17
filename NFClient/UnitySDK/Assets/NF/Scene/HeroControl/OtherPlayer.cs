@@ -20,7 +20,11 @@ public class OtherPlayer : MonoBehaviour {
         // get the components on the object we need ( should not be null due to require component so no need to check )
 		mAnimation = GetComponent<Animator>();
 		mController = GetComponent<CharacterController>();
+
+		mController.detectCollisions = false;
 		targetPos = this.transform.position;
+
+
 	}
 
 	public void JumpTo(Vector3 pos)
@@ -35,10 +39,9 @@ public class OtherPlayer : MonoBehaviour {
 
 		transform.LookAt(pos);
 
-		if (mAnimation)
-		{
-			mAnimation.Play("run");
-		}
+        this.moveDirection = targetPos - this.transform.position;
+
+		mAnimation.Play("run");
     }
 
     private void Update()
@@ -51,11 +54,27 @@ public class OtherPlayer : MonoBehaviour {
 		}
 		else
 		{
-			this.moveDirection = targetPos - this.transform.position;
-		}
 
-        moveDirection.y -= gravity * Time.deltaTime;
-		CollisionFlags flags = mController.Move(this.moveDirection.normalized * speed * Time.deltaTime);
-        grounded = (flags & CollisionFlags.CollidedBelow) != 0;
+            //mController.SimpleMove(this.moveDirection.normalized * speed);
+            if (grounded)
+            {
+                moveDirection.y = 0;
+            }
+            else
+            {
+                moveDirection.y -= gravity * Time.deltaTime;
+            }
+
+			Vector3 vector = this.moveDirection.normalized * speed * Time.deltaTime;
+			if (vector.sqrMagnitude >= fDis)
+			{
+				transform.position = targetPos;
+			}
+			else
+			{
+				CollisionFlags flags = mController.Move(vector);
+                grounded = (flags & CollisionFlags.CollidedBelow) != 0; 	
+			}
+		}
     }
 }
