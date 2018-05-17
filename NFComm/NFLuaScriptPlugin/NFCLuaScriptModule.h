@@ -68,7 +68,7 @@ protected:
 	NFIScheduleModule* m_pScheduleModule;
 
 protected:
-    LuaIntf::LuaContext l;
+    LuaIntf::LuaContext mLuaContext;
     int64_t mnTime;
     NFMap<std::string, NFMap<NFGUID, NFList<std::string>>> m_luaPropertyCallBackFuncMap;
     NFMap<std::string, NFMap<NFGUID, NFList<std::string>>> m_luaRecordCallBackFuncMap;
