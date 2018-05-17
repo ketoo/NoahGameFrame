@@ -4,35 +4,8 @@
     <Filter Include="src">
       <UniqueIdentifier>{ada599ed-2042-4bb6-be74-419c4019e854}</UniqueIdentifier>
     </Filter>
-    <Filter Include="impl">
-      <UniqueIdentifier>{b99bf90d-0ffa-4b7a-a945-613a07ce0e0b}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="impl\CppArg.h">
-      <Filter>impl</Filter>
-    </ClInclude>
-    <ClInclude Include="impl\CppBindClass.h">
-      <Filter>impl</Filter>
-    </ClInclude>
-    <ClInclude Include="impl\CppBindModule.h">
-      <Filter>impl</Filter>
-    </ClInclude>
-    <ClInclude Include="impl\CppFunction.h">
-      <Filter>impl</Filter>
-    </ClInclude>
-    <ClInclude Include="impl\CppInvoke.h">
-      <Filter>impl</Filter>
-    </ClInclude>
-    <ClInclude Include="impl\CppObject.h">
-      <Filter>impl</Filter>
-    </ClInclude>
-    <ClInclude Include="impl\LuaException.h">
-      <Filter>impl</Filter>
-    </ClInclude>
-    <ClInclude Include="impl\LuaType.h">
-      <Filter>impl</Filter>
-    </ClInclude>
     <ClInclude Include="LuaCompat.h" />
     <ClInclude Include="LuaContext.h" />
     <ClInclude Include="LuaIntf.h" />
