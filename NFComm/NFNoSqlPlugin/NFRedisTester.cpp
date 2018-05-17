@@ -4,13 +4,19 @@
 #include <assert.h>
 #include "NFRedisTester.h"
 
-NFRedisTester::NFRedisTester(const std::string& ip, int port)
+NFRedisTester::NFRedisTester(const std::string& ip, int port, const std::string& auth)
 {
-    mxRedisClient.Connect(ip, port);
+    mxRedisClient.Connect(ip, port, auth);
 }
 
 bool NFRedisTester::RunTester()
 {
+	if (!mxRedisClient.GetAuthKey().empty() && !mxRedisClient.AUTH(mxRedisClient.GetAuthKey()))
+	{
+		printf("password error!\n");
+		return true;
+	}
+
     mxRedisClient.FLUSHDB();
 	TestKey();
 	TestString();
