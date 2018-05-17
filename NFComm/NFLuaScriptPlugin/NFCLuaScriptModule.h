@@ -40,7 +40,7 @@ public:
     bool AddRecordCallBack(const NFGUID& self, std::string& strRecordName, std::string& luaFunc);
     bool AddEventCallBack(const NFGUID& self, const NFEventDefine nEventID, std::string& luaFunc);
     bool AddHeartBeat(const NFGUID& self, std::string& strHeartBeatName, std::string& luaFunc, const float fTime, const int nCount);
-    int AddRow(const NFGUID& self, std::string& strRecordName, const NFIDataList& var);
+    int AddRow(const NFGUID& self, std::string& strRecordName, const NFDataList& var);
 
     bool AddClassCallBack(std::string& className, std::string& funcName);
 
@@ -50,12 +50,12 @@ protected:
     template<typename T1, typename... T2>
     bool CallLuaFuncFromMap(NFMap<T1, NFMap<NFGUID, NFList<string>>>& funcMap, T1 key, const NFGUID& self, T2... arg);
 
-    int OnLuaPropertyCB(const NFGUID& self, const std::string& strPropertyName, const NFIDataList::TData& oldVar, const NFIDataList::TData& newVar);
-    int OnLuaRecordCB(const NFGUID& self, const RECORD_EVENT_DATA& xEventData, const NFIDataList::TData& oldVar, const NFIDataList::TData& newVar);
+    int OnLuaPropertyCB(const NFGUID& self, const std::string& strPropertyName, const NFDataList::TData& oldVar, const NFDataList::TData& newVar);
+    int OnLuaRecordCB(const NFGUID& self, const RECORD_EVENT_DATA& xEventData, const NFDataList::TData& oldVar, const NFDataList::TData& newVar);
     int OnLuaHeartBeatCB(const NFGUID& self, const std::string& strHeartBeatName, const float fTime, const int nCount);
-    int OnLuaEventCB(const NFGUID& self, const NFEventDefine nEventID, const NFIDataList& argVar);
+    int OnLuaEventCB(const NFGUID& self, const NFEventDefine nEventID, const NFDataList& argVar);
 
-    int OnClassEventCB(const NFGUID& self, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFIDataList& var);
+    int OnClassEventCB(const NFGUID& self, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFDataList& var);
 
 protected:
     bool Regisger();
