@@ -96,7 +96,7 @@ bool NFCLuaScriptModule::AddClassCallBack(std::string& className, std::string& f
     }
 }
 
-int NFCLuaScriptModule::OnClassEventCB(const NFGUID& self, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFIDataList& var)
+int NFCLuaScriptModule::OnClassEventCB(const NFGUID& self, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFDataList& var)
 {
     auto funcName = m_ClassEventFuncMap.GetElement(strClassName);
     if (funcName)
@@ -129,7 +129,7 @@ bool NFCLuaScriptModule::AddPropertyCallBack(const NFGUID& self, std::string& st
     return true;
 }
 
-int NFCLuaScriptModule::OnLuaPropertyCB(const NFGUID& self, const std::string& strPropertyName, const NFIDataList::TData& oldVar, const NFIDataList::TData& newVar)
+int NFCLuaScriptModule::OnLuaPropertyCB(const NFGUID& self, const std::string& strPropertyName, const NFDataList::TData& oldVar, const NFDataList::TData& newVar)
 {
     return CallLuaFuncFromMap(m_luaPropertyCallBackFuncMap, strPropertyName, self, strPropertyName, oldVar, newVar);
 }
@@ -143,7 +143,7 @@ bool NFCLuaScriptModule::AddRecordCallBack(const NFGUID& self, std::string& strR
     return true;
 }
 
-int NFCLuaScriptModule::OnLuaRecordCB(const NFGUID& self, const RECORD_EVENT_DATA& xEventData, const NFIDataList::TData& oldVar, const NFIDataList::TData& newVar)
+int NFCLuaScriptModule::OnLuaRecordCB(const NFGUID& self, const RECORD_EVENT_DATA& xEventData, const NFDataList::TData& oldVar, const NFDataList::TData& newVar)
 {
     return CallLuaFuncFromMap(m_luaRecordCallBackFuncMap, xEventData.strRecordName, self, xEventData.strRecordName, xEventData.nOpType, xEventData.nRow, xEventData.nCol, oldVar, newVar);
 }
@@ -157,7 +157,7 @@ bool NFCLuaScriptModule::AddEventCallBack(const NFGUID& self, const NFEventDefin
     return true;
 }
 
-int NFCLuaScriptModule::OnLuaEventCB(const NFGUID& self, const NFEventDefine nEventID, const NFIDataList& argVar)
+int NFCLuaScriptModule::OnLuaEventCB(const NFGUID& self, const NFEventDefine nEventID, const NFDataList& argVar)
 {
     return CallLuaFuncFromMap(m_luaEventCallBackFuncMap, (int)nEventID, self, nEventID, (NFCDataList&)argVar);
 }
@@ -176,7 +176,7 @@ int NFCLuaScriptModule::OnLuaHeartBeatCB(const NFGUID& self, const std::string& 
     return CallLuaFuncFromMap(m_luaHeartBeatCallBackFuncMap, strHeartBeatName, self, strHeartBeatName, fTime, nCount);
 }
 
-int NFCLuaScriptModule::AddRow(const NFGUID& self, std::string& strRecordName, const NFIDataList& var)
+int NFCLuaScriptModule::AddRow(const NFGUID& self, std::string& strRecordName, const NFDataList& var)
 {
     NF_SHARE_PTR<NFIRecord> pRecord = m_pKernelModule->FindRecord(self, strRecordName);
     if (nullptr == pRecord)
@@ -285,7 +285,7 @@ bool NFCLuaScriptModule::Regisger()
     .addFunction("GetPluginManager", &NFIKernelModule::GetPluginManager)
     .addFunction("CreateScene", &NFIKernelModule::CreateScene)
     .addFunction("CreateObject", &NFIKernelModule::CreateObject)
-    .addFunction("DoEvent", (bool (NFIKernelModule::*)(const NFGUID&, const int, const NFIDataList&))&NFIKernelModule::DoEvent)
+    .addFunction("DoEvent", (bool (NFIKernelModule::*)(const NFGUID&, const int, const NFDataList&))&NFIKernelModule::DoEvent)
     .addFunction("ExistContainer", &NFIKernelModule::ExistContainer)
     .addFunction("SetPropertyInt", &NFIKernelModule::SetPropertyInt)
     .addFunction("SetPropertyFloat", &NFIKernelModule::SetPropertyFloat)
@@ -313,10 +313,10 @@ bool NFCLuaScriptModule::Regisger()
     .addFunction("SetHead", &NFGUID::SetHead)
     .endClass();
 
-    LuaIntf::LuaBinding(l).beginClass<NFIDataList>("NFIDataList")
+    LuaIntf::LuaBinding(l).beginClass<NFDataList>("NFDataList")
     .endClass();
 
-    LuaIntf::LuaBinding(l).beginExtendClass<NFCDataList, NFIDataList>("NFCDataList")
+    LuaIntf::LuaBinding(l).beginExtendClass<NFCDataList, NFDataList>("NFCDataList")
     .addConstructor(LUA_ARGS())
     .addFunction("IsEmpty", &NFCDataList::IsEmpty)
     .addFunction("GetCount", &NFCDataList::GetCount)
