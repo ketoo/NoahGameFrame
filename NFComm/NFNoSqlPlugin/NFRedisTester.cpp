@@ -21,9 +21,10 @@ bool NFRedisTester::RunTester()
 	TestKey();
 	TestString();
 	TestList();
-    TestHash();
-    TestSet();
-    TestSort();
+	TestHash();
+	TestSet();
+	TestSort();
+	TestPubSub();
 
 	return true;
 }
@@ -269,7 +270,21 @@ void NFRedisTester::TestList()
 
 void NFRedisTester::TestSet()
 {
+	struct A
+	{
+		int a = 100;
+		short b = 200;
+	};
+	A a;
 
+	std::string strKey = "TestSetKey1:";
+	std::string strBinary((char*)&a, sizeof(a));
+	mxRedisClient.SADD(strKey, strBinary);
+
+	string_vector members;
+	mxRedisClient.SMEMBERS(strKey, members);
+	A* pa = (A*)members[0].c_str();
+	assert(pa->a == 100 && pa->b == 200);
 }
 
 void NFRedisTester::TestSort()
@@ -352,6 +367,11 @@ void NFRedisTester::TestString()
 		assert(mxRedisClient.GET(vstringListKey[i], strGET) == true);
 		assert(strGET == vstringListValue[i]);
 	}
+
+}
+
+void NFRedisTester::TestPubSub()
+{
 
 }
 
