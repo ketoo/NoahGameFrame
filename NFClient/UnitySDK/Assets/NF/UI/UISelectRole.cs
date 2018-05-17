@@ -41,7 +41,7 @@ public class UISelectRole : UIDialog {
     // UI Event
     private void onCreateRoleClick()
     {
-        string strRoleName = "TestRole" + Random.Range(0, 10000);
+        string strRoleName = "TestRole" + Random.Range(1000, 10000);
 		mPlayerModule.RequireCreateRole(strRoleName, 1, 1);
     }
 

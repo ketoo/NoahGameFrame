@@ -51,8 +51,8 @@ namespace NFSDK
             mNetModule.AddReceiveCallBack(NFMsg.EGameMsgID.EGMI_ACK_PROPERTY_FLOAT, OnPropertyFloat);
             mNetModule.AddReceiveCallBack(NFMsg.EGameMsgID.EGMI_ACK_PROPERTY_STRING, OnPropertyString);
 			mNetModule.AddReceiveCallBack(NFMsg.EGameMsgID.EGMI_ACK_PROPERTY_OBJECT, OnPropertyObject);
-			mNetModule.AddReceiveCallBack(NFMsg.EGameMsgID.EGMI_ACK_RECORD_VECTOR2, OnPropertyVector2);
-			mNetModule.AddReceiveCallBack(NFMsg.EGameMsgID.EGMI_ACK_RECORD_VECTOR3, OnPropertyVector3);
+			mNetModule.AddReceiveCallBack(NFMsg.EGameMsgID.EGMI_ACK_PROPERTY_VECTOR2, OnPropertyVector2);
+			mNetModule.AddReceiveCallBack(NFMsg.EGameMsgID.EGMI_ACK_PROPERTY_VECTOR3, OnPropertyVector3);
 
             mNetModule.AddReceiveCallBack(NFMsg.EGameMsgID.EGMI_ACK_OBJECT_PROPERTY_ENTRY, OnObjectPropertyEntry);
 

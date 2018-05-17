@@ -6,28 +6,21 @@ using UnityStandardAssets.Characters.ThirdPerson;
 
 public class OtherPlayer : MonoBehaviour {
 
-	// Use this for initialization
-	private Transform target;                                    // target to aim for
-    private Vector3 targetPos;                                    // target to aim for
-
+	private float speed;
+	private Vector3 targetPos;
+	private Vector3 moveDirection;
     private CharacterController mController;
 	private Animator mAnimation;
-	private UnityEngine.AI.NavMeshAgent agent;            // the navmesh agent required for the path finding
-    
+
+    public float gravity = 20.0f;
+    private bool grounded = false;
+
 	void Start ()
     {
         // get the components on the object we need ( should not be null due to require component so no need to check )
 		mAnimation = GetComponent<Animator>();
-		agent = GetComponentInChildren<UnityEngine.AI.NavMeshAgent>();
-		if (agent == null)
-		{
-			agent = transform.gameObject.AddComponent<UnityEngine.AI.NavMeshAgent>();
-		}
-
-        agent.updateRotation = false;
-        agent.updatePosition = true;
-        // 其他玩家移动速度减慢
-        agent.speed = 0.9f;
+		mController = GetComponent<CharacterController>();
+		targetPos = this.transform.position;
 	}
 
 	public void JumpTo(Vector3 pos)
@@ -35,11 +28,12 @@ public class OtherPlayer : MonoBehaviour {
         mAnimation.Play("jump");
     }
 
-    public void MoveTo(Vector3 pos)
+    public void MoveTo(float speed, Vector3 pos)
     {
-        if (target != null)
-            target.position = pos;
-        targetPos = pos;
+		this.speed = 0.4f;
+		this.targetPos = pos;
+
+		transform.LookAt(pos);
 
 		if (mAnimation)
 		{
@@ -49,21 +43,19 @@ public class OtherPlayer : MonoBehaviour {
 
     private void Update()
     {
-        if (target != null)
-            agent.SetDestination(target.position);
-        else
-            agent.SetDestination(targetPos);
-
-		if (Vector3.Distance(this.transform.position, targetPos) < 0.05f)
+		float fDis = Mathf.Abs(Vector3.Distance(this.transform.position, targetPos));
+		if (fDis < 0.1f)
 		{
+			moveDirection = Vector3.zero;
 			mAnimation.Play("idle");
 		}
+		else
+		{
+			this.moveDirection = targetPos - this.transform.position;
+		}
 
-		//mController.mo(agent.desiredVelocity);
-    }
-
-    public void SetTarget(Transform target)
-    {
-        this.target = target;
+        moveDirection.y -= gravity * Time.deltaTime;
+		CollisionFlags flags = mController.Move(this.moveDirection.normalized * speed * Time.deltaTime);
+        grounded = (flags & CollisionFlags.CollidedBelow) != 0;
     }
 }

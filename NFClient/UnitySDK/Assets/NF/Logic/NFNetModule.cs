@@ -83,6 +83,7 @@ namespace NFSDK
             writer.Write(NFCNet.ConvertUint16((UInt16)unMsgID));
             writer.Write(NFCNet.ConvertUint32((UInt32)msgLen));
             body.WriteTo(pack);
+
             NFCNet.Instance().sendMsg(pack);
         }
 

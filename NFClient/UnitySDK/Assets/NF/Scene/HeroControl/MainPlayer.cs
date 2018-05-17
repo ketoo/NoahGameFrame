@@ -9,7 +9,7 @@ public class MainPlayer : MonoBehaviour {
     private float mSyncTime = 0.2f;
     private float mSyncTimeTick = 0.0f;
     
-	public float speed = 4.0f;
+	public float speed = 0.6f;
     public float jumpSpeed = 10.0f;
     public float gravity = 20.0f;
     public bool MouseChange = true;
@@ -80,16 +80,16 @@ public class MainPlayer : MonoBehaviour {
         grounded = (flags & CollisionFlags.CollidedBelow) != 0; //当controller处在空中间，grounded为false，即跳动和行走都无效
 
 
-
+		Sync();
     }
 
     void Sync()
 	{
 		mSyncTimeTick += Time.deltaTime;
 
-		if (grounded && mSyncTimeTick > mSyncTime)
+		if (mbMoved && grounded && mSyncTimeTick > mSyncTime)
         {
-            mPlayerModule.RequireMove(transform.position);
+			mPlayerModule.RequireMove(transform.position);
             mSyncTimeTick = 0.0f;
 			mbMoved = false;
         }

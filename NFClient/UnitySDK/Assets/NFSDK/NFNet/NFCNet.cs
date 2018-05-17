@@ -162,8 +162,7 @@ namespace NFSDK
 
             int nByteTrans = m_socket.Send(m_sendPool.Buffer, m_sendPool.ReadPos, nReadSize, SocketFlags.None);
             m_sendPool.ReadPos += nByteTrans;
-            Debug.LogFormat("Send Data{0}", nByteTrans);
-
+            //Debug.LogFormat("Send Data{0}", nByteTrans);
         }
 
         public static UInt16 ConvertUint16(UInt16 value)

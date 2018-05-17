@@ -10,6 +10,7 @@ namespace NFSDK
 		private NFNetModule mNetModule;
 		private NFPlayerModule mPlayerModule;
 		private NFIEventModule mEventModule;
+		private NFHelpModule mHelpModule;
 
 
 		private Dictionary<NFGUID, GameObject> mGameObjectMap = new Dictionary<NFGUID, GameObject>();
@@ -33,6 +34,7 @@ namespace NFSDK
 			mNetModule = FindModule<NFNetModule>();
 			mKernelModule = FindModule<NFIKernelModule>();
 			mEventModule = FindModule<NFIEventModule>();
+			mHelpModule = FindModule<NFHelpModule>();
 
             mKernelModule.RegisterClassCallBack(NFrame.Player.ThisName, OnClassPlayerEventHandler);
             mKernelModule.RegisterClassCallBack(NFrame.NPC.ThisName, OnClassNPCEventHandler);
@@ -77,17 +79,18 @@ namespace NFSDK
 			double fSpeed = valueList.FloatVal(1);
 			long nType = valueList.IntVal(2);
             NFVector3 pos = valueList.Vector3Val(3);
+			Vector3 vPos = new Vector3(pos.X(), pos.Y(), pos.Z());
 
 			if (nType > 0)
 			{
-				otherPlayer.JumpTo(new Vector3(pos.X(), pos.Y(), pos.Z()));
+				otherPlayer.JumpTo(vPos);
 			}
 			else
 			{
-				otherPlayer.MoveTo(new Vector3(pos.X(), pos.Y(), pos.Z()));
+				otherPlayer.MoveTo((float)fSpeed, vPos);
 			}
 
-            Debug.Log("Player Move:" + new Vector3(pos.X(), pos.Y(), pos.Z()).ToString());
+			Debug.Log("Player Move:" + vPos.ToString());
         }
 
         private void OnClassPlayerEventHandler(NFGUID self, int nContainerID, int nGroupID, NFIObject.CLASS_EVENT_TYPE eType, string strClassName, string strConfigIndex)
@@ -136,8 +139,7 @@ namespace NFSDK
                 }
                 else
                 {
-                    var other = player.AddComponent<OtherPlayer>();
-                    other.MoveTo(vec);
+                    player.AddComponent<OtherPlayer>();
                 }
             }
             else if (eType == NFIObject.CLASS_EVENT_TYPE.OBJECT_DESTROY)
