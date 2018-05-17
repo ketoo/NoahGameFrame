@@ -87,10 +87,7 @@ public:
 	* @return true if the timeout was set, false if key does not exist.
 	*/
 	virtual bool EXPIREAT(const std::string& key, const int64_t unixTime) = 0;
-	//NF_SHARE_PTR<NFRedisResult> KEYS(const std::string& key);
-	//NF_SHARE_PTR<NFRedisResult> MIGRATE(const std::string& key);
-	//NF_SHARE_PTR<NFRedisResult> MOVE(const std::string& key);
-	//NF_SHARE_PTR<NFRedisResult> OBJECT(const std::string& key);
+
 	/**
 	* @brief Remove the existing timeout on key, turning the key from volatile (a key with an expire set) to persistent(a key that will never expire as no timeout is associated).
 	* the difference is the times of the cmd EXPIREAT is unix timestamp
@@ -98,14 +95,7 @@ public:
 	* @return true if the timeout was removed, false if key does not exist or does not have an associated timeout.
 	*/
 	virtual bool PERSIST(const std::string& key) = 0;
-	//NF_SHARE_PTR<NFRedisResult> PEXPIRE(const std::string& key);
-	//NF_SHARE_PTR<NFRedisResult> PEXPIREAT(const std::string& key);
-	//NF_SHARE_PTR<NFRedisResult> PTTL(const std::string& key);
-	//NF_SHARE_PTR<NFRedisResult> RANDOMKEY(const std::string& key);
-	//NF_SHARE_PTR<NFRedisResult> RENAME(const std::string& key);
-	//NF_SHARE_PTR<NFRedisResult> RENAMENX(const std::string& key);
-	//NF_SHARE_PTR<NFRedisResult> RESTORE(const std::string& key);
-	//NF_SHARE_PTR<NFRedisResult> SORT(const std::string& key);
+
 	/**
 	* @brief Returns the remaining time to live of a key that has a timeout
 	* @param keys [in] name of key
@@ -477,23 +467,128 @@ public:
 	virtual int RPUSHX(const std::string& key, const std::string& value) = 0;
 
 	/////////client set//////////////
-	/*
-	NF_SHARE_PTR<NFRedisResult> SADD(const std::string& key, const std::string& value);
-	NF_SHARE_PTR<NFRedisResult> SCARD(const std::string& key, const std::string& value);
-	NF_SHARE_PTR<NFRedisResult> SDIFF(const std::string& key, const std::string& value);
-	NF_SHARE_PTR<NFRedisResult> SDIFFSTORE(const std::string& key, const std::string& value);
-	NF_SHARE_PTR<NFRedisResult> SINTER(const std::string& key, const std::string& value);
-	NF_SHARE_PTR<NFRedisResult> SINTERSTORE(const std::string& key, const std::string& value);
-	NF_SHARE_PTR<NFRedisResult> SISMEMBER(const std::string& key, const std::string& value);
-	NF_SHARE_PTR<NFRedisResult> SMEMBERS(const std::string& key, const std::string& value);
-	NF_SHARE_PTR<NFRedisResult> SMOVE(const std::string& key, const std::string& value);
-	NF_SHARE_PTR<NFRedisResult> SPOP(const std::string& key, const std::string& value);
-	NF_SHARE_PTR<NFRedisResult> SRANDMEMBER(const std::string& key, const std::string& value);
-	NF_SHARE_PTR<NFRedisResult> SREM(const std::string& key, const std::string& value);
-	NF_SHARE_PTR<NFRedisResult> SUNION(const std::string& key, const std::string& value);
-	NF_SHARE_PTR<NFRedisResult> SUNIONSTORE(const std::string& key, const std::string& value);
-	NF_SHARE_PTR<NFRedisResult> SSCAN(const std::string& key, const std::string& value);
+
+	/**
+	* @brief cmd SADD
+	* @param key [in] name of key
+	* @param member [in]
+	* @return return the number of elements added to the sets when cmd success.
 	*/
+	virtual int SADD(const std::string& key, const std::string& member) = 0;
+
+	/**
+	* @brief cmd SCARD
+	* @param key [in] name of key
+	* @param nCount [out] the size of set
+	* @return return true when cmd success.
+	*/
+	virtual bool SCARD(const std::string& key, int& nCount) = 0;
+
+	/**
+	* @brief cmd SDIFF
+	* @param key_1 [in] name of diff_key1
+	* @param key_2 [in] name of diff_key2
+	* @param output [out] difference sets
+	* @return return true when cmd success.
+	*/
+	virtual bool SDIFF(const std::string& key_1, const std::string& key_2, string_vector& output) = 0;
+
+	/**
+	* @brief cmd SDIFFSTORE
+	* @param store_key [in] store_diff_key
+	* @param key_1 [in] name of diff_key1
+	* @param key_2 [in] name of diff_key2
+	* @return return true when cmd success.
+	*/
+	virtual int SDIFFSTORE(const std::string& store_key, const std::string& diff_key1, const std::string& diff_key2) = 0;
+
+	/**
+	* @brief cmd SINTER
+	* @param store_key [in] store_diff_key
+	* @param key_1 [in] name of inter_key1
+	* @param key_2 [in] name of inter_key2
+	* @param output [out] inter_key1 and inter_key2 intersection
+	* @return return true when cmd success.
+	*/
+	virtual bool SINTER(const std::string& key_1, const std::string& key_2, string_vector& output) = 0;
+
+	/**
+	* @brief cmd SINTERSTORE
+	* @param store_key [in] inter_store_key
+	* @param inter_key1 [in] name of inter_key1
+	* @param inter_key2 [in] name of inter_key2
+	* @return return true when cmd success.
+	*/
+	virtual int SINTERSTORE(const std::string& inter_store_key, const std::string& inter_key1, const std::string& inter_key2) = 0;
+
+	/**
+	* @brief cmd SISMEMBER
+	* @param store_key [in] name of key
+	* @param member [in] set's member
+	* @return return true when the member in set.
+	*/
+	virtual bool SISMEMBER(const std::string& key, const std::string& member) = 0;
+
+	/**
+	* @brief cmd SMEMBERS
+	* @param store_key [in] name of key
+	* @param output [out] all member of set
+	* @return return true when cmd success.
+	*/
+	virtual bool SMEMBERS(const std::string& key, string_vector& output) = 0;
+
+	/**
+	* @brief cmd SMOVE
+	* @param source_key [in] name of source set key
+	* @param dest_key [in] name of destination set key
+	* @param member [in] the member of source set
+	* @return return true when cmd success.
+	*/
+	virtual bool SMOVE(const std::string& source_key, const std::string& dest_key, const std::string& member) = 0;
+
+	/**
+	* @brief cmd SPOP
+	* @param key [in] name of key
+	* @param output [out] remove member
+	* @return return true when cmd success.
+	*/
+	virtual bool SPOP(const std::string& key, std::string& output) = 0;
+
+	/**
+	* @brief cmd SRANDMEMBER
+	* @param key [in] name of key
+	* @param count [in] the number of member
+	* @param output [out] remove members
+	* @return return true when cmd success.
+	*/
+	virtual bool SRANDMEMBER(const std::string& key, int count, string_vector& output) = 0;
+
+	/**
+	* @brief cmd SREM
+	* @param key [in] name of key
+	* @param output [out] remove members
+	* @return return the number of remove member
+	*/
+	virtual int SREM(const std::string& key, const string_vector& members) = 0;
+
+	/**
+	* @brief cmd SUNION
+	* @param union_key1 [in] name of union_key1
+	* @param union_key2 [in] name of union_key2
+	* @param output [out] set1 and set2 union member
+	* @return return true when cmd success.
+	*/
+	virtual bool SUNION(const std::string& union_key1, const std::string& union_key2, string_vector& output) = 0;
+
+	/**
+	* @brief cmd SUNIONSTORE
+	* @param dest_store_key [in] name of destination set
+	* @param union_key1 [in] name of union_key1
+	* @param union_key2 [out] name of union_key2
+	* @return return true when cmd success.
+	*/
+	virtual int SUNIONSTORE(const std::string& dest_store_key, const std::string& union_key1, const std::string& union_key2) = 0;
+	
 
 	/////////client SortedSet//////////////
 	/**
@@ -629,12 +724,7 @@ public:
 	* @return true if member is exists in the sorted set, false when member does not exist or not a z key.
 	*/
 	virtual bool ZSCORE(const std::string& key, const std::string& member, double& score) = 0;
-	//NF_SHARE_PTR<NFRedisResult> ZUNIONSTORE(const std::string& key, const std::string& value);
-	//NF_SHARE_PTR<NFRedisResult> ZINTERSTORE(const std::string& key, const std::string& value);
-	//NF_SHARE_PTR<NFRedisResult> ZSCAN(const std::string& key, const std::string& value);
-	//NF_SHARE_PTR<NFRedisResult> ZRANGEBYLEX(const std::string& key, const std::string& value);
-	//NF_SHARE_PTR<NFRedisResult> ZLEXCOUNT(const std::string& key, const std::string& value);
-	//NF_SHARE_PTR<NFRedisResult> ZREMRANGEBYLEX(const std::string& key, const std::string& value);
+
 
 	/////////client server//////////////
 	/**
@@ -646,6 +736,27 @@ public:
 	* @brief Removes all the keys of current DB
 	*/
 	virtual void FLUSHDB() = 0;
+
+
+	/////////client pubsub//////////////
+	/**	@brief cmd PUBLISH
+	* @param key [in] name of key
+	* @param value [in] publish's msg
+	* @return return true when cmd success.
+	*/
+	virtual bool PUBLISH(const std::string& key, const std::string& value) = 0;
+
+	/**	@brief cmd SUBSCRIBE
+	* @param key [in] name of key
+	* @return return true when cmd success.
+	*/
+	virtual bool SUBSCRIBE(const std::string& key) = 0;
+
+	/**	@brief cmd UNSUBSCRIBE
+	* @param key [in] name of key
+	* @return return true when cmd success.
+	*/
+	virtual	bool UNSUBSCRIBE(const std::string& key) = 0;
 
 };
 

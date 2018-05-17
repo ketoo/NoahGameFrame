@@ -197,13 +197,12 @@ bool NFRedisClient::ZREM(const std::string & key, const std::string & member)
 		return false;
 	}
 
-	int del_num = 0;
 	if (pReply->type == REDIS_REPLY_INTEGER)
 	{
-		del_num = (int)pReply->integer;
+		return (bool)pReply->integer;
 	}
 
-	return (bool)del_num;
+	return false;
 }
 
 bool NFRedisClient::ZREMRANGEBYRANK(const std::string & key, const int start, const int end)
@@ -219,13 +218,12 @@ bool NFRedisClient::ZREMRANGEBYRANK(const std::string & key, const int start, co
 		return false;
 	}
 
-	int del_num = 0;
 	if (pReply->type == REDIS_REPLY_INTEGER)
 	{
-		del_num = (int)pReply->integer;
+		return (bool)pReply->integer;
 	}
 
-	return (bool)del_num;
+	return false;
 }
 
 bool NFRedisClient::ZREMRANGEBYSCORE(const std::string & key, const double start, const double end)
@@ -241,14 +239,12 @@ bool NFRedisClient::ZREMRANGEBYSCORE(const std::string & key, const double start
 		return false;
 	}
 
-
-	int del_num = 0;
 	if (pReply->type == REDIS_REPLY_INTEGER)
 	{
-		del_num = (int)pReply->integer;
+		return (bool)pReply->integer;
 	}
 
-	return (bool)del_num;
+	return false;
 }
 
 bool NFRedisClient::ZREVRANGE(const std::string& key, const int start, const int end, string_score_vector& values)
