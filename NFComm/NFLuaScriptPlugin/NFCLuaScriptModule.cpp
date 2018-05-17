@@ -11,13 +11,12 @@
 #include "NFLuaScriptPlugin.h"
 #include "NFComm/NFPluginModule/NFIKernelModule.h"
 
-#define TRY_RUN_GLOBAL_SCRIPT_FUN0(strFuncName)   try {LuaIntf::LuaRef func(l, strFuncName);  func.call<LuaIntf::LuaRef>(); }   catch (LuaIntf::LuaException& e) { cout << e.what() << endl; }
-#define TRY_RUN_GLOBAL_SCRIPT_FUN1(strFuncName, arg1)  try {LuaIntf::LuaRef func(l, strFuncName);  func.call<LuaIntf::LuaRef>(arg1); }catch (LuaIntf::LuaException& e) { cout << e.what() << endl; }
-#define TRY_RUN_GLOBAL_SCRIPT_FUN2(strFuncName, arg1, arg2)  try {LuaIntf::LuaRef func(l, strFuncName);  func.call<LuaIntf::LuaRef>(arg1, arg2); }catch (LuaIntf::LuaException& e) { cout << e.what() << endl; }
+#define TRY_RUN_GLOBAL_SCRIPT_FUN0(strFuncName)   try {LuaIntf::LuaRef func(mLuaContext, strFuncName);  func.call<LuaIntf::LuaRef>(); }   catch (LuaIntf::LuaException& e) { cout << e.what() << endl; }
+#define TRY_RUN_GLOBAL_SCRIPT_FUN1(strFuncName, arg1)  try {LuaIntf::LuaRef func(mLuaContext, strFuncName);  func.call<LuaIntf::LuaRef>(arg1); }catch (LuaIntf::LuaException& e) { cout << e.what() << endl; }
+#define TRY_RUN_GLOBAL_SCRIPT_FUN2(strFuncName, arg1, arg2)  try {LuaIntf::LuaRef func(mLuaContext, strFuncName);  func.call<LuaIntf::LuaRef>(arg1, arg2); }catch (LuaIntf::LuaException& e) { cout << e.what() << endl; }
 
-#define TRY_LOAD_SCRIPT_FLE(strFileName)  try{l.doFile(strFileName);} catch (LuaIntf::LuaException& e) { cout << e.what() << endl; }
-#define TRY_ADD_PACKAGE_PATH(strFilePath)  try{l.addPackagePath(strFilePath);} catch (LuaIntf::LuaException& e) { cout << e.what() << endl; }
-LUA_USING_SHARED_PTR_TYPE(std::shared_ptr)
+#define TRY_LOAD_SCRIPT_FLE(strFileName)  try{mLuaContext.doFile(strFileName);} catch (LuaIntf::LuaException& e) { cout << e.what() << endl; }
+#define TRY_ADD_PACKAGE_PATH(strFilePath)  try{mLuaContext.addPackagePath(strFilePath);} catch (LuaIntf::LuaException& e) { cout << e.what() << endl; }
 
 bool NFCLuaScriptModule::Init()
 {
@@ -31,7 +30,8 @@ bool NFCLuaScriptModule::Init()
 	
 	Regisger();
 
-    TRY_ADD_PACKAGE_PATH(pPluginManager->GetConfigPath() + "NFDataCfg/ScriptModule"); //Add Search Path to Lua
+
+    //TRY_ADD_PACKAGE_PATH(pPluginManager->GetConfigPath() + "NFDataCfg/ScriptModule"); //Add Search Path to Lua
 
     TRY_LOAD_SCRIPT_FLE("script_init.lua");
 
@@ -103,7 +103,7 @@ int NFCLuaScriptModule::OnClassEventCB(const NFGUID& self, const std::string& st
     {
         try
         {
-            LuaIntf::LuaRef func(l, funcName->c_str());
+            LuaIntf::LuaRef func(mLuaContext, funcName->c_str());
             func.call(self, strClassName, (int)eClassEvent, (NFDataList)var);
         }
         catch (LuaIntf::LuaException& e)
@@ -239,7 +239,7 @@ bool NFCLuaScriptModule::CallLuaFuncFromMap(NFMap<T1, NFMap<NFGUID, NFList<strin
             {
                 try
                 {
-                    LuaIntf::LuaRef func(l, funcName.c_str());
+                    LuaIntf::LuaRef func(mLuaContext, funcName.c_str());
                     func.call(self, arg...);
                 }
                 catch (LuaIntf::LuaException& e)
@@ -256,17 +256,17 @@ bool NFCLuaScriptModule::CallLuaFuncFromMap(NFMap<T1, NFMap<NFGUID, NFList<strin
 
 bool NFCLuaScriptModule::Regisger()
 {
-    LuaIntf::LuaBinding(l).beginClass<RECORD_EVENT_DATA>("RECORD_EVENT_DATA")
+    LuaIntf::LuaBinding(mLuaContext).beginClass<RECORD_EVENT_DATA>("RECORD_EVENT_DATA")
     .endClass();
 
-    LuaIntf::LuaBinding(l).beginClass<NFIObject>("NFIObject")
+    LuaIntf::LuaBinding(mLuaContext).beginClass<NFIObject>("NFIObject")
     .addFunction("Self", &NFIObject::Self)
     .endClass();
 
-    LuaIntf::LuaBinding(l).beginClass<NFIClassModule>("NFIClassModule")
+    LuaIntf::LuaBinding(mLuaContext).beginClass<NFIClassModule>("NFIClassModule")
     .endClass();
 
-    LuaIntf::LuaBinding(l).beginClass<NFIPluginManager>("NFIPluginManager")
+    LuaIntf::LuaBinding(mLuaContext).beginClass<NFIPluginManager>("NFIPluginManager")
     .addFunction("FindLuaModule", &NFIPluginManager::FindModule<NFILuaScriptModule>)
     .addFunction("FindKernelModule", &NFIPluginManager::FindModule<NFIKernelModule>)
     .addFunction("FindLogicClassModule", &NFIPluginManager::FindModule<NFIClassModule>)
@@ -274,14 +274,14 @@ bool NFCLuaScriptModule::Regisger()
 	.addFunction("GetNowTime", &NFIPluginManager::GetNowTime)
     .endClass();
 
-    LuaIntf::LuaBinding(l).beginClass<NFIElementModule>("NFIElementModule")
+    LuaIntf::LuaBinding(mLuaContext).beginClass<NFIElementModule>("NFIElementModule")
     .addFunction("ExistElement", (bool (NFIElementModule::*)(const std::string&))&NFIElementModule::ExistElement)
     .addFunction("GetPropertyInt", &NFIElementModule::GetPropertyInt)
     .addFunction("GetPropertyFloat", &NFIElementModule::GetPropertyFloat)
     .addFunction("GetPropertyString", &NFIElementModule::GetPropertyString)
     .endClass();
 
-    LuaIntf::LuaBinding(l).beginClass<NFIKernelModule>("NFIKernelModule")
+    LuaIntf::LuaBinding(mLuaContext).beginClass<NFIKernelModule>("NFIKernelModule")
     .addFunction("GetPluginManager", &NFIKernelModule::GetPluginManager)
     .addFunction("CreateScene", &NFIKernelModule::CreateScene)
     .addFunction("CreateObject", &NFIKernelModule::CreateObject)
@@ -305,7 +305,7 @@ bool NFCLuaScriptModule::Regisger()
     .addFunction("GetRecordObject", (const NFGUID & (NFIKernelModule::*)(const NFGUID&, const string&, const int, const int))&NFIKernelModule::GetRecordObject)
     .endClass();
 
-    LuaIntf::LuaBinding(l).beginClass<NFGUID>("NFGUID")
+    LuaIntf::LuaBinding(mLuaContext).beginClass<NFGUID>("NFGUID")
     .addConstructor(LUA_ARGS())
     .addFunction("GetData", &NFGUID::GetData)
     .addFunction("SetData", &NFGUID::SetData)
@@ -313,10 +313,10 @@ bool NFCLuaScriptModule::Regisger()
     .addFunction("SetHead", &NFGUID::SetHead)
     .endClass();
 
-    LuaIntf::LuaBinding(l).beginClass<NFDataList>("NFDataList")
+    LuaIntf::LuaBinding(mLuaContext).beginClass<NFDataList>("NFDataList")
     .endClass();
 
-    LuaIntf::LuaBinding(l).beginExtendClass<NFDataList, NFDataList>("NFDataList")
+    LuaIntf::LuaBinding(mLuaContext).beginExtendClass<NFDataList, NFDataList>("NFDataList")
     .addConstructor(LUA_ARGS())
     .addFunction("IsEmpty", &NFDataList::IsEmpty)
     .addFunction("GetCount", &NFDataList::GetCount)
@@ -335,7 +335,7 @@ bool NFCLuaScriptModule::Regisger()
     .addFunction("Object", &NFDataList::Object)
     .endClass();
 
-    LuaIntf::LuaBinding(l).beginClass<NFData>("TData")
+    LuaIntf::LuaBinding(mLuaContext).beginClass<NFData>("TData")
     .addConstructor(LUA_ARGS())
     .addFunction("GetFloat", &NFData::GetFloat)
     .addFunction("GetInt", &NFData::GetInt)
@@ -350,7 +350,7 @@ bool NFCLuaScriptModule::Regisger()
     //.addFunction("StringValEx", &NFData::StringValEx)
     .endClass();
 
-    LuaIntf::LuaBinding(l).beginClass<NFCLuaScriptModule>("NFCLuaScriptModule")
+    LuaIntf::LuaBinding(mLuaContext).beginClass<NFCLuaScriptModule>("NFCLuaScriptModule")
     .addFunction("AddPropertyCallBack", &NFCLuaScriptModule::AddPropertyCallBack)
     .addFunction("AddRecordCallBack", &NFCLuaScriptModule::AddRecordCallBack)
     .addFunction("AddEventCallBack", &NFCLuaScriptModule::AddEventCallBack)
