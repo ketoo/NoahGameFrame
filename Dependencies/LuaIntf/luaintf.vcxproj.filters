@@ -61,8 +61,5 @@
     <ClCompile Include="src\LuaState.cpp">
       <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="src\QtLuaIntf.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
   </ItemGroup>
 </Project>
