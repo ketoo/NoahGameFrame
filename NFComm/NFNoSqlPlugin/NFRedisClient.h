@@ -665,8 +665,8 @@ public:
 	virtual void FLUSHDB();
 
 protected:
-	redisReply * BuildSendCmd(const NFRedisCommand& cmd);
-	redisReply * ParseForReply();
+	NF_SHARE_PTR<redisReply> BuildSendCmd(const NFRedisCommand& cmd);
+	NF_SHARE_PTR<redisReply> ParseForReply();
 
 
 private:
