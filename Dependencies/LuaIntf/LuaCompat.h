@@ -49,7 +49,7 @@
  * destructor of object on stack will be called as expected.
  */
 #ifndef LUAINTF_LINK_LUA_COMPILED_IN_CXX
-    #define LUAINTF_LINK_LUA_COMPILED_IN_CXX 1
+    #define LUAINTF_LINK_LUA_COMPILED_IN_CXX 0
 #endif
 
 /**
