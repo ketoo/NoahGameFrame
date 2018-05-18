@@ -74,9 +74,6 @@
     <ClInclude Include="lua.h">
       <Filter>Head</Filter>
     </ClInclude>
-    <ClInclude Include="lua.hpp">
-      <Filter>Head</Filter>
-    </ClInclude>
     <ClInclude Include="luaconf.h">
       <Filter>Head</Filter>
     </ClInclude>
@@ -176,9 +173,6 @@
       <Filter>Source</Filter>
     </ClCompile>
     <ClCompile Include="ltm.c">
-      <Filter>Source</Filter>
-    </ClCompile>
-    <ClCompile Include="lua.c">
       <Filter>Source</Filter>
     </ClCompile>
     <ClCompile Include="lundump.c">
