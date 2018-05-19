@@ -17,26 +17,31 @@
 
 #define TRY_LOAD_SCRIPT_FLE(strFileName)  try{mLuaContext.doFile(strFileName);} catch (LuaIntf::LuaException& e) { cout << e.what() << endl; }
 
-bool NFCLuaScriptModule::Init()
+bool NFCLuaScriptModule::Awake()
 {
-    mnTime = pPluginManager->GetNowTime();
+	mnTime = pPluginManager->GetNowTime();
 
-    m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>();
-    m_pLogicClassModule = pPluginManager->FindModule<NFIClassModule>();
+	m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>();
+	m_pLogicClassModule = pPluginManager->FindModule<NFIClassModule>();
 	m_pElementModule = pPluginManager->FindModule<NFIElementModule>();
 	m_pEventModule = pPluginManager->FindModule<NFIEventModule>();
 	m_pScheduleModule = pPluginManager->FindModule<NFIScheduleModule>();
-	
+
 	Regisger();
 
 	std::string strRootFileh = pPluginManager->GetConfigPath() + "NFDataCfg/ScriptModule/NFScriptSystem.lua";
-    //TRY_ADD_PACKAGE_PATH(strPath.c_str()); //Add Search Path to Lua
 
-    TRY_LOAD_SCRIPT_FLE(strRootFileh.c_str());
+	TRY_LOAD_SCRIPT_FLE(strRootFileh.c_str());
 
-    TRY_RUN_GLOBAL_SCRIPT_FUN2("init_script_system", pPluginManager, this);
+	TRY_RUN_GLOBAL_SCRIPT_FUN2("init_script_system", pPluginManager, this);
 
+	TRY_RUN_GLOBAL_SCRIPT_FUN0("module_awake");
 
+	return true;
+}
+
+bool NFCLuaScriptModule::Init()
+{
     TRY_RUN_GLOBAL_SCRIPT_FUN0("module_init");
 
     return true;
@@ -54,6 +59,13 @@ bool NFCLuaScriptModule::Shut()
 	TRY_RUN_GLOBAL_SCRIPT_FUN0("module_shut");
 
     return true;
+}
+
+bool NFCLuaScriptModule::ReadyExecute()
+{
+	TRY_RUN_GLOBAL_SCRIPT_FUN0("module_ready_execute");
+
+	return true;
 }
 
 bool NFCLuaScriptModule::Execute()
