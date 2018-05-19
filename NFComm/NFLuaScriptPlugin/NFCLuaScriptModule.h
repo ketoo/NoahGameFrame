@@ -38,6 +38,9 @@ public:
     virtual bool AfterInit();
     virtual bool BeforeShut();
 
+
+protected:
+
 	//FOR KERNEL MODULE
 	NFGUID CreateObject(const NFGUID& self, const int nSceneID, const int nGroupID, const std::string& strClassName, const std::string& strIndex, const NFDataList& arg);
 	bool ExistObject(const NFGUID& self);
