@@ -16,7 +16,6 @@
 #define TRY_RUN_GLOBAL_SCRIPT_FUN2(strFuncName, arg1, arg2)  try {LuaIntf::LuaRef func(mLuaContext, strFuncName);  func.call<LuaIntf::LuaRef>(arg1, arg2); }catch (LuaIntf::LuaException& e) { cout << e.what() << endl; }
 
 #define TRY_LOAD_SCRIPT_FLE(strFileName)  try{mLuaContext.doFile(strFileName);} catch (LuaIntf::LuaException& e) { cout << e.what() << endl; }
-#define TRY_ADD_PACKAGE_PATH(strFilePath)  try{mLuaContext.addPackagePath(strFilePath);} catch (LuaIntf::LuaException& e) { cout << e.what() << endl; }
 
 bool NFCLuaScriptModule::Init()
 {
@@ -30,31 +29,29 @@ bool NFCLuaScriptModule::Init()
 	
 	Regisger();
 
-	std::string strRootFileh = pPluginManager->GetConfigPath() + "NFDataCfg/ScriptModule/script_init.lua";
+	std::string strRootFileh = pPluginManager->GetConfigPath() + "NFDataCfg/ScriptModule/NFScriptSystem.lua";
     //TRY_ADD_PACKAGE_PATH(strPath.c_str()); //Add Search Path to Lua
 
     TRY_LOAD_SCRIPT_FLE(strRootFileh.c_str());
 
     TRY_RUN_GLOBAL_SCRIPT_FUN2("init_script_system", pPluginManager, this);
 
-    TRY_LOAD_SCRIPT_FLE("script_list.lua");
-    TRY_LOAD_SCRIPT_FLE("script_module.lua");
 
-    TRY_RUN_GLOBAL_SCRIPT_FUN0("ScriptModule.Init");
+    TRY_RUN_GLOBAL_SCRIPT_FUN0("module_init");
 
     return true;
 }
 
 bool NFCLuaScriptModule::AfterInit()
 {
-    TRY_RUN_GLOBAL_SCRIPT_FUN0("ScriptModule.AfterInit");
+	TRY_RUN_GLOBAL_SCRIPT_FUN0("module_after_init");
 
     return true;
 }
 
 bool NFCLuaScriptModule::Shut()
 {
-    TRY_RUN_GLOBAL_SCRIPT_FUN0("ScriptModule.Shut");
+	TRY_RUN_GLOBAL_SCRIPT_FUN0("module_shut");
 
     return true;
 }
@@ -65,9 +62,8 @@ bool NFCLuaScriptModule::Execute()
     if (pPluginManager->GetNowTime() - mnTime > 10)
     {
         mnTime = pPluginManager->GetNowTime();
-        TRY_RUN_GLOBAL_SCRIPT_FUN0("ScriptModule.Execute");
-        TRY_LOAD_SCRIPT_FLE("script_reload.lua")
 
+		TRY_RUN_GLOBAL_SCRIPT_FUN0("module_execute");
     }
 
     return true;
@@ -75,7 +71,7 @@ bool NFCLuaScriptModule::Execute()
 
 bool NFCLuaScriptModule::BeforeShut()
 {
-    TRY_RUN_GLOBAL_SCRIPT_FUN0("ScriptModule.BeforeShut");
+    TRY_RUN_GLOBAL_SCRIPT_FUN0("module_before_shut");
 
     return true;
 }
