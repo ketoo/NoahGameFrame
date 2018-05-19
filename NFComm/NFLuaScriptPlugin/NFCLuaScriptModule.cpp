@@ -88,6 +88,31 @@ bool NFCLuaScriptModule::BeforeShut()
     return true;
 }
 
+NFGUID NFCLuaScriptModule::CreateObject(const NFGUID & self, const int nSceneID, const int nGroupID, const std::string & strClassName, const std::string & strIndex, const NFDataList & arg)
+{
+	return NFGUID();
+}
+
+bool NFCLuaScriptModule::ExistObject(const NFGUID & self)
+{
+	return false;
+}
+
+bool NFCLuaScriptModule::DestroyObject()
+{
+	return false;
+}
+
+bool NFCLuaScriptModule::EnterScene(const int nSceneID, const int nGroupID)
+{
+	return false;
+}
+
+bool NFCLuaScriptModule::DoEvent(const NFGUID & self, const int nEventID, const NFDataList & arg)
+{
+	return false;
+}
+
 bool NFCLuaScriptModule::FindProperty(const NFGUID & self, const std::string & strPropertyName)
 {
 	return false;
@@ -346,6 +371,11 @@ NFGUID NFCLuaScriptModule::CreateID()
 	return m_pKernelModule->CreateGUID();
 }
 
+bool NFCLuaScriptModule::ExistElementObject(const std::string & strConfigName)
+{
+	return false;
+}
+
 NFINT64 NFCLuaScriptModule::GetElePropertyInt(const std::string & strConfigName, const std::string & strPropertyName)
 {
 	return NFINT64();
@@ -497,18 +527,12 @@ bool NFCLuaScriptModule::Regisger()
 	LuaIntf::LuaBinding(mLuaContext).beginClass<NFCLuaScriptModule>("NFCLuaScriptModule")
 
 		//for kernel module
+		.addFunction("create_object", &NFCLuaScriptModule::CreateObject)
+		.addFunction("exist_object", &NFCLuaScriptModule::ExistObject)
+		.addFunction("destroy_object", &NFCLuaScriptModule::CreateObject)
+		.addFunction("enter_scene", &NFCLuaScriptModule::EnterScene)
 
-		//create_object
-		//exist_object
-		//destroy_object
-		//create_scene
-		//exist_scene
-		//destroy_scene
-		//enter_scene
-		//leave_scene
-
-		//do_event
-
+		.addFunction("do_event", &NFCLuaScriptModule::DoEvent)
 
 		.addFunction("set_prop_int", &NFCLuaScriptModule::SetPropertyInt)
 		.addFunction("set_prop_float", &NFCLuaScriptModule::SetPropertyFloat)
@@ -552,6 +576,7 @@ bool NFCLuaScriptModule::Regisger()
 		.addFunction("new_id", &NFCLuaScriptModule::CreateID)
 
 		//for element module
+		.addFunction("exist_element", &NFCLuaScriptModule::ExistElementObject)
 		.addFunction("get_int", &NFCLuaScriptModule::GetElePropertyInt)
 		.addFunction("get_float", &NFCLuaScriptModule::GetElePropertyFloat)
 		.addFunction("get_string", &NFCLuaScriptModule::GetElePropertyString)
