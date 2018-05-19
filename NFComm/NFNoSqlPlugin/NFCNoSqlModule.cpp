@@ -108,7 +108,7 @@ bool NFCNoSqlModule::Execute()
 
 	mLastCheckTime = pPluginManager->GetNowTime();
 
-	NF_SHARE_PTR<NFIRedisClient> xNosqlDriver = this->mxNoSqlDriver.First();
+	xNosqlDriver = this->mxNoSqlDriver.First();
 	while (xNosqlDriver)
 	{
 		if (!xNosqlDriver->Enable())
