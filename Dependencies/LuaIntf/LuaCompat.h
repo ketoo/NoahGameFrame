@@ -128,7 +128,6 @@ extern "C"
 #endif
 
 //---------------------------------------------------------------------------
-#define LUAINTF_LINK_LUA_COMPILED_IN_CXX 1
 #if LUA_VERSION_NUM == 501
 
 #include <stdint.h>
