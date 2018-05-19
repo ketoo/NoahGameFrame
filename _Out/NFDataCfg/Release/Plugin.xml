@@ -53,8 +53,7 @@
 	<TutorialServer>
 		<Plugin Name="NFKernelPlugin" />
 		<Plugin Name="NFConfigPlugin" />
-		<Plugin Name="NFLogPlugin" />
-		<Plugin Name="NFActorPlugin" />		
-		<Plugin Name="Tutorial4Plugin" />	
+		<Plugin Name="NFLogPlugin" />		
+		<Plugin Name="Tutorial1" />	
 	</TutorialServer>
 </XML>

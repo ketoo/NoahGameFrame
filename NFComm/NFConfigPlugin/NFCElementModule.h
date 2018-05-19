@@ -88,7 +88,9 @@ public:
     virtual NFINT64 GetPropertyInt(const std::string& strConfigName, const std::string& strPropertyName);
 	virtual int GetPropertyInt32(const std::string& strConfigName, const std::string& strPropertyName);
     virtual double GetPropertyFloat(const std::string& strConfigName, const std::string& strPropertyName);
-    virtual const std::string& GetPropertyString(const std::string& strConfigName, const std::string& strPropertyName);
+	virtual const std::string& GetPropertyString(const std::string& strConfigName, const std::string& strPropertyName);
+	virtual const NFVector2 GetPropertyVector2(const std::string& strConfigName, const std::string& strPropertyName);
+	virtual const NFVector3 GetPropertyVector3(const std::string& strConfigName, const std::string& strPropertyName);
 
 	virtual const std::vector<std::string> GetListByProperty(const std::string& strClassName, const std::string& strPropertyName, const NFINT64 nValue);
 	virtual const std::vector<std::string> GetListByProperty(const std::string& strClassName, const std::string& strPropertyName, const std::string& nValue);

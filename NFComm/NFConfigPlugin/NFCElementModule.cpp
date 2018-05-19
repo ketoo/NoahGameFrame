@@ -317,6 +317,29 @@ const std::string& NFCElementModule::GetPropertyString(const std::string& strCon
     return  NULL_STR;
 }
 
+const NFVector2 NFCElementModule::GetPropertyVector2(const std::string & strConfigName, const std::string & strPropertyName)
+{
+	NF_SHARE_PTR<NFIProperty> pProperty = GetProperty(strConfigName, strPropertyName);
+	if (pProperty)
+	{
+		return pProperty->GetVector2();
+	}
+
+	return NFVector2();
+}
+
+const NFVector3 NFCElementModule::GetPropertyVector3(const std::string & strConfigName, const std::string & strPropertyName)
+{
+	NF_SHARE_PTR<NFIProperty> pProperty = GetProperty(strConfigName, strPropertyName);
+	if (pProperty)
+	{
+		return pProperty->GetVector3();
+	}
+
+
+	return NFVector3();
+}
+
 const std::vector<std::string> NFCElementModule::GetListByProperty(const std::string & strClassName, const std::string & strPropertyName, NFINT64 nValue)
 {
 	std::vector<std::string> xList;
