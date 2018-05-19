@@ -79,6 +79,7 @@
 		<Plugin Name="NFKernelPlugin" />
 		<Plugin Name="NFConfigPlugin" />
 		
+		<Plugin Name="NFLuaScriptPlugin" />
 		<Plugin Name="NFActorPlugin" />
 		<Plugin Name="NFLogPlugin" />
 		<Plugin Name="Tutorial5" />	

@@ -33,7 +33,7 @@ bool NFCLuaScriptModule::Awake()
 
 	TRY_LOAD_SCRIPT_FLE(strRootFileh.c_str());
 
-	TRY_RUN_GLOBAL_SCRIPT_FUN2("init_script_system", pPluginManager, this);
+	TRY_RUN_GLOBAL_SCRIPT_FUN1("init_script_system", this);
 
 	TRY_RUN_GLOBAL_SCRIPT_FUN0("module_awake");
 
@@ -86,6 +86,76 @@ bool NFCLuaScriptModule::BeforeShut()
     TRY_RUN_GLOBAL_SCRIPT_FUN0("module_before_shut");
 
     return true;
+}
+
+bool NFCLuaScriptModule::FindProperty(const NFGUID & self, const std::string & strPropertyName)
+{
+	return false;
+}
+
+bool NFCLuaScriptModule::SetPropertyInt(const NFGUID & self, const std::string & strPropertyName, const NFINT64 nValue)
+{
+	return false;
+}
+
+bool NFCLuaScriptModule::SetPropertyFloat(const NFGUID & self, const std::string & strPropertyName, const double dValue)
+{
+	return false;
+}
+
+bool NFCLuaScriptModule::SetPropertyString(const NFGUID & self, const std::string & strPropertyName, const std::string & strValue)
+{
+	return false;
+}
+
+bool NFCLuaScriptModule::SetPropertyObject(const NFGUID & self, const std::string & strPropertyName, const NFGUID & objectValue)
+{
+	return false;
+}
+
+bool NFCLuaScriptModule::SetPropertyVector2(const NFGUID & self, const std::string & strPropertyName, const NFVector2 & value)
+{
+	return false;
+}
+
+bool NFCLuaScriptModule::SetPropertyVector3(const NFGUID & self, const std::string & strPropertyName, const NFVector3 & value)
+{
+	return false;
+}
+
+NFINT64 NFCLuaScriptModule::GetPropertyInt(const NFGUID & self, const std::string & strPropertyName)
+{
+	return NFINT64();
+}
+
+int NFCLuaScriptModule::GetPropertyInt32(const NFGUID & self, const std::string & strPropertyName)
+{
+	return 0;
+}
+
+double NFCLuaScriptModule::GetPropertyFloat(const NFGUID & self, const std::string & strPropertyName)
+{
+	return 0.0;
+}
+
+std::string NFCLuaScriptModule::GetPropertyString(const NFGUID & self, const std::string & strPropertyName)
+{
+	return "";
+}
+
+NFGUID NFCLuaScriptModule::GetPropertyObject(const NFGUID & self, const std::string & strPropertyName)
+{
+	return NFGUID();
+}
+
+NFVector2 NFCLuaScriptModule::GetPropertyVector2(const NFGUID & self, const std::string & strPropertyName)
+{
+	return NFVector2();
+}
+
+NFVector3 NFCLuaScriptModule::GetPropertyVector3(const NFGUID & self, const std::string & strPropertyName)
+{
+	return NFVector3();
 }
 
 bool NFCLuaScriptModule::AddClassCallBack(std::string& className, std::string& funcName)
@@ -170,7 +240,7 @@ int NFCLuaScriptModule::OnLuaEventCB(const NFGUID& self, const NFEventDefine nEv
     return CallLuaFuncFromMap(m_luaEventCallBackFuncMap, (int)nEventID, self, nEventID, (NFDataList&)argVar);
 }
 
-bool NFCLuaScriptModule::AddHeartBeat(const NFGUID& self, std::string& strHeartBeatName, std::string& luaFunc, const float fTime, const int nCount)
+bool NFCLuaScriptModule::AddSchedule(const NFGUID& self, std::string& strHeartBeatName, std::string& luaFunc, const float fTime, const int nCount)
 {
     if (AddLuaFuncToMap(m_luaHeartBeatCallBackFuncMap, self, strHeartBeatName, luaFunc))
     {
@@ -178,6 +248,12 @@ bool NFCLuaScriptModule::AddHeartBeat(const NFGUID& self, std::string& strHeartB
     }
     return true;
 }
+/*
+bool NFCLuaScriptModule::DoEvent(const NFGUID & self, std::string & strHeartBeatName, std::string & luaFunc, const float fTime, const int nCount)
+{
+	return false;
+}
+*/
 
 int NFCLuaScriptModule::OnLuaHeartBeatCB(const NFGUID& self, const std::string& strHeartBeatName, const float fTime, const int nCount)
 {
@@ -193,6 +269,106 @@ int NFCLuaScriptModule::AddRow(const NFGUID& self, std::string& strRecordName, c
     }
 
     return pRecord->AddRow(-1, var);
+}
+
+bool NFCLuaScriptModule::RemRow(const NFGUID & self, std::string & strRecordName, const int nRow)
+{
+	return false;
+}
+
+bool NFCLuaScriptModule::SetRecordInt(const NFGUID & self, const std::string & strRecordName, const int nRow, const std::string & strColTag, const NFINT64 value)
+{
+	return false;
+}
+
+bool NFCLuaScriptModule::SetRecordFloat(const NFGUID & self, const std::string & strRecordName, const int nRow, const std::string & strColTag, const double value)
+{
+	return false;
+}
+
+bool NFCLuaScriptModule::SetRecordString(const NFGUID & self, const std::string & strRecordName, const int nRow, const std::string & strColTag, const std::string & value)
+{
+	return false;
+}
+
+bool NFCLuaScriptModule::SetRecordObject(const NFGUID & self, const std::string & strRecordName, const int nRow, const std::string & strColTag, const NFGUID & value)
+{
+	return false;
+}
+
+bool NFCLuaScriptModule::SetRecordVector2(const NFGUID & self, const std::string & strRecordName, const int nRow, const std::string & strColTag, const NFVector2 & value)
+{
+	return false;
+}
+
+bool NFCLuaScriptModule::SetRecordVector3(const NFGUID & self, const std::string & strRecordName, const int nRow, const std::string & strColTag, const NFVector3 & value)
+{
+	return false;
+}
+
+NFINT64 NFCLuaScriptModule::GetRecordInt(const NFGUID & self, const std::string & strRecordName, const int nRow, const std::string & strColTag)
+{
+	return NFINT64();
+}
+
+double NFCLuaScriptModule::GetRecordFloat(const NFGUID & self, const std::string & strRecordName, const int nRow, const std::string & strColTag)
+{
+	return 0.0;
+}
+
+std::string NFCLuaScriptModule::GetRecordString(const NFGUID & self, const std::string & strRecordName, const int nRow, const std::string & strColTag)
+{
+	return "";
+}
+
+NFGUID NFCLuaScriptModule::GetRecordObject(const NFGUID & self, const std::string & strRecordName, const int nRow, const std::string & strColTag)
+{
+	return NFGUID();
+}
+
+NFVector2 NFCLuaScriptModule::GetRecordVector2(const NFGUID & self, const std::string & strRecordName, const int nRow, const std::string & strColTag)
+{
+	return NFVector2();
+}
+
+NFVector3 NFCLuaScriptModule::GetRecordVector3(const NFGUID & self, const std::string & strRecordName, const int nRow, const std::string & strColTag)
+{
+	return NFVector3();
+}
+
+NFINT64 NFCLuaScriptModule::GetNowTime()
+{
+	return pPluginManager->GetNowTime();
+}
+
+NFGUID NFCLuaScriptModule::CreateID()
+{
+	return m_pKernelModule->CreateGUID();
+}
+
+NFINT64 NFCLuaScriptModule::GetElePropertyInt(const std::string & strConfigName, const std::string & strPropertyName)
+{
+	return NFINT64();
+}
+
+double NFCLuaScriptModule::GetElePropertyFloat(const std::string & strConfigName, const std::string & strPropertyName)
+{
+	return 0.0;
+}
+
+std::string NFCLuaScriptModule::GetElePropertyString(const std::string & strConfigName, const std::string & strPropertyName)
+{
+	return "";
+}
+
+NFVector2 NFCLuaScriptModule::GetElePropertyVector2(const std::string & strConfigName, const std::string & strPropertyName)
+{
+	return NFVector2();
+}
+
+NFVector3 NFCLuaScriptModule::GetElePropertyVector3(const std::string & strConfigName, const std::string & strPropertyName)
+{
+	return NFVector3();
 }
 
 template<typename T>
@@ -264,108 +440,150 @@ bool NFCLuaScriptModule::CallLuaFuncFromMap(NFMap<T1, NFMap<NFGUID, NFList<strin
 
 bool NFCLuaScriptModule::Regisger()
 {
-    LuaIntf::LuaBinding(mLuaContext).beginClass<RECORD_EVENT_DATA>("RECORD_EVENT_DATA")
-    .endClass();
+	LuaIntf::LuaBinding(mLuaContext).beginClass<NFGUID>("NFGUID")
+		.addConstructor(LUA_ARGS())
+		.addProperty("data", &NFGUID::GetData, &NFGUID::SetData)
+		.addProperty("head", &NFGUID::GetHead, &NFGUID::SetHead)
+		.addFunction("tostring", &NFGUID::ToString)
+		.addFunction("fromstring", &NFGUID::FromString)
+		.endClass();
 
-    LuaIntf::LuaBinding(mLuaContext).beginClass<NFIObject>("NFIObject")
-    .addFunction("Self", &NFIObject::Self)
-    .endClass();
+	LuaIntf::LuaBinding(mLuaContext).beginClass<NFDataList>("NFDataList")
+		.endClass();
 
-    LuaIntf::LuaBinding(mLuaContext).beginClass<NFIClassModule>("NFIClassModule")
-    .endClass();
+	LuaIntf::LuaBinding(mLuaContext).beginExtendClass<NFDataList, NFDataList>("NFDataList")
+		.addConstructor(LUA_ARGS())
+		.addFunction("empty", &NFDataList::IsEmpty)
+		.addFunction("count", &NFDataList::GetCount)
+		.addFunction("tye", &NFDataList::Type)
+		.addFunction("add_int", &NFDataList::AddInt)
+		.addFunction("add_float", &NFDataList::AddFloat)
+		.addFunction("add_string", &NFDataList::AddStringFromChar)
+		.addFunction("add_object", &NFDataList::AddObject)
+		.addFunction("add_vector2", &NFDataList::AddVector2)
+		.addFunction("add_vector3", &NFDataList::AddVector3)
+		.addFunction("set_int", &NFDataList::SetInt)
+		.addFunction("set_float", &NFDataList::SetFloat)
+		.addFunction("set_string", &NFDataList::SetString)
+		.addFunction("set_object", &NFDataList::SetObject)
+		.addFunction("set_vector2", &NFDataList::SetVector2)
+		.addFunction("set_vector3", &NFDataList::SetVector3)
+		.addFunction("int", &NFDataList::Int)
+		.addFunction("float", &NFDataList::Float)
+		.addFunction("string", &NFDataList::String)
+		.addFunction("object", &NFDataList::Object)
+		.addFunction("vector2", &NFDataList::Vector2)
+		.addFunction("vector3", &NFDataList::Vector3)
+		.endClass();
 
-    LuaIntf::LuaBinding(mLuaContext).beginClass<NFIPluginManager>("NFIPluginManager")
-    .addFunction("FindLuaModule", &NFIPluginManager::FindModule<NFILuaScriptModule>)
-    .addFunction("FindKernelModule", &NFIPluginManager::FindModule<NFIKernelModule>)
-    .addFunction("FindLogicClassModule", &NFIPluginManager::FindModule<NFIClassModule>)
-    .addFunction("FindElementInfoModule", &NFIPluginManager::FindModule<NFIElementModule>)
-	.addFunction("GetNowTime", &NFIPluginManager::GetNowTime)
-    .endClass();
+	LuaIntf::LuaBinding(mLuaContext).beginClass<NFData>("TData")
+		.addConstructor(LUA_ARGS())
+		.addFunction("float", &NFData::GetFloat)
+		.addFunction("int", &NFData::GetInt)
+		.addFunction("object", &NFData::GetObject)
+		.addFunction("string", &NFData::GetString)
+		.addFunction("vector2", &NFData::GetVector2)
+		.addFunction("vector3", &NFData::GetVector3)
+		.addFunction("type", &NFData::GetType)
+		.addFunction("is_null", &NFData::IsNullValue)
+		.addFunction("set_float", &NFData::SetFloat)
+		.addFunction("set_int", &NFData::SetInt)
+		.addFunction("set_object", &NFData::SetObject)
+		.addFunction("set_string", &NFData::SetString)
+		.addFunction("set_vector2", &NFData::SetVector2)
+		.addFunction("set_vector3", &NFData::SetVector3)
+		.endClass();
 
-    LuaIntf::LuaBinding(mLuaContext).beginClass<NFIElementModule>("NFIElementModule")
-    .addFunction("ExistElement", (bool (NFIElementModule::*)(const std::string&))&NFIElementModule::ExistElement)
-    .addFunction("GetPropertyInt", &NFIElementModule::GetPropertyInt)
-    .addFunction("GetPropertyFloat", &NFIElementModule::GetPropertyFloat)
-    .addFunction("GetPropertyString", &NFIElementModule::GetPropertyString)
-    .endClass();
+	LuaIntf::LuaBinding(mLuaContext).beginClass<NFCLuaScriptModule>("NFCLuaScriptModule")
 
-    LuaIntf::LuaBinding(mLuaContext).beginClass<NFIKernelModule>("NFIKernelModule")
-    .addFunction("GetPluginManager", &NFIKernelModule::GetPluginManager)
-    .addFunction("CreateScene", &NFIKernelModule::CreateScene)
-    .addFunction("CreateObject", &NFIKernelModule::CreateObject)
-    .addFunction("DoEvent", (bool (NFIKernelModule::*)(const NFGUID&, const int, const NFDataList&))&NFIKernelModule::DoEvent)
-    //.addFunction("ExistContainer", &NFIKernelModule::ExistContainer)
-    .addFunction("SetPropertyInt", &NFIKernelModule::SetPropertyInt)
-    .addFunction("SetPropertyFloat", &NFIKernelModule::SetPropertyFloat)
-    .addFunction("SetPropertyString", &NFIKernelModule::SetPropertyString)
-    .addFunction("SetPropertyObject", &NFIKernelModule::SetPropertyObject)
-    .addFunction("GetPropertyInt", &NFIKernelModule::GetPropertyInt)
-    .addFunction("GetPropertyFloat", &NFIKernelModule::GetPropertyFloat)
-    .addFunction("GetPropertyString", &NFIKernelModule::GetPropertyString)
-    .addFunction("GetPropertyObject", &NFIKernelModule::GetPropertyObject)
-    .addFunction("SetRecordInt", (bool (NFIKernelModule::*)(const NFGUID&, const string&, const int, const int, const NFINT64))&NFIKernelModule::SetRecordInt)
-    .addFunction("SetRecordFloat", (bool (NFIKernelModule::*)(const NFGUID&, const string&, const int, const int, const double))&NFIKernelModule::SetRecordFloat)
-    .addFunction("SetRecordString", (bool (NFIKernelModule::*)(const NFGUID&, const string&, const int, const int, const string&))&NFIKernelModule::SetRecordString)
-    .addFunction("SetRecordObject", (bool (NFIKernelModule::*)(const NFGUID&, const string&, const int, const int, const NFGUID&))&NFIKernelModule::SetRecordObject)
-    .addFunction("GetRecordInt", (NFINT64(NFIKernelModule::*)(const NFGUID&, const string&, const int, const int))&NFIKernelModule::GetRecordInt)
-    .addFunction("GetRecordFloat", (double(NFIKernelModule::*)(const NFGUID&, const string&, const int, const int))&NFIKernelModule::GetRecordFloat)
-    .addFunction("GetRecordString", (const string & (NFIKernelModule::*)(const NFGUID&, const string&, const int, const int))&NFIKernelModule::GetRecordString)
-    .addFunction("GetRecordObject", (const NFGUID & (NFIKernelModule::*)(const NFGUID&, const string&, const int, const int))&NFIKernelModule::GetRecordObject)
-    .endClass();
+		//for kernel module
 
-    LuaIntf::LuaBinding(mLuaContext).beginClass<NFGUID>("NFGUID")
-    .addConstructor(LUA_ARGS())
-    .addFunction("GetData", &NFGUID::GetData)
-    .addFunction("SetData", &NFGUID::SetData)
-    .addFunction("GetHead", &NFGUID::GetHead)
-    .addFunction("SetHead", &NFGUID::SetHead)
-    .endClass();
+		//create_object
+		//exist_object
+		//destroy_object
+		//create_scene
+		//exist_scene
+		//destroy_scene
+		//enter_scene
+		//leave_scene
 
-    LuaIntf::LuaBinding(mLuaContext).beginClass<NFDataList>("NFDataList")
-    .endClass();
+		//do_event
 
-    LuaIntf::LuaBinding(mLuaContext).beginExtendClass<NFDataList, NFDataList>("NFDataList")
-    .addConstructor(LUA_ARGS())
-    .addFunction("IsEmpty", &NFDataList::IsEmpty)
-    .addFunction("GetCount", &NFDataList::GetCount)
-    .addFunction("Type", &NFDataList::Type)
-    .addFunction("AddInt", &NFDataList::AddInt)
-    .addFunction("AddFloat", &NFDataList::AddFloat)
-    .addFunction("AddString", &NFDataList::AddStringFromChar)
-    .addFunction("AddObject", &NFDataList::AddObject)
-    .addFunction("SetInt", &NFDataList::SetInt)
-    .addFunction("SetFloat", &NFDataList::SetFloat)
-    .addFunction("SetString", &NFDataList::SetString)
-    .addFunction("SetObject", &NFDataList::SetObject)
-    .addFunction("Int", &NFDataList::Int)
-    .addFunction("Float", &NFDataList::Float)
-    .addFunction("String", &NFDataList::String)
-    .addFunction("Object", &NFDataList::Object)
-    .endClass();
 
-    LuaIntf::LuaBinding(mLuaContext).beginClass<NFData>("TData")
-    .addConstructor(LUA_ARGS())
-    .addFunction("GetFloat", &NFData::GetFloat)
-    .addFunction("GetInt", &NFData::GetInt)
-    .addFunction("GetObject", &NFData::GetObject)
-    .addFunction("GetString", &NFData::GetCharArr)
-    .addFunction("GetType", &NFData::GetType)
-    .addFunction("IsNullValue", &NFData::IsNullValue)
-    .addFunction("SetFloat", &NFData::SetFloat)
-    .addFunction("SetInt", &NFData::SetInt)
-    .addFunction("SetObject", &NFData::SetObject)
-    .addFunction("SetString", &NFData::SetString)
-    //.addFunction("StringValEx", &NFData::StringValEx)
-    .endClass();
+		.addFunction("set_prop_int", &NFCLuaScriptModule::SetPropertyInt)
+		.addFunction("set_prop_float", &NFCLuaScriptModule::SetPropertyFloat)
+		.addFunction("set_prop_string", &NFCLuaScriptModule::SetPropertyString)
+		.addFunction("set_prop_object", &NFCLuaScriptModule::SetPropertyObject)
+		.addFunction("set_prop_vector2", &NFCLuaScriptModule::SetPropertyVector2)
+		.addFunction("set_prop_vector3", &NFCLuaScriptModule::SetPropertyVector3)
 
-    LuaIntf::LuaBinding(mLuaContext).beginClass<NFCLuaScriptModule>("NFCLuaScriptModule")
-    .addFunction("AddPropertyCallBack", &NFCLuaScriptModule::AddPropertyCallBack)
-    .addFunction("AddRecordCallBack", &NFCLuaScriptModule::AddRecordCallBack)
-    .addFunction("AddEventCallBack", &NFCLuaScriptModule::AddEventCallBack)
-    .addFunction("AddHeartBeat", &NFCLuaScriptModule::AddHeartBeat)
-    .addFunction("AddRow", &NFCLuaScriptModule::AddRow)
-    .addFunction("AddClassCallBack", &NFCLuaScriptModule::AddClassCallBack)
-    .endClass();
+		.addFunction("get_prop_int", &NFCLuaScriptModule::GetPropertyInt)
+		.addFunction("get_prop_float", &NFCLuaScriptModule::GetPropertyFloat)
+		.addFunction("get_prop_string", &NFCLuaScriptModule::GetPropertyString)
+		.addFunction("get_prop_object", &NFCLuaScriptModule::GetPropertyObject)
+		.addFunction("get_prop_vector2", &NFCLuaScriptModule::GetPropertyVector2)
+		.addFunction("get_prop_vector3", &NFCLuaScriptModule::GetPropertyVector3)
+
+		.addFunction("set_record_int", &NFCLuaScriptModule::SetRecordInt)
+		.addFunction("set_record_float",&NFCLuaScriptModule::SetRecordFloat)
+		.addFunction("set_record_string", &NFCLuaScriptModule::SetRecordString)
+		.addFunction("set_record_object", &NFCLuaScriptModule::SetRecordObject)
+		.addFunction("set_record_vector2", &NFCLuaScriptModule::SetPropertyVector2)
+		.addFunction("set_record_vector3", &NFCLuaScriptModule::SetPropertyVector3)
+		
+		.addFunction("get_record_int", &NFCLuaScriptModule::GetRecordInt)
+		.addFunction("get_record_float", &NFCLuaScriptModule::GetRecordFloat)
+		.addFunction("get_record_string", &NFCLuaScriptModule::GetRecordString)
+		.addFunction("get_record_object", &NFCLuaScriptModule::GetRecordObject)
+		.addFunction("get_record_vector2", &NFCLuaScriptModule::GetPropertyVector2)
+		.addFunction("get_record_vector3", &NFCLuaScriptModule::GetPropertyVector3)
+
+		.addFunction("add_prop_cb", &NFCLuaScriptModule::AddPropertyCallBack)
+		.addFunction("add_record_cb", &NFCLuaScriptModule::AddRecordCallBack)
+		.addFunction("add_event_cb", &NFCLuaScriptModule::AddEventCallBack)
+		.addFunction("add_class_cb", &NFCLuaScriptModule::AddClassCallBack)
+		.addFunction("add_schedule", &NFCLuaScriptModule::AddSchedule)
+		.addFunction("do_event", &NFCLuaScriptModule::AddSchedule)
+		//do_event
+		.addFunction("add_row", &NFCLuaScriptModule::AddRow)
+		.addFunction("rem_row", &NFCLuaScriptModule::RemRow)
+
+		.addFunction("time", &NFCLuaScriptModule::GetNowTime)
+		.addFunction("new_id", &NFCLuaScriptModule::CreateID)
+
+		//for element module
+		.addFunction("get_int", &NFCLuaScriptModule::GetElePropertyInt)
+		.addFunction("get_float", &NFCLuaScriptModule::GetElePropertyFloat)
+		.addFunction("get_string", &NFCLuaScriptModule::GetElePropertyString)
+		.addFunction("get_vector2", &NFCLuaScriptModule::GetElePropertyVector2)
+		.addFunction("get_vector3", &NFCLuaScriptModule::GetElePropertyVector3)
+
+		//for class module
+
+
+		//for net module
+		/*
+		.addFunction("add_msg_cb", &NFCLuaScriptModule::GetElePropertyVector3)
+		.addFunction("send_msg", &NFCLuaScriptModule::GetElePropertyVector3)
+		*/
+
+		//for log module
+		/*
+		.addFunction("log_info", &NFCLuaScriptModule::GetElePropertyVector3)
+		.addFunction("log_error", &NFCLuaScriptModule::GetElePropertyVector3)
+		.addFunction("log_warning", &NFCLuaScriptModule::GetElePropertyVector3)
+		.addFunction("log_debug", &NFCLuaScriptModule::GetElePropertyVector3)
+		*/
+
+		//for actor
+
+		//for nosql
+		/*
+		.addFunction("save_data", &NFCLuaScriptModule::GetElePropertyVector3)
+		*/
+
+
+		.endClass();
 
     return true;
 }

@@ -5,11 +5,9 @@ function test_module.awake()
 end
 
 function test_module.init()
-	io.write("test_module init!\n");
-
-	io.write("Addr of pPluginManager " .. tostring(pPluginManager) .. "\n");
-
-	local pKernelModule = pPluginManager:FindKernelModule("NFCKernelModule");
+	io.write("test_module init!----" .. "\n");
+--[[
+	local pKernelModule = script_module:FindKernelModule();
 	io.write("Addr of NFCKernelModule " .. tostring(pKernelModule) .. "\n");
 
 	local pLogicClassModule = pPluginManager:FindLogicClassModule("NFCLogicClassModule");
@@ -19,11 +17,11 @@ function test_module.init()
 	io.write("Addr of NFCElementInfoModule " .. tostring(pElementInfoModule) .. "\n");
 
 	pLuaScriptModule:AddClassCallBack("Player", "TestModule.OnClassCommonEvent");
-
+]]
 end
 
 function test_module.after_init()
-	io.write("test_module after_init!" .. tostring(pLuaScriptModule) .. "\n");
+	io.write("test_module after_init!----" .. tostring(pLuaScriptModule) .. "\n");
 --[[
 	local pKernelModule = pPluginManager:FindKernelModule("NFCKernelModule");
 	pKernelModule:CreateScene(1);
