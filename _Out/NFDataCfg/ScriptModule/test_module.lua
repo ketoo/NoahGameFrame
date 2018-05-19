@@ -1,9 +1,9 @@
-TestModule = {}
+test_module = {}
+register_module(test_module,"test_module");
 
-register_module(TestModule,"TestModule");
-
-function TestModule.Init()
-	io.write("TestModule Init!\n");
+function test_module.init()
+	io.write("test_module init!\n");
+	--[[
 	io.write("Addr of pPluginManager " .. tostring(pPluginManager) .. "\n");
 
 	local pKernelModule = pPluginManager:FindKernelModule("NFCKernelModule");
@@ -16,11 +16,12 @@ function TestModule.Init()
 	io.write("Addr of NFCElementInfoModule " .. tostring(pElementInfoModule) .. "\n");
 
 	pLuaScriptModule:AddClassCallBack("Player", "TestModule.OnClassCommonEvent");
+	]]
 end
 
-function TestModule.AfterInit()
-	io.write("TestModule AfterInit!" .. tostring(pLuaScriptModule) .. "\n");
-
+function test_module.after_init()
+	io.write("test_module after_init!" .. tostring(pLuaScriptModule) .. "\n");
+--[[
 	local pKernelModule = pPluginManager:FindKernelModule("NFCKernelModule");
 	pKernelModule:CreateScene(1);
 
@@ -59,10 +60,24 @@ function TestModule.AfterInit()
 	pKernelModule:DoEvent(OID, 1, obj);
 
 	--Hearback
-	pLuaScriptModule:AddHeartBeat(OID, "strHeartBeatName", "TestModule.HearCallBack", 2, 55555);
+	pLuaScriptModule:AddHeartBeat(OID, "strHeartBeatName", "test_module.HearCallBack", 2, 55555);
+	]]
 end
 
-function TestModule.MaxPropertyCallBack(self, propertyName, oldVar, newVar)
+function test_module.execute()
+	io.write("test_module execute!\n");
+end
+
+function test_module.before_shut()
+	io.write("test_module before_shut!\n");
+end
+
+function test_module.shut()
+	io.write("test_module shut!\n");
+end
+
+
+function test_module.MaxPropertyCallBack(self, propertyName, oldVar, newVar)
 	local nOldVar = oldVar:GetInt();
 	local nNewVar = newVar:GetInt();
 
@@ -70,7 +85,7 @@ function TestModule.MaxPropertyCallBack(self, propertyName, oldVar, newVar)
 	io.write("Hello Lua MaxPropertyCallBack oldVar:" .. tostring(nOldVar) .. " newVar:" .. tostring(nNewVar) .. "\n");
 end
 
-function TestModule.TaskListCallBack(self, recordName, nOpType, nRow, nCol, oldVar, newVar)
+function test_module.TaskListCallBack(self, recordName, nOpType, nRow, nCol, oldVar, newVar)
 	io.write("Hello Lua TaskListCallBack ")
 	if nCol == 0 then
 		local nOldVar = oldVar:GetString();
@@ -88,7 +103,7 @@ function TestModule.TaskListCallBack(self, recordName, nOpType, nRow, nCol, oldV
 
 end
 
-function TestModule.EventCallBack(self, nEventID, arg)
+function test_module.EventCallBack(self, nEventID, arg)
 	local nValue = arg:Int(0);
 	local fValue = arg:Float(1);
 	local strValue = arg:String(2);
@@ -102,7 +117,7 @@ function TestModule.EventCallBack(self, nEventID, arg)
 	io.write("\r\targ:nValue:".. tostring(nValue) .. " fValue:"..tostring(fValue).. " strValue:"..tostring(strValue).." head:"..tostring(head).." data:"..tostring(data).."\n");
 end
 
-function TestModule.HearCallBack(self, strHeartBeat, fTime, nCount)
+function test_module.HearCallBack(self, strHeartBeat, fTime, nCount)
 	local obj = NFCDataList();
 	--local s = os.clock()
 	local s = pPluginManager:GetNowTime();
@@ -113,26 +128,14 @@ function TestModule.HearCallBack(self, strHeartBeat, fTime, nCount)
 	oldTime = s;
 end
 
-function TestModule.OnClassCommonEvent(self, strClassName, eventID, varData)
+function test_module.OnClassCommonEvent(self, strClassName, eventID, varData)
 	io.write("onClassCommonEvent, ClassName: " .. tostring(strClassName) .. " EventID: " .. tostring(eventID) .. "\n");
 end
 
-function TestModule.OnRecordCommonEvent(self, recordName, nOpType, nRow, nCol, oldVar, newVar)
+function test_module.OnRecordCommonEvent(self, recordName, nOpType, nRow, nCol, oldVar, newVar)
 	io.write("OnRecordCommonEvent, self: " .. tostring(self) .. " nOpType: " .. tostring(nOpType) .. " oldVar: " .. tostring(oldVar) .. " newVar: " .. tostring(newVar) .. "\n");
 end
 
-function TestModule.OnPropertyCommEvent(self, strPropertyName, oldVar, newVar)
+function test_module.OnPropertyCommEvent(self, strPropertyName, oldVar, newVar)
 	io.write("OnPropertyCommEvent, self: " .. tostring(self) .. " strPropertyName: " .. tostring(strPropertyName) .. " oldVar: " .. tostring(oldVar) .. " newVar: " .. tostring(newVar) .. "\n");
-end
-
-function TestModule.Execute()
-	io.write("TestModule Execute!\n");
-end
-
-function TestModule.BeforeShut()
-	io.write("TestModule BeforeShut!\n");
-end
-
-function TestModule.Shut()
-	io.write("TestModule Shut!\n");
 end

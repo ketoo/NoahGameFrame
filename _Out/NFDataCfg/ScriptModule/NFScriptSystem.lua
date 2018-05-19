@@ -1,4 +1,4 @@
---package.path = '../../NFDataCfg/Script/?.lua;'
+package.path = '../NFDataCfg/ScriptModule/?.lua;'
 
 pLuaScriptModule = nil;
 pPluginManager = nil;
@@ -67,3 +67,39 @@ function register_module(tbl, name)
 		end
 	end
 end
+
+---------------------------------------------
+
+function module_init(...)
+	for i=1, #(ScriptList) do
+		ScriptList[i].tbl.init(...);
+	end
+end
+
+function module_after_init(...)
+	for i=1, #(ScriptList) do
+		ScriptList[i].tbl.after_init(...);
+	end
+end
+
+function module_execute(...)
+	for i=1, #(ScriptList) do
+		ScriptList[i].tbl.execute(...);
+	end
+end
+
+function module_before_shut(...)
+	for i=1, #(ScriptList) do
+		ScriptList[i].tbl.before_shut(...);
+	end
+end
+
+function module_shut(...)
+	for i=1, #(ScriptList) do
+		ScriptList[i].tbl.shut(...);
+	end
+end
+
+----------------------------------------------
+
+require("script_list");
