@@ -2,13 +2,12 @@ package.path = '../NFDataCfg/ScriptModule/?.lua;'
 
 require("NFScriptInterfaces");
 
-pLuaScriptModule = nil;
-pPluginManager = nil;
-function init_script_system(xPluginManager, xLuaScriptModule)
-	pPluginManager = xPluginManager;
-	pLuaScriptModule = xLuaScriptModule;
+script_module = nil;
+function init_script_system(xLuaScriptModule)
+
+	script_module = xLuaScriptModule;
 	
-	io.write("\nHello Lua pPluginManager:" .. tostring(pPluginManager) .. " pLuaScriptModule:" .. tostring(pLuaScriptModule) .."\n\n");
+	io.write("\nHello Lua script_module:" .. tostring(script_module) .."\n\n");
 	io.write();
 	
 end
