@@ -1,8 +1,6 @@
 
 -- --NFLuaAPI:
 
--- SetComponentEnable(kernel, self, strComponentName, bEnable)
--- QueryComponentEnable(kernel, self, strComponentName)
 
 -- CreateContainer(kernel, nContainerIndex, strSceneConfigID)
 -- ExistContainer(kernel, nContainerIndex)

@@ -39,6 +39,14 @@ public:
     virtual bool BeforeShut();
 
 	//FOR KERNEL MODULE
+	NFGUID CreateObject(const NFGUID& self, const int nSceneID, const int nGroupID, const std::string& strClassName, const std::string& strIndex, const NFDataList& arg);
+	bool ExistObject(const NFGUID& self);
+	bool DestroyObject();
+
+	//return the group id
+	bool EnterScene(const int nSceneID, const int nGroupID);
+	bool DoEvent(const NFGUID& self, const int nEventID, const NFDataList& arg);
+
 	bool FindProperty(const NFGUID& self, const std::string& strPropertyName);
 
 	bool SetPropertyInt(const NFGUID& self, const std::string& strPropertyName, const NFINT64 nValue);
@@ -82,6 +90,8 @@ public:
 	NFGUID CreateID();
 
 	//FOR ELEMENT MODULE
+	bool ExistElementObject(const std::string& strConfigName);
+
 	NFINT64 GetElePropertyInt(const std::string& strConfigName, const std::string& strPropertyName);
 	double GetElePropertyFloat(const std::string& strConfigName, const std::string& strPropertyName);
 	std::string GetElePropertyString(const std::string& strConfigName, const std::string& strPropertyName);
