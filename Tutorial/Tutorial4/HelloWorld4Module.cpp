@@ -12,10 +12,12 @@
 
 bool NFCHelloWorld4Module::Init()
 {
+	m_pActorModule = pPluginManager->FindModule<NFIActorModule>();
+
 	return true;
 }
 
-int NFCHelloWorld4Module::HttpRequestAsyEnd(const NFGUID& self, const int nFormActor, const int nSubMsgID, const std::string& strData)
+int NFCHelloWorld4Module::RequestAsyEnd(const NFGUID& self, const int nFormActor, const int nSubMsgID, const std::string& strData)
 {
 	std::cout << "Main thread: " << std::this_thread::get_id() << " " << self.ToString() << " Actor: " << nFormActor << " MsgID: " << nSubMsgID << " Data:" << strData << std::endl;
 
@@ -27,11 +29,10 @@ bool NFCHelloWorld4Module::AfterInit()
 	
 	std::cout << "Hello, world4, AfterInit" << std::endl;
 
-	m_pActorModule = pPluginManager->FindModule<NFIActorModule>();
 
 	int nActorID = m_pActorModule->RequireActor();
-	m_pActorModule->AddComponent<NFCHttpComponent>(nActorID);
-	m_pActorModule->AddDefaultEndFunc(nActorID, this, &NFCHelloWorld4Module::HttpRequestAsyEnd);
+	m_pActorModule->AddComponent<NFHttpComponent>(nActorID);
+	m_pActorModule->AddDefaultEndFunc(nActorID, this, &NFCHelloWorld4Module::RequestAsyEnd);
 
 	for (int i = 0; i < 10; ++i)
 	{

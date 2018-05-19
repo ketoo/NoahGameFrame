@@ -13,6 +13,11 @@
 #include "NFComm/NFPluginModule/NFIPluginManager.h"
 #include "NFComm/NFPluginModule/NFINavigationModule.h"
 
+/*
+IN THIS PLUGIN:
+YOU WILL KNOW HOW TO USE THE "INavigationModule" TO FIND THE PATH FOR AI OBJECT
+*/
+
 class NFIHelloWorld
 	: public NFIModule
 {

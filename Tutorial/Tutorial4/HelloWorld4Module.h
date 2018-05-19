@@ -14,21 +14,27 @@
 #include "NFComm/NFPluginModule/NFIActorModule.h"
 #include "NFComm/NFPluginModule/NFIComponent.h"
 
-class NFCHttpComponent : public NFIComponent
+/*
+IN THIS PLUGIN:
+YOU WILL KNOW HOW TO USE THE "NFIActorModule" TO PROCESS IN DIFFERENT CPU
+*/
+
+
+class NFHttpComponent : public NFIComponent
 {
 public:
-	NFCHttpComponent() : NFIComponent(GET_CLASS_NAME(NFCHttpComponent))
+	NFHttpComponent() : NFIComponent(GET_CLASS_NAME(NFHttpComponent))
 	{
 	}
 
-	virtual ~NFCHttpComponent()
+	virtual ~NFHttpComponent()
 	{
 
 	}
 
 	virtual bool Init()
 	{
-		AddMsgObserver(2, this, &NFCHttpComponent::OnMsgEvent);
+		AddMsgObserver(2, this, &NFHttpComponent::OnMsgEvent);
 
 		return true;
 	}
@@ -75,7 +81,7 @@ public:
     virtual bool Shut();
 
 protected:
-	int HttpRequestAsyEnd(const NFGUID& self, const int nFormActor, const int nSubMsgID, const std::string& strData);
+	int RequestAsyEnd(const NFGUID& self, const int nFormActor, const int nSubMsgID, const std::string& strData);
 	
 protected:
     NFIActorModule* m_pActorModule;

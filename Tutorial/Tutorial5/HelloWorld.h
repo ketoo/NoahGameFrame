@@ -24,7 +24,10 @@
 #include "NFComm/NFPluginModule/NFIElementModule.h"
 #include "NFComm/NFPluginModule/NFIScheduleModule.h"
 
-
+/*
+IN THIS PLUGIN:
+YOU WILL KNOW HOW TO USE THE "NFIHttpServerModule" AND "NFIHttpClientModule" TO PROCESS WEB SERVICES AND ACCESS WEB RESOURCES
+*/
 
 class NFIHelloWorld
 	: public NFIModule
