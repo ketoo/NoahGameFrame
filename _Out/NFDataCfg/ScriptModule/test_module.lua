@@ -1,9 +1,12 @@
 test_module = {}
 register_module(test_module,"test_module");
 
+function test_module.awake()
+end
+
 function test_module.init()
 	io.write("test_module init!\n");
-	--[[
+
 	io.write("Addr of pPluginManager " .. tostring(pPluginManager) .. "\n");
 
 	local pKernelModule = pPluginManager:FindKernelModule("NFCKernelModule");
@@ -16,7 +19,7 @@ function test_module.init()
 	io.write("Addr of NFCElementInfoModule " .. tostring(pElementInfoModule) .. "\n");
 
 	pLuaScriptModule:AddClassCallBack("Player", "TestModule.OnClassCommonEvent");
-	]]
+
 end
 
 function test_module.after_init()
@@ -62,6 +65,10 @@ function test_module.after_init()
 	--Hearback
 	pLuaScriptModule:AddHeartBeat(OID, "strHeartBeatName", "test_module.HearCallBack", 2, 55555);
 	]]
+end
+
+function test_module.ready_execute()
+	io.write("test_module execute!\n");
 end
 
 function test_module.execute()

@@ -29,9 +29,11 @@ public:
         pPluginManager = p;
     }
 
-    virtual bool Init();
+	virtual bool Awake();
+	virtual bool Init();
     virtual bool Shut();
-    virtual bool Execute();
+	virtual bool ReadyExecute();
+	virtual bool Execute();
 
     virtual bool AfterInit();
     virtual bool BeforeShut();
