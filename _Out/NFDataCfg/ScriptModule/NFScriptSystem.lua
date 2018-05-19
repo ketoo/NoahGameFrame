@@ -1,8 +1,10 @@
 package.path = '../NFDataCfg/ScriptModule/?.lua;'
 
+require("NFScriptInterfaces");
+
 pLuaScriptModule = nil;
 pPluginManager = nil;
-function init_script_system(xPluginManager,xLuaScriptModule)
+function init_script_system(xPluginManager, xLuaScriptModule)
 	pPluginManager = xPluginManager;
 	pLuaScriptModule = xLuaScriptModule;
 	
@@ -69,6 +71,12 @@ function register_module(tbl, name)
 end
 
 ---------------------------------------------
+function module_awake(...)
+	for i=1, #(ScriptList) do
+		ScriptList[i].tbl.awake(...);
+	end
+end
+
 
 function module_init(...)
 	for i=1, #(ScriptList) do
@@ -79,6 +87,12 @@ end
 function module_after_init(...)
 	for i=1, #(ScriptList) do
 		ScriptList[i].tbl.after_init(...);
+	end
+end
+
+function module_ready_execute(...)
+	for i=1, #(ScriptList) do
+		ScriptList[i].tbl.ready_execute(...);
 	end
 end
 
