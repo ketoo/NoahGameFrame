@@ -90,10 +90,22 @@ bool NFCNoSqlModule::KeepLive()
 
 bool NFCNoSqlModule::Execute()
 {
+	NF_SHARE_PTR<NFIRedisClient> xNosqlDriver = this->mxNoSqlDriver.First();
+	while (xNosqlDriver)
+	{
+		if (xNosqlDriver->Enable())
+		{
+			xNosqlDriver->Execute();
+		}
+
+		xNosqlDriver = this->mxNoSqlDriver.Next();
+	}
+
 	if (mLastCheckTime + 10 > pPluginManager->GetNowTime())
 	{
 		return false;
 	}
+
 	mLastCheckTime = pPluginManager->GetNowTime();
 
 	NF_SHARE_PTR<NFIRedisClient> xNosqlDriver = this->mxNoSqlDriver.First();
