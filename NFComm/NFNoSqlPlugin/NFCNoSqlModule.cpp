@@ -115,7 +115,7 @@ bool NFCNoSqlModule::Execute()
 		{
 			//m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFGUID(), xNosqlDriver->GetIP(), xNosqlDriver->GetAuthKey(), __FUNCTION__, __LINE__);
 
-			//xNosqlDriver->ReConnect();
+			//xNosqlDriver->rea();
 		}
 
 		xNosqlDriver = this->mxNoSqlDriver.Next();
@@ -191,7 +191,7 @@ bool NFCNoSqlModule::AddConnectSql(const std::string& strID, const std::string& 
 {
 	if (!mxNoSqlDriver.ExistElement(strID))
 	{
-		NF_SHARE_PTR<NFIRedisClient> pNoSqlDriver(new NFRedisClient());
+		NF_SHARE_PTR<NFIRedisClient> pNoSqlDriver(NF_NEW NFRedisClient());
 		pNoSqlDriver->Connect(strIP, nPort, strPass);
 		return mxNoSqlDriver.AddElement(strID, pNoSqlDriver);
 	}
