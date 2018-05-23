@@ -36,8 +36,8 @@ bool NFCUILogin::initLayout()
 
 	m_pLoginButton->addClickEventListener(CC_CALLBACK_1(NFCUILogin::onLoginTouch, this));
 		
-	g_pNetLogic->ConnectServer("104.160.35.67", 14001);
-	//g_pNetLogic->ConnectServer("127.0.0.1", 14001);
+	//g_pNetLogic->ConnectServer("104.160.35.67", 14001);
+	g_pNetLogic->ConnectServer("127.0.0.1", 14001);
 	g_pLoginLogic->AddEventCallBack(E_LoginEvent_LoginSuccess, this, &NFCUILogin::OnLoginEvent);
 	return true;
 }
