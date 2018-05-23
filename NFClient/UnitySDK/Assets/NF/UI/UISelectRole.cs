@@ -11,7 +11,7 @@ public class UISelectRole : UIDialog {
 	private NFIEventModule mEventModule;
 
     private Transform mContentList;
-    private GameObject mItemModle;
+    private GameObject mItemModel;
 	public Button mCreateRole;
 	public Button mEnterGameRole;
 
@@ -27,8 +27,8 @@ public class UISelectRole : UIDialog {
 
 
         mContentList = transform.Find("Panel/ListView/Mask/Content");
-        mItemModle = mContentList.Find("Item").gameObject;
-        mItemModle.transform.SetParent(null);
+        mItemModel = mContentList.Find("Item").gameObject;
+        mItemModel.transform.SetParent(null);
 
 		mCreateRole.onClick.AddListener(onCreateRoleClick);
 		mEnterGameRole.onClick.AddListener(onEnterGameClick);
@@ -80,7 +80,7 @@ public class UISelectRole : UIDialog {
         int nIndex = 0;
 		foreach (NFMsg.RoleLiteInfo info in roleList)
         {
-            GameObject item = Instantiate(mItemModle);
+            GameObject item = Instantiate(mItemModel);
             item.transform.SetParent(mContentList);
             item.transform.localScale = UnityEngine.Vector3.one;
             item.GetComponentInChildren<Text>().text = System.Text.Encoding.Default.GetString(info.noob_name);

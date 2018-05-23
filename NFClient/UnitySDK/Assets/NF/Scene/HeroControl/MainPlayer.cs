@@ -9,7 +9,7 @@ public class MainPlayer : MonoBehaviour {
     private float mSyncTime = 0.3f;
     private float mSyncTimeTick = 0.0f;
     
-	public float speed = 0.6f;
+	public float speed = 6.0f;
     public float jumpSpeed = 10.0f;
     public float gravity = 20.0f;
     public bool MouseChange = true;
