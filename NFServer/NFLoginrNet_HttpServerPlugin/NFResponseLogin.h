@@ -1,19 +1,19 @@
 #pragma once
 // -------------------------------------------------------------------------
-//    @FileName			:    NFResponsetLogin.h
+//    @FileName			:    NFResponseLogin.h
 //    @Author           :    LvSheng.Huang
 //    @Date             :    2018-04-29
-//    @Module           :    NFResponsetLogin
+//    @Module           :    NFResponseLogin
 //
 // -------------------------------------------------------------------------
 
 #include "NFComm/NFPluginModule/NFIResponse.h"
 
-class NFResponsetLogin : public NFIResponse
+class NFResponseLogin : public NFIResponse
 {
 public:
 	std::string jwt;
 
 };
 
-AJSON(NFResponsetLogin, jwt, code, message)
+AJSON(NFResponseLogin, jwt, code, message)

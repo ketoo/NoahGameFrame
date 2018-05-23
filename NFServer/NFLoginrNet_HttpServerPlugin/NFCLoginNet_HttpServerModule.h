@@ -14,6 +14,7 @@
 #include "NFComm/NFPluginModule/NFIKernelModule.h"
 #include "NFComm/NFPluginModule/NFIElementModule.h"
 #include "NFComm/NFPluginModule/NFIHttpServerModule.h"
+#include "NFComm/NFPluginModule/NFILoginToMasterModule.h"
 #include "NFComm/NFPluginModule/NFILoginNet_ServerModule.h"
 #include "NFComm/NFPluginModule/NFILoginNet_HttpServerModule.h"
 
@@ -34,6 +35,7 @@ public:
 
 protected:
 	bool OnLogin(const NFHttpRequest& req);
+	bool OnWorld(const NFHttpRequest& req);
 
 	bool OnCommonQuery(const NFHttpRequest& req);
 
@@ -43,6 +45,7 @@ private:
 	NFIKernelModule* m_pKernelModule;
 	NFIHttpServerModule* m_pHttpNetModule;
 	NFILoginNet_ServerModule* m_pLoginServerModule;
+	NFILoginToMasterModule* m_pLoginToMasterModule;
 	NFIClassModule* m_pLogicClassModule;
 	NFIElementModule* m_pElementModule;
 };
