@@ -1,9 +1,9 @@
 #pragma once
 // -------------------------------------------------------------------------
-//    @FileName			:    NFResponsetLogin.h
+//    @FileName			:    NFResponseLogin.h
 //    @Author           :    LvSheng.Huang
 //    @Date             :    2018-04-29
-//    @Module           :    NFResponsetLogin
+//    @Module           :    NFResponseLogin
 //
 // -------------------------------------------------------------------------
 

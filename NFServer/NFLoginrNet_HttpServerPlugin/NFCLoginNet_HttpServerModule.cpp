@@ -8,6 +8,7 @@
 
 #include "NFRequestLogin.h"
 #include "NFResponseLogin.h"
+#include "NFResponseWorldList.h"
 #include "NFCLoginNet_HttpServerModule.h"
 #include "NFComm/NFMessageDefine/NFProtocolDefine.hpp"
 
@@ -18,7 +19,8 @@ bool NFCLoginNet_HttpServerModule::Init()
 	m_pLoginServerModule = pPluginManager->FindModule<NFILoginNet_ServerModule>();
 	m_pLogicClassModule = pPluginManager->FindModule<NFIClassModule>();
 	m_pElementModule = pPluginManager->FindModule<NFIElementModule>();
-
+	m_pLoginToMasterModule = pPluginManager->FindModule<NFILoginToMasterModule>();
+	
 	return true;
 }
 bool NFCLoginNet_HttpServerModule::Shut()
@@ -29,8 +31,10 @@ bool NFCLoginNet_HttpServerModule::Shut()
 bool NFCLoginNet_HttpServerModule::AfterInit()
 {
 	m_pHttpNetModule->AddRequestHandler("/login", NFHttpType::NF_HTTP_REQ_POST, this, &NFCLoginNet_HttpServerModule::OnLogin);
+	m_pHttpNetModule->AddRequestHandler("/world", NFHttpType::NF_HTTP_REQ_GET, this, &NFCLoginNet_HttpServerModule::OnWorld);
 
 	m_pHttpNetModule->AddNetFilter("/login", this, &NFCLoginNet_HttpServerModule::OnFilter);
+	m_pHttpNetModule->AddNetFilter("/world", this, &NFCLoginNet_HttpServerModule::OnFilter);
 
 	NF_SHARE_PTR<NFIClass> xLogicClass = m_pLogicClassModule->GetElement(NFrame::Server::ThisName());
 	if (xLogicClass)
@@ -65,7 +69,7 @@ bool NFCLoginNet_HttpServerModule::Execute()
 bool NFCLoginNet_HttpServerModule::OnLogin(const NFHttpRequest& req)
 {
 	std::string strResponse;
-	NFResponsetLogin xResponsetLogin;
+	NFResponseLogin xResponsetLogin;
 
 	NFRequestLogin xRequestLogin;
 	ajson::load_from_buff(xRequestLogin, req.body.c_str());
@@ -92,6 +96,34 @@ bool NFCLoginNet_HttpServerModule::OnLogin(const NFHttpRequest& req)
 		ajson::save_to(ss, xResponsetLogin);
 		strResponse = ss.str();
 	}
+
+	return m_pHttpNetModule->ResponseMsg(req, strResponse, NFWebStatus::WEB_OK);
+}
+
+bool NFCLoginNet_HttpServerModule::OnWorld(const NFHttpRequest & req)
+{
+	std::string strResponse;
+	NFResponseWorldList xResponsetWorldList;
+
+	NFMapEx<int, NFMsg::ServerInfoReport>& xWorldMap = m_pLoginToMasterModule->GetWorldMap();
+	NFMsg::ServerInfoReport* pWorldData = xWorldMap.FirstNude();
+	while (pWorldData)
+	{
+		NFResponseWorldList::NFWorld xWorld;
+
+		xWorld.id = pWorldData->server_id();
+		xWorld.name = pWorldData->server_name();
+		xWorld.state = pWorldData->server_state();
+		xWorld.count = pWorldData->server_cur_count();
+
+		xResponsetWorldList.world.push_back(xWorld);
+
+		pWorldData = xWorldMap.NextNude();
+	}
+
+	ajson::string_stream ss;
+	ajson::save_to(ss, xResponsetWorldList);
+	strResponse = ss.str();
 
 	return m_pHttpNetModule->ResponseMsg(req, strResponse, NFWebStatus::WEB_OK);
 }
