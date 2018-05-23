@@ -13,7 +13,8 @@ public class OtherPlayer : MonoBehaviour {
 	private Animator mAnimation;
 
     public float gravity = 20.0f;
-    private bool grounded = false;
+    private bool grounded = true;
+    private bool newPosition = false;
 
 	void Start ()
     {
@@ -34,26 +35,29 @@ public class OtherPlayer : MonoBehaviour {
 
     public void MoveTo(float speed, Vector3 pos)
     {
-		this.speed = 0.4f;
+		this.speed = 4.0f;
 		this.targetPos = pos;
 
-		transform.LookAt(pos);
-
-        this.moveDirection = targetPos - this.transform.position;
-
-		mAnimation.Play("run");
+        newPosition = true;
     }
 
     private void Update()
     {
-		float fDis = Mathf.Abs(Vector3.Distance(this.transform.position, targetPos));
-		if (fDis < 0.1f)
+        if (newPosition == false)
+            return;
+        
+        float fDis = Mathf.Abs(Vector3.Distance(this.transform.position, targetPos));
+		if (fDis < speed*0.1)
 		{
 			moveDirection = Vector3.zero;
 			mAnimation.Play("idle");
-		}
+            newPosition = false;
+        }
 		else
-		{
+        {
+            transform.LookAt(targetPos);
+            this.moveDirection = targetPos - this.transform.position;
+            mAnimation.Play("run");
 
             //mController.SimpleMove(this.moveDirection.normalized * speed);
             if (grounded)
@@ -68,12 +72,14 @@ public class OtherPlayer : MonoBehaviour {
 			Vector3 vector = this.moveDirection.normalized * speed * Time.deltaTime;
 			if (vector.sqrMagnitude >= fDis)
 			{
-				transform.position = targetPos;
-			}
+				//transform.position = targetPos;
+                mAnimation.Play("idle");
+                newPosition = false;
+            }
 			else
 			{
 				CollisionFlags flags = mController.Move(vector);
-                grounded = (flags & CollisionFlags.CollidedBelow) != 0; 	
+                //grounded = (flags & CollisionFlags.CollidedBelow) != 0; 	
 			}
 		}
     }
