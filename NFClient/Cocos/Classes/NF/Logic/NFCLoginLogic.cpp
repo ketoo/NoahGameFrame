@@ -104,6 +104,7 @@ void NFCLoginLogic::RequireServerList()
 {
 	NFMsg::ReqServerList xMsg;
 	xMsg.set_type(NFMsg::RSLT_GAMES_ERVER);
+    // 這邊 req game list ,req world list是共用NFMsg::EGameMsgID::EGMI_REQ_WORLD_LIST這個msg
 	g_pNetLogic->SendToServerByPB(NFMsg::EGameMsgID::EGMI_REQ_WORLD_LIST, xMsg);
 }
 

@@ -147,8 +147,9 @@ void NFCProxyServerNet_ServerModule::OnConnectKeyProcess(const NFSOCK nSockIndex
         return;
     }
     //TODO 比較client傳來的token
-	bool bRet = m_pSecurityModule->VirifySecurityKey(xMsg.account(), xMsg.security_code());
-    //bool bRet = m_pProxyToWorldModule->VerifyConnectData(xMsg.account(), xMsg.security_code());
+
+	//bool bRet = m_pSecurityModule->VirifySecurityKey(xMsg.account(), xMsg.security_code());
+    bool bRet = m_pProxyToWorldModule->VerifyConnectData(xMsg.account(), xMsg.security_code());
     if (bRet)
     {
         NetObject* pNetObject = m_pNetModule->GetNet()->GetNetObject(nSockIndex);

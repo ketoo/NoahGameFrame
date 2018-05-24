@@ -33,6 +33,7 @@ public:
 
 	//when a user login NF system, as a security module, you need to grant user an key.
 	virtual const std::string& GetSecurityKey(const std::string& strAcount);
+    std::string secKey;
 
 	//when the user want to connect to proxy, as a user need to provide the key that got in login system.
 	virtual bool VirifySecurityKey(const std::string& strAcount, const std::string& strSucrityKey);
