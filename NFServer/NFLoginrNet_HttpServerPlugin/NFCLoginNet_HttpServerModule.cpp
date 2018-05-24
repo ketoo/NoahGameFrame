@@ -9,6 +9,7 @@
 #include "NFRequestLogin.h"
 #include "NFResponseLogin.h"
 #include "NFResponseWorldList.h"
+#include "NFRequestSelectWorld.h"
 #include "NFCLoginNet_HttpServerModule.h"
 #include "NFComm/NFMessageDefine/NFProtocolDefine.hpp"
 
@@ -20,6 +21,7 @@ bool NFCLoginNet_HttpServerModule::Init()
 	m_pLogicClassModule = pPluginManager->FindModule<NFIClassModule>();
 	m_pElementModule = pPluginManager->FindModule<NFIElementModule>();
 	m_pLoginToMasterModule = pPluginManager->FindModule<NFILoginToMasterModule>();
+	m_pNetClientModule = pPluginManager->FindModule<NFINetClientModule>();
 	
 	return true;
 }
@@ -31,9 +33,9 @@ bool NFCLoginNet_HttpServerModule::Shut()
 bool NFCLoginNet_HttpServerModule::AfterInit()
 {
 	m_pHttpNetModule->AddRequestHandler("/login", NFHttpType::NF_HTTP_REQ_POST, this, &NFCLoginNet_HttpServerModule::OnLogin);
-	m_pHttpNetModule->AddRequestHandler("/world", NFHttpType::NF_HTTP_REQ_GET, this, &NFCLoginNet_HttpServerModule::OnWorld);
+	m_pHttpNetModule->AddRequestHandler("/world", NFHttpType::NF_HTTP_REQ_GET, this, &NFCLoginNet_HttpServerModule::OnWorldView);
+	m_pHttpNetModule->AddRequestHandler("/world", NFHttpType::NF_HTTP_REQ_CONNECT, this, &NFCLoginNet_HttpServerModule::OnWorldSelect);
 
-	m_pHttpNetModule->AddNetFilter("/login", this, &NFCLoginNet_HttpServerModule::OnFilter);
 	m_pHttpNetModule->AddNetFilter("/world", this, &NFCLoginNet_HttpServerModule::OnFilter);
 
 	NF_SHARE_PTR<NFIClass> xLogicClass = m_pLogicClassModule->GetElement(NFrame::Server::ThisName());
@@ -90,7 +92,7 @@ bool NFCLoginNet_HttpServerModule::OnLogin(const NFHttpRequest& req)
 		xResponsetLogin.code = NFIResponse::ResponseType::RES_TYPE_SUCCESS;
 		xResponsetLogin.jwt = xGUIDKey.ToString();
 
-		//mxConnectkey[xRequestLogin.user] = xRequestLogin.password;
+		mToken[xRequestLogin.user] = xGUIDKey.ToString();
 
 		ajson::string_stream ss;
 		ajson::save_to(ss, xResponsetLogin);
@@ -100,7 +102,7 @@ bool NFCLoginNet_HttpServerModule::OnLogin(const NFHttpRequest& req)
 	return m_pHttpNetModule->ResponseMsg(req, strResponse, NFWebStatus::WEB_OK);
 }
 
-bool NFCLoginNet_HttpServerModule::OnWorld(const NFHttpRequest & req)
+bool NFCLoginNet_HttpServerModule::OnWorldView(const NFHttpRequest & req)
 {
 	std::string strResponse;
 	NFResponseWorldList xResponsetWorldList;
@@ -128,13 +130,90 @@ bool NFCLoginNet_HttpServerModule::OnWorld(const NFHttpRequest & req)
 	return m_pHttpNetModule->ResponseMsg(req, strResponse, NFWebStatus::WEB_OK);
 }
 
+bool NFCLoginNet_HttpServerModule::OnWorldSelect(const NFHttpRequest & req)
+{
+	std::string strResponse;
+	NFIResponse xResponse;
+
+	std::string user = GetUserID(req);
+
+	NFRequestSelectWorld xRequestSelectWorld;
+	ajson::load_from_buff(xRequestSelectWorld, req.body.c_str());
+	if (xRequestSelectWorld.id == 0)
+	{
+		xResponse.code = NFIResponse::ResponseType::RES_TYPE_FAILED;
+
+		ajson::string_stream ss;
+		ajson::save_to(ss, xResponse);
+		strResponse = ss.str();
+
+		return m_pHttpNetModule->ResponseMsg(req, strResponse, NFWebStatus::WEB_OK);
+	}
+
+	NFMsg::ReqConnectWorld xData;
+	xData.set_world_id(xRequestSelectWorld.id);
+	xData.set_login_id(pPluginManager->GetAppID());
+	xData.mutable_sender()->CopyFrom(NFINetModule::NFToPB(NFGUID()));
+	xData.set_account(user);
+
+	m_pNetClientModule->SendSuitByPB(NF_SERVER_TYPES::NF_ST_MASTER, user, NFMsg::EGameMsgID::EGMI_REQ_CONNECT_WORLD, xData);
+
+	YieldCo();
+
+	return m_pHttpNetModule->ResponseMsg(req, strResponse, NFWebStatus::WEB_OK);
+}
+
 bool NFCLoginNet_HttpServerModule::OnCommonQuery(const NFHttpRequest& req)
 {
 	return m_pHttpNetModule->ResponseMsg(req, "OnCommonQuery", NFWebStatus::WEB_ERROR);
 }
 
+std::string NFCLoginNet_HttpServerModule::GetUserID(const NFHttpRequest & req)
+{
+	auto it = req.headers.find("user");
+	if (it != req.headers.end())
+	{
+		return it->second;
+	}
+
+	return "";
+}
+
+std::string NFCLoginNet_HttpServerModule::GetUserJWT(const NFHttpRequest & req)
+{
+	auto it = req.headers.find("jwt");
+	if (it != req.headers.end())
+	{
+		return it->second;
+	}
+
+	return "";
+}
+
+bool NFCLoginNet_HttpServerModule::CheckUserJWT(const std::string & user, const std::string & jwt)
+{
+	auto it = mToken.find(user);
+	if (it != mToken.end())
+	{
+		return (it->second == jwt);
+	}
+
+	return false;
+}
+
 NFWebStatus NFCLoginNet_HttpServerModule::OnFilter(const NFHttpRequest & req)
 {
+	std::string user = GetUserID(req);
+	std::string jwt = GetUserJWT(req);
+
+	bool bRet = CheckUserJWT(user, jwt);
+	if (bRet)
+	{
+		return NFWebStatus::WEB_OK;
+	}
+
+	return NFWebStatus::WEB_AUTH;
+	/*
 	std::cout << "OnFilter: " << std::endl;
 
 	std::cout << "url: " << req.url << std::endl;
@@ -157,4 +236,5 @@ NFWebStatus NFCLoginNet_HttpServerModule::OnFilter(const NFHttpRequest & req)
 	}
 
 	return NFWebStatus::WEB_OK;
+	*/
 }

@@ -9,6 +9,9 @@
 #ifndef NFC_LOGIN_NET_HTTP_MODULE_H
 #define NFC_LOGIN_NET_HTTP_MODULE_H
 
+#include <map>
+#include <iostream>
+
 #include "NFComm/NFMessageDefine/NFMsgDefine.h"
 #include "NFComm/NFPluginModule/NFPlatform.h"
 #include "NFComm/NFPluginModule/NFIKernelModule.h"
@@ -35,13 +38,22 @@ public:
 
 protected:
 	bool OnLogin(const NFHttpRequest& req);
-	bool OnWorld(const NFHttpRequest& req);
+	bool OnWorldView(const NFHttpRequest& req);
+	bool OnWorldSelect(const NFHttpRequest& req);
 
 	bool OnCommonQuery(const NFHttpRequest& req);
 
 	NFWebStatus OnFilter(const NFHttpRequest& req);
 
+	std::string GetUserID(const NFHttpRequest & req);
+	std::string GetUserJWT(const NFHttpRequest & req);
+	bool CheckUserJWT(const std::string & user, const std::string & jwt);
+
+
+	std::map<std::string, std::string> mToken;
+
 private:
+	NFINetClientModule* m_pNetClientModule;
 	NFIKernelModule* m_pKernelModule;
 	NFIHttpServerModule* m_pHttpNetModule;
 	NFILoginNet_ServerModule* m_pLoginServerModule;
