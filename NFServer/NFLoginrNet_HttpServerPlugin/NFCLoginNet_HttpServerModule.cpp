@@ -157,8 +157,17 @@ bool NFCLoginNet_HttpServerModule::OnWorldSelect(const NFHttpRequest & req)
 	xData.set_account(user);
 
 	m_pNetClientModule->SendSuitByPB(NF_SERVER_TYPES::NF_ST_MASTER, user, NFMsg::EGameMsgID::EGMI_REQ_CONNECT_WORLD, xData);
+	/*
+	while (true)
+	{
+		YieldCo();
 
-	YieldCo();
+		if ()
+		{
+			break;
+		}
+	}
+	*/
 
 	return m_pHttpNetModule->ResponseMsg(req, strResponse, NFWebStatus::WEB_OK);
 }
