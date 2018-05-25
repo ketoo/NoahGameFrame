@@ -28,8 +28,9 @@ bool NFCProxyServerNet_ServerModule::Init()
 bool NFCProxyServerNet_ServerModule::AfterInit()
 {
 	m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_REQ_CONNECT_KEY, this, &NFCProxyServerNet_ServerModule::OnConnectKeyProcess);
-	m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_REQ_WORLD_LIST, this, &NFCProxyServerNet_ServerModule::OnReqServerListProcess);
-	m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_REQ_SELECT_SERVER, this, &NFCProxyServerNet_ServerModule::OnSelectServerProcess);
+    m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_REQ_CONNECT_WORLD, this, &NFCProxyServerNet_ServerModule::OnSelectWorldProcess);
+    m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_REQ_WORLD_LIST, this, &NFCProxyServerNet_ServerModule::OnReqServerListProcess);
+    m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_REQ_SELECT_SERVER, this, &NFCProxyServerNet_ServerModule::OnSelectServerProcess);
 	m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_REQ_ROLE_LIST, this, &NFCProxyServerNet_ServerModule::OnReqRoleListProcess);
 	m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_REQ_CREATE_ROLE, this, &NFCProxyServerNet_ServerModule::OnReqCreateRoleProcess);
 	m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_REQ_DELETE_ROLE, this, &NFCProxyServerNet_ServerModule::OnReqDelRoleProcess);
@@ -310,6 +311,36 @@ void NFCProxyServerNet_ServerModule::OnSelectServerProcess(const NFSOCK nSockInd
     NFMsg::AckEventResult xSendMsg;
     xSendMsg.set_event_code(NFMsg::EGameEventCode::EGEC_SELECTSERVER_FAIL);
 	m_pNetModule->SendMsgPB(NFMsg::EGameMsgID::EGMI_ACK_SELECT_SERVER, xMsg, nSockIndex);
+}
+//想要連到其他的world時
+void NFCProxyServerNet_ServerModule::OnSelectWorldProcess(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
+{
+    NFGUID nPlayerID;
+    NFMsg::ReqConnectWorld xMsg;
+    if (!m_pNetModule->ReceivePB(nMsgID, msg, nLen, xMsg, nPlayerID))
+    {
+        return;
+    }
+
+    NetObject* pNetObject = m_pNetModule->GetNet()->GetNetObject(nSockIndex);
+    if (!pNetObject)
+    {
+        return;
+    }
+
+
+    if (pNetObject->GetConnectKeyState() <= 0)
+    {
+        return;
+    }
+
+    NFMsg::ReqConnectWorld xData;
+    xData.set_world_id(xMsg.world_id());
+    xData.set_login_id(pPluginManager->GetAppID());
+    xData.mutable_sender()->CopyFrom(NFINetModule::NFToPB(pNetObject->GetClientID()));
+    xData.set_account(pNetObject->GetAccount());
+
+    m_pNetClientModule->SendSuitByPB(NF_SERVER_TYPES::NF_ST_WORLD, pNetObject->GetAccount(), NFMsg::EGameMsgID::EGMI_REQ_CONNECT_WORLD, xData);//here has a problem to be solve
 }
 
 void NFCProxyServerNet_ServerModule::OnReqServerListProcess(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
