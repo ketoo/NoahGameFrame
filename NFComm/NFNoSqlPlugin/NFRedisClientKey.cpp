@@ -133,7 +133,7 @@ std::string NFRedisClient::TYPE(const std::string &key)
 	NF_SHARE_PTR<redisReply> pReply = BuildSendCmd(cmd);
 	if (pReply == nullptr)
 	{
-		return false;
+		return "";
 	}
 
 	std::string type_name = "";
