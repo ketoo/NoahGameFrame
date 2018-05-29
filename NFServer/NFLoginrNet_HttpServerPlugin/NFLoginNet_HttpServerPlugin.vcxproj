@@ -81,6 +81,7 @@
     <ClInclude Include="NFCLoginNet_HttpServerModule.h" />
     <ClInclude Include="NFLoginNet_HttpServerPlugin.h" />
     <ClInclude Include="NFRequestLogin.h" />
+    <ClInclude Include="NFRequestSelectWorld.h" />
     <ClInclude Include="NFResponseLogin.h" />
     <ClInclude Include="NFResponseWorldList.h" />
   </ItemGroup>
