@@ -1,21 +1,21 @@
 set(ProjectName "Tutorial7")
-file(GLOB Tutorial6_ROOT_Cpp
+file(GLOB Tutorial7_ROOT_Cpp
 	*.cpp)
-file(GLOB Tutorial6_ROOT_Hpp 
+file(GLOB Tutorial7_ROOT_Hpp 
 	*.h)
 
-add_library(Tutorial6 SHARED
-	${Tutorial6_ROOT_Cpp}
-	${Tutorial6_ROOT_Hpp})
+add_library(Tutorial7 SHARED
+	${Tutorial7_ROOT_Cpp}
+	${Tutorial7_ROOT_Hpp})
 	
-set_target_properties( Tutorial6 PROPERTIES OUTPUT_NAME_DEBUG "Tutorial6_d")
-set_target_properties( Tutorial6 PROPERTIES PREFIX "")
-set_target_properties( Tutorial6 PROPERTIES 
+set_target_properties( Tutorial7 PROPERTIES OUTPUT_NAME_DEBUG "Tutorial7_d")
+set_target_properties( Tutorial7 PROPERTIES PREFIX "")
+set_target_properties( Tutorial7 PROPERTIES 
 	FOLDER "Tutorial"
 	ARCHIVE_OUTPUT_DIRECTORY ${NFOutPutDir}
 	RUNTIME_OUTPUT_DIRECTORY ${NFOutPutDir}
 	LIBRARY_OUTPUT_DIRECTORY ${NFOutPutDir} )
-link_NFSDK("Tutorial6")
+link_NFSDK("Tutorial7")
 
 if(UNIX)
 	add_definitions(
