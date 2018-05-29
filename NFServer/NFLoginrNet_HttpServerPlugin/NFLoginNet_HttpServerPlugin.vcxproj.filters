@@ -17,6 +17,9 @@
     <ClInclude Include="NFResponseWorldList.h">
       <Filter>NFRequest</Filter>
     </ClInclude>
+    <ClInclude Include="NFRequestSelectWorld.h">
+      <Filter>NFResponse</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="NFResponse">
