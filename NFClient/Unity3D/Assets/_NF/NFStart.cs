@@ -116,7 +116,7 @@ public class NFStart : MonoBehaviour
 
     void OnGUI()
     {
-
+        //GUI.Button(new Rect(200, 20, 350, 50), "2Loginss");
         if (null != mxNetFocus)
         {
             mxNetFocus.Update();
@@ -146,9 +146,10 @@ public class NFStart : MonoBehaviour
                         }
                         else
                         {
+                            //GUI.Button(new Rect(200, 200, 350, 50), "2Loginss");
                             mxNetFocus.strAccount = GUI.TextField(new Rect(10, 10, 150, 50), mxNetFocus.strAccount);
                             mxNetFocus.strPassword = GUI.TextField(new Rect(10, 100, 150, 50), mxNetFocus.strPassword);
-                            if (GUI.Button (new Rect (10, 200, 150, 50), "Login"))
+                            if (GUI.Button (new Rect (10, 200, 150, 50), "Loginss"))
                             {
                                 Debug.Log("Login  Name: " + mxNetFocus.strAccount + "  Pass: " + mxNetFocus.strPassword);
                                 mxNetFocus.mxSendLogic.LoginPB(mxNetFocus.strAccount, mxNetFocus.strPassword, "");
@@ -177,23 +178,23 @@ public class NFStart : MonoBehaviour
                     {
                         string strWorpdIP = NFStart.Instance.GetFocusNet().strWorldIP;
                         string strWorpdKey = NFStart.Instance.GetFocusNet().strKey;
-                        string strAccount = NFStart.Instance.GetFocusNet().strKey;
+                        string strAccount = NFStart.Instance.GetFocusNet().strAccount;
                         int nPort = NFStart.Instance.GetFocusNet().nWorldPort;
 
                         NFNet xNet = new NFNet();
-#if UNITY_EDITOR
+//#if UNITY_EDITOR
                         if (strWorpdIP == "127.0.0.1")
                         {
                             strWorpdIP = strTargetIP;
                         }
-#endif
+//#endif
                         xNet.strWorldIP = strWorpdIP;
                         xNet.strKey = strWorpdKey;
                         xNet.strAccount = strAccount;
                         xNet.nWorldPort = nPort;
 
                         xNet.mPlayerState = NFNet.PLAYER_STATE.E_START_CONNECT_TO_GATE;
-                        Debug.Log("Conect to ProxyServer  " + strWorpdIP + ":" + nPort + "  Key: " + strWorpdKey);
+                        Debug.Log("Conect to ProxyServer  " + strWorpdIP + ":" + nPort + "  Key: " + strWorpdKey+ " strTargetIP="+ strTargetIP);
                         xNet.StartConnect(xNet.strWorldIP, nPort);
                         NFStart.Instance.SetFocusNet(xNet);
                     }
@@ -252,6 +253,8 @@ public class NFStart : MonoBehaviour
                     break;
 
                 case NFNet.PLAYER_STATE.E_PLAYER_GAMEING:
+                    //NFMsg.ReqAckPlayerChat.EGCT_PRIVATE
+                    //mxNetFocus.mxSendLogic.RequireChat(NFStart.Instance.GetFocusNet().nMainRoleID, null,3 , "test");
                     //NFCSectionManager.Instance.SetGameState(NFCSectionManager.UI_SECTION_STATE.UISS_GAMEING);
                     break;
 

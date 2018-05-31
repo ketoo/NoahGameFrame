@@ -38,7 +38,9 @@ void NFCLoginLogicModule::OnLoginProcess(const NFSOCK nSockIndex, const int nMsg
 	{
 		if (pNetObject->GetConnectKeyState() == 0)
 		{
-			if (!m_pAccountRedisModule->ExistAccount(xMsg.account()))
+			bool exist = false;
+			exist=m_pAccountRedisModule->ExistAccount(xMsg.account());
+			if (!exist)
 			{
 				m_pAccountRedisModule->AddAccount(xMsg.account(), xMsg.password());
 			}
@@ -47,7 +49,7 @@ void NFCLoginLogicModule::OnLoginProcess(const NFSOCK nSockIndex, const int nMsg
 			if (0 != nState)
 			{
 				std::ostringstream strLog;
-				strLog << "Check password failed, Account = " << xMsg.account() << " Password = " << xMsg.password();
+				strLog << "Check password failed, Account = " << xMsg.account() << " Password = " << xMsg.password()<<",exist="<<exist<<",driverOk="<< m_pAccountRedisModule->driverOk();
 				m_pLogModule->LogNormal(NFILogModule::NLL_ERROR_NORMAL, NFGUID(0, nSockIndex), strLog, __FUNCTION__, __LINE__);
 
 				NFMsg::AckEventResult xMsg;
