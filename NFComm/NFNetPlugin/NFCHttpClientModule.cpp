@@ -16,6 +16,7 @@ NFCHttpClientModule::NFCHttpClientModule(NFIPluginManager* p)
     pPluginManager = p;
     m_pHttpClient = new NFCHttpClient();
     m_xDefaultHttpHeaders["Connection"] = "close";
+    //evhttp_add_header(output_headers, "Connection", "keep-alive");
 	m_xDefaultHttpHeaders["Content-Type"] = "text/plain;text/html;application/x-www-form-urlencoded;charset=utf-8";
 	//m_xDefaultHttpHeaders["Content-Type"] = "text/plain;text/html;application/x-www-form-urlencoded;charset=utf-8";
     m_xDefaultHttpHeaders["User-Agent"] = DEFAULT_USER_AGENT;
