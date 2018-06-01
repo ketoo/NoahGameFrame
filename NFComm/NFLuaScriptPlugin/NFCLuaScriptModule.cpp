@@ -25,9 +25,12 @@ bool NFCLuaScriptModule::Awake()
 	m_pLogicClassModule = pPluginManager->FindModule<NFIClassModule>();
 	m_pElementModule = pPluginManager->FindModule<NFIElementModule>();
 	m_pEventModule = pPluginManager->FindModule<NFIEventModule>();
-	m_pScheduleModule = pPluginManager->FindModule<NFIScheduleModule>();
+    m_pScheduleModule = pPluginManager->FindModule<NFIScheduleModule>();
+    m_pNetClientModule = pPluginManager->FindModule<NFINetClientModule>();
+    m_pNetModule = pPluginManager->FindModule<NFINetModule>();
 
-	Regisger();
+
+    Register();
 
 	std::string strRootFileh = pPluginManager->GetConfigPath() + "NFDataCfg/ScriptModule/NFScriptSystem.lua";
 
@@ -465,10 +468,41 @@ bool NFCLuaScriptModule::CallLuaFuncFromMap(NFMap<T1, NFMap<NFGUID, NFList<strin
             }
         }
     }
+
     return true;
 }
 
-bool NFCLuaScriptModule::Regisger()
+void NFCLuaScriptModule::AddReceiveCallBack(const int nMsgID, const std::string& luaFunc)
+{
+}
+
+void NFCLuaScriptModule::SendByServerID(const int nServerID, const uint16_t nMsgID, const std::string& strData)
+{
+
+}
+
+void NFCLuaScriptModule::SendToAllServer(const uint16_t nMsgID, const std::string& strData)
+{
+
+}
+
+void NFCLuaScriptModule::SendToAllServer(const NF_SERVER_TYPES eType, const uint16_t nMsgID, const std::string& strData)
+{
+
+}
+
+//for net module
+void NFCLuaScriptModule::SendToPlayer(const NFGUID player, const uint16_t nMsgID, const std::string& strData)
+{
+
+}
+
+void NFCLuaScriptModule::SendToAllPlayer(const uint16_t nMsgID, const std::string& strData)
+{
+
+}
+
+bool NFCLuaScriptModule::Register()
 {
 	LuaIntf::LuaBinding(mLuaContext).beginClass<NFGUID>("NFGUID")
 		.addConstructor(LUA_ARGS())
@@ -577,20 +611,25 @@ bool NFCLuaScriptModule::Regisger()
 
 		//for element module
 		.addFunction("exist_element", &NFCLuaScriptModule::ExistElementObject)
-		.addFunction("get_int", &NFCLuaScriptModule::GetElePropertyInt)
-		.addFunction("get_float", &NFCLuaScriptModule::GetElePropertyFloat)
-		.addFunction("get_string", &NFCLuaScriptModule::GetElePropertyString)
-		.addFunction("get_vector2", &NFCLuaScriptModule::GetElePropertyVector2)
-		.addFunction("get_vector3", &NFCLuaScriptModule::GetElePropertyVector3)
+		.addFunction("get_ele_int", &NFCLuaScriptModule::GetElePropertyInt)
+		.addFunction("get_ele_float", &NFCLuaScriptModule::GetElePropertyFloat)
+		.addFunction("get_ele_string", &NFCLuaScriptModule::GetElePropertyString)
+		.addFunction("get_ele_vector2", &NFCLuaScriptModule::GetElePropertyVector2)
+		.addFunction("get_ele_vector3", &NFCLuaScriptModule::GetElePropertyVector3)
 
 		//for class module
 
 
 		//for net module
-		/*
-		.addFunction("add_msg_cb", &NFCLuaScriptModule::GetElePropertyVector3)
-		.addFunction("send_msg", &NFCLuaScriptModule::GetElePropertyVector3)
-		*/
+		.addFunction("add_msg_cb", &NFCLuaScriptModule::AddReceiveCallBack)
+
+		.addFunction("send_by_id", &NFCLuaScriptModule::SendByServerID)
+		.addFunction("send_by_type", &NFCLuaScriptModule::SendToAllServer)
+		.addFunction("send_all_server", &NFCLuaScriptModule::SendToAllServer)
+
+		.addFunction("send_player", &NFCLuaScriptModule::SendToPlayer)
+		.addFunction("send_all_player", &NFCLuaScriptModule::SendToAllPlayer)
+
 
 		//for log module
 		/*
