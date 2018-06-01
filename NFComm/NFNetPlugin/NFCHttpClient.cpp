@@ -264,6 +264,8 @@ bool NFCHttpClient::MakeRequest(const std::string& strUri,
     struct evkeyvalq* output_headers = evhttp_request_get_output_headers(req);
     evhttp_add_header(output_headers, "Host", host);
     evhttp_add_header(output_headers, "Connection", "close");
+    //evhttp_add_header(output_headers, "Connection", "keep-alive");
+
     std::map<std::string, std::string>::const_iterator it = xHeaders.cbegin();
     while (it != xHeaders.cend())
     {
