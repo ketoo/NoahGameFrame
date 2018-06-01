@@ -19,6 +19,8 @@
 #include "NFComm/NFPluginModule/NFIEventModule.h"
 #include "NFComm/NFPluginModule/NFIScheduleModule.h"
 #include "NFComm/NFPluginModule/NFIElementModule.h"
+#include "NFComm/NFPluginModule/NFINetClientModule.h"
+#include "NFComm/NFPluginModule/NFINetServerModule.h"
 
 class NFCLuaScriptModule
     : public NFILuaScriptModule
@@ -102,7 +104,17 @@ protected:
 	NFVector3 GetElePropertyVector3(const std::string& strConfigName, const std::string& strPropertyName);
 
 	//FOR NET MODULE
+    //for client module
 
+    virtual bool AddReceiveCallBack(const int nMsgID, const std::string& luaFunc);
+
+	virtual void SendByServerID(const int nServerID, const uint16_t nMsgID, const std::string& strData);
+    virtual void SendToAllServer(const uint16_t nMsgID, const std::string& strData);
+    virtual void SendToAllServer(const NF_SERVER_TYPES eType, const uint16_t nMsgID, const std::string& strData);
+
+    //for net module
+    virtual void SendToPlayer(const NFGUID player, const uint16_t nMsgID, const std::string& strData);
+    virtual void SendToAllPlayer(const uint16_t nMsgID, const std::string& strData);
 
 	//FOR CLASS MDOULE
 
@@ -113,6 +125,7 @@ protected:
 protected:
     template<typename T>
     bool AddLuaFuncToMap(NFMap<T, NFMap<NFGUID, NFList<string>>>& funcMap, const NFGUID& self, T key, std::string& luaFunc);
+
     template<typename T1, typename... T2>
     bool CallLuaFuncFromMap(NFMap<T1, NFMap<NFGUID, NFList<string>>>& funcMap, T1 key, const NFGUID& self, T2... arg);
 
@@ -124,14 +137,16 @@ protected:
     int OnClassEventCB(const NFGUID& self, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFDataList& var);
 
 protected:
-    bool Regisger();
+    bool Register();
 
 protected:
     NFIElementModule* m_pElementModule;
     NFIKernelModule* m_pKernelModule;
     NFIClassModule* m_pLogicClassModule;
 	NFIEventModule* m_pEventModule;
-	NFIScheduleModule* m_pScheduleModule;
+    NFIScheduleModule* m_pScheduleModule;
+    NFINetClientModule* m_pNetClientModule;
+    NFINetModule* m_pNetModule;
 
 protected:
     LuaIntf::LuaContext mLuaContext;
