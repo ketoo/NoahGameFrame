@@ -91,8 +91,16 @@ bool NFCAccountRedisModule::CreateRole(const std::string & strAccount, const std
 	{
 		if (xNoSqlDriver->EXISTS(strAccountKey) && !xNoSqlDriver->EXISTS(strRoleName))
 		{
-			xNoSqlDriver->HSET(strAccountKey, NFrame::Player::Name(), strRoleName);
-			xNoSqlDriver->HSET(strAccountKey, NFrame::Player::ID(), id.ToString());
+			std::vector<std::string> vecFields;
+			std::vector<std::string> vecValues;
+
+			vecFields.push_back(NFrame::Player::Name());
+			vecFields.push_back(NFrame::Player::ID());
+
+			vecValues.push_back(strRoleName);
+			vecValues.push_back(id.ToString());
+
+			xNoSqlDriver->HMSET(strAccountKey, vecFields, vecValues);
 
             NF_SHARE_PTR<NFIRedisClient> xRoleNameNoSqlDriver = m_pNoSqlModule->GetDriverBySuitConsistent();
             if (xRoleNameNoSqlDriver)
