@@ -14,7 +14,6 @@
 
 NF_EXPORT void DllStartPlugin(NFIPluginManager* pm)
 {
-
     CREATE_PLUGIN(pm, NFHeroPlugin)
 
 };
