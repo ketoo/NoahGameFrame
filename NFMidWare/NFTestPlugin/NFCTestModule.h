@@ -9,6 +9,7 @@
 #ifndef NFC_TEST_MODULE_H
 #define NFC_TEST_MODULE_H
 
+#include "Dependencies/googletest-release-1.8.0/googletest/include/gtest/gtest.h"
 #include "NFComm/NFMessageDefine/NFMsgDefine.h"
 #include "NFComm/NFPluginModule/NFINetModule.h"
 #include "NFComm/NFPluginModule/NFILogModule.h"
@@ -39,28 +40,15 @@ public:
     }
     virtual ~NFCTestModule() {};
 
+	virtual bool Awake();
     virtual bool Init();
     virtual bool Shut();
     virtual bool Execute();
     virtual bool AfterInit();
 
 protected:
-		int OnClassObjectEvent( const NFGUID& self, const std::string& strClassNames, const CLASS_OBJECT_EVENT eClassEvent, const NFDataList& var );
-
-protected:
-    void OnClientAcceptTask(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
-    void OnClientPushTask(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
 
 private:
-	NFINetModule*					m_pNetModule;
-    NFIKernelModule* 				m_pKernelModule;
-    NFIPackModule* 					m_pPackModule;
-    NFIElementModule* 				m_pElementModule;
-    NFIClassModule* 				m_pLogicClassModule;
-    NFIPropertyModule* 				m_pPropertyModule;
-	NFIHeroModule* 					m_pHeroModule;
-	NFICommonConfigModule* 			m_pCommonConfigModule;
-	NFIGameServerNet_ServerModule*	m_pGameServerNet_ServerModule;
 };
 
 
