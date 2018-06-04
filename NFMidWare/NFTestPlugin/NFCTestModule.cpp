@@ -8,17 +8,20 @@
 
 #include "NFCTestModule.h"
 
+bool NFCTestModule::Awake()
+{
+	int argc = 0;
+	char* c = new char[1];
+	testing::InitGoogleTest(&argc, &c);
+
+	return true;
+}
+
 bool NFCTestModule::Init()
 {
-	m_pNetModule = pPluginManager->FindModule<NFINetModule>();
-	m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>();
-	m_pPackModule = pPluginManager->FindModule<NFIPackModule>();
-	m_pElementModule = pPluginManager->FindModule<NFIElementModule>();
-	m_pLogicClassModule = pPluginManager->FindModule<NFIClassModule>();
-	m_pPropertyModule = pPluginManager->FindModule<NFIPropertyModule>();
-	m_pHeroModule = pPluginManager->FindModule<NFIHeroModule>();
-	m_pCommonConfigModule = pPluginManager->FindModule<NFICommonConfigModule>();
-	m_pGameServerNet_ServerModule = pPluginManager->FindModule<NFIGameServerNet_ServerModule>();
+	//find all plugins and all modules, then check whether they have a tester for each module
+	//if any module have't a tester for it then  can not start the application
+	//this is a rule for NF's world to keep high quality code under TDD
 
     return true;
 }
@@ -36,38 +39,6 @@ bool NFCTestModule::Execute()
 bool NFCTestModule::AfterInit()
 {
 
-	
-	m_pKernelModule->AddClassCallBack(NFrame::Player::ThisName(), this, &NFCTestModule::OnClassObjectEvent );
-	
-	CheckConfig();
-
-	//////////////////////////////////////////////////////////////////////////
-	// add msg handler
-    if (!m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_REQ_ACCEPT_TASK, this, &NFCTestModule::OnClientAcceptTask)) { return false; }
-    if (!m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_REQ_COMPELETE_TASK, this, &NFCTestModule::OnClientPushTask)) { return false; }
 
     return true;
-}
-
-int NFCTestModule::OnClassObjectEvent( const NFGUID& self, const std::string& strClassNames, const CLASS_OBJECT_EVENT eClassEvent, const NFDataList& var )
-{
-    if ( CLASS_OBJECT_EVENT::COE_DESTROY == eClassEvent )
-    {
-
-    }
-    else if ( CLASS_OBJECT_EVENT::COE_CREATE_NODATA == eClassEvent )
-    {
-    }
-
-    return 0;
-}
-
-void NFCTestModule::OnClientAcceptTask(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
-{
-    CLIENT_MSG_PROCESS( nMsgID, msg, nLen, NFMsg::ReqAcceptTask)
-}
-
-void NFCTestModule::OnClientPushTask(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
-{
-    CLIENT_MSG_PROCESS( nMsgID, msg, nLen, NFMsg::ReqCompeleteTask)
 }
