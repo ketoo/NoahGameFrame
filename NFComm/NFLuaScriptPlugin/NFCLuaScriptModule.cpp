@@ -486,9 +486,8 @@ void NFCLuaScriptModule::SendToAllServer(const uint16_t nMsgID, const std::strin
 
 }
 
-void NFCLuaScriptModule::SendToAllServer(const NF_SERVER_TYPES eType, const uint16_t nMsgID, const std::string& strData)
+void NFCLuaScriptModule::SendByServerType(const NF_SERVER_TYPES eType, const uint16_t nMsgID, const std::string & strData)
 {
-
 }
 
 //for net module
@@ -557,79 +556,61 @@ bool NFCLuaScriptModule::Register()
 		.addFunction("set_vector2", &NFData::SetVector2)
 		.addFunction("set_vector3", &NFData::SetVector3)
 		.endClass();
+	//for kernel module
 
 	LuaIntf::LuaBinding(mLuaContext).beginClass<NFCLuaScriptModule>("NFCLuaScriptModule")
-
-		//for kernel module
 		.addFunction("create_object", &NFCLuaScriptModule::CreateObject)
 		.addFunction("exist_object", &NFCLuaScriptModule::ExistObject)
 		.addFunction("destroy_object", &NFCLuaScriptModule::CreateObject)
 		.addFunction("enter_scene", &NFCLuaScriptModule::EnterScene)
-
 		.addFunction("do_event", &NFCLuaScriptModule::DoEvent)
-
 		.addFunction("set_prop_int", &NFCLuaScriptModule::SetPropertyInt)
 		.addFunction("set_prop_float", &NFCLuaScriptModule::SetPropertyFloat)
 		.addFunction("set_prop_string", &NFCLuaScriptModule::SetPropertyString)
 		.addFunction("set_prop_object", &NFCLuaScriptModule::SetPropertyObject)
 		.addFunction("set_prop_vector2", &NFCLuaScriptModule::SetPropertyVector2)
 		.addFunction("set_prop_vector3", &NFCLuaScriptModule::SetPropertyVector3)
-
 		.addFunction("get_prop_int", &NFCLuaScriptModule::GetPropertyInt)
 		.addFunction("get_prop_float", &NFCLuaScriptModule::GetPropertyFloat)
 		.addFunction("get_prop_string", &NFCLuaScriptModule::GetPropertyString)
 		.addFunction("get_prop_object", &NFCLuaScriptModule::GetPropertyObject)
 		.addFunction("get_prop_vector2", &NFCLuaScriptModule::GetPropertyVector2)
 		.addFunction("get_prop_vector3", &NFCLuaScriptModule::GetPropertyVector3)
-
 		.addFunction("set_record_int", &NFCLuaScriptModule::SetRecordInt)
 		.addFunction("set_record_float",&NFCLuaScriptModule::SetRecordFloat)
 		.addFunction("set_record_string", &NFCLuaScriptModule::SetRecordString)
 		.addFunction("set_record_object", &NFCLuaScriptModule::SetRecordObject)
 		.addFunction("set_record_vector2", &NFCLuaScriptModule::SetPropertyVector2)
 		.addFunction("set_record_vector3", &NFCLuaScriptModule::SetPropertyVector3)
-		
 		.addFunction("get_record_int", &NFCLuaScriptModule::GetRecordInt)
 		.addFunction("get_record_float", &NFCLuaScriptModule::GetRecordFloat)
 		.addFunction("get_record_string", &NFCLuaScriptModule::GetRecordString)
 		.addFunction("get_record_object", &NFCLuaScriptModule::GetRecordObject)
 		.addFunction("get_record_vector2", &NFCLuaScriptModule::GetPropertyVector2)
 		.addFunction("get_record_vector3", &NFCLuaScriptModule::GetPropertyVector3)
-
 		.addFunction("add_prop_cb", &NFCLuaScriptModule::AddPropertyCallBack)
 		.addFunction("add_record_cb", &NFCLuaScriptModule::AddRecordCallBack)
 		.addFunction("add_event_cb", &NFCLuaScriptModule::AddEventCallBack)
 		.addFunction("add_class_cb", &NFCLuaScriptModule::AddClassCallBack)
 		.addFunction("add_schedule", &NFCLuaScriptModule::AddSchedule)
 		.addFunction("do_event", &NFCLuaScriptModule::AddSchedule)
-		//do_event
 		.addFunction("add_row", &NFCLuaScriptModule::AddRow)
 		.addFunction("rem_row", &NFCLuaScriptModule::RemRow)
-
 		.addFunction("time", &NFCLuaScriptModule::GetNowTime)
 		.addFunction("new_id", &NFCLuaScriptModule::CreateID)
-
-		//for element module
 		.addFunction("exist_element", &NFCLuaScriptModule::ExistElementObject)
 		.addFunction("get_ele_int", &NFCLuaScriptModule::GetElePropertyInt)
 		.addFunction("get_ele_float", &NFCLuaScriptModule::GetElePropertyFloat)
 		.addFunction("get_ele_string", &NFCLuaScriptModule::GetElePropertyString)
 		.addFunction("get_ele_vector2", &NFCLuaScriptModule::GetElePropertyVector2)
 		.addFunction("get_ele_vector3", &NFCLuaScriptModule::GetElePropertyVector3)
-
-		//for class module
-
-
-		//for net module
 		.addFunction("add_msg_cb", &NFCLuaScriptModule::AddReceiveCallBack)
-
 		.addFunction("send_by_id", &NFCLuaScriptModule::SendByServerID)
-		.addFunction("send_by_type", &NFCLuaScriptModule::SendToAllServer)
+		.addFunction("send_by_type", &NFCLuaScriptModule::SendByServerType)
 		.addFunction("send_all_server", &NFCLuaScriptModule::SendToAllServer)
-
 		.addFunction("send_player", &NFCLuaScriptModule::SendToPlayer)
 		.addFunction("send_all_player", &NFCLuaScriptModule::SendToAllPlayer)
-
+		.endClass();
 
 		//for log module
 		/*
@@ -647,7 +628,7 @@ bool NFCLuaScriptModule::Register()
 		*/
 
 
-		.endClass();
+		
 
     return true;
 }
