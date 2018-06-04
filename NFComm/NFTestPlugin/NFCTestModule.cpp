@@ -23,6 +23,12 @@ bool NFCTestModule::Init()
 	//if any module have't a tester for it then  can not start the application
 	//this is a rule for NF's world to keep high quality code under TDD
 
+	std::list<NFIModule*> xModules = pPluginManager->Modules();
+	for (auto it : xModules)
+	{
+		NFIModule* pModule = it;
+	}
+
     return true;
 }
 
