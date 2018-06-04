@@ -93,33 +93,13 @@ bool NFCNoSqlModule::Execute()
 	NF_SHARE_PTR<NFIRedisClient> xNosqlDriver = this->mxNoSqlDriver.First();
 	while (xNosqlDriver)
 	{
-		if (xNosqlDriver->Enable())
-		{
-			xNosqlDriver->Execute();
-		}
+		xNosqlDriver->Execute();
 
 		xNosqlDriver = this->mxNoSqlDriver.Next();
 	}
 
-	if (mLastCheckTime + 10 > pPluginManager->GetNowTime())
-	{
-		return false;
-	}
-
-	mLastCheckTime = pPluginManager->GetNowTime();
-
-	xNosqlDriver = this->mxNoSqlDriver.First();
-	while (xNosqlDriver)
-	{
-		if (!xNosqlDriver->Enable())
-		{
-			//m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFGUID(), xNosqlDriver->GetIP(), xNosqlDriver->GetAuthKey(), __FUNCTION__, __LINE__);
-
-			//xNosqlDriver->rea();
-		}
-
-		xNosqlDriver = this->mxNoSqlDriver.Next();
-	}
+	Reconnect();
+	
 
 	return true;
 }
@@ -226,4 +206,30 @@ NF_SHARE_PTR<NFIRedisClient> NFCNoSqlModule::GetDriver(const std::string& strID)
 bool NFCNoSqlModule::RemoveConnectSql(const std::string& strID)
 {
 	return mxNoSqlDriver.RemoveElement(strID);
+}
+
+void NFCNoSqlModule::Reconnect()
+{
+	if (mLastCheckTime + 10 > pPluginManager->GetNowTime())
+	{
+		return;
+	}
+
+	mLastCheckTime = pPluginManager->GetNowTime();
+
+
+	NF_SHARE_PTR<NFIRedisClient> xNosqlDriver = this->mxNoSqlDriver.First();
+	while (xNosqlDriver)
+	{
+		if (xNosqlDriver->Enable() && !xNosqlDriver->Authed())
+		{
+			xNosqlDriver->AUTH(xNosqlDriver->GetAuthKey());
+		}
+		else if (!xNosqlDriver->Enable())
+		{
+			//reconnect
+		}
+
+		xNosqlDriver = this->mxNoSqlDriver.Next();
+	}
 }
