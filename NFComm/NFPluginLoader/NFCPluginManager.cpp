@@ -449,6 +449,19 @@ NFIModule* NFCPluginManager::FindModule(const std::string& strModuleName)
     return NULL;
 }
 
+std::list<NFIModule*> NFCPluginManager::Modules()
+{
+	std::list<NFIModule*> xModules;
+
+	PluginInstanceMap::iterator itCheckInstance = mPluginInstanceMap.begin();
+	for (; itCheckInstance != mPluginInstanceMap.end(); itCheckInstance++)
+	{
+		xModules.push_back(itCheckInstance->second);
+	}
+
+	return xModules;
+}
+
 bool NFCPluginManager::AfterInit()
 {
     PluginInstanceMap::iterator itAfterInstance = mPluginInstanceMap.begin();
