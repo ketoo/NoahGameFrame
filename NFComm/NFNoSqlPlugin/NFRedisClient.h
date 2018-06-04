@@ -39,6 +39,7 @@ public:
 	virtual bool Connect(const std::string& ip, const int port, const std::string& auth = "");
 
 	virtual bool Enable();
+	virtual bool Authed();
 	virtual bool Busy();
 
 	virtual bool Execute();
@@ -785,6 +786,7 @@ private:
 	int mnPort;
 	std::string mstrAuthKey;
 
+	bool bAuthed;
 	bool bBusy;
 	NFRedisClientSocket* m_pRedisClientSocket;
 };

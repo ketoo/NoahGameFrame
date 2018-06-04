@@ -28,12 +28,14 @@ public:
 	virtual bool Connect(const std::string& ip, const int port, const std::string& auth) = 0;
 
 	virtual bool Enable() = 0;
+	virtual bool Authed() = 0;
 	virtual bool Busy() = 0;
 
 	virtual bool KeepLive() = 0;
 	virtual bool Execute() = 0;
 
 
+	virtual const std::string& GetAuthKey() = 0;
 
 	/**
 	* @brie if you have setted a password for Redis, you much use AUTH cmd to connect to the server than you can use other cmds

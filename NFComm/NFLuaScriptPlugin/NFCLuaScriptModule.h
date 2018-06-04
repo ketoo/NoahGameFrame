@@ -20,7 +20,7 @@
 #include "NFComm/NFPluginModule/NFIScheduleModule.h"
 #include "NFComm/NFPluginModule/NFIElementModule.h"
 #include "NFComm/NFPluginModule/NFINetClientModule.h"
-#include "NFComm/NFPluginModule/NFINetServerModule.h"
+#include "NFComm/NFPluginModule/NFINetModule.h"
 
 class NFCLuaScriptModule
     : public NFILuaScriptModule
@@ -106,11 +106,11 @@ protected:
 	//FOR NET MODULE
     //for client module
 
-    virtual bool AddReceiveCallBack(const int nMsgID, const std::string& luaFunc);
+    virtual void AddReceiveCallBack(const int nMsgID, const std::string& luaFunc);
 
 	virtual void SendByServerID(const int nServerID, const uint16_t nMsgID, const std::string& strData);
     virtual void SendToAllServer(const uint16_t nMsgID, const std::string& strData);
-    virtual void SendToAllServer(const NF_SERVER_TYPES eType, const uint16_t nMsgID, const std::string& strData);
+    virtual void SendByServerType(const NF_SERVER_TYPES eType, const uint16_t nMsgID, const std::string& strData);
 
     //for net module
     virtual void SendToPlayer(const NFGUID player, const uint16_t nMsgID, const std::string& strData);
