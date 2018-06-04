@@ -144,6 +144,8 @@ public:
 
     virtual NFIModule* FindModule(const std::string& strModuleName) = 0;
 
+	virtual std::list<NFIModule*> Modules() = 0;
+
     virtual int GetAppID() const = 0;
     virtual void SetAppID(const int nAppID) = 0;
 

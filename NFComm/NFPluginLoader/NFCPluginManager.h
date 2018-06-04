@@ -64,6 +64,8 @@ public:
 
     virtual NFIModule* FindModule(const std::string& strModuleName) override;
 
+	virtual std::list<NFIModule*> Modules();
+
     virtual bool Execute() override;
 
 	virtual int GetAppID() const override;
