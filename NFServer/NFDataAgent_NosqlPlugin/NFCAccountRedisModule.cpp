@@ -113,6 +113,46 @@ bool NFCAccountRedisModule::CreateRole(const std::string & strAccount, const std
 			vKey.push_back(NFrame::Player::Account());
 			vValue.push_back(strAccount);
 
+			NF_SHARE_PTR<NFIPropertyManager> xPropertyManager = m_pCommonRedisModule->NewPropertyManager(NFrame::Player::ThisName());
+			if (xPropertyManager)
+			{
+				NF_SHARE_PTR<NFIProperty> xProperty = xPropertyManager->First();
+				while (xProperty)
+				{
+					if (xProperty->GetKey() == NFrame::Player::Account())
+					{
+						continue;
+					}
+					else if (xProperty->GetKey() == NFrame::Player::Level())
+					{
+						vKey.push_back(xProperty->GetKey());
+						vValue.push_back("1");
+					}
+					else
+					{
+						switch (xProperty->GetType())
+						{
+						case NFDATA_TYPE::TDATA_INT:
+							break;
+						case NFDATA_TYPE::TDATA_FLOAT:
+							break;
+						case NFDATA_TYPE::TDATA_STRING:
+							break;
+						case NFDATA_TYPE::TDATA_OBJECT:
+							break;
+						case NFDATA_TYPE::TDATA_VECTOR2:
+							break;
+						case NFDATA_TYPE::TDATA_VECTOR3:
+							break;
+						default:
+							break;
+						}
+					}
+
+					xProperty = xPropertyManager->First();
+				}
+			}
+
 			xNoSqlDriver->HMSET(m_pCommonRedisModule->GetPropertyCacheKey(id), vKey, vValue);
 			//xNoSqlDriver->HMSet(m_pCommonRedisModule->GetRecordCacheKey(id), vKey, vValue);
 
