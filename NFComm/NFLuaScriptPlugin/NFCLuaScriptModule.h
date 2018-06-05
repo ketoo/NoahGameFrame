@@ -106,15 +106,22 @@ protected:
 	//FOR NET MODULE
     //for client module
 
-    virtual void AddReceiveCallBack(const int nMsgID, const std::string& luaFunc);
+    void AddReceiveCallBack(const int nMsgID, const std::string& luaFunc);
 
-	virtual void SendByServerID(const int nServerID, const uint16_t nMsgID, const std::string& strData);
-    virtual void SendToAllServer(const uint16_t nMsgID, const std::string& strData);
-    virtual void SendByServerType(const NF_SERVER_TYPES eType, const uint16_t nMsgID, const std::string& strData);
+	void SendByServerID(const int nServerID, const uint16_t nMsgID, const std::string& strData);
+    void SendToAllServer(const uint16_t nMsgID, const std::string& strData);
+    void SendByServerType(const NF_SERVER_TYPES eType, const uint16_t nMsgID, const std::string& strData);
 
     //for net module
-    virtual void SendToPlayer(const NFGUID player, const uint16_t nMsgID, const std::string& strData);
-    virtual void SendToAllPlayer(const uint16_t nMsgID, const std::string& strData);
+    void SendToPlayer(const NFGUID player, const uint16_t nMsgID, const std::string& strData);
+    void SendToAllPlayer(const uint16_t nMsgID, const std::string& strData);
+
+	//for log
+	void LogInfo(const std::string& strData);
+	void LogError(const std::string& strData);
+	void LogWarning(const std::string& strData);
+	void LogDebug(const std::string& strData);
+
 
 	//FOR CLASS MDOULE
 
