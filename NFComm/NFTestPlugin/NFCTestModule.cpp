@@ -12,7 +12,15 @@ bool NFCTestModule::Awake()
 {
 	int argc = 0;
 	char* c = new char[1];
-	testing::InitGoogleTest(&argc, &c);
+	//testing::InitGoogleTest(&argc, &c);
+
+	std::list<NFIModule*> xModules = pPluginManager->Modules();
+	for (auto it : xModules)
+	{
+		NFIModule* pModule = it;
+		NFIModule* pTestModule = pPluginManager->FindTestModule(pModule->strName);
+		pTestModule->Awake();
+	}
 
 	return true;
 }
@@ -27,24 +35,113 @@ bool NFCTestModule::Init()
 	for (auto it : xModules)
 	{
 		NFIModule* pModule = it;
+		NFIModule* pTestModule = pPluginManager->FindTestModule(pModule->strName);
+		pTestModule->Init();
 	}
 
     return true;
 }
 
-bool NFCTestModule::Shut()
+bool NFCTestModule::AfterInit()
 {
-    return true;
+	std::list<NFIModule*> xModules = pPluginManager->Modules();
+	for (auto it : xModules)
+	{
+		NFIModule* pModule = it;
+		NFIModule* pTestModule = pPluginManager->FindTestModule(pModule->strName);
+		pTestModule->AfterInit();
+	}
+
+	return true;
+}
+
+bool NFCTestModule::CheckConfig()
+{
+	std::list<NFIModule*> xModules = pPluginManager->Modules();
+	for (auto it : xModules)
+	{
+		NFIModule* pModule = it;
+		NFIModule* pTestModule = pPluginManager->FindTestModule(pModule->strName);
+		pTestModule->CheckConfig();
+	}
+
+	return true;
+}
+
+bool NFCTestModule::ReadyExecute()
+{
+	std::list<NFIModule*> xModules = pPluginManager->Modules();
+	for (auto it : xModules)
+	{
+		NFIModule* pModule = it;
+		NFIModule* pTestModule = pPluginManager->FindTestModule(pModule->strName);
+		pTestModule->ReadyExecute();
+	}
+
+	return true;
 }
 
 bool NFCTestModule::Execute()
 {
+	std::list<NFIModule*> xModules = pPluginManager->Modules();
+	for (auto it : xModules)
+	{
+		NFIModule* pModule = it;
+		NFIModule* pTestModule = pPluginManager->FindTestModule(pModule->strName);
+		pTestModule->Execute();
+	}
+
     return true;
 }
 
-bool NFCTestModule::AfterInit()
+bool NFCTestModule::BeforeShut()
 {
+	std::list<NFIModule*> xModules = pPluginManager->Modules();
+	for (auto it : xModules)
+	{
+		NFIModule* pModule = it;
+		NFIModule* pTestModule = pPluginManager->FindTestModule(pModule->strName);
+		pTestModule->BeforeShut();
+	}
 
+	return true;
+}
 
-    return true;
+bool NFCTestModule::Shut()
+{
+	std::list<NFIModule*> xModules = pPluginManager->Modules();
+	for (auto it : xModules)
+	{
+		NFIModule* pModule = it;
+		NFIModule* pTestModule = pPluginManager->FindTestModule(pModule->strName);
+		pTestModule->Shut();
+	}
+
+	return true;
+}
+
+bool NFCTestModule::Finalize()
+{
+	std::list<NFIModule*> xModules = pPluginManager->Modules();
+	for (auto it : xModules)
+	{
+		NFIModule* pModule = it;
+		NFIModule* pTestModule = pPluginManager->FindTestModule(pModule->strName);
+		pTestModule->Finalize();
+	}
+
+	return true;
+}
+
+bool NFCTestModule::OnReloadPlugin()
+{
+	std::list<NFIModule*> xModules = pPluginManager->Modules();
+	for (auto it : xModules)
+	{
+		NFIModule* pModule = it;
+		NFIModule* pTestModule = pPluginManager->FindTestModule(pModule->strName);
+		pTestModule->OnReloadPlugin();
+	}
+
+	return true;
 }
