@@ -57,15 +57,18 @@ NF_SHARE_PTR<NFIPropertyManager> NFCCommonRedisModule::NewPropertyManager(const 
         NF_SHARE_PTR<NFIPropertyManager> pPropertyManager(NF_NEW NFCPropertyManager(ident));
 
         NF_SHARE_PTR<NFIProperty> pStaticConfigPropertyInfo = pStaticClassPropertyManager->First();
-        while (pStaticConfigPropertyInfo.get())
+        while (pStaticConfigPropertyInfo)
         {
-            NF_SHARE_PTR<NFIProperty> xProperty = pPropertyManager->AddProperty(ident, pStaticConfigPropertyInfo->GetKey(), pStaticConfigPropertyInfo->GetType());
+			if (pStaticConfigPropertyInfo->GetSave())
+			{
+				NF_SHARE_PTR<NFIProperty> xProperty = pPropertyManager->AddProperty(ident, pStaticConfigPropertyInfo->GetKey(), pStaticConfigPropertyInfo->GetType());
 
-            xProperty->SetPublic(pStaticConfigPropertyInfo->GetPublic());
-            xProperty->SetPrivate(pStaticConfigPropertyInfo->GetPrivate());
-            xProperty->SetSave(pStaticConfigPropertyInfo->GetSave());
-            xProperty->SetCache(pStaticConfigPropertyInfo->GetCache());
-            xProperty->SetRef(pStaticConfigPropertyInfo->GetRef());
+				xProperty->SetPublic(pStaticConfigPropertyInfo->GetPublic());
+				xProperty->SetPrivate(pStaticConfigPropertyInfo->GetPrivate());
+				xProperty->SetSave(pStaticConfigPropertyInfo->GetSave());
+				xProperty->SetCache(pStaticConfigPropertyInfo->GetCache());
+				xProperty->SetRef(pStaticConfigPropertyInfo->GetRef());
+			}
 
             pStaticConfigPropertyInfo = pStaticClassPropertyManager->Next();
         }
@@ -87,16 +90,20 @@ NF_SHARE_PTR<NFIRecordManager> NFCCommonRedisModule::NewRecordManager(const std:
         NF_SHARE_PTR<NFIRecord> pConfigRecordInfo = pStaticClassRecordManager->First();
         while (pConfigRecordInfo)
         {
-            NF_SHARE_PTR<NFIRecord> xRecord = pRecordManager->AddRecord(ident,
-                pConfigRecordInfo->GetName(),
-                pConfigRecordInfo->GetInitData(),
-                pConfigRecordInfo->GetTag(),
-                pConfigRecordInfo->GetRows());
+			if (pConfigRecordInfo->GetSave())
+			{
+				NF_SHARE_PTR<NFIRecord> xRecord = pRecordManager->AddRecord(ident,
+					pConfigRecordInfo->GetName(),
+					pConfigRecordInfo->GetInitData(),
+					pConfigRecordInfo->GetTag(),
+					pConfigRecordInfo->GetRows());
 
-            xRecord->SetPublic(pConfigRecordInfo->GetPublic());
-            xRecord->SetPrivate(pConfigRecordInfo->GetPrivate());
-            xRecord->SetSave(pConfigRecordInfo->GetSave());
-            xRecord->SetCache(pConfigRecordInfo->GetCache());
+				xRecord->SetPublic(pConfigRecordInfo->GetPublic());
+				xRecord->SetPrivate(pConfigRecordInfo->GetPrivate());
+				xRecord->SetSave(pConfigRecordInfo->GetSave());
+				xRecord->SetCache(pConfigRecordInfo->GetCache());
+
+			}
 
             pConfigRecordInfo = pStaticClassRecordManager->Next();
         }
