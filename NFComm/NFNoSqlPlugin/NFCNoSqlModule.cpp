@@ -209,13 +209,13 @@ bool NFCNoSqlModule::RemoveConnectSql(const std::string& strID)
 
 void NFCNoSqlModule::Reconnect()
 {
-	if (mLastCheckTime + 10 > pPluginManager->GetNowTime())
+	static int CHECK_TIME = 10;
+	if (mLastCheckTime + CHECK_TIME > pPluginManager->GetNowTime())
 	{
 		return;
 	}
 
 	mLastCheckTime = pPluginManager->GetNowTime();
-
 
 	NF_SHARE_PTR<NFIRedisClient> xNosqlDriver = this->mxNoSqlDriver.First();
 	while (xNosqlDriver)
@@ -228,6 +228,7 @@ void NFCNoSqlModule::Reconnect()
 		{
 			//reconnect
 			xNosqlDriver->ReConnect();
+			CHECK_TIME *= 2;
 		}
 
 		xNosqlDriver = this->mxNoSqlDriver.Next();
