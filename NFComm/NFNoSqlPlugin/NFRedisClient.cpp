@@ -52,19 +52,9 @@ bool NFRedisClient::KeepLive()
     return false;
 }
 
-const std::string& NFRedisClient::GetIP()
+bool NFRedisClient::ReConnect()
 {
-	return mstrIP;
-}
-
-const int NFRedisClient::GetPort()
-{
-	return mnPort;
-}
-
-const std::string& NFRedisClient::GetAuthKey()
-{
-	return mstrAuthKey;
+	return m_pRedisClientSocket->Connect(mstrIP, mnPort) > 0;
 }
 
 bool NFRedisClient::IsConnect()

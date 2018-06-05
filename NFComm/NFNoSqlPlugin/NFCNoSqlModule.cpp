@@ -100,7 +100,6 @@ bool NFCNoSqlModule::Execute()
 
 	Reconnect();
 	
-
 	return true;
 }
 
@@ -228,6 +227,7 @@ void NFCNoSqlModule::Reconnect()
 		else if (!xNosqlDriver->Enable())
 		{
 			//reconnect
+			xNosqlDriver->ReConnect();
 		}
 
 		xNosqlDriver = this->mxNoSqlDriver.Next();
