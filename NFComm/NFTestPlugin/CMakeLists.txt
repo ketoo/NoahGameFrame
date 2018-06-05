@@ -17,8 +17,9 @@ set_target_properties( NFTestPlugin PROPERTIES
 	RUNTIME_OUTPUT_DIRECTORY ${NFOutPutDir}
 	LIBRARY_OUTPUT_DIRECTORY ${NFOutPutDir} )
 link_NFSDK("NFTestPlugin")
-
 if(UNIX)
+	target_include_directories(NFTestPlugin PUBLIC
+			${SolutionDir}/Dependencies/googletest-release-1.8.0/googletest/include/)
 	add_definitions(
 		-D_USRDLL
 		-DELPP_NO_DEFAULT_LOG_FILE

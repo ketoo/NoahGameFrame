@@ -60,11 +60,15 @@ public:
 
     virtual void AddModule(const std::string& strModuleName, NFIModule* pModule) override;
 
+	virtual void AddTestModule(const std::string& strModuleName, NFIModule* pModule) override;
+
     virtual void RemoveModule(const std::string& strModuleName) override;
 
     virtual NFIModule* FindModule(const std::string& strModuleName) override;
 
-	virtual std::list<NFIModule*> Modules();
+	virtual NFIModule* FindTestModule(const std::string& strModuleName) override;
+
+	virtual std::list<NFIModule*> Modules() override;
 
     virtual bool Execute() override;
 
@@ -121,6 +125,7 @@ private:
     typedef std::map<std::string, NFCDynLib*> PluginLibMap;
     typedef std::map<std::string, NFIPlugin*> PluginInstanceMap;
     typedef std::map<std::string, NFIModule*> ModuleInstanceMap;
+	typedef std::map<std::string, NFIModule*> TestModuleInstanceMap;
 
     typedef void(* DLL_START_PLUGIN_FUNC)(NFIPluginManager* pm);
     typedef void(* DLL_STOP_PLUGIN_FUNC)(NFIPluginManager* pm);
@@ -128,7 +133,8 @@ private:
     PluginNameMap mPluginNameMap;
     PluginLibMap mPluginLibMap;
     PluginInstanceMap mPluginInstanceMap;
-    ModuleInstanceMap mModuleInstanceMap;
+	ModuleInstanceMap mModuleInstanceMap;
+	TestModuleInstanceMap mTestModuleInstanceMap;
 
 	GET_FILECONTENT_FUNCTOR mGetFileContentFunctor;
 
