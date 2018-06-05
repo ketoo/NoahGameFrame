@@ -98,12 +98,12 @@ NFGUID NFCLuaScriptModule::CreateObject(const NFGUID & self, const int nSceneID,
 
 bool NFCLuaScriptModule::ExistObject(const NFGUID & self)
 {
-	return false;
+	return m_pKernelModule->ExistObject(self);
 }
 
 bool NFCLuaScriptModule::DestroyObject()
 {
-	return false;
+	return m_pKernelModule->DestroyObject(self);
 }
 
 bool NFCLuaScriptModule::EnterScene(const int nSceneID, const int nGroupID)
@@ -501,6 +501,27 @@ void NFCLuaScriptModule::SendToAllPlayer(const uint16_t nMsgID, const std::strin
 
 }
 
+void NFCLuaScriptModule::LogInfo(const std::string& strData)
+{
+
+}
+
+void NFCLuaScriptModule::LogError(const std::string& strData)
+{
+
+}
+
+void NFCLuaScriptModule::LogWarning(const std::string& strData)
+{
+
+}
+
+void NFCLuaScriptModule::LogDebug(const std::string& strData)
+{
+
+}
+
+
 bool NFCLuaScriptModule::Register()
 {
 	LuaIntf::LuaBinding(mLuaContext).beginClass<NFGUID>("NFGUID")
@@ -607,28 +628,15 @@ bool NFCLuaScriptModule::Register()
 		.addFunction("add_msg_cb", &NFCLuaScriptModule::AddReceiveCallBack)
 		.addFunction("send_by_id", &NFCLuaScriptModule::SendByServerID)
 		.addFunction("send_by_type", &NFCLuaScriptModule::SendByServerType)
-		.addFunction("send_all_server", &NFCLuaScriptModule::SendToAllServer)
-		.addFunction("send_player", &NFCLuaScriptModule::SendToPlayer)
-		.addFunction("send_all_player", &NFCLuaScriptModule::SendToAllPlayer)
+		.addFunction("send_to_all_server", &NFCLuaScriptModule::SendToAllServer)
+		.addFunction("send_to_player", &NFCLuaScriptModule::SendToPlayer)
+		.addFunction("send_to_all_player", &NFCLuaScriptModule::SendToAllPlayer)
+		.addFunction("log_info", &NFCLuaScriptModule::LogInfo)
+		.addFunction("log_error", &NFCLuaScriptModule::LogError)
+		.addFunction("log_warning", &NFCLuaScriptModule::LogWarning)
+		.addFunction("log_debug", &NFCLuaScriptModule::LogDebug)
 		.endClass();
 
-		//for log module
-		/*
-		.addFunction("log_info", &NFCLuaScriptModule::GetElePropertyVector3)
-		.addFunction("log_error", &NFCLuaScriptModule::GetElePropertyVector3)
-		.addFunction("log_warning", &NFCLuaScriptModule::GetElePropertyVector3)
-		.addFunction("log_debug", &NFCLuaScriptModule::GetElePropertyVector3)
-		*/
-
-		//for actor
-
-		//for nosql
-		/*
-		.addFunction("save_data", &NFCLuaScriptModule::GetElePropertyVector3)
-		*/
-
-
-		
 
     return true;
 }
