@@ -35,7 +35,13 @@ public:
 	virtual bool Execute() = 0;
 
 
-	virtual const std::string& GetAuthKey() = 0;
+	virtual const std::string& GetAuthKey() { return mstrAuthKey; }
+
+	virtual const std::string& GetIP() { return mstrIP; }
+
+	virtual const int GetPort() { return mnPort; }
+
+	virtual bool ReConnect() = 0;
 
 	/**
 	* @brie if you have setted a password for Redis, you much use AUTH cmd to connect to the server than you can use other cmds
@@ -760,6 +766,11 @@ public:
 	*/
 	virtual	bool UNSUBSCRIBE(const std::string& key) = 0;
 
+protected:
+
+	std::string mstrIP;
+	int mnPort;
+	std::string mstrAuthKey;
 };
 
 class NFINoSqlModule
