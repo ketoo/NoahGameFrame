@@ -46,7 +46,7 @@ protected:
 	//FOR KERNEL MODULE
 	NFGUID CreateObject(const NFGUID& self, const int nSceneID, const int nGroupID, const std::string& strClassName, const std::string& strIndex, const NFDataList& arg);
 	bool ExistObject(const NFGUID& self);
-	bool DestroyObject();
+	bool DestroyObject(const NFGUID & self);
 
 	//return the group id
 	bool EnterScene(const int nSceneID, const int nGroupID);
