@@ -18,7 +18,7 @@ bool NFRedisClient::APPEND(const std::string &key, const std::string &value, int
 
 	if (pReply->type == REDIS_REPLY_INTEGER)
 	{
-		length = pReply->integer;
+		length = (int)pReply->integer;
 	}
 
 	return true;

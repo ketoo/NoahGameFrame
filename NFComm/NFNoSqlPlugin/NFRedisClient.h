@@ -45,13 +45,9 @@ public:
 	virtual bool Execute();
 	virtual bool KeepLive();
 
-	const std::string& GetIP();
-
-	const int GetPort();
+	bool ReConnect();
 
 	bool IsConnect();
-
-	const std::string& GetAuthKey();
 
 	/**
 	* @brie if you have setted a password for Redis, you much use AUTH cmd to connect to the server than you can use other cmds
@@ -781,10 +777,6 @@ protected:
 
 
 private:
-
-	std::string mstrIP;
-	int mnPort;
-	std::string mstrAuthKey;
 
 	bool bAuthed;
 	bool bBusy;
