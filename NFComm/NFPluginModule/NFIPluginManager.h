@@ -10,6 +10,7 @@
 #define NFI_PLUGIN_MANAGER_H
 
 #include <functional>
+#include <list>
 #include "NFPlatform.h"
 
 class NFIPlugin;
@@ -138,11 +139,15 @@ public:
 
     virtual NFIPlugin* FindPlugin(const std::string& strPluginName) = 0;
 
-    virtual void AddModule(const std::string& strModuleName, NFIModule* pModule) = 0;
+	virtual void AddModule(const std::string& strModuleName, NFIModule* pModule) = 0;
+
+	virtual void AddTestModule(const std::string& strModuleName, NFIModule* pModule) = 0;
 
     virtual void RemoveModule(const std::string& strModuleName) = 0;
 
     virtual NFIModule* FindModule(const std::string& strModuleName) = 0;
+
+    virtual NFIModule* FindTestModule(const std::string& strModuleName) = 0;
 
 	virtual std::list<NFIModule*> Modules() = 0;
 
