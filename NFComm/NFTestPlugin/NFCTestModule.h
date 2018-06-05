@@ -38,13 +38,19 @@ public:
     {
         pPluginManager = p;
     }
+
     virtual ~NFCTestModule() {};
 
-	virtual bool Awake();
+    virtual bool Awake();
     virtual bool Init();
-    virtual bool Shut();
-    virtual bool Execute();
     virtual bool AfterInit();
+    virtual bool CheckConfig();
+    virtual bool ReadyExecute();
+    virtual bool Execute();
+    virtual bool BeforeShut();
+    virtual bool Shut();
+    virtual bool Finalize();
+    virtual bool OnReloadPlugin();
 
 protected:
 
