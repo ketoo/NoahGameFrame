@@ -15,14 +15,14 @@ fi
 
 g++ --version
 if [ $? -ne 0 ]; then
-    echo "[ERROR] Please install unzip first."
+    echo "[ERROR] Please install g++ first."
     echo "[ubuntu] sudo apt-get install g++ or [centos] yum install g++ or [mac] brew install g++"
     exit 1
 fi
 
 automake --version
 if [ $? -ne 0 ]; then
-    echo "[ERROR] Please install unzip first."
+    echo "[ERROR] Please install automake first."
     echo "[ubuntu] sudo apt-get install automake or [centos] yum install automake or [mac] brew install automake"
     exit 1
 fi
