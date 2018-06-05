@@ -101,7 +101,7 @@ bool NFCLuaScriptModule::ExistObject(const NFGUID & self)
 	return m_pKernelModule->ExistObject(self);
 }
 
-bool NFCLuaScriptModule::DestroyObject()
+bool NFCLuaScriptModule::DestroyObject(const NFGUID & self)
 {
 	return m_pKernelModule->DestroyObject(self);
 }
