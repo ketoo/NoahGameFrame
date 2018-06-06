@@ -94,7 +94,14 @@ bool NFCLuaScriptModule::BeforeShut()
 
 NFGUID NFCLuaScriptModule::CreateObject(const NFGUID & self, const int nSceneID, const int nGroupID, const std::string & strClassName, const std::string & strIndex, const NFDataList & arg)
 {
-	return m_pKernelModule->CreateObject(self, nSceneID, nGroupID, strClassName, strIndex, arg);
+	NF_SHARE_PTR<NFIObject> xObject = m_pKernelModule->CreateObject(self, nSceneID, nGroupID, strClassName, strIndex, arg);
+	if (xObject)
+	{
+		return xObject->Self();
+
+	}
+
+	return NFGUID();
 }
 
 bool NFCLuaScriptModule::ExistObject(const NFGUID & self)
@@ -114,13 +121,14 @@ bool NFCLuaScriptModule::EnterScene(const int nSceneID, const int nGroupID)
 
 bool NFCLuaScriptModule::DoEvent(const NFGUID & self, const int nEventID, const NFDataList & arg)
 {
-	m_pEventModule->DoEvent();
-	return false;
+	m_pEventModule->DoEvent(self, (NFEventDefine)nEventID, arg);
+
+	return true;
 }
 
 bool NFCLuaScriptModule::FindProperty(const NFGUID & self, const std::string & strPropertyName)
 {
-	return m_pKernelModule->FindProperty(self, strPropertyName;
+	return m_pKernelModule->FindProperty(self, strPropertyName);
 }
 
 bool NFCLuaScriptModule::SetPropertyInt(const NFGUID & self, const std::string & strPropertyName, const NFINT64 nValue)
@@ -140,17 +148,17 @@ bool NFCLuaScriptModule::SetPropertyString(const NFGUID & self, const std::strin
 
 bool NFCLuaScriptModule::SetPropertyObject(const NFGUID & self, const std::string & strPropertyName, const NFGUID & objectValue)
 {
-	return m_pKernelModule->SetPropertyString(self, strPropertyName, objectValue);
+	return m_pKernelModule->SetPropertyObject(self, strPropertyName, objectValue);
 }
 
 bool NFCLuaScriptModule::SetPropertyVector2(const NFGUID & self, const std::string & strPropertyName, const NFVector2 & value)
 {
-	return m_pKernelModule->SetPropertyString(self, strPropertyName, value);
+	return m_pKernelModule->SetPropertyVector2(self, strPropertyName, value);
 }
 
 bool NFCLuaScriptModule::SetPropertyVector3(const NFGUID & self, const std::string & strPropertyName, const NFVector3 & value)
 {
-	return m_pKernelModule->SetPropertyString(self, strPropertyName, value);
+	return m_pKernelModule->SetPropertyVector3(self, strPropertyName, value);
 }
 
 NFINT64 NFCLuaScriptModule::GetPropertyInt(const NFGUID & self, const std::string & strPropertyName)
@@ -309,7 +317,7 @@ bool NFCLuaScriptModule::RemRow(const NFGUID & self, std::string & strRecordName
         return false;
     }
 
-    return pRecord->RemRow(nRow);
+    return pRecord->Remove(nRow);
 }
 
 bool NFCLuaScriptModule::SetRecordInt(const NFGUID & self, const std::string & strRecordName, const int nRow, const std::string & strColTag, const NFINT64 value)
@@ -344,7 +352,7 @@ bool NFCLuaScriptModule::SetRecordVector3(const NFGUID & self, const std::string
 
 NFINT64 NFCLuaScriptModule::GetRecordInt(const NFGUID & self, const std::string & strRecordName, const int nRow, const std::string & strColTag)
 {
-	return m_pKernelModule->GetRecordInt(self, strRecordName, nRow, strColTag)
+	return m_pKernelModule->GetRecordInt(self, strRecordName, nRow, strColTag);
 }
 
 double NFCLuaScriptModule::GetRecordFloat(const NFGUID & self, const std::string & strRecordName, const int nRow, const std::string & strColTag)
@@ -394,22 +402,22 @@ NFINT64 NFCLuaScriptModule::GetElePropertyInt(const std::string & strConfigName,
 
 double NFCLuaScriptModule::GetElePropertyFloat(const std::string & strConfigName, const std::string & strPropertyName)
 {
-	return m_pElementModule->GetElePropertyFloat(strConfigName, strPropertyName);
+	return m_pElementModule->GetPropertyFloat(strConfigName, strPropertyName);
 }
 
 std::string NFCLuaScriptModule::GetElePropertyString(const std::string & strConfigName, const std::string & strPropertyName)
 {
-	return m_pElementModule->GetElePropertyString(strConfigName, strPropertyName);
+	return m_pElementModule->GetPropertyString(strConfigName, strPropertyName);
 }
 
 NFVector2 NFCLuaScriptModule::GetElePropertyVector2(const std::string & strConfigName, const std::string & strPropertyName)
 {
-	return m_pElementModule->GetElePropertyVector2(strConfigName, strPropertyName);
+	return m_pElementModule->GetPropertyVector2(strConfigName, strPropertyName);
 }
 
 NFVector3 NFCLuaScriptModule::GetElePropertyVector3(const std::string & strConfigName, const std::string & strPropertyName)
 {
-	return m_pElementModule->GetElePropertyVector3(strConfigName, strPropertyName);
+	return m_pElementModule->GetPropertyVector3(strConfigName, strPropertyName);
 }
 
 template<typename T>

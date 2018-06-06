@@ -52,20 +52,6 @@ protected:
 
 protected:
 
-    void OnGameServerRegisteredProcess(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
-    void OnGameServerUnRegisteredProcess(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
-
-    void OnRefreshWorldServerInfoProcess(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
-
-
-private:
-
-    NFINT64 mnLastCheckTime;
-
-    //serverid,data
-	NFConsistentHashMapEx<int, ServerData> mWorldMap;
-	NFConsistentHashMapEx<int, ServerData> mGameMap;
-
     NFIElementModule* m_pElementModule;
     NFIClassModule* m_pClassModule;
     NFIKernelModule* m_pKernelModule;

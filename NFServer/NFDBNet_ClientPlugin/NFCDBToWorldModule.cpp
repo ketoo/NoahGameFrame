@@ -93,7 +93,7 @@ void NFCDBToWorldModule::Register(NFINet* pNet)
 
 			const int nServerType = m_pElementModule->GetPropertyInt32(strId, NFrame::Server::Type());
 			const int nServerID = m_pElementModule->GetPropertyInt32(strId, NFrame::Server::ServerID());
-			if (nServerType == NF_SERVER_TYPES::NF_ST_WORLD && pPluginManager->GetAppID() == nServerID)
+			if (nServerType == NF_SERVER_TYPES::NF_ST_DB && pPluginManager->GetAppID() == nServerID)
 			{
 				const int nPort = m_pElementModule->GetPropertyInt32(strId, NFrame::Server::Port());
 				const int nMaxConnect = m_pElementModule->GetPropertyInt32(strId, NFrame::Server::MaxOnline());
@@ -117,7 +117,7 @@ void NFCDBToWorldModule::Register(NFINet* pNet)
 				if (pServerData)
 				{
 					int nTargetID = pServerData->nGameID;
-					m_pNetClientModule->SendToServerByPB(nTargetID, NFMsg::EGameMsgID::EGMI_WTM_WORLD_REGISTERED, xMsg);
+					m_pNetClientModule->SendToServerByPB(nTargetID, NFMsg::EGameMsgID::EGMI_DTW_DB_REGISTERED, xMsg);
 
 					m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFGUID(0, pData->server_id()), pData->server_name(), "Register");
 				}
@@ -161,7 +161,7 @@ void NFCDBToWorldModule::ServerReport()
 				reqMsg.set_server_state(NFMsg::EST_NARMAL);
 				reqMsg.set_server_type(nServerType);
 
-				m_pNetClientModule->SendToAllServerByPB(NF_SERVER_TYPES::NF_ST_MASTER, NFMsg::EGMI_STS_SERVER_REPORT, reqMsg);
+				m_pNetClientModule->SendToAllServerByPB(NF_SERVER_TYPES::NF_ST_WORLD, NFMsg::EGMI_STS_SERVER_REPORT, reqMsg);
 			}
 		}
 	}

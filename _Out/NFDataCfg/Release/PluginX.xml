@@ -22,9 +22,7 @@
 		<Plugin Name="NFRankPlugin" />
 		<Plugin Name="NFMailPlugin" />
 		<Plugin Name="NFHeroPlugin" />
-		<Plugin Name="NFFriendPlugin" />
-		
-    	<ConfigPath Name="../" />		
+		<Plugin Name="NFFriendPlugin" />	
 	</GameServer>
 
 	<LoginServer>
@@ -38,9 +36,7 @@
 
 		<Plugin Name="NFDataAgent_NosqlPlugin" />
 		<Plugin Name="NFActorPlugin" />
-		<Plugin Name="NFNoSqlPlugin" />
-
-    	<ConfigPath Name="../" />		
+		<Plugin Name="NFNoSqlPlugin" />	
 	</LoginServer>
 
 	<MasterServer>
@@ -50,8 +46,7 @@
 		<Plugin Name="NFMasterServerPlugin" />
 		<Plugin Name="NFMasterNet_ServerPlugin" />
 		<Plugin Name="NFMasterNet_HttpServerPlugin" />
-		<Plugin Name="NFLogPlugin" />
-    	<ConfigPath Name="../" />		
+		<Plugin Name="NFLogPlugin" />	
 	</MasterServer>
 
 	<ProxyServer>
@@ -62,8 +57,7 @@
 		<Plugin Name="NFProxyServerNet_ClientPlugin" />
 		<Plugin Name="NFProxyServerNet_ServerPlugin" />
 		<Plugin Name="NFLogPlugin" />
-		<Plugin Name="NFSecurityPlugin" />	
-    	<ConfigPath Name="../" />				
+		<Plugin Name="NFSecurityPlugin" />			
 	</ProxyServer>
 
 	<WorldServer>
@@ -78,8 +72,27 @@
 		<Plugin Name="NFActorPlugin" />
 		<Plugin Name="NFNoSqlPlugin" />
 		<Plugin Name="NFSecurityPlugin" />	
-		<Plugin Name="NFGuildPlugin" />
-    	<ConfigPath Name="../" />		
+		<Plugin Name="NFGuildPlugin" />	
 	</WorldServer>
-	
+	<DBServer>
+		<Plugin Name="NFNetPlugin" />
+		<Plugin Name="NFKernelPlugin" />
+		<Plugin Name="NFConfigPlugin" />
+		<Plugin Name="NFDBNet_ClientPlugin" />
+		<Plugin Name="NFDBNet_ServerPlugin" />
+		<Plugin Name="NFLogPlugin" />
+		<Plugin Name="NFDataAgent_NosqlPlugin" />
+		<Plugin Name="NFActorPlugin" />
+		<Plugin Name="NFNoSqlPlugin" />
+		<Plugin Name="NFSecurityPlugin" />
+	</DBServer>
+	<TutorialServer>
+		<Plugin Name="NFKernelPlugin" />
+		<Plugin Name="NFConfigPlugin" />
+		
+		<Plugin Name="NFLuaScriptPlugin" />
+		<Plugin Name="NFActorPlugin" />
+		<Plugin Name="NFLogPlugin" />
+		<Plugin Name="Tutorial5" />	
+	</TutorialServer>
 </XML>
