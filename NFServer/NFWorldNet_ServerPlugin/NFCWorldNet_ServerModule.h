@@ -83,6 +83,9 @@ protected:
 	void SynWorldToGame();
 	void SynWorldToGame(const NFSOCK nFD);
 
+	void SynDBToGame();
+	void SynDBToGame(const NFSOCK nFD);
+
     void LogGameServer();
 
 private:
@@ -93,6 +96,7 @@ private:
 	NFConsistentHashMapEx<int, ServerData> mWorldMap;
 	NFConsistentHashMapEx<int, ServerData> mGameMap;
 	NFConsistentHashMapEx<int, ServerData> mProxyMap;
+	NFConsistentHashMapEx<int, ServerData> mDBMap;
 
     NFIElementModule* m_pElementModule;
     NFIClassModule* m_pClassModule;

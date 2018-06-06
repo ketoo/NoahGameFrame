@@ -22,6 +22,8 @@ chmod -R 777  NFPluginLoader
 
 ./NFPluginLoader -d Server=LoginServer ID=4
 
+./NFPluginLoader -d Server=DBServer ID=8
+
 ./NFPluginLoader -d Server=GameServer ID=6
 
 ./NFPluginLoader -d Server=ProxyServer ID=5

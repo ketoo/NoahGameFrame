@@ -217,6 +217,10 @@ void NFCGameServerToWorldModule::OnServerInfoProcess(const NFSOCK nSockIndex, co
 		{
 			m_pNetClientModule->AddServer(xServerData);
 		}
+		else if (NF_SERVER_TYPES::NF_ST_DB == xServerData.eServerType)
+		{
+			m_pNetClientModule->AddServer(xServerData);
+		}
 	}
 }
 
