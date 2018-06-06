@@ -33,11 +33,11 @@ bool NFCDBToWorldModule::Shut()
 
 bool NFCDBToWorldModule::AfterInit()
 {
-	m_pNetClientModule->AddReceiveCallBack(NF_SERVER_TYPES::NF_ST_MASTER, this, &NFCDBToWorldModule::InvalidMessage);
+	m_pNetClientModule->AddReceiveCallBack(NF_SERVER_TYPES::NF_ST_WORLD, this, &NFCDBToWorldModule::InvalidMessage);
 
-	m_pNetClientModule->AddReceiveCallBack(NF_SERVER_TYPES::NF_ST_MASTER, NFMsg::EGMI_STS_NET_INFO, this, &NFCDBToWorldModule::OnServerInfoProcess);
+	m_pNetClientModule->AddReceiveCallBack(NF_SERVER_TYPES::NF_ST_WORLD, NFMsg::EGMI_STS_NET_INFO, this, &NFCDBToWorldModule::OnServerInfoProcess);
 
-	m_pNetClientModule->AddEventCallBack(NF_SERVER_TYPES::NF_ST_MASTER, this, &NFCDBToWorldModule::OnSocketMSEvent);
+	m_pNetClientModule->AddEventCallBack(NF_SERVER_TYPES::NF_ST_WORLD, this, &NFCDBToWorldModule::OnSocketMSEvent);
 	m_pNetClientModule->ExpandBufferSize();
 
 	NF_SHARE_PTR<NFIClass> xLogicClass = m_pClassModule->GetElement(NFrame::Server::ThisName());
