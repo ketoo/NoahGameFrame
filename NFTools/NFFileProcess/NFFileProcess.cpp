@@ -748,10 +748,10 @@ bool NFFileProcess::SaveForSQL()
 			continue;
 		}
 
-		strElementData += "CREATE TABLE IF NOT EXISTS " + pClassDta->xStructData.strClassName + "  (
-			`ID` varchar(128) NOT NULL,
-			PRIMARY KEY (`ID`)
-		) ENGINE=InnoDB DEFAULT CHARSET=utf8; \n";
+		strElementData += "CREATE TABLE IF NOT EXISTS " + pClassDta->xStructData.strClassName + "  (";
+		strElementData += " `ID` varchar(128) NOT NULL,";
+		strElementData += " PRIMARY KEY (`ID`)";
+		strElementData += " ) ENGINE=InnoDB DEFAULT CHARSET=utf8; \n";
 	}
 
 
@@ -868,7 +868,7 @@ bool NFFileProcess::SaveForSQL()
 			if (strSave=="1" || strCache=="1")
 			{
 				std::string strAlter = "ALTER TABLE `" + strClassName + "` ADD `" + strRecordName + "`";
-				strAlter += " text COLLATE utf8mb4_unicode_ci  DEFAULT ''"
+				strAlter += " text COLLATE utf8mb4_unicode_ci  DEFAULT ''";
 				strAlter += " COMMENT '" + strDesc + "';";
 
 				strElementData += strAlter;
