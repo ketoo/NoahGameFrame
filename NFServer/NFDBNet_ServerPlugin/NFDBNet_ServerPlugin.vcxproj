@@ -11,7 +11,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{4BC56C4A-50BC-446D-8906-2CF8F0845E76}</ProjectGuid>
+    <ProjectGuid>{85A3C1E6-7E40-4725-83FD-10EDD9E2BAA1}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>NFDBNet_ServerPlugin</RootNamespace>
     <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
@@ -96,7 +96,7 @@
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="NFCWorldNet_ServerModule.h" />
+    <ClInclude Include="NFCDBNet_ServerModule.h" />
     <ClInclude Include="NFDBNet_ServerPlugin.h" />
   </ItemGroup>
   <ItemGroup>
@@ -108,7 +108,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
       </PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="NFCWorldNet_ServerModule.cpp" />
+    <ClCompile Include="NFCDBNet_ServerModule.cpp" />
     <ClCompile Include="NFDBNet_ServerPlugin.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
