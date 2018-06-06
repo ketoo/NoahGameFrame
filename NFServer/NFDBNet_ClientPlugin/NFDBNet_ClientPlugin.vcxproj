@@ -11,7 +11,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{DC5131EA-B34B-4141-ABF4-872843E0B183}</ProjectGuid>
+    <ProjectGuid>{039AF02F-5001-487A-A73C-099715A348A2}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>NFDBNet_ClientPlugin</RootNamespace>
     <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
@@ -96,7 +96,7 @@
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="NFCDBToMasterModule.h" />
+    <ClInclude Include="NFCDBToWorldModule.h" />
     <ClInclude Include="NFDBNet_ClientPlugin.h" />
   </ItemGroup>
   <ItemGroup>
@@ -108,7 +108,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
       </PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="NFCDBToMasterModule.cpp" />
+    <ClCompile Include="NFCDBToWorldModule.cpp" />
     <ClCompile Include="NFDBNet_ClientPlugin.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
