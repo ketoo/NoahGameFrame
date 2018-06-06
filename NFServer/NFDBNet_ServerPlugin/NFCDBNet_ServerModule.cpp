@@ -25,9 +25,6 @@ bool NFCDBNet_ServerModule::Init()
 
 bool NFCDBNet_ServerModule::AfterInit()
 {
-	m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_GTW_GAME_REGISTERED, this, &NFCDBNet_ServerModule::OnGameServerRegisteredProcess);
-	m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_GTW_GAME_UNREGISTERED, this, &NFCDBNet_ServerModule::OnGameServerUnRegisteredProcess);
-
     m_pNetModule->AddEventCallBack(this, &NFCDBNet_ServerModule::OnSocketEvent);
 	m_pNetModule->ExpandBufferSize();
 
