@@ -802,27 +802,27 @@ bool NFFileProcess::SaveForSQL()
 				//ALTER TABLE `Buff` ADD `EffectType` bigint(11) DEFAULT '0' COMMENT '影响属性类型(效果类型)  生命，法力(可组合,叠加)';
 				if (strType=="int")
 				{
-					strAlter += " bigint(11) DEFAULT '0'"
+					strAlter += " bigint(11) DEFAULT '0'";
 				}
 				else if (strType=="string")
 				{
-					strAlter += " text COLLATE utf8mb4_unicode_ci  DEFAULT ''"
+					strAlter += " text COLLATE utf8mb4_unicode_ci  DEFAULT ''";
 				}
 				else if (strType=="float")
 				{
-					strAlter += " double DEFAULT '0.0'"
+					strAlter += " double DEFAULT '0.0'";
 				}
 				else if (strType=="object")
 				{
-					strAlter += " varchar(64) COLLATE utf8mb4_unicode_ci DEFAULT ''"
+					strAlter += " varchar(64) COLLATE utf8mb4_unicode_ci DEFAULT ''";
 				}
 				else if (strType=="vector2")
 				{
-					strAlter += " varchar(64) COLLATE utf8mb4_unicode_ci DEFAULT ''"
+					strAlter += " varchar(64) COLLATE utf8mb4_unicode_ci DEFAULT ''";
 				}
 				else if (strType=="vector3")
 				{
-					strAlter += " varchar(64) COLLATE utf8mb4_unicode_ci DEFAULT ''"
+					strAlter += " varchar(64) COLLATE utf8mb4_unicode_ci DEFAULT ''";
 				}
 
 				strAlter += " COMMENT '" + strDesc + "';";
