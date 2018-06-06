@@ -22,8 +22,13 @@
 #include "NFComm/NFPluginModule/NFILoginNet_ServerModule.h"
 #include "NFComm/NFPluginModule/NFIWorldToMasterModule.h"
 
+class NFIDBNet_ServerModule : public NFIModule
+{
+
+};
+
 class NFCDBNet_ServerModule
-    : public NFIWorldNet_ServerModule
+    : public NFIDBNet_ServerModule
 {
 public:
     NFCDBNet_ServerModule(NFIPluginManager* p)
@@ -42,7 +47,8 @@ protected:
 
     void OnSocketEvent(const NFSOCK nSockIndex, const NF_NET_EVENT eEvent, NFINet* pNet);
 
-    void OnClientDisconnect(const NFSOCK nAddress);
+	void OnClientDisconnect(const NFSOCK nAddress);
+	void OnClientConnected(const NFSOCK nAddress);
 
 protected:
 
