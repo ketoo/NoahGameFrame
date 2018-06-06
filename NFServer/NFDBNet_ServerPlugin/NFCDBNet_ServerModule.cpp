@@ -41,7 +41,7 @@ bool NFCDBNet_ServerModule::AfterInit()
 
             const int nServerType = m_pElementModule->GetPropertyInt32(strId, NFrame::Server::Type());
             const int nServerID = m_pElementModule->GetPropertyInt32(strId, NFrame::Server::ServerID());
-            if (nServerType == NF_SERVER_TYPES::NF_ST_WORLD && pPluginManager->GetAppID() == nServerID)
+            if (nServerType == NF_SERVER_TYPES::NF_ST_DB && pPluginManager->GetAppID() == nServerID)
             {
                 const int nPort = m_pElementModule->GetPropertyInt32(strId, NFrame::Server::Port());
                 const int nMaxConnect = m_pElementModule->GetPropertyInt32(strId, NFrame::Server::MaxOnline());
@@ -65,41 +65,6 @@ bool NFCDBNet_ServerModule::AfterInit()
     return true;
 }
 
-/*
-void NFCDBNet_ServerModule::OnServerInfoProcess(const NFSOCK nSockIndex, const int nMsgID, const char * msg, const uint32_t nLen)
-{
-	NFGUID nPlayerID;
-	NFMsg::ServerInfoReportList xMsg;
-	if (!NFINetModule::ReceivePB(nMsgID, msg, nLen, xMsg, nPlayerID))
-	{
-		return;
-	}
-
-	for (int i = 0; i < xMsg.server_list_size(); ++i)
-	{
-		const NFMsg::ServerInfoReport& xData = xMsg.server_list(i);
-		if (xData.server_type() == NF_SERVER_TYPES::NF_ST_WORLD)
-		{
-			NF_SHARE_PTR<ServerData> pServerData = mWorldMap.GetElement(xData.server_id());
-			if (!pServerData)
-			{
-				pServerData = NF_SHARE_PTR<ServerData>(NF_NEW ServerData());
-				mWorldMap.AddElement(xData.server_id(), pServerData);
-			}
-
-			pServerData->nFD = nSockIndex;
-			*(pServerData->pData) = xData;
-
-			m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFGUID(0, xData.server_id()), xData.server_name(), "GameServerRegistered");
-		}
-	}
-
-	//sync to proxy
-
-	//sync to game
-
-}
-*/
 bool NFCDBNet_ServerModule::Shut()
 {
 
@@ -110,79 +75,6 @@ bool NFCDBNet_ServerModule::Execute()
 {
 
 	return true;
-}
-
-void NFCDBNet_ServerModule::OnGameServerRegisteredProcess(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
-{
-    NFGUID nPlayerID;
-    NFMsg::ServerInfoReportList xMsg;
-    if (!m_pNetModule->ReceivePB( nMsgID, msg, nLen, xMsg, nPlayerID))
-    {
-        return;
-    }
-
-    for (int i = 0; i < xMsg.server_list_size(); ++i)
-    {
-        const NFMsg::ServerInfoReport& xData = xMsg.server_list(i);
-        NF_SHARE_PTR<ServerData> pServerData =  mGameMap.GetElement(xData.server_id());
-        if (!pServerData)
-        {
-            pServerData = NF_SHARE_PTR<ServerData>(NF_NEW ServerData());
-            mGameMap.AddElement(xData.server_id(), pServerData);
-        }
-
-        pServerData->nFD = nSockIndex;
-        *(pServerData->pData) = xData;
-
-        m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFGUID(0, xData.server_id()), xData.server_name(), "GameServerRegistered");
-    }
-
-}
-
-void NFCDBNet_ServerModule::OnGameServerUnRegisteredProcess(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
-{
-    NFGUID nPlayerID;
-    NFMsg::ServerInfoReportList xMsg;
-    if (!m_pNetModule->ReceivePB( nMsgID, msg, nLen, xMsg, nPlayerID))
-    {
-        return;
-    }
-
-    for (int i = 0; i < xMsg.server_list_size(); ++i)
-    {
-        const NFMsg::ServerInfoReport& xData = xMsg.server_list(i);
-        mGameMap.RemoveElement(xData.server_id());
-
-        m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFGUID(0, xData.server_id()), xData.server_name(), "GameServerRegistered");
-    }
-}
-
-void NFCDBNet_ServerModule::OnRefreshWorldServerInfoProcess(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
-{
-    NFGUID nPlayerID;
-    NFMsg::ServerInfoReportList xMsg;
-    if (!m_pNetModule->ReceivePB( nMsgID, msg, nLen, xMsg, nPlayerID))
-    {
-        return;
-    }
-
-    for (int i = 0; i < xMsg.server_list_size(); ++i)
-    {
-        const NFMsg::ServerInfoReport& xData = xMsg.server_list(i);
-
-        NF_SHARE_PTR<ServerData> pServerData =  mGameMap.GetElement(xData.server_id());
-        if (!pServerData)
-        {
-            pServerData = NF_SHARE_PTR<ServerData>(NF_NEW ServerData());
-            mGameMap.AddElement(xData.server_id(), pServerData);
-        }
-
-        pServerData->nFD = nSockIndex;
-        *(pServerData->pData) = xData;
-
-        m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFGUID(0, xData.server_id()), xData.server_name(), "GameServerRegistered");
-    }
-
 }
 
 void NFCDBNet_ServerModule::OnSocketEvent(const NFSOCK nSockIndex, const NF_NET_EVENT eEvent, NFINet* pNet)

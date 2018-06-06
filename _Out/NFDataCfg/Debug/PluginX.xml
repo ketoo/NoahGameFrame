@@ -74,7 +74,18 @@
 		<Plugin Name="NFSecurityPlugin" />	
 		<Plugin Name="NFGuildPlugin" />	
 	</WorldServer>
-		
+	<DBServer>
+		<Plugin Name="NFNetPlugin" />
+		<Plugin Name="NFKernelPlugin" />
+		<Plugin Name="NFConfigPlugin" />
+		<Plugin Name="NFDBNet_ClientPlugin" />
+		<Plugin Name="NFDBNet_ServerPlugin" />
+		<Plugin Name="NFLogPlugin" />
+		<Plugin Name="NFDataAgent_NosqlPlugin" />
+		<Plugin Name="NFActorPlugin" />
+		<Plugin Name="NFNoSqlPlugin" />
+		<Plugin Name="NFSecurityPlugin" />
+	</DBServer>
 	<TutorialServer>
 		<Plugin Name="NFKernelPlugin" />
 		<Plugin Name="NFConfigPlugin" />

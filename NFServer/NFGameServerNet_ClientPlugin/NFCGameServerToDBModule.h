@@ -41,18 +41,8 @@ protected:
     void OnSocketWSEvent(const NFSOCK nSockIndex, const NF_NET_EVENT eEvent, NFINet* pNet);
 
 protected:
-    void Register(NFINet* pNet);
     void TransPBToProxy(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
 
-    int OnObjectClassEvent(const NFGUID& self, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFDataList& var);
-	
-	void OnServerInfoProcess(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
-
-private:
-    void SendOnline(const NFGUID& self);
-    void SendOffline(const NFGUID& self);
-
-private:
 	NFINT64 mLastReportTime;
 
     NFILogModule* m_pLogModule;
