@@ -27,8 +27,6 @@ bool NFCDBNet_ServerModule::AfterInit()
 {
 	m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_GTW_GAME_REGISTERED, this, &NFCDBNet_ServerModule::OnGameServerRegisteredProcess);
 	m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_GTW_GAME_UNREGISTERED, this, &NFCDBNet_ServerModule::OnGameServerUnRegisteredProcess);
-	m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_GTW_GAME_REFRESH, this, &NFCDBNet_ServerModule::OnRefreshGameServerInfoProcess);
-	m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_STS_SERVER_REPORT, this, &NFCDBNet_ServerModule::OnTransmitServerReport);
 
     m_pNetModule->AddEventCallBack(this, &NFCDBNet_ServerModule::OnSocketEvent);
 	m_pNetModule->ExpandBufferSize();
@@ -67,6 +65,7 @@ bool NFCDBNet_ServerModule::AfterInit()
     return true;
 }
 
+/*
 void NFCDBNet_ServerModule::OnServerInfoProcess(const NFSOCK nSockIndex, const int nMsgID, const char * msg, const uint32_t nLen)
 {
 	NFGUID nPlayerID;
@@ -100,7 +99,7 @@ void NFCDBNet_ServerModule::OnServerInfoProcess(const NFSOCK nSockIndex, const i
 	//sync to game
 
 }
-
+*/
 bool NFCDBNet_ServerModule::Shut()
 {
 
@@ -109,7 +108,6 @@ bool NFCDBNet_ServerModule::Shut()
 
 bool NFCDBNet_ServerModule::Execute()
 {
-    LogGameServer();
 
 	return true;
 }
@@ -139,7 +137,6 @@ void NFCDBNet_ServerModule::OnGameServerRegisteredProcess(const NFSOCK nSockInde
         m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFGUID(0, xData.server_id()), xData.server_name(), "GameServerRegistered");
     }
 
-    SynGameToProxy();
 }
 
 void NFCDBNet_ServerModule::OnGameServerUnRegisteredProcess(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
@@ -186,7 +183,6 @@ void NFCDBNet_ServerModule::OnRefreshWorldServerInfoProcess(const NFSOCK nSockIn
         m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFGUID(0, xData.server_id()), xData.server_name(), "GameServerRegistered");
     }
 
-    SynGameToProxy();
 }
 
 void NFCDBNet_ServerModule::OnSocketEvent(const NFSOCK nSockIndex, const NF_NET_EVENT eEvent, NFINet* pNet)
@@ -211,5 +207,13 @@ void NFCDBNet_ServerModule::OnSocketEvent(const NFSOCK nSockIndex, const NF_NET_
         m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFGUID(0, nSockIndex), "NF_NET_EVENT_CONNECTED", "connectioned success", __FUNCTION__, __LINE__);
         OnClientConnected(nSockIndex);
     }
+}
+
+void NFCDBNet_ServerModule::OnClientDisconnect(const NFSOCK nAddress)
+{
+}
+
+void NFCDBNet_ServerModule::OnClientConnected(const NFSOCK nAddress)
+{
 }
 

@@ -9,17 +9,17 @@
 #include "NFComm/NFPluginModule/NFIPlugin.h"
 #include "NFComm/NFPluginModule/NFIPluginManager.h"
 
-#ifdef NFWORLDNET_SERVERPLUGIN_EXPORTS
-#define NFWORLDNET_SERVERPLUGIN_API __declspec(dllexport)
+#ifdef NFDBNET_SERVERPLUGIN_EXPORTS
+#define NFDBNET_SERVERPLUGIN_API __declspec(dllexport)
 #else
-#define NFWORLDNET_SERVERPLUGIN_API __declspec(dllimport)
+#define NFDBNET_SERVERPLUGIN_API __declspec(dllimport)
 #endif
 
 //////////////////////////////////////////////////////////////////////////
-class NFWorldNet_ServerPlugin : public NFIPlugin
+class NFDBNet_ServerPlugin : public NFIPlugin
 {
 public:
-    NFWorldNet_ServerPlugin(NFIPluginManager* p)
+	NFDBNet_ServerPlugin(NFIPluginManager* p)
     {
         pPluginManager = p;
     }
