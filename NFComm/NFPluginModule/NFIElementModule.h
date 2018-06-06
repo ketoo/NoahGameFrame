@@ -36,7 +36,9 @@ public:
 	virtual int GetPropertyInt32(const std::string& strConfigName, const std::string& strPropertyName) = 0;
     virtual double GetPropertyFloat(const std::string& strConfigName, const std::string& strPropertyName) = 0;
     virtual const std::string& GetPropertyString(const std::string& strConfigName, const std::string& strPropertyName) = 0;
-	
+	virtual const NFVector2 GetPropertyVector2(const std::string& strConfigName, const std::string& strPropertyName) = 0;
+	virtual const NFVector3 GetPropertyVector3(const std::string& strConfigName, const std::string& strPropertyName) = 0;
+
 	virtual const std::vector<std::string> GetListByProperty(const std::string& strClassName, const std::string& strPropertyName, const NFINT64 nValue) = 0;
 	virtual const std::vector<std::string> GetListByProperty(const std::string& strClassName, const std::string& strPropertyName, const std::string& nValue) = 0;
 

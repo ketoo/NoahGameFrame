@@ -410,6 +410,35 @@ void NFCWorldNet_ServerModule::SynWorldToGame(const NFSOCK nFD)
 	m_pNetModule->SendMsgPB(NFMsg::EGameMsgID::EGMI_STS_NET_INFO, xData, nFD);
 }
 
+void NFCWorldNet_ServerModule::SynDBToGame()
+{
+	NFMsg::ServerInfoReportList xData;
+
+	NF_SHARE_PTR<ServerData> pServerData = mGameMap.First();
+	while (pServerData)
+	{
+		SynDBToGame(pServerData->nFD);
+
+		pServerData = mGameMap.Next();
+	}
+}
+
+void NFCWorldNet_ServerModule::SynDBToGame(const NFSOCK nFD)
+{
+	NFMsg::ServerInfoReportList xData;
+
+	NF_SHARE_PTR<ServerData> pServerData = mDBMap.First();
+	while (pServerData)
+	{
+		NFMsg::ServerInfoReport* pData = xData.add_server_list();
+		*pData = *(pServerData->pData);
+
+		pServerData = mDBMap.Next();
+	}
+
+	m_pNetModule->SendMsgPB(NFMsg::EGameMsgID::EGMI_STS_NET_INFO, xData, nFD);
+}
+
 void NFCWorldNet_ServerModule::OnClientDisconnect(const NFSOCK nAddress)
 {
     NF_SHARE_PTR<ServerData> pServerData =  mGameMap.First();

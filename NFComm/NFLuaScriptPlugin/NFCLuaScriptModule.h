@@ -21,6 +21,7 @@
 #include "NFComm/NFPluginModule/NFIElementModule.h"
 #include "NFComm/NFPluginModule/NFINetClientModule.h"
 #include "NFComm/NFPluginModule/NFINetModule.h"
+#include "NFComm/NFPluginModule/NFILogModule.h"
 
 class NFCLuaScriptModule
     : public NFILuaScriptModule
