@@ -34,7 +34,6 @@ public:
     NFCDBNet_ServerModule(NFIPluginManager* p)
     {
         pPluginManager = p;
-        mnLastCheckTime = pPluginManager->GetNowTime();
     }
 
     virtual bool Init();
