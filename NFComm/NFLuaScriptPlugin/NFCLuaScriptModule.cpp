@@ -28,6 +28,7 @@ bool NFCLuaScriptModule::Awake()
     m_pScheduleModule = pPluginManager->FindModule<NFIScheduleModule>();
     m_pNetClientModule = pPluginManager->FindModule<NFINetClientModule>();
     m_pNetModule = pPluginManager->FindModule<NFINetModule>();
+    m_pLogModule = pPluginManager->FindModule<NFILogModule>();
 
 
     Register();
@@ -93,7 +94,7 @@ bool NFCLuaScriptModule::BeforeShut()
 
 NFGUID NFCLuaScriptModule::CreateObject(const NFGUID & self, const int nSceneID, const int nGroupID, const std::string & strClassName, const std::string & strIndex, const NFDataList & arg)
 {
-	return NFGUID();
+	return m_pKernelModule->CreateObject(self, nSceneID, nGroupID, strClassName, strIndex, arg);
 }
 
 bool NFCLuaScriptModule::ExistObject(const NFGUID & self)
@@ -113,77 +114,78 @@ bool NFCLuaScriptModule::EnterScene(const int nSceneID, const int nGroupID)
 
 bool NFCLuaScriptModule::DoEvent(const NFGUID & self, const int nEventID, const NFDataList & arg)
 {
+	m_pEventModule->DoEvent();
 	return false;
 }
 
 bool NFCLuaScriptModule::FindProperty(const NFGUID & self, const std::string & strPropertyName)
 {
-	return false;
+	return m_pKernelModule->FindProperty(self, strPropertyName;
 }
 
 bool NFCLuaScriptModule::SetPropertyInt(const NFGUID & self, const std::string & strPropertyName, const NFINT64 nValue)
 {
-	return false;
+	return m_pKernelModule->SetPropertyInt(self, strPropertyName, nValue);
 }
 
 bool NFCLuaScriptModule::SetPropertyFloat(const NFGUID & self, const std::string & strPropertyName, const double dValue)
 {
-	return false;
+	return m_pKernelModule->SetPropertyFloat(self, strPropertyName, dValue);
 }
 
 bool NFCLuaScriptModule::SetPropertyString(const NFGUID & self, const std::string & strPropertyName, const std::string & strValue)
 {
-	return false;
+	return m_pKernelModule->SetPropertyString(self, strPropertyName, strValue);
 }
 
 bool NFCLuaScriptModule::SetPropertyObject(const NFGUID & self, const std::string & strPropertyName, const NFGUID & objectValue)
 {
-	return false;
+	return m_pKernelModule->SetPropertyString(self, strPropertyName, objectValue);
 }
 
 bool NFCLuaScriptModule::SetPropertyVector2(const NFGUID & self, const std::string & strPropertyName, const NFVector2 & value)
 {
-	return false;
+	return m_pKernelModule->SetPropertyString(self, strPropertyName, value);
 }
 
 bool NFCLuaScriptModule::SetPropertyVector3(const NFGUID & self, const std::string & strPropertyName, const NFVector3 & value)
 {
-	return false;
+	return m_pKernelModule->SetPropertyString(self, strPropertyName, value);
 }
 
 NFINT64 NFCLuaScriptModule::GetPropertyInt(const NFGUID & self, const std::string & strPropertyName)
 {
-	return NFINT64();
+	return m_pKernelModule->GetPropertyInt(self, strPropertyName);
 }
 
 int NFCLuaScriptModule::GetPropertyInt32(const NFGUID & self, const std::string & strPropertyName)
 {
-	return 0;
+	return m_pKernelModule->GetPropertyInt32(self, strPropertyName);
 }
 
 double NFCLuaScriptModule::GetPropertyFloat(const NFGUID & self, const std::string & strPropertyName)
 {
-	return 0.0;
+	return m_pKernelModule->GetPropertyFloat(self, strPropertyName);
 }
 
 std::string NFCLuaScriptModule::GetPropertyString(const NFGUID & self, const std::string & strPropertyName)
 {
-	return "";
+	return m_pKernelModule->GetPropertyString(self, strPropertyName);
 }
 
 NFGUID NFCLuaScriptModule::GetPropertyObject(const NFGUID & self, const std::string & strPropertyName)
 {
-	return NFGUID();
+	return m_pKernelModule->GetPropertyObject(self, strPropertyName);
 }
 
 NFVector2 NFCLuaScriptModule::GetPropertyVector2(const NFGUID & self, const std::string & strPropertyName)
 {
-	return NFVector2();
+	return m_pKernelModule->GetPropertyVector2(self, strPropertyName);
 }
 
 NFVector3 NFCLuaScriptModule::GetPropertyVector3(const NFGUID & self, const std::string & strPropertyName)
 {
-	return NFVector3();
+	return m_pKernelModule->GetPropertyVector3(self, strPropertyName);
 }
 
 bool NFCLuaScriptModule::AddClassCallBack(std::string& className, std::string& funcName)
@@ -301,67 +303,73 @@ int NFCLuaScriptModule::AddRow(const NFGUID& self, std::string& strRecordName, c
 
 bool NFCLuaScriptModule::RemRow(const NFGUID & self, std::string & strRecordName, const int nRow)
 {
-	return false;
+    NF_SHARE_PTR<NFIRecord> pRecord = m_pKernelModule->FindRecord(self, strRecordName);
+    if (nullptr == pRecord)
+    {
+        return false;
+    }
+
+    return pRecord->RemRow(nRow);
 }
 
 bool NFCLuaScriptModule::SetRecordInt(const NFGUID & self, const std::string & strRecordName, const int nRow, const std::string & strColTag, const NFINT64 value)
 {
-	return false;
+	return m_pKernelModule->SetRecordInt(self, strRecordName, nRow, strColTag, value);
 }
 
 bool NFCLuaScriptModule::SetRecordFloat(const NFGUID & self, const std::string & strRecordName, const int nRow, const std::string & strColTag, const double value)
 {
-	return false;
+	return m_pKernelModule->SetRecordFloat(self, strRecordName, nRow, strColTag, value);
 }
 
 bool NFCLuaScriptModule::SetRecordString(const NFGUID & self, const std::string & strRecordName, const int nRow, const std::string & strColTag, const std::string & value)
 {
-	return false;
+	return m_pKernelModule->SetRecordString(self, strRecordName, nRow, strColTag, value);
 }
 
 bool NFCLuaScriptModule::SetRecordObject(const NFGUID & self, const std::string & strRecordName, const int nRow, const std::string & strColTag, const NFGUID & value)
 {
-	return false;
+	return m_pKernelModule->SetRecordObject(self, strRecordName, nRow, strColTag, value);
 }
 
 bool NFCLuaScriptModule::SetRecordVector2(const NFGUID & self, const std::string & strRecordName, const int nRow, const std::string & strColTag, const NFVector2 & value)
 {
-	return false;
+	return m_pKernelModule->SetRecordVector2(self, strRecordName, nRow, strColTag, value);
 }
 
 bool NFCLuaScriptModule::SetRecordVector3(const NFGUID & self, const std::string & strRecordName, const int nRow, const std::string & strColTag, const NFVector3 & value)
 {
-	return false;
+	return m_pKernelModule->SetRecordVector3(self, strRecordName, nRow, strColTag, value);
 }
 
 NFINT64 NFCLuaScriptModule::GetRecordInt(const NFGUID & self, const std::string & strRecordName, const int nRow, const std::string & strColTag)
 {
-	return NFINT64();
+	return m_pKernelModule->GetRecordInt(self, strRecordName, nRow, strColTag)
 }
 
 double NFCLuaScriptModule::GetRecordFloat(const NFGUID & self, const std::string & strRecordName, const int nRow, const std::string & strColTag)
 {
-	return 0.0;
+	return m_pKernelModule->GetRecordFloat(self, strRecordName, nRow, strColTag);
 }
 
 std::string NFCLuaScriptModule::GetRecordString(const NFGUID & self, const std::string & strRecordName, const int nRow, const std::string & strColTag)
 {
-	return "";
+	return m_pKernelModule->GetRecordString(self, strRecordName, nRow, strColTag);
 }
 
 NFGUID NFCLuaScriptModule::GetRecordObject(const NFGUID & self, const std::string & strRecordName, const int nRow, const std::string & strColTag)
 {
-	return NFGUID();
+	return m_pKernelModule->GetRecordObject(self, strRecordName, nRow, strColTag);
 }
 
 NFVector2 NFCLuaScriptModule::GetRecordVector2(const NFGUID & self, const std::string & strRecordName, const int nRow, const std::string & strColTag)
 {
-	return NFVector2();
+	return m_pKernelModule->GetRecordVector2(self, strRecordName, nRow, strColTag);
 }
 
 NFVector3 NFCLuaScriptModule::GetRecordVector3(const NFGUID & self, const std::string & strRecordName, const int nRow, const std::string & strColTag)
 {
-	return NFVector3();
+	return m_pKernelModule->GetRecordVector3(self, strRecordName, nRow, strColTag);
 }
 
 NFINT64 NFCLuaScriptModule::GetNowTime()
@@ -376,32 +384,32 @@ NFGUID NFCLuaScriptModule::CreateID()
 
 bool NFCLuaScriptModule::ExistElementObject(const std::string & strConfigName)
 {
-	return false;
+	return m_pElementModule->ExistElement(strConfigName);
 }
 
 NFINT64 NFCLuaScriptModule::GetElePropertyInt(const std::string & strConfigName, const std::string & strPropertyName)
 {
-	return NFINT64();
+	return m_pElementModule->GetPropertyInt(strConfigName, strPropertyName);
 }
 
 double NFCLuaScriptModule::GetElePropertyFloat(const std::string & strConfigName, const std::string & strPropertyName)
 {
-	return 0.0;
+	return m_pElementModule->GetElePropertyFloat(strConfigName, strPropertyName);
 }
 
 std::string NFCLuaScriptModule::GetElePropertyString(const std::string & strConfigName, const std::string & strPropertyName)
 {
-	return "";
+	return m_pElementModule->GetElePropertyString(strConfigName, strPropertyName);
 }
 
 NFVector2 NFCLuaScriptModule::GetElePropertyVector2(const std::string & strConfigName, const std::string & strPropertyName)
 {
-	return NFVector2();
+	return m_pElementModule->GetElePropertyVector2(strConfigName, strPropertyName);
 }
 
 NFVector3 NFCLuaScriptModule::GetElePropertyVector3(const std::string & strConfigName, const std::string & strPropertyName)
 {
-	return NFVector3();
+	return m_pElementModule->GetElePropertyVector3(strConfigName, strPropertyName);
 }
 
 template<typename T>
@@ -503,7 +511,6 @@ void NFCLuaScriptModule::SendToAllPlayer(const uint16_t nMsgID, const std::strin
 
 void NFCLuaScriptModule::LogInfo(const std::string& strData)
 {
-
 }
 
 void NFCLuaScriptModule::LogError(const std::string& strData)

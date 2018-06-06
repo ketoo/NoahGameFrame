@@ -154,6 +154,7 @@ protected:
     NFIScheduleModule* m_pScheduleModule;
     NFINetClientModule* m_pNetClientModule;
     NFINetModule* m_pNetModule;
+    NFILogModule* m_pLogModule;
 
 protected:
     LuaIntf::LuaContext mLuaContext;
