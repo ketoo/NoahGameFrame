@@ -1,22 +1,22 @@
-set(ProjectName "NFDataAgent_NosqlPlugin")
+set(ProjectName "NFDBLogicPlugin")
 file(GLOB NFDataAgent_NosqlPlugin_ROOT_Cpp
 	*.cpp)
 
 file(GLOB NFDataAgent_NosqlPlugin_ROOT_Hpp 
 	*.h)
 
-add_library(NFDataAgent_NosqlPlugin SHARED
+add_library(NFDBLogicPlugin SHARED
 	${NFDataAgent_NosqlPlugin_ROOT_Cpp}
 	${NFDataAgent_NosqlPlugin_ROOT_Hpp})
 	
-set_target_properties( NFDataAgent_NosqlPlugin PROPERTIES OUTPUT_NAME_DEBUG "NFDataAgent_NosqlPlugin_d")
-set_target_properties( NFDataAgent_NosqlPlugin PROPERTIES PREFIX "")
-set_target_properties( NFDataAgent_NosqlPlugin PROPERTIES 
+set_target_properties( NFDBLogicPlugin PROPERTIES OUTPUT_NAME_DEBUG "NFDBLogicPlugin_d")
+set_target_properties( NFDBLogicPlugin PROPERTIES PREFIX "")
+set_target_properties( NFDBLogicPlugin PROPERTIES 
 	FOLDER "NFServer/GameServer"
 	ARCHIVE_OUTPUT_DIRECTORY ${NFOutPutDir}
 	RUNTIME_OUTPUT_DIRECTORY ${NFOutPutDir}
 	LIBRARY_OUTPUT_DIRECTORY ${NFOutPutDir} )
-link_NFSDK("NFDataAgent_NosqlPlugin")
+link_NFSDK("NFDBLogicPlugin")
 
 if(UNIX)
 	add_definitions(

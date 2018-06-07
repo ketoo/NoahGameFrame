@@ -19,7 +19,7 @@
     <ClCompile Include="NFCPlayerRedisModule.cpp" />
     <ClCompile Include="NFCRankRedisModule.cpp" />
     <ClCompile Include="NFCCommonRedisModule.cpp" />
-    <ClCompile Include="NFDataAgent_NosqlPlugin.cpp" />
+    <ClCompile Include="NFDBLogicPlugin.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="NFCAccountRedisModule.h" />
@@ -29,13 +29,14 @@
     <ClInclude Include="NFCPlayerRedisModule.h" />
     <ClInclude Include="NFCRankRedisModule.h" />
     <ClInclude Include="NFCCommonRedisModule.h" />
-    <ClInclude Include="NFDataAgent_NosqlPlugin.h" />
+    <ClInclude Include="NFDBLogicPlugin.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{B7132059-C4A0-472A-9D58-BEB40B9528DB}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>NFDataAgent_NosqlPlugin</RootNamespace>
     <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
+    <ProjectName>NFDBLogicPlugin</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
