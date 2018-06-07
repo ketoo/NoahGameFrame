@@ -1,18 +1,18 @@
 // -------------------------------------------------------------------------
-//    @FileName			:    NFDataAgent_NosqlPlugin.h
+//    @FileName			:    NFDBLogicPlugin.h
 //    @Author           :    LvSheng.Huang
 //    @Date             :    2013-10-03
-//    @Module           :    NFDataAgent_NosqlPlugin
+//    @Module           :    NFDBLogicPlugin
 //    @Desc             :
 // -------------------------------------------------------------------------
 
 #include "NFComm/NFPluginModule/NFIPlugin.h"
 #include "NFComm/NFPluginModule/NFIPluginManager.h"
 
-class NFDataAgent_NosqlPlugin : public NFIPlugin
+class NFDBLogicPlugin : public NFIPlugin
 {
 public:
-	NFDataAgent_NosqlPlugin(NFIPluginManager* p)
+	NFDBLogicPlugin(NFIPluginManager* p)
     {
         pPluginManager = p;
     }

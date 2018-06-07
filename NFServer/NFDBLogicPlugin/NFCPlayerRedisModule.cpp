@@ -98,45 +98,88 @@ bool NFCPlayerRedisModule::AfterInit()
 	return true;
 }
 
-bool NFCPlayerRedisModule::LoadPlayerData(const NFGUID & self)
+bool NFCPlayerRedisModule::LoadPlayerData(const NFGUID & self, NFMsg::RoleDataPack& roleData)
 {
-	mxObjectDataCache.RemoveElement(self);
-
-	m_pLogModule->LogNormal(NFILogModule::NF_LOG_LEVEL::NLL_DEBUG_NORMAL, self, "Start to load data ", NFGetTimeMS());
-
-	NF_SHARE_PTR<PlayerDataCache> xPlayerDataCache(NF_NEW PlayerDataCache());
-	mxObjectDataCache.AddElement(self, xPlayerDataCache);
-
-	m_pCommonRedisModule->GetCachePropertyInfo(self, NFrame::Player::ThisName(), xPlayerDataCache->mvPropertyKeyList, xPlayerDataCache->mvPropertyValueList);
-	m_pCommonRedisModule->GetCacheRecordInfo(self, NFrame::Player::ThisName(), xPlayerDataCache->mvRecordKeyList, xPlayerDataCache->mvRecordValueList);
-
-	//xPlayerDataCache->nHomeSceneID = xPlayerDataCache->xPropertyManager->GetPropertyInt(NFrame::Player::HomeSceneID());
-	for (int i = 0; i < xPlayerDataCache->mvPropertyKeyList.size(); ++i)
+	NF_SHARE_PTR<NFIPropertyManager> xPropertyManager = m_pCommonRedisModule->GetCachePropertyInfo(self, NFrame::Player::ThisName());
+	NF_SHARE_PTR<NFIRecordManager> xRecordManager = m_pCommonRedisModule->GetCacheRecordInfo(self, NFrame::Player::ThisName());
+	if (xPropertyManager)
 	{
-		if (xPlayerDataCache->mvPropertyKeyList[i] == NFrame::Player::HomeSceneID())
+		NF_SHARE_PTR<NFIProperty> xPropert = xPropertyManager->First();
+		while (xPropert)
 		{
-			const std::string& strValue = xPlayerDataCache->mvPropertyValueList[i];
-			xPlayerDataCache->nHomeSceneID = lexical_cast<int>(strValue);
-			break;
+			switch (xPropert->GetType())
+			{
+			case NFDATA_TYPE::TDATA_INT:
+			{
+				NFMsg::PropertyInt* pData = roleData.mutable_property()->add_property_int_list();
+				pData->set_property_name(xPropert->GetKey());
+				pData->set_data(xPropert->GetInt());
+			}
+				break;
+
+			case NFDATA_TYPE::TDATA_FLOAT:
+			{
+				NFMsg::PropertyFloat* pData = roleData.mutable_property()->add_property_float_list();
+				pData->set_property_name(xPropert->GetKey());
+				pData->set_data(xPropert->GetFloat());
+			}
+				break;
+
+			case NFDATA_TYPE::TDATA_OBJECT:
+			{
+				NFMsg::PropertyObject* pData = roleData.mutable_property()->add_property_object_list();
+				pData->set_property_name(xPropert->GetKey());
+				*(pData->mutable_data()) = NFINetModule::NFToPB(xPropert->GetObject());
+			}
+				break;
+
+			case NFDATA_TYPE::TDATA_STRING:
+			{
+				NFMsg::PropertyString* pData = roleData.mutable_property()->add_property_string_list();
+				pData->set_property_name(xPropert->GetKey());
+				pData->set_data(xPropert->GetString());
+			}
+				break;
+
+			case NFDATA_TYPE::TDATA_VECTOR2:
+			{
+				NFMsg::PropertyVector2* pData = roleData.mutable_property()->add_property_vector2_list();
+				pData->set_property_name(xPropert->GetKey());
+				*(pData->mutable_data()) = NFINetModule::NFToPB(xPropert->GetVector2());
+			}
+				break;
+
+			case NFDATA_TYPE::TDATA_VECTOR3:
+			{
+				NFMsg::PropertyVector3* pData = roleData.mutable_property()->add_property_vector3_list();
+				pData->set_property_name(xPropert->GetKey());
+				*(pData->mutable_data()) = NFINetModule::NFToPB(xPropert->GetVector3());
+			}
+				break;
+			default:
+				break;
+			}
+
+			xPropert = xPropertyManager->Next();
+		}
+	}
+
+	if (xPropertyManager)
+	{
+		NF_SHARE_PTR<NFIRecord> xPropert = xRecordManager->First();
+		while (xPropert)
+		{
+
+			xPropert = xRecordManager->Next();
 		}
 	}
 
 	m_pLogModule->LogNormal(NFILogModule::NF_LOG_LEVEL::NLL_DEBUG_NORMAL, self, "loaded data ", NFGetTimeMS());
 
-
 	return true;
 }
 
-int NFCPlayerRedisModule::GetPlayerHomeSceneID(const NFGUID & self)
-{
-	NF_SHARE_PTR<PlayerDataCache> xPlayerDataCache = mxObjectDataCache.GetElement(self);
-	if (xPlayerDataCache)
-	{
-		return xPlayerDataCache->nHomeSceneID;
-	}
 
-	return 0;
-}
 
 bool NFCPlayerRedisModule::SavePlayerTile(const int nSceneID, const NFGUID & self, const std::string & strTileData)
 {
@@ -366,8 +409,8 @@ const bool NFCPlayerRedisModule::AttachData(const NFGUID & self)
 		NF_SHARE_PTR<NFIObject> pObject = m_pKernelModule->GetObject(self);
 		if (pObject)
 		{
-			m_pCommonRedisModule->ConvertPBToPropertyManager(xPlayerDataCache->mvPropertyKeyList, xPlayerDataCache->mvPropertyValueList, pObject->GetPropertyManager());
-			m_pCommonRedisModule->ConvertPBToRecordManager(xPlayerDataCache->mvRecordKeyList, xPlayerDataCache->mvRecordValueList, pObject->GetRecordManager());
+			m_pCommonRedisModule->ConvertVectorToPropertyManager(xPlayerDataCache->mvPropertyKeyList, xPlayerDataCache->mvPropertyValueList, pObject->GetPropertyManager());
+			m_pCommonRedisModule->ConvertVectorToRecordManager(xPlayerDataCache->mvRecordKeyList, xPlayerDataCache->mvRecordValueList, pObject->GetRecordManager());
 
 			return true;
 		}

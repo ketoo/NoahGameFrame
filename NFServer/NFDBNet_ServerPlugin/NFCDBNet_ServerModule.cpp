@@ -19,7 +19,8 @@ bool NFCDBNet_ServerModule::Init()
 	m_pElementModule = pPluginManager->FindModule<NFIElementModule>();
 	m_pClassModule = pPluginManager->FindModule<NFIClassModule>();
 	m_pNetClientModule = pPluginManager->FindModule<NFINetClientModule>();
-
+	m_pAccountRedisModule = pPluginManager->FindModule<NFIAccountRedisModule>();
+	
     return true;
 }
 
@@ -58,6 +59,11 @@ bool NFCDBNet_ServerModule::AfterInit()
             }
         }
     }
+
+	m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_REQ_ROLE_LIST, this, &NFCDBNet_ServerModule::OnReqiureRoleListProcess);
+	m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_REQ_CREATE_ROLE, this, &NFCDBNet_ServerModule::OnCreateRoleGameProcess);
+	m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_REQ_DELETE_ROLE, this, &NFCDBNet_ServerModule::OnDeleteRoleGameProcess);
+	m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_REQ_LOAD_ROLE_DATA, this, &NFCDBNet_ServerModule::OnLoadRoleDataProcess);
 
     return true;
 }
@@ -104,5 +110,112 @@ void NFCDBNet_ServerModule::OnClientDisconnect(const NFSOCK nAddress)
 
 void NFCDBNet_ServerModule::OnClientConnected(const NFSOCK nAddress)
 {
+}
+
+void NFCDBNet_ServerModule::OnReqiureRoleListProcess(const NFSOCK nSockIndex, const int nMsgID, const char * msg, const uint32_t nLen)
+{
+
+	NFGUID nClientID;
+	NFMsg::ReqRoleList xMsg;
+	if (!m_pNetModule->ReceivePB(nMsgID, msg, nLen, xMsg, nClientID))
+	{
+		return;
+	}
+
+	NFGUID xPlayerID;
+	std::string strRoleName;
+	if (!m_pAccountRedisModule->GetRoleInfo(xMsg.account(), strRoleName, xPlayerID))
+	{
+		NFMsg::AckRoleLiteInfoList xAckRoleLiteInfoList;
+		m_pNetModule->SendMsgPB(NFMsg::EGMI_ACK_ROLE_LIST, xAckRoleLiteInfoList, nSockIndex, nClientID);
+		return;
+	}
+
+	NFMsg::AckRoleLiteInfoList xAckRoleLiteInfoList;
+	NFMsg::RoleLiteInfo* pData = xAckRoleLiteInfoList.add_char_data();
+	pData->mutable_id()->CopyFrom(NFINetModule::NFToPB(xPlayerID));
+	pData->set_game_id(pPluginManager->GetAppID());
+	pData->set_career(0);
+	pData->set_sex(0);
+	pData->set_race(0);
+	pData->set_noob_name(strRoleName);
+	pData->set_role_level(0);
+	pData->set_delete_time(0);
+	pData->set_reg_time(0);
+	pData->set_last_offline_time(0);
+	pData->set_last_offline_ip(0);
+	pData->set_view_record("");
+
+	m_pNetModule->SendMsgPB(NFMsg::EGMI_ACK_ROLE_LIST, xAckRoleLiteInfoList, nSockIndex, nClientID);
+}
+
+void NFCDBNet_ServerModule::OnCreateRoleGameProcess(const NFSOCK nSockIndex, const int nMsgID, const char * msg, const uint32_t nLen)
+{
+	NFGUID nClientID;
+	NFMsg::ReqCreateRole xMsg;
+	if (!m_pNetModule->ReceivePB(nMsgID, msg, nLen, xMsg, nClientID))
+	{
+		return;
+	}
+
+	const std::string& strAccount = xMsg.account();
+	const std::string& strName = xMsg.noob_name();
+
+	NFGUID xID = m_pKernelModule->CreateGUID();
+	if (m_pAccountRedisModule->CreateRole(strAccount, strName, xID))
+	{
+		NFMsg::AckRoleLiteInfoList xAckRoleLiteInfoList;
+		NFMsg::RoleLiteInfo* pData = xAckRoleLiteInfoList.add_char_data();
+		pData->mutable_id()->CopyFrom(NFINetModule::NFToPB(xID));
+		pData->set_career(xMsg.career());
+		pData->set_game_id(pPluginManager->GetAppID());
+		pData->set_sex(xMsg.sex());
+		pData->set_race(xMsg.race());
+		pData->set_noob_name(xMsg.noob_name());
+		pData->set_role_level(1);
+		pData->set_delete_time(0);
+		pData->set_reg_time(0);
+		pData->set_last_offline_time(0);
+		pData->set_last_offline_ip(0);
+		pData->set_view_record("");
+
+		m_pNetModule->SendMsgPB(NFMsg::EGMI_ACK_ROLE_LIST, xAckRoleLiteInfoList, nSockIndex, nClientID);
+	}
+}
+
+void NFCDBNet_ServerModule::OnDeleteRoleGameProcess(const NFSOCK nSockIndex, const int nMsgID, const char * msg, const uint32_t nLen)
+{
+	NFGUID nClientID;
+	NFMsg::ReqRoleList xMsg;
+	if (!m_pNetModule->ReceivePB(nMsgID, msg, nLen, xMsg, nClientID))
+	{
+		return;
+	}
+
+	NFMsg::AckRoleLiteInfoList xAckRoleLiteInfoList;
+	m_pNetModule->SendMsgPB(NFMsg::EGMI_ACK_ROLE_LIST, xAckRoleLiteInfoList, nSockIndex, nClientID);
+}
+
+void NFCDBNet_ServerModule::OnLoadRoleDataProcess(const NFSOCK nSockIndex, const int nMsgID, const char * msg, const uint32_t nLen)
+{
+	NFGUID nClientID;
+	NFMsg::RoleDataPack xMsg;
+	if (!m_pNetModule->ReceivePB(nMsgID, msg, nLen, xMsg, nClientID))
+	{
+		return;
+	}
+
+	NFGUID nRoleID = NFINetModule::PBToNF(xMsg.id());
+
+	if (m_pPlayerRedisModule->LoadPlayerData(nRoleID))
+	{
+		int nHomeSceneID = m_pPlayerRedisModule->GetPlayerHomeSceneID(nRoleID);
+		if (nHomeSceneID <= 0)
+		{
+			nHomeSceneID = 1;
+		}
+
+		m_pNetModule->SendMsgPB(NFMsg::EGMI_ACK_ROLE_LIST, xAckRoleLiteInfoList, nSockIndex, nClientID);
+	}
 }
 

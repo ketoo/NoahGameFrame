@@ -20,6 +20,7 @@
 #include "NFComm/NFPluginModule/NFIPlayerRedisModule.h"
 #include "NFComm/NFPluginModule/NFINoSqlModule.h"
 #include "NFComm/NFPluginModule/NFICommonRedisModule.h"
+#include "NFComm/NFPluginModule/NFINetModule.h"
 
 class NFCPlayerRedisModule : public NFIPlayerRedisModule
 {
@@ -33,9 +34,7 @@ public:
 
 	virtual bool AfterInit();
 
-	virtual int GetPlayerHomeSceneID(const NFGUID& self);
-
-	virtual bool LoadPlayerData(const NFGUID& self);
+	virtual bool LoadPlayerData(const NFGUID& self, NFMsg::RoleDataPack& roleData);
 	virtual bool SavePlayerData(const NFGUID& self);
 
 	virtual bool SavePlayerTile(const int nSceneID, const NFGUID& self, const std::string& strTileData);
@@ -66,23 +65,7 @@ protected:
 	int OnRecordCommonEvent(const NFGUID & self, const RECORD_EVENT_DATA & xEventData, const NFData & oldVar, const NFData & newVar);
 
 private:
-	struct PlayerDataCache
-	{
-		PlayerDataCache()
-		{
-			nHomeSceneID = 0;
-		}
-		int nHomeSceneID;
 
-		std::vector<std::string> mvPropertyKeyList;
-		std::vector<std::string> mvPropertyValueList;
-
-		std::vector<std::string> mvRecordKeyList;
-		std::vector<std::string> mvRecordValueList;
-	};
-
-	NFMapEx<NFGUID, PlayerDataCache> mxObjectDataCache;
-	NFMapEx<NFGUID, std::string> mxObjectTileCache;
 
 private:
 	NFIClassModule* m_pLogicClassModule;

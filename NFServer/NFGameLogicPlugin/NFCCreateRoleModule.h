@@ -14,9 +14,7 @@
 #include "NFComm/NFPluginModule/NFINoSqlModule.h"
 #include "NFComm/NFPluginModule/NFIElementModule.h"
 #include "NFComm/NFPluginModule/NFICreateRoleModule.h"
-#include "NFComm/NFPluginModule/NFIPlayerRedisModule.h"
-#include "NFComm/NFPluginModule/NFIAccountRedisModule.h"
-#include "NFComm/NFPluginModule/NFISceneAOIModule.h"
+#include "NFComm/NFPluginModule/NFIGameServerToDBModule.h"
 #include "NFComm/NFPluginModule/NFISceneProcessModule.h"
 #include "NFComm/NFPluginModule/NFIPVPModule.h"
 #include "NFComm/NFPluginModule/NFIGameServerNet_ServerModule.h"
@@ -42,6 +40,28 @@ protected:
 	void OnCreateRoleGameProcess(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
 	void OnDeleteRoleGameProcess(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
 	void OnClienEnterGameProcess(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+	
+	void OnDBLoadRoleDataProcess(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+
+
+private:
+	struct PlayerDataCache
+	{
+		PlayerDataCache()
+		{
+			nHomeSceneID = 0;
+		}
+		int nHomeSceneID;
+
+		std::vector<std::string> mvPropertyKeyList;
+		std::vector<std::string> mvPropertyValueList;
+
+		std::vector<std::string> mvRecordKeyList;
+		std::vector<std::string> mvRecordValueList;
+	};
+
+	NFMapEx<NFGUID, PlayerDataCache> mxObjectDataCache;
+	NFMapEx<NFGUID, std::string> mxObjectTileCache;
 
 private:
 	NFIPVPModule* m_pPVPModule;
@@ -51,10 +71,9 @@ private:
     NFIKernelModule* m_pKernelModule;
 	NFINoSqlModule* m_pNoSqlModule;
 	NFIGameServerNet_ServerModule* m_pGameServerNet_ServerModule;
-	NFIPlayerRedisModule* m_pPlayerRedisModule;
-	NFIAccountRedisModule* m_pAccountRedisModule;
-	NFISceneAOIModule* m_pSceneAOIModule;
+	NFIGameServerToDBModule* m_pGameToDBModule;
 	NFISceneProcessModule* m_pSceneProcessModule;
+	NFINetClientModule* m_pNetClientModule;
 };
 
 #endif
