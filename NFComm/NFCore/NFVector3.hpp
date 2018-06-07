@@ -281,11 +281,20 @@ public:
 		{
 			return false;
 		}
-		x = lexical_cast<float>(values.at(0));
-		y = lexical_cast<float>(values.at(1));
-		z = lexical_cast<float>(values.at(2));
+		try
+		{
+			x = lexical_cast<float>(values.at(0));
+			y = lexical_cast<float>(values.at(1));
+			z = lexical_cast<float>(values.at(2));
 
-		return true;
+			return true;
+		}
+		catch (const std::exception&)
+		{
+
+		}
+
+		return false;
 	}
 
 	//----------------------------------------------------------------------------

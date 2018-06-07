@@ -251,10 +251,20 @@ public:
 		{
 			return false;
 		}
-		x = lexical_cast<float>(values.at(0));
-		y = lexical_cast<float>(values.at(1));
 
-		return true;
+		try
+		{
+			x = lexical_cast<float>(values.at(0));
+			y = lexical_cast<float>(values.at(1));
+
+			return true;
+		}
+		catch (const std::exception&)
+		{
+
+		}
+
+		return false;
 	}
 
 	std::string ToString() const
