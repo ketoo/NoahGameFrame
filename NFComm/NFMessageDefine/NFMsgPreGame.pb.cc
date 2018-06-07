@@ -83,6 +83,9 @@ const ::google::protobuf::internal::GeneratedMessageReflection*
 const ::google::protobuf::Descriptor* RoleOfflineNotify_descriptor_ = NULL;
 const ::google::protobuf::internal::GeneratedMessageReflection*
   RoleOfflineNotify_reflection_ = NULL;
+const ::google::protobuf::Descriptor* RoleDataPack_descriptor_ = NULL;
+const ::google::protobuf::internal::GeneratedMessageReflection*
+  RoleDataPack_reflection_ = NULL;
 const ::google::protobuf::EnumDescriptor* EServerState_descriptor_ = NULL;
 const ::google::protobuf::EnumDescriptor* ReqServerListType_descriptor_ = NULL;
 
@@ -471,6 +474,23 @@ void protobuf_AssignDesc_NFMsgPreGame_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(RoleOfflineNotify));
+  RoleDataPack_descriptor_ = file->message_type(21);
+  static const int RoleDataPack_offsets_[3] = {
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(RoleDataPack, id_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(RoleDataPack, property_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(RoleDataPack, record_),
+  };
+  RoleDataPack_reflection_ =
+    new ::google::protobuf::internal::GeneratedMessageReflection(
+      RoleDataPack_descriptor_,
+      RoleDataPack::default_instance_,
+      RoleDataPack_offsets_,
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(RoleDataPack, _has_bits_[0]),
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(RoleDataPack, _unknown_fields_),
+      -1,
+      ::google::protobuf::DescriptorPool::generated_pool(),
+      ::google::protobuf::MessageFactory::generated_factory(),
+      sizeof(RoleDataPack));
   EServerState_descriptor_ = file->enum_type(0);
   ReqServerListType_descriptor_ = file->enum_type(1);
 }
@@ -527,6 +547,8 @@ void protobuf_RegisterTypes(const ::std::string&) {
     RoleOnlineNotify_descriptor_, &RoleOnlineNotify::default_instance());
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
     RoleOfflineNotify_descriptor_, &RoleOfflineNotify::default_instance());
+  ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
+    RoleDataPack_descriptor_, &RoleDataPack::default_instance());
 }
 
 }  // namespace
@@ -574,6 +596,8 @@ void protobuf_ShutdownFile_NFMsgPreGame_2eproto() {
   delete RoleOnlineNotify_reflection_;
   delete RoleOfflineNotify::default_instance_;
   delete RoleOfflineNotify_reflection_;
+  delete RoleDataPack::default_instance_;
+  delete RoleDataPack_reflection_;
 }
 
 void protobuf_AddDesc_NFMsgPreGame_2eproto() {
@@ -641,11 +665,14 @@ void protobuf_AddDesc_NFMsgPreGame_2eproto() {
     " \002(\005\022\r\n\005proxy\030\004 \002(\005\"i\n\021RoleOfflineNotify"
     "\022\032\n\004self\030\001 \002(\0132\014.NFMsg.Ident\022\033\n\005guild\030\002 "
     "\002(\0132\014.NFMsg.Ident\022\014\n\004game\030\003 \002(\005\022\r\n\005proxy"
-    "\030\004 \002(\005*Z\n\014EServerState\022\r\n\tEST_CRASH\020\000\022\016\n"
-    "\nEST_NARMAL\020\001\022\014\n\010EST_BUSY\020\002\022\014\n\010EST_FIRE\020"
-    "\003\022\017\n\013EST_MAINTEN\020\004*@\n\021ReqServerListType\022"
-    "\025\n\021RSLT_WORLD_SERVER\020\000\022\024\n\020RSLT_GAMES_ERV"
-    "ER\020\001", 2404);
+    "\030\004 \002(\005\"~\n\014RoleDataPack\022\030\n\002id\030\001 \002(\0132\014.NFM"
+    "sg.Ident\022+\n\010property\030\002 \002(\0132\031.NFMsg.Objec"
+    "tPropertyList\022\'\n\006record\030\004 \002(\0132\027.NFMsg.Ob"
+    "jectRecordList*Z\n\014EServerState\022\r\n\tEST_CR"
+    "ASH\020\000\022\016\n\nEST_NARMAL\020\001\022\014\n\010EST_BUSY\020\002\022\014\n\010E"
+    "ST_FIRE\020\003\022\017\n\013EST_MAINTEN\020\004*@\n\021ReqServerL"
+    "istType\022\025\n\021RSLT_WORLD_SERVER\020\000\022\024\n\020RSLT_G"
+    "AMES_ERVER\020\001", 2532);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "NFMsgPreGame.proto", &protobuf_RegisterTypes);
   ServerInfoReport::default_instance_ = new ServerInfoReport();
@@ -669,6 +696,7 @@ void protobuf_AddDesc_NFMsgPreGame_2eproto() {
   ServerHeartBeat::default_instance_ = new ServerHeartBeat();
   RoleOnlineNotify::default_instance_ = new RoleOnlineNotify();
   RoleOfflineNotify::default_instance_ = new RoleOfflineNotify();
+  RoleDataPack::default_instance_ = new RoleDataPack();
   ServerInfoReport::default_instance_->InitAsDefaultInstance();
   ServerInfoReportList::default_instance_->InitAsDefaultInstance();
   AckEventResult::default_instance_->InitAsDefaultInstance();
@@ -690,6 +718,7 @@ void protobuf_AddDesc_NFMsgPreGame_2eproto() {
   ServerHeartBeat::default_instance_->InitAsDefaultInstance();
   RoleOnlineNotify::default_instance_->InitAsDefaultInstance();
   RoleOfflineNotify::default_instance_->InitAsDefaultInstance();
+  RoleDataPack::default_instance_->InitAsDefaultInstance();
   ::google::protobuf::internal::OnShutdown(&protobuf_ShutdownFile_NFMsgPreGame_2eproto);
 }
 
@@ -7866,6 +7895,319 @@ void RoleOfflineNotify::Swap(RoleOfflineNotify* other) {
   ::google::protobuf::Metadata metadata;
   metadata.descriptor = RoleOfflineNotify_descriptor_;
   metadata.reflection = RoleOfflineNotify_reflection_;
+  return metadata;
+}
+
+
+// ===================================================================
+
+#ifndef _MSC_VER
+const int RoleDataPack::kIdFieldNumber;
+const int RoleDataPack::kPropertyFieldNumber;
+const int RoleDataPack::kRecordFieldNumber;
+#endif  // !_MSC_VER
+
+RoleDataPack::RoleDataPack()
+  : ::google::protobuf::Message() {
+  SharedCtor();
+}
+
+void RoleDataPack::InitAsDefaultInstance() {
+  id_ = const_cast< ::NFMsg::Ident*>(&::NFMsg::Ident::default_instance());
+  property_ = const_cast< ::NFMsg::ObjectPropertyList*>(&::NFMsg::ObjectPropertyList::default_instance());
+  record_ = const_cast< ::NFMsg::ObjectRecordList*>(&::NFMsg::ObjectRecordList::default_instance());
+}
+
+RoleDataPack::RoleDataPack(const RoleDataPack& from)
+  : ::google::protobuf::Message() {
+  SharedCtor();
+  MergeFrom(from);
+}
+
+void RoleDataPack::SharedCtor() {
+  _cached_size_ = 0;
+  id_ = NULL;
+  property_ = NULL;
+  record_ = NULL;
+  ::memset(_has_bits_, 0, sizeof(_has_bits_));
+}
+
+RoleDataPack::~RoleDataPack() {
+  SharedDtor();
+}
+
+void RoleDataPack::SharedDtor() {
+  if (this != default_instance_) {
+    delete id_;
+    delete property_;
+    delete record_;
+  }
+}
+
+void RoleDataPack::SetCachedSize(int size) const {
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+}
+const ::google::protobuf::Descriptor* RoleDataPack::descriptor() {
+  protobuf_AssignDescriptorsOnce();
+  return RoleDataPack_descriptor_;
+}
+
+const RoleDataPack& RoleDataPack::default_instance() {
+  if (default_instance_ == NULL) protobuf_AddDesc_NFMsgPreGame_2eproto();
+  return *default_instance_;
+}
+
+RoleDataPack* RoleDataPack::default_instance_ = NULL;
+
+RoleDataPack* RoleDataPack::New() const {
+  return new RoleDataPack;
+}
+
+void RoleDataPack::Clear() {
+  if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    if (has_id()) {
+      if (id_ != NULL) id_->::NFMsg::Ident::Clear();
+    }
+    if (has_property()) {
+      if (property_ != NULL) property_->::NFMsg::ObjectPropertyList::Clear();
+    }
+    if (has_record()) {
+      if (record_ != NULL) record_->::NFMsg::ObjectRecordList::Clear();
+    }
+  }
+  ::memset(_has_bits_, 0, sizeof(_has_bits_));
+  mutable_unknown_fields()->Clear();
+}
+
+bool RoleDataPack::MergePartialFromCodedStream(
+    ::google::protobuf::io::CodedInputStream* input) {
+#define DO_(EXPRESSION) if (!(EXPRESSION)) return false
+  ::google::protobuf::uint32 tag;
+  while ((tag = input->ReadTag()) != 0) {
+    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
+      // required .NFMsg.Ident id = 1;
+      case 1: {
+        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
+          DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
+               input, mutable_id()));
+        } else {
+          goto handle_uninterpreted;
+        }
+        if (input->ExpectTag(18)) goto parse_property;
+        break;
+      }
+
+      // required .NFMsg.ObjectPropertyList property = 2;
+      case 2: {
+        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
+         parse_property:
+          DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
+               input, mutable_property()));
+        } else {
+          goto handle_uninterpreted;
+        }
+        if (input->ExpectTag(34)) goto parse_record;
+        break;
+      }
+
+      // required .NFMsg.ObjectRecordList record = 4;
+      case 4: {
+        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
+         parse_record:
+          DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
+               input, mutable_record()));
+        } else {
+          goto handle_uninterpreted;
+        }
+        if (input->ExpectAtEnd()) return true;
+        break;
+      }
+
+      default: {
+      handle_uninterpreted:
+        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_END_GROUP) {
+          return true;
+        }
+        DO_(::google::protobuf::internal::WireFormat::SkipField(
+              input, tag, mutable_unknown_fields()));
+        break;
+      }
+    }
+  }
+  return true;
+#undef DO_
+}
+
+void RoleDataPack::SerializeWithCachedSizes(
+    ::google::protobuf::io::CodedOutputStream* output) const {
+  // required .NFMsg.Ident id = 1;
+  if (has_id()) {
+    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+      1, this->id(), output);
+  }
+
+  // required .NFMsg.ObjectPropertyList property = 2;
+  if (has_property()) {
+    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+      2, this->property(), output);
+  }
+
+  // required .NFMsg.ObjectRecordList record = 4;
+  if (has_record()) {
+    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+      4, this->record(), output);
+  }
+
+  if (!unknown_fields().empty()) {
+    ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
+        unknown_fields(), output);
+  }
+}
+
+::google::protobuf::uint8* RoleDataPack::SerializeWithCachedSizesToArray(
+    ::google::protobuf::uint8* target) const {
+  // required .NFMsg.Ident id = 1;
+  if (has_id()) {
+    target = ::google::protobuf::internal::WireFormatLite::
+      WriteMessageNoVirtualToArray(
+        1, this->id(), target);
+  }
+
+  // required .NFMsg.ObjectPropertyList property = 2;
+  if (has_property()) {
+    target = ::google::protobuf::internal::WireFormatLite::
+      WriteMessageNoVirtualToArray(
+        2, this->property(), target);
+  }
+
+  // required .NFMsg.ObjectRecordList record = 4;
+  if (has_record()) {
+    target = ::google::protobuf::internal::WireFormatLite::
+      WriteMessageNoVirtualToArray(
+        4, this->record(), target);
+  }
+
+  if (!unknown_fields().empty()) {
+    target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
+        unknown_fields(), target);
+  }
+  return target;
+}
+
+int RoleDataPack::ByteSize() const {
+  int total_size = 0;
+
+  if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    // required .NFMsg.Ident id = 1;
+    if (has_id()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
+          this->id());
+    }
+
+    // required .NFMsg.ObjectPropertyList property = 2;
+    if (has_property()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
+          this->property());
+    }
+
+    // required .NFMsg.ObjectRecordList record = 4;
+    if (has_record()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
+          this->record());
+    }
+
+  }
+  if (!unknown_fields().empty()) {
+    total_size +=
+      ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
+        unknown_fields());
+  }
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = total_size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+  return total_size;
+}
+
+void RoleDataPack::MergeFrom(const ::google::protobuf::Message& from) {
+  GOOGLE_CHECK_NE(&from, this);
+  const RoleDataPack* source =
+    ::google::protobuf::internal::dynamic_cast_if_available<const RoleDataPack*>(
+      &from);
+  if (source == NULL) {
+    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
+  } else {
+    MergeFrom(*source);
+  }
+}
+
+void RoleDataPack::MergeFrom(const RoleDataPack& from) {
+  GOOGLE_CHECK_NE(&from, this);
+  if (from._has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    if (from.has_id()) {
+      mutable_id()->::NFMsg::Ident::MergeFrom(from.id());
+    }
+    if (from.has_property()) {
+      mutable_property()->::NFMsg::ObjectPropertyList::MergeFrom(from.property());
+    }
+    if (from.has_record()) {
+      mutable_record()->::NFMsg::ObjectRecordList::MergeFrom(from.record());
+    }
+  }
+  mutable_unknown_fields()->MergeFrom(from.unknown_fields());
+}
+
+void RoleDataPack::CopyFrom(const ::google::protobuf::Message& from) {
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+void RoleDataPack::CopyFrom(const RoleDataPack& from) {
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool RoleDataPack::IsInitialized() const {
+  if ((_has_bits_[0] & 0x00000007) != 0x00000007) return false;
+
+  if (has_id()) {
+    if (!this->id().IsInitialized()) return false;
+  }
+  if (has_property()) {
+    if (!this->property().IsInitialized()) return false;
+  }
+  if (has_record()) {
+    if (!this->record().IsInitialized()) return false;
+  }
+  return true;
+}
+
+void RoleDataPack::Swap(RoleDataPack* other) {
+  if (other != this) {
+    std::swap(id_, other->id_);
+    std::swap(property_, other->property_);
+    std::swap(record_, other->record_);
+    std::swap(_has_bits_[0], other->_has_bits_[0]);
+    _unknown_fields_.Swap(&other->_unknown_fields_);
+    std::swap(_cached_size_, other->_cached_size_);
+  }
+}
+
+::google::protobuf::Metadata RoleDataPack::GetMetadata() const {
+  protobuf_AssignDescriptorsOnce();
+  ::google::protobuf::Metadata metadata;
+  metadata.descriptor = RoleDataPack_descriptor_;
+  metadata.reflection = RoleDataPack_reflection_;
   return metadata;
 }
 

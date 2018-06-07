@@ -57,6 +57,7 @@ class ReqRecoverRole;
 class ServerHeartBeat;
 class RoleOnlineNotify;
 class RoleOfflineNotify;
+class RoleDataPack;
 
 enum EServerState {
   EST_CRASH = 0,
@@ -2582,6 +2583,114 @@ class LIBPROTOC_EXPORT RoleOfflineNotify : public ::google::protobuf::Message {
 
   void InitAsDefaultInstance();
   static RoleOfflineNotify* default_instance_;
+};
+// -------------------------------------------------------------------
+
+class LIBPROTOC_EXPORT RoleDataPack : public ::google::protobuf::Message {
+ public:
+  RoleDataPack();
+  virtual ~RoleDataPack();
+
+  RoleDataPack(const RoleDataPack& from);
+
+  inline RoleDataPack& operator=(const RoleDataPack& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _unknown_fields_;
+  }
+
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return &_unknown_fields_;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const RoleDataPack& default_instance();
+
+  void Swap(RoleDataPack* other);
+
+  // implements Message ----------------------------------------------
+
+  RoleDataPack* New() const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const RoleDataPack& from);
+  void MergeFrom(const RoleDataPack& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // required .NFMsg.Ident id = 1;
+  inline bool has_id() const;
+  inline void clear_id();
+  static const int kIdFieldNumber = 1;
+  inline const ::NFMsg::Ident& id() const;
+  inline ::NFMsg::Ident* mutable_id();
+  inline ::NFMsg::Ident* release_id();
+  inline void set_allocated_id(::NFMsg::Ident* id);
+
+  // required .NFMsg.ObjectPropertyList property = 2;
+  inline bool has_property() const;
+  inline void clear_property();
+  static const int kPropertyFieldNumber = 2;
+  inline const ::NFMsg::ObjectPropertyList& property() const;
+  inline ::NFMsg::ObjectPropertyList* mutable_property();
+  inline ::NFMsg::ObjectPropertyList* release_property();
+  inline void set_allocated_property(::NFMsg::ObjectPropertyList* property);
+
+  // required .NFMsg.ObjectRecordList record = 4;
+  inline bool has_record() const;
+  inline void clear_record();
+  static const int kRecordFieldNumber = 4;
+  inline const ::NFMsg::ObjectRecordList& record() const;
+  inline ::NFMsg::ObjectRecordList* mutable_record();
+  inline ::NFMsg::ObjectRecordList* release_record();
+  inline void set_allocated_record(::NFMsg::ObjectRecordList* record);
+
+  // @@protoc_insertion_point(class_scope:NFMsg.RoleDataPack)
+ private:
+  inline void set_has_id();
+  inline void clear_has_id();
+  inline void set_has_property();
+  inline void clear_has_property();
+  inline void set_has_record();
+  inline void clear_has_record();
+
+  ::google::protobuf::UnknownFieldSet _unknown_fields_;
+
+  ::NFMsg::Ident* id_;
+  ::NFMsg::ObjectPropertyList* property_;
+  ::NFMsg::ObjectRecordList* record_;
+
+  mutable int _cached_size_;
+  ::google::protobuf::uint32 _has_bits_[(3 + 31) / 32];
+
+  friend void LIBPROTOC_EXPORT protobuf_AddDesc_NFMsgPreGame_2eproto();
+  friend void protobuf_AssignDesc_NFMsgPreGame_2eproto();
+  friend void protobuf_ShutdownFile_NFMsgPreGame_2eproto();
+
+  void InitAsDefaultInstance();
+  static RoleDataPack* default_instance_;
 };
 // ===================================================================
 
@@ -5830,6 +5939,124 @@ inline ::google::protobuf::int32 RoleOfflineNotify::proxy() const {
 inline void RoleOfflineNotify::set_proxy(::google::protobuf::int32 value) {
   set_has_proxy();
   proxy_ = value;
+}
+
+// -------------------------------------------------------------------
+
+// RoleDataPack
+
+// required .NFMsg.Ident id = 1;
+inline bool RoleDataPack::has_id() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+inline void RoleDataPack::set_has_id() {
+  _has_bits_[0] |= 0x00000001u;
+}
+inline void RoleDataPack::clear_has_id() {
+  _has_bits_[0] &= ~0x00000001u;
+}
+inline void RoleDataPack::clear_id() {
+  if (id_ != NULL) id_->::NFMsg::Ident::Clear();
+  clear_has_id();
+}
+inline const ::NFMsg::Ident& RoleDataPack::id() const {
+  return id_ != NULL ? *id_ : *default_instance_->id_;
+}
+inline ::NFMsg::Ident* RoleDataPack::mutable_id() {
+  set_has_id();
+  if (id_ == NULL) id_ = new ::NFMsg::Ident;
+  return id_;
+}
+inline ::NFMsg::Ident* RoleDataPack::release_id() {
+  clear_has_id();
+  ::NFMsg::Ident* temp = id_;
+  id_ = NULL;
+  return temp;
+}
+inline void RoleDataPack::set_allocated_id(::NFMsg::Ident* id) {
+  delete id_;
+  id_ = id;
+  if (id) {
+    set_has_id();
+  } else {
+    clear_has_id();
+  }
+}
+
+// required .NFMsg.ObjectPropertyList property = 2;
+inline bool RoleDataPack::has_property() const {
+  return (_has_bits_[0] & 0x00000002u) != 0;
+}
+inline void RoleDataPack::set_has_property() {
+  _has_bits_[0] |= 0x00000002u;
+}
+inline void RoleDataPack::clear_has_property() {
+  _has_bits_[0] &= ~0x00000002u;
+}
+inline void RoleDataPack::clear_property() {
+  if (property_ != NULL) property_->::NFMsg::ObjectPropertyList::Clear();
+  clear_has_property();
+}
+inline const ::NFMsg::ObjectPropertyList& RoleDataPack::property() const {
+  return property_ != NULL ? *property_ : *default_instance_->property_;
+}
+inline ::NFMsg::ObjectPropertyList* RoleDataPack::mutable_property() {
+  set_has_property();
+  if (property_ == NULL) property_ = new ::NFMsg::ObjectPropertyList;
+  return property_;
+}
+inline ::NFMsg::ObjectPropertyList* RoleDataPack::release_property() {
+  clear_has_property();
+  ::NFMsg::ObjectPropertyList* temp = property_;
+  property_ = NULL;
+  return temp;
+}
+inline void RoleDataPack::set_allocated_property(::NFMsg::ObjectPropertyList* property) {
+  delete property_;
+  property_ = property;
+  if (property) {
+    set_has_property();
+  } else {
+    clear_has_property();
+  }
+}
+
+// required .NFMsg.ObjectRecordList record = 4;
+inline bool RoleDataPack::has_record() const {
+  return (_has_bits_[0] & 0x00000004u) != 0;
+}
+inline void RoleDataPack::set_has_record() {
+  _has_bits_[0] |= 0x00000004u;
+}
+inline void RoleDataPack::clear_has_record() {
+  _has_bits_[0] &= ~0x00000004u;
+}
+inline void RoleDataPack::clear_record() {
+  if (record_ != NULL) record_->::NFMsg::ObjectRecordList::Clear();
+  clear_has_record();
+}
+inline const ::NFMsg::ObjectRecordList& RoleDataPack::record() const {
+  return record_ != NULL ? *record_ : *default_instance_->record_;
+}
+inline ::NFMsg::ObjectRecordList* RoleDataPack::mutable_record() {
+  set_has_record();
+  if (record_ == NULL) record_ = new ::NFMsg::ObjectRecordList;
+  return record_;
+}
+inline ::NFMsg::ObjectRecordList* RoleDataPack::release_record() {
+  clear_has_record();
+  ::NFMsg::ObjectRecordList* temp = record_;
+  record_ = NULL;
+  return temp;
+}
+inline void RoleDataPack::set_allocated_record(::NFMsg::ObjectRecordList* record) {
+  delete record_;
+  record_ = record;
+  if (record) {
+    set_has_record();
+  } else {
+    clear_has_record();
+  }
 }
 
 

@@ -19,6 +19,8 @@ chmod -R 777  NFPluginLoader
 
 ./NFPluginLoader -d PluginX.xml Server=WorldServer ID=7
 
+./NFPluginLoader -d PluginX.xml Server=DBServer ID=8
+
 ./NFPluginLoader -d PluginX.xml Server=LoginServer ID=4
 
 ./NFPluginLoader -d PluginX.xml Server=GameServer ID=6

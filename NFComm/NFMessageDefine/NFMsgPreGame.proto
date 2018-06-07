@@ -186,3 +186,10 @@ message RoleOfflineNotify
 	required int32 game = 3;
 	required int32 proxy = 4;
 }
+
+message RoleDataPack
+{
+	required Ident 		id = 1;
+	required ObjectPropertyList 	property = 2;
+	required ObjectRecordList 		record = 4;
+}
