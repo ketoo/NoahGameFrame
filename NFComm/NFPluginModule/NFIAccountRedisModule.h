@@ -19,10 +19,6 @@ public:
 	virtual int VerifyAccount(const std::string& strAccount, const std::string& strPwd) = 0;
 	virtual bool AddAccount(const std::string& strAccount, const std::string& strPwd) = 0;
 	virtual bool ExistAccount(const std::string& strAccount) = 0;
-
-	virtual bool ExistRoleName(const std::string& strRoleName) = 0;
-	virtual bool CreateRole(const std::string& strAccount, const std::string& strRoleName, const NFGUID& id) = 0;
-	virtual bool GetRoleInfo(const std::string& strAccount, std::string& strRoleName, NFGUID& id) = 0;
 };
 
 #endif

@@ -31,10 +31,54 @@ bool NFCCreateRoleModule::AfterInit()
 	return true;
 }
 
+bool NFCCreateRoleModule::ReadyExecute()
+{
+	m_pNetModule->RemoveReceiveCallBack(NFMsg::EGMI_REQ_ROLE_LIST);
+	m_pNetModule->RemoveReceiveCallBack(NFMsg::EGMI_REQ_CREATE_ROLE);
+	m_pNetModule->RemoveReceiveCallBack(NFMsg::EGMI_REQ_DELETE_ROLE);
+	m_pNetModule->RemoveReceiveCallBack(NFMsg::EGMI_REQ_ENTER_GAME);
+
+	m_pNetModule->RemoveReceiveCallBack(NFMsg::EGMI_ACK_LOAD_ROLE_DATA);
+
+	m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_REQ_ROLE_LIST, this, &NFCCreateRoleModule::OnReqiureRoleListProcess);
+	m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_ACK_ROLE_LIST, this, &NFCCreateRoleModule::OnReposeRoleListProcess);
+
+	m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_REQ_CREATE_ROLE, this, &NFCCreateRoleModule::OnCreateRoleGameProcess);
+
+	m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_REQ_DELETE_ROLE, this, &NFCCreateRoleModule::OnDeleteRoleGameProcess);
+	m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_REQ_ENTER_GAME, this, &NFCCreateRoleModule::OnClienEnterGameProcess);
+
+	m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_ACK_LOAD_ROLE_DATA, this, &NFCCreateRoleModule::OnDBLoadRoleDataProcess);
+
+	return true;
+}
+
 void NFCCreateRoleModule::OnReqiureRoleListProcess(const NFSOCK nSockIndex, const int nMsgID, const char * msg, const uint32_t nLen)
 {
+	/*
+	NFGUID nClientID;
+	NFMsg::ReqRoleList xData;
+	if (!m_pNetModule->ReceivePB(nMsgID, msg, nLen, xData, nClientID))
+	{
+		return;
+	}
+	*/
 	m_pNetClientModule->SendBySuit(NF_SERVER_TYPES::NF_ST_DB, nSockIndex, nMsgID, msg, nLen);
+	
+	//YieldCo();
 
+}
+
+void NFCCreateRoleModule::OnReposeRoleListProcess(const NFSOCK nSockIndex, const int nMsgID, const char * msg, const uint32_t nLen)
+{
+	NFGUID nClientID;
+	NFMsg::AckRoleLiteInfoList xData;
+	if (!m_pNetModule->ReceivePB(nMsgID, msg, nLen, xData, nClientID))
+	{
+		return;
+	}
+
+	m_pNetClientModule->SendByServerID(nClientID.GetHead(), nMsgID, msg, nLen);
 }
 
 void NFCCreateRoleModule::OnCreateRoleGameProcess(const NFSOCK nSockIndex, const int nMsgID, const char * msg, const uint32_t nLen)
@@ -137,25 +181,6 @@ void NFCCreateRoleModule::OnClienEnterGameProcess(const NFSOCK nSockIndex, const
 
 void NFCCreateRoleModule::OnDBLoadRoleDataProcess(const NFSOCK nSockIndex, const int nMsgID, const char * msg, const uint32_t nLen)
 {
-}
-
-bool NFCCreateRoleModule::ReadyExecute()
-{
-	m_pNetModule->RemoveReceiveCallBack(NFMsg::EGMI_REQ_ROLE_LIST);
-	m_pNetModule->RemoveReceiveCallBack(NFMsg::EGMI_REQ_CREATE_ROLE);
-	m_pNetModule->RemoveReceiveCallBack(NFMsg::EGMI_REQ_DELETE_ROLE);
-	m_pNetModule->RemoveReceiveCallBack(NFMsg::EGMI_REQ_ENTER_GAME);
-
-	m_pNetModule->RemoveReceiveCallBack(NFMsg::EGMI_ACK_LOAD_ROLE_DATA);
-
-	m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_REQ_ROLE_LIST, this, &NFCCreateRoleModule::OnReqiureRoleListProcess);
-	m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_REQ_CREATE_ROLE, this, &NFCCreateRoleModule::OnCreateRoleGameProcess);
-	m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_REQ_DELETE_ROLE, this, &NFCCreateRoleModule::OnDeleteRoleGameProcess);
-	m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_REQ_ENTER_GAME, this, &NFCCreateRoleModule::OnClienEnterGameProcess);
-
-	m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_ACK_LOAD_ROLE_DATA, this, &NFCCreateRoleModule::OnDBLoadRoleDataProcess);
-
-	return true;
 }
 
 bool NFCCreateRoleModule::Shut()

@@ -6,6 +6,7 @@
 //    @Desc             :
 // -------------------------------------------------------------------------
 #include "NFCPlayerRedisModule.h"
+#include "NFCCommonRedisModule.h"
 
 NFCPlayerRedisModule::NFCPlayerRedisModule(NFIPluginManager * p)
 {
@@ -20,64 +21,7 @@ bool NFCPlayerRedisModule::Init()
 	m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>();
 	m_pLogModule = pPluginManager->FindModule<NFILogModule>();
 	
-	m_pKernelModule->RegisterCommonPropertyEvent(this, &NFCPlayerRedisModule::OnPropertyCommonEvent);
-	m_pKernelModule->RegisterCommonRecordEvent(this, &NFCPlayerRedisModule::OnRecordCommonEvent);
-
 	return true;
-}
-
-int NFCPlayerRedisModule::OnPropertyCommonEvent(const NFGUID & self, const std::string & strPropertyName, const NFData & oldVar, const NFData & newVar)
-{
-	const std::string& strClassName = m_pKernelModule->GetPropertyString(self, NFrame::IObject::ClassName());
-	if (strClassName == NFrame::Player::ThisName())
-	{
-		NF_SHARE_PTR<NFIObject> pObject = m_pKernelModule->GetObject(self);
-		if (pObject)
-		{
-			NF_SHARE_PTR<NFIPropertyManager> pPropertyManager = pObject->GetPropertyManager();
-			if (pPropertyManager)
-			{
-				NF_SHARE_PTR<NFIProperty> pPropertyInfo = pPropertyManager->GetElement(strPropertyName);
-				if (pPropertyInfo)
-				{
-					if (pPropertyInfo->GetForce())
-					{
-						//save data with real-time
-					}
-				}
-			}
-		}
-		
-	}
-
-	return 0;
-}
-
-int NFCPlayerRedisModule::OnRecordCommonEvent(const NFGUID & self, const RECORD_EVENT_DATA & xEventData, const NFData & oldVar, const NFData & newVar)
-{
-	const std::string& strClassName = m_pKernelModule->GetPropertyString(self, NFrame::IObject::ClassName());
-	if (strClassName == NFrame::Player::ThisName())
-	{
-		NF_SHARE_PTR<NFIObject> pObject = m_pKernelModule->GetObject(self);
-		if (pObject)
-		{
-			NF_SHARE_PTR<NFIRecordManager> pRecordManager = pObject->GetRecordManager();
-			if (pRecordManager)
-			{
-				NF_SHARE_PTR<NFIRecord> pRecordInfo = pRecordManager->GetElement(xEventData.strRecordName);
-				if (pRecordInfo)
-				{
-					if (pRecordInfo->GetForce())
-					{
-						//save data with real-time
-					}
-				}
-			}
-		}
-
-	}
-
-	return 0;
 }
 
 bool NFCPlayerRedisModule::Shut()
@@ -92,8 +36,6 @@ bool NFCPlayerRedisModule::Execute()
 
 bool NFCPlayerRedisModule::AfterInit()
 {
-	m_pKernelModule->AddClassCallBack(NFrame::Player::ThisName(), this, &NFCPlayerRedisModule::OnObjectPlayerEvent);
-	m_pKernelModule->AddClassCallBack(NFrame::Guild::ThisName(), this, &NFCPlayerRedisModule::OnObjectGuildEvent);
 
 	return true;
 }
@@ -166,11 +108,15 @@ bool NFCPlayerRedisModule::LoadPlayerData(const NFGUID & self, NFMsg::RoleDataPa
 
 	if (xPropertyManager)
 	{
-		NF_SHARE_PTR<NFIRecord> xPropert = xRecordManager->First();
-		while (xPropert)
+		NFCCommonRedisModule* pCommonRedisModule = (NFCCommonRedisModule*)(m_pCommonRedisModule);
+		NF_SHARE_PTR<NFIRecord> xRecord = xRecordManager->First();
+		while (xRecord)
 		{
+			NFMsg::ObjectRecordBase* pRecord = roleData.mutable_record()->add_record_list();
 
-			xPropert = xRecordManager->Next();
+			pCommonRedisModule->ConvertRecordToPB(xRecord, pRecord);
+
+			xRecord = xRecordManager->Next();
 		}
 	}
 
@@ -180,6 +126,17 @@ bool NFCPlayerRedisModule::LoadPlayerData(const NFGUID & self, NFMsg::RoleDataPa
 }
 
 
+bool NFCPlayerRedisModule::SavePlayerData(const NFGUID & self, const NFMsg::RoleDataPack& roleData)
+{
+	NFCCommonRedisModule* pCommonRedisModule = (NFCCommonRedisModule*)m_pCommonRedisModule;
+
+	//pCommonRedisModule->ConvertPBToRecord
+
+	m_pCommonRedisModule->SaveCachePropertyInfo(self, m_pKernelModule->GetObject(self)->GetPropertyManager());
+	m_pCommonRedisModule->SaveCacheRecordInfo(self, m_pKernelModule->GetObject(self)->GetRecordManager());
+
+	return true;
+}
 
 bool NFCPlayerRedisModule::SavePlayerTile(const int nSceneID, const NFGUID & self, const std::string & strTileData)
 {
@@ -219,12 +176,6 @@ bool NFCPlayerRedisModule::LoadPlayerTileRandom(const int nSceneID, NFGUID& xPla
 			std::string strKey = vKeys[nKeyIndex];
 			if (xPlayer.FromString(strKey) && xNoSqlDriver->HGET(strTileKey, strKey, strTileData))
 			{
-				if (mxObjectTileCache.ExistElement(xPlayer))
-				{
-					mxObjectTileCache.RemoveElement(xPlayer);
-				}
-
-				mxObjectTileCache.AddElement(xPlayer, NF_SHARE_PTR<std::string>(NF_NEW std::string(strTileData)));
 
 				return true;
 			}
@@ -236,16 +187,6 @@ bool NFCPlayerRedisModule::LoadPlayerTileRandom(const int nSceneID, NFGUID& xPla
 
 bool NFCPlayerRedisModule::LoadPlayerTileRandomCache(const NFGUID & xPlayer, std::string & strTileData)
 {
-	if (mxObjectTileCache.ExistElement(xPlayer))
-	{
-		NF_SHARE_PTR<std::string> xData = mxObjectTileCache.GetElement(xPlayer);
-		if (xData)
-		{
-			strTileData = *xData;
-		}
-
-		return true;
-	}
 
 	return false;
 }
@@ -381,14 +322,6 @@ NFVector3 NFCPlayerRedisModule::GetPropertyVector3(const NFGUID & self, const st
 	return xValue;
 }
 
-bool NFCPlayerRedisModule::SavePlayerData(const NFGUID & self)
-{
-	m_pCommonRedisModule->SaveCachePropertyInfo(self, m_pKernelModule->GetObject(self)->GetPropertyManager());
-	m_pCommonRedisModule->SaveCacheRecordInfo(self, m_pKernelModule->GetObject(self)->GetRecordManager());
-	
-	return true;
-}
-
 std::string NFCPlayerRedisModule::GetOnlineGameServerKey()
 {
 	//if (strValue == "**nonexistent-key**")
@@ -400,83 +333,89 @@ std::string NFCPlayerRedisModule::GetOnlineProxyServerKey()
 	return "OnlineProxyKey";
 }
 
-const bool NFCPlayerRedisModule::AttachData(const NFGUID & self)
-{
-	NF_SHARE_PTR<PlayerDataCache> xPlayerDataCache = mxObjectDataCache.GetElement(self);
-	if (xPlayerDataCache)
-	{
-		//way 1:load first then create object, especially we have loaded nosql plugin
-		NF_SHARE_PTR<NFIObject> pObject = m_pKernelModule->GetObject(self);
-		if (pObject)
-		{
-			m_pCommonRedisModule->ConvertVectorToPropertyManager(xPlayerDataCache->mvPropertyKeyList, xPlayerDataCache->mvPropertyValueList, pObject->GetPropertyManager());
-			m_pCommonRedisModule->ConvertVectorToRecordManager(xPlayerDataCache->mvRecordKeyList, xPlayerDataCache->mvRecordValueList, pObject->GetRecordManager());
 
-			return true;
-		}
-	}
-	else
+bool NFCPlayerRedisModule::ExistRoleName(const std::string & strRoleName)
+{
+	NF_SHARE_PTR<NFIRedisClient> xNoSqlDriver = m_pNoSqlModule->GetDriverBySuitConsistent();
+	if (xNoSqlDriver)
 	{
-		//way 2:load data when creating a object, especially we donot loaded any sql or nosql plugin
+		return xNoSqlDriver->EXISTS(strRoleName);
 	}
 
 	return false;
 }
 
-int NFCPlayerRedisModule::OnObjectPlayerEvent(const NFGUID & self, const std::string & strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFDataList & var)
+bool NFCPlayerRedisModule::CreateRole(const std::string & strAccount, const std::string & strRoleName, const NFGUID & id)
 {
-	if (CLASS_OBJECT_EVENT::COE_DESTROY == eClassEvent)
+	const std::string strAccountKey = m_pCommonRedisModule->GetAccountCacheKey(strAccount);
+	NF_SHARE_PTR<NFIRedisClient> xNoSqlDriver = m_pNoSqlModule->GetDriverBySuit(strAccount);
+	if (xNoSqlDriver)
 	{
-		OnOffline(self);
-		
-		m_pLogModule->LogNormal(NFILogModule::NF_LOG_LEVEL::NLL_INFO_NORMAL, self, "start to save data", NFGetTimeMS());
+		if (xNoSqlDriver->EXISTS(strAccountKey) && !xNoSqlDriver->EXISTS(strRoleName))
+		{
+			std::vector<std::string> vecFields;
+			std::vector<std::string> vecValues;
 
-		SavePlayerData(self);
+			vecFields.push_back(NFrame::Player::Name());
+			vecFields.push_back(NFrame::Player::ID());
 
-		m_pLogModule->LogNormal(NFILogModule::NF_LOG_LEVEL::NLL_INFO_NORMAL, self, "saved data", NFGetTimeMS());
+			vecValues.push_back(strRoleName);
+			vecValues.push_back(id.ToString());
+
+			xNoSqlDriver->HMSET(strAccountKey, vecFields, vecValues);
+
+			NF_SHARE_PTR<NFIRedisClient> xRoleNameNoSqlDriver = m_pNoSqlModule->GetDriverBySuitConsistent();
+			if (xRoleNameNoSqlDriver)
+			{
+				//the name ref to the guid
+				xRoleNameNoSqlDriver->HSET(strRoleName, NFrame::Player::ID(), id.ToString());
+			}
+
+			NF_SHARE_PTR<NFIPropertyManager> xPropertyManager = m_pCommonRedisModule->NewPropertyManager(NFrame::Player::ThisName());
+			if (xPropertyManager)
+			{
+				NF_SHARE_PTR<NFIProperty> xProperty = xPropertyManager->GetElement(NFrame::Player::Account());
+				if (xProperty)
+				{
+					xProperty->SetString(strAccount);
+				}
+
+				xProperty = xPropertyManager->GetElement(NFrame::Player::Level());
+				if (xProperty)
+				{
+					xProperty->SetInt(1);
+				}
+
+				m_pCommonRedisModule->SaveCachePropertyInfo(id, xPropertyManager);
+			}
+
+			return true;
+		}
 	}
-	else if (CLASS_OBJECT_EVENT::COE_CREATE_LOADDATA == eClassEvent)
-	{
-		OnOnline(self);
 
-		m_pLogModule->LogNormal(NFILogModule::NF_LOG_LEVEL::NLL_INFO_NORMAL, self, "start to attach data", NFGetTimeMS());
-
-		AttachData(self);
-
-		m_pLogModule->LogNormal(NFILogModule::NF_LOG_LEVEL::NLL_INFO_NORMAL, self, "attached data", NFGetTimeMS());
-	}
-	else if (CLASS_OBJECT_EVENT::COE_CREATE_FINISH == eClassEvent)
-	{
-		mxObjectDataCache.RemoveElement(self);
-	}
-
-	return 0;
+	return false;
 }
 
-int NFCPlayerRedisModule::OnObjectGuildEvent(const NFGUID & self, const std::string & strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFDataList & var)
+bool NFCPlayerRedisModule::GetRoleInfo(const std::string & strAccount, std::string & strRoleName, NFGUID & id)
 {
-	if (CLASS_OBJECT_EVENT::COE_DESTROY == eClassEvent)
+	std::string strAccountKey = m_pCommonRedisModule->GetAccountCacheKey(strAccount);
+	NF_SHARE_PTR<NFIRedisClient> xNoSqlDriver = m_pNoSqlModule->GetDriverBySuit(strAccount);
+	if (xNoSqlDriver)
 	{
-		SavePlayerData(self);
-	}
-	else if (CLASS_OBJECT_EVENT::COE_CREATE_LOADDATA == eClassEvent)
-	{
-		AttachData(self);
-	}
-	else if (CLASS_OBJECT_EVENT::COE_CREATE_FINISH == eClassEvent)
-	{
-		mxObjectDataCache.RemoveElement(self);
+		if (xNoSqlDriver->EXISTS(strAccountKey))
+		{
+			std::string strID;
+			bool bRoleNameRet = xNoSqlDriver->HGET(strAccountKey, NFrame::Player::Name(), strRoleName);
+			bool bRoleIDRet = xNoSqlDriver->HGET(strAccountKey, NFrame::Player::ID(), strID);
+			if (bRoleNameRet && bRoleIDRet
+				&& !strRoleName.empty() && !strID.empty())
+			{
+				return id.FromString(strID);
+			}
+
+			return false;
+		}
 	}
 
-	return 0;
-}
-
-void NFCPlayerRedisModule::OnOnline(const NFGUID & self)
-{
-	//const int nGateID = m_pKernelModule->GetPropertyInt32(self, NFrame::Player::GateID());
-	//const int nServerID = m_pKernelModule->GetPropertyInt32(self, NFrame::Player::GameID());
-}
-
-void NFCPlayerRedisModule::OnOffline(const NFGUID & self)
-{
+	return false;
 }

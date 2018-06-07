@@ -7,7 +7,7 @@
 // -------------------------------------------------------------------------
 
 #include "NFCDBNet_ServerModule.h"
-#include "NFDBNet_ServerPlugin.h"
+#include "../NFDBLogicPlugin/NFCPlayerRedisModule.h"
 #include "NFComm/NFMessageDefine/NFMsgDefine.h"
 #include "NFComm/NFMessageDefine/NFProtocolDefine.hpp"
 
@@ -64,6 +64,7 @@ bool NFCDBNet_ServerModule::AfterInit()
 	m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_REQ_CREATE_ROLE, this, &NFCDBNet_ServerModule::OnCreateRoleGameProcess);
 	m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_REQ_DELETE_ROLE, this, &NFCDBNet_ServerModule::OnDeleteRoleGameProcess);
 	m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_REQ_LOAD_ROLE_DATA, this, &NFCDBNet_ServerModule::OnLoadRoleDataProcess);
+	m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_REQ_SAVE_ROLE_DATA, this, &NFCDBNet_ServerModule::OnSaveRoleDataProcess);
 
     return true;
 }
@@ -124,7 +125,7 @@ void NFCDBNet_ServerModule::OnReqiureRoleListProcess(const NFSOCK nSockIndex, co
 
 	NFGUID xPlayerID;
 	std::string strRoleName;
-	if (!m_pAccountRedisModule->GetRoleInfo(xMsg.account(), strRoleName, xPlayerID))
+	if (!m_pPlayerRedisModule->GetRoleInfo(xMsg.account(), strRoleName, xPlayerID))
 	{
 		NFMsg::AckRoleLiteInfoList xAckRoleLiteInfoList;
 		m_pNetModule->SendMsgPB(NFMsg::EGMI_ACK_ROLE_LIST, xAckRoleLiteInfoList, nSockIndex, nClientID);
@@ -132,6 +133,8 @@ void NFCDBNet_ServerModule::OnReqiureRoleListProcess(const NFSOCK nSockIndex, co
 	}
 
 	NFMsg::AckRoleLiteInfoList xAckRoleLiteInfoList;
+	xAckRoleLiteInfoList.set_account(xMsg.account());
+
 	NFMsg::RoleLiteInfo* pData = xAckRoleLiteInfoList.add_char_data();
 	pData->mutable_id()->CopyFrom(NFINetModule::NFToPB(xPlayerID));
 	pData->set_game_id(pPluginManager->GetAppID());
@@ -162,9 +165,11 @@ void NFCDBNet_ServerModule::OnCreateRoleGameProcess(const NFSOCK nSockIndex, con
 	const std::string& strName = xMsg.noob_name();
 
 	NFGUID xID = m_pKernelModule->CreateGUID();
-	if (m_pAccountRedisModule->CreateRole(strAccount, strName, xID))
+	if (m_pPlayerRedisModule->CreateRole(strAccount, strName, xID))
 	{
 		NFMsg::AckRoleLiteInfoList xAckRoleLiteInfoList;
+		xAckRoleLiteInfoList.set_account(strAccount);
+
 		NFMsg::RoleLiteInfo* pData = xAckRoleLiteInfoList.add_char_data();
 		pData->mutable_id()->CopyFrom(NFINetModule::NFToPB(xID));
 		pData->set_career(xMsg.career());
@@ -186,13 +191,15 @@ void NFCDBNet_ServerModule::OnCreateRoleGameProcess(const NFSOCK nSockIndex, con
 void NFCDBNet_ServerModule::OnDeleteRoleGameProcess(const NFSOCK nSockIndex, const int nMsgID, const char * msg, const uint32_t nLen)
 {
 	NFGUID nClientID;
-	NFMsg::ReqRoleList xMsg;
+	NFMsg::ReqDeleteRole xMsg;
 	if (!m_pNetModule->ReceivePB(nMsgID, msg, nLen, xMsg, nClientID))
 	{
 		return;
 	}
 
 	NFMsg::AckRoleLiteInfoList xAckRoleLiteInfoList;
+	xAckRoleLiteInfoList.set_account(xMsg.account());
+
 	m_pNetModule->SendMsgPB(NFMsg::EGMI_ACK_ROLE_LIST, xAckRoleLiteInfoList, nSockIndex, nClientID);
 }
 
@@ -207,15 +214,29 @@ void NFCDBNet_ServerModule::OnLoadRoleDataProcess(const NFSOCK nSockIndex, const
 
 	NFGUID nRoleID = NFINetModule::PBToNF(xMsg.id());
 
-	if (m_pPlayerRedisModule->LoadPlayerData(nRoleID))
-	{
-		int nHomeSceneID = m_pPlayerRedisModule->GetPlayerHomeSceneID(nRoleID);
-		if (nHomeSceneID <= 0)
-		{
-			nHomeSceneID = 1;
-		}
+	NFMsg::RoleDataPack xRoleDataxMsg;
+	xRoleDataxMsg.mutable_id()->CopyFrom(NFINetModule::NFToPB(nRoleID));
 
-		m_pNetModule->SendMsgPB(NFMsg::EGMI_ACK_ROLE_LIST, xAckRoleLiteInfoList, nSockIndex, nClientID);
+	NFCPlayerRedisModule* pPlayerRedisModule = (NFCPlayerRedisModule*)m_pPlayerRedisModule;
+	pPlayerRedisModule->LoadPlayerData(nRoleID, xRoleDataxMsg);
+		
+	m_pNetModule->SendMsgPB(NFMsg::EGMI_ACK_LOAD_ROLE_DATA, xMsg, nSockIndex);
+}
+
+void NFCDBNet_ServerModule::OnSaveRoleDataProcess(const NFSOCK nSockIndex, const int nMsgID, const char * msg, const uint32_t nLen)
+{
+	NFGUID nClientID;
+	NFMsg::RoleDataPack xMsg;
+	if (!m_pNetModule->ReceivePB(nMsgID, msg, nLen, xMsg, nClientID))
+	{
+		return;
 	}
+
+	NFGUID nRoleID = NFINetModule::PBToNF(xMsg.id());
+
+	NFCPlayerRedisModule* pPlayerRedisModule = (NFCPlayerRedisModule*)m_pPlayerRedisModule;
+	pPlayerRedisModule->SavePlayerData(nRoleID, xMsg);
+
+	//m_pNetModule->SendMsgPB(NFMsg::EGMI_ACK_LOAD_ROLE_DATA, xMsg, nSockIndex);
 }
 

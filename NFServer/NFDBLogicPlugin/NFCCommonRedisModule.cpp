@@ -90,7 +90,7 @@ NF_SHARE_PTR<NFIRecordManager> NFCCommonRedisModule::NewRecordManager(const std:
         NF_SHARE_PTR<NFIRecord> pConfigRecordInfo = pStaticClassRecordManager->First();
         while (pConfigRecordInfo)
         {
-			if (pConfigRecordInfo->GetSave() || || pStaticConfigPropertyInfo->GetCache())
+			if (pConfigRecordInfo->GetSave() || pConfigRecordInfo->GetCache())
 			{
 				NF_SHARE_PTR<NFIRecord> xRecord = pRecordManager->AddRecord(ident,
 					pConfigRecordInfo->GetName(),
@@ -208,11 +208,6 @@ NF_SHARE_PTR<NFIPropertyManager> NFCCommonRedisModule::GetCachePropertyInfo(cons
 	std::vector<std::string> vValueCacheList;
 
 	return GetCachePropertyInfo(self, strClassName, vKeyCacheList, vValueCacheList);
-}
-
-NF_SHARE_PTR<NFIRecordManager> NFCCommonRedisModule::GetCacheRecordInfo(const NFGUID & self, const std::string & strClassName)
-{
-	return NF_SHARE_PTR<NFIRecordManager>();
 }
 
 bool NFCCommonRedisModule::SaveCachePropertyInfo(const NFGUID& self, NF_SHARE_PTR<NFIPropertyManager> pPropertyManager, const int nExpireSecond)
@@ -539,7 +534,7 @@ bool NFCCommonRedisModule::ConvertRecordToPB(const NF_SHARE_PTR<NFIRecord>& pRec
 	return true;
 }
 
-bool NFCCommonRedisModule::ConvertPBToRecord(const NF_SHARE_PTR<NFIRecord>& pRecord, NFMsg::ObjectRecordBase * pRecordData)
+bool NFCCommonRedisModule::ConvertPBToRecord(NFMsg::ObjectRecordBase * pRecordData, NF_SHARE_PTR<NFIRecord> pRecord)
 {
 	for (int iStuct = 0; iStuct < pRecordData->row_struct_size(); iStuct++)
 	{

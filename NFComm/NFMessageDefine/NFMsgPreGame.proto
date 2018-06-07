@@ -140,6 +140,7 @@ message RoleLiteInfo
 message AckRoleLiteInfoList
 {
 	repeated RoleLiteInfo char_data = 1;
+	required bytes   account = 2;
 }
 
 message ReqCreateRole
