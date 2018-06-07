@@ -25,13 +25,18 @@ bool NFCWorldNet_ServerModule::Init()
 
 bool NFCWorldNet_ServerModule::AfterInit()
 {
-	m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_PTWG_PROXY_REFRESH, this, &NFCWorldNet_ServerModule::OnRefreshProxyServerInfoProcess);
 	m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_PTWG_PROXY_REGISTERED, this, &NFCWorldNet_ServerModule::OnProxyServerRegisteredProcess);
 	m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_PTWG_PROXY_UNREGISTERED, this, &NFCWorldNet_ServerModule::OnProxyServerUnRegisteredProcess);
+	m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_PTWG_PROXY_REFRESH, this, &NFCWorldNet_ServerModule::OnRefreshProxyServerInfoProcess);
 
 	m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_GTW_GAME_REGISTERED, this, &NFCWorldNet_ServerModule::OnGameServerRegisteredProcess);
 	m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_GTW_GAME_UNREGISTERED, this, &NFCWorldNet_ServerModule::OnGameServerUnRegisteredProcess);
 	m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_GTW_GAME_REFRESH, this, &NFCWorldNet_ServerModule::OnRefreshGameServerInfoProcess);
+	
+	m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_DTW_DB_REGISTERED, this, &NFCWorldNet_ServerModule::OnGameServerRegisteredProcess);
+	m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_DTW_DB_UNREGISTERED, this, &NFCWorldNet_ServerModule::OnGameServerUnRegisteredProcess);
+	m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_DTW_DB_REFRESH, this, &NFCWorldNet_ServerModule::OnRefreshGameServerInfoProcess);
+
 	m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_ACK_ONLINE_NOTIFY, this, &NFCWorldNet_ServerModule::OnOnlineProcess);
 	m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_ACK_OFFLINE_NOTIFY, this, &NFCWorldNet_ServerModule::OnOfflineProcess);
 	m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_STS_SERVER_REPORT, this, &NFCWorldNet_ServerModule::OnTransmitServerReport);
@@ -278,6 +283,82 @@ void NFCWorldNet_ServerModule::OnRefreshProxyServerInfoProcess(const NFSOCK nSoc
     }
 }
 
+void NFCWorldNet_ServerModule::OnDBServerRegisteredProcess(const NFSOCK nSockIndex, const int nMsgID, const char * msg, const uint32_t nLen)
+{
+	NFGUID nPlayerID;
+	NFMsg::ServerInfoReportList xMsg;
+	if (!m_pNetModule->ReceivePB(nMsgID, msg, nLen, xMsg, nPlayerID))
+	{
+		return;
+	}
+
+	for (int i = 0; i < xMsg.server_list_size(); ++i)
+	{
+		const NFMsg::ServerInfoReport& xData = xMsg.server_list(i);
+		NF_SHARE_PTR<ServerData> pServerData = mDBMap.GetElement(xData.server_id());
+		if (!pServerData)
+		{
+			pServerData = NF_SHARE_PTR<ServerData>(NF_NEW ServerData());
+			mDBMap.AddElement(xData.server_id(), pServerData);
+		}
+
+		pServerData->nFD = nSockIndex;
+		*(pServerData->pData) = xData;
+
+		m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFGUID(0, xData.server_id()), xData.server_name(), "GameServerRegistered");
+	}
+
+	SynDBToGame();
+}
+
+void NFCWorldNet_ServerModule::OnDBServerUnRegisteredProcess(const NFSOCK nSockIndex, const int nMsgID, const char * msg, const uint32_t nLen)
+{
+	NFGUID nPlayerID;
+	NFMsg::ServerInfoReportList xMsg;
+	if (!m_pNetModule->ReceivePB(nMsgID, msg, nLen, xMsg, nPlayerID))
+	{
+		return;
+	}
+
+	for (int i = 0; i < xMsg.server_list_size(); ++i)
+	{
+		const NFMsg::ServerInfoReport& xData = xMsg.server_list(i);
+
+		mDBMap.RemoveElement(xData.server_id());
+
+		m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFGUID(0, xData.server_id()), xData.server_name(), "Proxy UnRegistered");
+	}
+}
+
+void NFCWorldNet_ServerModule::OnRefreshDBServerInfoProcess(const NFSOCK nSockIndex, const int nMsgID, const char * msg, const uint32_t nLen)
+{
+	NFGUID nPlayerID;
+	NFMsg::ServerInfoReportList xMsg;
+	if (!m_pNetModule->ReceivePB(nMsgID, msg, nLen, xMsg, nPlayerID))
+	{
+		return;
+	}
+
+	for (int i = 0; i < xMsg.server_list_size(); ++i)
+	{
+		const NFMsg::ServerInfoReport& xData = xMsg.server_list(i);
+
+		NF_SHARE_PTR<ServerData> pServerData = mDBMap.GetElement(xData.server_id());
+		if (!pServerData)
+		{
+			pServerData = NF_SHARE_PTR<ServerData>(NF_NEW ServerData());
+			mDBMap.AddElement(xData.server_id(), pServerData);
+		}
+
+		pServerData->nFD = nSockIndex;
+		*(pServerData->pData) = xData;
+
+		m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFGUID(0, xData.server_id()), xData.server_name(), "Proxy Registered");
+
+		SynDBToGame(nSockIndex);
+	}
+}
+
 void NFCWorldNet_ServerModule::OnSocketEvent(const NFSOCK nSockIndex, const NF_NET_EVENT eEvent, NFINet* pNet)
 {
     if (eEvent & NF_NET_EVENT_EOF)
@@ -451,7 +532,7 @@ void NFCWorldNet_ServerModule::OnClientDisconnect(const NFSOCK nAddress)
 
 			ServerReport(pServerData->pData->server_id(), NFMsg::EST_CRASH);
             SynGameToProxy();
-            return;
+            break;
         }
 
         pServerData = mGameMap.Next();
@@ -468,11 +549,31 @@ void NFCWorldNet_ServerModule::OnClientDisconnect(const NFSOCK nAddress)
             mProxyMap.RemoveElement(nServerID);
 
 			ServerReport(pServerData->pData->server_id(), NFMsg::EST_CRASH);
+			SynGameToProxy();
             break;
         }
 
         pServerData = mProxyMap.Next();
     }
+
+
+	//////////////////////////////////////////////////////////////////////////
+
+	pServerData = mDBMap.First();
+	while (pServerData)
+	{
+		if (nAddress == pServerData->nFD)
+		{
+			int nServerID = pServerData->pData->server_id();
+			mDBMap.RemoveElement(nServerID);
+
+			ServerReport(pServerData->pData->server_id(), NFMsg::EST_CRASH);
+			SynDBToGame();
+			break;
+		}
+
+		pServerData = mDBMap.Next();
+	}
 }
 
 void NFCWorldNet_ServerModule::OnClientConnected(const NFSOCK nAddress)

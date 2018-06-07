@@ -54,7 +54,6 @@ protected:
 
 	void Register(NFINet* pNet);
 	void ServerReport();
-	void RefreshWorldInfo();
 	void OnServerInfoProcess(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
 
 	void InvalidMessage(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);

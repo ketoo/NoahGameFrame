@@ -21,6 +21,8 @@
 #include "NFComm/NFPluginModule/NFIKernelModule.h"
 #include "NFComm/NFPluginModule/NFILoginNet_ServerModule.h"
 #include "NFComm/NFPluginModule/NFIWorldToMasterModule.h"
+#include "NFComm/NFPluginModule/NFIAccountRedisModule.h"
+#include "NFComm/NFPluginModule/NFIPlayerRedisModule.h"
 
 class NFIDBNet_ServerModule : public NFIModule
 {
@@ -49,8 +51,16 @@ protected:
 	void OnClientDisconnect(const NFSOCK nAddress);
 	void OnClientConnected(const NFSOCK nAddress);
 
-protected:
 
+	void OnReqiureRoleListProcess(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+	void OnCreateRoleGameProcess(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+	void OnDeleteRoleGameProcess(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+	void OnClienEnterGameProcess(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+
+
+protected:
+	NFIPlayerRedisModule* m_pPlayerRedisModule;
+	NFIAccountRedisModule* m_pAccountRedisModule;
     NFIElementModule* m_pElementModule;
     NFIClassModule* m_pClassModule;
     NFIKernelModule* m_pKernelModule;

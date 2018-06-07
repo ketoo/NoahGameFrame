@@ -167,12 +167,6 @@ void NFCDBToWorldModule::ServerReport()
 	}
 }
 
-void NFCDBToWorldModule::RefreshWorldInfo()
-{
-
-}
-
-
 void NFCDBToWorldModule::InvalidMessage(const NFSOCK nSockIndex, const int nMsgID, const char * msg, const uint32_t nLen)
 {
 	printf("NFNet || unMsgID=%d\n", nMsgID);
@@ -221,5 +215,30 @@ void NFCDBToWorldModule::LogServerInfo(const std::string& strServerInfo)
 
 void NFCDBToWorldModule::OnServerInfoProcess(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
 {
-	m_pWorldNet_ServerModule->OnServerInfoProcess(nSockIndex, nMsgID, msg, nLen);
+	NFGUID nPlayerID;
+	NFMsg::ServerInfoReportList xMsg;
+	if (!NFINetModule::ReceivePB(nMsgID, msg, nLen, xMsg, nPlayerID))
+	{
+		return;
+	}
+
+	for (int i = 0; i < xMsg.server_list_size(); ++i)
+	{
+		const NFMsg::ServerInfoReport& xData = xMsg.server_list(i);
+
+		//type
+		ConnectData xServerData;
+
+		xServerData.nGameID = xData.server_id();
+		xServerData.strIP = xData.server_ip();
+		xServerData.nPort = xData.server_port();
+		xServerData.strName = xData.server_name();
+		xServerData.nWorkLoad = xData.server_cur_count();
+		xServerData.eServerType = (NF_SERVER_TYPES)xData.server_type();
+
+		if (NF_SERVER_TYPES::NF_ST_WORLD == xServerData.eServerType)
+		{
+			m_pNetClientModule->AddServer(xServerData);
+		}
+	}
 }
