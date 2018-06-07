@@ -1887,15 +1887,30 @@ class LIBPROTOC_EXPORT AckRoleLiteInfoList : public ::google::protobuf::Message 
   inline ::google::protobuf::RepeatedPtrField< ::NFMsg::RoleLiteInfo >*
       mutable_char_data();
 
+  // required bytes account = 2;
+  inline bool has_account() const;
+  inline void clear_account();
+  static const int kAccountFieldNumber = 2;
+  inline const ::std::string& account() const;
+  inline void set_account(const ::std::string& value);
+  inline void set_account(const char* value);
+  inline void set_account(const void* value, size_t size);
+  inline ::std::string* mutable_account();
+  inline ::std::string* release_account();
+  inline void set_allocated_account(::std::string* account);
+
   // @@protoc_insertion_point(class_scope:NFMsg.AckRoleLiteInfoList)
  private:
+  inline void set_has_account();
+  inline void clear_has_account();
 
   ::google::protobuf::UnknownFieldSet _unknown_fields_;
 
   ::google::protobuf::RepeatedPtrField< ::NFMsg::RoleLiteInfo > char_data_;
+  ::std::string* account_;
 
   mutable int _cached_size_;
-  ::google::protobuf::uint32 _has_bits_[(1 + 31) / 32];
+  ::google::protobuf::uint32 _has_bits_[(2 + 31) / 32];
 
   friend void LIBPROTOC_EXPORT protobuf_AddDesc_NFMsgPreGame_2eproto();
   friend void protobuf_AssignDesc_NFMsgPreGame_2eproto();
@@ -5101,6 +5116,76 @@ AckRoleLiteInfoList::char_data() const {
 inline ::google::protobuf::RepeatedPtrField< ::NFMsg::RoleLiteInfo >*
 AckRoleLiteInfoList::mutable_char_data() {
   return &char_data_;
+}
+
+// required bytes account = 2;
+inline bool AckRoleLiteInfoList::has_account() const {
+  return (_has_bits_[0] & 0x00000002u) != 0;
+}
+inline void AckRoleLiteInfoList::set_has_account() {
+  _has_bits_[0] |= 0x00000002u;
+}
+inline void AckRoleLiteInfoList::clear_has_account() {
+  _has_bits_[0] &= ~0x00000002u;
+}
+inline void AckRoleLiteInfoList::clear_account() {
+  if (account_ != &::google::protobuf::internal::kEmptyString) {
+    account_->clear();
+  }
+  clear_has_account();
+}
+inline const ::std::string& AckRoleLiteInfoList::account() const {
+  return *account_;
+}
+inline void AckRoleLiteInfoList::set_account(const ::std::string& value) {
+  set_has_account();
+  if (account_ == &::google::protobuf::internal::kEmptyString) {
+    account_ = new ::std::string;
+  }
+  account_->assign(value);
+}
+inline void AckRoleLiteInfoList::set_account(const char* value) {
+  set_has_account();
+  if (account_ == &::google::protobuf::internal::kEmptyString) {
+    account_ = new ::std::string;
+  }
+  account_->assign(value);
+}
+inline void AckRoleLiteInfoList::set_account(const void* value, size_t size) {
+  set_has_account();
+  if (account_ == &::google::protobuf::internal::kEmptyString) {
+    account_ = new ::std::string;
+  }
+  account_->assign(reinterpret_cast<const char*>(value), size);
+}
+inline ::std::string* AckRoleLiteInfoList::mutable_account() {
+  set_has_account();
+  if (account_ == &::google::protobuf::internal::kEmptyString) {
+    account_ = new ::std::string;
+  }
+  return account_;
+}
+inline ::std::string* AckRoleLiteInfoList::release_account() {
+  clear_has_account();
+  if (account_ == &::google::protobuf::internal::kEmptyString) {
+    return NULL;
+  } else {
+    ::std::string* temp = account_;
+    account_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+    return temp;
+  }
+}
+inline void AckRoleLiteInfoList::set_allocated_account(::std::string* account) {
+  if (account_ != &::google::protobuf::internal::kEmptyString) {
+    delete account_;
+  }
+  if (account) {
+    set_has_account();
+    account_ = account;
+  } else {
+    clear_has_account();
+    account_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+  }
 }
 
 // -------------------------------------------------------------------
