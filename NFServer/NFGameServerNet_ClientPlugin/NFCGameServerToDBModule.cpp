@@ -65,14 +65,7 @@ void NFCGameServerToDBModule::OnSocketWSEvent(const NFSOCK nSockIndex, const NF_
 
 void NFCGameServerToDBModule::TransPBToProxy(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
 {
-	NFGUID nPlayerID;
-	std::string strData;
-	if (!NFINetModule::ReceivePB( nMsgID, msg, nLen, strData, nPlayerID))
-	{
-		return;
-	}
-
-	m_pGameServerNet_ServerModule->SendMsgPBToGate(nMsgID, strData, nPlayerID);
+	m_pNetClientModule->SendBySuit(NF_SERVER_TYPES::NF_ST_DB, nSockIndex, nMsgID, msg, nLen);
 
 	return;
 }

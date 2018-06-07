@@ -1,12 +1,12 @@
 // -------------------------------------------------------------------------
-//    @FileName			:    NFDataAgent_NosqlPlugin.cpp
+//    @FileName			:    NFDBLogicPlugin.cpp
 //    @Author           :    LvSheng.Huang
 //    @Date             :    2013-10-03
-//    @Module           :    NFDataAgent_NosqlPlugin
+//    @Module           :    NFDBLogicPlugin
 //    @Desc             :
 // -------------------------------------------------------------------------
 
-#include "NFDataAgent_NosqlPlugin.h"
+#include "NFDBLogicPlugin.h"
 #include "NFCRankRedisModule.h"
 #include "NFCPlayerRedisModule.h"
 #include "NFCGuildRedisModule.h"
@@ -19,29 +19,29 @@
 
 NF_EXPORT void DllStartPlugin(NFIPluginManager* pm)
 {
-    CREATE_PLUGIN(pm, NFDataAgent_NosqlPlugin)
+    CREATE_PLUGIN(pm, NFDBLogicPlugin)
 
 };
 
 NF_EXPORT void DllStopPlugin(NFIPluginManager* pm)
 {
-    DESTROY_PLUGIN(pm, NFDataAgent_NosqlPlugin)
+    DESTROY_PLUGIN(pm, NFDBLogicPlugin)
 };
 
 #endif
 //////////////////////////////////////////////////////////////////////////
 
-const int NFDataAgent_NosqlPlugin::GetPluginVersion()
+const int NFDBLogicPlugin::GetPluginVersion()
 {
     return 0;
 }
 
-const std::string NFDataAgent_NosqlPlugin::GetPluginName()
+const std::string NFDBLogicPlugin::GetPluginName()
 {
-	return GET_CLASS_NAME(NFDataAgent_NosqlPlugin);
+	return GET_CLASS_NAME(NFDBLogicPlugin);
 }
 
-void NFDataAgent_NosqlPlugin::Install()
+void NFDBLogicPlugin::Install()
 {
 	REGISTER_MODULE(pPluginManager, NFIRankRedisModule, NFCRankRedisModule)
 	REGISTER_MODULE(pPluginManager, NFIPlayerRedisModule, NFCPlayerRedisModule)
@@ -52,7 +52,7 @@ void NFDataAgent_NosqlPlugin::Install()
 	REGISTER_MODULE(pPluginManager, NFIAccountRedisModule, NFCAccountRedisModule)
 }
 
-void NFDataAgent_NosqlPlugin::Uninstall()
+void NFDBLogicPlugin::Uninstall()
 {
 	UNREGISTER_MODULE(pPluginManager, NFIAccountRedisModule, NFCAccountRedisModule)
 	UNREGISTER_MODULE(pPluginManager, NFIMailRedisModule, NFCMailRedisModule)
