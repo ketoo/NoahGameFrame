@@ -40,9 +40,7 @@ public:
 	virtual bool AddAccount(const std::string& strAccount, const std::string& strPwd);
 	virtual bool ExistAccount(const std::string& strAccount);
 
-	virtual bool ExistRoleName(const std::string& strRoleName);
-	virtual bool CreateRole(const std::string& strAccount, const std::string& strRoleName, const NFGUID& id);
-	virtual bool GetRoleInfo(const std::string& strAccount, std::string& strRoleName, NFGUID& id);
+
 protected:
 
 private:
