@@ -9,7 +9,6 @@
 		<Plugin Name="NFLogPlugin" />
 		<Plugin Name="NFGameLogicPlugin" />
 		
-		<Plugin Name="NFDataAgent_NosqlPlugin" />
 		<Plugin Name="NFActorPlugin" />
 		<Plugin Name="NFNoSqlPlugin" />
 		<Plugin Name="NFChatPlugin" />
@@ -34,7 +33,7 @@
 		<Plugin Name="NFLoginNet_ClientPlugin" />
 		<Plugin Name="NFLogPlugin" />
 
-		<Plugin Name="NFDataAgent_NosqlPlugin" />
+		<Plugin Name="NFDBLogicPlugin" />
 		<Plugin Name="NFActorPlugin" />
 		<Plugin Name="NFNoSqlPlugin" />	
 	</LoginServer>
@@ -68,7 +67,7 @@
 		<Plugin Name="NFWorldNet_ClientPlugin" />
 		<Plugin Name="NFWorldNet_ServerPlugin" />
 		<Plugin Name="NFLogPlugin" />
-		<Plugin Name="NFDataAgent_NosqlPlugin" />
+		<Plugin Name="NFDBLogicPlugin" />
 		<Plugin Name="NFActorPlugin" />
 		<Plugin Name="NFNoSqlPlugin" />
 		<Plugin Name="NFSecurityPlugin" />	
