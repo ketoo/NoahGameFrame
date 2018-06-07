@@ -16,10 +16,10 @@ class NFIPlayerRedisModule
 {
 
 public:
-	virtual int GetPlayerHomeSceneID(const NFGUID& self) = 0;
+	virtual bool ExistRoleName(const std::string& strRoleName) = 0;
+	virtual bool CreateRole(const std::string& strAccount, const std::string& strRoleName, const NFGUID& id) = 0;
+	virtual bool GetRoleInfo(const std::string& strAccount, std::string& strRoleName, NFGUID& id) = 0;
 
-	virtual bool LoadPlayerData(const NFGUID& self) = 0;
-	virtual bool SavePlayerData(const NFGUID& self) = 0;
 	virtual bool SavePlayerTile(const int nSceneID, const NFGUID& self, const std::string& strTileData) = 0;
 
 	virtual bool LoadPlayerTile(const int nSceneID, const NFGUID& self, std::string& strTileData) = 0;
