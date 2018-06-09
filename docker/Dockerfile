@@ -3,16 +3,13 @@ FROM ubuntu:16.04
 MAINTAINER James.Huang <342006@qq.com>
 
 RUN apt-get update \
-&&  apt-get -y upgrade
-
-
-RUN apt-get install -y git g++ cmake unzip autoconf automake subversion
-
-RUN git config --global http.sslVerify false \
-&& git config --global http.postBuffer 1048576000 \
+&&  apt-get -y upgrade \
 && mkdir -p /mnt/data \
 && mkdir -p /mnt/data/apps \
 && mkdir -p /mnt/data/logs
+
+
+RUN apt-get install -y git g++ cmake unzip autoconf automake subversion
 
 ADD NoahGameFrame /mnt/data/apps
 
