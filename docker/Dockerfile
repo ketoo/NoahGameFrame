@@ -11,7 +11,7 @@ RUN apt-get update \
 
 RUN apt-get install -y git g++ cmake unzip autoconf automake subversion
 
-ADD ./NoahGameFrame /mnt/data/apps
+ADD ./NoahGameFrame /mnt/data/apps/NoahGameFrame
 
 RUN cd /mnt/data/apps/NoahGameFrame \
 && ./install4cmake.sh
