@@ -1,4 +1,5 @@
 #1 pull the Dockerfile from github
+git clone https://github.com/ketoo/NoahGameFrame.git
 
 #2 building the Dockerfile to build a docker image with the app's binary file
 
