@@ -70,8 +70,8 @@ bool NFRedisClient::ZINCRBY(const std::string & key, const std::string & member,
 {
 	NFRedisCommand cmd(GET_NAME(ZINCRBY));
 	cmd << key;
-	cmd << member;
 	cmd << score;
+	cmd << member;
 
 	NF_SHARE_PTR<redisReply> pReply = BuildSendCmd(cmd);
 	if (pReply == nullptr)
@@ -288,7 +288,6 @@ bool NFRedisClient::ZREVRANGE(const std::string& key, const int start, const int
 bool NFRedisClient::ZREVRANGEBYSCORE(const std::string & key, const double start, const double end, string_score_vector& values)
 {
 	NFRedisCommand cmd(GET_NAME(ZREVRANGEBYSCORE));
-	cmd << key;
 	cmd << key;
 	cmd << start;
 	cmd << end;
