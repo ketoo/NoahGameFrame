@@ -11,17 +11,18 @@ RUN apt-get update \
 
 RUN apt-get install -y git g++ cmake unzip autoconf automake subversion
 
-ADD NoahGameFrame /mnt/data/apps
+ADD ./NoahGameFrame /mnt/data/apps
 
-RUN cd /mnt/data/apps \
-&& cd ./NoahGameFrame \
+RUN cd /mnt/data/apps/NoahGameFrame \
 && ./install4cmake.sh
 
 #RUN cd /mnt/data/apps \
 #&& wget redis.tar.gz "http://download.redis.io/releases/redis-3.2.5.tar.gz" \
 #&& tar -xzf redis.tar.gz ./ \
 #&& cd redis\
-#&& make
+#&& make \
+#&& cd ..
+#&& rm redis.tar.gz
 
 
 #ENTRYPOINT ["/mnt/data/apps/NoahGameFrame/_Out/rund.sh"]
