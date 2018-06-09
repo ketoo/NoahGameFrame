@@ -114,7 +114,7 @@ NF_SHARE_PTR<NFIRecordManager> NFCCommonRedisModule::NewRecordManager(const std:
     return NF_SHARE_PTR<NFIRecordManager>(NULL);
 }
 
-NF_SHARE_PTR<NFIPropertyManager> NFCCommonRedisModule::GetCachePropertyInfo(const NFGUID& self, const std::string& strClassName, std::vector<std::string>& vKeyCacheList, std::vector<std::string>& vValueCacheList)
+NF_SHARE_PTR<NFIPropertyManager> NFCCommonRedisModule::GetPropertyInfo(const NFGUID& self, const std::string& strClassName, std::vector<std::string>& vKeyCacheList, std::vector<std::string>& vValueCacheList)
 {
 	//TODO optimize
     NF_SHARE_PTR<NFIPropertyManager> pPropertyManager = NewPropertyManager(strClassName);
@@ -159,7 +159,7 @@ NF_SHARE_PTR<NFIPropertyManager> NFCCommonRedisModule::GetCachePropertyInfo(cons
 	return nullptr;
 }
 
-NF_SHARE_PTR<NFIRecordManager> NFCCommonRedisModule::GetCacheRecordInfo(const NFGUID& self, const std::string& strClassName, std::vector<std::string>& vKeyCacheList, std::vector<std::string>& vValueCacheList)
+NF_SHARE_PTR<NFIRecordManager> NFCCommonRedisModule::GetRecordInfo(const NFGUID& self, const std::string& strClassName, std::vector<std::string>& vKeyCacheList, std::vector<std::string>& vValueCacheList)
 {
     NF_SHARE_PTR<NFIRecordManager> pRecordManager = NewRecordManager(strClassName);
     if (!pRecordManager.get())
@@ -197,20 +197,42 @@ NF_SHARE_PTR<NFIRecordManager> NFCCommonRedisModule::GetCacheRecordInfo(const NF
 	if (vKeyCacheList.size() == vValueCacheList.size())
 	{
 		ConvertVectorToRecordManager(vKeyCacheList, vValueCacheList, pRecordManager);
+		return pRecordManager;
 	}
 
-    return pRecordManager;
+	return nullptr;
 }
 
-NF_SHARE_PTR<NFIPropertyManager> NFCCommonRedisModule::GetCachePropertyInfo(const NFGUID & self, const std::string & strClassName)
+NF_SHARE_PTR<NFIPropertyManager> NFCCommonRedisModule::GetPropertyInfo(const NFGUID & self, const std::string & strClassName)
 {
 	std::vector<std::string> vKeyCacheList;
 	std::vector<std::string> vValueCacheList;
 
-	return GetCachePropertyInfo(self, strClassName, vKeyCacheList, vValueCacheList);
+	return GetPropertyInfo(self, strClassName, vKeyCacheList, vValueCacheList);
 }
 
-bool NFCCommonRedisModule::SaveCachePropertyInfo(const NFGUID& self, NF_SHARE_PTR<NFIPropertyManager> pPropertyManager, const int nExpireSecond)
+NF_SHARE_PTR<NFIRecordManager> NFCCommonRedisModule::GetRecordInfo(const NFGUID & self, const std::string & strClassName)
+{
+	std::vector<std::string> vKeyCacheList;
+	std::vector<std::string> vValueCacheList;
+
+	return GetRecordInfo(self, strClassName, vKeyCacheList, vValueCacheList);
+}
+
+bool NFCCommonRedisModule::GetRecordInfo(const NFGUID & self, const std::string & strClassName, NFMsg::ObjectRecordList * pRecordDataList)
+{
+	std::vector<std::string> vKeyCacheList;
+	std::vector<std::string> vValueCacheList;
+	NF_SHARE_PTR<NFIRecordManager> xRecordManager = GetRecordInfo(self, strClassName, vKeyCacheList, vValueCacheList);
+	if (xRecordManager && vKeyCacheList.size() == vValueCacheList.size())
+	{
+		return ConvertRecordManagerToPB(xRecordManager, pRecordDataList);
+	}
+
+	return false;
+}
+
+bool NFCCommonRedisModule::SavePropertyInfo(const NFGUID& self, NF_SHARE_PTR<NFIPropertyManager> pPropertyManager, const int nExpireSecond)
 {
     if (self.IsNull())
     {
@@ -255,7 +277,7 @@ bool NFCCommonRedisModule::SaveCachePropertyInfo(const NFGUID& self, NF_SHARE_PT
     return true;
 }
 
-bool NFCCommonRedisModule::SaveCacheRecordInfo(const NFGUID& self, NF_SHARE_PTR<NFIRecordManager> pRecordManager, const int nExpireSecond)
+bool NFCCommonRedisModule::SaveRecordInfo(const NFGUID& self, NF_SHARE_PTR<NFIRecordManager> pRecordManager, const int nExpireSecond)
 {
     if (self.IsNull())
     {
@@ -267,18 +289,45 @@ bool NFCCommonRedisModule::SaveCacheRecordInfo(const NFGUID& self, NF_SHARE_PTR<
         return false;
     }
 
+	NFMsg::ObjectRecordList xRecordList;
+	if (ConvertRecordManagerToPB(pRecordManager, &xRecordList))
+	{
+		return SaveRecordInfo(self, xRecordList, nExpireSecond);
+	}
+
+    return false;
+}
+
+bool NFCCommonRedisModule::SaveRecordInfo(const NFGUID & self, const NFMsg::ObjectRecordList& xRecordData, const int nExpireSecond)
+{
+	if (self.IsNull())
+	{
+		return false;
+	}
+
 	NF_SHARE_PTR<NFIRedisClient> pDriver = m_pNoSqlModule->GetDriverBySuit(self.ToString());
-    if (!pDriver)
-    {
-        return false;
-    }
+	if (!pDriver)
+	{
+		return false;
+	}
 
 	std::vector<std::string> vKeyList;
 	std::vector<std::string> vValueList;
-    if (!ConvertRecordManagerToVector(pRecordManager, vKeyList, vValueList))
-    {
-        return false;
-    }
+	
+	for (int i = 0; i < xRecordData.record_list_size(); ++i)
+	{
+		const NFMsg::ObjectRecordBase& xRecord = xRecordData.record_list(i);
+
+		std::string strValue;
+		if (!xRecord.SerializeToString(&strValue))
+		{
+			continue;
+		}
+
+		vKeyList.push_back(xRecord.record_name());
+		vValueList.push_back(strValue);
+	}
+
 
 	if (vKeyList.size() != vValueList.size())
 	{
@@ -296,7 +345,7 @@ bool NFCCommonRedisModule::SaveCacheRecordInfo(const NFGUID& self, NF_SHARE_PTR<
 		pDriver->EXPIRE(strKey, nExpireSecond);
 	}
 
-    return true;
+	return true;
 }
 
 bool NFCCommonRedisModule::ConvertVectorToPropertyManager(std::vector<std::string>& vKeyList, std::vector<std::string>& vValueList, NF_SHARE_PTR<NFIPropertyManager> pPropertyManager)
@@ -351,7 +400,7 @@ bool NFCCommonRedisModule::ConvertVectorToRecordManager(std::vector<std::string>
 			NFMsg::ObjectRecordBase xRecordData;
 			if (xRecordData.ParseFromString(strValue))
 			{
-				ConvertPBToRecord(pRecord, &xRecordData);
+				ConvertPBToRecord(xRecordData, pRecord);
 			}
 			else
 			{
@@ -393,22 +442,18 @@ bool NFCCommonRedisModule::ConvertRecordManagerToVector(NF_SHARE_PTR<NFIRecordMa
 			continue;
 		}
 
-		NFMsg::ObjectRecordBase* pRecordData = new NFMsg::ObjectRecordBase();
-		if (!pRecordData)
-		{
-			continue;
-		}
+		NFMsg::ObjectRecordBase xRecordData;
 
-		ConvertRecordToPB(pRecord, pRecordData);
+		ConvertRecordToPB(pRecord, &xRecordData);
 
 		////
 		std::string strValue;
-		if (!pRecordData->SerializeToString(&strValue))
+		if (!xRecordData.SerializeToString(&strValue))
 		{
 			continue;
 		}
 
-		vKeyList.push_back(pRecordData->record_name());
+		vKeyList.push_back(xRecordData.record_name());
 		vValueList.push_back(strValue);
 	}
 
@@ -534,11 +579,11 @@ bool NFCCommonRedisModule::ConvertRecordToPB(const NF_SHARE_PTR<NFIRecord>& pRec
 	return true;
 }
 
-bool NFCCommonRedisModule::ConvertPBToRecord(NFMsg::ObjectRecordBase * pRecordData, NF_SHARE_PTR<NFIRecord> pRecord)
+bool NFCCommonRedisModule::ConvertPBToRecord(const NFMsg::ObjectRecordBase& pRecordData, NF_SHARE_PTR<NFIRecord> pRecord)
 {
-	for (int iStuct = 0; iStuct < pRecordData->row_struct_size(); iStuct++)
+	for (int iStuct = 0; iStuct < pRecordData.row_struct_size(); iStuct++)
 	{
-		const NFMsg::RecordAddRowStruct& xAddRowStruct = pRecordData->row_struct(iStuct);
+		const NFMsg::RecordAddRowStruct& xAddRowStruct = pRecordData.row_struct(iStuct);
 
 		const int nCommonRow = xAddRowStruct.row();
 		pRecord->SetUsed(nCommonRow, true);
@@ -606,4 +651,197 @@ bool NFCCommonRedisModule::ConvertPBToRecord(NFMsg::ObjectRecordBase * pRecordDa
 	}
 
 	return false;
+}
+
+bool NFCCommonRedisModule::ConvertRecordManagerToPB(const NF_SHARE_PTR<NFIRecordManager>& pRecordManager, NFMsg::ObjectRecordList * pRecordDataList)
+{
+	if (pRecordDataList == nullptr )
+	{
+		return false;
+	}
+
+	for (NF_SHARE_PTR<NFIRecord> pRecord = pRecordManager->First(); pRecord != NULL; pRecord = pRecordManager->Next())
+	{
+		if (!pRecord->GetCache() && !pRecord->GetSave())
+		{
+			continue;
+		}
+
+		NFMsg::ObjectRecordBase* pRecordData = pRecordDataList->add_record_list();
+		if (!pRecordData)
+		{
+			continue;
+		}
+
+		ConvertRecordToPB(pRecord, pRecordData);
+	}
+
+	return true;
+}
+
+bool NFCCommonRedisModule::ConvertPBToRecordManager(const NFMsg::ObjectRecordList & pRecordData, NF_SHARE_PTR<NFIRecordManager> pRecord)
+{
+	if (pRecord == nullptr)
+	{
+		return false;
+	}
+
+	for (int i = 0; i < pRecordData.record_list_size(); ++i)
+	{
+		const NFMsg::ObjectRecordBase& xRecordBase = pRecordData.record_list(i);
+		NF_SHARE_PTR<NFIRecord> xRecord = pRecord->GetElement(xRecordBase.record_name());
+		if (xRecord)
+		{
+			ConvertPBToRecord(xRecordBase, xRecord);
+		}
+	}
+
+	return true;
+}
+
+bool NFCCommonRedisModule::ConvertPropertyManagerToPB(const NF_SHARE_PTR<NFIPropertyManager>& pProps, NFMsg::ObjectPropertyList * pPropertyData)
+{
+	if (pProps)
+	{
+		NF_SHARE_PTR<NFIProperty> xPropert = pProps->First();
+		while (xPropert)
+		{
+			switch (xPropert->GetType())
+			{
+			case NFDATA_TYPE::TDATA_INT:
+			{
+				NFMsg::PropertyInt* pData = pPropertyData->add_property_int_list();
+				pData->set_property_name(xPropert->GetKey());
+				pData->set_data(xPropert->GetInt());
+			}
+			break;
+
+			case NFDATA_TYPE::TDATA_FLOAT:
+			{
+				NFMsg::PropertyFloat* pData = pPropertyData->add_property_float_list();
+				pData->set_property_name(xPropert->GetKey());
+				pData->set_data(xPropert->GetFloat());
+			}
+			break;
+
+			case NFDATA_TYPE::TDATA_OBJECT:
+			{
+				NFMsg::PropertyObject* pData = pPropertyData->add_property_object_list();
+				pData->set_property_name(xPropert->GetKey());
+				*(pData->mutable_data()) = NFINetModule::NFToPB(xPropert->GetObject());
+			}
+			break;
+
+			case NFDATA_TYPE::TDATA_STRING:
+			{
+				NFMsg::PropertyString* pData = pPropertyData->add_property_string_list();
+				pData->set_property_name(xPropert->GetKey());
+				pData->set_data(xPropert->GetString());
+			}
+			break;
+
+			case NFDATA_TYPE::TDATA_VECTOR2:
+			{
+				NFMsg::PropertyVector2* pData = pPropertyData->add_property_vector2_list();
+				pData->set_property_name(xPropert->GetKey());
+				*(pData->mutable_data()) = NFINetModule::NFToPB(xPropert->GetVector2());
+			}
+			break;
+
+			case NFDATA_TYPE::TDATA_VECTOR3:
+			{
+				NFMsg::PropertyVector3* pData = pPropertyData->add_property_vector3_list();
+				pData->set_property_name(xPropert->GetKey());
+				*(pData->mutable_data()) = NFINetModule::NFToPB(xPropert->GetVector3());
+			}
+			break;
+			default:
+				break;
+			}
+
+			xPropert = pProps->Next();
+		}
+	}
+
+	return false;
+}
+
+bool NFCCommonRedisModule::ConvertPBToPropertyManager(const NFMsg::ObjectPropertyList& pPropertyData, NF_SHARE_PTR<NFIPropertyManager> pProps)
+{
+	if (pProps)
+	{
+		for (int i = 0; i < pPropertyData.property_int_list_size(); ++i)
+		{
+			const NFMsg::PropertyInt& xData = pPropertyData.property_int_list(i);
+
+			if (pProps->ExistElement(xData.property_name()))
+			{
+				pProps->AddProperty(pProps->Self(), xData.property_name(), NFDATA_TYPE::TDATA_INT);
+			}
+
+			pProps->SetPropertyInt(xData.property_name(), xData.data());
+		}
+
+		for (int i = 0; i < pPropertyData.property_float_list_size(); ++i)
+		{
+			const NFMsg::PropertyFloat& xData = pPropertyData.property_float_list(i);
+
+			if (pProps->ExistElement(xData.property_name()))
+			{
+				pProps->AddProperty(pProps->Self(), xData.property_name(), NFDATA_TYPE::TDATA_FLOAT);
+			}
+
+			pProps->SetPropertyFloat(xData.property_name(), xData.data());
+		}
+
+		for (int i = 0; i < pPropertyData.property_string_list_size(); ++i)
+		{
+			const NFMsg::PropertyString& xData = pPropertyData.property_string_list(i);
+
+			if (pProps->ExistElement(xData.property_name()))
+			{
+				pProps->AddProperty(pProps->Self(), xData.property_name(), NFDATA_TYPE::TDATA_STRING);
+			}
+
+			pProps->SetPropertyString(xData.property_name(), xData.data());
+		}
+
+		for (int i = 0; i < pPropertyData.property_object_list_size(); ++i)
+		{
+			const NFMsg::PropertyObject& xData = pPropertyData.property_object_list(i);
+
+			if (pProps->ExistElement(xData.property_name()))
+			{
+				pProps->AddProperty(pProps->Self(), xData.property_name(), NFDATA_TYPE::TDATA_OBJECT);
+			}
+
+			pProps->SetPropertyObject(xData.property_name(), NFGUID(xData.data().svrid(), xData.data().index()));
+		}
+
+		for (int i = 0; i < pPropertyData.property_vector2_list_size(); ++i)
+		{
+			const NFMsg::PropertyVector2& xData = pPropertyData.property_vector2_list(i);
+
+			if (pProps->ExistElement(xData.property_name()))
+			{
+				pProps->AddProperty(pProps->Self(), xData.property_name(), NFDATA_TYPE::TDATA_VECTOR2);
+			}
+
+			pProps->SetPropertyVector2(xData.property_name(), NFVector2(xData.data().x(), xData.data().y()));
+		}
+
+		for (int i = 0; i < pPropertyData.property_vector3_list_size(); ++i)
+		{
+			const NFMsg::PropertyVector3& xData = pPropertyData.property_vector3_list(i);
+
+			if (pProps->ExistElement(xData.property_name()))
+			{
+				pProps->AddProperty(pProps->Self(), xData.property_name(), NFDATA_TYPE::TDATA_VECTOR3);
+			}
+
+			pProps->SetPropertyVector3(xData.property_name(), NFVector3(xData.data().x(), xData.data().y(), xData.data().z()));
+		}
+	}
+
+	return true;
 }
