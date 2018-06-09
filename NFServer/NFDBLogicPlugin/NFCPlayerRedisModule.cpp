@@ -42,73 +42,20 @@ bool NFCPlayerRedisModule::AfterInit()
 
 bool NFCPlayerRedisModule::LoadPlayerData(const NFGUID & self, NFMsg::RoleDataPack& roleData)
 {
-	NF_SHARE_PTR<NFIPropertyManager> xPropertyManager = m_pCommonRedisModule->GetCachePropertyInfo(self, NFrame::Player::ThisName());
-	NF_SHARE_PTR<NFIRecordManager> xRecordManager = m_pCommonRedisModule->GetCacheRecordInfo(self, NFrame::Player::ThisName());
-	if (xPropertyManager)
+	NFCCommonRedisModule* pCommonRedisModule = (NFCCommonRedisModule*)(m_pCommonRedisModule);
+
+	NF_SHARE_PTR<NFIPropertyManager> xPropertyManager = m_pCommonRedisModule->GetPropertyInfo(self, NFrame::Player::ThisName());
+	NF_SHARE_PTR<NFIRecordManager> xRecordManager = m_pCommonRedisModule->GetRecordInfo(self, NFrame::Player::ThisName());
+	
+	if (xRecordManager)
 	{
-		NF_SHARE_PTR<NFIProperty> xPropert = xPropertyManager->First();
-		while (xPropert)
-		{
-			switch (xPropert->GetType())
-			{
-			case NFDATA_TYPE::TDATA_INT:
-			{
-				NFMsg::PropertyInt* pData = roleData.mutable_property()->add_property_int_list();
-				pData->set_property_name(xPropert->GetKey());
-				pData->set_data(xPropert->GetInt());
-			}
-				break;
-
-			case NFDATA_TYPE::TDATA_FLOAT:
-			{
-				NFMsg::PropertyFloat* pData = roleData.mutable_property()->add_property_float_list();
-				pData->set_property_name(xPropert->GetKey());
-				pData->set_data(xPropert->GetFloat());
-			}
-				break;
-
-			case NFDATA_TYPE::TDATA_OBJECT:
-			{
-				NFMsg::PropertyObject* pData = roleData.mutable_property()->add_property_object_list();
-				pData->set_property_name(xPropert->GetKey());
-				*(pData->mutable_data()) = NFINetModule::NFToPB(xPropert->GetObject());
-			}
-				break;
-
-			case NFDATA_TYPE::TDATA_STRING:
-			{
-				NFMsg::PropertyString* pData = roleData.mutable_property()->add_property_string_list();
-				pData->set_property_name(xPropert->GetKey());
-				pData->set_data(xPropert->GetString());
-			}
-				break;
-
-			case NFDATA_TYPE::TDATA_VECTOR2:
-			{
-				NFMsg::PropertyVector2* pData = roleData.mutable_property()->add_property_vector2_list();
-				pData->set_property_name(xPropert->GetKey());
-				*(pData->mutable_data()) = NFINetModule::NFToPB(xPropert->GetVector2());
-			}
-				break;
-
-			case NFDATA_TYPE::TDATA_VECTOR3:
-			{
-				NFMsg::PropertyVector3* pData = roleData.mutable_property()->add_property_vector3_list();
-				pData->set_property_name(xPropert->GetKey());
-				*(pData->mutable_data()) = NFINetModule::NFToPB(xPropert->GetVector3());
-			}
-				break;
-			default:
-				break;
-			}
-
-			xPropert = xPropertyManager->Next();
-		}
+		pCommonRedisModule->ConvertPropertyManagerToPB(xPropertyManager, roleData.mutable_property());
 	}
 
-	if (xPropertyManager)
+	pCommonRedisModule->GetRecordInfo(self, NFrame::Player::ThisName(), roleData.mutable_record());
+	/*
+	if (xRecordManager)
 	{
-		NFCCommonRedisModule* pCommonRedisModule = (NFCCommonRedisModule*)(m_pCommonRedisModule);
 		NF_SHARE_PTR<NFIRecord> xRecord = xRecordManager->First();
 		while (xRecord)
 		{
@@ -119,21 +66,23 @@ bool NFCPlayerRedisModule::LoadPlayerData(const NFGUID & self, NFMsg::RoleDataPa
 			xRecord = xRecordManager->Next();
 		}
 	}
-
+	*/
 	m_pLogModule->LogNormal(NFILogModule::NF_LOG_LEVEL::NLL_DEBUG_NORMAL, self, "loaded data ", NFGetTimeMS());
 
 	return true;
 }
 
-
 bool NFCPlayerRedisModule::SavePlayerData(const NFGUID & self, const NFMsg::RoleDataPack& roleData)
 {
 	NFCCommonRedisModule* pCommonRedisModule = (NFCCommonRedisModule*)m_pCommonRedisModule;
 
-	//pCommonRedisModule->ConvertPBToRecord
+	NF_SHARE_PTR<NFIPropertyManager> xPropManager = pCommonRedisModule->NewPropertyManager(NFrame::Player::ThisName());
+	if (pCommonRedisModule->ConvertPBToPropertyManager(roleData.property(), xPropManager))
+	{
+		m_pCommonRedisModule->SavePropertyInfo(self, xPropManager);
+	}
 
-	m_pCommonRedisModule->SaveCachePropertyInfo(self, m_pKernelModule->GetObject(self)->GetPropertyManager());
-	m_pCommonRedisModule->SaveCacheRecordInfo(self, m_pKernelModule->GetObject(self)->GetRecordManager());
+	pCommonRedisModule->SaveRecordInfo(self, roleData.record(), -1);
 
 	return true;
 }
@@ -386,7 +335,7 @@ bool NFCPlayerRedisModule::CreateRole(const std::string & strAccount, const std:
 					xProperty->SetInt(1);
 				}
 
-				m_pCommonRedisModule->SaveCachePropertyInfo(id, xPropertyManager);
+				m_pCommonRedisModule->SavePropertyInfo(id, xPropertyManager);
 			}
 
 			return true;
