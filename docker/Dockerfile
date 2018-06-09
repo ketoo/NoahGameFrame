@@ -8,8 +8,9 @@ RUN apt-get update \
 
 RUN apt-get install -y git g++ cmake unzip autoconf automake subversion
 
-# create working directory
-RUN mkdir -p /mnt/data \
+RUN git config --global http.sslVerify false \
+&& git config --global http.postBuffer 1048576000
+&& mkdir -p /mnt/data \
 && mkdir -p /mnt/data/apps \
 && mkdir -p /mnt/data/logs \
 && cd /mnt/data/apps \
@@ -22,9 +23,7 @@ RUN cd /mnt/data/apps \
 && wget redis.tar.gz "http://download.redis.io/releases/redis-3.2.5.tar.gz" \
 && tar -xzf redis.tar.gz ./ \
 && cd redis\
-&& make \
-&& rm -rf /var/lib/apt/lists/* \
-&& rm redis.tar.gz
+&& make
 
 
 #ENTRYPOINT ["/mnt/data/apps/NoahGameFrame/_Out/rund.sh"]
