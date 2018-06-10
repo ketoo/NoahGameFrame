@@ -20,6 +20,7 @@ bool NFCCreateRoleModule::Init()
 	m_pSceneProcessModule = pPluginManager->FindModule<NFISceneProcessModule>();
 	m_pGameServerNet_ServerModule = pPluginManager->FindModule<NFIGameServerNet_ServerModule>();
 	m_pNetClientModule = pPluginManager->FindModule<NFINetClientModule>();
+	m_pScheduleModule = pPluginManager->FindModule<NFIScheduleModule>();
 	
     return true;
 }
@@ -207,6 +208,8 @@ int NFCCreateRoleModule::OnObjectPlayerEvent(const NFGUID & self, const std::str
 		{
 			mxObjectDataCache.erase(it);
 		}
+
+		m_pScheduleModule->AddSchedule(self, "SaveDataOnTime", this, &NFCCreateRoleModule::SaveDataOnTime, 180.0f, -1);
 	}
 
 	return 0;
@@ -234,6 +237,7 @@ void NFCCreateRoleModule::AttachData(const NFGUID & self)
 			}
 
 			mxObjectDataCache.erase(it);
+
 		}
 	}
 }
@@ -261,6 +265,12 @@ void NFCCreateRoleModule::SaveData(const NFGUID & self)
 
 		m_pNetClientModule->SendSuitByPB(NF_SERVER_TYPES::NF_ST_DB, self.GetData(), NFMsg::EGMI_REQ_SAVE_ROLE_DATA, xDataPack);
 	}
+}
+
+int NFCCreateRoleModule::SaveDataOnTime(const NFGUID & self, const std::string & name, const float fIntervalTime, const int nCount)
+{
+	SaveData(self);
+	return 0;
 }
 
 bool NFCCreateRoleModule::Shut()
