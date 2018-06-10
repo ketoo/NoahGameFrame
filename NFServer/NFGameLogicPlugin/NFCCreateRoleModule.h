@@ -18,6 +18,7 @@
 #include "NFComm/NFPluginModule/NFISceneProcessModule.h"
 #include "NFComm/NFPluginModule/NFIPVPModule.h"
 #include "NFComm/NFPluginModule/NFIGameServerNet_ServerModule.h"
+#include "NFComm/NFPluginModule/NFIScheduleModule.h"
 
 class NFCCreateRoleModule
     : public NFICreateRoleModule
@@ -62,6 +63,8 @@ private:
 	void AttachData(const NFGUID& self);
 	void SaveData(const NFGUID& self);
 
+	int SaveDataOnTime(const NFGUID& self, const std::string& name, const float fIntervalTime, const int nCount);
+
 private:
 
 	std::map<NFGUID, NFMsg::RoleDataPack> mxObjectDataCache;
@@ -76,6 +79,7 @@ private:
 	NFIGameServerToDBModule* m_pGameToDBModule;
 	NFISceneProcessModule* m_pSceneProcessModule;
 	NFINetClientModule* m_pNetClientModule;
+	NFIScheduleModule* m_pScheduleModule;
 };
 
 #endif
