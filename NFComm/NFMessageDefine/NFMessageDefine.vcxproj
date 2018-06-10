@@ -98,7 +98,6 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="NFDefine.pb.h" />
-    <ClInclude Include="NFFleetingDefine.pb.h" />
     <ClInclude Include="NFLimit.h" />
     <ClInclude Include="NFMsgBase.pb.h" />
     <ClInclude Include="NFMsgExtra.pb.h" />
@@ -108,7 +107,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="NFDefine.pb.cc" />
-    <ClCompile Include="NFFleetingDefine.pb.cc" />
     <ClCompile Include="NFMsgBase.pb.cc" />
     <ClCompile Include="NFMsgExtra.pb.cc" />
     <ClCompile Include="NFMsgPreGame.pb.cc" />

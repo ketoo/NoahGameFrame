@@ -45,25 +45,11 @@ protected:
 	
 	void OnDBLoadRoleDataProcess(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
 
+	int OnObjectPlayerEvent(const NFGUID & self, const std::string & strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFDataList & var);
 
 private:
-	struct PlayerDataCache
-	{
-		PlayerDataCache()
-		{
-			nHomeSceneID = 0;
-		}
-		int nHomeSceneID;
 
-		std::vector<std::string> mvPropertyKeyList;
-		std::vector<std::string> mvPropertyValueList;
-
-		std::vector<std::string> mvRecordKeyList;
-		std::vector<std::string> mvRecordValueList;
-	};
-
-	NFMapEx<NFGUID, PlayerDataCache> mxObjectDataCache;
-	NFMapEx<NFGUID, std::string> mxObjectTileCache;
+	std::map<NFGUID, NFMsg::RoleDataPack> mxObjectDataCache;
 
 private:
 	NFIPVPModule* m_pPVPModule;
@@ -71,7 +57,6 @@ private:
 	NFIClassModule* m_pClassModule;
 	NFIElementModule* m_pElementModule;
     NFIKernelModule* m_pKernelModule;
-	NFINoSqlModule* m_pNoSqlModule;
 	NFIGameServerNet_ServerModule* m_pGameServerNet_ServerModule;
 	NFIGameServerToDBModule* m_pGameToDBModule;
 	NFISceneProcessModule* m_pSceneProcessModule;

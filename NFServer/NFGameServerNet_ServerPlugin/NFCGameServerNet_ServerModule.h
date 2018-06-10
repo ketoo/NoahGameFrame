@@ -119,6 +119,7 @@ protected:
 private:
     
     NFMapEx<NFGUID, GateBaseInfo> mRoleBaseData;
+
     //gateid,data
     NFMapEx<int, GateServerInfo> mProxyMap;
 

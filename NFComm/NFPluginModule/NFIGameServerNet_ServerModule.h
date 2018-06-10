@@ -20,10 +20,17 @@ public:
 
     struct GateBaseInfo
     {
+		enum ERoleStatus
+		{
+			E_LOADING = 1,
+			E_LOADED = 2,
+		};
+
         GateBaseInfo()
         {
             nActorID = 0;
             nGateID = 0;
+			eStatus = E_LOADING;
         }
 
         GateBaseInfo(const int gateID, const NFGUID xIdent)
@@ -34,7 +41,8 @@ public:
         }
 
         int nActorID;
-        int nGateID;
+		int nGateID;
+		ERoleStatus eStatus;
         NFGUID xClientID;
     };
 
