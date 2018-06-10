@@ -206,7 +206,7 @@ void NFCDBNet_ServerModule::OnDeleteRoleGameProcess(const NFSOCK nSockIndex, con
 void NFCDBNet_ServerModule::OnLoadRoleDataProcess(const NFSOCK nSockIndex, const int nMsgID, const char * msg, const uint32_t nLen)
 {
 	NFGUID nClientID;
-	NFMsg::RoleDataPack xMsg;
+	NFMsg::ReqEnterGameServer xMsg;
 	if (!m_pNetModule->ReceivePB(nMsgID, msg, nLen, xMsg, nClientID))
 	{
 		return;
