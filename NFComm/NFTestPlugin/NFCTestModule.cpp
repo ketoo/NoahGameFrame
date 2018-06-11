@@ -27,7 +27,7 @@ bool NFCTestModule::Awake()
 
 bool NFCTestModule::Init()
 {
-	//find all plugins and all modules, then check whether they have a tester for each module
+	//find all plugins and all modules, then check whether they have a tester
 	//if any module have't a tester for it then  can not start the application
 	//this is a rule for NF's world to keep high quality code under TDD
 
