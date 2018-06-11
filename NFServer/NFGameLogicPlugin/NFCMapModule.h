@@ -68,11 +68,11 @@ protected:
 	void LeaveStation(const std::string& strTitleID, const NFGUID& xGuildID);
 private:
 	NFINetModule* m_pNetModule;
-	NFIBigMapRedisModule* m_pBigMapRedisModule;
+	//NFIBigMapRedisModule* m_pBigMapRedisModule;
 	NFIKernelModule* m_pKernelModule;
 	NFIClassModule* m_pLogicClassModule;
 	NFIElementModule* m_pElementModule;
-	NFIGuildRedisModule* m_pGuildRedisModule;
+	//NFIGuildRedisModule* m_pGuildRedisModule;
 	NFIGameServerNet_ServerModule* m_pGameServerNet_ServerModule;
 
 
