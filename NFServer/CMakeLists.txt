@@ -1,4 +1,4 @@
-add_subdirectory(NFDataAgent_NosqlPlugin)
+add_subdirectory(NFDBLogicPlugin)
 add_subdirectory(NFGameLogicPlugin)
 add_subdirectory(NFGameServerNet_ClientPlugin)
 add_subdirectory(NFGameServerNet_ServerPlugin)
