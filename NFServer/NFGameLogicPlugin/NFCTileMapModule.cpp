@@ -16,13 +16,10 @@
 bool NFCTileMapModule::Init()
 {
 	m_pNetModule = pPluginManager->FindModule<NFINetModule>();
-	m_pBigMapRedisModule = pPluginManager->FindModule<NFIBigMapRedisModule>();
 	m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>();
 	m_pLogicClassModule = pPluginManager->FindModule<NFIClassModule>();
 	m_pElementModule = pPluginManager->FindModule<NFIElementModule>();
-	m_pGuildRedisModule = pPluginManager->FindModule<NFIGuildRedisModule>();
 	m_pGameServerNet_ServerModule = pPluginManager->FindModule<NFIGameServerNet_ServerModule>();
-	m_pPlayerRedisModule = pPluginManager->FindModule<NFIPlayerRedisModule>();
 	m_pSceneAOIModule = pPluginManager->FindModule<NFISceneAOIModule>();
 	m_pClassModule = pPluginManager->FindModule<NFIClassModule>();
 	m_pTileModule = pPluginManager->FindModule<NFITileModule>();

@@ -20,7 +20,6 @@ bool NFCDBToWorldModule::Init()
 	m_pClassModule = pPluginManager->FindModule<NFIClassModule>();
 	m_pElementModule = pPluginManager->FindModule<NFIElementModule>();
 	m_pLogModule = pPluginManager->FindModule<NFILogModule>();
-	m_pWorldNet_ServerModule = pPluginManager->FindModule<NFIWorldNet_ServerModule>();
 	m_pSecurityModule = pPluginManager->FindModule<NFISecurityModule>();
 
 	return true;

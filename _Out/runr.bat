@@ -13,10 +13,6 @@ choice /t 5 /d y /n >nul
 echo Starting NFLoginServer...
 start "NFLoginServer" "NFPluginLoader.exe" "Server=LoginServer" "ID=4"
 
-choice /t 2 /d y /n >nul
-
-echo Starting NFDBServer...
-start "NFDBServer" "NFPluginLoader.exe" "Server=DBServer" "ID=8"
 
 
 choice /t 5 /d y /n >nul

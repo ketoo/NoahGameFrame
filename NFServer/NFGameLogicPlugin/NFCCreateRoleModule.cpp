@@ -11,7 +11,6 @@
 
 bool NFCCreateRoleModule::Init()
 {
-	m_pPVPModule = pPluginManager->FindModule<NFIPVPModule>();
 	m_pElementModule = pPluginManager->FindModule<NFIElementModule>();
 	m_pClassModule = pPluginManager->FindModule<NFIClassModule>();
 	m_pNetModule = pPluginManager->FindModule<NFINetModule>();
