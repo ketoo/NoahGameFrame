@@ -82,13 +82,10 @@ private:
 	NFITileModule* m_pTileModule;
 	NFINetModule* m_pNetModule;
 	NFIClassModule* m_pClassModule;
-	NFIBigMapRedisModule* m_pBigMapRedisModule;
 	NFIKernelModule* m_pKernelModule;
 	NFIClassModule* m_pLogicClassModule;
 	NFIElementModule* m_pElementModule;
 	NFISceneAOIModule* m_pSceneAOIModule;
-	NFIGuildRedisModule* m_pGuildRedisModule;
-	NFIPlayerRedisModule* m_pPlayerRedisModule;
 	NFIGameServerNet_ServerModule* m_pGameServerNet_ServerModule;
 };
 

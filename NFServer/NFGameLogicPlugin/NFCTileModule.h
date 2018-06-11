@@ -109,8 +109,7 @@ private:
 	NFIClassModule* m_pLogicClassModule;
 	NFIElementModule* m_pElementModule;
 	NFISceneAOIModule* m_pSceneAOIModule;
-	NFIGuildRedisModule* m_pGuildRedisModule;
-	NFIPlayerRedisModule* m_pPlayerRedisModule;
+	//NFIPlayerRedisModule* m_pPlayerRedisModule;
 	NFIGameServerNet_ServerModule* m_pGameServerNet_ServerModule;
 };
 

@@ -20,13 +20,13 @@
 #include "NFComm/NFPluginModule/NFINetClientModule.h"
 #include "NFComm/NFPluginModule/NFISecurityModule.h"
 
-class NFIDBToMasterModule : public NFIModule
+class NFIDBToWorldModule : public NFIModule
 {
 
 };
 
 class NFCDBToWorldModule
-	: public NFIDBToMasterModule
+	: public NFIDBToWorldModule
 {
 public:
 	NFCDBToWorldModule(NFIPluginManager* p)
@@ -63,7 +63,6 @@ private:
 	NFILogModule* m_pLogModule;
 	NFIElementModule* m_pElementModule;
 	NFIClassModule* m_pClassModule;
-	NFIWorldNet_ServerModule* m_pWorldNet_ServerModule;
 	NFINetClientModule* m_pNetClientModule;
 	NFINetModule* m_pNetModule;
 	NFISecurityModule* m_pSecurityModule;
