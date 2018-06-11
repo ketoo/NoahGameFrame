@@ -16,9 +16,7 @@ bool NFCTileModule::Init()
 	m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>();
 	m_pLogicClassModule = pPluginManager->FindModule<NFIClassModule>();
 	m_pElementModule = pPluginManager->FindModule<NFIElementModule>();
-	m_pGuildRedisModule = pPluginManager->FindModule<NFIGuildRedisModule>();
 	m_pGameServerNet_ServerModule = pPluginManager->FindModule<NFIGameServerNet_ServerModule>();
-	m_pPlayerRedisModule = pPluginManager->FindModule<NFIPlayerRedisModule>();
 	m_pSceneAOIModule = pPluginManager->FindModule<NFISceneAOIModule>();
 	
     return true;
@@ -342,7 +340,7 @@ bool NFCTileModule::SaveTileData(const NFGUID & self)
 	if (GetOnlinePlayerTileData(self, strData))
 	{
 		const int nSceneID = m_pKernelModule->GetPropertyInt32(self, NFrame::Player::HomeSceneID());
-		return m_pPlayerRedisModule->SavePlayerTile(nSceneID, self, strData);
+		//return m_pPlayerRedisModule->SavePlayerTile(nSceneID, self, strData);
 	}
 
 	return false;
@@ -353,6 +351,7 @@ bool NFCTileModule::LoadTileData(const NFGUID & self, const int nSceneID)
 	mxTileData.RemoveElement(self);
 
 	std::string strData;
+	/*
 	if (m_pPlayerRedisModule->LoadPlayerTile(nSceneID, self, strData))
 	{
 		NFMsg::AckMiningTitle xData;
@@ -379,6 +378,7 @@ bool NFCTileModule::LoadTileData(const NFGUID & self, const int nSceneID)
 			return true;
 		}
 	}
+	*/
 	return false;
 }
 

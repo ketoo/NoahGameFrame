@@ -16,7 +16,7 @@ start "NFLoginServer" "NFPluginLoader_d.exe" "Server=LoginServer" "ID=4" "Plugin
 choice /t 5 /d y /n >nul
 
 echo Starting NFDBServer...
-start "NFDBServer" "NFPluginLoader_d.exe" "Server=DBServer" "ID=8"
+start "NFDBServer" "NFPluginLoader_d.exe" "Server=DBServer" "ID=8" "PluginX.xml"
 
 
 choice /t 2 /d y /n >nul

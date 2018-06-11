@@ -70,7 +70,6 @@ private:
 	std::map<NFGUID, NFMsg::RoleDataPack> mxObjectDataCache;
 
 private:
-	NFIPVPModule* m_pPVPModule;
 	NFINetModule* m_pNetModule;
 	NFIClassModule* m_pClassModule;
 	NFIElementModule* m_pElementModule;
