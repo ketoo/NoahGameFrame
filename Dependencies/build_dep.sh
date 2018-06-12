@@ -52,11 +52,35 @@ cp -r -f ./Lib/*.a ../lib/Release/
 make clean
 cd ../
 
+# compiling lua
+echo Building lua...
+cd lua
+
+sysOS=`uname -s`
+if [ $sysOS == "Darwin" ];then
+    echo "I'm MacOS"
+    make macosx
+    export DYLD_LIBRARY_PATH=.:$DYLD_LIBRARY_PATH
+elif [ $sysOS == "Linux" ];then
+    export LD_LIBRARY_PATH=.:$LD_LIBRARY_PATH
+    make linux
+else
+    echo "Other OS: $sysOS"
+fi
+
+cp -r -f ./*.a ../lib/Debug/
+cp -r -f ./*.a ../lib/Release/
+
+cd ../
+echo Building lua finish...
+
 # compiling hiredis
 echo Building hiredis...
 chmod 777 build_hiredis.sh
 ./build_hiredis.sh
 echo Building hiredis finish...
+
+
 
 
 # TODO: other libs

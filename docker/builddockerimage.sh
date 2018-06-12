@@ -1,11 +1,11 @@
 export DOCKER_ID_USER="jameshuang4nz"
-export DOCKER_ID_PWD="*********"
+export DOCKER_ID_PWD="1234567a"
 export REPOS_NAME="noahframe"
 
 #1 pull the Dockerfile from github
 
 rm -rf NoahGameFrame
-git clone https://github.com/ketoo/NoahGameFrame.git
+git clone -b develop https://github.com/ketoo/NoahGameFrame.git
 
 #2 building the Dockerfile to build a docker image with the app's binary file
 
