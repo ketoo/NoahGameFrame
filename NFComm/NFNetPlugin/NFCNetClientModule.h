@@ -16,6 +16,7 @@
 #include "NFComm/NFMessageDefine/NFDefine.pb.h"
 #include "NFComm/NFPluginModule/NFINetClientModule.h"
 #include "NFComm/NFPluginModule/NFINetModule.h"
+#include "NFComm/NFPluginModule/NFILogModule.h"
 #include "NFComm/NFPluginModule/NFIPluginManager.h"
 
 class NFCNetClientModule : public NFINetClientModule
@@ -100,12 +101,6 @@ protected:
 
     void ProcessExecute();
 
-    void KeepReport(NF_SHARE_PTR<ConnectData> pServerData)
-    {};
-
-    void LogServerInfo(const std::string& strServerInfo)
-    {};
-
 private:
     void LogServerInfo();
 
@@ -120,6 +115,7 @@ private:
     void ProcessAddNetConnect();
 
 private:
+	int mnLastActionTime;
     int mnBufferSize;
     //server_id, server_data
     NFConsistentHashMapEx<int, ConnectData> mxServerMap;
@@ -138,6 +134,8 @@ private:
     };
 
     NFMapEx<int, CallBack> mxCallBack;
+
+	NFILogModule* m_pLogModule;
 };
 
 #endif

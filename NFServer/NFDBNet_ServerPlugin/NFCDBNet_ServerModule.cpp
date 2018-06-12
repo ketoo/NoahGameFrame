@@ -20,6 +20,7 @@ bool NFCDBNet_ServerModule::Init()
 	m_pClassModule = pPluginManager->FindModule<NFIClassModule>();
 	m_pNetClientModule = pPluginManager->FindModule<NFINetClientModule>();
 	m_pAccountRedisModule = pPluginManager->FindModule<NFIAccountRedisModule>();
+	m_pPlayerRedisModule = pPluginManager->FindModule<NFIPlayerRedisModule>();
 	
     return true;
 }
@@ -100,7 +101,7 @@ void NFCDBNet_ServerModule::OnSocketEvent(const NFSOCK nSockIndex, const NF_NET_
     }
     else  if (eEvent == NF_NET_EVENT_CONNECTED)
     {
-        m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFGUID(0, nSockIndex), "NF_NET_EVENT_CONNECTED", "connectioned success", __FUNCTION__, __LINE__);
+        m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFGUID(0, nSockIndex), "NF_NET_EVENT_CONNECTED", "connected success", __FUNCTION__, __LINE__);
         OnClientConnected(nSockIndex);
     }
 }
