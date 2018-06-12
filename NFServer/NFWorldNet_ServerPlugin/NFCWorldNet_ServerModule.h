@@ -87,6 +87,9 @@ protected:
 	void SynWorldToGame();
 	void SynWorldToGame(const NFSOCK nFD);
 
+	void SynWorldToDB();
+	void SynWorldToDB(const NFSOCK nFD);
+
 	void SynDBToGame();
 	void SynDBToGame(const NFSOCK nFD);
 
