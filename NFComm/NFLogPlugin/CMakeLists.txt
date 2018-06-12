@@ -8,6 +8,7 @@ add_library(NFLogPlugin SHARED
 
 if(UNIX)
 	add_dependencies(NFLogPlugin NFCore)
+
 	if (CMAKE_BUILD_TYPE MATCHES "Release")
 		target_link_libraries(NFLogPlugin )
 	else()
