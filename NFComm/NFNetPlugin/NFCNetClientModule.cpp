@@ -15,6 +15,8 @@ NFCNetClientModule::NFCNetClientModule(NFIPluginManager* p)
 {
     mnBufferSize = 0;
     pPluginManager = p;
+
+	mnLastActionTime = GetPluginManager()->GetNowTime();
 }
 
 bool NFCNetClientModule::Init()
@@ -24,11 +26,15 @@ bool NFCNetClientModule::Init()
         NFINetClientModule::AddEventCallBack((NF_SERVER_TYPES) i, this, &NFCNetClientModule::OnSocketEvent);
     }
 
+	m_pLogModule = pPluginManager->FindModule<NFILogModule>();
+
     return true;
 }
 
 bool NFCNetClientModule::AfterInit()
 {
+
+
     return true;
 }
 
@@ -46,6 +52,15 @@ bool NFCNetClientModule::Execute()
 {
     ProcessExecute();
     ProcessAddNetConnect();
+
+	if (mnLastActionTime + 10 > GetPluginManager()->GetNowTime())
+	{
+		return true;
+	}
+
+	mnLastActionTime = GetPluginManager()->GetNowTime();
+
+	LogServerInfo();
 
     return true;
 }
@@ -311,6 +326,12 @@ NF_SHARE_PTR<ConnectData> NFCNetClientModule::GetServerNetInfo(const NFINet* pNe
 
 void NFCNetClientModule::InitCallBacks(NF_SHARE_PTR<ConnectData> pServerData)
 {
+	std::ostringstream stream;
+	stream << "AddServer Type: " << pServerData->eServerType << " Server ID: " << pServerData->nGameID << " State: "
+		<< pServerData->eState << " IP: " << pServerData->strIP << " Port: " << pServerData->nPort;
+
+	m_pLogModule->LogInfo(stream.str());
+
     NF_SHARE_PTR<CallBack> xCallBack = mxCallBack.GetElement(pServerData->eServerType);
     if (!xCallBack)
     {
@@ -406,21 +427,21 @@ void NFCNetClientModule::ProcessExecute()
 
 void NFCNetClientModule::LogServerInfo()
 {
-    LogServerInfo("This is a client, begin to print Server Info----------------------------------");
+	m_pLogModule->LogInfo("This is a client, begin to print Server Info----------------------------------");
 
     ConnectData* pServerData = mxServerMap.FirstNude();
     while (nullptr != pServerData)
     {
         std::ostringstream stream;
-        stream << "Type: " << pServerData->eServerType << " ProxyServer ID: " << pServerData->nGameID << " State: "
+        stream << "Type: " << pServerData->eServerType << " Server ID: " << pServerData->nGameID << " State: "
                << pServerData->eState << " IP: " << pServerData->strIP << " Port: " << pServerData->nPort;
 
-        LogServerInfo(stream.str());
+		m_pLogModule->LogInfo(stream.str());
 
         pServerData = mxServerMap.NextNude();
     }
 
-    LogServerInfo("This is a client, end to print Server Info----------------------------------");
+	m_pLogModule->LogInfo("This is a client, end to print Server Info----------------------------------");
 }
 
 void NFCNetClientModule::KeepState(NF_SHARE_PTR<ConnectData> pServerData)
@@ -432,8 +453,7 @@ void NFCNetClientModule::KeepState(NF_SHARE_PTR<ConnectData> pServerData)
 
     pServerData->mnLastActionTime = GetPluginManager()->GetNowTime();
 
-    KeepReport(pServerData);
-    LogServerInfo();
+	//send message
 }
 
 void NFCNetClientModule::OnSocketEvent(const NFSOCK fd, const NF_NET_EVENT eEvent, NFINet* pNet)
