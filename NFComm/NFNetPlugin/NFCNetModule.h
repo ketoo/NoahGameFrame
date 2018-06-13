@@ -14,6 +14,7 @@
 #include "NFCNet.h"
 #include "NFComm/NFCore/NFQueue.hpp"
 #include "NFComm/NFPluginModule/NFINetModule.h"
+#include "NFComm/NFPluginModule/NFILogModule.h"
 #include "NFComm/NFPluginModule/NFIPluginManager.h"
 #include "NFComm/NFMessageDefine/NFMsgDefine.h"
 
@@ -27,13 +28,15 @@
 #pragma warning(default: 4244 4267)
 #endif
 
-class NFCNetModule
-        : public NFINetModule
+class NFCNetModule: public NFINetModule
 {
 public:
     NFCNetModule(NFIPluginManager* p);
 
     virtual ~NFCNetModule();
+
+	virtual bool Init();
+	virtual bool AfterInit();
 
     //as client
     virtual void Initialization(const char* strIP, const unsigned short nPort);
@@ -86,6 +89,8 @@ private:
 	std::map<int, std::list<NET_RECEIVE_FUNCTOR_PTR>> mxReceiveCallBack;
     std::list<NET_EVENT_FUNCTOR_PTR> mxEventCallBackList;
     std::list<NET_RECEIVE_FUNCTOR_PTR> mxCallBackList;
+
+	NFILogModule* m_pLogModule;
 };
 
 #endif
