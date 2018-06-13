@@ -352,7 +352,7 @@ const bool NFCNoSqlModule::HSet(const std::string &strKey, const std::string &st
 			YieldCo();
 		}
 
-		return xNoSqlDriver->HSet(strKey, strValue, strValue);
+		return xNoSqlDriver->HSet(strKey, strField, strValue);
 	}
 
 	return false;
@@ -368,7 +368,7 @@ const bool NFCNoSqlModule::HGet(const std::string &strKey, const std::string &st
 			YieldCo();
 		}
 
-		return xNoSqlDriver->HGet(strKey, strValue, strValue);
+		return xNoSqlDriver->HGet(strKey, strField, strValue);
 	}
 
 	return false;
