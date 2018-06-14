@@ -36,7 +36,7 @@ public:
 
 	virtual bool AfterInit();
 
-	virtual int VerifyAccount(const std::string& strAccount, const std::string& strPwd);
+	virtual bool VerifyAccount(const std::string& strAccount, const std::string& strPwd);
 	virtual bool AddAccount(const std::string& strAccount, const std::string& strPwd);
 	virtual bool ExistAccount(const std::string& strAccount);
 

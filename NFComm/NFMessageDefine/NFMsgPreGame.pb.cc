@@ -84,6 +84,7 @@ const ::google::protobuf::Descriptor* RoleOfflineNotify_descriptor_ = NULL;
 const ::google::protobuf::internal::GeneratedMessageReflection*
   RoleOfflineNotify_reflection_ = NULL;
 const ::google::protobuf::EnumDescriptor* EServerState_descriptor_ = NULL;
+const ::google::protobuf::EnumDescriptor* ELoginMode_descriptor_ = NULL;
 const ::google::protobuf::EnumDescriptor* ReqServerListType_descriptor_ = NULL;
 
 }  // namespace
@@ -472,7 +473,8 @@ void protobuf_AssignDesc_NFMsgPreGame_2eproto() {
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(RoleOfflineNotify));
   EServerState_descriptor_ = file->enum_type(0);
-  ReqServerListType_descriptor_ = file->enum_type(1);
+  ELoginMode_descriptor_ = file->enum_type(1);
+  ReqServerListType_descriptor_ = file->enum_type(2);
 }
 
 namespace {
@@ -597,55 +599,57 @@ void protobuf_AddDesc_NFMsgPreGame_2eproto() {
     "tResult\022)\n\nevent_code\030\001 \002(\0162\025.NFMsg.EGam"
     "eEventCode\022\"\n\014event_object\030\002 \001(\0132\014.NFMsg"
     ".Ident\022\"\n\014event_client\030\003 \001(\0132\014.NFMsg.Ide"
-    "nt\"\354\001\n\017ReqAccountLogin\022\017\n\007account\030\002 \002(\014\022"
+    "nt\"\377\001\n\017ReqAccountLogin\022\017\n\007account\030\002 \002(\014\022"
     "\020\n\010password\030\003 \002(\014\022\025\n\rsecurity_code\030\004 \002(\014"
     "\022\020\n\010signBuff\030\005 \002(\014\022\025\n\rclientVersion\030\006 \002("
-    "\005\022\021\n\tloginMode\030\007 \002(\005\022\020\n\010clientIP\030\010 \002(\005\022\021"
-    "\n\tclientMAC\030\t \002(\003\022\023\n\013device_info\030\n \002(\014\022\022"
-    "\n\nextra_info\030\013 \002(\014\022\025\n\rplatform_type\030\014 \001("
-    "\005\"7\n\020ReqAccountLogout\022\017\n\007account\030\002 \002(\014\022\022"
-    "\n\nextra_info\030\003 \002(\014\"f\n\nServerInfo\022\021\n\tserv"
-    "er_id\030\001 \002(\005\022\014\n\004name\030\002 \002(\014\022\022\n\nwait_count\030"
-    "\003 \002(\005\022#\n\006status\030\004 \002(\0162\023.NFMsg.EServerSta"
-    "te\"7\n\rReqServerList\022&\n\004type\030\001 \002(\0162\030.NFMs"
-    "g.ReqServerListType\"X\n\rAckServerList\022&\n\004"
-    "type\030\001 \002(\0162\030.NFMsg.ReqServerListType\022\037\n\004"
-    "info\030\002 \003(\0132\021.NFMsg.ServerInfo\"d\n\017ReqConn"
-    "ectWorld\022\020\n\010world_id\030\001 \002(\005\022\017\n\007account\030\002 "
-    "\001(\014\022\034\n\006sender\030\003 \001(\0132\014.NFMsg.Ident\022\020\n\010log"
-    "in_id\030\004 \001(\005\"\243\001\n\025AckConnectWorldResult\022\020\n"
-    "\010world_id\030\001 \002(\005\022\034\n\006sender\030\002 \002(\0132\014.NFMsg."
-    "Ident\022\020\n\010login_id\030\003 \002(\005\022\017\n\007account\030\004 \002(\014"
-    "\022\020\n\010world_ip\030\005 \002(\014\022\022\n\nworld_port\030\006 \002(\005\022\021"
-    "\n\tworld_key\030\007 \002(\014\"#\n\017ReqSelectServer\022\020\n\010"
-    "world_id\030\001 \002(\005\"5\n\020ReqKickFromWorld\022\020\n\010wo"
-    "rld_id\030\001 \002(\005\022\017\n\007account\030\002 \002(\014\"/\n\013ReqRole"
-    "List\022\017\n\007game_id\030\001 \002(\005\022\017\n\007account\030\002 \002(\014\"\373"
-    "\001\n\014RoleLiteInfo\022\030\n\002id\030\001 \002(\0132\014.NFMsg.Iden"
-    "t\022\016\n\006career\030\002 \002(\005\022\013\n\003sex\030\003 \002(\005\022\014\n\004race\030\004"
-    " \002(\005\022\021\n\tnoob_name\030\005 \002(\014\022\017\n\007game_id\030\006 \002(\005"
-    "\022\022\n\nrole_level\030\007 \002(\005\022\023\n\013delete_time\030\010 \002("
-    "\005\022\020\n\010reg_time\030\t \002(\005\022\031\n\021last_offline_time"
-    "\030\n \002(\005\022\027\n\017last_offline_ip\030\013 \002(\005\022\023\n\013view_"
-    "record\030\014 \002(\014\"=\n\023AckRoleLiteInfoList\022&\n\tc"
-    "har_data\030\001 \003(\0132\023.NFMsg.RoleLiteInfo\"o\n\rR"
-    "eqCreateRole\022\017\n\007account\030\001 \002(\014\022\016\n\006career\030"
-    "\002 \002(\005\022\013\n\003sex\030\003 \002(\005\022\014\n\004race\030\004 \002(\005\022\021\n\tnoob"
-    "_name\030\005 \002(\014\022\017\n\007game_id\030\006 \002(\005\"\?\n\rReqDelet"
-    "eRole\022\017\n\007account\030\001 \002(\014\022\014\n\004name\030\002 \002(\014\022\017\n\007"
-    "game_id\030\003 \002(\005\"@\n\016ReqRecoverRole\022\017\n\007accou"
-    "nt\030\001 \002(\014\022\014\n\004name\030\002 \002(\014\022\017\n\007game_id\030\003 \002(\005\""
-    " \n\017ServerHeartBeat\022\r\n\005count\030\001 \001(\005\"h\n\020Rol"
-    "eOnlineNotify\022\032\n\004self\030\001 \002(\0132\014.NFMsg.Iden"
-    "t\022\033\n\005guild\030\002 \002(\0132\014.NFMsg.Ident\022\014\n\004game\030\003"
-    " \002(\005\022\r\n\005proxy\030\004 \002(\005\"i\n\021RoleOfflineNotify"
-    "\022\032\n\004self\030\001 \002(\0132\014.NFMsg.Ident\022\033\n\005guild\030\002 "
-    "\002(\0132\014.NFMsg.Ident\022\014\n\004game\030\003 \002(\005\022\r\n\005proxy"
-    "\030\004 \002(\005*Z\n\014EServerState\022\r\n\tEST_CRASH\020\000\022\016\n"
-    "\nEST_NARMAL\020\001\022\014\n\010EST_BUSY\020\002\022\014\n\010EST_FIRE\020"
-    "\003\022\017\n\013EST_MAINTEN\020\004*@\n\021ReqServerListType\022"
-    "\025\n\021RSLT_WORLD_SERVER\020\000\022\024\n\020RSLT_GAMES_ERV"
-    "ER\020\001", 2404);
+    "\005\022$\n\tloginMode\030\007 \002(\0162\021.NFMsg.ELoginMode\022"
+    "\020\n\010clientIP\030\010 \002(\005\022\021\n\tclientMAC\030\t \002(\003\022\023\n\013"
+    "device_info\030\n \002(\014\022\022\n\nextra_info\030\013 \002(\014\022\025\n"
+    "\rplatform_type\030\014 \001(\005\"7\n\020ReqAccountLogout"
+    "\022\017\n\007account\030\002 \002(\014\022\022\n\nextra_info\030\003 \002(\014\"f\n"
+    "\nServerInfo\022\021\n\tserver_id\030\001 \002(\005\022\014\n\004name\030\002"
+    " \002(\014\022\022\n\nwait_count\030\003 \002(\005\022#\n\006status\030\004 \002(\016"
+    "2\023.NFMsg.EServerState\"7\n\rReqServerList\022&"
+    "\n\004type\030\001 \002(\0162\030.NFMsg.ReqServerListType\"X"
+    "\n\rAckServerList\022&\n\004type\030\001 \002(\0162\030.NFMsg.Re"
+    "qServerListType\022\037\n\004info\030\002 \003(\0132\021.NFMsg.Se"
+    "rverInfo\"d\n\017ReqConnectWorld\022\020\n\010world_id\030"
+    "\001 \002(\005\022\017\n\007account\030\002 \001(\014\022\034\n\006sender\030\003 \001(\0132\014"
+    ".NFMsg.Ident\022\020\n\010login_id\030\004 \001(\005\"\243\001\n\025AckCo"
+    "nnectWorldResult\022\020\n\010world_id\030\001 \002(\005\022\034\n\006se"
+    "nder\030\002 \002(\0132\014.NFMsg.Ident\022\020\n\010login_id\030\003 \002"
+    "(\005\022\017\n\007account\030\004 \002(\014\022\020\n\010world_ip\030\005 \002(\014\022\022\n"
+    "\nworld_port\030\006 \002(\005\022\021\n\tworld_key\030\007 \002(\014\"#\n\017"
+    "ReqSelectServer\022\020\n\010world_id\030\001 \002(\005\"5\n\020Req"
+    "KickFromWorld\022\020\n\010world_id\030\001 \002(\005\022\017\n\007accou"
+    "nt\030\002 \002(\014\"/\n\013ReqRoleList\022\017\n\007game_id\030\001 \002(\005"
+    "\022\017\n\007account\030\002 \002(\014\"\373\001\n\014RoleLiteInfo\022\030\n\002id"
+    "\030\001 \002(\0132\014.NFMsg.Ident\022\016\n\006career\030\002 \002(\005\022\013\n\003"
+    "sex\030\003 \002(\005\022\014\n\004race\030\004 \002(\005\022\021\n\tnoob_name\030\005 \002"
+    "(\014\022\017\n\007game_id\030\006 \002(\005\022\022\n\nrole_level\030\007 \002(\005\022"
+    "\023\n\013delete_time\030\010 \002(\005\022\020\n\010reg_time\030\t \002(\005\022\031"
+    "\n\021last_offline_time\030\n \002(\005\022\027\n\017last_offlin"
+    "e_ip\030\013 \002(\005\022\023\n\013view_record\030\014 \002(\014\"=\n\023AckRo"
+    "leLiteInfoList\022&\n\tchar_data\030\001 \003(\0132\023.NFMs"
+    "g.RoleLiteInfo\"o\n\rReqCreateRole\022\017\n\007accou"
+    "nt\030\001 \002(\014\022\016\n\006career\030\002 \002(\005\022\013\n\003sex\030\003 \002(\005\022\014\n"
+    "\004race\030\004 \002(\005\022\021\n\tnoob_name\030\005 \002(\014\022\017\n\007game_i"
+    "d\030\006 \002(\005\"\?\n\rReqDeleteRole\022\017\n\007account\030\001 \002("
+    "\014\022\014\n\004name\030\002 \002(\014\022\017\n\007game_id\030\003 \002(\005\"@\n\016ReqR"
+    "ecoverRole\022\017\n\007account\030\001 \002(\014\022\014\n\004name\030\002 \002("
+    "\014\022\017\n\007game_id\030\003 \002(\005\" \n\017ServerHeartBeat\022\r\n"
+    "\005count\030\001 \001(\005\"h\n\020RoleOnlineNotify\022\032\n\004self"
+    "\030\001 \002(\0132\014.NFMsg.Ident\022\033\n\005guild\030\002 \002(\0132\014.NF"
+    "Msg.Ident\022\014\n\004game\030\003 \002(\005\022\r\n\005proxy\030\004 \002(\005\"i"
+    "\n\021RoleOfflineNotify\022\032\n\004self\030\001 \002(\0132\014.NFMs"
+    "g.Ident\022\033\n\005guild\030\002 \002(\0132\014.NFMsg.Ident\022\014\n\004"
+    "game\030\003 \002(\005\022\r\n\005proxy\030\004 \002(\005*Z\n\014EServerStat"
+    "e\022\r\n\tEST_CRASH\020\000\022\016\n\nEST_NARMAL\020\001\022\014\n\010EST_"
+    "BUSY\020\002\022\014\n\010EST_FIRE\020\003\022\017\n\013EST_MAINTEN\020\004*J\n"
+    "\nELoginMode\022\r\n\tELM_LOGIN\020\000\022\020\n\014ELM_REGIST"
+    "ER\020\001\022\033\n\027ELM_AUTO_REGISTER_LOGIN\020\002*@\n\021Req"
+    "ServerListType\022\025\n\021RSLT_WORLD_SERVER\020\000\022\024\n"
+    "\020RSLT_GAMES_ERVER\020\001", 2499);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "NFMsgPreGame.proto", &protobuf_RegisterTypes);
   ServerInfoReport::default_instance_ = new ServerInfoReport();
@@ -710,6 +714,21 @@ bool EServerState_IsValid(int value) {
     case 2:
     case 3:
     case 4:
+      return true;
+    default:
+      return false;
+  }
+}
+
+const ::google::protobuf::EnumDescriptor* ELoginMode_descriptor() {
+  protobuf_AssignDescriptorsOnce();
+  return ELoginMode_descriptor_;
+}
+bool ELoginMode_IsValid(int value) {
+  switch(value) {
+    case 0:
+    case 1:
+    case 2:
       return true;
     default:
       return false;
@@ -1974,15 +1993,20 @@ bool ReqAccountLogin::MergePartialFromCodedStream(
         break;
       }
 
-      // required int32 loginMode = 7;
+      // required .NFMsg.ELoginMode loginMode = 7;
       case 7: {
         if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
             ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
          parse_loginMode:
+          int value;
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
-                 input, &loginmode_)));
-          set_has_loginmode();
+                   int, ::google::protobuf::internal::WireFormatLite::TYPE_ENUM>(
+                 input, &value)));
+          if (::NFMsg::ELoginMode_IsValid(value)) {
+            set_loginmode(static_cast< ::NFMsg::ELoginMode >(value));
+          } else {
+            mutable_unknown_fields()->AddVarint(7, value);
+          }
         } else {
           goto handle_uninterpreted;
         }
@@ -2113,9 +2137,10 @@ void ReqAccountLogin::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormatLite::WriteInt32(6, this->clientversion(), output);
   }
 
-  // required int32 loginMode = 7;
+  // required .NFMsg.ELoginMode loginMode = 7;
   if (has_loginmode()) {
-    ::google::protobuf::internal::WireFormatLite::WriteInt32(7, this->loginmode(), output);
+    ::google::protobuf::internal::WireFormatLite::WriteEnum(
+      7, this->loginmode(), output);
   }
 
   // required int32 clientIP = 8;
@@ -2186,9 +2211,10 @@ void ReqAccountLogin::SerializeWithCachedSizes(
     target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(6, this->clientversion(), target);
   }
 
-  // required int32 loginMode = 7;
+  // required .NFMsg.ELoginMode loginMode = 7;
   if (has_loginmode()) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(7, this->loginmode(), target);
+    target = ::google::protobuf::internal::WireFormatLite::WriteEnumToArray(
+      7, this->loginmode(), target);
   }
 
   // required int32 clientIP = 8;
@@ -2266,11 +2292,10 @@ int ReqAccountLogin::ByteSize() const {
           this->clientversion());
     }
 
-    // required int32 loginMode = 7;
+    // required .NFMsg.ELoginMode loginMode = 7;
     if (has_loginmode()) {
       total_size += 1 +
-        ::google::protobuf::internal::WireFormatLite::Int32Size(
-          this->loginmode());
+        ::google::protobuf::internal::WireFormatLite::EnumSize(this->loginmode());
     }
 
     // required int32 clientIP = 8;
