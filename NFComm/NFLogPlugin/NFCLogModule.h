@@ -17,6 +17,7 @@ class NFCLogModule
 public:
 
     NFCLogModule(NFIPluginManager* p);
+    virtual string getLogConfigFileName(std::string aName);
     virtual ~NFCLogModule() {}
 
 	virtual bool Awake();
@@ -74,7 +75,7 @@ protected:
 
     static bool CheckLogFileExist(const char* filename);
     static void rolloutHandler(const char* filename, std::size_t size);
-
+    virtual void copyConfFile(const char *filename);
 private:
     static unsigned int idx;
     uint64_t mnLogCountTotal;

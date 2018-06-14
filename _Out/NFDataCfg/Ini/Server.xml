@@ -9,5 +9,5 @@
 	<Object Id="ProxyServer_2" Area="2" CpuCount="1" IP="127.0.0.1" MaxOnline="5000" Name="ProxyServer" Port="15002" ServerID="51" Type="5" />
 	<Object Id="TutorialServer_1" Area="1" CpuCount="1" IP="127.0.0.1" MaxOnline="5000" Name="TutorialServer" Port="14001" ServerID="0" Type="4" />
 	<Object Id="WorldServer_1" Area="1" CpuCount="1" IP="127.0.0.1" MaxOnline="5000" Name="WorldServer" Port="17001" ServerID="7" Type="7" />
-	<Object Id="WorldServer_2" Area="2" CpuCount="1" IP="127.0.0.1" MaxOnline="5000" Name="WorldServer" Port="17002" ServerID="71" Type="7" />
+	<Object Id="WorldServer_2" Area="2" CpuCount="1" IP="127.0.0.1" MaxOnline="5000" Name="WorldServer22" Port="17002" ServerID="71" Type="7" />
 </XML>

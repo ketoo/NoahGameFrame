@@ -38,8 +38,8 @@ bool NFCUILogin::initLayout()
 		
 	//g_pNetLogic->ConnectServer("104.160.35.67", 14001);
     //g_pNetLogic->ConnectServer("192.168.140.134", 14001);
-    //g_pNetLogic->ConnectServer("127.0.0.1", 14001);
-    g_pNetLogic->ConnectServer("54.168.104.154", 14001);
+    g_pNetLogic->ConnectServer("127.0.0.1", 14001);
+    //g_pNetLogic->ConnectServer("54.168.104.154", 14001);
     g_pLoginLogic->AddEventCallBack(E_LoginEvent_LoginSuccess, this, &NFCUILogin::OnLoginEvent);
 	return true;
 }

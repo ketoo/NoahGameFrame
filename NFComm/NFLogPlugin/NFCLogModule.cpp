@@ -41,11 +41,65 @@ void NFCLogModule::rolloutHandler(const char* filename, std::size_t size)
     }
 }
 
+void NFCLogModule::copyConfFile(const char *filename)
+{
+    std::fstream file;
+    std::ifstream fileMaster;
+    std::string filenamepathMaster,fnamePath;
+    fnamePath = getLogConfigFileName(filename);
+    file.open(fnamePath, std::ios::in);
+    if (!file.is_open()) {
+        
+        filenamepathMaster = getLogConfigFileName("MasterServer");
+        fileMaster.open(filenamepathMaster, std::ios::in);
+        fileMaster.seekg(0,std::ios::end);
+        int32_t size=fileMaster.tellg();
+        fileMaster.seekg(0,std::ios::beg);
+        char *buf;
+        buf = new char[size+1];
+        memset(buf, 0, size + 1);
+        fileMaster.read(buf, size);
+        std::string conf = buf;
+        delete []buf;
+        int32_t pos;
+        while (std::string::npos != (pos=conf.find("master_server")))
+        {
+            conf.replace(pos, 13, filename);
+        }
+        std::ofstream ofile;
+        ofile.open(fnamePath, ios::trunc);
+        ofile.write(conf.c_str(), conf.size());
+        ofile.close();
+        
+    }
+
+}
+
 NFCLogModule::NFCLogModule(NFIPluginManager* p)
 {
     pPluginManager = p;
 }
+string NFCLogModule::getLogConfigFileName(std::string aName)
+{
+    string strAppLogName = "";
 
+#if NF_PLATFORM == NF_PLATFORM_WIN
+#ifdef NF_DEBUG_MODE
+    strAppLogName = pPluginManager->GetConfigPath() + "NFDataCfg/Debug/logconfig/" + aName + "_win.conf";
+#else
+    strAppLogName = pPluginManager->GetConfigPath() + "NFDataCfg/Release/logconfig/" + strLogConfigName + "_win.conf";
+#endif
+
+#else
+#ifdef NF_DEBUG_MODE
+    strAppLogName = pPluginManager->GetConfigPath() + "NFDataCfg/Debug/logconfig/" + strLogConfigName + ".conf";
+#else
+    strAppLogName = pPluginManager->GetConfigPath() + "NFDataCfg/Release/logconfig/" + strLogConfigName + ".conf";
+#endif
+#endif
+    return strAppLogName;
+
+}
 bool NFCLogModule::Awake()
 {
 	mnLogCountTotal = 0;
@@ -58,22 +112,23 @@ bool NFCLogModule::Awake()
 	{
 		strLogConfigName = pPluginManager->GetAppName();
 	}
-
-	string strAppLogName = "";
-#if NF_PLATFORM == NF_PLATFORM_WIN
-#ifdef NF_DEBUG_MODE
-	strAppLogName = pPluginManager->GetConfigPath() + "NFDataCfg/Debug/logconfig/" + strLogConfigName + "_win.conf";
-#else
-	strAppLogName = pPluginManager->GetConfigPath() + "NFDataCfg/Release/logconfig/" + strLogConfigName + "_win.conf";
-#endif
-
-#else
-#ifdef NF_DEBUG_MODE
-	strAppLogName = pPluginManager->GetConfigPath() + "NFDataCfg/Debug/logconfig/" + strLogConfigName + ".conf";
-#else
-	strAppLogName = pPluginManager->GetConfigPath() + "NFDataCfg/Release/logconfig/" + strLogConfigName + ".conf";
-#endif
-#endif
+    copyConfFile(strLogConfigName.c_str());
+    string strAppLogName = "";
+    strAppLogName=getLogConfigFileName(strLogConfigName);
+//#if NF_PLATFORM == NF_PLATFORM_WIN
+//#ifdef NF_DEBUG_MODE
+//	strAppLogName = pPluginManager->GetConfigPath() + "NFDataCfg/Debug/logconfig/" + strLogConfigName + "_win.conf";
+//#else
+//	strAppLogName = pPluginManager->GetConfigPath() + "NFDataCfg/Release/logconfig/" + strLogConfigName + "_win.conf";
+//#endif
+//
+//#else
+//#ifdef NF_DEBUG_MODE
+//	strAppLogName = pPluginManager->GetConfigPath() + "NFDataCfg/Debug/logconfig/" + strLogConfigName + ".conf";
+//#else
+//	strAppLogName = pPluginManager->GetConfigPath() + "NFDataCfg/Release/logconfig/" + strLogConfigName + ".conf";
+//#endif
+//#endif
 
 	el::Configurations conf(strAppLogName);
 
