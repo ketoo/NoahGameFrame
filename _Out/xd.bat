@@ -26,7 +26,7 @@ start "NFProxyServer" "NFPluginLoader_d.exe" "Server=ProxyServer" "ID=5" "Plugin
 
 
 echo Starting NFWorldServer2...
-start "NFWorldServer2" "NFPluginLoader_d.exe" "Server=WorldServer" "ID=71" "PluginX_deltest.xml"
+start "NFWorldServer2" "NFPluginLoader_d.exe" "Server=WorldServer2" "ID=71" "PluginX_deltest.xml"
 
 
 echo Starting NFGameServer...

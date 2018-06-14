@@ -378,9 +378,9 @@ void NFCProxyServerNet_ServerModule::OnReqServerListProcess(const NFSOCK nSockIn
 
         NFMapEx<int, ConnectData>& xServerList = m_pNetClientModule->GetServerList();
         ConnectData* pGameData = xServerList.FirstNude();
-        while (pGameData && NF_SERVER_TYPES::NF_ST_GAME == pGameData->eServerType)
+        while (pGameData)
         {
-            if (ConnectDataState::NORMAL == pGameData->eState)
+            if ((ConnectDataState::NORMAL == pGameData->eState) && (NF_SERVER_TYPES::NF_ST_GAME == pGameData->eServerType))
             {
                 NFMsg::ServerInfo* pServerInfo = xData.add_info();
 

@@ -2,7 +2,7 @@
 <XML>
 	<Object Id="AIServer_1" Area="1" CpuCount="1" IP="127.0.0.1" MaxOnline="5000" Name="AIServer" Port="18001" ServerID="8" Type="8" />
 	<Object Id="GameServer_1" Area="1" CpuCount="1" IP="127.0.0.1" MaxOnline="5000" Name="GameServer" Port="16001" ServerID="6" Type="6" />
-	<Object Id="GameServer_2" Area="2" CpuCount="1" IP="127.0.0.1" MaxOnline="5000" Name="GameServer" Port="16002" ServerID="61" Type="6" />
+	<Object Id="GameServer_2" Area="1" CpuCount="1" IP="127.0.0.1" MaxOnline="5000" Name="GameServer222" Port="16002" ServerID="61" Type="6" />
 	<Object Id="LoginServer_1" Area="1" CpuCount="1" IP="127.0.0.1" MaxOnline="5000" Name="LoginServer" Port="14001" ServerID="4" Type="4" />
 	<Object Id="MasterServer_1" Area="1" CpuCount="1" IP="127.0.0.1" MaxOnline="5000" Name="MasterServer" Port="13001" ServerID="3" Type="3" />
 	<Object Id="ProxyServer_1" Area="1" CpuCount="1" IP="127.0.0.1" MaxOnline="5000" Name="ProxyServer" Port="15001" ServerID="5" Type="5" />
