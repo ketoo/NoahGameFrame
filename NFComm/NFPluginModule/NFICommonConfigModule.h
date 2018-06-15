@@ -1,8 +1,8 @@
 // -------------------------------------------------------------------------
-
-
-
-
+//    @FileName      :    NFCCommonConfigModule.h
+//    @Author           :    LvSheng.Huang
+//    @Date             :    2013-07-05
+//    @Module           :    NFCCommonConfigModule
 //
 // -------------------------------------------------------------------------
 
@@ -17,13 +17,19 @@ class NFICommonConfigModule
     : public NFIModule
 {
 public:
+	virtual bool LoadConfig(const std::string& strFile) = 0;
     virtual bool ClearConfig() = 0;
-    virtual const int GetAttributeInt(const std::string& strStructName, const std::string& strStructItemName, const std::string& strAttribute) = 0;
-    virtual const int GetAttributeInt(const std::string& strStructName, const std::string& strSDKAttribute) = 0;
-    virtual const std::string& GetAttributeString(const std::string& strStructName, const std::string& strStructItemName, const std::string& strAttribute) = 0;
-    virtual const std::string& GetAttributeString(const std::string& strStructName, const std::string& strSDKAttribute) = 0;
-    virtual bool LoadConfig(const std::string& strFile) = 0;
-    virtual std::vector<std::string> GetStructItemList(const std::string& strStructName) = 0;
+
+	virtual const int GetFieldInt(const std::string& key1, const std::string& field) = 0;
+    virtual const int GetFieldInt(const std::string& key1, const std::string& key2, const std::string& field) = 0;
+
+	virtual const std::string& GetFieldString(const std::string& key1, const std::string& field) = 0;
+    virtual const std::string& GetFieldString(const std::string& key1, const std::string& key2, const std::string& field) = 0;
+
+	virtual std::vector<std::string> GetFieldList(const std::string& key1) = 0;
+	virtual std::vector<std::string> GetSubKeyList(const std::string& key1) = 0;
+
+	virtual std::vector<std::string> GetFieldList(const std::string& key1, const std::string& key2) = 0;
 };
 
 #endif
