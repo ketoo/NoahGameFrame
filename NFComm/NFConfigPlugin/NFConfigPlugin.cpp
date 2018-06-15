@@ -9,6 +9,7 @@
 #include "NFConfigPlugin.h"
 #include "NFCClassModule.h"
 #include "NFCElementModule.h"
+#include "NFCCommonConfigModule.h"
 
 #ifdef NF_DYNAMIC_PLUGIN
 
@@ -44,10 +45,13 @@ void NFConfigPlugin::Install()
 {
     REGISTER_MODULE(pPluginManager, NFIClassModule, NFCClassModule)
     REGISTER_MODULE(pPluginManager, NFIElementModule, NFCElementModule)
+	REGISTER_MODULE(pPluginManager, NFICommonConfigModule, NFCCommonConfigModule);
+
 }
 
 void NFConfigPlugin::Uninstall()
 {
     UNREGISTER_MODULE(pPluginManager, NFIElementModule, NFCElementModule)
     UNREGISTER_MODULE(pPluginManager, NFIClassModule, NFCClassModule)
+	UNREGISTER_MODULE(pPluginManager, NFICommonConfigModule, NFCCommonConfigModule);
 }
