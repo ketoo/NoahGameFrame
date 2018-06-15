@@ -38,7 +38,8 @@ bool NFCSecurityModule::AfterInit()
 
 const std::string & NFCSecurityModule::GetSecurityKey(const std::string & strAcount)
 {
-	return strAcount;
+    secKey = "strAcount_todo_token";
+	return secKey;
 }
 
 bool NFCSecurityModule::VirifySecurityKey(const std::string & strAcount, const std::string & strSucrityKey)

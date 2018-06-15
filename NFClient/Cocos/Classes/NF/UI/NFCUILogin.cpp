@@ -31,14 +31,16 @@ bool NFCUILogin::initLayout()
 	GetObjectByName(&m_pUserName, "name_TextField");
 	GetObjectByName(&m_pUserPWD, "password_TextField");
 
-	m_pUserName->setString("test1");
+	m_pUserName->setString("test31");
 	m_pUserPWD->setString("123456");
 
 	m_pLoginButton->addClickEventListener(CC_CALLBACK_1(NFCUILogin::onLoginTouch, this));
 		
-	g_pNetLogic->ConnectServer("104.160.35.67", 14001);
-	//g_pNetLogic->ConnectServer("127.0.0.1", 14001);
-	g_pLoginLogic->AddEventCallBack(E_LoginEvent_LoginSuccess, this, &NFCUILogin::OnLoginEvent);
+	//g_pNetLogic->ConnectServer("104.160.35.67", 14001);
+    //g_pNetLogic->ConnectServer("192.168.140.134", 14001);
+    g_pNetLogic->ConnectServer("127.0.0.1", 14001);
+    //g_pNetLogic->ConnectServer("54.168.104.154", 14001);
+    g_pLoginLogic->AddEventCallBack(E_LoginEvent_LoginSuccess, this, &NFCUILogin::OnLoginEvent);
 	return true;
 }
 

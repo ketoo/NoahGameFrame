@@ -73,7 +73,7 @@ namespace NFrame
         public override void Init()
         {
 #if NF_CLIENT_FRAME
-            mxLogicClassModule.Init();
+            //mxLogicClassModule.Init();
             mxElementModule.Init();
             mxUploadModule.Init();
 #endif
@@ -310,8 +310,8 @@ namespace NFrame
                     }
                 }
 
-                InitProperty(self, strClassName);
-                InitRecord(self, strClassName);
+                //InitProperty(self, strClassName);
+                //InitRecord(self, strClassName);
 
 				ClassHandleDel xHandleDel = (ClassHandleDel)mhtClassHandleDel[strClassName];
                 if (null != xHandleDel && null != xHandleDel.GetHandler())

@@ -23,6 +23,7 @@ public:
 	virtual bool ExistRoleName(const std::string& strRoleName) = 0;
 	virtual bool CreateRole(const std::string& strAccount, const std::string& strRoleName, const NFGUID& id) = 0;
 	virtual bool GetRoleInfo(const std::string& strAccount, std::string& strRoleName, NFGUID& id) = 0;
+    virtual bool driverOk()=0;
 };
 
 #endif

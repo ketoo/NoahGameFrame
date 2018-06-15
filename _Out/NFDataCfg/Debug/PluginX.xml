@@ -29,7 +29,7 @@
 		<Plugin Name="NFNetPlugin" />
 		<Plugin Name="NFKernelPlugin" />
 		<Plugin Name="NFConfigPlugin" />	
-		<Plugin Name="NFLoginLogicPlugin" />
+		<Plugin Name="NFLoginLogicPlugin" />  
 		<Plugin Name="NFLoginNet_ServerPlugin" />
 		<Plugin Name="NFLoginNet_ClientPlugin" />
 		<Plugin Name="NFLogPlugin" />
@@ -39,6 +39,12 @@
 		<Plugin Name="NFNoSqlPlugin" />	
 	</LoginServer>
 
+	
+
+	
+	
+	
+	
 	<MasterServer>
 		<Plugin Name="NFNetPlugin" />
 		<Plugin Name="NFKernelPlugin" />
@@ -71,8 +77,10 @@
 		<Plugin Name="NFDataAgent_NosqlPlugin" />
 		<Plugin Name="NFActorPlugin" />
 		<Plugin Name="NFNoSqlPlugin" />
-		<Plugin Name="NFSecurityPlugin" />	
+		<Plugin Name="NFSecurityPlugin" />	 
 		<Plugin Name="NFGuildPlugin" />	
+		
+
 	</WorldServer>
 	
 </XML>
