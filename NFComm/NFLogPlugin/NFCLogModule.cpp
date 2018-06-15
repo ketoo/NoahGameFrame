@@ -55,6 +55,8 @@ void NFCLogModule::copyConfFile(const char *filename)
         fileMaster.seekg(0,std::ios::end);
         int32_t size=fileMaster.tellg();
         fileMaster.seekg(0,std::ios::beg);
+        if (size <= 0)
+            return;
         char *buf;
         buf = new char[size+1];
         memset(buf, 0, size + 1);
