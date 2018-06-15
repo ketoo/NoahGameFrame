@@ -123,7 +123,7 @@ bool NFCUserGiftModule::DoLevelAward(const NFGUID & self, const int nLevel)
 
 bool NFCUserGiftModule::DoInitProperty(const NFGUID & self)
 {
-	std::vector<std::string> xList = m_pCommonConfigModule->GetStructItemList(NFrame::Player::ThisName());
+	std::vector<std::string> xList = m_pCommonConfigModule->GetSubKeyList(NFrame::Player::ThisName());
 	for (int i = 0; i < xList.size(); ++i)
 	{
 		const std::string& strPropertyName = xList.at(i);
@@ -135,12 +135,12 @@ bool NFCUserGiftModule::DoInitProperty(const NFGUID & self)
 			{
 				if (xProperty->GetType() == NFDATA_TYPE::TDATA_STRING)
 				{
-					const std::string& strPropertyValue = m_pCommonConfigModule->GetAttributeString(NFrame::Player::ThisName(), strPropertyName);
+					const std::string& strPropertyValue = m_pCommonConfigModule->GetFieldString(NFrame::Player::ThisName(), strPropertyName);
 					m_pKernelModule->SetPropertyString(self, strPropertyName, strPropertyValue);
 				}
 				else if (xProperty->GetType() == NFDATA_TYPE::TDATA_INT)
 				{
-					const int nPropertyValue = m_pCommonConfigModule->GetAttributeInt(NFrame::Player::ThisName(), strPropertyName);
+					const int nPropertyValue = m_pCommonConfigModule->GetFieldInt(NFrame::Player::ThisName(), strPropertyName);
 					m_pKernelModule->SetPropertyInt(self, strPropertyName, nPropertyValue);
 				}
 			}

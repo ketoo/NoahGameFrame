@@ -41,7 +41,7 @@ bool NFCCommonConfigModule::ClearConfig()
 	return true;
 }
 
-const int NFCCommonConfigModule::GetAttributeInt(const std::string& strStructName, const std::string& strStructItemName, const std::string& strAttribute)
+const int NFCCommonConfigModule::GetFieldInt(const std::string& strStructName, const std::string& strStructItemName, const std::string& strAttribute)
 {
 	NF_SHARE_PTR<CStructInfo> pSDKInfo = mmData.GetElement(strStructName);
 	if (pSDKInfo)
@@ -56,7 +56,7 @@ const int NFCCommonConfigModule::GetAttributeInt(const std::string& strStructNam
 	return 0;
 }
 
-const std::string& NFCCommonConfigModule::GetAttributeString(const std::string& strStructName, const std::string& strStructItemName, const std::string& strAttribute)
+const std::string& NFCCommonConfigModule::GetFieldString(const std::string& strStructName, const std::string& strStructItemName, const std::string& strAttribute)
 {
 	NF_SHARE_PTR<CStructInfo> pSDKInfo = mmData.GetElement(strStructName);
 	if (pSDKInfo)
@@ -72,7 +72,7 @@ const std::string& NFCCommonConfigModule::GetAttributeString(const std::string& 
 }
 
 
-const int NFCCommonConfigModule::GetAttributeInt(const std::string& strStructName, const std::string& strSDKAttribute)
+const int NFCCommonConfigModule::GetFieldInt(const std::string& strStructName, const std::string& strSDKAttribute)
 {
 	NF_SHARE_PTR<CStructInfo> pSDKInfo = mmData.GetElement(strStructName);
 	if (pSDKInfo)
@@ -82,7 +82,7 @@ const int NFCCommonConfigModule::GetAttributeInt(const std::string& strStructNam
 
 	return 0;
 }
-const std::string& NFCCommonConfigModule::GetAttributeString(const std::string& strStructName,const std::string& strSDKAttribute)
+const std::string& NFCCommonConfigModule::GetFieldString(const std::string& strStructName,const std::string& strSDKAttribute)
 {
 	NF_SHARE_PTR<CStructInfo> pSDKInfo = mmData.GetElement(strStructName);
 	if (pSDKInfo)
@@ -178,7 +178,7 @@ bool NFCCommonConfigModule::LoadConfig(const std::string& strFile)
 	return true;
 }
 
-std::vector<std::string> NFCCommonConfigModule::GetStructItemList(const std::string&strStructName)
+std::vector<std::string> NFCCommonConfigModule::GetSubKeyList(const std::string&strStructName)
 {
 	std::vector<std::string> xList;
 	NF_SHARE_PTR<CStructInfo> pStructTypeData = mmData.GetElement(strStructName);
