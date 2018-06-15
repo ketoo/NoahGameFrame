@@ -325,13 +325,13 @@ bool NFCItemModule::ConsumeDataItemProperty(const NFGUID& self, const std::strin
 
 bool NFCItemModule::DoAwardPack(const NFGUID& self, const std::string& strAwardPack)
 {
-	std::vector<std::string> xList = m_pCommonConfigModule->GetStructItemList(strAwardPack);
+	std::vector<std::string> xList = m_pCommonConfigModule->GetSubKeyList(strAwardPack);
 
 	for (int i = 0; i < xList.size(); ++i)
 	{
 		const std::string& strItemID = xList[i];
-		const int nCount = m_pCommonConfigModule->GetAttributeInt(strAwardPack, strItemID, "Count");
-		const int nIsHero = m_pCommonConfigModule->GetAttributeInt(strAwardPack, strItemID, "IsHero");
+		const int nCount = m_pCommonConfigModule->GetFieldInt(strAwardPack, strItemID, "Count");
+		const int nIsHero = m_pCommonConfigModule->GetFieldInt(strAwardPack, strItemID, "IsHero");
 		if (m_pElementModule->ExistElement(strItemID))
 		{
 			if (nIsHero > 0)
