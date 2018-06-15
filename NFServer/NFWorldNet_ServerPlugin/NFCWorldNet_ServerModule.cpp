@@ -509,12 +509,12 @@ void NFCWorldNet_ServerModule::SynWorldToDB()
 {
 	NFMsg::ServerInfoReportList xData;
 
-	NF_SHARE_PTR<ServerData> pServerData = mWorldMap.First();
+	NF_SHARE_PTR<ServerData> pServerData = mDBMap.First();
 	while (pServerData)
 	{
 		SynWorldToDB(pServerData->nFD);
 
-		pServerData = mWorldMap.Next();
+		pServerData = mDBMap.Next();
 	}
 }
 
