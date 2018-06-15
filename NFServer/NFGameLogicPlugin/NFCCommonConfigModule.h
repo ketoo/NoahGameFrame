@@ -63,12 +63,12 @@ public:
     virtual bool AfterInit();
 
 	virtual bool ClearConfig();
-	virtual const int GetAttributeInt(const std::string& strStructName, const std::string& strStructItemName, const std::string& strAttribute);
-	virtual const int GetAttributeInt(const std::string& strStructName, const std::string& strSDKAttribute);
-	virtual const std::string& GetAttributeString(const std::string& strStructName, const std::string& strStructItemName, const std::string& strAttribute);
-	virtual const std::string& GetAttributeString(const std::string& strStructName,const std::string& strSDKAttribute);
+	virtual const int GetFieldInt(const std::string& strStructName, const std::string& strStructItemName, const std::string& strAttribute);
+	virtual const int GetFieldInt(const std::string& strStructName, const std::string& strSDKAttribute);
+	virtual const std::string& GetFieldString(const std::string& strStructName, const std::string& strStructItemName, const std::string& strAttribute);
+	virtual const std::string& GetFieldString(const std::string& strStructName,const std::string& strSDKAttribute);
 	virtual bool LoadConfig(const std::string& strFile);
-	virtual std::vector<std::string> GetStructItemList(const std::string&strStructName);
+	virtual std::vector<std::string> GetSubKeyList(const std::string&strStructName);
 
 private:
 	NFMapEx<std::string, CStructInfo> mmData; //strStructName<-->CStructInfo
