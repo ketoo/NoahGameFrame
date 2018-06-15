@@ -33,6 +33,19 @@ bool NFCAccountRedisModule::AfterInit()
 	return true;
 }
 
+
+bool NFCAccountRedisModule::driverOk()
+{
+    NF_SHARE_PTR<NFINoSqlDriver> xNoSqlDriver = m_pNoSqlModule->GetDriverBySuitConsistent();
+    if (xNoSqlDriver)
+    {
+        return true;
+    }
+
+    return false;
+
+}
+
 int NFCAccountRedisModule::VerifyAccount(const std::string& strAccount, const std::string& strPwd)
 {
 	std::string strAccountKey = m_pCommonRedisModule->GetAccountCacheKey(strAccount);

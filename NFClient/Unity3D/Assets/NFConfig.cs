@@ -15,6 +15,7 @@ using System.Net;
 using System.Net.Sockets;
 using System.Threading;
 using System.Runtime.InteropServices;
+using UnityEngine;
 
 public class NFConfig
 {
@@ -43,10 +44,18 @@ public class NFConfig
 
     public void Load()
     {
+        //TextAsset textAsset = (TextAsset)Resources.Load("Config", typeof(TextAsset));
+        string textAsset = Resources.Load("Config").ToString();
         xmldoc = new XmlDocument();
 
-        xmldoc.Load("Config.xml");
+        xmldoc.LoadXml(textAsset);
         root = xmldoc.SelectSingleNode("XML");
+
+
+
+        //xmldoc = new XmlDocument();
+        //xmldoc.Load("Config.xml");
+        //root = xmldoc.SelectSingleNode("XML");
     }
 
     public ArrayList GetServerList()

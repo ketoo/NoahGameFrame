@@ -274,6 +274,7 @@ void NFCProxyServerToWorldModule::OnSelectServerResultProcess(const NFSOCK nSock
     pConnectData = NF_SHARE_PTR<ClientConnectData>(NF_NEW ClientConnectData());
     pConnectData->strAccount = xMsg.account();
     pConnectData->strConnectKey = xMsg.world_key();
+    //將token存起來
     mWantToConnectMap.AddElement(pConnectData->strAccount, pConnectData);
 }
 
