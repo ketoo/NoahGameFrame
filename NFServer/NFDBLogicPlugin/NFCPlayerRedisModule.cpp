@@ -45,9 +45,7 @@ bool NFCPlayerRedisModule::LoadPlayerData(const NFGUID & self, NFMsg::RoleDataPa
 	NFCCommonRedisModule* pCommonRedisModule = (NFCCommonRedisModule*)(m_pCommonRedisModule);
 
 	NF_SHARE_PTR<NFIPropertyManager> xPropertyManager = m_pCommonRedisModule->GetPropertyInfo(self, NFrame::Player::ThisName());
-	NF_SHARE_PTR<NFIRecordManager> xRecordManager = m_pCommonRedisModule->GetRecordInfo(self, NFrame::Player::ThisName());
-	
-	if (xRecordManager)
+	if (xPropertyManager)
 	{
 		pCommonRedisModule->ConvertPropertyManagerToPB(xPropertyManager, roleData.mutable_property());
 	}
