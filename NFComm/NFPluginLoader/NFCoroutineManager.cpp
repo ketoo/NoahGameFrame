@@ -195,7 +195,7 @@ NFCoroutine* NFCoroutineManager::AllotCoroutine()
 
     if (id == this->mxCoroutineList.size())
     {
-        this->mxCoroutineList[id] = new NFCoroutine(this, id);
+        this->mxCoroutineList.push_back(new NFCoroutine(this, id));
     }
 
     return this->mxCoroutineList[id];
