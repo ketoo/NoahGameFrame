@@ -217,7 +217,7 @@ void NFCDBNet_ServerModule::OnLoadRoleDataProcess(const NFSOCK nSockIndex, const
 	NFGUID nRoleID = NFINetModule::PBToNF(xMsg.id());
 
 	NFMsg::RoleDataPack xRoleDataxMsg;
-	xRoleDataxMsg.mutable_id()->CopyFrom(NFINetModule::NFToPB(nRoleID));
+	xRoleDataxMsg.mutable_id()->CopyFrom(xMsg.id());
 
 	NFCPlayerRedisModule* pPlayerRedisModule = (NFCPlayerRedisModule*)m_pPlayerRedisModule;
 	pPlayerRedisModule->LoadPlayerData(nRoleID, xRoleDataxMsg);

@@ -2664,7 +2664,7 @@ class LIBPROTOC_EXPORT RoleDataPack : public ::google::protobuf::Message {
   inline ::NFMsg::Ident* release_id();
   inline void set_allocated_id(::NFMsg::Ident* id);
 
-  // required .NFMsg.ObjectPropertyList property = 2;
+  // optional .NFMsg.ObjectPropertyList property = 2;
   inline bool has_property() const;
   inline void clear_property();
   static const int kPropertyFieldNumber = 2;
@@ -2673,7 +2673,7 @@ class LIBPROTOC_EXPORT RoleDataPack : public ::google::protobuf::Message {
   inline ::NFMsg::ObjectPropertyList* release_property();
   inline void set_allocated_property(::NFMsg::ObjectPropertyList* property);
 
-  // required .NFMsg.ObjectRecordList record = 4;
+  // optional .NFMsg.ObjectRecordList record = 4;
   inline bool has_record() const;
   inline void clear_record();
   static const int kRecordFieldNumber = 4;
@@ -6068,7 +6068,7 @@ inline void RoleDataPack::set_allocated_id(::NFMsg::Ident* id) {
   }
 }
 
-// required .NFMsg.ObjectPropertyList property = 2;
+// optional .NFMsg.ObjectPropertyList property = 2;
 inline bool RoleDataPack::has_property() const {
   return (_has_bits_[0] & 0x00000002u) != 0;
 }
@@ -6106,7 +6106,7 @@ inline void RoleDataPack::set_allocated_property(::NFMsg::ObjectPropertyList* pr
   }
 }
 
-// required .NFMsg.ObjectRecordList record = 4;
+// optional .NFMsg.ObjectRecordList record = 4;
 inline bool RoleDataPack::has_record() const {
   return (_has_bits_[0] & 0x00000004u) != 0;
 }

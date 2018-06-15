@@ -668,8 +668,8 @@ void protobuf_AddDesc_NFMsgPreGame_2eproto() {
     "Ident\022\033\n\005guild\030\002 \002(\0132\014.NFMsg.Ident\022\014\n\004ga"
     "me\030\003 \002(\005\022\r\n\005proxy\030\004 \002(\005\"~\n\014RoleDataPack\022"
     "\030\n\002id\030\001 \002(\0132\014.NFMsg.Ident\022+\n\010property\030\002 "
-    "\002(\0132\031.NFMsg.ObjectPropertyList\022\'\n\006record"
-    "\030\004 \002(\0132\027.NFMsg.ObjectRecordList*Z\n\014EServ"
+    "\001(\0132\031.NFMsg.ObjectPropertyList\022\'\n\006record"
+    "\030\004 \001(\0132\027.NFMsg.ObjectRecordList*Z\n\014EServ"
     "erState\022\r\n\tEST_CRASH\020\000\022\016\n\nEST_NARMAL\020\001\022\014"
     "\n\010EST_BUSY\020\002\022\014\n\010EST_FIRE\020\003\022\017\n\013EST_MAINTE"
     "N\020\004*@\n\021ReqServerListType\022\025\n\021RSLT_WORLD_S"
@@ -8056,7 +8056,7 @@ bool RoleDataPack::MergePartialFromCodedStream(
         break;
       }
 
-      // required .NFMsg.ObjectPropertyList property = 2;
+      // optional .NFMsg.ObjectPropertyList property = 2;
       case 2: {
         if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
             ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
@@ -8070,7 +8070,7 @@ bool RoleDataPack::MergePartialFromCodedStream(
         break;
       }
 
-      // required .NFMsg.ObjectRecordList record = 4;
+      // optional .NFMsg.ObjectRecordList record = 4;
       case 4: {
         if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
             ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
@@ -8108,13 +8108,13 @@ void RoleDataPack::SerializeWithCachedSizes(
       1, this->id(), output);
   }
 
-  // required .NFMsg.ObjectPropertyList property = 2;
+  // optional .NFMsg.ObjectPropertyList property = 2;
   if (has_property()) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
       2, this->property(), output);
   }
 
-  // required .NFMsg.ObjectRecordList record = 4;
+  // optional .NFMsg.ObjectRecordList record = 4;
   if (has_record()) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
       4, this->record(), output);
@@ -8135,14 +8135,14 @@ void RoleDataPack::SerializeWithCachedSizes(
         1, this->id(), target);
   }
 
-  // required .NFMsg.ObjectPropertyList property = 2;
+  // optional .NFMsg.ObjectPropertyList property = 2;
   if (has_property()) {
     target = ::google::protobuf::internal::WireFormatLite::
       WriteMessageNoVirtualToArray(
         2, this->property(), target);
   }
 
-  // required .NFMsg.ObjectRecordList record = 4;
+  // optional .NFMsg.ObjectRecordList record = 4;
   if (has_record()) {
     target = ::google::protobuf::internal::WireFormatLite::
       WriteMessageNoVirtualToArray(
@@ -8167,14 +8167,14 @@ int RoleDataPack::ByteSize() const {
           this->id());
     }
 
-    // required .NFMsg.ObjectPropertyList property = 2;
+    // optional .NFMsg.ObjectPropertyList property = 2;
     if (has_property()) {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
           this->property());
     }
 
-    // required .NFMsg.ObjectRecordList record = 4;
+    // optional .NFMsg.ObjectRecordList record = 4;
     if (has_record()) {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
@@ -8234,7 +8234,7 @@ void RoleDataPack::CopyFrom(const RoleDataPack& from) {
 }
 
 bool RoleDataPack::IsInitialized() const {
-  if ((_has_bits_[0] & 0x00000007) != 0x00000007) return false;
+  if ((_has_bits_[0] & 0x00000001) != 0x00000001) return false;
 
   if (has_id()) {
     if (!this->id().IsInitialized()) return false;
