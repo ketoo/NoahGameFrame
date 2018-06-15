@@ -21,9 +21,7 @@
 #pragma warning(disable: 4244 4267)
 #endif
 #include "NFComm/NFMessageDefine/NFDefine.pb.h"
-#ifdef _MSC_VER
-#pragma warning(default: 4244 4267)
-#endif
+
 
 enum NF_SERVER_TYPES
 {
@@ -185,7 +183,9 @@ public:
 		{
 			char szData[MAX_PATH] = { 0 };
 			NFSPRINTF(szData, MAX_PATH, "Parse Message Failed from Packet to MsgBase, MessageID: %d\n", nMsgID);
-			//LogRecive(szData);
+#ifdef DEBUG
+			std::cout << "--------------------" << szData << __FUNCTION__ << " " << __LINE__ << std::endl;
+#endif // DEBUG
 
 			return false;
 		}
@@ -209,7 +209,9 @@ public:
 		{
 			char szData[MAX_PATH] = { 0 };
 			NFSPRINTF(szData, MAX_PATH, "Parse Message Failed from Packet to MsgBase, MessageID: %d\n", nMsgID);
-			//LogRecive(szData);
+#ifdef DEBUG
+			std::cout << "--------------------" << szData << __FUNCTION__ << " " << __LINE__ << std::endl;
+#endif // DEBUG
 
 			return false;
 		}
@@ -218,7 +220,9 @@ public:
 		{
 			char szData[MAX_PATH] = { 0 };
 			NFSPRINTF(szData, MAX_PATH, "Parse Message Failed from MsgData to ProtocolData, MessageID: %d\n", nMsgID);
-			//LogRecive(szData);
+#ifdef DEBUG
+			std::cout << "--------------------" << szData << __FUNCTION__ << " " << __LINE__ << std::endl;
+#endif // DEBUG
 
 			return false;
 		}
