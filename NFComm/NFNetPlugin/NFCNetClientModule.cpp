@@ -267,7 +267,7 @@ void NFCNetClientModule::SendToAllServerByPB(const NF_SERVER_TYPES eType, const 
     while (pServer)
     {
         NF_SHARE_PTR<NFINetModule> pNetModule = pServer->mxNetModule;
-        if (pNetModule && eType == pServer->eServerType)
+        if (pNetModule && eType == pServer->eServerType && pServer->eState == ConnectDataState::NORMAL)
         {
             if (!pNetModule->SendMsgPB(nMsgID, xData, 0))
 			{
@@ -469,6 +469,12 @@ void NFCNetClientModule::ProcessExecute()
 
                 pServerData->eState = ConnectDataState::CONNECTING;
                 pServerData->mxNetModule = NF_SHARE_PTR<NFINetModule>(NF_NEW NFCNetModule(pPluginManager));
+
+				pServerData->mxNetModule->Awake();
+				pServerData->mxNetModule->Init();
+				pServerData->mxNetModule->AfterInit();
+				pServerData->mxNetModule->ReadyExecute();
+
                 pServerData->mxNetModule->Initialization(pServerData->strIP.c_str(), pServerData->nPort);
 
                 InitCallBacks(pServerData);
@@ -493,7 +499,14 @@ void NFCNetClientModule::LogServerInfo()
         stream << "Type: " << pServerData->eServerType << " Server ID: " << pServerData->nGameID << " State: "
                << pServerData->eState << " IP: " << pServerData->strIP << " Port: " << pServerData->nPort;
 
-		m_pLogModule->LogInfo(stream.str());
+		if (pServerData->eState == ConnectDataState::NORMAL)
+		{
+			m_pLogModule->LogInfo(stream.str());
+		}
+		else
+		{
+			m_pLogModule->LogError(stream.str());
+		}
 
         pServerData = mxServerMap.NextNude();
     }
@@ -518,7 +531,8 @@ void NFCNetClientModule::OnSocketEvent(const NFSOCK fd, const NF_NET_EVENT eEven
     if (eEvent & NF_NET_EVENT::NF_NET_EVENT_CONNECTED)
     {
         OnConnected(fd, pNet);
-    } else
+    }
+	else
     {
         OnDisConnected(fd, pNet);
     }
@@ -534,12 +548,10 @@ int NFCNetClientModule::OnConnected(const NFSOCK fd, NFINet* pNet)
         pServerInfo->eState = ConnectDataState::NORMAL;
 
         //for type--suit
-        NF_SHARE_PTR<NFConsistentHashMapEx<int, ConnectData>> xConnectDataMap = mxServerTypeMap.GetElement(
-                pServerInfo->eServerType);
+        NF_SHARE_PTR<NFConsistentHashMapEx<int, ConnectData>> xConnectDataMap = mxServerTypeMap.GetElement(pServerInfo->eServerType);
         if (!xConnectDataMap)
         {
-            xConnectDataMap = NF_SHARE_PTR<NFConsistentHashMapEx<int, ConnectData>>(
-                    NF_NEW NFConsistentHashMapEx<int, ConnectData>());
+            xConnectDataMap = NF_SHARE_PTR<NFConsistentHashMapEx<int, ConnectData>>(NF_NEW NFConsistentHashMapEx<int, ConnectData>());
             mxServerTypeMap.AddElement(pServerInfo->eServerType, xConnectDataMap);
         }
 
