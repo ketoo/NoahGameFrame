@@ -64,7 +64,11 @@ void NFCCreateRoleModule::OnReposeRoleListProcess(const NFSOCK nSockIndex, const
 		return;
 	}
 
-	m_pNetClientModule->SendByServerID(nClientID.GetHead(), nMsgID, msg, nLen);
+	NF_SHARE_PTR<NFIGameServerNet_ServerModule::GateServerInfo> xGateInfo = m_pGameServerNet_ServerModule->GetGateServerInfo(nClientID.GetHead());
+	if (xGateInfo)
+	{
+		m_pNetModule->SendMsgWithOutHead (nMsgID, std::string(msg, nLen), xGateInfo->xServerData.nFD);
+	}
 }
 
 void NFCCreateRoleModule::OnCreateRoleGameProcess(const NFSOCK nSockIndex, const int nMsgID, const char * msg, const uint32_t nLen)
