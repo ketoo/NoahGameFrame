@@ -1937,7 +1937,7 @@ void NFCGameServerNet_ServerModule::OnProxyServerRegisteredProcess(const NFSOCK 
 {
 	NFGUID nPlayerID;
 	NFMsg::ServerInfoReportList xMsg;
-	if (!m_pNetModule->ReceivePB( nMsgID, msg, nLen, xMsg, nPlayerID))
+	if (!NFINetModule::ReceivePB( nMsgID, msg, nLen, xMsg, nPlayerID))
 	{
 		return;
 	}
