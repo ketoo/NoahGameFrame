@@ -5,9 +5,6 @@
       <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
       <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
     </Filter>
-    <Filter Include="NFCommonConfigModule">
-      <UniqueIdentifier>{15121c6f-c078-4629-81c4-7bac017e056f}</UniqueIdentifier>
-    </Filter>
     <Filter Include="NFCreateRoleModule">
       <UniqueIdentifier>{ca2648e6-36dd-4163-9791-b22482d4b8b6}</UniqueIdentifier>
     </Filter>
@@ -17,9 +14,6 @@
       <Filter>NFBuffModule</Filter>
     </ClInclude>
     <ClInclude Include="NFGameLogicPlugin.h" />
-    <ClInclude Include="NFCCommonConfigModule.h">
-      <Filter>NFCommonConfigModule</Filter>
-    </ClInclude>
     <ClInclude Include="NFCCreateRoleModule.h">
       <Filter>NFCreateRoleModule</Filter>
     </ClInclude>
@@ -30,9 +24,6 @@
       <Filter>NFBuffModule</Filter>
     </ClCompile>
     <ClCompile Include="NFGameLogicPlugin.cpp" />
-    <ClCompile Include="NFCCommonConfigModule.cpp">
-      <Filter>NFCommonConfigModule</Filter>
-    </ClCompile>
     <ClCompile Include="NFCCreateRoleModule.cpp">
       <Filter>NFCreateRoleModule</Filter>
     </ClCompile>
