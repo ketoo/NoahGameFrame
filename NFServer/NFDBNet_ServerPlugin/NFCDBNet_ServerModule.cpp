@@ -129,6 +129,7 @@ void NFCDBNet_ServerModule::OnRequireRoleListProcess(const NFSOCK nSockIndex, co
 	if (!m_pPlayerRedisModule->GetRoleInfo(xMsg.account(), strRoleName, xPlayerID))
 	{
 		NFMsg::AckRoleLiteInfoList xAckRoleLiteInfoList;
+		xAckRoleLiteInfoList.set_account(xMsg.account());
 		m_pNetModule->SendMsgPB(NFMsg::EGMI_ACK_ROLE_LIST, xAckRoleLiteInfoList, nSockIndex, nClientID);
 		return;
 	}
