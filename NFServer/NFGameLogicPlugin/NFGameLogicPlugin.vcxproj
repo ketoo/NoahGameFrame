@@ -101,7 +101,6 @@
   <ItemGroup>
     <ClInclude Include="NFCBuffModule.h" />
     <ClInclude Include="NFCCreateRoleModule.h" />
-    <ClInclude Include="NFCCommonConfigModule.h" />
     <ClInclude Include="NFGameLogicPlugin.h" />
   </ItemGroup>
   <ItemGroup>
@@ -115,7 +114,6 @@
     </ClCompile>
     <ClCompile Include="NFCBuffModule.cpp" />
     <ClCompile Include="NFCCreateRoleModule.cpp" />
-    <ClCompile Include="NFCCommonConfigModule.cpp" />
     <ClCompile Include="NFGameLogicPlugin.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
