@@ -111,7 +111,7 @@ void NFCNetLogic::OnSocketEvent(const NFSOCK nSockIndex, const NF_NET_EVENT eEve
     {
         g_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFGUID(0, nSockIndex), "NF_NET_EVENT_TIMEOUT", "read timeout", __FUNCTION__, __LINE__);
     }
-    else  if (eEvent == NF_NET_EVENT_CONNECTED)
+    else  if (eEvent & NF_NET_EVENT_CONNECTED)
     {
         g_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFGUID(0, nSockIndex), "NF_NET_EVENT_CONNECTED", "connectioned success", __FUNCTION__, __LINE__);
 		m_bSocketReady = true;

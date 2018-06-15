@@ -61,7 +61,7 @@ bool NFCDBNet_ServerModule::AfterInit()
         }
     }
 
-	m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_REQ_ROLE_LIST, this, &NFCDBNet_ServerModule::OnReqiureRoleListProcess);
+	m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_REQ_ROLE_LIST, this, &NFCDBNet_ServerModule::OnRequireRoleListProcess);
 	m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_REQ_CREATE_ROLE, this, &NFCDBNet_ServerModule::OnCreateRoleGameProcess);
 	m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_REQ_DELETE_ROLE, this, &NFCDBNet_ServerModule::OnDeleteRoleGameProcess);
 	m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_REQ_LOAD_ROLE_DATA, this, &NFCDBNet_ServerModule::OnLoadRoleDataProcess);
@@ -99,7 +99,7 @@ void NFCDBNet_ServerModule::OnSocketEvent(const NFSOCK nSockIndex, const NF_NET_
         m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFGUID(0, nSockIndex), "NF_NET_EVENT_TIMEOUT", "read timeout", __FUNCTION__, __LINE__);
         OnClientDisconnect(nSockIndex);
     }
-    else  if (eEvent == NF_NET_EVENT_CONNECTED)
+    else  if (eEvent & NF_NET_EVENT_CONNECTED)
     {
         m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFGUID(0, nSockIndex), "NF_NET_EVENT_CONNECTED", "connected success", __FUNCTION__, __LINE__);
         OnClientConnected(nSockIndex);
@@ -114,7 +114,7 @@ void NFCDBNet_ServerModule::OnClientConnected(const NFSOCK nAddress)
 {
 }
 
-void NFCDBNet_ServerModule::OnReqiureRoleListProcess(const NFSOCK nSockIndex, const int nMsgID, const char * msg, const uint32_t nLen)
+void NFCDBNet_ServerModule::OnRequireRoleListProcess(const NFSOCK nSockIndex, const int nMsgID, const char * msg, const uint32_t nLen)
 {
 
 	NFGUID nClientID;
