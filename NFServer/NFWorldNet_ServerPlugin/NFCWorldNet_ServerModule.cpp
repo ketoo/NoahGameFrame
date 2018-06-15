@@ -482,7 +482,11 @@ void NFCWorldNet_ServerModule::SynWorldToGame()
 	NF_SHARE_PTR<ServerData> pServerData = mGameMap.First();
 	while (pServerData)
 	{
-		SynWorldToGame(pServerData->nFD);
+		if (pServerData->pData->server_state() != NFMsg::EServerState::EST_MAINTEN
+			&& pServerData->pData->server_state() != NFMsg::EServerState::EST_CRASH)
+		{
+			SynWorldToGame(pServerData->nFD);
+		}
 
 		pServerData = mGameMap.Next();
 	}
@@ -512,7 +516,11 @@ void NFCWorldNet_ServerModule::SynWorldToDB()
 	NF_SHARE_PTR<ServerData> pServerData = mDBMap.First();
 	while (pServerData)
 	{
-		SynWorldToDB(pServerData->nFD);
+		if (pServerData->pData->server_state() != NFMsg::EServerState::EST_MAINTEN
+			&& pServerData->pData->server_state() != NFMsg::EServerState::EST_CRASH)
+		{
+			SynWorldToDB(pServerData->nFD);
+		}
 
 		pServerData = mDBMap.Next();
 	}
@@ -541,7 +549,11 @@ void NFCWorldNet_ServerModule::SynDBToGame()
 	NF_SHARE_PTR<ServerData> pServerData = mGameMap.First();
 	while (pServerData)
 	{
-		SynDBToGame(pServerData->nFD);
+		if (pServerData->pData->server_state() != NFMsg::EServerState::EST_MAINTEN
+			&& pServerData->pData->server_state() != NFMsg::EServerState::EST_CRASH)
+		{
+			SynDBToGame(pServerData->nFD);
+		}
 
 		pServerData = mGameMap.Next();
 	}

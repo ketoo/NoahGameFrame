@@ -1249,6 +1249,7 @@ void NFCGameServerNet_ServerModule::OnReqRoleListProcess(const NFSOCK nSockIndex
 	}
 
 	NFMsg::AckRoleLiteInfoList xAckRoleLiteInfoList;
+	xAckRoleLiteInfoList.set_account(xMsg.account());
 	m_pNetModule->SendMsgPB(NFMsg::EGMI_ACK_ROLE_LIST, xAckRoleLiteInfoList, nSockIndex, nClientID);
 }
 
@@ -1262,6 +1263,8 @@ void NFCGameServerNet_ServerModule::OnCreateRoleGameProcess(const NFSOCK nSockIn
 	}
 
 	NFMsg::AckRoleLiteInfoList xAckRoleLiteInfoList;
+	xAckRoleLiteInfoList.set_account(xMsg.account());
+
 	NFMsg::RoleLiteInfo* pData = xAckRoleLiteInfoList.add_char_data();
 	pData->mutable_id()->CopyFrom(NFINetModule::NFToPB(m_pKernelModule->CreateGUID()));
 	pData->set_career(xMsg.career());
@@ -1289,6 +1292,8 @@ void NFCGameServerNet_ServerModule::OnDeleteRoleGameProcess(const NFSOCK nSockIn
 	}
 
 	NFMsg::AckRoleLiteInfoList xAckRoleLiteInfoList;
+	xAckRoleLiteInfoList.set_account(xMsg.account());
+
 	m_pNetModule->SendMsgPB(NFMsg::EGMI_ACK_ROLE_LIST, xAckRoleLiteInfoList, nSockIndex, nPlayerID);
 }
 
