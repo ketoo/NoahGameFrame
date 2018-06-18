@@ -6,7 +6,7 @@
 //
 // -------------------------------------------------------------------------
 
-#include "NFCPropertyTrailModule.h"
+#include "NFCDataTrailModule.h"
 #include "NFComm/NFPluginModule/NFIPluginManager.h"
 #include "NFComm/NFCore/NFDataList.hpp"
 
@@ -108,6 +108,8 @@ int NFCPropertyTrailModule::OnObjectPropertyEvent(const NFGUID& self, const std:
 
     m_pLogModule->LogProperty(NFILogModule::NF_LOG_LEVEL::NLL_DEBUG_NORMAL, self, strPropertyName, stream.str(),  __FUNCTION__, __LINE__);
 
+    PrintStackTrace();
+
     return 0;
 }
 
@@ -136,6 +138,8 @@ int NFCPropertyTrailModule::OnObjectRecordEvent(const NFGUID& self, const RECORD
                 }
 
                 m_pLogModule->LogRecord(NFILogModule::NF_LOG_LEVEL::NLL_DEBUG_NORMAL, self, xRecord->GetName(), stream.str(),  __FUNCTION__, __LINE__);
+
+                PrintStackTrace();
             }
         }
         break;
@@ -143,6 +147,8 @@ int NFCPropertyTrailModule::OnObjectRecordEvent(const NFGUID& self, const RECORD
         {
             stream << " Trail Del Row[" << xEventData.nRow << "]";
             m_pLogModule->LogRecord(NFILogModule::NF_LOG_LEVEL::NLL_DEBUG_NORMAL, self, xRecord->GetName(), stream.str(),  __FUNCTION__, __LINE__);
+
+            PrintStackTrace();
         }
         break;
         case RECORD_EVENT_DATA::Swap:
@@ -159,6 +165,8 @@ int NFCPropertyTrailModule::OnObjectRecordEvent(const NFGUID& self, const RECORD
             stream << " [Old] " << oldVar.ToString();
             stream << " [New] " << newVar.ToString();
             m_pLogModule->LogRecord(NFILogModule::NF_LOG_LEVEL::NLL_DEBUG_NORMAL, self, xRecord->GetName(), stream.str(),  __FUNCTION__, __LINE__);
+
+            PrintStackTrace();
         }
         break;
         case RECORD_EVENT_DATA::Cleared:
@@ -206,4 +214,19 @@ int NFCPropertyTrailModule::TrailObjectData(const NFGUID& self)
     }
 
     return 0;
+}
+
+void NFCPropertyTrailModule::PrintStackTrace()
+{
+    int size = 16;
+    void * array[16];
+    int stack_num = backtrace(array, size);
+    char ** stacktrace = backtrace_symbols(array, stack_num);
+    for (int i = 0; i < stack_num; ++i)
+    {
+        //printf("%s\n", stacktrace[i]);
+        m_pLogModule->LogProperty(NFILogModule::NF_LOG_LEVEL::NLL_DEBUG_NORMAL, NFGUID(), "", stacktrace[i],  __FUNCTION__, __LINE__);
+    }
+
+    free(stacktrace);
 }
