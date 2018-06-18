@@ -1,8 +1,8 @@
 // -------------------------------------------------------------------------
-//    @FileName			:    NFIPropertyTrailModule.h
+//    @FileName			:    NFIDataTrailModule.h
 //    @Author           :    LvSheng.Huang
 //    @Date             :    2013-09-30
-//    @Module           :    NFIPropertyTrailModule
+//    @Module           :    NFIDataTrailModule
 //
 // -------------------------------------------------------------------------
 
@@ -12,7 +12,7 @@
 #include <iostream>
 #include "NFIModule.h"
 
-class NFIPropertyTrailModule
+class NFIDataTrailModule
     : public NFIModule
 {
 public:
