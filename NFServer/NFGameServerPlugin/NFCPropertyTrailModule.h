@@ -33,12 +33,11 @@ public:
     virtual bool Execute();
     virtual bool AfterInit();
 
+	virtual void LogObjectData(const NFGUID& self);
     virtual void StartTrail(const NFGUID self);
-    virtual void EndTrail(const NFGUID self);
 
 protected:
 
-    int LogObjectData(const NFGUID& self);
     int TrailObjectData(const NFGUID& self);
 
     int OnObjectPropertyEvent(const NFGUID& self, const std::string& strPropertyName, const NFData& oldVar, const NFData& newVar);

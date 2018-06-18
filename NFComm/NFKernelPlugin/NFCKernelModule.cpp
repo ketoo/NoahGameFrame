@@ -277,6 +277,7 @@ NF_SHARE_PTR<NFIObject> NFCKernelModule::CreateObject(const NFGUID& self, const 
 		pObject->SetState(COE_CREATE_HASDATA);
 		DoEvent(ident, strClassName, pObject->GetState(), arg);
 
+
 		pObject->SetState(COE_CREATE_FINISH);
 		DoEvent(ident, strClassName, pObject->GetState(), arg);
     }

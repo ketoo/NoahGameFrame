@@ -222,7 +222,7 @@ void NFCDBNet_ServerModule::OnLoadRoleDataProcess(const NFSOCK nSockIndex, const
 	NFCPlayerRedisModule* pPlayerRedisModule = (NFCPlayerRedisModule*)m_pPlayerRedisModule;
 	pPlayerRedisModule->LoadPlayerData(nRoleID, xRoleDataxMsg);
 		
-	m_pNetModule->SendMsgPB(NFMsg::EGMI_ACK_LOAD_ROLE_DATA, xMsg, nSockIndex);
+	m_pNetModule->SendMsgPB(NFMsg::EGMI_ACK_LOAD_ROLE_DATA, xRoleDataxMsg, nSockIndex);
 }
 
 void NFCDBNet_ServerModule::OnSaveRoleDataProcess(const NFSOCK nSockIndex, const int nMsgID, const char * msg, const uint32_t nLen)
