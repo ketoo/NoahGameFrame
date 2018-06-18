@@ -20,6 +20,7 @@ bool NFCCreateRoleModule::Init()
 	m_pGameServerNet_ServerModule = pPluginManager->FindModule<NFIGameServerNet_ServerModule>();
 	m_pNetClientModule = pPluginManager->FindModule<NFINetClientModule>();
 	m_pScheduleModule = pPluginManager->FindModule<NFIScheduleModule>();
+	m_pPropertyTrailModule = pPluginManager->FindModule<NFIPropertyTrailModule>();
 	
     return true;
 }
@@ -143,6 +144,14 @@ void NFCCreateRoleModule::OnDBLoadRoleDataProcess(const NFSOCK nSockIndex, const
 	NFMsg::RoleDataPack xMsg;
 	if (!m_pNetModule->ReceivePB(nMsgID, msg, nLen, xMsg, nClientID))
 	{
+		//releasing all the resource that allow when the user login, then kick off the user
+		// TODO
+
+		//m_pGameServerNet_ServerModule->RemovePlayerGateInfo();
+
+		//Avtually, the developer may not know the user id in this situation, therefore the developer must record the login-time when the user coming
+		//and check the time per min to kick off the user who are not active.
+
 		return;
 	}
 
@@ -195,10 +204,15 @@ int NFCCreateRoleModule::OnObjectPlayerEvent(const NFGUID & self, const std::str
 {
 	if (CLASS_OBJECT_EVENT::COE_DESTROY == eClassEvent)
 	{
+		m_pPropertyTrailModule->LogObjectData(self);
+
 		SaveData(self);
 	}
 	else if (CLASS_OBJECT_EVENT::COE_CREATE_LOADDATA == eClassEvent)
 	{
+		m_pPropertyTrailModule->StartTrail(self);
+		m_pPropertyTrailModule->LogObjectData(self);
+
 		AttachData(self);
 	}
 	else if (CLASS_OBJECT_EVENT::COE_CREATE_FINISH == eClassEvent)
@@ -208,6 +222,7 @@ int NFCCreateRoleModule::OnObjectPlayerEvent(const NFGUID & self, const std::str
 		{
 			mxObjectDataCache.erase(it);
 		}
+
 
 		m_pScheduleModule->AddSchedule(self, "SaveDataOnTime", this, &NFCCreateRoleModule::SaveDataOnTime, 180.0f, -1);
 	}
@@ -252,6 +267,9 @@ void NFCCreateRoleModule::SaveData(const NFGUID & self)
 		NFMsg::RoleDataPack xDataPack;
 
 		*xDataPack.mutable_id() = NFINetModule::NFToPB(self);
+
+		*(xDataPack.mutable_property()->mutable_player_id()) = NFINetModule::NFToPB(self);
+		*(xDataPack.mutable_record()->mutable_player_id()) = NFINetModule::NFToPB(self);
 
 		if (xPropManager)
 		{
