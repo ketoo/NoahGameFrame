@@ -37,6 +37,7 @@ public:
     virtual void StartTrail(const NFGUID self);
 
 protected:
+    void PrintStackTrace();
 
     int TrailObjectData(const NFGUID& self);
 
