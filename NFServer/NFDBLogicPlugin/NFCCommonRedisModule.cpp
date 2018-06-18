@@ -221,12 +221,17 @@ NF_SHARE_PTR<NFIRecordManager> NFCCommonRedisModule::GetRecordInfo(const NFGUID 
 
 bool NFCCommonRedisModule::GetRecordInfo(const NFGUID & self, const std::string & strClassName, NFMsg::ObjectRecordList * pRecordDataList)
 {
+	*(pRecordDataList->mutable_player_id()) = NFINetModule::NFToPB(self);
+
 	std::vector<std::string> vKeyCacheList;
 	std::vector<std::string> vValueCacheList;
 	NF_SHARE_PTR<NFIRecordManager> xRecordManager = GetRecordInfo(self, strClassName, vKeyCacheList, vValueCacheList);
 	if (xRecordManager && vKeyCacheList.size() == vValueCacheList.size())
 	{
-		return ConvertRecordManagerToPB(xRecordManager, pRecordDataList);
+		if (ConvertRecordManagerToPB(xRecordManager, pRecordDataList))
+		{
+			return true;
+		}
 	}
 
 	return false;

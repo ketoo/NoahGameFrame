@@ -39,22 +39,15 @@ bool NFCPropertyTrailModule::AfterInit()
 
 void NFCPropertyTrailModule::StartTrail(const NFGUID self)
 {
-    LogObjectData(self);
-
-
+	TrailObjectData(self);
 }
 
-void NFCPropertyTrailModule::EndTrail(const NFGUID self)
-{
-
-}
-
-int NFCPropertyTrailModule::LogObjectData(const NFGUID& self)
+void NFCPropertyTrailModule::LogObjectData(const NFGUID& self)
 {
     NF_SHARE_PTR<NFIObject> xObject = m_pKernelModule->GetObject(self);
     if (nullptr == xObject)
     {
-        return -1;
+        return;
     }
 
     NF_SHARE_PTR<NFIPropertyManager> xPropertyManager = xObject->GetPropertyManager();
@@ -101,8 +94,6 @@ int NFCPropertyTrailModule::LogObjectData(const NFGUID& self)
             xRecord = xRecordManager->Next();
         }
     }
-
-    return 0;
 }
 
 int NFCPropertyTrailModule::OnObjectPropertyEvent(const NFGUID& self, const std::string& strPropertyName, const NFData& oldVar, const NFData& newVar)

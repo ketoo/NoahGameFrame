@@ -47,10 +47,17 @@ bool NFCPlayerRedisModule::LoadPlayerData(const NFGUID & self, NFMsg::RoleDataPa
 	NF_SHARE_PTR<NFIPropertyManager> xPropertyManager = m_pCommonRedisModule->GetPropertyInfo(self, NFrame::Player::ThisName());
 	if (xPropertyManager)
 	{
+		*(roleData.mutable_property()->mutable_player_id()) = NFINetModule::NFToPB(self);
+
 		pCommonRedisModule->ConvertPropertyManagerToPB(xPropertyManager, roleData.mutable_property());
+
+		pCommonRedisModule->GetRecordInfo(self, NFrame::Player::ThisName(), roleData.mutable_record());
+		
+		return true;
 	}
 
-	pCommonRedisModule->GetRecordInfo(self, NFrame::Player::ThisName(), roleData.mutable_record());
+	
+
 	/*
 	if (xRecordManager)
 	{
@@ -65,9 +72,9 @@ bool NFCPlayerRedisModule::LoadPlayerData(const NFGUID & self, NFMsg::RoleDataPa
 		}
 	}
 	*/
-	m_pLogModule->LogNormal(NFILogModule::NF_LOG_LEVEL::NLL_DEBUG_NORMAL, self, "loaded data ", NFGetTimeMS());
+	m_pLogModule->LogNormal(NFILogModule::NF_LOG_LEVEL::NLL_ERROR_NORMAL, self, "loaded data false", NFGetTimeMS());
 
-	return true;
+	return false;
 }
 
 bool NFCPlayerRedisModule::SavePlayerData(const NFGUID & self, const NFMsg::RoleDataPack& roleData)

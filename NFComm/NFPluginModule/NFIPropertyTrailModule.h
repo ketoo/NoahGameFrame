@@ -16,8 +16,10 @@ class NFIPropertyTrailModule
     : public NFIModule
 {
 public:
+
+	virtual void LogObjectData(const NFGUID& self) = 0;
+
     virtual void StartTrail(const NFGUID self) = 0;
-    virtual void EndTrail(const NFGUID self) = 0;
 
 };
 
