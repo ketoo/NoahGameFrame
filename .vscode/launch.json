@@ -1,0 +1,86 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "GameServer",
+            "type": "cppdbg",
+            "request": "launch",
+            //"request": "attach",
+            "program": "${workspaceFolder}/_Out/Debug/NFPluginLoader_d",
+            "args": ["-d Server=GameServer ID=6"],
+            "stopAtEntry": false,
+            "cwd": "${workspaceFolder}",
+            "environment": [],
+            "externalConsole": true,
+            "MIMode": "gdb"
+        },
+        {
+            "name": "Worlderver",
+            "type": "cppdbg",
+            "request": "launch",
+            //"request": "attach",
+            "program": "${workspaceFolder}/_Out/Debug/NFPluginLoader_d",
+            "args": ["-d Server=WorldServer ID=7"],
+            "stopAtEntry": false,
+            "cwd": "${workspaceFolder}",
+            "environment": [],
+            "externalConsole": true,
+            "MIMode": "gdb"
+        },
+        {
+            "name": "ProxyServer",
+            "type": "cppdbg",
+            "request": "launch",
+            //"request": "attach",
+            "program": "${workspaceFolder}/_Out/Debug/NFPluginLoader_d",
+            "args": ["-d Server=GameServer ID=5"],
+            "stopAtEntry": false,
+            "cwd": "${workspaceFolder}",
+            "environment": [],
+            "externalConsole": true,
+            "MIMode": "gdb"
+        },
+        {
+            "name": "DBServer",
+            "type": "cppdbg",
+            "request": "launch",
+            //"request": "attach",
+            "program": "${workspaceFolder}/_Out/Debug/NFPluginLoader_d",
+            "args": ["-d Server=GameServer ID=3"],
+            "stopAtEntry": false,
+            "cwd": "${workspaceFolder}",
+            "environment": [],
+            "externalConsole": true,
+            "MIMode": "gdb"
+        },
+        {
+            "name": "MasterServer",
+            "type": "cppdbg",
+            "request": "launch",
+            //"request": "attach",
+            "program": "${workspaceFolder}/_Out/Debug/NFPluginLoader_d",
+            "args": ["-d Server=GameServer ID=3"],
+            "stopAtEntry": false,
+            "cwd": "${workspaceFolder}",
+            "environment": [],
+            "externalConsole": true,
+            "MIMode": "gdb"
+        },
+        {
+            "name": "LoginServer",
+            "type": "cppdbg",
+            "request": "launch",
+            //"request": "attach",
+            "program": "${workspaceFolder}/_Out/Debug/NFPluginLoader_d",
+            "args": ["-d Server=GameServer ID=3"],
+            "stopAtEntry": false,
+            "cwd": "${workspaceFolder}",
+            "environment": [],
+            "externalConsole": true,
+            "MIMode": "gdb"
+        }
+    ]
+}
