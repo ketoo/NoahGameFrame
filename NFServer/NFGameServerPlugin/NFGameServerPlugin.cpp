@@ -15,7 +15,6 @@
 #include "NFCPropertyConfigModule.h"
 #include "NFCNPCRefreshModule.h"
 #include "NFCSwitchGameServerModule.h"
-#include "NFCPropertyTrailModule.h"
 
 class NFCSwitchGameServerModule;
 
@@ -54,12 +53,10 @@ void NFGameServerPlugin::Install()
     REGISTER_MODULE(pPluginManager, NFILevelModule, NFCLevelModule)
     REGISTER_MODULE(pPluginManager, NFIPropertyConfigModule, NFCPropertyConfigModule)
     REGISTER_MODULE(pPluginManager, NFINPCRefreshModule, NFCNPCRefreshModule)
-    REGISTER_MODULE(pPluginManager, NFIPropertyTrailModule, NFCPropertyTrailModule)
 }
 
 void NFGameServerPlugin::Uninstall()
 {
-	UNREGISTER_MODULE(pPluginManager, NFIPropertyTrailModule, NFCPropertyTrailModule)
 	UNREGISTER_MODULE(pPluginManager, NFINPCRefreshModule, NFCNPCRefreshModule)
 	UNREGISTER_MODULE(pPluginManager, NFIPropertyConfigModule, NFCPropertyConfigModule)
     UNREGISTER_MODULE(pPluginManager, NFILevelModule, NFCLevelModule)
