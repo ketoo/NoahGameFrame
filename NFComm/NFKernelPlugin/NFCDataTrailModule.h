@@ -1,13 +1,13 @@
 // -------------------------------------------------------------------------
-//    @FileName			:    NFCPropertyTrailModule.h
+//    @FileName			:    NFCDataTrailModule.h
 //    @Author           :    LvSheng.Huang
 //    @Date             :    2013-09-30
-//    @Module           :    NFCPropertyTrailModule
+//    @Module           :    NFCDataTrailModule
 //
 // -------------------------------------------------------------------------
 
-#ifndef NFC_PROPERTY_TRAIL_MODULE_H
-#define NFC_PROPERTY_TRAIL_MODULE_H
+#ifndef NFC_DATA_TRAIL_MODULE_H
+#define NFC_DATA_TRAIL_MODULE_H
 
 #include "NFComm/NFPluginModule/NFIKernelModule.h"
 #include "NFComm/NFPluginModule/NFIPropertyModule.h"
@@ -15,18 +15,18 @@
 #include "NFComm/NFPluginModule/NFIClassModule.h"
 #include "NFComm/NFPluginModule/NFIPropertyConfigModule.h"
 #include "NFComm/NFPluginModule/NFIPluginManager.h"
-#include "NFComm/NFPluginModule/NFIPropertyTrailModule.h"
+#include "NFComm/NFPluginModule/NFIDataTrailModule.h"
 #include "NFComm/NFPluginModule/NFILogModule.h"
 
-class NFCPropertyTrailModule
-    : public NFIPropertyTrailModule
+class NFCDataTrailModule
+    : public NFIDataTrailModule
 {
 public:
-    NFCPropertyTrailModule(NFIPluginManager* p)
+    NFCDataTrailModule(NFIPluginManager* p)
     {
         pPluginManager = p;
     }
-    virtual ~NFCPropertyTrailModule() {};
+    virtual ~NFCDataTrailModule() {};
 
     virtual bool Init();
     virtual bool Shut();
@@ -34,7 +34,7 @@ public:
     virtual bool AfterInit();
 
 	virtual void LogObjectData(const NFGUID& self);
-    virtual void StartTrail(const NFGUID self);
+    virtual void StartTrail(const NFGUID& self);
 
 protected:
     void PrintStackTrace();

@@ -33,7 +33,7 @@ bool NFCAccountRedisModule::AfterInit()
 	return true;
 }
 
-int NFCAccountRedisModule::VerifyAccount(const std::string& strAccount, const std::string& strPwd)
+bool NFCAccountRedisModule::VerifyAccount(const std::string& strAccount, const std::string& strPwd)
 {
 	std::string strAccountKey = m_pCommonRedisModule->GetAccountCacheKey(strAccount);
 	NF_SHARE_PTR<NFIRedisClient> xNoSqlDriver = m_pNoSqlModule->GetDriverBySuit(strAccount);
@@ -42,11 +42,11 @@ int NFCAccountRedisModule::VerifyAccount(const std::string& strAccount, const st
 		std::string strPassword;
 		if (xNoSqlDriver->HGET(strAccountKey, "Password", strPassword) && strPassword == strPwd)
 		{
-			return 0;
+			return true;
 		}
 	}
 
-	return 1;
+	return false;
 }
 
 bool NFCAccountRedisModule::AddAccount(const std::string & strAccount, const std::string & strPwd)
