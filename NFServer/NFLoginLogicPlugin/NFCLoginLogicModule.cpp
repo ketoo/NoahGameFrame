@@ -26,9 +26,9 @@ bool NFCLoginLogicModule::Shut()
 
 void NFCLoginLogicModule::OnLoginProcess(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
 {
-    NFGUID nPlayerID;
+	NFGUID nPlayerID;
 	NFMsg::ReqAccountLogin xMsg;
-	if (!m_pNetModule->ReceivePB( nMsgID, msg, nLen, xMsg, nPlayerID))
+	if (!m_pNetModule->ReceivePB(nMsgID, msg, nLen, xMsg, nPlayerID))
 	{
 		return;
 	}
@@ -38,32 +38,52 @@ void NFCLoginLogicModule::OnLoginProcess(const NFSOCK nSockIndex, const int nMsg
 	{
 		if (pNetObject->GetConnectKeyState() == 0)
 		{
-			if (!m_pAccountRedisModule->ExistAccount(xMsg.account()))
+			NFMsg::AckEventResult xAckMsg;
+
+			switch (xMsg.loginmode())
 			{
-				m_pAccountRedisModule->AddAccount(xMsg.account(), xMsg.password());
-			}
+			case NFMsg::ELM_AUTO_REGISTER_LOGIN: // auto register when login
+				if (m_pAccountRedisModule->AddAccount(xMsg.account(), xMsg.password()))
+				{
+					break;
+				}
+				// goto case NFMsg::ELM_LOGIN
 
-			int nState = m_pAccountRedisModule->VerifyAccount(xMsg.account(), xMsg.password());
-			if (0 != nState)
-			{
-				std::ostringstream strLog;
-				strLog << "Check password failed, Account = " << xMsg.account() << " Password = " << xMsg.password();
-				m_pLogModule->LogNormal(NFILogModule::NLL_ERROR_NORMAL, NFGUID(0, nSockIndex), strLog, __FUNCTION__, __LINE__);
+			case NFMsg::ELM_LOGIN: // login
+				if (!m_pAccountRedisModule->VerifyAccount(xMsg.account(), xMsg.password()))
+				{
+					std::ostringstream strLog;
+					strLog << "Check password failed, Account = " << xMsg.account() << " Password = " << xMsg.password();
+					m_pLogModule->LogNormal(NFILogModule::NLL_ERROR_NORMAL, NFGUID(0, nSockIndex), strLog, __FUNCTION__, __LINE__);
 
-				NFMsg::AckEventResult xMsg;
-				xMsg.set_event_code(NFMsg::EGEC_ACCOUNTPWD_INVALID);
+					xAckMsg.set_event_code(NFMsg::EGEC_ACCOUNTPWD_INVALID);
+					m_pNetModule->SendMsgPB(NFMsg::EGameMsgID::EGMI_ACK_LOGIN, xAckMsg, nSockIndex);
+					return;
+				}
+				break;
 
-				m_pNetModule->SendMsgPB(NFMsg::EGameMsgID::EGMI_ACK_LOGIN, xMsg, nSockIndex);
-				return;
+			case NFMsg::ELM_REGISTER: // register
+				if (!m_pAccountRedisModule->AddAccount(xMsg.account(), xMsg.password()))
+				{
+					std::ostringstream strLog;
+					strLog << "Create account failed, Account = " << xMsg.account() << " Password = " << xMsg.password();
+					m_pLogModule->LogNormal(NFILogModule::NLL_ERROR_NORMAL, NFGUID(0, nSockIndex), strLog, __FUNCTION__, __LINE__);
+
+					xAckMsg.set_event_code(NFMsg::EGEC_ACCOUNT_EXIST);
+					m_pNetModule->SendMsgPB(NFMsg::EGameMsgID::EGMI_ACK_LOGIN, xAckMsg, nSockIndex);
+					return;
+				}
+				break;
+
+			default:
+				break;
 			}
 
 			pNetObject->SetConnectKeyState(1);
 			pNetObject->SetAccount(xMsg.account());
 
-			NFMsg::AckEventResult xData;
-			xData.set_event_code(NFMsg::EGEC_ACCOUNT_SUCCESS);
-
-			m_pNetModule->SendMsgPB(NFMsg::EGameMsgID::EGMI_ACK_LOGIN, xData, nSockIndex);
+			xAckMsg.set_event_code(NFMsg::EGEC_ACCOUNT_SUCCESS);
+			m_pNetModule->SendMsgPB(NFMsg::EGameMsgID::EGMI_ACK_LOGIN, xAckMsg, nSockIndex);
 
 			m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFGUID(0, nSockIndex), "Login successed :", xMsg.account().c_str());
 		}

@@ -19,7 +19,7 @@
 #include "NFComm/NFPluginModule/NFIPVPModule.h"
 #include "NFComm/NFPluginModule/NFIGameServerNet_ServerModule.h"
 #include "NFComm/NFPluginModule/NFIScheduleModule.h"
-#include "NFComm/NFPluginModule/NFIPropertyTrailModule.h"
+#include "NFComm/NFPluginModule/NFIDataTrailModule.h"
 
 class NFCCreateRoleModule
     : public NFICreateRoleModule
@@ -80,7 +80,7 @@ private:
 	NFISceneProcessModule* m_pSceneProcessModule;
 	NFINetClientModule* m_pNetClientModule;
 	NFIScheduleModule* m_pScheduleModule;
-	NFIPropertyTrailModule* m_pPropertyTrailModule;
+	NFIDataTrailModule* m_pDataTrailModule;
 };
 
 #endif
