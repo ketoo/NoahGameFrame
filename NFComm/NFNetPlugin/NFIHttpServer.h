@@ -44,9 +44,9 @@ enum NFWebStatus
     WEB_OK = 200,
 	WEB_AUTH = 401,
 	WEB_ERROR = 404,
+	WEB_INTER_ERROR = 500,
     WEB_TIMEOUT = 503,
 };
-
 
 enum NFHttpType
 {
