@@ -52,7 +52,14 @@ bool NFCHttpServerModule::OnReceiveNetPack(const NFHttpRequest& req)
 		{
 			HTTP_RECEIVE_FUNCTOR_PTR& pFunPtr = itPath->second;
 			HTTP_RECEIVE_FUNCTOR* pFunc = pFunPtr.get();
-			pFunc->operator()(req);
+			try
+			{
+				pFunc->operator()(req);
+			}
+			catch (const std::exception&)
+			{
+				ResponseMsg(req, "unknow error", NFWebStatus::WEB_INTER_ERROR);
+			}
 			return true;
 		}
 	}
