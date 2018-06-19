@@ -12,6 +12,13 @@ enum EServerState
 	EST_MAINTEN = 4;
 }
 
+enum ELoginMode
+{
+	ELM_LOGIN = 0;
+	ELM_REGISTER = 1;
+	ELM_AUTO_REGISTER_LOGIN = 2; // login, or register if account dosen't exsit
+}
+
 message ServerInfoReport
 {
 	
@@ -45,7 +52,7 @@ message ReqAccountLogin
 	required bytes 			security_code = 4;
     required bytes 			signBuff = 5;
     required int32 			clientVersion = 6;
-    required int32 			loginMode = 7;
+    required ELoginMode		loginMode = 7;
     required int32 			clientIP = 8;
     required int64 			clientMAC = 9;
 	required bytes 			device_info = 10;

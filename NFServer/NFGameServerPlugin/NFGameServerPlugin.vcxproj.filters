@@ -29,9 +29,6 @@
       <Filter>NFPropertyModule</Filter>
     </ClInclude>
     <ClInclude Include="NFCGameServerModule.h" />
-    <ClInclude Include="NFCPropertyTrailModule.h">
-      <Filter>NFPropertyModule</Filter>
-    </ClInclude>
     <ClInclude Include="NFCNPCRefreshModule.h">
       <Filter>NFNPCRefreshModule</Filter>
     </ClInclude>
@@ -53,9 +50,6 @@
       <Filter>NFPropertyModule</Filter>
     </ClCompile>
     <ClCompile Include="NFCGameServerModule.cpp" />
-    <ClCompile Include="NFCPropertyTrailModule.cpp">
-      <Filter>NFPropertyModule</Filter>
-    </ClCompile>
     <ClCompile Include="NFCNPCRefreshModule.cpp">
       <Filter>NFNPCRefreshModule</Filter>
     </ClCompile>

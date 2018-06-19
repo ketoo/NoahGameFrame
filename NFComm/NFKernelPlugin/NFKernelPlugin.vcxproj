@@ -103,6 +103,7 @@
     </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="NFCDataTrailModule.h" />
     <ClInclude Include="NFCErrorBusModule.h" />
     <ClInclude Include="NFCEventModule.h" />
     <ClInclude Include="NFCKernelModule.h" />
@@ -119,6 +120,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
       </PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="NFCDataTrailModule.cpp" />
     <ClCompile Include="NFCErrorBusModule.cpp" />
     <ClCompile Include="NFCEventModule.cpp" />
     <ClCompile Include="NFCKernelModule.cpp" />
