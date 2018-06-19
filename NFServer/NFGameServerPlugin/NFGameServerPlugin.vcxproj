@@ -104,7 +104,6 @@
     <ClInclude Include="NFCNPCRefreshModule.h" />
     <ClInclude Include="NFCPropertyConfigModule.h" />
     <ClInclude Include="NFCPropertyModule.h" />
-    <ClInclude Include="NFCPropertyTrailModule.h" />
     <ClInclude Include="NFCSceneProcessModule.h" />
     <ClInclude Include="NFCSwitchGameServerModule.h" />
     <ClInclude Include="NFGameServerPlugin.h" />
@@ -123,7 +122,6 @@
     <ClCompile Include="NFCNPCRefreshModule.cpp" />
     <ClCompile Include="NFCPropertyConfigModule.cpp" />
     <ClCompile Include="NFCPropertyModule.cpp" />
-    <ClCompile Include="NFCPropertyTrailModule.cpp" />
     <ClCompile Include="NFCSceneProcessModule.cpp" />
     <ClCompile Include="NFCSwitchGameServerModule.cpp" />
     <ClCompile Include="NFGameServerPlugin.cpp" />

@@ -1,8 +1,8 @@
 // -------------------------------------------------------------------------
-//    @FileName			:    NFCPropertyTrailModule.cpp
+//    @FileName			:    NFCDataTrailModule.cpp
 //    @Author           :    LvSheng.Huang
 //    @Date             :    2013-09-30
-//    @Module           :    NFCPropertyTrailModule
+//    @Module           :    NFCDataTrailModule
 //
 // -------------------------------------------------------------------------
 
@@ -10,7 +10,7 @@
 #include "NFComm/NFPluginModule/NFIPluginManager.h"
 #include "NFComm/NFCore/NFDataList.hpp"
 
-bool NFCPropertyTrailModule::Init()
+bool NFCDataTrailModule::Init()
 {
 	m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>();
 	m_pElementModule = pPluginManager->FindModule<NFIElementModule>();
@@ -21,28 +21,28 @@ bool NFCPropertyTrailModule::Init()
 }
 
 
-bool NFCPropertyTrailModule::Shut()
+bool NFCDataTrailModule::Shut()
 {
     return true;
 }
 
-bool NFCPropertyTrailModule::Execute()
+bool NFCDataTrailModule::Execute()
 {
     return true;
 }
 
-bool NFCPropertyTrailModule::AfterInit()
+bool NFCDataTrailModule::AfterInit()
 {
 
     return true;
 }
 
-void NFCPropertyTrailModule::StartTrail(const NFGUID self)
+void NFCDataTrailModule::StartTrail(const NFGUID& self)
 {
 	TrailObjectData(self);
 }
 
-void NFCPropertyTrailModule::LogObjectData(const NFGUID& self)
+void NFCDataTrailModule::LogObjectData(const NFGUID& self)
 {
     NF_SHARE_PTR<NFIObject> xObject = m_pKernelModule->GetObject(self);
     if (nullptr == xObject)
@@ -96,7 +96,7 @@ void NFCPropertyTrailModule::LogObjectData(const NFGUID& self)
     }
 }
 
-int NFCPropertyTrailModule::OnObjectPropertyEvent(const NFGUID& self, const std::string& strPropertyName, const NFData& oldVar, const NFData& newVar)
+int NFCDataTrailModule::OnObjectPropertyEvent(const NFGUID& self, const std::string& strPropertyName, const NFData& oldVar, const NFData& newVar)
 {
     std::ostringstream stream;
 
@@ -113,7 +113,7 @@ int NFCPropertyTrailModule::OnObjectPropertyEvent(const NFGUID& self, const std:
     return 0;
 }
 
-int NFCPropertyTrailModule::OnObjectRecordEvent(const NFGUID& self, const RECORD_EVENT_DATA& xEventData, const NFData& oldVar, const NFData& newVar)
+int NFCDataTrailModule::OnObjectRecordEvent(const NFGUID& self, const RECORD_EVENT_DATA& xEventData, const NFData& oldVar, const NFData& newVar)
 {
     std::ostringstream stream;
     NF_SHARE_PTR<NFIRecord> xRecord = m_pKernelModule->FindRecord(self, xEventData.strRecordName);
@@ -180,7 +180,7 @@ int NFCPropertyTrailModule::OnObjectRecordEvent(const NFGUID& self, const RECORD
     return 0;
 }
 
-int NFCPropertyTrailModule::TrailObjectData(const NFGUID& self)
+int NFCDataTrailModule::TrailObjectData(const NFGUID& self)
 {
     NF_SHARE_PTR<NFIObject> xObject = m_pKernelModule->GetObject(self);
     if (nullptr == xObject)
@@ -194,7 +194,7 @@ int NFCPropertyTrailModule::TrailObjectData(const NFGUID& self)
         NF_SHARE_PTR<NFIProperty> xProperty = xPropertyManager->First();
         while (nullptr != xProperty)
         {
-            m_pKernelModule->AddPropertyCallBack(self, xProperty->GetKey(), this, &NFCPropertyTrailModule::OnObjectPropertyEvent);
+            m_pKernelModule->AddPropertyCallBack(self, xProperty->GetKey(), this, &NFCDataTrailModule::OnObjectPropertyEvent);
 
             xProperty = xPropertyManager->Next();
         }
@@ -206,7 +206,7 @@ int NFCPropertyTrailModule::TrailObjectData(const NFGUID& self)
         NF_SHARE_PTR<NFIRecord> xRecord = xRecordManager->First();
         while (nullptr != xRecord)
         {
-            m_pKernelModule->AddRecordCallBack(self, xRecord->GetName(), this, &NFCPropertyTrailModule::OnObjectRecordEvent);
+            m_pKernelModule->AddRecordCallBack(self, xRecord->GetName(), this, &NFCDataTrailModule::OnObjectRecordEvent);
 
 
             xRecord = xRecordManager->Next();
@@ -216,17 +216,21 @@ int NFCPropertyTrailModule::TrailObjectData(const NFGUID& self)
     return 0;
 }
 
-void NFCPropertyTrailModule::PrintStackTrace()
+void NFCDataTrailModule::PrintStackTrace()
 {
-    int size = 16;
-    void * array[16];
-    int stack_num = backtrace(array, size);
-    char ** stacktrace = backtrace_symbols(array, stack_num);
-    for (int i = 0; i < stack_num; ++i)
-    {
-        //printf("%s\n", stacktrace[i]);
-        m_pLogModule->LogProperty(NFILogModule::NF_LOG_LEVEL::NLL_DEBUG_NORMAL, NFGUID(), "", stacktrace[i],  __FUNCTION__, __LINE__);
-    }
+#if NF_PLATFORM != NF_PLATFORM_WIN
 
-    free(stacktrace);
+	int size = 16;
+	void * array[16];
+	int stack_num = backtrace(array, size);
+	char ** stacktrace = backtrace_symbols(array, stack_num);
+	for (int i = 0; i < stack_num; ++i)
+	{
+		//printf("%s\n", stacktrace[i]);
+		m_pLogModule->LogProperty(NFILogModule::NF_LOG_LEVEL::NLL_DEBUG_NORMAL, NFGUID(), "", stacktrace[i], __FUNCTION__, __LINE__);
+	}
+
+	free(stacktrace);
+#endif
+
 }
