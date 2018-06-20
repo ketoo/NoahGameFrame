@@ -102,9 +102,9 @@ int NFCDataTrailModule::OnObjectPropertyEvent(const NFGUID& self, const std::str
 
     stream << " Trailing ";
     stream << " [Old] ";
-    stream << oldVar.GetString();
+    stream << oldVar.ToString();
     stream << " [New] ";
-    stream << newVar.GetString();
+    stream << newVar.ToString();
 
     m_pLogModule->LogProperty(NFILogModule::NF_LOG_LEVEL::NLL_DEBUG_NORMAL, self, strPropertyName, stream.str(),  __FUNCTION__, __LINE__);
 
