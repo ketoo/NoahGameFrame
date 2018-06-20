@@ -35,8 +35,8 @@
 		<Property Id="GMLevel" Cache="1" Desc="GM等级" Force="0" Private="1" Public="1" Ref="0" Save="0" Type="int" Upload="0" />
 		<Property Id="GambleDiamond" Cache="1" Desc="" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="int" Upload="0" />
 		<Property Id="GambleGold" Cache="1" Desc="" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="int" Upload="0" />
-		<Property Id="GameID" Cache="1" Desc="登陆的服ID" Force="0" Private="0" Public="0" Ref="0" Save="0" Type="int" Upload="0" />
-		<Property Id="GateID" Cache="1" Desc="登陆的网关ID" Force="0" Private="0" Public="0" Ref="0" Save="0" Type="int" Upload="0" />
+		<Property Id="GameID" Cache="0" Desc="登陆的服ID" Force="0" Private="0" Public="0" Ref="0" Save="0" Type="int" Upload="0" />
+		<Property Id="GateID" Cache="0" Desc="登陆的网关ID" Force="0" Private="0" Public="0" Ref="0" Save="0" Type="int" Upload="0" />
 		<Property Id="Gold" Cache="1" Desc="玩家游戏金币" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="int" Upload="0" />
 		<Property Id="GuildID" Cache="1" Desc="公会ID" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="object" Upload="0" />
 		<Property Id="Guild_AD" Cache="0" Desc="工会公告" Force="0" Private="1" Public="1" Ref="0" Save="1" Type="string" Upload="0" />
