@@ -29,7 +29,8 @@ public:
 		ECONSt_HERO_POS1 = 1,
 		ECONSt_HERO_POS2 = 2,
 		ECONSt_HERO_POS3 = 3,
-		ECONSt_HERO_MAX = 4,
+		ECONSt_HERO_POS4 = 4,
+		ECONSt_HERO_MAX = 5,
 	};
 
     virtual NFGUID AddHero(const NFGUID& self, const std::string& strID) = 0;
