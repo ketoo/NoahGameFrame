@@ -81,7 +81,7 @@ int NFCHeroPropertyModule::OnObjectHeroRecordEvent(const NFGUID& self, const REC
 		const NFGUID xHeroID = pHeroRecord->GetObject(xEventData.nRow, NFrame::Player::PlayerHero::GUID);
 		
 		AddHeroProperty(self, xHeroID);
-
+		/**
 		if (m_pKernelModule->GetPropertyObject(self, NFrame::Player::HeroID1()) == NFGUID())
 		{
 			//must setting props before we set props for fighting hero
@@ -101,6 +101,7 @@ int NFCHeroPropertyModule::OnObjectHeroRecordEvent(const NFGUID& self, const REC
 		{
 			CalFightintHeroProperty(self);
 		}
+		*/
 	}
 	break;
 	case RECORD_EVENT_DATA::Del:
@@ -175,31 +176,36 @@ bool NFCHeroPropertyModule::OnHeroPropertyUpdate(const NFGUID & self, const NFGU
 		break;
 	case NFIHeroModule::ECONSt_HERO_POS1:
 	{
-		m_pKernelModule->SetPropertyInt(self, NFrame::Player::HeroPos1Star(), nStar);
+		m_pKernelModule->SetPropertyInt(self, NFrame::Player::HeroStar1(), nStar);
 	}
 		break;
 	case NFIHeroModule::ECONSt_HERO_POS2:
 	{
-		m_pKernelModule->SetPropertyInt(self, NFrame::Player::HeroPos2Star(), nStar);
+		m_pKernelModule->SetPropertyInt(self, NFrame::Player::HeroStar2(), nStar);
 	}
 		break;
 	case NFIHeroModule::ECONSt_HERO_POS3:
 	{
-		m_pKernelModule->SetPropertyInt(self, NFrame::Player::HeroPos3Star(), nStar);
+		m_pKernelModule->SetPropertyInt(self, NFrame::Player::HeroStar3(), nStar);
 	}
 		break;
+	case NFIHeroModule::ECONSt_HERO_POS4:
+	{
+		m_pKernelModule->SetPropertyInt(self, NFrame::Player::HeroStar4(), nStar);
+	}
+	break;
 	case NFIHeroModule::ECONSt_HERO_MAX:
 		break;
 	default:
 		break;
 	}
-
+	/*
 	NFGUID xFightingID = m_pKernelModule->GetPropertyObject(self, NFrame::Player::FightHero());
 	if (xFightingID == xHeroGUID)
 	{
 		CalFightintHeroProperty(self);
 	}
-
+	*/
 	return true;
 }
 
@@ -467,6 +473,7 @@ bool NFCHeroPropertyModule::CalHeroEquipProperty(const NFGUID& self, const NFGUI
 
 bool NFCHeroPropertyModule::CalFightintHeroProperty(const NFGUID & self)
 {
+	/*
 	NF_SHARE_PTR<NFIRecord> pHeroRecord = m_pKernelModule->FindRecord(self, NFrame::Player::PlayerHero::ThisName());
 	if (nullptr == pHeroRecord)
 	{
@@ -498,7 +505,7 @@ bool NFCHeroPropertyModule::CalFightintHeroProperty(const NFGUID & self)
 
 		m_pPropertyModule->SetPropertyValue(self, strColTag, NFIPropertyModule::NPG_FIGHTING_HERO, nValue);
 	}
-
+	*/
 
 	return true;
 }
