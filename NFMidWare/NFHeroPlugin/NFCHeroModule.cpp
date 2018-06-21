@@ -125,7 +125,7 @@ NFGUID NFCHeroModule::AddHero(const NFGUID& self, const std::string& strID)
 
 bool NFCHeroModule::AddHeroExp(const NFGUID & self, const int64_t nExp)
 {
-	NFGUID xID = m_pKernelModule->GetPropertyObject(self, NFrame::Player::FightHero());
+	NFGUID xID;// = m_pKernelModule->GetPropertyObject(self, NFrame::Player::FightHero());
 	return AddHeroExp(self, xID, nExp);
 }
 
@@ -223,7 +223,6 @@ bool NFCHeroModule::SetFightHero(const NFGUID& self, const NFGUID& xHeroID, cons
 	NFGUID xHero1 = m_pKernelModule->GetPropertyObject(self, NFrame::Player::HeroID1());
 	NFGUID xHero2 = m_pKernelModule->GetPropertyObject(self, NFrame::Player::HeroID2());
 	NFGUID xHero3 = m_pKernelModule->GetPropertyObject(self, NFrame::Player::HeroID3());
-	NFGUID xFightHero = m_pKernelModule->GetPropertyObject(self, NFrame::Player::FightHero());
 	if (xHero1 == xHeroID
 		|| xHero2 == xHeroID
 		|| xHero3 == xHeroID)
@@ -231,7 +230,7 @@ bool NFCHeroModule::SetFightHero(const NFGUID& self, const NFGUID& xHeroID, cons
 		//this hero has exist in the fighting list
 		return 0;
 	}
-
+	/*
 	NF_SHARE_PTR<NFIRecord> pHeroValueRecord = m_pKernelModule->FindRecord(self, NFrame::Player::HeroValue::ThisName());
 	int nHeroMAXHP = pHeroValueRecord->GetInt(nRow, NFrame::Player::HeroValue::MAXHP);
 
@@ -286,12 +285,14 @@ bool NFCHeroModule::SetFightHero(const NFGUID& self, const NFGUID& xHeroID, cons
 	default:
 		break;
 	}
+	*/
 
 	return false;
 }
 
 bool NFCHeroModule::SwitchFightHero(const NFGUID & self, const NFGUID & xHeroID)
 {
+	/*
 	NFGUID xLastFightingHero = m_pKernelModule->GetPropertyObject(self, NFrame::Player::FightHero());
 	if (xLastFightingHero == xHeroID)
 	{
@@ -364,6 +365,7 @@ bool NFCHeroModule::SwitchFightHero(const NFGUID & self, const NFGUID & xHeroID)
 	m_pKernelModule->SetPropertyString(self, NFrame::Player::Skill3(), strSkill3);
 
 	m_pHeroPropertyModule->CalFightintHeroProperty(self);
+	*/
 	return true;
 }
 
@@ -406,6 +408,7 @@ void NFCHeroModule::OnSwitchFightHeroMsg(const NFSOCK nSockIndex, const int nMsg
 
 NFIHeroModule::EConsHero_Pos NFCHeroModule::GetFightPos(const NFGUID & self, const NFGUID & xHeroID)
 {
+	/*
 	if (m_pKernelModule->GetPropertyObject(self, NFrame::Player::HeroID1()) == xHeroID)
 	{
 		return EConsHero_Pos::ECONSt_HERO_POS1;
@@ -418,7 +421,11 @@ NFIHeroModule::EConsHero_Pos NFCHeroModule::GetFightPos(const NFGUID & self, con
 	{
 		return EConsHero_Pos::ECONSt_HERO_POS3;
 	}
-
+	else if (m_pKernelModule->GetPropertyObject(self, NFrame::Player::HeroID4()) == xHeroID)
+	{
+		return EConsHero_Pos::ECONSt_HERO_POS4;
+	}
+	*/
 	return EConsHero_Pos::ECONSt_HERO_UNKNOW;
 }
 
@@ -434,6 +441,7 @@ int NFCHeroModule::OnPlayerClassEvent(const NFGUID & self, const std::string & s
 
 int NFCHeroModule::OnPlayerHPEvent(const NFGUID & self, const std::string & strPropertyName, const NFData & oldVar, const NFData & newVar)
 {
+	/*
 	NFGUID xFightingHero = m_pKernelModule->GetPropertyObject(self, NFrame::Player::FightHero());
 	EConsHero_Pos nPos = GetFightPos(self, xFightingHero);
 
@@ -461,7 +469,7 @@ int NFCHeroModule::OnPlayerHPEvent(const NFGUID & self, const std::string & strP
 	default:
 		break;
 	}
-
+	*/
 	return 0;
 }
 
@@ -472,6 +480,7 @@ int NFCHeroModule::BeforeEnterSceneGroupEvent(const NFGUID & self, const int nSc
 
 int NFCHeroModule::AfterEnterSceneGroupEvent(const NFGUID & self, const int nSceneID, const int nGroupID, const int nType, const NFDataList & argList)
 {
+	/*
 	//full hp for all heroes
 	NFGUID xFightingHeroID = m_pKernelModule->GetPropertyObject(self, NFrame::Player::FightHero());
 	NFGUID xHero1ID = m_pKernelModule->GetPropertyObject(self, NFrame::Player::HeroID1());
@@ -526,7 +535,7 @@ int NFCHeroModule::AfterEnterSceneGroupEvent(const NFGUID & self, const int nSce
 		m_pKernelModule->SetPropertyInt(self, NFrame::Player::MP(), nHero3MAXMP);
 	}
 
-
+	*/
 	return 0;
 }
 
