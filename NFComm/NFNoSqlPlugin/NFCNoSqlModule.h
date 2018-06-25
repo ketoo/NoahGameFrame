@@ -49,7 +49,7 @@ public:
 	virtual bool RemoveConnectSql(const std::string& strID);
 
 protected:
-	void Reconnect();
+	void CheckConnect();
 
 protected:
 	NFINT64 mLastCheckTime;
