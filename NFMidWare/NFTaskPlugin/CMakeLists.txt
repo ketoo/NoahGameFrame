@@ -5,7 +5,7 @@ file(GLOB NFTaskPlugin_ROOT_Cpp
 file(GLOB NFTaskPlugin_ROOT_Hpp 
 	*.h)
 
-add_library(NFTaskPlugin SHARED
+add_library(NFTaskPlugin STATIC
 	${NFTaskPlugin_ROOT_Cpp}
 	${NFTaskPlugin_ROOT_Hpp})
 	

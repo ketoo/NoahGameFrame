@@ -5,7 +5,7 @@ file(GLOB NFProxyServerNet_ServerPlugin_ROOT_Cpp
 file(GLOB NFProxyServerNet_ServerPlugin_ROOT_Hpp 
 	*.h)
 
-add_library(NFProxyServerNet_ServerPlugin SHARED
+add_library(NFProxyServerNet_ServerPlugin STATIC
 	${NFProxyServerNet_ServerPlugin_ROOT_Cpp}
 	${NFProxyServerNet_ServerPlugin_ROOT_Hpp})
 	

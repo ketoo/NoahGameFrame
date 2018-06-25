@@ -5,7 +5,7 @@ file(GLOB NFGameServerNet_ServerPlugin_ROOT_Cpp
 file(GLOB NFGameServerNet_ServerPlugin_ROOT_Hpp 
 	*.h)
 
-add_library(NFGameServerNet_ServerPlugin SHARED
+add_library(NFGameServerNet_ServerPlugin STATIC
 	${NFGameServerNet_ServerPlugin_ROOT_Cpp}
 	${NFGameServerNet_ServerPlugin_ROOT_Hpp})
 	

@@ -5,7 +5,7 @@ file(GLOB NFAOIPlugin_ROOT_Cpp
 file(GLOB NFAOIPlugin_ROOT_Hpp 
 	*.h)
 
-add_library(NFAOIPlugin SHARED
+add_library(NFAOIPlugin STATIC
 	${NFAOIPlugin_ROOT_Cpp}
 	${NFAOIPlugin_ROOT_Hpp})
 	

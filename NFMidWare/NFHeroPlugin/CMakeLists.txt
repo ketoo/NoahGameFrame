@@ -5,7 +5,7 @@ file(GLOB NFHeroPlugin_ROOT_Cpp
 file(GLOB NFHeroPlugin_ROOT_Hpp 
 	*.h)
 
-add_library(NFHeroPlugin SHARED
+add_library(NFHeroPlugin STATIC
 	${NFHeroPlugin_ROOT_Cpp}
 	${NFHeroPlugin_ROOT_Hpp})
 	

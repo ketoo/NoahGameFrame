@@ -5,7 +5,7 @@ file(GLOB NFLoginLogicPlugin_ROOT_Cpp
 file(GLOB NFLoginLogicPlugin_ROOT_Hpp 
 	*.h)
 
-add_library(NFLoginLogicPlugin SHARED
+add_library(NFLoginLogicPlugin STATIC
 	${NFLoginLogicPlugin_ROOT_Cpp}
 	${NFLoginLogicPlugin_ROOT_Hpp})
 	

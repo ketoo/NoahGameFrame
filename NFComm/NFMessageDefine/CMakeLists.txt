@@ -3,7 +3,7 @@ file(GLOB NFMessageDefine_ROOT_Cpp *.cpp)
 file(GLOB NFMessageDefine_ROOT_CC *.cc)
 file(GLOB NFMessageDefine_ROOT_Hpp *.h)
 
-add_library(NFMessageDefine SHARED
+add_library(NFMessageDefine STATIC
 	${NFMessageDefine_ROOT_Cpp}
 	${NFMessageDefine_ROOT_CC}
 	${NFMessageDefine_ROOT_Hpp})

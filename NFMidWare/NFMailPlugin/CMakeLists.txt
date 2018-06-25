@@ -5,7 +5,7 @@ file(GLOB NFMailPlugin_ROOT_Cpp
 file(GLOB NFMailPlugin_ROOT_Hpp 
 	*.h)
 
-add_library(NFMailPlugin SHARED
+add_library(NFMailPlugin STATIC
 	${NFMailPlugin_ROOT_Cpp}
 	${NFMailPlugin_ROOT_Hpp})
 	

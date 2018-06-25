@@ -5,7 +5,7 @@ file(GLOB NFMasterNet_ServerPlugin_ROOT_Cpp
 file(GLOB NFMasterNet_ServerPlugin_ROOT_Hpp 
 	*.h)
 
-add_library(NFMasterNet_ServerPlugin SHARED
+add_library(NFMasterNet_ServerPlugin STATIC
 	${NFMasterNet_ServerPlugin_ROOT_Cpp}
 	${NFMasterNet_ServerPlugin_ROOT_Hpp})
 	

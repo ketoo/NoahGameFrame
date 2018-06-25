@@ -5,7 +5,7 @@ file(GLOB NFDataAgent_NosqlPlugin_ROOT_Cpp
 file(GLOB NFDataAgent_NosqlPlugin_ROOT_Hpp 
 	*.h)
 
-add_library(NFDBLogicPlugin SHARED
+add_library(NFDBLogicPlugin STATIC
 	${NFDataAgent_NosqlPlugin_ROOT_Cpp}
 	${NFDataAgent_NosqlPlugin_ROOT_Hpp})
 	

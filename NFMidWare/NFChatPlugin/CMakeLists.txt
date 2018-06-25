@@ -5,7 +5,7 @@ file(GLOB NFChatPlugin_ROOT_Cpp
 file(GLOB NFChatPlugin_ROOT_Hpp 
 	*.h)
 
-add_library(NFChatPlugin SHARED
+add_library(NFChatPlugin STATIC
 	${NFChatPlugin_ROOT_Cpp}
 	${NFChatPlugin_ROOT_Hpp})
 	
