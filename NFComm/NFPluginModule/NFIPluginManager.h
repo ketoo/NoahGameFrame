@@ -154,6 +154,11 @@ public:
     virtual int GetAppID() const = 0;
     virtual void SetAppID(const int nAppID) = 0;
 
+    virtual bool IsRunningDocker() const = 0;
+    virtual void SetRunningDocker(bool bDocker) = 0;
+
+    virtual bool IsStaticPlugin() const = 0;
+
     virtual NFINT64 GetInitTime() const = 0;
     virtual NFINT64 GetNowTime() const = 0;
 

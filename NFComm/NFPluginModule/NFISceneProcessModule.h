@@ -26,7 +26,6 @@ class NFISceneProcessModule
 {
 
 public:
-	virtual bool RequestEnterScene(const NFGUID & self, const NFGUID& player) = 0;
 	virtual bool RequestEnterScene(const NFGUID & self, const int nSceneID, const int nType, const NFDataList & argList) = 0;
 	virtual bool RequestEnterScene(const NFGUID& self, const int nSceneID, const int nGrupID, const int nType, const NFDataList& argList) = 0;
 };

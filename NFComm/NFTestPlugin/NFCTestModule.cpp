@@ -12,7 +12,8 @@ bool NFCTestModule::Awake()
 {
 	int argc = 0;
 	char* c = new char[1];
-	//testing::InitGoogleTest(&argc, &c);
+	//::testing::GTEST_FLAG(output) = "xml:hello.xml";
+	//::testing::InitGoogleTest(&argc, &c);
 
 	std::list<NFIModule*> xModules = pPluginManager->Modules();
 	for (auto it : xModules)
@@ -145,3 +146,23 @@ bool NFCTestModule::OnReloadPlugin()
 
 	return true;
 }
+
+int NFCTestModule::Factorial(int n)
+{
+	if (1 == n)
+	{
+		return 1;
+	}
+
+	return n*Factorial(n-1);
+}
+
+// 测试用例
+/*
+TEST(FactorialTest, HandlesPositiveInput) {
+    EXPECT_EQ(1, this->Factorial(1));
+    EXPECT_EQ(2, this->Factorial(2));
+    EXPECT_EQ(6, this->Factorial(3));
+    EXPECT_EQ(40320, this->Factorial(8));
+}
+*/

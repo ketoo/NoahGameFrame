@@ -58,19 +58,16 @@ cd lua
 
 sysOS=`uname -s`
 if [ $sysOS == "Darwin" ];then
-    echo "I'm MacOS"
-    make macosx
-    export DYLD_LIBRARY_PATH=.:$DYLD_LIBRARY_PATH
+    make macosx test
 elif [ $sysOS == "Linux" ];then
-    export LD_LIBRARY_PATH=.:$LD_LIBRARY_PATH
-    make linux
+    make linux test
 else
-    echo "Other OS: $sysOS"
 fi
 
 cp -r -f ./*.a ../lib/Debug/
 cp -r -f ./*.a ../lib/Release/
-
+cp -r -f ./*.a ../../_Out/Debug/
+cp -r -f ./*.a ../../_Out/Release/
 cd ../
 echo Building lua finish...
 

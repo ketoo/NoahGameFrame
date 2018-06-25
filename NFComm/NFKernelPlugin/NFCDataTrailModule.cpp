@@ -6,6 +6,7 @@
 //
 // -------------------------------------------------------------------------
 
+#include <execinfo.h>
 #include "NFCDataTrailModule.h"
 #include "NFComm/NFPluginModule/NFIPluginManager.h"
 #include "NFComm/NFCore/NFDataList.hpp"
