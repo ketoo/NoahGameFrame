@@ -6,7 +6,7 @@
 //
 // -------------------------------------------------------------------------
 
-#include "NFCProxyLogicPlugin.h"
+#include "NFProxyLogicPlugin.h"
 #include "NFCProxyLogicModule.h"
 
 bool NFCProxyLogicModule::Init()
