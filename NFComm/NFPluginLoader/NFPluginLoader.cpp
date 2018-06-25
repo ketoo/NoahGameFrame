@@ -266,6 +266,26 @@ void ProcessParameter(int argc, char* argv[])
         }
 	}
 
+	if (strArgvList.find("Docker=") != string::npos)
+	{
+		std::string strDockerFlag = "0";
+		for (int i = 0; i < argc; i++)
+		{
+			strDockerFlag = argv[i];
+			if (strDockerFlag.find("Docker=") != string::npos)
+			{
+                strDockerFlag.erase(0, 7);
+				break;
+			}
+		}
+
+		int nDockerFlag = 0;
+        if(NF_StrTo(strDockerFlag, nDockerFlag))
+        {
+            NFCPluginManager::GetSingletonPtr()->SetRunningDocker(nDockerFlag);
+        }
+	}
+	
 	strTitleName = strAppName + strAppID;// +" PID" + NFGetPID();
 	strTitleName.replace(strTitleName.find("Server"), 6, "");
 	strTitleName = "NF" + strTitleName;
