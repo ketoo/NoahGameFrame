@@ -9,7 +9,7 @@ file(GLOB NFGameLogicPlugin_ROOT_Hpp
 file(GLOB RemoveItems_Cpp NFCPVPModule.cpp NFCTileMapModule.cpp NFCTileModule.cpp NFCSurvivalModule.cpp NFCTileMapModule.cpp)
 list(REMOVE_ITEM NFGameLogicPlugin_ROOT_Cpp ${RemoveItems_Cpp})
 
-add_library(NFGameLogicPlugin SHARED
+add_library(NFGameLogicPlugin STATIC
 	${NFGameLogicPlugin_ROOT_Cpp}
 	${NFGameLogicPlugin_ROOT_Hpp})
 	

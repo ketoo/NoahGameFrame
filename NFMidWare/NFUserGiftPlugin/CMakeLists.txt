@@ -5,7 +5,7 @@ file(GLOB NFUserGiftPlugin_ROOT_Cpp
 file(GLOB NFUserGiftPlugin_ROOT_Hpp 
 	*.h)
 
-add_library(NFUserGiftPlugin SHARED
+add_library(NFUserGiftPlugin STATIC
 	${NFUserGiftPlugin_ROOT_Cpp}
 	${NFUserGiftPlugin_ROOT_Hpp})
 	

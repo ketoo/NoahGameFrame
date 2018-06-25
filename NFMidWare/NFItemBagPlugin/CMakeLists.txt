@@ -5,7 +5,7 @@ file(GLOB NFItemBagPlugin_ROOT_Cpp
 file(GLOB NFItemBagPlugin_ROOT_Hpp 
 	*.h)
 
-add_library(NFItemBagPlugin SHARED
+add_library(NFItemBagPlugin STATIC
 	${NFItemBagPlugin_ROOT_Cpp}
 	${NFItemBagPlugin_ROOT_Hpp})
 	

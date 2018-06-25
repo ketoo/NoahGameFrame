@@ -5,7 +5,7 @@ file(GLOB NFRankPlugin_ROOT_Cpp
 file(GLOB NFRankPlugin_ROOT_Hpp 
 	*.h)
 
-add_library(NFRankPlugin SHARED
+add_library(NFRankPlugin STATIC
 	${NFRankPlugin_ROOT_Cpp}
 	${NFRankPlugin_ROOT_Hpp})
 	

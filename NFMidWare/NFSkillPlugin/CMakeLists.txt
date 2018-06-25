@@ -5,7 +5,7 @@ file(GLOB NFSkillPlugin_ROOT_Cpp
 file(GLOB NFSkillPlugin_ROOT_Hpp 
 	*.h)
 
-add_library(NFSkillPlugin SHARED
+add_library(NFSkillPlugin STATIC
 	${NFSkillPlugin_ROOT_Cpp}
 	${NFSkillPlugin_ROOT_Hpp})
 	

@@ -5,7 +5,7 @@ file(GLOB NFTestPlugin_ROOT_Cpp
 file(GLOB NFTestPlugin_ROOT_Hpp 
 	*.h)
 
-add_library(NFTestPlugin SHARED
+add_library(NFTestPlugin STATIC
 	${NFTestPlugin_ROOT_Cpp}
 	${NFTestPlugin_ROOT_Hpp})
 	

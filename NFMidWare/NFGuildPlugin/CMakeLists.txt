@@ -6,7 +6,7 @@ file(GLOB NFGuildPlugin_ROOT_Cpp
 file(GLOB NFGuildPlugin_ROOT_Hpp 
 	*.h)
 
-add_library(NFGuildPlugin SHARED
+add_library(NFGuildPlugin STATIC
 	${NFGuildPlugin_ROOT_Cpp}
 	${NFGuildPlugin_ROOT_Hpp})
 	

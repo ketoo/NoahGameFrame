@@ -5,7 +5,7 @@ file(GLOB NFLoginNet_ClientPlugin_ROOT_Cpp
 file(GLOB NFLoginNet_ClientPlugin_ROOT_Hpp 
 	*.h)
 
-add_library(NFLoginNet_ClientPlugin SHARED
+add_library(NFLoginNet_ClientPlugin STATIC
 	${NFLoginNet_ClientPlugin_ROOT_Cpp}
 	${NFLoginNet_ClientPlugin_ROOT_Hpp})
 	
