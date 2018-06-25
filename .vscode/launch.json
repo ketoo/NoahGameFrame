@@ -10,12 +10,13 @@
             "request": "launch",
             //"request": "attach",
             "program": "${workspaceFolder}/_Out/Debug/NFPluginLoader_d",
-            "args": ["-d Server=GameServer ID=6"],
+            "args": ["Server=GameServer", "ID=6"],
             "stopAtEntry": false,
-            "cwd": "${workspaceFolder}",
+            "cwd": "${workspaceFolder}/_Out/Debug/",
             "environment": [],
             "externalConsole": true,
-            "MIMode": "gdb"
+            //for mac lldb
+            "MIMode": "lldb"
         },
         {
             "name": "Worlderver",
@@ -23,12 +24,13 @@
             "request": "launch",
             //"request": "attach",
             "program": "${workspaceFolder}/_Out/Debug/NFPluginLoader_d",
-            "args": ["-d Server=WorldServer ID=7"],
+            "args": ["Server=WorldServer", "ID=7"],
             "stopAtEntry": false,
-            "cwd": "${workspaceFolder}",
+            "cwd": "${workspaceFolder}/_Out/Debug/",
             "environment": [],
             "externalConsole": true,
-            "MIMode": "gdb"
+            //for mac lldb
+            "MIMode": "lldb"
         },
         {
             "name": "ProxyServer",
@@ -36,12 +38,13 @@
             "request": "launch",
             //"request": "attach",
             "program": "${workspaceFolder}/_Out/Debug/NFPluginLoader_d",
-            "args": ["-d Server=GameServer ID=5"],
+            "args": ["Server=GameServer", "ID=5"],
             "stopAtEntry": false,
-            "cwd": "${workspaceFolder}",
+            "cwd": "${workspaceFolder}/_Out/Debug/",
             "environment": [],
             "externalConsole": true,
-            "MIMode": "gdb"
+            //for mac lldb
+            "MIMode": "lldb"
         },
         {
             "name": "DBServer",
@@ -49,12 +52,13 @@
             "request": "launch",
             //"request": "attach",
             "program": "${workspaceFolder}/_Out/Debug/NFPluginLoader_d",
-            "args": ["-d Server=GameServer ID=3"],
+            "args": ["Server=GameServer", "ID=3"],
             "stopAtEntry": false,
-            "cwd": "${workspaceFolder}",
+            "cwd": "${workspaceFolder}/_Out/Debug/",
             "environment": [],
             "externalConsole": true,
-            "MIMode": "gdb"
+            //for mac lldb
+            "MIMode": "lldb"
         },
         {
             "name": "MasterServer",
@@ -62,12 +66,13 @@
             "request": "launch",
             //"request": "attach",
             "program": "${workspaceFolder}/_Out/Debug/NFPluginLoader_d",
-            "args": ["-d Server=GameServer ID=3"],
+            "args": ["Server=GameServer", "ID=3"],
             "stopAtEntry": false,
-            "cwd": "${workspaceFolder}",
+            "cwd": "${workspaceFolder}/_Out/Debug/",
             "environment": [],
             "externalConsole": true,
-            "MIMode": "gdb"
+            //for mac lldb
+            "MIMode": "lldb"
         },
         {
             "name": "LoginServer",
@@ -75,12 +80,13 @@
             "request": "launch",
             //"request": "attach",
             "program": "${workspaceFolder}/_Out/Debug/NFPluginLoader_d",
-            "args": ["-d Server=GameServer ID=3"],
+            "args": ["Server=GameServer", "ID=3"],
             "stopAtEntry": false,
-            "cwd": "${workspaceFolder}",
+            "cwd": "${workspaceFolder}/_Out/Debug/",
             "environment": [],
             "externalConsole": true,
-            "MIMode": "gdb"
+            //for mac lldb
+            "MIMode": "lldb"
         }
     ]
 }

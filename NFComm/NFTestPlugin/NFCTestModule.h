@@ -52,7 +52,9 @@ public:
     virtual bool Finalize();
     virtual bool OnReloadPlugin();
 
+
 protected:
+    int Factorial(int n);
 
 private:
 };
