@@ -7,7 +7,7 @@
 // -------------------------------------------------------------------------
 
 
-#include "NFCProxyLogicPlugin.h"
+#include "NFProxyLogicPlugin.h"
 #include "NFCProxyLogicModule.h"
 
 #ifdef NF_DYNAMIC_PLUGIN
