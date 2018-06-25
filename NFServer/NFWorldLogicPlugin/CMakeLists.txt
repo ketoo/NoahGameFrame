@@ -5,7 +5,7 @@ file(GLOB NFWorldLogicPlugin_ROOT_Cpp
 file(GLOB NFWorldLogicPlugin_ROOT_Hpp 
 	*.h)
 
-add_library(NFWorldLogicPlugin SHARED
+add_library(NFWorldLogicPlugin STATIC
 	${NFWorldLogicPlugin_ROOT_Cpp}
 	${NFWorldLogicPlugin_ROOT_Hpp})
 	

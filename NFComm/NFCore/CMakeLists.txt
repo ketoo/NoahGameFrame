@@ -5,7 +5,8 @@ file(GLOB NFCore_ROOT_Hpp
 file(GLOB NFCore_ROOT_H
 	*.h)
 
-add_library(NFCore SHARED ${NFCore_ROOT_Cpp} ${NFCore_ROOT_H} ${NFCore_ROOT_Hpp})
+add_library(NFCore STATIC ${NFCore_ROOT_Cpp} ${NFCore_ROOT_H} ${NFCore_ROOT_Hpp})
+
 add_definitions(-DNF_NONCLIENT_BUILD)
 set_target_properties( NFCore PROPERTIES OUTPUT_NAME_DEBUG "NFCore_d")
 set_target_properties( NFCore PROPERTIES PREFIX "")

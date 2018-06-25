@@ -2,7 +2,7 @@ set(ProjectName "NFLuaScriptPlugin")
 file(GLOB NFLuaScriptPlugin_ROOT_Cpp *.cpp)
 file(GLOB NFLuaScriptPlugin_ROOT_Hpp *.h)
 
-add_library(NFLuaScriptPlugin SHARED
+add_library(NFLuaScriptPlugin STATIC
 	${NFLuaScriptPlugin_ROOT_Cpp}
 	${NFLuaScriptPlugin_ROOT_Hpp})
 

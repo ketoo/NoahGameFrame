@@ -5,7 +5,7 @@ file(GLOB NFFriendPlugin_ROOT_Cpp
 file(GLOB NFFriendPlugin_ROOT_Hpp 
 	*.h)
 
-add_library(NFFriendPlugin SHARED
+add_library(NFFriendPlugin STATIC
 	${NFFriendPlugin_ROOT_Cpp}
 	${NFFriendPlugin_ROOT_Hpp})
 	

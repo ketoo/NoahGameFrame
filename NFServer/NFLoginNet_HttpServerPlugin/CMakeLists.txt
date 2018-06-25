@@ -2,7 +2,7 @@ set(ProjectName "NFLoginNet_HttpServerPlugin")
 file(GLOB NFLoginNet_HttpServerPlugin_ROOT_Cpp *.cpp)
 file(GLOB NFLoginNet_HttpServerPlugin_ROOT_Hpp *.h)
 
-add_library(NFLoginNet_HttpServerPlugin SHARED
+add_library(NFLoginNet_HttpServerPlugin STATIC
 	${NFLoginNet_HttpServerPlugin_ROOT_Cpp}
 	${NFLoginNet_HttpServerPlugin_ROOT_Hpp})
 	

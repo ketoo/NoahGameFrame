@@ -5,7 +5,7 @@ file(GLOB NFWorldNet_ClientPlugin_ROOT_Cpp
 file(GLOB NFWorldNet_ClientPlugin_ROOT_Hpp 
 	*.h)
 
-add_library(NFWorldNet_ClientPlugin SHARED
+add_library(NFWorldNet_ClientPlugin STATIC
 	${NFWorldNet_ClientPlugin_ROOT_Cpp}
 	${NFWorldNet_ClientPlugin_ROOT_Hpp})
 	

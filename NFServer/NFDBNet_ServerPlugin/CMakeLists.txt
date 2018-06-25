@@ -5,7 +5,7 @@ file(GLOB NFDBNet_ServerPlugin_ROOT_Cpp
 file(GLOB NFDBNet_ServerPlugin_ROOT_Hpp 
 	*.h)
 
-add_library(NFDBNet_ServerPlugin SHARED
+add_library(NFDBNet_ServerPlugin STATIC
 	${NFDBNet_ServerPlugin_ROOT_Cpp}
 	${NFDBNet_ServerPlugin_ROOT_Hpp})
 	
