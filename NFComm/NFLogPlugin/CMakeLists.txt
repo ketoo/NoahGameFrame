@@ -2,7 +2,7 @@ set(ProjectName "NFLogPlugin")
 file(GLOB NFLogPlugin_ROOT_Cpp *.cpp)
 file(GLOB NFLogPlugin_ROOT_Hpp *.h)
 
-add_library(NFLogPlugin SHARED
+add_library(NFLogPlugin STATIC
 	${NFLogPlugin_ROOT_Cpp}
 	${NFLogPlugin_ROOT_Hpp})
 

@@ -5,7 +5,7 @@ file(GLOB NFProxyLogicPlugin_ROOT_Cpp
 file(GLOB NFProxyLogicPlugin_ROOT_Hpp 
 	*.h)
 
-add_library(NFProxyLogicPlugin SHARED
+add_library(NFProxyLogicPlugin STATIC
 	${NFProxyLogicPlugin_ROOT_Cpp}
 	${NFProxyLogicPlugin_ROOT_Hpp})
 	

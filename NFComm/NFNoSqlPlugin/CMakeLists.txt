@@ -7,7 +7,7 @@ file(GLOB NFNoSqlPlugin_ROOT_Cpp
 file(GLOB NFNoSqlPlugin_ROOT_Hpp
 		*.h)
 
-add_library(NFNoSqlPlugin SHARED
+add_library(NFNoSqlPlugin STATIC
 		${NFNoSqlPlugin_ROOT_Cpp}
 		${NFNoSqlPlugin_Hpp})
 

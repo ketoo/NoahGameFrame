@@ -3,7 +3,7 @@ file(GLOB NFActorPlugin_ROOT_Cpp *.cpp)
 file(GLOB NFActorPlugin_ROOT_CC *.cc)
 file(GLOB NFActorPlugin_ROOT_Hpp *.h)
 
-add_library(NFActorPlugin SHARED
+add_library(NFActorPlugin STATIC
 	${NFActorPlugin_ROOT_Cpp}
 	${NFActorPlugin_ROOT_CC}
 	${NFActorPlugin_ROOT_Hpp})

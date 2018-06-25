@@ -9,7 +9,7 @@ remove_file(NFShopPlugin_ROOT_Cpp "NFCSLGBuildingModule.cpp")
 remove_file(NFShopPlugin_ROOT_Hpp "NFCSLGBuildingModule.h")
 
 
-add_library(NFShopPlugin SHARED
+add_library(NFShopPlugin STATIC
 	${NFShopPlugin_ROOT_Cpp}
 	${NFShopPlugin_ROOT_Hpp})
 	

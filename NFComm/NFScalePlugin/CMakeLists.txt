@@ -5,7 +5,7 @@ file(GLOB NFScalePlugin_ROOT_Cpp
 file(GLOB NFScalePlugin_ROOT_Hpp 
 	*.h)
 
-add_library(NFScalePlugin SHARED
+add_library(NFScalePlugin STATIC
 	${NFScalePlugin_ROOT_Cpp}
 	${NFScalePlugin_ROOT_Hpp})
 	

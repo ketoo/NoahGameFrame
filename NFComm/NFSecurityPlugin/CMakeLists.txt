@@ -5,7 +5,7 @@ file(GLOB NFSecurityPlugin_ROOT_Cpp
 file(GLOB NFSecurityPlugin_ROOT_Hpp 
 	*.h)
 
-add_library(NFSecurityPlugin SHARED
+add_library(NFSecurityPlugin STATIC
 	${NFSecurityPlugin_ROOT_Cpp}
 	${NFSecurityPlugin_ROOT_Hpp})
 	
