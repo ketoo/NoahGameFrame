@@ -58,16 +58,13 @@ cd lua
 
 sysOS=`uname -s`
 if [ $sysOS == "Darwin" ];then
-    make macosx test
+    make macosx
 elif [ $sysOS == "Linux" ];then
-    make linux test
-else
+    make linux
 fi
 
 cp -r -f ./*.a ../lib/Debug/
 cp -r -f ./*.a ../lib/Release/
-cp -r -f ./*.a ../../_Out/Debug/
-cp -r -f ./*.a ../../_Out/Release/
 cd ../
 echo Building lua finish...
 
