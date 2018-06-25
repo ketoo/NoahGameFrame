@@ -54,37 +54,27 @@ namespace NFrame
         private bool Load()
         {
             ClearLogicClass();
-            
+
             XmlDocument xmldoc = new XmlDocument();
 
-            if (System.IO.File.Exists(mstrPath + "/NFDataCfg/Struct/LogicClass.xml"))
-            {
-                mbEncrypt = false;
-                
-            }
-            else
-            {
-                mbEncrypt = true;
-            }
+            string strLogicPath = Path.Combine(mstrPath, LogicClassFile);
+
+            mbEncrypt = !File.Exists(strLogicPath);
 
             if (!mbEncrypt)
             {
-                string strLogicPath = mstrPath + "/NFDataCfg/Struct/LogicClass.xml";
-
                 xmldoc.Load(strLogicPath);
             }
             else
             {
                 //º”√‹¡À
-                string strLogicPath = mstrPath + "/NFDataCfg/Struct/LogicClass.NF";
+                strLogicPath = Path.Combine(mstrPath, EncrpytedLogicClassFile);
 
                 ///////////////////////////////////////////////////////////////////////////////////////
-                StreamReader cepherReader = new StreamReader(strLogicPath); ;
-                string strContent = cepherReader.ReadToEnd();
-                cepherReader.Close();
+                string strContent = File.ReadAllText(strLogicPath);
 
                 byte[] data = Convert.FromBase64String(strContent);
-                string res = System.Text.ASCIIEncoding.Default.GetString(data);
+                string res = Encoding.ASCII.GetString(data);
 
                 xmldoc.LoadXml(res);
             }
@@ -94,7 +84,7 @@ namespace NFrame
             LoadLogicClass(root);
             LoadLogicClassProperty();
             LoadLogicClassRecord();
-            
+
 
             return false;
         }
@@ -160,7 +150,7 @@ namespace NFrame
                 }
             }
         }
-        
+
         private void ClearLogicClass()
         {
             mhtObject.Clear();
@@ -281,7 +271,7 @@ namespace NFrame
 
                 XmlDocument xmldoc = new XmlDocument();
 
-                if(mbEncrypt)
+                if (mbEncrypt)
                 {
                     ///////////////////////////////////////////////////////////////////////////////////////
                     StreamReader cepherReader = new StreamReader(strLogicPath); ;
@@ -383,5 +373,8 @@ namespace NFrame
         private Dictionary<string, NFILogicClass> mhtObject = new Dictionary<string, NFILogicClass>();
         private string mstrPath = "";
         private bool mbEncrypt;
+
+        private const string LogicClassFile = "NFDataCfg/Struct/LogicClass.xml";
+        private const string EncrpytedLogicClassFile = "NFDataCfg/Struct/LogicClass.NF";
     }
 }
