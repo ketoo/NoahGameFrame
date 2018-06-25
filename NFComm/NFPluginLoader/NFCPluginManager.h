@@ -76,6 +76,12 @@ public:
 
     virtual void SetAppID(const int nAppID) override;
 
+	virtual bool IsRunningDocker() const;
+
+    virtual void SetRunningDocker(bool bDocker);
+
+    virtual bool IsStaticPlugin() const;
+
 	virtual NFINT64 GetInitTime() const override;
 
 	virtual NFINT64 GetNowTime() const override;
@@ -114,6 +120,8 @@ protected:
 
 private:
     int mnAppID;
+    bool mbIsDocker;
+    bool mbStaticPlugin;
     NFINT64 mnInitTime;
     NFINT64 mnNowTime;
     std::string mstrConfigPath;

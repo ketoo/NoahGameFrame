@@ -61,10 +61,7 @@ bool NFCSceneProcessModule::AfterInit()
 
     return true;
 }
-bool NFCSceneProcessModule::RequestEnterScene(const NFGUID & self, const NFGUID & player)
-{
-	return false;
-}
+
 bool NFCSceneProcessModule::RequestEnterScene(const NFGUID & self, const int nSceneID, const int nType, const NFDataList & argList)
 {
 	return RequestEnterScene(self, nSceneID, -1, nType, argList);

@@ -31,43 +31,43 @@ bool NFCLuaScriptModule::Awake()
     m_pLogModule = pPluginManager->FindModule<NFILogModule>();
 
 
-    Register();
+    //Register();
 
 	std::string strRootFileh = pPluginManager->GetConfigPath() + "NFDataCfg/ScriptModule/NFScriptSystem.lua";
 
-	TRY_LOAD_SCRIPT_FLE(strRootFileh.c_str());
+	//TRY_LOAD_SCRIPT_FLE(strRootFileh.c_str());
 
-	TRY_RUN_GLOBAL_SCRIPT_FUN1("init_script_system", this);
+	//TRY_RUN_GLOBAL_SCRIPT_FUN1("init_script_system", this);
 
-	TRY_RUN_GLOBAL_SCRIPT_FUN0("module_awake");
+	//TRY_RUN_GLOBAL_SCRIPT_FUN0("module_awake");
 
 	return true;
 }
 
 bool NFCLuaScriptModule::Init()
 {
-    TRY_RUN_GLOBAL_SCRIPT_FUN0("module_init");
+    //TRY_RUN_GLOBAL_SCRIPT_FUN0("module_init");
 
     return true;
 }
 
 bool NFCLuaScriptModule::AfterInit()
 {
-	TRY_RUN_GLOBAL_SCRIPT_FUN0("module_after_init");
+	//TRY_RUN_GLOBAL_SCRIPT_FUN0("module_after_init");
 
     return true;
 }
 
 bool NFCLuaScriptModule::Shut()
 {
-	TRY_RUN_GLOBAL_SCRIPT_FUN0("module_shut");
+	//TRY_RUN_GLOBAL_SCRIPT_FUN0("module_shut");
 
     return true;
 }
 
 bool NFCLuaScriptModule::ReadyExecute()
 {
-	TRY_RUN_GLOBAL_SCRIPT_FUN0("module_ready_execute");
+	//TRY_RUN_GLOBAL_SCRIPT_FUN0("module_ready_execute");
 
 	return true;
 }
@@ -79,7 +79,7 @@ bool NFCLuaScriptModule::Execute()
     {
         mnTime = pPluginManager->GetNowTime();
 
-		TRY_RUN_GLOBAL_SCRIPT_FUN0("module_execute");
+		//TRY_RUN_GLOBAL_SCRIPT_FUN0("module_execute");
     }
 
     return true;
@@ -87,7 +87,7 @@ bool NFCLuaScriptModule::Execute()
 
 bool NFCLuaScriptModule::BeforeShut()
 {
-    TRY_RUN_GLOBAL_SCRIPT_FUN0("module_before_shut");
+    //TRY_RUN_GLOBAL_SCRIPT_FUN0("module_before_shut");
 
     return true;
 }
@@ -214,6 +214,7 @@ bool NFCLuaScriptModule::AddClassCallBack(std::string& className, std::string& f
 
 int NFCLuaScriptModule::OnClassEventCB(const NFGUID& self, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFDataList& var)
 {
+	/*
     auto funcName = m_ClassEventFuncMap.GetElement(strClassName);
     if (funcName)
     {
@@ -233,6 +234,10 @@ int NFCLuaScriptModule::OnClassEventCB(const NFGUID& self, const std::string& st
     {
         return 1;
     }
+
+	*/
+
+	return -1;
 }
 
 bool NFCLuaScriptModule::AddPropertyCallBack(const NFGUID& self, std::string& strPropertyName, std::string& luaFunc)
@@ -460,6 +465,7 @@ bool NFCLuaScriptModule::AddLuaFuncToMap(NFMap<T, NFMap<NFGUID, NFList<string>>>
 template<typename T1, typename ...T2>
 bool NFCLuaScriptModule::CallLuaFuncFromMap(NFMap<T1, NFMap<NFGUID, NFList<string>>>& funcMap, T1 key, const NFGUID& self, T2 ... arg)
 {
+	/*
     auto funcList = funcMap.GetElement(key);
     if (funcList)
     {
@@ -484,7 +490,7 @@ bool NFCLuaScriptModule::CallLuaFuncFromMap(NFMap<T1, NFMap<NFGUID, NFList<strin
             }
         }
     }
-
+*/
     return true;
 }
 
@@ -509,36 +515,38 @@ void NFCLuaScriptModule::SendByServerType(const NF_SERVER_TYPES eType, const uin
 //for net module
 void NFCLuaScriptModule::SendToPlayer(const NFGUID player, const uint16_t nMsgID, const std::string& strData)
 {
-
 }
 
 void NFCLuaScriptModule::SendToAllPlayer(const uint16_t nMsgID, const std::string& strData)
 {
-
+	m_pNetModule->SendMsgToAllClientWithOutHead(nMsgID, strData);
 }
 
 void NFCLuaScriptModule::LogInfo(const std::string& strData)
 {
+	m_pLogModule->LogInfo(strData);
 }
 
 void NFCLuaScriptModule::LogError(const std::string& strData)
 {
-
+	m_pLogModule->LogError(strData);
 }
 
 void NFCLuaScriptModule::LogWarning(const std::string& strData)
 {
-
+	m_pLogModule->LogWarning(strData);
 }
 
 void NFCLuaScriptModule::LogDebug(const std::string& strData)
 {
-
+	m_pLogModule->LogDebug(strData);
 }
 
 
 bool NFCLuaScriptModule::Register()
 {
+/*
+	
 	LuaIntf::LuaBinding(mLuaContext).beginClass<NFGUID>("NFGUID")
 		.addConstructor(LUA_ARGS())
 		.addProperty("data", &NFGUID::GetData, &NFGUID::SetData)
@@ -667,6 +675,6 @@ bool NFCLuaScriptModule::Register()
 		.addFunction("log_debug", &NFCLuaScriptModule::LogDebug)
 		.endClass();
 
-
+*/
     return true;
 }

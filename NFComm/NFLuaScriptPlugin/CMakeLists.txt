@@ -8,16 +8,17 @@ add_library(NFLuaScriptPlugin SHARED
 
 if(UNIX)
 	add_dependencies(NFLuaScriptPlugin NFCore)
+	
 	if (CMAKE_BUILD_TYPE MATCHES "Release")
-		target_link_libraries(NFLuaScriptPlugin )
+	target_link_libraries(NFLuaScriptPlugin liblua.a)
 	else()
-		target_link_libraries(NFLuaScriptPlugin )
+	target_link_libraries(NFLuaScriptPlugin liblua.a)
 	endif()
-
 
 else()
 	add_dependencies(NFLuaScriptPlugin NFCore )
 	target_link_libraries(NFLuaScriptPlugin libprotobuf )
+	target_link_libraries(NFLuaScriptPlugin liblua.a)
 
 
 endif()

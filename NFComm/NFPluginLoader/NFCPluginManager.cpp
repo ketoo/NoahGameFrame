@@ -40,6 +40,61 @@
 
 #endif
 
+
+#ifdef NF_DYNAMIC_PLUGIN
+//for nf-sdk plugins
+#include "NFComm/NFActorPlugin/NFActorPlugin.h"
+#include "NFComm/NFConfigPlugin/NFConfigPlugin.h"
+#include "NFComm/NFKernelPlugin/NFKernelPlugin.h"
+#include "NFComm/NFLogPlugin/NFLogPlugin.h"
+#include "NFComm/NFLuaScriptPlugin/NFLuaScriptPlugin.h"
+#include "NFComm/NFNavigationPlugin/NFNavigationPlugin.h"
+#include "NFComm/NFNetPlugin/NFNetPlugin.h"
+#include "NFComm/NFNoSqlPlugin/NFNoSqlPlugin.h"
+#include "NFComm/NFScalePlugin/NFScalePlugin.h"
+#include "NFComm/NFSecurityPlugin/NFSecurityPlugin.h"
+#include "NFComm/NFTestPlugin/NFTestPlugin.h"
+//DB
+#include "NFServer/NFDBLogicPlugin/NFDBLogicPlugin.h"
+#include "NFServer/NFDBNet_ClientPlugin/NFDBNet_ClientPlugin.h"
+#include "NFServer/NFDBNet_ServerPlugin/NFDBNet_ServerPlugin.h"
+//GAME
+#include "NFServer/NFGameLogicPlugin/NFGameLogicPlugin.h"
+#include "NFServer/NFGameServerNet_ClientPlugin/NFGameServerNet_ClientPlugin.h"
+#include "NFServer/NFGameServerNet_ServerPlugin/NFGameServerNet_ServerPlugin.h"
+#include "NFServer/NFGameServerPlugin/NFGameServerPlugin.h"
+//LOGIN
+#include "NFServer/NFLoginLogicPlugin/NFLoginLogicPlugin.h"
+#include "NFServer/NFLoginNet_ClientPlugin/NFLoginNet_ClientPlugin.h"
+#include "NFServer/NFLoginNet_ServerPlugin/NFLoginNet_ServerPlugin.h"
+#include "NFServer/NFLoginNet_HttpServerPlugin/NFLoginNet_HttpServerPlugin.h"
+//MASTER
+#include "NFServer/NFMasterNet_HttpServerPlugin/NFMasterNet_HttpServerPlugin.h"
+#include "NFServer/NFMasterNet_ServerPlugin/NFMasterNet_ServerPlugin.h"
+//PROXY
+#include "NFServer/NFProxyLogicPlugin/NFProxyLogicPlugin.h"
+#include "NFServer/NFProxyServerNet_ClientPlugin/NFProxyServerNet_ClientPlugin.h"
+#include "NFServer/NFProxyServerNet_ServerPlugin/NFProxyServerNet_ServerPlugin.h"
+//WORLD
+#include "NFServer/NFWorldLogicPlugin/NFWorldLogicPlugin.h"
+#include "NFServer/NFWorldNet_ClientPlugin/NFWorldNet_ClientPlugin.h"
+#include "NFServer/NFWorldNet_ServerPlugin/NFWorldNet_ServerPlugin.h"
+//MIDWARE
+#include "NFMidWare/NFAIPlugin/NFAIPlugin.h"
+#include "NFMidWare/NFAOIPlugin/NFAOIPlugin.h"
+#include "NFMidWare/NFChatPlugin/NFChatPlugin.h"
+#include "NFMidWare/NFFriendPlugin/NFFriendPlugin.h"
+#include "NFMidWare/NFGuildPlugin/NFGuildPlugin.h"
+#include "NFMidWare/NFHeroPlugin/NFHeroPlugin.h"
+#include "NFMidWare/NFItemBagPlugin/NFItemBagPlugin.h"
+#include "NFMidWare/NFMailPlugin/NFMailPlugin.h"
+#include "NFMidWare/NFRankPlugin/NFRankPlugin.h"
+#include "NFMidWare/NFShopPlugin/NFShopPlugin.h"
+#include "NFMidWare/NFSkillPlugin/NFSkillPlugin.h"
+#include "NFMidWare/NFTaskPlugin/NFTaskPlugin.h"
+#include "NFMidWare/NFUserGiftPlugin/NFUserGiftPlugin.h"
+#endif
+
 void CoroutineExecute(void* arg)
 {
 	NFCPluginManager::Instance()->Execute();
@@ -47,13 +102,21 @@ void CoroutineExecute(void* arg)
 
 NFCPluginManager::NFCPluginManager() : NFIPluginManager()
 {
-   mnAppID = 0;
-   mnInitTime = time(NULL);
-   mnNowTime = mnInitTime;
+	mnAppID = 0;
+    mbIsDocker = false;
 
-   mGetFileContentFunctor = nullptr;
+#ifdef NF_DYNAMIC_PLUGIN
+	mbStaticPlugin = false;
+#else
+	mbStaticPlugin = true;
+#endif
 
-   mstrConfigPath = "../";
+	mnInitTime = time(NULL);
+	mnNowTime = mnInitTime;
+
+	mGetFileContentFunctor = nullptr;
+
+	mstrConfigPath = "../";
 
 #ifdef NF_DEBUG_MODE
    mstrConfigName = "NFDataCfg/Debug/Plugin.xml";
@@ -143,7 +206,7 @@ bool NFCPluginManager::LoadStaticPlugin(const std::string& strPluginDLLName)
 
 	//     CREATE_PLUGIN(this, NFKernelPlugin)
 	//     CREATE_PLUGIN(this, NFEventProcessPlugin)
-	//     CREATE_PLUGIN(this, NFConfigPlugin)
+	//CREATE_PLUGIN(this, NFConfigPlugin)
 
 	return false;
 }
@@ -300,6 +363,20 @@ inline int NFCPluginManager::GetAppID() const
 inline void NFCPluginManager::SetAppID(const int nAppID)
 {
     mnAppID = nAppID;
+}
+bool NFCPluginManager::IsRunningDocker() const
+{
+	return mbIsDocker;
+}
+
+void NFCPluginManager::SetRunningDocker(bool bDocker)
+{
+	mbIsDocker = bDocker;
+}
+
+bool NFCPluginManager::IsStaticPlugin() const
+{
+	return mbStaticPlugin;
 }
 
 inline NFINT64 NFCPluginManager::GetInitTime() const

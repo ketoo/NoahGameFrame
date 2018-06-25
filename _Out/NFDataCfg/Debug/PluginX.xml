@@ -92,6 +92,6 @@
 		<Plugin Name="NFLuaScriptPlugin" />
 		<Plugin Name="NFActorPlugin" />
 		<Plugin Name="NFLogPlugin" />
-		<Plugin Name="Tutorial5" />	
+		<Plugin Name="Tutorial7" />
 	</TutorialServer>
 </XML>
