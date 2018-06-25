@@ -106,6 +106,7 @@ void NFCSwitchGameServerModule::OnAckSwitchServer(const NFSOCK nSockIndex, const
 
 bool NFCSwitchGameServerModule::SwitchServer(const NFGUID &self, const int nServer, const int nSceneID, const int nGroup)
 {
+    //lock the user
     NFMsg::ReqSwitchServer xMsg;
 
     xMsg.set_sceneid(nSceneID);
