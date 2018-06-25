@@ -28,4 +28,5 @@ set_target_properties( NFPluginLoader PROPERTIES
 	RUNTIME_OUTPUT_DIRECTORY ${NFOutPutDir}
 	LIBRARY_OUTPUT_DIRECTORY ${NFOutPutDir} )
 
-add_definitions(-D_X64 -D_CONSOLE -DNF_DYNAMIC_PLUGIN)
+add_definitions(-D_X64 -D_CONSOLE)
+#add_definitions(-D_X64 -D_CONSOLE -DNF_DYNAMIC_PLUGIN)

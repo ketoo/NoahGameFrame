@@ -16,9 +16,9 @@ endif()
 
 set_target_properties( navigation PROPERTIES 
 	FOLDER "NFDeps"
-	ARCHIVE_OUTPUT_DIRECTORY ${NFOutPutDir}
-	RUNTIME_OUTPUT_DIRECTORY ${NFOutPutDir}
-	LIBRARY_OUTPUT_DIRECTORY ${NFOutPutDir} )
+	ARCHIVE_OUTPUT_DIRECTORY ${DependenciesLibPath}
+	RUNTIME_OUTPUT_DIRECTORY ${DependenciesLibPath}
+	LIBRARY_OUTPUT_DIRECTORY ${DependenciesLibPath} )
 	
 
 target_link_libraries(navigation)
