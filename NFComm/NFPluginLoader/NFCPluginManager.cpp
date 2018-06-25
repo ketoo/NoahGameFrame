@@ -41,7 +41,7 @@
 #endif
 
 
-#ifdef NF_DYNAMIC_PLUGIN
+#ifndef NF_DYNAMIC_PLUGIN
 //for nf-sdk plugins
 #include "NFComm/NFActorPlugin/NFActorPlugin.h"
 #include "NFComm/NFConfigPlugin/NFConfigPlugin.h"
