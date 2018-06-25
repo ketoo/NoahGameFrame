@@ -98,7 +98,7 @@ bool NFCNoSqlModule::Execute()
 		xNosqlDriver = this->mxNoSqlDriver.Next();
 	}
 
-	Reconnect();
+	CheckConnect();
 	
 	return true;
 }
@@ -207,9 +207,9 @@ bool NFCNoSqlModule::RemoveConnectSql(const std::string& strID)
 	return mxNoSqlDriver.RemoveElement(strID);
 }
 
-void NFCNoSqlModule::Reconnect()
+void NFCNoSqlModule::CheckConnect()
 {
-	static int CHECK_TIME = 10;
+	static const int CHECK_TIME = 15;
 	if (mLastCheckTime + CHECK_TIME > pPluginManager->GetNowTime())
 	{
 		return;
@@ -228,7 +228,6 @@ void NFCNoSqlModule::Reconnect()
 		{
 			//reconnect
 			xNosqlDriver->ReConnect();
-			CHECK_TIME *= 2;
 		}
 
 		xNosqlDriver = this->mxNoSqlDriver.Next();

@@ -22,6 +22,15 @@ NFRedisClientSocket::NFRedisClientSocket()
 {
 	mNetStatus = NF_NET_EVENT::NF_NET_EVENT_NONE;
 	m_pRedisReader = redisReaderCreate();
+	fd_ = -1;
+
+#ifdef _MSC_VER
+	WSADATA wsa_data;
+	WSAStartup(0x0201, &wsa_data);
+#endif
+
+	base = event_base_new();
+	assert(base != nullptr);
 }
 
 NFRedisClientSocket::~NFRedisClientSocket()
@@ -29,17 +38,25 @@ NFRedisClientSocket::~NFRedisClientSocket()
 	if (m_pRedisReader)
 	{
 		redisReaderFree(m_pRedisReader);
+		m_pRedisReader = nullptr;
+	}
+
+	if (bev)
+	{
+		bufferevent_free(bev);
+		bev = nullptr;
+	}
+
+	if (base)
+	{
+		event_base_free(base);
+		base = nullptr;
 	}
 }
 
 int64_t NFRedisClientSocket::Connect(const std::string &ip, const int port)
 {
 	struct sockaddr_in addr;
-
-#ifdef _MSC_VER
-	WSADATA wsa_data;
-	WSAStartup(0x0201, &wsa_data);
-#endif
 
 	memset(&addr, 0, sizeof(addr));
 	addr.sin_family = AF_INET;
@@ -51,19 +68,8 @@ int64_t NFRedisClientSocket::Connect(const std::string &ip, const int port)
 		return -1;
 	}
 
-	base = event_base_new();
-	if (base == NULL)
-	{
-		printf("event_base_new ");
-		return -1;
-	}
-
 	bev = bufferevent_socket_new(base, -1, BEV_OPT_CLOSE_ON_FREE);
-	if (bev == NULL)
-	{
-		printf("bufferevent_socket_new ");
-		return -1;
-	}
+	assert(bev != nullptr);
 
 	int bRet = bufferevent_socket_connect(bev, (struct sockaddr*)&addr, sizeof(addr));
 	if (0 != bRet)
@@ -73,14 +79,26 @@ int64_t NFRedisClientSocket::Connect(const std::string &ip, const int port)
 		return -1;
 	}
 
-	fd = bufferevent_getfd(bev);
+	fd_ = bufferevent_getfd(bev);
 
 	bufferevent_setcb(bev, conn_readcb, conn_writecb, conn_eventcb, this);
 	bufferevent_enable(bev, EV_READ | EV_WRITE);
 
 	event_set_log_callback(&NFRedisClientSocket::log_cb);
 
-	return fd;
+	return fd_;
+}
+
+bool NFRedisClientSocket::ReConnect(const std::string& ip, const int port)
+{
+	if (bev)
+	{
+		bufferevent_free(bev);
+		fd_ = -1;
+		bev = nullptr;
+	}
+
+	return Connect(ip, port);
 }
 
 int NFRedisClientSocket::Execute()

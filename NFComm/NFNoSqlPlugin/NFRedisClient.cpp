@@ -54,7 +54,7 @@ bool NFRedisClient::KeepLive()
 
 bool NFRedisClient::ReConnect()
 {
-	return m_pRedisClientSocket->Connect(mstrIP, mnPort) > 0;
+	return m_pRedisClientSocket->ReConnect(mstrIP, mnPort);
 }
 
 bool NFRedisClient::IsConnect()
@@ -84,13 +84,23 @@ NF_SHARE_PTR<redisReply> NFRedisClient::BuildSendCmd(const NFRedisCommand& cmd)
 		YieldFunction();
 	}
 
-	std::string msg = cmd.Serialize();
-	int nRet = m_pRedisClientSocket->Write(msg.data(), msg.length());
-	if (nRet != 0)
+	if (!IsConnect())
 	{
-		//lost net
-		//do some thing
+		ReConnect();
 		return nullptr;
+	}
+	else
+	{
+		std::string msg = cmd.Serialize();
+		if (msg.empty())
+		{
+			return nullptr;
+		}
+		int nRet = m_pRedisClientSocket->Write(msg.data(), msg.length());
+		if (nRet != 0)
+		{
+			return nullptr;
+		}
 	}
 	
 	bBusy = true;
@@ -119,6 +129,12 @@ NF_SHARE_PTR<redisReply> NFRedisClient::ParseForReply()
 		else
 		{
 			Execute();
+		}
+
+		if (!IsConnect())
+		{
+			ReConnect();
+			break;
 		}
 	}
 
