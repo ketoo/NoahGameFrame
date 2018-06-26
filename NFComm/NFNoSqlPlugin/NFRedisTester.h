@@ -17,7 +17,8 @@ public:
     bool RunTester();
     void Execute();
 	bool IsConnect();
-private:
+
+	bool Test_1();
 
     void TestHash();
     void TestKey();
@@ -27,7 +28,6 @@ private:
     void TestString();
 	void TestPubSub();
 
-private:
     NFRedisClient mxRedisClient;
 };
 

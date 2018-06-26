@@ -19,16 +19,24 @@ using namespace std;
 int main()
 {
 	NFRedisTester xRedisTester(_IP_, _PORT_);
-	cout << "test begin......" << endl;
+
 	while (1)
 	{
 		if (xRedisTester.IsConnect())
 		{
-			if (xRedisTester.RunTester())
-			{
-				break;
-			}
+			break;
 		}
+
+		xRedisTester.Execute();
+	}
+
+	cout << "test begin......" << endl;
+	while (1)
+	{
+		std::this_thread::sleep_for(std::chrono::milliseconds(10));
+
+		if (xRedisTester.RunTester())
+			break;
 
 		xRedisTester.Execute();
 	}
