@@ -113,6 +113,9 @@ public:
 protected:
 	bool LoadPluginConfig();
 
+	bool LoadStaticPlugin();
+	bool CheckStaticPlugin();
+
 	bool LoadStaticPlugin(const std::string& strPluginDLLName);
     bool LoadPluginLibrary(const std::string& strPluginDLLName);
     bool UnLoadPluginLibrary(const std::string& strPluginDLLName);
@@ -137,6 +140,8 @@ private:
 
     typedef void(* DLL_START_PLUGIN_FUNC)(NFIPluginManager* pm);
     typedef void(* DLL_STOP_PLUGIN_FUNC)(NFIPluginManager* pm);
+
+	std::vector<std::string> mStaticPlugin;
 
     PluginNameMap mPluginNameMap;
     PluginLibMap mPluginLibMap;
