@@ -29,6 +29,15 @@ bool NFRedisTester::RunTester()
 	return true;
 }
 
+bool NFRedisTester::Test_1()
+{
+	int64_t num;
+	mxRedisClient.INCRBY("12123ddddd", 13, num);
+	mxRedisClient.INCRBY("12123ddddd", 13, num);
+
+	return true;
+}
+
 void NFRedisTester::TestHash()
 {
 	int64_t nnn;

@@ -70,6 +70,7 @@ public:
 	virtual ~NFRedisClientSocket();
 
 	int64_t Connect(const std::string& ip, const int port);
+	bool ReConnect(const std::string& ip, const int port);
     int Close();
     int Write(const char *buf, size_t count);
 
@@ -91,7 +92,7 @@ private:
 
 	NF_NET_EVENT mNetStatus;
 	redisReader* m_pRedisReader;
-    int64_t fd;
+	NFINT64 fd_;
 };
 
 
