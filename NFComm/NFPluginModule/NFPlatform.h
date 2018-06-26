@@ -313,9 +313,13 @@ typedef int64_t NFSOCK;
 #define NFGetPID() lexical_cast<std::string>(getpid())
 #endif
 
-//#define NF_DYNAMIC_PLUGIN 1
-//#define NF_USE_COROUTINE 1
+#if NF_PLATFORM == NF_PLATFORM_WIN
+#ifndef NF_DYNAMIC_PLUGIN
+#define NF_DYNAMIC_PLUGIN 1
+#endif
+#endif
 
+//#define NF_USE_COROUTINE 1
 //use actor mode--begin
 #define NF_ACTOR_THREAD_COUNT 16
 

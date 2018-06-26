@@ -134,6 +134,10 @@ bool NFCPluginManager::Awake()
 {
 	LoadPluginConfig();
 
+#ifndef NF_DYNAMIC_PLUGIN
+	LoadStaticPlugin();
+#endif
+
 	PluginNameMap::iterator it = mPluginNameMap.begin();
 	for (; it != mPluginNameMap.end(); ++it)
 	{
@@ -144,6 +148,9 @@ bool NFCPluginManager::Awake()
 #endif
 	}
 
+#ifndef NF_DYNAMIC_PLUGIN
+	CheckStaticPlugin();
+#endif
 
 	PluginInstanceMap::iterator itAfterInstance = mPluginInstanceMap.begin();
 	for (; itAfterInstance != mPluginInstanceMap.end(); itAfterInstance++)
@@ -195,20 +202,89 @@ bool NFCPluginManager::LoadPluginConfig()
     return true;
 }
 
+bool NFCPluginManager::LoadStaticPlugin()
+{
+
+#ifndef NF_DYNAMIC_PLUGIN
+	CREATE_PLUGIN(this, NFConfigPlugin)
+	CREATE_PLUGIN(this, NFKernelPlugin)
+	CREATE_PLUGIN(this, NFLogPlugin)
+	CREATE_PLUGIN(this, NFNetPlugin)
+	CREATE_PLUGIN(this, NFNoSqlPlugin)
+
+	CREATE_PLUGIN(this, NFProxyLogicPlugin)
+	CREATE_PLUGIN(this, NFProxyServerNet_ClientPlugin)
+	CREATE_PLUGIN(this, NFProxyServerNet_ServerPlugin)
+#endif
+
+    return true;
+}
+
+bool NFCPluginManager::CheckStaticPlugin()
+{
+#ifndef NF_DYNAMIC_PLUGIN
+	//plugin
+	for (auto it = mPluginInstanceMap.begin(); it != mPluginInstanceMap.end();)
+	{
+		bool bFind = false;
+		const std::string& strPluginName = it->first;
+		for (int i = 0; i < mStaticPlugin.size(); ++i)
+		{
+			const std::string& tempPluginName = mStaticPlugin[i];
+			if (tempPluginName == strPluginName)
+			{
+				bFind = true;
+			}
+		}
+
+		if (!bFind)
+		{
+			it = mPluginInstanceMap.erase(it);  
+		}
+		else
+		{
+			it++;
+		}
+	}
+	//////module
+	for (auto it = mModuleInstanceMap.begin(); it != mModuleInstanceMap.end();)
+	{
+		bool bFind = false;
+		const std::string& strModuleName = it->first;
+		for (int i = 0; i < mStaticPlugin.size(); ++i)
+		{
+			const std::string& strPluginName = mStaticPlugin[i];
+			NFIPlugin* pPlugin = this->FindPlugin(strPluginName);
+			if (pPlugin)
+			{
+				NFIModule* pModule = pPlugin->GetElement(strModuleName);
+				if (pModule)
+				{
+					bFind = true;
+					break;
+				}
+			}
+		}
+
+		if (!bFind)
+		{
+			it = mModuleInstanceMap.erase(it);  
+		}
+		else
+		{
+			it++;
+		}
+	}
+#endif
+
+    return true;
+}
+
 bool NFCPluginManager::LoadStaticPlugin(const std::string& strPluginDLLName)
 {
-	//     PluginNameList::iterator it = mPluginNameList.begin();
-	//     for (; it != mPluginNameList.end(); it++)
-	//     {
-	//         const std::string& strPluginName = *it;
-	//         CREATE_PLUGIN( this, strPluginName );
-	//     }
+	mStaticPlugin.push_back(mStaticPlugin);
 
-	//     CREATE_PLUGIN(this, NFKernelPlugin)
-	//     CREATE_PLUGIN(this, NFEventProcessPlugin)
-	//CREATE_PLUGIN(this, NFConfigPlugin)
-
-	return false;
+	return true;
 }
 
 void NFCPluginManager::Registered(NFIPlugin* plugin)
