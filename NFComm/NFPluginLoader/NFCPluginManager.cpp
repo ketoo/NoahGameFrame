@@ -206,15 +206,63 @@ bool NFCPluginManager::LoadStaticPlugin()
 {
 
 #ifndef NF_DYNAMIC_PLUGIN
+
+//for nf-sdk plugins
+	CREATE_PLUGIN(this, NFActorPlugin)
 	CREATE_PLUGIN(this, NFConfigPlugin)
 	CREATE_PLUGIN(this, NFKernelPlugin)
 	CREATE_PLUGIN(this, NFLogPlugin)
+	CREATE_PLUGIN(this, NFLuaScriptPlugin)
+	CREATE_PLUGIN(this, NFNavigationPlugin)
 	CREATE_PLUGIN(this, NFNetPlugin)
 	CREATE_PLUGIN(this, NFNoSqlPlugin)
+	CREATE_PLUGIN(this, NFScalePlugin)
+	CREATE_PLUGIN(this, NFSecurityPlugin)
+	CREATE_PLUGIN(this, NFTestPlugin)
 
+//DB
+	CREATE_PLUGIN(this, NFDBLogicPlugin)
+	CREATE_PLUGIN(this, NFDBNet_ClientPlugin)
+	CREATE_PLUGIN(this, NFDBNet_ServerPlugin)
+
+//GAME
+	CREATE_PLUGIN(this, NFGameLogicPlugin)
+	CREATE_PLUGIN(this, NFGameServerNet_ClientPlugin)
+	CREATE_PLUGIN(this, NFGameServerNet_ServerPlugin)
+	CREATE_PLUGIN(this, NFGameServerPlugin)
+
+//LOGIN
+	CREATE_PLUGIN(this, NFLoginLogicPlugin)
+	CREATE_PLUGIN(this, NFLoginNet_ClientPlugin)
+	CREATE_PLUGIN(this, NFLoginNet_ServerPlugin)
+	CREATE_PLUGIN(this, NFLoginNet_HttpServerPlugin)
+
+//MASTER
+	CREATE_PLUGIN(this, NFMasterNet_HttpServerPlugin)
+	CREATE_PLUGIN(this, NFMasterNet_ServerPlugin)
+
+//PROXY
 	CREATE_PLUGIN(this, NFProxyLogicPlugin)
 	CREATE_PLUGIN(this, NFProxyServerNet_ClientPlugin)
 	CREATE_PLUGIN(this, NFProxyServerNet_ServerPlugin)
+
+//WORLD
+	CREATE_PLUGIN(this, NFWorldLogicPlugin)
+	CREATE_PLUGIN(this, NFWorldNet_ClientPlugin)
+	CREATE_PLUGIN(this, NFWorldNet_ServerPlugin)
+
+//MIDWARE
+	CREATE_PLUGIN(this, NFChatPlugin)
+	CREATE_PLUGIN(this, NFFriendPlugin)
+	CREATE_PLUGIN(this, NFGuildPlugin)
+	CREATE_PLUGIN(this, NFHeroPlugin)
+	CREATE_PLUGIN(this, NFItemBagPlugin)
+	CREATE_PLUGIN(this, NFMailPlugin)
+	CREATE_PLUGIN(this, NFRankPlugin)
+	CREATE_PLUGIN(this, NFShopPlugin)
+	CREATE_PLUGIN(this, NFSkillPlugin)
+	CREATE_PLUGIN(this, NFTaskPlugin)
+	CREATE_PLUGIN(this, NFUserGiftPlugin)
 #endif
 
     return true;
@@ -282,7 +330,7 @@ bool NFCPluginManager::CheckStaticPlugin()
 
 bool NFCPluginManager::LoadStaticPlugin(const std::string& strPluginDLLName)
 {
-	mStaticPlugin.push_back(mStaticPlugin);
+	mStaticPlugin.push_back(strPluginDLLName);
 
 	return true;
 }

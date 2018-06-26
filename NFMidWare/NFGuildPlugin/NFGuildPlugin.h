@@ -6,8 +6,8 @@
 //
 // -------------------------------------------------------------------------
 
-#ifndef NF_CHAT_PLUGIN_H
-#define NF_CHAT_PLUGIN_H
+#ifndef NF_GUILD_PLUGIN_H
+#define NF_GUILD_PLUGIN_H
 
 ///
 #include "NFComm/NFPluginModule/NFIPlugin.h"
