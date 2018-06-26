@@ -8,6 +8,7 @@
 #define NFC_HTTP_CLIENT_H
 
 #include "NFIHttpClient.h"
+#include "NFIHttpServer.h"
 
 #if NF_PLATFORM == NF_PLATFORM_WIN
 #include <winsock2.h>
@@ -106,7 +107,7 @@ private:
 					HTTP_RESP_FUNCTOR_PTR pCB,
                     const std::string& strPostData,
                     const std::map<std::string, std::string>& xHeaders,
-					const bool bPost = false,
+					const NFHttpType eHttpType,
 					const NFGUID id = NFGUID());
 
 private:

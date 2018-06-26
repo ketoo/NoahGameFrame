@@ -9,7 +9,7 @@ mkdir -p lib/Release/
 # compiling libevent
 cd libevent
 chmod +x ./configure
-./configure CPPFLAGS=-fPIC --disable-shared --disable-openssl
+./configure --disable-shared --disable-openssl
 make
 
 cp -R -f ./.libs/*.a ../lib/Debug/
@@ -21,7 +21,7 @@ cd ../
 # compiling protobuf
 cd protobuf
 chmod -R 755 *
-./configure CXXFLAGS=-fPIC
+./configure --disable-shared
 make
 make check
 
