@@ -80,6 +80,26 @@ inline bool EServerState_Parse(
   return ::google::protobuf::internal::ParseNamedEnum<EServerState>(
     EServerState_descriptor(), name, value);
 }
+enum ELoginMode {
+  ELM_LOGIN = 0,
+  ELM_REGISTER = 1,
+  ELM_AUTO_REGISTER_LOGIN = 2
+};
+LIBPROTOC_EXPORT bool ELoginMode_IsValid(int value);
+const ELoginMode ELoginMode_MIN = ELM_LOGIN;
+const ELoginMode ELoginMode_MAX = ELM_AUTO_REGISTER_LOGIN;
+const int ELoginMode_ARRAYSIZE = ELoginMode_MAX + 1;
+
+LIBPROTOC_EXPORT const ::google::protobuf::EnumDescriptor* ELoginMode_descriptor();
+inline const ::std::string& ELoginMode_Name(ELoginMode value) {
+  return ::google::protobuf::internal::NameOfEnum(
+    ELoginMode_descriptor(), value);
+}
+inline bool ELoginMode_Parse(
+    const ::std::string& name, ELoginMode* value) {
+  return ::google::protobuf::internal::ParseNamedEnum<ELoginMode>(
+    ELoginMode_descriptor(), name, value);
+}
 enum ReqServerListType {
   RSLT_WORLD_SERVER = 0,
   RSLT_GAMES_ERVER = 1
@@ -563,12 +583,12 @@ class LIBPROTOC_EXPORT ReqAccountLogin : public ::google::protobuf::Message {
   inline ::google::protobuf::int32 clientversion() const;
   inline void set_clientversion(::google::protobuf::int32 value);
 
-  // required int32 loginMode = 7;
+  // required .NFMsg.ELoginMode loginMode = 7;
   inline bool has_loginmode() const;
   inline void clear_loginmode();
   static const int kLoginModeFieldNumber = 7;
-  inline ::google::protobuf::int32 loginmode() const;
-  inline void set_loginmode(::google::protobuf::int32 value);
+  inline ::NFMsg::ELoginMode loginmode() const;
+  inline void set_loginmode(::NFMsg::ELoginMode value);
 
   // required int32 clientIP = 8;
   inline bool has_clientip() const;
@@ -647,7 +667,7 @@ class LIBPROTOC_EXPORT ReqAccountLogin : public ::google::protobuf::Message {
   ::std::string* security_code_;
   ::std::string* signbuff_;
   ::google::protobuf::int32 clientversion_;
-  ::google::protobuf::int32 loginmode_;
+  int loginmode_;
   ::google::protobuf::int64 clientmac_;
   ::std::string* device_info_;
   ::google::protobuf::int32 clientip_;
@@ -3301,7 +3321,7 @@ inline void ReqAccountLogin::set_clientversion(::google::protobuf::int32 value) 
   clientversion_ = value;
 }
 
-// required int32 loginMode = 7;
+// required .NFMsg.ELoginMode loginMode = 7;
 inline bool ReqAccountLogin::has_loginmode() const {
   return (_has_bits_[0] & 0x00000020u) != 0;
 }
@@ -3315,10 +3335,11 @@ inline void ReqAccountLogin::clear_loginmode() {
   loginmode_ = 0;
   clear_has_loginmode();
 }
-inline ::google::protobuf::int32 ReqAccountLogin::loginmode() const {
-  return loginmode_;
+inline ::NFMsg::ELoginMode ReqAccountLogin::loginmode() const {
+  return static_cast< ::NFMsg::ELoginMode >(loginmode_);
 }
-inline void ReqAccountLogin::set_loginmode(::google::protobuf::int32 value) {
+inline void ReqAccountLogin::set_loginmode(::NFMsg::ELoginMode value) {
+  assert(::NFMsg::ELoginMode_IsValid(value));
   set_has_loginmode();
   loginmode_ = value;
 }
@@ -5844,6 +5865,10 @@ namespace protobuf {
 template <>
 inline const EnumDescriptor* GetEnumDescriptor< ::NFMsg::EServerState>() {
   return ::NFMsg::EServerState_descriptor();
+}
+template <>
+inline const EnumDescriptor* GetEnumDescriptor< ::NFMsg::ELoginMode>() {
+  return ::NFMsg::ELoginMode_descriptor();
 }
 template <>
 inline const EnumDescriptor* GetEnumDescriptor< ::NFMsg::ReqServerListType>() {
