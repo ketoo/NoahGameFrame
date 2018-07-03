@@ -7,20 +7,18 @@ add_library(NFLogPlugin STATIC
 	${NFLogPlugin_ROOT_Hpp})
 
 if(UNIX)
-	add_dependencies(NFLogPlugin NFCore)
 
 	if (CMAKE_BUILD_TYPE MATCHES "Release")
-		target_link_libraries(NFLogPlugin )
 	else()
-		target_link_libraries(NFLogPlugin )
 	endif()
 	
+	add_dependencies(NFLogPlugin NFCore )
 
+	target_link_libraries(NFLogPlugin -static-libstdc++)
 else()
 	add_dependencies(NFLogPlugin NFCore )
-	target_link_libraries(NFLogPlugin  libprotobuf )
 	
-
+	target_link_libraries(NFLogPlugin -static-libstdc++)
 endif()
 
 set_target_properties( NFLogPlugin PROPERTIES OUTPUT_NAME_DEBUG "NFLogPlugin_d")

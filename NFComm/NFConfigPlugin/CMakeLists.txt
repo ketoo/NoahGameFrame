@@ -17,11 +17,14 @@ set_target_properties( NFConfigPlugin PROPERTIES
 if(UNIX)
 	add_dependencies(NFConfigPlugin NFCore)
 	if (CMAKE_BUILD_TYPE MATCHES "Release")
-		target_link_libraries(NFConfigPlugin  NFCore)
 	else()
-		target_link_libraries(NFConfigPlugin  NFCore)
 	endif()
+
+	target_link_libraries(NFConfigPlugin  NFCore)
+	target_link_libraries(NFConfigPlugin -static-libstdc++)
 else()
 	message("${ProjectName} ${CMAKE_BUILD_TYPE}")
-	target_link_libraries(NFConfigPlugin  libprotobuf )
+	
+	target_link_libraries(NFConfigPlugin  NFCore)
+	target_link_libraries(NFConfigPlugin -static-libstdc++)
 endif()

@@ -3,13 +3,27 @@ echo Building dependencies...
 #sudo apt-get install automake
 #sudo apt-get install zip unzip
 
+rm -rf ./lib
 mkdir -p lib/Debug/
 mkdir -p lib/Release/
 
+apt-get install libssl-dev
+#cd openssl-1.1.0h
+#rm -rf *.a
+#chmod -R 755 *
+#./config no-shared
+#make depend
+#make
+#cp -r -f ./*.a ../lib/Debug/
+#cp -r -f ./*.a ../lib/Release/
+#cd ../
+
 # compiling libevent
 cd libevent
+make clean
 chmod +x ./configure
-./configure CPPFLAGS=-fPIC --disable-shared --disable-openssl
+#./configure --disable-shared --disable-openssl
+./configure --disable-shared
 make
 
 cp -R -f ./.libs/*.a ../lib/Debug/
@@ -20,23 +34,14 @@ cd ../
 
 # compiling protobuf
 cd protobuf
+make clean
 chmod -R 755 *
-./configure CXXFLAGS=-fPIC
+./configure --disable-shared
 make
 make check
 
 cp -r -f ./src/.libs/*.a ../lib/Debug/
 cp -r -f ./src/.libs/*.a ../lib/Release/
-
-cp -r -f ./src/.libs/*.so ../../_Out/Debug/
-cp -r -f ./src/.libs/*.so.* ../../_Out/Debug/
-cp -r -f ./src/.libs/*.so ../../_Out/Release/
-cp -r -f ./src/.libs/*.so.* ../../_Out/Release/
-
-cp -r -f ./src/.libs/*.dylib ../../_Out/Debug/
-cp -r -f ./src/.libs/*.dylib.* ../../_Out/Debug/
-cp -r -f ./src/.libs/*.dylib ../../_Out/Release/
-cp -r -f ./src/.libs/*.dylib.* ../../_Out/Release/
 
 cd ../
 

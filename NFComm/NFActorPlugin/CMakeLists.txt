@@ -14,6 +14,9 @@ if(UNIX)
 	else()
 		target_link_libraries(NFActorPlugin libtherond.a)
 	endif()
+
+	target_link_libraries(NFActorPlugin -static-libstdc++)
+
 	add_definitions(
 		-D_USRDLL
 		-D_LIB
@@ -24,6 +27,8 @@ if(UNIX)
 else()
 	add_dependencies(NFActorPlugin libprotobuf NFMessageDefine)
 	target_link_libraries(NFActorPlugin libprotobuf Theron NFMessageDefine)
+	target_link_libraries(NFActorPlugin -static-libstdc++)
+	
 	add_definitions(
 		-D_USRDLL
 		-D_LIB
