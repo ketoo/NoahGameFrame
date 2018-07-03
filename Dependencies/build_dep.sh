@@ -3,11 +3,13 @@ echo Building dependencies...
 #sudo apt-get install automake
 #sudo apt-get install zip unzip
 
+rm -rf ./lib
 mkdir -p lib/Debug/
 mkdir -p lib/Release/
 
 # compiling libevent
 cd libevent
+make clean
 chmod +x ./configure
 ./configure --disable-shared --disable-openssl
 make
@@ -27,16 +29,6 @@ make check
 
 cp -r -f ./src/.libs/*.a ../lib/Debug/
 cp -r -f ./src/.libs/*.a ../lib/Release/
-
-cp -r -f ./src/.libs/*.so ../../_Out/Debug/
-cp -r -f ./src/.libs/*.so.* ../../_Out/Debug/
-cp -r -f ./src/.libs/*.so ../../_Out/Release/
-cp -r -f ./src/.libs/*.so.* ../../_Out/Release/
-
-cp -r -f ./src/.libs/*.dylib ../../_Out/Debug/
-cp -r -f ./src/.libs/*.dylib.* ../../_Out/Debug/
-cp -r -f ./src/.libs/*.dylib ../../_Out/Release/
-cp -r -f ./src/.libs/*.dylib.* ../../_Out/Release/
 
 cd ../
 
