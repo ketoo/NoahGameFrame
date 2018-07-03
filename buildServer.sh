@@ -34,11 +34,6 @@ fi
 rm -rf ./_Out/Debug
 rm -rf ./_Out/Release
 
-cd ./Dependencies
-chmod -R 755 build_dep.sh
-./build_dep.sh
-cd ../
-
 cd BuildScript/linux/
 chmod -R 755 ./BuildNF.CMake.Tools.sh
 ./BuildNF.CMake.Tools.sh

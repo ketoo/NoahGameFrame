@@ -19,12 +19,18 @@ set_target_properties( NFChatPlugin PROPERTIES
 link_NFSDK("NFChatPlugin")
 
 if(UNIX)
+
+	target_link_libraries(NFChatPlugin -static-libstdc++)
+
 	add_definitions(
 		-D_USRDLL
 		-DELPP_NO_DEFAULT_LOG_FILE
 	)
 	
 else()
+
+	target_link_libraries(NFChatPlugin -static-libstdc++)
+
 	add_definitions(
 		-DWIN
 		-D_USRDLL

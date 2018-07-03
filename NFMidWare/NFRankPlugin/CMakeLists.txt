@@ -19,12 +19,20 @@ set_target_properties( NFRankPlugin PROPERTIES
 link_NFSDK("NFRankPlugin")
 
 if(UNIX)
+
+
+	target_link_libraries(NFRankPlugin -static-libstdc++)
+
 	add_definitions(
 		-D_USRDLL
 		-DELPP_NO_DEFAULT_LOG_FILE
 	)
 	
 else()
+
+	target_link_libraries(NFRankPlugin -static-libstdc++)
+
+
 	add_definitions(
 		-DWIN
 		-D_USRDLL
