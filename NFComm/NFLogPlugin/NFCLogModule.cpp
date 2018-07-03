@@ -50,12 +50,36 @@ NFCLogModule::NFCLogModule(NFIPluginManager* p)
     pPluginManager = p;
 }
 
+void CrashHandler(int sig) {
+	// FOLLOWING LINE IS ABSOLUTELY NEEDED AT THE END IN ORDER TO ABORT APPLICATION
+	//el::base::debug::StackTrace();
+	//el::Helpers::logCrashReason(sig, true);
+
+#if NF_PLATFORM != NF_PLATFORM_WIN
+
+	LOG(FATAL) << "crash sig:" << sig;
+
+	int size = 16;
+	void * array[16];
+	int stack_num = backtrace(array, size);
+	char ** stacktrace = backtrace_symbols(array, stack_num);
+	for (int i = 0; i < stack_num; ++i)
+	{
+		//printf("%s\n", stacktrace[i]);
+		LOG(FATAL) << stacktrace[i];
+	}
+
+	free(stacktrace);
+#endif
+}
+
 bool NFCLogModule::Awake()
 {
 	mnLogCountTotal = 0;
 
 	el::Loggers::addFlag(el::LoggingFlag::StrictLogFileSizeCheck);
 	el::Loggers::addFlag(el::LoggingFlag::DisableApplicationAbortOnFatalLog);
+    el::Helpers::setCrashHandler(CrashHandler);
 
 	std::string strLogConfigName = pPluginManager->GetLogConfigName();
 	if (strLogConfigName.empty())
@@ -285,7 +309,8 @@ void NFCLogModule::LogStack()
 	for (int i = 0; i < stack_num; ++i)
 	{
 		//printf("%s\n", stacktrace[i]);
-		m_pLogModule->LogProperty(NFILogModule::NF_LOG_LEVEL::NLL_DEBUG_NORMAL, NFGUID(), "", stacktrace[i], __FUNCTION__, __LINE__);
+        
+		LOG(FATAL) << stacktrace[i];
 	}
 
 	free(stacktrace);
