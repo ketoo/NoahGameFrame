@@ -117,6 +117,8 @@ private:
     int m_nRetry = 2;
     int m_nTimeOut = 5;
 
+    std::list<HttpObject*> mlHttpObject;
+
 #if NF_ENABLE_SSL
     SSL_CTX *			m_pSslCtx = nullptr;
 #endif

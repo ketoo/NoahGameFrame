@@ -22,6 +22,12 @@ bool NFCHttpClient::Execute()
 
 bool NFCHttpClient::Init()
 {
+    for (int i = 0; i < 1024; ++i)
+    {
+        mlHttpObject.push_back(new HttpObject(this, nullptr, nullptr, NFGUID()));
+    }
+
+
 #if NF_PLATFORM == NF_PLATFORM_WIN
     WORD wVersionRequested;
     WSADATA wsaData;
@@ -245,7 +251,15 @@ bool NFCHttpClient::MakeRequest(const std::string& strUri,
         evhttp_connection_set_timeout(evcon, m_nTimeOut);
     }
 
-    HttpObject* pHttpObj = new HttpObject(this, bev, pCB, id);
+    HttpObject* pHttpObj = nullptr;
+    if (mlHttpObject.size() > 0)
+    {
+        pHttpObj = mlHttpObject.front();
+    }
+    else
+    {
+        pHttpObj = new HttpObject(this, bev, pCB, id);
+    }
 
     // Fire off the request
     struct evhttp_request* req = evhttp_request_new(OnHttpReqDone, pHttpObj);
@@ -360,6 +374,7 @@ void NFCHttpClient::OnHttpReqDone(struct evhttp_request* req, void* ctx)
         
         throw std::runtime_error(strErrMsg);
 
+        mlHttpObject.push_back(pHttpObj);
         return;
     }
 
@@ -405,6 +420,5 @@ void NFCHttpClient::OnHttpReqDone(struct evhttp_request* req, void* ctx)
         }
     }
 
-    //it shoue be push back to the pool
-	delete pHttpObj;
+    mlHttpObject.push_back(pHttpObj);
 }
