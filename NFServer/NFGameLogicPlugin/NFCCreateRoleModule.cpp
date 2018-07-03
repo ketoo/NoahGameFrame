@@ -20,7 +20,7 @@ bool NFCCreateRoleModule::Init()
 	m_pGameServerNet_ServerModule = pPluginManager->FindModule<NFIGameServerNet_ServerModule>();
 	m_pNetClientModule = pPluginManager->FindModule<NFINetClientModule>();
 	m_pScheduleModule = pPluginManager->FindModule<NFIScheduleModule>();
-	m_pDataTrailModule = pPluginManager->FindModule<NFIDataTrailModule>();
+	m_pDataTailModule = pPluginManager->FindModule<NFIDataTailModule>();
 	
     return true;
 }
@@ -204,14 +204,14 @@ int NFCCreateRoleModule::OnObjectPlayerEvent(const NFGUID & self, const std::str
 {
 	if (CLASS_OBJECT_EVENT::COE_DESTROY == eClassEvent)
 	{
-		//m_pDataTrailModule->LogObjectData(self);
+		//m_pDataTailModule->LogObjectData(self);
 
 		SaveData(self);
 	}
 	else if (CLASS_OBJECT_EVENT::COE_CREATE_LOADDATA == eClassEvent)
 	{
-		//m_pDataTrailModule->StartTrail(self);
-		//m_pDataTrailModule->LogObjectData(self);
+		//m_pDataTailModule->StartTrail(self);
+		//m_pDataTailModule->LogObjectData(self);
 
 		AttachData(self);
 	}
