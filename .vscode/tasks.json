@@ -4,17 +4,7 @@
     "version": "2.0.0",
     "tasks": [
         {
-            "label": "build NoahGameFrame",
-            "type": "shell",
-            "command": "./install4cmake.sh",
-            "group": {
-                "kind": "build",
-                "isDefault": true
-            },
-            "problemMatcher": []
-        },
-        {
-            "label": "build NFSDK",
+            "label": "build NoahFrame",
             "type": "shell",
             "command": "./install4cmake.sh",
             "group": {
@@ -26,7 +16,7 @@
         {
             "label": "build GameServer",
             "type": "shell",
-            "command": "./install4cmake.sh",
+            "command": "./buildServer.sh",
             "group": {
                 "kind": "build",
                 "isDefault": true
