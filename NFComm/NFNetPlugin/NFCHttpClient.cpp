@@ -335,7 +335,7 @@ void NFCHttpClient::OnHttpReqDone(struct evhttp_request* req, void* ctx)
         /* Print out the OpenSSL error queue that libevent
         * squirreled away for us, if any. */
 
-        char buffer[512] = {0};
+        char buffer[1024] = {0};
         int nread = 0;
 
 #if NF_ENABLE_SSL
@@ -350,26 +350,21 @@ void NFCHttpClient::OnHttpReqDone(struct evhttp_request* req, void* ctx)
         * socket error; let's try printing that. */
         if (!printed_err)
         {
-            char tmpBuf[512] = {0};
-            snprintf(tmpBuf, 512, "socket error = %s (%d)\n",
+            char tmpBuf[1024] = {0};
+            snprintf(tmpBuf, 1024, "socket error = %s (%d)\n",
                      evutil_socket_error_to_string(errcode),
                      errcode);
             strErrMsg += std::string(tmpBuf);
         }
 
-        if (pHttpObj->m_pCB)
-        {
-            if (pHttpObj->m_pCB.get())
-            {
-                HTTP_RESP_FUNCTOR fun(*pHttpObj->m_pCB.get());
-                fun(pHttpObj ->mID, -1, strErrMsg);
-            }
-        }
+        
+        throw std::runtime_error(strErrMsg);
+
         return;
     }
 
     int nRespCode = evhttp_request_get_response_code(req);
-    char buffer[512] = {0};
+    char buffer[4096] = {0};
     int nread = 0;
     std::string strResp;
     while ((nread = evbuffer_remove(evhttp_request_get_input_buffer(req),
@@ -410,6 +405,6 @@ void NFCHttpClient::OnHttpReqDone(struct evhttp_request* req, void* ctx)
         }
     }
 
-
+    //it shoue be push back to the pool
 	delete pHttpObj;
 }
