@@ -19,12 +19,17 @@ set_target_properties( NFUserGiftPlugin PROPERTIES
 link_NFSDK("NFUserGiftPlugin")
 
 if(UNIX)
+	target_link_libraries(NFUserGiftPlugin -static-libstdc++)
+	
 	add_definitions(
 		-D_USRDLL
 		-DELPP_NO_DEFAULT_LOG_FILE
 	)
 	
 else()
+
+	target_link_libraries(NFUserGiftPlugin -static-libstdc++)
+	
 	add_definitions(
 		-DWIN
 		-D_USRDLL

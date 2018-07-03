@@ -6,6 +6,9 @@ add_executable(NFPluginLoader ${NFPluginLoader_ROOT_Cpp} ${NFPluginLoader_ROOT_H
 
 #link_NFSDK("NFPluginLoader")
 
+
+
+target_link_libraries(NFPluginLoader libprotobuf.a)
 target_link_libraries(NFPluginLoader NFCore)
 target_link_libraries(NFPluginLoader NFActorPlugin)
 target_link_libraries(NFPluginLoader NFConfigPlugin)
@@ -68,11 +71,13 @@ if(UNIX)
 	endif()
 	
 
+	target_link_libraries(NFPluginLoader -static-libstdc++)
 
 else()
 	add_dependencies(NFPluginLoader NFCore )
 	target_link_libraries(NFPluginLoader )
 	
+	target_link_libraries(NFPluginLoader -static-libstdc++)
 endif()
 
 set_target_properties( NFPluginLoader PROPERTIES OUTPUT_NAME_DEBUG "NFPluginLoader_d")
