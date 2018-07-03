@@ -13,6 +13,10 @@ if(UNIX)
 	else()
 		target_link_libraries(NFNavigationPlugin navigation_d NFCore)
 	endif()
+
+
+	target_link_libraries(NFNavigationPlugin -static-libstdc++)
+
 	add_definitions(
 			-D_USRDLL
 		)
@@ -24,6 +28,7 @@ else()
 		${SolutionDir}/Dependencies/navigation/)
 	add_dependencies(NFNavigationPlugin navigation NFCore)
 	target_link_libraries(NFNavigationPlugin navigation NFCore)
+	target_link_libraries(NFNavigationPlugin -static-libstdc++)
 	add_definitions(
 			-D_USRDLL
 			-DTHERON_CPP11

@@ -22,3 +22,4 @@ set_target_properties( navigation PROPERTIES
 	
 
 target_link_libraries(navigation)
+target_link_libraries(navigation -static-libstdc++)

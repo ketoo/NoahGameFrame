@@ -22,7 +22,10 @@ if(UNIX)
 	else()
 		target_link_libraries(NFCore )
 	endif()
+
+	target_link_libraries(NFCore -static-libstdc++)
 else()
 	target_link_libraries(NFCore )
+	target_link_libraries(NFCore -static-libstdc++)
 endif()
 

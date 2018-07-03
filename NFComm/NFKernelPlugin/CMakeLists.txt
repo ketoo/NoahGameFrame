@@ -22,13 +22,15 @@ add_library(NFKernelPlugin STATIC
 if(UNIX)
 	add_dependencies(NFKernelPlugin NFCore NFConfigPlugin)
 	if (CMAKE_BUILD_TYPE MATCHES "Release")
-		target_link_libraries(NFKernelPlugin  NFCore)
 	else()
-		target_link_libraries(NFKernelPlugin  NFCore)
 	endif()
-
+		
+	target_link_libraries(NFKernelPlugin  NFCore)
+	target_link_libraries(NFKernelPlugin -static-libstdc++)
 else()
 	add_dependencies(NFKernelPlugin NFCore NFConfigPlugin)
+
+	target_link_libraries(NFKernelPlugin -static-libstdc++)
 
 endif()
 

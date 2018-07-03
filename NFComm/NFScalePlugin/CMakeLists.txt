@@ -19,12 +19,18 @@ set_target_properties( NFScalePlugin PROPERTIES
 link_NFSDK("NFScalePlugin")
 
 if(UNIX)
+
+	target_link_libraries(NFScalePlugin -static-libstdc++)
+
 	add_definitions(
 		-D_USRDLL
 		-DELPP_NO_DEFAULT_LOG_FILE
 	)
 	
 else()
+
+	target_link_libraries(NFScalePlugin -static-libstdc++)
+
 	add_definitions(
 		-DWIN
 		-D_USRDLL

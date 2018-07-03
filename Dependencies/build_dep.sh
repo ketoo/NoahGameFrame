@@ -7,11 +7,23 @@ rm -rf ./lib
 mkdir -p lib/Debug/
 mkdir -p lib/Release/
 
+apt-get install libssl-dev
+#cd openssl-1.1.0h
+#rm -rf *.a
+#chmod -R 755 *
+#./config no-shared
+#make depend
+#make
+#cp -r -f ./*.a ../lib/Debug/
+#cp -r -f ./*.a ../lib/Release/
+#cd ../
+
 # compiling libevent
 cd libevent
 make clean
 chmod +x ./configure
-./configure --disable-shared --disable-openssl
+#./configure --disable-shared --disable-openssl
+./configure --disable-shared
 make
 
 cp -R -f ./.libs/*.a ../lib/Debug/
@@ -22,6 +34,7 @@ cd ../
 
 # compiling protobuf
 cd protobuf
+make clean
 chmod -R 755 *
 ./configure --disable-shared
 make
