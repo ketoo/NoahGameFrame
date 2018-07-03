@@ -65,16 +65,13 @@ target_link_libraries(NFPluginLoader NFUserGiftPlugin)
 if(UNIX)
 	add_dependencies(NFPluginLoader NFCore)
 	if (CMAKE_BUILD_TYPE MATCHES "Release")
-		target_link_libraries(NFPluginLoader  pthread dl)
 	else()
-		target_link_libraries(NFPluginLoader  pthread dl)
 	endif()
-	
 
+	target_link_libraries(NFPluginLoader )
 	target_link_libraries(NFPluginLoader -static-libstdc++)
 
 else()
-	add_dependencies(NFPluginLoader NFCore )
 	target_link_libraries(NFPluginLoader )
 	
 	target_link_libraries(NFPluginLoader -static-libstdc++)
