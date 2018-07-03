@@ -16,6 +16,8 @@ RUN apt-get update \
 #&& cd ..
 #&& rm redis.tar.gz
 
+#WORKDIR  /mnt/data/apps/NoahGameFrame
+
 RUN apt-get install -y git g++ cmake unzip autoconf automake subversion
 
 ADD ./NoahGameFrame /mnt/data/apps/NoahGameFrame
@@ -24,4 +26,7 @@ RUN cd /mnt/data/apps/NoahGameFrame \
 && ./install4cmake.sh
 
 EXPOSE 14001
-ENTRYPOINT ["/mnt/data/apps/NoahGameFrame/_Out/rund.sh"]
+ENV VERSION=1.0.0
+ENV LAUNCH_OPTS=""
+
+ENTRYPOINT [ "sh", "-c", "./mnt/data/apps/NoahGameFrame/_Out/Debug/NFPluginLoader ${args}" ]
