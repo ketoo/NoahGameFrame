@@ -2,6 +2,9 @@
 
 export LC_ALL="C"
 
+ulimit -c unlimited
+source /etc/profile
+
 sysOS=`uname -s`
 if [ $sysOS == "Darwin" ];then
     echo "I'm MacOS"
