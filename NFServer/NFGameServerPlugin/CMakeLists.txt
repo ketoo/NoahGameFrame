@@ -19,12 +19,14 @@ set_target_properties( NFGameServerPlugin PROPERTIES
 link_NFSDK("NFGameServerPlugin")
 
 if(UNIX)
+	target_link_libraries(NFGameServerPlugin -static-libstdc++)
 	add_definitions(
 		-D_USRDLL
 		-DELPP_NO_DEFAULT_LOG_FILE
 	)
 	
 else()
+	target_link_libraries(NFGameServerPlugin -static-libstdc++)
 	add_definitions(
 		-DWIN
 		-D_USRDLL

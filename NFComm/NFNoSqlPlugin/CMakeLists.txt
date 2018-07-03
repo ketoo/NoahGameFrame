@@ -27,6 +27,8 @@ if(UNIX)
 		target_link_libraries(NFNoSqlPlugin hiredis)
 	endif()
 
+	target_link_libraries(NFNoSqlPlugin -static-libstdc++)
+
 	add_definitions(
 			-D_USRDLL
 			-DELPP_NO_DEFAULT_LOG_FILE
@@ -39,6 +41,7 @@ else()
 		target_link_libraries(NFNoSqlPlugin hiredis_d)
 	endif()
 
+	target_link_libraries(NFNoSqlPlugin -static-libstdc++)
 	add_definitions(
 			-DWIN
 			-D_USRDLL

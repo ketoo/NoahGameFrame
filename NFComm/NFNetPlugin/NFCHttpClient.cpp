@@ -96,7 +96,7 @@ bool NFCHttpClient::MakeRequest(const std::string& strUri,
                                 HTTP_RESP_FUNCTOR_PTR pCB,
                                 const std::string& strPostData,
                                 const std::map<std::string, std::string>& xHeaders,
-                                const bool bPost,
+                                const NFHttpType eHttpType,
 								const NFGUID id)
 {
     struct evhttp_uri* http_uri = NULL;
@@ -283,7 +283,7 @@ bool NFCHttpClient::MakeRequest(const std::string& strUri,
         evhttp_add_header(output_headers, "Content-Length", buf);
     }
 
-    int r_ = evhttp_make_request(evcon, req, EVHTTP_REQ_GET, uri);
+    int r_ = evhttp_make_request(evcon, req, (evhttp_cmd_type)eHttpType, uri);
     if (r_ != 0)
     {
         fprintf(stderr, "evhttp_make_request() failed\n");
@@ -307,13 +307,13 @@ bool NFCHttpClient::MakeRequest(const std::string& strUri,
 bool NFCHttpClient::DoGet(const std::string& strUri, HTTP_RESP_FUNCTOR_PTR pCB,
                                const std::map<std::string, std::string>& xHeaders, const NFGUID id)
 {
-    return MakeRequest(strUri, pCB, "", xHeaders, false);
+    return MakeRequest(strUri, pCB, "", xHeaders, NFHttpType::NF_HTTP_REQ_GET);
 }
 
 bool NFCHttpClient::DoPost(const std::string& strUri, const std::string& strPostData, HTTP_RESP_FUNCTOR_PTR pCB,
                                 const std::map<std::string, std::string>& xHeaders, const NFGUID id)
 {
-    return MakeRequest(strUri, pCB, strPostData, xHeaders, true);
+    return MakeRequest(strUri, pCB, strPostData, xHeaders, NFHttpType::NF_HTTP_REQ_POST);
 }
 
 void NFCHttpClient::OnHttpReqDone(struct evhttp_request* req, void* ctx)

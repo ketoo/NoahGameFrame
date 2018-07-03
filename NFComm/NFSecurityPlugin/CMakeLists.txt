@@ -19,12 +19,16 @@ set_target_properties( NFSecurityPlugin PROPERTIES
 link_NFSDK("NFSecurityPlugin")
 
 if(UNIX)
+
+	target_link_libraries(NFSecurityPlugin -static-libstdc++)
 	add_definitions(
 		-D_USRDLL
 		-DELPP_NO_DEFAULT_LOG_FILE
 	)
 	
 else()
+
+	target_link_libraries(NFSecurityPlugin -static-libstdc++)
 	add_definitions(
 		-DWIN
 		-D_USRDLL
