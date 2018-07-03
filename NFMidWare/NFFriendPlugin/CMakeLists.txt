@@ -19,12 +19,18 @@ set_target_properties( NFFriendPlugin PROPERTIES
 link_NFSDK("NFFriendPlugin")
 
 if(UNIX)
+
+	target_link_libraries(NFFriendPlugin -static-libstdc++)
+
 	add_definitions(
 		-D_USRDLL
 		-DELPP_NO_DEFAULT_LOG_FILE
 	)
 	
 else()
+
+	target_link_libraries(NFFriendPlugin -static-libstdc++)
+
 	add_definitions(
 		-DWIN
 		-D_USRDLL

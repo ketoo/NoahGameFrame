@@ -17,6 +17,8 @@ if (APPLE)
 	add_definitions(
 		-D_THREAD_SAFE
 	)
+
+	target_link_libraries(NFMessageDefine -static-libstdc++)
 elseif(UNIX)
 	if (CMAKE_BUILD_TYPE MATCHES "Release")
 		target_link_libraries(NFMessageDefine )
@@ -24,9 +26,12 @@ elseif(UNIX)
 		target_link_libraries(NFMessageDefine )
 	endif()
 	
+	target_link_libraries(NFMessageDefine -static-libstdc++)
 else()
 	add_dependencies(NFMessageDefine libprotobuf)
 	target_link_libraries(NFMessageDefine  libprotobuf )
+	target_link_libraries(NFMessageDefine -static-libstdc++)
+	
 	add_definitions(
 		-D_USRDLL
 		-D_LIB

@@ -15,11 +15,13 @@ if(UNIX)
 	target_link_libraries(NFLuaScriptPlugin liblua.a)
 	endif()
 
+	target_link_libraries(NFLuaScriptPlugin -static-libstdc++)
 else()
 	add_dependencies(NFLuaScriptPlugin NFCore )
 	target_link_libraries(NFLuaScriptPlugin libprotobuf )
 	target_link_libraries(NFLuaScriptPlugin liblua.a)
 
+	target_link_libraries(NFLuaScriptPlugin -static-libstdc++)
 
 endif()
 
