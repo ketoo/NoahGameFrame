@@ -19,12 +19,14 @@ set_target_properties( NFWorldLogicPlugin PROPERTIES
 link_NFSDK("NFWorldLogicPlugin")
 
 if(UNIX)
+	target_link_libraries(NFWorldLogicPlugin -static-libstdc++)
 	add_definitions(
 		-D_USRDLL
 		-DELPP_NO_DEFAULT_LOG_FILE
 	)
 
 else()
+	target_link_libraries(NFWorldLogicPlugin -static-libstdc++)
 	add_definitions(
 		-DWIN
 		-D_USRDLL

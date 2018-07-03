@@ -19,12 +19,14 @@ set_target_properties( NFLoginLogicPlugin PROPERTIES
 link_NFSDK("NFLoginLogicPlugin")
 
 if(UNIX)
+	target_link_libraries(NFLoginLogicPlugin -static-libstdc++)
 	add_definitions(
 		-D_USRDLL
 		-DELPP_NO_DEFAULT_LOG_FILE
 	)
 
 else()
+	target_link_libraries(NFLoginLogicPlugin -static-libstdc++)
 	add_definitions(
 		-DWIN
 		-D_USRDLL
