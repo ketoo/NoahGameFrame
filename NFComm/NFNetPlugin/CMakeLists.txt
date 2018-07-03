@@ -29,6 +29,7 @@ if (APPLE)
 		target_link_libraries(NFNetPlugin libprotobuf.a)
 		target_link_libraries(NFNetPlugin NFMessageDefine)
 	endif()
+		target_link_libraries(NFNetPlugin -static-libstdc++)
 	add_definitions(
 		-D_USRDLL
 		-DTHERON_CPP11
@@ -44,6 +45,7 @@ elseif(UNIX)
 		target_link_libraries(NFNetPlugin libevent_core.a)
 		target_link_libraries(NFNetPlugin libprotobuf.a)
 	endif()
+		target_link_libraries(NFNetPlugin -static-libstdc++)
 	add_definitions(
 		-D_USRDLL
 		-DTHERON_CPP11
