@@ -79,7 +79,7 @@ public:
 class NFCHttpClient : public NFIHttpClient
 {
 public:
-    NFCHttpClient(int nRetry = 2, int nTimeoutSec = 2)
+    NFCHttpClient(int nRetry = 2, int nTimeoutSec = 30)
             : m_nRetry(nRetry), m_nTimeOut(nTimeoutSec)
     {
     }
@@ -115,7 +115,7 @@ private:
     struct event_base* m_pBase = nullptr;
 
     int m_nRetry = 2;
-    int m_nTimeOut = 5;
+    int m_nTimeOut = 30;
 
 #if NF_ENABLE_SSL
     SSL_CTX *			m_pSslCtx = nullptr;
