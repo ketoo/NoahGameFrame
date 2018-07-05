@@ -13,6 +13,10 @@
 #include "NFLogPlugin.h"
 #include "termcolor.hpp"
 
+#if NF_PLATFORM != NF_PLATFORM_WIN
+#include <execinfo.h>
+#endif
+
 INITIALIZE_EASYLOGGINGPP
 
 unsigned int NFCLogModule::idx = 0;
@@ -46,12 +50,36 @@ NFCLogModule::NFCLogModule(NFIPluginManager* p)
     pPluginManager = p;
 }
 
+void CrashHandler(int sig) {
+	// FOLLOWING LINE IS ABSOLUTELY NEEDED AT THE END IN ORDER TO ABORT APPLICATION
+	//el::base::debug::StackTrace();
+	//el::Helpers::logCrashReason(sig, true);
+
+#if NF_PLATFORM != NF_PLATFORM_WIN
+
+	LOG(FATAL) << "crash sig:" << sig;
+
+	int size = 16;
+	void * array[16];
+	int stack_num = backtrace(array, size);
+	char ** stacktrace = backtrace_symbols(array, stack_num);
+	for (int i = 0; i < stack_num; ++i)
+	{
+		//printf("%s\n", stacktrace[i]);
+		LOG(FATAL) << stacktrace[i];
+	}
+
+	free(stacktrace);
+#endif
+}
+
 bool NFCLogModule::Awake()
 {
 	mnLogCountTotal = 0;
 
 	el::Loggers::addFlag(el::LoggingFlag::StrictLogFileSizeCheck);
 	el::Loggers::addFlag(el::LoggingFlag::DisableApplicationAbortOnFatalLog);
+    el::Helpers::setCrashHandler(CrashHandler);
 
 	std::string strLogConfigName = pPluginManager->GetLogConfigName();
 	if (strLogConfigName.empty())
@@ -254,8 +282,7 @@ void NFCLogModule::LogStack()
 {
 
     //To Add
-    /*
-    #ifdef NF_DEBUG_MODE
+#if NF_PLATFORM == NF_PLATFORM_WIN
     time_t t = time(0);
     char szDmupName[MAX_PATH];
     tm* ptm = localtime(&t);
@@ -274,9 +301,22 @@ void NFCLogModule::LogStack()
     MiniDumpWriteDump(GetCurrentProcess(), GetCurrentProcessId(), hDumpFile, MiniDumpNormal, &dumpInfo, NULL, NULL);
 
     CloseHandle(hDumpFile);
+#else
+	int size = 16;
+	void * array[16];
+	int stack_num = backtrace(array, size);
+	char ** stacktrace = backtrace_symbols(array, stack_num);
+	for (int i = 0; i < stack_num; ++i)
+	{
+		//printf("%s\n", stacktrace[i]);
+        
+		LOG(FATAL) << stacktrace[i];
+	}
 
-    #endif
-    */
+	free(stacktrace);
+#endif
+ 
+    
 }
 
 bool NFCLogModule::LogNormal(const NF_LOG_LEVEL nll, const NFGUID ident, const std::string& strInfo, const std::string& strDesc, const char* func, int line)

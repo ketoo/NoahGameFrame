@@ -17,13 +17,17 @@
 #include <atomic>
 #include "NFCPluginManager.h"
 #include "NFComm/NFPluginModule/NFPlatform.h"
+#include "NFComm/NFLogPlugin/easylogging++.h"
 
-#if NF_PLATFORM == NF_PLATFORM_LINUX
+#if NF_PLATFORM != NF_PLATFORM_WIN
 #include <unistd.h>
 #include <netdb.h>
 #include <arpa/inet.h>
 #include <signal.h>
+#include <execinfo.h>
+#if NF_PLATFORM == NF_PLATFORM_LINUX
 #include <sys/prctl.h>
+#endif
 #endif
 
 bool bExitApp = false;
@@ -326,15 +330,49 @@ int main(int argc, char* argv[])
 
 #if NF_PLATFORM == NF_PLATFORM_WIN
         __try
-        {
+#else
+		try
 #endif
-		//NFCPluginManager::GetSingletonPtr()->Execute();
-		NFCPluginManager::Instance()->ExecuteCoScheduler();
+		{
+#ifdef NF_COROUTINE
+			NFCPluginManager::Instance()->ExecuteCoScheduler();
+#else
+			NFCPluginManager::GetSingletonPtr()->Execute();
+#endif
+		}
 #if NF_PLATFORM == NF_PLATFORM_WIN
-        }
         __except (ApplicationCrashHandler(GetExceptionInformation()))
         {
         }
+#else
+	catch(const std::exception& e)
+	{
+		int size = 16;
+		void * array[16];
+		int stack_num = backtrace(array, size);
+		char ** stacktrace = backtrace_symbols(array, stack_num);
+		for (int i = 0; i < stack_num; ++i)
+		{
+			//printf("%s\n", stacktrace[i]);
+			LOG(FATAL) << stacktrace[i];
+		}
+
+		free(stacktrace);
+	}
+	catch(...)
+	{
+		int size = 16;
+		void * array[16];
+		int stack_num = backtrace(array, size);
+		char ** stacktrace = backtrace_symbols(array, stack_num);
+		for (int i = 0; i < stack_num; ++i)
+		{
+			//printf("%s\n", stacktrace[i]);
+			LOG(FATAL) << stacktrace[i];
+		}
+
+		free(stacktrace);
+	}
 #endif
     }
 
