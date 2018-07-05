@@ -18,7 +18,7 @@ class NFException : public std::exception
 private:
     static std::string _msgDelay;
     std::string _msg;
-    int index = 0;
+    static int index;
 public:
     NFException(const std::string& msg)
     {
@@ -64,4 +64,7 @@ public:
     char const * what() const noexcept{ return _msg.c_str(); }
 #endif
 };
+
+int NFException::index = 0;
+
 #endif
