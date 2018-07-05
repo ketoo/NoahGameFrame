@@ -50,8 +50,7 @@ bool NFCHttpClient::Init()
 
     m_pSslCtx = SSL_CTX_new(SSLv23_client_method());
     if (!m_pSslCtx) {
-        printf("SSL_CTX_new err.");
-        return false;
+        throw NFException("SSL_CTX_new err.", __FUNCTION__, __LINE__);
     }
 
 #endif
@@ -59,8 +58,7 @@ bool NFCHttpClient::Init()
     m_pBase = event_base_new();
     if (m_pBase == nullptr)
     {
-        printf("event_base_new err.");
-        return false;
+        throw NFException("event_base_new err.", __FUNCTION__, __LINE__);
     }
     return true;
 }
@@ -111,7 +109,7 @@ bool NFCHttpClient::MakeRequest(const std::string& strUri,
     http_uri = evhttp_uri_parse(strUri.c_str());
     if (http_uri == NULL)
     {
-        return false;
+        throw NFException("evhttp_uri_parse err.", __FUNCTION__, __LINE__);
     }
 
     bool isHttps = false;
@@ -126,7 +124,7 @@ bool NFCHttpClient::MakeRequest(const std::string& strUri,
             evhttp_uri_free(http_uri);
         }
 
-        return false;
+        throw NFException("scheme == NULL err.", __FUNCTION__, __LINE__);
     }
 
     if (lowwerScheme.compare("https") == 0)
@@ -137,12 +135,12 @@ bool NFCHttpClient::MakeRequest(const std::string& strUri,
     host = evhttp_uri_get_host(http_uri);
     if (host == NULL)
     {
-        printf("url must have a host \n");
         if (http_uri)
         {
             evhttp_uri_free(http_uri);
         }
-        return false;
+
+        throw NFException("url must have a host.", __FUNCTION__, __LINE__);
     }
 
     int port = evhttp_uri_get_port(http_uri);
@@ -187,13 +185,12 @@ bool NFCHttpClient::MakeRequest(const std::string& strUri,
     SSL *pSSL = SSL_new(m_pSslCtx);
     if (pSSL == NULL)
     {
-        printf("SSL_new err.");
         if (http_uri)
         {
             evhttp_uri_free(http_uri);
         }
 
-        return false;
+        throw NFException("SSL_new err", __FUNCTION__, __LINE__);
     }
 #endif
 
@@ -212,14 +209,12 @@ bool NFCHttpClient::MakeRequest(const std::string& strUri,
 
     if (bev == NULL)
     {
-        fprintf(stderr, "bufferevent_socket_new() failed\n");
-
         if (http_uri)
         {
             evhttp_uri_free(http_uri);
         }
 
-        return false;
+        throw NFException(stderr + " bufferevent_socket_new() failed", __FUNCTION__, __LINE__);
     }
 
 #if NF_ENABLE_SSL
@@ -232,13 +227,12 @@ bool NFCHttpClient::MakeRequest(const std::string& strUri,
     struct evhttp_connection* evcon = evhttp_connection_base_bufferevent_new(m_pBase, NULL, bev, host, port);
     if (evcon == NULL)
     {
-        fprintf(stderr, "evhttp_connection_base_bufferevent_new() failed\n");
-
         if (http_uri)
         {
             evhttp_uri_free(http_uri);
         }
 
+        throw NFException(stderr + " evhttp_connection_base_bufferevent_new() failed", __FUNCTION__, __LINE__);
         return false;
     }
 
@@ -255,6 +249,11 @@ bool NFCHttpClient::MakeRequest(const std::string& strUri,
     if (mlHttpObject.size() > 0)
     {
         pHttpObj = mlHttpObject.front();
+
+        pHttpObj->m_pHttpClient = this;
+        pHttpObj->m_pBev = bev;
+        pHttpObj->m_pCB = pCB;
+		pHttpObj->mID = id;
     }
     else
     {
@@ -265,13 +264,12 @@ bool NFCHttpClient::MakeRequest(const std::string& strUri,
     struct evhttp_request* req = evhttp_request_new(OnHttpReqDone, pHttpObj);
     if (req == NULL)
     {
-        fprintf(stderr, "evhttp_request_new() failed\n");
-
         if (http_uri)
         {
             evhttp_uri_free(http_uri);
         }
 
+        throw NFException(stderr + " evhttp_request_new() failed", __FUNCTION__, __LINE__);
         return false;
     }
 
@@ -300,13 +298,13 @@ bool NFCHttpClient::MakeRequest(const std::string& strUri,
     int r_ = evhttp_make_request(evcon, req, (evhttp_cmd_type)eHttpType, uri);
     if (r_ != 0)
     {
-        fprintf(stderr, "evhttp_make_request() failed\n");
 
         if (http_uri)
         {
             evhttp_uri_free(http_uri);
         }
 
+        throw NFException(stderr + " evhttp_make_request() failed", __FUNCTION__, __LINE__);
         return false;
     }
 
@@ -371,10 +369,9 @@ void NFCHttpClient::OnHttpReqDone(struct evhttp_request* req, void* ctx)
             strErrMsg += std::string(tmpBuf);
         }
 
-        
-        throw std::runtime_error(strErrMsg);
-
         mlHttpObject.push_back(pHttpObj);
+        
+        throw NFException(strErrMsg, __FUNCTION__, __LINE__);
         return;
     }
 
@@ -411,12 +408,20 @@ void NFCHttpClient::OnHttpReqDone(struct evhttp_request* req, void* ctx)
         }
     }
 
+    
     if (pHttpObj->m_pCB)
     {
         if (pHttpObj->m_pCB.get())
         {
-            HTTP_RESP_FUNCTOR fun(*pHttpObj->m_pCB.get());
-            fun(pHttpObj->mID, nRespCode, strResp);
+            try
+            {
+                HTTP_RESP_FUNCTOR fun(*pHttpObj->m_pCB.get());
+                fun(pHttpObj->mID, nRespCode, strResp);
+            }
+            catch(...)
+            {
+                //i dont know why cant throw a exception(I u throw a exception than u will got a error when u request a new access request)
+            }
         }
     }
 

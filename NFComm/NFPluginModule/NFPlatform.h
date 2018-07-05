@@ -288,6 +288,7 @@ typedef int64_t NFSOCK;
 #include <sstream>
 #include <stdio.h>
 #include <common/lexical_cast.hpp>
+#include "NFException.h"
 
 #ifndef _MSC_VER
 #include <sys/time.h>
@@ -396,5 +397,6 @@ inline int64_t NFGetTimeS()
 #endif
 #endif
 #endif
+
 
 #endif
