@@ -22,6 +22,12 @@ bool NFCHttpClient::Execute()
 
 bool NFCHttpClient::Init()
 {
+    for (int i = 0; i < 1024; ++i)
+    {
+        mlHttpObject.push_back(new HttpObject(this, nullptr, nullptr, NFGUID()));
+    }
+
+
 #if NF_PLATFORM == NF_PLATFORM_WIN
     WORD wVersionRequested;
     WSADATA wsaData;
@@ -245,7 +251,15 @@ bool NFCHttpClient::MakeRequest(const std::string& strUri,
         evhttp_connection_set_timeout(evcon, m_nTimeOut);
     }
 
-    HttpObject* pHttpObj = new HttpObject(this, bev, pCB, id);
+    HttpObject* pHttpObj = nullptr;
+    if (mlHttpObject.size() > 0)
+    {
+        pHttpObj = mlHttpObject.front();
+    }
+    else
+    {
+        pHttpObj = new HttpObject(this, bev, pCB, id);
+    }
 
     // Fire off the request
     struct evhttp_request* req = evhttp_request_new(OnHttpReqDone, pHttpObj);
@@ -335,7 +349,7 @@ void NFCHttpClient::OnHttpReqDone(struct evhttp_request* req, void* ctx)
         /* Print out the OpenSSL error queue that libevent
         * squirreled away for us, if any. */
 
-        char buffer[512] = {0};
+        char buffer[1024] = {0};
         int nread = 0;
 
 #if NF_ENABLE_SSL
@@ -350,26 +364,22 @@ void NFCHttpClient::OnHttpReqDone(struct evhttp_request* req, void* ctx)
         * socket error; let's try printing that. */
         if (!printed_err)
         {
-            char tmpBuf[512] = {0};
-            snprintf(tmpBuf, 512, "socket error = %s (%d)\n",
+            char tmpBuf[1024] = {0};
+            snprintf(tmpBuf, 1024, "socket error = %s (%d)\n",
                      evutil_socket_error_to_string(errcode),
                      errcode);
             strErrMsg += std::string(tmpBuf);
         }
 
-        if (pHttpObj->m_pCB)
-        {
-            if (pHttpObj->m_pCB.get())
-            {
-                HTTP_RESP_FUNCTOR fun(*pHttpObj->m_pCB.get());
-                fun(pHttpObj ->mID, -1, strErrMsg);
-            }
-        }
+        
+        throw std::runtime_error(strErrMsg);
+
+        mlHttpObject.push_back(pHttpObj);
         return;
     }
 
     int nRespCode = evhttp_request_get_response_code(req);
-    char buffer[512] = {0};
+    char buffer[4096] = {0};
     int nread = 0;
     std::string strResp;
     while ((nread = evbuffer_remove(evhttp_request_get_input_buffer(req),
@@ -410,6 +420,5 @@ void NFCHttpClient::OnHttpReqDone(struct evhttp_request* req, void* ctx)
         }
     }
 
-
-	delete pHttpObj;
+    mlHttpObject.push_back(pHttpObj);
 }
