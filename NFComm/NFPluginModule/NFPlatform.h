@@ -17,7 +17,7 @@
 #define NF_ENDIAN_LITTLE 1
 #define NF_ENDIAN_BIG 2
 
-#define NF_ENABLE_SSL 0
+#define NF_ENABLE_SSL 1
 
 #if NF_ENABLE_SSL
 #define EVENT__HAVE_OPENSSL
@@ -319,16 +319,18 @@ typedef int64_t NFSOCK;
 #endif
 #endif
 
+#if NF_PLATFORM != NF_PLATFORM_WIN
+#ifndef NF_USE_COROUTINE
 //#define NF_USE_COROUTINE 1
+#endif
+#endif
+
 //use actor mode--begin
 #define NF_ACTOR_THREAD_COUNT 16
 
 #ifndef NF_USE_ACTOR
+
 #define NF_USE_ACTOR
-#endif
-
-#ifdef NF_USE_ACTOR
-
 #ifdef NF_DEBUG_MODE
 #define THERON_DEBUG 1
 #else
