@@ -11,7 +11,7 @@
 #include "NFCSceneAOIModule.h"
 #include "NFCEventModule.h"
 #include "NFCScheduleModule.h"
-#include "NFCDataTrailModule.h"
+#include "NFCDataTailModule.h"
 
 //
 //
@@ -48,7 +48,7 @@ void NFKernelPlugin::Install()
 	REGISTER_MODULE(pPluginManager, NFIKernelModule, NFCKernelModule)
 	REGISTER_MODULE(pPluginManager, NFIEventModule, NFCEventModule)
 	REGISTER_MODULE(pPluginManager, NFIScheduleModule, NFCScheduleModule)
-	REGISTER_MODULE(pPluginManager, NFIDataTrailModule, NFCDataTrailModule)
+	REGISTER_MODULE(pPluginManager, NFIDataTrailModule, NFCDataTailModule)
 
 	/*
 	REGISTER_TEST_MODULE(pPluginManager, NFISceneAOIModule, NFCSceneAOITestModule)
@@ -66,7 +66,7 @@ void NFKernelPlugin::Uninstall()
 	UNREGISTER_TEST_MODULE(pPluginManager, NFISceneAOIModule, NFCSceneAOITestModule)
 	UNREGISTER_TEST_MODULE(pPluginManager, NFIScheduleModule, NFCScheduleTestModule)
 */
-	UNREGISTER_MODULE(pPluginManager, NFIDataTrailModule, NFCDataTrailModule)
+	UNREGISTER_MODULE(pPluginManager, NFIDataTrailModule, NFCDataTailModule)
 	UNREGISTER_MODULE(pPluginManager, NFIEventModule, NFCEventModule)
 	UNREGISTER_MODULE(pPluginManager, NFIKernelModule, NFCKernelModule)
 	UNREGISTER_MODULE(pPluginManager, NFISceneAOIModule, NFCSceneAOIModule)

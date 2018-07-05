@@ -76,11 +76,11 @@ public:
 
     virtual void SetAppID(const int nAppID) override;
 
-	virtual bool IsRunningDocker() const;
+	virtual bool IsRunningDocker() const override;
 
-    virtual void SetRunningDocker(bool bDocker);
+    virtual void SetRunningDocker(bool bDocker) override;
 
-    virtual bool IsStaticPlugin() const;
+    virtual bool IsStaticPlugin() const override;
 
 	virtual NFINT64 GetInitTime() const override;
 
