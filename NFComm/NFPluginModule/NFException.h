@@ -9,19 +9,29 @@
 #ifndef NF_EXCEPTION_H
 #define NF_EXCEPTION_H
 
+#include <string>
 #include <iostream>
 #include <stdio.h>
 #include <stdlib.h>
+#include <exception>
 
-class NFException : public std::exception
+class NFException
 {
 private:
     static std::string _msgDelay;
-    std::string _msg;
+    static std::string indexStr;
     static int index;
+
+    std::string _msg;
 public:
     NFException(const std::string& msg)
     {
+        if (indexStr.empty())
+        {
+            index = 0;
+            indexStr = "1";
+        }
+
         index++;
         if (!_msgDelay.empty())
         {
@@ -29,27 +39,39 @@ public:
             _msgDelay.clear();
         }
 
-        _msg.append("NFException" + std::to_string(index) + " ");
+        _msg.append(" NFException" + std::to_string(index) + " ");
         _msg.append(msg);
     }
 
     NFException(const std::string& msg, const char* file, const char* line)
     {
+        if (indexStr.empty())
+        {
+            index = 0;
+            indexStr = "1";
+        }
+
         index++;
         if (!_msgDelay.empty())
         {
-            _msg.append(_msgDelay) + " ";
+            _msg.append(_msgDelay);
             _msgDelay.clear();
         }
 
-        _msg.append("NFException" + std::to_string(index) + " ");
+        _msg.append(" NFException" + std::to_string(index) + " ");
         _msg.append(msg);
         _msg.append(file);
         _msg.append(line);
     }
 
-    static void ExceptionDelay(const std::string const& msg, const char* file, const char* line)
+    static void ExceptionDelay(const std::string& msg, const char* file, const char* line)
     {
+        if (indexStr.empty())
+        {
+            index = 0;
+            indexStr = "1";
+        }
+
         index++;
 
         _msgDelay.append(" NFException" + std::to_string(index) + " ");
@@ -64,7 +86,5 @@ public:
     char const * what() const noexcept{ return _msg.c_str(); }
 #endif
 };
-
-int NFException::index = 0;
 
 #endif
