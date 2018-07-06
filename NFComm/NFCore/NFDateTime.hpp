@@ -1,10 +1,28 @@
-﻿// -------------------------------------------------------------------------
-//    @FileName         :    NFDateTime.hpp
-//    @Author           :    LvSheng.Huang
-//    @Date             :    2016-12-22
-//    @Module           :    NFDateTime
-//
-// -------------------------------------------------------------------------
+﻿/*
+            This file is part of: 
+                NoahFrame
+            http://noahframe.com
+
+   Copyright 2009 - 2018 NoahFrame(NoahGameFrame)
+
+   File creator: lvsheng.huang
+   
+   NoahFrame is opensorece software and you can redistribute it and/or modify
+   it under the terms of the License.
+
+   Licensed under the Apache License, Version 2.0 (the "License");
+   you may not use this file except in compliance with the License.
+   You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   See the License for the specific language governing permissions and
+   limitations under the License.
+*/
+
 
 #ifndef NF_DATETIME_HPP
 #define NF_DATETIME_HPP
@@ -17,8 +35,8 @@
 #include <string>
 #include <map>
 #include <vector>
-#include "NFException.hpp"
 #include "NFComm/NFPluginModule/NFPlatform.h"
+#include "NFComm/NFPluginModule/NFException.h"
 
 //for timespan
 #define FACTOR_SEC_TO_MILLI                     1000
@@ -520,32 +538,44 @@ protected:
 
 		if (!IsValidMonth(month))
 		{
-			throw NFException("Month %d is not in range", month);
+			char data[128] = {0};
+			sprintf(data, "Month %d is not in range", month);
+			throw NFException(data);
 		}
 
 		if (!IsValidDayOfMonth(day, month))
 		{
-			throw NFException("Day %d is not in month %d's range", day, month);
+			char data[128] = {0};
+			sprintf(data, "Day %d is not in month %d's range", day, month);
+			throw NFException(data);
 		}
 
 		if (!IsValidHour(hour))
 		{
-			throw NFException("Hour %d is not in valid range ( %d - %d )", hour, MIN_HOUR, MAX_HOUR);
+			char data[128] = {0};
+			sprintf(data, "Hour %d is not in valid range ( %d - %d )", hour, MIN_HOUR, MAX_HOUR);
+			throw NFException(data);
 		}
 
 		if (!IsValidMinute(minute))
 		{
-			throw NFException("Minute %d is not in valid range ( %d - %d )", minute, MIN_MINUTE, MAX_MINUTE);
+			char data[128] = {0};
+			sprintf(data, "Minute %d is not in valid range ( %d - %d )", minute, MIN_MINUTE, MAX_MINUTE);
+			throw NFException(data);
 		}
 
 		if (!IsValidSecond(second))
 		{
-			throw NFException("Second %d is not in valid range ( %d - %d )", second, MIN_SECOND, MAX_SECOND);
+			char data[128] = {0};
+			sprintf(data, "Second %d is not in valid range ( %d - %d )", second, MIN_SECOND, MAX_SECOND);
+			throw NFException(data);
 		}
 
 		if (!IsValidMillisecond(millisecond))
 		{
-			throw NFException("Millisecond %d is not in valid range ( %d - %d )", millisecond, MIN_MILLISECOND, MAX_MILLISECOND);
+			char data[128] = {0};
+			sprintf(data, "Millisecond %d is not in valid range ( %d - %d )", millisecond, MIN_MILLISECOND, MAX_MILLISECOND);
+			throw NFException(data);
 		}
 
 		this->day = day;

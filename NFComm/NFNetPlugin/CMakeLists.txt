@@ -17,6 +17,8 @@ set_target_properties( NFNetPlugin PROPERTIES
 	RUNTIME_OUTPUT_DIRECTORY ${NFOutPutDir}
 	LIBRARY_OUTPUT_DIRECTORY ${NFOutPutDir})
 
+	add_dependencies(NFPluginLoader NFCore)
+	
 if (APPLE)
 	if (CMAKE_BUILD_TYPE MATCHES "Release")
 	else()
