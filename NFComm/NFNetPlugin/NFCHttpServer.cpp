@@ -1,4 +1,29 @@
-﻿#include <thread>
+﻿/*
+            This file is part of: 
+                NoahFrame
+            http://noahframe.com
+
+   Copyright 2009 - 2018 NoahFrame(NoahGameFrame)
+
+   File creator: Stonexin
+   
+   NoahFrame is opensorece software and you can redistribute it and/or modify
+   it under the terms of the License.
+
+   Licensed under the Apache License, Version 2.0 (the "License");
+   you may not use this file except in compliance with the License.
+   You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   See the License for the specific language governing permissions and
+   limitations under the License.
+*/
+
+#include <thread>
 #include "NFCHttpServer.h"
 
 bool NFCHttpServer::Execute()
@@ -91,13 +116,41 @@ int NFCHttpServer::InitServer(const unsigned short port)
 
 void NFCHttpServer::listener_cb(struct evhttp_request* req, void* arg)
 {
+	if (req == NULL)
+	{
+		NFException::Delay("req == Null", __FUNCTION__, __LINE__);
+		return;
+	}
+
 	NFCHttpServer* pNet = (NFCHttpServer*)arg;
+	if (pNet == NULL)
+	{
+		NFException::Delay("pNet == Null", __FUNCTION__, __LINE__);
+		evhttp_send_error(req, HTTP_BADREQUEST, 0);
+		return;
+	}
+
 	NFHttpRequest* pRequest = pNet->AllowHttpRequest();
+	if (pRequest == NULL)
+	{
+		NFException::Delay("pRequest == Null", __FUNCTION__, __LINE__);
+		evhttp_send_error(req, HTTP_BADREQUEST, 0);
+		return;
+	}
 
 	pRequest->req = req;
 
 	//headers
 	struct evkeyvalq * header = evhttp_request_get_input_headers(req);
+	if (header == NULL)
+	{
+		pNet->mxHttpRequestPool.push_back(pRequest);
+
+		NFException::Delay("header == Null", __FUNCTION__, __LINE__);
+		evhttp_send_error(req, HTTP_BADREQUEST, 0);
+		return;
+	}
+
 	struct evkeyval* kv = header->tqh_first;
 	while (kv)
 	{
@@ -108,24 +161,51 @@ void NFCHttpServer::listener_cb(struct evhttp_request* req, void* arg)
 
 	//uri
 	const char* uri = evhttp_request_get_uri(req);
+	if (uri == NULL)
+	{
+		pNet->mxHttpRequestPool.push_back(pRequest);
+
+		NFException::Delay("uri == Null", __FUNCTION__, __LINE__);
+		evhttp_send_error(req, HTTP_BADREQUEST, 0);
+		return;
+	}
+
 	pRequest->url = uri;
-	pRequest->remoteHost = evhttp_request_get_host(req);
+	const char* hostname = evhttp_request_get_host(req);
+	if (hostname != NULL)
+	{
+		//evhttp_find_vhost(http, &http, hostname);
+		pRequest->remoteHost = hostname;
+	}
+	else
+	{
+		NFException::Delay("hostname == Null", __FUNCTION__, __LINE__);
+	}
+
 	pRequest->type = (NFHttpType)evhttp_request_get_command(req);
 
 	//get decodeUri
 	struct evhttp_uri* decoded = evhttp_uri_parse(uri);
 	if (!decoded)
 	{
-		std::cout << "It's not a good URI. Sending BADREQUEST" << std::endl;
-		evhttp_send_error(req, HTTP_BADREQUEST, 0);
-
 		pNet->mxHttpRequestPool.push_back(pRequest);
-		
+
+		evhttp_send_error(req, HTTP_BADREQUEST, 0);
+		NFException::Delay("bad request", __FUNCTION__, __LINE__);
 		return;
 	}
 
 	//path
-	pRequest->path = evhttp_uri_get_path(decoded);
+	const char* urlPath = evhttp_uri_get_path(decoded);
+	if (urlPath != NULL)
+	{
+		pRequest->path = urlPath;
+	}
+	else
+	{
+		NFException::Delay("urlPath == NULL", __FUNCTION__, __LINE__);
+	}
+
 	evhttp_uri_free(decoded);
 
 	//std::cout << "Got a GET request:" << uri << std::endl;
@@ -146,38 +226,74 @@ void NFCHttpServer::listener_cb(struct evhttp_request* req, void* arg)
 	}
 
 	struct evbuffer *in_evb = evhttp_request_get_input_buffer(req);
+	if (in_evb == NULL)
+	{
+		pNet->mxHttpRequestPool.push_back(pRequest);
+
+		NFException::Delay("urlPath == NULL", __FUNCTION__, __LINE__);
+		return;
+	}
+
 	size_t len = evbuffer_get_length(in_evb);
 	if (len > 0)
 	{
 		unsigned char *pData = evbuffer_pullup(in_evb, len);
 		pRequest->body.clear();
-		pRequest->body.append((const char *)pData, len);
+		
+		if (pData != NULL)
+		{
+			pRequest->body.append((const char *)pData, len);
+		}
 	}
 
 	if (pNet->mFilter)
 	{
 		//return 401
-		NFWebStatus xWebStatus = pNet->mFilter(*pRequest);
-		if (xWebStatus != NFWebStatus::WEB_OK)
+		try
 		{
+			NFWebStatus xWebStatus = pNet->mFilter(*pRequest);
+			if (xWebStatus != NFWebStatus::WEB_OK)
+			{
 
-			pNet->mxHttpRequestPool.push_back(pRequest);
+				pNet->mxHttpRequestPool.push_back(pRequest);
 
-			//401
-			pNet->ResponseMsg(*pRequest, "Filter error", xWebStatus);
-			return;
+				//401
+				pNet->ResponseMsg(*pRequest, "Filter error", xWebStatus);
+				return;
+			}
 		}
+		catch(std::exception& e)
+		{
+			pNet->ResponseMsg(*pRequest, e.what(), NFWebStatus::WEB_ERROR);
+		}
+		catch(...)
+		{
+			pNet->ResponseMsg(*pRequest, "UNKNOW ERROR", NFWebStatus::WEB_ERROR);
+		}
+		
 	}
 
 	// call cb
-	if (pNet->mReceiveCB)
+	try
 	{
-		pNet->mReceiveCB(*pRequest);
+		if (pNet->mReceiveCB)
+		{
+			pNet->mReceiveCB(*pRequest);
+		}
+		else
+		{
+			pNet->ResponseMsg(*pRequest, "NO PROCESSER", NFWebStatus::WEB_ERROR);
+		}
 	}
-	else
+	catch(std::exception& e)
 	{
-		pNet->ResponseMsg(*pRequest, "NO PROCESSER", NFWebStatus::WEB_ERROR);
+		pNet->ResponseMsg(*pRequest, e.what(), NFWebStatus::WEB_ERROR);
 	}
+	catch(...)
+	{
+		pNet->ResponseMsg(*pRequest, "UNKNOW ERROR", NFWebStatus::WEB_ERROR);
+	}
+	
 }
 
 NFHttpRequest* NFCHttpServer::AllowHttpRequest()
