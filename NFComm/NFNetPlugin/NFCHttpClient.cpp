@@ -427,10 +427,7 @@ void NFCHttpClient::OnHttpReqDone(struct evhttp_request* req, void* ctx)
         }
 
         NFCHttpClient* pHttpClient = (NFCHttpClient*)(pHttpObj->m_pHttpClient);
-        if (pHttpClient)
-        {
-            pHttpClient->mlHttpObject.push_back(pHttpObj);
-        }
+        pHttpClient->mlHttpObject.push_back(pHttpObj);
         
         NFException::Delay(strErrMsg, __FUNCTION__, __LINE__);
         return;
@@ -485,9 +482,7 @@ void NFCHttpClient::OnHttpReqDone(struct evhttp_request* req, void* ctx)
             }
         }
     }
+
     NFCHttpClient* pHttpClient = (NFCHttpClient*)(pHttpObj->m_pHttpClient);
-    if (pHttpClient)
-    {
-        pHttpClient->mlHttpObject.push_back(pHttpObj);
-    }
+    pHttpClient->mlHttpObject.push_back(pHttpObj);
 }
