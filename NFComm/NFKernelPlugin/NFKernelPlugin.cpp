@@ -1,14 +1,14 @@
 /*
             This file is part of: 
                 NoahFrame
-            http://noahframe.com
+            https://github.com/ketoo/NoahGameFrame
 
    Copyright 2009 - 2018 NoahFrame(NoahGameFrame)
 
    File creator: lvsheng.huang
    
-   NoahFrame is opensorece software and you can redistribute it and/or modify
-   it under the terms of the License.
+   NoahFrame is open-source software and you can redistribute it and/or modify
+   it under the terms of the License; besides, anyone who use this file/software must include this copyright announcement.
 
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.
@@ -65,7 +65,7 @@ void NFKernelPlugin::Install()
 	REGISTER_MODULE(pPluginManager, NFIKernelModule, NFCKernelModule)
 	REGISTER_MODULE(pPluginManager, NFIEventModule, NFCEventModule)
 	REGISTER_MODULE(pPluginManager, NFIScheduleModule, NFCScheduleModule)
-	REGISTER_MODULE(pPluginManager, NFIDataTrailModule, NFCDataTailModule)
+	REGISTER_MODULE(pPluginManager, NFIDataTailModule, NFCDataTailModule)
 
 	/*
 	REGISTER_TEST_MODULE(pPluginManager, NFISceneAOIModule, NFCSceneAOITestModule)
@@ -83,7 +83,7 @@ void NFKernelPlugin::Uninstall()
 	UNREGISTER_TEST_MODULE(pPluginManager, NFISceneAOIModule, NFCSceneAOITestModule)
 	UNREGISTER_TEST_MODULE(pPluginManager, NFIScheduleModule, NFCScheduleTestModule)
 */
-	UNREGISTER_MODULE(pPluginManager, NFIDataTrailModule, NFCDataTailModule)
+	UNREGISTER_MODULE(pPluginManager, NFIDataTailModule, NFCDataTailModule)
 	UNREGISTER_MODULE(pPluginManager, NFIEventModule, NFCEventModule)
 	UNREGISTER_MODULE(pPluginManager, NFIKernelModule, NFCKernelModule)
 	UNREGISTER_MODULE(pPluginManager, NFISceneAOIModule, NFCSceneAOIModule)
