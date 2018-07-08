@@ -38,7 +38,7 @@
 #define NF_ENDIAN_LITTLE 1
 #define NF_ENDIAN_BIG 2
 
-#define NF_ENABLE_SSL 1
+//#define NF_ENABLE_SSL 1
 
 #if NF_ENABLE_SSL
 #define EVENT__HAVE_OPENSSL
