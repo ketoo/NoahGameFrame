@@ -1,14 +1,14 @@
 ﻿/*
             This file is part of: 
                 NoahFrame
-            http://noahframe.com
+            https://github.com/ketoo/NoahGameFrame
 
    Copyright 2009 - 2018 NoahFrame(NoahGameFrame)
 
    File creator: Stonexin
    
-   NoahFrame is opensorece software and you can redistribute it and/or modify
-   it under the terms of the License.
+   NoahFrame is open-source software and you can redistribute it and/or modify
+   it under the terms of the License; besides, anyone who use this file/software must include this copyright announcement.
 
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.
