@@ -25,6 +25,7 @@
 
 #include <thread>
 #include "NFCHttpServer.h"
+#include "NFComm/NFLogPlugin/easylogging++.h"
 
 bool NFCHttpServer::Execute()
 {
@@ -118,14 +119,14 @@ void NFCHttpServer::listener_cb(struct evhttp_request* req, void* arg)
 {
 	if (req == NULL)
 	{
-		NFException::Delay("req == Null", __FUNCTION__, __LINE__);
+		LOG(ERROR) << "req ==NULL" << " " << __FUNCTION__ << " " << __LINE__;
 		return;
 	}
 
 	NFCHttpServer* pNet = (NFCHttpServer*)arg;
 	if (pNet == NULL)
 	{
-		NFException::Delay("pNet == Null", __FUNCTION__, __LINE__);
+		LOG(ERROR) << "pNet ==NULL" << " " << __FUNCTION__ << " " << __LINE__;
 		evhttp_send_error(req, HTTP_BADREQUEST, 0);
 		return;
 	}
@@ -133,7 +134,7 @@ void NFCHttpServer::listener_cb(struct evhttp_request* req, void* arg)
 	NFHttpRequest* pRequest = pNet->AllowHttpRequest();
 	if (pRequest == NULL)
 	{
-		NFException::Delay("pRequest == Null", __FUNCTION__, __LINE__);
+		LOG(ERROR) << "pRequest ==NULL" << " " << __FUNCTION__ << " " << __LINE__;
 		evhttp_send_error(req, HTTP_BADREQUEST, 0);
 		return;
 	}
@@ -146,7 +147,7 @@ void NFCHttpServer::listener_cb(struct evhttp_request* req, void* arg)
 	{
 		pNet->mxHttpRequestPool.push_back(pRequest);
 
-		NFException::Delay("header == Null", __FUNCTION__, __LINE__);
+		LOG(ERROR) << "header ==NULL" << " " << __FUNCTION__ << " " << __LINE__;
 		evhttp_send_error(req, HTTP_BADREQUEST, 0);
 		return;
 	}
@@ -165,7 +166,7 @@ void NFCHttpServer::listener_cb(struct evhttp_request* req, void* arg)
 	{
 		pNet->mxHttpRequestPool.push_back(pRequest);
 
-		NFException::Delay("uri == Null", __FUNCTION__, __LINE__);
+		LOG(ERROR) << "uri ==NULL" << " " << __FUNCTION__ << " " << __LINE__;
 		evhttp_send_error(req, HTTP_BADREQUEST, 0);
 		return;
 	}
@@ -179,7 +180,7 @@ void NFCHttpServer::listener_cb(struct evhttp_request* req, void* arg)
 	}
 	else
 	{
-		NFException::Delay("hostname == Null", __FUNCTION__, __LINE__);
+		LOG(ERROR) << "hostname ==NULL" << " " << __FUNCTION__ << " " << __LINE__;
 	}
 
 	pRequest->type = (NFHttpType)evhttp_request_get_command(req);
@@ -191,7 +192,7 @@ void NFCHttpServer::listener_cb(struct evhttp_request* req, void* arg)
 		pNet->mxHttpRequestPool.push_back(pRequest);
 
 		evhttp_send_error(req, HTTP_BADREQUEST, 0);
-		NFException::Delay("bad request", __FUNCTION__, __LINE__);
+		LOG(ERROR) << "bad request " << " " << __FUNCTION__ << " " << __LINE__;
 		return;
 	}
 
@@ -203,7 +204,7 @@ void NFCHttpServer::listener_cb(struct evhttp_request* req, void* arg)
 	}
 	else
 	{
-		NFException::Delay("urlPath == NULL", __FUNCTION__, __LINE__);
+		LOG(ERROR) << "urlPath ==NULL " << " " << __FUNCTION__ << " " << __LINE__;
 	}
 
 	evhttp_uri_free(decoded);
@@ -230,7 +231,7 @@ void NFCHttpServer::listener_cb(struct evhttp_request* req, void* arg)
 	{
 		pNet->mxHttpRequestPool.push_back(pRequest);
 
-		NFException::Delay("urlPath == NULL", __FUNCTION__, __LINE__);
+		LOG(ERROR) << "urlPath ==NULL " << " " << __FUNCTION__ << " " << __LINE__;
 		return;
 	}
 

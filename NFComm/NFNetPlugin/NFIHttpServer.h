@@ -28,6 +28,7 @@
 #define NFI_HTTP_SERVER_H
 
 #include <cstring>
+#include <string>
 #include <errno.h>
 #include <stdio.h>
 #include <signal.h>

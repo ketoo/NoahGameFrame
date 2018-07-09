@@ -26,5 +26,38 @@
 
 #include "NFException.h"
 
-int NFException::index = 0;
-std::string NFException::_msgDelay = "";
+
+int exception_index = 0;
+
+NFException::NFException(const char *format, ...)
+{
+	exception_index++;
+
+	char buf[1024] = { 0 };
+	va_list args;
+	va_start(args, format);
+	vsprintf(buf, format, args);
+	va_end(args);
+
+	_msg.append(" NFException" + std::to_string(exception_index) + " ");
+	_msg.append(buf);
+
+}
+
+NFException::NFException(const std::string & msg)
+{
+	exception_index++;
+
+	_msg.append(" NFException" + std::to_string(exception_index) + " ");
+	_msg.append(msg);
+}
+
+NFException::NFException(const std::string& msg, const char* file, const int line)
+{
+	exception_index++;
+
+	_msg.append(" NFException" + std::to_string(exception_index) + " ");
+	_msg.append(msg);
+	_msg.append(file);
+	_msg.append(std::to_string(line));
+}

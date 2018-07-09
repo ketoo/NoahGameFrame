@@ -104,11 +104,11 @@
       </PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="NFCProxyLogicModule.cpp" />
-    <ClCompile Include="NFCProxyLogicPlugin.cpp" />
+    <ClCompile Include="NFProxyLogicPlugin.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="NFCProxyLogicModule.h" />
-    <ClInclude Include="NFCProxyLogicPlugin.h" />
+    <ClInclude Include="NFProxyLogicPlugin.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
