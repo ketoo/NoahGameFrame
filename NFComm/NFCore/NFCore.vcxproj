@@ -104,7 +104,6 @@
     <ClInclude Include="NFCRecordManager.h" />
     <ClInclude Include="NFDataList.hpp" />
     <ClInclude Include="NFDateTime.hpp" />
-    <ClInclude Include="NFException.hpp" />
     <ClInclude Include="NFLine.hpp" />
     <ClInclude Include="NFMapEx.hpp" />
     <ClInclude Include="NFMemManager.hpp" />
