@@ -30,7 +30,7 @@
 
 #if NF_PLATFORM == NF_PLATFORM_WIN
 #pragma comment( lib, "ws2_32" )
-#pragma comment( lib, "liblua.lib" )
+#pragma comment( lib, "lua_d.lib" )
 
 #elif NF_PLATFORM == NF_PLATFORM_LINUX || NF_PLATFORM == NF_PLATFORM_ANDROID
 #pragma comment( lib, "NFCore_d.a" )

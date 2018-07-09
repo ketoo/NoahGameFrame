@@ -321,12 +321,12 @@ void ProcessParameter(int argc, char* argv[])
 #endif
 }
 
+#if NF_PLATFORM != NF_PLATFORM_WIN
 void CrashHandler(int sig) {
 	// FOLLOWING LINE IS ABSOLUTELY NEEDED AT THE END IN ORDER TO ABORT APPLICATION
 	//el::base::debug::StackTrace();
 	//el::Helpers::logCrashReason(sig, true);
 
-#if NF_PLATFORM != NF_PLATFORM_WIN
 
 	LOG(FATAL) << "crash sig:" << sig;
 
@@ -341,8 +341,8 @@ void CrashHandler(int sig) {
 	}
 
 	free(stacktrace);
-#endif
 }
+#endif
 
 void MainExecute()
 {
@@ -407,13 +407,13 @@ int main(int argc, char* argv[])
 {
 #if NF_PLATFORM == NF_PLATFORM_WIN
     SetUnhandledExceptionFilter((LPTOP_LEVEL_EXCEPTION_FILTER)ApplicationCrashHandler);
-#elif NF_PLATFORM == NF_PLATFORM_LINUX
+#else
+	el::Helpers::setCrashHandler(CrashHandler);
 #endif
 	//atexit(ReleaseNF);
 
     ProcessParameter(argc, argv);
 
-    el::Helpers::setCrashHandler(CrashHandler);
 
 	PrintfLogo();
 	CreateBackThread();
