@@ -98,6 +98,9 @@ bool NFCLuaScriptModule::Execute()
         mnTime = pPluginManager->GetNowTime();
 
 		TRY_RUN_GLOBAL_SCRIPT_FUN0("module_execute");
+
+		std::string strRootFileh = pPluginManager->GetConfigPath() + "NFDataCfg/ScriptModule/script_reload.lua";
+		TRY_LOAD_SCRIPT_FLE(strRootFileh.c_str());
     }
 
     return true;
@@ -633,7 +636,7 @@ bool NFCLuaScriptModule::Register()
 	LuaIntf::LuaBinding(mLuaContext).beginClass<NFCLuaScriptModule>("NFCLuaScriptModule")
 		.addFunction("create_object", &NFCLuaScriptModule::CreateObject)
 		.addFunction("exist_object", &NFCLuaScriptModule::ExistObject)
-		.addFunction("destroy_object", &NFCLuaScriptModule::CreateObject)
+		.addFunction("destroy_object", &NFCLuaScriptModule::DestroyObject)
 
 		.addFunction("enter_scene", &NFCLuaScriptModule::EnterScene)
 		.addFunction("do_event", &NFCLuaScriptModule::DoEvent)
@@ -671,7 +674,7 @@ bool NFCLuaScriptModule::Register()
 		.addFunction("add_event_cb", &NFCLuaScriptModule::AddEventCallBack)
 		.addFunction("add_class_cb", &NFCLuaScriptModule::AddClassCallBack)
 		.addFunction("add_schedule", &NFCLuaScriptModule::AddSchedule)
-		.addFunction("do_event", &NFCLuaScriptModule::AddSchedule)
+		.addFunction("do_event", &NFCLuaScriptModule::DoEvent)
 		.addFunction("add_row", &NFCLuaScriptModule::AddRow)
 		.addFunction("rem_row", &NFCLuaScriptModule::RemRow)
 

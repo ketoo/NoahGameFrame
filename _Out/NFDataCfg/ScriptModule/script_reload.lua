@@ -1,7 +1,6 @@
 io.write("Start reload!\n");
 ScriptReloadList={
-	{tbl=nil, tblName="TestModule"},
-	{tbl=nil, tblName="TestModule2"},
+	--{tbl=nil, tblName="test_module"},
 }
 
 reload_script_table(ScriptReloadList)
