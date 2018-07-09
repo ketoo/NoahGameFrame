@@ -7,7 +7,7 @@ function init_script_system(xLuaScriptModule)
 
 	script_module = xLuaScriptModule;
 	
-	io.write("\nHello Lua script_module:" .. tostring(script_module) .."\n\n");
+	io.write("\nHello Lua script_module\n\n");
 	io.write();
 	
 end
@@ -56,14 +56,7 @@ function register_module(tbl, name)
 		for i=1, #(ScriptList) do
 			if ScriptList[i].tblName == name then
 				ScriptList[i].tbl = tbl;
-			end
-		end
-	end
-
-	if ScriptReloadList then
-		for i=1, #(ScriptReloadList) do
-			if ScriptReloadList[i].tblName == name then
-				ScriptReloadList[i].tbl = tbl;
+				io.write("----register_module ".. name .. " successed\n");
 			end
 		end
 	end
@@ -90,9 +83,7 @@ function module_after_init(...)
 end
 
 function module_ready_execute(...)
-	for i=1, #(ScriptList) do
-		ScriptList[i].tbl.ready_execute(...);
-	end
+	require("script_reload");
 end
 
 function module_execute(...)

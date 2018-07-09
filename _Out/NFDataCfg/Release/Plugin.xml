@@ -7,6 +7,7 @@
 		<Plugin Name="NFGameServerNet_ServerPlugin" />
 		<Plugin Name="NFGameServerNet_ClientPlugin" />
 		<Plugin Name="NFLogPlugin" />
+		<Plugin Name="NFLuaScriptPlugin" />
 	</GameServer>
 
 	<LoginServer>
