@@ -39,80 +39,15 @@ class NFException
 private:
     NFException(){}
 
-    static std::string _msgDelay;
-    static int index;
-
     std::string _msg;
 public:
-    NFException(const char *format, ...)
-	{
-        index++;
-        
-        if (!_msgDelay.empty())
-        {
-            _msg.append(_msgDelay) + " ";
-            _msgDelay.clear();
-        }
+	NFException(const char *format, ...);
 
-		char buf[1024] = {0};
-		va_list args;
-		va_start(args, format);
-		vsprintf(buf, format, args);
-		va_end(args);
+	NFException(const std::string& msg);
 
-        _msg.append(" NFException" + std::to_string(index) + " ");
-		_msg.append(buf);
-        
-	}
-
-    NFException(const std::string& msg)
-    {
-        index++;
-        
-        if (!_msgDelay.empty())
-        {
-            _msg.append(_msgDelay) + " ";
-            _msgDelay.clear();
-        }
-
-        _msg.append(" NFException" + std::to_string(index) + " ");
-        _msg.append(msg);
-    }
-
-    NFException(const std::string& msg, const char* file, const char* line)
-    {
-        index++;
-
-        if (!_msgDelay.empty())
-        {
-            _msg.append(_msgDelay);
-            _msgDelay.clear();
-        }
-
-        _msg.append(" NFException" + std::to_string(index) + " ");
-        _msg.append(msg);
-        _msg.append(file);
-        _msg.append(line);
-    }
-
-    static void Delay(const std::string& msg, const char* file, const int line)
-    {
-        index++;
-
-        _msgDelay.append(" NFException" + std::to_string(index) + " ");
-        _msgDelay.append(msg);
-        _msgDelay.append(file);
-        _msgDelay.append(std::to_string(line));
-    }
-
+	NFException(const std::string& msg, const char* file, const int line);
+ 
     char const * what() const noexcept{ return _msg.c_str(); }
-/*
-#if NF_PLATFORM == NF_PLATFORM_WIN
-    char const * what() const noexcept{ return _msg.c_str(); }
-#else
-    char const * what() const noexcept{ return _msg.c_str(); }
-#endif
-*/
 };
 
 #endif
