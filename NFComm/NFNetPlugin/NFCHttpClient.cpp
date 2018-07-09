@@ -24,6 +24,7 @@
 */
 
 #include "NFCHttpClient.h"
+#include "NFComm/NFLogPlugin/easylogging++.h"
 
 #if _MSC_VER
 #define snprintf _snprintf
@@ -70,7 +71,7 @@ bool NFCHttpClient::Init()
     m_pSslCtx = SSL_CTX_new(SSLv23_client_method());
     if (!m_pSslCtx)
     {
-        NFException::Delay("SSL_CTX_new err.", __FUNCTION__, __LINE__);
+		LOG(ERROR) << "SSL_CTX_new err. " << __FUNCTION__ << " " << __LINE__;
         return false;
     }
 
@@ -79,7 +80,7 @@ bool NFCHttpClient::Init()
     m_pBase = event_base_new();
     if (m_pBase == nullptr)
     {
-        NFException::Delay("event_base_new err.", __FUNCTION__, __LINE__);
+		LOG(ERROR) << "event_base_new err " << __FUNCTION__ << " " << __LINE__;
         return false;
     }
     return true;
@@ -128,14 +129,14 @@ bool NFCHttpClient::MakeRequest(const std::string& strUri,
     struct evhttp_uri* http_uri = evhttp_uri_parse(strUri.c_str());
     if (http_uri == NULL)
     {
-        NFException::Delay("evhttp_uri_parse err.", __FUNCTION__, __LINE__);
+		LOG(ERROR) << "evhttp_uri_parse err. " << __FUNCTION__ << " " << __LINE__;
         return false;
     }
 
     const char*  scheme = evhttp_uri_get_scheme(http_uri);
     if (scheme == NULL)
     {
-        NFException::Delay("scheme == NULL err.", __FUNCTION__, __LINE__);
+		LOG(ERROR) << "scheme == NULL err. " << __FUNCTION__ << " " << __LINE__;
         return false;
     }
 
@@ -148,7 +149,7 @@ bool NFCHttpClient::MakeRequest(const std::string& strUri,
             evhttp_uri_free(http_uri);
         }
 
-        NFException::Delay("scheme == NULL err.", __FUNCTION__, __LINE__);
+		LOG(ERROR) << "scheme == NULL err. " << __FUNCTION__ << " " << __LINE__;
         return false;
     }
 
@@ -166,7 +167,7 @@ bool NFCHttpClient::MakeRequest(const std::string& strUri,
             evhttp_uri_free(http_uri);
         }
 
-        NFException::Delay("url must have a host.", __FUNCTION__, __LINE__);
+		LOG(ERROR) << "url must have a host err. " << __FUNCTION__ << " " << __LINE__;
         return false;
     }
 
@@ -179,7 +180,7 @@ bool NFCHttpClient::MakeRequest(const std::string& strUri,
     const char* path = evhttp_uri_get_path(http_uri);
     if(path == NULL)
     {
-        NFException::Delay("path == NULL", __FUNCTION__, __LINE__);
+		LOG(ERROR) << "path == NUL err. " << __FUNCTION__ << " " << __LINE__;
         return false;
     }
 
@@ -223,7 +224,7 @@ bool NFCHttpClient::MakeRequest(const std::string& strUri,
             evhttp_uri_free(http_uri);
         }
 
-        NFException::Delay("SSL_new err", __FUNCTION__, __LINE__);
+		LOG(ERROR) << "SSL_new err. " << __FUNCTION__ << " " << __LINE__;
         return false;
     }
 #endif
@@ -248,7 +249,7 @@ bool NFCHttpClient::MakeRequest(const std::string& strUri,
             evhttp_uri_free(http_uri);
         }
 
-        NFException::Delay(" bev == NULL", __FUNCTION__, __LINE__);
+		LOG(ERROR) << " bev == NUL err. " << __FUNCTION__ << " " << __LINE__;
         return false;
     }
 
@@ -267,7 +268,7 @@ bool NFCHttpClient::MakeRequest(const std::string& strUri,
             evhttp_uri_free(http_uri);
         }
 
-        NFException::Delay(" evcon == NULL", __FUNCTION__, __LINE__);
+		LOG(ERROR) << " evcon == NUL err. " << __FUNCTION__ << " " << __LINE__;
         return false;
     }
 
@@ -297,7 +298,7 @@ bool NFCHttpClient::MakeRequest(const std::string& strUri,
 
     if (pHttpObj == nullptr)
     {
-        NFException::Delay(" pHttpObj == nullptr", __FUNCTION__, __LINE__);
+		LOG(ERROR) << "pHttpObj == nullptr err. " << __FUNCTION__ << " " << __LINE__;
         return false;
     }
 
@@ -310,14 +311,14 @@ bool NFCHttpClient::MakeRequest(const std::string& strUri,
             evhttp_uri_free(http_uri);
         }
 
-        NFException::Delay(" req == NULL", __FUNCTION__, __LINE__);
+		LOG(ERROR) << "req == NULL err. " << __FUNCTION__ << " " << __LINE__;
         return false;
     }
 
     struct evkeyvalq* output_headers = evhttp_request_get_output_headers(req);
     if(output_headers == NULL)
     {
-        NFException::Delay("output_headers == NULL", __FUNCTION__, __LINE__);
+		LOG(ERROR) << "output_headers == NULL err. " << __FUNCTION__ << " " << __LINE__;
         return false;
     }
 
@@ -338,7 +339,7 @@ bool NFCHttpClient::MakeRequest(const std::string& strUri,
         struct evbuffer* output_buffer = evhttp_request_get_output_buffer(req);
         if (output_buffer == NULL)
         {
-            NFException::Delay("output_buffer == NULL", __FUNCTION__, __LINE__);
+			LOG(ERROR) << "output_buffer == NUL err. " << __FUNCTION__ << " " << __LINE__;
             return false;
         }
 
@@ -357,8 +358,9 @@ bool NFCHttpClient::MakeRequest(const std::string& strUri,
             evhttp_uri_free(http_uri);
         }
 
-        NFException::Delay(" evhttp_make_request() failed", __FUNCTION__, __LINE__);
-        return false;
+		LOG(ERROR) << " evhttp_make_request() failed" << " " << __FUNCTION__ << " " << __LINE__;
+        
+		return false;
     }
 
     if (http_uri)
@@ -386,7 +388,7 @@ void NFCHttpClient::OnHttpReqDone(struct evhttp_request* req, void* ctx)
     HttpObject* pHttpObj = (HttpObject*) (ctx);
     if (pHttpObj ==NULL)
     {
-        NFException::Delay("pHttpObj ==NULL", __FUNCTION__, __LINE__);
+		LOG(ERROR) << "pHttpObj ==NULL" << " " << __FUNCTION__ << " " << __LINE__;
         return;
     }
 
@@ -430,7 +432,7 @@ void NFCHttpClient::OnHttpReqDone(struct evhttp_request* req, void* ctx)
         NFCHttpClient* pHttpClient = (NFCHttpClient*)(pHttpObj->m_pHttpClient);
         pHttpClient->mlHttpObject.push_back(pHttpObj);
         
-        NFException::Delay(strErrMsg, __FUNCTION__, __LINE__);
+		LOG(ERROR) << strErrMsg << __FUNCTION__ << " " << __LINE__;
         return;
     }
 

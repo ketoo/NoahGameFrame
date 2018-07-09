@@ -131,8 +131,8 @@ private:
     void ProcessAddNetConnect();
 
 private:
-	int mnLastActionTime;
-    int mnBufferSize;
+	int64_t mnLastActionTime;
+	int64_t mnBufferSize;
     //server_id, server_data
     NFConsistentHashMapEx<int, ConnectData> mxServerMap;
     //server_type, server_id, server_data
