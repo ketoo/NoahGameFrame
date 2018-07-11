@@ -40,7 +40,7 @@ bool NFCLuaScriptModule::Awake()
 	mnTime = pPluginManager->GetNowTime();
 
 	m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>();
-	m_pLogicClassModule = pPluginManager->FindModule<NFIClassModule>();
+	m_pClassModule = pPluginManager->FindModule<NFIClassModule>();
 	m_pElementModule = pPluginManager->FindModule<NFIElementModule>();
 	m_pEventModule = pPluginManager->FindModule<NFIEventModule>();
     m_pScheduleModule = pPluginManager->FindModule<NFIScheduleModule>();
@@ -92,12 +92,10 @@ bool NFCLuaScriptModule::ReadyExecute()
 
 bool NFCLuaScriptModule::Execute()
 {
-    //10秒钟reload一次
-    if (pPluginManager->GetNowTime() - mnTime > 10)
+    //1分钟reload一次
+    if (pPluginManager->GetNowTime() - mnTime > 60)
     {
         mnTime = pPluginManager->GetNowTime();
-
-		TRY_RUN_GLOBAL_SCRIPT_FUN0("module_execute");
 
 		std::string strRootFileh = pPluginManager->GetConfigPath() + "NFDataCfg/ScriptModule/script_reload.lua";
 		TRY_LOAD_SCRIPT_FLE(strRootFileh.c_str());
@@ -307,6 +305,15 @@ int NFCLuaScriptModule::OnLuaEventCB(const NFGUID& self, const NFEventDefine nEv
     return CallLuaFuncFromMap(m_luaEventCallBackFuncMap, (int)nEventID, self, nEventID, (NFDataList&)argVar);
 }
 
+bool NFCLuaScriptModule::AddModuleSchedule(std::string& strHeartBeatName, std::string& luaFunc, const float fTime, const int nCount)
+{
+    if (AddLuaFuncToMap(m_luaHeartBeatCallBackFuncMap, strHeartBeatName, luaFunc))
+    {
+		m_pScheduleModule->AddSchedule(strHeartBeatName, this, &NFCLuaScriptModule::OnLuaHeartBeatCB, fTime, nCount);
+    }
+    return true;
+}
+
 bool NFCLuaScriptModule::AddSchedule(const NFGUID& self, std::string& strHeartBeatName, std::string& luaFunc, const float fTime, const int nCount)
 {
     if (AddLuaFuncToMap(m_luaHeartBeatCallBackFuncMap, self, strHeartBeatName, luaFunc))
@@ -315,16 +322,15 @@ bool NFCLuaScriptModule::AddSchedule(const NFGUID& self, std::string& strHeartBe
     }
     return true;
 }
-/*
-bool NFCLuaScriptModule::DoEvent(const NFGUID & self, std::string & strHeartBeatName, std::string & luaFunc, const float fTime, const int nCount)
-{
-	return false;
-}
-*/
 
 int NFCLuaScriptModule::OnLuaHeartBeatCB(const NFGUID& self, const std::string& strHeartBeatName, const float fTime, const int nCount)
 {
     return CallLuaFuncFromMap(m_luaHeartBeatCallBackFuncMap, strHeartBeatName, self, strHeartBeatName, fTime, nCount);
+}
+
+int NFCLuaScriptModule::OnLuaHeartBeatCB(const std::string& strHeartBeatName, const float fTime, const int nCount)
+{
+    return CallLuaFuncFromMap(m_luaHeartBeatCallBackFuncMap, strHeartBeatName, strHeartBeatName, fTime, nCount);
 }
 
 int NFCLuaScriptModule::AddRow(const NFGUID& self, std::string& strRecordName, const NFDataList& var)
@@ -419,9 +425,47 @@ NFGUID NFCLuaScriptModule::CreateID()
 	return m_pKernelModule->CreateGUID();
 }
 
+NFINT64 NFCLuaScriptModule::APPID()
+{
+	return pPluginManager->GetAppID();
+}
+
+NFINT64 NFCLuaScriptModule::APPType()
+{
+    NF_SHARE_PTR<NFIClass> xLogicClass = m_pClassModule->GetElement(NFrame::Server::ThisName());
+    if (xLogicClass)
+    {
+		const std::vector<std::string>& strIdList = xLogicClass->GetIDList();
+		for (int i = 0; i < strIdList.size(); ++i)
+		{
+			const std::string& strId = strIdList[i];
+
+            const int nServerType = m_pElementModule->GetPropertyInt32(strId, NFrame::Server::Type());
+            const int nServerID = m_pElementModule->GetPropertyInt32(strId, NFrame::Server::ServerID());
+            if (pPluginManager->GetAppID() == nServerID)
+            {
+                return nServerType;
+            }
+        }
+    }
+    
+	return 0;
+}
+
 bool NFCLuaScriptModule::ExistElementObject(const std::string & strConfigName)
 {
 	return m_pElementModule->ExistElement(strConfigName);
+}
+
+std::vector<std::string> NFCLuaScriptModule::GetEleList(const std::string& strClassName)
+{
+    NF_SHARE_PTR<NFIClass> xLogicClass = m_pClassModule->GetElement(NFrame::Server::ThisName());
+	if (xLogicClass)
+	{
+		return xLogicClass->GetIDList();
+    }
+
+    return std::vector<std::string>();
 }
 
 NFINT64 NFCLuaScriptModule::GetElePropertyInt(const std::string & strConfigName, const std::string & strPropertyName)
@@ -486,6 +530,44 @@ bool NFCLuaScriptModule::AddLuaFuncToMap(NFMap<T, NFMap<NFGUID, NFList<string>>>
 
 }
 
+
+template<typename T>
+bool NFCLuaScriptModule::AddLuaFuncToMap(NFMap<T, NFMap<NFGUID, NFList<string>>>& funcMap, T key, string& luaFunc)
+{
+    auto funcList = funcMap.GetElement(key);
+    if (!funcList)
+    {
+        NFList<string>* funcNameList = new NFList<string>;
+        funcNameList->Add(luaFunc);
+        funcList = new NFMap<NFGUID, NFList<string>>;
+        funcList->AddElement(NFGUID(), funcNameList);
+        funcMap.AddElement(key, funcList);
+        return true;
+    }
+
+    if (!funcList->GetElement(NFGUID()))
+    {
+        NFList<string>* funcNameList = new NFList<string>;
+        funcNameList->Add(luaFunc);
+        funcList->AddElement(NFGUID(), funcNameList);
+        return true;
+    }
+    else
+    {
+        auto funcNameList = funcList->GetElement(NFGUID());
+        if (!funcNameList->Find(luaFunc))
+        {
+            funcNameList->Add(luaFunc);
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+}
+
 template<typename T1, typename ...T2>
 bool NFCLuaScriptModule::CallLuaFuncFromMap(NFMap<T1, NFMap<NFGUID, NFList<string>>>& funcMap, T1 key, const NFGUID& self, T2 ... arg)
 {
@@ -503,6 +585,44 @@ bool NFCLuaScriptModule::CallLuaFuncFromMap(NFMap<T1, NFMap<NFGUID, NFList<strin
                 {
                     LuaIntf::LuaRef func(mLuaContext, funcName.c_str());
                     func.call(self, arg...);
+					return true;
+                }
+                catch (LuaIntf::LuaException& e)
+                {
+                    cout << e.what() << endl;
+                    return false;
+                }
+				catch (...)
+				{
+                    return false;
+				}
+
+                Ret = funcNameList->Next(funcName);
+            }
+        }
+    }
+
+    return true;
+}
+
+template<typename T1, typename ...T2>
+bool NFCLuaScriptModule::CallLuaFuncFromMap(NFMap<T1, NFMap<NFGUID, NFList<string>>>& funcMap, T1 key, T2 ... arg)
+{
+    auto funcList = funcMap.GetElement(key);
+    if (funcList)
+    {
+        auto funcNameList = funcList->GetElement(NFGUID());
+        if (funcNameList)
+        {
+            string funcName;
+            auto Ret = funcNameList->First(funcName);
+            while (Ret)
+            {
+                try
+                {
+                    LuaIntf::LuaRef func(mLuaContext, funcName.c_str());
+                    func.call(arg...);
+					return true;
                 }
                 catch (LuaIntf::LuaException& e)
                 {
@@ -524,25 +644,26 @@ bool NFCLuaScriptModule::CallLuaFuncFromMap(NFMap<T1, NFMap<NFGUID, NFList<strin
 
 void NFCLuaScriptModule::AddReceiveCallBack(const int nMsgID, const std::string& luaFunc)
 {
+
 }
 
 void NFCLuaScriptModule::SendByServerID(const int nServerID, const uint16_t nMsgID, const std::string& strData)
 {
-
-}
-
-void NFCLuaScriptModule::SendToAllServer(const uint16_t nMsgID, const std::string& strData)
-{
-
+    //when the app is a game server
+    //when te app is a world server or ?
 }
 
 void NFCLuaScriptModule::SendByServerType(const NF_SERVER_TYPES eType, const uint16_t nMsgID, const std::string & strData)
 {
+    //when the app is a game server
+    //when te app is a world server or ?
 }
 
 //for net module
 void NFCLuaScriptModule::SendToPlayer(const NFGUID player, const uint16_t nMsgID, const std::string& strData)
 {
+    //when the app is a game server
+    //when te app is a world server or ?
 }
 
 void NFCLuaScriptModule::SendToAllPlayer(const uint16_t nMsgID, const std::string& strData)
@@ -570,6 +691,15 @@ void NFCLuaScriptModule::LogDebug(const std::string& strData)
 	m_pLogModule->LogDebug(strData);
 }
 
+void NFCLuaScriptModule::SetVersionCode(const std::string& strData)
+{
+    strVersionCode = strData;
+}
+
+const std::string&  NFCLuaScriptModule::GetVersionCode()
+{
+    return strVersionCode;
+}
 
 bool NFCLuaScriptModule::Register()
 {
@@ -674,14 +804,18 @@ bool NFCLuaScriptModule::Register()
 		.addFunction("add_event_cb", &NFCLuaScriptModule::AddEventCallBack)
 		.addFunction("add_class_cb", &NFCLuaScriptModule::AddClassCallBack)
 		.addFunction("add_schedule", &NFCLuaScriptModule::AddSchedule)
+		.addFunction("add_module_schedule", &NFCLuaScriptModule::AddModuleSchedule)
 		.addFunction("do_event", &NFCLuaScriptModule::DoEvent)
 		.addFunction("add_row", &NFCLuaScriptModule::AddRow)
 		.addFunction("rem_row", &NFCLuaScriptModule::RemRow)
 
 		.addFunction("time", &NFCLuaScriptModule::GetNowTime)
 		.addFunction("new_id", &NFCLuaScriptModule::CreateID)
+		.addFunction("app_id", &NFCLuaScriptModule::APPID)
+		.addFunction("app_type", &NFCLuaScriptModule::APPID)
 
 		.addFunction("exist_element", &NFCLuaScriptModule::ExistElementObject)
+		.addFunction("get_ele_list", &NFCLuaScriptModule::GetEleList)
 		.addFunction("get_ele_int", &NFCLuaScriptModule::GetElePropertyInt)
 		.addFunction("get_ele_float", &NFCLuaScriptModule::GetElePropertyFloat)
 		.addFunction("get_ele_string", &NFCLuaScriptModule::GetElePropertyString)
@@ -691,7 +825,6 @@ bool NFCLuaScriptModule::Register()
 		.addFunction("add_msg_cb", &NFCLuaScriptModule::AddReceiveCallBack)
 		.addFunction("send_by_id", &NFCLuaScriptModule::SendByServerID)
 		.addFunction("send_by_type", &NFCLuaScriptModule::SendByServerType)
-		.addFunction("send_to_all_server", &NFCLuaScriptModule::SendToAllServer)
 		.addFunction("send_to_player", &NFCLuaScriptModule::SendToPlayer)
 		.addFunction("send_to_all_player", &NFCLuaScriptModule::SendToAllPlayer)
 
@@ -699,6 +832,9 @@ bool NFCLuaScriptModule::Register()
 		.addFunction("log_error", &NFCLuaScriptModule::LogError)
 		.addFunction("log_warning", &NFCLuaScriptModule::LogWarning)
 		.addFunction("log_debug", &NFCLuaScriptModule::LogDebug)
+
+		.addFunction("get_version_code", &NFCLuaScriptModule::GetVersionCode)
+		.addFunction("set_version_code", &NFCLuaScriptModule::SetVersionCode)
 		.endClass();
 
     return true;

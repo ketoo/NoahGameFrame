@@ -1,8 +1,17 @@
-io.write("Start reload!\n");
+local version_code = "1.0.1"
 ScriptReloadList={
-	--{tbl=nil, tblName="test_module"},
+	{tbl=nil, tblName="test_module"},
 }
 
-reload_script_table(ScriptReloadList)
+local old_version_code = script_module:get_version_code()
+if (old_version_code == "") then
+	script_module:set_version_code(version_code);
+else
+	if (old_version_code ~= version_code) then
+		script_module:log_info("old_version_code == " .. old_version_code .. " ++ now version code = "..version_code);
+		
+		script_module:set_version_code(version_code);
+		reload_script_table(ScriptReloadList);
+	end
+end
 
---clear the data of this file
