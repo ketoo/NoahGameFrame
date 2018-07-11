@@ -19,4 +19,19 @@ RecordOptype =
 	"Cover",
 	"UNKNOW",
 }
-RecordOptype = CreatEnumTable(RecordOptype) 
+RecordOptype = CreatEnumTable(RecordOptype)
+
+NF_SERVER_TYPES =
+{
+    "NF_ST_NONE",
+    "NF_ST_REDIS",
+    "NF_ST_MYSQL",
+    "NF_ST_MASTER",
+    "NF_ST_LOGIN",
+    "NF_ST_PROXY",
+    "NF_ST_GAME",
+	"NF_ST_WORLD",
+	"NF_ST_DB",
+	"NF_ST_MAX",
+};
+NF_SERVER_TYPES = CreatEnumTable(NF_SERVER_TYPES)
