@@ -176,6 +176,8 @@ protected:
     int OnLuaEventCB(const NFGUID& self, const NFEventDefine nEventID, const NFDataList& argVar);
 
     int OnClassEventCB(const NFGUID& self, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFDataList& var);
+    
+	void OnScriptReload();
 
 protected:
     bool Register();
