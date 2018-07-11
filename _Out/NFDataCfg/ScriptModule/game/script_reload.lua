@@ -1,6 +1,6 @@
-local version_code = "1.0.1"
+local version_code = "1.0.2"
 ScriptReloadList={
-	{tbl=nil, tblName="test_module"},
+	{tbl=nil, tblName="test_game_module"},
 }
 
 local old_version_code = script_module:get_version_code()
