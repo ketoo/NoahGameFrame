@@ -1,8 +1,13 @@
 test_module = {}
 register_module(test_module,"test_module");
 
+local other_module = nil;
+function test_module.reload()
+	--other_module = script_module:find_module("other_module");
+end
+
 function test_module.awake()
-	io.write("test_module awake!----" .. "\n");
+	test_module.reload();
 end
 
 function test_module.init()
@@ -32,8 +37,8 @@ function test_module.after_init()
 	varTask:add_int(1);
 
 	script_module:add_row(playerObject, "TaskList", varTask);
-	script_module:set_record_int(playerObject, "TaskList", 0, 1, 3);
-	script_module:set_record_string(playerObject, "TaskList", 0, 0, "NewStr_Task_From_Lua");
+	--script_module:set_record_int(playerObject, "TaskList", 0, 1, 3);
+	--script_module:set_record_string(playerObject, "TaskList", 0, 0, "NewStr_Task_From_Lua");
 
 	--event callback
 	script_module:add_event_cb(playerObject, 1, "test_module.event_cb");
@@ -52,15 +57,12 @@ function test_module.after_init()
 	script_module:do_event(playerObject, 1, dataList);
 
 	--Hearback
-	script_module:add_schedule(playerObject, "strHeartBeatName", "test_module.schedule", 2, 55555);
+	script_module:add_schedule(playerObject, "add_schedule", "test_module.schedule", 5, 55555);
+	script_module:add_module_schedule("add_module_schedule", "test_module.module_schedule", 10, 55555);
 end
 
 function test_module.ready_execute()
-	io.write("test_module execute!\n");
-end
-
-function test_module.execute()
-	io.write("test_module execute!\n");
+	io.write("test_module ready_execute!\n");
 end
 
 function test_module.before_shut()
@@ -122,8 +124,12 @@ function test_module.schedule(self, strHeartBeat, fTime, nCount)
 	if oldTime == nil then
 		oldTime = s
 	end
-	io.write("Hello Lua HearCallBack:".. strHeartBeat .. " Time:" .. (s-oldTime) .. "\n");
+	io.write("Hello Lua HeartCallBack:".. strHeartBeat .. " Time:" .. (s-oldTime) .. "\n");
 	oldTime = s;
+end
+
+function test_module.module_schedule(strHeartBeat, fTime, nCount)
+	io.write("Hello Lua Module HeartCallBack:".. strHeartBeat .. " Time:" .. fTime .. "\n");
 end
 
 function test_module.class_common_event(self, strClassName, eventID, varData)
