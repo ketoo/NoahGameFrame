@@ -1,4 +1,4 @@
-package.path = '../NFDataCfg/ScriptModule/?.lua;'
+package.path = '../NFDataCfg/ScriptModule/?.lua;../NFDataCfg/ScriptModule/game/?.lua;../NFDataCfg/ScriptModule/world/?.lua;../NFDataCfg/ScriptModule/proxy/?.lua;../NFDataCfg/ScriptModule/master/?.lua;../NFDataCfg/ScriptModule/login/?.lua;'
 
 require("NFScriptEnum");
 
@@ -16,6 +16,7 @@ function init_script_system(xLuaScriptModule)
 	if NF_SERVER_TYPES.NF_ST_GAME == app_type then
 		io.write("Hello NF_ST_GAME");
 		io.write("\n");
+		require("./game/script_list");
 	elseif NF_SERVER_TYPES.NF_ST_WORLD == app_type then
 		io.write("Hello NF_ST_WORLD");
 		io.write("\n");
@@ -145,5 +146,3 @@ function module_shut(...)
 end
 
 ----------------------------------------------
-
-require("script_list");

@@ -97,8 +97,8 @@ bool NFCLuaScriptModule::Execute()
     {
         mnTime = pPluginManager->GetNowTime();
 
-		std::string strRootFileh = pPluginManager->GetConfigPath() + "NFDataCfg/ScriptModule/script_reload.lua";
-		TRY_LOAD_SCRIPT_FLE(strRootFileh.c_str());
+        OnScriptReload();
+
     }
 
     return true;
@@ -260,6 +260,47 @@ int NFCLuaScriptModule::OnClassEventCB(const NFGUID& self, const std::string& st
 
 
 	return -1;
+}
+
+void NFCLuaScriptModule::OnScriptReload()
+{
+    NFINT64 nAppType = APPType();
+    std::string strRootFileh = "";
+    switch ((NF_SERVER_TYPES)(nAppType))
+    {
+        case NF_SERVER_TYPES::NF_ST_GAME:
+        {
+            strRootFileh = pPluginManager->GetConfigPath() + "NFDataCfg/ScriptModule/game/script_reload.lua";
+        }
+        break;
+        case NF_SERVER_TYPES::NF_ST_LOGIN:
+        {
+            strRootFileh = pPluginManager->GetConfigPath() + "NFDataCfg/ScriptModule/login/script_reload.lua";
+        }
+        break;
+        case NF_SERVER_TYPES::NF_ST_WORLD:
+        {
+            strRootFileh = pPluginManager->GetConfigPath() + "NFDataCfg/ScriptModule/world/script_reload.lua";
+        }
+        break;
+        case NF_SERVER_TYPES::NF_ST_PROXY:
+        {
+            strRootFileh = pPluginManager->GetConfigPath() + "NFDataCfg/ScriptModule/proxy/script_reload.lua";
+        }
+        break;
+        case NF_SERVER_TYPES::NF_ST_MASTER:
+        {
+            strRootFileh = pPluginManager->GetConfigPath() + "NFDataCfg/ScriptModule/master/script_reload.lua";
+        }
+        break;
+        default:
+        break;
+    }
+    
+    if (!strRootFileh.empty())
+    {
+		TRY_LOAD_SCRIPT_FLE(strRootFileh.c_str());
+    }
 }
 
 bool NFCLuaScriptModule::AddPropertyCallBack(const NFGUID& self, std::string& strPropertyName, std::string& luaFunc)
