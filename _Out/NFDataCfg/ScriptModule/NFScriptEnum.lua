@@ -19,7 +19,7 @@ RecordOptype =
 	"Cover",
 	"UNKNOW",
 }
-RecordOptype = CreatEnumTable(RecordOptype)
+RecordOptype = CreatEnumTable(RecordOptype, -1)
 
 NF_SERVER_TYPES =
 {
@@ -34,4 +34,4 @@ NF_SERVER_TYPES =
 	"NF_ST_DB",
 	"NF_ST_MAX",
 };
-NF_SERVER_TYPES = CreatEnumTable(NF_SERVER_TYPES)
+NF_SERVER_TYPES = CreatEnumTable(NF_SERVER_TYPES, -1)
