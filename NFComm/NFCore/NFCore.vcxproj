@@ -104,7 +104,6 @@
     <ClInclude Include="NFCRecordManager.h" />
     <ClInclude Include="NFDataList.hpp" />
     <ClInclude Include="NFDateTime.hpp" />
-    <ClInclude Include="NFException.hpp" />
     <ClInclude Include="NFLine.hpp" />
     <ClInclude Include="NFMapEx.hpp" />
     <ClInclude Include="NFMemManager.hpp" />
@@ -123,8 +122,10 @@
     <ClInclude Include="NFList.hpp" />
     <ClInclude Include="NFVector2.hpp" />
     <ClInclude Include="NFVector3.hpp" />
+    <ClInclude Include="NFException.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="NFException.cpp" />
     <ClCompile Include="NFCObject.cpp" />
     <ClCompile Include="NFCProperty.cpp" />
     <ClCompile Include="NFCPropertyManager.cpp" />

@@ -17,10 +17,14 @@ set_target_properties( NFNetPlugin PROPERTIES
 	RUNTIME_OUTPUT_DIRECTORY ${NFOutPutDir}
 	LIBRARY_OUTPUT_DIRECTORY ${NFOutPutDir})
 
+	add_dependencies(NFNetPlugin NFCore)
+	
 if (APPLE)
 	if (CMAKE_BUILD_TYPE MATCHES "Release")
 	else()
 	endif()
+
+		target_link_libraries(NFNetPlugin NFCore)
 		target_link_libraries(NFNetPlugin libevent.a)
 		target_link_libraries(NFNetPlugin libevent_core.a)
 		target_link_libraries(NFNetPlugin libevent_extra.a)
@@ -41,6 +45,7 @@ elseif(UNIX)
 	else()
 	endif()
 
+		target_link_libraries(NFNetPlugin NFCore)
 		target_link_libraries(NFNetPlugin libevent.a)
 		target_link_libraries(NFNetPlugin libevent_core.a)
 		target_link_libraries(NFNetPlugin libevent_extra.a)
