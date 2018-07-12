@@ -26,6 +26,8 @@
 #include "NFCHttpClient.h"
 #include "NFComm/NFLogPlugin/easylogging++.h"
 
+INITIALIZE_EASYLOGGINGPP
+
 #if _MSC_VER
 #define snprintf _snprintf
 #endif
