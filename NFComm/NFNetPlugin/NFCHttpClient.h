@@ -26,6 +26,7 @@
 #ifndef NFC_HTTP_CLIENT_H
 #define NFC_HTTP_CLIENT_H
 
+
 #include "NFIHttpClient.h"
 #include "NFIHttpServer.h"
 #include "NFComm/NFCore/NFException.h"
