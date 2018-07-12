@@ -1,10 +1,28 @@
-// -------------------------------------------------------------------------
-//    @FileName			:    NFCLuaScriptModule.h
-//    @Author           :    LvSheng.Huang
-//    @Date             :    2013-07-08
-//    @Module           :    NFCLuaScriptModule
-//    @Desc             :
-// -------------------------------------------------------------------------
+/*
+            This file is part of: 
+                NoahFrame
+            https://github.com/ketoo/NoahGameFrame
+
+   Copyright 2009 - 2018 NoahFrame(NoahGameFrame)
+
+   File creator: lvsheng.huang
+   
+   NoahFrame is open-source software and you can redistribute it and/or modify
+   it under the terms of the License; besides, anyone who use this file/software must include this copyright announcement.
+
+   Licensed under the Apache License, Version 2.0 (the "License");
+   you may not use this file except in compliance with the License.
+   You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   See the License for the specific language governing permissions and
+   limitations under the License.
+*/
+
 
 #ifndef NFC_LUA_SCRIPT_MODULE_H
 #define NFC_LUA_SCRIPT_MODULE_H
@@ -74,7 +92,8 @@ protected:
     bool AddRecordCallBack(const NFGUID& self, std::string& strRecordName, std::string& luaFunc);
     bool AddEventCallBack(const NFGUID& self, const NFEventDefine nEventID, std::string& luaFunc);
 	bool AddSchedule(const NFGUID& self, std::string& strHeartBeatName, std::string& luaFunc, const float fTime, const int nCount);
-	//bool DoEvent(const NFGUID& self, std::string& strHeartBeatName, std::string& luaFunc, const float fTime, const int nCount);
+	bool AddModuleSchedule(std::string& strHeartBeatName, std::string& luaFunc, const float fTime, const int nCount);
+
 	int AddRow(const NFGUID& self, std::string& strRecordName, const NFDataList& var);
 	bool RemRow(const NFGUID& self, std::string& strRecordName, const int nRow);
 
@@ -94,9 +113,12 @@ protected:
 
 	NFINT64 GetNowTime();
 	NFGUID CreateID();
+	NFINT64 APPID();
+	NFINT64 APPType();
 
 	//FOR ELEMENT MODULE
 	bool ExistElementObject(const std::string& strConfigName);
+	std::vector<std::string> GetEleList(const std::string& strClassName);
 
 	NFINT64 GetElePropertyInt(const std::string& strConfigName, const std::string& strPropertyName);
 	double GetElePropertyFloat(const std::string& strConfigName, const std::string& strPropertyName);
@@ -110,7 +132,6 @@ protected:
     void AddReceiveCallBack(const int nMsgID, const std::string& luaFunc);
 
 	void SendByServerID(const int nServerID, const uint16_t nMsgID, const std::string& strData);
-    void SendToAllServer(const uint16_t nMsgID, const std::string& strData);
     void SendByServerType(const NF_SERVER_TYPES eType, const uint16_t nMsgID, const std::string& strData);
 
     //for net module
@@ -123,6 +144,9 @@ protected:
 	void LogWarning(const std::string& strData);
 	void LogDebug(const std::string& strData);
 
+    //hot fix
+	void SetVersionCode(const std::string& strData);
+	const std::string& GetVersionCode();
 
 	//FOR CLASS MDOULE
 
@@ -134,15 +158,26 @@ protected:
     template<typename T>
     bool AddLuaFuncToMap(NFMap<T, NFMap<NFGUID, NFList<string>>>& funcMap, const NFGUID& self, T key, std::string& luaFunc);
 
+    template<typename T>
+    bool AddLuaFuncToMap(NFMap<T, NFMap<NFGUID, NFList<string>>>& funcMap, T key, std::string& luaFunc);
+
     template<typename T1, typename... T2>
     bool CallLuaFuncFromMap(NFMap<T1, NFMap<NFGUID, NFList<string>>>& funcMap, T1 key, const NFGUID& self, T2... arg);
+
+    template<typename T1, typename... T2>
+    bool CallLuaFuncFromMap(NFMap<T1, NFMap<NFGUID, NFList<string>>>& funcMap, T1 key, T2... arg);
 
     int OnLuaPropertyCB(const NFGUID& self, const std::string& strPropertyName, const NFData& oldVar, const NFData& newVar);
     int OnLuaRecordCB(const NFGUID& self, const RECORD_EVENT_DATA& xEventData, const NFData& oldVar, const NFData& newVar);
     int OnLuaHeartBeatCB(const NFGUID& self, const std::string& strHeartBeatName, const float fTime, const int nCount);
+
+	int OnLuaHeartBeatCB(const std::string& strHeartBeatName, const float fTime, const int nCount);
+
     int OnLuaEventCB(const NFGUID& self, const NFEventDefine nEventID, const NFDataList& argVar);
 
     int OnClassEventCB(const NFGUID& self, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFDataList& var);
+    
+	void OnScriptReload();
 
 protected:
     bool Register();
@@ -150,7 +185,7 @@ protected:
 protected:
     NFIElementModule* m_pElementModule;
     NFIKernelModule* m_pKernelModule;
-    NFIClassModule* m_pLogicClassModule;
+    NFIClassModule* m_pClassModule;
 	NFIEventModule* m_pEventModule;
     NFIScheduleModule* m_pScheduleModule;
     NFINetClientModule* m_pNetClientModule;
@@ -158,8 +193,10 @@ protected:
     NFILogModule* m_pLogModule;
 
 protected:
-    LuaIntf::LuaContext mLuaContext;
     int64_t mnTime;
+    std::string strVersionCode;
+    LuaIntf::LuaContext mLuaContext;
+
     NFMap<std::string, NFMap<NFGUID, NFList<std::string>>> m_luaPropertyCallBackFuncMap;
     NFMap<std::string, NFMap<NFGUID, NFList<std::string>>> m_luaRecordCallBackFuncMap;
     NFMap<int, NFMap<NFGUID, NFList<std::string>>> m_luaEventCallBackFuncMap;
