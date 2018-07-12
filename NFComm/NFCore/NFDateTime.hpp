@@ -427,7 +427,9 @@ public:
 		}
 		else
 		{
-			throw NFException("Day %d is not in valid weekday range ( %d - %d )", day, MIN_WEEKDAY, MAX_WEEKDAY);
+			char data[128] = { 0 };
+			sprintf(data, "Day %d is not in valid weekday range ( %d - %d )", day, MIN_WEEKDAY, MAX_WEEKDAY);
+			throw NFException(data);
 		}
 	}
 
@@ -439,7 +441,9 @@ public:
 		}
 		else
 		{
-			throw NFException("Month %d is not in valid range ( %d - %d )", month, MIN_MONTH, MAX_MONTH);
+			char data[128] = { 0 };
+			sprintf(data, "Month %d is not in valid range ( %d - %d )", month, MIN_MONTH, MAX_MONTH);
+			throw NFException(data);
 		}
 	}
 
