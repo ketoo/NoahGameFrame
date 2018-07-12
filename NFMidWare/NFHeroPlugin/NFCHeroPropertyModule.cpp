@@ -97,9 +97,8 @@ int NFCHeroPropertyModule::OnObjectHeroRecordEvent(const NFGUID& self, const REC
 	case RECORD_EVENT_DATA::Add:
 	{
 		const NFGUID xHeroID = pHeroRecord->GetObject(xEventData.nRow, NFrame::Player::PlayerHero::GUID);
-		
 		AddHeroProperty(self, xHeroID);
-		/**
+
 		if (m_pKernelModule->GetPropertyObject(self, NFrame::Player::HeroID1()) == NFGUID())
 		{
 			//must setting props before we set props for fighting hero
@@ -114,12 +113,11 @@ int NFCHeroPropertyModule::OnObjectHeroRecordEvent(const NFGUID& self, const REC
 			m_pHeroModule->SetFightHero(self, xHeroID, NFIHeroModule::EConsHero_Pos::ECONSt_HERO_POS3);
 		}
 
-		const NFGUID xFightingHeroID = m_pKernelModule->GetPropertyObject(self, NFrame::Player::FightHero());
+		const NFGUID xFightingHeroID = m_pKernelModule->GetPropertyObject(self, NFrame::Player::FightHeroID());
 		if (xFightingHeroID == xHeroID)
 		{
 			CalFightintHeroProperty(self);
 		}
-		*/
 	}
 	break;
 	case RECORD_EVENT_DATA::Del:
@@ -207,28 +205,24 @@ bool NFCHeroPropertyModule::OnHeroPropertyUpdate(const NFGUID & self, const NFGU
 		m_pKernelModule->SetPropertyInt(self, NFrame::Player::HeroStar3(), nStar);
 	}
 		break;
-	case NFIHeroModule::ECONSt_HERO_POS4:
-	{
-		m_pKernelModule->SetPropertyInt(self, NFrame::Player::HeroStar4(), nStar);
-	}
-	break;
 	case NFIHeroModule::ECONSt_HERO_MAX:
 		break;
 	default:
 		break;
 	}
-	/*
-	NFGUID xFightingID = m_pKernelModule->GetPropertyObject(self, NFrame::Player::FightHero());
+
+	NFGUID xFightingID = m_pKernelModule->GetPropertyObject(self, NFrame::Player::FightHeroID());
 	if (xFightingID == xHeroGUID)
 	{
 		CalFightintHeroProperty(self);
 	}
-	*/
+
 	return true;
 }
 
 bool NFCHeroPropertyModule::AddHeroProperty(const NFGUID & self, const NFGUID & xHeroGUID)
 {
+	//we would add a row to record the hero props when the player got this hero first time
 	NF_SHARE_PTR<NFIRecord> pHeroRecord = m_pKernelModule->FindRecord(self, NFrame::Player::PlayerHero::ThisName());
 	if (nullptr == pHeroRecord)
 	{

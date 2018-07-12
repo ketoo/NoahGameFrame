@@ -61,6 +61,7 @@ const std::string & NFCSecurityModule::GetSecurityKey(const std::string & strAco
 
 bool NFCSecurityModule::VirifySecurityKey(const std::string & strAcount, const std::string & strSucrityKey)
 {
+	//you would implement this function by yourself
 	if (strAcount == strSucrityKey)
 	{
 		return true;
