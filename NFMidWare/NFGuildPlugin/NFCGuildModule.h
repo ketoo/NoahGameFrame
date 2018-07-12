@@ -27,6 +27,7 @@
 #ifndef NFC_GUILD_MODULE_H
 #define NFC_GUILD_MODULE_H
 
+#include "NFComm/NFCore/NFDateTime.hpp"
 #include "NFComm/NFCore/NFMapEx.hpp"
 #include "NFComm/NFPluginModule/NFIKernelModule.h"
 #include "NFComm/NFPluginModule/NFIGuildModule.h"

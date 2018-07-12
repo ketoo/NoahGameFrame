@@ -25,7 +25,6 @@
 
 
 #include "NFCGuildModule.h"
-#include "NFComm/NFCore/NFDateTime.hpp"
 #include "NFComm/NFPluginModule/NFPlatform.h"
 #include "NFComm/NFMessageDefine/NFMsgShare.pb.h"
 #include "NFComm/NFPluginModule/NFINetModule.h"

@@ -35,7 +35,7 @@
 #include <string>
 #include <map>
 #include <vector>
-#include "NFException.h"
+#include "NFException.hpp"
 #include "NFComm/NFPluginModule/NFPlatform.h"
 
 //for timespan
