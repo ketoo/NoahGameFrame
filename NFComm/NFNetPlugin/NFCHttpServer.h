@@ -27,7 +27,7 @@
 #define NFC_HTTP_SERVER_H
 
 #include "NFIHttpServer.h"
-#include "NFComm/NFCore/NFException.h"
+#include "NFComm/NFCore/NFException.hpp"
 
 #if NF_PLATFORM == NF_PLATFORM_WIN
 #include <winsock2.h>
