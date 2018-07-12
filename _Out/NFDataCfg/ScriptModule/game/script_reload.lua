@@ -1,7 +1,9 @@
-local version_code = "1.0.2"
+local version_code = "1.0.4"
 ScriptReloadList={
 	{tbl=nil, tblName="test_game_module"},
 }
+
+io.write("start to reload, version: " ..version_code .. "\n");
 
 local old_version_code = script_module:get_version_code()
 if (old_version_code == "") then

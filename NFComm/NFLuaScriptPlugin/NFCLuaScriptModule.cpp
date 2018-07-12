@@ -93,7 +93,11 @@ bool NFCLuaScriptModule::ReadyExecute()
 bool NFCLuaScriptModule::Execute()
 {
     //1分钟reload一次
+#ifdef NF_DEBUG_MODE
+    if (pPluginManager->GetNowTime() - mnTime > 10)
+#else
     if (pPluginManager->GetNowTime() - mnTime > 60)
+#endif
     {
         mnTime = pPluginManager->GetNowTime();
 
@@ -688,23 +692,221 @@ void NFCLuaScriptModule::AddReceiveCallBack(const int nMsgID, const std::string&
 
 }
 
+void NFCLuaScriptModule::SendByServerFD(const NFSOCK nFD, const uint16_t nMsgID, const std::string& strData)
+{
+    m_pNetModule->SendMsgWithOutHead(nMsgID, strData, nFD);
+}
+
 void NFCLuaScriptModule::SendByServerID(const int nServerID, const uint16_t nMsgID, const std::string& strData)
 {
-    //when the app is a game server
-    //when te app is a world server or ?
+    if (pPluginManager->GetAppID() == nServerID)
+    {
+        m_pLogModule->LogError("you can send message to youself");
+        return;
+    }
+
+    NF_SERVER_TYPES nowServerType = NF_SERVER_TYPES::NF_ST_NONE;
+    NF_SERVER_TYPES goalServerType = NF_SERVER_TYPES::NF_ST_NONE;
+
+    NF_SHARE_PTR<NFIClass> xLogicClass = m_pClassModule->GetElement(NFrame::Server::ThisName());
+	if (xLogicClass)
+	{
+		const std::vector<std::string>& strIdList = xLogicClass->GetIDList();
+		for (int i = 0; i < strIdList.size(); ++i)
+		{
+			const std::string& strId = strIdList[i];
+
+			const int nTempServerType = m_pElementModule->GetPropertyInt32(strId, NFrame::Server::Type());
+			const int nTempServerID = m_pElementModule->GetPropertyInt32(strId, NFrame::Server::ServerID());
+			if (pPluginManager->GetAppID() == nTempServerID)
+			{
+                nowServerType = (NF_SERVER_TYPES)(nTempServerType);
+                break;
+            }
+        }
+
+        for (int i = 0; i < strIdList.size(); ++i)
+		{
+			const std::string& strId = strIdList[i];
+
+			const int nTempServerType = m_pElementModule->GetPropertyInt32(strId, NFrame::Server::Type());
+			const int nTempServerID = m_pElementModule->GetPropertyInt32(strId, NFrame::Server::ServerID());
+			if (nServerID == nTempServerID)
+			{
+                goalServerType = (NF_SERVER_TYPES)(nTempServerType);
+                break;
+            }
+        }
+    }
+
+    if (goalServerType == NF_SERVER_TYPES::NF_ST_NONE || nowServerType == NF_SERVER_TYPES::NF_ST_NONE)
+    {
+        m_pLogModule->LogError("goal type: none or now type: none");
+        return;
+    }
+
+    switch (nowServerType)
+    {
+        case NF_SERVER_TYPES::NF_ST_GAME:
+        {
+            if (NF_SERVER_TYPES::NF_ST_WORLD == goalServerType)
+            {
+                m_pNetClientModule->SendByServerID(nServerID, nMsgID, strData);
+            }
+            else if (NF_SERVER_TYPES::NF_ST_PROXY == goalServerType)
+            {
+                //
+            }
+        }
+        break;
+        case NF_SERVER_TYPES::NF_ST_WORLD:
+        {
+            if (NF_SERVER_TYPES::NF_ST_GAME == goalServerType)
+            {
+                //
+            }
+            else if (NF_SERVER_TYPES::NF_ST_MASTER == goalServerType)
+            {
+                m_pNetClientModule->SendByServerID(nServerID, nMsgID, strData);
+            }
+        }
+        break;
+        case NF_SERVER_TYPES::NF_ST_PROXY:
+        {
+            if (NF_SERVER_TYPES::NF_ST_GAME == goalServerType)
+            {
+                m_pNetClientModule->SendByServerID(nServerID, nMsgID, strData);
+            }
+        }
+        break;
+        case NF_SERVER_TYPES::NF_ST_MASTER:
+        {
+            if (NF_SERVER_TYPES::NF_ST_WORLD == goalServerType)
+            {
+
+            }
+            else if (NF_SERVER_TYPES::NF_ST_LOGIN == goalServerType)
+            {
+
+            }
+        }
+        break;
+        case NF_SERVER_TYPES::NF_ST_LOGIN:
+        {
+            if (NF_SERVER_TYPES::NF_ST_MASTER == goalServerType)
+            {
+                m_pNetClientModule->SendByServerID(nServerID, nMsgID, strData);
+            }
+        }
+        break;
+        default:
+        break;
+    }
 }
 
 void NFCLuaScriptModule::SendByServerType(const NF_SERVER_TYPES eType, const uint16_t nMsgID, const std::string & strData)
 {
-    //when the app is a game server
-    //when te app is a world server or ?
+    NF_SERVER_TYPES nowServerType = NF_SERVER_TYPES::NF_ST_NONE;
+    NF_SERVER_TYPES goalServerType = eType;
+
+    NF_SHARE_PTR<NFIClass> xLogicClass = m_pClassModule->GetElement(NFrame::Server::ThisName());
+	if (xLogicClass)
+	{
+		const std::vector<std::string>& strIdList = xLogicClass->GetIDList();
+		for (int i = 0; i < strIdList.size(); ++i)
+		{
+			const std::string& strId = strIdList[i];
+
+			const int nTempServerType = m_pElementModule->GetPropertyInt32(strId, NFrame::Server::Type());
+			const int nTempServerID = m_pElementModule->GetPropertyInt32(strId, NFrame::Server::ServerID());
+			if (pPluginManager->GetAppID() == nTempServerID)
+			{
+                nowServerType = (NF_SERVER_TYPES)(nTempServerType);
+                break;
+            }
+        }
+    }
+
+    if (goalServerType == NF_SERVER_TYPES::NF_ST_NONE || nowServerType == NF_SERVER_TYPES::NF_ST_NONE)
+    {
+        m_pLogModule->LogError("goal type: none or now type: none");
+        return;
+    }
+
+    if (goalServerType == nowServerType)
+    {
+        m_pLogModule->LogError("can not send the message to the same server type");
+        return;
+    }
+
+    switch (nowServerType)
+    {
+        case NF_SERVER_TYPES::NF_ST_GAME:
+        {
+            if (NF_SERVER_TYPES::NF_ST_WORLD == goalServerType)
+            {
+                m_pNetClientModule->SendToAllServer(nMsgID, strData);
+            }
+            else if (NF_SERVER_TYPES::NF_ST_PROXY == goalServerType)
+            {
+                m_pNetModule->SendMsgToAllClientWithOutHead(nMsgID, strData);
+            }
+        }
+        break;
+        case NF_SERVER_TYPES::NF_ST_WORLD:
+        {
+            if (NF_SERVER_TYPES::NF_ST_GAME == goalServerType)
+            {
+                m_pNetModule->SendMsgToAllClientWithOutHead(nMsgID, strData);
+            }
+            else if (NF_SERVER_TYPES::NF_ST_MASTER == goalServerType)
+            {
+                m_pNetClientModule->SendToAllServer(nMsgID, strData);
+            }
+        }
+        break;
+        case NF_SERVER_TYPES::NF_ST_PROXY:
+        {
+            if (NF_SERVER_TYPES::NF_ST_GAME == goalServerType)
+            {
+                m_pNetClientModule->SendToAllServer(nMsgID, strData);
+            }
+        }
+        break;
+        case NF_SERVER_TYPES::NF_ST_MASTER:
+        {
+            if (NF_SERVER_TYPES::NF_ST_WORLD == goalServerType)
+            {
+                //m_pNetModule->SendMsgToAllClientWithOutHead(nMsgID, strData);
+            }
+            else if (NF_SERVER_TYPES::NF_ST_LOGIN == goalServerType)
+            {
+
+            }
+        }
+        break;
+        case NF_SERVER_TYPES::NF_ST_LOGIN:
+        {
+            if (NF_SERVER_TYPES::NF_ST_MASTER == goalServerType)
+            {
+                m_pNetClientModule->SendToAllServer(nMsgID, strData);
+            }
+        }
+        break;
+        default:
+        break;
+    }
 }
 
-//for net module
-void NFCLuaScriptModule::SendToPlayer(const NFGUID player, const uint16_t nMsgID, const std::string& strData)
+void NFCLuaScriptModule::SendMsgToGate(const NFGUID player, const uint16_t nMsgID, const std::string& strData)
 {
-    //when the app is a game server
-    //when te app is a world server or ?
+    //the app must be the game server
+}
+
+void NFCLuaScriptModule::SendGroupMsgToGate(const uint16_t nMsgID, const std::string& strData)
+{
+    //the app must be the game server
+
 }
 
 void NFCLuaScriptModule::SendToAllPlayer(const uint16_t nMsgID, const std::string& strData)
@@ -864,9 +1066,14 @@ bool NFCLuaScriptModule::Register()
 		.addFunction("get_ele_vector3", &NFCLuaScriptModule::GetElePropertyVector3)
 
 		.addFunction("add_msg_cb", &NFCLuaScriptModule::AddReceiveCallBack)
+
+
+		.addFunction("send_by_fd", &NFCLuaScriptModule::SendByServerFD)
 		.addFunction("send_by_id", &NFCLuaScriptModule::SendByServerID)
 		.addFunction("send_by_type", &NFCLuaScriptModule::SendByServerType)
-		.addFunction("send_to_player", &NFCLuaScriptModule::SendToPlayer)
+
+		.addFunction("send_to_player", &NFCLuaScriptModule::SendMsgToGate)
+		.addFunction("send_to_group_player", &NFCLuaScriptModule::SendGroupMsgToGate)
 		.addFunction("send_to_all_player", &NFCLuaScriptModule::SendToAllPlayer)
 
 		.addFunction("log_info", &NFCLuaScriptModule::LogInfo)

@@ -124,12 +124,12 @@ function test_game_module.schedule(self, strHeartBeat, fTime, nCount)
 	if oldTime == nil then
 		oldTime = s
 	end
-	io.write("Hello Lua HeartCallBack222:".. strHeartBeat .. " Time:" .. (s-oldTime) .. "\n");
+	io.write("Hello Lua HeartCallBack5555555:".. strHeartBeat .. " Time:" .. (s-oldTime) .. "\n");
 	oldTime = s;
 end
 
 function test_game_module.module_schedule(strHeartBeat, fTime, nCount)
-	io.write("Hello Lua Module HeartCallBack222:".. strHeartBeat .. " Time:" .. fTime .. "\n");
+	io.write("Hello Lua Module HeartCallBack55555:".. strHeartBeat .. " Time:" .. fTime .. "\n");
 end
 
 function test_game_module.class_common_event(self, strClassName, eventID, varData)
