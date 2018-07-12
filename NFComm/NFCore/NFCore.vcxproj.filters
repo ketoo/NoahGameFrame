@@ -80,9 +80,6 @@
     <ClInclude Include="NFDateTime.hpp">
       <Filter>Unit</Filter>
     </ClInclude>
-    <ClInclude Include="NFException.hpp">
-      <Filter>Unit</Filter>
-    </ClInclude>
     <ClInclude Include="NFMemoryCounter.hpp">
       <Filter>Unit</Filter>
     </ClInclude>
@@ -97,6 +94,9 @@
     </ClInclude>
     <ClInclude Include="NFConsistentHash.hpp">
       <Filter>Unit</Filter>
+    </ClInclude>
+    <ClInclude Include="NFException.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -113,6 +113,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="NFCObject.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="NFException.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

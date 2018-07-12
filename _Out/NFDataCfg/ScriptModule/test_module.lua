@@ -1,76 +1,68 @@
 test_module = {}
 register_module(test_module,"test_module");
 
+local other_module = nil;
+function test_module.reload()
+	--other_module = script_module:find_module("other_module");
+end
+
 function test_module.awake()
+	test_module.reload();
 end
 
 function test_module.init()
 	io.write("test_module init!----" .. "\n");
---[[
-	local pKernelModule = script_module:FindKernelModule();
-	io.write("Addr of NFCKernelModule " .. tostring(pKernelModule) .. "\n");
 
-	local pLogicClassModule = pPluginManager:FindLogicClassModule("NFCLogicClassModule");
-	io.write("Addr of NFCLogicClassModule " .. tostring(pLogicClassModule) .. "\n");
+	script_module:add_class_cb("Player", "test_module.class_common_event");
 
-	local pElementInfoModule = pPluginManager:FindElementInfoModule("NFCElementInfoModule");
-	io.write("Addr of NFCElementInfoModule " .. tostring(pElementInfoModule) .. "\n");
-
-	pLuaScriptModule:AddClassCallBack("Player", "TestModule.OnClassCommonEvent");
-]]
 end
 
 function test_module.after_init()
-	io.write("test_module after_init!----" .. tostring(pLuaScriptModule) .. "\n");
---[[
-	local pKernelModule = pPluginManager:FindKernelModule("NFCKernelModule");
-	pKernelModule:CreateScene(1);
+	io.write("test_module after_init!----\n");
 
-	local pObject = pKernelModule:CreateObject(NFGUID(), 1, 0, "Player", "", NFCDataList());
-	local OID = pObject:Self();
+	local playerObject = script_module:create_object(NFGUID(), 1, 0, "Player", "", NFDataList());
+
+	io.write("create_object " .. playerObject:tostring() .. "\n");
 
 	--property callback
-	pLuaScriptModule:AddPropertyCallBack(OID, "MAXHP", "TestModule.MaxPropertyCallBack");
-	pKernelModule:SetPropertyInt(OID,"MAXHP",100);
+	script_module:add_prop_cb(playerObject, "MAXHP", "test_module.max_prop_cb");
+	script_module:set_prop_int(playerObject,"MAXHP",100);
 
 	--record callback
-	pLuaScriptModule:AddRecordCallBack(OID, "TaskList", "TestModule.TaskListCallBack");
-	local varTask =  NFCDataList();
-	varTask:AddString("Task_From_Lua");
-	varTask:AddInt(1);
-	varTask:AddInt(1);
+	script_module:add_record_cb(playerObject, "TaskList", "test_module.task_list_cb");
 
-	pLuaScriptModule:AddRow(OID, "TaskList", varTask);
-	pKernelModule:SetRecordInt(OID, "TaskList", 0, 1, 3);
-	pKernelModule:SetRecordString(OID, "TaskList", 0, 0, "NewStr_Task_From_Lua");
+	local varTask =  NFDataList();
+	varTask:add_string("Task_From_Lua");
+	varTask:add_int(1);
+	varTask:add_int(1);
+
+	script_module:add_row(playerObject, "TaskList", varTask);
+	--script_module:set_record_int(playerObject, "TaskList", 0, 1, 3);
+	--script_module:set_record_string(playerObject, "TaskList", 0, 0, "NewStr_Task_From_Lua");
 
 	--event callback
-	pLuaScriptModule:AddEventCallBack(OID, 1, "TestModule.EventCallBack");
+	script_module:add_event_cb(playerObject, 1, "test_module.event_cb");
 
-	local obj = NFCDataList();
-	obj:AddInt(21);
-	obj:AddFloat(22.5);
-	obj:AddString("str23");
+	local dataList = NFDataList();
+	dataList:add_int(21);
+	dataList:add_float(22.5);
+	dataList:add_string("str23");
 
 	local ident = NFGUID();
-	ident:SetHead(241);
-	ident:SetData(242);
+	ident.head = 241;
+	ident.data = 242;
 
-	obj:AddObject(ident);
+	dataList:add_object(ident);
 
-	pKernelModule:DoEvent(OID, 1, obj);
+	script_module:do_event(playerObject, 1, dataList);
 
 	--Hearback
-	pLuaScriptModule:AddHeartBeat(OID, "strHeartBeatName", "test_module.HearCallBack", 2, 55555);
-	]]
+	script_module:add_schedule(playerObject, "add_schedule", "test_module.schedule", 5, 55555);
+	script_module:add_module_schedule("add_module_schedule", "test_module.module_schedule", 10, 55555);
 end
 
 function test_module.ready_execute()
-	io.write("test_module execute!\n");
-end
-
-function test_module.execute()
-	io.write("test_module execute!\n");
+	io.write("test_module ready_execute!\n");
 end
 
 function test_module.before_shut()
@@ -82,65 +74,64 @@ function test_module.shut()
 end
 
 
-function test_module.MaxPropertyCallBack(self, propertyName, oldVar, newVar)
-	local nOldVar = oldVar:GetInt();
-	local nNewVar = newVar:GetInt();
+function test_module.max_prop_cb(self, propertyName, oldVar, newVar)
+	local oldVar = oldVar:int();
+	local newVar = newVar:int();
 
-	local obj = NFCDataList();
-	io.write("Hello Lua MaxPropertyCallBack oldVar:" .. tostring(nOldVar) .. " newVar:" .. tostring(nNewVar) .. "\n");
+	io.write("Hello Lua max_prop_cb oldVar:" .. tostring(oldVar) .. " newVar:" .. tostring(newVar) .. "\n");
 end
 
-function test_module.TaskListCallBack(self, recordName, nOpType, nRow, nCol, oldVar, newVar)
-	io.write("Hello Lua TaskListCallBack ")
-	if nCol == 0 then
-		local nOldVar = oldVar:GetString();
-		local nNewVar = newVar:GetString();
-
-		io.write(" nOpType:".. tostring(nOpType).. " oldVar:".. tostring(nOldVar) .." newVar:" .. tostring(nNewVar) .. "\n");
+function test_module.task_list_cb(self, recordName, nOpType, nRow, nCol, oldVar, newVar)
+	io.write("Hello Lua task_list_cb ")
+	if nOpType == RecordOptype.Add then
+		io.write(" nOpType:".. tostring(nOpType) .. "\n");
 	end
 
-	if nCol == 1 then
-		local nOldVar = oldVar:GetInt();
-		local nNewVar = newVar:GetInt();
+	if nOpType == RecordOptype.Update then
+		if nCol == 0 then
+			local nOldVar = oldVar:string();
+			local nNewVar = newVar:string();
+
+			io.write(" nOpType:".. tostring(nOpType).. " oldVar:".. tostring(nOldVar) .." newVar:" .. tostring(nNewVar) .. "\n");
+		end
+		if nCol == 1 then
+		local nOldVar = oldVar:int();
+		local nNewVar = newVar:int();
 
 		io.write(" nOpType:".. tostring(nOpType).. " oldVar:".. tostring(nOldVar) .." newVar:" .. tostring(nNewVar) .. "\n");
+		end
 	end
 
 end
 
-function test_module.EventCallBack(self, nEventID, arg)
-	local nValue = arg:Int(0);
-	local fValue = arg:Float(1);
-	local strValue = arg:String(2);
+function test_module.event_cb(self, nEventID, arg)
+	local nValue = arg:int(0);
+	local fValue = arg:float(1);
+	local strValue = arg:string(2);
 
-
-	local ident = arg:Object(3);
-	local head = ident:GetHead();
-	local data = ident:GetData();
+	local ident = arg:object(3);
+	local head = ident.head;
+	local data = ident.data;
 
 	io.write("Hello Lua EventCallBack nEventID:".. nEventID .. "\n");
-	io.write("\r\targ:nValue:".. tostring(nValue) .. " fValue:"..tostring(fValue).. " strValue:"..tostring(strValue).." head:"..tostring(head).." data:"..tostring(data).."\n");
+	io.write("\r\targ:nValue:".. tostring(nValue) .. " fValue:"..tostring(fValue).. " strValue:"..tostring(strValue).." ident:".. ident:tostring() .. "\n");
 end
 
-function test_module.HearCallBack(self, strHeartBeat, fTime, nCount)
-	local obj = NFCDataList();
+function test_module.schedule(self, strHeartBeat, fTime, nCount)
+	local obj = NFDataList();
 	--local s = os.clock()
-	local s = pPluginManager:GetNowTime();
+	local s = script_module:time();
 	if oldTime == nil then
 		oldTime = s
 	end
-	io.write("Hello Lua HearCallBack :".. strHeartBeat .. " Time:" .. (s-oldTime) .. "\n");
+	io.write("Hello Lua HeartCallBack:".. strHeartBeat .. " Time:" .. (s-oldTime) .. "\n");
 	oldTime = s;
 end
 
-function test_module.OnClassCommonEvent(self, strClassName, eventID, varData)
-	io.write("onClassCommonEvent, ClassName: " .. tostring(strClassName) .. " EventID: " .. tostring(eventID) .. "\n");
+function test_module.module_schedule(strHeartBeat, fTime, nCount)
+	io.write("Hello Lua Module HeartCallBack:".. strHeartBeat .. " Time:" .. fTime .. "\n");
 end
 
-function test_module.OnRecordCommonEvent(self, recordName, nOpType, nRow, nCol, oldVar, newVar)
-	io.write("OnRecordCommonEvent, self: " .. tostring(self) .. " nOpType: " .. tostring(nOpType) .. " oldVar: " .. tostring(oldVar) .. " newVar: " .. tostring(newVar) .. "\n");
-end
-
-function test_module.OnPropertyCommEvent(self, strPropertyName, oldVar, newVar)
-	io.write("OnPropertyCommEvent, self: " .. tostring(self) .. " strPropertyName: " .. tostring(strPropertyName) .. " oldVar: " .. tostring(oldVar) .. " newVar: " .. tostring(newVar) .. "\n");
+function test_module.class_common_event(self, strClassName, eventID, varData)
+	io.write("class_common_event, ClassName: " .. tostring(strClassName) .. " EventID: " .. tostring(eventID) .. "\n");
 end

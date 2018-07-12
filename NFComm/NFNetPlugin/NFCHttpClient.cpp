@@ -1,10 +1,30 @@
-////////////////////////////////////////////
-//  Filename NFCHttpClient.cpp
-//  Copyright (C) 2017  Stonexin
-//  CreateTime 2017/07/05
-//
-////////////////////////////////////////////
+/*
+            This file is part of: 
+                NoahFrame
+            https://github.com/ketoo/NoahGameFrame
+
+   Copyright 2009 - 2018 NoahFrame(NoahGameFrame)
+
+   File creator: Stonexin
+   
+   NoahFrame is open-source software and you can redistribute it and/or modify
+   it under the terms of the License; besides, anyone who use this file/software must include this copyright announcement.
+
+   Licensed under the Apache License, Version 2.0 (the "License");
+   you may not use this file except in compliance with the License.
+   You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   See the License for the specific language governing permissions and
+   limitations under the License.
+*/
+
 #include "NFCHttpClient.h"
+#include "NFComm/NFLogPlugin/easylogging++.h"
 
 #if _MSC_VER
 #define snprintf _snprintf
@@ -49,8 +69,9 @@ bool NFCHttpClient::Init()
 #endif
 
     m_pSslCtx = SSL_CTX_new(SSLv23_client_method());
-    if (!m_pSslCtx) {
-        printf("SSL_CTX_new err.");
+    if (!m_pSslCtx)
+    {
+		LOG(ERROR) << "SSL_CTX_new err. " << __FUNCTION__ << " " << __LINE__;
         return false;
     }
 
@@ -59,7 +80,7 @@ bool NFCHttpClient::Init()
     m_pBase = event_base_new();
     if (m_pBase == nullptr)
     {
-        printf("event_base_new err.");
+		LOG(ERROR) << "event_base_new err " << __FUNCTION__ << " " << __LINE__;
         return false;
     }
     return true;
@@ -105,43 +126,48 @@ bool NFCHttpClient::MakeRequest(const std::string& strUri,
                                 const NFHttpType eHttpType,
 								const NFGUID id)
 {
-    struct evhttp_uri* http_uri = NULL;
-    const char* scheme, * host, * path, * query;
-
-    http_uri = evhttp_uri_parse(strUri.c_str());
+    struct evhttp_uri* http_uri = evhttp_uri_parse(strUri.c_str());
     if (http_uri == NULL)
     {
+		LOG(ERROR) << "evhttp_uri_parse err. " << __FUNCTION__ << " " << __LINE__;
         return false;
     }
 
-    bool isHttps = false;
+    const char*  scheme = evhttp_uri_get_scheme(http_uri);
+    if (scheme == NULL)
+    {
+		LOG(ERROR) << "scheme == NULL err. " << __FUNCTION__ << " " << __LINE__;
+        return false;
+    }
 
-    scheme = evhttp_uri_get_scheme(http_uri);
     std::string lowwerScheme(scheme);
     std::transform(lowwerScheme.begin(), lowwerScheme.end(), lowwerScheme.begin(), (int (*)(int)) std::tolower);
-    if (scheme == NULL || (lowwerScheme.compare("https") != 0 && lowwerScheme.compare("http") != 0))
+    if (lowwerScheme.compare("https") != 0 && lowwerScheme.compare("http") != 0)
     {
         if (http_uri)
         {
             evhttp_uri_free(http_uri);
         }
 
+		LOG(ERROR) << "scheme == NULL err. " << __FUNCTION__ << " " << __LINE__;
         return false;
     }
 
+    bool isHttps = false;
     if (lowwerScheme.compare("https") == 0)
     {
         isHttps = true;
     }
 
-    host = evhttp_uri_get_host(http_uri);
+    const char* host = evhttp_uri_get_host(http_uri);
     if (host == NULL)
     {
-        printf("url must have a host \n");
         if (http_uri)
         {
             evhttp_uri_free(http_uri);
         }
+
+		LOG(ERROR) << "url must have a host err. " << __FUNCTION__ << " " << __LINE__;
         return false;
     }
 
@@ -151,7 +177,13 @@ bool NFCHttpClient::MakeRequest(const std::string& strUri,
         port = isHttps ? 443 : 80;
     }
 
-    path = evhttp_uri_get_path(http_uri);
+    const char* path = evhttp_uri_get_path(http_uri);
+    if(path == NULL)
+    {
+		LOG(ERROR) << "path == NUL err. " << __FUNCTION__ << " " << __LINE__;
+        return false;
+    }
+
     if (strlen(path) == 0)
     {
         path = "/";
@@ -159,7 +191,7 @@ bool NFCHttpClient::MakeRequest(const std::string& strUri,
 
     char uri[512] = {0};
 
-    query = evhttp_uri_get_query(http_uri);
+    const char* query = evhttp_uri_get_query(http_uri);
     if (query == NULL)
     {
         snprintf(uri, sizeof(uri) - 1, "%s", path);
@@ -168,8 +200,8 @@ bool NFCHttpClient::MakeRequest(const std::string& strUri,
     {
         snprintf(uri, sizeof(uri) - 1, "%s?%s", path, query);
     }
-    uri[sizeof(uri) - 1] = '\0';
 
+    uri[sizeof(uri) - 1] = '\0';
     //-------we do not verify peer--------//
     //like the curl SSL_VERIFYPEER is set false
 
@@ -187,12 +219,12 @@ bool NFCHttpClient::MakeRequest(const std::string& strUri,
     SSL *pSSL = SSL_new(m_pSslCtx);
     if (pSSL == NULL)
     {
-        printf("SSL_new err.");
         if (http_uri)
         {
             evhttp_uri_free(http_uri);
         }
 
+		LOG(ERROR) << "SSL_new err. " << __FUNCTION__ << " " << __LINE__;
         return false;
     }
 #endif
@@ -212,13 +244,12 @@ bool NFCHttpClient::MakeRequest(const std::string& strUri,
 
     if (bev == NULL)
     {
-        fprintf(stderr, "bufferevent_socket_new() failed\n");
-
         if (http_uri)
         {
             evhttp_uri_free(http_uri);
         }
 
+		LOG(ERROR) << " bev == NUL err. " << __FUNCTION__ << " " << __LINE__;
         return false;
     }
 
@@ -232,13 +263,12 @@ bool NFCHttpClient::MakeRequest(const std::string& strUri,
     struct evhttp_connection* evcon = evhttp_connection_base_bufferevent_new(m_pBase, NULL, bev, host, port);
     if (evcon == NULL)
     {
-        fprintf(stderr, "evhttp_connection_base_bufferevent_new() failed\n");
-
         if (http_uri)
         {
             evhttp_uri_free(http_uri);
         }
 
+		LOG(ERROR) << " evcon == NUL err. " << __FUNCTION__ << " " << __LINE__;
         return false;
     }
 
@@ -255,27 +285,43 @@ bool NFCHttpClient::MakeRequest(const std::string& strUri,
     if (mlHttpObject.size() > 0)
     {
         pHttpObj = mlHttpObject.front();
+
+        pHttpObj->m_pHttpClient = this;
+        pHttpObj->m_pBev = bev;
+        pHttpObj->m_pCB = pCB;
+		pHttpObj->mID = id;
     }
     else
     {
         pHttpObj = new HttpObject(this, bev, pCB, id);
     }
 
+    if (pHttpObj == nullptr)
+    {
+		LOG(ERROR) << "pHttpObj == nullptr err. " << __FUNCTION__ << " " << __LINE__;
+        return false;
+    }
+
     // Fire off the request
     struct evhttp_request* req = evhttp_request_new(OnHttpReqDone, pHttpObj);
     if (req == NULL)
     {
-        fprintf(stderr, "evhttp_request_new() failed\n");
-
         if (http_uri)
         {
             evhttp_uri_free(http_uri);
         }
 
+		LOG(ERROR) << "req == NULL err. " << __FUNCTION__ << " " << __LINE__;
         return false;
     }
 
     struct evkeyvalq* output_headers = evhttp_request_get_output_headers(req);
+    if(output_headers == NULL)
+    {
+		LOG(ERROR) << "output_headers == NULL err. " << __FUNCTION__ << " " << __LINE__;
+        return false;
+    }
+
     evhttp_add_header(output_headers, "Host", host);
     evhttp_add_header(output_headers, "Connection", "close");
     //evhttp_add_header(output_headers, "Connection", "keep-alive");
@@ -291,6 +337,12 @@ bool NFCHttpClient::MakeRequest(const std::string& strUri,
     if (nLen > 0)
     {
         struct evbuffer* output_buffer = evhttp_request_get_output_buffer(req);
+        if (output_buffer == NULL)
+        {
+			LOG(ERROR) << "output_buffer == NUL err. " << __FUNCTION__ << " " << __LINE__;
+            return false;
+        }
+
         evbuffer_add(output_buffer, strPostData.c_str(), nLen);
         char buf[256] = {0};
         evutil_snprintf(buf, sizeof(buf) - 1, "%lu", (unsigned long) nLen);
@@ -300,14 +352,15 @@ bool NFCHttpClient::MakeRequest(const std::string& strUri,
     int r_ = evhttp_make_request(evcon, req, (evhttp_cmd_type)eHttpType, uri);
     if (r_ != 0)
     {
-        fprintf(stderr, "evhttp_make_request() failed\n");
 
         if (http_uri)
         {
             evhttp_uri_free(http_uri);
         }
 
-        return false;
+		LOG(ERROR) << " evhttp_make_request() failed" << " " << __FUNCTION__ << " " << __LINE__;
+        
+		return false;
     }
 
     if (http_uri)
@@ -333,6 +386,11 @@ bool NFCHttpClient::DoPost(const std::string& strUri, const std::string& strPost
 void NFCHttpClient::OnHttpReqDone(struct evhttp_request* req, void* ctx)
 {
     HttpObject* pHttpObj = (HttpObject*) (ctx);
+    if (pHttpObj ==NULL)
+    {
+		LOG(ERROR) << "pHttpObj ==NULL" << " " << __FUNCTION__ << " " << __LINE__;
+        return;
+    }
 
     if (req == NULL)
     {
@@ -371,10 +429,10 @@ void NFCHttpClient::OnHttpReqDone(struct evhttp_request* req, void* ctx)
             strErrMsg += std::string(tmpBuf);
         }
 
+        NFCHttpClient* pHttpClient = (NFCHttpClient*)(pHttpObj->m_pHttpClient);
+        pHttpClient->mlHttpObject.push_back(pHttpObj);
         
-        throw std::runtime_error(strErrMsg);
-
-        mlHttpObject.push_back(pHttpObj);
+		LOG(ERROR) << strErrMsg << __FUNCTION__ << " " << __LINE__;
         return;
     }
 
@@ -411,14 +469,23 @@ void NFCHttpClient::OnHttpReqDone(struct evhttp_request* req, void* ctx)
         }
     }
 
+    
     if (pHttpObj->m_pCB)
     {
         if (pHttpObj->m_pCB.get())
         {
-            HTTP_RESP_FUNCTOR fun(*pHttpObj->m_pCB.get());
-            fun(pHttpObj->mID, nRespCode, strResp);
+            try
+            {
+                HTTP_RESP_FUNCTOR fun(*pHttpObj->m_pCB.get());
+                fun(pHttpObj->mID, nRespCode, strResp);
+            }
+            catch(...)
+            {
+                //i dont know why cant throw a exception(I u throw a exception than u will got a error when u request a new access request)
+            }
         }
     }
 
-    mlHttpObject.push_back(pHttpObj);
+    NFCHttpClient* pHttpClient = (NFCHttpClient*)(pHttpObj->m_pHttpClient);
+    pHttpClient->mlHttpObject.push_back(pHttpObj);
 }
