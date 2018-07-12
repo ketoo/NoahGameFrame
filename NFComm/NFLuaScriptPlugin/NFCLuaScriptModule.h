@@ -131,11 +131,13 @@ protected:
 
     void AddReceiveCallBack(const int nMsgID, const std::string& luaFunc);
 
+	void SendByServerFD(const NFSOCK nFD, const uint16_t nMsgID, const std::string& strData);
 	void SendByServerID(const int nServerID, const uint16_t nMsgID, const std::string& strData);
     void SendByServerType(const NF_SERVER_TYPES eType, const uint16_t nMsgID, const std::string& strData);
 
     //for net module
-    void SendToPlayer(const NFGUID player, const uint16_t nMsgID, const std::string& strData);
+    void SendMsgToGate(const NFGUID player, const uint16_t nMsgID, const std::string& strData);
+    void SendGroupMsgToGate(const uint16_t nMsgID, const std::string& strData);
     void SendToAllPlayer(const uint16_t nMsgID, const std::string& strData);
 
 	//for log
