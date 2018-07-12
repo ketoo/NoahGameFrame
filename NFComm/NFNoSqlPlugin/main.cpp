@@ -36,7 +36,7 @@ using namespace std;
 #pragma comment( lib, "hiredis_d.lib") 
 #else
 #pragma comment( lib, "hiredis.lib") 
-#endif
+#endif	
 
 #define _IP_ "127.0.0.1"
 #define _PORT_ 6379
