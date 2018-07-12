@@ -122,10 +122,9 @@
     <ClInclude Include="NFList.hpp" />
     <ClInclude Include="NFVector2.hpp" />
     <ClInclude Include="NFVector3.hpp" />
-    <ClInclude Include="NFException.h" />
+    <ClInclude Include="NFException.hpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="NFException.cpp" />
     <ClCompile Include="NFCObject.cpp" />
     <ClCompile Include="NFCProperty.cpp" />
     <ClCompile Include="NFCPropertyManager.cpp" />

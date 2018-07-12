@@ -95,8 +95,8 @@
     <ClInclude Include="NFConsistentHash.hpp">
       <Filter>Unit</Filter>
     </ClInclude>
-    <ClInclude Include="NFException.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="NFException.hpp">
+      <Filter>Unit</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -113,9 +113,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="NFCObject.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="NFException.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
