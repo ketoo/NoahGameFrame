@@ -29,21 +29,6 @@
 
 int exception_index = 0;
 
-NFException::NFException(const char *format, ...)
-{
-	exception_index++;
-
-	char buf[1024] = { 0 };
-	va_list args;
-	va_start(args, format);
-	vsprintf(buf, format, args);
-	va_end(args);
-
-	_msg.append(" NFException" + std::to_string(exception_index) + " ");
-	_msg.append(buf);
-
-}
-
 NFException::NFException(const std::string & msg)
 {
 	exception_index++;

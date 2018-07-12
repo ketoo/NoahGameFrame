@@ -41,7 +41,6 @@ private:
 
     std::string _msg;
 public:
-	NFException(const char *format, ...);
 
 	NFException(const std::string& msg);
 
