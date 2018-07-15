@@ -4,6 +4,7 @@
     // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
     "version": "0.2.0",
     "configurations": [
+
         {
             "name": "GameServer",
             "type": "cppdbg",
@@ -80,6 +81,34 @@
             "request": "launch",
             //"request": "attach",
             "program": "${workspaceFolder}/_Out/Debug/NFPluginLoader_d",
+            "args": ["Server=GameServer", "ID=3"],
+            "stopAtEntry": false,
+            "cwd": "${workspaceFolder}/_Out/Debug/",
+            "environment": [],
+            "externalConsole": true,
+            //for mac lldb
+            "MIMode": "lldb"
+        },
+        {
+            "name": "NetServer",
+            "type": "cppdbg",
+            "request": "launch",
+            //"request": "attach",
+            "program": "${workspaceFolder}/_Out/Debug/NFNetSvr",
+            "args": ["Server=GameServer", "ID=3"],
+            "stopAtEntry": false,
+            "cwd": "${workspaceFolder}/_Out/Debug/",
+            "environment": [],
+            "externalConsole": true,
+            //for mac lldb
+            "MIMode": "lldb"
+        },
+        {
+            "name": "NetClient",
+            "type": "cppdbg",
+            "request": "launch",
+            //"request": "attach",
+            "program": "${workspaceFolder}/_Out/Debug/NFNetCli",
             "args": ["Server=GameServer", "ID=3"],
             "stopAtEntry": false,
             "cwd": "${workspaceFolder}/_Out/Debug/",
