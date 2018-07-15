@@ -53,7 +53,7 @@ const int NFSecurityPlugin::GetPluginVersion()
 
 const std::string NFSecurityPlugin::GetPluginName()
 {
-	return GET_CLASS_NAME(NFCSecurityPlugin);
+	return GET_CLASS_NAME(NFSecurityPlugin);
 }
 
 void NFSecurityPlugin::Install()
