@@ -127,6 +127,7 @@ private:
     static void conn_writecb(struct bufferevent* bev, void* user_data);
     static void conn_eventcb(struct bufferevent* bev, short events, void* user_data);
     static void log_cb(int severity, const char* msg);
+    static void event_fatal_cb(int err);
 
 protected:
     int DeCode(const char* strData, const uint32_t unLen, NFCMsgHead& xHead);

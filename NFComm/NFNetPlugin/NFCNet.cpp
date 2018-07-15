@@ -23,9 +23,10 @@
    limitations under the License.
 */
 
-#include "NFCNet.h"
 #include <string.h>
+#include <atomic>
 
+#include "NFCNet.h"
 #if NF_PLATFORM == NF_PLATFORM_WIN
 #include <WS2tcpip.h>
 #include <winsock2.h>
@@ -38,9 +39,9 @@
 #include <arpa/inet.h>
 #endif
 
-#include "event2/bufferevent_struct.h"
 #include "event2/event.h"
-#include <atomic>
+#include "event2/bufferevent_struct.h"
+#include "NFComm/NFLogPlugin/easylogging++.h"
 
 /*
 if any one upgrade the networking library(libEvent), please change the size of evbuffer as below:
@@ -53,6 +54,11 @@ TO
 //1048576 = 1024 * 1024
 #define NF_BUFFER_MAX_READ	1048576
 
+void NFCNet::event_fatal_cb(int err)
+{
+    LOG(FATAL) << "event_fatal_cb " << err;
+
+}
 void NFCNet::conn_writecb(struct bufferevent* bev, void* user_data)
 {
     
@@ -135,9 +141,9 @@ void NFCNet::listener_cb(struct evconnlistener* listener, evutil_socket_t fd, st
     
     bufferevent_setcb(bev, conn_readcb, conn_writecb, conn_eventcb, (void*)pObject);
 
+    bufferevent_enable(bev, EV_READ | EV_WRITE | EV_CLOSED | EV_TIMEOUT | EV_PERSIST);
     
-    bufferevent_enable(bev, EV_READ | EV_WRITE | EV_CLOSED | EV_TIMEOUT);
-
+    event_set_fatal_callback(event_fatal_cb);
     
     conn_eventcb(bev, BEV_EVENT_CONNECTED, (void*)pObject);
 }
@@ -427,7 +433,7 @@ int NFCNet::InitClientNet()
     mbServer = false;
 
     bufferevent_setcb(bev, conn_readcb, conn_writecb, conn_eventcb, (void*)pObject);
-    bufferevent_enable(bev, EV_READ | EV_WRITE);
+    bufferevent_enable(bev, EV_READ | EV_WRITE | EV_CLOSED | EV_TIMEOUT | EV_PERSIST);
 
     event_set_log_callback(&NFCNet::log_cb);
 
@@ -576,7 +582,7 @@ void NFCNet::ExecuteClose()
 
 void NFCNet::log_cb(int severity, const char* msg)
 {
-
+    LOG(FATAL) << "severity:" << severity << " " << msg; 
 }
 
 bool NFCNet::IsServer()
