@@ -48,6 +48,9 @@
         "queue": "cpp",
         "stack": "cpp",
         "ios": "cpp",
-        "__tuple": "cpp"
+        "__tuple": "cpp",
+        "future": "cpp",
+        "istream": "cpp",
+        "thread": "cpp"
     }
 }

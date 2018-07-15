@@ -23,12 +23,17 @@
    limitations under the License.
 */
 
-#include "NFCNet.h"
+#include "NFComm/NFNetPlugin/NFCNet.h"
 #include <thread>
 #include <string>
-#include <processthreadsapi.h>
 #include "NFComm/NFLogPlugin/easylogging++.h"
-
+#if NF_PLATFORM != NF_PLATFORM_WIN
+#include <unistd.h>
+#include <netdb.h>
+#include <arpa/inet.h>
+#include <signal.h>
+#include <execinfo.h>
+#endif
 #pragma comment(lib,"ws2_32.lib")
 #pragma comment(lib,"NFNet_d.lib")
 
@@ -42,6 +47,10 @@ public:
         pNet = new NFCNet(this, &TestServerClass::ReciveHandler, &TestServerClass::EventHandler);
         pNet->Initialization(1000, 8088);
     }
+    virtual ~TestServerClass()
+    {
+        
+    }
 
     void ReciveHandler(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
     {
@@ -49,7 +58,7 @@ public:
         str.assign(msg, nLen);
 
         pNet->SendMsgWithOutHead(nMsgID, msg, nLen, nSockIndex);
-        std::cout << " fd: " << nSockIndex << " msg_id: " << nMsgID /*<<  " data: " << str*/ << " thread_id: " << GetCurrentThreadId() << std::endl;
+        std::cout << " fd: " << nSockIndex << " msg_id: " << nMsgID /*<<  " data: " << str*/ << std::endl;
     }
 
     void EventHandler(const NFSOCK nSockIndex, const NF_NET_EVENT e, NFINet* p)
