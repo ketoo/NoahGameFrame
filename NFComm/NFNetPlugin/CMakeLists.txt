@@ -4,8 +4,8 @@ file(GLOB NFNet_ROOT_Cpp *.cpp)
 file(GLOB NFNet_ROOT_Hpp *.h)
 
 #Exclude this file
-file(GLOB RemoveItems_Cpp TestClient.cpp TestServer.cpp)
-list(REMOVE_ITEM NFNet_ROOT_Cpp ${RemoveItems_Cpp})
+#file(GLOB RemoveItems_Cpp TestClient.cpp TestServer.cpp)
+#list(REMOVE_ITEM NFNet_ROOT_Cpp ${RemoveItems_Cpp})
 
 add_library(NFNetPlugin STATIC ${NFNet_ROOT_Cpp} ${NFNet_ROOT_Hpp})
 add_definitions(-DNF_NONCLIENT_BUILD)

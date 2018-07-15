@@ -23,11 +23,17 @@
    limitations under the License.
 */
 
-#include "NFCNet.h"
+#include "NFComm/NFNetPlugin/NFCNet.h"
 #include <thread>
 #include <string>
 #include "NFComm/NFLogPlugin/easylogging++.h"
-
+#if NF_PLATFORM != NF_PLATFORM_WIN
+#include <unistd.h>
+#include <netdb.h>
+#include <arpa/inet.h>
+#include <signal.h>
+#include <execinfo.h>
+#endif
 #pragma comment(lib,"ws2_32.lib")
 #pragma comment(lib,"NFNet_d.lib")
 
@@ -43,6 +49,11 @@ public:
 		bConnected = false;
     }
 
+    virtual ~TestClientClass()
+    {
+
+    }
+
     void ReciveHandler(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
     {
         std::string str;
@@ -54,7 +65,7 @@ public:
     void EventHandler(const NFSOCK nSockIndex, const NF_NET_EVENT e, NFINet* p)
     {
         std::cout << " fd: " << nSockIndex << " event_id: " << e << " thread_id: " << std::this_thread::get_id() << std::endl;
-		if(events & BEV_EVENT_CONNECTED)
+		if(e & BEV_EVENT_CONNECTED)
 		{
 			bConnected = true;
 		}
@@ -165,23 +176,35 @@ int main(int argc, char** argv)
 
     std::list<TestClientClass*> list;
 
-    for (int i = 0; i < 1000; ++i)
+    for (int i = 0; i < 10; ++i)
     {
         TestClientClass* x = new TestClientClass();;
         list.push_back(x);
     }
 
-    while (1)
+    try
     {
-        std::list<TestClientClass*>::iterator it = list.begin();
-        for (it; it != list.end(); ++it)
-        {
-            Sleep(1);
 
-            (*it)->Execute();
+        while (1)
+        {
+            sleep(1);
+            
+            std::list<TestClientClass*>::iterator it = list.begin();
+            for (it; it != list.end(); ++it)
+            {
+
+                (*it)->Execute();
+            }
         }
     }
-
+    catch(std::exception& e)
+    {
+	    LOG(FATAL) << e.what();
+    }
+    catch(...)
+    {
+	    LOG(FATAL) << "unknow exception";
+    }
 
 
     return 0;
