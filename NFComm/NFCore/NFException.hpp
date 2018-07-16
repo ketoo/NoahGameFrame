@@ -10,9 +10,7 @@
 #define NF_EXCEPTION_HPP
 
 #include <string>
-#include <cstring>
-#include <stdio.h>
-#include <stdarg.h>
+#include <cstdarg>
 
 class NFException
 {
@@ -23,7 +21,7 @@ public:
 		va_list args;
 		va_start(args, format);
 		vsprintf(buf, format, args);
-		message = std::string(buf);
+		message = buf;
 		va_end(args);
 	}
 	std::string GetMessage() { return message; }
