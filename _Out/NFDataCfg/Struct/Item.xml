@@ -13,10 +13,10 @@
 		<Property Id="HeroType" Cache="0" Desc="归属英雄类型，力敏智" Force="0" Private="0" Public="0" Ref="0" Save="0" Type="int" Upload="0" />
 		<Property Id="Icon" Cache="0" Desc="物品显示Icon" Force="0" Private="0" Public="0" Ref="0" Save="0" Type="string" Upload="0" />
 		<Property Id="ItemSubType" Cache="0" Desc="物品子类别 EGameEquipSubType EGameGemSubType EGameItemSubType EGameCardSubType EGameTokenSubType" Force="0" Private="0" Public="0" Ref="0" Save="0" Type="int" Upload="0" />
-		<Property Id="ItemType" Cache="0" Desc="物品类别EItemType       EIT_EQUIP      = 0; 
- EIT_GEM       = 1;
- EIT_ITEM       = 2;
- EIT_CARD       = 3;
+		<Property Id="ItemType" Cache="0" Desc="物品类别EItemType       EIT_EQUIP      = 0; 
+ EIT_GEM       = 1;
+ EIT_ITEM       = 2;
+ EIT_CARD       = 3;
  EIT_TOKEN       = 4; //" Force="0" Private="0" Public="0" Ref="0" Save="0" Type="int" Upload="0" />
 		<Property Id="Job" Cache="0" Desc="职业限制,用分号隔开" Force="0" Private="0" Public="0" Ref="0" Save="0" Type="string" Upload="0" />
 		<Property Id="Level" Cache="0" Desc="等级限制" Force="0" Private="0" Public="0" Ref="0" Save="0" Type="int" Upload="0" />
