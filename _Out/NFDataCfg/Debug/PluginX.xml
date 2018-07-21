@@ -86,13 +86,4 @@
 		<Plugin Name="NFNoSqlPlugin" />
 		<Plugin Name="NFSecurityPlugin" />
 	</DBServer>
-	<TutorialServer>
-		<Plugin Name="NFKernelPlugin" />
-		<Plugin Name="NFConfigPlugin" />
-		<Plugin Name="NFNetPlugin" />
-		<Plugin Name="NFLuaScriptPlugin" />
-		<Plugin Name="NFActorPlugin" />
-		<Plugin Name="NFLogPlugin" />
-		<Plugin Name="Tutorial7" />
-	</TutorialServer>
 </XML>
