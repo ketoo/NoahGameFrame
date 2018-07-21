@@ -74,10 +74,21 @@ bool NFCActorModule::Execute()
 
 int NFCActorModule::RequireActor()
 {
-    NF_SHARE_PTR<NFIActor> pActor(NF_NEW NFCActor(mFramework, this));
-	mxActorMap.AddElement(pActor->GetAddress().AsInteger(), pActor);
+	NF_SHARE_PTR<NFIActor> pActor = nullptr;
+	if (mxActorPool.Empty())
+	{
+		pActor = NF_SHARE_PTR<NFIActor>(NF_NEW NFCActor(mFramework, this));
+		mxActorMap.AddElement(pActor->GetAddress().AsInteger(), pActor);
 
-    return pActor->GetAddress().AsInteger();
+		return pActor->GetAddress().AsInteger();
+	}
+
+	if (mxActorPool.Pop(pActor) && pActor)
+	{
+		return pActor->GetAddress().AsInteger();
+	}
+
+    return -1;
 }
 
 NF_SHARE_PTR<NFIActor> NFCActorModule::GetActor(const int nActorIndex)
@@ -99,19 +110,26 @@ bool NFCActorModule::ExecuteEvent()
 {
 	NFIActorMessage xMsg;
 	bool bRet = false;
-	bRet = mxQueue.Pop(xMsg);
+	bRet = mxQueue.TryPop(xMsg);
 	while (bRet)
 	{
 		if (xMsg.msgType != NFIActorMessage::ACTOR_MSG_TYPE_COMPONENT && xMsg.xEndFuncptr != nullptr)
 		{
+			//Actor can be reused in ActorPool mode, so we don't release it.
+			//>ReleaseActor(xMsg.nFormActor);
 			ACTOR_PROCESS_FUNCTOR* pFun = xMsg.xEndFuncptr.get();
 			pFun->operator()(xMsg.nFormActor, xMsg.nMsgID, xMsg.data);
 
-			//Actor can be reused in ActorPool mode, so we don't release it.
-			//m_pActorManager->ReleaseActor(xMsg.nFormActor);
+
+			NF_SHARE_PTR<NFIActor> xActor = mxActorMap.GetElement(xMsg.nFormActor);
+			if (xActor)
+			{
+				mxActorMap.RemoveElement(xMsg.nFormActor);
+				mxActorPool.Push(xActor);
+			}
 		}
 
-		bRet = mxQueue.Pop(xMsg);
+		bRet = mxQueue.TryPop(xMsg);
 	}
 
 	return true;

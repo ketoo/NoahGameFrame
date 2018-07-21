@@ -117,11 +117,6 @@ public:
         return mstrName;
     };
 
-    //for actor
-    virtual int OnASyncEvent(const int from, const int event, std::string& arg)
-    {
-        return 0;
-    }
 
 	template<typename BaseType>
 	bool AddMsgObserver(const int nSubMessage, BaseType* pBase, int (BaseType::*handler)(const int, const int, std::string&))
@@ -129,7 +124,7 @@ public:
 		ACTOR_PROCESS_FUNCTOR functor = std::bind(handler, pBase, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3);
 		ACTOR_PROCESS_FUNCTOR_PTR functorPtr(new ACTOR_PROCESS_FUNCTOR(functor));
 
-		return mSelf->AddBeginunc(nSubMessage, functorPtr);
+		return mSelf->AddBeginFunc(nSubMessage, functorPtr);
 	}
 
 	template <typename T>
