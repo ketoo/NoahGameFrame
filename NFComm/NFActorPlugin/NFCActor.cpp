@@ -43,6 +43,9 @@ void NFCActor::HandlerEx(const NFIActorMessage& message, const Theron::Address f
 
 void NFCActor::AddComponent(NF_SHARE_PTR<NFIComponent> pComponent)
 {
+	//if you want to add more components for the actor, please don't clear the component
+	mxComponent.ClearAll();
+
 	mxComponent.AddElement(pComponent->GetComponentName(), pComponent);
 	pComponent->SetActor(this);
 
@@ -57,7 +60,7 @@ NF_SHARE_PTR<NFIComponent> NFCActor::FindComponent(const std::string & strCompon
 	return mxComponent.GetElement(strComponentName);
 }
 
-bool NFCActor::AddBeginunc(const int nSubMsgID, ACTOR_PROCESS_FUNCTOR_PTR xBeginFunctor)
+bool NFCActor::AddBeginFunc(const int nSubMsgID, ACTOR_PROCESS_FUNCTOR_PTR xBeginFunctor)
 {
 	if (mxProcessFuntor.GetElement(nSubMsgID))
 	{
@@ -97,16 +100,6 @@ void NFCActor::Handler(const NFIActorMessage& message, const Theron::Address fro
 		
 		ACTOR_PROCESS_FUNCTOR* pFun = ptrBegin.get();
 		pFun->operator()(message.nFormActor, message.nMsgID, strData);
-	}
-	else
-	{
-		for (NF_SHARE_PTR<NFIComponent> pComponent = mxComponent.First(); pComponent != nullptr; pComponent = mxComponent.Next())
-		{
-			if (pComponent->Enable())
-			{
-				pComponent->OnASyncEvent(message.nFormActor, message.nMsgID, strData);
-			}
-		}
 	}
  
     ////////////////////////////////////////////////////////
