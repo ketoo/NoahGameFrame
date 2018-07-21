@@ -75,6 +75,7 @@ private:
 
     Theron::Framework mFramework;
     NFMapEx<int, NFIActor> mxActorMap;
+	NFQueue<NF_SHARE_PTR<NFIActor>> mxActorPool;
 
 	NFQueue<NFIActorMessage> mxQueue;
 };

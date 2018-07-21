@@ -65,13 +65,6 @@ public:
 
 		return 0;
 	}
-
-	virtual int OnASyncEvent(const NFGUID& self, const int from, const int event, std::string& arg)
-	{
-		std::cout << "------Actor thread: " << std::this_thread::get_id() << " " << self.ToString() << " MsgID: " << event << " Data:" << arg << std::endl;
-
-		return 0;
-	}
 };
 
 class NFIHelloWorld4Module

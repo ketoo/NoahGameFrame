@@ -92,7 +92,7 @@ public:
 			//use CreateNewInstance to replace this line to create a new component script
 			NF_SHARE_PTR<TypeComponent> pComponent = NF_SHARE_PTR<TypeComponent>(NF_NEW TypeComponent());
 
-			GET_CLASS_NAME(TypeComponent);
+			//GET_CLASS_NAME(TypeComponent);
 
 			return AddComponent(nActorIndex, pComponent);
 		}

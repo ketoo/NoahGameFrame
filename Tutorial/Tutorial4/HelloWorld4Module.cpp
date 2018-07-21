@@ -38,6 +38,7 @@ int NFCHelloWorld4Module::RequestAsyEnd(const int nFormActor, const int nSubMsgI
 {
 	std::cout << "Main thread: " << std::this_thread::get_id() << " Actor: " << nFormActor << " MsgID: " << nSubMsgID << " Data:" << strData << std::endl;
 
+	int nActorID2 = m_pActorModule->RequireActor();
 	return 0;
 }
 
@@ -57,7 +58,6 @@ bool NFCHelloWorld4Module::AfterInit()
 	}
 
 	std::cout << "Hello, world4, AfterInit end" << std::endl;
-
 	return true;
 }
 
