@@ -58,7 +58,7 @@ public:
     }
 
 	template<typename TypeComponent, typename BaseType>
-	int RequireActor(BaseType* pBase, int (BaseType::*handler_end)(const NFGUID&, const int, const int, const std::string&))
+	int RequireActor(BaseType* pBase, int (BaseType::*handler_end)(const int, const int, const std::string&))
 	{
 		if (!TIsDerived<TypeComponent, NFIComponent>::Result)
 		{
@@ -102,24 +102,24 @@ public:
 
 	template<typename BaseType>
 	int AddEndFunc(const int nActorIndex, const int nSubMessageID,
-		BaseType* pBase, int (BaseType::*handler_end)(const NFGUID&, const int, const int, const std::string&))
+		BaseType* pBase, int (BaseType::*handler_end)(const int, const int, const std::string&))
 	{
-		ACTOR_PROCESS_FUNCTOR functor_end = std::bind(handler_end, pBase, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3, std::placeholders::_4);
+		ACTOR_PROCESS_FUNCTOR functor_end = std::bind(handler_end, pBase, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3);
 		ACTOR_PROCESS_FUNCTOR_PTR functorPtr_end(new ACTOR_PROCESS_FUNCTOR(functor_end));
 
 		return AddEndFunc(nActorIndex, nSubMessageID, functorPtr_end);
 	}
 	template<typename BaseType>
 	int AddDefaultEndFunc(const int nActorIndex,
-		BaseType* pBase, int (BaseType::*handler_end)(const NFGUID&, const int, const int, const std::string&))
+		BaseType* pBase, int (BaseType::*handler_end)(const int, const int, const std::string&))
 	{
-		ACTOR_PROCESS_FUNCTOR functor_end = std::bind(handler_end, pBase, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3, std::placeholders::_4);
+		ACTOR_PROCESS_FUNCTOR functor_end = std::bind(handler_end, pBase, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3);
 		ACTOR_PROCESS_FUNCTOR_PTR functorPtr_end(new ACTOR_PROCESS_FUNCTOR(functor_end));
 
 		return AddEndFunc(nActorIndex, -1, functorPtr_end);
 	}
 	virtual int RequireActor() = 0;
-    virtual bool SendMsgToActor(const int nActorIndex, const NFGUID& objectID, const int nEventID, const std::string& strArg) = 0;
+    virtual bool SendMsgToActor(const int nActorIndex, const int nEventID, const std::string& strArg) = 0;
 	virtual bool HandlerEx(const NFIActorMessage& message, const int from) = 0;
 	virtual bool ReleaseActor(const int nActorIndex) = 0;
 	virtual NF_SHARE_PTR<NFIActor> GetActor(const int nActorIndex) = 0;

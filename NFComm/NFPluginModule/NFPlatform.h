@@ -346,9 +346,11 @@ typedef int64_t NFSOCK;
 #endif
 #endif
 
-//use actor mode--begin
-#define NF_ACTOR_THREAD_COUNT 16
+//using tcmalloc
+//#define NF_USE_TCMALLOC 1
 
+//using actor mode--begin
+#define NF_ACTOR_THREAD_COUNT 16
 #ifndef NF_USE_ACTOR
 
 #define NF_USE_ACTOR

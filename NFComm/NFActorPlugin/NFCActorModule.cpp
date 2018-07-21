@@ -105,7 +105,7 @@ bool NFCActorModule::ExecuteEvent()
 		if (xMsg.msgType != NFIActorMessage::ACTOR_MSG_TYPE_COMPONENT && xMsg.xEndFuncptr != nullptr)
 		{
 			ACTOR_PROCESS_FUNCTOR* pFun = xMsg.xEndFuncptr.get();
-			pFun->operator()(xMsg.self, xMsg.nFormActor, xMsg.nMsgID, xMsg.data);
+			pFun->operator()(xMsg.nFormActor, xMsg.nMsgID, xMsg.data);
 
 			//Actor can be reused in ActorPool mode, so we don't release it.
 			//m_pActorManager->ReleaseActor(xMsg.nFormActor);
@@ -117,7 +117,7 @@ bool NFCActorModule::ExecuteEvent()
 	return true;
 }
 
-bool NFCActorModule::SendMsgToActor(const int nActorIndex, const NFGUID& objectID, const int nEventID, const std::string& strArg)
+bool NFCActorModule::SendMsgToActor(const int nActorIndex, const int nEventID, const std::string& strArg)
 {
     NF_SHARE_PTR<NFIActor> pActor = GetActor(nActorIndex);
     if (nullptr != pActor)
@@ -128,7 +128,6 @@ bool NFCActorModule::SendMsgToActor(const int nActorIndex, const NFGUID& objectI
         xMessage.data = strArg;
         xMessage.nMsgID = nEventID;
         xMessage.nFormActor = m_pMainActor->GetAddress().AsInteger();
-        xMessage.self = objectID;
 
         return mFramework.Send(xMessage, m_pMainActor->GetAddress(), pActor->GetAddress());
     }
