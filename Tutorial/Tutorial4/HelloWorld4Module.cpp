@@ -34,9 +34,9 @@ bool NFCHelloWorld4Module::Init()
 	return true;
 }
 
-int NFCHelloWorld4Module::RequestAsyEnd(const NFGUID& self, const int nFormActor, const int nSubMsgID, const std::string& strData)
+int NFCHelloWorld4Module::RequestAsyEnd(const int nFormActor, const int nSubMsgID, const std::string& strData)
 {
-	std::cout << "Main thread: " << std::this_thread::get_id() << " " << self.ToString() << " Actor: " << nFormActor << " MsgID: " << nSubMsgID << " Data:" << strData << std::endl;
+	std::cout << "Main thread: " << std::this_thread::get_id() << " Actor: " << nFormActor << " MsgID: " << nSubMsgID << " Data:" << strData << std::endl;
 
 	return 0;
 }
@@ -53,7 +53,7 @@ bool NFCHelloWorld4Module::AfterInit()
 
 	for (int i = 0; i < 10; ++i)
 	{
-		m_pActorModule->SendMsgToActor(nActorID, NFGUID(10, 20), i, "Test actor!");
+		m_pActorModule->SendMsgToActor(nActorID, i, "Test actor!");
 	}
 
 	std::cout << "Hello, world4, AfterInit end" << std::endl;

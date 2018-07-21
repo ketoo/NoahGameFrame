@@ -96,7 +96,7 @@ void NFCActor::Handler(const NFIActorMessage& message, const Theron::Address fro
 	{
 		
 		ACTOR_PROCESS_FUNCTOR* pFun = ptrBegin.get();
-		pFun->operator()(message.self, message.nFormActor, message.nMsgID, strData);
+		pFun->operator()(message.nFormActor, message.nMsgID, strData);
 	}
 	else
 	{
@@ -104,7 +104,7 @@ void NFCActor::Handler(const NFIActorMessage& message, const Theron::Address fro
 		{
 			if (pComponent->Enable())
 			{
-				pComponent->OnASyncEvent(message.self, message.nFormActor, message.nMsgID, strData);
+				pComponent->OnASyncEvent(message.nFormActor, message.nMsgID, strData);
 			}
 		}
 	}
@@ -116,7 +116,6 @@ void NFCActor::Handler(const NFIActorMessage& message, const Theron::Address fro
 	xReturnMessage.msgType = NFIActorMessage::ACTOR_MSG_TYPE_END_FUNC;
 	xReturnMessage.nMsgID = message.nMsgID;
     xReturnMessage.data = strData;
-    xReturnMessage.self = message.self;
     xReturnMessage.nFormActor = this->GetAddress().AsInteger();
 
 	ACTOR_PROCESS_FUNCTOR_PTR ptrEnd = mxEndProcessFuntor.GetElement(message.nMsgID);
