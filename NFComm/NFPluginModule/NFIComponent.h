@@ -104,8 +104,6 @@ public:
     {
         mbEnable = bEnable;
 
-		OnEnable();
-
         return mbEnable;
     }
 
@@ -114,45 +112,24 @@ public:
         return mbEnable;
     }
 
-	virtual void OnEnable()
-	{
-
-	}
-
     virtual const std::string& GetComponentName() const
     {
         return mstrName;
     };
 
     //for actor
-    virtual int OnASyncEvent(const NFGUID& self, const int from, const int event, std::string& arg)
+    virtual int OnASyncEvent(const int from, const int event, std::string& arg)
     {
         return 0;
     }
 
 	template<typename BaseType>
-	bool AddMsgObserver(const int nSubMessage, BaseType* pBase, int (BaseType::*handler)(const NFGUID&, const int, const int, std::string&))
+	bool AddMsgObserver(const int nSubMessage, BaseType* pBase, int (BaseType::*handler)(const int, const int, std::string&))
 	{
-		ACTOR_PROCESS_FUNCTOR functor = std::bind(handler, pBase, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3, std::placeholders::_4);
+		ACTOR_PROCESS_FUNCTOR functor = std::bind(handler, pBase, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3);
 		ACTOR_PROCESS_FUNCTOR_PTR functorPtr(new ACTOR_PROCESS_FUNCTOR(functor));
 
 		return mSelf->AddBeginunc(nSubMessage, functorPtr);
-	}
-
-	virtual bool SendMsgPB(const uint16_t nMsgID, const std::string& strData, const NFSOCK nSockIndex)
-	{
-		return true;
-
-	}
-
-	virtual bool SendMsgPB(const uint16_t nMsgID, const std::string& strData, const NFSOCK nSockIndex, const NFGUID nPlayer, const std::vector<NFGUID>* pClientIDList = NULL)
-	{
-		return true;
-	}
-
-	virtual bool SendMsgPBToAllClient(const uint16_t nMsgID, const std::string& strData)
-	{
-		return true;
 	}
 
 	template <typename T>

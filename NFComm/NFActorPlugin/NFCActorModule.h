@@ -55,7 +55,7 @@ public:
 
 	virtual int RequireActor();
 
-    virtual bool SendMsgToActor(const int nActorIndex, const NFGUID& objectID, const int nEventID, const std::string& strArg);
+    virtual bool SendMsgToActor(const int nActorIndex, const int nEventID, const std::string& strArg);
 
 	virtual bool HandlerEx(const NFIActorMessage& message, const int from);
 

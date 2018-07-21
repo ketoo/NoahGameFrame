@@ -186,7 +186,7 @@ public:
     void Print()
     {
         return;
-
+/*
         std::cout << "-----------size:" << Size() << " capacity:" << Capacity() << std::endl;
 
         if (m_rear > m_front)
@@ -208,6 +208,7 @@ public:
                 std::cout << " " << m_data[i] << " " << std::endl;
             }
         }
+        */
     }
 
 private:
