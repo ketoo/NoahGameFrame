@@ -36,7 +36,7 @@
 class NFIComponent;
 class NFIActorModule;
 
-typedef std::function<int(const NFGUID&, const int, const int, std::string&)> ACTOR_PROCESS_FUNCTOR;
+typedef std::function<int(const int, const int, std::string&)> ACTOR_PROCESS_FUNCTOR;
 typedef NF_SHARE_PTR<ACTOR_PROCESS_FUNCTOR> ACTOR_PROCESS_FUNCTOR_PTR;
 
 
@@ -62,8 +62,6 @@ public:
 	std::string data;
 	MessageType msgType;
 	////////////////////event/////////////////////////////////////////////////
-	NFGUID self;
-	//////////////////////////////////////////////////////////////////////////
 	ACTOR_PROCESS_FUNCTOR_PTR xEndFuncptr;
 protected:
 private:
@@ -87,7 +85,7 @@ public:
 		if (!TIsDerived<T, NFIComponent>::Result)
 		{
 			//BaseTypeComponent must inherit from NFIComponent;
-			return NF_SHARE_PTR<T>();
+			return nullptr;
 		}
 
 		NF_SHARE_PTR<NFIComponent> pComponent = FindComponent(strName);
@@ -97,7 +95,7 @@ public:
 			return pT;
 		}
 
-		return NF_SHARE_PTR<T>();
+		return nullptr;
 	}
 	virtual NF_SHARE_PTR<NFIComponent> FindComponent(const std::string& strComponentName) = 0;
 	

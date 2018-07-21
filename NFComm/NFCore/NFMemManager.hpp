@@ -29,10 +29,8 @@
 #include "NFSingleton.hpp"
 #include "NFComm/NFPluginModule/NFPlatform.h"
 
-//#define  NF_USE_TCMALLOC
-
 #ifdef NF_USE_TCMALLOC
-#include "Dependencies/gperftools-2.1/src/gperftools/malloc_extension.h"
+#include "Dependencies/gperftools-2.5/src/gperftools/malloc_extension.h"
 #endif
 
 #ifdef NF_USE_TCMALLOC

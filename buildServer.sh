@@ -1,4 +1,5 @@
 # make sure cmake is installed
+# sudo apt-get update
 cmake --version
 if [ $? -ne 0 ]; then
     echo "[ERROR] Please install cmake first."

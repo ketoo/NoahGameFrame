@@ -57,11 +57,10 @@ public:
 	}
 
 
-	virtual int OnMsgEvent(const NFGUID& self, const int from, const int event, std::string& arg)
+	virtual int OnMsgEvent(const int from, const int event, std::string& arg)
 	{
 
-		std::cout << "Thread: " << std::this_thread::get_id() << " " << self.ToString() << " MsgID: " << event << " Data:" << arg << std::endl;
-
+		std::cout << "Thread: " << std::this_thread::get_id() << " MsgID: " << event << " Data:" << arg << std::endl;
 
 
 		return 0;
@@ -98,7 +97,7 @@ public:
     virtual bool Shut();
 
 protected:
-	int RequestAsyEnd(const NFGUID& self, const int nFormActor, const int nSubMsgID, const std::string& strData);
+	int RequestAsyEnd(const int nFormActor, const int nSubMsgID, const std::string& strData);
 	
 protected:
     NFIActorModule* m_pActorModule;
