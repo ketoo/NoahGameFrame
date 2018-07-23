@@ -616,6 +616,9 @@ void NFCWorldNet_ServerModule::OnClientDisconnect(const NFSOCK nAddress)
     {
         if (nAddress == pServerData->nFD)
         {
+            pServerData->pData->set_server_state(NFMsg::EST_CRASH);
+            pServerData->nFD = 0;
+
             int nServerID = pServerData->pData->server_id();
             mProxyMap.RemoveElement(nServerID);
 
@@ -635,6 +638,9 @@ void NFCWorldNet_ServerModule::OnClientDisconnect(const NFSOCK nAddress)
 	{
 		if (nAddress == pServerData->nFD)
 		{
+            pServerData->pData->set_server_state(NFMsg::EST_CRASH);
+            pServerData->nFD = 0;
+
 			int nServerID = pServerData->pData->server_id();
 			mDBMap.RemoveElement(nServerID);
 
