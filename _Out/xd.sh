@@ -13,7 +13,7 @@ else
     echo "Other OS: $sysOS"
 fi
 
-/Users/James/Desktop/NoahGameFrame/_Out/Tester/rundx_db.bat/Users/James/Desktop/NoahGameFrame/_Out/Tester/rundx_db.sh
+
 cd Debug
 
 chmod -R 777  NFPluginLoader_d
