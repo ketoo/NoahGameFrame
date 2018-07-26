@@ -729,6 +729,11 @@ bool NFCCommonRedisModule::ConvertPropertyManagerToPB(const NF_SHARE_PTR<NFIProp
 		NF_SHARE_PTR<NFIProperty> xPropert = pProps->First();
 		while (xPropert)
 		{
+			if (!xPropert->GetCache() && !xPropert->GetSave())
+			{
+				continue;
+			}
+
 			switch (xPropert->GetType())
 			{
 			case NFDATA_TYPE::TDATA_INT:
