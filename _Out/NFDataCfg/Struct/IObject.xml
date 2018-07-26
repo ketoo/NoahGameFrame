@@ -2,7 +2,7 @@
 <XML>
 	<Propertys>
 		<Property Id="ClassName" Cache="0" Desc="" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="string" Upload="0" />
-		<Property Id="ConfigID" Cache="0" Desc="" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="string" Upload="0" />
+		<Property Id="ConfigID" Cache="1" Desc="" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="string" Upload="0" />
 		<Property Id="GroupID" Cache="0" Desc="" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="int" Upload="0" />
 		<Property Id="ID" Cache="0" Desc="" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="string" Upload="0" />
 		<Property Id="Position" Cache="0" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="vector3" Upload="0" />
