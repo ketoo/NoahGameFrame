@@ -503,8 +503,10 @@ public:
 
 	std::string ToLongDateString() const
 	{
+        //yyyy-MM-dd hh:mm:ss
 		std::stringstream ss(std::stringstream::in | std::stringstream::out);
-		ss << NameOfDay(DayOfWeek()) << ", " << Day() << DaySuffix(Day()) << " " << NameOfMonth(Month()) << ", " << Year();
+        //ss << NameOfDay(DayOfWeek()) << ", " << Day() << DaySuffix(Day()) << " " << NameOfMonth(Month()) << ", " << Year();
+        ss << Year() << "-" << Month() << "-" << Day();
 		return ss.str();
 	}
 
@@ -529,6 +531,7 @@ public:
 		return ss.str();
 	}
 
+	//yyyy-MM-dd hh:mm:ss
 	inline std::string ToString()
 	{
 		return ToLongDateString() + " - " + ToLongTimeString();
