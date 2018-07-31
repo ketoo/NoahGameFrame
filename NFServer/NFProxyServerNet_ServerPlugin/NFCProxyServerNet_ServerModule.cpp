@@ -1,11 +1,27 @@
-// -------------------------------------------------------------------------
-//    @FileName			:    NFCGameServerNet_ServerModule.cpp
-//    @Author           :    LvSheng.Huang
-//    @Date             :    2013-01-02
-//    @Module           :    NFCGameServerNet_ServerModule
-//    @Desc             :
-// -------------------------------------------------------------------------
+/*
+            This file is part of: 
+                NoahFrame
+            https://github.com/ketoo/NoahGameFrame
 
+   Copyright 2009 - 2018 NoahFrame(NoahGameFrame)
+
+   File creator: lvsheng.huang
+   
+   NoahFrame is open-source software and you can redistribute it and/or modify
+   it under the terms of the License; besides, anyone who use this file/software must include this copyright announcement.
+
+   Licensed under the Apache License, Version 2.0 (the "License");
+   you may not use this file except in compliance with the License.
+   You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   See the License for the specific language governing permissions and
+   limitations under the License.
+*/
 #include "NFCProxyServerNet_ServerModule.h"
 #include "NFProxyServerNet_ServerPlugin.h"
 #include "NFComm/NFPluginModule/NFIKernelModule.h"
@@ -192,9 +208,9 @@ void NFCProxyServerNet_ServerModule::OnSocketClientEvent(const NFSOCK nSockIndex
         m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFGUID(0, nSockIndex), "NF_NET_EVENT_TIMEOUT", "read timeout", __FUNCTION__, __LINE__);
         OnClientDisconnect(nSockIndex);
     }
-    else  if (eEvent == NF_NET_EVENT_CONNECTED)
+    else  if (eEvent & NF_NET_EVENT_CONNECTED)
     {
-        m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFGUID(0, nSockIndex), "NF_NET_EVENT_CONNECTED", "connectioned success", __FUNCTION__, __LINE__);
+        m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFGUID(0, nSockIndex), "NF_NET_EVENT_CONNECTED", "connected success", __FUNCTION__, __LINE__);
         OnClientConnected(nSockIndex);
     }
 }
@@ -346,9 +362,10 @@ void NFCProxyServerNet_ServerModule::OnReqServerListProcess(const NFSOCK nSockIn
 
         NFMapEx<int, ConnectData>& xServerList = m_pNetClientModule->GetServerList();
         ConnectData* pGameData = xServerList.FirstNude();
-        while (pGameData && NF_SERVER_TYPES::NF_ST_GAME == pGameData->eServerType)
+        while (pGameData)
         {
-            if (ConnectDataState::NORMAL == pGameData->eState)
+            if (ConnectDataState::NORMAL == pGameData->eState
+				&& NF_SERVER_TYPES::NF_ST_GAME == pGameData->eServerType)
             {
                 NFMsg::ServerInfo* pServerInfo = xData.add_info();
 

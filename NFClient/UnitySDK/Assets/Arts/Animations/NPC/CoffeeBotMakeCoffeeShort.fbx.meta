@@ -1,0 +1,337 @@
+fileFormatVersion: 2
+guid: 751b7715d7efabd419908ce4c48ea3bf
+timeCreated: 1461150837
+licenseType: Store
+ModelImporter:
+  serializedVersion: 19
+  fileIDToRecycleName:
+    100000: //RootNode
+    100002: Controls
+    100004: Head
+    100006: HeadEnd
+    100008: Housing
+    100010: HousingLeftDoor1
+    100012: HousingLeftDoor2
+    100014: HousingLeftDoorEnd
+    100016: HousingRightDoor1
+    100018: HousingRightDoor2
+    100020: HousingRightDoorEnd
+    100022: LeftArm1
+    100024: LeftArm2
+    100026: LeftArm3
+    100028: LeftArm4
+    100030: LeftArm5
+    100032: LeftArm6
+    100034: LeftArmEnd
+    100036: LeftEye
+    100038: LeftIndex1
+    100040: LeftIndex2
+    100042: LeftIndex3
+    100044: LeftIndexEnd
+    100046: LeftMiddle1
+    100048: LeftMiddle2
+    100050: LeftMiddle3
+    100052: LeftMiddleEnd
+    100054: LeftThumb1
+    100056: LeftThumb2
+    100058: LeftThumb3
+    100060: LeftThumbEnd
+    100062: Lid
+    100064: LidEnd
+    100066: RightArm1
+    100068: RightArm2
+    100070: RightArm3
+    100072: RightArm4
+    100074: RightArm5
+    100076: RightArm6
+    100078: RightArmEnd
+    100080: RightEye
+    100082: RightIndex1
+    100084: RightIndex2
+    100086: RightIndex3
+    100088: RightIndexEnd
+    100090: RightMiddle1
+    100092: RightMiddle2
+    100094: RightMiddle3
+    100096: RightMiddleEnd
+    100098: RightThumb1
+    100100: RightThumb2
+    100102: RightThumb3
+    100104: RightThumbEnd
+    100106: Skeleton
+    100108: Spine1
+    100110: spine2
+    100112: Tongue
+    100114: Tooth
+    100116: ToothEnd
+    400000: //RootNode
+    400002: Controls
+    400004: Head
+    400006: HeadEnd
+    400008: Housing
+    400010: HousingLeftDoor1
+    400012: HousingLeftDoor2
+    400014: HousingLeftDoorEnd
+    400016: HousingRightDoor1
+    400018: HousingRightDoor2
+    400020: HousingRightDoorEnd
+    400022: LeftArm1
+    400024: LeftArm2
+    400026: LeftArm3
+    400028: LeftArm4
+    400030: LeftArm5
+    400032: LeftArm6
+    400034: LeftArmEnd
+    400036: LeftEye
+    400038: LeftIndex1
+    400040: LeftIndex2
+    400042: LeftIndex3
+    400044: LeftIndexEnd
+    400046: LeftMiddle1
+    400048: LeftMiddle2
+    400050: LeftMiddle3
+    400052: LeftMiddleEnd
+    400054: LeftThumb1
+    400056: LeftThumb2
+    400058: LeftThumb3
+    400060: LeftThumbEnd
+    400062: Lid
+    400064: LidEnd
+    400066: RightArm1
+    400068: RightArm2
+    400070: RightArm3
+    400072: RightArm4
+    400074: RightArm5
+    400076: RightArm6
+    400078: RightArmEnd
+    400080: RightEye
+    400082: RightIndex1
+    400084: RightIndex2
+    400086: RightIndex3
+    400088: RightIndexEnd
+    400090: RightMiddle1
+    400092: RightMiddle2
+    400094: RightMiddle3
+    400096: RightMiddleEnd
+    400098: RightThumb1
+    400100: RightThumb2
+    400102: RightThumb3
+    400104: RightThumbEnd
+    400106: Skeleton
+    400108: Spine1
+    400110: spine2
+    400112: Tongue
+    400114: Tooth
+    400116: ToothEnd
+    7400000: CoffeeBotMakeCoffeeShort
+    9500000: //RootNode
+  materials:
+    importMaterials: 0
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleRotations: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: CoffeeBotMakeCoffeeShort
+      takeName: Take 001
+      firstFrame: 1
+      lastFrame: 62
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Controls
+        weight: 1
+      - path: Skeleton
+        weight: 1
+      - path: Skeleton/Housing
+        weight: 1
+      - path: Skeleton/Housing/HousingLeftDoor1
+        weight: 1
+      - path: Skeleton/Housing/HousingLeftDoor1/HousingLeftDoor2
+        weight: 1
+      - path: Skeleton/Housing/HousingLeftDoor1/HousingLeftDoor2/HousingLeftDoorEnd
+        weight: 1
+      - path: Skeleton/Housing/HousingRightDoor1
+        weight: 1
+      - path: Skeleton/Housing/HousingRightDoor1/HousingRightDoor2
+        weight: 1
+      - path: Skeleton/Housing/HousingRightDoor1/HousingRightDoor2/HousingRightDoorEnd
+        weight: 1
+      - path: Skeleton/Housing/Lid
+        weight: 1
+      - path: Skeleton/Housing/Lid/LidEnd
+        weight: 1
+      - path: Skeleton/Spine1
+        weight: 1
+      - path: Skeleton/Spine1/LeftArm1
+        weight: 1
+      - path: Skeleton/Spine1/LeftArm1/LeftArm2
+        weight: 1
+      - path: Skeleton/Spine1/LeftArm1/LeftArm2/LeftArm3
+        weight: 1
+      - path: Skeleton/Spine1/LeftArm1/LeftArm2/LeftArm3/LeftArm4
+        weight: 1
+      - path: Skeleton/Spine1/LeftArm1/LeftArm2/LeftArm3/LeftArm4/LeftArm5
+        weight: 1
+      - path: Skeleton/Spine1/LeftArm1/LeftArm2/LeftArm3/LeftArm4/LeftArm5/LeftArm6
+        weight: 1
+      - path: Skeleton/Spine1/LeftArm1/LeftArm2/LeftArm3/LeftArm4/LeftArm5/LeftArm6/LeftArmEnd
+        weight: 1
+      - path: Skeleton/Spine1/LeftArm1/LeftArm2/LeftArm3/LeftArm4/LeftArm5/LeftArm6/LeftArmEnd/LeftIndex1
+        weight: 1
+      - path: Skeleton/Spine1/LeftArm1/LeftArm2/LeftArm3/LeftArm4/LeftArm5/LeftArm6/LeftArmEnd/LeftIndex1/LeftIndex2
+        weight: 1
+      - path: Skeleton/Spine1/LeftArm1/LeftArm2/LeftArm3/LeftArm4/LeftArm5/LeftArm6/LeftArmEnd/LeftIndex1/LeftIndex2/LeftIndex3
+        weight: 1
+      - path: Skeleton/Spine1/LeftArm1/LeftArm2/LeftArm3/LeftArm4/LeftArm5/LeftArm6/LeftArmEnd/LeftIndex1/LeftIndex2/LeftIndex3/LeftIndexEnd
+        weight: 1
+      - path: Skeleton/Spine1/LeftArm1/LeftArm2/LeftArm3/LeftArm4/LeftArm5/LeftArm6/LeftArmEnd/LeftMiddle1
+        weight: 1
+      - path: Skeleton/Spine1/LeftArm1/LeftArm2/LeftArm3/LeftArm4/LeftArm5/LeftArm6/LeftArmEnd/LeftMiddle1/LeftMiddle2
+        weight: 1
+      - path: Skeleton/Spine1/LeftArm1/LeftArm2/LeftArm3/LeftArm4/LeftArm5/LeftArm6/LeftArmEnd/LeftMiddle1/LeftMiddle2/LeftMiddle3
+        weight: 1
+      - path: Skeleton/Spine1/LeftArm1/LeftArm2/LeftArm3/LeftArm4/LeftArm5/LeftArm6/LeftArmEnd/LeftMiddle1/LeftMiddle2/LeftMiddle3/LeftMiddleEnd
+        weight: 1
+      - path: Skeleton/Spine1/LeftArm1/LeftArm2/LeftArm3/LeftArm4/LeftArm5/LeftArm6/LeftArmEnd/LeftThumb1
+        weight: 1
+      - path: Skeleton/Spine1/LeftArm1/LeftArm2/LeftArm3/LeftArm4/LeftArm5/LeftArm6/LeftArmEnd/LeftThumb1/LeftThumb2
+        weight: 1
+      - path: Skeleton/Spine1/LeftArm1/LeftArm2/LeftArm3/LeftArm4/LeftArm5/LeftArm6/LeftArmEnd/LeftThumb1/LeftThumb2/LeftThumb3
+        weight: 1
+      - path: Skeleton/Spine1/LeftArm1/LeftArm2/LeftArm3/LeftArm4/LeftArm5/LeftArm6/LeftArmEnd/LeftThumb1/LeftThumb2/LeftThumb3/LeftThumbEnd
+        weight: 1
+      - path: Skeleton/Spine1/RightArm1
+        weight: 1
+      - path: Skeleton/Spine1/RightArm1/RightArm2
+        weight: 1
+      - path: Skeleton/Spine1/RightArm1/RightArm2/RightArm3
+        weight: 1
+      - path: Skeleton/Spine1/RightArm1/RightArm2/RightArm3/RightArm4
+        weight: 1
+      - path: Skeleton/Spine1/RightArm1/RightArm2/RightArm3/RightArm4/RightArm5
+        weight: 1
+      - path: Skeleton/Spine1/RightArm1/RightArm2/RightArm3/RightArm4/RightArm5/RightArm6
+        weight: 1
+      - path: Skeleton/Spine1/RightArm1/RightArm2/RightArm3/RightArm4/RightArm5/RightArm6/RightArmEnd
+        weight: 1
+      - path: Skeleton/Spine1/RightArm1/RightArm2/RightArm3/RightArm4/RightArm5/RightArm6/RightArmEnd/RightIndex1
+        weight: 1
+      - path: Skeleton/Spine1/RightArm1/RightArm2/RightArm3/RightArm4/RightArm5/RightArm6/RightArmEnd/RightIndex1/RightIndex2
+        weight: 1
+      - path: Skeleton/Spine1/RightArm1/RightArm2/RightArm3/RightArm4/RightArm5/RightArm6/RightArmEnd/RightIndex1/RightIndex2/RightIndex3
+        weight: 1
+      - path: Skeleton/Spine1/RightArm1/RightArm2/RightArm3/RightArm4/RightArm5/RightArm6/RightArmEnd/RightIndex1/RightIndex2/RightIndex3/RightIndexEnd
+        weight: 1
+      - path: Skeleton/Spine1/RightArm1/RightArm2/RightArm3/RightArm4/RightArm5/RightArm6/RightArmEnd/RightMiddle1
+        weight: 1
+      - path: Skeleton/Spine1/RightArm1/RightArm2/RightArm3/RightArm4/RightArm5/RightArm6/RightArmEnd/RightMiddle1/RightMiddle2
+        weight: 1
+      - path: Skeleton/Spine1/RightArm1/RightArm2/RightArm3/RightArm4/RightArm5/RightArm6/RightArmEnd/RightMiddle1/RightMiddle2/RightMiddle3
+        weight: 1
+      - path: Skeleton/Spine1/RightArm1/RightArm2/RightArm3/RightArm4/RightArm5/RightArm6/RightArmEnd/RightMiddle1/RightMiddle2/RightMiddle3/RightMiddleEnd
+        weight: 1
+      - path: Skeleton/Spine1/RightArm1/RightArm2/RightArm3/RightArm4/RightArm5/RightArm6/RightArmEnd/RightThumb1
+        weight: 1
+      - path: Skeleton/Spine1/RightArm1/RightArm2/RightArm3/RightArm4/RightArm5/RightArm6/RightArmEnd/RightThumb1/RightThumb2
+        weight: 1
+      - path: Skeleton/Spine1/RightArm1/RightArm2/RightArm3/RightArm4/RightArm5/RightArm6/RightArmEnd/RightThumb1/RightThumb2/RightThumb3
+        weight: 1
+      - path: Skeleton/Spine1/RightArm1/RightArm2/RightArm3/RightArm4/RightArm5/RightArm6/RightArmEnd/RightThumb1/RightThumb2/RightThumb3/RightThumbEnd
+        weight: 1
+      - path: Skeleton/Spine1/spine2
+        weight: 1
+      - path: Skeleton/Spine1/spine2/Head
+        weight: 1
+      - path: Skeleton/Spine1/spine2/Head/HeadEnd
+        weight: 1
+      - path: Skeleton/Spine1/spine2/Head/LeftEye
+        weight: 1
+      - path: Skeleton/Spine1/spine2/Head/RightEye
+        weight: 1
+      - path: Skeleton/Spine1/spine2/Head/Tooth
+        weight: 1
+      - path: Skeleton/Spine1/spine2/Head/Tooth/ToothEnd
+        weight: 1
+      - path: Skeleton/Spine1/spine2/Tongue
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

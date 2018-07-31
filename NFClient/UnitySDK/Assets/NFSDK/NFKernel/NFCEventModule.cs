@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Linq;
 using System.Text;
 using System.Collections;
@@ -8,12 +8,12 @@ namespace NFSDK
 {
 	public class NFCEventModule : NFIEventModule
     {
-        public override bool Awake() { return true; }
-        public override bool Init() { return true; }
-        public override bool AfterInit() { return true; }
-        public override bool Execute() { return true; }
-        public override bool BeforeShut() { return true; }
-        public override bool Shut() { return true; }
+        public override void Awake() {}
+        public override void Init() {}
+        public override void AfterInit() {}
+        public override void Execute() { }
+        public override void BeforeShut() { }
+        public override void Shut() {  }
 
         private static NFCEventModule _instance = null;
         public static NFCEventModule Instance()
@@ -25,44 +25,40 @@ namespace NFSDK
         {
             _instance = this;
             mPluginManager = pluginManager;
-            mhtEvent = new Dictionary<NFGUID, Dictionary<int, NFIEvent>>();
+            mhtEvent = new Dictionary<int, NFIEvent>();
 		}
-
-		public override void RegisterCallback(NFGUID self, int nEventID, NFIEvent.EventHandler handler, NFIDataList valueList)
-		{
-            Dictionary<int, NFIEvent> xData = mhtEvent[self];
-			if (!mhtEvent.ContainsKey(self) || null == xData)
-			{
-                xData = new Dictionary<int, NFIEvent>();
-                xData.Add(nEventID, new NFCEvent(self, nEventID, valueList));
-                
-                mhtEvent.Add(self, xData);
-                return;
-			}
-
-            if (!xData.ContainsKey(nEventID))
+  
+  
+        public override void RegisterCallback(int nEventID, NFIEvent.EventHandler handler)
+        {
+            if (!mhtEvent.ContainsKey(nEventID))
             {
-                xData.Add(nEventID, new NFCEvent(self, nEventID, valueList));
-                return ;
+				mhtEvent.Add(nEventID, new NFCEvent(nEventID, new NFDataList()));
             }
 
-			NFIEvent identEvent = (NFIEvent)mhtEvent[self][nEventID];
-			identEvent.RegisterCallback(handler);
-		}
+			NFIEvent identEvent = (NFIEvent)mhtEvent[nEventID];
+            identEvent.RegisterCallback(handler);
+        }
 
-        public override void DoEvent(NFGUID self, int nEventID, NFIDataList valueList)
+        public override void DoEvent(int nEventID, NFDataList valueList)
         {
-            Dictionary<int, NFIEvent> xData = mhtEvent[self];
-            if (null != xData)
+            if (mhtEvent.ContainsKey(nEventID))
             {
-                if (xData.ContainsKey(nEventID))
-                {
-                    NFIEvent identEvent = (NFIEvent)xData[nEventID];
-                    identEvent.DoEvent(valueList);
-                }
+                NFIEvent identEvent = (NFIEvent)mhtEvent[nEventID];
+                identEvent.DoEvent(valueList);
             }
         }
 
-        Dictionary<NFGUID, Dictionary<int, NFIEvent>> mhtEvent;
+        public override void DoEvent(int nEventID)
+        {
+			NFDataList valueList = new NFDataList();
+			if (mhtEvent.ContainsKey(nEventID))
+            {
+				NFIEvent identEvent = (NFIEvent)mhtEvent[nEventID];
+                identEvent.DoEvent(valueList);
+            }
+        }
+
+        Dictionary<int, NFIEvent> mhtEvent;
     }
 }

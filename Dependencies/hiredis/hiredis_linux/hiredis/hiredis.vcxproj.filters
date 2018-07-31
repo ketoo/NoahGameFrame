@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Text Include="ReadMe.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="sds.c" />
+    <ClCompile Include="read.c" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="sds.h" />
+    <ClInclude Include="sdsalloc.h" />
+    <ClInclude Include="win32.h" />
+    <ClInclude Include="read.h" />
+    <ClInclude Include="fmacros.h" />
+    <ClInclude Include="win32_types.h" />
+    <ClInclude Include="win32_types_hiredis.h" />
+  </ItemGroup>
+</Project>

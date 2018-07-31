@@ -1,0 +1,655 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!74 &7400000
+AnimationClip:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: SecuirtyCameraIdle
+  serializedVersion: 6
+  m_Legacy: 0
+  m_Compressed: 0
+  m_UseHighQualityCurve: 1
+  m_RotationCurves: []
+  m_CompressedRotationCurves: []
+  m_EulerCurves:
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - time: 0
+        value: {x: 0, y: 38.96625, z: 0}
+        inSlope: {x: 0, y: 0, z: 0}
+        outSlope: {x: 0, y: 0, z: 0}
+        tangentMode: 0
+      - time: 0.16666667
+        value: {x: 0, y: 40.64361, z: 0}
+        inSlope: {x: 0, y: 0, z: 0}
+        outSlope: {x: 0, y: 0, z: 0}
+        tangentMode: 0
+      - time: 0.31666666
+        value: {x: 0, y: 38.51473, z: 0}
+        inSlope: {x: 0, y: -27.383217, z: 0}
+        outSlope: {x: 0, y: -27.383217, z: 0}
+        tangentMode: 0
+      - time: 1.6833333
+        value: {x: 0, y: -37.025764, z: 0}
+        inSlope: {x: 0, y: 0, z: 0}
+        outSlope: {x: 0, y: 0, z: 0}
+        tangentMode: 0
+      - time: 1.8166667
+        value: {x: 0, y: -38.930153, z: 0}
+        inSlope: {x: 0, y: 0, z: 0}
+        outSlope: {x: 0, y: 0, z: 0}
+        tangentMode: 0
+      - time: 1.9666667
+        value: {x: 0, y: -36.83941, z: 0}
+        inSlope: {x: 0, y: 0, z: 0}
+        outSlope: {x: 0, y: 0, z: 0}
+        tangentMode: 0
+      - time: 2.3333335
+        value: {x: 0, y: -36.83941, z: 0}
+        inSlope: {x: 0, y: 0, z: 0}
+        outSlope: {x: 0, y: 0, z: 0}
+        tangentMode: 0
+      - time: 3.3333335
+        value: {x: 0, y: -36.83941, z: 0}
+        inSlope: {x: 0, y: 0, z: 0}
+        outSlope: {x: 0, y: 0, z: 0}
+        tangentMode: 0
+      - time: 3.4666665
+        value: {x: 0, y: -36.83941, z: 0}
+        inSlope: {x: 0, y: 0, z: 0}
+        outSlope: {x: 0, y: 0, z: 0}
+        tangentMode: 0
+      - time: 3.5666668
+        value: {x: 0, y: -38.49926, z: 0}
+        inSlope: {x: 0, y: -19.806175, z: 0}
+        outSlope: {x: 0, y: -19.806175, z: 0}
+        tangentMode: 0
+      - time: 3.6166666
+        value: {x: 0, y: -39.06761, z: 0}
+        inSlope: {x: 0, y: 0.4196167, z: 0}
+        outSlope: {x: 0, y: 0.4196167, z: 0}
+        tangentMode: 0
+      - time: 3.783333
+        value: {x: 0, y: -36.40211, z: 0}
+        inSlope: {x: 0, y: 0, z: 0}
+        outSlope: {x: 0, y: 0, z: 0}
+        tangentMode: 0
+      - time: 3.8000002
+        value: {x: 0, y: -36.37668, z: 0}
+        inSlope: {x: 0, y: 3.0410266, z: 0}
+        outSlope: {x: 0, y: 3.0410266, z: 0}
+        tangentMode: 0
+      - time: 4.3166666
+        value: {x: 0, y: -16.065878, z: 0}
+        inSlope: {x: 0, y: 65.218544, z: 0}
+        outSlope: {x: 0, y: 65.218544, z: 0}
+        tangentMode: 0
+      - time: 5.366666
+        value: {x: 0, y: 40.64361, z: 0}
+        inSlope: {x: 0, y: 0, z: 0}
+        outSlope: {x: 0, y: 0, z: 0}
+        tangentMode: 0
+      - time: 5.5166664
+        value: {x: 0, y: 38.96625, z: 0}
+        inSlope: {x: 0, y: 0, z: 0}
+        outSlope: {x: 0, y: 0, z: 0}
+        tangentMode: 0
+      - time: 5.916667
+        value: {x: 0, y: 38.966248, z: 0}
+        inSlope: {x: 0, y: 0, z: 0}
+        outSlope: {x: 0, y: 0, z: 0}
+        tangentMode: 0
+      - time: 7.016667
+        value: {x: 0, y: 38.96625, z: 0}
+        inSlope: {x: 0, y: 0, z: 0}
+        outSlope: {x: 0, y: 0, z: 0}
+        tangentMode: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    path: CameraCam
+  m_PositionCurves: []
+  m_ScaleCurves: []
+  m_FloatCurves:
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - time: 0
+        value: 0.88235295
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 10
+      - time: 7.016667
+        value: 0.88235295
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 10
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: material._TintColor.r
+    path: CameraCam/CameraLight
+    classID: 23
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - time: 0
+        value: 0.0129757915
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 10
+      - time: 7.016667
+        value: 0.0129757915
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 10
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: material._TintColor.g
+    path: CameraCam/CameraLight
+    classID: 23
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - time: 0
+        value: 0.0129757915
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 10
+      - time: 7.016667
+        value: 0.0129757915
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 10
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: material._TintColor.b
+    path: CameraCam/CameraLight
+    classID: 23
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - time: 0
+        value: 0.5
+        inSlope: -0.0008526045
+        outSlope: -0.0008526045
+        tangentMode: 0
+      - time: 0.46666667
+        value: 0.05
+        inSlope: -0.15287453
+        outSlope: -0.15287453
+        tangentMode: 10
+      - time: 1.15
+        value: 0.5
+        inSlope: -0.13624892
+        outSlope: -0.13624892
+        tangentMode: 10
+      - time: 1.6333333
+        value: 0.05
+        inSlope: -0.172039
+        outSlope: -0.172039
+        tangentMode: 10
+      - time: 2.4
+        value: 0.5
+        inSlope: -0.172039
+        outSlope: -0.172039
+        tangentMode: 10
+      - time: 2.8833334
+        value: 0.05
+        inSlope: -0.17203897
+        outSlope: -0.17203897
+        tangentMode: 10
+      - time: 3.65
+        value: 0.5
+        inSlope: -0.34937906
+        outSlope: -0.34937906
+        tangentMode: 10
+      - time: 4
+        value: 0.05
+        inSlope: -0.4017859
+        outSlope: -0.4017859
+        tangentMode: 10
+      - time: 4.9333334
+        value: 0.5
+        inSlope: -0.32142848
+        outSlope: -0.32142848
+        tangentMode: 10
+      - time: 5.3333335
+        value: 0.05
+        inSlope: -0.21634585
+        outSlope: -0.21634585
+        tangentMode: 10
+      - time: 5.983333
+        value: 0.5
+        inSlope: -0.29670238
+        outSlope: -0.29670238
+        tangentMode: 10
+      - time: 6.3333335
+        value: 0.05
+        inSlope: -0.30535635
+        outSlope: -0.30535635
+        tangentMode: 10
+      - time: 7
+        value: 0.5
+        inSlope: 0.003937149
+        outSlope: 0.003937149
+        tangentMode: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: material._TintColor.a
+    path: CameraCam/CameraLight
+    classID: 23
+    script: {fileID: 0}
+  m_PPtrCurves: []
+  m_SampleRate: 60
+  m_WrapMode: 0
+  m_Bounds:
+    m_Center: {x: 0, y: 0, z: 0}
+    m_Extent: {x: 0, y: 0, z: 0}
+  m_ClipBindingConstant:
+    genericBindings:
+    - path: 2461954006
+      attribute: 4
+      script: {fileID: 0}
+      classID: 4
+      customType: 14
+      isPPtrCurve: 0
+    - path: 2240798905
+      attribute: 1895888582
+      script: {fileID: 0}
+      classID: 23
+      customType: 22
+      isPPtrCurve: 0
+    - path: 2240798905
+      attribute: 1090582214
+      script: {fileID: 0}
+      classID: 23
+      customType: 22
+      isPPtrCurve: 0
+    - path: 2240798905
+      attribute: 1359017670
+      script: {fileID: 0}
+      classID: 23
+      customType: 22
+      isPPtrCurve: 0
+    - path: 2240798905
+      attribute: 1627453126
+      script: {fileID: 0}
+      classID: 23
+      customType: 22
+      isPPtrCurve: 0
+    pptrCurveMapping: []
+  m_AnimationClipSettings:
+    serializedVersion: 2
+    m_AdditiveReferencePoseClip: {fileID: 0}
+    m_AdditiveReferencePoseTime: 0
+    m_StartTime: 0
+    m_StopTime: 7.016667
+    m_OrientationOffsetY: 0
+    m_Level: 0
+    m_CycleOffset: 0
+    m_HasAdditiveReferencePose: 0
+    m_LoopTime: 1
+    m_LoopBlend: 0
+    m_LoopBlendOrientation: 0
+    m_LoopBlendPositionY: 0
+    m_LoopBlendPositionXZ: 0
+    m_KeepOriginalOrientation: 0
+    m_KeepOriginalPositionY: 1
+    m_KeepOriginalPositionXZ: 0
+    m_HeightFromFeet: 0
+    m_Mirror: 0
+  m_EditorCurves:
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - time: 0
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 10
+      - time: 0.16666667
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 10
+      - time: 0.31666666
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 10
+      - time: 2.3333335
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 10
+      - time: 3.3333335
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 10
+      - time: 3.5666668
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 10
+      - time: 3.8000002
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 10
+      - time: 4.3166666
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 10
+      - time: 5.916667
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 10
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: localEulerAnglesRaw.x
+    path: CameraCam
+    classID: 4
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - time: 0
+        value: 38.96625
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+      - time: 0.16666667
+        value: 40.64361
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+      - time: 1.6833333
+        value: -37.025764
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+      - time: 1.8166667
+        value: -38.930153
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+      - time: 1.9666667
+        value: -36.83941
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+      - time: 3.4666665
+        value: -36.83941
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+      - time: 3.6166666
+        value: -39.06761
+        inSlope: 0.4196167
+        outSlope: 0.4196167
+        tangentMode: 0
+      - time: 3.783333
+        value: -36.40211
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+      - time: 5.366666
+        value: 40.64361
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+      - time: 5.5166664
+        value: 38.96625
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+      - time: 7.016667
+        value: 38.96625
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: localEulerAnglesRaw.y
+    path: CameraCam
+    classID: 4
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - time: 0
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 10
+      - time: 0.16666667
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 10
+      - time: 0.31666666
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 10
+      - time: 2.3333335
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 10
+      - time: 3.3333335
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 10
+      - time: 3.5666668
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 10
+      - time: 3.8000002
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 10
+      - time: 4.3166666
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 10
+      - time: 5.916667
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 10
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: localEulerAnglesRaw.z
+    path: CameraCam
+    classID: 4
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - time: 0
+        value: 0.88235295
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 10
+      - time: 7.016667
+        value: 0.88235295
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 10
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: material._TintColor.r
+    path: CameraCam/CameraLight
+    classID: 23
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - time: 0
+        value: 0.0129757915
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 10
+      - time: 7.016667
+        value: 0.0129757915
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 10
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: material._TintColor.g
+    path: CameraCam/CameraLight
+    classID: 23
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - time: 0
+        value: 0.0129757915
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 10
+      - time: 7.016667
+        value: 0.0129757915
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 10
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: material._TintColor.b
+    path: CameraCam/CameraLight
+    classID: 23
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - time: 0
+        value: 0.5
+        inSlope: -0.0008526045
+        outSlope: -0.0008526045
+        tangentMode: 0
+      - time: 0.46666667
+        value: 0.05
+        inSlope: -0.15287453
+        outSlope: -0.15287453
+        tangentMode: 10
+      - time: 1.15
+        value: 0.5
+        inSlope: -0.13624892
+        outSlope: -0.13624892
+        tangentMode: 10
+      - time: 1.6333333
+        value: 0.05
+        inSlope: -0.172039
+        outSlope: -0.172039
+        tangentMode: 10
+      - time: 2.4
+        value: 0.5
+        inSlope: -0.172039
+        outSlope: -0.172039
+        tangentMode: 10
+      - time: 2.8833334
+        value: 0.05
+        inSlope: -0.17203897
+        outSlope: -0.17203897
+        tangentMode: 10
+      - time: 3.65
+        value: 0.5
+        inSlope: -0.34937906
+        outSlope: -0.34937906
+        tangentMode: 10
+      - time: 4
+        value: 0.05
+        inSlope: -0.4017859
+        outSlope: -0.4017859
+        tangentMode: 10
+      - time: 4.9333334
+        value: 0.5
+        inSlope: -0.32142848
+        outSlope: -0.32142848
+        tangentMode: 10
+      - time: 5.3333335
+        value: 0.05
+        inSlope: -0.21634585
+        outSlope: -0.21634585
+        tangentMode: 10
+      - time: 5.983333
+        value: 0.5
+        inSlope: -0.29670238
+        outSlope: -0.29670238
+        tangentMode: 10
+      - time: 6.3333335
+        value: 0.05
+        inSlope: -0.30535635
+        outSlope: -0.30535635
+        tangentMode: 10
+      - time: 7
+        value: 0.5
+        inSlope: 0.003937149
+        outSlope: 0.003937149
+        tangentMode: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: material._TintColor.a
+    path: CameraCam/CameraLight
+    classID: 23
+    script: {fileID: 0}
+  m_EulerEditorCurves:
+  - curve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_LocalEulerAngles.x
+    path: CameraCam
+    classID: 4
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_LocalEulerAngles.y
+    path: CameraCam
+    classID: 4
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_LocalEulerAngles.z
+    path: CameraCam
+    classID: 4
+    script: {fileID: 0}
+  m_HasGenericRootTransform: 0
+  m_HasMotionFloatCurves: 0
+  m_GenerateMotionCurves: 0
+  m_Events: []

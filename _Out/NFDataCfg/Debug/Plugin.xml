@@ -7,6 +7,7 @@
 		<Plugin Name="NFGameServerNet_ServerPlugin" />
 		<Plugin Name="NFGameServerNet_ClientPlugin" />
 		<Plugin Name="NFLogPlugin" />	
+		<Plugin Name="NFLuaScriptPlugin" />
 	</GameServer>
 
 	<LoginServer>
@@ -49,13 +50,4 @@
 		<Plugin Name="NFSecurityPlugin" />
 	</WorldServer>
 
-	
-	<TutorialServer>
-		<Plugin Name="NFKernelPlugin" />
-		<Plugin Name="NFConfigPlugin" />
-		
-		<Plugin Name="NFActorPlugin" />
-		<Plugin Name="NFLogPlugin" />
-		<Plugin Name="Tutorial4Plugin" />	
-	</TutorialServer>
 </XML>

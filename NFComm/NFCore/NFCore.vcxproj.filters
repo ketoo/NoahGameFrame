@@ -80,9 +80,6 @@
     <ClInclude Include="NFDateTime.hpp">
       <Filter>Unit</Filter>
     </ClInclude>
-    <ClInclude Include="NFException.hpp">
-      <Filter>Unit</Filter>
-    </ClInclude>
     <ClInclude Include="NFMemoryCounter.hpp">
       <Filter>Unit</Filter>
     </ClInclude>
@@ -96,6 +93,9 @@
       <Filter>Unit</Filter>
     </ClInclude>
     <ClInclude Include="NFConsistentHash.hpp">
+      <Filter>Unit</Filter>
+    </ClInclude>
+    <ClInclude Include="NFException.hpp">
       <Filter>Unit</Filter>
     </ClInclude>
   </ItemGroup>

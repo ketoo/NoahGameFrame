@@ -13,7 +13,7 @@ namespace NFSDK
         {
             if (m_msgHandles.ContainsKey(id))
             {
-                Debug.LogFormat("Cannot register exist func {0}!", id);
+				Debug.LogErrorFormat("Cannot register exist func {0}!", id);
                 return;
             }
             m_msgHandles.Add(id, netHandler);
@@ -28,10 +28,10 @@ namespace NFSDK
             MessageHandler handler;
             if (!m_msgHandles.TryGetValue(id, out handler))
             {
-                Debug.LogFormat("Cannot handle this message id: {0}", id);
+				Debug.LogErrorFormat("No handler for this message id: {0}", id);
                 if (id == 0)
                 {
-                    Debug.Log("FUCK!!!");
+					Debug.LogError("FUCK!!!  MESSAGEID == 0");
                 }
                 return;
             }

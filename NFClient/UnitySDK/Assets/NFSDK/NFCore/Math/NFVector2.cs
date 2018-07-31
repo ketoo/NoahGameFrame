@@ -7,6 +7,7 @@ namespace NFSDK
 {
     public class NFVector2
     {
+        private static NFVector2 zero = new NFVector2();
         private float x;
         private float y;
 
@@ -60,8 +61,8 @@ namespace NFSDK
             {
                 return new NFVector2();
             }
-            float length =  this.Length();
-            return new NFVector2(x /length, y /length);
+            float length = this.Length();
+            return new NFVector2(x / length, y / length);
         }
 
         public bool FromString(string value)
@@ -76,7 +77,7 @@ namespace NFSDK
             return true;
         }
 
-        public string ToStr()
+        public string ToString()
         {
             return x + "," + y;
         }
@@ -103,6 +104,9 @@ namespace NFSDK
             return vector.Length();
         }
 
-
+        public static NFVector2 Zero()
+        {
+            return zero;
+        }
     }
 }
