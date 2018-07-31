@@ -33,7 +33,6 @@
 NFCKernelModule::NFCKernelModule(NFIPluginManager* p)
 {
     nGUIDIndex = 0;
-    mnRandomPos = 0;
     nLastTime = 0;
 
     pPluginManager = p;
@@ -51,8 +50,8 @@ void NFCKernelModule::InitRandom()
 {
     mvRandom.clear();
 
-    int nRandomMax = 100000;
-    mnRandomPos = 0;
+    constexpr int nRandomMax = 100000;
+	mvRandom.reserve(nRandomMax);
 
     std::random_device rd;
     std::mt19937 gen(rd());
@@ -60,8 +59,10 @@ void NFCKernelModule::InitRandom()
 
     for (int i = 0; i < nRandomMax; i++)
     {
-        mvRandom.push_back((float) dis(gen));
+        mvRandom.emplace_back((float) dis(gen));
     }
+
+	mxRandomItor = mvRandom.cbegin();
 }
 
 bool NFCKernelModule::Init()
@@ -1536,45 +1537,31 @@ bool NFCKernelModule::BeforeShut()
 }
 
 void NFCKernelModule::Random(int nStart, int nEnd, int nCount, NFDataList& valueList)
-{
-    if (mnRandomPos + nCount >= mvRandom.size())
+{	
+    for (int i = 0; i < nCount; i++)
     {
-        mnRandomPos = 0;
+        valueList.Add(static_cast<NFINT64>(Random(nStart,nEnd)));
     }
-
-    for (int i = mnRandomPos; i < mnRandomPos + nCount; i++)
-    {
-        float fRanValue = mvRandom.at(i);
-        int nValue = int((nEnd - nStart) * fRanValue) + nStart;
-        valueList.Add((NFINT64)nValue);
-    }
-
-    mnRandomPos += nCount;
 }
 
 int NFCKernelModule::Random(int nStart, int nEnd)
 {
-	if (mnRandomPos + 1 >= mvRandom.size())
+	if (++mxRandomItor == mvRandom.cend())
 	{
-		mnRandomPos = 0;
+		mxRandomItor = mvRandom.cbegin();
 	}
 
-	float fRanValue = mvRandom.at(mnRandomPos);
-	mnRandomPos++;
-
-	int nValue = int((nEnd - nStart) * fRanValue) + nStart;
-	return nValue;
+	return static_cast<int>((nEnd - nStart) * *mxRandomItor) + nStart;
 }
 
 float NFCKernelModule::Random()
 {
-	mnRandomPos++;
-
-	if (mnRandomPos + 1 >= mvRandom.size())
+	if (++mxRandomItor == mvRandom.cend())
 	{
-		mnRandomPos = 0;
+		mxRandomItor = mvRandom.cbegin();
 	}
-	return mvRandom.at(mnRandomPos);;
+
+	return *mxRandomItor;
 }
 
 bool NFCKernelModule::AddClassCallBack(const std::string& strClassName, const CLASS_EVENT_FUNCTOR_PTR& cb)
