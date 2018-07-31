@@ -5,7 +5,7 @@ file(GLOB NFWorldNet_ClientPlugin_ROOT_Cpp
 file(GLOB NFWorldNet_ClientPlugin_ROOT_Hpp 
 	*.h)
 
-add_library(NFWorldNet_ClientPlugin SHARED
+add_library(NFWorldNet_ClientPlugin STATIC
 	${NFWorldNet_ClientPlugin_ROOT_Cpp}
 	${NFWorldNet_ClientPlugin_ROOT_Hpp})
 	
@@ -19,12 +19,14 @@ set_target_properties( NFWorldNet_ClientPlugin PROPERTIES
 link_NFSDK("NFWorldNet_ClientPlugin")
 
 if(UNIX)
+	target_link_libraries(NFWorldNet_ClientPlugin -static-libstdc++)
 	add_definitions(
 		-D_USRDLL
 		-DELPP_NO_DEFAULT_LOG_FILE
 	)
 
 else()
+	target_link_libraries(NFWorldNet_ClientPlugin -static-libstdc++)
 	add_definitions(
 		-DWIN
 		-D_USRDLL

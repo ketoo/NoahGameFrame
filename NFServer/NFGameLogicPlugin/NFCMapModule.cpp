@@ -1,10 +1,28 @@
-// -------------------------------------------------------------------------
-//    @FileName				:    NFCMapModule.cpp
-//    @Author               :    LvSheng.Huang
-//    @Date                 :    2013-07-05
-//    @Module               :    NFCMapModule
-//    @Desc                 :
-// -------------------------------------------------------------------------
+/*
+            This file is part of: 
+                NoahFrame
+            https://github.com/ketoo/NoahGameFrame
+
+   Copyright 2009 - 2018 NoahFrame(NoahGameFrame)
+
+   File creator: lvsheng.huang
+   
+   NoahFrame is open-source software and you can redistribute it and/or modify
+   it under the terms of the License; besides, anyone who use this file/software must include this copyright announcement.
+
+   Licensed under the Apache License, Version 2.0 (the "License");
+   you may not use this file except in compliance with the License.
+   You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   See the License for the specific language governing permissions and
+   limitations under the License.
+*/
+
 
 #include "NFCMapModule.h"
 #include "NFComm/NFMessageDefine/NFProtocolDefine.hpp"
@@ -12,11 +30,11 @@
 bool NFCMapModule::Init()
 {
 	m_pNetModule = pPluginManager->FindModule<NFINetModule>();
-	m_pBigMapRedisModule = pPluginManager->FindModule<NFIBigMapRedisModule>();
+	//m_pBigMapRedisModule = pPluginManager->FindModule<NFIBigMapRedisModule>();
 	m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>();
 	m_pLogicClassModule = pPluginManager->FindModule<NFIClassModule>();
 	m_pElementModule = pPluginManager->FindModule<NFIElementModule>();
-	m_pGuildRedisModule = pPluginManager->FindModule<NFIGuildRedisModule>();
+	//m_pGuildRedisModule = pPluginManager->FindModule<NFIGuildRedisModule>();
 	m_pGameServerNet_ServerModule = pPluginManager->FindModule<NFIGameServerNet_ServerModule>();
 
     return true;
@@ -54,7 +72,7 @@ void NFCMapModule::ReqBigMapsInfo(const NFSOCK nSockIndex, const int nMsgID, con
 
 
 	NF_SHARE_PTR<NFIClass> xLogicClass = m_pLogicClassModule->GetElement(NFrame::Map::ThisName());
-	
+	/*
 	//find all title info
 	NFMsg::AckBigMapInfo xAckBigMapInfo;
 	std::vector<NFMsg::BigMapGridBaseInfo> xBigMapGridBaseInfoList;
@@ -72,12 +90,14 @@ void NFCMapModule::ReqBigMapsInfo(const NFSOCK nSockIndex, const int nMsgID, con
 
 		m_pGameServerNet_ServerModule->SendMsgPBToGate(NFMsg::EGMI_ACK_BIG_MAP_INFO, xAckBigMapInfo, nPlayerID);
 	}
+	*/
 }
 
 void NFCMapModule::ReqMapTitleInfo(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
 {
 	CLIENT_MSG_PROCESS( nMsgID, msg, nLen, NFMsg::ReqBigMapGridInfo);
 	
+	/*
 	NFMsg::AckBigMapGridInfo xAckBigMapGridInfo;
 
 	int nTitleCount = xMsg.map_title_id_size();
@@ -136,6 +156,7 @@ void NFCMapModule::ReqMapTitleInfo(const NFSOCK nSockIndex, const int nMsgID, co
 	}
 
 	m_pGameServerNet_ServerModule->SendMsgPBToGate(NFMsg::EGMI_ACK_MAP_GRID_INFO, xAckBigMapGridInfo, nPlayerID);
+	*/
 }
 
 void NFCMapModule::ReqStation(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
@@ -182,13 +203,13 @@ void NFCMapModule::ReqLeaveMsgToMap(const NFSOCK nSockIndex, const int nMsgID, c
 		return;
 	}
 
-	m_pBigMapRedisModule->AddGridLeaveMsgInfo(xMsg.map_title_id(), xMsg.leave_msg());
+	//m_pBigMapRedisModule->AddGridLeaveMsgInfo(xMsg.map_title_id(), xMsg.leave_msg());
 }
 
 void NFCMapModule::ReqMapHunting(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
 {
 	CLIENT_MSG_PROCESS( nMsgID, msg, nLen, NFMsg::ReqMapHunting);
-
+	/*
 	if (!m_pElementModule->ExistElement(xMsg.map_title_id()))
 	{
 		return;
@@ -204,7 +225,7 @@ void NFCMapModule::ReqMapHunting(const NFSOCK nSockIndex, const int nMsgID, cons
 	xGridBaseInfo.mutable_hurter()->CopyFrom(NFINetModule::NFToPB(nPlayerID));
 
 	m_pBigMapRedisModule->SetGridBaseInfo(xMsg.map_title_id(), xGridBaseInfo);
-
+	*/
 	//show msgbox
 }
 
@@ -216,6 +237,7 @@ void NFCMapModule::ReqMapKingWar(const NFSOCK nSockIndex, const int nMsgID, cons
 	{
 		return;
 	}
+	/*
 
 	NFMsg::BigMapGridBaseInfo xGridBaseInfo;
 	if (!m_pBigMapRedisModule->GetGridBaseInfo(xMsg.map_title(), xGridBaseInfo))
@@ -227,12 +249,13 @@ void NFCMapModule::ReqMapKingWar(const NFSOCK nSockIndex, const int nMsgID, cons
 	xGridBaseInfo.mutable_kingwarrer()->CopyFrom(NFINetModule::NFToPB(nPlayerID));
 
 	m_pBigMapRedisModule->SetGridBaseInfo(xMsg.map_title(), xGridBaseInfo);
-
+	*/
 	//show msgbox
 }
 
 void NFCMapModule::EndMapHunting(const std::string& strTitleID)
 {
+	/*
 	NFMsg::BigMapGridBaseInfo xGridBaseInfo;
 	if (!m_pBigMapRedisModule->GetGridBaseInfo(strTitleID, xGridBaseInfo))
 	{
@@ -243,12 +266,13 @@ void NFCMapModule::EndMapHunting(const std::string& strTitleID)
 	xGridBaseInfo.mutable_kingwarrer()->CopyFrom(NFINetModule::NFToPB(NFGUID()));
 
 	m_pBigMapRedisModule->SetGridBaseInfo(strTitleID, xGridBaseInfo);
-
+	*/
 	//show msgbox and send mail to award
 }
 
 void NFCMapModule::EndMapKingWar(const std::string& strTitleID)
 {
+	/*
 	NFMsg::BigMapGridBaseInfo xGridBaseInfo;
 	if (!m_pBigMapRedisModule->GetGridBaseInfo(strTitleID, xGridBaseInfo))
 	{
@@ -259,7 +283,7 @@ void NFCMapModule::EndMapKingWar(const std::string& strTitleID)
 	xGridBaseInfo.mutable_kingwarrer()->CopyFrom(NFINetModule::NFToPB(NFGUID()));
 
 	m_pBigMapRedisModule->SetGridBaseInfo(strTitleID, xGridBaseInfo);
-
+	*/
 	//show msgbox and send mail to award
 }
 
