@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project DefaultTargets="Build" ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|x64">
       <Configuration>Debug</Configuration>
@@ -15,6 +15,7 @@
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>NFDataNoSqlPlugin</RootNamespace>
     <ProjectName>NFNoSqlPlugin</ProjectName>
+    <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
@@ -59,7 +60,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>_X64;_DEBUG;_LIB;WIN32;WIN;NF_NONCLIENT_BUILD;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>$(SolutionDir)\Dependencies\protobuf\src\;$(SolutionDir);$(SolutionDir)\Dependencies\;$(SolutionDir)\Dependencies\libevent\;$(SolutionDir)\Dependencies\libevent\WIN32-Code\nmake;$(SolutionDir)\Dependencies\libevent\WIN32-Code\;$(SolutionDir)\Dependencies\libevent\include\;$(SolutionDir)\Dependencies\libevent\compat\;$(SolutionDir)\Dependencies\openssl\include;$(SolutionDir)\Dependencies\websocketpp;$(SolutionDir)\Dependencies\asio;$(SolutionDir)\Dependencies\redis-cplusplus-client\msvc\anet_win32\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)\Dependencies\protobuf\src\;$(SolutionDir);$(SolutionDir)\Dependencies\hiredis\hiredis_win;$(SolutionDir)\Dependencies\;$(SolutionDir)\Dependencies\libevent\;$(SolutionDir)\Dependencies\libevent\WIN32-Code\nmake;$(SolutionDir)\Dependencies\libevent\WIN32-Code\;$(SolutionDir)\Dependencies\libevent\include\;$(SolutionDir)\Dependencies\libevent\compat\;$(SolutionDir)\Dependencies\openssl\include;$(SolutionDir)\Dependencies\websocketpp;$(SolutionDir)\Dependencies\asio;$(SolutionDir)\Dependencies\redis-cplusplus-client\msvc\anet_win32\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
       <BrowseInformation>false</BrowseInformation>
     </ClCompile>
@@ -83,7 +84,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>WIN;WIN32;_X64;NDEBUG;_USRDLL;THERON_CPP11;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>$(SolutionDir)\Dependencies\protobuf\src\;$(SolutionDir);$(SolutionDir)\Dependencies\;$(SolutionDir)\Dependencies\libevent\;$(SolutionDir)\Dependencies\libevent\WIN32-Code\nmake;$(SolutionDir)\Dependencies\libevent\WIN32-Code\;$(SolutionDir)\Dependencies\libevent\include\;$(SolutionDir)\Dependencies\libevent\compat\;$(SolutionDir)\Dependencies\openssl\include;$(SolutionDir)\Dependencies\websocketpp;$(SolutionDir)\Dependencies\asio;$(SolutionDir)\Dependencies\redis-cplusplus-client\msvc\anet_win32\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)\Dependencies\hiredis\hiredis_win;$(SolutionDir)\Dependencies\protobuf\src\;$(SolutionDir);$(SolutionDir)\Dependencies\;$(SolutionDir)\Dependencies\libevent\;$(SolutionDir)\Dependencies\libevent\WIN32-Code\nmake;$(SolutionDir)\Dependencies\libevent\WIN32-Code\;$(SolutionDir)\Dependencies\libevent\include\;$(SolutionDir)\Dependencies\libevent\compat\;$(SolutionDir)\Dependencies\openssl\include;$(SolutionDir)\Dependencies\websocketpp;$(SolutionDir)\Dependencies\asio;$(SolutionDir)\Dependencies\redis-cplusplus-client\msvc\anet_win32\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -107,31 +108,28 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
       </PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="NFCNoSqlDriver.cpp" />
     <ClCompile Include="NFCNoSqlModule.cpp" />
     <ClCompile Include="NFNoSqlPlugin.cpp" />
     <ClCompile Include="NFRedisClient.cpp" />
     <ClCompile Include="NFRedisClientHash.cpp" />
     <ClCompile Include="NFRedisClientKey.cpp" />
     <ClCompile Include="NFRedisClientList.cpp" />
+    <ClCompile Include="NFRedisClientPubSub.cpp" />
     <ClCompile Include="NFRedisClientServer.cpp" />
     <ClCompile Include="NFRedisClientSet.cpp" />
     <ClCompile Include="NFRedisClientSocket.cpp" />
     <ClCompile Include="NFRedisClientSort.cpp" />
     <ClCompile Include="NFRedisClientString.cpp" />
     <ClCompile Include="NFRedisCommand.cpp" />
-    <ClCompile Include="NFRedisResult.cpp" />
     <ClCompile Include="NFRedisTester.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="NFCNoSqlDriver.h" />
     <ClInclude Include="NFCNoSqlModule.h" />
     <ClInclude Include="NFNoSqlPlugin.h" />
     <ClInclude Include="NFRedisClient.h" />
     <ClInclude Include="NFRedisClientSocket.h" />
     <ClInclude Include="NFRedisCommand.h" />
     <ClInclude Include="NFRedisProtocolDefine.h" />
-    <ClInclude Include="NFRedisResult.h" />
     <ClInclude Include="NFRedisTester.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

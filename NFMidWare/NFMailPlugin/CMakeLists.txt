@@ -5,7 +5,7 @@ file(GLOB NFMailPlugin_ROOT_Cpp
 file(GLOB NFMailPlugin_ROOT_Hpp 
 	*.h)
 
-add_library(NFMailPlugin SHARED
+add_library(NFMailPlugin STATIC
 	${NFMailPlugin_ROOT_Cpp}
 	${NFMailPlugin_ROOT_Hpp})
 	
@@ -19,12 +19,19 @@ set_target_properties( NFMailPlugin PROPERTIES
 link_NFSDK("NFMailPlugin")
 
 if(UNIX)
+
+	target_link_libraries(NFMailPlugin -static-libstdc++)
+
 	add_definitions(
 		-D_USRDLL
 		-DELPP_NO_DEFAULT_LOG_FILE
 	)
 	
 else()
+
+
+	target_link_libraries(NFMailPlugin -static-libstdc++)
+	
 	add_definitions(
 		-DWIN
 		-D_USRDLL
