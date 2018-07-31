@@ -179,7 +179,8 @@ protected:
 private:
     std::vector<float> mvRandom;
 	int nGUIDIndex;
-    int mnRandomPos;
+    //int mnRandomPos;
+	decltype(mvRandom.cbegin()) mxRandomItor;
 
     NFGUID mnCurExeObject;
     NFINT64 nLastTime;
