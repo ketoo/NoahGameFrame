@@ -23,7 +23,7 @@ cd libevent
 make clean
 chmod +x ./configure
 #./configure --disable-shared --disable-openssl
-./configure --disable-shared
+./configure --disable-shared --disable-openssl
 make
 
 cp -R -f ./.libs/*.a ../lib/Debug/

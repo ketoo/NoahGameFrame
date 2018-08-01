@@ -211,7 +211,7 @@ bool NFCGuildModule::MemberOffline(const NFGUID& self, const NFGUID& xGuild)
 		xRecord->SetInt(nRow, NFrame::Guild::Guild_MemberList::GameID, 0);
 
 		NFDateTime xTime = NFDateTime::Now();
-		xRecord->SetString(nRow, NFrame::Guild::Guild_MemberList::LastTime, xTime.GetAsString());
+		xRecord->SetString(nRow, NFrame::Guild::Guild_MemberList::LastTime, xTime.ToString());
 
 		return true;
 	}
