@@ -565,6 +565,11 @@ bool NFCCreateRoleModule::ConvertPropertyManagerToPB(const NF_SHARE_PTR<NFIPrope
 		NF_SHARE_PTR<NFIProperty> xPropert = pProps->First();
 		while (xPropert)
 		{
+			if (!xPropert->GetCache() && !xPropert->GetSave())
+			{
+				continue;
+			}
+
 			switch (xPropert->GetType())
 			{
 			case NFDATA_TYPE::TDATA_INT:
@@ -596,6 +601,8 @@ bool NFCCreateRoleModule::ConvertPropertyManagerToPB(const NF_SHARE_PTR<NFIPrope
 				NFMsg::PropertyString* pData = pPropertyData->add_property_string_list();
 				pData->set_property_name(xPropert->GetKey());
 				pData->set_data(xPropert->GetString());
+
+				std::cout << xPropert->GetKey() << " " << xPropert->GetString() << std::endl;
 			}
 			break;
 
