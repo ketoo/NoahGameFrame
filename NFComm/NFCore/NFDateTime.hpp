@@ -74,6 +74,7 @@ public:
 		return _value;
 	}
 
+	/*
 	static NFTimeSpan MaxValue()
 	{
 		static NFTimeSpan _value = std::chrono::system_clock::duration::max();
@@ -85,6 +86,7 @@ public:
 		static NFTimeSpan _value = std::chrono::system_clock::duration::min();
 		return _value;
 	}
+	*/
 
 	NFTimeSpan(long long ticks) :
 		NFTimeSpan(std::chrono::system_clock::duration(ticks))
@@ -294,6 +296,7 @@ protected:
 class NFDateTime
 {
 public:
+	/*
 	static NFDateTime MinValue()
 	{
 		static NFDateTime _value = std::chrono::system_clock::time_point::min();
@@ -305,7 +308,7 @@ public:
 		static NFDateTime _value = std::chrono::system_clock::time_point::max();
 		return _value;
 	}
-
+	*/
 	NFDateTime(int year, int month, int day) :
 		NFDateTime(year, month, day, 0, 0, 0, 0)
 	{}
