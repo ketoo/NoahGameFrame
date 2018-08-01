@@ -196,6 +196,7 @@ protected:
 private:
     std::vector<float> mvRandom;
 	int nGUIDIndex;
+    //int mnRandomPos;
 	decltype(mvRandom.cbegin()) mxRandomItor;
 
     NFGUID mnCurExeObject;
