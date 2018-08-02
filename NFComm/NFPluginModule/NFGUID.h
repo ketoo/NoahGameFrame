@@ -16,34 +16,46 @@
 
 struct NFGUID
 {
-    NFINT64 nData64;
-    NFINT64 nHead64;
+	NFINT64 nData64;
+	NFINT64 nHead64;
 
-    NFGUID()
-    {
-        nData64 = 0;
-        nHead64 = 0;
-    }
+	NFGUID()
+	{
+		nData64 = 0;
+		nHead64 = 0;
+	}
 
-    NFGUID(NFINT64 nHeadData, NFINT64 nData)
-    {
-        nHead64 = nHeadData;
-        nData64 = nData;
-    }
+	NFGUID(NFINT64 nHeadData, NFINT64 nData)
+	{
+		nHead64 = nHeadData;
+		nData64 = nData;
+	}
 
-    NFGUID(const NFGUID& xData)
-    {
-        nHead64 = xData.nHead64;
-        nData64 = xData.nData64;
-    }
+	NFGUID(const NFGUID& xData)
+	{
+		nHead64 = xData.nHead64;
+		nData64 = xData.nData64;
+	}
 
-    NFGUID& operator=(const NFGUID& xData)
-    {
-        nHead64 = xData.nHead64;
-        nData64 = xData.nData64;
+	NFGUID(const std::string& strID)
+	{
+		FromString(strID);
+	}
 
-        return *this;
-    }
+	NFGUID& operator=(const NFGUID& xData)
+	{
+		nHead64 = xData.nHead64;
+		nData64 = xData.nData64;
+
+		return *this;
+	}
+
+	NFGUID& operator=(const std::string& strID)
+	{
+		FromString(strID);
+
+		return *this;
+	}
 
     const NFINT64 GetData() const
     {
