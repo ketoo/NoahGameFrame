@@ -1055,7 +1055,7 @@ bool NFCLuaScriptModule::Register()
 		.addFunction("time", &NFCLuaScriptModule::GetNowTime)
 		.addFunction("new_id", &NFCLuaScriptModule::CreateID)
 		.addFunction("app_id", &NFCLuaScriptModule::APPID)
-		.addFunction("app_type", &NFCLuaScriptModule::APPID)
+		.addFunction("app_type", &NFCLuaScriptModule::APPType)
 
 		.addFunction("exist_element", &NFCLuaScriptModule::ExistElementObject)
 		.addFunction("get_ele_list", &NFCLuaScriptModule::GetEleList)
