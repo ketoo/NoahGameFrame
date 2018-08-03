@@ -1,0 +1,10 @@
+<XML>
+	<TutorialServer>
+		<Plugin Name="NFKernelPlugin" />
+		<Plugin Name="NFConfigPlugin" />
+		
+		<Plugin Name="NFLogPlugin" />
+		<Plugin Name="NFActorPlugin" />
+		<Plugin Name="Tutorial4" />	
+	</TutorialServer>
+</XML>

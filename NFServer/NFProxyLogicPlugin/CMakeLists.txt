@@ -5,7 +5,7 @@ file(GLOB NFProxyLogicPlugin_ROOT_Cpp
 file(GLOB NFProxyLogicPlugin_ROOT_Hpp 
 	*.h)
 
-add_library(NFProxyLogicPlugin SHARED
+add_library(NFProxyLogicPlugin STATIC
 	${NFProxyLogicPlugin_ROOT_Cpp}
 	${NFProxyLogicPlugin_ROOT_Hpp})
 	
@@ -19,12 +19,14 @@ set_target_properties( NFProxyLogicPlugin PROPERTIES
 link_NFSDK("NFProxyLogicPlugin")
 
 if(UNIX)
+	target_link_libraries(NFProxyLogicPlugin -static-libstdc++)
 	add_definitions(
 		-D_USRDLL
 		-DELPP_NO_DEFAULT_LOG_FILE
 	)
 
 else()
+	target_link_libraries(NFProxyLogicPlugin -static-libstdc++)
 	add_definitions(
 		-DWIN
 		-D_USRDLL
