@@ -1,0 +1,386 @@
+fileFormatVersion: 2
+guid: 27dc1f41f9a3fad46a08a615f1730ad1
+timeCreated: 1460541017
+licenseType: Store
+ModelImporter:
+  serializedVersion: 19
+  fileIDToRecycleName:
+    100000: Bird
+    100002: //RootNode
+    100004: Controls
+    100006: Disguise
+    100008: Hair
+    100010: HairEnd
+    100012: Head
+    100014: joint26
+    100016: LeftBackToe
+    100018: LeftBackToeEnd
+    100020: LeftDownWing
+    100022: LeftDownWingEnd
+    100024: LeftLeg
+    100026: LeftToe
+    100028: LeftToeEnd
+    100030: LeftUpLeg
+    100032: LeftUpWing
+    100034: LeftUpWingEnd
+    100036: Mesh
+    100038: RightBackToe
+    100040: RightBackToeEnd
+    100042: RightDownWing
+    100044: RightDownWingEnd
+    100046: RightLeg
+    100048: RightToe
+    100050: RightToeEnd
+    100052: RightUpLeg
+    100054: RightUpWing
+    100056: RightUpWingEnd
+    100058: Skeleton
+    100060: Spine
+    100062: Tail
+    100064: Bird 1
+    100066: ControlsHair
+    100068: ControlsHead
+    100070: ControlsLeftDownWing
+    100072: ControlsLeftFoot
+    100074: ControlsLeftPoleVector
+    100076: ControlsLeftToes
+    100078: ControlsLeftUpWing
+    100080: ControlsRightDownWing
+    100082: ControlsRightFoot
+    100084: ControlsRightPoleVector
+    100086: ControlsRightToes
+    100088: ControlsRightUpWing
+    100090: ControlsSpine
+    100092: ControlsTail
+    100094: Glasses
+    100096: ikHandleBackToe
+    100098: ikHandleLeftLeg
+    100100: ikHandleRightBackToe
+    100102: ikHandleRightLeg
+    100104: ikHandleRightToe
+    100106: ikHandleToe
+    400000: Bird
+    400002: //RootNode
+    400004: Controls
+    400006: Disguise
+    400008: Hair
+    400010: HairEnd
+    400012: Head
+    400014: joint26
+    400016: LeftBackToe
+    400018: LeftBackToeEnd
+    400020: LeftDownWing
+    400022: LeftDownWingEnd
+    400024: LeftLeg
+    400026: LeftToe
+    400028: LeftToeEnd
+    400030: LeftUpLeg
+    400032: LeftUpWing
+    400034: LeftUpWingEnd
+    400036: Mesh
+    400038: RightBackToe
+    400040: RightBackToeEnd
+    400042: RightDownWing
+    400044: RightDownWingEnd
+    400046: RightLeg
+    400048: RightToe
+    400050: RightToeEnd
+    400052: RightUpLeg
+    400054: RightUpWing
+    400056: RightUpWingEnd
+    400058: Skeleton
+    400060: Spine
+    400062: Tail
+    400064: Bird 1
+    400066: ControlsHair
+    400068: ControlsHead
+    400070: ControlsLeftDownWing
+    400072: ControlsLeftFoot
+    400074: ControlsLeftPoleVector
+    400076: ControlsLeftToes
+    400078: ControlsLeftUpWing
+    400080: ControlsRightDownWing
+    400082: ControlsRightFoot
+    400084: ControlsRightPoleVector
+    400086: ControlsRightToes
+    400088: ControlsRightUpWing
+    400090: ControlsSpine
+    400092: ControlsTail
+    400094: Glasses
+    400096: ikHandleBackToe
+    400098: ikHandleLeftLeg
+    400100: ikHandleRightBackToe
+    400102: ikHandleRightLeg
+    400104: ikHandleRightToe
+    400106: ikHandleToe
+    2300000: //RootNode
+    2300002: Disguise
+    2300004: Bird
+    2300006: ControlsLeftPoleVector
+    2300008: ControlsRightPoleVector
+    2300010: Glasses
+    3300000: //RootNode
+    3300002: Disguise
+    3300004: Bird
+    3300006: ControlsLeftPoleVector
+    3300008: ControlsRightPoleVector
+    3300010: Glasses
+    4300000: BirdGlassesCutscene
+    4300002: Bird
+    4300004: Disguise
+    4300006: Glasses
+    4300008: ControlsLeftPoleVector
+    4300010: ControlsRightPoleVector
+    7400000: BirdIdle
+    7400002: FlyAway
+    9500000: //RootNode
+    13700000: Bird
+    13700002: Bird 1
+  materials:
+    importMaterials: 0
+    materialName: 1
+    materialSearch: 2
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleRotations: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 0
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: BirdIdle
+      takeName: Take 001
+      firstFrame: 0
+      lastFrame: 120
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 1
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Bird
+        weight: 1
+      - path: Bird/Mesh
+        weight: 1
+      - path: Bird/Mesh/Bird 1
+        weight: 1
+      - path: Bird/Skeleton
+        weight: 1
+      - path: Bird/Skeleton/Spine
+        weight: 1
+      - path: Bird/Skeleton/Spine/Head
+        weight: 1
+      - path: Bird/Skeleton/Spine/Head/Hair
+        weight: 1
+      - path: Bird/Skeleton/Spine/Head/Hair/HairEnd
+        weight: 1
+      - path: Bird/Skeleton/Spine/LeftDownWing
+        weight: 1
+      - path: Bird/Skeleton/Spine/LeftDownWing/LeftDownWingEnd
+        weight: 1
+      - path: Bird/Skeleton/Spine/LeftUpLeg
+        weight: 1
+      - path: Bird/Skeleton/Spine/LeftUpLeg/LeftLeg
+        weight: 1
+      - path: Bird/Skeleton/Spine/LeftUpLeg/LeftLeg/LeftBackToe
+        weight: 1
+      - path: Bird/Skeleton/Spine/LeftUpLeg/LeftLeg/LeftBackToe/LeftBackToeEnd
+        weight: 1
+      - path: Bird/Skeleton/Spine/LeftUpLeg/LeftLeg/LeftToe
+        weight: 1
+      - path: Bird/Skeleton/Spine/LeftUpLeg/LeftLeg/LeftToe/LeftToeEnd
+        weight: 1
+      - path: Bird/Skeleton/Spine/LeftUpWing
+        weight: 1
+      - path: Bird/Skeleton/Spine/LeftUpWing/LeftUpWingEnd
+        weight: 1
+      - path: Bird/Skeleton/Spine/RightDownWing
+        weight: 1
+      - path: Bird/Skeleton/Spine/RightDownWing/RightDownWingEnd
+        weight: 1
+      - path: Bird/Skeleton/Spine/RightUpLeg
+        weight: 1
+      - path: Bird/Skeleton/Spine/RightUpLeg/RightLeg
+        weight: 1
+      - path: Bird/Skeleton/Spine/RightUpLeg/RightLeg/RightBackToe
+        weight: 1
+      - path: Bird/Skeleton/Spine/RightUpLeg/RightLeg/RightBackToe/RightBackToeEnd
+        weight: 1
+      - path: Bird/Skeleton/Spine/RightUpLeg/RightLeg/RightToe
+        weight: 1
+      - path: Bird/Skeleton/Spine/RightUpLeg/RightLeg/RightToe/RightToeEnd
+        weight: 1
+      - path: Bird/Skeleton/Spine/RightUpWing
+        weight: 1
+      - path: Bird/Skeleton/Spine/RightUpWing/RightUpWingEnd
+        weight: 1
+      - path: Bird/Skeleton/Spine/Tail
+        weight: 1
+      - path: Bird/Skeleton/Spine/Tail/joint26
+        weight: 1
+      - path: Glasses
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: FlyAway
+      takeName: Take 001
+      firstFrame: 121
+      lastFrame: 247
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Bird
+        weight: 1
+      - path: Bird/Mesh
+        weight: 1
+      - path: Bird/Mesh/Bird 1
+        weight: 1
+      - path: Bird/Skeleton
+        weight: 1
+      - path: Bird/Skeleton/Spine
+        weight: 1
+      - path: Bird/Skeleton/Spine/Head
+        weight: 1
+      - path: Bird/Skeleton/Spine/Head/Hair
+        weight: 1
+      - path: Bird/Skeleton/Spine/Head/Hair/HairEnd
+        weight: 1
+      - path: Bird/Skeleton/Spine/LeftDownWing
+        weight: 1
+      - path: Bird/Skeleton/Spine/LeftDownWing/LeftDownWingEnd
+        weight: 1
+      - path: Bird/Skeleton/Spine/LeftUpLeg
+        weight: 1
+      - path: Bird/Skeleton/Spine/LeftUpLeg/LeftLeg
+        weight: 1
+      - path: Bird/Skeleton/Spine/LeftUpLeg/LeftLeg/LeftBackToe
+        weight: 1
+      - path: Bird/Skeleton/Spine/LeftUpLeg/LeftLeg/LeftBackToe/LeftBackToeEnd
+        weight: 1
+      - path: Bird/Skeleton/Spine/LeftUpLeg/LeftLeg/LeftToe
+        weight: 1
+      - path: Bird/Skeleton/Spine/LeftUpLeg/LeftLeg/LeftToe/LeftToeEnd
+        weight: 1
+      - path: Bird/Skeleton/Spine/LeftUpWing
+        weight: 1
+      - path: Bird/Skeleton/Spine/LeftUpWing/LeftUpWingEnd
+        weight: 1
+      - path: Bird/Skeleton/Spine/RightDownWing
+        weight: 1
+      - path: Bird/Skeleton/Spine/RightDownWing/RightDownWingEnd
+        weight: 1
+      - path: Bird/Skeleton/Spine/RightUpLeg
+        weight: 1
+      - path: Bird/Skeleton/Spine/RightUpLeg/RightLeg
+        weight: 1
+      - path: Bird/Skeleton/Spine/RightUpLeg/RightLeg/RightBackToe
+        weight: 1
+      - path: Bird/Skeleton/Spine/RightUpLeg/RightLeg/RightBackToe/RightBackToeEnd
+        weight: 1
+      - path: Bird/Skeleton/Spine/RightUpLeg/RightLeg/RightToe
+        weight: 1
+      - path: Bird/Skeleton/Spine/RightUpLeg/RightLeg/RightToe/RightToeEnd
+        weight: 1
+      - path: Bird/Skeleton/Spine/RightUpWing
+        weight: 1
+      - path: Bird/Skeleton/Spine/RightUpWing/RightUpWingEnd
+        weight: 1
+      - path: Bird/Skeleton/Spine/Tail
+        weight: 1
+      - path: Bird/Skeleton/Spine/Tail/joint26
+        weight: 1
+      - path: Glasses
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

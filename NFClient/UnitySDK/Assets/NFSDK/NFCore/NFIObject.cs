@@ -1,3 +1,8 @@
+//-----------------------------------------------------------------------
+// <copyright file="NFIObject.cs">
+//     Copyright (C) 2015-2015 lvsheng.huang <https://github.com/ketoo/NFrame>
+// </copyright>
+//-----------------------------------------------------------------------
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,12 +24,14 @@ namespace NFSDK
 
         public abstract void Init();
         public abstract void Shut();
+
         ///////////////////////////////////////////////////////////////////////
         public abstract NFGUID Self();
         public abstract int ContainerID();
         public abstract int GroupID();
         public abstract string ClassName();
         public abstract string ConfigIndex();
+
         /////////////////////////////////////////////////////////////////
 
         public abstract bool FindProperty(string strPropertyName);

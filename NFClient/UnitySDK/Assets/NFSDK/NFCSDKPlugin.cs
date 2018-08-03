@@ -18,7 +18,7 @@ namespace NFSDK
         {
             Debug.Log("NFCSDKPlugin Install");
             AddModule<NFIElementModule>(new NFCElementModule(mPluginManager));
-            AddModule<NFILogicClassModule>(new NFCLogicClassModule(mPluginManager));
+            AddModule<NFIClassModule>(new NFCClassModule(mPluginManager));
             AddModule<NFIKernelModule>(new NFCKernelModule(mPluginManager));
             AddModule<NFIEventModule>(new NFCEventModule(mPluginManager));
         }
@@ -26,7 +26,7 @@ namespace NFSDK
         {
             Debug.Log("NFCSDKPlugin Uninstall");
             mPluginManager.RemoveModule("NFIElementModule");
-            mPluginManager.RemoveModule("NFILogicClassModule");
+            mPluginManager.RemoveModule("NFIClassModule");
             mPluginManager.RemoveModule("NFIKernelModule");
             mPluginManager.RemoveModule("NFIEventModule");
             mModules.Clear();

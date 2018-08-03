@@ -125,7 +125,7 @@ namespace NFSDK
             return m_curState;
         }
 
-        public void doUpdate()
+        public void Execute()
         {
             if (m_curState == State.CONNECT_FAILED)
             {
@@ -162,8 +162,7 @@ namespace NFSDK
 
             int nByteTrans = m_socket.Send(m_sendPool.Buffer, m_sendPool.ReadPos, nReadSize, SocketFlags.None);
             m_sendPool.ReadPos += nByteTrans;
-            Debug.LogFormat("Send Data{0}", nByteTrans);
-
+            //Debug.LogFormat("Send Data{0}", nByteTrans);
         }
 
         public static UInt16 ConvertUint16(UInt16 value)
@@ -240,13 +239,13 @@ namespace NFSDK
                 length = ConvertUint32(length);
                 nMsgID = ConvertUint16(nMsgID);
 
-                Debug.LogFormat("RecvData {0} \t {1}", length, nMsgID);
+                //Debug.LogFormat("RecvData {0} \t {1}", length, nMsgID);
                 if (nReadSize < length)
                     break;
 
                 m_recvPool.ReadPos += (int)length;
 
-                Debug.LogFormat("Recv:{0}", nMsgID);
+                //Debug.LogFormat("Recv:{0}", nMsgID);
 
                 nReadPos += (int)ConstDefine.NF_PACKET_HEAD_SIZE;
                 length -= ConstDefine.NF_PACKET_HEAD_SIZE;

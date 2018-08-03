@@ -1,0 +1,6 @@
+<!-- edited with XMLSpy v2011 (http://www.altova.com) by tom (acer) -->
+<XML>   
+	<Object ID="NEW_Attack1" ConfigID="NPC_MaskedOrc-Green" X="44.5" Y="95" Z="0"  Weight="100" />
+	<Object ID="NEW_Attack2" ConfigID="NPC_CrawlingBug-Green" X="66.5" Y="95" Z="0" Weight="100" />
+	<Object ID="NEW_Attack3" ConfigID="NPC_FlowerMonster-Blue" X="77.5" Y="95" Z="0" Weight="100" />
+</XML>

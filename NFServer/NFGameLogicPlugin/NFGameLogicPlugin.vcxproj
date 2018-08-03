@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|x64">
       <Configuration>Debug</Configuration>
@@ -101,14 +101,7 @@
   <ItemGroup>
     <ClInclude Include="NFCBuffModule.h" />
     <ClInclude Include="NFCCreateRoleModule.h" />
-    <ClInclude Include="NFCCommonConfigModule.h" />
-    <ClInclude Include="NFCHomeModule.h" />
-    <ClInclude Include="NFCMapModule.h" />
-    <ClInclude Include="NFCPVPModule.h" />
-    <ClInclude Include="NFCTileMapModule.h" />
-    <ClInclude Include="NFCTileModule.h" />
     <ClInclude Include="NFGameLogicPlugin.h" />
-    <ClInclude Include="NFCSurvivalModule.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="dllmain.cpp">
@@ -121,14 +114,7 @@
     </ClCompile>
     <ClCompile Include="NFCBuffModule.cpp" />
     <ClCompile Include="NFCCreateRoleModule.cpp" />
-    <ClCompile Include="NFCCommonConfigModule.cpp" />
-    <ClCompile Include="NFCHomeModule.cpp" />
-    <ClCompile Include="NFCMapModule.cpp" />
-    <ClCompile Include="NFCPVPModule.cpp" />
-    <ClCompile Include="NFCTileMapModule.cpp" />
-    <ClCompile Include="NFCTileModule.cpp" />
     <ClCompile Include="NFGameLogicPlugin.cpp" />
-    <ClCompile Include="NFCSurvivalModule.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

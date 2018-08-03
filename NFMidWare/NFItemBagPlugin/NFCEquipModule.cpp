@@ -1,10 +1,27 @@
-// -------------------------------------------------------------------------
-//    @FileName         :    NFCEquipModule.cpp
-//    @Author               :    LvSheng.Huang
-//    @Date                 :    2013-06-11
-//    @Module               :    NFCEquipModule
-//    @Desc                 :
-// -------------------------------------------------------------------------
+/*
+            This file is part of: 
+                NoahFrame
+            https://github.com/ketoo/NoahGameFrame
+
+   Copyright 2009 - 2018 NoahFrame(NoahGameFrame)
+
+   File creator: lvsheng.huang
+   
+   NoahFrame is open-source software and you can redistribute it and/or modify
+   it under the terms of the License; besides, anyone who use this file/software must include this copyright announcement.
+
+   Licensed under the Apache License, Version 2.0 (the "License");
+   you may not use this file except in compliance with the License.
+   You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   See the License for the specific language governing permissions and
+   limitations under the License.
+*/
 
 #include "NFCEquipModule.h"
 #include "NFComm/NFPluginModule/NFINetModule.h"
@@ -50,9 +67,9 @@ bool NFCEquipModule::IntensifylevelToEquip( const NFGUID& self, const NFGUID& xE
 {
     const int nLevel = GetEquipIntensifyLevel(self, xEquipID);
 
-    const int nCostMoney = m_pCommonConfigModule->GetAttributeInt("IntensifylevelToEquip", lexical_cast<std::string>(nLevel), "CostMoney");
-    const int nConstItemCount = m_pCommonConfigModule->GetAttributeInt("IntensifylevelToEquip", lexical_cast<std::string>(nLevel), "ConstItemCount");
-    const std::string& strCostItemID = m_pCommonConfigModule->GetAttributeString("IntensifylevelToEquip", lexical_cast<std::string>(nLevel), "ConstItem");
+    const int nCostMoney = m_pCommonConfigModule->GetFieldInt("IntensifylevelToEquip", lexical_cast<std::string>(nLevel), "CostMoney");
+    const int nConstItemCount = m_pCommonConfigModule->GetFieldInt("IntensifylevelToEquip", lexical_cast<std::string>(nLevel), "ConstItemCount");
+    const std::string& strCostItemID = m_pCommonConfigModule->GetFieldString("IntensifylevelToEquip", lexical_cast<std::string>(nLevel), "ConstItem");
 
     if (!strCostItemID.empty())
     {
@@ -88,9 +105,9 @@ bool NFCEquipModule::IntensifylevelToEquip( const NFGUID& self, const NFGUID& xE
 bool NFCEquipModule::HoleToEquip( const NFGUID& self, const NFGUID& xEquipID )
 {
     const int nHoleCount = GetEquipHoleCount(self, xEquipID);
-    const int nCostMoney = m_pCommonConfigModule->GetAttributeInt("HoleToEquip", lexical_cast<std::string>(nHoleCount), "CostMoney");
-    const int nConstItemCount = m_pCommonConfigModule->GetAttributeInt("HoleToEquip", lexical_cast<std::string>(nHoleCount), "ConstItemCount");
-    const std::string& strCostItemID = m_pCommonConfigModule->GetAttributeString("HoleToEquip", lexical_cast<std::string>(nHoleCount), "ConstItem");
+    const int nCostMoney = m_pCommonConfigModule->GetFieldInt("HoleToEquip", lexical_cast<std::string>(nHoleCount), "CostMoney");
+    const int nConstItemCount = m_pCommonConfigModule->GetFieldInt("HoleToEquip", lexical_cast<std::string>(nHoleCount), "ConstItemCount");
+    const std::string& strCostItemID = m_pCommonConfigModule->GetFieldString("HoleToEquip", lexical_cast<std::string>(nHoleCount), "ConstItem");
 
     if (!strCostItemID.empty())
     {
@@ -149,9 +166,9 @@ bool NFCEquipModule::InlaystoneToEquip( const NFGUID& self, const NFGUID& xEquip
 
     const int nHoleID = nHoleIndex - NFrame::Player::BagEquipList::InlayStone1 + 1;
 
-    const int nCostMoney = m_pCommonConfigModule->GetAttributeInt("ElementlevelToEquip", lexical_cast<std::string>(nHoleID), "CostMoney");
-    const int nConstItemCount = m_pCommonConfigModule->GetAttributeInt("ElementlevelToEquip", lexical_cast<std::string>(nHoleID), "ConstItemCount");
-    const std::string& strCostItemID = m_pCommonConfigModule->GetAttributeString("ElementlevelToEquip", lexical_cast<std::string>(nHoleID), "ConstItem");
+    const int nCostMoney = m_pCommonConfigModule->GetFieldInt("ElementlevelToEquip", lexical_cast<std::string>(nHoleID), "CostMoney");
+    const int nConstItemCount = m_pCommonConfigModule->GetFieldInt("ElementlevelToEquip", lexical_cast<std::string>(nHoleID), "ConstItemCount");
+    const std::string& strCostItemID = m_pCommonConfigModule->GetFieldString("ElementlevelToEquip", lexical_cast<std::string>(nHoleID), "ConstItem");
 
     if (!strCostItemID.empty())
     {
@@ -191,9 +208,9 @@ bool NFCEquipModule::ElementlevelToEquip( const NFGUID& self, const NFGUID& xEqu
     const int nElementIndex = NFrame::Player::BagEquipList::ElementLevel1_FIRE + eElemetType;
     const int nElementLevel = GetEquipElementLevel(self, xEquipID, nElementIndex);
 
-    const int nCostMoney = m_pCommonConfigModule->GetAttributeInt("ElementlevelToEquip", lexical_cast<std::string>(nElementLevel), "CostMoney");
-    const int nConstItemCount = m_pCommonConfigModule->GetAttributeInt("ElementlevelToEquip", lexical_cast<std::string>(nElementLevel), "ConstItemCount");
-    const std::string& strCostItemID = m_pCommonConfigModule->GetAttributeString("ElementlevelToEquip", lexical_cast<std::string>(nElementLevel), "ConstItem");
+    const int nCostMoney = m_pCommonConfigModule->GetFieldInt("ElementlevelToEquip", lexical_cast<std::string>(nElementLevel), "CostMoney");
+    const int nConstItemCount = m_pCommonConfigModule->GetFieldInt("ElementlevelToEquip", lexical_cast<std::string>(nElementLevel), "ConstItemCount");
+    const std::string& strCostItemID = m_pCommonConfigModule->GetFieldString("ElementlevelToEquip", lexical_cast<std::string>(nElementLevel), "ConstItem");
 
     if (!strCostItemID.empty())
     {
@@ -225,7 +242,7 @@ bool NFCEquipModule::ElementlevelToEquip( const NFGUID& self, const NFGUID& xEqu
     }
     else
     {
-        const int nIsDownLevel = m_pCommonConfigModule->GetAttributeInt("IntensifylevelToEquip", lexical_cast<std::string>(nElementLevel), "IsDownLevel");
+        const int nIsDownLevel = m_pCommonConfigModule->GetFieldInt("IntensifylevelToEquip", lexical_cast<std::string>(nElementLevel), "IsDownLevel");
         if (nIsDownLevel > 0)
         {
             int nAfterLevel = nElementLevel - 1;

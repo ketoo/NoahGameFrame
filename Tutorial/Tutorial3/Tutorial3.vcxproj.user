@@ -10,6 +10,6 @@
     <LocalDebuggerWorkingDirectory>$(SolutionDir)\_Out\Debug</LocalDebuggerWorkingDirectory>
     <DebuggerFlavor>WindowsLocalDebugger</DebuggerFlavor>
     <LocalDebuggerCommand>$(SolutionDir)\_Out\Debug\NFPluginLoader_d.exe</LocalDebuggerCommand>
-    <LocalDebuggerCommandArguments>"Server=TutorialServer" "ID=4"</LocalDebuggerCommandArguments>
+    <LocalDebuggerCommandArguments>"Server=TutorialServer" "ID=4" "Tutorial3.xml"</LocalDebuggerCommandArguments>
   </PropertyGroup>
 </Project>
