@@ -5,7 +5,7 @@ file(GLOB NFSkillPlugin_ROOT_Cpp
 file(GLOB NFSkillPlugin_ROOT_Hpp 
 	*.h)
 
-add_library(NFSkillPlugin SHARED
+add_library(NFSkillPlugin STATIC
 	${NFSkillPlugin_ROOT_Cpp}
 	${NFSkillPlugin_ROOT_Hpp})
 	
@@ -19,12 +19,17 @@ set_target_properties( NFSkillPlugin PROPERTIES
 link_NFSDK("NFSkillPlugin")
 
 if(UNIX)
+
+	target_link_libraries(NFSkillPlugin -static-libstdc++)
+
 	add_definitions(
 		-D_USRDLL
 		-DELPP_NO_DEFAULT_LOG_FILE
 	)
 	
 else()
+	target_link_libraries(NFSkillPlugin -static-libstdc++)
+
 	add_definitions(
 		-DWIN
 		-D_USRDLL

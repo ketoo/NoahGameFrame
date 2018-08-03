@@ -5,7 +5,7 @@ file(GLOB NFAOIPlugin_ROOT_Cpp
 file(GLOB NFAOIPlugin_ROOT_Hpp 
 	*.h)
 
-add_library(NFAOIPlugin SHARED
+add_library(NFAOIPlugin STATIC
 	${NFAOIPlugin_ROOT_Cpp}
 	${NFAOIPlugin_ROOT_Hpp})
 	
@@ -19,12 +19,18 @@ set_target_properties( NFAOIPlugin PROPERTIES
 link_NFSDK("NFAOIPlugin")
 
 if(UNIX)
+
+	target_link_libraries(NFAOIPlugin -static-libstdc++)
+
 	add_definitions(
 		-D_USRDLL
 		-DELPP_NO_DEFAULT_LOG_FILE
 	)
 	
 else()
+
+	target_link_libraries(NFAOIPlugin -static-libstdc++)
+
 	add_definitions(
 		-DWIN
 		-D_USRDLL

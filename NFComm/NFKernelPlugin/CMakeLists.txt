@@ -11,7 +11,7 @@ source_group("NFSceneModule" FILES ${NFKernelPlugin_NFSceneModule_Cpp})
 source_group("NFKernelModule" FILES ${NFKernelPlugin_NFKernelModule_Hpp})
 source_group("NFSceneModule" FILES ${NFKernelPlugin_NFSceneModule_Hpp})
 
-add_library(NFKernelPlugin SHARED
+add_library(NFKernelPlugin STATIC
 	${NFKernelPlugin_NFKernelModule_Cpp} 
 	${NFKernelPlugin_NFSceneModule_Cpp} 
 	${NFKernelPlugin_NFKernelModule_Hpp} 
@@ -22,15 +22,18 @@ add_library(NFKernelPlugin SHARED
 if(UNIX)
 	add_dependencies(NFKernelPlugin NFCore NFConfigPlugin)
 	if (CMAKE_BUILD_TYPE MATCHES "Release")
-		target_link_libraries(NFKernelPlugin  NFCore)
 	else()
-		target_link_libraries(NFKernelPlugin  NFCore)
 	endif()
-
+		
+	target_link_libraries(NFKernelPlugin  NFCore)
+	target_link_libraries(NFKernelPlugin -static-libstdc++)
 else()
 	add_dependencies(NFKernelPlugin NFCore NFConfigPlugin)
 
+	target_link_libraries(NFKernelPlugin -static-libstdc++)
+
 endif()
+
 set_target_properties( NFKernelPlugin PROPERTIES OUTPUT_NAME_DEBUG "NFKernelPlugin_d")
 set_target_properties( NFKernelPlugin PROPERTIES PREFIX "")
 set_target_properties( NFKernelPlugin PROPERTIES
