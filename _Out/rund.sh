@@ -1,4 +1,9 @@
+#!/bin/bash
+
 export LC_ALL="C"
+
+ulimit -c unlimited
+source /etc/profile
 
 sysOS=`uname -s`
 if [ $sysOS == "Darwin" ];then
@@ -18,6 +23,7 @@ chmod -R 777  NFPluginLoader_d
 ./NFPluginLoader_d -d Server=MasterServer ID=3
 
 ./NFPluginLoader_d -d Server=WorldServer ID=7
+
 
 ./NFPluginLoader_d -d Server=LoginServer ID=4
 
