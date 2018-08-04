@@ -1,0 +1,11 @@
+<?xml version='1.0' encoding='utf-8' ?>
+<XML>
+	<Object Id="TALENT1" Desc="Talent1" EffectData="" Icon="" NextID="0" ShowName="T1" SpriteFile="" />
+	<Object Id="TALENT2" Desc="Talent2" EffectData="" Icon="" NextID="0" ShowName="T2" SpriteFile="" />
+	<Object Id="TALENT3" Desc="Talent3" EffectData="" Icon="" NextID="0" ShowName="T3" SpriteFile="" />
+	<Object Id="TALENT4" Desc="Talent4" EffectData="" Icon="" NextID="0" ShowName="T4" SpriteFile="" />
+	<Object Id="TALENT5" Desc="Talent5" EffectData="" Icon="" NextID="0" ShowName="T5" SpriteFile="" />
+	<Object Id="TALENT6" Desc="Talent6" EffectData="" Icon="" NextID="0" ShowName="T6" SpriteFile="" />
+	<Object Id="TALENT7" Desc="Talent7" EffectData="" Icon="" NextID="0" ShowName="T7" SpriteFile="" />
+	<Object Id="TALENT8" Desc="Talent8" EffectData="" Icon="" NextID="0" ShowName="T8" SpriteFile="" />
+</XML>

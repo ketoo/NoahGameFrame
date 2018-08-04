@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 using System;
@@ -7,13 +7,22 @@ namespace NFSDK
 {
     public class NFCPluginManager : NFIPluginManager
     {
+
+		private static NFIPluginManager _instance = null;
+		public static NFIPluginManager Instance()
+        {
+			return _instance;
+        }
+
+
         public NFCPluginManager()
         {
             mPluginManager = this;
+			_instance = this;
         }
-        //------------- �ӿ� -------------------//
+        //------------- 接口 -------------------//
 
-        public override bool Awake()
+        public override void Awake()
         {
             foreach (NFIPlugin plugin in mPlugins.Values)
             {
@@ -22,10 +31,9 @@ namespace NFSDK
                     plugin.Awake();
                 }
             }
-            return true;
         }
 
-        public override bool Init()
+        public override void Init()
         {
             mInitTime = DateTime.Now.Ticks / 10000;
             foreach (NFIPlugin plugin in mPlugins.Values)
@@ -35,10 +43,9 @@ namespace NFSDK
                     plugin.Init();
                 }
             }
-            return true;
         }
 
-        public override bool AfterInit()
+        public override void AfterInit()
         {
             foreach (NFIPlugin plugin in mPlugins.Values)
             {
@@ -47,9 +54,8 @@ namespace NFSDK
                     plugin.AfterInit();
                 }
             }
-            return true;
         }
-        public override bool Execute()
+        public override void Execute()
         {
             mNowTime = DateTime.Now.Ticks / 10000;
 
@@ -57,13 +63,12 @@ namespace NFSDK
             {
                 if (plugin != null)
                 {
-                    plugin.Execute();
+					plugin.Execute();
                 }
             }
-            return true;
         }
 
-        public override bool BeforeShut()
+        public override void BeforeShut()
         {
             foreach (NFIPlugin plugin in mPlugins.Values)
             {
@@ -72,10 +77,9 @@ namespace NFSDK
                     plugin.BeforeShut();
                 }
             }
-            return true;
         }
 
-        public override bool Shut()
+        public override void Shut()
         {
             foreach (NFIPlugin plugin in mPlugins.Values)
             {
@@ -84,7 +88,6 @@ namespace NFSDK
                     plugin.Shut();
                 }
             }
-            return true;
         }
 
 

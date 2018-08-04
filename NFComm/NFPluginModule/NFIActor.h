@@ -1,10 +1,27 @@
-// -------------------------------------------------------------------------
-//    @FileName			:    NFIActor.h
-//    @Author           :    LvSheng.Huang
-//    @Date             :    2012-12-15
-//    @Module           :    NFIActor
-//
-// -------------------------------------------------------------------------
+/*
+            This file is part of: 
+                NoahFrame
+            https://github.com/ketoo/NoahGameFrame
+
+   Copyright 2009 - 2018 NoahFrame(NoahGameFrame)
+
+   File creator: lvsheng.huang
+   
+   NoahFrame is open-source software and you can redistribute it and/or modify
+   it under the terms of the License; besides, anyone who use this file/software must include this copyright announcement.
+
+   Licensed under the Apache License, Version 2.0 (the "License");
+   you may not use this file except in compliance with the License.
+   You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   See the License for the specific language governing permissions and
+   limitations under the License.
+*/
 
 #ifndef NFI_ACTOR_H
 #define NFI_ACTOR_H
@@ -19,7 +36,7 @@
 class NFIComponent;
 class NFIActorModule;
 
-typedef std::function<int(const NFGUID&, const int, const int, std::string&)> ACTOR_PROCESS_FUNCTOR;
+typedef std::function<int(const int, const int, std::string&)> ACTOR_PROCESS_FUNCTOR;
 typedef NF_SHARE_PTR<ACTOR_PROCESS_FUNCTOR> ACTOR_PROCESS_FUNCTOR_PTR;
 
 
@@ -45,8 +62,6 @@ public:
 	std::string data;
 	MessageType msgType;
 	////////////////////event/////////////////////////////////////////////////
-	NFGUID self;
-	//////////////////////////////////////////////////////////////////////////
 	ACTOR_PROCESS_FUNCTOR_PTR xEndFuncptr;
 protected:
 private:
@@ -70,7 +85,7 @@ public:
 		if (!TIsDerived<T, NFIComponent>::Result)
 		{
 			//BaseTypeComponent must inherit from NFIComponent;
-			return NF_SHARE_PTR<T>();
+			return nullptr;
 		}
 
 		NF_SHARE_PTR<NFIComponent> pComponent = FindComponent(strName);
@@ -80,11 +95,11 @@ public:
 			return pT;
 		}
 
-		return NF_SHARE_PTR<T>();
+		return nullptr;
 	}
 	virtual NF_SHARE_PTR<NFIComponent> FindComponent(const std::string& strComponentName) = 0;
 	
-	virtual bool AddBeginunc(const int nSubMsgID, ACTOR_PROCESS_FUNCTOR_PTR xBeginFunctor) = 0;
+	virtual bool AddBeginFunc(const int nSubMsgID, ACTOR_PROCESS_FUNCTOR_PTR xBeginFunctor) = 0;
 	virtual bool AddEndFunc(const int nSubMsgID, ACTOR_PROCESS_FUNCTOR_PTR xEndFunctor) = 0;
     
 	virtual bool SendMsg(const Theron::Address address, const NFIActorMessage& message) = 0;

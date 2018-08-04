@@ -1,0 +1,121 @@
+fileFormatVersion: 2
+guid: ee1701bd3676de14c86a6f7cedc08177
+timeCreated: 1461842000
+licenseType: Store
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: Market_CoffeeSign_Diffuse_0
+    21300002: Market_CoffeeSign_Diffuse_1
+  serializedVersion: 2
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 1
+    linearTexture: 0
+    correctGamma: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 0
+  cubemapConvolution: 0
+  cubemapConvolutionSteps: 7
+  cubemapConvolutionExponent: 1.5
+  seamlessCubemap: 0
+  textureFormat: -1
+  maxTextureSize: 2048
+  textureSettings:
+    filterMode: -1
+    aniso: 16
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  rGBM: 0
+  compressionQuality: 50
+  allowsAlphaSplitting: 0
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 100
+  alphaIsTransparency: 1
+  textureType: 8
+  buildTargetSettings: []
+  spriteSheet:
+    sprites:
+    - name: Market_CoffeeSign_Diffuse_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 256
+        width: 512
+        height: 256
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 182, y: 32}
+        - {x: 182, y: 26}
+        - {x: 183, y: 0}
+        - {x: 197, y: 0}
+        - {x: 197, y: 50}
+        - {x: 253, y: 50}
+        - {x: 255, y: 52}
+        - {x: 255, y: 58}
+        - {x: 249, y: 77}
+        - {x: 255, y: 84}
+        - {x: 255, y: 171}
+        - {x: -221, y: 171}
+        - {x: -249, y: 120}
+        - {x: -249, y: 93}
+        - {x: -223, y: 52}
+        - {x: -198, y: 0}
+        - {x: -182, y: 0}
+        - {x: -92, y: 53}
+        - {x: -37, y: 45}
+        - {x: 183, y: 48}
+    - name: Market_CoffeeSign_Diffuse_1
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 512
+        height: 256
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 182, y: 32}
+        - {x: 182, y: 26}
+        - {x: 183, y: 0}
+        - {x: 197, y: 0}
+        - {x: 197, y: 50}
+        - {x: 253, y: 50}
+        - {x: 255, y: 52}
+        - {x: 255, y: 58}
+        - {x: 249, y: 77}
+        - {x: 255, y: 84}
+        - {x: 255, y: 171}
+        - {x: -221, y: 171}
+        - {x: -249, y: 120}
+        - {x: -249, y: 93}
+        - {x: -223, y: 52}
+        - {x: -198, y: 0}
+        - {x: -182, y: 0}
+        - {x: -92, y: 53}
+        - {x: -37, y: 45}
+        - {x: 183, y: 48}
+    outline: []
+  spritePackingTag: 
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

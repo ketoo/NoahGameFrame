@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,7 +8,7 @@ namespace NFSDK
 {
     public abstract class NFIKernelModule : NFIModule
     {
-        public abstract NFIDataList GetObjectList();
+        public abstract NFDataList GetObjectList();
         /////////////////////////////////////////////////////////////
         public abstract void RegisterPropertyCallback(NFGUID self, string strPropertyName, NFIProperty.PropertyEventHandler handler);
 
@@ -22,7 +22,7 @@ namespace NFSDK
 
         public abstract NFIObject GetObject(NFGUID ident);
 
-        public abstract NFIObject CreateObject(NFGUID self, int nContainerID, int nGroupID, string strClassName, string strConfigIndex, NFIDataList arg);
+        public abstract NFIObject CreateObject(NFGUID self, int nContainerID, int nGroupID, string strClassName, string strConfigIndex, NFDataList arg);
 
         public abstract bool DestroyObject(NFGUID self);
 
@@ -58,12 +58,12 @@ namespace NFSDK
         public abstract NFVector2 QueryRecordVector2(NFGUID self, string strRecordName, int nRow, int nCol);
         public abstract NFVector3 QueryRecordVector3(NFGUID self, string strRecordName, int nRow, int nCol);
 
-        public abstract int FindRecordRow(NFGUID self, string strRecordName, int nCol, int nValue, ref NFIDataList xDatalist);
-        public abstract int FindRecordRow(NFGUID self, string strRecordName, int nCol, double fValue, ref NFIDataList xDatalist);
-        public abstract int FindRecordRow(NFGUID self, string strRecordName, int nCol, string strValue, ref NFIDataList xDatalist);
-        public abstract int FindRecordRow(NFGUID self, string strRecordName, int nCol, NFGUID nValue, ref NFIDataList xDatalist);
-        public abstract int FindRecordRow(NFGUID self, string strRecordName, int nCol, NFVector2 nValue, ref NFIDataList xDatalist);
-        public abstract int FindRecordRow(NFGUID self, string strRecordName, int nCol, NFVector3 nValue, ref NFIDataList xDatalist);
+        public abstract int FindRecordRow(NFGUID self, string strRecordName, int nCol, int nValue, ref NFDataList xDatalist);
+        public abstract int FindRecordRow(NFGUID self, string strRecordName, int nCol, double fValue, ref NFDataList xDatalist);
+        public abstract int FindRecordRow(NFGUID self, string strRecordName, int nCol, string strValue, ref NFDataList xDatalist);
+        public abstract int FindRecordRow(NFGUID self, string strRecordName, int nCol, NFGUID nValue, ref NFDataList xDatalist);
+        public abstract int FindRecordRow(NFGUID self, string strRecordName, int nCol, NFVector2 nValue, ref NFDataList xDatalist);
+        public abstract int FindRecordRow(NFGUID self, string strRecordName, int nCol, NFVector3 nValue, ref NFDataList xDatalist);
 
 
     }

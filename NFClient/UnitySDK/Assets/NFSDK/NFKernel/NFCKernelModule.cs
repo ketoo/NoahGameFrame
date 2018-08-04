@@ -1,4 +1,4 @@
-
+﻿
 //-----------------------------------------------------------------------
 // <copyright file="NFCKernelModule.cs">
 //     Copyright (C) 2015-2015 lvsheng.huang <https://github.com/ketoo/NFrame>
@@ -16,55 +16,49 @@ namespace NFSDK
 {
 	public class NFCKernelModule : NFIKernelModule
     {
-        private static NFCKernelModule _instance = null;
-        public static NFCKernelModule Instance()
-        {
-            return _instance;
-        }
-
         public NFCKernelModule(NFIPluginManager pluginManager)
         {
-            _instance = this;
             mPluginManager = pluginManager;
             mhtObject = new Dictionary<NFGUID, NFIObject>();
             mhtClassHandleDel = new Dictionary<string, ClassHandleDel>();
         }
-		
+
+
+        private Dictionary<NFGUID, NFIObject> mhtObject;
+        private Dictionary<string, ClassHandleDel> mhtClassHandleDel;
+        private NFIElementModule mxElementModule;
+        private NFIClassModule mxLogicClassModule;
+
+       
 		~NFCKernelModule()
 		{
 			mhtObject = null;
         }
 
-        public override bool Awake()
+        public override void Awake()
         {
-            return true;
         }
 
-        public override bool Init()
+        public override void Init()
         {
             mxElementModule = FindModule<NFIElementModule>();
-            mxLogicClassModule = FindModule<NFILogicClassModule>();
-            return true;
+            mxLogicClassModule = FindModule<NFIClassModule>();
         }
 
-        public override bool AfterInit()
+        public override void AfterInit()
         {
-            return true;
         }
 
-        public override bool BeforeShut()
+        public override void BeforeShut()
         {
-            return true;
         }
 
-        public override bool Shut()
-        {
-            return true;
-        }
+		public override void Shut()
+		{
+		}
 
-        public override bool Execute()
+        public override void Execute()
         {
-            return true;
         }
 
 		public override void RegisterPropertyCallback(NFGUID self, string strPropertyName, NFIProperty.PropertyEventHandler handler)
@@ -120,18 +114,18 @@ namespace NFSDK
 			return null;
 		}
 
-		public override NFIObject CreateObject(NFGUID self, int nContainerID, int nGroupID, string strClassName, string strConfigIndex, NFIDataList arg)
+		public override NFIObject CreateObject(NFGUID self, int nContainerID, int nGroupID, string strClassName, string strConfigIndex, NFDataList arg)
 		{
 			if (!mhtObject.ContainsKey(self))
 			{
 				NFIObject xNewObject = new NFCObject(self, nContainerID, nGroupID, strClassName, strConfigIndex);
 				mhtObject.Add(self, xNewObject);
 
-                NFCDataList varConfigID = new NFCDataList();
+                NFDataList varConfigID = new NFDataList();
                 varConfigID.AddString(strConfigIndex);
                 xNewObject.GetPropertyManager().AddProperty("ConfigID", varConfigID);
 
-                NFCDataList varConfigClass = new NFCDataList();
+                NFDataList varConfigClass = new NFDataList();
                 varConfigClass.AddString(strClassName);
                 xNewObject.GetPropertyManager().AddProperty("ClassName", varConfigClass);
 
@@ -140,47 +134,47 @@ namespace NFSDK
                     for (int i = 0; i < arg.Count() - 1; i += 2)
                     {
                         string strPropertyName = arg.StringVal(i);
-                        NFIDataList.VARIANT_TYPE eType = arg.GetType(i + 1);
+                        NFDataList.VARIANT_TYPE eType = arg.GetType(i + 1);
                         switch (eType)
                         {
-                            case NFIDataList.VARIANT_TYPE.VTYPE_INT:
+                            case NFDataList.VARIANT_TYPE.VTYPE_INT:
                                 {
-                                    NFIDataList xDataList = new NFCDataList();
+                                    NFDataList xDataList = new NFDataList();
                                     xDataList.AddInt(arg.IntVal(i+1));
                                     xNewObject.GetPropertyManager().AddProperty(strPropertyName, xDataList);
                                 }
                                 break;
-                            case NFIDataList.VARIANT_TYPE.VTYPE_FLOAT:
+                            case NFDataList.VARIANT_TYPE.VTYPE_FLOAT:
                                 {
-                                    NFIDataList xDataList = new NFCDataList();
+                                    NFDataList xDataList = new NFDataList();
                                     xDataList.AddFloat(arg.FloatVal(i + 1));
                                     xNewObject.GetPropertyManager().AddProperty(strPropertyName, xDataList);
                                 }
                                 break;
-                            case NFIDataList.VARIANT_TYPE.VTYPE_STRING:
+                            case NFDataList.VARIANT_TYPE.VTYPE_STRING:
                                 {
-                                    NFIDataList xDataList = new NFCDataList();
+                                    NFDataList xDataList = new NFDataList();
                                     xDataList.AddString(arg.StringVal(i + 1));
                                     xNewObject.GetPropertyManager().AddProperty(strPropertyName, xDataList);
                                 }
                                 break;
-                            case NFIDataList.VARIANT_TYPE.VTYPE_OBJECT:
+                            case NFDataList.VARIANT_TYPE.VTYPE_OBJECT:
                                 {
-                                    NFIDataList xDataList = new NFCDataList();
+                                    NFDataList xDataList = new NFDataList();
                                     xDataList.AddObject(arg.ObjectVal(i + 1));
                                     xNewObject.GetPropertyManager().AddProperty(strPropertyName, xDataList);
                                 }
                                 break;
-                            case NFIDataList.VARIANT_TYPE.VTYPE_VECTOR2:
+                            case NFDataList.VARIANT_TYPE.VTYPE_VECTOR2:
                                 {
-                                    NFIDataList xDataList = new NFCDataList();
+                                    NFDataList xDataList = new NFDataList();
                                     xDataList.AddVector2(arg.Vector2Val(i + 1));
                                     xNewObject.GetPropertyManager().AddProperty(strPropertyName, xDataList);
                                 }
                                 break;
-                            case NFIDataList.VARIANT_TYPE.VTYPE_VECTOR3:
+                            case NFDataList.VARIANT_TYPE.VTYPE_VECTOR3:
                                 {
-                                    NFIDataList xDataList = new NFCDataList();
+                                    NFDataList xDataList = new NFDataList();
                                     xDataList.AddVector3(arg.Vector3Val(i + 1));
                                     xNewObject.GetPropertyManager().AddProperty(strPropertyName, xDataList);
                                 }
@@ -525,9 +519,9 @@ namespace NFSDK
             return new NFVector3();
         }
 
-        public override NFIDataList GetObjectList()
+        public override NFDataList GetObjectList()
 		{
-			NFIDataList varData = new NFCDataList();
+			NFDataList varData = new NFDataList();
             foreach (KeyValuePair<NFGUID, NFIObject> kv in mhtObject)
             {
                 varData.AddObject(kv.Key);				
@@ -535,7 +529,7 @@ namespace NFSDK
 
 			return varData;
 		}
-        public override int FindRecordRow(NFGUID self, string strRecordName, int nCol, int nValue, ref NFIDataList xDatalist)
+        public override int FindRecordRow(NFGUID self, string strRecordName, int nCol, int nValue, ref NFDataList xDatalist)
         {
             if (mhtObject.ContainsKey(self))
             {
@@ -550,7 +544,7 @@ namespace NFSDK
             return -1;
         }
 
-        public override int FindRecordRow(NFGUID self, string strRecordName, int nCol, double fValue, ref NFIDataList xDatalist)
+        public override int FindRecordRow(NFGUID self, string strRecordName, int nCol, double fValue, ref NFDataList xDatalist)
         {
             if (mhtObject.ContainsKey(self))
             {
@@ -565,7 +559,7 @@ namespace NFSDK
             return -1;
         }
 
-        public override int FindRecordRow(NFGUID self, string strRecordName, int nCol, string strValue, ref NFIDataList xDatalist)
+        public override int FindRecordRow(NFGUID self, string strRecordName, int nCol, string strValue, ref NFDataList xDatalist)
         {
             if (mhtObject.ContainsKey(self))
             {
@@ -580,7 +574,7 @@ namespace NFSDK
             return -1;
         }
 
-        public override int FindRecordRow(NFGUID self, string strRecordName, int nCol, NFGUID nValue, ref NFIDataList xDatalist)
+        public override int FindRecordRow(NFGUID self, string strRecordName, int nCol, NFGUID nValue, ref NFDataList xDatalist)
         {
             if (mhtObject.ContainsKey(self))
             {
@@ -595,7 +589,7 @@ namespace NFSDK
             return -1;
         }
 
-        public override int FindRecordRow(NFGUID self, string strRecordName, int nCol, NFVector2 nValue, ref NFIDataList xDatalist)
+        public override int FindRecordRow(NFGUID self, string strRecordName, int nCol, NFVector2 nValue, ref NFDataList xDatalist)
         {
             if (mhtObject.ContainsKey(self))
             {
@@ -610,7 +604,7 @@ namespace NFSDK
             return -1;
         }
 
-        public override int FindRecordRow(NFGUID self, string strRecordName, int nCol, NFVector3 nValue, ref NFIDataList xDatalist)
+        public override int FindRecordRow(NFGUID self, string strRecordName, int nCol, NFVector3 nValue, ref NFDataList xDatalist)
         {
             if (mhtObject.ContainsKey(self))
             {
@@ -627,8 +621,8 @@ namespace NFSDK
 
         void InitProperty(NFGUID self, string strClassName)
         {
-            NFILogicClass xLogicClass = mxLogicClassModule.GetElement(strClassName);
-            NFIDataList xDataList = xLogicClass.GetPropertyManager().GetPropertyList();
+            NFIClass xLogicClass = mxLogicClassModule.GetElement(strClassName);
+            NFDataList xDataList = xLogicClass.GetPropertyManager().GetPropertyList();
             for (int i = 0; i < xDataList.Count(); ++i )
             {
                 string strPropertyName = xDataList.StringVal(i);
@@ -648,8 +642,8 @@ namespace NFSDK
 
         void InitRecord(NFGUID self, string strClassName)
         {
-            NFILogicClass xLogicClass = mxLogicClassModule.GetElement(strClassName);
-            NFIDataList xDataList = xLogicClass.GetRecordManager().GetRecordList();
+			NFIClass xLogicClass = mxLogicClassModule.GetElement(strClassName);
+            NFDataList xDataList = xLogicClass.GetRecordManager().GetRecordList();
             for (int i = 0; i < xDataList.Count(); ++i)
             {
                 string strRecordyName = xDataList.StringVal(i);
@@ -658,19 +652,14 @@ namespace NFSDK
                 NFIObject xObject = GetObject(self);
                 NFIRecordManager xRecordManager = xObject.GetRecordManager();
 
-                NFIRecord record = xRecordManager.AddRecord(strRecordyName, xRecord.GetRows(), xRecord.GetColsData());
-                if(record != null)
+                NFIRecord record = xRecordManager.AddRecord(strRecordyName, xRecord.GetRows(), xRecord.GetColsData(), xRecord.GetTagData());
+                if (record != null)
                 {
                     record.SetUpload(xRecord.GetUpload());
                 }
             }
         }
-
-        private Dictionary<NFGUID, NFIObject> mhtObject;
-        private Dictionary<string, ClassHandleDel> mhtClassHandleDel;
-        private NFIElementModule mxElementModule;
-        private NFILogicClassModule mxLogicClassModule;
-
+      
         class ClassHandleDel
 		{
 			public ClassHandleDel()

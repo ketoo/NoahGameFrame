@@ -1,3 +1,8 @@
+//-----------------------------------------------------------------------
+// <copyright file="NFCPropertyManager.cs">
+//     Copyright (C) 2015-2015 lvsheng.huang <https://github.com/ketoo/NFrame>
+// </copyright>
+//-----------------------------------------------------------------------
 using System.Collections;
 
 namespace NFSDK
@@ -10,7 +15,7 @@ namespace NFSDK
 			mhtProperty = new Hashtable();
 		}
 		
-		public override NFIProperty AddProperty(string strPropertyName, NFIDataList varData)
+		public override NFIProperty AddProperty(string strPropertyName, NFDataList varData)
 		{
 			NFIProperty xProperty = null;
 			if (!mhtProperty.ContainsKey(strPropertyName))
@@ -22,7 +27,7 @@ namespace NFSDK
 			return xProperty;
 		}
 
-        public override NFIProperty AddProperty(string strPropertyName, NFIDataList.TData varData)
+        public override NFIProperty AddProperty(string strPropertyName, NFDataList.TData varData)
         {
             NFIProperty xProperty = null;
             if (!mhtProperty.ContainsKey(strPropertyName))
@@ -34,7 +39,7 @@ namespace NFSDK
             return xProperty;
         }
 
-		public override bool SetProperty(string strPropertyName, NFIDataList varData)
+		public override bool SetProperty(string strPropertyName, NFDataList varData)
 		{
 			if (mhtProperty.ContainsKey(strPropertyName))
 			{
@@ -68,9 +73,9 @@ namespace NFSDK
 			}
 		}
 		
-		public override NFIDataList GetPropertyList()
+		public override NFDataList GetPropertyList()
 		{
-			NFIDataList varData = new NFCDataList();
+			NFDataList varData = new NFDataList();
 			foreach( DictionaryEntry de in mhtProperty) 
 			{
 				varData.AddString(de.Key.ToString());				

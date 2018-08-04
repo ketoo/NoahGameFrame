@@ -232,10 +232,10 @@ message ObjectPropertyList//send all properties as a pack when client log in or 
 	repeated PropertyVector3 property_vector3_list = 7;
 }
  
- message MultiObjectPropertyList//send all client's properties as a pack when client log in or log off
- {
+message MultiObjectPropertyList//send all client's properties as a pack when client log in or log off
+{
 	repeated ObjectPropertyList multi_player_property = 1;
- }
+}
 
 message ObjectRecordList//send all records as a pack when client log in or log off
 {

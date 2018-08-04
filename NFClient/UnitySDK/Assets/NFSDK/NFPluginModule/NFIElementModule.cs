@@ -10,7 +10,7 @@ using System.Text;
 
 namespace NFSDK
 {
-    public abstract class NFIElementModule : NFIModule
+	public abstract class NFIElementModule : NFIModule
     {
         public abstract bool Load();
         public abstract bool Clear();
