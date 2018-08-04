@@ -305,24 +305,6 @@ package nframe;
 		// Record
 
 	}
-	public class HttpServer
-	{
-		//Class name
-		public static final String ThisName = "HttpServer";
-		// IObject
-		public static final String ClassName = "ClassName";// string
-		public static final String ConfigID = "ConfigID";// string
-		public static final String GroupID = "GroupID";// int
-		public static final String ID = "ID";// string
-		public static final String Position = "Position";// vector3
-		public static final String SceneID = "SceneID";// int
-		// Property
-		public static final String ServerID = "ServerID";// int
-		public static final String WebPort = "WebPort";// int
-		public static final String WebRootPath = "WebRootPath";// string
-		// Record
-
-	}
 	public class IObject
 	{
 		//Class name
@@ -590,8 +572,12 @@ package nframe;
 		public static final String DIZZY_GATE = "DIZZY_GATE";// int
 		public static final String Diamond = "Diamond";// int
 		public static final String EXP = "EXP";// int
-		public static final String FightHero = "FightHero";// object
 		public static final String FightHeroCnfID = "FightHeroCnfID";// string
+		public static final String FightHeroHP1 = "FightHeroHP1";// int
+		public static final String FightHeroHP2 = "FightHeroHP2";// int
+		public static final String FightHeroHP3 = "FightHeroHP3";// int
+		public static final String FightHeroID = "FightHeroID";// object
+		public static final String FightHeroLevel = "FightHeroLevel";// int
 		public static final String FightingOpponent = "FightingOpponent";// object
 		public static final String FightingStar = "FightingStar";// int
 		public static final String FirstTarget = "FirstTarget";// object
@@ -626,22 +612,15 @@ package nframe;
 		public static final String HP = "HP";// int
 		public static final String HPREGEN = "HPREGEN";// int
 		public static final String Head = "Head";// string
-		public static final String Hero1BornPos = "Hero1BornPos";// vector3
-		public static final String Hero1HP = "Hero1HP";// int
-		public static final String Hero2BornPos = "Hero2BornPos";// vector3
-		public static final String Hero2HP = "Hero2HP";// int
-		public static final String Hero3BornPos = "Hero3BornPos";// vector3
-		public static final String Hero3HP = "Hero3HP";// int
+		public static final String HeroCnfID1 = "HeroCnfID1";// string
+		public static final String HeroCnfID2 = "HeroCnfID2";// string
+		public static final String HeroCnfID3 = "HeroCnfID3";// string
 		public static final String HeroID1 = "HeroID1";// object
 		public static final String HeroID2 = "HeroID2";// object
 		public static final String HeroID3 = "HeroID3";// object
-		public static final String HeroLevel = "HeroLevel";// int
-		public static final String HeroPos1CnfID = "HeroPos1CnfID";// string
-		public static final String HeroPos1Star = "HeroPos1Star";// int
-		public static final String HeroPos2CnfID = "HeroPos2CnfID";// string
-		public static final String HeroPos2Star = "HeroPos2Star";// int
-		public static final String HeroPos3CnfID = "HeroPos3CnfID";// string
-		public static final String HeroPos3Star = "HeroPos3Star";// int
+		public static final String HeroStar1 = "HeroStar1";// int
+		public static final String HeroStar2 = "HeroStar2";// int
+		public static final String HeroStar3 = "HeroStar3";// int
 		public static final String HomeSceneID = "HomeSceneID";// int
 		public static final String Item1 = "Item1";// string
 		public static final String Item1Count = "Item1Count";// int
@@ -672,14 +651,11 @@ package nframe;
 		public static final String OpponentGold = "OpponentGold";// int
 		public static final String OpponentHead = "OpponentHead";// string
 		public static final String OpponentHero1 = "OpponentHero1";// string
-		public static final String OpponentHero1BornPos = "OpponentHero1BornPos";// vector3
-		public static final String OpponentHero1Star = "OpponentHero1Star";// int
 		public static final String OpponentHero2 = "OpponentHero2";// string
-		public static final String OpponentHero2BornPos = "OpponentHero2BornPos";// vector3
-		public static final String OpponentHero2Star = "OpponentHero2Star";// int
 		public static final String OpponentHero3 = "OpponentHero3";// string
-		public static final String OpponentHero3BornPos = "OpponentHero3BornPos";// vector3
-		public static final String OpponentHero3Star = "OpponentHero3Star";// int
+		public static final String OpponentHeroStar1 = "OpponentHeroStar1";// int
+		public static final String OpponentHeroStar2 = "OpponentHeroStar2";// int
+		public static final String OpponentHeroStar3 = "OpponentHeroStar3";// int
 		public static final String OpponentLevel = "OpponentLevel";// int
 		public static final String OpponentName = "OpponentName";// string
 		public static final String PHYSICAL_GATE = "PHYSICAL_GATE";// int
@@ -709,55 +685,6 @@ package nframe;
 		public static final String WonDiamond = "WonDiamond";// int
 		public static final String WonGold = "WonGold";// int
 		// Record
-		public class AttackList
-		{
-			//Class name
-			public static final String ThisName = "AttackList";
-			public static final int WarID = 0;//object
-			public static final int AttackerID = 1;//object
-			public static final int BeAttackerID = 2;//object
-			public static final int AttackerName = 3;//string
-			public static final int BeAttackerName = 4;//string
-			public static final int AttackerLevel = 5;//int
-			public static final int BeAttackerLevel = 6;//int
-			public static final int AttackerCup = 7;//int
-			public static final int BeAttackerCup = 8;//int
-			public static final int AttackerHero1 = 9;//string
-			public static final int AttackerHero2 = 10;//string
-			public static final int AttackerHero3 = 11;//string
-			public static final int AttackerHero1Star = 12;//int
-			public static final int AttackerHero2Star = 13;//int
-			public static final int AttackerHero3Star = 14;//int
-			public static final int BeAttackerHero1 = 15;//string
-			public static final int BeAttackerHero2 = 16;//string
-			public static final int BeAttackerHero3 = 17;//string
-			public static final int BeAttackerHero1Star = 18;//int
-			public static final int BeAttackerHero2Star = 19;//int
-			public static final int BeAttackerHero3Star = 20;//int
-			public static final int Gold = 21;//int
-			public static final int Diamond = 22;//int
-			public static final int Winner = 23;//object
-			public static final int WarStar = 24;//int
-			public static final int EventTime = 25;//int
-			public static final int CostTime = 26;//int
-			public static final int Item1 = 27;//string
-			public static final int Item1Count = 28;//int
-			public static final int Item2 = 29;//string
-			public static final int Item2Count = 30;//int
-			public static final int Item3 = 31;//string
-			public static final int Item3Count = 32;//int
-			public static final int BuildingCount = 33;//int
-			public static final int DestroiedBuilding = 34;//int
-			public static final int MasterCount = 35;//int
-			public static final int KilledMasterCount = 36;//int
-			public static final int KilledHero1 = 37;//int
-			public static final int KilledHero2 = 38;//int
-			public static final int KilledHero3 = 39;//int
-			public static final int DeadHero1 = 40;//int
-			public static final int DeadHero2 = 41;//int
-			public static final int DeadHero3 = 42;//int
-
-		}
 		public class BagEquipList
 		{
 			//Class name
@@ -796,55 +723,6 @@ package nframe;
 			public static final int Bound = 2;//int
 			public static final int ExpiredType = 3;//int
 			public static final int Date = 4;//int
-
-		}
-		public class BeAccackList
-		{
-			//Class name
-			public static final String ThisName = "BeAccackList";
-			public static final int WarID = 0;//object
-			public static final int AttackerID = 1;//object
-			public static final int BeAttackerID = 2;//object
-			public static final int AttackerName = 3;//string
-			public static final int BeAttackerName = 4;//string
-			public static final int AttackerLevel = 5;//int
-			public static final int BeAttackerLevel = 6;//int
-			public static final int AttackerCup = 7;//int
-			public static final int BeAttackerCup = 8;//int
-			public static final int AttackerHero1 = 9;//string
-			public static final int AttackerHero2 = 10;//string
-			public static final int AttackerHero3 = 11;//string
-			public static final int AttackerHero1Star = 12;//int
-			public static final int AttackerHero2Star = 13;//int
-			public static final int AttackerHero3Star = 14;//int
-			public static final int BeAttackerHero1 = 15;//string
-			public static final int BeAttackerHero2 = 16;//string
-			public static final int BeAttackerHero3 = 17;//string
-			public static final int BeAttackerHero1Star = 18;//int
-			public static final int BeAttackerHero2Star = 19;//int
-			public static final int BeAttackerHero3Star = 20;//int
-			public static final int Gold = 21;//int
-			public static final int Diamond = 22;//int
-			public static final int Winner = 23;//object
-			public static final int WarStar = 24;//int
-			public static final int EventTime = 25;//int
-			public static final int CostTime = 26;//int
-			public static final int Item1 = 27;//string
-			public static final int Item1Count = 28;//int
-			public static final int Item2 = 29;//string
-			public static final int Item2Count = 30;//int
-			public static final int Item3 = 31;//string
-			public static final int Item3Count = 32;//int
-			public static final int BuildingCount = 33;//int
-			public static final int DestroiedBuilding = 34;//int
-			public static final int MasterCount = 35;//int
-			public static final int KilledMasterCount = 36;//int
-			public static final int KilledHero1 = 37;//int
-			public static final int KilledHero2 = 38;//int
-			public static final int KilledHero3 = 39;//int
-			public static final int DeadHero1 = 40;//int
-			public static final int DeadHero2 = 41;//int
-			public static final int DeadHero3 = 42;//int
 
 		}
 		public class BuildingList
@@ -1054,6 +932,40 @@ package nframe;
 			public static final int ItemCount = 1;//int
 
 		}
+		public class WarList
+		{
+			//Class name
+			public static final String ThisName = "WarList";
+			public static final int WarID = 0;//object
+			public static final int AttackerID = 1;//object
+			public static final int BeAttackerID = 2;//object
+			public static final int AttackerName = 3;//string
+			public static final int BeAttackerName = 4;//string
+			public static final int AttackerLevel = 5;//int
+			public static final int BeAttackerLevel = 6;//int
+			public static final int AttackerCup = 7;//int
+			public static final int BeAttackerCup = 8;//int
+			public static final int AttackerHeroList = 9;//string
+			public static final int AttackerHeroStarList = 10;//int
+			public static final int BeAttackerHeroList = 11;//string
+			public static final int BeAttackerHeroStarList = 12;//int
+			public static final int Gold = 13;//int
+			public static final int Diamond = 14;//int
+			public static final int Winner = 15;//object
+			public static final int WarStar = 16;//int
+			public static final int EventTime = 17;//int
+			public static final int CostTime = 18;//int
+			public static final int ItemList = 19;//string
+
+		}
+		public class WarObject
+		{
+			//Class name
+			public static final String ThisName = "WarObject";
+			public static final int OjectID = 0;//object
+			public static final int CreateTime = 1;//int
+
+		}
 
 	}
 	public class Scene
@@ -1125,6 +1037,7 @@ package nframe;
 		public static final String Port = "Port";// int
 		public static final String ServerID = "ServerID";// int
 		public static final String Type = "Type";// int
+		public static final String WebPort = "WebPort";// int
 		// Record
 
 	}

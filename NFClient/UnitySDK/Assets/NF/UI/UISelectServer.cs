@@ -5,35 +5,47 @@ using NFSDK;
 
 public class UISelectServer : UIDialog
 {
+	   
+	private NFLoginModule mLoginModule;
+	private NFUIModule mUIModule;
+	private NFIEventModule mEventModule;
+
     private Transform mContentList;
     private GameObject mItemModle;
 	// Use this for initialization
-	void Start () {
+	void Start ()
+	{
+		NFIPluginManager xPluginManager = NFCPluginManager.Instance();
+		mLoginModule = xPluginManager.FindModule<NFLoginModule>();
+		mUIModule = xPluginManager.FindModule<NFUIModule>();
+		mEventModule = xPluginManager.FindModule<NFIEventModule>();
 
         mContentList = transform.Find("Panel/ListView/Mask/Content");
         mItemModle = mContentList.Find("Item").gameObject;
         mItemModle.transform.SetParent(null);
-        NFCLoginLogic.Instance().RegisterCallback((int)NFCLoginLogic.Event.WorldList, OnWorldList);
-        NFCLoginLogic.Instance().RegisterCallback((int)NFCLoginLogic.Event.ServerList, OnServerList);
-        NFCLoginLogic.Instance().RegisterCallback((int)NFCLoginLogic.Event.SelectServerSuccess, OnSelectServer);
 
-        NFCLoginLogic.Instance().RequireWorldList();
+
+		mEventModule.RegisterCallback((int)NFUIModule.Event.WorldList, OnWorldList);
+		mEventModule.RegisterCallback((int)NFUIModule.Event.ServerList, OnServerList);
+		mEventModule.RegisterCallback((int)NFUIModule.Event.SelectServerSuccess, OnSelectServer);
+
+        mLoginModule.RequireWorldList();
 	}
 	
     // UI Event
     private void OnWorldServerClick(NFMsg.ServerInfo info)
     {
-        NFCLoginLogic.Instance().RequireConnectWorld(info.server_id);
+        mLoginModule.RequireConnectWorld(info.server_id);
     }
     private void OnGameServerClick(NFMsg.ServerInfo info)
     {
-        NFCLoginLogic.Instance().RequireSelectServer(info.server_id);
+        mLoginModule.RequireSelectServer(info.server_id);
     }
 
     // Logic Event
-    public bool OnWorldList(NFIDataList valueList)
+    public void OnWorldList(NFDataList valueList)
     {
-        ArrayList serverList = NFCLoginLogic.Instance().mWorldServerList;
+        ArrayList serverList = mLoginModule.mWorldServerList;
 
         Debug.Log("OnWorldList" + serverList.Count);
 
@@ -48,11 +60,10 @@ public class UISelectServer : UIDialog
                 OnWorldServerClick(info);
             });
         }
-        return true;
     }
-    public bool OnServerList(NFIDataList valueList)
+	public void OnServerList(NFDataList valueList)
     {
-        ArrayList serverList = NFCLoginLogic.Instance().mGameServerList;
+        ArrayList serverList = mLoginModule.mGameServerList;
 
         Debug.Log("OnServerList" + serverList.Count);
 
@@ -77,11 +88,9 @@ public class UISelectServer : UIDialog
                 OnGameServerClick(info);
             });
         }
-        return true;
     }
-    public bool OnSelectServer(NFIDataList valueList)
+	public void OnSelectServer(NFDataList valueList)
     {
-        NFCUIManager.Instance().ShowUI<UISelectRole>();
-        return true;
+		mUIModule.ShowUI<UISelectRole>();
     }
 }

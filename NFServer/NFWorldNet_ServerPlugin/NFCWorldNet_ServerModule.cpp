@@ -1,11 +1,27 @@
-// -------------------------------------------------------------------------
-//    @FileName         :    NFCWorldNet_ServerModule.cpp
-//    @Author           :    LvSheng.Huang
-//    @Date             :    2013-01-02
-//    @Module           :    NFCWorldNet_ServerModule
-//    @Desc             :
-// -------------------------------------------------------------------------
+/*
+            This file is part of: 
+                NoahFrame
+            https://github.com/ketoo/NoahGameFrame
 
+   Copyright 2009 - 2018 NoahFrame(NoahGameFrame)
+
+   File creator: lvsheng.huang
+   
+   NoahFrame is open-source software and you can redistribute it and/or modify
+   it under the terms of the License; besides, anyone who use this file/software must include this copyright announcement.
+
+   Licensed under the Apache License, Version 2.0 (the "License");
+   you may not use this file except in compliance with the License.
+   You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   See the License for the specific language governing permissions and
+   limitations under the License.
+*/
 #include "NFCWorldNet_ServerModule.h"
 #include "NFWorldNet_ServerPlugin.h"
 #include "NFComm/NFMessageDefine/NFMsgDefine.h"
@@ -25,20 +41,24 @@ bool NFCWorldNet_ServerModule::Init()
 
 bool NFCWorldNet_ServerModule::AfterInit()
 {
-	m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_PTWG_PROXY_REFRESH, this, &NFCWorldNet_ServerModule::OnRefreshProxyServerInfoProcess);
 	m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_PTWG_PROXY_REGISTERED, this, &NFCWorldNet_ServerModule::OnProxyServerRegisteredProcess);
 	m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_PTWG_PROXY_UNREGISTERED, this, &NFCWorldNet_ServerModule::OnProxyServerUnRegisteredProcess);
+	m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_PTWG_PROXY_REFRESH, this, &NFCWorldNet_ServerModule::OnRefreshProxyServerInfoProcess);
 
 	m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_GTW_GAME_REGISTERED, this, &NFCWorldNet_ServerModule::OnGameServerRegisteredProcess);
 	m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_GTW_GAME_UNREGISTERED, this, &NFCWorldNet_ServerModule::OnGameServerUnRegisteredProcess);
 	m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_GTW_GAME_REFRESH, this, &NFCWorldNet_ServerModule::OnRefreshGameServerInfoProcess);
+	
+	m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_DTW_DB_REGISTERED, this, &NFCWorldNet_ServerModule::OnDBServerRegisteredProcess);
+	m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_DTW_DB_UNREGISTERED, this, &NFCWorldNet_ServerModule::OnDBServerUnRegisteredProcess);
+	m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_DTW_DB_REFRESH, this, &NFCWorldNet_ServerModule::OnRefreshDBServerInfoProcess);
+
 	m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_ACK_ONLINE_NOTIFY, this, &NFCWorldNet_ServerModule::OnOnlineProcess);
 	m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_ACK_OFFLINE_NOTIFY, this, &NFCWorldNet_ServerModule::OnOfflineProcess);
 	m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_STS_SERVER_REPORT, this, &NFCWorldNet_ServerModule::OnTransmitServerReport);
 
     if (!m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_REQSWICHSERVER, this, &NFCWorldNet_ServerModule::OnReqSwitchServer)) { return false; }
     if (!m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_ACKSWICHSERVER, this, &NFCWorldNet_ServerModule::OnAckSwitchServer)) { return false; }
-
 
     m_pNetModule->AddEventCallBack(this, &NFCWorldNet_ServerModule::OnSocketEvent);
 	m_pNetModule->ExpandBufferSize();
@@ -77,6 +97,43 @@ bool NFCWorldNet_ServerModule::AfterInit()
     return true;
 }
 
+void NFCWorldNet_ServerModule::OnServerInfoProcess(const NFSOCK nSockIndex, const int nMsgID, const char * msg, const uint32_t nLen)
+{
+	NFGUID nPlayerID;
+	NFMsg::ServerInfoReportList xMsg;
+	if (!NFINetModule::ReceivePB(nMsgID, msg, nLen, xMsg, nPlayerID))
+	{
+		return;
+	}
+
+	for (int i = 0; i < xMsg.server_list_size(); ++i)
+	{
+		const NFMsg::ServerInfoReport& xData = xMsg.server_list(i);
+		if (xData.server_type() == NF_SERVER_TYPES::NF_ST_WORLD)
+		{
+			NF_SHARE_PTR<ServerData> pServerData = mWorldMap.GetElement(xData.server_id());
+			if (!pServerData)
+			{
+				pServerData = NF_SHARE_PTR<ServerData>(NF_NEW ServerData());
+				mWorldMap.AddElement(xData.server_id(), pServerData);
+			}
+
+			pServerData->nFD = nSockIndex;
+			*(pServerData->pData) = xData;
+
+			m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFGUID(0, xData.server_id()), xData.server_name(), "GameServerRegistered");
+		}
+	}
+
+	//sync to proxy
+
+	SynWorldToProxy();
+
+	//sync to game
+	SynWorldToGame();
+
+}
+
 bool NFCWorldNet_ServerModule::Shut()
 {
 
@@ -85,6 +142,19 @@ bool NFCWorldNet_ServerModule::Shut()
 
 bool NFCWorldNet_ServerModule::Execute()
 {
+
+	if (mnLastCheckTime + 10 > GetPluginManager()->GetNowTime())
+	{
+		return true;
+	}
+
+	SynDBToGame();
+	SynGameToProxy();
+	SynWorldToProxy();
+	SynWorldToGame();
+	SynWorldToDB();
+
+
     LogGameServer();
 
 	return true;
@@ -242,6 +312,82 @@ void NFCWorldNet_ServerModule::OnRefreshProxyServerInfoProcess(const NFSOCK nSoc
     }
 }
 
+void NFCWorldNet_ServerModule::OnDBServerRegisteredProcess(const NFSOCK nSockIndex, const int nMsgID, const char * msg, const uint32_t nLen)
+{
+	NFGUID nPlayerID;
+	NFMsg::ServerInfoReportList xMsg;
+	if (!m_pNetModule->ReceivePB(nMsgID, msg, nLen, xMsg, nPlayerID))
+	{
+		return;
+	}
+
+	for (int i = 0; i < xMsg.server_list_size(); ++i)
+	{
+		const NFMsg::ServerInfoReport& xData = xMsg.server_list(i);
+		NF_SHARE_PTR<ServerData> pServerData = mDBMap.GetElement(xData.server_id());
+		if (!pServerData)
+		{
+			pServerData = NF_SHARE_PTR<ServerData>(NF_NEW ServerData());
+			mDBMap.AddElement(xData.server_id(), pServerData);
+		}
+
+		pServerData->nFD = nSockIndex;
+		*(pServerData->pData) = xData;
+
+		m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFGUID(0, xData.server_id()), xData.server_name(), "DBServerRegistered");
+	}
+
+	SynDBToGame();
+}
+
+void NFCWorldNet_ServerModule::OnDBServerUnRegisteredProcess(const NFSOCK nSockIndex, const int nMsgID, const char * msg, const uint32_t nLen)
+{
+	NFGUID nPlayerID;
+	NFMsg::ServerInfoReportList xMsg;
+	if (!m_pNetModule->ReceivePB(nMsgID, msg, nLen, xMsg, nPlayerID))
+	{
+		return;
+	}
+
+	for (int i = 0; i < xMsg.server_list_size(); ++i)
+	{
+		const NFMsg::ServerInfoReport& xData = xMsg.server_list(i);
+
+		mDBMap.RemoveElement(xData.server_id());
+
+		m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFGUID(0, xData.server_id()), xData.server_name(), "Proxy UnRegistered");
+	}
+}
+
+void NFCWorldNet_ServerModule::OnRefreshDBServerInfoProcess(const NFSOCK nSockIndex, const int nMsgID, const char * msg, const uint32_t nLen)
+{
+	NFGUID nPlayerID;
+	NFMsg::ServerInfoReportList xMsg;
+	if (!m_pNetModule->ReceivePB(nMsgID, msg, nLen, xMsg, nPlayerID))
+	{
+		return;
+	}
+
+	for (int i = 0; i < xMsg.server_list_size(); ++i)
+	{
+		const NFMsg::ServerInfoReport& xData = xMsg.server_list(i);
+
+		NF_SHARE_PTR<ServerData> pServerData = mDBMap.GetElement(xData.server_id());
+		if (!pServerData)
+		{
+			pServerData = NF_SHARE_PTR<ServerData>(NF_NEW ServerData());
+			mDBMap.AddElement(xData.server_id(), pServerData);
+		}
+
+		pServerData->nFD = nSockIndex;
+		*(pServerData->pData) = xData;
+
+		m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFGUID(0, xData.server_id()), xData.server_name(), "Proxy Registered");
+
+		SynDBToGame(nSockIndex);
+	}
+}
+
 void NFCWorldNet_ServerModule::OnSocketEvent(const NFSOCK nSockIndex, const NF_NET_EVENT eEvent, NFINet* pNet)
 {
     if (eEvent & NF_NET_EVENT_EOF)
@@ -259,9 +405,9 @@ void NFCWorldNet_ServerModule::OnSocketEvent(const NFSOCK nSockIndex, const NF_N
         m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFGUID(0, nSockIndex), "NF_NET_EVENT_TIMEOUT", "read timeout", __FUNCTION__, __LINE__);
         OnClientDisconnect(nSockIndex);
     }
-    else  if (eEvent == NF_NET_EVENT_CONNECTED)
+    else  if (eEvent & NF_NET_EVENT_CONNECTED)
     {
-        m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFGUID(0, nSockIndex), "NF_NET_EVENT_CONNECTED", "connectioned success", __FUNCTION__, __LINE__);
+        m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFGUID(0, nSockIndex), "NF_NET_EVENT_CONNECTED", "connected success", __FUNCTION__, __LINE__);
         OnClientConnected(nSockIndex);
     }
 }
@@ -316,6 +462,135 @@ void NFCWorldNet_ServerModule::SynGameToProxy(const NFSOCK nFD)
 	m_pNetModule->SendMsgPB(NFMsg::EGameMsgID::EGMI_STS_NET_INFO, xData, nFD);
 }
 
+void NFCWorldNet_ServerModule::SynWorldToProxy()
+{
+	NFMsg::ServerInfoReportList xData;
+
+	NF_SHARE_PTR<ServerData> pServerData = mProxyMap.First();
+	while (pServerData)
+	{
+		SynWorldToProxy(pServerData->nFD);
+
+		pServerData = mProxyMap.Next();
+	}
+}
+
+void NFCWorldNet_ServerModule::SynWorldToProxy(const NFSOCK nFD)
+{
+	NFMsg::ServerInfoReportList xData;
+
+	NF_SHARE_PTR<ServerData> pServerData = mWorldMap.First();
+	while (pServerData)
+	{
+		NFMsg::ServerInfoReport* pData = xData.add_server_list();
+		*pData = *(pServerData->pData);
+
+		pServerData = mWorldMap.Next();
+	}
+
+	m_pNetModule->SendMsgPB(NFMsg::EGameMsgID::EGMI_STS_NET_INFO, xData, nFD);
+}
+
+void NFCWorldNet_ServerModule::SynWorldToGame()
+{
+	NFMsg::ServerInfoReportList xData;
+
+	NF_SHARE_PTR<ServerData> pServerData = mGameMap.First();
+	while (pServerData)
+	{
+		if (pServerData->pData->server_state() != NFMsg::EServerState::EST_MAINTEN
+			&& pServerData->pData->server_state() != NFMsg::EServerState::EST_CRASH)
+		{
+			SynWorldToGame(pServerData->nFD);
+		}
+
+		pServerData = mGameMap.Next();
+	}
+}
+
+void NFCWorldNet_ServerModule::SynWorldToGame(const NFSOCK nFD)
+{
+	NFMsg::ServerInfoReportList xData;
+
+	NF_SHARE_PTR<ServerData> pServerData = mWorldMap.First();
+	while (pServerData)
+	{
+		NFMsg::ServerInfoReport* pData = xData.add_server_list();
+		*pData = *(pServerData->pData);
+
+		pServerData = mWorldMap.Next();
+	}
+
+	m_pNetModule->SendMsgPB(NFMsg::EGameMsgID::EGMI_STS_NET_INFO, xData, nFD);
+}
+
+
+void NFCWorldNet_ServerModule::SynWorldToDB()
+{
+	NFMsg::ServerInfoReportList xData;
+
+	NF_SHARE_PTR<ServerData> pServerData = mDBMap.First();
+	while (pServerData)
+	{
+		if (pServerData->pData->server_state() != NFMsg::EServerState::EST_MAINTEN
+			&& pServerData->pData->server_state() != NFMsg::EServerState::EST_CRASH)
+		{
+			SynWorldToDB(pServerData->nFD);
+		}
+
+		pServerData = mDBMap.Next();
+	}
+}
+
+void NFCWorldNet_ServerModule::SynWorldToDB(const NFSOCK nFD)
+{
+	NFMsg::ServerInfoReportList xData;
+
+	NF_SHARE_PTR<ServerData> pServerData = mWorldMap.First();
+	while (pServerData)
+	{
+		NFMsg::ServerInfoReport* pData = xData.add_server_list();
+		*pData = *(pServerData->pData);
+
+		pServerData = mWorldMap.Next();
+	}
+
+	m_pNetModule->SendMsgPB(NFMsg::EGameMsgID::EGMI_STS_NET_INFO, xData, nFD);
+}
+
+void NFCWorldNet_ServerModule::SynDBToGame()
+{
+	NFMsg::ServerInfoReportList xData;
+
+	NF_SHARE_PTR<ServerData> pServerData = mGameMap.First();
+	while (pServerData)
+	{
+		if (pServerData->pData->server_state() != NFMsg::EServerState::EST_MAINTEN
+			&& pServerData->pData->server_state() != NFMsg::EServerState::EST_CRASH)
+		{
+			SynDBToGame(pServerData->nFD);
+		}
+
+		pServerData = mGameMap.Next();
+	}
+}
+
+void NFCWorldNet_ServerModule::SynDBToGame(const NFSOCK nFD)
+{
+	NFMsg::ServerInfoReportList xData;
+
+	NF_SHARE_PTR<ServerData> pServerData = mDBMap.First();
+	while (pServerData)
+	{
+		NFMsg::ServerInfoReport* pData = xData.add_server_list();
+		*pData = *(pServerData->pData);
+
+		pServerData = mDBMap.Next();
+	}
+
+	m_pNetModule->SendMsgPB(NFMsg::EGameMsgID::EGMI_STS_NET_INFO, xData, nFD);
+}
+
 void NFCWorldNet_ServerModule::OnClientDisconnect(const NFSOCK nAddress)
 {
     NF_SHARE_PTR<ServerData> pServerData =  mGameMap.First();
@@ -328,7 +603,7 @@ void NFCWorldNet_ServerModule::OnClientDisconnect(const NFSOCK nAddress)
 
 			ServerReport(pServerData->pData->server_id(), NFMsg::EST_CRASH);
             SynGameToProxy();
-            return;
+            break;
         }
 
         pServerData = mGameMap.Next();
@@ -341,15 +616,41 @@ void NFCWorldNet_ServerModule::OnClientDisconnect(const NFSOCK nAddress)
     {
         if (nAddress == pServerData->nFD)
         {
+            pServerData->pData->set_server_state(NFMsg::EST_CRASH);
+            pServerData->nFD = 0;
+
             int nServerID = pServerData->pData->server_id();
             mProxyMap.RemoveElement(nServerID);
 
 			ServerReport(pServerData->pData->server_id(), NFMsg::EST_CRASH);
+			SynGameToProxy();
             break;
         }
 
         pServerData = mProxyMap.Next();
     }
+
+
+	//////////////////////////////////////////////////////////////////////////
+
+	pServerData = mDBMap.First();
+	while (pServerData)
+	{
+		if (nAddress == pServerData->nFD)
+		{
+            pServerData->pData->set_server_state(NFMsg::EST_CRASH);
+            pServerData->nFD = 0;
+
+			int nServerID = pServerData->pData->server_id();
+			mDBMap.RemoveElement(nServerID);
+
+			ServerReport(pServerData->pData->server_id(), NFMsg::EST_CRASH);
+			SynDBToGame();
+			break;
+		}
+
+		pServerData = mDBMap.Next();
+	}
 }
 
 void NFCWorldNet_ServerModule::OnClientConnected(const NFSOCK nAddress)
@@ -359,14 +660,11 @@ void NFCWorldNet_ServerModule::OnClientConnected(const NFSOCK nAddress)
 
 void NFCWorldNet_ServerModule::LogGameServer()
 {
-    if (mnLastCheckTime + 10 > GetPluginManager()->GetNowTime())
-    {
-        return;
-    }
+
 
     mnLastCheckTime = GetPluginManager()->GetNowTime();
 
-    m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFGUID(), "Begin Log GameServer Info", "");
+    m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFGUID(), "--------------------Begin Log GameServer Info", "");
 
     NF_SHARE_PTR<ServerData> pGameData = mGameMap.First();
     while (pGameData)
@@ -379,9 +677,9 @@ void NFCWorldNet_ServerModule::LogGameServer()
         pGameData = mGameMap.Next();
     }
 
-    m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFGUID(), "End Log GameServer Info", "");
+    m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFGUID(), "--------------------End Log GameServer Info", "");
 
-    m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFGUID(), "Begin Log ProxyServer Info", "");
+    m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFGUID(), "--------------------Begin Log ProxyServer Info", "");
 
     pGameData = mProxyMap.First();
     while (pGameData)
@@ -394,7 +692,23 @@ void NFCWorldNet_ServerModule::LogGameServer()
         pGameData = mProxyMap.Next();
     }
 
-    m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFGUID(), "End Log ProxyServer Info", "");
+    m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFGUID(), "--------------------End Log ProxyServer Info", "");
+
+
+	m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFGUID(), "--------------------Begin Log DBServer Info", "");
+
+	pGameData = mDBMap.First();
+	while (pGameData)
+	{
+		std::ostringstream stream;
+		stream << "Type: " << pGameData->pData->server_type() << " ID: " << pGameData->pData->server_id() << " State: " << NFMsg::EServerState_Name(pGameData->pData->server_state()) << " IP: " << pGameData->pData->server_ip() << " FD: " << pGameData->nFD;
+
+		m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFGUID(), stream);
+
+		pGameData = mDBMap.Next();
+	}
+
+	m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFGUID(), "--------------------End Log DBServer Info", "");
 }
 
 

@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,60 +11,51 @@ namespace NFSDK
 {
     public class NFCElementModule : NFIElementModule
     {
-        private static NFCElementModule _instance = null;
-        public static NFCElementModule Instance()
-        {
-            return _instance;
-        }
 
         public NFCElementModule(NFIPluginManager pluginManager)
         {
-            _instance = this;
             mPluginManager = pluginManager;
             mhtObject = new Dictionary<string, NFIElement>();
         }
 
-        public override bool Awake() { return true; }
+        public override void Awake() 
+		{  
+		}
 
-        public override bool Init()
+        public override void Init()
         {
-            mxLogicClassModule = FindModule<NFILogicClassModule>();
+            mxLogicClassModule = FindModule<NFIClassModule>();
             mstrRootPath = mxLogicClassModule.GetDataPath();
-            return true;
         }
 
-        public override bool AfterInit()
+        public override void AfterInit()
         {
             Load();
-            return true;
         }
 
-        public override bool BeforeShut()
+        public override void BeforeShut()
         {
-            return true;
         }
 
-        public override bool Shut()
+        public override void Shut()
         {
-            return true;
         }
 
-        public override bool Execute()
+        public override void Execute()
         {
-            return true;
         }
 
         public override bool Load()
         {
             ClearInstanceElement();
 
-            Dictionary<string, NFILogicClass> xTable = mxLogicClassModule.GetElementList();
-            foreach (KeyValuePair<string, NFILogicClass> kv in xTable)
+            Dictionary<string, NFIClass> xTable = mxLogicClassModule.GetElementList();
+            foreach (KeyValuePair<string, NFIClass> kv in xTable)
             {
                 LoadInstanceElement(kv.Value);
-            }
+			}
 
-            return false;
+			return true;
         }
 
         public override bool Clear()
@@ -112,7 +103,7 @@ namespace NFSDK
                 return xElement.QueryString(strPropertyName);
             }
 
-            return NFIDataList.NULL_STRING;
+            return NFDataList.NULL_STRING;
         }
 
         public override bool AddElement(string strName, NFIElement xElement)
@@ -142,31 +133,13 @@ namespace NFSDK
             mhtObject.Clear();
         }
 
-        private void LoadInstanceElement(NFILogicClass xLogicClass)
+        private void LoadInstanceElement(NFIClass xLogicClass)
         {
             string strLogicPath = mstrRootPath;
             strLogicPath += xLogicClass.GetInstance();
 
             XmlDocument xmldoc = new XmlDocument();
-
-            if (xLogicClass.GetEncrypt())
-            {
-                ///////////////////////////////////////////////////////////////////////////////////////
-                StreamReader cepherReader = new StreamReader(strLogicPath); ;
-                string strContent = cepherReader.ReadToEnd();
-                cepherReader.Close();
-
-                byte[] data = Convert.FromBase64String(strContent);
-
-                string res = System.Text.ASCIIEncoding.Default.GetString(data);
-
-                xmldoc.LoadXml(res);
-                /////////////////////////////////////////////////////////////////
-            }
-            else
-            {
-                xmldoc.Load(strLogicPath);
-            }
+            xmldoc.Load(strLogicPath);
 
             XmlNode xRoot = xmldoc.SelectSingleNode("XML");
 
@@ -194,36 +167,36 @@ namespace NFSDK
                         NFIProperty xProperty = xLogicClass.GetPropertyManager().GetProperty(xAttribute.Name);
                         if (null != xProperty)
                         {
-                            NFIDataList.VARIANT_TYPE eType = xProperty.GetType();
+                            NFDataList.VARIANT_TYPE eType = xProperty.GetType();
                             switch (eType)
                             {
-                                case NFIDataList.VARIANT_TYPE.VTYPE_INT:
+                                case NFDataList.VARIANT_TYPE.VTYPE_INT:
                                     {
-                                        NFIDataList xValue = new NFCDataList();
+                                        NFDataList xValue = new NFDataList();
                                         xValue.AddInt(int.Parse(xAttribute.Value));
                                         NFIProperty property = xElement.GetPropertyManager().AddProperty(xAttribute.Name, xValue);
                                         property.SetUpload(xProperty.GetUpload());
                                     }
                                     break;
-                                case NFIDataList.VARIANT_TYPE.VTYPE_FLOAT:
+                                case NFDataList.VARIANT_TYPE.VTYPE_FLOAT:
                                     {
-                                        NFIDataList xValue = new NFCDataList();
+                                        NFDataList xValue = new NFDataList();
                                         xValue.AddFloat(float.Parse(xAttribute.Value));
                                         NFIProperty property = xElement.GetPropertyManager().AddProperty(xAttribute.Name, xValue);
                                         property.SetUpload(xProperty.GetUpload());
                                     }
                                     break;
-                                case NFIDataList.VARIANT_TYPE.VTYPE_STRING:
+                                case NFDataList.VARIANT_TYPE.VTYPE_STRING:
                                     {
-                                        NFIDataList xValue = new NFCDataList();
+                                        NFDataList xValue = new NFDataList();
                                         xValue.AddString(xAttribute.Value);
                                         NFIProperty property = xElement.GetPropertyManager().AddProperty(xAttribute.Name, xValue);
                                         property.SetUpload(xProperty.GetUpload());
                                     }
                                     break;
-                                case NFIDataList.VARIANT_TYPE.VTYPE_OBJECT:
+                                case NFDataList.VARIANT_TYPE.VTYPE_OBJECT:
                                     {
-                                        NFIDataList xValue = new NFCDataList();
+                                        NFDataList xValue = new NFDataList();
                                         xValue.AddObject(new NFGUID(0, int.Parse(xAttribute.Value)));
                                         NFIProperty property = xElement.GetPropertyManager().AddProperty(xAttribute.Name, xValue);
                                         property.SetUpload(xProperty.GetUpload());
@@ -239,7 +212,7 @@ namespace NFSDK
         }
 
         /////////////////////////////////////////
-        private NFILogicClassModule mxLogicClassModule;
+        private NFIClassModule mxLogicClassModule;
         /////////////////////////////////////////
         private Dictionary<string, NFIElement> mhtObject;
         private string mstrRootPath;

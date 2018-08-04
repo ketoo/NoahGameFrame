@@ -174,7 +174,7 @@
 #define EVENT__HAVE_NETINET_TCP_H 1
 
 /* Define if the system has openssl */
-/* #undef EVENT__HAVE_OPENSSL */
+#define EVENT__HAVE_OPENSSL 1
 
 /* Define to 1 if you have the `pipe' function. */
 #define EVENT__HAVE_PIPE 1

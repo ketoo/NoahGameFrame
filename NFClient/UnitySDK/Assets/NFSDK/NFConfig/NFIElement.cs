@@ -1,4 +1,9 @@
-﻿using System;
+﻿//-----------------------------------------------------------------------
+// <copyright file="NFIElement.cs">
+//     Copyright (C) 2015-2015 lvsheng.huang <https://github.com/ketoo/NFrame>
+// </copyright>
+//-----------------------------------------------------------------------
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,5 +18,6 @@ namespace NFSDK
         public abstract double QueryFloat(string strName);
         public abstract string QueryString(string strName);
         public abstract NFGUID QueryObject(string strName);
+
 	}
 }

@@ -1,0 +1,245 @@
+fileFormatVersion: 2
+guid: e7fef9092fa565e41bf56c266766658d
+timeCreated: 1460458759
+licenseType: Store
+ModelImporter:
+  serializedVersion: 19
+  fileIDToRecycleName:
+    100000: //RootNode
+    100002: CoffeeBot
+    100004: CoffeeBotHousing
+    100006: CoffeeBotHousingDoorMainL
+    100008: CoffeeBotHousingDoorMainL 1
+    100010: CoffeeBotHousingDoorMainR
+    100012: CoffeeBotHousingDoorSmallL
+    100014: CoffeeBotHousingLid
+    100016: Controls
+    100018: Head
+    100020: HeadEnd
+    100022: joint2
+    100024: joint2 1
+    100026: LeftArm1
+    100028: LeftArm2
+    100030: LeftArm3
+    100032: LeftArm4
+    100034: LeftArm5
+    100036: LeftArm6
+    100038: LeftEye
+    100040: LeftIndex1
+    100042: LeftIndex2
+    100044: LeftIndex3
+    100046: LeftIndexEnd
+    100048: LeftMiddle1
+    100050: LeftMiddle2
+    100052: LeftMiddle3
+    100054: LeftMiddleEnd
+    100056: LeftThumb1
+    100058: LeftThumb2
+    100060: LeftThumb3
+    100062: LeftThumbEnd
+    100064: Mesh
+    100066: RightArm1
+    100068: RightArm2
+    100070: RightArm3
+    100072: RightArm4
+    100074: RightArm5
+    100076: RightArm6
+    100078: RightEye
+    100080: RightIndex1
+    100082: RightIndex2
+    100084: RightIndex3
+    100086: RightIndexEnd
+    100088: RightMiddle1
+    100090: RightMiddle2
+    100092: RightMiddle3
+    100094: RightMiddleEnd
+    100096: RightThumb1
+    100098: RightThumb2
+    100100: RightThumb3
+    100102: RightThumbEnd
+    100104: Skeleton
+    100106: Spine1
+    100108: spine2
+    100110: Tongue
+    100112: Tooth
+    100114: ToothEnd
+    100116: Body
+    100118: Housing
+    100120: HousingLeftDoor1
+    100122: HousingLeftDoor2
+    100124: HousingLeftDoorEnd
+    100126: HousingRightDoor1
+    100128: HousingRightDoor2
+    100130: HousingRightDoorEnd
+    100132: LeftArmEnd
+    100134: Lid
+    100136: LidEnd
+    100138: RightArmEnd
+    100140: Coffee
+    100142: CoffeeCupMesh
+    400000: //RootNode
+    400002: CoffeeBot
+    400004: CoffeeBotHousing
+    400006: CoffeeBotHousingDoorMainL
+    400008: CoffeeBotHousingDoorMainL 1
+    400010: CoffeeBotHousingDoorMainR
+    400012: CoffeeBotHousingDoorSmallL
+    400014: CoffeeBotHousingLid
+    400016: Controls
+    400018: Head
+    400020: HeadEnd
+    400022: joint2
+    400024: joint2 1
+    400026: LeftArm1
+    400028: LeftArm2
+    400030: LeftArm3
+    400032: LeftArm4
+    400034: LeftArm5
+    400036: LeftArm6
+    400038: LeftEye
+    400040: LeftIndex1
+    400042: LeftIndex2
+    400044: LeftIndex3
+    400046: LeftIndexEnd
+    400048: LeftMiddle1
+    400050: LeftMiddle2
+    400052: LeftMiddle3
+    400054: LeftMiddleEnd
+    400056: LeftThumb1
+    400058: LeftThumb2
+    400060: LeftThumb3
+    400062: LeftThumbEnd
+    400064: Mesh
+    400066: RightArm1
+    400068: RightArm2
+    400070: RightArm3
+    400072: RightArm4
+    400074: RightArm5
+    400076: RightArm6
+    400078: RightEye
+    400080: RightIndex1
+    400082: RightIndex2
+    400084: RightIndex3
+    400086: RightIndexEnd
+    400088: RightMiddle1
+    400090: RightMiddle2
+    400092: RightMiddle3
+    400094: RightMiddleEnd
+    400096: RightThumb1
+    400098: RightThumb2
+    400100: RightThumb3
+    400102: RightThumbEnd
+    400104: Skeleton
+    400106: Spine1
+    400108: spine2
+    400110: Tongue
+    400112: Tooth
+    400114: ToothEnd
+    400116: Body
+    400118: Housing
+    400120: HousingLeftDoor1
+    400122: HousingLeftDoor2
+    400124: HousingLeftDoorEnd
+    400126: HousingRightDoor1
+    400128: HousingRightDoor2
+    400130: HousingRightDoorEnd
+    400132: LeftArmEnd
+    400134: Lid
+    400136: LidEnd
+    400138: RightArmEnd
+    400140: Coffee
+    400142: CoffeeCupMesh
+    2300000: CoffeeBotHousing
+    2300002: CoffeeBotHousingDoorMainL
+    2300004: CoffeeBotHousingDoorMainL 1
+    2300006: CoffeeBotHousingDoorMainR
+    2300008: CoffeeBotHousingDoorSmallL
+    2300010: CoffeeBotHousingLid
+    2300012: Coffee
+    2300014: CoffeeCupMesh
+    3300000: CoffeeBotHousing
+    3300002: CoffeeBotHousingDoorMainL
+    3300004: CoffeeBotHousingDoorMainL 1
+    3300006: CoffeeBotHousingDoorMainR
+    3300008: CoffeeBotHousingDoorSmallL
+    3300010: CoffeeBotHousingLid
+    3300012: Coffee
+    3300014: CoffeeCupMesh
+    4300000: CoffeeBot
+    4300002: CoffeeBotHousing
+    4300004: CoffeeBotHousingDoorMainL
+    4300006: CoffeeBotHousingDoorSmallL
+    4300008: CoffeeBotHousingDoorMainR
+    4300010: CoffeeBotHousingDoorMainL
+    4300012: CoffeeBotHousingLid
+    4300014: Body
+    4300016: Coffee
+    4300018: CoffeeCupMesh
+    7400000: Take 001
+    9500000: //RootNode
+    13700000: CoffeeBot
+    13700002: Body
+  materials:
+    importMaterials: 1
+    materialName: 1
+    materialSearch: 2
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleRotations: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

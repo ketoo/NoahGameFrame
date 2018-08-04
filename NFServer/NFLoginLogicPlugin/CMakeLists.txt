@@ -5,7 +5,7 @@ file(GLOB NFLoginLogicPlugin_ROOT_Cpp
 file(GLOB NFLoginLogicPlugin_ROOT_Hpp 
 	*.h)
 
-add_library(NFLoginLogicPlugin SHARED
+add_library(NFLoginLogicPlugin STATIC
 	${NFLoginLogicPlugin_ROOT_Cpp}
 	${NFLoginLogicPlugin_ROOT_Hpp})
 	
@@ -19,12 +19,14 @@ set_target_properties( NFLoginLogicPlugin PROPERTIES
 link_NFSDK("NFLoginLogicPlugin")
 
 if(UNIX)
+	target_link_libraries(NFLoginLogicPlugin -static-libstdc++)
 	add_definitions(
 		-D_USRDLL
 		-DELPP_NO_DEFAULT_LOG_FILE
 	)
 
 else()
+	target_link_libraries(NFLoginLogicPlugin -static-libstdc++)
 	add_definitions(
 		-DWIN
 		-D_USRDLL

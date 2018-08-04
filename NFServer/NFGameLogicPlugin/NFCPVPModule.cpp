@@ -1,10 +1,28 @@
-// -------------------------------------------------------------------------
-//    @FileName         :    NFCPVPModule.cpp
-//    @Author           :    LvSheng.Huang
-//    @Date             :    2017-02-02
-//    @Module           :    NFCPVPModule
-//
-// -------------------------------------------------------------------------
+/*
+            This file is part of: 
+                NoahFrame
+            https://github.com/ketoo/NoahGameFrame
+
+   Copyright 2009 - 2018 NoahFrame(NoahGameFrame)
+
+   File creator: lvsheng.huang
+   
+   NoahFrame is open-source software and you can redistribute it and/or modify
+   it under the terms of the License; besides, anyone who use this file/software must include this copyright announcement.
+
+   Licensed under the Apache License, Version 2.0 (the "License");
+   you may not use this file except in compliance with the License.
+   You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   See the License for the specific language governing permissions and
+   limitations under the License.
+*/
+
 #ifdef _MSC_VER
 #pragma warning(disable: 4244 4267)
 #endif
@@ -198,8 +216,8 @@ void NFCPVPModule::FindAllTileScene()
 		{
 			const std::string& strId = strIdList[i];
 
-			const int nServerType = m_pElementModule->GetPropertyInt32(strId, NFrame::Scene::Tile());
-			if (nServerType == 1)
+			const int nSceneType = m_pElementModule->GetPropertyInt32(strId, NFrame::Scene::Tile());
+			if (nSceneType == 1 && strId != "1")
 			{
 				mxTileSceneIDList.push_back(lexical_cast<int>(strId));
 			}
@@ -352,113 +370,118 @@ bool NFCPVPModule::ProcessOpponentData(const NFGUID & self, const NFGUID& oppone
 
 	//try
 	const std::string& strPlayerKey = m_pCommonRedisModule->GetPropertyCacheKey(opponent);
-	if (m_pNoSqlModule->HMGet(strPlayerKey, vKeyList, vValueList))
+	NF_SHARE_PTR<NFIRedisClient> xRedisClient = m_pNoSqlModule->GetDriverBySuit(strPlayerKey);
+	if (xRedisClient)
 	{
-		int nGold = lexical_cast<int>(vValueList.at(0));
-		int nDiamond = lexical_cast<int>(vValueList.at(1));
-		int nLevel = lexical_cast<int>(vValueList.at(2));
-		int nCup = lexical_cast<int>(vValueList.at(3));
-		std::string strName = vValueList.at(4);
-		std::string strHead = vValueList.at(5);
-
-		std::string strHero1CnfID = vValueList.at(6);
-		int nHero1Star = lexical_cast<int>(vValueList.at(7));
-		std::string strHero2CnfID = vValueList.at(8);
-		int nHero2Star = lexical_cast<int>(vValueList.at(9));
-		std::string strHero3CnfID = vValueList.at(10);
-		int nHero3Star = lexical_cast<int>(vValueList.at(11));
-
-		NFGUID xHero1;
-		NFGUID xHero2;
-		NFGUID xHero3;
-
-		xHero1.FromString(vValueList.at(12));
-		xHero2.FromString(vValueList.at(13));
-		xHero3.FromString(vValueList.at(14));
-
-		NFVector3 xHeroPos1 = m_pSceneAOIModule->GetTagPosition(nSceneID, 0);
-		NFVector3 xHeroPos2 = m_pSceneAOIModule->GetTagPosition(nSceneID, 1);
-		NFVector3 xHeroPos3 = m_pSceneAOIModule->GetTagPosition(nSceneID, 2);
-
-		m_pKernelModule->SetPropertyInt(self, NFrame::Player::OpponentGold(), nGold);
-		m_pKernelModule->SetPropertyInt(self, NFrame::Player::OpponentDiamond(), nDiamond);
-		m_pKernelModule->SetPropertyInt(self, NFrame::Player::OpponentLevel(), nLevel);
-		m_pKernelModule->SetPropertyInt(self, NFrame::Player::OpponentCup(), nCup);
-		m_pKernelModule->SetPropertyString(self, NFrame::Player::OpponentName(), strName);
-		m_pKernelModule->SetPropertyString(self, NFrame::Player::OpponentHead(), strHead);
-
-		m_pKernelModule->SetPropertyString(self, NFrame::Player::OpponentHero1(), strHero1CnfID);
-		m_pKernelModule->SetPropertyInt(self, NFrame::Player::OpponentHero1Star(), nHero1Star);
-		m_pKernelModule->SetPropertyString(self, NFrame::Player::OpponentHero2(), strHero2CnfID);
-		m_pKernelModule->SetPropertyInt(self, NFrame::Player::OpponentHero2Star(), nHero2Star);
-		m_pKernelModule->SetPropertyString(self, NFrame::Player::OpponentHero3(), strHero3CnfID);
-		m_pKernelModule->SetPropertyInt(self, NFrame::Player::OpponentHero3Star(), nHero3Star);
-
-		NFVector3 xHeroBornPos1 = m_pKernelModule->GetPropertyVector3(self, NFrame::Player::Hero1BornPos());
-		NFVector3 xHeroBornPos2 = m_pKernelModule->GetPropertyVector3(self, NFrame::Player::Hero1BornPos());
-		NFVector3 xHeroBornPos3 = m_pKernelModule->GetPropertyVector3(self, NFrame::Player::Hero1BornPos());
-		if (!xHeroBornPos1.IsZero())
+		if (xRedisClient->HMGET(strPlayerKey, vKeyList, vValueList))
 		{
-			xHeroPos1 = xHeroBornPos1;
-		}
-		if (!xHeroBornPos2.IsZero())
-		{
-			xHeroPos2 = xHeroBornPos2;
-		}
-		if (!xHeroBornPos3.IsZero())
-		{
-			xHeroPos3 = xHeroBornPos3;
-		}
-		//create building and hero
-		NFDataList xHeroData1;
-		xHeroData1.AddString(NFrame::NPC::Position());
-		xHeroData1.AddVector3(xHeroPos1);
-		xHeroData1.AddString(NFrame::NPC::MasterID());
-		xHeroData1.AddObject(opponent);
-		xHeroData1.AddString(NFrame::NPC::AIOwnerID());
-		xHeroData1.AddObject(self);
-		xHeroData1.AddString(NFrame::NPC::NPCType());
-		xHeroData1.AddInt(NFMsg::ENPCType::ENPCTYPE_TURRET);
-		xHeroData1.AddString(NFrame::NPC::Level());
-		xHeroData1.AddInt(nLevel);
-		xHeroData1.AddString(NFrame::NPC::HeroStar());
-		xHeroData1.AddInt(nHero1Star);
+			int nGold = lexical_cast<int>(vValueList.at(0));
+			int nDiamond = lexical_cast<int>(vValueList.at(1));
+			int nLevel = lexical_cast<int>(vValueList.at(2));
+			int nCup = lexical_cast<int>(vValueList.at(3));
+			std::string strName = vValueList.at(4);
+			std::string strHead = vValueList.at(5);
 
-		NFDataList xHeroData2;
-		
-		xHeroData2.AddString(NFrame::NPC::Position());
-		xHeroData2.AddVector3(xHeroPos2);
-		xHeroData2.AddString(NFrame::NPC::MasterID());
-		xHeroData2.AddObject(opponent);
-		xHeroData2.AddString(NFrame::NPC::AIOwnerID());
-		xHeroData2.AddObject(self);
-		xHeroData2.AddString(NFrame::NPC::NPCType());
-		xHeroData2.AddInt(NFMsg::ENPCType::ENPCTYPE_TURRET);
-		xHeroData2.AddString(NFrame::NPC::Level());
-		xHeroData2.AddInt(nLevel);
-		xHeroData2.AddString(NFrame::NPC::HeroStar());
-		xHeroData2.AddInt(nHero2Star);
+			std::string strHero1CnfID = vValueList.at(6);
+			int nHero1Star = lexical_cast<int>(vValueList.at(7));
+			std::string strHero2CnfID = vValueList.at(8);
+			int nHero2Star = lexical_cast<int>(vValueList.at(9));
+			std::string strHero3CnfID = vValueList.at(10);
+			int nHero3Star = lexical_cast<int>(vValueList.at(11));
 
-		NFDataList xHeroData3;
-		xHeroData3.AddString(NFrame::NPC::Position());
-		xHeroData3.AddVector3(xHeroPos3);
-		xHeroData3.AddString(NFrame::NPC::MasterID());
-		xHeroData3.AddObject(opponent);
-		xHeroData3.AddString(NFrame::NPC::AIOwnerID());
-		xHeroData3.AddObject(self);
-		xHeroData3.AddString(NFrame::NPC::NPCType());
-		xHeroData3.AddInt(NFMsg::ENPCType::ENPCTYPE_TURRET);
-		xHeroData3.AddString(NFrame::NPC::Level());
-		xHeroData3.AddInt(nLevel);
-		xHeroData3.AddString(NFrame::NPC::HeroStar());
-		xHeroData3.AddInt(nHero3Star);
+			NFGUID xHero1;
+			NFGUID xHero2;
+			NFGUID xHero3;
 
-		m_pKernelModule->CreateObject(xHero1, nSceneID, nGroupID, NFrame::NPC::ThisName(), strHero1CnfID, xHeroData1);
-		m_pKernelModule->CreateObject(xHero2, nSceneID, nGroupID, NFrame::NPC::ThisName(), strHero2CnfID, xHeroData2);
-		m_pKernelModule->CreateObject(xHero3, nSceneID, nGroupID, NFrame::NPC::ThisName(), strHero3CnfID, xHeroData3);
-		
-		return true;
+			xHero1.FromString(vValueList.at(12));
+			xHero2.FromString(vValueList.at(13));
+			xHero3.FromString(vValueList.at(14));
+
+			NFVector3 xHeroPos1 = m_pSceneAOIModule->GetTagPosition(nSceneID, 0);
+			NFVector3 xHeroPos2 = m_pSceneAOIModule->GetTagPosition(nSceneID, 1);
+			NFVector3 xHeroPos3 = m_pSceneAOIModule->GetTagPosition(nSceneID, 2);
+
+			m_pKernelModule->SetPropertyInt(self, NFrame::Player::OpponentGold(), nGold);
+			m_pKernelModule->SetPropertyInt(self, NFrame::Player::OpponentDiamond(), nDiamond);
+			m_pKernelModule->SetPropertyInt(self, NFrame::Player::OpponentLevel(), nLevel);
+			m_pKernelModule->SetPropertyInt(self, NFrame::Player::OpponentCup(), nCup);
+			m_pKernelModule->SetPropertyString(self, NFrame::Player::OpponentName(), strName);
+			m_pKernelModule->SetPropertyString(self, NFrame::Player::OpponentHead(), strHead);
+
+			m_pKernelModule->SetPropertyString(self, NFrame::Player::OpponentHero1(), strHero1CnfID);
+			m_pKernelModule->SetPropertyInt(self, NFrame::Player::OpponentHero1Star(), nHero1Star);
+			m_pKernelModule->SetPropertyString(self, NFrame::Player::OpponentHero2(), strHero2CnfID);
+			m_pKernelModule->SetPropertyInt(self, NFrame::Player::OpponentHero2Star(), nHero2Star);
+			m_pKernelModule->SetPropertyString(self, NFrame::Player::OpponentHero3(), strHero3CnfID);
+			m_pKernelModule->SetPropertyInt(self, NFrame::Player::OpponentHero3Star(), nHero3Star);
+
+			NFVector3 xHeroBornPos1 = m_pKernelModule->GetPropertyVector3(self, NFrame::Player::Hero1BornPos());
+			NFVector3 xHeroBornPos2 = m_pKernelModule->GetPropertyVector3(self, NFrame::Player::Hero1BornPos());
+			NFVector3 xHeroBornPos3 = m_pKernelModule->GetPropertyVector3(self, NFrame::Player::Hero1BornPos());
+			if (!xHeroBornPos1.IsZero())
+			{
+				xHeroPos1 = xHeroBornPos1;
+			}
+			if (!xHeroBornPos2.IsZero())
+			{
+				xHeroPos2 = xHeroBornPos2;
+			}
+			if (!xHeroBornPos3.IsZero())
+			{
+				xHeroPos3 = xHeroBornPos3;
+			}
+			//create building and hero
+			NFDataList xHeroData1;
+			xHeroData1.AddString(NFrame::NPC::Position());
+			xHeroData1.AddVector3(xHeroPos1);
+			xHeroData1.AddString(NFrame::NPC::MasterID());
+			xHeroData1.AddObject(opponent);
+			xHeroData1.AddString(NFrame::NPC::AIOwnerID());
+			xHeroData1.AddObject(self);
+			xHeroData1.AddString(NFrame::NPC::NPCType());
+			xHeroData1.AddInt(NFMsg::ENPCType::ENPCTYPE_TURRET);
+			xHeroData1.AddString(NFrame::NPC::Level());
+			xHeroData1.AddInt(nLevel);
+			xHeroData1.AddString(NFrame::NPC::HeroStar());
+			xHeroData1.AddInt(nHero1Star);
+
+			NFDataList xHeroData2;
+
+			xHeroData2.AddString(NFrame::NPC::Position());
+			xHeroData2.AddVector3(xHeroPos2);
+			xHeroData2.AddString(NFrame::NPC::MasterID());
+			xHeroData2.AddObject(opponent);
+			xHeroData2.AddString(NFrame::NPC::AIOwnerID());
+			xHeroData2.AddObject(self);
+			xHeroData2.AddString(NFrame::NPC::NPCType());
+			xHeroData2.AddInt(NFMsg::ENPCType::ENPCTYPE_TURRET);
+			xHeroData2.AddString(NFrame::NPC::Level());
+			xHeroData2.AddInt(nLevel);
+			xHeroData2.AddString(NFrame::NPC::HeroStar());
+			xHeroData2.AddInt(nHero2Star);
+
+			NFDataList xHeroData3;
+			xHeroData3.AddString(NFrame::NPC::Position());
+			xHeroData3.AddVector3(xHeroPos3);
+			xHeroData3.AddString(NFrame::NPC::MasterID());
+			xHeroData3.AddObject(opponent);
+			xHeroData3.AddString(NFrame::NPC::AIOwnerID());
+			xHeroData3.AddObject(self);
+			xHeroData3.AddString(NFrame::NPC::NPCType());
+			xHeroData3.AddInt(NFMsg::ENPCType::ENPCTYPE_TURRET);
+			xHeroData3.AddString(NFrame::NPC::Level());
+			xHeroData3.AddInt(nLevel);
+			xHeroData3.AddString(NFrame::NPC::HeroStar());
+			xHeroData3.AddInt(nHero3Star);
+
+			m_pKernelModule->CreateObject(xHero1, nSceneID, nGroupID, NFrame::NPC::ThisName(), strHero1CnfID, xHeroData1);
+			m_pKernelModule->CreateObject(xHero2, nSceneID, nGroupID, NFrame::NPC::ThisName(), strHero2CnfID, xHeroData2);
+			m_pKernelModule->CreateObject(xHero3, nSceneID, nGroupID, NFrame::NPC::ThisName(), strHero3CnfID, xHeroData3);
+
+			return true;
+		}
 	}
+	
 
 	return false;
 }
