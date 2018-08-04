@@ -1,10 +1,27 @@
-// -------------------------------------------------------------------------
-//    @FileName				:    NFCItemModule.cpp
-//    @Author               :    LvSheng.Huang
-//    @Date                 :    2013-06-11
-//    @Module               :    NFCItemModule
-//    @Desc                 :
-// -------------------------------------------------------------------------
+/*
+            This file is part of: 
+                NoahFrame
+            https://github.com/ketoo/NoahGameFrame
+
+   Copyright 2009 - 2018 NoahFrame(NoahGameFrame)
+
+   File creator: lvsheng.huang
+   
+   NoahFrame is open-source software and you can redistribute it and/or modify
+   it under the terms of the License; besides, anyone who use this file/software must include this copyright announcement.
+
+   Licensed under the Apache License, Version 2.0 (the "License");
+   you may not use this file except in compliance with the License.
+   You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   See the License for the specific language governing permissions and
+   limitations under the License.
+*/
 
 #include "NFCItemModule.h"
 
@@ -325,13 +342,13 @@ bool NFCItemModule::ConsumeDataItemProperty(const NFGUID& self, const std::strin
 
 bool NFCItemModule::DoAwardPack(const NFGUID& self, const std::string& strAwardPack)
 {
-	std::vector<std::string> xList = m_pCommonConfigModule->GetStructItemList(strAwardPack);
+	std::vector<std::string> xList = m_pCommonConfigModule->GetSubKeyList(strAwardPack);
 
 	for (int i = 0; i < xList.size(); ++i)
 	{
 		const std::string& strItemID = xList[i];
-		const int nCount = m_pCommonConfigModule->GetAttributeInt(strAwardPack, strItemID, "Count");
-		const int nIsHero = m_pCommonConfigModule->GetAttributeInt(strAwardPack, strItemID, "IsHero");
+		const int nCount = m_pCommonConfigModule->GetFieldInt(strAwardPack, strItemID, "Count");
+		const int nIsHero = m_pCommonConfigModule->GetFieldInt(strAwardPack, strItemID, "IsHero");
 		if (m_pElementModule->ExistElement(strItemID))
 		{
 			if (nIsHero > 0)

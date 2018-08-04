@@ -7,7 +7,7 @@ file(GLOB NFNoSqlPlugin_ROOT_Cpp
 file(GLOB NFNoSqlPlugin_ROOT_Hpp
 		*.h)
 
-add_library(NFNoSqlPlugin SHARED
+add_library(NFNoSqlPlugin STATIC
 		${NFNoSqlPlugin_ROOT_Cpp}
 		${NFNoSqlPlugin_Hpp})
 
@@ -22,10 +22,12 @@ link_NFSDK("NFNoSqlPlugin")
 
 if(UNIX)
 	if (CMAKE_BUILD_TYPE MATCHES "Release")
-		target_link_libraries(NFNoSqlPlugin redisclient)
+		target_link_libraries(NFNoSqlPlugin hiredis)
 	else()
-		target_link_libraries(NFNoSqlPlugin redisclient)
+		target_link_libraries(NFNoSqlPlugin hiredis)
 	endif()
+
+	target_link_libraries(NFNoSqlPlugin -static-libstdc++)
 
 	add_definitions(
 			-D_USRDLL
@@ -34,11 +36,12 @@ if(UNIX)
 
 else()
 	if (CMAKE_BUILD_TYPE MATCHES "Release")
-		target_link_libraries(NFNoSqlPlugin redisclient)
+		target_link_libraries(NFNoSqlPlugin hiredis)
 	else()
-		target_link_libraries(NFNoSqlPlugin redisclient)
+		target_link_libraries(NFNoSqlPlugin hiredis_d)
 	endif()
 
+	target_link_libraries(NFNoSqlPlugin -static-libstdc++)
 	add_definitions(
 			-DWIN
 			-D_USRDLL

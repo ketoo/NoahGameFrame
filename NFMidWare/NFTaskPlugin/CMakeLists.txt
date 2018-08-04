@@ -5,7 +5,7 @@ file(GLOB NFTaskPlugin_ROOT_Cpp
 file(GLOB NFTaskPlugin_ROOT_Hpp 
 	*.h)
 
-add_library(NFTaskPlugin SHARED
+add_library(NFTaskPlugin STATIC
 	${NFTaskPlugin_ROOT_Cpp}
 	${NFTaskPlugin_ROOT_Hpp})
 	
@@ -19,12 +19,17 @@ set_target_properties( NFTaskPlugin PROPERTIES
 link_NFSDK("NFTaskPlugin")
 
 if(UNIX)
+	target_link_libraries(NFTaskPlugin -static-libstdc++)
+
 	add_definitions(
 		-D_USRDLL
 		-DELPP_NO_DEFAULT_LOG_FILE
 	)
 	
 else()
+
+	target_link_libraries(NFTaskPlugin -static-libstdc++)
+	
 	add_definitions(
 		-DWIN
 		-D_USRDLL

@@ -1,15 +1,32 @@
-// -------------------------------------------------------------------------
-//    @FileName			:    NFCNoSqlModule.h
-//    @Author           :    LvSheng.Huang
-//    @Date             :    2013-10-11
-//    @Module           :    NFCNoSqlModule
-//
-// -------------------------------------------------------------------------
+/*
+            This file is part of: 
+                NoahFrame
+            https://github.com/ketoo/NoahGameFrame
+
+   Copyright 2009 - 2018 NoahFrame(NoahGameFrame)
+
+   File creator: lvsheng.huang
+   
+   NoahFrame is open-source software and you can redistribute it and/or modify
+   it under the terms of the License; besides, anyone who use this file/software must include this copyright announcement.
+
+   Licensed under the Apache License, Version 2.0 (the "License");
+   you may not use this file except in compliance with the License.
+   You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   See the License for the specific language governing permissions and
+   limitations under the License.
+*/
 
 #ifndef NFC_DATANOSQL_MODULE_H
 #define NFC_DATANOSQL_MODULE_H
 
-#include "NFCNoSqlDriver.h"
+#include "NFRedisClient.h"
 #include "NFComm/NFPluginModule/NFPlatform.h"
 #include "NFComm/NFPluginModule/NFIPluginManager.h"
 #include "NFComm/NFPluginModule/NFINoSqlModule.h"
@@ -17,109 +34,47 @@
 #include "NFComm/NFPluginModule/NFIElementModule.h"
 #include "NFComm/NFPluginModule/NFILogModule.h"
 
-void YieldFunction();
-
 class NFCNoSqlModule
-    : public NFINoSqlModule
+	: public NFINoSqlModule
 {
 public:
 
-    NFCNoSqlModule(NFIPluginManager* p);
-    virtual ~NFCNoSqlModule();
+	NFCNoSqlModule(NFIPluginManager* p);
+	virtual ~NFCNoSqlModule();
 
-    virtual bool Init();
-    virtual bool Shut();
-    virtual bool Execute();
-    virtual bool AfterInit();
+	virtual bool Init();
+	virtual bool Shut();
+	virtual bool Execute();
+	virtual bool AfterInit();
+	
+	virtual bool Connect(const std::string& strIP, const int nPort, const std::string& strPass) { return false; };
+	virtual bool Enable();
+	virtual bool Busy();
+	virtual bool KeepLive();
+
 
 	virtual bool AddConnectSql(const std::string& strID, const std::string& strIP);
 	virtual bool AddConnectSql(const std::string& strID, const std::string& strIP, const int nPort);
 	virtual bool AddConnectSql(const std::string& strID, const std::string& strIP, const int nPort, const std::string& strPass);
 
 	virtual NFList<std::string> GetDriverIdList();
-	virtual NF_SHARE_PTR<NFINoSqlDriver> GetDriver(const std::string& strID);
-	virtual NF_SHARE_PTR<NFINoSqlDriver> GetDriverBySuitRandom();
-	virtual NF_SHARE_PTR<NFINoSqlDriver> GetDriverBySuitConsistent();
-	virtual NF_SHARE_PTR<NFINoSqlDriver> GetDriverBySuit(const std::string& strHash);
-	//virtual NF_SHARE_PTR<NFINoSqlDriver> GetDriverBySuit(const int nHash);
-    virtual bool RemoveConnectSql(const std::string& strID);
+	virtual NF_SHARE_PTR<NFIRedisClient> GetDriver(const std::string& strID);
+	virtual NF_SHARE_PTR<NFIRedisClient> GetDriverBySuitRandom();
+	virtual NF_SHARE_PTR<NFIRedisClient> GetDriverBySuitConsistent();
+	virtual NF_SHARE_PTR<NFIRedisClient> GetDriverBySuit(const std::string& strHash);
+	//virtual NF_SHARE_PTR<NFIRedisClient> GetDriverBySuit(const int nHash);
+	virtual bool RemoveConnectSql(const std::string& strID);
 
-	//the interfaces below are supported by coroutine
-	///////////////////////////////////////////////////////////
-	virtual const bool Del(const std::string& strKey);
-	virtual const bool Exists(const std::string& strKey);
-	virtual const bool Expire(const std::string& strKey, unsigned int nSecs);
-	virtual const bool Expireat(const std::string& strKey, unsigned int nUnixTime);
+protected:
+	void CheckConnect();
 
-	///////////////////////////////////////////////////////////
-
-	virtual const bool Set(const std::string& strKey, const std::string& strValue);
-	virtual const bool Get(const std::string& strKey, std::string& strValue);
-
-	///////////////////////////////////////////////////////////
-
-	//SET if Not eXists
-	virtual const bool SetNX(const std::string& strKey, const std::string& strValue);
-	//set key->value and set Expire time
-	virtual const bool SetEX(const std::string& strKey, const std::string& strValue, const unsigned int nSeconds);
-
-	virtual const bool HSet(const std::string& strKey, const std::string& strField, const std::string& strValue);
-	virtual const bool HGet(const std::string& strKey, const std::string& strField, std::string& strValue);
-	virtual const bool HMSet(const std::string& strKey, const std::vector<std::string>& fieldVec, const std::vector<std::string>& valueVec);
-	virtual const bool HMGet(const std::string& strKey, const std::vector<std::string>& fieldVec, std::vector<std::string>& valueVec);
-
-	virtual const bool HExists(const std::string& strKey, const std::string& strField);
-	virtual const bool HDel(const std::string& strKey, const std::string& strField);
-	virtual const bool HLength(const std::string& strKey, int& nLen);
-
-	virtual const bool HKeys(const std::string& strKey, std::vector<std::string>& fieldVec);
-	virtual const bool HValues(const std::string& strKey, std::vector<std::string>& valueVec);
-	virtual const bool HGetAll(const std::string& strKey, std::vector<std::pair<std::string, std::string> >& valueVec);
-
-	/////////////
-
-	virtual const bool ZAdd(const std::string& strKey, const double nScore, const std::string& strMember);
-	virtual const bool ZIncrBy(const std::string& strKey, const std::string& strMember, const double nIncrement);
-
-	virtual const bool ZRem(const std::string& strKey, const std::string& strMember);
-	virtual const bool ZRemRangeByRank(const std::string& strKey, const int nStart, const int nStop);
-	virtual const bool ZRemRangeByScore(const std::string& strKey, const int nMin, const int nMax);
-
-
-	virtual const bool ZScore(const std::string& strKey, const std::string& strMember, double& nScore);
-
-
-	virtual const bool ZCard(const std::string& strKey, int& nCount);
-	virtual const bool ZRank(const std::string& strKey, const std::string& strMember, int& nRank);
-	virtual const bool ZCount(const std::string& strKey, const int nMin, const int nMax, int& nCount);
-
-
-	virtual const bool ZRevRange(const std::string& strKey, const int nStart, const int nStop, std::vector<std::pair<std::string, double> >& memberScoreVec);
-	virtual const bool ZRevRank(const std::string& strKey, const std::string& strMember, int& nRank);
-	virtual const bool ZRange(const std::string& strKey, const int nStartIndex, const int nEndIndex, std::vector<std::pair<std::string, double> >& memberScoreVec);
-	virtual const bool ZRangeByScore(const std::string& strKey, const int nMin, const int nMax, std::vector<std::pair<std::string, double> >& memberScoreVec);
-
-	///////////////////////////////////////////////////////////
-	//push form back of the list
-	//pop form head of the list
-	virtual const bool ListPush(const std::string& strKey, const std::string& strValue);
-	virtual const bool ListPop(const std::string& strKey, std::string& strValue);
-
-	//>= star, < end
-	virtual const bool ListRange(const std::string& strKey, const int nStar, const int nEnd, std::vector<std::string>& xList);
-	virtual const bool ListLen(const std::string& strKey, int& nLength);
-
-	virtual const bool ListIndex(const std::string& strKey, const int nIndex, std::string& strValue);
-	virtual const bool ListRem(const std::string& strKey, const int nCount, const std::string& strValue);
-	virtual const bool ListSet(const std::string& strKey, const int nCount, const std::string& strValue);
-	virtual const bool ListTrim(const std::string& strKey, const int nStar, const int nEnd);
 protected:
 	NFINT64 mLastCheckTime;
 	NFIClassModule* m_pClassModule;
 	NFIElementModule* m_pElementModule;
 	NFILogModule* m_pLogModule;
 
-	NFConsistentHashMapEx<std::string, NFINoSqlDriver> mxNoSqlDriver;
+	NFConsistentHashMapEx<std::string, NFIRedisClient> mxNoSqlDriver;
 
 };
 
