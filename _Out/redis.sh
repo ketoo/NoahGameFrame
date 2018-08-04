@@ -1,3 +1,6 @@
+#!/bin/bash
+#./src/redis-server ./redis.conf &
+
 cd redis
 
 

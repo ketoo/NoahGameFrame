@@ -147,6 +147,7 @@ message RoleLiteInfo
 message AckRoleLiteInfoList
 {
 	repeated RoleLiteInfo char_data = 1;
+	required bytes   account = 2;
 }
 
 message ReqCreateRole
@@ -192,4 +193,11 @@ message RoleOfflineNotify
 	required Ident guild = 2;
 	required int32 game = 3;
 	required int32 proxy = 4;
+}
+
+message RoleDataPack
+{
+	required Ident 		id = 1;
+	optional ObjectPropertyList 	property = 2;
+	optional ObjectRecordList 		record = 4;
 }

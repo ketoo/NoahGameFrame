@@ -1,10 +1,27 @@
-// -------------------------------------------------------------------------
-//    @FileName			:    NFCActor.cpp
-//    @Author           :    LvSheng.Huang
-//    @Date             :    2014-04-05
-//    @Module           :    NFCActor
-//
-// -------------------------------------------------------------------------
+/*
+            This file is part of: 
+                NoahFrame
+            https://github.com/ketoo/NoahGameFrame
+
+   Copyright 2009 - 2018 NoahFrame(NoahGameFrame)
+
+   File creator: lvsheng.huang
+   
+   NoahFrame is open-source software and you can redistribute it and/or modify
+   it under the terms of the License; besides, anyone who use this file/software must include this copyright announcement.
+
+   Licensed under the Apache License, Version 2.0 (the "License");
+   you may not use this file except in compliance with the License.
+   You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   See the License for the specific language governing permissions and
+   limitations under the License.
+*/
 
 #include "NFCActor.h"
 #include "NFComm/NFPluginModule/NFIPluginManager.h"
@@ -26,6 +43,9 @@ void NFCActor::HandlerEx(const NFIActorMessage& message, const Theron::Address f
 
 void NFCActor::AddComponent(NF_SHARE_PTR<NFIComponent> pComponent)
 {
+	//if you want to add more components for the actor, please don't clear the component
+	mxComponent.ClearAll();
+
 	mxComponent.AddElement(pComponent->GetComponentName(), pComponent);
 	pComponent->SetActor(this);
 
@@ -40,7 +60,7 @@ NF_SHARE_PTR<NFIComponent> NFCActor::FindComponent(const std::string & strCompon
 	return mxComponent.GetElement(strComponentName);
 }
 
-bool NFCActor::AddBeginunc(const int nSubMsgID, ACTOR_PROCESS_FUNCTOR_PTR xBeginFunctor)
+bool NFCActor::AddBeginFunc(const int nSubMsgID, ACTOR_PROCESS_FUNCTOR_PTR xBeginFunctor)
 {
 	if (mxProcessFuntor.GetElement(nSubMsgID))
 	{
@@ -79,17 +99,7 @@ void NFCActor::Handler(const NFIActorMessage& message, const Theron::Address fro
 	{
 		
 		ACTOR_PROCESS_FUNCTOR* pFun = ptrBegin.get();
-		pFun->operator()(message.self, message.nFormActor, message.nMsgID, strData);
-	}
-	else
-	{
-		for (NF_SHARE_PTR<NFIComponent> pComponent = mxComponent.First(); pComponent != nullptr; pComponent = mxComponent.Next())
-		{
-			if (pComponent->Enable())
-			{
-				pComponent->OnASyncEvent(message.self, message.nFormActor, message.nMsgID, strData);
-			}
-		}
+		pFun->operator()(message.nFormActor, message.nMsgID, strData);
 	}
  
     ////////////////////////////////////////////////////////
@@ -99,7 +109,6 @@ void NFCActor::Handler(const NFIActorMessage& message, const Theron::Address fro
 	xReturnMessage.msgType = NFIActorMessage::ACTOR_MSG_TYPE_END_FUNC;
 	xReturnMessage.nMsgID = message.nMsgID;
     xReturnMessage.data = strData;
-    xReturnMessage.self = message.self;
     xReturnMessage.nFormActor = this->GetAddress().AsInteger();
 
 	ACTOR_PROCESS_FUNCTOR_PTR ptrEnd = mxEndProcessFuntor.GetElement(message.nMsgID);

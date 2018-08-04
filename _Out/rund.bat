@@ -7,7 +7,6 @@ choice /t 2 /d y /n >nul
 echo Starting NFWorldServer...
 start "NFWorldServer" "NFPluginLoader_d.exe" "Server=WorldServer" "ID=7"
 
-
 choice /t 5 /d y /n >nul
 
 echo Starting NFLoginServer...

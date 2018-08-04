@@ -1,23 +1,63 @@
-//
-// Author: LUSHENG HUANG Created on 18/11/17.
-//
+/*
+            This file is part of: 
+                NoahFrame
+            https://github.com/ketoo/NoahGameFrame
+
+   Copyright 2009 - 2018 NoahFrame(NoahGameFrame)
+
+   File creator: lvsheng.huang
+   
+   NoahFrame is open-source software and you can redistribute it and/or modify
+   it under the terms of the License; besides, anyone who use this file/software must include this copyright announcement.
+
+   Licensed under the Apache License, Version 2.0 (the "License");
+   you may not use this file except in compliance with the License.
+   You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   See the License for the specific language governing permissions and
+   limitations under the License.
+*/
+
 #include <assert.h>
 #include "NFRedisTester.h"
 
-NFRedisTester::NFRedisTester()
+NFRedisTester::NFRedisTester(const std::string& ip, int port, const std::string& auth)
 {
-    mxRedisClient.ConnectTo("127.0.0.1", 6379, "NoahGameFrame");
+    mxRedisClient.Connect(ip, port, auth);
 }
 
-void NFRedisTester::RunTester()
+bool NFRedisTester::RunTester()
 {
+	if (!mxRedisClient.GetAuthKey().empty() && !mxRedisClient.AUTH(mxRedisClient.GetAuthKey()))
+	{
+		printf("password error!\n");
+		return true;
+	}
+
     mxRedisClient.FLUSHDB();
 	TestKey();
 	TestString();
 	TestList();
-    TestHash();
-    TestSet();
-    TestSort();
+	TestHash();
+	TestSet();
+	TestSort();
+	TestPubSub();
+
+	return true;
+}
+
+bool NFRedisTester::Test_1()
+{
+	int64_t num;
+	mxRedisClient.INCRBY("12123ddddd", 13, num);
+	mxRedisClient.INCRBY("12123ddddd", 13, num);
+
+	return true;
 }
 
 void NFRedisTester::TestHash()
@@ -153,9 +193,9 @@ void NFRedisTester::TestKey()
 	assert(mxRedisClient.SET(strKey, strValue) == true);
 	assert(mxRedisClient.EXISTS(strKey) == true);
 
-	assert(mxRedisClient.EXPIRE(strKey, 5) == true);
+	assert(mxRedisClient.EXPIRE(strKey, 2) == true);
 
-	NFSLEEP(6000);
+	NFSLEEP(3000);
 	std::string strGET;
 	assert(mxRedisClient.GET(strKey, strGET) == false);
 	assert(strGET == "");
@@ -163,7 +203,7 @@ void NFRedisTester::TestKey()
 	//pRedisResult = mxRedisClient.EXPIREAT(strKey, const int64_t unixTime);
 	assert(mxRedisClient.PERSIST(strKey) == false);
 	assert(mxRedisClient.TTL(strKey) == -2);
-	assert(mxRedisClient.TYPE(strKey) == "");
+	assert(mxRedisClient.TYPE(strKey) == "none");
 
 }
 
@@ -261,7 +301,21 @@ void NFRedisTester::TestList()
 
 void NFRedisTester::TestSet()
 {
+	struct A
+	{
+		int a = 100;
+		short b = 200;
+	};
+	A a;
 
+	std::string strKey = "TestSetKey1:";
+	std::string strBinary((char*)&a, sizeof(a));
+	mxRedisClient.SADD(strKey, strBinary);
+
+	string_vector members;
+	mxRedisClient.SMEMBERS(strKey, members);
+	A* pa = (A*)members[0].c_str();
+	assert(pa->a == 100 && pa->b == 200);
 }
 
 void NFRedisTester::TestSort()
@@ -275,7 +329,7 @@ void NFRedisTester::TestString()
 	std::string strValu11e = "111";
 
 	int64_t nValueDECR;
-	assert(mxRedisClient.DECR(strKey11, nValueDECR) == false);
+	assert(mxRedisClient.DECR(strKey11, nValueDECR) == true);
 	assert(mxRedisClient.SET(strKey11, strValu11e) == true);
 	assert(mxRedisClient.DECR(strKey11, nValueDECR) == true);
 	assert(nValueDECR == 110);
@@ -286,10 +340,10 @@ void NFRedisTester::TestString()
 	assert(oldGETSET == "100");
 
 	assert(mxRedisClient.INCR(strKey11, nValueDECR) == true);
-	assert(nValueDECR == 101);
+	assert(nValueDECR == 201);
 
 	assert(mxRedisClient.INCRBY(strKey11, 100, nValueDECR) == true);
-	assert(nValueDECR == 201);
+	assert(nValueDECR == 301);
 
 	std::string strKey = "TestString";
 	std::string strValue = "1232TestString234";
@@ -300,11 +354,11 @@ void NFRedisTester::TestString()
 	assert(mxRedisClient.GET(strKey, strGET) == true);
 	assert(strGET == strValue);
 
-	int nAPPEND;
+	int nAPPEND = 0;
 	assert(mxRedisClient.APPEND(strKey, strValue, nAPPEND) == true);
 	assert(nAPPEND == strValue.length() * 2);
 
-	int nSTRLEN;
+	int nSTRLEN = 0;
 	assert(mxRedisClient.STRLEN(strKey, nSTRLEN) == true);
 	assert(nSTRLEN == strValue.length() * 2);
 
@@ -347,7 +401,17 @@ void NFRedisTester::TestString()
 
 }
 
+void NFRedisTester::TestPubSub()
+{
+
+}
+
 void NFRedisTester::Execute()
 {
     mxRedisClient.Execute();
+}
+
+bool NFRedisTester::IsConnect()
+{
+	return mxRedisClient.IsConnect();
 }

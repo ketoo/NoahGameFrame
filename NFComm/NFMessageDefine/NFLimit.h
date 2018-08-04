@@ -2,7 +2,6 @@
 //    @FileName			:    NFLimit.h
 //    @Author      :    LvSheng.Huang
 //    @Date    :    2010-10-5 12:05
-
 //
 // -------------------------------------------------------------------------
 
@@ -10,9 +9,6 @@
 #define NF_LIMIT_H
 
 #pragma pack(push,1)
-
-
-
 
 
 #define NF_NAME_MAXLEN          32              

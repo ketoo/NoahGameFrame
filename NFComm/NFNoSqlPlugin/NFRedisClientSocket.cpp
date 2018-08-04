@@ -1,14 +1,33 @@
-//
-// Author: LUSHENG HUANG Created on 17/11/17.
-//
+/*
+            This file is part of: 
+                NoahFrame
+            https://github.com/ketoo/NoahGameFrame
+
+   Copyright 2009 - 2018 NoahFrame(NoahGameFrame)
+
+   File creator: lvsheng.huang
+   
+   NoahFrame is open-source software and you can redistribute it and/or modify
+   it under the terms of the License; besides, anyone who use this file/software must include this copyright announcement.
+
+   Licensed under the Apache License, Version 2.0 (the "License");
+   you may not use this file except in compliance with the License.
+   You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   See the License for the specific language governing permissions and
+   limitations under the License.
+*/
 
 #include "NFRedisClient.h"
 #include "NFRedisClientSocket.h"
 
 #if NF_PLATFORM == NF_PLATFORM_WIN
-#include <WS2tcpip.h>
-#include <winsock2.h>
-#pragma  comment(lib,"Ws2_32.lib")
+
 #ifndef LIBEVENT_SRC
 #pragma  comment(lib,"libevent.lib")
 #pragma  comment(lib,"libevent_core.lib")
@@ -22,23 +41,43 @@
 
 NFRedisClientSocket::NFRedisClientSocket()
 {
-	mNetStatus = NF_NET_EVENT::NF_NET_EVENT_CONNECTED;
-}
-
-NFRedisClientSocket::~NFRedisClientSocket()
-{
-
-}
-
-int64_t NFRedisClientSocket::Connect(const std::string &ip, const int port)
-{
-
-	struct sockaddr_in addr;
+	mNetStatus = NF_NET_EVENT::NF_NET_EVENT_NONE;
+	m_pRedisReader = redisReaderCreate();
+	fd_ = -1;
 
 #ifdef _MSC_VER
 	WSADATA wsa_data;
 	WSAStartup(0x0201, &wsa_data);
 #endif
+
+	base = event_base_new();
+	assert(base != nullptr);
+}
+
+NFRedisClientSocket::~NFRedisClientSocket()
+{
+	if (m_pRedisReader)
+	{
+		redisReaderFree(m_pRedisReader);
+		m_pRedisReader = nullptr;
+	}
+
+	if (bev)
+	{
+		bufferevent_free(bev);
+		bev = nullptr;
+	}
+
+	if (base)
+	{
+		event_base_free(base);
+		base = nullptr;
+	}
+}
+
+int64_t NFRedisClientSocket::Connect(const std::string &ip, const int port)
+{
+	struct sockaddr_in addr;
 
 	memset(&addr, 0, sizeof(addr));
 	addr.sin_family = AF_INET;
@@ -50,19 +89,8 @@ int64_t NFRedisClientSocket::Connect(const std::string &ip, const int port)
 		return -1;
 	}
 
-	base = event_base_new();
-	if (base == NULL)
-	{
-		printf("event_base_new ");
-		return -1;
-	}
-
 	bev = bufferevent_socket_new(base, -1, BEV_OPT_CLOSE_ON_FREE);
-	if (bev == NULL)
-	{
-		printf("bufferevent_socket_new ");
-		return -1;
-	}
+	assert(bev != nullptr);
 
 	int bRet = bufferevent_socket_connect(bev, (struct sockaddr*)&addr, sizeof(addr));
 	if (0 != bRet)
@@ -72,14 +100,26 @@ int64_t NFRedisClientSocket::Connect(const std::string &ip, const int port)
 		return -1;
 	}
 
-	fd = bufferevent_getfd(bev);
+	fd_ = bufferevent_getfd(bev);
 
 	bufferevent_setcb(bev, conn_readcb, conn_writecb, conn_eventcb, this);
 	bufferevent_enable(bev, EV_READ | EV_WRITE);
 
 	event_set_log_callback(&NFRedisClientSocket::log_cb);
 
-	return fd;
+	return fd_;
+}
+
+bool NFRedisClientSocket::ReConnect(const std::string& ip, const int port)
+{
+	if (bev)
+	{
+		bufferevent_free(bev);
+		fd_ = -1;
+		bev = nullptr;
+	}
+
+	return Connect(ip, port);
 }
 
 int NFRedisClientSocket::Execute()
@@ -92,132 +132,34 @@ int NFRedisClientSocket::Execute()
 	return 0;
 }
 
+bool NFRedisClientSocket::IsConnect()
+{
+	return mNetStatus == NF_NET_EVENT::NF_NET_EVENT_CONNECTED;
+}
+
+redisReader * NFRedisClientSocket::GetRedisReader()
+{
+	return m_pRedisReader;
+}
+
 int NFRedisClientSocket::Close()
 {
     return 0;
 }
 
-bool NFRedisClientSocket::ReadLineFromBuff(std::string &line)
-{
-	line.clear();
-
-	bool bFindLine = false;
-	int len = -1;
-	const char* p = mstrBuff.data();
-
-	while (!bFindLine)
-	{
-		for (int i = 0; i < mstrBuff.length(); ++i)
-		{
-			p++;
-			if (i < (mstrBuff.length() - 1) && *p == '\r' && *(p + 1) == '\n')
-			{
-				len = i;
-				bFindLine = true;
-				break;
-			}
-		}
-
-		if (!bFindLine)
-		{
-			return false;
-		}
-	}
-
-	int nTotalLen = len + 1 + NFREDIS_SIZEOF_CRLF;
-	line.append(mstrBuff.data(), nTotalLen);
-	mstrBuff.erase(0, nTotalLen);
-
-	return true;
-}
-
-
-int NFRedisClientSocket::Write(const char *buf, int count)
+int NFRedisClientSocket::Write(const char *buf, size_t count)
 {
 	if (buf == NULL || count <= 0)
 	{
 		return 0;
 	}
 
-	if (NULL != bev && mNetStatus == NF_NET_EVENT::NF_NET_EVENT_CONNECTED)
+	if (bev == nullptr || mNetStatus != NF_NET_EVENT::NF_NET_EVENT_CONNECTED)
 	{
-		return bufferevent_write(bev, buf, count);
+		return -1;
 	}
 
-    return 0;
-}
-
-int NFRedisClientSocket::GetLineNum()
-{
-	return mLineList.size();
-}
-
-bool NFRedisClientSocket::TryPredictType(char& eType)
-{
-	bool bFindType = false;
-	while (!bFindType)
-	{
-		if (mLineList.size() <= 0)
-		{
-			//yeild
-			if (YieldFunction)
-			{
-				YieldFunction();
-			}
-			else
-			{
-				Execute();
-			}
-		}
-		else
-		{
-			std::string& line = mLineList.front();
-			eType = line.data()[0];
-			bFindType = true;
-		}
-	}
-
-	return true;
-}
-
-bool NFRedisClientSocket::ReadLine(std::string & line)
-{
-	bool bFindLine = false;
-	while (!bFindLine)
-	{
-		if (mLineList.size() <= 0)
-		{
-			if (YieldFunction)
-			{
-				YieldFunction();
-			}
-			else
-			{
-				Execute();
-			}
-		}
-		else
-		{
-			bFindLine = true;
-
-			line = mLineList.front();
-			mLineList.pop_front();
-		}
-	}
-	
-	return true;
-}
-
-int NFRedisClientSocket::ClearBuff()
-{
-    mstrBuff = "";
-
-	return 0;
-}
-
-int NFRedisClientSocket::BuffLength()
-{
-	return mstrBuff.length();
+	return bufferevent_write(bev, buf, count);
 }
 
 void NFRedisClientSocket::listener_cb(evconnlistener * listener, evutil_socket_t fd, sockaddr * sa, int socklen, void * user_data)
@@ -236,41 +178,9 @@ void NFRedisClientSocket::conn_readcb(bufferevent * bev, void * user_data)
 	}
 
 	size_t len = evbuffer_get_length(input);
-
-	//////////////////////////////////////////////////////////////////////////
-
-	static char* mstrTempBuffData = nullptr;
-	if (mstrTempBuffData == nullptr)
-	{
-		mstrTempBuffData = new char[NF_BUFFER_MAX_READ];
-	}
-
-	int nDataLen = len;
-	if (len > NF_BUFFER_MAX_READ)
-	{
-		nDataLen = NF_BUFFER_MAX_READ;
-	}
-
-	if (evbuffer_remove(input, mstrTempBuffData, len) > 0)
-	{
-		pClientSocket->mstrBuff.append(mstrTempBuffData, len);
-	}
-
-	//push back as a new line
-	bool b = true;
-	while (b)
-	{
-		std::string line;
-		if (pClientSocket->ReadLineFromBuff(line))
-		{
-			pClientSocket->mLineList.push_back(line);
-		}
-		else
-		{
-			b = false;
-		}
-	}
-	
+	unsigned char *pData = evbuffer_pullup(input, len);
+	redisReaderFeed(pClientSocket->m_pRedisReader, (const char *)pData, len);
+	evbuffer_drain(input, len);
 }
 
 void NFRedisClientSocket::conn_writecb(bufferevent * bev, void * user_data)

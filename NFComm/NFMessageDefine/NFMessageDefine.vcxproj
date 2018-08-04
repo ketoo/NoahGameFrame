@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project DefaultTargets="Build" ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|x64">
       <Configuration>Debug</Configuration>
@@ -14,6 +14,7 @@
     <ProjectGuid>{3D9DB426-BA46-450B-BBAC-DABB6B6D69DE}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>NFMessageDefine</RootNamespace>
+    <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
@@ -97,7 +98,6 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="NFDefine.pb.h" />
-    <ClInclude Include="NFFleetingDefine.pb.h" />
     <ClInclude Include="NFLimit.h" />
     <ClInclude Include="NFMsgBase.pb.h" />
     <ClInclude Include="NFMsgExtra.pb.h" />
@@ -107,7 +107,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="NFDefine.pb.cc" />
-    <ClCompile Include="NFFleetingDefine.pb.cc" />
     <ClCompile Include="NFMsgBase.pb.cc" />
     <ClCompile Include="NFMsgExtra.pb.cc" />
     <ClCompile Include="NFMsgPreGame.pb.cc" />
