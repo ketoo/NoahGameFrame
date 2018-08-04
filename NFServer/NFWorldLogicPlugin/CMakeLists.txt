@@ -5,7 +5,7 @@ file(GLOB NFWorldLogicPlugin_ROOT_Cpp
 file(GLOB NFWorldLogicPlugin_ROOT_Hpp 
 	*.h)
 
-add_library(NFWorldLogicPlugin SHARED
+add_library(NFWorldLogicPlugin STATIC
 	${NFWorldLogicPlugin_ROOT_Cpp}
 	${NFWorldLogicPlugin_ROOT_Hpp})
 	
@@ -19,12 +19,14 @@ set_target_properties( NFWorldLogicPlugin PROPERTIES
 link_NFSDK("NFWorldLogicPlugin")
 
 if(UNIX)
+	target_link_libraries(NFWorldLogicPlugin -static-libstdc++)
 	add_definitions(
 		-D_USRDLL
 		-DELPP_NO_DEFAULT_LOG_FILE
 	)
 
 else()
+	target_link_libraries(NFWorldLogicPlugin -static-libstdc++)
 	add_definitions(
 		-DWIN
 		-D_USRDLL
