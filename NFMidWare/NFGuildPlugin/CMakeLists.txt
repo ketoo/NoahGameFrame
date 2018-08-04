@@ -6,7 +6,7 @@ file(GLOB NFGuildPlugin_ROOT_Cpp
 file(GLOB NFGuildPlugin_ROOT_Hpp 
 	*.h)
 
-add_library(NFGuildPlugin SHARED
+add_library(NFGuildPlugin STATIC
 	${NFGuildPlugin_ROOT_Cpp}
 	${NFGuildPlugin_ROOT_Hpp})
 	
@@ -20,12 +20,18 @@ set_target_properties( NFGuildPlugin PROPERTIES
 link_NFSDK("NFGuildPlugin")
 
 if(UNIX)
+
+	target_link_libraries(NFGuildPlugin -static-libstdc++)
+
 	add_definitions(
 		-D_USRDLL
 		-DELPP_NO_DEFAULT_LOG_FILE
 	)
 	
 else()
+
+	target_link_libraries(NFGuildPlugin -static-libstdc++)
+	
 	add_definitions(
 		-DWIN
 		-D_USRDLL

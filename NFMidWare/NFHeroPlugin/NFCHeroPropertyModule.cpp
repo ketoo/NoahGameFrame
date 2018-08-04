@@ -1,10 +1,28 @@
-// -------------------------------------------------------------------------
-//    @FileName			:    NFCHeroPropertyModule.h
-//    @Author           :    LvSheng.Huang
-//    @Date             :    2017-02-16
-//    @Module           :    NFCHeroPropertyModule
-//
-// -------------------------------------------------------------------------
+/*
+            This file is part of: 
+                NoahFrame
+            https://github.com/ketoo/NoahGameFrame
+
+   Copyright 2009 - 2018 NoahFrame(NoahGameFrame)
+
+   File creator: lvsheng.huang
+   
+   NoahFrame is open-source software and you can redistribute it and/or modify
+   it under the terms of the License; besides, anyone who use this file/software must include this copyright announcement.
+
+   Licensed under the Apache License, Version 2.0 (the "License");
+   you may not use this file except in compliance with the License.
+   You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   See the License for the specific language governing permissions and
+   limitations under the License.
+*/
+
 
 #include "NFCHeroPropertyModule.h"
 
@@ -79,7 +97,6 @@ int NFCHeroPropertyModule::OnObjectHeroRecordEvent(const NFGUID& self, const REC
 	case RECORD_EVENT_DATA::Add:
 	{
 		const NFGUID xHeroID = pHeroRecord->GetObject(xEventData.nRow, NFrame::Player::PlayerHero::GUID);
-		
 		AddHeroProperty(self, xHeroID);
 
 		if (m_pKernelModule->GetPropertyObject(self, NFrame::Player::HeroID1()) == NFGUID())
@@ -96,7 +113,7 @@ int NFCHeroPropertyModule::OnObjectHeroRecordEvent(const NFGUID& self, const REC
 			m_pHeroModule->SetFightHero(self, xHeroID, NFIHeroModule::EConsHero_Pos::ECONSt_HERO_POS3);
 		}
 
-		const NFGUID xFightingHeroID = m_pKernelModule->GetPropertyObject(self, NFrame::Player::FightHero());
+		const NFGUID xFightingHeroID = m_pKernelModule->GetPropertyObject(self, NFrame::Player::FightHeroID());
 		if (xFightingHeroID == xHeroID)
 		{
 			CalFightintHeroProperty(self);
@@ -175,17 +192,17 @@ bool NFCHeroPropertyModule::OnHeroPropertyUpdate(const NFGUID & self, const NFGU
 		break;
 	case NFIHeroModule::ECONSt_HERO_POS1:
 	{
-		m_pKernelModule->SetPropertyInt(self, NFrame::Player::HeroPos1Star(), nStar);
+		m_pKernelModule->SetPropertyInt(self, NFrame::Player::HeroStar1(), nStar);
 	}
 		break;
 	case NFIHeroModule::ECONSt_HERO_POS2:
 	{
-		m_pKernelModule->SetPropertyInt(self, NFrame::Player::HeroPos2Star(), nStar);
+		m_pKernelModule->SetPropertyInt(self, NFrame::Player::HeroStar2(), nStar);
 	}
 		break;
 	case NFIHeroModule::ECONSt_HERO_POS3:
 	{
-		m_pKernelModule->SetPropertyInt(self, NFrame::Player::HeroPos3Star(), nStar);
+		m_pKernelModule->SetPropertyInt(self, NFrame::Player::HeroStar3(), nStar);
 	}
 		break;
 	case NFIHeroModule::ECONSt_HERO_MAX:
@@ -194,7 +211,7 @@ bool NFCHeroPropertyModule::OnHeroPropertyUpdate(const NFGUID & self, const NFGU
 		break;
 	}
 
-	NFGUID xFightingID = m_pKernelModule->GetPropertyObject(self, NFrame::Player::FightHero());
+	NFGUID xFightingID = m_pKernelModule->GetPropertyObject(self, NFrame::Player::FightHeroID());
 	if (xFightingID == xHeroGUID)
 	{
 		CalFightintHeroProperty(self);
@@ -205,6 +222,7 @@ bool NFCHeroPropertyModule::OnHeroPropertyUpdate(const NFGUID & self, const NFGU
 
 bool NFCHeroPropertyModule::AddHeroProperty(const NFGUID & self, const NFGUID & xHeroGUID)
 {
+	//we would add a row to record the hero props when the player got this hero first time
 	NF_SHARE_PTR<NFIRecord> pHeroRecord = m_pKernelModule->FindRecord(self, NFrame::Player::PlayerHero::ThisName());
 	if (nullptr == pHeroRecord)
 	{
@@ -467,6 +485,7 @@ bool NFCHeroPropertyModule::CalHeroEquipProperty(const NFGUID& self, const NFGUI
 
 bool NFCHeroPropertyModule::CalFightintHeroProperty(const NFGUID & self)
 {
+	/*
 	NF_SHARE_PTR<NFIRecord> pHeroRecord = m_pKernelModule->FindRecord(self, NFrame::Player::PlayerHero::ThisName());
 	if (nullptr == pHeroRecord)
 	{
@@ -498,7 +517,7 @@ bool NFCHeroPropertyModule::CalFightintHeroProperty(const NFGUID & self)
 
 		m_pPropertyModule->SetPropertyValue(self, strColTag, NFIPropertyModule::NPG_FIGHTING_HERO, nValue);
 	}
-
+	*/
 
 	return true;
 }

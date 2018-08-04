@@ -5,7 +5,7 @@ file(GLOB NFUserGiftPlugin_ROOT_Cpp
 file(GLOB NFUserGiftPlugin_ROOT_Hpp 
 	*.h)
 
-add_library(NFUserGiftPlugin SHARED
+add_library(NFUserGiftPlugin STATIC
 	${NFUserGiftPlugin_ROOT_Cpp}
 	${NFUserGiftPlugin_ROOT_Hpp})
 	
@@ -19,12 +19,17 @@ set_target_properties( NFUserGiftPlugin PROPERTIES
 link_NFSDK("NFUserGiftPlugin")
 
 if(UNIX)
+	target_link_libraries(NFUserGiftPlugin -static-libstdc++)
+	
 	add_definitions(
 		-D_USRDLL
 		-DELPP_NO_DEFAULT_LOG_FILE
 	)
 	
 else()
+
+	target_link_libraries(NFUserGiftPlugin -static-libstdc++)
+	
 	add_definitions(
 		-DWIN
 		-D_USRDLL

@@ -1,36 +1,49 @@
-// -------------------------------------------------------------------------
-//    @FileName			:    NFCActorModule.cpp
-//    @Author           :    LvSheng.Huang
-//    @Date             :    2012-12-15
-//    @Module           :    NFCActorModule
-//
-// -------------------------------------------------------------------------
+/*
+            This file is part of: 
+                NoahFrame
+            https://github.com/ketoo/NoahGameFrame
+
+   Copyright 2009 - 2018 NoahFrame(NoahGameFrame)
+
+   File creator: lvsheng.huang
+   
+   NoahFrame is open-source software and you can redistribute it and/or modify
+   it under the terms of the License; besides, anyone who use this file/software must include this copyright announcement.
+
+   Licensed under the Apache License, Version 2.0 (the "License");
+   you may not use this file except in compliance with the License.
+   You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   See the License for the specific language governing permissions and
+   limitations under the License.
+*/
+
 
 #include "NFCActorModule.h"
 
 NFCActorModule::NFCActorModule(NFIPluginManager* p)
+	:mFramework(NF_ACTOR_THREAD_COUNT)
 {
 	pPluginManager = p;
 
     srand((unsigned)time(NULL));
 
-    m_pFramework = NF_NEW Theron::Framework(NF_ACTOR_THREAD_COUNT);
-
-    m_pMainActor = NF_SHARE_PTR<NFIActor>(NF_NEW NFCActor(*m_pFramework, this));
+    m_pMainActor = NF_SHARE_PTR<NFIActor>(NF_NEW NFCActor(mFramework, this));
 }
 
 NFCActorModule::~NFCActorModule()
 {
-    m_pMainActor.reset();
-    m_pMainActor = nullptr;
-
-    delete m_pFramework;
-    m_pFramework = NULL;
+	m_pMainActor.reset();
+	m_pMainActor = nullptr;
 }
 
 bool NFCActorModule::Init()
 {
-
     return true;
 }
 
@@ -61,10 +74,21 @@ bool NFCActorModule::Execute()
 
 int NFCActorModule::RequireActor()
 {
-    NF_SHARE_PTR<NFIActor> pActor(NF_NEW NFCActor(*m_pFramework, this));
-	mxActorMap.AddElement(pActor->GetAddress().AsInteger(), pActor);
+	NF_SHARE_PTR<NFIActor> pActor = nullptr;
+	if (mxActorPool.Empty())
+	{
+		pActor = NF_SHARE_PTR<NFIActor>(NF_NEW NFCActor(mFramework, this));
+		mxActorMap.AddElement(pActor->GetAddress().AsInteger(), pActor);
 
-    return pActor->GetAddress().AsInteger();
+		return pActor->GetAddress().AsInteger();
+	}
+
+	if (mxActorPool.Pop(pActor) && pActor)
+	{
+		return pActor->GetAddress().AsInteger();
+	}
+
+    return -1;
 }
 
 NF_SHARE_PTR<NFIActor> NFCActorModule::GetActor(const int nActorIndex)
@@ -86,25 +110,32 @@ bool NFCActorModule::ExecuteEvent()
 {
 	NFIActorMessage xMsg;
 	bool bRet = false;
-	bRet = mxQueue.Pop(xMsg);
+	bRet = mxQueue.TryPop(xMsg);
 	while (bRet)
 	{
 		if (xMsg.msgType != NFIActorMessage::ACTOR_MSG_TYPE_COMPONENT && xMsg.xEndFuncptr != nullptr)
 		{
-			ACTOR_PROCESS_FUNCTOR* pFun = xMsg.xEndFuncptr.get();
-			pFun->operator()(xMsg.self, xMsg.nFormActor, xMsg.nMsgID, xMsg.data);
-
 			//Actor can be reused in ActorPool mode, so we don't release it.
-			//m_pActorManager->ReleaseActor(xMsg.nFormActor);
+			//>ReleaseActor(xMsg.nFormActor);
+			ACTOR_PROCESS_FUNCTOR* pFun = xMsg.xEndFuncptr.get();
+			pFun->operator()(xMsg.nFormActor, xMsg.nMsgID, xMsg.data);
+
+
+			NF_SHARE_PTR<NFIActor> xActor = mxActorMap.GetElement(xMsg.nFormActor);
+			if (xActor)
+			{
+				mxActorMap.RemoveElement(xMsg.nFormActor);
+				mxActorPool.Push(xActor);
+			}
 		}
 
-		bRet = mxQueue.Pop(xMsg);
+		bRet = mxQueue.TryPop(xMsg);
 	}
 
 	return true;
 }
 
-bool NFCActorModule::SendMsgToActor(const int nActorIndex, const NFGUID& objectID, const int nEventID, const std::string& strArg)
+bool NFCActorModule::SendMsgToActor(const int nActorIndex, const int nEventID, const std::string& strArg)
 {
     NF_SHARE_PTR<NFIActor> pActor = GetActor(nActorIndex);
     if (nullptr != pActor)
@@ -115,9 +146,8 @@ bool NFCActorModule::SendMsgToActor(const int nActorIndex, const NFGUID& objectI
         xMessage.data = strArg;
         xMessage.nMsgID = nEventID;
         xMessage.nFormActor = m_pMainActor->GetAddress().AsInteger();
-        xMessage.self = objectID;
 
-        return m_pFramework->Send(xMessage, m_pMainActor->GetAddress(), pActor->GetAddress());
+        return mFramework.Send(xMessage, m_pMainActor->GetAddress(), pActor->GetAddress());
     }
 
     return false;

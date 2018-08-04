@@ -5,7 +5,7 @@ file(GLOB NFProxyServerNet_ClientPlugin_ROOT_Cpp
 file(GLOB NFProxyServerNet_ClientPlugin_ROOT_Hpp 
 	*.h)
 
-add_library(NFProxyServerNet_ClientPlugin SHARED
+add_library(NFProxyServerNet_ClientPlugin STATIC
 	${NFProxyServerNet_ClientPlugin_ROOT_Cpp}
 	${NFProxyServerNet_ClientPlugin_ROOT_Hpp})
 	
@@ -19,12 +19,14 @@ set_target_properties( NFProxyServerNet_ClientPlugin PROPERTIES
 link_NFSDK("NFProxyServerNet_ClientPlugin")
 
 if(UNIX)
+	target_link_libraries(NFProxyServerNet_ClientPlugin -static-libstdc++)
 	add_definitions(
 		-D_USRDLL
 		-DELPP_NO_DEFAULT_LOG_FILE
 	)
 
 else()
+	target_link_libraries(NFProxyServerNet_ClientPlugin -static-libstdc++)
 	add_definitions(
 		-DWIN
 		-D_USRDLL
