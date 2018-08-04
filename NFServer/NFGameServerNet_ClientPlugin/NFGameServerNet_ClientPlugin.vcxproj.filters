@@ -3,10 +3,12 @@
   <ItemGroup>
     <ClInclude Include="NFGameServerNet_ClientPlugin.h" />
     <ClInclude Include="NFCGameServerToWorldModule.h" />
+    <ClInclude Include="NFCGameServerToDBModule.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="dllmain.cpp" />
     <ClCompile Include="NFGameServerNet_ClientPlugin.cpp" />
     <ClCompile Include="NFCGameServerToWorldModule.cpp" />
+    <ClCompile Include="NFCGameServerToDBModule.cpp" />
   </ItemGroup>
 </Project>

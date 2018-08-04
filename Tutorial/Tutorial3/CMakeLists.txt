@@ -4,7 +4,7 @@ file(GLOB Tutorial3_ROOT_Cpp
 file(GLOB Tutorial3_ROOT_Hpp 
 	*.h)
 
-add_library(Tutorial3Plugin SHARED
+add_library(Tutorial3Plugin STATIC
 	${Tutorial3_ROOT_Cpp}
 	${Tutorial3_ROOT_Hpp})
 	

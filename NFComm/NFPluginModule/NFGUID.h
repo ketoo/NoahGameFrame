@@ -1,10 +1,27 @@
-// -------------------------------------------------------------------------
-//    @FileName         :    NFGUID.h
-//    @Author           :    LvSheng.Huang
-//    @Date             :    2012-07-11
-//    @Module           :    NFGUID
-//
-// -------------------------------------------------------------------------
+/*
+            This file is part of: 
+                NoahFrame
+            https://github.com/ketoo/NoahGameFrame
+
+   Copyright 2009 - 2018 NoahFrame(NoahGameFrame)
+
+   File creator: lvsheng.huang
+   
+   NoahFrame is open-source software and you can redistribute it and/or modify
+   it under the terms of the License; besides, anyone who use this file/software must include this copyright announcement.
+
+   Licensed under the Apache License, Version 2.0 (the "License");
+   you may not use this file except in compliance with the License.
+   You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   See the License for the specific language governing permissions and
+   limitations under the License.
+*/
 
 #ifndef NF_IDENTID_H
 #define NF_IDENTID_H
@@ -14,48 +31,93 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-struct NFGUID
+class NFGUID
 {
-	NFINT64 nData64;
-	NFINT64 nHead64;
+private:
+	static NFINT64 nInstanceID;
+	static NFINT64 nGUIDIndex;
 
-	NFGUID()
+public:
+
+    NFINT64 nData64;
+    NFINT64 nHead64;
+
+	static void SetInstanceID(NFINT64 id)
 	{
-		nData64 = 0;
-		nHead64 = 0;
+		/*
+		if (nInstanceID != 0)
+		{
+			std::cout << "ERROR-------------------- set instance id again!!!" << std::endl;
+			return;
+		}
+		*/
+		nInstanceID = id;
+		nGUIDIndex = 0;
 	}
 
-	NFGUID(NFINT64 nHeadData, NFINT64 nData)
+    NFGUID()
+    {
+        nData64 = 0;
+        nHead64 = 0;
+    }
+
+    NFGUID(NFINT64 nHeadData, NFINT64 nData)
+    {
+        nHead64 = nHeadData;
+        nData64 = nData;
+    }
+
+    NFGUID(const NFGUID& xData)
+    {
+        nHead64 = xData.nHead64;
+        nData64 = xData.nData64;
+    }
+  
+    NFGUID(const std::string& strID)
+    {
+        FromString(strID);
+    }
+
+	static NFGUID CreateID()
 	{
-		nHead64 = nHeadData;
-		nData64 = nData;
+		int64_t value = 0;
+		uint64_t time = std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now().time_since_epoch()).count();
+
+
+		//value = time << 16;
+		value = time * 1000000;
+
+
+		//value |= nGUIDIndex++;
+		value += nGUIDIndex++;
+
+		//if (sequence_ == 0x7FFF)
+		if (nGUIDIndex == 999999)
+		{
+			nGUIDIndex = 0;
+		}
+
+		NFGUID xID;
+		xID.nHead64 = nInstanceID;
+		xID.nData64 = value;
+
+		return xID;
 	}
 
-	NFGUID(const NFGUID& xData)
-	{
-		nHead64 = xData.nHead64;
-		nData64 = xData.nData64;
-	}
+    NFGUID& operator=(const NFGUID& xData)
+    {
+        nHead64 = xData.nHead64;
+        nData64 = xData.nData64;
 
-	NFGUID(const std::string& strID)
-	{
-		FromString(strID);
-	}
+        return *this;
+    }
+  
+    NFGUID& operator=(const std::string& strID)
+    {
+        FromString(strID);
 
-	NFGUID& operator=(const NFGUID& xData)
-	{
-		nHead64 = xData.nHead64;
-		nData64 = xData.nData64;
-
-		return *this;
-	}
-
-	NFGUID& operator=(const std::string& strID)
-	{
-		FromString(strID);
-
-		return *this;
-	}
+        return *this;
+    }
 
     const NFINT64 GetData() const
     {
@@ -136,5 +198,8 @@ struct NFGUID
         }
     }
 };
-
+/*
+NFINT64 NFGUID::nInstanceID = 0;
+NFINT64 NFGUID::nGUIDIndex = 0;
+*/
 #endif

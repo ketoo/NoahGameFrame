@@ -9,42 +9,48 @@
 
 ##Step 1
 Create a Lua Script File, and Must Contain following functions
-- Init()
-- AfterInit()
-- Execute()
-- BeforeShut()
-- Shut()
+- reload()
+- awake()
+- init()
+- ready_execute()
+- after_init()
+- before_shut()
+- shut()
 
 Mostly like this
-# [TestModule2.lua](https://github.com/ketoo/NoahGameFrame/tree/develop/_Out/Server/NFDataCfg/ScriptModule/TestModule2.lua)
+# [test_module.lua](https://github.com/ketoo/NoahGameFrame/tree/develop/_Out/Server/NFDataCfg/ScriptModule/test_module.lua)
 
 ```lua
-TestModule2 = {}
+test_module = {}
+register_module(test_module,"test_module");
 
-function TestModule2.Init()
-    io.write("TestModule2 Init!\n");
+function test_module.reload()
 end
 
-function TestModule2.AfterInit()
-    io.write("TestModule2 AfterInit!\n");
+function test_module.awake()
+	reload();
 end
 
-function TestModule2.Execute()
-    io.write("TestModule2 Execute!\n");
+function test_module.init()
 end
 
-function TestModule2.BeforeShut()
-    io.write("TestModule2 BeforeShut!\n");
+function test_module.after_init()
 end
 
-function TestModule2.Shut()
-    io.write("TestModule2 Shut!\n");
+function test_module.ready_execute()
+end
+
+function test_module.before_shut()
+end
+
+function test_module.shut()
 end
 
 return TestModule2 --Do not forget return this
 ```
 ##Step 2
 Add your LuaScriptModule Infomation into [script_list.lua](https://github.com/ketoo/NoahGameFrame/tree/develop/_Out/Server/NFDataCfg/ScriptModule/script_list.lua)
+
 ```lua
 ScriptList={
     {tbl=nil, tblName="TestModule"},
@@ -53,4 +59,18 @@ ScriptList={
 
 load_script_file(ScriptList)
 ```
+
+
+##How to do hot fix?
+Add your lua script file name on here [script_reload.lua](https://github.com/ketoo/NoahGameFrame/tree/develop/_Out/Server/NFDataCfg/ScriptModule/script_reload.lua)
+
+```lua
+local version_code = "1.0.1"
+ScriptReloadList={
+	{tbl=nil, tblName="test_module"},
+}
+```
+
+Once you changed the version_code then the engine will reload the files that in ScriptReloadList.
+
 ##Enjoy it!

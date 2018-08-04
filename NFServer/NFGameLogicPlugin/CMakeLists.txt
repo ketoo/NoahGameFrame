@@ -4,11 +4,17 @@ file(GLOB NFGameLogicPlugin_ROOT_Cpp
 
 file(GLOB NFGameLogicPlugin_ROOT_Hpp 
 	*.h)
-	
-add_library(NFGameLogicPlugin SHARED
+
+#Exclude this file
+file(GLOB RemoveItems_Cpp NFCPVPModule.cpp NFCTileMapModule.cpp NFCTileModule.cpp NFCSurvivalModule.cpp NFCTileMapModule.cpp)
+list(REMOVE_ITEM NFGameLogicPlugin_ROOT_Cpp ${RemoveItems_Cpp})
+
+add_library(NFGameLogicPlugin STATIC
 	${NFGameLogicPlugin_ROOT_Cpp}
 	${NFGameLogicPlugin_ROOT_Hpp})
 	
+
+
 set_target_properties( NFGameLogicPlugin PROPERTIES OUTPUT_NAME_DEBUG "NFGameLogicPlugin_d")
 set_target_properties( NFGameLogicPlugin PROPERTIES PREFIX "")
 set_target_properties( NFGameLogicPlugin PROPERTIES 
@@ -19,11 +25,13 @@ set_target_properties( NFGameLogicPlugin PROPERTIES
 link_NFSDK("NFGameLogicPlugin")
 
 if(UNIX)
+	target_link_libraries(NFGameLogicPlugin -static-libstdc++)
 	add_definitions(
 		-D_USRDLL
 		-DELPP_NO_DEFAULT_LOG_FILE
 	)
 else()
+	target_link_libraries(NFGameLogicPlugin -static-libstdc++)
 	add_definitions(
 		-DWIN
 		-D_USRDLL
