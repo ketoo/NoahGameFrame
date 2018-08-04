@@ -5,7 +5,7 @@ file(GLOB NFMasterServerPlugin_ROOT_Cpp
 file(GLOB NFMasterServerPlugin_ROOT_Hpp 
 	*.h)
 
-add_library(NFMasterServerPlugin SHARED
+add_library(NFMasterServerPlugin STATIC
 	${NFMasterServerPlugin_ROOT_Cpp}
 	${NFMasterServerPlugin_ROOT_Hpp})
 	
@@ -19,12 +19,14 @@ set_target_properties( NFMasterServerPlugin PROPERTIES
 link_NFSDK("NFMasterServerPlugin")
 
 if(UNIX)
+	target_link_libraries(NFMasterServerPlugin -static-libstdc++)
 	add_definitions(
 		-D_USRDLL
 		-DELPP_NO_DEFAULT_LOG_FILE
 	)
 
 else()
+	target_link_libraries(NFMasterServerPlugin -static-libstdc++)
 	add_definitions(
 		-DWIN
 		-D_USRDLL

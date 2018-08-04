@@ -1,11 +1,27 @@
+/*
+            This file is part of: 
+                NoahFrame
+            https://github.com/ketoo/NoahGameFrame
 
-// -------------------------------------------------------------------------
-//    @FileName         :    NFCNetClientModule.cpp
-//    @Author           :    LvSheng.Huang
-//    @Date             :    2017-02-15
-//    @Module           :    NFCNetClientModule
-//
-// -------------------------------------------------------------------------
+   Copyright 2009 - 2018 NoahFrame(NoahGameFrame)
+
+   File creator: lvsheng.huang
+   
+   NoahFrame is open-source software and you can redistribute it and/or modify
+   it under the terms of the License; besides, anyone who use this file/software must include this copyright announcement.
+
+   Licensed under the Apache License, Version 2.0 (the "License");
+   you may not use this file except in compliance with the License.
+   You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   See the License for the specific language governing permissions and
+   limitations under the License.
+*/
 
 #include "NFCNetModule.h"
 #include "NFCNetClientModule.h"
@@ -15,10 +31,14 @@ NFCNetClientModule::NFCNetClientModule(NFIPluginManager* p)
 {
     mnBufferSize = 0;
     pPluginManager = p;
+
+	mnLastActionTime = GetPluginManager()->GetNowTime();
 }
 
 bool NFCNetClientModule::Init()
 {
+	m_pLogModule = pPluginManager->FindModule<NFILogModule>();
+
     for (int i = 0; i < NF_SERVER_TYPES::NF_ST_MAX; ++i)
     {
         NFINetClientModule::AddEventCallBack((NF_SERVER_TYPES) i, this, &NFCNetClientModule::OnSocketEvent);
@@ -29,6 +49,8 @@ bool NFCNetClientModule::Init()
 
 bool NFCNetClientModule::AfterInit()
 {
+
+
     return true;
 }
 
@@ -46,6 +68,15 @@ bool NFCNetClientModule::Execute()
 {
     ProcessExecute();
     ProcessAddNetConnect();
+
+	if (mnLastActionTime + 10 > GetPluginManager()->GetNowTime())
+	{
+		return true;
+	}
+
+	mnLastActionTime = GetPluginManager()->GetNowTime();
+
+	LogServerInfo();
 
     return true;
 }
@@ -137,9 +168,22 @@ NFCNetClientModule::SendByServerID(const int nServerID, const uint16_t nMsgID, c
         NF_SHARE_PTR<NFINetModule> pNetModule = pServer->mxNetModule;
         if (pNetModule.get())
         {
-            pNetModule->GetNet()->SendMsgWithOutHead(nMsgID, msg, nLen, 0);
+			if (!pNetModule->GetNet()->SendMsgWithOutHead(nMsgID, msg, nLen, 0))
+			{
+				std::ostringstream stream;
+				stream << " SendMsgWithOutHead failed " << nServerID;
+				stream << " msg id " << nMsgID;
+				m_pLogModule->LogError(stream, __FUNCTION__, __LINE__);
+			}
         }
     }
+	else
+	{
+		std::ostringstream stream;
+		stream << " can't find the server " << nServerID;
+		stream << " msg id " << nMsgID;
+		m_pLogModule->LogError(stream, __FUNCTION__, __LINE__);
+	}
 }
 
 void NFCNetClientModule::SendToAllServer(const uint16_t nMsgID, const std::string& strData)
@@ -150,7 +194,13 @@ void NFCNetClientModule::SendToAllServer(const uint16_t nMsgID, const std::strin
         NF_SHARE_PTR<NFINetModule> pNetModule = pServer->mxNetModule;
         if (pNetModule)
         {
-            pNetModule->SendMsgWithOutHead(nMsgID, strData, 0);
+			if (!pNetModule->SendMsgWithOutHead(nMsgID, strData, 0))
+			{
+				std::ostringstream stream;
+				stream << " SendMsgWithOutHead failed " << pServer->nGameID;
+				stream << " msg id " << nMsgID;
+				m_pLogModule->LogError(stream, __FUNCTION__, __LINE__);
+			}
         }
 
         pServer = mxServerMap.Next();
@@ -165,7 +215,13 @@ void NFCNetClientModule::SendToAllServer(const NF_SERVER_TYPES eType, const uint
         NF_SHARE_PTR<NFINetModule> pNetModule = pServer->mxNetModule;
         if (pNetModule && eType == pServer->eServerType)
         {
-            pNetModule->SendMsgWithOutHead(nMsgID, strData, 0);
+			if (!pNetModule->SendMsgWithOutHead(nMsgID, strData, 0))
+			{
+				std::ostringstream stream;
+				stream << " SendMsgWithOutHead failed " << pServer->nGameID;
+				stream << " msg id " << nMsgID;
+				m_pLogModule->LogError(stream, __FUNCTION__, __LINE__);
+			}
         }
 
         pServer = mxServerMap.Next();
@@ -179,11 +235,24 @@ NFCNetClientModule::SendToServerByPB(const int nServerID, const uint16_t nMsgID,
     if (pServer)
     {
         NF_SHARE_PTR<NFINetModule> pNetModule = pServer->mxNetModule;
-        if (pNetModule.get())
+        if (pNetModule)
         {
-            pNetModule->SendMsgPB(nMsgID, xData, 0, NFGUID(), NULL);
+			if (!pNetModule->SendMsgPB(nMsgID, xData, 0, NFGUID(), NULL))
+			{
+				std::ostringstream stream;
+				stream << " SendMsgPB failed " << pServer->nGameID;
+				stream << " msg id " << nMsgID;
+				m_pLogModule->LogError(stream, __FUNCTION__, __LINE__);
+		   }
         }
     }
+	else
+	{
+		std::ostringstream stream;
+		stream << " can't find the server " << nServerID;
+		stream << " msg id " << nMsgID;
+		m_pLogModule->LogError(stream, __FUNCTION__, __LINE__);
+	}
 }
 
 void NFCNetClientModule::SendToAllServerByPB(const uint16_t nMsgID, const google::protobuf::Message& xData)
@@ -194,7 +263,13 @@ void NFCNetClientModule::SendToAllServerByPB(const uint16_t nMsgID, const google
         NF_SHARE_PTR<NFINetModule> pNetModule = pServer->mxNetModule;
         if (pNetModule)
         {
-            pNetModule->SendMsgPB(nMsgID, xData, 0);
+			if (!pNetModule->SendMsgPB(nMsgID, xData, 0))
+			{
+				std::ostringstream stream;
+				stream << " SendMsgPB failed " << pServer->nGameID;
+				stream << " msg id " << nMsgID;
+				m_pLogModule->LogError(stream, __FUNCTION__, __LINE__);
+			}
         }
 
         pServer = mxServerMap.Next();
@@ -208,9 +283,15 @@ void NFCNetClientModule::SendToAllServerByPB(const NF_SERVER_TYPES eType, const 
     while (pServer)
     {
         NF_SHARE_PTR<NFINetModule> pNetModule = pServer->mxNetModule;
-        if (pNetModule && eType == pServer->eServerType)
+        if (pNetModule && eType == pServer->eServerType && pServer->eState == ConnectDataState::NORMAL)
         {
-            pNetModule->SendMsgPB(nMsgID, xData, 0);
+            if (!pNetModule->SendMsgPB(nMsgID, xData, 0))
+			{
+				std::ostringstream stream;
+				stream << " SendMsgPB failed " << pServer->nGameID;
+				stream << " msg id " << nMsgID;
+				m_pLogModule->LogError(stream, __FUNCTION__, __LINE__);
+			}
         }
 
         pServer = mxServerMap.Next();
@@ -250,6 +331,13 @@ NFCNetClientModule::SendBySuit(const NF_SERVER_TYPES eType, const int nHashKey, 
             SendByServerID(pConnectData->nGameID, nMsgID, msg, nLen);
         }
     }
+	else
+	{
+		std::ostringstream stream;
+		stream << " can't find the server type " << eType;
+		stream << " msg id " << nMsgID;
+		m_pLogModule->LogError(stream, __FUNCTION__, __LINE__);
+	}
 }
 
 void NFCNetClientModule::SendSuitByPB(const NF_SERVER_TYPES eType, const std::string& strHashKey, const uint16_t nMsgID,
@@ -311,6 +399,12 @@ NF_SHARE_PTR<ConnectData> NFCNetClientModule::GetServerNetInfo(const NFINet* pNe
 
 void NFCNetClientModule::InitCallBacks(NF_SHARE_PTR<ConnectData> pServerData)
 {
+	std::ostringstream stream;
+	stream << "AddServer Type: " << pServerData->eServerType << " Server ID: " << pServerData->nGameID << " State: "
+		<< pServerData->eState << " IP: " << pServerData->strIP << " Port: " << pServerData->nPort;
+
+	m_pLogModule->LogInfo(stream.str());
+
     NF_SHARE_PTR<CallBack> xCallBack = mxCallBack.GetElement(pServerData->eServerType);
     if (!xCallBack)
     {
@@ -391,6 +485,12 @@ void NFCNetClientModule::ProcessExecute()
 
                 pServerData->eState = ConnectDataState::CONNECTING;
                 pServerData->mxNetModule = NF_SHARE_PTR<NFINetModule>(NF_NEW NFCNetModule(pPluginManager));
+
+				pServerData->mxNetModule->Awake();
+				pServerData->mxNetModule->Init();
+				pServerData->mxNetModule->AfterInit();
+				pServerData->mxNetModule->ReadyExecute();
+
                 pServerData->mxNetModule->Initialization(pServerData->strIP.c_str(), pServerData->nPort);
 
                 InitCallBacks(pServerData);
@@ -406,21 +506,28 @@ void NFCNetClientModule::ProcessExecute()
 
 void NFCNetClientModule::LogServerInfo()
 {
-    LogServerInfo("This is a client, begin to print Server Info----------------------------------");
+	m_pLogModule->LogInfo("This is a client, begin to print Server Info-------------------");
 
     ConnectData* pServerData = mxServerMap.FirstNude();
     while (nullptr != pServerData)
     {
         std::ostringstream stream;
-        stream << "Type: " << pServerData->eServerType << " ProxyServer ID: " << pServerData->nGameID << " State: "
+        stream << "Type: " << pServerData->eServerType << " Server ID: " << pServerData->nGameID << " State: "
                << pServerData->eState << " IP: " << pServerData->strIP << " Port: " << pServerData->nPort;
 
-        LogServerInfo(stream.str());
+		if (pServerData->eState == ConnectDataState::NORMAL)
+		{
+			m_pLogModule->LogInfo(stream.str());
+		}
+		else
+		{
+			m_pLogModule->LogError(stream.str());
+		}
 
         pServerData = mxServerMap.NextNude();
     }
 
-    LogServerInfo("This is a client, end to print Server Info----------------------------------");
+	m_pLogModule->LogInfo("This is a client, end to print Server Info---------------------");
 }
 
 void NFCNetClientModule::KeepState(NF_SHARE_PTR<ConnectData> pServerData)
@@ -432,8 +539,7 @@ void NFCNetClientModule::KeepState(NF_SHARE_PTR<ConnectData> pServerData)
 
     pServerData->mnLastActionTime = GetPluginManager()->GetNowTime();
 
-    KeepReport(pServerData);
-    LogServerInfo();
+	//send message
 }
 
 void NFCNetClientModule::OnSocketEvent(const NFSOCK fd, const NF_NET_EVENT eEvent, NFINet* pNet)
@@ -441,7 +547,8 @@ void NFCNetClientModule::OnSocketEvent(const NFSOCK fd, const NF_NET_EVENT eEven
     if (eEvent & NF_NET_EVENT::NF_NET_EVENT_CONNECTED)
     {
         OnConnected(fd, pNet);
-    } else
+    }
+	else
     {
         OnDisConnected(fd, pNet);
     }
@@ -457,12 +564,10 @@ int NFCNetClientModule::OnConnected(const NFSOCK fd, NFINet* pNet)
         pServerInfo->eState = ConnectDataState::NORMAL;
 
         //for type--suit
-        NF_SHARE_PTR<NFConsistentHashMapEx<int, ConnectData>> xConnectDataMap = mxServerTypeMap.GetElement(
-                pServerInfo->eServerType);
+        NF_SHARE_PTR<NFConsistentHashMapEx<int, ConnectData>> xConnectDataMap = mxServerTypeMap.GetElement(pServerInfo->eServerType);
         if (!xConnectDataMap)
         {
-            xConnectDataMap = NF_SHARE_PTR<NFConsistentHashMapEx<int, ConnectData>>(
-                    NF_NEW NFConsistentHashMapEx<int, ConnectData>());
+            xConnectDataMap = NF_SHARE_PTR<NFConsistentHashMapEx<int, ConnectData>>(NF_NEW NFConsistentHashMapEx<int, ConnectData>());
             mxServerTypeMap.AddElement(pServerInfo->eServerType, xConnectDataMap);
         }
 
@@ -518,6 +623,12 @@ void NFCNetClientModule::ProcessAddNetConnect()
             xServerData->mnLastActionTime = GetPluginManager()->GetNowTime();
 
             xServerData->mxNetModule = NF_SHARE_PTR<NFINetModule>(NF_NEW NFCNetModule(pPluginManager));
+
+			xServerData->mxNetModule->Awake();
+			xServerData->mxNetModule->Init();
+			xServerData->mxNetModule->AfterInit();
+			xServerData->mxNetModule->ReadyExecute();
+
             xServerData->mxNetModule->Initialization(xServerData->strIP.c_str(), xServerData->nPort);
             xServerData->mxNetModule->ExpandBufferSize(mnBufferSize);
 

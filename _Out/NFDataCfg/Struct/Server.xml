@@ -9,6 +9,7 @@
 		<Property Id="Port" Cache="0" Desc="作为服务器时：相对客户端的port" Force="0" Private="0" Public="0" Ref="0" Save="0" Type="int" Upload="0" />
 		<Property Id="ServerID" Cache="0" Desc="服务器ID" Force="0" Private="0" Public="0" Ref="0" Save="0" Type="int" Upload="0" />
 		<Property Id="Type" Cache="0" Desc="服务器类型" Force="0" Private="0" Public="0" Ref="0" Save="0" Type="int" Upload="0" />
+		<Property Id="WebPort" Cache="0" Desc="WebPort" Force="0" Private="0" Public="0" Ref="0" Save="0" Type="int" Upload="0" />
 	</Propertys>
 	<Records>
 	</Records>

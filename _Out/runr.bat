@@ -13,7 +13,9 @@ choice /t 5 /d y /n >nul
 echo Starting NFLoginServer...
 start "NFLoginServer" "NFPluginLoader.exe" "Server=LoginServer" "ID=4"
 
-choice /t 2 /d y /n >nul
+
+
+choice /t 5 /d y /n >nul
 
 echo Starting NFGameServer...
 start "NFGameServer" "NFPluginLoader.exe" "Server=GameServer" "ID=6"
