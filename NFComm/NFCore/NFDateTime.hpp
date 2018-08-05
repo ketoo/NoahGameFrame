@@ -41,7 +41,7 @@ enum class DayOfWeek
 	Saturday = 6,
 };
 
-enum Month
+enum class Month
 {
 	January = 1,
 	February = 2,
@@ -68,25 +68,31 @@ public:
 	static constexpr long long TicksPerHour = TicksPerMinute * 60;
 	static constexpr long long TicksPerDay = TicksPerHour * 24;
 
-	static NFTimeSpan Zero()
+	static const NFTimeSpan& Zero()
 	{
-		static NFTimeSpan _value = 0;
+		static const NFTimeSpan _value = 0LL;
 		return _value;
 	}
 
-	/*
-	static NFTimeSpan MaxValue()
+	static const NFTimeSpan& MaxValue()
 	{
-		static NFTimeSpan _value = std::chrono::system_clock::duration::max();
+		//fix compile error
+#pragma push_macro("max")
+#undef max
+		static const NFTimeSpan _value = std::chrono::system_clock::duration::max();
+#pragma pop_macro("max")
 		return _value;
 	}
 
-	static NFTimeSpan MinValue()
+	static const NFTimeSpan& MinValue()
 	{
-		static NFTimeSpan _value = std::chrono::system_clock::duration::min();
+		//fix compile error
+#pragma push_macro("min")
+#undef min
+		static const NFTimeSpan _value = std::chrono::system_clock::duration::min();
+#pragma pop_macro("min")
 		return _value;
 	}
-	*/
 
 	NFTimeSpan(long long ticks) :
 		NFTimeSpan(std::chrono::system_clock::duration(ticks))
@@ -164,29 +170,29 @@ public:
 		return t1._ticks == t2._ticks;
 	}
 
-	static NFTimeSpan FromDays(long long value)
+	static NFTimeSpan FromDays(double value)
 	{
-		return NFTimeSpan(value, 0, 0, 0, 0);
+		return value * TicksPerDay;
 	}
 
-	static NFTimeSpan FromHours(long long value)
+	static NFTimeSpan FromHours(double value)
 	{
-		return NFTimeSpan(0, value, 0, 0, 0);
+		return value * TicksPerHour;
 	}
 
-	static NFTimeSpan FromMilliseconds(long long value)
+	static NFTimeSpan FromMilliseconds(double value)
 	{
-		return NFTimeSpan(0, 0, 0, 0, value);
+		return value * TicksPerMillisecond;
 	}
 
-	static NFTimeSpan FromMinutes(long long value)
+	static NFTimeSpan FromMinutes(double value)
 	{
-		return NFTimeSpan(0, 0, value, 0, 0);
+		return value * TicksPerMinute;
 	}
 
-	static NFTimeSpan FromSeconds(long long value)
+	static NFTimeSpan FromSeconds(double value)
 	{
-		return NFTimeSpan(0, 0, 0, value, 0);
+		return value * TicksPerSecond;
 	}
 
 	static NFTimeSpan FromTicks(long long value)
@@ -281,6 +287,10 @@ protected:
 		_ticks(ticks)
 	{}
 
+	NFTimeSpan(double ticks) :
+		NFTimeSpan(static_cast<long long>(ticks))
+	{}
+
 	template<typename T>
 	inline long long TickCount() const
 	{
@@ -296,19 +306,26 @@ protected:
 class NFDateTime
 {
 public:
-	/*
-	static NFDateTime MinValue()
+	static const NFDateTime& MinValue()
 	{
-		static NFDateTime _value = std::chrono::system_clock::time_point::min();
+		//fix compile error
+#pragma push_macro("min")
+#undef min
+		static const NFDateTime _value = std::chrono::system_clock::time_point::min();
+#pragma pop_macro("min")
 		return _value;
 	}
 
-	static NFDateTime MaxValue()
+	static const NFDateTime& MaxValue()
 	{
-		static NFDateTime _value = std::chrono::system_clock::time_point::max();
+		//fix compile error
+#pragma push_macro("max")
+#undef max
+		static const NFDateTime _value = std::chrono::system_clock::time_point::max();
+#pragma pop_macro("max")
 		return _value;
 	}
-	*/
+
 	NFDateTime(int year, int month, int day) :
 		NFDateTime(year, month, day, 0, 0, 0, 0)
 	{}
@@ -334,7 +351,7 @@ public:
 	{
 		NFDateTime dt = std::chrono::system_clock::now();
 		dt._tm.tm_hour = dt._tm.tm_min = dt._tm.tm_sec = 0;
-		return std::move(dt);
+		return dt;
 	}
 
 	inline long long Ticks()
@@ -399,24 +416,24 @@ public:
 
 	static int DaysInMonth(int year, int month)
 	{
-		switch (month)
+		switch (static_cast<::Month>(month))
 		{
-		case Month::January:
-		case Month::March:
-		case Month::May:
-		case Month::July:
-		case Month::August:
-		case Month::October:
-		case Month::December:
+		case ::Month::January:
+		case ::Month::March:
+		case ::Month::May:
+		case ::Month::July:
+		case ::Month::August:
+		case ::Month::October:
+		case ::Month::December:
 			return 31;
 
-		case Month::April:
-		case Month::June:
-		case Month::September:
-		case Month::November:
+		case ::Month::April:
+		case ::Month::June:
+		case ::Month::September:
+		case ::Month::November:
 			return 30;
 
-		case Month::February:
+		case ::Month::February:
 			return IsLeapYear(year) ? 29 : 28;
 
 		default:
@@ -506,10 +523,10 @@ public:
 
 	std::string ToLongDateString() const
 	{
-        //yyyy-MM-dd hh:mm:ss
+		//yyyy-MM-dd hh:mm:ss
 		std::stringstream ss(std::stringstream::in | std::stringstream::out);
-        //ss << NameOfDay(DayOfWeek()) << ", " << Day() << DaySuffix(Day()) << " " << NameOfMonth(Month()) << ", " << Year();
-        ss << Year() << "-" << Month() << "-" << Day();
+		//ss << NameOfDay(DayOfWeek()) << ", " << Day() << DaySuffix(Day()) << " " << NameOfMonth(Month()) << ", " << Year();
+		ss << Year() << "-" << Month() << "-" << Day();
 		return ss.str();
 	}
 
@@ -619,7 +636,7 @@ protected:
 
 	static std::string NameOfMonth(int month)
 	{
-		switch (month)
+		switch (static_cast<::Month>(month))
 		{
 			MONTH_CASE(January);
 			MONTH_CASE(February);
