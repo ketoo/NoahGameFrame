@@ -43,7 +43,7 @@ elseif(UNIX)
 	endif()
 
 		target_link_libraries(NFNetCli NFCore)
-		target_link_libraries(NFNetSvr NFNetPlugin)
+		target_link_libraries(NFNetCli NFNetPlugin)
 		target_link_libraries(NFNetCli libevent.a)
 		target_link_libraries(NFNetCli libevent_core.a)
 		target_link_libraries(NFNetCli libevent_extra.a)
