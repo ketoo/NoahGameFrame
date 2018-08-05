@@ -72,6 +72,11 @@ public:
         nHead64 = xData.nHead64;
         nData64 = xData.nData64;
     }
+  
+    NFGUID(const std::string& strID)
+    {
+        FromString(strID);
+    }
 
 	static NFGUID CreateID()
 	{
@@ -103,6 +108,13 @@ public:
     {
         nHead64 = xData.nHead64;
         nData64 = xData.nData64;
+
+        return *this;
+    }
+  
+    NFGUID& operator=(const std::string& strID)
+    {
+        FromString(strID);
 
         return *this;
     }
