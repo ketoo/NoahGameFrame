@@ -336,6 +336,8 @@ NFINet* NFCNetModule::GetNet()
 
 void NFCNetModule::OnReceiveNetPack(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
 {
+	m_pLogModule->LogInfo("OnReceiveNetPack " + std::to_string(nMsgID), __FUNCTION__, __LINE__);
+
     std::map<int, std::list<NET_RECEIVE_FUNCTOR_PTR>>::iterator it = mxReceiveCallBack.find(nMsgID);
     if (mxReceiveCallBack.end() != it)
     {
