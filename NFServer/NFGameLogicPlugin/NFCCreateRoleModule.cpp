@@ -565,64 +565,63 @@ bool NFCCreateRoleModule::ConvertPropertyManagerToPB(const NF_SHARE_PTR<NFIPrope
 		NF_SHARE_PTR<NFIProperty> xPropert = pProps->First();
 		while (xPropert)
 		{
-			if (!xPropert->GetCache() && !xPropert->GetSave())
+			if (xPropert->GetCache() || xPropert->GetSave())
 			{
-				continue;
-			}
 
-			switch (xPropert->GetType())
-			{
-			case NFDATA_TYPE::TDATA_INT:
-			{
-				NFMsg::PropertyInt* pData = pPropertyData->add_property_int_list();
-				pData->set_property_name(xPropert->GetKey());
-				pData->set_data(xPropert->GetInt());
-			}
-			break;
-
-			case NFDATA_TYPE::TDATA_FLOAT:
-			{
-				NFMsg::PropertyFloat* pData = pPropertyData->add_property_float_list();
-				pData->set_property_name(xPropert->GetKey());
-				pData->set_data(xPropert->GetFloat());
-			}
-			break;
-
-			case NFDATA_TYPE::TDATA_OBJECT:
-			{
-				NFMsg::PropertyObject* pData = pPropertyData->add_property_object_list();
-				pData->set_property_name(xPropert->GetKey());
-				*(pData->mutable_data()) = NFINetModule::NFToPB(xPropert->GetObject());
-			}
-			break;
-
-			case NFDATA_TYPE::TDATA_STRING:
-			{
-				NFMsg::PropertyString* pData = pPropertyData->add_property_string_list();
-				pData->set_property_name(xPropert->GetKey());
-				pData->set_data(xPropert->GetString());
-
-				std::cout << xPropert->GetKey() << " " << xPropert->GetString() << std::endl;
-			}
-			break;
-
-			case NFDATA_TYPE::TDATA_VECTOR2:
-			{
-				NFMsg::PropertyVector2* pData = pPropertyData->add_property_vector2_list();
-				pData->set_property_name(xPropert->GetKey());
-				*(pData->mutable_data()) = NFINetModule::NFToPB(xPropert->GetVector2());
-			}
-			break;
-
-			case NFDATA_TYPE::TDATA_VECTOR3:
-			{
-				NFMsg::PropertyVector3* pData = pPropertyData->add_property_vector3_list();
-				pData->set_property_name(xPropert->GetKey());
-				*(pData->mutable_data()) = NFINetModule::NFToPB(xPropert->GetVector3());
-			}
-			break;
-			default:
+				switch (xPropert->GetType())
+				{
+				case NFDATA_TYPE::TDATA_INT:
+				{
+					NFMsg::PropertyInt* pData = pPropertyData->add_property_int_list();
+					pData->set_property_name(xPropert->GetKey());
+					pData->set_data(xPropert->GetInt());
+				}
 				break;
+
+				case NFDATA_TYPE::TDATA_FLOAT:
+				{
+					NFMsg::PropertyFloat* pData = pPropertyData->add_property_float_list();
+					pData->set_property_name(xPropert->GetKey());
+					pData->set_data(xPropert->GetFloat());
+				}
+				break;
+
+				case NFDATA_TYPE::TDATA_OBJECT:
+				{
+					NFMsg::PropertyObject* pData = pPropertyData->add_property_object_list();
+					pData->set_property_name(xPropert->GetKey());
+					*(pData->mutable_data()) = NFINetModule::NFToPB(xPropert->GetObject());
+				}
+				break;
+
+				case NFDATA_TYPE::TDATA_STRING:
+				{
+					NFMsg::PropertyString* pData = pPropertyData->add_property_string_list();
+					pData->set_property_name(xPropert->GetKey());
+					pData->set_data(xPropert->GetString());
+
+					std::cout << xPropert->GetKey() << " " << xPropert->GetString() << std::endl;
+				}
+				break;
+
+				case NFDATA_TYPE::TDATA_VECTOR2:
+				{
+					NFMsg::PropertyVector2* pData = pPropertyData->add_property_vector2_list();
+					pData->set_property_name(xPropert->GetKey());
+					*(pData->mutable_data()) = NFINetModule::NFToPB(xPropert->GetVector2());
+				}
+				break;
+
+				case NFDATA_TYPE::TDATA_VECTOR3:
+				{
+					NFMsg::PropertyVector3* pData = pPropertyData->add_property_vector3_list();
+					pData->set_property_name(xPropert->GetKey());
+					*(pData->mutable_data()) = NFINetModule::NFToPB(xPropert->GetVector3());
+				}
+				break;
+				default:
+					break;
+				}
 			}
 
 			xPropert = pProps->Next();
