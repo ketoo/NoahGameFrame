@@ -77,6 +77,9 @@ else()
 	target_link_libraries(NFPluginLoader -static-libstdc++)
 endif()
 
+target_link_libraries(NFPluginLoader ${CMAKE_DL_LIBS})
+target_link_libraries(NFPluginLoader pthread)
+
 set_target_properties( NFPluginLoader PROPERTIES OUTPUT_NAME_DEBUG "NFPluginLoader_d")
 set_target_properties( NFPluginLoader PROPERTIES
 	FOLDER "NFSDK"
