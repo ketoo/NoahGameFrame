@@ -93,7 +93,10 @@ public:
 #pragma pop_macro("min")
         return _value;
     }
-
+	NFTimeSpan(long int ticks) :
+            NFTimeSpan(std::chrono::system_clock::duration(ticks))
+    {}
+	
     NFTimeSpan(long long ticks) :
             NFTimeSpan(std::chrono::system_clock::duration(ticks))
     {}
