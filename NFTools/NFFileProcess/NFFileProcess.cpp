@@ -148,8 +148,12 @@ bool NFFileProcess::LoadIniData(MiniExcelReader::Sheet & sheet, ClassData * pCla
 		MiniExcelReader::Cell* pIDCell = sheet.getCell(r, dim.firstCol);
 		if (pIDCell && !pIDCell->value.empty())
 		{
-			NFClassElement::ElementData* pIniObject = new NFClassElement::ElementData();
-			pClassData->xIniData.xElementList[pIDCell->value] = pIniObject;
+			NFClassElement::ElementData* pIniObject = pClassData->xIniData.xElementList[pIDCell->value];
+			if (!pIniObject)
+			{
+				pIniObject = new NFClassElement::ElementData();
+				pClassData->xIniData.xElementList[pIDCell->value] = pIniObject;
+			}
 
 			for (std::map<std::string, int>::iterator itProperty = PropertyIndex.begin(); itProperty != PropertyIndex.end(); ++itProperty)
 			{
@@ -756,7 +760,7 @@ bool NFFileProcess::SaveForSQL()
 
 
 	//2 fields
-	//ALTER TABLE `Buff` ADD `EffectType` bigint(11) DEFAULT '0' COMMENT 'å½±å“å±æ€§ç±»å‹(æ•ˆæœç±»å‹)  ç”Ÿå‘½ï¼Œæ³•åŠ›(å¯ç»„åˆ,å åŠ )';
+	//ALTER TABLE `Buff` ADD `EffectType` bigint(11) DEFAULT '0' COMMENT 'Ó°ÏìÊôĞÔÀàĞÍ(Ğ§¹ûÀàĞÍ)  ÉúÃü£¬·¨Á¦(¿É×éºÏ,µş¼Ó)';
 	// 2.1) property
 	for (std::map<std::string, ClassData*>::iterator it = mxClassData.begin(); it != mxClassData.end(); ++it)
 	{
@@ -799,7 +803,7 @@ bool NFFileProcess::SaveForSQL()
 			if (strSave=="1" || strCache=="1")
 			{
 				std::string strAlter = "ALTER TABLE `" + strClassName + "` ADD `" + strPropertyName + "`";
-				//ALTER TABLE `Buff` ADD `EffectType` bigint(11) DEFAULT '0' COMMENT 'å½±å“å±æ€§ç±»å‹(æ•ˆæœç±»å‹)  ç”Ÿå‘½ï¼Œæ³•åŠ›(å¯ç»„åˆ,å åŠ )';
+				//ALTER TABLE `Buff` ADD `EffectType` bigint(11) DEFAULT '0' COMMENT 'Ó°ÏìÊôĞÔÀàĞÍ(Ğ§¹ûÀàĞÍ)  ÉúÃü£¬·¨Á¦(¿É×éºÏ,µş¼Ó)';
 				if (strType=="int")
 				{
 					strAlter += " bigint(11) DEFAULT '0'";
