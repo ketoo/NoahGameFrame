@@ -25,9 +25,9 @@ using std::chrono::milliseconds;
 using std::chrono::seconds;
 using std::chrono::minutes;
 using std::chrono::hours;
-using days = std::chrono::duration<long long, std::ratio<3600 * 24>>;
+using tick_t = std::chrono::system_clock::duration::rep; // int64_t
+using days = std::chrono::duration<tick_t, std::ratio<3600 * 24>>;
 
-using namespace std;
 using namespace std::chrono;
 
 enum class DayOfWeek
@@ -62,15 +62,15 @@ class NFDateTime;
 class NFTimeSpan
 {
 public:
-	static constexpr long long TicksPerSecond = std::chrono::system_clock::duration::period::den;
-	static constexpr long long TicksPerMillisecond = TicksPerSecond / 1000;
-	static constexpr long long TicksPerMinute = TicksPerSecond * 60;
-	static constexpr long long TicksPerHour = TicksPerMinute * 60;
-	static constexpr long long TicksPerDay = TicksPerHour * 24;
+	static constexpr tick_t TicksPerSecond = std::chrono::system_clock::duration::period::den;
+	static constexpr tick_t TicksPerMillisecond = TicksPerSecond / 1000;
+	static constexpr tick_t TicksPerMinute = TicksPerSecond * 60;
+	static constexpr tick_t TicksPerHour = TicksPerMinute * 60;
+	static constexpr tick_t TicksPerDay = TicksPerHour * 24;
 
 	static const NFTimeSpan& Zero()
 	{
-		static const NFTimeSpan _value = 0LL;
+		static const NFTimeSpan _value = static_cast<tick_t>(0);
 		return _value;
 	}
 
@@ -94,7 +94,7 @@ public:
 		return _value;
 	}
 
-	NFTimeSpan(long long ticks) :
+	NFTimeSpan(tick_t ticks) :
 		NFTimeSpan(std::chrono::system_clock::duration(ticks))
 	{}
 
@@ -110,7 +110,7 @@ public:
 		NFTimeSpan(days * TicksPerDay + hours * TicksPerHour + minutes * TicksPerMinute + seconds * TicksPerSecond + milliseconds * TicksPerMillisecond)
 	{}
 
-	inline long long TotalMilliseconds() const
+	inline int64_t TotalMilliseconds() const
 	{
 		return TickCount<milliseconds>();
 	}
@@ -150,17 +150,17 @@ public:
 		return TickCount<days>();
 	}
 
-	inline long long Ticks() const
+	inline tick_t Ticks() const
 	{
 		return _ticks.count();
 	}
 
-	inline long long TotalMinutes() const
+	inline int64_t TotalMinutes() const
 	{
 		return TickCount<minutes>();
 	}
 
-	inline long long TotalSeconds() const
+	inline int64_t TotalSeconds() const
 	{
 		return TickCount<seconds>();
 	}
@@ -195,7 +195,7 @@ public:
 		return value * TicksPerSecond;
 	}
 
-	static NFTimeSpan FromTicks(long long value)
+	static NFTimeSpan FromTicks(tick_t value)
 	{
 		return value;
 	}
@@ -288,11 +288,11 @@ protected:
 	{}
 
 	NFTimeSpan(double ticks) :
-		NFTimeSpan(static_cast<long long>(ticks))
+		NFTimeSpan(static_cast<tick_t>(ticks))
 	{}
 
 	template<typename T>
-	inline long long TickCount() const
+	inline tick_t TickCount() const
 	{
 		return std::chrono::duration_cast<T>(_ticks).count();
 	}
@@ -354,7 +354,7 @@ public:
 		return dt;
 	}
 
-	inline long long Ticks()
+	inline tick_t Ticks()
 	{
 		return _time_point.time_since_epoch().count();
 	}
@@ -455,22 +455,22 @@ public:
 
 	inline NFDateTime AddDays(const double value) const
 	{
-		return _time_point + std::chrono::system_clock::duration(static_cast<long long>(value * NFTimeSpan::TicksPerDay));
+		return _time_point + std::chrono::system_clock::duration(static_cast<tick_t>(value * NFTimeSpan::TicksPerDay));
 	}
 
 	inline NFDateTime AddHours(const double value) const
 	{
-		return _time_point + std::chrono::system_clock::duration(static_cast<long long>(value * NFTimeSpan::TicksPerHour));
+		return _time_point + std::chrono::system_clock::duration(static_cast<tick_t>(value * NFTimeSpan::TicksPerHour));
 	}
 
 	inline NFDateTime AddMilliseconds(const double value) const
 	{
-		return _time_point + std::chrono::system_clock::duration(static_cast<long long>(value * NFTimeSpan::TicksPerMillisecond));
+		return _time_point + std::chrono::system_clock::duration(static_cast<tick_t>(value * NFTimeSpan::TicksPerMillisecond));
 	}
 
 	inline NFDateTime AddMinutes(const double value) const
 	{
-		return _time_point + std::chrono::system_clock::duration(static_cast<long long>(value * NFTimeSpan::TicksPerMinute));
+		return _time_point + std::chrono::system_clock::duration(static_cast<tick_t>(value * NFTimeSpan::TicksPerMinute));
 	}
 
 	inline NFDateTime AddMonths(const int value) const
@@ -485,10 +485,10 @@ public:
 
 	inline NFDateTime AddSeconds(const double value) const
 	{
-		return _time_point + std::chrono::system_clock::duration(static_cast<long long>(value * NFTimeSpan::TicksPerSecond));
+		return _time_point + std::chrono::system_clock::duration(static_cast<tick_t>(value * NFTimeSpan::TicksPerSecond));
 	}
 
-	inline NFDateTime AddTicks(const long long value) const
+	inline NFDateTime AddTicks(const tick_t value) const
 	{
 		return _time_point + std::chrono::system_clock::duration(value);
 	}
