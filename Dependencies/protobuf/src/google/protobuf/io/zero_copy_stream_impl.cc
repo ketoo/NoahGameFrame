@@ -1,6 +1,6 @@
 // Protocol Buffers - Google's data interchange format
 // Copyright 2008 Google Inc.  All rights reserved.
-// http://code.google.com/p/protobuf/
+// https://developers.google.com/protocol-buffers/
 //
 // Redistribution and use in source and binary forms, with or without
 // modification, are permitted provided that the following conditions are
@@ -32,9 +32,7 @@
 //  Based on original Protocol Buffers design by
 //  Sanjay Ghemawat, Jeff Dean, and others.
 
-#ifdef _MSC_VER
-#include <io.h>
-#else
+#ifndef _MSC_VER
 #include <unistd.h>
 #include <sys/types.h>
 #include <sys/stat.h>
@@ -43,10 +41,11 @@
 #include <errno.h>
 #include <iostream>
 #include <algorithm>
-
 #include <google/protobuf/io/zero_copy_stream_impl.h>
 #include <google/protobuf/stubs/common.h>
+#include <google/protobuf/stubs/logging.h>
 #include <google/protobuf/stubs/stl_util.h>
+#include <google/protobuf/stubs/io_win32.h>
 
 
 namespace google {
@@ -57,6 +56,13 @@ namespace io {
 // Win32 lseek is broken:  If invoked on a non-seekable file descriptor, its
 // return value is undefined.  We re-define it to always produce an error.
 #define lseek(fd, offset, origin) ((off_t)-1)
+// DO NOT include <io.h>, instead create functions in io_win32.{h,cc} and import
+// them like we do below.
+using google::protobuf::internal::win32::access;
+using google::protobuf::internal::win32::close;
+using google::protobuf::internal::win32::open;
+using google::protobuf::internal::win32::read;
+using google::protobuf::internal::win32::write;
 #endif
 
 namespace {
@@ -79,8 +85,6 @@ FileInputStream::FileInputStream(int file_descriptor, int block_size)
   : copying_input_(file_descriptor),
     impl_(&copying_input_, block_size) {
 }
-
-FileInputStream::~FileInputStream() {}
 
 bool FileInputStream::Close() {
   return copying_input_.Close();
@@ -269,12 +273,8 @@ bool FileOutputStream::CopyingFileOutputStream::Write(
 
 // ===================================================================
 
-IstreamInputStream::IstreamInputStream(istream* input, int block_size)
-  : copying_input_(input),
-    impl_(&copying_input_, block_size) {
-}
-
-IstreamInputStream::~IstreamInputStream() {}
+IstreamInputStream::IstreamInputStream(std::istream* input, int block_size)
+    : copying_input_(input), impl_(&copying_input_, block_size) {}
 
 bool IstreamInputStream::Next(const void** data, int* size) {
   return impl_.Next(data, size);
@@ -293,9 +293,8 @@ int64 IstreamInputStream::ByteCount() const {
 }
 
 IstreamInputStream::CopyingIstreamInputStream::CopyingIstreamInputStream(
-    istream* input)
-  : input_(input) {
-}
+    std::istream* input)
+    : input_(input) {}
 
 IstreamInputStream::CopyingIstreamInputStream::~CopyingIstreamInputStream() {}
 
@@ -311,10 +310,8 @@ int IstreamInputStream::CopyingIstreamInputStream::Read(
 
 // ===================================================================
 
-OstreamOutputStream::OstreamOutputStream(ostream* output, int block_size)
-  : copying_output_(output),
-    impl_(&copying_output_, block_size) {
-}
+OstreamOutputStream::OstreamOutputStream(std::ostream* output, int block_size)
+    : copying_output_(output), impl_(&copying_output_, block_size) {}
 
 OstreamOutputStream::~OstreamOutputStream() {
   impl_.Flush();
@@ -333,9 +330,8 @@ int64 OstreamOutputStream::ByteCount() const {
 }
 
 OstreamOutputStream::CopyingOstreamOutputStream::CopyingOstreamOutputStream(
-    ostream* output)
-  : output_(output) {
-}
+    std::ostream* output)
+    : output_(output) {}
 
 OstreamOutputStream::CopyingOstreamOutputStream::~CopyingOstreamOutputStream() {
 }
@@ -351,9 +347,6 @@ bool OstreamOutputStream::CopyingOstreamOutputStream::Write(
 ConcatenatingInputStream::ConcatenatingInputStream(
     ZeroCopyInputStream* const streams[], int count)
   : streams_(streams), stream_count_(count), bytes_retired_(0) {
-}
-
-ConcatenatingInputStream::~ConcatenatingInputStream() {
 }
 
 bool ConcatenatingInputStream::Next(const void** data, int* size) {
@@ -413,7 +406,9 @@ int64 ConcatenatingInputStream::ByteCount() const {
 
 LimitingInputStream::LimitingInputStream(ZeroCopyInputStream* input,
                                          int64 limit)
-  : input_(input), limit_(limit) {}
+  : input_(input), limit_(limit) {
+  prior_bytes_read_ = input_->ByteCount();
+}
 
 LimitingInputStream::~LimitingInputStream() {
   // If we overshot the limit, back up.
@@ -457,9 +452,9 @@ bool LimitingInputStream::Skip(int count) {
 
 int64 LimitingInputStream::ByteCount() const {
   if (limit_ < 0) {
-    return input_->ByteCount() + limit_;
+    return input_->ByteCount() + limit_ - prior_bytes_read_;
   } else {
-    return input_->ByteCount();
+    return input_->ByteCount() - prior_bytes_read_;
   }
 }
 

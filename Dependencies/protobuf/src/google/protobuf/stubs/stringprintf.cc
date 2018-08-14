@@ -1,6 +1,6 @@
 // Protocol Buffers - Google's data interchange format
 // Copyright 2012 Google Inc.  All rights reserved.
-// http://code.google.com/p/protobuf/
+// https://developers.google.com/protocol-buffers/
 //
 // Redistribution and use in source and binary forms, with or without
 // modification, are permitted provided that the following conditions are
@@ -37,7 +37,6 @@
 #include <stdio.h> // MSVC requires this for _vsnprintf
 #include <vector>
 #include <google/protobuf/stubs/common.h>
-#include <google/protobuf/testing/googletest.h>
 
 namespace google {
 namespace protobuf {
@@ -138,7 +137,7 @@ const int kStringPrintfVectorMaxArgs = 32;
 // and we can fix the problem or protect against an attack.
 static const char string_printf_empty_block[256] = { '\0' };
 
-string StringPrintfVector(const char* format, const vector<string>& v) {
+string StringPrintfVector(const char* format, const std::vector<string>& v) {
   GOOGLE_CHECK_LE(v.size(), kStringPrintfVectorMaxArgs)
       << "StringPrintfVector currently only supports up to "
       << kStringPrintfVectorMaxArgs << " arguments. "

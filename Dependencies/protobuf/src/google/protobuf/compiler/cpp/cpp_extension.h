@@ -1,6 +1,6 @@
 // Protocol Buffers - Google's data interchange format
 // Copyright 2008 Google Inc.  All rights reserved.
-// http://code.google.com/p/protobuf/
+// https://developers.google.com/protocol-buffers/
 //
 // Redistribution and use in source and binary forms, with or without
 // modification, are permitted provided that the following conditions are
@@ -57,7 +57,7 @@ namespace cpp {
 class ExtensionGenerator {
  public:
   // See generator.cc for the meaning of dllexport_decl.
-  explicit ExtensionGenerator(const FieldDescriptor* desycriptor,
+  explicit ExtensionGenerator(const FieldDescriptor* descriptor,
                               const Options& options);
   ~ExtensionGenerator();
 
@@ -66,9 +66,6 @@ class ExtensionGenerator {
 
   // Source file stuff.
   void GenerateDefinition(io::Printer* printer);
-
-  // Generate code to register the extension.
-  void GenerateRegistration(io::Printer* printer);
 
  private:
   const FieldDescriptor* descriptor_;

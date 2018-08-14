@@ -83,7 +83,7 @@ public class UISelectRole : UIDialog {
             GameObject item = Instantiate(mItemModel);
             item.transform.SetParent(mContentList);
             item.transform.localScale = UnityEngine.Vector3.one;
-            item.GetComponentInChildren<Text>().text = System.Text.Encoding.Default.GetString(info.noob_name);
+            item.GetComponentInChildren<Text>().text = info.noob_name.ToStringUtf8();
             int nRoleIndex = nIndex;
             item.GetComponent<Button>().onClick.AddListener(() =>
             {

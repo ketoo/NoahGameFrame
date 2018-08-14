@@ -1,3 +1,5 @@
+syntax = "proto3";
+
 package NFMsg; 
 
 //events
@@ -424,6 +426,7 @@ enum EGameItemSubType
 //the sub items type of EIT_CARD
 enum EGameCardSubType
 {
+	EGCST_UNKNOW				= 0;//
 	EGCST_STRENGTH 				= 1;//	
 	EGCST_AGILITY				= 2;//
 	EGCST_INTELLIGENCE			= 3;//
@@ -505,6 +508,7 @@ enum EPVPType
 
 enum EShopType
 {
+	EST_UNKNOW		= 0;//
 	EST_BUILDING 	= 1;//
 	EST_GOLD		= 2;//
 	EST_ITEM		= 3;//
@@ -518,6 +522,7 @@ enum EShopType
 
 enum ERankType
 {
+	ERT_UNKNOW					= 0;
 	ERT_PLAYER_LEVEL 			= 1;
 	ERT_FIGHT_VALUE				= 2;
 	ERT_PLAYER_MONEY			= 3;
@@ -548,6 +553,7 @@ enum ETARGETType
 //PropertyType
 enum EPropertyType
 {
+	EPT_UNKNOW				= 0;//
 	EPT_STRENGTH 			= 1;//
 	EPT_AGILITY				= 2;//
 	EPT_INTELLIGENCE		= 3;//

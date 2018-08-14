@@ -1,6 +1,6 @@
 // Protocol Buffers - Google's data interchange format
 // Copyright 2008 Google Inc.  All rights reserved.
-// http://code.google.com/p/protobuf/
+// https://developers.google.com/protocol-buffers/
 //
 // Redistribution and use in source and binary forms, with or without
 // modification, are permitted provided that the following conditions are
@@ -34,14 +34,17 @@
 //   It seemed like parameterizing it would add more complexity than it is
 //   worth.
 
+#include <memory>
+
 #include <google/protobuf/compiler/java/java_generator.h>
 #include <google/protobuf/compiler/command_line_interface.h>
 #include <google/protobuf/io/zero_copy_stream.h>
 #include <google/protobuf/io/printer.h>
 
+#include <google/protobuf/testing/file.h>
+#include <google/protobuf/testing/file.h>
 #include <google/protobuf/testing/googletest.h>
 #include <gtest/gtest.h>
-#include <google/protobuf/testing/file.h>
 
 namespace google {
 namespace protobuf {
@@ -70,8 +73,8 @@ class TestGenerator : public CodeGenerator {
 
   void TryInsert(const string& filename, const string& insertion_point,
                  GeneratorContext* context) const {
-    scoped_ptr<io::ZeroCopyOutputStream> output(
-      context->OpenForInsert(filename, insertion_point));
+    std::unique_ptr<io::ZeroCopyOutputStream> output(
+        context->OpenForInsert(filename, insertion_point));
     io::Printer printer(output.get(), '$');
     printer.Print("// inserted $name$\n", "name", insertion_point);
   }
@@ -81,16 +84,16 @@ class TestGenerator : public CodeGenerator {
 // not verify that they are correctly-placed; that would require actually
 // compiling the output which is a bit more than I care to do for this test.
 TEST(JavaPluginTest, PluginTest) {
-  File::WriteStringToFileOrDie(
-      "syntax = \"proto2\";\n"
-      "package foo;\n"
-      "option java_package = \"\";\n"
-      "option java_outer_classname = \"Test\";\n"
-      "message Bar {\n"
-      "  message Baz {}\n"
-      "}\n"
-      "enum Qux { BLAH = 1; }\n",
-      TestTempDir() + "/test.proto");
+  GOOGLE_CHECK_OK(File::SetContents(TestTempDir() + "/test.proto",
+                             "syntax = \"proto2\";\n"
+                             "package foo;\n"
+                             "option java_package = \"\";\n"
+                             "option java_outer_classname = \"Test\";\n"
+                             "message Bar {\n"
+                             "  message Baz {}\n"
+                             "}\n"
+                             "enum Qux { BLAH = 1; }\n",
+                             true));
 
   google::protobuf::compiler::CommandLineInterface cli;
   cli.SetInputsAreProtoPathRelative(true);
