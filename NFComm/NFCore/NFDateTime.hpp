@@ -1,10 +1,28 @@
-﻿// -------------------------------------------------------------------------
-//    @FileName         :    NFDateTime.hpp
-//    @Author           :    LvSheng.Huang
-//    @Date             :    2016-12-22
-//    @Module           :    NFDateTime
-//
-// -------------------------------------------------------------------------
+/*
+This file is part of:
+NoahFrame
+https://github.com/ketoo/NoahGameFrame
+
+Copyright 2009 - 2018 NoahFrame(NoahGameFrame)
+
+File creator: lvsheng.huang
+
+NoahFrame is open-source software and you can redistribute it and/or modify
+it under the terms of the License; besides, anyone who use this file/software must include this copyright announcement; besides, anyone who use this file/software
+must include this copyright announcement.
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+*/
 
 #pragma once
 #ifndef NF_DATETIME_HPP
@@ -32,29 +50,29 @@ using namespace std::chrono;
 
 enum class DayOfWeek
 {
-	Sunday = 0,
-	Monday = 1,
-	Thuesday = 2,
-	Wednesday = 3,
-	Thursday = 4,
-	Friday = 5,
-	Saturday = 6,
+    Sunday = 0,
+    Monday = 1,
+    Thuesday = 2,
+    Wednesday = 3,
+    Thursday = 4,
+    Friday = 5,
+    Saturday = 6,
 };
 
 enum class Month
 {
-	January = 1,
-	February = 2,
-	March = 3,
-	April = 4,
-	May = 5,
-	June = 6,
-	July = 7,
-	August = 8,
-	September = 9,
-	October = 10,
-	November = 11,
-	December = 12,
+    January = 1,
+    February = 2,
+    March = 3,
+    April = 4,
+    May = 5,
+    June = 6,
+    July = 7,
+    August = 8,
+    September = 9,
+    October = 10,
+    November = 11,
+    December = 12,
 };
 
 class NFDateTime;
@@ -79,17 +97,17 @@ public:
 		//fix compile error
 #pragma push_macro("max")
 #undef max
-		static const NFTimeSpan _value = std::chrono::system_clock::duration::max();
+        static const NFTimeSpan _value = std::chrono::system_clock::duration::max();
 #pragma pop_macro("max")
-		return _value;
-	}
+        return _value;
+    }
 
-	static const NFTimeSpan& MinValue()
-	{
-		//fix compile error
+    static const NFTimeSpan& MinValue()
+    {
+        //fix compile error
 #pragma push_macro("min")
 #undef min
-		static const NFTimeSpan _value = std::chrono::system_clock::duration::min();
+        static const NFTimeSpan _value = std::chrono::system_clock::duration::min();
 #pragma pop_macro("min")
 		return _value;
 	}
@@ -281,11 +299,10 @@ public:
 	{
 		return _ticks >= t._ticks;
 	}
-
 protected:
-	NFTimeSpan(const std::chrono::system_clock::duration& ticks) :
-		_ticks(ticks)
-	{}
+    NFTimeSpan(const std::chrono::system_clock::duration& ticks) :
+            _ticks(ticks)
+    {}
 
 	NFTimeSpan(double ticks) :
 		NFTimeSpan(static_cast<tick_t>(ticks))
@@ -297,31 +314,31 @@ protected:
 		return std::chrono::duration_cast<T>(_ticks).count();
 	}
 
-	std::chrono::system_clock::duration _ticks;
+    std::chrono::system_clock::duration _ticks;
 
-	friend class NFDateTime;
+    friend class NFDateTime;
 };
 
 
 class NFDateTime
 {
 public:
-	static const NFDateTime& MinValue()
-	{
-		//fix compile error
+    static const NFDateTime& MinValue()
+    {
+        //fix compile error
 #pragma push_macro("min")
 #undef min
-		static const NFDateTime _value = std::chrono::system_clock::time_point::min();
+        static const NFDateTime _value = std::chrono::system_clock::time_point::min();
 #pragma pop_macro("min")
-		return _value;
-	}
+        return _value;
+    }
 
-	static const NFDateTime& MaxValue()
-	{
-		//fix compile error
+    static const NFDateTime& MaxValue()
+    {
+        //fix compile error
 #pragma push_macro("max")
 #undef max
-		static const NFDateTime _value = std::chrono::system_clock::time_point::max();
+        static const NFDateTime _value = std::chrono::system_clock::time_point::max();
 #pragma pop_macro("max")
 		return _value;
 	}
@@ -601,82 +618,82 @@ public:
 	{
 		return _time_point >= dt._time_point;
 	}
-
+  
 protected:
-	NFDateTime(const std::chrono::system_clock::time_point& tp) :
-		_time_point(tp),
-		_time(std::chrono::system_clock::to_time_t(tp))
-	{
-		_tm = *localtime(&_time);
-		_millisecond = std::chrono::time_point_cast<milliseconds>(tp).time_since_epoch().count() % 1000;
-	}
+    NFDateTime(const std::chrono::system_clock::time_point& tp) :
+            _time_point(tp),
+            _time(std::chrono::system_clock::to_time_t(tp))
+    {
+        _tm = *localtime(&_time);
+        _millisecond = std::chrono::time_point_cast<milliseconds>(tp).time_since_epoch().count() % 1000;
+    }
 
-	int _millisecond;
-	time_t _time;
-	tm _tm;
-	std::chrono::system_clock::time_point _time_point;
+    int _millisecond;
+    time_t _time;
+    tm _tm;
+    std::chrono::system_clock::time_point _time_point;
 
-	static std::string NameOfDay(::DayOfWeek day)
-	{
-		switch (day)
-		{
-			DAY_CASE(Monday);
-			DAY_CASE(Thuesday);
-			DAY_CASE(Wednesday);
-			DAY_CASE(Thursday);
-			DAY_CASE(Friday);
-			DAY_CASE(Saturday);
-			DAY_CASE(Sunday);
+    static std::string NameOfDay(::DayOfWeek day)
+    {
+        switch (day)
+        {
+            DAY_CASE(Monday);
+            DAY_CASE(Thuesday);
+            DAY_CASE(Wednesday);
+            DAY_CASE(Thursday);
+            DAY_CASE(Friday);
+            DAY_CASE(Saturday);
+            DAY_CASE(Sunday);
 
-		default:
-			throw NFException("Day %d is not in valid weekday range ( %d - %d )", day, ::DayOfWeek::Sunday, ::DayOfWeek::Saturday);
-			break;
-		}
-	}
+            default:
+                throw NFException("Day %d is not in valid weekday range ( %d - %d )", day, ::DayOfWeek::Sunday, ::DayOfWeek::Saturday);
+                break;
+        }
+    }
 
-	static std::string NameOfMonth(int month)
-	{
-		switch (static_cast<::Month>(month))
-		{
-			MONTH_CASE(January);
-			MONTH_CASE(February);
-			MONTH_CASE(March);
-			MONTH_CASE(April);
-			MONTH_CASE(May);
-			MONTH_CASE(June);
-			MONTH_CASE(July);
-			MONTH_CASE(August);
-			MONTH_CASE(September);
-			MONTH_CASE(October);
-			MONTH_CASE(November);
-			MONTH_CASE(December);
+    static std::string NameOfMonth(int month)
+    {
+        switch (static_cast<::Month>(month))
+        {
+            MONTH_CASE(January);
+            MONTH_CASE(February);
+            MONTH_CASE(March);
+            MONTH_CASE(April);
+            MONTH_CASE(May);
+            MONTH_CASE(June);
+            MONTH_CASE(July);
+            MONTH_CASE(August);
+            MONTH_CASE(September);
+            MONTH_CASE(October);
+            MONTH_CASE(November);
+            MONTH_CASE(December);
 
-		default:
-			throw NFException("Month %d is not in valid range ( %d - %d )", month, ::Month::January, ::Month::December);
-			break;
-		}
-	}
-	static std::string DaySuffix(int day)
-	{
-		switch (day)
-		{
-		case 1:
-		case 21:
-		case 31:
-			return "st";
+            default:
+                throw NFException("Month %d is not in valid range ( %d - %d )", month, ::Month::January, ::Month::December);
+                break;
+        }
+    }
+    static std::string DaySuffix(int day)
+    {
+        switch (day)
+        {
+            case 1:
+            case 21:
+            case 31:
+                return "st";
 
-		case 2:
-		case 22:
-			return "nd";
+            case 2:
+            case 22:
+                return "nd";
 
-		case 3:
-		case 23:
-			return "rd";
+            case 3:
+            case 23:
+                return "rd";
 
-		default:
-			return "th";
-		}
-	}
+            default:
+                return "th";
+        }
+    }
 };
 
 #endif
