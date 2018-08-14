@@ -1,3 +1,5 @@
+syntax = "proto3";
+
 package NFMsg; 
 
 import "NFDefine.proto";
@@ -22,14 +24,14 @@ enum ELoginMode
 message ServerInfoReport
 {
 	
-	required int32   server_id = 1;
-	required bytes  server_name = 2;
-	required bytes  server_ip = 3;
-	required int32   server_port = 4;
-	required int32   server_max_online = 5;
-	required int32   server_cur_count = 6;
-	required EServerState   server_state = 7;
-	required int32   server_type = 8;
+	int32   server_id = 1;
+	bytes  server_name = 2;
+	bytes  server_ip = 3;
+	int32   server_port = 4;
+	int32   server_max_online = 5;
+	int32   server_cur_count = 6;
+	EServerState   server_state = 7;
+	int32   server_type = 8;
 }
 
 message ServerInfoReportList
@@ -39,39 +41,39 @@ message ServerInfoReportList
 
 message AckEventResult
 {
-	required EGameEventCode event_code = 1;
-	optional Ident event_object = 2;//playerID
-	optional Ident event_client = 3;//clientID
+	EGameEventCode event_code = 1;
+	Ident event_object = 2;//playerID
+	Ident event_client = 3;//clientID
 }
 
 ////////////////////////////////////////////////////
 message ReqAccountLogin
 { 
-	required bytes 			account = 2;
-	required bytes 			password = 3;
-	required bytes 			security_code = 4;
-    required bytes 			signBuff = 5;
-    required int32 			clientVersion = 6;
-    required ELoginMode		loginMode = 7;
-    required int32 			clientIP = 8;
-    required int64 			clientMAC = 9;
-	required bytes 			device_info = 10;
-	required bytes 			extra_info = 11;
-	optional int32 			platform_type = 12;
+	bytes 			account = 2;
+	bytes 			password = 3;
+	bytes 			security_code = 4;
+    bytes 			signBuff = 5;
+    int32 			clientVersion = 6;
+    ELoginMode		loginMode = 7;
+    int32 			clientIP = 8;
+    int64 			clientMAC = 9;
+	bytes 			device_info = 10;
+	bytes 			extra_info = 11;
+	int32 			platform_type = 12;
 }
 
 message ReqAccountLogout
 { 
-	required bytes 		account = 2;
-	required bytes 		extra_info = 3;
+	bytes 		account = 2;
+	bytes 		extra_info = 3;
 }
 
 message ServerInfo
 {
-    required int32  		server_id = 1;
-    required bytes 			name = 2;
-	required int32			wait_count = 3;
-	required EServerState	status = 4;
+    int32  		server_id = 1;
+    bytes 			name = 2;
+	int32			wait_count = 3;
+	EServerState	status = 4;
 }
 
 enum ReqServerListType
@@ -82,122 +84,122 @@ enum ReqServerListType
 
 message ReqServerList
 {
-	required ReqServerListType type = 1;
+	ReqServerListType type = 1;
 }
 
 message AckServerList
 {
-	required ReqServerListType type = 1;
+	ReqServerListType type = 1;
 	repeated ServerInfo info = 2;
 }
 
 message ReqConnectWorld
 {
-	required int32   world_id = 1;
-	optional bytes  account = 2;
-	optional Ident  sender = 3;
-	optional int32   login_id = 4;
+	int32   world_id = 1;
+	bytes  account = 2;
+	Ident  sender = 3;
+	int32   login_id = 4;
 }
 
 message AckConnectWorldResult
 {
-	required int32   world_id = 1;
-	required Ident  sender = 2;
-	required int32   login_id = 3;
-	required bytes  account = 4;
-	required bytes  world_ip = 5;
-	required int32  world_port = 6;
-	required bytes  world_key = 7;
+	int32   world_id = 1;
+	Ident  sender = 2;
+	int32   login_id = 3;
+	bytes  account = 4;
+	bytes  world_ip = 5;
+	int32  world_port = 6;
+	bytes  world_key = 7;
 }
 
 message ReqSelectServer
 {
-	required int32   world_id = 1;
+	int32   world_id = 1;
 }
 
 message ReqKickFromWorld
 {
-	required int32   world_id = 1;
-	required bytes   account = 2;
+	int32   world_id = 1;
+	bytes   account = 2;
 }
 
 ////////////////////////////////////////////
 message ReqRoleList
 {
-	required int32   game_id = 1;
-	required bytes   account = 2;	
+	int32   game_id = 1;
+	bytes   account = 2;	
 }
 
 message RoleLiteInfo
 {
-	required Ident 		id = 1;
-	required int32 		career = 2;
-    required int32 		sex = 3;
-    required int32 		race = 4;
-    required bytes 		noob_name = 5;
-    required int32 		game_id = 6;
-	required int32 		role_level = 7;
-	required int32		delete_time = 8;
-	required int32		reg_time = 9;
-	required int32		last_offline_time = 10;
-	required int32		last_offline_ip = 11;
-	required bytes		view_record = 12;
+	Ident 		id = 1;
+	int32 		career = 2;
+    int32 		sex = 3;
+    int32 		race = 4;
+    bytes 		noob_name = 5;
+    int32 		game_id = 6;
+	int32 		role_level = 7;
+	int32		delete_time = 8;
+	int32		reg_time = 9;
+	int32		last_offline_time = 10;
+	int32		last_offline_ip = 11;
+	bytes		view_record = 12;
 }
 
 message AckRoleLiteInfoList
 {
 	repeated RoleLiteInfo char_data = 1;
-	required bytes   account = 2;
+	bytes   account = 2;
 }
 
 message ReqCreateRole
 {
-	required bytes 		account = 1;
-	required int32 		career = 2;
-    required int32 		sex = 3;
-    required int32 		race = 4;
-    required bytes 		noob_name = 5;
-    required int32 		game_id = 6;
+	bytes 		account = 1;
+	int32 		career = 2;
+    int32 		sex = 3;
+    int32 		race = 4;
+    bytes 		noob_name = 5;
+    int32 		game_id = 6;
 }
 
 message ReqDeleteRole
 {
-	required bytes 	account = 1;
-    required bytes	name = 2;
-	required int32 	game_id = 3;
+	bytes 	account = 1;
+    bytes	name = 2;
+	int32 	game_id = 3;
 }
 
 message ReqRecoverRole
 {
-	required bytes 	account = 1;
-    required bytes	name = 2;
-	required int32 	game_id = 3;
+	bytes 	account = 1;
+    bytes	name = 2;
+	int32 	game_id = 3;
 }
 
 message ServerHeartBeat
 {
-	optional int32 count = 1;
+	int32 count = 1;
 }
 
 message RoleOnlineNotify
 {
-	required Ident self = 1;
-	required Ident guild = 2;
-	required int32 game = 3;
-	required int32 proxy = 4;
+	Ident self = 1;
+	Ident guild = 2;
+	int32 game = 3;
+	int32 proxy = 4;
 }
 
 message RoleOfflineNotify
 {
-	required Ident self = 1;
-	required Ident guild = 2;
-	required int32 game = 3;
-	required int32 proxy = 4;
+	Ident self = 1;
+	Ident guild = 2;
+	int32 game = 3;
+	int32 proxy = 4;
 }
 
 message RoleDataPack
 {
-	required Ident 		id = 1;
-	optional ObjectPropertyList 	property = 2;
-	optional ObjectRecordList 		record = 4;
+	Ident 		id = 1;
+	ObjectPropertyList 	property = 2;
+	ObjectRecordList 		record = 4;
 }
