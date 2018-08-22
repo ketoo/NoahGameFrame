@@ -38,6 +38,7 @@ bool NFCClassModule::Awake()
     Load();
 	
 	return true;
+	
 }
 
 bool NFCClassModule::Init()
