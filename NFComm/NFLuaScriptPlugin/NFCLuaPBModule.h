@@ -77,18 +77,24 @@ private:
 
 	LuaIntf::LuaRef GetField(const google::protobuf::Message& message, const google::protobuf::FieldDescriptor* field) const;
 	LuaIntf::LuaRef GetRepeatedField(const google::protobuf::Message& message, const google::protobuf::FieldDescriptor* field) const;
-	// index starts from 0.
-	LuaIntf::LuaRef GetRepeatedFieldElement(const google::protobuf::FieldDescriptor* field, int index) const;
+	LuaIntf::LuaRef GetRepeatedFieldElement(const google::protobuf::Message& message, const google::protobuf::FieldDescriptor* field, int index) const;
 
 
 	///////////////
-	const std::string& TblToMessage(const std::string& strMsgTypeName, const LuaIntf::LuaRef& luaTable);
-
+	const std::string& TblToMessage(const LuaIntf::LuaRef& luaTable, google::protobuf::Message& messag);
+	
+	void SetField(google::protobuf::Message& messag, const std::string& sField, const LuaIntf::LuaRef& luaValue);
+	void SetRepeatedField(google::protobuf::Message& messag, const google::protobuf::FieldDescriptor* field, const LuaIntf::LuaRef& luaTable);
+	void SetRepeatedMapField(google::protobuf::Message& messag, const google::protobuf::FieldDescriptor* field, const LuaIntf::LuaRef& luaTable);
+	void AddToRepeatedField(google::protobuf::Message& messag, const google::protobuf::FieldDescriptor* field, const LuaIntf::LuaRef& luaValue);
+	void AddToMapField(google::protobuf::Message& messag, const google::protobuf::FieldDescriptor* field, const LuaIntf::LuaRef& key, const LuaIntf::LuaRef& val);
+	int GetEnumValue(google::protobuf::Message& messag, const LuaIntf::LuaRef& luaValue, const google::protobuf::FieldDescriptor* field) const;
 
 protected:
     int64_t mnTime;
     std::string strVersionCode;
 	lua_State* m_pLuaState;
+	google::protobuf::compiler::DiskSourceTree mSourceTree;
 	google::protobuf::compiler::Importer* m_pImporter;
 	google::protobuf::DynamicMessageFactory* m_pFactory;
 };
