@@ -1,6 +1,6 @@
 // Protocol Buffers - Google's data interchange format
 // Copyright 2008 Google Inc.  All rights reserved.
-// http://code.google.com/p/protobuf/
+// https://developers.google.com/protocol-buffers/
 //
 // Redistribution and use in source and binary forms, with or without
 // modification, are permitted provided that the following conditions are
@@ -41,6 +41,7 @@
 #include <google/protobuf/io/zero_copy_stream_impl.h>
 
 #include <google/protobuf/stubs/common.h>
+#include <google/protobuf/stubs/logging.h>
 #include <google/protobuf/stubs/strutil.h>
 #include <google/protobuf/stubs/substitute.h>
 #include <google/protobuf/testing/googletest.h>
@@ -198,8 +199,8 @@ struct SimpleTokenCase {
   Tokenizer::TokenType type;
 };
 
-inline ostream& operator<<(ostream& out,
-                           const SimpleTokenCase& test_case) {
+inline std::ostream& operator<<(std::ostream& out,
+                                const SimpleTokenCase& test_case) {
   return out << CEscape(test_case.input);
 }
 
@@ -332,15 +333,15 @@ struct MultiTokenCase {
                                 // needed.
 };
 
-inline ostream& operator<<(ostream& out,
-                           const MultiTokenCase& test_case) {
+inline std::ostream& operator<<(std::ostream& out,
+                                const MultiTokenCase& test_case) {
   return out << CEscape(test_case.input);
 }
 
 MultiTokenCase kMultiTokenCases[] = {
   // Test empty input.
   { "", {
-    { Tokenizer::TYPE_END       , ""     , 0,  0 },
+    { Tokenizer::TYPE_END       , ""     , 0,  0,  0 },
   }},
 
   // Test all token types at the same time.
@@ -409,12 +410,6 @@ MultiTokenCase kMultiTokenCases[] = {
     { Tokenizer::TYPE_IDENTIFIER, "bar", 0, 6, 9 },
     { Tokenizer::TYPE_IDENTIFIER, "baz", 1, 0, 3 },
     { Tokenizer::TYPE_END       , ""   , 1, 3, 3 },
-  }},
-
-  // Bytes with the high-order bit set should not be seen as control characters.
-  { "\300", {
-    { Tokenizer::TYPE_SYMBOL, "\300", 0, 0, 1 },
-    { Tokenizer::TYPE_END   , ""    , 0, 1, 1 },
   }},
 
   // Test all whitespace chars
@@ -525,8 +520,8 @@ struct DocCommentCase {
   const char* next_leading_comments;
 };
 
-inline ostream& operator<<(ostream& out,
-                           const DocCommentCase& test_case) {
+inline std::ostream& operator<<(std::ostream& out,
+                                const DocCommentCase& test_case) {
   return out << CEscape(test_case.input);
 }
 
@@ -698,7 +693,7 @@ TEST_2D(TokenizerTest, DocComments, kDocCommentCases, kBlockSizes) {
   EXPECT_EQ("prev", tokenizer2.current().text);
 
   string prev_trailing_comments;
-  vector<string> detached_comments;
+  std::vector<string> detached_comments;
   string next_leading_comments;
   tokenizer.NextWithComments(&prev_trailing_comments, &detached_comments,
                              &next_leading_comments);
@@ -741,19 +736,13 @@ TEST_F(TokenizerTest, ParseInteger) {
   EXPECT_EQ(0, ParseInteger("0x"));
 
   uint64 i;
-#ifdef PROTOBUF_HASDEATH_TEST  // death tests do not work on Windows yet
+
   // Test invalid integers that will never be tokenized as integers.
-  EXPECT_DEBUG_DEATH(Tokenizer::ParseInteger("zxy", kuint64max, &i),
-    "passed text that could not have been tokenized as an integer");
-  EXPECT_DEBUG_DEATH(Tokenizer::ParseInteger("1.2", kuint64max, &i),
-    "passed text that could not have been tokenized as an integer");
-  EXPECT_DEBUG_DEATH(Tokenizer::ParseInteger("08", kuint64max, &i),
-    "passed text that could not have been tokenized as an integer");
-  EXPECT_DEBUG_DEATH(Tokenizer::ParseInteger("0xg", kuint64max, &i),
-    "passed text that could not have been tokenized as an integer");
-  EXPECT_DEBUG_DEATH(Tokenizer::ParseInteger("-1", kuint64max, &i),
-    "passed text that could not have been tokenized as an integer");
-#endif  // PROTOBUF_HASDEATH_TEST
+  EXPECT_FALSE(Tokenizer::ParseInteger("zxy", kuint64max, &i));
+  EXPECT_FALSE(Tokenizer::ParseInteger("1.2", kuint64max, &i));
+  EXPECT_FALSE(Tokenizer::ParseInteger("08", kuint64max, &i));
+  EXPECT_FALSE(Tokenizer::ParseInteger("0xg", kuint64max, &i));
+  EXPECT_FALSE(Tokenizer::ParseInteger("-1", kuint64max, &i));
 
   // Test overflows.
   EXPECT_TRUE (Tokenizer::ParseInteger("0", 0, &i));
@@ -796,7 +785,7 @@ TEST_F(TokenizerTest, ParseFloat) {
   EXPECT_EQ(     0.0, Tokenizer::ParseFloat("1e-9999999999999999999999999999"));
   EXPECT_EQ(HUGE_VAL, Tokenizer::ParseFloat("1e+9999999999999999999999999999"));
 
-#ifdef PROTOBUF_HASDEATH_TEST  // death tests do not work on Windows yet
+#ifdef PROTOBUF_HAS_DEATH_TEST  // death tests do not work on Windows yet
   // Test invalid integers that will never be tokenized as integers.
   EXPECT_DEBUG_DEATH(Tokenizer::ParseFloat("zxy"),
     "passed text that could not have been tokenized as a float");
@@ -804,7 +793,7 @@ TEST_F(TokenizerTest, ParseFloat) {
     "passed text that could not have been tokenized as a float");
   EXPECT_DEBUG_DEATH(Tokenizer::ParseFloat("-1.0"),
     "passed text that could not have been tokenized as a float");
-#endif  // PROTOBUF_HASDEATH_TEST
+#endif  // PROTOBUF_HAS_DEATH_TEST
 }
 
 TEST_F(TokenizerTest, ParseString) {
@@ -843,10 +832,10 @@ TEST_F(TokenizerTest, ParseString) {
   EXPECT_EQ("u0", output);
 
   // Test invalid strings that will never be tokenized as strings.
-#ifdef PROTOBUF_HASDEATH_TEST  // death tests do not work on Windows yet
+#ifdef PROTOBUF_HAS_DEATH_TEST  // death tests do not work on Windows yet
   EXPECT_DEBUG_DEATH(Tokenizer::ParseString("", &output),
     "passed text that could not have been tokenized as a string");
-#endif  // PROTOBUF_HASDEATH_TEST
+#endif  // PROTOBUF_HAS_DEATH_TEST
 }
 
 TEST_F(TokenizerTest, ParseStringAppend) {
@@ -871,8 +860,7 @@ struct ErrorCase {
   const char* errors;
 };
 
-inline ostream& operator<<(ostream& out,
-                           const ErrorCase& test_case) {
+inline std::ostream& operator<<(std::ostream& out, const ErrorCase& test_case) {
   return out << CEscape(test_case.input);
 }
 
@@ -880,10 +868,12 @@ ErrorCase kErrorCases[] = {
   // String errors.
   { "'\\l' foo", true,
     "0:2: Invalid escape sequence in string literal.\n" },
+  { "'\\X' foo", true,
+    "0:2: Invalid escape sequence in string literal.\n" },
   { "'\\x' foo", true,
     "0:3: Expected hex digits for escape sequence.\n" },
   { "'foo", false,
-    "0:4: String literals cannot cross line boundaries.\n" },
+    "0:4: Unexpected end of string.\n" },
   { "'bar\nfoo", true,
     "0:4: String literals cannot cross line boundaries.\n" },
   { "'\\u01' foo", true,
@@ -951,6 +941,10 @@ ErrorCase kErrorCases[] = {
     "0:0: Invalid control characters encountered in text.\n" },
   { string("\0\0foo", 5), true,
     "0:0: Invalid control characters encountered in text.\n" },
+
+  // Check error from high order bits set
+  { "\300foo", true,
+    "0:0: Interpreting non ascii codepoint 192.\n" },
 };
 
 TEST_2D(TokenizerTest, Errors, kErrorCases, kBlockSizes) {

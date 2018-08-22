@@ -1,6 +1,6 @@
 // Protocol Buffers - Google's data interchange format
 // Copyright 2012 Google Inc.  All rights reserved.
-// http://code.google.com/p/protobuf/
+// https://developers.google.com/protocol-buffers/
 //
 // Redistribution and use in source and binary forms, with or without
 // modification, are permitted provided that the following conditions are
@@ -68,7 +68,7 @@ LIBPROTOBUF_EXPORT extern const int kStringPrintfVectorMaxArgs;
 // You can use this version when all your arguments are strings, but
 // you don't know how many arguments you'll have at compile time.
 // StringPrintfVector will LOG(FATAL) if v.size() > kStringPrintfVectorMaxArgs
-LIBPROTOBUF_EXPORT extern string StringPrintfVector(const char* format, const vector<string>& v);
+LIBPROTOBUF_EXPORT extern string StringPrintfVector(const char* format, const std::vector<string>& v);
 
 }  // namespace protobuf
 }  // namespace google

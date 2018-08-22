@@ -4,8 +4,8 @@ using System.Text;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
-using ProtoBuf;
 using UnityEngine;
+using Google.Protobuf;
 
 namespace NFSDK
 {
@@ -72,10 +72,10 @@ namespace NFSDK
         {
             NFMsg.MsgBase xData = new NFMsg.MsgBase();
 			xData.player_id = mHelpModule.NFToPB(mOwnerID);
-            xData.msg_data = stream.ToArray();
+            xData.msg_data = ByteString.AttachBytes(stream.ToArray());
             
             MemoryStream body = new MemoryStream();
-            Serializer.Serialize<NFMsg.MsgBase>(body, xData);
+            xData.WriteTo(body);
 
             MemoryStream pack = new MemoryStream();
             BinaryWriter writer = new BinaryWriter(pack);

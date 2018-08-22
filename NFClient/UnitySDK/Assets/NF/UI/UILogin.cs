@@ -23,7 +23,7 @@ public class UILogin : UIDialog
 
         mLogin.onClick.AddListener(onLoginClick);
 
-        mNetModule.ConnectServer("104.160.35.67", 14001);
+        mNetModule.ConnectServer("127.0.0.1", 14001);
 
 		mEventModule.RegisterCallback((int)NFUIModule.Event.LoginSuccess, OnLoginSuccess);
 	}

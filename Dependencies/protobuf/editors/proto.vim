@@ -1,6 +1,6 @@
 " Protocol Buffers - Google's data interchange format
 " Copyright 2008 Google Inc.  All rights reserved.
-" http://code.google.com/p/protobuf/
+" https://developers.google.com/protocol-buffers/
 "
 " Redistribution and use in source and binary forms, with or without
 " modification, are permitted provided that the following conditions are
@@ -54,10 +54,10 @@ syn keyword pbTodo       contained TODO FIXME XXX
 syn cluster pbCommentGrp contains=pbTodo
 
 syn keyword pbSyntax     syntax import option
-syn keyword pbStructure  package message group
+syn keyword pbStructure  package message group oneof
 syn keyword pbRepeat     optional required repeated
 syn keyword pbDefault    default
-syn keyword pbExtend     extend extensions to max
+syn keyword pbExtend     extend extensions to max reserved
 syn keyword pbRPC        service rpc returns
 
 syn keyword pbType      int32 int64 uint32 uint64 sint32 sint64

@@ -1,6 +1,6 @@
 // Protocol Buffers - Google's data interchange format
 // Copyright 2008 Google Inc.  All rights reserved.
-// http://code.google.com/p/protobuf/
+// https://developers.google.com/protocol-buffers/
 //
 // Redistribution and use in source and binary forms, with or without
 // modification, are permitted provided that the following conditions are
@@ -74,12 +74,12 @@
 //
 // To call a remote MyServiceImpl, first you need an RpcChannel connected to it.
 // How to construct a channel depends, again, on your RPC implementation.
-// Here we use a hypothentical "MyRpcChannel" as an example:
+// Here we use a hypothetical "MyRpcChannel" as an example:
 //   MyRpcChannel channel("rpc:hostname:1234/myservice");
 //   MyRpcController controller;
 //   MyServiceImpl::Stub stub(&channel);
 //   FooRequest request;
-//   FooRespnose response;
+//   FooResponse response;
 //
 //   // ... fill in request ...
 //
@@ -102,6 +102,7 @@
 
 #include <string>
 #include <google/protobuf/stubs/common.h>
+#include <google/protobuf/stubs/callback.h>
 
 namespace google {
 namespace protobuf {

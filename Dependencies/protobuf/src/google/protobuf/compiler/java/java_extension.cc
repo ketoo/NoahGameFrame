@@ -1,6 +1,6 @@
 // Protocol Buffers - Google's data interchange format
 // Copyright 2008 Google Inc.  All rights reserved.
-// http://code.google.com/p/protobuf/
+// https://developers.google.com/protocol-buffers/
 //
 // Redistribution and use in source and binary forms, with or without
 // modification, are permitted provided that the following conditions are
@@ -33,75 +33,49 @@
 //  Sanjay Ghemawat, Jeff Dean, and others.
 
 #include <google/protobuf/compiler/java/java_extension.h>
+
+#include <google/protobuf/compiler/java/java_context.h>
 #include <google/protobuf/compiler/java/java_doc_comment.h>
 #include <google/protobuf/compiler/java/java_helpers.h>
-#include <google/protobuf/stubs/strutil.h>
+#include <google/protobuf/compiler/java/java_name_resolver.h>
 #include <google/protobuf/io/printer.h>
+#include <google/protobuf/stubs/strutil.h>
 
 namespace google {
 namespace protobuf {
 namespace compiler {
 namespace java {
 
-namespace {
-
-const char* TypeName(FieldDescriptor::Type field_type) {
-  switch (field_type) {
-    case FieldDescriptor::TYPE_INT32   : return "INT32";
-    case FieldDescriptor::TYPE_UINT32  : return "UINT32";
-    case FieldDescriptor::TYPE_SINT32  : return "SINT32";
-    case FieldDescriptor::TYPE_FIXED32 : return "FIXED32";
-    case FieldDescriptor::TYPE_SFIXED32: return "SFIXED32";
-    case FieldDescriptor::TYPE_INT64   : return "INT64";
-    case FieldDescriptor::TYPE_UINT64  : return "UINT64";
-    case FieldDescriptor::TYPE_SINT64  : return "SINT64";
-    case FieldDescriptor::TYPE_FIXED64 : return "FIXED64";
-    case FieldDescriptor::TYPE_SFIXED64: return "SFIXED64";
-    case FieldDescriptor::TYPE_FLOAT   : return "FLOAT";
-    case FieldDescriptor::TYPE_DOUBLE  : return "DOUBLE";
-    case FieldDescriptor::TYPE_BOOL    : return "BOOL";
-    case FieldDescriptor::TYPE_STRING  : return "STRING";
-    case FieldDescriptor::TYPE_BYTES   : return "BYTES";
-    case FieldDescriptor::TYPE_ENUM    : return "ENUM";
-    case FieldDescriptor::TYPE_GROUP   : return "GROUP";
-    case FieldDescriptor::TYPE_MESSAGE : return "MESSAGE";
-
-    // No default because we want the compiler to complain if any new
-    // types are added.
-  }
-
-  GOOGLE_LOG(FATAL) << "Can't get here.";
-  return NULL;
-}
-
-}
-
-ExtensionGenerator::ExtensionGenerator(const FieldDescriptor* descriptor)
-  : descriptor_(descriptor) {
+ImmutableExtensionGenerator::ImmutableExtensionGenerator(
+    const FieldDescriptor* descriptor, Context* context)
+  : descriptor_(descriptor), context_(context),
+    name_resolver_(context->GetNameResolver()) {
   if (descriptor_->extension_scope() != NULL) {
-    scope_ = ClassName(descriptor_->extension_scope());
+    scope_ = name_resolver_->GetImmutableClassName(
+        descriptor_->extension_scope());
   } else {
-    scope_ = ClassName(descriptor_->file());
+    scope_ = name_resolver_->GetImmutableClassName(descriptor_->file());
   }
 }
 
-ExtensionGenerator::~ExtensionGenerator() {}
+ImmutableExtensionGenerator::~ImmutableExtensionGenerator() {}
 
 // Initializes the vars referenced in the generated code templates.
-void InitTemplateVars(const FieldDescriptor* descriptor,
-                      const string& scope,
-                      map<string, string>* vars_pointer) {
-  map<string, string> &vars = *vars_pointer;
+void ExtensionGenerator::InitTemplateVars(
+    const FieldDescriptor* descriptor, const string& scope, bool immutable,
+    ClassNameResolver* name_resolver, std::map<string, string>* vars_pointer) {
+  std::map<string, string> &vars = *vars_pointer;
   vars["scope"] = scope;
   vars["name"] = UnderscoresToCamelCase(descriptor);
-  vars["containing_type"] = ClassName(descriptor->containing_type());
+  vars["containing_type"] =
+      name_resolver->GetClassName(descriptor->containing_type(), immutable);
   vars["number"] = SimpleItoa(descriptor->number());
   vars["constant_name"] = FieldConstantName(descriptor);
   vars["index"] = SimpleItoa(descriptor->index());
-  vars["default"] =
-      descriptor->is_repeated() ? "" : DefaultValue(descriptor);
-  vars["type_constant"] = TypeName(GetType(descriptor));
-  vars["packed"] = descriptor->options().packed() ? "true" : "false";
+  vars["default"] = descriptor->is_repeated() ?
+      "" : DefaultValue(descriptor, immutable, name_resolver);
+  vars["type_constant"] = FieldTypeName(GetType(descriptor));
+  vars["packed"] = descriptor->is_packed() ? "true" : "false";
   vars["enum_map"] = "null";
   vars["prototype"] = "null";
 
@@ -109,12 +83,20 @@ void InitTemplateVars(const FieldDescriptor* descriptor,
   string singular_type;
   switch (java_type) {
     case JAVATYPE_MESSAGE:
-      singular_type = ClassName(descriptor->message_type());
+      singular_type = name_resolver->GetClassName(descriptor->message_type(),
+                                                   immutable);
       vars["prototype"] = singular_type + ".getDefaultInstance()";
       break;
     case JAVATYPE_ENUM:
-      singular_type = ClassName(descriptor->enum_type());
+      singular_type = name_resolver->GetClassName(descriptor->enum_type(),
+                                                   immutable);
       vars["enum_map"] = singular_type + ".internalGetValueMap()";
+      break;
+    case JAVATYPE_STRING:
+      singular_type = "java.lang.String";
+      break;
+    case JAVATYPE_BYTES:
+      singular_type = immutable ? "com.google.protobuf.ByteString" : "byte[]";
       break;
     default:
       singular_type = BoxedPrimitiveTypeName(java_type);
@@ -125,91 +107,64 @@ void InitTemplateVars(const FieldDescriptor* descriptor,
   vars["singular_type"] = singular_type;
 }
 
-void ExtensionGenerator::Generate(io::Printer* printer) {
-  map<string, string> vars;
-  InitTemplateVars(descriptor_, scope_, &vars);
+void ImmutableExtensionGenerator::Generate(io::Printer* printer) {
+  std::map<string, string> vars;
+  const bool kUseImmutableNames = true;
+  InitTemplateVars(descriptor_, scope_, kUseImmutableNames, name_resolver_,
+                   &vars);
   printer->Print(vars,
       "public static final int $constant_name$ = $number$;\n");
 
   WriteFieldDocComment(printer, descriptor_);
-  if (HasDescriptorMethods(descriptor_->file())) {
-    // Non-lite extensions
-    if (descriptor_->extension_scope() == NULL) {
-      // Non-nested
-      printer->Print(
-          vars,
-          "public static final\n"
-          "  com.google.protobuf.GeneratedMessage.GeneratedExtension<\n"
-          "    $containing_type$,\n"
-          "    $type$> $name$ = com.google.protobuf.GeneratedMessage\n"
-          "        .newFileScopedGeneratedExtension(\n"
-          "      $singular_type$.class,\n"
-          "      $prototype$);\n");
-    } else {
-      // Nested
-      printer->Print(
-          vars,
-          "public static final\n"
-          "  com.google.protobuf.GeneratedMessage.GeneratedExtension<\n"
-          "    $containing_type$,\n"
-          "    $type$> $name$ = com.google.protobuf.GeneratedMessage\n"
-          "        .newMessageScopedGeneratedExtension(\n"
-          "      $scope$.getDefaultInstance(),\n"
-          "      $index$,\n"
-          "      $singular_type$.class,\n"
-          "      $prototype$);\n");
-    }
+  if (descriptor_->extension_scope() == NULL) {
+    // Non-nested
+    printer->Print(
+        vars,
+        "public static final\n"
+        "  com.google.protobuf.GeneratedMessage.GeneratedExtension<\n"
+        "    $containing_type$,\n"
+        "    $type$> $name$ = com.google.protobuf.GeneratedMessage\n"
+        "        .newFileScopedGeneratedExtension(\n"
+        "      $singular_type$.class,\n"
+        "      $prototype$);\n");
   } else {
-    // Lite extensions
-    if (descriptor_->is_repeated()) {
-      printer->Print(
-          vars,
-          "public static final\n"
-          "  com.google.protobuf.GeneratedMessageLite.GeneratedExtension<\n"
-          "    $containing_type$,\n"
-          "    $type$> $name$ = com.google.protobuf.GeneratedMessageLite\n"
-          "        .newRepeatedGeneratedExtension(\n"
-          "      $containing_type$.getDefaultInstance(),\n"
-          "      $prototype$,\n"
-          "      $enum_map$,\n"
-          "      $number$,\n"
-          "      com.google.protobuf.WireFormat.FieldType.$type_constant$,\n"
-          "      $packed$);\n");
-    } else {
-      printer->Print(
-          vars,
-          "public static final\n"
-          "  com.google.protobuf.GeneratedMessageLite.GeneratedExtension<\n"
-          "    $containing_type$,\n"
-          "    $type$> $name$ = com.google.protobuf.GeneratedMessageLite\n"
-          "        .newSingularGeneratedExtension(\n"
-          "      $containing_type$.getDefaultInstance(),\n"
-          "      $default$,\n"
-          "      $prototype$,\n"
-          "      $enum_map$,\n"
-          "      $number$,\n"
-          "      com.google.protobuf.WireFormat.FieldType.$type_constant$);\n");
-    }
+    // Nested
+    printer->Print(
+        vars,
+        "public static final\n"
+        "  com.google.protobuf.GeneratedMessage.GeneratedExtension<\n"
+        "    $containing_type$,\n"
+        "    $type$> $name$ = com.google.protobuf.GeneratedMessage\n"
+        "        .newMessageScopedGeneratedExtension(\n"
+        "      $scope$.getDefaultInstance(),\n"
+        "      $index$,\n"
+        "      $singular_type$.class,\n"
+        "      $prototype$);\n");
   }
+  printer->Annotate("name", descriptor_);
 }
 
-void ExtensionGenerator::GenerateNonNestedInitializationCode(
+int ImmutableExtensionGenerator::GenerateNonNestedInitializationCode(
     io::Printer* printer) {
-  if (descriptor_->extension_scope() == NULL &&
-      HasDescriptorMethods(descriptor_->file())) {
-    // Only applies to non-nested, non-lite extensions.
+  int bytecode_estimate = 0;
+  if (descriptor_->extension_scope() == NULL) {
+    // Only applies to non-nested extensions.
     printer->Print(
         "$name$.internalInit(descriptor.getExtensions().get($index$));\n",
         "name", UnderscoresToCamelCase(descriptor_),
         "index", SimpleItoa(descriptor_->index()));
+    bytecode_estimate += 21;
   }
+  return bytecode_estimate;
 }
 
-void ExtensionGenerator::GenerateRegistrationCode(io::Printer* printer) {
+int ImmutableExtensionGenerator::GenerateRegistrationCode(
+    io::Printer* printer) {
   printer->Print(
     "registry.add($scope$.$name$);\n",
     "scope", scope_,
     "name", UnderscoresToCamelCase(descriptor_));
+  return 7;
 }
 
 }  // namespace java

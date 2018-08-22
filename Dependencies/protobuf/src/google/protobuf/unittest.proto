@@ -1,6 +1,6 @@
 // Protocol Buffers - Google's data interchange format
 // Copyright 2008 Google Inc.  All rights reserved.
-// http://code.google.com/p/protobuf/
+// https://developers.google.com/protocol-buffers/
 //
 // Redistribution and use in source and binary forms, with or without
 // modification, are permitted provided that the following conditions are
@@ -33,13 +33,17 @@
 //  Sanjay Ghemawat, Jeff Dean, and others.
 //
 // A proto file we will use for unit testing.
+//
+// LINT: ALLOW_GROUPS, LEGACY_NAMES
 
+syntax = "proto2";
 
 // Some generic_services option(s) added automatically.
 // See:  http://go/proto2-generic-services-default
 option cc_generic_services = true;     // auto-added
 option java_generic_services = true;   // auto-added
 option py_generic_services = true;     // auto-added
+option cc_enable_arenas = true;
 
 import "google/protobuf/unittest_import.proto";
 
@@ -69,6 +73,7 @@ message TestAllTypes {
     FOO = 1;
     BAR = 2;
     BAZ = 3;
+    NEG = -1;  // Intentionally negative.
   }
 
   // Singular
@@ -167,22 +172,50 @@ message TestAllTypes {
 
   optional string default_string_piece = 84 [ctype=STRING_PIECE,default="abc"];
   optional string default_cord = 85 [ctype=CORD,default="123"];
+
+  // For oneof test
+  oneof oneof_field {
+    uint32 oneof_uint32 = 111;
+    NestedMessage oneof_nested_message = 112;
+    string oneof_string = 113;
+    bytes oneof_bytes = 114;
+  }
+}
+
+// This proto includes a recusively nested message.
+message NestedTestAllTypes {
+  optional NestedTestAllTypes child = 1;
+  optional TestAllTypes payload = 2;
+  repeated NestedTestAllTypes repeated_child = 3;
 }
 
 message TestDeprecatedFields {
   optional int32 deprecated_int32 = 1 [deprecated=true];
+  oneof oneof_fields {
+    int32 deprecated_int32_in_oneof = 2 [deprecated=true];
+  }
+}
+
+message TestDeprecatedMessage {
+  option deprecated = true;
 }
 
 // Define these after TestAllTypes to make sure the compiler can handle
 // that.
 message ForeignMessage {
   optional int32 c = 1;
+  optional int32 d = 2;
 }
 
 enum ForeignEnum {
   FOREIGN_FOO = 4;
   FOREIGN_BAR = 5;
   FOREIGN_BAZ = 6;
+}
+
+message TestReservedFields {
+  reserved 2, 15, 9 to 11;
+  reserved "bar", "baz";
 }
 
 message TestAllExtensions {
@@ -294,6 +327,23 @@ extend TestAllExtensions {
   optional string default_string_piece_extension = 84 [ctype=STRING_PIECE,
                                                        default="abc"];
   optional string default_cord_extension = 85 [ctype=CORD, default="123"];
+
+  // For oneof test
+  optional uint32 oneof_uint32_extension = 111;
+  optional TestAllTypes.NestedMessage oneof_nested_message_extension = 112;
+  optional string oneof_string_extension = 113;
+  optional bytes oneof_bytes_extension = 114;
+}
+
+message TestGroup {
+  optional group OptionalGroup = 16 {
+    optional int32 a = 17;
+  }
+  optional ForeignEnum optional_foreign_enum = 22;
+}
+
+message TestGroupExtension {
+  extensions 1 to max;
 }
 
 message TestNestedExtension {
@@ -301,6 +351,16 @@ message TestNestedExtension {
     // Check for bug where string extensions declared in tested scope did not
     // compile.
     optional string test = 1002 [default="test"];
+    // Used to test if generated extension name is correct when there are
+    // underscores.
+    optional string nested_string_extension = 1003;
+  }
+
+  extend TestGroupExtension {
+    optional group OptionalGroup_extension = 16 {
+      optional int32 a = 17;
+    }
+    optional ForeignEnum optional_foreign_enum_extension = 22;
   }
 }
 
@@ -360,6 +420,12 @@ message TestRequiredForeign {
   optional int32 dummy = 3;
 }
 
+message TestRequiredMessage {
+  optional TestRequired optional_message = 1;
+  repeated TestRequired repeated_message = 2;
+  required TestRequired required_message = 3;
+}
+
 // Test that we can use NestedMessage from outside TestAllTypes.
 message TestForeignNested {
   optional TestAllTypes.NestedMessage foreign_nested = 1;
@@ -396,7 +462,14 @@ message TestRecursiveMessage {
 
 // Test that mutual recursion works.
 message TestMutualRecursionA {
+  message SubMessage {
+    optional TestMutualRecursionB b = 1;
+  }
   optional TestMutualRecursionB bb = 1;
+  optional group SubGroup = 2 {
+    optional SubMessage sub_message = 3;  // Needed because of bug in javatest
+    optional TestAllTypes not_in_this_scc = 4;
+  }
 }
 
 message TestMutualRecursionB {
@@ -404,8 +477,17 @@ message TestMutualRecursionB {
   optional int32 optional_int32 = 2;
 }
 
+message TestIsInitialized {
+  message SubMessage {
+    optional group SubGroup = 1 {
+      required int32 i = 2;
+    }
+  }
+  optional SubMessage sub_message = 1;
+}
+
 // Test that groups have disjoint field numbers from their siblings and
-// parents.  This is NOT possible in proto1; only proto2.  When attempting
+// parents.  This is NOT possible in proto1; only google.protobuf.  When attempting
 // to compile with proto1, this will emit an error; so we only include it
 // in protobuf_unittest_proto.
 message TestDupFieldNumber {                        // NO_PROTO1
@@ -435,6 +517,7 @@ message TestNestedMessageHasBits {
 // Test an enum that has multiple values with the same number.
 enum TestEnumWithDupValue {
   option allow_alias = true;
+
   FOO1 = 1;
   BAR1 = 2;
   BAZ = 3;
@@ -480,14 +563,41 @@ message TestFieldOrderings {
   optional int64 my_int = 1;
   extensions 12 to 100;
   optional float my_float = 101;
-}
+  message NestedMessage {
+    optional int64 oo = 2;
+    // The field name "b" fails to compile in proto1 because it conflicts with
+    // a local variable named "b" in one of the generated methods.  Doh.
+    // This file needs to compile in proto1 to test backwards-compatibility.
+    optional int32 bb = 1;
+  }
 
+  optional NestedMessage optional_nested_message  = 200;
+}
 
 extend TestFieldOrderings {
   optional string my_extension_string = 50;
   optional int32 my_extension_int = 5;
 }
 
+message TestExtensionOrderings1 {
+  extend TestFieldOrderings {
+    optional TestExtensionOrderings1 test_ext_orderings1 = 13;
+  }
+  optional string my_string = 1;
+}
+
+message TestExtensionOrderings2 {
+  extend TestFieldOrderings {
+    optional TestExtensionOrderings2 test_ext_orderings2 = 12;
+  }
+  message TestExtensionOrderings3 {
+    extend TestFieldOrderings {
+      optional TestExtensionOrderings3 test_ext_orderings3 = 14;
+    }
+    optional string my_string = 1;
+  }
+  optional string my_string = 1;
+}
 
 message TestExtremeDefaultValues {
   optional bytes escaped_bytes = 1 [default = "\0\001\a\b\f\n\r\t\v\\\'\"\xfe"];
@@ -535,6 +645,7 @@ message TestExtremeDefaultValues {
                                                default="ab\000c"];
   optional string cord_with_zero         = 26 [ctype=CORD,
                                                default="12\0003"];
+  optional string replacement_string     = 27 [default="${unknown}"];
 }
 
 message SparseEnumMessage {
@@ -556,6 +667,101 @@ message OneBytes {
 
 message MoreBytes {
   repeated bytes data = 1;
+}
+
+// Test int32, uint32, int64, uint64, and bool are all compatible
+message Int32Message {
+  optional int32 data = 1;
+}
+
+message Uint32Message {
+  optional uint32 data = 1;
+}
+
+message Int64Message {
+  optional int64 data = 1;
+}
+
+message Uint64Message {
+  optional uint64 data = 1;
+}
+
+message BoolMessage {
+  optional bool data = 1;
+}
+
+// Test oneofs.
+message TestOneof {
+  oneof foo {
+    int32 foo_int = 1;
+    string foo_string = 2;
+    TestAllTypes foo_message = 3;
+    group FooGroup = 4 {
+      optional int32 a = 5;
+      optional string b = 6;
+    }
+  }
+}
+
+message TestOneofBackwardsCompatible {
+  optional int32 foo_int = 1;
+  optional string foo_string = 2;
+  optional TestAllTypes foo_message = 3;
+  optional group FooGroup = 4 {
+    optional int32 a = 5;
+    optional string b = 6;
+  }
+}
+
+message TestOneof2 {
+  oneof foo {
+    int32 foo_int = 1;
+    string foo_string = 2;
+    string foo_cord = 3 [ctype=CORD];
+    string foo_string_piece = 4 [ctype=STRING_PIECE];
+    bytes foo_bytes = 5;
+    NestedEnum foo_enum = 6;
+    NestedMessage foo_message = 7;
+    group FooGroup = 8 {
+      optional int32 a = 9;
+      optional string b = 10;
+    }
+    NestedMessage foo_lazy_message = 11 [lazy=true];
+  }
+
+  oneof bar {
+    int32 bar_int = 12 [default = 5];
+    string bar_string = 13 [default = "STRING"];
+    string bar_cord = 14 [ctype=CORD, default = "CORD"];
+    string bar_string_piece = 15 [ctype=STRING_PIECE, default = "SPIECE"];
+    bytes bar_bytes = 16 [default = "BYTES"];
+    NestedEnum bar_enum = 17 [default = BAR];
+  }
+
+  optional int32 baz_int = 18;
+  optional string baz_string = 19 [default = "BAZ"];
+
+  message NestedMessage {
+    optional int64 qux_int = 1;
+    repeated int32 corge_int = 2;
+  }
+
+  enum NestedEnum {
+    FOO = 1;
+    BAR = 2;
+    BAZ = 3;
+  }
+}
+
+message TestRequiredOneof {
+  oneof foo {
+    int32 foo_int = 1;
+    string foo_string = 2;
+    NestedMessage foo_message = 3;
+  }
+  message NestedMessage {
+    required double required_double = 1;
+  }
 }
 
 
@@ -616,6 +822,27 @@ extend TestPackedExtensions {
   repeated   double packed_double_extension   = 101 [packed = true];
   repeated     bool packed_bool_extension     = 102 [packed = true];
   repeated ForeignEnum packed_enum_extension  = 103 [packed = true];
+}
+
+message TestUnpackedExtensions {
+  extensions 1 to max;
+}
+
+extend TestUnpackedExtensions {
+  repeated    int32 unpacked_int32_extension    =  90 [packed = false];
+  repeated    int64 unpacked_int64_extension    =  91 [packed = false];
+  repeated   uint32 unpacked_uint32_extension   =  92 [packed = false];
+  repeated   uint64 unpacked_uint64_extension   =  93 [packed = false];
+  repeated   sint32 unpacked_sint32_extension   =  94 [packed = false];
+  repeated   sint64 unpacked_sint64_extension   =  95 [packed = false];
+  repeated  fixed32 unpacked_fixed32_extension  =  96 [packed = false];
+  repeated  fixed64 unpacked_fixed64_extension  =  97 [packed = false];
+  repeated sfixed32 unpacked_sfixed32_extension =  98 [packed = false];
+  repeated sfixed64 unpacked_sfixed64_extension =  99 [packed = false];
+  repeated    float unpacked_float_extension    = 100 [packed = false];
+  repeated   double unpacked_double_extension   = 101 [packed = false];
+  repeated     bool unpacked_bool_extension     = 102 [packed = false];
+  repeated ForeignEnum unpacked_enum_extension  = 103 [packed = false];
 }
 
 // Used by ExtensionSetTest/DynamicExtensions.  The test actually builds
@@ -717,3 +944,61 @@ service TestService {
 
 message BarRequest  {}
 message BarResponse {}
+
+message TestJsonName {
+  optional int32 field_name1 = 1;
+  optional int32 fieldName2 = 2;
+  optional int32 FieldName3 = 3;
+  optional int32 _field_name4 = 4;
+  optional int32 FIELD_NAME5 = 5;
+  optional int32 field_name6 = 6 [json_name = "@type"];
+}
+
+message TestHugeFieldNumbers {
+  optional int32 optional_int32 = 536870000;
+  optional int32 fixed_32 = 536870001;
+  repeated int32 repeated_int32 = 536870002 [packed = false];
+  repeated int32 packed_int32 = 536870003 [packed = true];
+
+  optional ForeignEnum optional_enum = 536870004;
+  optional string optional_string = 536870005;
+  optional bytes optional_bytes = 536870006;
+  optional ForeignMessage optional_message = 536870007;
+
+  optional group OptionalGroup = 536870008 {
+    optional int32 group_a = 536870009;
+  }
+
+  map<string, string> string_string_map = 536870010;
+
+  oneof oneof_field {
+    uint32 oneof_uint32 = 536870011;
+    TestAllTypes oneof_test_all_types = 536870012;
+    string oneof_string = 536870013;
+    bytes oneof_bytes = 536870014;
+  }
+
+  extensions  536860000 to 536869999;
+}
+
+extend TestHugeFieldNumbers {
+  optional TestAllTypes test_all_types = 536860000;
+}
+
+message TestExtensionInsideTable {
+  optional int32 field1 = 1;
+  optional int32 field2 = 2;
+  optional int32 field3 = 3;
+  optional int32 field4 = 4;
+  extensions 5 to 5;
+  optional int32 field6 = 6;
+  optional int32 field7 = 7;
+  optional int32 field8 = 8;
+  optional int32 field9 = 9;
+  optional int32 field10 = 10;
+}
+
+extend TestExtensionInsideTable {
+  optional int32 test_extension_inside_table_extension = 5;
+}
+

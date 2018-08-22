@@ -1,7 +1,38 @@
-// Copyright 2005-2008 Google Inc. All Rights Reserved.
+// Protocol Buffers - Google's data interchange format
+// Copyright 2008 Google Inc.  All rights reserved.
+// https://developers.google.com/protocol-buffers/
+//
+// Redistribution and use in source and binary forms, with or without
+// modification, are permitted provided that the following conditions are
+// met:
+//
+//     * Redistributions of source code must retain the above copyright
+// notice, this list of conditions and the following disclaimer.
+//     * Redistributions in binary form must reproduce the above
+// copyright notice, this list of conditions and the following disclaimer
+// in the documentation and/or other materials provided with the
+// distribution.
+//     * Neither the name of Google Inc. nor the names of its
+// contributors may be used to endorse or promote products derived from
+// this software without specific prior written permission.
+//
+// THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+// "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+// LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
+// A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
+// OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+// SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+// LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+// DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
+// THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+// (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+// OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+
 // Author: jrm@google.com (Jim Meehan)
 
 #include <google/protobuf/stubs/common.h>
+
+#include <google/protobuf/stubs/stringpiece.h>
 
 namespace google {
 namespace protobuf {
@@ -529,6 +560,56 @@ bool IsStructurallyValidUTF8(const char* buf, int len) {
   UTF8GenericScanFastAscii(&utf8acceptnonsurrogates_obj,
                            buf, len, &bytes_consumed);
   return (bytes_consumed == len);
+}
+
+int UTF8SpnStructurallyValid(const StringPiece& str) {
+  if (!module_initialized_) return str.size();
+
+  int bytes_consumed = 0;
+  UTF8GenericScanFastAscii(&utf8acceptnonsurrogates_obj,
+                           str.data(), str.size(), &bytes_consumed);
+  return bytes_consumed;
+}
+
+// Coerce UTF-8 byte string in src_str to be
+// a structurally-valid equal-length string by selectively
+// overwriting illegal bytes with replace_char (typically blank).
+// replace_char must be legal printable 7-bit Ascii 0x20..0x7e.
+// src_str is read-only. If any overwriting is needed, a modified byte string
+// is created in idst, length isrclen.
+//
+// Returns pointer to output buffer, isrc if no changes were made,
+//  or idst if some bytes were changed.
+//
+// Fast case: all is structurally valid and no byte copying is done.
+//
+char* UTF8CoerceToStructurallyValid(const StringPiece& src_str,
+                                    char* idst,
+                                    const char replace_char) {
+  const char* isrc = src_str.data();
+  const int len = src_str.length();
+  int n = UTF8SpnStructurallyValid(src_str);
+  if (n == len) {               // Normal case -- all is cool, return
+    return const_cast<char*>(isrc);
+  } else {                      // Unusual case -- copy w/o bad bytes
+    const char* src = isrc;
+    const char* srclimit = isrc + len;
+    char* dst = idst;
+    memmove(dst, src, n);       // Copy initial good chunk
+    src += n;
+    dst += n;
+    while (src < srclimit) {    // src points to bogus byte or is off the end
+      dst[0] = replace_char;                    // replace one bad byte
+      src++;
+      dst++;
+      StringPiece str2(src, srclimit - src);
+      n = UTF8SpnStructurallyValid(str2);       // scan the remainder
+      memmove(dst, src, n);                     // copy next good chunk
+      src += n;
+      dst += n;
+    }
+  }
+  return idst;
 }
 
 }  // namespace internal
