@@ -43,12 +43,17 @@ NFCElementModule::~NFCElementModule()
 
 }
 
-bool NFCElementModule::Init()
+bool NFCElementModule::Awake()
 {
-    m_pClassModule = pPluginManager->FindModule<NFIClassModule>();
+	m_pClassModule = pPluginManager->FindModule<NFIClassModule>();
 	
 	Load();
+	
+	return true;
+}
 
+bool NFCElementModule::Init()
+{
     return true;
 }
 
