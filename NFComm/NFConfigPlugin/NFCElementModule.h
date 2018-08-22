@@ -84,6 +84,7 @@ public:
     NFCElementModule(NFIPluginManager* p);
     virtual ~NFCElementModule();
 
+	
 	virtual bool Awake();
     virtual bool Init();
     virtual bool Shut();
