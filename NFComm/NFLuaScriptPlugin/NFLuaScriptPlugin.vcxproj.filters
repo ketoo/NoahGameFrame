@@ -4,9 +4,11 @@
     <ClCompile Include="dllmain.cpp" />
     <ClCompile Include="NFCLuaScriptModule.cpp" />
     <ClCompile Include="NFLuaScriptPlugin.cpp" />
+    <ClCompile Include="NFCLuaPBModule.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="NFCLuaScriptModule.h" />
     <ClInclude Include="NFLuaScriptPlugin.h" />
+    <ClInclude Include="NFCLuaPBModule.h" />
   </ItemGroup>
 </Project>

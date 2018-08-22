@@ -25,6 +25,7 @@
 
 
 #include <assert.h>
+#include "NFCLuaPBModule.h"
 #include "NFCLuaScriptModule.h"
 #include "NFLuaScriptPlugin.h"
 #include "NFComm/NFPluginModule/NFIKernelModule.h"
@@ -694,18 +695,20 @@ void NFCLuaScriptModule::AddReceiveCallBack(const int nMsgID, const std::string&
 
 void NFCLuaScriptModule::ImportProtoFile(const std::string& strFile)
 {
-    const google::protobuf::FileDescriptor* pDesc = mImporter.Import(strFile);
-    if (pDesc) return;
+	NFCLuaPBModule* p = (NFCLuaPBModule*)m_pLuaPBModule;
+	p->ImportProtoFile(strFile);
 }
 
-const std::string& NFCLuaScriptModule::Encode(const std::string& strMsgTypeName, const LuaRef& luaTable)
+const std::string& NFCLuaScriptModule::Encode(const std::string& strMsgTypeName, const LuaIntf::LuaRef& luaTable)
 {
-    return m_pLuaPBModule->Encode(strMsgTypeName, luaTable);
+	NFCLuaPBModule* p = (NFCLuaPBModule*)m_pLuaPBModule;
+	return p->Encode(strMsgTypeName, luaTable);
 }
 
-LuaRef NFCLuaScriptModule::Decode(const std::string& strMsgTypeName, const std::string& strData)
+LuaIntf::LuaRef NFCLuaScriptModule::Decode(const std::string& strMsgTypeName, const std::string& strData)
 {
-    return m_pLuaPBModule->Decode(strMsgTypeName, strData);
+	NFCLuaPBModule* p = (NFCLuaPBModule*)m_pLuaPBModule;
+	return p->Decode(strMsgTypeName, strData);
 }
 
 void NFCLuaScriptModule::SendByServerFD(const NFSOCK nFD, const uint16_t nMsgID, const std::string& strData)
