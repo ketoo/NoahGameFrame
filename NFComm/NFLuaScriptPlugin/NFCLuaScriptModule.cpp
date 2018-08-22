@@ -51,7 +51,7 @@ bool NFCLuaScriptModule::Awake()
     m_pLuaPBModule = pPluginManager->FindModule<NFILuaPBModule>();
 
 	NFCLuaPBModule* p = (NFCLuaPBModule*)(m_pLuaPBModule);
-	p->SetLuaState(mLuaContext.state);
+	p->SetLuaState(mLuaContext.state());
 
     Register();
 
