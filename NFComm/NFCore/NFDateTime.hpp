@@ -571,7 +571,7 @@ public:
 	//yyyy-MM-dd hh:mm:ss
 	inline std::string ToString()
 	{
-		return ToLongDateString() + " - " + ToLongTimeString();
+		return ToLongDateString() + " " + ToLongTimeString();
 	}
 
 	inline NFDateTime operator +(const NFTimeSpan &t) const
