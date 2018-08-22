@@ -211,9 +211,6 @@ bool NFCNetModule::SendMsgPBToAllClient(const uint16_t nMsgID, const google::pro
         return false;
     }
 
-    NFMsg::Ident* pPlayerID = xMsg.mutable_player_id();
-    *pPlayerID = NFToPB(NFGUID());
-
     std::string strMsg;
     if (!xMsg.SerializeToString(&strMsg))
     {
