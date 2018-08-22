@@ -25,6 +25,7 @@
 
 
 #include <assert.h>
+#include <unordered_map>
 #include "NFCLuaPBModule.h"
 #include "NFLuaScriptPlugin.h"
 #include "NFComm/NFPluginModule/NFIKernelModule.h"
@@ -32,22 +33,12 @@
 bool NFCLuaPBModule::Awake()
 {
 	mnTime = pPluginManager->GetNowTime();
-
-	m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>();
-	m_pClassModule = pPluginManager->FindModule<NFIClassModule>();
-	m_pElementModule = pPluginManager->FindModule<NFIElementModule>();
-	m_pEventModule = pPluginManager->FindModule<NFIEventModule>();
-    m_pScheduleModule = pPluginManager->FindModule<NFIScheduleModule>();
-    m_pNetClientModule = pPluginManager->FindModule<NFINetClientModule>();
-    m_pNetModule = pPluginManager->FindModule<NFINetModule>();
-    m_pLogModule = pPluginManager->FindModule<NFILogModule>();
-
    
 	return true;
 }
-NFCLuaPBModule::Init()
-{
 
+bool NFCLuaPBModule::Init()
+{
     return true;
 }
 
@@ -79,22 +70,27 @@ bool NFCLuaPBModule::BeforeShut()
 
 void NFCLuaPBModule::ImportProtoFile(const std::string & strFile)
 {
-	const google::protobuf::FileDescriptor* pDesc = mImporter.Import(strFile);
+	const google::protobuf::FileDescriptor* pDesc = m_pImporter->Import(strFile);
 	if (pDesc) return;
 }
 
-const LuaIntf::LuaRef NFCLuaPBModule::Decode(const std::string& strMsgTypeName, const std::string& strData)
+const void NFCLuaPBModule::SetLuaState(lua_State * pState)
 {
-const google::protobuf::Descriptor* pDesc = mImporter.pool()->FindMessageTypeByName(strMsgTypeName);
+	m_pLuaState = pState;
+}
+
+LuaIntf::LuaRef NFCLuaPBModule::Decode(const std::string& strMsgTypeName, const std::string& strData)
+{
+	const google::protobuf::Descriptor* pDesc = m_pImporter->pool()->FindMessageTypeByName(strMsgTypeName);
     if (!pDesc)
     {
-        return "";
+		throw NFException("unknow message struct name: " + strMsgTypeName);
     }
 
-    const google::protobuf::Message* pProtoType = mFactory.GetPrototype(pDesc);
+    const google::protobuf::Message* pProtoType = m_pFactory->GetPrototype(pDesc);
     if (!pProtoType)
     {
-        return "";
+		throw NFException("cannot find the message body from factory: " + strMsgTypeName);
     }
 
     //GC
@@ -102,23 +98,23 @@ const google::protobuf::Descriptor* pDesc = mImporter.pool()->FindMessageTypeByN
 
     if (xMessageBody->ParseFromString(strData))
     {
-        //MsgToTbl
+		return MessageToTbl(*xMessageBody);
     }
 
-    return LuaIntf::LuaRef(L, nullptr);
+    return LuaIntf::LuaRef(m_pLuaState, nullptr);
 }
 
 const std::string& NFCLuaPBModule::Encode(const std::string& strMsgTypeName, const LuaIntf::LuaRef& luaTable)
 {
     luaTable.checkTable();
 
-    const google::protobuf::Descriptor* pDesc = mImporter.pool()->FindMessageTypeByName(strMsgTypeName);
+    const google::protobuf::Descriptor* pDesc = m_pImporter->pool()->FindMessageTypeByName(strMsgTypeName);
     if (!pDesc)
     {
         return NULL_STR;
     }
 
-    const google::protobuf::Message* pProtoType = mFactory.GetPrototype(pDesc);
+    const google::protobuf::Message* pProtoType = m_pFactory->GetPrototype(pDesc);
     if (!pProtoType)
     {
         return NULL_STR;
@@ -131,90 +127,113 @@ const std::string& NFCLuaPBModule::Encode(const std::string& strMsgTypeName, con
     return xMessageBody->SerializeAsString();
 }
 
-const LuaIntf::LuaRef NFCLuaPBModule::MessageToTbl(const std::string & strMsgTypeName, const google::protobuf::Message& message)
+LuaIntf::LuaRef NFCLuaPBModule::MessageToTbl(const google::protobuf::Message& message)
 {
 	const google::protobuf::Descriptor* pDesc = message.GetDescriptor();
-	assert(pDesc);
-
-	std::unordered_set<const google::protobuf::OneofDescriptor*> oneofDescSet;
-	LuaIntf::LuaRef tbl = LuaIntf::LuaRef::createTable(&m_rLuaState);
-
-	int nField = pDesc->field_count();
-	for (int i = 0; i < nField; ++i)
+	if (pDesc)
 	{
-		const google::protobuf::FieldDescriptor* pField = pDesc->field(i);
-		assert(pField);
-		const google::protobuf::OneofDescriptor* pOneof = pField->containing_oneof();
-		if (pOneof)
+		std::unordered_set<const google::protobuf::OneofDescriptor*> oneofDescSet;
+		LuaIntf::LuaRef tbl = LuaIntf::LuaRef::createTable(m_pLuaState);
+
+		int nField = pDesc->field_count();
+		for (int i = 0; i < nField; ++i)
 		{
-			oneofDescSet.insert(pOneof);
-			continue;  // Oneof field should not set default value.
+			const google::protobuf::FieldDescriptor* pField = pDesc->field(i);
+			if (pField)
+			{
+				const google::protobuf::OneofDescriptor* pOneof = pField->containing_oneof();
+				if (pOneof)
+				{
+					oneofDescSet.insert(pOneof);
+					continue;  // Oneof field should not set default value.
+				}
+
+				tbl[pField->name()] = GetField(message, pField);
+			}
 		}
-		tbl[pField->name()] = GetField(*pField);
+
+		// Set oneof fields.
+		for (const google::protobuf::OneofDescriptor* pOneof : oneofDescSet)
+		{
+			const google::protobuf::Reflection* pReflection = message.GetReflection();
+			if (pReflection)
+			{
+				const google::protobuf::FieldDescriptor* pField = pReflection->GetOneofFieldDescriptor(message, pOneof);
+				if (pField)
+				{
+					tbl[pField->name()] = GetField(message, pField);
+				}
+			}
+		}
+
+		return tbl;
 	}
 
-	// Set oneof fields.
-	for (const OneofDescriptor* pOneof : oneofDescSet)
-	{
-		const FieldDescriptor* pField = m_pRefl->
-			GetOneofFieldDescriptor(m_msg, pOneof);
-		if (pField)
-			tbl[pField->name()] = GetField(*pField);
-	}
-
-	return tbl;
 
 	return LuaIntf::LuaRef();
 }
 
-LuaIntf::LuaRef NFCLuaPBModule::GetField(const google::protobuf::FieldDescriptor & field) const
+LuaIntf::LuaRef NFCLuaPBModule::GetField(const google::protobuf::Message& message, const google::protobuf::FieldDescriptor* field) const
 {
-	if (field.is_repeated())
+	if (nullptr == field)
 	{
-		// returns (TableRef, "") or (nil, error_string)
-		return GetRepeatedField(field);
+		return LuaIntf::LuaRef();
 	}
 
-	lua_State* L = nullptr;// &m_rLuaState;
-	google::protobuf::FieldDescriptor::CppType eCppType = field.cpp_type();
+	if (field->is_repeated())
+	{
+		// returns (TableRef, "") or (nil, error_string)
+		return GetRepeatedField(message, field);
+	}
+
+	const google::protobuf::Reflection* pReflection = message.GetReflection();
+	if (nullptr == pReflection)
+	{
+		return LuaIntf::LuaRef();
+	}
+
+	google::protobuf::FieldDescriptor::CppType eCppType = field->cpp_type();
 	switch (eCppType)
 	{
 		// Scalar field always has a default value.
 	case google::protobuf::FieldDescriptor::CPPTYPE_INT32:
-		return LuaRefValue(L, m_pRefl->GetInt32(m_msg, &field));
+		return LuaIntf::LuaRefValue(m_pLuaState, pReflection->GetInt32(message, field));
 	case google::protobuf::FieldDescriptor::CPPTYPE_INT64:
-		return LuaRefValue(L, m_pRefl->GetInt64(m_msg, &field));
+		return LuaIntf::LuaRefValue(m_pLuaState, pReflection->GetInt64(message, field));
 	case google::protobuf::FieldDescriptor::CPPTYPE_UINT32:
-		return LuaRefValue(L, m_pRefl->GetUInt32(m_msg, &field));
+		return LuaIntf::LuaRefValue(m_pLuaState, pReflection->GetUInt32(message, field));
 	case google::protobuf::FieldDescriptor::CPPTYPE_UINT64:
-		return LuaRefValue(L, m_pRefl->GetUInt64(m_msg, &field));
+		return LuaIntf::LuaRefValue(m_pLuaState, pReflection->GetUInt64(message, field));
 	case google::protobuf::FieldDescriptor::CPPTYPE_DOUBLE:
-		return LuaRefValue(L, m_pRefl->GetDouble(m_msg, &field));
+		return LuaIntf::LuaRefValue(m_pLuaState, pReflection->GetDouble(message, field));
 	case google::protobuf::FieldDescriptor::CPPTYPE_FLOAT:
-		return LuaRefValue(L, m_pRefl->GetFloat(m_msg, &field));
+		return LuaIntf::LuaRefValue(m_pLuaState, pReflection->GetFloat(message, field));
 	case google::protobuf::FieldDescriptor::CPPTYPE_BOOL:
-		return LuaRefValue(L, m_pRefl->GetBool(m_msg, &field));
+		return LuaIntf::LuaRefValue(m_pLuaState, pReflection->GetBool(message, field));
 	case google::protobuf::FieldDescriptor::CPPTYPE_ENUM:
-		return LuaRefValue(L, m_pRefl->GetEnumValue(m_msg, &field));
+		return LuaIntf::LuaRefValue(m_pLuaState, pReflection->GetEnumValue(message, field));
 	case google::protobuf::FieldDescriptor::CPPTYPE_STRING:
-		return LuaRefValue(L, m_pRefl->GetString(m_msg, &field));
+		return LuaIntf::LuaRefValue(m_pLuaState, pReflection->GetString(message, field));
 	case google::protobuf::FieldDescriptor::CPPTYPE_MESSAGE:
 	{
 		// For message field, the default value is null.
-		if (m_pRefl->HasField(m_msg, &field))
+		if (pReflection->HasField(message, field))
 		{
-			const google::protobuf::Message& subMsg = m_pRefl->GetMessage(m_msg, &field);
-			return MessageToTbl(*L, subMsg).ToTbl();
+			const google::protobuf::Message& subMsg = pReflection->GetMessage(message, field);
+			return MessageToTbl(subMsg);
 		}
-		return  LuaIntf::LuaRef(L, nullptr);
+		return  LuaIntf::LuaRef(m_pLuaState, nullptr);
 	}
 		
 	default:
 		break;
 	}
+
+
+	return LuaIntf::LuaRef();
 }
 
-LuaIntf::LuaRef NFCLuaPBModule::GetRepeatedField(const google::protobuf::FieldDescriptor & field) const
+LuaIntf::LuaRef NFCLuaPBModule::GetRepeatedField(const google::protobuf::Message& message, const google::protobuf::FieldDescriptor* field) const
 {
 	return LuaIntf::LuaRef();
 }
