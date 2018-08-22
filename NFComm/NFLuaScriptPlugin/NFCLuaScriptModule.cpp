@@ -47,7 +47,7 @@ bool NFCLuaScriptModule::Awake()
     m_pNetClientModule = pPluginManager->FindModule<NFINetClientModule>();
     m_pNetModule = pPluginManager->FindModule<NFINetModule>();
     m_pLogModule = pPluginManager->FindModule<NFILogModule>();
-
+    m_pLuaPBModule = pPluginManager->FindModule<NFILuaPBModule>();
 
     Register();
 
@@ -692,6 +692,22 @@ void NFCLuaScriptModule::AddReceiveCallBack(const int nMsgID, const std::string&
 
 }
 
+void NFCLuaScriptModule::ImportProtoFile(const std::string& strFile)
+{
+    const google::protobuf::FileDescriptor* pDesc = mImporter.Import(strFile);
+    if (pDesc) return;
+}
+
+const std::string& NFCLuaScriptModule::Encode(const std::string& strMsgTypeName, const LuaRef& luaTable)
+{
+    return m_pLuaPBModule->Encode(strMsgTypeName, luaTable);
+}
+
+LuaRef NFCLuaScriptModule::Decode(const std::string& strMsgTypeName, const std::string& strData)
+{
+    return m_pLuaPBModule->Decode(strMsgTypeName, strData);
+}
+
 void NFCLuaScriptModule::SendByServerFD(const NFSOCK nFD, const uint16_t nMsgID, const std::string& strData)
 {
     m_pNetModule->SendMsgWithOutHead(nMsgID, strData, nFD);
@@ -946,6 +962,7 @@ const std::string&  NFCLuaScriptModule::GetVersionCode()
 
 bool NFCLuaScriptModule::Register()
 {
+
 	LuaIntf::LuaBinding(mLuaContext).beginClass<NFGUID>("NFGUID")
 		.addConstructor(LUA_ARGS())
 		.addProperty("data", &NFGUID::GetData, &NFGUID::SetData)
@@ -1066,7 +1083,9 @@ bool NFCLuaScriptModule::Register()
 		.addFunction("get_ele_vector3", &NFCLuaScriptModule::GetElePropertyVector3)
 
 		.addFunction("add_msg_cb", &NFCLuaScriptModule::AddReceiveCallBack)
-
+		.addFunction("import_proto_file", &NFCLuaScriptModule::ImportProtoFile)
+		.addFunction("encode", &NFCLuaScriptModule::Encode)
+		.addFunction("dncode", &NFCLuaScriptModule::Decode)
 
 		.addFunction("send_by_fd", &NFCLuaScriptModule::SendByServerFD)
 		.addFunction("send_by_id", &NFCLuaScriptModule::SendByServerID)
