@@ -27,9 +27,6 @@
 #ifndef NFC_LUA_PB_MODULE_H
 #define NFC_LUA_PB_MODULE_H
 
-//just define it as 0 if you want to use luaintf with C
-//#define LUAINTF_LINK_LUA_COMPILED_IN_CXX 0
-
 #include "Dependencies/LuaIntf/LuaIntf.h"
 #include "Dependencies/LuaIntf/LuaRef.h"
 #include <google/protobuf/descriptor.h>
@@ -68,15 +65,17 @@ public:
 	virtual void ImportProtoFile(const std::string& strFile);
 
 protected:
-	const LuaIntf::LuaRef Decode(const std::string& strMsgTypeName, const std::string& strData);
+	const void SetLuaState(lua_State* pState);
+
+	LuaIntf::LuaRef Decode(const std::string& strMsgTypeName, const std::string& strData);
 	const std::string& Encode(const std::string& strMsgTypeName, const LuaIntf::LuaRef& luaTable);
 
 	friend class NFCLuaScriptModule;
 private:
-	const LuaIntf::LuaRef MessageToTbl(const std::string& strMsgTypeName, const google::protobuf::Message& message);
+	LuaIntf::LuaRef MessageToTbl(const google::protobuf::Message& message);
 
-	LuaIntf::LuaRef GetField(const google::protobuf::FieldDescriptor& field) const;
-	LuaIntf::LuaRef GetRepeatedField(const google::protobuf::FieldDescriptor& field) const;
+	LuaIntf::LuaRef GetField(const google::protobuf::Message& message, const google::protobuf::FieldDescriptor* field) const;
+	LuaIntf::LuaRef GetRepeatedField(const google::protobuf::Message& message, const google::protobuf::FieldDescriptor* field) const;
 	// index starts from 0.
 	LuaIntf::LuaRef GetRepeatedFieldElement(const google::protobuf::FieldDescriptor& field, int index) const;
 
@@ -88,9 +87,9 @@ private:
 protected:
     int64_t mnTime;
     std::string strVersionCode;
-    LuaIntf::LuaContext mLuaContext;
-	google::protobuf::compiler::Importer mImporter;
-	google::protobuf::DynamicMessageFactory mFactory;
+	lua_State* m_pLuaState;
+	google::protobuf::compiler::Importer* m_pImporter;
+	google::protobuf::DynamicMessageFactory* m_pFactory;
 };
 
 #endif
