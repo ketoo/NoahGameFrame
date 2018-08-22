@@ -4,34 +4,7 @@ require("NFScriptEnum");
 
 script_module = nil;
 function init_script_system(xLuaScriptModule)
-
 	script_module = xLuaScriptModule;
-	io.write("\n");
-	io.write("Hello Lua script_module");
-	io.write("\n");
-
-	local app_id = script_module:app_id();
-	local app_type = script_module:app_type();
-
-	if NF_SERVER_TYPES.NF_ST_GAME == app_type then
-		io.write("Hello NF_ST_GAME");
-		io.write("\n");
-		require("./game/script_list");
-	elseif NF_SERVER_TYPES.NF_ST_WORLD == app_type then
-		io.write("Hello NF_ST_WORLD");
-		io.write("\n");
-	elseif NF_SERVER_TYPES.NF_ST_PROXY == app_type then
-		io.write("Hello NF_ST_PROXY");
-		io.write("\n");
-	elseif NF_SERVER_TYPES.NF_ST_LOGIN == app_type then
-		io.write("Hello NF_ST_LOGIN");
-		io.write("\n");
-	elseif NF_SERVER_TYPES.NF_ST_MASTER == app_type then
-		io.write("Hello NF_ST_MASTER");
-		io.write("\n");
-	else
-	end
-
 end
 
 function load_script_file(name)
