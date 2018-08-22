@@ -60,6 +60,8 @@ public:
 
 
 protected:
+	//json to lua
+	//lua to json
 };
 
 #endif
