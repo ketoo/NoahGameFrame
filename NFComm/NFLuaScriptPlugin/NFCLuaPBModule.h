@@ -32,7 +32,10 @@
 
 #include "Dependencies/LuaIntf/LuaIntf.h"
 #include "Dependencies/LuaIntf/LuaRef.h"
-#include <google/protobuf/stubs/common.h>
+#include <google/protobuf/descriptor.h>
+#include <google/protobuf/descriptor.pb.h>
+#include <google/protobuf/compiler/importer.h>
+#include <google/protobuf/dynamic_message.h>
 #include "NFComm/NFPluginModule/NFIKernelModule.h"
 #include "NFComm/NFPluginModule/NFIClassModule.h"
 #include "NFComm/NFPluginModule/NFILuaScriptModule.h"
@@ -42,6 +45,7 @@
 #include "NFComm/NFPluginModule/NFINetClientModule.h"
 #include "NFComm/NFPluginModule/NFINetModule.h"
 #include "NFComm/NFPluginModule/NFILogModule.h"
+#include "NFComm/NFPluginModule/NFILuaPBModule.h"
 
 class NFCLuaPBModule
     : public NFILuaPBModule
@@ -61,12 +65,25 @@ public:
     virtual bool AfterInit();
     virtual bool BeforeShut();
 
-	const LuaRef Decode(const std::string& strMsgTypeName, const std::string& strData);
-	const std::string& Encode(const std::string& strMsgTypeName, const LuaRef& luaTable);
+	virtual void ImportProtoFile(const std::string& strFile);
 
+protected:
+	const LuaIntf::LuaRef Decode(const std::string& strMsgTypeName, const std::string& strData);
+	const std::string& Encode(const std::string& strMsgTypeName, const LuaIntf::LuaRef& luaTable);
+
+	friend class NFCLuaScriptModule;
 private:
-	const LuaRef MsgToTbl(const std::string& strMsgTypeName, const std::string& strData);
-	const std::string& TblToMsg(const std::string& strMsgTypeName, const LuaRef& luaTable);
+	const LuaIntf::LuaRef MessageToTbl(const std::string& strMsgTypeName, const google::protobuf::Message& message);
+
+	LuaIntf::LuaRef GetField(const google::protobuf::FieldDescriptor& field) const;
+	LuaIntf::LuaRef GetRepeatedField(const google::protobuf::FieldDescriptor& field) const;
+	// index starts from 0.
+	LuaIntf::LuaRef GetRepeatedFieldElement(const google::protobuf::FieldDescriptor& field, int index) const;
+
+
+	///////////////
+	const std::string& TblToMessage(const std::string& strMsgTypeName, const LuaIntf::LuaRef& luaTable);
+
 
 protected:
     int64_t mnTime;

@@ -108,10 +108,12 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
       </PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="NFCLuaPBModule.cpp" />
     <ClCompile Include="NFCLuaScriptModule.cpp" />
     <ClCompile Include="NFLuaScriptPlugin.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="NFCLuaPBModule.h" />
     <ClInclude Include="NFCLuaScriptModule.h" />
     <ClInclude Include="NFLuaScriptPlugin.h" />
   </ItemGroup>

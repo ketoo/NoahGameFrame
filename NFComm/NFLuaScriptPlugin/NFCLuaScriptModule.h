@@ -30,8 +30,6 @@
 //just define it as 0 if you want to use luaintf with C
 //#define LUAINTF_LINK_LUA_COMPILED_IN_CXX 0
 
-#include "MsgToTbl.h"
-#include "MessageSetter.h"
 #include "Dependencies/LuaIntf/LuaIntf.h"
 #include "Dependencies/LuaIntf/LuaRef.h"
 #include <google/protobuf/stubs/common.h>
@@ -44,6 +42,7 @@
 #include "NFComm/NFPluginModule/NFINetClientModule.h"
 #include "NFComm/NFPluginModule/NFINetModule.h"
 #include "NFComm/NFPluginModule/NFILogModule.h"
+#include "NFComm/NFPluginModule/NFILuaPBModule.h"
 
 class NFCLuaScriptModule
     : public NFILuaScriptModule
@@ -135,8 +134,8 @@ protected:
 
     void AddReceiveCallBack(const int nMsgID, const std::string& luaFunc);
     void ImportProtoFile(const std::string& strFile);
-    const std::string& Encode(const std::string& strMsgTypeName, const LuaRef& luaTable);
-    LuaRef Decode(const std::string& strMsgTypeName, const std::string& strData);
+    const std::string& Encode(const std::string& strMsgTypeName, const LuaIntf::LuaRef& luaTable);
+	LuaIntf::LuaRef Decode(const std::string& strMsgTypeName, const std::string& strData);
 
 	void SendByServerFD(const NFSOCK nFD, const uint16_t nMsgID, const std::string& strData);
 	void SendByServerID(const int nServerID, const uint16_t nMsgID, const std::string& strData);
