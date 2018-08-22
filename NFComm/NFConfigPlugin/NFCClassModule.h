@@ -157,6 +157,7 @@ public:
     NFCClassModule(NFIPluginManager* p);
     virtual ~NFCClassModule();
 	
+	
 	virtual bool Awake();
     virtual bool Init();
     virtual bool Shut();
