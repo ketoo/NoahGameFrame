@@ -11,10 +11,12 @@ if(UNIX)
 	
 	if (CMAKE_BUILD_TYPE MATCHES "Release")
 	target_link_libraries(NFLuaScriptPlugin liblua.a)
+	target_link_libraries(NFLuaScriptPlugin libprotobuf.a)
 	else()
+	target_link_libraries(NFLuaScriptPlugin libprotobuf.a)
 	target_link_libraries(NFLuaScriptPlugin liblua.a)
 	endif()
-
+	
 	target_link_libraries(NFLuaScriptPlugin -static-libstdc++)
 else()
 	add_dependencies(NFLuaScriptPlugin NFCore )
