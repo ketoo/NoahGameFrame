@@ -65,19 +65,20 @@ public:
 	virtual void ImportProtoFile(const std::string& strFile);
 
 protected:
-	const void SetLuaState(lua_State* pState);
+	void SetLuaState(lua_State* pState);
 
 	LuaIntf::LuaRef Decode(const std::string& strMsgTypeName, const std::string& strData);
 	const std::string& Encode(const std::string& strMsgTypeName, const LuaIntf::LuaRef& luaTable);
 
 	friend class NFCLuaScriptModule;
+
 private:
-	LuaIntf::LuaRef MessageToTbl(const google::protobuf::Message& message);
+	LuaIntf::LuaRef MessageToTbl(const google::protobuf::Message& message) const;
 
 	LuaIntf::LuaRef GetField(const google::protobuf::Message& message, const google::protobuf::FieldDescriptor* field) const;
 	LuaIntf::LuaRef GetRepeatedField(const google::protobuf::Message& message, const google::protobuf::FieldDescriptor* field) const;
 	// index starts from 0.
-	LuaIntf::LuaRef GetRepeatedFieldElement(const google::protobuf::FieldDescriptor& field, int index) const;
+	LuaIntf::LuaRef GetRepeatedFieldElement(const google::protobuf::FieldDescriptor* field, int index) const;
 
 
 	///////////////

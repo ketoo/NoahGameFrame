@@ -74,7 +74,7 @@ void NFCLuaPBModule::ImportProtoFile(const std::string & strFile)
 	if (pDesc) return;
 }
 
-const void NFCLuaPBModule::SetLuaState(lua_State * pState)
+void NFCLuaPBModule::SetLuaState(lua_State * pState)
 {
 	m_pLuaState = pState;
 }
@@ -127,7 +127,7 @@ const std::string& NFCLuaPBModule::Encode(const std::string& strMsgTypeName, con
     return xMessageBody->SerializeAsString();
 }
 
-LuaIntf::LuaRef NFCLuaPBModule::MessageToTbl(const google::protobuf::Message& message)
+LuaIntf::LuaRef NFCLuaPBModule::MessageToTbl(const google::protobuf::Message& message) const
 {
 	const google::protobuf::Descriptor* pDesc = message.GetDescriptor();
 	if (pDesc)
@@ -235,10 +235,47 @@ LuaIntf::LuaRef NFCLuaPBModule::GetField(const google::protobuf::Message& messag
 
 LuaIntf::LuaRef NFCLuaPBModule::GetRepeatedField(const google::protobuf::Message& message, const google::protobuf::FieldDescriptor* field) const
 {
-	return LuaIntf::LuaRef();
+	if (!field->is_repeated())
+	{
+		return LuaIntf::LuaRef();
+	}
+
+	const google::protobuf::Reflection* pReflection = message.GetReflection();
+	if (nullptr == pReflection)
+	{
+		return LuaIntf::LuaRef();
+	}
+
+	LuaIntf::LuaRef tbl = LuaIntf::LuaRef::createTable(m_pLuaState);
+	int nFldSize = pReflection->FieldSize(message, field);
+	if (!field->is_map())
+	{
+		for (int index = 0; index < nFldSize; ++index)
+		{
+			tbl[index + 1] = GetRepeatedFieldElement(field, index);
+		}
+
+		return tbl;
+	}
+
+	// map
+	if (field->cpp_type() != google::protobuf::FieldDescriptor::CPPTYPE_MESSAGE)
+	{
+		return tbl;
+	}
+
+	for (int index = 0; index < nFldSize; ++index)
+	{
+		const google::protobuf::Message& entryMsg = pReflection->GetRepeatedMessage(message, field, index);
+		LuaIntf::LuaRef entryTbl = MessageToTbl(message);
+		const LuaIntf::LuaRef& key = entryTbl["key"];
+		const LuaIntf::LuaRef& value = entryTbl["value"];
+		tbl[key] = value;
+	}
+	return tbl;
 }
 
-LuaIntf::LuaRef NFCLuaPBModule::GetRepeatedFieldElement(const google::protobuf::FieldDescriptor & field, int index) const
+LuaIntf::LuaRef NFCLuaPBModule::GetRepeatedFieldElement(const google::protobuf::FieldDescriptor* field, int index) const
 {
 	return LuaIntf::LuaRef();
 }
