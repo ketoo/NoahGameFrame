@@ -50,6 +50,7 @@ bool NFCElementModule::Awake()
 	Load();
 	
 	return true;
+	
 }
 
 bool NFCElementModule::Init()
