@@ -1,4 +1,4 @@
-/*
+﻿/*
             This file is part of: 
                 NoahFrame
             https://github.com/ketoo/NoahGameFrame
@@ -24,48 +24,45 @@
 */
 
 
-#include "NFCLuaScriptModule.h"
-#include "NFCLuaPBModule.h"
+#include <assert.h>
+#include <unordered_map>
 #include "NFCLuaWebSocketModule.h"
 #include "NFLuaScriptPlugin.h"
+#include "NFComm/NFPluginModule/NFIKernelModule.h"
 
-#ifdef NF_DYNAMIC_PLUGIN
-
-NF_EXPORT void DllStartPlugin(NFIPluginManager* pm)
+bool NFCLuaWebSocketModule::Awake()
 {
-    CREATE_PLUGIN(pm, NFLuaScriptPlugin)
-
-};
-
-NF_EXPORT void DllStopPlugin(NFIPluginManager* pm)
-{
-    DESTROY_PLUGIN(pm, NFLuaScriptPlugin)
-};
-
-#endif
-//////////////////////////////////////////////////////////////////////////
-
-const int NFLuaScriptPlugin::GetPluginVersion()
-{
-    return 0;
+   
+	return true;
 }
 
-const std::string NFLuaScriptPlugin::GetPluginName()
+bool NFCLuaWebSocketModule::Init()
 {
-	return GET_CLASS_NAME(NFLuaScriptPlugin);
+    return true;
 }
 
-void NFLuaScriptPlugin::Install()
+bool NFCLuaWebSocketModule::AfterInit()
 {
-	REGISTER_MODULE(pPluginManager, NFILuaScriptModule, NFCLuaScriptModule)
-	REGISTER_MODULE(pPluginManager, NFILuaPBModule, NFCLuaPBModule)
-	REGISTER_MODULE(pPluginManager, NFILuaWebSocketModule, NFCLuaWebSocketModule)
 
+    return true;
 }
 
-void NFLuaScriptPlugin::Uninstall()
+bool NFCLuaWebSocketModule::Shut()
 {
-	UNREGISTER_MODULE(pPluginManager, NFILuaWebSocketModule, NFCLuaWebSocketModule)
-	UNREGISTER_MODULE(pPluginManager, NFILuaPBModule, NFCLuaPBModule)
-	UNREGISTER_MODULE(pPluginManager, NFILuaScriptModule, NFCLuaScriptModule)
+    return true;
+}
+
+bool NFCLuaWebSocketModule::ReadyExecute()
+{
+	return true;
+}
+
+bool NFCLuaWebSocketModule::Execute()
+{
+    return true;
+}
+
+bool NFCLuaWebSocketModule::BeforeShut()
+{
+    return true;
 }
