@@ -50,6 +50,9 @@ bool NFCLuaScriptModule::Awake()
     m_pLogModule = pPluginManager->FindModule<NFILogModule>();
     m_pLuaPBModule = pPluginManager->FindModule<NFILuaPBModule>();
 
+	NFCLuaPBModule* p = (NFCLuaPBModule*)m_pLuaPBModule;
+	p->SetLuaState(mLuaContext.state);
+
     Register();
 
 	std::string strRootFileh = pPluginManager->GetConfigPath() + "NFDataCfg/ScriptModule/NFScriptSystem.lua";
@@ -103,7 +106,6 @@ bool NFCLuaScriptModule::Execute()
         mnTime = pPluginManager->GetNowTime();
 
         OnScriptReload();
-
     }
 
     return true;
