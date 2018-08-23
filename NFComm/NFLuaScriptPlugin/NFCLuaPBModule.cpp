@@ -24,11 +24,7 @@
 */
 
 
-#include <assert.h>
-#include <unordered_map>
 #include "NFCLuaPBModule.h"
-#include "NFLuaScriptPlugin.h"
-#include "NFComm/NFPluginModule/NFIKernelModule.h"
 
 bool NFCLuaPBModule::Awake()
 {
@@ -205,14 +201,21 @@ LuaIntf::LuaRef NFCLuaPBModule::GetField(const google::protobuf::Message& messag
 		// For message field, the default value is null.
 		if (pReflection->HasField(message, field))
 		{
+#if NF_PLATFORM == NF_PLATFORM_WIN
+#pragma push_macro("GetMessage")
+#undef GetMessage
 			const google::protobuf::Message& subMsg = pReflection->GetMessage(message, field);
+#pragma pop_macro("GetMessage")
+#else
+			const google::protobuf::Message& subMsg = pReflection->GetMessage(message, field);
+#endif
 			return MessageToTbl(subMsg);
 		}
 		return  LuaIntf::LuaRef(m_pLuaState, nullptr);
 	}
 
 	default:
-		break;
+		break;	
 	}
 
 
