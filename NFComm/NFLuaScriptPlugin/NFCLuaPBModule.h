@@ -33,14 +33,8 @@
 #include <google/protobuf/descriptor.pb.h>
 #include <google/protobuf/compiler/importer.h>
 #include <google/protobuf/dynamic_message.h>
-#include "NFComm/NFPluginModule/NFIKernelModule.h"
-#include "NFComm/NFPluginModule/NFIClassModule.h"
+#include "NFComm/NFCore/NFException.hpp"
 #include "NFComm/NFPluginModule/NFILuaScriptModule.h"
-#include "NFComm/NFPluginModule/NFIEventModule.h"
-#include "NFComm/NFPluginModule/NFIScheduleModule.h"
-#include "NFComm/NFPluginModule/NFIElementModule.h"
-#include "NFComm/NFPluginModule/NFINetClientModule.h"
-#include "NFComm/NFPluginModule/NFINetModule.h"
 #include "NFComm/NFPluginModule/NFILogModule.h"
 #include "NFComm/NFPluginModule/NFILuaPBModule.h"
 
