@@ -81,14 +81,14 @@ private:
 
 
 	///////////////
-	const std::string& TblToMessage(const LuaIntf::LuaRef& luaTable, google::protobuf::Message& messag);
+	const std::string& TblToMessage(const LuaIntf::LuaRef& luaTable, google::protobuf::Message& message);
 	
-	void SetField(google::protobuf::Message& messag, const std::string& sField, const LuaIntf::LuaRef& luaValue);
-	void SetRepeatedField(google::protobuf::Message& messag, const google::protobuf::FieldDescriptor* field, const LuaIntf::LuaRef& luaTable);
-	void SetRepeatedMapField(google::protobuf::Message& messag, const google::protobuf::FieldDescriptor* field, const LuaIntf::LuaRef& luaTable);
-	void AddToRepeatedField(google::protobuf::Message& messag, const google::protobuf::FieldDescriptor* field, const LuaIntf::LuaRef& luaValue);
-	void AddToMapField(google::protobuf::Message& messag, const google::protobuf::FieldDescriptor* field, const LuaIntf::LuaRef& key, const LuaIntf::LuaRef& val);
-	int GetEnumValue(google::protobuf::Message& messag, const LuaIntf::LuaRef& luaValue, const google::protobuf::FieldDescriptor* field) const;
+	void SetField(google::protobuf::Message& message, const std::string& sField, const LuaIntf::LuaRef& luaValue);
+	void SetRepeatedField(google::protobuf::Message& message, const google::protobuf::FieldDescriptor* field, const LuaIntf::LuaRef& luaTable);
+	void SetRepeatedMapField(google::protobuf::Message& message, const google::protobuf::FieldDescriptor* field, const LuaIntf::LuaRef& luaTable);
+	void AddToRepeatedField(google::protobuf::Message& message, const google::protobuf::FieldDescriptor* field, const LuaIntf::LuaRef& luaValue);
+	void AddToMapField(google::protobuf::Message& message, const google::protobuf::FieldDescriptor* field, const LuaIntf::LuaRef& key, const LuaIntf::LuaRef& val);
+	int GetEnumValue(google::protobuf::Message& message, const LuaIntf::LuaRef& luaValue, const google::protobuf::FieldDescriptor* field) const;
 
 protected:
     int64_t mnTime;
