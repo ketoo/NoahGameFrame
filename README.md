@@ -28,7 +28,7 @@ NoahGameFrame (NF) is a lightweight, fast, scalable, distributed plugin framewor
 
 ## Tutorial--English
 
-https://github.com/ketoo/NoahGameFrame/wiki/Tutorial-&-Concept
+https://github.com/ketoo/NoahGameFrame/wiki
 
 ## Documents--English
 
