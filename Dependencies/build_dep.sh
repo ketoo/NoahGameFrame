@@ -1,7 +1,7 @@
 echo Building dependencies...
 
-#sudo apt-get install automake
-#sudo apt-get install zip unzip
+sudo apt-get install automake
+sudo apt-get install zip unzip
 
 rm -rf ./lib
 mkdir -p lib/Debug/
