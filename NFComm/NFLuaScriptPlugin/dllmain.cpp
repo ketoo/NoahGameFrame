@@ -26,6 +26,8 @@
 
 #include "NFComm/NFPluginModule/NFPlatform.h"
 
+#define PROTOBUF_USE_DLLS
+
 #ifdef NF_DEBUG_MODE
 
 #if NF_PLATFORM == NF_PLATFORM_WIN
