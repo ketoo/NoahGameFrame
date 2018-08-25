@@ -7,7 +7,8 @@ rm -rf ./lib
 mkdir -p lib/Debug/
 mkdir -p lib/Release/
 
-apt-get install libssl-dev
+sudo apt-get install libssl-dev
+sudo apt-get install libreadline-dev 
 #cd openssl-1.1.0h
 #rm -rf *.a
 #chmod -R 755 *
@@ -64,9 +65,9 @@ cd lua
 
 sysOS=`uname -s`
 if [ $sysOS == "Darwin" ];then
-    make macosx
+    make macosx test
 elif [ $sysOS == "Linux" ];then
-    make linux
+    make linux test
 fi
 
 cp -r -f ./*.a ../lib/Debug/
