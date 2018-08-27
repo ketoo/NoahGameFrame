@@ -207,7 +207,7 @@ void NFCLoginNet_ServerModule::OnSelectWorldProcess(const NFSOCK nSockIndex, con
 	xData.mutable_sender()->CopyFrom(NFINetModule::NFToPB(pNetObject->GetClientID()));
 	xData.set_account(pNetObject->GetAccount());
 
-	m_pNetClientModule->SendSuitByPB(NF_SERVER_TYPES::NF_ST_MASTER, pNetObject->GetAccount(), NFMsg::EGameMsgID::EGMI_REQ_CONNECT_WORLD, xData);//here has a problem to be solve
+	m_pNetClientModule->SendSuitByPB(NF_SERVER_TYPES::NF_ST_MASTER, pNetObject->GetAccount(), NFMsg::EGameMsgID::EGMI_REQ_CONNECT_WORLD, xData);
 }
 
 void NFCLoginNet_ServerModule::OnSocketClientEvent(const NFSOCK nSockIndex, const NF_NET_EVENT eEvent, NFINet* pNet)
