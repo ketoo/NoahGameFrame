@@ -146,6 +146,9 @@ void NFCNet::listener_cb(struct evconnlistener* listener, evutil_socket_t fd, st
     event_set_fatal_callback(event_fatal_cb);
     
     conn_eventcb(bev, BEV_EVENT_CONNECTED, (void*)pObject);
+	
+    bufferevent_set_max_single_read(bev, NF_BUFFER_MAX_READ);
+    bufferevent_set_max_single_write(bev, NF_BUFFER_MAX_READ);
 }
 
 
@@ -437,14 +440,14 @@ int NFCNet::InitClientNet()
 
     event_set_log_callback(&NFCNet::log_cb);
 
-	int nSizeRead = (int)bufferevent_get_max_to_read(bev);
-	int nSizeWrite = (int)bufferevent_get_max_to_write(bev);
+    bufferevent_set_max_single_read(bev, NF_BUFFER_MAX_READ);
+    bufferevent_set_max_single_write(bev, NF_BUFFER_MAX_READ);
 
-	std::cout << "want to connect " << mstrIP << " SizeRead: " << nSizeRead << std::endl;
-	std::cout << "SizeWrite: " << nSizeWrite << std::endl;
+    int nSizeRead = (int)bufferevent_get_max_to_read(bev);
+    int nSizeWrite = (int)bufferevent_get_max_to_write(bev);
 
-	//bufferevent_set_max_single_read(bev, 0);
-	//bufferevent_set_max_single_write(bev, 0);
+    std::cout << "want to connect " << mstrIP << " SizeRead: " << nSizeRead << std::endl;
+    std::cout << "SizeWrite: " << nSizeWrite << std::endl;
 
     return sockfd;
 }
