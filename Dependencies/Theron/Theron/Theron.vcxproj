@@ -150,11 +150,11 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <TargetName>$(ProjectName)_d</TargetName>
-    <OutDir>$(SolutionDir)\_Out\$(Configuration)\</OutDir>
+    <OutDir>$(SolutionDir)\Dependencies\lib\$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)\Temp\$(Configuration)_$(Platform)\$(ProjectName)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <OutDir>$(SolutionDir)\_Out\$(Configuration)\</OutDir>
+    <OutDir>$(SolutionDir)\Dependencies\lib\$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)\Temp\$(Configuration)_$(Platform)\$(ProjectName)\</IntDir>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
