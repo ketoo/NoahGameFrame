@@ -28,7 +28,7 @@ NoahGameFrame (NF) is a lightweight, fast, scalable, distributed plugin framewor
 
 ## Tutorial--English
 
-https://github.com/ketoo/NoahGameFrame/wiki/Tutorial-&-Concept
+https://github.com/ketoo/NoahGameFrame/wiki
 
 ## Documents--English
 
@@ -69,7 +69,7 @@ svn checkout https://github.com/ketoo/NoahGameFrame
 - libevent 2.0.22
 - easylogging++ 9.80
 - mysql++ 3.2.2
-- google protobuf 2.5.0
+- google protobuf 3.6
 - redis-cpp-client 
 - Theron 6.00.01
 
