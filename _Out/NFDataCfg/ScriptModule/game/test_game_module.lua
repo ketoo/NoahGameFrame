@@ -46,7 +46,16 @@ end
 
 function test_game_module.after_init()
 	io.write("test_game_module after_init!----\n");
-
+	
+	script_module:import_proto_file("NFDataCfg\proto\NFMsgShare.proto");
+	
+	local tbl = {
+	};
+	
+	local data = script_module:encode("NFMsg.PropertyInt", tbl);
+	io.write(data);
+	local test_tbl =  script_module:decode("NFMsg.PropertyInt", data);
+	
 	local playerObject = script_module:create_object(NFGUID(), 1, 0, "Player", "", NFDataList());
 
 	io.write("create_object " .. playerObject:tostring() .. "\n");
