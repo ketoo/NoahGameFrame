@@ -412,6 +412,7 @@ inline int64_t NFGetTimeS()
 }
 
 //Protobuf Using Dlls
+/*
 #if NF_PLATFORM == NF_PLATFORM_WIN
 #ifndef PROTOBUF_SRC
 #ifndef PROTOBUF_USE_DLLS
@@ -419,6 +420,6 @@ inline int64_t NFGetTimeS()
 #endif
 #endif
 #endif
-
+*/
 
 #endif

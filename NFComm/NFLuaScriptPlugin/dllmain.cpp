@@ -26,7 +26,7 @@
 
 #include "NFComm/NFPluginModule/NFPlatform.h"
 
-#define PROTOBUF_USE_DLLS
+//#define PROTOBUF_USE_DLLS
 
 #ifdef NF_DEBUG_MODE
 
