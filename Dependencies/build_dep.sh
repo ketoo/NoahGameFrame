@@ -37,10 +37,9 @@ cd ../
 cd protobuf
 make clean
 chmod -R 755 *
-./configure
+./configure --disable-shared
 make
 make check
-make install
 
 cp -r -f ./src/.libs/*.a ../lib/Debug/
 cp -r -f ./src/.libs/*.a ../lib/Release/
