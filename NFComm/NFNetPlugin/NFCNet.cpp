@@ -44,7 +44,7 @@
 #include "NFComm/NFLogPlugin/easylogging++.h"
 
 /*
-if any one upgrade the networking library(libEvent), please change the size of evbuffer as below:
+if any one want to upgrade the networking library(libEvent), please change the size of evbuffer as below:
 *MODIFY--libevent/buffer.c
 #define EVBUFFER_MAX_READ	4096
 TO
