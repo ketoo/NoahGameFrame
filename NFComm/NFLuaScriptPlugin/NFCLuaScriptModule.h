@@ -31,6 +31,8 @@
 //#define LUAINTF_LINK_LUA_COMPILED_IN_CXX 0
 
 #include "Dependencies/LuaIntf/LuaIntf.h"
+#include "Dependencies/LuaIntf/LuaRef.h"
+#include <google/protobuf/stubs/common.h>
 #include "NFComm/NFPluginModule/NFIKernelModule.h"
 #include "NFComm/NFPluginModule/NFIClassModule.h"
 #include "NFComm/NFPluginModule/NFILuaScriptModule.h"
@@ -40,6 +42,7 @@
 #include "NFComm/NFPluginModule/NFINetClientModule.h"
 #include "NFComm/NFPluginModule/NFINetModule.h"
 #include "NFComm/NFPluginModule/NFILogModule.h"
+#include "NFComm/NFPluginModule/NFILuaPBModule.h"
 
 class NFCLuaScriptModule
     : public NFILuaScriptModule
@@ -130,6 +133,9 @@ protected:
     //for client module
 
     void AddReceiveCallBack(const int nMsgID, const std::string& luaFunc);
+    void ImportProtoFile(const std::string& strFile);
+    const std::string& Encode(const std::string& strMsgTypeName, const LuaIntf::LuaRef& luaTable);
+	LuaIntf::LuaRef Decode(const std::string& strMsgTypeName, const std::string& strData);
 
 	void SendByServerFD(const NFSOCK nFD, const uint16_t nMsgID, const std::string& strData);
 	void SendByServerID(const int nServerID, const uint16_t nMsgID, const std::string& strData);
@@ -193,11 +199,14 @@ protected:
     NFINetClientModule* m_pNetClientModule;
     NFINetModule* m_pNetModule;
     NFILogModule* m_pLogModule;
-
+	NFILuaPBModule* m_pLuaPBModule;
+	
 protected:
     int64_t mnTime;
     std::string strVersionCode;
     LuaIntf::LuaContext mLuaContext;
+
+	
 
     NFMap<std::string, NFMap<NFGUID, NFList<std::string>>> m_luaPropertyCallBackFuncMap;
     NFMap<std::string, NFMap<NFGUID, NFList<std::string>>> m_luaRecordCallBackFuncMap;

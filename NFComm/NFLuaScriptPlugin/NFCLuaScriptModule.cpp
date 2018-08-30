@@ -25,6 +25,7 @@
 
 
 #include <assert.h>
+#include "NFCLuaPBModule.h"
 #include "NFCLuaScriptModule.h"
 #include "NFLuaScriptPlugin.h"
 #include "NFComm/NFPluginModule/NFIKernelModule.h"
@@ -47,7 +48,10 @@ bool NFCLuaScriptModule::Awake()
     m_pNetClientModule = pPluginManager->FindModule<NFINetClientModule>();
     m_pNetModule = pPluginManager->FindModule<NFINetModule>();
     m_pLogModule = pPluginManager->FindModule<NFILogModule>();
+    m_pLuaPBModule = pPluginManager->FindModule<NFILuaPBModule>();
 
+	NFCLuaPBModule* p = (NFCLuaPBModule*)(m_pLuaPBModule);
+	p->SetLuaState(mLuaContext.state());
 
     Register();
 
@@ -102,7 +106,6 @@ bool NFCLuaScriptModule::Execute()
         mnTime = pPluginManager->GetNowTime();
 
         OnScriptReload();
-
     }
 
     return true;
@@ -692,6 +695,24 @@ void NFCLuaScriptModule::AddReceiveCallBack(const int nMsgID, const std::string&
 
 }
 
+void NFCLuaScriptModule::ImportProtoFile(const std::string& strFile)
+{
+	NFCLuaPBModule* p = (NFCLuaPBModule*)m_pLuaPBModule;
+	p->ImportProtoFile(strFile);
+}
+
+const std::string& NFCLuaScriptModule::Encode(const std::string& strMsgTypeName, const LuaIntf::LuaRef& luaTable)
+{
+	NFCLuaPBModule* p = (NFCLuaPBModule*)m_pLuaPBModule;
+	return p->Encode(strMsgTypeName, luaTable);
+}
+
+LuaIntf::LuaRef NFCLuaScriptModule::Decode(const std::string& strMsgTypeName, const std::string& strData)
+{
+	NFCLuaPBModule* p = (NFCLuaPBModule*)m_pLuaPBModule;
+	return p->Decode(strMsgTypeName, strData);
+}
+
 void NFCLuaScriptModule::SendByServerFD(const NFSOCK nFD, const uint16_t nMsgID, const std::string& strData)
 {
     m_pNetModule->SendMsgWithOutHead(nMsgID, strData, nFD);
@@ -946,6 +967,7 @@ const std::string&  NFCLuaScriptModule::GetVersionCode()
 
 bool NFCLuaScriptModule::Register()
 {
+
 	LuaIntf::LuaBinding(mLuaContext).beginClass<NFGUID>("NFGUID")
 		.addConstructor(LUA_ARGS())
 		.addProperty("data", &NFGUID::GetData, &NFGUID::SetData)
@@ -1066,7 +1088,9 @@ bool NFCLuaScriptModule::Register()
 		.addFunction("get_ele_vector3", &NFCLuaScriptModule::GetElePropertyVector3)
 
 		.addFunction("add_msg_cb", &NFCLuaScriptModule::AddReceiveCallBack)
-
+		.addFunction("import_proto_file", &NFCLuaScriptModule::ImportProtoFile)
+		.addFunction("encode", &NFCLuaScriptModule::Encode)
+		.addFunction("dncode", &NFCLuaScriptModule::Decode)
 
 		.addFunction("send_by_fd", &NFCLuaScriptModule::SendByServerFD)
 		.addFunction("send_by_id", &NFCLuaScriptModule::SendByServerID)

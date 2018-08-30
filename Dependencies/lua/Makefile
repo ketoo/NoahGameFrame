@@ -1,197 +1,114 @@
-# Makefile for building Lua
-# See ../doc/readme.html for installation and customization instructions.
+# Makefile for installing Lua
+# See doc/readme.html for installation and customization instructions.
 
 # == CHANGE THE SETTINGS BELOW TO SUIT YOUR ENVIRONMENT =======================
 
 # Your platform. See PLATS for possible values.
 PLAT= none
 
-CC= gcc -std=gnu99
-CFLAGS= -O2 -Wall -Wextra -DLUA_COMPAT_5_2 $(SYSCFLAGS) $(MYCFLAGS)
-LDFLAGS= $(SYSLDFLAGS) $(MYLDFLAGS)
-LIBS= -lm $(SYSLIBS) $(MYLIBS)
+# Where to install. The installation starts in the src and doc directories,
+# so take care if INSTALL_TOP is not an absolute path. See the local target.
+# You may want to make INSTALL_LMOD and INSTALL_CMOD consistent with
+# LUA_ROOT, LUA_LDIR, and LUA_CDIR in luaconf.h.
+INSTALL_TOP= /usr/local
+INSTALL_BIN= $(INSTALL_TOP)/bin
+INSTALL_INC= $(INSTALL_TOP)/include
+INSTALL_LIB= $(INSTALL_TOP)/lib
+INSTALL_MAN= $(INSTALL_TOP)/man/man1
+INSTALL_LMOD= $(INSTALL_TOP)/share/lua/$V
+INSTALL_CMOD= $(INSTALL_TOP)/lib/lua/$V
 
-AR= ar rcu
-RANLIB= ranlib
+# How to install. If your install program does not support "-p", then
+# you may have to run ranlib on the installed liblua.a.
+INSTALL= install -p
+INSTALL_EXEC= $(INSTALL) -m 0755
+INSTALL_DATA= $(INSTALL) -m 0644
+#
+# If you don't have "install" you can use "cp" instead.
+# INSTALL= cp -p
+# INSTALL_EXEC= $(INSTALL)
+# INSTALL_DATA= $(INSTALL)
+
+# Other utilities.
+MKDIR= mkdir -p
 RM= rm -f
-
-SYSCFLAGS=
-SYSLDFLAGS=
-SYSLIBS=
-
-MYCFLAGS=
-MYLDFLAGS=
-MYLIBS=
-MYOBJS=
 
 # == END OF USER SETTINGS -- NO NEED TO CHANGE ANYTHING BELOW THIS LINE =======
 
+# Convenience platforms targets.
 PLATS= aix bsd c89 freebsd generic linux macosx mingw posix solaris
 
-LUA_A=	liblua.a
-CORE_O=	lapi.o lcode.o lctype.o ldebug.o ldo.o ldump.o lfunc.o lgc.o llex.o \
-	lmem.o lobject.o lopcodes.o lparser.o lstate.o lstring.o ltable.o \
-	ltm.o lundump.o lvm.o lzio.o
-LIB_O=	lauxlib.o lbaselib.o lbitlib.o lcorolib.o ldblib.o liolib.o \
-	lmathlib.o loslib.o lstrlib.o ltablib.o lutf8lib.o loadlib.o linit.o
-BASE_O= $(CORE_O) $(LIB_O) $(MYOBJS)
+# What to install.
+TO_BIN= lua luac
+TO_INC= lua.h luaconf.h lualib.h lauxlib.h lua.hpp
+TO_LIB= liblua.a
+TO_MAN= lua.1 luac.1
 
-LUA_T=	lua
-LUA_O=	lua.o
-
-LUAC_T=	luac
-LUAC_O=	luac.o
-
-ALL_O= $(BASE_O) $(LUA_O) $(LUAC_O)
-ALL_T= $(LUA_A) $(LUA_T) $(LUAC_T)
-ALL_A= $(LUA_A)
+# Lua version and release.
+V= 5.3
+R= $V.4
 
 # Targets start here.
-default: $(PLAT)
+all:	$(PLAT)
 
-all:	$(ALL_T)
+$(PLATS) clean:
+	cd src && $(MAKE) $@
 
-o:	$(ALL_O)
+test:	dummy
+	src/lua -v
 
-a:	$(ALL_A)
+install: dummy
+	cd src && $(MKDIR) $(INSTALL_BIN) $(INSTALL_INC) $(INSTALL_LIB) $(INSTALL_MAN) $(INSTALL_LMOD) $(INSTALL_CMOD)
+	cd src && $(INSTALL_EXEC) $(TO_BIN) $(INSTALL_BIN)
+	cd src && $(INSTALL_DATA) $(TO_INC) $(INSTALL_INC)
+	cd src && $(INSTALL_DATA) $(TO_LIB) $(INSTALL_LIB)
+	cd doc && $(INSTALL_DATA) $(TO_MAN) $(INSTALL_MAN)
 
-$(LUA_A): $(BASE_O)
-	$(AR) $@ $(BASE_O)
-	$(RANLIB) $@
+uninstall:
+	cd src && cd $(INSTALL_BIN) && $(RM) $(TO_BIN)
+	cd src && cd $(INSTALL_INC) && $(RM) $(TO_INC)
+	cd src && cd $(INSTALL_LIB) && $(RM) $(TO_LIB)
+	cd doc && cd $(INSTALL_MAN) && $(RM) $(TO_MAN)
 
-$(LUA_T): $(LUA_O) $(LUA_A)
-	$(CC) -o $@ $(LDFLAGS) $(LUA_O) $(LUA_A) $(LIBS)
-
-$(LUAC_T): $(LUAC_O) $(LUA_A)
-	$(CC) -o $@ $(LDFLAGS) $(LUAC_O) $(LUA_A) $(LIBS)
-
-clean:
-	$(RM) $(ALL_T) $(ALL_O)
-
-depend:
-	@$(CC) $(CFLAGS) -MM l*.c
-
-echo:
-	@echo "PLAT= $(PLAT)"
-	@echo "CC= $(CC)"
-	@echo "CFLAGS= $(CFLAGS)"
-	@echo "LDFLAGS= $(SYSLDFLAGS)"
-	@echo "LIBS= $(LIBS)"
-	@echo "AR= $(AR)"
-	@echo "RANLIB= $(RANLIB)"
-	@echo "RM= $(RM)"
-
-# Convenience targets for popular platforms
-ALL= all
+local:
+	$(MAKE) install INSTALL_TOP=../install
 
 none:
 	@echo "Please do 'make PLATFORM' where PLATFORM is one of these:"
 	@echo "   $(PLATS)"
+	@echo "See doc/readme.html for complete instructions."
 
-aix:
-	$(MAKE) $(ALL) CC="xlc" CFLAGS="-O2 -DLUA_USE_POSIX -DLUA_USE_DLOPEN" SYSLIBS="-ldl" SYSLDFLAGS="-brtl -bexpall"
+# make may get confused with test/ and install/
+dummy:
 
-bsd:
-	$(MAKE) $(ALL) SYSCFLAGS="-DLUA_USE_POSIX -DLUA_USE_DLOPEN" SYSLIBS="-Wl,-E"
+# echo config parameters
+echo:
+	@cd src && $(MAKE) -s echo
+	@echo "PLAT= $(PLAT)"
+	@echo "V= $V"
+	@echo "R= $R"
+	@echo "TO_BIN= $(TO_BIN)"
+	@echo "TO_INC= $(TO_INC)"
+	@echo "TO_LIB= $(TO_LIB)"
+	@echo "TO_MAN= $(TO_MAN)"
+	@echo "INSTALL_TOP= $(INSTALL_TOP)"
+	@echo "INSTALL_BIN= $(INSTALL_BIN)"
+	@echo "INSTALL_INC= $(INSTALL_INC)"
+	@echo "INSTALL_LIB= $(INSTALL_LIB)"
+	@echo "INSTALL_MAN= $(INSTALL_MAN)"
+	@echo "INSTALL_LMOD= $(INSTALL_LMOD)"
+	@echo "INSTALL_CMOD= $(INSTALL_CMOD)"
+	@echo "INSTALL_EXEC= $(INSTALL_EXEC)"
+	@echo "INSTALL_DATA= $(INSTALL_DATA)"
 
-c89:
-	$(MAKE) $(ALL) SYSCFLAGS="-DLUA_USE_C89" CC="gcc -std=c89"
-	@echo ''
-	@echo '*** C89 does not guarantee 64-bit integers for Lua.'
-	@echo ''
-
-
-freebsd:
-	$(MAKE) $(ALL) SYSCFLAGS="-DLUA_USE_LINUX" SYSLIBS="-Wl,-E -lreadline"
-
-generic: $(ALL)
-
-linux:
-	$(MAKE) $(ALL) SYSCFLAGS="-DLUA_USE_LINUX" SYSLIBS="-Wl,-E -ldl -lreadline"
-
-macosx:
-	$(MAKE) $(ALL) SYSCFLAGS="-DLUA_USE_MACOSX" SYSLIBS="-lreadline" CC=cc
-
-mingw:
-	$(MAKE) "LUA_A=lua53.dll" "LUA_T=lua.exe" \
-	"AR=$(CC) -shared -o" "RANLIB=strip --strip-unneeded" \
-	"SYSCFLAGS=-DLUA_BUILD_AS_DLL" "SYSLIBS=" "SYSLDFLAGS=-s" lua.exe
-	$(MAKE) "LUAC_T=luac.exe" luac.exe
-
-posix:
-	$(MAKE) $(ALL) SYSCFLAGS="-DLUA_USE_POSIX"
-
-solaris:
-	$(MAKE) $(ALL) SYSCFLAGS="-DLUA_USE_POSIX -DLUA_USE_DLOPEN -D_REENTRANT" SYSLIBS="-ldl"
+# echo pkg-config data
+pc:
+	@echo "version=$R"
+	@echo "prefix=$(INSTALL_TOP)"
+	@echo "libdir=$(INSTALL_LIB)"
+	@echo "includedir=$(INSTALL_INC)"
 
 # list targets that do not create files (but not all makes understand .PHONY)
-.PHONY: all $(PLATS) default o a clean depend echo none
-
-# DO NOT DELETE
-
-lapi.o: lapi.c lprefix.h lua.h luaconf.h lapi.h llimits.h lstate.h \
- lobject.h ltm.h lzio.h lmem.h ldebug.h ldo.h lfunc.h lgc.h lstring.h \
- ltable.h lundump.h lvm.h
-lauxlib.o: lauxlib.c lprefix.h lua.h luaconf.h lauxlib.h
-lbaselib.o: lbaselib.c lprefix.h lua.h luaconf.h lauxlib.h lualib.h
-lbitlib.o: lbitlib.c lprefix.h lua.h luaconf.h lauxlib.h lualib.h
-lcode.o: lcode.c lprefix.h lua.h luaconf.h lcode.h llex.h lobject.h \
- llimits.h lzio.h lmem.h lopcodes.h lparser.h ldebug.h lstate.h ltm.h \
- ldo.h lgc.h lstring.h ltable.h lvm.h
-lcorolib.o: lcorolib.c lprefix.h lua.h luaconf.h lauxlib.h lualib.h
-lctype.o: lctype.c lprefix.h lctype.h lua.h luaconf.h llimits.h
-ldblib.o: ldblib.c lprefix.h lua.h luaconf.h lauxlib.h lualib.h
-ldebug.o: ldebug.c lprefix.h lua.h luaconf.h lapi.h llimits.h lstate.h \
- lobject.h ltm.h lzio.h lmem.h lcode.h llex.h lopcodes.h lparser.h \
- ldebug.h ldo.h lfunc.h lstring.h lgc.h ltable.h lvm.h
-ldo.o: ldo.c lprefix.h lua.h luaconf.h lapi.h llimits.h lstate.h \
- lobject.h ltm.h lzio.h lmem.h ldebug.h ldo.h lfunc.h lgc.h lopcodes.h \
- lparser.h lstring.h ltable.h lundump.h lvm.h
-ldump.o: ldump.c lprefix.h lua.h luaconf.h lobject.h llimits.h lstate.h \
- ltm.h lzio.h lmem.h lundump.h
-lfunc.o: lfunc.c lprefix.h lua.h luaconf.h lfunc.h lobject.h llimits.h \
- lgc.h lstate.h ltm.h lzio.h lmem.h
-lgc.o: lgc.c lprefix.h lua.h luaconf.h ldebug.h lstate.h lobject.h \
- llimits.h ltm.h lzio.h lmem.h ldo.h lfunc.h lgc.h lstring.h ltable.h
-linit.o: linit.c lprefix.h lua.h luaconf.h lualib.h lauxlib.h
-liolib.o: liolib.c lprefix.h lua.h luaconf.h lauxlib.h lualib.h
-llex.o: llex.c lprefix.h lua.h luaconf.h lctype.h llimits.h ldebug.h \
- lstate.h lobject.h ltm.h lzio.h lmem.h ldo.h lgc.h llex.h lparser.h \
- lstring.h ltable.h
-lmathlib.o: lmathlib.c lprefix.h lua.h luaconf.h lauxlib.h lualib.h
-lmem.o: lmem.c lprefix.h lua.h luaconf.h ldebug.h lstate.h lobject.h \
- llimits.h ltm.h lzio.h lmem.h ldo.h lgc.h
-loadlib.o: loadlib.c lprefix.h lua.h luaconf.h lauxlib.h lualib.h
-lobject.o: lobject.c lprefix.h lua.h luaconf.h lctype.h llimits.h \
- ldebug.h lstate.h lobject.h ltm.h lzio.h lmem.h ldo.h lstring.h lgc.h \
- lvm.h
-lopcodes.o: lopcodes.c lprefix.h lopcodes.h llimits.h lua.h luaconf.h
-loslib.o: loslib.c lprefix.h lua.h luaconf.h lauxlib.h lualib.h
-lparser.o: lparser.c lprefix.h lua.h luaconf.h lcode.h llex.h lobject.h \
- llimits.h lzio.h lmem.h lopcodes.h lparser.h ldebug.h lstate.h ltm.h \
- ldo.h lfunc.h lstring.h lgc.h ltable.h
-lstate.o: lstate.c lprefix.h lua.h luaconf.h lapi.h llimits.h lstate.h \
- lobject.h ltm.h lzio.h lmem.h ldebug.h ldo.h lfunc.h lgc.h llex.h \
- lstring.h ltable.h
-lstring.o: lstring.c lprefix.h lua.h luaconf.h ldebug.h lstate.h \
- lobject.h llimits.h ltm.h lzio.h lmem.h ldo.h lstring.h lgc.h
-lstrlib.o: lstrlib.c lprefix.h lua.h luaconf.h lauxlib.h lualib.h
-ltable.o: ltable.c lprefix.h lua.h luaconf.h ldebug.h lstate.h lobject.h \
- llimits.h ltm.h lzio.h lmem.h ldo.h lgc.h lstring.h ltable.h lvm.h
-ltablib.o: ltablib.c lprefix.h lua.h luaconf.h lauxlib.h lualib.h
-ltm.o: ltm.c lprefix.h lua.h luaconf.h ldebug.h lstate.h lobject.h \
- llimits.h ltm.h lzio.h lmem.h ldo.h lstring.h lgc.h ltable.h lvm.h
-lua.o: lua.c lprefix.h lua.h luaconf.h lauxlib.h lualib.h
-luac.o: luac.c lprefix.h lua.h luaconf.h lauxlib.h lobject.h llimits.h \
- lstate.h ltm.h lzio.h lmem.h lundump.h ldebug.h lopcodes.h
-lundump.o: lundump.c lprefix.h lua.h luaconf.h ldebug.h lstate.h \
- lobject.h llimits.h ltm.h lzio.h lmem.h ldo.h lfunc.h lstring.h lgc.h \
- lundump.h
-lutf8lib.o: lutf8lib.c lprefix.h lua.h luaconf.h lauxlib.h lualib.h
-lvm.o: lvm.c lprefix.h lua.h luaconf.h ldebug.h lstate.h lobject.h \
- llimits.h ltm.h lzio.h lmem.h ldo.h lfunc.h lgc.h lopcodes.h lstring.h \
- ltable.h lvm.h
-lzio.o: lzio.c lprefix.h lua.h luaconf.h llimits.h lmem.h lstate.h \
- lobject.h ltm.h lzio.h
+.PHONY: all $(PLATS) clean test install local none dummy echo pecho lecho
 
 # (end of Makefile)

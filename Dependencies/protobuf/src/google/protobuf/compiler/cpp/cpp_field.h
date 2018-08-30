@@ -1,6 +1,6 @@
 // Protocol Buffers - Google's data interchange format
 // Copyright 2008 Google Inc.  All rights reserved.
-// http://code.google.com/p/protobuf/
+// https://developers.google.com/protocol-buffers/
 //
 // Redistribution and use in source and binary forms, with or without
 // modification, are permitted provided that the following conditions are
@@ -36,11 +36,12 @@
 #define GOOGLE_PROTOBUF_COMPILER_CPP_FIELD_H__
 
 #include <map>
+#include <memory>
 #include <string>
 
-#include <google/protobuf/stubs/common.h>
-#include <google/protobuf/descriptor.h>
+#include <google/protobuf/compiler/cpp/cpp_helpers.h>
 #include <google/protobuf/compiler/cpp/cpp_options.h>
+#include <google/protobuf/descriptor.h>
 
 namespace google {
 namespace protobuf {
@@ -58,18 +59,26 @@ namespace cpp {
 // ['name', 'index', 'number', 'classname', 'declared_type', 'tag_size',
 // 'deprecation'].
 void SetCommonFieldVariables(const FieldDescriptor* descriptor,
-                             map<string, string>* variables,
+                             std::map<string, string>* variables,
                              const Options& options);
+
+void SetCommonOneofFieldVariables(const FieldDescriptor* descriptor,
+                                  std::map<string, string>* variables);
 
 class FieldGenerator {
  public:
-  FieldGenerator() {}
+  explicit FieldGenerator(const Options& options) : options_(options) {}
   virtual ~FieldGenerator();
 
   // Generate lines of code declaring members fields of the message class
   // needed to represent this field.  These are placed inside the message
   // class.
   virtual void GeneratePrivateMembers(io::Printer* printer) const = 0;
+
+  // Generate static default variable for this field. These are placed inside
+  // the message class. Most field types don't need this, so the default
+  // implementation is empty.
+  virtual void GenerateStaticMembers(io::Printer* /*printer*/) const {}
 
   // Generate prototypes for all of the accessor functions related to this
   // field.  These are placed inside the class definition.
@@ -78,18 +87,28 @@ class FieldGenerator {
   // Generate inline definitions of accessor functions for this field.
   // These are placed inside the header after all class definitions.
   virtual void GenerateInlineAccessorDefinitions(
-    io::Printer* printer) const = 0;
+      io::Printer* printer) const = 0;
 
   // Generate definitions of accessors that aren't inlined.  These are
   // placed somewhere in the .cc file.
   // Most field types don't need this, so the default implementation is empty.
   virtual void GenerateNonInlineAccessorDefinitions(
-    io::Printer* printer) const {}
+      io::Printer* /*printer*/) const {}
 
   // Generate lines of code (statements, not declarations) which clear the
-  // field.  This is used to define the clear_$name$() method as well as
-  // the Clear() method for the whole message.
+  // field.  This is used to define the clear_$name$() method
   virtual void GenerateClearingCode(io::Printer* printer) const = 0;
+
+  // Generate lines of code (statements, not declarations) which clear the field
+  // as part of the Clear() method for the whole message.  For message types
+  // which have field presence bits, MessageGenerator::GenerateClear will have
+  // already checked the presence bits.
+  //
+  // Since most field types can re-use GenerateClearingCode, this method is not
+  // pure virtual.
+  virtual void GenerateMessageClearingCode(io::Printer* printer) const {
+    GenerateClearingCode(printer);
+  }
 
   // Generate lines of code (statements, not declarations) which merges the
   // contents of the field from the current message to the target message,
@@ -98,6 +117,9 @@ class FieldGenerator {
   // Details of this usage can be found in message.cc under the
   // GenerateMergeFrom method.
   virtual void GenerateMergingCode(io::Printer* printer) const = 0;
+
+  // Generates a copy constructor
+  virtual void GenerateCopyConstructorCode(io::Printer* printer) const = 0;
 
   // Generate lines of code (statements, not declarations) which swaps
   // this field and the corresponding field of another message, which
@@ -114,18 +136,29 @@ class FieldGenerator {
   // Generate any code that needs to go in the class's SharedDtor() method,
   // invoked by the destructor.
   // Most field types don't need this, so the default implementation is empty.
-  virtual void GenerateDestructorCode(io::Printer* printer) const {}
+  virtual void GenerateDestructorCode(io::Printer* /*printer*/) const {}
+
+  // Generate a manual destructor invocation for use when the message is on an
+  // arena. The code that this method generates will be executed inside a
+  // shared-for-the-whole-message-class method registered with OwnDestructor().
+  // The method should return |true| if it generated any code that requires a
+  // call; this allows the message generator to eliminate the OwnDestructor()
+  // registration if no fields require it.
+  virtual bool GenerateArenaDestructorCode(io::Printer* printer) const {
+    return false;
+  }
 
   // Generate code that allocates the fields's default instance.
-  virtual void GenerateDefaultInstanceAllocator(io::Printer* printer) const {}
-
-  // Generate code that should be run when ShutdownProtobufLibrary() is called,
-  // to delete all dynamically-allocated objects.
-  virtual void GenerateShutdownCode(io::Printer* printer) const {}
+  virtual void GenerateDefaultInstanceAllocator(io::Printer* /*printer*/)
+      const {}
 
   // Generate lines to decode this field, which will be placed inside the
   // message's MergeFromCodedStream() method.
   virtual void GenerateMergeFromCodedStream(io::Printer* printer) const = 0;
+
+  // Returns true if this field's "MergeFromCodedStream" code needs the arena
+  // to be defined as a variable.
+  virtual bool MergeFromCodedStreamNeedsArena() const { return false; }
 
   // Generate lines to decode this field from a packed value, which will be
   // placed inside the message's MergeFromCodedStream() method.
@@ -146,6 +179,14 @@ class FieldGenerator {
   // are placed in the message's ByteSize() method.
   virtual void GenerateByteSize(io::Printer* printer) const = 0;
 
+  // Any tags about field layout decisions (such as inlining) to embed in the
+  // offset.
+  virtual uint32 CalculateFieldTag() const { return 0; }
+  virtual bool IsInlined() const { return false; }
+
+ protected:
+  const Options& options_;
+
  private:
   GOOGLE_DISALLOW_EVIL_CONSTRUCTORS(FieldGenerator);
 };
@@ -153,21 +194,23 @@ class FieldGenerator {
 // Convenience class which constructs FieldGenerators for a Descriptor.
 class FieldGeneratorMap {
  public:
-  explicit FieldGeneratorMap(const Descriptor* descriptor, const Options& options);
+  FieldGeneratorMap(const Descriptor* descriptor, const Options& options,
+                    SCCAnalyzer* scc_analyzer);
   ~FieldGeneratorMap();
 
   const FieldGenerator& get(const FieldDescriptor* field) const;
 
  private:
   const Descriptor* descriptor_;
-  scoped_array<scoped_ptr<FieldGenerator> > field_generators_;
+  const Options& options_;
+  std::vector<std::unique_ptr<FieldGenerator>> field_generators_;
 
   static FieldGenerator* MakeGenerator(const FieldDescriptor* field,
-                                       const Options& options);
+                                       const Options& options,
+                                       SCCAnalyzer* scc_analyzer);
 
   GOOGLE_DISALLOW_EVIL_CONSTRUCTORS(FieldGeneratorMap);
 };
-
 
 }  // namespace cpp
 }  // namespace compiler

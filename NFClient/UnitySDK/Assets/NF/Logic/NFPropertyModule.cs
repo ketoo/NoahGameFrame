@@ -4,7 +4,6 @@ using System.Text;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
-using ProtoBuf;
 using NFMsg;
 using UnityEngine;
 
@@ -61,24 +60,22 @@ namespace NFSDK
 
         private void OnPropertyInt(UInt16 id, MemoryStream stream)
         {
-            NFMsg.MsgBase xMsg = new NFMsg.MsgBase();
-            xMsg = Serializer.Deserialize<NFMsg.MsgBase>(stream);
+            NFMsg.MsgBase xMsg = NFMsg.MsgBase.Parser.ParseFrom(stream);
 
-            NFMsg.ObjectPropertyInt propertyData = new NFMsg.ObjectPropertyInt();
-            propertyData = Serializer.Deserialize<NFMsg.ObjectPropertyInt>(new MemoryStream(xMsg.msg_data));
+            NFMsg.ObjectPropertyInt propertyData = NFMsg.ObjectPropertyInt.Parser.ParseFrom(xMsg.msg_data);
 
 			NFIObject go = mKernelModule.GetObject(mHelpModule.PBToNF(propertyData.player_id));
             NFIPropertyManager propertyManager = go.GetPropertyManager();
 
             for (int i = 0; i < propertyData.property_list.Count; i++)
             {
-                NFIProperty property = propertyManager.GetProperty(System.Text.Encoding.Default.GetString(propertyData.property_list[i].property_name));
+                NFIProperty property = propertyManager.GetProperty(propertyData.property_list[i].property_name.ToStringUtf8());
                 if (null == property)
                 {
                     NFDataList varList = new NFDataList();
                     varList.AddInt(0);
 
-                    property = propertyManager.AddProperty(System.Text.Encoding.Default.GetString(propertyData.property_list[i].property_name), varList);
+                    property = propertyManager.AddProperty(propertyData.property_list[i].property_name.ToStringUtf8(), varList);
                 }
 
                 property.SetInt(propertyData.property_list[i].data);
@@ -86,24 +83,22 @@ namespace NFSDK
         }
         private void OnPropertyFloat(UInt16 id, MemoryStream stream)
         {
-            NFMsg.MsgBase xMsg = new NFMsg.MsgBase();
-            xMsg = Serializer.Deserialize<NFMsg.MsgBase>(stream);
+            NFMsg.MsgBase xMsg = NFMsg.MsgBase.Parser.ParseFrom(stream);
 
-            NFMsg.ObjectPropertyFloat propertyData = new NFMsg.ObjectPropertyFloat();
-            propertyData = Serializer.Deserialize<NFMsg.ObjectPropertyFloat>(new MemoryStream(xMsg.msg_data));
+            NFMsg.ObjectPropertyFloat propertyData = NFMsg.ObjectPropertyFloat.Parser.ParseFrom(xMsg.msg_data);
 
 			NFIObject go = mKernelModule.GetObject(mHelpModule.PBToNF(propertyData.player_id));
 
             for (int i = 0; i < propertyData.property_list.Count; i++)
             {
                 NFIPropertyManager propertyManager = go.GetPropertyManager();
-                NFIProperty property = propertyManager.GetProperty(System.Text.Encoding.Default.GetString(propertyData.property_list[i].property_name));
+                NFIProperty property = propertyManager.GetProperty(propertyData.property_list[i].property_name.ToStringUtf8());
                 if (null == property)
                 {
                     NFDataList varList = new NFDataList();
                     varList.AddFloat(0.0f);
 
-                    property = propertyManager.AddProperty(System.Text.Encoding.Default.GetString(propertyData.property_list[i].property_name), varList);
+                    property = propertyManager.AddProperty(propertyData.property_list[i].property_name.ToStringUtf8(), varList);
                 }
 
                 property.SetFloat(propertyData.property_list[i].data);
@@ -111,49 +106,45 @@ namespace NFSDK
         }
         private void OnPropertyString(UInt16 id, MemoryStream stream)
         {
-            NFMsg.MsgBase xMsg = new NFMsg.MsgBase();
-            xMsg = Serializer.Deserialize<NFMsg.MsgBase>(stream);
+            NFMsg.MsgBase xMsg = NFMsg.MsgBase.Parser.ParseFrom(stream);
 
-            NFMsg.ObjectPropertyString propertyData = new NFMsg.ObjectPropertyString();
-            propertyData = Serializer.Deserialize<NFMsg.ObjectPropertyString>(new MemoryStream(xMsg.msg_data));
+            NFMsg.ObjectPropertyString propertyData = NFMsg.ObjectPropertyString.Parser.ParseFrom(xMsg.msg_data);
 
 			NFIObject go = mKernelModule.GetObject(mHelpModule.PBToNF(propertyData.player_id));
 
             for (int i = 0; i < propertyData.property_list.Count; i++)
             {
                 NFIPropertyManager propertyManager = go.GetPropertyManager();
-                NFIProperty property = propertyManager.GetProperty(System.Text.Encoding.Default.GetString(propertyData.property_list[i].property_name));
+                NFIProperty property = propertyManager.GetProperty(propertyData.property_list[i].property_name.ToStringUtf8());
                 if (null == property)
                 {
                     NFDataList varList = new NFDataList();
                     varList.AddString("");
 
-                    property = propertyManager.AddProperty(System.Text.Encoding.Default.GetString(propertyData.property_list[i].property_name), varList);
+                    property = propertyManager.AddProperty(propertyData.property_list[i].property_name.ToStringUtf8(), varList);
                 }
 
-                property.SetString(System.Text.Encoding.Default.GetString(propertyData.property_list[i].data));
+                property.SetString(propertyData.property_list[i].data.ToStringUtf8());
             }
         }
         private void OnPropertyObject(UInt16 id, MemoryStream stream)
         {
-            NFMsg.MsgBase xMsg = new NFMsg.MsgBase();
-            xMsg = Serializer.Deserialize<NFMsg.MsgBase>(stream);
+            NFMsg.MsgBase xMsg = NFMsg.MsgBase.Parser.ParseFrom(stream);
 
-            NFMsg.ObjectPropertyObject propertyData = new NFMsg.ObjectPropertyObject();
-            propertyData = Serializer.Deserialize<NFMsg.ObjectPropertyObject>(new MemoryStream(xMsg.msg_data));
+            NFMsg.ObjectPropertyObject propertyData = NFMsg.ObjectPropertyObject.Parser.ParseFrom(xMsg.msg_data);
 
 			NFIObject go = mKernelModule.GetObject(mHelpModule.PBToNF(propertyData.player_id));
 
             for (int i = 0; i < propertyData.property_list.Count; i++)
             {
                 NFIPropertyManager propertyManager = go.GetPropertyManager();
-                NFIProperty property = propertyManager.GetProperty(System.Text.Encoding.Default.GetString(propertyData.property_list[i].property_name));
+                NFIProperty property = propertyManager.GetProperty(propertyData.property_list[i].property_name.ToStringUtf8());
                 if (null == property)
                 {
                     NFDataList varList = new NFDataList();
                     varList.AddObject(new NFGUID());
 
-                    property = propertyManager.AddProperty(System.Text.Encoding.Default.GetString(propertyData.property_list[i].property_name), varList);
+                    property = propertyManager.AddProperty(propertyData.property_list[i].property_name.ToStringUtf8(), varList);
                 }
 
 				property.SetObject(mHelpModule.PBToNF(propertyData.property_list[i].data));
@@ -162,24 +153,22 @@ namespace NFSDK
 
 		private void OnPropertyVector2(UInt16 id, MemoryStream stream)
         {
-            NFMsg.MsgBase xMsg = new NFMsg.MsgBase();
-            xMsg = Serializer.Deserialize<NFMsg.MsgBase>(stream);
+            NFMsg.MsgBase xMsg = NFMsg.MsgBase.Parser.ParseFrom(stream);
 
-			NFMsg.ObjectPropertyVector2 propertyData = new NFMsg.ObjectPropertyVector2();
-			propertyData = Serializer.Deserialize<NFMsg.ObjectPropertyVector2>(new MemoryStream(xMsg.msg_data));
+            NFMsg.ObjectPropertyVector2 propertyData = NFMsg.ObjectPropertyVector2.Parser.ParseFrom(xMsg.msg_data);
 
             NFIObject go = mKernelModule.GetObject(mHelpModule.PBToNF(propertyData.player_id));
 
 			for (int i = 0; i < propertyData.property_list.Count; i++)
             {
                 NFIPropertyManager propertyManager = go.GetPropertyManager();
-				NFIProperty property = propertyManager.GetProperty(System.Text.Encoding.Default.GetString(propertyData.property_list[i].property_name));
+				NFIProperty property = propertyManager.GetProperty(propertyData.property_list[i].property_name.ToStringUtf8());
                 if (null == property)
                 {
                     NFDataList varList = new NFDataList();
                     varList.AddVector2(new NFVector2());
 
-					property = propertyManager.AddProperty(System.Text.Encoding.Default.GetString(propertyData.property_list[i].property_name), varList);
+					property = propertyManager.AddProperty(propertyData.property_list[i].property_name.ToStringUtf8(), varList);
                 }
 
 				property.SetVector2(mHelpModule.PBToNF(propertyData.property_list[i].data));
@@ -188,24 +177,22 @@ namespace NFSDK
 
 		private void OnPropertyVector3(UInt16 id, MemoryStream stream)
         {
-            NFMsg.MsgBase xMsg = new NFMsg.MsgBase();
-            xMsg = Serializer.Deserialize<NFMsg.MsgBase>(stream);
+            NFMsg.MsgBase xMsg = NFMsg.MsgBase.Parser.ParseFrom(stream);
 
-			NFMsg.ObjectPropertyVector3 propertyData = new NFMsg.ObjectPropertyVector3();
-			propertyData = Serializer.Deserialize<NFMsg.ObjectPropertyVector3>(new MemoryStream(xMsg.msg_data));
+            NFMsg.ObjectPropertyVector3 propertyData = NFMsg.ObjectPropertyVector3.Parser.ParseFrom(xMsg.msg_data);
 
             NFIObject go = mKernelModule.GetObject(mHelpModule.PBToNF(propertyData.player_id));
 
 			for (int i = 0; i < propertyData.property_list.Count; i++)
             {
                 NFIPropertyManager propertyManager = go.GetPropertyManager();
-				NFIProperty property = propertyManager.GetProperty(System.Text.Encoding.Default.GetString(propertyData.property_list[i].property_name));
+				NFIProperty property = propertyManager.GetProperty(propertyData.property_list[i].property_name.ToStringUtf8());
                 if (null == property)
                 {
                     NFDataList varList = new NFDataList();
                     varList.AddVector3(new NFVector3());
 
-					property = propertyManager.AddProperty(System.Text.Encoding.Default.GetString(propertyData.property_list[i].property_name), varList);
+					property = propertyManager.AddProperty(propertyData.property_list[i].property_name.ToStringUtf8(), varList);
                 }
 
 				property.SetVector3(mHelpModule.PBToNF(propertyData.property_list[i].data));
@@ -214,11 +201,9 @@ namespace NFSDK
 
         internal void OnObjectPropertyEntry(UInt16 id, MemoryStream stream)
         {
-            NFMsg.MsgBase xMsg = new NFMsg.MsgBase();
-            xMsg = Serializer.Deserialize<NFMsg.MsgBase>(stream);
+            NFMsg.MsgBase xMsg = NFMsg.MsgBase.Parser.ParseFrom(stream);
 
-            NFMsg.MultiObjectPropertyList xMultiObjectPropertyList = new NFMsg.MultiObjectPropertyList();
-            xMultiObjectPropertyList = Serializer.Deserialize<NFMsg.MultiObjectPropertyList>(new MemoryStream(xMsg.msg_data));
+            NFMsg.MultiObjectPropertyList xMultiObjectPropertyList = NFMsg.MultiObjectPropertyList.Parser.ParseFrom(xMsg.msg_data);
 
             for (int i = 0; i < xMultiObjectPropertyList.multi_player_property.Count; i++)
             {
@@ -228,7 +213,7 @@ namespace NFSDK
 
                 for (int j = 0; j < xPropertyData.property_int_list.Count; j++)
                 {
-                    string strPropertyName = System.Text.Encoding.Default.GetString(xPropertyData.property_int_list[j].property_name);
+                    string strPropertyName = xPropertyData.property_int_list[j].property_name.ToStringUtf8();
                     NFIProperty xProperty = xPropertyManager.GetProperty(strPropertyName);
                     if (null == xProperty)
                     {
@@ -243,7 +228,7 @@ namespace NFSDK
 
                 for (int j = 0; j < xPropertyData.property_float_list.Count; j++)
                 {
-                    string strPropertyName = System.Text.Encoding.Default.GetString(xPropertyData.property_float_list[j].property_name);
+                    string strPropertyName = xPropertyData.property_float_list[j].property_name.ToStringUtf8();
                     NFIProperty xProperty = xPropertyManager.GetProperty(strPropertyName);
                     if (null == xProperty)
                     {
@@ -258,7 +243,7 @@ namespace NFSDK
 
                 for (int j = 0; j < xPropertyData.property_string_list.Count; j++)
                 {
-                    string strPropertyName = System.Text.Encoding.Default.GetString(xPropertyData.property_string_list[j].property_name);
+                    string strPropertyName = xPropertyData.property_string_list[j].property_name.ToStringUtf8();
                     NFIProperty xProperty = xPropertyManager.GetProperty(strPropertyName);
                     if (null == xProperty)
                     {
@@ -268,12 +253,12 @@ namespace NFSDK
                         xProperty = xPropertyManager.AddProperty(strPropertyName, varList);
                     }
 
-                    xProperty.SetString(System.Text.Encoding.Default.GetString(xPropertyData.property_string_list[j].data));
+                    xProperty.SetString(xPropertyData.property_string_list[j].data.ToStringUtf8());
                 }
 
                 for (int j = 0; j < xPropertyData.property_object_list.Count; j++)
                 {
-                    string strPropertyName = System.Text.Encoding.Default.GetString(xPropertyData.property_object_list[j].property_name);
+                    string strPropertyName = xPropertyData.property_object_list[j].property_name.ToStringUtf8();
                     NFIProperty xProperty = xPropertyManager.GetProperty(strPropertyName);
                     if (null == xProperty)
                     {

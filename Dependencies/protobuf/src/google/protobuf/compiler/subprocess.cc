@@ -1,6 +1,6 @@
 // Protocol Buffers - Google's data interchange format
 // Copyright 2008 Google Inc.  All rights reserved.
-// http://code.google.com/p/protobuf/
+// https://developers.google.com/protocol-buffers/
 //
 // Redistribution and use in source and binary forms, with or without
 // modification, are permitted provided that the following conditions are
@@ -33,6 +33,7 @@
 #include <google/protobuf/compiler/subprocess.h>
 
 #include <algorithm>
+#include <cstring>
 #include <iostream>
 
 #ifndef _WIN32
@@ -42,6 +43,7 @@
 #include <signal.h>
 #endif
 
+#include <google/protobuf/stubs/logging.h>
 #include <google/protobuf/stubs/common.h>
 #include <google/protobuf/message.h>
 #include <google/protobuf/stubs/substitute.h>
@@ -49,6 +51,16 @@
 namespace google {
 namespace protobuf {
 namespace compiler {
+
+namespace {
+char* portable_strdup(const char* s) {
+  char* ns = (char*) malloc(strlen(s) + 1);
+  if (ns != NULL) {
+    strcpy(ns, s);
+  }
+  return ns;
+}
+}  // namespace
 
 #ifdef _WIN32
 
@@ -113,7 +125,7 @@ void Subprocess::Start(const string& program, SearchMode search_mode) {
   }
 
   // CreateProcess() mutates its second parameter.  WTF?
-  char* name_copy = strdup(program.c_str());
+  char* name_copy = portable_strdup(program.c_str());
 
   // Create the process.
   PROCESS_INFORMATION process_info;
@@ -171,7 +183,7 @@ bool Subprocess::Communicate(const Message& input, Message* output,
     DWORD wait_result =
         WaitForMultipleObjects(handle_count, handles, FALSE, INFINITE);
 
-    HANDLE signaled_handle;
+    HANDLE signaled_handle = NULL;
     if (wait_result >= WAIT_OBJECT_0 &&
         wait_result < WAIT_OBJECT_0 + handle_count) {
       signaled_handle = handles[wait_result - WAIT_OBJECT_0];
@@ -259,12 +271,11 @@ string Subprocess::Win32ErrorMessage(DWORD error_code) {
   char* message;
 
   // WTF?
-  FormatMessage(FORMAT_MESSAGE_ALLOCATE_BUFFER |
-                FORMAT_MESSAGE_FROM_SYSTEM |
-                FORMAT_MESSAGE_IGNORE_INSERTS,
-                NULL, error_code, 0,
-                (LPTSTR)&message,  // NOT A BUG!
-                0, NULL);
+  FormatMessageA(FORMAT_MESSAGE_ALLOCATE_BUFFER | FORMAT_MESSAGE_FROM_SYSTEM |
+                     FORMAT_MESSAGE_IGNORE_INSERTS,
+                 NULL, error_code, 0,
+                 (LPSTR)&message,  // NOT A BUG!
+                 0, NULL);
 
   string result = message;
   LocalFree(message);
@@ -298,7 +309,7 @@ void Subprocess::Start(const string& program, SearchMode search_mode) {
   GOOGLE_CHECK(pipe(stdin_pipe) != -1);
   GOOGLE_CHECK(pipe(stdout_pipe) != -1);
 
-  char* argv[2] = { strdup(program.c_str()), NULL };
+  char* argv[2] = { portable_strdup(program.c_str()), NULL };
 
   child_pid_ = fork();
   if (child_pid_ == -1) {
@@ -346,7 +357,6 @@ void Subprocess::Start(const string& program, SearchMode search_mode) {
 
 bool Subprocess::Communicate(const Message& input, Message* output,
                              string* error) {
-
   GOOGLE_CHECK_NE(child_stdin_, -1) << "Must call Start() first.";
 
   // The "sighandler_t" typedef is GNU-specific, so define our own.
@@ -359,7 +369,7 @@ bool Subprocess::Communicate(const Message& input, Message* output,
   string output_data;
 
   int input_pos = 0;
-  int max_fd = max(child_stdin_, child_stdout_);
+  int max_fd = std::max(child_stdin_, child_stdout_);
 
   while (child_stdout_ != -1) {
     fd_set read_fds;
@@ -449,7 +459,7 @@ bool Subprocess::Communicate(const Message& input, Message* output,
   }
 
   if (!output->ParseFromString(output_data)) {
-    *error = "Plugin output is unparseable.";
+    *error = "Plugin output is unparseable: " + CEscape(output_data);
     return false;
   }
 

@@ -1,0 +1,7 @@
+D:/Documents/Downloads/protobuf-cpp-3.6.1/protobuf-3.6.1/vsprojects/CMakeFiles/libprotobuf-lite.dir
+D:/Documents/Downloads/protobuf-cpp-3.6.1/protobuf-3.6.1/vsprojects/CMakeFiles/INSTALL.dir
+D:/Documents/Downloads/protobuf-cpp-3.6.1/protobuf-3.6.1/vsprojects/CMakeFiles/libprotobuf.dir
+D:/Documents/Downloads/protobuf-cpp-3.6.1/protobuf-3.6.1/vsprojects/CMakeFiles/protoc.dir
+D:/Documents/Downloads/protobuf-cpp-3.6.1/protobuf-3.6.1/vsprojects/CMakeFiles/libprotoc.dir
+D:/Documents/Downloads/protobuf-cpp-3.6.1/protobuf-3.6.1/vsprojects/CMakeFiles/ALL_BUILD.dir
+D:/Documents/Downloads/protobuf-cpp-3.6.1/protobuf-3.6.1/vsprojects/CMakeFiles/ZERO_CHECK.dir
