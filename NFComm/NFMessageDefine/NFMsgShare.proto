@@ -389,12 +389,37 @@ message AckMiningTitle
 //EGMI_REQ_SEARCH_OPPNENT
 message ReqSearchOppnent
 {
+    int32		self_scene = 1;
 }
 
 //EGMI_ACK_SEARCH_OPPNENT
 message AckSearchOppnent
 {
-    int32		scene_id = 1;
+    int32 scene_id = 1;
+	int32 gold = 2;
+	int32 diamond = 3;
+	int32 level = 4;
+	int32 cup = 5;
+	bytes name = 6;
+	bytes head = 7;
+	bytes hero_cnf1 = 8;
+	int32 hero_star1 = 9;
+	bytes hero_cnf2 = 10;
+	int32 hero_star2 = 11;
+	bytes hero_cnf3 = 12;
+	int32 hero_star3 = 13;
+
+	Ident hero_id1 = 20;
+	Ident hero_id2 = 21;
+	Ident hero_id3 = 22;
+	
+	
+	Vector3 hero_pos1 = 23;
+	Vector3 hero_pos2 = 24;
+	Vector3 hero_pos3 = 25;
+	
+	AckMiningTitle title = 30;
+    Ident opponent = 31;
 }
 
 

@@ -2240,3 +2240,4 @@ void NFCGameServerNet_ServerModule::OnGuildTransWorld(const NFSOCK nSockIndex, c
 		m_pNetClientModule->SendBySuit(NF_SERVER_TYPES::NF_ST_WORLD, nHasKey, nMsgID, msg, nLen);
 	}
 }
+

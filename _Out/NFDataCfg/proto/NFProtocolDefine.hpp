@@ -629,6 +629,9 @@ namespace NFrame
 		static const std::string& HeroID1(){ static std::string x = "HeroID1"; return x; };// object
 		static const std::string& HeroID2(){ static std::string x = "HeroID2"; return x; };// object
 		static const std::string& HeroID3(){ static std::string x = "HeroID3"; return x; };// object
+		static const std::string& HeroPos1(){ static std::string x = "HeroPos1"; return x; };// vector
+		static const std::string& HeroPos2(){ static std::string x = "HeroPos2"; return x; };// vector
+		static const std::string& HeroPos3(){ static std::string x = "HeroPos3"; return x; };// vector
 		static const std::string& HeroStar1(){ static std::string x = "HeroStar1"; return x; };// int
 		static const std::string& HeroStar2(){ static std::string x = "HeroStar2"; return x; };// int
 		static const std::string& HeroStar3(){ static std::string x = "HeroStar3"; return x; };// int

@@ -34,6 +34,7 @@ extern PROTOBUF_INTERNAL_EXPORT_protobuf_NFMsgShare_2eproto ::google::protobuf::
 extern PROTOBUF_INTERNAL_EXPORT_protobuf_NFMsgShare_2eproto ::google::protobuf::internal::SCCInfo<1> scc_info_PlayerEntryInfo;
 extern PROTOBUF_INTERNAL_EXPORT_protobuf_NFMsgShare_2eproto ::google::protobuf::internal::SCCInfo<1> scc_info_TileBuilding;
 extern PROTOBUF_INTERNAL_EXPORT_protobuf_NFMsgShare_2eproto ::google::protobuf::internal::SCCInfo<1> scc_info_TileNPC;
+extern PROTOBUF_INTERNAL_EXPORT_protobuf_NFMsgShare_2eproto ::google::protobuf::internal::SCCInfo<3> scc_info_AckMiningTitle;
 }  // namespace protobuf_NFMsgShare_2eproto
 namespace NFMsg {
 class ReqEnterGameServerDefaultTypeInternal {
@@ -962,8 +963,11 @@ static void InitDefaultsAckSearchOppnent() {
   ::NFMsg::AckSearchOppnent::InitAsDefaultInstance();
 }
 
-LIBPROTOC_EXPORT ::google::protobuf::internal::SCCInfo<0> scc_info_AckSearchOppnent =
-    {{ATOMIC_VAR_INIT(::google::protobuf::internal::SCCInfoBase::kUninitialized), 0, InitDefaultsAckSearchOppnent}, {}};
+LIBPROTOC_EXPORT ::google::protobuf::internal::SCCInfo<3> scc_info_AckSearchOppnent =
+    {{ATOMIC_VAR_INIT(::google::protobuf::internal::SCCInfoBase::kUninitialized), 3, InitDefaultsAckSearchOppnent}, {
+      &protobuf_NFMsgBase_2eproto::scc_info_Ident.base,
+      &protobuf_NFMsgBase_2eproto::scc_info_Vector3.base,
+      &protobuf_NFMsgShare_2eproto::scc_info_AckMiningTitle.base,}};
 
 static void InitDefaultsReqSendMail() {
   GOOGLE_PROTOBUF_VERIFY_VERSION;
@@ -1491,12 +1495,33 @@ const ::google::protobuf::uint32 TableStruct::offsets[] GOOGLE_PROTOBUF_ATTRIBUT
   ~0u,  // no _extensions_
   ~0u,  // no _oneof_case_
   ~0u,  // no _weak_field_map_
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NFMsg::ReqSearchOppnent, self_scene_),
   ~0u,  // no _has_bits_
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NFMsg::AckSearchOppnent, _internal_metadata_),
   ~0u,  // no _extensions_
   ~0u,  // no _oneof_case_
   ~0u,  // no _weak_field_map_
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NFMsg::AckSearchOppnent, scene_id_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NFMsg::AckSearchOppnent, gold_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NFMsg::AckSearchOppnent, diamond_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NFMsg::AckSearchOppnent, level_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NFMsg::AckSearchOppnent, cup_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NFMsg::AckSearchOppnent, name_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NFMsg::AckSearchOppnent, head_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NFMsg::AckSearchOppnent, hero_cnf1_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NFMsg::AckSearchOppnent, hero_star1_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NFMsg::AckSearchOppnent, hero_cnf2_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NFMsg::AckSearchOppnent, hero_star2_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NFMsg::AckSearchOppnent, hero_cnf3_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NFMsg::AckSearchOppnent, hero_star3_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NFMsg::AckSearchOppnent, hero_id1_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NFMsg::AckSearchOppnent, hero_id2_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NFMsg::AckSearchOppnent, hero_id3_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NFMsg::AckSearchOppnent, hero_pos1_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NFMsg::AckSearchOppnent, hero_pos2_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NFMsg::AckSearchOppnent, hero_pos3_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NFMsg::AckSearchOppnent, title_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NFMsg::AckSearchOppnent, opponent_),
   ~0u,  // no _has_bits_
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NFMsg::ReqSendMail, _internal_metadata_),
   ~0u,  // no _extensions_
@@ -1621,15 +1646,15 @@ static const ::google::protobuf::internal::MigrationSchema schemas[] GOOGLE_PROT
   { 319, -1, sizeof(::NFMsg::TileNPC)},
   { 328, -1, sizeof(::NFMsg::AckMiningTitle)},
   { 336, -1, sizeof(::NFMsg::ReqSearchOppnent)},
-  { 341, -1, sizeof(::NFMsg::AckSearchOppnent)},
-  { 347, -1, sizeof(::NFMsg::ReqSendMail)},
-  { 355, -1, sizeof(::NFMsg::ReqSwitchServer)},
-  { 367, -1, sizeof(::NFMsg::AckSwitchServer)},
-  { 376, -1, sizeof(::NFMsg::PVPRoomInfo)},
-  { 391, -1, sizeof(::NFMsg::ReqPVPApplyMatch)},
-  { 401, -1, sizeof(::NFMsg::AckPVPApplyMatch)},
-  { 410, -1, sizeof(::NFMsg::ReqCreatePVPEctype)},
-  { 417, -1, sizeof(::NFMsg::AckCreatePVPEctype)},
+  { 342, -1, sizeof(::NFMsg::AckSearchOppnent)},
+  { 368, -1, sizeof(::NFMsg::ReqSendMail)},
+  { 376, -1, sizeof(::NFMsg::ReqSwitchServer)},
+  { 388, -1, sizeof(::NFMsg::AckSwitchServer)},
+  { 397, -1, sizeof(::NFMsg::PVPRoomInfo)},
+  { 412, -1, sizeof(::NFMsg::ReqPVPApplyMatch)},
+  { 422, -1, sizeof(::NFMsg::AckPVPApplyMatch)},
+  { 431, -1, sizeof(::NFMsg::ReqCreatePVPEctype)},
+  { 438, -1, sizeof(::NFMsg::AckCreatePVPEctype)},
 };
 
 static ::google::protobuf::Message const * const file_default_instances[] = {
@@ -1820,41 +1845,54 @@ void AddDescriptorsImpl() {
       "g.Ident\"t\n\016AckMiningTitle\022\036\n\004tile\030\001 \003(\0132"
       "\020.NFMsg.TileState\022%\n\010building\030\002 \003(\0132\023.NF"
       "Msg.TileBuilding\022\033\n\003npc\030\003 \003(\0132\016.NFMsg.Ti"
-      "leNPC\"\022\n\020ReqSearchOppnent\"$\n\020AckSearchOp"
-      "pnent\022\020\n\010scene_id\030\001 \001(\005\"\201\001\n\013ReqSendMail\022"
-      "\036\n\010reciever\030\001 \001(\0132\014.NFMsg.Ident\022$\n\titem_"
-      "list\030\002 \003(\0132\021.NFMsg.ItemStruct\022,\n\rcurrenc"
-      "y_list\030\003 \003(\0132\025.NFMsg.CurrencyStruct\"\271\001\n\017"
-      "ReqSwitchServer\022\034\n\006selfid\030\001 \001(\0132\014.NFMsg."
-      "Ident\022\025\n\rself_serverid\030\002 \001(\003\022\027\n\017target_s"
-      "erverid\030\003 \001(\003\022\025\n\rgate_serverid\030\004 \001(\003\022\017\n\007"
-      "SceneID\030\005 \001(\003\022\037\n\tclient_id\030\006 \001(\0132\014.NFMsg"
-      ".Ident\022\017\n\007groupID\030\007 \001(\003\"v\n\017AckSwitchServ"
-      "er\022\034\n\006selfid\030\001 \001(\0132\014.NFMsg.Ident\022\025\n\rself"
-      "_serverid\030\002 \001(\003\022\027\n\017target_serverid\030\003 \001(\003"
-      "\022\025\n\rgate_serverid\030\004 \001(\003\"\361\001\n\013PVPRoomInfo\022"
-      "\023\n\013nCellStatus\030\001 \001(\005\022\034\n\006RoomID\030\002 \001(\0132\014.N"
-      "FMsg.Ident\022\020\n\010nPVPMode\030\003 \001(\005\022\021\n\tnPVPGrad"
-      "e\030\004 \001(\005\022\021\n\tMaxPalyer\030\005 \001(\005\022 \n\nxRedPlayer"
-      "\030\006 \003(\0132\014.NFMsg.Ident\022!\n\013xBluePlayer\030\007 \003("
-      "\0132\014.NFMsg.Ident\022\020\n\010serverid\030\010 \001(\003\022\017\n\007Sce"
-      "neID\030\t \001(\003\022\017\n\007groupID\030\n \001(\003\"\276\001\n\020ReqPVPAp"
-      "plyMatch\022\035\n\007self_id\030\001 \001(\0132\014.NFMsg.Ident\022"
-      "\020\n\010nPVPMode\030\002 \001(\005\022\r\n\005score\030\003 \001(\003\022\021\n\tAppl"
-      "yType\030\004 \001(\005\022\035\n\007team_id\030\005 \001(\0132\014.NFMsg.Ide"
-      "nt\"8\n\nEApplyType\022\025\n\021EApplyType_Single\020\000\022"
-      "\023\n\017EApplyType_Team\020\001\"|\n\020AckPVPApplyMatch"
-      "\022\035\n\007self_id\030\001 \001(\0132\014.NFMsg.Ident\022%\n\txRoom"
-      "Info\030\002 \001(\0132\022.NFMsg.PVPRoomInfo\022\021\n\tApplyT"
-      "ype\030\003 \001(\005\022\017\n\007nResult\030\004 \001(\005\"Z\n\022ReqCreateP"
-      "VPEctype\022\035\n\007self_id\030\001 \001(\0132\014.NFMsg.Ident\022"
-      "%\n\txRoomInfo\030\002 \001(\0132\022.NFMsg.PVPRoomInfo\"m"
-      "\n\022AckCreatePVPEctype\022\035\n\007self_id\030\001 \001(\0132\014."
-      "NFMsg.Ident\022%\n\txRoomInfo\030\002 \001(\0132\022.NFMsg.P"
-      "VPRoomInfo\022\021\n\tApplyType\030\003 \001(\005b\006proto3"
+      "leNPC\"&\n\020ReqSearchOppnent\022\022\n\nself_scene\030"
+      "\001 \001(\005\"\377\003\n\020AckSearchOppnent\022\020\n\010scene_id\030\001"
+      " \001(\005\022\014\n\004gold\030\002 \001(\005\022\017\n\007diamond\030\003 \001(\005\022\r\n\005l"
+      "evel\030\004 \001(\005\022\013\n\003cup\030\005 \001(\005\022\014\n\004name\030\006 \001(\014\022\014\n"
+      "\004head\030\007 \001(\014\022\021\n\thero_cnf1\030\010 \001(\014\022\022\n\nhero_s"
+      "tar1\030\t \001(\005\022\021\n\thero_cnf2\030\n \001(\014\022\022\n\nhero_st"
+      "ar2\030\013 \001(\005\022\021\n\thero_cnf3\030\014 \001(\014\022\022\n\nhero_sta"
+      "r3\030\r \001(\005\022\036\n\010hero_id1\030\024 \001(\0132\014.NFMsg.Ident"
+      "\022\036\n\010hero_id2\030\025 \001(\0132\014.NFMsg.Ident\022\036\n\010hero"
+      "_id3\030\026 \001(\0132\014.NFMsg.Ident\022!\n\thero_pos1\030\027 "
+      "\001(\0132\016.NFMsg.Vector3\022!\n\thero_pos2\030\030 \001(\0132\016"
+      ".NFMsg.Vector3\022!\n\thero_pos3\030\031 \001(\0132\016.NFMs"
+      "g.Vector3\022$\n\005title\030\036 \001(\0132\025.NFMsg.AckMini"
+      "ngTitle\022\036\n\010opponent\030\037 \001(\0132\014.NFMsg.Ident\""
+      "\201\001\n\013ReqSendMail\022\036\n\010reciever\030\001 \001(\0132\014.NFMs"
+      "g.Ident\022$\n\titem_list\030\002 \003(\0132\021.NFMsg.ItemS"
+      "truct\022,\n\rcurrency_list\030\003 \003(\0132\025.NFMsg.Cur"
+      "rencyStruct\"\271\001\n\017ReqSwitchServer\022\034\n\006selfi"
+      "d\030\001 \001(\0132\014.NFMsg.Ident\022\025\n\rself_serverid\030\002"
+      " \001(\003\022\027\n\017target_serverid\030\003 \001(\003\022\025\n\rgate_se"
+      "rverid\030\004 \001(\003\022\017\n\007SceneID\030\005 \001(\003\022\037\n\tclient_"
+      "id\030\006 \001(\0132\014.NFMsg.Ident\022\017\n\007groupID\030\007 \001(\003\""
+      "v\n\017AckSwitchServer\022\034\n\006selfid\030\001 \001(\0132\014.NFM"
+      "sg.Ident\022\025\n\rself_serverid\030\002 \001(\003\022\027\n\017targe"
+      "t_serverid\030\003 \001(\003\022\025\n\rgate_serverid\030\004 \001(\003\""
+      "\361\001\n\013PVPRoomInfo\022\023\n\013nCellStatus\030\001 \001(\005\022\034\n\006"
+      "RoomID\030\002 \001(\0132\014.NFMsg.Ident\022\020\n\010nPVPMode\030\003"
+      " \001(\005\022\021\n\tnPVPGrade\030\004 \001(\005\022\021\n\tMaxPalyer\030\005 \001"
+      "(\005\022 \n\nxRedPlayer\030\006 \003(\0132\014.NFMsg.Ident\022!\n\013"
+      "xBluePlayer\030\007 \003(\0132\014.NFMsg.Ident\022\020\n\010serve"
+      "rid\030\010 \001(\003\022\017\n\007SceneID\030\t \001(\003\022\017\n\007groupID\030\n "
+      "\001(\003\"\276\001\n\020ReqPVPApplyMatch\022\035\n\007self_id\030\001 \001("
+      "\0132\014.NFMsg.Ident\022\020\n\010nPVPMode\030\002 \001(\005\022\r\n\005sco"
+      "re\030\003 \001(\003\022\021\n\tApplyType\030\004 \001(\005\022\035\n\007team_id\030\005"
+      " \001(\0132\014.NFMsg.Ident\"8\n\nEApplyType\022\025\n\021EApp"
+      "lyType_Single\020\000\022\023\n\017EApplyType_Team\020\001\"|\n\020"
+      "AckPVPApplyMatch\022\035\n\007self_id\030\001 \001(\0132\014.NFMs"
+      "g.Ident\022%\n\txRoomInfo\030\002 \001(\0132\022.NFMsg.PVPRo"
+      "omInfo\022\021\n\tApplyType\030\003 \001(\005\022\017\n\007nResult\030\004 \001"
+      "(\005\"Z\n\022ReqCreatePVPEctype\022\035\n\007self_id\030\001 \001("
+      "\0132\014.NFMsg.Ident\022%\n\txRoomInfo\030\002 \001(\0132\022.NFM"
+      "sg.PVPRoomInfo\"m\n\022AckCreatePVPEctype\022\035\n\007"
+      "self_id\030\001 \001(\0132\014.NFMsg.Ident\022%\n\txRoomInfo"
+      "\030\002 \001(\0132\022.NFMsg.PVPRoomInfo\022\021\n\tApplyType\030"
+      "\003 \001(\005b\006proto3"
   };
   ::google::protobuf::DescriptorPool::InternalAddGeneratedFile(
-      descriptor, 5717);
+      descriptor, 6213);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "NFMsgShare.proto", &protobuf_RegisterTypes);
   ::protobuf_NFDefine_2eproto::AddDescriptors();
@@ -15385,6 +15423,7 @@ void AckMiningTitle::InternalSwap(AckMiningTitle* other) {
 void ReqSearchOppnent::InitAsDefaultInstance() {
 }
 #if !defined(_MSC_VER) || _MSC_VER >= 1900
+const int ReqSearchOppnent::kSelfSceneFieldNumber;
 #endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
 
 ReqSearchOppnent::ReqSearchOppnent()
@@ -15398,10 +15437,12 @@ ReqSearchOppnent::ReqSearchOppnent(const ReqSearchOppnent& from)
   : ::google::protobuf::Message(),
       _internal_metadata_(NULL) {
   _internal_metadata_.MergeFrom(from._internal_metadata_);
+  self_scene_ = from.self_scene_;
   // @@protoc_insertion_point(copy_constructor:NFMsg.ReqSearchOppnent)
 }
 
 void ReqSearchOppnent::SharedCtor() {
+  self_scene_ = 0;
 }
 
 ReqSearchOppnent::~ReqSearchOppnent() {
@@ -15432,6 +15473,7 @@ void ReqSearchOppnent::Clear() {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
+  self_scene_ = 0;
   _internal_metadata_.Clear();
 }
 
@@ -15444,12 +15486,31 @@ bool ReqSearchOppnent::MergePartialFromCodedStream(
     ::std::pair<::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
     tag = p.first;
     if (!p.second) goto handle_unusual;
-  handle_unusual:
-    if (tag == 0) {
-      goto success;
+    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
+      // int32 self_scene = 1;
+      case 1: {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(8u /* 8 & 0xFF */)) {
+
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
+                 input, &self_scene_)));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      default: {
+      handle_unusual:
+        if (tag == 0) {
+          goto success;
+        }
+        DO_(::google::protobuf::internal::WireFormat::SkipField(
+              input, tag, _internal_metadata_.mutable_unknown_fields()));
+        break;
+      }
     }
-    DO_(::google::protobuf::internal::WireFormat::SkipField(
-          input, tag, _internal_metadata_.mutable_unknown_fields()));
   }
 success:
   // @@protoc_insertion_point(parse_success:NFMsg.ReqSearchOppnent)
@@ -15466,6 +15527,11 @@ void ReqSearchOppnent::SerializeWithCachedSizes(
   ::google::protobuf::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
+  // int32 self_scene = 1;
+  if (this->self_scene() != 0) {
+    ::google::protobuf::internal::WireFormatLite::WriteInt32(1, this->self_scene(), output);
+  }
+
   if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
     ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
         (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()), output);
@@ -15479,6 +15545,11 @@ void ReqSearchOppnent::SerializeWithCachedSizes(
   // @@protoc_insertion_point(serialize_to_array_start:NFMsg.ReqSearchOppnent)
   ::google::protobuf::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
+
+  // int32 self_scene = 1;
+  if (this->self_scene() != 0) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(1, this->self_scene(), target);
+  }
 
   if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
     target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
@@ -15497,6 +15568,13 @@ size_t ReqSearchOppnent::ByteSizeLong() const {
       ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
         (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()));
   }
+  // int32 self_scene = 1;
+  if (this->self_scene() != 0) {
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::Int32Size(
+        this->self_scene());
+  }
+
   int cached_size = ::google::protobuf::internal::ToCachedSize(total_size);
   SetCachedSize(cached_size);
   return total_size;
@@ -15524,6 +15602,9 @@ void ReqSearchOppnent::MergeFrom(const ReqSearchOppnent& from) {
   ::google::protobuf::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
+  if (from.self_scene() != 0) {
+    set_self_scene(from.self_scene());
+  }
 }
 
 void ReqSearchOppnent::CopyFrom(const ::google::protobuf::Message& from) {
@@ -15550,6 +15631,7 @@ void ReqSearchOppnent::Swap(ReqSearchOppnent* other) {
 }
 void ReqSearchOppnent::InternalSwap(ReqSearchOppnent* other) {
   using std::swap;
+  swap(self_scene_, other->self_scene_);
   _internal_metadata_.Swap(&other->_internal_metadata_);
 }
 
@@ -15562,9 +15644,87 @@ void ReqSearchOppnent::InternalSwap(ReqSearchOppnent* other) {
 // ===================================================================
 
 void AckSearchOppnent::InitAsDefaultInstance() {
+  ::NFMsg::_AckSearchOppnent_default_instance_._instance.get_mutable()->hero_id1_ = const_cast< ::NFMsg::Ident*>(
+      ::NFMsg::Ident::internal_default_instance());
+  ::NFMsg::_AckSearchOppnent_default_instance_._instance.get_mutable()->hero_id2_ = const_cast< ::NFMsg::Ident*>(
+      ::NFMsg::Ident::internal_default_instance());
+  ::NFMsg::_AckSearchOppnent_default_instance_._instance.get_mutable()->hero_id3_ = const_cast< ::NFMsg::Ident*>(
+      ::NFMsg::Ident::internal_default_instance());
+  ::NFMsg::_AckSearchOppnent_default_instance_._instance.get_mutable()->hero_pos1_ = const_cast< ::NFMsg::Vector3*>(
+      ::NFMsg::Vector3::internal_default_instance());
+  ::NFMsg::_AckSearchOppnent_default_instance_._instance.get_mutable()->hero_pos2_ = const_cast< ::NFMsg::Vector3*>(
+      ::NFMsg::Vector3::internal_default_instance());
+  ::NFMsg::_AckSearchOppnent_default_instance_._instance.get_mutable()->hero_pos3_ = const_cast< ::NFMsg::Vector3*>(
+      ::NFMsg::Vector3::internal_default_instance());
+  ::NFMsg::_AckSearchOppnent_default_instance_._instance.get_mutable()->title_ = const_cast< ::NFMsg::AckMiningTitle*>(
+      ::NFMsg::AckMiningTitle::internal_default_instance());
+  ::NFMsg::_AckSearchOppnent_default_instance_._instance.get_mutable()->opponent_ = const_cast< ::NFMsg::Ident*>(
+      ::NFMsg::Ident::internal_default_instance());
+}
+void AckSearchOppnent::clear_hero_id1() {
+  if (GetArenaNoVirtual() == NULL && hero_id1_ != NULL) {
+    delete hero_id1_;
+  }
+  hero_id1_ = NULL;
+}
+void AckSearchOppnent::clear_hero_id2() {
+  if (GetArenaNoVirtual() == NULL && hero_id2_ != NULL) {
+    delete hero_id2_;
+  }
+  hero_id2_ = NULL;
+}
+void AckSearchOppnent::clear_hero_id3() {
+  if (GetArenaNoVirtual() == NULL && hero_id3_ != NULL) {
+    delete hero_id3_;
+  }
+  hero_id3_ = NULL;
+}
+void AckSearchOppnent::clear_hero_pos1() {
+  if (GetArenaNoVirtual() == NULL && hero_pos1_ != NULL) {
+    delete hero_pos1_;
+  }
+  hero_pos1_ = NULL;
+}
+void AckSearchOppnent::clear_hero_pos2() {
+  if (GetArenaNoVirtual() == NULL && hero_pos2_ != NULL) {
+    delete hero_pos2_;
+  }
+  hero_pos2_ = NULL;
+}
+void AckSearchOppnent::clear_hero_pos3() {
+  if (GetArenaNoVirtual() == NULL && hero_pos3_ != NULL) {
+    delete hero_pos3_;
+  }
+  hero_pos3_ = NULL;
+}
+void AckSearchOppnent::clear_opponent() {
+  if (GetArenaNoVirtual() == NULL && opponent_ != NULL) {
+    delete opponent_;
+  }
+  opponent_ = NULL;
 }
 #if !defined(_MSC_VER) || _MSC_VER >= 1900
 const int AckSearchOppnent::kSceneIdFieldNumber;
+const int AckSearchOppnent::kGoldFieldNumber;
+const int AckSearchOppnent::kDiamondFieldNumber;
+const int AckSearchOppnent::kLevelFieldNumber;
+const int AckSearchOppnent::kCupFieldNumber;
+const int AckSearchOppnent::kNameFieldNumber;
+const int AckSearchOppnent::kHeadFieldNumber;
+const int AckSearchOppnent::kHeroCnf1FieldNumber;
+const int AckSearchOppnent::kHeroStar1FieldNumber;
+const int AckSearchOppnent::kHeroCnf2FieldNumber;
+const int AckSearchOppnent::kHeroStar2FieldNumber;
+const int AckSearchOppnent::kHeroCnf3FieldNumber;
+const int AckSearchOppnent::kHeroStar3FieldNumber;
+const int AckSearchOppnent::kHeroId1FieldNumber;
+const int AckSearchOppnent::kHeroId2FieldNumber;
+const int AckSearchOppnent::kHeroId3FieldNumber;
+const int AckSearchOppnent::kHeroPos1FieldNumber;
+const int AckSearchOppnent::kHeroPos2FieldNumber;
+const int AckSearchOppnent::kHeroPos3FieldNumber;
+const int AckSearchOppnent::kTitleFieldNumber;
+const int AckSearchOppnent::kOpponentFieldNumber;
 #endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
 
 AckSearchOppnent::AckSearchOppnent()
@@ -15578,12 +15738,81 @@ AckSearchOppnent::AckSearchOppnent(const AckSearchOppnent& from)
   : ::google::protobuf::Message(),
       _internal_metadata_(NULL) {
   _internal_metadata_.MergeFrom(from._internal_metadata_);
-  scene_id_ = from.scene_id_;
+  name_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  if (from.name().size() > 0) {
+    name_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.name_);
+  }
+  head_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  if (from.head().size() > 0) {
+    head_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.head_);
+  }
+  hero_cnf1_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  if (from.hero_cnf1().size() > 0) {
+    hero_cnf1_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.hero_cnf1_);
+  }
+  hero_cnf2_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  if (from.hero_cnf2().size() > 0) {
+    hero_cnf2_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.hero_cnf2_);
+  }
+  hero_cnf3_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  if (from.hero_cnf3().size() > 0) {
+    hero_cnf3_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.hero_cnf3_);
+  }
+  if (from.has_hero_id1()) {
+    hero_id1_ = new ::NFMsg::Ident(*from.hero_id1_);
+  } else {
+    hero_id1_ = NULL;
+  }
+  if (from.has_hero_id2()) {
+    hero_id2_ = new ::NFMsg::Ident(*from.hero_id2_);
+  } else {
+    hero_id2_ = NULL;
+  }
+  if (from.has_hero_id3()) {
+    hero_id3_ = new ::NFMsg::Ident(*from.hero_id3_);
+  } else {
+    hero_id3_ = NULL;
+  }
+  if (from.has_hero_pos1()) {
+    hero_pos1_ = new ::NFMsg::Vector3(*from.hero_pos1_);
+  } else {
+    hero_pos1_ = NULL;
+  }
+  if (from.has_hero_pos2()) {
+    hero_pos2_ = new ::NFMsg::Vector3(*from.hero_pos2_);
+  } else {
+    hero_pos2_ = NULL;
+  }
+  if (from.has_hero_pos3()) {
+    hero_pos3_ = new ::NFMsg::Vector3(*from.hero_pos3_);
+  } else {
+    hero_pos3_ = NULL;
+  }
+  if (from.has_title()) {
+    title_ = new ::NFMsg::AckMiningTitle(*from.title_);
+  } else {
+    title_ = NULL;
+  }
+  if (from.has_opponent()) {
+    opponent_ = new ::NFMsg::Ident(*from.opponent_);
+  } else {
+    opponent_ = NULL;
+  }
+  ::memcpy(&scene_id_, &from.scene_id_,
+    static_cast<size_t>(reinterpret_cast<char*>(&hero_star3_) -
+    reinterpret_cast<char*>(&scene_id_)) + sizeof(hero_star3_));
   // @@protoc_insertion_point(copy_constructor:NFMsg.AckSearchOppnent)
 }
 
 void AckSearchOppnent::SharedCtor() {
-  scene_id_ = 0;
+  name_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  head_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  hero_cnf1_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  hero_cnf2_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  hero_cnf3_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  ::memset(&hero_id1_, 0, static_cast<size_t>(
+      reinterpret_cast<char*>(&hero_star3_) -
+      reinterpret_cast<char*>(&hero_id1_)) + sizeof(hero_star3_));
 }
 
 AckSearchOppnent::~AckSearchOppnent() {
@@ -15592,6 +15821,19 @@ AckSearchOppnent::~AckSearchOppnent() {
 }
 
 void AckSearchOppnent::SharedDtor() {
+  name_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  head_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  hero_cnf1_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  hero_cnf2_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  hero_cnf3_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  if (this != internal_default_instance()) delete hero_id1_;
+  if (this != internal_default_instance()) delete hero_id2_;
+  if (this != internal_default_instance()) delete hero_id3_;
+  if (this != internal_default_instance()) delete hero_pos1_;
+  if (this != internal_default_instance()) delete hero_pos2_;
+  if (this != internal_default_instance()) delete hero_pos3_;
+  if (this != internal_default_instance()) delete title_;
+  if (this != internal_default_instance()) delete opponent_;
 }
 
 void AckSearchOppnent::SetCachedSize(int size) const {
@@ -15614,7 +15856,46 @@ void AckSearchOppnent::Clear() {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  scene_id_ = 0;
+  name_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  head_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  hero_cnf1_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  hero_cnf2_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  hero_cnf3_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  if (GetArenaNoVirtual() == NULL && hero_id1_ != NULL) {
+    delete hero_id1_;
+  }
+  hero_id1_ = NULL;
+  if (GetArenaNoVirtual() == NULL && hero_id2_ != NULL) {
+    delete hero_id2_;
+  }
+  hero_id2_ = NULL;
+  if (GetArenaNoVirtual() == NULL && hero_id3_ != NULL) {
+    delete hero_id3_;
+  }
+  hero_id3_ = NULL;
+  if (GetArenaNoVirtual() == NULL && hero_pos1_ != NULL) {
+    delete hero_pos1_;
+  }
+  hero_pos1_ = NULL;
+  if (GetArenaNoVirtual() == NULL && hero_pos2_ != NULL) {
+    delete hero_pos2_;
+  }
+  hero_pos2_ = NULL;
+  if (GetArenaNoVirtual() == NULL && hero_pos3_ != NULL) {
+    delete hero_pos3_;
+  }
+  hero_pos3_ = NULL;
+  if (GetArenaNoVirtual() == NULL && title_ != NULL) {
+    delete title_;
+  }
+  title_ = NULL;
+  if (GetArenaNoVirtual() == NULL && opponent_ != NULL) {
+    delete opponent_;
+  }
+  opponent_ = NULL;
+  ::memset(&scene_id_, 0, static_cast<size_t>(
+      reinterpret_cast<char*>(&hero_star3_) -
+      reinterpret_cast<char*>(&scene_id_)) + sizeof(hero_star3_));
   _internal_metadata_.Clear();
 }
 
@@ -15624,7 +15905,7 @@ bool AckSearchOppnent::MergePartialFromCodedStream(
   ::google::protobuf::uint32 tag;
   // @@protoc_insertion_point(parse_start:NFMsg.AckSearchOppnent)
   for (;;) {
-    ::std::pair<::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
+    ::std::pair<::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(16383u);
     tag = p.first;
     if (!p.second) goto handle_unusual;
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
@@ -15636,6 +15917,260 @@ bool AckSearchOppnent::MergePartialFromCodedStream(
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
                  input, &scene_id_)));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      // int32 gold = 2;
+      case 2: {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(16u /* 16 & 0xFF */)) {
+
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
+                 input, &gold_)));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      // int32 diamond = 3;
+      case 3: {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(24u /* 24 & 0xFF */)) {
+
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
+                 input, &diamond_)));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      // int32 level = 4;
+      case 4: {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(32u /* 32 & 0xFF */)) {
+
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
+                 input, &level_)));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      // int32 cup = 5;
+      case 5: {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(40u /* 40 & 0xFF */)) {
+
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
+                 input, &cup_)));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      // bytes name = 6;
+      case 6: {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(50u /* 50 & 0xFF */)) {
+          DO_(::google::protobuf::internal::WireFormatLite::ReadBytes(
+                input, this->mutable_name()));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      // bytes head = 7;
+      case 7: {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(58u /* 58 & 0xFF */)) {
+          DO_(::google::protobuf::internal::WireFormatLite::ReadBytes(
+                input, this->mutable_head()));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      // bytes hero_cnf1 = 8;
+      case 8: {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(66u /* 66 & 0xFF */)) {
+          DO_(::google::protobuf::internal::WireFormatLite::ReadBytes(
+                input, this->mutable_hero_cnf1()));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      // int32 hero_star1 = 9;
+      case 9: {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(72u /* 72 & 0xFF */)) {
+
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
+                 input, &hero_star1_)));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      // bytes hero_cnf2 = 10;
+      case 10: {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(82u /* 82 & 0xFF */)) {
+          DO_(::google::protobuf::internal::WireFormatLite::ReadBytes(
+                input, this->mutable_hero_cnf2()));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      // int32 hero_star2 = 11;
+      case 11: {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(88u /* 88 & 0xFF */)) {
+
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
+                 input, &hero_star2_)));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      // bytes hero_cnf3 = 12;
+      case 12: {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(98u /* 98 & 0xFF */)) {
+          DO_(::google::protobuf::internal::WireFormatLite::ReadBytes(
+                input, this->mutable_hero_cnf3()));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      // int32 hero_star3 = 13;
+      case 13: {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(104u /* 104 & 0xFF */)) {
+
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
+                 input, &hero_star3_)));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      // .NFMsg.Ident hero_id1 = 20;
+      case 20: {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(162u /* 162 & 0xFF */)) {
+          DO_(::google::protobuf::internal::WireFormatLite::ReadMessage(
+               input, mutable_hero_id1()));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      // .NFMsg.Ident hero_id2 = 21;
+      case 21: {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(170u /* 170 & 0xFF */)) {
+          DO_(::google::protobuf::internal::WireFormatLite::ReadMessage(
+               input, mutable_hero_id2()));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      // .NFMsg.Ident hero_id3 = 22;
+      case 22: {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(178u /* 178 & 0xFF */)) {
+          DO_(::google::protobuf::internal::WireFormatLite::ReadMessage(
+               input, mutable_hero_id3()));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      // .NFMsg.Vector3 hero_pos1 = 23;
+      case 23: {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(186u /* 186 & 0xFF */)) {
+          DO_(::google::protobuf::internal::WireFormatLite::ReadMessage(
+               input, mutable_hero_pos1()));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      // .NFMsg.Vector3 hero_pos2 = 24;
+      case 24: {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(194u /* 194 & 0xFF */)) {
+          DO_(::google::protobuf::internal::WireFormatLite::ReadMessage(
+               input, mutable_hero_pos2()));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      // .NFMsg.Vector3 hero_pos3 = 25;
+      case 25: {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(202u /* 202 & 0xFF */)) {
+          DO_(::google::protobuf::internal::WireFormatLite::ReadMessage(
+               input, mutable_hero_pos3()));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      // .NFMsg.AckMiningTitle title = 30;
+      case 30: {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(242u /* 242 & 0xFF */)) {
+          DO_(::google::protobuf::internal::WireFormatLite::ReadMessage(
+               input, mutable_title()));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      // .NFMsg.Ident opponent = 31;
+      case 31: {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(250u /* 250 & 0xFF */)) {
+          DO_(::google::protobuf::internal::WireFormatLite::ReadMessage(
+               input, mutable_opponent()));
         } else {
           goto handle_unusual;
         }
@@ -15673,6 +16208,119 @@ void AckSearchOppnent::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormatLite::WriteInt32(1, this->scene_id(), output);
   }
 
+  // int32 gold = 2;
+  if (this->gold() != 0) {
+    ::google::protobuf::internal::WireFormatLite::WriteInt32(2, this->gold(), output);
+  }
+
+  // int32 diamond = 3;
+  if (this->diamond() != 0) {
+    ::google::protobuf::internal::WireFormatLite::WriteInt32(3, this->diamond(), output);
+  }
+
+  // int32 level = 4;
+  if (this->level() != 0) {
+    ::google::protobuf::internal::WireFormatLite::WriteInt32(4, this->level(), output);
+  }
+
+  // int32 cup = 5;
+  if (this->cup() != 0) {
+    ::google::protobuf::internal::WireFormatLite::WriteInt32(5, this->cup(), output);
+  }
+
+  // bytes name = 6;
+  if (this->name().size() > 0) {
+    ::google::protobuf::internal::WireFormatLite::WriteBytesMaybeAliased(
+      6, this->name(), output);
+  }
+
+  // bytes head = 7;
+  if (this->head().size() > 0) {
+    ::google::protobuf::internal::WireFormatLite::WriteBytesMaybeAliased(
+      7, this->head(), output);
+  }
+
+  // bytes hero_cnf1 = 8;
+  if (this->hero_cnf1().size() > 0) {
+    ::google::protobuf::internal::WireFormatLite::WriteBytesMaybeAliased(
+      8, this->hero_cnf1(), output);
+  }
+
+  // int32 hero_star1 = 9;
+  if (this->hero_star1() != 0) {
+    ::google::protobuf::internal::WireFormatLite::WriteInt32(9, this->hero_star1(), output);
+  }
+
+  // bytes hero_cnf2 = 10;
+  if (this->hero_cnf2().size() > 0) {
+    ::google::protobuf::internal::WireFormatLite::WriteBytesMaybeAliased(
+      10, this->hero_cnf2(), output);
+  }
+
+  // int32 hero_star2 = 11;
+  if (this->hero_star2() != 0) {
+    ::google::protobuf::internal::WireFormatLite::WriteInt32(11, this->hero_star2(), output);
+  }
+
+  // bytes hero_cnf3 = 12;
+  if (this->hero_cnf3().size() > 0) {
+    ::google::protobuf::internal::WireFormatLite::WriteBytesMaybeAliased(
+      12, this->hero_cnf3(), output);
+  }
+
+  // int32 hero_star3 = 13;
+  if (this->hero_star3() != 0) {
+    ::google::protobuf::internal::WireFormatLite::WriteInt32(13, this->hero_star3(), output);
+  }
+
+  // .NFMsg.Ident hero_id1 = 20;
+  if (this->has_hero_id1()) {
+    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+      20, this->_internal_hero_id1(), output);
+  }
+
+  // .NFMsg.Ident hero_id2 = 21;
+  if (this->has_hero_id2()) {
+    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+      21, this->_internal_hero_id2(), output);
+  }
+
+  // .NFMsg.Ident hero_id3 = 22;
+  if (this->has_hero_id3()) {
+    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+      22, this->_internal_hero_id3(), output);
+  }
+
+  // .NFMsg.Vector3 hero_pos1 = 23;
+  if (this->has_hero_pos1()) {
+    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+      23, this->_internal_hero_pos1(), output);
+  }
+
+  // .NFMsg.Vector3 hero_pos2 = 24;
+  if (this->has_hero_pos2()) {
+    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+      24, this->_internal_hero_pos2(), output);
+  }
+
+  // .NFMsg.Vector3 hero_pos3 = 25;
+  if (this->has_hero_pos3()) {
+    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+      25, this->_internal_hero_pos3(), output);
+  }
+
+  // .NFMsg.AckMiningTitle title = 30;
+  if (this->has_title()) {
+    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+      30, this->_internal_title(), output);
+  }
+
+  // .NFMsg.Ident opponent = 31;
+  if (this->has_opponent()) {
+    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+      31, this->_internal_opponent(), output);
+  }
+
   if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
     ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
         (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()), output);
@@ -15692,6 +16340,132 @@ void AckSearchOppnent::SerializeWithCachedSizes(
     target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(1, this->scene_id(), target);
   }
 
+  // int32 gold = 2;
+  if (this->gold() != 0) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(2, this->gold(), target);
+  }
+
+  // int32 diamond = 3;
+  if (this->diamond() != 0) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(3, this->diamond(), target);
+  }
+
+  // int32 level = 4;
+  if (this->level() != 0) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(4, this->level(), target);
+  }
+
+  // int32 cup = 5;
+  if (this->cup() != 0) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(5, this->cup(), target);
+  }
+
+  // bytes name = 6;
+  if (this->name().size() > 0) {
+    target =
+      ::google::protobuf::internal::WireFormatLite::WriteBytesToArray(
+        6, this->name(), target);
+  }
+
+  // bytes head = 7;
+  if (this->head().size() > 0) {
+    target =
+      ::google::protobuf::internal::WireFormatLite::WriteBytesToArray(
+        7, this->head(), target);
+  }
+
+  // bytes hero_cnf1 = 8;
+  if (this->hero_cnf1().size() > 0) {
+    target =
+      ::google::protobuf::internal::WireFormatLite::WriteBytesToArray(
+        8, this->hero_cnf1(), target);
+  }
+
+  // int32 hero_star1 = 9;
+  if (this->hero_star1() != 0) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(9, this->hero_star1(), target);
+  }
+
+  // bytes hero_cnf2 = 10;
+  if (this->hero_cnf2().size() > 0) {
+    target =
+      ::google::protobuf::internal::WireFormatLite::WriteBytesToArray(
+        10, this->hero_cnf2(), target);
+  }
+
+  // int32 hero_star2 = 11;
+  if (this->hero_star2() != 0) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(11, this->hero_star2(), target);
+  }
+
+  // bytes hero_cnf3 = 12;
+  if (this->hero_cnf3().size() > 0) {
+    target =
+      ::google::protobuf::internal::WireFormatLite::WriteBytesToArray(
+        12, this->hero_cnf3(), target);
+  }
+
+  // int32 hero_star3 = 13;
+  if (this->hero_star3() != 0) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(13, this->hero_star3(), target);
+  }
+
+  // .NFMsg.Ident hero_id1 = 20;
+  if (this->has_hero_id1()) {
+    target = ::google::protobuf::internal::WireFormatLite::
+      InternalWriteMessageToArray(
+        20, this->_internal_hero_id1(), deterministic, target);
+  }
+
+  // .NFMsg.Ident hero_id2 = 21;
+  if (this->has_hero_id2()) {
+    target = ::google::protobuf::internal::WireFormatLite::
+      InternalWriteMessageToArray(
+        21, this->_internal_hero_id2(), deterministic, target);
+  }
+
+  // .NFMsg.Ident hero_id3 = 22;
+  if (this->has_hero_id3()) {
+    target = ::google::protobuf::internal::WireFormatLite::
+      InternalWriteMessageToArray(
+        22, this->_internal_hero_id3(), deterministic, target);
+  }
+
+  // .NFMsg.Vector3 hero_pos1 = 23;
+  if (this->has_hero_pos1()) {
+    target = ::google::protobuf::internal::WireFormatLite::
+      InternalWriteMessageToArray(
+        23, this->_internal_hero_pos1(), deterministic, target);
+  }
+
+  // .NFMsg.Vector3 hero_pos2 = 24;
+  if (this->has_hero_pos2()) {
+    target = ::google::protobuf::internal::WireFormatLite::
+      InternalWriteMessageToArray(
+        24, this->_internal_hero_pos2(), deterministic, target);
+  }
+
+  // .NFMsg.Vector3 hero_pos3 = 25;
+  if (this->has_hero_pos3()) {
+    target = ::google::protobuf::internal::WireFormatLite::
+      InternalWriteMessageToArray(
+        25, this->_internal_hero_pos3(), deterministic, target);
+  }
+
+  // .NFMsg.AckMiningTitle title = 30;
+  if (this->has_title()) {
+    target = ::google::protobuf::internal::WireFormatLite::
+      InternalWriteMessageToArray(
+        30, this->_internal_title(), deterministic, target);
+  }
+
+  // .NFMsg.Ident opponent = 31;
+  if (this->has_opponent()) {
+    target = ::google::protobuf::internal::WireFormatLite::
+      InternalWriteMessageToArray(
+        31, this->_internal_opponent(), deterministic, target);
+  }
+
   if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
     target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
         (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()), target);
@@ -15709,11 +16483,151 @@ size_t AckSearchOppnent::ByteSizeLong() const {
       ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
         (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()));
   }
+  // bytes name = 6;
+  if (this->name().size() > 0) {
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::BytesSize(
+        this->name());
+  }
+
+  // bytes head = 7;
+  if (this->head().size() > 0) {
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::BytesSize(
+        this->head());
+  }
+
+  // bytes hero_cnf1 = 8;
+  if (this->hero_cnf1().size() > 0) {
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::BytesSize(
+        this->hero_cnf1());
+  }
+
+  // bytes hero_cnf2 = 10;
+  if (this->hero_cnf2().size() > 0) {
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::BytesSize(
+        this->hero_cnf2());
+  }
+
+  // bytes hero_cnf3 = 12;
+  if (this->hero_cnf3().size() > 0) {
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::BytesSize(
+        this->hero_cnf3());
+  }
+
+  // .NFMsg.Ident hero_id1 = 20;
+  if (this->has_hero_id1()) {
+    total_size += 2 +
+      ::google::protobuf::internal::WireFormatLite::MessageSize(
+        *hero_id1_);
+  }
+
+  // .NFMsg.Ident hero_id2 = 21;
+  if (this->has_hero_id2()) {
+    total_size += 2 +
+      ::google::protobuf::internal::WireFormatLite::MessageSize(
+        *hero_id2_);
+  }
+
+  // .NFMsg.Ident hero_id3 = 22;
+  if (this->has_hero_id3()) {
+    total_size += 2 +
+      ::google::protobuf::internal::WireFormatLite::MessageSize(
+        *hero_id3_);
+  }
+
+  // .NFMsg.Vector3 hero_pos1 = 23;
+  if (this->has_hero_pos1()) {
+    total_size += 2 +
+      ::google::protobuf::internal::WireFormatLite::MessageSize(
+        *hero_pos1_);
+  }
+
+  // .NFMsg.Vector3 hero_pos2 = 24;
+  if (this->has_hero_pos2()) {
+    total_size += 2 +
+      ::google::protobuf::internal::WireFormatLite::MessageSize(
+        *hero_pos2_);
+  }
+
+  // .NFMsg.Vector3 hero_pos3 = 25;
+  if (this->has_hero_pos3()) {
+    total_size += 2 +
+      ::google::protobuf::internal::WireFormatLite::MessageSize(
+        *hero_pos3_);
+  }
+
+  // .NFMsg.AckMiningTitle title = 30;
+  if (this->has_title()) {
+    total_size += 2 +
+      ::google::protobuf::internal::WireFormatLite::MessageSize(
+        *title_);
+  }
+
+  // .NFMsg.Ident opponent = 31;
+  if (this->has_opponent()) {
+    total_size += 2 +
+      ::google::protobuf::internal::WireFormatLite::MessageSize(
+        *opponent_);
+  }
+
   // int32 scene_id = 1;
   if (this->scene_id() != 0) {
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::Int32Size(
         this->scene_id());
+  }
+
+  // int32 gold = 2;
+  if (this->gold() != 0) {
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::Int32Size(
+        this->gold());
+  }
+
+  // int32 diamond = 3;
+  if (this->diamond() != 0) {
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::Int32Size(
+        this->diamond());
+  }
+
+  // int32 level = 4;
+  if (this->level() != 0) {
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::Int32Size(
+        this->level());
+  }
+
+  // int32 cup = 5;
+  if (this->cup() != 0) {
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::Int32Size(
+        this->cup());
+  }
+
+  // int32 hero_star1 = 9;
+  if (this->hero_star1() != 0) {
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::Int32Size(
+        this->hero_star1());
+  }
+
+  // int32 hero_star2 = 11;
+  if (this->hero_star2() != 0) {
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::Int32Size(
+        this->hero_star2());
+  }
+
+  // int32 hero_star3 = 13;
+  if (this->hero_star3() != 0) {
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::Int32Size(
+        this->hero_star3());
   }
 
   int cached_size = ::google::protobuf::internal::ToCachedSize(total_size);
@@ -15743,8 +16657,73 @@ void AckSearchOppnent::MergeFrom(const AckSearchOppnent& from) {
   ::google::protobuf::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
+  if (from.name().size() > 0) {
+
+    name_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.name_);
+  }
+  if (from.head().size() > 0) {
+
+    head_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.head_);
+  }
+  if (from.hero_cnf1().size() > 0) {
+
+    hero_cnf1_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.hero_cnf1_);
+  }
+  if (from.hero_cnf2().size() > 0) {
+
+    hero_cnf2_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.hero_cnf2_);
+  }
+  if (from.hero_cnf3().size() > 0) {
+
+    hero_cnf3_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.hero_cnf3_);
+  }
+  if (from.has_hero_id1()) {
+    mutable_hero_id1()->::NFMsg::Ident::MergeFrom(from.hero_id1());
+  }
+  if (from.has_hero_id2()) {
+    mutable_hero_id2()->::NFMsg::Ident::MergeFrom(from.hero_id2());
+  }
+  if (from.has_hero_id3()) {
+    mutable_hero_id3()->::NFMsg::Ident::MergeFrom(from.hero_id3());
+  }
+  if (from.has_hero_pos1()) {
+    mutable_hero_pos1()->::NFMsg::Vector3::MergeFrom(from.hero_pos1());
+  }
+  if (from.has_hero_pos2()) {
+    mutable_hero_pos2()->::NFMsg::Vector3::MergeFrom(from.hero_pos2());
+  }
+  if (from.has_hero_pos3()) {
+    mutable_hero_pos3()->::NFMsg::Vector3::MergeFrom(from.hero_pos3());
+  }
+  if (from.has_title()) {
+    mutable_title()->::NFMsg::AckMiningTitle::MergeFrom(from.title());
+  }
+  if (from.has_opponent()) {
+    mutable_opponent()->::NFMsg::Ident::MergeFrom(from.opponent());
+  }
   if (from.scene_id() != 0) {
     set_scene_id(from.scene_id());
+  }
+  if (from.gold() != 0) {
+    set_gold(from.gold());
+  }
+  if (from.diamond() != 0) {
+    set_diamond(from.diamond());
+  }
+  if (from.level() != 0) {
+    set_level(from.level());
+  }
+  if (from.cup() != 0) {
+    set_cup(from.cup());
+  }
+  if (from.hero_star1() != 0) {
+    set_hero_star1(from.hero_star1());
+  }
+  if (from.hero_star2() != 0) {
+    set_hero_star2(from.hero_star2());
+  }
+  if (from.hero_star3() != 0) {
+    set_hero_star3(from.hero_star3());
   }
 }
 
@@ -15772,7 +16751,32 @@ void AckSearchOppnent::Swap(AckSearchOppnent* other) {
 }
 void AckSearchOppnent::InternalSwap(AckSearchOppnent* other) {
   using std::swap;
+  name_.Swap(&other->name_, &::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+    GetArenaNoVirtual());
+  head_.Swap(&other->head_, &::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+    GetArenaNoVirtual());
+  hero_cnf1_.Swap(&other->hero_cnf1_, &::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+    GetArenaNoVirtual());
+  hero_cnf2_.Swap(&other->hero_cnf2_, &::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+    GetArenaNoVirtual());
+  hero_cnf3_.Swap(&other->hero_cnf3_, &::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+    GetArenaNoVirtual());
+  swap(hero_id1_, other->hero_id1_);
+  swap(hero_id2_, other->hero_id2_);
+  swap(hero_id3_, other->hero_id3_);
+  swap(hero_pos1_, other->hero_pos1_);
+  swap(hero_pos2_, other->hero_pos2_);
+  swap(hero_pos3_, other->hero_pos3_);
+  swap(title_, other->title_);
+  swap(opponent_, other->opponent_);
   swap(scene_id_, other->scene_id_);
+  swap(gold_, other->gold_);
+  swap(diamond_, other->diamond_);
+  swap(level_, other->level_);
+  swap(cup_, other->cup_);
+  swap(hero_star1_, other->hero_star1_);
+  swap(hero_star2_, other->hero_star2_);
+  swap(hero_star3_, other->hero_star3_);
   _internal_metadata_.Swap(&other->_internal_metadata_);
 }
 

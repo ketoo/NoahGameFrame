@@ -64,7 +64,7 @@ void NFGameLogicPlugin::Install()
 {
     REGISTER_MODULE(pPluginManager, NFIBuffModule, NFCBuffModule)
 	REGISTER_MODULE(pPluginManager, NFICreateRoleModule, NFCCreateRoleModule)
-	//REGISTER_MODULE(pPluginManager, NFIPVPModule, NFCPVPModule)
+	REGISTER_MODULE(pPluginManager, NFIPVPModule, NFCPVPModule)
 	//REGISTER_MODULE(pPluginManager, NFIMapModule, NFCMapModule);
 	//REGISTER_MODULE(pPluginManager, NFITileModule, NFCTileModule);
 	//REGISTER_MODULE(pPluginManager, NFISurvivalModule, NFCSurvivalModule);
@@ -79,7 +79,7 @@ void NFGameLogicPlugin::Uninstall()
 	//UNREGISTER_MODULE(pPluginManager, NFISurvivalModule, NFCSurvivalModule);
 	//UNREGISTER_MODULE(pPluginManager, NFITileModule, NFCTileModule);
 	//UNREGISTER_MODULE(pPluginManager, NFIMapModule, NFCMapModule);
-	//UNREGISTER_MODULE(pPluginManager, NFIPVPModule, NFCPVPModule)
+	UNREGISTER_MODULE(pPluginManager, NFIPVPModule, NFCPVPModule)
     UNREGISTER_MODULE(pPluginManager, NFICreateRoleModule, NFCCreateRoleModule)
     UNREGISTER_MODULE(pPluginManager, NFIBuffModule, NFCBuffModule)
 
