@@ -35,8 +35,6 @@ class NFIPVPModule
 {
 public:
 
-	virtual int RandomTileScene() = 0;
-
 };
 
 #endif

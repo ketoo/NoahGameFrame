@@ -6186,10 +6186,17 @@ class LIBPROTOC_EXPORT ReqSearchOppnent : public ::google::protobuf::Message /* 
 
   // accessors -------------------------------------------------------
 
+  // int32 self_scene = 1;
+  void clear_self_scene();
+  static const int kSelfSceneFieldNumber = 1;
+  ::google::protobuf::int32 self_scene() const;
+  void set_self_scene(::google::protobuf::int32 value);
+
   // @@protoc_insertion_point(class_scope:NFMsg.ReqSearchOppnent)
  private:
 
   ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
+  ::google::protobuf::int32 self_scene_;
   mutable ::google::protobuf::internal::CachedSize _cached_size_;
   friend struct ::protobuf_NFMsgShare_2eproto::TableStruct;
 };
@@ -6282,17 +6289,245 @@ class LIBPROTOC_EXPORT AckSearchOppnent : public ::google::protobuf::Message /* 
 
   // accessors -------------------------------------------------------
 
+  // bytes name = 6;
+  void clear_name();
+  static const int kNameFieldNumber = 6;
+  const ::std::string& name() const;
+  void set_name(const ::std::string& value);
+  #if LANG_CXX11
+  void set_name(::std::string&& value);
+  #endif
+  void set_name(const char* value);
+  void set_name(const void* value, size_t size);
+  ::std::string* mutable_name();
+  ::std::string* release_name();
+  void set_allocated_name(::std::string* name);
+
+  // bytes head = 7;
+  void clear_head();
+  static const int kHeadFieldNumber = 7;
+  const ::std::string& head() const;
+  void set_head(const ::std::string& value);
+  #if LANG_CXX11
+  void set_head(::std::string&& value);
+  #endif
+  void set_head(const char* value);
+  void set_head(const void* value, size_t size);
+  ::std::string* mutable_head();
+  ::std::string* release_head();
+  void set_allocated_head(::std::string* head);
+
+  // bytes hero_cnf1 = 8;
+  void clear_hero_cnf1();
+  static const int kHeroCnf1FieldNumber = 8;
+  const ::std::string& hero_cnf1() const;
+  void set_hero_cnf1(const ::std::string& value);
+  #if LANG_CXX11
+  void set_hero_cnf1(::std::string&& value);
+  #endif
+  void set_hero_cnf1(const char* value);
+  void set_hero_cnf1(const void* value, size_t size);
+  ::std::string* mutable_hero_cnf1();
+  ::std::string* release_hero_cnf1();
+  void set_allocated_hero_cnf1(::std::string* hero_cnf1);
+
+  // bytes hero_cnf2 = 10;
+  void clear_hero_cnf2();
+  static const int kHeroCnf2FieldNumber = 10;
+  const ::std::string& hero_cnf2() const;
+  void set_hero_cnf2(const ::std::string& value);
+  #if LANG_CXX11
+  void set_hero_cnf2(::std::string&& value);
+  #endif
+  void set_hero_cnf2(const char* value);
+  void set_hero_cnf2(const void* value, size_t size);
+  ::std::string* mutable_hero_cnf2();
+  ::std::string* release_hero_cnf2();
+  void set_allocated_hero_cnf2(::std::string* hero_cnf2);
+
+  // bytes hero_cnf3 = 12;
+  void clear_hero_cnf3();
+  static const int kHeroCnf3FieldNumber = 12;
+  const ::std::string& hero_cnf3() const;
+  void set_hero_cnf3(const ::std::string& value);
+  #if LANG_CXX11
+  void set_hero_cnf3(::std::string&& value);
+  #endif
+  void set_hero_cnf3(const char* value);
+  void set_hero_cnf3(const void* value, size_t size);
+  ::std::string* mutable_hero_cnf3();
+  ::std::string* release_hero_cnf3();
+  void set_allocated_hero_cnf3(::std::string* hero_cnf3);
+
+  // .NFMsg.Ident hero_id1 = 20;
+  bool has_hero_id1() const;
+  void clear_hero_id1();
+  static const int kHeroId1FieldNumber = 20;
+  private:
+  const ::NFMsg::Ident& _internal_hero_id1() const;
+  public:
+  const ::NFMsg::Ident& hero_id1() const;
+  ::NFMsg::Ident* release_hero_id1();
+  ::NFMsg::Ident* mutable_hero_id1();
+  void set_allocated_hero_id1(::NFMsg::Ident* hero_id1);
+
+  // .NFMsg.Ident hero_id2 = 21;
+  bool has_hero_id2() const;
+  void clear_hero_id2();
+  static const int kHeroId2FieldNumber = 21;
+  private:
+  const ::NFMsg::Ident& _internal_hero_id2() const;
+  public:
+  const ::NFMsg::Ident& hero_id2() const;
+  ::NFMsg::Ident* release_hero_id2();
+  ::NFMsg::Ident* mutable_hero_id2();
+  void set_allocated_hero_id2(::NFMsg::Ident* hero_id2);
+
+  // .NFMsg.Ident hero_id3 = 22;
+  bool has_hero_id3() const;
+  void clear_hero_id3();
+  static const int kHeroId3FieldNumber = 22;
+  private:
+  const ::NFMsg::Ident& _internal_hero_id3() const;
+  public:
+  const ::NFMsg::Ident& hero_id3() const;
+  ::NFMsg::Ident* release_hero_id3();
+  ::NFMsg::Ident* mutable_hero_id3();
+  void set_allocated_hero_id3(::NFMsg::Ident* hero_id3);
+
+  // .NFMsg.Vector3 hero_pos1 = 23;
+  bool has_hero_pos1() const;
+  void clear_hero_pos1();
+  static const int kHeroPos1FieldNumber = 23;
+  private:
+  const ::NFMsg::Vector3& _internal_hero_pos1() const;
+  public:
+  const ::NFMsg::Vector3& hero_pos1() const;
+  ::NFMsg::Vector3* release_hero_pos1();
+  ::NFMsg::Vector3* mutable_hero_pos1();
+  void set_allocated_hero_pos1(::NFMsg::Vector3* hero_pos1);
+
+  // .NFMsg.Vector3 hero_pos2 = 24;
+  bool has_hero_pos2() const;
+  void clear_hero_pos2();
+  static const int kHeroPos2FieldNumber = 24;
+  private:
+  const ::NFMsg::Vector3& _internal_hero_pos2() const;
+  public:
+  const ::NFMsg::Vector3& hero_pos2() const;
+  ::NFMsg::Vector3* release_hero_pos2();
+  ::NFMsg::Vector3* mutable_hero_pos2();
+  void set_allocated_hero_pos2(::NFMsg::Vector3* hero_pos2);
+
+  // .NFMsg.Vector3 hero_pos3 = 25;
+  bool has_hero_pos3() const;
+  void clear_hero_pos3();
+  static const int kHeroPos3FieldNumber = 25;
+  private:
+  const ::NFMsg::Vector3& _internal_hero_pos3() const;
+  public:
+  const ::NFMsg::Vector3& hero_pos3() const;
+  ::NFMsg::Vector3* release_hero_pos3();
+  ::NFMsg::Vector3* mutable_hero_pos3();
+  void set_allocated_hero_pos3(::NFMsg::Vector3* hero_pos3);
+
+  // .NFMsg.AckMiningTitle title = 30;
+  bool has_title() const;
+  void clear_title();
+  static const int kTitleFieldNumber = 30;
+  private:
+  const ::NFMsg::AckMiningTitle& _internal_title() const;
+  public:
+  const ::NFMsg::AckMiningTitle& title() const;
+  ::NFMsg::AckMiningTitle* release_title();
+  ::NFMsg::AckMiningTitle* mutable_title();
+  void set_allocated_title(::NFMsg::AckMiningTitle* title);
+
+  // .NFMsg.Ident opponent = 31;
+  bool has_opponent() const;
+  void clear_opponent();
+  static const int kOpponentFieldNumber = 31;
+  private:
+  const ::NFMsg::Ident& _internal_opponent() const;
+  public:
+  const ::NFMsg::Ident& opponent() const;
+  ::NFMsg::Ident* release_opponent();
+  ::NFMsg::Ident* mutable_opponent();
+  void set_allocated_opponent(::NFMsg::Ident* opponent);
+
   // int32 scene_id = 1;
   void clear_scene_id();
   static const int kSceneIdFieldNumber = 1;
   ::google::protobuf::int32 scene_id() const;
   void set_scene_id(::google::protobuf::int32 value);
 
+  // int32 gold = 2;
+  void clear_gold();
+  static const int kGoldFieldNumber = 2;
+  ::google::protobuf::int32 gold() const;
+  void set_gold(::google::protobuf::int32 value);
+
+  // int32 diamond = 3;
+  void clear_diamond();
+  static const int kDiamondFieldNumber = 3;
+  ::google::protobuf::int32 diamond() const;
+  void set_diamond(::google::protobuf::int32 value);
+
+  // int32 level = 4;
+  void clear_level();
+  static const int kLevelFieldNumber = 4;
+  ::google::protobuf::int32 level() const;
+  void set_level(::google::protobuf::int32 value);
+
+  // int32 cup = 5;
+  void clear_cup();
+  static const int kCupFieldNumber = 5;
+  ::google::protobuf::int32 cup() const;
+  void set_cup(::google::protobuf::int32 value);
+
+  // int32 hero_star1 = 9;
+  void clear_hero_star1();
+  static const int kHeroStar1FieldNumber = 9;
+  ::google::protobuf::int32 hero_star1() const;
+  void set_hero_star1(::google::protobuf::int32 value);
+
+  // int32 hero_star2 = 11;
+  void clear_hero_star2();
+  static const int kHeroStar2FieldNumber = 11;
+  ::google::protobuf::int32 hero_star2() const;
+  void set_hero_star2(::google::protobuf::int32 value);
+
+  // int32 hero_star3 = 13;
+  void clear_hero_star3();
+  static const int kHeroStar3FieldNumber = 13;
+  ::google::protobuf::int32 hero_star3() const;
+  void set_hero_star3(::google::protobuf::int32 value);
+
   // @@protoc_insertion_point(class_scope:NFMsg.AckSearchOppnent)
  private:
 
   ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
+  ::google::protobuf::internal::ArenaStringPtr name_;
+  ::google::protobuf::internal::ArenaStringPtr head_;
+  ::google::protobuf::internal::ArenaStringPtr hero_cnf1_;
+  ::google::protobuf::internal::ArenaStringPtr hero_cnf2_;
+  ::google::protobuf::internal::ArenaStringPtr hero_cnf3_;
+  ::NFMsg::Ident* hero_id1_;
+  ::NFMsg::Ident* hero_id2_;
+  ::NFMsg::Ident* hero_id3_;
+  ::NFMsg::Vector3* hero_pos1_;
+  ::NFMsg::Vector3* hero_pos2_;
+  ::NFMsg::Vector3* hero_pos3_;
+  ::NFMsg::AckMiningTitle* title_;
+  ::NFMsg::Ident* opponent_;
   ::google::protobuf::int32 scene_id_;
+  ::google::protobuf::int32 gold_;
+  ::google::protobuf::int32 diamond_;
+  ::google::protobuf::int32 level_;
+  ::google::protobuf::int32 cup_;
+  ::google::protobuf::int32 hero_star1_;
+  ::google::protobuf::int32 hero_star2_;
+  ::google::protobuf::int32 hero_star3_;
   mutable ::google::protobuf::internal::CachedSize _cached_size_;
   friend struct ::protobuf_NFMsgShare_2eproto::TableStruct;
 };
@@ -11336,6 +11571,20 @@ AckMiningTitle::npc() const {
 
 // ReqSearchOppnent
 
+// int32 self_scene = 1;
+inline void ReqSearchOppnent::clear_self_scene() {
+  self_scene_ = 0;
+}
+inline ::google::protobuf::int32 ReqSearchOppnent::self_scene() const {
+  // @@protoc_insertion_point(field_get:NFMsg.ReqSearchOppnent.self_scene)
+  return self_scene_;
+}
+inline void ReqSearchOppnent::set_self_scene(::google::protobuf::int32 value) {
+  
+  self_scene_ = value;
+  // @@protoc_insertion_point(field_set:NFMsg.ReqSearchOppnent.self_scene)
+}
+
 // -------------------------------------------------------------------
 
 // AckSearchOppnent
@@ -11352,6 +11601,759 @@ inline void AckSearchOppnent::set_scene_id(::google::protobuf::int32 value) {
   
   scene_id_ = value;
   // @@protoc_insertion_point(field_set:NFMsg.AckSearchOppnent.scene_id)
+}
+
+// int32 gold = 2;
+inline void AckSearchOppnent::clear_gold() {
+  gold_ = 0;
+}
+inline ::google::protobuf::int32 AckSearchOppnent::gold() const {
+  // @@protoc_insertion_point(field_get:NFMsg.AckSearchOppnent.gold)
+  return gold_;
+}
+inline void AckSearchOppnent::set_gold(::google::protobuf::int32 value) {
+  
+  gold_ = value;
+  // @@protoc_insertion_point(field_set:NFMsg.AckSearchOppnent.gold)
+}
+
+// int32 diamond = 3;
+inline void AckSearchOppnent::clear_diamond() {
+  diamond_ = 0;
+}
+inline ::google::protobuf::int32 AckSearchOppnent::diamond() const {
+  // @@protoc_insertion_point(field_get:NFMsg.AckSearchOppnent.diamond)
+  return diamond_;
+}
+inline void AckSearchOppnent::set_diamond(::google::protobuf::int32 value) {
+  
+  diamond_ = value;
+  // @@protoc_insertion_point(field_set:NFMsg.AckSearchOppnent.diamond)
+}
+
+// int32 level = 4;
+inline void AckSearchOppnent::clear_level() {
+  level_ = 0;
+}
+inline ::google::protobuf::int32 AckSearchOppnent::level() const {
+  // @@protoc_insertion_point(field_get:NFMsg.AckSearchOppnent.level)
+  return level_;
+}
+inline void AckSearchOppnent::set_level(::google::protobuf::int32 value) {
+  
+  level_ = value;
+  // @@protoc_insertion_point(field_set:NFMsg.AckSearchOppnent.level)
+}
+
+// int32 cup = 5;
+inline void AckSearchOppnent::clear_cup() {
+  cup_ = 0;
+}
+inline ::google::protobuf::int32 AckSearchOppnent::cup() const {
+  // @@protoc_insertion_point(field_get:NFMsg.AckSearchOppnent.cup)
+  return cup_;
+}
+inline void AckSearchOppnent::set_cup(::google::protobuf::int32 value) {
+  
+  cup_ = value;
+  // @@protoc_insertion_point(field_set:NFMsg.AckSearchOppnent.cup)
+}
+
+// bytes name = 6;
+inline void AckSearchOppnent::clear_name() {
+  name_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline const ::std::string& AckSearchOppnent::name() const {
+  // @@protoc_insertion_point(field_get:NFMsg.AckSearchOppnent.name)
+  return name_.GetNoArena();
+}
+inline void AckSearchOppnent::set_name(const ::std::string& value) {
+  
+  name_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
+  // @@protoc_insertion_point(field_set:NFMsg.AckSearchOppnent.name)
+}
+#if LANG_CXX11
+inline void AckSearchOppnent::set_name(::std::string&& value) {
+  
+  name_.SetNoArena(
+    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
+  // @@protoc_insertion_point(field_set_rvalue:NFMsg.AckSearchOppnent.name)
+}
+#endif
+inline void AckSearchOppnent::set_name(const char* value) {
+  GOOGLE_DCHECK(value != NULL);
+  
+  name_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:NFMsg.AckSearchOppnent.name)
+}
+inline void AckSearchOppnent::set_name(const void* value, size_t size) {
+  
+  name_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+      ::std::string(reinterpret_cast<const char*>(value), size));
+  // @@protoc_insertion_point(field_set_pointer:NFMsg.AckSearchOppnent.name)
+}
+inline ::std::string* AckSearchOppnent::mutable_name() {
+  
+  // @@protoc_insertion_point(field_mutable:NFMsg.AckSearchOppnent.name)
+  return name_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline ::std::string* AckSearchOppnent::release_name() {
+  // @@protoc_insertion_point(field_release:NFMsg.AckSearchOppnent.name)
+  
+  return name_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline void AckSearchOppnent::set_allocated_name(::std::string* name) {
+  if (name != NULL) {
+    
+  } else {
+    
+  }
+  name_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), name);
+  // @@protoc_insertion_point(field_set_allocated:NFMsg.AckSearchOppnent.name)
+}
+
+// bytes head = 7;
+inline void AckSearchOppnent::clear_head() {
+  head_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline const ::std::string& AckSearchOppnent::head() const {
+  // @@protoc_insertion_point(field_get:NFMsg.AckSearchOppnent.head)
+  return head_.GetNoArena();
+}
+inline void AckSearchOppnent::set_head(const ::std::string& value) {
+  
+  head_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
+  // @@protoc_insertion_point(field_set:NFMsg.AckSearchOppnent.head)
+}
+#if LANG_CXX11
+inline void AckSearchOppnent::set_head(::std::string&& value) {
+  
+  head_.SetNoArena(
+    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
+  // @@protoc_insertion_point(field_set_rvalue:NFMsg.AckSearchOppnent.head)
+}
+#endif
+inline void AckSearchOppnent::set_head(const char* value) {
+  GOOGLE_DCHECK(value != NULL);
+  
+  head_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:NFMsg.AckSearchOppnent.head)
+}
+inline void AckSearchOppnent::set_head(const void* value, size_t size) {
+  
+  head_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+      ::std::string(reinterpret_cast<const char*>(value), size));
+  // @@protoc_insertion_point(field_set_pointer:NFMsg.AckSearchOppnent.head)
+}
+inline ::std::string* AckSearchOppnent::mutable_head() {
+  
+  // @@protoc_insertion_point(field_mutable:NFMsg.AckSearchOppnent.head)
+  return head_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline ::std::string* AckSearchOppnent::release_head() {
+  // @@protoc_insertion_point(field_release:NFMsg.AckSearchOppnent.head)
+  
+  return head_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline void AckSearchOppnent::set_allocated_head(::std::string* head) {
+  if (head != NULL) {
+    
+  } else {
+    
+  }
+  head_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), head);
+  // @@protoc_insertion_point(field_set_allocated:NFMsg.AckSearchOppnent.head)
+}
+
+// bytes hero_cnf1 = 8;
+inline void AckSearchOppnent::clear_hero_cnf1() {
+  hero_cnf1_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline const ::std::string& AckSearchOppnent::hero_cnf1() const {
+  // @@protoc_insertion_point(field_get:NFMsg.AckSearchOppnent.hero_cnf1)
+  return hero_cnf1_.GetNoArena();
+}
+inline void AckSearchOppnent::set_hero_cnf1(const ::std::string& value) {
+  
+  hero_cnf1_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
+  // @@protoc_insertion_point(field_set:NFMsg.AckSearchOppnent.hero_cnf1)
+}
+#if LANG_CXX11
+inline void AckSearchOppnent::set_hero_cnf1(::std::string&& value) {
+  
+  hero_cnf1_.SetNoArena(
+    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
+  // @@protoc_insertion_point(field_set_rvalue:NFMsg.AckSearchOppnent.hero_cnf1)
+}
+#endif
+inline void AckSearchOppnent::set_hero_cnf1(const char* value) {
+  GOOGLE_DCHECK(value != NULL);
+  
+  hero_cnf1_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:NFMsg.AckSearchOppnent.hero_cnf1)
+}
+inline void AckSearchOppnent::set_hero_cnf1(const void* value, size_t size) {
+  
+  hero_cnf1_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+      ::std::string(reinterpret_cast<const char*>(value), size));
+  // @@protoc_insertion_point(field_set_pointer:NFMsg.AckSearchOppnent.hero_cnf1)
+}
+inline ::std::string* AckSearchOppnent::mutable_hero_cnf1() {
+  
+  // @@protoc_insertion_point(field_mutable:NFMsg.AckSearchOppnent.hero_cnf1)
+  return hero_cnf1_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline ::std::string* AckSearchOppnent::release_hero_cnf1() {
+  // @@protoc_insertion_point(field_release:NFMsg.AckSearchOppnent.hero_cnf1)
+  
+  return hero_cnf1_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline void AckSearchOppnent::set_allocated_hero_cnf1(::std::string* hero_cnf1) {
+  if (hero_cnf1 != NULL) {
+    
+  } else {
+    
+  }
+  hero_cnf1_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), hero_cnf1);
+  // @@protoc_insertion_point(field_set_allocated:NFMsg.AckSearchOppnent.hero_cnf1)
+}
+
+// int32 hero_star1 = 9;
+inline void AckSearchOppnent::clear_hero_star1() {
+  hero_star1_ = 0;
+}
+inline ::google::protobuf::int32 AckSearchOppnent::hero_star1() const {
+  // @@protoc_insertion_point(field_get:NFMsg.AckSearchOppnent.hero_star1)
+  return hero_star1_;
+}
+inline void AckSearchOppnent::set_hero_star1(::google::protobuf::int32 value) {
+  
+  hero_star1_ = value;
+  // @@protoc_insertion_point(field_set:NFMsg.AckSearchOppnent.hero_star1)
+}
+
+// bytes hero_cnf2 = 10;
+inline void AckSearchOppnent::clear_hero_cnf2() {
+  hero_cnf2_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline const ::std::string& AckSearchOppnent::hero_cnf2() const {
+  // @@protoc_insertion_point(field_get:NFMsg.AckSearchOppnent.hero_cnf2)
+  return hero_cnf2_.GetNoArena();
+}
+inline void AckSearchOppnent::set_hero_cnf2(const ::std::string& value) {
+  
+  hero_cnf2_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
+  // @@protoc_insertion_point(field_set:NFMsg.AckSearchOppnent.hero_cnf2)
+}
+#if LANG_CXX11
+inline void AckSearchOppnent::set_hero_cnf2(::std::string&& value) {
+  
+  hero_cnf2_.SetNoArena(
+    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
+  // @@protoc_insertion_point(field_set_rvalue:NFMsg.AckSearchOppnent.hero_cnf2)
+}
+#endif
+inline void AckSearchOppnent::set_hero_cnf2(const char* value) {
+  GOOGLE_DCHECK(value != NULL);
+  
+  hero_cnf2_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:NFMsg.AckSearchOppnent.hero_cnf2)
+}
+inline void AckSearchOppnent::set_hero_cnf2(const void* value, size_t size) {
+  
+  hero_cnf2_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+      ::std::string(reinterpret_cast<const char*>(value), size));
+  // @@protoc_insertion_point(field_set_pointer:NFMsg.AckSearchOppnent.hero_cnf2)
+}
+inline ::std::string* AckSearchOppnent::mutable_hero_cnf2() {
+  
+  // @@protoc_insertion_point(field_mutable:NFMsg.AckSearchOppnent.hero_cnf2)
+  return hero_cnf2_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline ::std::string* AckSearchOppnent::release_hero_cnf2() {
+  // @@protoc_insertion_point(field_release:NFMsg.AckSearchOppnent.hero_cnf2)
+  
+  return hero_cnf2_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline void AckSearchOppnent::set_allocated_hero_cnf2(::std::string* hero_cnf2) {
+  if (hero_cnf2 != NULL) {
+    
+  } else {
+    
+  }
+  hero_cnf2_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), hero_cnf2);
+  // @@protoc_insertion_point(field_set_allocated:NFMsg.AckSearchOppnent.hero_cnf2)
+}
+
+// int32 hero_star2 = 11;
+inline void AckSearchOppnent::clear_hero_star2() {
+  hero_star2_ = 0;
+}
+inline ::google::protobuf::int32 AckSearchOppnent::hero_star2() const {
+  // @@protoc_insertion_point(field_get:NFMsg.AckSearchOppnent.hero_star2)
+  return hero_star2_;
+}
+inline void AckSearchOppnent::set_hero_star2(::google::protobuf::int32 value) {
+  
+  hero_star2_ = value;
+  // @@protoc_insertion_point(field_set:NFMsg.AckSearchOppnent.hero_star2)
+}
+
+// bytes hero_cnf3 = 12;
+inline void AckSearchOppnent::clear_hero_cnf3() {
+  hero_cnf3_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline const ::std::string& AckSearchOppnent::hero_cnf3() const {
+  // @@protoc_insertion_point(field_get:NFMsg.AckSearchOppnent.hero_cnf3)
+  return hero_cnf3_.GetNoArena();
+}
+inline void AckSearchOppnent::set_hero_cnf3(const ::std::string& value) {
+  
+  hero_cnf3_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
+  // @@protoc_insertion_point(field_set:NFMsg.AckSearchOppnent.hero_cnf3)
+}
+#if LANG_CXX11
+inline void AckSearchOppnent::set_hero_cnf3(::std::string&& value) {
+  
+  hero_cnf3_.SetNoArena(
+    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
+  // @@protoc_insertion_point(field_set_rvalue:NFMsg.AckSearchOppnent.hero_cnf3)
+}
+#endif
+inline void AckSearchOppnent::set_hero_cnf3(const char* value) {
+  GOOGLE_DCHECK(value != NULL);
+  
+  hero_cnf3_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:NFMsg.AckSearchOppnent.hero_cnf3)
+}
+inline void AckSearchOppnent::set_hero_cnf3(const void* value, size_t size) {
+  
+  hero_cnf3_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+      ::std::string(reinterpret_cast<const char*>(value), size));
+  // @@protoc_insertion_point(field_set_pointer:NFMsg.AckSearchOppnent.hero_cnf3)
+}
+inline ::std::string* AckSearchOppnent::mutable_hero_cnf3() {
+  
+  // @@protoc_insertion_point(field_mutable:NFMsg.AckSearchOppnent.hero_cnf3)
+  return hero_cnf3_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline ::std::string* AckSearchOppnent::release_hero_cnf3() {
+  // @@protoc_insertion_point(field_release:NFMsg.AckSearchOppnent.hero_cnf3)
+  
+  return hero_cnf3_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline void AckSearchOppnent::set_allocated_hero_cnf3(::std::string* hero_cnf3) {
+  if (hero_cnf3 != NULL) {
+    
+  } else {
+    
+  }
+  hero_cnf3_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), hero_cnf3);
+  // @@protoc_insertion_point(field_set_allocated:NFMsg.AckSearchOppnent.hero_cnf3)
+}
+
+// int32 hero_star3 = 13;
+inline void AckSearchOppnent::clear_hero_star3() {
+  hero_star3_ = 0;
+}
+inline ::google::protobuf::int32 AckSearchOppnent::hero_star3() const {
+  // @@protoc_insertion_point(field_get:NFMsg.AckSearchOppnent.hero_star3)
+  return hero_star3_;
+}
+inline void AckSearchOppnent::set_hero_star3(::google::protobuf::int32 value) {
+  
+  hero_star3_ = value;
+  // @@protoc_insertion_point(field_set:NFMsg.AckSearchOppnent.hero_star3)
+}
+
+// .NFMsg.Ident hero_id1 = 20;
+inline bool AckSearchOppnent::has_hero_id1() const {
+  return this != internal_default_instance() && hero_id1_ != NULL;
+}
+inline const ::NFMsg::Ident& AckSearchOppnent::_internal_hero_id1() const {
+  return *hero_id1_;
+}
+inline const ::NFMsg::Ident& AckSearchOppnent::hero_id1() const {
+  const ::NFMsg::Ident* p = hero_id1_;
+  // @@protoc_insertion_point(field_get:NFMsg.AckSearchOppnent.hero_id1)
+  return p != NULL ? *p : *reinterpret_cast<const ::NFMsg::Ident*>(
+      &::NFMsg::_Ident_default_instance_);
+}
+inline ::NFMsg::Ident* AckSearchOppnent::release_hero_id1() {
+  // @@protoc_insertion_point(field_release:NFMsg.AckSearchOppnent.hero_id1)
+  
+  ::NFMsg::Ident* temp = hero_id1_;
+  hero_id1_ = NULL;
+  return temp;
+}
+inline ::NFMsg::Ident* AckSearchOppnent::mutable_hero_id1() {
+  
+  if (hero_id1_ == NULL) {
+    auto* p = CreateMaybeMessage<::NFMsg::Ident>(GetArenaNoVirtual());
+    hero_id1_ = p;
+  }
+  // @@protoc_insertion_point(field_mutable:NFMsg.AckSearchOppnent.hero_id1)
+  return hero_id1_;
+}
+inline void AckSearchOppnent::set_allocated_hero_id1(::NFMsg::Ident* hero_id1) {
+  ::google::protobuf::Arena* message_arena = GetArenaNoVirtual();
+  if (message_arena == NULL) {
+    delete reinterpret_cast< ::google::protobuf::MessageLite*>(hero_id1_);
+  }
+  if (hero_id1) {
+    ::google::protobuf::Arena* submessage_arena = NULL;
+    if (message_arena != submessage_arena) {
+      hero_id1 = ::google::protobuf::internal::GetOwnedMessage(
+          message_arena, hero_id1, submessage_arena);
+    }
+    
+  } else {
+    
+  }
+  hero_id1_ = hero_id1;
+  // @@protoc_insertion_point(field_set_allocated:NFMsg.AckSearchOppnent.hero_id1)
+}
+
+// .NFMsg.Ident hero_id2 = 21;
+inline bool AckSearchOppnent::has_hero_id2() const {
+  return this != internal_default_instance() && hero_id2_ != NULL;
+}
+inline const ::NFMsg::Ident& AckSearchOppnent::_internal_hero_id2() const {
+  return *hero_id2_;
+}
+inline const ::NFMsg::Ident& AckSearchOppnent::hero_id2() const {
+  const ::NFMsg::Ident* p = hero_id2_;
+  // @@protoc_insertion_point(field_get:NFMsg.AckSearchOppnent.hero_id2)
+  return p != NULL ? *p : *reinterpret_cast<const ::NFMsg::Ident*>(
+      &::NFMsg::_Ident_default_instance_);
+}
+inline ::NFMsg::Ident* AckSearchOppnent::release_hero_id2() {
+  // @@protoc_insertion_point(field_release:NFMsg.AckSearchOppnent.hero_id2)
+  
+  ::NFMsg::Ident* temp = hero_id2_;
+  hero_id2_ = NULL;
+  return temp;
+}
+inline ::NFMsg::Ident* AckSearchOppnent::mutable_hero_id2() {
+  
+  if (hero_id2_ == NULL) {
+    auto* p = CreateMaybeMessage<::NFMsg::Ident>(GetArenaNoVirtual());
+    hero_id2_ = p;
+  }
+  // @@protoc_insertion_point(field_mutable:NFMsg.AckSearchOppnent.hero_id2)
+  return hero_id2_;
+}
+inline void AckSearchOppnent::set_allocated_hero_id2(::NFMsg::Ident* hero_id2) {
+  ::google::protobuf::Arena* message_arena = GetArenaNoVirtual();
+  if (message_arena == NULL) {
+    delete reinterpret_cast< ::google::protobuf::MessageLite*>(hero_id2_);
+  }
+  if (hero_id2) {
+    ::google::protobuf::Arena* submessage_arena = NULL;
+    if (message_arena != submessage_arena) {
+      hero_id2 = ::google::protobuf::internal::GetOwnedMessage(
+          message_arena, hero_id2, submessage_arena);
+    }
+    
+  } else {
+    
+  }
+  hero_id2_ = hero_id2;
+  // @@protoc_insertion_point(field_set_allocated:NFMsg.AckSearchOppnent.hero_id2)
+}
+
+// .NFMsg.Ident hero_id3 = 22;
+inline bool AckSearchOppnent::has_hero_id3() const {
+  return this != internal_default_instance() && hero_id3_ != NULL;
+}
+inline const ::NFMsg::Ident& AckSearchOppnent::_internal_hero_id3() const {
+  return *hero_id3_;
+}
+inline const ::NFMsg::Ident& AckSearchOppnent::hero_id3() const {
+  const ::NFMsg::Ident* p = hero_id3_;
+  // @@protoc_insertion_point(field_get:NFMsg.AckSearchOppnent.hero_id3)
+  return p != NULL ? *p : *reinterpret_cast<const ::NFMsg::Ident*>(
+      &::NFMsg::_Ident_default_instance_);
+}
+inline ::NFMsg::Ident* AckSearchOppnent::release_hero_id3() {
+  // @@protoc_insertion_point(field_release:NFMsg.AckSearchOppnent.hero_id3)
+  
+  ::NFMsg::Ident* temp = hero_id3_;
+  hero_id3_ = NULL;
+  return temp;
+}
+inline ::NFMsg::Ident* AckSearchOppnent::mutable_hero_id3() {
+  
+  if (hero_id3_ == NULL) {
+    auto* p = CreateMaybeMessage<::NFMsg::Ident>(GetArenaNoVirtual());
+    hero_id3_ = p;
+  }
+  // @@protoc_insertion_point(field_mutable:NFMsg.AckSearchOppnent.hero_id3)
+  return hero_id3_;
+}
+inline void AckSearchOppnent::set_allocated_hero_id3(::NFMsg::Ident* hero_id3) {
+  ::google::protobuf::Arena* message_arena = GetArenaNoVirtual();
+  if (message_arena == NULL) {
+    delete reinterpret_cast< ::google::protobuf::MessageLite*>(hero_id3_);
+  }
+  if (hero_id3) {
+    ::google::protobuf::Arena* submessage_arena = NULL;
+    if (message_arena != submessage_arena) {
+      hero_id3 = ::google::protobuf::internal::GetOwnedMessage(
+          message_arena, hero_id3, submessage_arena);
+    }
+    
+  } else {
+    
+  }
+  hero_id3_ = hero_id3;
+  // @@protoc_insertion_point(field_set_allocated:NFMsg.AckSearchOppnent.hero_id3)
+}
+
+// .NFMsg.Vector3 hero_pos1 = 23;
+inline bool AckSearchOppnent::has_hero_pos1() const {
+  return this != internal_default_instance() && hero_pos1_ != NULL;
+}
+inline const ::NFMsg::Vector3& AckSearchOppnent::_internal_hero_pos1() const {
+  return *hero_pos1_;
+}
+inline const ::NFMsg::Vector3& AckSearchOppnent::hero_pos1() const {
+  const ::NFMsg::Vector3* p = hero_pos1_;
+  // @@protoc_insertion_point(field_get:NFMsg.AckSearchOppnent.hero_pos1)
+  return p != NULL ? *p : *reinterpret_cast<const ::NFMsg::Vector3*>(
+      &::NFMsg::_Vector3_default_instance_);
+}
+inline ::NFMsg::Vector3* AckSearchOppnent::release_hero_pos1() {
+  // @@protoc_insertion_point(field_release:NFMsg.AckSearchOppnent.hero_pos1)
+  
+  ::NFMsg::Vector3* temp = hero_pos1_;
+  hero_pos1_ = NULL;
+  return temp;
+}
+inline ::NFMsg::Vector3* AckSearchOppnent::mutable_hero_pos1() {
+  
+  if (hero_pos1_ == NULL) {
+    auto* p = CreateMaybeMessage<::NFMsg::Vector3>(GetArenaNoVirtual());
+    hero_pos1_ = p;
+  }
+  // @@protoc_insertion_point(field_mutable:NFMsg.AckSearchOppnent.hero_pos1)
+  return hero_pos1_;
+}
+inline void AckSearchOppnent::set_allocated_hero_pos1(::NFMsg::Vector3* hero_pos1) {
+  ::google::protobuf::Arena* message_arena = GetArenaNoVirtual();
+  if (message_arena == NULL) {
+    delete reinterpret_cast< ::google::protobuf::MessageLite*>(hero_pos1_);
+  }
+  if (hero_pos1) {
+    ::google::protobuf::Arena* submessage_arena = NULL;
+    if (message_arena != submessage_arena) {
+      hero_pos1 = ::google::protobuf::internal::GetOwnedMessage(
+          message_arena, hero_pos1, submessage_arena);
+    }
+    
+  } else {
+    
+  }
+  hero_pos1_ = hero_pos1;
+  // @@protoc_insertion_point(field_set_allocated:NFMsg.AckSearchOppnent.hero_pos1)
+}
+
+// .NFMsg.Vector3 hero_pos2 = 24;
+inline bool AckSearchOppnent::has_hero_pos2() const {
+  return this != internal_default_instance() && hero_pos2_ != NULL;
+}
+inline const ::NFMsg::Vector3& AckSearchOppnent::_internal_hero_pos2() const {
+  return *hero_pos2_;
+}
+inline const ::NFMsg::Vector3& AckSearchOppnent::hero_pos2() const {
+  const ::NFMsg::Vector3* p = hero_pos2_;
+  // @@protoc_insertion_point(field_get:NFMsg.AckSearchOppnent.hero_pos2)
+  return p != NULL ? *p : *reinterpret_cast<const ::NFMsg::Vector3*>(
+      &::NFMsg::_Vector3_default_instance_);
+}
+inline ::NFMsg::Vector3* AckSearchOppnent::release_hero_pos2() {
+  // @@protoc_insertion_point(field_release:NFMsg.AckSearchOppnent.hero_pos2)
+  
+  ::NFMsg::Vector3* temp = hero_pos2_;
+  hero_pos2_ = NULL;
+  return temp;
+}
+inline ::NFMsg::Vector3* AckSearchOppnent::mutable_hero_pos2() {
+  
+  if (hero_pos2_ == NULL) {
+    auto* p = CreateMaybeMessage<::NFMsg::Vector3>(GetArenaNoVirtual());
+    hero_pos2_ = p;
+  }
+  // @@protoc_insertion_point(field_mutable:NFMsg.AckSearchOppnent.hero_pos2)
+  return hero_pos2_;
+}
+inline void AckSearchOppnent::set_allocated_hero_pos2(::NFMsg::Vector3* hero_pos2) {
+  ::google::protobuf::Arena* message_arena = GetArenaNoVirtual();
+  if (message_arena == NULL) {
+    delete reinterpret_cast< ::google::protobuf::MessageLite*>(hero_pos2_);
+  }
+  if (hero_pos2) {
+    ::google::protobuf::Arena* submessage_arena = NULL;
+    if (message_arena != submessage_arena) {
+      hero_pos2 = ::google::protobuf::internal::GetOwnedMessage(
+          message_arena, hero_pos2, submessage_arena);
+    }
+    
+  } else {
+    
+  }
+  hero_pos2_ = hero_pos2;
+  // @@protoc_insertion_point(field_set_allocated:NFMsg.AckSearchOppnent.hero_pos2)
+}
+
+// .NFMsg.Vector3 hero_pos3 = 25;
+inline bool AckSearchOppnent::has_hero_pos3() const {
+  return this != internal_default_instance() && hero_pos3_ != NULL;
+}
+inline const ::NFMsg::Vector3& AckSearchOppnent::_internal_hero_pos3() const {
+  return *hero_pos3_;
+}
+inline const ::NFMsg::Vector3& AckSearchOppnent::hero_pos3() const {
+  const ::NFMsg::Vector3* p = hero_pos3_;
+  // @@protoc_insertion_point(field_get:NFMsg.AckSearchOppnent.hero_pos3)
+  return p != NULL ? *p : *reinterpret_cast<const ::NFMsg::Vector3*>(
+      &::NFMsg::_Vector3_default_instance_);
+}
+inline ::NFMsg::Vector3* AckSearchOppnent::release_hero_pos3() {
+  // @@protoc_insertion_point(field_release:NFMsg.AckSearchOppnent.hero_pos3)
+  
+  ::NFMsg::Vector3* temp = hero_pos3_;
+  hero_pos3_ = NULL;
+  return temp;
+}
+inline ::NFMsg::Vector3* AckSearchOppnent::mutable_hero_pos3() {
+  
+  if (hero_pos3_ == NULL) {
+    auto* p = CreateMaybeMessage<::NFMsg::Vector3>(GetArenaNoVirtual());
+    hero_pos3_ = p;
+  }
+  // @@protoc_insertion_point(field_mutable:NFMsg.AckSearchOppnent.hero_pos3)
+  return hero_pos3_;
+}
+inline void AckSearchOppnent::set_allocated_hero_pos3(::NFMsg::Vector3* hero_pos3) {
+  ::google::protobuf::Arena* message_arena = GetArenaNoVirtual();
+  if (message_arena == NULL) {
+    delete reinterpret_cast< ::google::protobuf::MessageLite*>(hero_pos3_);
+  }
+  if (hero_pos3) {
+    ::google::protobuf::Arena* submessage_arena = NULL;
+    if (message_arena != submessage_arena) {
+      hero_pos3 = ::google::protobuf::internal::GetOwnedMessage(
+          message_arena, hero_pos3, submessage_arena);
+    }
+    
+  } else {
+    
+  }
+  hero_pos3_ = hero_pos3;
+  // @@protoc_insertion_point(field_set_allocated:NFMsg.AckSearchOppnent.hero_pos3)
+}
+
+// .NFMsg.AckMiningTitle title = 30;
+inline bool AckSearchOppnent::has_title() const {
+  return this != internal_default_instance() && title_ != NULL;
+}
+inline void AckSearchOppnent::clear_title() {
+  if (GetArenaNoVirtual() == NULL && title_ != NULL) {
+    delete title_;
+  }
+  title_ = NULL;
+}
+inline const ::NFMsg::AckMiningTitle& AckSearchOppnent::_internal_title() const {
+  return *title_;
+}
+inline const ::NFMsg::AckMiningTitle& AckSearchOppnent::title() const {
+  const ::NFMsg::AckMiningTitle* p = title_;
+  // @@protoc_insertion_point(field_get:NFMsg.AckSearchOppnent.title)
+  return p != NULL ? *p : *reinterpret_cast<const ::NFMsg::AckMiningTitle*>(
+      &::NFMsg::_AckMiningTitle_default_instance_);
+}
+inline ::NFMsg::AckMiningTitle* AckSearchOppnent::release_title() {
+  // @@protoc_insertion_point(field_release:NFMsg.AckSearchOppnent.title)
+  
+  ::NFMsg::AckMiningTitle* temp = title_;
+  title_ = NULL;
+  return temp;
+}
+inline ::NFMsg::AckMiningTitle* AckSearchOppnent::mutable_title() {
+  
+  if (title_ == NULL) {
+    auto* p = CreateMaybeMessage<::NFMsg::AckMiningTitle>(GetArenaNoVirtual());
+    title_ = p;
+  }
+  // @@protoc_insertion_point(field_mutable:NFMsg.AckSearchOppnent.title)
+  return title_;
+}
+inline void AckSearchOppnent::set_allocated_title(::NFMsg::AckMiningTitle* title) {
+  ::google::protobuf::Arena* message_arena = GetArenaNoVirtual();
+  if (message_arena == NULL) {
+    delete title_;
+  }
+  if (title) {
+    ::google::protobuf::Arena* submessage_arena = NULL;
+    if (message_arena != submessage_arena) {
+      title = ::google::protobuf::internal::GetOwnedMessage(
+          message_arena, title, submessage_arena);
+    }
+    
+  } else {
+    
+  }
+  title_ = title;
+  // @@protoc_insertion_point(field_set_allocated:NFMsg.AckSearchOppnent.title)
+}
+
+// .NFMsg.Ident opponent = 31;
+inline bool AckSearchOppnent::has_opponent() const {
+  return this != internal_default_instance() && opponent_ != NULL;
+}
+inline const ::NFMsg::Ident& AckSearchOppnent::_internal_opponent() const {
+  return *opponent_;
+}
+inline const ::NFMsg::Ident& AckSearchOppnent::opponent() const {
+  const ::NFMsg::Ident* p = opponent_;
+  // @@protoc_insertion_point(field_get:NFMsg.AckSearchOppnent.opponent)
+  return p != NULL ? *p : *reinterpret_cast<const ::NFMsg::Ident*>(
+      &::NFMsg::_Ident_default_instance_);
+}
+inline ::NFMsg::Ident* AckSearchOppnent::release_opponent() {
+  // @@protoc_insertion_point(field_release:NFMsg.AckSearchOppnent.opponent)
+  
+  ::NFMsg::Ident* temp = opponent_;
+  opponent_ = NULL;
+  return temp;
+}
+inline ::NFMsg::Ident* AckSearchOppnent::mutable_opponent() {
+  
+  if (opponent_ == NULL) {
+    auto* p = CreateMaybeMessage<::NFMsg::Ident>(GetArenaNoVirtual());
+    opponent_ = p;
+  }
+  // @@protoc_insertion_point(field_mutable:NFMsg.AckSearchOppnent.opponent)
+  return opponent_;
+}
+inline void AckSearchOppnent::set_allocated_opponent(::NFMsg::Ident* opponent) {
+  ::google::protobuf::Arena* message_arena = GetArenaNoVirtual();
+  if (message_arena == NULL) {
+    delete reinterpret_cast< ::google::protobuf::MessageLite*>(opponent_);
+  }
+  if (opponent) {
+    ::google::protobuf::Arena* submessage_arena = NULL;
+    if (message_arena != submessage_arena) {
+      opponent = ::google::protobuf::internal::GetOwnedMessage(
+          message_arena, opponent, submessage_arena);
+    }
+    
+  } else {
+    
+  }
+  opponent_ = opponent;
+  // @@protoc_insertion_point(field_set_allocated:NFMsg.AckSearchOppnent.opponent)
 }
 
 // -------------------------------------------------------------------
