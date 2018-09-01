@@ -618,6 +618,9 @@ package nframe;
 		public static final String HeroID1 = "HeroID1";// object
 		public static final String HeroID2 = "HeroID2";// object
 		public static final String HeroID3 = "HeroID3";// object
+		public static final String HeroPos1 = "HeroPos1";// vector
+		public static final String HeroPos2 = "HeroPos2";// vector
+		public static final String HeroPos3 = "HeroPos3";// vector
 		public static final String HeroStar1 = "HeroStar1";// int
 		public static final String HeroStar2 = "HeroStar2";// int
 		public static final String HeroStar3 = "HeroStar3";// int
