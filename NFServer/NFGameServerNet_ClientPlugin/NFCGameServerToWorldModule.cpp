@@ -314,7 +314,7 @@ void NFCGameServerToWorldModule::TransPBToProxy(const NFSOCK nSockIndex, const i
 		return;
 	}
 
-	m_pGameServerNet_ServerModule->SendMsgPBToGate(nMsgID, strData, nPlayerID);
+	m_pGameServerNet_ServerModule->SendMsgToGate(nMsgID, strData, nPlayerID);
 
 	return;
 }

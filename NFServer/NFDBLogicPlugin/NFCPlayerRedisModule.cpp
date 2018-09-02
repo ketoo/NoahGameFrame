@@ -330,11 +330,9 @@ bool NFCPlayerRedisModule::CreateRole(const std::string & strAccount, const std:
 
 			vecFields.push_back(NFrame::Player::Name());
 			vecFields.push_back(NFrame::Player::ID());
-			vecFields.push_back(NFrame::Player::HomeSceneID());
 
 			vecValues.push_back(strRoleName);
 			vecValues.push_back(id.ToString());
-			vecValues.push_back(lexical_cast<std::string>(nHomeSceneID));
 
 			xNoSqlDriver->HMSET(strAccountKey, vecFields, vecValues);
 
@@ -358,6 +356,12 @@ bool NFCPlayerRedisModule::CreateRole(const std::string & strAccount, const std:
 				if (xProperty)
 				{
 					xProperty->SetInt(1);
+				}
+
+				xProperty = xPropertyManager->GetElement(NFrame::Player::HomeSceneID());
+				if (xProperty)
+				{
+					xProperty->SetInt(nHomeSceneID);
 				}
 
 				m_pCommonRedisModule->SavePropertyInfo(id, xPropertyManager);

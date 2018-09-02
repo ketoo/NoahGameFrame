@@ -38,6 +38,7 @@
 #include "NFComm/NFPluginModule/NFIEventModule.h"
 #include "NFComm/NFPluginModule/NFIEventModule.h"
 #include "NFComm/NFPluginModule/NFIItemConsumeManagerModule.h"
+#include "NFComm/NFPluginModule/NFILogModule.h"
 
 class NFCItemModule
     : public NFIItemModule
@@ -75,6 +76,7 @@ private:
     NFIEventModule* m_pEventModule;
 	NFIKernelModule* m_pKernelModule;
 	NFINetModule* m_pNetModule;
+	NFILogModule* m_pLogModule;
     NFIPackModule* m_pPackModule;
     NFIElementModule* m_pElementModule;
     NFIClassModule* m_pLogicClassModule;
