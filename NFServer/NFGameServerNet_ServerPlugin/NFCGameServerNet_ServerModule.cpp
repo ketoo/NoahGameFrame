@@ -2046,7 +2046,7 @@ void NFCGameServerNet_ServerModule::SendMsgPBToGate(const uint16_t nMsgID, googl
 	}
 }
 
-void NFCGameServerNet_ServerModule::SendMsgPBToGate(const uint16_t nMsgID, const std::string& strMsg, const NFGUID& self)
+void NFCGameServerNet_ServerModule::SendMsgToGate(const uint16_t nMsgID, const std::string& strMsg, const NFGUID& self)
 {
 	NF_SHARE_PTR<GateBaseInfo> pData = mRoleBaseData.GetElement(self);
 	if (pData)
@@ -2054,7 +2054,7 @@ void NFCGameServerNet_ServerModule::SendMsgPBToGate(const uint16_t nMsgID, const
 		NF_SHARE_PTR<GateServerInfo> pProxyData = mProxyMap.GetElement(pData->nGateID);
 		if (pProxyData)
 		{
-			m_pNetModule->SendMsgPB(nMsgID, strMsg, pProxyData->xServerData.nFD, pData->xClientID);
+			m_pNetModule->SendMsg(nMsgID, strMsg, pProxyData->xServerData.nFD, pData->xClientID);
 		}
 	}
 }
@@ -2082,7 +2082,7 @@ void NFCGameServerNet_ServerModule::SendMsgPBToGate(const uint16_t nMsgID, const
 		for (int i = 0; i < xList.GetCount(); ++i)
 		{
 			NFGUID xObject = xList.Object(i);
-			this->SendMsgPBToGate(nMsgID, strMsg, xObject);
+			this->SendMsgToGate(nMsgID, strMsg, xObject);
 		}
 	}
 }
@@ -2191,7 +2191,7 @@ void NFCGameServerNet_ServerModule::OnTransWorld(const NFSOCK nSockIndex, const 
 		nHasKey = nPlayer.nData64;
 	}
 
-	m_pNetClientModule->SendBySuit(NF_SERVER_TYPES::NF_ST_WORLD, nHasKey, nMsgID, msg, nLen);
+	m_pNetClientModule->SendBySuitWithOutHead(NF_SERVER_TYPES::NF_ST_WORLD, nHasKey, nMsgID, std::string(msg, nLen));
 }
 
 void NFCGameServerNet_ServerModule::OnGuildTransWorld(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
@@ -2209,7 +2209,7 @@ void NFCGameServerNet_ServerModule::OnGuildTransWorld(const NFSOCK nSockIndex, c
 				if (xGuildID.IsNull())
 				{
 					int nHashKey = nPlayer.nHead64;
-					m_pNetClientModule->SendBySuit(NF_SERVER_TYPES::NF_ST_WORLD, nHashKey, nMsgID, msg, nLen);
+					m_pNetClientModule->SendBySuitWithOutHead(NF_SERVER_TYPES::NF_ST_WORLD, nHashKey, nMsgID, std::string(msg, nLen));
 				}
 			}
 		}
@@ -2237,7 +2237,7 @@ void NFCGameServerNet_ServerModule::OnGuildTransWorld(const NFSOCK nSockIndex, c
 	if (NFINetModule::ReceivePB(nMsgID, msg, nLen, strMsg, nPlayer))
 	{
 		nHasKey = nPlayer.nData64;
-		m_pNetClientModule->SendBySuit(NF_SERVER_TYPES::NF_ST_WORLD, nHasKey, nMsgID, msg, nLen);
+		m_pNetClientModule->SendBySuitWithOutHead(NF_SERVER_TYPES::NF_ST_WORLD, nHasKey, nMsgID, std::string(msg, nLen));
 	}
 }
 
