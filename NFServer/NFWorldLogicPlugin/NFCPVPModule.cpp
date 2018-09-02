@@ -51,21 +51,13 @@ bool NFCPVPModule::Execute()
 
 bool NFCPVPModule::AfterInit()
 {
-	m_pTileModule = pPluginManager->FindModule<NFITileModule>();
 	m_pElementModule = pPluginManager->FindModule<NFIElementModule>();
 	m_pClassModule = pPluginManager->FindModule<NFIClassModule>();
 	m_pNetModule = pPluginManager->FindModule<NFINetModule>();
 	m_pLogModule = pPluginManager->FindModule<NFILogModule>();
-	m_pSceneProcessModule = pPluginManager->FindModule<NFISceneProcessModule>();
 	m_pPlayerRedisModule = pPluginManager->FindModule<NFIPlayerRedisModule>();
-	m_pSceneAOIModule = pPluginManager->FindModule<NFISceneAOIModule>();
-	m_pPropertyModule = pPluginManager->FindModule<NFIPropertyModule>();
-	m_pGameServerNet_ServerModule = pPluginManager->FindModule<NFIGameServerNet_ServerModule>();
 	m_pNoSqlModule = pPluginManager->FindModule<NFINoSqlModule>();
 	m_pCommonRedisModule = pPluginManager->FindModule<NFICommonRedisModule>();
-	m_pLevelModule = pPluginManager->FindModule<NFILevelModule>();
-	m_pHeroModule = pPluginManager->FindModule<NFIHeroModule>();
-	m_pScheduleModule = pPluginManager->FindModule<NFIScheduleModule>();
 	m_pScheduleModule = pPluginManager->FindModule<NFIScheduleModule>();
 	m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>();
 
@@ -85,13 +77,13 @@ bool NFCPVPModule::ReadyExecute()
 void NFCPVPModule::OnReqSearchOpponentProcess(const NFSOCK nSockIndex, const int nMsgID, const char *msg,
                                               const uint32_t nLen)
 {
-	CLIENT_MSG_PROCESS( nMsgID, msg, nLen, NFMsg::ReqSearchOppnent);
+	CLIENT_MSG_PROCESS_NO_OBJECT( nMsgID, msg, nLen, NFMsg::ReqSearchOppnent);
 
 	int nSearchCount = 0;
 	bool bRet = false;
 	while (!bRet && nSearchCount <= 5)
 	{
-		bRet = SearchOpponent(nPlayerID, xMsg.self_scene());
+		bRet = SearchOpponent(nPlayerID, xMsg.self_scene(), nSockIndex);
 		nSearchCount++;
 	}
 
@@ -100,7 +92,7 @@ void NFCPVPModule::OnReqSearchOpponentProcess(const NFSOCK nSockIndex, const int
 		//failed
 		NFMsg::AckSearchOppnent xAckData;
 		xAckData.set_scene_id(0);
-		m_pGameServerNet_ServerModule->SendMsgPBToGate(NFMsg::EGMI_ACK_SEARCH_OPPNENT, xAckData, nPlayerID);
+		m_pNetModule->SendMsgPB(NFMsg::EGMI_ACK_SEARCH_OPPNENT, xAckData, nSockIndex);
 
 		m_pLogModule->LogNormal(NFILogModule::NLL_ERROR_NORMAL, nPlayerID, "ERROR TO FIND A OPPNENT!", "", __FUNCTION__, __LINE__);
 	}
@@ -132,7 +124,7 @@ void NFCPVPModule::InitAllTileScene()
 	}
 }
 
-bool NFCPVPModule::SearchOpponent(const NFGUID & self, const int nExceptSceneID)
+bool NFCPVPModule::SearchOpponent(const NFGUID & self, const int nExceptSceneID, const NFSOCK nSockIndex)
 {
 	int nSceneID = RandomTileScene(nExceptSceneID);
 	std::string strTileData;
@@ -153,7 +145,7 @@ bool NFCPVPModule::SearchOpponent(const NFGUID & self, const int nExceptSceneID)
 
 			ProcessOpponentData(xViewOpponent, xAckData);
 
-			m_pGameServerNet_ServerModule->SendMsgPBToGate(NFMsg::EGMI_ACK_SEARCH_OPPNENT, xAckData, self);
+			m_pNetModule->SendMsgPB(NFMsg::EGMI_ACK_SEARCH_OPPNENT, xAckData, nSockIndex, self);
 
 			return true;
 		}

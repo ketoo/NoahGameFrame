@@ -57,11 +57,9 @@ bool NFCPVPModule::AfterInit()
 	m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>();
 	m_pLogModule = pPluginManager->FindModule<NFILogModule>();
 	m_pSceneProcessModule = pPluginManager->FindModule<NFISceneProcessModule>();
-	m_pPlayerRedisModule = pPluginManager->FindModule<NFIPlayerRedisModule>();
 	m_pSceneAOIModule = pPluginManager->FindModule<NFISceneAOIModule>();
 	m_pPropertyModule = pPluginManager->FindModule<NFIPropertyModule>();
 	m_pGameServerNet_ServerModule = pPluginManager->FindModule<NFIGameServerNet_ServerModule>();
-	m_pCommonRedisModule = pPluginManager->FindModule<NFICommonRedisModule>();
 	m_pLevelModule = pPluginManager->FindModule<NFILevelModule>();
 	m_pHeroModule = pPluginManager->FindModule<NFIHeroModule>();
 	m_pScheduleModule = pPluginManager->FindModule<NFIScheduleModule>();
@@ -112,7 +110,7 @@ void NFCPVPModule::OnReqSearchOpponentProcess(const NFSOCK nSockIndex, const int
 	int nHomeSceneID = m_pKernelModule->GetPropertyInt(nPlayerID, NFrame::Player::HomeSceneID());
 	xMsg.set_self_scene(nHomeSceneID);
 	int nHasKey = nPlayerID.nData64;
-	m_pNetClientModule->SendSuitByPB(NF_SERVER_TYPES::NF_ST_WORLD, nHasKey, nMsgID, xMsg);
+	m_pNetClientModule->SendSuitByPB(NF_SERVER_TYPES::NF_ST_WORLD, nHasKey, nMsgID, xMsg, nPlayerID);
 }
 
 void NFCPVPModule::OnAckSearchOpponentProcess(const NFSOCK nSockIndex, const int nMsgID, const char * msg, const uint32_t nLen)
@@ -124,50 +122,49 @@ void NFCPVPModule::OnAckSearchOpponentProcess(const NFSOCK nSockIndex, const int
 		return;
 	}
 
-		m_pKernelModule->SetPropertyObject(nPlayerID, NFrame::Player::ViewOpponent(), NFINetModule::PBToNF(xMsg.opponent()));
-		m_pKernelModule->SetPropertyObject(nPlayerID, NFrame::Player::FightingOpponent(), NFGUID());
-		m_pKernelModule->SetPropertyInt(nPlayerID, NFrame::Player::FightingStar(), 0);
+	m_pKernelModule->SetPropertyObject(nPlayerID, NFrame::Player::ViewOpponent(), NFINetModule::PBToNF(xMsg.opponent()));
+	m_pKernelModule->SetPropertyObject(nPlayerID, NFrame::Player::FightingOpponent(), NFGUID());
+	m_pKernelModule->SetPropertyInt(nPlayerID, NFrame::Player::FightingStar(), 0);
 
-		m_pKernelModule->SetPropertyInt(nPlayerID, NFrame::Player::PVPType(), NFMsg::EPVPType::PVP_INDIVIDUAL);
+	m_pKernelModule->SetPropertyInt(nPlayerID, NFrame::Player::PVPType(), NFMsg::EPVPType::PVP_INDIVIDUAL);
 
-		m_pSceneProcessModule->RequestEnterScene(nPlayerID, xMsg.scene_id(), 0, NFDataList());
+	m_pSceneProcessModule->RequestEnterScene(nPlayerID, xMsg.scene_id(), 0, NFDataList());
 
-		int nNoWSceneID = m_pKernelModule->GetPropertyInt(nPlayerID, NFrame::Player::SceneID());
-		int nGroupID = m_pKernelModule->GetPropertyInt(nPlayerID, NFrame::Player::GroupID());
+	int nNoWSceneID = m_pKernelModule->GetPropertyInt(nPlayerID, NFrame::Player::SceneID());
+	int nGroupID = m_pKernelModule->GetPropertyInt(nPlayerID, NFrame::Player::GroupID());
 
-		if (nNoWSceneID != xMsg.scene_id())
-		{
-			return;
-		}
-		
-		//process opponent data
-		ProcessOpponentData(nPlayerID, xMsg);
+	if (nNoWSceneID != xMsg.scene_id())
+	{
+		return;
+	}
+	
+	//process opponent data
+	ProcessOpponentData(nPlayerID, xMsg);
 
-		m_pGameServerNet_ServerModule->SendMsgPBToGate(NFMsg::EGMI_ACK_SEARCH_OPPNENT, std::string(msg, nLen), nPlayerID);
+	m_pGameServerNet_ServerModule->SendMsgToGate(NFMsg::EGMI_ACK_SEARCH_OPPNENT, std::string(msg, nLen), nPlayerID);
 
-		for (int i = 0; i < xMsg.title().building_size(); ++i)
-		{
-			const NFMsg::TileBuilding& xTileBuilding = xMsg.title().building().Get(i);
+	for (int i = 0; i < xMsg.title().building_size(); ++i)
+	{
+		const NFMsg::TileBuilding& xTileBuilding = xMsg.title().building().Get(i);
 
-			NFGUID xBuildingID = NFINetModule::PBToNF(xTileBuilding.guid());
-			NFVector3 vPos;
-			vPos.SetX(xTileBuilding.x());
-			vPos.SetY(xTileBuilding.y());
-			std::string strCnfID = xTileBuilding.configid();
+		NFGUID xBuildingID = NFINetModule::PBToNF(xTileBuilding.guid());
+		NFVector3 vPos;
+		vPos.SetX(xTileBuilding.x());
+		vPos.SetY(xTileBuilding.y());
+		std::string strCnfID = xTileBuilding.configid();
 
-			NFDataList xDataArg;
-			xDataArg.AddString(NFrame::NPC::Position());
-			xDataArg.AddVector3(vPos);
-			xDataArg.AddString(NFrame::NPC::MasterID());
-			xDataArg.AddObject(NFINetModule::PBToNF(xMsg.opponent()));
-			xDataArg.AddString(NFrame::NPC::AIOwnerID());
-			xDataArg.AddObject(nPlayerID);
-			xDataArg.AddString(NFrame::NPC::NPCType());
-			xDataArg.AddInt(NFMsg::ENPCType::ENPCTYPE_TURRET);
+		NFDataList xDataArg;
+		xDataArg.AddString(NFrame::NPC::Position());
+		xDataArg.AddVector3(vPos);
+		xDataArg.AddString(NFrame::NPC::MasterID());
+		xDataArg.AddObject(NFINetModule::PBToNF(xMsg.opponent()));
+		xDataArg.AddString(NFrame::NPC::AIOwnerID());
+		xDataArg.AddObject(nPlayerID);
+		xDataArg.AddString(NFrame::NPC::NPCType());
+		xDataArg.AddInt(NFMsg::ENPCType::ENPCTYPE_TURRET);
 
-			m_pKernelModule->CreateObject(xBuildingID, nNoWSceneID, nGroupID, NFrame::NPC::ThisName(), strCnfID, xDataArg);
-		}
-
+		m_pKernelModule->CreateObject(xBuildingID, nNoWSceneID, nGroupID, NFrame::NPC::ThisName(), strCnfID, xDataArg);
+	}
 }
 
 void NFCPVPModule::OnReqSwapHomeSceneProcess(const NFSOCK nSockIndex, const int nMsgID, const char * msg, const uint32_t nLen)
@@ -271,7 +268,7 @@ int NFCPVPModule::OnSceneEvent(const NFGUID & self, const int nSceneID, const in
 	}
 	else if(ePvpType == NFMsg::EPVPType::PVP_INDIVIDUAL)
 	{
-		if (m_pPlayerRedisModule->LoadPlayerTileRandomCache(xViewOpponent, strTileData))
+		//if (m_pPlayerRedisModule->LoadPlayerTileRandomCache(xViewOpponent, strTileData))
 		{
 			xAckSwapScene.set_data(strTileData.c_str(), strTileData.length());
 		}
@@ -346,6 +343,8 @@ int NFCPVPModule::OnDeadSwapHeroHeart(const NFGUID & self, const std::string & s
 		m_pHeroModule->SwitchFightHero(self, xHero3);
 	}
 	//swap hero
+
+	return 0;
 }
 
 bool NFCPVPModule::ProcessOpponentData(const NFGUID & self, const NFMsg::AckSearchOppnent& opponent)

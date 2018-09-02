@@ -28,6 +28,7 @@
 #define NFC_TASK_MODULE_H
 
 #include "NFComm/NFMessageDefine/NFMsgDefine.h"
+#include "NFComm/NFPluginModule/NFILogModule.h"
 #include "NFComm/NFPluginModule/NFINetModule.h"
 #include "NFComm/NFPluginModule/NFILogModule.h"
 #include "NFComm/NFPluginModule/NFIKernelModule.h"
@@ -64,7 +65,9 @@ protected:
     void OnClientAcceptTask(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
     void OnClientPushTask(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
 
+
 private:
+	NFILogModule*					m_pLogModule;
 	NFINetModule*					m_pNetModule;
     NFIKernelModule* 				m_pKernelModule;
     NFIPackModule* 					m_pPackModule;

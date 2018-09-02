@@ -73,26 +73,19 @@ protected:
 
 protected:
 	
-	bool SearchOpponent(const NFGUID & self, const int nExceptSceneID);
+	bool SearchOpponent(const NFGUID & self, const int nExceptSceneID, const NFSOCK nSockIndex);
 	bool ProcessOpponentData( const NFGUID& opponent, NFMsg::AckSearchOppnent& xAckData);
 
 private:
 	NFIKernelModule* m_pKernelModule;
 	NFIScheduleModule* m_pScheduleModule;
-	NFITileModule* m_pTileModule;
-	NFIHeroModule* m_pHeroModule;
-	NFIPropertyModule* m_pPropertyModule;
 	NFIClassModule* m_pClassModule;
 	NFIElementModule* m_pElementModule;
 	NFINetModule* m_pNetModule;
 	NFILogModule* m_pLogModule;
 	NFIPlayerRedisModule* m_pPlayerRedisModule;
-	NFISceneProcessModule* m_pSceneProcessModule;
-	NFISceneAOIModule* m_pSceneAOIModule;
-	NFIGameServerNet_ServerModule* m_pGameServerNet_ServerModule;
 	NFINoSqlModule* m_pNoSqlModule;
 	NFICommonRedisModule* m_pCommonRedisModule;
-	NFILevelModule* m_pLevelModule;
 
 	std::vector<int> mxTileSceneIDList;
 };
