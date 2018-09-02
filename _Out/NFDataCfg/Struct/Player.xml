@@ -73,9 +73,9 @@
 		<Property Id="HeroID1" Cache="1" Desc="Hero1" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="object" Upload="0" />
 		<Property Id="HeroID2" Cache="1" Desc="Hero2" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="object" Upload="0" />
 		<Property Id="HeroID3" Cache="1" Desc="Hero3" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="object" Upload="0" />
-		<Property Id="HeroPos1" Cache="1" Desc="FightHeroHP1" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="vector" Upload="0" />
-		<Property Id="HeroPos2" Cache="1" Desc="FightHeroHP2" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="vector" Upload="0" />
-		<Property Id="HeroPos3" Cache="1" Desc="FightHeroHP3" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="vector" Upload="0" />
+		<Property Id="HeroPos1" Cache="1" Desc="FightHeroHP1" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="vector3" Upload="0" />
+		<Property Id="HeroPos2" Cache="1" Desc="FightHeroHP2" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="vector3" Upload="0" />
+		<Property Id="HeroPos3" Cache="1" Desc="FightHeroHP3" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="vector3" Upload="0" />
 		<Property Id="HeroStar1" Cache="1" Desc="Hero1" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="int" Upload="0" />
 		<Property Id="HeroStar2" Cache="1" Desc="Hero2" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="int" Upload="0" />
 		<Property Id="HeroStar3" Cache="1" Desc="Hero3" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="int" Upload="0" />
