@@ -53,7 +53,7 @@ public:
 	virtual bool AfterInit();
 
 	virtual bool ExistRoleName(const std::string& strRoleName);
-	virtual bool CreateRole(const std::string& strAccount, const std::string& strRoleName, const NFGUID& id);
+	virtual bool CreateRole(const std::string& strAccount, const std::string& strRoleName, const NFGUID& id, const int nHomeSceneID);
 	virtual bool GetRoleInfo(const std::string& strAccount, std::string& strRoleName, NFGUID& id);
 
 	virtual bool LoadPlayerData(const NFGUID& self, NFMsg::RoleDataPack& roleData);
