@@ -215,7 +215,8 @@ void NFCCreateRoleModule::OnDBLoadRoleDataProcess(const NFSOCK nSockIndex, const
 
 	//get data first then create player
 	int nHomeSceneiD = pObject->GetPropertyInt(NFrame::Player::HomeSceneID());
-	m_pSceneProcessModule->RequestEnterScene(pObject->Self(), nHomeSceneiD, -1, 0, NFDataList());
+	//m_pSceneProcessModule->RequestEnterScene(pObject->Self(), nHomeSceneiD, -1, 0, NFDataList());
+	m_pSceneProcessModule->RequestEnterScene(pObject->Self(), 1, 1, 0, NFDataList());
 }
 
 int NFCCreateRoleModule::OnObjectPlayerEvent(const NFGUID & self, const std::string & strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFDataList & var)
