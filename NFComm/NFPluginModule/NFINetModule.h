@@ -30,6 +30,7 @@
 #include <iosfwd>
 #include "NFGUID.h"
 #include "NFIModule.h"
+#include "NFILogModule.h"
 #include "NFIPluginManager.h"
 #include "NFComm/NFNetPlugin/NFINet.h"
 #include "NFComm/NFCore/NFQueue.hpp"
