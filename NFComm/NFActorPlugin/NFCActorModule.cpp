@@ -124,7 +124,7 @@ bool NFCActorModule::ExecuteEvent()
 			NF_SHARE_PTR<NFIActor> xActor = mxActorMap.GetElement(xMsg.nFormActor);
 			if (xActor)
 			{
-				mxActorMap.RemoveElement(xMsg.nFormActor);
+				//mxActorMap.RemoveElement(xMsg.nFormActor);
 				mxActorPool.Push(xActor);
 			}
 		}
