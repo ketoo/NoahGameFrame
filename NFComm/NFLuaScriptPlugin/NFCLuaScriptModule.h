@@ -134,7 +134,7 @@ protected:
 
     void AddReceiveCallBack(const int nMsgID, const std::string& luaFunc);
     void ImportProtoFile(const std::string& strFile);
-    const std::string& Encode(const std::string& strMsgTypeName, const LuaIntf::LuaRef& luaTable);
+    const std::string Encode(const std::string& strMsgTypeName, const LuaIntf::LuaRef& luaTable);
 	LuaIntf::LuaRef Decode(const std::string& strMsgTypeName, const std::string& strData);
 
 	void SendByServerFD(const NFSOCK nFD, const uint16_t nMsgID, const std::string& strData);
