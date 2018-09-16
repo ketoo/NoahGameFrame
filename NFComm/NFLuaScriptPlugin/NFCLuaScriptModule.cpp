@@ -701,7 +701,7 @@ void NFCLuaScriptModule::ImportProtoFile(const std::string& strFile)
 	p->ImportProtoFile(strFile);
 }
 
-const std::string& NFCLuaScriptModule::Encode(const std::string& strMsgTypeName, const LuaIntf::LuaRef& luaTable)
+const std::string NFCLuaScriptModule::Encode(const std::string& strMsgTypeName, const LuaIntf::LuaRef& luaTable)
 {
 	NFCLuaPBModule* p = (NFCLuaPBModule*)m_pLuaPBModule;
 	return p->Encode(strMsgTypeName, luaTable);
@@ -1090,7 +1090,7 @@ bool NFCLuaScriptModule::Register()
 		.addFunction("add_msg_cb", &NFCLuaScriptModule::AddReceiveCallBack)
 		.addFunction("import_proto_file", &NFCLuaScriptModule::ImportProtoFile)
 		.addFunction("encode", &NFCLuaScriptModule::Encode)
-		.addFunction("dncode", &NFCLuaScriptModule::Decode)
+		.addFunction("decode", &NFCLuaScriptModule::Decode)
 
 		.addFunction("send_by_fd", &NFCLuaScriptModule::SendByServerFD)
 		.addFunction("send_by_id", &NFCLuaScriptModule::SendByServerID)

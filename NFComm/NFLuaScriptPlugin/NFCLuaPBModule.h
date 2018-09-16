@@ -38,6 +38,20 @@
 #include "NFComm/NFPluginModule/NFILogModule.h"
 #include "NFComm/NFPluginModule/NFILuaPBModule.h"
 
+class NFMultiFileErrorCollector : public google::protobuf::compiler::MultiFileErrorCollector
+{
+public:
+	NFMultiFileErrorCollector() {}
+	virtual ~NFMultiFileErrorCollector() {};
+
+	// Line and column numbers are zero-based.  A line number of -1 indicates
+	// an error with the entire file (e.g. "not found").
+	virtual void AddError(const string& filename, int line, int column, const string& message)
+	{
+		std::cout << filename << " line:" << line << " column:" << column  << " message:" << message  << std::endl;
+	}
+};
+
 class NFCLuaPBModule
     : public NFILuaPBModule
 {
@@ -62,7 +76,7 @@ protected:
 	void SetLuaState(lua_State* pState);
 
 	LuaIntf::LuaRef Decode(const std::string& strMsgTypeName, const std::string& strData);
-	const std::string& Encode(const std::string& strMsgTypeName, const LuaIntf::LuaRef& luaTable);
+	const std::string Encode(const std::string& strMsgTypeName, const LuaIntf::LuaRef& luaTable);
 
 	friend class NFCLuaScriptModule;
 
@@ -75,7 +89,7 @@ private:
 
 
 	///////////////
-	const std::string& TblToMessage(const LuaIntf::LuaRef& luaTable, google::protobuf::Message& message);
+	const bool TblToMessage(const LuaIntf::LuaRef& luaTable, google::protobuf::Message& message);
 	
 	void SetField(google::protobuf::Message& message, const std::string& sField, const LuaIntf::LuaRef& luaValue);
 	void SetRepeatedField(google::protobuf::Message& message, const google::protobuf::FieldDescriptor* field, const LuaIntf::LuaRef& luaTable);
@@ -88,6 +102,8 @@ protected:
     int64_t mnTime;
     std::string strVersionCode;
 	lua_State* m_pLuaState;
+
+	NFMultiFileErrorCollector mErrorCollector;
 	google::protobuf::compiler::DiskSourceTree mSourceTree;
 	google::protobuf::compiler::Importer* m_pImporter;
 	google::protobuf::DynamicMessageFactory* m_pFactory;

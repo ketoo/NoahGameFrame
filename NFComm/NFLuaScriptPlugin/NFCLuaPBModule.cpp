@@ -28,8 +28,9 @@
 
 bool NFCLuaPBModule::Awake()
 {
-	mSourceTree.MapPath("", "./");
-	m_pImporter = new google::protobuf::compiler::Importer(&mSourceTree, NULL);
+	mSourceTree.MapPath("", "./../NFDataCfg");
+	mSourceTree.MapPath("", "./../NFDataCfg/proto");
+	m_pImporter = new google::protobuf::compiler::Importer(&mSourceTree, &mErrorCollector);
 	m_pFactory = new google::protobuf::DynamicMessageFactory();
 
 	mnTime = pPluginManager->GetNowTime();
@@ -77,7 +78,11 @@ bool NFCLuaPBModule::BeforeShut()
 void NFCLuaPBModule::ImportProtoFile(const std::string & strFile)
 {
 	const google::protobuf::FileDescriptor* pDesc = m_pImporter->Import(strFile);
-	if (pDesc) return;
+	if (!pDesc)
+	{
+		std::cout << "unknow protocol  file to import struct name: " << strFile << std::endl;
+		//throw NFException("unknow protocol  file to import struct name: " + strFile);
+	};
 }
 
 void NFCLuaPBModule::SetLuaState(lua_State * pState)
@@ -110,7 +115,7 @@ LuaIntf::LuaRef NFCLuaPBModule::Decode(const std::string& strMsgTypeName, const 
     return LuaIntf::LuaRef(m_pLuaState, nullptr);
 }
 
-const std::string& NFCLuaPBModule::Encode(const std::string& strMsgTypeName, const LuaIntf::LuaRef& luaTable)
+const std::string NFCLuaPBModule::Encode(const std::string& strMsgTypeName, const LuaIntf::LuaRef& luaTable)
 {
     luaTable.checkTable();
 
@@ -129,7 +134,12 @@ const std::string& NFCLuaPBModule::Encode(const std::string& strMsgTypeName, con
     //GC
     std::shared_ptr<google::protobuf::Message> xMessageBody(pProtoType->New());
 
-	return TblToMessage(luaTable, *xMessageBody);
+	if (TblToMessage(luaTable, *xMessageBody))
+	{
+		return xMessageBody->SerializeAsString();
+	}
+
+	return NULL_STR;
 }
 
 LuaIntf::LuaRef NFCLuaPBModule::MessageToTbl(const google::protobuf::Message& message) const
@@ -321,11 +331,11 @@ LuaIntf::LuaRef NFCLuaPBModule::GetRepeatedFieldElement(const google::protobuf::
 	return LuaIntf::LuaRef();
 }
 
-const std::string & NFCLuaPBModule::TblToMessage(const LuaIntf::LuaRef& luaTable, google::protobuf::Message& message)
+const bool NFCLuaPBModule::TblToMessage(const LuaIntf::LuaRef& luaTable, google::protobuf::Message& message)
 {
 	if (!luaTable.isTable())
 	{
-		return NULL_STR;
+		return false;
 	}
 
 	const auto itrEnd = luaTable.end();
@@ -344,7 +354,7 @@ const std::string & NFCLuaPBModule::TblToMessage(const LuaIntf::LuaRef& luaTable
 		SetField(message, sKey, val);
 	}
 
-	return NULL_STR;
+	return true;
 }
 
 void NFCLuaPBModule::SetField(google::protobuf::Message& message, const std::string & sField, const LuaIntf::LuaRef & luaValue)
