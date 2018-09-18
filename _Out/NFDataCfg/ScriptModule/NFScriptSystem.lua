@@ -145,7 +145,7 @@ function module_shut(...)
 	end
 end
 
-function PrintTable(table , level)
+function print_table(table , level)
 	local key = ""
 	level = level or 1
 	local indent = ""
@@ -163,15 +163,14 @@ function PrintTable(table , level)
 	for k,v in pairs(table) do
 	if type(v) == "table" then
 		key = k
-		PrintTable(v, level + 1)
+		print(indent .. key .. " =")
+		print_table(v, level + 1)
 	else
 		local content = string.format("%s%s = %s", indent .. "  ",tostring(k), tostring(v))
-		print(content)  
+		print(content..";")  
 		end
 	end
 	print(indent .. "}")
 
 end
-
-
 ----------------------------------------------
