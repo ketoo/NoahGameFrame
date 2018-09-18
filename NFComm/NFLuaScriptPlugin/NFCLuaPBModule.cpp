@@ -90,6 +90,23 @@ void NFCLuaPBModule::SetLuaState(lua_State * pState)
 	m_pLuaState = pState;
 }
 
+void NFCLuaPBModule::PrintMessage(const google::protobuf::Message & message, const bool bEncode)
+{
+	return;
+	if (bEncode)
+	{
+		std::cout << "********begin encode***********" << std::endl;
+		std::cout << message.DebugString() << std::endl;
+		std::cout << "*********end encode************" << std::endl;
+	}
+	else
+	{
+		std::cout << "********begin decode***********" << std::endl;
+		std::cout << message.DebugString() << std::endl;
+		std::cout << "*********end decode************" << std::endl;
+	}
+}
+
 LuaIntf::LuaRef NFCLuaPBModule::Decode(const std::string& strMsgTypeName, const std::string& strData)
 {
 	const google::protobuf::Descriptor* pDescriptor = m_pImporter->pool()->FindMessageTypeByName(strMsgTypeName);
@@ -109,6 +126,7 @@ LuaIntf::LuaRef NFCLuaPBModule::Decode(const std::string& strMsgTypeName, const 
 
     if (xMessageBody->ParseFromString(strData))
     {
+		PrintMessage(*xMessageBody, false);
 		return MessageToTbl(*xMessageBody);
     }
 
@@ -136,6 +154,8 @@ const std::string NFCLuaPBModule::Encode(const std::string& strMsgTypeName, cons
 
 	if (TblToMessage(luaTable, *xMessageBody))
 	{
+		PrintMessage(*xMessageBody, true);
+
 		return xMessageBody->SerializeAsString();
 	}
 
@@ -156,6 +176,12 @@ LuaIntf::LuaRef NFCLuaPBModule::MessageToTbl(const google::protobuf::Message& me
 			if (pField)
 			{
 				tbl[pField->name()] = GetField(message, pField);
+
+				if (pField->cpp_type() != google::protobuf::FieldDescriptor::CPPTYPE_MESSAGE)
+				{
+					//std::cout << field->name() << " = " << pReflection->GetString(message, field) << std::endl;
+					//std::cout << pField->name() << " = " << tbl[pField->name()].value<std::string>() << std::endl;
+				}
 			}
 		}
 
@@ -168,6 +194,7 @@ LuaIntf::LuaRef NFCLuaPBModule::MessageToTbl(const google::protobuf::Message& me
 
 LuaIntf::LuaRef NFCLuaPBModule::GetField(const google::protobuf::Message& message, const google::protobuf::FieldDescriptor* field) const
 {
+
 	if (nullptr == field)
 	{
 		return LuaIntf::LuaRef();
@@ -347,9 +374,13 @@ const bool NFCLuaPBModule::TblToMessage(const LuaIntf::LuaRef& luaTable, google:
 			continue;
 		}
 
-		const std::string& sKey = key.toValue<std::string>();
-		// std::cout << sKey << std::endl;
+		const std::string& sKey = key.toValue<std::string>();	
 		const LuaIntf::LuaRef& val = itr.value();
+
+		if (!val.isTable())
+		{
+			//std::cout << sKey << " = " << val.toValue<std::string>() << std::endl;
+		}
 
 		SetField(message, sKey, val);
 	}
