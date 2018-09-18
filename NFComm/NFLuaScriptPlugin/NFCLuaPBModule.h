@@ -74,6 +74,7 @@ public:
 
 protected:
 	void SetLuaState(lua_State* pState);
+	void PrintMessage(const google::protobuf::Message& messag, const bool bEncode);
 
 	LuaIntf::LuaRef Decode(const std::string& strMsgTypeName, const std::string& strData);
 	const std::string Encode(const std::string& strMsgTypeName, const LuaIntf::LuaRef& luaTable);

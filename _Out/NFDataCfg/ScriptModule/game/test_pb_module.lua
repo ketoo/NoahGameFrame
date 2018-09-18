@@ -1,7 +1,6 @@
 test_pb_module = {}
 register_module(test_pb_module,"test_pb_module");
 
-local other_module = nil;
 function test_pb_module.reload()
 end
 
@@ -9,27 +8,24 @@ function test_pb_module.awake()
 end
 
 function test_pb_module.init()
-
-	
+	script_module:import_proto_file("NFMsgShare.proto");
+	script_module:import_proto_file("NFMsgPreGame.proto");
+	script_module:import_proto_file("NFMsgExtra.proto");
 end
+
+
 
 function test_pb_module.after_init()
 	io.write("test_pb_module after_init!----\n");
-	io.write("-------------------------------------------------\n");
-	script_module:import_proto_file("NFMsgShare.proto");
+	print("-------------------------------------------------\n");
+	--test1();
+	--test2();
+	--test3();
+	--test4();
+	--test5();
 	
-	local tbl = {
-	property_name = "test_pb_property";
-	data = 1;
-	};
 	
-	local data = script_module:encode("NFMsg.PropertyInt", tbl);
-	io.write(data .. "\n\n");
-	
-	local test_tbl =  script_module:decode("NFMsg.PropertyInt", data);
-	PrintTable(test_tbl);
-	
-	io.write("-------------------------------------------------\n");
+	print("-------------------------------------------------\n");
 end
 
 function test_pb_module.ready_execute()
@@ -40,3 +36,54 @@ end
 
 function test_pb_module.shut()
 end
+
+--------------------------------------------------------------------------------
+function test1()
+	local tbl = {
+		property_name = "NFMsg.PropertyInt",
+		data = 1,
+	};
+	
+	local data = script_module:encode("NFMsg.PropertyInt", tbl);
+	local test_tbl =  script_module:decode("NFMsg.PropertyInt", data);
+	--print_table(test_tbl);
+	
+	assert(tbl.property_name == test_tbl.property_name, "property_name not equal "..tbl.property_name);
+	assert(tbl.data == test_tbl.data, "property_data not equal "..tbl.data);
+end
+
+function test2()
+
+	local tbl_data = {
+		x = 1;
+		y = 2;
+		z = 3;
+	};
+	
+	
+	local tbl = {
+		property_name = "NFMsg.PropertyVector3";
+		data = tbl_data;
+	};
+	
+	print_table(tbl);
+	
+	local data = script_module:encode("NFMsg.PropertyVector3", tbl);
+	
+	print(">>>>>>>>>");
+	
+	local test_tbl =  script_module:decode("NFMsg.PropertyVector3", data);
+	
+	print_table(test_tbl);
+	
+	assert(tbl.property_name == test_tbl.property_name, "property_name not equal "..tbl.property_name);
+	--assert(tbl.data.x == test_tbl.data.x, "property_data not equal "..tbl.data);
+end
+
+
+function test3()
+
+end
+
+
+
