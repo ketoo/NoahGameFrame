@@ -222,12 +222,30 @@ NFVector3 NFCLuaScriptModule::GetPropertyVector3(const NFGUID & self, const std:
 	return m_pKernelModule->GetPropertyVector3(self, strPropertyName);
 }
 
-bool NFCLuaScriptModule::AddClassCallBack(std::string& className, std::string& funcName)
+bool NFCLuaScriptModule::AddClassCallBack(std::string& className, const LuaIntf::LuaRef& luaRef, const LuaIntf::LuaRef& luaRef1)
 {
     auto newFuncName = m_ClassEventFuncMap.GetElement(className);
     if (!newFuncName)
     {
-        newFuncName = new std::string(funcName);
+		//std::cout << " = " << luaRef1.toValue<std::string>() << std::endl;
+
+		if (luaRef.isTable())
+		{
+			for (auto itr = luaRef.begin(); itr != luaRef.end(); ++itr)
+			{
+				const LuaIntf::LuaRef& key = itr.key();
+
+				const std::string& sKey = key.toValue<std::string>();
+				const LuaIntf::LuaRef& val = itr.value();
+				//if (val.isFunction() && luaRef1.isFunction() && val.() == luaRef1.toPtr())
+				{
+					std::cout << sKey << " got it " << luaRef1.toPtr() << " " << val.toPtr() << std::endl;
+				}
+				//std::cout << sKey << " = " << val.toValue<void*>() << " - "<< luaRef1.toValue<void*>() << std::endl;
+			}
+		}
+
+		newFuncName = new std::string("");
         m_ClassEventFuncMap.AddElement(className, newFuncName);
         m_pKernelModule->AddClassCallBack(className, this, &NFCLuaScriptModule::OnClassEventCB);
         return true;

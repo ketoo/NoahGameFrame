@@ -2,18 +2,25 @@ test_game_module = {}
 register_module(test_game_module,"test_game_module");
 
 local other_module = nil;
-function test_game_module.reload()
+function test_game_module:reload()
 	--other_module = script_module:find_module("other_module");
 end
 
-function test_game_module.awake()
+function test_game_module:awake()
 	test_game_module.reload();
 end
 
-function test_game_module.init()
+function test_game_module:init()
 	io.write("test_game_module init!----" .. "\n");
-
-	script_module:add_class_cb("Player", "test_game_module.class_common_event");
+	print(self.class_common_event);
+	for k,v in pairs(self) do
+		if v == self.class_common_event then
+		print(k);
+		print(v);
+		end
+	end
+	script_module:add_class_cb("Player", self, self.class_common_event);
+	--script_module:add_class_cb("Player", test_game_module.class_common_event);
 
 	io.write("\n");
 	io.write("Hello Lua script_module");
@@ -44,7 +51,7 @@ function test_game_module.init()
 	
 end
 
-function test_game_module.after_init()
+function test_game_module:after_init()
 	io.write("test_game_module after_init!----\n");
 	
 	local playerObject = script_module:create_object(NFGUID(), 1, 0, "Player", "", NFDataList());
@@ -88,27 +95,27 @@ function test_game_module.after_init()
 	script_module:add_module_schedule("add_game_module_schedule", "test_game_module.module_schedule", 10, 55555);
 end
 
-function test_game_module.ready_execute()
+function test_game_module:ready_execute()
 	io.write("test_game_module ready_execute!\n");
 end
 
-function test_game_module.before_shut()
+function test_game_module:before_shut()
 	io.write("test_game_module before_shut!\n");
 end
 
-function test_game_module.shut()
+function test_game_module:shut()
 	io.write("test_game_module shut!\n");
 end
 
 
-function test_game_module.max_prop_cb(self, propertyName, oldVar, newVar)
+function test_game_module:max_prop_cb(self, propertyName, oldVar, newVar)
 	local oldVar = oldVar:int();
 	local newVar = newVar:int();
 
 	io.write("Hello Lua max_prop_cb oldVar:" .. tostring(oldVar) .. " newVar:" .. tostring(newVar) .. "\n");
 end
 
-function test_game_module.task_list_cb(self, recordName, nOpType, nRow, nCol, oldVar, newVar)
+function test_game_module:task_list_cb(self, recordName, nOpType, nRow, nCol, oldVar, newVar)
 	io.write("Hello Lua task_list_cb ")
 	if nOpType == RecordOptype.Add then
 		io.write(" nOpType:".. tostring(nOpType) .. "\n");
@@ -131,7 +138,7 @@ function test_game_module.task_list_cb(self, recordName, nOpType, nRow, nCol, ol
 
 end
 
-function test_game_module.event_cb(self, nEventID, arg)
+function test_game_module:event_cb(self, nEventID, arg)
 	local nValue = arg:int(0);
 	local fValue = arg:float(1);
 	local strValue = arg:string(2);
@@ -144,7 +151,7 @@ function test_game_module.event_cb(self, nEventID, arg)
 	io.write("\r\targ:nValue:".. tostring(nValue) .. " fValue:"..tostring(fValue).. " strValue:"..tostring(strValue).." ident:".. ident:tostring() .. "\n");
 end
 
-function test_game_module.schedule(self, strHeartBeat, fTime, nCount)
+function test_game_module:schedule(self, strHeartBeat, fTime, nCount)
 	local obj = NFDataList();
 	--local s = os.clock()
 	local s = script_module:time();
@@ -155,11 +162,11 @@ function test_game_module.schedule(self, strHeartBeat, fTime, nCount)
 	oldTime = s;
 end
 
-function test_game_module.module_schedule(strHeartBeat, fTime, nCount)
+function test_game_module:module_schedule(strHeartBeat, fTime, nCount)
 	io.write("Hello Lua Module HeartCallBack55555:".. strHeartBeat .. " Time:" .. fTime .. "\n");
 	
 end
 
-function test_game_module.class_common_event(self, strClassName, eventID, varData)
+function test_game_module:class_common_event(self, strClassName, eventID, varData)
 	io.write("class_common_event, ClassName: " .. tostring(strClassName) .. " EventID: " .. tostring(eventID) .. "\n");
 end
