@@ -110,38 +110,38 @@ end
 ---------------------------------------------
 function module_awake(...)
 	for i=1, #(ScriptList) do
-		ScriptList[i].tbl.awake(...);
+		ScriptList[i].tbl:awake(...);
 	end
 end
 
 
 function module_init(...)
 	for i=1, #(ScriptList) do
-		ScriptList[i].tbl.init(...);
+		ScriptList[i].tbl:init(...);
 	end
 end
 
 function module_after_init(...)
 	for i=1, #(ScriptList) do
-		ScriptList[i].tbl.after_init(...);
+		ScriptList[i].tbl:after_init(...);
 	end
 end
 
 function module_ready_execute(...)	
 	for i=1, #(ScriptList) do
-	ScriptList[i].tbl.ready_execute(...);
+	ScriptList[i].tbl:ready_execute(...);
 	end
 end
 
 function module_before_shut(...)
 	for i=1, #(ScriptList) do
-		ScriptList[i].tbl.before_shut(...);
+		ScriptList[i].tbl:before_shut(...);
 	end
 end
 
 function module_shut(...)
 	for i=1, #(ScriptList) do
-		ScriptList[i].tbl.shut(...);
+		ScriptList[i].tbl:shut(...);
 	end
 end
 

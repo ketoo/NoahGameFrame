@@ -160,7 +160,7 @@ protected:
 
 
 
-    bool AddClassCallBack(std::string& className, std::string& funcName);
+    bool AddClassCallBack(std::string& className, const LuaIntf::LuaRef& luaRef, const LuaIntf::LuaRef& luaRef1);
 
 protected:
     template<typename T>
