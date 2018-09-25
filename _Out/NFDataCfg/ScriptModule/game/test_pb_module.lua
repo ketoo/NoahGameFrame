@@ -1,13 +1,13 @@
 test_pb_module = {}
 register_module(test_pb_module,"test_pb_module");
 
-function test_pb_module.reload()
+function test_pb_module:reload()
 end
 
-function test_pb_module.awake()
+function test_pb_module:awake()
 end
 
-function test_pb_module.init()
+function test_pb_module:init()
 	script_module:import_proto_file("NFMsgShare.proto");
 	script_module:import_proto_file("NFMsgPreGame.proto");
 	script_module:import_proto_file("NFMsgExtra.proto");
@@ -15,7 +15,7 @@ end
 
 
 
-function test_pb_module.after_init()
+function test_pb_module:after_init()
 	io.write("test_pb_module after_init!----\n");
 	print("-------------------------------------------------\n");
 	--test1();
@@ -28,13 +28,13 @@ function test_pb_module.after_init()
 	print("-------------------------------------------------\n");
 end
 
-function test_pb_module.ready_execute()
+function test_pb_module:ready_execute()
 end
 
-function test_pb_module.before_shut()
+function test_pb_module:before_shut()
 end
 
-function test_pb_module.shut()
+function test_pb_module:shut()
 end
 
 --------------------------------------------------------------------------------

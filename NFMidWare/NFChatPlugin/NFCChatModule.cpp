@@ -44,7 +44,6 @@ bool NFCChatModule::Init()
 
 bool NFCChatModule::AfterInit()
 {
-	m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_REQ_CHAT, this, &NFCChatModule::OnClienChatProcess);
 
 	return true;
 }
