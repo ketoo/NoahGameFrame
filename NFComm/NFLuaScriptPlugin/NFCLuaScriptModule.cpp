@@ -118,7 +118,6 @@ bool NFCLuaScriptModule::BeforeShut()
     return true;
 }
 
-std::map<std::string, LuaIntf::LuaRef> mxTableName;
 void NFCLuaScriptModule::RegisterModule(const std::string & tableName, const LuaIntf::LuaRef & luatbl)
 {
 	mxTableName[tableName] = luatbl;
@@ -393,9 +392,8 @@ bool NFCLuaScriptModule::AddModuleSchedule(std::string& strHeartBeatName, const 
 	{
 		if (AddLuaFuncToMap(mxLuaHeartBeatCallBackFuncMap, strHeartBeatName, luaFuncName))
 		{
-			m_pScheduleModule->AddSchedule(strHeartBeatName, this, &NFCLuaScriptModule::OnLuaHeartBeatCB, fTime, nCount);
+			return m_pScheduleModule->AddSchedule(strHeartBeatName, this, &NFCLuaScriptModule::OnLuaHeartBeatCB, fTime, nCount);
 		}
-		return true;
 	}
 
 	return false;
@@ -678,7 +676,7 @@ bool NFCLuaScriptModule::CallLuaFuncFromMap(NFMap<T1, NFMap<NFGUID, NFList<strin
                 try
                 {
                     LuaIntf::LuaRef func(mLuaContext, funcName.c_str());
-                    func.call(self, arg...);
+                    func.call(self, key, arg ...);
 					return true;
                 }
                 catch (LuaIntf::LuaException& e)
@@ -715,7 +713,7 @@ bool NFCLuaScriptModule::CallLuaFuncFromMap(NFMap<T1, NFMap<NFGUID, NFList<strin
                 try
                 {
                     LuaIntf::LuaRef func(mLuaContext, funcName.c_str());
-                    func.call(arg...);
+                    func.call(key, arg...);
 					return true;
                 }
                 catch (LuaIntf::LuaException& e)
@@ -1075,11 +1073,10 @@ bool NFCLuaScriptModule::Register()
 	//for kernel module
 
 	LuaIntf::LuaBinding(mLuaContext).beginClass<NFCLuaScriptModule>("NFCLuaScriptModule")
-		.addFunction("register_module", &NFCLuaScriptModule::RegisterModule)
 		.addFunction("create_object", &NFCLuaScriptModule::CreateObject)
 		.addFunction("exist_object", &NFCLuaScriptModule::ExistObject)
 		.addFunction("destroy_object", &NFCLuaScriptModule::DestroyObject)
-
+		.addFunction("register_module", &NFCLuaScriptModule::RegisterModule)
 		.addFunction("enter_scene", &NFCLuaScriptModule::EnterScene)
 		.addFunction("do_event", &NFCLuaScriptModule::DoEvent)
 
@@ -1183,7 +1180,7 @@ std::string NFCLuaScriptModule::FindFuncName(const LuaIntf::LuaRef & luatbl, con
 				const LuaIntf::LuaRef& val = itr.value();
 				if (val.isFunction() && luaFunc.isFunction() && val == luaFunc)
 				{
-					strLuaTableName.append(":");
+					strLuaTableName.append(".");
 					strLuaTableName.append(sKey);
 					return strLuaTableName;
 				}

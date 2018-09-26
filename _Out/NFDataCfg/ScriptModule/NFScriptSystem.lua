@@ -34,21 +34,26 @@ function load_script_file(fileList)
 		end
 		
 		local oldTbl =_G[fileList[i].tblName];
-		print_table(oldTbl);
-			
 		local object = require(fileList[i].tblName);
 		if true == object then
 			local newTbl =_G[fileList[i].tblName];
-			print_table(newTbl);
 			register_module(newTbl, fileList[i].tblName);
-			print("load_script_file " .. fileList[i].tblName .. " successed\n");
+			if oldTbl == nil then
+				print("load_script_file " .. fileList[i].tblName .. " successed\n");
+			else
+				print("reload_script_file " .. fileList[i].tblName .. " successed\n");
+			end
 		else
 			print("load_script_file " .. fileList[i].tblName .. " failed\n");
 			
 		end
 	end
 end
+
 --[[
+if you write code under the rule of NF, then you don't need these functions that show below,
+but if you write code with free style and want to hot fix feature then you need these functions below.
+
 function reload_script_file( tblName )
 	local old_module = _G[tblName]
     package.loaded[tblName] = nil
@@ -84,6 +89,7 @@ function reload_script_table( nameList )
 	end
 end
 --]]
+
 function register_module(tbl, name)
 	script_module:register_module(name, tbl);
 	if ScriptList then
