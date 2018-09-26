@@ -205,7 +205,7 @@ protected:
     std::string strVersionCode;
     LuaIntf::LuaContext mLuaContext;
 
-	
+	std::map<std::string, LuaIntf::LuaRef> mxTableName;
 
     NFMap<std::string, NFMap<NFGUID, NFList<std::string>>> mxLuaPropertyCallBackFuncMap;
     NFMap<std::string, NFMap<NFGUID, NFList<std::string>>> mxLuaRecordCallBackFuncMap;
