@@ -6,76 +6,73 @@ script_module = nil;
 function init_script_system(xLuaScriptModule)
 	script_module = xLuaScriptModule;
 	
-	io.write("\n");
-	io.write("Hello Lua script_module");
-	io.write("\n");
+	print("Hello Lua script_module");
 
 	local app_id = script_module:app_id();
 	local app_type = script_module:app_type();
 
 	if NF_SERVER_TYPES.NF_ST_GAME == app_type then
-		io.write("Hello NF_ST_GAME");
-		io.write("\n");
+		print("Hello NF_ST_GAME");
 		require("./game/script_list");
 	elseif NF_SERVER_TYPES.NF_ST_WORLD == app_type then
-		io.write("Hello NF_ST_WORLD");
-		io.write("\n");
+		print("Hello NF_ST_WORLD");
 	elseif NF_SERVER_TYPES.NF_ST_PROXY == app_type then
-		io.write("Hello NF_ST_PROXY");
-		io.write("\n");
+		print("Hello NF_ST_PROXY");
 	elseif NF_SERVER_TYPES.NF_ST_LOGIN == app_type then
-		io.write("Hello NF_ST_LOGIN");
-		io.write("\n");
+		print("Hello NF_ST_LOGIN");
 	elseif NF_SERVER_TYPES.NF_ST_MASTER == app_type then
-		io.write("Hello NF_ST_MASTER");
-		io.write("\n");
+		print("Hello NF_ST_MASTER");
 	else
 	end
 
 end
 
-function load_script_file(name)
-	for i=1, #(name) do
-		if package.loaded[name[i].tblName] then
-
+function load_script_file(fileList)
+	for i=1, #(fileList) do
+		if package.loaded[fileList[i].tblName] then
+			package.loaded[fileList[i].tblName] = nil
+		end
+		
+		local oldTbl =_G[fileList[i].tblName];
+		print_table(oldTbl);
+			
+		local object = require(fileList[i].tblName);
+		if true == object then
+			local newTbl =_G[fileList[i].tblName];
+			print_table(newTbl);
+			register_module(newTbl, fileList[i].tblName);
+			print("load_script_file " .. fileList[i].tblName .. " successed\n");
 		else
-			local object = require(name[i].tblName);
-			if nil == object then
-				io.write("load_script_file " .. name[i].tblName .. " failed\n");
-			else
-				io.write("load_script_file " .. name[i].tblName .. " successed\n");
-			end
+			print("load_script_file " .. fileList[i].tblName .. " failed\n");
+			
 		end
 	end
 end
-
-function reload_script_file( name )
-  
-	
-
-	local old_module = _G[name]
-    package.loaded[name] = nil
-	local object = require(name);
+--[[
+function reload_script_file( tblName )
+	local old_module = _G[tblName]
+    package.loaded[tblName] = nil
+	local object = require(tblName);
 	if nil == object then
-		io.write("  reload_script_file " .. name .. " failed\n");
+		print("  reload_script_file " .. tblName .. " failed\n");
 	else
-		io.write("  reload_script_file " .. name .. " successed\n");
+		print("  reload_script_file " .. tblName .. " successed\n");
 	end
 	
-    local new_module = _G[name]
+    local new_module = _G[tblName]
     for k, v in pairs(new_module) do
         old_module[k] = v
     end
 end
 
-function reload_script_table( name )
+function reload_script_table( nameList )
 	io.write("----Begin reload lua list----\n");
 
 	local ret = 0;
-	for i=1, #(name) do
+	for i=1, #(nameList) do
 		ret = 1;
-		io.write("reload script : " .. tostring(name[i].tblName) .. "\n");
-		reload_script_file(name[i].tblName)
+		print("reload script : " .. tostring(nameList[i].tblName) .. "\n");
+		reload_script_file(nameList[i].tblName)
 	end
 
 	io.write("----End reload lua list----\n");
@@ -86,14 +83,18 @@ function reload_script_table( name )
 		end
 	end
 end
-
+--]]
 function register_module(tbl, name)
+	script_module:register_module(name, tbl);
 	if ScriptList then
 		for i=1, #(ScriptList) do
 			if ScriptList[i].tblName == name then
 				ScriptList[i].tbl = tbl;
 				io.write("----register_module ".. name .. " successed\n");
 			end
+		end
+		for i=1, #(ScriptList) do
+			ScriptList[i].tbl.reload();
 		end
 	end
 end
@@ -145,7 +146,12 @@ function module_shut(...)
 	end
 end
 
-function print_table(table , level)
+function print_table(table, level)
+	if table == nil then
+		print("the table is nil");
+		return;
+	end
+	
 	local key = ""
 	level = level or 1
 	local indent = ""
