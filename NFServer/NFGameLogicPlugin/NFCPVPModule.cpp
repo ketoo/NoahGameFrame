@@ -356,27 +356,7 @@ bool NFCPVPModule::ProcessOpponentData(const NFGUID & self, const NFMsg::AckSear
 	//tell client u shoud adjust tile
 	//m_pGameServerNet_ServerModule->SendMsgPBToGate(NFMsg::EGEC_ACK_MINING_TITLE, xTileData, nPlayerID);
 	//tell client u should load resources
-	//gold, diamong, awards, level, name, headicon, 3 heros and the star of that heros
-	std::vector<std::string> vKeyList;
-	std::vector<std::string> vValueList;
 
-	vKeyList.push_back(NFrame::Player::Gold());
-	vKeyList.push_back(NFrame::Player::Diamond());
-	vKeyList.push_back(NFrame::Player::Level());
-	vKeyList.push_back(NFrame::Player::Cup());
-	vKeyList.push_back(NFrame::Player::Name());
-	vKeyList.push_back(NFrame::Player::Head());
-	vKeyList.push_back(NFrame::Player::HeroCnfID1());
-	vKeyList.push_back(NFrame::Player::HeroStar1());
-	vKeyList.push_back(NFrame::Player::HeroCnfID2());
-	vKeyList.push_back(NFrame::Player::HeroStar2());
-	vKeyList.push_back(NFrame::Player::HeroCnfID3());
-	vKeyList.push_back(NFrame::Player::HeroStar3());
-
-	//12-14
-	vKeyList.push_back(NFrame::Player::HeroID1());
-	vKeyList.push_back(NFrame::Player::HeroID2());
-	vKeyList.push_back(NFrame::Player::HeroID3());
 
 
 	m_pKernelModule->SetPropertyInt(self, NFrame::Player::OpponentGold(), opponent.gold());
