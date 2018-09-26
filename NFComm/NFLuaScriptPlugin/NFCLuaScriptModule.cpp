@@ -118,6 +118,12 @@ bool NFCLuaScriptModule::BeforeShut()
     return true;
 }
 
+std::map<std::string, LuaIntf::LuaRef> mxTableName;
+void NFCLuaScriptModule::RegisterModule(const std::string & tableName, const LuaIntf::LuaRef & luatbl)
+{
+	mxTableName[tableName] = luatbl;
+}
+
 NFGUID NFCLuaScriptModule::CreateObject(const NFGUID & self, const int nSceneID, const int nGroupID, const std::string & strClassName, const std::string & strIndex, const NFDataList & arg)
 {
 	NF_SHARE_PTR<NFIObject> xObject = m_pKernelModule->CreateObject(self, nSceneID, nGroupID, strClassName, strIndex, arg);
@@ -222,67 +228,58 @@ NFVector3 NFCLuaScriptModule::GetPropertyVector3(const NFGUID & self, const std:
 	return m_pKernelModule->GetPropertyVector3(self, strPropertyName);
 }
 
-bool NFCLuaScriptModule::AddClassCallBack(std::string& className, const LuaIntf::LuaRef& luaRef, const LuaIntf::LuaRef& luaRef1)
+bool NFCLuaScriptModule::AddClassCallBack(std::string& className, const LuaIntf::LuaRef& luatbl, const LuaIntf::LuaRef& luaFunc)
 {
-    auto newFuncName = m_ClassEventFuncMap.GetElement(className);
-    if (!newFuncName)
-    {
-		//std::cout << " = " << luaRef1.toValue<std::string>() << std::endl;
+	auto funcNameList = mxClassEventFuncMap.GetElement(className);
+	if (!funcNameList)
+	{
+		funcNameList = new NFList<string>();
+		mxClassEventFuncMap.AddElement(className, funcNameList);
 
-		if (luaRef.isTable())
+		m_pKernelModule->AddClassCallBack(className, this, &NFCLuaScriptModule::OnClassEventCB);
+	}
+	
+	std::string strfuncName = FindFuncName(luatbl, luaFunc);
+	if (!strfuncName.empty())
+	{
+		if (!funcNameList->Find(strfuncName))
 		{
-			for (auto itr = luaRef.begin(); itr != luaRef.end(); ++itr)
-			{
-				const LuaIntf::LuaRef& key = itr.key();
+			funcNameList->Add(strfuncName);
 
-				const std::string& sKey = key.toValue<std::string>();
-				const LuaIntf::LuaRef& val = itr.value();
-				//if (val.isFunction() && luaRef1.isFunction() && val.() == luaRef1.toPtr())
-				{
-					std::cout << sKey << " got it " << luaRef1.toPtr() << " " << val.toPtr() << std::endl;
-				}
-				//std::cout << sKey << " = " << val.toValue<void*>() << " - "<< luaRef1.toValue<void*>() << std::endl;
-			}
+			return true;
 		}
+	}
 
-		newFuncName = new std::string("");
-        m_ClassEventFuncMap.AddElement(className, newFuncName);
-        m_pKernelModule->AddClassCallBack(className, this, &NFCLuaScriptModule::OnClassEventCB);
-        return true;
-    }
-    else
-    {
-        return false;
-    }
+	return false;
 }
 
 int NFCLuaScriptModule::OnClassEventCB(const NFGUID& self, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFDataList& var)
 {
-    auto funcName = m_ClassEventFuncMap.GetElement(strClassName);
-    if (funcName)
+    auto funcNameList = mxClassEventFuncMap.GetElement(strClassName);
+    if (funcNameList)
     {
-        try
-        {
-            LuaIntf::LuaRef func(mLuaContext, funcName->c_str());
-            func.call(self, strClassName, (int)eClassEvent, (NFDataList)var);
-        }
-        catch (LuaIntf::LuaException& e)
-        {
-            cout << e.what() << endl;
-            return 0;
-        }
-		catch (...)
+		std::string strFuncNme;
+		bool ret = funcNameList->First(strFuncNme);
+		while (ret)
 		{
-            return 0;
+			try
+			{
+				LuaIntf::LuaRef func(mLuaContext, strFuncNme.c_str());
+				func.call(self, strClassName, (int)eClassEvent, (NFDataList)var);
+			}
+			catch (LuaIntf::LuaException& e)
+			{
+				cout << e.what() << endl;
+				return 0;
+			}
+			catch (...)
+			{
+				return 0;
+			}
+
+			ret = funcNameList->Next(strFuncNme);
 		}
-
-        return 0;
     }
-    else
-    {
-        return 1;
-    }
-
 
 	return -1;
 }
@@ -328,75 +325,106 @@ void NFCLuaScriptModule::OnScriptReload()
     }
 }
 
-bool NFCLuaScriptModule::AddPropertyCallBack(const NFGUID& self, std::string& strPropertyName, std::string& luaFunc)
+bool NFCLuaScriptModule::AddPropertyCallBack(const NFGUID& self, std::string& strPropertyName, const LuaIntf::LuaRef& luatbl, const LuaIntf::LuaRef& luaFunc)
 {
-    if (AddLuaFuncToMap(m_luaPropertyCallBackFuncMap, self, strPropertyName, luaFunc))
-    {
-        m_pKernelModule->AddPropertyCallBack(self, strPropertyName, this, &NFCLuaScriptModule::OnLuaPropertyCB);
-    }
+	std::string luaFuncName = FindFuncName(luatbl, luaFunc);
+	if (!luaFuncName.empty())
+	{
+		if (AddLuaFuncToMap(mxLuaPropertyCallBackFuncMap, self, strPropertyName, luaFuncName))
+		{
+			m_pKernelModule->AddPropertyCallBack(self, strPropertyName, this, &NFCLuaScriptModule::OnLuaPropertyCB);
+		}
 
-    return true;
+		return true;
+	}
+    return false;
 }
 
 int NFCLuaScriptModule::OnLuaPropertyCB(const NFGUID& self, const std::string& strPropertyName, const NFData& oldVar, const NFData& newVar)
 {
-    return CallLuaFuncFromMap(m_luaPropertyCallBackFuncMap, strPropertyName, self, strPropertyName, oldVar, newVar);
+    return CallLuaFuncFromMap(mxLuaPropertyCallBackFuncMap, strPropertyName, self, strPropertyName, oldVar, newVar);
 }
 
-bool NFCLuaScriptModule::AddRecordCallBack(const NFGUID& self, std::string& strRecordName, std::string& luaFunc)
+bool NFCLuaScriptModule::AddRecordCallBack(const NFGUID& self, std::string& strRecordName, const LuaIntf::LuaRef& luatbl, const LuaIntf::LuaRef& luaFunc)
 {
-    if (AddLuaFuncToMap(m_luaRecordCallBackFuncMap, self, strRecordName, luaFunc))
-    {
-        m_pKernelModule->AddRecordCallBack(self, strRecordName, this, &NFCLuaScriptModule::OnLuaRecordCB);
-    }
-    return true;
+	std::string luaFuncName = FindFuncName(luatbl, luaFunc);
+	if (!luaFuncName.empty())
+	{
+		if (AddLuaFuncToMap(mxLuaRecordCallBackFuncMap, self, strRecordName, luaFuncName))
+		{
+			m_pKernelModule->AddRecordCallBack(self, strRecordName, this, &NFCLuaScriptModule::OnLuaRecordCB);
+		}
+		return true;
+	}
+
+	return false;
 }
 
 int NFCLuaScriptModule::OnLuaRecordCB(const NFGUID& self, const RECORD_EVENT_DATA& xEventData, const NFData& oldVar, const NFData& newVar)
 {
-    return CallLuaFuncFromMap(m_luaRecordCallBackFuncMap, xEventData.strRecordName, self, xEventData.strRecordName, xEventData.nOpType, xEventData.nRow, xEventData.nCol, oldVar, newVar);
+    return CallLuaFuncFromMap(mxLuaRecordCallBackFuncMap, xEventData.strRecordName, self, xEventData.strRecordName, xEventData.nOpType, xEventData.nRow, xEventData.nCol, oldVar, newVar);
 }
 
-bool NFCLuaScriptModule::AddEventCallBack(const NFGUID& self, const NFEventDefine nEventID, std::string& luaFunc)
+bool NFCLuaScriptModule::AddEventCallBack(const NFGUID& self, const NFEventDefine nEventID, const LuaIntf::LuaRef& luatbl, const LuaIntf::LuaRef& luaFunc)
 {
-    if (AddLuaFuncToMap(m_luaEventCallBackFuncMap, self, (int)nEventID, luaFunc))
-    {
-		m_pEventModule->AddEventCallBack(self, nEventID, this, &NFCLuaScriptModule::OnLuaEventCB);
-    }
-    return true;
+	std::string luaFuncName = FindFuncName(luatbl, luaFunc);
+	if (!luaFuncName.empty())
+	{
+		if (AddLuaFuncToMap(mxLuaEventCallBackFuncMap, self, (int)nEventID, luaFuncName))
+		{
+			m_pEventModule->AddEventCallBack(self, nEventID, this, &NFCLuaScriptModule::OnLuaEventCB);
+		}
+
+		return true;
+	}
+
+	return false;
 }
 
 int NFCLuaScriptModule::OnLuaEventCB(const NFGUID& self, const NFEventDefine nEventID, const NFDataList& argVar)
 {
-    return CallLuaFuncFromMap(m_luaEventCallBackFuncMap, (int)nEventID, self, nEventID, (NFDataList&)argVar);
+    return CallLuaFuncFromMap(mxLuaEventCallBackFuncMap, (int)nEventID, self, nEventID, (NFDataList&)argVar);
 }
 
-bool NFCLuaScriptModule::AddModuleSchedule(std::string& strHeartBeatName, std::string& luaFunc, const float fTime, const int nCount)
+bool NFCLuaScriptModule::AddModuleSchedule(std::string& strHeartBeatName, const LuaIntf::LuaRef& luatbl, const LuaIntf::LuaRef& luaFunc, const float fTime, const int nCount)
 {
-    if (AddLuaFuncToMap(m_luaHeartBeatCallBackFuncMap, strHeartBeatName, luaFunc))
-    {
-		m_pScheduleModule->AddSchedule(strHeartBeatName, this, &NFCLuaScriptModule::OnLuaHeartBeatCB, fTime, nCount);
-    }
-    return true;
+	std::string luaFuncName = FindFuncName(luatbl, luaFunc);
+	if (!luaFuncName.empty())
+	{
+		if (AddLuaFuncToMap(mxLuaHeartBeatCallBackFuncMap, strHeartBeatName, luaFuncName))
+		{
+			m_pScheduleModule->AddSchedule(strHeartBeatName, this, &NFCLuaScriptModule::OnLuaHeartBeatCB, fTime, nCount);
+		}
+		return true;
+	}
+
+	return false;
 }
 
-bool NFCLuaScriptModule::AddSchedule(const NFGUID& self, std::string& strHeartBeatName, std::string& luaFunc, const float fTime, const int nCount)
+bool NFCLuaScriptModule::AddSchedule(const NFGUID& self, std::string& strHeartBeatName, const LuaIntf::LuaRef& luatbl, const LuaIntf::LuaRef& luaFunc, const float fTime, const int nCount)
 {
-    if (AddLuaFuncToMap(m_luaHeartBeatCallBackFuncMap, self, strHeartBeatName, luaFunc))
-    {
-		m_pScheduleModule->AddSchedule(self, strHeartBeatName, this, &NFCLuaScriptModule::OnLuaHeartBeatCB, fTime, nCount);
-    }
-    return true;
+	std::string luaFuncName = FindFuncName(luatbl, luaFunc);
+	if (!luaFuncName.empty())
+	{
+		if (AddLuaFuncToMap(mxLuaHeartBeatCallBackFuncMap, self, strHeartBeatName, luaFuncName))
+		{
+			m_pScheduleModule->AddSchedule(self, strHeartBeatName, this, &NFCLuaScriptModule::OnLuaHeartBeatCB, fTime, nCount);
+		}
+
+		return true;
+	}
+
+	return false;
 }
 
 int NFCLuaScriptModule::OnLuaHeartBeatCB(const NFGUID& self, const std::string& strHeartBeatName, const float fTime, const int nCount)
 {
-    return CallLuaFuncFromMap(m_luaHeartBeatCallBackFuncMap, strHeartBeatName, self, strHeartBeatName, fTime, nCount);
+    return CallLuaFuncFromMap(mxLuaHeartBeatCallBackFuncMap, strHeartBeatName, self, strHeartBeatName, fTime, nCount);
 }
 
 int NFCLuaScriptModule::OnLuaHeartBeatCB(const std::string& strHeartBeatName, const float fTime, const int nCount)
 {
-    return CallLuaFuncFromMap(m_luaHeartBeatCallBackFuncMap, strHeartBeatName, strHeartBeatName, fTime, nCount);
+    return CallLuaFuncFromMap(mxLuaHeartBeatCallBackFuncMap, strHeartBeatName, strHeartBeatName, fTime, nCount);
 }
 
 int NFCLuaScriptModule::AddRow(const NFGUID& self, std::string& strRecordName, const NFDataList& var)
@@ -1047,6 +1075,7 @@ bool NFCLuaScriptModule::Register()
 	//for kernel module
 
 	LuaIntf::LuaBinding(mLuaContext).beginClass<NFCLuaScriptModule>("NFCLuaScriptModule")
+		.addFunction("register_module", &NFCLuaScriptModule::RegisterModule)
 		.addFunction("create_object", &NFCLuaScriptModule::CreateObject)
 		.addFunction("exist_object", &NFCLuaScriptModule::ExistObject)
 		.addFunction("destroy_object", &NFCLuaScriptModule::DestroyObject)
@@ -1128,4 +1157,39 @@ bool NFCLuaScriptModule::Register()
 		.endClass();
 
     return true;
+}
+
+std::string NFCLuaScriptModule::FindFuncName(const LuaIntf::LuaRef & luatbl, const LuaIntf::LuaRef & luaFunc)
+{
+	if (luatbl.isTable() && luaFunc.isFunction())
+	{
+		std::string strLuaTableName = "";
+		std::map<std::string, LuaIntf::LuaRef>::iterator it = mxTableName.begin();
+		for (it; it != mxTableName.end(); ++it)
+		{
+			if (it->second == luatbl)
+			{
+				strLuaTableName = it->first;
+			}
+		}
+		
+		if (!strLuaTableName.empty())
+		{
+			for (auto itr = luatbl.begin(); itr != luatbl.end(); ++itr)
+			{
+				const LuaIntf::LuaRef& key = itr.key();
+
+				const std::string& sKey = key.toValue<std::string>();
+				const LuaIntf::LuaRef& val = itr.value();
+				if (val.isFunction() && luaFunc.isFunction() && val == luaFunc)
+				{
+					strLuaTableName.append(":");
+					strLuaTableName.append(sKey);
+					return strLuaTableName;
+				}
+			}
+		}
+	}
+
+	return NULL_STR;
 }

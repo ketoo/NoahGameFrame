@@ -1,5 +1,4 @@
 test_game_module = {}
-register_module(test_game_module,"test_game_module");
 
 local other_module = nil;
 function test_game_module:reload()
@@ -11,7 +10,7 @@ function test_game_module:awake()
 end
 
 function test_game_module:init()
-	io.write("test_game_module init!----" .. "\n");
+	print("test_game_module init!----");
 	print(self.class_common_event);
 	for k,v in pairs(self) do
 		if v == self.class_common_event then
@@ -22,41 +21,21 @@ function test_game_module:init()
 	script_module:add_class_cb("Player", self, self.class_common_event);
 	--script_module:add_class_cb("Player", test_game_module.class_common_event);
 
-	io.write("\n");
-	io.write("Hello Lua script_module");
-	io.write("\n");
+	print("Hello game script_module");
 
 	local app_id = script_module:app_id();
 	local app_type = script_module:app_type();
-
-	if NF_SERVER_TYPES.NF_ST_GAME == app_type then
-		io.write("Hello NF_ST_GAME");
-		io.write("\n");
-		require("./game/script_list");
-	elseif NF_SERVER_TYPES.NF_ST_WORLD == app_type then
-		io.write("Hello NF_ST_WORLD");
-		io.write("\n");
-	elseif NF_SERVER_TYPES.NF_ST_PROXY == app_type then
-		io.write("Hello NF_ST_PROXY");
-		io.write("\n");
-	elseif NF_SERVER_TYPES.NF_ST_LOGIN == app_type then
-		io.write("Hello NF_ST_LOGIN");
-		io.write("\n");
-	elseif NF_SERVER_TYPES.NF_ST_MASTER == app_type then
-		io.write("Hello NF_ST_MASTER");
-		io.write("\n");
-	else
-	end
 
 	
 end
 
 function test_game_module:after_init()
-	io.write("test_game_module after_init!----\n");
-	
+	print("test_game_module after_init!----");
+
 	local playerObject = script_module:create_object(NFGUID(), 1, 0, "Player", "", NFDataList());
 
-	io.write("create_object " .. playerObject:tostring() .. "\n");
+	print("test_game_module after_init!11111----");
+	print("create_object" .. playerObject:tostring());
 
 	--property callback
 	script_module:add_prop_cb(playerObject, "MAXHP", "test_game_module.max_prop_cb");
