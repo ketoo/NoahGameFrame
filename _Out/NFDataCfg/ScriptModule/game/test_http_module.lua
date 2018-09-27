@@ -1,5 +1,4 @@
 test_http_module = {}
-register_module(test_http_module,"test_http_module");
 
 function test_http_module:reload()
 end
@@ -13,7 +12,6 @@ end
 
 
 function test_http_module:after_init()
-	io.write("test_http_module after_init!----\n");
 	print("-------------------------------------------------\n");
 	
 	print("-------------------------------------------------\n");
