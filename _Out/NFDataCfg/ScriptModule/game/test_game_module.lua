@@ -12,7 +12,7 @@ end
 function test_game_module:init()
 	print("test_game_module init!----");
 	
-	script_module:add_class_cb("Player", self, self.class_common_event);
+	script_module:add_class_cb("Player", test_game_module, test_game_module.class_common_event);
 end
 
 function test_game_module:after_init()
@@ -71,7 +71,7 @@ function test_game_module:shut()
 end
 
 
-function test_game_module:max_prop_cb(self, propertyName, oldVar, newVar)
+function test_game_module:max_prop_cb(id, propertyName, oldVar, newVar)
 
 
 	local oldValue = oldVar:int();
@@ -81,7 +81,7 @@ function test_game_module:max_prop_cb(self, propertyName, oldVar, newVar)
 	
 end
 
-function test_game_module:task_list_cb(self, recordName, nOpType, nRow, nCol, oldVar, newVar)
+function test_game_module:task_list_cb(id, recordName, nOpType, nRow, nCol, oldVar, newVar)
 	print("Hello Lua task_list_cb ")
 	if nOpType == RecordOptype.Add then
 		print(" nOpType:".. tostring(nOpType) .. "");
@@ -104,7 +104,7 @@ function test_game_module:task_list_cb(self, recordName, nOpType, nRow, nCol, ol
 
 end
 
-function test_game_module:event_cb(self, nEventID, arg)
+function test_game_module:event_cb(id, nEventID, arg)
 	local nValue = arg:int(0);
 	local fValue = arg:float(1);
 	local strValue = arg:string(2);
@@ -117,7 +117,7 @@ function test_game_module:event_cb(self, nEventID, arg)
 	print("\r\targ:nValue:".. tostring(nValue) .. " fValue:"..tostring(fValue).. " strValue:"..tostring(strValue).." ident:".. ident:tostring() .. "");
 end
 
-function test_game_module:schedule(self, strHeartBeat, fTime, nCount)
+function test_game_module:schedule(id, strHeartBeat, fTime, nCount)
 	local obj = NFDataList();
 	--local s = os.clock()
 	local s = script_module:time();
@@ -133,6 +133,7 @@ function test_game_module:module_schedule(strHeartBeat, fTime, nCount)
 	
 end
 
-function test_game_module:class_common_event(self, strClassName, eventID, varData)
+function test_game_module:class_common_event(id, strClassName, eventID, varData)
+
 	print("class_common_event, ClassName: " .. tostring(strClassName) .. " EventID: " .. tostring(eventID) .. "");
 end

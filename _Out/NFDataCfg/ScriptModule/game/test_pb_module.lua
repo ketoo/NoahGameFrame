@@ -1,5 +1,4 @@
 test_pb_module = {}
-register_module(test_pb_module,"test_pb_module");
 
 function test_pb_module:reload()
 end
@@ -16,16 +15,12 @@ end
 
 
 function test_pb_module:after_init()
-	io.write("test_pb_module after_init!----\n");
-	print("-------------------------------------------------\n");
+	print("test_pb_module after_init!----");
 	--test1();
 	--test2();
 	--test3();
-	--test4();
-	--test5();
 	
 	
-	print("-------------------------------------------------\n");
 end
 
 function test_pb_module:ready_execute()
