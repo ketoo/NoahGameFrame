@@ -1,5 +1,4 @@
 test_pb_msg_module = {}
-register_module(test_pb_msg_module,"test_pb_msg_module");
 
 function test_pb_msg_module:reload()
 end
@@ -13,10 +12,8 @@ end
 
 
 function test_pb_msg_module:after_init()
-	io.write("test_pb_msg_module after_init!----\n");
-	print("-------------------------------------------------\n");
+	print("test_pb_msg_module after_init!----");
 	--script_module:add_msg_cb(1212, test);
-	print("-------------------------------------------------\n");
 end
 
 function test_pb_msg_module:ready_execute()

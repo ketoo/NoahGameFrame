@@ -734,9 +734,32 @@ bool NFCLuaScriptModule::CallLuaFuncFromMap(NFMap<T1, NFMap<NFGUID, NFList<strin
     return true;
 }
 
-void NFCLuaScriptModule::AddReceiveCallBack(const int nMsgID, const std::string& luaFunc)
+void NFCLuaScriptModule::RemoveClientMsgCallBack(const int nMsgID)
 {
+	m_pNetModule->RemoveReceiveCallBack(nMsgID);
+}
 
+void NFCLuaScriptModule::AddClientMsgCallBack(const int nMsgID, const LuaIntf::LuaRef & luatbl, const LuaIntf::LuaRef & luaFunc)
+{
+	//m_pNetModule->AddEventCallBack
+}
+
+void NFCLuaScriptModule::RemoveServerMsgCallBack(const int nServerType, const int nMsgID)
+{
+	m_pNetClientModule->RemoveReceiveCallBack((NF_SERVER_TYPES)nServerType, nMsgID);
+}
+
+void NFCLuaScriptModule::AddServerMsgCallBack(const int nServerType, const int nMsgID, const LuaIntf::LuaRef & luatbl, const LuaIntf::LuaRef & luaFunc)
+{
+	//m_pNetClientModule->AddReceiveCallBack((NF_SERVER_TYPES)nServerType, )
+}
+
+void NFCLuaScriptModule::RemoveHttpCallBack(const std::string & path)
+{
+}
+
+void NFCLuaScriptModule::AddHttpCallBack(const std::string & path, const int httpType, const LuaIntf::LuaRef & luatbl, const LuaIntf::LuaRef & luaFunc)
+{
 }
 
 void NFCLuaScriptModule::ImportProtoFile(const std::string& strFile)
@@ -1073,10 +1096,10 @@ bool NFCLuaScriptModule::Register()
 	//for kernel module
 
 	LuaIntf::LuaBinding(mLuaContext).beginClass<NFCLuaScriptModule>("NFCLuaScriptModule")
+		.addFunction("register_module", &NFCLuaScriptModule::RegisterModule)
 		.addFunction("create_object", &NFCLuaScriptModule::CreateObject)
 		.addFunction("exist_object", &NFCLuaScriptModule::ExistObject)
 		.addFunction("destroy_object", &NFCLuaScriptModule::DestroyObject)
-		.addFunction("register_module", &NFCLuaScriptModule::RegisterModule)
 		.addFunction("enter_scene", &NFCLuaScriptModule::EnterScene)
 		.addFunction("do_event", &NFCLuaScriptModule::DoEvent)
 
@@ -1123,7 +1146,7 @@ bool NFCLuaScriptModule::Register()
 		.addFunction("app_id", &NFCLuaScriptModule::APPID)
 		.addFunction("app_type", &NFCLuaScriptModule::APPType)
 
-		.addFunction("exist_element", &NFCLuaScriptModule::ExistElementObject)
+		.addFunction("exist_ele", &NFCLuaScriptModule::ExistElementObject)
 		.addFunction("get_ele_list", &NFCLuaScriptModule::GetEleList)
 		.addFunction("get_ele_int", &NFCLuaScriptModule::GetElePropertyInt)
 		.addFunction("get_ele_float", &NFCLuaScriptModule::GetElePropertyFloat)
@@ -1131,18 +1154,21 @@ bool NFCLuaScriptModule::Register()
 		.addFunction("get_ele_vector2", &NFCLuaScriptModule::GetElePropertyVector2)
 		.addFunction("get_ele_vector3", &NFCLuaScriptModule::GetElePropertyVector3)
 
-		.addFunction("add_msg_cb", &NFCLuaScriptModule::AddReceiveCallBack)
-		.addFunction("import_proto_file", &NFCLuaScriptModule::ImportProtoFile)
-		.addFunction("encode", &NFCLuaScriptModule::Encode)
-		.addFunction("decode", &NFCLuaScriptModule::Decode)
+		.addFunction("remove_cli_msg_cb", &NFCLuaScriptModule::RemoveClientMsgCallBack)//as server
+		.addFunction("add_cli_msg_cb", &NFCLuaScriptModule::AddClientMsgCallBack)//as server
+		.addFunction("remove_svr_msg_cb", &NFCLuaScriptModule::RemoveServerMsgCallBack)//as client
+		.addFunction("add_svr_msg_cb", &NFCLuaScriptModule::AddServerMsgCallBack)//as client
 
-		.addFunction("send_by_fd", &NFCLuaScriptModule::SendByServerFD)
-		.addFunction("send_by_id", &NFCLuaScriptModule::SendByServerID)
-		.addFunction("send_by_type", &NFCLuaScriptModule::SendByServerType)
+		.addFunction("remove_http_cb", &NFCLuaScriptModule::RemoveHttpCallBack)
+		.addFunction("add_http_cb", &NFCLuaScriptModule::AddHttpCallBack)
 
-		.addFunction("send_to_player", &NFCLuaScriptModule::SendMsgToGate)
-		.addFunction("send_to_group_player", &NFCLuaScriptModule::SendGroupMsgToGate)
-		.addFunction("send_to_all_player", &NFCLuaScriptModule::SendToAllPlayer)
+		.addFunction("send_by_fd", &NFCLuaScriptModule::SendByServerFD)//as client
+		.addFunction("send_by_id", &NFCLuaScriptModule::SendByServerID)//as clent
+		.addFunction("send_by_type", &NFCLuaScriptModule::SendByServerType)//as client
+
+		.addFunction("send_to_player", &NFCLuaScriptModule::SendMsgToGate)//as game
+		.addFunction("send_to_group_player", &NFCLuaScriptModule::SendGroupMsgToGate)//as game
+		.addFunction("send_to_all_player", &NFCLuaScriptModule::SendToAllPlayer)//as game
 
 		.addFunction("log_info", &NFCLuaScriptModule::LogInfo)
 		.addFunction("log_error", &NFCLuaScriptModule::LogError)
@@ -1151,6 +1177,11 @@ bool NFCLuaScriptModule::Register()
 
 		.addFunction("get_version_code", &NFCLuaScriptModule::GetVersionCode)
 		.addFunction("set_version_code", &NFCLuaScriptModule::SetVersionCode)
+
+		.addFunction("import_proto_file", &NFCLuaScriptModule::ImportProtoFile)
+		.addFunction("encode", &NFCLuaScriptModule::Encode)
+		.addFunction("decode", &NFCLuaScriptModule::Decode)
+
 		.endClass();
 
     return true;
