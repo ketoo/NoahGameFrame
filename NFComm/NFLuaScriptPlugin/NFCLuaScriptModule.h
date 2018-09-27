@@ -94,7 +94,7 @@ protected:
 
 	bool AddPropertyCallBack(const NFGUID& self, std::string& strPropertyName, const LuaIntf::LuaRef& luatbl, const LuaIntf::LuaRef& luaFunc);
     bool AddRecordCallBack(const NFGUID& self, std::string& strRecordName, const LuaIntf::LuaRef& luatbl, const LuaIntf::LuaRef& luaFunc);
-    bool AddEventCallBack(const NFGUID& self, const NFEventDefine nEventID, const LuaIntf::LuaRef& luatbl, const LuaIntf::LuaRef& luaFuncc);
+    bool AddEventCallBack(const NFGUID& self, const NFEventDefine nEventID, const LuaIntf::LuaRef& luatbl, const LuaIntf::LuaRef& luaFunc);
 	bool AddSchedule(const NFGUID& self, std::string& strHeartBeatName, const LuaIntf::LuaRef& luatbl, const LuaIntf::LuaRef& luaFunc, const float fTime, const int nCount);
 	bool AddModuleSchedule(std::string& strHeartBeatName, const LuaIntf::LuaRef& luatbl, const LuaIntf::LuaRef& luaFunc, const float fTime, const int nCount);
 
@@ -131,9 +131,13 @@ protected:
 	NFVector3 GetElePropertyVector3(const std::string& strConfigName, const std::string& strPropertyName);
 
 	//FOR NET MODULE
-    //for client module
+	void RemoveClientMsgCallBack(const int nMsgID);
+	void AddClientMsgCallBack(const int nMsgID, const LuaIntf::LuaRef& luatbl, const LuaIntf::LuaRef& luaFunc);
+	void RemoveServerMsgCallBack(const int nServerType, const int nMsgID);
+	void AddServerMsgCallBack(const int nServerType, const int nMsgID, const LuaIntf::LuaRef& luatbl, const LuaIntf::LuaRef& luaFunc);
+	void RemoveHttpCallBack(const std::string& path);
+	void AddHttpCallBack(const std::string& path, const int httpType, const LuaIntf::LuaRef& luatbl, const LuaIntf::LuaRef& luaFunc);
 
-    void AddReceiveCallBack(const int nMsgID, const std::string& luaFunc);
     void ImportProtoFile(const std::string& strFile);
     const std::string Encode(const std::string& strMsgTypeName, const LuaIntf::LuaRef& luaTable);
 	LuaIntf::LuaRef Decode(const std::string& strMsgTypeName, const std::string& strData);

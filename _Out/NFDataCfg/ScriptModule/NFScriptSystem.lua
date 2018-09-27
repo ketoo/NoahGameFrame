@@ -33,18 +33,18 @@ function load_script_file(fileList)
 			package.loaded[fileList[i].tblName] = nil
 		end
 		
+		print("start to load " .. fileList[i].tblName);
+		
 		local oldTbl =_G[fileList[i].tblName];
 		local object = require(fileList[i].tblName);
 		if true == object then
 			local newTbl =_G[fileList[i].tblName];
 			register_module(newTbl, fileList[i].tblName);
-			if oldTbl == nil then
-				print("load_script_file " .. fileList[i].tblName .. " successed\n");
-			else
-				print("reload_script_file " .. fileList[i].tblName .. " successed\n");
+			if oldTbl ~= nil then
+				print("reload_script_file " .. fileList[i].tblName .. " successed");
 			end
 		else
-			print("load_script_file " .. fileList[i].tblName .. " failed\n");
+			print("load_script_file " .. fileList[i].tblName .. " failed");
 			
 		end
 	end
@@ -100,7 +100,9 @@ function register_module(tbl, name)
 			end
 		end
 		for i=1, #(ScriptList) do
-			ScriptList[i].tbl.reload();
+			if  ScriptList[i].tbl ~= nil then
+				ScriptList[i].tbl.reload();
+			end
 		end
 	end
 end
