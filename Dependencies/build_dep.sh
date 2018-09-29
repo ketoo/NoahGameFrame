@@ -66,11 +66,13 @@ sysOS=`uname -s`
 if [ $sysOS == "Darwin" ];then
     make macosx test
 elif [ $sysOS == "Linux" ];then
+	sudo apt-get install libreadline6-dev 
+	sudo apt-get install libncurses5-dev
     make linux test
 fi
 
-cp -r -f ./*.a ../lib/Debug/
-cp -r -f ./*.a ../lib/Release/
+cp -r -f ./src/*.a ../lib/Debug/
+cp -r -f ./src/*.a ../lib/Release/
 cd ../
 echo Building lua finish...
 
