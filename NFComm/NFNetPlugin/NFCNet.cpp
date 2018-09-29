@@ -259,6 +259,11 @@ bool NFCNet::SendMsgToAllClient(const char* msg, const size_t nLen)
         return false;
     }
 
+	if (!mbWorking)
+	{
+		return false;
+	}
+
     std::map<NFSOCK, NetObject*>::iterator it = mmObject.begin();
     for (; it != mmObject.end(); ++it)
     {
@@ -266,7 +271,7 @@ bool NFCNet::SendMsgToAllClient(const char* msg, const size_t nLen)
         if (pNetObject && !pNetObject->NeedRemove())
         {
             bufferevent* bev = (bufferevent*)pNetObject->GetUserData();
-            if (NULL != bev && mbWorking )
+            if (NULL != bev)
             {
                 bufferevent_write(bev, msg, nLen);
 
@@ -286,6 +291,11 @@ bool NFCNet::SendMsg(const char* msg, const size_t nLen, const NFSOCK nSockIndex
         return false;
     }
 
+	if (!mbWorking)
+	{
+		return false;
+	}
+
     std::map<NFSOCK, NetObject*>::iterator it = mmObject.find(nSockIndex);
     if (it != mmObject.end())
     {
@@ -293,7 +303,7 @@ bool NFCNet::SendMsg(const char* msg, const size_t nLen, const NFSOCK nSockIndex
         if (pNetObject)
         {
             bufferevent* bev = (bufferevent*)pNetObject->GetUserData();
-            if (NULL != bev && mbWorking)
+            if (NULL != bev)
             {
                 bufferevent_write(bev, msg, nLen);
 
