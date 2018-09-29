@@ -797,16 +797,11 @@ int NFCNetClientModule::OnDisConnected(const NFSOCK fd, NFINet* pNet)
         pServerInfo->mnLastActionTime = GetPluginManager()->GetNowTime();
 
         //for type--suit
-        NF_SHARE_PTR<NFConsistentHashMapEx<int, ConnectData>> xConnectDataMap = mxServerTypeMap.GetElement(
-                pServerInfo->eServerType);
-        if (!xConnectDataMap)
+        NF_SHARE_PTR<NFConsistentHashMapEx<int, ConnectData>> xConnectDataMap = mxServerTypeMap.GetElement(pServerInfo->eServerType);
+        if (xConnectDataMap)
         {
-            xConnectDataMap = NF_SHARE_PTR<NFConsistentHashMapEx<int, ConnectData>>(
-                    NF_NEW NFConsistentHashMapEx<int, ConnectData>());
-            mxServerTypeMap.AddElement(pServerInfo->eServerType, xConnectDataMap);
+			xConnectDataMap->RemoveElement(pServerInfo->nGameID);
         }
-
-        xConnectDataMap->RemoveElement(pServerInfo->nGameID);
     }
 
     return 0;
