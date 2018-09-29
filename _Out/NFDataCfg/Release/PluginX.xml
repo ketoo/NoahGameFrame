@@ -81,7 +81,7 @@
 		<Plugin Name="NFDBNet_ClientPlugin" />
 		<Plugin Name="NFDBNet_ServerPlugin" />
 		<Plugin Name="NFLogPlugin" />
-		<Plugin Name="NFDataAgent_NosqlPlugin" />
+		<Plugin Name="NFDBLogicPlugin" />
 		<Plugin Name="NFActorPlugin" />
 		<Plugin Name="NFNoSqlPlugin" />
 		<Plugin Name="NFSecurityPlugin" />
