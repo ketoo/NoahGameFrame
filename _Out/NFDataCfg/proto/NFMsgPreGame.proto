@@ -1,0 +1,205 @@
+syntax = "proto3";
+
+package NFMsg; 
+
+import "NFDefine.proto";
+import "NFMsgBase.proto";
+
+enum EServerState
+{
+	EST_CRASH = 0;
+	EST_NARMAL = 1;
+	EST_BUSY = 2;
+	EST_FIRE = 3;
+	EST_MAINTEN = 4;
+}
+
+enum ELoginMode
+{
+	ELM_LOGIN = 0;
+	ELM_REGISTER = 1;
+	ELM_AUTO_REGISTER_LOGIN = 2; // login, or register if account dosen't exsit
+}
+
+message ServerInfoReport
+{
+	
+	int32   server_id = 1;
+	bytes  server_name = 2;
+	bytes  server_ip = 3;
+	int32   server_port = 4;
+	int32   server_max_online = 5;
+	int32   server_cur_count = 6;
+	EServerState   server_state = 7;
+	int32   server_type = 8;
+}
+
+message ServerInfoReportList
+{
+	repeated ServerInfoReport server_list = 1;
+}
+
+message AckEventResult
+{
+	EGameEventCode event_code = 1;
+	Ident event_object = 2;//playerID
+	Ident event_client = 3;//clientID
+}
+
+////////////////////////////////////////////////////
+message ReqAccountLogin
+{ 
+	bytes 			account = 2;
+	bytes 			password = 3;
+	bytes 			security_code = 4;
+    bytes 			signBuff = 5;
+    int32 			clientVersion = 6;
+    ELoginMode		loginMode = 7;
+    int32 			clientIP = 8;
+    int64 			clientMAC = 9;
+	bytes 			device_info = 10;
+	bytes 			extra_info = 11;
+	int32 			platform_type = 12;
+}
+
+message ReqAccountLogout
+{ 
+	bytes 		account = 2;
+	bytes 		extra_info = 3;
+}
+
+message ServerInfo
+{
+    int32  		server_id = 1;
+    bytes 			name = 2;
+	int32			wait_count = 3;
+	EServerState	status = 4;
+}
+
+enum ReqServerListType
+{
+	RSLT_WORLD_SERVER = 0;
+	RSLT_GAMES_ERVER = 1;
+};
+
+message ReqServerList
+{
+	ReqServerListType type = 1;
+}
+
+message AckServerList
+{
+	ReqServerListType type = 1;
+	repeated ServerInfo info = 2;
+}
+
+message ReqConnectWorld
+{
+	int32   world_id = 1;
+	bytes  account = 2;
+	Ident  sender = 3;
+	int32   login_id = 4;
+}
+
+message AckConnectWorldResult
+{
+	int32   world_id = 1;
+	Ident  sender = 2;
+	int32   login_id = 3;
+	bytes  account = 4;
+	bytes  world_ip = 5;
+	int32  world_port = 6;
+	bytes  world_key = 7;
+}
+
+message ReqSelectServer
+{
+	int32   world_id = 1;
+}
+
+message ReqKickFromWorld
+{
+	int32   world_id = 1;
+	bytes   account = 2;
+}
+
+////////////////////////////////////////////
+message ReqRoleList
+{
+	int32   game_id = 1;
+	bytes   account = 2;	
+}
+
+message RoleLiteInfo
+{
+	Ident 		id = 1;
+	int32 		career = 2;
+    int32 		sex = 3;
+    int32 		race = 4;
+    bytes 		noob_name = 5;
+    int32 		game_id = 6;
+	int32 		role_level = 7;
+	int32		delete_time = 8;
+	int32		reg_time = 9;
+	int32		last_offline_time = 10;
+	int32		last_offline_ip = 11;
+	bytes		view_record = 12;
+}
+
+message AckRoleLiteInfoList
+{
+	repeated RoleLiteInfo char_data = 1;
+	bytes   account = 2;
+}
+
+message ReqCreateRole
+{
+	bytes 		account = 1;
+	int32 		career = 2;
+    int32 		sex = 3;
+    int32 		race = 4;
+    bytes 		noob_name = 5;
+    int32 		game_id = 6;
+}
+
+message ReqDeleteRole
+{
+	bytes 	account = 1;
+    bytes	name = 2;
+	int32 	game_id = 3;
+}
+
+message ReqRecoverRole
+{
+	bytes 	account = 1;
+    bytes	name = 2;
+	int32 	game_id = 3;
+}
+
+message ServerHeartBeat
+{
+	int32 count = 1;
+}
+
+message RoleOnlineNotify
+{
+	Ident self = 1;
+	Ident guild = 2;
+	int32 game = 3;
+	int32 proxy = 4;
+}
+
+message RoleOfflineNotify
+{
+	Ident self = 1;
+	Ident guild = 2;
+	int32 game = 3;
+	int32 proxy = 4;
+}
+
+message RoleDataPack
+{
+	Ident 		id = 1;
+	ObjectPropertyList 	property = 2;
+	ObjectRecordList 		record = 4;
+}

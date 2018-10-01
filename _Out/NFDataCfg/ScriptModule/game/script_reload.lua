@@ -1,6 +1,7 @@
-local version_code = "1.0.4"
+local version_code = "1.0.0"
 ScriptReloadList={
 	{tbl=nil, tblName="test_game_module"},
+	--{tbl=nil, tblName="test_pb_module"},
 }
 
 io.write("start to reload, version: " ..version_code .. "\n");
@@ -13,7 +14,7 @@ else
 		script_module:log_info("old_version_code == " .. old_version_code .. " ++ now version code = "..version_code);
 		
 		script_module:set_version_code(version_code);
-		reload_script_table(ScriptReloadList);
+		load_script_file(ScriptReloadList);
 	end
 end
 

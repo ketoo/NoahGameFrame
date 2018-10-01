@@ -39,6 +39,7 @@
 #include "NFComm/NFPluginModule/NFISceneProcessModule.h"
 #include "NFComm/NFPluginModule/NFIHeroPropertyModule.h"
 #include "NFComm/NFPluginModule/NFISceneAOIModule.h"
+#include "NFComm/NFPluginModule/NFILogModule.h"
 
 class NFCHeroModule
     : public NFIHeroModule
@@ -82,6 +83,7 @@ protected:
 
 
 protected:
+	NFILogModule* m_pLogModule;
 	NFISceneAOIModule* m_pSceneAOIModule;
     NFIClassModule* m_pLogicClassModule;
     NFIElementModule* m_pElementModule;

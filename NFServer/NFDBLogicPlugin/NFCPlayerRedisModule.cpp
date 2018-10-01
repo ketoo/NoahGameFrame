@@ -140,7 +140,7 @@ bool NFCPlayerRedisModule::LoadPlayerTileRandom(const int nSceneID, NFGUID& xPla
 	NF_SHARE_PTR<NFIRedisClient> xNoSqlDriver = m_pNoSqlModule->GetDriverBySuit(xPlayer.ToString());
 	if (xNoSqlDriver && xNoSqlDriver->EXISTS(strTileKey))
 	{
-		//need to cache this keys
+		//its a good way to cache these keys to boost the performance
 		std::vector<std::string> vKeys;
 		if (xNoSqlDriver->HKEYS(strTileKey, vKeys))
 		{
@@ -317,7 +317,7 @@ bool NFCPlayerRedisModule::ExistRoleName(const std::string & strRoleName)
 	return false;
 }
 
-bool NFCPlayerRedisModule::CreateRole(const std::string & strAccount, const std::string & strRoleName, const NFGUID & id)
+bool NFCPlayerRedisModule::CreateRole(const std::string & strAccount, const std::string & strRoleName, const NFGUID & id, const int nHomeSceneID)
 {
 	const std::string strAccountKey = m_pCommonRedisModule->GetAccountCacheKey(strAccount);
 	NF_SHARE_PTR<NFIRedisClient> xNoSqlDriver = m_pNoSqlModule->GetDriverBySuit(strAccount);
@@ -356,6 +356,12 @@ bool NFCPlayerRedisModule::CreateRole(const std::string & strAccount, const std:
 				if (xProperty)
 				{
 					xProperty->SetInt(1);
+				}
+
+				xProperty = xPropertyManager->GetElement(NFrame::Player::HomeSceneID());
+				if (xProperty)
+				{
+					xProperty->SetInt(nHomeSceneID);
 				}
 
 				m_pCommonRedisModule->SavePropertyInfo(id, xPropertyManager);
