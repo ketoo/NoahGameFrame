@@ -56,6 +56,7 @@ bool NFCHeroModule::AfterInit()
 	m_pSceneProcessModule = pPluginManager->FindModule<NFISceneProcessModule>();
 	m_pHeroPropertyModule = pPluginManager->FindModule<NFIHeroPropertyModule>();
 	m_pSceneAOIModule = pPluginManager->FindModule<NFISceneAOIModule>();
+	m_pLogModule = pPluginManager->FindModule<NFILogModule>();
 
 
 	m_pNetModule->AddReceiveCallBack(NFMsg::EGEC_REQ_SET_FIGHT_HERO, this, &NFCHeroModule::OnSetFightHeroMsg);

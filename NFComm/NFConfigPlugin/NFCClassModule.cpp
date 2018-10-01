@@ -31,12 +31,18 @@
 #include "Dependencies/RapidXML/rapidxml.hpp"
 #include "Dependencies/RapidXML/rapidxml_print.hpp"
 
-bool NFCClassModule::Init()
+bool NFCClassModule::Awake()
 {
-    m_pElementModule = pPluginManager->FindModule<NFIElementModule>();
+	m_pElementModule = pPluginManager->FindModule<NFIElementModule>();
 
     Load();
+	
+	return true;
+	
+}
 
+bool NFCClassModule::Init()
+{
     return true;
 }
 

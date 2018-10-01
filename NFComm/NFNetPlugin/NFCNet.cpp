@@ -44,7 +44,7 @@
 #include "NFComm/NFLogPlugin/easylogging++.h"
 
 /*
-if any one upgrade the networking library(libEvent), please change the size of evbuffer as below:
+if any one want to upgrade the networking library(libEvent), please change the size of evbuffer as below:
 *MODIFY--libevent/buffer.c
 #define EVBUFFER_MAX_READ	4096
 TO
@@ -146,6 +146,9 @@ void NFCNet::listener_cb(struct evconnlistener* listener, evutil_socket_t fd, st
     event_set_fatal_callback(event_fatal_cb);
     
     conn_eventcb(bev, BEV_EVENT_CONNECTED, (void*)pObject);
+	
+    bufferevent_set_max_single_read(bev, NF_BUFFER_MAX_READ);
+    bufferevent_set_max_single_write(bev, NF_BUFFER_MAX_READ);
 }
 
 
@@ -256,6 +259,11 @@ bool NFCNet::SendMsgToAllClient(const char* msg, const size_t nLen)
         return false;
     }
 
+	if (!mbWorking)
+	{
+		return false;
+	}
+
     std::map<NFSOCK, NetObject*>::iterator it = mmObject.begin();
     for (; it != mmObject.end(); ++it)
     {
@@ -263,7 +271,7 @@ bool NFCNet::SendMsgToAllClient(const char* msg, const size_t nLen)
         if (pNetObject && !pNetObject->NeedRemove())
         {
             bufferevent* bev = (bufferevent*)pNetObject->GetUserData();
-            if (NULL != bev && mbWorking )
+            if (NULL != bev)
             {
                 bufferevent_write(bev, msg, nLen);
 
@@ -283,6 +291,11 @@ bool NFCNet::SendMsg(const char* msg, const size_t nLen, const NFSOCK nSockIndex
         return false;
     }
 
+	if (!mbWorking)
+	{
+		return false;
+	}
+
     std::map<NFSOCK, NetObject*>::iterator it = mmObject.find(nSockIndex);
     if (it != mmObject.end())
     {
@@ -290,7 +303,7 @@ bool NFCNet::SendMsg(const char* msg, const size_t nLen, const NFSOCK nSockIndex
         if (pNetObject)
         {
             bufferevent* bev = (bufferevent*)pNetObject->GetUserData();
-            if (NULL != bev && mbWorking)
+            if (NULL != bev)
             {
                 bufferevent_write(bev, msg, nLen);
 
@@ -437,14 +450,14 @@ int NFCNet::InitClientNet()
 
     event_set_log_callback(&NFCNet::log_cb);
 
-	int nSizeRead = (int)bufferevent_get_max_to_read(bev);
-	int nSizeWrite = (int)bufferevent_get_max_to_write(bev);
+    bufferevent_set_max_single_read(bev, NF_BUFFER_MAX_READ);
+    bufferevent_set_max_single_write(bev, NF_BUFFER_MAX_READ);
 
-	std::cout << "want to connect " << mstrIP << " SizeRead: " << nSizeRead << std::endl;
-	std::cout << "SizeWrite: " << nSizeWrite << std::endl;
+    int nSizeRead = (int)bufferevent_get_max_to_read(bev);
+    int nSizeWrite = (int)bufferevent_get_max_to_write(bev);
 
-	//bufferevent_set_max_single_read(bev, 0);
-	//bufferevent_set_max_single_write(bev, 0);
+    std::cout << "want to connect " << mstrIP << " SizeRead: " << nSizeRead << std::endl;
+    std::cout << "SizeWrite: " << nSizeWrite << std::endl;
 
     return sockfd;
 }

@@ -624,6 +624,9 @@ namespace NFrame
 		public static readonly String HeroID1 = "HeroID1";// object
 		public static readonly String HeroID2 = "HeroID2";// object
 		public static readonly String HeroID3 = "HeroID3";// object
+		public static readonly String HeroPos1 = "HeroPos1";// vector3
+		public static readonly String HeroPos2 = "HeroPos2";// vector3
+		public static readonly String HeroPos3 = "HeroPos3";// vector3
 		public static readonly String HeroStar1 = "HeroStar1";// int
 		public static readonly String HeroStar2 = "HeroStar2";// int
 		public static readonly String HeroStar3 = "HeroStar3";// int

@@ -59,9 +59,10 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>X64;_DEBUG;_WINDOWS;_USRDLL;THERON_CPP11</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>$(SolutionDir);$(SolutionDir)\Dependencies\;$(SolutionDir)\Dependencies\Theron\Include;$(SolutionDir)\Dependencies\lua;$(SolutionDir)\Dependencies\protobuf\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir);$(SolutionDir)\Dependencies\;$(SolutionDir)\Dependencies\Theron\Include;$(SolutionDir)\Dependencies\lua\src;$(SolutionDir)\Dependencies\protobuf\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <BrowseInformation>true</BrowseInformation>
       <PrecompiledHeaderFile />
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -85,7 +86,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>WIN;_WINDOWS;_USRDLL;THERON_CPP11</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>$(SolutionDir);$(SolutionDir)\Dependencies\;$(SolutionDir)\Dependencies\Theron\Include;$(SolutionDir)\Dependencies\lua;$(SolutionDir)\Dependencies\protobuf\src</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir);$(SolutionDir)\Dependencies\;$(SolutionDir)\Dependencies\Theron\Include;$(SolutionDir)\Dependencies\lua\src;$(SolutionDir)\Dependencies\protobuf\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -108,11 +109,17 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
       </PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="NFCLuaHttpModule.cpp" />
+    <ClCompile Include="NFCLuaPBModule.cpp" />
     <ClCompile Include="NFCLuaScriptModule.cpp" />
+    <ClCompile Include="NFCLuaWebSocketModule.cpp" />
     <ClCompile Include="NFLuaScriptPlugin.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="NFCLuaHttpModule.h" />
+    <ClInclude Include="NFCLuaPBModule.h" />
     <ClInclude Include="NFCLuaScriptModule.h" />
+    <ClInclude Include="NFCLuaWebSocketModule.h" />
     <ClInclude Include="NFLuaScriptPlugin.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
