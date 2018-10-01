@@ -11,6 +11,9 @@
     <Filter Include="NFPVP">
       <UniqueIdentifier>{19e315a2-7662-47a2-a943-6abcee1ee64c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="NFSyncModule">
+      <UniqueIdentifier>{ad5d009c-1b04-4908-bad2-4fbb3fb70803}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="NFCBuffModule.h">
@@ -22,6 +25,9 @@
     </ClInclude>
     <ClInclude Include="NFCPVPModule.h">
       <Filter>NFPVP</Filter>
+    </ClInclude>
+    <ClInclude Include="NFCSyncModule.h">
+      <Filter>NFSyncModule</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -35,6 +41,9 @@
     </ClCompile>
     <ClCompile Include="NFCPVPModule.cpp">
       <Filter>NFPVP</Filter>
+    </ClCompile>
+    <ClCompile Include="NFCSyncModule.cpp">
+      <Filter>NFSyncModule</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
