@@ -1,6 +1,6 @@
 // Protocol Buffers - Google's data interchange format
 // Copyright 2008 Google Inc.  All rights reserved.
-// http://code.google.com/p/protobuf/
+// https://developers.google.com/protocol-buffers/
 //
 // Redistribution and use in source and binary forms, with or without
 // modification, are permitted provided that the following conditions are
@@ -32,18 +32,29 @@
 //  Based on original Protocol Buffers design by
 //  Sanjay Ghemawat, Jeff Dean, and others.
 
+#include <algorithm>
+#include <google/protobuf/stubs/hash.h>
 #include <limits>
 #include <vector>
 
+#include <google/protobuf/stubs/stringprintf.h>
 #include <google/protobuf/compiler/java/java_helpers.h>
+#include <google/protobuf/compiler/java/java_name_resolver.h>
 #include <google/protobuf/descriptor.pb.h>
+#include <google/protobuf/wire_format.h>
 #include <google/protobuf/stubs/strutil.h>
 #include <google/protobuf/stubs/substitute.h>
+
+
+#include <google/protobuf/stubs/hash.h>  // for hash<T *>
 
 namespace google {
 namespace protobuf {
 namespace compiler {
 namespace java {
+
+using internal::WireFormat;
+using internal::WireFormatLite;
 
 const char kThickSeparator[] =
   "// ===================================================================\n";
@@ -54,18 +65,77 @@ namespace {
 
 const char* kDefaultPackage = "";
 
-const string& FieldName(const FieldDescriptor* field) {
+// Names that should be avoided as field names.
+// Using them will cause the compiler to generate accessors whose names are
+// colliding with methods defined in base classes.
+const char* kForbiddenWordList[] = {
+  // message base class:
+  "cached_size", "serialized_size",
+  // java.lang.Object:
+  "class",
+};
+
+const int kDefaultLookUpStartFieldNumber = 40;
+
+bool IsForbidden(const string& field_name) {
+  for (int i = 0; i < GOOGLE_ARRAYSIZE(kForbiddenWordList); ++i) {
+    if (field_name == kForbiddenWordList[i]) {
+      return true;
+    }
+  }
+  return false;
+}
+
+string FieldName(const FieldDescriptor* field) {
+  string field_name;
   // Groups are hacky:  The name of the field is just the lower-cased name
   // of the group type.  In Java, though, we would like to retain the original
   // capitalization of the type name.
   if (GetType(field) == FieldDescriptor::TYPE_GROUP) {
-    return field->message_type()->name();
+    field_name = field->message_type()->name();
   } else {
-    return field->name();
+    field_name = field->name();
   }
+  if (IsForbidden(field_name)) {
+    // Append a trailing "#" to indicate that the name should be decorated to
+    // avoid collision with other names.
+    field_name += "#";
+  }
+  return field_name;
 }
 
-string UnderscoresToCamelCaseImpl(const string& input, bool cap_next_letter) {
+
+// Judge whether should use table or use look up.
+// Copied from com.google.protobuf.SchemaUtil.shouldUseTableSwitch
+bool ShouldUseTable(int lo, int hi, int number_of_fields) {
+  if (hi < kDefaultLookUpStartFieldNumber) {
+    return true;
+  }
+  int64 table_space_cost = (static_cast<int64>(hi) - lo + 1);  // words
+  int64 table_time_cost = 3;           // comparisons
+  int64 lookup_space_cost = 3 + 2 * static_cast<int64>(number_of_fields);
+  int64 lookup_time_cost = 3 + number_of_fields;
+  return table_space_cost + 3 * table_time_cost <=
+         lookup_space_cost + 3 * lookup_time_cost;
+}
+
+}  // namespace
+
+void PrintGeneratedAnnotation(io::Printer* printer, char delimiter,
+                              const string& annotation_file) {
+  if (annotation_file.empty()) {
+    return;
+  }
+  string ptemplate =
+      "@javax.annotation.Generated(value=\"protoc\", comments=\"annotations:";
+  ptemplate.push_back(delimiter);
+  ptemplate.append("annotation_file");
+  ptemplate.push_back(delimiter);
+  ptemplate.append("\")\n");
+  printer->Print(ptemplate.c_str(), "annotation_file", annotation_file);
+}
+
+string UnderscoresToCamelCase(const string& input, bool cap_next_letter) {
   string result;
   // Note:  I distrust ctype.h due to locales.
   for (int i = 0; i < input.size(); i++) {
@@ -93,21 +163,35 @@ string UnderscoresToCamelCaseImpl(const string& input, bool cap_next_letter) {
       cap_next_letter = true;
     }
   }
+  // Add a trailing "_" if the name should be altered.
+  if (input[input.size() - 1] == '#') {
+    result += '_';
+  }
   return result;
 }
 
-}  // namespace
-
 string UnderscoresToCamelCase(const FieldDescriptor* field) {
-  return UnderscoresToCamelCaseImpl(FieldName(field), false);
+  return UnderscoresToCamelCase(FieldName(field), false);
 }
 
 string UnderscoresToCapitalizedCamelCase(const FieldDescriptor* field) {
-  return UnderscoresToCamelCaseImpl(FieldName(field), true);
+  return UnderscoresToCamelCase(FieldName(field), true);
 }
 
 string UnderscoresToCamelCase(const MethodDescriptor* method) {
-  return UnderscoresToCamelCaseImpl(method->name(), false);
+  return UnderscoresToCamelCase(method->name(), false);
+}
+
+string UniqueFileScopeIdentifier(const Descriptor* descriptor) {
+  return "static_" + StringReplace(descriptor->full_name(), ".", "_", true);
+}
+
+string CamelCaseFieldName(const FieldDescriptor* field) {
+  string fieldName = UnderscoresToCamelCase(field);
+  if ('0' <= fieldName[0] && fieldName[0] <= '9') {
+    return '_' + fieldName;
+  }
+  return fieldName;
 }
 
 string StripProto(const string& filename) {
@@ -118,22 +202,12 @@ string StripProto(const string& filename) {
   }
 }
 
-string FileClassName(const FileDescriptor* file) {
-  if (file->options().has_java_outer_classname()) {
-    return file->options().java_outer_classname();
-  } else {
-    string basename;
-    string::size_type last_slash = file->name().find_last_of('/');
-    if (last_slash == string::npos) {
-      basename = file->name();
-    } else {
-      basename = file->name().substr(last_slash + 1);
-    }
-    return UnderscoresToCamelCaseImpl(StripProto(basename), true);
-  }
+string FileClassName(const FileDescriptor* file, bool immutable) {
+  ClassNameResolver name_resolver;
+  return name_resolver.GetFileClassName(file, immutable);
 }
 
-string FileJavaPackage(const FileDescriptor* file) {
+string FileJavaPackage(const FileDescriptor* file, bool immutable) {
   string result;
 
   if (file->options().has_java_package()) {
@@ -146,7 +220,6 @@ string FileJavaPackage(const FileDescriptor* file) {
     }
   }
 
-
   return result;
 }
 
@@ -157,7 +230,10 @@ string JavaPackageToDir(string package_name) {
   return package_dir;
 }
 
-string ToJavaName(const string& full_name, const FileDescriptor* file) {
+// TODO(xiaofeng): This function is only kept for it's publicly referenced.
+// It should be removed after mutable API up-integration.
+string ToJavaName(const string& full_name,
+                  const FileDescriptor* file) {
   string result;
   if (file->options().java_multiple_files()) {
     result = FileJavaPackage(file);
@@ -178,22 +254,43 @@ string ToJavaName(const string& full_name, const FileDescriptor* file) {
 }
 
 string ClassName(const Descriptor* descriptor) {
-  return ToJavaName(descriptor->full_name(), descriptor->file());
+  ClassNameResolver name_resolver;
+  return name_resolver.GetClassName(descriptor, true);
 }
 
 string ClassName(const EnumDescriptor* descriptor) {
-  return ToJavaName(descriptor->full_name(), descriptor->file());
+  ClassNameResolver name_resolver;
+  return name_resolver.GetClassName(descriptor, true);
 }
 
 string ClassName(const ServiceDescriptor* descriptor) {
-  return ToJavaName(descriptor->full_name(), descriptor->file());
+  ClassNameResolver name_resolver;
+  return name_resolver.GetClassName(descriptor, true);
 }
 
 string ClassName(const FileDescriptor* descriptor) {
-  string result = FileJavaPackage(descriptor);
-  if (!result.empty()) result += '.';
-  result += FileClassName(descriptor);
-  return result;
+  ClassNameResolver name_resolver;
+  return name_resolver.GetClassName(descriptor, true);
+}
+
+
+string ExtraMessageInterfaces(const Descriptor* descriptor) {
+  string interfaces = "// @@protoc_insertion_point(message_implements:"
+      + descriptor->full_name() + ")";
+  return interfaces;
+}
+
+
+string ExtraBuilderInterfaces(const Descriptor* descriptor) {
+  string interfaces = "// @@protoc_insertion_point(builder_implements:"
+      + descriptor->full_name() + ")";
+  return interfaces;
+}
+
+string ExtraMessageOrBuilderInterfaces(const Descriptor* descriptor) {
+  string interfaces = "// @@protoc_insertion_point(interface_extends:"
+      + descriptor->full_name() + ")";
+  return interfaces;
 }
 
 string FieldConstantName(const FieldDescriptor *field) {
@@ -252,6 +349,26 @@ JavaType GetJavaType(const FieldDescriptor* field) {
   return JAVATYPE_INT;
 }
 
+const char* PrimitiveTypeName(JavaType type) {
+  switch (type) {
+    case JAVATYPE_INT    : return "int";
+    case JAVATYPE_LONG   : return "long";
+    case JAVATYPE_FLOAT  : return "float";
+    case JAVATYPE_DOUBLE : return "double";
+    case JAVATYPE_BOOLEAN: return "boolean";
+    case JAVATYPE_STRING : return "java.lang.String";
+    case JAVATYPE_BYTES  : return "com.google.protobuf.ByteString";
+    case JAVATYPE_ENUM   : return NULL;
+    case JAVATYPE_MESSAGE: return NULL;
+
+    // No default because we want the compiler to complain if any new
+    // JavaTypes are added.
+  }
+
+  GOOGLE_LOG(FATAL) << "Can't get here.";
+  return NULL;
+}
+
 const char* BoxedPrimitiveTypeName(JavaType type) {
   switch (type) {
     case JAVATYPE_INT    : return "java.lang.Integer";
@@ -272,6 +389,36 @@ const char* BoxedPrimitiveTypeName(JavaType type) {
   return NULL;
 }
 
+
+const char* FieldTypeName(FieldDescriptor::Type field_type) {
+  switch (field_type) {
+    case FieldDescriptor::TYPE_INT32   : return "INT32";
+    case FieldDescriptor::TYPE_UINT32  : return "UINT32";
+    case FieldDescriptor::TYPE_SINT32  : return "SINT32";
+    case FieldDescriptor::TYPE_FIXED32 : return "FIXED32";
+    case FieldDescriptor::TYPE_SFIXED32: return "SFIXED32";
+    case FieldDescriptor::TYPE_INT64   : return "INT64";
+    case FieldDescriptor::TYPE_UINT64  : return "UINT64";
+    case FieldDescriptor::TYPE_SINT64  : return "SINT64";
+    case FieldDescriptor::TYPE_FIXED64 : return "FIXED64";
+    case FieldDescriptor::TYPE_SFIXED64: return "SFIXED64";
+    case FieldDescriptor::TYPE_FLOAT   : return "FLOAT";
+    case FieldDescriptor::TYPE_DOUBLE  : return "DOUBLE";
+    case FieldDescriptor::TYPE_BOOL    : return "BOOL";
+    case FieldDescriptor::TYPE_STRING  : return "STRING";
+    case FieldDescriptor::TYPE_BYTES   : return "BYTES";
+    case FieldDescriptor::TYPE_ENUM    : return "ENUM";
+    case FieldDescriptor::TYPE_GROUP   : return "GROUP";
+    case FieldDescriptor::TYPE_MESSAGE : return "MESSAGE";
+
+    // No default because we want the compiler to complain if any new
+    // types are added.
+  }
+
+  GOOGLE_LOG(FATAL) << "Can't get here.";
+  return NULL;
+}
+
 bool AllAscii(const string& text) {
   for (int i = 0; i < text.size(); i++) {
     if ((text[i] & 0x80) != 0) {
@@ -281,7 +428,8 @@ bool AllAscii(const string& text) {
   return true;
 }
 
-string DefaultValue(const FieldDescriptor* field) {
+string DefaultValue(const FieldDescriptor* field, bool immutable,
+                    ClassNameResolver* name_resolver) {
   // Switch on CppType since we need to know which default_value_* method
   // of FieldDescriptor to call.
   switch (field->cpp_type()) {
@@ -297,9 +445,9 @@ string DefaultValue(const FieldDescriptor* field) {
              "L";
     case FieldDescriptor::CPPTYPE_DOUBLE: {
       double value = field->default_value_double();
-      if (value == numeric_limits<double>::infinity()) {
+      if (value == std::numeric_limits<double>::infinity()) {
         return "Double.POSITIVE_INFINITY";
-      } else if (value == -numeric_limits<double>::infinity()) {
+      } else if (value == -std::numeric_limits<double>::infinity()) {
         return "Double.NEGATIVE_INFINITY";
       } else if (value != value) {
         return "Double.NaN";
@@ -309,9 +457,9 @@ string DefaultValue(const FieldDescriptor* field) {
     }
     case FieldDescriptor::CPPTYPE_FLOAT: {
       float value = field->default_value_float();
-      if (value == numeric_limits<float>::infinity()) {
+      if (value == std::numeric_limits<float>::infinity()) {
         return "Float.POSITIVE_INFINITY";
-      } else if (value == -numeric_limits<float>::infinity()) {
+      } else if (value == -std::numeric_limits<float>::infinity()) {
         return "Float.NEGATIVE_INFINITY";
       } else if (value != value) {
         return "Float.NaN";
@@ -344,11 +492,12 @@ string DefaultValue(const FieldDescriptor* field) {
       }
 
     case FieldDescriptor::CPPTYPE_ENUM:
-      return ClassName(field->enum_type()) + "." +
+      return name_resolver->GetClassName(field->enum_type(), immutable) + "." +
           field->default_value_enum()->name();
 
     case FieldDescriptor::CPPTYPE_MESSAGE:
-      return ClassName(field->message_type()) + ".getDefaultInstance()";
+      return name_resolver->GetClassName(field->message_type(), immutable) +
+          ".getDefaultInstance()";
 
     // No default because we want the compiler to complain if any new
     // types are added.
@@ -376,9 +525,9 @@ bool IsDefaultValueJavaDefault(const FieldDescriptor* field) {
       return field->default_value_float() == 0.0;
     case FieldDescriptor::CPPTYPE_BOOL:
       return field->default_value_bool() == false;
-
-    case FieldDescriptor::CPPTYPE_STRING:
     case FieldDescriptor::CPPTYPE_ENUM:
+      return field->default_value_enum()->number() == 0;
+    case FieldDescriptor::CPPTYPE_STRING:
     case FieldDescriptor::CPPTYPE_MESSAGE:
       return false;
 
@@ -388,6 +537,11 @@ bool IsDefaultValueJavaDefault(const FieldDescriptor* field) {
 
   GOOGLE_LOG(FATAL) << "Can't get here.";
   return false;
+}
+
+bool IsByteStringWithCustomDefaultValue(const FieldDescriptor* field) {
+  return GetJavaType(field) == JAVATYPE_BYTES &&
+         field->default_value_string() != "";
 }
 
 const char* bit_masks[] = {
@@ -494,6 +648,306 @@ string GenerateSetBitMutableLocal(int bitIndex) {
   return GenerateSetBitInternal("mutable_", bitIndex);
 }
 
+bool IsReferenceType(JavaType type) {
+  switch (type) {
+    case JAVATYPE_INT    : return false;
+    case JAVATYPE_LONG   : return false;
+    case JAVATYPE_FLOAT  : return false;
+    case JAVATYPE_DOUBLE : return false;
+    case JAVATYPE_BOOLEAN: return false;
+    case JAVATYPE_STRING : return true;
+    case JAVATYPE_BYTES  : return true;
+    case JAVATYPE_ENUM   : return true;
+    case JAVATYPE_MESSAGE: return true;
+
+    // No default because we want the compiler to complain if any new
+    // JavaTypes are added.
+  }
+
+  GOOGLE_LOG(FATAL) << "Can't get here.";
+  return false;
+}
+
+const char* GetCapitalizedType(const FieldDescriptor* field, bool immutable) {
+  switch (GetType(field)) {
+    case FieldDescriptor::TYPE_INT32   : return "Int32";
+    case FieldDescriptor::TYPE_UINT32  : return "UInt32";
+    case FieldDescriptor::TYPE_SINT32  : return "SInt32";
+    case FieldDescriptor::TYPE_FIXED32 : return "Fixed32";
+    case FieldDescriptor::TYPE_SFIXED32: return "SFixed32";
+    case FieldDescriptor::TYPE_INT64   : return "Int64";
+    case FieldDescriptor::TYPE_UINT64  : return "UInt64";
+    case FieldDescriptor::TYPE_SINT64  : return "SInt64";
+    case FieldDescriptor::TYPE_FIXED64 : return "Fixed64";
+    case FieldDescriptor::TYPE_SFIXED64: return "SFixed64";
+    case FieldDescriptor::TYPE_FLOAT   : return "Float";
+    case FieldDescriptor::TYPE_DOUBLE  : return "Double";
+    case FieldDescriptor::TYPE_BOOL    : return "Bool";
+    case FieldDescriptor::TYPE_STRING  : return "String";
+    case FieldDescriptor::TYPE_BYTES   : {
+      return "Bytes";
+    }
+    case FieldDescriptor::TYPE_ENUM    : return "Enum";
+    case FieldDescriptor::TYPE_GROUP   : return "Group";
+    case FieldDescriptor::TYPE_MESSAGE : return "Message";
+
+    // No default because we want the compiler to complain if any new
+    // types are added.
+  }
+
+  GOOGLE_LOG(FATAL) << "Can't get here.";
+  return NULL;
+}
+
+// For encodings with fixed sizes, returns that size in bytes.  Otherwise
+// returns -1.
+int FixedSize(FieldDescriptor::Type type) {
+  switch (type) {
+    case FieldDescriptor::TYPE_INT32   : return -1;
+    case FieldDescriptor::TYPE_INT64   : return -1;
+    case FieldDescriptor::TYPE_UINT32  : return -1;
+    case FieldDescriptor::TYPE_UINT64  : return -1;
+    case FieldDescriptor::TYPE_SINT32  : return -1;
+    case FieldDescriptor::TYPE_SINT64  : return -1;
+    case FieldDescriptor::TYPE_FIXED32 : return WireFormatLite::kFixed32Size;
+    case FieldDescriptor::TYPE_FIXED64 : return WireFormatLite::kFixed64Size;
+    case FieldDescriptor::TYPE_SFIXED32: return WireFormatLite::kSFixed32Size;
+    case FieldDescriptor::TYPE_SFIXED64: return WireFormatLite::kSFixed64Size;
+    case FieldDescriptor::TYPE_FLOAT   : return WireFormatLite::kFloatSize;
+    case FieldDescriptor::TYPE_DOUBLE  : return WireFormatLite::kDoubleSize;
+
+    case FieldDescriptor::TYPE_BOOL    : return WireFormatLite::kBoolSize;
+    case FieldDescriptor::TYPE_ENUM    : return -1;
+
+    case FieldDescriptor::TYPE_STRING  : return -1;
+    case FieldDescriptor::TYPE_BYTES   : return -1;
+    case FieldDescriptor::TYPE_GROUP   : return -1;
+    case FieldDescriptor::TYPE_MESSAGE : return -1;
+
+    // No default because we want the compiler to complain if any new
+    // types are added.
+  }
+  GOOGLE_LOG(FATAL) << "Can't get here.";
+  return -1;
+}
+
+// Sort the fields of the given Descriptor by number into a new[]'d array
+// and return it. The caller should delete the returned array.
+const FieldDescriptor** SortFieldsByNumber(const Descriptor* descriptor) {
+  const FieldDescriptor** fields =
+    new const FieldDescriptor*[descriptor->field_count()];
+  for (int i = 0; i < descriptor->field_count(); i++) {
+    fields[i] = descriptor->field(i);
+  }
+  std::sort(fields, fields + descriptor->field_count(),
+            FieldOrderingByNumber());
+  return fields;
+}
+
+// Returns true if the message type has any required fields.  If it doesn't,
+// we can optimize out calls to its isInitialized() method.
+//
+// already_seen is used to avoid checking the same type multiple times
+// (and also to protect against recursion).
+bool HasRequiredFields(
+    const Descriptor* type,
+    hash_set<const Descriptor*>* already_seen) {
+  if (already_seen->count(type) > 0) {
+    // The type is already in cache.  This means that either:
+    // a. The type has no required fields.
+    // b. We are in the midst of checking if the type has required fields,
+    //    somewhere up the stack.  In this case, we know that if the type
+    //    has any required fields, they'll be found when we return to it,
+    //    and the whole call to HasRequiredFields() will return true.
+    //    Therefore, we don't have to check if this type has required fields
+    //    here.
+    return false;
+  }
+  already_seen->insert(type);
+
+  // If the type has extensions, an extension with message type could contain
+  // required fields, so we have to be conservative and assume such an
+  // extension exists.
+  if (type->extension_range_count() > 0) return true;
+
+  for (int i = 0; i < type->field_count(); i++) {
+    const FieldDescriptor* field = type->field(i);
+    if (field->is_required()) {
+      return true;
+    }
+    if (GetJavaType(field) == JAVATYPE_MESSAGE) {
+      if (HasRequiredFields(field->message_type(), already_seen)) {
+        return true;
+      }
+    }
+  }
+
+  return false;
+}
+
+bool HasRequiredFields(const Descriptor* type) {
+  hash_set<const Descriptor*> already_seen;
+  return HasRequiredFields(type, &already_seen);
+}
+
+bool HasRepeatedFields(const Descriptor* descriptor) {
+  for (int i = 0; i < descriptor->field_count(); ++i) {
+    const FieldDescriptor* field = descriptor->field(i);
+    if (field->is_repeated()) {
+      return true;
+    }
+  }
+  return false;
+}
+
+// Encode an unsigned 32-bit value into a sequence of UTF-16 characters.
+//
+// If the value is in [0x0000, 0xD7FF], we encode it with a single character
+// with the same numeric value.
+//
+// If the value is larger than 0xD7FF, we encode its lowest 13 bits into a
+// character in the range [0xE000, 0xFFFF] by combining these 13 bits with
+// 0xE000 using logic-or. Then we shift the value to the right by 13 bits, and
+// encode the remaining value by repeating this same process until we get to
+// a value in [0x0000, 0xD7FF] where we will encode it using a character with
+// the same numeric value.
+//
+// Note that we only use code points in [0x0000, 0xD7FF] and [0xE000, 0xFFFF].
+// There will be no surrogate pairs in the encoded character sequence.
+void WriteUInt32ToUtf16CharSequence(uint32 number,
+                                    std::vector<uint16>* output) {
+  // For values in [0x0000, 0xD7FF], only use one char to encode it.
+  if (number < 0xD800) {
+    output->push_back(static_cast<uint16>(number));
+    return;
+  }
+  // Encode into multiple chars. All except the last char will be in the range
+  // [0xE000, 0xFFFF], and the last char will be in the range [0x0000, 0xD7FF].
+  // Note that we don't use any value in range [0xD800, 0xDFFF] because they
+  // have to come in pairs and the encoding is just more space-efficient w/o
+  // them.
+  while (number >= 0xD800) {
+    // [0xE000, 0xFFFF] can represent 13 bits of info.
+    output->push_back(static_cast<uint16>(0xE000 | (number & 0x1FFF)));
+    number >>= 13;
+  }
+  output->push_back(static_cast<uint16>(number));
+}
+
+int GetExperimentalJavaFieldTypeForSingular(const FieldDescriptor* field) {
+  // j/c/g/protobuf/FieldType.java lists field types in a slightly different
+  // order from FieldDescriptor::Type so we can't do a simple cast.
+  //
+  // TODO(xiaofeng): Make j/c/g/protobuf/FieldType.java follow the same order.
+  int result = field->type();
+  if (result == FieldDescriptor::TYPE_GROUP) {
+    return 17;
+  } else if (result < FieldDescriptor::TYPE_GROUP) {
+    return result - 1;
+  } else {
+    return result - 2;
+  }
+}
+
+int GetExperimentalJavaFieldTypeForRepeated(const FieldDescriptor* field) {
+  if (field->type() == FieldDescriptor::TYPE_GROUP) {
+    return 49;
+  } else {
+    return GetExperimentalJavaFieldTypeForSingular(field) + 18;
+  }
+}
+
+int GetExperimentalJavaFieldTypeForPacked(const FieldDescriptor* field) {
+  int result = field->type();
+  if (result < FieldDescriptor::TYPE_STRING) {
+    return result + 34;
+  } else if (result > FieldDescriptor::TYPE_BYTES) {
+    return result + 30;
+  } else {
+    GOOGLE_LOG(FATAL) << field->full_name() << " can't be packed.";
+    return 0;
+  }
+}
+
+int GetExperimentalJavaFieldType(const FieldDescriptor* field) {
+  static const int kMapFieldType = 50;
+  static const int kOneofFieldTypeOffset = 51;
+  static const int kRequiredBit = 0x100;
+  static const int kUtf8CheckBit = 0x200;
+  static const int kCheckInitialized = 0x400;
+  static const int kMapWithProto2EnumValue = 0x800;
+  int extra_bits = field->is_required() ? kRequiredBit : 0;
+  if (field->type() == FieldDescriptor::TYPE_STRING && CheckUtf8(field)) {
+    extra_bits |= kUtf8CheckBit;
+  }
+  if (field->is_required() || (GetJavaType(field) == JAVATYPE_MESSAGE &&
+                               HasRequiredFields(field->message_type()))) {
+    extra_bits |= kCheckInitialized;
+  }
+
+  if (field->is_map()) {
+    if (SupportFieldPresence(field->file())) {
+      const FieldDescriptor* value =
+          field->message_type()->FindFieldByName("value");
+      if (GetJavaType(value) == JAVATYPE_ENUM) {
+        extra_bits |= kMapWithProto2EnumValue;
+      }
+    }
+    return kMapFieldType | extra_bits;
+  } else if (field->is_packed()) {
+    return GetExperimentalJavaFieldTypeForPacked(field);
+  } else if (field->is_repeated()) {
+    return GetExperimentalJavaFieldTypeForRepeated(field) | extra_bits;
+  } else if (field->containing_oneof() != NULL) {
+    return (GetExperimentalJavaFieldTypeForSingular(field) +
+            kOneofFieldTypeOffset) |
+           extra_bits;
+  } else {
+    return GetExperimentalJavaFieldTypeForSingular(field) | extra_bits;
+  }
+}
+
+// Escape a UTF-16 character to be embedded in a Java string.
+void EscapeUtf16ToString(uint16 code, string* output) {
+  if (code == '\t') {
+    output->append("\\t");
+  } else if (code == '\b') {
+    output->append("\\b");
+  } else if (code == '\n') {
+    output->append("\\n");
+  } else if (code == '\r') {
+    output->append("\\r");
+  } else if (code == '\f') {
+    output->append("\\f");
+  } else if (code == '\'') {
+    output->append("\\'");
+  } else if (code == '\"') {
+    output->append("\\\"");
+  } else if (code == '\\') {
+    output->append("\\\\");
+  } else if (code >= 0x20 && code <= 0x7f) {
+    output->push_back(static_cast<char>(code));
+  } else {
+    output->append(StringPrintf("\\u%04x", code));
+  }
+}
+
+std::pair<int, int> GetTableDrivenNumberOfEntriesAndLookUpStartFieldNumber(
+    const FieldDescriptor** fields, int count) {
+  GOOGLE_CHECK_GT(count, 0);
+  int table_driven_number_of_entries = count;
+  int look_up_start_field_number = 0;
+  for (int i = 0; i < count; i++) {
+    const int field_number = fields[i]->number();
+    if (ShouldUseTable(fields[0]->number(), field_number, i + 1)) {
+      table_driven_number_of_entries =
+          field_number - fields[0]->number() + 1 + count - i - 1;
+      look_up_start_field_number = field_number + 1;
+    }
+  }
+  return std::make_pair(
+      table_driven_number_of_entries, look_up_start_field_number);
+}
 }  // namespace java
 }  // namespace compiler
 }  // namespace protobuf

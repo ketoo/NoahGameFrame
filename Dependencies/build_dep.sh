@@ -1,13 +1,14 @@
 echo Building dependencies...
 
-#sudo apt-get install automake
-#sudo apt-get install zip unzip
+sudo apt-get install automake
+sudo apt-get install zip unzip
 
 rm -rf ./lib
 mkdir -p lib/Debug/
 mkdir -p lib/Release/
 
-apt-get install libssl-dev
+sudo apt-get install libssl-dev
+sudo apt-get install libreadline-dev 
 #cd openssl-1.1.0h
 #rm -rf *.a
 #chmod -R 755 *
@@ -63,13 +64,15 @@ cd lua
 
 sysOS=`uname -s`
 if [ $sysOS == "Darwin" ];then
-    make macosx
+    make macosx test
 elif [ $sysOS == "Linux" ];then
-    make linux
+	sudo apt-get install libreadline6-dev 
+	sudo apt-get install libncurses5-dev
+    make linux test
 fi
 
-cp -r -f ./*.a ../lib/Debug/
-cp -r -f ./*.a ../lib/Release/
+cp -r -f ./src/*.a ../lib/Debug/
+cp -r -f ./src/*.a ../lib/Release/
 cd ../
 echo Building lua finish...
 

@@ -1,6 +1,6 @@
 // Protocol Buffers - Google's data interchange format
 // Copyright 2008 Google Inc.  All rights reserved.
-// http://code.google.com/p/protobuf/
+// https://developers.google.com/protocol-buffers/
 //
 // Redistribution and use in source and binary forms, with or without
 // modification, are permitted provided that the following conditions are
@@ -35,18 +35,27 @@
 #ifndef GOOGLE_PROTOBUF_COMPILER_JAVA_FILE_H__
 #define GOOGLE_PROTOBUF_COMPILER_JAVA_FILE_H__
 
+#include <memory>
 #include <string>
 #include <vector>
 #include <google/protobuf/stubs/common.h>
+#include <google/protobuf/compiler/java/java_options.h>
 
 namespace google {
 namespace protobuf {
-  class FileDescriptor;        // descriptor.h
+  class FileDescriptor;          // descriptor.h
   namespace io {
-    class Printer;             // printer.h
+    class Printer;               // printer.h
   }
   namespace compiler {
-    class GeneratorContext;     // code_generator.h
+    class GeneratorContext;      // code_generator.h
+    namespace java {
+      class Context;             // context.h
+      class MessageGenerator;    // message.h
+      class GeneratorFactory;    // generator_factory.h
+      class ExtensionGenerator;  // extension.h
+      class ClassNameResolver;   // name_resolver.h
+    }
   }
 }
 
@@ -56,7 +65,8 @@ namespace java {
 
 class FileGenerator {
  public:
-  explicit FileGenerator(const FileDescriptor* file);
+  FileGenerator(const FileDescriptor* file, const Options& options,
+                bool immutable_api = true);
   ~FileGenerator();
 
   // Checks for problems that would otherwise lead to cryptic compile errors.
@@ -71,24 +81,30 @@ class FileGenerator {
   // service type).
   void GenerateSiblings(const string& package_dir,
                         GeneratorContext* generator_context,
-                        vector<string>* file_list);
+                        std::vector<string>* file_list,
+                        std::vector<string>* annotation_list);
 
   const string& java_package() { return java_package_; }
   const string& classname()    { return classname_;    }
 
-
  private:
-  // Returns whether the dependency should be included in the output file.
-  // Always returns true for opensource, but used internally at Google to help
-  // improve compatibility with version 1 of protocol buffers.
-  bool ShouldIncludeDependency(const FileDescriptor* descriptor);
+  void GenerateDescriptorInitializationCodeForImmutable(io::Printer* printer);
+  void GenerateDescriptorInitializationCodeForMutable(io::Printer* printer);
+
+  bool ShouldIncludeDependency(const FileDescriptor* descriptor,
+                               bool immutable_api_);
 
   const FileDescriptor* file_;
   string java_package_;
   string classname_;
 
-
-  void GenerateEmbeddedDescriptor(io::Printer* printer);
+  std::vector<std::unique_ptr<MessageGenerator>> message_generators_;
+  std::vector<std::unique_ptr<ExtensionGenerator>> extension_generators_;
+  std::unique_ptr<GeneratorFactory> generator_factory_;
+  std::unique_ptr<Context> context_;
+  ClassNameResolver* name_resolver_;
+  const Options options_;
+  bool immutable_api_;
 
   GOOGLE_DISALLOW_EVIL_CONSTRUCTORS(FileGenerator);
 };

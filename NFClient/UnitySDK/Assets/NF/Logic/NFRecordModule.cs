@@ -4,7 +4,6 @@ using System.Text;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
-using ProtoBuf;
 using NFMsg;
 using UnityEngine;
 
@@ -105,7 +104,7 @@ namespace NFSDK
                 if (addStringStruct.col >= 0)
                 {
                     recordVecDesc[addStringStruct.col] = NFDataList.VARIANT_TYPE.VTYPE_STRING;
-                    recordVecData[addStringStruct.col] = System.Text.Encoding.Default.GetString(addStringStruct.data);
+                    recordVecData[addStringStruct.col] = addStringStruct.data.ToStringUtf8();
 
                 }
             }
@@ -219,15 +218,13 @@ namespace NFSDK
 
         private void OnRecordInt(UInt16 id, MemoryStream stream)
         {
-            NFMsg.MsgBase xMsg = new NFMsg.MsgBase();
-            xMsg = Serializer.Deserialize<NFMsg.MsgBase>(stream);
+            NFMsg.MsgBase xMsg = NFMsg.MsgBase.Parser.ParseFrom(stream);
 
-            NFMsg.ObjectRecordInt recordData = new NFMsg.ObjectRecordInt();
-            recordData = Serializer.Deserialize<NFMsg.ObjectRecordInt>(new MemoryStream(xMsg.msg_data));
+            NFMsg.ObjectRecordInt recordData = NFMsg.ObjectRecordInt.Parser.ParseFrom(xMsg.msg_data);
 
 			NFIObject go = mKernelModule.GetObject(mHelpModule.PBToNF(recordData.player_id));
             NFIRecordManager recordManager = go.GetRecordManager();
-            NFIRecord record = recordManager.GetRecord(System.Text.Encoding.Default.GetString(recordData.record_name));
+            NFIRecord record = recordManager.GetRecord(recordData.record_name.ToStringUtf8());
 
             for (int i = 0; i < recordData.property_list.Count; i++)
             {
@@ -236,15 +233,13 @@ namespace NFSDK
         }
         private void OnRecordFloat(UInt16 id, MemoryStream stream)
         {
-            NFMsg.MsgBase xMsg = new NFMsg.MsgBase();
-            xMsg = Serializer.Deserialize<NFMsg.MsgBase>(stream);
+            NFMsg.MsgBase xMsg = NFMsg.MsgBase.Parser.ParseFrom(stream);
 
-            NFMsg.ObjectRecordFloat recordData = new NFMsg.ObjectRecordFloat();
-            recordData = Serializer.Deserialize<NFMsg.ObjectRecordFloat>(new MemoryStream(xMsg.msg_data));
+            NFMsg.ObjectRecordFloat recordData = NFMsg.ObjectRecordFloat.Parser.ParseFrom(xMsg.msg_data);
 
 			NFIObject go = mKernelModule.GetObject(mHelpModule.PBToNF(recordData.player_id));
             NFIRecordManager recordManager = go.GetRecordManager();
-            NFIRecord record = recordManager.GetRecord(System.Text.Encoding.Default.GetString(recordData.record_name));
+            NFIRecord record = recordManager.GetRecord(recordData.record_name.ToStringUtf8());
 
             for (int i = 0; i < recordData.property_list.Count; i++)
             {
@@ -253,32 +248,28 @@ namespace NFSDK
         }
         private void OnRecordString(UInt16 id, MemoryStream stream)
         {
-            NFMsg.MsgBase xMsg = new NFMsg.MsgBase();
-            xMsg = Serializer.Deserialize<NFMsg.MsgBase>(stream);
+            NFMsg.MsgBase xMsg = NFMsg.MsgBase.Parser.ParseFrom(stream);
 
-            NFMsg.ObjectRecordString recordData = new NFMsg.ObjectRecordString();
-            recordData = Serializer.Deserialize<NFMsg.ObjectRecordString>(new MemoryStream(xMsg.msg_data));
+            NFMsg.ObjectRecordString recordData = NFMsg.ObjectRecordString.Parser.ParseFrom(xMsg.msg_data);
 
 			NFIObject go = mKernelModule.GetObject(mHelpModule.PBToNF(recordData.player_id));
             NFIRecordManager recordManager = go.GetRecordManager();
-            NFIRecord record = recordManager.GetRecord(System.Text.Encoding.Default.GetString(recordData.record_name));
+            NFIRecord record = recordManager.GetRecord(recordData.record_name.ToStringUtf8());
 
             for (int i = 0; i < recordData.property_list.Count; i++)
             {
-                record.SetString(recordData.property_list[i].row, recordData.property_list[i].col, System.Text.Encoding.Default.GetString(recordData.property_list[i].data));
+                record.SetString(recordData.property_list[i].row, recordData.property_list[i].col, recordData.property_list[i].data.ToStringUtf8());
             }
         }
         private void OnRecordObject(UInt16 id, MemoryStream stream)
         {
-            NFMsg.MsgBase xMsg = new NFMsg.MsgBase();
-            xMsg = Serializer.Deserialize<NFMsg.MsgBase>(stream);
+            NFMsg.MsgBase xMsg = NFMsg.MsgBase.Parser.ParseFrom(stream);
 
-            NFMsg.ObjectRecordObject recordData = new NFMsg.ObjectRecordObject();
-            recordData = Serializer.Deserialize<NFMsg.ObjectRecordObject>(new MemoryStream(xMsg.msg_data));
+            NFMsg.ObjectRecordObject recordData = NFMsg.ObjectRecordObject.Parser.ParseFrom(xMsg.msg_data);
 
 			NFIObject go = mKernelModule.GetObject(mHelpModule.PBToNF(recordData.player_id));
             NFIRecordManager recordManager = go.GetRecordManager();
-            NFIRecord record = recordManager.GetRecord(System.Text.Encoding.Default.GetString(recordData.record_name));
+            NFIRecord record = recordManager.GetRecord(recordData.record_name.ToStringUtf8());
 
 
             for (int i = 0; i < recordData.property_list.Count; i++)
@@ -289,15 +280,13 @@ namespace NFSDK
 
 		private void OnRecordVector2(UInt16 id, MemoryStream stream)
         {
-            NFMsg.MsgBase xMsg = new NFMsg.MsgBase();
-            xMsg = Serializer.Deserialize<NFMsg.MsgBase>(stream);
+            NFMsg.MsgBase xMsg = NFMsg.MsgBase.Parser.ParseFrom(stream);
 
-			NFMsg.ObjectRecordVector2 recordData = new NFMsg.ObjectRecordVector2();
-			recordData = Serializer.Deserialize<NFMsg.ObjectRecordVector2>(new MemoryStream(xMsg.msg_data));
+            NFMsg.ObjectRecordVector2 recordData = NFMsg.ObjectRecordVector2.Parser.ParseFrom(xMsg.msg_data);
 
             NFIObject go = mKernelModule.GetObject(mHelpModule.PBToNF(recordData.player_id));
             NFIRecordManager recordManager = go.GetRecordManager();
-            NFIRecord record = recordManager.GetRecord(System.Text.Encoding.Default.GetString(recordData.record_name));
+            NFIRecord record = recordManager.GetRecord(recordData.record_name.ToStringUtf8());
 
 
             for (int i = 0; i < recordData.property_list.Count; i++)
@@ -308,15 +297,13 @@ namespace NFSDK
 
 		private void OnRecordVector3(UInt16 id, MemoryStream stream)
         {
-            NFMsg.MsgBase xMsg = new NFMsg.MsgBase();
-            xMsg = Serializer.Deserialize<NFMsg.MsgBase>(stream);
+            NFMsg.MsgBase xMsg = NFMsg.MsgBase.Parser.ParseFrom(stream);
 
-			NFMsg.ObjectRecordVector3 recordData = new NFMsg.ObjectRecordVector3();
-			recordData = Serializer.Deserialize<NFMsg.ObjectRecordVector3>(new MemoryStream(xMsg.msg_data));
+            NFMsg.ObjectRecordVector3 recordData = NFMsg.ObjectRecordVector3.Parser.ParseFrom(xMsg.msg_data);
 
             NFIObject go = mKernelModule.GetObject(mHelpModule.PBToNF(recordData.player_id));
             NFIRecordManager recordManager = go.GetRecordManager();
-            NFIRecord record = recordManager.GetRecord(System.Text.Encoding.Default.GetString(recordData.record_name));
+            NFIRecord record = recordManager.GetRecord(recordData.record_name.ToStringUtf8());
 
 
             for (int i = 0; i < recordData.property_list.Count; i++)
@@ -328,15 +315,13 @@ namespace NFSDK
 
         private void OnSwapRow(UInt16 id, MemoryStream stream)
         {
-            NFMsg.MsgBase xMsg = new NFMsg.MsgBase();
-            xMsg = Serializer.Deserialize<NFMsg.MsgBase>(stream);
+            NFMsg.MsgBase xMsg = NFMsg.MsgBase.Parser.ParseFrom(stream);
 
-            NFMsg.ObjectRecordSwap recordData = new NFMsg.ObjectRecordSwap();
-            recordData = Serializer.Deserialize<NFMsg.ObjectRecordSwap>(new MemoryStream(xMsg.msg_data));
+            NFMsg.ObjectRecordSwap recordData = NFMsg.ObjectRecordSwap.Parser.ParseFrom(xMsg.msg_data);
 
 			NFIObject go = mKernelModule.GetObject(mHelpModule.PBToNF(recordData.player_id));
             NFIRecordManager recordManager = go.GetRecordManager();
-            NFIRecord record = recordManager.GetRecord(System.Text.Encoding.Default.GetString(recordData.origin_record_name));
+            NFIRecord record = recordManager.GetRecord(recordData.origin_record_name.ToStringUtf8());
 
 
             //目前认为在同一张表中交换吧
@@ -344,31 +329,27 @@ namespace NFSDK
         }
         private void OnAddRow(UInt16 id, MemoryStream stream)
         {
-            NFMsg.MsgBase xMsg = new NFMsg.MsgBase();
-            xMsg = Serializer.Deserialize<NFMsg.MsgBase>(stream);
+            NFMsg.MsgBase xMsg = NFMsg.MsgBase.Parser.ParseFrom(stream);
 
-            NFMsg.ObjectRecordAddRow recordData = new NFMsg.ObjectRecordAddRow();
-            recordData = Serializer.Deserialize<NFMsg.ObjectRecordAddRow>(new MemoryStream(xMsg.msg_data));
+            NFMsg.ObjectRecordAddRow recordData = NFMsg.ObjectRecordAddRow.Parser.ParseFrom(xMsg.msg_data);
 
 			NFIObject go = mKernelModule.GetObject(mHelpModule.PBToNF(recordData.player_id));
             NFIRecordManager recordManager = go.GetRecordManager();
 
             for (int i = 0; i < recordData.row_data.Count; i++)
             {
-				ADD_ROW(mHelpModule.PBToNF(recordData.player_id), System.Text.Encoding.Default.GetString(recordData.record_name), recordData.row_data[i]);
+				ADD_ROW(mHelpModule.PBToNF(recordData.player_id), recordData.record_name.ToStringUtf8(), recordData.row_data[i]);
             }
         }
         private void OnRemoveRow(UInt16 id, MemoryStream stream)
         {
-            NFMsg.MsgBase xMsg = new NFMsg.MsgBase();
-            xMsg = Serializer.Deserialize<NFMsg.MsgBase>(stream);
+            NFMsg.MsgBase xMsg = NFMsg.MsgBase.Parser.ParseFrom(stream);
 
-            NFMsg.ObjectRecordRemove recordData = new NFMsg.ObjectRecordRemove();
-            recordData = Serializer.Deserialize<NFMsg.ObjectRecordRemove>(new MemoryStream(xMsg.msg_data));
+            NFMsg.ObjectRecordRemove recordData = NFMsg.ObjectRecordRemove.Parser.ParseFrom(xMsg.msg_data);
 
 			NFIObject go = mKernelModule.GetObject(mHelpModule.PBToNF(recordData.player_id));
             NFIRecordManager recordManager = go.GetRecordManager();
-            NFIRecord record = recordManager.GetRecord(System.Text.Encoding.Default.GetString(recordData.record_name));
+            NFIRecord record = recordManager.GetRecord(recordData.record_name.ToStringUtf8());
 
             for (int i = 0; i < recordData.remove_row.Count; i++)
             {
@@ -377,11 +358,9 @@ namespace NFSDK
         }
         private void OnObjectRecordEntry(UInt16 id, MemoryStream stream)
         {
-            NFMsg.MsgBase xMsg = new NFMsg.MsgBase();
-            xMsg = Serializer.Deserialize<NFMsg.MsgBase>(stream);
+            NFMsg.MsgBase xMsg = NFMsg.MsgBase.Parser.ParseFrom(stream);
 
-            NFMsg.MultiObjectRecordList xMultiObjectRecordData = new NFMsg.MultiObjectRecordList();
-            xMultiObjectRecordData = Serializer.Deserialize<NFMsg.MultiObjectRecordList>(new MemoryStream(xMsg.msg_data));
+            NFMsg.MultiObjectRecordList xMultiObjectRecordData = NFMsg.MultiObjectRecordList.Parser.ParseFrom(xMsg.msg_data);
 
             for (int i = 0; i < xMultiObjectRecordData.multi_player_record.Count; i++)
             {
@@ -393,7 +372,7 @@ namespace NFSDK
                     {
                         NFMsg.RecordAddRowStruct xAddRowStruct = xObjectRecordBase.row_struct[k];
 
-						ADD_ROW(mHelpModule.PBToNF(xObjectRecordList.player_id), System.Text.Encoding.Default.GetString(xObjectRecordBase.record_name), xAddRowStruct);
+						ADD_ROW(mHelpModule.PBToNF(xObjectRecordList.player_id), xObjectRecordBase.record_name.ToStringUtf8(), xAddRowStruct);
                     }
                 }
             }

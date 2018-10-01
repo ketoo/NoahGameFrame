@@ -31,6 +31,8 @@
 //#define LUAINTF_LINK_LUA_COMPILED_IN_CXX 0
 
 #include "Dependencies/LuaIntf/LuaIntf.h"
+#include "Dependencies/LuaIntf/LuaRef.h"
+#include <google/protobuf/stubs/common.h>
 #include "NFComm/NFPluginModule/NFIKernelModule.h"
 #include "NFComm/NFPluginModule/NFIClassModule.h"
 #include "NFComm/NFPluginModule/NFILuaScriptModule.h"
@@ -40,6 +42,7 @@
 #include "NFComm/NFPluginModule/NFINetClientModule.h"
 #include "NFComm/NFPluginModule/NFINetModule.h"
 #include "NFComm/NFPluginModule/NFILogModule.h"
+#include "NFComm/NFPluginModule/NFILuaPBModule.h"
 
 class NFCLuaScriptModule
     : public NFILuaScriptModule
@@ -61,6 +64,7 @@ public:
 
 
 protected:
+	void RegisterModule(const std::string& tableName, const LuaIntf::LuaRef& luatbl);
 
 	//FOR KERNEL MODULE
 	NFGUID CreateObject(const NFGUID& self, const int nSceneID, const int nGroupID, const std::string& strClassName, const std::string& strIndex, const NFDataList& arg);
@@ -88,11 +92,11 @@ protected:
 	NFVector2 GetPropertyVector2(const NFGUID& self, const std::string& strPropertyName);
 	NFVector3 GetPropertyVector3(const NFGUID& self, const std::string& strPropertyName);
 
-	bool AddPropertyCallBack(const NFGUID& self, std::string& strPropertyName, std::string& luaFunc);
-    bool AddRecordCallBack(const NFGUID& self, std::string& strRecordName, std::string& luaFunc);
-    bool AddEventCallBack(const NFGUID& self, const NFEventDefine nEventID, std::string& luaFunc);
-	bool AddSchedule(const NFGUID& self, std::string& strHeartBeatName, std::string& luaFunc, const float fTime, const int nCount);
-	bool AddModuleSchedule(std::string& strHeartBeatName, std::string& luaFunc, const float fTime, const int nCount);
+	bool AddPropertyCallBack(const NFGUID& self, std::string& strPropertyName, const LuaIntf::LuaRef& luatbl, const LuaIntf::LuaRef& luaFunc);
+    bool AddRecordCallBack(const NFGUID& self, std::string& strRecordName, const LuaIntf::LuaRef& luatbl, const LuaIntf::LuaRef& luaFunc);
+    bool AddEventCallBack(const NFGUID& self, const NFEventDefine nEventID, const LuaIntf::LuaRef& luatbl, const LuaIntf::LuaRef& luaFunc);
+	bool AddSchedule(const NFGUID& self, std::string& strHeartBeatName, const LuaIntf::LuaRef& luatbl, const LuaIntf::LuaRef& luaFunc, const float fTime, const int nCount);
+	bool AddModuleSchedule(std::string& strHeartBeatName, const LuaIntf::LuaRef& luatbl, const LuaIntf::LuaRef& luaFunc, const float fTime, const int nCount);
 
 	int AddRow(const NFGUID& self, std::string& strRecordName, const NFDataList& var);
 	bool RemRow(const NFGUID& self, std::string& strRecordName, const int nRow);
@@ -127,9 +131,16 @@ protected:
 	NFVector3 GetElePropertyVector3(const std::string& strConfigName, const std::string& strPropertyName);
 
 	//FOR NET MODULE
-    //for client module
+	void RemoveClientMsgCallBack(const int nMsgID);
+	void AddClientMsgCallBack(const int nMsgID, const LuaIntf::LuaRef& luatbl, const LuaIntf::LuaRef& luaFunc);
+	void RemoveServerMsgCallBack(const int nServerType, const int nMsgID);
+	void AddServerMsgCallBack(const int nServerType, const int nMsgID, const LuaIntf::LuaRef& luatbl, const LuaIntf::LuaRef& luaFunc);
+	void RemoveHttpCallBack(const std::string& path);
+	void AddHttpCallBack(const std::string& path, const int httpType, const LuaIntf::LuaRef& luatbl, const LuaIntf::LuaRef& luaFunc);
 
-    void AddReceiveCallBack(const int nMsgID, const std::string& luaFunc);
+    void ImportProtoFile(const std::string& strFile);
+    const std::string Encode(const std::string& strMsgTypeName, const LuaIntf::LuaRef& luaTable);
+	LuaIntf::LuaRef Decode(const std::string& strMsgTypeName, const std::string& strData);
 
 	void SendByServerFD(const NFSOCK nFD, const uint16_t nMsgID, const std::string& strData);
 	void SendByServerID(const int nServerID, const uint16_t nMsgID, const std::string& strData);
@@ -151,10 +162,7 @@ protected:
 	const std::string& GetVersionCode();
 
 	//FOR CLASS MDOULE
-
-
-
-    bool AddClassCallBack(std::string& className, std::string& funcName);
+    bool AddClassCallBack(std::string& className, const LuaIntf::LuaRef& luatbl, const LuaIntf::LuaRef& luaFunc);
 
 protected:
     template<typename T>
@@ -183,6 +191,7 @@ protected:
 
 protected:
     bool Register();
+	std::string FindFuncName(const LuaIntf::LuaRef& luatbl, const LuaIntf::LuaRef& luaFunc);
 
 protected:
     NFIElementModule* m_pElementModule;
@@ -193,18 +202,21 @@ protected:
     NFINetClientModule* m_pNetClientModule;
     NFINetModule* m_pNetModule;
     NFILogModule* m_pLogModule;
-
+	NFILuaPBModule* m_pLuaPBModule;
+	
 protected:
     int64_t mnTime;
     std::string strVersionCode;
     LuaIntf::LuaContext mLuaContext;
 
-    NFMap<std::string, NFMap<NFGUID, NFList<std::string>>> m_luaPropertyCallBackFuncMap;
-    NFMap<std::string, NFMap<NFGUID, NFList<std::string>>> m_luaRecordCallBackFuncMap;
-    NFMap<int, NFMap<NFGUID, NFList<std::string>>> m_luaEventCallBackFuncMap;
-    NFMap<std::string, NFMap<NFGUID, NFList<std::string>>> m_luaHeartBeatCallBackFuncMap;
+	std::map<std::string, LuaIntf::LuaRef> mxTableName;
 
-    NFMap<std::string, std::string> m_ClassEventFuncMap;
+    NFMap<std::string, NFMap<NFGUID, NFList<std::string>>> mxLuaPropertyCallBackFuncMap;
+    NFMap<std::string, NFMap<NFGUID, NFList<std::string>>> mxLuaRecordCallBackFuncMap;
+    NFMap<int, NFMap<NFGUID, NFList<std::string>>> mxLuaEventCallBackFuncMap;
+    NFMap<std::string, NFMap<NFGUID, NFList<std::string>>> mxLuaHeartBeatCallBackFuncMap;
+
+    NFMap<std::string, NFList<std::string>> mxClassEventFuncMap;
 };
 
 #endif

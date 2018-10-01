@@ -4,9 +4,9 @@ using System.Text;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
-using ProtoBuf;
 using NFMsg;
 using UnityEngine;
+using Google.Protobuf;
 
 namespace NFSDK
 {
@@ -96,10 +96,10 @@ namespace NFSDK
         {
             NFMsg.ReqRoleList xData = new NFMsg.ReqRoleList();
 			xData.game_id = mLoginModule.mServerID;
-			xData.account = UnicodeEncoding.Default.GetBytes(mLoginModule.mAccount);
+			xData.account = ByteString.CopyFromUtf8(mLoginModule.mAccount);
 
             MemoryStream stream = new MemoryStream();
-            Serializer.Serialize<NFMsg.ReqRoleList>(stream, xData);
+            xData.WriteTo(stream);
 
             mNetModule.SendToServerByPB(NFMsg.EGameMsgID.EGMI_REQ_ROLE_LIST, stream);
             Debug.Log("RequireRoleList");
@@ -114,13 +114,13 @@ namespace NFSDK
             NFMsg.ReqCreateRole xData = new NFMsg.ReqCreateRole();
             xData.career = byCareer;
             xData.sex = bySex;
-            xData.noob_name = UnicodeEncoding.Default.GetBytes(strRoleName);
-            xData.account = UnicodeEncoding.Default.GetBytes(mLoginModule.mAccount);
+            xData.noob_name = ByteString.CopyFromUtf8(strRoleName);
+            xData.account = ByteString.CopyFromUtf8(mLoginModule.mAccount);
             xData.race = 0;
 			xData.game_id = mLoginModule.mServerID;
 
             MemoryStream stream = new MemoryStream();
-            Serializer.Serialize<NFMsg.ReqCreateRole>(stream, xData);
+            xData.WriteTo(stream);
 
             mNetModule.SendToServerByPB(NFMsg.EGameMsgID.EGMI_REQ_CREATE_ROLE, stream);
         }
@@ -131,13 +131,13 @@ namespace NFSDK
             NFMsg.RoleLiteInfo info = (NFMsg.RoleLiteInfo)mRoleList[nRoleIndex];
             NFMsg.ReqEnterGameServer xData = new NFMsg.ReqEnterGameServer();
             xData.name = info.noob_name;
-			xData.account = UnicodeEncoding.Default.GetBytes(mLoginModule.mAccount);
+			xData.account = ByteString.CopyFromUtf8(mLoginModule.mAccount);
             xData.game_id = mLoginModule.mServerID;
             xData.id = info.id;
             MemoryStream stream = new MemoryStream();
-            Serializer.Serialize<NFMsg.ReqEnterGameServer>(stream, xData);
+            xData.WriteTo(stream);
 
-			mRoleID = mHelpModule.PBToNF(info.id);
+            mRoleID = mHelpModule.PBToNF(info.id);
             mNetModule.mOwnerID = mRoleID;
 
             mNetModule.SendToServerByPB(NFMsg.EGameMsgID.EGMI_REQ_ENTER_GAME, stream);
@@ -158,7 +158,7 @@ namespace NFSDK
             xData.target_pos.Add(xTargetPos);
 
             MemoryStream stream = new MemoryStream();
-            Serializer.Serialize<NFMsg.ReqAckPlayerMove>(stream, xData);
+            xData.WriteTo(stream);
 
             mNetModule.SendToServerByPB(NFMsg.EGameMsgID.EGMI_REQ_MOVE, stream);
         }
@@ -177,18 +177,16 @@ namespace NFSDK
             xData.target_pos.Add(xTargetPos);
 
             MemoryStream stream = new MemoryStream();
-            Serializer.Serialize<NFMsg.ReqAckPlayerMove>(stream, xData);
+            xData.WriteTo(stream);
 
             mNetModule.SendToServerByPB(NFMsg.EGameMsgID.EGMI_REQ_MOVE, stream);
         }
 
 		private void OnRoleList(UInt16 id, MemoryStream stream)
         {
-            NFMsg.MsgBase xMsg = new NFMsg.MsgBase();
-            xMsg = Serializer.Deserialize<NFMsg.MsgBase>(stream);
+            NFMsg.MsgBase xMsg = NFMsg.MsgBase.Parser.ParseFrom(stream);
 
-            NFMsg.AckRoleLiteInfoList xData = new NFMsg.AckRoleLiteInfoList();
-            xData = Serializer.Deserialize<NFMsg.AckRoleLiteInfoList>(new MemoryStream(xMsg.msg_data));
+            NFMsg.AckRoleLiteInfoList xData = NFMsg.AckRoleLiteInfoList.Parser.ParseFrom(xMsg.msg_data);
 
             Debug.Log("QueryRoleList  SUCCESS");
             mRoleList.Clear();
@@ -202,11 +200,9 @@ namespace NFSDK
         }
 	    private void OnObjectEntry(UInt16 id, MemoryStream stream)
         {
-            NFMsg.MsgBase xMsg = new NFMsg.MsgBase();
-            xMsg = Serializer.Deserialize<NFMsg.MsgBase>(stream);
+            NFMsg.MsgBase xMsg = NFMsg.MsgBase.Parser.ParseFrom(stream);
 
-            NFMsg.AckPlayerEntryList xData = new NFMsg.AckPlayerEntryList();
-            xData = Serializer.Deserialize<NFMsg.AckPlayerEntryList>(new MemoryStream(xMsg.msg_data));
+            NFMsg.AckPlayerEntryList xData = NFMsg.AckPlayerEntryList.Parser.ParseFrom(xMsg.msg_data);
 
             for (int i = 0; i < xData.object_list.Count; ++i)
             {
@@ -220,22 +216,20 @@ namespace NFSDK
                 var.AddString("Z");
                 var.AddFloat(xInfo.y);
 
-                Debug.LogWarning("Object Enter: " + mHelpModule.PBToNF(xInfo.object_guid).ToString() + "  ConfigID:" + System.Text.Encoding.Default.GetString(xInfo.class_id));
-				NFIObject xGO = mKernelModule.CreateObject(mHelpModule.PBToNF(xInfo.object_guid), xInfo.scene_id, 0, System.Text.Encoding.Default.GetString(xInfo.class_id), System.Text.Encoding.Default.GetString(xInfo.config_id), var);
+                Debug.LogWarning("Object Enter: " + mHelpModule.PBToNF(xInfo.object_guid).ToString() + "  ConfigID:" + xInfo.class_id.ToStringUtf8());
+				NFIObject xGO = mKernelModule.CreateObject(mHelpModule.PBToNF(xInfo.object_guid), xInfo.scene_id, 0, xInfo.class_id.ToStringUtf8(), xInfo.config_id.ToStringUtf8(), var);
                 if (null == xGO)
                 {
-                    Debug.LogError("ID: " + xInfo.object_guid + "  ConfigID:" + System.Text.Encoding.Default.GetString(xInfo.config_id));
+                    Debug.LogError("ID: " + xInfo.object_guid + "  ConfigID:" + xInfo.config_id.ToStringUtf8());
                     continue;
                 }
             }
         }
 	    private void OnObjectLeave(UInt16 id, MemoryStream stream)
         {
-            NFMsg.MsgBase xMsg = new NFMsg.MsgBase();
-            xMsg = Serializer.Deserialize<NFMsg.MsgBase>(stream);
+            NFMsg.MsgBase xMsg = NFMsg.MsgBase.Parser.ParseFrom(stream);
 
-            NFMsg.AckPlayerLeaveList xData = new NFMsg.AckPlayerLeaveList();
-            xData = Serializer.Deserialize<NFMsg.AckPlayerLeaveList>(new MemoryStream(xMsg.msg_data));
+            NFMsg.AckPlayerLeaveList xData = NFMsg.AckPlayerLeaveList.Parser.ParseFrom(xMsg.msg_data);
 
             for (int i = 0; i < xData.object_list.Count; ++i)
             {
@@ -245,11 +239,9 @@ namespace NFSDK
 
 		private void OnSwapScene(UInt16 id, MemoryStream stream)
 		{
-			NFMsg.MsgBase xMsg = new NFMsg.MsgBase();
-            xMsg = Serializer.Deserialize<NFMsg.MsgBase>(stream);
+			NFMsg.MsgBase xMsg = NFMsg.MsgBase.Parser.ParseFrom(stream);
 
-			NFMsg.ReqAckSwapScene xData = new NFMsg.ReqAckSwapScene();
-			xData = Serializer.Deserialize<NFMsg.ReqAckSwapScene>(new MemoryStream(xMsg.msg_data));
+            NFMsg.ReqAckSwapScene xData = NFMsg.ReqAckSwapScene.Parser.ParseFrom(xMsg.msg_data);
 
 			mUIModule.ShowUI<UIMain>();
 
@@ -286,11 +278,9 @@ namespace NFSDK
 
 	    private void OnObjectMove(UInt16 id, MemoryStream stream)
         {
-            NFMsg.MsgBase xMsg = new NFMsg.MsgBase();
-            xMsg = Serializer.Deserialize<NFMsg.MsgBase>(stream);
+            NFMsg.MsgBase xMsg = NFMsg.MsgBase.Parser.ParseFrom(stream);
 
-            NFMsg.ReqAckPlayerMove xData = new NFMsg.ReqAckPlayerMove();
-            xData = Serializer.Deserialize<NFMsg.ReqAckPlayerMove>(new MemoryStream(xMsg.msg_data));
+            NFMsg.ReqAckPlayerMove xData = NFMsg.ReqAckPlayerMove.Parser.ParseFrom(xMsg.msg_data);
             if (xData.target_pos.Count <= 0)
             {
                 return;
@@ -317,11 +307,9 @@ namespace NFSDK
 
 	    private void OnObjectJump(UInt16 id, MemoryStream stream)
         {
-            NFMsg.MsgBase xMsg = new NFMsg.MsgBase();
-            xMsg = Serializer.Deserialize<NFMsg.MsgBase>(stream);
+            NFMsg.MsgBase xMsg = NFMsg.MsgBase.Parser.ParseFrom(stream);
 
-            NFMsg.ReqAckPlayerMove xData = new NFMsg.ReqAckPlayerMove();
-            xData = Serializer.Deserialize<NFMsg.ReqAckPlayerMove>(new MemoryStream(xMsg.msg_data));
+            NFMsg.ReqAckPlayerMove xData = NFMsg.ReqAckPlayerMove.Parser.ParseFrom(xMsg.msg_data);
             if (xData.target_pos.Count <= 0)
             {
                 return;

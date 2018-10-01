@@ -1,6 +1,6 @@
 // Protocol Buffers - Google's data interchange format
 // Copyright 2008 Google Inc.  All rights reserved.
-// http://code.google.com/p/protobuf/
+// https://developers.google.com/protocol-buffers/
 //
 // Redistribution and use in source and binary forms, with or without
 // modification, are permitted provided that the following conditions are
@@ -90,7 +90,9 @@
 
 #include <google/protobuf/io/tokenizer.h>
 #include <google/protobuf/stubs/common.h>
+#include <google/protobuf/stubs/logging.h>
 #include <google/protobuf/stubs/stringprintf.h>
+#include <google/protobuf/io/strtod.h>
 #include <google/protobuf/io/zero_copy_stream.h>
 #include <google/protobuf/stubs/strutil.h>
 #include <google/protobuf/stubs/stl_util.h>
@@ -195,7 +197,9 @@ Tokenizer::Tokenizer(ZeroCopyInputStream* input,
     record_target_(NULL),
     record_start_(-1),
     allow_f_after_float_(false),
-    comment_style_(CPP_COMMENT_STYLE) {
+    comment_style_(CPP_COMMENT_STYLE),
+    require_space_after_number_(true),
+    allow_multiline_strings_(false) {
 
   current_.line = 0;
   current_.column = 0;
@@ -350,9 +354,16 @@ void Tokenizer::ConsumeString(char delimiter) {
   while (true) {
     switch (current_char_) {
       case '\0':
-      case '\n': {
-        AddError("String literals cannot cross line boundaries.");
+        AddError("Unexpected end of string.");
         return;
+
+      case '\n': {
+        if (!allow_multiline_strings_) {
+          AddError("String literals cannot cross line boundaries.");
+          return;
+        }
+        NextChar();
+        break;
       }
 
       case '\\': {
@@ -364,7 +375,7 @@ void Tokenizer::ConsumeString(char delimiter) {
           // Possibly followed by two more octal digits, but these will
           // just be consumed by the main loop anyway so we don't need
           // to do so explicitly here.
-        } else if (TryConsume('x') || TryConsume('X')) {
+        } else if (TryConsume('x')) {
           if (!TryConsumeOne<HexDigit>()) {
             AddError("Expected hex digits for escape sequence.");
           }
@@ -449,7 +460,7 @@ Tokenizer::TokenType Tokenizer::ConsumeNumber(bool started_with_zero,
     }
   }
 
-  if (LookingAt<Letter>()) {
+  if (LookingAt<Letter>() && require_space_after_number_) {
     AddError("Need space between number and identifier.");
   } else if (current_char_ == '.') {
     if (is_float) {
@@ -618,6 +629,12 @@ bool Tokenizer::Next() {
         ConsumeString('\'');
         current_.type = TYPE_STRING;
       } else {
+        // Check if the high order bit is set.
+        if (current_char_ & 0x80) {
+          error_collector_->AddError(line_, column_,
+              StringPrintf("Interpreting non ascii codepoint %d.",
+                           static_cast<unsigned char>(current_char_)));
+        }
         NextChar();
         current_.type = TYPE_SYMBOL;
       }
@@ -648,7 +665,7 @@ namespace {
 class CommentCollector {
  public:
   CommentCollector(string* prev_trailing_comments,
-                   vector<string>* detached_comments,
+                   std::vector<string>* detached_comments,
                    string* next_leading_comments)
       : prev_trailing_comments_(prev_trailing_comments),
         detached_comments_(detached_comments),
@@ -720,7 +737,7 @@ class CommentCollector {
 
  private:
   string* prev_trailing_comments_;
-  vector<string>* detached_comments_;
+  std::vector<string>* detached_comments_;
   string* next_leading_comments_;
 
   string comment_buffer_;
@@ -740,12 +757,21 @@ class CommentCollector {
 } // namespace
 
 bool Tokenizer::NextWithComments(string* prev_trailing_comments,
-                                 vector<string>* detached_comments,
+                                 std::vector<string>* detached_comments,
                                  string* next_leading_comments) {
   CommentCollector collector(prev_trailing_comments, detached_comments,
                              next_leading_comments);
 
   if (current_.type == TYPE_START) {
+    // Ignore unicode byte order mark(BOM) if it appears at the file
+    // beginning. Only UTF-8 BOM (0xEF 0xBB 0xBF) is accepted.
+    if (TryConsume((char)0xEF)) {
+      if (!TryConsume((char)0xBB) || !TryConsume((char)0xBF)) {
+        AddError("Proto file starts with 0xEF but not UTF-8 BOM. "
+                 "Only UTF-8 is accepted for proto file.");
+        return false;
+      }
+    }
     collector.DetachFromPrev();
   } else {
     // A comment appearing on the same line must be attached to the previous
@@ -855,9 +881,11 @@ bool Tokenizer::ParseInteger(const string& text, uint64 max_value,
   uint64 result = 0;
   for (; *ptr != '\0'; ptr++) {
     int digit = DigitValue(*ptr);
-    GOOGLE_LOG_IF(DFATAL, digit < 0 || digit >= base)
-      << " Tokenizer::ParseInteger() passed text that could not have been"
-         " tokenized as an integer: " << CEscape(text);
+    if (digit < 0 || digit >= base) {
+      // The token provided by Tokenizer is invalid. i.e., 099 is an invalid
+      // token, but Tokenizer still think it's integer.
+      return false;
+    }
     if (digit > max_value || result > (max_value - digit) / base) {
       // Overflow.
       return false;
@@ -1084,6 +1112,26 @@ void Tokenizer::ParseStringAppend(const string& text, string* output) {
       output->push_back(*ptr);
     }
   }
+}
+
+template<typename CharacterClass>
+static bool AllInClass(const string& s) {
+  for (int i = 0; i < s.size(); ++i) {
+    if (!CharacterClass::InClass(s[i]))
+      return false;
+  }
+  return true;
+}
+
+bool Tokenizer::IsIdentifier(const string& text) {
+  // Mirrors IDENTIFIER definition in Tokenizer::Next() above.
+  if (text.size() == 0)
+    return false;
+  if (!Letter::InClass(text.at(0)))
+    return false;
+  if (!AllInClass<Alphanumeric>(text.substr(1)))
+    return false;
+  return true;
 }
 
 }  // namespace io

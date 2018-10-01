@@ -54,7 +54,7 @@ public class UISelectServer : UIDialog
             GameObject item = Instantiate(mItemModle);
             item.transform.SetParent(mContentList);
             item.transform.localScale = UnityEngine.Vector3.one;
-            item.GetComponentInChildren<Text>().text = System.Text.Encoding.Default.GetString(info.name);
+            item.GetComponentInChildren<Text>().text = info.name.ToStringUtf8();
             item.GetComponent<Button>().onClick.AddListener(() =>
             {
                 OnWorldServerClick(info);
@@ -82,7 +82,7 @@ public class UISelectServer : UIDialog
             GameObject item = Instantiate(mItemModle);
             item.transform.SetParent(mContentList);
             item.transform.localScale = UnityEngine.Vector3.one;
-            item.GetComponentInChildren<Text>().text = System.Text.Encoding.Default.GetString(info.name);
+            item.GetComponentInChildren<Text>().text = info.name.ToStringUtf8();
             item.GetComponent<Button>().onClick.AddListener(()=>
             {
                 OnGameServerClick(info);

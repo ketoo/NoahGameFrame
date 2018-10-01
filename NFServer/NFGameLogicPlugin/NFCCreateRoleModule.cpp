@@ -70,7 +70,7 @@ bool NFCCreateRoleModule::ReadyExecute()
 
 void NFCCreateRoleModule::OnReqiureRoleListProcess(const NFSOCK nSockIndex, const int nMsgID, const char * msg, const uint32_t nLen)
 {
-	m_pNetClientModule->SendBySuit(NF_SERVER_TYPES::NF_ST_DB, nSockIndex, nMsgID, msg, nLen);
+	m_pNetClientModule->SendBySuitWithOutHead(NF_SERVER_TYPES::NF_ST_DB, nSockIndex, nMsgID, std::string(msg, nLen));
 }
 
 void NFCCreateRoleModule::OnReposeRoleListProcess(const NFSOCK nSockIndex, const int nMsgID, const char * msg, const uint32_t nLen)
@@ -91,12 +91,12 @@ void NFCCreateRoleModule::OnReposeRoleListProcess(const NFSOCK nSockIndex, const
 
 void NFCCreateRoleModule::OnCreateRoleGameProcess(const NFSOCK nSockIndex, const int nMsgID, const char * msg, const uint32_t nLen)
 {
-	m_pNetClientModule->SendBySuit(NF_SERVER_TYPES::NF_ST_DB, nSockIndex, nMsgID, msg, nLen);
+	m_pNetClientModule->SendBySuitWithOutHead(NF_SERVER_TYPES::NF_ST_DB, nSockIndex, nMsgID, std::string(msg, nLen));
 }
 
 void NFCCreateRoleModule::OnDeleteRoleGameProcess(const NFSOCK nSockIndex, const int nMsgID, const char * msg, const uint32_t nLen)
 {
-	m_pNetClientModule->SendBySuit(NF_SERVER_TYPES::NF_ST_DB, nSockIndex, nMsgID, msg, nLen);
+	m_pNetClientModule->SendBySuitWithOutHead(NF_SERVER_TYPES::NF_ST_DB, nSockIndex, nMsgID, std::string(msg, nLen));
 }
 
 void NFCCreateRoleModule::OnClienEnterGameProcess(const NFSOCK nSockIndex, const int nMsgID, const char * msg, const uint32_t nLen)
@@ -151,7 +151,7 @@ void NFCCreateRoleModule::OnClienEnterGameProcess(const NFSOCK nSockIndex, const
 		return;
 	}
 
-	m_pNetClientModule->SendBySuit(NF_SERVER_TYPES::NF_ST_DB, nSockIndex, NFMsg::EGMI_REQ_LOAD_ROLE_DATA, msg, nLen);
+	m_pNetClientModule->SendBySuitWithOutHead(NF_SERVER_TYPES::NF_ST_DB, nSockIndex, NFMsg::EGMI_REQ_LOAD_ROLE_DATA, std::string(msg, nLen));
 
 }
 
@@ -197,13 +197,13 @@ void NFCCreateRoleModule::OnDBLoadRoleDataProcess(const NFSOCK nSockIndex, const
 
 	var.AddString(NFrame::Player::GameID());
 	var.AddInt(pPluginManager->GetAppID());
-
+	/*
 	var.AddString(NFrame::Player::HomeSceneID());
 	var.AddInt(1);
 
 	var.AddString(NFrame::Player::SceneID());
 	var.AddInt(1);
-
+	*/
 	NF_SHARE_PTR<NFIObject> pObject = m_pKernelModule->CreateObject(nRoleID, 1, 0, NFrame::Player::ThisName(), "", var);
 	if (nullptr == pObject)
 	{
@@ -214,7 +214,9 @@ void NFCCreateRoleModule::OnDBLoadRoleDataProcess(const NFSOCK nSockIndex, const
 	}
 
 	//get data first then create player
-	m_pSceneProcessModule->RequestEnterScene(pObject->Self(), 1, -1, 0, NFDataList());
+	int nHomeSceneiD = pObject->GetPropertyInt(NFrame::Player::HomeSceneID());
+	//m_pSceneProcessModule->RequestEnterScene(pObject->Self(), nHomeSceneiD, -1, 0, NFDataList());
+	m_pSceneProcessModule->RequestEnterScene(pObject->Self(), 1, 1, 0, NFDataList());
 }
 
 int NFCCreateRoleModule::OnObjectPlayerEvent(const NFGUID & self, const std::string & strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFDataList & var)
