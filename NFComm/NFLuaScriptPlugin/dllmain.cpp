@@ -31,7 +31,7 @@
 #if NF_PLATFORM == NF_PLATFORM_WIN
 #pragma comment( lib, "ws2_32" )
 #pragma comment( lib, "lua_d.lib" )
-
+#pragma comment( lib, "libprotobuf_d.lib" )
 #elif NF_PLATFORM == NF_PLATFORM_LINUX || NF_PLATFORM == NF_PLATFORM_ANDROID
 #pragma comment( lib, "NFCore_d.a" )
 #pragma comment( lib, "liblua.a" )
@@ -45,6 +45,7 @@
 #if NF_PLATFORM == NF_PLATFORM_WIN
 #pragma comment( lib, "NFCore.lib" )
 #pragma comment( lib, "lua.lib" )
+#pragma comment( lib, "libprotobuf.lib" )
 #elif NF_PLATFORM == NF_PLATFORM_LINUX || NF_PLATFORM == NF_PLATFORM_ANDROID
 #pragma comment( lib, "NFCore.a" )
 #pragma comment( lib, "liblua.a" )

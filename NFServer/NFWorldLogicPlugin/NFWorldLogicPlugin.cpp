@@ -22,7 +22,9 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 */
+
 #include "NFCWorldLogicModule.h"
+#include "NFCPVPModule.h"
 #include "NFWorldLogicPlugin.h"
 
 NF_EXPORT void DllStartPlugin(NFIPluginManager* pm)
@@ -49,10 +51,12 @@ const std::string NFWorldLogicPlugin::GetPluginName()
 
 void NFWorldLogicPlugin::Install()
 {
-    REGISTER_MODULE(pPluginManager, NFIWorldLogicModule, NFCWorldLogicModule)
+	REGISTER_MODULE(pPluginManager, NFIWorldLogicModule, NFCWorldLogicModule)
+	REGISTER_MODULE(pPluginManager, NFIPVPModule, NFCPVPModule)
 }
 
 void NFWorldLogicPlugin::Uninstall()
 {
-    UNREGISTER_MODULE(pPluginManager, NFIWorldLogicModule, NFCWorldLogicModule)
+	UNREGISTER_MODULE(pPluginManager, NFIPVPModule, NFCPVPModule)
+	UNREGISTER_MODULE(pPluginManager, NFIWorldLogicModule, NFCWorldLogicModule)
 }

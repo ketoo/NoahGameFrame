@@ -44,6 +44,8 @@ bool NFCDBNet_ServerModule::Init()
 
 bool NFCDBNet_ServerModule::AfterInit()
 {
+	InitAllHomeScene();
+
     m_pNetModule->AddEventCallBack(this, &NFCDBNet_ServerModule::OnSocketEvent);
 	m_pNetModule->ExpandBufferSize();
 
@@ -171,6 +173,42 @@ void NFCDBNet_ServerModule::OnRequireRoleListProcess(const NFSOCK nSockIndex, co
 	m_pNetModule->SendMsgPB(NFMsg::EGMI_ACK_ROLE_LIST, xAckRoleLiteInfoList, nSockIndex, nClientID);
 }
 
+void NFCDBNet_ServerModule::InitAllHomeScene()
+{
+	//Tile
+	//mxTileSceneIDList
+	NF_SHARE_PTR<NFIClass> xLogicClass = m_pClassModule->GetElement(NFrame::Scene::ThisName());
+	if (xLogicClass)
+	{
+		const std::vector<std::string>& strIdList = xLogicClass->GetIDList();
+		for (int i = 0; i < strIdList.size(); ++i)
+		{
+			const std::string& strId = strIdList[i];
+
+			const int nSceneType = m_pElementModule->GetPropertyInt32(strId, NFrame::Scene::Tile());
+			if (nSceneType == 1 && strId != "1")
+			{
+				int nSceneID = lexical_cast<int>(strId);
+				std::vector<int>::iterator it = std::find(mxTileSceneIDList.begin(), mxTileSceneIDList.end(), nSceneID);
+				if (it == mxTileSceneIDList.end())
+				{
+					mxTileSceneIDList.push_back(nSceneID);
+				}
+			}
+		}
+	}
+}
+
+int NFCDBNet_ServerModule::RandomHomeScene()
+{
+	if (mxTileSceneIDList.size() > 1)
+	{
+		return mxTileSceneIDList.at(m_pKernelModule->Random(0, (int)mxTileSceneIDList.size()));
+	}
+
+	return mxTileSceneIDList[0];
+}
+
 void NFCDBNet_ServerModule::OnCreateRoleGameProcess(const NFSOCK nSockIndex, const int nMsgID, const char * msg, const uint32_t nLen)
 {
 	NFGUID nClientID;
@@ -182,10 +220,13 @@ void NFCDBNet_ServerModule::OnCreateRoleGameProcess(const NFSOCK nSockIndex, con
 
 	const std::string& strAccount = xMsg.account();
 	const std::string& strName = xMsg.noob_name();
-
+	const int nHomeSceneID = RandomHomeScene();
 	NFGUID xID = m_pKernelModule->CreateGUID();
-	if (m_pPlayerRedisModule->CreateRole(strAccount, strName, xID))
+
+	if (m_pPlayerRedisModule->CreateRole(strAccount, strName, xID, nHomeSceneID))
 	{
+		m_pPlayerRedisModule->SavePlayerTile(nHomeSceneID, xID, "");
+
 		NFMsg::AckRoleLiteInfoList xAckRoleLiteInfoList;
 		xAckRoleLiteInfoList.set_account(strAccount);
 
