@@ -237,6 +237,22 @@ bool NFCPVPModule::ProcessOpponentData(const NFGUID& opponent, NFMsg::AckSearchO
 			xAckData.mutable_hero_pos3()->CopyFrom(NFINetModule::NFToPB(vec3));
 
 			xAckData.mutable_opponent()->CopyFrom(NFINetModule::NFToPB(opponent));
+
+			std::ostringstream stream;
+			//stream << " searcher: " << strHero1CnfID;
+			stream << " name: " << strName;
+			stream << " cup: " << nCup;
+			stream << " level: " << nLevel;
+			stream << " diamond: " << nDiamond;
+			stream << " gold: " << nGold;
+			stream << " hero1: " << strHero1CnfID;
+			stream << " pos: " << vec1.ToString();
+			stream << " hero2: " << strHero2CnfID;
+			stream << " pos: " << vec2.ToString();
+			stream << " hero3: " << strHero3CnfID;
+			stream << " pos: " << vec3.ToString();
+
+			m_pLogModule->LogInfo(stream);
 			return true;
 		}
 	}
