@@ -56,7 +56,6 @@
     <Reference Include="System" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="NFFleetingDefine.cs" />
     <Compile Include="NFMsgExtra.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="NFDefine.cs" />
