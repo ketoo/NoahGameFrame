@@ -63,7 +63,7 @@ bool NFCSyncModule::AfterInit()
 
 int NFCSyncModule::SyncHeart(const std::string & strHeartName, const float fTime, const int nCount)
 {
-	std::cout << strHeartName << " " << fTime << " " << nCount << std::endl;
+	//std::cout << strHeartName << " " << fTime << " " << nCount << std::endl;
 
 	return 0;
 }
