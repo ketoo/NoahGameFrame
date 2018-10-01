@@ -278,9 +278,10 @@ void NFCProxyServerNet_ServerModule::OnSelectServerProcess(const NFSOCK nSockInd
     NF_SHARE_PTR<ConnectData> pServerData = m_pNetClientModule->GetServerNetInfo(xMsg.world_id());
     if (pServerData && ConnectDataState::NORMAL == pServerData->eState)
     {
-        NetObject* pNetObject = m_pNetModule->GetNet()->GetNetObject(nSockIndex);
-        if (pNetObject)
-        {
+	//Modify: not need check pNetObject again by wenmin
+        //NetObject* pNetObject = m_pNetModule->GetNet()->GetNetObject(nSockIndex);
+        //if (pNetObject)
+        //{
             //now this client bind a game server, all message will be sent to this game server whom bind with client
             pNetObject->SetGameID(xMsg.world_id());
 
@@ -288,7 +289,7 @@ void NFCProxyServerNet_ServerModule::OnSelectServerProcess(const NFSOCK nSockInd
             xMsg.set_event_code(NFMsg::EGameEventCode::EGEC_SELECTSERVER_SUCCESS);
 			m_pNetModule->SendMsgPB(NFMsg::EGameMsgID::EGMI_ACK_SELECT_SERVER, xMsg, nSockIndex);
             return;
-        }
+        //}
     }
 
     //actually, if you want the game server working with a good performance then we need to find the game server with lowest workload
