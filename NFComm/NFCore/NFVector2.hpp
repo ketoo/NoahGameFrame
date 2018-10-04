@@ -78,12 +78,14 @@ public:
 	}
 	NFVector2(const char* v, const int len)
 	{
-
+		FromString(std::string(v, len));
 	}
+
 	NFVector2(const std::string& v)
 	{
-
+		FromString(v);
 	}
+
 	bool operator<(const NFVector2& v) const
 	{
 		return this->Length() < v.Length();
