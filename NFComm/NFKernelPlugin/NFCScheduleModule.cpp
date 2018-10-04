@@ -92,7 +92,7 @@ bool NFCScheduleModule::Execute()
 					else
 					{
 						NFINT64 nNextCostTime = NFINT64(pSchedule->mfIntervalTime * 1000);
-						pSchedule->mnNextTriggerTime = pSchedule->mnNextTriggerTime + nNextCostTime;
+						pSchedule->mnNextTriggerTime = nNow + nNextCostTime;
 					}
 				}
 			}
@@ -166,7 +166,7 @@ bool NFCScheduleModule::Execute()
 				else
 				{
 					NFINT64 nNextCostTime = NFINT64(xModuleSchedule->mfIntervalTime * 1000);
-					xModuleSchedule->mnNextTriggerTime = xModuleSchedule->mnNextTriggerTime + nNextCostTime;
+					xModuleSchedule->mnNextTriggerTime = nNow + nNextCostTime;
 				}
 			}
 		}
