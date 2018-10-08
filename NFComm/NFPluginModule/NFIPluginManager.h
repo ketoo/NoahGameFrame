@@ -192,6 +192,13 @@ public:
 	virtual const std::string& GetLogConfigName() const = 0;
 	virtual void SetLogConfigName(const std::string& strName) = 0;
 
+	NFIPlugin* GetCurrentPlugin();
+	NFIModule* GetCurrenModule();
+
+	void SetCurrentPlugin(NFIPlugin* pPlugin);
+	void SetCurrenModule(NFIModule* pModule);
+
+
 	virtual void SetGetFileContentFunctor(GET_FILECONTENT_FUNCTOR fun) = 0;
 	virtual bool GetFileContent(const std::string &strFileName, std::string &strContent) = 0;
 
