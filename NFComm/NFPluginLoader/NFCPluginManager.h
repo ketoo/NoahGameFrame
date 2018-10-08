@@ -117,6 +117,12 @@ public:
 
 	virtual void SetLogConfigName(const std::string& strName) override;
 
+	virtual NFIPlugin* GetCurrentPlugin();
+	virtual NFIModule* GetCurrenModule();
+
+	virtual void SetCurrentPlugin(NFIPlugin* pPlugin);
+	virtual void SetCurrenModule(NFIModule* pModule);
+
 	virtual void SetGetFileContentFunctor(GET_FILECONTENT_FUNCTOR fun) override;
 
 	virtual bool GetFileContent(const std::string &strFileName, std::string &strContent) override;
@@ -148,6 +154,9 @@ private:
 	std::string mstrConfigName;
 	std::string mstrAppName;
 	std::string mstrLogConfigName;
+
+	NFIPlugin* mCurrentPlugin;
+	NFIModule* mCurrenModule;
 
     typedef std::map<std::string, bool> PluginNameMap;
     typedef std::map<std::string, NFCDynLib*> PluginLibMap;
