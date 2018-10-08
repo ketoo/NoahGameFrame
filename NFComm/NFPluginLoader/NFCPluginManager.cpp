@@ -123,6 +123,9 @@ NFCPluginManager::NFCPluginManager() : NFIPluginManager()
 	mnAppID = 0;
     mbIsDocker = false;
 
+	mCurrentPlugin = nullptr;
+	mCurrenModule = nullptr;
+
 #ifdef NF_DYNAMIC_PLUGIN
 	mbStaticPlugin = false;
 #else
@@ -173,6 +176,7 @@ bool NFCPluginManager::Awake()
 	PluginInstanceMap::iterator itAfterInstance = mPluginInstanceMap.begin();
 	for (; itAfterInstance != mPluginInstanceMap.end(); itAfterInstance++)
 	{
+		SetCurrentPlugin(itAfterInstance->second);
 		itAfterInstance->second->Awake();
 	}
 
@@ -184,6 +188,7 @@ inline bool NFCPluginManager::Init()
 	PluginInstanceMap::iterator itInstance = mPluginInstanceMap.begin();
 	for (; itInstance != mPluginInstanceMap.end(); itInstance++)
 	{
+		SetCurrentPlugin(itInstance->second);
 		itInstance->second->Init();
 	}
 
@@ -590,6 +595,26 @@ void NFCPluginManager::SetLogConfigName(const std::string & strName)
 	mstrLogConfigName = strName;
 }
 
+NFIPlugin * NFCPluginManager::GetCurrentPlugin()
+{
+	return mCurrentPlugin;
+}
+
+NFIModule * NFCPluginManager::GetCurrenModule()
+{
+	return mCurrenModule;
+}
+
+void NFCPluginManager::SetCurrentPlugin(NFIPlugin * pPlugin)
+{
+	 mCurrentPlugin = pPlugin;
+}
+
+void NFCPluginManager::SetCurrenModule(NFIModule * pModule)
+{
+	mCurrenModule = pModule;
+}
+
 void NFCPluginManager::SetGetFileContentFunctor(GET_FILECONTENT_FUNCTOR fun)
 {
 	mGetFileContentFunctor = fun;
@@ -672,6 +697,8 @@ NFIModule* NFCPluginManager::FindModule(const std::string& strModuleName)
 	{
 		return it->second;
 	}
+	
+	std::cout << this->GetCurrenModule()->strName << " want to find module: " << strModuleName << " but got null_ptr!!!" << std::endl;
 
     return NULL;
 }
@@ -726,6 +753,7 @@ bool NFCPluginManager::AfterInit()
     PluginInstanceMap::iterator itAfterInstance = mPluginInstanceMap.begin();
     for (; itAfterInstance != mPluginInstanceMap.end(); itAfterInstance++)
     {
+		SetCurrentPlugin(itAfterInstance->second);
         itAfterInstance->second->AfterInit();
     }
 
@@ -737,6 +765,7 @@ bool NFCPluginManager::CheckConfig()
     PluginInstanceMap::iterator itCheckInstance = mPluginInstanceMap.begin();
     for (; itCheckInstance != mPluginInstanceMap.end(); itCheckInstance++)
     {
+		SetCurrentPlugin(itCheckInstance->second);
         itCheckInstance->second->CheckConfig();
     }
 
@@ -748,6 +777,7 @@ bool NFCPluginManager::ReadyExecute()
     PluginInstanceMap::iterator itCheckInstance = mPluginInstanceMap.begin();
     for (; itCheckInstance != mPluginInstanceMap.end(); itCheckInstance++)
     {
+		SetCurrentPlugin(itCheckInstance->second);
         itCheckInstance->second->ReadyExecute();
     }
 
@@ -759,6 +789,7 @@ bool NFCPluginManager::BeforeShut()
     PluginInstanceMap::iterator itBeforeInstance = mPluginInstanceMap.begin();
     for (; itBeforeInstance != mPluginInstanceMap.end(); itBeforeInstance++)
     {
+		SetCurrentPlugin(itBeforeInstance->second);
         itBeforeInstance->second->BeforeShut();
     }
 
@@ -770,6 +801,7 @@ bool NFCPluginManager::Shut()
     PluginInstanceMap::iterator itInstance = mPluginInstanceMap.begin();
     for (; itInstance != mPluginInstanceMap.end(); ++itInstance)
     {
+		SetCurrentPlugin(itInstance->second);
         itInstance->second->Shut();
     }
 
@@ -781,6 +813,7 @@ bool NFCPluginManager::Finalize()
 	PluginInstanceMap::iterator itInstance = mPluginInstanceMap.begin();
 	for (; itInstance != mPluginInstanceMap.end(); itInstance++)
 	{
+		SetCurrentPlugin(itInstance->second);
 		itInstance->second->Finalize();
 	}
 
