@@ -117,11 +117,11 @@ public:
 
 	virtual void SetLogConfigName(const std::string& strName) override;
 
-	virtual NFIPlugin* GetCurrentPlugin();
-	virtual NFIModule* GetCurrenModule();
+	virtual NFIPlugin* GetCurrentPlugin() override;
+	virtual NFIModule* GetCurrenModule() override;
 
-	virtual void SetCurrentPlugin(NFIPlugin* pPlugin);
-	virtual void SetCurrenModule(NFIModule* pModule);
+	virtual void SetCurrentPlugin(NFIPlugin* pPlugin) override;
+	virtual void SetCurrenModule(NFIModule* pModule) override;
 
 	virtual void SetGetFileContentFunctor(GET_FILECONTENT_FUNCTOR fun) override;
 
