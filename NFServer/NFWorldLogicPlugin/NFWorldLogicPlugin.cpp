@@ -24,7 +24,7 @@
 */
 
 #include "NFCWorldLogicModule.h"
-#include "NFCPVPModule.h"
+#include "NFCWorldPVPModule.h"
 #include "NFWorldLogicPlugin.h"
 
 NF_EXPORT void DllStartPlugin(NFIPluginManager* pm)
@@ -52,11 +52,11 @@ const std::string NFWorldLogicPlugin::GetPluginName()
 void NFWorldLogicPlugin::Install()
 {
 	REGISTER_MODULE(pPluginManager, NFIWorldLogicModule, NFCWorldLogicModule)
-	REGISTER_MODULE(pPluginManager, NFIPVPModule, NFCPVPModule)
+	REGISTER_MODULE(pPluginManager, NFIWorldPVPModule, NFCWorldPVPModule)
 }
 
 void NFWorldLogicPlugin::Uninstall()
 {
-	UNREGISTER_MODULE(pPluginManager, NFIPVPModule, NFCPVPModule)
+	UNREGISTER_MODULE(pPluginManager, NFIWorldPVPModule, NFCWorldPVPModule)
 	UNREGISTER_MODULE(pPluginManager, NFIWorldLogicModule, NFCWorldLogicModule)
 }
