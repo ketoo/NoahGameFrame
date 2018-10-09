@@ -387,7 +387,7 @@ bool NFCGamePVPModule::ProcessOpponentData(const NFGUID & self, const NFMsg::Ack
 	xHeroData1.AddString(NFrame::NPC::AIOwnerID());
 	xHeroData1.AddObject(self);
 	xHeroData1.AddString(NFrame::NPC::NPCType());
-	xHeroData1.AddInt(NFMsg::ENPCType::ENPCTYPE_TURRET);
+	xHeroData1.AddInt(NFMsg::ENPCType::ENPCTYPE_HERO);
 	xHeroData1.AddString(NFrame::NPC::Level());
 	xHeroData1.AddInt(opponent.level());
 	xHeroData1.AddString(NFrame::NPC::HeroStar());
@@ -402,7 +402,7 @@ bool NFCGamePVPModule::ProcessOpponentData(const NFGUID & self, const NFMsg::Ack
 	xHeroData2.AddString(NFrame::NPC::AIOwnerID());
 	xHeroData2.AddObject(self);
 	xHeroData2.AddString(NFrame::NPC::NPCType());
-	xHeroData2.AddInt(NFMsg::ENPCType::ENPCTYPE_TURRET);
+	xHeroData2.AddInt(NFMsg::ENPCType::ENPCTYPE_HERO);
 	xHeroData2.AddString(NFrame::NPC::Level());
 	xHeroData2.AddInt(opponent.level());
 	xHeroData2.AddString(NFrame::NPC::HeroStar());
@@ -416,7 +416,7 @@ bool NFCGamePVPModule::ProcessOpponentData(const NFGUID & self, const NFMsg::Ack
 	xHeroData3.AddString(NFrame::NPC::AIOwnerID());
 	xHeroData3.AddObject(self);
 	xHeroData3.AddString(NFrame::NPC::NPCType());
-	xHeroData3.AddInt(NFMsg::ENPCType::ENPCTYPE_TURRET);
+	xHeroData3.AddInt(NFMsg::ENPCType::ENPCTYPE_HERO);
 	xHeroData3.AddString(NFrame::NPC::Level());
 	xHeroData3.AddInt(opponent.level());
 	xHeroData3.AddString(NFrame::NPC::HeroStar());
