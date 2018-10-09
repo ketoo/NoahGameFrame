@@ -74,18 +74,17 @@ int NFCItemTokenConsumeProcessModule::ConsumeLegal(const NFGUID& self, const std
 
 	const int nSceneID = m_pKernelModule->GetPropertyInt32(self, NFrame::Player::SceneID());
 	const int nHomeSceneID = m_pKernelModule->GetPropertyInt32(self, NFrame::Player::HomeSceneID());
-	if (nSceneID != nHomeSceneID)
+	
+	if (nSceneID == nHomeSceneID)
 	{
-		return 3;
+		NFDataList varList;
+		if (pBuildRecord->FindString(NFrame::Player::BuildingList::BuildingCnfID, strBuildingCnfID, varList) <= 0)
+		{
+			return 0;
+		}
 	}
 
-	NFDataList varList;
-	if (pBuildRecord->FindString(NFrame::Player::BuildingList::BuildingCnfID, strBuildingCnfID, varList) <= 0)
-	{
-		return 0;
-	}
-
-	return 100;
+	return 0;
 }
 
 int NFCItemTokenConsumeProcessModule::ConsumeProcess(const NFGUID& self, const std::string& strItemID, const NFDataList& targetID)
@@ -104,20 +103,30 @@ int NFCItemTokenConsumeProcessModule::ConsumeProcess(const NFGUID& self, const s
 	const int nSceneID = m_pKernelModule->GetPropertyInt32(self, NFrame::Player::SceneID());
 	const int nHomeSceneID = m_pKernelModule->GetPropertyInt32(self, NFrame::Player::HomeSceneID());
 	const int nGroupID = m_pKernelModule->GetPropertyInt32(self, NFrame::Player::GroupID());
-	if (nSceneID != nHomeSceneID)
-	{
-		return 2;
-	}
-
 	const NFGUID xID = m_pKernelModule->CreateGUID();
 
+	if (nSceneID == nHomeSceneID)
+	{
+		NF_SHARE_PTR<NFDataList> xDataList = pBuildRecord->GetInitData();
+		xDataList->SetString(NFrame::Player::BuildingList::BuildingCnfID, strBuildingCnfID);
+		xDataList->SetObject(NFrame::Player::BuildingList::BuildingGUID, xID);
+		xDataList->SetVector3(NFrame::Player::BuildingList::Pos, vPos);
+		pBuildRecord->AddRow(-1, *xDataList);
 
-	NF_SHARE_PTR<NFDataList> xDataList = pBuildRecord->GetInitData();
-	xDataList->SetString(NFrame::Player::BuildingList::BuildingCnfID, strBuildingCnfID);
-	xDataList->SetObject(NFrame::Player::BuildingList::BuildingGUID, xID);
-	xDataList->SetVector3(NFrame::Player::BuildingList::Pos, vPos);
-	pBuildRecord->AddRow(-1, *xDataList);
+		return 0;
+	}
 
+	NFDataList xDataArg;
+	xDataArg.AddString(NFrame::NPC::Position());
+	xDataArg.AddVector3(vPos);
+	xDataArg.AddString(NFrame::NPC::MasterID());
+	xDataArg.AddObject(self);
+	xDataArg.AddString(NFrame::NPC::AIOwnerID());
+	xDataArg.AddObject(self);
+	xDataArg.AddString(NFrame::NPC::NPCType());
+	xDataArg.AddInt(NFMsg::ENPCType::ENPCTYPE_TURRET);
 
-	return 100;
+	m_pKernelModule->CreateObject(xID, nSceneID, nGroupID, NFrame::NPC::ThisName(), strBuildingCnfID, NFDataList());
+
+	return 0;
 }
