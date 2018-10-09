@@ -698,7 +698,10 @@ NFIModule* NFCPluginManager::FindModule(const std::string& strModuleName)
 		return it->second;
 	}
 	
-	std::cout << this->GetCurrenModule()->strName << " want to find module: " << strModuleName << " but got null_ptr!!!" << std::endl;
+	if (this->GetCurrenModule())
+	{
+		std::cout << this->GetCurrenModule()->strName << " want to find module: " << strModuleName << " but got null_ptr!!!" << std::endl;
+	}
 
     return NULL;
 }
