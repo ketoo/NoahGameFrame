@@ -26,30 +26,30 @@
 #ifdef _MSC_VER
 #pragma warning(disable: 4244 4267)
 #endif
-#include "NFCPVPModule.h"
+#include "NFCGamePVPModule.h"
 #include "NFComm/NFPluginModule/NFINetModule.h"
 #include "NFComm/NFMessageDefine/NFMsgShare.pb.h"
 #include "NFComm/NFMessageDefine/NFProtocolDefine.hpp"
 
-bool NFCPVPModule::Init()
+bool NFCGamePVPModule::Init()
 {
 	
     return true;
 }
 
 
-bool NFCPVPModule::Shut()
+bool NFCGamePVPModule::Shut()
 {
     return true;
 }
 
-bool NFCPVPModule::Execute()
+bool NFCGamePVPModule::Execute()
 {
     
     return true;
 }
 
-bool NFCPVPModule::AfterInit()
+bool NFCGamePVPModule::AfterInit()
 {
 	m_pElementModule = pPluginManager->FindModule<NFIElementModule>();
 	m_pClassModule = pPluginManager->FindModule<NFIClassModule>();
@@ -65,37 +65,37 @@ bool NFCPVPModule::AfterInit()
 	m_pScheduleModule = pPluginManager->FindModule<NFIScheduleModule>();
 	m_pNetClientModule = pPluginManager->FindModule<NFINetClientModule>();
 
-	m_pKernelModule->AddClassCallBack(NFrame::NPC::ThisName(), this, &NFCPVPModule::OnNPCClassEvent);
-	m_pKernelModule->AddClassCallBack(NFrame::Player::ThisName(), this, &NFCPVPModule::OnPlayerClassEvent);
+	m_pKernelModule->AddClassCallBack(NFrame::NPC::ThisName(), this, &NFCGamePVPModule::OnNPCClassEvent);
+	m_pKernelModule->AddClassCallBack(NFrame::Player::ThisName(), this, &NFCGamePVPModule::OnPlayerClassEvent);
 
-	m_pSceneAOIModule->AddEnterSceneConditionCallBack(this, &NFCPVPModule::EnterSceneConditionEvent);
+	m_pSceneAOIModule->AddEnterSceneConditionCallBack(this, &NFCGamePVPModule::EnterSceneConditionEvent);
 
-	m_pSceneAOIModule->AddBeforeEnterSceneGroupCallBack(this, &NFCPVPModule::BeforeEnterSceneGroupEvent);
-	m_pSceneAOIModule->AddAfterEnterSceneGroupCallBack(this, &NFCPVPModule::AfterEnterSceneGroupEvent);
-	m_pSceneAOIModule->AddBeforeLeaveSceneGroupCallBack(this, &NFCPVPModule::BeforeLeaveSceneGroupEvent);
-	m_pSceneAOIModule->AddAfterLeaveSceneGroupCallBack(this, &NFCPVPModule::AfterLeaveSceneGroupEvent);
+	m_pSceneAOIModule->AddBeforeEnterSceneGroupCallBack(this, &NFCGamePVPModule::BeforeEnterSceneGroupEvent);
+	m_pSceneAOIModule->AddAfterEnterSceneGroupCallBack(this, &NFCGamePVPModule::AfterEnterSceneGroupEvent);
+	m_pSceneAOIModule->AddBeforeLeaveSceneGroupCallBack(this, &NFCGamePVPModule::BeforeLeaveSceneGroupEvent);
+	m_pSceneAOIModule->AddAfterLeaveSceneGroupCallBack(this, &NFCGamePVPModule::AfterLeaveSceneGroupEvent);
 
-	if (!m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_REQ_SEARCH_OPPNENT, this, &NFCPVPModule::OnReqSearchOpponentProcess)) { return false; }
-	if (!m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_REQ_SWAP_HOME_SCENE, this, &NFCPVPModule::OnReqSwapHomeSceneProcess)) { return false; }
-	if (!m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_REQ_START_OPPNENT, this, &NFCPVPModule::OnReqStartPVPOpponentProcess)) { return false; }
-	if (!m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_REQ_END_OPPNENT, this, &NFCPVPModule::OnReqEndPVPOpponentProcess)) { return false; }
-	if (!m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_REQ_ADJUST_GAMBLE, this, &NFCPVPModule::OnReqAddGambleProcess)) { return false; }
+	if (!m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_REQ_SEARCH_OPPNENT, this, &NFCGamePVPModule::OnReqSearchOpponentProcess)) { return false; }
+	if (!m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_REQ_SWAP_HOME_SCENE, this, &NFCGamePVPModule::OnReqSwapHomeSceneProcess)) { return false; }
+	if (!m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_REQ_START_OPPNENT, this, &NFCGamePVPModule::OnReqStartPVPOpponentProcess)) { return false; }
+	if (!m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_REQ_END_OPPNENT, this, &NFCGamePVPModule::OnReqEndPVPOpponentProcess)) { return false; }
+	if (!m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_REQ_ADJUST_GAMBLE, this, &NFCGamePVPModule::OnReqAddGambleProcess)) { return false; }
 
 
-	if (!m_pNetClientModule->AddReceiveCallBack(NF_SERVER_TYPES::NF_ST_WORLD, NFMsg::EGMI_ACK_SEARCH_OPPNENT, this, &NFCPVPModule::OnAckSearchOpponentProcess)) { return false; }
+	if (!m_pNetClientModule->AddReceiveCallBack(NF_SERVER_TYPES::NF_ST_WORLD, NFMsg::EGMI_ACK_SEARCH_OPPNENT, this, &NFCGamePVPModule::OnAckSearchOpponentProcess)) { return false; }
 
     return true;
 }
 
-bool NFCPVPModule::ReadyExecute()
+bool NFCGamePVPModule::ReadyExecute()
 {
 	m_pSceneAOIModule->RemoveSwapSceneEventCallBack();
-	m_pSceneAOIModule->AddSwapSceneEventCallBack(this, &NFCPVPModule::OnSceneEvent);
+	m_pSceneAOIModule->AddSwapSceneEventCallBack(this, &NFCGamePVPModule::OnSceneEvent);
 
 	return false;
 }
 
-void NFCPVPModule::OnReqSearchOpponentProcess(const NFSOCK nSockIndex, const int nMsgID, const char *msg,
+void NFCGamePVPModule::OnReqSearchOpponentProcess(const NFSOCK nSockIndex, const int nMsgID, const char *msg,
                                               const uint32_t nLen)
 {
 	CLIENT_MSG_PROCESS( nMsgID, msg, nLen, NFMsg::ReqSearchOppnent);
@@ -113,7 +113,7 @@ void NFCPVPModule::OnReqSearchOpponentProcess(const NFSOCK nSockIndex, const int
 	m_pNetClientModule->SendSuitByPB(NF_SERVER_TYPES::NF_ST_WORLD, nHasKey, nMsgID, xMsg, nPlayerID);
 }
 
-void NFCPVPModule::OnAckSearchOpponentProcess(const NFSOCK nSockIndex, const int nMsgID, const char * msg, const uint32_t nLen)
+void NFCGamePVPModule::OnAckSearchOpponentProcess(const NFSOCK nSockIndex, const int nMsgID, const char * msg, const uint32_t nLen)
 {
 	CLIENT_MSG_PROCESS(nMsgID, msg, nLen, NFMsg::AckSearchOppnent);
 
@@ -167,7 +167,7 @@ void NFCPVPModule::OnAckSearchOpponentProcess(const NFSOCK nSockIndex, const int
 	}
 }
 
-void NFCPVPModule::OnReqSwapHomeSceneProcess(const NFSOCK nSockIndex, const int nMsgID, const char * msg, const uint32_t nLen)
+void NFCGamePVPModule::OnReqSwapHomeSceneProcess(const NFSOCK nSockIndex, const int nMsgID, const char * msg, const uint32_t nLen)
 {
 	CLIENT_MSG_PROCESS( nMsgID, msg, nLen, NFMsg::ReqAckHomeScene);
 	int nHomeSceneID = m_pKernelModule->GetPropertyInt32(nPlayerID, NFrame::Player::HomeSceneID());
@@ -188,7 +188,7 @@ void NFCPVPModule::OnReqSwapHomeSceneProcess(const NFSOCK nSockIndex, const int 
 	
 }
 
-void NFCPVPModule::OnReqStartPVPOpponentProcess(const NFSOCK nSockIndex, const int nMsgID, const char *msg,
+void NFCGamePVPModule::OnReqStartPVPOpponentProcess(const NFSOCK nSockIndex, const int nMsgID, const char *msg,
 												const uint32_t nLen)
 {
 	CLIENT_MSG_PROCESS( nMsgID, msg, nLen, NFMsg::ReqAckStartBattle);
@@ -222,7 +222,7 @@ void NFCPVPModule::OnReqStartPVPOpponentProcess(const NFSOCK nSockIndex, const i
 	m_pGameServerNet_ServerModule->SendMsgPBToGate(NFMsg::EGMI_ACK_START_OPPNENT, xReqAckStartBattle, nPlayerID);
 }
 
-void NFCPVPModule::OnReqEndPVPOpponentProcess(const NFSOCK nSockIndex, const int nMsgID, const char *msg,
+void NFCGamePVPModule::OnReqEndPVPOpponentProcess(const NFSOCK nSockIndex, const int nMsgID, const char *msg,
 											  const uint32_t nLen)
 {
 	CLIENT_MSG_PROCESS( nMsgID, msg, nLen, NFMsg::ReqEndBattle);
@@ -242,7 +242,7 @@ void NFCPVPModule::OnReqEndPVPOpponentProcess(const NFSOCK nSockIndex, const int
 
 }
 
-int NFCPVPModule::OnSceneEvent(const NFGUID & self, const int nSceneID, const int nGroupID, const int nType, const NFDataList & argList)
+int NFCGamePVPModule::OnSceneEvent(const NFGUID & self, const int nSceneID, const int nGroupID, const int nType, const NFDataList & argList)
 {
 	std::string strTileData;
 	NFVector3 vRelivePos = m_pSceneAOIModule->GetRelivePosition(nSceneID, 0);
@@ -281,17 +281,17 @@ int NFCPVPModule::OnSceneEvent(const NFGUID & self, const int nSceneID, const in
 	return 0;
 }
 
-int NFCPVPModule::EnterSceneConditionEvent(const NFGUID & self, const int nSceneID, const int nGroupID, const int nType, const NFDataList & argList)
+int NFCGamePVPModule::EnterSceneConditionEvent(const NFGUID & self, const int nSceneID, const int nGroupID, const int nType, const NFDataList & argList)
 {
 	return 0;
 }
 
-int NFCPVPModule::BeforeEnterSceneGroupEvent(const NFGUID & self, const int nSceneID, const int nGroupID, const int nType, const NFDataList & argList)
+int NFCGamePVPModule::BeforeEnterSceneGroupEvent(const NFGUID & self, const int nSceneID, const int nGroupID, const int nType, const NFDataList & argList)
 {
 	return 0;
 }
 
-int NFCPVPModule::AfterEnterSceneGroupEvent(const NFGUID & self, const int nSceneID, const int nGroupID, const int nType, const NFDataList & argList)
+int NFCGamePVPModule::AfterEnterSceneGroupEvent(const NFGUID & self, const int nSceneID, const int nGroupID, const int nType, const NFDataList & argList)
 {
 	//create building if the player back home
 	//create building if the player wants attack the others
@@ -301,17 +301,17 @@ int NFCPVPModule::AfterEnterSceneGroupEvent(const NFGUID & self, const int nScen
 	return 0;
 }
 
-int NFCPVPModule::BeforeLeaveSceneGroupEvent(const NFGUID & self, const int nSceneID, const int nGroupID, const int nType, const NFDataList & argList)
+int NFCGamePVPModule::BeforeLeaveSceneGroupEvent(const NFGUID & self, const int nSceneID, const int nGroupID, const int nType, const NFDataList & argList)
 {
 	return 0;
 }
 
-int NFCPVPModule::AfterLeaveSceneGroupEvent(const NFGUID & self, const int nSceneID, const int nGroupID, const int nType, const NFDataList & argList)
+int NFCGamePVPModule::AfterLeaveSceneGroupEvent(const NFGUID & self, const int nSceneID, const int nGroupID, const int nType, const NFDataList & argList)
 {
 	return 0;
 }
 
-int NFCPVPModule::OnDeadSwapHeroHeart(const NFGUID & self, const std::string & strHeartBeat, const float fTime, const int nCount)
+int NFCGamePVPModule::OnDeadSwapHeroHeart(const NFGUID & self, const std::string & strHeartBeat, const float fTime, const int nCount)
 {
 	NFGUID xFightingHero = m_pKernelModule->GetPropertyObject(self, NFrame::Player::FightHeroID());
 	NFGUID xHero1 = m_pKernelModule->GetPropertyObject(self, NFrame::Player::HeroID1());
@@ -347,7 +347,7 @@ int NFCPVPModule::OnDeadSwapHeroHeart(const NFGUID & self, const std::string & s
 	return 0;
 }
 
-bool NFCPVPModule::ProcessOpponentData(const NFGUID & self, const NFMsg::AckSearchOppnent& opponent)
+bool NFCGamePVPModule::ProcessOpponentData(const NFGUID & self, const NFMsg::AckSearchOppnent& opponent)
 {
 
 	const int nSceneID = m_pKernelModule->GetPropertyInt(self, NFrame::Player::SceneID());
@@ -429,7 +429,7 @@ bool NFCPVPModule::ProcessOpponentData(const NFGUID & self, const NFMsg::AckSear
 	return true;
 }
 
-void NFCPVPModule::ResetPVPData(const NFGUID & self)
+void NFCGamePVPModule::ResetPVPData(const NFGUID & self)
 {
 	m_pKernelModule->SetPropertyObject(self, NFrame::Player::ViewOpponent(), NFGUID());
 	m_pKernelModule->SetPropertyObject(self, NFrame::Player::FightingOpponent(), NFGUID());
@@ -462,7 +462,7 @@ void NFCPVPModule::ResetPVPData(const NFGUID & self)
 	m_pKernelModule->ClearRecord(self, NFrame::Player::TempItemList::ThisName());
 }
 
-void NFCPVPModule::RecordPVPData(const NFGUID & self, const int nStar, const int nGold, const int nDiamond)
+void NFCGamePVPModule::RecordPVPData(const NFGUID & self, const int nStar, const int nGold, const int nDiamond)
 {
 	//how to record this war for these two people
 	NFGUID xWarID = m_pKernelModule->GetPropertyObject(self, NFrame::Player::WarID());
@@ -545,17 +545,17 @@ void NFCPVPModule::RecordPVPData(const NFGUID & self, const int nStar, const int
 
 }
 
-int NFCPVPModule::OnNPCClassEvent(const NFGUID & self, const std::string & strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFDataList & var)
+int NFCGamePVPModule::OnNPCClassEvent(const NFGUID & self, const std::string & strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFDataList & var)
 {
 	if (CLASS_OBJECT_EVENT::COE_CREATE_HASDATA == eClassEvent)
 	{
-		m_pKernelModule->AddPropertyCallBack(self, NFrame::NPC::HP(), this, &NFCPVPModule::OnNPCHPEvent);
+		m_pKernelModule->AddPropertyCallBack(self, NFrame::NPC::HP(), this, &NFCGamePVPModule::OnNPCHPEvent);
 	}
 
 	return 0;
 }
 
-int NFCPVPModule::OnNPCHPEvent(const NFGUID & self, const std::string & strPropertyName, const NFData & oldVar, const NFData & newVar)
+int NFCGamePVPModule::OnNPCHPEvent(const NFGUID & self, const std::string & strPropertyName, const NFData & oldVar, const NFData & newVar)
 {
 	if (newVar.GetInt() <= 0)
 	{
@@ -608,19 +608,19 @@ int NFCPVPModule::OnNPCHPEvent(const NFGUID & self, const std::string & strPrope
 	return 0;
 }
 
-int NFCPVPModule::OnPlayerClassEvent(const NFGUID & self, const std::string & strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFDataList & var)
+int NFCGamePVPModule::OnPlayerClassEvent(const NFGUID & self, const std::string & strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFDataList & var)
 {
 	if (CLASS_OBJECT_EVENT::COE_CREATE_FINISH == eClassEvent)
 	{
-		m_pKernelModule->AddPropertyCallBack(self, NFrame::Player::FightHeroHP1(), this, &NFCPVPModule::OnPlayerHPEvent);
-		m_pKernelModule->AddPropertyCallBack(self, NFrame::Player::FightHeroHP2(), this, &NFCPVPModule::OnPlayerHPEvent);
-		m_pKernelModule->AddPropertyCallBack(self, NFrame::Player::FightHeroHP3(), this, &NFCPVPModule::OnPlayerHPEvent);
+		m_pKernelModule->AddPropertyCallBack(self, NFrame::Player::FightHeroHP1(), this, &NFCGamePVPModule::OnPlayerHPEvent);
+		m_pKernelModule->AddPropertyCallBack(self, NFrame::Player::FightHeroHP2(), this, &NFCGamePVPModule::OnPlayerHPEvent);
+		m_pKernelModule->AddPropertyCallBack(self, NFrame::Player::FightHeroHP3(), this, &NFCGamePVPModule::OnPlayerHPEvent);
 	}
 
 	return 0;
 }
 
-int NFCPVPModule::OnPlayerHPEvent(const NFGUID & self, const std::string & strPropertyName, const NFData & oldVar, const NFData & newVar)
+int NFCGamePVPModule::OnPlayerHPEvent(const NFGUID & self, const std::string & strPropertyName, const NFData & oldVar, const NFData & newVar)
 {
 	//is pvp
 	int pvpType = m_pKernelModule->GetPropertyInt(self, NFrame::Player::PVPType());
@@ -628,14 +628,14 @@ int NFCPVPModule::OnPlayerHPEvent(const NFGUID & self, const std::string & strPr
 	{
 		if (newVar.GetInt() <= 0)
 		{
-			m_pScheduleModule->AddSchedule(self, "NFCPVPModule::OnDeadSwapHeroHeart", this, &NFCPVPModule::OnDeadSwapHeroHeart, 5.0f, 1);
+			m_pScheduleModule->AddSchedule(self, "NFCGamePVPModule::OnDeadSwapHeroHeart", this, &NFCGamePVPModule::OnDeadSwapHeroHeart, 5.0f, 1);
 		}
 	}
 
 	return 0;
 }
 
-void NFCPVPModule::EndTheBattle(const NFGUID & self)
+void NFCGamePVPModule::EndTheBattle(const NFGUID & self)
 {
 	int64_t nGambleGold = m_pKernelModule->GetPropertyInt(self, NFrame::Player::OpponentGold());
 	int64_t nGambleDiamond = m_pKernelModule->GetPropertyInt(self, NFrame::Player::OpponentDiamond());
@@ -697,7 +697,7 @@ void NFCPVPModule::EndTheBattle(const NFGUID & self)
 	m_pGameServerNet_ServerModule->SendMsgPBToGate(NFMsg::EGMI_ACK_END_OPPNENT, xReqAckEndBattle, self);
 }
 
-void NFCPVPModule::OnReqAddGambleProcess(const NFSOCK nSockIndex, const int nMsgID, const char *msg, const uint32_t nLen)
+void NFCGamePVPModule::OnReqAddGambleProcess(const NFSOCK nSockIndex, const int nMsgID, const char *msg, const uint32_t nLen)
 {
 	//attack record and beattack record
 	CLIENT_MSG_PROCESS(nMsgID, msg, nLen, NFMsg::ReqAddGambleValue);

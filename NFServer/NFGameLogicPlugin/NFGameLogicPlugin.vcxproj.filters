@@ -23,11 +23,11 @@
     <ClInclude Include="NFCCreateRoleModule.h">
       <Filter>NFCreateRoleModule</Filter>
     </ClInclude>
-    <ClInclude Include="NFCPVPModule.h">
-      <Filter>NFPVP</Filter>
-    </ClInclude>
     <ClInclude Include="NFCSyncModule.h">
       <Filter>NFSyncModule</Filter>
+    </ClInclude>
+    <ClInclude Include="NFCGamePVPModule.h">
+      <Filter>NFPVP</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -39,11 +39,11 @@
     <ClCompile Include="NFCCreateRoleModule.cpp">
       <Filter>NFCreateRoleModule</Filter>
     </ClCompile>
-    <ClCompile Include="NFCPVPModule.cpp">
-      <Filter>NFPVP</Filter>
-    </ClCompile>
     <ClCompile Include="NFCSyncModule.cpp">
       <Filter>NFSyncModule</Filter>
+    </ClCompile>
+    <ClCompile Include="NFCGamePVPModule.cpp">
+      <Filter>NFPVP</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
