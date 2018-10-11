@@ -3,7 +3,7 @@
   <ItemGroup>
     <ClInclude Include="NFWorldLogicPlugin.h" />
     <ClInclude Include="NFCWorldLogicModule.h" />
-    <ClInclude Include="NFCPVPModule.h">
+    <ClInclude Include="NFCWorldPVPModule.h">
       <Filter>NFPVP</Filter>
     </ClInclude>
   </ItemGroup>
@@ -11,7 +11,7 @@
     <ClCompile Include="dllmain.cpp" />
     <ClCompile Include="NFWorldLogicPlugin.cpp" />
     <ClCompile Include="NFCWorldLogicModule.cpp" />
-    <ClCompile Include="NFCPVPModule.cpp">
+    <ClCompile Include="NFCWorldPVPModule.cpp">
       <Filter>NFPVP</Filter>
     </ClCompile>
   </ItemGroup>

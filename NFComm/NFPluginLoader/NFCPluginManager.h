@@ -46,6 +46,8 @@ public:
     NFCPluginManager();
     virtual ~NFCPluginManager();
 
+	virtual bool LoadPlugin() override;
+
 	virtual bool Awake() override;
 
 	virtual bool Init() override;
@@ -117,6 +119,12 @@ public:
 
 	virtual void SetLogConfigName(const std::string& strName) override;
 
+	virtual NFIPlugin* GetCurrentPlugin() override;
+	virtual NFIModule* GetCurrenModule() override;
+
+	virtual void SetCurrentPlugin(NFIPlugin* pPlugin) override;
+	virtual void SetCurrenModule(NFIModule* pModule) override;
+
 	virtual void SetGetFileContentFunctor(GET_FILECONTENT_FUNCTOR fun) override;
 
 	virtual bool GetFileContent(const std::string &strFileName, std::string &strContent) override;
@@ -148,6 +156,9 @@ private:
 	std::string mstrConfigName;
 	std::string mstrAppName;
 	std::string mstrLogConfigName;
+
+	NFIPlugin* mCurrentPlugin;
+	NFIModule* mCurrenModule;
 
     typedef std::map<std::string, bool> PluginNameMap;
     typedef std::map<std::string, NFCDynLib*> PluginLibMap;

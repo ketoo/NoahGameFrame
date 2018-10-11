@@ -33,7 +33,6 @@
 #include "NFComm/NFPluginModule/NFICreateRoleModule.h"
 #include "NFComm/NFPluginModule/NFIGameServerToDBModule.h"
 #include "NFComm/NFPluginModule/NFISceneProcessModule.h"
-#include "NFComm/NFPluginModule/NFIPVPModule.h"
 #include "NFComm/NFPluginModule/NFIGameServerNet_ServerModule.h"
 #include "NFComm/NFPluginModule/NFIScheduleModule.h"
 #include "NFComm/NFPluginModule/NFIDataTailModule.h"
