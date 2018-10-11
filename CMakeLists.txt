@@ -53,10 +53,16 @@ ${SolutionDir}/Dependencies/protobuf/src/
 ${SolutionDir}/Dependencies/libevent/
 ${SolutionDir}/Dependencies/libevent/include/
 ${SolutionDir}/Dependencies/libevent/compat/
-${SolutionDir}/Dependencies/lua/
+${SolutionDir}/Dependencies/lua/src/
 ${SolutionDir}/Dependencies/asio/
 ${SolutionDir}/Dependencies/websocketpp/
 )
+if (UNIX)
+	include_directories(${SolutionDir}/Dependencies/hiredis/hiredis_linux)
+else()
+	include_directories(${SolutionDir}/Dependencies/hiredis/hiredis_win)
+endif()
+
 
 #message("Build Type:"${CMAKE_BUILD_TYPE} ${CMAKE_CXX_FLAGS})
 

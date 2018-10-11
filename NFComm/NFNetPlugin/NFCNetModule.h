@@ -1,10 +1,27 @@
-// -------------------------------------------------------------------------
-//    @FileName         :    NFCNetModule.h
-//    @Author           :    LvSheng.Huang
-//    @Date             :    2017-02-15
-//    @Module           :    NFCNetModule
-//
-// -------------------------------------------------------------------------
+/*
+            This file is part of: 
+                NoahFrame
+            https://github.com/ketoo/NoahGameFrame
+
+   Copyright 2009 - 2018 NoahFrame(NoahGameFrame)
+
+   File creator: lvsheng.huang
+   
+   NoahFrame is open-source software and you can redistribute it and/or modify
+   it under the terms of the License; besides, anyone who use this file/software must include this copyright announcement.
+
+   Licensed under the Apache License, Version 2.0 (the "License");
+   you may not use this file except in compliance with the License.
+   You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   See the License for the specific language governing permissions and
+   limitations under the License.
+*/
 
 #ifndef NFC_NET_MODULE_H
 #define NFC_NET_MODULE_H
@@ -14,6 +31,7 @@
 #include "NFCNet.h"
 #include "NFComm/NFCore/NFQueue.hpp"
 #include "NFComm/NFPluginModule/NFINetModule.h"
+#include "NFComm/NFPluginModule/NFILogModule.h"
 #include "NFComm/NFPluginModule/NFIPluginManager.h"
 #include "NFComm/NFMessageDefine/NFMsgDefine.h"
 
@@ -27,13 +45,15 @@
 #pragma warning(default: 4244 4267)
 #endif
 
-class NFCNetModule
-        : public NFINetModule
+class NFCNetModule: public NFINetModule
 {
 public:
     NFCNetModule(NFIPluginManager* p);
 
     virtual ~NFCNetModule();
+
+	virtual bool Init();
+	virtual bool AfterInit();
 
     //as client
     virtual void Initialization(const char* strIP, const unsigned short nPort);
@@ -55,19 +75,17 @@ public:
 
 
     virtual bool SendMsgWithOutHead(const int nMsgID, const std::string& msg, const NFSOCK nSockIndex);
-
     virtual bool SendMsgToAllClientWithOutHead(const int nMsgID, const std::string& msg);
 
-    virtual bool SendMsgPB(const uint16_t nMsgID, const google::protobuf::Message& xData, const NFSOCK nSockIndex);
+	virtual bool SendMsgPB(const uint16_t nMsgID, const google::protobuf::Message& xData, const NFSOCK nSockIndex);
+	virtual bool SendMsgPB(const uint16_t nMsgID, const google::protobuf::Message& xData, const NFSOCK nSockIndex, const NFGUID id);
+	virtual bool SendMsg(const uint16_t nMsgID, const std::string& xData, const NFSOCK nSockIndex);
+	virtual bool SendMsg(const uint16_t nMsgID, const std::string& xData, const NFSOCK nSockIndex, const NFGUID id);
 
     virtual bool SendMsgPBToAllClient(const uint16_t nMsgID, const google::protobuf::Message& xData);
 
-    virtual bool SendMsgPB(const uint16_t nMsgID, const google::protobuf::Message& xData, const NFSOCK nSockIndex,
-                           const NFGUID nPlayer, const std::vector<NFGUID>* pClientIDList = NULL);
-
-    virtual bool
-    SendMsgPB(const uint16_t nMsgID, const std::string& strData, const NFSOCK nSockIndex, const NFGUID nPlayer,
-              const std::vector<NFGUID>* pClientIDList = NULL);
+    virtual bool SendMsgPB(const uint16_t nMsgID, const google::protobuf::Message& xData, const NFSOCK nSockIndex, const std::vector<NFGUID>* pClientIDList);
+    virtual bool SendMsgPB(const uint16_t nMsgID, const std::string& strData, const NFSOCK nSockIndex,  const std::vector<NFGUID>* pClientIDList);
 
     virtual NFINet* GetNet();
 
@@ -86,6 +104,8 @@ private:
 	std::map<int, std::list<NET_RECEIVE_FUNCTOR_PTR>> mxReceiveCallBack;
     std::list<NET_EVENT_FUNCTOR_PTR> mxEventCallBackList;
     std::list<NET_RECEIVE_FUNCTOR_PTR> mxCallBackList;
+
+	NFILogModule* m_pLogModule;
 };
 
 #endif

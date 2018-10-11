@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project DefaultTargets="Build" ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|x64">
       <Configuration>Debug</Configuration>
@@ -13,11 +13,13 @@
   <ItemGroup>
     <ClCompile Include="dllmain.cpp" />
     <ClCompile Include="NFCClassModule.cpp" />
+    <ClCompile Include="NFCCommonConfigModule.cpp" />
     <ClCompile Include="NFCElementModule.cpp" />
     <ClCompile Include="NFConfigPlugin.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="NFCClassModule.h" />
+    <ClInclude Include="NFCCommonConfigModule.h" />
     <ClInclude Include="NFCElementModule.h" />
     <ClInclude Include="NFConfigPlugin.h" />
   </ItemGroup>
@@ -25,6 +27,7 @@
     <ProjectGuid>{79DD0147-06CD-4F60-A8A5-19E2962B3D56}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>NFConfigPlugin</RootNamespace>
+    <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">

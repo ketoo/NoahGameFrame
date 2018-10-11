@@ -1,10 +1,28 @@
-// -------------------------------------------------------------------------
-//    @FileName			:    NFCHeroModule.cpp
-//    @Author           :    LvSheng.Huang
-//    @Date             :    2017-02-16
-//    @Module           :    NFCHeroModule
-//    @Desc             :
-// -------------------------------------------------------------------------
+/*
+            This file is part of: 
+                NoahFrame
+            https://github.com/ketoo/NoahGameFrame
+
+   Copyright 2009 - 2018 NoahFrame(NoahGameFrame)
+
+   File creator: lvsheng.huang
+   
+   NoahFrame is open-source software and you can redistribute it and/or modify
+   it under the terms of the License; besides, anyone who use this file/software must include this copyright announcement.
+
+   Licensed under the Apache License, Version 2.0 (the "License");
+   you may not use this file except in compliance with the License.
+   You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   See the License for the specific language governing permissions and
+   limitations under the License.
+*/
+
 
 #include "NFCHeroModule.h"
 #include "NFComm/NFPluginModule/NFIModule.h"
@@ -38,6 +56,7 @@ bool NFCHeroModule::AfterInit()
 	m_pSceneProcessModule = pPluginManager->FindModule<NFISceneProcessModule>();
 	m_pHeroPropertyModule = pPluginManager->FindModule<NFIHeroPropertyModule>();
 	m_pSceneAOIModule = pPluginManager->FindModule<NFISceneAOIModule>();
+	m_pLogModule = pPluginManager->FindModule<NFILogModule>();
 
 
 	m_pNetModule->AddReceiveCallBack(NFMsg::EGEC_REQ_SET_FIGHT_HERO, this, &NFCHeroModule::OnSetFightHeroMsg);
@@ -125,7 +144,7 @@ NFGUID NFCHeroModule::AddHero(const NFGUID& self, const std::string& strID)
 
 bool NFCHeroModule::AddHeroExp(const NFGUID & self, const int64_t nExp)
 {
-	NFGUID xID = m_pKernelModule->GetPropertyObject(self, NFrame::Player::FightHero());
+	NFGUID xID = m_pKernelModule->GetPropertyObject(self, NFrame::Player::FightHeroID());
 	return AddHeroExp(self, xID, nExp);
 }
 
@@ -223,7 +242,6 @@ bool NFCHeroModule::SetFightHero(const NFGUID& self, const NFGUID& xHeroID, cons
 	NFGUID xHero1 = m_pKernelModule->GetPropertyObject(self, NFrame::Player::HeroID1());
 	NFGUID xHero2 = m_pKernelModule->GetPropertyObject(self, NFrame::Player::HeroID2());
 	NFGUID xHero3 = m_pKernelModule->GetPropertyObject(self, NFrame::Player::HeroID3());
-	NFGUID xFightHero = m_pKernelModule->GetPropertyObject(self, NFrame::Player::FightHero());
 	if (xHero1 == xHeroID
 		|| xHero2 == xHeroID
 		|| xHero3 == xHeroID)
@@ -233,16 +251,15 @@ bool NFCHeroModule::SetFightHero(const NFGUID& self, const NFGUID& xHeroID, cons
 	}
 
 	NF_SHARE_PTR<NFIRecord> pHeroValueRecord = m_pKernelModule->FindRecord(self, NFrame::Player::HeroValue::ThisName());
-	int nHeroMAXHP = pHeroValueRecord->GetInt(nRow, NFrame::Player::HeroValue::MAXHP);
+	NFGUID xFightHero = m_pKernelModule->GetPropertyObject(self, NFrame::Player::FightHeroID());
 
 	switch (nPos)
 	{
 	case EConsHero_Pos::ECONSt_HERO_POS1:
 	{
 		m_pKernelModule->SetPropertyObject(self, NFrame::Player::HeroID1(), xHeroID);
-		m_pKernelModule->SetPropertyString(self, NFrame::Player::HeroPos1CnfID(), strCnfID);
-		m_pKernelModule->SetPropertyInt(self, NFrame::Player::HeroPos1Star(), nStar);
-		m_pKernelModule->SetPropertyInt(self, NFrame::Player::Hero1HP(), nHeroMAXHP);
+		m_pKernelModule->SetPropertyString(self, NFrame::Player::HeroCnfID1(), strCnfID);
+		m_pKernelModule->SetPropertyInt(self, NFrame::Player::HeroStar1(), nStar);
 		//now the fighting hero is hero 2, we would change the fighting hero as a new one because the pos2 has been placed
 		if (xFightHero == xHero1
 			|| xFightHero.IsNull())
@@ -255,10 +272,8 @@ bool NFCHeroModule::SetFightHero(const NFGUID& self, const NFGUID& xHeroID, cons
 	case EConsHero_Pos::ECONSt_HERO_POS2:
 	{
 		m_pKernelModule->SetPropertyObject(self, NFrame::Player::HeroID2(), xHeroID);
-		m_pKernelModule->SetPropertyString(self, NFrame::Player::HeroPos2CnfID(), strCnfID);
-		m_pKernelModule->SetPropertyInt(self, NFrame::Player::HeroPos2Star(), nStar);
-		m_pKernelModule->SetPropertyInt(self, NFrame::Player::Hero1HP(), nHeroMAXHP);
-
+		m_pKernelModule->SetPropertyString(self, NFrame::Player::HeroCnfID2(), strCnfID);
+		m_pKernelModule->SetPropertyInt(self, NFrame::Player::HeroStar2(), nStar);
 		//now the fighting hero is hero 2, we would change the fighting hero as a new one because the pos2 has been placed
 		if (xFightHero == xHero2
 			|| xFightHero.IsNull())
@@ -271,9 +286,8 @@ bool NFCHeroModule::SetFightHero(const NFGUID& self, const NFGUID& xHeroID, cons
 	case EConsHero_Pos::ECONSt_HERO_POS3:
 	{
 		m_pKernelModule->SetPropertyObject(self, NFrame::Player::HeroID3(), xHeroID);
-		m_pKernelModule->SetPropertyString(self, NFrame::Player::HeroPos3CnfID(), strCnfID);
-		m_pKernelModule->SetPropertyInt(self, NFrame::Player::HeroPos3Star(), nStar);
-		m_pKernelModule->SetPropertyInt(self, NFrame::Player::Hero1HP(), nHeroMAXHP);
+		m_pKernelModule->SetPropertyString(self, NFrame::Player::HeroCnfID3(), strCnfID);
+		m_pKernelModule->SetPropertyInt(self, NFrame::Player::HeroStar3(), nStar);
 		//now the fighting hero is hero 2, we would change the fighting hero as a new one because the pos2 has been placed
 		if (xFightHero == xHero3
 			|| xFightHero.IsNull())
@@ -292,7 +306,7 @@ bool NFCHeroModule::SetFightHero(const NFGUID& self, const NFGUID& xHeroID, cons
 
 bool NFCHeroModule::SwitchFightHero(const NFGUID & self, const NFGUID & xHeroID)
 {
-	NFGUID xLastFightingHero = m_pKernelModule->GetPropertyObject(self, NFrame::Player::FightHero());
+	NFGUID xLastFightingHero = m_pKernelModule->GetPropertyObject(self, NFrame::Player::FightHeroID());
 	if (xLastFightingHero == xHeroID)
 	{
 		return false;
@@ -318,9 +332,9 @@ bool NFCHeroModule::SwitchFightHero(const NFGUID & self, const NFGUID & xHeroID)
 		return false;
 	}
 
-	int nHero1HP = m_pKernelModule->GetPropertyInt(self, NFrame::Player::Hero1HP());
-	int nHero2HP = m_pKernelModule->GetPropertyInt(self, NFrame::Player::Hero2HP());
-	int nHero3HP = m_pKernelModule->GetPropertyInt(self, NFrame::Player::Hero3HP());
+	int nHero1HP = m_pKernelModule->GetPropertyInt(self, NFrame::Player::FightHeroHP1());
+	int nHero2HP = m_pKernelModule->GetPropertyInt(self, NFrame::Player::FightHeroHP2());
+	int nHero3HP = m_pKernelModule->GetPropertyInt(self, NFrame::Player::FightHeroHP3());
 	int nHP = 0;
 	if (nPos == EConsHero_Pos::ECONSt_HERO_POS1)
 	{
@@ -350,9 +364,9 @@ bool NFCHeroModule::SwitchFightHero(const NFGUID & self, const NFGUID & xHeroID)
 	const std::string& strCnfID = pHeroRecord->GetString(nRow, NFrame::Player::PlayerHero::ConfigID);
 	const int nHeroLevel = pHeroRecord->GetInt(nRow, NFrame::Player::PlayerHero::Level);
 	
-	m_pKernelModule->SetPropertyObject(self, NFrame::Player::FightHero(), xHeroID);
+	m_pKernelModule->SetPropertyObject(self, NFrame::Player::FightHeroID(), xHeroID);
 	m_pKernelModule->SetPropertyString(self, NFrame::Player::FightHeroCnfID(), strCnfID);
-	m_pKernelModule->SetPropertyInt(self, NFrame::Player::HeroLevel(), nHeroLevel);
+	m_pKernelModule->SetPropertyInt(self, NFrame::Player::FightHeroLevel(), nHeroLevel);
 	m_pKernelModule->SetPropertyInt(self, NFrame::Player::HP(), nHP);
 
 	const std::string& strSkill1 = m_pElementModule->GetPropertyString(strCnfID, NFrame::NPC::SkillNormal());
@@ -364,6 +378,7 @@ bool NFCHeroModule::SwitchFightHero(const NFGUID & self, const NFGUID & xHeroID)
 	m_pKernelModule->SetPropertyString(self, NFrame::Player::Skill3(), strSkill3);
 
 	m_pHeroPropertyModule->CalFightintHeroProperty(self);
+
 	return true;
 }
 
@@ -418,7 +433,7 @@ NFIHeroModule::EConsHero_Pos NFCHeroModule::GetFightPos(const NFGUID & self, con
 	{
 		return EConsHero_Pos::ECONSt_HERO_POS3;
 	}
-
+	
 	return EConsHero_Pos::ECONSt_HERO_UNKNOW;
 }
 
@@ -434,7 +449,8 @@ int NFCHeroModule::OnPlayerClassEvent(const NFGUID & self, const std::string & s
 
 int NFCHeroModule::OnPlayerHPEvent(const NFGUID & self, const std::string & strPropertyName, const NFData & oldVar, const NFData & newVar)
 {
-	NFGUID xFightingHero = m_pKernelModule->GetPropertyObject(self, NFrame::Player::FightHero());
+
+	NFGUID xFightingHero = m_pKernelModule->GetPropertyObject(self, NFrame::Player::FightHeroID());
 	EConsHero_Pos nPos = GetFightPos(self, xFightingHero);
 
 	switch (nPos)
@@ -443,17 +459,17 @@ int NFCHeroModule::OnPlayerHPEvent(const NFGUID & self, const std::string & strP
 		break;
 	case NFIHeroModule::ECONSt_HERO_POS1:
 	{
-		m_pKernelModule->SetPropertyInt(self, NFrame::Player::Hero1HP(), newVar.GetInt());
+		m_pKernelModule->SetPropertyInt(self, NFrame::Player::FightHeroHP1(), newVar.GetInt());
 	}
 		break;
 	case NFIHeroModule::ECONSt_HERO_POS2:
 	{
-		m_pKernelModule->SetPropertyInt(self, NFrame::Player::Hero2HP(), newVar.GetInt());
+		m_pKernelModule->SetPropertyInt(self, NFrame::Player::FightHeroHP2(), newVar.GetInt());
 	}
 		break;
 	case NFIHeroModule::ECONSt_HERO_POS3:
 	{
-		m_pKernelModule->SetPropertyInt(self, NFrame::Player::Hero3HP(), newVar.GetInt());
+		m_pKernelModule->SetPropertyInt(self, NFrame::Player::FightHeroHP3(), newVar.GetInt());
 	}
 		break;
 	case NFIHeroModule::ECONSt_HERO_MAX:
@@ -461,7 +477,6 @@ int NFCHeroModule::OnPlayerHPEvent(const NFGUID & self, const std::string & strP
 	default:
 		break;
 	}
-
 	return 0;
 }
 
@@ -472,6 +487,7 @@ int NFCHeroModule::BeforeEnterSceneGroupEvent(const NFGUID & self, const int nSc
 
 int NFCHeroModule::AfterEnterSceneGroupEvent(const NFGUID & self, const int nSceneID, const int nGroupID, const int nType, const NFDataList & argList)
 {
+	/*
 	//full hp for all heroes
 	NFGUID xFightingHeroID = m_pKernelModule->GetPropertyObject(self, NFrame::Player::FightHero());
 	NFGUID xHero1ID = m_pKernelModule->GetPropertyObject(self, NFrame::Player::HeroID1());
@@ -526,7 +542,7 @@ int NFCHeroModule::AfterEnterSceneGroupEvent(const NFGUID & self, const int nSce
 		m_pKernelModule->SetPropertyInt(self, NFrame::Player::MP(), nHero3MAXMP);
 	}
 
-
+	*/
 	return 0;
 }
 

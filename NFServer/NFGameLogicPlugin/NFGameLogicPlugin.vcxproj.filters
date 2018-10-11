@@ -5,17 +5,11 @@
       <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
       <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
     </Filter>
-    <Filter Include="NFPVPModule">
-      <UniqueIdentifier>{61a8697e-e6af-4dc2-a039-8939512fadc9}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="NFCommonConfigModule">
-      <UniqueIdentifier>{15121c6f-c078-4629-81c4-7bac017e056f}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="NFMapModule">
-      <UniqueIdentifier>{54157a03-de81-4609-966f-ec32582895de}</UniqueIdentifier>
-    </Filter>
     <Filter Include="NFCreateRoleModule">
       <UniqueIdentifier>{ca2648e6-36dd-4163-9791-b22482d4b8b6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="NFPVP">
+      <UniqueIdentifier>{19e315a2-7662-47a2-a943-6abcee1ee64c}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -23,29 +17,11 @@
       <Filter>NFBuffModule</Filter>
     </ClInclude>
     <ClInclude Include="NFGameLogicPlugin.h" />
-    <ClInclude Include="NFCPVPModule.h">
-      <Filter>NFPVPModule</Filter>
-    </ClInclude>
-    <ClInclude Include="NFCCommonConfigModule.h">
-      <Filter>NFCommonConfigModule</Filter>
-    </ClInclude>
-    <ClInclude Include="NFCMapModule.h">
-      <Filter>NFMapModule</Filter>
-    </ClInclude>
     <ClInclude Include="NFCCreateRoleModule.h">
       <Filter>NFCreateRoleModule</Filter>
     </ClInclude>
-    <ClInclude Include="NFCTileModule.h">
-      <Filter>NFMapModule</Filter>
-    </ClInclude>
-    <ClInclude Include="NFCSurvivalModule.h">
-      <Filter>NFPVPModule</Filter>
-    </ClInclude>
-    <ClInclude Include="NFCTileMapModule.h">
-      <Filter>NFMapModule</Filter>
-    </ClInclude>
-    <ClInclude Include="NFCHomeModule.h">
-      <Filter>NFPVPModule</Filter>
+    <ClInclude Include="NFCPVPModule.h">
+      <Filter>NFPVP</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -54,29 +30,11 @@
       <Filter>NFBuffModule</Filter>
     </ClCompile>
     <ClCompile Include="NFGameLogicPlugin.cpp" />
-    <ClCompile Include="NFCPVPModule.cpp">
-      <Filter>NFPVPModule</Filter>
-    </ClCompile>
-    <ClCompile Include="NFCCommonConfigModule.cpp">
-      <Filter>NFCommonConfigModule</Filter>
-    </ClCompile>
-    <ClCompile Include="NFCMapModule.cpp">
-      <Filter>NFMapModule</Filter>
-    </ClCompile>
     <ClCompile Include="NFCCreateRoleModule.cpp">
       <Filter>NFCreateRoleModule</Filter>
     </ClCompile>
-    <ClCompile Include="NFCTileModule.cpp">
-      <Filter>NFMapModule</Filter>
-    </ClCompile>
-    <ClCompile Include="NFCSurvivalModule.cpp">
-      <Filter>NFPVPModule</Filter>
-    </ClCompile>
-    <ClCompile Include="NFCTileMapModule.cpp">
-      <Filter>NFMapModule</Filter>
-    </ClCompile>
-    <ClCompile Include="NFCHomeModule.cpp">
-      <Filter>NFPVPModule</Filter>
+    <ClCompile Include="NFCPVPModule.cpp">
+      <Filter>NFPVP</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

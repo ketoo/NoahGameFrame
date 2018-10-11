@@ -1,3 +1,24 @@
+/*
+    Copyright 2009 - 2018 LvSheng.Huang
+
+   This source file is part of NoahGameFrame/NoahFrame.
+   NoahGameFrame/NoahFrame is open-source software and you can redistribute it and/or modify
+   it under the terms of the License; besides, anyone who use this file/software must include this copyright announcement.
+
+   Licensed under the Apache License, Version 2.0 (the "License");
+   you may not use this file except in compliance with the License.
+   You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   See the License for the specific language governing permissions and
+   limitations under the License.
+*/
+
+
 #ifndef NF_PLATFORM_H
 #define NF_PLATFORM_H
 
@@ -17,7 +38,7 @@
 #define NF_ENDIAN_LITTLE 1
 #define NF_ENDIAN_BIG 2
 
-#define NF_ENABLE_SSL 0
+//#define NF_ENABLE_SSL 1
 
 #if NF_ENABLE_SSL
 #define EVENT__HAVE_OPENSSL
@@ -313,19 +334,26 @@ typedef int64_t NFSOCK;
 #define NFGetPID() lexical_cast<std::string>(getpid())
 #endif
 
+#if NF_PLATFORM == NF_PLATFORM_WIN
 #ifndef NF_DYNAMIC_PLUGIN
-#define NF_DYNAMIC_PLUGIN
+#define NF_DYNAMIC_PLUGIN 1
+#endif
 #endif
 
-//use actor mode--begin
-#define NF_ACTOR_THREAD_COUNT 2
+#if NF_PLATFORM != NF_PLATFORM_WIN
+#ifndef NF_USE_COROUTINE
+//#define NF_USE_COROUTINE 1
+#endif
+#endif
 
+//using tcmalloc
+//#define NF_USE_TCMALLOC 1
+
+//using actor mode--begin
+#define NF_ACTOR_THREAD_COUNT 16
 #ifndef NF_USE_ACTOR
+
 #define NF_USE_ACTOR
-#endif
-
-#ifdef NF_USE_ACTOR
-
 #ifdef NF_DEBUG_MODE
 #define THERON_DEBUG 1
 #else
@@ -384,12 +412,12 @@ inline int64_t NFGetTimeS()
 }
 
 //Protobuf Using Dlls
+/*
 #if NF_PLATFORM == NF_PLATFORM_WIN
-#ifndef PROTOBUF_SRC
 #ifndef PROTOBUF_USE_DLLS
 #define PROTOBUF_USE_DLLS
 #endif
 #endif
-#endif
+*/
 
 #endif

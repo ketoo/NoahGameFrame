@@ -1,10 +1,9 @@
 echo on
-protogen -i:NFDefine.proto -o:NFDefine.cs
-protogen -i:NFMsgBase.proto -o:NFMsgBase.cs
-protogen -i:NFMsgPreGame.proto -o:NFMsgPreGame.cs
-protogen -i:NFMsgShare.proto -o:NFMsgShare.cs
-protogen -i:NFFleetingDefine.proto -o:NFFleetingDefine.cs
-protogen -i:NFMsgExtra.proto -o:NFMsgExtra.cs
+protoc.exe --csharp_out="./" --proto_path="./" NFDefine.proto
+protoc.exe --csharp_out="./" --proto_path="./" NFMsgBase.proto
+protoc.exe --csharp_out="./" --proto_path="./" NFMsgPreGame.proto
+protoc.exe --csharp_out="./" --proto_path="./" NFMsgShare.proto
+protoc.exe --csharp_out="./" --proto_path="./" NFMsgExtra.proto
 
 xcopy *.cs ..\..\NFClient\NFMessageDefine\ /s /e /Y
 
