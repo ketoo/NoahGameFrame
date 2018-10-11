@@ -1,11 +1,27 @@
-// -------------------------------------------------------------------------
-//    @FileName			:    NFCGameServerNet_ServerModule.cpp
-//    @Author           :    LvSheng.Huang
-//    @Date             :    2013-01-02
-//    @Module           :    NFCGameServerNet_ServerModule
-//    @Desc             :
-// -------------------------------------------------------------------------
+/*
+            This file is part of: 
+                NoahFrame
+            https://github.com/ketoo/NoahGameFrame
 
+   Copyright 2009 - 2018 NoahFrame(NoahGameFrame)
+
+   File creator: lvsheng.huang
+   
+   NoahFrame is open-source software and you can redistribute it and/or modify
+   it under the terms of the License; besides, anyone who use this file/software must include this copyright announcement.
+
+   Licensed under the Apache License, Version 2.0 (the "License");
+   you may not use this file except in compliance with the License.
+   You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   See the License for the specific language governing permissions and
+   limitations under the License.
+*/
 #include "NFCProxyServerNet_ServerModule.h"
 #include "NFProxyServerNet_ServerPlugin.h"
 #include "NFComm/NFPluginModule/NFIKernelModule.h"
@@ -124,17 +140,17 @@ void NFCProxyServerNet_ServerModule::OnOtherMessage(const NFSOCK nSockIndex, con
 		//special for distributed
 		if (!pNetObject->GetHashIdentID().IsNull())
 		{
-			m_pNetClientModule->SendBySuit(NF_SERVER_TYPES::NF_ST_GAME, pNetObject->GetHashIdentID().ToString(), nMsgID, strMsg);
+			m_pNetClientModule->SendBySuitWithOutHead(NF_SERVER_TYPES::NF_ST_GAME, pNetObject->GetHashIdentID().ToString(), nMsgID, strMsg);
 		}
 		else
 		{
 			NFGUID xHashIdent = NFINetModule::PBToNF(xMsg.hash_ident());
-			m_pNetClientModule->SendBySuit(NF_SERVER_TYPES::NF_ST_GAME, xHashIdent.ToString(), nMsgID, strMsg);
+			m_pNetClientModule->SendBySuitWithOutHead(NF_SERVER_TYPES::NF_ST_GAME, xHashIdent.ToString(), nMsgID, strMsg);
 		}
 	}
 	else
 	{
-		m_pNetClientModule->SendByServerID(pNetObject->GetGameID(), nMsgID, strMsg);
+		m_pNetClientModule->SendByServerIDWithOutHead(pNetObject->GetGameID(), nMsgID, strMsg);
 	}
 }
 
@@ -192,9 +208,9 @@ void NFCProxyServerNet_ServerModule::OnSocketClientEvent(const NFSOCK nSockIndex
         m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFGUID(0, nSockIndex), "NF_NET_EVENT_TIMEOUT", "read timeout", __FUNCTION__, __LINE__);
         OnClientDisconnect(nSockIndex);
     }
-    else  if (eEvent == NF_NET_EVENT_CONNECTED)
+    else  if (eEvent & NF_NET_EVENT_CONNECTED)
     {
-        m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFGUID(0, nSockIndex), "NF_NET_EVENT_CONNECTED", "connectioned success", __FUNCTION__, __LINE__);
+        m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFGUID(0, nSockIndex), "NF_NET_EVENT_CONNECTED", "connected success", __FUNCTION__, __LINE__);
         OnClientConnected(nSockIndex);
     }
 }
@@ -229,7 +245,7 @@ void NFCProxyServerNet_ServerModule::OnClientDisconnect(const NFSOCK nAddress)
                     return;
                 }
 
-				m_pNetClientModule->SendByServerID(nGameID, NFMsg::EGameMsgID::EGMI_REQ_LEAVE_GAME, strMsg);
+				m_pNetClientModule->SendByServerIDWithOutHead(nGameID, NFMsg::EGameMsgID::EGMI_REQ_LEAVE_GAME, strMsg);
             }
         }
 
@@ -262,9 +278,10 @@ void NFCProxyServerNet_ServerModule::OnSelectServerProcess(const NFSOCK nSockInd
     NF_SHARE_PTR<ConnectData> pServerData = m_pNetClientModule->GetServerNetInfo(xMsg.world_id());
     if (pServerData && ConnectDataState::NORMAL == pServerData->eState)
     {
-        NetObject* pNetObject = m_pNetModule->GetNet()->GetNetObject(nSockIndex);
-        if (pNetObject)
-        {
+	//Modify: not need check pNetObject again by wenmin
+        //NetObject* pNetObject = m_pNetModule->GetNet()->GetNetObject(nSockIndex);
+        //if (pNetObject)
+        //{
             //now this client bind a game server, all message will be sent to this game server whom bind with client
             pNetObject->SetGameID(xMsg.world_id());
 
@@ -272,7 +289,7 @@ void NFCProxyServerNet_ServerModule::OnSelectServerProcess(const NFSOCK nSockInd
             xMsg.set_event_code(NFMsg::EGameEventCode::EGEC_SELECTSERVER_SUCCESS);
 			m_pNetModule->SendMsgPB(NFMsg::EGameMsgID::EGMI_ACK_SELECT_SERVER, xMsg, nSockIndex);
             return;
-        }
+        //}
     }
 
     //actually, if you want the game server working with a good performance then we need to find the game server with lowest workload
@@ -346,9 +363,10 @@ void NFCProxyServerNet_ServerModule::OnReqServerListProcess(const NFSOCK nSockIn
 
         NFMapEx<int, ConnectData>& xServerList = m_pNetClientModule->GetServerList();
         ConnectData* pGameData = xServerList.FirstNude();
-        while (pGameData && NF_SERVER_TYPES::NF_ST_GAME == pGameData->eServerType)
+        while (pGameData)
         {
-            if (ConnectDataState::NORMAL == pGameData->eState)
+            if (ConnectDataState::NORMAL == pGameData->eState
+				&& NF_SERVER_TYPES::NF_ST_GAME == pGameData->eServerType)
             {
                 NFMsg::ServerInfo* pServerInfo = xData.add_info();
 
@@ -391,7 +409,7 @@ int NFCProxyServerNet_ServerModule::Transpond(const NFSOCK nSockIndex, const int
                 }
             }
 
-			m_pNetModule->GetNet()->SendMsgWithOutHead(nMsgID, msg, nLen, *pFD);
+			m_pNetModule->SendMsgWithOutHead(nMsgID, std::string(msg, nLen), *pFD);
         }
     }
 
@@ -411,7 +429,7 @@ int NFCProxyServerNet_ServerModule::Transpond(const NFSOCK nSockIndex, const int
                 }
             }
 
-			m_pNetModule->GetNet()->SendMsgWithOutHead(nMsgID, msg, nLen, *pFD);
+			m_pNetModule->SendMsgWithOutHead(nMsgID, std::string(msg, nLen), *pFD);
         }
 		else if(xClientIdent.IsNull())
 		{
@@ -485,7 +503,7 @@ void NFCProxyServerNet_ServerModule::OnReqRoleListProcess(const NFSOCK nSockInde
                 return;
             }
 
-			m_pNetClientModule->SendByServerID(pNetObject->GetGameID(), NFMsg::EGameMsgID::EGMI_REQ_ROLE_LIST, strMsg);
+			m_pNetClientModule->SendByServerIDWithOutHead(pNetObject->GetGameID(), NFMsg::EGameMsgID::EGMI_REQ_ROLE_LIST, strMsg);
         }
     }
 }
@@ -534,7 +552,7 @@ void NFCProxyServerNet_ServerModule::OnReqCreateRoleProcess(const NFSOCK nSockIn
                 return;
             }
 
-			m_pNetClientModule->SendByServerID(pNetObject->GetGameID(), nMsgID, strMsg);
+			m_pNetClientModule->SendByServerIDWithOutHead(pNetObject->GetGameID(), nMsgID, strMsg);
         }
     }
 }
@@ -583,7 +601,7 @@ void NFCProxyServerNet_ServerModule::OnReqDelRoleProcess(const NFSOCK nSockIndex
 				return;
 			}
 
-			m_pNetClientModule->SendByServerID(pNetObject->GetGameID(), nMsgID, strMsg);
+			m_pNetClientModule->SendByServerIDWithOutHead(pNetObject->GetGameID(), nMsgID, strMsg);
         }
     }
 }
@@ -627,14 +645,13 @@ void NFCProxyServerNet_ServerModule::OnReqEnterGameServer(const NFSOCK nSockInde
 
 			//clientid
             xMsg.mutable_player_id()->CopyFrom(NFINetModule::NFToPB(pNetObject->GetClientID()));
-
             std::string strMsg;
             if (!xMsg.SerializeToString(&strMsg))
             {
                 return;
             }
 
-			m_pNetClientModule->SendByServerID(pNetObject->GetGameID(), NFMsg::EGameMsgID::EGMI_REQ_ENTER_GAME, strMsg);
+			m_pNetClientModule->SendByServerIDWithOutHead(pNetObject->GetGameID(), NFMsg::EGameMsgID::EGMI_REQ_ENTER_GAME, strMsg);
         }
     }
 }

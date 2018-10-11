@@ -1,10 +1,28 @@
-// -------------------------------------------------------------------------
-//    @FileName			:    NFCPluginManager.cpp
-//    @Author           :    LvSheng.Huang
-//    @Date             :    2012-12-15
-//    @Module           :    NFCPluginManager
-//
-// -------------------------------------------------------------------------
+/*
+            This file is part of: 
+                NoahFrame
+            https://github.com/ketoo/NoahGameFrame
+
+   Copyright 2009 - 2018 NoahFrame(NoahGameFrame)
+
+   File creator: lvsheng.huang
+   
+   NoahFrame is open-source software and you can redistribute it and/or modify
+   it under the terms of the License; besides, anyone who use this file/software must include this copyright announcement.
+
+   Licensed under the Apache License, Version 2.0 (the "License");
+   you may not use this file except in compliance with the License.
+   You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   See the License for the specific language governing permissions and
+   limitations under the License.
+*/
+
 
 #include "NFCPluginManager.h"
 #include "Dependencies/RapidXML/rapidxml.hpp"
@@ -40,6 +58,61 @@
 
 #endif
 
+
+#ifndef NF_DYNAMIC_PLUGIN
+//for nf-sdk plugins
+#include "NFComm/NFActorPlugin/NFActorPlugin.h"
+#include "NFComm/NFConfigPlugin/NFConfigPlugin.h"
+#include "NFComm/NFKernelPlugin/NFKernelPlugin.h"
+#include "NFComm/NFLogPlugin/NFLogPlugin.h"
+#include "NFComm/NFLuaScriptPlugin/NFLuaScriptPlugin.h"
+#include "NFComm/NFNavigationPlugin/NFNavigationPlugin.h"
+#include "NFComm/NFNetPlugin/NFNetPlugin.h"
+#include "NFComm/NFNoSqlPlugin/NFNoSqlPlugin.h"
+#include "NFComm/NFScalePlugin/NFScalePlugin.h"
+#include "NFComm/NFSecurityPlugin/NFSecurityPlugin.h"
+#include "NFComm/NFTestPlugin/NFTestPlugin.h"
+//DB
+#include "NFServer/NFDBLogicPlugin/NFDBLogicPlugin.h"
+#include "NFServer/NFDBNet_ClientPlugin/NFDBNet_ClientPlugin.h"
+#include "NFServer/NFDBNet_ServerPlugin/NFDBNet_ServerPlugin.h"
+//GAME
+#include "NFServer/NFGameLogicPlugin/NFGameLogicPlugin.h"
+#include "NFServer/NFGameServerNet_ClientPlugin/NFGameServerNet_ClientPlugin.h"
+#include "NFServer/NFGameServerNet_ServerPlugin/NFGameServerNet_ServerPlugin.h"
+#include "NFServer/NFGameServerPlugin/NFGameServerPlugin.h"
+//LOGIN
+#include "NFServer/NFLoginLogicPlugin/NFLoginLogicPlugin.h"
+#include "NFServer/NFLoginNet_ClientPlugin/NFLoginNet_ClientPlugin.h"
+#include "NFServer/NFLoginNet_ServerPlugin/NFLoginNet_ServerPlugin.h"
+#include "NFServer/NFLoginNet_HttpServerPlugin/NFLoginNet_HttpServerPlugin.h"
+//MASTER
+#include "NFServer/NFMasterNet_HttpServerPlugin/NFMasterNet_HttpServerPlugin.h"
+#include "NFServer/NFMasterNet_ServerPlugin/NFMasterNet_ServerPlugin.h"
+//PROXY
+#include "NFServer/NFProxyLogicPlugin/NFProxyLogicPlugin.h"
+#include "NFServer/NFProxyServerNet_ClientPlugin/NFProxyServerNet_ClientPlugin.h"
+#include "NFServer/NFProxyServerNet_ServerPlugin/NFProxyServerNet_ServerPlugin.h"
+//WORLD
+#include "NFServer/NFWorldLogicPlugin/NFWorldLogicPlugin.h"
+#include "NFServer/NFWorldNet_ClientPlugin/NFWorldNet_ClientPlugin.h"
+#include "NFServer/NFWorldNet_ServerPlugin/NFWorldNet_ServerPlugin.h"
+//MIDWARE
+#include "NFMidWare/NFAIPlugin/NFAIPlugin.h"
+#include "NFMidWare/NFAOIPlugin/NFAOIPlugin.h"
+#include "NFMidWare/NFChatPlugin/NFChatPlugin.h"
+#include "NFMidWare/NFFriendPlugin/NFFriendPlugin.h"
+#include "NFMidWare/NFGuildPlugin/NFGuildPlugin.h"
+#include "NFMidWare/NFHeroPlugin/NFHeroPlugin.h"
+#include "NFMidWare/NFItemBagPlugin/NFItemBagPlugin.h"
+#include "NFMidWare/NFMailPlugin/NFMailPlugin.h"
+#include "NFMidWare/NFRankPlugin/NFRankPlugin.h"
+#include "NFMidWare/NFShopPlugin/NFShopPlugin.h"
+#include "NFMidWare/NFSkillPlugin/NFSkillPlugin.h"
+#include "NFMidWare/NFTaskPlugin/NFTaskPlugin.h"
+#include "NFMidWare/NFUserGiftPlugin/NFUserGiftPlugin.h"
+#endif
+
 void CoroutineExecute(void* arg)
 {
 	NFCPluginManager::Instance()->Execute();
@@ -47,13 +120,21 @@ void CoroutineExecute(void* arg)
 
 NFCPluginManager::NFCPluginManager() : NFIPluginManager()
 {
-   mnAppID = 0;
-   mnInitTime = time(NULL);
-   mnNowTime = mnInitTime;
+	mnAppID = 0;
+    mbIsDocker = false;
 
-   mGetFileContentFunctor = nullptr;
+#ifdef NF_DYNAMIC_PLUGIN
+	mbStaticPlugin = false;
+#else
+	mbStaticPlugin = true;
+#endif
 
-   mstrConfigPath = "../";
+	mnInitTime = time(NULL);
+	mnNowTime = mnInitTime;
+
+	mGetFileContentFunctor = nullptr;
+
+	mstrConfigPath = "../";
 
 #ifdef NF_DEBUG_MODE
    mstrConfigName = "NFDataCfg/Debug/Plugin.xml";
@@ -71,6 +152,10 @@ bool NFCPluginManager::Awake()
 {
 	LoadPluginConfig();
 
+#ifndef NF_DYNAMIC_PLUGIN
+	LoadStaticPlugin();
+#endif
+
 	PluginNameMap::iterator it = mPluginNameMap.begin();
 	for (; it != mPluginNameMap.end(); ++it)
 	{
@@ -81,6 +166,9 @@ bool NFCPluginManager::Awake()
 #endif
 	}
 
+#ifndef NF_DYNAMIC_PLUGIN
+	CheckStaticPlugin();
+#endif
 
 	PluginInstanceMap::iterator itAfterInstance = mPluginInstanceMap.begin();
 	for (; itAfterInstance != mPluginInstanceMap.end(); itAfterInstance++)
@@ -132,20 +220,137 @@ bool NFCPluginManager::LoadPluginConfig()
     return true;
 }
 
+bool NFCPluginManager::LoadStaticPlugin()
+{
+
+#ifndef NF_DYNAMIC_PLUGIN
+
+//for nf-sdk plugins
+	CREATE_PLUGIN(this, NFActorPlugin)
+	CREATE_PLUGIN(this, NFConfigPlugin)
+	CREATE_PLUGIN(this, NFKernelPlugin)
+	CREATE_PLUGIN(this, NFLogPlugin)
+	CREATE_PLUGIN(this, NFLuaScriptPlugin)
+	CREATE_PLUGIN(this, NFNavigationPlugin)
+	CREATE_PLUGIN(this, NFNetPlugin)
+	CREATE_PLUGIN(this, NFNoSqlPlugin)
+	CREATE_PLUGIN(this, NFScalePlugin)
+	CREATE_PLUGIN(this, NFSecurityPlugin)
+	CREATE_PLUGIN(this, NFTestPlugin)
+
+//DB
+	CREATE_PLUGIN(this, NFDBLogicPlugin)
+	CREATE_PLUGIN(this, NFDBNet_ClientPlugin)
+	CREATE_PLUGIN(this, NFDBNet_ServerPlugin)
+
+//GAME
+	CREATE_PLUGIN(this, NFGameLogicPlugin)
+	CREATE_PLUGIN(this, NFGameServerNet_ClientPlugin)
+	CREATE_PLUGIN(this, NFGameServerNet_ServerPlugin)
+	CREATE_PLUGIN(this, NFGameServerPlugin)
+
+//LOGIN
+	CREATE_PLUGIN(this, NFLoginLogicPlugin)
+	CREATE_PLUGIN(this, NFLoginNet_ClientPlugin)
+	CREATE_PLUGIN(this, NFLoginNet_ServerPlugin)
+	CREATE_PLUGIN(this, NFLoginNet_HttpServerPlugin)
+
+//MASTER
+	CREATE_PLUGIN(this, NFMasterNet_HttpServerPlugin)
+	CREATE_PLUGIN(this, NFMasterNet_ServerPlugin)
+
+//PROXY
+	CREATE_PLUGIN(this, NFProxyLogicPlugin)
+	CREATE_PLUGIN(this, NFProxyServerNet_ClientPlugin)
+	CREATE_PLUGIN(this, NFProxyServerNet_ServerPlugin)
+
+//WORLD
+	CREATE_PLUGIN(this, NFWorldLogicPlugin)
+	CREATE_PLUGIN(this, NFWorldNet_ClientPlugin)
+	CREATE_PLUGIN(this, NFWorldNet_ServerPlugin)
+
+//MIDWARE
+	CREATE_PLUGIN(this, NFChatPlugin)
+	CREATE_PLUGIN(this, NFFriendPlugin)
+	CREATE_PLUGIN(this, NFGuildPlugin)
+	CREATE_PLUGIN(this, NFHeroPlugin)
+	CREATE_PLUGIN(this, NFItemBagPlugin)
+	CREATE_PLUGIN(this, NFMailPlugin)
+	CREATE_PLUGIN(this, NFRankPlugin)
+	CREATE_PLUGIN(this, NFShopPlugin)
+	CREATE_PLUGIN(this, NFSkillPlugin)
+	CREATE_PLUGIN(this, NFTaskPlugin)
+	CREATE_PLUGIN(this, NFUserGiftPlugin)
+#endif
+
+    return true;
+}
+
+bool NFCPluginManager::CheckStaticPlugin()
+{
+#ifndef NF_DYNAMIC_PLUGIN
+	//plugin
+	for (auto it = mPluginInstanceMap.begin(); it != mPluginInstanceMap.end();)
+	{
+		bool bFind = false;
+		const std::string& strPluginName = it->first;
+		for (int i = 0; i < mStaticPlugin.size(); ++i)
+		{
+			const std::string& tempPluginName = mStaticPlugin[i];
+			if (tempPluginName == strPluginName)
+			{
+				bFind = true;
+			}
+		}
+
+		if (!bFind)
+		{
+			it = mPluginInstanceMap.erase(it);  
+		}
+		else
+		{
+			it++;
+		}
+	}
+	//////module
+	for (auto it = mModuleInstanceMap.begin(); it != mModuleInstanceMap.end();)
+	{
+		bool bFind = false;
+		const std::string& strModuleName = it->first;
+		for (int i = 0; i < mStaticPlugin.size(); ++i)
+		{
+			const std::string& strPluginName = mStaticPlugin[i];
+			NFIPlugin* pPlugin = this->FindPlugin(strPluginName);
+			if (pPlugin)
+			{
+				NFIModule* pModule = pPlugin->GetElement(strModuleName);
+				if (pModule)
+				{
+					bFind = true;
+					break;
+				}
+			}
+		}
+
+		if (!bFind)
+		{
+			it = mModuleInstanceMap.erase(it);  
+		}
+		else
+		{
+			it++;
+		}
+	}
+#endif
+
+    return true;
+}
+
 bool NFCPluginManager::LoadStaticPlugin(const std::string& strPluginDLLName)
 {
-	//     PluginNameList::iterator it = mPluginNameList.begin();
-	//     for (; it != mPluginNameList.end(); it++)
-	//     {
-	//         const std::string& strPluginName = *it;
-	//         CREATE_PLUGIN( this, strPluginName );
-	//     }
+	mStaticPlugin.push_back(strPluginDLLName);
 
-	//     CREATE_PLUGIN(this, NFKernelPlugin)
-	//     CREATE_PLUGIN(this, NFEventProcessPlugin)
-	//     CREATE_PLUGIN(this, NFConfigPlugin)
-
-	return false;
+	return true;
 }
 
 void NFCPluginManager::Registered(NFIPlugin* plugin)
@@ -301,6 +506,20 @@ inline void NFCPluginManager::SetAppID(const int nAppID)
 {
     mnAppID = nAppID;
 }
+bool NFCPluginManager::IsRunningDocker() const
+{
+	return mbIsDocker;
+}
+
+void NFCPluginManager::SetRunningDocker(bool bDocker)
+{
+	mbIsDocker = bDocker;
+}
+
+bool NFCPluginManager::IsStaticPlugin() const
+{
+	return mbStaticPlugin;
+}
 
 inline NFINT64 NFCPluginManager::GetInitTime() const
 {
@@ -407,6 +626,14 @@ void NFCPluginManager::AddModule(const std::string& strModuleName, NFIModule* pM
     }
 }
 
+void NFCPluginManager::AddTestModule(const std::string& strModuleName, NFIModule* pModule)
+{
+	if (!FindTestModule(strModuleName))
+	{
+		mTestModuleInstanceMap.insert(TestModuleInstanceMap::value_type(strModuleName, pModule));
+	}
+}
+
 void NFCPluginManager::RemoveModule(const std::string& strModuleName)
 {
     ModuleInstanceMap::iterator it = mModuleInstanceMap.find(strModuleName);
@@ -447,6 +674,51 @@ NFIModule* NFCPluginManager::FindModule(const std::string& strModuleName)
 	}
 
     return NULL;
+}
+
+NFIModule* NFCPluginManager::FindTestModule(const std::string& strModuleName)
+{
+	std::string strSubModuleName = strModuleName;
+
+#if NF_PLATFORM == NF_PLATFORM_WIN
+	std::size_t position = strSubModuleName.find(" ");
+	if (string::npos != position)
+	{
+		strSubModuleName = strSubModuleName.substr(position + 1, strSubModuleName.length());
+	}
+#else
+	for (int i = 0; i < strSubModuleName.length(); i++)
+	{
+		std::string s = strSubModuleName.substr(0, i + 1);
+		int n = atof(s.c_str());
+		if (strSubModuleName.length() == i + 1 + n)
+		{
+			strSubModuleName = strSubModuleName.substr(i + 1, strSubModuleName.length());
+			break;
+		}
+	}
+#endif
+
+    TestModuleInstanceMap::iterator it = mTestModuleInstanceMap.find(strSubModuleName);
+	if (it != mTestModuleInstanceMap.end())
+	{
+		return it->second;
+	}
+
+	return NULL;
+}
+
+std::list<NFIModule*> NFCPluginManager::Modules()
+{
+	std::list<NFIModule*> xModules;
+
+	ModuleInstanceMap::iterator itCheckInstance = mModuleInstanceMap.begin();
+	for (; itCheckInstance != mModuleInstanceMap.end(); itCheckInstance++)
+	{
+		xModules.push_back(itCheckInstance->second);
+	}
+
+	return xModules;
 }
 
 bool NFCPluginManager::AfterInit()
@@ -615,7 +887,7 @@ void NFCPluginManager::ExecuteCoScheduler()
     mxCoroutineManager.ScheduleJob();
 }
 
-void NFCPluginManager::YieldCo(const float nSecond)
+void NFCPluginManager::YieldCo(const int64_t nSecond)
 {
 	mxCoroutineManager.YieldCo(nSecond);
 }

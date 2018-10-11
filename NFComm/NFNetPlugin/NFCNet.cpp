@@ -1,13 +1,32 @@
-// -------------------------------------------------------------------------
-//    @FileName			:		NFCNet.cpp
-//    @Author			:		LvSheng.Huang
-//    @Date				:		2012-12-15
-//    @Module			:		NFCNet
-// -------------------------------------------------------------------------
+/*
+            This file is part of: 
+                NoahFrame
+            https://github.com/ketoo/NoahGameFrame
+
+   Copyright 2009 - 2018 NoahFrame(NoahGameFrame)
+
+   File creator: lvsheng.huang
+   
+   NoahFrame is open-source software and you can redistribute it and/or modify
+   it under the terms of the License; besides, anyone who use this file/software must include this copyright announcement.
+
+   Licensed under the Apache License, Version 2.0 (the "License");
+   you may not use this file except in compliance with the License.
+   You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   See the License for the specific language governing permissions and
+   limitations under the License.
+*/
+
+#include <string.h>
+#include <atomic>
 
 #include "NFCNet.h"
-#include <string.h>
-
 #if NF_PLATFORM == NF_PLATFORM_WIN
 #include <WS2tcpip.h>
 #include <winsock2.h>
@@ -20,12 +39,12 @@
 #include <arpa/inet.h>
 #endif
 
-#include "event2/bufferevent_struct.h"
 #include "event2/event.h"
-#include <atomic>
+#include "event2/bufferevent_struct.h"
+#include "NFComm/NFLogPlugin/easylogging++.h"
 
 /*
-if any one upgrade the networking library(libEvent), please change the size of evbuffer as below:
+if any one want to upgrade the networking library(libEvent), please change the size of evbuffer as below:
 *MODIFY--libevent/buffer.c
 #define EVBUFFER_MAX_READ	4096
 TO
@@ -35,6 +54,11 @@ TO
 //1048576 = 1024 * 1024
 #define NF_BUFFER_MAX_READ	1048576
 
+void NFCNet::event_fatal_cb(int err)
+{
+    LOG(FATAL) << "event_fatal_cb " << err;
+
+}
 void NFCNet::conn_writecb(struct bufferevent* bev, void* user_data)
 {
     
@@ -117,11 +141,14 @@ void NFCNet::listener_cb(struct evconnlistener* listener, evutil_socket_t fd, st
     
     bufferevent_setcb(bev, conn_readcb, conn_writecb, conn_eventcb, (void*)pObject);
 
+    bufferevent_enable(bev, EV_READ | EV_WRITE | EV_CLOSED | EV_TIMEOUT | EV_PERSIST);
     
-    bufferevent_enable(bev, EV_READ | EV_WRITE | EV_CLOSED | EV_TIMEOUT);
-
+    event_set_fatal_callback(event_fatal_cb);
     
     conn_eventcb(bev, BEV_EVENT_CONNECTED, (void*)pObject);
+	
+    bufferevent_set_max_single_read(bev, NF_BUFFER_MAX_READ);
+    bufferevent_set_max_single_write(bev, NF_BUFFER_MAX_READ);
 }
 
 
@@ -232,6 +259,11 @@ bool NFCNet::SendMsgToAllClient(const char* msg, const size_t nLen)
         return false;
     }
 
+	if (!mbWorking)
+	{
+		return false;
+	}
+
     std::map<NFSOCK, NetObject*>::iterator it = mmObject.begin();
     for (; it != mmObject.end(); ++it)
     {
@@ -239,7 +271,7 @@ bool NFCNet::SendMsgToAllClient(const char* msg, const size_t nLen)
         if (pNetObject && !pNetObject->NeedRemove())
         {
             bufferevent* bev = (bufferevent*)pNetObject->GetUserData();
-            if (NULL != bev && mbWorking )
+            if (NULL != bev)
             {
                 bufferevent_write(bev, msg, nLen);
 
@@ -259,6 +291,11 @@ bool NFCNet::SendMsg(const char* msg, const size_t nLen, const NFSOCK nSockIndex
         return false;
     }
 
+	if (!mbWorking)
+	{
+		return false;
+	}
+
     std::map<NFSOCK, NetObject*>::iterator it = mmObject.find(nSockIndex);
     if (it != mmObject.end())
     {
@@ -266,7 +303,7 @@ bool NFCNet::SendMsg(const char* msg, const size_t nLen, const NFSOCK nSockIndex
         if (pNetObject)
         {
             bufferevent* bev = (bufferevent*)pNetObject->GetUserData();
-            if (NULL != bev && mbWorking)
+            if (NULL != bev)
             {
                 bufferevent_write(bev, msg, nLen);
 
@@ -409,18 +446,18 @@ int NFCNet::InitClientNet()
     mbServer = false;
 
     bufferevent_setcb(bev, conn_readcb, conn_writecb, conn_eventcb, (void*)pObject);
-    bufferevent_enable(bev, EV_READ | EV_WRITE);
+    bufferevent_enable(bev, EV_READ | EV_WRITE | EV_CLOSED | EV_TIMEOUT | EV_PERSIST);
 
     event_set_log_callback(&NFCNet::log_cb);
 
-	int nSizeRead = (int)bufferevent_get_max_to_read(bev);
-	int nSizeWrite = (int)bufferevent_get_max_to_write(bev);
+    bufferevent_set_max_single_read(bev, NF_BUFFER_MAX_READ);
+    bufferevent_set_max_single_write(bev, NF_BUFFER_MAX_READ);
 
-	std::cout << "want to connect " << mstrIP << " SizeRead: " << nSizeRead << std::endl;
-	std::cout << "SizeWrite: " << nSizeWrite << std::endl;
+    int nSizeRead = (int)bufferevent_get_max_to_read(bev);
+    int nSizeWrite = (int)bufferevent_get_max_to_write(bev);
 
-	//bufferevent_set_max_single_read(bev, 0);
-	//bufferevent_set_max_single_write(bev, 0);
+    std::cout << "want to connect " << mstrIP << " SizeRead: " << nSizeRead << std::endl;
+    std::cout << "SizeWrite: " << nSizeWrite << std::endl;
 
     return sockfd;
 }
@@ -558,7 +595,7 @@ void NFCNet::ExecuteClose()
 
 void NFCNet::log_cb(int severity, const char* msg)
 {
-
+    LOG(FATAL) << "severity:" << severity << " " << msg; 
 }
 
 bool NFCNet::IsServer()

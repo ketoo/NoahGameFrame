@@ -733,6 +733,151 @@ bool NFFileProcess::SaveForPB()
 
 bool NFFileProcess::SaveForSQL()
 {
+	//1 class.sql
+	std::string strFileName = strXMLStructPath + "NFrame.sql";
+
+	FILE* iniWriter = fopen(strFileName.c_str(), "w");
+
+	std::string strElementData;
+	for (std::map<std::string, ClassData*>::iterator it = mxClassData.begin(); it != mxClassData.end(); ++it)
+	{
+		const std::string& strClassName = it->first;
+		ClassData* pClassDta = it->second;
+		if (strClassName == "IObject")
+		{
+			continue;
+		}
+
+		strElementData += "CREATE TABLE IF NOT EXISTS " + pClassDta->xStructData.strClassName + "  (";
+		strElementData += " `ID` varchar(128) NOT NULL,";
+		strElementData += " PRIMARY KEY (`ID`)";
+		strElementData += " ) ENGINE=InnoDB DEFAULT CHARSET=utf8; \n";
+	}
+
+
+	//2 fields
+	//ALTER TABLE `Buff` ADD `EffectType` bigint(11) DEFAULT '0' COMMENT '影响属性类型(效果类型)  生命，法力(可组合,叠加)';
+	// 2.1) property
+	for (std::map<std::string, ClassData*>::iterator it = mxClassData.begin(); it != mxClassData.end(); ++it)
+	{
+		const std::string& strClassName = it->first;
+		ClassData* pClassDta = it->second;
+
+		for (std::map<std::string, NFClassProperty*>::iterator itProperty = pClassDta->xStructData.xPropertyList.begin();
+			itProperty != pClassDta->xStructData.xPropertyList.end(); ++itProperty)
+		{
+			const std::string& strPropertyName = itProperty->first;
+			NFClassProperty* xPropertyData = itProperty->second;
+
+			std::string strType;
+			std::string strSave;
+			std::string strCache;
+			std::string strDesc;
+			for (std::map<std::string, std::string>::iterator itDesc = xPropertyData->descList.begin();
+				itDesc != xPropertyData->descList.end(); ++itDesc)
+			{
+				const std::string& strKey = itDesc->first;
+				const std::string& strValue = itDesc->second;
+				if (strKey=="Type")
+				{
+					strType = strValue;
+				}
+				else if (strKey=="Save")
+				{
+					strSave = strValue;
+				} 
+				else if (strKey=="Cache")
+				{
+					strCache = strValue;
+				}
+				else if (strKey=="Desc")
+				{
+					strDesc = strValue;
+				}
+			}
+
+			if (strSave=="1" || strCache=="1")
+			{
+				std::string strAlter = "ALTER TABLE `" + strClassName + "` ADD `" + strPropertyName + "`";
+				//ALTER TABLE `Buff` ADD `EffectType` bigint(11) DEFAULT '0' COMMENT '影响属性类型(效果类型)  生命，法力(可组合,叠加)';
+				if (strType=="int")
+				{
+					strAlter += " bigint(11) DEFAULT '0'";
+				}
+				else if (strType=="string")
+				{
+					strAlter += " text COLLATE utf8mb4_unicode_ci  DEFAULT ''";
+				}
+				else if (strType=="float")
+				{
+					strAlter += " double DEFAULT '0.0'";
+				}
+				else if (strType=="object")
+				{
+					strAlter += " varchar(64) COLLATE utf8mb4_unicode_ci DEFAULT ''";
+				}
+				else if (strType=="vector2")
+				{
+					strAlter += " varchar(64) COLLATE utf8mb4_unicode_ci DEFAULT ''";
+				}
+				else if (strType=="vector3")
+				{
+					strAlter += " varchar(64) COLLATE utf8mb4_unicode_ci DEFAULT ''";
+				}
+
+				strAlter += " COMMENT '" + strDesc + "';";
+
+				strElementData += strAlter;
+			}
+		}
+
+		// 2.2) record
+		for (std::map<std::string, NFClassRecord*>::iterator itRecord = pClassDta->xStructData.xRecordList.begin();
+			itRecord != pClassDta->xStructData.xRecordList.end(); ++itRecord)
+		{
+			const std::string& strRecordName = itRecord->first;
+			NFClassRecord* xRecordData = itRecord->second;
+
+			std::string strType;
+			std::string strSave;
+			std::string strCache;
+			std::string strDesc;
+			for (std::map<std::string, std::string>::iterator itDesc = xRecordData->descList.begin();
+				itDesc != xRecordData->descList.end(); ++itDesc)
+			{
+				const std::string& strKey = itDesc->first;
+				const std::string& strValue = itDesc->second;
+				if (strKey=="Type")
+				{
+					strType = strValue;
+				}
+				else if (strKey=="Save")
+				{
+					strSave = strValue;
+				} 
+				else if (strKey=="Cache")
+				{
+					strCache = strValue;
+				}
+				else if (strKey=="Desc")
+				{
+					strDesc = strValue;
+				}
+			}
+
+			if (strSave=="1" || strCache=="1")
+			{
+				std::string strAlter = "ALTER TABLE `" + strClassName + "` ADD `" + strRecordName + "`";
+				strAlter += " text COLLATE utf8mb4_unicode_ci  DEFAULT ''";
+				strAlter += " COMMENT '" + strDesc + "';";
+
+				strElementData += strAlter;
+			}
+		}
+
+		fwrite(strElementData.c_str(), strElementData.length(), 1, iniWriter);
+
+	}
 	return false;
 }
 

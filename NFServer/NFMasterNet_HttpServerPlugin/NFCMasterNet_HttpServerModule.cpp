@@ -1,20 +1,30 @@
+/*
+            This file is part of: 
+                NoahFrame
+            https://github.com/ketoo/NoahGameFrame
+
+   Copyright 2009 - 2018 NoahFrame(NoahGameFrame)
+
+   File creator: lvsheng.huang
+   
+   NoahFrame is open-source software and you can redistribute it and/or modify
+   it under the terms of the License; besides, anyone who use this file/software must include this copyright announcement.
+
+   Licensed under the Apache License, Version 2.0 (the "License");
+   you may not use this file except in compliance with the License.
+   You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   See the License for the specific language governing permissions and
+   limitations under the License.
+*/
+
 #include "NFCMasterNet_HttpServerModule.h"
 #include "NFComm/NFMessageDefine/NFProtocolDefine.hpp"
-
-#if NF_PLATFORM == NF_PLATFORM_WIN
-#include <winsock2.h>
-#include <ws2tcpip.h>
-#include <windows.h>
-#include <io.h>
-#include <fcntl.h>
-#else
-#include <sys/stat.h>
-#include <sys/socket.h>
-#include <signal.h>
-#include <fcntl.h>
-#include <unistd.h>
-#include <dirent.h>
-#endif
 
 bool NFCMasterNet_HttpServerModule::Init()
 {
@@ -34,10 +44,14 @@ bool NFCMasterNet_HttpServerModule::Shut()
 bool NFCMasterNet_HttpServerModule::AfterInit()
 {
     //http://127.0.0.1/json
-	m_pHttpNetModule->AddReceiveCallBack("json", this, &NFCMasterNet_HttpServerModule::OnCommandQuery);
-	m_pHttpNetModule->AddNetCommonReceiveCallBack(this, &NFCMasterNet_HttpServerModule::OnCommonQuery);
+	m_pHttpNetModule->AddRequestHandler("/json", NFHttpType::NF_HTTP_REQ_GET, this, &NFCMasterNet_HttpServerModule::OnCommandQuery);
+	m_pHttpNetModule->AddRequestHandler("/json", NFHttpType::NF_HTTP_REQ_POST, this, &NFCMasterNet_HttpServerModule::OnCommandQuery);
+	m_pHttpNetModule->AddRequestHandler("/json", NFHttpType::NF_HTTP_REQ_DELETE, this, &NFCMasterNet_HttpServerModule::OnCommandQuery);
+	m_pHttpNetModule->AddRequestHandler("/json", NFHttpType::NF_HTTP_REQ_PUT, this, &NFCMasterNet_HttpServerModule::OnCommandQuery);
 
-	NF_SHARE_PTR<NFIClass> xLogicClass = m_pLogicClassModule->GetElement(NFrame::HttpServer::ThisName());
+	m_pHttpNetModule->AddNetFilter("/json", this, &NFCMasterNet_HttpServerModule::OnFilter);
+
+	NF_SHARE_PTR<NFIClass> xLogicClass = m_pLogicClassModule->GetElement(NFrame::Server::ThisName());
 	if (xLogicClass)
 	{
 		const std::vector<std::string>& strIdList = xLogicClass->GetIDList();
@@ -45,8 +59,8 @@ bool NFCMasterNet_HttpServerModule::AfterInit()
 		{
 			const std::string& strId = strIdList[i];
 
-			int nJsonPort = m_pElementModule->GetPropertyInt32(strId, NFrame::HttpServer::WebPort());
-			int nWebServerAppID = m_pElementModule->GetPropertyInt32(strId, NFrame::HttpServer::ServerID());
+			int nJsonPort = m_pElementModule->GetPropertyInt32(strId, NFrame::Server::WebPort());
+			int nWebServerAppID = m_pElementModule->GetPropertyInt32(strId, NFrame::Server::ServerID());
 
 			//webserver only run one instance in each server
 			if (pPluginManager->GetAppID() == nWebServerAppID)
@@ -69,14 +83,12 @@ bool NFCMasterNet_HttpServerModule::Execute()
 
 bool NFCMasterNet_HttpServerModule::OnCommandQuery(const NFHttpRequest& req)
 {
-	std::string str = m_pMasterServerModule->GetServersStatus();
-	m_pHttpNetModule->ResponseMsg(req, str, NFWebStatus::WEB_OK);
-
-
 	std::cout << "url: " << req.url << std::endl;
 	std::cout << "path: " << req.path << std::endl;
 	std::cout << "type: " << req.type << std::endl;
 	std::cout << "body: " << req.body << std::endl;
+
+	std::cout << "params: " << std::endl;
 
 	for (auto item : req.params)
 	{
@@ -90,30 +102,32 @@ bool NFCMasterNet_HttpServerModule::OnCommandQuery(const NFHttpRequest& req)
 		std::cout << item.first << ":" << item.second << std::endl;
 	}
 
-	return true;
+	std::string str = m_pMasterServerModule->GetServersStatus();
+	return m_pHttpNetModule->ResponseMsg(req, str, NFWebStatus::WEB_OK);
 }
 
-bool NFCMasterNet_HttpServerModule::OnCommonQuery(const NFHttpRequest& req)
+NFWebStatus NFCMasterNet_HttpServerModule::OnFilter(const NFHttpRequest & req)
 {
-
-    m_pHttpNetModule->ResponseMsg(req, "NFCMasterNet_HttpServerModule", NFWebStatus::WEB_OK);
+	std::cout << "OnFilter: " << std::endl;
 
 	std::cout << "url: " << req.url << std::endl;
 	std::cout << "path: " << req.path << std::endl;
 	std::cout << "type: " << req.type << std::endl;
 	std::cout << "body: " << req.body << std::endl;
 
-    for (auto item : req.params)
-    {
-		std::cout << item.first << ":" << item.second << std::endl;
-    }
+	std::cout << "params: " << std::endl;
 
-    std::cout << "headers: " << std::endl;
+	for (auto item : req.params)
+	{
+		std::cout << item.first << ":" << item.second << std::endl;
+	}
+
+	std::cout << "headers: " << std::endl;
 
 	for (auto item : req.headers)
 	{
 		std::cout << item.first << ":" << item.second << std::endl;
 	}
 
-	return true;
+	return NFWebStatus::WEB_OK;
 }
