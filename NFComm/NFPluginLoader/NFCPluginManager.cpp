@@ -151,7 +151,7 @@ NFCPluginManager::~NFCPluginManager()
 
 }
 
-bool NFCPluginManager::Awake()
+bool NFCPluginManager::LoadPlugin()
 {
 	LoadPluginConfig();
 
@@ -173,6 +173,11 @@ bool NFCPluginManager::Awake()
 	CheckStaticPlugin();
 #endif
 
+	return true;
+}
+
+bool NFCPluginManager::Awake()
+{
 	PluginInstanceMap::iterator itAfterInstance = mPluginInstanceMap.begin();
 	for (; itAfterInstance != mPluginInstanceMap.end(); itAfterInstance++)
 	{
