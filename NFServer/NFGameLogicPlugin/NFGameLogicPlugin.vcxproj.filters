@@ -11,6 +11,9 @@
     <Filter Include="NFPVP">
       <UniqueIdentifier>{19e315a2-7662-47a2-a943-6abcee1ee64c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="NFSyncModule">
+      <UniqueIdentifier>{ad5d009c-1b04-4908-bad2-4fbb3fb70803}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="NFCBuffModule.h">
@@ -20,7 +23,10 @@
     <ClInclude Include="NFCCreateRoleModule.h">
       <Filter>NFCreateRoleModule</Filter>
     </ClInclude>
-    <ClInclude Include="NFCPVPModule.h">
+    <ClInclude Include="NFCSyncModule.h">
+      <Filter>NFSyncModule</Filter>
+    </ClInclude>
+    <ClInclude Include="NFCGamePVPModule.h">
       <Filter>NFPVP</Filter>
     </ClInclude>
   </ItemGroup>
@@ -33,7 +39,10 @@
     <ClCompile Include="NFCCreateRoleModule.cpp">
       <Filter>NFCreateRoleModule</Filter>
     </ClCompile>
-    <ClCompile Include="NFCPVPModule.cpp">
+    <ClCompile Include="NFCSyncModule.cpp">
+      <Filter>NFSyncModule</Filter>
+    </ClCompile>
+    <ClCompile Include="NFCGamePVPModule.cpp">
       <Filter>NFPVP</Filter>
     </ClCompile>
   </ItemGroup>
