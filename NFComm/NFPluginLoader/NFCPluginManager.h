@@ -46,6 +46,8 @@ public:
     NFCPluginManager();
     virtual ~NFCPluginManager();
 
+	virtual bool LoadPlugin() override;
+
 	virtual bool Awake() override;
 
 	virtual bool Init() override;
