@@ -273,6 +273,14 @@ NF_SHARE_PTR<NFIObject> NFCKernelModule::CreateObject(const NFGUID& self, const 
 			}
 		}
 
+		std::ostringstream stream;
+		stream << " create object: " << ident.ToString();
+		stream << " config_name: " << strConfigIndex;
+		stream << " scene_id: " << nSceneID;
+		stream << " group_id: " << nGroupID;
+		stream << " position: " << pObject->GetPropertyVector3(NFrame::IObject::Position()).ToString();
+
+		m_pLogModule->LogInfo(stream);
 
 		pObject->SetState(COE_CREATE_BEFORE_ATTACHDATA);
 		DoEvent(ident, strClassName, pObject->GetState(), arg);

@@ -88,11 +88,11 @@ public:
 	}
 	NFVector3(const char* v, const int len)
 	{
-
+		FromString(std::string(v,  len));
 	}
 	NFVector3(const std::string& v)
 	{
-		
+		FromString(v);
 	}
 	//----------------------------------------------------------------------------
 	bool operator<(const NFVector3& v) const

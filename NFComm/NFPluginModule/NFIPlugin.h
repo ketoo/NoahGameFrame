@@ -94,6 +94,8 @@ public:
 		NFIModule* pModule = First();
 		while (pModule)
 		{
+			pPluginManager->SetCurrenModule(pModule);
+
 			bool bRet = pModule->Awake();
 			if (!bRet)
 			{
@@ -111,6 +113,7 @@ public:
         NFIModule* pModule = First();
         while (pModule)
         {
+			pPluginManager->SetCurrenModule(pModule);
             bool bRet = pModule->Init();
             if (!bRet)
             {
@@ -128,6 +131,7 @@ public:
         NFIModule* pModule = First();
         while (pModule)
         {
+			pPluginManager->SetCurrenModule(pModule);
             bool bRet = pModule->AfterInit();
             if (!bRet)
             {
@@ -145,6 +149,7 @@ public:
         NFIModule* pModule = First();
         while (pModule)
         {
+			pPluginManager->SetCurrenModule(pModule);
             pModule->CheckConfig();
 
             pModule = Next();
@@ -158,6 +163,7 @@ public:
 		NFIModule* pModule = First();
 		while (pModule)
 		{
+			pPluginManager->SetCurrenModule(pModule);
 			pModule->ReadyExecute();
 
 			pModule = Next();
@@ -171,6 +177,7 @@ public:
         NFIModule* pModule = First();
         while (pModule)
         {
+			pPluginManager->SetCurrenModule(pModule);
             pModule->Execute();
 
             pModule = Next();
@@ -184,6 +191,7 @@ public:
         NFIModule* pModule = First();
         while (pModule)
         {
+			pPluginManager->SetCurrenModule(pModule);
             pModule->BeforeShut();
 
             pModule = Next();
@@ -196,6 +204,7 @@ public:
         NFIModule* pModule = First();
         while (pModule)
         {
+			pPluginManager->SetCurrenModule(pModule);
             pModule->Shut();
 
             pModule = Next();
@@ -209,6 +218,7 @@ public:
         NFIModule* pModule = First();
         while (pModule)
         {
+			pPluginManager->SetCurrenModule(pModule);
             pModule->Finalize();
 
             pModule = Next();
@@ -222,6 +232,7 @@ public:
 		NFIModule* pModule = First();
 		while (pModule)
 		{
+			pPluginManager->SetCurrenModule(pModule);
 			pModule->OnReloadPlugin();
 
 			pModule = Next();

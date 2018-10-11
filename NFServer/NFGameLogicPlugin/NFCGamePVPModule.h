@@ -24,12 +24,12 @@
 */
 
 
-#ifndef NFC_PVP_MODULE_H
-#define NFC_PVP_MODULE_H
+#ifndef NFC_GAME_PVP_MODULE_H
+#define NFC_GAME_PVP_MODULE_H
 
 #include "NFComm/NFPluginModule/NFIKernelModule.h"
 #include "NFComm/NFPluginModule/NFIElementModule.h"
-#include "NFComm/NFPluginModule/NFIPVPModule.h"
+#include "NFComm/NFPluginModule/NFIGamePVPModule.h"
 #include "NFComm/NFPluginModule/NFILogModule.h"
 #include "NFComm/NFPluginModule/NFIPropertyConfigModule.h"
 #include "NFComm/NFPluginModule/NFIPluginManager.h"
@@ -42,16 +42,16 @@
 #include "NFComm/NFPluginModule/NFIScheduleModule.h"
 #include "NFComm/NFPluginModule/NFINetClientModule.h"
 
-class NFCPVPModule
-    : public NFIPVPModule
+class NFCGamePVPModule
+    : public NFIGamePVPModule
 {
 public:
-    NFCPVPModule( NFIPluginManager* p )
+	NFCGamePVPModule( NFIPluginManager* p )
     {
         pPluginManager = p;
     }
 
-    virtual ~NFCPVPModule() {};
+    virtual ~NFCGamePVPModule() {};
 
     virtual bool Init();
     virtual bool Shut();

@@ -39,7 +39,6 @@
 #include "NFComm/NFPluginModule/NFIPropertyModule.h"
 #include "NFComm/NFPluginModule/NFIItemConsumeProcessModule.h"
 #include "NFComm/NFPluginModule/NFILevelModule.h"
-#include "NFComm/NFPluginModule/NFIPVPModule.h"
 
 class NFCItemItemConsumeProcessModule
 	: public NFIItemConsumeProcessModule

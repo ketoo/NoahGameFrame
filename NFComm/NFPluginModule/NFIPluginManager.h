@@ -72,6 +72,11 @@ public:
 
 	/////////////////////
 
+	virtual bool LoadPlugin()
+	{
+		return true;
+	}
+
 	virtual bool Awake()
 	{
 		return true;
@@ -191,6 +196,13 @@ public:
 
 	virtual const std::string& GetLogConfigName() const = 0;
 	virtual void SetLogConfigName(const std::string& strName) = 0;
+
+	virtual NFIPlugin* GetCurrentPlugin() = 0;
+	virtual NFIModule* GetCurrenModule() = 0;
+
+	virtual void SetCurrentPlugin(NFIPlugin* pPlugin) = 0;
+	virtual void SetCurrenModule(NFIModule* pModule) = 0;
+
 
 	virtual void SetGetFileContentFunctor(GET_FILECONTENT_FUNCTOR fun) = 0;
 	virtual bool GetFileContent(const std::string &strFileName, std::string &strContent) = 0;
