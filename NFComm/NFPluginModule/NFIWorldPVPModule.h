@@ -24,13 +24,13 @@
 */
 
 
-#ifndef NFI_PVP_MODULE_H
-#define NFI_PVP_MODULE_H
+#ifndef NFI_WORLD_PVP_MODULE_H
+#define NFI_WORLD_PVP_MODULE_H
 
 #include <iostream>
 #include "NFIModule.h"
 
-class NFIPVPModule
+class NFIWorldPVPModule
     : public NFIModule
 {
 public:

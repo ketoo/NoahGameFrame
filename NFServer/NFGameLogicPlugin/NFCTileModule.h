@@ -37,7 +37,6 @@
 #include "NFComm/NFPluginModule/NFIGameServerNet_ServerModule.h"
 #include "NFComm/NFPluginModule/NFIPlayerRedisModule.h"
 #include "NFComm/NFPluginModule/NFISceneAOIModule.h"
-#include "NFComm/NFPluginModule/NFIPVPModule.h"
 
 class NFCTileModule
     : public NFITileModule
