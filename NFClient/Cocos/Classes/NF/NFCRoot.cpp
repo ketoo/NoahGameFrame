@@ -71,7 +71,8 @@ bool NFCRoot::init()
 	CREATE_PLUGIN(pPluginManager, NFCLogicPlugin);
 	CREATE_PLUGIN(pPluginManager, NFCUIPlugin);
 	CREATE_PLUGIN(pPluginManager, NFCScenePlugin);
-	
+
+	NFCPluginManager::GetSingletonPtr()->Awake();
 	NFCPluginManager::GetSingletonPtr()->Init();
 	NFCPluginManager::GetSingletonPtr()->AfterInit();
 	NFCPluginManager::GetSingletonPtr()->CheckConfig();

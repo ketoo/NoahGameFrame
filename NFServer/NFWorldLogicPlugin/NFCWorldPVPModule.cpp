@@ -26,30 +26,30 @@
 #ifdef _MSC_VER
 #pragma warning(disable: 4244 4267)
 #endif
-#include "NFCPVPModule.h"
+#include "NFCWorldPVPModule.h"
 #include "NFComm/NFPluginModule/NFINetModule.h"
 #include "NFComm/NFMessageDefine/NFMsgShare.pb.h"
 #include "NFComm/NFMessageDefine/NFProtocolDefine.hpp"
 
-bool NFCPVPModule::Init()
+bool NFCWorldPVPModule::Init()
 {
 	
     return true;
 }
 
 
-bool NFCPVPModule::Shut()
+bool NFCWorldPVPModule::Shut()
 {
     return true;
 }
 
-bool NFCPVPModule::Execute()
+bool NFCWorldPVPModule::Execute()
 {
     
     return true;
 }
 
-bool NFCPVPModule::AfterInit()
+bool NFCWorldPVPModule::AfterInit()
 {
 	m_pElementModule = pPluginManager->FindModule<NFIElementModule>();
 	m_pClassModule = pPluginManager->FindModule<NFIClassModule>();
@@ -63,18 +63,18 @@ bool NFCPVPModule::AfterInit()
 
 	InitAllTileScene();
 
-	if (!m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_REQ_SEARCH_OPPNENT, this, &NFCPVPModule::OnReqSearchOpponentProcess)) { return false; }
+	if (!m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_REQ_SEARCH_OPPNENT, this, &NFCWorldPVPModule::OnReqSearchOpponentProcess)) { return false; }
 
     return true;
 }
 
-bool NFCPVPModule::ReadyExecute()
+bool NFCWorldPVPModule::ReadyExecute()
 {
 
 	return false;
 }
 
-void NFCPVPModule::OnReqSearchOpponentProcess(const NFSOCK nSockIndex, const int nMsgID, const char *msg,
+void NFCWorldPVPModule::OnReqSearchOpponentProcess(const NFSOCK nSockIndex, const int nMsgID, const char *msg,
                                               const uint32_t nLen)
 {
 	CLIENT_MSG_PROCESS_NO_OBJECT( nMsgID, msg, nLen, NFMsg::ReqSearchOppnent);
@@ -98,7 +98,7 @@ void NFCPVPModule::OnReqSearchOpponentProcess(const NFSOCK nSockIndex, const int
 	}
 }
 
-void NFCPVPModule::InitAllTileScene()
+void NFCWorldPVPModule::InitAllTileScene()
 {
 	//Tile
 	//mxTileSceneIDList
@@ -124,7 +124,7 @@ void NFCPVPModule::InitAllTileScene()
 	}
 }
 
-bool NFCPVPModule::SearchOpponent(const NFGUID & self, const int nExceptSceneID, const NFSOCK nSockIndex)
+bool NFCWorldPVPModule::SearchOpponent(const NFGUID & self, const int nExceptSceneID, const NFSOCK nSockIndex)
 {
 	int nSceneID = RandomTileScene(nExceptSceneID);
 	std::string strTileData;
@@ -160,7 +160,7 @@ bool NFCPVPModule::SearchOpponent(const NFGUID & self, const int nExceptSceneID,
 }
 
 
-bool NFCPVPModule::ProcessOpponentData(const NFGUID& opponent, NFMsg::AckSearchOppnent& xAckData)
+bool NFCWorldPVPModule::ProcessOpponentData(const NFGUID& opponent, NFMsg::AckSearchOppnent& xAckData)
 {
 	std::vector<std::string> vKeyList;
 	std::vector<std::string> vValueList;
@@ -237,6 +237,22 @@ bool NFCPVPModule::ProcessOpponentData(const NFGUID& opponent, NFMsg::AckSearchO
 			xAckData.mutable_hero_pos3()->CopyFrom(NFINetModule::NFToPB(vec3));
 
 			xAckData.mutable_opponent()->CopyFrom(NFINetModule::NFToPB(opponent));
+
+			std::ostringstream stream;
+			//stream << " searcher: " << strHero1CnfID;
+			stream << " name: " << strName;
+			stream << " cup: " << nCup;
+			stream << " level: " << nLevel;
+			stream << " diamond: " << nDiamond;
+			stream << " gold: " << nGold;
+			stream << " hero1: " << strHero1CnfID;
+			stream << " pos: " << vec1.ToString();
+			stream << " hero2: " << strHero2CnfID;
+			stream << " pos: " << vec2.ToString();
+			stream << " hero3: " << strHero3CnfID;
+			stream << " pos: " << vec3.ToString();
+
+			m_pLogModule->LogInfo(stream);
 			return true;
 		}
 	}
@@ -244,7 +260,7 @@ bool NFCPVPModule::ProcessOpponentData(const NFGUID& opponent, NFMsg::AckSearchO
 	return false;
 }
 
-int NFCPVPModule::RandomTileScene(const int nExceptSceneID)
+int NFCWorldPVPModule::RandomTileScene(const int nExceptSceneID)
 {
 	if (mxTileSceneIDList.size() > 1)
 	{

@@ -24,12 +24,12 @@
 */
 
 
-#ifndef NFC_PVP_MODULE_H
-#define NFC_PVP_MODULE_H
+#ifndef NFC_WORLD_PVP_MODULE_H
+#define NFC_WORLD_PVP_MODULE_H
 
 #include "NFComm/NFPluginModule/NFIKernelModule.h"
 #include "NFComm/NFPluginModule/NFIElementModule.h"
-#include "NFComm/NFPluginModule/NFIPVPModule.h"
+#include "NFComm/NFPluginModule/NFIWorldPVPModule.h"
 #include "NFComm/NFPluginModule/NFILogModule.h"
 #include "NFComm/NFPluginModule/NFIPropertyConfigModule.h"
 #include "NFComm/NFPluginModule/NFIPluginManager.h"
@@ -44,17 +44,18 @@
 #include "NFComm/NFPluginModule/NFILevelModule.h"
 #include "NFComm/NFPluginModule/NFIHeroModule.h"
 #include "NFComm/NFPluginModule/NFIScheduleModule.h"
+#include "NFComm/NFPluginModule/NFIWorldPVPModule.h"
 
-class NFCPVPModule
-    : public NFIPVPModule
+class NFCWorldPVPModule
+    : public NFIWorldPVPModule
 {
 public:
-    NFCPVPModule( NFIPluginManager* p )
+	NFCWorldPVPModule( NFIPluginManager* p )
     {
         pPluginManager = p;
     }
 
-    virtual ~NFCPVPModule() {};
+    virtual ~NFCWorldPVPModule() {};
 
     virtual bool Init();
     virtual bool Shut();
