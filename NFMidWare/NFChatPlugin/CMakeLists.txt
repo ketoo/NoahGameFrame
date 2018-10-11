@@ -5,7 +5,7 @@ file(GLOB NFChatPlugin_ROOT_Cpp
 file(GLOB NFChatPlugin_ROOT_Hpp 
 	*.h)
 
-add_library(NFChatPlugin SHARED
+add_library(NFChatPlugin STATIC
 	${NFChatPlugin_ROOT_Cpp}
 	${NFChatPlugin_ROOT_Hpp})
 	
@@ -19,12 +19,18 @@ set_target_properties( NFChatPlugin PROPERTIES
 link_NFSDK("NFChatPlugin")
 
 if(UNIX)
+
+	target_link_libraries(NFChatPlugin -static-libstdc++)
+
 	add_definitions(
 		-D_USRDLL
 		-DELPP_NO_DEFAULT_LOG_FILE
 	)
 	
 else()
+
+	target_link_libraries(NFChatPlugin -static-libstdc++)
+
 	add_definitions(
 		-DWIN
 		-D_USRDLL

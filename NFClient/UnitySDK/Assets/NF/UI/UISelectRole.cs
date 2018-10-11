@@ -5,42 +5,67 @@ using NFSDK;
 
 public class UISelectRole : UIDialog {
 
+    private NFLoginModule mLoginModule;
+	private NFUIModule mUIModule;
+	private NFPlayerModule mPlayerModule;
+	private NFIEventModule mEventModule;
+
     private Transform mContentList;
-    private GameObject mItemModle;
-    private Button mCreateRole;
+    private GameObject mItemModel;
+	public Button mCreateRole;
+	public Button mEnterGameRole;
+
 	// Use this for initialization
-	void Start () {
+	void Start ()
+	{
+
+		NFIPluginManager xPluginManager = NFCPluginManager.Instance();
+        mLoginModule = xPluginManager.FindModule<NFLoginModule>();
+		mUIModule = xPluginManager.FindModule<NFUIModule>();
+		mPlayerModule = xPluginManager.FindModule<NFPlayerModule>();
+		mEventModule = xPluginManager.FindModule<NFIEventModule>();
+
+
         mContentList = transform.Find("Panel/ListView/Mask/Content");
-        mItemModle = mContentList.Find("Item").gameObject;
-        mItemModle.transform.SetParent(null);
+        mItemModel = mContentList.Find("Item").gameObject;
+        mItemModel.transform.SetParent(null);
 
-        mCreateRole = transform.Find("Panel/CreateRole").GetComponent<Button>();
-        mCreateRole.onClick.AddListener(onCreateRoleClick);
+		mCreateRole.onClick.AddListener(onCreateRoleClick);
+		mEnterGameRole.onClick.AddListener(onEnterGameClick);
 
-        NFCPlayerLogic.Instance().RegisterCallback((int)NFCPlayerLogic.Event.RoleList, OnRoleList);
+		mEventModule.RegisterCallback((int)NFPlayerModule.Event.RoleList, OnRoleList);
 
-        NFCPlayerLogic.Instance().RequireRoleList();
+		mPlayerModule.RequireRoleList();
     }
 
     // UI Event
     private void onCreateRoleClick()
     {
-        string strRoleName = "TestRole" + Random.Range(0, 1000);
-        NFCPlayerLogic.Instance().RequireCreateRole(strRoleName, 1, 1);
+        string strRoleName = "TestRole" + Random.Range(1000, 10000);
+		mPlayerModule.RequireCreateRole(strRoleName, 1, 1);
     }
+
+	private void onEnterGameClick()
+    {
+		ArrayList roleList = mPlayerModule.mRoleList;
+		if (roleList.Count > 0)
+		{
+			OnRoleClick(0);
+		}
+    }
+
     private void OnRoleClick(int nIndex)
     {
-        NFCPlayerLogic.Instance().RequireEnterGameServer(nIndex);
-        NFCUIManager.Instance().CloseUI();
-        Application.LoadLevel(1);
+		mPlayerModule.RequireEnterGameServer(nIndex);
+		mUIModule.CloseUI();
     }
 
     // Logic Event
-    public bool OnRoleList(NFIDataList valueList)
+    public void OnRoleList(NFDataList valueList)
     {
-        ArrayList serverList = NFCPlayerLogic.Instance().mRoleList;
+		ArrayList roleList = mPlayerModule.mRoleList;
 
-        Debug.Log("OnRoleList" + serverList.Count);
+		Debug.Log("OnRoleList" + roleList.Count);
 
         ArrayList lst = new ArrayList();
         foreach (Transform child in mContentList.transform)
@@ -53,12 +78,12 @@ public class UISelectRole : UIDialog {
             Destroy(child.gameObject);
         }
         int nIndex = 0;
-        foreach (NFMsg.RoleLiteInfo info in serverList)
+		foreach (NFMsg.RoleLiteInfo info in roleList)
         {
-            GameObject item = Instantiate(mItemModle);
+            GameObject item = Instantiate(mItemModel);
             item.transform.SetParent(mContentList);
             item.transform.localScale = UnityEngine.Vector3.one;
-            item.GetComponentInChildren<Text>().text = System.Text.Encoding.Default.GetString(info.noob_name);
+            item.GetComponentInChildren<Text>().text = info.noob_name.ToStringUtf8();
             int nRoleIndex = nIndex;
             item.GetComponent<Button>().onClick.AddListener(() =>
             {
@@ -66,6 +91,5 @@ public class UISelectRole : UIDialog {
             });
             nIndex++;
         }
-        return true;
     }
 }

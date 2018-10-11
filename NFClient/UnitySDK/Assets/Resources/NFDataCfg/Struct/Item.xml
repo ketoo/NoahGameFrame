@@ -1,0 +1,32 @@
+<?xml version='1.0' encoding='utf-8' ?>
+<XML>
+	<Propertys>
+		<Property Id="AwardData" Cache="0" Desc="使用后获得的物品" Force="0" Private="0" Public="0" Ref="0" Save="0" Type="string" Upload="0" />
+		<Property Id="AwardProperty" Cache="0" Desc="使用后增加的属性值（货币经验等,一般有他就不用EffectData）" Force="0" Private="0" Public="0" Ref="0" Save="0" Type="int" Upload="0" />
+		<Property Id="BuyPrice" Cache="0" Desc="商店买价格" Force="0" Private="0" Public="0" Ref="0" Save="0" Type="int" Upload="0" />
+		<Property Id="ConsumeData" Cache="0" Desc="消费数据属性包索引" Force="0" Private="0" Public="0" Ref="0" Save="0" Type="string" Upload="0" />
+		<Property Id="CoolDownTime" Cache="0" Desc="使用冷却CD" Force="0" Private="0" Public="0" Ref="0" Save="0" Type="float" Upload="0" />
+		<Property Id="DescID" Cache="0" Desc="装备描述字符串索引" Force="0" Private="0" Public="0" Ref="1" Save="0" Type="string" Upload="0" />
+		<Property Id="EffectData" Cache="0" Desc="绝对值属性包索引" Force="0" Private="0" Public="0" Ref="0" Save="0" Type="string" Upload="0" />
+		<Property Id="ExpiredType" Cache="0" Desc="过期类型EGameItemExpiredType" Force="0" Private="0" Public="0" Ref="0" Save="0" Type="int" Upload="0" />
+		<Property Id="Extend" Cache="0" Desc="扩展字段，比如得到英雄等，实际意义和当时的类型有关系" Force="0" Private="0" Public="0" Ref="0" Save="0" Type="string" Upload="0" />
+		<Property Id="HeroType" Cache="0" Desc="归属英雄类型，力敏智" Force="0" Private="0" Public="0" Ref="0" Save="0" Type="int" Upload="0" />
+		<Property Id="Icon" Cache="0" Desc="物品显示Icon" Force="0" Private="0" Public="0" Ref="0" Save="0" Type="string" Upload="0" />
+		<Property Id="ItemSubType" Cache="0" Desc="物品子类别 EGameEquipSubType EGameGemSubType EGameItemSubType EGameCardSubType EGameTokenSubType" Force="0" Private="0" Public="0" Ref="0" Save="0" Type="int" Upload="0" />
+		<Property Id="ItemType" Cache="0" Desc="物品类别EItemType       EIT_EQUIP      = 0; 
+ EIT_GEM       = 1;
+ EIT_ITEM       = 2;
+ EIT_CARD       = 3;
+ EIT_TOKEN       = 4; //" Force="0" Private="0" Public="0" Ref="0" Save="0" Type="int" Upload="0" />
+		<Property Id="Job" Cache="0" Desc="职业限制,用分号隔开" Force="0" Private="0" Public="0" Ref="0" Save="0" Type="string" Upload="0" />
+		<Property Id="Level" Cache="0" Desc="等级限制" Force="0" Private="0" Public="0" Ref="0" Save="0" Type="int" Upload="0" />
+		<Property Id="OverlayCount" Cache="0" Desc="叠加数量" Force="0" Private="0" Public="0" Ref="0" Save="0" Type="int" Upload="0" />
+		<Property Id="Quality" Cache="0" Desc="物品品质" Force="0" Private="0" Public="0" Ref="0" Save="0" Type="int" Upload="0" />
+		<Property Id="SalePrice" Cache="0" Desc="卖商店价格" Force="0" Private="0" Public="0" Ref="0" Save="0" Type="int" Upload="0" />
+		<Property Id="Script" Cache="0" Desc="物品使用脚本文件，比如得到英雄等" Force="0" Private="0" Public="0" Ref="0" Save="0" Type="string" Upload="0" />
+		<Property Id="ShowName" Cache="0" Desc="名字" Force="0" Private="0" Public="0" Ref="1" Save="0" Type="string" Upload="0" />
+		<Property Id="SpriteFile" Cache="0" Desc="SpriteFile" Force="0" Private="0" Public="0" Ref="0" Save="0" Type="string" Upload="0" />
+	</Propertys>
+	<Records>
+	</Records>
+</XML>

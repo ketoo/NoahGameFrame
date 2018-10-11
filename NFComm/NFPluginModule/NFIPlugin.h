@@ -1,10 +1,28 @@
-// -------------------------------------------------------------------------
-//    @FileName         :    NFIPlugin.h
-//    @Author           :    LvSheng.Huang
-//    @Date             :    2012-12-15
-//    @Module           :    NFIPlugin
-//
-// -------------------------------------------------------------------------
+/*
+            This file is part of: 
+                NoahFrame
+            https://github.com/ketoo/NoahGameFrame
+
+   Copyright 2009 - 2018 NoahFrame(NoahGameFrame)
+
+   File creator: lvsheng.huang
+   
+   NoahFrame is open-source software and you can redistribute it and/or modify
+   it under the terms of the License; besides, anyone who use this file/software must include this copyright announcement.
+
+   Licensed under the Apache License, Version 2.0 (the "License");
+   you may not use this file except in compliance with the License.
+   You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   See the License for the specific language governing permissions and
+   limitations under the License.
+*/
+
 
 #ifndef NFI_PLUGIN_H
 #define NFI_PLUGIN_H
@@ -20,12 +38,26 @@
 	assert((TIsDerived<className, classBaseName>::Result));	\
 	NFIModule* pRegisterModule##className= new className(pManager); \
     pRegisterModule##className->strName = (#className); \
-    pManager->AddModule( #classBaseName, pRegisterModule##className );AddElement( #classBaseName, pRegisterModule##className );
+    pManager->AddModule( #classBaseName, pRegisterModule##className );\
+    AddElement( #classBaseName, pRegisterModule##className );
 
-#define UNREGISTER_MODULE(pManager, classBaseName, className) NFIModule* pUnRegisterModule##className =  \
-	dynamic_cast<NFIModule*>( pManager->FindModule( #classBaseName )); \
-	pManager->RemoveModule( #classBaseName ); RemoveElement( #classBaseName ); delete pUnRegisterModule##className;
+#define REGISTER_TEST_MODULE(pManager, classBaseName, className)  \
+	assert((TIsDerived<classBaseName, NFIModule>::Result));	\
+	assert((TIsDerived<className, NFIModule>::Result));	\
+	NFIModule* pRegisterModule##className= new className(pManager); \
+    pRegisterModule##className->strName = (#className); \
+    pManager->AddTestModule( #classBaseName, pRegisterModule##className );
 
+#define UNREGISTER_MODULE(pManager, classBaseName, className) \
+    NFIModule* pUnRegisterModule##className = dynamic_cast<NFIModule*>( pManager->FindModule( #classBaseName )); \
+	pManager->RemoveModule( #classBaseName ); \
+    RemoveElement( #classBaseName ); \
+    delete pUnRegisterModule##className;
+
+#define UNREGISTER_TEST_MODULE(pManager, classBaseName, className) \
+    NFIModule* pUnRegisterModule##className = dynamic_cast<NFIModule*>( pManager->FindtESTModule( #classBaseName )); \
+	pManager->RemoveTestModule( #classBaseName ); \
+    delete pUnRegisterModule##className;
 
 #define CREATE_PLUGIN(pManager, className)  NFIPlugin* pCreatePlugin##className = new className(pManager); pManager->Registered( pCreatePlugin##className );
 

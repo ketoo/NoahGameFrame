@@ -1,6 +1,6 @@
 // Protocol Buffers - Google's data interchange format
 // Copyright 2008 Google Inc.  All rights reserved.
-// http://code.google.com/p/protobuf/
+// https://developers.google.com/protocol-buffers/
 //
 // Redistribution and use in source and binary forms, with or without
 // modification, are permitted provided that the following conditions are
@@ -37,7 +37,6 @@
 #include <stdlib.h>
 #include <google/protobuf/compiler/plugin.h>
 #include <google/protobuf/compiler/mock_code_generator.h>
-#include <google/protobuf/stubs/strutil.h>
 
 int main(int argc, char* argv[]) {
 #ifdef _MSC_VER

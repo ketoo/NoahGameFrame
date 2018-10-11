@@ -1,0 +1,6 @@
+<?xml version='1.0' encoding='utf-8' ?>
+<XML>
+	<Object Id="Task1" AwardExp="100" AwardGold="110" AwardPack="DropBag_1" Desc="Task1" KillCount="1" KillMonsterName="AttackNpc1" LevelReq="1" NextTaskID="Task2" Type="1" />
+	<Object Id="Task2" AwardExp="200" AwardGold="220" AwardPack="DropBag_1" Desc="Task2" KillCount="2" KillMonsterName="AttackNpc1" LevelReq="2" NextTaskID="Task3" Type="1" />
+	<Object Id="Task3" AwardExp="300" AwardGold="330" AwardPack="DropBag_1" Desc="Task3" KillCount="3" KillMonsterName="AttackNpc1" LevelReq="3" NextTaskID="Task4" Type="1" />
+</XML>

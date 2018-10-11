@@ -1,6 +1,6 @@
 // Protocol Buffers - Google's data interchange format
 // Copyright 2008 Google Inc.  All rights reserved.
-// http://code.google.com/p/protobuf/
+// https://developers.google.com/protocol-buffers/
 //
 // Redistribution and use in source and binary forms, with or without
 // modification, are permitted provided that the following conditions are
@@ -35,6 +35,7 @@
 // This file tests that various identifiers work as field and type names even
 // though the same identifiers are used internally by the C++ code generator.
 
+syntax = "proto2";
 
 // Some generic_services option(s) added automatically.
 // See:  http://go/proto2-generic-services-default
@@ -58,7 +59,7 @@ message TestConflictingSymbolNames {
   optional int32 total_size = 6;
   optional int32 tag = 7;
 
-  enum TestEnum { FOO = 1; }
+  enum TestEnum { FOO = 0; }
   message Data1 { repeated int32 data = 1; }
   message Data2 { repeated TestEnum data = 1; }
   message Data3 { repeated string data = 1; }
@@ -98,6 +99,9 @@ message TestConflictingSymbolNames {
   // Some keywords.
   optional uint32 int = 30;
   optional uint32 friend = 31;
+  optional uint32 class = 37;
+  optional uint32 typedecl = 39;
+  optional uint32 auto = 40;
 
   // The generator used to #define a macro called "DO" inside the .cc file.
   message DO {}
@@ -107,16 +111,49 @@ message TestConflictingSymbolNames {
   optional int32 field_type = 33;
   optional bool is_packed = 34;
 
-  extensions 1000 to max;
+  // test conflicting release_$name$. "length" and "do" field in this message
+  // must remain string or message fields to make the test valid.
+  optional string release_length = 35;
+  // A more extreme case, the field name "do" here is a keyword, which will be
+  // escaped to "do_" already. Test there is no conflict even with escaped field
+  // names.
+  optional DO release_do = 36;
+
+  // For clashing local variables in Serialize and ByteSize calculation.
+  optional string target = 38;
+
+  extensions 1000 to max;  // NO_PROTO3
 }
 
-message TestConflictingSymbolNamesExtension {
-  extend TestConflictingSymbolNames {
-    repeated int32 repeated_int32_ext = 20423638 [packed=true];
-  }
-}
+message TestConflictingSymbolNamesExtension {                    // NO_PROTO3
+  extend TestConflictingSymbolNames {                            // NO_PROTO3
+    repeated int32 repeated_int32_ext = 20423638 [packed=true];  // NO_PROTO3
+  }                                                              // NO_PROTO3
+}                                                                // NO_PROTO3
+
+message TestConflictingEnumNames {  // NO_PROTO3
+  enum NestedConflictingEnum {      // NO_PROTO3
+    and = 1;                        // NO_PROTO3
+    class = 2;                      // NO_PROTO3
+    int = 3;                        // NO_PROTO3
+    typedef = 4;                    // NO_PROTO3
+    XOR = 5;                        // NO_PROTO3
+  }                                 // NO_PROTO3
+
+  optional NestedConflictingEnum conflicting_enum = 1;  // NO_PROTO3
+}  // NO_PROTO3
+
+enum ConflictingEnum {  // NO_PROTO3
+  NOT_EQ = 1;           // NO_PROTO3
+  volatile = 2;         // NO_PROTO3
+  return = 3;           // NO_PROTO3
+}  // NO_PROTO3
 
 message DummyMessage {}
+
+// Message names that could conflict.
+message Shutdown {}
+message TableStruct {}
 
 service TestConflictingMethodNames {
   rpc Closure(DummyMessage) returns (DummyMessage);

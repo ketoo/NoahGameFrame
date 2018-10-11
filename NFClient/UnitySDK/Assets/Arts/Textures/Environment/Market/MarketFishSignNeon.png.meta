@@ -1,0 +1,226 @@
+fileFormatVersion: 2
+guid: 1f7e69f695c34aa4eb96e9309660d3bb
+timeCreated: 1461752935
+licenseType: Store
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: Market_FishSignNeon_0
+    21300002: Market_FishSignNeon_1
+    21300004: Market_FishSignNeon_2
+    21300006: Market_FishSignNeon_3
+  serializedVersion: 2
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 1
+    linearTexture: 0
+    correctGamma: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 0
+  cubemapConvolution: 0
+  cubemapConvolutionSteps: 7
+  cubemapConvolutionExponent: 1.5
+  seamlessCubemap: 0
+  textureFormat: -1
+  maxTextureSize: 2048
+  textureSettings:
+    filterMode: -1
+    aniso: 16
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  rGBM: 0
+  compressionQuality: 50
+  allowsAlphaSplitting: 0
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 100
+  alphaIsTransparency: 1
+  textureType: 8
+  buildTargetSettings: []
+  spriteSheet:
+    sprites:
+    - name: Market_FishSignNeon_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 768
+        width: 512
+        height: 256
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 113, y: -64}
+        - {x: 192, y: -116}
+        - {x: 225, y: -103}
+        - {x: 225, y: -68}
+        - {x: 205, y: -14}
+        - {x: 225, y: 32}
+        - {x: 225, y: 39}
+        - {x: 223, y: 63}
+        - {x: 187, y: 75}
+        - {x: 131, y: 40}
+        - {x: 84, y: 44}
+        - {x: 53, y: 90}
+        - {x: -28, y: 122}
+        - {x: -54, y: 120}
+        - {x: -154, y: 53}
+        - {x: -145, y: 75}
+        - {x: -175, y: 123}
+        - {x: -217, y: 123}
+        - {x: -221, y: 115}
+        - {x: -221, y: -23}
+        - {x: -205, y: -50}
+        - {x: -145, y: -82}
+        - {x: -54, y: -128}
+        - {x: -23, y: -128}
+        - {x: -17, y: -123}
+        - {x: 41, y: -108}
+        - {x: 84, y: -90}
+    - name: Market_FishSignNeon_1
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 512
+        width: 512
+        height: 256
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 192, y: -116}
+        - {x: 225, y: -103}
+        - {x: 225, y: -68}
+        - {x: 205, y: -14}
+        - {x: 225, y: 32}
+        - {x: 225, y: 39}
+        - {x: 223, y: 63}
+        - {x: 187, y: 75}
+        - {x: 131, y: 40}
+        - {x: 84, y: 44}
+        - {x: 53, y: 90}
+        - {x: -28, y: 122}
+        - {x: -54, y: 120}
+        - {x: -106, y: 74}
+        - {x: -139, y: 59}
+        - {x: -156, y: 64}
+        - {x: -169, y: 117}
+        - {x: -187, y: 123}
+        - {x: -217, y: 123}
+        - {x: -221, y: 114}
+        - {x: -221, y: 89}
+        - {x: -209, y: 77}
+        - {x: -219, y: 45}
+        - {x: -221, y: 14}
+        - {x: -221, y: -18}
+        - {x: -215, y: -32}
+        - {x: -146, y: -84}
+        - {x: -65, y: -128}
+        - {x: -14, y: -128}
+        - {x: 41, y: -108}
+        - {x: 84, y: -90}
+        - {x: 113, y: -64}
+    - name: Market_FishSignNeon_2
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 256
+        width: 512
+        height: 256
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 113, y: -64}
+        - {x: 192, y: -116}
+        - {x: 225, y: -103}
+        - {x: 225, y: -68}
+        - {x: 205, y: -14}
+        - {x: 225, y: 32}
+        - {x: 225, y: 39}
+        - {x: 223, y: 63}
+        - {x: 187, y: 75}
+        - {x: 131, y: 40}
+        - {x: 84, y: 44}
+        - {x: 53, y: 90}
+        - {x: -28, y: 122}
+        - {x: -54, y: 120}
+        - {x: -106, y: 74}
+        - {x: -158, y: 75}
+        - {x: -169, y: 109}
+        - {x: -184, y: 123}
+        - {x: -212, y: 123}
+        - {x: -221, y: 114}
+        - {x: -221, y: 88}
+        - {x: -216, y: 67}
+        - {x: -221, y: 28}
+        - {x: -221, y: -15}
+        - {x: -215, y: -33}
+        - {x: -204, y: -48}
+        - {x: -64, y: -128}
+        - {x: -23, y: -128}
+        - {x: -17, y: -123}
+        - {x: 41, y: -108}
+        - {x: 84, y: -90}
+    - name: Market_FishSignNeon_3
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 512
+        height: 256
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 113, y: -64}
+        - {x: 166, y: -99}
+        - {x: 192, y: -116}
+        - {x: 225, y: -103}
+        - {x: 225, y: -68}
+        - {x: 205, y: -14}
+        - {x: 225, y: 32}
+        - {x: 225, y: 39}
+        - {x: 223, y: 63}
+        - {x: 187, y: 75}
+        - {x: 131, y: 40}
+        - {x: 18, y: 105}
+        - {x: -28, y: 120}
+        - {x: -54, y: 120}
+        - {x: -106, y: 74}
+        - {x: -159, y: 56}
+        - {x: -163, y: 79}
+        - {x: -176, y: 117}
+        - {x: -188, y: 126}
+        - {x: -207, y: 126}
+        - {x: -214, y: 124}
+        - {x: -222, y: 116}
+        - {x: -222, y: 34}
+        - {x: -219, y: -23}
+        - {x: -201, y: -44}
+        - {x: -145, y: -82}
+        - {x: -54, y: -128}
+        - {x: -22, y: -128}
+        - {x: 1, y: -107}
+        - {x: 41, y: -107}
+        - {x: 80, y: -91}
+    outline: []
+  spritePackingTag: 
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

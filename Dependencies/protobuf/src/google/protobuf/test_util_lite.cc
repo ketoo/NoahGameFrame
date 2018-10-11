@@ -1,6 +1,6 @@
 // Protocol Buffers - Google's data interchange format
 // Copyright 2008 Google Inc.  All rights reserved.
-// http://code.google.com/p/protobuf/
+// https://developers.google.com/protocol-buffers/
 //
 // Redistribution and use in source and binary forms, with or without
 // modification, are permitted provided that the following conditions are
@@ -33,14 +33,10 @@
 //  Sanjay Ghemawat, Jeff Dean, and others.
 
 #include <google/protobuf/test_util_lite.h>
+#include <google/protobuf/stubs/logging.h>
 #include <google/protobuf/stubs/common.h>
+#include <gtest/gtest.h>
 
-
-#define EXPECT_TRUE GOOGLE_CHECK
-#define ASSERT_TRUE GOOGLE_CHECK
-#define EXPECT_FALSE(COND) GOOGLE_CHECK(!(COND))
-#define EXPECT_EQ GOOGLE_CHECK_EQ
-#define ASSERT_EQ GOOGLE_CHECK_EQ
 
 namespace google {
 namespace protobuf {
@@ -153,6 +149,11 @@ void TestUtilLite::SetAllFields(unittest::TestAllTypesLite* message) {
   message->set_default_foreign_enum(unittest::FOREIGN_LITE_FOO      );
   message->set_default_import_enum (unittest_import::IMPORT_LITE_FOO);
 
+
+  message->set_oneof_uint32(601);
+  message->mutable_oneof_nested_message()->set_bb(602);
+  message->set_oneof_string("603");
+  message->set_oneof_bytes("604");
 }
 
 // -------------------------------------------------------------------
@@ -378,6 +379,13 @@ void TestUtilLite::ExpectAllFieldsSet(
   EXPECT_EQ(unittest::FOREIGN_LITE_FOO      , message.default_foreign_enum());
   EXPECT_EQ(unittest_import::IMPORT_LITE_FOO, message.default_import_enum ());
 
+
+  EXPECT_FALSE(message.has_oneof_uint32        ());
+  EXPECT_FALSE(message.has_oneof_nested_message());
+  EXPECT_FALSE(message.has_oneof_string        ());
+  EXPECT_TRUE(message.has_oneof_bytes          ());
+
+  EXPECT_EQ("604", message.oneof_bytes());
 }
 
 // -------------------------------------------------------------------
@@ -518,6 +526,11 @@ void TestUtilLite::ExpectClear(const unittest::TestAllTypesLite& message) {
   EXPECT_EQ(unittest::FOREIGN_LITE_BAR      , message.default_foreign_enum());
   EXPECT_EQ(unittest_import::IMPORT_LITE_BAR, message.default_import_enum ());
 
+
+  EXPECT_FALSE(message.has_oneof_uint32        ());
+  EXPECT_FALSE(message.has_oneof_nested_message());
+  EXPECT_FALSE(message.has_oneof_string        ());
+  EXPECT_FALSE(message.has_oneof_bytes         ());
 }
 
 // -------------------------------------------------------------------
@@ -900,6 +913,11 @@ void TestUtilLite::SetAllExtensions(unittest::TestAllExtensionsLite* message) {
   message->SetExtension(unittest::default_foreign_enum_extension_lite, unittest::FOREIGN_LITE_FOO      );
   message->SetExtension(unittest::default_import_enum_extension_lite , unittest_import::IMPORT_LITE_FOO);
 
+
+  message->SetExtension(unittest::oneof_uint32_extension_lite, 601);
+  message->MutableExtension(unittest::oneof_nested_message_extension_lite)->set_bb(602);;
+  message->SetExtension(unittest::oneof_string_extension_lite, "603");
+  message->SetExtension(unittest::oneof_bytes_extension_lite, "604");
 }
 
 // -------------------------------------------------------------------
@@ -1126,6 +1144,16 @@ void TestUtilLite::ExpectAllExtensionsSet(
   EXPECT_EQ(unittest::FOREIGN_LITE_FOO      , message.GetExtension(unittest::default_foreign_enum_extension_lite));
   EXPECT_EQ(unittest_import::IMPORT_LITE_FOO, message.GetExtension(unittest::default_import_enum_extension_lite ));
 
+
+  EXPECT_TRUE(message.HasExtension(unittest::oneof_uint32_extension_lite));
+  EXPECT_TRUE(message.GetExtension(unittest::oneof_nested_message_extension_lite).has_bb());
+  EXPECT_TRUE(message.HasExtension(unittest::oneof_string_extension_lite));
+  EXPECT_TRUE(message.HasExtension(unittest::oneof_bytes_extension_lite));
+
+  EXPECT_EQ(601, message.GetExtension(unittest::oneof_uint32_extension_lite));
+  EXPECT_EQ(602, message.GetExtension(unittest::oneof_nested_message_extension_lite).bb());
+  EXPECT_EQ("603", message.GetExtension(unittest::oneof_string_extension_lite));
+  EXPECT_EQ("604", message.GetExtension(unittest::oneof_bytes_extension_lite));
 }
 
 // -------------------------------------------------------------------
@@ -1274,6 +1302,11 @@ void TestUtilLite::ExpectExtensionsClear(
   EXPECT_EQ(unittest::FOREIGN_LITE_BAR      , message.GetExtension(unittest::default_foreign_enum_extension_lite));
   EXPECT_EQ(unittest_import::IMPORT_LITE_BAR, message.GetExtension(unittest::default_import_enum_extension_lite ));
 
+
+  EXPECT_FALSE(message.HasExtension(unittest::oneof_uint32_extension_lite));
+  EXPECT_FALSE(message.GetExtension(unittest::oneof_nested_message_extension_lite).has_bb());
+  EXPECT_FALSE(message.HasExtension(unittest::oneof_string_extension_lite));
+  EXPECT_FALSE(message.HasExtension(unittest::oneof_bytes_extension_lite));
 }
 
 // -------------------------------------------------------------------

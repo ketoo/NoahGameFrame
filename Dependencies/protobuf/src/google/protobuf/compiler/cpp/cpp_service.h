@@ -1,6 +1,6 @@
 // Protocol Buffers - Google's data interchange format
 // Copyright 2008 Google Inc.  All rights reserved.
-// http://code.google.com/p/protobuf/
+// https://developers.google.com/protocol-buffers/
 //
 // Redistribution and use in source and binary forms, with or without
 // modification, are permitted provided that the following conditions are
@@ -37,7 +37,6 @@
 
 #include <map>
 #include <string>
-#include <google/protobuf/stubs/common.h>
 #include <google/protobuf/compiler/cpp/cpp_options.h>
 #include <google/protobuf/descriptor.h>
 
@@ -106,8 +105,11 @@ class ServiceGenerator {
   void GenerateStubMethods(io::Printer* printer);
 
   const ServiceDescriptor* descriptor_;
-  map<string, string> vars_;
+  std::map<string, string> vars_;
 
+  int index_in_metadata_;
+
+  friend class FileGenerator;
   GOOGLE_DISALLOW_EVIL_CONSTRUCTORS(ServiceGenerator);
 };
 

@@ -1,6 +1,6 @@
 // Protocol Buffers - Google's data interchange format
 // Copyright 2008 Google Inc.  All rights reserved.
-// http://code.google.com/p/protobuf/
+// https://developers.google.com/protocol-buffers/
 //
 // Redistribution and use in source and binary forms, with or without
 // modification, are permitted provided that the following conditions are
@@ -34,14 +34,21 @@
 
 #include <google/protobuf/io/zero_copy_stream.h>
 
+#include <google/protobuf/stubs/logging.h>
+#include <google/protobuf/stubs/common.h>
 
 namespace google {
 namespace protobuf {
 namespace io {
 
-ZeroCopyInputStream::~ZeroCopyInputStream() {}
-ZeroCopyOutputStream::~ZeroCopyOutputStream() {}
 
+bool ZeroCopyOutputStream::WriteAliasedRaw(const void* /* data */,
+                                           int /* size */) {
+  GOOGLE_LOG(FATAL) << "This ZeroCopyOutputStream doesn't support aliasing. "
+                "Reaching here usually means a ZeroCopyOutputStream "
+                "implementation bug.";
+  return false;
+}
 
 }  // namespace io
 }  // namespace protobuf

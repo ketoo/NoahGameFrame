@@ -12,7 +12,9 @@ namespace NFSDK
 {
 	public abstract class NFIEventModule : NFIModule
 	{
-		public abstract void RegisterCallback(NFGUID self, int nEventID, NFIEvent.EventHandler handler, NFIDataList valueList);
-		public abstract void DoEvent(NFGUID self, int nEventID, NFIDataList valueList);
+
+		public abstract void RegisterCallback(int nEventID, NFIEvent.EventHandler handler);
+		public abstract void DoEvent(int nEventID);
+		public abstract void DoEvent(int nEventID, NFDataList valueList);
 	}
 }

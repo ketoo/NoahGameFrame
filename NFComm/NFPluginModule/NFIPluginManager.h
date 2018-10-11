@@ -1,15 +1,34 @@
-// -------------------------------------------------------------------------
-//    @FileName			:    NFIPluginManager.h
-//    @Author           :    LvSheng.Huang
-//    @Date             :    2012-12-15
-//    @Module           :    NFIPluginManager
-//
-// -------------------------------------------------------------------------
+/*
+            This file is part of: 
+                NoahFrame
+            https://github.com/ketoo/NoahGameFrame
+
+   Copyright 2009 - 2018 NoahFrame(NoahGameFrame)
+
+   File creator: lvsheng.huang
+   
+   NoahFrame is open-source software and you can redistribute it and/or modify
+   it under the terms of the License; besides, anyone who use this file/software must include this copyright announcement.
+
+   Licensed under the Apache License, Version 2.0 (the "License");
+   you may not use this file except in compliance with the License.
+   You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   See the License for the specific language governing permissions and
+   limitations under the License.
+*/
+
 
 #ifndef NFI_PLUGIN_MANAGER_H
 #define NFI_PLUGIN_MANAGER_H
 
 #include <functional>
+#include <list>
 #include "NFPlatform.h"
 
 class NFIPlugin;
@@ -138,14 +157,25 @@ public:
 
     virtual NFIPlugin* FindPlugin(const std::string& strPluginName) = 0;
 
-    virtual void AddModule(const std::string& strModuleName, NFIModule* pModule) = 0;
+	virtual void AddModule(const std::string& strModuleName, NFIModule* pModule) = 0;
+
+	virtual void AddTestModule(const std::string& strModuleName, NFIModule* pModule) = 0;
 
     virtual void RemoveModule(const std::string& strModuleName) = 0;
 
     virtual NFIModule* FindModule(const std::string& strModuleName) = 0;
 
+    virtual NFIModule* FindTestModule(const std::string& strModuleName) = 0;
+
+	virtual std::list<NFIModule*> Modules() = 0;
+
     virtual int GetAppID() const = 0;
     virtual void SetAppID(const int nAppID) = 0;
+
+    virtual bool IsRunningDocker() const = 0;
+    virtual void SetRunningDocker(bool bDocker) = 0;
+
+    virtual bool IsStaticPlugin() const = 0;
 
     virtual NFINT64 GetInitTime() const = 0;
     virtual NFINT64 GetNowTime() const = 0;
@@ -166,7 +196,7 @@ public:
 	virtual bool GetFileContent(const std::string &strFileName, std::string &strContent) = 0;
 
 	virtual void ExecuteCoScheduler() = 0;
-	virtual void YieldCo(const float nSecond) = 0;
+	virtual void YieldCo(const int64_t nSecond) = 0;
 	virtual void YieldCo() = 0;
 };
 

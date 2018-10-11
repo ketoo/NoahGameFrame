@@ -1,10 +1,28 @@
-// -------------------------------------------------------------------------
-//    @FileName         :    NFPluginLoader.cpp
-//    @Author           :    LvSheng.Huang
-//    @Date             :
-//    @Module           :    NFPluginLoader
-//
-// -------------------------------------------------------------------------
+/*
+            This file is part of: 
+                NoahFrame
+            https://github.com/ketoo/NoahGameFrame
+
+   Copyright 2009 - 2018 NoahFrame(NoahGameFrame)
+
+   File creator: lvsheng.huang
+   
+   NoahFrame is open-source software and you can redistribute it and/or modify
+   it under the terms of the License; besides, anyone who use this file/software must include this copyright announcement.
+
+   Licensed under the Apache License, Version 2.0 (the "License");
+   you may not use this file except in compliance with the License.
+   You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   See the License for the specific language governing permissions and
+   limitations under the License.
+*/
+
 #include <stdlib.h>
 #include <time.h>
 #include <stdio.h>
@@ -17,13 +35,17 @@
 #include <atomic>
 #include "NFCPluginManager.h"
 #include "NFComm/NFPluginModule/NFPlatform.h"
+#include "NFComm/NFLogPlugin/easylogging++.h"
 
-#if NF_PLATFORM == NF_PLATFORM_LINUX
+#if NF_PLATFORM != NF_PLATFORM_WIN
 #include <unistd.h>
 #include <netdb.h>
 #include <arpa/inet.h>
 #include <signal.h>
+#include <execinfo.h>
+#if NF_PLATFORM == NF_PLATFORM_LINUX
 #include <sys/prctl.h>
+#endif
 #endif
 
 bool bExitApp = false;
@@ -34,6 +56,8 @@ std::string strDataPath;
 std::string strAppName;
 std::string strAppID;
 std::string strTitleName;
+
+void MainExecute();
 
 void ReleaseNF()
 {
@@ -266,6 +290,26 @@ void ProcessParameter(int argc, char* argv[])
         }
 	}
 
+	if (strArgvList.find("Docker=") != string::npos)
+	{
+		std::string strDockerFlag = "0";
+		for (int i = 0; i < argc; i++)
+		{
+			strDockerFlag = argv[i];
+			if (strDockerFlag.find("Docker=") != string::npos)
+			{
+                strDockerFlag.erase(0, 7);
+				break;
+			}
+		}
+
+		int nDockerFlag = 0;
+        if(NF_StrTo(strDockerFlag, nDockerFlag))
+        {
+            NFCPluginManager::GetSingletonPtr()->SetRunningDocker(nDockerFlag);
+        }
+	}
+	
 	strTitleName = strAppName + strAppID;// +" PID" + NFGetPID();
 	strTitleName.replace(strTitleName.find("Server"), 6, "");
 	strTitleName = "NF" + strTitleName;
@@ -277,15 +321,99 @@ void ProcessParameter(int argc, char* argv[])
 #endif
 }
 
+#if NF_PLATFORM != NF_PLATFORM_WIN
+void CrashHandler(int sig) {
+	// FOLLOWING LINE IS ABSOLUTELY NEEDED AT THE END IN ORDER TO ABORT APPLICATION
+	//el::base::debug::StackTrace();
+	//el::Helpers::logCrashReason(sig, true);
+
+
+	LOG(FATAL) << "crash sig:" << sig;
+
+	int size = 16;
+	void * array[16];
+	int stack_num = backtrace(array, size);
+	char ** stacktrace = backtrace_symbols(array, stack_num);
+	for (int i = 0; i < stack_num; ++i)
+	{
+		//printf("%s\n", stacktrace[i]);
+		LOG(FATAL) << stacktrace[i];
+	}
+
+	free(stacktrace);
+}
+#endif
+
+void MainExecute()
+{
+
+	uint64_t nIndex = 0;
+    while (!bExitApp)
+    {
+		nIndex++;
+
+		std::this_thread::sleep_for(std::chrono::milliseconds(1));
+
+#if NF_PLATFORM == NF_PLATFORM_WIN
+        __try
+#else
+		try
+#endif
+		{
+#ifdef NF_COROUTINE
+			NFCPluginManager::Instance()->ExecuteCoScheduler();
+#else
+			NFCPluginManager::GetSingletonPtr()->Execute();
+#endif
+		}
+#if NF_PLATFORM == NF_PLATFORM_WIN
+        __except (ApplicationCrashHandler(GetExceptionInformation()))
+        {
+        }
+#else
+	catch(const std::exception& e)
+	{
+		int size = 16;
+		void * array[16];
+		int stack_num = backtrace(array, size);
+		char ** stacktrace = backtrace_symbols(array, stack_num);
+		for (int i = 0; i < stack_num; ++i)
+		{
+			//printf("%s\n", stacktrace[i]);
+			LOG(FATAL) << stacktrace[i];
+		}
+
+		free(stacktrace);
+	}
+	catch(...)
+	{
+		int size = 16;
+		void * array[16];
+		int stack_num = backtrace(array, size);
+		char ** stacktrace = backtrace_symbols(array, stack_num);
+		for (int i = 0; i < stack_num; ++i)
+		{
+			//printf("%s\n", stacktrace[i]);
+			LOG(FATAL) << stacktrace[i];
+		}
+
+		free(stacktrace);
+	}
+#endif
+    }
+}
+
 int main(int argc, char* argv[])
 {
 #if NF_PLATFORM == NF_PLATFORM_WIN
     SetUnhandledExceptionFilter((LPTOP_LEVEL_EXCEPTION_FILTER)ApplicationCrashHandler);
-#elif NF_PLATFORM == NF_PLATFORM_LINUX
+#else
+	el::Helpers::setCrashHandler(CrashHandler);
 #endif
 	//atexit(ReleaseNF);
 
     ProcessParameter(argc, argv);
+
 
 	PrintfLogo();
 	CreateBackThread();
@@ -296,27 +424,7 @@ int main(int argc, char* argv[])
 	NFCPluginManager::GetSingletonPtr()->CheckConfig();
 	NFCPluginManager::GetSingletonPtr()->ReadyExecute();
 
-	
-	uint64_t nIndex = 0;
-    while (!bExitApp)
-    {
-		nIndex++;
-
-		std::this_thread::sleep_for(std::chrono::milliseconds(1));
-
-#if NF_PLATFORM == NF_PLATFORM_WIN
-        __try
-        {
-#endif
-		//NFCPluginManager::GetSingletonPtr()->Execute();
-		NFCPluginManager::Instance()->ExecuteCoScheduler();
-#if NF_PLATFORM == NF_PLATFORM_WIN
-        }
-        __except (ApplicationCrashHandler(GetExceptionInformation()))
-        {
-        }
-#endif
-    }
+	MainExecute();
 
 	ReleaseNF();
 

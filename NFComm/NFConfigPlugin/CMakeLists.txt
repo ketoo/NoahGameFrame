@@ -4,7 +4,8 @@ file(GLOB NFConfigPlugin_ROOT_Cpp
 
 file(GLOB NFConfigPlugin_ROOT_Hpp 
 	*.h)
-add_library(NFConfigPlugin SHARED ${NFConfigPlugin_ROOT_Cpp} ${NFConfigPlugin_ROOT_Hpp})
+add_library(NFConfigPlugin STATIC ${NFConfigPlugin_ROOT_Cpp} ${NFConfigPlugin_ROOT_Hpp})
+
 set_target_properties( NFConfigPlugin PROPERTIES OUTPUT_NAME_DEBUG "NFConfigPlugin_d")
 set_target_properties( NFConfigPlugin PROPERTIES PREFIX "")
 set_target_properties( NFConfigPlugin PROPERTIES 
@@ -16,11 +17,14 @@ set_target_properties( NFConfigPlugin PROPERTIES
 if(UNIX)
 	add_dependencies(NFConfigPlugin NFCore)
 	if (CMAKE_BUILD_TYPE MATCHES "Release")
-		target_link_libraries(NFConfigPlugin  NFCore)
 	else()
-		target_link_libraries(NFConfigPlugin  NFCore)
 	endif()
+
+	target_link_libraries(NFConfigPlugin  NFCore)
+	target_link_libraries(NFConfigPlugin -static-libstdc++)
 else()
 	message("${ProjectName} ${CMAKE_BUILD_TYPE}")
-	target_link_libraries(NFConfigPlugin  libprotobuf )
+	
+	target_link_libraries(NFConfigPlugin  NFCore)
+	target_link_libraries(NFConfigPlugin -static-libstdc++)
 endif()

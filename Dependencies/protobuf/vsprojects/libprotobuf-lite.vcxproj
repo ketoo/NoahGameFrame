@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <Project DefaultTargets="Build" ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|x64">
@@ -9,101 +9,321 @@
       <Configuration>Release</Configuration>
       <Platform>x64</Platform>
     </ProjectConfiguration>
+    <ProjectConfiguration Include="MinSizeRel|x64">
+      <Configuration>MinSizeRel</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="RelWithDebInfo|x64">
+      <Configuration>RelWithDebInfo</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{49EA010D-706F-4BE2-A397-77854B72A040}</ProjectGuid>
+    <ProjectGUID>{5B932FBB-B210-382F-8C69-D458364CCF56}</ProjectGUID>
     <Keyword>Win32Proj</Keyword>
+    <Platform>x64</Platform>
+    <ProjectName>libprotobuf-lite</ProjectName>
+    <VCProjectUpgraderObjectName>NoUpgrade</VCProjectUpgraderObjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
-    <ConfigurationType>StaticLibrary</ConfigurationType>
-    <PlatformToolset>v140</PlatformToolset>
-  </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseOfMfc>false</UseOfMfc>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v140</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseOfMfc>false</UseOfMfc>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v140</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseOfMfc>false</UseOfMfc>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v140</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseOfMfc>false</UseOfMfc>
+    <CharacterSet>MultiByte</CharacterSet>
     <PlatformToolset>v140</PlatformToolset>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ImportGroup Label="ExtensionSettings">
   </ImportGroup>
-  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="PropertySheets">
-    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
-  </ImportGroup>
-  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="PropertySheets">
+  <ImportGroup Label="PropertySheets">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
-  <PropertyGroup>
-    <_ProjectFileVersion>11.0.50727.1</_ProjectFileVersion>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <TargetName>$(ProjectName)_d</TargetName>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-  </PropertyGroup>
+    <PropertyGroup>
+      <_ProjectFileVersion>10.0.20506.1</_ProjectFileVersion>
+      <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">D:\Documents\Downloads\protobuf-cpp-3.6.1\protobuf-3.6.1\vsprojects\Debug\</OutDir>
+      <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">libprotobuf-lite.dir\Debug\</IntDir>
+      <TargetName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">libprotobuf-lited</TargetName>
+      <TargetExt Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">.lib</TargetExt>
+      <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">D:\Documents\Downloads\protobuf-cpp-3.6.1\protobuf-3.6.1\vsprojects\Release\</OutDir>
+      <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">libprotobuf-lite.dir\Release\</IntDir>
+      <TargetName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">libprotobuf-lite</TargetName>
+      <TargetExt Condition="'$(Configuration)|$(Platform)'=='Release|x64'">.lib</TargetExt>
+      <OutDir Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">D:\Documents\Downloads\protobuf-cpp-3.6.1\protobuf-3.6.1\vsprojects\MinSizeRel\</OutDir>
+      <IntDir Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">libprotobuf-lite.dir\MinSizeRel\</IntDir>
+      <TargetName Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">libprotobuf-lite</TargetName>
+      <TargetExt Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">.lib</TargetExt>
+      <OutDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">D:\Documents\Downloads\protobuf-cpp-3.6.1\protobuf-3.6.1\vsprojects\RelWithDebInfo\</OutDir>
+      <IntDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">libprotobuf-lite.dir\RelWithDebInfo\</IntDir>
+      <TargetName Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">libprotobuf-lite</TargetName>
+      <TargetExt Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">.lib</TargetExt>
+    </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
-      <AdditionalOptions>/wd4244 /wd4267 /wd4018 /wd4355 /wd4800 /wd4251 /wd4996 /wd4146 /wd4305 %(AdditionalOptions)</AdditionalOptions>
-      <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>../src;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;_USRDLL;LIBPROTOBUF_EXPORTS;_SILENCE_STDEXT_HASH_DEPRECATION_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalOptions>%(AdditionalOptions)  /bigobj</AdditionalOptions>
+      <AdditionalIncludeDirectories>D:\Documents\Downloads\protobuf-cpp-3.6.1\protobuf-3.6.1\vsprojects;D:\Documents\Downloads\protobuf-cpp-3.6.1\protobuf-3.6.1\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AssemblerListingLocation>Debug/</AssemblerListingLocation>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
-      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
-      <PrecompiledHeader>
-      </PrecompiledHeader>
-      <WarningLevel>Level3</WarningLevel>
+      <CompileAs>CompileAsCpp</CompileAs>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <DisableSpecificWarnings>4018;4065;4146;4244;4251;4267;4305;4307;4309;4334;4355;4506;4800;4996</DisableSpecificWarnings>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <InlineFunctionExpansion>Disabled</InlineFunctionExpansion>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <Optimization>Disabled</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <WarningLevel>Level3</WarningLevel>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;GOOGLE_PROTOBUF_CMAKE_BUILD;CMAKE_INTDIR="Debug";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
     </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;GOOGLE_PROTOBUF_CMAKE_BUILD;CMAKE_INTDIR=\"Debug\";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>D:\Documents\Downloads\protobuf-cpp-3.6.1\protobuf-3.6.1\vsprojects;D:\Documents\Downloads\protobuf-cpp-3.6.1\protobuf-3.6.1\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>D:\Documents\Downloads\protobuf-cpp-3.6.1\protobuf-3.6.1\vsprojects;D:\Documents\Downloads\protobuf-cpp-3.6.1\protobuf-3.6.1\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <Lib>
+      <AdditionalOptions>%(AdditionalOptions)  /ignore:4221</AdditionalOptions>
+    </Lib>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
-      <AdditionalOptions>/wd4244 /wd4267 /wd4018 /wd4355 /wd4800 /wd4251 /wd4996 /wd4146 /wd4305 %(AdditionalOptions)</AdditionalOptions>
-      <AdditionalIncludeDirectories>../src;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;_USRDLL;LIBPROTOBUF_EXPORTS;_SILENCE_STDEXT_HASH_DEPRECATION_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
-      <PrecompiledHeader>
-      </PrecompiledHeader>
+      <AdditionalOptions>%(AdditionalOptions)  /bigobj</AdditionalOptions>
+      <AdditionalIncludeDirectories>D:\Documents\Downloads\protobuf-cpp-3.6.1\protobuf-3.6.1\vsprojects;D:\Documents\Downloads\protobuf-cpp-3.6.1\protobuf-3.6.1\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AssemblerListingLocation>Release/</AssemblerListingLocation>
+      <CompileAs>CompileAsCpp</CompileAs>
+      <DisableSpecificWarnings>4018;4065;4146;4244;4251;4267;4305;4307;4309;4334;4355;4506;4800;4996</DisableSpecificWarnings>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <Optimization>MaxSpeed</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
       <WarningLevel>Level3</WarningLevel>
-      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;GOOGLE_PROTOBUF_CMAKE_BUILD;CMAKE_INTDIR="Release";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <DebugInformationFormat></DebugInformationFormat>
     </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;GOOGLE_PROTOBUF_CMAKE_BUILD;CMAKE_INTDIR=\"Release\";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>D:\Documents\Downloads\protobuf-cpp-3.6.1\protobuf-3.6.1\vsprojects;D:\Documents\Downloads\protobuf-cpp-3.6.1\protobuf-3.6.1\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>D:\Documents\Downloads\protobuf-cpp-3.6.1\protobuf-3.6.1\vsprojects;D:\Documents\Downloads\protobuf-cpp-3.6.1\protobuf-3.6.1\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <Lib>
+      <AdditionalOptions>%(AdditionalOptions)  /ignore:4221</AdditionalOptions>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">
+    <ClCompile>
+      <AdditionalOptions>%(AdditionalOptions)  /bigobj</AdditionalOptions>
+      <AdditionalIncludeDirectories>D:\Documents\Downloads\protobuf-cpp-3.6.1\protobuf-3.6.1\vsprojects;D:\Documents\Downloads\protobuf-cpp-3.6.1\protobuf-3.6.1\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AssemblerListingLocation>MinSizeRel/</AssemblerListingLocation>
+      <CompileAs>CompileAsCpp</CompileAs>
+      <DisableSpecificWarnings>4018;4065;4146;4244;4251;4267;4305;4307;4309;4334;4355;4506;4800;4996</DisableSpecificWarnings>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <Optimization>MinSpace</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <WarningLevel>Level3</WarningLevel>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;GOOGLE_PROTOBUF_CMAKE_BUILD;CMAKE_INTDIR="MinSizeRel";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <DebugInformationFormat></DebugInformationFormat>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;GOOGLE_PROTOBUF_CMAKE_BUILD;CMAKE_INTDIR=\"MinSizeRel\";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>D:\Documents\Downloads\protobuf-cpp-3.6.1\protobuf-3.6.1\vsprojects;D:\Documents\Downloads\protobuf-cpp-3.6.1\protobuf-3.6.1\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>D:\Documents\Downloads\protobuf-cpp-3.6.1\protobuf-3.6.1\vsprojects;D:\Documents\Downloads\protobuf-cpp-3.6.1\protobuf-3.6.1\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <Lib>
+      <AdditionalOptions>%(AdditionalOptions)  /ignore:4221</AdditionalOptions>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">
+    <ClCompile>
+      <AdditionalOptions>%(AdditionalOptions)  /bigobj</AdditionalOptions>
+      <AdditionalIncludeDirectories>D:\Documents\Downloads\protobuf-cpp-3.6.1\protobuf-3.6.1\vsprojects;D:\Documents\Downloads\protobuf-cpp-3.6.1\protobuf-3.6.1\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AssemblerListingLocation>RelWithDebInfo/</AssemblerListingLocation>
+      <CompileAs>CompileAsCpp</CompileAs>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <DisableSpecificWarnings>4018;4065;4146;4244;4251;4267;4305;4307;4309;4334;4355;4506;4800;4996</DisableSpecificWarnings>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <Optimization>MaxSpeed</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <WarningLevel>Level3</WarningLevel>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;GOOGLE_PROTOBUF_CMAKE_BUILD;CMAKE_INTDIR="RelWithDebInfo";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;GOOGLE_PROTOBUF_CMAKE_BUILD;CMAKE_INTDIR=\"RelWithDebInfo\";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>D:\Documents\Downloads\protobuf-cpp-3.6.1\protobuf-3.6.1\vsprojects;D:\Documents\Downloads\protobuf-cpp-3.6.1\protobuf-3.6.1\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>D:\Documents\Downloads\protobuf-cpp-3.6.1\protobuf-3.6.1\vsprojects;D:\Documents\Downloads\protobuf-cpp-3.6.1\protobuf-3.6.1\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <Lib>
+      <AdditionalOptions>%(AdditionalOptions)  /ignore:4221</AdditionalOptions>
+    </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="..\src\google\protobuf\io\coded_stream.h" />
-    <ClInclude Include="..\src\google\protobuf\io\coded_stream_inl.h" />
-    <ClInclude Include="..\src\google\protobuf\stubs\common.h" />
-    <ClInclude Include="config.h" />
-    <ClInclude Include="..\src\google\protobuf\extension_set.h" />
-    <ClInclude Include="..\src\google\protobuf\generated_message_util.h" />
-    <ClInclude Include="..\src\google\protobuf\stubs\hash.h" />
-    <ClInclude Include="..\src\google\protobuf\stubs\map-util.h" />
-    <ClInclude Include="..\src\google\protobuf\message_lite.h" />
-    <ClInclude Include="..\src\google\protobuf\stubs\once.h" />
-    <ClInclude Include="..\src\google\protobuf\stubs\atomicops.h" />
-    <ClInclude Include="..\src\google\protobuf\stubs\atomicops_internals_x86_msvc.h" />
-    <ClInclude Include="..\src\google\protobuf\stubs\platform_macros.h" />
-    <ClInclude Include="..\src\google\protobuf\repeated_field.h" />
-    <ClInclude Include="..\src\google\protobuf\stubs\stl_util.h" />
-    <ClInclude Include="..\src\google\protobuf\wire_format_lite.h" />
-    <ClInclude Include="..\src\google\protobuf\wire_format_lite_inl.h" />
-    <ClInclude Include="..\src\google\protobuf\io\zero_copy_stream.h" />
-    <ClInclude Include="..\src\google\protobuf\io\zero_copy_stream_impl_lite.h" />
-    <ClInclude Include="..\src\google\protobuf\stubs\stringprintf.h" />
-    <ClInclude Include="..\src\google\protobuf\stubs\template_util.h" />
-    <ClInclude Include="..\src\google\protobuf\stubs\type_traits.h" />
+    <CustomBuild Include="D:\Documents\Downloads\protobuf-cpp-3.6.1\protobuf-3.6.1\cmake\CMakeLists.txt">
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Building Custom Rule D:/Documents/Downloads/protobuf-cpp-3.6.1/protobuf-3.6.1/cmake/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -HD:/Documents/Downloads/protobuf-cpp-3.6.1/protobuf-3.6.1/cmake -BD:/Documents/Downloads/protobuf-cpp-3.6.1/protobuf-3.6.1/vsprojects --check-stamp-file D:/Documents/Downloads/protobuf-cpp-3.6.1/protobuf-3.6.1/vsprojects/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">D:/Documents/Downloads/protobuf-cpp-3.6.1/protobuf-3.6.1/cmake/CMakeLists.txt;D:\Documents\Downloads\protobuf-cpp-3.6.1\protobuf-3.6.1\cmake\CMakeLists.txt;D:\Documents\Downloads\protobuf-cpp-3.6.1\protobuf-3.6.1\vsprojects\CMakeFiles\3.8.0\CMakeSystem.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\CMakeSystemSpecificInitialize.cmake;D:\Documents\Downloads\protobuf-cpp-3.6.1\protobuf-3.6.1\vsprojects\CMakeFiles\3.8.0\CMakeCCompiler.cmake;D:\Documents\Downloads\protobuf-cpp-3.6.1\protobuf-3.6.1\vsprojects\CMakeFiles\3.8.0\CMakeCXXCompiler.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\CMakeSystemSpecificInformation.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\CMakeGenericSystem.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\Platform\Windows.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\Platform\WindowsPaths.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\CMakeCInformation.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\CMakeLanguageInformation.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\Platform\Windows-MSVC-C.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\Platform\Windows-MSVC.cmake;D:\Documents\Downloads\protobuf-cpp-3.6.1\protobuf-3.6.1\vsprojects\CMakeFiles\3.8.0\CMakeRCCompiler.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\CMakeRCInformation.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\CMakeCommonLanguageInclude.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\CMakeCXXInformation.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\CMakeLanguageInformation.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\Compiler\MSVC-CXX.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\Platform\Windows-MSVC-CXX.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\Platform\Windows-MSVC.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\CMakeCommonLanguageInclude.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\CMakeDependentOption.cmake;D:\Documents\Downloads\protobuf-cpp-3.6.1\protobuf-3.6.1\cmake\protobuf-options.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\FindThreads.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\CheckLibraryExists.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\CheckSymbolExists.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\CheckIncludeFile.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\FindPackageHandleStandardArgs.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\FindPackageMessage.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\FindZLIB.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\SelectLibraryConfigurations.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\FindPackageHandleStandardArgs.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\FindPackageMessage.cmake;D:\Documents\Downloads\protobuf-cpp-3.6.1\protobuf-3.6.1\cmake\extract_includes.bat.in;D:\Documents\Downloads\protobuf-cpp-3.6.1\protobuf-3.6.1\cmake\libprotobuf-lite.cmake;D:\Documents\Downloads\protobuf-cpp-3.6.1\protobuf-3.6.1\cmake\libprotobuf.cmake;D:\Documents\Downloads\protobuf-cpp-3.6.1\protobuf-3.6.1\cmake\libprotoc.cmake;D:\Documents\Downloads\protobuf-cpp-3.6.1\protobuf-3.6.1\cmake\protoc.cmake;D:\Documents\Downloads\protobuf-cpp-3.6.1\protobuf-3.6.1\cmake\install.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\GNUInstallDirs.cmake;D:\Documents\Downloads\protobuf-cpp-3.6.1\protobuf-3.6.1\cmake\protobuf.pc.cmake;D:\Documents\Downloads\protobuf-cpp-3.6.1\protobuf-3.6.1\cmake\protobuf-lite.pc.cmake;D:\Documents\Downloads\protobuf-cpp-3.6.1\protobuf-3.6.1\cmake\protobuf-config.cmake.in;D:\Documents\Downloads\protobuf-cpp-3.6.1\protobuf-3.6.1\cmake\protobuf-config-version.cmake.in;D:\Documents\Downloads\protobuf-cpp-3.6.1\protobuf-3.6.1\cmake\protobuf-module.cmake.in;D:\Documents\Downloads\protobuf-cpp-3.6.1\protobuf-3.6.1\cmake\protobuf-options.cmake;D:\Documents\Downloads\protobuf-cpp-3.6.1\protobuf-3.6.1\cmake\CMakeLists.txt;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">D:\Documents\Downloads\protobuf-cpp-3.6.1\protobuf-3.6.1\vsprojects\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Building Custom Rule D:/Documents/Downloads/protobuf-cpp-3.6.1/protobuf-3.6.1/cmake/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -HD:/Documents/Downloads/protobuf-cpp-3.6.1/protobuf-3.6.1/cmake -BD:/Documents/Downloads/protobuf-cpp-3.6.1/protobuf-3.6.1/vsprojects --check-stamp-file D:/Documents/Downloads/protobuf-cpp-3.6.1/protobuf-3.6.1/vsprojects/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">D:/Documents/Downloads/protobuf-cpp-3.6.1/protobuf-3.6.1/cmake/CMakeLists.txt;D:\Documents\Downloads\protobuf-cpp-3.6.1\protobuf-3.6.1\cmake\CMakeLists.txt;D:\Documents\Downloads\protobuf-cpp-3.6.1\protobuf-3.6.1\vsprojects\CMakeFiles\3.8.0\CMakeSystem.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\CMakeSystemSpecificInitialize.cmake;D:\Documents\Downloads\protobuf-cpp-3.6.1\protobuf-3.6.1\vsprojects\CMakeFiles\3.8.0\CMakeCCompiler.cmake;D:\Documents\Downloads\protobuf-cpp-3.6.1\protobuf-3.6.1\vsprojects\CMakeFiles\3.8.0\CMakeCXXCompiler.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\CMakeSystemSpecificInformation.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\CMakeGenericSystem.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\Platform\Windows.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\Platform\WindowsPaths.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\CMakeCInformation.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\CMakeLanguageInformation.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\Platform\Windows-MSVC-C.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\Platform\Windows-MSVC.cmake;D:\Documents\Downloads\protobuf-cpp-3.6.1\protobuf-3.6.1\vsprojects\CMakeFiles\3.8.0\CMakeRCCompiler.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\CMakeRCInformation.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\CMakeCommonLanguageInclude.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\CMakeCXXInformation.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\CMakeLanguageInformation.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\Compiler\MSVC-CXX.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\Platform\Windows-MSVC-CXX.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\Platform\Windows-MSVC.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\CMakeCommonLanguageInclude.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\CMakeDependentOption.cmake;D:\Documents\Downloads\protobuf-cpp-3.6.1\protobuf-3.6.1\cmake\protobuf-options.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\FindThreads.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\CheckLibraryExists.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\CheckSymbolExists.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\CheckIncludeFile.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\FindPackageHandleStandardArgs.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\FindPackageMessage.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\FindZLIB.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\SelectLibraryConfigurations.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\FindPackageHandleStandardArgs.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\FindPackageMessage.cmake;D:\Documents\Downloads\protobuf-cpp-3.6.1\protobuf-3.6.1\cmake\extract_includes.bat.in;D:\Documents\Downloads\protobuf-cpp-3.6.1\protobuf-3.6.1\cmake\libprotobuf-lite.cmake;D:\Documents\Downloads\protobuf-cpp-3.6.1\protobuf-3.6.1\cmake\libprotobuf.cmake;D:\Documents\Downloads\protobuf-cpp-3.6.1\protobuf-3.6.1\cmake\libprotoc.cmake;D:\Documents\Downloads\protobuf-cpp-3.6.1\protobuf-3.6.1\cmake\protoc.cmake;D:\Documents\Downloads\protobuf-cpp-3.6.1\protobuf-3.6.1\cmake\install.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\GNUInstallDirs.cmake;D:\Documents\Downloads\protobuf-cpp-3.6.1\protobuf-3.6.1\cmake\protobuf.pc.cmake;D:\Documents\Downloads\protobuf-cpp-3.6.1\protobuf-3.6.1\cmake\protobuf-lite.pc.cmake;D:\Documents\Downloads\protobuf-cpp-3.6.1\protobuf-3.6.1\cmake\protobuf-config.cmake.in;D:\Documents\Downloads\protobuf-cpp-3.6.1\protobuf-3.6.1\cmake\protobuf-config-version.cmake.in;D:\Documents\Downloads\protobuf-cpp-3.6.1\protobuf-3.6.1\cmake\protobuf-module.cmake.in;D:\Documents\Downloads\protobuf-cpp-3.6.1\protobuf-3.6.1\cmake\protobuf-options.cmake;D:\Documents\Downloads\protobuf-cpp-3.6.1\protobuf-3.6.1\cmake\CMakeLists.txt;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">D:\Documents\Downloads\protobuf-cpp-3.6.1\protobuf-3.6.1\vsprojects\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">Building Custom Rule D:/Documents/Downloads/protobuf-cpp-3.6.1/protobuf-3.6.1/cmake/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -HD:/Documents/Downloads/protobuf-cpp-3.6.1/protobuf-3.6.1/cmake -BD:/Documents/Downloads/protobuf-cpp-3.6.1/protobuf-3.6.1/vsprojects --check-stamp-file D:/Documents/Downloads/protobuf-cpp-3.6.1/protobuf-3.6.1/vsprojects/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">D:/Documents/Downloads/protobuf-cpp-3.6.1/protobuf-3.6.1/cmake/CMakeLists.txt;D:\Documents\Downloads\protobuf-cpp-3.6.1\protobuf-3.6.1\cmake\CMakeLists.txt;D:\Documents\Downloads\protobuf-cpp-3.6.1\protobuf-3.6.1\vsprojects\CMakeFiles\3.8.0\CMakeSystem.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\CMakeSystemSpecificInitialize.cmake;D:\Documents\Downloads\protobuf-cpp-3.6.1\protobuf-3.6.1\vsprojects\CMakeFiles\3.8.0\CMakeCCompiler.cmake;D:\Documents\Downloads\protobuf-cpp-3.6.1\protobuf-3.6.1\vsprojects\CMakeFiles\3.8.0\CMakeCXXCompiler.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\CMakeSystemSpecificInformation.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\CMakeGenericSystem.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\Platform\Windows.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\Platform\WindowsPaths.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\CMakeCInformation.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\CMakeLanguageInformation.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\Platform\Windows-MSVC-C.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\Platform\Windows-MSVC.cmake;D:\Documents\Downloads\protobuf-cpp-3.6.1\protobuf-3.6.1\vsprojects\CMakeFiles\3.8.0\CMakeRCCompiler.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\CMakeRCInformation.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\CMakeCommonLanguageInclude.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\CMakeCXXInformation.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\CMakeLanguageInformation.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\Compiler\MSVC-CXX.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\Platform\Windows-MSVC-CXX.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\Platform\Windows-MSVC.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\CMakeCommonLanguageInclude.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\CMakeDependentOption.cmake;D:\Documents\Downloads\protobuf-cpp-3.6.1\protobuf-3.6.1\cmake\protobuf-options.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\FindThreads.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\CheckLibraryExists.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\CheckSymbolExists.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\CheckIncludeFile.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\FindPackageHandleStandardArgs.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\FindPackageMessage.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\FindZLIB.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\SelectLibraryConfigurations.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\FindPackageHandleStandardArgs.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\FindPackageMessage.cmake;D:\Documents\Downloads\protobuf-cpp-3.6.1\protobuf-3.6.1\cmake\extract_includes.bat.in;D:\Documents\Downloads\protobuf-cpp-3.6.1\protobuf-3.6.1\cmake\libprotobuf-lite.cmake;D:\Documents\Downloads\protobuf-cpp-3.6.1\protobuf-3.6.1\cmake\libprotobuf.cmake;D:\Documents\Downloads\protobuf-cpp-3.6.1\protobuf-3.6.1\cmake\libprotoc.cmake;D:\Documents\Downloads\protobuf-cpp-3.6.1\protobuf-3.6.1\cmake\protoc.cmake;D:\Documents\Downloads\protobuf-cpp-3.6.1\protobuf-3.6.1\cmake\install.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\GNUInstallDirs.cmake;D:\Documents\Downloads\protobuf-cpp-3.6.1\protobuf-3.6.1\cmake\protobuf.pc.cmake;D:\Documents\Downloads\protobuf-cpp-3.6.1\protobuf-3.6.1\cmake\protobuf-lite.pc.cmake;D:\Documents\Downloads\protobuf-cpp-3.6.1\protobuf-3.6.1\cmake\protobuf-config.cmake.in;D:\Documents\Downloads\protobuf-cpp-3.6.1\protobuf-3.6.1\cmake\protobuf-config-version.cmake.in;D:\Documents\Downloads\protobuf-cpp-3.6.1\protobuf-3.6.1\cmake\protobuf-module.cmake.in;D:\Documents\Downloads\protobuf-cpp-3.6.1\protobuf-3.6.1\cmake\protobuf-options.cmake;D:\Documents\Downloads\protobuf-cpp-3.6.1\protobuf-3.6.1\cmake\CMakeLists.txt;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">D:\Documents\Downloads\protobuf-cpp-3.6.1\protobuf-3.6.1\vsprojects\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">Building Custom Rule D:/Documents/Downloads/protobuf-cpp-3.6.1/protobuf-3.6.1/cmake/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -HD:/Documents/Downloads/protobuf-cpp-3.6.1/protobuf-3.6.1/cmake -BD:/Documents/Downloads/protobuf-cpp-3.6.1/protobuf-3.6.1/vsprojects --check-stamp-file D:/Documents/Downloads/protobuf-cpp-3.6.1/protobuf-3.6.1/vsprojects/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">D:/Documents/Downloads/protobuf-cpp-3.6.1/protobuf-3.6.1/cmake/CMakeLists.txt;D:\Documents\Downloads\protobuf-cpp-3.6.1\protobuf-3.6.1\cmake\CMakeLists.txt;D:\Documents\Downloads\protobuf-cpp-3.6.1\protobuf-3.6.1\vsprojects\CMakeFiles\3.8.0\CMakeSystem.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\CMakeSystemSpecificInitialize.cmake;D:\Documents\Downloads\protobuf-cpp-3.6.1\protobuf-3.6.1\vsprojects\CMakeFiles\3.8.0\CMakeCCompiler.cmake;D:\Documents\Downloads\protobuf-cpp-3.6.1\protobuf-3.6.1\vsprojects\CMakeFiles\3.8.0\CMakeCXXCompiler.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\CMakeSystemSpecificInformation.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\CMakeGenericSystem.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\Platform\Windows.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\Platform\WindowsPaths.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\CMakeCInformation.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\CMakeLanguageInformation.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\Platform\Windows-MSVC-C.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\Platform\Windows-MSVC.cmake;D:\Documents\Downloads\protobuf-cpp-3.6.1\protobuf-3.6.1\vsprojects\CMakeFiles\3.8.0\CMakeRCCompiler.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\CMakeRCInformation.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\CMakeCommonLanguageInclude.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\CMakeCXXInformation.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\CMakeLanguageInformation.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\Compiler\MSVC-CXX.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\Platform\Windows-MSVC-CXX.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\Platform\Windows-MSVC.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\CMakeCommonLanguageInclude.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\CMakeDependentOption.cmake;D:\Documents\Downloads\protobuf-cpp-3.6.1\protobuf-3.6.1\cmake\protobuf-options.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\FindThreads.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\CheckLibraryExists.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\CheckSymbolExists.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\CheckIncludeFile.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\FindPackageHandleStandardArgs.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\FindPackageMessage.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\FindZLIB.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\SelectLibraryConfigurations.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\FindPackageHandleStandardArgs.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\FindPackageMessage.cmake;D:\Documents\Downloads\protobuf-cpp-3.6.1\protobuf-3.6.1\cmake\extract_includes.bat.in;D:\Documents\Downloads\protobuf-cpp-3.6.1\protobuf-3.6.1\cmake\libprotobuf-lite.cmake;D:\Documents\Downloads\protobuf-cpp-3.6.1\protobuf-3.6.1\cmake\libprotobuf.cmake;D:\Documents\Downloads\protobuf-cpp-3.6.1\protobuf-3.6.1\cmake\libprotoc.cmake;D:\Documents\Downloads\protobuf-cpp-3.6.1\protobuf-3.6.1\cmake\protoc.cmake;D:\Documents\Downloads\protobuf-cpp-3.6.1\protobuf-3.6.1\cmake\install.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\GNUInstallDirs.cmake;D:\Documents\Downloads\protobuf-cpp-3.6.1\protobuf-3.6.1\cmake\protobuf.pc.cmake;D:\Documents\Downloads\protobuf-cpp-3.6.1\protobuf-3.6.1\cmake\protobuf-lite.pc.cmake;D:\Documents\Downloads\protobuf-cpp-3.6.1\protobuf-3.6.1\cmake\protobuf-config.cmake.in;D:\Documents\Downloads\protobuf-cpp-3.6.1\protobuf-3.6.1\cmake\protobuf-config-version.cmake.in;D:\Documents\Downloads\protobuf-cpp-3.6.1\protobuf-3.6.1\cmake\protobuf-module.cmake.in;D:\Documents\Downloads\protobuf-cpp-3.6.1\protobuf-3.6.1\cmake\protobuf-options.cmake;D:\Documents\Downloads\protobuf-cpp-3.6.1\protobuf-3.6.1\cmake\CMakeLists.txt;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">D:\Documents\Downloads\protobuf-cpp-3.6.1\protobuf-3.6.1\vsprojects\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">false</LinkObjects>
+    </CustomBuild>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\src\google\protobuf\io\coded_stream.cc" />
-    <ClCompile Include="..\src\google\protobuf\stubs\common.cc" />
-    <ClCompile Include="..\src\google\protobuf\extension_set.cc" />
-    <ClCompile Include="..\src\google\protobuf\generated_message_util.cc" />
-    <ClCompile Include="..\src\google\protobuf\message_lite.cc" />
-    <ClCompile Include="..\src\google\protobuf\stubs\once.cc" />
-    <ClCompile Include="..\src\google\protobuf\stubs\atomicops_internals_x86_msvc.cc" />
-    <ClCompile Include="..\src\google\protobuf\repeated_field.cc" />
-    <ClCompile Include="..\src\google\protobuf\wire_format_lite.cc" />
-    <ClCompile Include="..\src\google\protobuf\io\zero_copy_stream.cc" />
-    <ClCompile Include="..\src\google\protobuf\io\zero_copy_stream_impl_lite.cc" />
-    <ClCompile Include="..\src\google\protobuf\stubs\stringprintf.cc" />
+    <ClInclude Include="D:\Documents\Downloads\protobuf-cpp-3.6.1\protobuf-3.6.1\src\google\protobuf\arena.h" />
+    <ClInclude Include="D:\Documents\Downloads\protobuf-cpp-3.6.1\protobuf-3.6.1\src\google\protobuf\arenastring.h" />
+    <ClInclude Include="D:\Documents\Downloads\protobuf-cpp-3.6.1\protobuf-3.6.1\src\google\protobuf\extension_set.h" />
+    <ClInclude Include="D:\Documents\Downloads\protobuf-cpp-3.6.1\protobuf-3.6.1\src\google\protobuf\generated_message_util.h" />
+    <ClInclude Include="D:\Documents\Downloads\protobuf-cpp-3.6.1\protobuf-3.6.1\src\google\protobuf\implicit_weak_message.h" />
+    <ClInclude Include="D:\Documents\Downloads\protobuf-cpp-3.6.1\protobuf-3.6.1\src\google\protobuf\io\coded_stream.h" />
+    <ClInclude Include="D:\Documents\Downloads\protobuf-cpp-3.6.1\protobuf-3.6.1\src\google\protobuf\io\zero_copy_stream.h" />
+    <ClInclude Include="D:\Documents\Downloads\protobuf-cpp-3.6.1\protobuf-3.6.1\src\google\protobuf\io\zero_copy_stream_impl_lite.h" />
+    <ClInclude Include="D:\Documents\Downloads\protobuf-cpp-3.6.1\protobuf-3.6.1\src\google\protobuf\message_lite.h" />
+    <ClInclude Include="D:\Documents\Downloads\protobuf-cpp-3.6.1\protobuf-3.6.1\src\google\protobuf\repeated_field.h" />
+    <ClInclude Include="D:\Documents\Downloads\protobuf-cpp-3.6.1\protobuf-3.6.1\src\google\protobuf\stubs\bytestream.h" />
+    <ClInclude Include="D:\Documents\Downloads\protobuf-cpp-3.6.1\protobuf-3.6.1\src\google\protobuf\stubs\common.h" />
+    <ClInclude Include="D:\Documents\Downloads\protobuf-cpp-3.6.1\protobuf-3.6.1\src\google\protobuf\stubs\int128.h" />
+    <ClInclude Include="D:\Documents\Downloads\protobuf-cpp-3.6.1\protobuf-3.6.1\src\google\protobuf\stubs\once.h" />
+    <ClInclude Include="D:\Documents\Downloads\protobuf-cpp-3.6.1\protobuf-3.6.1\src\google\protobuf\stubs\status.h" />
+    <ClInclude Include="D:\Documents\Downloads\protobuf-cpp-3.6.1\protobuf-3.6.1\src\google\protobuf\stubs\statusor.h" />
+    <ClInclude Include="D:\Documents\Downloads\protobuf-cpp-3.6.1\protobuf-3.6.1\src\google\protobuf\stubs\stringpiece.h" />
+    <ClInclude Include="D:\Documents\Downloads\protobuf-cpp-3.6.1\protobuf-3.6.1\src\google\protobuf\stubs\stringprintf.h" />
+    <ClInclude Include="D:\Documents\Downloads\protobuf-cpp-3.6.1\protobuf-3.6.1\src\google\protobuf\stubs\strutil.h" />
+    <ClInclude Include="D:\Documents\Downloads\protobuf-cpp-3.6.1\protobuf-3.6.1\src\google\protobuf\stubs\time.h" />
+    <ClInclude Include="D:\Documents\Downloads\protobuf-cpp-3.6.1\protobuf-3.6.1\src\google\protobuf\wire_format_lite.h" />
+    <ClCompile Include="D:\Documents\Downloads\protobuf-cpp-3.6.1\protobuf-3.6.1\src\google\protobuf\arena.cc"  />
+    <ClCompile Include="D:\Documents\Downloads\protobuf-cpp-3.6.1\protobuf-3.6.1\src\google\protobuf\arenastring.cc"  />
+    <ClCompile Include="D:\Documents\Downloads\protobuf-cpp-3.6.1\protobuf-3.6.1\src\google\protobuf\extension_set.cc"  />
+    <ClCompile Include="D:\Documents\Downloads\protobuf-cpp-3.6.1\protobuf-3.6.1\src\google\protobuf\generated_message_table_driven_lite.cc"  />
+    <ClCompile Include="D:\Documents\Downloads\protobuf-cpp-3.6.1\protobuf-3.6.1\src\google\protobuf\generated_message_util.cc"  />
+    <ClCompile Include="D:\Documents\Downloads\protobuf-cpp-3.6.1\protobuf-3.6.1\src\google\protobuf\implicit_weak_message.cc"  />
+    <ClCompile Include="D:\Documents\Downloads\protobuf-cpp-3.6.1\protobuf-3.6.1\src\google\protobuf\io\coded_stream.cc"  />
+    <ClCompile Include="D:\Documents\Downloads\protobuf-cpp-3.6.1\protobuf-3.6.1\src\google\protobuf\io\zero_copy_stream.cc"  />
+    <ClCompile Include="D:\Documents\Downloads\protobuf-cpp-3.6.1\protobuf-3.6.1\src\google\protobuf\io\zero_copy_stream_impl_lite.cc"  />
+    <ClCompile Include="D:\Documents\Downloads\protobuf-cpp-3.6.1\protobuf-3.6.1\src\google\protobuf\message_lite.cc"  />
+    <ClCompile Include="D:\Documents\Downloads\protobuf-cpp-3.6.1\protobuf-3.6.1\src\google\protobuf\repeated_field.cc"  />
+    <ClCompile Include="D:\Documents\Downloads\protobuf-cpp-3.6.1\protobuf-3.6.1\src\google\protobuf\stubs\bytestream.cc"  />
+    <ClCompile Include="D:\Documents\Downloads\protobuf-cpp-3.6.1\protobuf-3.6.1\src\google\protobuf\stubs\common.cc"  />
+    <ClCompile Include="D:\Documents\Downloads\protobuf-cpp-3.6.1\protobuf-3.6.1\src\google\protobuf\stubs\int128.cc"  />
+    <ClCompile Include="D:\Documents\Downloads\protobuf-cpp-3.6.1\protobuf-3.6.1\src\google\protobuf\stubs\io_win32.cc"  />
+    <ClCompile Include="D:\Documents\Downloads\protobuf-cpp-3.6.1\protobuf-3.6.1\src\google\protobuf\stubs\status.cc"  />
+    <ClCompile Include="D:\Documents\Downloads\protobuf-cpp-3.6.1\protobuf-3.6.1\src\google\protobuf\stubs\statusor.cc"  />
+    <ClCompile Include="D:\Documents\Downloads\protobuf-cpp-3.6.1\protobuf-3.6.1\src\google\protobuf\stubs\stringpiece.cc"  />
+    <ClCompile Include="D:\Documents\Downloads\protobuf-cpp-3.6.1\protobuf-3.6.1\src\google\protobuf\stubs\stringprintf.cc"  />
+    <ClCompile Include="D:\Documents\Downloads\protobuf-cpp-3.6.1\protobuf-3.6.1\src\google\protobuf\stubs\structurally_valid.cc"  />
+    <ClCompile Include="D:\Documents\Downloads\protobuf-cpp-3.6.1\protobuf-3.6.1\src\google\protobuf\stubs\strutil.cc"  />
+    <ClCompile Include="D:\Documents\Downloads\protobuf-cpp-3.6.1\protobuf-3.6.1\src\google\protobuf\stubs\time.cc"  />
+    <ClCompile Include="D:\Documents\Downloads\protobuf-cpp-3.6.1\protobuf-3.6.1\src\google\protobuf\wire_format_lite.cc"  />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="D:\Documents\Downloads\protobuf-cpp-3.6.1\protobuf-3.6.1\vsprojects\ZERO_CHECK.vcxproj">
+      <Project>53D972A4-6293-336B-95E1-80E11A169885</Project>
+      <Name>ZERO_CHECK</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

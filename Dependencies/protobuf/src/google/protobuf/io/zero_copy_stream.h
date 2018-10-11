@@ -1,6 +1,6 @@
 // Protocol Buffers - Google's data interchange format
 // Copyright 2008 Google Inc.  All rights reserved.
-// http://code.google.com/p/protobuf/
+// https://developers.google.com/protocol-buffers/
 //
 // Redistribution and use in source and binary forms, with or without
 // modification, are permitted provided that the following conditions are
@@ -123,8 +123,8 @@ class ZeroCopyOutputStream;
 // copying.
 class LIBPROTOBUF_EXPORT ZeroCopyInputStream {
  public:
-  inline ZeroCopyInputStream() {}
-  virtual ~ZeroCopyInputStream();
+  ZeroCopyInputStream() {}
+  virtual ~ZeroCopyInputStream() {}
 
   // Obtains a chunk of data from the stream.
   //
@@ -180,8 +180,8 @@ class LIBPROTOBUF_EXPORT ZeroCopyInputStream {
 // copying.
 class LIBPROTOBUF_EXPORT ZeroCopyOutputStream {
  public:
-  inline ZeroCopyOutputStream() {}
-  virtual ~ZeroCopyOutputStream();
+  ZeroCopyOutputStream() {}
+  virtual ~ZeroCopyOutputStream() {}
 
   // Obtains a buffer into which data can be written.  Any data written
   // into this buffer will eventually (maybe instantly, maybe later on)
@@ -225,6 +225,16 @@ class LIBPROTOBUF_EXPORT ZeroCopyOutputStream {
 
   // Returns the total number of bytes written since this object was created.
   virtual int64 ByteCount() const = 0;
+
+  // Write a given chunk of data to the output.  Some output streams may
+  // implement this in a way that avoids copying. Check AllowsAliasing() before
+  // calling WriteAliasedRaw(). It will GOOGLE_CHECK fail if WriteAliasedRaw() is
+  // called on a stream that does not allow aliasing.
+  //
+  // NOTE: It is caller's responsibility to ensure that the chunk of memory
+  // remains live until all of the data has been consumed from the stream.
+  virtual bool WriteAliasedRaw(const void* data, int size);
+  virtual bool AllowsAliasing() const { return false; }
 
 
  private:

@@ -1,6 +1,6 @@
 // Protocol Buffers - Google's data interchange format
 // Copyright 2008 Google Inc.  All rights reserved.
-// http://code.google.com/p/protobuf/
+// https://developers.google.com/protocol-buffers/
 //
 // Redistribution and use in source and binary forms, with or without
 // modification, are permitted provided that the following conditions are
@@ -43,9 +43,13 @@
 #include <google/protobuf/unittest.pb.h>
 #include <google/protobuf/test_util.h>
 
+#include <google/protobuf/stubs/callback.h>
 #include <google/protobuf/stubs/common.h>
+#include <google/protobuf/stubs/logging.h>
+#include <google/protobuf/stubs/mutex.h>
 #include <google/protobuf/testing/googletest.h>
 #include <gtest/gtest.h>
+
 #include <google/protobuf/stubs/stl_util.h>
 
 namespace google {
@@ -118,7 +122,12 @@ TEST_F(UnknownFieldSetTest, AllFieldsPresent) {
     const FieldDescriptor* field = descriptor_->FindFieldByNumber(i);
     if (field != NULL) {
       ASSERT_LT(pos, unknown_fields_->field_count());
-      EXPECT_EQ(i, unknown_fields_->field(pos++).number());
+      // Do not check oneof field if it is not set.
+      if (field->containing_oneof() == NULL) {
+        EXPECT_EQ(i, unknown_fields_->field(pos++).number());
+      } else if (i == unknown_fields_->field(pos).number()) {
+        pos++;
+      }
       if (field->is_repeated()) {
         // Should have a second instance.
         ASSERT_LT(pos, unknown_fields_->field_count());
@@ -477,6 +486,13 @@ TEST_F(UnknownFieldSetTest, UnknownEnumValue) {
   }
 }
 
+TEST_F(UnknownFieldSetTest, SpaceUsedExcludingSelf) {
+  UnknownFieldSet empty;
+  empty.AddVarint(1, 0);
+  EXPECT_EQ(sizeof(std::vector<UnknownField>) + sizeof(UnknownField),
+            empty.SpaceUsedExcludingSelf());
+}
+
 TEST_F(UnknownFieldSetTest, SpaceUsed) {
   unittest::TestEmptyMessage empty_message;
 
@@ -544,8 +560,9 @@ TEST_F(UnknownFieldSetTest, DeleteSubrange) {
   }
 }
 
-void CheckDeleteByNumber(const vector<int>& field_numbers, int deleted_number,
-                        const vector<int>& expected_field_nubmers) {
+void CheckDeleteByNumber(const std::vector<int>& field_numbers,
+                         int deleted_number,
+                         const std::vector<int>& expected_field_nubmers) {
   UnknownFieldSet unknown_fields;
   for (int i = 0; i < field_numbers.size(); ++i) {
     unknown_fields.AddFixed32(field_numbers[i], i);
@@ -558,9 +575,9 @@ void CheckDeleteByNumber(const vector<int>& field_numbers, int deleted_number,
   }
 }
 
-#define MAKE_VECTOR(x) vector<int>(x, x + GOOGLE_ARRAYSIZE(x))
+#define MAKE_VECTOR(x) std::vector<int>(x, x + GOOGLE_ARRAYSIZE(x))
 TEST_F(UnknownFieldSetTest, DeleteByNumber) {
-  CheckDeleteByNumber(vector<int>(), 1, vector<int>());
+  CheckDeleteByNumber(std::vector<int>(), 1, std::vector<int>());
   static const int kTestFieldNumbers1[] = {1, 2, 3};
   static const int kFieldNumberToDelete1 = 1;
   static const int kExpectedFieldNumbers1[] = {2, 3};

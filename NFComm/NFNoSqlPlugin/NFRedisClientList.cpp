@@ -1,6 +1,27 @@
-//
-// Author: LUSHENG HUANG Created on 17/11/17.
-//
+/*
+            This file is part of: 
+                NoahFrame
+            https://github.com/ketoo/NoahGameFrame
+
+   Copyright 2009 - 2018 NoahFrame(NoahGameFrame)
+
+   File creator: lvsheng.huang
+   
+   NoahFrame is open-source software and you can redistribute it and/or modify
+   it under the terms of the License; besides, anyone who use this file/software must include this copyright announcement.
+
+   Licensed under the Apache License, Version 2.0 (the "License");
+   you may not use this file except in compliance with the License.
+   You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   See the License for the specific language governing permissions and
+   limitations under the License.
+*/
 
 #include "NFRedisClient.h"
 
@@ -10,35 +31,18 @@ bool NFRedisClient::LINDEX(const std::string &key, const int index, std::string&
 	cmd << key;
 	cmd << index;
 
-	NF_SHARE_PTR<NFRedisResult> pRedisResult = BuildSendCmd(cmd);
-
-	WaitingResult(pRedisResult);
-
-
-	switch (pRedisResult->GetRespType())
+	NF_SHARE_PTR<redisReply> pReply = BuildSendCmd(cmd);
+	if (pReply == nullptr)
 	{
-	case NFREDIS_RESP_TYPE::NFREDIS_RESP_ERROR:
-	case NFREDIS_RESP_TYPE::NFREDIS_RESP_UNKNOW:
-		break;
-	case NFREDIS_RESP_TYPE::NFREDIS_RESP_ARRAY:
-		break;
-	case NFREDIS_RESP_TYPE::NFREDIS_RESP_BULK:
-	{
-		value = pRedisResult->GetRespString();
-		return true;
-	}
-		break;
-	case NFREDIS_RESP_TYPE::NFREDIS_RESP_INT:
-		break;
-	case NFREDIS_RESP_TYPE::NFREDIS_RESP_NIL:
-		break;
-	case NFREDIS_RESP_TYPE::NFREDIS_RESP_STATUS:
-		break;
-	default:
-		break;
+		return false;
 	}
 
-	return false;
+	if (pReply->type == REDIS_REPLY_STRING)
+	{
+		value = std::string(pReply->str, pReply->len);
+	}
+
+	return true;
 }
 
 bool NFRedisClient::LLEN(const std::string &key, int& length)
@@ -46,35 +50,18 @@ bool NFRedisClient::LLEN(const std::string &key, int& length)
 	NFRedisCommand cmd(GET_NAME(LLEN));
 	cmd << key;
 
-	NF_SHARE_PTR<NFRedisResult> pRedisResult = BuildSendCmd(cmd);
-
-	WaitingResult(pRedisResult);
-
-
-	switch (pRedisResult->GetRespType())
+	NF_SHARE_PTR<redisReply> pReply = BuildSendCmd(cmd);
+	if (pReply == nullptr)
 	{
-	case NFREDIS_RESP_TYPE::NFREDIS_RESP_ERROR:
-	case NFREDIS_RESP_TYPE::NFREDIS_RESP_UNKNOW:
-		break;
-	case NFREDIS_RESP_TYPE::NFREDIS_RESP_ARRAY:
-		break;
-	case NFREDIS_RESP_TYPE::NFREDIS_RESP_BULK:
-		break;
-	case NFREDIS_RESP_TYPE::NFREDIS_RESP_INT:
-	{
-		length = pRedisResult->GetRespInt();
-		return true;
-	}
-		break;
-	case NFREDIS_RESP_TYPE::NFREDIS_RESP_NIL:
-		break;
-	case NFREDIS_RESP_TYPE::NFREDIS_RESP_STATUS:
-		break;
-	default:
-		break;
+		return false;
 	}
 
-	return false;
+	if (pReply->type == REDIS_REPLY_INTEGER)
+	{
+		length = (int)pReply->integer;
+	}
+
+	return true;
 }
 
 bool NFRedisClient::LPOP(const std::string &key, std::string& value)
@@ -82,35 +69,18 @@ bool NFRedisClient::LPOP(const std::string &key, std::string& value)
 	NFRedisCommand cmd(GET_NAME(LPOP));
 	cmd << key;
 
-	NF_SHARE_PTR<NFRedisResult> pRedisResult = BuildSendCmd(cmd);
-
-	WaitingResult(pRedisResult);
-
-	switch (pRedisResult->GetRespType())
+	NF_SHARE_PTR<redisReply> pReply = BuildSendCmd(cmd);
+	if (pReply == nullptr)
 	{
-	case NFREDIS_RESP_TYPE::NFREDIS_RESP_ERROR:
-	case NFREDIS_RESP_TYPE::NFREDIS_RESP_UNKNOW:
-		break;
-	case NFREDIS_RESP_TYPE::NFREDIS_RESP_ARRAY:
-		break;
-	case NFREDIS_RESP_TYPE::NFREDIS_RESP_BULK:
-	{
-		value = pRedisResult->GetRespString();
-		return true;
-	}
-		break;
-	case NFREDIS_RESP_TYPE::NFREDIS_RESP_INT:
-		break;
-	case NFREDIS_RESP_TYPE::NFREDIS_RESP_NIL:
-		break;
-	case NFREDIS_RESP_TYPE::NFREDIS_RESP_STATUS:
-		break;
-	default:
-		break;
+		return false;
 	}
 
+	if (pReply->type == REDIS_REPLY_STRING)
+	{
+		value = std::string(pReply->str, pReply->len);
+	}
 
-	return false;
+	return true;
 }
 
 int NFRedisClient::LPUSH(const std::string &key, const std::string &value)
@@ -119,34 +89,19 @@ int NFRedisClient::LPUSH(const std::string &key, const std::string &value)
 	cmd << key;
 	cmd << value;
 
-	NF_SHARE_PTR<NFRedisResult> pRedisResult = BuildSendCmd(cmd);
-
-	WaitingResult(pRedisResult);
-
-
-	switch (pRedisResult->GetRespType())
+	NF_SHARE_PTR<redisReply> pReply = BuildSendCmd(cmd);
+	if (pReply == nullptr)
 	{
-	case NFREDIS_RESP_TYPE::NFREDIS_RESP_ERROR:
-	case NFREDIS_RESP_TYPE::NFREDIS_RESP_UNKNOW:
-		break;
-	case NFREDIS_RESP_TYPE::NFREDIS_RESP_ARRAY:
-		break;
-	case NFREDIS_RESP_TYPE::NFREDIS_RESP_BULK:
-		break;
-	case NFREDIS_RESP_TYPE::NFREDIS_RESP_INT:
-	{
-		return pRedisResult->GetRespInt();
-	}
-		break;
-	case NFREDIS_RESP_TYPE::NFREDIS_RESP_NIL:
-		break;
-	case NFREDIS_RESP_TYPE::NFREDIS_RESP_STATUS:
-		break;
-	default:
-		break;
+		return false;
 	}
 
-	return 0;;
+	int list_len = 0;
+	if (pReply->type == REDIS_REPLY_INTEGER)
+	{
+		list_len = (int)pReply->integer;
+	}
+
+	return list_len;
 }
 
 int NFRedisClient::LPUSHX(const std::string &key, const std::string &value) 
@@ -155,34 +110,19 @@ int NFRedisClient::LPUSHX(const std::string &key, const std::string &value)
 	cmd << key;
 	cmd << value;
 
-	NF_SHARE_PTR<NFRedisResult> pRedisResult = BuildSendCmd(cmd);
-
-	WaitingResult(pRedisResult);
-
-
-	switch (pRedisResult->GetRespType())
+	NF_SHARE_PTR<redisReply> pReply = BuildSendCmd(cmd);
+	if (pReply == nullptr)
 	{
-	case NFREDIS_RESP_TYPE::NFREDIS_RESP_ERROR:
-	case NFREDIS_RESP_TYPE::NFREDIS_RESP_UNKNOW:
-		break;
-	case NFREDIS_RESP_TYPE::NFREDIS_RESP_ARRAY:
-		break;
-	case NFREDIS_RESP_TYPE::NFREDIS_RESP_BULK:
-		break;
-	case NFREDIS_RESP_TYPE::NFREDIS_RESP_INT:
-	{
-		return pRedisResult->GetRespInt();
-	}
-		break;
-	case NFREDIS_RESP_TYPE::NFREDIS_RESP_NIL:
-		break;
-	case NFREDIS_RESP_TYPE::NFREDIS_RESP_STATUS:
-		break;
-	default:
-		break;
+		return false;
 	}
 
-	return 0;
+	int list_len = 0;
+	if (pReply->type == REDIS_REPLY_INTEGER)
+	{
+		list_len = (int)pReply->integer;
+	}
+
+	return list_len;
 }
 
 bool NFRedisClient::LRANGE(const std::string &key, const int start, const int end, string_vector &values) 
@@ -197,43 +137,24 @@ bool NFRedisClient::LRANGE(const std::string &key, const int start, const int en
 	cmd << start;
 	cmd << end;
 
-	NF_SHARE_PTR<NFRedisResult> pRedisResult = BuildSendCmd(cmd);
-
-	WaitingResult(pRedisResult);
-
-	switch (pRedisResult->GetRespType())
+	NF_SHARE_PTR<redisReply> pReply = BuildSendCmd(cmd);
+	if (pReply == nullptr)
 	{
-	case NFREDIS_RESP_TYPE::NFREDIS_RESP_ERROR:
-	case NFREDIS_RESP_TYPE::NFREDIS_RESP_UNKNOW:
-		break;
-	case NFREDIS_RESP_TYPE::NFREDIS_RESP_ARRAY:
+		return false;
+	}
+
+	if (pReply->type == REDIS_REPLY_ARRAY)
 	{
-		const std::vector<NFRedisResult> xVector = pRedisResult->GetRespArray();
-		if ((end - start + 1) == xVector.size())
+		for (int k = 0; k < (int)pReply->elements; k++)
 		{
-			for (int i = 0; i < xVector.size(); ++i)
+			if (pReply->element[k]->type == REDIS_REPLY_STRING)
 			{
-				values.push_back(xVector[i].GetRespString());
+				values.emplace_back(std::move(std::string(pReply->element[k]->str, pReply->element[k]->len)));
 			}
-
-			return true;
 		}
 	}
-		break;
-	case NFREDIS_RESP_TYPE::NFREDIS_RESP_BULK:
-		break;
-	case NFREDIS_RESP_TYPE::NFREDIS_RESP_INT:
-		break;
-	case NFREDIS_RESP_TYPE::NFREDIS_RESP_NIL:
-		break;
-	case NFREDIS_RESP_TYPE::NFREDIS_RESP_STATUS:
-		break;
-	default:
-		break;
-	}
 
-
-	return false;
+	return true;
 }
 
 bool NFRedisClient::LSET(const std::string &key, const int index, const std::string &value)
@@ -243,30 +164,13 @@ bool NFRedisClient::LSET(const std::string &key, const int index, const std::str
 	cmd << index;
 	cmd << value;
 
-	NF_SHARE_PTR<NFRedisResult> pRedisResult = BuildSendCmd(cmd);
-	WaitingResult(pRedisResult);
-
-	switch (pRedisResult->GetRespType())
+	NF_SHARE_PTR<redisReply> pReply = BuildSendCmd(cmd);
+	if (pReply == nullptr)
 	{
-	case NFREDIS_RESP_TYPE::NFREDIS_RESP_ERROR:
-	case NFREDIS_RESP_TYPE::NFREDIS_RESP_UNKNOW:
-		break;
-	case NFREDIS_RESP_TYPE::NFREDIS_RESP_ARRAY:
-		break;
-	case NFREDIS_RESP_TYPE::NFREDIS_RESP_BULK:
-		break;
-	case NFREDIS_RESP_TYPE::NFREDIS_RESP_INT:
-		break;
-	case NFREDIS_RESP_TYPE::NFREDIS_RESP_NIL:
-		break;
-	case NFREDIS_RESP_TYPE::NFREDIS_RESP_STATUS:
-		return pRedisResult->IsOKRespStatus();
-		break;
-	default:
-		break;
+		return false;
 	}
 
-	return false;
+	return true;
 }
 
 bool NFRedisClient::RPOP(const std::string &key, std::string& value)
@@ -275,35 +179,18 @@ bool NFRedisClient::RPOP(const std::string &key, std::string& value)
 	NFRedisCommand cmd(GET_NAME(RPOP));
 	cmd << key;
 
-	NF_SHARE_PTR<NFRedisResult> pRedisResult = BuildSendCmd(cmd);
-
-	WaitingResult(pRedisResult);
-
-
-	switch (pRedisResult->GetRespType())
+	NF_SHARE_PTR<redisReply> pReply = BuildSendCmd(cmd);
+	if (pReply == nullptr)
 	{
-	case NFREDIS_RESP_TYPE::NFREDIS_RESP_ERROR:
-	case NFREDIS_RESP_TYPE::NFREDIS_RESP_UNKNOW:
-		break;
-	case NFREDIS_RESP_TYPE::NFREDIS_RESP_ARRAY:
-		break;
-	case NFREDIS_RESP_TYPE::NFREDIS_RESP_BULK:
-	{
-		value = pRedisResult->GetRespString();
-		return true;
-	}
-		break;
-	case NFREDIS_RESP_TYPE::NFREDIS_RESP_INT:
-		break;
-	case NFREDIS_RESP_TYPE::NFREDIS_RESP_NIL:
-		break;
-	case NFREDIS_RESP_TYPE::NFREDIS_RESP_STATUS:
-		break;
-	default:
-		break;
+		return false;
 	}
 
-	return false;
+	if (pReply->type == REDIS_REPLY_STRING)
+	{
+		value = std::string(pReply->str, pReply->len);
+	}
+
+	return true;
 }
 
 int NFRedisClient::RPUSH(const std::string &key, const std::string &value) 
@@ -312,32 +199,19 @@ int NFRedisClient::RPUSH(const std::string &key, const std::string &value)
 	cmd << key;
 	cmd << value;
 
-	NF_SHARE_PTR<NFRedisResult> pRedisResult = BuildSendCmd(cmd);
-
-	WaitingResult(pRedisResult);
-
-	switch (pRedisResult->GetRespType())
+	NF_SHARE_PTR<redisReply> pReply = BuildSendCmd(cmd);
+	if (pReply == nullptr)
 	{
-	case NFREDIS_RESP_TYPE::NFREDIS_RESP_ERROR:
-	case NFREDIS_RESP_TYPE::NFREDIS_RESP_UNKNOW:
-		break;
-	case NFREDIS_RESP_TYPE::NFREDIS_RESP_ARRAY:
-		break;
-	case NFREDIS_RESP_TYPE::NFREDIS_RESP_BULK:
-		break;
-	case NFREDIS_RESP_TYPE::NFREDIS_RESP_INT:
-		return pRedisResult->GetRespInt();
-		break;
-	case NFREDIS_RESP_TYPE::NFREDIS_RESP_NIL:
-		break;
-	case NFREDIS_RESP_TYPE::NFREDIS_RESP_STATUS:
-		break;
-	default:
-		break;
+		return false;
 	}
 
+	int list_len = 0;
+	if (pReply->type == REDIS_REPLY_INTEGER)
+	{
+		list_len = (int)pReply->integer;
+	}
 
-	return 0;
+	return list_len;
 }
 
 int NFRedisClient::RPUSHX(const std::string &key, const std::string &value)
@@ -347,30 +221,17 @@ int NFRedisClient::RPUSHX(const std::string &key, const std::string &value)
 	cmd << key;
 	cmd << value;
 
-	NF_SHARE_PTR<NFRedisResult> pRedisResult = BuildSendCmd(cmd);
-
-	WaitingResult(pRedisResult);
-
-
-	switch (pRedisResult->GetRespType())
+	NF_SHARE_PTR<redisReply> pReply = BuildSendCmd(cmd);
+	if (pReply == nullptr)
 	{
-	case NFREDIS_RESP_TYPE::NFREDIS_RESP_ERROR:
-	case NFREDIS_RESP_TYPE::NFREDIS_RESP_UNKNOW:
-		break;
-	case NFREDIS_RESP_TYPE::NFREDIS_RESP_ARRAY:
-		break;
-	case NFREDIS_RESP_TYPE::NFREDIS_RESP_BULK:
-		break;
-	case NFREDIS_RESP_TYPE::NFREDIS_RESP_INT:
-		return pRedisResult->GetRespInt();
-		break;
-	case NFREDIS_RESP_TYPE::NFREDIS_RESP_NIL:
-		break;
-	case NFREDIS_RESP_TYPE::NFREDIS_RESP_STATUS:
-		break;
-	default:
-		break;
+		return false;
 	}
 
-	return 0;
+	int list_len = 0;
+	if (pReply->type == REDIS_REPLY_INTEGER)
+	{
+		list_len = (int)pReply->integer;
+	}
+
+	return list_len;
 }

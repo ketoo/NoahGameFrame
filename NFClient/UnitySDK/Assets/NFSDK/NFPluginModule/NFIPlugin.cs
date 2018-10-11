@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -6,11 +6,11 @@ namespace NFSDK
 {
     public abstract class NFIPlugin : NFIModule
     {
-        //------------- �ӿ� -------------------//
+        //------------- 接口 -------------------//
         public abstract string GetPluginName();
         public abstract void Install();
         public abstract void Uninstall();
-        public override bool Awake()
+        public override void Awake()
         {
             foreach (NFIModule module in mModules.Values)
             {
@@ -19,10 +19,9 @@ namespace NFSDK
                     module.Awake();
                 }
             }
-            return true;
         }
 
-        public override bool Init()
+        public override void Init()
         {
             foreach (NFIModule module in mModules.Values)
             {
@@ -32,10 +31,9 @@ namespace NFSDK
                     Debug.LogFormat("NFIPlugin module Init");
                 }
             }
-            return true;
         }
 
-        public override bool AfterInit()
+        public override void AfterInit()
         {
             foreach (NFIModule module in mModules.Values)
             {
@@ -44,22 +42,20 @@ namespace NFSDK
                     module.AfterInit();
                 }
             }
-            return true;
         }
 
-        public override bool Execute()
+        public override void Execute()
         {
             foreach (NFIModule module in mModules.Values)
             {
                 if (module != null)
                 {
-                    module.Execute();
+					module.Execute();
                 }
             }
-            return true;
         }
 
-        public override bool BeforeShut()
+        public override void BeforeShut()
         {
             foreach (NFIModule module in mModules.Values)
             {
@@ -68,10 +64,9 @@ namespace NFSDK
                     module.BeforeShut();
                 }
             }
-            return true;
         }
 
-        public override bool Shut()
+        public override void Shut()
         {
             foreach (NFIModule module in mModules.Values)
             {
@@ -80,7 +75,6 @@ namespace NFSDK
                     module.Shut();
                 }
             }
-            return true;
         }
 
         public void AddModule<T1>(NFIModule module)

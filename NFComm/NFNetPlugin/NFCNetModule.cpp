@@ -1,11 +1,30 @@
+/*
+            This file is part of: 
+                NoahFrame
+            https://github.com/ketoo/NoahGameFrame
+
+   Copyright 2009 - 2018 NoahFrame(NoahGameFrame)
+
+   File creator: lvsheng.huang
+   
+   NoahFrame is open-source software and you can redistribute it and/or modify
+   it under the terms of the License; besides, anyone who use this file/software must include this copyright announcement.
+
+   Licensed under the Apache License, Version 2.0 (the "License");
+   you may not use this file except in compliance with the License.
+   You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   See the License for the specific language governing permissions and
+   limitations under the License.
+*/
+
 #include "NFCNetModule.h"
-// -------------------------------------------------------------------------
-//    @FileName         :    NFCNetModule.cpp
-//    @Author           :    LvSheng.Huang
-//    @Date             :    2017-02-15
-//    @Module           :    NFCNetModule
-//
-// -------------------------------------------------------------------------
+
 
 NFCNetModule::NFCNetModule(NFIPluginManager* p)
 {
@@ -25,6 +44,18 @@ NFCNetModule::~NFCNetModule()
 
     delete m_pNet;
     m_pNet = NULL;
+}
+
+bool NFCNetModule::Init()
+{
+	m_pLogModule = pPluginManager->FindModule<NFILogModule>();
+
+	return true;
+}
+
+bool NFCNetModule::AfterInit()
+{
+	return true;
 }
 
 void NFCNetModule::Initialization(const char* strIP, const unsigned short nPort)
@@ -109,42 +140,119 @@ bool NFCNetModule::Execute()
 
 bool NFCNetModule::SendMsgWithOutHead(const int nMsgID, const std::string& msg, const NFSOCK nSockIndex)
 {
-    return m_pNet->SendMsgWithOutHead(nMsgID, msg.c_str(), (uint32_t) msg.length(), nSockIndex);
+    bool bRet = m_pNet->SendMsgWithOutHead(nMsgID, msg.c_str(), (uint32_t) msg.length(), nSockIndex);
+	if (!bRet)
+	{
+		std::ostringstream stream;
+		stream << " SendMsgWithOutHead failed fd " << nSockIndex;
+		stream << " msg id " << nMsgID;
+		m_pLogModule->LogError(stream, __FUNCTION__, __LINE__);
+	}
+
+	return bRet;
 }
 
 bool NFCNetModule::SendMsgToAllClientWithOutHead(const int nMsgID, const std::string& msg)
 {
-    return m_pNet->SendMsgToAllClientWithOutHead(nMsgID, msg.c_str(), (uint32_t) msg.length());
+	bool bRet = m_pNet->SendMsgToAllClientWithOutHead(nMsgID, msg.c_str(), (uint32_t) msg.length());
+	if (!bRet)
+	{
+		std::ostringstream stream;
+		stream << " SendMsgToAllClientWithOutHead failed";
+		stream << " msg id " << nMsgID;
+		m_pLogModule->LogError(stream, __FUNCTION__, __LINE__);
+	}
+
+	return bRet;
 }
 
-bool NFCNetModule::SendMsgPB(const uint16_t nMsgID, const google::protobuf::Message& xData, const NFSOCK nSockIndex)
+bool NFCNetModule::SendMsgPB(const uint16_t nMsgID, const google::protobuf::Message& xData, const NFSOCK nSockIndex, const NFGUID id)
 {
     NFMsg::MsgBase xMsg;
     if (!xData.SerializeToString(xMsg.mutable_msg_data()))
     {
-        char szData[MAX_PATH] = {0};
-        NFSPRINTF(szData, MAX_PATH, "Send Message to %d Failed For Serialize of MsgData, MessageID: %d\n",
-                  (int) nSockIndex, nMsgID);
+		std::ostringstream stream;
+		stream << " SendMsgPB Message to  " << nSockIndex;
+		stream << " Failed For Serialize of MsgData, MessageID " << nMsgID;
+		m_pLogModule->LogError(stream, __FUNCTION__, __LINE__);
 
         return false;
     }
 
     NFMsg::Ident* pPlayerID = xMsg.mutable_player_id();
-    *pPlayerID = NFToPB(NFGUID());
+    *pPlayerID = NFToPB(id);
 
     std::string strMsg;
     if (!xMsg.SerializeToString(&strMsg))
     {
-        char szData[MAX_PATH] = {0};
-        NFSPRINTF(szData, MAX_PATH, "Send Message to %d Failed For Serialize of MsgBase, MessageID: %d\n",
-                  (int) nSockIndex, nMsgID);
+		std::ostringstream stream;
+		stream << " SendMsgPB Message to  " << nSockIndex;
+		stream << " Failed For Serialize of MsgBase, MessageID " << nMsgID;
+		m_pLogModule->LogError(stream, __FUNCTION__, __LINE__);
 
         return false;
     }
 
-    SendMsgWithOutHead(nMsgID, strMsg, nSockIndex);
+	return SendMsgWithOutHead(nMsgID, strMsg, nSockIndex);
+}
 
-    return true;
+bool NFCNetModule::SendMsg(const uint16_t nMsgID, const std::string & xData, const NFSOCK nSockIndex)
+{
+	return SendMsgWithOutHead(nMsgID, xData, nSockIndex);
+}
+
+bool NFCNetModule::SendMsg(const uint16_t nMsgID, const std::string & xData, const NFSOCK nSockIndex, const NFGUID id)
+{
+	NFMsg::MsgBase xMsg;
+	xMsg.set_msg_data(xData.data(), xData.length());
+
+	NFMsg::Ident* pPlayerID = xMsg.mutable_player_id();
+	*pPlayerID = NFToPB(id);
+
+	std::string strMsg;
+	if (!xMsg.SerializeToString(&strMsg))
+	{
+		std::ostringstream stream;
+		stream << " SendMsgPB Message to  " << nSockIndex;
+		stream << " Failed For Serialize of MsgBase, MessageID " << nMsgID;
+		m_pLogModule->LogError(stream, __FUNCTION__, __LINE__);
+
+		return false;
+	}
+
+	return SendMsgWithOutHead(nMsgID, strMsg, nSockIndex);
+}
+
+bool NFCNetModule::SendMsgPB(const uint16_t nMsgID, const google::protobuf::Message& xData, const NFSOCK nSockIndex)
+{
+	NFMsg::MsgBase xMsg;
+	if (!xData.SerializeToString(xMsg.mutable_msg_data()))
+	{
+		std::ostringstream stream;
+		stream << " SendMsgPB Message to  " << nSockIndex;
+		stream << " Failed For Serialize of MsgData, MessageID " << nMsgID;
+		m_pLogModule->LogError(stream, __FUNCTION__, __LINE__);
+
+		return false;
+	}
+
+	NFMsg::Ident* pPlayerID = xMsg.mutable_player_id();
+	*pPlayerID = NFToPB(NFGUID());
+
+	std::string strMsg;
+	if (!xMsg.SerializeToString(&strMsg))
+	{
+		std::ostringstream stream;
+		stream << " SendMsgPB Message to  " << nSockIndex;
+		stream << " Failed For Serialize of MsgBase, MessageID " << nMsgID;
+		m_pLogModule->LogError(stream, __FUNCTION__, __LINE__);
+
+		return false;
+	}
+
+	SendMsgWithOutHead(nMsgID, strMsg, nSockIndex);
+
+	return true;
 }
 
 bool NFCNetModule::SendMsgPBToAllClient(const uint16_t nMsgID, const google::protobuf::Message& xData)
@@ -152,20 +260,21 @@ bool NFCNetModule::SendMsgPBToAllClient(const uint16_t nMsgID, const google::pro
     NFMsg::MsgBase xMsg;
     if (!xData.SerializeToString(xMsg.mutable_msg_data()))
     {
-        char szData[MAX_PATH] = {0};
-        NFSPRINTF(szData, MAX_PATH, "Send Message to all Failed For Serialize of MsgData, MessageID: %d\n", nMsgID);
+		std::ostringstream stream;
+		stream << " SendMsgPBToAllClient";
+		stream << " Failed For Serialize of MsgData, MessageID " << nMsgID;
+		m_pLogModule->LogError(stream, __FUNCTION__, __LINE__);
 
         return false;
     }
 
-    NFMsg::Ident* pPlayerID = xMsg.mutable_player_id();
-    *pPlayerID = NFToPB(NFGUID());
-
     std::string strMsg;
     if (!xMsg.SerializeToString(&strMsg))
     {
-        char szData[MAX_PATH] = {0};
-        NFSPRINTF(szData, MAX_PATH, "Send Message to all Failed For Serialize of MsgBase, MessageID: %d\n", nMsgID);
+		std::ostringstream stream;
+		stream << " SendMsgPBToAllClient";
+		stream << " Failed For Serialize of MsgBase, MessageID " << nMsgID;
+		m_pLogModule->LogError(stream, __FUNCTION__, __LINE__);
 
         return false;
     }
@@ -173,14 +282,14 @@ bool NFCNetModule::SendMsgPBToAllClient(const uint16_t nMsgID, const google::pro
     return SendMsgToAllClientWithOutHead(nMsgID, strMsg);
 }
 
-bool NFCNetModule::SendMsgPB(const uint16_t nMsgID, const google::protobuf::Message& xData, const NFSOCK nSockIndex,
-                             const NFGUID nPlayer, const std::vector<NFGUID>* pClientIDList)
+bool NFCNetModule::SendMsgPB(const uint16_t nMsgID, const google::protobuf::Message& xData, const NFSOCK nSockIndex, const std::vector<NFGUID>* pClientIDList)
 {
     if (!m_pNet)
     {
-        char szData[MAX_PATH] = {0};
-        NFSPRINTF(szData, MAX_PATH, "Send Message to %d Failed For NULL Of Net, MessageID: %d\n", (int) nSockIndex,
-                  nMsgID);
+		std::ostringstream stream;
+		stream << " m_pNet SendMsgPB faailed fd " << nSockIndex;
+		stream << " Failed For Serialize of MsgBase, MessageID " << nMsgID;
+		m_pLogModule->LogError(stream, __FUNCTION__, __LINE__);
 
         return false;
     }
@@ -188,16 +297,17 @@ bool NFCNetModule::SendMsgPB(const uint16_t nMsgID, const google::protobuf::Mess
     NFMsg::MsgBase xMsg;
     if (!xData.SerializeToString(xMsg.mutable_msg_data()))
     {
-        char szData[MAX_PATH] = {0};
-        NFSPRINTF(szData, MAX_PATH, "Send Message to %d Failed For Serialize of MsgData, MessageID: %d\n",
-                  (int) nSockIndex, nMsgID);
+		std::ostringstream stream;
+		stream << " SendMsgPB faailed fd " << nSockIndex;
+		stream << " Failed For Serialize of MsgBase, MessageID " << nMsgID;
+		m_pLogModule->LogError(stream, __FUNCTION__, __LINE__);
 
         return false;
     }
 
 
     NFMsg::Ident* pPlayerID = xMsg.mutable_player_id();
-    *pPlayerID = NFToPB(nPlayer);
+    *pPlayerID = NFToPB(NFGUID());
     if (pClientIDList)
     {
         for (int i = 0; i < pClientIDList->size(); ++i)
@@ -215,9 +325,10 @@ bool NFCNetModule::SendMsgPB(const uint16_t nMsgID, const google::protobuf::Mess
     std::string strMsg;
     if (!xMsg.SerializeToString(&strMsg))
     {
-        char szData[MAX_PATH] = {0};
-        NFSPRINTF(szData, MAX_PATH, "Send Message to %d Failed For Serialize of MsgBase, MessageID: %d\n",
-                  (int) nSockIndex, nMsgID);
+		std::ostringstream stream;
+		stream << " SendMsgPB faailed fd " << nSockIndex;
+		stream << " Failed For Serialize of MsgBase, MessageID " << nMsgID;
+		m_pLogModule->LogError(stream, __FUNCTION__, __LINE__);
 
         return false;
     }
@@ -225,15 +336,14 @@ bool NFCNetModule::SendMsgPB(const uint16_t nMsgID, const google::protobuf::Mess
     return SendMsgWithOutHead(nMsgID, strMsg, nSockIndex);
 }
 
-bool NFCNetModule::SendMsgPB(const uint16_t nMsgID, const std::string& strData, const NFSOCK nSockIndex,
-                             const NFGUID nPlayer, const std::vector<NFGUID>* pClientIDList)
+bool NFCNetModule::SendMsgPB(const uint16_t nMsgID, const std::string& strData, const NFSOCK nSockIndex, const std::vector<NFGUID>* pClientIDList)
 {
     if (!m_pNet)
     {
-        char szData[MAX_PATH] = {0};
-        NFSPRINTF(szData, MAX_PATH, "Send Message to %d Failed For NULL Of Net, MessageID: %d\n", (int) nSockIndex,
-                  nMsgID);
-        //LogSend(szData);
+		std::ostringstream stream;
+		stream << " SendMsgPB NULL Of Net faailed fd " << nSockIndex;
+		stream << " Failed For Serialize of MsgBase, MessageID " << nMsgID;
+		m_pLogModule->LogError(stream, __FUNCTION__, __LINE__);
 
         return false;
     }
@@ -241,9 +351,8 @@ bool NFCNetModule::SendMsgPB(const uint16_t nMsgID, const std::string& strData, 
     NFMsg::MsgBase xMsg;
     xMsg.set_msg_data(strData.data(), strData.length());
 
-
     NFMsg::Ident* pPlayerID = xMsg.mutable_player_id();
-    *pPlayerID = NFToPB(nPlayer);
+    *pPlayerID = NFToPB(NFGUID());
     if (pClientIDList)
     {
         for (int i = 0; i < pClientIDList->size(); ++i)
@@ -261,10 +370,10 @@ bool NFCNetModule::SendMsgPB(const uint16_t nMsgID, const std::string& strData, 
     std::string strMsg;
     if (!xMsg.SerializeToString(&strMsg))
     {
-        char szData[MAX_PATH] = {0};
-        NFSPRINTF(szData, MAX_PATH, "Send Message to %d Failed For Serialize of MsgBase, MessageID: %d\n",
-                  (int) nSockIndex, nMsgID);
-        //LogSend(szData);
+		std::ostringstream stream;
+		stream << " SendMsgPB failed fd " << nSockIndex;
+		stream << " Failed For Serialize of MsgBase, MessageID " << nMsgID;
+		m_pLogModule->LogError(stream, __FUNCTION__, __LINE__);
 
         return false;
     }
@@ -279,6 +388,8 @@ NFINet* NFCNetModule::GetNet()
 
 void NFCNetModule::OnReceiveNetPack(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
 {
+	m_pLogModule->LogInfo("OnReceiveNetPack " + std::to_string(nMsgID), __FUNCTION__, __LINE__);
+
     std::map<int, std::list<NET_RECEIVE_FUNCTOR_PTR>>::iterator it = mxReceiveCallBack.find(nMsgID);
     if (mxReceiveCallBack.end() != it)
     {

@@ -1,6 +1,6 @@
 // Protocol Buffers - Google's data interchange format
 // Copyright 2008 Google Inc.  All rights reserved.
-// http://code.google.com/p/protobuf/
+// https://developers.google.com/protocol-buffers/
 //
 // Redistribution and use in source and binary forms, with or without
 // modification, are permitted provided that the following conditions are
@@ -52,7 +52,7 @@ class TestUtilLite {
   static void SetPackedExtensions(unittest::TestPackedExtensionsLite* message);
 
   // Use the repeated versions of the set_*() accessors to modify all the
-  // repeated fields of the messsage (which should already have been
+  // repeated fields of the message (which should already have been
   // initialized with Set*Fields()).  Set*Fields() itself only tests
   // the add_*() accessors.
   static void ModifyRepeatedFields(unittest::TestAllTypesLite* message);

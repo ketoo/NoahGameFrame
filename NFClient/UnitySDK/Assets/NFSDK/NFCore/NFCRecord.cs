@@ -13,12 +13,14 @@ namespace NFSDK
 {
     public class NFCRecord : NFIRecord
     {
-		public NFCRecord(NFGUID self, string strRecordName, int nRow, NFIDataList varData)
+
+		public NFCRecord(NFGUID self, string strRecordName, int nRow, NFDataList varData, NFDataList varTag)
 		{
 			mSelf = self;
 			mnRow = nRow;
 			mstrRecordName = strRecordName;
-            mVarRecordType = new NFCDataList(varData);
+            mVarRecordType = new NFDataList(varData);
+			mxTag = new NFDataList(varTag);
 		}
 
         public override void SetUpload(bool upload)
@@ -31,6 +33,7 @@ namespace NFSDK
             return mbUpload;
         }
 
+        //==============================================
         public override bool IsUsed(int nRow)
 		{
 			if (mhtRecordVec.ContainsKey(nRow))
@@ -51,16 +54,24 @@ namespace NFSDK
 			return mVarRecordType.Count();
         }
 
-        public override NFIDataList.VARIANT_TYPE GetColType(int nCol)
+        public override NFDataList.VARIANT_TYPE GetColType(int nCol)
         {
 			return mVarRecordType.GetType(nCol);
         }
 
-        public override NFIDataList GetColsData()
+        public override NFDataList GetColsData()
         {
             return mVarRecordType;
         }
 
+		public override NFDataList GetTagData()
+		{
+			return mxTag;
+		}
+		public override string GetColTag(int nCol)
+		{
+			return mxTag.StringVal (nCol);
+		}
 
         // add data
         public override int AddRow(int nRow)
@@ -73,17 +84,17 @@ namespace NFSDK
 			return -1;
         }
 
-        public override int AddRow(int nRow, NFIDataList var)
+        public override int AddRow(int nRow, NFDataList var)
         {
 			if(nRow >= 0 && nRow < mnRow)
 			{
 				if (!mhtRecordVec.ContainsKey(nRow))
 				{
-					mhtRecordVec[nRow] = new NFCDataList(var);
+					mhtRecordVec[nRow] = new NFDataList(var);
 
                     if (null != doHandleDel)
                     {
-                        doHandleDel(mSelf, mstrRecordName, eRecordOptype.Add, nRow, 0, NFIDataList.NULL_TDATA, NFIDataList.NULL_TDATA);
+                        doHandleDel(mSelf, mstrRecordName, eRecordOptype.Add, nRow, 0, NFDataList.NULL_TDATA, NFDataList.NULL_TDATA);
                     }
 					return nRow;
 				}
@@ -94,7 +105,7 @@ namespace NFSDK
         }
 
         // set data
-        public override int SetValue(int nRow, NFIDataList var)
+        public override int SetValue(int nRow, NFDataList var)
         {
 			if(nRow >= 0 && nRow < mnRow)
 			{
@@ -117,13 +128,13 @@ namespace NFSDK
 				{
 					AddRow(nRow);
 				}
-				NFIDataList valueList = (NFIDataList)mhtRecordVec[nRow];
-				if (valueList.GetType(nCol) == NFIDataList.VARIANT_TYPE.VTYPE_INT)
+				NFDataList valueList = (NFDataList)mhtRecordVec[nRow];
+				if (valueList.GetType(nCol) == NFDataList.VARIANT_TYPE.VTYPE_INT)
 				{
 					if (valueList.IntVal(nCol) != value)
 					{
-                        NFIDataList.TData oldValue = new NFIDataList.TData(NFIDataList.VARIANT_TYPE.VTYPE_INT);
-                        NFIDataList.TData newValue = new NFIDataList.TData(NFIDataList.VARIANT_TYPE.VTYPE_INT);
+                        NFDataList.TData oldValue = new NFDataList.TData(NFDataList.VARIANT_TYPE.VTYPE_INT);
+                        NFDataList.TData newValue = new NFDataList.TData(NFDataList.VARIANT_TYPE.VTYPE_INT);
 
                         oldValue.Set(valueList.IntVal(nCol));
                         newValue.Set(value);
@@ -150,14 +161,14 @@ namespace NFSDK
 				{
 					AddRow(nRow);
 				}
-				NFIDataList valueList = (NFIDataList)mhtRecordVec[nRow];
-				if (valueList.GetType(nCol) == NFIDataList.VARIANT_TYPE.VTYPE_FLOAT)
+				NFDataList valueList = (NFDataList)mhtRecordVec[nRow];
+				if (valueList.GetType(nCol) == NFDataList.VARIANT_TYPE.VTYPE_FLOAT)
 				{
-					if (valueList.FloatVal(nCol) - value > NFIDataList.EPS_DOUBLE
-						|| valueList.FloatVal(nCol) - value < -NFIDataList.EPS_DOUBLE)
+					if (valueList.FloatVal(nCol) - value > NFDataList.EPS_DOUBLE
+						|| valueList.FloatVal(nCol) - value < -NFDataList.EPS_DOUBLE)
 					{
-                        NFIDataList.TData oldValue = new NFIDataList.TData(NFIDataList.VARIANT_TYPE.VTYPE_FLOAT);
-                        NFIDataList.TData newValue = new NFIDataList.TData(NFIDataList.VARIANT_TYPE.VTYPE_FLOAT);
+                        NFDataList.TData oldValue = new NFDataList.TData(NFDataList.VARIANT_TYPE.VTYPE_FLOAT);
+                        NFDataList.TData newValue = new NFDataList.TData(NFDataList.VARIANT_TYPE.VTYPE_FLOAT);
 
                         oldValue.Set(valueList.FloatVal(nCol));
                         newValue.Set(value);
@@ -185,13 +196,13 @@ namespace NFSDK
 				{
 					AddRow(nRow);
 				}
-				NFIDataList valueList = (NFIDataList)mhtRecordVec[nRow];
-				if (valueList.GetType(nCol) == NFIDataList.VARIANT_TYPE.VTYPE_STRING)
+				NFDataList valueList = (NFDataList)mhtRecordVec[nRow];
+				if (valueList.GetType(nCol) == NFDataList.VARIANT_TYPE.VTYPE_STRING)
 				{
 					if (valueList.StringVal(nCol) != value)
 					{
-                        NFIDataList.TData oldValue = new NFIDataList.TData(NFIDataList.VARIANT_TYPE.VTYPE_STRING);
-                        NFIDataList.TData newValue = new NFIDataList.TData(NFIDataList.VARIANT_TYPE.VTYPE_STRING);
+                        NFDataList.TData oldValue = new NFDataList.TData(NFDataList.VARIANT_TYPE.VTYPE_STRING);
+                        NFDataList.TData newValue = new NFDataList.TData(NFDataList.VARIANT_TYPE.VTYPE_STRING);
 
                         oldValue.Set(valueList.StringVal(nCol));
                         newValue.Set(value);
@@ -219,13 +230,13 @@ namespace NFSDK
 				{
 					AddRow(nRow);
 				}
-				NFIDataList valueList = (NFIDataList)mhtRecordVec[nRow];
-				if (valueList.GetType(nCol) == NFIDataList.VARIANT_TYPE.VTYPE_OBJECT)
+				NFDataList valueList = (NFDataList)mhtRecordVec[nRow];
+				if (valueList.GetType(nCol) == NFDataList.VARIANT_TYPE.VTYPE_OBJECT)
 				{
 					if (valueList.ObjectVal(nCol) != value)
 					{
-                        NFIDataList.TData oldValue = new NFIDataList.TData(NFIDataList.VARIANT_TYPE.VTYPE_OBJECT);
-                        NFIDataList.TData newValue = new NFIDataList.TData(NFIDataList.VARIANT_TYPE.VTYPE_OBJECT);
+                        NFDataList.TData oldValue = new NFDataList.TData(NFDataList.VARIANT_TYPE.VTYPE_OBJECT);
+                        NFDataList.TData newValue = new NFDataList.TData(NFDataList.VARIANT_TYPE.VTYPE_OBJECT);
 
                         oldValue.Set(valueList.ObjectVal(nCol));
                         newValue.Set(value);
@@ -253,13 +264,13 @@ namespace NFSDK
                 {
                     AddRow(nRow);
                 }
-                NFIDataList valueList = (NFIDataList)mhtRecordVec[nRow];
-                if (valueList.GetType(nCol) == NFIDataList.VARIANT_TYPE.VTYPE_VECTOR2)
+                NFDataList valueList = (NFDataList)mhtRecordVec[nRow];
+                if (valueList.GetType(nCol) == NFDataList.VARIANT_TYPE.VTYPE_VECTOR2)
                 {
                     if (valueList.Vector2Val(nCol) != value)
                     {
-                        NFIDataList.TData oldValue = new NFIDataList.TData(NFIDataList.VARIANT_TYPE.VTYPE_VECTOR2);
-                        NFIDataList.TData newValue = new NFIDataList.TData(NFIDataList.VARIANT_TYPE.VTYPE_VECTOR2);
+                        NFDataList.TData oldValue = new NFDataList.TData(NFDataList.VARIANT_TYPE.VTYPE_VECTOR2);
+                        NFDataList.TData newValue = new NFDataList.TData(NFDataList.VARIANT_TYPE.VTYPE_VECTOR2);
 
                         oldValue.Set(valueList.Vector2Val(nCol));
                         newValue.Set(value);
@@ -287,13 +298,13 @@ namespace NFSDK
                 {
                     AddRow(nRow);
                 }
-                NFIDataList valueList = (NFIDataList)mhtRecordVec[nRow];
-                if (valueList.GetType(nCol) == NFIDataList.VARIANT_TYPE.VTYPE_VECTOR3)
+                NFDataList valueList = (NFDataList)mhtRecordVec[nRow];
+                if (valueList.GetType(nCol) == NFDataList.VARIANT_TYPE.VTYPE_VECTOR3)
                 {
                     if (valueList.Vector3Val(nCol) != value)
                     {
-                        NFIDataList.TData oldValue = new NFIDataList.TData(NFIDataList.VARIANT_TYPE.VTYPE_VECTOR3);
-                        NFIDataList.TData newValue = new NFIDataList.TData(NFIDataList.VARIANT_TYPE.VTYPE_VECTOR3);
+                        NFDataList.TData oldValue = new NFDataList.TData(NFDataList.VARIANT_TYPE.VTYPE_VECTOR3);
+                        NFDataList.TData newValue = new NFDataList.TData(NFDataList.VARIANT_TYPE.VTYPE_VECTOR3);
 
                         oldValue.Set(valueList.Vector3Val(nCol));
                         newValue.Set(value);
@@ -314,30 +325,44 @@ namespace NFSDK
         }
 
         // query data
-        public override NFIDataList QueryRow(int nRow)
+        public override NFDataList QueryRow(int nRow)
         {
 			if (mhtRecordVec.ContainsKey(nRow))
 			{
-				return  (NFIDataList)mhtRecordVec[nRow];
+				return  (NFDataList)mhtRecordVec[nRow];
 			}
 
             return null;
         }
 
+		public override NFDataList.TData QueryRowCol(int nRow, int nCol)
+		{
+			if (mhtRecordVec.ContainsKey(nRow))
+			{
+				NFDataList dataList =  (NFDataList)mhtRecordVec[nRow];
+				if (dataList != null)
+				{
+					return dataList.GetData (nCol);
+				}
+			}
+
+			return null;
+		}
+
         public override bool SwapRow(int nOriginRow, int nTargetRow)
         {
 			if(nOriginRow >= 0 && nOriginRow < mnRow && nTargetRow >= 0 && nTargetRow < mnRow)
 			{
-	            NFIDataList valueOriginList = null;
-	            NFIDataList valueTargetList = null;
+	            NFDataList valueOriginList = null;
+	            NFDataList valueTargetList = null;
 	           
 	            if (mhtRecordVec.ContainsKey(nOriginRow))
 	            {
-	                valueOriginList = (NFIDataList)mhtRecordVec[nOriginRow];
+	                valueOriginList = (NFDataList)mhtRecordVec[nOriginRow];
 	            }
 	            if (mhtRecordVec.ContainsKey(nTargetRow))
 	            {
-	                valueTargetList = (NFIDataList)mhtRecordVec[nOriginRow];
+	                valueTargetList = (NFDataList)mhtRecordVec[nOriginRow];
 	            }
 	
 	            if (null == valueTargetList)
@@ -366,7 +391,7 @@ namespace NFSDK
 	           
 	            if (null != doHandleDel)
 	             {
-	                 doHandleDel(mSelf, mstrRecordName, eRecordOptype.Swap, nOriginRow, nTargetRow, NFIDataList.NULL_TDATA, NFIDataList.NULL_TDATA);
+	                 doHandleDel(mSelf, mstrRecordName, eRecordOptype.Swap, nOriginRow, nTargetRow, NFDataList.NULL_TDATA, NFDataList.NULL_TDATA);
 	             }
 	            return true;
 			}
@@ -375,7 +400,7 @@ namespace NFSDK
 
         public override Int64 QueryInt(int nRow, int nCol)
         {
-			NFIDataList valueList = QueryRow(nRow);
+			NFDataList valueList = QueryRow(nRow);
 			if (null != valueList)
 			{
 				return valueList.IntVal(nCol);
@@ -386,7 +411,7 @@ namespace NFSDK
 
         public override double QueryFloat(int nRow, int nCol)
         {
-			NFIDataList valueList = QueryRow(nRow);
+			NFDataList valueList = QueryRow(nRow);
 			if (null != valueList)
 			{
 				return valueList.FloatVal(nCol);
@@ -397,72 +422,72 @@ namespace NFSDK
 
         public override string QueryString(int nRow, int nCol)
         {
-			NFIDataList valueList = QueryRow(nRow);
+			NFDataList valueList = QueryRow(nRow);
 			if (null != valueList)
 			{
 				return valueList.StringVal(nCol);
 			}
 
-            return NFIDataList.NULL_STRING;
+            return NFDataList.NULL_STRING;
         }
 
         public override NFGUID QueryObject(int nRow, int nCol)
         {
-			NFIDataList valueList = QueryRow(nRow);
+			NFDataList valueList = QueryRow(nRow);
 			if (null != valueList)
 			{
 				return valueList.ObjectVal(nCol);
 			}
 
-            return NFIDataList.NULL_OBJECT;
+            return NFDataList.NULL_OBJECT;
         }
 
         public override NFVector2 QueryVector2(int nRow, int nCol)
         {
-            NFIDataList valueList = QueryRow(nRow);
+            NFDataList valueList = QueryRow(nRow);
             if (null != valueList)
             {
                 return valueList.Vector2Val(nCol);
             }
 
-            return NFIDataList.NULL_VECTOR2;
+            return NFDataList.NULL_VECTOR2;
         }
 
         public override NFVector3 QueryVector3(int nRow, int nCol)
         {
-            NFIDataList valueList = QueryRow(nRow);
+            NFDataList valueList = QueryRow(nRow);
             if (null != valueList)
             {
                 return valueList.Vector3Val(nCol);
             }
 
-            return NFIDataList.NULL_VECTOR3;
+            return NFDataList.NULL_VECTOR3;
         }
 
         //public override int FindRow( int nRow );
-        public override int FindColValue(int nCol, NFIDataList var, ref NFIDataList varResult)
+        public override int FindColValue(int nCol, NFDataList var, ref NFDataList varResult)
         {
 			for (int i = 0; i < mhtRecordVec.Count; i++ )
 			{
-				NFIDataList valueList = (NFIDataList)mhtRecordVec[i];
+				NFDataList valueList = (NFDataList)mhtRecordVec[i];
 				switch (valueList.GetType(0))
 				{
-					case NFIDataList.VARIANT_TYPE.VTYPE_INT:
+					case NFDataList.VARIANT_TYPE.VTYPE_INT:
 						return FindInt(nCol, var.IntVal(0), ref varResult);
 
-					case NFIDataList.VARIANT_TYPE.VTYPE_FLOAT:
+					case NFDataList.VARIANT_TYPE.VTYPE_FLOAT:
 						return FindInt(nCol, var.IntVal(0), ref varResult);
 
-					case NFIDataList.VARIANT_TYPE.VTYPE_STRING:
+					case NFDataList.VARIANT_TYPE.VTYPE_STRING:
 						return FindInt(nCol, var.IntVal(0), ref varResult);
 
-					case NFIDataList.VARIANT_TYPE.VTYPE_OBJECT:
+					case NFDataList.VARIANT_TYPE.VTYPE_OBJECT:
 						return FindObject(nCol, var.ObjectVal(0), ref varResult);
 
-                    case NFIDataList.VARIANT_TYPE.VTYPE_VECTOR2:
+                    case NFDataList.VARIANT_TYPE.VTYPE_VECTOR2:
                         return FindVector2(nCol, var.Vector2Val(0), ref varResult);
 
-                    case NFIDataList.VARIANT_TYPE.VTYPE_VECTOR3:
+                    case NFDataList.VARIANT_TYPE.VTYPE_VECTOR3:
                         return FindVector3(nCol, var.Vector3Val(0), ref varResult);
                     default:
 					break;
@@ -473,11 +498,11 @@ namespace NFSDK
             return -1;
         }
 
-        public override int FindInt(int nCol, Int64 value, ref NFIDataList varResult)
+        public override int FindInt(int nCol, Int64 value, ref NFDataList varResult)
         {
 			foreach (int i in mhtRecordVec.Keys)
 			{
-				NFIDataList valueList = (NFIDataList)mhtRecordVec[i];
+				NFDataList valueList = (NFDataList)mhtRecordVec[i];
 				if (valueList.IntVal(nCol) == value)
 				{
                     varResult.AddInt(i);
@@ -487,11 +512,11 @@ namespace NFSDK
             return varResult.Count();
         }
 
-        public override int FindFloat(int nCol, double value, ref NFIDataList varResult)
+        public override int FindFloat(int nCol, double value, ref NFDataList varResult)
         {
 			foreach (int i in mhtRecordVec.Keys)
 			{
-				NFIDataList valueList = (NFIDataList)mhtRecordVec[i];
+				NFDataList valueList = (NFDataList)mhtRecordVec[i];
 				if (valueList.FloatVal(nCol) == value)
 				{
                     varResult.AddInt(i);
@@ -501,11 +526,11 @@ namespace NFSDK
             return varResult.Count();
         }
 
-        public override int FindString(int nCol, string value, ref NFIDataList varResult)
+        public override int FindString(int nCol, string value, ref NFDataList varResult)
         {
 			foreach (int i in mhtRecordVec.Keys)
 			{
-				NFIDataList valueList = (NFIDataList)mhtRecordVec[i];
+				NFDataList valueList = (NFDataList)mhtRecordVec[i];
 				if (valueList.StringVal(nCol) == value)
 				{
                     varResult.AddInt(i);
@@ -515,11 +540,11 @@ namespace NFSDK
             return varResult.Count();
         }
 
-        public override int FindObject(int nCol, NFGUID value, ref NFIDataList varResult)
+        public override int FindObject(int nCol, NFGUID value, ref NFDataList varResult)
         {
 			foreach (int i in mhtRecordVec.Keys)
 			{
-				NFIDataList valueList = (NFIDataList)mhtRecordVec[i];
+				NFDataList valueList = (NFDataList)mhtRecordVec[i];
 				if (valueList.ObjectVal(nCol) == value)
 				{
                     varResult.AddInt(i);
@@ -529,11 +554,11 @@ namespace NFSDK
             return varResult.Count();
         }
 
-        public override int FindVector2(int nCol, NFVector2 value, ref NFIDataList varResult)
+        public override int FindVector2(int nCol, NFVector2 value, ref NFDataList varResult)
         {
             foreach (int i in mhtRecordVec.Keys)
             {
-                NFIDataList valueList = (NFIDataList)mhtRecordVec[i];
+                NFDataList valueList = (NFDataList)mhtRecordVec[i];
                 if (valueList.Vector2Val(nCol) == value)
                 {
                     varResult.AddInt(i);
@@ -543,11 +568,11 @@ namespace NFSDK
             return varResult.Count();
         }
 
-        public override int FindVector3(int nCol, NFVector3 value, ref NFIDataList varResult)
+        public override int FindVector3(int nCol, NFVector3 value, ref NFDataList varResult)
         {
             foreach (int i in mhtRecordVec.Keys)
             {
-                NFIDataList valueList = (NFIDataList)mhtRecordVec[i];
+                NFDataList valueList = (NFDataList)mhtRecordVec[i];
                 if (valueList.Vector3Val(nCol) == value)
                 {
                     varResult.AddInt(i);
@@ -556,6 +581,77 @@ namespace NFSDK
 
             return varResult.Count();
         }
+		public override int FindInt(int nCol, Int64 value)
+		{
+			NFDataList varResult = new NFDataList ();
+			int nCount = FindInt (nCol, value, ref varResult);
+			if (nCount > 0 && varResult.Count() > 0)
+			{
+				return (int)varResult.IntVal (0);
+			}
+
+			return -1;
+		}
+
+		public override int FindFloat(int nCol, double value)
+		{
+			NFDataList varResult = new NFDataList ();
+			int nCount = FindFloat (nCol, value, ref varResult);
+			if (nCount > 0 && varResult.Count() > 0)
+			{
+				return (int)varResult.IntVal (0);
+			}
+
+			return -1;
+		}
+
+		public override int FindString(int nCol, string value)
+		{
+			NFDataList varResult = new NFDataList ();
+			int nCount = FindString (nCol, value, ref varResult);
+			if (nCount > 0 && varResult.Count() > 0)
+			{
+				return (int)varResult.IntVal (0);
+			}
+
+			return -1;
+		}
+
+		public override int FindObject(int nCol, NFGUID value)
+		{
+			NFDataList varResult = new NFDataList ();
+			int nCount = FindObject (nCol, value, ref varResult);
+			if (nCount > 0 && varResult.Count() > 0)
+			{
+				return (int)varResult.IntVal (0);
+			}
+
+			return -1;
+		}
+
+		public override int FindVector2(int nCol, NFVector2 value)
+		{
+			NFDataList varResult = new NFDataList ();
+			int nCount = FindVector2 (nCol, value, ref varResult);
+			if (nCount > 0 && varResult.Count() > 0)
+			{
+				return (int)varResult.IntVal (0);
+			}
+
+			return -1;
+		}
+
+		public override int FindVector3(int nCol, NFVector3 value)
+		{
+			NFDataList varResult = new NFDataList ();
+			int nCount = FindVector3 (nCol, value, ref varResult);
+			if (nCount > 0 && varResult.Count() > 0)
+			{
+				return (int)varResult.IntVal (0);
+			}
+
+			return -1;
+		}
 
         public override bool Remove(int nRow)
         {
@@ -563,7 +659,7 @@ namespace NFSDK
             {
 				if (null != doHandleDel)
                 {
-                    doHandleDel(mSelf, mstrRecordName, eRecordOptype.Del, nRow, 0, NFIDataList.NULL_TDATA, NFIDataList.NULL_TDATA);
+                    doHandleDel(mSelf, mstrRecordName, eRecordOptype.Del, nRow, 0, NFDataList.NULL_TDATA, NFDataList.NULL_TDATA);
                 }
 				mhtRecordVec.Remove(nRow);
 				return true;
@@ -606,9 +702,10 @@ namespace NFSDK
 
 		RecordEventHandler doHandleDel;
 
-		NFIDataList mVarRecordType;
+		NFDataList mVarRecordType;
         Hashtable mhtRecordVec = new Hashtable();
         Dictionary<int, int> mhtUseState = new Dictionary<int, int>();
+		NFDataList mxTag;
 
 		NFGUID mSelf;
 		string mstrRecordName;
