@@ -72,6 +72,11 @@ public:
 
 	/////////////////////
 
+	virtual bool LoadPlugin()
+	{
+		return true;
+	}
+
 	virtual bool Awake()
 	{
 		return true;
