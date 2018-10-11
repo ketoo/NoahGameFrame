@@ -418,6 +418,7 @@ int main(int argc, char* argv[])
 	PrintfLogo();
 	CreateBackThread();
 
+	NFCPluginManager::GetSingletonPtr()->LoadPlugin();
 	NFCPluginManager::GetSingletonPtr()->Awake();
 	NFCPluginManager::GetSingletonPtr()->Init();
 	NFCPluginManager::GetSingletonPtr()->AfterInit();

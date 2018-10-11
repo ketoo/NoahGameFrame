@@ -122,36 +122,47 @@ namespace NFMsg {
             "GAIgASgFEhAKCGNvbmZpZ0lEGAMgASgMEhoKBGd1aWQYBCABKAsyDC5ORk1z",
             "Zy5JZGVudCJ0Cg5BY2tNaW5pbmdUaXRsZRIeCgR0aWxlGAEgAygLMhAuTkZN",
             "c2cuVGlsZVN0YXRlEiUKCGJ1aWxkaW5nGAIgAygLMhMuTkZNc2cuVGlsZUJ1",
-            "aWxkaW5nEhsKA25wYxgDIAMoCzIOLk5GTXNnLlRpbGVOUEMiEgoQUmVxU2Vh",
-            "cmNoT3BwbmVudCIkChBBY2tTZWFyY2hPcHBuZW50EhAKCHNjZW5lX2lkGAEg",
-            "ASgFIoEBCgtSZXFTZW5kTWFpbBIeCghyZWNpZXZlchgBIAEoCzIMLk5GTXNn",
-            "LklkZW50EiQKCWl0ZW1fbGlzdBgCIAMoCzIRLk5GTXNnLkl0ZW1TdHJ1Y3QS",
-            "LAoNY3VycmVuY3lfbGlzdBgDIAMoCzIVLk5GTXNnLkN1cnJlbmN5U3RydWN0",
-            "IrkBCg9SZXFTd2l0Y2hTZXJ2ZXISHAoGc2VsZmlkGAEgASgLMgwuTkZNc2cu",
-            "SWRlbnQSFQoNc2VsZl9zZXJ2ZXJpZBgCIAEoAxIXCg90YXJnZXRfc2VydmVy",
-            "aWQYAyABKAMSFQoNZ2F0ZV9zZXJ2ZXJpZBgEIAEoAxIPCgdTY2VuZUlEGAUg",
-            "ASgDEh8KCWNsaWVudF9pZBgGIAEoCzIMLk5GTXNnLklkZW50Eg8KB2dyb3Vw",
-            "SUQYByABKAMidgoPQWNrU3dpdGNoU2VydmVyEhwKBnNlbGZpZBgBIAEoCzIM",
-            "Lk5GTXNnLklkZW50EhUKDXNlbGZfc2VydmVyaWQYAiABKAMSFwoPdGFyZ2V0",
-            "X3NlcnZlcmlkGAMgASgDEhUKDWdhdGVfc2VydmVyaWQYBCABKAMi8QEKC1BW",
-            "UFJvb21JbmZvEhMKC25DZWxsU3RhdHVzGAEgASgFEhwKBlJvb21JRBgCIAEo",
-            "CzIMLk5GTXNnLklkZW50EhAKCG5QVlBNb2RlGAMgASgFEhEKCW5QVlBHcmFk",
-            "ZRgEIAEoBRIRCglNYXhQYWx5ZXIYBSABKAUSIAoKeFJlZFBsYXllchgGIAMo",
-            "CzIMLk5GTXNnLklkZW50EiEKC3hCbHVlUGxheWVyGAcgAygLMgwuTkZNc2cu",
-            "SWRlbnQSEAoIc2VydmVyaWQYCCABKAMSDwoHU2NlbmVJRBgJIAEoAxIPCgdn",
-            "cm91cElEGAogASgDIr4BChBSZXFQVlBBcHBseU1hdGNoEh0KB3NlbGZfaWQY",
-            "ASABKAsyDC5ORk1zZy5JZGVudBIQCghuUFZQTW9kZRgCIAEoBRINCgVzY29y",
-            "ZRgDIAEoAxIRCglBcHBseVR5cGUYBCABKAUSHQoHdGVhbV9pZBgFIAEoCzIM",
-            "Lk5GTXNnLklkZW50IjgKCkVBcHBseVR5cGUSFQoRRUFwcGx5VHlwZV9TaW5n",
-            "bGUQABITCg9FQXBwbHlUeXBlX1RlYW0QASJ8ChBBY2tQVlBBcHBseU1hdGNo",
-            "Eh0KB3NlbGZfaWQYASABKAsyDC5ORk1zZy5JZGVudBIlCgl4Um9vbUluZm8Y",
-            "AiABKAsyEi5ORk1zZy5QVlBSb29tSW5mbxIRCglBcHBseVR5cGUYAyABKAUS",
-            "DwoHblJlc3VsdBgEIAEoBSJaChJSZXFDcmVhdGVQVlBFY3R5cGUSHQoHc2Vs",
-            "Zl9pZBgBIAEoCzIMLk5GTXNnLklkZW50EiUKCXhSb29tSW5mbxgCIAEoCzIS",
-            "Lk5GTXNnLlBWUFJvb21JbmZvIm0KEkFja0NyZWF0ZVBWUEVjdHlwZRIdCgdz",
-            "ZWxmX2lkGAEgASgLMgwuTkZNc2cuSWRlbnQSJQoJeFJvb21JbmZvGAIgASgL",
-            "MhIuTkZNc2cuUFZQUm9vbUluZm8SEQoJQXBwbHlUeXBlGAMgASgFYgZwcm90",
-            "bzM="));
+            "aWxkaW5nEhsKA25wYxgDIAMoCzIOLk5GTXNnLlRpbGVOUEMiJgoQUmVxU2Vh",
+            "cmNoT3BwbmVudBISCgpzZWxmX3NjZW5lGAEgASgFIv8DChBBY2tTZWFyY2hP",
+            "cHBuZW50EhAKCHNjZW5lX2lkGAEgASgFEgwKBGdvbGQYAiABKAUSDwoHZGlh",
+            "bW9uZBgDIAEoBRINCgVsZXZlbBgEIAEoBRILCgNjdXAYBSABKAUSDAoEbmFt",
+            "ZRgGIAEoDBIMCgRoZWFkGAcgASgMEhEKCWhlcm9fY25mMRgIIAEoDBISCgpo",
+            "ZXJvX3N0YXIxGAkgASgFEhEKCWhlcm9fY25mMhgKIAEoDBISCgpoZXJvX3N0",
+            "YXIyGAsgASgFEhEKCWhlcm9fY25mMxgMIAEoDBISCgpoZXJvX3N0YXIzGA0g",
+            "ASgFEh4KCGhlcm9faWQxGBQgASgLMgwuTkZNc2cuSWRlbnQSHgoIaGVyb19p",
+            "ZDIYFSABKAsyDC5ORk1zZy5JZGVudBIeCghoZXJvX2lkMxgWIAEoCzIMLk5G",
+            "TXNnLklkZW50EiEKCWhlcm9fcG9zMRgXIAEoCzIOLk5GTXNnLlZlY3RvcjMS",
+            "IQoJaGVyb19wb3MyGBggASgLMg4uTkZNc2cuVmVjdG9yMxIhCgloZXJvX3Bv",
+            "czMYGSABKAsyDi5ORk1zZy5WZWN0b3IzEiQKBXRpdGxlGB4gASgLMhUuTkZN",
+            "c2cuQWNrTWluaW5nVGl0bGUSHgoIb3Bwb25lbnQYHyABKAsyDC5ORk1zZy5J",
+            "ZGVudCKBAQoLUmVxU2VuZE1haWwSHgoIcmVjaWV2ZXIYASABKAsyDC5ORk1z",
+            "Zy5JZGVudBIkCglpdGVtX2xpc3QYAiADKAsyES5ORk1zZy5JdGVtU3RydWN0",
+            "EiwKDWN1cnJlbmN5X2xpc3QYAyADKAsyFS5ORk1zZy5DdXJyZW5jeVN0cnVj",
+            "dCK5AQoPUmVxU3dpdGNoU2VydmVyEhwKBnNlbGZpZBgBIAEoCzIMLk5GTXNn",
+            "LklkZW50EhUKDXNlbGZfc2VydmVyaWQYAiABKAMSFwoPdGFyZ2V0X3NlcnZl",
+            "cmlkGAMgASgDEhUKDWdhdGVfc2VydmVyaWQYBCABKAMSDwoHU2NlbmVJRBgF",
+            "IAEoAxIfCgljbGllbnRfaWQYBiABKAsyDC5ORk1zZy5JZGVudBIPCgdncm91",
+            "cElEGAcgASgDInYKD0Fja1N3aXRjaFNlcnZlchIcCgZzZWxmaWQYASABKAsy",
+            "DC5ORk1zZy5JZGVudBIVCg1zZWxmX3NlcnZlcmlkGAIgASgDEhcKD3Rhcmdl",
+            "dF9zZXJ2ZXJpZBgDIAEoAxIVCg1nYXRlX3NlcnZlcmlkGAQgASgDIvEBCgtQ",
+            "VlBSb29tSW5mbxITCgtuQ2VsbFN0YXR1cxgBIAEoBRIcCgZSb29tSUQYAiAB",
+            "KAsyDC5ORk1zZy5JZGVudBIQCghuUFZQTW9kZRgDIAEoBRIRCgluUFZQR3Jh",
+            "ZGUYBCABKAUSEQoJTWF4UGFseWVyGAUgASgFEiAKCnhSZWRQbGF5ZXIYBiAD",
+            "KAsyDC5ORk1zZy5JZGVudBIhCgt4Qmx1ZVBsYXllchgHIAMoCzIMLk5GTXNn",
+            "LklkZW50EhAKCHNlcnZlcmlkGAggASgDEg8KB1NjZW5lSUQYCSABKAMSDwoH",
+            "Z3JvdXBJRBgKIAEoAyK+AQoQUmVxUFZQQXBwbHlNYXRjaBIdCgdzZWxmX2lk",
+            "GAEgASgLMgwuTkZNc2cuSWRlbnQSEAoIblBWUE1vZGUYAiABKAUSDQoFc2Nv",
+            "cmUYAyABKAMSEQoJQXBwbHlUeXBlGAQgASgFEh0KB3RlYW1faWQYBSABKAsy",
+            "DC5ORk1zZy5JZGVudCI4CgpFQXBwbHlUeXBlEhUKEUVBcHBseVR5cGVfU2lu",
+            "Z2xlEAASEwoPRUFwcGx5VHlwZV9UZWFtEAEifAoQQWNrUFZQQXBwbHlNYXRj",
+            "aBIdCgdzZWxmX2lkGAEgASgLMgwuTkZNc2cuSWRlbnQSJQoJeFJvb21JbmZv",
+            "GAIgASgLMhIuTkZNc2cuUFZQUm9vbUluZm8SEQoJQXBwbHlUeXBlGAMgASgF",
+            "Eg8KB25SZXN1bHQYBCABKAUiWgoSUmVxQ3JlYXRlUFZQRWN0eXBlEh0KB3Nl",
+            "bGZfaWQYASABKAsyDC5ORk1zZy5JZGVudBIlCgl4Um9vbUluZm8YAiABKAsy",
+            "Ei5ORk1zZy5QVlBSb29tSW5mbyJtChJBY2tDcmVhdGVQVlBFY3R5cGUSHQoH",
+            "c2VsZl9pZBgBIAEoCzIMLk5GTXNnLklkZW50EiUKCXhSb29tSW5mbxgCIAEo",
+            "CzISLk5GTXNnLlBWUFJvb21JbmZvEhEKCUFwcGx5VHlwZRgDIAEoBWIGcHJv",
+            "dG8z"));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { global::NFMsg.NFDefineReflection.Descriptor, global::NFMsg.NFMsgBaseReflection.Descriptor, },
           new pbr::GeneratedClrTypeInfo(null, new pbr::GeneratedClrTypeInfo[] {
@@ -196,8 +207,8 @@ namespace NFMsg {
             new pbr::GeneratedClrTypeInfo(typeof(global::NFMsg.TileBuilding), global::NFMsg.TileBuilding.Parser, new[]{ "x", "y", "configID", "guid" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::NFMsg.TileNPC), global::NFMsg.TileNPC.Parser, new[]{ "x", "y", "configID", "guid" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::NFMsg.AckMiningTitle), global::NFMsg.AckMiningTitle.Parser, new[]{ "tile", "building", "npc" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::NFMsg.ReqSearchOppnent), global::NFMsg.ReqSearchOppnent.Parser, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::NFMsg.AckSearchOppnent), global::NFMsg.AckSearchOppnent.Parser, new[]{ "scene_id" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::NFMsg.ReqSearchOppnent), global::NFMsg.ReqSearchOppnent.Parser, new[]{ "self_scene" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::NFMsg.AckSearchOppnent), global::NFMsg.AckSearchOppnent.Parser, new[]{ "scene_id", "gold", "diamond", "level", "cup", "name", "head", "hero_cnf1", "hero_star1", "hero_cnf2", "hero_star2", "hero_cnf3", "hero_star3", "hero_id1", "hero_id2", "hero_id3", "hero_pos1", "hero_pos2", "hero_pos3", "title", "opponent" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::NFMsg.ReqSendMail), global::NFMsg.ReqSendMail.Parser, new[]{ "reciever", "item_list", "currency_list" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::NFMsg.ReqSwitchServer), global::NFMsg.ReqSwitchServer.Parser, new[]{ "selfid", "self_serverid", "target_serverid", "gate_serverid", "SceneID", "client_id", "groupID" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::NFMsg.AckSwitchServer), global::NFMsg.AckSwitchServer.Parser, new[]{ "selfid", "self_serverid", "target_serverid", "gate_serverid" }, null, null, null),
@@ -8297,12 +8308,24 @@ namespace NFMsg {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public ReqSearchOppnent(ReqSearchOppnent other) : this() {
+      selfScene_ = other.selfScene_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public ReqSearchOppnent Clone() {
       return new ReqSearchOppnent(this);
+    }
+
+    /// <summary>Field number for the "self_scene" field.</summary>
+    public const int self_sceneFieldNumber = 1;
+    private int selfScene_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int self_scene {
+      get { return selfScene_; }
+      set {
+        selfScene_ = value;
+      }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -8318,12 +8341,14 @@ namespace NFMsg {
       if (ReferenceEquals(other, this)) {
         return true;
       }
+      if (self_scene != other.self_scene) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override int GetHashCode() {
       int hash = 1;
+      if (self_scene != 0) hash ^= self_scene.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -8337,6 +8362,10 @@ namespace NFMsg {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public void WriteTo(pb::CodedOutputStream output) {
+      if (self_scene != 0) {
+        output.WriteRawTag(8);
+        output.WriteInt32(self_scene);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
@@ -8345,6 +8374,9 @@ namespace NFMsg {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public int CalculateSize() {
       int size = 0;
+      if (self_scene != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(self_scene);
+      }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
       }
@@ -8355,6 +8387,9 @@ namespace NFMsg {
     public void MergeFrom(ReqSearchOppnent other) {
       if (other == null) {
         return;
+      }
+      if (other.self_scene != 0) {
+        self_scene = other.self_scene;
       }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
@@ -8367,6 +8402,10 @@ namespace NFMsg {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
+          case 8: {
+            self_scene = input.ReadInt32();
+            break;
+          }
         }
       }
     }
@@ -8402,6 +8441,26 @@ namespace NFMsg {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public AckSearchOppnent(AckSearchOppnent other) : this() {
       sceneId_ = other.sceneId_;
+      gold_ = other.gold_;
+      diamond_ = other.diamond_;
+      level_ = other.level_;
+      cup_ = other.cup_;
+      name_ = other.name_;
+      head_ = other.head_;
+      heroCnf1_ = other.heroCnf1_;
+      heroStar1_ = other.heroStar1_;
+      heroCnf2_ = other.heroCnf2_;
+      heroStar2_ = other.heroStar2_;
+      heroCnf3_ = other.heroCnf3_;
+      heroStar3_ = other.heroStar3_;
+      heroId1_ = other.heroId1_ != null ? other.heroId1_.Clone() : null;
+      heroId2_ = other.heroId2_ != null ? other.heroId2_.Clone() : null;
+      heroId3_ = other.heroId3_ != null ? other.heroId3_.Clone() : null;
+      heroPos1_ = other.heroPos1_ != null ? other.heroPos1_.Clone() : null;
+      heroPos2_ = other.heroPos2_ != null ? other.heroPos2_.Clone() : null;
+      heroPos3_ = other.heroPos3_ != null ? other.heroPos3_.Clone() : null;
+      title_ = other.title_ != null ? other.title_.Clone() : null;
+      opponent_ = other.opponent_ != null ? other.opponent_.Clone() : null;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -8421,6 +8480,226 @@ namespace NFMsg {
       }
     }
 
+    /// <summary>Field number for the "gold" field.</summary>
+    public const int goldFieldNumber = 2;
+    private int gold_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int gold {
+      get { return gold_; }
+      set {
+        gold_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "diamond" field.</summary>
+    public const int diamondFieldNumber = 3;
+    private int diamond_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int diamond {
+      get { return diamond_; }
+      set {
+        diamond_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "level" field.</summary>
+    public const int levelFieldNumber = 4;
+    private int level_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int level {
+      get { return level_; }
+      set {
+        level_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "cup" field.</summary>
+    public const int cupFieldNumber = 5;
+    private int cup_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int cup {
+      get { return cup_; }
+      set {
+        cup_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "name" field.</summary>
+    public const int nameFieldNumber = 6;
+    private pb::ByteString name_ = pb::ByteString.Empty;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public pb::ByteString name {
+      get { return name_; }
+      set {
+        name_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    /// <summary>Field number for the "head" field.</summary>
+    public const int headFieldNumber = 7;
+    private pb::ByteString head_ = pb::ByteString.Empty;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public pb::ByteString head {
+      get { return head_; }
+      set {
+        head_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    /// <summary>Field number for the "hero_cnf1" field.</summary>
+    public const int hero_cnf1FieldNumber = 8;
+    private pb::ByteString heroCnf1_ = pb::ByteString.Empty;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public pb::ByteString hero_cnf1 {
+      get { return heroCnf1_; }
+      set {
+        heroCnf1_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    /// <summary>Field number for the "hero_star1" field.</summary>
+    public const int hero_star1FieldNumber = 9;
+    private int heroStar1_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int hero_star1 {
+      get { return heroStar1_; }
+      set {
+        heroStar1_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "hero_cnf2" field.</summary>
+    public const int hero_cnf2FieldNumber = 10;
+    private pb::ByteString heroCnf2_ = pb::ByteString.Empty;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public pb::ByteString hero_cnf2 {
+      get { return heroCnf2_; }
+      set {
+        heroCnf2_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    /// <summary>Field number for the "hero_star2" field.</summary>
+    public const int hero_star2FieldNumber = 11;
+    private int heroStar2_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int hero_star2 {
+      get { return heroStar2_; }
+      set {
+        heroStar2_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "hero_cnf3" field.</summary>
+    public const int hero_cnf3FieldNumber = 12;
+    private pb::ByteString heroCnf3_ = pb::ByteString.Empty;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public pb::ByteString hero_cnf3 {
+      get { return heroCnf3_; }
+      set {
+        heroCnf3_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    /// <summary>Field number for the "hero_star3" field.</summary>
+    public const int hero_star3FieldNumber = 13;
+    private int heroStar3_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int hero_star3 {
+      get { return heroStar3_; }
+      set {
+        heroStar3_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "hero_id1" field.</summary>
+    public const int hero_id1FieldNumber = 20;
+    private global::NFMsg.Ident heroId1_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public global::NFMsg.Ident hero_id1 {
+      get { return heroId1_; }
+      set {
+        heroId1_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "hero_id2" field.</summary>
+    public const int hero_id2FieldNumber = 21;
+    private global::NFMsg.Ident heroId2_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public global::NFMsg.Ident hero_id2 {
+      get { return heroId2_; }
+      set {
+        heroId2_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "hero_id3" field.</summary>
+    public const int hero_id3FieldNumber = 22;
+    private global::NFMsg.Ident heroId3_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public global::NFMsg.Ident hero_id3 {
+      get { return heroId3_; }
+      set {
+        heroId3_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "hero_pos1" field.</summary>
+    public const int hero_pos1FieldNumber = 23;
+    private global::NFMsg.Vector3 heroPos1_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public global::NFMsg.Vector3 hero_pos1 {
+      get { return heroPos1_; }
+      set {
+        heroPos1_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "hero_pos2" field.</summary>
+    public const int hero_pos2FieldNumber = 24;
+    private global::NFMsg.Vector3 heroPos2_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public global::NFMsg.Vector3 hero_pos2 {
+      get { return heroPos2_; }
+      set {
+        heroPos2_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "hero_pos3" field.</summary>
+    public const int hero_pos3FieldNumber = 25;
+    private global::NFMsg.Vector3 heroPos3_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public global::NFMsg.Vector3 hero_pos3 {
+      get { return heroPos3_; }
+      set {
+        heroPos3_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "title" field.</summary>
+    public const int titleFieldNumber = 30;
+    private global::NFMsg.AckMiningTitle title_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public global::NFMsg.AckMiningTitle title {
+      get { return title_; }
+      set {
+        title_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "opponent" field.</summary>
+    public const int opponentFieldNumber = 31;
+    private global::NFMsg.Ident opponent_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public global::NFMsg.Ident opponent {
+      get { return opponent_; }
+      set {
+        opponent_ = value;
+      }
+    }
+
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override bool Equals(object other) {
       return Equals(other as AckSearchOppnent);
@@ -8435,6 +8714,26 @@ namespace NFMsg {
         return true;
       }
       if (scene_id != other.scene_id) return false;
+      if (gold != other.gold) return false;
+      if (diamond != other.diamond) return false;
+      if (level != other.level) return false;
+      if (cup != other.cup) return false;
+      if (name != other.name) return false;
+      if (head != other.head) return false;
+      if (hero_cnf1 != other.hero_cnf1) return false;
+      if (hero_star1 != other.hero_star1) return false;
+      if (hero_cnf2 != other.hero_cnf2) return false;
+      if (hero_star2 != other.hero_star2) return false;
+      if (hero_cnf3 != other.hero_cnf3) return false;
+      if (hero_star3 != other.hero_star3) return false;
+      if (!object.Equals(hero_id1, other.hero_id1)) return false;
+      if (!object.Equals(hero_id2, other.hero_id2)) return false;
+      if (!object.Equals(hero_id3, other.hero_id3)) return false;
+      if (!object.Equals(hero_pos1, other.hero_pos1)) return false;
+      if (!object.Equals(hero_pos2, other.hero_pos2)) return false;
+      if (!object.Equals(hero_pos3, other.hero_pos3)) return false;
+      if (!object.Equals(title, other.title)) return false;
+      if (!object.Equals(opponent, other.opponent)) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -8442,6 +8741,26 @@ namespace NFMsg {
     public override int GetHashCode() {
       int hash = 1;
       if (scene_id != 0) hash ^= scene_id.GetHashCode();
+      if (gold != 0) hash ^= gold.GetHashCode();
+      if (diamond != 0) hash ^= diamond.GetHashCode();
+      if (level != 0) hash ^= level.GetHashCode();
+      if (cup != 0) hash ^= cup.GetHashCode();
+      if (name.Length != 0) hash ^= name.GetHashCode();
+      if (head.Length != 0) hash ^= head.GetHashCode();
+      if (hero_cnf1.Length != 0) hash ^= hero_cnf1.GetHashCode();
+      if (hero_star1 != 0) hash ^= hero_star1.GetHashCode();
+      if (hero_cnf2.Length != 0) hash ^= hero_cnf2.GetHashCode();
+      if (hero_star2 != 0) hash ^= hero_star2.GetHashCode();
+      if (hero_cnf3.Length != 0) hash ^= hero_cnf3.GetHashCode();
+      if (hero_star3 != 0) hash ^= hero_star3.GetHashCode();
+      if (heroId1_ != null) hash ^= hero_id1.GetHashCode();
+      if (heroId2_ != null) hash ^= hero_id2.GetHashCode();
+      if (heroId3_ != null) hash ^= hero_id3.GetHashCode();
+      if (heroPos1_ != null) hash ^= hero_pos1.GetHashCode();
+      if (heroPos2_ != null) hash ^= hero_pos2.GetHashCode();
+      if (heroPos3_ != null) hash ^= hero_pos3.GetHashCode();
+      if (title_ != null) hash ^= title.GetHashCode();
+      if (opponent_ != null) hash ^= opponent.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -8459,6 +8778,86 @@ namespace NFMsg {
         output.WriteRawTag(8);
         output.WriteInt32(scene_id);
       }
+      if (gold != 0) {
+        output.WriteRawTag(16);
+        output.WriteInt32(gold);
+      }
+      if (diamond != 0) {
+        output.WriteRawTag(24);
+        output.WriteInt32(diamond);
+      }
+      if (level != 0) {
+        output.WriteRawTag(32);
+        output.WriteInt32(level);
+      }
+      if (cup != 0) {
+        output.WriteRawTag(40);
+        output.WriteInt32(cup);
+      }
+      if (name.Length != 0) {
+        output.WriteRawTag(50);
+        output.WriteBytes(name);
+      }
+      if (head.Length != 0) {
+        output.WriteRawTag(58);
+        output.WriteBytes(head);
+      }
+      if (hero_cnf1.Length != 0) {
+        output.WriteRawTag(66);
+        output.WriteBytes(hero_cnf1);
+      }
+      if (hero_star1 != 0) {
+        output.WriteRawTag(72);
+        output.WriteInt32(hero_star1);
+      }
+      if (hero_cnf2.Length != 0) {
+        output.WriteRawTag(82);
+        output.WriteBytes(hero_cnf2);
+      }
+      if (hero_star2 != 0) {
+        output.WriteRawTag(88);
+        output.WriteInt32(hero_star2);
+      }
+      if (hero_cnf3.Length != 0) {
+        output.WriteRawTag(98);
+        output.WriteBytes(hero_cnf3);
+      }
+      if (hero_star3 != 0) {
+        output.WriteRawTag(104);
+        output.WriteInt32(hero_star3);
+      }
+      if (heroId1_ != null) {
+        output.WriteRawTag(162, 1);
+        output.WriteMessage(hero_id1);
+      }
+      if (heroId2_ != null) {
+        output.WriteRawTag(170, 1);
+        output.WriteMessage(hero_id2);
+      }
+      if (heroId3_ != null) {
+        output.WriteRawTag(178, 1);
+        output.WriteMessage(hero_id3);
+      }
+      if (heroPos1_ != null) {
+        output.WriteRawTag(186, 1);
+        output.WriteMessage(hero_pos1);
+      }
+      if (heroPos2_ != null) {
+        output.WriteRawTag(194, 1);
+        output.WriteMessage(hero_pos2);
+      }
+      if (heroPos3_ != null) {
+        output.WriteRawTag(202, 1);
+        output.WriteMessage(hero_pos3);
+      }
+      if (title_ != null) {
+        output.WriteRawTag(242, 1);
+        output.WriteMessage(title);
+      }
+      if (opponent_ != null) {
+        output.WriteRawTag(250, 1);
+        output.WriteMessage(opponent);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
@@ -8469,6 +8868,66 @@ namespace NFMsg {
       int size = 0;
       if (scene_id != 0) {
         size += 1 + pb::CodedOutputStream.ComputeInt32Size(scene_id);
+      }
+      if (gold != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(gold);
+      }
+      if (diamond != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(diamond);
+      }
+      if (level != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(level);
+      }
+      if (cup != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(cup);
+      }
+      if (name.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeBytesSize(name);
+      }
+      if (head.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeBytesSize(head);
+      }
+      if (hero_cnf1.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeBytesSize(hero_cnf1);
+      }
+      if (hero_star1 != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(hero_star1);
+      }
+      if (hero_cnf2.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeBytesSize(hero_cnf2);
+      }
+      if (hero_star2 != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(hero_star2);
+      }
+      if (hero_cnf3.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeBytesSize(hero_cnf3);
+      }
+      if (hero_star3 != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(hero_star3);
+      }
+      if (heroId1_ != null) {
+        size += 2 + pb::CodedOutputStream.ComputeMessageSize(hero_id1);
+      }
+      if (heroId2_ != null) {
+        size += 2 + pb::CodedOutputStream.ComputeMessageSize(hero_id2);
+      }
+      if (heroId3_ != null) {
+        size += 2 + pb::CodedOutputStream.ComputeMessageSize(hero_id3);
+      }
+      if (heroPos1_ != null) {
+        size += 2 + pb::CodedOutputStream.ComputeMessageSize(hero_pos1);
+      }
+      if (heroPos2_ != null) {
+        size += 2 + pb::CodedOutputStream.ComputeMessageSize(hero_pos2);
+      }
+      if (heroPos3_ != null) {
+        size += 2 + pb::CodedOutputStream.ComputeMessageSize(hero_pos3);
+      }
+      if (title_ != null) {
+        size += 2 + pb::CodedOutputStream.ComputeMessageSize(title);
+      }
+      if (opponent_ != null) {
+        size += 2 + pb::CodedOutputStream.ComputeMessageSize(opponent);
       }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
@@ -8484,6 +8943,90 @@ namespace NFMsg {
       if (other.scene_id != 0) {
         scene_id = other.scene_id;
       }
+      if (other.gold != 0) {
+        gold = other.gold;
+      }
+      if (other.diamond != 0) {
+        diamond = other.diamond;
+      }
+      if (other.level != 0) {
+        level = other.level;
+      }
+      if (other.cup != 0) {
+        cup = other.cup;
+      }
+      if (other.name.Length != 0) {
+        name = other.name;
+      }
+      if (other.head.Length != 0) {
+        head = other.head;
+      }
+      if (other.hero_cnf1.Length != 0) {
+        hero_cnf1 = other.hero_cnf1;
+      }
+      if (other.hero_star1 != 0) {
+        hero_star1 = other.hero_star1;
+      }
+      if (other.hero_cnf2.Length != 0) {
+        hero_cnf2 = other.hero_cnf2;
+      }
+      if (other.hero_star2 != 0) {
+        hero_star2 = other.hero_star2;
+      }
+      if (other.hero_cnf3.Length != 0) {
+        hero_cnf3 = other.hero_cnf3;
+      }
+      if (other.hero_star3 != 0) {
+        hero_star3 = other.hero_star3;
+      }
+      if (other.heroId1_ != null) {
+        if (heroId1_ == null) {
+          heroId1_ = new global::NFMsg.Ident();
+        }
+        hero_id1.MergeFrom(other.hero_id1);
+      }
+      if (other.heroId2_ != null) {
+        if (heroId2_ == null) {
+          heroId2_ = new global::NFMsg.Ident();
+        }
+        hero_id2.MergeFrom(other.hero_id2);
+      }
+      if (other.heroId3_ != null) {
+        if (heroId3_ == null) {
+          heroId3_ = new global::NFMsg.Ident();
+        }
+        hero_id3.MergeFrom(other.hero_id3);
+      }
+      if (other.heroPos1_ != null) {
+        if (heroPos1_ == null) {
+          heroPos1_ = new global::NFMsg.Vector3();
+        }
+        hero_pos1.MergeFrom(other.hero_pos1);
+      }
+      if (other.heroPos2_ != null) {
+        if (heroPos2_ == null) {
+          heroPos2_ = new global::NFMsg.Vector3();
+        }
+        hero_pos2.MergeFrom(other.hero_pos2);
+      }
+      if (other.heroPos3_ != null) {
+        if (heroPos3_ == null) {
+          heroPos3_ = new global::NFMsg.Vector3();
+        }
+        hero_pos3.MergeFrom(other.hero_pos3);
+      }
+      if (other.title_ != null) {
+        if (title_ == null) {
+          title_ = new global::NFMsg.AckMiningTitle();
+        }
+        title.MergeFrom(other.title);
+      }
+      if (other.opponent_ != null) {
+        if (opponent_ == null) {
+          opponent_ = new global::NFMsg.Ident();
+        }
+        opponent.MergeFrom(other.opponent);
+      }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
 
@@ -8497,6 +9040,110 @@ namespace NFMsg {
             break;
           case 8: {
             scene_id = input.ReadInt32();
+            break;
+          }
+          case 16: {
+            gold = input.ReadInt32();
+            break;
+          }
+          case 24: {
+            diamond = input.ReadInt32();
+            break;
+          }
+          case 32: {
+            level = input.ReadInt32();
+            break;
+          }
+          case 40: {
+            cup = input.ReadInt32();
+            break;
+          }
+          case 50: {
+            name = input.ReadBytes();
+            break;
+          }
+          case 58: {
+            head = input.ReadBytes();
+            break;
+          }
+          case 66: {
+            hero_cnf1 = input.ReadBytes();
+            break;
+          }
+          case 72: {
+            hero_star1 = input.ReadInt32();
+            break;
+          }
+          case 82: {
+            hero_cnf2 = input.ReadBytes();
+            break;
+          }
+          case 88: {
+            hero_star2 = input.ReadInt32();
+            break;
+          }
+          case 98: {
+            hero_cnf3 = input.ReadBytes();
+            break;
+          }
+          case 104: {
+            hero_star3 = input.ReadInt32();
+            break;
+          }
+          case 162: {
+            if (heroId1_ == null) {
+              heroId1_ = new global::NFMsg.Ident();
+            }
+            input.ReadMessage(heroId1_);
+            break;
+          }
+          case 170: {
+            if (heroId2_ == null) {
+              heroId2_ = new global::NFMsg.Ident();
+            }
+            input.ReadMessage(heroId2_);
+            break;
+          }
+          case 178: {
+            if (heroId3_ == null) {
+              heroId3_ = new global::NFMsg.Ident();
+            }
+            input.ReadMessage(heroId3_);
+            break;
+          }
+          case 186: {
+            if (heroPos1_ == null) {
+              heroPos1_ = new global::NFMsg.Vector3();
+            }
+            input.ReadMessage(heroPos1_);
+            break;
+          }
+          case 194: {
+            if (heroPos2_ == null) {
+              heroPos2_ = new global::NFMsg.Vector3();
+            }
+            input.ReadMessage(heroPos2_);
+            break;
+          }
+          case 202: {
+            if (heroPos3_ == null) {
+              heroPos3_ = new global::NFMsg.Vector3();
+            }
+            input.ReadMessage(heroPos3_);
+            break;
+          }
+          case 242: {
+            if (title_ == null) {
+              title_ = new global::NFMsg.AckMiningTitle();
+            }
+            input.ReadMessage(title_);
+            break;
+          }
+          case 250: {
+            if (opponent_ == null) {
+              opponent_ = new global::NFMsg.Ident();
+            }
+            input.ReadMessage(opponent_);
             break;
           }
         }

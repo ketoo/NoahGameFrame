@@ -14,7 +14,7 @@
     <ProjectGuid>{76A39BB2-9B84-4C65-98A5-654D86B86F2A}</ProjectGuid>
     <RootNamespace>test_win32</RootNamespace>
     <Keyword>Win32Proj</Keyword>
-    <WindowsTargetPlatformVersion>10.0.15063.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0.16299.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
@@ -272,168 +272,471 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)" /D /E /I /F /Y
       <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
       </ForcedIncludeFiles>
     </ClCompile>
+    <ClCompile Include="..\..\..\Dependencies\protobuf\src\google\protobuf\any.cc">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+      </ForcedIncludeFiles>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Dependencies\protobuf\src\google\protobuf\any.pb.cc">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+      </ForcedIncludeFiles>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Dependencies\protobuf\src\google\protobuf\api.pb.cc">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+      </ForcedIncludeFiles>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Dependencies\protobuf\src\google\protobuf\arena.cc">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+      </ForcedIncludeFiles>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Dependencies\protobuf\src\google\protobuf\arenastring.cc">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+      </ForcedIncludeFiles>
+    </ClCompile>
     <ClCompile Include="..\..\..\Dependencies\protobuf\src\google\protobuf\compiler\importer.cc">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
       <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
       </ForcedIncludeFiles>
     </ClCompile>
     <ClCompile Include="..\..\..\Dependencies\protobuf\src\google\protobuf\compiler\parser.cc">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
       <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
       </ForcedIncludeFiles>
     </ClCompile>
     <ClCompile Include="..\..\..\Dependencies\protobuf\src\google\protobuf\descriptor.cc">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
       <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
       </ForcedIncludeFiles>
     </ClCompile>
     <ClCompile Include="..\..\..\Dependencies\protobuf\src\google\protobuf\descriptor.pb.cc">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
       <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
       </ForcedIncludeFiles>
     </ClCompile>
     <ClCompile Include="..\..\..\Dependencies\protobuf\src\google\protobuf\descriptor_database.cc">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+      </ForcedIncludeFiles>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Dependencies\protobuf\src\google\protobuf\duration.pb.cc">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
       <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
       </ForcedIncludeFiles>
     </ClCompile>
     <ClCompile Include="..\..\..\Dependencies\protobuf\src\google\protobuf\dynamic_message.cc">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+      </ForcedIncludeFiles>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Dependencies\protobuf\src\google\protobuf\empty.pb.cc">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
       <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
       </ForcedIncludeFiles>
     </ClCompile>
     <ClCompile Include="..\..\..\Dependencies\protobuf\src\google\protobuf\extension_set.cc">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
       <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
       </ForcedIncludeFiles>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="..\..\..\Dependencies\protobuf\src\google\protobuf\extension_set_heavy.cc">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+      </ForcedIncludeFiles>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Dependencies\protobuf\src\google\protobuf\field_mask.pb.cc">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
       <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
       </ForcedIncludeFiles>
     </ClCompile>
     <ClCompile Include="..\..\..\Dependencies\protobuf\src\google\protobuf\generated_message_reflection.cc">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+      </ForcedIncludeFiles>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Dependencies\protobuf\src\google\protobuf\generated_message_table_driven.cc">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+      </ForcedIncludeFiles>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Dependencies\protobuf\src\google\protobuf\generated_message_table_driven_lite.cc">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
       <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
       </ForcedIncludeFiles>
     </ClCompile>
     <ClCompile Include="..\..\..\Dependencies\protobuf\src\google\protobuf\generated_message_util.cc">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+      </ForcedIncludeFiles>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Dependencies\protobuf\src\google\protobuf\implicit_weak_message.cc">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
       <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
       </ForcedIncludeFiles>
     </ClCompile>
     <ClCompile Include="..\..\..\Dependencies\protobuf\src\google\protobuf\io\coded_stream.cc">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
       <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
       </ForcedIncludeFiles>
     </ClCompile>
     <ClCompile Include="..\..\..\Dependencies\protobuf\src\google\protobuf\io\gzip_stream.cc">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
       <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
       </ForcedIncludeFiles>
     </ClCompile>
     <ClCompile Include="..\..\..\Dependencies\protobuf\src\google\protobuf\io\printer.cc">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+      </ForcedIncludeFiles>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Dependencies\protobuf\src\google\protobuf\io\strtod.cc">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
       <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
       </ForcedIncludeFiles>
     </ClCompile>
     <ClCompile Include="..\..\..\Dependencies\protobuf\src\google\protobuf\io\tokenizer.cc">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
       <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
       </ForcedIncludeFiles>
     </ClCompile>
     <ClCompile Include="..\..\..\Dependencies\protobuf\src\google\protobuf\io\zero_copy_stream.cc">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
       <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
       </ForcedIncludeFiles>
     </ClCompile>
     <ClCompile Include="..\..\..\Dependencies\protobuf\src\google\protobuf\io\zero_copy_stream_impl.cc">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
       <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
       </ForcedIncludeFiles>
     </ClCompile>
     <ClCompile Include="..\..\..\Dependencies\protobuf\src\google\protobuf\io\zero_copy_stream_impl_lite.cc">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+      </ForcedIncludeFiles>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Dependencies\protobuf\src\google\protobuf\map_field.cc">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
       <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
       </ForcedIncludeFiles>
     </ClCompile>
     <ClCompile Include="..\..\..\Dependencies\protobuf\src\google\protobuf\message.cc">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
       <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
       </ForcedIncludeFiles>
     </ClCompile>
     <ClCompile Include="..\..\..\Dependencies\protobuf\src\google\protobuf\message_lite.cc">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
       <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
       </ForcedIncludeFiles>
     </ClCompile>
     <ClCompile Include="..\..\..\Dependencies\protobuf\src\google\protobuf\reflection_ops.cc">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
       <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
       </ForcedIncludeFiles>
     </ClCompile>
     <ClCompile Include="..\..\..\Dependencies\protobuf\src\google\protobuf\repeated_field.cc">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
       <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
       </ForcedIncludeFiles>
     </ClCompile>
     <ClCompile Include="..\..\..\Dependencies\protobuf\src\google\protobuf\service.cc">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
       <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
       </ForcedIncludeFiles>
     </ClCompile>
-    <ClCompile Include="..\..\..\Dependencies\protobuf\src\google\protobuf\stubs\atomicops_internals_x86_msvc.cc">
+    <ClCompile Include="..\..\..\Dependencies\protobuf\src\google\protobuf\source_context.pb.cc">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+      </ForcedIncludeFiles>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Dependencies\protobuf\src\google\protobuf\struct.pb.cc">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+      </ForcedIncludeFiles>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Dependencies\protobuf\src\google\protobuf\stubs\bytestream.cc">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
       <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
       </ForcedIncludeFiles>
     </ClCompile>
     <ClCompile Include="..\..\..\Dependencies\protobuf\src\google\protobuf\stubs\common.cc">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
       <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
       </ForcedIncludeFiles>
     </ClCompile>
-    <ClCompile Include="..\..\..\Dependencies\protobuf\src\google\protobuf\stubs\once.cc">
+    <ClCompile Include="..\..\..\Dependencies\protobuf\src\google\protobuf\stubs\int128.cc">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+      </ForcedIncludeFiles>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Dependencies\protobuf\src\google\protobuf\stubs\io_win32.cc">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+      </ForcedIncludeFiles>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Dependencies\protobuf\src\google\protobuf\stubs\mathlimits.cc">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+      </ForcedIncludeFiles>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Dependencies\protobuf\src\google\protobuf\stubs\status.cc">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+      </ForcedIncludeFiles>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Dependencies\protobuf\src\google\protobuf\stubs\statusor.cc">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+      </ForcedIncludeFiles>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Dependencies\protobuf\src\google\protobuf\stubs\stringpiece.cc">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
       <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
       </ForcedIncludeFiles>
     </ClCompile>
     <ClCompile Include="..\..\..\Dependencies\protobuf\src\google\protobuf\stubs\stringprintf.cc">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
       <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
       </ForcedIncludeFiles>
     </ClCompile>
     <ClCompile Include="..\..\..\Dependencies\protobuf\src\google\protobuf\stubs\structurally_valid.cc">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
       <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
       </ForcedIncludeFiles>
     </ClCompile>
     <ClCompile Include="..\..\..\Dependencies\protobuf\src\google\protobuf\stubs\strutil.cc">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
       <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
       </ForcedIncludeFiles>
     </ClCompile>
     <ClCompile Include="..\..\..\Dependencies\protobuf\src\google\protobuf\stubs\substitute.cc">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+      </ForcedIncludeFiles>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Dependencies\protobuf\src\google\protobuf\stubs\time.cc">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
       <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
       </ForcedIncludeFiles>
     </ClCompile>
     <ClCompile Include="..\..\..\Dependencies\protobuf\src\google\protobuf\text_format.cc">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+      </ForcedIncludeFiles>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Dependencies\protobuf\src\google\protobuf\timestamp.pb.cc">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+      </ForcedIncludeFiles>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Dependencies\protobuf\src\google\protobuf\type.pb.cc">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
       <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
       </ForcedIncludeFiles>
     </ClCompile>
     <ClCompile Include="..\..\..\Dependencies\protobuf\src\google\protobuf\unknown_field_set.cc">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+      </ForcedIncludeFiles>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Dependencies\protobuf\src\google\protobuf\util\delimited_message_util.cc">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+      </ForcedIncludeFiles>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Dependencies\protobuf\src\google\protobuf\util\field_comparator.cc">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+      </ForcedIncludeFiles>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Dependencies\protobuf\src\google\protobuf\util\field_mask_util.cc">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+      </ForcedIncludeFiles>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Dependencies\protobuf\src\google\protobuf\util\internal\datapiece.cc">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+      </ForcedIncludeFiles>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Dependencies\protobuf\src\google\protobuf\util\internal\default_value_objectwriter.cc">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+      </ForcedIncludeFiles>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Dependencies\protobuf\src\google\protobuf\util\internal\error_listener.cc">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+      </ForcedIncludeFiles>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Dependencies\protobuf\src\google\protobuf\util\internal\field_mask_utility.cc">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+      </ForcedIncludeFiles>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Dependencies\protobuf\src\google\protobuf\util\internal\json_escaping.cc">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+      </ForcedIncludeFiles>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Dependencies\protobuf\src\google\protobuf\util\internal\json_objectwriter.cc">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+      </ForcedIncludeFiles>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Dependencies\protobuf\src\google\protobuf\util\internal\json_stream_parser.cc">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+      </ForcedIncludeFiles>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Dependencies\protobuf\src\google\protobuf\util\internal\object_writer.cc">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+      </ForcedIncludeFiles>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Dependencies\protobuf\src\google\protobuf\util\internal\protostream_objectsource.cc">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+      </ForcedIncludeFiles>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Dependencies\protobuf\src\google\protobuf\util\internal\protostream_objectwriter.cc">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+      </ForcedIncludeFiles>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Dependencies\protobuf\src\google\protobuf\util\internal\proto_writer.cc">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+      </ForcedIncludeFiles>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Dependencies\protobuf\src\google\protobuf\util\internal\type_info.cc">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+      </ForcedIncludeFiles>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Dependencies\protobuf\src\google\protobuf\util\internal\type_info_test_helper.cc">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+      </ForcedIncludeFiles>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Dependencies\protobuf\src\google\protobuf\util\internal\utility.cc">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+      </ForcedIncludeFiles>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Dependencies\protobuf\src\google\protobuf\util\json_util.cc">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+      </ForcedIncludeFiles>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Dependencies\protobuf\src\google\protobuf\util\message_differencer.cc">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+      </ForcedIncludeFiles>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Dependencies\protobuf\src\google\protobuf\util\time_util.cc">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+      </ForcedIncludeFiles>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Dependencies\protobuf\src\google\protobuf\util\type_resolver_util.cc">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
       <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
       </ForcedIncludeFiles>
     </ClCompile>
     <ClCompile Include="..\..\..\Dependencies\protobuf\src\google\protobuf\wire_format.cc">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
       <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
       </ForcedIncludeFiles>
     </ClCompile>
     <ClCompile Include="..\..\..\Dependencies\protobuf\src\google\protobuf\wire_format_lite.cc">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+      </ForcedIncludeFiles>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Dependencies\protobuf\src\google\protobuf\wrappers.pb.cc">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
       <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
       </ForcedIncludeFiles>
     </ClCompile>
@@ -450,7 +753,6 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)" /D /E /I /F /Y
     <ClCompile Include="..\..\..\NFComm\NFKernelPlugin\NFCScheduleModule.cpp" />
     <ClCompile Include="..\..\..\NFComm\NFLogPlugin\NFCLogModule.cpp" />
     <ClCompile Include="..\..\..\NFComm\NFMessageDefine\NFDefine.pb.cc" />
-    <ClCompile Include="..\..\..\NFComm\NFMessageDefine\NFFleetingDefine.pb.cc" />
     <ClCompile Include="..\..\..\NFComm\NFMessageDefine\NFMsgBase.pb.cc" />
     <ClCompile Include="..\..\..\NFComm\NFMessageDefine\NFMsgDefine.cpp" />
     <ClCompile Include="..\..\..\NFComm\NFMessageDefine\NFMsgPreGame.pb.cc" />
@@ -502,47 +804,59 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)" /D /E /I /F /Y
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\Dependencies\libevent\event.h" />
+    <ClInclude Include="..\..\..\Dependencies\protobuf\src\google\protobuf\any.h" />
+    <ClInclude Include="..\..\..\Dependencies\protobuf\src\google\protobuf\any.pb.h" />
+    <ClInclude Include="..\..\..\Dependencies\protobuf\src\google\protobuf\api.pb.h" />
     <ClInclude Include="..\..\..\Dependencies\protobuf\src\google\protobuf\compiler\importer.h" />
     <ClInclude Include="..\..\..\Dependencies\protobuf\src\google\protobuf\compiler\parser.h" />
     <ClInclude Include="..\..\..\Dependencies\protobuf\src\google\protobuf\descriptor.h" />
     <ClInclude Include="..\..\..\Dependencies\protobuf\src\google\protobuf\descriptor.pb.h" />
     <ClInclude Include="..\..\..\Dependencies\protobuf\src\google\protobuf\descriptor_database.h" />
+    <ClInclude Include="..\..\..\Dependencies\protobuf\src\google\protobuf\duration.pb.h" />
     <ClInclude Include="..\..\..\Dependencies\protobuf\src\google\protobuf\dynamic_message.h" />
-    <ClInclude Include="..\..\..\Dependencies\protobuf\src\google\protobuf\extension_set.h" />
+    <ClInclude Include="..\..\..\Dependencies\protobuf\src\google\protobuf\empty.pb.h" />
+    <ClInclude Include="..\..\..\Dependencies\protobuf\src\google\protobuf\field_mask.pb.h" />
     <ClInclude Include="..\..\..\Dependencies\protobuf\src\google\protobuf\generated_message_reflection.h" />
-    <ClInclude Include="..\..\..\Dependencies\protobuf\src\google\protobuf\generated_message_util.h" />
-    <ClInclude Include="..\..\..\Dependencies\protobuf\src\google\protobuf\io\coded_stream.h" />
-    <ClInclude Include="..\..\..\Dependencies\protobuf\src\google\protobuf\io\coded_stream_inl.h" />
     <ClInclude Include="..\..\..\Dependencies\protobuf\src\google\protobuf\io\gzip_stream.h" />
     <ClInclude Include="..\..\..\Dependencies\protobuf\src\google\protobuf\io\printer.h" />
+    <ClInclude Include="..\..\..\Dependencies\protobuf\src\google\protobuf\io\strtod.h" />
     <ClInclude Include="..\..\..\Dependencies\protobuf\src\google\protobuf\io\tokenizer.h" />
-    <ClInclude Include="..\..\..\Dependencies\protobuf\src\google\protobuf\io\zero_copy_stream.h" />
     <ClInclude Include="..\..\..\Dependencies\protobuf\src\google\protobuf\io\zero_copy_stream_impl.h" />
-    <ClInclude Include="..\..\..\Dependencies\protobuf\src\google\protobuf\io\zero_copy_stream_impl_lite.h" />
+    <ClInclude Include="..\..\..\Dependencies\protobuf\src\google\protobuf\map_field.h" />
     <ClInclude Include="..\..\..\Dependencies\protobuf\src\google\protobuf\message.h" />
-    <ClInclude Include="..\..\..\Dependencies\protobuf\src\google\protobuf\message_lite.h" />
     <ClInclude Include="..\..\..\Dependencies\protobuf\src\google\protobuf\reflection_ops.h" />
-    <ClInclude Include="..\..\..\Dependencies\protobuf\src\google\protobuf\repeated_field.h" />
     <ClInclude Include="..\..\..\Dependencies\protobuf\src\google\protobuf\service.h" />
-    <ClInclude Include="..\..\..\Dependencies\protobuf\src\google\protobuf\stubs\atomicops.h" />
-    <ClInclude Include="..\..\..\Dependencies\protobuf\src\google\protobuf\stubs\atomicops_internals_x86_msvc.h" />
-    <ClInclude Include="..\..\..\Dependencies\protobuf\src\google\protobuf\stubs\common.h" />
-    <ClInclude Include="..\..\..\Dependencies\protobuf\src\google\protobuf\stubs\hash.h" />
-    <ClInclude Include="..\..\..\Dependencies\protobuf\src\google\protobuf\stubs\map-util.h" />
-    <ClInclude Include="..\..\..\Dependencies\protobuf\src\google\protobuf\stubs\once.h" />
-    <ClInclude Include="..\..\..\Dependencies\protobuf\src\google\protobuf\stubs\platform_macros.h" />
-    <ClInclude Include="..\..\..\Dependencies\protobuf\src\google\protobuf\stubs\stl_util.h" />
-    <ClInclude Include="..\..\..\Dependencies\protobuf\src\google\protobuf\stubs\stringprintf.h" />
-    <ClInclude Include="..\..\..\Dependencies\protobuf\src\google\protobuf\stubs\strutil.h" />
+    <ClInclude Include="..\..\..\Dependencies\protobuf\src\google\protobuf\source_context.pb.h" />
+    <ClInclude Include="..\..\..\Dependencies\protobuf\src\google\protobuf\struct.pb.h" />
+    <ClInclude Include="..\..\..\Dependencies\protobuf\src\google\protobuf\stubs\mathlimits.h" />
     <ClInclude Include="..\..\..\Dependencies\protobuf\src\google\protobuf\stubs\substitute.h" />
-    <ClInclude Include="..\..\..\Dependencies\protobuf\src\google\protobuf\stubs\template_util.h" />
-    <ClInclude Include="..\..\..\Dependencies\protobuf\src\google\protobuf\stubs\type_traits.h" />
     <ClInclude Include="..\..\..\Dependencies\protobuf\src\google\protobuf\text_format.h" />
+    <ClInclude Include="..\..\..\Dependencies\protobuf\src\google\protobuf\timestamp.pb.h" />
+    <ClInclude Include="..\..\..\Dependencies\protobuf\src\google\protobuf\type.pb.h" />
     <ClInclude Include="..\..\..\Dependencies\protobuf\src\google\protobuf\unknown_field_set.h" />
+    <ClInclude Include="..\..\..\Dependencies\protobuf\src\google\protobuf\util\delimited_message_util.h" />
+    <ClInclude Include="..\..\..\Dependencies\protobuf\src\google\protobuf\util\field_comparator.h" />
+    <ClInclude Include="..\..\..\Dependencies\protobuf\src\google\protobuf\util\field_mask_util.h" />
+    <ClInclude Include="..\..\..\Dependencies\protobuf\src\google\protobuf\util\internal\datapiece.h" />
+    <ClInclude Include="..\..\..\Dependencies\protobuf\src\google\protobuf\util\internal\default_value_objectwriter.h" />
+    <ClInclude Include="..\..\..\Dependencies\protobuf\src\google\protobuf\util\internal\error_listener.h" />
+    <ClInclude Include="..\..\..\Dependencies\protobuf\src\google\protobuf\util\internal\field_mask_utility.h" />
+    <ClInclude Include="..\..\..\Dependencies\protobuf\src\google\protobuf\util\internal\json_escaping.h" />
+    <ClInclude Include="..\..\..\Dependencies\protobuf\src\google\protobuf\util\internal\json_objectwriter.h" />
+    <ClInclude Include="..\..\..\Dependencies\protobuf\src\google\protobuf\util\internal\json_stream_parser.h" />
+    <ClInclude Include="..\..\..\Dependencies\protobuf\src\google\protobuf\util\internal\object_writer.h" />
+    <ClInclude Include="..\..\..\Dependencies\protobuf\src\google\protobuf\util\internal\protostream_objectsource.h" />
+    <ClInclude Include="..\..\..\Dependencies\protobuf\src\google\protobuf\util\internal\protostream_objectwriter.h" />
+    <ClInclude Include="..\..\..\Dependencies\protobuf\src\google\protobuf\util\internal\proto_writer.h" />
+    <ClInclude Include="..\..\..\Dependencies\protobuf\src\google\protobuf\util\internal\type_info.h" />
+    <ClInclude Include="..\..\..\Dependencies\protobuf\src\google\protobuf\util\internal\type_info_test_helper.h" />
+    <ClInclude Include="..\..\..\Dependencies\protobuf\src\google\protobuf\util\internal\utility.h" />
+    <ClInclude Include="..\..\..\Dependencies\protobuf\src\google\protobuf\util\json_util.h" />
+    <ClInclude Include="..\..\..\Dependencies\protobuf\src\google\protobuf\util\message_differencer.h" />
+    <ClInclude Include="..\..\..\Dependencies\protobuf\src\google\protobuf\util\time_util.h" />
+    <ClInclude Include="..\..\..\Dependencies\protobuf\src\google\protobuf\util\type_resolver_util.h" />
     <ClInclude Include="..\..\..\Dependencies\protobuf\src\google\protobuf\wire_format.h" />
-    <ClInclude Include="..\..\..\Dependencies\protobuf\src\google\protobuf\wire_format_lite.h" />
-    <ClInclude Include="..\..\..\Dependencies\protobuf\src\google\protobuf\wire_format_lite_inl.h" />
-    <ClInclude Include="..\..\..\Dependencies\protobuf\vsprojects\config.h" />
+    <ClInclude Include="..\..\..\Dependencies\protobuf\src\google\protobuf\wrappers.pb.h" />
     <ClInclude Include="..\..\..\NFComm\NFConfigPlugin\NFCClassModule.h" />
     <ClInclude Include="..\..\..\NFComm\NFConfigPlugin\NFCElementModule.h" />
     <ClInclude Include="..\..\..\NFComm\NFCore\NFBox.hpp" />
@@ -580,7 +894,6 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)" /D /E /I /F /Y
     <ClInclude Include="..\..\..\NFComm\NFKernelPlugin\NFCScheduleModule.h" />
     <ClInclude Include="..\..\..\NFComm\NFLogPlugin\NFCLogModule.h" />
     <ClInclude Include="..\..\..\NFComm\NFMessageDefine\NFDefine.pb.h" />
-    <ClInclude Include="..\..\..\NFComm\NFMessageDefine\NFFleetingDefine.pb.h" />
     <ClInclude Include="..\..\..\NFComm\NFMessageDefine\NFLimit.h" />
     <ClInclude Include="..\..\..\NFComm\NFMessageDefine\NFMsgBase.pb.h" />
     <ClInclude Include="..\..\..\NFComm\NFMessageDefine\NFMsgDefine.h" />
