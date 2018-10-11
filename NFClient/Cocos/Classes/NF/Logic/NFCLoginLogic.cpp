@@ -50,7 +50,7 @@ void NFCLoginLogic::LoginPB(const std::string &strAccount, const std::string &st
 	xMsg.set_security_code("");
 	xMsg.set_signbuff("");
 	xMsg.set_clientversion(1);
-	xMsg.set_loginmode(0);
+	xMsg.set_loginmode(NFMsg::ELM_AUTO_REGISTER_LOGIN);
 	xMsg.set_clientip(0);
 	xMsg.set_clientip(0);
 	xMsg.set_clientmac(0);
@@ -86,7 +86,7 @@ void NFCLoginLogic::RequireVerifyWorldKey(const std::string &strAccount, const s
 	NFMsg::ReqAccountLogin xMsg;
 	xMsg.set_signbuff("");
 	xMsg.set_clientversion(1);
-	xMsg.set_loginmode(0);
+	xMsg.set_loginmode(NFMsg::ELoginMode());
 	xMsg.set_clientip(0);
 	xMsg.set_clientip(0);
 	xMsg.set_clientmac(0);
