@@ -1,10 +1,27 @@
-// -------------------------------------------------------------------------
-//    @FileName      	:   NFCHttpClientModul.cpp
-//    @Author           :   LvSheng.Huang
-//    @Date             :   2017-07-07
-//    @Module           :   NFCHttpClientModule
-//
-// -------------------------------------------------------------------------
+/*
+            This file is part of: 
+                NoahFrame
+            https://github.com/ketoo/NoahGameFrame
+
+   Copyright 2009 - 2018 NoahFrame(NoahGameFrame)
+
+   File creator: lvsheng.huang
+   
+   NoahFrame is open-source software and you can redistribute it and/or modify
+   it under the terms of the License; besides, anyone who use this file/software must include this copyright announcement.
+
+   Licensed under the Apache License, Version 2.0 (the "License");
+   you may not use this file except in compliance with the License.
+   You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   See the License for the specific language governing permissions and
+   limitations under the License.
+*/
 
 #include "NFCHttpClientModule.h"
 #include "NFCHttpClient.h"
@@ -16,6 +33,7 @@ NFCHttpClientModule::NFCHttpClientModule(NFIPluginManager* p)
     pPluginManager = p;
     m_pHttpClient = new NFCHttpClient();
     m_xDefaultHttpHeaders["Connection"] = "close";
+    //evhttp_add_header(output_headers, "Connection", "keep-alive");
 	m_xDefaultHttpHeaders["Content-Type"] = "text/plain;text/html;application/x-www-form-urlencoded;charset=utf-8";
 	//m_xDefaultHttpHeaders["Content-Type"] = "text/plain;text/html;application/x-www-form-urlencoded;charset=utf-8";
     m_xDefaultHttpHeaders["User-Agent"] = DEFAULT_USER_AGENT;

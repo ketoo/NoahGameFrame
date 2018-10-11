@@ -1,10 +1,27 @@
-// -------------------------------------------------------------------------
-//    @FileName			:    NFIActorModule.h
-//    @Author           :    LvSheng.Huang
-//    @Date             :    2012-12-15
-//    @Module           :    NFIActorModule
-//
-// -------------------------------------------------------------------------
+/*
+            This file is part of: 
+                NoahFrame
+            https://github.com/ketoo/NoahGameFrame
+
+   Copyright 2009 - 2018 NoahFrame(NoahGameFrame)
+
+   File creator: lvsheng.huang
+   
+   NoahFrame is open-source software and you can redistribute it and/or modify
+   it under the terms of the License; besides, anyone who use this file/software must include this copyright announcement.
+
+   Licensed under the Apache License, Version 2.0 (the "License");
+   you may not use this file except in compliance with the License.
+   You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   See the License for the specific language governing permissions and
+   limitations under the License.
+*/
 
 #ifndef NFI_ACTOR_MODULE_H
 #define NFI_ACTOR_MODULE_H
@@ -41,7 +58,7 @@ public:
     }
 
 	template<typename TypeComponent, typename BaseType>
-	int RequireActor(BaseType* pBase, int (BaseType::*handler_end)(const NFGUID&, const int, const int, const std::string&))
+	int RequireActor(BaseType* pBase, int (BaseType::*handler_end)(const int, const int, const std::string&))
 	{
 		if (!TIsDerived<TypeComponent, NFIComponent>::Result)
 		{
@@ -75,7 +92,7 @@ public:
 			//use CreateNewInstance to replace this line to create a new component script
 			NF_SHARE_PTR<TypeComponent> pComponent = NF_SHARE_PTR<TypeComponent>(NF_NEW TypeComponent());
 
-			GET_CLASS_NAME(TypeComponent);
+			//GET_CLASS_NAME(TypeComponent);
 
 			return AddComponent(nActorIndex, pComponent);
 		}
@@ -85,24 +102,24 @@ public:
 
 	template<typename BaseType>
 	int AddEndFunc(const int nActorIndex, const int nSubMessageID,
-		BaseType* pBase, int (BaseType::*handler_end)(const NFGUID&, const int, const int, const std::string&))
+		BaseType* pBase, int (BaseType::*handler_end)(const int, const int, const std::string&))
 	{
-		ACTOR_PROCESS_FUNCTOR functor_end = std::bind(handler_end, pBase, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3, std::placeholders::_4);
+		ACTOR_PROCESS_FUNCTOR functor_end = std::bind(handler_end, pBase, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3);
 		ACTOR_PROCESS_FUNCTOR_PTR functorPtr_end(new ACTOR_PROCESS_FUNCTOR(functor_end));
 
 		return AddEndFunc(nActorIndex, nSubMessageID, functorPtr_end);
 	}
 	template<typename BaseType>
 	int AddDefaultEndFunc(const int nActorIndex,
-		BaseType* pBase, int (BaseType::*handler_end)(const NFGUID&, const int, const int, const std::string&))
+		BaseType* pBase, int (BaseType::*handler_end)(const int, const int, const std::string&))
 	{
-		ACTOR_PROCESS_FUNCTOR functor_end = std::bind(handler_end, pBase, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3, std::placeholders::_4);
+		ACTOR_PROCESS_FUNCTOR functor_end = std::bind(handler_end, pBase, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3);
 		ACTOR_PROCESS_FUNCTOR_PTR functorPtr_end(new ACTOR_PROCESS_FUNCTOR(functor_end));
 
 		return AddEndFunc(nActorIndex, -1, functorPtr_end);
 	}
 	virtual int RequireActor() = 0;
-    virtual bool SendMsgToActor(const int nActorIndex, const NFGUID& objectID, const int nEventID, const std::string& strArg) = 0;
+    virtual bool SendMsgToActor(const int nActorIndex, const int nEventID, const std::string& strArg) = 0;
 	virtual bool HandlerEx(const NFIActorMessage& message, const int from) = 0;
 	virtual bool ReleaseActor(const int nActorIndex) = 0;
 	virtual NF_SHARE_PTR<NFIActor> GetActor(const int nActorIndex) = 0;

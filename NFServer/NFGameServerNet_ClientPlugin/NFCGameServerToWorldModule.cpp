@@ -1,10 +1,28 @@
-// -------------------------------------------------------------------------
-//    @FileName			:    NFCGameServerNet_ClientModule.cpp
-//    @Author           :    LvSheng.Huang
-//    @Date             :    2013-01-02
-//    @Module           :    NFCGameServerNet_ClientModule
-//    @Desc             :
-// -------------------------------------------------------------------------
+/*
+            This file is part of: 
+                NoahFrame
+            https://github.com/ketoo/NoahGameFrame
+
+   Copyright 2009 - 2018 NoahFrame(NoahGameFrame)
+
+   File creator: lvsheng.huang
+   
+   NoahFrame is open-source software and you can redistribute it and/or modify
+   it under the terms of the License; besides, anyone who use this file/software must include this copyright announcement.
+
+   Licensed under the Apache License, Version 2.0 (the "License");
+   you may not use this file except in compliance with the License.
+   You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   See the License for the specific language governing permissions and
+   limitations under the License.
+*/
+
 
 #include "NFCGameServerToWorldModule.h"
 #include "NFGameServerNet_ClientPlugin.h"
@@ -124,31 +142,14 @@ void NFCGameServerToWorldModule::ServerReport()
 	}
 }
 
-
-void NFCGameServerToWorldModule::RefreshWorldInfo()
-{
-	//     _tagPT_KEY_BASE_MSG baseMsg;
-	//     NFMsg::ServerInfoReport xMsg;
-	//
-	//     xMsg.set_server_id(m_pGameLogicModule->GetGameID());
-	//     xMsg.set_server_port(m_pGameServerModule->GetServerPort());
-	//     xMsg.set_server_cur_count(0);
-	//     xMsg.set_server_max_online(50000);
-	//
-	//     if (xMsg.SerializeToString(&baseMsg.strSyncInfo))
-	//     {
-	//         baseMsg._unMsgID = GTW_GAME_REFRESH;
-	//         RakNet::BitStream oBitStream;
-	//         baseMsg.EnCode(&oBitStream);
-	//         SendBitStream(&oBitStream);
-	//     }
-}
-
 bool NFCGameServerToWorldModule::AfterInit()
 {
-	m_pNetClientModule->AddReceiveCallBack(NF_SERVER_TYPES::NF_ST_WORLD, this, &NFCGameServerToWorldModule::TransPBToProxy);
-	m_pNetClientModule->AddEventCallBack(NF_SERVER_TYPES::NF_ST_WORLD, this, &NFCGameServerToWorldModule::OnSocketWSEvent);
+	m_pNetClientModule->AddReceiveCallBack(NF_SERVER_TYPES::NF_ST_WORLD, NFMsg::EGMI_STS_NET_INFO, this, &NFCGameServerToWorldModule::OnServerInfoProcess);
 
+	m_pNetClientModule->AddReceiveCallBack(NF_SERVER_TYPES::NF_ST_WORLD, this, &NFCGameServerToWorldModule::TransPBToProxy);
+	
+	m_pNetClientModule->AddEventCallBack(NF_SERVER_TYPES::NF_ST_WORLD, this, &NFCGameServerToWorldModule::OnSocketWSEvent);
+	
 	m_pKernelModule->AddClassCallBack(NFrame::Player::ThisName(), this, &NFCGameServerToWorldModule::OnObjectClassEvent);
 
 	m_pNetClientModule->ExpandBufferSize();
@@ -207,6 +208,40 @@ bool NFCGameServerToWorldModule::AfterInit()
 	return true;
 }
 
+void NFCGameServerToWorldModule::OnServerInfoProcess(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
+{
+	NFGUID nPlayerID;
+	NFMsg::ServerInfoReportList xMsg;
+	if (!NFINetModule::ReceivePB(nMsgID, msg, nLen, xMsg, nPlayerID))
+	{
+		return;
+	}
+
+	for (int i = 0; i < xMsg.server_list_size(); ++i)
+	{
+		const NFMsg::ServerInfoReport& xData = xMsg.server_list(i);
+
+		//type
+		ConnectData xServerData;
+
+		xServerData.nGameID = xData.server_id();
+		xServerData.strIP = xData.server_ip();
+		xServerData.nPort = xData.server_port();
+		xServerData.strName = xData.server_name();
+		xServerData.nWorkLoad = xData.server_cur_count();
+		xServerData.eServerType = (NF_SERVER_TYPES)xData.server_type();
+
+		if (NF_SERVER_TYPES::NF_ST_WORLD == xServerData.eServerType)
+		{
+			m_pNetClientModule->AddServer(xServerData);
+		}
+		else if (NF_SERVER_TYPES::NF_ST_DB == xServerData.eServerType)
+		{
+			m_pNetClientModule->AddServer(xServerData);
+		}
+	}
+}
+
 void NFCGameServerToWorldModule::OnSocketWSEvent(const NFSOCK nSockIndex, const NF_NET_EVENT eEvent, NFINet* pNet)
 {
 	if (eEvent & NF_NET_EVENT_EOF)
@@ -218,9 +253,9 @@ void NFCGameServerToWorldModule::OnSocketWSEvent(const NFSOCK nSockIndex, const 
 	else if (eEvent & NF_NET_EVENT_TIMEOUT)
 	{
 	}
-	else  if (eEvent == NF_NET_EVENT_CONNECTED)
+	else  if (eEvent & NF_NET_EVENT_CONNECTED)
 	{
-		m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFGUID(0, nSockIndex), "NF_NET_EVENT_CONNECTED", "connectioned success", __FUNCTION__, __LINE__);
+		m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFGUID(0, nSockIndex), "NF_NET_EVENT_CONNECTED", "connected success", __FUNCTION__, __LINE__);
 		Register(pNet);
 
 	}
@@ -279,7 +314,7 @@ void NFCGameServerToWorldModule::TransPBToProxy(const NFSOCK nSockIndex, const i
 		return;
 	}
 
-	m_pGameServerNet_ServerModule->SendMsgPBToGate(nMsgID, strData, nPlayerID);
+	m_pGameServerNet_ServerModule->SendMsgToGate(nMsgID, strData, nPlayerID);
 
 	return;
 }

@@ -311,24 +311,6 @@ namespace NFrame
 		// Record
 
 	}
-	public class HttpServer
-	{
-		//Class name
-		public static readonly String ThisName = "HttpServer";
-		// IObject
-		public static readonly String ClassName = "ClassName";// string
-		public static readonly String ConfigID = "ConfigID";// string
-		public static readonly String GroupID = "GroupID";// int
-		public static readonly String ID = "ID";// string
-		public static readonly String Position = "Position";// vector3
-		public static readonly String SceneID = "SceneID";// int
-		// Property
-		public static readonly String ServerID = "ServerID";// int
-		public static readonly String WebPort = "WebPort";// int
-		public static readonly String WebRootPath = "WebRootPath";// string
-		// Record
-
-	}
 	public class IObject
 	{
 		//Class name
@@ -596,8 +578,12 @@ namespace NFrame
 		public static readonly String DIZZY_GATE = "DIZZY_GATE";// int
 		public static readonly String Diamond = "Diamond";// int
 		public static readonly String EXP = "EXP";// int
-		public static readonly String FightHero = "FightHero";// object
 		public static readonly String FightHeroCnfID = "FightHeroCnfID";// string
+		public static readonly String FightHeroHP1 = "FightHeroHP1";// int
+		public static readonly String FightHeroHP2 = "FightHeroHP2";// int
+		public static readonly String FightHeroHP3 = "FightHeroHP3";// int
+		public static readonly String FightHeroID = "FightHeroID";// object
+		public static readonly String FightHeroLevel = "FightHeroLevel";// int
 		public static readonly String FightingOpponent = "FightingOpponent";// object
 		public static readonly String FightingStar = "FightingStar";// int
 		public static readonly String FirstTarget = "FirstTarget";// object
@@ -632,22 +618,18 @@ namespace NFrame
 		public static readonly String HP = "HP";// int
 		public static readonly String HPREGEN = "HPREGEN";// int
 		public static readonly String Head = "Head";// string
-		public static readonly String Hero1BornPos = "Hero1BornPos";// vector3
-		public static readonly String Hero1HP = "Hero1HP";// int
-		public static readonly String Hero2BornPos = "Hero2BornPos";// vector3
-		public static readonly String Hero2HP = "Hero2HP";// int
-		public static readonly String Hero3BornPos = "Hero3BornPos";// vector3
-		public static readonly String Hero3HP = "Hero3HP";// int
+		public static readonly String HeroCnfID1 = "HeroCnfID1";// string
+		public static readonly String HeroCnfID2 = "HeroCnfID2";// string
+		public static readonly String HeroCnfID3 = "HeroCnfID3";// string
 		public static readonly String HeroID1 = "HeroID1";// object
 		public static readonly String HeroID2 = "HeroID2";// object
 		public static readonly String HeroID3 = "HeroID3";// object
-		public static readonly String HeroLevel = "HeroLevel";// int
-		public static readonly String HeroPos1CnfID = "HeroPos1CnfID";// string
-		public static readonly String HeroPos1Star = "HeroPos1Star";// int
-		public static readonly String HeroPos2CnfID = "HeroPos2CnfID";// string
-		public static readonly String HeroPos2Star = "HeroPos2Star";// int
-		public static readonly String HeroPos3CnfID = "HeroPos3CnfID";// string
-		public static readonly String HeroPos3Star = "HeroPos3Star";// int
+		public static readonly String HeroPos1 = "HeroPos1";// vector3
+		public static readonly String HeroPos2 = "HeroPos2";// vector3
+		public static readonly String HeroPos3 = "HeroPos3";// vector3
+		public static readonly String HeroStar1 = "HeroStar1";// int
+		public static readonly String HeroStar2 = "HeroStar2";// int
+		public static readonly String HeroStar3 = "HeroStar3";// int
 		public static readonly String HomeSceneID = "HomeSceneID";// int
 		public static readonly String Item1 = "Item1";// string
 		public static readonly String Item1Count = "Item1Count";// int
@@ -678,14 +660,11 @@ namespace NFrame
 		public static readonly String OpponentGold = "OpponentGold";// int
 		public static readonly String OpponentHead = "OpponentHead";// string
 		public static readonly String OpponentHero1 = "OpponentHero1";// string
-		public static readonly String OpponentHero1BornPos = "OpponentHero1BornPos";// vector3
-		public static readonly String OpponentHero1Star = "OpponentHero1Star";// int
 		public static readonly String OpponentHero2 = "OpponentHero2";// string
-		public static readonly String OpponentHero2BornPos = "OpponentHero2BornPos";// vector3
-		public static readonly String OpponentHero2Star = "OpponentHero2Star";// int
 		public static readonly String OpponentHero3 = "OpponentHero3";// string
-		public static readonly String OpponentHero3BornPos = "OpponentHero3BornPos";// vector3
-		public static readonly String OpponentHero3Star = "OpponentHero3Star";// int
+		public static readonly String OpponentHeroStar1 = "OpponentHeroStar1";// int
+		public static readonly String OpponentHeroStar2 = "OpponentHeroStar2";// int
+		public static readonly String OpponentHeroStar3 = "OpponentHeroStar3";// int
 		public static readonly String OpponentLevel = "OpponentLevel";// int
 		public static readonly String OpponentName = "OpponentName";// string
 		public static readonly String PHYSICAL_GATE = "PHYSICAL_GATE";// int
@@ -715,55 +694,6 @@ namespace NFrame
 		public static readonly String WonDiamond = "WonDiamond";// int
 		public static readonly String WonGold = "WonGold";// int
 		// Record
-		public class AttackList
-		{
-			//Class name
-			public static readonly String ThisName = "AttackList";
-			public const int WarID = 0;//object
-			public const int AttackerID = 1;//object
-			public const int BeAttackerID = 2;//object
-			public const int AttackerName = 3;//string
-			public const int BeAttackerName = 4;//string
-			public const int AttackerLevel = 5;//int
-			public const int BeAttackerLevel = 6;//int
-			public const int AttackerCup = 7;//int
-			public const int BeAttackerCup = 8;//int
-			public const int AttackerHero1 = 9;//string
-			public const int AttackerHero2 = 10;//string
-			public const int AttackerHero3 = 11;//string
-			public const int AttackerHero1Star = 12;//int
-			public const int AttackerHero2Star = 13;//int
-			public const int AttackerHero3Star = 14;//int
-			public const int BeAttackerHero1 = 15;//string
-			public const int BeAttackerHero2 = 16;//string
-			public const int BeAttackerHero3 = 17;//string
-			public const int BeAttackerHero1Star = 18;//int
-			public const int BeAttackerHero2Star = 19;//int
-			public const int BeAttackerHero3Star = 20;//int
-			public const int Gold = 21;//int
-			public const int Diamond = 22;//int
-			public const int Winner = 23;//object
-			public const int WarStar = 24;//int
-			public const int EventTime = 25;//int
-			public const int CostTime = 26;//int
-			public const int Item1 = 27;//string
-			public const int Item1Count = 28;//int
-			public const int Item2 = 29;//string
-			public const int Item2Count = 30;//int
-			public const int Item3 = 31;//string
-			public const int Item3Count = 32;//int
-			public const int BuildingCount = 33;//int
-			public const int DestroiedBuilding = 34;//int
-			public const int MasterCount = 35;//int
-			public const int KilledMasterCount = 36;//int
-			public const int KilledHero1 = 37;//int
-			public const int KilledHero2 = 38;//int
-			public const int KilledHero3 = 39;//int
-			public const int DeadHero1 = 40;//int
-			public const int DeadHero2 = 41;//int
-			public const int DeadHero3 = 42;//int
-
-		}
 		public class BagEquipList
 		{
 			//Class name
@@ -802,55 +732,6 @@ namespace NFrame
 			public const int Bound = 2;//int
 			public const int ExpiredType = 3;//int
 			public const int Date = 4;//int
-
-		}
-		public class BeAccackList
-		{
-			//Class name
-			public static readonly String ThisName = "BeAccackList";
-			public const int WarID = 0;//object
-			public const int AttackerID = 1;//object
-			public const int BeAttackerID = 2;//object
-			public const int AttackerName = 3;//string
-			public const int BeAttackerName = 4;//string
-			public const int AttackerLevel = 5;//int
-			public const int BeAttackerLevel = 6;//int
-			public const int AttackerCup = 7;//int
-			public const int BeAttackerCup = 8;//int
-			public const int AttackerHero1 = 9;//string
-			public const int AttackerHero2 = 10;//string
-			public const int AttackerHero3 = 11;//string
-			public const int AttackerHero1Star = 12;//int
-			public const int AttackerHero2Star = 13;//int
-			public const int AttackerHero3Star = 14;//int
-			public const int BeAttackerHero1 = 15;//string
-			public const int BeAttackerHero2 = 16;//string
-			public const int BeAttackerHero3 = 17;//string
-			public const int BeAttackerHero1Star = 18;//int
-			public const int BeAttackerHero2Star = 19;//int
-			public const int BeAttackerHero3Star = 20;//int
-			public const int Gold = 21;//int
-			public const int Diamond = 22;//int
-			public const int Winner = 23;//object
-			public const int WarStar = 24;//int
-			public const int EventTime = 25;//int
-			public const int CostTime = 26;//int
-			public const int Item1 = 27;//string
-			public const int Item1Count = 28;//int
-			public const int Item2 = 29;//string
-			public const int Item2Count = 30;//int
-			public const int Item3 = 31;//string
-			public const int Item3Count = 32;//int
-			public const int BuildingCount = 33;//int
-			public const int DestroiedBuilding = 34;//int
-			public const int MasterCount = 35;//int
-			public const int KilledMasterCount = 36;//int
-			public const int KilledHero1 = 37;//int
-			public const int KilledHero2 = 38;//int
-			public const int KilledHero3 = 39;//int
-			public const int DeadHero1 = 40;//int
-			public const int DeadHero2 = 41;//int
-			public const int DeadHero3 = 42;//int
 
 		}
 		public class BuildingList
@@ -1060,6 +941,40 @@ namespace NFrame
 			public const int ItemCount = 1;//int
 
 		}
+		public class WarList
+		{
+			//Class name
+			public static readonly String ThisName = "WarList";
+			public const int WarID = 0;//object
+			public const int AttackerID = 1;//object
+			public const int BeAttackerID = 2;//object
+			public const int AttackerName = 3;//string
+			public const int BeAttackerName = 4;//string
+			public const int AttackerLevel = 5;//int
+			public const int BeAttackerLevel = 6;//int
+			public const int AttackerCup = 7;//int
+			public const int BeAttackerCup = 8;//int
+			public const int AttackerHeroList = 9;//string
+			public const int AttackerHeroStarList = 10;//int
+			public const int BeAttackerHeroList = 11;//string
+			public const int BeAttackerHeroStarList = 12;//int
+			public const int Gold = 13;//int
+			public const int Diamond = 14;//int
+			public const int Winner = 15;//object
+			public const int WarStar = 16;//int
+			public const int EventTime = 17;//int
+			public const int CostTime = 18;//int
+			public const int ItemList = 19;//string
+
+		}
+		public class WarObject
+		{
+			//Class name
+			public static readonly String ThisName = "WarObject";
+			public const int OjectID = 0;//object
+			public const int CreateTime = 1;//int
+
+		}
 
 	}
 	public class Scene
@@ -1131,6 +1046,7 @@ namespace NFrame
 		public static readonly String Port = "Port";// int
 		public static readonly String ServerID = "ServerID";// int
 		public static readonly String Type = "Type";// int
+		public static readonly String WebPort = "WebPort";// int
 		// Record
 
 	}

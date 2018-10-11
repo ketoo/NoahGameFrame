@@ -27,68 +27,68 @@
 		<Property Id="DIZZY_GATE" Cache="0" Desc="眩晕开关" Force="0" Private="1" Public="1" Ref="0" Save="0" Type="int" Upload="0" />
 		<Property Id="Diamond" Cache="1" Desc="钻石" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="int" Upload="0" />
 		<Property Id="EXP" Cache="1" Desc="经验获得,如果是怪物，则是掉落经验" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="int" Upload="0" />
-		<Property Id="FightHero" Cache="1" Desc="Hero" Force="0" Private="1" Public="0" Ref="0" Save="1" Type="object" Upload="0" />
-		<Property Id="FightHeroCnfID" Cache="1" Desc="Hero" Force="0" Private="1" Public="0" Ref="0" Save="1" Type="string" Upload="0" />
-		<Property Id="FightingOpponent" Cache="1" Desc="pvp_oppnent" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="object" Upload="0" />
+		<Property Id="FightHeroCnfID" Cache="1" Desc="FightHeroCnfID" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="string" Upload="0" />
+		<Property Id="FightHeroHP1" Cache="0" Desc="FightHeroHP1" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="int" Upload="0" />
+		<Property Id="FightHeroHP2" Cache="0" Desc="FightHeroHP2" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="int" Upload="0" />
+		<Property Id="FightHeroHP3" Cache="0" Desc="FightHeroHP3" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="int" Upload="0" />
+		<Property Id="FightHeroID" Cache="1" Desc="FightHeroID" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="object" Upload="0" />
+		<Property Id="FightHeroLevel" Cache="0" Desc="FightHeroLevel" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="int" Upload="0" />
+		<Property Id="FightingOpponent" Cache="0" Desc="pvp_oppnent" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="object" Upload="0" />
 		<Property Id="FightingStar" Cache="1" Desc="" Force="0" Private="1" Public="1" Ref="0" Save="0" Type="int" Upload="0" />
 		<Property Id="FirstTarget" Cache="1" Desc="首要目标" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="object" Upload="0" />
 		<Property Id="GMLevel" Cache="1" Desc="GM等级" Force="0" Private="1" Public="1" Ref="0" Save="0" Type="int" Upload="0" />
-		<Property Id="GambleDiamond" Cache="1" Desc="" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="int" Upload="0" />
-		<Property Id="GambleGold" Cache="1" Desc="" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="int" Upload="0" />
-		<Property Id="GameID" Cache="1" Desc="登陆的服ID" Force="0" Private="0" Public="0" Ref="0" Save="0" Type="int" Upload="0" />
-		<Property Id="GateID" Cache="1" Desc="登陆的网关ID" Force="0" Private="0" Public="0" Ref="0" Save="0" Type="int" Upload="0" />
+		<Property Id="GambleDiamond" Cache="0" Desc="" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="int" Upload="0" />
+		<Property Id="GambleGold" Cache="0" Desc="" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="int" Upload="0" />
+		<Property Id="GameID" Cache="0" Desc="登陆的服ID" Force="0" Private="0" Public="0" Ref="0" Save="0" Type="int" Upload="0" />
+		<Property Id="GateID" Cache="0" Desc="登陆的网关ID" Force="0" Private="0" Public="0" Ref="0" Save="0" Type="int" Upload="0" />
 		<Property Id="Gold" Cache="1" Desc="玩家游戏金币" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="int" Upload="0" />
 		<Property Id="GuildID" Cache="1" Desc="公会ID" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="object" Upload="0" />
-		<Property Id="Guild_AD" Cache="0" Desc="工会公告" Force="0" Private="1" Public="1" Ref="0" Save="1" Type="string" Upload="0" />
-		<Property Id="Guild_ContinueDay" Cache="0" Desc="工会霸占排行榜天数" Force="0" Private="1" Public="1" Ref="0" Save="1" Type="int" Upload="0" />
-		<Property Id="Guild_CreateTime" Cache="0" Desc="公会创建时间" Force="0" Private="1" Public="1" Ref="0" Save="1" Type="int" Upload="0" />
-		<Property Id="Guild_Desc" Cache="0" Desc="工会描述" Force="0" Private="1" Public="1" Ref="0" Save="1" Type="string" Upload="0" />
-		<Property Id="Guild_EctypID" Cache="0" Desc="工会副本ID" Force="0" Private="1" Public="0" Ref="0" Save="1" Type="int" Upload="0" />
+		<Property Id="Guild_AD" Cache="0" Desc="工会公告" Force="0" Private="1" Public="1" Ref="0" Save="0" Type="string" Upload="0" />
+		<Property Id="Guild_ContinueDay" Cache="0" Desc="工会霸占排行榜天数" Force="0" Private="1" Public="1" Ref="0" Save="0" Type="int" Upload="0" />
+		<Property Id="Guild_CreateTime" Cache="0" Desc="公会创建时间" Force="0" Private="1" Public="1" Ref="0" Save="0" Type="int" Upload="0" />
+		<Property Id="Guild_Desc" Cache="0" Desc="工会描述" Force="0" Private="1" Public="1" Ref="0" Save="0" Type="string" Upload="0" />
+		<Property Id="Guild_EctypID" Cache="0" Desc="工会副本ID" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="int" Upload="0" />
 		<Property Id="Guild_EctypIDGroup" Cache="0" Desc="工会副本所在的曾" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="int" Upload="0" />
-		<Property Id="Guild_EctypServer" Cache="0" Desc="工会副本所在的服" Force="0" Private="1" Public="0" Ref="0" Save="1" Type="object" Upload="0" />
-		<Property Id="Guild_Exp" Cache="0" Desc="公会经验" Force="0" Private="1" Public="1" Ref="0" Save="1" Type="int" Upload="0" />
-		<Property Id="Guild_Gold" Cache="0" Desc="工会财富" Force="0" Private="1" Public="1" Ref="0" Save="1" Type="int" Upload="0" />
-		<Property Id="Guild_Honor" Cache="0" Desc="公会荣誉" Force="0" Private="1" Public="1" Ref="0" Save="1" Type="int" Upload="0" />
-		<Property Id="Guild_ID" Cache="0" Desc="工会ID" Force="0" Private="1" Public="1" Ref="0" Save="1" Type="object" Upload="0" />
-		<Property Id="Guild_Icon" Cache="0" Desc="公会头像" Force="0" Private="1" Public="1" Ref="0" Save="1" Type="string" Upload="0" />
-		<Property Id="Guild_KingWarResource" Cache="0" Desc="获得的战役资源" Force="0" Private="1" Public="1" Ref="0" Save="1" Type="int" Upload="0" />
-		<Property Id="Guild_Level" Cache="0" Desc="工会等级" Force="0" Private="1" Public="1" Ref="0" Save="1" Type="int" Upload="0" />
-		<Property Id="Guild_MemeberCount" Cache="0" Desc="成员数量(增加个字段，不然遍历Record太麻烦)" Force="0" Private="1" Public="1" Ref="0" Save="1" Type="int" Upload="0" />
-		<Property Id="Guild_MemeberMaxCount" Cache="0" Desc="成员最大数量" Force="0" Private="1" Public="1" Ref="0" Save="1" Type="int" Upload="0" />
-		<Property Id="Guild_Name" Cache="0" Desc="工会名" Force="0" Private="1" Public="1" Ref="0" Save="1" Type="string" Upload="0" />
-		<Property Id="Guild_PresidentID" Cache="0" Desc="会长ID" Force="0" Private="1" Public="1" Ref="0" Save="1" Type="object" Upload="0" />
-		<Property Id="Guild_PresidentName" Cache="0" Desc="会长名" Force="0" Private="1" Public="1" Ref="0" Save="1" Type="string" Upload="0" />
-		<Property Id="Guild_Rank" Cache="0" Desc="公会排名" Force="0" Private="1" Public="1" Ref="0" Save="1" Type="int" Upload="0" />
-		<Property Id="Guild_Status" Cache="0" Desc="公会状态，正常状态，申请解散状态" Force="0" Private="1" Public="1" Ref="0" Save="1" Type="int" Upload="0" />
+		<Property Id="Guild_EctypServer" Cache="0" Desc="工会副本所在的服" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="object" Upload="0" />
+		<Property Id="Guild_Exp" Cache="0" Desc="公会经验" Force="0" Private="1" Public="1" Ref="0" Save="0" Type="int" Upload="0" />
+		<Property Id="Guild_Gold" Cache="0" Desc="工会财富" Force="0" Private="1" Public="1" Ref="0" Save="0" Type="int" Upload="0" />
+		<Property Id="Guild_Honor" Cache="0" Desc="公会荣誉" Force="0" Private="1" Public="1" Ref="0" Save="0" Type="int" Upload="0" />
+		<Property Id="Guild_ID" Cache="0" Desc="工会ID" Force="0" Private="1" Public="1" Ref="0" Save="0" Type="object" Upload="0" />
+		<Property Id="Guild_Icon" Cache="0" Desc="公会头像" Force="0" Private="1" Public="1" Ref="0" Save="0" Type="string" Upload="0" />
+		<Property Id="Guild_KingWarResource" Cache="0" Desc="获得的战役资源" Force="0" Private="1" Public="1" Ref="0" Save="0" Type="int" Upload="0" />
+		<Property Id="Guild_Level" Cache="0" Desc="工会等级" Force="0" Private="1" Public="1" Ref="0" Save="0" Type="int" Upload="0" />
+		<Property Id="Guild_MemeberCount" Cache="0" Desc="成员数量(增加个字段，不然遍历Record太麻烦)" Force="0" Private="1" Public="1" Ref="0" Save="0" Type="int" Upload="0" />
+		<Property Id="Guild_MemeberMaxCount" Cache="0" Desc="成员最大数量" Force="0" Private="1" Public="1" Ref="0" Save="0" Type="int" Upload="0" />
+		<Property Id="Guild_Name" Cache="0" Desc="工会名" Force="0" Private="1" Public="1" Ref="0" Save="0" Type="string" Upload="0" />
+		<Property Id="Guild_PresidentID" Cache="0" Desc="会长ID" Force="0" Private="1" Public="1" Ref="0" Save="0" Type="object" Upload="0" />
+		<Property Id="Guild_PresidentName" Cache="0" Desc="会长名" Force="0" Private="1" Public="1" Ref="0" Save="0" Type="string" Upload="0" />
+		<Property Id="Guild_Rank" Cache="0" Desc="公会排名" Force="0" Private="1" Public="1" Ref="0" Save="0" Type="int" Upload="0" />
+		<Property Id="Guild_Status" Cache="0" Desc="公会状态，正常状态，申请解散状态" Force="0" Private="1" Public="1" Ref="0" Save="0" Type="int" Upload="0" />
 		<Property Id="HP" Cache="1" Desc="生命值" Force="0" Private="1" Public="1" Ref="0" Save="0" Type="int" Upload="0" />
 		<Property Id="HPREGEN" Cache="0" Desc="生命值回复" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="int" Upload="0" />
 		<Property Id="Head" Cache="1" Desc="headicon--guild" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="string" Upload="0" />
-		<Property Id="Hero1BornPos" Cache="1" Desc="Hero1" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="vector3" Upload="0" />
-		<Property Id="Hero1HP" Cache="1" Desc="Hero1" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="int" Upload="0" />
-		<Property Id="Hero2BornPos" Cache="1" Desc="Hero2" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="vector3" Upload="0" />
-		<Property Id="Hero2HP" Cache="1" Desc="Hero2" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="int" Upload="0" />
-		<Property Id="Hero3BornPos" Cache="1" Desc="Hero3" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="vector3" Upload="0" />
-		<Property Id="Hero3HP" Cache="1" Desc="Hero3" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="int" Upload="0" />
+		<Property Id="HeroCnfID1" Cache="1" Desc="Hero1" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="string" Upload="0" />
+		<Property Id="HeroCnfID2" Cache="1" Desc="Hero2" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="string" Upload="0" />
+		<Property Id="HeroCnfID3" Cache="1" Desc="Hero3" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="string" Upload="0" />
 		<Property Id="HeroID1" Cache="1" Desc="Hero1" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="object" Upload="0" />
 		<Property Id="HeroID2" Cache="1" Desc="Hero2" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="object" Upload="0" />
 		<Property Id="HeroID3" Cache="1" Desc="Hero3" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="object" Upload="0" />
-		<Property Id="HeroLevel" Cache="1" Desc="hero等级" Force="0" Private="1" Public="1" Ref="0" Save="0" Type="int" Upload="0" />
-		<Property Id="HeroPos1CnfID" Cache="1" Desc="Hero1" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="string" Upload="0" />
-		<Property Id="HeroPos1Star" Cache="1" Desc="Hero1" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="int" Upload="0" />
-		<Property Id="HeroPos2CnfID" Cache="1" Desc="Hero2" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="string" Upload="0" />
-		<Property Id="HeroPos2Star" Cache="1" Desc="Hero2" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="int" Upload="0" />
-		<Property Id="HeroPos3CnfID" Cache="1" Desc="Hero3" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="string" Upload="0" />
-		<Property Id="HeroPos3Star" Cache="1" Desc="Hero3" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="int" Upload="0" />
+		<Property Id="HeroPos1" Cache="1" Desc="FightHeroHP1" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="vector3" Upload="0" />
+		<Property Id="HeroPos2" Cache="1" Desc="FightHeroHP2" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="vector3" Upload="0" />
+		<Property Id="HeroPos3" Cache="1" Desc="FightHeroHP3" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="vector3" Upload="0" />
+		<Property Id="HeroStar1" Cache="1" Desc="Hero1" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="int" Upload="0" />
+		<Property Id="HeroStar2" Cache="1" Desc="Hero2" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="int" Upload="0" />
+		<Property Id="HeroStar3" Cache="1" Desc="Hero3" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="int" Upload="0" />
 		<Property Id="HomeSceneID" Cache="1" Desc="玩家下线的时候需要保存上次在线的场景" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="int" Upload="0" />
 		<Property Id="Item1" Cache="1" Desc="Skill4" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="string" Upload="0" />
 		<Property Id="Item1Count" Cache="1" Desc="Item1Count" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="int" Upload="0" />
-		<Property Id="Item1UsedCount" Cache="1" Desc="Hero1" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="int" Upload="0" />
+		<Property Id="Item1UsedCount" Cache="0" Desc="Hero1" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="int" Upload="0" />
 		<Property Id="Item2" Cache="1" Desc="Skill5" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="string" Upload="0" />
 		<Property Id="Item2Count" Cache="1" Desc="Item2Count" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="int" Upload="0" />
-		<Property Id="Item2UsedCount" Cache="1" Desc="Hero1" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="int" Upload="0" />
+		<Property Id="Item2UsedCount" Cache="0" Desc="Hero1" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="int" Upload="0" />
 		<Property Id="Item3" Cache="1" Desc="Skill5" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="string" Upload="0" />
 		<Property Id="Item3Count" Cache="1" Desc="Item3Count" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="int" Upload="0" />
-		<Property Id="Item3UsedCount" Cache="1" Desc="Hero1" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="int" Upload="0" />
+		<Property Id="Item3UsedCount" Cache="0" Desc="Hero1" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="int" Upload="0" />
 		<Property Id="Job" Cache="1" Desc="职业" Force="0" Private="1" Public="1" Ref="0" Save="0" Type="int" Upload="0" />
 		<Property Id="LastOfflineTime" Cache="1" Desc="上次下线时间" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="object" Upload="0" />
 		<Property Id="Level" Cache="1" Desc="等级" Force="0" Private="1" Public="1" Ref="0" Save="0" Type="int" Upload="0" />
@@ -104,20 +104,17 @@
 		<Property Id="Name" Cache="1" Desc="角色名" Force="0" Private="1" Public="1" Ref="0" Save="0" Type="string" Upload="0" />
 		<Property Id="OnlineCount" Cache="1" Desc="上线次数" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="int" Upload="0" />
 		<Property Id="OnlineTime" Cache="1" Desc="本次上线时间" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="object" Upload="0" />
-		<Property Id="OpponentCup" Cache="1" Desc="Cup" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="int" Upload="0" />
+		<Property Id="OpponentCup" Cache="0" Desc="Cup" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="int" Upload="0" />
 		<Property Id="OpponentDiamond" Cache="1" Desc="" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="int" Upload="0" />
-		<Property Id="OpponentGold" Cache="1" Desc="" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="int" Upload="0" />
+		<Property Id="OpponentGold" Cache="0" Desc="" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="int" Upload="0" />
 		<Property Id="OpponentHead" Cache="1" Desc="Cup" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="string" Upload="0" />
-		<Property Id="OpponentHero1" Cache="1" Desc="Hero1" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="string" Upload="0" />
-		<Property Id="OpponentHero1BornPos" Cache="1" Desc="Hero1" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="vector3" Upload="0" />
-		<Property Id="OpponentHero1Star" Cache="1" Desc="Hero1" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="int" Upload="0" />
-		<Property Id="OpponentHero2" Cache="1" Desc="Hero2" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="string" Upload="0" />
-		<Property Id="OpponentHero2BornPos" Cache="1" Desc="Hero2" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="vector3" Upload="0" />
-		<Property Id="OpponentHero2Star" Cache="1" Desc="Hero2" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="int" Upload="0" />
-		<Property Id="OpponentHero3" Cache="1" Desc="Hero3" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="string" Upload="0" />
-		<Property Id="OpponentHero3BornPos" Cache="1" Desc="Hero3" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="vector3" Upload="0" />
-		<Property Id="OpponentHero3Star" Cache="1" Desc="Hero3" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="int" Upload="0" />
-		<Property Id="OpponentLevel" Cache="1" Desc="" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="int" Upload="0" />
+		<Property Id="OpponentHero1" Cache="0" Desc="Hero1" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="string" Upload="0" />
+		<Property Id="OpponentHero2" Cache="0" Desc="Hero2" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="string" Upload="0" />
+		<Property Id="OpponentHero3" Cache="0" Desc="Hero3" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="string" Upload="0" />
+		<Property Id="OpponentHeroStar1" Cache="0" Desc="Hero1" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="int" Upload="0" />
+		<Property Id="OpponentHeroStar2" Cache="0" Desc="Hero2" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="int" Upload="0" />
+		<Property Id="OpponentHeroStar3" Cache="0" Desc="Hero3" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="int" Upload="0" />
+		<Property Id="OpponentLevel" Cache="0" Desc="" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="int" Upload="0" />
 		<Property Id="OpponentName" Cache="1" Desc="Cup" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="string" Upload="0" />
 		<Property Id="PHYSICAL_GATE" Cache="0" Desc="物理免疫开关" Force="0" Private="1" Public="1" Ref="0" Save="0" Type="int" Upload="0" />
 		<Property Id="PVPType" Cache="0" Desc="Cup" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="int" Upload="0" />
@@ -139,59 +136,14 @@
 		<Property Id="TotalTime" Cache="1" Desc="在线时间" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="int" Upload="0" />
 		<Property Id="VIPEXP" Cache="1" Desc="VIP经验" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="int" Upload="0" />
 		<Property Id="VIPLevel" Cache="1" Desc="经验获得,如果是怪物，则是掉落经验" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="int" Upload="0" />
-		<Property Id="ViewOpponent" Cache="1" Desc="when searching" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="object" Upload="0" />
-		<Property Id="WarEventTime" Cache="1" Desc="Cup" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="int" Upload="0" />
-		<Property Id="WarID" Cache="1" Desc="Cup" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="object" Upload="0" />
-		<Property Id="WonCup" Cache="1" Desc="" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="int" Upload="0" />
-		<Property Id="WonDiamond" Cache="1" Desc="" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="int" Upload="0" />
-		<Property Id="WonGold" Cache="1" Desc="" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="int" Upload="0" />
+		<Property Id="ViewOpponent" Cache="0" Desc="when searching" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="object" Upload="0" />
+		<Property Id="WarEventTime" Cache="0" Desc="Cup" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="int" Upload="0" />
+		<Property Id="WarID" Cache="0" Desc="Cup" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="object" Upload="0" />
+		<Property Id="WonCup" Cache="0" Desc="" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="int" Upload="0" />
+		<Property Id="WonDiamond" Cache="0" Desc="" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="int" Upload="0" />
+		<Property Id="WonGold" Cache="0" Desc="" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="int" Upload="0" />
 	</Propertys>
 	<Records>
-		<Record Id="AttackList" Cache="1"	 Col="43"	 Force="0"	 Private="1"	 Public="0"	 Ref="0"	 Row="10"	 Save="0"	 Upload="0"	 >
-			<Col Type ="object"	Tag="WarID"/><!--- 0-->
-			<Col Type ="object"	Tag="AttackerID"/><!--- 0-->
-			<Col Type ="object"	Tag="BeAttackerID"/><!--- 0-->
-			<Col Type ="string"	Tag="AttackerName"/><!--- 0-->
-			<Col Type ="string"	Tag="BeAttackerName"/><!--- 0-->
-			<Col Type ="int"	Tag="AttackerLevel"/><!--- 0-->
-			<Col Type ="int"	Tag="BeAttackerLevel"/><!--- 0-->
-			<Col Type ="int"	Tag="AttackerCup"/><!--- 0-->
-			<Col Type ="int"	Tag="BeAttackerCup"/><!--- 0-->
-			<Col Type ="string"	Tag="AttackerHero1"/><!--- 0-->
-			<Col Type ="string"	Tag="AttackerHero2"/><!--- 0-->
-			<Col Type ="string"	Tag="AttackerHero3"/><!--- 0-->
-			<Col Type ="int"	Tag="AttackerHero1Star"/><!--- 0-->
-			<Col Type ="int"	Tag="AttackerHero2Star"/><!--- 0-->
-			<Col Type ="int"	Tag="AttackerHero3Star"/><!--- 0-->
-			<Col Type ="string"	Tag="BeAttackerHero1"/><!--- 0-->
-			<Col Type ="string"	Tag="BeAttackerHero2"/><!--- 0-->
-			<Col Type ="string"	Tag="BeAttackerHero3"/><!--- 0-->
-			<Col Type ="int"	Tag="BeAttackerHero1Star"/><!--- 0-->
-			<Col Type ="int"	Tag="BeAttackerHero2Star"/><!--- 0-->
-			<Col Type ="int"	Tag="BeAttackerHero3Star"/><!--- 0-->
-			<Col Type ="int"	Tag="Gold"/><!--- 0-->
-			<Col Type ="int"	Tag="Diamond"/><!--- 0-->
-			<Col Type ="object"	Tag="Winner"/><!--- 0-->
-			<Col Type ="int"	Tag="WarStar"/><!--- 0-->
-			<Col Type ="int"	Tag="EventTime"/><!--- 0-->
-			<Col Type ="int"	Tag="CostTime"/><!--- 0-->
-			<Col Type ="string"	Tag="Item1"/><!--- 0-->
-			<Col Type ="int"	Tag="Item1Count"/><!--- 0-->
-			<Col Type ="string"	Tag="Item2"/><!--- 0-->
-			<Col Type ="int"	Tag="Item2Count"/><!--- 0-->
-			<Col Type ="string"	Tag="Item3"/><!--- 0-->
-			<Col Type ="int"	Tag="Item3Count"/><!--- 0-->
-			<Col Type ="int"	Tag="BuildingCount"/><!--- 0-->
-			<Col Type ="int"	Tag="DestroiedBuilding"/><!--- 0-->
-			<Col Type ="int"	Tag="MasterCount"/><!--- 0-->
-			<Col Type ="int"	Tag="KilledMasterCount"/><!--- 0-->
-			<Col Type ="int"	Tag="KilledHero1"/><!--- 0-->
-			<Col Type ="int"	Tag="KilledHero2"/><!--- 0-->
-			<Col Type ="int"	Tag="KilledHero3"/><!--- 0-->
-			<Col Type ="int"	Tag="DeadHero1"/><!--- 0-->
-			<Col Type ="int"	Tag="DeadHero2"/><!--- 0-->
-			<Col Type ="int"	Tag="DeadHero3"/><!--- 0-->
-		</Record>
 		<Record Id="BagEquipList" Cache="1"	 Col="23"	 Force="0"	 Private="1"	 Public="0"	 Ref="0"	 Row="256"	 Save="0"	 Upload="0"	 >
 			<Col Type ="object"	Tag="GUID"/><!--- Desc-->
 			<Col Type ="object"	Tag="WearGUID"/><!--- 普通背包-->
@@ -223,51 +175,6 @@
 			<Col Type ="int"	Tag="Bound"/>
 			<Col Type ="int"	Tag="ExpiredType"/>
 			<Col Type ="int"	Tag="Date"/>
-		</Record>
-		<Record Id="BeAccackList" Cache="1"	 Col="43"	 Force="0"	 Private="1"	 Public="0"	 Ref="0"	 Row="10"	 Save="0"	 Upload="0"	 >
-			<Col Type ="object"	Tag="WarID"/><!--- 0-->
-			<Col Type ="object"	Tag="AttackerID"/><!--- 0-->
-			<Col Type ="object"	Tag="BeAttackerID"/><!--- 0-->
-			<Col Type ="string"	Tag="AttackerName"/><!--- 0-->
-			<Col Type ="string"	Tag="BeAttackerName"/><!--- 0-->
-			<Col Type ="int"	Tag="AttackerLevel"/><!--- 0-->
-			<Col Type ="int"	Tag="BeAttackerLevel"/><!--- 0-->
-			<Col Type ="int"	Tag="AttackerCup"/><!--- 0-->
-			<Col Type ="int"	Tag="BeAttackerCup"/><!--- 0-->
-			<Col Type ="string"	Tag="AttackerHero1"/><!--- 0-->
-			<Col Type ="string"	Tag="AttackerHero2"/><!--- 0-->
-			<Col Type ="string"	Tag="AttackerHero3"/><!--- 0-->
-			<Col Type ="int"	Tag="AttackerHero1Star"/><!--- 0-->
-			<Col Type ="int"	Tag="AttackerHero2Star"/><!--- 0-->
-			<Col Type ="int"	Tag="AttackerHero3Star"/><!--- 0-->
-			<Col Type ="string"	Tag="BeAttackerHero1"/><!--- 0-->
-			<Col Type ="string"	Tag="BeAttackerHero2"/><!--- 0-->
-			<Col Type ="string"	Tag="BeAttackerHero3"/><!--- 0-->
-			<Col Type ="int"	Tag="BeAttackerHero1Star"/><!--- 0-->
-			<Col Type ="int"	Tag="BeAttackerHero2Star"/><!--- 0-->
-			<Col Type ="int"	Tag="BeAttackerHero3Star"/><!--- 0-->
-			<Col Type ="int"	Tag="Gold"/><!--- 0-->
-			<Col Type ="int"	Tag="Diamond"/><!--- 0-->
-			<Col Type ="object"	Tag="Winner"/><!--- 0-->
-			<Col Type ="int"	Tag="WarStar"/><!--- 0-->
-			<Col Type ="int"	Tag="EventTime"/><!--- 0-->
-			<Col Type ="int"	Tag="CostTime"/><!--- 0-->
-			<Col Type ="string"	Tag="Item1"/><!--- 0-->
-			<Col Type ="int"	Tag="Item1Count"/><!--- 0-->
-			<Col Type ="string"	Tag="Item2"/><!--- 0-->
-			<Col Type ="int"	Tag="Item2Count"/><!--- 0-->
-			<Col Type ="string"	Tag="Item3"/><!--- 0-->
-			<Col Type ="int"	Tag="Item3Count"/><!--- 0-->
-			<Col Type ="int"	Tag="BuildingCount"/><!--- 0-->
-			<Col Type ="int"	Tag="DestroiedBuilding"/><!--- 0-->
-			<Col Type ="int"	Tag="MasterCount"/><!--- 0-->
-			<Col Type ="int"	Tag="KilledMasterCount"/><!--- 0-->
-			<Col Type ="int"	Tag="KilledHero1"/><!--- 0-->
-			<Col Type ="int"	Tag="KilledHero2"/><!--- 0-->
-			<Col Type ="int"	Tag="KilledHero3"/><!--- 0-->
-			<Col Type ="int"	Tag="DeadHero1"/><!--- 0-->
-			<Col Type ="int"	Tag="DeadHero2"/><!--- 0-->
-			<Col Type ="int"	Tag="DeadHero3"/><!--- 0-->
 		</Record>
 		<Record Id="BuildingList" Cache="1"	 Col="5"	 Force="0"	 Private="1"	 Public="0"	 Ref="0"	 Row="128"	 Save="0"	 Upload="0"	 >
 			<Col Type ="string"	Tag="BuildingCnfID"/><!--- Desc-->
@@ -419,6 +326,32 @@
 		<Record Id="TempItemList" Cache="0"	 Col="2"	 Force="0"	 Private="1"	 Public="0"	 Ref="0"	 Row="8"	 Save="0"	 Upload="0"	 >
 			<Col Type ="string"	Tag="ConfigID"/><!--- Desc-->
 			<Col Type ="int"	Tag="ItemCount"/><!--- 普通背包-->
+		</Record>
+		<Record Id="WarList" Cache="1"	 Col="20"	 Force="0"	 Private="1"	 Public="0"	 Ref="0"	 Row="10"	 Save="1"	 Upload="0"	 >
+			<Col Type ="object"	Tag="WarID"/><!--- 0-->
+			<Col Type ="object"	Tag="AttackerID"/><!--- 0-->
+			<Col Type ="object"	Tag="BeAttackerID"/><!--- 0-->
+			<Col Type ="string"	Tag="AttackerName"/><!--- 0-->
+			<Col Type ="string"	Tag="BeAttackerName"/><!--- 0-->
+			<Col Type ="int"	Tag="AttackerLevel"/><!--- 0-->
+			<Col Type ="int"	Tag="BeAttackerLevel"/><!--- 0-->
+			<Col Type ="int"	Tag="AttackerCup"/><!--- 0-->
+			<Col Type ="int"	Tag="BeAttackerCup"/><!--- 0-->
+			<Col Type ="string"	Tag="AttackerHeroList"/><!--- 0-->
+			<Col Type ="int"	Tag="AttackerHeroStarList"/><!--- 0-->
+			<Col Type ="string"	Tag="BeAttackerHeroList"/><!--- 0-->
+			<Col Type ="int"	Tag="BeAttackerHeroStarList"/><!--- 0-->
+			<Col Type ="int"	Tag="Gold"/><!--- 0-->
+			<Col Type ="int"	Tag="Diamond"/><!--- 0-->
+			<Col Type ="object"	Tag="Winner"/><!--- 0-->
+			<Col Type ="int"	Tag="WarStar"/><!--- 0-->
+			<Col Type ="int"	Tag="EventTime"/><!--- 0-->
+			<Col Type ="int"	Tag="CostTime"/><!--- 0-->
+			<Col Type ="string"	Tag="ItemList"/><!--- 0-->
+		</Record>
+		<Record Id="WarObject" Cache="0"	 Col="2"	 Force="0"	 Private="1"	 Public="0"	 Ref="0"	 Row="100"	 Save="0"	 Upload="0"	 >
+			<Col Type ="object"	Tag="OjectID"/><!--- 0-->
+			<Col Type ="int"	Tag="CreateTime"/><!--- 0-->
 		</Record>
 	</Records>
 </XML>

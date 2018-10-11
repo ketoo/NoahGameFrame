@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="dllmain.cpp" />
+    <ClCompile Include="NFCLuaScriptModule.cpp" />
+    <ClCompile Include="NFLuaScriptPlugin.cpp" />
+    <ClCompile Include="NFCLuaPBModule.cpp" />
+    <ClCompile Include="NFCLuaHttpModule.cpp" />
+    <ClCompile Include="NFCLuaWebSocketModule.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="NFCLuaScriptModule.h" />
+    <ClInclude Include="NFLuaScriptPlugin.h" />
+    <ClInclude Include="NFCLuaPBModule.h" />
+    <ClInclude Include="NFCLuaHttpModule.h" />
+    <ClInclude Include="NFCLuaWebSocketModule.h" />
+  </ItemGroup>
+</Project>

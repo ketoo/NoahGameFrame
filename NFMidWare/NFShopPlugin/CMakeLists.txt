@@ -9,7 +9,7 @@ remove_file(NFShopPlugin_ROOT_Cpp "NFCSLGBuildingModule.cpp")
 remove_file(NFShopPlugin_ROOT_Hpp "NFCSLGBuildingModule.h")
 
 
-add_library(NFShopPlugin SHARED
+add_library(NFShopPlugin STATIC
 	${NFShopPlugin_ROOT_Cpp}
 	${NFShopPlugin_ROOT_Hpp})
 	
@@ -23,12 +23,17 @@ set_target_properties( NFShopPlugin PROPERTIES
 link_NFSDK("NFShopPlugin")
 
 if(UNIX)
+
+	target_link_libraries(NFShopPlugin -static-libstdc++)
+
 	add_definitions(
 		-D_USRDLL
 		-DELPP_NO_DEFAULT_LOG_FILE
 	)
 	
 else()
+	target_link_libraries(NFShopPlugin -static-libstdc++)
+
 	add_definitions(
 		-DWIN
 		-D_USRDLL
