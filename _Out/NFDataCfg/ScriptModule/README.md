@@ -18,7 +18,7 @@ Create a Lua Script File, and Must Contain following functions
 - shut()
 
 Mostly like this
-# [test_module.lua](https://github.com/ketoo/NoahGameFrame/tree/develop/_Out/Server/NFDataCfg/ScriptModule/test_module.lua)
+# [test_module.lua](https://github.com/ketoo/NoahGameFrame/tree/develop/_Out/Server/NFDataCfg/ScriptModule/game/test_game_module.lua)
 
 ```lua
 test_module = {}
