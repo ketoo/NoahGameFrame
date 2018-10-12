@@ -18,7 +18,7 @@ Create a Lua Script File, and Must Contain following functions
 - shut()
 
 Mostly like this
-# [test_module.lua](https://github.com/ketoo/NoahGameFrame/tree/develop/_Out/Server/NFDataCfg/ScriptModule/game/test_game_module.lua)
+# [test_module.lua](https://github.com/ketoo/NoahGameFrame/blob/master/_Out/NFDataCfg/ScriptModule/game/test_game_module.lua)
 
 ```lua
 test_module = {}
@@ -49,7 +49,7 @@ end
 return TestModule2 --Do not forget return this
 ```
 ##Step 2
-Add your LuaScriptModule Infomation into [script_list.lua](https://github.com/ketoo/NoahGameFrame/tree/develop/_Out/Server/NFDataCfg/ScriptModule/script_list.lua)
+Add your LuaScriptModule Infomation into [script_list.lua](https://github.com/ketoo/NoahGameFrame/blob/master/_Out/NFDataCfg/ScriptModule/game/script_list.lua)
 
 ```lua
 ScriptList={
@@ -62,7 +62,7 @@ load_script_file(ScriptList)
 
 
 ##How to do hot fix?
-Add your lua script file name on here [script_reload.lua](https://github.com/ketoo/NoahGameFrame/tree/develop/_Out/Server/NFDataCfg/ScriptModule/script_reload.lua)
+Add your lua script file name on here [script_reload.lua](https://github.com/ketoo/NoahGameFrame/blob/master/_Out/NFDataCfg/ScriptModule/game/script_reload.lua)
 
 ```lua
 local version_code = "1.0.1"
