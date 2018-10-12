@@ -347,8 +347,14 @@ EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libevent_core", "Dependencies\libevent\libevent_core.vcxproj", "{9FECEE4C-7F7C-4715-A5FE-20951ACE69DD}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Tutorial6", "Tutorial\Tutorial6\Tutorial6.vcxproj", "{C21FBABD-FF91-4FF1-855B-BB7783AE6237}"
+	ProjectSection(ProjectDependencies) = postProject
+		{B9833FE8-8C0B-40D6-BA01-3CDADEB21166} = {B9833FE8-8C0B-40D6-BA01-3CDADEB21166}
+	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "NFScalePlugin", "NFComm\NFScalePlugin\NFScalePlugin.vcxproj", "{5B999220-7D01-48C4-8892-C601E3B91847}"
+	ProjectSection(ProjectDependencies) = postProject
+		{3D9DB426-BA46-450B-BBAC-DABB6B6D69DE} = {3D9DB426-BA46-450B-BBAC-DABB6B6D69DE}
+	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "NFTester", "NFTester", "{799B1E29-07FC-4D54-96D3-EDBB4C40CF21}"
 EndProject
@@ -359,28 +365,45 @@ EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "NFLuaScriptPlugin", "NFComm\NFLuaScriptPlugin\NFLuaScriptPlugin.vcxproj", "{0D7E27F4-11C2-4F1D-8900-CC24297E4397}"
 	ProjectSection(ProjectDependencies) = postProject
 		{98ACA029-C914-474E-80A8-7FF3080343E4} = {98ACA029-C914-474E-80A8-7FF3080343E4}
+		{3E283F37-A4ED-41B7-A3E6-A2D89D131A30} = {3E283F37-A4ED-41B7-A3E6-A2D89D131A30}
 	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "lua", "Dependencies\lua\lua.vcxproj", "{98ACA029-C914-474E-80A8-7FF3080343E4}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Tutorial7", "Tutorial\Tutorial7\Tutorial7.vcxproj", "{52715C7E-7383-4998-8978-82AA8F84917C}"
+	ProjectSection(ProjectDependencies) = postProject
+		{B9833FE8-8C0B-40D6-BA01-3CDADEB21166} = {B9833FE8-8C0B-40D6-BA01-3CDADEB21166}
+	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "gtest", "Dependencies\googletest-release-1.8.0\googletest\msvc\gtest.vcxproj", "{C8F6C172-56F2-4E76-B5FA-C3B423B31BE7}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "NFTestPlugin", "NFComm\NFTestPlugin\NFTestPlugin.vcxproj", "{FD3CA971-9E8F-4A9F-8232-156F2D51BF2D}"
 	ProjectSection(ProjectDependencies) = postProject
+		{3D9DB426-BA46-450B-BBAC-DABB6B6D69DE} = {3D9DB426-BA46-450B-BBAC-DABB6B6D69DE}
 		{C8F6C172-56F2-4E76-B5FA-C3B423B31BE7} = {C8F6C172-56F2-4E76-B5FA-C3B423B31BE7}
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DBServer", "DBServer", "{A44988B7-63AD-4A21-8C91-4DC7BD6D964E}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "NFDBNet_ClientPlugin", "NFServer\NFDBNet_ClientPlugin\NFDBNet_ClientPlugin.vcxproj", "{039AF02F-5001-487A-A73C-099715A348A2}"
+	ProjectSection(ProjectDependencies) = postProject
+		{3D9DB426-BA46-450B-BBAC-DABB6B6D69DE} = {3D9DB426-BA46-450B-BBAC-DABB6B6D69DE}
+	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "NFDBNet_ServerPlugin", "NFServer\NFDBNet_ServerPlugin\NFDBNet_ServerPlugin.vcxproj", "{85A3C1E6-7E40-4725-83FD-10EDD9E2BAA1}"
+	ProjectSection(ProjectDependencies) = postProject
+		{3D9DB426-BA46-450B-BBAC-DABB6B6D69DE} = {3D9DB426-BA46-450B-BBAC-DABB6B6D69DE}
+	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "NFDBLogicPlugin", "NFServer\NFDBLogicPlugin\NFDBLogicPlugin.vcxproj", "{B7132059-C4A0-472A-9D58-BEB40B9528DB}"
+	ProjectSection(ProjectDependencies) = postProject
+		{3D9DB426-BA46-450B-BBAC-DABB6B6D69DE} = {3D9DB426-BA46-450B-BBAC-DABB6B6D69DE}
+	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "NFLoginNet_HttpServerPlugin", "NFServer\NFLoginNet_HttpServerPlugin\NFLoginNet_HttpServerPlugin.vcxproj", "{5EBB5D6A-5C7B-4A18-8F60-4094173771BD}"
+	ProjectSection(ProjectDependencies) = postProject
+		{3D9DB426-BA46-450B-BBAC-DABB6B6D69DE} = {3D9DB426-BA46-450B-BBAC-DABB6B6D69DE}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
