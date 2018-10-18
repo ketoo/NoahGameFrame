@@ -267,7 +267,6 @@ end
 function test_module.shut()
 end
 
-return TestModule2 --Do not forget return this
 ```
 
 ##Step 2
