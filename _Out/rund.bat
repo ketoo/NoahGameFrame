@@ -1,3 +1,4 @@
+cd /d %~dp0
 cd Debug
 
 echo Starting NFMasterServer...
