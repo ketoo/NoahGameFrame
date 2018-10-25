@@ -257,12 +257,13 @@ bool NFCHeroModule::SetFightHero(const NFGUID& self, const NFGUID& xHeroID, cons
 	{
 	case EConsHero_Pos::ECONSt_HERO_POS1:
 	{
-		const int nHP = m_pElementModule->GetPropertyInt(strCnfID, NFrame::NPC::HP());
+		const std::string& strEffectData = m_pElementModule->GetPropertyString(strCnfID, NFrame::NPC::EffectData());
+		const int nMAXHP = m_pElementModule->GetPropertyInt(strEffectData, NFrame::NPC::MAXHP());
 
 		m_pKernelModule->SetPropertyObject(self, NFrame::Player::HeroID1(), xHeroID);
 		m_pKernelModule->SetPropertyString(self, NFrame::Player::HeroCnfID1(), strCnfID);
 		m_pKernelModule->SetPropertyInt(self, NFrame::Player::HeroStar1(), nStar);
-		m_pKernelModule->SetPropertyInt(self, NFrame::Player::FightHeroHP1(), nHP);
+		m_pKernelModule->SetPropertyInt(self, NFrame::Player::FightHeroHP1(), nMAXHP);
 		//now the fighting hero is hero 2, we would change the fighting hero as a new one because the pos2 has been placed
 		if (xFightHero == xHero1
 			|| xFightHero.IsNull())
@@ -274,12 +275,13 @@ bool NFCHeroModule::SetFightHero(const NFGUID& self, const NFGUID& xHeroID, cons
 
 	case EConsHero_Pos::ECONSt_HERO_POS2:
 	{
-		const int nHP = m_pElementModule->GetPropertyInt(strCnfID, NFrame::NPC::HP());
+		const std::string& strEffectData = m_pElementModule->GetPropertyString(strCnfID, NFrame::NPC::EffectData());
+		const int nMAXHP = m_pElementModule->GetPropertyInt(strEffectData, NFrame::NPC::MAXHP());
 
 		m_pKernelModule->SetPropertyObject(self, NFrame::Player::HeroID2(), xHeroID);
 		m_pKernelModule->SetPropertyString(self, NFrame::Player::HeroCnfID2(), strCnfID);
 		m_pKernelModule->SetPropertyInt(self, NFrame::Player::HeroStar2(), nStar);
-		m_pKernelModule->SetPropertyInt(self, NFrame::Player::FightHeroHP2(), nHP);
+		m_pKernelModule->SetPropertyInt(self, NFrame::Player::FightHeroHP2(), nMAXHP);
 		//now the fighting hero is hero 2, we would change the fighting hero as a new one because the pos2 has been placed
 		if (xFightHero == xHero2
 			|| xFightHero.IsNull())
@@ -291,12 +293,13 @@ bool NFCHeroModule::SetFightHero(const NFGUID& self, const NFGUID& xHeroID, cons
 
 	case EConsHero_Pos::ECONSt_HERO_POS3:
 	{
-		const int nHP = m_pElementModule->GetPropertyInt(strCnfID, NFrame::NPC::HP());
+		const std::string& strEffectData = m_pElementModule->GetPropertyString(strCnfID, NFrame::NPC::EffectData());
+		const int nMAXHP = m_pElementModule->GetPropertyInt(strEffectData, NFrame::NPC::MAXHP());
 
 		m_pKernelModule->SetPropertyObject(self, NFrame::Player::HeroID3(), xHeroID);
 		m_pKernelModule->SetPropertyString(self, NFrame::Player::HeroCnfID3(), strCnfID);
 		m_pKernelModule->SetPropertyInt(self, NFrame::Player::HeroStar3(), nStar);
-		m_pKernelModule->SetPropertyInt(self, NFrame::Player::FightHeroHP3(), nHP);
+		m_pKernelModule->SetPropertyInt(self, NFrame::Player::FightHeroHP3(), nMAXHP);
 		//now the fighting hero is hero 2, we would change the fighting hero as a new one because the pos2 has been placed
 		if (xFightHero == xHero3
 			|| xFightHero.IsNull())

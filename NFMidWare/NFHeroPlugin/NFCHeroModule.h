@@ -61,7 +61,11 @@ public:
 	virtual NFGUID AddHero(const NFGUID& self, const std::string& strID);
 	virtual bool AddHeroExp(const NFGUID& self, const int64_t nExp);
 	virtual bool AddHeroExp(const NFGUID& self, const NFGUID& xHeroID, const int64_t nExp);
+
+	//setting the hero who you want him stay in fighting list
 	virtual bool SetFightHero(const NFGUID& self, const NFGUID& xHeroID, const EConsHero_Pos nPos);
+
+	//the hero who you want him fight for you right now
 	virtual bool SwitchFightHero(const NFGUID& self, const NFGUID& xHeroID);
 
 	virtual NFGUID GetHeroGUID(const NFGUID& self, const std::string& strID);
