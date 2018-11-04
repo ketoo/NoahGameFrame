@@ -123,10 +123,13 @@ bool NFCActorModule::ExecuteEvent()
 			NF_SHARE_PTR<NFIActor> xActor = mxActorMap.GetElement(xMsg.nFormActor);
 			if (xActor)
 			{
-				int nActorID = xActor->GetAddress().AsInteger();
-				if (mxActorPool.find(nActorID) == mxActorPool.end())
+				if (xActor->GetNumQueuedMessages() <= 0)
 				{
-					mxActorPool.insert(std::pair<int, int>(nActorID, 0));
+					int nActorID = xActor->GetAddress().AsInteger();
+					if (mxActorPool.find(nActorID) == mxActorPool.end())
+					{
+						mxActorPool.insert(std::pair<int, int>(nActorID, 0));
+					}
 				}
 			}
 		}
@@ -144,7 +147,7 @@ bool NFCActorModule::SendMsgToActor(const int nActorIndex, const int nEventID, c
     {
         NFIActorMessage xMessage;
 
-		xMessage.msgType = NFIActorMessage::ACTOR_MSG_TYPE_COMPONENT;
+        xMessage.msgType = NFIActorMessage::ACTOR_MSG_TYPE_COMPONENT;
         xMessage.data = strArg;
         xMessage.nMsgID = nEventID;
         xMessage.nFormActor = m_pMainActor->GetAddress().AsInteger();
