@@ -51,7 +51,16 @@ public:
 
 	virtual bool Init()
 	{
+		AddMsgObserver(0, this, &NFHttpComponent::OnMsgEvent);
+		AddMsgObserver(1, this, &NFHttpComponent::OnMsgEvent);
 		AddMsgObserver(2, this, &NFHttpComponent::OnMsgEvent);
+		AddMsgObserver(3, this, &NFHttpComponent::OnMsgEvent);
+		AddMsgObserver(4, this, &NFHttpComponent::OnMsgEvent);
+		AddMsgObserver(5, this, &NFHttpComponent::OnMsgEvent);
+		AddMsgObserver(6, this, &NFHttpComponent::OnMsgEvent);
+		AddMsgObserver(7, this, &NFHttpComponent::OnMsgEvent);
+		AddMsgObserver(8, this, &NFHttpComponent::OnMsgEvent);
+		AddMsgObserver(9, this, &NFHttpComponent::OnMsgEvent);
 
 		return true;
 	}

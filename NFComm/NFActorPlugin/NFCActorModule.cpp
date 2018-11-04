@@ -75,7 +75,7 @@ bool NFCActorModule::Execute()
 int NFCActorModule::RequireActor()
 {
 	NF_SHARE_PTR<NFIActor> pActor = nullptr;
-	if (mxActorPool.Empty())
+	if (mxActorPool.size() <= 0)
 	{
 		pActor = NF_SHARE_PTR<NFIActor>(NF_NEW NFCActor(mFramework, this));
 		mxActorMap.AddElement(pActor->GetAddress().AsInteger(), pActor);
@@ -83,12 +83,11 @@ int NFCActorModule::RequireActor()
 		return pActor->GetAddress().AsInteger();
 	}
 
-	if (mxActorPool.Pop(pActor) && pActor)
-	{
-		return pActor->GetAddress().AsInteger();
-	}
+	std::map<int, int>::iterator it = mxActorPool.begin();
+	int nActorID = it->first;
+	mxActorPool.erase(it);
 
-    return -1;
+    return nActorID;
 }
 
 NF_SHARE_PTR<NFIActor> NFCActorModule::GetActor(const int nActorIndex)
@@ -124,8 +123,11 @@ bool NFCActorModule::ExecuteEvent()
 			NF_SHARE_PTR<NFIActor> xActor = mxActorMap.GetElement(xMsg.nFormActor);
 			if (xActor)
 			{
-				//mxActorMap.RemoveElement(xMsg.nFormActor);
-				mxActorPool.Push(xActor);
+				int nActorID = xActor->GetAddress().AsInteger();
+				if (mxActorPool.find(nActorID) == mxActorPool.end())
+				{
+					mxActorPool.insert(std::pair<int, int>(nActorID, 0));
+				}
 			}
 		}
 
