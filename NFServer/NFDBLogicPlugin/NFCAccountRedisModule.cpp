@@ -53,6 +53,11 @@ bool NFCAccountRedisModule::AfterInit()
 
 bool NFCAccountRedisModule::VerifyAccount(const std::string& strAccount, const std::string& strPwd)
 {
+	if (strAccount.empty() || strPwd.empty())
+	{
+		return false;
+	}
+
 	std::string strAccountKey = m_pCommonRedisModule->GetAccountCacheKey(strAccount);
 	NF_SHARE_PTR<NFIRedisClient> xNoSqlDriver = m_pNoSqlModule->GetDriverBySuit(strAccount);
 	if (xNoSqlDriver)

@@ -103,7 +103,7 @@ void NFCActor::Handler(const NFIActorMessage& message, const Theron::Address fro
 	}
  
     ////////////////////////////////////////////////////////
-	// must return message 
+	// it should return a message to the main thread
     NFIActorMessage xReturnMessage;
 
 	xReturnMessage.msgType = NFIActorMessage::ACTOR_MSG_TYPE_END_FUNC;

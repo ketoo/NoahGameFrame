@@ -485,13 +485,12 @@ bool NFCHeroPropertyModule::CalHeroEquipProperty(const NFGUID& self, const NFGUI
 
 bool NFCHeroPropertyModule::CalFightintHeroProperty(const NFGUID & self)
 {
-	/*
 	NF_SHARE_PTR<NFIRecord> pHeroRecord = m_pKernelModule->FindRecord(self, NFrame::Player::PlayerHero::ThisName());
 	if (nullptr == pHeroRecord)
 	{
 		return false;
 	}
-	NFGUID xHeroGUID = m_pKernelModule->GetPropertyObject(self, NFrame::Player::FightHero());
+	NFGUID xHeroGUID = m_pKernelModule->GetPropertyObject(self, NFrame::Player::FightHeroID());
 	if (xHeroGUID.IsNull())
 	{
 		return false;
@@ -517,7 +516,6 @@ bool NFCHeroPropertyModule::CalFightintHeroProperty(const NFGUID & self)
 
 		m_pPropertyModule->SetPropertyValue(self, strColTag, NFIPropertyModule::NPG_FIGHTING_HERO, nValue);
 	}
-	*/
 
 	return true;
 }
