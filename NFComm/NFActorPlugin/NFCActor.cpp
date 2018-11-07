@@ -73,19 +73,19 @@ bool NFCActor::AddBeginFunc(const int nSubMsgID, ACTOR_PROCESS_FUNCTOR_PTR xBegi
 
 bool NFCActor::AddEndFunc(const int nSubMsgID, ACTOR_PROCESS_FUNCTOR_PTR xEndFunctor)
 {
-	if (mxProcessFuntor.GetElement(nSubMsgID))
+	if (mxEndProcessFuntor.GetElement(nSubMsgID))
 	{
 		return false;
 	}
 
-	if (nSubMsgID >= 0)
-	{
-		mxProcessFuntor.AddElement(nSubMsgID, xEndFunctor);
-	}
-	else
-	{
-		mxDefaultEndProcessFuntor = xEndFunctor;
-	}
+	mxEndProcessFuntor.AddElement(nSubMsgID, xEndFunctor);
+	
+	return true;
+}
+
+bool NFCActor::AddDefaultEndFunc(ACTOR_PROCESS_FUNCTOR_PTR xEndFunctor)
+{
+	mxDefaultEndProcessFuntor = xEndFunctor;
 
 	return true;
 }
