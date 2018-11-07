@@ -49,6 +49,7 @@ public:
 
 	virtual bool AddBeginFunc(const int nSubMsgID, ACTOR_PROCESS_FUNCTOR_PTR xBeginFunctor);
 	virtual bool AddEndFunc(const int nSubMsgID, ACTOR_PROCESS_FUNCTOR_PTR xEndFunctor);
+	virtual bool AddDefaultEndFunc(ACTOR_PROCESS_FUNCTOR_PTR xEndFunctor);
 
     virtual bool SendMsg(const Theron::Address address, const NFIActorMessage& message);
 

@@ -176,6 +176,17 @@ bool NFCActorModule::ReleaseActor(const int nActorIndex)
 	return mxActorMap.RemoveElement(nActorIndex);
 }
 
+bool NFCActorModule::AddDefaultEndFunc(const int nActorIndex, ACTOR_PROCESS_FUNCTOR_PTR functorPtr_end)
+{
+	NF_SHARE_PTR<NFIActor> pActor = GetActor(nActorIndex);
+	if (nullptr != pActor)
+	{
+		return pActor->AddDefaultEndFunc(functorPtr_end);
+	}
+
+	return false;
+}
+
 bool NFCActorModule::AddEndFunc(const int nActorIndex, const int nSubMsgID, ACTOR_PROCESS_FUNCTOR_PTR functorPtr)
 {
     NF_SHARE_PTR<NFIActor> pActor = GetActor(nActorIndex);
