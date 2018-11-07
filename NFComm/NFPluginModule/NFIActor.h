@@ -101,7 +101,8 @@ public:
 	
 	virtual bool AddBeginFunc(const int nSubMsgID, ACTOR_PROCESS_FUNCTOR_PTR xBeginFunctor) = 0;
 	virtual bool AddEndFunc(const int nSubMsgID, ACTOR_PROCESS_FUNCTOR_PTR xEndFunctor) = 0;
-    
+	virtual bool AddDefaultEndFunc(ACTOR_PROCESS_FUNCTOR_PTR xEndFunctor) = 0;
+
 	virtual bool SendMsg(const Theron::Address address, const NFIActorMessage& message) = 0;
 
 protected:
