@@ -47,11 +47,11 @@ https://github.com/ketoo/NoahGameFrame/wiki/Documentation
 ## Architecture
 
 ### App Architecture:
-![App Architecture](https://github.com/ketoo/NoahGameFrame/blob/develop/Introduce/img/NF_app_arch.png)
+![App Architecture](https://github.com/ketoo/NoahGameFrame/blob/master/Introduce/img/NF_app_arch.png)
 
 
 ### Server Architecture
-![Server Architecture](https://github.com/ketoo/NoahGameFrame/blob/develop/Introduce/img/NF_server_arch.png)
+![Server Architecture](https://github.com/ketoo/NoahGameFrame/blob/master/Introduce/img/NF_server_arch.png)
 
 
 
