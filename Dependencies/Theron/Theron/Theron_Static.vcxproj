@@ -1,0 +1,195 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Actor.cpp" />
+    <ClCompile Include="Address.cpp" />
+    <ClCompile Include="AllocatorManager.cpp" />
+    <ClCompile Include="BuildDescriptor.cpp" />
+    <ClCompile Include="Clock.cpp" />
+    <ClCompile Include="DefaultHandlerCollection.cpp" />
+    <ClCompile Include="EndPoint.cpp" />
+    <ClCompile Include="FallbackHandlerCollection.cpp" />
+    <ClCompile Include="Framework.cpp" />
+    <ClCompile Include="HandlerCollection.cpp" />
+    <ClCompile Include="Receiver.cpp" />
+    <ClCompile Include="StringPool.cpp" />
+    <ClCompile Include="YieldPolicy.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\Include\Theron\Actor.h" />
+    <ClInclude Include="..\Include\Theron\Address.h" />
+    <ClInclude Include="..\Include\Theron\Align.h" />
+    <ClInclude Include="..\Include\Theron\AllocatorManager.h" />
+    <ClInclude Include="..\Include\Theron\Assert.h" />
+    <ClInclude Include="..\Include\Theron\BasicTypes.h" />
+    <ClInclude Include="..\Include\Theron\Catcher.h" />
+    <ClInclude Include="..\Include\Theron\DefaultAllocator.h" />
+    <ClInclude Include="..\Include\Theron\Defines.h" />
+    <ClInclude Include="..\Include\Theron\Detail\Alignment\MessageAlignment.h" />
+    <ClInclude Include="..\Include\Theron\Detail\Allocators\CachingAllocator.h" />
+    <ClInclude Include="..\Include\Theron\Detail\Allocators\Pool.h" />
+    <ClInclude Include="..\Include\Theron\Detail\Containers\List.h" />
+    <ClInclude Include="..\Include\Theron\Detail\Containers\Map.h" />
+    <ClInclude Include="..\Include\Theron\Detail\Containers\Queue.h" />
+    <ClInclude Include="..\Include\Theron\Detail\Debug\BuildDescriptor.h" />
+    <ClInclude Include="..\Include\Theron\Detail\Directory\Directory.h" />
+    <ClInclude Include="..\Include\Theron\Detail\Directory\Entry.h" />
+    <ClInclude Include="..\Include\Theron\Detail\Directory\StaticDirectory.h" />
+    <ClInclude Include="..\Include\Theron\Detail\Handlers\BlindDefaultHandler.h" />
+    <ClInclude Include="..\Include\Theron\Detail\Handlers\BlindFallbackHandler.h" />
+    <ClInclude Include="..\Include\Theron\Detail\Handlers\DefaultFallbackHandler.h" />
+    <ClInclude Include="..\Include\Theron\Detail\Handlers\DefaultHandler.h" />
+    <ClInclude Include="..\Include\Theron\Detail\Handlers\DefaultHandlerCollection.h" />
+    <ClInclude Include="..\Include\Theron\Detail\Handlers\FallbackHandler.h" />
+    <ClInclude Include="..\Include\Theron\Detail\Handlers\FallbackHandlerCollection.h" />
+    <ClInclude Include="..\Include\Theron\Detail\Handlers\HandlerCollection.h" />
+    <ClInclude Include="..\Include\Theron\Detail\Handlers\IDefaultHandler.h" />
+    <ClInclude Include="..\Include\Theron\Detail\Handlers\IFallbackHandler.h" />
+    <ClInclude Include="..\Include\Theron\Detail\Handlers\IMessageHandler.h" />
+    <ClInclude Include="..\Include\Theron\Detail\Handlers\IReceiverHandler.h" />
+    <ClInclude Include="..\Include\Theron\Detail\Handlers\MessageHandler.h" />
+    <ClInclude Include="..\Include\Theron\Detail\Handlers\MessageHandlerCast.h" />
+    <ClInclude Include="..\Include\Theron\Detail\Handlers\ReceiverHandler.h" />
+    <ClInclude Include="..\Include\Theron\Detail\Handlers\ReceiverHandlerCast.h" />
+    <ClInclude Include="..\Include\Theron\Detail\Mailboxes\Mailbox.h" />
+    <ClInclude Include="..\Include\Theron\Detail\Messages\IMessage.h" />
+    <ClInclude Include="..\Include\Theron\Detail\Messages\Message.h" />
+    <ClInclude Include="..\Include\Theron\Detail\Messages\MessageCast.h" />
+    <ClInclude Include="..\Include\Theron\Detail\Messages\MessageCreator.h" />
+    <ClInclude Include="..\Include\Theron\Detail\Messages\MessageSize.h" />
+    <ClInclude Include="..\Include\Theron\Detail\Messages\MessageTraits.h" />
+    <ClInclude Include="..\Include\Theron\Detail\Network\Index.h" />
+    <ClInclude Include="..\Include\Theron\Detail\Network\MessageFactory.h" />
+    <ClInclude Include="..\Include\Theron\Detail\Network\NameGenerator.h" />
+    <ClInclude Include="..\Include\Theron\Detail\Network\NameMap.h" />
+    <ClInclude Include="..\Include\Theron\Detail\Network\NetworkMessage.h" />
+    <ClInclude Include="..\Include\Theron\Detail\Scheduler\BlockingMonitor.h" />
+    <ClInclude Include="..\Include\Theron\Detail\Scheduler\Counting.h" />
+    <ClInclude Include="..\Include\Theron\Detail\Scheduler\IScheduler.h" />
+    <ClInclude Include="..\Include\Theron\Detail\Scheduler\MailboxContext.h" />
+    <ClInclude Include="..\Include\Theron\Detail\Scheduler\MailboxProcessor.h" />
+    <ClInclude Include="..\Include\Theron\Detail\Scheduler\MailboxQueue.h" />
+    <ClInclude Include="..\Include\Theron\Detail\Scheduler\NonBlockingMonitor.h" />
+    <ClInclude Include="..\Include\Theron\Detail\Scheduler\Scheduler.h" />
+    <ClInclude Include="..\Include\Theron\Detail\Scheduler\SchedulerHints.h" />
+    <ClInclude Include="..\Include\Theron\Detail\Scheduler\ThreadPool.h" />
+    <ClInclude Include="..\Include\Theron\Detail\Scheduler\WorkerContext.h" />
+    <ClInclude Include="..\Include\Theron\Detail\Scheduler\YieldImplementation.h" />
+    <ClInclude Include="..\Include\Theron\Detail\Scheduler\YieldPolicy.h" />
+    <ClInclude Include="..\Include\Theron\Detail\Strings\String.h" />
+    <ClInclude Include="..\Include\Theron\Detail\Strings\StringHash.h" />
+    <ClInclude Include="..\Include\Theron\Detail\Strings\StringPool.h" />
+    <ClInclude Include="..\Include\Theron\Detail\Threading\Atomic.h" />
+    <ClInclude Include="..\Include\Theron\Detail\Threading\Clock.h" />
+    <ClInclude Include="..\Include\Theron\Detail\Threading\Condition.h" />
+    <ClInclude Include="..\Include\Theron\Detail\Threading\Lock.h" />
+    <ClInclude Include="..\Include\Theron\Detail\Threading\Mutex.h" />
+    <ClInclude Include="..\Include\Theron\Detail\Threading\SpinLock.h" />
+    <ClInclude Include="..\Include\Theron\Detail\Threading\Thread.h" />
+    <ClInclude Include="..\Include\Theron\Detail\Threading\Utils.h" />
+    <ClInclude Include="..\Include\Theron\Detail\Transport\Context.h" />
+    <ClInclude Include="..\Include\Theron\Detail\Transport\InputMessage.h" />
+    <ClInclude Include="..\Include\Theron\Detail\Transport\InputSocket.h" />
+    <ClInclude Include="..\Include\Theron\Detail\Transport\OutputMessage.h" />
+    <ClInclude Include="..\Include\Theron\Detail\Transport\OutputSocket.h" />
+    <ClInclude Include="..\Include\Theron\EndPoint.h" />
+    <ClInclude Include="..\Include\Theron\Framework.h" />
+    <ClInclude Include="..\Include\Theron\IAllocator.h" />
+    <ClInclude Include="..\Include\Theron\Receiver.h" />
+    <ClInclude Include="..\Include\Theron\Register.h" />
+    <ClInclude Include="..\Include\Theron\Theron.h" />
+    <ClInclude Include="..\Include\Theron\YieldStrategy.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\Include\Theron\Detail\Threading\README.txt" />
+    <None Include="Theron.def" />
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{8C0827D2-EFA0-427B-96B2-A92158E7812F}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <RootNamespace>Theron</RootNamespace>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v100</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v100</PlatformToolset>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="Properties\Theron.props" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="Properties\Theron.props" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <OutDir>$(NFBIN_COMM)\$(Configuration)\</OutDir>
+    <TargetName>$(ProjectName)_d</TargetName>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <OutDir>$(NFBIN_COMM)\$(Configuration)\</OutDir>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_USRDLL;THERON_CPP11;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>../Include\External;../Include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <BrowseInformation>true</BrowseInformation>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <ImportLibrary>$(OutDir)$(TargetName).lib</ImportLibrary>
+      <ModuleDefinitionFile>Theron.def</ModuleDefinitionFile>
+    </Link>
+    <Bscmake>
+      <PreserveSBR>true</PreserveSBR>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_USRDLL;THERON_CPP11;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>../Include\External;../Include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <ModuleDefinitionFile>Theron.def</ModuleDefinitionFile>
+    </Link>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

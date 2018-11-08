@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<Project ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <CustomBuild Include="D:\Documents\Downloads\protobuf-cpp-3.6.1\protobuf-3.6.1\cmake\CMakeLists.txt" />
+    <CustomBuild Include="D:\Documents\Downloads\protobuf-cpp-3.6.1\protobuf-3.6.1\vsprojects\CMakeFiles\c2840612b2a72483d70b082e8f2f4fbe\check.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="D:\Documents\Downloads\protobuf-cpp-3.6.1\protobuf-3.6.1\vsprojects\CMakeFiles\check" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="CMake Rules">
+      <UniqueIdentifier>{668B98F4-8744-3263-8732-566050BFBFCF}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

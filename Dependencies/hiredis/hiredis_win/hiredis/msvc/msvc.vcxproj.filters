@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="..\async.c" />
+    <ClCompile Include="..\dict.c" />
+    <ClCompile Include="..\hiredis.c" />
+    <ClCompile Include="..\net.c" />
+    <ClCompile Include="..\sds.c" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\async.h" />
+    <ClInclude Include="..\dict.h" />
+    <ClInclude Include="..\fmacros.h" />
+    <ClInclude Include="..\hiredis.h" />
+    <ClInclude Include="..\net.h" />
+    <ClInclude Include="..\sds.h" />
+  </ItemGroup>
+</Project>
