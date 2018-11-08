@@ -1,0 +1,46 @@
+
+/**
+
+@mainpage API reference
+
+<p>
+This is the API reference documentation for <a href="http://www.theron-library.com">Theron</a>.
+Click on the heading tabs above for details of classes, namespaces and files within the distribution.
+</p>
+
+<p>
+    <ul>
+        <li>List of <a href="annotated.html">classes</a>.</li>
+        <li>List of <a href="files.html">header files</a>.</li>
+        <li>List of <a href="functions_func.html">functions</a>.</li>
+        <li>List of <a href="globals_defs.html">defines</a>.</li>
+    </ul>
+</p>
+
+<p>
+See the online documentation for the latest version of this API documentation, plus the following useful resources:
+</p>
+
+<p>
+    <ul>
+        <li>Source code for the <a href="http://www.theron-library.com/index.php?t=latest">latest release</a>.</li>
+        <li>The <a href="http://www.theron-library.com/index.php?t=page&p=getting%20started">getting started</a> guide.</li>
+        <li>The <a href="http://www.theron-library.com/index.php?t=page&p=tutorial">online tutorial</a>, which is a guide to the samples in the release.</li>
+        <li>The <a href="http://www.theron-library.com/index.php?t=page&p=user%20guide">user guide</a>, which introduces the concepts behind Theron.</li>
+        <li>The latest <a href="http://www.theron-library.com/index.php?t=page&p=performance">performance results</a>.</li>
+        <li>List of answers to <a href="http://www.theron-library.com/index.php?t=page&p=faq">frequently asked questions</a>.</li>
+    </ul>
+</p>
+
+<p>
+If you have any questions, feedback or bug reports, please send them to me at
+<a href="mailto:ash@ashtonmason.net">ash@ashtonmason.net</a>.
+</p>
+
+<p>
+Thanks<br/>
+Ashton Mason
+</p>
+
+*/
+
