@@ -41,8 +41,8 @@ https://github.com/ketoo/NoahGameFrame/wiki/Documentation
 ### FAQ OR DISCUSSIONS
 [FAQ](http://blog.noahframe.com/?p=229) : http://blog.noahframe.com/?p=229
 
-### Unity3D client
-[U3D Client](https://github.com/ketoo/NoahGameFrame/tree/master/NFClient/Unity3D)
+### Client (Unity3D && Cocos2d)
+[Client](https://github.com/ketoo/NFClient)
 
 ## Architecture
 
