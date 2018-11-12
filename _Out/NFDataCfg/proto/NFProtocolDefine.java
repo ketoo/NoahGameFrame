@@ -578,7 +578,6 @@ package nframe;
 		public static final String FightHeroHP3 = "FightHeroHP3";// int
 		public static final String FightHeroID = "FightHeroID";// object
 		public static final String FightHeroLevel = "FightHeroLevel";// int
-		public static final String FightingOpponent = "FightingOpponent";// object
 		public static final String FightingStar = "FightingStar";// int
 		public static final String FirstTarget = "FirstTarget";// object
 		public static final String GMLevel = "GMLevel";// int
@@ -651,6 +650,7 @@ package nframe;
 		public static final String OnlineTime = "OnlineTime";// object
 		public static final String OpponentCup = "OpponentCup";// int
 		public static final String OpponentDiamond = "OpponentDiamond";// int
+		public static final String OpponentFighting = "OpponentFighting";// object
 		public static final String OpponentGold = "OpponentGold";// int
 		public static final String OpponentHead = "OpponentHead";// string
 		public static final String OpponentHero1 = "OpponentHero1";// string
@@ -659,6 +659,7 @@ package nframe;
 		public static final String OpponentHeroStar1 = "OpponentHeroStar1";// int
 		public static final String OpponentHeroStar2 = "OpponentHeroStar2";// int
 		public static final String OpponentHeroStar3 = "OpponentHeroStar3";// int
+		public static final String OpponentID = "OpponentID";// object
 		public static final String OpponentLevel = "OpponentLevel";// int
 		public static final String OpponentName = "OpponentName";// string
 		public static final String PHYSICAL_GATE = "PHYSICAL_GATE";// int
@@ -681,7 +682,6 @@ package nframe;
 		public static final String TotalTime = "TotalTime";// int
 		public static final String VIPEXP = "VIPEXP";// int
 		public static final String VIPLevel = "VIPLevel";// int
-		public static final String ViewOpponent = "ViewOpponent";// object
 		public static final String WarEventTime = "WarEventTime";// int
 		public static final String WarID = "WarID";// object
 		public static final String WonCup = "WonCup";// int

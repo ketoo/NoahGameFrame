@@ -589,7 +589,6 @@ namespace NFrame
 		static const std::string& FightHeroHP3(){ static std::string x = "FightHeroHP3"; return x; };// int
 		static const std::string& FightHeroID(){ static std::string x = "FightHeroID"; return x; };// object
 		static const std::string& FightHeroLevel(){ static std::string x = "FightHeroLevel"; return x; };// int
-		static const std::string& FightingOpponent(){ static std::string x = "FightingOpponent"; return x; };// object
 		static const std::string& FightingStar(){ static std::string x = "FightingStar"; return x; };// int
 		static const std::string& FirstTarget(){ static std::string x = "FirstTarget"; return x; };// object
 		static const std::string& GMLevel(){ static std::string x = "GMLevel"; return x; };// int
@@ -662,6 +661,7 @@ namespace NFrame
 		static const std::string& OnlineTime(){ static std::string x = "OnlineTime"; return x; };// object
 		static const std::string& OpponentCup(){ static std::string x = "OpponentCup"; return x; };// int
 		static const std::string& OpponentDiamond(){ static std::string x = "OpponentDiamond"; return x; };// int
+		static const std::string& OpponentFighting(){ static std::string x = "OpponentFighting"; return x; };// object
 		static const std::string& OpponentGold(){ static std::string x = "OpponentGold"; return x; };// int
 		static const std::string& OpponentHead(){ static std::string x = "OpponentHead"; return x; };// string
 		static const std::string& OpponentHero1(){ static std::string x = "OpponentHero1"; return x; };// string
@@ -670,6 +670,7 @@ namespace NFrame
 		static const std::string& OpponentHeroStar1(){ static std::string x = "OpponentHeroStar1"; return x; };// int
 		static const std::string& OpponentHeroStar2(){ static std::string x = "OpponentHeroStar2"; return x; };// int
 		static const std::string& OpponentHeroStar3(){ static std::string x = "OpponentHeroStar3"; return x; };// int
+		static const std::string& OpponentID(){ static std::string x = "OpponentID"; return x; };// object
 		static const std::string& OpponentLevel(){ static std::string x = "OpponentLevel"; return x; };// int
 		static const std::string& OpponentName(){ static std::string x = "OpponentName"; return x; };// string
 		static const std::string& PHYSICAL_GATE(){ static std::string x = "PHYSICAL_GATE"; return x; };// int
@@ -692,7 +693,6 @@ namespace NFrame
 		static const std::string& TotalTime(){ static std::string x = "TotalTime"; return x; };// int
 		static const std::string& VIPEXP(){ static std::string x = "VIPEXP"; return x; };// int
 		static const std::string& VIPLevel(){ static std::string x = "VIPLevel"; return x; };// int
-		static const std::string& ViewOpponent(){ static std::string x = "ViewOpponent"; return x; };// object
 		static const std::string& WarEventTime(){ static std::string x = "WarEventTime"; return x; };// int
 		static const std::string& WarID(){ static std::string x = "WarID"; return x; };// object
 		static const std::string& WonCup(){ static std::string x = "WonCup"; return x; };// int

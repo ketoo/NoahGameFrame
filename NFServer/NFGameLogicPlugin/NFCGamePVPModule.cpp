@@ -122,10 +122,9 @@ void NFCGamePVPModule::OnAckSearchOpponentProcess(const NFSOCK nSockIndex, const
 		return;
 	}
 
-	m_pKernelModule->SetPropertyObject(nPlayerID, NFrame::Player::ViewOpponent(), NFINetModule::PBToNF(xMsg.opponent()));
-	m_pKernelModule->SetPropertyObject(nPlayerID, NFrame::Player::FightingOpponent(), NFGUID());
-	m_pKernelModule->SetPropertyInt(nPlayerID, NFrame::Player::FightingStar(), 0);
 
+	m_pKernelModule->SetPropertyObject(nPlayerID, NFrame::Player::OpponentFighting(), NFGUID());
+	m_pKernelModule->SetPropertyInt(nPlayerID, NFrame::Player::FightingStar(), 0);
 	m_pKernelModule->SetPropertyInt(nPlayerID, NFrame::Player::PVPType(), NFMsg::EPVPType::PVP_INDIVIDUAL);
 
 	m_pSceneProcessModule->RequestEnterScene(nPlayerID, xMsg.scene_id(), 0, NFDataList());
@@ -199,9 +198,9 @@ void NFCGamePVPModule::OnReqStartPVPOpponentProcess(const NFSOCK nSockIndex, con
 	}
 
 	NFGUID xWarGUID = m_pKernelModule->CreateGUID();
-	NFGUID xViewOpponent = m_pKernelModule->GetPropertyObject(nPlayerID, NFrame::Player::ViewOpponent());
+	NFGUID xViewOpponent = m_pKernelModule->GetPropertyObject(nPlayerID, NFrame::Player::OpponentID());
 
-	m_pKernelModule->SetPropertyObject(nPlayerID, NFrame::Player::FightingOpponent(), xViewOpponent);
+	m_pKernelModule->SetPropertyObject(nPlayerID, NFrame::Player::OpponentFighting(), xViewOpponent);
 	m_pKernelModule->SetPropertyObject(nPlayerID, NFrame::Player::WarID(), xWarGUID);
 	m_pKernelModule->SetPropertyInt(nPlayerID, NFrame::Player::WarEventTime(), NFGetTimeMS());
 
@@ -246,7 +245,7 @@ int NFCGamePVPModule::OnSceneEvent(const NFGUID & self, const int nSceneID, cons
 {
 	std::string strTileData;
 	NFVector3 vRelivePos = m_pSceneAOIModule->GetRelivePosition(nSceneID, 0);
-	NFGUID xViewOpponent = m_pKernelModule->GetPropertyObject(self, NFrame::Player::ViewOpponent());
+	NFGUID xViewOpponent = m_pKernelModule->GetPropertyObject(self, NFrame::Player::OpponentID());
 	NFMsg::EPVPType ePvpType = (NFMsg::EPVPType)m_pKernelModule->GetPropertyInt(self, NFrame::Player::PVPType());
 
 	NFMsg::ReqAckSwapScene xAckSwapScene;
@@ -259,7 +258,7 @@ int NFCGamePVPModule::OnSceneEvent(const NFGUID & self, const int nSceneID, cons
 
 	if (ePvpType == NFMsg::EPVPType::PVP_HOME)
 	{
-		m_pKernelModule->SetPropertyObject(self, NFrame::Player::ViewOpponent(), NFGUID());
+		m_pKernelModule->SetPropertyObject(self, NFrame::Player::OpponentID(), NFGUID());
 
 		//if (m_pTileModule->GetOnlinePlayerTileData(self, strTileData))
 		{
@@ -358,7 +357,7 @@ bool NFCGamePVPModule::ProcessOpponentData(const NFGUID & self, const NFMsg::Ack
 	//tell client u should load resources
 
 
-
+	m_pKernelModule->SetPropertyObject(self, NFrame::Player::OpponentID(), NFINetModule::PBToNF(opponent.opponent()));
 	m_pKernelModule->SetPropertyInt(self, NFrame::Player::OpponentGold(), opponent.gold());
 	m_pKernelModule->SetPropertyInt(self, NFrame::Player::OpponentDiamond(), opponent.diamond());
 	m_pKernelModule->SetPropertyInt(self, NFrame::Player::OpponentLevel(), opponent.level());
@@ -431,8 +430,8 @@ bool NFCGamePVPModule::ProcessOpponentData(const NFGUID & self, const NFMsg::Ack
 
 void NFCGamePVPModule::ResetPVPData(const NFGUID & self)
 {
-	m_pKernelModule->SetPropertyObject(self, NFrame::Player::ViewOpponent(), NFGUID());
-	m_pKernelModule->SetPropertyObject(self, NFrame::Player::FightingOpponent(), NFGUID());
+	m_pKernelModule->SetPropertyObject(self, NFrame::Player::OpponentID(), NFGUID());
+	m_pKernelModule->SetPropertyObject(self, NFrame::Player::OpponentFighting(), NFGUID());
 
 	m_pKernelModule->SetPropertyObject(self, NFrame::Player::WarID(), NFGUID());
 	m_pKernelModule->SetPropertyInt(self, NFrame::Player::WarEventTime(), 0);
@@ -508,7 +507,7 @@ void NFCGamePVPModule::RecordPVPData(const NFGUID & self, const int nStar, const
 	//xDataList->SetInt(NFrame::Player::WarList::BeAttackerHero2Star, m_pKernelModule->GetPropertyInt(self, NFrame::Player::OpponentHero2Star()));
 	//xDataList->SetString(NFrame::Player::WarList::BeAttackerHero3, m_pKernelModule->GetPropertyString(self, NFrame::Player::OpponentHero3()));
 	//xDataList->SetInt(NFrame::Player::WarList::BeAttackerHero3Star, m_pKernelModule->GetPropertyInt(self, NFrame::Player::OpponentHero3Star()));
-	xDataList->SetObject(NFrame::Player::WarList::BeAttackerID, m_pKernelModule->GetPropertyObject(self, NFrame::Player::FightingOpponent()));
+	xDataList->SetObject(NFrame::Player::WarList::BeAttackerID, m_pKernelModule->GetPropertyObject(self, NFrame::Player::OpponentFighting()));
 	xDataList->SetInt(NFrame::Player::WarList::BeAttackerLevel, m_pKernelModule->GetPropertyInt(self, NFrame::Player::Level()));
 
 	//xDataList->SetString(NFrame::Player::WarList::Item1, m_pKernelModule->GetPropertyString(self, NFrame::Player::Item1()));
@@ -534,7 +533,7 @@ void NFCGamePVPModule::RecordPVPData(const NFGUID & self, const int nStar, const
 	}
 	else
 	{
-		xDataList->SetObject(NFrame::Player::WarList::Winner, m_pKernelModule->GetPropertyObject(self, NFrame::Player::FightingOpponent()));
+		xDataList->SetObject(NFrame::Player::WarList::Winner, m_pKernelModule->GetPropertyObject(self, NFrame::Player::OpponentFighting()));
 	}
 
 	xAttackWarRecord->AddRow(-1, *xDataList);
@@ -575,8 +574,8 @@ int NFCGamePVPModule::OnNPCHPEvent(const NFGUID & self, const std::string & strP
 				int nOpponentCup = m_pKernelModule->GetPropertyInt(identAttacker, NFrame::Player::OpponentCup());
 				int pvpType = m_pKernelModule->GetPropertyInt(identAttacker, NFrame::Player::PVPType());
 
-				NFGUID xViewOpponent = m_pKernelModule->GetPropertyObject(identAttacker, NFrame::Player::ViewOpponent());
-				NFGUID xFightingOpponent = m_pKernelModule->GetPropertyObject(identAttacker, NFrame::Player::FightingOpponent());
+				NFGUID xViewOpponent = m_pKernelModule->GetPropertyObject(identAttacker, NFrame::Player::OpponentID());
+				NFGUID xOpponentFighting = m_pKernelModule->GetPropertyObject(identAttacker, NFrame::Player::OpponentFighting());
 			
 				if (pvpType == NFMsg::EPVPType::PVP_INDIVIDUAL)
 				{
