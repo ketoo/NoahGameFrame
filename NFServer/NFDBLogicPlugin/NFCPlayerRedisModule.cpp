@@ -364,6 +364,12 @@ bool NFCPlayerRedisModule::CreateRole(const std::string & strAccount, const std:
 					xProperty->SetInt(nHomeSceneID);
 				}
 
+				xProperty = xPropertyManager->GetElement(NFrame::Player::Name());
+				if (xProperty)
+				{
+					xProperty->SetString(strRoleName);
+				}
+
 				m_pCommonRedisModule->SavePropertyInfo(id, xPropertyManager);
 			}
 

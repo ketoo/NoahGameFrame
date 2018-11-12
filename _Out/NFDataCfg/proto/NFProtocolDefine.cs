@@ -584,7 +584,6 @@ namespace NFrame
 		public static readonly String FightHeroHP3 = "FightHeroHP3";// int
 		public static readonly String FightHeroID = "FightHeroID";// object
 		public static readonly String FightHeroLevel = "FightHeroLevel";// int
-		public static readonly String FightingOpponent = "FightingOpponent";// object
 		public static readonly String FightingStar = "FightingStar";// int
 		public static readonly String FirstTarget = "FirstTarget";// object
 		public static readonly String GMLevel = "GMLevel";// int
@@ -657,6 +656,7 @@ namespace NFrame
 		public static readonly String OnlineTime = "OnlineTime";// object
 		public static readonly String OpponentCup = "OpponentCup";// int
 		public static readonly String OpponentDiamond = "OpponentDiamond";// int
+		public static readonly String OpponentFighting = "OpponentFighting";// object
 		public static readonly String OpponentGold = "OpponentGold";// int
 		public static readonly String OpponentHead = "OpponentHead";// string
 		public static readonly String OpponentHero1 = "OpponentHero1";// string
@@ -665,6 +665,7 @@ namespace NFrame
 		public static readonly String OpponentHeroStar1 = "OpponentHeroStar1";// int
 		public static readonly String OpponentHeroStar2 = "OpponentHeroStar2";// int
 		public static readonly String OpponentHeroStar3 = "OpponentHeroStar3";// int
+		public static readonly String OpponentID = "OpponentID";// object
 		public static readonly String OpponentLevel = "OpponentLevel";// int
 		public static readonly String OpponentName = "OpponentName";// string
 		public static readonly String PHYSICAL_GATE = "PHYSICAL_GATE";// int
@@ -687,7 +688,6 @@ namespace NFrame
 		public static readonly String TotalTime = "TotalTime";// int
 		public static readonly String VIPEXP = "VIPEXP";// int
 		public static readonly String VIPLevel = "VIPLevel";// int
-		public static readonly String ViewOpponent = "ViewOpponent";// object
 		public static readonly String WarEventTime = "WarEventTime";// int
 		public static readonly String WarID = "WarID";// object
 		public static readonly String WonCup = "WonCup";// int
