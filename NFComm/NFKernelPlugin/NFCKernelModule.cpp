@@ -88,7 +88,8 @@ bool NFCKernelModule::Execute()
 {
 	ProcessMemFree();
 
-	mnCurExeObject = NFGUID();
+	mnCurExeObject.nHead64 = 0;
+	mnCurExeObject.nData64 = 0;
 
 	if (mtDeleteSelfList.size() > 0)
 	{
@@ -107,7 +108,9 @@ bool NFCKernelModule::Execute()
 	{
 		mnCurExeObject = pObject->Self();
 		pObject->Execute();
-		mnCurExeObject = NFGUID();
+
+		mnCurExeObject.nHead64 = 0;
+		mnCurExeObject.nData64 = 0;
 
 		pObject = Next();
 	}
