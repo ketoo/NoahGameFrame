@@ -874,11 +874,11 @@ bool NFFileProcess::SaveForSQL()
 				strElementData += strAlter;
 			}
 		}
-
-		fwrite(strElementData.c_str(), strElementData.length(), 1, iniWriter);
-
 	}
-	return false;
+	
+	fwrite(strElementData.c_str(), strElementData.length(), 1, iniWriter);
+
+	return true;
 }
 
 bool NFFileProcess::SaveForStruct()
