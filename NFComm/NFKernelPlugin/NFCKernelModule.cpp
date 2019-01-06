@@ -88,7 +88,8 @@ bool NFCKernelModule::Execute()
 {
 	ProcessMemFree();
 
-	mnCurExeObject = NFGUID();
+	mnCurExeObject.nHead64 = 0;
+	mnCurExeObject.nData64 = 0;
 
 	if (mtDeleteSelfList.size() > 0)
 	{
@@ -107,7 +108,9 @@ bool NFCKernelModule::Execute()
 	{
 		mnCurExeObject = pObject->Self();
 		pObject->Execute();
-		mnCurExeObject = NFGUID();
+
+		mnCurExeObject.nHead64 = 0;
+		mnCurExeObject.nData64 = 0;
 
 		pObject = Next();
 	}
@@ -1373,9 +1376,9 @@ bool NFCKernelModule::ExistObject(const NFGUID & ident)
 bool NFCKernelModule::ExistObject(const NFGUID & ident, const int nSceneID, const int nGroupID)
 {
 	NF_SHARE_PTR<NFCSceneInfo> pSceneInfo = m_pSceneModule->GetElement(nSceneID);
-	if (pSceneInfo)
+	if (!pSceneInfo)
 	{
-		return true;
+		return false;
 	}
 
 	return pSceneInfo->ExistObjectInGroup(nGroupID, ident);
