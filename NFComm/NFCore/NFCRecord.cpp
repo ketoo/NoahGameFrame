@@ -76,7 +76,7 @@ NFCRecord::NFCRecord(const NFGUID& self, const std::string& strRecordName, const
         mtRecordVec.push_back(NF_SHARE_PTR<NFData>());
     }
 
-	//optimize would be better, it should be applied memory space only once
+	//it would be optimized in future as it should apply the memory by onetime
     for (int i = 0; i < mVarRecordTag->GetCount(); ++i)
     {
         if (!mVarRecordTag->String(i).empty())
@@ -1506,6 +1506,7 @@ bool NFCRecord::SwapRowInfo(const int nOriginRow, const int nTargetRow)
 
 const NF_SHARE_PTR<NFDataList> NFCRecord::GetTag() const
 {
+	//TODO
     NF_SHARE_PTR<NFDataList> pIniData = NF_SHARE_PTR<NFDataList>(NF_NEW NFDataList());
     pIniData->Append(*mVarRecordTag);
     return pIniData;

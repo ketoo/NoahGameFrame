@@ -798,7 +798,7 @@ bool NFFileProcess::SaveForSQL()
 
 			if (strSave=="1" || strCache=="1")
 			{
-				std::string strAlter = "ALTER TABLE `" + strClassName + "` ADD `" + strPropertyName + "`";
+				std::string strAlter = "\nALTER TABLE `" + strClassName + "` ADD `" + strPropertyName + "`";
 				//ALTER TABLE `Buff` ADD `EffectType` bigint(11) DEFAULT '0' COMMENT '影响属性类型(效果类型)  生命，法力(可组合,叠加)';
 				if (strType=="int")
 				{
@@ -867,18 +867,18 @@ bool NFFileProcess::SaveForSQL()
 
 			if (strSave=="1" || strCache=="1")
 			{
-				std::string strAlter = "ALTER TABLE `" + strClassName + "` ADD `" + strRecordName + "`";
+				std::string strAlter = "\nALTER TABLE `" + strClassName + "` ADD `" + strRecordName + "`";
 				strAlter += " text COLLATE utf8mb4_unicode_ci  DEFAULT ''";
 				strAlter += " COMMENT '" + strDesc + "';";
 
 				strElementData += strAlter;
 			}
 		}
-
-		fwrite(strElementData.c_str(), strElementData.length(), 1, iniWriter);
-
 	}
-	return false;
+	
+	fwrite(strElementData.c_str(), strElementData.length(), 1, iniWriter);
+
+	return true;
 }
 
 bool NFFileProcess::SaveForStruct()

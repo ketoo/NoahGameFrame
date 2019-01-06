@@ -304,13 +304,19 @@ bool NFRedisClient::HSET(const std::string &key, const std::string &field, const
 		return false;
 	}
 
-	bool success = false;
+	//bool success = false;
 	if (pReply->type == REDIS_REPLY_INTEGER)
 	{
-		success = (bool)pReply->integer;
+		 //success = (bool)pReply->integer;
+		/*
+		Return value
+		Integer reply, specifically:
+		1 if field is a new field in the hash and value was set.
+		0 if field already exists in the hash and the value was updated.
+		*/
 	}
 
-	return success;
+	return true;
 }
 
 bool NFRedisClient::HSETNX(const std::string &key, const std::string &field, const std::string &value)
