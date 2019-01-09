@@ -36,7 +36,7 @@ public:
     NFCLogModule(NFIPluginManager* p);
     virtual ~NFCLogModule() {}
 
-	virtual bool Awake();
+    virtual bool Awake();
     virtual bool Init();
     virtual bool Shut();
 
@@ -60,32 +60,34 @@ public:
     virtual bool LogNormal(const NF_LOG_LEVEL nll, const NFGUID ident, const std::ostringstream& stream, const char* func = "", int line = 0);
 
     virtual bool LogDebug(const std::string& strLog, const char* func = "", int line = 0);
-	virtual bool LogInfo(const std::string& strLog, const  char* func = "", int line = 0);
-	virtual bool LogWarning(const std::string& strLog, const char* func = "", int line = 0);
-	virtual bool LogError(const std::string& strLog, const char* func = "", int line = 0);
+    virtual bool LogInfo(const std::string& strLog, const  char* func = "", int line = 0);
+    virtual bool LogWarning(const std::string& strLog, const char* func = "", int line = 0);
+    virtual bool LogError(const std::string& strLog, const char* func = "", int line = 0);
     virtual bool LogFatal(const std::string& strLog, const char* func = "", int line = 0);
 
     virtual bool LogDebug(const std::ostringstream& stream, const char* func = "", int line = 0);
-	virtual bool LogInfo(const std::ostringstream& stream, const  char* func = "", int line = 0);
-	virtual bool LogWarning(const std::ostringstream& stream, const char* func = "", int line = 0);
-	virtual bool LogError(const std::ostringstream& stream, const char* func = "", int line = 0);
+    virtual bool LogInfo(const std::ostringstream& stream, const  char* func = "", int line = 0);
+    virtual bool LogWarning(const std::ostringstream& stream, const char* func = "", int line = 0);
+    virtual bool LogError(const std::ostringstream& stream, const char* func = "", int line = 0);
     virtual bool LogFatal(const std::ostringstream& stream, const char* func = "", int line = 0);
 
     virtual bool LogDebug(const NFGUID ident, const std::string& strLog, const char* func = "", int line = 0);
-	virtual bool LogInfo(const NFGUID ident, const std::string& strLog, const  char* func = "", int line = 0);
-	virtual bool LogWarning(const NFGUID ident, const std::string& strLog, const char* func = "", int line = 0);
-	virtual bool LogError(const NFGUID ident, const std::string& strLog, const char* func = "", int line = 0);
+    virtual bool LogInfo(const NFGUID ident, const std::string& strLog, const  char* func = "", int line = 0);
+    virtual bool LogWarning(const NFGUID ident, const std::string& strLog, const char* func = "", int line = 0);
+    virtual bool LogError(const NFGUID ident, const std::string& strLog, const char* func = "", int line = 0);
     virtual bool LogFatal(const NFGUID ident, const std::string& strLog, const char* func = "", int line = 0);
 
     virtual bool LogDebug(const NFGUID ident, const std::ostringstream& stream, const char* func = "", int line = 0);
-	virtual bool LogInfo(const NFGUID ident, const std::ostringstream& stream, const  char* func = "", int line = 0);
-	virtual bool LogWarning(const NFGUID ident, const std::ostringstream& stream, const char* func = "", int line = 0);
-	virtual bool LogError(const NFGUID ident, const std::ostringstream& stream, const char* func = "", int line = 0);
+    virtual bool LogInfo(const NFGUID ident, const std::ostringstream& stream, const  char* func = "", int line = 0);
+    virtual bool LogWarning(const NFGUID ident, const std::ostringstream& stream, const char* func = "", int line = 0);
+    virtual bool LogError(const NFGUID ident, const std::ostringstream& stream, const char* func = "", int line = 0);
     virtual bool LogFatal(const NFGUID ident, const std::ostringstream& stream, const char* func = "", int line = 0);
 
     virtual bool LogDebugFunctionDump(const NFGUID ident, const int nMsg, const std::string& strArg, const char* func = "", const int line = 0);
     virtual bool ChangeLogLevel(const std::string& strLevel);
-
+    
+    virtual void StackTrace();
+    
 protected:
     virtual bool Log(const NF_LOG_LEVEL nll, const char* format, ...);
 
