@@ -760,3 +760,11 @@ void NFCLogModule::StackTrace(/*const NF_LOG_LEVEL nll = NFILogModule::NLL_FATAL
 */
 #endif
 }
+
+void NFCLogModule::StartTimeCheckPoint(const std::ostringstream& stream, const char* func = "", int line = 0)
+{
+}
+
+void NFCLogModule::EndTimeCheckPoint(int milliSecond, const char* func = "", int line = 0)
+{
+}
