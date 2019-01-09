@@ -937,3 +937,7 @@ void NFCPluginManager::YieldCo()
 {
    mxCoroutineManager.YieldCo();
 }
+
+void NFCPluginManager::StackTrace()
+{
+}
