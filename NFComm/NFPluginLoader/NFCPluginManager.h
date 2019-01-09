@@ -135,7 +135,6 @@ public:
 
     virtual void YieldCo() override;
     
-    virtual void StackTrace() override;
 
 protected:
     bool LoadPluginConfig();
