@@ -710,4 +710,21 @@ bool NFCLogModule::LogFatal(const NFGUID ident, const std::ostringstream& stream
 
 void NFCLogModule::StackTrace()
 {
+#if NF_PLATFORM != NF_PLATFORM_WIN
+    LOG(FATAL) << "crash sig:" << sig;
+
+    int size = 16;
+    void * array[16];
+    int stack_num = backtrace(array, size);
+    char ** stacktrace = backtrace_symbols(array, stack_num);
+    for (int i = 0; i < stack_num; ++i)
+    {
+    	//printf("%s\n", stacktrace[i]);
+    	LOG(FATAL) << stacktrace[i];
+    }
+
+    free(stacktrace);
+#else
+	
+#endif
 }
