@@ -707,3 +707,7 @@ bool NFCLogModule::LogFatal(const NFGUID ident, const std::ostringstream& stream
 
     return true;
 }
+
+void NFCLogModule::StackTrace()
+{
+}
