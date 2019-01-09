@@ -87,7 +87,8 @@ public:
     virtual bool ChangeLogLevel(const std::string& strLevel);
     
     virtual void StackTrace();
-    
+    virtual void StartTimeCheckPoint(const std::ostringstream& stream, const char* func = "", int line = 0);
+    virtual void EndTimeCheckPoint(int milliSecond, const char* func = "", int line = 0);
 protected:
     virtual bool Log(const NF_LOG_LEVEL nll, const char* format, ...);
 
