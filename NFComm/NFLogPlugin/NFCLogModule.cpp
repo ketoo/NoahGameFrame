@@ -707,3 +707,63 @@ bool NFCLogModule::LogFatal(const NFGUID ident, const std::ostringstream& stream
 
     return true;
 }
+
+void NFCLogModule::StackTrace(/*const NF_LOG_LEVEL nll = NFILogModule::NLL_FATAL_NORMAL*/)
+{
+#if NF_PLATFORM != NF_PLATFORM_WIN
+    LOG(FATAL) << "crash sig:" << sig;
+
+    int size = 8;
+    void * array[8];
+    int stack_num = backtrace(array, size);
+    char ** stacktrace = backtrace_symbols(array, stack_num);
+    for (int i = 0; i < stack_num; ++i)
+    {
+    	//printf("%s\n", stacktrace[i]);
+    	LOG(FATAL) << stacktrace[i];
+    }
+
+    free(stacktrace);
+#else
+
+	static const int MAX_STACK_FRAMES = 8;
+	
+	void *pStack[MAX_STACK_FRAMES];
+ 
+	HANDLE process = GetCurrentProcess();
+	SymInitialize(process, NULL, TRUE);
+	WORD frames = CaptureStackBackTrace(0, MAX_STACK_FRAMES, pStack, NULL);
+ 
+	LOG(FATAL) << "stack traceback: " << std::endl;
+	for (WORD i = 0; i < frames; ++i) {
+		DWORD64 address = (DWORD64)(pStack[i]);
+ 
+		DWORD64 displacementSym = 0;
+		char buffer[sizeof(SYMBOL_INFO) + MAX_SYM_NAME * sizeof(TCHAR)];
+		PSYMBOL_INFO pSymbol = (PSYMBOL_INFO)buffer;
+		pSymbol->SizeOfStruct = sizeof(SYMBOL_INFO);
+		pSymbol->MaxNameLen = MAX_SYM_NAME;
+ 
+		DWORD displacementLine = 0;
+		IMAGEHLP_LINE64 line;
+		//SymSetOptions(SYMOPT_LOAD_LINES);
+		line.SizeOfStruct = sizeof(IMAGEHLP_LINE64);
+ 
+		if (SymFromAddr(process, address, &displacementSym, pSymbol)
+		 && SymGetLineFromAddr64(process, address, &displacementLine, &line)) {
+			LOG(FATAL) << "\t" << pSymbol->Name << " at " << line.FileName << ":" << line.LineNumber << "(0x" << std::hex << pSymbol->Address << std::dec << ")" << std::endl;
+		}
+		else {
+			LOG(FATAL) << "\terror: " << GetLastError() << std::endl;
+		}
+	}
+#endif
+}
+
+void NFCLogModule::StartTimeCheckPoint(const std::ostringstream& stream, const char* func, int line)
+{
+}
+
+void NFCLogModule::EndTimeCheckPoint(int milliSecond, const char* func, int line)
+{
+}
