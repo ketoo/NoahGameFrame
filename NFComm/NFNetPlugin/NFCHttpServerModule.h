@@ -28,6 +28,7 @@
 
 #include <iostream>
 #include "NFComm/NFCore/NFMapEx.hpp"
+#include "NFComm/NFCore/NFPerformance.hpp"
 #include "NFComm/NFNetPlugin/NFIHttpServer.h"
 #include "NFComm/NFPluginModule/NFIHttpServerModule.h"
 #include "NFComm/NFPluginModule/NFILogModule.h"
@@ -61,7 +62,7 @@ private:
 
 private:
 	NFIHttpServer* m_pHttpServer;
-	NFILogModule* mLogModule;
+	NFILogModule* m_pLogModule;
 
 	NFMapEx<NFHttpType, std::map<std::string, HTTP_RECEIVE_FUNCTOR_PTR>> mMsgCBMap;
 	std::map<std::string, HTTP_FILTER_FUNCTOR_PTR> mMsgFliterMap;

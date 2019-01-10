@@ -390,6 +390,8 @@ void NFCNetModule::OnReceiveNetPack(const NFSOCK nSockIndex, const int nMsgID, c
 {
 	m_pLogModule->LogInfo("OnReceiveNetPack " + std::to_string(nMsgID), __FUNCTION__, __LINE__);
 
+	NFPerformance performance;
+
     std::map<int, std::list<NET_RECEIVE_FUNCTOR_PTR>>::iterator it = mxReceiveCallBack.find(nMsgID);
     if (mxReceiveCallBack.end() != it)
     {
@@ -410,6 +412,15 @@ void NFCNetModule::OnReceiveNetPack(const NFSOCK nSockIndex, const int nMsgID, c
             pFunc->operator()(nSockIndex, nMsgID, msg, nLen);
         }
     }
+
+	if (performance.CheckTimePoint(1))
+	{
+		std::ostringstream os;
+		os << "---------------net module performance problem------------------- ";
+		os << performance.TimeScope();
+		os << "---------- ";
+		m_pLogModule->LogWarning(NFGUID(0, nMsgID), os, __FUNCTION__, __LINE__);
+	}
 }
 
 void NFCNetModule::OnSocketNetEvent(const NFSOCK nSockIndex, const NF_NET_EVENT eEvent, NFINet* pNet)

@@ -53,6 +53,7 @@ bool NFCHttpServerModule::Execute()
 
 int NFCHttpServerModule::InitServer(const unsigned short nPort)
 {
+	m_pLogModule = pPluginManager->FindModule<NFILogModule>();
 	m_pHttpServer = new NFCHttpServer(this, &NFCHttpServerModule::OnReceiveNetPack, &NFCHttpServerModule::OnFilterPack);
     std::cout << "Open http port:" << nPort << std::endl;
 
@@ -61,6 +62,7 @@ int NFCHttpServerModule::InitServer(const unsigned short nPort)
 
 bool NFCHttpServerModule::OnReceiveNetPack(const NFHttpRequest& req)
 {
+	NFPerformance performance;
 	auto it = mMsgCBMap.GetElement(req.type);
 	if (it)
 	{
@@ -79,6 +81,16 @@ bool NFCHttpServerModule::OnReceiveNetPack(const NFHttpRequest& req)
 			}
 			return true;
 		}
+	}
+
+	if (performance.CheckTimePoint(1))
+	{
+		std::ostringstream os;
+		os << "---------------net module performance problem------------------- ";
+		os << performance.TimeScope();
+		os << "---------- ";
+		os << req.path;
+		m_pLogModule->LogWarning(NFGUID(), os, __FUNCTION__, __LINE__);
 	}
 
 	return ResponseMsg(req, "", NFWebStatus::WEB_ERROR);
