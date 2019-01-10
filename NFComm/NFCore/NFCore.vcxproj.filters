@@ -98,6 +98,9 @@
     <ClInclude Include="NFException.hpp">
       <Filter>Unit</Filter>
     </ClInclude>
+    <ClInclude Include="NFPerformance.hpp">
+      <Filter>Unit</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="NFCRecord.cpp">
