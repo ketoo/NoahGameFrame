@@ -725,7 +725,7 @@ void NFCLogModule::StackTrace(/*const NF_LOG_LEVEL nll = NFILogModule::NLL_FATAL
 
     free(stacktrace);
 #else
-/*
+
 	static const int MAX_STACK_FRAMES = 8;
 	
 	void *pStack[MAX_STACK_FRAMES];
@@ -757,14 +757,13 @@ void NFCLogModule::StackTrace(/*const NF_LOG_LEVEL nll = NFILogModule::NLL_FATAL
 			LOG(FATAL) << "\terror: " << GetLastError() << std::endl;
 		}
 	}
-*/
 #endif
 }
 
-void NFCLogModule::StartTimeCheckPoint(const std::ostringstream& stream, const char* func = "", int line = 0)
+void NFCLogModule::StartTimeCheckPoint(const std::ostringstream& stream, const char* func, int line)
 {
 }
 
-void NFCLogModule::EndTimeCheckPoint(int milliSecond, const char* func = "", int line = 0)
+void NFCLogModule::EndTimeCheckPoint(int milliSecond, const char* func, int line)
 {
 }
