@@ -78,9 +78,6 @@ public:
     virtual bool LogFatal(const NFGUID ident, const std::ostringstream& stream, const char* func = "", int line = 0) = 0;
 
 	virtual void StackTrace() = 0;
-	virtual void StartTimeCheckPoint(const std::ostringstream& stream, const char* func = "", int line = 0) = 0;
-	virtual void EndTimeCheckPoint(const int milliSecond = 1, const char* func = "", int line = 0) = 0;
-
 };
 
 #endif

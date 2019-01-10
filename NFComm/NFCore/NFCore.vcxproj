@@ -108,6 +108,7 @@
     <ClInclude Include="NFMapEx.hpp" />
     <ClInclude Include="NFMemManager.hpp" />
     <ClInclude Include="NFMemoryCounter.hpp" />
+    <ClInclude Include="NFPerformance.hpp" />
     <ClInclude Include="NFPlane.hpp" />
     <ClInclude Include="NFRay.hpp" />
     <ClInclude Include="NFSingleton.hpp" />

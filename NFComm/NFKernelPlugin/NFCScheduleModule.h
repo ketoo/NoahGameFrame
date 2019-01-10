@@ -28,9 +28,11 @@
 
 #include "NFComm/NFCore/NFMap.hpp"
 #include "NFComm/NFCore/NFList.hpp"
+#include "NFComm/NFCore/NFPerformance.hpp"
 #include "NFComm/NFCore/NFDataList.hpp"
 #include "NFComm/NFCore/NFDateTime.hpp"
 #include "NFComm/NFPluginModule/NFIScheduleModule.h"
+#include "NFComm/NFPluginModule/NFILogModule.h"
 
 class  NFCScheduleElement
 {
@@ -98,6 +100,8 @@ protected:
 	NFMapEx <std::string, NFCScheduleElement > mModuleScheduleMap;//guid_scheduleName_element
 	std::list<NFCScheduleElement> mModuleAddList;
 	std::list<std::string> mModuleRemoveList;
+
+	NFILogModule* m_pLogModule;
 	
 };
 

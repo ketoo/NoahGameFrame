@@ -61,10 +61,14 @@ NFCScheduleModule::~NFCScheduleModule()
 
 bool NFCScheduleModule::Init()
 {
+	m_pLogModule = pPluginManager->FindModule<NFILogModule>();
+
 	return true;
 }
 bool NFCScheduleModule::Execute()
 {
+	NFPerformance performanceObject;
+
 	//execute every schedule
 	NF_SHARE_PTR<NFMapEx <std::string, NFCScheduleElement >> xObjectSchedule = mObjectScheduleMap.First();
 	while (xObjectSchedule)
@@ -142,8 +146,19 @@ bool NFCScheduleModule::Execute()
 
 	mObjectAddList.clear();
 
+	if (performanceObject.CheckTimePoint(1))
+	{
+		std::ostringstream os;
+		os << "---------------object scehdule  performance problem------------------- ";
+		os << performanceObject.TimeScope();
+		os << "---------- ";
+		m_pLogModule->LogWarning(NFGUID(), os, __FUNCTION__, __LINE__);
+	}
 	////////////////////////////////////////////
 	//execute every schedule
+
+	NFPerformance performanceModule;
+
 	NF_SHARE_PTR< NFCScheduleElement > xModuleSchedule = mModuleScheduleMap.First();
 	while (xModuleSchedule)
 	{
@@ -200,6 +215,16 @@ bool NFCScheduleModule::Execute()
 	}
 
 	mModuleAddList.clear();
+
+	if (performanceModule.CheckTimePoint(1))
+	{
+		std::ostringstream os;
+		os << "---------------module scehdule performance problem------------------- ";
+		os << performanceObject.TimeScope();
+		os << "---------- ";
+		m_pLogModule->LogWarning(NFGUID(), os, __FUNCTION__, __LINE__);
+	}
+
 	return true;
 }
 
