@@ -284,7 +284,7 @@ load_script_file(ScriptList)
 
 
 
-##How to do hot fix?
+##Hot fix
 Add your lua script file name on here [script_reload.lua](https://github.com/ketoo/NoahGameFrame/blob/master/_Out/NFDataCfg/ScriptModule/game/script_reload.lua)
 
 -------------------
