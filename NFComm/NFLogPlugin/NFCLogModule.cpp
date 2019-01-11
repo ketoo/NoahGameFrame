@@ -711,7 +711,6 @@ bool NFCLogModule::LogFatal(const NFGUID ident, const std::ostringstream& stream
 void NFCLogModule::StackTrace(/*const NF_LOG_LEVEL nll = NFILogModule::NLL_FATAL_NORMAL*/)
 {
 #if NF_PLATFORM != NF_PLATFORM_WIN
-    LOG(FATAL) << "crash sig:" << sig;
 
     int size = 8;
     void * array[8];
