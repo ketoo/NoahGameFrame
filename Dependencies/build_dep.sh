@@ -2,6 +2,7 @@ echo Building dependencies...
 
 sudo apt-get install automake
 sudo apt-get install zip unzip
+sudo apt-get install libtool
 
 rm -rf ./lib
 mkdir -p lib/Debug/
@@ -22,6 +23,7 @@ sudo apt-get install libreadline-dev
 # compiling libevent
 cd libevent
 make clean
+./autogen.sh
 chmod +x ./configure
 #./configure --disable-shared --disable-openssl
 ./configure --disable-shared --disable-openssl
@@ -37,6 +39,7 @@ cd ../
 cd protobuf
 make clean
 chmod -R 755 *
+./autogen.sh
 ./configure --disable-shared
 make
 make check
