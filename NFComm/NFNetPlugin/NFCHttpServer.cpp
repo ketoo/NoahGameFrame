@@ -39,16 +39,9 @@ bool NFCHttpServer::Execute()
 
 int NFCHttpServer::InitServer(const unsigned short port)
 {
-	/*
-    event_init();  
-    struct evhttp *httpserv = evhttp_start(addr,port);  
-	evhttp_set_gencb(httpserv, reqHandler,NULL);
-	event_dispatch();
-	*/
-
-    //struct event_base *base;
-    struct evhttp* http;
-    struct evhttp_bound_socket* handle;
+	//struct event_base *base;
+	struct evhttp* http;
+	struct evhttp_bound_socket* handle;
 
 #if NF_PLATFORM == NF_PLATFORM_WIN
     WSADATA WSAData;
@@ -72,48 +65,87 @@ int NFCHttpServer::InitServer(const unsigned short port)
         return 1;
     }
     /* 创建SSL上下文环境 ，可以理解为 SSL句柄 */
-    /*
-    SSL_CTX *ctx = SSL_CTX_new (SSLv23_server_method ());
-    SSL_CTX_set_options (ctx,
-            SSL_OP_SINGLE_DH_USE |
-            SSL_OP_SINGLE_ECDH_USE |
-            SSL_OP_NO_SSLv2);
-*/
+    SSL_CTX *ctx = SSL_CTX_new(SSLv23_server_method());
+    SSL_CTX_set_options(ctx,
+        SSL_OP_SINGLE_DH_USE |
+        SSL_OP_SINGLE_ECDH_USE |
+        SSL_OP_NO_SSLv2);
     /* Cheesily pick an elliptic curve to use with elliptic curve ciphersuites.
      * We just hardcode a single curve which is reasonably decent.
      * See http://www.mail-archive.com/openssl-dev@openssl.org/msg30957.html */
-	/*
-    EC_KEY *ecdh = EC_KEY_new_by_curve_name (NID_X9_62_prime256v1);
-    if (! ecdh)
-        die_most_horribly_from_openssl_error ("EC_KEY_new_by_curve_name");
-    if (1 != SSL_CTX_set_tmp_ecdh (ctx, ecdh))
-        die_most_horribly_from_openssl_error ("SSL_CTX_set_tmp_ecdh");
-*/
-    /* 选择服务器证书 和 服务器私钥. */
-	/*
-    const char *certificate_chain = "server-certificate-chain.pem";
-    const char *private_key = "server-private-key.pem";
-    */
-    /* 设置服务器证书 和 服务器私钥 到 
-     OPENSSL ctx上下文句柄中 */
-    //server_setup_certs (ctx, certificate_chain, private_key);
-
-    /* 
-        使我们创建好的evhttp句柄 支持 SSL加密
-        实际上，加密的动作和解密的动作都已经帮
-        我们自动完成，我们拿到的数据就已经解密之后的
-    */
-    handle = evhttp_bind_socket_with_handle(http, "0.0.0.0", port);
-    if (!handle)
+    EC_KEY *ecdh = EC_KEY_new_by_curve_name(NID_X9_62_prime256v1);
+    if (!ecdh)
     {
-        std::cout << "bind port :" << port << " fail" << std::endl;;
+        fprintf(stderr, "EC_KEY_new_by_curve_name failed:\n");
+        ERR_print_errors_fp(stderr);
         return 1;
     }
+
+    if (1 != SSL_CTX_set_tmp_ecdh(ctx, ecdh))
+    {
+        fprintf(stderr, "SSL_CTX_set_tmp_ecdh failed:\n");
+        ERR_print_errors_fp(stderr);
+        return 1;
+    }
+	/* 选择服务器证书 和 服务器私钥. */
+	const char *certificate_chain = "./server.crt";
+	const char *private_key = "./server.key";
+
+	/* 设置服务器证书 和 服务器私钥 到
+	 OPENSSL ctx上下文句柄中 */
+	if (!server_setup_certs(ctx, certificate_chain, private_key))
+	{
+		LOG(ERROR) << "set key failed !" << __FUNCTION__ << " " << __LINE__;
+		return 1;
+	}
+
+	/*
+		使我们创建好的evhttp句柄 支持 SSL加密
+		实际上，加密的动作和解密的动作都已经帮
+		我们自动完成，我们拿到的数据就已经解密之后的
+	*/
+	handle = evhttp_bind_socket_with_handle(http, "0.0.0.0", port);
+	if (!handle)
+	{
+		std::cout << "bind port :" << port << " fail" << std::endl;;
+		return 1;
+	}
+
+	/* This is the magic that lets evhttp use SSL. */
+	evhttp_set_bevcb(http, listener_https_cb, ctx);
 
     evhttp_set_gencb(http, listener_cb, (void*) this);
 
     return 0;
 }
+
+bool NFCHttpServer::server_setup_certs(SSL_CTX *ctx,
+	const char *certificate_chain,
+	const char *private_key)
+{
+	LOG(INFO) << "pNet ==NULL" << " " << __FUNCTION__ << " " << __LINE__;
+
+	if (1 != SSL_CTX_use_certificate_chain_file(ctx, certificate_chain))
+	{
+		LOG(ERROR) << "SSL_CTX_use_certificate_chain_file" << __FUNCTION__ << " " << __LINE__;
+		return false;
+	}
+
+	if (1 != SSL_CTX_use_PrivateKey_file(ctx, private_key, SSL_FILETYPE_PEM))
+	{
+		LOG(ERROR) << "SSL_CTX_use_PrivateKey_file" << __FUNCTION__ << " " << __LINE__;
+		return false;
+	}
+
+	if (1 != SSL_CTX_check_private_key(ctx))
+	{
+		LOG(ERROR) << "SSL_CTX_check_private_key" << __FUNCTION__ << " " << __LINE__;
+		return false;
+	}
+
+	return true;
+}
+
 
 void NFCHttpServer::listener_cb(struct evhttp_request* req, void* arg)
 {
@@ -240,7 +272,7 @@ void NFCHttpServer::listener_cb(struct evhttp_request* req, void* arg)
 	{
 		unsigned char *pData = evbuffer_pullup(in_evb, len);
 		pRequest->body.clear();
-		
+
 		if (pData != NULL)
 		{
 			pRequest->body.append((const char *)pData, len);
@@ -263,15 +295,15 @@ void NFCHttpServer::listener_cb(struct evhttp_request* req, void* arg)
 				return;
 			}
 		}
-		catch(std::exception& e)
+		catch (std::exception& e)
 		{
 			pNet->ResponseMsg(*pRequest, e.what(), NFWebStatus::WEB_ERROR);
 		}
-		catch(...)
+		catch (...)
 		{
 			pNet->ResponseMsg(*pRequest, "UNKNOW ERROR", NFWebStatus::WEB_ERROR);
 		}
-		
+
 	}
 
 	// call cb
@@ -286,15 +318,28 @@ void NFCHttpServer::listener_cb(struct evhttp_request* req, void* arg)
 			pNet->ResponseMsg(*pRequest, "NO PROCESSER", NFWebStatus::WEB_ERROR);
 		}
 	}
-	catch(std::exception& e)
+	catch (std::exception& e)
 	{
 		pNet->ResponseMsg(*pRequest, e.what(), NFWebStatus::WEB_ERROR);
 	}
-	catch(...)
+	catch (...)
 	{
 		pNet->ResponseMsg(*pRequest, "UNKNOW ERROR", NFWebStatus::WEB_ERROR);
 	}
-	
+
+}
+
+bufferevent* NFCHttpServer::listener_https_cb(struct event_base* base, void* arg)
+{
+	struct bufferevent* r;
+	SSL_CTX *ctx = (SSL_CTX *)arg;
+
+	r = bufferevent_openssl_socket_new(base,
+		-1,
+		SSL_new(ctx),
+		BUFFEREVENT_SSL_ACCEPTING,
+		BEV_OPT_CLOSE_ON_FREE);
+	return r;
 }
 
 NFHttpRequest* NFCHttpServer::AllowHttpRequest()
@@ -317,7 +362,7 @@ NFHttpRequest* NFCHttpServer::AllowHttpRequest()
 }
 
 bool NFCHttpServer::ResponseMsg(const NFHttpRequest& req, const std::string& strMsg, NFWebStatus code,
-                                const std::string& strReason)
+	const std::string& strReason)
 {
 	auto it = mxHttpRequestMap.find(req.id);
 	if (it != mxHttpRequestMap.end())
@@ -327,18 +372,18 @@ bool NFCHttpServer::ResponseMsg(const NFHttpRequest& req, const std::string& str
 	}
 
 	evhttp_request* pHttpReq = (evhttp_request*)req.req;
-    //create buffer
-    struct evbuffer* eventBuffer = evbuffer_new();
+	//create buffer
+	struct evbuffer* eventBuffer = evbuffer_new();
 
-    //send data
-    evbuffer_add_printf(eventBuffer, strMsg.c_str());
+	//send data
+	evbuffer_add_printf(eventBuffer, strMsg.c_str());
 
-    evhttp_add_header(evhttp_request_get_output_headers(pHttpReq), "Content-Type", "application/json");
-	
+	evhttp_add_header(evhttp_request_get_output_headers(pHttpReq), "Content-Type", "application/json");
+
 	evhttp_send_reply(pHttpReq, code, strReason.c_str(), eventBuffer);
 
-    //free
-    evbuffer_free(eventBuffer);
+	//free
+	evbuffer_free(eventBuffer);
 
-    return true;
+	return true;
 }

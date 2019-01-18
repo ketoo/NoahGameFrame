@@ -62,11 +62,14 @@
 
 #include <event2/bufferevent.h>
 #include "event2/bufferevent_struct.h"
+#include <event2/bufferevent_ssl.h>
 #include "event2/event.h"
 #include <event2/http.h>
 #include <event2/buffer.h>
 #include <event2/util.h>
 #include <event2/keyvalq_struct.h>
+#include <openssl/ssl.h>
+#include <openssl/err.h>
 
 
 class NFCHttpServer : public NFIHttpServer
@@ -100,8 +103,12 @@ public:
 
     virtual bool ResponseMsg(const NFHttpRequest& req, const std::string& strMsg, NFWebStatus code, const std::string& strReason = "OK");
 
+    static bool server_setup_certs(SSL_CTX *ctx,
+        const char *certificate_chain,
+        const char *private_key);
 private:
     static void listener_cb(struct evhttp_request* req, void* arg);
+    static bufferevent* NFCHttpServer::listener_https_cb(struct event_base* req, void* arg);
 
 	NFHttpRequest* AllowHttpRequest();
 
