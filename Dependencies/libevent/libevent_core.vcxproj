@@ -15,6 +15,7 @@
     <ClCompile Include="bufferevent.c" />
     <ClCompile Include="bufferevent_async.c" />
     <ClCompile Include="bufferevent_filter.c" />
+    <ClCompile Include="bufferevent_openssl.c" />
     <ClCompile Include="bufferevent_pair.c" />
     <ClCompile Include="bufferevent_ratelim.c" />
     <ClCompile Include="bufferevent_sock.c" />
@@ -80,7 +81,7 @@
     <ClCompile>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>WIN32-Code/nmake;include;compat;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>WIN32-Code/nmake;include;compat;.;$(SolutionDir)\Dependencies\openssl\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DisableSpecificWarnings>4996</DisableSpecificWarnings>
       <WarningLevel>Level3</WarningLevel>
       <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
