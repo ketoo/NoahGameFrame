@@ -453,11 +453,11 @@ public:
 		}
 
 		NF_SHARE_PTR<NFCNavigationHandle> pNavMeshHandle = NF_SHARE_PTR<NFCNavigationHandle>(NF_NEW NFCNavigationHandle());
-		dtNavMeshQuery* pMavmeshQuery = new dtNavMeshQuery();
+		dtNavMeshQuery* pNavmeshQuery = new dtNavMeshQuery();
 
-		pMavmeshQuery->init(mesh, 1024);
+		pNavmeshQuery->init(mesh, 1024);
 		pNavMeshHandle->resPath = resPath;
-		pNavMeshHandle->navmeshLayer.pNavmeshQuery = pMavmeshQuery;
+		pNavMeshHandle->navmeshLayer.pNavmeshQuery = pNavmeshQuery;
 		pNavMeshHandle->navmeshLayer.pNavmesh = mesh;
 
 		uint32_t tileCount = 0;
