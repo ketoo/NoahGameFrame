@@ -29,6 +29,7 @@
 #include "NFEventModule.h"
 #include "NFScheduleModule.h"
 #include "NFDataTailModule.h"
+#include "NFGridModule.h"
 
 //
 //
@@ -66,6 +67,7 @@ void NFKernelPlugin::Install()
 	REGISTER_MODULE(pPluginManager, NFIEventModule, NFEventModule)
 	REGISTER_MODULE(pPluginManager, NFIScheduleModule, NFScheduleModule)
 	REGISTER_MODULE(pPluginManager, NFIDataTailModule, NFDataTailModule)
+	REGISTER_MODULE(pPluginManager, NFIGridModule, NFGridModule)
 
 	/*
 	REGISTER_TEST_MODULE(pPluginManager, NFISceneAOIModule, NFSceneAOITestModule)
@@ -83,6 +85,7 @@ void NFKernelPlugin::Uninstall()
 	UNREGISTER_TEST_MODULE(pPluginManager, NFISceneAOIModule, NFSceneAOITestModule)
 	UNREGISTER_TEST_MODULE(pPluginManager, NFIScheduleModule, NFScheduleTestModule)
 */
+	UNREGISTER_MODULE(pPluginManager, NFIGridModule, NFGridModule)
 	UNREGISTER_MODULE(pPluginManager, NFIDataTailModule, NFDataTailModule)
 	UNREGISTER_MODULE(pPluginManager, NFIEventModule, NFEventModule)
 	UNREGISTER_MODULE(pPluginManager, NFIKernelModule, NFKernelModule)

@@ -76,6 +76,7 @@
     <ClInclude Include="..\NFPluginModule\NFIGameServerNet_ServerModule.h" />
     <ClInclude Include="..\NFPluginModule\NFIGameServerScriptModule.h" />
     <ClInclude Include="..\NFPluginModule\NFIGameServerToWorldModule.h" />
+    <ClInclude Include="..\NFPluginModule\NFIGridModule.h" />
     <ClInclude Include="..\NFPluginModule\NFIGuildModule.h" />
     <ClInclude Include="..\NFPluginModule\NFIGuildRedisModule.h" />
     <ClInclude Include="..\NFPluginModule\NFIHateModule.h" />

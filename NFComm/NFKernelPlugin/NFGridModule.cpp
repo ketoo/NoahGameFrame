@@ -1,41 +1,42 @@
-// -------------------------------------------------------------------------
-//    @FileName      :    NFCGridModule.cpp
-//    @Author           :    LvSheng.Huang
-//    @Date             :    2012-12-15
-//    @Module           :    NFCGridModule
-//
-// -------------------------------------------------------------------------
+/*
+			This file is part of:
+				NoahFrame
+		https://github.com/ketoo/NoahGameFrame
 
-//#include "stdafx.h"
-#include "NFCGridModule.h"
-#include "NFComm/NFCore/NFCDataList.h"
+	Copyright 2009 - 2018 NoahFrame(NoahGameFrame)
 
-NFCGridModule::NFCGridModule(const int& sceneID, const int nSceneWidth)
+	File creator: lvsheng.huang
+
+	NoahFrame is open-source software and you can redistribute it and/or modify
+	it under the terms of the License; besides, anyone who use this file/software must include this copyright announcement.
+
+	Licensed under the Apache License, Version 2.0 (the "License");
+	you may not use this file except in compliance with the License.
+	You may obtain a copy of the License at
+
+		http://www.apache.org/licenses/LICENSE-2.0
+
+	Unless required by applicable law or agreed to in writing, software
+	distributed under the License is distributed on an "AS IS" BASIS,
+	WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+	See the License for the specific language governing permissions and
+	limitations under the License.
+*/
+
+#include "NFGridModule.h"
+
+
+NFGridModule::NFGridModule(NFIPluginManager* p)
 {
-    //     if (sceneID.IsNull()
-    //         || nSceneWidth <= 0)
-    //     {
-    //         assert(0);
-    //     }
-
-    mSceneID = sceneID;
-    mnSceneWidth = nSceneWidth;
-
-    Init();
 }
 
-NFCGridModule::~NFCGridModule()
+NFGridModule::~NFGridModule()
 {
-    Final();
 }
 
-const NFIDENTID NFCGridModule::OnObjectMove(const NFIDENTID& self, const int& sceneID, const NFIDENTID& lastGrid, const int nX, const int nY, const int nZ)
+const NFGUID NFGridModule::OnObjectMove(const NFGUID& self, const int& sceneID, const NFGUID& lastGrid, const int nX, const int nY, const int nZ)
 {
-    if (sceneID != mSceneID)
-    {
-        return NFIDENTID();
-    }
-    const NFIDENTID& currGrid = ComputerGridID(nX, nY, nZ);
+    const NFGUID& currGrid = ComputerGridID(nX, nY, nZ);
     if (currGrid == lastGrid)
     {
         return lastGrid;
@@ -47,10 +48,10 @@ const NFIDENTID NFCGridModule::OnObjectMove(const NFIDENTID& self, const int& sc
     return currGrid;
 }
 
-const NFIDENTID NFCGridModule::OnObjectEntry(const NFIDENTID& self, const int& sceneID, const int nX, const int nY, const int nZ)
+const NFGUID NFGridModule::OnObjectEntry(const NFGUID& self, const int& sceneID, const int nX, const int nY, const int nZ)
 {
-    NFIDENTID gridID = ComputerGridID(nX, nY, nZ);
-    NFCSceneGridInfo* pGridInfo = GetGridInfo(gridID);
+    NFGUID gridID = ComputerGridID(nX, nY, nZ);
+    NFSceneGridInfo* pGridInfo = GetGridInfo(gridID);
     if (pGridInfo)
     {
         OnMoveIn(self, gridID, gridID);
@@ -59,34 +60,34 @@ const NFIDENTID NFCGridModule::OnObjectEntry(const NFIDENTID& self, const int& s
     return gridID;
 }
 
-const NFIDENTID NFCGridModule::OnObjectLeave(const NFIDENTID& self, const int& sceneID, const NFIDENTID& lastGrid)
+const NFGUID NFGridModule::OnObjectLeave(const NFGUID& self, const int& sceneID, const NFGUID& lastGrid)
 {
 
     OnMoveOut(self, lastGrid, lastGrid);
 
-    return NFIDENTID();
+    return NFGUID();
 }
 
-const NFIDENTID NFCGridModule::ComputerGridID(const int nX, const int nY, const int nZ)
+const NFGUID NFGridModule::ComputerGridID(const int nX, const int nY, const int nZ)
 {
     int nGridXIndex = nX / nGridWidth;
     int nGridZIndex = nZ / nGridWidth;
 
-    return NFIDENTID(nGridXIndex, nGridZIndex);
+    return NFGUID(nGridXIndex, nGridZIndex);
 }
 
-const NFIDENTID NFCGridModule::GetStepLenth(const NFIDENTID& selfGrid, const NFIDENTID& otherGrid)
+const NFGUID NFGridModule::GetStepLenth(const NFGUID& selfGrid, const NFGUID& otherGrid)
 {
-    return NFIDENTID(abs(otherGrid.nHead64 - selfGrid.nHead64), abs(otherGrid.nData64 - selfGrid.nData64));
+    return NFGUID(abs(otherGrid.nHead64 - selfGrid.nHead64), abs(otherGrid.nData64 - selfGrid.nData64));
 }
 
-const int NFCGridModule::GetAroundGrid(const NFIDENTID& selfGrid, NFIDataList& gridList, EGRID_AROUND eAround /*= EGRID_AROUND_9 */)
+const int NFGridModule::GetAroundGrid(const NFGUID& selfGrid, NFDataList& gridList, EGRID_AROUND eAround /*= EGRID_AROUND_9 */)
 {
-    NFCSceneGridInfo* pGridInfo = GetGridInfo(selfGrid);
+    NFSceneGridInfo* pGridInfo = GetGridInfo(selfGrid);
     return GetAroundGrid(pGridInfo, gridList, eAround);
 }
 
-const int NFCGridModule::GetAroundGrid(NFCSceneGridInfo* pGridInfo, NFIDataList& gridList, EGRID_AROUND eAround /*= EGRID_AROUND_9 */)
+const int NFGridModule::GetAroundGrid(NFSceneGridInfo* pGridInfo, NFList<NFSceneGridInfo*>& gridList, EGRID_AROUND eAround /*= EGRID_AROUND_9 */)
 {
     int nObjectCount = 0;
 
@@ -105,11 +106,10 @@ const int NFCGridModule::GetAroundGrid(NFCSceneGridInfo* pGridInfo, NFIDataList&
         {
             for (int i = 0; i < EGRID_DIRECTION_MAXCOUNT; i++)
             {
-                NFCSceneGridInfo* pInfo = pGridInfo->GetConnectGrid((EGRID_DIRECTION)i);
+                NFSceneGridInfo* pInfo = pGridInfo->GetConnectGrid((EGRID_DIRECTION)i);
                 if (pInfo)
                 {
                     gridList.Add(pInfo);
-                    //gridList.push_back( pInfo );
                     nObjectCount += pInfo->Count();
                 }
             }
@@ -128,9 +128,9 @@ const int NFCGridModule::GetAroundGrid(NFCSceneGridInfo* pGridInfo, NFIDataList&
     return nObjectCount;
 }
 
-const int NFCGridModule::GetAroundObject(const NFIDENTID& selfGrid, NFIDataList& objectList, EGRID_AROUND eAround /*= EGRID_AROUND_9 */)
+const int NFGridModule::GetAroundObject(const NFGUID& selfGrid, NFDataList& objectList, EGRID_AROUND eAround /*= EGRID_AROUND_9 */)
 {
-    NFCSceneGridInfo* pGridInfo = GetGridInfo(selfGrid);
+    NFSceneGridInfo* pGridInfo = GetGridInfo(selfGrid);
     if (pGridInfo)
     {
         return GetAroundObject(pGridInfo, objectList, eAround);
@@ -138,22 +138,22 @@ const int NFCGridModule::GetAroundObject(const NFIDENTID& selfGrid, NFIDataList&
     return 0;
 }
 
-const int NFCGridModule::GetAroundObject(NFCSceneGridInfo* pGridInfo, NFIDataList& objectList, EGRID_AROUND eAround /*= EGRID_AROUND_9 */)
+const int NFGridModule::GetAroundObject(NFSceneGridInfo* pGridInfo, NFDataList& objectList, EGRID_AROUND eAround /*= EGRID_AROUND_9 */)
 {
     if (!pGridInfo)
     {
         return 0;
     }
 
-    NFCDataList gridList;
+    NFList<NFSceneGridInfo> gridList;
     if (GetAroundGrid(pGridInfo, gridList, eAround) > 0)
     {
         for (int i = 0; i < gridList.GetCount(); i++)
         {
-            NFCSceneGridInfo* pGridInfo = (NFCSceneGridInfo*)(gridList.Pointer(i));
+            NFSceneGridInfo* pGridInfo = (NFSceneGridInfo*)(gridList.Pointer(i));
             if (pGridInfo)
             {
-                NFIDENTID ident;
+                NFGUID ident;
                 bool bRet = pGridInfo->First(ident);
                 while (bRet)
                 {
@@ -167,9 +167,9 @@ const int NFCGridModule::GetAroundObject(NFCSceneGridInfo* pGridInfo, NFIDataLis
     return objectList.GetCount();
 }
 
-NFCSceneGridInfo* NFCGridModule::GetConnectGrid(const NFIDENTID& selfGrid, EGRID_DIRECTION eDirection)
+NFSceneGridInfo* NFGridModule::GetConnectGrid(const NFGUID& selfGrid, EGRID_DIRECTION eDirection)
 {
-    NFCSceneGridInfo* pGridInfo = GetGridInfo(selfGrid);
+    NFSceneGridInfo* pGridInfo = GetGridInfo(selfGrid);
     if (pGridInfo)
     {
         return pGridInfo->GetConnectGrid(eDirection);
@@ -178,7 +178,7 @@ NFCSceneGridInfo* NFCGridModule::GetConnectGrid(const NFIDENTID& selfGrid, EGRID
     return NULL;
 }
 
-NFCSceneGridInfo* NFCGridModule::GetGridInfo(const NFIDENTID& selfGrid)
+NFSceneGridInfo* NFGridModule::GetGridInfo(const NFGUID& selfGrid)
 {
     TMAP_GRID_INFO::iterator it = mtGridInfoMap.find(selfGrid);
     if (it != mtGridInfoMap.end())
@@ -189,14 +189,14 @@ NFCSceneGridInfo* NFCGridModule::GetGridInfo(const NFIDENTID& selfGrid)
     return NULL;
 }
 
-bool NFCGridModule::Init()
+bool NFGridModule::Init()
 {
     // init all grid
-    for (int nWidthPos = 0; nWidthPos < mnSceneWidth; nWidthPos += nGridWidth)
+    for (int nWidthPos = 0; nWidthPos < nSceneWidth; nWidthPos += nGridWidth)
     {
-        for (int nHeightPos = 0; nHeightPos < mnSceneWidth; nHeightPos += nGridWidth)
+        for (int nHeightPos = 0; nHeightPos < nSceneWidth; nHeightPos += nGridWidth)
         {
-            NFIDENTID gridID = ComputerGridID(nWidthPos, 0, nHeightPos);
+            NFGUID gridID = ComputerGridID(nWidthPos, 0, nHeightPos);
             if (!GetGridInfo(gridID))
             {
                 RegisterGrid(gridID);
@@ -207,7 +207,7 @@ bool NFCGridModule::Init()
     //     {
     //         for (int nHeightPos = -mnSceneWidth + 1; nHeightPos < mnSceneWidth; nHeightPos++)
     //         {
-    //             NFIDENTID gridID = ComputerGridID(nWidthPos, 0, nHeightPos);
+    //             NFGUID gridID = ComputerGridID(nWidthPos, 0, nHeightPos);
     //             if (!GetGridInfo(gridID))
     //             {
     //                 RegisterGrid(gridID);
@@ -219,7 +219,7 @@ bool NFCGridModule::Init()
     TMAP_GRID_INFO::iterator it = mtGridInfoMap.begin();
     for (it; it != mtGridInfoMap.end(); it++)
     {
-        NFCSceneGridInfo* aroundGrid[EGRID_DIRECTION_MAXCOUNT] = { 0 };
+        NFSceneGridInfo* aroundGrid[EGRID_DIRECTION_MAXCOUNT] = { 0 };
 
         for (int  i = 0; i < EGRID_DIRECTION_MAXCOUNT; i++)
         {
@@ -232,28 +232,43 @@ bool NFCGridModule::Init()
     return true;
 }
 
-bool NFCGridModule::Final()
+bool NFGridModule::AfterInit()
 {
-    TMAP_GRID_INFO::iterator it = mtGridInfoMap.begin();
-    for (it; it != mtGridInfoMap.end(); it++)
-    {
-        if (NULL != it->second)
-        {
-            delete it->second;
-            it->second = NULL;
-        }
-    }
-
-    mtGridInfoMap.clear();
-
-    return true;
+	return false;
 }
 
-bool NFCGridModule::RegisterGrid(const NFIDENTID& grid)
+bool NFGridModule::BeforeShut()
+{
+	TMAP_GRID_INFO::iterator it = mtGridInfoMap.begin();
+	for (it; it != mtGridInfoMap.end(); it++)
+	{
+		if (NULL != it->second)
+		{
+			delete it->second;
+			it->second = NULL;
+		}
+	}
+
+	mtGridInfoMap.clear();
+
+	return false;
+}
+
+bool NFGridModule::Shut()
+{
+	return false;
+}
+
+bool NFGridModule::Execute()
+{
+	return false;
+}
+
+bool NFGridModule::RegisterGrid(const NFGUID& grid)
 {
     if (!GetGridInfo(grid))
     {
-        NFCSceneGridInfo* pInfo = NF_NEW NFCSceneGridInfo(grid);
+        NFSceneGridInfo* pInfo = NF_NEW NFSceneGridInfo(grid);
         mtGridInfoMap.insert(TMAP_GRID_INFO::value_type(grid, pInfo));
 
         return true;
@@ -262,7 +277,7 @@ bool NFCGridModule::RegisterGrid(const NFIDENTID& grid)
     return false;
 }
 
-bool NFCGridModule::OnMoveIn(const NFIDENTID& self, const NFIDENTID& grid, const NFIDENTID& lastGrid)
+bool NFGridModule::OnMoveIn(const NFGUID& self, const NFGUID& grid, const NFGUID& lastGrid)
 {
     TMAP_GRID_INFO::iterator it = mtGridInfoMap.find(grid);
     if (it != mtGridInfoMap.end())
@@ -273,7 +288,7 @@ bool NFCGridModule::OnMoveIn(const NFIDENTID& self, const NFIDENTID& grid, const
     return false;
 }
 
-bool NFCGridModule::OnMoveOut(const NFIDENTID& self, const NFIDENTID& grid, const NFIDENTID& lastGrid)
+bool NFGridModule::OnMoveOut(const NFGUID& self, const NFGUID& grid, const NFGUID& lastGrid)
 {
     //grid为现在的格子
     TMAP_GRID_INFO::iterator it = mtGridInfoMap.find(grid);

@@ -8,6 +8,7 @@
     <ClInclude Include="NFKernelModule.h" />
     <ClInclude Include="NFSceneAOIModule.h" />
     <ClInclude Include="NFScheduleModule.h" />
+    <ClInclude Include="NFGridModule.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="NFKernelPlugin.cpp" />
@@ -18,5 +19,6 @@
     <ClCompile Include="NFKernelModule.cpp" />
     <ClCompile Include="NFSceneAOIModule.cpp" />
     <ClCompile Include="NFScheduleModule.cpp" />
+    <ClCompile Include="NFGridModule.cpp" />
   </ItemGroup>
 </Project>
