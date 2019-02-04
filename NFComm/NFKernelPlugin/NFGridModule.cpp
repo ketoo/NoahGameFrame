@@ -81,7 +81,7 @@ const NFGUID NFGridModule::GetStepLenth(const NFGUID& selfGrid, const NFGUID& ot
     return NFGUID(abs(otherGrid.nHead64 - selfGrid.nHead64), abs(otherGrid.nData64 - selfGrid.nData64));
 }
 
-const int NFGridModule::GetAroundGrid(const NFGUID& selfGrid, NFDataList& gridList, EGRID_AROUND eAround /*= EGRID_AROUND_9 */)
+const int NFGridModule::GetAroundGrid(const NFGUID& selfGrid, NFList<NFSceneGridInfo*>& gridList, EGRID_AROUND eAround /*= EGRID_AROUND_9 */)
 {
     NFSceneGridInfo* pGridInfo = GetGridInfo(selfGrid);
     return GetAroundGrid(pGridInfo, gridList, eAround);
@@ -145,12 +145,12 @@ const int NFGridModule::GetAroundObject(NFSceneGridInfo* pGridInfo, NFDataList& 
         return 0;
     }
 
-    NFList<NFSceneGridInfo> gridList;
+    NFList<NFSceneGridInfo*> gridList;
     if (GetAroundGrid(pGridInfo, gridList, eAround) > 0)
     {
-        for (int i = 0; i < gridList.GetCount(); i++)
+        for (int i = 0; i < gridList.Count(); i++)
         {
-            NFSceneGridInfo* pGridInfo = (NFSceneGridInfo*)(gridList.Pointer(i));
+            NFSceneGridInfo* pGridInfo = (NFSceneGridInfo*)(gridList.Get(i));
             if (pGridInfo)
             {
                 NFGUID ident;
