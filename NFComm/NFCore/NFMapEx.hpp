@@ -301,7 +301,7 @@ class NFConsistentHashMapEx : public NFMapEx<T, TD>
 public:
 	virtual NF_SHARE_PTR<TD> GetElementBySuitRandom()
 	{
-		NFCVirtualNode<T> vNode;
+		NFVirtualNode<T> vNode;
 		if (mxConsistentHash.GetSuitNodeRandom(vNode))
 		{
 			typename NFMapEx<T, TD>::NFMapOBJECT::iterator itr = NFMapEx<T, TD>::mObjectList.find(vNode.mxData);
@@ -316,7 +316,7 @@ public:
 
 	virtual NF_SHARE_PTR<TD> GetElementBySuitConsistent()
 	{
-		NFCVirtualNode<T> vNode;
+		NFVirtualNode<T> vNode;
 		if (mxConsistentHash.GetSuitNodeConsistent(vNode))
 		{
 			typename NFMapEx<T, TD>::NFMapOBJECT::iterator itr = NFMapEx<T, TD>::mObjectList.find(vNode.mxData);
@@ -331,7 +331,7 @@ public:
 
 	virtual NF_SHARE_PTR<TD> GetElementBySuit(const T& name)
 	{
-		NFCVirtualNode<T> vNode;
+		NFVirtualNode<T> vNode;
 		if (mxConsistentHash.GetSuitNode(name, vNode))
 		{
 			typename NFMapEx<T, TD>::NFMapOBJECT::iterator itr = NFMapEx<T, TD>::mObjectList.find(vNode.mxData);

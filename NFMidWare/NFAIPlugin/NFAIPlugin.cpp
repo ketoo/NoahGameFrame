@@ -25,8 +25,8 @@
 
 
 #include "NFAIPlugin.h"
-#include "NFCAIModule.h"
-#include "NFCHateModule.h"
+#include "NFAIModule.h"
+#include "NFHateModule.h"
 
 #ifdef NF_DYNAMIC_PLUGIN
 
@@ -56,12 +56,12 @@ const std::string NFAIPlugin::GetPluginName()
 
 void NFAIPlugin::Install()
 {
-	REGISTER_MODULE(pPluginManager, NFIAIModule, NFCAIModule)
-	REGISTER_MODULE(pPluginManager, NFIHateModule, NFCHateModule)
+	REGISTER_MODULE(pPluginManager, NFIAIModule, NFAIModule)
+	REGISTER_MODULE(pPluginManager, NFIHateModule, NFHateModule)
 }
 
 void NFAIPlugin::Uninstall()
 {
-	UNREGISTER_MODULE(pPluginManager, NFIHateModule, NFCHateModule)
-	UNREGISTER_MODULE(pPluginManager, NFIAIModule, NFCAIModule)
+	UNREGISTER_MODULE(pPluginManager, NFIHateModule, NFHateModule)
+	UNREGISTER_MODULE(pPluginManager, NFIAIModule, NFAIModule)
 }

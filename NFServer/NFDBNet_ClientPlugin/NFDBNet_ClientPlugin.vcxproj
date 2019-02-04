@@ -96,7 +96,7 @@
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="NFCDBToWorldModule.h" />
+    <ClInclude Include="NFDBToWorldModule.h" />
     <ClInclude Include="NFDBNet_ClientPlugin.h" />
   </ItemGroup>
   <ItemGroup>
@@ -108,7 +108,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
       </PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="NFCDBToWorldModule.cpp" />
+    <ClCompile Include="NFDBToWorldModule.cpp" />
     <ClCompile Include="NFDBNet_ClientPlugin.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

@@ -3,49 +3,49 @@
   <ItemGroup>
     <ClInclude Include="NFAIPlugin.h" />
     <ClInclude Include="NFIStateMachine.h" />
-    <ClInclude Include="NFCHateModule.h" />
-    <ClInclude Include="NFCAIModule.h" />
     <ClInclude Include="NFIState.h" />
-    <ClInclude Include="NFCChaseState.h">
+    <ClInclude Include="NFAIModule.h" />
+    <ClInclude Include="NFHateModule.h" />
+    <ClInclude Include="NFChaseState.h">
       <Filter>StateMahine</Filter>
     </ClInclude>
-    <ClInclude Include="NFCDeadState.h">
+    <ClInclude Include="NFDeadState.h">
       <Filter>StateMahine</Filter>
     </ClInclude>
-    <ClInclude Include="NFCFightState.h">
+    <ClInclude Include="NFFightState.h">
       <Filter>StateMahine</Filter>
     </ClInclude>
-    <ClInclude Include="NFCIdleState.h">
+    <ClInclude Include="NFIdleState.h">
       <Filter>StateMahine</Filter>
     </ClInclude>
-    <ClInclude Include="NFCPatrolState.h">
+    <ClInclude Include="NFPatrolState.h">
       <Filter>StateMahine</Filter>
     </ClInclude>
-    <ClInclude Include="NFCStateMachine.h">
+    <ClInclude Include="NFStateMachine.h">
       <Filter>StateMahine</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="dllmain.cpp" />
     <ClCompile Include="NFAIPlugin.cpp" />
-    <ClCompile Include="NFCHateModule.cpp" />
-    <ClCompile Include="NFCAIModule.cpp" />
-    <ClCompile Include="NFCChaseState.cpp">
+    <ClCompile Include="NFAIModule.cpp" />
+    <ClCompile Include="NFHateModule.cpp" />
+    <ClCompile Include="NFChaseState.cpp">
       <Filter>StateMahine</Filter>
     </ClCompile>
-    <ClCompile Include="NFCDeadState.cpp">
+    <ClCompile Include="NFDeadState.cpp">
       <Filter>StateMahine</Filter>
     </ClCompile>
-    <ClCompile Include="NFCFightState.cpp">
+    <ClCompile Include="NFFightState.cpp">
       <Filter>StateMahine</Filter>
     </ClCompile>
-    <ClCompile Include="NFCIdleState.cpp">
+    <ClCompile Include="NFIdleState.cpp">
       <Filter>StateMahine</Filter>
     </ClCompile>
-    <ClCompile Include="NFCPatrolState.cpp">
+    <ClCompile Include="NFPatrolState.cpp">
       <Filter>StateMahine</Filter>
     </ClCompile>
-    <ClCompile Include="NFCStateMachine.cpp">
+    <ClCompile Include="NFStateMachine.cpp">
       <Filter>StateMahine</Filter>
     </ClCompile>
   </ItemGroup>

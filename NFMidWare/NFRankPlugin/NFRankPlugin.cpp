@@ -25,7 +25,7 @@
 
 
 
-#include "NFCRankModule.h"
+#include "NFRankModule.h"
 #include "NFRankPlugin.h"
 
 //
@@ -59,11 +59,11 @@ const std::string NFRankPlugin::GetPluginName()
 
 void NFRankPlugin::Install()
 {
-    REGISTER_MODULE(pPluginManager, NFIRankModule, NFCRankModule)
+    REGISTER_MODULE(pPluginManager, NFIRankModule, NFRankModule)
 
 }
 
 void NFRankPlugin::Uninstall()
 {
-    UNREGISTER_MODULE(pPluginManager, NFIRankModule, NFCRankModule)
+    UNREGISTER_MODULE(pPluginManager, NFIRankModule, NFRankModule)
 }

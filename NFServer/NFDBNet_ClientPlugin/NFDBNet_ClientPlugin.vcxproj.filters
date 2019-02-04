@@ -2,11 +2,11 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <ClInclude Include="NFDBNet_ClientPlugin.h" />
-    <ClInclude Include="NFCDBToWorldModule.h" />
+    <ClInclude Include="NFDBToWorldModule.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="dllmain.cpp" />
     <ClCompile Include="NFDBNet_ClientPlugin.cpp" />
-    <ClCompile Include="NFCDBToWorldModule.cpp" />
+    <ClCompile Include="NFDBToWorldModule.cpp" />
   </ItemGroup>
 </Project>

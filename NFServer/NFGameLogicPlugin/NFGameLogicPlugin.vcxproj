@@ -99,10 +99,10 @@
     </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="NFCBuffModule.h" />
-    <ClInclude Include="NFCCreateRoleModule.h" />
-    <ClInclude Include="NFCGamePVPModule.h" />
-    <ClInclude Include="NFCSyncModule.h" />
+    <ClInclude Include="NFBuffModule.h" />
+    <ClInclude Include="NFCreateRoleModule.h" />
+    <ClInclude Include="NFGamePVPModule.h" />
+    <ClInclude Include="NFSyncModule.h" />
     <ClInclude Include="NFGameLogicPlugin.h" />
   </ItemGroup>
   <ItemGroup>
@@ -114,10 +114,10 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
       </PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="NFCBuffModule.cpp" />
-    <ClCompile Include="NFCCreateRoleModule.cpp" />
-    <ClCompile Include="NFCGamePVPModule.cpp" />
-    <ClCompile Include="NFCSyncModule.cpp" />
+    <ClCompile Include="NFBuffModule.cpp" />
+    <ClCompile Include="NFCreateRoleModule.cpp" />
+    <ClCompile Include="NFGamePVPModule.cpp" />
+    <ClCompile Include="NFSyncModule.cpp" />
     <ClCompile Include="NFGameLogicPlugin.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

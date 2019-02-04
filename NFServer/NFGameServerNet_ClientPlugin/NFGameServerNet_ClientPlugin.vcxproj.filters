@@ -2,13 +2,13 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <ClInclude Include="NFGameServerNet_ClientPlugin.h" />
-    <ClInclude Include="NFCGameServerToWorldModule.h" />
-    <ClInclude Include="NFCGameServerToDBModule.h" />
+    <ClInclude Include="NFGameServerToDBModule.h" />
+    <ClInclude Include="NFGameServerToWorldModule.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="dllmain.cpp" />
     <ClCompile Include="NFGameServerNet_ClientPlugin.cpp" />
-    <ClCompile Include="NFCGameServerToWorldModule.cpp" />
-    <ClCompile Include="NFCGameServerToDBModule.cpp" />
+    <ClCompile Include="NFGameServerToDBModule.cpp" />
+    <ClCompile Include="NFGameServerToWorldModule.cpp" />
   </ItemGroup>
 </Project>

@@ -23,7 +23,7 @@
    limitations under the License.
 */
 #include "NFMasterNet_ServerPlugin.h"
-#include "NFCMasterNet_ServerModule.h"
+#include "NFMasterNet_ServerModule.h"
 
 //
 //
@@ -57,10 +57,10 @@ const std::string NFMasterNet_ServerPlugin::GetPluginName()
 
 void NFMasterNet_ServerPlugin::Install()
 {
-    REGISTER_MODULE(pPluginManager, NFIMasterNet_ServerModule, NFCMasterNet_ServerModule)
+    REGISTER_MODULE(pPluginManager, NFIMasterNet_ServerModule, NFMasterNet_ServerModule)
 }
 
 void NFMasterNet_ServerPlugin::Uninstall()
 {
-    UNREGISTER_MODULE(pPluginManager, NFIMasterNet_ServerModule, NFCMasterNet_ServerModule)
+    UNREGISTER_MODULE(pPluginManager, NFIMasterNet_ServerModule, NFMasterNet_ServerModule)
 }

@@ -27,14 +27,14 @@
 #include "NFComm/NFMessageDefine/NFProtocolDefine.hpp"
 #include "NFComm/NFPluginModule/NFIEventModule.h"
 
-bool NFCHelloWorld4Module::Init()
+bool NFHelloWorld4Module::Init()
 {
 	m_pActorModule = pPluginManager->FindModule<NFIActorModule>();
 
 	return true;
 }
 
-int NFCHelloWorld4Module::RequestAsyEnd(const int nFormActor, const int nSubMsgID, const std::string& strData)
+int NFHelloWorld4Module::RequestAsyEnd(const int nFormActor, const int nSubMsgID, const std::string& strData)
 {
 	std::cout << "Main thread: " << std::this_thread::get_id() << " Actor: " << nFormActor << " MsgID: " << nSubMsgID << " Data:" << strData << std::endl;
 
@@ -42,7 +42,7 @@ int NFCHelloWorld4Module::RequestAsyEnd(const int nFormActor, const int nSubMsgI
 	return 0;
 }
 
-bool NFCHelloWorld4Module::AfterInit()
+bool NFHelloWorld4Module::AfterInit()
 {
 	
 	std::cout << "Hello, world4, AfterInit" << std::endl;
@@ -50,7 +50,7 @@ bool NFCHelloWorld4Module::AfterInit()
 
 	int nActorID = m_pActorModule->RequireActor();
 	m_pActorModule->AddComponent<NFHttpComponent>(nActorID);
-	m_pActorModule->AddDefaultEndFunc(nActorID, this, &NFCHelloWorld4Module::RequestAsyEnd);
+	m_pActorModule->AddDefaultEndFunc(nActorID, this, &NFHelloWorld4Module::RequestAsyEnd);
 
 	for (int i = 0; i < 10; ++i)
 	{
@@ -61,7 +61,7 @@ bool NFCHelloWorld4Module::AfterInit()
 	return true;
 }
 
-bool NFCHelloWorld4Module::Execute()
+bool NFHelloWorld4Module::Execute()
 {
 	
 	//std::cout << "Hello, world4, Execute" << std::endl;
@@ -69,7 +69,7 @@ bool NFCHelloWorld4Module::Execute()
 	return true;
 }
 
-bool NFCHelloWorld4Module::BeforeShut()
+bool NFHelloWorld4Module::BeforeShut()
 {
 	
 	std::cout << "Hello, world4, BeforeShut" << std::endl;
@@ -77,7 +77,7 @@ bool NFCHelloWorld4Module::BeforeShut()
 	return true;
 }
 
-bool NFCHelloWorld4Module::Shut()
+bool NFHelloWorld4Module::Shut()
 {
 	
 	std::cout << "Hello, world4, Shut" << std::endl;

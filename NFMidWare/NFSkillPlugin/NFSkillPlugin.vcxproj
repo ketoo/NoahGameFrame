@@ -100,19 +100,19 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
       </PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="NFCBriefSkillConsumeProcessModule.cpp" />
-    <ClCompile Include="NFCBulletSkillConsumeProcessModule.cpp" />
-    <ClCompile Include="NFCSkillConsumeManagerModule.cpp" />
-    <ClCompile Include="NFCSkillCooldownModule.cpp" />
-    <ClCompile Include="NFCSkillModule.cpp" />
+    <ClCompile Include="NFBriefSkillConsumeProcessModule.cpp" />
+    <ClCompile Include="NFBulletSkillConsumeProcessModule.cpp" />
+    <ClCompile Include="NFSkillConsumeManagerModule.cpp" />
+    <ClCompile Include="NFSkillCooldownModule.cpp" />
+    <ClCompile Include="NFSkillModule.cpp" />
     <ClCompile Include="NFSkillPlugin.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="NFCBriefSkillConsumeProcessModule.h" />
-    <ClInclude Include="NFCBulletSkillConsumeProcessModule.h" />
-    <ClInclude Include="NFCSkillConsumeManagerModule.h" />
-    <ClInclude Include="NFCSkillCooldownModule.h" />
-    <ClInclude Include="NFCSkillModule.h" />
+    <ClInclude Include="NFBriefSkillConsumeProcessModule.h" />
+    <ClInclude Include="NFBulletSkillConsumeProcessModule.h" />
+    <ClInclude Include="NFSkillConsumeManagerModule.h" />
+    <ClInclude Include="NFSkillCooldownModule.h" />
+    <ClInclude Include="NFSkillModule.h" />
     <ClInclude Include="NFSkillPlugin.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

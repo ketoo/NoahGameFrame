@@ -16,34 +16,34 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="NFCBuffModule.h">
+    <ClInclude Include="NFGameLogicPlugin.h" />
+    <ClInclude Include="NFBuffModule.h">
       <Filter>NFBuffModule</Filter>
     </ClInclude>
-    <ClInclude Include="NFGameLogicPlugin.h" />
-    <ClInclude Include="NFCCreateRoleModule.h">
+    <ClInclude Include="NFCreateRoleModule.h">
       <Filter>NFCreateRoleModule</Filter>
     </ClInclude>
-    <ClInclude Include="NFCSyncModule.h">
-      <Filter>NFSyncModule</Filter>
-    </ClInclude>
-    <ClInclude Include="NFCGamePVPModule.h">
+    <ClInclude Include="NFGamePVPModule.h">
       <Filter>NFPVP</Filter>
+    </ClInclude>
+    <ClInclude Include="NFSyncModule.h">
+      <Filter>NFSyncModule</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="dllmain.cpp" />
-    <ClCompile Include="NFCBuffModule.cpp">
+    <ClCompile Include="NFGameLogicPlugin.cpp" />
+    <ClCompile Include="NFBuffModule.cpp">
       <Filter>NFBuffModule</Filter>
     </ClCompile>
-    <ClCompile Include="NFGameLogicPlugin.cpp" />
-    <ClCompile Include="NFCCreateRoleModule.cpp">
+    <ClCompile Include="NFCreateRoleModule.cpp">
       <Filter>NFCreateRoleModule</Filter>
     </ClCompile>
-    <ClCompile Include="NFCSyncModule.cpp">
-      <Filter>NFSyncModule</Filter>
-    </ClCompile>
-    <ClCompile Include="NFCGamePVPModule.cpp">
+    <ClCompile Include="NFGamePVPModule.cpp">
       <Filter>NFPVP</Filter>
+    </ClCompile>
+    <ClCompile Include="NFSyncModule.cpp">
+      <Filter>NFSyncModule</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

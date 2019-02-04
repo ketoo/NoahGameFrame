@@ -6,16 +6,16 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="NFCLogModule.cpp">
-      <Filter>NFLogModule</Filter>
-    </ClCompile>
     <ClCompile Include="NFLogPlugin.cpp" />
     <ClCompile Include="dllmain.cpp" />
+    <ClCompile Include="NFLogModule.cpp">
+      <Filter>NFLogModule</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="NFCLogModule.h">
+    <ClInclude Include="NFLogPlugin.h" />
+    <ClInclude Include="NFLogModule.h">
       <Filter>NFLogModule</Filter>
     </ClInclude>
-    <ClInclude Include="NFLogPlugin.h" />
   </ItemGroup>
 </Project>

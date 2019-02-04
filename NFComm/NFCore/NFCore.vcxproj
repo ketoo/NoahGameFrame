@@ -98,10 +98,10 @@
   <ItemGroup>
     <ClInclude Include="NFBox.hpp" />
     <ClInclude Include="NFConsistentHash.hpp" />
-    <ClInclude Include="NFCObject.h" />
-    <ClInclude Include="NFCProperty.h" />
-    <ClInclude Include="NFCPropertyManager.h" />
-    <ClInclude Include="NFCRecordManager.h" />
+    <ClInclude Include="NFObject.h" />
+    <ClInclude Include="NFProperty.h" />
+    <ClInclude Include="NFPropertyManager.h" />
+    <ClInclude Include="NFRecordManager.h" />
     <ClInclude Include="NFDataList.hpp" />
     <ClInclude Include="NFDateTime.hpp" />
     <ClInclude Include="NFLine.hpp" />
@@ -114,7 +114,7 @@
     <ClInclude Include="NFSingleton.hpp" />
     <ClInclude Include="NFSpaceNode.hpp" />
     <ClInclude Include="NFSphere.hpp" />
-    <ClInclude Include="NFCRecord.h" />
+    <ClInclude Include="NFRecord.h" />
     <ClInclude Include="NFIObject.h" />
     <ClInclude Include="NFIProperty.h" />
     <ClInclude Include="NFIPropertyManager.h" />
@@ -126,11 +126,11 @@
     <ClInclude Include="NFException.hpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="NFCObject.cpp" />
-    <ClCompile Include="NFCProperty.cpp" />
-    <ClCompile Include="NFCPropertyManager.cpp" />
-    <ClCompile Include="NFCRecordManager.cpp" />
-    <ClCompile Include="NFCRecord.cpp" />
+    <ClCompile Include="NFObject.cpp" />
+    <ClCompile Include="NFProperty.cpp" />
+    <ClCompile Include="NFPropertyManager.cpp" />
+    <ClCompile Include="NFRecordManager.cpp" />
+    <ClCompile Include="NFRecord.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

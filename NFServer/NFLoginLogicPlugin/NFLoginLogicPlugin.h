@@ -23,8 +23,8 @@
    limitations under the License.
 */
 
-#ifndef NFC_LOGINLOGICPLUGIN_MODULE_H
-#define NFC_LOGINLOGICPLUGIN_MODULE_H
+#ifndef NF_LOGINLOGICPLUGIN_MODULE_H
+#define NF_LOGINLOGICPLUGIN_MODULE_H
 
 #include "NFComm/NFPluginModule/NFIPlugin.h"
 #include "NFComm/NFPluginModule/NFIPluginManager.h"

@@ -100,11 +100,11 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
       </PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="NFCProxyServerNet_ServerModule.cpp" />
+    <ClCompile Include="NFProxyServerNet_ServerModule.cpp" />
     <ClCompile Include="NFProxyServerNet_ServerPlugin.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="NFCProxyServerNet_ServerModule.h" />
+    <ClInclude Include="NFProxyServerNet_ServerModule.h" />
     <ClInclude Include="NFProxyServerNet_ServerPlugin.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

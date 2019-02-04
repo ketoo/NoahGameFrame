@@ -23,7 +23,7 @@
    limitations under the License.
 */
 
-#include "NFCChatModule.h"
+#include "NFChatModule.h"
 #include "NFChatPlugin.h"
 
 //
@@ -57,11 +57,11 @@ const std::string NFChatPlugin::GetPluginName()
 
 void NFChatPlugin::Install()
 {
-    REGISTER_MODULE(pPluginManager, NFIChatModule, NFCChatModule)
+    REGISTER_MODULE(pPluginManager, NFIChatModule, NFChatModule)
 
 }
 
 void NFChatPlugin::Uninstall()
 {
-    UNREGISTER_MODULE(pPluginManager, NFIChatModule, NFCChatModule)
+    UNREGISTER_MODULE(pPluginManager, NFIChatModule, NFChatModule)
 }

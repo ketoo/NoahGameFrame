@@ -100,13 +100,13 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
       </PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="NFCHeroModule.cpp" />
-    <ClCompile Include="NFCHeroPropertyModule.cpp" />
+    <ClCompile Include="NFHeroModule.cpp" />
+    <ClCompile Include="NFHeroPropertyModule.cpp" />
     <ClCompile Include="NFHeroPlugin.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="NFCHeroModule.h" />
-    <ClInclude Include="NFCHeroPropertyModule.h" />
+    <ClInclude Include="NFHeroModule.h" />
+    <ClInclude Include="NFHeroPropertyModule.h" />
     <ClInclude Include="NFHeroPlugin.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

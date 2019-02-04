@@ -25,7 +25,7 @@
 
 
 
-#include "NFCTaskModule.h"
+#include "NFTaskModule.h"
 #include "NFTaskPlugin.h"
 
 //
@@ -59,11 +59,11 @@ const std::string NFTaskPlugin::GetPluginName()
 
 void NFTaskPlugin::Install()
 {
-    REGISTER_MODULE(pPluginManager, NFITaskModule, NFCTaskModule)
+    REGISTER_MODULE(pPluginManager, NFITaskModule, NFTaskModule)
 
 }
 
 void NFTaskPlugin::Uninstall()
 {
-    UNREGISTER_MODULE(pPluginManager, NFITaskModule, NFCTaskModule)
+    UNREGISTER_MODULE(pPluginManager, NFITaskModule, NFTaskModule)
 }

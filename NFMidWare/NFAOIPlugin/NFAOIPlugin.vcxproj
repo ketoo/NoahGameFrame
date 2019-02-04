@@ -101,11 +101,11 @@
       </PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="NFAOIPlugin.cpp" />
-    <ClCompile Include="NFCAOIModule.cpp" />
+    <ClCompile Include="NFAOIModule.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="NFAOIPlugin.h" />
-    <ClInclude Include="NFCAOIModule.h" />
+    <ClInclude Include="NFAOIModule.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
