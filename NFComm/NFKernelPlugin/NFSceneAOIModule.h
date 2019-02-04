@@ -127,22 +127,22 @@ protected:
 
 private:
 
-	std::vector<OBJECT_ENTER_EVENT_FUNCTOR_PTR> mtObjectEnterCallback;
-	std::vector<OBJECT_ENTER_EVENT_FUNCTOR_PTR> mtObjectDataFinishedCallBack;
-	std::vector<OBJECT_LEAVE_EVENT_FUNCTOR_PTR> mtObjectLeaveCallback;
+	std::vector<OBJECT_ENTER_EVENT_FUNCTOR_PTR> mvObjectEnterCallback;
+	std::vector<OBJECT_ENTER_EVENT_FUNCTOR_PTR> mvObjectDataFinishedCallBack;
+	std::vector<OBJECT_LEAVE_EVENT_FUNCTOR_PTR> mvObjectLeaveCallback;
 
-	std::vector<PROPERTY_ENTER_EVENT_FUNCTOR_PTR> mtPropertyEnterCallback;
-	std::vector<RECORD_ENTER_EVENT_FUNCTOR_PTR> mtRecordEnterCallback;
+	std::vector<PROPERTY_ENTER_EVENT_FUNCTOR_PTR> mvPropertyEnterCallback;
+	std::vector<RECORD_ENTER_EVENT_FUNCTOR_PTR> mvRecordEnterCallback;
 
-	std::vector<PROPERTY_SINGLE_EVENT_FUNCTOR_PTR> mtPropertySingleCallback;
-	std::vector<RECORD_SINGLE_EVENT_FUNCTOR_PTR> mtRecordSingleCallback;
+	std::vector<PROPERTY_SINGLE_EVENT_FUNCTOR_PTR> mvPropertySingleCallback;
+	std::vector<RECORD_SINGLE_EVENT_FUNCTOR_PTR> mvRecordSingleCallback;
 
-	std::vector<SCENE_EVENT_FUNCTOR_PTR> mtEnterSceneConditionCallback;
-	std::vector<SCENE_EVENT_FUNCTOR_PTR> mtBeforeEnterSceneCallback;
-	std::vector<SCENE_EVENT_FUNCTOR_PTR> mtAfterEnterSceneCallback;
-	std::vector<SCENE_EVENT_FUNCTOR_PTR> mtOnSwapSceneCallback;
-	std::vector<SCENE_EVENT_FUNCTOR_PTR> mtBeforeLeaveSceneCallback;
-	std::vector<SCENE_EVENT_FUNCTOR_PTR> mtAfterLeaveSceneCallback;
+	std::vector<SCENE_EVENT_FUNCTOR_PTR> mvEnterSceneConditionCallback;
+	std::vector<SCENE_EVENT_FUNCTOR_PTR> mvBeforeEnterSceneCallback;
+	std::vector<SCENE_EVENT_FUNCTOR_PTR> mvAfterEnterSceneCallback;
+	std::vector<SCENE_EVENT_FUNCTOR_PTR> mvOnSwapSceneCallback;
+	std::vector<SCENE_EVENT_FUNCTOR_PTR> mvBeforeLeaveSceneCallback;
+	std::vector<SCENE_EVENT_FUNCTOR_PTR> mvAfterLeaveSceneCallback;
 private:
 	NFIKernelModule* m_pKernelModule;
 	NFIClassModule* m_pClassModule;
