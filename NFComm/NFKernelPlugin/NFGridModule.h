@@ -128,11 +128,11 @@ public:
 protected:
 
 	// get some grids that around this grid
-	virtual const int GetAroundGrid(NFSceneGridInfo* pGridInfo, NFList<NFSceneGridInfo*>& gridList,
+	virtual const int GetAroundGrid(NFSceneGridInfo* pGridInfo, std::array<NFSceneGridInfo*> & gridList,
 		EGRID_AROUND eAround = EGRID_AROUND_9);
 
 	// get some objects that around this grid
-	virtual const int GetAroundObject(NFSceneGridInfo* pGridInfo, NFList<NFSceneGridInfo*>& objectList,
+	virtual const int GetAroundObject(NFSceneGridInfo* pGridInfo, NFDataList& objectList,
 		EGRID_AROUND eAround = EGRID_AROUND_9);
 
 private:
