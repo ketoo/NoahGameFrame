@@ -106,6 +106,7 @@
     <ClInclude Include="NFDataTailModule.h" />
     <ClInclude Include="NFErrorBusModule.h" />
     <ClInclude Include="NFEventModule.h" />
+    <ClInclude Include="NFGridModule.h" />
     <ClInclude Include="NFKernelModule.h" />
     <ClInclude Include="NFSceneAOIModule.h" />
     <ClInclude Include="NFScheduleModule.h" />
@@ -123,6 +124,7 @@
     <ClCompile Include="NFDataTailModule.cpp" />
     <ClCompile Include="NFErrorBusModule.cpp" />
     <ClCompile Include="NFEventModule.cpp" />
+    <ClCompile Include="NFGridModule.cpp" />
     <ClCompile Include="NFKernelModule.cpp" />
     <ClCompile Include="NFSceneAOIModule.cpp" />
     <ClCompile Include="NFScheduleModule.cpp" />
