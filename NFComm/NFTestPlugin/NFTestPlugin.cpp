@@ -25,7 +25,7 @@
 
 
 
-#include "NFCTestModule.h"
+#include "NFTestModule.h"
 #include "NFTestPlugin.h"
 
 //
@@ -59,11 +59,11 @@ const std::string NFTestPlugin::GetPluginName()
 
 void NFTestPlugin::Install()
 {
-    REGISTER_MODULE(pPluginManager, NFITestModule, NFCTestModule)
+    REGISTER_MODULE(pPluginManager, NFITestModule, NFTestModule)
 
 }
 
 void NFTestPlugin::Uninstall()
 {
-    UNREGISTER_MODULE(pPluginManager, NFITestModule, NFCTestModule)
+    UNREGISTER_MODULE(pPluginManager, NFITestModule, NFTestModule)
 }

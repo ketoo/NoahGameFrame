@@ -24,7 +24,7 @@
 */
 
 
-#include "NFCSecurityModule.h"
+#include "NFSecurityModule.h"
 #include "NFSecurityPlugin.h"
 
 //
@@ -58,11 +58,11 @@ const std::string NFSecurityPlugin::GetPluginName()
 
 void NFSecurityPlugin::Install()
 {
-    REGISTER_MODULE(pPluginManager, NFISecurityModule, NFCSecurityModule)
+    REGISTER_MODULE(pPluginManager, NFISecurityModule, NFSecurityModule)
 
 }
 
 void NFSecurityPlugin::Uninstall()
 {
-    UNREGISTER_MODULE(pPluginManager, NFISecurityModule, NFCSecurityModule)
+    UNREGISTER_MODULE(pPluginManager, NFISecurityModule, NFSecurityModule)
 }

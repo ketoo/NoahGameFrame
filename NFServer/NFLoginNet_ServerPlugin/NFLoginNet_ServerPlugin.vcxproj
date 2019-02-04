@@ -94,7 +94,7 @@
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="NFCLoginNet_ServerModule.h" />
+    <ClInclude Include="NFLoginNet_ServerModule.h" />
     <ClInclude Include="NFLoginNet_ServerPlugin.h" />
   </ItemGroup>
   <ItemGroup>
@@ -106,7 +106,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
       </PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="NFCLoginNet_ServerModule.cpp" />
+    <ClCompile Include="NFLoginNet_ServerModule.cpp" />
     <ClCompile Include="NFLoginNet_ServerPlugin.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

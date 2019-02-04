@@ -25,13 +25,13 @@
 
 
 #include "NFDBLogicPlugin.h"
-#include "NFCRankRedisModule.h"
-#include "NFCPlayerRedisModule.h"
-#include "NFCGuildRedisModule.h"
-#include "NFCBigMapRedisModule.h"
-#include "NFCCommonRedisModule.h"
-#include "NFCMailRedisModule.h"
-#include "NFCAccountRedisModule.h"
+#include "NFRankRedisModule.h"
+#include "NFPlayerRedisModule.h"
+#include "NFGuildRedisModule.h"
+#include "NFBigMapRedisModule.h"
+#include "NFCommonRedisModule.h"
+#include "NFMailRedisModule.h"
+#include "NFAccountRedisModule.h"
 
 #ifdef NF_DYNAMIC_PLUGIN
 
@@ -61,22 +61,22 @@ const std::string NFDBLogicPlugin::GetPluginName()
 
 void NFDBLogicPlugin::Install()
 {
-	REGISTER_MODULE(pPluginManager, NFIRankRedisModule, NFCRankRedisModule)
-	REGISTER_MODULE(pPluginManager, NFIPlayerRedisModule, NFCPlayerRedisModule)
-	REGISTER_MODULE(pPluginManager, NFIGuildRedisModule, NFCGuildRedisModule)
-    REGISTER_MODULE(pPluginManager, NFIBigMapRedisModule, NFCBigMapRedisModule)
-	REGISTER_MODULE(pPluginManager, NFICommonRedisModule, NFCCommonRedisModule)
-	REGISTER_MODULE(pPluginManager, NFIMailRedisModule, NFCMailRedisModule)
-	REGISTER_MODULE(pPluginManager, NFIAccountRedisModule, NFCAccountRedisModule)
+	REGISTER_MODULE(pPluginManager, NFIRankRedisModule, NFRankRedisModule)
+	REGISTER_MODULE(pPluginManager, NFIPlayerRedisModule, NFPlayerRedisModule)
+	REGISTER_MODULE(pPluginManager, NFIGuildRedisModule, NFGuildRedisModule)
+    REGISTER_MODULE(pPluginManager, NFIBigMapRedisModule, NFBigMapRedisModule)
+	REGISTER_MODULE(pPluginManager, NFICommonRedisModule, NFCommonRedisModule)
+	REGISTER_MODULE(pPluginManager, NFIMailRedisModule, NFMailRedisModule)
+	REGISTER_MODULE(pPluginManager, NFIAccountRedisModule, NFAccountRedisModule)
 }
 
 void NFDBLogicPlugin::Uninstall()
 {
-	UNREGISTER_MODULE(pPluginManager, NFIAccountRedisModule, NFCAccountRedisModule)
-	UNREGISTER_MODULE(pPluginManager, NFIMailRedisModule, NFCMailRedisModule)
-	UNREGISTER_MODULE(pPluginManager, NFICommonRedisModule, NFCCommonRedisModule)
-	UNREGISTER_MODULE(pPluginManager, NFIBigMapRedisModule, NFCBigMapRedisModule)
-	UNREGISTER_MODULE(pPluginManager, NFIGuildRedisModule, NFCGuildRedisModule)
-	UNREGISTER_MODULE(pPluginManager, NFIPlayerRedisModule, NFCPlayerRedisModule)
-	UNREGISTER_MODULE(pPluginManager, NFIRankRedisModule, NFCRankRedisModule)
+	UNREGISTER_MODULE(pPluginManager, NFIAccountRedisModule, NFAccountRedisModule)
+	UNREGISTER_MODULE(pPluginManager, NFIMailRedisModule, NFMailRedisModule)
+	UNREGISTER_MODULE(pPluginManager, NFICommonRedisModule, NFCommonRedisModule)
+	UNREGISTER_MODULE(pPluginManager, NFIBigMapRedisModule, NFBigMapRedisModule)
+	UNREGISTER_MODULE(pPluginManager, NFIGuildRedisModule, NFGuildRedisModule)
+	UNREGISTER_MODULE(pPluginManager, NFIPlayerRedisModule, NFPlayerRedisModule)
+	UNREGISTER_MODULE(pPluginManager, NFIRankRedisModule, NFRankRedisModule)
 }

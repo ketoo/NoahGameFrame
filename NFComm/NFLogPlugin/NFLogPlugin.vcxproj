@@ -11,12 +11,12 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="NFCLogModule.cpp" />
+    <ClCompile Include="NFLogModule.cpp" />
     <ClCompile Include="dllmain.cpp" />
     <ClCompile Include="NFLogPlugin.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="NFCLogModule.h" />
+    <ClInclude Include="NFLogModule.h" />
     <ClInclude Include="NFLogPlugin.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">

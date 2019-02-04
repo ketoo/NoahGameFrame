@@ -96,7 +96,7 @@
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="NFCWorldNet_ServerModule.h" />
+    <ClInclude Include="NFWorldNet_ServerModule.h" />
     <ClInclude Include="NFWorldNet_ServerPlugin.h" />
   </ItemGroup>
   <ItemGroup>
@@ -108,7 +108,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
       </PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="NFCWorldNet_ServerModule.cpp" />
+    <ClCompile Include="NFWorldNet_ServerModule.cpp" />
     <ClCompile Include="NFWorldNet_ServerPlugin.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

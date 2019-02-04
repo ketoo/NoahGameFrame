@@ -24,7 +24,7 @@
 */
 
 #include "NFWorldNet_ClientPlugin.h"
-#include "NFCWorldToMasterModule.h"
+#include "NFWorldToMasterModule.h"
 
 //
 //
@@ -57,10 +57,10 @@ const std::string NFWorldNet_ClientPlugin::GetPluginName()
 
 void NFWorldNet_ClientPlugin::Install()
 {
-    REGISTER_MODULE(pPluginManager, NFIWorldToMasterModule, NFCWorldToMasterModule)
+    REGISTER_MODULE(pPluginManager, NFIWorldToMasterModule, NFWorldToMasterModule)
 }
 
 void NFWorldNet_ClientPlugin::Uninstall()
 {
-    UNREGISTER_MODULE(pPluginManager, NFIWorldToMasterModule, NFCWorldToMasterModule)
+    UNREGISTER_MODULE(pPluginManager, NFIWorldToMasterModule, NFWorldToMasterModule)
 }

@@ -24,7 +24,7 @@
 */
 
 #include "NFLoginNet_ServerPlugin.h"
-#include "NFCLoginNet_ServerModule.h"
+#include "NFLoginNet_ServerModule.h"
 
 //
 //
@@ -57,10 +57,10 @@ const std::string NFLoginNet_ServerPlugin::GetPluginName()
 
 void NFLoginNet_ServerPlugin::Install()
 {
-    REGISTER_MODULE(pPluginManager, NFILoginNet_ServerModule, NFCLoginNet_ServerModule)
+    REGISTER_MODULE(pPluginManager, NFILoginNet_ServerModule, NFLoginNet_ServerModule)
 }
 
 void NFLoginNet_ServerPlugin::Uninstall()
 {
-    UNREGISTER_MODULE(pPluginManager, NFILoginNet_ServerModule, NFCLoginNet_ServerModule)
+    UNREGISTER_MODULE(pPluginManager, NFILoginNet_ServerModule, NFLoginNet_ServerModule)
 }

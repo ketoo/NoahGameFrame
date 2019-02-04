@@ -2,11 +2,11 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <ClInclude Include="NFWorldNet_ServerPlugin.h" />
-    <ClInclude Include="NFCWorldNet_ServerModule.h" />
+    <ClInclude Include="NFWorldNet_ServerModule.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="dllmain.cpp" />
     <ClCompile Include="NFWorldNet_ServerPlugin.cpp" />
-    <ClCompile Include="NFCWorldNet_ServerModule.cpp" />
+    <ClCompile Include="NFWorldNet_ServerModule.cpp" />
   </ItemGroup>
 </Project>

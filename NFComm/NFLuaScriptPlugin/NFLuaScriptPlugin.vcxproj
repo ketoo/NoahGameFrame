@@ -109,17 +109,17 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
       </PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="NFCLuaHttpModule.cpp" />
-    <ClCompile Include="NFCLuaPBModule.cpp" />
-    <ClCompile Include="NFCLuaScriptModule.cpp" />
-    <ClCompile Include="NFCLuaWebSocketModule.cpp" />
+    <ClCompile Include="NFLuaHttpModule.cpp" />
+    <ClCompile Include="NFLuaPBModule.cpp" />
+    <ClCompile Include="NFLuaScriptModule.cpp" />
+    <ClCompile Include="NFLuaWebSocketModule.cpp" />
     <ClCompile Include="NFLuaScriptPlugin.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="NFCLuaHttpModule.h" />
-    <ClInclude Include="NFCLuaPBModule.h" />
-    <ClInclude Include="NFCLuaScriptModule.h" />
-    <ClInclude Include="NFCLuaWebSocketModule.h" />
+    <ClInclude Include="NFLuaHttpModule.h" />
+    <ClInclude Include="NFLuaPBModule.h" />
+    <ClInclude Include="NFLuaScriptModule.h" />
+    <ClInclude Include="NFLuaWebSocketModule.h" />
     <ClInclude Include="NFLuaScriptPlugin.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

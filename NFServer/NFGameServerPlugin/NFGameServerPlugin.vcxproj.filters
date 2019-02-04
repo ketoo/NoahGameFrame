@@ -16,43 +16,43 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="NFGameServerPlugin.h" />
-    <ClInclude Include="NFCSceneProcessModule.h">
+    <ClInclude Include="NFGameServerModule.h" />
+    <ClInclude Include="NFSwitchGameServerModule.h" />
+    <ClInclude Include="NFSceneProcessModule.h">
       <Filter>NFSceneModule</Filter>
     </ClInclude>
-    <ClInclude Include="NFCPropertyModule.h">
+    <ClInclude Include="NFPropertyConfigModule.h">
       <Filter>NFPropertyModule</Filter>
     </ClInclude>
-    <ClInclude Include="NFCLevelModule.h">
-      <Filter>NFLevelModule</Filter>
-    </ClInclude>
-    <ClInclude Include="NFCPropertyConfigModule.h">
+    <ClInclude Include="NFPropertyModule.h">
       <Filter>NFPropertyModule</Filter>
     </ClInclude>
-    <ClInclude Include="NFCGameServerModule.h" />
-    <ClInclude Include="NFCNPCRefreshModule.h">
+    <ClInclude Include="NFNPCRefreshModule.h">
       <Filter>NFNPCRefreshModule</Filter>
     </ClInclude>
-    <ClInclude Include="NFCSwitchGameServerModule.h" />
+    <ClInclude Include="NFLevelModule.h">
+      <Filter>NFLevelModule</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="dllmain.cpp" />
     <ClCompile Include="NFGameServerPlugin.cpp" />
-    <ClCompile Include="NFCSceneProcessModule.cpp">
+    <ClCompile Include="NFGameServerModule.cpp" />
+    <ClCompile Include="NFSwitchGameServerModule.cpp" />
+    <ClCompile Include="NFSceneProcessModule.cpp">
       <Filter>NFSceneModule</Filter>
     </ClCompile>
-    <ClCompile Include="NFCPropertyModule.cpp">
+    <ClCompile Include="NFPropertyConfigModule.cpp">
       <Filter>NFPropertyModule</Filter>
     </ClCompile>
-    <ClCompile Include="NFCLevelModule.cpp">
-      <Filter>NFLevelModule</Filter>
-    </ClCompile>
-    <ClCompile Include="NFCPropertyConfigModule.cpp">
+    <ClCompile Include="NFPropertyModule.cpp">
       <Filter>NFPropertyModule</Filter>
     </ClCompile>
-    <ClCompile Include="NFCGameServerModule.cpp" />
-    <ClCompile Include="NFCNPCRefreshModule.cpp">
+    <ClCompile Include="NFNPCRefreshModule.cpp">
       <Filter>NFNPCRefreshModule</Filter>
     </ClCompile>
-    <ClCompile Include="NFCSwitchGameServerModule.cpp" />
+    <ClCompile Include="NFLevelModule.cpp">
+      <Filter>NFLevelModule</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

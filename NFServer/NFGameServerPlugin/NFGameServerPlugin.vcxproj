@@ -99,13 +99,13 @@
     </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="NFCGameServerModule.h" />
-    <ClInclude Include="NFCLevelModule.h" />
-    <ClInclude Include="NFCNPCRefreshModule.h" />
-    <ClInclude Include="NFCPropertyConfigModule.h" />
-    <ClInclude Include="NFCPropertyModule.h" />
-    <ClInclude Include="NFCSceneProcessModule.h" />
-    <ClInclude Include="NFCSwitchGameServerModule.h" />
+    <ClInclude Include="NFGameServerModule.h" />
+    <ClInclude Include="NFLevelModule.h" />
+    <ClInclude Include="NFNPCRefreshModule.h" />
+    <ClInclude Include="NFPropertyConfigModule.h" />
+    <ClInclude Include="NFPropertyModule.h" />
+    <ClInclude Include="NFSceneProcessModule.h" />
+    <ClInclude Include="NFSwitchGameServerModule.h" />
     <ClInclude Include="NFGameServerPlugin.h" />
   </ItemGroup>
   <ItemGroup>
@@ -117,13 +117,13 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
       </PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="NFCGameServerModule.cpp" />
-    <ClCompile Include="NFCLevelModule.cpp" />
-    <ClCompile Include="NFCNPCRefreshModule.cpp" />
-    <ClCompile Include="NFCPropertyConfigModule.cpp" />
-    <ClCompile Include="NFCPropertyModule.cpp" />
-    <ClCompile Include="NFCSceneProcessModule.cpp" />
-    <ClCompile Include="NFCSwitchGameServerModule.cpp" />
+    <ClCompile Include="NFGameServerModule.cpp" />
+    <ClCompile Include="NFLevelModule.cpp" />
+    <ClCompile Include="NFNPCRefreshModule.cpp" />
+    <ClCompile Include="NFPropertyConfigModule.cpp" />
+    <ClCompile Include="NFPropertyModule.cpp" />
+    <ClCompile Include="NFSceneProcessModule.cpp" />
+    <ClCompile Include="NFSwitchGameServerModule.cpp" />
     <ClCompile Include="NFGameServerPlugin.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

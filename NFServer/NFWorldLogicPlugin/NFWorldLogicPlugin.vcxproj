@@ -92,8 +92,8 @@
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="NFCWorldPVPModule.h" />
-    <ClInclude Include="NFCWorldLogicModule.h" />
+    <ClInclude Include="NFWorldPVPModule.h" />
+    <ClInclude Include="NFWorldLogicModule.h" />
     <ClInclude Include="NFWorldLogicPlugin.h" />
   </ItemGroup>
   <ItemGroup>
@@ -105,8 +105,8 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
       </PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="NFCWorldPVPModule.cpp" />
-    <ClCompile Include="NFCWorldLogicModule.cpp" />
+    <ClCompile Include="NFWorldPVPModule.cpp" />
+    <ClCompile Include="NFWorldLogicModule.cpp" />
     <ClCompile Include="NFWorldLogicPlugin.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

@@ -24,7 +24,7 @@
 */
 
 
-#include "NFCGameServerNet_ServerModule.h"
+#include "NFGameServerNet_ServerModule.h"
 #include "NFGameServerNet_ServerPlugin.h"
 
 //
@@ -58,11 +58,11 @@ const std::string NFGameServerNet_ServerPlugin::GetPluginName()
 
 void NFGameServerNet_ServerPlugin::Install()
 {
-    REGISTER_MODULE(pPluginManager, NFIGameServerNet_ServerModule, NFCGameServerNet_ServerModule)
+    REGISTER_MODULE(pPluginManager, NFIGameServerNet_ServerModule, NFGameServerNet_ServerModule)
 
 }
 
 void NFGameServerNet_ServerPlugin::Uninstall()
 {
-    UNREGISTER_MODULE(pPluginManager, NFIGameServerNet_ServerModule, NFCGameServerNet_ServerModule)
+    UNREGISTER_MODULE(pPluginManager, NFIGameServerNet_ServerModule, NFGameServerNet_ServerModule)
 }

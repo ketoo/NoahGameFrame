@@ -2,11 +2,10 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <ClCompile Include="dllmain.cpp" />
-    <ClCompile Include="NFCLoginNet_HttpServerModule.cpp" />
     <ClCompile Include="NFLoginNet_HttpServerPlugin.cpp" />
+    <ClCompile Include="NFLoginNet_HttpServerModule.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="NFCLoginNet_HttpServerModule.h" />
     <ClInclude Include="NFLoginNet_HttpServerPlugin.h" />
     <ClInclude Include="NFRequestLogin.h">
       <Filter>NFResponse</Filter>
@@ -20,6 +19,7 @@
     <ClInclude Include="NFRequestSelectWorld.h">
       <Filter>NFResponse</Filter>
     </ClInclude>
+    <ClInclude Include="NFLoginNet_HttpServerModule.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="NFResponse">

@@ -103,11 +103,11 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
       </PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="NFCProxyLogicModule.cpp" />
+    <ClCompile Include="NFProxyLogicModule.cpp" />
     <ClCompile Include="NFProxyLogicPlugin.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="NFCProxyLogicModule.h" />
+    <ClInclude Include="NFProxyLogicModule.h" />
     <ClInclude Include="NFProxyLogicPlugin.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

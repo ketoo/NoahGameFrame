@@ -5,10 +5,10 @@
 #include <map>
 
 
-class NFClassProperty
+class NFlassProperty
 {
 public:
-	NFClassProperty()
+	NFlassProperty()
 	{
 	}
 
@@ -17,10 +17,10 @@ public:
 	std::string type;
 };
 
-class NFClassRecord
+class NFlassRecord
 {
 public:
-	NFClassRecord()
+	NFlassRecord()
 	{
 	}
 
@@ -36,21 +36,21 @@ public:
 	std::map<std::string, RecordColDesc*> colList;//tag, desc
 };
 
-class NFClassStruct
+class NFlassStruct
 {
 public:
-	NFClassStruct()
+	NFlassStruct()
 	{
 	}
 	std::string strClassName;
-	std::map<std::string, NFClassProperty*> xPropertyList;//key, desc
-	std::map<std::string, NFClassRecord*> xRecordList;//name, desc
+	std::map<std::string, NFlassProperty*> xPropertyList;//key, desc
+	std::map<std::string, NFlassRecord*> xRecordList;//name, desc
 };
 
-class NFClassElement
+class NFlassElement
 {
 public:
-	NFClassElement()
+	NFlassElement()
 	{
 	}
 
@@ -66,8 +66,8 @@ public:
 class ClassData
 {
 public:
-	NFClassStruct xStructData;
-	NFClassElement xIniData;
+	NFlassStruct xStructData;
+	NFlassElement xIniData;
 };
 
 class NFFileProcess

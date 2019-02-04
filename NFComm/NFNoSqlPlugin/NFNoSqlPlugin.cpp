@@ -24,7 +24,7 @@
 */
 
 #include "NFNoSqlPlugin.h"
-#include "NFCNoSqlModule.h"
+#include "NFNoSqlModule.h"
 
 #ifdef NF_DYNAMIC_PLUGIN
 
@@ -53,10 +53,10 @@ const std::string NFNoSqlPlugin::GetPluginName()
 
 void NFNoSqlPlugin::Install()
 {
-	REGISTER_MODULE(pPluginManager, NFINoSqlModule, NFCNoSqlModule)
+	REGISTER_MODULE(pPluginManager, NFINoSqlModule, NFNoSqlModule)
 }
 
 void NFNoSqlPlugin::Uninstall()
 {
-	UNREGISTER_MODULE(pPluginManager, NFINoSqlModule, NFCNoSqlModule)
+	UNREGISTER_MODULE(pPluginManager, NFINoSqlModule, NFNoSqlModule)
 }

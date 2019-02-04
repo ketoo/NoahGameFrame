@@ -94,13 +94,13 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="dllmain.cpp" />
-    <ClCompile Include="NFCProxyServerToGameModule.cpp" />
-    <ClCompile Include="NFCProxyServerToWorldModule.cpp" />
+    <ClCompile Include="NFProxyServerToGameModule.cpp" />
+    <ClCompile Include="NFProxyServerToWorldModule.cpp" />
     <ClCompile Include="NFProxyServerNet_ClientPlugin.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="NFCProxyServerToGameModule.h" />
-    <ClInclude Include="NFCProxyServerToWorldModule.h" />
+    <ClInclude Include="NFProxyServerToGameModule.h" />
+    <ClInclude Include="NFProxyServerToWorldModule.h" />
     <ClInclude Include="NFProxyServerNet_ClientPlugin.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

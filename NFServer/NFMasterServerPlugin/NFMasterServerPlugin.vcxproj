@@ -92,7 +92,7 @@
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="NFCMasterModule.h" />
+    <ClInclude Include="NFMasterModule.h" />
     <ClInclude Include="NFMasterServerPlugin.h" />
   </ItemGroup>
   <ItemGroup>
@@ -104,7 +104,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
       </PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="NFCMasterModule.cpp" />
+    <ClCompile Include="NFMasterModule.cpp" />
     <ClCompile Include="NFMasterServerPlugin.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

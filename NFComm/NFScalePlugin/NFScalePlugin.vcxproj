@@ -100,11 +100,11 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
       </PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="NFCScaleModule.cpp" />
+    <ClCompile Include="NFScaleModule.cpp" />
     <ClCompile Include="NFScalePlugin.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="NFCScaleModule.h" />
+    <ClInclude Include="NFScaleModule.h" />
     <ClInclude Include="NFScalePlugin.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

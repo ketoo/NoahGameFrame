@@ -23,8 +23,8 @@
    limitations under the License.
 */
 
-#ifndef NFC_HELLO_WORLD_H
-#define NFC_HELLO_WORLD_H
+#ifndef NF_HELLO_WORLD_H
+#define NF_HELLO_WORLD_H
 
 #include "NFComm/NFPluginModule/NFIPlugin.h"
 #include "NFComm/NFPluginModule/NFIPluginManager.h"
@@ -42,11 +42,11 @@ class NFIHelloWorld
 
 };
 
-class NFCHelloWorld
+class NFHelloWorld
     : public NFIHelloWorld
 {
 public:
-    NFCHelloWorld(NFIPluginManager* p)
+    NFHelloWorld(NFIPluginManager* p)
     {
         pPluginManager = p;
     }

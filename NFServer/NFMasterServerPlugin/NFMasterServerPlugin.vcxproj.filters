@@ -2,11 +2,11 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <ClInclude Include="NFMasterServerPlugin.h" />
-    <ClInclude Include="NFCMasterModule.h" />
+    <ClInclude Include="NFMasterModule.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="dllmain.cpp" />
     <ClCompile Include="NFMasterServerPlugin.cpp" />
-    <ClCompile Include="NFCMasterModule.cpp" />
+    <ClCompile Include="NFMasterModule.cpp" />
   </ItemGroup>
 </Project>

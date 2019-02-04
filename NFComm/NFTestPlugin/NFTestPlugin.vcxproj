@@ -93,7 +93,7 @@
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="NFCTestModule.h" />
+    <ClInclude Include="NFTestModule.h" />
     <ClInclude Include="NFTestPlugin.h" />
   </ItemGroup>
   <ItemGroup>
@@ -105,7 +105,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
       </PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="NFCTestModule.cpp" />
+    <ClCompile Include="NFTestModule.cpp" />
     <ClCompile Include="NFTestPlugin.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

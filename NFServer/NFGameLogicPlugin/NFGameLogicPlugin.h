@@ -24,8 +24,8 @@
 */
 
 
-#ifndef NFC_GAMELOGICLUGIN_H
-#define NFC_GAMELOGICLUGIN_H
+#ifndef NF_GAMELOGICLUGIN_H
+#define NF_GAMELOGICLUGIN_H
 
 #include "NFComm/NFPluginModule/NFIPlugin.h"
 #include "NFComm/NFPluginModule/NFIPluginManager.h"

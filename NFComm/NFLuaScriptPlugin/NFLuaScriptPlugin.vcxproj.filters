@@ -2,17 +2,17 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <ClCompile Include="dllmain.cpp" />
-    <ClCompile Include="NFCLuaScriptModule.cpp" />
     <ClCompile Include="NFLuaScriptPlugin.cpp" />
-    <ClCompile Include="NFCLuaPBModule.cpp" />
-    <ClCompile Include="NFCLuaHttpModule.cpp" />
-    <ClCompile Include="NFCLuaWebSocketModule.cpp" />
+    <ClCompile Include="NFLuaHttpModule.cpp" />
+    <ClCompile Include="NFLuaPBModule.cpp" />
+    <ClCompile Include="NFLuaScriptModule.cpp" />
+    <ClCompile Include="NFLuaWebSocketModule.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="NFCLuaScriptModule.h" />
     <ClInclude Include="NFLuaScriptPlugin.h" />
-    <ClInclude Include="NFCLuaPBModule.h" />
-    <ClInclude Include="NFCLuaHttpModule.h" />
-    <ClInclude Include="NFCLuaWebSocketModule.h" />
+    <ClInclude Include="NFLuaHttpModule.h" />
+    <ClInclude Include="NFLuaPBModule.h" />
+    <ClInclude Include="NFLuaScriptModule.h" />
+    <ClInclude Include="NFLuaWebSocketModule.h" />
   </ItemGroup>
 </Project>

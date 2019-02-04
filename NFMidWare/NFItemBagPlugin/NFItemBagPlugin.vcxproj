@@ -100,29 +100,29 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
       </PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="NFCEquipModule.cpp" />
-    <ClCompile Include="NFCEquipPropertyModule.cpp" />
-    <ClCompile Include="NFCItemCardConsumeProcessModule.cpp" />
-    <ClCompile Include="NFCItemConsumeManagerModule.cpp" />
-    <ClCompile Include="NFCItemEquipConsumeProcessModule.cpp" />
-    <ClCompile Include="NFCItemGemConsumeProcessModule.cpp" />
-    <ClCompile Include="NFCItemItemConsumeProcessModule.cpp" />
-    <ClCompile Include="NFCItemModule.cpp" />
-    <ClCompile Include="NFCItemTokenConsumeProcessModule.cpp" />
-    <ClCompile Include="NFCPackModule.cpp" />
+    <ClCompile Include="NFEquipModule.cpp" />
+    <ClCompile Include="NFEquipPropertyModule.cpp" />
+    <ClCompile Include="NFItemCardConsumeProcessModule.cpp" />
+    <ClCompile Include="NFItemConsumeManagerModule.cpp" />
+    <ClCompile Include="NFItemEquipConsumeProcessModule.cpp" />
+    <ClCompile Include="NFItemGemConsumeProcessModule.cpp" />
+    <ClCompile Include="NFItemItemConsumeProcessModule.cpp" />
+    <ClCompile Include="NFItemModule.cpp" />
+    <ClCompile Include="NFItemTokenConsumeProcessModule.cpp" />
+    <ClCompile Include="NFPackModule.cpp" />
     <ClCompile Include="NFItemBagPlugin.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="NFCEquipModule.h" />
-    <ClInclude Include="NFCEquipPropertyModule.h" />
-    <ClInclude Include="NFCItemCardConsumeProcessModule.h" />
-    <ClInclude Include="NFCItemConsumeManagerModule.h" />
-    <ClInclude Include="NFCItemEquipConsumeProcessModule.h" />
-    <ClInclude Include="NFCItemGemConsumeProcessModule.h" />
-    <ClInclude Include="NFCItemItemConsumeProcessModule.h" />
-    <ClInclude Include="NFCItemModule.h" />
-    <ClInclude Include="NFCItemTokenConsumeProcessModule.h" />
-    <ClInclude Include="NFCPackModule.h" />
+    <ClInclude Include="NFEquipModule.h" />
+    <ClInclude Include="NFEquipPropertyModule.h" />
+    <ClInclude Include="NFItemCardConsumeProcessModule.h" />
+    <ClInclude Include="NFItemConsumeManagerModule.h" />
+    <ClInclude Include="NFItemEquipConsumeProcessModule.h" />
+    <ClInclude Include="NFItemGemConsumeProcessModule.h" />
+    <ClInclude Include="NFItemItemConsumeProcessModule.h" />
+    <ClInclude Include="NFItemModule.h" />
+    <ClInclude Include="NFItemTokenConsumeProcessModule.h" />
+    <ClInclude Include="NFPackModule.h" />
     <ClInclude Include="NFItemBagPlugin.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

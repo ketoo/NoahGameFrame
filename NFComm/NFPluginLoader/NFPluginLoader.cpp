@@ -33,7 +33,7 @@
 #include <future>
 #include <functional>
 #include <atomic>
-#include "NFCPluginManager.h"
+#include "NFPluginManager.h"
 #include "NFComm/NFPluginModule/NFPlatform.h"
 #include "NFComm/NFLogPlugin/easylogging++.h"
 
@@ -125,11 +125,11 @@ void MainExecute();
 
 void ReleaseNF()
 {
-	NFCPluginManager::GetSingletonPtr()->BeforeShut();
-	NFCPluginManager::GetSingletonPtr()->Shut();
-	NFCPluginManager::GetSingletonPtr()->Finalize();
+	NFPluginManager::GetSingletonPtr()->BeforeShut();
+	NFPluginManager::GetSingletonPtr()->Shut();
+	NFPluginManager::GetSingletonPtr()->Finalize();
 
-	NFCPluginManager::GetSingletonPtr()->ReleaseInstance();
+	NFPluginManager::GetSingletonPtr()->ReleaseInstance();
 }
 
 #if NF_PLATFORM == NF_PLATFORM_WIN
@@ -299,11 +299,11 @@ void ProcessParameter(int argc, char* argv[])
             }
         }
 
-        NFCPluginManager::GetSingletonPtr()->SetConfigPath(strDataPath);
+        NFPluginManager::GetSingletonPtr()->SetConfigPath(strDataPath);
     }
     else
     {
-        NFCPluginManager::GetSingletonPtr()->SetConfigPath("../");
+        NFPluginManager::GetSingletonPtr()->SetConfigPath("../");
     }
 
 	if (strArgvList.find(".xml") != string::npos)
@@ -317,7 +317,7 @@ void ProcessParameter(int argc, char* argv[])
 			}
 		}
 
-		NFCPluginManager::GetSingletonPtr()->SetConfigName(strPluginName);
+		NFPluginManager::GetSingletonPtr()->SetConfigName(strPluginName);
 	}
 
     if (strArgvList.find("Server=") != string::npos)
@@ -332,7 +332,7 @@ void ProcessParameter(int argc, char* argv[])
 			}
 		}
 
-		NFCPluginManager::GetSingletonPtr()->SetAppName(strAppName);
+		NFPluginManager::GetSingletonPtr()->SetAppName(strAppName);
 	}
 
 	if (strArgvList.find("ID=") != string::npos)
@@ -350,7 +350,7 @@ void ProcessParameter(int argc, char* argv[])
 		int nAppID = 0;
         if(NF_StrTo(strAppID, nAppID))
         {
-            NFCPluginManager::GetSingletonPtr()->SetAppID(nAppID);
+            NFPluginManager::GetSingletonPtr()->SetAppID(nAppID);
         }
 	}
 
@@ -370,7 +370,7 @@ void ProcessParameter(int argc, char* argv[])
 		int nDockerFlag = 0;
         if(NF_StrTo(strDockerFlag, nDockerFlag))
         {
-            NFCPluginManager::GetSingletonPtr()->SetRunningDocker(nDockerFlag);
+            NFPluginManager::GetSingletonPtr()->SetRunningDocker(nDockerFlag);
         }
 	}
 	
@@ -425,9 +425,9 @@ void MainExecute()
 #endif
 		{
 #ifdef NF_COROUTINE
-			NFCPluginManager::Instance()->ExecuteCoScheduler();
+			NFPluginManager::Instance()->ExecuteCoScheduler();
 #else
-			NFCPluginManager::GetSingletonPtr()->Execute();
+			NFPluginManager::GetSingletonPtr()->Execute();
 #endif
 		}
 #if NF_PLATFORM == NF_PLATFORM_WIN
@@ -462,12 +462,12 @@ int main(int argc, char* argv[])
 	PrintfLogo();
 	CreateBackThread();
 
-	NFCPluginManager::GetSingletonPtr()->LoadPlugin();
-	NFCPluginManager::GetSingletonPtr()->Awake();
-	NFCPluginManager::GetSingletonPtr()->Init();
-	NFCPluginManager::GetSingletonPtr()->AfterInit();
-	NFCPluginManager::GetSingletonPtr()->CheckConfig();
-	NFCPluginManager::GetSingletonPtr()->ReadyExecute();
+	NFPluginManager::GetSingletonPtr()->LoadPlugin();
+	NFPluginManager::GetSingletonPtr()->Awake();
+	NFPluginManager::GetSingletonPtr()->Init();
+	NFPluginManager::GetSingletonPtr()->AfterInit();
+	NFPluginManager::GetSingletonPtr()->CheckConfig();
+	NFPluginManager::GetSingletonPtr()->ReadyExecute();
 
 #if NF_PLATFORM == NF_PLATFORM_WIN
 	MainExecute();

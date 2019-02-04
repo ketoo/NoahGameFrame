@@ -95,14 +95,14 @@
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="NFCDynLib.h" />
+    <ClInclude Include="NFDynLib.h" />
     <ClInclude Include="NFCoroutineManager.h" />
-    <ClInclude Include="NFCPluginManager.h" />
+    <ClInclude Include="NFPluginManager.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="NFCDynLib.cpp" />
+    <ClCompile Include="NFDynLib.cpp" />
     <ClCompile Include="NFCoroutineManager.cpp" />
-    <ClCompile Include="NFCPluginManager.cpp" />
+    <ClCompile Include="NFPluginManager.cpp" />
     <ClCompile Include="NFPluginLoader.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

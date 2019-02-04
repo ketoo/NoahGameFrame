@@ -11,14 +11,14 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="NFCActor.cpp" />
-    <ClCompile Include="NFCActorModule.cpp" />
+    <ClCompile Include="NFActor.cpp" />
+    <ClCompile Include="NFActorModule.cpp" />
     <ClCompile Include="dllmain.cpp" />
     <ClCompile Include="NFActorPlugin.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="NFCActor.h" />
-    <ClInclude Include="NFCActorModule.h" />
+    <ClInclude Include="NFActor.h" />
+    <ClInclude Include="NFActorModule.h" />
     <ClInclude Include="NFActorPlugin.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">

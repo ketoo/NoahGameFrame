@@ -52,20 +52,20 @@ struct SceneSeedResource
 //SceneID,(SeedID,SeedData)
 //NFMapEx<int, NFMapEx<std::string, SceneSeedResource>> mtSceneResourceConfig;
 
-class NFCSceneGroupInfo
+class NFSceneGroupInfo
 {
 public:
-    NFCSceneGroupInfo(int nSceneID, int nGroupID)
+    NFSceneGroupInfo(int nSceneID, int nGroupID)
     {
         mnGroupID = nGroupID;
     }
 
-    NFCSceneGroupInfo(int nSceneID, int nGroupID, int nWidth)
+    NFSceneGroupInfo(int nSceneID, int nGroupID, int nWidth)
     {
         mnGroupID = nGroupID;
     }
 
-    virtual ~NFCSceneGroupInfo()
+    virtual ~NFSceneGroupInfo()
     {
     }
 
@@ -80,26 +80,26 @@ public:
 };
 
 // all group in this scene
-class NFCSceneInfo
-    : public NFMapEx<int, NFCSceneGroupInfo>
+class NFSceneInfo
+    : public NFMapEx<int, NFSceneGroupInfo>
 {
 public:
 
-    NFCSceneInfo(int nSceneID)
+    NFSceneInfo(int nSceneID)
     {
         mnGroupIndex = -1;
         mnSceneID = nSceneID;
         mnWidth = 512;
     }
 
-    NFCSceneInfo(int nSceneID, int nWidth)
+    NFSceneInfo(int nSceneID, int nWidth)
     {
         mnGroupIndex = -1;
         mnSceneID = nSceneID;
         mnWidth = nWidth;
     }
 
-    virtual ~NFCSceneInfo()
+    virtual ~NFSceneInfo()
     {
         ClearAll();
     }
@@ -117,7 +117,7 @@ public:
 
     bool AddObjectToGroup(const int nGroupID, const NFGUID& ident, bool bPlayer)
     {
-        NF_SHARE_PTR<NFCSceneGroupInfo> pInfo = GetElement(nGroupID);
+        NF_SHARE_PTR<NFSceneGroupInfo> pInfo = GetElement(nGroupID);
         if (pInfo.get())
         {
             if (bPlayer)
@@ -135,7 +135,7 @@ public:
 
     bool RemoveObjectFromGroup(const int nGroupID, const NFGUID& ident, bool bPlayer)
     {
-        NF_SHARE_PTR<NFCSceneGroupInfo> pInfo = GetElement(nGroupID);
+        NF_SHARE_PTR<NFSceneGroupInfo> pInfo = GetElement(nGroupID);
         if (pInfo.get())
         {
             if (bPlayer)
@@ -153,7 +153,7 @@ public:
 
 	bool ExistObjectInGroup(const int nGroupID, const NFGUID& ident)
 	{
-		NF_SHARE_PTR<NFCSceneGroupInfo> pInfo = GetElement(nGroupID);
+		NF_SHARE_PTR<NFSceneGroupInfo> pInfo = GetElement(nGroupID);
 		if (pInfo)
 		{
 			return pInfo->mxPlayerList.ExistElement(ident) || pInfo->mxOtherList.ExistElement(ident);
@@ -164,7 +164,7 @@ public:
 
     bool Execute()
     {
-        NF_SHARE_PTR<NFCSceneGroupInfo> pGroupInfo = First();
+        NF_SHARE_PTR<NFSceneGroupInfo> pGroupInfo = First();
         while (pGroupInfo.get())
         {
             pGroupInfo->Execute();
@@ -270,7 +270,7 @@ typedef NF_SHARE_PTR<SCENE_EVENT_FUNCTOR> SCENE_EVENT_FUNCTOR_PTR;
 
 class NFISceneAOIModule
     : public NFIModule,
-  public NFMapEx<int, NFCSceneInfo>
+  public NFMapEx<int, NFSceneInfo>
 {
 public:
     virtual ~NFISceneAOIModule()
