@@ -29,6 +29,7 @@
 #include <list>
 #include <iostream>
 #include <algorithm>
+#include <array>
 #include "NFComm/NFCore/NFDataList.hpp"
 #include "NFComm/NFPluginModule/NFIModule.h"
 #include "NFComm/NFPluginModule/NFGUID.h"
