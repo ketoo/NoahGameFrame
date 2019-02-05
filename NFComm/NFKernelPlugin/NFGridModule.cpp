@@ -150,8 +150,8 @@ const int NFGridModule::GetAroundObject(NFSceneGridInfo* pGridInfo, NFDataList& 
     {
         for (int i = 0; i < gridList.Count(); i++)
         {
-            NFSceneGridInfo* pGridInfo = (NFSceneGridInfo*)(gridList.Get(i));
-            if (pGridInfo)
+			NFSceneGridInfo* pGridInfo = nullptr;
+            if (gridList.Get(i, pGridInfo))
             {
                 NFGUID ident;
                 bool bRet = pGridInfo->First(ident);
