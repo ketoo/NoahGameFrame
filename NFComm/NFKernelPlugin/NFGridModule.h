@@ -115,8 +115,8 @@ public:
 	virtual bool Shut();
 	virtual bool Execute();
 
-	// the event that a object are moving
-	virtual const bool RequestGroupGrid(const NFGUID& self, const int& sceneID, const int& groupID);
+	virtual const bool CreateGroupGrid(const NFGUID& self, const int& sceneID, const int& groupID);
+	virtual const bool DestroyGroupGrid(const NFGUID& self, const int& sceneID, const int& groupID);
 
     // the event that a object are moving
     virtual const NFGUID OnObjectMove(const NFGUID& self, const int& sceneID, const int& groupID,
