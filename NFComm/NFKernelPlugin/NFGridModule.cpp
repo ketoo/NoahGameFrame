@@ -28,13 +28,110 @@
 
 NFGridModule::NFGridModule(NFIPluginManager* p)
 {
+	pPluginManager = p;
 }
 
 NFGridModule::~NFGridModule()
 {
 }
 
-const NFGUID NFGridModule::OnObjectMove(const NFGUID& self, const int& sceneID, const NFGUID& lastGrid, const int nX, const int nY, const int nZ)
+
+bool NFGridModule::Init()
+{
+	m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>();
+	m_pClassModule = pPluginManager->FindModule<NFIClassModule>();
+	m_pElementModule = pPluginManager->FindModule<NFIElementModule>();
+	m_pLogModule = pPluginManager->FindModule<NFILogModule>();
+	m_pEventModule = pPluginManager->FindModule<NFIEventModule>();
+
+
+	return true;
+}
+
+bool NFGridModule::AfterInit()
+{
+
+	//init all scene
+	NF_SHARE_PTR<NFIClass> xLogicClass = m_pClassModule->GetElement(NFrame::Scene::ThisName());
+	if (xLogicClass)
+	{
+		const std::vector<std::string>& strIdList = xLogicClass->GetIDList();
+
+		for (int i = 0; i < strIdList.size(); ++i)
+		{
+			const std::string& strId = strIdList[i];
+
+			int nSceneID = lexical_cast<int>(strId);
+			TMAP_SCENE_INFO::iterator it = mtGridInfoMap.find(nSceneID);
+			if (it == mtGridInfoMap.end())
+			{
+				TMAP_GROUP_INFO groupInfo;
+				groupInfo.insert(TMAP_GROUP_INFO::value_type(0, std::map<NFGUID, NF_SHARE_PTR<NFSceneGridInfo>>()));
+				mtGridInfoMap.insert(TMAP_SCENE_INFO::value_type(nSceneID, groupInfo));
+			}
+		}
+
+
+		TMAP_SCENE_INFO::iterator it = mtGridInfoMap.begin();
+		for (; it != mtGridInfoMap.end(); it++)
+		{
+			// init all grid, start from position 0
+			//the default group's id is 0
+			TMAP_GROUP_INFO::iterator itGroup = it->second.find(0);
+
+			for (int nWidthPos = 0; nWidthPos < nSceneWidth; nWidthPos += nGridWidth)
+			{
+				for (int nHeightPos = 0; nHeightPos < nSceneWidth; nHeightPos += nGridWidth)
+				{
+					NFGUID gridID = ComputerGridID(nWidthPos, 0, nHeightPos);
+					itGroup->second.insert(TMAP_GRID_INFO::value_type(gridID, NF_SHARE_PTR<NFSceneGridInfo>(NF_NEW NFSceneGridInfo(it->first, itGroup->first, gridID))));
+				}
+			}
+		}
+	}
+
+	//all grids  connect together
+	TMAP_SCENE_INFO::iterator it = mtGridInfoMap.begin();
+	for (it; it != mtGridInfoMap.end(); it++)
+	{
+		//std::map<NFGUID, NF_SHARE_PTR<NFSceneGridInfo>>& gridMap = it->second;
+
+		NFSceneGridInfo* aroundGrid[EGRID_DIRECTION_MAXCOUNT] = { 0 };
+
+		for (int i = 0; i < EGRID_DIRECTION_MAXCOUNT; i++)
+		{
+			//aroundGrid[i] = GetConnectGrid(it->first, 0, (EGRID_DIRECTION)i);
+		}
+
+		//it->second->Init(aroundGrid);
+	}
+
+	return false;
+}
+
+bool NFGridModule::BeforeShut()
+{
+	mtGridInfoMap.clear();
+
+	return false;
+}
+
+bool NFGridModule::Shut()
+{
+	return false;
+}
+
+bool NFGridModule::Execute()
+{
+	return false;
+}
+
+const bool NFGridModule::RequestGroupGrid(const NFGUID & self, const int & sceneID, const int & groupID)
+{
+	return false;
+}
+
+const NFGUID NFGridModule::OnObjectMove(const NFGUID& self, const int& sceneID, const int& groupID, const NFGUID& lastGrid, const int nX, const int nY, const int nZ)
 {
     const NFGUID& currGrid = ComputerGridID(nX, nY, nZ);
     if (currGrid == lastGrid)
@@ -42,28 +139,32 @@ const NFGUID NFGridModule::OnObjectMove(const NFGUID& self, const int& sceneID, 
         return lastGrid;
     }
 
-    OnMoveOut(self, currGrid, lastGrid);
-    OnMoveIn(self, currGrid, lastGrid);
+    OnMoveOut(self, sceneID, groupID, lastGrid, currGrid);
+    OnMoveIn(self, sceneID, groupID, lastGrid, currGrid);
 
     return currGrid;
 }
 
-const NFGUID NFGridModule::OnObjectEntry(const NFGUID& self, const int& sceneID, const int nX, const int nY, const int nZ)
+const NFGUID NFGridModule::OnObjectEntry(const NFGUID& self, const int& sceneID, const int& groupID, const int nX, const int nY, const int nZ)
 {
     NFGUID gridID = ComputerGridID(nX, nY, nZ);
-    NFSceneGridInfo* pGridInfo = GetGridInfo(gridID);
+    NF_SHARE_PTR<NFSceneGridInfo> pGridInfo = GetGridInfo(sceneID, groupID, gridID);
     if (pGridInfo)
     {
-        OnMoveIn(self, gridID, gridID);
+        OnMoveIn(self, sceneID, groupID, gridID, gridID);
     }
 
     return gridID;
 }
 
-const NFGUID NFGridModule::OnObjectLeave(const NFGUID& self, const int& sceneID, const NFGUID& lastGrid)
+const NFGUID NFGridModule::OnObjectLeave(const NFGUID& self, const int& sceneID, const int& groupID, const int nX, const int nY, const int nZ)
 {
-
-    OnMoveOut(self, lastGrid, lastGrid);
+	NFGUID gridID = ComputerGridID(nX, nY, nZ);
+	NF_SHARE_PTR<NFSceneGridInfo> pGridInfo = GetGridInfo(sceneID, groupID, gridID);
+	if (pGridInfo)
+	{
+		OnMoveOut(self, sceneID, groupID, gridID, gridID);
+	}
 
     return NFGUID();
 }
@@ -76,18 +177,52 @@ const NFGUID NFGridModule::ComputerGridID(const int nX, const int nY, const int 
     return NFGUID(nGridXIndex, nGridZIndex);
 }
 
-const NFGUID NFGridModule::GetStepLenth(const NFGUID& selfGrid, const NFGUID& otherGrid)
+const NFGUID NFGridModule::ComputerGridID(const NFGUID & selfGrid, EGRID_DIRECTION eDirection)
 {
-    return NFGUID(abs(otherGrid.nHead64 - selfGrid.nHead64), abs(otherGrid.nData64 - selfGrid.nData64));
+	switch (eDirection)
+	{
+	case EGRID_TOP:
+		return NFGUID(selfGrid.nHead64, selfGrid.nData64 + 1);
+		break;
+	case EGRID_DOWN:
+		return NFGUID(selfGrid.nHead64, selfGrid.nData64 - 1);
+		break;
+	case EGRID_LEFT:
+		return NFGUID(selfGrid.nHead64 - 1, selfGrid.nData64);
+		break;
+	case EGRID_RIGHT:
+		return NFGUID(selfGrid.nHead64 + 1, selfGrid.nData64);
+		break;
+	case EGRID_LEFT_TOP:
+		return NFGUID(selfGrid.nHead64 + 1, selfGrid.nData64 + 1);
+		break;
+	case EGRID_LEFT_DOWN:
+		return NFGUID(selfGrid.nHead64 - 1, selfGrid.nData64 - 1);
+		break;
+	case EGRID_RIGHT_TOP:
+		return NFGUID(selfGrid.nHead64 + 1, selfGrid.nData64 + 1);
+		break;
+	case EGRID_RIGHT_DOWN:
+		return NFGUID(selfGrid.nHead64 + 1, selfGrid.nData64 - 1);
+		break;
+	default:
+		break;
+	}
+	return NFGUID();
 }
 
-const int NFGridModule::GetAroundGrid(const NFGUID& selfGrid, NFList<NFSceneGridInfo*>& gridList, EGRID_AROUND eAround /*= EGRID_AROUND_9 */)
+const NFGUID NFGridModule::GetStepLenth(const NFGUID& selfGrid, const NFGUID& otherGrid)
 {
-    NFSceneGridInfo* pGridInfo = GetGridInfo(selfGrid);
+    return NFGUID(std::abs(otherGrid.nHead64 - selfGrid.nHead64), std::abs(otherGrid.nData64 - selfGrid.nData64));
+}
+
+const int NFGridModule::GetAroundGrid(const int& sceneID, const int& groupID, const NFGUID& selfGrid, NFList<NF_SHARE_PTR<NFSceneGridInfo>>& gridList, EGRID_AROUND eAround /*= EGRID_AROUND_9 */)
+{
+	NF_SHARE_PTR<NFSceneGridInfo> pGridInfo = GetGridInfo(sceneID, groupID, selfGrid);
     return GetAroundGrid(pGridInfo, gridList, eAround);
 }
 
-const int NFGridModule::GetAroundGrid(NFSceneGridInfo* pGridInfo, NFList<NFSceneGridInfo*>& gridList, EGRID_AROUND eAround /*= EGRID_AROUND_9 */)
+const int NFGridModule::GetAroundGrid(NF_SHARE_PTR<NFSceneGridInfo> pGridInfo, NFList<NF_SHARE_PTR<NFSceneGridInfo>>& gridList, EGRID_AROUND eAround /*= EGRID_AROUND_9 */)
 {
     int nObjectCount = 0;
 
@@ -106,7 +241,7 @@ const int NFGridModule::GetAroundGrid(NFSceneGridInfo* pGridInfo, NFList<NFScene
         {
             for (int i = 0; i < EGRID_DIRECTION_MAXCOUNT; i++)
             {
-                NFSceneGridInfo* pInfo = pGridInfo->GetConnectGrid((EGRID_DIRECTION)i);
+				NF_SHARE_PTR<NFSceneGridInfo> pInfo = pGridInfo->GetConnectGrid((EGRID_DIRECTION)i);
                 if (pInfo)
                 {
                     gridList.Add(pInfo);
@@ -128,9 +263,9 @@ const int NFGridModule::GetAroundGrid(NFSceneGridInfo* pGridInfo, NFList<NFScene
     return nObjectCount;
 }
 
-const int NFGridModule::GetAroundObject(const NFGUID& selfGrid, NFDataList& objectList, EGRID_AROUND eAround /*= EGRID_AROUND_9 */)
+const int NFGridModule::GetAroundObject(const int& sceneID, const int& groupID, const NFGUID& selfGrid, NFDataList& objectList, EGRID_AROUND eAround /*= EGRID_AROUND_9 */)
 {
-    NFSceneGridInfo* pGridInfo = GetGridInfo(selfGrid);
+    NF_SHARE_PTR<NFSceneGridInfo> pGridInfo = GetGridInfo(sceneID, groupID, selfGrid);
     if (pGridInfo)
     {
         return GetAroundObject(pGridInfo, objectList, eAround);
@@ -138,19 +273,19 @@ const int NFGridModule::GetAroundObject(const NFGUID& selfGrid, NFDataList& obje
     return 0;
 }
 
-const int NFGridModule::GetAroundObject(NFSceneGridInfo* pGridInfo, NFDataList& objectList, EGRID_AROUND eAround /*= EGRID_AROUND_9 */)
+const int NFGridModule::GetAroundObject(NF_SHARE_PTR<NFSceneGridInfo> pGridInfo, NFDataList& objectList, EGRID_AROUND eAround /*= EGRID_AROUND_9 */)
 {
     if (!pGridInfo)
     {
         return 0;
     }
 
-    NFList<NFSceneGridInfo*> gridList;
+    NFList<NF_SHARE_PTR<NFSceneGridInfo>> gridList;
     if (GetAroundGrid(pGridInfo, gridList, eAround) > 0)
     {
         for (int i = 0; i < gridList.Count(); i++)
         {
-			NFSceneGridInfo* pGridInfo = nullptr;
+			NF_SHARE_PTR<NFSceneGridInfo> pGridInfo = nullptr;
             if (gridList.Get(i, pGridInfo))
             {
                 NFGUID ident;
@@ -167,136 +302,55 @@ const int NFGridModule::GetAroundObject(NFSceneGridInfo* pGridInfo, NFDataList& 
     return objectList.GetCount();
 }
 
-NFSceneGridInfo* NFGridModule::GetConnectGrid(const NFGUID& selfGrid, EGRID_DIRECTION eDirection)
+NF_SHARE_PTR<NFSceneGridInfo> NFGridModule::GetConnectGrid(const int& sceneID, const int& groupID, const NFGUID& selfGrid, EGRID_DIRECTION eDirection)
 {
-    NFSceneGridInfo* pGridInfo = GetGridInfo(selfGrid);
+	NF_SHARE_PTR<NFSceneGridInfo> pGridInfo = GetGridInfo(sceneID, groupID, selfGrid);
     if (pGridInfo)
     {
-        return pGridInfo->GetConnectGrid(eDirection);
+        //return pGridInfo->GetConnectGrid(sceneID, eDirection);
     }
 
     return NULL;
 }
 
-NFSceneGridInfo* NFGridModule::GetGridInfo(const NFGUID& selfGrid)
+NF_SHARE_PTR<NFSceneGridInfo> NFGridModule::GetGridInfo(const int& sceneID, const int& groupID, const NFGUID& selfGrid)
 {
-    TMAP_GRID_INFO::iterator it = mtGridInfoMap.find(selfGrid);
+    TMAP_SCENE_INFO::iterator it = mtGridInfoMap.find(sceneID);
     if (it != mtGridInfoMap.end())
     {
-        return it->second;
+		TMAP_GROUP_INFO::iterator itGroup = it->second.find(groupID);
+		if (itGroup != it->second.end())
+		{
+			TMAP_GRID_INFO::iterator itGrid = itGroup->second.find(selfGrid);
+			if (itGrid != itGroup->second.end())
+			{
+				return itGrid->second;
+			}
+		}
     }
 
     return NULL;
 }
 
-bool NFGridModule::Init()
+bool NFGridModule::OnMoveIn(const NFGUID& self, const int& sceneID, const int& groupID, const NFGUID& fromGrid, const NFGUID& toGrid)
 {
-    // init all grid
-    for (int nWidthPos = 0; nWidthPos < nSceneWidth; nWidthPos += nGridWidth)
-    {
-        for (int nHeightPos = 0; nHeightPos < nSceneWidth; nHeightPos += nGridWidth)
-        {
-            NFGUID gridID = ComputerGridID(nWidthPos, 0, nHeightPos);
-            if (!GetGridInfo(gridID))
-            {
-                RegisterGrid(gridID);
-            }
-        }
-    }
-    //     for (int nWidthPos = -mnSceneWidth + 1; nWidthPos < mnSceneWidth; nWidthPos++)
-    //     {
-    //         for (int nHeightPos = -mnSceneWidth + 1; nHeightPos < mnSceneWidth; nHeightPos++)
-    //         {
-    //             NFGUID gridID = ComputerGridID(nWidthPos, 0, nHeightPos);
-    //             if (!GetGridInfo(gridID))
-    //             {
-    //                 RegisterGrid(gridID);
-    //             }
-    //         }
-    //     }
-
-    // connect all grid
-    TMAP_GRID_INFO::iterator it = mtGridInfoMap.begin();
-    for (it; it != mtGridInfoMap.end(); it++)
-    {
-        NFSceneGridInfo* aroundGrid[EGRID_DIRECTION_MAXCOUNT] = { 0 };
-
-        for (int  i = 0; i < EGRID_DIRECTION_MAXCOUNT; i++)
-        {
-            aroundGrid[i] = GetConnectGrid(it->first, (EGRID_DIRECTION)i);
-        }
-
-        it->second->Init(aroundGrid);
-    }
-
-    return true;
-}
-
-bool NFGridModule::AfterInit()
-{
-	return false;
-}
-
-bool NFGridModule::BeforeShut()
-{
-	TMAP_GRID_INFO::iterator it = mtGridInfoMap.begin();
-	for (it; it != mtGridInfoMap.end(); it++)
+	NF_SHARE_PTR<NFSceneGridInfo> pGrigInfo = GetGridInfo(sceneID, groupID, toGrid);
+	if (pGrigInfo)
 	{
-		if (NULL != it->second)
-		{
-			delete it->second;
-			it->second = NULL;
-		}
+		pGrigInfo->Add(self);
 	}
 
-	mtGridInfoMap.clear();
-
-	return false;
-}
-
-bool NFGridModule::Shut()
-{
-	return false;
-}
-
-bool NFGridModule::Execute()
-{
-	return false;
-}
-
-bool NFGridModule::RegisterGrid(const NFGUID& grid)
-{
-    if (!GetGridInfo(grid))
-    {
-        NFSceneGridInfo* pInfo = NF_NEW NFSceneGridInfo(grid);
-        mtGridInfoMap.insert(TMAP_GRID_INFO::value_type(grid, pInfo));
-
-        return true;
-    }
-
     return false;
 }
 
-bool NFGridModule::OnMoveIn(const NFGUID& self, const NFGUID& grid, const NFGUID& lastGrid)
+bool NFGridModule::OnMoveOut(const NFGUID& self, const int& sceneID, const int& groupID, const NFGUID& fromGrid, const NFGUID& toGrid)
 {
-    TMAP_GRID_INFO::iterator it = mtGridInfoMap.find(grid);
-    if (it != mtGridInfoMap.end())
-    {
-        return it->second->Add(self);
-    }
+	NF_SHARE_PTR<NFSceneGridInfo> pGrigInfo = GetGridInfo(sceneID, groupID, fromGrid);
+	if (pGrigInfo)
+	{
+		return pGrigInfo->Remove(self);
+	}
 
-    return false;
-}
-
-bool NFGridModule::OnMoveOut(const NFGUID& self, const NFGUID& grid, const NFGUID& lastGrid)
-{
-    //grid为现在的格子
-    TMAP_GRID_INFO::iterator it = mtGridInfoMap.find(grid);
-    if (it != mtGridInfoMap.end())
-    {
-        return it->second->Remove(self);
-    }
-
-    return true;
+	return false;
 }
 

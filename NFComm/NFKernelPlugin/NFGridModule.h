@@ -30,18 +30,28 @@
 #include <iostream>
 #include <assert.h>
 #include <map>
-#include "NFComm/NFPluginModule/NFIGridModule.h"
 #include "NFComm/NFCore/NFList.hpp"
 #include "NFComm/NFCore/NFDataList.hpp"
+#include "NFComm/NFMessageDefine/NFProtocolDefine.hpp"
+#include "NFComm/NFPluginModule/NFIGridModule.h"
+#include "NFComm/NFPluginModule/NFISceneAOIModule.h"
+#include "NFComm/NFPluginModule/NFILogModule.h"
+#include "NFComm/NFPluginModule/NFIKernelModule.h"
+#include "NFComm/NFPluginModule/NFIClassModule.h"
+#include "NFComm/NFPluginModule/NFIElementModule.h"
+#include "NFComm/NFPluginModule/NFIEventModule.h"
 
 class NFSceneGridInfo
     : public NFList<NFGUID>
 {
 public:
 
-    NFSceneGridInfo(const NFGUID& gridID)
+    NFSceneGridInfo(const int& sceneID, const int& groupID, const NFGUID& gridID)
     {
-        mGridID = gridID;
+		mnSceneID = sceneID;
+		mnGroupID = groupID;
+		mGridID = gridID;
+
         for (int i = EGRID_TOP; i < EGRID_DIRECTION_MAXCOUNT; i++)
         {
             mAroundGrid[i] = NULL;
@@ -53,7 +63,7 @@ public:
         // TODO
     }
 
-    void Init(NFSceneGridInfo** pGridArray)
+    void Init(NF_SHARE_PTR<NFSceneGridInfo>* pGridArray)
     {
         for (int i = EGRID_TOP; i < EGRID_DIRECTION_MAXCOUNT; i++)
         {
@@ -65,15 +75,17 @@ public:
     {
     }
 
-    NFSceneGridInfo* GetConnectGrid(EGRID_DIRECTION eDirection)
+	NF_SHARE_PTR<NFSceneGridInfo> GetConnectGrid(EGRID_DIRECTION eDirection)
     {
         return mAroundGrid[eDirection];
     }
 
 protected:
 private:
-    NFSceneGridInfo* mAroundGrid[EGRID_DIRECTION_MAXCOUNT];
+    NF_SHARE_PTR<NFSceneGridInfo> mAroundGrid[EGRID_DIRECTION_MAXCOUNT];
 	NFGUID mGridID;
+	int mnSceneID;
+	int mnGroupID;
 };
 
 class NFGridModule
@@ -90,66 +102,78 @@ public:
 	virtual bool Shut();
 	virtual bool Execute();
 
+	// the event that a object are moving
+	virtual const bool RequestGroupGrid(const NFGUID& self, const int& sceneID, const int& groupID);
+
     // the event that a object are moving
-    virtual const NFGUID OnObjectMove(const NFGUID& self, const int& sceneID,
+    virtual const NFGUID OnObjectMove(const NFGUID& self, const int& sceneID, const int& groupID,
                                          const NFGUID& lastGrid, const int nX, const int nY, const int nZ);
 
     // the event that a object has entried
-    virtual const NFGUID OnObjectEntry(const NFGUID& self, const int& sceneID,
+    virtual const NFGUID OnObjectEntry(const NFGUID& self, const int& sceneID, const int& groupID,
                                           const int nX, const int nY, const int nZ);
 
     // the event that a object has leaved
-    virtual const NFGUID OnObjectLeave(const NFGUID& self, const int& sceneID,
-                                          const NFGUID& lastGrid);
+    virtual const NFGUID OnObjectLeave(const NFGUID& self, const int& sceneID, const int& groupID,
+											const int nX, const int nY, const int nZ);
 
     //////////////////////////////////////////////////////////////////////////
     // computer a id of this grid by position
-    static const NFGUID ComputerGridID(const int nX, const int nY, const int nZ);
+	virtual const NFGUID ComputerGridID(const int nX, const int nY, const int nZ);
+	//////////////////////////////////////////////////////////////////////////
+	// computer a id of this grid by position
+	virtual const NFGUID ComputerGridID(const NFGUID& selfGrid, EGRID_DIRECTION eDirection);
 
     // get the step lenth each two grid
     virtual const NFGUID GetStepLenth(const NFGUID& selfGrid, const NFGUID& otherGrid);
 
     // get some grids that around this grid
-    virtual const int GetAroundGrid(const NFGUID& selfGrid, NFList<NFSceneGridInfo*>& gridList,
+    virtual const int GetAroundGrid(const int& sceneID, const int& groupID, const NFGUID& selfGrid, NFList<NF_SHARE_PTR<NFSceneGridInfo>>& gridList,
                                     EGRID_AROUND eAround = EGRID_AROUND_9);
 
 
     // get some objects that around this grid
-    virtual const int GetAroundObject(const NFGUID& selfGrid, NFDataList& objectList,
+    virtual const int GetAroundObject(const int& sceneID, const int& groupID, const NFGUID& selfGrid, NFDataList& objectList,
                                       EGRID_AROUND eAround = EGRID_AROUND_9);
 
 
     // get a grid who connected it by direction
-    virtual NFSceneGridInfo* GetConnectGrid(const NFGUID& selfGrid, EGRID_DIRECTION eDirection);
+    virtual NF_SHARE_PTR<NFSceneGridInfo> GetConnectGrid(const int& sceneID, const int& groupID, const NFGUID& selfGrid, EGRID_DIRECTION eDirection);
 
     // get the pointer of this grid
-    virtual NFSceneGridInfo* GetGridInfo(const NFGUID& selfGrid);
+    virtual NF_SHARE_PTR<NFSceneGridInfo> GetGridInfo(const int& sceneID, const int& groupID, const NFGUID& selfGrid);
 
 protected:
 
 	// get some grids that around this grid
-	virtual const int GetAroundGrid(NFSceneGridInfo* pGridInfo, NFList<NFSceneGridInfo*> & gridList,
+	virtual const int GetAroundGrid(NF_SHARE_PTR<NFSceneGridInfo> pGridInfo, NFList<NF_SHARE_PTR<NFSceneGridInfo>> & gridList,
 		EGRID_AROUND eAround = EGRID_AROUND_9);
 
 	// get some objects that around this grid
-	virtual const int GetAroundObject(NFSceneGridInfo* pGridInfo, NFDataList& objectList,
+	virtual const int GetAroundObject(NF_SHARE_PTR<NFSceneGridInfo> pGridInfo, NFDataList& objectList,
 		EGRID_AROUND eAround = EGRID_AROUND_9);
 
 private:
 
-    bool RegisterGrid(const NFGUID& grid);
+    bool OnMoveIn(const NFGUID& self, const int& sceneID, const int& groupID, const NFGUID& fromGrid, const NFGUID& toGrid);
 
-    bool OnMoveIn(const NFGUID& self, const NFGUID& grid, const NFGUID& lastGrid);
-
-    bool OnMoveOut(const NFGUID& self, const NFGUID& grid, const NFGUID& lastGrid);
+    bool OnMoveOut(const NFGUID& self, const int& sceneID, const int& groupID, const NFGUID& fromGrid, const NFGUID& toGrid);
 
 private:
 	const static int nGridWidth = 10;
 	const static int nSceneWidth = 10000;
 
-    typedef std::map<NFGUID, NFSceneGridInfo*> TMAP_GRID_INFO;
-    TMAP_GRID_INFO mtGridInfoMap;
+	typedef std::map<NFGUID, NF_SHARE_PTR<NFSceneGridInfo>> TMAP_GRID_INFO;
+	typedef std::map<int, TMAP_GRID_INFO> TMAP_GROUP_INFO;
+	typedef std::map<int, TMAP_GROUP_INFO> TMAP_SCENE_INFO;
+	TMAP_SCENE_INFO mtGridInfoMap;
 
+private:
+	NFIKernelModule* m_pKernelModule;
+	NFIClassModule* m_pClassModule;
+	NFILogModule* m_pLogModule;
+	NFIElementModule* m_pElementModule;
+	NFIEventModule* m_pEventModule;
 };
 
 #endif
