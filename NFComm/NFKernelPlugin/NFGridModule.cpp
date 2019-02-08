@@ -135,9 +135,31 @@ bool NFGridModule::Execute()
 	return false;
 }
 
-const bool NFGridModule::RequestGroupGrid(const NFGUID & self, const int & sceneID, const int & groupID)
+const bool NFGridModule::CreateGroupGrid(const NFGUID & self, const int & sceneID, const int & groupID)
 {
 	//we would have a group grid pool
+	TMAP_SCENE_INFO::iterator it = mtGridInfoMap.find(sceneID);
+	if (it != mtGridInfoMap.end())
+	{
+		TMAP_GROUP_INFO::iterator itNewGroup = it->second.find(groupID);
+		TMAP_GROUP_INFO::iterator itGroup0 = it->second.find(0);
+		if (itNewGroup == it->second.end()
+			&& itGroup0 != it->second.end())
+		{
+			TMAP_GRID_INFO::iterator itGrid0 = itGroup0->second.begin();
+			for (itGrid0; itGrid0 != itGroup0->second.end(); itGrid0++)
+			{
+				NF_SHARE_PTR<NFSceneGridInfo> pGridInfo0 = itGrid0->second;
+				//NF_SHARE_PTR<NFSceneGridInfo> pNewGridInfo = NF_SHARE_PTR<NFSceneGridInfo>(NF_NEW NFSceneGridInfo(pGridInfo0));
+			}
+		}
+	}
+
+	return false;
+}
+
+const bool NFGridModule::DestroyGroupGrid(const NFGUID & self, const int & sceneID, const int & groupID)
+{
 	return false;
 }
 
