@@ -24,8 +24,8 @@
 */
 
 
-#ifndef NF_GRID_MODULE_H
-#define NF_GRID_MODULE_H
+#ifndef NF_CELL_MODULE_H
+#define NF_CELL_MODULE_H
 
 #include <iostream>
 #include <assert.h>
@@ -33,7 +33,7 @@
 #include "NFComm/NFCore/NFList.hpp"
 #include "NFComm/NFCore/NFDataList.hpp"
 #include "NFComm/NFMessageDefine/NFProtocolDefine.hpp"
-#include "NFComm/NFPluginModule/NFIGridModule.h"
+#include "NFComm/NFPluginModule/NFICellModule.h"
 #include "NFComm/NFPluginModule/NFISceneAOIModule.h"
 #include "NFComm/NFPluginModule/NFILogModule.h"
 #include "NFComm/NFPluginModule/NFIKernelModule.h"
@@ -41,31 +41,31 @@
 #include "NFComm/NFPluginModule/NFIElementModule.h"
 #include "NFComm/NFPluginModule/NFIEventModule.h"
 
-class NFSceneGridInfo
+class NFSceneCellInfo
     : public NFList<NFGUID>
 {
 public:
 
-    NFSceneGridInfo(const int& sceneID, const int& groupID, const NFGUID& gridID)
+    NFSceneCellInfo(const int& sceneID, const int& groupID, const NFGUID& gridID)
     {
 		mnSceneID = sceneID;
 		mnGroupID = groupID;
 		mGridID = gridID;
 
-        for (int i = EGRID_TOP; i < EGRID_DIRECTION_MAXCOUNT; i++)
+        for (int i = ECELL_TOP; i < ECELL_DIRECTION_MAXCOUNT; i++)
         {
             mAroundGrid[i] = NULL;
         }
     }
 
-    virtual ~NFSceneGridInfo()
+    virtual ~NFSceneCellInfo()
     {
         // TODO
     }
 
-    void Init(NF_SHARE_PTR<NFSceneGridInfo>* pGridArray)
+    void Init(NF_SHARE_PTR<NFSceneCellInfo>* pGridArray)
     {
-        for (int i = EGRID_TOP; i < EGRID_DIRECTION_MAXCOUNT; i++)
+        for (int i = ECELL_TOP; i < ECELL_DIRECTION_MAXCOUNT; i++)
         {
             mAroundGrid[i] = pGridArray[i];
         }
@@ -75,7 +75,7 @@ public:
     {
     }
 
-	NF_SHARE_PTR<NFSceneGridInfo> GetConnectGrid(EGRID_DIRECTION eDirection)
+	NF_SHARE_PTR<NFSceneCellInfo> GetConnectGrid(ECELL_DIRECTION eDirection)
     {
         return mAroundGrid[eDirection];
     }
@@ -95,19 +95,19 @@ public:
 	}
 protected:
 private:
-    NF_SHARE_PTR<NFSceneGridInfo> mAroundGrid[EGRID_DIRECTION_MAXCOUNT];
+    NF_SHARE_PTR<NFSceneCellInfo> mAroundGrid[ECELL_DIRECTION_MAXCOUNT];
 	NFGUID mGridID;
 	int mnSceneID;
 	int mnGroupID;
 };
 
-class NFGridModule
-    : public NFIGridModule
+class NFCellModule
+    : public NFICellModule
 {
 public:
-	NFGridModule(NFIPluginManager* p);
+	NFCellModule(NFIPluginManager* p);
 
-    virtual ~NFGridModule();
+    virtual ~NFCellModule();
 
 	virtual bool Init();
 	virtual bool AfterInit();
@@ -135,36 +135,36 @@ public:
 	virtual const NFGUID ComputerGridID(const int nX, const int nY, const int nZ);
 	//////////////////////////////////////////////////////////////////////////
 	// computer a id of this grid by position
-	virtual const NFGUID ComputerGridID(const NFGUID& selfGrid, EGRID_DIRECTION eDirection);
+	virtual const NFGUID ComputerGridID(const NFGUID& selfGrid, ECELL_DIRECTION eDirection);
 
     // get the step lenth each two grid
     virtual const NFGUID GetStepLenth(const NFGUID& selfGrid, const NFGUID& otherGrid);
 
     // get some grids that around this grid(not include self)
-    virtual const int GetAroundGrid(const int& sceneID, const int& groupID, const NFGUID& selfGrid, NF_SHARE_PTR<NFSceneGridInfo>* gridList,
-                                    EGRID_AROUND eAround = EGRID_AROUND_9);
+    virtual const int GetAroundGrid(const int& sceneID, const int& groupID, const NFGUID& selfGrid, NF_SHARE_PTR<NFSceneCellInfo>* gridList,
+                                    ECELL_AROUND eAround = ECELL_AROUND_9);
 
 
     // get some objects that around this grid(not include self)
     virtual const int GetAroundObject(const int& sceneID, const int& groupID, const NFGUID& selfGrid, NFDataList& objectList,
-                                      EGRID_AROUND eAround = EGRID_AROUND_9);
+                                      ECELL_AROUND eAround = ECELL_AROUND_9);
 
 
     // get a grid who connected it by direction
-    virtual NF_SHARE_PTR<NFSceneGridInfo> GetConnectGrid(const int& sceneID, const int& groupID, const NFGUID& selfGrid, EGRID_DIRECTION eDirection);
+    virtual NF_SHARE_PTR<NFSceneCellInfo> GetConnectGrid(const int& sceneID, const int& groupID, const NFGUID& selfGrid, ECELL_DIRECTION eDirection);
 
     // get the pointer of this grid
-    virtual NF_SHARE_PTR<NFSceneGridInfo> GetGridInfo(const int& sceneID, const int& groupID, const NFGUID& selfGrid);
+    virtual NF_SHARE_PTR<NFSceneCellInfo> GetGridInfo(const int& sceneID, const int& groupID, const NFGUID& selfGrid);
 
 protected:
 
 	// get some grids that around this grid(not include self)
-	virtual const int GetAroundGrid(NF_SHARE_PTR<NFSceneGridInfo> pGridInfo, NF_SHARE_PTR<NFSceneGridInfo>* gridList,
-		EGRID_AROUND eAround = EGRID_AROUND_9);
+	virtual const int GetAroundGrid(NF_SHARE_PTR<NFSceneCellInfo> pGridInfo, NF_SHARE_PTR<NFSceneCellInfo>* gridList,
+		ECELL_AROUND eAround = ECELL_AROUND_9);
 
 	// get some objects that around this grid(not include self)
-	virtual const int GetAroundObject(NF_SHARE_PTR<NFSceneGridInfo> pGridInfo, NFDataList& objectList,
-		EGRID_AROUND eAround = EGRID_AROUND_9);
+	virtual const int GetAroundObject(NF_SHARE_PTR<NFSceneCellInfo> pGridInfo, NFDataList& objectList,
+		ECELL_AROUND eAround = ECELL_AROUND_9);
 
 private:
 
@@ -176,7 +176,7 @@ private:
 	const static int nGridWidth = 10;
 	const static int nSceneWidth = 10000;
 
-	typedef std::map<NFGUID, NF_SHARE_PTR<NFSceneGridInfo>> TMAP_GRID_INFO;
+	typedef std::map<NFGUID, NF_SHARE_PTR<NFSceneCellInfo>> TMAP_GRID_INFO;
 	typedef std::map<int, TMAP_GRID_INFO> TMAP_GROUP_INFO;
 	typedef std::map<int, TMAP_GROUP_INFO> TMAP_SCENE_INFO;
 	TMAP_SCENE_INFO mtGridInfoMap;

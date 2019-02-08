@@ -58,6 +58,7 @@
     <ClInclude Include="..\NFPluginModule\NFIBigMapRedisModule.h" />
     <ClInclude Include="..\NFPluginModule\NFIBuffConfigModule.h" />
     <ClInclude Include="..\NFPluginModule\NFIBuffModule.h" />
+    <ClInclude Include="..\NFPluginModule\NFICellModule.h" />
     <ClInclude Include="..\NFPluginModule\NFIChatModule.h" />
     <ClInclude Include="..\NFPluginModule\NFIClassModule.h" />
     <ClInclude Include="..\NFPluginModule\NFICommonConfigModule.h" />
@@ -76,7 +77,6 @@
     <ClInclude Include="..\NFPluginModule\NFIGameServerNet_ServerModule.h" />
     <ClInclude Include="..\NFPluginModule\NFIGameServerScriptModule.h" />
     <ClInclude Include="..\NFPluginModule\NFIGameServerToWorldModule.h" />
-    <ClInclude Include="..\NFPluginModule\NFIGridModule.h" />
     <ClInclude Include="..\NFPluginModule\NFIGuildModule.h" />
     <ClInclude Include="..\NFPluginModule\NFIGuildRedisModule.h" />
     <ClInclude Include="..\NFPluginModule\NFIHateModule.h" />
