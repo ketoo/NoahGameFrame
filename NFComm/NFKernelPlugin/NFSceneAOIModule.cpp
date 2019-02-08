@@ -24,7 +24,6 @@
 */
 
 #include "NFSceneAOIModule.h"
-#include "NFComm/NFMessageDefine/NFProtocolDefine.hpp"
 
 bool NFSceneAOIModule::Init()
 {
@@ -38,6 +37,12 @@ bool NFSceneAOIModule::Init()
 	m_pKernelModule->RegisterCommonPropertyEvent(this, &NFSceneAOIModule::OnPropertyCommonEvent);
 	m_pKernelModule->RegisterCommonRecordEvent(this, &NFSceneAOIModule::OnRecordCommonEvent);
 
+
+    return true;
+}
+
+bool NFSceneAOIModule::AfterInit()
+{
 	//init all scene
 	NF_SHARE_PTR<NFIClass> xLogicClass = m_pClassModule->GetElement(NFrame::Scene::ThisName());
 	if (xLogicClass)
@@ -52,13 +57,6 @@ bool NFSceneAOIModule::Init()
 			m_pKernelModule->CreateScene(nSceneID);
 		}
 	}
-
-    return true;
-}
-
-bool NFSceneAOIModule::AfterInit()
-{
-	
     return true;
 }
 

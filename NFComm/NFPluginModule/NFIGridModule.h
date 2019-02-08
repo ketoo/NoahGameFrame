@@ -66,37 +66,19 @@ class NFIGridModule
 public:
     virtual ~NFIGridModule() {}
     // the event that a object are moving
-    virtual const NFGUID OnObjectMove(const NFGUID& self, const int& sceneID,
+    virtual const NFGUID OnObjectMove(const NFGUID& self, const int& sceneID, const int& groupID,
                                          const NFGUID& lastGrid, const int nX, const int nY, const int nZ) = 0;
 
     // the event that a object has entried
-    virtual const NFGUID OnObjectEntry(const NFGUID& self, const int& sceneID,
+    virtual const NFGUID OnObjectEntry(const NFGUID& self, const int& sceneID, const int& groupID,
                                           const int nX, const int nY, const int nZ) = 0;
 
     // the event that a object has leaved
-    virtual const NFGUID OnObjectLeave(const NFGUID& self, const int& sceneID,
-                                          const NFGUID& lastGrid) = 0;
+    virtual const NFGUID OnObjectLeave(const NFGUID& self, const int& sceneID, const int& groupID,
+											const int nX, const int nY, const int nZ) = 0;
 
     //////////////////////////////////////////////////////////////////////////
-    // computer a id of this grid by position
-    //virtual const NFGUID ComputerGridID(const int nX, const int nY, const int nZ) = 0;
-
-    // get the step lenth each two grid
-    virtual const NFGUID GetStepLenth(const NFGUID& selfGrid, const NFGUID& otherGrid) = 0;
-
-    // get some grids that around this grid
-    virtual const int GetAroundGrid(const NFGUID& selfGrid, NFList<NFSceneGridInfo*>& gridList,
-                                    EGRID_AROUND eAround = EGRID_AROUND_9) = 0;
-
-    // get some objects that around this grid
-    virtual const int GetAroundObject(const NFGUID& selfGrid, NFDataList& objectList,
-                                      EGRID_AROUND eAround = EGRID_AROUND_9) = 0;
-
-    // get a grid who connected it by direction
-    virtual NFSceneGridInfo* GetConnectGrid(const NFGUID& selfGrid, EGRID_DIRECTION eDirection) = 0;
-
-    // get the pointer of this grid
-    virtual NFSceneGridInfo* GetGridInfo(const NFGUID& selfGrid) = 0;
+    
 
 protected:
 private:

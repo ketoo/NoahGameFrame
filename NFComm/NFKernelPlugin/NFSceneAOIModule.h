@@ -28,6 +28,7 @@
 
 #include <iostream>
 #include "NFComm/NFCore/NFIObject.h"
+#include "NFComm/NFMessageDefine/NFProtocolDefine.hpp"
 #include "NFComm/NFPluginModule/NFGUID.h"
 #include "NFComm/NFPluginModule/NFISceneAOIModule.h"
 #include "NFComm/NFPluginModule/NFILogModule.h"
