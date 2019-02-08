@@ -95,7 +95,7 @@ bool NFGridModule::AfterInit()
 		}
 	}
 
-	//all grids  connect together
+	//all grids must connect together
 	NF_SHARE_PTR<NFSceneGridInfo> pGridInfo = nullptr;
 	for (gridList.First(pGridInfo); pGridInfo != nullptr; gridList.Next(pGridInfo))
 	{
@@ -112,6 +112,8 @@ bool NFGridModule::AfterInit()
 
 		pGridInfo = nullptr;
 	}
+
+	//prepare group grid pool to enhance the performance when requesting a new group 
 
 	return false;
 }
