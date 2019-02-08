@@ -80,6 +80,19 @@ public:
         return mAroundGrid[eDirection];
     }
 
+	const int GetSceneID()
+	{
+		return mnSceneID;
+	}
+
+	const int GetGroupID()
+	{
+		return mnGroupID;
+	}
+	const NFGUID GetID()
+	{
+		return mGridID;
+	}
 protected:
 private:
     NF_SHARE_PTR<NFSceneGridInfo> mAroundGrid[EGRID_DIRECTION_MAXCOUNT];
@@ -127,12 +140,12 @@ public:
     // get the step lenth each two grid
     virtual const NFGUID GetStepLenth(const NFGUID& selfGrid, const NFGUID& otherGrid);
 
-    // get some grids that around this grid
-    virtual const int GetAroundGrid(const int& sceneID, const int& groupID, const NFGUID& selfGrid, NFList<NF_SHARE_PTR<NFSceneGridInfo>>& gridList,
+    // get some grids that around this grid(not include self)
+    virtual const int GetAroundGrid(const int& sceneID, const int& groupID, const NFGUID& selfGrid, NF_SHARE_PTR<NFSceneGridInfo>* gridList,
                                     EGRID_AROUND eAround = EGRID_AROUND_9);
 
 
-    // get some objects that around this grid
+    // get some objects that around this grid(not include self)
     virtual const int GetAroundObject(const int& sceneID, const int& groupID, const NFGUID& selfGrid, NFDataList& objectList,
                                       EGRID_AROUND eAround = EGRID_AROUND_9);
 
@@ -145,11 +158,11 @@ public:
 
 protected:
 
-	// get some grids that around this grid
-	virtual const int GetAroundGrid(NF_SHARE_PTR<NFSceneGridInfo> pGridInfo, NFList<NF_SHARE_PTR<NFSceneGridInfo>> & gridList,
+	// get some grids that around this grid(not include self)
+	virtual const int GetAroundGrid(NF_SHARE_PTR<NFSceneGridInfo> pGridInfo, NF_SHARE_PTR<NFSceneGridInfo>* gridList,
 		EGRID_AROUND eAround = EGRID_AROUND_9);
 
-	// get some objects that around this grid
+	// get some objects that around this grid(not include self)
 	virtual const int GetAroundObject(NF_SHARE_PTR<NFSceneGridInfo> pGridInfo, NFDataList& objectList,
 		EGRID_AROUND eAround = EGRID_AROUND_9);
 
