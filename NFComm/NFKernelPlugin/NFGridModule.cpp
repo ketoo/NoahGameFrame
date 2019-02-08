@@ -86,7 +86,7 @@ bool NFGridModule::AfterInit()
 				for (int nHeightPos = 0; nHeightPos < nSceneWidth; nHeightPos += nGridWidth)
 				{
 					NFGUID gridID = ComputerGridID(nWidthPos, 0, nHeightPos);
-					NF_SHARE_PTR<NFSceneGridInfo> pGridInfo = NF_SHARE_PTR<NFSceneGridInfo>(NF_NEW NFSceneGridInfo(it->first, itGroup->first, gridID)));
+					NF_SHARE_PTR<NFSceneGridInfo> pGridInfo = NF_SHARE_PTR<NFSceneGridInfo>(NF_NEW NFSceneGridInfo(it->first, itGroup->first, gridID));
 
 					itGroup->second.insert(TMAP_GRID_INFO::value_type(gridID, pGridInfo));
 					gridList.Add(pGridInfo);
