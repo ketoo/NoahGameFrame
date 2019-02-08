@@ -23,8 +23,8 @@
 	limitations under the License.
 */
 
-#ifndef NFI_GRID_MODULE_H
-#define NFI_GRID_MODULE_H
+#ifndef NFI_CELL_MODULE_H
+#define NFI_CELL_MODULE_H
 
 #include <list>
 #include <iostream>
@@ -34,37 +34,37 @@
 #include "NFComm/NFPluginModule/NFIModule.h"
 #include "NFComm/NFPluginModule/NFGUID.h"
 
-class NFSceneGridInfo;
+class NFSceneCellInfo;
 
-enum EGRID_DIRECTION
+enum ECELL_DIRECTION
 {
-    EGRID_TOP = 0,
-    EGRID_DOWN = 1,
-    EGRID_LEFT = 2,
-    EGRID_RIGHT = 3,
+    ECELL_TOP = 0,
+    ECELL_DOWN = 1,
+    ECELL_LEFT = 2,
+    ECELL_RIGHT = 3,
 
-    EGRID_LEFT_TOP = 4,
-    EGRID_LEFT_DOWN = 5,
-    EGRID_RIGHT_TOP = 6,
-    EGRID_RIGHT_DOWN = 7,
+    ECELL_LEFT_TOP = 4,
+    ECELL_LEFT_DOWN = 5,
+    ECELL_RIGHT_TOP = 6,
+    ECELL_RIGHT_DOWN = 7,
 
-    EGRID_DIRECTION_MAXCOUNT = 8,
+    ECELL_DIRECTION_MAXCOUNT = 8,
 };
 
-enum EGRID_AROUND
+enum ECELL_AROUND
 {
-    EGRID_SELF,
-    EGRID_AROUND_9,
-    EGRID_AROUND_16,
-    EGRID_AROUND_25,
-    EGRID_AROUND_ALL,
+    ECELL_SELF,
+    ECELL_AROUND_9,
+    ECELL_AROUND_16,
+    ECELL_AROUND_25,
+    ECELL_AROUND_ALL,
 };
 
-class NFIGridModule
+class NFICellModule
 	: public NFIModule
 {
 public:
-    virtual ~NFIGridModule() {}
+    virtual ~NFICellModule() {}
     // the event that a object are moving
     virtual const NFGUID OnObjectMove(const NFGUID& self, const int& sceneID, const int& groupID,
                                          const NFGUID& lastGrid, const int nX, const int nY, const int nZ) = 0;

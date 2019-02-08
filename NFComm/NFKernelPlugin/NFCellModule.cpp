@@ -23,20 +23,20 @@
 	limitations under the License.
 */
 
-#include "NFGridModule.h"
+#include "NFCellModule.h"
 
 
-NFGridModule::NFGridModule(NFIPluginManager* p)
+NFCellModule::NFCellModule(NFIPluginManager* p)
 {
 	pPluginManager = p;
 }
 
-NFGridModule::~NFGridModule()
+NFCellModule::~NFCellModule()
 {
 }
 
 
-bool NFGridModule::Init()
+bool NFCellModule::Init()
 {
 	m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>();
 	m_pClassModule = pPluginManager->FindModule<NFIClassModule>();
@@ -48,11 +48,11 @@ bool NFGridModule::Init()
 	return true;
 }
 
-bool NFGridModule::AfterInit()
+bool NFCellModule::AfterInit()
 {
 
 	//init all scene
-	NFList<NF_SHARE_PTR<NFSceneGridInfo>> gridList;
+	NFList<NF_SHARE_PTR<NFSceneCellInfo>> gridList;
 
 	NF_SHARE_PTR<NFIClass> xLogicClass = m_pClassModule->GetElement(NFrame::Scene::ThisName());
 	if (xLogicClass)
@@ -68,7 +68,7 @@ bool NFGridModule::AfterInit()
 			if (it == mtGridInfoMap.end())
 			{
 				TMAP_GROUP_INFO groupInfo;
-				groupInfo.insert(TMAP_GROUP_INFO::value_type(0, std::map<NFGUID, NF_SHARE_PTR<NFSceneGridInfo>>()));
+				groupInfo.insert(TMAP_GROUP_INFO::value_type(0, std::map<NFGUID, NF_SHARE_PTR<NFSceneCellInfo>>()));
 				mtGridInfoMap.insert(TMAP_SCENE_INFO::value_type(nSceneID, groupInfo));
 			}
 		}
@@ -86,7 +86,7 @@ bool NFGridModule::AfterInit()
 				for (int nHeightPos = 0; nHeightPos < nSceneWidth; nHeightPos += nGridWidth)
 				{
 					NFGUID gridID = ComputerGridID(nWidthPos, 0, nHeightPos);
-					NF_SHARE_PTR<NFSceneGridInfo> pGridInfo = NF_SHARE_PTR<NFSceneGridInfo>(NF_NEW NFSceneGridInfo(it->first, itGroup->first, gridID));
+					NF_SHARE_PTR<NFSceneCellInfo> pGridInfo = NF_SHARE_PTR<NFSceneCellInfo>(NF_NEW NFSceneCellInfo(it->first, itGroup->first, gridID));
 
 					itGroup->second.insert(TMAP_GRID_INFO::value_type(gridID, pGridInfo));
 					gridList.Add(pGridInfo);
@@ -96,15 +96,15 @@ bool NFGridModule::AfterInit()
 	}
 
 	//all grids must connect together
-	NF_SHARE_PTR<NFSceneGridInfo> pGridInfo = nullptr;
+	NF_SHARE_PTR<NFSceneCellInfo> pGridInfo = nullptr;
 	for (gridList.First(pGridInfo); pGridInfo != nullptr; gridList.Next(pGridInfo))
 	{
-		NF_SHARE_PTR<NFSceneGridInfo> aroundGrid[EGRID_DIRECTION_MAXCOUNT] = { 0 };
-		NFGUID gridID[EGRID_DIRECTION_MAXCOUNT] = { 0 };
+		NF_SHARE_PTR<NFSceneCellInfo> aroundGrid[ECELL_DIRECTION_MAXCOUNT] = { 0 };
+		NFGUID gridID[ECELL_DIRECTION_MAXCOUNT] = { 0 };
 
-		for (int i = 0; i <EGRID_DIRECTION_MAXCOUNT; ++i)
+		for (int i = 0; i <ECELL_DIRECTION_MAXCOUNT; ++i)
 		{
-			gridID[i] = ComputerGridID(pGridInfo->GetID(), (EGRID_DIRECTION)i);
+			gridID[i] = ComputerGridID(pGridInfo->GetID(), (ECELL_DIRECTION)i);
 			aroundGrid[i] = GetGridInfo(pGridInfo->GetSceneID(), pGridInfo->GetGroupID(), gridID[i]);
 		}
 
@@ -118,24 +118,24 @@ bool NFGridModule::AfterInit()
 	return false;
 }
 
-bool NFGridModule::BeforeShut()
+bool NFCellModule::BeforeShut()
 {
 	mtGridInfoMap.clear();
 
 	return false;
 }
 
-bool NFGridModule::Shut()
+bool NFCellModule::Shut()
 {
 	return false;
 }
 
-bool NFGridModule::Execute()
+bool NFCellModule::Execute()
 {
 	return false;
 }
 
-const bool NFGridModule::CreateGroupGrid(const NFGUID & self, const int & sceneID, const int & groupID)
+const bool NFCellModule::CreateGroupGrid(const NFGUID & self, const int & sceneID, const int & groupID)
 {
 	//we would have a group grid pool
 	TMAP_SCENE_INFO::iterator it = mtGridInfoMap.find(sceneID);
@@ -149,8 +149,8 @@ const bool NFGridModule::CreateGroupGrid(const NFGUID & self, const int & sceneI
 			TMAP_GRID_INFO::iterator itGrid0 = itGroup0->second.begin();
 			for (itGrid0; itGrid0 != itGroup0->second.end(); itGrid0++)
 			{
-				NF_SHARE_PTR<NFSceneGridInfo> pGridInfo0 = itGrid0->second;
-				//NF_SHARE_PTR<NFSceneGridInfo> pNewGridInfo = NF_SHARE_PTR<NFSceneGridInfo>(NF_NEW NFSceneGridInfo(pGridInfo0));
+				NF_SHARE_PTR<NFSceneCellInfo> pGridInfo0 = itGrid0->second;
+				//NF_SHARE_PTR<NFSceneCellInfo> pNewGridInfo = NF_SHARE_PTR<NFSceneCellInfo>(NF_NEW NFSceneCellInfo(pGridInfo0));
 			}
 		}
 	}
@@ -158,12 +158,12 @@ const bool NFGridModule::CreateGroupGrid(const NFGUID & self, const int & sceneI
 	return false;
 }
 
-const bool NFGridModule::DestroyGroupGrid(const NFGUID & self, const int & sceneID, const int & groupID)
+const bool NFCellModule::DestroyGroupGrid(const NFGUID & self, const int & sceneID, const int & groupID)
 {
 	return false;
 }
 
-const NFGUID NFGridModule::OnObjectMove(const NFGUID& self, const int& sceneID, const int& groupID, const NFGUID& lastGrid, const int nX, const int nY, const int nZ)
+const NFGUID NFCellModule::OnObjectMove(const NFGUID& self, const int& sceneID, const int& groupID, const NFGUID& lastGrid, const int nX, const int nY, const int nZ)
 {
     const NFGUID& currGrid = ComputerGridID(nX, nY, nZ);
     if (currGrid == lastGrid)
@@ -177,10 +177,10 @@ const NFGUID NFGridModule::OnObjectMove(const NFGUID& self, const int& sceneID, 
     return currGrid;
 }
 
-const NFGUID NFGridModule::OnObjectEntry(const NFGUID& self, const int& sceneID, const int& groupID, const int nX, const int nY, const int nZ)
+const NFGUID NFCellModule::OnObjectEntry(const NFGUID& self, const int& sceneID, const int& groupID, const int nX, const int nY, const int nZ)
 {
     NFGUID gridID = ComputerGridID(nX, nY, nZ);
-    NF_SHARE_PTR<NFSceneGridInfo> pGridInfo = GetGridInfo(sceneID, groupID, gridID);
+    NF_SHARE_PTR<NFSceneCellInfo> pGridInfo = GetGridInfo(sceneID, groupID, gridID);
     if (pGridInfo)
     {
         OnMoveIn(self, sceneID, groupID, gridID, gridID);
@@ -189,10 +189,10 @@ const NFGUID NFGridModule::OnObjectEntry(const NFGUID& self, const int& sceneID,
     return gridID;
 }
 
-const NFGUID NFGridModule::OnObjectLeave(const NFGUID& self, const int& sceneID, const int& groupID, const int nX, const int nY, const int nZ)
+const NFGUID NFCellModule::OnObjectLeave(const NFGUID& self, const int& sceneID, const int& groupID, const int nX, const int nY, const int nZ)
 {
 	NFGUID gridID = ComputerGridID(nX, nY, nZ);
-	NF_SHARE_PTR<NFSceneGridInfo> pGridInfo = GetGridInfo(sceneID, groupID, gridID);
+	NF_SHARE_PTR<NFSceneCellInfo> pGridInfo = GetGridInfo(sceneID, groupID, gridID);
 	if (pGridInfo)
 	{
 		OnMoveOut(self, sceneID, groupID, gridID, gridID);
@@ -201,7 +201,7 @@ const NFGUID NFGridModule::OnObjectLeave(const NFGUID& self, const int& sceneID,
     return NFGUID();
 }
 
-const NFGUID NFGridModule::ComputerGridID(const int nX, const int nY, const int nZ)
+const NFGUID NFCellModule::ComputerGridID(const int nX, const int nY, const int nZ)
 {
     int nGridXIndex = nX / nGridWidth;
     int nGridZIndex = nZ / nGridWidth;
@@ -209,32 +209,32 @@ const NFGUID NFGridModule::ComputerGridID(const int nX, const int nY, const int 
     return NFGUID(nGridXIndex, nGridZIndex);
 }
 
-const NFGUID NFGridModule::ComputerGridID(const NFGUID & selfGrid, EGRID_DIRECTION eDirection)
+const NFGUID NFCellModule::ComputerGridID(const NFGUID & selfGrid, ECELL_DIRECTION eDirection)
 {
 	switch (eDirection)
 	{
-	case EGRID_TOP:
+	case ECELL_TOP:
 		return NFGUID(selfGrid.nHead64, selfGrid.nData64 + 1);
 		break;
-	case EGRID_DOWN:
+	case ECELL_DOWN:
 		return NFGUID(selfGrid.nHead64, selfGrid.nData64 - 1);
 		break;
-	case EGRID_LEFT:
+	case ECELL_LEFT:
 		return NFGUID(selfGrid.nHead64 - 1, selfGrid.nData64);
 		break;
-	case EGRID_RIGHT:
+	case ECELL_RIGHT:
 		return NFGUID(selfGrid.nHead64 + 1, selfGrid.nData64);
 		break;
-	case EGRID_LEFT_TOP:
+	case ECELL_LEFT_TOP:
 		return NFGUID(selfGrid.nHead64 + 1, selfGrid.nData64 + 1);
 		break;
-	case EGRID_LEFT_DOWN:
+	case ECELL_LEFT_DOWN:
 		return NFGUID(selfGrid.nHead64 - 1, selfGrid.nData64 - 1);
 		break;
-	case EGRID_RIGHT_TOP:
+	case ECELL_RIGHT_TOP:
 		return NFGUID(selfGrid.nHead64 + 1, selfGrid.nData64 + 1);
 		break;
-	case EGRID_RIGHT_DOWN:
+	case ECELL_RIGHT_DOWN:
 		return NFGUID(selfGrid.nHead64 + 1, selfGrid.nData64 - 1);
 		break;
 	default:
@@ -243,18 +243,18 @@ const NFGUID NFGridModule::ComputerGridID(const NFGUID & selfGrid, EGRID_DIRECTI
 	return NFGUID();
 }
 
-const NFGUID NFGridModule::GetStepLenth(const NFGUID& selfGrid, const NFGUID& otherGrid)
+const NFGUID NFCellModule::GetStepLenth(const NFGUID& selfGrid, const NFGUID& otherGrid)
 {
     return NFGUID(std::abs(otherGrid.nHead64 - selfGrid.nHead64), std::abs(otherGrid.nData64 - selfGrid.nData64));
 }
 
-const int NFGridModule::GetAroundGrid(const int& sceneID, const int& groupID, const NFGUID& selfGrid, NF_SHARE_PTR<NFSceneGridInfo>* gridList, EGRID_AROUND eAround /*= EGRID_AROUND_9 */)
+const int NFCellModule::GetAroundGrid(const int& sceneID, const int& groupID, const NFGUID& selfGrid, NF_SHARE_PTR<NFSceneCellInfo>* gridList, ECELL_AROUND eAround /*= ECELL_AROUND_9 */)
 {
-	NF_SHARE_PTR<NFSceneGridInfo> pGridInfo = GetGridInfo(sceneID, groupID, selfGrid);
+	NF_SHARE_PTR<NFSceneCellInfo> pGridInfo = GetGridInfo(sceneID, groupID, selfGrid);
     return GetAroundGrid(pGridInfo, gridList, eAround);
 }
 
-const int NFGridModule::GetAroundGrid(NF_SHARE_PTR<NFSceneGridInfo> pGridInfo, NF_SHARE_PTR<NFSceneGridInfo>* gridList, EGRID_AROUND eAround /*= EGRID_AROUND_9 */)
+const int NFCellModule::GetAroundGrid(NF_SHARE_PTR<NFSceneCellInfo> pGridInfo, NF_SHARE_PTR<NFSceneCellInfo>* gridList, ECELL_AROUND eAround /*= ECELL_AROUND_9 */)
 {
     int nObjectCount = 0;
 
@@ -263,17 +263,17 @@ const int NFGridModule::GetAroundGrid(NF_SHARE_PTR<NFSceneGridInfo> pGridInfo, N
         return nObjectCount;
     }
 
-    gridList[EGRID_DIRECTION_MAXCOUNT] = pGridInfo;
+    gridList[ECELL_DIRECTION_MAXCOUNT] = pGridInfo;
 
     nObjectCount += pGridInfo->Count();
 
     switch (eAround)
     {
-        case EGRID_AROUND_9:
+        case ECELL_AROUND_9:
         {
-            for (int i = 0; i < EGRID_DIRECTION_MAXCOUNT; i++)
+            for (int i = 0; i < ECELL_DIRECTION_MAXCOUNT; i++)
             {
-                NF_SHARE_PTR<NFSceneGridInfo> pInfo = pGridInfo->GetConnectGrid((EGRID_DIRECTION)i);
+                NF_SHARE_PTR<NFSceneCellInfo> pInfo = pGridInfo->GetConnectGrid((ECELL_DIRECTION)i);
                 if (pInfo)
                 {
 					gridList[i] = pInfo;
@@ -282,11 +282,11 @@ const int NFGridModule::GetAroundGrid(NF_SHARE_PTR<NFSceneGridInfo> pGridInfo, N
             }
         }
         break;
-        case EGRID_AROUND_16:
+        case ECELL_AROUND_16:
             break;
-        case EGRID_AROUND_25:
+        case ECELL_AROUND_25:
             break;
-        case EGRID_AROUND_ALL:
+        case ECELL_AROUND_ALL:
             break;
         default:
             break;
@@ -295,9 +295,9 @@ const int NFGridModule::GetAroundGrid(NF_SHARE_PTR<NFSceneGridInfo> pGridInfo, N
     return nObjectCount;
 }
 
-const int NFGridModule::GetAroundObject(const int& sceneID, const int& groupID, const NFGUID& selfGrid, NFDataList& objectList, EGRID_AROUND eAround /*= EGRID_AROUND_9 */)
+const int NFCellModule::GetAroundObject(const int& sceneID, const int& groupID, const NFGUID& selfGrid, NFDataList& objectList, ECELL_AROUND eAround /*= ECELL_AROUND_9 */)
 {
-    NF_SHARE_PTR<NFSceneGridInfo> pGridInfo = GetGridInfo(sceneID, groupID, selfGrid);
+    NF_SHARE_PTR<NFSceneCellInfo> pGridInfo = GetGridInfo(sceneID, groupID, selfGrid);
     if (pGridInfo)
     {
         return GetAroundObject(pGridInfo, objectList, eAround);
@@ -305,7 +305,7 @@ const int NFGridModule::GetAroundObject(const int& sceneID, const int& groupID, 
     return 0;
 }
 
-const int NFGridModule::GetAroundObject(NF_SHARE_PTR<NFSceneGridInfo> pGridInfo, NFDataList& objectList, EGRID_AROUND eAround /*= EGRID_AROUND_9 */)
+const int NFCellModule::GetAroundObject(NF_SHARE_PTR<NFSceneCellInfo> pGridInfo, NFDataList& objectList, ECELL_AROUND eAround /*= ECELL_AROUND_9 */)
 {
     if (!pGridInfo)
     {
@@ -313,12 +313,12 @@ const int NFGridModule::GetAroundObject(NF_SHARE_PTR<NFSceneGridInfo> pGridInfo,
     }
 
 
-	NF_SHARE_PTR<NFSceneGridInfo> aroundGrid[EGRID_DIRECTION_MAXCOUNT];
+	NF_SHARE_PTR<NFSceneCellInfo> aroundGrid[ECELL_DIRECTION_MAXCOUNT];
     if (GetAroundGrid(pGridInfo, aroundGrid, eAround) > 0)
     {
-        for (int i = 0; i < EGRID_DIRECTION_MAXCOUNT; i++)
+        for (int i = 0; i < ECELL_DIRECTION_MAXCOUNT; i++)
         {
-			NF_SHARE_PTR<NFSceneGridInfo> pGridInfo = aroundGrid[i];
+			NF_SHARE_PTR<NFSceneCellInfo> pGridInfo = aroundGrid[i];
             if (pGridInfo)
             {
                 NFGUID ident;
@@ -335,9 +335,9 @@ const int NFGridModule::GetAroundObject(NF_SHARE_PTR<NFSceneGridInfo> pGridInfo,
     return objectList.GetCount();
 }
 
-NF_SHARE_PTR<NFSceneGridInfo> NFGridModule::GetConnectGrid(const int& sceneID, const int& groupID, const NFGUID& selfGrid, EGRID_DIRECTION eDirection)
+NF_SHARE_PTR<NFSceneCellInfo> NFCellModule::GetConnectGrid(const int& sceneID, const int& groupID, const NFGUID& selfGrid, ECELL_DIRECTION eDirection)
 {
-	NF_SHARE_PTR<NFSceneGridInfo> pGridInfo = GetGridInfo(sceneID, groupID, selfGrid);
+	NF_SHARE_PTR<NFSceneCellInfo> pGridInfo = GetGridInfo(sceneID, groupID, selfGrid);
     if (pGridInfo)
     {
         return pGridInfo->GetConnectGrid(eDirection);
@@ -346,7 +346,7 @@ NF_SHARE_PTR<NFSceneGridInfo> NFGridModule::GetConnectGrid(const int& sceneID, c
     return NULL;
 }
 
-NF_SHARE_PTR<NFSceneGridInfo> NFGridModule::GetGridInfo(const int& sceneID, const int& groupID, const NFGUID& selfGrid)
+NF_SHARE_PTR<NFSceneCellInfo> NFCellModule::GetGridInfo(const int& sceneID, const int& groupID, const NFGUID& selfGrid)
 {
     TMAP_SCENE_INFO::iterator it = mtGridInfoMap.find(sceneID);
     if (it != mtGridInfoMap.end())
@@ -365,9 +365,9 @@ NF_SHARE_PTR<NFSceneGridInfo> NFGridModule::GetGridInfo(const int& sceneID, cons
     return NULL;
 }
 
-bool NFGridModule::OnMoveIn(const NFGUID& self, const int& sceneID, const int& groupID, const NFGUID& fromGrid, const NFGUID& toGrid)
+bool NFCellModule::OnMoveIn(const NFGUID& self, const int& sceneID, const int& groupID, const NFGUID& fromGrid, const NFGUID& toGrid)
 {
-	NF_SHARE_PTR<NFSceneGridInfo> pGrigInfo = GetGridInfo(sceneID, groupID, toGrid);
+	NF_SHARE_PTR<NFSceneCellInfo> pGrigInfo = GetGridInfo(sceneID, groupID, toGrid);
 	if (pGrigInfo)
 	{
 		pGrigInfo->Add(self);
@@ -376,9 +376,9 @@ bool NFGridModule::OnMoveIn(const NFGUID& self, const int& sceneID, const int& g
     return false;
 }
 
-bool NFGridModule::OnMoveOut(const NFGUID& self, const int& sceneID, const int& groupID, const NFGUID& fromGrid, const NFGUID& toGrid)
+bool NFCellModule::OnMoveOut(const NFGUID& self, const int& sceneID, const int& groupID, const NFGUID& fromGrid, const NFGUID& toGrid)
 {
-	NF_SHARE_PTR<NFSceneGridInfo> pGrigInfo = GetGridInfo(sceneID, groupID, fromGrid);
+	NF_SHARE_PTR<NFSceneCellInfo> pGrigInfo = GetGridInfo(sceneID, groupID, fromGrid);
 	if (pGrigInfo)
 	{
 		return pGrigInfo->Remove(self);
