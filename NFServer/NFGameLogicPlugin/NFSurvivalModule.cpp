@@ -24,9 +24,9 @@
 */
 
 
-#include "NFCSurvivalModule.h"
+#include "NFSurvivalModule.h"
 
-bool NFCSurvivalModule::Init()
+bool NFSurvivalModule::Init()
 {
 
 	mnMinPeopleForSurvivalMode = 50;
@@ -34,17 +34,17 @@ bool NFCSurvivalModule::Init()
 	return true;
 }
 
-bool NFCSurvivalModule::Shut()
+bool NFSurvivalModule::Shut()
 {
 	return true;
 }
 
-bool NFCSurvivalModule::Execute()
+bool NFSurvivalModule::Execute()
 {
 	return true;
 }
 
-bool NFCSurvivalModule::AfterInit()
+bool NFSurvivalModule::AfterInit()
 {
 	m_pElementModule = pPluginManager->FindModule<NFIElementModule>();
 	m_pClassModule = pPluginManager->FindModule<NFIClassModule>();
@@ -60,12 +60,12 @@ bool NFCSurvivalModule::AfterInit()
 	m_pRankModule = pPluginManager->FindModule<NFIRankModule>();
 
 
-	m_pScheduleModule->AddSchedule("CheckSurvivalList", this, &NFCSurvivalModule::CheckSurvivalList, 10, -1);
+	m_pScheduleModule->AddSchedule("CheckSurvivalList", this, &NFSurvivalModule::CheckSurvivalList, 10, -1);
 	
 	return true;
 }
 
-int NFCSurvivalModule::CheckSurvivalList(const std::string & strScheduleName, const float fIntervalTime, const int nCount)
+int NFSurvivalModule::CheckSurvivalList(const std::string & strScheduleName, const float fIntervalTime, const int nCount)
 {
 	m_pLogModule->LogDebug(strScheduleName);
 

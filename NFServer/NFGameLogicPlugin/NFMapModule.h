@@ -24,27 +24,27 @@
 */
 
 
-#ifndef NFC_MAP_MODULE_H
-#define NFC_MAP_MODULE_H
+#ifndef NF_MAP_MODULE_H
+#define NF_MAP_MODULE_H
 
-#include "NFComm/NFPluginModule/NFIMapModule.h"
-#include "NFComm/NFPluginModule/NFIPluginManager.h"
-#include "NFComm/NFPluginModule/NFIBigMapRedisModule.h"
-#include "NFComm/NFPluginModule/NFIClassModule.h"
-#include "NFComm/NFPluginModule/NFIElementModule.h"
-#include "NFComm/NFPluginModule/NFIKernelModule.h"
-#include "NFComm/NFPluginModule/NFIGuildRedisModule.h"
-#include "NFComm/NFPluginModule/NFIGameServerNet_ServerModule.h"
+#include "NFomm/NFPluginModule/NFIMapModule.h"
+#include "NFomm/NFPluginModule/NFIPluginManager.h"
+#include "NFomm/NFPluginModule/NFIBigMapRedisModule.h"
+#include "NFomm/NFPluginModule/NFIClassModule.h"
+#include "NFomm/NFPluginModule/NFIElementModule.h"
+#include "NFomm/NFPluginModule/NFIKernelModule.h"
+#include "NFomm/NFPluginModule/NFIGuildRedisModule.h"
+#include "NFomm/NFPluginModule/NFIGameServerNet_ServerModule.h"
 
-class NFCMapModule
+class NFMapModule
     : public NFIMapModule
 {
 public:
-	NFCMapModule(NFIPluginManager* p)
+	NFMapModule(NFIPluginManager* p)
 	{
 		pPluginManager = p;
 	}
-	virtual ~NFCMapModule() {};
+	virtual ~NFMapModule() {};
 
     virtual bool Init();
     virtual bool Shut();

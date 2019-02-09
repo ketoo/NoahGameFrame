@@ -24,10 +24,10 @@
 */
 
 
-#include "NFCTileModule.h"
-#include "NFComm/NFMessageDefine/NFProtocolDefine.hpp"
+#include "NFTileModule.h"
+#include "NFomm/NFMessageDefine/NFProtocolDefine.hpp"
 
-bool NFCTileModule::Init()
+bool NFTileModule::Init()
 {
 	m_pNetModule = pPluginManager->FindModule<NFINetModule>();
 	m_pBigMapRedisModule = pPluginManager->FindModule<NFIBigMapRedisModule>();
@@ -40,30 +40,30 @@ bool NFCTileModule::Init()
     return true;
 }
 
-bool NFCTileModule::Shut()
+bool NFTileModule::Shut()
 {
     return true;
 }
 
-bool NFCTileModule::Execute()
+bool NFTileModule::Execute()
 {
     return true;
 }
 
-bool NFCTileModule::AfterInit()
+bool NFTileModule::AfterInit()
 {
-	m_pKernelModule->AddClassCallBack(NFrame::Player::ThisName(), this, &NFCTileModule::OnObjectClassEvent);
+	m_pKernelModule->AddClassCallBack(NFrame::Player::ThisName(), this, &NFTileModule::OnObjectClassEvent);
 
-	m_pSceneAOIModule->AddBeforeEnterSceneGroupCallBack(this, &NFCTileModule::BeforeEnterSceneGroupEvent);
-	m_pSceneAOIModule->AddAfterEnterSceneGroupCallBack(this, &NFCTileModule::AfterEnterSceneGroupEvent);
-	m_pSceneAOIModule->AddBeforeLeaveSceneGroupCallBack(this, &NFCTileModule::BeforeLeaveSceneGroupEvent);
-	m_pSceneAOIModule->AddAfterLeaveSceneGroupCallBack(this, &NFCTileModule::AfterLeaveSceneGroupEvent);
+	m_pSceneAOIModule->AddBeforeEnterSceneGroupCallBack(this, &NFTileModule::BeforeEnterSceneGroupEvent);
+	m_pSceneAOIModule->AddAfterEnterSceneGroupCallBack(this, &NFTileModule::AfterEnterSceneGroupEvent);
+	m_pSceneAOIModule->AddBeforeLeaveSceneGroupCallBack(this, &NFTileModule::BeforeLeaveSceneGroupEvent);
+	m_pSceneAOIModule->AddAfterLeaveSceneGroupCallBack(this, &NFTileModule::AfterLeaveSceneGroupEvent);
 
-	if (!m_pNetModule->AddReceiveCallBack(NFMsg::EGameMsgID::EGEC_REQ_MINING_TITLE, this, &NFCTileModule::OnReqMineTileProcess)) { return false; }
+	if (!m_pNetModule->AddReceiveCallBack(NFMsg::EGameMsgID::EGEC_REQ_MINING_TITLE, this, &NFTileModule::OnReqMineTileProcess)) { return false; }
     return true;
 }
 
-bool NFCTileModule::GetOnlinePlayerTileData(const NFGUID& self, std::string& strData)
+bool NFTileModule::GetOnlinePlayerTileData(const NFGUID& self, std::string& strData)
 {
 	NF_SHARE_PTR<TileData> xTileData = mxTileData.GetElement(self);
 	if (!xTileData)
@@ -140,7 +140,7 @@ bool NFCTileModule::GetOnlinePlayerTileData(const NFGUID& self, std::string& str
 	return false;
 }
 
-void NFCTileModule::OnReqMineTileProcess(const NFSOCK nSockIndex, const int nMsgID, const char * msg, const uint32_t nLen)
+void NFTileModule::OnReqMineTileProcess(const NFSOCK nSockIndex, const int nMsgID, const char * msg, const uint32_t nLen)
 {
 	CLIENT_MSG_PROCESS( nMsgID, msg, nLen, NFMsg::ReqMiningTitle);
 
@@ -177,7 +177,7 @@ void NFCTileModule::OnReqMineTileProcess(const NFSOCK nSockIndex, const int nMsg
 	m_pGameServerNet_ServerModule->SendMsgPBToGate(NFMsg::EGEC_ACK_MINING_TITLE, xData, nPlayerID);
 }
 
-bool NFCTileModule::AddTile(const NFGUID & self, const int nX, const int nY, const int nOpr)
+bool NFTileModule::AddTile(const NFGUID & self, const int nX, const int nY, const int nOpr)
 {
 	NF_SHARE_PTR<TileData> xTileData = mxTileData.GetElement(self);
 	if (!xTileData)
@@ -216,7 +216,7 @@ bool NFCTileModule::AddTile(const NFGUID & self, const int nX, const int nY, con
 	return true;
 }
 
-bool NFCTileModule::AddBuilding(const NFGUID & self, const int nX, const int nY, const NFGUID & id, const std::string & strCnfID)
+bool NFTileModule::AddBuilding(const NFGUID & self, const int nX, const int nY, const NFGUID & id, const std::string & strCnfID)
 {
 	NF_SHARE_PTR<TileData> xTileData = mxTileData.GetElement(self);
 	if (!xTileData)
@@ -249,7 +249,7 @@ bool NFCTileModule::AddBuilding(const NFGUID & self, const int nX, const int nY,
 	return true;
 }
 
-bool NFCTileModule::AddNPC(const NFGUID & self, const int nX, const int nY, const NFGUID & id, const std::string & strCnfID)
+bool NFTileModule::AddNPC(const NFGUID & self, const int nX, const int nY, const NFGUID & id, const std::string & strCnfID)
 {
 	NF_SHARE_PTR<TileData> xTileData = mxTileData.GetElement(self);
 	if (!xTileData)
@@ -280,7 +280,7 @@ bool NFCTileModule::AddNPC(const NFGUID & self, const int nX, const int nY, cons
 	return true;
 }
 
-bool NFCTileModule::RemoveTile(const NFGUID & self, const int nX, const int nY)
+bool NFTileModule::RemoveTile(const NFGUID & self, const int nX, const int nY)
 {
 	NF_SHARE_PTR<TileData> xTileData = mxTileData.GetElement(self);
 	if (!xTileData)
@@ -306,7 +306,7 @@ bool NFCTileModule::RemoveTile(const NFGUID & self, const int nX, const int nY)
 	return false;
 }
 
-bool NFCTileModule::RemoveBuilding(const NFGUID & self, const int nX, const int nY, const NFGUID & id)
+bool NFTileModule::RemoveBuilding(const NFGUID & self, const int nX, const int nY, const NFGUID & id)
 {
 	NF_SHARE_PTR<TileData> xTileData = mxTileData.GetElement(self);
 	if (!xTileData)
@@ -329,7 +329,7 @@ bool NFCTileModule::RemoveBuilding(const NFGUID & self, const int nX, const int 
 	return false;
 }
 
-bool NFCTileModule::RemoveNPC(const NFGUID & self, const int nX, const int nY, const NFGUID & id)
+bool NFTileModule::RemoveNPC(const NFGUID & self, const int nX, const int nY, const NFGUID & id)
 {
 	NF_SHARE_PTR<TileData> xTileData = mxTileData.GetElement(self);
 	if (!xTileData)
@@ -352,7 +352,7 @@ bool NFCTileModule::RemoveNPC(const NFGUID & self, const int nX, const int nY, c
 	return false;
 }
 
-bool NFCTileModule::SaveTileData(const NFGUID & self)
+bool NFTileModule::SaveTileData(const NFGUID & self)
 {
 	std::string strData;
 	if (GetOnlinePlayerTileData(self, strData))
@@ -364,7 +364,7 @@ bool NFCTileModule::SaveTileData(const NFGUID & self)
 	return false;
 }
 
-bool NFCTileModule::LoadTileData(const NFGUID & self, const int nSceneID)
+bool NFTileModule::LoadTileData(const NFGUID & self, const int nSceneID)
 {
 	mxTileData.RemoveElement(self);
 
@@ -400,7 +400,7 @@ bool NFCTileModule::LoadTileData(const NFGUID & self, const int nSceneID)
 	return false;
 }
 
-bool NFCTileModule::SendTileData(const NFGUID & self)
+bool NFTileModule::SendTileData(const NFGUID & self)
 {
 	std::string strData;
 	if (GetOnlinePlayerTileData(self, strData))
@@ -411,7 +411,7 @@ bool NFCTileModule::SendTileData(const NFGUID & self)
 	return true;
 }
 
-bool NFCTileModule::CreateTileBuilding(const NFGUID & self)
+bool NFTileModule::CreateTileBuilding(const NFGUID & self)
 {
 	NF_SHARE_PTR<NFIRecord> xRecord = m_pKernelModule->FindRecord(self, NFrame::Player::BuildingList::ThisName());
 	if (xRecord)
@@ -444,7 +444,7 @@ bool NFCTileModule::CreateTileBuilding(const NFGUID & self)
 	return false;
 }
 
-int NFCTileModule::OnObjectClassEvent(const NFGUID & self, const std::string & strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFDataList & var)
+int NFTileModule::OnObjectClassEvent(const NFGUID & self, const std::string & strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFDataList & var)
 {
 	if (CLASS_OBJECT_EVENT::COE_BEFOREDESTROY == eClassEvent)
 	{
@@ -461,14 +461,14 @@ int NFCTileModule::OnObjectClassEvent(const NFGUID & self, const std::string & s
 		//load
 		SendTileData(self);
 
-		m_pKernelModule->AddRecordCallBack(self, NFrame::Player::BuildingList::ThisName(), this, &NFCTileModule::OnRecordEvent);
+		m_pKernelModule->AddRecordCallBack(self, NFrame::Player::BuildingList::ThisName(), this, &NFTileModule::OnRecordEvent);
 	}
 
 	return 0;
 }
 
 
-int NFCTileModule::OnRecordEvent(const NFGUID& self, const RECORD_EVENT_DATA& xEventData, const NFData& oldVar, const NFData& newVar)
+int NFTileModule::OnRecordEvent(const NFGUID& self, const RECORD_EVENT_DATA& xEventData, const NFData& oldVar, const NFData& newVar)
 {
 	switch (xEventData.nOpType)
 	{
@@ -513,12 +513,12 @@ int NFCTileModule::OnRecordEvent(const NFGUID& self, const RECORD_EVENT_DATA& xE
 }
 
 
-int NFCTileModule::BeforeEnterSceneGroupEvent(const NFGUID & self, const int nSceneID, const int nGroupID, const int nType, const NFDataList & argList)
+int NFTileModule::BeforeEnterSceneGroupEvent(const NFGUID & self, const int nSceneID, const int nGroupID, const int nType, const NFDataList & argList)
 {
 	return 0;
 }
 
-int NFCTileModule::AfterEnterSceneGroupEvent(const NFGUID & self, const int nSceneID, const int nGroupID, const int nType, const NFDataList & argList)
+int NFTileModule::AfterEnterSceneGroupEvent(const NFGUID & self, const int nSceneID, const int nGroupID, const int nType, const NFDataList & argList)
 {
 	//create building if the player back home
 	//create building if the player wants attack the others
@@ -534,12 +534,12 @@ int NFCTileModule::AfterEnterSceneGroupEvent(const NFGUID & self, const int nSce
 	return 0;
 }
 
-int NFCTileModule::BeforeLeaveSceneGroupEvent(const NFGUID & self, const int nSceneID, const int nGroupID, const int nType, const NFDataList & argList)
+int NFTileModule::BeforeLeaveSceneGroupEvent(const NFGUID & self, const int nSceneID, const int nGroupID, const int nType, const NFDataList & argList)
 {
 	return 0;
 }
 
-int NFCTileModule::AfterLeaveSceneGroupEvent(const NFGUID & self, const int nSceneID, const int nGroupID, const int nType, const NFDataList & argList)
+int NFTileModule::AfterLeaveSceneGroupEvent(const NFGUID & self, const int nSceneID, const int nGroupID, const int nType, const NFDataList & argList)
 {
 	return 0;
 }

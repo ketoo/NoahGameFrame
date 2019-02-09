@@ -24,29 +24,29 @@
 */
 
 
-#ifndef NFC_TILE_MODULE_H
-#define NFC_TILE_MODULE_H
+#ifndef NF_TILE_MODULE_H
+#define NF_TILE_MODULE_H
 
-#include "NFComm/NFPluginModule/NFITileModule.h"
-#include "NFComm/NFPluginModule/NFIPluginManager.h"
-#include "NFComm/NFPluginModule/NFIBigMapRedisModule.h"
-#include "NFComm/NFPluginModule/NFIClassModule.h"
-#include "NFComm/NFPluginModule/NFIElementModule.h"
-#include "NFComm/NFPluginModule/NFIKernelModule.h"
-#include "NFComm/NFPluginModule/NFIGuildRedisModule.h"
-#include "NFComm/NFPluginModule/NFIGameServerNet_ServerModule.h"
-#include "NFComm/NFPluginModule/NFIPlayerRedisModule.h"
-#include "NFComm/NFPluginModule/NFISceneAOIModule.h"
+#include "NFomm/NFPluginModule/NFITileModule.h"
+#include "NFomm/NFPluginModule/NFIPluginManager.h"
+#include "NFomm/NFPluginModule/NFIBigMapRedisModule.h"
+#include "NFomm/NFPluginModule/NFIClassModule.h"
+#include "NFomm/NFPluginModule/NFIElementModule.h"
+#include "NFomm/NFPluginModule/NFIKernelModule.h"
+#include "NFomm/NFPluginModule/NFIGuildRedisModule.h"
+#include "NFomm/NFPluginModule/NFIGameServerNet_ServerModule.h"
+#include "NFomm/NFPluginModule/NFIPlayerRedisModule.h"
+#include "NFomm/NFPluginModule/NFISceneAOIModule.h"
 
-class NFCTileModule
+class NFTileModule
     : public NFITileModule
 {
 public:
-	NFCTileModule(NFIPluginManager* p)
+	NFTileModule(NFIPluginManager* p)
 	{
 		pPluginManager = p;
 	}
-	virtual ~NFCTileModule() {};
+	virtual ~NFTileModule() {};
 
     virtual bool Init();
     virtual bool Shut();

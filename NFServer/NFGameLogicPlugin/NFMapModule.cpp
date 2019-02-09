@@ -24,10 +24,10 @@
 */
 
 
-#include "NFCMapModule.h"
-#include "NFComm/NFMessageDefine/NFProtocolDefine.hpp"
+#include "NFMapModule.h"
+#include "NFomm/NFMessageDefine/NFProtocolDefine.hpp"
 
-bool NFCMapModule::Init()
+bool NFMapModule::Init()
 {
 	m_pNetModule = pPluginManager->FindModule<NFINetModule>();
 	//m_pBigMapRedisModule = pPluginManager->FindModule<NFIBigMapRedisModule>();
@@ -40,33 +40,33 @@ bool NFCMapModule::Init()
     return true;
 }
 
-bool NFCMapModule::Shut()
+bool NFMapModule::Shut()
 {
     return true;
 }
 
-bool NFCMapModule::Execute()
+bool NFMapModule::Execute()
 {
     return true;
 }
 
-bool NFCMapModule::AfterInit()
+bool NFMapModule::AfterInit()
 {
 
-	if (!m_pNetModule->AddReceiveCallBack(NFMsg::EGameMsgID::EGMI_REQ_BIG_MAP_INFO, this, &NFCMapModule::ReqBigMapsInfo)) { return false; }
-	if (!m_pNetModule->AddReceiveCallBack(NFMsg::EGameMsgID::EGMI_REQ_MAP_GRID_INFO, this, &NFCMapModule::ReqMapTitleInfo)) { return false; }
+	if (!m_pNetModule->AddReceiveCallBack(NFMsg::EGameMsgID::EGMI_REQ_BIG_MAP_INFO, this, &NFMapModule::ReqBigMapsInfo)) { return false; }
+	if (!m_pNetModule->AddReceiveCallBack(NFMsg::EGameMsgID::EGMI_REQ_MAP_GRID_INFO, this, &NFMapModule::ReqMapTitleInfo)) { return false; }
 
-	if (!m_pNetModule->AddReceiveCallBack(NFMsg::EGameMsgID::EGMI_REQ_HOLD_MAP_GRID, this, &NFCMapModule::ReqStation)) { return false; }
-	if (!m_pNetModule->AddReceiveCallBack(NFMsg::EGameMsgID::EGMI_REQ_GET_MAP_GRID_AWARD, this, &NFCMapModule::ReqGetMapAward)) { return false; }
-	if (!m_pNetModule->AddReceiveCallBack(NFMsg::EGameMsgID::EGMI_REQ_LEAVE_MSG_MAP_GRID, this, &NFCMapModule::ReqLeaveMsgToMap)) { return false; }
+	if (!m_pNetModule->AddReceiveCallBack(NFMsg::EGameMsgID::EGMI_REQ_HOLD_MAP_GRID, this, &NFMapModule::ReqStation)) { return false; }
+	if (!m_pNetModule->AddReceiveCallBack(NFMsg::EGameMsgID::EGMI_REQ_GET_MAP_GRID_AWARD, this, &NFMapModule::ReqGetMapAward)) { return false; }
+	if (!m_pNetModule->AddReceiveCallBack(NFMsg::EGameMsgID::EGMI_REQ_LEAVE_MSG_MAP_GRID, this, &NFMapModule::ReqLeaveMsgToMap)) { return false; }
 
-	if (!m_pNetModule->AddReceiveCallBack(NFMsg::EGameMsgID::EGMI_REQ_MAP_GRID_HUNTING, this, &NFCMapModule::ReqMapHunting)) { return false; }
-	if (!m_pNetModule->AddReceiveCallBack(NFMsg::EGameMsgID::EGMI_REQ_MAP_GRID_KING_WAR, this, &NFCMapModule::ReqMapKingWar)) { return false; }
+	if (!m_pNetModule->AddReceiveCallBack(NFMsg::EGameMsgID::EGMI_REQ_MAP_GRID_HUNTING, this, &NFMapModule::ReqMapHunting)) { return false; }
+	if (!m_pNetModule->AddReceiveCallBack(NFMsg::EGameMsgID::EGMI_REQ_MAP_GRID_KING_WAR, this, &NFMapModule::ReqMapKingWar)) { return false; }
 
     return true;
 }
 
-void NFCMapModule::ReqBigMapsInfo(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
+void NFMapModule::ReqBigMapsInfo(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
 {
 	CLIENT_MSG_PROCESS( nMsgID, msg, nLen, NFMsg::ReqBigMapInfo);
 
@@ -93,7 +93,7 @@ void NFCMapModule::ReqBigMapsInfo(const NFSOCK nSockIndex, const int nMsgID, con
 	*/
 }
 
-void NFCMapModule::ReqMapTitleInfo(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
+void NFMapModule::ReqMapTitleInfo(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
 {
 	CLIENT_MSG_PROCESS( nMsgID, msg, nLen, NFMsg::ReqBigMapGridInfo);
 	
@@ -159,7 +159,7 @@ void NFCMapModule::ReqMapTitleInfo(const NFSOCK nSockIndex, const int nMsgID, co
 	*/
 }
 
-void NFCMapModule::ReqStation(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
+void NFMapModule::ReqStation(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
 {
 	CLIENT_MSG_PROCESS( nMsgID, msg, nLen, NFMsg::ReqHoldMapGrid);
 
@@ -182,7 +182,7 @@ void NFCMapModule::ReqStation(const NFSOCK nSockIndex, const int nMsgID, const c
 
 }
 
-void NFCMapModule::ReqGetMapAward(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
+void NFMapModule::ReqGetMapAward(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
 {
 	CLIENT_MSG_PROCESS( nMsgID, msg, nLen, NFMsg::ReqGetMapAward);
 
@@ -194,7 +194,7 @@ void NFCMapModule::ReqGetMapAward(const NFSOCK nSockIndex, const int nMsgID, con
 	//get guild informatin and send mail to all members to send award item
 }
 
-void NFCMapModule::ReqLeaveMsgToMap(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
+void NFMapModule::ReqLeaveMsgToMap(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
 {
 	CLIENT_MSG_PROCESS( nMsgID, msg, nLen, NFMsg::ReqLeaveMapMsg);
 
@@ -206,7 +206,7 @@ void NFCMapModule::ReqLeaveMsgToMap(const NFSOCK nSockIndex, const int nMsgID, c
 	//m_pBigMapRedisModule->AddGridLeaveMsgInfo(xMsg.map_title_id(), xMsg.leave_msg());
 }
 
-void NFCMapModule::ReqMapHunting(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
+void NFMapModule::ReqMapHunting(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
 {
 	CLIENT_MSG_PROCESS( nMsgID, msg, nLen, NFMsg::ReqMapHunting);
 	/*
@@ -229,7 +229,7 @@ void NFCMapModule::ReqMapHunting(const NFSOCK nSockIndex, const int nMsgID, cons
 	//show msgbox
 }
 
-void NFCMapModule::ReqMapKingWar(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
+void NFMapModule::ReqMapKingWar(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
 {
 	CLIENT_MSG_PROCESS( nMsgID, msg, nLen, NFMsg::ReqMapKingWar);
 
@@ -253,7 +253,7 @@ void NFCMapModule::ReqMapKingWar(const NFSOCK nSockIndex, const int nMsgID, cons
 	//show msgbox
 }
 
-void NFCMapModule::EndMapHunting(const std::string& strTitleID)
+void NFMapModule::EndMapHunting(const std::string& strTitleID)
 {
 	/*
 	NFMsg::BigMapGridBaseInfo xGridBaseInfo;
@@ -270,7 +270,7 @@ void NFCMapModule::EndMapHunting(const std::string& strTitleID)
 	//show msgbox and send mail to award
 }
 
-void NFCMapModule::EndMapKingWar(const std::string& strTitleID)
+void NFMapModule::EndMapKingWar(const std::string& strTitleID)
 {
 	/*
 	NFMsg::BigMapGridBaseInfo xGridBaseInfo;
@@ -287,7 +287,7 @@ void NFCMapModule::EndMapKingWar(const std::string& strTitleID)
 	//show msgbox and send mail to award
 }
 
-void NFCMapModule::SetKingForGrid(const std::string& strTitleID, const NFGUID& xGuildID)
+void NFMapModule::SetKingForGrid(const std::string& strTitleID, const NFGUID& xGuildID)
 {
 	/*
 	if (!m_pElementModule->ExistElement(strTitleID))
@@ -319,7 +319,7 @@ void NFCMapModule::SetKingForGrid(const std::string& strTitleID, const NFGUID& x
 	*/
 }
 
-void NFCMapModule::LeaveStation(const std::string& strTitleID, const NFGUID& xGuildID)
+void NFMapModule::LeaveStation(const std::string& strTitleID, const NFGUID& xGuildID)
 {
 
 }

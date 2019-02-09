@@ -24,32 +24,32 @@
 */
 
 
-#ifndef NFC_SURVIVAL_MODULE_H
-#define NFC_SURVIVAL_MODULE_H
+#ifndef NF_SURVIVAL_MODULE_H
+#define NF_SURVIVAL_MODULE_H
 
-#include "NFComm/NFCore/NFConsistentHash.hpp"
-#include "NFComm/NFPluginModule/NFIKernelModule.h"
-#include "NFComm/NFPluginModule/NFINoSqlModule.h"
-#include "NFComm/NFPluginModule/NFIElementModule.h"
-#include "NFComm/NFPluginModule/NFICreateRoleModule.h"
-#include "NFComm/NFPluginModule/NFIPlayerRedisModule.h"
-#include "NFComm/NFPluginModule/NFIScheduleModule.h"
-#include "NFComm/NFPluginModule/NFISceneAOIModule.h"
-#include "NFComm/NFPluginModule/NFISceneProcessModule.h"
-#include "NFComm/NFPluginModule/NFISurvivalModule.h"
-#include "NFComm/NFPluginModule/NFIGameServerNet_ServerModule.h"
-#include "NFComm/NFPluginModule/NFILogModule.h"
-#include "NFComm/NFPluginModule/NFIRankModule.h"
+#include "NFomm/NFore/NFonsistentHash.hpp"
+#include "NFomm/NFPluginModule/NFIKernelModule.h"
+#include "NFomm/NFPluginModule/NFINoSqlModule.h"
+#include "NFomm/NFPluginModule/NFIElementModule.h"
+#include "NFomm/NFPluginModule/NFICreateRoleModule.h"
+#include "NFomm/NFPluginModule/NFIPlayerRedisModule.h"
+#include "NFomm/NFPluginModule/NFIScheduleModule.h"
+#include "NFomm/NFPluginModule/NFISceneAOIModule.h"
+#include "NFomm/NFPluginModule/NFISceneProcessModule.h"
+#include "NFomm/NFPluginModule/NFISurvivalModule.h"
+#include "NFomm/NFPluginModule/NFIGameServerNet_ServerModule.h"
+#include "NFomm/NFPluginModule/NFILogModule.h"
+#include "NFomm/NFPluginModule/NFIRankModule.h"
 
-class NFCSurvivalModule
+class NFSurvivalModule
     : public NFISurvivalModule
 {
 public:
-    NFCSurvivalModule(NFIPluginManager* p)
+    NFSurvivalModule(NFIPluginManager* p)
     {
         pPluginManager = p;
     }
-    virtual ~NFCSurvivalModule() {};
+    virtual ~NFSurvivalModule() {};
 
 	virtual bool Init();
 	virtual bool Shut();
