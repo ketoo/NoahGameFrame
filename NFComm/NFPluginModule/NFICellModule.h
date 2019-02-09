@@ -30,9 +30,9 @@
 #include <iostream>
 #include <algorithm>
 #include <array>
-#include "NFComm/NFCore/NFDataList.hpp"
-#include "NFComm/NFPluginModule/NFIModule.h"
-#include "NFComm/NFPluginModule/NFGUID.h"
+#include "NFIModule.h"
+#include "NFIModule.h"
+#include "NFGUID.h"
 
 class NFSceneCellInfo;
 
