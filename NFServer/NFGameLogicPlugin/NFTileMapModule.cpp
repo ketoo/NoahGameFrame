@@ -24,14 +24,14 @@
 */
 
 
-#include "NFCTileMapModule.h"
+#include "NFTileMapModule.h"
 #include "Dependencies/RapidXML/rapidxml.hpp"
 #include "Dependencies/RapidXML/rapidxml_iterators.hpp"
 #include "Dependencies/RapidXML/rapidxml_print.hpp"
 #include "Dependencies/RapidXML/rapidxml_utils.hpp"
-#include "NFComm/NFMessageDefine/NFProtocolDefine.hpp"
+#include "NFomm/NFMessageDefine/NFProtocolDefine.hpp"
 
-bool NFCTileMapModule::Init()
+bool NFTileMapModule::Init()
 {
 	m_pNetModule = pPluginManager->FindModule<NFINetModule>();
 	m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>();
@@ -45,24 +45,24 @@ bool NFCTileMapModule::Init()
     return true;
 }
 
-bool NFCTileMapModule::Shut()
+bool NFTileMapModule::Shut()
 {
     return true;
 }
 
-bool NFCTileMapModule::Execute()
+bool NFTileMapModule::Execute()
 {
     return true;
 }
 
-bool NFCTileMapModule::AfterInit()
+bool NFTileMapModule::AfterInit()
 {
-	m_pKernelModule->AddClassCallBack(NFrame::Player::ThisName(), this, &NFCTileMapModule::OnObjectClassEvent);
+	m_pKernelModule->AddClassCallBack(NFrame::Player::ThisName(), this, &NFTileMapModule::OnObjectClassEvent);
 
-	m_pSceneAOIModule->AddBeforeEnterSceneGroupCallBack(this, &NFCTileMapModule::BeforeEnterSceneGroupEvent);
-	m_pSceneAOIModule->AddAfterEnterSceneGroupCallBack(this, &NFCTileMapModule::AfterEnterSceneGroupEvent);
-	m_pSceneAOIModule->AddBeforeLeaveSceneGroupCallBack(this, &NFCTileMapModule::BeforeLeaveSceneGroupEvent);
-	m_pSceneAOIModule->AddAfterLeaveSceneGroupCallBack(this, &NFCTileMapModule::AfterLeaveSceneGroupEvent);
+	m_pSceneAOIModule->AddBeforeEnterSceneGroupCallBack(this, &NFTileMapModule::BeforeEnterSceneGroupEvent);
+	m_pSceneAOIModule->AddAfterEnterSceneGroupCallBack(this, &NFTileMapModule::AfterEnterSceneGroupEvent);
+	m_pSceneAOIModule->AddBeforeLeaveSceneGroupCallBack(this, &NFTileMapModule::BeforeLeaveSceneGroupEvent);
+	m_pSceneAOIModule->AddAfterLeaveSceneGroupCallBack(this, &NFTileMapModule::AfterLeaveSceneGroupEvent);
 
 	NF_SHARE_PTR<NFIClass> xLogicClass = m_pClassModule->GetElement(NFrame::Scene::ThisName());
 	if (xLogicClass)
@@ -79,7 +79,7 @@ bool NFCTileMapModule::AfterInit()
     return true;
 }
 
-bool NFCTileMapModule::GenerateTileMap(const NFGUID self, const NFGUID other, const int nSceneID)
+bool NFTileMapModule::GenerateTileMap(const NFGUID self, const NFGUID other, const int nSceneID)
 {
 	ReleaseTileMap(self);
 
@@ -112,12 +112,12 @@ bool NFCTileMapModule::GenerateTileMap(const NFGUID self, const NFGUID other, co
 	return true;
 }
 
-bool NFCTileMapModule::ReleaseTileMap(const NFGUID self)
+bool NFTileMapModule::ReleaseTileMap(const NFGUID self)
 {
 	return true;
 }
 
-int NFCTileMapModule::OnObjectClassEvent(const NFGUID & self, const std::string & strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFDataList & var)
+int NFTileMapModule::OnObjectClassEvent(const NFGUID & self, const std::string & strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFDataList & var)
 {
 	if (CLASS_OBJECT_EVENT::COE_BEFOREDESTROY == eClassEvent)
 	{
@@ -127,31 +127,31 @@ int NFCTileMapModule::OnObjectClassEvent(const NFGUID & self, const std::string 
 	return 0;
 }
 
-int NFCTileMapModule::BeforeEnterSceneGroupEvent(const NFGUID & self, const int nSceneID, const int nGroupID, const int nType, const NFDataList & argList)
+int NFTileMapModule::BeforeEnterSceneGroupEvent(const NFGUID & self, const int nSceneID, const int nGroupID, const int nType, const NFDataList & argList)
 {
 	return 0;
 }
 
-int NFCTileMapModule::AfterEnterSceneGroupEvent(const NFGUID & self, const int nSceneID, const int nGroupID, const int nType, const NFDataList & argList)
+int NFTileMapModule::AfterEnterSceneGroupEvent(const NFGUID & self, const int nSceneID, const int nGroupID, const int nType, const NFDataList & argList)
 {
 	GenerateTileMap(self, self, nSceneID);
 
 	return 0;
 }
 
-int NFCTileMapModule::BeforeLeaveSceneGroupEvent(const NFGUID & self, const int nSceneID, const int nGroupID, const int nType, const NFDataList & argList)
+int NFTileMapModule::BeforeLeaveSceneGroupEvent(const NFGUID & self, const int nSceneID, const int nGroupID, const int nType, const NFDataList & argList)
 {
 	ReleaseTileMap(self);
 
 	return 0;
 }
 
-int NFCTileMapModule::AfterLeaveSceneGroupEvent(const NFGUID & self, const int nSceneID, const int nGroupID, const int nType, const NFDataList & argList)
+int NFTileMapModule::AfterLeaveSceneGroupEvent(const NFGUID & self, const int nSceneID, const int nGroupID, const int nType, const NFDataList & argList)
 {
 	return 0;
 }
 
-void NFCTileMapModule::LoadStaticTileData(const std::string& strSceneIDName)
+void NFTileMapModule::LoadStaticTileData(const std::string& strSceneIDName)
 {
 	const std::string& strSceneFilePath = m_pElementModule->GetPropertyString(strSceneIDName, NFrame::Scene::ResPath());
 
