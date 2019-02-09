@@ -100,7 +100,7 @@ bool NFCellModule::AfterInit()
 	for (gridList.First(pGridInfo); pGridInfo != nullptr; gridList.Next(pGridInfo))
 	{
 		NF_SHARE_PTR<NFSceneCellInfo> aroundGrid[ECELL_DIRECTION_MAXCOUNT] = { 0 };
-		NFGUID gridID[ECELL_DIRECTION_MAXCOUNT] = { 0 };
+		NFGUID gridID[ECELL_DIRECTION_MAXCOUNT];
 
 		for (int i = 0; i <ECELL_DIRECTION_MAXCOUNT; ++i)
 		{
