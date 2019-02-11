@@ -144,8 +144,8 @@ void NFTileModule::OnReqMineTileProcess(const NFSOCK nSockIndex, const int nMsgI
 {
 	CLIENT_MSG_PROCESS( nMsgID, msg, nLen, NFMsg::ReqMiningTitle);
 
-	NFGUID xViewOpponentID = m_pKernelModule->GetPropertyObject(nPlayerID, NFrame::Player::ViewOpponent());
-	NFGUID xFightOpponentID = m_pKernelModule->GetPropertyObject(nPlayerID, NFrame::Player::FightingOpponent());
+	NFGUID xViewOpponentID = m_pKernelModule->GetPropertyObject(nPlayerID, NFrame::Player::OpponentID());
+	NFGUID xFightOpponentID = m_pKernelModule->GetPropertyObject(nPlayerID, NFrame::Player::OpponentFighting());
 	if (!xViewOpponentID.IsNull() || !xFightOpponentID.IsNull())
 	{
 		return;
@@ -405,7 +405,7 @@ bool NFTileModule::SendTileData(const NFGUID & self)
 	std::string strData;
 	if (GetOnlinePlayerTileData(self, strData))
 	{
-		m_pGameServerNet_ServerModule->SendMsgPBToGate(NFMsg::EGEC_ACK_MINING_TITLE, strData, self);
+		m_pGameServerNet_ServerModule->SendMsgToGate(NFMsg::EGEC_ACK_MINING_TITLE, strData, self);
 	}
 
 	return true;
