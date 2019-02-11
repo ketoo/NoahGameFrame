@@ -25,7 +25,7 @@
 
 
 #include "NFMapModule.h"
-#include "NFomm/NFMessageDefine/NFProtocolDefine.hpp"
+#include "NFComm/NFMessageDefine/NFProtocolDefine.hpp"
 
 bool NFMapModule::Init()
 {

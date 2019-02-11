@@ -29,7 +29,7 @@
 #include "Dependencies/RapidXML/rapidxml_iterators.hpp"
 #include "Dependencies/RapidXML/rapidxml_print.hpp"
 #include "Dependencies/RapidXML/rapidxml_utils.hpp"
-#include "NFomm/NFMessageDefine/NFProtocolDefine.hpp"
+#include "NFComm/NFMessageDefine/NFProtocolDefine.hpp"
 
 bool NFTileMapModule::Init()
 {
