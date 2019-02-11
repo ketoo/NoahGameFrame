@@ -23,25 +23,25 @@
    limitations under the License.
 */
 
-#include "NFCHomeModule.h"
+#include "NFHomeModule.h"
 
-bool NFCHomeModule::Init()
+bool NFHomeModule::Init()
 {
 
 	return true;
 }
 
-bool NFCHomeModule::Shut()
+bool NFHomeModule::Shut()
 {
 	return true;
 }
 
-bool NFCHomeModule::Execute()
+bool NFHomeModule::Execute()
 {
 	return true;
 }
 
-bool NFCHomeModule::AfterInit()
+bool NFHomeModule::AfterInit()
 {
 	m_pElementModule = pPluginManager->FindModule<NFIElementModule>();
 	m_pClassModule = pPluginManager->FindModule<NFIClassModule>();
@@ -56,12 +56,12 @@ bool NFCHomeModule::AfterInit()
 	m_pLogModule = pPluginManager->FindModule<NFILogModule>();
 	m_pRankModule = pPluginManager->FindModule<NFIRankModule>();
 
-	m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_REQ_ACK_RELIVE, this, &NFCHomeModule::OnRequireReliveProcess);
+	m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_REQ_ACK_RELIVE, this, &NFHomeModule::OnRequireReliveProcess);
 
 	return true;
 }
 
-void NFCHomeModule::Relive(const NFGUID & self)
+void NFHomeModule::Relive(const NFGUID & self)
 {
 	NFMsg::ReqAckRelive xMsg;
 
@@ -79,7 +79,7 @@ void NFCHomeModule::Relive(const NFGUID & self)
 	}
 }
 
-void NFCHomeModule::OnRequireReliveProcess(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
+void NFHomeModule::OnRequireReliveProcess(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
 {
 	NFGUID nPlayerID;
 	NFMsg::ReqAckRelive xMsg;

@@ -23,8 +23,8 @@
    limitations under the License.
 */
 
-#ifndef NFC_HOME_MODULE_H
-#define NFC_HOME_MODULE_H
+#ifndef NF_HOME_MODULE_H
+#define NF_HOME_MODULE_H
 
 #include "NFComm/NFCore/NFConsistentHash.hpp"
 #include "NFComm/NFPluginModule/NFIKernelModule.h"
@@ -40,15 +40,15 @@
 #include "NFComm/NFPluginModule/NFILogModule.h"
 #include "NFComm/NFPluginModule/NFIRankModule.h"
 
-class NFCHomeModule
+class NFHomeModule
 	: public NFIHomeModule
 {
 public:
-	NFCHomeModule(NFIPluginManager* p)
+	NFHomeModule(NFIPluginManager* p)
 	{
 		pPluginManager = p;
 	}
-	virtual ~NFCHomeModule() {};
+	virtual ~NFHomeModule() {};
 
 	virtual bool Init();
 	virtual bool Shut();
