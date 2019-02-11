@@ -25,7 +25,7 @@
 
 
 #include "NFTileModule.h"
-#include "NFomm/NFMessageDefine/NFProtocolDefine.hpp"
+#include "NFComm/NFMessageDefine/NFProtocolDefine.hpp"
 
 bool NFTileModule::Init()
 {
