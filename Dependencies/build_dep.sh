@@ -10,7 +10,7 @@ mkdir -p lib/Release/
 
 sudo apt-get install libssl-dev
 sudo apt-get install libreadline-dev 
-cd openssl-1.1.0h
+cd openssl
 rm -rf *.a
 chmod -R 755 *
 ./config no-shared
