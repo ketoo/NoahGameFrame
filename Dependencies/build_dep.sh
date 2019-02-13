@@ -3,13 +3,15 @@ echo Building dependencies...
 sudo apt-get install automake
 sudo apt-get install zip unzip
 sudo apt-get install libtool
+sudo apt-get install libssl-dev
+sudo apt-get install libreadline-dev 
+sudo apt-get install libreadline6-dev 
+sudo apt-get install libncurses5-dev
 
 rm -rf ./lib
 mkdir -p lib/Debug/
 mkdir -p lib/Release/
 
-sudo apt-get install libssl-dev
-sudo apt-get install libreadline-dev 
 cd openssl
 rm -rf *.a
 chmod -R 755 *
@@ -65,11 +67,9 @@ echo Building lua...
 cd lua
 
 sysOS=`uname -s`
-if [ $sysOS == "Darwin" ];then
+if [ $sysOS = "Darwin" ];then
     make macosx test
-elif [ $sysOS == "Linux" ];then
-	sudo apt-get install libreadline6-dev 
-	sudo apt-get install libncurses5-dev
+elif [ $sysOS = "Linux" ];then
     make linux test
 fi
 
@@ -82,7 +82,8 @@ echo Building lua finish...
 echo Building hiredis...
 cd hiredis/hiredis_linux/hiredis
 make
-cp libhiredis.a ../../../lib/Debug/
+cp *.a ../../../lib/Debug/
+cp *.a ../../../lib/Release/
 cd ../../../
 echo Building hiredis finish...
 
@@ -92,6 +93,7 @@ cd openssl
 ./config
 make
 cp *.a ../lib/Debug/
+cp *.a ../lib/Release/
 cd ../
 
 
