@@ -86,7 +86,13 @@ cp libhiredis.a ../../../lib/Debug/
 cd ../../../
 echo Building hiredis finish...
 
-
+# compiling openssl
+echo Building openssl
+cd openssl
+./config
+make
+cp *.a ../lib/Debug/
+cd ../
 
 
 # TODO: other libs

@@ -53,6 +53,7 @@ ${SolutionDir}/Dependencies/protobuf/src/
 ${SolutionDir}/Dependencies/libevent/
 ${SolutionDir}/Dependencies/libevent/include/
 ${SolutionDir}/Dependencies/libevent/compat/
+${SolutionDir}/Dependencies/openssl/include/
 ${SolutionDir}/Dependencies/lua/src/
 ${SolutionDir}/Dependencies/asio/
 ${SolutionDir}/Dependencies/websocketpp/

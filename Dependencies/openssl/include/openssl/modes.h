@@ -7,14 +7,11 @@
  * https://www.openssl.org/source/license.html
  */
 
-#ifndef HEADER_MODES_H
-# define HEADER_MODES_H
+#include <stddef.h>
 
-# include <stddef.h>
-
-# ifdef  __cplusplus
+#ifdef  __cplusplus
 extern "C" {
-# endif
+#endif
 typedef void (*block128_f) (const unsigned char in[16],
                             unsigned char out[16], const void *key);
 
@@ -169,7 +166,7 @@ size_t CRYPTO_128_unwrap_pad(void *key, const unsigned char *icv,
                              unsigned char *out, const unsigned char *in,
                              size_t inlen, block128_f block);
 
-# ifndef OPENSSL_NO_OCB
+#ifndef OPENSSL_NO_OCB
 typedef struct ocb128_context OCB128_CONTEXT;
 
 typedef void (*ocb128_f) (const unsigned char *in, unsigned char *out,
@@ -199,10 +196,8 @@ int CRYPTO_ocb128_finish(OCB128_CONTEXT *ctx, const unsigned char *tag,
                          size_t len);
 int CRYPTO_ocb128_tag(OCB128_CONTEXT *ctx, unsigned char *tag, size_t len);
 void CRYPTO_ocb128_cleanup(OCB128_CONTEXT *ctx);
-# endif                          /* OPENSSL_NO_OCB */
+#endif                          /* OPENSSL_NO_OCB */
 
-# ifdef  __cplusplus
+#ifdef  __cplusplus
 }
-# endif
-
 #endif

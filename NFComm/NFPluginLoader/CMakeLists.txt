@@ -60,6 +60,13 @@ target_link_libraries(NFPluginLoader NFShopPlugin)
 target_link_libraries(NFPluginLoader NFSkillPlugin)
 target_link_libraries(NFPluginLoader NFTaskPlugin)
 target_link_libraries(NFPluginLoader NFUserGiftPlugin)
+target_link_libraries(NFPluginLoader Tutorial5)
+target_link_libraries(NFPluginLoader ssl)
+target_link_libraries(NFPluginLoader crypto)
+target_link_libraries(NFPluginLoader event)
+target_link_libraries(NFPluginLoader event_core)
+target_link_libraries(NFPluginLoader event_extra)
+target_link_libraries(NFPluginLoader event_openssl)
 
 
 if(UNIX)
