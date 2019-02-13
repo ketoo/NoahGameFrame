@@ -43,9 +43,9 @@
 #include <arpa/inet.h>
 #include <signal.h>
 #include <execinfo.h>
-#include <execinfo.h>
 #if NF_PLATFORM == NF_PLATFORM_LINUX
 #include <sys/prctl.h>
+#include <setjmp.h>
 #endif
 #endif
 
