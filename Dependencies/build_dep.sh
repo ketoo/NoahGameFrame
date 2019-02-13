@@ -80,8 +80,10 @@ echo Building lua finish...
 
 # compiling hiredis
 echo Building hiredis...
-chmod 777 build_hiredis.sh
-./build_hiredis.sh
+cd hiredis/hiredis_linux/hiredis
+make
+cp libhiredis.a ../../../lib/Debug/
+cd ../../../
 echo Building hiredis finish...
 
 
