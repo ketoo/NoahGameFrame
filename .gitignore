@@ -81,4 +81,6 @@
 /_Out/NFDataCfg/proto
 /_Out/NFDataCfg/Tool/NFFileProcess
 /Dependencies/*
+/_Out/Debug/*
+/_Out/Release/*
 

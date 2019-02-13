@@ -108,7 +108,7 @@ public:
         const char *private_key);
 private:
     static void listener_cb(struct evhttp_request* req, void* arg);
-    static bufferevent* NFCHttpServer::listener_https_cb(struct event_base* req, void* arg);
+    static bufferevent* listener_https_cb(struct event_base* req, void* arg);
 
 	NFHttpRequest* AllowHttpRequest();
 

@@ -10,23 +10,22 @@ mkdir -p lib/Release/
 
 sudo apt-get install libssl-dev
 sudo apt-get install libreadline-dev 
-#cd openssl-1.1.0h
-#rm -rf *.a
-#chmod -R 755 *
-#./config no-shared
-#make depend
-#make
-#cp -r -f ./*.a ../lib/Debug/
-#cp -r -f ./*.a ../lib/Release/
-#cd ../
+cd openssl-1.1.0h
+rm -rf *.a
+chmod -R 755 *
+./config no-shared
+make depend
+make
+cp -r -f ./*.a ../lib/Debug/
+cp -r -f ./*.a ../lib/Release/
+cd ../
 
 # compiling libevent
 cd libevent
 make clean
-./autogen.sh
+sh autogen.sh
 chmod +x ./configure
-#./configure --disable-shared --disable-openssl
-./configure --disable-shared --disable-openssl
+./configure --disable-shared
 make
 
 cp -R -f ./.libs/*.a ../lib/Debug/
@@ -39,7 +38,7 @@ cd ../
 cd protobuf
 make clean
 chmod -R 755 *
-./autogen.sh
+sh autogen.sh
 ./configure --disable-shared
 make
 make check

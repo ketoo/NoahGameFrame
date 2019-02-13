@@ -33,6 +33,7 @@
 #include <future>
 #include <functional>
 #include <atomic>
+#include <setjmp.h>
 #include "NFCPluginManager.h"
 #include "NFComm/NFPluginModule/NFPlatform.h"
 #include "NFComm/NFLogPlugin/easylogging++.h"
@@ -98,15 +99,9 @@ void StackTrace(int sig)
 }
 
 NFExceptFrame exceptStack;
-void CrashHandler(int sig)
-{
-	printf("received signal %d !!!\n", sig);
-	StackTrace(sig);
-	siglongjmp(exceptStack.env, 1);
-}
 
 #define NF_CRASH_TRY \
-exceptStack->flag = sigsetjmp(exceptStack.env,1);\
+exceptStack.flag = sigsetjmp(exceptStack.env,1);\
 if(!exceptStack.isDef()) \
 { \
 signal(SIGSEGV,CrashHandler); \
@@ -221,7 +216,7 @@ void CreateBackThread()
 void InitDaemon()
 {
 #if NF_PLATFORM != NF_PLATFORM_WIN
-    daemon(1, 0);
+    // daemon(1, 0);
 
     // ignore signals
     signal(SIGINT,  SIG_IGN);
