@@ -386,7 +386,7 @@ void ProcessParameter(int argc, char* argv[])
 }
 
 #if NF_PLATFORM != NF_PLATFORM_WIN
-void CrashHandler(int sig) {
+void NFCrashHandler(int sig) {
 	// FOLLOWING LINE IS ABSOLUTELY NEEDED AT THE END IN ORDER TO ABORT APPLICATION
 	//el::base::debug::StackTrace();
 	//el::Helpers::logCrashReason(sig, true);
@@ -452,7 +452,7 @@ int main(int argc, char* argv[])
 #if NF_PLATFORM == NF_PLATFORM_WIN
     SetUnhandledExceptionFilter((LPTOP_LEVEL_EXCEPTION_FILTER)ApplicationCrashHandler);
 #else
-	signal(SIGSEGV, CrashHandler);
+	signal(SIGSEGV, NFCrashHandler);
 	//el::Helpers::setCrashHandler(CrashHandler);
 #endif
 
