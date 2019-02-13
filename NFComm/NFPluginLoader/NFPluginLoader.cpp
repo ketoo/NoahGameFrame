@@ -106,7 +106,7 @@ void CrashHandler(int sig)
 }
 
 #define NF_CRASH_TRY \
-exceptStack->flag = sigsetjmp(exceptStack.env,1);\
+exceptStack.flag = sigsetjmp(exceptStack.env,1);\
 if(!exceptStack.isDef()) \
 { \
 signal(SIGSEGV,CrashHandler); \
