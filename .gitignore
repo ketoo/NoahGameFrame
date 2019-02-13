@@ -79,3 +79,6 @@
 #OSX .DS_Store
 .DS_Store
 /_Out/NFDataCfg/proto
+/_Out/NFDataCfg/Tool/NFFileProcess
+/Dependencies/*
+
