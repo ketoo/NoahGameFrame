@@ -50,7 +50,7 @@ bool NFCHelloWorld::AfterInit()
 
 	m_pHttpNetModule->AddNetFilter("/json", this, &NFCHelloWorld::OnFilter);
 
-	m_pHttpNetModule->InitServer(8080);
+	m_pHttpNetModule->InitServer(10000);
 
     return true;
 }

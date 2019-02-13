@@ -111,6 +111,8 @@
 #include "NFMidWare/NFSkillPlugin/NFSkillPlugin.h"
 #include "NFMidWare/NFTaskPlugin/NFTaskPlugin.h"
 #include "NFMidWare/NFUserGiftPlugin/NFUserGiftPlugin.h"
+//Tutorial
+#include "Tutorial/Tutorial5/Tutorial5.h"
 #endif
 
 void CoroutineExecute(void* arg)
@@ -291,6 +293,7 @@ bool NFCPluginManager::LoadStaticPlugin()
 	CREATE_PLUGIN(this, NFSkillPlugin)
 	CREATE_PLUGIN(this, NFTaskPlugin)
 	CREATE_PLUGIN(this, NFUserGiftPlugin)
+	CREATE_PLUGIN(this, Tutorial5)
 #endif
 
     return true;
@@ -323,6 +326,22 @@ bool NFCPluginManager::CheckStaticPlugin()
 		}
 	}
 	//////module
+	// print module
+	std::cout << " before mModuleInstanceMap all :" << std::endl;
+	for (auto mModuleInstanceMapIter = mModuleInstanceMap.begin(); 
+			mModuleInstanceMapIter != mModuleInstanceMap.end();
+			++mModuleInstanceMapIter)
+	{
+		std::cout << " , " << mModuleInstanceMapIter->first;
+	}
+	std::cout << std::endl << "before mStaticPlugin : " << std::endl;
+
+	for (int i = 0; i < mStaticPlugin.size(); ++i)
+	{
+		std::cout << " , " << mStaticPlugin[i] ;
+	}
+	std::cout << std::endl;
+
 	for (auto it = mModuleInstanceMap.begin(); it != mModuleInstanceMap.end();)
 	{
 		bool bFind = false;
@@ -351,6 +370,15 @@ bool NFCPluginManager::CheckStaticPlugin()
 			it++;
 		}
 	}
+
+	std::cout << std::endl << " after mModuleInstanceMap all :" << std::endl;
+	for (auto mModuleInstanceMapIter = mModuleInstanceMap.begin(); 
+			mModuleInstanceMapIter != mModuleInstanceMap.end();
+			++mModuleInstanceMapIter)
+	{
+		std::cout << " , " << mModuleInstanceMapIter->first;
+	}
+
 #endif
 
     return true;

@@ -6,6 +6,6 @@ cd Debug
 
 chmod -R 777  NFPluginLoader_d
 
-./NFPluginLoader_d Server=TutorialServer ID=0 Tutorial1.xml
+./NFPluginLoader_d Server=TutorialServer ID=5 Tutorial5.xml
 
 ps -A|grep NF

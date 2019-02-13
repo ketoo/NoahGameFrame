@@ -2,6 +2,7 @@
 	<TutorialServer>
 		<Plugin Name="NFKernelPlugin" />
 		<Plugin Name="NFConfigPlugin" />
+		<Plugin Name="NFNetPlugin" />
 		
 		<Plugin Name="NFLogPlugin" />
 		<Plugin Name="Tutorial5" />	
