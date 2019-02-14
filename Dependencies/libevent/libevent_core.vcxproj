@@ -81,7 +81,7 @@
     <ClCompile>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>WIN32-Code/nmake;include;compat;.;$(SolutionDir)\Dependencies\openssl\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>WIN32-Code/nmake;include;compat;.;$(SolutionDir)\Dependencies\openssl_win\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DisableSpecificWarnings>4996</DisableSpecificWarnings>
       <WarningLevel>Level3</WarningLevel>
       <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
