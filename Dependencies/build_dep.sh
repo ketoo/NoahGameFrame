@@ -12,7 +12,7 @@ rm -rf ./lib
 mkdir -p lib/Debug/
 mkdir -p lib/Release/
 
-cd openssl
+cd openssl_linux
 rm -rf *.a
 chmod -R 755 *
 ./config no-shared
@@ -86,16 +86,6 @@ cp *.a ../../../lib/Debug/
 cp *.a ../../../lib/Release/
 cd ../../../
 echo Building hiredis finish...
-
-# compiling openssl
-echo Building openssl
-cd openssl
-./config
-make
-cp *.a ../lib/Debug/
-cp *.a ../lib/Release/
-cd ../
-
 
 # TODO: other libs
 #unzip -o gperftools-2.5.zip -d ./
