@@ -365,7 +365,7 @@ bool NFPluginManager::LoadStaticPlugin(const std::string& strPluginDLLName)
 
 void NFPluginManager::Registered(NFIPlugin* plugin)
 {
-    std::string strPluginName = plugin->GetPluginName();
+    const std::string& strPluginName = plugin->GetPluginName();
     if (!FindPlugin(strPluginName))
 	{
 		mPluginInstanceMap.insert(PluginInstanceMap::value_type(strPluginName, plugin));
@@ -373,6 +373,7 @@ void NFPluginManager::Registered(NFIPlugin* plugin)
     }
 	else
 	{
+		std::cout << strPluginName << std::endl;
 		assert(0);
 	}
 }
