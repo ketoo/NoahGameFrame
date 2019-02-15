@@ -53,7 +53,7 @@ const int NFGuildPlugin::GetPluginVersion()
 
 const std::string NFGuildPlugin::GetPluginName()
 {
-	return GET_CLASS_NAME(NFChatPlugin);
+	return GET_CLASS_NAME(NFGuildPlugin);
 }
 
 void NFGuildPlugin::Install()
