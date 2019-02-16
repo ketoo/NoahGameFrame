@@ -43,10 +43,12 @@
 #include <arpa/inet.h>
 #include <signal.h>
 #include <execinfo.h>
+#include <setjmp.h>
+
 #if NF_PLATFORM == NF_PLATFORM_LINUX
 #include <sys/prctl.h>
-#include <setjmp.h>
 #endif
+
 #endif
 
 bool bExitApp = false;
