@@ -61,10 +61,11 @@ bool NFCellModule::AfterInit()
 			const std::string& strId = strIdList[i];
 
 			const int nServerID = m_pElementModule->GetPropertyInt32(strId, NFrame::Server::ServerID());
-			const int nCell = 0;// m_pElementModule->GetPropertyInt32(strId, NFrame::Server::Cell());
+			const int nCell = m_pElementModule->GetPropertyInt32(strId, NFrame::Server::Cell());
 			if (pPluginManager->GetAppID() == nServerID && nCell == 1)
 			{
 				bCell = true;
+				break;
 			}
 		}
 	}
