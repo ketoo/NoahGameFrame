@@ -1033,6 +1033,7 @@ package nframe;
 		public static final String SceneID = "SceneID";// int
 		// Property
 		public static final String Area = "Area";// int
+		public static final String Cell = "Cell";// int
 		public static final String CpuCount = "CpuCount";// int
 		public static final String IP = "IP";// string
 		public static final String MaxOnline = "MaxOnline";// int

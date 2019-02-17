@@ -50,6 +50,29 @@ bool NFCellModule::Init()
 
 bool NFCellModule::AfterInit()
 {
+	//NF SYNC
+	bool bCell = false;
+	std::shared_ptr<NFIClass> xServerLogicClass = m_pClassModule->GetElement(NFrame::Server::ThisName());
+	if (xServerLogicClass)
+	{
+		const std::vector<std::string>& strIdList = xServerLogicClass->GetIDList();
+		for (int i = 0; i < strIdList.size(); ++i)
+		{
+			const std::string& strId = strIdList[i];
+
+			const int nServerID = m_pElementModule->GetPropertyInt32(strId, NFrame::Server::ServerID());
+			const int nCell = 0;// m_pElementModule->GetPropertyInt32(strId, NFrame::Server::Cell());
+			if (pPluginManager->GetAppID() == nServerID && nCell == 1)
+			{
+				bCell = true;
+			}
+		}
+	}
+
+	if (!bCell)
+	{
+		return true;
+	}
 
 	//init all scene
 	NFList<NF_SHARE_PTR<NFSceneCellInfo>> gridList;
@@ -115,7 +138,7 @@ bool NFCellModule::AfterInit()
 
 	//prepare group grid pool to enhance the performance when requesting a new group 
 
-	return false;
+	return true;
 }
 
 bool NFCellModule::BeforeShut()
