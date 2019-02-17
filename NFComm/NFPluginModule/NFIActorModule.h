@@ -109,6 +109,7 @@ public:
 
 		return AddEndFunc(nActorIndex, nSubMessageID, functorPtr_end);
 	}
+
 	int AddEndFunc(const int nActorIndex, const int nSubMessageID,
 		ACTOR_PROCESS_FUNCTOR functor_end)
 	{
@@ -134,6 +135,25 @@ public:
 
 		return AddDefaultEndFunc(nActorIndex, functorPtr_end);
 	}
+
+
+	int AddAsyncFunc(const int nActorIndex, const int nSubMessageID,
+		ACTOR_PROCESS_FUNCTOR asyncFunctor, ACTOR_PROCESS_FUNCTOR functor_end)
+	{
+
+		NF_SHARE_PTR<NFIActor> pActor =  GetActor(nActorIndex);
+		if (pActor)
+		{
+			ACTOR_PROCESS_FUNCTOR_PTR functorPtr_begin(new ACTOR_PROCESS_FUNCTOR(asyncFunctor));
+			ACTOR_PROCESS_FUNCTOR_PTR functorPtr_end(new ACTOR_PROCESS_FUNCTOR(functor_end));
+
+			pActor->AddBeginFunc(nSubMessageID, functorPtr_begin);
+			return AddEndFunc(nActorIndex, nSubMessageID, functorPtr_end);
+		}
+
+		return 1;
+	}
+
 
 	virtual int RequireActor() = 0;
     virtual bool SendMsgToActor(const int nActorIndex, const int nEventID, const std::string& strArg) = 0;
