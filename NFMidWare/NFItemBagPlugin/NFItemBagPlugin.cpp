@@ -25,11 +25,11 @@
 
 
 #include "NFItemBagPlugin.h"
-#include "NFCItemModule.h"
-#include "NFCPackModule.h"
-#include "NFCEquipModule.h"
-#include "NFCEquipPropertyModule.h"
-#include "NFCItemConsumeManagerModule.h"
+#include "NFItemModule.h"
+#include "NFPackModule.h"
+#include "NFEquipModule.h"
+#include "NFEquipPropertyModule.h"
+#include "NFItemConsumeManagerModule.h"
 
 #ifdef NF_DYNAMIC_PLUGIN
 
@@ -58,18 +58,18 @@ const std::string NFItemBagPlugin::GetPluginName()
 
 void NFItemBagPlugin::Install()
 {
-	REGISTER_MODULE(pPluginManager, NFIItemConsumeManagerModule, NFCItemConsumeManagerModule)
-	REGISTER_MODULE(pPluginManager, NFIItemModule, NFCItemModule)
-	REGISTER_MODULE(pPluginManager, NFIPackModule, NFCPackModule)
-	REGISTER_MODULE(pPluginManager, NFIEquipModule, NFCEquipModule)
-	REGISTER_MODULE(pPluginManager, NFIEquipPropertyModule, NFCEquipPropertyModule);
+	REGISTER_MODULE(pPluginManager, NFIItemConsumeManagerModule, NFItemConsumeManagerModule)
+	REGISTER_MODULE(pPluginManager, NFIItemModule, NFItemModule)
+	REGISTER_MODULE(pPluginManager, NFIPackModule, NFPackModule)
+	REGISTER_MODULE(pPluginManager, NFIEquipModule, NFEquipModule)
+	REGISTER_MODULE(pPluginManager, NFIEquipPropertyModule, NFEquipPropertyModule);
 }
 
 void NFItemBagPlugin::Uninstall()
 {
-	UNREGISTER_MODULE(pPluginManager, NFIEquipPropertyModule, NFCEquipPropertyModule);
-	UNREGISTER_MODULE(pPluginManager, NFIEquipModule, NFCEquipModule)
-	UNREGISTER_MODULE(pPluginManager, NFIPackModule, NFCPackModule)
-	UNREGISTER_MODULE(pPluginManager, NFIItemModule, NFCItemModule)
-	UNREGISTER_MODULE(pPluginManager, NFIItemConsumeManagerModule, NFCItemConsumeManagerModule)
+	UNREGISTER_MODULE(pPluginManager, NFIEquipPropertyModule, NFEquipPropertyModule);
+	UNREGISTER_MODULE(pPluginManager, NFIEquipModule, NFEquipModule)
+	UNREGISTER_MODULE(pPluginManager, NFIPackModule, NFPackModule)
+	UNREGISTER_MODULE(pPluginManager, NFIItemModule, NFItemModule)
+	UNREGISTER_MODULE(pPluginManager, NFIItemConsumeManagerModule, NFItemConsumeManagerModule)
 }

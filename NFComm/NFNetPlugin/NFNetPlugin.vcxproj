@@ -12,23 +12,23 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="dllmain.cpp" />
-    <ClCompile Include="NFCHttpClient.cpp" />
-    <ClCompile Include="NFCHttpClientModule.cpp" />
-    <ClCompile Include="NFCHttpServer.cpp" />
-    <ClCompile Include="NFCHttpServerModule.cpp" />
-    <ClCompile Include="NFCNet.cpp" />
-    <ClCompile Include="NFCNetClientModule.cpp" />
-    <ClCompile Include="NFCNetModule.cpp" />
+    <ClCompile Include="NFHttpClient.cpp" />
+    <ClCompile Include="NFHttpClientModule.cpp" />
+    <ClCompile Include="NFHttpServer.cpp" />
+    <ClCompile Include="NFHttpServerModule.cpp" />
+    <ClCompile Include="NFNet.cpp" />
+    <ClCompile Include="NFNetClientModule.cpp" />
+    <ClCompile Include="NFNetModule.cpp" />
     <ClCompile Include="NFNetPlugin.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="NFCHttpClient.h" />
-    <ClInclude Include="NFCHttpClientModule.h" />
-    <ClInclude Include="NFCHttpServer.h" />
-    <ClInclude Include="NFCHttpServerModule.h" />
-    <ClInclude Include="NFCNet.h" />
-    <ClInclude Include="NFCNetClientModule.h" />
-    <ClInclude Include="NFCNetModule.h" />
+    <ClInclude Include="NFHttpClient.h" />
+    <ClInclude Include="NFHttpClientModule.h" />
+    <ClInclude Include="NFHttpServer.h" />
+    <ClInclude Include="NFHttpServerModule.h" />
+    <ClInclude Include="NFNet.h" />
+    <ClInclude Include="NFNetClientModule.h" />
+    <ClInclude Include="NFNetModule.h" />
     <ClInclude Include="NFIHttpClient.h" />
     <ClInclude Include="NFIHttpServer.h" />
     <ClInclude Include="NFINet.h" />

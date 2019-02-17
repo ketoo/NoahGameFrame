@@ -19,7 +19,7 @@
 */
 
 
-#include "NFCAOIModule.h"
+#include "NFAOIModule.h"
 #include "NFAOIPlugin.h"
 
 //
@@ -53,11 +53,11 @@ const std::string NFAOIPlugin::GetPluginName()
 
 void NFAOIPlugin::Install()
 {
-    REGISTER_MODULE(pPluginManager, NFIAOIModule, NFCAOIModule)
+    REGISTER_MODULE(pPluginManager, NFIAOIModule, NFAOIModule)
 
 }
 
 void NFAOIPlugin::Uninstall()
 {
-    UNREGISTER_MODULE(pPluginManager, NFIAOIModule, NFCAOIModule)
+    UNREGISTER_MODULE(pPluginManager, NFIAOIModule, NFAOIModule)
 }

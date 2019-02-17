@@ -23,8 +23,8 @@
    limitations under the License.
 */
 
-#ifndef NFC_NFCMEMMANGER_H
-#define NFC_NFCMEMMANGER_H
+#ifndef NF_NFMEMMANGER_H
+#define NF_NFMEMMANGER_H
 
 #include "NFSingleton.hpp"
 #include "NFComm/NFPluginModule/NFPlatform.h"

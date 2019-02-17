@@ -91,14 +91,14 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="NFAIPlugin.h" />
-    <ClInclude Include="NFCAIModule.h" />
-    <ClInclude Include="NFCChaseState.h" />
-    <ClInclude Include="NFCDeadState.h" />
-    <ClInclude Include="NFCFightState.h" />
-    <ClInclude Include="NFCHateModule.h" />
-    <ClInclude Include="NFCIdleState.h" />
-    <ClInclude Include="NFCPatrolState.h" />
-    <ClInclude Include="NFCStateMachine.h" />
+    <ClInclude Include="NFAIModule.h" />
+    <ClInclude Include="NFChaseState.h" />
+    <ClInclude Include="NFDeadState.h" />
+    <ClInclude Include="NFFightState.h" />
+    <ClInclude Include="NFHateModule.h" />
+    <ClInclude Include="NFIdleState.h" />
+    <ClInclude Include="NFPatrolState.h" />
+    <ClInclude Include="NFStateMachine.h" />
     <ClInclude Include="NFIState.h" />
     <ClInclude Include="NFIStateMachine.h" />
   </ItemGroup>
@@ -112,14 +112,14 @@
       </PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="NFAIPlugin.cpp" />
-    <ClCompile Include="NFCAIModule.cpp" />
-    <ClCompile Include="NFCChaseState.cpp" />
-    <ClCompile Include="NFCDeadState.cpp" />
-    <ClCompile Include="NFCFightState.cpp" />
-    <ClCompile Include="NFCHateModule.cpp" />
-    <ClCompile Include="NFCIdleState.cpp" />
-    <ClCompile Include="NFCPatrolState.cpp" />
-    <ClCompile Include="NFCStateMachine.cpp" />
+    <ClCompile Include="NFAIModule.cpp" />
+    <ClCompile Include="NFChaseState.cpp" />
+    <ClCompile Include="NFDeadState.cpp" />
+    <ClCompile Include="NFFightState.cpp" />
+    <ClCompile Include="NFHateModule.cpp" />
+    <ClCompile Include="NFIdleState.cpp" />
+    <ClCompile Include="NFPatrolState.cpp" />
+    <ClCompile Include="NFStateMachine.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -24,7 +24,7 @@
 */
 
 #include "NFLoginNet_HttpServerPlugin.h"
-#include "NFCLoginNet_HttpServerModule.h"
+#include "NFLoginNet_HttpServerModule.h"
 
 #ifdef NF_DYNAMIC_PLUGIN
 
@@ -56,10 +56,10 @@ const std::string NFLoginNet_HttpServerPlugin::GetPluginName()
 
 void NFLoginNet_HttpServerPlugin::Install()
 {
-	REGISTER_MODULE(pPluginManager, NFILoginNet_HttpServerModule, NFCLoginNet_HttpServerModule)
+	REGISTER_MODULE(pPluginManager, NFILoginNet_HttpServerModule, NFLoginNet_HttpServerModule)
 }
 
 void NFLoginNet_HttpServerPlugin::Uninstall()
 {
-	UNREGISTER_MODULE(pPluginManager, NFILoginNet_HttpServerModule, NFCLoginNet_HttpServerModule)
+	UNREGISTER_MODULE(pPluginManager, NFILoginNet_HttpServerModule, NFLoginNet_HttpServerModule)
 }

@@ -24,7 +24,7 @@
 */
 
 #include "NFLoginNet_ClientPlugin.h"
-#include "NFCLoginToMasterModule.h"
+#include "NFLoginToMasterModule.h"
 
 //
 //
@@ -57,10 +57,10 @@ const std::string NFLoginNet_ClientPlugin::GetPluginName()
 
 void NFLoginNet_ClientPlugin::Install()
 {
-    REGISTER_MODULE(pPluginManager, NFILoginToMasterModule, NFCLoginToMasterModule)
+    REGISTER_MODULE(pPluginManager, NFILoginToMasterModule, NFLoginToMasterModule)
 }
 
 void NFLoginNet_ClientPlugin::Uninstall()
 {
-    UNREGISTER_MODULE(pPluginManager, NFILoginToMasterModule, NFCLoginToMasterModule)
+    UNREGISTER_MODULE(pPluginManager, NFILoginToMasterModule, NFLoginToMasterModule)
 }

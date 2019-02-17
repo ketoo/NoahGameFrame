@@ -78,12 +78,12 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="NFCMasterNet_HttpServerModule.h" />
+    <ClInclude Include="NFMasterNet_HttpServerModule.h" />
     <ClInclude Include="NFMasterNet_HttpServerPlugin.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="dllmain.cpp" />
-    <ClCompile Include="NFCMasterNet_HttpServerModule.cpp" />
+    <ClCompile Include="NFMasterNet_HttpServerModule.cpp" />
     <ClCompile Include="NFMasterNet_HttpServerPlugin.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

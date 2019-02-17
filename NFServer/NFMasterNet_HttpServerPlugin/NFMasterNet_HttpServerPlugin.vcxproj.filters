@@ -2,11 +2,11 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <ClInclude Include="NFMasterNet_HttpServerPlugin.h" />
-    <ClInclude Include="NFCMasterNet_HttpServerModule.h" />
+    <ClInclude Include="NFMasterNet_HttpServerModule.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="NFMasterNet_HttpServerPlugin.cpp" />
     <ClCompile Include="dllmain.cpp" />
-    <ClCompile Include="NFCMasterNet_HttpServerModule.cpp" />
+    <ClCompile Include="NFMasterNet_HttpServerModule.cpp" />
   </ItemGroup>
 </Project>

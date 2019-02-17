@@ -92,7 +92,7 @@
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="NFCMailModule.h" />
+    <ClInclude Include="NFMailModule.h" />
     <ClInclude Include="NFMailPlugin.h" />
   </ItemGroup>
   <ItemGroup>
@@ -104,7 +104,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
       </PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="NFCMailModule.cpp" />
+    <ClCompile Include="NFMailModule.cpp" />
     <ClCompile Include="NFMailPlugin.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

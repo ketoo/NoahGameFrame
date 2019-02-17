@@ -94,7 +94,7 @@
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="NFCLoginLogicModule.h" />
+    <ClInclude Include="NFLoginLogicModule.h" />
     <ClInclude Include="NFLoginLogicPlugin.h" />
   </ItemGroup>
   <ItemGroup>
@@ -106,7 +106,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
       </PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="NFCLoginLogicModule.cpp" />
+    <ClCompile Include="NFLoginLogicModule.cpp" />
     <ClCompile Include="NFLoginLogicPlugin.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

@@ -12,15 +12,15 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="dllmain.cpp" />
-    <ClCompile Include="NFCClassModule.cpp" />
-    <ClCompile Include="NFCCommonConfigModule.cpp" />
-    <ClCompile Include="NFCElementModule.cpp" />
+    <ClCompile Include="NFClassModule.cpp" />
+    <ClCompile Include="NFCommonConfigModule.cpp" />
+    <ClCompile Include="NFElementModule.cpp" />
     <ClCompile Include="NFConfigPlugin.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="NFCClassModule.h" />
-    <ClInclude Include="NFCCommonConfigModule.h" />
-    <ClInclude Include="NFCElementModule.h" />
+    <ClInclude Include="NFClassModule.h" />
+    <ClInclude Include="NFCommonConfigModule.h" />
+    <ClInclude Include="NFElementModule.h" />
     <ClInclude Include="NFConfigPlugin.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">

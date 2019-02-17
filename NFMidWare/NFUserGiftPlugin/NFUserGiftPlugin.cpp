@@ -25,7 +25,7 @@
 
 
 
-#include "NFCUserGiftModule.h"
+#include "NFUserGiftModule.h"
 #include "NFUserGiftPlugin.h"
 
 //
@@ -59,11 +59,11 @@ const std::string NFUserGiftPlugin::GetPluginName()
 
 void NFUserGiftPlugin::Install()
 {
-    REGISTER_MODULE(pPluginManager, NFIUserGiftModule, NFCUserGiftModule)
+    REGISTER_MODULE(pPluginManager, NFIUserGiftModule, NFUserGiftModule)
 
 }
 
 void NFUserGiftPlugin::Uninstall()
 {
-    UNREGISTER_MODULE(pPluginManager, NFIUserGiftModule, NFCUserGiftModule)
+    UNREGISTER_MODULE(pPluginManager, NFIUserGiftModule, NFUserGiftModule)
 }

@@ -25,8 +25,8 @@
 
 
 
-#include "NFCGameServerToWorldModule.h"
-#include "NFCGameServerToDBModule.h"
+#include "NFGameServerToWorldModule.h"
+#include "NFGameServerToDBModule.h"
 #include "NFGameServerNet_ClientPlugin.h"
 
 //
@@ -59,13 +59,13 @@ const std::string NFGameServerNet_ClientPlugin::GetPluginName()
 
 void NFGameServerNet_ClientPlugin::Install()
 {
-	REGISTER_MODULE(pPluginManager, NFIGameServerToWorldModule, NFCGameServerToWorldModule)
-	REGISTER_MODULE(pPluginManager, NFIGameServerToDBModule, NFCGameServerToDBModule)
+	REGISTER_MODULE(pPluginManager, NFIGameServerToWorldModule, NFGameServerToWorldModule)
+	REGISTER_MODULE(pPluginManager, NFIGameServerToDBModule, NFGameServerToDBModule)
 
 }
 
 void NFGameServerNet_ClientPlugin::Uninstall()
 {
-	UNREGISTER_MODULE(pPluginManager, NFIGameServerToDBModule, NFCGameServerToDBModule)
-	UNREGISTER_MODULE(pPluginManager, NFIGameServerToWorldModule, NFCGameServerToWorldModule)
+	UNREGISTER_MODULE(pPluginManager, NFIGameServerToDBModule, NFGameServerToDBModule)
+	UNREGISTER_MODULE(pPluginManager, NFIGameServerToWorldModule, NFGameServerToWorldModule)
 }

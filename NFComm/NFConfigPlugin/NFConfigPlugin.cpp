@@ -25,9 +25,9 @@
 
 
 #include "NFConfigPlugin.h"
-#include "NFCClassModule.h"
-#include "NFCElementModule.h"
-#include "NFCCommonConfigModule.h"
+#include "NFClassModule.h"
+#include "NFElementModule.h"
+#include "NFCommonConfigModule.h"
 
 #ifdef NF_DYNAMIC_PLUGIN
 
@@ -61,15 +61,15 @@ const std::string NFConfigPlugin::GetPluginName()
 
 void NFConfigPlugin::Install()
 {
-    REGISTER_MODULE(pPluginManager, NFIClassModule, NFCClassModule)
-    REGISTER_MODULE(pPluginManager, NFIElementModule, NFCElementModule)
-	REGISTER_MODULE(pPluginManager, NFICommonConfigModule, NFCCommonConfigModule);
+    REGISTER_MODULE(pPluginManager, NFIClassModule, NFClassModule)
+    REGISTER_MODULE(pPluginManager, NFIElementModule, NFElementModule)
+	REGISTER_MODULE(pPluginManager, NFICommonConfigModule, NFCommonConfigModule);
 
 }
 
 void NFConfigPlugin::Uninstall()
 {
-    UNREGISTER_MODULE(pPluginManager, NFIElementModule, NFCElementModule)
-    UNREGISTER_MODULE(pPluginManager, NFIClassModule, NFCClassModule)
-	UNREGISTER_MODULE(pPluginManager, NFICommonConfigModule, NFCCommonConfigModule);
+    UNREGISTER_MODULE(pPluginManager, NFIElementModule, NFElementModule)
+    UNREGISTER_MODULE(pPluginManager, NFIClassModule, NFClassModule)
+	UNREGISTER_MODULE(pPluginManager, NFICommonConfigModule, NFCommonConfigModule);
 }

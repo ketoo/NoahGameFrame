@@ -168,10 +168,10 @@ struct NFIMsgHead
 
 };
 
-class NFCMsgHead : public NFIMsgHead
+class NFMsgHead : public NFIMsgHead
 {
 public:
-    NFCMsgHead()
+    NFMsgHead()
     {
         munSize = 0;
         munMsgID = 0;

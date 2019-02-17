@@ -23,8 +23,8 @@
    limitations under the License.
 */
 
-#ifndef NFC_GAMESERVERPLUGIN_H
-#define NFC_GAMESERVERPLUGIN_H
+#ifndef NF_GAMESERVERPLUGIN_H
+#define NF_GAMESERVERPLUGIN_H
 
 #include "NFComm/NFPluginModule/NFIPlugin.h"
 #include "NFComm/NFPluginModule/NFIPluginManager.h"

@@ -23,7 +23,7 @@
    limitations under the License.
 */
 
-#include "NFComm/NFNetPlugin/NFCNet.h"
+#include "NFComm/NFNetPlugin/NFNet.h"
 #include <thread>
 #include <string>
 #include "NFComm/NFLogPlugin/easylogging++.h"
@@ -44,7 +44,7 @@ class TestClientClass
 public:
     TestClientClass()
     {
-        pNet = new NFCNet(this, &TestClientClass::ReciveHandler, &TestClientClass::EventHandler);
+        pNet = new NFNet(this, &TestClientClass::ReciveHandler, &TestClientClass::EventHandler);
         pNet->Initialization("127.0.0.1", 8088);
 		bConnected = false;
     }

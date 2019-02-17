@@ -17,9 +17,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="NFCRecord.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="NFIObject.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -29,22 +26,10 @@
     <ClInclude Include="NFIRecordManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="NFCRecordManager.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="NFIPropertyManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="NFCPropertyManager.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="NFCProperty.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="NFIProperty.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="NFCObject.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="NFVector3.hpp">
@@ -98,21 +83,39 @@
     <ClInclude Include="NFException.hpp">
       <Filter>Unit</Filter>
     </ClInclude>
+    <ClInclude Include="NFPerformance.hpp">
+      <Filter>Unit</Filter>
+    </ClInclude>
+    <ClInclude Include="NFObject.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="NFPropertyManager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="NFRecord.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="NFRecordManager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="NFProperty.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="NFCRecord.cpp">
+    <ClCompile Include="NFObject.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="NFCRecordManager.cpp">
+    <ClCompile Include="NFProperty.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="NFCPropertyManager.cpp">
+    <ClCompile Include="NFPropertyManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="NFCProperty.cpp">
+    <ClCompile Include="NFRecord.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="NFCObject.cpp">
+    <ClCompile Include="NFRecordManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

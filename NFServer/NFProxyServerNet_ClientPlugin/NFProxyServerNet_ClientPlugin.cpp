@@ -23,9 +23,9 @@
    limitations under the License.
 */
 
-#include "NFCProxyServerToWorldModule.h"
+#include "NFProxyServerToWorldModule.h"
 #include "NFProxyServerNet_ClientPlugin.h"
-#include "NFCProxyServerToGameModule.h"
+#include "NFProxyServerToGameModule.h"
 
 //
 //
@@ -57,12 +57,12 @@ const std::string NFProxyServerNet_ClientPlugin::GetPluginName()
 
 void NFProxyServerNet_ClientPlugin::Install()
 {
-    REGISTER_MODULE(pPluginManager, NFIProxyServerToWorldModule, NFCProxyServerToWorldModule)
-    REGISTER_MODULE(pPluginManager, NFIProxyServerToGameModule, NFCProxyServerToGameModule)
+    REGISTER_MODULE(pPluginManager, NFIProxyServerToWorldModule, NFProxyServerToWorldModule)
+    REGISTER_MODULE(pPluginManager, NFIProxyServerToGameModule, NFProxyServerToGameModule)
 }
 
 void NFProxyServerNet_ClientPlugin::Uninstall()
 {
-    UNREGISTER_MODULE(pPluginManager, NFIProxyServerToGameModule, NFCProxyServerToGameModule)
-    UNREGISTER_MODULE(pPluginManager, NFIProxyServerToWorldModule, NFCProxyServerToWorldModule)
+    UNREGISTER_MODULE(pPluginManager, NFIProxyServerToGameModule, NFProxyServerToGameModule)
+    UNREGISTER_MODULE(pPluginManager, NFIProxyServerToWorldModule, NFProxyServerToWorldModule)
 }

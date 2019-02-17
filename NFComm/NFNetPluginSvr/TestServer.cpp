@@ -23,7 +23,7 @@
    limitations under the License.
 */
 
-#include "NFComm/NFNetPlugin/NFCNet.h"
+#include "NFComm/NFNetPlugin/NFNet.h"
 #include <thread>
 #include <string>
 #include "NFComm/NFLogPlugin/easylogging++.h"
@@ -44,7 +44,7 @@ class TestServerClass
 public:
     TestServerClass()
     {
-        pNet = new NFCNet(this, &TestServerClass::ReciveHandler, &TestServerClass::EventHandler);
+        pNet = new NFNet(this, &TestServerClass::ReciveHandler, &TestServerClass::EventHandler);
         pNet->Initialization(1000, 8088);
     }
     virtual ~TestServerClass()

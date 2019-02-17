@@ -103,7 +103,7 @@
     </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="NFCNavigationModule.h" />
+    <ClInclude Include="NFNavigationModule.h" />
     <ClInclude Include="NFNavigationPlugin.h" />
   </ItemGroup>
   <ItemGroup>
@@ -115,7 +115,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
       </PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="NFCNavigationModule.cpp" />
+    <ClCompile Include="NFNavigationModule.cpp" />
     <ClCompile Include="NFNavigationPlugin.cpp" />
   </ItemGroup>
   <ItemGroup>

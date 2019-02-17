@@ -1062,6 +1062,7 @@ namespace NFrame
 		static const std::string& SceneID(){ static std::string x = "SceneID"; return x; };// int
 		// Property
 		static const std::string& Area(){ static std::string x = "Area"; return x; };// int
+		static const std::string& Cell(){ static std::string x = "Cell"; return x; };// int
 		static const std::string& CpuCount(){ static std::string x = "CpuCount"; return x; };// int
 		static const std::string& IP(){ static std::string x = "IP"; return x; };// string
 		static const std::string& MaxOnline(){ static std::string x = "MaxOnline"; return x; };// int
