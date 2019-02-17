@@ -72,8 +72,6 @@ public:
 protected:
 	bool OnCommandQuery(const NFHttpRequest& req);
 
-	bool OnCommonQuery(const NFHttpRequest& req);
-
 	NFWebStatus OnFilter(const NFHttpRequest& req);
 
 	int OnHeartBeat(const NFGUID& self, const std::string& strHeartBeat, const float fTime, const int nCount);
