@@ -101,31 +101,6 @@ bool NFHelloWorld::OnCommandQuery(const NFHttpRequest & req)
 	return m_pHttpNetModule->ResponseMsg(req, "OnCommandQuery --- test1", NFWebStatus::WEB_OK);
 }
 
-bool NFHelloWorld::OnCommonQuery(const NFHttpRequest & req)
-{
-	std::cout << "url: " << req.url << std::endl;
-	std::cout << "path: " << req.path << std::endl;
-	std::cout << "type: " << req.type << std::endl;
-	std::cout << "body: " << req.body << std::endl;
-
-	std::cout << "params: " << std::endl;
-
-	for (auto item : req.params)
-	{
-		std::cout << item.first << ":" << item.second << std::endl;
-	}
-
-	std::cout << "headers: " << std::endl;
-
-	for (auto item : req.headers)
-	{
-		std::cout << item.first << ":" << item.second << std::endl;
-	}
-
-
-	return m_pHttpNetModule->ResponseMsg(req, "OnCommandQuery +++ test2", NFWebStatus::WEB_OK);
-}
-
 NFWebStatus NFHelloWorld::OnFilter(const NFHttpRequest & req)
 {
 	std::cout << "OnFilter ... " << std::endl;
