@@ -25,7 +25,7 @@
 
 
 #include "NFDBNet_ServerPlugin.h"
-#include "NFCDBNet_ServerModule.h"
+#include "NFDBNet_ServerModule.h"
 
 //
 //
@@ -57,10 +57,10 @@ const std::string NFDBNet_ServerPlugin::GetPluginName()
 
 void NFDBNet_ServerPlugin::Install()
 {
-    REGISTER_MODULE(pPluginManager, NFIDBNet_ServerModule, NFCDBNet_ServerModule)
+    REGISTER_MODULE(pPluginManager, NFIDBNet_ServerModule, NFDBNet_ServerModule)
 }
 
 void NFDBNet_ServerPlugin::Uninstall()
 {
-    UNREGISTER_MODULE(pPluginManager, NFIDBNet_ServerModule, NFCDBNet_ServerModule)
+    UNREGISTER_MODULE(pPluginManager, NFIDBNet_ServerModule, NFDBNet_ServerModule)
 }

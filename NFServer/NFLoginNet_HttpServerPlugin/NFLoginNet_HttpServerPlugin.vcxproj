@@ -78,7 +78,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="NFCLoginNet_HttpServerModule.h" />
+    <ClInclude Include="NFLoginNet_HttpServerModule.h" />
     <ClInclude Include="NFLoginNet_HttpServerPlugin.h" />
     <ClInclude Include="NFRequestLogin.h" />
     <ClInclude Include="NFRequestSelectWorld.h" />
@@ -87,7 +87,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="dllmain.cpp" />
-    <ClCompile Include="NFCLoginNet_HttpServerModule.cpp" />
+    <ClCompile Include="NFLoginNet_HttpServerModule.cpp" />
     <ClCompile Include="NFLoginNet_HttpServerPlugin.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

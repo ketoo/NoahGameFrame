@@ -2,21 +2,23 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <ClInclude Include="NFKernelPlugin.h" />
-    <ClInclude Include="NFCEventModule.h" />
-    <ClInclude Include="NFCKernelModule.h" />
-    <ClInclude Include="NFCScheduleModule.h" />
-    <ClInclude Include="NFCSceneAOIModule.h" />
-    <ClInclude Include="NFCErrorBusModule.h" />
-    <ClInclude Include="NFCDataTailModule.h" />
+    <ClInclude Include="NFDataTailModule.h" />
+    <ClInclude Include="NFErrorBusModule.h" />
+    <ClInclude Include="NFEventModule.h" />
+    <ClInclude Include="NFKernelModule.h" />
+    <ClInclude Include="NFSceneAOIModule.h" />
+    <ClInclude Include="NFScheduleModule.h" />
+    <ClInclude Include="NFCellModule.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="NFKernelPlugin.cpp" />
     <ClCompile Include="dllmain.cpp" />
-    <ClCompile Include="NFCKernelModule.cpp" />
-    <ClCompile Include="NFCEventModule.cpp" />
-    <ClCompile Include="NFCScheduleModule.cpp" />
-    <ClCompile Include="NFCSceneAOIModule.cpp" />
-    <ClCompile Include="NFCErrorBusModule.cpp" />
-    <ClCompile Include="NFCDataTailModule.cpp" />
+    <ClCompile Include="NFDataTailModule.cpp" />
+    <ClCompile Include="NFErrorBusModule.cpp" />
+    <ClCompile Include="NFEventModule.cpp" />
+    <ClCompile Include="NFKernelModule.cpp" />
+    <ClCompile Include="NFSceneAOIModule.cpp" />
+    <ClCompile Include="NFScheduleModule.cpp" />
+    <ClCompile Include="NFCellModule.cpp" />
   </ItemGroup>
 </Project>

@@ -23,8 +23,8 @@
    limitations under the License.
 */
 
-#include "NFCWorldLogicModule.h"
-#include "NFCWorldPVPModule.h"
+#include "NFWorldLogicModule.h"
+#include "NFWorldPVPModule.h"
 #include "NFWorldLogicPlugin.h"
 
 NF_EXPORT void DllStartPlugin(NFIPluginManager* pm)
@@ -51,12 +51,12 @@ const std::string NFWorldLogicPlugin::GetPluginName()
 
 void NFWorldLogicPlugin::Install()
 {
-	REGISTER_MODULE(pPluginManager, NFIWorldLogicModule, NFCWorldLogicModule)
-	REGISTER_MODULE(pPluginManager, NFIWorldPVPModule, NFCWorldPVPModule)
+	REGISTER_MODULE(pPluginManager, NFIWorldLogicModule, NFWorldLogicModule)
+	REGISTER_MODULE(pPluginManager, NFIWorldPVPModule, NFWorldPVPModule)
 }
 
 void NFWorldLogicPlugin::Uninstall()
 {
-	UNREGISTER_MODULE(pPluginManager, NFIWorldPVPModule, NFCWorldPVPModule)
-	UNREGISTER_MODULE(pPluginManager, NFIWorldLogicModule, NFCWorldLogicModule)
+	UNREGISTER_MODULE(pPluginManager, NFIWorldPVPModule, NFWorldPVPModule)
+	UNREGISTER_MODULE(pPluginManager, NFIWorldLogicModule, NFWorldLogicModule)
 }

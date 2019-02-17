@@ -25,7 +25,7 @@
 
 #include "HelloWorld.h"
 
-bool NFCHelloWorld::Init()
+bool NFHelloWorld::Init()
 { 
 
     std::cout << "Hello, world, Init" << std::endl;
@@ -33,18 +33,18 @@ bool NFCHelloWorld::Init()
     return true;
 }
 
-bool NFCHelloWorld::AfterInit()
+bool NFHelloWorld::AfterInit()
 {
 	
     return true;
 }
 
-bool NFCHelloWorld::Execute()
+bool NFHelloWorld::Execute()
 {
     return true;
 }
 
-bool NFCHelloWorld::BeforeShut()
+bool NFHelloWorld::BeforeShut()
 {
     
     std::cout << "Hello, world2, BeforeShut" << std::endl;
@@ -52,7 +52,7 @@ bool NFCHelloWorld::BeforeShut()
     return true;
 }
 
-bool NFCHelloWorld::Shut()
+bool NFHelloWorld::Shut()
 {
     
     std::cout << "Hello, world2, Shut" << std::endl;

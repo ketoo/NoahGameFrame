@@ -18,10 +18,10 @@
    limitations under the License.
 */
 #include "NFNetPlugin.h"
-#include "NFCNetModule.h"
-#include "NFCNetClientModule.h"
-#include "NFCHttpClientModule.h"
-#include "NFCHttpServerModule.h"
+#include "NFNetModule.h"
+#include "NFNetClientModule.h"
+#include "NFHttpClientModule.h"
+#include "NFHttpServerModule.h"
 #include "NFComm/NFPluginModule/NFIPluginManager.h"
 
 #ifdef NF_DYNAMIC_PLUGIN
@@ -54,16 +54,16 @@ const std::string NFNetPlugin::GetPluginName()
 
 void NFNetPlugin::Install()
 {
-    REGISTER_MODULE(pPluginManager, NFINetModule, NFCNetModule)
-    REGISTER_MODULE(pPluginManager, NFINetClientModule, NFCNetClientModule)
-	REGISTER_MODULE(pPluginManager, NFIHttpServerModule, NFCHttpServerModule)
-	REGISTER_MODULE(pPluginManager, NFIHttpClientModule, NFCHttpClientModule)
+    REGISTER_MODULE(pPluginManager, NFINetModule, NFNetModule)
+    REGISTER_MODULE(pPluginManager, NFINetClientModule, NFNetClientModule)
+	REGISTER_MODULE(pPluginManager, NFIHttpServerModule, NFHttpServerModule)
+	REGISTER_MODULE(pPluginManager, NFIHttpClientModule, NFHttpClientModule)
 }
 
 void NFNetPlugin::Uninstall()
 {
-	UNREGISTER_MODULE(pPluginManager, NFIHttpClientModule, NFCHttpClientModule)
-    UNREGISTER_MODULE(pPluginManager, NFINetClientModule, NFCNetClientModule)
-    UNREGISTER_MODULE(pPluginManager, NFINetModule, NFCNetModule)
-	UNREGISTER_MODULE(pPluginManager, NFIHttpServerModule, NFCHttpServerModule)
+	UNREGISTER_MODULE(pPluginManager, NFIHttpClientModule, NFHttpClientModule)
+    UNREGISTER_MODULE(pPluginManager, NFINetClientModule, NFNetClientModule)
+    UNREGISTER_MODULE(pPluginManager, NFINetModule, NFNetModule)
+	UNREGISTER_MODULE(pPluginManager, NFIHttpServerModule, NFHttpServerModule)
 }

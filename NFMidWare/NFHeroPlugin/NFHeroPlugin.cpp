@@ -25,8 +25,8 @@
 
 
 #include "NFHeroPlugin.h"
-#include "NFCHeroModule.h"
-#include "NFCHeroPropertyModule.h"
+#include "NFHeroModule.h"
+#include "NFHeroPropertyModule.h"
 
 #ifdef NF_DYNAMIC_PLUGIN
 
@@ -56,12 +56,12 @@ const std::string NFHeroPlugin::GetPluginName()
 
 void NFHeroPlugin::Install()
 {
-	REGISTER_MODULE(pPluginManager, NFIHeroModule, NFCHeroModule)
-	REGISTER_MODULE(pPluginManager, NFIHeroPropertyModule, NFCHeroPropertyModule)
+	REGISTER_MODULE(pPluginManager, NFIHeroModule, NFHeroModule)
+	REGISTER_MODULE(pPluginManager, NFIHeroPropertyModule, NFHeroPropertyModule)
 }
 
 void NFHeroPlugin::Uninstall()
 {
-	UNREGISTER_MODULE(pPluginManager, NFIHeroPropertyModule, NFCHeroPropertyModule)
-	UNREGISTER_MODULE(pPluginManager, NFIHeroModule, NFCHeroModule)
+	UNREGISTER_MODULE(pPluginManager, NFIHeroPropertyModule, NFHeroPropertyModule)
+	UNREGISTER_MODULE(pPluginManager, NFIHeroModule, NFHeroModule)
 }

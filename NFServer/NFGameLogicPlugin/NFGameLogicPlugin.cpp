@@ -25,15 +25,15 @@
 
 
 #include "NFGameLogicPlugin.h"
-#include "NFCBuffModule.h"
-#include "NFCGamePVPModule.h"
-#include "NFCMapModule.h"
-#include "NFCCreateRoleModule.h"
-#include "NFCTileModule.h"
-#include "NFCSurvivalModule.h"
-#include "NFCTileMapModule.h"
-#include "NFCHomeModule.h"
-#include "NFCSyncModule.h"
+#include "NFBuffModule.h"
+#include "NFGamePVPModule.h"
+//#include "NFMapModule.h"
+#include "NFCreateRoleModule.h"
+//#include "NFTileModule.h"
+//#include "NFSurvivalModule.h"
+//#include "NFTileMapModule.h"
+//#include "NFHomeModule.h"
+#include "NFSyncModule.h"
 
 #ifdef NF_DYNAMIC_PLUGIN
 
@@ -63,27 +63,27 @@ const std::string NFGameLogicPlugin::GetPluginName()
 
 void NFGameLogicPlugin::Install()
 {
-    REGISTER_MODULE(pPluginManager, NFIBuffModule, NFCBuffModule)
-	REGISTER_MODULE(pPluginManager, NFICreateRoleModule, NFCCreateRoleModule)
-	REGISTER_MODULE(pPluginManager, NFIGamePVPModule, NFCGamePVPModule)
-	REGISTER_MODULE(pPluginManager, NFISyncModule, NFCSyncModule)
-	//REGISTER_MODULE(pPluginManager, NFIMapModule, NFCMapModule);
-	//REGISTER_MODULE(pPluginManager, NFITileModule, NFCTileModule);
-	//REGISTER_MODULE(pPluginManager, NFISurvivalModule, NFCSurvivalModule);
-	//REGISTER_MODULE(pPluginManager, NFITileMapModule, NFCTileMapModule);
-	//REGISTER_MODULE(pPluginManager, NFIHomeModule, NFCHomeModule);
+    REGISTER_MODULE(pPluginManager, NFIBuffModule, NFBuffModule)
+	REGISTER_MODULE(pPluginManager, NFICreateRoleModule, NFCreateRoleModule)
+	REGISTER_MODULE(pPluginManager, NFIGamePVPModule, NFGamePVPModule)
+	REGISTER_MODULE(pPluginManager, NFISyncModule, NFSyncModule)
+	//REGISTER_MODULE(pPluginManager, NFIMapModule, NFMapModule);
+	//REGISTER_MODULE(pPluginManager, NFITileModule, NFTileModule);
+	//REGISTER_MODULE(pPluginManager, NFISurvivalModule, NFSurvivalModule);
+	//REGISTER_MODULE(pPluginManager, NFITileMapModule, NFTileMapModule);
+	//REGISTER_MODULE(pPluginManager, NFIHomeModule, NFHomeModule);
 }
 
 void NFGameLogicPlugin::Uninstall()
 {
-	//UNREGISTER_MODULE(pPluginManager, NFIHomeModule, NFCHomeModule);
-	//UNREGISTER_MODULE(pPluginManager, NFITileMapModule, NFCTileMapModule);
-	//UNREGISTER_MODULE(pPluginManager, NFISurvivalModule, NFCSurvivalModule);
-	//UNREGISTER_MODULE(pPluginManager, NFITileModule, NFCTileModule);
-	//UNREGISTER_MODULE(pPluginManager, NFIMapModule, NFCMapModule);
-	UNREGISTER_MODULE(pPluginManager, NFISyncModule, NFCSyncModule)
-	UNREGISTER_MODULE(pPluginManager, NFIGamePVPModule, NFCGamePVPModule)
-    UNREGISTER_MODULE(pPluginManager, NFICreateRoleModule, NFCCreateRoleModule)
-    UNREGISTER_MODULE(pPluginManager, NFIBuffModule, NFCBuffModule)
+	//UNREGISTER_MODULE(pPluginManager, NFIHomeModule, NFHomeModule);
+	//UNREGISTER_MODULE(pPluginManager, NFITileMapModule, NFTileMapModule);
+	//UNREGISTER_MODULE(pPluginManager, NFISurvivalModule, NFSurvivalModule);
+	//UNREGISTER_MODULE(pPluginManager, NFITileModule, NFTileModule);
+	//UNREGISTER_MODULE(pPluginManager, NFIMapModule, NFMapModule);
+	UNREGISTER_MODULE(pPluginManager, NFISyncModule, NFSyncModule)
+	UNREGISTER_MODULE(pPluginManager, NFIGamePVPModule, NFGamePVPModule)
+    UNREGISTER_MODULE(pPluginManager, NFICreateRoleModule, NFCreateRoleModule)
+    UNREGISTER_MODULE(pPluginManager, NFIBuffModule, NFBuffModule)
 
 }

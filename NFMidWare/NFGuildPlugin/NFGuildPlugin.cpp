@@ -26,8 +26,8 @@
 
 
 #include "NFGuildPlugin.h"
-#include "NFCGuildModule.h"
-//#include "NFCGuildDataModule.h"
+#include "NFGuildModule.h"
+//#include "NFGuildDataModule.h"
 
 #ifdef NF_DYNAMIC_PLUGIN
 
@@ -53,16 +53,16 @@ const int NFGuildPlugin::GetPluginVersion()
 
 const std::string NFGuildPlugin::GetPluginName()
 {
-	return GET_CLASS_NAME(NFCChatPlugin);
+	return GET_CLASS_NAME(NFGuildPlugin);
 }
 
 void NFGuildPlugin::Install()
 {
-	REGISTER_MODULE(pPluginManager, NFIGuildModule, NFCGuildModule)
+	REGISTER_MODULE(pPluginManager, NFIGuildModule, NFGuildModule)
 
 }
 
 void NFGuildPlugin::Uninstall()
 {
-	UNREGISTER_MODULE(pPluginManager, NFIGuildModule, NFCGuildModule)
+	UNREGISTER_MODULE(pPluginManager, NFIGuildModule, NFGuildModule)
 }

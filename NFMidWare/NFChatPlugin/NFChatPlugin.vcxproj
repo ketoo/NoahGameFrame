@@ -92,7 +92,7 @@
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="NFCChatModule.h" />
+    <ClInclude Include="NFChatModule.h" />
     <ClInclude Include="NFChatPlugin.h" />
   </ItemGroup>
   <ItemGroup>
@@ -104,7 +104,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
       </PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="NFCChatModule.cpp" />
+    <ClCompile Include="NFChatModule.cpp" />
     <ClCompile Include="NFChatPlugin.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

@@ -24,7 +24,7 @@
 */
 
 #include "NFMasterNet_HttpServerPlugin.h"
-#include "NFCMasterNet_HttpServerModule.h"
+#include "NFMasterNet_HttpServerModule.h"
 //
 //
 #ifdef NF_DYNAMIC_PLUGIN
@@ -57,10 +57,10 @@ const std::string NFMasterNet_HttpServerPlugin::GetPluginName()
 
 void NFMasterNet_HttpServerPlugin::Install()
 {
-	REGISTER_MODULE(pPluginManager, NFIMasterNet_HttpServerModule, NFCMasterNet_HttpServerModule)
+	REGISTER_MODULE(pPluginManager, NFIMasterNet_HttpServerModule, NFMasterNet_HttpServerModule)
 }
 
 void NFMasterNet_HttpServerPlugin::Uninstall()
 {
-	UNREGISTER_MODULE(pPluginManager, NFIMasterNet_HttpServerModule, NFCMasterNet_HttpServerModule)
+	UNREGISTER_MODULE(pPluginManager, NFIMasterNet_HttpServerModule, NFMasterNet_HttpServerModule)
 }

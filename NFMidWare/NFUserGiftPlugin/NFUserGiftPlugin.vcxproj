@@ -99,11 +99,11 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
       </PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="NFCUserGiftModule.cpp" />
+    <ClCompile Include="NFUserGiftModule.cpp" />
     <ClCompile Include="NFUserGiftPlugin.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="NFCUserGiftModule.h" />
+    <ClInclude Include="NFUserGiftModule.h" />
     <ClInclude Include="NFUserGiftPlugin.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

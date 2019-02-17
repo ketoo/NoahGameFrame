@@ -24,11 +24,12 @@
 */
 
 #include "NFKernelPlugin.h"
-#include "NFCKernelModule.h"
-#include "NFCSceneAOIModule.h"
-#include "NFCEventModule.h"
-#include "NFCScheduleModule.h"
-#include "NFCDataTailModule.h"
+#include "NFKernelModule.h"
+#include "NFSceneAOIModule.h"
+#include "NFEventModule.h"
+#include "NFScheduleModule.h"
+#include "NFDataTailModule.h"
+#include "NFCellModule.h"
 
 //
 //
@@ -61,31 +62,33 @@ const std::string NFKernelPlugin::GetPluginName()
 
 void NFKernelPlugin::Install()
 {
-    REGISTER_MODULE(pPluginManager, NFISceneAOIModule, NFCSceneAOIModule)
-	REGISTER_MODULE(pPluginManager, NFIKernelModule, NFCKernelModule)
-	REGISTER_MODULE(pPluginManager, NFIEventModule, NFCEventModule)
-	REGISTER_MODULE(pPluginManager, NFIScheduleModule, NFCScheduleModule)
-	REGISTER_MODULE(pPluginManager, NFIDataTailModule, NFCDataTailModule)
+    REGISTER_MODULE(pPluginManager, NFISceneAOIModule, NFSceneAOIModule)
+	REGISTER_MODULE(pPluginManager, NFIKernelModule, NFKernelModule)
+	REGISTER_MODULE(pPluginManager, NFIEventModule, NFEventModule)
+	REGISTER_MODULE(pPluginManager, NFIScheduleModule, NFScheduleModule)
+	REGISTER_MODULE(pPluginManager, NFIDataTailModule, NFDataTailModule)
+	REGISTER_MODULE(pPluginManager, NFICellModule, NFCellModule)
 
 	/*
-	REGISTER_TEST_MODULE(pPluginManager, NFISceneAOIModule, NFCSceneAOITestModule)
-	REGISTER_TEST_MODULE(pPluginManager, NFIKernelModule, NFCKernelTestModule)
-	REGISTER_TEST_MODULE(pPluginManager, NFIEventModule, NFCEventTestModule)
-	REGISTER_TEST_MODULE(pPluginManager, NFIScheduleModule, NFCScheduleTestModule)
+	REGISTER_TEST_MODULE(pPluginManager, NFISceneAOIModule, NFSceneAOITestModule)
+	REGISTER_TEST_MODULE(pPluginManager, NFIKernelModule, NFKernelTestModule)
+	REGISTER_TEST_MODULE(pPluginManager, NFIEventModule, NFEventTestModule)
+	REGISTER_TEST_MODULE(pPluginManager, NFIScheduleModule, NFScheduleTestModule)
 	*/
 }
 
 void NFKernelPlugin::Uninstall()
 {
 	/*
-	UNREGISTER_TEST_MODULE(pPluginManager, NFIEventModule, NFCEventTestModule)
-	UNREGISTER_TEST_MODULE(pPluginManager, NFIKernelModule, NFCKernelTestModule)
-	UNREGISTER_TEST_MODULE(pPluginManager, NFISceneAOIModule, NFCSceneAOITestModule)
-	UNREGISTER_TEST_MODULE(pPluginManager, NFIScheduleModule, NFCScheduleTestModule)
+	UNREGISTER_TEST_MODULE(pPluginManager, NFIEventModule, NFEventTestModule)
+	UNREGISTER_TEST_MODULE(pPluginManager, NFIKernelModule, NFKernelTestModule)
+	UNREGISTER_TEST_MODULE(pPluginManager, NFISceneAOIModule, NFSceneAOITestModule)
+	UNREGISTER_TEST_MODULE(pPluginManager, NFIScheduleModule, NFScheduleTestModule)
 */
-	UNREGISTER_MODULE(pPluginManager, NFIDataTailModule, NFCDataTailModule)
-	UNREGISTER_MODULE(pPluginManager, NFIEventModule, NFCEventModule)
-	UNREGISTER_MODULE(pPluginManager, NFIKernelModule, NFCKernelModule)
-	UNREGISTER_MODULE(pPluginManager, NFISceneAOIModule, NFCSceneAOIModule)
-	UNREGISTER_MODULE(pPluginManager, NFIScheduleModule, NFCScheduleModule)
+	UNREGISTER_MODULE(pPluginManager, NFICellModule, NFCellModule)
+	UNREGISTER_MODULE(pPluginManager, NFIDataTailModule, NFDataTailModule)
+	UNREGISTER_MODULE(pPluginManager, NFIEventModule, NFEventModule)
+	UNREGISTER_MODULE(pPluginManager, NFIKernelModule, NFKernelModule)
+	UNREGISTER_MODULE(pPluginManager, NFISceneAOIModule, NFSceneAOIModule)
+	UNREGISTER_MODULE(pPluginManager, NFIScheduleModule, NFScheduleModule)
 }

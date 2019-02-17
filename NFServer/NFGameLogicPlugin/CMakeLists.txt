@@ -6,8 +6,8 @@ file(GLOB NFGameLogicPlugin_ROOT_Hpp
 	*.h)
 
 #Exclude this file
-file(GLOB RemoveItems_Cpp NFCPVPModule.cpp NFCTileMapModule.cpp NFCTileModule.cpp NFCSurvivalModule.cpp NFCTileMapModule.cpp)
-list(REMOVE_ITEM NFGameLogicPlugin_ROOT_Cpp ${RemoveItems_Cpp})
+#file(GLOB RemoveItems_Cpp NFPVPModule.cpp NFTileMapModule.cpp NFTileModule.cpp NFSurvivalModule.cpp NFTileMapModule.cpp)
+#list(REMOVE_ITEM NFGameLogicPlugin_ROOT_Cpp ${RemoveItems_Cpp})
 
 add_library(NFGameLogicPlugin STATIC
 	${NFGameLogicPlugin_ROOT_Cpp}

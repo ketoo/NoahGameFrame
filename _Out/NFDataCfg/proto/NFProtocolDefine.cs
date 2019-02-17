@@ -1039,6 +1039,7 @@ namespace NFrame
 		public static readonly String SceneID = "SceneID";// int
 		// Property
 		public static readonly String Area = "Area";// int
+		public static readonly String Cell = "Cell";// int
 		public static readonly String CpuCount = "CpuCount";// int
 		public static readonly String IP = "IP";// string
 		public static readonly String MaxOnline = "MaxOnline";// int

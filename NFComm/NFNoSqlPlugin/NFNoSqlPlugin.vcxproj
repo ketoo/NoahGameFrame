@@ -108,7 +108,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
       </PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="NFCNoSqlModule.cpp" />
+    <ClCompile Include="NFNoSqlModule.cpp" />
     <ClCompile Include="NFNoSqlPlugin.cpp" />
     <ClCompile Include="NFRedisClient.cpp" />
     <ClCompile Include="NFRedisClientHash.cpp" />
@@ -124,7 +124,7 @@
     <ClCompile Include="NFRedisTester.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="NFCNoSqlModule.h" />
+    <ClInclude Include="NFNoSqlModule.h" />
     <ClInclude Include="NFNoSqlPlugin.h" />
     <ClInclude Include="NFRedisClient.h" />
     <ClInclude Include="NFRedisClientSocket.h" />

@@ -33,7 +33,7 @@
 #include <future>
 #include <functional>
 #include <atomic>
-#include "NFCPluginManager.h"
+#include "NFPluginManager.h"
 #include "NFComm/NFPluginModule/NFPlatform.h"
 #include "NFComm/NFLogPlugin/easylogging++.h"
 
@@ -43,9 +43,12 @@
 #include <arpa/inet.h>
 #include <signal.h>
 #include <execinfo.h>
+#include <setjmp.h>
+
 #if NF_PLATFORM == NF_PLATFORM_LINUX
 #include <sys/prctl.h>
 #endif
+
 #endif
 
 bool bExitApp = false;
@@ -57,15 +60,78 @@ std::string strAppName;
 std::string strAppID;
 std::string strTitleName;
 
+#if NF_PLATFORM != NF_PLATFORM_WIN
+class NFExceptFrame
+{
+public:
+	jmp_buf env;
+	int flag;
+	void clear()
+	{
+		flag = 0;
+		bzero(env, sizeof(env));
+	}
+	bool isDef()
+	{
+		return flag;
+	}
+	NFExceptFrame()
+	{
+		clear();
+	}
+};
+
+
+void StackTrace(int sig)
+{
+	LOG(FATAL) << "crash sig:" << sig;
+
+	int size = 16;
+	void * array[16];
+	int stack_num = backtrace(array, size);
+	char ** stacktrace = backtrace_symbols(array, stack_num);
+	for (int i = 0; i < stack_num; ++i)
+	{
+		//printf("%s\n", stacktrace[i]);
+		LOG(FATAL) << stacktrace[i];
+	}
+
+	free(stacktrace);
+}
+
+NFExceptFrame exceptStack;
+void CrashHandler(int sig)
+{
+	printf("received signal %d !!!\n", sig);
+	StackTrace(sig);
+	siglongjmp(exceptStack.env, 1);
+}
+
+#define NF_CRASH_TRY \
+exceptStack.flag = sigsetjmp(exceptStack.env,1);\
+if(!exceptStack.isDef()) \
+{ \
+signal(SIGSEGV,CrashHandler); \
+printf("start use TRY\n");
+#define NF_CRASH_END_TRY \
+}\
+else\
+{\
+exceptStack.clear();\
+}\
+printf("stop use TRY\n");
+
+#endif
+
 void MainExecute();
 
 void ReleaseNF()
 {
-	NFCPluginManager::GetSingletonPtr()->BeforeShut();
-	NFCPluginManager::GetSingletonPtr()->Shut();
-	NFCPluginManager::GetSingletonPtr()->Finalize();
+	NFPluginManager::GetSingletonPtr()->BeforeShut();
+	NFPluginManager::GetSingletonPtr()->Shut();
+	NFPluginManager::GetSingletonPtr()->Finalize();
 
-	NFCPluginManager::GetSingletonPtr()->ReleaseInstance();
+	NFPluginManager::GetSingletonPtr()->ReleaseInstance();
 }
 
 #if NF_PLATFORM == NF_PLATFORM_WIN
@@ -235,11 +301,11 @@ void ProcessParameter(int argc, char* argv[])
             }
         }
 
-        NFCPluginManager::GetSingletonPtr()->SetConfigPath(strDataPath);
+        NFPluginManager::GetSingletonPtr()->SetConfigPath(strDataPath);
     }
     else
     {
-        NFCPluginManager::GetSingletonPtr()->SetConfigPath("../");
+        NFPluginManager::GetSingletonPtr()->SetConfigPath("../");
     }
 
 	if (strArgvList.find(".xml") != string::npos)
@@ -253,7 +319,7 @@ void ProcessParameter(int argc, char* argv[])
 			}
 		}
 
-		NFCPluginManager::GetSingletonPtr()->SetConfigName(strPluginName);
+		NFPluginManager::GetSingletonPtr()->SetConfigName(strPluginName);
 	}
 
     if (strArgvList.find("Server=") != string::npos)
@@ -268,7 +334,7 @@ void ProcessParameter(int argc, char* argv[])
 			}
 		}
 
-		NFCPluginManager::GetSingletonPtr()->SetAppName(strAppName);
+		NFPluginManager::GetSingletonPtr()->SetAppName(strAppName);
 	}
 
 	if (strArgvList.find("ID=") != string::npos)
@@ -286,7 +352,7 @@ void ProcessParameter(int argc, char* argv[])
 		int nAppID = 0;
         if(NF_StrTo(strAppID, nAppID))
         {
-            NFCPluginManager::GetSingletonPtr()->SetAppID(nAppID);
+            NFPluginManager::GetSingletonPtr()->SetAppID(nAppID);
         }
 	}
 
@@ -306,7 +372,7 @@ void ProcessParameter(int argc, char* argv[])
 		int nDockerFlag = 0;
         if(NF_StrTo(strDockerFlag, nDockerFlag))
         {
-            NFCPluginManager::GetSingletonPtr()->SetRunningDocker(nDockerFlag);
+            NFPluginManager::GetSingletonPtr()->SetRunningDocker(nDockerFlag);
         }
 	}
 	
@@ -322,7 +388,7 @@ void ProcessParameter(int argc, char* argv[])
 }
 
 #if NF_PLATFORM != NF_PLATFORM_WIN
-void CrashHandler(int sig) {
+void NFCrashHandler(int sig) {
 	// FOLLOWING LINE IS ABSOLUTELY NEEDED AT THE END IN ORDER TO ABORT APPLICATION
 	//el::base::debug::StackTrace();
 	//el::Helpers::logCrashReason(sig, true);
@@ -361,9 +427,9 @@ void MainExecute()
 #endif
 		{
 #ifdef NF_COROUTINE
-			NFCPluginManager::Instance()->ExecuteCoScheduler();
+			NFPluginManager::Instance()->ExecuteCoScheduler();
 #else
-			NFCPluginManager::GetSingletonPtr()->Execute();
+			NFPluginManager::GetSingletonPtr()->Execute();
 #endif
 		}
 #if NF_PLATFORM == NF_PLATFORM_WIN
@@ -373,31 +439,11 @@ void MainExecute()
 #else
 	catch(const std::exception& e)
 	{
-		int size = 16;
-		void * array[16];
-		int stack_num = backtrace(array, size);
-		char ** stacktrace = backtrace_symbols(array, stack_num);
-		for (int i = 0; i < stack_num; ++i)
-		{
-			//printf("%s\n", stacktrace[i]);
-			LOG(FATAL) << stacktrace[i];
-		}
-
-		free(stacktrace);
+		StackTrace(11);
 	}
 	catch(...)
 	{
-		int size = 16;
-		void * array[16];
-		int stack_num = backtrace(array, size);
-		char ** stacktrace = backtrace_symbols(array, stack_num);
-		for (int i = 0; i < stack_num; ++i)
-		{
-			//printf("%s\n", stacktrace[i]);
-			LOG(FATAL) << stacktrace[i];
-		}
-
-		free(stacktrace);
+		StackTrace(11);
 	}
 #endif
     }
@@ -408,9 +454,9 @@ int main(int argc, char* argv[])
 #if NF_PLATFORM == NF_PLATFORM_WIN
     SetUnhandledExceptionFilter((LPTOP_LEVEL_EXCEPTION_FILTER)ApplicationCrashHandler);
 #else
-	el::Helpers::setCrashHandler(CrashHandler);
+	signal(SIGSEGV, NFCrashHandler);
+	//el::Helpers::setCrashHandler(CrashHandler);
 #endif
-	//atexit(ReleaseNF);
 
     ProcessParameter(argc, argv);
 
@@ -418,14 +464,25 @@ int main(int argc, char* argv[])
 	PrintfLogo();
 	CreateBackThread();
 
-	NFCPluginManager::GetSingletonPtr()->LoadPlugin();
-	NFCPluginManager::GetSingletonPtr()->Awake();
-	NFCPluginManager::GetSingletonPtr()->Init();
-	NFCPluginManager::GetSingletonPtr()->AfterInit();
-	NFCPluginManager::GetSingletonPtr()->CheckConfig();
-	NFCPluginManager::GetSingletonPtr()->ReadyExecute();
+	NFPluginManager::GetSingletonPtr()->LoadPlugin();
+	NFPluginManager::GetSingletonPtr()->Awake();
+	NFPluginManager::GetSingletonPtr()->Init();
+	NFPluginManager::GetSingletonPtr()->AfterInit();
+	NFPluginManager::GetSingletonPtr()->CheckConfig();
+	NFPluginManager::GetSingletonPtr()->ReadyExecute();
 
+#if NF_PLATFORM == NF_PLATFORM_WIN
 	MainExecute();
+#else
+	while (1)
+	{
+		NF_CRASH_TRY
+		MainExecute();
+		NF_CRASH_END_TRY
+	}
+#endif
+
+	
 
 	ReleaseNF();
 

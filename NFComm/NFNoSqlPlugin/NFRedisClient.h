@@ -799,8 +799,8 @@ protected:
 
 private:
 
-	bool bAuthed;
-	bool bBusy;
+	bool mbAuthed;
+	bool mbBusy;
 	NFRedisClientSocket* m_pRedisClientSocket;
 };
 

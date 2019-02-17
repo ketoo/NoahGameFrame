@@ -55,11 +55,11 @@ const std::string Tutorial7::GetPluginName()
 
 void Tutorial7::Install()
 {
-    REGISTER_MODULE(pPluginManager, NFIHelloWorld, NFCHelloWorld)
+    REGISTER_MODULE(pPluginManager, NFIHelloWorld, NFHelloWorld)
     
 }
 
 void Tutorial7::Uninstall()
 {
-    UNREGISTER_MODULE(pPluginManager, NFIHelloWorld, NFCHelloWorld)
+    UNREGISTER_MODULE(pPluginManager, NFIHelloWorld, NFHelloWorld)
 }

@@ -58,6 +58,7 @@
     <ClInclude Include="..\NFPluginModule\NFIBigMapRedisModule.h" />
     <ClInclude Include="..\NFPluginModule\NFIBuffConfigModule.h" />
     <ClInclude Include="..\NFPluginModule\NFIBuffModule.h" />
+    <ClInclude Include="..\NFPluginModule\NFICellModule.h" />
     <ClInclude Include="..\NFPluginModule\NFIChatModule.h" />
     <ClInclude Include="..\NFPluginModule\NFIClassModule.h" />
     <ClInclude Include="..\NFPluginModule\NFICommonConfigModule.h" />

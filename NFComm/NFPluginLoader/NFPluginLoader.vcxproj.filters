@@ -1,14 +1,14 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClInclude Include="NFCPluginManager.h" />
-    <ClInclude Include="NFCDynLib.h" />
     <ClInclude Include="NFCoroutineManager.h" />
+    <ClInclude Include="NFDynLib.h" />
+    <ClInclude Include="NFPluginManager.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="NFPluginLoader.cpp" />
-    <ClCompile Include="NFCPluginManager.cpp" />
-    <ClCompile Include="NFCDynLib.cpp" />
     <ClCompile Include="NFCoroutineManager.cpp" />
+    <ClCompile Include="NFDynLib.cpp" />
+    <ClCompile Include="NFPluginManager.cpp" />
   </ItemGroup>
 </Project>
