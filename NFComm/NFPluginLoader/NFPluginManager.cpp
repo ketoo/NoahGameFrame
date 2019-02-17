@@ -517,6 +517,7 @@ inline void NFPluginManager::SetAppID(const int nAppID)
 {
     mnAppID = nAppID;
 }
+
 bool NFPluginManager::IsRunningDocker() const
 {
 	return mbIsDocker;

@@ -34,8 +34,9 @@
 class NFIPlugin;
 class NFIModule;
 
-typedef std::function<bool (const std::string &strFileName, std::string &strContent)> GET_FILECONTENT_FUNCTOR;
+typedef std::function<bool (const std::string& strFileName, std::string& strContent)> GET_FILECONTENT_FUNCTOR;
 typedef void (* CoroutineFunction)(void* arg);
+typedef void(*AsyncFunction)(const std::string& strData, std::string& strContent);
 
 template<typename DerivedType, typename BaseType>
 class TIsDerived
@@ -210,6 +211,7 @@ public:
 	virtual void ExecuteCoScheduler() = 0;
 	virtual void YieldCo(const int64_t nSecond) = 0;
 	virtual void YieldCo() = 0;
+	//virtual void Async(AsyncFunction fun) = 0;
 };
 
 #endif

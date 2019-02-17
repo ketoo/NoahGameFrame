@@ -51,6 +51,11 @@ bool NFHelloWorld4Module::AfterInit()
 	int nActorID = m_pActorModule->RequireActor();
 	m_pActorModule->AddComponent<NFHttpComponent>(nActorID);
 	m_pActorModule->AddDefaultEndFunc(nActorID, this, &NFHelloWorld4Module::RequestAsyEnd);
+	m_pActorModule->AddEndFunc(nActorID, 1, [nActorID](const int nFormActor, const int nSubMsgID, std::string& strData) -> int
+	{
+		std::cout << nActorID << std::endl;
+		return nSubMsgID;
+	});
 
 	for (int i = 0; i < 10; ++i)
 	{
