@@ -23,47 +23,42 @@
    limitations under the License.
 */
 
-#include "NFActorPlugin.h"
-#include "NFActorModule.h"
+
 #include "NFAsyncTaskModule.h"
-#include "NFThreadPoolModule.h"
 
-#ifdef NF_DYNAMIC_PLUGIN
-
-NF_EXPORT void DllStartPlugin(NFIPluginManager* pm)
+NFAsyncTaskModule::NFAsyncTaskModule(NFIPluginManager* p)
 {
-    CREATE_PLUGIN(pm, NFActorPlugin)
-};
-
-NF_EXPORT void DllStopPlugin(NFIPluginManager* pm)
-{
-    DESTROY_PLUGIN(pm, NFActorPlugin)
-};
-
-#endif
-
-//////////////////////////////////////////////////////////////////////////
-
-const int NFActorPlugin::GetPluginVersion()
-{
-    return 0;
+	pPluginManager = p;
 }
 
-const std::string NFActorPlugin::GetPluginName()
+NFAsyncTaskModule::~NFAsyncTaskModule()
 {
-	return GET_CLASS_NAME(NFActorPlugin);
 }
 
-void NFActorPlugin::Install()
+bool NFAsyncTaskModule::Init()
 {
-	REGISTER_MODULE(pPluginManager, NFIActorModule, NFActorModule)
-	REGISTER_MODULE(pPluginManager, NFIAsyncTaskModule, NFAsyncTaskModule)
-	REGISTER_MODULE(pPluginManager, NFIThreadPoolModule, NFThreadPoolModule)
+    return true;
 }
 
-void NFActorPlugin::Uninstall()
+bool NFAsyncTaskModule::AfterInit()
 {
-	UNREGISTER_MODULE(pPluginManager, NFIThreadPoolModule, NFThreadPoolModule)
-	UNREGISTER_MODULE(pPluginManager, NFIAsyncTaskModule, NFAsyncTaskModule)
-	UNREGISTER_MODULE(pPluginManager, NFIActorModule, NFActorModule)
+
+    return true;
 }
+
+bool NFAsyncTaskModule::BeforeShut()
+{
+    return true;
+}
+
+bool NFAsyncTaskModule::Shut()
+{
+ 
+    return true;
+}
+
+bool NFAsyncTaskModule::Execute()
+{
+    return true;
+}
+
