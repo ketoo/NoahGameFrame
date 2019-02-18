@@ -26,6 +26,11 @@
 
 #include "NFThreadPoolModule.h"
 
+void ThreadExecute()
+{
+	//return the thread to the idle thread pool
+}
+
 NFThreadPoolModule::NFThreadPoolModule(NFIPluginManager* p)
 {
 	pPluginManager = p;
@@ -37,6 +42,10 @@ NFThreadPoolModule::~NFThreadPoolModule()
 
 bool NFThreadPoolModule::Init()
 {
+	for (int i = 0; i < 10; +i)
+	{
+	}
+
     return true;
 }
 
