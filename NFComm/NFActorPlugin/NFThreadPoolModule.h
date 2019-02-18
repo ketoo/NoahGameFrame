@@ -34,6 +34,18 @@
 #include "NFComm/NFPluginModule/NFIThreadPoolModule.h"
 #include "NFComm/NFCore/NFQueue.hpp"
 
+
+class NFThreadTask
+{
+};
+
+class NFThreadCell
+{
+private:
+	std::list<NFThreadTask> mTaskList;
+	NF_SHARE_PTR<std::thread> mThread;
+};
+
 class NFThreadPoolModule
     : public NFIThreadPoolModule
 {
@@ -52,6 +64,8 @@ public:
     virtual bool Execute();
 
 private:
+	std::list<NF_SHARE_PTR<NFThreadCell>> mlIdleThreadPool;
+	std::list<NF_SHARE_PTR<NFThreadCell>> mlBusyThreadPool;
 };
 
 #endif
