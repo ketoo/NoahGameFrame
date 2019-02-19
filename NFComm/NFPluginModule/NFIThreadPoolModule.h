@@ -68,22 +68,22 @@ class NFIThreadPoolModule : public NFIModule
 public:
 	int DoTask(const std::string& data, TASK_PROCESS_FUNCTOR asyncFunctor, TASK_PROCESS_FUNCTOR functor_end)
 	{
-		return 1;
+		return DoTask(0, data, asyncFunctor, functor_end);
 	}
 
-	int DoTask(const int hash, const std::string& data, 
+	int DoTask(const int hash, const std::string& data,
 		TASK_PROCESS_FUNCTOR asyncFunctor, TASK_PROCESS_FUNCTOR functor_end)
 	{
 		return 1;
 	}
 
-	int DoTask(const int nTaskID, const std::string& data,
+	int DoTask(const NFGUID taskID, const std::string& data,
 		TASK_PROCESS_FUNCTOR asyncFunctor, TASK_PROCESS_FUNCTOR functor_end)
 	{
-		return 1;
+		return DoTask(0, taskID, data,  asyncFunctor, functor_end);
 	}
 
-	int DoTask(const int hash, const int nTaskID, const std::string& data,
+	int DoTask(const int hash, const NFGUID taskID, const std::string& data,
 		TASK_PROCESS_FUNCTOR asyncFunctor, TASK_PROCESS_FUNCTOR functor_end)
 	{
 		return 1;
