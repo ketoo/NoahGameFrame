@@ -482,6 +482,7 @@ void NFWorldNet_ServerModule::SynWorldToProxy(const NFSOCK nFD)
 	NF_SHARE_PTR<ServerData> pServerData = mWorldMap.First();
 	while (pServerData)
 	{
+		//it must be the same area
 		NFMsg::ServerInfoReport* pData = xData.add_server_list();
 		*pData = *(pServerData->pData);
 
@@ -515,6 +516,7 @@ void NFWorldNet_ServerModule::SynWorldToGame(const NFSOCK nFD)
 	NF_SHARE_PTR<ServerData> pServerData = mWorldMap.First();
 	while (pServerData)
 	{
+		//it must be the same area
 		NFMsg::ServerInfoReport* pData = xData.add_server_list();
 		*pData = *(pServerData->pData);
 
