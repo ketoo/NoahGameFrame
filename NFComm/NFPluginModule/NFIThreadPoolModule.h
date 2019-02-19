@@ -27,12 +27,45 @@
 #define NFI_THREAD_POOL_MODULE_H
 
 #include "NFIModule.h"
+#include <thread>
 
 ///////////////////////////////////////////////////
+
+typedef std::function<int(const int, const int, std::string&)> TASK_PROCESS_FUNCTOR;
+typedef NF_SHARE_PTR<TASK_PROCESS_FUNCTOR> TASK_PROCESS_FUNCTOR_PTR;
+
+
+class NFThreadTask
+{
+	int nMsgID;
+	int nFormThread;
+	std::string data;
+	ACTOR_PROCESS_FUNCTOR_PTR xThreadFuncptr;
+	ACTOR_PROCESS_FUNCTOR_PTR xEndFuncptr;
+};
+
+class NFThreadCell
+{
+private:
+	std::list<NFThreadTask> mTaskList;
+	NF_SHARE_PTR<std::thread> mThread;
+};
 
 class NFIThreadPoolModule : public NFIModule
 {
 public:
+
+	int DoTask(const int nTaskID,
+		ACTOR_PROCESS_FUNCTOR asyncFunctor, ACTOR_PROCESS_FUNCTOR functor_end)
+	{
+		return 1;
+	}
+
+	int DoTask(const int hash, const int nTaskID,
+		ACTOR_PROCESS_FUNCTOR asyncFunctor, ACTOR_PROCESS_FUNCTOR functor_end)
+	{
+		return 1;
+	}
 };
 
 #endif
