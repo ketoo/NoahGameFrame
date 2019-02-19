@@ -37,15 +37,27 @@ typedef NF_SHARE_PTR<TASK_PROCESS_FUNCTOR> TASK_PROCESS_FUNCTOR_PTR;
 
 class NFThreadTask
 {
-	int nMsgID;
+	int nTaskID;
 	int nFormThread;
 	std::string data;
-	ACTOR_PROCESS_FUNCTOR_PTR xThreadFuncptr;
-	ACTOR_PROCESS_FUNCTOR_PTR xEndFuncptr;
+	TASK_PROCESS_FUNCTOR_PTR xThreadFuncptr;
+	TASK_PROCESS_FUNCTOR_PTR xEndFuncptr;
 };
 
 class NFThreadCell
 {
+public:
+
+	NFThreadCell()
+	{
+		mThread = NF_SHARE_PTR<std::thread>(NF_NEW std::thread(Execute));
+	}
+
+protected:
+	static void Execute()
+	{
+
+	}
 private:
 	std::list<NFThreadTask> mTaskList;
 	NF_SHARE_PTR<std::thread> mThread;
@@ -54,15 +66,25 @@ private:
 class NFIThreadPoolModule : public NFIModule
 {
 public:
-
-	int DoTask(const int nTaskID,
-		ACTOR_PROCESS_FUNCTOR asyncFunctor, ACTOR_PROCESS_FUNCTOR functor_end)
+	int DoTask(const std::string& data, TASK_PROCESS_FUNCTOR asyncFunctor, TASK_PROCESS_FUNCTOR functor_end)
 	{
 		return 1;
 	}
 
-	int DoTask(const int hash, const int nTaskID,
-		ACTOR_PROCESS_FUNCTOR asyncFunctor, ACTOR_PROCESS_FUNCTOR functor_end)
+	int DoTask(const int hash, const std::string& data, 
+		TASK_PROCESS_FUNCTOR asyncFunctor, TASK_PROCESS_FUNCTOR functor_end)
+	{
+		return 1;
+	}
+
+	int DoTask(const int nTaskID, const std::string& data,
+		TASK_PROCESS_FUNCTOR asyncFunctor, TASK_PROCESS_FUNCTOR functor_end)
+	{
+		return 1;
+	}
+
+	int DoTask(const int hash, const int nTaskID, const std::string& data,
+		TASK_PROCESS_FUNCTOR asyncFunctor, TASK_PROCESS_FUNCTOR functor_end)
 	{
 		return 1;
 	}
