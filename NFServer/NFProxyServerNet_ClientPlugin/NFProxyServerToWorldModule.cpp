@@ -135,14 +135,14 @@ void NFProxyServerToWorldModule::Register(NFINet* pNet)
                 const int nPort = m_pElementModule->GetPropertyInt32(strId, NFrame::Server::Port());
                 const int nMaxConnect = m_pElementModule->GetPropertyInt32(strId, NFrame::Server::MaxOnline());
                 //const int nCpus = m_pElementModule->GetPropertyInt32(strId, NFrame::Server::CpuCount());
-                const std::string& strName = m_pElementModule->GetPropertyString(strId, NFrame::Server::Name());
+                const std::string& strName = m_pElementModule->GetPropertyString(strId, NFrame::Server::ID());
                 const std::string& strIP = m_pElementModule->GetPropertyString(strId, NFrame::Server::IP());
 
                 NFMsg::ServerInfoReportList xMsg;
                 NFMsg::ServerInfoReport* pData = xMsg.add_server_list();
 
                 pData->set_server_id(nServerID);
-                pData->set_server_name(strName);
+                pData->set_server_name(strId);
                 pData->set_server_cur_count(0);
                 pData->set_server_ip(strIP);
                 pData->set_server_port(nPort);
@@ -184,13 +184,13 @@ void NFProxyServerToWorldModule::ServerReport()
 			{
 				const int nPort = m_pElementModule->GetPropertyInt32(strId, NFrame::Server::Port());
 				const int nMaxConnect = m_pElementModule->GetPropertyInt32(strId, NFrame::Server::MaxOnline());
-				const std::string& strName = m_pElementModule->GetPropertyString(strId, NFrame::Server::Name());
+				const std::string& strName = m_pElementModule->GetPropertyString(strId, NFrame::Server::ID());
 				const std::string& strIP = m_pElementModule->GetPropertyString(strId, NFrame::Server::IP());
 
 				NFMsg::ServerInfoReport reqMsg;
 
 				reqMsg.set_server_id(nServerID);
-				reqMsg.set_server_name(strName);
+				reqMsg.set_server_name(strId);
                 ////////cur count
 				reqMsg.set_server_cur_count(0);
 				reqMsg.set_server_ip(strIP);
@@ -251,7 +251,7 @@ bool NFProxyServerToWorldModule::AfterInit()
                 const int nPort = m_pElementModule->GetPropertyInt32(strId, NFrame::Server::Port());
                 //const int nMaxConnect = m_pElementModule->GetPropertyInt32(strId, NFrame::Server::MaxOnline());
                 //const int nCpus = m_pElementModule->GetPropertyInt32(strId, NFrame::Server::CpuCount());
-                const std::string& strName = m_pElementModule->GetPropertyString(strId, NFrame::Server::Name());
+                const std::string& strName = m_pElementModule->GetPropertyString(strId, NFrame::Server::ID());
                 const std::string& strIP = m_pElementModule->GetPropertyString(strId, NFrame::Server::IP());
 
                 ConnectData xServerData;
@@ -260,7 +260,7 @@ bool NFProxyServerToWorldModule::AfterInit()
                 xServerData.eServerType = (NF_SERVER_TYPES)nServerType;
                 xServerData.strIP = strIP;
                 xServerData.nPort = nPort;
-                xServerData.strName = strName;
+                xServerData.strName = strId;
 
 				m_pNetClientModule->AddServer(xServerData);
             }

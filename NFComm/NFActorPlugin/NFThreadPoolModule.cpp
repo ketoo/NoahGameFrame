@@ -42,10 +42,13 @@ NFThreadPoolModule::~NFThreadPoolModule()
 
 bool NFThreadPoolModule::Init()
 {
+	/*
+
 	for (int i = 0; i < 10; +i)
 	{
-		mThreadPool.push_back(NF_SHARE_PTR<NFThreadCell>(NF_NEW NFThreadCell()));
+	mThreadPool.push_back(NF_SHARE_PTR<NFThreadCell>(NF_NEW NFThreadCell()));
 	}
+	*/
 
     return true;
 }

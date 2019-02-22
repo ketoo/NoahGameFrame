@@ -97,14 +97,14 @@ void NFProxyServerToGameModule::Register(NFINet* pNet)
                 const int nPort = m_pElementModule->GetPropertyInt32(strId, NFrame::Server::Port());
                 const int nMaxConnect = m_pElementModule->GetPropertyInt32(strId, NFrame::Server::MaxOnline());
                 //const int nCpus = m_pElementModule->GetPropertyInt32(strId, NFrame::Server::CpuCount());
-                const std::string& strName = m_pElementModule->GetPropertyString(strId, NFrame::Server::Name());
+                const std::string& strName = m_pElementModule->GetPropertyString(strId, NFrame::Server::ID());
                 const std::string& strIP = m_pElementModule->GetPropertyString(strId, NFrame::Server::IP());
 
                 NFMsg::ServerInfoReportList xMsg;
                 NFMsg::ServerInfoReport* pData = xMsg.add_server_list();
 
                 pData->set_server_id(nServerID);
-                pData->set_server_name(strName);
+                pData->set_server_name(strId);
                 pData->set_server_cur_count(0);
                 pData->set_server_ip(strIP);
                 pData->set_server_port(nPort);
