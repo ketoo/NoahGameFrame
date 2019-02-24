@@ -36,7 +36,7 @@
 #include "NFComm/NFPluginModule/NFIUserGiftModule.h"
 #include "NFComm/NFPluginModule/NFIElementModule.h"
 #include "NFComm/NFPluginModule/NFIEventModule.h"
-#include "NFComm/NFPluginModule/NFISceneAOIModule.h"
+#include "NFComm/NFPluginModule/NFISceneModule.h"
 #include "NFComm/NFPluginModule/NFIPackModule.h"
 #include "NFComm/NFPluginModule/NFIItemModule.h"
 #include "NFComm/NFPluginModule/NFICommonConfigModule.h"
@@ -79,7 +79,7 @@ protected:
     NFIElementModule* m_pElementModule;
 	NFINetModule* m_pNetModule;
 	NFIEventModule* m_pEventModule;
-	NFISceneAOIModule* m_pSceneAOIModule;
+	NFISceneModule* m_pSceneModule;
 	NFICommonConfigModule* m_pCommonConfigModule;
     //////////////////////////////////////////////////////////////////////////
 };

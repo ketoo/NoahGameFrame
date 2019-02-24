@@ -57,7 +57,7 @@ bool NFGamePVPModule::AfterInit()
 	m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>();
 	m_pLogModule = pPluginManager->FindModule<NFILogModule>();
 	m_pSceneProcessModule = pPluginManager->FindModule<NFISceneProcessModule>();
-	m_pSceneAOIModule = pPluginManager->FindModule<NFISceneAOIModule>();
+	m_pSceneModule = pPluginManager->FindModule<NFISceneModule>();
 	m_pPropertyModule = pPluginManager->FindModule<NFIPropertyModule>();
 	m_pGameServerNet_ServerModule = pPluginManager->FindModule<NFIGameServerNet_ServerModule>();
 	m_pLevelModule = pPluginManager->FindModule<NFILevelModule>();
@@ -68,12 +68,12 @@ bool NFGamePVPModule::AfterInit()
 	m_pKernelModule->AddClassCallBack(NFrame::NPC::ThisName(), this, &NFGamePVPModule::OnNPCClassEvent);
 	m_pKernelModule->AddClassCallBack(NFrame::Player::ThisName(), this, &NFGamePVPModule::OnPlayerClassEvent);
 
-	m_pSceneAOIModule->AddEnterSceneConditionCallBack(this, &NFGamePVPModule::EnterSceneConditionEvent);
+	m_pSceneModule->AddEnterSceneConditionCallBack(this, &NFGamePVPModule::EnterSceneConditionEvent);
 
-	m_pSceneAOIModule->AddBeforeEnterSceneGroupCallBack(this, &NFGamePVPModule::BeforeEnterSceneGroupEvent);
-	m_pSceneAOIModule->AddAfterEnterSceneGroupCallBack(this, &NFGamePVPModule::AfterEnterSceneGroupEvent);
-	m_pSceneAOIModule->AddBeforeLeaveSceneGroupCallBack(this, &NFGamePVPModule::BeforeLeaveSceneGroupEvent);
-	m_pSceneAOIModule->AddAfterLeaveSceneGroupCallBack(this, &NFGamePVPModule::AfterLeaveSceneGroupEvent);
+	m_pSceneModule->AddBeforeEnterSceneGroupCallBack(this, &NFGamePVPModule::BeforeEnterSceneGroupEvent);
+	m_pSceneModule->AddAfterEnterSceneGroupCallBack(this, &NFGamePVPModule::AfterEnterSceneGroupEvent);
+	m_pSceneModule->AddBeforeLeaveSceneGroupCallBack(this, &NFGamePVPModule::BeforeLeaveSceneGroupEvent);
+	m_pSceneModule->AddAfterLeaveSceneGroupCallBack(this, &NFGamePVPModule::AfterLeaveSceneGroupEvent);
 
 	if (!m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_REQ_SEARCH_OPPNENT, this, &NFGamePVPModule::OnReqSearchOpponentProcess)) { return false; }
 	if (!m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_REQ_SWAP_HOME_SCENE, this, &NFGamePVPModule::OnReqSwapHomeSceneProcess)) { return false; }
@@ -89,8 +89,8 @@ bool NFGamePVPModule::AfterInit()
 
 bool NFGamePVPModule::ReadyExecute()
 {
-	m_pSceneAOIModule->RemoveSwapSceneEventCallBack();
-	m_pSceneAOIModule->AddSwapSceneEventCallBack(this, &NFGamePVPModule::OnSceneEvent);
+	m_pSceneModule->RemoveSwapSceneEventCallBack();
+	m_pSceneModule->AddSwapSceneEventCallBack(this, &NFGamePVPModule::OnSceneEvent);
 
 	return false;
 }
@@ -244,7 +244,7 @@ void NFGamePVPModule::OnReqEndPVPOpponentProcess(const NFSOCK nSockIndex, const 
 int NFGamePVPModule::OnSceneEvent(const NFGUID & self, const int nSceneID, const int nGroupID, const int nType, const NFDataList & argList)
 {
 	std::string strTileData;
-	NFVector3 vRelivePos = m_pSceneAOIModule->GetRelivePosition(nSceneID, 0);
+	NFVector3 vRelivePos = m_pSceneModule->GetRelivePosition(nSceneID, 0);
 	NFGUID xViewOpponent = m_pKernelModule->GetPropertyObject(self, NFrame::Player::OpponentID());
 	NFMsg::EPVPType ePvpType = (NFMsg::EPVPType)m_pKernelModule->GetPropertyInt(self, NFrame::Player::PVPType());
 
