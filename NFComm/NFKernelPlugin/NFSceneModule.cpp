@@ -23,9 +23,9 @@
    limitations under the License.
 */
 
-#include "NFSceneAOIModule.h"
+#include "NFSceneModule.h"
 
-bool NFSceneAOIModule::Init()
+bool NFSceneModule::Init()
 {
 	m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>();
 	m_pClassModule = pPluginManager->FindModule<NFIClassModule>();
@@ -33,15 +33,15 @@ bool NFSceneAOIModule::Init()
 	m_pLogModule = pPluginManager->FindModule<NFILogModule>();
 	m_pEventModule = pPluginManager->FindModule<NFIEventModule>();
 
-	m_pKernelModule->RegisterCommonClassEvent(this, &NFSceneAOIModule::OnClassCommonEvent);
-	m_pKernelModule->RegisterCommonPropertyEvent(this, &NFSceneAOIModule::OnPropertyCommonEvent);
-	m_pKernelModule->RegisterCommonRecordEvent(this, &NFSceneAOIModule::OnRecordCommonEvent);
+	m_pKernelModule->RegisterCommonClassEvent(this, &NFSceneModule::OnClassCommonEvent);
+	m_pKernelModule->RegisterCommonPropertyEvent(this, &NFSceneModule::OnPropertyCommonEvent);
+	m_pKernelModule->RegisterCommonRecordEvent(this, &NFSceneModule::OnRecordCommonEvent);
 
 
     return true;
 }
 
-bool NFSceneAOIModule::AfterInit()
+bool NFSceneModule::AfterInit()
 {
 	//init all scene
 	NF_SHARE_PTR<NFIClass> xLogicClass = m_pClassModule->GetElement(NFrame::Scene::ThisName());
@@ -60,7 +60,7 @@ bool NFSceneAOIModule::AfterInit()
     return true;
 }
 
-bool NFSceneAOIModule::BeforeShut()
+bool NFSceneModule::BeforeShut()
 {
 	mvObjectEnterCallback.clear();
 	mvObjectLeaveCallback.clear();
@@ -75,17 +75,17 @@ bool NFSceneAOIModule::BeforeShut()
     return true;
 }
 
-bool NFSceneAOIModule::Shut()
+bool NFSceneModule::Shut()
 {
     return true;
 }
 
-bool NFSceneAOIModule::Execute()
+bool NFSceneModule::Execute()
 {
     return true;
 }
 
-bool NFSceneAOIModule::RequestEnterScene(const NFGUID & self, const int nSceneID, const int nGrupID, const int nType, const NFDataList & argList)
+bool NFSceneModule::RequestEnterScene(const NFGUID & self, const int nSceneID, const int nGrupID, const int nType, const NFDataList & argList)
 {
 	if (nGrupID < 0)
 	{
@@ -135,7 +135,7 @@ bool NFSceneAOIModule::RequestEnterScene(const NFGUID & self, const int nSceneID
 	return true;
 }
 
-bool NFSceneAOIModule::AddSeedData(const int nSceneID, const std::string & strSeedID, const std::string & strConfigID, const NFVector3 & vPos, const int nWeight)
+bool NFSceneModule::AddSeedData(const int nSceneID, const std::string & strSeedID, const std::string & strConfigID, const NFVector3 & vPos, const int nWeight)
 {
 	NF_SHARE_PTR<NFSceneInfo> pSceneInfo = GetElement(nSceneID);
 	if (pSceneInfo)
@@ -146,7 +146,7 @@ bool NFSceneAOIModule::AddSeedData(const int nSceneID, const std::string & strSe
 	return false;
 }
 
-bool NFSceneAOIModule::AddRelivePosition(const int nSceneID, const int nIndex, const NFVector3 & vPos)
+bool NFSceneModule::AddRelivePosition(const int nSceneID, const int nIndex, const NFVector3 & vPos)
 {
 	NF_SHARE_PTR<NFSceneInfo> pSceneInfo = GetElement(nSceneID);
 	if (pSceneInfo)
@@ -157,7 +157,7 @@ bool NFSceneAOIModule::AddRelivePosition(const int nSceneID, const int nIndex, c
 	return false;
 }
 
-NFVector3 NFSceneAOIModule::GetRelivePosition(const int nSceneID, const int nIndex, const bool bRoll)
+NFVector3 NFSceneModule::GetRelivePosition(const int nSceneID, const int nIndex, const bool bRoll)
 {
 	NF_SHARE_PTR<NFSceneInfo> pSceneInfo = GetElement(nSceneID);
 	if (pSceneInfo)
@@ -168,7 +168,7 @@ NFVector3 NFSceneAOIModule::GetRelivePosition(const int nSceneID, const int nInd
 	return NFVector3();
 }
 
-bool NFSceneAOIModule::AddTagPosition(const int nSceneID, const int nIndex, const NFVector3 & vPos)
+bool NFSceneModule::AddTagPosition(const int nSceneID, const int nIndex, const NFVector3 & vPos)
 {
 	NF_SHARE_PTR<NFSceneInfo> pSceneInfo = GetElement(nSceneID);
 	if (pSceneInfo)
@@ -179,7 +179,7 @@ bool NFSceneAOIModule::AddTagPosition(const int nSceneID, const int nIndex, cons
 	return false;
 }
 
-NFVector3 NFSceneAOIModule::GetTagPosition(const int nSceneID, const int nIndex, const bool bRoll)
+NFVector3 NFSceneModule::GetTagPosition(const int nSceneID, const int nIndex, const bool bRoll)
 {
 	NF_SHARE_PTR<NFSceneInfo> pSceneInfo = GetElement(nSceneID);
 	if (pSceneInfo)
@@ -190,90 +190,90 @@ NFVector3 NFSceneAOIModule::GetTagPosition(const int nSceneID, const int nIndex,
 	return NFVector3();
 }
 
-bool NFSceneAOIModule::AddObjectEnterCallBack(const OBJECT_ENTER_EVENT_FUNCTOR_PTR & cb)
+bool NFSceneModule::AddObjectEnterCallBack(const OBJECT_ENTER_EVENT_FUNCTOR_PTR & cb)
 {
 	mvObjectEnterCallback.push_back(cb);
 	return true;
 }
 
-bool NFSceneAOIModule::AddObjectDataFinishedCallBack(const OBJECT_ENTER_EVENT_FUNCTOR_PTR & cb)
+bool NFSceneModule::AddObjectDataFinishedCallBack(const OBJECT_ENTER_EVENT_FUNCTOR_PTR & cb)
 {
 	mvObjectDataFinishedCallBack.push_back(cb);
 	return true;
 }
 
-bool NFSceneAOIModule::AddObjectLeaveCallBack(const OBJECT_LEAVE_EVENT_FUNCTOR_PTR & cb)
+bool NFSceneModule::AddObjectLeaveCallBack(const OBJECT_LEAVE_EVENT_FUNCTOR_PTR & cb)
 {
 	mvObjectLeaveCallback.push_back(cb);
 	return true;
 }
 
-bool NFSceneAOIModule::AddPropertyEnterCallBack(const PROPERTY_ENTER_EVENT_FUNCTOR_PTR & cb)
+bool NFSceneModule::AddPropertyEnterCallBack(const PROPERTY_ENTER_EVENT_FUNCTOR_PTR & cb)
 {
 	mvPropertyEnterCallback.push_back(cb);
 	return true;
 }
 
-bool NFSceneAOIModule::AddRecordEnterCallBack(const RECORD_ENTER_EVENT_FUNCTOR_PTR & cb)
+bool NFSceneModule::AddRecordEnterCallBack(const RECORD_ENTER_EVENT_FUNCTOR_PTR & cb)
 {
 	mvRecordEnterCallback.push_back(cb);
 	return true;
 }
 
-bool NFSceneAOIModule::AddPropertyEventCallBack(const PROPERTY_SINGLE_EVENT_FUNCTOR_PTR & cb)
+bool NFSceneModule::AddPropertyEventCallBack(const PROPERTY_SINGLE_EVENT_FUNCTOR_PTR & cb)
 {
 	mvPropertySingleCallback.push_back(cb);
 	return true;
 }
 
-bool NFSceneAOIModule::AddRecordEventCallBack(const RECORD_SINGLE_EVENT_FUNCTOR_PTR & cb)
+bool NFSceneModule::AddRecordEventCallBack(const RECORD_SINGLE_EVENT_FUNCTOR_PTR & cb)
 {
 	mvRecordSingleCallback.push_back(cb);
 	return true;
 }
 
-bool NFSceneAOIModule::AddEnterSceneConditionCallBack(const SCENE_EVENT_FUNCTOR_PTR & cb)
+bool NFSceneModule::AddEnterSceneConditionCallBack(const SCENE_EVENT_FUNCTOR_PTR & cb)
 {
 	mvEnterSceneConditionCallback.push_back(cb);
 	return true;
 }
 
-bool NFSceneAOIModule::AddBeforeEnterSceneGroupCallBack(const SCENE_EVENT_FUNCTOR_PTR & cb)
+bool NFSceneModule::AddBeforeEnterSceneGroupCallBack(const SCENE_EVENT_FUNCTOR_PTR & cb)
 {
 	mvBeforeEnterSceneCallback.push_back(cb);
 	return true;
 }
 
-bool NFSceneAOIModule::AddAfterEnterSceneGroupCallBack(const SCENE_EVENT_FUNCTOR_PTR & cb)
+bool NFSceneModule::AddAfterEnterSceneGroupCallBack(const SCENE_EVENT_FUNCTOR_PTR & cb)
 {
 	mvAfterEnterSceneCallback.push_back(cb);
 	return true;
 }
 
-bool NFSceneAOIModule::AddSwapSceneEventCallBack(const SCENE_EVENT_FUNCTOR_PTR & cb)
+bool NFSceneModule::AddSwapSceneEventCallBack(const SCENE_EVENT_FUNCTOR_PTR & cb)
 {
 	mvOnSwapSceneCallback.push_back(cb);
 	return true;
 }
 
-bool NFSceneAOIModule::AddBeforeLeaveSceneGroupCallBack(const SCENE_EVENT_FUNCTOR_PTR & cb)
+bool NFSceneModule::AddBeforeLeaveSceneGroupCallBack(const SCENE_EVENT_FUNCTOR_PTR & cb)
 {
 	mvBeforeLeaveSceneCallback.push_back(cb);
 	return true;
 }
 
-bool NFSceneAOIModule::AddAfterLeaveSceneGroupCallBack(const SCENE_EVENT_FUNCTOR_PTR & cb)
+bool NFSceneModule::AddAfterLeaveSceneGroupCallBack(const SCENE_EVENT_FUNCTOR_PTR & cb)
 {
 	mvAfterLeaveSceneCallback.push_back(cb);
 	return true;
 }
 
-bool NFSceneAOIModule::CreateSceneNPC(const int nSceneID, const int nGroupID)
+bool NFSceneModule::CreateSceneNPC(const int nSceneID, const int nGroupID)
 {
 	return CreateSceneNPC(nSceneID, nGroupID, NFDataList());
 }
 
-bool NFSceneAOIModule::CreateSceneNPC(const int nSceneID, const int nGroupID, const NFDataList& argList)
+bool NFSceneModule::CreateSceneNPC(const int nSceneID, const int nGroupID, const NFDataList& argList)
 {
 	NF_SHARE_PTR<NFSceneInfo> pSceneInfo = GetElement(nSceneID);
 	if (!pSceneInfo)
@@ -302,7 +302,7 @@ bool NFSceneAOIModule::CreateSceneNPC(const int nSceneID, const int nGroupID, co
 	return false;
 }
 
-bool NFSceneAOIModule::DestroySceneNPC(const int nSceneID, const int nGroupID)
+bool NFSceneModule::DestroySceneNPC(const int nSceneID, const int nGroupID)
 {
 	NF_SHARE_PTR<NFSceneInfo> pSceneInfo = GetElement(nSceneID);
 	if (pSceneInfo)
@@ -328,14 +328,14 @@ bool NFSceneAOIModule::DestroySceneNPC(const int nSceneID, const int nGroupID)
 	return false;
 }
 
-bool NFSceneAOIModule::RemoveSwapSceneEventCallBack()
+bool NFSceneModule::RemoveSwapSceneEventCallBack()
 {
 	mvOnSwapSceneCallback.clear();
 
 	return true;
 }
 
-bool NFSceneAOIModule::SwitchScene(const NFGUID& self, const int nTargetSceneID, const int nTargetGroupID, const int nType, const NFVector3 v, const float fOrient, const NFDataList& arg)
+bool NFSceneModule::SwitchScene(const NFGUID& self, const int nTargetSceneID, const int nTargetGroupID, const int nType, const NFVector3 v, const float fOrient, const NFDataList& arg)
 {
 	NF_SHARE_PTR<NFIObject> pObject = m_pKernelModule->GetObject(self);
 	if (pObject)
@@ -397,7 +397,7 @@ bool NFSceneAOIModule::SwitchScene(const NFGUID& self, const int nTargetSceneID,
 	return false;
 }
 
-int NFSceneAOIModule::OnPropertyCommonEvent(const NFGUID & self, const std::string & strPropertyName, const NFData & oldVar, const NFData & newVar)
+int NFSceneModule::OnPropertyCommonEvent(const NFGUID & self, const std::string & strPropertyName, const NFData & oldVar, const NFData & newVar)
 {
 	const std::string& strClassName = m_pKernelModule->GetPropertyString(self, NFrame::IObject::ClassName());
 	if (strClassName == NFrame::Player::ThisName())
@@ -427,7 +427,7 @@ int NFSceneAOIModule::OnPropertyCommonEvent(const NFGUID & self, const std::stri
 	return 0;
 }
 
-int NFSceneAOIModule::OnRecordCommonEvent(const NFGUID & self, const RECORD_EVENT_DATA & xEventData, const NFData & oldVar, const NFData & newVar)
+int NFSceneModule::OnRecordCommonEvent(const NFGUID & self, const RECORD_EVENT_DATA & xEventData, const NFData & oldVar, const NFData & newVar)
 {
 	const std::string& strRecordName = xEventData.strRecordName;
 
@@ -446,7 +446,7 @@ int NFSceneAOIModule::OnRecordCommonEvent(const NFGUID & self, const RECORD_EVEN
 	return 0;
 }
 
-int NFSceneAOIModule::OnClassCommonEvent(const NFGUID & self, const std::string & strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFDataList & var)
+int NFSceneModule::OnClassCommonEvent(const NFGUID & self, const std::string & strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFDataList & var)
 {
 	if (CLASS_OBJECT_EVENT::COE_DESTROY == eClassEvent)
 	{
@@ -515,7 +515,7 @@ int NFSceneAOIModule::OnClassCommonEvent(const NFGUID & self, const std::string 
 	return 0;
 }
 
-int NFSceneAOIModule::OnPlayerGroupEvent(const NFGUID & self, const std::string & strPropertyName, const NFData & oldVar, const NFData & newVar)
+int NFSceneModule::OnPlayerGroupEvent(const NFGUID & self, const std::string & strPropertyName, const NFData & oldVar, const NFData & newVar)
 {
 	//this event only happened in the same scene
 	int nSceneID = m_pKernelModule->GetPropertyInt32(self, NFrame::IObject::SceneID());
@@ -606,7 +606,7 @@ int NFSceneAOIModule::OnPlayerGroupEvent(const NFGUID & self, const std::string 
 	return 0;
 }
 
-int NFSceneAOIModule::OnPlayerSceneEvent(const NFGUID & self, const std::string & strPropertyName, const NFData & oldVar, const NFData & newVar)
+int NFSceneModule::OnPlayerSceneEvent(const NFGUID & self, const std::string & strPropertyName, const NFData & oldVar, const NFData & newVar)
 {
 	//no more player in this group of this scene at the same time
 	//so now only one player(that you) in this group of this scene
@@ -618,7 +618,7 @@ int NFSceneAOIModule::OnPlayerSceneEvent(const NFGUID & self, const std::string 
 	return 0;
 }
 
-int NFSceneAOIModule::GetBroadCastObject(const NFGUID & self, const std::string & strPropertyName, const bool bTable, NFDataList & valueObject)
+int NFSceneModule::GetBroadCastObject(const NFGUID & self, const std::string & strPropertyName, const bool bTable, NFDataList & valueObject)
 {
 	int nObjectContainerID = m_pKernelModule->GetPropertyInt32(self, NFrame::IObject::SceneID());
 	int nObjectGroupID = m_pKernelModule->GetPropertyInt32(self, NFrame::IObject::GroupID());
@@ -691,7 +691,7 @@ int NFSceneAOIModule::GetBroadCastObject(const NFGUID & self, const std::string 
 	return valueObject.GetCount();
 }
 
-int NFSceneAOIModule::EnterSceneCondition(const NFGUID & self, const int nSceneID, const int nGroupID, const int nType, const NFDataList & argList)
+int NFSceneModule::EnterSceneCondition(const NFGUID & self, const int nSceneID, const int nGroupID, const int nType, const NFDataList & argList)
 {
 	std::vector<SCENE_EVENT_FUNCTOR_PTR>::iterator it = mvEnterSceneConditionCallback.begin();
 	for (; it != mvEnterSceneConditionCallback.end(); it++)
@@ -707,7 +707,7 @@ int NFSceneAOIModule::EnterSceneCondition(const NFGUID & self, const int nSceneI
 	return 0;
 }
 
-int NFSceneAOIModule::AfterEnterSceneGroup(const NFGUID & self, const int nSceneID, const int nGroupID, const int nType, const NFDataList & argList)
+int NFSceneModule::AfterEnterSceneGroup(const NFGUID & self, const int nSceneID, const int nGroupID, const int nType, const NFDataList & argList)
 {
 	std::vector<SCENE_EVENT_FUNCTOR_PTR>::iterator it = mvAfterEnterSceneCallback.begin();
 	for (; it != mvAfterEnterSceneCallback.end(); it++)
@@ -720,7 +720,7 @@ int NFSceneAOIModule::AfterEnterSceneGroup(const NFGUID & self, const int nScene
 	return 0;
 }
 
-int NFSceneAOIModule::BeforeLeaveSceneGroup(const NFGUID & self, const int nSceneID, const int nGroupID, const int nType, const NFDataList & argList)
+int NFSceneModule::BeforeLeaveSceneGroup(const NFGUID & self, const int nSceneID, const int nGroupID, const int nType, const NFDataList & argList)
 {
 	std::vector<SCENE_EVENT_FUNCTOR_PTR>::iterator it = mvBeforeLeaveSceneCallback.begin();
 	for (; it != mvBeforeLeaveSceneCallback.end(); it++)
@@ -733,7 +733,7 @@ int NFSceneAOIModule::BeforeLeaveSceneGroup(const NFGUID & self, const int nScen
 	return 0;
 }
 
-int NFSceneAOIModule::AfterLeaveSceneGroup(const NFGUID & self, const int nSceneID, const int nGroupID, const int nType, const NFDataList & argList)
+int NFSceneModule::AfterLeaveSceneGroup(const NFGUID & self, const int nSceneID, const int nGroupID, const int nType, const NFDataList & argList)
 {
 	std::vector<SCENE_EVENT_FUNCTOR_PTR>::iterator it = mvAfterLeaveSceneCallback.begin();
 	for (; it != mvAfterLeaveSceneCallback.end(); it++)
@@ -746,7 +746,7 @@ int NFSceneAOIModule::AfterLeaveSceneGroup(const NFGUID & self, const int nScene
 	return 0;
 }
 
-int NFSceneAOIModule::OnSwapSceneEvent(const NFGUID & self, const int nSceneID, const int nGroupID, const int nType, const NFDataList & argList)
+int NFSceneModule::OnSwapSceneEvent(const NFGUID & self, const int nSceneID, const int nGroupID, const int nType, const NFDataList & argList)
 {
 	std::vector<SCENE_EVENT_FUNCTOR_PTR>::iterator it = mvOnSwapSceneCallback.begin();
 	for (; it != mvOnSwapSceneCallback.end(); it++)
@@ -758,7 +758,7 @@ int NFSceneAOIModule::OnSwapSceneEvent(const NFGUID & self, const int nSceneID, 
 	return 0;
 }
 
-int NFSceneAOIModule::BeforeEnterSceneGroup(const NFGUID & self, const int nSceneID, const int nGroupID, const int nType, const NFDataList & argList)
+int NFSceneModule::BeforeEnterSceneGroup(const NFGUID & self, const int nSceneID, const int nGroupID, const int nType, const NFDataList & argList)
 {
 	std::vector<SCENE_EVENT_FUNCTOR_PTR>::iterator it = mvBeforeEnterSceneCallback.begin();
 	for (; it != mvBeforeEnterSceneCallback.end(); it++)
@@ -770,7 +770,7 @@ int NFSceneAOIModule::BeforeEnterSceneGroup(const NFGUID & self, const int nScen
 	return 0;
 }
 
-int NFSceneAOIModule::OnObjectListEnter(const NFDataList & self, const NFDataList & argVar)
+int NFSceneModule::OnObjectListEnter(const NFDataList & self, const NFDataList & argVar)
 {
 	std::vector<OBJECT_ENTER_EVENT_FUNCTOR_PTR>::iterator it = mvObjectEnterCallback.begin();
 	for (; it != mvObjectEnterCallback.end(); it++)
@@ -783,7 +783,7 @@ int NFSceneAOIModule::OnObjectListEnter(const NFDataList & self, const NFDataLis
 	return 0;
 }
 
-int NFSceneAOIModule::OnObjectListEnterFinished(const NFDataList & self, const NFDataList & argVar)
+int NFSceneModule::OnObjectListEnterFinished(const NFDataList & self, const NFDataList & argVar)
 {
 	std::vector<OBJECT_ENTER_EVENT_FUNCTOR_PTR>::iterator it = mvObjectDataFinishedCallBack.begin();
 	for (; it != mvObjectDataFinishedCallBack.end(); it++)
@@ -796,7 +796,7 @@ int NFSceneAOIModule::OnObjectListEnterFinished(const NFDataList & self, const N
 	return 0;
 }
 
-int NFSceneAOIModule::OnObjectListLeave(const NFDataList & self, const NFDataList & argVar)
+int NFSceneModule::OnObjectListLeave(const NFDataList & self, const NFDataList & argVar)
 {
 	std::vector<OBJECT_LEAVE_EVENT_FUNCTOR_PTR>::iterator it = mvObjectLeaveCallback.begin();
 	for (; it != mvObjectLeaveCallback.end(); it++)
@@ -809,7 +809,7 @@ int NFSceneAOIModule::OnObjectListLeave(const NFDataList & self, const NFDataLis
 	return 0;
 }
 
-int NFSceneAOIModule::OnPropertyEnter(const NFDataList & argVar, const NFGUID & self)
+int NFSceneModule::OnPropertyEnter(const NFDataList & argVar, const NFGUID & self)
 {
 	std::vector<PROPERTY_ENTER_EVENT_FUNCTOR_PTR>::iterator it = mvPropertyEnterCallback.begin();
 	for (; it != mvPropertyEnterCallback.end(); it++)
@@ -822,7 +822,7 @@ int NFSceneAOIModule::OnPropertyEnter(const NFDataList & argVar, const NFGUID & 
 	return 0;
 }
 
-int NFSceneAOIModule::OnRecordEnter(const NFDataList & argVar, const NFGUID & self)
+int NFSceneModule::OnRecordEnter(const NFDataList & argVar, const NFGUID & self)
 {
 	std::vector<RECORD_ENTER_EVENT_FUNCTOR_PTR>::iterator it = mvRecordEnterCallback.begin();
 	for (; it != mvRecordEnterCallback.end(); it++)
@@ -835,7 +835,7 @@ int NFSceneAOIModule::OnRecordEnter(const NFDataList & argVar, const NFGUID & se
 	return 0;
 }
 
-int NFSceneAOIModule::OnPropertyEvent(const NFGUID & self, const std::string & strProperty, const NFData & oldVar, const NFData & newVar, const NFDataList& argVar)
+int NFSceneModule::OnPropertyEvent(const NFGUID & self, const std::string & strProperty, const NFData & oldVar, const NFData & newVar, const NFDataList& argVar)
 {
 	std::vector<PROPERTY_SINGLE_EVENT_FUNCTOR_PTR>::iterator it = mvPropertySingleCallback.begin();
 	for (; it != mvPropertySingleCallback.end(); it++)
@@ -848,7 +848,7 @@ int NFSceneAOIModule::OnPropertyEvent(const NFGUID & self, const std::string & s
 	return 0;
 }
 
-int NFSceneAOIModule::OnRecordEvent(const NFGUID & self, const std::string& strProperty, const RECORD_EVENT_DATA & xEventData, const NFData & oldVar, const NFData & newVar, const NFDataList& argVar)
+int NFSceneModule::OnRecordEvent(const NFGUID & self, const std::string& strProperty, const RECORD_EVENT_DATA & xEventData, const NFData & oldVar, const NFData & newVar, const NFDataList& argVar)
 {
 	std::vector<RECORD_SINGLE_EVENT_FUNCTOR_PTR>::iterator it = mvRecordSingleCallback.begin();
 	for (; it != mvRecordSingleCallback.end(); it++)

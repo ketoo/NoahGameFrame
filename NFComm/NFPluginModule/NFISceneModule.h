@@ -268,12 +268,12 @@ typedef std::function<int(const NFGUID&, const int, const int, const int, const 
 typedef NF_SHARE_PTR<SCENE_EVENT_FUNCTOR> SCENE_EVENT_FUNCTOR_PTR;
 
 
-class NFISceneAOIModule
+class NFISceneModule
     : public NFIModule,
   public NFMapEx<int, NFSceneInfo>
 {
 public:
-    virtual ~NFISceneAOIModule()
+    virtual ~NFISceneModule()
     {
         ClearAll();
     }

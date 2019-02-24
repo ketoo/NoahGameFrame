@@ -46,7 +46,7 @@
 #include "NFComm/NFPluginModule/NFILogModule.h"
 #include "NFComm/NFPluginModule/NFIPluginManager.h"
 #include "NFComm/NFPluginModule/NFIEventModule.h"
-#include "NFComm/NFPluginModule/NFISceneAOIModule.h"
+#include "NFComm/NFPluginModule/NFISceneModule.h"
 #include "NFComm/NFPluginModule/NFIGameServerNet_ServerModule.h"
 
 class NFSceneProcessModule
@@ -63,6 +63,7 @@ public:
     virtual bool Shut();
     virtual bool Execute();
     virtual bool AfterInit();
+	virtual bool ReadyExecute();
 
 	virtual bool RequestEnterScene(const NFGUID & self, const int nSceneID, const int nType, const NFDataList & argList);
 	virtual bool RequestEnterScene(const NFGUID& self, const int nSceneID, const int nGroupID, const int nType, const NFDataList& argList);
@@ -89,7 +90,7 @@ private:
     NFIKernelModule* m_pKernelModule;
     NFILogModule* m_pLogModule;
 	NFIEventModule* m_pEventModule;
-	NFISceneAOIModule* m_pSceneAOIModule;
+	NFISceneModule* m_pSceneModule;
     NFIGameServerNet_ServerModule* m_pGameServerNet_ServerModule;
 };
 

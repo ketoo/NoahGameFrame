@@ -35,7 +35,7 @@ bool NFSwitchGameServerModule::Init()
     m_pSceneProcessModule = pPluginManager->FindModule<NFISceneProcessModule>();
     m_pPropertyModule = pPluginManager->FindModule<NFIPropertyModule>();
     m_pNetClientModule = pPluginManager->FindModule<NFINetClientModule>();
-    m_pSceneAOIModule = pPluginManager->FindModule<NFISceneAOIModule>();
+    m_pSceneModule = pPluginManager->FindModule<NFISceneModule>();
     m_pGameServerNet_ServerModule = pPluginManager->FindModule<NFIGameServerNet_ServerModule>();
 
     return true;
@@ -101,7 +101,7 @@ void NFSwitchGameServerModule::OnReqSwitchServer(const NFSOCK nSockIndex, const 
 
     m_pKernelModule->DoEvent(pObject->Self(), NFrame::Player::ThisName(), CLASS_OBJECT_EVENT::COE_CREATE_FINISH, NFDataList());
 
-    m_pSceneAOIModule->RequestEnterScene(pObject->Self(), nSceneID, nGroup, 0, NFDataList());
+    m_pSceneModule->RequestEnterScene(pObject->Self(), nSceneID, nGroup, 0, NFDataList());
     //m_pEventModule->DoEvent(pObject->Self(), NFED_ON_CLIENT_ENTER_SCENE, varEntry);
 
     if (!m_pGameServerNet_ServerModule->AddPlayerGateInfo(nPlayerID, nClientID, nGateID))

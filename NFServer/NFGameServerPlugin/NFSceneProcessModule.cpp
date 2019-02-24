@@ -34,7 +34,7 @@ bool NFSceneProcessModule::Init()
 	m_pClassModule = pPluginManager->FindModule<NFIClassModule>();
 	m_pLogModule = pPluginManager->FindModule<NFILogModule>();
 	m_pEventModule = pPluginManager->FindModule<NFIEventModule>();
-	m_pSceneAOIModule = pPluginManager->FindModule<NFISceneAOIModule>();
+	m_pSceneModule = pPluginManager->FindModule<NFISceneModule>();
 	m_pGameServerNet_ServerModule = pPluginManager->FindModule<NFIGameServerNet_ServerModule>();
 
     return true;
@@ -54,17 +54,22 @@ bool NFSceneProcessModule::AfterInit()
 {
     m_pKernelModule->AddClassCallBack(NFrame::Player::ThisName(), this, &NFSceneProcessModule::OnObjectClassEvent);
 
-	m_pSceneAOIModule->AddEnterSceneConditionCallBack(this, &NFSceneProcessModule::EnterSceneConditionEvent);
+	m_pSceneModule->AddEnterSceneConditionCallBack(this, &NFSceneProcessModule::EnterSceneConditionEvent);
 
-	m_pSceneAOIModule->AddBeforeEnterSceneGroupCallBack(this, &NFSceneProcessModule::BeforeEnterSceneGroupEvent);
-	m_pSceneAOIModule->AddAfterEnterSceneGroupCallBack(this, &NFSceneProcessModule::AfterEnterSceneGroupEvent);
-	m_pSceneAOIModule->AddBeforeLeaveSceneGroupCallBack(this, &NFSceneProcessModule::BeforeLeaveSceneGroupEvent);
-	m_pSceneAOIModule->AddAfterLeaveSceneGroupCallBack(this, &NFSceneProcessModule::AfterLeaveSceneGroupEvent);
+	m_pSceneModule->AddBeforeEnterSceneGroupCallBack(this, &NFSceneProcessModule::BeforeEnterSceneGroupEvent);
+	m_pSceneModule->AddAfterEnterSceneGroupCallBack(this, &NFSceneProcessModule::AfterEnterSceneGroupEvent);
+	m_pSceneModule->AddBeforeLeaveSceneGroupCallBack(this, &NFSceneProcessModule::BeforeLeaveSceneGroupEvent);
+	m_pSceneModule->AddAfterLeaveSceneGroupCallBack(this, &NFSceneProcessModule::AfterLeaveSceneGroupEvent);
     //////////////////////////////////////////////////////////////////////////
 
-    NF_SHARE_PTR<NFIClass> xLogicClass =  m_pClassModule->GetElement(NFrame::Scene::ThisName());
-    if (xLogicClass)
-    {
+    return true;
+}
+
+bool NFSceneProcessModule::ReadyExecute()
+{
+	NF_SHARE_PTR<NFIClass> xLogicClass = m_pClassModule->GetElement(NFrame::Scene::ThisName());
+	if (xLogicClass)
+	{
 		const std::vector<std::string>& strIdList = xLogicClass->GetIDList();
 		for (int i = 0; i < strIdList.size(); ++i)
 		{
@@ -75,9 +80,9 @@ bool NFSceneProcessModule::AfterInit()
 			//create second
 			CreateSceneBaseGroup(strId);
 		}
-    }
+	}
 
-    return true;
+	return true;
 }
 
 bool NFSceneProcessModule::RequestEnterScene(const NFGUID & self, const int nSceneID, const int nType, const NFDataList & argList)
@@ -93,21 +98,21 @@ bool NFSceneProcessModule::RequestEnterScene(const NFGUID & self, const int nSce
 		int nNewGroupID = m_pKernelModule->RequestGroupScene(nSceneID);
 		if (nNewGroupID > 0)
 		{
-			return m_pSceneAOIModule->RequestEnterScene(self, nSceneID, nNewGroupID, nType, argList);
+			return m_pSceneModule->RequestEnterScene(self, nSceneID, nNewGroupID, nType, argList);
 		}
 	}
 	else if (eSceneType == E_SCENE_TYPE::SCENE_TYPE_MULTI_CLONE_SCENE)
 	{
 		if (nGroupID > 0)
 		{
-			return m_pSceneAOIModule->RequestEnterScene(self, nSceneID, nGroupID, nType, argList);
+			return m_pSceneModule->RequestEnterScene(self, nSceneID, nGroupID, nType, argList);
 		}
 		else
 		{
 			int nNewGroupID = m_pKernelModule->RequestGroupScene(nSceneID);
 			if (nNewGroupID > 0)
 			{
-				return m_pSceneAOIModule->RequestEnterScene(self, nSceneID, nNewGroupID, nType, argList);
+				return m_pSceneModule->RequestEnterScene(self, nSceneID, nNewGroupID, nType, argList);
 			}
 		}
 		
@@ -122,7 +127,7 @@ bool NFSceneProcessModule::RequestEnterScene(const NFGUID & self, const int nSce
 			m_pKernelModule->GetGroupObjectList(nSceneID, i, xList, true);
 			if (xList.GetCount() < nMaxPlayer)
 			{
-				return m_pSceneAOIModule->RequestEnterScene(self, nSceneID, i, nType, argList);
+				return m_pSceneModule->RequestEnterScene(self, nSceneID, i, nType, argList);
 			}
 		}
 
@@ -136,7 +141,7 @@ bool NFSceneProcessModule::RequestEnterScene(const NFGUID & self, const int nSce
 
 		}
 
-		return m_pSceneAOIModule->RequestEnterScene(self, nSceneID, 1, nType, argList);
+		return m_pSceneModule->RequestEnterScene(self, nSceneID, 1, nType, argList);
 	}
 	return false;
 }
@@ -215,7 +220,7 @@ int NFSceneProcessModule::BeforeEnterSceneGroupEvent(const NFGUID & self, const 
 		NFDataList xDataList;
 		xDataList << NFrame::NPC::AIOwnerID();
 		xDataList << self;
-		m_pSceneAOIModule->CreateSceneNPC(nSceneID, nGroupID, xDataList);
+		m_pSceneModule->CreateSceneNPC(nSceneID, nGroupID, xDataList);
 	}
 	else if (eSceneType  == E_SCENE_TYPE::SCENE_TYPE_MULTI_CLONE_SCENE)
 	{
@@ -225,7 +230,7 @@ int NFSceneProcessModule::BeforeEnterSceneGroupEvent(const NFGUID & self, const 
 			NFDataList xDataList;
 			xDataList << NFrame::NPC::AIOwnerID();
 			xDataList << self;
-			m_pSceneAOIModule->CreateSceneNPC(nSceneID, nGroupID, xDataList);
+			m_pSceneModule->CreateSceneNPC(nSceneID, nGroupID, xDataList);
 		}
 	}
 
@@ -258,7 +263,7 @@ bool NFSceneProcessModule::LoadSceneResource(const std::string& strSceneIDName)
         float fSeedY = lexical_cast<float>(pSeedFileNode->first_attribute("Y")->value());
         float fSeedZ = lexical_cast<float>(pSeedFileNode->first_attribute("Z")->value());
 		int nWeight = lexical_cast<int>(pSeedFileNode->first_attribute("Weight")->value());
-		m_pSceneAOIModule->AddSeedData(nSceneID, strSeedID, strConfigID, NFVector3(fSeedX, fSeedY, fSeedZ), nWeight);
+		m_pSceneModule->AddSeedData(nSceneID, strSeedID, strConfigID, NFVector3(fSeedX, fSeedY, fSeedZ), nWeight);
 
 	}
 
@@ -277,7 +282,7 @@ bool NFSceneProcessModule::LoadSceneResource(const std::string& strSceneIDName)
 				float fPosX = lexical_cast<float>(xPosition.String(0));
 				float fPosY = lexical_cast<float>(xPosition.String(1));
 				float fPosZ = lexical_cast<float>(xPosition.String(2));
-				m_pSceneAOIModule->AddRelivePosition(nSceneID, i, NFVector3(fPosX, fPosY, fPosZ));
+				m_pSceneModule->AddRelivePosition(nSceneID, i, NFVector3(fPosX, fPosY, fPosZ));
 			}
 		}
 	}
@@ -297,7 +302,7 @@ bool NFSceneProcessModule::LoadSceneResource(const std::string& strSceneIDName)
 				float fPosX = lexical_cast<float>(xPosition.String(0));
 				float fPosY = lexical_cast<float>(xPosition.String(1));
 				float fPosZ = lexical_cast<float>(xPosition.String(2));
-				m_pSceneAOIModule->AddTagPosition(nSceneID, i, NFVector3(fPosX, fPosY, fPosZ));
+				m_pSceneModule->AddTagPosition(nSceneID, i, NFVector3(fPosX, fPosY, fPosZ));
 			}
 		}
 	}
@@ -318,7 +323,14 @@ bool NFSceneProcessModule::CreateSceneBaseGroup(const std::string & strSceneIDNa
 		for (int i = 0; i < nMaxGroup; ++i)
 		{
 			int nGroupID = m_pKernelModule->RequestGroupScene(nSceneID);
-			m_pSceneAOIModule->CreateSceneNPC(nSceneID, nGroupID);
+			if (nGroupID>= 0)
+			{
+				m_pSceneModule->CreateSceneNPC(nSceneID, nGroupID);
+			}
+			else
+			{
+				m_pLogModule->LogError("CreateSceneBaseGroup error " + strSceneIDName);
+			}
 		}
 
 		return true;
