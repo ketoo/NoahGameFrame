@@ -36,7 +36,7 @@
 #include "NFComm/NFPluginModule/NFIGuildRedisModule.h"
 #include "NFComm/NFPluginModule/NFIGameServerNet_ServerModule.h"
 #include "NFComm/NFPluginModule/NFIPlayerRedisModule.h"
-#include "NFComm/NFPluginModule/NFISceneAOIModule.h"
+#include "NFComm/NFPluginModule/NFISceneModule.h"
 
 class NFTileModule
     : public NFITileModule
@@ -125,7 +125,7 @@ private:
 	NFIKernelModule* m_pKernelModule;
 	NFIClassModule* m_pLogicClassModule;
 	NFIElementModule* m_pElementModule;
-	NFISceneAOIModule* m_pSceneAOIModule;
+	NFISceneModule* m_pSceneModule;
 	//NFIPlayerRedisModule* m_pPlayerRedisModule;
 	NFIGameServerNet_ServerModule* m_pGameServerNet_ServerModule;
 };
