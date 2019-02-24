@@ -39,7 +39,7 @@
 #include "NFComm/NFPluginModule/NFIKernelModule.h"
 #include "NFComm/NFPluginModule/NFIClassModule.h"
 #include "NFComm/NFPluginModule/NFIElementModule.h"
-#include "NFComm/NFPluginModule/NFISceneAOIModule.h"
+#include "NFComm/NFPluginModule/NFISceneModule.h"
 #include "NFComm/NFPluginModule/NFIScheduleModule.h"
 #include "NFComm/NFPluginModule/NFIEventModule.h"
 
@@ -202,7 +202,7 @@ private:
     NFGUID mnCurExeObject;
     NFINT64 nLastTime;
 
-	NFISceneAOIModule* m_pSceneModule;
+	NFISceneModule* m_pSceneModule;
     NFILogModule* m_pLogModule;
     NFIClassModule* m_pClassModule;
     NFIElementModule* m_pElementModule;

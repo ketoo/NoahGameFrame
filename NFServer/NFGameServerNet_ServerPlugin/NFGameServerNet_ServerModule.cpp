@@ -36,7 +36,7 @@ bool NFGameServerNet_ServerModule::Init()
 	m_pElementModule = pPluginManager->FindModule<NFIElementModule>();
 	m_pLogModule = pPluginManager->FindModule<NFILogModule>();
 	m_pEventModule = pPluginManager->FindModule<NFIEventModule>();
-	m_pSceneAOIModule = pPluginManager->FindModule<NFISceneAOIModule>();
+	m_pSceneModule = pPluginManager->FindModule<NFISceneModule>();
 
 	m_pNetModule = pPluginManager->FindModule<NFINetModule>();
 	m_pNetClientModule = pPluginManager->FindModule<NFINetClientModule>();
@@ -97,15 +97,15 @@ bool NFGameServerNet_ServerModule::AfterInit()
 
 	m_pKernelModule->AddClassCallBack(NFrame::Player::ThisName(), this, &NFGameServerNet_ServerModule::OnObjectClassEvent);
 
-	m_pSceneAOIModule->AddObjectEnterCallBack(this, &NFGameServerNet_ServerModule::OnObjectListEnter);
-	m_pSceneAOIModule->AddObjectDataFinishedCallBack(this, &NFGameServerNet_ServerModule::OnObjectDataFinished);
-	m_pSceneAOIModule->AddObjectLeaveCallBack(this, &NFGameServerNet_ServerModule::OnObjectListLeave);
-	m_pSceneAOIModule->AddPropertyEnterCallBack(this, &NFGameServerNet_ServerModule::OnPropertyEnter);
-	m_pSceneAOIModule->AddRecordEnterCallBack(this, &NFGameServerNet_ServerModule::OnRecordEnter);
-	m_pSceneAOIModule->AddPropertyEventCallBack(this, &NFGameServerNet_ServerModule::OnPropertyEvent);
-	m_pSceneAOIModule->AddRecordEventCallBack(this, &NFGameServerNet_ServerModule::OnRecordEvent);
+	m_pSceneModule->AddObjectEnterCallBack(this, &NFGameServerNet_ServerModule::OnObjectListEnter);
+	m_pSceneModule->AddObjectDataFinishedCallBack(this, &NFGameServerNet_ServerModule::OnObjectDataFinished);
+	m_pSceneModule->AddObjectLeaveCallBack(this, &NFGameServerNet_ServerModule::OnObjectListLeave);
+	m_pSceneModule->AddPropertyEnterCallBack(this, &NFGameServerNet_ServerModule::OnPropertyEnter);
+	m_pSceneModule->AddRecordEnterCallBack(this, &NFGameServerNet_ServerModule::OnRecordEnter);
+	m_pSceneModule->AddPropertyEventCallBack(this, &NFGameServerNet_ServerModule::OnPropertyEvent);
+	m_pSceneModule->AddRecordEventCallBack(this, &NFGameServerNet_ServerModule::OnRecordEvent);
 
-	m_pSceneAOIModule->AddSwapSceneEventCallBack(this, &NFGameServerNet_ServerModule::OnSceneEvent);
+	m_pSceneModule->AddSwapSceneEventCallBack(this, &NFGameServerNet_ServerModule::OnSceneEvent);
 
 	/////////////////////////////////////////////////////////////////////////
 
@@ -268,7 +268,7 @@ void NFGameServerNet_ServerModule::OnClientEnterGameProcess(const NFSOCK nSockIn
 		return;
 	}
 
-	m_pSceneAOIModule->RequestEnterScene(pObject->Self(), nSceneID, 1, 0, NFDataList());
+	m_pSceneModule->RequestEnterScene(pObject->Self(), nSceneID, 1, 0, NFDataList());
 }
 
 void NFGameServerNet_ServerModule::OnClientLeaveGameProcess(const NFSOCK nSockIndex, const int nMsgID, const char *msg,
@@ -1233,7 +1233,7 @@ int NFGameServerNet_ServerModule::OnObjectClassEvent(const NFGUID& self, const s
 
 int NFGameServerNet_ServerModule::OnSceneEvent(const NFGUID & self, const int nSceneID, const int nGroupID, const int nType, const NFDataList& argList)
 {
-	NFVector3 vRelivePos = m_pSceneAOIModule->GetRelivePosition(nSceneID, 0);
+	NFVector3 vRelivePos = m_pSceneModule->GetRelivePosition(nSceneID, 0);
 
 	NFMsg::ReqAckSwapScene xAckSwapScene;
 	xAckSwapScene.set_scene_id(nSceneID);

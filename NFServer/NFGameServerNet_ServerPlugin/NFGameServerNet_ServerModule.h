@@ -35,7 +35,7 @@
 #include "NFComm/NFPluginModule/NFISceneProcessModule.h"
 #include "NFComm/NFPluginModule/NFIElementModule.h"
 #include "NFComm/NFPluginModule/NFIEventModule.h"
-#include "NFComm/NFPluginModule/NFISceneAOIModule.h"
+#include "NFComm/NFPluginModule/NFISceneModule.h"
 #include "NFComm/NFPluginModule/NFIGameServerToWorldModule.h"
 #include "NFComm/NFPluginModule/NFIGameServerNet_ServerModule.h"
 #include "NFComm/NFPluginModule/NFIGameServerNet_ServerModule.h"
@@ -148,7 +148,7 @@ private:
     NFIElementModule* m_pElementModule;
 	NFINetModule* m_pNetModule;
 	NFIEventModule* m_pEventModule;
-	NFISceneAOIModule* m_pSceneAOIModule;
+	NFISceneModule* m_pSceneModule;
     NFINetClientModule* m_pNetClientModule;
 };
 #endif

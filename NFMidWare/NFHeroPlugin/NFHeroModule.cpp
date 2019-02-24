@@ -55,7 +55,7 @@ bool NFHeroModule::AfterInit()
 	m_pElementModule = pPluginManager->FindModule<NFIElementModule>();
 	m_pSceneProcessModule = pPluginManager->FindModule<NFISceneProcessModule>();
 	m_pHeroPropertyModule = pPluginManager->FindModule<NFIHeroPropertyModule>();
-	m_pSceneAOIModule = pPluginManager->FindModule<NFISceneAOIModule>();
+	m_pSceneModule = pPluginManager->FindModule<NFISceneModule>();
 	m_pLogModule = pPluginManager->FindModule<NFILogModule>();
 
 
@@ -64,10 +64,10 @@ bool NFHeroModule::AfterInit()
 
 	m_pKernelModule->AddClassCallBack(NFrame::Player::ThisName(), this, &NFHeroModule::OnPlayerClassEvent);
 
-	m_pSceneAOIModule->AddBeforeEnterSceneGroupCallBack(this, &NFHeroModule::BeforeEnterSceneGroupEvent);
-	m_pSceneAOIModule->AddAfterEnterSceneGroupCallBack(this, &NFHeroModule::AfterEnterSceneGroupEvent);
-	m_pSceneAOIModule->AddBeforeLeaveSceneGroupCallBack(this, &NFHeroModule::BeforeLeaveSceneGroupEvent);
-	m_pSceneAOIModule->AddAfterLeaveSceneGroupCallBack(this, &NFHeroModule::AfterLeaveSceneGroupEvent);
+	m_pSceneModule->AddBeforeEnterSceneGroupCallBack(this, &NFHeroModule::BeforeEnterSceneGroupEvent);
+	m_pSceneModule->AddAfterEnterSceneGroupCallBack(this, &NFHeroModule::AfterEnterSceneGroupEvent);
+	m_pSceneModule->AddBeforeLeaveSceneGroupCallBack(this, &NFHeroModule::BeforeLeaveSceneGroupEvent);
+	m_pSceneModule->AddAfterLeaveSceneGroupCallBack(this, &NFHeroModule::AfterLeaveSceneGroupEvent);
 
 	return true;
 }

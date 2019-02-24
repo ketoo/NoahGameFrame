@@ -23,31 +23,31 @@
    limitations under the License.
 */
 
-#ifndef NF_SCENE_AOI__MODULE_H
-#define NF_SCENE_AOI__MODULE_H
+#ifndef NF_SCENE_MODULE_H
+#define NF_SCENE_MODULE_H
 
 #include <iostream>
 #include "NFComm/NFCore/NFIObject.h"
 #include "NFComm/NFMessageDefine/NFProtocolDefine.hpp"
 #include "NFComm/NFPluginModule/NFGUID.h"
-#include "NFComm/NFPluginModule/NFISceneAOIModule.h"
+#include "NFComm/NFPluginModule/NFISceneModule.h"
 #include "NFComm/NFPluginModule/NFILogModule.h"
 #include "NFComm/NFPluginModule/NFIKernelModule.h"
 #include "NFComm/NFPluginModule/NFIClassModule.h"
 #include "NFComm/NFPluginModule/NFIElementModule.h"
 #include "NFComm/NFPluginModule/NFIEventModule.h"
 
-class NFSceneAOIModule
-    : public NFISceneAOIModule
+class NFSceneModule
+    : public NFISceneModule
 {
 public:
-	NFSceneAOIModule(NFIPluginManager* p)
+	NFSceneModule(NFIPluginManager* p)
     {
         pPluginManager = p;
     }
 
 
-    virtual ~NFSceneAOIModule()
+    virtual ~NFSceneModule()
     {
     }
 

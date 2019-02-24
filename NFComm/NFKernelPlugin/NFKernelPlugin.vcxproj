@@ -108,7 +108,7 @@
     <ClInclude Include="NFErrorBusModule.h" />
     <ClInclude Include="NFEventModule.h" />
     <ClInclude Include="NFKernelModule.h" />
-    <ClInclude Include="NFSceneAOIModule.h" />
+    <ClInclude Include="NFSceneModule.h" />
     <ClInclude Include="NFScheduleModule.h" />
     <ClInclude Include="NFKernelPlugin.h" />
   </ItemGroup>
@@ -126,7 +126,7 @@
     <ClCompile Include="NFErrorBusModule.cpp" />
     <ClCompile Include="NFEventModule.cpp" />
     <ClCompile Include="NFKernelModule.cpp" />
-    <ClCompile Include="NFSceneAOIModule.cpp" />
+    <ClCompile Include="NFSceneModule.cpp" />
     <ClCompile Include="NFScheduleModule.cpp" />
     <ClCompile Include="NFKernelPlugin.cpp" />
   </ItemGroup>
