@@ -36,7 +36,7 @@
 #include "NFComm/NFPluginModule/NFIGuildRedisModule.h"
 #include "NFComm/NFPluginModule/NFIGameServerNet_ServerModule.h"
 #include "NFComm/NFPluginModule/NFIPlayerRedisModule.h"
-#include "NFComm/NFPluginModule/NFISceneAOIModule.h"
+#include "NFComm/NFPluginModule/NFISceneModule.h"
 #include "NFComm/NFPluginModule/NFIClassModule.h"
 #include "NFComm/NFPluginModule/NFITileModule.h"
 

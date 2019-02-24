@@ -35,7 +35,7 @@ Why DOI(DATA OF INTEREST)? Some people who do not build the relationship with yo
 #include "NFComm/NFPluginModule/NFIAOIModule.h"
 #include "NFComm/NFPluginModule/NFIElementModule.h"
 #include "NFComm/NFPluginModule/NFIEventModule.h"
-#include "NFComm/NFPluginModule/NFISceneAOIModule.h"
+#include "NFComm/NFPluginModule/NFISceneModule.h"
 #include "NFComm/NFPluginModule/NFINoSqlModule.h"
 #include "NFComm/NFPluginModule/NFIElementModule.h"
 #include "NFComm/NFPluginModule/NFIGameServerNet_ServerModule.h"

@@ -121,7 +121,7 @@
     <ClInclude Include="..\NFPluginModule\NFIPVPModule.h" />
     <ClInclude Include="..\NFPluginModule\NFIRankModule.h" />
     <ClInclude Include="..\NFPluginModule\NFIRankRedisModule.h" />
-    <ClInclude Include="..\NFPluginModule\NFISceneAOIModule.h" />
+    <ClInclude Include="..\NFPluginModule\NFISceneModule.h" />
     <ClInclude Include="..\NFPluginModule\NFISceneProcessModule.h" />
     <ClInclude Include="..\NFPluginModule\NFIScheduleModule.h" />
     <ClInclude Include="..\NFPluginModule\NFIScriptModule.h" />
