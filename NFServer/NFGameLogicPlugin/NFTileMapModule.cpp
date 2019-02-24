@@ -38,7 +38,7 @@ bool NFTileMapModule::Init()
 	m_pLogicClassModule = pPluginManager->FindModule<NFIClassModule>();
 	m_pElementModule = pPluginManager->FindModule<NFIElementModule>();
 	m_pGameServerNet_ServerModule = pPluginManager->FindModule<NFIGameServerNet_ServerModule>();
-	m_pSceneAOIModule = pPluginManager->FindModule<NFISceneAOIModule>();
+	m_pSceneModule = pPluginManager->FindModule<NFISceneModule>();
 	m_pClassModule = pPluginManager->FindModule<NFIClassModule>();
 	m_pTileModule = pPluginManager->FindModule<NFITileModule>();
 	
@@ -59,10 +59,10 @@ bool NFTileMapModule::AfterInit()
 {
 	m_pKernelModule->AddClassCallBack(NFrame::Player::ThisName(), this, &NFTileMapModule::OnObjectClassEvent);
 
-	m_pSceneAOIModule->AddBeforeEnterSceneGroupCallBack(this, &NFTileMapModule::BeforeEnterSceneGroupEvent);
-	m_pSceneAOIModule->AddAfterEnterSceneGroupCallBack(this, &NFTileMapModule::AfterEnterSceneGroupEvent);
-	m_pSceneAOIModule->AddBeforeLeaveSceneGroupCallBack(this, &NFTileMapModule::BeforeLeaveSceneGroupEvent);
-	m_pSceneAOIModule->AddAfterLeaveSceneGroupCallBack(this, &NFTileMapModule::AfterLeaveSceneGroupEvent);
+	m_pSceneModule->AddBeforeEnterSceneGroupCallBack(this, &NFTileMapModule::BeforeEnterSceneGroupEvent);
+	m_pSceneModule->AddAfterEnterSceneGroupCallBack(this, &NFTileMapModule::AfterEnterSceneGroupEvent);
+	m_pSceneModule->AddBeforeLeaveSceneGroupCallBack(this, &NFTileMapModule::BeforeLeaveSceneGroupEvent);
+	m_pSceneModule->AddAfterLeaveSceneGroupCallBack(this, &NFTileMapModule::AfterLeaveSceneGroupEvent);
 
 	NF_SHARE_PTR<NFIClass> xLogicClass = m_pClassModule->GetElement(NFrame::Scene::ThisName());
 	if (xLogicClass)

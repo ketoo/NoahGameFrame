@@ -35,7 +35,7 @@ bool NFTileModule::Init()
 	m_pLogicClassModule = pPluginManager->FindModule<NFIClassModule>();
 	m_pElementModule = pPluginManager->FindModule<NFIElementModule>();
 	m_pGameServerNet_ServerModule = pPluginManager->FindModule<NFIGameServerNet_ServerModule>();
-	m_pSceneAOIModule = pPluginManager->FindModule<NFISceneAOIModule>();
+	m_pSceneModule = pPluginManager->FindModule<NFISceneModule>();
 	
     return true;
 }
@@ -54,10 +54,10 @@ bool NFTileModule::AfterInit()
 {
 	m_pKernelModule->AddClassCallBack(NFrame::Player::ThisName(), this, &NFTileModule::OnObjectClassEvent);
 
-	m_pSceneAOIModule->AddBeforeEnterSceneGroupCallBack(this, &NFTileModule::BeforeEnterSceneGroupEvent);
-	m_pSceneAOIModule->AddAfterEnterSceneGroupCallBack(this, &NFTileModule::AfterEnterSceneGroupEvent);
-	m_pSceneAOIModule->AddBeforeLeaveSceneGroupCallBack(this, &NFTileModule::BeforeLeaveSceneGroupEvent);
-	m_pSceneAOIModule->AddAfterLeaveSceneGroupCallBack(this, &NFTileModule::AfterLeaveSceneGroupEvent);
+	m_pSceneModule->AddBeforeEnterSceneGroupCallBack(this, &NFTileModule::BeforeEnterSceneGroupEvent);
+	m_pSceneModule->AddAfterEnterSceneGroupCallBack(this, &NFTileModule::AfterEnterSceneGroupEvent);
+	m_pSceneModule->AddBeforeLeaveSceneGroupCallBack(this, &NFTileModule::BeforeLeaveSceneGroupEvent);
+	m_pSceneModule->AddAfterLeaveSceneGroupCallBack(this, &NFTileModule::AfterLeaveSceneGroupEvent);
 
 	if (!m_pNetModule->AddReceiveCallBack(NFMsg::EGameMsgID::EGEC_REQ_MINING_TITLE, this, &NFTileModule::OnReqMineTileProcess)) { return false; }
     return true;
