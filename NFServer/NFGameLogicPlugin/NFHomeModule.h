@@ -71,7 +71,7 @@ private:
 	NFINoSqlModule* m_pNoSqlModule;
 	NFIGameServerNet_ServerModule* m_pGameServerNet_ServerModule;
 	NFIPlayerRedisModule* m_pPlayerRedisModule;
-	NFISceneModule* m_pSceneAOIModule;
+	NFISceneModule* m_pSceneModule;
 	NFISceneProcessModule* m_pSceneProcessModule;
 	NFILogModule* m_pLogModule;
 	NFIRankModule* m_pRankModule;

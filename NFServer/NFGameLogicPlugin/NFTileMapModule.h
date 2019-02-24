@@ -103,7 +103,7 @@ private:
 	NFIKernelModule* m_pKernelModule;
 	NFIClassModule* m_pLogicClassModule;
 	NFIElementModule* m_pElementModule;
-	NFISceneAOIModule* m_pSceneAOIModule;
+	NFISceneModule* m_pSceneModule;
 	NFIGameServerNet_ServerModule* m_pGameServerNet_ServerModule;
 };
 
