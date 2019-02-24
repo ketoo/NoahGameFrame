@@ -6,9 +6,9 @@
     <ClInclude Include="NFErrorBusModule.h" />
     <ClInclude Include="NFEventModule.h" />
     <ClInclude Include="NFKernelModule.h" />
-    <ClInclude Include="NFSceneAOIModule.h" />
     <ClInclude Include="NFScheduleModule.h" />
     <ClInclude Include="NFCellModule.h" />
+    <ClInclude Include="NFSceneModule.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="NFKernelPlugin.cpp" />
@@ -17,8 +17,8 @@
     <ClCompile Include="NFErrorBusModule.cpp" />
     <ClCompile Include="NFEventModule.cpp" />
     <ClCompile Include="NFKernelModule.cpp" />
-    <ClCompile Include="NFSceneAOIModule.cpp" />
     <ClCompile Include="NFScheduleModule.cpp" />
     <ClCompile Include="NFCellModule.cpp" />
+    <ClCompile Include="NFSceneModule.cpp" />
   </ItemGroup>
 </Project>

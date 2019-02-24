@@ -80,7 +80,7 @@ solution 3: the game like kinds of lol or dota2 that creating a romm for fightin
 #include "NFComm/NFMessageDefine/NFProtocolDefine.hpp"
 #include "NFComm/NFPluginModule/NFINetClientModule.h"
 #include "NFComm/NFPluginModule/NFIPackModule.h"
-#include "NFComm/NFPluginModule/NFISceneAOIModule.h"
+#include "NFComm/NFPluginModule/NFISceneModule.h"
 #include "NFComm/NFPluginModule/NFIGameServerNet_ServerModule.h"
 
 class NFSwitchGameServerModule
@@ -115,7 +115,7 @@ private:
     NFIPropertyModule*              m_pPropertyModule;
     NFINetClientModule*             m_pNetClientModule;
     NFIPackModule*                  m_pPackModule;
-    NFISceneAOIModule*              m_pSceneAOIModule;
+    NFISceneModule*              m_pSceneModule;
     NFIGameServerNet_ServerModule*  m_pGameServerNet_ServerModule;
 };
 

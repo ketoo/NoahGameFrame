@@ -35,7 +35,7 @@ bool NFUserGiftModule::Init()
 	m_pElementModule = pPluginManager->FindModule<NFIElementModule>();
 	m_pLogModule = pPluginManager->FindModule<NFILogModule>();
 	m_pEventModule = pPluginManager->FindModule<NFIEventModule>();
-	m_pSceneAOIModule = pPluginManager->FindModule<NFISceneAOIModule>();
+	m_pSceneModule = pPluginManager->FindModule<NFISceneModule>();
 	m_pPackModule = pPluginManager->FindModule<NFIPackModule>();
 	m_pItemModule = pPluginManager->FindModule<NFIItemModule>();
 	m_pCommonConfigModule = pPluginManager->FindModule<NFICommonConfigModule>();
