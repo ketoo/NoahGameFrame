@@ -78,7 +78,7 @@ bool NFWorldNet_ServerModule::AfterInit()
                 const int nPort = m_pElementModule->GetPropertyInt32(strId, NFrame::Server::Port());
                 const int nMaxConnect = m_pElementModule->GetPropertyInt32(strId, NFrame::Server::MaxOnline());
                 const int nCpus = m_pElementModule->GetPropertyInt32(strId, NFrame::Server::CpuCount());
-                //const std::string& strName = m_pElementModule->GetPropertyString(strId, NFrame::Server::Name());
+                //const std::string& strName = m_pElementModule->GetPropertyString(strId, NFrame::Server::ID());
                 //const std::string& strIP = m_pElementModule->GetPropertyString(strId, NFrame::Server::IP());
 
                 int nRet = m_pNetModule->Initialization(nMaxConnect, nPort, nCpus);
@@ -99,34 +99,59 @@ bool NFWorldNet_ServerModule::AfterInit()
 
 void NFWorldNet_ServerModule::OnServerInfoProcess(const NFSOCK nSockIndex, const int nMsgID, const char * msg, const uint32_t nLen)
 {
-	NFGUID nPlayerID;
-	NFMsg::ServerInfoReportList xMsg;
-	if (!NFINetModule::ReceivePB(nMsgID, msg, nLen, xMsg, nPlayerID))
+	NF_SHARE_PTR<NFIClass> xLogicClass = m_pClassModule->GetElement(NFrame::Server::ThisName());
+	if (xLogicClass)
 	{
-		return;
-	}
+		const std::vector<std::string>& strIdList = xLogicClass->GetIDList();
 
-	for (int i = 0; i < xMsg.server_list_size(); ++i)
-	{
-		const NFMsg::ServerInfoReport& xData = xMsg.server_list(i);
-		if (xData.server_type() == NF_SERVER_TYPES::NF_ST_WORLD)
+		const int nCurAppID = pPluginManager->GetAppID();
+		std::vector<std::string>::const_iterator itr =
+			std::find_if(strIdList.begin(), strIdList.end(), [&](const std::string& strConfigId)
 		{
-			NF_SHARE_PTR<ServerData> pServerData = mWorldMap.GetElement(xData.server_id());
-			if (!pServerData)
+			return nCurAppID == m_pElementModule->GetPropertyInt32(strConfigId, NFrame::Server::ServerID());
+		});
+
+		if (strIdList.end() == itr)
+		{
+			std::ostringstream strLog;
+			strLog << "Cannot find current server, AppID = " << nCurAppID;
+			m_pLogModule->LogNormal(NFILogModule::NLL_ERROR_NORMAL, NULL_OBJECT, strLog, __FUNCTION__, __LINE__);
+
+			return;
+		}
+
+		const int nCurArea = m_pElementModule->GetPropertyInt32(*itr, NFrame::Server::Area());
+
+		NFGUID nPlayerID;
+		NFMsg::ServerInfoReportList xMsg;
+		if (!NFINetModule::ReceivePB(nMsgID, msg, nLen, xMsg, nPlayerID))
+		{
+			return;
+		}
+
+		for (int i = 0; i < xMsg.server_list_size(); ++i)
+		{
+			const NFMsg::ServerInfoReport& xData = xMsg.server_list(i);
+			const int nAreaID = m_pElementModule->GetPropertyInt(xData.server_name(), NFrame::Server::Area());
+			if (xData.server_type() == NF_SERVER_TYPES::NF_ST_WORLD
+				&& nCurArea == nAreaID)
 			{
-				pServerData = NF_SHARE_PTR<ServerData>(NF_NEW ServerData());
-				mWorldMap.AddElement(xData.server_id(), pServerData);
+				NF_SHARE_PTR<ServerData> pServerData = mWorldMap.GetElement(xData.server_id());
+				if (!pServerData)
+				{
+					pServerData = NF_SHARE_PTR<ServerData>(NF_NEW ServerData());
+					mWorldMap.AddElement(xData.server_id(), pServerData);
+				}
+
+				pServerData->nFD = nSockIndex;
+				*(pServerData->pData) = xData;
+
+				m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFGUID(0, xData.server_id()), xData.server_name(), "GameServerRegistered");
 			}
-
-			pServerData->nFD = nSockIndex;
-			*(pServerData->pData) = xData;
-
-			m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFGUID(0, xData.server_id()), xData.server_name(), "GameServerRegistered");
 		}
 	}
 
 	//sync to proxy
-
 	SynWorldToProxy();
 
 	//sync to game
@@ -162,28 +187,61 @@ bool NFWorldNet_ServerModule::Execute()
 
 void NFWorldNet_ServerModule::OnGameServerRegisteredProcess(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
 {
-    NFGUID nPlayerID;
-    NFMsg::ServerInfoReportList xMsg;
-    if (!m_pNetModule->ReceivePB( nMsgID, msg, nLen, xMsg, nPlayerID))
-    {
-        return;
-    }
+	NF_SHARE_PTR<NFIClass> xLogicClass = m_pClassModule->GetElement(NFrame::Server::ThisName());
+	if (xLogicClass)
+	{
+		const std::vector<std::string>& strIdList = xLogicClass->GetIDList();
 
-    for (int i = 0; i < xMsg.server_list_size(); ++i)
-    {
-        const NFMsg::ServerInfoReport& xData = xMsg.server_list(i);
-        NF_SHARE_PTR<ServerData> pServerData =  mGameMap.GetElement(xData.server_id());
-        if (!pServerData)
-        {
-            pServerData = NF_SHARE_PTR<ServerData>(NF_NEW ServerData());
-            mGameMap.AddElement(xData.server_id(), pServerData);
-        }
+		const int nCurAppID = pPluginManager->GetAppID();
+		std::vector<std::string>::const_iterator itr =
+			std::find_if(strIdList.begin(), strIdList.end(), [&](const std::string& strConfigId)
+		{
+			return nCurAppID == m_pElementModule->GetPropertyInt32(strConfigId, NFrame::Server::ServerID());
+		});
 
-        pServerData->nFD = nSockIndex;
-        *(pServerData->pData) = xData;
+		if (strIdList.end() == itr)
+		{
+			std::ostringstream strLog;
+			strLog << "Cannot find current server, AppID = " << nCurAppID;
+			m_pLogModule->LogNormal(NFILogModule::NLL_ERROR_NORMAL, NULL_OBJECT, strLog, __FUNCTION__, __LINE__);
 
-        m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFGUID(0, xData.server_id()), xData.server_name(), "GameServerRegistered");
-    }
+			return;
+		}
+
+		const int nCurArea = m_pElementModule->GetPropertyInt32(*itr, NFrame::Server::Area());
+
+		NFGUID nPlayerID;
+		NFMsg::ServerInfoReportList xMsg;
+		if (!m_pNetModule->ReceivePB(nMsgID, msg, nLen, xMsg, nPlayerID))
+		{
+			return;
+		}
+
+		for (int i = 0; i < xMsg.server_list_size(); ++i)
+		{
+			const NFMsg::ServerInfoReport& xData = xMsg.server_list(i);
+			const int nAreaID = m_pElementModule->GetPropertyInt(xData.server_name(), NFrame::Server::Area());
+			if (nAreaID == nCurArea)
+			{
+				NF_SHARE_PTR<ServerData> pServerData = mGameMap.GetElement(xData.server_id());
+				if (!pServerData)
+				{
+
+					pServerData = NF_SHARE_PTR<ServerData>(NF_NEW ServerData());
+					mGameMap.AddElement(xData.server_id(), pServerData);
+				}
+
+				pServerData->nFD = nSockIndex;
+				*(pServerData->pData) = xData;
+
+				m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFGUID(0, xData.server_id()), xData.server_name(), "GameServerRegistered");
+			}
+			else
+			{
+				m_pLogModule->LogNormal(NFILogModule::NLL_ERROR_NORMAL, NFGUID(0, xData.server_id()), xData.server_name(), "GameServerRegistered");
+			}
+		}
+	}
 
     SynGameToProxy();
 }
@@ -237,31 +295,62 @@ void NFWorldNet_ServerModule::OnRefreshGameServerInfoProcess(const NFSOCK nSockI
 
 void NFWorldNet_ServerModule::OnProxyServerRegisteredProcess(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
 {
-    NFGUID nPlayerID;
-    NFMsg::ServerInfoReportList xMsg;
-    if (!m_pNetModule->ReceivePB( nMsgID, msg, nLen, xMsg, nPlayerID))
-    {
-        return;
-    }
+	NF_SHARE_PTR<NFIClass> xLogicClass = m_pClassModule->GetElement(NFrame::Server::ThisName());
+	if (xLogicClass)
+	{
+		const std::vector<std::string>& strIdList = xLogicClass->GetIDList();
 
-    for (int i = 0; i < xMsg.server_list_size(); ++i)
-    {
-        const NFMsg::ServerInfoReport& xData = xMsg.server_list(i);
+		const int nCurAppID = pPluginManager->GetAppID();
+		std::vector<std::string>::const_iterator itr =
+			std::find_if(strIdList.begin(), strIdList.end(), [&](const std::string& strConfigId)
+		{
+			return nCurAppID == m_pElementModule->GetPropertyInt32(strConfigId, NFrame::Server::ServerID());
+		});
 
-        NF_SHARE_PTR<ServerData> pServerData =  mProxyMap.GetElement(xData.server_id());
-        if (!pServerData)
-        {
-            pServerData = NF_SHARE_PTR<ServerData>(NF_NEW ServerData());
-            mProxyMap.AddElement(xData.server_id(), pServerData);
-        }
+		if (strIdList.end() == itr)
+		{
+			std::ostringstream strLog;
+			strLog << "Cannot find current server, AppID = " << nCurAppID;
+			m_pLogModule->LogNormal(NFILogModule::NLL_ERROR_NORMAL, NULL_OBJECT, strLog, __FUNCTION__, __LINE__);
 
-        pServerData->nFD = nSockIndex;
-        *(pServerData->pData) = xData;
+			return;
+		}
 
-        m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFGUID(0, xData.server_id()), xData.server_name(), "Proxy Registered");
+		const int nCurArea = m_pElementModule->GetPropertyInt32(*itr, NFrame::Server::Area());
 
-        SynGameToProxy(nSockIndex);
-    }
+		NFGUID nPlayerID;
+		NFMsg::ServerInfoReportList xMsg;
+		if (!m_pNetModule->ReceivePB(nMsgID, msg, nLen, xMsg, nPlayerID))
+		{
+			return;
+		}
+
+		for (int i = 0; i < xMsg.server_list_size(); ++i)
+		{
+			const NFMsg::ServerInfoReport& xData = xMsg.server_list(i);
+			const int nAreaID = m_pElementModule->GetPropertyInt(xData.server_name(), NFrame::Server::Area());
+			if (nAreaID == nCurArea)
+			{
+				NF_SHARE_PTR<ServerData> pServerData = mProxyMap.GetElement(xData.server_id());
+				if (!pServerData)
+				{
+					pServerData = NF_SHARE_PTR<ServerData>(NF_NEW ServerData());
+					mProxyMap.AddElement(xData.server_id(), pServerData);
+				}
+
+				pServerData->nFD = nSockIndex;
+				*(pServerData->pData) = xData;
+
+				m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFGUID(0, xData.server_id()), xData.server_name(), "Proxy Registered");
+
+				SynGameToProxy(nSockIndex);
+			}
+			else
+			{
+				m_pLogModule->LogNormal(NFILogModule::NLL_ERROR_NORMAL, NFGUID(0, xData.server_id()), xData.server_name(), "Proxy Registered");
+			}
+		}
+	}
 }
 
 void NFWorldNet_ServerModule::OnProxyServerUnRegisteredProcess(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
@@ -314,30 +403,63 @@ void NFWorldNet_ServerModule::OnRefreshProxyServerInfoProcess(const NFSOCK nSock
 
 void NFWorldNet_ServerModule::OnDBServerRegisteredProcess(const NFSOCK nSockIndex, const int nMsgID, const char * msg, const uint32_t nLen)
 {
-	NFGUID nPlayerID;
-	NFMsg::ServerInfoReportList xMsg;
-	if (!m_pNetModule->ReceivePB(nMsgID, msg, nLen, xMsg, nPlayerID))
+	NF_SHARE_PTR<NFIClass> xLogicClass = m_pClassModule->GetElement(NFrame::Server::ThisName());
+	if (xLogicClass)
 	{
-		return;
-	}
+		const std::vector<std::string>& strIdList = xLogicClass->GetIDList();
 
-	for (int i = 0; i < xMsg.server_list_size(); ++i)
-	{
-		const NFMsg::ServerInfoReport& xData = xMsg.server_list(i);
-		NF_SHARE_PTR<ServerData> pServerData = mDBMap.GetElement(xData.server_id());
-		if (!pServerData)
+		const int nCurAppID = pPluginManager->GetAppID();
+		std::vector<std::string>::const_iterator itr =
+			std::find_if(strIdList.begin(), strIdList.end(), [&](const std::string& strConfigId)
 		{
-			pServerData = NF_SHARE_PTR<ServerData>(NF_NEW ServerData());
-			mDBMap.AddElement(xData.server_id(), pServerData);
+			return nCurAppID == m_pElementModule->GetPropertyInt32(strConfigId, NFrame::Server::ServerID());
+		});
+
+		if (strIdList.end() == itr)
+		{
+			std::ostringstream strLog;
+			strLog << "Cannot find current server, AppID = " << nCurAppID;
+			m_pLogModule->LogNormal(NFILogModule::NLL_ERROR_NORMAL, NULL_OBJECT, strLog, __FUNCTION__, __LINE__);
+
+			return;
 		}
 
-		pServerData->nFD = nSockIndex;
-		*(pServerData->pData) = xData;
+		const int nCurArea = m_pElementModule->GetPropertyInt32(*itr, NFrame::Server::Area());
 
-		m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFGUID(0, xData.server_id()), xData.server_name(), "DBServerRegistered");
+		NFGUID nPlayerID;
+		NFMsg::ServerInfoReportList xMsg;
+		if (!m_pNetModule->ReceivePB(nMsgID, msg, nLen, xMsg, nPlayerID))
+		{
+			return;
+		}
+
+		for (int i = 0; i < xMsg.server_list_size(); ++i)
+		{
+			const NFMsg::ServerInfoReport& xData = xMsg.server_list(i);
+			const int nAreaID = m_pElementModule->GetPropertyInt(xData.server_name(), NFrame::Server::Area());
+			if (nAreaID == nCurArea)
+			{
+
+				NF_SHARE_PTR<ServerData> pServerData = mDBMap.GetElement(xData.server_id());
+				if (!pServerData)
+				{
+					pServerData = NF_SHARE_PTR<ServerData>(NF_NEW ServerData());
+					mDBMap.AddElement(xData.server_id(), pServerData);
+				}
+
+				pServerData->nFD = nSockIndex;
+				*(pServerData->pData) = xData;
+
+				m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFGUID(0, xData.server_id()), xData.server_name(), "DBServerRegistered");
+			}
+			else
+			{
+				m_pLogModule->LogNormal(NFILogModule::NLL_ERROR_NORMAL, NFGUID(0, xData.server_id()), xData.server_name(), "DBServerRegistered");
+			}
+		}
+
+		SynDBToGame();
 	}
-
-	SynDBToGame();
 }
 
 void NFWorldNet_ServerModule::OnDBServerUnRegisteredProcess(const NFSOCK nSockIndex, const int nMsgID, const char * msg, const uint32_t nLen)
@@ -482,7 +604,6 @@ void NFWorldNet_ServerModule::SynWorldToProxy(const NFSOCK nFD)
 	NF_SHARE_PTR<ServerData> pServerData = mWorldMap.First();
 	while (pServerData)
 	{
-		//it must be the same area
 		NFMsg::ServerInfoReport* pData = xData.add_server_list();
 		*pData = *(pServerData->pData);
 
@@ -511,96 +632,6 @@ void NFWorldNet_ServerModule::SynWorldToGame()
 
 void NFWorldNet_ServerModule::SynWorldToGame(const NFSOCK nFD)
 {
-	NF_SHARE_PTR<NFIClass> xLogicClass = m_pClassModule->GetElement(NFrame::Server::ThisName());
-	if (xLogicClass)
-	{
-		const std::vector<std::string>& strIdList = xLogicClass->GetIDList();
-
-		const int nCurAppID = pPluginManager->GetAppID();
-		std::vector<std::string>::const_iterator itr =
-			std::find_if(strIdList.begin(), strIdList.end(), [&](const std::string& strConfigId)
-		{
-			return nCurAppID == m_pElementModule->GetPropertyInt32(strConfigId, NFrame::Server::ServerID());
-		});
-
-		if (strIdList.end() == itr)
-		{
-			std::ostringstream strLog;
-			strLog << "Cannot find current server, AppID = " << nCurAppID;
-			m_pLogModule->LogNormal(NFILogModule::NLL_ERROR_NORMAL, NULL_OBJECT, strLog, __FUNCTION__, __LINE__);
-			NFASSERT(-1, "Cannot find current server", __FILE__, __FUNCTION__);
-			exit(0);
-		}
-
-		const int nCurArea = m_pElementModule->GetPropertyInt32(*itr, NFrame::Server::Area());
-
-
-		NFMsg::ServerInfoReportList xData;
-
-		NF_SHARE_PTR<ServerData> pServerData = mWorldMap.First();
-		while (pServerData)
-		{
-			//it must be the same area
-			const int nAreaID = m_pElementModule->GetPropertyInt(pServerData->pData->server_name(), NFrame::Server::Area());
-			if (nAreaID == nCurArea)
-			{
-				NFMsg::ServerInfoReport* pData = xData.add_server_list();
-				*pData = *(pServerData->pData);
-			}
-
-			pServerData = mWorldMap.Next();
-		}
-
-		m_pNetModule->SendMsgPB(NFMsg::EGameMsgID::EGMI_STS_NET_INFO, xData, nFD);
-	}
-}
-
-
-void NFWorldNet_ServerModule::SynWorldToDB()
-{
-	NF_SHARE_PTR<NFIClass> xLogicClass = m_pClassModule->GetElement(NFrame::Server::ThisName());
-	if (xLogicClass)
-	{
-		const std::vector<std::string>& strIdList = xLogicClass->GetIDList();
-
-		const int nCurAppID = pPluginManager->GetAppID();
-		std::vector<std::string>::const_iterator itr =
-			std::find_if(strIdList.begin(), strIdList.end(), [&](const std::string& strConfigId)
-		{
-			return nCurAppID == m_pElementModule->GetPropertyInt32(strConfigId, NFrame::Server::ServerID());
-		});
-
-		if (strIdList.end() == itr)
-		{
-			std::ostringstream strLog;
-			strLog << "Cannot find current server, AppID = " << nCurAppID;
-			m_pLogModule->LogNormal(NFILogModule::NLL_ERROR_NORMAL, NULL_OBJECT, strLog, __FUNCTION__, __LINE__);
-			NFASSERT(-1, "Cannot find current server", __FILE__, __FUNCTION__);
-			exit(0);
-		}
-
-		const int nCurArea = m_pElementModule->GetPropertyInt32(*itr, NFrame::Server::Area());
-
-		NFMsg::ServerInfoReportList xData;
-
-		NF_SHARE_PTR<ServerData> pServerData = mDBMap.First();
-		while (pServerData)
-		{
-			const int nAreaID = m_pElementModule->GetPropertyInt(pServerData->pData->server_name(), NFrame::Server::Area());
-			if (pServerData->pData->server_state() != NFMsg::EServerState::EST_MAINTEN
-				&& pServerData->pData->server_state() != NFMsg::EServerState::EST_CRASH
-				&&nCurArea == nAreaID)
-			{
-				SynWorldToDB(pServerData->nFD);
-			}
-
-			pServerData = mDBMap.Next();
-		}
-	}
-}
-
-void NFWorldNet_ServerModule::SynWorldToDB(const NFSOCK nFD)
-{
 	NFMsg::ServerInfoReportList xData;
 
 	NF_SHARE_PTR<ServerData> pServerData = mWorldMap.First();
@@ -615,63 +646,71 @@ void NFWorldNet_ServerModule::SynWorldToDB(const NFSOCK nFD)
 	m_pNetModule->SendMsgPB(NFMsg::EGameMsgID::EGMI_STS_NET_INFO, xData, nFD);
 }
 
-void NFWorldNet_ServerModule::SynDBToGame()
-{
-	NF_SHARE_PTR<NFIClass> xLogicClass = m_pClassModule->GetElement(NFrame::Server::ThisName());
-	if (xLogicClass)
-	{
-		const std::vector<std::string>& strIdList = xLogicClass->GetIDList();
 
-		const int nCurAppID = pPluginManager->GetAppID();
-		std::vector<std::string>::const_iterator itr =
-			std::find_if(strIdList.begin(), strIdList.end(), [&](const std::string& strConfigId)
-		{
-			return nCurAppID == m_pElementModule->GetPropertyInt32(strConfigId, NFrame::Server::ServerID());
-		});
-
-		if (strIdList.end() == itr)
-		{
-			std::ostringstream strLog;
-			strLog << "Cannot find current server, AppID = " << nCurAppID;
-			m_pLogModule->LogNormal(NFILogModule::NLL_ERROR_NORMAL, NULL_OBJECT, strLog, __FUNCTION__, __LINE__);
-			NFASSERT(-1, "Cannot find current server", __FILE__, __FUNCTION__);
-			exit(0);
-		}
-
-		const int nCurArea = m_pElementModule->GetPropertyInt32(*itr, NFrame::Server::Area());
-
-
-		NFMsg::ServerInfoReportList xData;
-
-		NF_SHARE_PTR<ServerData> pServerData = mGameMap.First();
-		while (pServerData)
-		{
-			const int nAreaID = m_pElementModule->GetPropertyInt(pServerData->pData->server_name(), NFrame::Server::Area());
-			if (pServerData->pData->server_state() != NFMsg::EServerState::EST_MAINTEN
-				&& pServerData->pData->server_state() != NFMsg::EServerState::EST_CRASH
-				&&nAreaID == nCurArea)
-			{
-				SynDBToGame(pServerData->nFD);
-			}
-
-			pServerData = mGameMap.Next();
-		}
-	}
-}
-
-void NFWorldNet_ServerModule::SynDBToGame(const NFSOCK nFD)
+void NFWorldNet_ServerModule::SynWorldToDB()
 {
 	NFMsg::ServerInfoReportList xData;
 
 	NF_SHARE_PTR<ServerData> pServerData = mDBMap.First();
 	while (pServerData)
 	{
-		NFMsg::ServerInfoReport* pData = xData.add_server_list();
-		*pData = *(pServerData->pData);
+		if (pServerData->pData->server_state() != NFMsg::EServerState::EST_MAINTEN
+			&& pServerData->pData->server_state() != NFMsg::EServerState::EST_CRASH)
+		{
+			SynWorldToDB(pServerData->nFD);
+		}
 
 		pServerData = mDBMap.Next();
 	}
+}
 
+void NFWorldNet_ServerModule::SynWorldToDB(const NFSOCK nFD)
+{
+	NFMsg::ServerInfoReportList xData;
+
+	NF_SHARE_PTR<ServerData> pServerData = mWorldMap.First();
+	while (pServerData)
+	{
+
+		NFMsg::ServerInfoReport* pData = xData.add_server_list();
+		*pData = *(pServerData->pData);
+
+		pServerData = mWorldMap.Next();
+	}
+
+	m_pNetModule->SendMsgPB(NFMsg::EGameMsgID::EGMI_STS_NET_INFO, xData, nFD);
+}
+
+void NFWorldNet_ServerModule::SynDBToGame()
+{
+	NFMsg::ServerInfoReportList xData;
+
+	NF_SHARE_PTR<ServerData> pServerData = mGameMap.First();
+	while (pServerData)
+	{
+		if (pServerData->pData->server_state() != NFMsg::EServerState::EST_MAINTEN
+			&& pServerData->pData->server_state() != NFMsg::EServerState::EST_CRASH)
+		{
+			SynDBToGame(pServerData->nFD);
+		}
+
+		pServerData = mGameMap.Next();
+	}
+}
+
+void NFWorldNet_ServerModule::SynDBToGame(const NFSOCK nFD)
+{
+	NFMsg::ServerInfoReportList xData;
+	
+	NF_SHARE_PTR<ServerData> pServerData = mDBMap.First();
+	while (pServerData)
+	{
+		NFMsg::ServerInfoReport* pData = xData.add_server_list();
+		*pData = *(pServerData->pData);
+		
+		pServerData = mDBMap.Next();
+	}
+	
 	m_pNetModule->SendMsgPB(NFMsg::EGameMsgID::EGMI_STS_NET_INFO, xData, nFD);
 }
 
@@ -744,8 +783,6 @@ void NFWorldNet_ServerModule::OnClientConnected(const NFSOCK nAddress)
 
 void NFWorldNet_ServerModule::LogGameServer()
 {
-
-
     mnLastCheckTime = GetPluginManager()->GetNowTime();
 
     m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFGUID(), "--------------------Begin Log GameServer Info", "");
@@ -905,13 +942,13 @@ void NFWorldNet_ServerModule::ServerReport(int reportServerId, NFMsg::EServerSta
 			{
 				const int nPort = m_pElementModule->GetPropertyInt32(strId, NFrame::Server::Port());
 				const int nMaxConnect = m_pElementModule->GetPropertyInt32(strId, NFrame::Server::MaxOnline());
-				const std::string& strName = m_pElementModule->GetPropertyString(strId, NFrame::Server::Name());
+				const std::string& strName = m_pElementModule->GetPropertyString(strId, NFrame::Server::ID());
 				const std::string& strIP = m_pElementModule->GetPropertyString(strId, NFrame::Server::IP());
 
 				NFMsg::ServerInfoReport reqMsg;
 
 				reqMsg.set_server_id(nServerID);
-				reqMsg.set_server_name(strName);
+				reqMsg.set_server_name(strId);
 				reqMsg.set_server_cur_count(0);
 				reqMsg.set_server_ip(strIP);
 				reqMsg.set_server_port(nPort);
