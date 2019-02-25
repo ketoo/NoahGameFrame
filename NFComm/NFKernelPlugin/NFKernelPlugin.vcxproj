@@ -111,6 +111,7 @@
     <ClInclude Include="NFSceneModule.h" />
     <ClInclude Include="NFScheduleModule.h" />
     <ClInclude Include="NFKernelPlugin.h" />
+    <ClInclude Include="NFThreadPoolModule.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="dllmain.cpp">
@@ -129,6 +130,7 @@
     <ClCompile Include="NFSceneModule.cpp" />
     <ClCompile Include="NFScheduleModule.cpp" />
     <ClCompile Include="NFKernelPlugin.cpp" />
+    <ClCompile Include="NFThreadPoolModule.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\NFConfigPlugin\NFConfigPlugin.vcxproj">
