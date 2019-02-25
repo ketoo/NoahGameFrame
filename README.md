@@ -1,6 +1,4 @@
 # NoahGameFrame
-#####  http://www.noahframe.com
-##### Forum: http://bbs.noahframe.com/forum.php
 
 - develop
 [![Build Status](https://travis-ci.org/ketoo/NoahGameFrame.svg?branch=develop)](https://travis-ci.org/ketoo/NoahGameFrame)
