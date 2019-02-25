@@ -26,20 +26,9 @@ NoahGameFrame (NF) is a lightweight, fast, scalable, distributed plugin framewor
 - Cross-platform support
 
 
-## Tutorial--English
+## Tutorial && Documents
 
 https://github.com/ketoo/NoahGameFrame/wiki
-
-## Documents--English
-
-https://github.com/ketoo/NoahGameFrame/wiki/Documentation
-
-## Tutorial--中文
-
-[Tutorial](http://bbs.noahframe.com/forum.php?mod=forumdisplay&fid=39) : http://bbs.noahframe.com/forum.php?mod=forumdisplay&fid=39
-
-### FAQ OR DISCUSSIONS
-[FAQ](http://blog.noahframe.com/?p=229) : http://blog.noahframe.com/?p=229
 
 ### Client (Unity3D && Cocos2d)
 [Client](https://github.com/ketoo/NFClient)
