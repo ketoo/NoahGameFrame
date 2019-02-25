@@ -24,13 +24,11 @@
 */
 
 
-#ifndef NF_THREAD_POOL_MANAGER_H
-#define NF_THREAD_POOL_MANAGER_H
+#ifndef NF_THREAD_POOL_MODULE_H
+#define NF_THREAD_POOL_NF_THREAD_POOL_MODULE_HMANAGER_H
 
 #include <map>
 #include <string>
-#include "NFActor.h"
-#include "Theron/Theron.h"
 #include "NFComm/NFPluginModule/NFIThreadPoolModule.h"
 #include "NFComm/NFCore/NFQueue.hpp"
 
