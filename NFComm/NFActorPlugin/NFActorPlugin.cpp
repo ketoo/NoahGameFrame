@@ -25,7 +25,6 @@
 
 #include "NFActorPlugin.h"
 #include "NFActorModule.h"
-#include "NFAsyncTaskModule.h"
 #include "NFThreadPoolModule.h"
 
 #ifdef NF_DYNAMIC_PLUGIN
@@ -57,13 +56,11 @@ const std::string NFActorPlugin::GetPluginName()
 void NFActorPlugin::Install()
 {
 	REGISTER_MODULE(pPluginManager, NFIActorModule, NFActorModule)
-	REGISTER_MODULE(pPluginManager, NFIAsyncTaskModule, NFAsyncTaskModule)
 	REGISTER_MODULE(pPluginManager, NFIThreadPoolModule, NFThreadPoolModule)
 }
 
 void NFActorPlugin::Uninstall()
 {
 	UNREGISTER_MODULE(pPluginManager, NFIThreadPoolModule, NFThreadPoolModule)
-	UNREGISTER_MODULE(pPluginManager, NFIAsyncTaskModule, NFAsyncTaskModule)
 	UNREGISTER_MODULE(pPluginManager, NFIActorModule, NFActorModule)
 }

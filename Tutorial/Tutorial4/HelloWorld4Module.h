@@ -30,6 +30,7 @@
 #include "NFComm/NFPluginModule/NFIKernelModule.h"
 #include "NFComm/NFPluginModule/NFIActorModule.h"
 #include "NFComm/NFPluginModule/NFIComponent.h"
+#include "NFComm/NFPluginModule/NFIThreadPoolModule.h"
 
 /*
 IN THIS PLUGIN:
@@ -103,6 +104,7 @@ protected:
 	
 protected:
     NFIActorModule* m_pActorModule;
+	NFIThreadPoolModule* m_pThreadPoolModule;
 };
 
 #endif

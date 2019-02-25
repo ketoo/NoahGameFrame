@@ -15,14 +15,12 @@
     <ClCompile Include="NFActorModule.cpp" />
     <ClCompile Include="dllmain.cpp" />
     <ClCompile Include="NFActorPlugin.cpp" />
-    <ClCompile Include="NFAsyncTaskModule.cpp" />
     <ClCompile Include="NFThreadPoolModule.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="NFActor.h" />
     <ClInclude Include="NFActorModule.h" />
     <ClInclude Include="NFActorPlugin.h" />
-    <ClInclude Include="NFAsyncTaskModule.h" />
     <ClInclude Include="NFThreadPoolModule.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
