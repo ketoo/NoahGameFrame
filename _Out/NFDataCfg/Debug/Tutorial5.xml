@@ -4,6 +4,7 @@
 		<Plugin Name="NFConfigPlugin" />
 		
 		<Plugin Name="NFLogPlugin" />
+		<Plugin Name="NFNetPlugin" />
 		<Plugin Name="Tutorial5" />	
 	</TutorialServer>
 </XML>
