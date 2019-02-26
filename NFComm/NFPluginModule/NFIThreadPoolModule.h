@@ -31,63 +31,30 @@
 
 ///////////////////////////////////////////////////
 
-typedef std::function<int(const int, const int, std::string&)> TASK_PROCESS_FUNCTOR;
-typedef NF_SHARE_PTR<TASK_PROCESS_FUNCTOR> TASK_PROCESS_FUNCTOR_PTR;
+typedef std::function<std::string(const NFGUID, std::string&)> TASK_PROCESS_FUNCTOR;
+typedef std::function<void(const NFGUID, std::string&)> TASK_PROCESS_RESULT_FUNCTOR;
 
-
-class NFThreadTask
-{
-	int nTaskID;
-	int nFormThread;
-	std::string data;
-	TASK_PROCESS_FUNCTOR_PTR xThreadFuncptr;
-	TASK_PROCESS_FUNCTOR_PTR xEndFuncptr;
-};
-
-class NFThreadCell
-{
-public:
-
-	NFThreadCell()
-	{
-		mThread = NF_SHARE_PTR<std::thread>(NF_NEW std::thread(Execute));
-	}
-
-protected:
-	static void Execute()
-	{
-
-	}
-private:
-	std::list<NFThreadTask> mTaskList;
-	NF_SHARE_PTR<std::thread> mThread;
-};
 
 class NFIThreadPoolModule : public NFIModule
 {
 public:
-	int DoTask(const std::string& data, TASK_PROCESS_FUNCTOR asyncFunctor, TASK_PROCESS_FUNCTOR functor_end)
+
+	void DoAsyncTask(const std::string& data, TASK_PROCESS_FUNCTOR asyncFunctor, TASK_PROCESS_RESULT_FUNCTOR functor_end)
 	{
-		return DoTask(0, data, asyncFunctor, functor_end);
+		return DoAsyncTask(0, NFGUID(), data, asyncFunctor, functor_end);
 	}
 
-	int DoTask(const int hash, const std::string& data,
-		TASK_PROCESS_FUNCTOR asyncFunctor, TASK_PROCESS_FUNCTOR functor_end)
+	void DoAsyncTask(const NFGUID taskID, const std::string& data,
+		TASK_PROCESS_FUNCTOR asyncFunctor, TASK_PROCESS_RESULT_FUNCTOR functor_end)
 	{
-		return 1;
+		return DoAsyncTask(0, taskID, data,  asyncFunctor, functor_end);
 	}
 
-	int DoTask(const NFGUID taskID, const std::string& data,
-		TASK_PROCESS_FUNCTOR asyncFunctor, TASK_PROCESS_FUNCTOR functor_end)
-	{
-		return DoTask(0, taskID, data,  asyncFunctor, functor_end);
-	}
+	virtual void DoAsyncTask(const int hash, const NFGUID taskID, const std::string& data,
+		TASK_PROCESS_FUNCTOR asyncFunctor, TASK_PROCESS_RESULT_FUNCTOR functor_end) = 0;
 
-	int DoTask(const int hash, const NFGUID taskID, const std::string& data,
-		TASK_PROCESS_FUNCTOR asyncFunctor, TASK_PROCESS_FUNCTOR functor_end)
-	{
-		return 1;
-	}
+	/////repush the result
+	virtual void TaskResult(const NFGUID taskID, const std::string& resultData, TASK_PROCESS_RESULT_FUNCTOR functor_end) = 0;
 };
 
 #endif

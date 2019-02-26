@@ -42,13 +42,10 @@ NFThreadPoolModule::~NFThreadPoolModule()
 
 bool NFThreadPoolModule::Init()
 {
-	/*
-
-	for (int i = 0; i < 10; +i)
+	for (int i = 0; i < 10; ++i)
 	{
-	mThreadPool.push_back(NF_SHARE_PTR<NFThreadCell>(NF_NEW NFThreadCell()));
+		mThreadPool.AddElement(i, NF_SHARE_PTR<NFThreadCell>(NF_NEW NFThreadCell(this)));
 	}
-	*/
 
     return true;
 }
@@ -72,6 +69,38 @@ bool NFThreadPoolModule::Shut()
 
 bool NFThreadPoolModule::Execute()
 {
+	ExecuteTaskResult();
+
     return true;
+}
+
+void NFThreadPoolModule::DoAsyncTask(const int hash, const NFGUID taskID, const std::string & data, TASK_PROCESS_FUNCTOR asyncFunctor, TASK_PROCESS_RESULT_FUNCTOR functor_end)
+{
+	NFThreadTask task;
+	task.nTaskID = taskID;
+	task.data = data;
+	task.xThreadFunc = asyncFunctor;
+	task.xEndFunc = functor_end;
+
+	NF_SHARE_PTR<NFThreadCell> threadobject = mThreadPool.GetElementBySuit(hash);
+	threadobject->AddTask(task);
+}
+
+void NFThreadPoolModule::ExecuteTaskResult()
+{
+	NFThreaTaskResult xMsg;
+	bool bRet = false;
+	bRet = mTaskResult.TryPop(xMsg);
+	while (bRet)
+	{
+		xMsg.xEndFunc(xMsg.nTaskID, xMsg.resultData);
+
+		bRet = mTaskResult.TryPop(xMsg);
+	}
+}
+
+void NFThreadPoolModule::TaskResult(const NFGUID taskID,  const std::string & resultData, TASK_PROCESS_RESULT_FUNCTOR functor_end)
+{
+	mTaskResult.Push(NFThreaTaskResult(taskID, resultData, functor_end));
 }
 

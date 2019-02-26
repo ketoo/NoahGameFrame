@@ -111,7 +111,17 @@ NFWebStatus NFHelloWorld::OnFilter(const NFHttpRequest & req)
 int NFHelloWorld::OnHeartBeat(const NFGUID & self, const std::string & strHeartBeat, const float fTime, const int nCount)
 {
 	m_pHttpClientModule->DoGet("http://192.168.13.133:8080/json", this, &NFHelloWorld::OnGetCallBack);
+	m_pHttpClientModule->DoGet("http://192.168.13.133:8080/json", [](const NFGUID id, const int state_code, const std::string & strRespData) -> void
+	{
+		std::cout << "OnGetCallBack" << std::endl;
+	});
+
 	m_pHttpClientModule->DoPost("http://192.168.13.133:8080/json", "OnHeartBeat post data---", this, &NFHelloWorld::OnPostCallBack);
+
+	m_pHttpClientModule->DoPost("http://192.168.13.133:8080/json", "OnHeartBeat post data---", [](const NFGUID id, const int state_code, const std::string & strRespData) -> void
+	{
+		std::cout << "OnPostCallBack" << std::endl;
+	});
 
 	return 0;
 }

@@ -30,7 +30,8 @@
 bool NFHelloWorld4Module::Init()
 {
 	m_pActorModule = pPluginManager->FindModule<NFIActorModule>();
-
+	m_pThreadPoolModule = pPluginManager->FindModule<NFIThreadPoolModule>();
+	
 	return true;
 }
 
@@ -44,10 +45,10 @@ int NFHelloWorld4Module::RequestAsyEnd(const int nFormActor, const int nSubMsgID
 
 bool NFHelloWorld4Module::AfterInit()
 {
-	
-	std::cout << "Hello, world4, AfterInit" << std::endl;
 
+	std::cout << "Hello, world4, AfterInit, Main thread: " << std::this_thread::get_id() << std::endl;
 
+	/*
 	//example 1
 	int nActorID1 = m_pActorModule->RequireActor();
 	m_pActorModule->AddComponent<NFHttpComponent>(nActorID1);
@@ -56,7 +57,7 @@ bool NFHelloWorld4Module::AfterInit()
 
 	for (int i = 0; i < 10; ++i)
 	{
-	m_pActorModule->SendMsgToActor(nActorID1, i, "Test actor!");
+		m_pActorModule->SendMsgToActor(nActorID1, i, "Test actor!");
 	}
 
 
@@ -65,35 +66,65 @@ bool NFHelloWorld4Module::AfterInit()
 	m_pActorModule->AddComponent<NFHttpComponent>(nActorID2);
 	m_pActorModule->AddEndFunc(nActorID2, 1, [nActorID2](const int nFormActor, const int nSubMsgID, std::string& strData) -> int
 	{
-	std::cout << "AddEndFunc" << nActorID2 << std::endl;
-	return nSubMsgID;
+		std::cout << "example 2 AddEndFunc" << nActorID2 << std::endl;
+		return nSubMsgID;
 	});
 
 	for (int i = 0; i < 10; ++i)
 	{
-	m_pActorModule->SendMsgToActor(nActorID2, i, "Test actor!");
+		m_pActorModule->SendMsgToActor(nActorID2, i, "Test actor!");
 	}
-
 
 	//example 3
 	int nActorID3 = m_pActorModule->RequireActor();
 	m_pActorModule->AddAsyncFunc(nActorID3, 1,
-	[nActorID3](const int nFormActor, const int nSubMsgID, std::string& strData) -> int
+		[nActorID3](const int nFormActor, const int nSubMsgID, std::string& strData) -> int
 	{
-	std::cout << "Async " << nActorID3 << " " << nSubMsgID << std::endl;
-	return nSubMsgID;
+		std::cout << "example 3 Async " << nActorID3 << " " << nSubMsgID << std::endl;
+		return nSubMsgID;
 	},
-
-	[nActorID3](const int nFormActor, const int nSubMsgID, std::string& strData) -> int
+		[nActorID3](const int nFormActor, const int nSubMsgID, std::string& strData) -> int
 	{
-	std::cout << "end " << nActorID3 << " " << nSubMsgID  <<  std::endl;
-	return nSubMsgID;
+		std::cout << "example 3 end " << nActorID3 << " " << nSubMsgID  <<  std::endl;
+		return nSubMsgID;
 	});
 
 	for (int i = 0; i < 10; ++i)
 	{
 		m_pActorModule->SendMsgToActor(nActorID3, i, "Test actor!");
 	}
+	*/
+
+	//example 4
+	for (int i = 0; i < 100; ++i)
+	{
+		m_pThreadPoolModule->DoAsyncTask("sas",
+			[](const NFGUID taskID, const std::string& strData) -> std::string
+		{
+			std::cout << "example 4 thread id: " << std::this_thread::get_id() << " task id:" << taskID.ToString() << " task data:" << strData << std::endl;
+			return "aaaaaresulttttttt";
+		},
+			[](const NFGUID taskID, const std::string& strData) -> void
+		{
+			std::cout << "example 4 thread id: " << std::this_thread::get_id() << " task id:" << taskID.ToString() << " task result:" << strData << std::endl;
+		});
+	}
+
+	//example 5
+	for (int i = 0; i < 100; ++i)
+	{
+		m_pThreadPoolModule->DoAsyncTask(i, NFGUID(0, i), "sas",
+			[](const NFGUID taskID, const std::string& strData) -> std::string
+		{
+			std::cout << "example 5 thread id: " << std::this_thread::get_id() << " task id:" << taskID.ToString() << " task data:" << strData << std::endl;
+			return "aaaaaresulttttttt";
+		},
+			[](const NFGUID taskID, const std::string& strData) -> void
+		{
+			std::cout << "example 5 thread id: " << std::this_thread::get_id() << " task id:" << taskID.ToString() << " task result:" << strData << std::endl;
+		});
+	}
+
 
 	std::cout << "Hello, world4, AfterInit end" << std::endl;
 	return true;
