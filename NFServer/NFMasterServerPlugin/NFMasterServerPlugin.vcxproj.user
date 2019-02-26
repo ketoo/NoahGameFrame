@@ -3,7 +3,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LocalDebuggerWorkingDirectory>$(SolutionDir)\_Out\$(Configuration)\</LocalDebuggerWorkingDirectory>
     <DebuggerFlavor>WindowsLocalDebugger</DebuggerFlavor>
-    <LocalDebuggerCommand>$(TargetPath)</LocalDebuggerCommand>
+    <LocalDebuggerCommand>$(SolutionDir)\_Out\Debug\NFPluginLoader_d.exe</LocalDebuggerCommand>
     <LocalDebuggerCommandArguments>Server=MasterServer ID=3</LocalDebuggerCommandArguments>
   </PropertyGroup>
 </Project>

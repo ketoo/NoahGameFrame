@@ -42,6 +42,13 @@ public:
         HTTP_RESP_FUNCTOR_PTR pd ( new HTTP_RESP_FUNCTOR ( std::bind ( handleRecieve, pBase, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3) ) );
         return DoGet ( strUri, std::map<std::string, std::string>(), pd );
     }
+
+	bool DoGet(const std::string& strUri, HTTP_RESP_FUNCTOR functor)
+	{
+		HTTP_RESP_FUNCTOR_PTR pd(new HTTP_RESP_FUNCTOR(functor));
+		return DoGet(strUri, std::map<std::string, std::string>(), pd);
+	}
+
     template<typename BaseType>
     bool DoGet ( const std::string& strUri, const std::map<std::string, std::string>& xHeaders,
                       BaseType* pBase,
@@ -50,6 +57,13 @@ public:
         HTTP_RESP_FUNCTOR_PTR pd ( new HTTP_RESP_FUNCTOR ( std::bind ( handleRecieve, pBase, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3) ) );
         return DoGet( strUri, xHeaders, pd );
     }
+
+	bool DoGet(const std::string& strUri, const std::map<std::string, std::string>& xHeaders,
+		HTTP_RESP_FUNCTOR functor)
+	{
+		HTTP_RESP_FUNCTOR_PTR pd(new HTTP_RESP_FUNCTOR(functor));
+		return DoGet(strUri, xHeaders, pd);
+	}
 
 
     template<typename BaseType>
@@ -61,6 +75,12 @@ public:
         return DoPost( strUri, std::map<std::string, std::string>(), strPostData, pd );
     }
 
+	bool DoPost(const std::string& strUri, const std::string& strPostData,
+		HTTP_RESP_FUNCTOR functor)
+	{
+		HTTP_RESP_FUNCTOR_PTR pd(new HTTP_RESP_FUNCTOR(functor));
+		return DoPost(strUri, std::map<std::string, std::string>(), strPostData, pd);
+	}
 
     template<typename BaseType>
     bool DoPost( const std::string& strUri, const std::string& strPostData, const std::map<std::string, std::string>& xHeaders,
@@ -71,6 +91,12 @@ public:
         return DoPost( strUri, xHeaders, strPostData, pd );
     }
 
+	bool DoPost(const std::string& strUri, const std::string& strPostData, const std::map<std::string, std::string>& xHeaders,
+		HTTP_RESP_FUNCTOR functor)
+	{
+		HTTP_RESP_FUNCTOR_PTR pd(new HTTP_RESP_FUNCTOR(functor));
+		return DoPost(strUri, xHeaders, strPostData, pd);
+	}
 	//actually, sync post method
 	//NFWebStatus
 	virtual int Post(const std::string& strUri, const std::string& strData, std::string& strResData) = 0;
