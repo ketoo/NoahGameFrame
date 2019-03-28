@@ -64,10 +64,12 @@ protected:
                             HTTP_RESP_FUNCTOR_PTR pCB);
 
     virtual bool DoPost(const std::string& strUri,
-                             const std::map<std::string, std::string>& xHeaders,
-                             const std::string& strPostData,
-                             HTTP_RESP_FUNCTOR_PTR pCB);
+        const std::map<std::string, std::string>& xHeaders,
+        const std::string& strPostData,
+        HTTP_RESP_FUNCTOR_PTR pCB, const std::string& strMemo = "");
 
+    virtual NF_SHARE_PTR<std::string> getMemoData(const NFGUID id);
+    virtual void removeMemoData(const NFGUID id);
 
 protected:
 
@@ -94,6 +96,7 @@ private:
 	NFIHttpClient* m_pHttpClient;
     std::map<std::string, std::string> m_xDefaultHttpHeaders;
 	NFMapEx<NFGUID, RespData> mxRespDataMap;
+    NFMapEx<NFGUID, std::string > mxMemoMap;
 };
 
 #endif

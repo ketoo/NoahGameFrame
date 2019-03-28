@@ -132,10 +132,15 @@ bool NFHttpClientModule::DoGet(const std::string& strUri,
 bool NFHttpClientModule::DoPost(const std::string& strUri,
                                       const std::map<std::string, std::string>& xHeaders,
                                       const std::string& strPostData,
-                                      HTTP_RESP_FUNCTOR_PTR pCB)
+                                      HTTP_RESP_FUNCTOR_PTR pCB, const std::string& strMemo)
 {
+    NFGUID aid = m_pKernelModule->CreateGUID();
+    if (strMemo.length() > 0)
+        mxMemoMap.AddElement(aid, NF_SHARE_PTR<std::string>(NF_NEW std::string(strMemo)));
+
     return m_pHttpClient->DoPost(strUri, strPostData, pCB,
-                                      xHeaders.size() == 0 ? m_xDefaultHttpHeaders : xHeaders);
+        xHeaders.size() == 0 ? m_xDefaultHttpHeaders : xHeaders, aid);
+
 }
 
 void NFHttpClientModule::CallBack(const NFGUID id, const int state_code, const std::string & strRespData)
@@ -147,4 +152,15 @@ void NFHttpClientModule::CallBack(const NFGUID id, const int state_code, const s
 		xRespData->state_code = state_code;
 		xRespData->strRespData = strRespData;
 	}
+}
+NF_SHARE_PTR<std::string> NFHttpClientModule::getMemoData(const NFGUID id)
+{
+    NF_SHARE_PTR<std::string> ss = mxMemoMap.GetElement(id);
+    return ss;
+}
+
+
+void NFHttpClientModule::removeMemoData(const NFGUID id)
+{
+    mxMemoMap.RemoveElement(id);
 }

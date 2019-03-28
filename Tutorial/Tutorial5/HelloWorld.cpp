@@ -115,8 +115,9 @@ int NFHelloWorld::OnHeartBeat(const NFGUID & self, const std::string & strHeartB
 	{
 		std::cout << "OnGetCallBack" << std::endl;
 	});
-
-	m_pHttpClientModule->DoPost("http://127.0.0.1:8080/json", "OnHeartBeat post data---", this, &NFHelloWorld::OnPostCallBack);
+    std::string memo;
+    memo = "memo here";
+	m_pHttpClientModule->DoPost("http://127.0.0.1:8080/json", "OnHeartBeat post data---", this, &NFHelloWorld::OnPostCallBack,memo);
 
 	m_pHttpClientModule->DoPost("http://127.0.0.1:8080/json", "OnHeartBeat post data---", [](const NFGUID id, const int state_code, const std::string & strRespData) -> void
 	{
@@ -133,5 +134,7 @@ void NFHelloWorld::OnGetCallBack(const NFGUID id, const int state_code, const st
 
 void NFHelloWorld::OnPostCallBack(const NFGUID id, const int state_code, const std::string & strRespData)
 {
-	std::cout << "OnPostCallBack" << std::endl;
+    NF_SHARE_PTR<std::string> ss = m_pHttpClientModule->getMemoData(id);
+    m_pHttpClientModule->removeMemoData(id);
+    std::cout << "OnPostCallBack" << " "<<ss<<std::endl;
 }
