@@ -82,7 +82,8 @@ int NFHttpClientModule::Post(const std::string & strUri, const std::map<std::str
 	HTTP_RESP_FUNCTOR_PTR pd(new HTTP_RESP_FUNCTOR(std::bind(&NFHttpClientModule::CallBack, this, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3)));
 
 	NFGUID id = m_pKernelModule->CreateGUID();
-	m_pHttpClient->DoPost(strUri, strData, pd, xHeaders, id);
+    std::string memo;
+    m_pHttpClient->DoPost(strUri, strData,memo, pd, xHeaders, id);
 
 	mxRespDataMap.AddElement(id, NF_SHARE_PTR<RespData>(NF_NEW RespData()));
 
@@ -135,10 +136,8 @@ bool NFHttpClientModule::DoPost(const std::string& strUri,
                                       HTTP_RESP_FUNCTOR_PTR pCB, const std::string& strMemo)
 {
     NFGUID aid = m_pKernelModule->CreateGUID();
-    if (strMemo.length() > 0)
-        mxMemoMap.AddElement(aid, NF_SHARE_PTR<std::string>(NF_NEW std::string(strMemo)));
 
-    return m_pHttpClient->DoPost(strUri, strPostData, pCB,
+    return m_pHttpClient->DoPost(strUri, strPostData, strMemo, pCB,
         xHeaders.size() == 0 ? m_xDefaultHttpHeaders : xHeaders, aid);
 
 }
@@ -152,15 +151,4 @@ void NFHttpClientModule::CallBack(const NFGUID id, const int state_code, const s
 		xRespData->state_code = state_code;
 		xRespData->strRespData = strRespData;
 	}
-}
-NF_SHARE_PTR<std::string> NFHttpClientModule::getMemoData(const NFGUID id)
-{
-    NF_SHARE_PTR<std::string> ss = mxMemoMap.GetElement(id);
-    return ss;
-}
-
-
-void NFHttpClientModule::removeMemoData(const NFGUID id)
-{
-    mxMemoMap.RemoveElement(id);
 }

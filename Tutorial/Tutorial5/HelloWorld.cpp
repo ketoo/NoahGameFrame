@@ -111,7 +111,7 @@ NFWebStatus NFHelloWorld::OnFilter(const NFHttpRequest & req)
 int NFHelloWorld::OnHeartBeat(const NFGUID & self, const std::string & strHeartBeat, const float fTime, const int nCount)
 {
 	m_pHttpClientModule->DoGet("http://127.0.0.1:8080/json", this, &NFHelloWorld::OnGetCallBack);
-	m_pHttpClientModule->DoGet("http://127.0.0.1:8080/json", [](const NFGUID id, const int state_code, const std::string & strRespData) -> void
+	m_pHttpClientModule->DoGet("http://127.0.0.1:8080/json", [](const NFGUID id, const int state_code, const std::string & strRespData, const std::string & strMemoData) -> void
 	{
 		std::cout << "OnGetCallBack" << std::endl;
 	});
@@ -119,7 +119,7 @@ int NFHelloWorld::OnHeartBeat(const NFGUID & self, const std::string & strHeartB
     memo = "memo here";
 	m_pHttpClientModule->DoPost("http://127.0.0.1:8080/json", "OnHeartBeat post data---", this, &NFHelloWorld::OnPostCallBack,memo);
 
-	m_pHttpClientModule->DoPost("http://127.0.0.1:8080/json", "OnHeartBeat post data---", [](const NFGUID id, const int state_code, const std::string & strRespData) -> void
+	m_pHttpClientModule->DoPost("http://127.0.0.1:8080/json", "OnHeartBeat post data---", [](const NFGUID id, const int state_code, const std::string & strRespData, const std::string & strMemoData) -> void
 	{
 		std::cout << "OnPostCallBack" << std::endl;
 	});
@@ -132,9 +132,7 @@ void NFHelloWorld::OnGetCallBack(const NFGUID id, const int state_code, const st
 	std::cout << "OnGetCallBack" << std::endl;
 }
 
-void NFHelloWorld::OnPostCallBack(const NFGUID id, const int state_code, const std::string & strRespData)
+void NFHelloWorld::OnPostCallBack(const NFGUID id, const int state_code, const std::string& strRespData, const std::string& strMemoData)
 {
-    NF_SHARE_PTR<std::string> ss = m_pHttpClientModule->getMemoData(id);
-    m_pHttpClientModule->removeMemoData(id);
-    std::cout << "OnPostCallBack" << " "<<ss<<std::endl;
+    std::cout << "OnPostCallBack" << " "<< strMemoData <<std::endl;
 }
