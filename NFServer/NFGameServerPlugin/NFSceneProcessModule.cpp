@@ -148,6 +148,8 @@ bool NFSceneProcessModule::RequestEnterScene(const NFGUID & self, const int nSce
 
 int NFSceneProcessModule::BeforeLeaveSceneGroupEvent(const NFGUID & self, const int nSceneID, const int nGroupID, const int nType, const NFDataList & argList)
 {
+	//change AI onwer
+
 	return 0;
 }
 
@@ -233,13 +235,39 @@ int NFSceneProcessModule::BeforeEnterSceneGroupEvent(const NFGUID & self, const 
 			m_pSceneModule->CreateSceneNPC(nSceneID, nGroupID, xDataList);
 		}
 	}
+	else if (eSceneType == E_SCENE_TYPE::SCENE_TYPE_NORMAL)
+	{
+	}
 
 	return 0;
 }
 
 int NFSceneProcessModule::AfterEnterSceneGroupEvent(const NFGUID & self, const int nSceneID, const int nGroupID, const int nType, const NFDataList & argList)
 {
-
+	E_SCENE_TYPE eSceneType = (E_SCENE_TYPE)m_pElementModule->GetPropertyInt32(std::to_string(nSceneID), NFrame::Scene::Type());
+	if (eSceneType == E_SCENE_TYPE::SCENE_TYPE_SINGLE_CLONE_SCENE)
+	{
+	}
+	else if (eSceneType == E_SCENE_TYPE::SCENE_TYPE_MULTI_CLONE_SCENE)
+	{
+	}
+	else if (eSceneType == E_SCENE_TYPE::SCENE_TYPE_NORMAL)
+	{
+		//change AI owner
+		NFDataList varObjectList;
+		if (m_pKernelModule->GetGroupObjectList(nSceneID, nGroupID, varObjectList, false) && varObjectList.GetCount() > 0)
+		{
+			for (int i = 0; i < varObjectList.GetCount(); ++i)
+			{
+				NFGUID npcID = varObjectList.Object(i);
+				NFGUID npcOnwerID = m_pKernelModule->GetPropertyObject(npcID, NFrame::NPC::AIOwnerID());
+				if (npcOnwerID.IsNull())
+				{
+					m_pKernelModule->SetPropertyObject(npcID, NFrame::NPC::AIOwnerID(), self);
+				}
+			}
+		}
+	}
 
 	return 1;
 }
