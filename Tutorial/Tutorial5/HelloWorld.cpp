@@ -115,9 +115,9 @@ int NFHelloWorld::OnHeartBeat(const NFGUID & self, const std::string & strHeartB
 	{
 		std::cout << "OnGetCallBack" << std::endl;
 	});
-    std::string memo;
-    memo = "memo here";
-	m_pHttpClientModule->DoPost("http://127.0.0.1:8080/json", "OnHeartBeat post data---", this, &NFHelloWorld::OnPostCallBack,memo);
+
+    std::string strMemo = "Memo here";
+	m_pHttpClientModule->DoPost("http://127.0.0.1:8080/json", "OnHeartBeat post data---", this, &NFHelloWorld::OnPostCallBack, strMemo);
 
 	m_pHttpClientModule->DoPost("http://127.0.0.1:8080/json", "OnHeartBeat post data---", [](const NFGUID id, const int state_code, const std::string & strRespData, const std::string & strMemoData) -> void
 	{
