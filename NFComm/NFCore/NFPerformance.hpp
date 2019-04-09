@@ -55,7 +55,7 @@ public:
 
 	int64_t TimeScope()
 	{
-		return checkTime;
+		return checkTime - time;
 	}
 };
 
