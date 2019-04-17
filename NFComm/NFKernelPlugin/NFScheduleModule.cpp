@@ -65,11 +65,12 @@ bool NFScheduleModule::Init()
 
 	return true;
 }
+
 bool NFScheduleModule::Execute()
 {
 	NFPerformance performanceObject;
 
-	//execute every schedule
+	//execute all tasks
 	NF_SHARE_PTR<NFMapEx <std::string, NFScheduleElement >> xObjectSchedule = mObjectScheduleMap.First();
 	while (xObjectSchedule)
 	{
@@ -122,6 +123,7 @@ bool NFScheduleModule::Execute()
 			}
 		}
 	}
+
 	mObjectRemoveList.clear();
 
 	//add schedule
@@ -146,16 +148,17 @@ bool NFScheduleModule::Execute()
 
 	mObjectAddList.clear();
 
-	if (performanceObject.CheckTimePoint(1))
+	if (performanceObject.CheckTimePoint(5))
 	{
 		std::ostringstream os;
-		os << "---------------object scehdule  performance problem------------------- ";
+		os << "---------------object schedule  performance problem ";
 		os << performanceObject.TimeScope();
 		os << "---------- ";
 		m_pLogModule->LogWarning(NFGUID(), os, __FUNCTION__, __LINE__);
 	}
+
 	////////////////////////////////////////////
-	//execute every schedule
+	//execute all tasks
 
 	NFPerformance performanceModule;
 
@@ -199,6 +202,7 @@ bool NFScheduleModule::Execute()
 			mModuleScheduleMap.RemoveElement(strSheduleName);
 		}
 	}
+
 	mModuleRemoveList.clear();
 
 	//add schedule
@@ -216,11 +220,11 @@ bool NFScheduleModule::Execute()
 
 	mModuleAddList.clear();
 
-	if (performanceModule.CheckTimePoint(1))
+	if (performanceModule.CheckTimePoint(5))
 	{
 		std::ostringstream os;
-		os << "---------------module scehdule performance problem------------------- ";
-		os << performanceObject.TimeScope();
+		os << "---------------module schedule performance problem ";
+		os << performanceModule.TimeScope();
 		os << "---------- ";
 		m_pLogModule->LogWarning(NFGUID(), os, __FUNCTION__, __LINE__);
 	}

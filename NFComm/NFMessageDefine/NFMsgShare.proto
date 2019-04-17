@@ -116,6 +116,17 @@ message ReqAckPlayerChat
 	repeated ChatContainer Container_data = 6;
 }
 
+message ReqAckPlayerPosSync
+{
+	Ident 	mover = 1;
+	int32 time = 2;
+	float InterpolationTime = 3;
+	Vector3 position = 4;
+    Vector3 direction = 5;
+    int32 status = 6;
+    int32 frame = 7;
+}
+
 ////////////////////////////
 
 message EffectData

@@ -454,33 +454,52 @@ int NFHeroModule::OnPlayerClassEvent(const NFGUID & self, const std::string & st
 	if (CLASS_OBJECT_EVENT::COE_CREATE_FINISH == eClassEvent)
 	{
 		m_pKernelModule->AddPropertyCallBack(self, NFrame::NPC::HP(), this, &NFHeroModule::OnPlayerHPEvent);
+		m_pKernelModule->AddPropertyCallBack(self, NFrame::Player::FightHeroHP1(), this, &NFHeroModule::OnPlayerHeroHPEvent);
+		m_pKernelModule->AddPropertyCallBack(self, NFrame::Player::FightHeroHP2(), this, &NFHeroModule::OnPlayerHeroHPEvent);
+		m_pKernelModule->AddPropertyCallBack(self, NFrame::Player::FightHeroHP3(), this, &NFHeroModule::OnPlayerHeroHPEvent);
 	}
 	
 	return 0;
 }
 
+int NFHeroModule::OnPlayerHeroHPEvent(const NFGUID & self, const std::string & strPropertyName, const NFData & oldVar, const NFData & newVar)
+{
+	NFGUID heroID1 = m_pKernelModule->GetPropertyObject(self, NFrame::Player::HeroID1());
+	NFGUID heroID2 = m_pKernelModule->GetPropertyObject(self, NFrame::Player::HeroID2());
+	NFGUID heroID3 = m_pKernelModule->GetPropertyObject(self, NFrame::Player::HeroID3());
+
+	int nHero1HP = m_pKernelModule->GetPropertyInt(self, NFrame::Player::FightHeroHP1());
+	int nHero2HP = m_pKernelModule->GetPropertyInt(self, NFrame::Player::FightHeroHP2());
+	int nHero3HP = m_pKernelModule->GetPropertyInt(self, NFrame::Player::FightHeroHP3());
+
+	return 0;
+}
+
 int NFHeroModule::OnPlayerHPEvent(const NFGUID & self, const std::string & strPropertyName, const NFData & oldVar, const NFData & newVar)
 {
-
 	NFGUID xFightingHero = m_pKernelModule->GetPropertyObject(self, NFrame::Player::FightHeroID());
 	EConsHero_Pos nPos = GetFightPos(self, xFightingHero);
 
 	switch (nPos)
 	{
 	case NFIHeroModule::ECONSt_HERO_UNKNOW:
+		//inactive
 		break;
 	case NFIHeroModule::ECONSt_HERO_POS1:
 	{
+		//inactive
 		m_pKernelModule->SetPropertyInt(self, NFrame::Player::FightHeroHP1(), newVar.GetInt());
 	}
 		break;
 	case NFIHeroModule::ECONSt_HERO_POS2:
 	{
+		//inactive
 		m_pKernelModule->SetPropertyInt(self, NFrame::Player::FightHeroHP2(), newVar.GetInt());
 	}
 		break;
 	case NFIHeroModule::ECONSt_HERO_POS3:
 	{
+		//inactive
 		m_pKernelModule->SetPropertyInt(self, NFrame::Player::FightHeroHP3(), newVar.GetInt());
 	}
 		break;

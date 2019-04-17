@@ -230,7 +230,7 @@ bool NFElementModule::Load(rapidxml::xml_node<>* attrNode, NF_SHARE_PTR<NFIClass
             break;
             case TDATA_FLOAT:
             {
-                if (strlen(pstrConfigValue) <= 0)
+                if (strlen(pstrConfigValue) <= 0 || !LegalFloat(pstrConfigValue))
                 {
                     NFASSERT(0, temProperty->GetKey(), __FILE__, __FUNCTION__);
                 }
@@ -253,23 +253,30 @@ bool NFElementModule::Load(rapidxml::xml_node<>* attrNode, NF_SHARE_PTR<NFIClass
             break;
 			case TDATA_VECTOR2:
 			{
-				if (strlen(pstrConfigValue))
+				if (strlen(pstrConfigValue) <= 0)
 				{
 					NFASSERT(0, temProperty->GetKey(), __FILE__, __FUNCTION__);
 				}
+
 				NFVector2 tmp;
-				tmp.FromString(pstrConfigValue);
+				if (!tmp.FromString(pstrConfigValue))
+				{
+					NFASSERT(0, temProperty->GetKey(), __FILE__, __FUNCTION__);
+				}
 				var.SetVector2(tmp);
 			}
 			break;
 			case TDATA_VECTOR3:
 			{
-				if (strlen(pstrConfigValue))
+				if (strlen(pstrConfigValue) <= 0)
 				{
 					NFASSERT(0, temProperty->GetKey(), __FILE__, __FUNCTION__);
 				}
 				NFVector3 tmp;
-				tmp.FromString(pstrConfigValue);
+				if (!tmp.FromString(pstrConfigValue))
+				{
+					NFASSERT(0, temProperty->GetKey(), __FILE__, __FUNCTION__);
+				}
 				var.SetVector3(tmp);
 			}
 			break;
@@ -517,6 +524,53 @@ bool NFElementModule::LegalNumber(const char* str)
     }
 
     return true;
+}
+
+bool NFElementModule::LegalFloat(const char * str)
+{
+
+	int nLen = int(strlen(str));
+	if (nLen <= 0)
+	{
+		return false;
+	}
+
+	int nStart = 0;
+	int nEnd = nLen;
+	if ('-' == str[0])
+	{
+		nStart = 1;
+	}
+	if ('f' == std::tolower(str[nEnd -1]))
+	{
+		nEnd--;
+	}
+
+	if (nEnd <= nStart)
+	{
+		return false;
+	}
+
+	int pointNum = 0;
+	for (int i = nStart; i < nEnd; ++i)
+	{
+		if ('.' == str[i])
+		{
+			pointNum++;
+		}
+
+		if (!isdigit(str[i]) && '.' != str[i])
+		{
+			return false;
+		}
+	}
+
+	if (pointNum > 1)
+	{
+		return false;
+	}
+
+	return true;
 }
 
 bool NFElementModule::AfterInit()

@@ -125,7 +125,8 @@ bool NFHttpClient::MakeRequest(const std::string& strUri,
                                 const std::string& strPostData,
                                 const std::map<std::string, std::string>& xHeaders,
                                 const NFHttpType eHttpType,
-								const NFGUID id)
+                                const std::string& strMemoData,
+                                const NFGUID id)
 {
     struct evhttp_uri* http_uri = evhttp_uri_parse(strUri.c_str());
     if (http_uri == NULL)
@@ -291,10 +292,11 @@ bool NFHttpClient::MakeRequest(const std::string& strUri,
         pHttpObj->m_pBev = bev;
         pHttpObj->m_pCB = pCB;
 		pHttpObj->mID = id;
+        pHttpObj->strMemo = strMemoData;
     }
     else
     {
-        pHttpObj = new HttpObject(this, bev, pCB, id);
+        pHttpObj = new HttpObject(this, bev, pCB, id,strMemoData);
     }
 
     if (pHttpObj == nullptr)
@@ -375,13 +377,14 @@ bool NFHttpClient::MakeRequest(const std::string& strUri,
 bool NFHttpClient::DoGet(const std::string& strUri, HTTP_RESP_FUNCTOR_PTR pCB,
                                const std::map<std::string, std::string>& xHeaders, const NFGUID id)
 {
-    return MakeRequest(strUri, pCB, "", xHeaders, NFHttpType::NF_HTTP_REQ_GET);
+    std::string memo;
+    return MakeRequest(strUri, pCB, "", xHeaders, NFHttpType::NF_HTTP_REQ_GET,memo);
 }
 
-bool NFHttpClient::DoPost(const std::string& strUri, const std::string& strPostData, HTTP_RESP_FUNCTOR_PTR pCB,
+bool NFHttpClient::DoPost(const std::string& strUri, const std::string& strPostData, const std::string& strMemoData, HTTP_RESP_FUNCTOR_PTR pCB,
                                 const std::map<std::string, std::string>& xHeaders, const NFGUID id)
 {
-    return MakeRequest(strUri, pCB, strPostData, xHeaders, NFHttpType::NF_HTTP_REQ_POST);
+    return MakeRequest(strUri, pCB, strPostData, xHeaders, NFHttpType::NF_HTTP_REQ_POST, strMemoData);
 }
 
 void NFHttpClient::OnHttpReqDone(struct evhttp_request* req, void* ctx)
@@ -392,6 +395,7 @@ void NFHttpClient::OnHttpReqDone(struct evhttp_request* req, void* ctx)
 		LOG(ERROR) << "pHttpObj ==NULL" << " " << __FUNCTION__ << " " << __LINE__;
         return;
     }
+    std::string strResp;
 
     if (req == NULL)
     {
@@ -430,6 +434,8 @@ void NFHttpClient::OnHttpReqDone(struct evhttp_request* req, void* ctx)
             strErrMsg += std::string(tmpBuf);
         }
 
+        strResp = strErrMsg;
+
         NFHttpClient* pHttpClient = (NFHttpClient*)(pHttpObj->m_pHttpClient);
         pHttpClient->mlHttpObject.push_back(pHttpObj);
         
@@ -440,7 +446,7 @@ void NFHttpClient::OnHttpReqDone(struct evhttp_request* req, void* ctx)
     int nRespCode = evhttp_request_get_response_code(req);
     char buffer[4096] = {0};
     int nread = 0;
-    std::string strResp;
+
     while ((nread = evbuffer_remove(evhttp_request_get_input_buffer(req),
                                     buffer, sizeof(buffer)))
            > 0)
@@ -470,7 +476,6 @@ void NFHttpClient::OnHttpReqDone(struct evhttp_request* req, void* ctx)
         }
     }
 
-    
     if (pHttpObj->m_pCB)
     {
         if (pHttpObj->m_pCB.get())
@@ -478,7 +483,7 @@ void NFHttpClient::OnHttpReqDone(struct evhttp_request* req, void* ctx)
             try
             {
                 HTTP_RESP_FUNCTOR fun(*pHttpObj->m_pCB.get());
-                fun(pHttpObj->mID, nRespCode, strResp);
+                fun(pHttpObj->mID, nRespCode, strResp,pHttpObj->strMemo);
             }
             catch(...)
             {

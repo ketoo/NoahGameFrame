@@ -370,9 +370,7 @@ enum ESkillType
 	EST_BULLET_SINGLE		= 2;//this kind of bullet just can damage one object
 	EST_BULLET_REBOUND		= 3;//this kind of bullet can damage multiple objects via rebound
 	EST_BULLET_BOMB			= 4;//this kind of bullet can damage multiple objects when touch the target object(position)
-	EST_TARGET_SINGLE		= 5;//???????
-	EST_TARGET_GROUP		= 6;//????????
-	EST_POSITION_GROUP		= 7;//??????(????????position)
+	EST_POSITION_GROUP		= 5;//
 };
 
 enum EItemType
@@ -544,9 +542,10 @@ enum ENPCType
 
 enum ETARGETType
 {
-    ETARGETTYPE_ENEMY	= 0;			  //
-    ETARGETTYPE_SELF 	= 1;              //
-    ETARGETTYPE_FRIEND  = 2;              //
+    ETARGETTYPE_NONE	= 0;			  //
+    ETARGETTYPE_ENEMY	= 1;			  //
+    ETARGETTYPE_SELF 	= 2;              //
+    ETARGETTYPE_FRIEND  = 3;              //
     
 };
 

@@ -64,9 +64,9 @@ protected:
                             HTTP_RESP_FUNCTOR_PTR pCB);
 
     virtual bool DoPost(const std::string& strUri,
-                             const std::map<std::string, std::string>& xHeaders,
-                             const std::string& strPostData,
-                             HTTP_RESP_FUNCTOR_PTR pCB);
+        const std::map<std::string, std::string>& xHeaders,
+        const std::string& strPostData,
+        HTTP_RESP_FUNCTOR_PTR pCB, const std::string& strMemo = "");
 
 
 protected:
