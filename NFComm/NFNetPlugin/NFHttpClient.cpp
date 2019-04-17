@@ -433,8 +433,8 @@ void NFHttpClient::OnHttpReqDone(struct evhttp_request* req, void* ctx)
                      errcode);
             strErrMsg += std::string(tmpBuf);
         }
+
         strResp = strErrMsg;
-        goto exit;
 
         NFHttpClient* pHttpClient = (NFHttpClient*)(pHttpObj->m_pHttpClient);
         pHttpClient->mlHttpObject.push_back(pHttpObj);
@@ -476,7 +476,6 @@ void NFHttpClient::OnHttpReqDone(struct evhttp_request* req, void* ctx)
         }
     }
 
-exit:
     if (pHttpObj->m_pCB)
     {
         if (pHttpObj->m_pCB.get())
