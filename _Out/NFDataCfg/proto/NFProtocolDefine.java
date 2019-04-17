@@ -988,12 +988,14 @@ package nframe;
 		public static final String CamOffestPos = "CamOffestPos";// string
 		public static final String CamOffestRot = "CamOffestRot";// string
 		public static final String FilePath = "FilePath";// string
+		public static final String LeftBot = "LeftBot";// vector2
 		public static final String LoadingUI = "LoadingUI";// string
 		public static final String MaxGroup = "MaxGroup";// int
 		public static final String MaxGroupPlayers = "MaxGroupPlayers";// int
 		public static final String NavigationResPath = "NavigationResPath";// string
 		public static final String RelivePos = "RelivePos";// string
 		public static final String ResPath = "ResPath";// string
+		public static final String RightTop = "RightTop";// vector2
 		public static final String SceneName = "SceneName";// string
 		public static final String SceneShowName = "SceneShowName";// string
 		public static final String SoundList = "SoundList";// string

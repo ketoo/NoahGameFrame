@@ -120,7 +120,8 @@ protected:
 
     virtual bool Load(rapidxml::xml_node<>* attrNode, NF_SHARE_PTR<NFIClass> pLogicClass);
     virtual bool CheckRef();
-    virtual bool LegalNumber(const char* str);
+	virtual bool LegalNumber(const char* str);
+	virtual bool LegalFloat(const char* str);
 
 protected:
     NFIClassModule* m_pClassModule;

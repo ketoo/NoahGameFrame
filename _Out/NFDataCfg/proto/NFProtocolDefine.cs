@@ -994,12 +994,14 @@ namespace NFrame
 		public static readonly String CamOffestPos = "CamOffestPos";// string
 		public static readonly String CamOffestRot = "CamOffestRot";// string
 		public static readonly String FilePath = "FilePath";// string
+		public static readonly String LeftBot = "LeftBot";// vector2
 		public static readonly String LoadingUI = "LoadingUI";// string
 		public static readonly String MaxGroup = "MaxGroup";// int
 		public static readonly String MaxGroupPlayers = "MaxGroupPlayers";// int
 		public static readonly String NavigationResPath = "NavigationResPath";// string
 		public static readonly String RelivePos = "RelivePos";// string
 		public static readonly String ResPath = "ResPath";// string
+		public static readonly String RightTop = "RightTop";// vector2
 		public static readonly String SceneName = "SceneName";// string
 		public static readonly String SceneShowName = "SceneShowName";// string
 		public static readonly String SoundList = "SoundList";// string

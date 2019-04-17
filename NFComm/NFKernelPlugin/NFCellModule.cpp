@@ -101,15 +101,19 @@ bool NFCellModule::AfterInit()
 		TMAP_SCENE_INFO::iterator it = mtGridInfoMap.begin();
 		for (; it != mtGridInfoMap.end(); it++)
 		{
-			// init all grid, start from position 0
+			//init all grid, start from position 0
 			//the default group's id is 0
+			int nSceneID = it->first;
+			NFVector2 vLeftBot = m_pElementModule->GetPropertyVector2(std::to_string(nSceneID), NFrame::Scene::LeftBot());
+			NFVector2 vRightTop = m_pElementModule->GetPropertyVector2(std::to_string(nSceneID), NFrame::Scene::RightTop());
+
 			TMAP_GROUP_INFO::iterator itGroup = it->second.find(0);
 
-			for (int nWidthPos = 0; nWidthPos < nSceneWidth; nWidthPos += nGridWidth)
+			for (int nPosX = vLeftBot.X(); nPosX < vRightTop.X(); nPosX += nGridWidth)
 			{
-				for (int nHeightPos = 0; nHeightPos < nSceneWidth; nHeightPos += nGridWidth)
+				for (int nPosY = vLeftBot.Y(); nPosY < vRightTop.Y(); nPosY += nGridWidth)
 				{
-					NFGUID gridID = ComputerGridID(nWidthPos, 0, nHeightPos);
+					NFGUID gridID = ComputerGridID(nPosX, 0, nPosY);
 					NF_SHARE_PTR<NFSceneCellInfo> pGridInfo = NF_SHARE_PTR<NFSceneCellInfo>(NF_NEW NFSceneCellInfo(it->first, itGroup->first, gridID));
 
 					itGroup->second.insert(TMAP_GRID_INFO::value_type(gridID, pGridInfo));

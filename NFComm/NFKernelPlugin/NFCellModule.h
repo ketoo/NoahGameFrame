@@ -174,7 +174,6 @@ private:
 
 private:
 	const static int nGridWidth = 10;
-	const static int nSceneWidth = 1000;
 
 	typedef std::map<NFGUID, NF_SHARE_PTR<NFSceneCellInfo>> TMAP_GRID_INFO;
 	typedef std::map<int, TMAP_GRID_INFO> TMAP_GROUP_INFO;
