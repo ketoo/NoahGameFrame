@@ -77,7 +77,7 @@ protected:
 	int OnHeartBeat(const NFGUID& self, const std::string& strHeartBeat, const float fTime, const int nCount);
 
 	void OnGetCallBack(const NFGUID id, const int state_code, const std::string& strRespData);
-	void OnPostCallBack(const NFGUID id, const int state_code, const std::string& strRespData);
+	void OnPostCallBack(const NFGUID id, const int state_code, const std::string& strRespData, const std::string& strMemoData);
 private:
 
 	NFIClassModule* m_pLogicClassModule;

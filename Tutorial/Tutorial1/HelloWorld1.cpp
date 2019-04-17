@@ -40,6 +40,19 @@ bool NFHelloWorld1::AfterInit()
     
     std::cout << "Hello, world1, AfterInit" << std::endl;
 
+
+	NFDataList dataList;
+	dataList.Add("1");
+	dataList.AddFloat(2.0f);
+	dataList.AddObject(NFGUID(3,3));
+	dataList.AddVector2(NFVector2(4.0f, 4.0f));
+
+	for (int i = 0; i < dataList.GetCount(); ++i)
+	{
+		std::cout << dataList.ToString(i) << std::endl;
+	}
+
+
     return true;
 }
 
