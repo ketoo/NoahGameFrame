@@ -25,6 +25,8 @@
 
 
 #include "NFSyncModule.h"
+#include "NFComm/NFPluginModule/NFINetModule.h"
+#include "NFComm/NFMessageDefine/NFMsgShare.pb.h"
 #include "NFComm/NFMessageDefine/NFProtocolDefine.hpp"
 
 bool NFSyncModule::Init()
@@ -58,7 +60,18 @@ bool NFSyncModule::AfterInit()
 	m_pKernelModule->AddClassCallBack(NFrame::NPC::ThisName(), this, &NFSyncModule::OnNPCClassEvent);
 	m_pKernelModule->AddClassCallBack(NFrame::Player::ThisName(), this, &NFSyncModule::OnPlayerClassEvent);
 
+
+	if (!m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_REQ_SEARCH_OPPNENT, this, &NFSyncModule::OnReqPosSyncProcess)) { return false; }
+
     return true;
+}
+
+void NFSyncModule::OnReqPosSyncProcess(const NFSOCK nSockIndex, const int nMsgID, const char *msg, const uint32_t nLen)
+{
+	CLIENT_MSG_PROCESS(nMsgID, msg, nLen, NFMsg::ReqAckPlayerPosSync);
+
+
+
 }
 
 int NFSyncModule::SyncHeart(const std::string & strHeartName, const float fTime, const int nCount)

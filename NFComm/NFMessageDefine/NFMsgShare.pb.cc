@@ -92,6 +92,11 @@ class ReqAckPlayerChatDefaultTypeInternal {
   ::google::protobuf::internal::ExplicitlyConstructed<ReqAckPlayerChat>
       _instance;
 } _ReqAckPlayerChat_default_instance_;
+class ReqAckPlayerPosSyncDefaultTypeInternal {
+ public:
+  ::google::protobuf::internal::ExplicitlyConstructed<ReqAckPlayerPosSync>
+      _instance;
+} _ReqAckPlayerPosSync_default_instance_;
 class EffectDataDefaultTypeInternal {
  public:
   ::google::protobuf::internal::ExplicitlyConstructed<EffectData>
@@ -466,6 +471,22 @@ LIBPROTOC_EXPORT ::google::protobuf::internal::SCCInfo<2> scc_info_ReqAckPlayerC
     {{ATOMIC_VAR_INIT(::google::protobuf::internal::SCCInfoBase::kUninitialized), 2, InitDefaultsReqAckPlayerChat}, {
       &protobuf_NFMsgBase_2eproto::scc_info_Ident.base,
       &protobuf_NFMsgShare_2eproto::scc_info_ReqAckPlayerChat_ChatContainer.base,}};
+
+static void InitDefaultsReqAckPlayerPosSync() {
+  GOOGLE_PROTOBUF_VERIFY_VERSION;
+
+  {
+    void* ptr = &::NFMsg::_ReqAckPlayerPosSync_default_instance_;
+    new (ptr) ::NFMsg::ReqAckPlayerPosSync();
+    ::google::protobuf::internal::OnShutdownDestroyMessage(ptr);
+  }
+  ::NFMsg::ReqAckPlayerPosSync::InitAsDefaultInstance();
+}
+
+LIBPROTOC_EXPORT ::google::protobuf::internal::SCCInfo<2> scc_info_ReqAckPlayerPosSync =
+    {{ATOMIC_VAR_INIT(::google::protobuf::internal::SCCInfoBase::kUninitialized), 2, InitDefaultsReqAckPlayerPosSync}, {
+      &protobuf_NFMsgBase_2eproto::scc_info_Ident.base,
+      &protobuf_NFMsgBase_2eproto::scc_info_Vector3.base,}};
 
 static void InitDefaultsEffectData() {
   GOOGLE_PROTOBUF_VERIFY_VERSION;
@@ -1106,6 +1127,7 @@ void InitDefaults() {
   ::google::protobuf::internal::InitSCC(&scc_info_ReqAckPlayerMove.base);
   ::google::protobuf::internal::InitSCC(&scc_info_ReqAckPlayerChat_ChatContainer.base);
   ::google::protobuf::internal::InitSCC(&scc_info_ReqAckPlayerChat.base);
+  ::google::protobuf::internal::InitSCC(&scc_info_ReqAckPlayerPosSync.base);
   ::google::protobuf::internal::InitSCC(&scc_info_EffectData.base);
   ::google::protobuf::internal::InitSCC(&scc_info_ReqAckUseSkill.base);
   ::google::protobuf::internal::InitSCC(&scc_info_ReqAckUseItem.base);
@@ -1150,7 +1172,7 @@ void InitDefaults() {
   ::google::protobuf::internal::InitSCC(&scc_info_AckCreatePVPEctype.base);
 }
 
-::google::protobuf::Metadata file_level_metadata[53];
+::google::protobuf::Metadata file_level_metadata[54];
 const ::google::protobuf::EnumDescriptor* file_level_enum_descriptors[9];
 
 const ::google::protobuf::uint32 TableStruct::offsets[] GOOGLE_PROTOBUF_ATTRIBUTE_SECTION_VARIABLE(protodesc_cold) = {
@@ -1248,6 +1270,18 @@ const ::google::protobuf::uint32 TableStruct::offsets[] GOOGLE_PROTOBUF_ATTRIBUT
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NFMsg::ReqAckPlayerChat, chat_name_),
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NFMsg::ReqAckPlayerChat, target_id_),
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NFMsg::ReqAckPlayerChat, container_data_),
+  ~0u,  // no _has_bits_
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NFMsg::ReqAckPlayerPosSync, _internal_metadata_),
+  ~0u,  // no _extensions_
+  ~0u,  // no _oneof_case_
+  ~0u,  // no _weak_field_map_
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NFMsg::ReqAckPlayerPosSync, mover_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NFMsg::ReqAckPlayerPosSync, time_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NFMsg::ReqAckPlayerPosSync, interpolationtime_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NFMsg::ReqAckPlayerPosSync, position_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NFMsg::ReqAckPlayerPosSync, direction_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NFMsg::ReqAckPlayerPosSync, status_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NFMsg::ReqAckPlayerPosSync, frame_),
   ~0u,  // no _has_bits_
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NFMsg::EffectData, _internal_metadata_),
   ~0u,  // no _extensions_
@@ -1613,48 +1647,49 @@ static const ::google::protobuf::internal::MigrationSchema schemas[] GOOGLE_PROT
   { 63, -1, sizeof(::NFMsg::ReqAckPlayerMove)},
   { 76, -1, sizeof(::NFMsg::ReqAckPlayerChat_ChatContainer)},
   { 83, -1, sizeof(::NFMsg::ReqAckPlayerChat)},
-  { 94, -1, sizeof(::NFMsg::EffectData)},
-  { 102, -1, sizeof(::NFMsg::ReqAckUseSkill)},
-  { 111, -1, sizeof(::NFMsg::ReqAckUseItem)},
-  { 122, -1, sizeof(::NFMsg::ReqAckSwapScene)},
-  { 134, -1, sizeof(::NFMsg::ReqAckHomeScene)},
-  { 140, -1, sizeof(::NFMsg::ItemStruct)},
-  { 147, -1, sizeof(::NFMsg::CurrencyStruct)},
-  { 154, -1, sizeof(::NFMsg::ReqAckStartBattle)},
-  { 161, -1, sizeof(::NFMsg::ReqEndBattle)},
-  { 166, -1, sizeof(::NFMsg::ReqAckRelive)},
-  { 172, -1, sizeof(::NFMsg::AckEndBattle)},
-  { 183, -1, sizeof(::NFMsg::ReqPickDropItem)},
-  { 189, -1, sizeof(::NFMsg::ReqAcceptTask)},
-  { 195, -1, sizeof(::NFMsg::ReqCompeleteTask)},
-  { 201, -1, sizeof(::NFMsg::ReqAckJoinActivity)},
-  { 208, -1, sizeof(::NFMsg::ReqAckCreateGuild)},
-  { 215, -1, sizeof(::NFMsg::ReqSearchGuild)},
-  { 221, -1, sizeof(::NFMsg::AckSearchGuild_SearchGuildObject)},
-  { 233, -1, sizeof(::NFMsg::AckSearchGuild)},
-  { 239, -1, sizeof(::NFMsg::ReqAckJoinGuild)},
-  { 246, -1, sizeof(::NFMsg::ReqAckLeaveGuild)},
-  { 253, -1, sizeof(::NFMsg::ReqAckOprGuildMember)},
-  { 261, -1, sizeof(::NFMsg::ReqEnterGuildEctype)},
-  { 267, -1, sizeof(::NFMsg::ReqSetFightHero)},
-  { 274, -1, sizeof(::NFMsg::ReqSwitchFightHero)},
-  { 280, -1, sizeof(::NFMsg::ReqBuyItemFromShop)},
-  { 287, -1, sizeof(::NFMsg::ReqAddGambleValue)},
-  { 294, -1, sizeof(::NFMsg::ReqMiningTitle)},
-  { 302, -1, sizeof(::NFMsg::TileState)},
-  { 310, -1, sizeof(::NFMsg::TileBuilding)},
-  { 319, -1, sizeof(::NFMsg::TileNPC)},
-  { 328, -1, sizeof(::NFMsg::AckMiningTitle)},
-  { 336, -1, sizeof(::NFMsg::ReqSearchOppnent)},
-  { 342, -1, sizeof(::NFMsg::AckSearchOppnent)},
-  { 368, -1, sizeof(::NFMsg::ReqSendMail)},
-  { 376, -1, sizeof(::NFMsg::ReqSwitchServer)},
-  { 388, -1, sizeof(::NFMsg::AckSwitchServer)},
-  { 397, -1, sizeof(::NFMsg::PVPRoomInfo)},
-  { 412, -1, sizeof(::NFMsg::ReqPVPApplyMatch)},
-  { 422, -1, sizeof(::NFMsg::AckPVPApplyMatch)},
-  { 431, -1, sizeof(::NFMsg::ReqCreatePVPEctype)},
-  { 438, -1, sizeof(::NFMsg::AckCreatePVPEctype)},
+  { 94, -1, sizeof(::NFMsg::ReqAckPlayerPosSync)},
+  { 106, -1, sizeof(::NFMsg::EffectData)},
+  { 114, -1, sizeof(::NFMsg::ReqAckUseSkill)},
+  { 123, -1, sizeof(::NFMsg::ReqAckUseItem)},
+  { 134, -1, sizeof(::NFMsg::ReqAckSwapScene)},
+  { 146, -1, sizeof(::NFMsg::ReqAckHomeScene)},
+  { 152, -1, sizeof(::NFMsg::ItemStruct)},
+  { 159, -1, sizeof(::NFMsg::CurrencyStruct)},
+  { 166, -1, sizeof(::NFMsg::ReqAckStartBattle)},
+  { 173, -1, sizeof(::NFMsg::ReqEndBattle)},
+  { 178, -1, sizeof(::NFMsg::ReqAckRelive)},
+  { 184, -1, sizeof(::NFMsg::AckEndBattle)},
+  { 195, -1, sizeof(::NFMsg::ReqPickDropItem)},
+  { 201, -1, sizeof(::NFMsg::ReqAcceptTask)},
+  { 207, -1, sizeof(::NFMsg::ReqCompeleteTask)},
+  { 213, -1, sizeof(::NFMsg::ReqAckJoinActivity)},
+  { 220, -1, sizeof(::NFMsg::ReqAckCreateGuild)},
+  { 227, -1, sizeof(::NFMsg::ReqSearchGuild)},
+  { 233, -1, sizeof(::NFMsg::AckSearchGuild_SearchGuildObject)},
+  { 245, -1, sizeof(::NFMsg::AckSearchGuild)},
+  { 251, -1, sizeof(::NFMsg::ReqAckJoinGuild)},
+  { 258, -1, sizeof(::NFMsg::ReqAckLeaveGuild)},
+  { 265, -1, sizeof(::NFMsg::ReqAckOprGuildMember)},
+  { 273, -1, sizeof(::NFMsg::ReqEnterGuildEctype)},
+  { 279, -1, sizeof(::NFMsg::ReqSetFightHero)},
+  { 286, -1, sizeof(::NFMsg::ReqSwitchFightHero)},
+  { 292, -1, sizeof(::NFMsg::ReqBuyItemFromShop)},
+  { 299, -1, sizeof(::NFMsg::ReqAddGambleValue)},
+  { 306, -1, sizeof(::NFMsg::ReqMiningTitle)},
+  { 314, -1, sizeof(::NFMsg::TileState)},
+  { 322, -1, sizeof(::NFMsg::TileBuilding)},
+  { 331, -1, sizeof(::NFMsg::TileNPC)},
+  { 340, -1, sizeof(::NFMsg::AckMiningTitle)},
+  { 348, -1, sizeof(::NFMsg::ReqSearchOppnent)},
+  { 354, -1, sizeof(::NFMsg::AckSearchOppnent)},
+  { 380, -1, sizeof(::NFMsg::ReqSendMail)},
+  { 388, -1, sizeof(::NFMsg::ReqSwitchServer)},
+  { 400, -1, sizeof(::NFMsg::AckSwitchServer)},
+  { 409, -1, sizeof(::NFMsg::PVPRoomInfo)},
+  { 424, -1, sizeof(::NFMsg::ReqPVPApplyMatch)},
+  { 434, -1, sizeof(::NFMsg::AckPVPApplyMatch)},
+  { 443, -1, sizeof(::NFMsg::ReqCreatePVPEctype)},
+  { 450, -1, sizeof(::NFMsg::AckCreatePVPEctype)},
 };
 
 static ::google::protobuf::Message const * const file_default_instances[] = {
@@ -1669,6 +1704,7 @@ static ::google::protobuf::Message const * const file_default_instances[] = {
   reinterpret_cast<const ::google::protobuf::Message*>(&::NFMsg::_ReqAckPlayerMove_default_instance_),
   reinterpret_cast<const ::google::protobuf::Message*>(&::NFMsg::_ReqAckPlayerChat_ChatContainer_default_instance_),
   reinterpret_cast<const ::google::protobuf::Message*>(&::NFMsg::_ReqAckPlayerChat_default_instance_),
+  reinterpret_cast<const ::google::protobuf::Message*>(&::NFMsg::_ReqAckPlayerPosSync_default_instance_),
   reinterpret_cast<const ::google::protobuf::Message*>(&::NFMsg::_EffectData_default_instance_),
   reinterpret_cast<const ::google::protobuf::Message*>(&::NFMsg::_ReqAckUseSkill_default_instance_),
   reinterpret_cast<const ::google::protobuf::Message*>(&::NFMsg::_ReqAckUseItem_default_instance_),
@@ -1728,7 +1764,7 @@ void protobuf_AssignDescriptorsOnce() {
 void protobuf_RegisterTypes(const ::std::string&) GOOGLE_PROTOBUF_ATTRIBUTE_COLD;
 void protobuf_RegisterTypes(const ::std::string&) {
   protobuf_AssignDescriptorsOnce();
-  ::google::protobuf::internal::RegisterAllTypes(file_level_metadata, 53);
+  ::google::protobuf::internal::RegisterAllTypes(file_level_metadata, 54);
 }
 
 void AddDescriptorsImpl() {
@@ -1771,128 +1807,133 @@ void AddDescriptorsImpl() {
       " \001(\014\"/\n\rContainerType\022\017\n\013EGCT_UNKNOW\020\000\022\r"
       "\n\tEGCT_ITEM\020\001\"P\n\rEGameChatType\022\016\n\nEGCT_G"
       "UILD\020\000\022\020\n\014EGCT_PRIVATE\020\001\022\r\n\tEGCT_TEAM\020\002\022"
-      "\016\n\nEGCT_WORLD\020\003\"\323\001\n\nEffectData\022\"\n\014effect"
-      "_ident\030\001 \001(\0132\014.NFMsg.Ident\022\024\n\014effect_val"
-      "ue\030\002 \001(\005\0221\n\neffect_rlt\030\003 \001(\0162\035.NFMsg.Eff"
-      "ectData.EResultType\"X\n\013EResultType\022\014\n\010EE"
-      "T_FAIL\020\000\022\017\n\013EET_SUCCESS\020\001\022\016\n\nEET_REFUSE\020"
-      "\002\022\014\n\010EET_MISS\020\003\022\014\n\010EET_CRIT\020\004\"y\n\016ReqAckU"
-      "seSkill\022\032\n\004user\030\001 \001(\0132\014.NFMsg.Ident\022\020\n\010s"
-      "kill_id\030\002 \001(\014\022\021\n\tuse_index\030\003 \001(\005\022&\n\013effe"
-      "ct_data\030\004 \003(\0132\021.NFMsg.EffectData\"\327\001\n\rReq"
-      "AckUseItem\022\032\n\004user\030\001 \001(\0132\014.NFMsg.Ident\022\037"
-      "\n\titem_guid\030\002 \001(\0132\014.NFMsg.Ident\022&\n\013effec"
-      "t_data\030\003 \003(\0132\021.NFMsg.EffectData\022\037\n\004item\030"
-      "\004 \001(\0132\021.NFMsg.ItemStruct\022\036\n\010targetid\030\005 \001"
-      "(\0132\014.NFMsg.Ident\022 \n\010position\030\006 \001(\0132\016.NFM"
-      "sg.Vector3\"\363\001\n\017ReqAckSwapScene\022;\n\rtransf"
-      "er_type\030\001 \001(\0162$.NFMsg.ReqAckSwapScene.EG"
-      "ameSwapType\022\020\n\010scene_id\030\002 \001(\005\022\017\n\007line_id"
-      "\030\003 \001(\005\022\t\n\001x\030\004 \001(\002\022\t\n\001y\030\005 \001(\002\022\t\n\001z\030\006 \001(\002\022"
-      "\014\n\004data\030\007 \001(\014\"Q\n\rEGameSwapType\022\017\n\013EGST_N"
-      "ARMAL\020\000\022\016\n\nEGST_CLONE\020\001\022\016\n\nEGST_ARENA\020\002\022"
-      "\017\n\013EGST_MIRROR\020\003\"\037\n\017ReqAckHomeScene\022\014\n\004d"
-      "ata\030\001 \001(\014\"1\n\nItemStruct\022\017\n\007item_id\030\001 \001(\014"
-      "\022\022\n\nitem_count\030\002 \001(\005\"\?\n\016CurrencyStruct\022\025"
-      "\n\rcurrency_type\030\001 \001(\005\022\026\n\016currency_count\030"
-      "\002 \001(\005\"2\n\021ReqAckStartBattle\022\014\n\004gold\030\001 \001(\005"
-      "\022\017\n\007diamond\030\002 \001(\005\"\016\n\014ReqEndBattle\"\037\n\014Req"
-      "AckRelive\022\017\n\007diamond\030\001 \001(\005\"{\n\014AckEndBatt"
-      "le\022\013\n\003win\030\001 \001(\005\022\014\n\004star\030\002 \001(\005\022\014\n\004gold\030\003 "
-      "\001(\005\022\013\n\003exp\030\004 \001(\005\022\017\n\007diamond\030\005 \001(\005\022$\n\tite"
-      "m_list\030\006 \003(\0132\021.NFMsg.ItemStruct\"2\n\017ReqPi"
-      "ckDropItem\022\037\n\titem_guid\030\002 \001(\0132\014.NFMsg.Id"
-      "ent\" \n\rReqAcceptTask\022\017\n\007task_id\030\001 \001(\014\"#\n"
-      "\020ReqCompeleteTask\022\017\n\007task_id\030\001 \001(\014\"\357\001\n\022R"
-      "eqAckJoinActivity\022B\n\ractivity_type\030\001 \001(\016"
-      "2+.NFMsg.ReqAckJoinActivity.EGameActivit"
-      "yType\022I\n\021sub_activity_type\030\002 \001(\0162..NFMsg"
-      ".ReqAckJoinActivity.EGameActivitySubType"
-      "\"!\n\021EGameActivityType\022\014\n\010EGAT_PVP\020\000\"\'\n\024E"
-      "GameActivitySubType\022\017\n\013EGAT_NORMAL\020\000\"G\n\021"
-      "ReqAckCreateGuild\022\036\n\010guild_id\030\001 \001(\0132\014.NF"
-      "Msg.Ident\022\022\n\nguild_name\030\002 \001(\014\"$\n\016ReqSear"
-      "chGuild\022\022\n\nguild_name\030\001 \001(\014\"\220\002\n\016AckSearc"
-      "hGuild\022;\n\nguild_list\030\001 \003(\0132\'.NFMsg.AckSe"
-      "archGuild.SearchGuildObject\032\300\001\n\021SearchGu"
-      "ildObject\022\036\n\010guild_ID\030\001 \001(\0132\014.NFMsg.Iden"
-      "t\022\022\n\nguild_name\030\002 \001(\014\022\022\n\nguild_icon\030\003 \001("
-      "\014\022\032\n\022guild_member_count\030\004 \001(\005\022\036\n\026guild_m"
-      "ember_max_count\030\005 \001(\005\022\023\n\013guild_honor\030\006 \001"
-      "(\005\022\022\n\nguild_rank\030\007 \001(\005\"E\n\017ReqAckJoinGuil"
-      "d\022\036\n\010guild_id\030\001 \001(\0132\014.NFMsg.Ident\022\022\n\ngui"
-      "ld_name\030\002 \001(\014\"F\n\020ReqAckLeaveGuild\022\036\n\010gui"
-      "ld_id\030\001 \001(\0132\014.NFMsg.Ident\022\022\n\nguild_name\030"
-      "\002 \001(\014\"\332\001\n\024ReqAckOprGuildMember\022\036\n\010guild_"
-      "id\030\001 \001(\0132\014.NFMsg.Ident\022\037\n\tmember_id\030\002 \001("
-      "\0132\014.NFMsg.Ident\022>\n\004type\030\003 \001(\01620.NFMsg.Re"
-      "qAckOprGuildMember.EGGuildMemberOprType\""
-      "A\n\024EGGuildMemberOprType\022\r\n\tEGAT_DOWN\020\000\022\013"
-      "\n\007EGAT_UP\020\001\022\r\n\tEGAT_KICK\020\002\"5\n\023ReqEnterGu"
-      "ildEctype\022\036\n\010guild_id\030\001 \001(\0132\014.NFMsg.Iden"
-      "t\"<\n\017ReqSetFightHero\022\034\n\006Heroid\030\001 \001(\0132\014.N"
-      "FMsg.Ident\022\013\n\003Set\030\002 \001(\005\"2\n\022ReqSwitchFigh"
-      "tHero\022\034\n\006Heroid\030\001 \001(\0132\014.NFMsg.Ident\"3\n\022R"
-      "eqBuyItemFromShop\022\016\n\006itemID\030\001 \001(\014\022\r\n\005cou"
-      "nt\030\002 \001(\005\"5\n\021ReqAddGambleValue\022\020\n\010propert"
-      "y\030\001 \001(\014\022\016\n\006number\030\002 \001(\005\"3\n\016ReqMiningTitl"
-      "e\022\t\n\001x\030\001 \001(\005\022\t\n\001y\030\002 \001(\005\022\013\n\003opr\030\003 \001(\005\".\n\t"
-      "TileState\022\t\n\001x\030\001 \001(\005\022\t\n\001y\030\002 \001(\005\022\013\n\003opr\030\003"
-      " \001(\005\"R\n\014TileBuilding\022\t\n\001x\030\001 \001(\005\022\t\n\001y\030\002 \001"
-      "(\005\022\020\n\010configID\030\003 \001(\014\022\032\n\004guid\030\004 \001(\0132\014.NFM"
-      "sg.Ident\"M\n\007TileNPC\022\t\n\001x\030\001 \001(\005\022\t\n\001y\030\002 \001("
-      "\005\022\020\n\010configID\030\003 \001(\014\022\032\n\004guid\030\004 \001(\0132\014.NFMs"
-      "g.Ident\"t\n\016AckMiningTitle\022\036\n\004tile\030\001 \003(\0132"
-      "\020.NFMsg.TileState\022%\n\010building\030\002 \003(\0132\023.NF"
-      "Msg.TileBuilding\022\033\n\003npc\030\003 \003(\0132\016.NFMsg.Ti"
-      "leNPC\"&\n\020ReqSearchOppnent\022\022\n\nself_scene\030"
-      "\001 \001(\005\"\377\003\n\020AckSearchOppnent\022\020\n\010scene_id\030\001"
-      " \001(\005\022\014\n\004gold\030\002 \001(\005\022\017\n\007diamond\030\003 \001(\005\022\r\n\005l"
-      "evel\030\004 \001(\005\022\013\n\003cup\030\005 \001(\005\022\014\n\004name\030\006 \001(\014\022\014\n"
-      "\004head\030\007 \001(\014\022\021\n\thero_cnf1\030\010 \001(\014\022\022\n\nhero_s"
-      "tar1\030\t \001(\005\022\021\n\thero_cnf2\030\n \001(\014\022\022\n\nhero_st"
-      "ar2\030\013 \001(\005\022\021\n\thero_cnf3\030\014 \001(\014\022\022\n\nhero_sta"
-      "r3\030\r \001(\005\022\036\n\010hero_id1\030\024 \001(\0132\014.NFMsg.Ident"
-      "\022\036\n\010hero_id2\030\025 \001(\0132\014.NFMsg.Ident\022\036\n\010hero"
-      "_id3\030\026 \001(\0132\014.NFMsg.Ident\022!\n\thero_pos1\030\027 "
-      "\001(\0132\016.NFMsg.Vector3\022!\n\thero_pos2\030\030 \001(\0132\016"
-      ".NFMsg.Vector3\022!\n\thero_pos3\030\031 \001(\0132\016.NFMs"
-      "g.Vector3\022$\n\005title\030\036 \001(\0132\025.NFMsg.AckMini"
-      "ngTitle\022\036\n\010opponent\030\037 \001(\0132\014.NFMsg.Ident\""
-      "\201\001\n\013ReqSendMail\022\036\n\010reciever\030\001 \001(\0132\014.NFMs"
-      "g.Ident\022$\n\titem_list\030\002 \003(\0132\021.NFMsg.ItemS"
-      "truct\022,\n\rcurrency_list\030\003 \003(\0132\025.NFMsg.Cur"
-      "rencyStruct\"\271\001\n\017ReqSwitchServer\022\034\n\006selfi"
-      "d\030\001 \001(\0132\014.NFMsg.Ident\022\025\n\rself_serverid\030\002"
-      " \001(\003\022\027\n\017target_serverid\030\003 \001(\003\022\025\n\rgate_se"
-      "rverid\030\004 \001(\003\022\017\n\007SceneID\030\005 \001(\003\022\037\n\tclient_"
-      "id\030\006 \001(\0132\014.NFMsg.Ident\022\017\n\007groupID\030\007 \001(\003\""
-      "v\n\017AckSwitchServer\022\034\n\006selfid\030\001 \001(\0132\014.NFM"
-      "sg.Ident\022\025\n\rself_serverid\030\002 \001(\003\022\027\n\017targe"
-      "t_serverid\030\003 \001(\003\022\025\n\rgate_serverid\030\004 \001(\003\""
-      "\361\001\n\013PVPRoomInfo\022\023\n\013nCellStatus\030\001 \001(\005\022\034\n\006"
-      "RoomID\030\002 \001(\0132\014.NFMsg.Ident\022\020\n\010nPVPMode\030\003"
-      " \001(\005\022\021\n\tnPVPGrade\030\004 \001(\005\022\021\n\tMaxPalyer\030\005 \001"
-      "(\005\022 \n\nxRedPlayer\030\006 \003(\0132\014.NFMsg.Ident\022!\n\013"
-      "xBluePlayer\030\007 \003(\0132\014.NFMsg.Ident\022\020\n\010serve"
-      "rid\030\010 \001(\003\022\017\n\007SceneID\030\t \001(\003\022\017\n\007groupID\030\n "
-      "\001(\003\"\276\001\n\020ReqPVPApplyMatch\022\035\n\007self_id\030\001 \001("
-      "\0132\014.NFMsg.Ident\022\020\n\010nPVPMode\030\002 \001(\005\022\r\n\005sco"
-      "re\030\003 \001(\003\022\021\n\tApplyType\030\004 \001(\005\022\035\n\007team_id\030\005"
-      " \001(\0132\014.NFMsg.Ident\"8\n\nEApplyType\022\025\n\021EApp"
-      "lyType_Single\020\000\022\023\n\017EApplyType_Team\020\001\"|\n\020"
-      "AckPVPApplyMatch\022\035\n\007self_id\030\001 \001(\0132\014.NFMs"
-      "g.Ident\022%\n\txRoomInfo\030\002 \001(\0132\022.NFMsg.PVPRo"
-      "omInfo\022\021\n\tApplyType\030\003 \001(\005\022\017\n\007nResult\030\004 \001"
-      "(\005\"Z\n\022ReqCreatePVPEctype\022\035\n\007self_id\030\001 \001("
-      "\0132\014.NFMsg.Ident\022%\n\txRoomInfo\030\002 \001(\0132\022.NFM"
-      "sg.PVPRoomInfo\"m\n\022AckCreatePVPEctype\022\035\n\007"
-      "self_id\030\001 \001(\0132\014.NFMsg.Ident\022%\n\txRoomInfo"
-      "\030\002 \001(\0132\022.NFMsg.PVPRoomInfo\022\021\n\tApplyType\030"
-      "\003 \001(\005b\006proto3"
+      "\016\n\nEGCT_WORLD\020\003\"\277\001\n\023ReqAckPlayerPosSync\022"
+      "\033\n\005mover\030\001 \001(\0132\014.NFMsg.Ident\022\014\n\004time\030\002 \001"
+      "(\005\022\031\n\021InterpolationTime\030\003 \001(\002\022 \n\010positio"
+      "n\030\004 \001(\0132\016.NFMsg.Vector3\022!\n\tdirection\030\005 \001"
+      "(\0132\016.NFMsg.Vector3\022\016\n\006status\030\006 \001(\005\022\r\n\005fr"
+      "ame\030\007 \001(\005\"\323\001\n\nEffectData\022\"\n\014effect_ident"
+      "\030\001 \001(\0132\014.NFMsg.Ident\022\024\n\014effect_value\030\002 \001"
+      "(\005\0221\n\neffect_rlt\030\003 \001(\0162\035.NFMsg.EffectDat"
+      "a.EResultType\"X\n\013EResultType\022\014\n\010EET_FAIL"
+      "\020\000\022\017\n\013EET_SUCCESS\020\001\022\016\n\nEET_REFUSE\020\002\022\014\n\010E"
+      "ET_MISS\020\003\022\014\n\010EET_CRIT\020\004\"y\n\016ReqAckUseSkil"
+      "l\022\032\n\004user\030\001 \001(\0132\014.NFMsg.Ident\022\020\n\010skill_i"
+      "d\030\002 \001(\014\022\021\n\tuse_index\030\003 \001(\005\022&\n\013effect_dat"
+      "a\030\004 \003(\0132\021.NFMsg.EffectData\"\327\001\n\rReqAckUse"
+      "Item\022\032\n\004user\030\001 \001(\0132\014.NFMsg.Ident\022\037\n\titem"
+      "_guid\030\002 \001(\0132\014.NFMsg.Ident\022&\n\013effect_data"
+      "\030\003 \003(\0132\021.NFMsg.EffectData\022\037\n\004item\030\004 \001(\0132"
+      "\021.NFMsg.ItemStruct\022\036\n\010targetid\030\005 \001(\0132\014.N"
+      "FMsg.Ident\022 \n\010position\030\006 \001(\0132\016.NFMsg.Vec"
+      "tor3\"\363\001\n\017ReqAckSwapScene\022;\n\rtransfer_typ"
+      "e\030\001 \001(\0162$.NFMsg.ReqAckSwapScene.EGameSwa"
+      "pType\022\020\n\010scene_id\030\002 \001(\005\022\017\n\007line_id\030\003 \001(\005"
+      "\022\t\n\001x\030\004 \001(\002\022\t\n\001y\030\005 \001(\002\022\t\n\001z\030\006 \001(\002\022\014\n\004dat"
+      "a\030\007 \001(\014\"Q\n\rEGameSwapType\022\017\n\013EGST_NARMAL\020"
+      "\000\022\016\n\nEGST_CLONE\020\001\022\016\n\nEGST_ARENA\020\002\022\017\n\013EGS"
+      "T_MIRROR\020\003\"\037\n\017ReqAckHomeScene\022\014\n\004data\030\001 "
+      "\001(\014\"1\n\nItemStruct\022\017\n\007item_id\030\001 \001(\014\022\022\n\nit"
+      "em_count\030\002 \001(\005\"\?\n\016CurrencyStruct\022\025\n\rcurr"
+      "ency_type\030\001 \001(\005\022\026\n\016currency_count\030\002 \001(\005\""
+      "2\n\021ReqAckStartBattle\022\014\n\004gold\030\001 \001(\005\022\017\n\007di"
+      "amond\030\002 \001(\005\"\016\n\014ReqEndBattle\"\037\n\014ReqAckRel"
+      "ive\022\017\n\007diamond\030\001 \001(\005\"{\n\014AckEndBattle\022\013\n\003"
+      "win\030\001 \001(\005\022\014\n\004star\030\002 \001(\005\022\014\n\004gold\030\003 \001(\005\022\013\n"
+      "\003exp\030\004 \001(\005\022\017\n\007diamond\030\005 \001(\005\022$\n\titem_list"
+      "\030\006 \003(\0132\021.NFMsg.ItemStruct\"2\n\017ReqPickDrop"
+      "Item\022\037\n\titem_guid\030\002 \001(\0132\014.NFMsg.Ident\" \n"
+      "\rReqAcceptTask\022\017\n\007task_id\030\001 \001(\014\"#\n\020ReqCo"
+      "mpeleteTask\022\017\n\007task_id\030\001 \001(\014\"\357\001\n\022ReqAckJ"
+      "oinActivity\022B\n\ractivity_type\030\001 \001(\0162+.NFM"
+      "sg.ReqAckJoinActivity.EGameActivityType\022"
+      "I\n\021sub_activity_type\030\002 \001(\0162..NFMsg.ReqAc"
+      "kJoinActivity.EGameActivitySubType\"!\n\021EG"
+      "ameActivityType\022\014\n\010EGAT_PVP\020\000\"\'\n\024EGameAc"
+      "tivitySubType\022\017\n\013EGAT_NORMAL\020\000\"G\n\021ReqAck"
+      "CreateGuild\022\036\n\010guild_id\030\001 \001(\0132\014.NFMsg.Id"
+      "ent\022\022\n\nguild_name\030\002 \001(\014\"$\n\016ReqSearchGuil"
+      "d\022\022\n\nguild_name\030\001 \001(\014\"\220\002\n\016AckSearchGuild"
+      "\022;\n\nguild_list\030\001 \003(\0132\'.NFMsg.AckSearchGu"
+      "ild.SearchGuildObject\032\300\001\n\021SearchGuildObj"
+      "ect\022\036\n\010guild_ID\030\001 \001(\0132\014.NFMsg.Ident\022\022\n\ng"
+      "uild_name\030\002 \001(\014\022\022\n\nguild_icon\030\003 \001(\014\022\032\n\022g"
+      "uild_member_count\030\004 \001(\005\022\036\n\026guild_member_"
+      "max_count\030\005 \001(\005\022\023\n\013guild_honor\030\006 \001(\005\022\022\n\n"
+      "guild_rank\030\007 \001(\005\"E\n\017ReqAckJoinGuild\022\036\n\010g"
+      "uild_id\030\001 \001(\0132\014.NFMsg.Ident\022\022\n\nguild_nam"
+      "e\030\002 \001(\014\"F\n\020ReqAckLeaveGuild\022\036\n\010guild_id\030"
+      "\001 \001(\0132\014.NFMsg.Ident\022\022\n\nguild_name\030\002 \001(\014\""
+      "\332\001\n\024ReqAckOprGuildMember\022\036\n\010guild_id\030\001 \001"
+      "(\0132\014.NFMsg.Ident\022\037\n\tmember_id\030\002 \001(\0132\014.NF"
+      "Msg.Ident\022>\n\004type\030\003 \001(\01620.NFMsg.ReqAckOp"
+      "rGuildMember.EGGuildMemberOprType\"A\n\024EGG"
+      "uildMemberOprType\022\r\n\tEGAT_DOWN\020\000\022\013\n\007EGAT"
+      "_UP\020\001\022\r\n\tEGAT_KICK\020\002\"5\n\023ReqEnterGuildEct"
+      "ype\022\036\n\010guild_id\030\001 \001(\0132\014.NFMsg.Ident\"<\n\017R"
+      "eqSetFightHero\022\034\n\006Heroid\030\001 \001(\0132\014.NFMsg.I"
+      "dent\022\013\n\003Set\030\002 \001(\005\"2\n\022ReqSwitchFightHero\022"
+      "\034\n\006Heroid\030\001 \001(\0132\014.NFMsg.Ident\"3\n\022ReqBuyI"
+      "temFromShop\022\016\n\006itemID\030\001 \001(\014\022\r\n\005count\030\002 \001"
+      "(\005\"5\n\021ReqAddGambleValue\022\020\n\010property\030\001 \001("
+      "\014\022\016\n\006number\030\002 \001(\005\"3\n\016ReqMiningTitle\022\t\n\001x"
+      "\030\001 \001(\005\022\t\n\001y\030\002 \001(\005\022\013\n\003opr\030\003 \001(\005\".\n\tTileSt"
+      "ate\022\t\n\001x\030\001 \001(\005\022\t\n\001y\030\002 \001(\005\022\013\n\003opr\030\003 \001(\005\"R"
+      "\n\014TileBuilding\022\t\n\001x\030\001 \001(\005\022\t\n\001y\030\002 \001(\005\022\020\n\010"
+      "configID\030\003 \001(\014\022\032\n\004guid\030\004 \001(\0132\014.NFMsg.Ide"
+      "nt\"M\n\007TileNPC\022\t\n\001x\030\001 \001(\005\022\t\n\001y\030\002 \001(\005\022\020\n\010c"
+      "onfigID\030\003 \001(\014\022\032\n\004guid\030\004 \001(\0132\014.NFMsg.Iden"
+      "t\"t\n\016AckMiningTitle\022\036\n\004tile\030\001 \003(\0132\020.NFMs"
+      "g.TileState\022%\n\010building\030\002 \003(\0132\023.NFMsg.Ti"
+      "leBuilding\022\033\n\003npc\030\003 \003(\0132\016.NFMsg.TileNPC\""
+      "&\n\020ReqSearchOppnent\022\022\n\nself_scene\030\001 \001(\005\""
+      "\377\003\n\020AckSearchOppnent\022\020\n\010scene_id\030\001 \001(\005\022\014"
+      "\n\004gold\030\002 \001(\005\022\017\n\007diamond\030\003 \001(\005\022\r\n\005level\030\004"
+      " \001(\005\022\013\n\003cup\030\005 \001(\005\022\014\n\004name\030\006 \001(\014\022\014\n\004head\030"
+      "\007 \001(\014\022\021\n\thero_cnf1\030\010 \001(\014\022\022\n\nhero_star1\030\t"
+      " \001(\005\022\021\n\thero_cnf2\030\n \001(\014\022\022\n\nhero_star2\030\013 "
+      "\001(\005\022\021\n\thero_cnf3\030\014 \001(\014\022\022\n\nhero_star3\030\r \001"
+      "(\005\022\036\n\010hero_id1\030\024 \001(\0132\014.NFMsg.Ident\022\036\n\010he"
+      "ro_id2\030\025 \001(\0132\014.NFMsg.Ident\022\036\n\010hero_id3\030\026"
+      " \001(\0132\014.NFMsg.Ident\022!\n\thero_pos1\030\027 \001(\0132\016."
+      "NFMsg.Vector3\022!\n\thero_pos2\030\030 \001(\0132\016.NFMsg"
+      ".Vector3\022!\n\thero_pos3\030\031 \001(\0132\016.NFMsg.Vect"
+      "or3\022$\n\005title\030\036 \001(\0132\025.NFMsg.AckMiningTitl"
+      "e\022\036\n\010opponent\030\037 \001(\0132\014.NFMsg.Ident\"\201\001\n\013Re"
+      "qSendMail\022\036\n\010reciever\030\001 \001(\0132\014.NFMsg.Iden"
+      "t\022$\n\titem_list\030\002 \003(\0132\021.NFMsg.ItemStruct\022"
+      ",\n\rcurrency_list\030\003 \003(\0132\025.NFMsg.CurrencyS"
+      "truct\"\271\001\n\017ReqSwitchServer\022\034\n\006selfid\030\001 \001("
+      "\0132\014.NFMsg.Ident\022\025\n\rself_serverid\030\002 \001(\003\022\027"
+      "\n\017target_serverid\030\003 \001(\003\022\025\n\rgate_serverid"
+      "\030\004 \001(\003\022\017\n\007SceneID\030\005 \001(\003\022\037\n\tclient_id\030\006 \001"
+      "(\0132\014.NFMsg.Ident\022\017\n\007groupID\030\007 \001(\003\"v\n\017Ack"
+      "SwitchServer\022\034\n\006selfid\030\001 \001(\0132\014.NFMsg.Ide"
+      "nt\022\025\n\rself_serverid\030\002 \001(\003\022\027\n\017target_serv"
+      "erid\030\003 \001(\003\022\025\n\rgate_serverid\030\004 \001(\003\"\361\001\n\013PV"
+      "PRoomInfo\022\023\n\013nCellStatus\030\001 \001(\005\022\034\n\006RoomID"
+      "\030\002 \001(\0132\014.NFMsg.Ident\022\020\n\010nPVPMode\030\003 \001(\005\022\021"
+      "\n\tnPVPGrade\030\004 \001(\005\022\021\n\tMaxPalyer\030\005 \001(\005\022 \n\n"
+      "xRedPlayer\030\006 \003(\0132\014.NFMsg.Ident\022!\n\013xBlueP"
+      "layer\030\007 \003(\0132\014.NFMsg.Ident\022\020\n\010serverid\030\010 "
+      "\001(\003\022\017\n\007SceneID\030\t \001(\003\022\017\n\007groupID\030\n \001(\003\"\276\001"
+      "\n\020ReqPVPApplyMatch\022\035\n\007self_id\030\001 \001(\0132\014.NF"
+      "Msg.Ident\022\020\n\010nPVPMode\030\002 \001(\005\022\r\n\005score\030\003 \001"
+      "(\003\022\021\n\tApplyType\030\004 \001(\005\022\035\n\007team_id\030\005 \001(\0132\014"
+      ".NFMsg.Ident\"8\n\nEApplyType\022\025\n\021EApplyType"
+      "_Single\020\000\022\023\n\017EApplyType_Team\020\001\"|\n\020AckPVP"
+      "ApplyMatch\022\035\n\007self_id\030\001 \001(\0132\014.NFMsg.Iden"
+      "t\022%\n\txRoomInfo\030\002 \001(\0132\022.NFMsg.PVPRoomInfo"
+      "\022\021\n\tApplyType\030\003 \001(\005\022\017\n\007nResult\030\004 \001(\005\"Z\n\022"
+      "ReqCreatePVPEctype\022\035\n\007self_id\030\001 \001(\0132\014.NF"
+      "Msg.Ident\022%\n\txRoomInfo\030\002 \001(\0132\022.NFMsg.PVP"
+      "RoomInfo\"m\n\022AckCreatePVPEctype\022\035\n\007self_i"
+      "d\030\001 \001(\0132\014.NFMsg.Ident\022%\n\txRoomInfo\030\002 \001(\013"
+      "2\022.NFMsg.PVPRoomInfo\022\021\n\tApplyType\030\003 \001(\005b"
+      "\006proto3"
   };
   ::google::protobuf::DescriptorPool::InternalAddGeneratedFile(
-      descriptor, 6213);
+      descriptor, 6407);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "NFMsgShare.proto", &protobuf_RegisterTypes);
   ::protobuf_NFDefine_2eproto::AddDescriptors();
@@ -5861,6 +5902,506 @@ void ReqAckPlayerChat::InternalSwap(ReqAckPlayerChat* other) {
 }
 
 ::google::protobuf::Metadata ReqAckPlayerChat::GetMetadata() const {
+  protobuf_NFMsgShare_2eproto::protobuf_AssignDescriptorsOnce();
+  return ::protobuf_NFMsgShare_2eproto::file_level_metadata[kIndexInFileMessages];
+}
+
+
+// ===================================================================
+
+void ReqAckPlayerPosSync::InitAsDefaultInstance() {
+  ::NFMsg::_ReqAckPlayerPosSync_default_instance_._instance.get_mutable()->mover_ = const_cast< ::NFMsg::Ident*>(
+      ::NFMsg::Ident::internal_default_instance());
+  ::NFMsg::_ReqAckPlayerPosSync_default_instance_._instance.get_mutable()->position_ = const_cast< ::NFMsg::Vector3*>(
+      ::NFMsg::Vector3::internal_default_instance());
+  ::NFMsg::_ReqAckPlayerPosSync_default_instance_._instance.get_mutable()->direction_ = const_cast< ::NFMsg::Vector3*>(
+      ::NFMsg::Vector3::internal_default_instance());
+}
+void ReqAckPlayerPosSync::clear_mover() {
+  if (GetArenaNoVirtual() == NULL && mover_ != NULL) {
+    delete mover_;
+  }
+  mover_ = NULL;
+}
+void ReqAckPlayerPosSync::clear_position() {
+  if (GetArenaNoVirtual() == NULL && position_ != NULL) {
+    delete position_;
+  }
+  position_ = NULL;
+}
+void ReqAckPlayerPosSync::clear_direction() {
+  if (GetArenaNoVirtual() == NULL && direction_ != NULL) {
+    delete direction_;
+  }
+  direction_ = NULL;
+}
+#if !defined(_MSC_VER) || _MSC_VER >= 1900
+const int ReqAckPlayerPosSync::kMoverFieldNumber;
+const int ReqAckPlayerPosSync::kTimeFieldNumber;
+const int ReqAckPlayerPosSync::kInterpolationTimeFieldNumber;
+const int ReqAckPlayerPosSync::kPositionFieldNumber;
+const int ReqAckPlayerPosSync::kDirectionFieldNumber;
+const int ReqAckPlayerPosSync::kStatusFieldNumber;
+const int ReqAckPlayerPosSync::kFrameFieldNumber;
+#endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
+
+ReqAckPlayerPosSync::ReqAckPlayerPosSync()
+  : ::google::protobuf::Message(), _internal_metadata_(NULL) {
+  ::google::protobuf::internal::InitSCC(
+      &protobuf_NFMsgShare_2eproto::scc_info_ReqAckPlayerPosSync.base);
+  SharedCtor();
+  // @@protoc_insertion_point(constructor:NFMsg.ReqAckPlayerPosSync)
+}
+ReqAckPlayerPosSync::ReqAckPlayerPosSync(const ReqAckPlayerPosSync& from)
+  : ::google::protobuf::Message(),
+      _internal_metadata_(NULL) {
+  _internal_metadata_.MergeFrom(from._internal_metadata_);
+  if (from.has_mover()) {
+    mover_ = new ::NFMsg::Ident(*from.mover_);
+  } else {
+    mover_ = NULL;
+  }
+  if (from.has_position()) {
+    position_ = new ::NFMsg::Vector3(*from.position_);
+  } else {
+    position_ = NULL;
+  }
+  if (from.has_direction()) {
+    direction_ = new ::NFMsg::Vector3(*from.direction_);
+  } else {
+    direction_ = NULL;
+  }
+  ::memcpy(&time_, &from.time_,
+    static_cast<size_t>(reinterpret_cast<char*>(&frame_) -
+    reinterpret_cast<char*>(&time_)) + sizeof(frame_));
+  // @@protoc_insertion_point(copy_constructor:NFMsg.ReqAckPlayerPosSync)
+}
+
+void ReqAckPlayerPosSync::SharedCtor() {
+  ::memset(&mover_, 0, static_cast<size_t>(
+      reinterpret_cast<char*>(&frame_) -
+      reinterpret_cast<char*>(&mover_)) + sizeof(frame_));
+}
+
+ReqAckPlayerPosSync::~ReqAckPlayerPosSync() {
+  // @@protoc_insertion_point(destructor:NFMsg.ReqAckPlayerPosSync)
+  SharedDtor();
+}
+
+void ReqAckPlayerPosSync::SharedDtor() {
+  if (this != internal_default_instance()) delete mover_;
+  if (this != internal_default_instance()) delete position_;
+  if (this != internal_default_instance()) delete direction_;
+}
+
+void ReqAckPlayerPosSync::SetCachedSize(int size) const {
+  _cached_size_.Set(size);
+}
+const ::google::protobuf::Descriptor* ReqAckPlayerPosSync::descriptor() {
+  ::protobuf_NFMsgShare_2eproto::protobuf_AssignDescriptorsOnce();
+  return ::protobuf_NFMsgShare_2eproto::file_level_metadata[kIndexInFileMessages].descriptor;
+}
+
+const ReqAckPlayerPosSync& ReqAckPlayerPosSync::default_instance() {
+  ::google::protobuf::internal::InitSCC(&protobuf_NFMsgShare_2eproto::scc_info_ReqAckPlayerPosSync.base);
+  return *internal_default_instance();
+}
+
+
+void ReqAckPlayerPosSync::Clear() {
+// @@protoc_insertion_point(message_clear_start:NFMsg.ReqAckPlayerPosSync)
+  ::google::protobuf::uint32 cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  if (GetArenaNoVirtual() == NULL && mover_ != NULL) {
+    delete mover_;
+  }
+  mover_ = NULL;
+  if (GetArenaNoVirtual() == NULL && position_ != NULL) {
+    delete position_;
+  }
+  position_ = NULL;
+  if (GetArenaNoVirtual() == NULL && direction_ != NULL) {
+    delete direction_;
+  }
+  direction_ = NULL;
+  ::memset(&time_, 0, static_cast<size_t>(
+      reinterpret_cast<char*>(&frame_) -
+      reinterpret_cast<char*>(&time_)) + sizeof(frame_));
+  _internal_metadata_.Clear();
+}
+
+bool ReqAckPlayerPosSync::MergePartialFromCodedStream(
+    ::google::protobuf::io::CodedInputStream* input) {
+#define DO_(EXPRESSION) if (!GOOGLE_PREDICT_TRUE(EXPRESSION)) goto failure
+  ::google::protobuf::uint32 tag;
+  // @@protoc_insertion_point(parse_start:NFMsg.ReqAckPlayerPosSync)
+  for (;;) {
+    ::std::pair<::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
+    tag = p.first;
+    if (!p.second) goto handle_unusual;
+    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
+      // .NFMsg.Ident mover = 1;
+      case 1: {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(10u /* 10 & 0xFF */)) {
+          DO_(::google::protobuf::internal::WireFormatLite::ReadMessage(
+               input, mutable_mover()));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      // int32 time = 2;
+      case 2: {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(16u /* 16 & 0xFF */)) {
+
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
+                 input, &time_)));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      // float InterpolationTime = 3;
+      case 3: {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(29u /* 29 & 0xFF */)) {
+
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   float, ::google::protobuf::internal::WireFormatLite::TYPE_FLOAT>(
+                 input, &interpolationtime_)));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      // .NFMsg.Vector3 position = 4;
+      case 4: {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(34u /* 34 & 0xFF */)) {
+          DO_(::google::protobuf::internal::WireFormatLite::ReadMessage(
+               input, mutable_position()));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      // .NFMsg.Vector3 direction = 5;
+      case 5: {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(42u /* 42 & 0xFF */)) {
+          DO_(::google::protobuf::internal::WireFormatLite::ReadMessage(
+               input, mutable_direction()));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      // int32 status = 6;
+      case 6: {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(48u /* 48 & 0xFF */)) {
+
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
+                 input, &status_)));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      // int32 frame = 7;
+      case 7: {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(56u /* 56 & 0xFF */)) {
+
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
+                 input, &frame_)));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      default: {
+      handle_unusual:
+        if (tag == 0) {
+          goto success;
+        }
+        DO_(::google::protobuf::internal::WireFormat::SkipField(
+              input, tag, _internal_metadata_.mutable_unknown_fields()));
+        break;
+      }
+    }
+  }
+success:
+  // @@protoc_insertion_point(parse_success:NFMsg.ReqAckPlayerPosSync)
+  return true;
+failure:
+  // @@protoc_insertion_point(parse_failure:NFMsg.ReqAckPlayerPosSync)
+  return false;
+#undef DO_
+}
+
+void ReqAckPlayerPosSync::SerializeWithCachedSizes(
+    ::google::protobuf::io::CodedOutputStream* output) const {
+  // @@protoc_insertion_point(serialize_start:NFMsg.ReqAckPlayerPosSync)
+  ::google::protobuf::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  // .NFMsg.Ident mover = 1;
+  if (this->has_mover()) {
+    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+      1, this->_internal_mover(), output);
+  }
+
+  // int32 time = 2;
+  if (this->time() != 0) {
+    ::google::protobuf::internal::WireFormatLite::WriteInt32(2, this->time(), output);
+  }
+
+  // float InterpolationTime = 3;
+  if (this->interpolationtime() != 0) {
+    ::google::protobuf::internal::WireFormatLite::WriteFloat(3, this->interpolationtime(), output);
+  }
+
+  // .NFMsg.Vector3 position = 4;
+  if (this->has_position()) {
+    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+      4, this->_internal_position(), output);
+  }
+
+  // .NFMsg.Vector3 direction = 5;
+  if (this->has_direction()) {
+    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+      5, this->_internal_direction(), output);
+  }
+
+  // int32 status = 6;
+  if (this->status() != 0) {
+    ::google::protobuf::internal::WireFormatLite::WriteInt32(6, this->status(), output);
+  }
+
+  // int32 frame = 7;
+  if (this->frame() != 0) {
+    ::google::protobuf::internal::WireFormatLite::WriteInt32(7, this->frame(), output);
+  }
+
+  if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
+    ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
+        (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()), output);
+  }
+  // @@protoc_insertion_point(serialize_end:NFMsg.ReqAckPlayerPosSync)
+}
+
+::google::protobuf::uint8* ReqAckPlayerPosSync::InternalSerializeWithCachedSizesToArray(
+    bool deterministic, ::google::protobuf::uint8* target) const {
+  (void)deterministic; // Unused
+  // @@protoc_insertion_point(serialize_to_array_start:NFMsg.ReqAckPlayerPosSync)
+  ::google::protobuf::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  // .NFMsg.Ident mover = 1;
+  if (this->has_mover()) {
+    target = ::google::protobuf::internal::WireFormatLite::
+      InternalWriteMessageToArray(
+        1, this->_internal_mover(), deterministic, target);
+  }
+
+  // int32 time = 2;
+  if (this->time() != 0) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(2, this->time(), target);
+  }
+
+  // float InterpolationTime = 3;
+  if (this->interpolationtime() != 0) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteFloatToArray(3, this->interpolationtime(), target);
+  }
+
+  // .NFMsg.Vector3 position = 4;
+  if (this->has_position()) {
+    target = ::google::protobuf::internal::WireFormatLite::
+      InternalWriteMessageToArray(
+        4, this->_internal_position(), deterministic, target);
+  }
+
+  // .NFMsg.Vector3 direction = 5;
+  if (this->has_direction()) {
+    target = ::google::protobuf::internal::WireFormatLite::
+      InternalWriteMessageToArray(
+        5, this->_internal_direction(), deterministic, target);
+  }
+
+  // int32 status = 6;
+  if (this->status() != 0) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(6, this->status(), target);
+  }
+
+  // int32 frame = 7;
+  if (this->frame() != 0) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(7, this->frame(), target);
+  }
+
+  if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
+    target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
+        (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()), target);
+  }
+  // @@protoc_insertion_point(serialize_to_array_end:NFMsg.ReqAckPlayerPosSync)
+  return target;
+}
+
+size_t ReqAckPlayerPosSync::ByteSizeLong() const {
+// @@protoc_insertion_point(message_byte_size_start:NFMsg.ReqAckPlayerPosSync)
+  size_t total_size = 0;
+
+  if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
+    total_size +=
+      ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
+        (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()));
+  }
+  // .NFMsg.Ident mover = 1;
+  if (this->has_mover()) {
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::MessageSize(
+        *mover_);
+  }
+
+  // .NFMsg.Vector3 position = 4;
+  if (this->has_position()) {
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::MessageSize(
+        *position_);
+  }
+
+  // .NFMsg.Vector3 direction = 5;
+  if (this->has_direction()) {
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::MessageSize(
+        *direction_);
+  }
+
+  // int32 time = 2;
+  if (this->time() != 0) {
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::Int32Size(
+        this->time());
+  }
+
+  // float InterpolationTime = 3;
+  if (this->interpolationtime() != 0) {
+    total_size += 1 + 4;
+  }
+
+  // int32 status = 6;
+  if (this->status() != 0) {
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::Int32Size(
+        this->status());
+  }
+
+  // int32 frame = 7;
+  if (this->frame() != 0) {
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::Int32Size(
+        this->frame());
+  }
+
+  int cached_size = ::google::protobuf::internal::ToCachedSize(total_size);
+  SetCachedSize(cached_size);
+  return total_size;
+}
+
+void ReqAckPlayerPosSync::MergeFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_merge_from_start:NFMsg.ReqAckPlayerPosSync)
+  GOOGLE_DCHECK_NE(&from, this);
+  const ReqAckPlayerPosSync* source =
+      ::google::protobuf::internal::DynamicCastToGenerated<const ReqAckPlayerPosSync>(
+          &from);
+  if (source == NULL) {
+  // @@protoc_insertion_point(generalized_merge_from_cast_fail:NFMsg.ReqAckPlayerPosSync)
+    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
+  } else {
+  // @@protoc_insertion_point(generalized_merge_from_cast_success:NFMsg.ReqAckPlayerPosSync)
+    MergeFrom(*source);
+  }
+}
+
+void ReqAckPlayerPosSync::MergeFrom(const ReqAckPlayerPosSync& from) {
+// @@protoc_insertion_point(class_specific_merge_from_start:NFMsg.ReqAckPlayerPosSync)
+  GOOGLE_DCHECK_NE(&from, this);
+  _internal_metadata_.MergeFrom(from._internal_metadata_);
+  ::google::protobuf::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  if (from.has_mover()) {
+    mutable_mover()->::NFMsg::Ident::MergeFrom(from.mover());
+  }
+  if (from.has_position()) {
+    mutable_position()->::NFMsg::Vector3::MergeFrom(from.position());
+  }
+  if (from.has_direction()) {
+    mutable_direction()->::NFMsg::Vector3::MergeFrom(from.direction());
+  }
+  if (from.time() != 0) {
+    set_time(from.time());
+  }
+  if (from.interpolationtime() != 0) {
+    set_interpolationtime(from.interpolationtime());
+  }
+  if (from.status() != 0) {
+    set_status(from.status());
+  }
+  if (from.frame() != 0) {
+    set_frame(from.frame());
+  }
+}
+
+void ReqAckPlayerPosSync::CopyFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_copy_from_start:NFMsg.ReqAckPlayerPosSync)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+void ReqAckPlayerPosSync::CopyFrom(const ReqAckPlayerPosSync& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:NFMsg.ReqAckPlayerPosSync)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool ReqAckPlayerPosSync::IsInitialized() const {
+  return true;
+}
+
+void ReqAckPlayerPosSync::Swap(ReqAckPlayerPosSync* other) {
+  if (other == this) return;
+  InternalSwap(other);
+}
+void ReqAckPlayerPosSync::InternalSwap(ReqAckPlayerPosSync* other) {
+  using std::swap;
+  swap(mover_, other->mover_);
+  swap(position_, other->position_);
+  swap(direction_, other->direction_);
+  swap(time_, other->time_);
+  swap(interpolationtime_, other->interpolationtime_);
+  swap(status_, other->status_);
+  swap(frame_, other->frame_);
+  _internal_metadata_.Swap(&other->_internal_metadata_);
+}
+
+::google::protobuf::Metadata ReqAckPlayerPosSync::GetMetadata() const {
   protobuf_NFMsgShare_2eproto::protobuf_AssignDescriptorsOnce();
   return ::protobuf_NFMsgShare_2eproto::file_level_metadata[kIndexInFileMessages];
 }
@@ -19987,6 +20528,9 @@ template<> GOOGLE_PROTOBUF_ATTRIBUTE_NOINLINE ::NFMsg::ReqAckPlayerChat_ChatCont
 }
 template<> GOOGLE_PROTOBUF_ATTRIBUTE_NOINLINE ::NFMsg::ReqAckPlayerChat* Arena::CreateMaybeMessage< ::NFMsg::ReqAckPlayerChat >(Arena* arena) {
   return Arena::CreateInternal< ::NFMsg::ReqAckPlayerChat >(arena);
+}
+template<> GOOGLE_PROTOBUF_ATTRIBUTE_NOINLINE ::NFMsg::ReqAckPlayerPosSync* Arena::CreateMaybeMessage< ::NFMsg::ReqAckPlayerPosSync >(Arena* arena) {
+  return Arena::CreateInternal< ::NFMsg::ReqAckPlayerPosSync >(arena);
 }
 template<> GOOGLE_PROTOBUF_ATTRIBUTE_NOINLINE ::NFMsg::EffectData* Arena::CreateMaybeMessage< ::NFMsg::EffectData >(Arena* arena) {
   return Arena::CreateInternal< ::NFMsg::EffectData >(arena);

@@ -539,11 +539,10 @@ public:
 
 	virtual std::string ToString(const int index) const
 	{
+		std::string strData;
 
 		if (ValidIndex(index))
 		{
-			std::string strData;
-
 			const NFDATA_TYPE eType = Type(index);
 			switch (eType)
 			{
@@ -577,7 +576,7 @@ public:
 			}
 		}
 
-		return NULL_STR;
+		return strData;
 	}
 
 	virtual bool ToString(std::string& str, const std::string& strSplit) const
