@@ -39,7 +39,8 @@ bool NFHelloWorld::Init()
 
 bool NFHelloWorld::AfterInit()
 {
-	m_pScheduleModule->AddSchedule(NFGUID(0, 1), "OnHeartBeat", this, &NFHelloWorld::OnHeartBeat, 5.0f, 10);
+	m_pScheduleModule->AddSchedule(NFGUID(0, 1), "OnHeartBeat1", this, &NFHelloWorld::OnHeartBeat, 5.0f, 10);
+	m_pScheduleModule->AddSchedule(NFGUID(0, 1), "OnHeartBeat2", this, &NFHelloWorld::OnHeartBeat, 5.0f, 10);
 
 	std::cout << "Hello, world, Init" << std::endl;
 	//http://127.0.0.1/json
@@ -110,6 +111,8 @@ NFWebStatus NFHelloWorld::OnFilter(const NFHttpRequest & req)
 
 int NFHelloWorld::OnHeartBeat(const NFGUID & self, const std::string & strHeartBeat, const float fTime, const int nCount)
 {
+	std::cout << strHeartBeat << std::endl;
+
 	m_pHttpClientModule->DoGet("http://127.0.0.1:8080/json", this, &NFHelloWorld::OnGetCallBack);
 	m_pHttpClientModule->DoGet("http://127.0.0.1:8080/json", [](const NFGUID id, const int state_code, const std::string & strRespData, const std::string & strMemoData) -> void
 	{
