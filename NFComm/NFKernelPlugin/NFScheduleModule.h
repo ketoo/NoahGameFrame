@@ -33,40 +33,7 @@
 #include "NFComm/NFCore/NFDateTime.hpp"
 #include "NFComm/NFPluginModule/NFIScheduleModule.h"
 #include "NFComm/NFPluginModule/NFILogModule.h"
-
-class  NFScheduleElement
-{
-public:
-	NFScheduleElement()
-	{
-		mstrScheduleName = "";
-		mfIntervalTime = 0.0f;
-		mnNextTriggerTime = 0;
-		mnStartTime = 0;
-		mnRemainCount = 0;
-		mnAllCount = 0;
-		mbForever = false;
-	};
-
-	virtual ~NFScheduleElement()
-	{
-	}
-
-	void DoHeartBeatEvent();
-
-	std::string mstrScheduleName;
-	float mfIntervalTime;
-	NFINT64 mnNextTriggerTime;
-	NFINT64 mnStartTime;
-	int mnRemainCount;
-	int mnAllCount;
-	bool mbForever;
-
-	NFGUID self;
-
-	NFList<OBJECT_SCHEDULE_FUNCTOR_PTR> mxObjectFunctor;
-	NFList<MODULE_SCHEDULE_FUNCTOR_PTR> mxModuleFunctor;
-};
+#include "NFComm/NFPluginModule/NFIKernelModule.h"
 
 class NFScheduleModule : public NFIScheduleModule
 {
@@ -89,19 +56,22 @@ public:
 	virtual bool RemoveSchedule(const NFGUID self);
 	virtual bool RemoveSchedule(const NFGUID self, const std::string& strScheduleName);
 	virtual bool ExistSchedule(const NFGUID self, const std::string& strScheduleName);
+	virtual NF_SHARE_PTR<NFScheduleElement> GetSchedule(const NFGUID self, const std::string& strScheduleName);
 
-
+protected:
+	int OnClassCommonEvent(const NFGUID & self, const std::string & strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFDataList & var);
 
 protected:
 	NFMapEx<NFGUID, NFMapEx <std::string, NFScheduleElement >> mObjectScheduleMap;//guid_scheduleName_element
 	std::list<NFScheduleElement> mObjectAddList;
-	std::map<NFGUID, std::string> mObjectRemoveList;
+	std::list< NF_SHARE_PTR<NFScheduleElement> > mObjectRemoveList;
 
 	NFMapEx <std::string, NFScheduleElement > mModuleScheduleMap;//guid_scheduleName_element
 	std::list<NFScheduleElement> mModuleAddList;
 	std::list<std::string> mModuleRemoveList;
 
 	NFILogModule* m_pLogModule;
+	NFIKernelModule* m_pKernelModule;
 	
 };
 

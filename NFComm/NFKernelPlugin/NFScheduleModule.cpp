@@ -62,7 +62,9 @@ NFScheduleModule::~NFScheduleModule()
 bool NFScheduleModule::Init()
 {
 	m_pLogModule = pPluginManager->FindModule<NFILogModule>();
-
+	m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>();
+	
+	m_pKernelModule->RegisterCommonClassEvent(this, &NFScheduleModule::OnClassCommonEvent);
 	return true;
 }
 
@@ -92,7 +94,7 @@ bool NFScheduleModule::Execute()
 
 					if (pSchedule->mnRemainCount <= 0 && pSchedule->mbForever == false)
 					{
-						mObjectRemoveList.insert(std::map<NFGUID, std::string>::value_type(pSchedule->self, pSchedule->mstrScheduleName));
+						mObjectRemoveList.push_back(pSchedule);
 					}
 					else
 					{
@@ -109,17 +111,22 @@ bool NFScheduleModule::Execute()
 	}
 
 	//remove schedule
-	for (std::map<NFGUID, std::string>::iterator it = mObjectRemoveList.begin(); it != mObjectRemoveList.end(); ++it)
+	for (auto it = mObjectRemoveList.begin(); it != mObjectRemoveList.end(); ++it)
 	{
-		NFGUID self = it->first;
-		std::string scheduleName = it->second;
-		auto findIter = mObjectScheduleMap.GetElement(self);
-		if (NULL != findIter)
+		NF_SHARE_PTR<NFScheduleElement> scheduleElement = *it;
+		if (scheduleElement)
 		{
-			findIter->RemoveElement(scheduleName);
-			if (findIter->Count() == 0)
+			NFGUID self = scheduleElement->self;
+			const std::string& scheduleName = scheduleElement->mstrScheduleName;
+
+			auto findIter = mObjectScheduleMap.GetElement(self);
+			if (NULL != findIter)
 			{
-				mObjectScheduleMap.RemoveElement(self);
+				findIter->RemoveElement(scheduleName);
+				if (findIter->Count() <= 0)
+				{
+					mObjectScheduleMap.RemoveElement(self);
+				}
 			}
 		}
 	}
@@ -295,18 +302,27 @@ bool NFScheduleModule::AddSchedule(const NFGUID self, const std::string& strSche
 
 bool NFScheduleModule::AddSchedule(const NFGUID self, const std::string & strScheduleName, const OBJECT_SCHEDULE_FUNCTOR_PTR & cb, const int nCount, const NFDateTime & date)
 {
+	//we would store this kind of schedule in database
 	return false;
 }
 
 bool NFScheduleModule::RemoveSchedule(const NFGUID self)
 {
+	//is there will be deleted when using?
 	return mObjectScheduleMap.RemoveElement(self);
 }
 
 bool NFScheduleModule::RemoveSchedule(const NFGUID self, const std::string& strScheduleName)
 {
-	mObjectRemoveList.insert(std::map<NFGUID, std::string>::value_type(self, strScheduleName));
-	return true;
+	NF_SHARE_PTR<NFScheduleElement> pScheduleElement = GetSchedule(self, strScheduleName);
+	if (pScheduleElement)
+	{
+		mObjectRemoveList.push_back(pScheduleElement);
+
+		return true;
+	}
+
+	return false;
 }
 
 bool NFScheduleModule::ExistSchedule(const NFGUID self, const std::string& strScheduleName)
@@ -318,4 +334,26 @@ bool NFScheduleModule::ExistSchedule(const NFGUID self, const std::string& strSc
 	}
 
 	return xObjectScheduleMap->ExistElement(strScheduleName);
+}
+
+NF_SHARE_PTR<NFScheduleElement> NFScheduleModule::GetSchedule(const NFGUID self, const std::string & strScheduleName)
+{
+	NF_SHARE_PTR< NFMapEx <std::string, NFScheduleElement >> xObjectScheduleMap = mObjectScheduleMap.GetElement(self);
+	if (NULL == xObjectScheduleMap)
+	{
+		return false;
+	}
+
+	return xObjectScheduleMap->GetElement(strScheduleName);
+}
+
+
+int NFScheduleModule::OnClassCommonEvent(const NFGUID & self, const std::string & strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFDataList & var)
+{
+	if (CLASS_OBJECT_EVENT::COE_DESTROY == eClassEvent)
+	{
+		this->RemoveSchedule(self);
+	}
+
+	return 0;
 }
