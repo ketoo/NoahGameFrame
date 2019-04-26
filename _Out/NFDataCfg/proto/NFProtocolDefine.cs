@@ -395,6 +395,8 @@ namespace NFrame
 		// Property
 		public static readonly String Chinese = "Chinese";// string
 		public static readonly String English = "English";// string
+		public static readonly String French = "French";// string
+		public static readonly String Spanish = "Spanish";// string
 		// Record
 
 	}
@@ -1168,12 +1170,12 @@ namespace NFrame
 		public static readonly String Position = "Position";// vector3
 		public static readonly String SceneID = "SceneID";// int
 		// Property
+		public static readonly String ArgCnfID = "ArgCnfID";// string
+		public static readonly String ArgCount = "ArgCount";// int
 		public static readonly String AwardExp = "AwardExp";// int
 		public static readonly String AwardGold = "AwardGold";// int
 		public static readonly String AwardPack = "AwardPack";// string
-		public static readonly String Desc = "Desc";// string
-		public static readonly String KillCount = "KillCount";// string
-		public static readonly String KillMonsterName = "KillMonsterName";// string
+		public static readonly String DescID = "DescID";// string
 		public static readonly String LevelReq = "LevelReq";// string
 		public static readonly String NextTaskID = "NextTaskID";// string
 		public static readonly String Type = "Type";// int

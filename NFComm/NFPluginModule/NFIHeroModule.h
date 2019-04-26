@@ -51,13 +51,6 @@ public:
 		ECONSt_HERO_MAX = 4,
 	};
 
-	enum EConsHero_ReliveType
-	{
-		EHERO_RELIVE_SUBURB,
-		EHERO_RELIVE_TOWN,
-		EHERO_RELIVE_CLONE,
-	};
-
     virtual NFGUID AddHero(const NFGUID& self, const std::string& strID) = 0;
 	virtual bool AddHeroExp(const NFGUID& self, const int64_t nExp) = 0;
     virtual bool AddHeroExp(const NFGUID& self, const NFGUID& xHeroID, const int64_t nExp) = 0;

@@ -258,9 +258,9 @@
 			<Col Type ="object"	Tag="GUID"/><!--- Desc-->
 			<Col Type ="int"	Tag="Level"/>
 		</Record>
-		<Record Id="HeroValue" Cache="1"	 Col="31"	 Force="0"	 Private="1"	 Public="0"	 Ref="0"	 Row="15"	 Save="0"	 Upload="0"	 >
+		<Record Id="HeroValue" Cache="1"	 Col="31"	 Force="0"	 Private="1"	 Public="0"	 Ref="0"	 Row="64"	 Save="0"	 Upload="0"	 >
 			<Col Type ="int"	Tag="SUCKBLOOD"/><!--- Desc-->
-			<Col Type ="int"	Tag="REFLECTDAMAGE"/><!--- one her one row to sotre the properties-->
+			<Col Type ="int"	Tag="REFLECTDAMAGE"/><!--- one hero one row to sotre the properties-->
 			<Col Type ="int"	Tag="CRITICAL"/>
 			<Col Type ="int"	Tag="MAXHP"/>
 			<Col Type ="int"	Tag="MAXMP"/>

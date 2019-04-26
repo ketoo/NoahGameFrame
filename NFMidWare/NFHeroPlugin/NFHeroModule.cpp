@@ -243,6 +243,11 @@ bool NFHeroModule::SetFightHero(const NFGUID& self, const NFGUID& xHeroID, const
 		return false;
 	}
 
+	if (!StillAlive(self, xHeroID))
+	{
+		return false;
+	}
+
 	const std::string& strCnfID = pHeroRecord->GetString(nRow, NFrame::Player::PlayerHero::ConfigID);
 	const int nStar = pHeroRecord->GetInt(nRow, NFrame::Player::PlayerHero::Star);
 
@@ -259,6 +264,10 @@ bool NFHeroModule::SetFightHero(const NFGUID& self, const NFGUID& xHeroID, const
 
 	NF_SHARE_PTR<NFIRecord> pHeroValueRecord = m_pKernelModule->FindRecord(self, NFrame::Player::HeroValue::ThisName());
 	NFGUID xFightHero = m_pKernelModule->GetPropertyObject(self, NFrame::Player::FightHeroID());
+	if (xFightHero == xHeroID)
+	{
+		return 0;
+	}
 
 	switch (nPos)
 	{
@@ -336,6 +345,16 @@ bool NFHeroModule::SwitchFightHero(const NFGUID & self, const NFGUID & xHeroID)
 
 	int nRow = pHeroRecord->FindObject(NFrame::Player::PlayerHero::GUID, xHeroID);
 	if (nRow < 0)
+	{
+		return false;
+	}
+	NFGUID xFightHero = m_pKernelModule->GetPropertyObject(self, NFrame::Player::FightHeroID());
+	if (xFightHero == xHeroID)
+	{
+		return 0;
+	}
+
+	if (!StillAlive(self, xHeroID))
 	{
 		return false;
 	}
@@ -417,7 +436,7 @@ void NFHeroModule::OnSwitchFightHeroMsg(const NFSOCK nSockIndex, const int nMsgI
 	
 }
 
-int NFHeroModule::CalReliveTime(const NFGUID & self, const NFGUID & xHeroID, const EConsHero_ReliveType reliveType)
+int NFHeroModule::CalReliveTime(const NFGUID & self, const NFGUID & xHeroID, const E_SCENE_TYPE reliveType)
 {
 	NF_SHARE_PTR<NFIRecord> pHeroRecord = m_pKernelModule->FindRecord(self, NFrame::Player::PlayerHero::ThisName());
 	if (nullptr == pHeroRecord)
@@ -441,13 +460,14 @@ int NFHeroModule::CalReliveTime(const NFGUID & self, const NFGUID & xHeroID, con
 
 	switch (reliveType)
 	{
-	case EConsHero_ReliveType::EHERO_RELIVE_TOWN:
+	case E_SCENE_TYPE::SCENE_TYPE_GUILD:
 		return (nLevel + nStar * 5) * 10 + NFGetTimeS();
 		break;
-	case EConsHero_ReliveType::EHERO_RELIVE_SUBURB:
+	case E_SCENE_TYPE::SCENE_TYPE_NORMAL:
 		return (nLevel + nStar * 5) * 100 + NFGetTimeS();
 		break;
-	case EConsHero_ReliveType::EHERO_RELIVE_CLONE:
+	case E_SCENE_TYPE::SCENE_TYPE_MULTI_CLONE_SCENE:
+	case E_SCENE_TYPE::SCENE_TYPE_SINGLE_CLONE_SCENE:
 		return (nLevel + nStar * 5) + NFGetTimeS();
 		break;
 	default:
@@ -455,6 +475,41 @@ int NFHeroModule::CalReliveTime(const NFGUID & self, const NFGUID & xHeroID, con
 	}
 
 	return 0;
+}
+
+bool NFHeroModule::StillAlive(const NFGUID & self, const NFGUID & xHeroID)
+{
+	int nowTimeMS = NFGetTimeS();
+	NF_SHARE_PTR<NFIRecord> pHeroRecord = m_pKernelModule->FindRecord(self, NFrame::Player::PlayerHero::ThisName());
+	if (nullptr == pHeroRecord)
+	{
+		return false;
+	}
+
+	if (xHeroID.IsNull())
+	{
+		return false;
+	}
+
+	int nRow = pHeroRecord->FindObject(NFrame::Player::PlayerHero::GUID, xHeroID);
+	if (nRow < 0)
+	{
+		return false;
+	}
+
+	const int nHP = pHeroRecord->GetInt(nRow, NFrame::Player::PlayerHero::HP);
+	if (nHP <= 0)
+	{
+		return false;
+	}
+
+	int nTime = pHeroRecord->GetInt(nRow, NFrame::Player::PlayerHero::ReliveTime);
+	if (nowTimeMS < nTime)
+	{
+		return false;
+	}
+
+	return true;
 }
 
 NFIHeroModule::EConsHero_Pos NFHeroModule::GetFightPos(const NFGUID & self, const NFGUID & xHeroID)
@@ -477,7 +532,25 @@ NFIHeroModule::EConsHero_Pos NFHeroModule::GetFightPos(const NFGUID & self, cons
 
 int NFHeroModule::OnPlayerClassEvent(const NFGUID & self, const std::string & strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFDataList & var)
 {
-	if (CLASS_OBJECT_EVENT::COE_CREATE_FINISH == eClassEvent)
+	if (CLASS_OBJECT_EVENT::COE_CREATE_HASDATA == eClassEvent)
+	{
+		NFGUID xLastFightingHero = m_pKernelModule->GetPropertyObject(self, NFrame::Player::FightHeroID());
+		NF_SHARE_PTR<NFIRecord> pHeroRecord = m_pKernelModule->FindRecord(self, NFrame::Player::PlayerHero::ThisName());
+		NF_SHARE_PTR<NFIRecord> pHeroValueRecord = m_pKernelModule->FindRecord(self, NFrame::Player::HeroValue::ThisName());
+		
+		int nRow = pHeroRecord->FindObject(NFrame::Player::PlayerHero::GUID, xLastFightingHero);
+		if (nRow < 0)
+		{
+			return false;
+		}
+
+		int nMAXHP = pHeroValueRecord->GetInt(nRow, NFrame::Player::HeroValue::MAXHP);
+		int nHP = pHeroRecord->GetInt(nRow, NFrame::Player::PlayerHero::HP);
+
+		m_pKernelModule->SetPropertyInt(self, NFrame::Player::MAXHP(), nMAXHP);
+		m_pKernelModule->SetPropertyInt(self, NFrame::Player::HP(), nHP);
+	}
+	else if (CLASS_OBJECT_EVENT::COE_CREATE_FINISH == eClassEvent)
 	{
 		m_pKernelModule->AddPropertyCallBack(self, NFrame::NPC::HP(), this, &NFHeroModule::OnPlayerHPEvent);
 	}
@@ -503,6 +576,17 @@ int NFHeroModule::OnPlayerHPEvent(const NFGUID & self, const std::string & strPr
 
 	pHeroRecord->SetInt(nRow, NFrame::Player::PlayerHero::HP, newVar.GetInt());
 	
+	if (newVar.GetInt() <= 0)
+	{
+		NFGUID id = pHeroRecord->GetObject(nRow, NFrame::Player::PlayerHero::GUID);
+		const int nSceneID = m_pKernelModule->GetPropertyInt(self, NFrame::Player::SceneID());
+		E_SCENE_TYPE sSceneType = (E_SCENE_TYPE)m_pElementModule->GetPropertyInt(std::to_string(nSceneID), NFrame::Scene::Type());
+		int nReliveTime = CalReliveTime(self, id, sSceneType);
+		pHeroRecord->SetInt(nRow, NFrame::Player::PlayerHero::ReliveTime, nReliveTime);
+
+		//add a schedule to relive the hero that would be better
+	}
+
 	return 0;
 }
 
