@@ -118,6 +118,13 @@ void NFSkillModule::OnClienUseSkill(const NFSOCK nSockIndex, const int nMsgID, c
 		}
 	}
 
+	const int nHP = m_pKernelModule->GetPropertyInt(xUser, NFrame::Player::HP());
+	if (nHP <= 0)
+	{
+		m_pLogModule->LogError(xUser, " die but wants to use skill ");
+		return;
+	}
+
 	if (m_pSkillCooldownModule->ExistSkillCD(xUser, strSkillID))
 	{
 		m_pLogModule->LogError(xUser, "ExistSkillCD " + strSkillID);

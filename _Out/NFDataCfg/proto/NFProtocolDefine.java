@@ -389,6 +389,8 @@ package nframe;
 		// Property
 		public static final String Chinese = "Chinese";// string
 		public static final String English = "English";// string
+		public static final String French = "French";// string
+		public static final String Spanish = "Spanish";// string
 		// Record
 
 	}
@@ -1162,12 +1164,12 @@ package nframe;
 		public static final String Position = "Position";// vector3
 		public static final String SceneID = "SceneID";// int
 		// Property
+		public static final String ArgCnfID = "ArgCnfID";// string
+		public static final String ArgCount = "ArgCount";// int
 		public static final String AwardExp = "AwardExp";// int
 		public static final String AwardGold = "AwardGold";// int
 		public static final String AwardPack = "AwardPack";// string
-		public static final String Desc = "Desc";// string
-		public static final String KillCount = "KillCount";// string
-		public static final String KillMonsterName = "KillMonsterName";// string
+		public static final String DescID = "DescID";// string
 		public static final String LevelReq = "LevelReq";// string
 		public static final String NextTaskID = "NextTaskID";// string
 		public static final String Type = "Type";// int

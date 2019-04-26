@@ -398,6 +398,8 @@ namespace NFrame
 		// Property
 		static const std::string& Chinese(){ static std::string x = "Chinese"; return x; };// string
 		static const std::string& English(){ static std::string x = "English"; return x; };// string
+		static const std::string& French(){ static std::string x = "French"; return x; };// string
+		static const std::string& Spanish(){ static std::string x = "Spanish"; return x; };// string
 		// Record
 
 	};
@@ -1191,12 +1193,12 @@ namespace NFrame
 		static const std::string& Position(){ static std::string x = "Position"; return x; };// vector3
 		static const std::string& SceneID(){ static std::string x = "SceneID"; return x; };// int
 		// Property
+		static const std::string& ArgCnfID(){ static std::string x = "ArgCnfID"; return x; };// string
+		static const std::string& ArgCount(){ static std::string x = "ArgCount"; return x; };// int
 		static const std::string& AwardExp(){ static std::string x = "AwardExp"; return x; };// int
 		static const std::string& AwardGold(){ static std::string x = "AwardGold"; return x; };// int
 		static const std::string& AwardPack(){ static std::string x = "AwardPack"; return x; };// string
-		static const std::string& Desc(){ static std::string x = "Desc"; return x; };// string
-		static const std::string& KillCount(){ static std::string x = "KillCount"; return x; };// string
-		static const std::string& KillMonsterName(){ static std::string x = "KillMonsterName"; return x; };// string
+		static const std::string& DescID(){ static std::string x = "DescID"; return x; };// string
 		static const std::string& LevelReq(){ static std::string x = "LevelReq"; return x; };// string
 		static const std::string& NextTaskID(){ static std::string x = "NextTaskID"; return x; };// string
 		static const std::string& Type(){ static std::string x = "Type"; return x; };// int
