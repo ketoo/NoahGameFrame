@@ -73,16 +73,7 @@ int NFItemTokenConsumeProcessModule::ConsumeLegal(const NFGUID& self, const std:
 
 
 	const int nSceneID = m_pKernelModule->GetPropertyInt32(self, NFrame::Player::SceneID());
-	const int nHomeSceneID = m_pKernelModule->GetPropertyInt32(self, NFrame::Player::HomeSceneID());
-	
-	if (nSceneID == nHomeSceneID)
-	{
-		NFDataList varList;
-		if (pBuildRecord->FindString(NFrame::Player::BuildingList::BuildingCnfID, strBuildingCnfID, varList) <= 0)
-		{
-			return 0;
-		}
-	}
+
 
 	return 0;
 }
@@ -101,11 +92,11 @@ int NFItemTokenConsumeProcessModule::ConsumeProcess(const NFGUID& self, const st
 
 	const NFVector3 vPos = m_pKernelModule->GetPropertyVector3(self, NFrame::Player::Position());
 	const int nSceneID = m_pKernelModule->GetPropertyInt32(self, NFrame::Player::SceneID());
-	const int nHomeSceneID = m_pKernelModule->GetPropertyInt32(self, NFrame::Player::HomeSceneID());
 	const int nGroupID = m_pKernelModule->GetPropertyInt32(self, NFrame::Player::GroupID());
 	const NFGUID xID = m_pKernelModule->CreateGUID();
 
-	if (nSceneID == nHomeSceneID)
+	E_SCENE_TYPE eSceneType = (E_SCENE_TYPE)m_pElementModule->GetPropertyInt32(std::to_string(nSceneID), NFrame::Scene::Type());
+	if (eSceneType == E_SCENE_TYPE::SCENE_TYPE_NORMAL)
 	{
 		NF_SHARE_PTR<NFDataList> xDataList = pBuildRecord->GetInitData();
 		xDataList->SetString(NFrame::Player::BuildingList::BuildingCnfID, strBuildingCnfID);

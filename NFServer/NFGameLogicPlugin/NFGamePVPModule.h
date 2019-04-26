@@ -82,8 +82,6 @@ protected:
 	int AfterLeaveSceneGroupEvent(const NFGUID& self, const int nSceneID, const int nGroupID, const int nType, const NFDataList& argList);
 
 protected:
-	int OnDeadSwapHeroHeart(const NFGUID& self, const std::string& strHeartBeat, const float fTime, const int nCount);
-
 	bool ProcessOpponentData(const NFGUID & self, const NFMsg::AckSearchOppnent& opponent);
 
 	void ResetPVPData(const NFGUID & self);
@@ -93,7 +91,6 @@ protected:
 	int OnNPCHPEvent(const NFGUID& self, const std::string& strPropertyName, const NFData& oldVar, const NFData& newVar);
 
 	int OnPlayerClassEvent(const NFGUID& self, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFDataList& var);
-	int OnPlayerHPEvent(const NFGUID& self, const std::string& strPropertyName, const NFData& oldVar, const NFData& newVar);
 
 	void EndTheBattle(const NFGUID& self);
 private:

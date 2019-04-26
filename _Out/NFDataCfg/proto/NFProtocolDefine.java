@@ -448,12 +448,12 @@ package nframe;
 		public static final String ATK_SPEED = "ATK_SPEED";// int
 		public static final String ATK_VALUE = "ATK_VALUE";// int
 		public static final String ATK_WIND = "ATK_WIND";// int
-		public static final String AtkDis = "AtkDis";// float
 		public static final String BUFF_GATE = "BUFF_GATE";// int
 		public static final String CRITICAL = "CRITICAL";// int
 		public static final String Camp = "Camp";// int
 		public static final String Climb = "Climb";// int
 		public static final String ConsumeData = "ConsumeData";// string
+		public static final String CrisisDis = "CrisisDis";// float
 		public static final String DEF_DARK = "DEF_DARK";// int
 		public static final String DEF_FIRE = "DEF_FIRE";// int
 		public static final String DEF_ICE = "DEF_ICE";// int
@@ -485,6 +485,7 @@ package nframe;
 		public static final String MP = "MP";// int
 		public static final String MPREGEN = "MPREGEN";// int
 		public static final String MasterID = "MasterID";// object
+		public static final String MeleeType = "MeleeType";// int
 		public static final String NPCType = "NPCType";// int
 		public static final String PHYSICAL_GATE = "PHYSICAL_GATE";// int
 		public static final String Prefab = "Prefab";// string
@@ -573,9 +574,6 @@ package nframe;
 		public static final String Diamond = "Diamond";// int
 		public static final String EXP = "EXP";// int
 		public static final String FightHeroCnfID = "FightHeroCnfID";// string
-		public static final String FightHeroHP1 = "FightHeroHP1";// int
-		public static final String FightHeroHP2 = "FightHeroHP2";// int
-		public static final String FightHeroHP3 = "FightHeroHP3";// int
 		public static final String FightHeroID = "FightHeroID";// object
 		public static final String FightHeroLevel = "FightHeroLevel";// int
 		public static final String FightingStar = "FightingStar";// int
@@ -617,13 +615,10 @@ package nframe;
 		public static final String HeroID1 = "HeroID1";// object
 		public static final String HeroID2 = "HeroID2";// object
 		public static final String HeroID3 = "HeroID3";// object
-		public static final String HeroPos1 = "HeroPos1";// vector3
-		public static final String HeroPos2 = "HeroPos2";// vector3
-		public static final String HeroPos3 = "HeroPos3";// vector3
 		public static final String HeroStar1 = "HeroStar1";// int
 		public static final String HeroStar2 = "HeroStar2";// int
 		public static final String HeroStar3 = "HeroStar3";// int
-		public static final String HomeSceneID = "HomeSceneID";// int
+		public static final String HomeCellID = "HomeCellID";// string
 		public static final String Item1 = "Item1";// string
 		public static final String Item1Count = "Item1Count";// int
 		public static final String Item1UsedCount = "Item1UsedCount";// int
@@ -663,7 +658,6 @@ package nframe;
 		public static final String OpponentLevel = "OpponentLevel";// int
 		public static final String OpponentName = "OpponentName";// string
 		public static final String PHYSICAL_GATE = "PHYSICAL_GATE";// int
-		public static final String PVPType = "PVPType";// int
 		public static final String PrefabPath = "PrefabPath";// string
 		public static final String REFLECTDAMAGE = "REFLECTDAMAGE";// int
 		public static final String RELIVE_SOUL = "RELIVE_SOUL";// int
@@ -900,12 +894,14 @@ package nframe;
 			public static final int Level = 3;//int
 			public static final int Exp = 4;//int
 			public static final int Star = 5;//int
-			public static final int Ice_Talent = 6;//int
-			public static final int Fire_Talent = 7;//int
-			public static final int Light_Talent = 8;//int
-			public static final int Wind_Talent = 9;//int
-			public static final int Poison_Talent = 10;//int
-			public static final int Dark_Talent = 11;//int
+			public static final int ReliveTime = 6;//int
+			public static final int HP = 7;//int
+			public static final int Ice_Talent = 8;//int
+			public static final int Fire_Talent = 9;//int
+			public static final int Light_Talent = 10;//int
+			public static final int Wind_Talent = 11;//int
+			public static final int Poison_Talent = 12;//int
+			public static final int Dark_Talent = 13;//int
 
 		}
 		public class TaskList
@@ -1096,17 +1092,17 @@ package nframe;
 		public static final String DamageValue = "DamageValue";// int
 		public static final String DefaultHitTime = "DefaultHitTime";// string
 		public static final String Desc = "Desc";// string
+		public static final String EffectObjType = "EffectObjType";// int
 		public static final String GetBuffList = "GetBuffList";// string
 		public static final String Icon = "Icon";// string
+		public static final String Melee = "Melee";// int
 		public static final String NewObject = "NewObject";// string
 		public static final String NextID = "NextID";// string
 		public static final String PlayerSkill = "PlayerSkill";// int
-		public static final String RequireDistance = "RequireDistance";// float
 		public static final String SendBuffList = "SendBuffList";// string
 		public static final String ShowName = "ShowName";// string
 		public static final String SkillType = "SkillType";// int
 		public static final String SpriteFile = "SpriteFile";// string
-		public static final String TargetType = "TargetType";// int
 		// Record
 
 	}

@@ -50,6 +50,7 @@ public:
 
     virtual const NFGUID& Self();
 
+	virtual std::string ToString();
     //////////////////////////////////////////////////////////////////////////
 
     virtual bool SetRecordInt(const std::string& strRecordName, const int nRow, const int nCol, const NFINT64 nValue);
