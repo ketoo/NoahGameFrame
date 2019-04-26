@@ -287,7 +287,7 @@ bool NFHttpClient::MakeRequest(const std::string& strUri,
     if (mlHttpObject.size() > 0)
     {
         pHttpObj = mlHttpObject.front();
-
+        mlHttpObject.pop_front();
         pHttpObj->m_pHttpClient = this;
         pHttpObj->m_pBev = bev;
         pHttpObj->m_pCB = pCB;
