@@ -257,6 +257,10 @@ bool NFHeroPropertyModule::AddHeroProperty(const NFGUID & self, const NFGUID & x
 		}
 	}
 
+	//update hero's current HP
+	int nMAXHP = pHeroPropertyRecord->GetInt(nRow, NFrame::Player::HeroValue::MAXHP);
+	pHeroRecord->SetInt(nRow, NFrame::Player::PlayerHero::HP, nMAXHP);
+
 	return true;
 }
 

@@ -22,12 +22,16 @@
 		<Property Id="DefaultHitTime" Cache="0" Desc="缺省打击时间
 （本来应该打到但是物理没碰撞到或者其他原因）" Force="0" Private="0" Public="0" Ref="0" Save="0" Type="string" Upload="0" />
 		<Property Id="Desc" Cache="0" Desc="描述字符串索引" Force="0" Private="0" Public="0" Ref="0" Save="0" Type="string" Upload="0" />
+		<Property Id="EffectObjType" Cache="0" Desc="作用效果目标
+0敌人
+1自己
+2队友(include self)" Force="0" Private="0" Public="0" Ref="0" Save="0" Type="int" Upload="0" />
 		<Property Id="GetBuffList" Cache="0" Desc="使用后获得的BUFF" Force="0" Private="0" Public="0" Ref="0" Save="0" Type="string" Upload="0" />
 		<Property Id="Icon" Cache="0" Desc="ICON" Force="0" Private="0" Public="0" Ref="0" Save="0" Type="string" Upload="0" />
+		<Property Id="Melee" Cache="0" Desc="Melee:0;Ranger:1" Force="0" Private="0" Public="0" Ref="0" Save="0" Type="int" Upload="0" />
 		<Property Id="NewObject" Cache="0" Desc="产生新的对象--召唤" Force="0" Private="0" Public="0" Ref="0" Save="0" Type="string" Upload="0" />
 		<Property Id="NextID" Cache="0" Desc="" Force="0" Private="0" Public="0" Ref="0" Save="0" Type="string" Upload="0" />
 		<Property Id="PlayerSkill" Cache="0" Desc="是否玩家技能" Force="0" Private="0" Public="0" Ref="0" Save="0" Type="int" Upload="0" />
-		<Property Id="RequireDistance" Cache="0" Desc="释放要求目标距离" Force="0" Private="0" Public="0" Ref="0" Save="0" Type="float" Upload="0" />
 		<Property Id="SendBuffList" Cache="0" Desc="使用后对方获得的BUFF" Force="0" Private="0" Public="0" Ref="0" Save="0" Type="string" Upload="0" />
 		<Property Id="ShowName" Cache="0" Desc="名字字符串索引" Force="0" Private="0" Public="0" Ref="0" Save="0" Type="string" Upload="0" />
 		<Property Id="SkillType" Cache="0" Desc=" EST_BRIEF_SINGLE   = 0;//普通0短刃类
@@ -39,10 +43,6 @@
  EST_TARGET_GROUP  = 6;//每人头顶闪电那样
  EST_POSITION_GROUP  = 7;//爆炸目标范围(火矛从天而降那样position)" Force="0" Private="0" Public="0" Ref="0" Save="0" Type="int" Upload="0" />
 		<Property Id="SpriteFile" Cache="0" Desc="图集" Force="0" Private="0" Public="0" Ref="0" Save="0" Type="string" Upload="0" />
-		<Property Id="TargetType" Cache="0" Desc="目标类别
-0敌人
-1自己
-2队友(include self)" Force="0" Private="0" Public="0" Ref="0" Save="0" Type="int" Upload="0" />
 	</Propertys>
 	<Records>
 	</Records>

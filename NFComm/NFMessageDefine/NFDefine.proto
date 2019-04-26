@@ -371,10 +371,8 @@ enum ESkillType
 	EST_BRIEF_GROUP 		= 1;//this kind of skill can damage multiple objects
 	EST_BULLET_SINGLE		= 2;//this kind of bullet just can damage one object
 	EST_BULLET_REBOUND		= 3;//this kind of bullet can damage multiple objects via rebound
-	EST_BULLET_BOMB			= 4;//this kind of bullet can damage multiple objects when touch the target object(position)
-	EST_TARGET_SINGLE		= 5;//???????
-	EST_TARGET_GROUP		= 6;//????????
-	EST_POSITION_GROUP		= 7;//??????(????????position)
+	EST_BULLET_TARGET_BOMB	= 4;//this kind of bullet can damage multiple objects who around the target when the bullet touched the target object
+	EST_BULLET_POS_BOMB		= 5;//this kind of bullet can damage multiple objects  who around the target when the bullet arrived the position
 };
 
 enum EItemType
@@ -543,8 +541,15 @@ enum ENPCType
     
 };
 
+enum EMeleeType
+{
+    ETYPE_MELEE	= 0;			  //
+    ETYPE_MELEE_DASH 	= 1;              //
+    ETYPE_RANGER = 2;              //
+    
+};
 
-enum ETARGETType
+enum EEffectObjType
 {
     ETARGETTYPE_ENEMY	= 0;			  //
     ETARGETTYPE_SELF 	= 1;              //

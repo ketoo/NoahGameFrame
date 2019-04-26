@@ -85,9 +85,9 @@ int NFBriefSkillConsumeProcessModule::ConsumeProcess( const NFGUID& self, const 
 	const std::string& strGetBuffList = m_pElementModule->GetPropertyString(strSkillName, NFrame::Skill::GetBuffList());
 	const std::string& strSendBuffList = m_pElementModule->GetPropertyString(strSkillName, NFrame::Skill::SendBuffList());
 
-	const double fRequireDistance = m_pElementModule->GetPropertyFloat(strSkillName, NFrame::Skill::RequireDistance());
+	const double fRequireDistance = m_pElementModule->GetPropertyFloat(strSkillName, NFrame::Skill::AtkDis());
 	const double fDamageDistance = m_pElementModule->GetPropertyFloat(strSkillName, NFrame::Skill::DamageDistance());
-	const NFINT64 nTargetType = m_pElementModule->GetPropertyInt(strSkillName, NFrame::Skill::TargetType());
+	const NFINT64 nTargetType = m_pElementModule->GetPropertyInt(strSkillName, NFrame::Skill::EffectObjType());
 
 	int64_t nOldConsumeVaue = m_pKernelModule->GetPropertyInt(self, strConsumeProperty);
 	nOldConsumeVaue -= nConsumeValue;

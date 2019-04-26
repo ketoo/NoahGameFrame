@@ -45,6 +45,7 @@ public:
 
     virtual const NFGUID& Self() = 0;
 
+	virtual std::string ToString() = 0;
     //////////////////////////////////////////////////////////////////////////
     virtual bool SetProperty(const std::string& strPropertyName, const NFData& TData) = 0;
 

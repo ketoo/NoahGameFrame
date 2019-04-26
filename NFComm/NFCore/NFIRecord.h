@@ -72,7 +72,8 @@ public:
 
     virtual ~NFIRecord() {}
 
-    virtual bool IsUsed(const int nRow) const  = 0;
+	virtual std::string ToString() = 0;
+	virtual bool IsUsed(const int nRow) const  = 0;
     virtual bool SetUsed(const int nRow, const int bUse)  = 0;
 	virtual bool PreAllocMemoryForRow(const int nRow) = 0;
 

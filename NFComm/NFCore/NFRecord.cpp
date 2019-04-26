@@ -103,6 +103,26 @@ NFRecord::~NFRecord()
     mtRecordCallback.clear();
 }
 
+std::string NFRecord::ToString()
+{
+	std::stringstream ss;
+	ss << this->GetName() << std::endl;
+
+	for (int i = 0; i < this->GetRows(); ++i)
+	{
+		if (IsUsed(i))
+		{
+			NFDataList rowDataList;
+			if (this->QueryRow(i, rowDataList))
+			{
+				ss << "ROW:" << i << "==>" << rowDataList.ToString() << std::endl;
+			}
+		}
+	}
+
+	return ss.str();
+}
+
 int NFRecord::GetCols() const
 {
     return mVarRecordType->GetCount();

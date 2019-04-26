@@ -48,8 +48,14 @@ public:
 		ECONSt_HERO_POS1 = 1,
 		ECONSt_HERO_POS2 = 2,
 		ECONSt_HERO_POS3 = 3,
-		ECONSt_HERO_POS4 = 4,
-		ECONSt_HERO_MAX = 5,
+		ECONSt_HERO_MAX = 4,
+	};
+
+	enum EConsHero_ReliveType
+	{
+		EHERO_RELIVE_SUBURB,
+		EHERO_RELIVE_TOWN,
+		EHERO_RELIVE_CLONE,
 	};
 
     virtual NFGUID AddHero(const NFGUID& self, const std::string& strID) = 0;

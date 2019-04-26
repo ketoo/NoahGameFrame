@@ -454,12 +454,12 @@ namespace NFrame
 		public static readonly String ATK_SPEED = "ATK_SPEED";// int
 		public static readonly String ATK_VALUE = "ATK_VALUE";// int
 		public static readonly String ATK_WIND = "ATK_WIND";// int
-		public static readonly String AtkDis = "AtkDis";// float
 		public static readonly String BUFF_GATE = "BUFF_GATE";// int
 		public static readonly String CRITICAL = "CRITICAL";// int
 		public static readonly String Camp = "Camp";// int
 		public static readonly String Climb = "Climb";// int
 		public static readonly String ConsumeData = "ConsumeData";// string
+		public static readonly String CrisisDis = "CrisisDis";// float
 		public static readonly String DEF_DARK = "DEF_DARK";// int
 		public static readonly String DEF_FIRE = "DEF_FIRE";// int
 		public static readonly String DEF_ICE = "DEF_ICE";// int
@@ -491,6 +491,7 @@ namespace NFrame
 		public static readonly String MP = "MP";// int
 		public static readonly String MPREGEN = "MPREGEN";// int
 		public static readonly String MasterID = "MasterID";// object
+		public static readonly String MeleeType = "MeleeType";// int
 		public static readonly String NPCType = "NPCType";// int
 		public static readonly String PHYSICAL_GATE = "PHYSICAL_GATE";// int
 		public static readonly String Prefab = "Prefab";// string
@@ -579,9 +580,6 @@ namespace NFrame
 		public static readonly String Diamond = "Diamond";// int
 		public static readonly String EXP = "EXP";// int
 		public static readonly String FightHeroCnfID = "FightHeroCnfID";// string
-		public static readonly String FightHeroHP1 = "FightHeroHP1";// int
-		public static readonly String FightHeroHP2 = "FightHeroHP2";// int
-		public static readonly String FightHeroHP3 = "FightHeroHP3";// int
 		public static readonly String FightHeroID = "FightHeroID";// object
 		public static readonly String FightHeroLevel = "FightHeroLevel";// int
 		public static readonly String FightingStar = "FightingStar";// int
@@ -623,13 +621,10 @@ namespace NFrame
 		public static readonly String HeroID1 = "HeroID1";// object
 		public static readonly String HeroID2 = "HeroID2";// object
 		public static readonly String HeroID3 = "HeroID3";// object
-		public static readonly String HeroPos1 = "HeroPos1";// vector3
-		public static readonly String HeroPos2 = "HeroPos2";// vector3
-		public static readonly String HeroPos3 = "HeroPos3";// vector3
 		public static readonly String HeroStar1 = "HeroStar1";// int
 		public static readonly String HeroStar2 = "HeroStar2";// int
 		public static readonly String HeroStar3 = "HeroStar3";// int
-		public static readonly String HomeSceneID = "HomeSceneID";// int
+		public static readonly String HomeCellID = "HomeCellID";// string
 		public static readonly String Item1 = "Item1";// string
 		public static readonly String Item1Count = "Item1Count";// int
 		public static readonly String Item1UsedCount = "Item1UsedCount";// int
@@ -669,7 +664,6 @@ namespace NFrame
 		public static readonly String OpponentLevel = "OpponentLevel";// int
 		public static readonly String OpponentName = "OpponentName";// string
 		public static readonly String PHYSICAL_GATE = "PHYSICAL_GATE";// int
-		public static readonly String PVPType = "PVPType";// int
 		public static readonly String PrefabPath = "PrefabPath";// string
 		public static readonly String REFLECTDAMAGE = "REFLECTDAMAGE";// int
 		public static readonly String RELIVE_SOUL = "RELIVE_SOUL";// int
@@ -906,12 +900,14 @@ namespace NFrame
 			public const int Level = 3;//int
 			public const int Exp = 4;//int
 			public const int Star = 5;//int
-			public const int Ice_Talent = 6;//int
-			public const int Fire_Talent = 7;//int
-			public const int Light_Talent = 8;//int
-			public const int Wind_Talent = 9;//int
-			public const int Poison_Talent = 10;//int
-			public const int Dark_Talent = 11;//int
+			public const int ReliveTime = 6;//int
+			public const int HP = 7;//int
+			public const int Ice_Talent = 8;//int
+			public const int Fire_Talent = 9;//int
+			public const int Light_Talent = 10;//int
+			public const int Wind_Talent = 11;//int
+			public const int Poison_Talent = 12;//int
+			public const int Dark_Talent = 13;//int
 
 		}
 		public class TaskList
@@ -1102,17 +1098,17 @@ namespace NFrame
 		public static readonly String DamageValue = "DamageValue";// int
 		public static readonly String DefaultHitTime = "DefaultHitTime";// string
 		public static readonly String Desc = "Desc";// string
+		public static readonly String EffectObjType = "EffectObjType";// int
 		public static readonly String GetBuffList = "GetBuffList";// string
 		public static readonly String Icon = "Icon";// string
+		public static readonly String Melee = "Melee";// int
 		public static readonly String NewObject = "NewObject";// string
 		public static readonly String NextID = "NextID";// string
 		public static readonly String PlayerSkill = "PlayerSkill";// int
-		public static readonly String RequireDistance = "RequireDistance";// float
 		public static readonly String SendBuffList = "SendBuffList";// string
 		public static readonly String ShowName = "ShowName";// string
 		public static readonly String SkillType = "SkillType";// int
 		public static readonly String SpriteFile = "SpriteFile";// string
-		public static readonly String TargetType = "TargetType";// int
 		// Record
 
 	}

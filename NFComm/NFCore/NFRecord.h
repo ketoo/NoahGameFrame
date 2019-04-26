@@ -41,6 +41,8 @@ public:
 
     virtual ~NFRecord();
 
+	virtual std::string ToString();
+
     virtual bool IsUsed(const int nRow) const;
 
     virtual bool SetUsed(const int nRow, const int bUse);
