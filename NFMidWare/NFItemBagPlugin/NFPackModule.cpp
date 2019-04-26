@@ -128,14 +128,16 @@ bool NFPackModule::CreateItem( const NFGUID& self, const std::string& strConfigN
 		return false;
 	}
 
-	NF_SHARE_PTR<NFIRecord> pRecord = nullptr;
-	if (m_pKernelModule->GetPropertyInt(self, NFrame::Player::PVPType()) == NFMsg::EPVPType::PVP_HOME)
+	const int nSceneID = m_pKernelModule->GetPropertyInt(self, NFrame::Player::SceneID());
+	E_SCENE_TYPE eSceneType = (E_SCENE_TYPE)m_pElementModule->GetPropertyInt32(std::to_string(nSceneID), NFrame::Scene::Type());
+	if (eSceneType == E_SCENE_TYPE::SCENE_TYPE_SINGLE_CLONE_SCENE
+		|| eSceneType == E_SCENE_TYPE::SCENE_TYPE_MULTI_CLONE_SCENE)
 	{
-		return CreateItemInNormalBag(self, strConfigName, nCount);
+		return CreateItemInTempBag(self, strConfigName, nCount);
 	}
 	else
 	{
-		return CreateItemInTempBag(self, strConfigName, nCount);
+		return CreateItemInNormalBag(self, strConfigName, nCount);
 	}
 	
 	return false;
@@ -304,7 +306,7 @@ bool NFPackModule::CreateItemInNormalBag(const NFGUID & self, const std::string 
 		xRowData->SetInt(NFrame::Player::BagItemList::ItemCount, nCount);
 		xRowData->SetInt(NFrame::Player::BagItemList::Date, pPluginManager->GetNowTime());
 
-		pRecord->AddRow(-1, *xRowData);
+		int row = pRecord->AddRow(-1, *xRowData);
 	}
 	else
 	{

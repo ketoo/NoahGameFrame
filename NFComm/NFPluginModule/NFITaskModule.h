@@ -34,6 +34,7 @@ class NFITaskModule : public NFIModule
 public:
     enum TaskType
     {
+		TT_MAKE_BUILDING,
         TT_KILL_MONSTER,
         TT_KILL_PLAYER,
     };

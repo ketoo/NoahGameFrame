@@ -50,6 +50,8 @@ public:
 
     virtual const NFGUID& Self();
 
+	virtual std::string ToString();
+
     virtual bool SetProperty(const std::string& strPropertyName, const NFData& TData);
 
     virtual bool SetPropertyInt(const std::string& strPropertyName, const NFINT64 nValue);

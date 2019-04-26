@@ -75,6 +75,8 @@ protected:
 	void OnSetFightHeroMsg(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
 	void OnSwitchFightHeroMsg( const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen );
 
+	int CalReliveTime(const NFGUID& self, const NFGUID& xHeroID, const E_SCENE_TYPE reliveType);
+	bool StillAlive(const NFGUID& self, const NFGUID& xHeroID);
 protected:
 
 	int OnPlayerClassEvent(const NFGUID& self, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFDataList& var);

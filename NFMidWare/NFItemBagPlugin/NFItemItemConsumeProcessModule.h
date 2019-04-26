@@ -62,7 +62,6 @@ public:
 
 protected:
 	virtual int ConsumeNormalProcess(const NFGUID& self, const std::string& strItemID, const NFDataList& targetID);
-	virtual int ConsumeTempProcess(const NFGUID& self, const std::string& strItemID, const NFDataList& targetID);
 
 private:
 	NFIKernelModule* m_pKernelModule;

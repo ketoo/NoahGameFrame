@@ -110,7 +110,7 @@ bool NFFileProcess::LoadDataFromExcel(MiniExcelReader::Sheet & sheet, ClassData 
 		LoadDataAndProcessProperty(sheet, pClassData);
 		LoadIniData(sheet, pClassData);
 	}
-	else if (strSheetName.find("componen") != std::string::npos)
+	else if (strSheetName.find("component") != std::string::npos)
 	{
 		LoadDataAndProcessComponent(sheet, pClassData);
 	}
