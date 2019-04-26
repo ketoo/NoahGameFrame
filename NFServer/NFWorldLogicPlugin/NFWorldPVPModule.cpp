@@ -183,9 +183,9 @@ bool NFWorldPVPModule::ProcessOpponentData(const NFGUID& opponent, NFMsg::AckSea
 	vKeyList.push_back(NFrame::Player::HeroID1());
 	vKeyList.push_back(NFrame::Player::HeroID2());
 	vKeyList.push_back(NFrame::Player::HeroID3());
-	vKeyList.push_back(NFrame::Player::HeroPos1());
-	vKeyList.push_back(NFrame::Player::HeroPos2());
-	vKeyList.push_back(NFrame::Player::HeroPos3());
+	//vKeyList.push_back(NFrame::Player::HeroPos1());
+	//vKeyList.push_back(NFrame::Player::HeroPos2());
+	//vKeyList.push_back(NFrame::Player::HeroPos3());
 	//try
 	const std::string& strPlayerKey = m_pCommonRedisModule->GetPropertyCacheKey(opponent);
 	NF_SHARE_PTR<NFIRedisClient> xRedisClient = m_pNoSqlModule->GetDriverBySuit(strPlayerKey);

@@ -49,6 +49,19 @@ const NFGUID& NFRecordManager::Self()
     return mSelf;
 }
 
+std::string NFRecordManager::ToString()
+{
+	std::stringstream stream;
+	NF_SHARE_PTR<NFIRecord> pRecord = First();
+	while (pRecord)
+	{
+		stream << pRecord->ToString() << std::endl;
+		pRecord = Next();
+	}
+
+	return stream.str();
+}
+
 bool NFRecordManager::SetRecordInt(const std::string& strRecordName, const int nRow, const int nCol, const NFINT64 nValue)
 {
     NF_SHARE_PTR<NFIRecord> pRecord = GetElement(strRecordName);

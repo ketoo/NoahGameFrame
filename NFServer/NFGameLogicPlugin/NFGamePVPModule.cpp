@@ -99,15 +99,10 @@ void NFGamePVPModule::OnReqSearchOpponentProcess(const NFSOCK nSockIndex, const 
                                               const uint32_t nLen)
 {
 	CLIENT_MSG_PROCESS( nMsgID, msg, nLen, NFMsg::ReqSearchOppnent);
-	int pvpType = m_pKernelModule->GetPropertyInt(nPlayerID, NFrame::Player::PVPType());
-	if (pvpType != NFMsg::EPVPType::PVP_HOME)
-	{
-		//return;
-	}
 
 	ResetPVPData(nPlayerID);
 
-	int nHomeSceneID = m_pKernelModule->GetPropertyInt(nPlayerID, NFrame::Player::HomeSceneID());
+	int nHomeSceneID = 1;// m_pKernelModule->GetPropertyInt(nPlayerID, NFrame::Player::HomeSceneID());
 	xMsg.set_self_scene(nHomeSceneID);
 	int nHasKey = nPlayerID.nData64;
 	m_pNetClientModule->SendSuitByPB(NF_SERVER_TYPES::NF_ST_WORLD, nHasKey, nMsgID, xMsg, nPlayerID);
@@ -125,7 +120,6 @@ void NFGamePVPModule::OnAckSearchOpponentProcess(const NFSOCK nSockIndex, const 
 
 	m_pKernelModule->SetPropertyObject(nPlayerID, NFrame::Player::OpponentFighting(), NFGUID());
 	m_pKernelModule->SetPropertyInt(nPlayerID, NFrame::Player::FightingStar(), 0);
-	m_pKernelModule->SetPropertyInt(nPlayerID, NFrame::Player::PVPType(), NFMsg::EPVPType::PVP_INDIVIDUAL);
 
 	m_pSceneProcessModule->RequestEnterScene(nPlayerID, xMsg.scene_id(), 0, NFDataList());
 
@@ -169,20 +163,14 @@ void NFGamePVPModule::OnAckSearchOpponentProcess(const NFSOCK nSockIndex, const 
 void NFGamePVPModule::OnReqSwapHomeSceneProcess(const NFSOCK nSockIndex, const int nMsgID, const char * msg, const uint32_t nLen)
 {
 	CLIENT_MSG_PROCESS( nMsgID, msg, nLen, NFMsg::ReqAckHomeScene);
-	int nHomeSceneID = m_pKernelModule->GetPropertyInt32(nPlayerID, NFrame::Player::HomeSceneID());
+	//int nHomeSceneID = m_pKernelModule->GetPropertyInt32(nPlayerID, NFrame::Player::HomeSceneID());
 	int nSceneID = m_pKernelModule->GetPropertyInt32(nPlayerID, NFrame::Player::SceneID());
-	int pvpType = m_pKernelModule->GetPropertyInt(nPlayerID, NFrame::Player::PVPType());
-	
-	if (pvpType == NFMsg::EPVPType::PVP_HOME)
-	{
-		return;
-	}
 
     ResetPVPData(nPlayerID);
 
-    m_pKernelModule->SetPropertyInt(nPlayerID, NFrame::Player::PVPType(), NFMsg::EPVPType::PVP_HOME);
+    //m_pKernelModule->SetPropertyInt(nPlayerID, NFrame::Player::PVPType(), NFMsg::EPVPType::PVP_HOME);
 
-	m_pSceneProcessModule->RequestEnterScene(nPlayerID, nHomeSceneID, 0, NFDataList());
+	m_pSceneProcessModule->RequestEnterScene(nPlayerID, 1, 0, NFDataList());
 
 	
 }
@@ -191,8 +179,10 @@ void NFGamePVPModule::OnReqStartPVPOpponentProcess(const NFSOCK nSockIndex, cons
 												const uint32_t nLen)
 {
 	CLIENT_MSG_PROCESS( nMsgID, msg, nLen, NFMsg::ReqAckStartBattle);
-	int pvpType = m_pKernelModule->GetPropertyInt(nPlayerID, NFrame::Player::PVPType());
-	if (pvpType == NFMsg::EPVPType::PVP_HOME)
+
+	const int nSceneID = m_pKernelModule->GetPropertyInt(nPlayerID, NFrame::Player::SceneID());
+	E_SCENE_TYPE sceneType = (E_SCENE_TYPE)m_pElementModule->GetPropertyInt(std::to_string(nSceneID), NFrame::Scene::Type());
+	if (sceneType != E_SCENE_TYPE::SCENE_TYPE_NORMAL)
 	{
 		return;
 	}
@@ -233,12 +223,13 @@ void NFGamePVPModule::OnReqEndPVPOpponentProcess(const NFSOCK nSockIndex, const 
 
 	//tell client the end information
 	//set oppnent 0
-	int pvpType = m_pKernelModule->GetPropertyInt(nPlayerID, NFrame::Player::PVPType());
-	if (pvpType == NFMsg::EPVPType::PVP_INDIVIDUAL)
+	const int nSceneID = m_pKernelModule->GetPropertyInt(nPlayerID, NFrame::Player::SceneID());
+	E_SCENE_TYPE eSceneType = (E_SCENE_TYPE)m_pElementModule->GetPropertyInt32(std::to_string(nSceneID), NFrame::Scene::Type());
+	if (eSceneType == E_SCENE_TYPE::SCENE_TYPE_SINGLE_CLONE_SCENE
+		|| eSceneType == E_SCENE_TYPE::SCENE_TYPE_MULTI_CLONE_SCENE)
 	{
 		EndTheBattle(nPlayerID);
 	}
-
 }
 
 int NFGamePVPModule::OnSceneEvent(const NFGUID & self, const int nSceneID, const int nGroupID, const int nType, const NFDataList & argList)
@@ -246,7 +237,6 @@ int NFGamePVPModule::OnSceneEvent(const NFGUID & self, const int nSceneID, const
 	std::string strTileData;
 	NFVector3 vRelivePos = m_pSceneModule->GetRelivePosition(nSceneID, 0);
 	NFGUID xViewOpponent = m_pKernelModule->GetPropertyObject(self, NFrame::Player::OpponentID());
-	NFMsg::EPVPType ePvpType = (NFMsg::EPVPType)m_pKernelModule->GetPropertyInt(self, NFrame::Player::PVPType());
 
 	NFMsg::ReqAckSwapScene xAckSwapScene;
 	xAckSwapScene.set_scene_id(nSceneID);
@@ -256,7 +246,16 @@ int NFGamePVPModule::OnSceneEvent(const NFGUID & self, const int nSceneID, const
 	xAckSwapScene.set_y(vRelivePos.Y());
 	xAckSwapScene.set_z(vRelivePos.Z());
 
-	if (ePvpType == NFMsg::EPVPType::PVP_HOME)
+	E_SCENE_TYPE eSceneType = (E_SCENE_TYPE)m_pElementModule->GetPropertyInt32(std::to_string(nSceneID), NFrame::Scene::Type());
+	if (eSceneType == E_SCENE_TYPE::SCENE_TYPE_SINGLE_CLONE_SCENE
+		|| eSceneType == E_SCENE_TYPE::SCENE_TYPE_MULTI_CLONE_SCENE)
+	{
+		//if (m_pPlayerRedisModule->LoadPlayerTileRandomCache(xViewOpponent, strTileData))
+		{
+			xAckSwapScene.set_data(strTileData.c_str(), strTileData.length());
+		}
+	}
+	else
 	{
 		m_pKernelModule->SetPropertyObject(self, NFrame::Player::OpponentID(), NFGUID());
 
@@ -265,14 +264,6 @@ int NFGamePVPModule::OnSceneEvent(const NFGUID & self, const int nSceneID, const
 			xAckSwapScene.set_data(strTileData.c_str(), strTileData.length());
 		}
 	}
-	else if(ePvpType == NFMsg::EPVPType::PVP_INDIVIDUAL)
-	{
-		//if (m_pPlayerRedisModule->LoadPlayerTileRandomCache(xViewOpponent, strTileData))
-		{
-			xAckSwapScene.set_data(strTileData.c_str(), strTileData.length());
-		}
-	}
-	
 
 	//attach tile data
 	m_pGameServerNet_ServerModule->SendMsgPBToGate(NFMsg::EGMI_ACK_SWAP_SCENE, xAckSwapScene, self);
@@ -309,43 +300,6 @@ int NFGamePVPModule::AfterLeaveSceneGroupEvent(const NFGUID & self, const int nS
 {
 	return 0;
 }
-
-int NFGamePVPModule::OnDeadSwapHeroHeart(const NFGUID & self, const std::string & strHeartBeat, const float fTime, const int nCount)
-{
-	NFGUID xFightingHero = m_pKernelModule->GetPropertyObject(self, NFrame::Player::FightHeroID());
-	NFGUID xHero1 = m_pKernelModule->GetPropertyObject(self, NFrame::Player::HeroID1());
-	NFGUID xHero2 = m_pKernelModule->GetPropertyObject(self, NFrame::Player::HeroID2());
-	NFGUID xHero3 = m_pKernelModule->GetPropertyObject(self, NFrame::Player::HeroID3());
-
-	int nHeroHP1 = m_pKernelModule->GetPropertyInt(self, NFrame::Player::FightHeroHP1());
-	int nHeroHP2 = m_pKernelModule->GetPropertyInt(self, NFrame::Player::FightHeroHP2());
-	int nHeroHP3 = m_pKernelModule->GetPropertyInt(self, NFrame::Player::FightHeroHP3());
-
-	if (nHeroHP1 <= 0 && nHeroHP2 <= 0 && nHeroHP3 <= 0)
-	{
-		//all dead, end the battle
-		EndTheBattle(self);
-
-		return 0;
-	}
-
-	if (nHeroHP1 > 0)
-	{
-		m_pHeroModule->SwitchFightHero(self, xHero1);
-	}
-	else if (nHeroHP2 > 0)
-	{
-		m_pHeroModule->SwitchFightHero(self, xHero2);
-	}
-	else if (nHeroHP3 > 0)
-	{
-		m_pHeroModule->SwitchFightHero(self, xHero3);
-	}
-	//swap hero
-
-	return 0;
-}
-
 bool NFGamePVPModule::ProcessOpponentData(const NFGUID & self, const NFMsg::AckSearchOppnent& opponent)
 {
 
@@ -372,10 +326,6 @@ bool NFGamePVPModule::ProcessOpponentData(const NFGUID & self, const NFMsg::AckS
 	m_pKernelModule->SetPropertyInt(self, NFrame::Player::OpponentHeroStar1(), opponent.hero_star1());
 	m_pKernelModule->SetPropertyInt(self, NFrame::Player::OpponentHeroStar2(), opponent.hero_star2());
 	m_pKernelModule->SetPropertyInt(self, NFrame::Player::OpponentHeroStar3(), opponent.hero_star3());
-
-	NFVector3 xHeroBornPos1 = m_pKernelModule->GetPropertyVector3(self, NFrame::Player::HeroPos1());
-	NFVector3 xHeroBornPos2 = m_pKernelModule->GetPropertyVector3(self, NFrame::Player::HeroPos2());
-	NFVector3 xHeroBornPos3 = m_pKernelModule->GetPropertyVector3(self, NFrame::Player::HeroPos3());
 	
 	//create building and hero
 	NFDataList xHeroData1;
@@ -567,17 +517,17 @@ int NFGamePVPModule::OnNPCHPEvent(const NFGUID & self, const std::string & strPr
 			if (m_pKernelModule->GetPropertyString(identAttacker, NFrame::IObject::ClassName()) == NFrame::Player::ThisName())
 			{
 				//is hero?
-				int nHomeSceneID = m_pKernelModule->GetPropertyInt32(identAttacker, NFrame::Player::HomeSceneID());
 				int nSceneID = m_pKernelModule->GetPropertyInt32(identAttacker, NFrame::Player::SceneID());
 				int nFightingStar = m_pKernelModule->GetPropertyInt32(identAttacker, NFrame::Player::FightingStar());
 				int nCup = m_pKernelModule->GetPropertyInt(identAttacker, NFrame::Player::Cup());
 				int nOpponentCup = m_pKernelModule->GetPropertyInt(identAttacker, NFrame::Player::OpponentCup());
-				int pvpType = m_pKernelModule->GetPropertyInt(identAttacker, NFrame::Player::PVPType());
 
 				NFGUID xViewOpponent = m_pKernelModule->GetPropertyObject(identAttacker, NFrame::Player::OpponentID());
 				NFGUID xOpponentFighting = m_pKernelModule->GetPropertyObject(identAttacker, NFrame::Player::OpponentFighting());
-			
-				if (pvpType == NFMsg::EPVPType::PVP_INDIVIDUAL)
+				E_SCENE_TYPE sceneType = (E_SCENE_TYPE)m_pElementModule->GetPropertyInt(std::to_string(nSceneID), NFrame::Scene::Type());
+
+				if (sceneType == E_SCENE_TYPE::SCENE_TYPE_SINGLE_CLONE_SCENE
+					|| sceneType == E_SCENE_TYPE::SCENE_TYPE_MULTI_CLONE_SCENE)
 				{
 					NFMsg::ENPCType eNPCType = (NFMsg::ENPCType)(m_pElementModule->GetPropertyInt(strCnfID, NFrame::NPC::NPCType()));
 					if (eNPCType == NFMsg::ENPCType::ENPCTYPE_HERO)
@@ -611,24 +561,6 @@ int NFGamePVPModule::OnPlayerClassEvent(const NFGUID & self, const std::string &
 {
 	if (CLASS_OBJECT_EVENT::COE_CREATE_FINISH == eClassEvent)
 	{
-		m_pKernelModule->AddPropertyCallBack(self, NFrame::Player::FightHeroHP1(), this, &NFGamePVPModule::OnPlayerHPEvent);
-		m_pKernelModule->AddPropertyCallBack(self, NFrame::Player::FightHeroHP2(), this, &NFGamePVPModule::OnPlayerHPEvent);
-		m_pKernelModule->AddPropertyCallBack(self, NFrame::Player::FightHeroHP3(), this, &NFGamePVPModule::OnPlayerHPEvent);
-	}
-
-	return 0;
-}
-
-int NFGamePVPModule::OnPlayerHPEvent(const NFGUID & self, const std::string & strPropertyName, const NFData & oldVar, const NFData & newVar)
-{
-	//is pvp
-	int pvpType = m_pKernelModule->GetPropertyInt(self, NFrame::Player::PVPType());
-	if (pvpType == NFMsg::EPVPType::PVP_INDIVIDUAL)
-	{
-		if (newVar.GetInt() <= 0)
-		{
-			m_pScheduleModule->AddSchedule(self, "NFGamePVPModule::OnDeadSwapHeroHeart", this, &NFGamePVPModule::OnDeadSwapHeroHeart, 5.0f, 1);
-		}
 	}
 
 	return 0;

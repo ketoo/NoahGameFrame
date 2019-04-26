@@ -217,6 +217,7 @@ message ReqEndBattle
 message ReqAckRelive
 {
 	int32	diamond 				= 1;
+	Ident 	hero_id = 2;
 }
 
 //EGMI_ACK_END_OPPNENT

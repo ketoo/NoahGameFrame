@@ -537,6 +537,21 @@ public:
 	{
 	}
 
+	virtual std::string ToString() const
+	{
+		std::stringstream os;
+		for (int i = 0; i < GetCount(); ++i)
+		{
+			os << ToString(i);
+			if (i < GetCount() - 1)
+			{
+				os << "|";
+			}
+		}
+
+		return os.str();
+	}
+
 	virtual std::string ToString(const int index) const
 	{
 		std::string strData;

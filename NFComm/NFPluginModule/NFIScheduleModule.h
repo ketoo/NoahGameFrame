@@ -40,6 +40,41 @@ typedef std::function<int(const std::string&, const float, const int)> MODULE_SC
 typedef NF_SHARE_PTR<OBJECT_SCHEDULE_FUNCTOR> OBJECT_SCHEDULE_FUNCTOR_PTR;//HEART
 typedef NF_SHARE_PTR<MODULE_SCHEDULE_FUNCTOR> MODULE_SCHEDULE_FUNCTOR_PTR;//HEART
 
+
+class  NFScheduleElement
+{
+public:
+	NFScheduleElement()
+	{
+		mstrScheduleName = "";
+		mfIntervalTime = 0.0f;
+		mnNextTriggerTime = 0;
+		mnStartTime = 0;
+		mnRemainCount = 0;
+		mnAllCount = 0;
+		mbForever = false;
+	};
+
+	virtual ~NFScheduleElement()
+	{
+	}
+
+	void DoHeartBeatEvent();
+
+	std::string mstrScheduleName;
+	float mfIntervalTime;
+	NFINT64 mnNextTriggerTime;
+	NFINT64 mnStartTime;
+	int mnRemainCount;
+	int mnAllCount;
+	bool mbForever;
+
+	NFGUID self;
+
+	NFList<OBJECT_SCHEDULE_FUNCTOR_PTR> mxObjectFunctor;
+	NFList<MODULE_SCHEDULE_FUNCTOR_PTR> mxModuleFunctor;
+};
+
 class NFIScheduleModule
 	:public  NFIModule
 {
@@ -66,6 +101,7 @@ public:
 	virtual bool RemoveSchedule(const NFGUID self) = 0;
 	virtual bool RemoveSchedule(const NFGUID self, const std::string& strScheduleName) = 0;
 	virtual bool ExistSchedule(const NFGUID self, const std::string& strScheduleName) = 0;
+	virtual NF_SHARE_PTR<NFScheduleElement> GetSchedule(const NFGUID self, const std::string& strScheduleName) = 0;
 
 	template<typename BaseType>
 	bool AddSchedule(const NFGUID self, const std::string& strScheduleName, BaseType* pBase, int (BaseType::*handler)(const NFGUID&, const std::string&, const float, const int), const float fIntervalTime, const int nCount)

@@ -3484,6 +3484,18 @@ class LIBPROTOC_EXPORT ReqAckRelive : public ::google::protobuf::Message /* @@pr
 
   // accessors -------------------------------------------------------
 
+  // .NFMsg.Ident hero_id = 2;
+  bool has_hero_id() const;
+  void clear_hero_id();
+  static const int kHeroIdFieldNumber = 2;
+  private:
+  const ::NFMsg::Ident& _internal_hero_id() const;
+  public:
+  const ::NFMsg::Ident& hero_id() const;
+  ::NFMsg::Ident* release_hero_id();
+  ::NFMsg::Ident* mutable_hero_id();
+  void set_allocated_hero_id(::NFMsg::Ident* hero_id);
+
   // int32 diamond = 1;
   void clear_diamond();
   static const int kDiamondFieldNumber = 1;
@@ -3494,6 +3506,7 @@ class LIBPROTOC_EXPORT ReqAckRelive : public ::google::protobuf::Message /* @@pr
  private:
 
   ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
+  ::NFMsg::Ident* hero_id_;
   ::google::protobuf::int32 diamond_;
   mutable ::google::protobuf::internal::CachedSize _cached_size_;
   friend struct ::protobuf_NFMsgShare_2eproto::TableStruct;
@@ -10136,6 +10149,54 @@ inline void ReqAckRelive::set_diamond(::google::protobuf::int32 value) {
   
   diamond_ = value;
   // @@protoc_insertion_point(field_set:NFMsg.ReqAckRelive.diamond)
+}
+
+// .NFMsg.Ident hero_id = 2;
+inline bool ReqAckRelive::has_hero_id() const {
+  return this != internal_default_instance() && hero_id_ != NULL;
+}
+inline const ::NFMsg::Ident& ReqAckRelive::_internal_hero_id() const {
+  return *hero_id_;
+}
+inline const ::NFMsg::Ident& ReqAckRelive::hero_id() const {
+  const ::NFMsg::Ident* p = hero_id_;
+  // @@protoc_insertion_point(field_get:NFMsg.ReqAckRelive.hero_id)
+  return p != NULL ? *p : *reinterpret_cast<const ::NFMsg::Ident*>(
+      &::NFMsg::_Ident_default_instance_);
+}
+inline ::NFMsg::Ident* ReqAckRelive::release_hero_id() {
+  // @@protoc_insertion_point(field_release:NFMsg.ReqAckRelive.hero_id)
+  
+  ::NFMsg::Ident* temp = hero_id_;
+  hero_id_ = NULL;
+  return temp;
+}
+inline ::NFMsg::Ident* ReqAckRelive::mutable_hero_id() {
+  
+  if (hero_id_ == NULL) {
+    auto* p = CreateMaybeMessage<::NFMsg::Ident>(GetArenaNoVirtual());
+    hero_id_ = p;
+  }
+  // @@protoc_insertion_point(field_mutable:NFMsg.ReqAckRelive.hero_id)
+  return hero_id_;
+}
+inline void ReqAckRelive::set_allocated_hero_id(::NFMsg::Ident* hero_id) {
+  ::google::protobuf::Arena* message_arena = GetArenaNoVirtual();
+  if (message_arena == NULL) {
+    delete reinterpret_cast< ::google::protobuf::MessageLite*>(hero_id_);
+  }
+  if (hero_id) {
+    ::google::protobuf::Arena* submessage_arena = NULL;
+    if (message_arena != submessage_arena) {
+      hero_id = ::google::protobuf::internal::GetOwnedMessage(
+          message_arena, hero_id, submessage_arena);
+    }
+    
+  } else {
+    
+  }
+  hero_id_ = hero_id;
+  // @@protoc_insertion_point(field_set_allocated:NFMsg.ReqAckRelive.hero_id)
 }
 
 // -------------------------------------------------------------------

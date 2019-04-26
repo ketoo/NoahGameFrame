@@ -372,16 +372,14 @@ enum ESkillType {
   EST_BRIEF_GROUP = 1,
   EST_BULLET_SINGLE = 2,
   EST_BULLET_REBOUND = 3,
-  EST_BULLET_BOMB = 4,
-  EST_TARGET_SINGLE = 5,
-  EST_TARGET_GROUP = 6,
-  EST_POSITION_GROUP = 7,
+  EST_BULLET_TARGET_BOMB = 4,
+  EST_BULLET_POS_BOMB = 5,
   ESkillType_INT_MIN_SENTINEL_DO_NOT_USE_ = ::google::protobuf::kint32min,
   ESkillType_INT_MAX_SENTINEL_DO_NOT_USE_ = ::google::protobuf::kint32max
 };
 LIBPROTOC_EXPORT bool ESkillType_IsValid(int value);
 const ESkillType ESkillType_MIN = EST_BRIEF_SINGLE;
-const ESkillType ESkillType_MAX = EST_POSITION_GROUP;
+const ESkillType ESkillType_MAX = EST_BULLET_POS_BOMB;
 const int ESkillType_ARRAYSIZE = ESkillType_MAX + 1;
 
 LIBPROTOC_EXPORT const ::google::protobuf::EnumDescriptor* ESkillType_descriptor();
@@ -761,27 +759,49 @@ inline bool ENPCType_Parse(
   return ::google::protobuf::internal::ParseNamedEnum<ENPCType>(
     ENPCType_descriptor(), name, value);
 }
-enum ETARGETType {
+enum EMeleeType {
+  ETYPE_MELEE = 0,
+  ETYPE_MELEE_DASH = 1,
+  ETYPE_RANGER = 2,
+  EMeleeType_INT_MIN_SENTINEL_DO_NOT_USE_ = ::google::protobuf::kint32min,
+  EMeleeType_INT_MAX_SENTINEL_DO_NOT_USE_ = ::google::protobuf::kint32max
+};
+LIBPROTOC_EXPORT bool EMeleeType_IsValid(int value);
+const EMeleeType EMeleeType_MIN = ETYPE_MELEE;
+const EMeleeType EMeleeType_MAX = ETYPE_RANGER;
+const int EMeleeType_ARRAYSIZE = EMeleeType_MAX + 1;
+
+LIBPROTOC_EXPORT const ::google::protobuf::EnumDescriptor* EMeleeType_descriptor();
+inline const ::std::string& EMeleeType_Name(EMeleeType value) {
+  return ::google::protobuf::internal::NameOfEnum(
+    EMeleeType_descriptor(), value);
+}
+inline bool EMeleeType_Parse(
+    const ::std::string& name, EMeleeType* value) {
+  return ::google::protobuf::internal::ParseNamedEnum<EMeleeType>(
+    EMeleeType_descriptor(), name, value);
+}
+enum EEffectObjType {
   ETARGETTYPE_ENEMY = 0,
   ETARGETTYPE_SELF = 1,
   ETARGETTYPE_FRIEND = 2,
-  ETARGETType_INT_MIN_SENTINEL_DO_NOT_USE_ = ::google::protobuf::kint32min,
-  ETARGETType_INT_MAX_SENTINEL_DO_NOT_USE_ = ::google::protobuf::kint32max
+  EEffectObjType_INT_MIN_SENTINEL_DO_NOT_USE_ = ::google::protobuf::kint32min,
+  EEffectObjType_INT_MAX_SENTINEL_DO_NOT_USE_ = ::google::protobuf::kint32max
 };
-LIBPROTOC_EXPORT bool ETARGETType_IsValid(int value);
-const ETARGETType ETARGETType_MIN = ETARGETTYPE_ENEMY;
-const ETARGETType ETARGETType_MAX = ETARGETTYPE_FRIEND;
-const int ETARGETType_ARRAYSIZE = ETARGETType_MAX + 1;
+LIBPROTOC_EXPORT bool EEffectObjType_IsValid(int value);
+const EEffectObjType EEffectObjType_MIN = ETARGETTYPE_ENEMY;
+const EEffectObjType EEffectObjType_MAX = ETARGETTYPE_FRIEND;
+const int EEffectObjType_ARRAYSIZE = EEffectObjType_MAX + 1;
 
-LIBPROTOC_EXPORT const ::google::protobuf::EnumDescriptor* ETARGETType_descriptor();
-inline const ::std::string& ETARGETType_Name(ETARGETType value) {
+LIBPROTOC_EXPORT const ::google::protobuf::EnumDescriptor* EEffectObjType_descriptor();
+inline const ::std::string& EEffectObjType_Name(EEffectObjType value) {
   return ::google::protobuf::internal::NameOfEnum(
-    ETARGETType_descriptor(), value);
+    EEffectObjType_descriptor(), value);
 }
-inline bool ETARGETType_Parse(
-    const ::std::string& name, ETARGETType* value) {
-  return ::google::protobuf::internal::ParseNamedEnum<ETARGETType>(
-    ETARGETType_descriptor(), name, value);
+inline bool EEffectObjType_Parse(
+    const ::std::string& name, EEffectObjType* value) {
+  return ::google::protobuf::internal::ParseNamedEnum<EEffectObjType>(
+    EEffectObjType_descriptor(), name, value);
 }
 enum EPropertyType {
   EPT_UNKNOW = 0,
@@ -949,10 +969,15 @@ template <>
 inline const EnumDescriptor* GetEnumDescriptor< ::NFMsg::ENPCType>() {
   return ::NFMsg::ENPCType_descriptor();
 }
-template <> struct is_proto_enum< ::NFMsg::ETARGETType> : ::std::true_type {};
+template <> struct is_proto_enum< ::NFMsg::EMeleeType> : ::std::true_type {};
 template <>
-inline const EnumDescriptor* GetEnumDescriptor< ::NFMsg::ETARGETType>() {
-  return ::NFMsg::ETARGETType_descriptor();
+inline const EnumDescriptor* GetEnumDescriptor< ::NFMsg::EMeleeType>() {
+  return ::NFMsg::EMeleeType_descriptor();
+}
+template <> struct is_proto_enum< ::NFMsg::EEffectObjType> : ::std::true_type {};
+template <>
+inline const EnumDescriptor* GetEnumDescriptor< ::NFMsg::EEffectObjType>() {
+  return ::NFMsg::EEffectObjType_descriptor();
 }
 template <> struct is_proto_enum< ::NFMsg::EPropertyType> : ::std::true_type {};
 template <>
