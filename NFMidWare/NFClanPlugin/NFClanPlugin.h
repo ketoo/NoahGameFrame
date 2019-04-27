@@ -23,24 +23,27 @@
    limitations under the License.
 */
 
-#ifndef NFI_GUILD_MODULE_H
-#define NFI_GUILD_MODULE_H
 
-#include "NFIModule.h"
+#ifndef NF_CLAN_PLUGIN_H
+#define NF_CLAN_PLUGIN_H
 
-class NFIGuildModule
-    : public NFIModule
+///
+#include "NFComm/NFPluginModule/NFIPlugin.h"
+#include "NFComm/NFPluginModule/NFIPluginManager.h"
+
+class NFClanPlugin : public NFIPlugin
 {
 public:
-    enum MEMBER_TYPE
+	NFClanPlugin(NFIPluginManager* p)
     {
-		MT_NONE,
-		MT_MEMBER,
-		MT_ELITE,
-		MT_OLDER,
-		MT_PRESIDENT,
-    };
+        pPluginManager = p;
+    }
+    virtual const int GetPluginVersion();
 
+    virtual const std::string GetPluginName();
+
+    virtual void Install();
+
+    virtual void Uninstall();
 };
-
 #endif

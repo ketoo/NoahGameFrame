@@ -70,19 +70,19 @@ namespace NFMsg {
             "ASgMEgwKBG5hbWUYAiABKAwSDwoHZ2FtZV9pZBgDIAEoBSJACg5SZXFSZWNv",
             "dmVyUm9sZRIPCgdhY2NvdW50GAEgASgMEgwKBG5hbWUYAiABKAwSDwoHZ2Ft",
             "ZV9pZBgDIAEoBSIgCg9TZXJ2ZXJIZWFydEJlYXQSDQoFY291bnQYASABKAUi",
-            "aAoQUm9sZU9ubGluZU5vdGlmeRIaCgRzZWxmGAEgASgLMgwuTkZNc2cuSWRl",
-            "bnQSGwoFZ3VpbGQYAiABKAsyDC5ORk1zZy5JZGVudBIMCgRnYW1lGAMgASgF",
-            "Eg0KBXByb3h5GAQgASgFImkKEVJvbGVPZmZsaW5lTm90aWZ5EhoKBHNlbGYY",
-            "ASABKAsyDC5ORk1zZy5JZGVudBIbCgVndWlsZBgCIAEoCzIMLk5GTXNnLklk",
-            "ZW50EgwKBGdhbWUYAyABKAUSDQoFcHJveHkYBCABKAUifgoMUm9sZURhdGFQ",
-            "YWNrEhgKAmlkGAEgASgLMgwuTkZNc2cuSWRlbnQSKwoIcHJvcGVydHkYAiAB",
-            "KAsyGS5ORk1zZy5PYmplY3RQcm9wZXJ0eUxpc3QSJwoGcmVjb3JkGAQgASgL",
-            "MhcuTkZNc2cuT2JqZWN0UmVjb3JkTGlzdCpaCgxFU2VydmVyU3RhdGUSDQoJ",
-            "RVNUX0NSQVNIEAASDgoKRVNUX05BUk1BTBABEgwKCEVTVF9CVVNZEAISDAoI",
-            "RVNUX0ZJUkUQAxIPCgtFU1RfTUFJTlRFThAEKkoKCkVMb2dpbk1vZGUSDQoJ",
-            "RUxNX0xPR0lOEAASEAoMRUxNX1JFR0lTVEVSEAESGwoXRUxNX0FVVE9fUkVH",
-            "SVNURVJfTE9HSU4QAipAChFSZXFTZXJ2ZXJMaXN0VHlwZRIVChFSU0xUX1dP",
-            "UkxEX1NFUlZFUhAAEhQKEFJTTFRfR0FNRVNfRVJWRVIQAWIGcHJvdG8z"));
+            "ZwoQUm9sZU9ubGluZU5vdGlmeRIaCgRzZWxmGAEgASgLMgwuTkZNc2cuSWRl",
+            "bnQSGgoEY2xhbhgCIAEoCzIMLk5GTXNnLklkZW50EgwKBGdhbWUYAyABKAUS",
+            "DQoFcHJveHkYBCABKAUiaAoRUm9sZU9mZmxpbmVOb3RpZnkSGgoEc2VsZhgB",
+            "IAEoCzIMLk5GTXNnLklkZW50EhoKBGNsYW4YAiABKAsyDC5ORk1zZy5JZGVu",
+            "dBIMCgRnYW1lGAMgASgFEg0KBXByb3h5GAQgASgFIn4KDFJvbGVEYXRhUGFj",
+            "axIYCgJpZBgBIAEoCzIMLk5GTXNnLklkZW50EisKCHByb3BlcnR5GAIgASgL",
+            "MhkuTkZNc2cuT2JqZWN0UHJvcGVydHlMaXN0EicKBnJlY29yZBgEIAEoCzIX",
+            "Lk5GTXNnLk9iamVjdFJlY29yZExpc3QqWgoMRVNlcnZlclN0YXRlEg0KCUVT",
+            "VF9DUkFTSBAAEg4KCkVTVF9OQVJNQUwQARIMCghFU1RfQlVTWRACEgwKCEVT",
+            "VF9GSVJFEAMSDwoLRVNUX01BSU5URU4QBCpKCgpFTG9naW5Nb2RlEg0KCUVM",
+            "TV9MT0dJThAAEhAKDEVMTV9SRUdJU1RFUhABEhsKF0VMTV9BVVRPX1JFR0lT",
+            "VEVSX0xPR0lOEAIqQAoRUmVxU2VydmVyTGlzdFR5cGUSFQoRUlNMVF9XT1JM",
+            "RF9TRVJWRVIQABIUChBSU0xUX0dBTUVTX0VSVkVSEAFiBnByb3RvMw=="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { global::NFMsg.NFDefineReflection.Descriptor, global::NFMsg.NFMsgBaseReflection.Descriptor, },
           new pbr::GeneratedClrTypeInfo(new[] {typeof(global::NFMsg.EServerState), typeof(global::NFMsg.ELoginMode), typeof(global::NFMsg.ReqServerListType), }, new pbr::GeneratedClrTypeInfo[] {
@@ -105,8 +105,8 @@ namespace NFMsg {
             new pbr::GeneratedClrTypeInfo(typeof(global::NFMsg.ReqDeleteRole), global::NFMsg.ReqDeleteRole.Parser, new[]{ "account", "name", "game_id" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::NFMsg.ReqRecoverRole), global::NFMsg.ReqRecoverRole.Parser, new[]{ "account", "name", "game_id" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::NFMsg.ServerHeartBeat), global::NFMsg.ServerHeartBeat.Parser, new[]{ "count" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::NFMsg.RoleOnlineNotify), global::NFMsg.RoleOnlineNotify.Parser, new[]{ "self", "guild", "game", "proxy" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::NFMsg.RoleOfflineNotify), global::NFMsg.RoleOfflineNotify.Parser, new[]{ "self", "guild", "game", "proxy" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::NFMsg.RoleOnlineNotify), global::NFMsg.RoleOnlineNotify.Parser, new[]{ "self", "clan", "game", "proxy" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::NFMsg.RoleOfflineNotify), global::NFMsg.RoleOfflineNotify.Parser, new[]{ "self", "clan", "game", "proxy" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::NFMsg.RoleDataPack), global::NFMsg.RoleDataPack.Parser, new[]{ "id", "property", "record" }, null, null, null)
           }));
     }
@@ -4202,7 +4202,7 @@ namespace NFMsg {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public RoleOnlineNotify(RoleOnlineNotify other) : this() {
       self_ = other.self_ != null ? other.self_.Clone() : null;
-      guild_ = other.guild_ != null ? other.guild_.Clone() : null;
+      clan_ = other.clan_ != null ? other.clan_.Clone() : null;
       game_ = other.game_;
       proxy_ = other.proxy_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
@@ -4224,14 +4224,14 @@ namespace NFMsg {
       }
     }
 
-    /// <summary>Field number for the "guild" field.</summary>
-    public const int guildFieldNumber = 2;
-    private global::NFMsg.Ident guild_;
+    /// <summary>Field number for the "clan" field.</summary>
+    public const int clanFieldNumber = 2;
+    private global::NFMsg.Ident clan_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public global::NFMsg.Ident guild {
-      get { return guild_; }
+    public global::NFMsg.Ident clan {
+      get { return clan_; }
       set {
-        guild_ = value;
+        clan_ = value;
       }
     }
 
@@ -4271,7 +4271,7 @@ namespace NFMsg {
         return true;
       }
       if (!object.Equals(self, other.self)) return false;
-      if (!object.Equals(guild, other.guild)) return false;
+      if (!object.Equals(clan, other.clan)) return false;
       if (game != other.game) return false;
       if (proxy != other.proxy) return false;
       return Equals(_unknownFields, other._unknownFields);
@@ -4281,7 +4281,7 @@ namespace NFMsg {
     public override int GetHashCode() {
       int hash = 1;
       if (self_ != null) hash ^= self.GetHashCode();
-      if (guild_ != null) hash ^= guild.GetHashCode();
+      if (clan_ != null) hash ^= clan.GetHashCode();
       if (game != 0) hash ^= game.GetHashCode();
       if (proxy != 0) hash ^= proxy.GetHashCode();
       if (_unknownFields != null) {
@@ -4301,9 +4301,9 @@ namespace NFMsg {
         output.WriteRawTag(10);
         output.WriteMessage(self);
       }
-      if (guild_ != null) {
+      if (clan_ != null) {
         output.WriteRawTag(18);
-        output.WriteMessage(guild);
+        output.WriteMessage(clan);
       }
       if (game != 0) {
         output.WriteRawTag(24);
@@ -4324,8 +4324,8 @@ namespace NFMsg {
       if (self_ != null) {
         size += 1 + pb::CodedOutputStream.ComputeMessageSize(self);
       }
-      if (guild_ != null) {
-        size += 1 + pb::CodedOutputStream.ComputeMessageSize(guild);
+      if (clan_ != null) {
+        size += 1 + pb::CodedOutputStream.ComputeMessageSize(clan);
       }
       if (game != 0) {
         size += 1 + pb::CodedOutputStream.ComputeInt32Size(game);
@@ -4350,11 +4350,11 @@ namespace NFMsg {
         }
         self.MergeFrom(other.self);
       }
-      if (other.guild_ != null) {
-        if (guild_ == null) {
-          guild_ = new global::NFMsg.Ident();
+      if (other.clan_ != null) {
+        if (clan_ == null) {
+          clan_ = new global::NFMsg.Ident();
         }
-        guild.MergeFrom(other.guild);
+        clan.MergeFrom(other.clan);
       }
       if (other.game != 0) {
         game = other.game;
@@ -4381,10 +4381,10 @@ namespace NFMsg {
             break;
           }
           case 18: {
-            if (guild_ == null) {
-              guild_ = new global::NFMsg.Ident();
+            if (clan_ == null) {
+              clan_ = new global::NFMsg.Ident();
             }
-            input.ReadMessage(guild_);
+            input.ReadMessage(clan_);
             break;
           }
           case 24: {
@@ -4427,7 +4427,7 @@ namespace NFMsg {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public RoleOfflineNotify(RoleOfflineNotify other) : this() {
       self_ = other.self_ != null ? other.self_.Clone() : null;
-      guild_ = other.guild_ != null ? other.guild_.Clone() : null;
+      clan_ = other.clan_ != null ? other.clan_.Clone() : null;
       game_ = other.game_;
       proxy_ = other.proxy_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
@@ -4449,14 +4449,14 @@ namespace NFMsg {
       }
     }
 
-    /// <summary>Field number for the "guild" field.</summary>
-    public const int guildFieldNumber = 2;
-    private global::NFMsg.Ident guild_;
+    /// <summary>Field number for the "clan" field.</summary>
+    public const int clanFieldNumber = 2;
+    private global::NFMsg.Ident clan_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public global::NFMsg.Ident guild {
-      get { return guild_; }
+    public global::NFMsg.Ident clan {
+      get { return clan_; }
       set {
-        guild_ = value;
+        clan_ = value;
       }
     }
 
@@ -4496,7 +4496,7 @@ namespace NFMsg {
         return true;
       }
       if (!object.Equals(self, other.self)) return false;
-      if (!object.Equals(guild, other.guild)) return false;
+      if (!object.Equals(clan, other.clan)) return false;
       if (game != other.game) return false;
       if (proxy != other.proxy) return false;
       return Equals(_unknownFields, other._unknownFields);
@@ -4506,7 +4506,7 @@ namespace NFMsg {
     public override int GetHashCode() {
       int hash = 1;
       if (self_ != null) hash ^= self.GetHashCode();
-      if (guild_ != null) hash ^= guild.GetHashCode();
+      if (clan_ != null) hash ^= clan.GetHashCode();
       if (game != 0) hash ^= game.GetHashCode();
       if (proxy != 0) hash ^= proxy.GetHashCode();
       if (_unknownFields != null) {
@@ -4526,9 +4526,9 @@ namespace NFMsg {
         output.WriteRawTag(10);
         output.WriteMessage(self);
       }
-      if (guild_ != null) {
+      if (clan_ != null) {
         output.WriteRawTag(18);
-        output.WriteMessage(guild);
+        output.WriteMessage(clan);
       }
       if (game != 0) {
         output.WriteRawTag(24);
@@ -4549,8 +4549,8 @@ namespace NFMsg {
       if (self_ != null) {
         size += 1 + pb::CodedOutputStream.ComputeMessageSize(self);
       }
-      if (guild_ != null) {
-        size += 1 + pb::CodedOutputStream.ComputeMessageSize(guild);
+      if (clan_ != null) {
+        size += 1 + pb::CodedOutputStream.ComputeMessageSize(clan);
       }
       if (game != 0) {
         size += 1 + pb::CodedOutputStream.ComputeInt32Size(game);
@@ -4575,11 +4575,11 @@ namespace NFMsg {
         }
         self.MergeFrom(other.self);
       }
-      if (other.guild_ != null) {
-        if (guild_ == null) {
-          guild_ = new global::NFMsg.Ident();
+      if (other.clan_ != null) {
+        if (clan_ == null) {
+          clan_ = new global::NFMsg.Ident();
         }
-        guild.MergeFrom(other.guild);
+        clan.MergeFrom(other.clan);
       }
       if (other.game != 0) {
         game = other.game;
@@ -4606,10 +4606,10 @@ namespace NFMsg {
             break;
           }
           case 18: {
-            if (guild_ == null) {
-              guild_ = new global::NFMsg.Ident();
+            if (clan_ == null) {
+              clan_ = new global::NFMsg.Ident();
             }
-            input.ReadMessage(guild_);
+            input.ReadMessage(clan_);
             break;
           }
           case 24: {

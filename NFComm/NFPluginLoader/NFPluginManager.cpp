@@ -102,7 +102,7 @@
 #include "NFMidWare/NFAOIPlugin/NFAOIPlugin.h"
 #include "NFMidWare/NFChatPlugin/NFChatPlugin.h"
 #include "NFMidWare/NFFriendPlugin/NFFriendPlugin.h"
-#include "NFMidWare/NFGuildPlugin/NFGuildPlugin.h"
+#include "NFMidWare/NFClanPlugin/NFClanPlugin.h"
 #include "NFMidWare/NFHeroPlugin/NFHeroPlugin.h"
 #include "NFMidWare/NFItemBagPlugin/NFItemBagPlugin.h"
 #include "NFMidWare/NFMailPlugin/NFMailPlugin.h"
@@ -282,7 +282,7 @@ bool NFPluginManager::LoadStaticPlugin()
 //MIDWARE
 	CREATE_PLUGIN(this, NFChatPlugin)
 	CREATE_PLUGIN(this, NFFriendPlugin)
-	CREATE_PLUGIN(this, NFGuildPlugin)
+	CREATE_PLUGIN(this, NFClanPlugin)
 	CREATE_PLUGIN(this, NFHeroPlugin)
 	CREATE_PLUGIN(this, NFItemBagPlugin)
 	CREATE_PLUGIN(this, NFMailPlugin)

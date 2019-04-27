@@ -133,7 +133,7 @@ bool NFSceneProcessModule::RequestEnterScene(const NFGUID & self, const int nSce
 
 		return false;
 	}
-	else if (eSceneType == E_SCENE_TYPE::SCENE_TYPE_GUILD)
+	else if (eSceneType == E_SCENE_TYPE::SCENE_TYPE_Clan)
 	{
 		const int nMaxGroup = m_pElementModule->GetPropertyInt32(std::to_string(nSceneID), NFrame::Scene::MaxGroup());
 		for (int i = 1; i < nMaxGroup; ++i)

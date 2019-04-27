@@ -5,6 +5,12 @@ package NFMsg;
 import "NFDefine.proto";
 import "NFMsgBase.proto";
 
+///////////////AI/////////////////////////////////////////////////////////////////////////////////////
+//EGMI_REQ_AI_ONWER
+message ReqAIOnwer
+{
+    Ident	ai_id 		= 1;
+}
 
 ///////////////组队/////////////////////////////////////////////////////////////////////////////////////
 message TeamInfo
@@ -102,7 +108,7 @@ message AckTeamEnterEctype
 
 
 ///////////////big map/////////////////////////////////////////////////////////////////////////////////////
-message GridGuildBaseInfo
+message GridClanBaseInfo
 {
 	Ident						id = 1;				//ID
 	int32						level = 2;			//Level
@@ -120,7 +126,7 @@ message ReqBigMapGridInfo
 message BigMapGridBaseInfo
 {
 	bytes						id = 1;				//GridID
-	GridGuildBaseInfo			guild_info = 2;			//所属占领公会
+	GridClanBaseInfo			guild_info = 2;			//所属占领公会
 	
 	//war state
 	
@@ -144,8 +150,8 @@ message BigMapLeaveMsg
 	
 message BigMapWarHistory
 {
-	GridGuildBaseInfo			red_info = 1;				//红方	
-	GridGuildBaseInfo			blue_info = 2;				//蓝方	
+	GridClanBaseInfo			red_info = 1;				//红方	
+	GridClanBaseInfo			blue_info = 2;				//蓝方	
 	
 	Ident						winner_id = 10;	//winner
 	int32						war_time = 11;	//war时间
@@ -155,7 +161,7 @@ message BigMapGridDetailInfo
 {
 	BigMapGridBaseInfo			grid_base_info 	= 1;
 	
-	repeated GridGuildBaseInfo			stay_guid_list 	= 2;	//
+	repeated GridClanBaseInfo			stay_guid_list 	= 2;	//
 	repeated BigMapLeaveMsg				leave_msg 		= 3;	//此地图留言(<=10)
 	repeated BigMapWarHistory			war_history 	= 4;	//此地图历史战争信息(<=10)
 }

@@ -24,7 +24,7 @@ extern PROTOBUF_INTERNAL_EXPORT_protobuf_NFMsgBase_2eproto ::google::protobuf::i
 }  // namespace protobuf_NFMsgBase_2eproto
 namespace protobuf_NFMsgExtra_2eproto {
 extern PROTOBUF_INTERNAL_EXPORT_protobuf_NFMsgExtra_2eproto ::google::protobuf::internal::SCCInfo<1> scc_info_BigMapLeaveMsg;
-extern PROTOBUF_INTERNAL_EXPORT_protobuf_NFMsgExtra_2eproto ::google::protobuf::internal::SCCInfo<1> scc_info_GridGuildBaseInfo;
+extern PROTOBUF_INTERNAL_EXPORT_protobuf_NFMsgExtra_2eproto ::google::protobuf::internal::SCCInfo<1> scc_info_GridClanBaseInfo;
 extern PROTOBUF_INTERNAL_EXPORT_protobuf_NFMsgExtra_2eproto ::google::protobuf::internal::SCCInfo<1> scc_info_TeammemberInfo;
 extern PROTOBUF_INTERNAL_EXPORT_protobuf_NFMsgExtra_2eproto ::google::protobuf::internal::SCCInfo<2> scc_info_BigMapGridBaseInfo;
 extern PROTOBUF_INTERNAL_EXPORT_protobuf_NFMsgExtra_2eproto ::google::protobuf::internal::SCCInfo<2> scc_info_BigMapWarHistory;
@@ -32,6 +32,11 @@ extern PROTOBUF_INTERNAL_EXPORT_protobuf_NFMsgExtra_2eproto ::google::protobuf::
 extern PROTOBUF_INTERNAL_EXPORT_protobuf_NFMsgExtra_2eproto ::google::protobuf::internal::SCCInfo<4> scc_info_BigMapGridDetailInfo;
 }  // namespace protobuf_NFMsgExtra_2eproto
 namespace NFMsg {
+class ReqAIOnwerDefaultTypeInternal {
+ public:
+  ::google::protobuf::internal::ExplicitlyConstructed<ReqAIOnwer>
+      _instance;
+} _ReqAIOnwer_default_instance_;
 class TeamInfoDefaultTypeInternal {
  public:
   ::google::protobuf::internal::ExplicitlyConstructed<TeamInfo>
@@ -77,11 +82,11 @@ class AckTeamEnterEctypeDefaultTypeInternal {
   ::google::protobuf::internal::ExplicitlyConstructed<AckTeamEnterEctype>
       _instance;
 } _AckTeamEnterEctype_default_instance_;
-class GridGuildBaseInfoDefaultTypeInternal {
+class GridClanBaseInfoDefaultTypeInternal {
  public:
-  ::google::protobuf::internal::ExplicitlyConstructed<GridGuildBaseInfo>
+  ::google::protobuf::internal::ExplicitlyConstructed<GridClanBaseInfo>
       _instance;
-} _GridGuildBaseInfo_default_instance_;
+} _GridClanBaseInfo_default_instance_;
 class ReqBigMapGridInfoDefaultTypeInternal {
  public:
   ::google::protobuf::internal::ExplicitlyConstructed<ReqBigMapGridInfo>
@@ -174,6 +179,21 @@ class AckMapKingWarDefaultTypeInternal {
 } _AckMapKingWar_default_instance_;
 }  // namespace NFMsg
 namespace protobuf_NFMsgExtra_2eproto {
+static void InitDefaultsReqAIOnwer() {
+  GOOGLE_PROTOBUF_VERIFY_VERSION;
+
+  {
+    void* ptr = &::NFMsg::_ReqAIOnwer_default_instance_;
+    new (ptr) ::NFMsg::ReqAIOnwer();
+    ::google::protobuf::internal::OnShutdownDestroyMessage(ptr);
+  }
+  ::NFMsg::ReqAIOnwer::InitAsDefaultInstance();
+}
+
+LIBPROTOC_EXPORT ::google::protobuf::internal::SCCInfo<1> scc_info_ReqAIOnwer =
+    {{ATOMIC_VAR_INIT(::google::protobuf::internal::SCCInfoBase::kUninitialized), 1, InitDefaultsReqAIOnwer}, {
+      &protobuf_NFMsgBase_2eproto::scc_info_Ident.base,}};
+
 static void InitDefaultsTeamInfo() {
   GOOGLE_PROTOBUF_VERIFY_VERSION;
 
@@ -314,19 +334,19 @@ LIBPROTOC_EXPORT ::google::protobuf::internal::SCCInfo<1> scc_info_AckTeamEnterE
     {{ATOMIC_VAR_INIT(::google::protobuf::internal::SCCInfoBase::kUninitialized), 1, InitDefaultsAckTeamEnterEctype}, {
       &protobuf_NFMsgBase_2eproto::scc_info_Ident.base,}};
 
-static void InitDefaultsGridGuildBaseInfo() {
+static void InitDefaultsGridClanBaseInfo() {
   GOOGLE_PROTOBUF_VERIFY_VERSION;
 
   {
-    void* ptr = &::NFMsg::_GridGuildBaseInfo_default_instance_;
-    new (ptr) ::NFMsg::GridGuildBaseInfo();
+    void* ptr = &::NFMsg::_GridClanBaseInfo_default_instance_;
+    new (ptr) ::NFMsg::GridClanBaseInfo();
     ::google::protobuf::internal::OnShutdownDestroyMessage(ptr);
   }
-  ::NFMsg::GridGuildBaseInfo::InitAsDefaultInstance();
+  ::NFMsg::GridClanBaseInfo::InitAsDefaultInstance();
 }
 
-LIBPROTOC_EXPORT ::google::protobuf::internal::SCCInfo<1> scc_info_GridGuildBaseInfo =
-    {{ATOMIC_VAR_INIT(::google::protobuf::internal::SCCInfoBase::kUninitialized), 1, InitDefaultsGridGuildBaseInfo}, {
+LIBPROTOC_EXPORT ::google::protobuf::internal::SCCInfo<1> scc_info_GridClanBaseInfo =
+    {{ATOMIC_VAR_INIT(::google::protobuf::internal::SCCInfoBase::kUninitialized), 1, InitDefaultsGridClanBaseInfo}, {
       &protobuf_NFMsgBase_2eproto::scc_info_Ident.base,}};
 
 static void InitDefaultsReqBigMapGridInfo() {
@@ -356,7 +376,7 @@ static void InitDefaultsBigMapGridBaseInfo() {
 
 LIBPROTOC_EXPORT ::google::protobuf::internal::SCCInfo<2> scc_info_BigMapGridBaseInfo =
     {{ATOMIC_VAR_INIT(::google::protobuf::internal::SCCInfoBase::kUninitialized), 2, InitDefaultsBigMapGridBaseInfo}, {
-      &protobuf_NFMsgExtra_2eproto::scc_info_GridGuildBaseInfo.base,
+      &protobuf_NFMsgExtra_2eproto::scc_info_GridClanBaseInfo.base,
       &protobuf_NFMsgBase_2eproto::scc_info_Ident.base,}};
 
 static void InitDefaultsBigMapLeaveMsg() {
@@ -387,7 +407,7 @@ static void InitDefaultsBigMapWarHistory() {
 
 LIBPROTOC_EXPORT ::google::protobuf::internal::SCCInfo<2> scc_info_BigMapWarHistory =
     {{ATOMIC_VAR_INIT(::google::protobuf::internal::SCCInfoBase::kUninitialized), 2, InitDefaultsBigMapWarHistory}, {
-      &protobuf_NFMsgExtra_2eproto::scc_info_GridGuildBaseInfo.base,
+      &protobuf_NFMsgExtra_2eproto::scc_info_GridClanBaseInfo.base,
       &protobuf_NFMsgBase_2eproto::scc_info_Ident.base,}};
 
 static void InitDefaultsBigMapGridDetailInfo() {
@@ -404,7 +424,7 @@ static void InitDefaultsBigMapGridDetailInfo() {
 LIBPROTOC_EXPORT ::google::protobuf::internal::SCCInfo<4> scc_info_BigMapGridDetailInfo =
     {{ATOMIC_VAR_INIT(::google::protobuf::internal::SCCInfoBase::kUninitialized), 4, InitDefaultsBigMapGridDetailInfo}, {
       &protobuf_NFMsgExtra_2eproto::scc_info_BigMapGridBaseInfo.base,
-      &protobuf_NFMsgExtra_2eproto::scc_info_GridGuildBaseInfo.base,
+      &protobuf_NFMsgExtra_2eproto::scc_info_GridClanBaseInfo.base,
       &protobuf_NFMsgExtra_2eproto::scc_info_BigMapLeaveMsg.base,
       &protobuf_NFMsgExtra_2eproto::scc_info_BigMapWarHistory.base,}};
 
@@ -595,6 +615,7 @@ LIBPROTOC_EXPORT ::google::protobuf::internal::SCCInfo<0> scc_info_AckMapKingWar
     {{ATOMIC_VAR_INIT(::google::protobuf::internal::SCCInfoBase::kUninitialized), 0, InitDefaultsAckMapKingWar}, {}};
 
 void InitDefaults() {
+  ::google::protobuf::internal::InitSCC(&scc_info_ReqAIOnwer.base);
   ::google::protobuf::internal::InitSCC(&scc_info_TeamInfo.base);
   ::google::protobuf::internal::InitSCC(&scc_info_TeammemberInfo.base);
   ::google::protobuf::internal::InitSCC(&scc_info_ReqAckCreateTeam.base);
@@ -604,7 +625,7 @@ void InitDefaults() {
   ::google::protobuf::internal::InitSCC(&scc_info_ReqAckInviteTeam.base);
   ::google::protobuf::internal::InitSCC(&scc_info_ReqTeamEnterEctype.base);
   ::google::protobuf::internal::InitSCC(&scc_info_AckTeamEnterEctype.base);
-  ::google::protobuf::internal::InitSCC(&scc_info_GridGuildBaseInfo.base);
+  ::google::protobuf::internal::InitSCC(&scc_info_GridClanBaseInfo.base);
   ::google::protobuf::internal::InitSCC(&scc_info_ReqBigMapGridInfo.base);
   ::google::protobuf::internal::InitSCC(&scc_info_BigMapGridBaseInfo.base);
   ::google::protobuf::internal::InitSCC(&scc_info_BigMapLeaveMsg.base);
@@ -625,10 +646,16 @@ void InitDefaults() {
   ::google::protobuf::internal::InitSCC(&scc_info_AckMapKingWar.base);
 }
 
-::google::protobuf::Metadata file_level_metadata[28];
+::google::protobuf::Metadata file_level_metadata[29];
 const ::google::protobuf::EnumDescriptor* file_level_enum_descriptors[1];
 
 const ::google::protobuf::uint32 TableStruct::offsets[] GOOGLE_PROTOBUF_ATTRIBUTE_SECTION_VARIABLE(protodesc_cold) = {
+  ~0u,  // no _has_bits_
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NFMsg::ReqAIOnwer, _internal_metadata_),
+  ~0u,  // no _extensions_
+  ~0u,  // no _oneof_case_
+  ~0u,  // no _weak_field_map_
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NFMsg::ReqAIOnwer, ai_id_),
   ~0u,  // no _has_bits_
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NFMsg::TeamInfo, _internal_metadata_),
   ~0u,  // no _extensions_
@@ -707,15 +734,15 @@ const ::google::protobuf::uint32 TableStruct::offsets[] GOOGLE_PROTOBUF_ATTRIBUT
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NFMsg::AckTeamEnterEctype, ngroupid_),
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NFMsg::AckTeamEnterEctype, nresult_),
   ~0u,  // no _has_bits_
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NFMsg::GridGuildBaseInfo, _internal_metadata_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NFMsg::GridClanBaseInfo, _internal_metadata_),
   ~0u,  // no _extensions_
   ~0u,  // no _oneof_case_
   ~0u,  // no _weak_field_map_
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NFMsg::GridGuildBaseInfo, id_),
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NFMsg::GridGuildBaseInfo, level_),
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NFMsg::GridGuildBaseInfo, count_),
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NFMsg::GridGuildBaseInfo, resource_),
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NFMsg::GridGuildBaseInfo, icon_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NFMsg::GridClanBaseInfo, id_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NFMsg::GridClanBaseInfo, level_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NFMsg::GridClanBaseInfo, count_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NFMsg::GridClanBaseInfo, resource_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NFMsg::GridClanBaseInfo, icon_),
   ~0u,  // no _has_bits_
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NFMsg::ReqBigMapGridInfo, _internal_metadata_),
   ~0u,  // no _extensions_
@@ -838,37 +865,39 @@ const ::google::protobuf::uint32 TableStruct::offsets[] GOOGLE_PROTOBUF_ATTRIBUT
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NFMsg::AckMapKingWar, map_title_),
 };
 static const ::google::protobuf::internal::MigrationSchema schemas[] GOOGLE_PROTOBUF_ATTRIBUTE_SECTION_VARIABLE(protodesc_cold) = {
-  { 0, -1, sizeof(::NFMsg::TeamInfo)},
-  { 8, -1, sizeof(::NFMsg::TeammemberInfo)},
-  { 18, -1, sizeof(::NFMsg::ReqAckCreateTeam)},
-  { 25, -1, sizeof(::NFMsg::ReqAckJoinTeam)},
-  { 32, -1, sizeof(::NFMsg::ReqAckLeaveTeam)},
-  { 39, -1, sizeof(::NFMsg::ReqAckOprTeamMember)},
-  { 48, -1, sizeof(::NFMsg::ReqAckInviteTeam)},
-  { 56, -1, sizeof(::NFMsg::ReqTeamEnterEctype)},
-  { 67, -1, sizeof(::NFMsg::AckTeamEnterEctype)},
-  { 77, -1, sizeof(::NFMsg::GridGuildBaseInfo)},
-  { 87, -1, sizeof(::NFMsg::ReqBigMapGridInfo)},
-  { 93, -1, sizeof(::NFMsg::BigMapGridBaseInfo)},
-  { 104, -1, sizeof(::NFMsg::BigMapLeaveMsg)},
-  { 114, -1, sizeof(::NFMsg::BigMapWarHistory)},
-  { 123, -1, sizeof(::NFMsg::BigMapGridDetailInfo)},
-  { 132, -1, sizeof(::NFMsg::AckBigMapGridInfo)},
-  { 138, -1, sizeof(::NFMsg::ReqBigMapInfo)},
-  { 143, -1, sizeof(::NFMsg::AckBigMapInfo)},
-  { 149, -1, sizeof(::NFMsg::ReqHoldMapGrid)},
-  { 156, -1, sizeof(::NFMsg::AckHoldMapGrid)},
-  { 161, -1, sizeof(::NFMsg::ReqLeaveMapMsg)},
-  { 168, -1, sizeof(::NFMsg::AckLeaveMapMsg)},
-  { 173, -1, sizeof(::NFMsg::ReqGetMapAward)},
-  { 179, -1, sizeof(::NFMsg::AckGetMapAward)},
-  { 184, -1, sizeof(::NFMsg::ReqMapHunting)},
-  { 190, -1, sizeof(::NFMsg::AckMapHunting)},
-  { 195, -1, sizeof(::NFMsg::ReqMapKingWar)},
-  { 201, -1, sizeof(::NFMsg::AckMapKingWar)},
+  { 0, -1, sizeof(::NFMsg::ReqAIOnwer)},
+  { 6, -1, sizeof(::NFMsg::TeamInfo)},
+  { 14, -1, sizeof(::NFMsg::TeammemberInfo)},
+  { 24, -1, sizeof(::NFMsg::ReqAckCreateTeam)},
+  { 31, -1, sizeof(::NFMsg::ReqAckJoinTeam)},
+  { 38, -1, sizeof(::NFMsg::ReqAckLeaveTeam)},
+  { 45, -1, sizeof(::NFMsg::ReqAckOprTeamMember)},
+  { 54, -1, sizeof(::NFMsg::ReqAckInviteTeam)},
+  { 62, -1, sizeof(::NFMsg::ReqTeamEnterEctype)},
+  { 73, -1, sizeof(::NFMsg::AckTeamEnterEctype)},
+  { 83, -1, sizeof(::NFMsg::GridClanBaseInfo)},
+  { 93, -1, sizeof(::NFMsg::ReqBigMapGridInfo)},
+  { 99, -1, sizeof(::NFMsg::BigMapGridBaseInfo)},
+  { 110, -1, sizeof(::NFMsg::BigMapLeaveMsg)},
+  { 120, -1, sizeof(::NFMsg::BigMapWarHistory)},
+  { 129, -1, sizeof(::NFMsg::BigMapGridDetailInfo)},
+  { 138, -1, sizeof(::NFMsg::AckBigMapGridInfo)},
+  { 144, -1, sizeof(::NFMsg::ReqBigMapInfo)},
+  { 149, -1, sizeof(::NFMsg::AckBigMapInfo)},
+  { 155, -1, sizeof(::NFMsg::ReqHoldMapGrid)},
+  { 162, -1, sizeof(::NFMsg::AckHoldMapGrid)},
+  { 167, -1, sizeof(::NFMsg::ReqLeaveMapMsg)},
+  { 174, -1, sizeof(::NFMsg::AckLeaveMapMsg)},
+  { 179, -1, sizeof(::NFMsg::ReqGetMapAward)},
+  { 185, -1, sizeof(::NFMsg::AckGetMapAward)},
+  { 190, -1, sizeof(::NFMsg::ReqMapHunting)},
+  { 196, -1, sizeof(::NFMsg::AckMapHunting)},
+  { 201, -1, sizeof(::NFMsg::ReqMapKingWar)},
+  { 207, -1, sizeof(::NFMsg::AckMapKingWar)},
 };
 
 static ::google::protobuf::Message const * const file_default_instances[] = {
+  reinterpret_cast<const ::google::protobuf::Message*>(&::NFMsg::_ReqAIOnwer_default_instance_),
   reinterpret_cast<const ::google::protobuf::Message*>(&::NFMsg::_TeamInfo_default_instance_),
   reinterpret_cast<const ::google::protobuf::Message*>(&::NFMsg::_TeammemberInfo_default_instance_),
   reinterpret_cast<const ::google::protobuf::Message*>(&::NFMsg::_ReqAckCreateTeam_default_instance_),
@@ -878,7 +907,7 @@ static ::google::protobuf::Message const * const file_default_instances[] = {
   reinterpret_cast<const ::google::protobuf::Message*>(&::NFMsg::_ReqAckInviteTeam_default_instance_),
   reinterpret_cast<const ::google::protobuf::Message*>(&::NFMsg::_ReqTeamEnterEctype_default_instance_),
   reinterpret_cast<const ::google::protobuf::Message*>(&::NFMsg::_AckTeamEnterEctype_default_instance_),
-  reinterpret_cast<const ::google::protobuf::Message*>(&::NFMsg::_GridGuildBaseInfo_default_instance_),
+  reinterpret_cast<const ::google::protobuf::Message*>(&::NFMsg::_GridClanBaseInfo_default_instance_),
   reinterpret_cast<const ::google::protobuf::Message*>(&::NFMsg::_ReqBigMapGridInfo_default_instance_),
   reinterpret_cast<const ::google::protobuf::Message*>(&::NFMsg::_BigMapGridBaseInfo_default_instance_),
   reinterpret_cast<const ::google::protobuf::Message*>(&::NFMsg::_BigMapLeaveMsg_default_instance_),
@@ -914,83 +943,84 @@ void protobuf_AssignDescriptorsOnce() {
 void protobuf_RegisterTypes(const ::std::string&) GOOGLE_PROTOBUF_ATTRIBUTE_COLD;
 void protobuf_RegisterTypes(const ::std::string&) {
   protobuf_AssignDescriptorsOnce();
-  ::google::protobuf::internal::RegisterAllTypes(file_level_metadata, 28);
+  ::google::protobuf::internal::RegisterAllTypes(file_level_metadata, 29);
 }
 
 void AddDescriptorsImpl() {
   InitDefaults();
   static const char descriptor[] GOOGLE_PROTOBUF_ATTRIBUTE_SECTION_VARIABLE(protodesc_cold) = {
       "\n\020NFMsgExtra.proto\022\005NFMsg\032\016NFDefine.prot"
-      "o\032\017NFMsgBase.proto\"z\n\010TeamInfo\022\035\n\007team_i"
-      "d\030\001 \001(\0132\014.NFMsg.Ident\022 \n\ncaptain_id\030\002 \001("
-      "\0132\014.NFMsg.Ident\022-\n\016teammemberInfo\030\003 \003(\0132"
-      "\025.NFMsg.TeammemberInfo\"n\n\016TeammemberInfo"
-      "\022\037\n\tplayer_id\030\001 \001(\0132\014.NFMsg.Ident\022\014\n\004nam"
-      "e\030\002 \001(\t\022\016\n\006nLevel\030\003 \001(\005\022\013\n\003job\030\004 \001(\005\022\020\n\010"
-      "HeadIcon\030\005 \001(\t\"U\n\020ReqAckCreateTeam\022\035\n\007te"
-      "am_id\030\001 \001(\0132\014.NFMsg.Ident\022\"\n\txTeamInfo\030\002"
-      " \001(\0132\017.NFMsg.TeamInfo\"S\n\016ReqAckJoinTeam\022"
-      "\035\n\007team_id\030\001 \001(\0132\014.NFMsg.Ident\022\"\n\txTeamI"
-      "nfo\030\002 \001(\0132\017.NFMsg.TeamInfo\"T\n\017ReqAckLeav"
-      "eTeam\022\035\n\007team_id\030\001 \001(\0132\014.NFMsg.Ident\022\"\n\t"
-      "xTeamInfo\030\002 \001(\0132\017.NFMsg.TeamInfo\"\350\002\n\023Req"
-      "AckOprTeamMember\022\035\n\007team_id\030\001 \001(\0132\014.NFMs"
-      "g.Ident\022\037\n\tmember_id\030\002 \001(\0132\014.NFMsg.Ident"
-      "\022<\n\004type\030\003 \001(\0162..NFMsg.ReqAckOprTeamMemb"
-      "er.EGTeamMemberOprType\022\"\n\txTeamInfo\030\004 \001("
-      "\0132\017.NFMsg.TeamInfo\"\256\001\n\023EGTeamMemberOprTy"
-      "pe\022\r\n\tEGAT_DOWN\020\000\022\013\n\007EGAT_UP\020\001\022\r\n\tEGAT_K"
-      "ICK\020\002\022\020\n\014EGAT_APPOINT\020\003\022\r\n\tEGAT_FIRE\020\004\022\017"
-      "\n\013EGAT_DEMISE\020\005\022\024\n\020EGAT_ACCEPTAPPLY\020\006\022\022\n"
-      "\016EGAT_DENYAPPLY\020\007\022\020\n\014EGAT_KICKOUT\020\010\"x\n\020R"
-      "eqAckInviteTeam\022\035\n\007team_id\030\001 \001(\0132\014.NFMsg"
-      ".Ident\022\035\n\007self_id\030\002 \001(\0132\014.NFMsg.Ident\022&\n"
-      "\020invite_target_id\030\003 \001(\0132\014.NFMsg.Ident\"\233\001"
-      "\n\022ReqTeamEnterEctype\022\035\n\007team_id\030\001 \001(\0132\014."
-      "NFMsg.Ident\022\035\n\007self_id\030\002 \001(\0132\014.NFMsg.Ide"
-      "nt\022\021\n\tnEctypeID\030\003 \001(\005\022\020\n\010nGroupID\030\004 \001(\005\022"
-      "\017\n\007nResult\030\005 \001(\005\022\021\n\tnServerID\030\006 \001(\005\"\210\001\n\022"
-      "AckTeamEnterEctype\022\035\n\007team_id\030\001 \001(\0132\014.NF"
+      "o\032\017NFMsgBase.proto\")\n\nReqAIOnwer\022\033\n\005ai_i"
+      "d\030\001 \001(\0132\014.NFMsg.Ident\"z\n\010TeamInfo\022\035\n\007tea"
+      "m_id\030\001 \001(\0132\014.NFMsg.Ident\022 \n\ncaptain_id\030\002"
+      " \001(\0132\014.NFMsg.Ident\022-\n\016teammemberInfo\030\003 \003"
+      "(\0132\025.NFMsg.TeammemberInfo\"n\n\016TeammemberI"
+      "nfo\022\037\n\tplayer_id\030\001 \001(\0132\014.NFMsg.Ident\022\014\n\004"
+      "name\030\002 \001(\t\022\016\n\006nLevel\030\003 \001(\005\022\013\n\003job\030\004 \001(\005\022"
+      "\020\n\010HeadIcon\030\005 \001(\t\"U\n\020ReqAckCreateTeam\022\035\n"
+      "\007team_id\030\001 \001(\0132\014.NFMsg.Ident\022\"\n\txTeamInf"
+      "o\030\002 \001(\0132\017.NFMsg.TeamInfo\"S\n\016ReqAckJoinTe"
+      "am\022\035\n\007team_id\030\001 \001(\0132\014.NFMsg.Ident\022\"\n\txTe"
+      "amInfo\030\002 \001(\0132\017.NFMsg.TeamInfo\"T\n\017ReqAckL"
+      "eaveTeam\022\035\n\007team_id\030\001 \001(\0132\014.NFMsg.Ident\022"
+      "\"\n\txTeamInfo\030\002 \001(\0132\017.NFMsg.TeamInfo\"\350\002\n\023"
+      "ReqAckOprTeamMember\022\035\n\007team_id\030\001 \001(\0132\014.N"
+      "FMsg.Ident\022\037\n\tmember_id\030\002 \001(\0132\014.NFMsg.Id"
+      "ent\022<\n\004type\030\003 \001(\0162..NFMsg.ReqAckOprTeamM"
+      "ember.EGTeamMemberOprType\022\"\n\txTeamInfo\030\004"
+      " \001(\0132\017.NFMsg.TeamInfo\"\256\001\n\023EGTeamMemberOp"
+      "rType\022\r\n\tEGAT_DOWN\020\000\022\013\n\007EGAT_UP\020\001\022\r\n\tEGA"
+      "T_KICK\020\002\022\020\n\014EGAT_APPOINT\020\003\022\r\n\tEGAT_FIRE\020"
+      "\004\022\017\n\013EGAT_DEMISE\020\005\022\024\n\020EGAT_ACCEPTAPPLY\020\006"
+      "\022\022\n\016EGAT_DENYAPPLY\020\007\022\020\n\014EGAT_KICKOUT\020\010\"x"
+      "\n\020ReqAckInviteTeam\022\035\n\007team_id\030\001 \001(\0132\014.NF"
       "Msg.Ident\022\035\n\007self_id\030\002 \001(\0132\014.NFMsg.Ident"
-      "\022\021\n\tnEctypeID\030\003 \001(\005\022\020\n\010nGroupID\030\004 \001(\005\022\017\n"
-      "\007nResult\030\005 \001(\005\"k\n\021GridGuildBaseInfo\022\030\n\002i"
-      "d\030\001 \001(\0132\014.NFMsg.Ident\022\r\n\005level\030\002 \001(\005\022\r\n\005"
-      "count\030\003 \001(\005\022\020\n\010resource\030\004 \001(\005\022\014\n\004icon\030\005 "
-      "\001(\014\")\n\021ReqBigMapGridInfo\022\024\n\014map_title_id"
-      "\030\001 \003(\014\"\272\001\n\022BigMapGridBaseInfo\022\n\n\002id\030\001 \001("
-      "\014\022,\n\nguild_info\030\002 \001(\0132\030.NFMsg.GridGuildB"
-      "aseInfo\022\024\n\014kingwar_time\030\n \001(\005\022 \n\nkingwar"
-      "rer\030\013 \001(\0132\014.NFMsg.Ident\022\024\n\014hurting_time\030"
-      "\024 \001(\005\022\034\n\006hurter\030\025 \001(\0132\014.NFMsg.Ident\"z\n\016B"
-      "igMapLeaveMsg\022\033\n\005owner\030\001 \001(\0132\014.NFMsg.Ide"
-      "nt\022\022\n\nowner_name\030\002 \001(\014\022\020\n\010msg_data\030\003 \001(\014"
-      "\022\020\n\010msg_time\030\004 \001(\005\022\023\n\013owner_level\030\005 \001(\005\""
-      "\236\001\n\020BigMapWarHistory\022*\n\010red_info\030\001 \001(\0132\030"
-      ".NFMsg.GridGuildBaseInfo\022+\n\tblue_info\030\002 "
-      "\001(\0132\030.NFMsg.GridGuildBaseInfo\022\037\n\twinner_"
-      "id\030\n \001(\0132\014.NFMsg.Ident\022\020\n\010war_time\030\013 \001(\005"
-      "\"\323\001\n\024BigMapGridDetailInfo\0221\n\016grid_base_i"
-      "nfo\030\001 \001(\0132\031.NFMsg.BigMapGridBaseInfo\0220\n\016"
-      "stay_guid_list\030\002 \003(\0132\030.NFMsg.GridGuildBa"
-      "seInfo\022(\n\tleave_msg\030\003 \003(\0132\025.NFMsg.BigMap"
-      "LeaveMsg\022,\n\013war_history\030\004 \003(\0132\027.NFMsg.Bi"
-      "gMapWarHistory\"B\n\021AckBigMapGridInfo\022-\n\010m"
-      "ap_data\030\001 \003(\0132\033.NFMsg.BigMapGridDetailIn"
-      "fo\"\017\n\rReqBigMapInfo\"B\n\rAckBigMapInfo\0221\n\016"
-      "grid_base_info\030\001 \003(\0132\031.NFMsg.BigMapGridB"
-      "aseInfo\"F\n\016ReqHoldMapGrid\022\024\n\014map_title_i"
-      "d\030\001 \001(\014\022\036\n\010guild_id\030\002 \001(\0132\014.NFMsg.Ident\""
-      "\020\n\016AckHoldMapGrid\"P\n\016ReqLeaveMapMsg\022\024\n\014m"
-      "ap_title_id\030\001 \001(\014\022(\n\tleave_msg\030\002 \001(\0132\025.N"
-      "FMsg.BigMapLeaveMsg\"\020\n\016AckLeaveMapMsg\"&\n"
-      "\016ReqGetMapAward\022\024\n\014map_title_id\030\001 \001(\014\"\020\n"
-      "\016AckGetMapAward\"%\n\rReqMapHunting\022\024\n\014map_"
-      "title_id\030\001 \001(\014\"\017\n\rAckMapHunting\"\"\n\rReqMa"
-      "pKingWar\022\021\n\tmap_title\030\001 \001(\014\"\"\n\rAckMapKin"
-      "gWar\022\021\n\tmap_title\030\001 \001(\014b\006proto3"
+      "\022&\n\020invite_target_id\030\003 \001(\0132\014.NFMsg.Ident"
+      "\"\233\001\n\022ReqTeamEnterEctype\022\035\n\007team_id\030\001 \001(\013"
+      "2\014.NFMsg.Ident\022\035\n\007self_id\030\002 \001(\0132\014.NFMsg."
+      "Ident\022\021\n\tnEctypeID\030\003 \001(\005\022\020\n\010nGroupID\030\004 \001"
+      "(\005\022\017\n\007nResult\030\005 \001(\005\022\021\n\tnServerID\030\006 \001(\005\"\210"
+      "\001\n\022AckTeamEnterEctype\022\035\n\007team_id\030\001 \001(\0132\014"
+      ".NFMsg.Ident\022\035\n\007self_id\030\002 \001(\0132\014.NFMsg.Id"
+      "ent\022\021\n\tnEctypeID\030\003 \001(\005\022\020\n\010nGroupID\030\004 \001(\005"
+      "\022\017\n\007nResult\030\005 \001(\005\"j\n\020GridClanBaseInfo\022\030\n"
+      "\002id\030\001 \001(\0132\014.NFMsg.Ident\022\r\n\005level\030\002 \001(\005\022\r"
+      "\n\005count\030\003 \001(\005\022\020\n\010resource\030\004 \001(\005\022\014\n\004icon\030"
+      "\005 \001(\014\")\n\021ReqBigMapGridInfo\022\024\n\014map_title_"
+      "id\030\001 \003(\014\"\271\001\n\022BigMapGridBaseInfo\022\n\n\002id\030\001 "
+      "\001(\014\022+\n\nguild_info\030\002 \001(\0132\027.NFMsg.GridClan"
+      "BaseInfo\022\024\n\014kingwar_time\030\n \001(\005\022 \n\nkingwa"
+      "rrer\030\013 \001(\0132\014.NFMsg.Ident\022\024\n\014hurting_time"
+      "\030\024 \001(\005\022\034\n\006hurter\030\025 \001(\0132\014.NFMsg.Ident\"z\n\016"
+      "BigMapLeaveMsg\022\033\n\005owner\030\001 \001(\0132\014.NFMsg.Id"
+      "ent\022\022\n\nowner_name\030\002 \001(\014\022\020\n\010msg_data\030\003 \001("
+      "\014\022\020\n\010msg_time\030\004 \001(\005\022\023\n\013owner_level\030\005 \001(\005"
+      "\"\234\001\n\020BigMapWarHistory\022)\n\010red_info\030\001 \001(\0132"
+      "\027.NFMsg.GridClanBaseInfo\022*\n\tblue_info\030\002 "
+      "\001(\0132\027.NFMsg.GridClanBaseInfo\022\037\n\twinner_i"
+      "d\030\n \001(\0132\014.NFMsg.Ident\022\020\n\010war_time\030\013 \001(\005\""
+      "\322\001\n\024BigMapGridDetailInfo\0221\n\016grid_base_in"
+      "fo\030\001 \001(\0132\031.NFMsg.BigMapGridBaseInfo\022/\n\016s"
+      "tay_guid_list\030\002 \003(\0132\027.NFMsg.GridClanBase"
+      "Info\022(\n\tleave_msg\030\003 \003(\0132\025.NFMsg.BigMapLe"
+      "aveMsg\022,\n\013war_history\030\004 \003(\0132\027.NFMsg.BigM"
+      "apWarHistory\"B\n\021AckBigMapGridInfo\022-\n\010map"
+      "_data\030\001 \003(\0132\033.NFMsg.BigMapGridDetailInfo"
+      "\"\017\n\rReqBigMapInfo\"B\n\rAckBigMapInfo\0221\n\016gr"
+      "id_base_info\030\001 \003(\0132\031.NFMsg.BigMapGridBas"
+      "eInfo\"F\n\016ReqHoldMapGrid\022\024\n\014map_title_id\030"
+      "\001 \001(\014\022\036\n\010guild_id\030\002 \001(\0132\014.NFMsg.Ident\"\020\n"
+      "\016AckHoldMapGrid\"P\n\016ReqLeaveMapMsg\022\024\n\014map"
+      "_title_id\030\001 \001(\014\022(\n\tleave_msg\030\002 \001(\0132\025.NFM"
+      "sg.BigMapLeaveMsg\"\020\n\016AckLeaveMapMsg\"&\n\016R"
+      "eqGetMapAward\022\024\n\014map_title_id\030\001 \001(\014\"\020\n\016A"
+      "ckGetMapAward\"%\n\rReqMapHunting\022\024\n\014map_ti"
+      "tle_id\030\001 \001(\014\"\017\n\rAckMapHunting\"\"\n\rReqMapK"
+      "ingWar\022\021\n\tmap_title\030\001 \001(\014\"\"\n\rAckMapKingW"
+      "ar\022\021\n\tmap_title\030\001 \001(\014b\006proto3"
   };
   ::google::protobuf::DescriptorPool::InternalAddGeneratedFile(
-      descriptor, 2711);
+      descriptor, 2749);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "NFMsgExtra.proto", &protobuf_RegisterTypes);
   ::protobuf_NFDefine_2eproto::AddDescriptors();
@@ -1044,6 +1074,246 @@ const ReqAckOprTeamMember_EGTeamMemberOprType ReqAckOprTeamMember::EGTeamMemberO
 const ReqAckOprTeamMember_EGTeamMemberOprType ReqAckOprTeamMember::EGTeamMemberOprType_MAX;
 const int ReqAckOprTeamMember::EGTeamMemberOprType_ARRAYSIZE;
 #endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
+
+// ===================================================================
+
+void ReqAIOnwer::InitAsDefaultInstance() {
+  ::NFMsg::_ReqAIOnwer_default_instance_._instance.get_mutable()->ai_id_ = const_cast< ::NFMsg::Ident*>(
+      ::NFMsg::Ident::internal_default_instance());
+}
+void ReqAIOnwer::clear_ai_id() {
+  if (GetArenaNoVirtual() == NULL && ai_id_ != NULL) {
+    delete ai_id_;
+  }
+  ai_id_ = NULL;
+}
+#if !defined(_MSC_VER) || _MSC_VER >= 1900
+const int ReqAIOnwer::kAiIdFieldNumber;
+#endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
+
+ReqAIOnwer::ReqAIOnwer()
+  : ::google::protobuf::Message(), _internal_metadata_(NULL) {
+  ::google::protobuf::internal::InitSCC(
+      &protobuf_NFMsgExtra_2eproto::scc_info_ReqAIOnwer.base);
+  SharedCtor();
+  // @@protoc_insertion_point(constructor:NFMsg.ReqAIOnwer)
+}
+ReqAIOnwer::ReqAIOnwer(const ReqAIOnwer& from)
+  : ::google::protobuf::Message(),
+      _internal_metadata_(NULL) {
+  _internal_metadata_.MergeFrom(from._internal_metadata_);
+  if (from.has_ai_id()) {
+    ai_id_ = new ::NFMsg::Ident(*from.ai_id_);
+  } else {
+    ai_id_ = NULL;
+  }
+  // @@protoc_insertion_point(copy_constructor:NFMsg.ReqAIOnwer)
+}
+
+void ReqAIOnwer::SharedCtor() {
+  ai_id_ = NULL;
+}
+
+ReqAIOnwer::~ReqAIOnwer() {
+  // @@protoc_insertion_point(destructor:NFMsg.ReqAIOnwer)
+  SharedDtor();
+}
+
+void ReqAIOnwer::SharedDtor() {
+  if (this != internal_default_instance()) delete ai_id_;
+}
+
+void ReqAIOnwer::SetCachedSize(int size) const {
+  _cached_size_.Set(size);
+}
+const ::google::protobuf::Descriptor* ReqAIOnwer::descriptor() {
+  ::protobuf_NFMsgExtra_2eproto::protobuf_AssignDescriptorsOnce();
+  return ::protobuf_NFMsgExtra_2eproto::file_level_metadata[kIndexInFileMessages].descriptor;
+}
+
+const ReqAIOnwer& ReqAIOnwer::default_instance() {
+  ::google::protobuf::internal::InitSCC(&protobuf_NFMsgExtra_2eproto::scc_info_ReqAIOnwer.base);
+  return *internal_default_instance();
+}
+
+
+void ReqAIOnwer::Clear() {
+// @@protoc_insertion_point(message_clear_start:NFMsg.ReqAIOnwer)
+  ::google::protobuf::uint32 cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  if (GetArenaNoVirtual() == NULL && ai_id_ != NULL) {
+    delete ai_id_;
+  }
+  ai_id_ = NULL;
+  _internal_metadata_.Clear();
+}
+
+bool ReqAIOnwer::MergePartialFromCodedStream(
+    ::google::protobuf::io::CodedInputStream* input) {
+#define DO_(EXPRESSION) if (!GOOGLE_PREDICT_TRUE(EXPRESSION)) goto failure
+  ::google::protobuf::uint32 tag;
+  // @@protoc_insertion_point(parse_start:NFMsg.ReqAIOnwer)
+  for (;;) {
+    ::std::pair<::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
+    tag = p.first;
+    if (!p.second) goto handle_unusual;
+    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
+      // .NFMsg.Ident ai_id = 1;
+      case 1: {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(10u /* 10 & 0xFF */)) {
+          DO_(::google::protobuf::internal::WireFormatLite::ReadMessage(
+               input, mutable_ai_id()));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      default: {
+      handle_unusual:
+        if (tag == 0) {
+          goto success;
+        }
+        DO_(::google::protobuf::internal::WireFormat::SkipField(
+              input, tag, _internal_metadata_.mutable_unknown_fields()));
+        break;
+      }
+    }
+  }
+success:
+  // @@protoc_insertion_point(parse_success:NFMsg.ReqAIOnwer)
+  return true;
+failure:
+  // @@protoc_insertion_point(parse_failure:NFMsg.ReqAIOnwer)
+  return false;
+#undef DO_
+}
+
+void ReqAIOnwer::SerializeWithCachedSizes(
+    ::google::protobuf::io::CodedOutputStream* output) const {
+  // @@protoc_insertion_point(serialize_start:NFMsg.ReqAIOnwer)
+  ::google::protobuf::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  // .NFMsg.Ident ai_id = 1;
+  if (this->has_ai_id()) {
+    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+      1, this->_internal_ai_id(), output);
+  }
+
+  if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
+    ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
+        (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()), output);
+  }
+  // @@protoc_insertion_point(serialize_end:NFMsg.ReqAIOnwer)
+}
+
+::google::protobuf::uint8* ReqAIOnwer::InternalSerializeWithCachedSizesToArray(
+    bool deterministic, ::google::protobuf::uint8* target) const {
+  (void)deterministic; // Unused
+  // @@protoc_insertion_point(serialize_to_array_start:NFMsg.ReqAIOnwer)
+  ::google::protobuf::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  // .NFMsg.Ident ai_id = 1;
+  if (this->has_ai_id()) {
+    target = ::google::protobuf::internal::WireFormatLite::
+      InternalWriteMessageToArray(
+        1, this->_internal_ai_id(), deterministic, target);
+  }
+
+  if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
+    target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
+        (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()), target);
+  }
+  // @@protoc_insertion_point(serialize_to_array_end:NFMsg.ReqAIOnwer)
+  return target;
+}
+
+size_t ReqAIOnwer::ByteSizeLong() const {
+// @@protoc_insertion_point(message_byte_size_start:NFMsg.ReqAIOnwer)
+  size_t total_size = 0;
+
+  if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
+    total_size +=
+      ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
+        (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()));
+  }
+  // .NFMsg.Ident ai_id = 1;
+  if (this->has_ai_id()) {
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::MessageSize(
+        *ai_id_);
+  }
+
+  int cached_size = ::google::protobuf::internal::ToCachedSize(total_size);
+  SetCachedSize(cached_size);
+  return total_size;
+}
+
+void ReqAIOnwer::MergeFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_merge_from_start:NFMsg.ReqAIOnwer)
+  GOOGLE_DCHECK_NE(&from, this);
+  const ReqAIOnwer* source =
+      ::google::protobuf::internal::DynamicCastToGenerated<const ReqAIOnwer>(
+          &from);
+  if (source == NULL) {
+  // @@protoc_insertion_point(generalized_merge_from_cast_fail:NFMsg.ReqAIOnwer)
+    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
+  } else {
+  // @@protoc_insertion_point(generalized_merge_from_cast_success:NFMsg.ReqAIOnwer)
+    MergeFrom(*source);
+  }
+}
+
+void ReqAIOnwer::MergeFrom(const ReqAIOnwer& from) {
+// @@protoc_insertion_point(class_specific_merge_from_start:NFMsg.ReqAIOnwer)
+  GOOGLE_DCHECK_NE(&from, this);
+  _internal_metadata_.MergeFrom(from._internal_metadata_);
+  ::google::protobuf::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  if (from.has_ai_id()) {
+    mutable_ai_id()->::NFMsg::Ident::MergeFrom(from.ai_id());
+  }
+}
+
+void ReqAIOnwer::CopyFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_copy_from_start:NFMsg.ReqAIOnwer)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+void ReqAIOnwer::CopyFrom(const ReqAIOnwer& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:NFMsg.ReqAIOnwer)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool ReqAIOnwer::IsInitialized() const {
+  return true;
+}
+
+void ReqAIOnwer::Swap(ReqAIOnwer* other) {
+  if (other == this) return;
+  InternalSwap(other);
+}
+void ReqAIOnwer::InternalSwap(ReqAIOnwer* other) {
+  using std::swap;
+  swap(ai_id_, other->ai_id_);
+  _internal_metadata_.Swap(&other->_internal_metadata_);
+}
+
+::google::protobuf::Metadata ReqAIOnwer::GetMetadata() const {
+  protobuf_NFMsgExtra_2eproto::protobuf_AssignDescriptorsOnce();
+  return ::protobuf_NFMsgExtra_2eproto::file_level_metadata[kIndexInFileMessages];
+}
+
 
 // ===================================================================
 
@@ -4294,32 +4564,32 @@ void AckTeamEnterEctype::InternalSwap(AckTeamEnterEctype* other) {
 
 // ===================================================================
 
-void GridGuildBaseInfo::InitAsDefaultInstance() {
-  ::NFMsg::_GridGuildBaseInfo_default_instance_._instance.get_mutable()->id_ = const_cast< ::NFMsg::Ident*>(
+void GridClanBaseInfo::InitAsDefaultInstance() {
+  ::NFMsg::_GridClanBaseInfo_default_instance_._instance.get_mutable()->id_ = const_cast< ::NFMsg::Ident*>(
       ::NFMsg::Ident::internal_default_instance());
 }
-void GridGuildBaseInfo::clear_id() {
+void GridClanBaseInfo::clear_id() {
   if (GetArenaNoVirtual() == NULL && id_ != NULL) {
     delete id_;
   }
   id_ = NULL;
 }
 #if !defined(_MSC_VER) || _MSC_VER >= 1900
-const int GridGuildBaseInfo::kIdFieldNumber;
-const int GridGuildBaseInfo::kLevelFieldNumber;
-const int GridGuildBaseInfo::kCountFieldNumber;
-const int GridGuildBaseInfo::kResourceFieldNumber;
-const int GridGuildBaseInfo::kIconFieldNumber;
+const int GridClanBaseInfo::kIdFieldNumber;
+const int GridClanBaseInfo::kLevelFieldNumber;
+const int GridClanBaseInfo::kCountFieldNumber;
+const int GridClanBaseInfo::kResourceFieldNumber;
+const int GridClanBaseInfo::kIconFieldNumber;
 #endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
 
-GridGuildBaseInfo::GridGuildBaseInfo()
+GridClanBaseInfo::GridClanBaseInfo()
   : ::google::protobuf::Message(), _internal_metadata_(NULL) {
   ::google::protobuf::internal::InitSCC(
-      &protobuf_NFMsgExtra_2eproto::scc_info_GridGuildBaseInfo.base);
+      &protobuf_NFMsgExtra_2eproto::scc_info_GridClanBaseInfo.base);
   SharedCtor();
-  // @@protoc_insertion_point(constructor:NFMsg.GridGuildBaseInfo)
+  // @@protoc_insertion_point(constructor:NFMsg.GridClanBaseInfo)
 }
-GridGuildBaseInfo::GridGuildBaseInfo(const GridGuildBaseInfo& from)
+GridClanBaseInfo::GridClanBaseInfo(const GridClanBaseInfo& from)
   : ::google::protobuf::Message(),
       _internal_metadata_(NULL) {
   _internal_metadata_.MergeFrom(from._internal_metadata_);
@@ -4335,42 +4605,42 @@ GridGuildBaseInfo::GridGuildBaseInfo(const GridGuildBaseInfo& from)
   ::memcpy(&level_, &from.level_,
     static_cast<size_t>(reinterpret_cast<char*>(&resource_) -
     reinterpret_cast<char*>(&level_)) + sizeof(resource_));
-  // @@protoc_insertion_point(copy_constructor:NFMsg.GridGuildBaseInfo)
+  // @@protoc_insertion_point(copy_constructor:NFMsg.GridClanBaseInfo)
 }
 
-void GridGuildBaseInfo::SharedCtor() {
+void GridClanBaseInfo::SharedCtor() {
   icon_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   ::memset(&id_, 0, static_cast<size_t>(
       reinterpret_cast<char*>(&resource_) -
       reinterpret_cast<char*>(&id_)) + sizeof(resource_));
 }
 
-GridGuildBaseInfo::~GridGuildBaseInfo() {
-  // @@protoc_insertion_point(destructor:NFMsg.GridGuildBaseInfo)
+GridClanBaseInfo::~GridClanBaseInfo() {
+  // @@protoc_insertion_point(destructor:NFMsg.GridClanBaseInfo)
   SharedDtor();
 }
 
-void GridGuildBaseInfo::SharedDtor() {
+void GridClanBaseInfo::SharedDtor() {
   icon_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   if (this != internal_default_instance()) delete id_;
 }
 
-void GridGuildBaseInfo::SetCachedSize(int size) const {
+void GridClanBaseInfo::SetCachedSize(int size) const {
   _cached_size_.Set(size);
 }
-const ::google::protobuf::Descriptor* GridGuildBaseInfo::descriptor() {
+const ::google::protobuf::Descriptor* GridClanBaseInfo::descriptor() {
   ::protobuf_NFMsgExtra_2eproto::protobuf_AssignDescriptorsOnce();
   return ::protobuf_NFMsgExtra_2eproto::file_level_metadata[kIndexInFileMessages].descriptor;
 }
 
-const GridGuildBaseInfo& GridGuildBaseInfo::default_instance() {
-  ::google::protobuf::internal::InitSCC(&protobuf_NFMsgExtra_2eproto::scc_info_GridGuildBaseInfo.base);
+const GridClanBaseInfo& GridClanBaseInfo::default_instance() {
+  ::google::protobuf::internal::InitSCC(&protobuf_NFMsgExtra_2eproto::scc_info_GridClanBaseInfo.base);
   return *internal_default_instance();
 }
 
 
-void GridGuildBaseInfo::Clear() {
-// @@protoc_insertion_point(message_clear_start:NFMsg.GridGuildBaseInfo)
+void GridClanBaseInfo::Clear() {
+// @@protoc_insertion_point(message_clear_start:NFMsg.GridClanBaseInfo)
   ::google::protobuf::uint32 cached_has_bits = 0;
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
@@ -4386,11 +4656,11 @@ void GridGuildBaseInfo::Clear() {
   _internal_metadata_.Clear();
 }
 
-bool GridGuildBaseInfo::MergePartialFromCodedStream(
+bool GridClanBaseInfo::MergePartialFromCodedStream(
     ::google::protobuf::io::CodedInputStream* input) {
 #define DO_(EXPRESSION) if (!GOOGLE_PREDICT_TRUE(EXPRESSION)) goto failure
   ::google::protobuf::uint32 tag;
-  // @@protoc_insertion_point(parse_start:NFMsg.GridGuildBaseInfo)
+  // @@protoc_insertion_point(parse_start:NFMsg.GridClanBaseInfo)
   for (;;) {
     ::std::pair<::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
     tag = p.first;
@@ -4474,17 +4744,17 @@ bool GridGuildBaseInfo::MergePartialFromCodedStream(
     }
   }
 success:
-  // @@protoc_insertion_point(parse_success:NFMsg.GridGuildBaseInfo)
+  // @@protoc_insertion_point(parse_success:NFMsg.GridClanBaseInfo)
   return true;
 failure:
-  // @@protoc_insertion_point(parse_failure:NFMsg.GridGuildBaseInfo)
+  // @@protoc_insertion_point(parse_failure:NFMsg.GridClanBaseInfo)
   return false;
 #undef DO_
 }
 
-void GridGuildBaseInfo::SerializeWithCachedSizes(
+void GridClanBaseInfo::SerializeWithCachedSizes(
     ::google::protobuf::io::CodedOutputStream* output) const {
-  // @@protoc_insertion_point(serialize_start:NFMsg.GridGuildBaseInfo)
+  // @@protoc_insertion_point(serialize_start:NFMsg.GridClanBaseInfo)
   ::google::protobuf::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
@@ -4519,13 +4789,13 @@ void GridGuildBaseInfo::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
         (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()), output);
   }
-  // @@protoc_insertion_point(serialize_end:NFMsg.GridGuildBaseInfo)
+  // @@protoc_insertion_point(serialize_end:NFMsg.GridClanBaseInfo)
 }
 
-::google::protobuf::uint8* GridGuildBaseInfo::InternalSerializeWithCachedSizesToArray(
+::google::protobuf::uint8* GridClanBaseInfo::InternalSerializeWithCachedSizesToArray(
     bool deterministic, ::google::protobuf::uint8* target) const {
   (void)deterministic; // Unused
-  // @@protoc_insertion_point(serialize_to_array_start:NFMsg.GridGuildBaseInfo)
+  // @@protoc_insertion_point(serialize_to_array_start:NFMsg.GridClanBaseInfo)
   ::google::protobuf::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
@@ -4562,12 +4832,12 @@ void GridGuildBaseInfo::SerializeWithCachedSizes(
     target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
         (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()), target);
   }
-  // @@protoc_insertion_point(serialize_to_array_end:NFMsg.GridGuildBaseInfo)
+  // @@protoc_insertion_point(serialize_to_array_end:NFMsg.GridClanBaseInfo)
   return target;
 }
 
-size_t GridGuildBaseInfo::ByteSizeLong() const {
-// @@protoc_insertion_point(message_byte_size_start:NFMsg.GridGuildBaseInfo)
+size_t GridClanBaseInfo::ByteSizeLong() const {
+// @@protoc_insertion_point(message_byte_size_start:NFMsg.GridClanBaseInfo)
   size_t total_size = 0;
 
   if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
@@ -4615,23 +4885,23 @@ size_t GridGuildBaseInfo::ByteSizeLong() const {
   return total_size;
 }
 
-void GridGuildBaseInfo::MergeFrom(const ::google::protobuf::Message& from) {
-// @@protoc_insertion_point(generalized_merge_from_start:NFMsg.GridGuildBaseInfo)
+void GridClanBaseInfo::MergeFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_merge_from_start:NFMsg.GridClanBaseInfo)
   GOOGLE_DCHECK_NE(&from, this);
-  const GridGuildBaseInfo* source =
-      ::google::protobuf::internal::DynamicCastToGenerated<const GridGuildBaseInfo>(
+  const GridClanBaseInfo* source =
+      ::google::protobuf::internal::DynamicCastToGenerated<const GridClanBaseInfo>(
           &from);
   if (source == NULL) {
-  // @@protoc_insertion_point(generalized_merge_from_cast_fail:NFMsg.GridGuildBaseInfo)
+  // @@protoc_insertion_point(generalized_merge_from_cast_fail:NFMsg.GridClanBaseInfo)
     ::google::protobuf::internal::ReflectionOps::Merge(from, this);
   } else {
-  // @@protoc_insertion_point(generalized_merge_from_cast_success:NFMsg.GridGuildBaseInfo)
+  // @@protoc_insertion_point(generalized_merge_from_cast_success:NFMsg.GridClanBaseInfo)
     MergeFrom(*source);
   }
 }
 
-void GridGuildBaseInfo::MergeFrom(const GridGuildBaseInfo& from) {
-// @@protoc_insertion_point(class_specific_merge_from_start:NFMsg.GridGuildBaseInfo)
+void GridClanBaseInfo::MergeFrom(const GridClanBaseInfo& from) {
+// @@protoc_insertion_point(class_specific_merge_from_start:NFMsg.GridClanBaseInfo)
   GOOGLE_DCHECK_NE(&from, this);
   _internal_metadata_.MergeFrom(from._internal_metadata_);
   ::google::protobuf::uint32 cached_has_bits = 0;
@@ -4655,29 +4925,29 @@ void GridGuildBaseInfo::MergeFrom(const GridGuildBaseInfo& from) {
   }
 }
 
-void GridGuildBaseInfo::CopyFrom(const ::google::protobuf::Message& from) {
-// @@protoc_insertion_point(generalized_copy_from_start:NFMsg.GridGuildBaseInfo)
+void GridClanBaseInfo::CopyFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_copy_from_start:NFMsg.GridClanBaseInfo)
   if (&from == this) return;
   Clear();
   MergeFrom(from);
 }
 
-void GridGuildBaseInfo::CopyFrom(const GridGuildBaseInfo& from) {
-// @@protoc_insertion_point(class_specific_copy_from_start:NFMsg.GridGuildBaseInfo)
+void GridClanBaseInfo::CopyFrom(const GridClanBaseInfo& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:NFMsg.GridClanBaseInfo)
   if (&from == this) return;
   Clear();
   MergeFrom(from);
 }
 
-bool GridGuildBaseInfo::IsInitialized() const {
+bool GridClanBaseInfo::IsInitialized() const {
   return true;
 }
 
-void GridGuildBaseInfo::Swap(GridGuildBaseInfo* other) {
+void GridClanBaseInfo::Swap(GridClanBaseInfo* other) {
   if (other == this) return;
   InternalSwap(other);
 }
-void GridGuildBaseInfo::InternalSwap(GridGuildBaseInfo* other) {
+void GridClanBaseInfo::InternalSwap(GridClanBaseInfo* other) {
   using std::swap;
   icon_.Swap(&other->icon_, &::google::protobuf::internal::GetEmptyStringAlreadyInited(),
     GetArenaNoVirtual());
@@ -4688,7 +4958,7 @@ void GridGuildBaseInfo::InternalSwap(GridGuildBaseInfo* other) {
   _internal_metadata_.Swap(&other->_internal_metadata_);
 }
 
-::google::protobuf::Metadata GridGuildBaseInfo::GetMetadata() const {
+::google::protobuf::Metadata GridClanBaseInfo::GetMetadata() const {
   protobuf_NFMsgExtra_2eproto::protobuf_AssignDescriptorsOnce();
   return ::protobuf_NFMsgExtra_2eproto::file_level_metadata[kIndexInFileMessages];
 }
@@ -4918,8 +5188,8 @@ void ReqBigMapGridInfo::InternalSwap(ReqBigMapGridInfo* other) {
 // ===================================================================
 
 void BigMapGridBaseInfo::InitAsDefaultInstance() {
-  ::NFMsg::_BigMapGridBaseInfo_default_instance_._instance.get_mutable()->guild_info_ = const_cast< ::NFMsg::GridGuildBaseInfo*>(
-      ::NFMsg::GridGuildBaseInfo::internal_default_instance());
+  ::NFMsg::_BigMapGridBaseInfo_default_instance_._instance.get_mutable()->guild_info_ = const_cast< ::NFMsg::GridClanBaseInfo*>(
+      ::NFMsg::GridClanBaseInfo::internal_default_instance());
   ::NFMsg::_BigMapGridBaseInfo_default_instance_._instance.get_mutable()->kingwarrer_ = const_cast< ::NFMsg::Ident*>(
       ::NFMsg::Ident::internal_default_instance());
   ::NFMsg::_BigMapGridBaseInfo_default_instance_._instance.get_mutable()->hurter_ = const_cast< ::NFMsg::Ident*>(
@@ -4962,7 +5232,7 @@ BigMapGridBaseInfo::BigMapGridBaseInfo(const BigMapGridBaseInfo& from)
     id_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.id_);
   }
   if (from.has_guild_info()) {
-    guild_info_ = new ::NFMsg::GridGuildBaseInfo(*from.guild_info_);
+    guild_info_ = new ::NFMsg::GridClanBaseInfo(*from.guild_info_);
   } else {
     guild_info_ = NULL;
   }
@@ -5062,7 +5332,7 @@ bool BigMapGridBaseInfo::MergePartialFromCodedStream(
         break;
       }
 
-      // .NFMsg.GridGuildBaseInfo guild_info = 2;
+      // .NFMsg.GridClanBaseInfo guild_info = 2;
       case 2: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
             static_cast< ::google::protobuf::uint8>(18u /* 18 & 0xFF */)) {
@@ -5158,7 +5428,7 @@ void BigMapGridBaseInfo::SerializeWithCachedSizes(
       1, this->id(), output);
   }
 
-  // .NFMsg.GridGuildBaseInfo guild_info = 2;
+  // .NFMsg.GridClanBaseInfo guild_info = 2;
   if (this->has_guild_info()) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
       2, this->_internal_guild_info(), output);
@@ -5207,7 +5477,7 @@ void BigMapGridBaseInfo::SerializeWithCachedSizes(
         1, this->id(), target);
   }
 
-  // .NFMsg.GridGuildBaseInfo guild_info = 2;
+  // .NFMsg.GridClanBaseInfo guild_info = 2;
   if (this->has_guild_info()) {
     target = ::google::protobuf::internal::WireFormatLite::
       InternalWriteMessageToArray(
@@ -5262,7 +5532,7 @@ size_t BigMapGridBaseInfo::ByteSizeLong() const {
         this->id());
   }
 
-  // .NFMsg.GridGuildBaseInfo guild_info = 2;
+  // .NFMsg.GridClanBaseInfo guild_info = 2;
   if (this->has_guild_info()) {
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::MessageSize(
@@ -5329,7 +5599,7 @@ void BigMapGridBaseInfo::MergeFrom(const BigMapGridBaseInfo& from) {
     id_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.id_);
   }
   if (from.has_guild_info()) {
-    mutable_guild_info()->::NFMsg::GridGuildBaseInfo::MergeFrom(from.guild_info());
+    mutable_guild_info()->::NFMsg::GridClanBaseInfo::MergeFrom(from.guild_info());
   }
   if (from.has_kingwarrer()) {
     mutable_kingwarrer()->::NFMsg::Ident::MergeFrom(from.kingwarrer());
@@ -5800,10 +6070,10 @@ void BigMapLeaveMsg::InternalSwap(BigMapLeaveMsg* other) {
 // ===================================================================
 
 void BigMapWarHistory::InitAsDefaultInstance() {
-  ::NFMsg::_BigMapWarHistory_default_instance_._instance.get_mutable()->red_info_ = const_cast< ::NFMsg::GridGuildBaseInfo*>(
-      ::NFMsg::GridGuildBaseInfo::internal_default_instance());
-  ::NFMsg::_BigMapWarHistory_default_instance_._instance.get_mutable()->blue_info_ = const_cast< ::NFMsg::GridGuildBaseInfo*>(
-      ::NFMsg::GridGuildBaseInfo::internal_default_instance());
+  ::NFMsg::_BigMapWarHistory_default_instance_._instance.get_mutable()->red_info_ = const_cast< ::NFMsg::GridClanBaseInfo*>(
+      ::NFMsg::GridClanBaseInfo::internal_default_instance());
+  ::NFMsg::_BigMapWarHistory_default_instance_._instance.get_mutable()->blue_info_ = const_cast< ::NFMsg::GridClanBaseInfo*>(
+      ::NFMsg::GridClanBaseInfo::internal_default_instance());
   ::NFMsg::_BigMapWarHistory_default_instance_._instance.get_mutable()->winner_id_ = const_cast< ::NFMsg::Ident*>(
       ::NFMsg::Ident::internal_default_instance());
 }
@@ -5832,12 +6102,12 @@ BigMapWarHistory::BigMapWarHistory(const BigMapWarHistory& from)
       _internal_metadata_(NULL) {
   _internal_metadata_.MergeFrom(from._internal_metadata_);
   if (from.has_red_info()) {
-    red_info_ = new ::NFMsg::GridGuildBaseInfo(*from.red_info_);
+    red_info_ = new ::NFMsg::GridClanBaseInfo(*from.red_info_);
   } else {
     red_info_ = NULL;
   }
   if (from.has_blue_info()) {
-    blue_info_ = new ::NFMsg::GridGuildBaseInfo(*from.blue_info_);
+    blue_info_ = new ::NFMsg::GridClanBaseInfo(*from.blue_info_);
   } else {
     blue_info_ = NULL;
   }
@@ -5913,7 +6183,7 @@ bool BigMapWarHistory::MergePartialFromCodedStream(
     tag = p.first;
     if (!p.second) goto handle_unusual;
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // .NFMsg.GridGuildBaseInfo red_info = 1;
+      // .NFMsg.GridClanBaseInfo red_info = 1;
       case 1: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
             static_cast< ::google::protobuf::uint8>(10u /* 10 & 0xFF */)) {
@@ -5925,7 +6195,7 @@ bool BigMapWarHistory::MergePartialFromCodedStream(
         break;
       }
 
-      // .NFMsg.GridGuildBaseInfo blue_info = 2;
+      // .NFMsg.GridClanBaseInfo blue_info = 2;
       case 2: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
             static_cast< ::google::protobuf::uint8>(18u /* 18 & 0xFF */)) {
@@ -5989,13 +6259,13 @@ void BigMapWarHistory::SerializeWithCachedSizes(
   ::google::protobuf::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
-  // .NFMsg.GridGuildBaseInfo red_info = 1;
+  // .NFMsg.GridClanBaseInfo red_info = 1;
   if (this->has_red_info()) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
       1, this->_internal_red_info(), output);
   }
 
-  // .NFMsg.GridGuildBaseInfo blue_info = 2;
+  // .NFMsg.GridClanBaseInfo blue_info = 2;
   if (this->has_blue_info()) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
       2, this->_internal_blue_info(), output);
@@ -6026,14 +6296,14 @@ void BigMapWarHistory::SerializeWithCachedSizes(
   ::google::protobuf::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
-  // .NFMsg.GridGuildBaseInfo red_info = 1;
+  // .NFMsg.GridClanBaseInfo red_info = 1;
   if (this->has_red_info()) {
     target = ::google::protobuf::internal::WireFormatLite::
       InternalWriteMessageToArray(
         1, this->_internal_red_info(), deterministic, target);
   }
 
-  // .NFMsg.GridGuildBaseInfo blue_info = 2;
+  // .NFMsg.GridClanBaseInfo blue_info = 2;
   if (this->has_blue_info()) {
     target = ::google::protobuf::internal::WireFormatLite::
       InternalWriteMessageToArray(
@@ -6069,14 +6339,14 @@ size_t BigMapWarHistory::ByteSizeLong() const {
       ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
         (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()));
   }
-  // .NFMsg.GridGuildBaseInfo red_info = 1;
+  // .NFMsg.GridClanBaseInfo red_info = 1;
   if (this->has_red_info()) {
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::MessageSize(
         *red_info_);
   }
 
-  // .NFMsg.GridGuildBaseInfo blue_info = 2;
+  // .NFMsg.GridClanBaseInfo blue_info = 2;
   if (this->has_blue_info()) {
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::MessageSize(
@@ -6125,10 +6395,10 @@ void BigMapWarHistory::MergeFrom(const BigMapWarHistory& from) {
   (void) cached_has_bits;
 
   if (from.has_red_info()) {
-    mutable_red_info()->::NFMsg::GridGuildBaseInfo::MergeFrom(from.red_info());
+    mutable_red_info()->::NFMsg::GridClanBaseInfo::MergeFrom(from.red_info());
   }
   if (from.has_blue_info()) {
-    mutable_blue_info()->::NFMsg::GridGuildBaseInfo::MergeFrom(from.blue_info());
+    mutable_blue_info()->::NFMsg::GridClanBaseInfo::MergeFrom(from.blue_info());
   }
   if (from.has_winner_id()) {
     mutable_winner_id()->::NFMsg::Ident::MergeFrom(from.winner_id());
@@ -6275,7 +6545,7 @@ bool BigMapGridDetailInfo::MergePartialFromCodedStream(
         break;
       }
 
-      // repeated .NFMsg.GridGuildBaseInfo stay_guid_list = 2;
+      // repeated .NFMsg.GridClanBaseInfo stay_guid_list = 2;
       case 2: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
             static_cast< ::google::protobuf::uint8>(18u /* 18 & 0xFF */)) {
@@ -6343,7 +6613,7 @@ void BigMapGridDetailInfo::SerializeWithCachedSizes(
       1, this->_internal_grid_base_info(), output);
   }
 
-  // repeated .NFMsg.GridGuildBaseInfo stay_guid_list = 2;
+  // repeated .NFMsg.GridClanBaseInfo stay_guid_list = 2;
   for (unsigned int i = 0,
       n = static_cast<unsigned int>(this->stay_guid_list_size()); i < n; i++) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
@@ -6391,7 +6661,7 @@ void BigMapGridDetailInfo::SerializeWithCachedSizes(
         1, this->_internal_grid_base_info(), deterministic, target);
   }
 
-  // repeated .NFMsg.GridGuildBaseInfo stay_guid_list = 2;
+  // repeated .NFMsg.GridClanBaseInfo stay_guid_list = 2;
   for (unsigned int i = 0,
       n = static_cast<unsigned int>(this->stay_guid_list_size()); i < n; i++) {
     target = ::google::protobuf::internal::WireFormatLite::
@@ -6432,7 +6702,7 @@ size_t BigMapGridDetailInfo::ByteSizeLong() const {
       ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
         (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()));
   }
-  // repeated .NFMsg.GridGuildBaseInfo stay_guid_list = 2;
+  // repeated .NFMsg.GridClanBaseInfo stay_guid_list = 2;
   {
     unsigned int count = static_cast<unsigned int>(this->stay_guid_list_size());
     total_size += 1UL * count;
@@ -9387,6 +9657,9 @@ void AckMapKingWar::InternalSwap(AckMapKingWar* other) {
 }  // namespace NFMsg
 namespace google {
 namespace protobuf {
+template<> GOOGLE_PROTOBUF_ATTRIBUTE_NOINLINE ::NFMsg::ReqAIOnwer* Arena::CreateMaybeMessage< ::NFMsg::ReqAIOnwer >(Arena* arena) {
+  return Arena::CreateInternal< ::NFMsg::ReqAIOnwer >(arena);
+}
 template<> GOOGLE_PROTOBUF_ATTRIBUTE_NOINLINE ::NFMsg::TeamInfo* Arena::CreateMaybeMessage< ::NFMsg::TeamInfo >(Arena* arena) {
   return Arena::CreateInternal< ::NFMsg::TeamInfo >(arena);
 }
@@ -9414,8 +9687,8 @@ template<> GOOGLE_PROTOBUF_ATTRIBUTE_NOINLINE ::NFMsg::ReqTeamEnterEctype* Arena
 template<> GOOGLE_PROTOBUF_ATTRIBUTE_NOINLINE ::NFMsg::AckTeamEnterEctype* Arena::CreateMaybeMessage< ::NFMsg::AckTeamEnterEctype >(Arena* arena) {
   return Arena::CreateInternal< ::NFMsg::AckTeamEnterEctype >(arena);
 }
-template<> GOOGLE_PROTOBUF_ATTRIBUTE_NOINLINE ::NFMsg::GridGuildBaseInfo* Arena::CreateMaybeMessage< ::NFMsg::GridGuildBaseInfo >(Arena* arena) {
-  return Arena::CreateInternal< ::NFMsg::GridGuildBaseInfo >(arena);
+template<> GOOGLE_PROTOBUF_ATTRIBUTE_NOINLINE ::NFMsg::GridClanBaseInfo* Arena::CreateMaybeMessage< ::NFMsg::GridClanBaseInfo >(Arena* arena) {
+  return Arena::CreateInternal< ::NFMsg::GridClanBaseInfo >(arena);
 }
 template<> GOOGLE_PROTOBUF_ATTRIBUTE_NOINLINE ::NFMsg::ReqBigMapGridInfo* Arena::CreateMaybeMessage< ::NFMsg::ReqBigMapGridInfo >(Arena* arena) {
   return Arena::CreateInternal< ::NFMsg::ReqBigMapGridInfo >(arena);

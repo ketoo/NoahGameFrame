@@ -72,14 +72,14 @@ void NFChatModule::OnClienChatProcess(const NFSOCK nSockIndex, const int nMsgID,
 		m_pNetModule->SendMsgPBToAllClient(NFMsg::EGMI_ACK_CHAT, xMsg);
 	}
 	break;
-	case NFMsg::ReqAckPlayerChat_EGameChatType::ReqAckPlayerChat_EGameChatType_EGCT_GUILD:
+	case NFMsg::ReqAckPlayerChat_EGameChatType::ReqAckPlayerChat_EGameChatType_EGCT_CLAN:
 	{
 		NFGUID xTargetID = NFINetModule::PBToNF(xMsg.target_id());
-		NFGUID xGuildID = m_pKernelModule->GetPropertyObject(nPlayerID, NFrame::Player::GuildID());
-		if (!xGuildID.IsNull() && xGuildID == xTargetID)
+		NFGUID xClanID = m_pKernelModule->GetPropertyObject(nPlayerID, NFrame::Player::Clan_ID());
+		if (!xClanID.IsNull() && xClanID == xTargetID)
 		{
 			//send to world server
-			m_pGameServerToWorldModule->TransmitToWorld(xGuildID.nData64, nMsgID, xMsg);
+			m_pGameServerToWorldModule->TransmitToWorld(xClanID.nData64, nMsgID, xMsg);
 		}
 	}
 	break;

@@ -2917,17 +2917,17 @@ class LIBPROTOC_EXPORT RoleOnlineNotify : public ::google::protobuf::Message /* 
   ::NFMsg::Ident* mutable_self();
   void set_allocated_self(::NFMsg::Ident* self);
 
-  // .NFMsg.Ident guild = 2;
-  bool has_guild() const;
-  void clear_guild();
-  static const int kGuildFieldNumber = 2;
+  // .NFMsg.Ident clan = 2;
+  bool has_clan() const;
+  void clear_clan();
+  static const int kClanFieldNumber = 2;
   private:
-  const ::NFMsg::Ident& _internal_guild() const;
+  const ::NFMsg::Ident& _internal_clan() const;
   public:
-  const ::NFMsg::Ident& guild() const;
-  ::NFMsg::Ident* release_guild();
-  ::NFMsg::Ident* mutable_guild();
-  void set_allocated_guild(::NFMsg::Ident* guild);
+  const ::NFMsg::Ident& clan() const;
+  ::NFMsg::Ident* release_clan();
+  ::NFMsg::Ident* mutable_clan();
+  void set_allocated_clan(::NFMsg::Ident* clan);
 
   // int32 game = 3;
   void clear_game();
@@ -2946,7 +2946,7 @@ class LIBPROTOC_EXPORT RoleOnlineNotify : public ::google::protobuf::Message /* 
 
   ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
   ::NFMsg::Ident* self_;
-  ::NFMsg::Ident* guild_;
+  ::NFMsg::Ident* clan_;
   ::google::protobuf::int32 game_;
   ::google::protobuf::int32 proxy_;
   mutable ::google::protobuf::internal::CachedSize _cached_size_;
@@ -3053,17 +3053,17 @@ class LIBPROTOC_EXPORT RoleOfflineNotify : public ::google::protobuf::Message /*
   ::NFMsg::Ident* mutable_self();
   void set_allocated_self(::NFMsg::Ident* self);
 
-  // .NFMsg.Ident guild = 2;
-  bool has_guild() const;
-  void clear_guild();
-  static const int kGuildFieldNumber = 2;
+  // .NFMsg.Ident clan = 2;
+  bool has_clan() const;
+  void clear_clan();
+  static const int kClanFieldNumber = 2;
   private:
-  const ::NFMsg::Ident& _internal_guild() const;
+  const ::NFMsg::Ident& _internal_clan() const;
   public:
-  const ::NFMsg::Ident& guild() const;
-  ::NFMsg::Ident* release_guild();
-  ::NFMsg::Ident* mutable_guild();
-  void set_allocated_guild(::NFMsg::Ident* guild);
+  const ::NFMsg::Ident& clan() const;
+  ::NFMsg::Ident* release_clan();
+  ::NFMsg::Ident* mutable_clan();
+  void set_allocated_clan(::NFMsg::Ident* clan);
 
   // int32 game = 3;
   void clear_game();
@@ -3082,7 +3082,7 @@ class LIBPROTOC_EXPORT RoleOfflineNotify : public ::google::protobuf::Message /*
 
   ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
   ::NFMsg::Ident* self_;
-  ::NFMsg::Ident* guild_;
+  ::NFMsg::Ident* clan_;
   ::google::protobuf::int32 game_;
   ::google::protobuf::int32 proxy_;
   mutable ::google::protobuf::internal::CachedSize _cached_size_;
@@ -5640,52 +5640,52 @@ inline void RoleOnlineNotify::set_allocated_self(::NFMsg::Ident* self) {
   // @@protoc_insertion_point(field_set_allocated:NFMsg.RoleOnlineNotify.self)
 }
 
-// .NFMsg.Ident guild = 2;
-inline bool RoleOnlineNotify::has_guild() const {
-  return this != internal_default_instance() && guild_ != NULL;
+// .NFMsg.Ident clan = 2;
+inline bool RoleOnlineNotify::has_clan() const {
+  return this != internal_default_instance() && clan_ != NULL;
 }
-inline const ::NFMsg::Ident& RoleOnlineNotify::_internal_guild() const {
-  return *guild_;
+inline const ::NFMsg::Ident& RoleOnlineNotify::_internal_clan() const {
+  return *clan_;
 }
-inline const ::NFMsg::Ident& RoleOnlineNotify::guild() const {
-  const ::NFMsg::Ident* p = guild_;
-  // @@protoc_insertion_point(field_get:NFMsg.RoleOnlineNotify.guild)
+inline const ::NFMsg::Ident& RoleOnlineNotify::clan() const {
+  const ::NFMsg::Ident* p = clan_;
+  // @@protoc_insertion_point(field_get:NFMsg.RoleOnlineNotify.clan)
   return p != NULL ? *p : *reinterpret_cast<const ::NFMsg::Ident*>(
       &::NFMsg::_Ident_default_instance_);
 }
-inline ::NFMsg::Ident* RoleOnlineNotify::release_guild() {
-  // @@protoc_insertion_point(field_release:NFMsg.RoleOnlineNotify.guild)
+inline ::NFMsg::Ident* RoleOnlineNotify::release_clan() {
+  // @@protoc_insertion_point(field_release:NFMsg.RoleOnlineNotify.clan)
   
-  ::NFMsg::Ident* temp = guild_;
-  guild_ = NULL;
+  ::NFMsg::Ident* temp = clan_;
+  clan_ = NULL;
   return temp;
 }
-inline ::NFMsg::Ident* RoleOnlineNotify::mutable_guild() {
+inline ::NFMsg::Ident* RoleOnlineNotify::mutable_clan() {
   
-  if (guild_ == NULL) {
+  if (clan_ == NULL) {
     auto* p = CreateMaybeMessage<::NFMsg::Ident>(GetArenaNoVirtual());
-    guild_ = p;
+    clan_ = p;
   }
-  // @@protoc_insertion_point(field_mutable:NFMsg.RoleOnlineNotify.guild)
-  return guild_;
+  // @@protoc_insertion_point(field_mutable:NFMsg.RoleOnlineNotify.clan)
+  return clan_;
 }
-inline void RoleOnlineNotify::set_allocated_guild(::NFMsg::Ident* guild) {
+inline void RoleOnlineNotify::set_allocated_clan(::NFMsg::Ident* clan) {
   ::google::protobuf::Arena* message_arena = GetArenaNoVirtual();
   if (message_arena == NULL) {
-    delete reinterpret_cast< ::google::protobuf::MessageLite*>(guild_);
+    delete reinterpret_cast< ::google::protobuf::MessageLite*>(clan_);
   }
-  if (guild) {
+  if (clan) {
     ::google::protobuf::Arena* submessage_arena = NULL;
     if (message_arena != submessage_arena) {
-      guild = ::google::protobuf::internal::GetOwnedMessage(
-          message_arena, guild, submessage_arena);
+      clan = ::google::protobuf::internal::GetOwnedMessage(
+          message_arena, clan, submessage_arena);
     }
     
   } else {
     
   }
-  guild_ = guild;
-  // @@protoc_insertion_point(field_set_allocated:NFMsg.RoleOnlineNotify.guild)
+  clan_ = clan;
+  // @@protoc_insertion_point(field_set_allocated:NFMsg.RoleOnlineNotify.clan)
 }
 
 // int32 game = 3;
@@ -5768,52 +5768,52 @@ inline void RoleOfflineNotify::set_allocated_self(::NFMsg::Ident* self) {
   // @@protoc_insertion_point(field_set_allocated:NFMsg.RoleOfflineNotify.self)
 }
 
-// .NFMsg.Ident guild = 2;
-inline bool RoleOfflineNotify::has_guild() const {
-  return this != internal_default_instance() && guild_ != NULL;
+// .NFMsg.Ident clan = 2;
+inline bool RoleOfflineNotify::has_clan() const {
+  return this != internal_default_instance() && clan_ != NULL;
 }
-inline const ::NFMsg::Ident& RoleOfflineNotify::_internal_guild() const {
-  return *guild_;
+inline const ::NFMsg::Ident& RoleOfflineNotify::_internal_clan() const {
+  return *clan_;
 }
-inline const ::NFMsg::Ident& RoleOfflineNotify::guild() const {
-  const ::NFMsg::Ident* p = guild_;
-  // @@protoc_insertion_point(field_get:NFMsg.RoleOfflineNotify.guild)
+inline const ::NFMsg::Ident& RoleOfflineNotify::clan() const {
+  const ::NFMsg::Ident* p = clan_;
+  // @@protoc_insertion_point(field_get:NFMsg.RoleOfflineNotify.clan)
   return p != NULL ? *p : *reinterpret_cast<const ::NFMsg::Ident*>(
       &::NFMsg::_Ident_default_instance_);
 }
-inline ::NFMsg::Ident* RoleOfflineNotify::release_guild() {
-  // @@protoc_insertion_point(field_release:NFMsg.RoleOfflineNotify.guild)
+inline ::NFMsg::Ident* RoleOfflineNotify::release_clan() {
+  // @@protoc_insertion_point(field_release:NFMsg.RoleOfflineNotify.clan)
   
-  ::NFMsg::Ident* temp = guild_;
-  guild_ = NULL;
+  ::NFMsg::Ident* temp = clan_;
+  clan_ = NULL;
   return temp;
 }
-inline ::NFMsg::Ident* RoleOfflineNotify::mutable_guild() {
+inline ::NFMsg::Ident* RoleOfflineNotify::mutable_clan() {
   
-  if (guild_ == NULL) {
+  if (clan_ == NULL) {
     auto* p = CreateMaybeMessage<::NFMsg::Ident>(GetArenaNoVirtual());
-    guild_ = p;
+    clan_ = p;
   }
-  // @@protoc_insertion_point(field_mutable:NFMsg.RoleOfflineNotify.guild)
-  return guild_;
+  // @@protoc_insertion_point(field_mutable:NFMsg.RoleOfflineNotify.clan)
+  return clan_;
 }
-inline void RoleOfflineNotify::set_allocated_guild(::NFMsg::Ident* guild) {
+inline void RoleOfflineNotify::set_allocated_clan(::NFMsg::Ident* clan) {
   ::google::protobuf::Arena* message_arena = GetArenaNoVirtual();
   if (message_arena == NULL) {
-    delete reinterpret_cast< ::google::protobuf::MessageLite*>(guild_);
+    delete reinterpret_cast< ::google::protobuf::MessageLite*>(clan_);
   }
-  if (guild) {
+  if (clan) {
     ::google::protobuf::Arena* submessage_arena = NULL;
     if (message_arena != submessage_arena) {
-      guild = ::google::protobuf::internal::GetOwnedMessage(
-          message_arena, guild, submessage_arena);
+      clan = ::google::protobuf::internal::GetOwnedMessage(
+          message_arena, clan, submessage_arena);
     }
     
   } else {
     
   }
-  guild_ = guild;
-  // @@protoc_insertion_point(field_set_allocated:NFMsg.RoleOfflineNotify.guild)
+  clan_ = clan;
+  // @@protoc_insertion_point(field_set_allocated:NFMsg.RoleOfflineNotify.clan)
 }
 
 // int32 game = 3;

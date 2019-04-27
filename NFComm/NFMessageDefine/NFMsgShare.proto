@@ -61,7 +61,7 @@ message ReqAckSynData//message sysn
 		EST_UNKNOW = 0;//
 		EST_GROUP = 1;	//层
 		EST_SCENE = 2;	//场景
-		EST_GUILD = 3;	//公会
+		EST_CLAN = 3;	//公会
 		EST_FRIEND = 4;	//好友
 	}
 	Ident 		syser = 1;
@@ -89,7 +89,7 @@ message ReqAckPlayerChat
 {
 	enum EGameChatType
 	{
-		EGCT_GUILD = 0;
+		EGCT_CLAN = 0;
 		EGCT_PRIVATE = 1;
 		EGCT_TEAM = 2;
 		EGCT_WORLD = 3;
@@ -268,66 +268,66 @@ message ReqAckJoinActivity
 
 
 ///////////////工会/////////////////////////////////////////////////////////////////////////////////////
-//EGMI_REQ_CREATE_GUILD                       = 300; // 申请创建公会 EGMI_ACK_CREATE_GUILD						= 301; // 创建公会结果
-message ReqAckCreateGuild
+//EGMI_REQ_CREATE_CLAN                       = 300; // 申请创建公会 EGMI_ACK_CREATE_CLAN						= 301; // 创建公会结果
+message ReqAckCreateClan
 {
-    Ident		guild_id = 1;
-    bytes 		guild_name = 2;
+    Ident		clan_id = 1;
+    bytes 		clan_name = 2;
 }
-//EGMI_REQ_SEARCH_GUILD                       = 308; // 申请搜索公会
-message ReqSearchGuild
+//EGMI_REQ_SEARCH_CLAN                       = 308; // 申请搜索公会
+message ReqSearchClan
 {
-    bytes 		guild_name = 1;
+    bytes 		clan_name = 1;
 }
-//EGMI_ACK_SEARCH_GUILD                       = 309; // 返回搜索公会
-message AckSearchGuild
+//EGMI_ACK_SEARCH_CLAN                       = 309; // 返回搜索公会
+message AckSearchClan
 {
-	message SearchGuildObject
+	message SearchClanObject
 	{
-		Ident		guild_ID 	= 1;
-		bytes		guild_name 	= 2;
-		bytes		guild_icon 	= 3;
-		int32		guild_member_count 	= 4;
-		int32		guild_member_max_count 	= 5;
-		int32		guild_honor 	= 6;
-		int32		guild_rank 	= 7;
+		Ident		clan_ID 	= 1;
+		bytes		clan_name 	= 2;
+		bytes		clan_icon 	= 3;
+		int32		clan_member_count 	= 4;
+		int32		clan_member_max_count 	= 5;
+		int32		clan_honor 	= 6;
+		int32		clan_rank 	= 7;
 	}
 	
-	repeated SearchGuildObject guild_list = 1;
+	repeated SearchClanObject clan_list = 1;
 }
-//EGMI_REQ_JOIN_GUILD                         = 302; // 申请加入公会 EGMI_ACK_JOIN_GUILD							= 303; // 加入公会结果
-message ReqAckJoinGuild
+//EGMI_REQ_JOIN_CLAN                         = 302; // 申请加入公会 EGMI_ACK_JOIN_CLAN							= 303; // 加入公会结果
+message ReqAckJoinClan
 {
-    Ident		guild_id = 1;
-    bytes		guild_name = 2;
+    Ident		clan_id = 1;
+    bytes		clan_name = 2;
 }
-//EGMI_ACK_LEAVE_GUILD						= 305; // 离开公会结果 
-message ReqAckLeaveGuild
+//EGMI_ACK_LEAVE_CLAN						= 305; // 离开公会结果 
+message ReqAckLeaveClan
 {
-    Ident		guild_id = 1;
-    bytes		guild_name = 2;
+    Ident		clan_id = 1;
+    bytes		clan_name = 2;
 }
 
 
-//操作成员 EGMI_REQ_OPR_GUILD                        	= 306; // 申请成员操作 EGMI_ACK_OPR_GUILD                        	= 307; // 成员操作结果
-message ReqAckOprGuildMember
+//操作成员 EGMI_REQ_OPR_CLAN                        	= 306; // 申请成员操作 EGMI_ACK_OPR_CLAN                        	= 307; // 成员操作结果
+message ReqAckOprClanMember
 {
-	enum EGGuildMemberOprType
+	enum EGClanMemberOprType
 	{
 		EGAT_DOWN = 0;
 		EGAT_UP = 1;
 		EGAT_KICK = 2;
 	}
-    Ident						guild_id = 1;
+    Ident						clan_id = 1;
     Ident						member_id = 2;//被操作的ID
-    EGGuildMemberOprType		type = 3;
+    EGClanMemberOprType		type = 3;
 }
 
 
-//EGMI_ReqEnterGuildEctype					= 315; // 
-message ReqEnterGuildEctype
+//EGMI_ReqEnterClanEctype					= 315; // 
+message ReqEnterClanEctype
 {	
-	Ident		guild_id				= 1;
+	Ident		clan_id				= 1;
 }
 
 //EGEC_REQ_SET_FIGHT_HERO						= 508;		 // 战斗武将
