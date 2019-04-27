@@ -21,6 +21,14 @@ Although they lack wisdom, but they very luckly which often double or even three
 	<Object Id="Desc_HP" Chinese="小瓶生命药水，增加英雄生命力！" English="" French="" Spanish="" />
 	<Object Id="Desc_MP" Chinese="小瓶魔法药水，增加英雄魔法力！" English="" French="" Spanish="" />
 	<Object Id="Desc_NoobPack" Chinese="新手升级礼包！" English="" French="" Spanish="" />
+	<Object Id="Desc_Task1" Chinese="打开背包，获取一个英雄" English="" French="" Spanish="" />
+	<Object Id="Desc_Task2" Chinese="切换英雄战斗教学" English="" French="" Spanish="" />
+	<Object Id="Desc_Task3" Chinese="探索资源，制作大本营（火堆）" English="" French="" Spanish="" />
+	<Object Id="Desc_Task4" Chinese="找一个合适的地方，使用火堆，扎营" English="" French="" Spanish="" />
+	<Object Id="Desc_Task5" Chinese="首夜生存模式,建立新炮塔" English="" French="" Spanish="" />
+	<Object Id="Desc_Task6" Chinese="PVP挑战对手" English="" French="" Spanish="" />
+	<Object Id="Desc_Task7" Chinese="抽宝箱获取新英雄和宝石" English="" French="" Spanish="" />
+	<Object Id="Desc_Task8" Chinese="宝石给英雄升星" English="" French="" Spanish="" />
 	<Object Id="Desc_WarPack" Chinese="战争奖励礼包！" English="" French="" Spanish="" />
 	<Object Id="Desc_anti_air_tower_1" Chinese="防空火箭(一级)" English="" French="" Spanish="" />
 	<Object Id="Desc_anti_air_tower_2" Chinese="防空火箭(二级)" English="" French="" Spanish="" />

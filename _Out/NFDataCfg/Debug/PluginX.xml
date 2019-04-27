@@ -70,7 +70,7 @@
 		<Plugin Name="NFActorPlugin" />
 		<Plugin Name="NFNoSqlPlugin" />
 		<Plugin Name="NFSecurityPlugin" />	
-		<Plugin Name="NFGuildPlugin" />	
+		<Plugin Name="NFClanPlugin" />	
 		
 		<Plugin Name="NFRankPlugin" />
 	</WorldServer>

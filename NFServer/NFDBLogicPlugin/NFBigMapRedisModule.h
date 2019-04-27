@@ -33,7 +33,7 @@
 #include "NFComm/NFPluginModule/NFIElementModule.h"
 #include "NFComm/NFPluginModule/NFIBigMapRedisModule.h"
 #include "NFComm/NFPluginModule/NFINoSqlModule.h"
-#include "NFComm/NFPluginModule/NFIGuildRedisModule.h"
+#include "NFComm/NFPluginModule/NFIClanRedisModule.h"
 
 class NFBigMapRedisModule : public NFIBigMapRedisModule
 {
@@ -54,7 +54,7 @@ public:
 	
 	virtual bool GetGridLeaveMsgInfo(const std::string& strGridID, std::vector<NFMsg::BigMapLeaveMsg>& xLeaveMsgList);
 	virtual bool GetGridWarHistoryInfo(const std::string& strGridID, std::vector<NFMsg::BigMapWarHistory>& xWarHistoryList);
-	virtual bool GetGridStationInfo(const std::string& strGridID, std::vector<NFMsg::GridGuildBaseInfo>& xWarHistoryList);
+	virtual bool GetGridStationInfo(const std::string& strGridID, std::vector<NFMsg::GridClanBaseInfo>& xWarHistoryList);
 
 	virtual bool SetGridBaseInfo(const std::string& strGridID, const NFMsg::BigMapGridBaseInfo& xBaseInfo);
 	
@@ -74,7 +74,7 @@ private:
 	NFINoSqlModule* m_pNoSqlModule;
 	NFIElementModule* m_pElementModule;
 	NFIClassModule* m_pLogicClassModule;
-	NFIGuildRedisModule* m_pGuildRedisModule;
+	NFIClanRedisModule* m_pClanRedisModule;
 };
 
 

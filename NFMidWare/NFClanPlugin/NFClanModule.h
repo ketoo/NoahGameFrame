@@ -24,25 +24,25 @@
 */
 
 
-#ifndef NF_GUILD_MODULE_H
-#define NF_GUILD_MODULE_H
+#ifndef NF_CLAN_MODULE_H
+#define NF_CLAN_MODULE_H
 
 #include "NFComm/NFCore/NFDateTime.hpp"
 #include "NFComm/NFCore/NFMapEx.hpp"
 #include "NFComm/NFPluginModule/NFIKernelModule.h"
-#include "NFComm/NFPluginModule/NFIGuildModule.h"
+#include "NFComm/NFPluginModule/NFIClanModule.h"
 #include "NFComm/NFPluginModule/NFILogModule.h"
 #include "NFComm/NFPluginModule/NFINetModule.h"
-#include "NFComm/NFPluginModule/NFIGuildRedisModule.h"
+#include "NFComm/NFPluginModule/NFIClanRedisModule.h"
 #include "NFComm/NFPluginModule/NFIPlayerRedisModule.h"
 #include "NFComm/NFPluginModule/NFIWorldNet_ServerModule.h"
 #include "NFComm/NFPluginModule/NFIGameServerNet_ServerModule.h"
 
-class NFGuildModule
-    : public NFIGuildModule
+class NFClanModule
+    : public NFIClanModule
 {
 public:
-    NFGuildModule(NFIPluginManager* p)
+    NFClanModule(NFIPluginManager* p)
     {
         pPluginManager = p;
     }
@@ -55,30 +55,30 @@ public:
 
 protected:
 
-    bool CreateGuild(const NFGUID& self, const NFGUID& xGuildID, const std::string& strGuildName);
-    bool JoinGuild(const NFGUID& self, const NFGUID& xGuildID);
-    bool LeaveGuild(const NFGUID& self, const NFGUID& xGuildID);
-    bool PromotionMember(const NFGUID& self, const NFGUID& xGuildID, const NFGUID& xMember);
-    bool DemotionMember(const NFGUID& self, const NFGUID& xGuildID, const NFGUID& xMember);
+    bool CreateClan(const NFGUID& self, const NFGUID& xClanID, const std::string& strClanName);
+    bool JoinClan(const NFGUID& self, const NFGUID& xClanID);
+    bool LeaveClan(const NFGUID& self, const NFGUID& xClanID);
+    bool PromotionMember(const NFGUID& self, const NFGUID& xClanID, const NFGUID& xMember);
+    bool DemotionMember(const NFGUID& self, const NFGUID& xClanID, const NFGUID& xMember);
 
-    bool MemberOnline(const NFGUID& self, const NFGUID& xGuild);
-    bool MemberOffline(const NFGUID& self, const NFGUID& xGuild);
+    bool MemberOnline(const NFGUID& self, const NFGUID& xClan);
+    bool MemberOffline(const NFGUID& self, const NFGUID& xClan);
 
 
-    void OnGuildOnlineProcess(const NFGUID& xGuildID);
-    void OnGuildOfflineProcess(const NFGUID& xGuildID);
+    void OnClanOnlineProcess(const NFGUID& xClanID);
+    void OnClanOfflineProcess(const NFGUID& xClanID);
 
-	bool AddMember(const NFGUID& xGuildID, const NFGUID& player, const MEMBER_TYPE type);
+	bool AddMember(const NFGUID& xClanID, const NFGUID& player, const MEMBER_TYPE type);
 
-    NFIGuildModule::MEMBER_TYPE CheckPower(const NFGUID& self, const NFGUID& xGuildID);
+	NFIClanModule::MEMBER_TYPE CheckPower(const NFGUID& self, const NFGUID& xClanID);
 
 protected:
 
-	void OnCreateGuildProcess(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
-	void OnJoinGuildProcess(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
-	void OnLeaveGuildProcess(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
-	void OnOprGuildMemberProcess(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
-	void OnSearchGuildProcess(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+	void OnCreateClanProcess(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+	void OnJoinClanProcess(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+	void OnLeaveClanProcess(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+	void OnOprClanMemberProcess(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+	void OnSearchClanProcess(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
 	void OnClientChatProcess(const NFSOCK nSockIndex, const int nMsgID, const char *msg, const uint32_t nLen);
 
 protected:
@@ -87,13 +87,13 @@ protected:
 	int OnPropertyCommonEvent(const NFGUID& self, const std::string& strPropertyName, const NFData& oldVar, const NFData& newVar);
 	int OnRecordCommonEvent(const NFGUID& self, const RECORD_EVENT_DATA& xEventData, const NFData& oldVar, const NFData& newVar);
 
-	void SendMessageToGameServer(const NFGUID& guild, const int nMessageID, google::protobuf::Message& msg);
+	void SendMessageToGameServer(const NFGUID& Clan, const int nMessageID, google::protobuf::Message& msg);
 
 protected:
 	NFILogModule* m_pLogModule;
 	NFINetModule* m_pNetModule;
 	NFIKernelModule* m_pKernelModule;
-	NFIGuildRedisModule* m_pGuildRedisModule;
+	NFIClanRedisModule* m_pClanRedisModule;
 	NFIPlayerRedisModule* m_pPlayerRedisModule;
 	NFIWorldNet_ServerModule* m_pWorldNet_ServerModule;
 };

@@ -281,10 +281,10 @@ int NFGameServerToWorldModule::OnObjectClassEvent(const NFGUID& self, const std:
 void NFGameServerToWorldModule::SendOnline(const NFGUID& self)
 {
 	NFMsg::RoleOnlineNotify xMsg;
-	const NFGUID& xGuild = m_pKernelModule->GetPropertyObject(self, NFrame::Player::GuildID());
+	const NFGUID& xClan = m_pKernelModule->GetPropertyObject(self, NFrame::Player::Clan_ID());
 
 	*xMsg.mutable_self() = NFINetModule::NFToPB(self);
-	*xMsg.mutable_guild() = NFINetModule::NFToPB(xGuild);
+	*xMsg.mutable_clan() = NFINetModule::NFToPB(xClan);
 	xMsg.set_game(pPluginManager->GetAppID());
 	xMsg.set_proxy(0);
 	m_pNetClientModule->SendToAllServerByPB(NF_SERVER_TYPES::NF_ST_WORLD, NFMsg::EGMI_ACK_ONLINE_NOTIFY, xMsg);
@@ -294,10 +294,10 @@ void NFGameServerToWorldModule::SendOffline(const NFGUID& self)
 {
 	NFMsg::RoleOfflineNotify xMsg;
 
-	const NFGUID& xGuild = m_pKernelModule->GetPropertyObject(self, NFrame::Player::GuildID());
+	const NFGUID& xClan = m_pKernelModule->GetPropertyObject(self, NFrame::Player::Clan_ID());
 
 	*xMsg.mutable_self() = NFINetModule::NFToPB(self);
-	*xMsg.mutable_guild() = NFINetModule::NFToPB(xGuild);
+	*xMsg.mutable_clan() = NFINetModule::NFToPB(xClan);
 	xMsg.set_game(pPluginManager->GetAppID());
 	xMsg.set_proxy(0);
 

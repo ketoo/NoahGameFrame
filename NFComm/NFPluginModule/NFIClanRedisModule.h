@@ -23,27 +23,20 @@
    limitations under the License.
 */
 
+#ifndef NFI_Clan_REDIS_MODULE_H
+#define NFI_Clan_REDIS_MODULE_H
 
-#ifndef NF_GUILD_PLUGIN_H
-#define NF_GUILD_PLUGIN_H
+#include "NFIModule.h"
 
-///
-#include "NFComm/NFPluginModule/NFIPlugin.h"
-#include "NFComm/NFPluginModule/NFIPluginManager.h"
-
-class NFGuildPlugin : public NFIPlugin
+class NFIClanRedisModule
+    : public NFIModule
 {
 public:
-	NFGuildPlugin(NFIPluginManager* p)
-    {
-        pPluginManager = p;
-    }
-    virtual const int GetPluginVersion();
+	virtual bool ExistClan(const std::string& strName) = 0;
+	virtual bool CreateClan(const NFGUID& self, const std::string& strClanName, const NFGUID& xCreater) = 0;
 
-    virtual const std::string GetPluginName();
 
-    virtual void Install();
 
-    virtual void Uninstall();
 };
+
 #endif

@@ -29,6 +29,106 @@ package nframe;
 		// Record
 
 	}
+	public class Clan
+	{
+		//Class name
+		public static final String ThisName = "Clan";
+		// IObject
+		public static final String ClassName = "ClassName";// string
+		public static final String ConfigID = "ConfigID";// string
+		public static final String GroupID = "GroupID";// int
+		public static final String ID = "ID";// string
+		public static final String Position = "Position";// vector3
+		public static final String SceneID = "SceneID";// int
+		// Property
+		public static final String Clan_AD = "Clan_AD";// string
+		public static final String Clan_CreateTime = "Clan_CreateTime";// int
+		public static final String Clan_Desc = "Clan_Desc";// string
+		public static final String Clan_Exp = "Clan_Exp";// int
+		public static final String Clan_Gold = "Clan_Gold";// int
+		public static final String Clan_Honor = "Clan_Honor";// int
+		public static final String Clan_Icon = "Clan_Icon";// string
+		public static final String Clan_Level = "Clan_Level";// int
+		public static final String Clan_MemeberCount = "Clan_MemeberCount";// int
+		public static final String Clan_MemeberMaxCount = "Clan_MemeberMaxCount";// int
+		public static final String Clan_Name = "Clan_Name";// string
+		public static final String Clan_PresidentID = "Clan_PresidentID";// object
+		public static final String Clan_PresidentName = "Clan_PresidentName";// string
+		public static final String Clan_Rank = "Clan_Rank";// int
+		public static final String Guild_EctypID = "Guild_EctypID";// int
+		// Record
+		public class Clan_AppyList
+		{
+			//Class name
+			public static final String ThisName = "Clan_AppyList";
+			public static final int GUID = 0;//object
+			public static final int Name = 1;//string
+			public static final int Level = 2;//int
+			public static final int VIP = 3;//int
+
+		}
+		public class Clan_Building
+		{
+			//Class name
+			public static final String ThisName = "Clan_Building";
+			public static final int GUID = 0;//object
+			public static final int Name = 1;//string
+			public static final int Level = 2;//int
+
+		}
+		public class Clan_MemberList
+		{
+			//Class name
+			public static final String ThisName = "Clan_MemberList";
+			public static final int GUID = 0;//object
+			public static final int Name = 1;//string
+			public static final int Level = 2;//int
+			public static final int Job = 3;//int
+			public static final int Donation = 4;//int
+			public static final int Receive = 5;//int
+			public static final int VIP = 6;//int
+			public static final int Online = 7;//int
+			public static final int Power = 8;//int
+			public static final int Title = 9;//int
+			public static final int GameID = 10;//int
+			public static final int JoinTime = 11;//int
+			public static final int Contribution = 12;//int
+			public static final int LastTime = 13;//string
+			public static final int AllContribution = 14;//int
+
+		}
+		public class Clan_WarList
+		{
+			//Class name
+			public static final String ThisName = "Clan_WarList";
+			public static final int GUID = 0;//object
+			public static final int Level = 1;//int
+
+		}
+
+	}
+	public class ClanConfig
+	{
+		//Class name
+		public static final String ThisName = "ClanConfig";
+		// IObject
+		public static final String ClassName = "ClassName";// string
+		public static final String ConfigID = "ConfigID";// string
+		public static final String GroupID = "GroupID";// int
+		public static final String ID = "ID";// string
+		public static final String Position = "Position";// vector3
+		public static final String SceneID = "SceneID";// int
+		// Property
+		public static final String DismissTime = "DismissTime";// int
+		public static final String GuildLevel = "GuildLevel";// int
+		public static final String Level = "Level";// int
+		public static final String MAXBuilding = "MAXBuilding";// int
+		public static final String MaxMember = "MaxMember";// int
+		public static final String Money = "Money";// int
+		public static final String VIP = "VIP";// int
+		// Record
+
+	}
 	public class ConsumeData
 	{
 		//Class name
@@ -166,142 +266,6 @@ package nframe;
 		public static final String SceneID = "SceneID";// int
 		// Property
 		public static final String Level = "Level";// int
-		// Record
-
-	}
-	public class Guild
-	{
-		//Class name
-		public static final String ThisName = "Guild";
-		// IObject
-		public static final String ClassName = "ClassName";// string
-		public static final String ConfigID = "ConfigID";// string
-		public static final String GroupID = "GroupID";// int
-		public static final String ID = "ID";// string
-		public static final String Position = "Position";// vector3
-		public static final String SceneID = "SceneID";// int
-		// Property
-		public static final String Guild_AD = "Guild_AD";// string
-		public static final String Guild_ContinueDay = "Guild_ContinueDay";// int
-		public static final String Guild_CreateTime = "Guild_CreateTime";// int
-		public static final String Guild_Desc = "Guild_Desc";// string
-		public static final String Guild_EctypID = "Guild_EctypID";// int
-		public static final String Guild_EctypIDGroup = "Guild_EctypIDGroup";// int
-		public static final String Guild_EctypServer = "Guild_EctypServer";// object
-		public static final String Guild_Exp = "Guild_Exp";// int
-		public static final String Guild_Gold = "Guild_Gold";// int
-		public static final String Guild_Honor = "Guild_Honor";// int
-		public static final String Guild_ID = "Guild_ID";// object
-		public static final String Guild_Icon = "Guild_Icon";// string
-		public static final String Guild_KingWarResource = "Guild_KingWarResource";// int
-		public static final String Guild_Level = "Guild_Level";// int
-		public static final String Guild_MemeberCount = "Guild_MemeberCount";// int
-		public static final String Guild_MemeberMaxCount = "Guild_MemeberMaxCount";// int
-		public static final String Guild_Name = "Guild_Name";// string
-		public static final String Guild_PresidentID = "Guild_PresidentID";// object
-		public static final String Guild_PresidentName = "Guild_PresidentName";// string
-		public static final String Guild_Rank = "Guild_Rank";// int
-		public static final String Guild_Status = "Guild_Status";// int
-		// Record
-		public class Guild_AppyList
-		{
-			//Class name
-			public static final String ThisName = "Guild_AppyList";
-			public static final int GUID = 0;//object
-			public static final int Name = 1;//string
-			public static final int Level = 2;//int
-			public static final int VIP = 3;//int
-
-		}
-		public class Guild_Building
-		{
-			//Class name
-			public static final String ThisName = "Guild_Building";
-			public static final int GUID = 0;//object
-			public static final int Name = 1;//string
-			public static final int Level = 2;//int
-
-		}
-		public class Guild_MemberList
-		{
-			//Class name
-			public static final String ThisName = "Guild_MemberList";
-			public static final int GUID = 0;//object
-			public static final int Name = 1;//string
-			public static final int Level = 2;//int
-			public static final int Job = 3;//int
-			public static final int Donation = 4;//int
-			public static final int Receive = 5;//int
-			public static final int VIP = 6;//int
-			public static final int Online = 7;//int
-			public static final int Power = 8;//int
-			public static final int Title = 9;//int
-			public static final int GameID = 10;//int
-			public static final int JoinTime = 11;//int
-			public static final int Contribution = 12;//int
-			public static final int LastTime = 13;//string
-			public static final int AllContribution = 14;//int
-
-		}
-		public class Guild_WarList
-		{
-			//Class name
-			public static final String ThisName = "Guild_WarList";
-			public static final int GUID = 0;//object
-			public static final int Level = 1;//int
-
-		}
-
-	}
-	public class GuildConfig
-	{
-		//Class name
-		public static final String ThisName = "GuildConfig";
-		// IObject
-		public static final String ClassName = "ClassName";// string
-		public static final String ConfigID = "ConfigID";// string
-		public static final String GroupID = "GroupID";// int
-		public static final String ID = "ID";// string
-		public static final String Position = "Position";// vector3
-		public static final String SceneID = "SceneID";// int
-		// Property
-		public static final String DismissTime = "DismissTime";// int
-		public static final String GuildLevel = "GuildLevel";// int
-		public static final String Level = "Level";// int
-		public static final String MaxMember = "MaxMember";// int
-		public static final String Money = "Money";// int
-		public static final String SkillNum = "SkillNum";// int
-		public static final String VIP = "VIP";// int
-		// Record
-
-	}
-	public class GuildJob
-	{
-		//Class name
-		public static final String ThisName = "GuildJob";
-		// IObject
-		public static final String ClassName = "ClassName";// string
-		public static final String ConfigID = "ConfigID";// string
-		public static final String GroupID = "GroupID";// int
-		public static final String ID = "ID";// string
-		public static final String Position = "Position";// vector3
-		public static final String SceneID = "SceneID";// int
-		// Property
-		public static final String AcceptApply = "AcceptApply";// object
-		public static final String ApplyDismiss = "ApplyDismiss";// object
-		public static final String Appoint = "Appoint";// object
-		public static final String Demise = "Demise";// object
-		public static final String DenyApply = "DenyApply";// object
-		public static final String EditAD = "EditAD";// object
-		public static final String Fire = "Fire";// object
-		public static final String Job = "Job";// int
-		public static final String JobCount = "JobCount";// object
-		public static final String Kickout = "Kickout";// object
-		public static final String Leave = "Leave";// object
-		public static final String LevelUp = "LevelUp";// object
-		public static final String PublishRecruit = "PublishRecruit";// object
-		public static final String SetRecruit = "SetRecruit";// object
-		public static final String StopDismiss = "StopDismiss";// object
 		// Record
 
 	}
@@ -470,6 +434,7 @@ package nframe;
 		public static final String DropProbability = "DropProbability";// int
 		public static final String EXP = "EXP";// int
 		public static final String EffectData = "EffectData";// string
+		public static final String FearOfFire = "FearOfFire";// int
 		public static final String Gold = "Gold";// int
 		public static final String HP = "HP";// int
 		public static final String HPREGEN = "HPREGEN";// int
@@ -562,6 +527,23 @@ package nframe;
 		public static final String BUFF_GATE = "BUFF_GATE";// int
 		public static final String CRITICAL = "CRITICAL";// int
 		public static final String Camp = "Camp";// int
+		public static final String Clan_AD = "Clan_AD";// string
+		public static final String Clan_ContinueDay = "Clan_ContinueDay";// int
+		public static final String Clan_CreateTime = "Clan_CreateTime";// int
+		public static final String Clan_Desc = "Clan_Desc";// string
+		public static final String Clan_EctypID = "Clan_EctypID";// int
+		public static final String Clan_Exp = "Clan_Exp";// int
+		public static final String Clan_Gold = "Clan_Gold";// int
+		public static final String Clan_Honor = "Clan_Honor";// int
+		public static final String Clan_ID = "Clan_ID";// object
+		public static final String Clan_Icon = "Clan_Icon";// string
+		public static final String Clan_Level = "Clan_Level";// int
+		public static final String Clan_MemeberMaxCount = "Clan_MemeberMaxCount";// int
+		public static final String Clan_Name = "Clan_Name";// string
+		public static final String Clan_PresidentID = "Clan_PresidentID";// object
+		public static final String Clan_PresidentName = "Clan_PresidentName";// string
+		public static final String Cland_MemeberCount = "Cland_MemeberCount";// int
+		public static final String Cland_Rank = "Cland_Rank";// int
 		public static final String ConnectKey = "ConnectKey";// string
 		public static final String Cup = "Cup";// int
 		public static final String DEF_DARK = "DEF_DARK";// int
@@ -587,27 +569,6 @@ package nframe;
 		public static final String GateID = "GateID";// int
 		public static final String Gold = "Gold";// int
 		public static final String GuildID = "GuildID";// object
-		public static final String Guild_AD = "Guild_AD";// string
-		public static final String Guild_ContinueDay = "Guild_ContinueDay";// int
-		public static final String Guild_CreateTime = "Guild_CreateTime";// int
-		public static final String Guild_Desc = "Guild_Desc";// string
-		public static final String Guild_EctypID = "Guild_EctypID";// int
-		public static final String Guild_EctypIDGroup = "Guild_EctypIDGroup";// int
-		public static final String Guild_EctypServer = "Guild_EctypServer";// object
-		public static final String Guild_Exp = "Guild_Exp";// int
-		public static final String Guild_Gold = "Guild_Gold";// int
-		public static final String Guild_Honor = "Guild_Honor";// int
-		public static final String Guild_ID = "Guild_ID";// object
-		public static final String Guild_Icon = "Guild_Icon";// string
-		public static final String Guild_KingWarResource = "Guild_KingWarResource";// int
-		public static final String Guild_Level = "Guild_Level";// int
-		public static final String Guild_MemeberCount = "Guild_MemeberCount";// int
-		public static final String Guild_MemeberMaxCount = "Guild_MemeberMaxCount";// int
-		public static final String Guild_Name = "Guild_Name";// string
-		public static final String Guild_PresidentID = "Guild_PresidentID";// object
-		public static final String Guild_PresidentName = "Guild_PresidentName";// string
-		public static final String Guild_Rank = "Guild_Rank";// int
-		public static final String Guild_Status = "Guild_Status";// int
 		public static final String HP = "HP";// int
 		public static final String HPREGEN = "HPREGEN";// int
 		public static final String Head = "Head";// string
@@ -746,6 +707,54 @@ package nframe;
 			public static final int StateEndTime = 4;//int
 
 		}
+		public class Clan_AppyList
+		{
+			//Class name
+			public static final String ThisName = "Clan_AppyList";
+			public static final int GUID = 0;//object
+			public static final int Name = 1;//string
+			public static final int Level = 2;//int
+			public static final int VIP = 3;//int
+
+		}
+		public class Clan_Building
+		{
+			//Class name
+			public static final String ThisName = "Clan_Building";
+			public static final int GUID = 0;//object
+			public static final int Name = 1;//string
+			public static final int Level = 2;//int
+
+		}
+		public class Clan_MemberList
+		{
+			//Class name
+			public static final String ThisName = "Clan_MemberList";
+			public static final int GUID = 0;//object
+			public static final int Name = 1;//string
+			public static final int Level = 2;//int
+			public static final int Job = 3;//int
+			public static final int Donation = 4;//int
+			public static final int Receive = 5;//int
+			public static final int VIP = 6;//int
+			public static final int Online = 7;//int
+			public static final int Power = 8;//int
+			public static final int Title = 9;//int
+			public static final int GameID = 10;//int
+			public static final int JoinTime = 11;//int
+			public static final int Contribution = 12;//int
+			public static final int LastTime = 13;//string
+			public static final int AllContribution = 14;//int
+
+		}
+		public class Clan_WarList
+		{
+			//Class name
+			public static final String ThisName = "Clan_WarList";
+			public static final int GUID = 0;//object
+			public static final int Level = 1;//int
+
+		}
 		public class CommValue
 		{
 			//Class name
@@ -799,54 +808,6 @@ package nframe;
 			public static final int ConfigID = 1;//string
 			public static final int ItemCount = 2;//int
 			public static final int Postion = 3;//vector3
-
-		}
-		public class Guild_AppyList
-		{
-			//Class name
-			public static final String ThisName = "Guild_AppyList";
-			public static final int GUID = 0;//object
-			public static final int Name = 1;//string
-			public static final int Level = 2;//int
-			public static final int VIP = 3;//int
-
-		}
-		public class Guild_Building
-		{
-			//Class name
-			public static final String ThisName = "Guild_Building";
-			public static final int GUID = 0;//object
-			public static final int Name = 1;//string
-			public static final int Level = 2;//int
-
-		}
-		public class Guild_MemberList
-		{
-			//Class name
-			public static final String ThisName = "Guild_MemberList";
-			public static final int GUID = 0;//object
-			public static final int Name = 1;//string
-			public static final int Level = 2;//int
-			public static final int Job = 3;//int
-			public static final int Donation = 4;//int
-			public static final int Receive = 5;//int
-			public static final int VIP = 6;//int
-			public static final int Online = 7;//int
-			public static final int Power = 8;//int
-			public static final int Title = 9;//int
-			public static final int GameID = 10;//int
-			public static final int JoinTime = 11;//int
-			public static final int Contribution = 12;//int
-			public static final int LastTime = 13;//string
-			public static final int AllContribution = 14;//int
-
-		}
-		public class Guild_WarList
-		{
-			//Class name
-			public static final String ThisName = "Guild_WarList";
-			public static final int GUID = 0;//object
-			public static final int Level = 1;//int
 
 		}
 		public class HeroValue
@@ -912,17 +873,8 @@ package nframe;
 			public static final String ThisName = "TaskList";
 			public static final int TaskID = 0;//string
 			public static final int TaskStatus = 1;//int
-			public static final int Process = 2;//int
-
-		}
-		public class TaskMonsterList
-		{
-			//Class name
-			public static final String ThisName = "TaskMonsterList";
-			public static final int MonsterID = 0;//string
-			public static final int CurrentKillCount = 1;//int
-			public static final int RequireKillCount = 2;//int
-			public static final int TaskID = 3;//string
+			public static final int ArgCnfID = 2;//string
+			public static final int ArgCount = 3;//int
 
 		}
 		public class TempItemList

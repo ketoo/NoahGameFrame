@@ -23,31 +23,31 @@
    limitations under the License.
 */
 
-#include "NFGuildRedisModule.h"
+#include "NFClanRedisModule.h"
 #include "NFComm/NFMessageDefine/NFProtocolDefine.hpp"
 #include "NFComm/NFPluginModule/NFINetModule.h"
 
-NFGuildRedisModule::NFGuildRedisModule(NFIPluginManager * p)
+NFClanRedisModule::NFClanRedisModule(NFIPluginManager * p)
 {
     pPluginManager = p;
 }
 
-bool NFGuildRedisModule::Init()
+bool NFClanRedisModule::Init()
 {
     return true;
 }
 
-bool NFGuildRedisModule::Shut()
+bool NFClanRedisModule::Shut()
 {
     return true;
 }
 
-bool NFGuildRedisModule::Execute()
+bool NFClanRedisModule::Execute()
 {
     return true;
 }
 
-bool NFGuildRedisModule::AfterInit()
+bool NFClanRedisModule::AfterInit()
 {
     m_pLogicClassModule = pPluginManager->FindModule<NFIClassModule>();
     m_pNoSqlModule = pPluginManager->FindModule<NFINoSqlModule>();
@@ -57,12 +57,12 @@ bool NFGuildRedisModule::AfterInit()
     return true;
 }
 
-bool NFGuildRedisModule::ExistGuild(const std::string & strName)
+bool NFClanRedisModule::ExistClan(const std::string & strName)
 {
 	return false;
 }
 
-bool NFGuildRedisModule::CreateGuild(const NFGUID & self, const std::string & strGuildName, const NFGUID & xCreater)
+bool NFClanRedisModule::CreateClan(const NFGUID & self, const std::string & strClanName, const NFGUID & xCreater)
 {
 	return false;
 }
