@@ -667,7 +667,7 @@ const ::google::protobuf::uint32 TableStruct::offsets[] GOOGLE_PROTOBUF_ATTRIBUT
   ~0u,  // no _oneof_case_
   ~0u,  // no _weak_field_map_
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NFMsg::RoleOnlineNotify, self_),
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NFMsg::RoleOnlineNotify, guild_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NFMsg::RoleOnlineNotify, clan_),
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NFMsg::RoleOnlineNotify, game_),
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NFMsg::RoleOnlineNotify, proxy_),
   ~0u,  // no _has_bits_
@@ -676,7 +676,7 @@ const ::google::protobuf::uint32 TableStruct::offsets[] GOOGLE_PROTOBUF_ATTRIBUT
   ~0u,  // no _oneof_case_
   ~0u,  // no _weak_field_map_
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NFMsg::RoleOfflineNotify, self_),
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NFMsg::RoleOfflineNotify, guild_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NFMsg::RoleOfflineNotify, clan_),
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NFMsg::RoleOfflineNotify, game_),
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NFMsg::RoleOfflineNotify, proxy_),
   ~0u,  // no _has_bits_
@@ -810,25 +810,25 @@ void AddDescriptorsImpl() {
       "e\022\017\n\007account\030\001 \001(\014\022\014\n\004name\030\002 \001(\014\022\017\n\007game"
       "_id\030\003 \001(\005\"@\n\016ReqRecoverRole\022\017\n\007account\030\001"
       " \001(\014\022\014\n\004name\030\002 \001(\014\022\017\n\007game_id\030\003 \001(\005\" \n\017S"
-      "erverHeartBeat\022\r\n\005count\030\001 \001(\005\"h\n\020RoleOnl"
-      "ineNotify\022\032\n\004self\030\001 \001(\0132\014.NFMsg.Ident\022\033\n"
-      "\005guild\030\002 \001(\0132\014.NFMsg.Ident\022\014\n\004game\030\003 \001(\005"
-      "\022\r\n\005proxy\030\004 \001(\005\"i\n\021RoleOfflineNotify\022\032\n\004"
-      "self\030\001 \001(\0132\014.NFMsg.Ident\022\033\n\005guild\030\002 \001(\0132"
-      "\014.NFMsg.Ident\022\014\n\004game\030\003 \001(\005\022\r\n\005proxy\030\004 \001"
-      "(\005\"~\n\014RoleDataPack\022\030\n\002id\030\001 \001(\0132\014.NFMsg.I"
-      "dent\022+\n\010property\030\002 \001(\0132\031.NFMsg.ObjectPro"
-      "pertyList\022\'\n\006record\030\004 \001(\0132\027.NFMsg.Object"
-      "RecordList*Z\n\014EServerState\022\r\n\tEST_CRASH\020"
-      "\000\022\016\n\nEST_NARMAL\020\001\022\014\n\010EST_BUSY\020\002\022\014\n\010EST_F"
-      "IRE\020\003\022\017\n\013EST_MAINTEN\020\004*J\n\nELoginMode\022\r\n\t"
-      "ELM_LOGIN\020\000\022\020\n\014ELM_REGISTER\020\001\022\033\n\027ELM_AUT"
-      "O_REGISTER_LOGIN\020\002*@\n\021ReqServerListType\022"
-      "\025\n\021RSLT_WORLD_SERVER\020\000\022\024\n\020RSLT_GAMES_ERV"
-      "ER\020\001b\006proto3"
+      "erverHeartBeat\022\r\n\005count\030\001 \001(\005\"g\n\020RoleOnl"
+      "ineNotify\022\032\n\004self\030\001 \001(\0132\014.NFMsg.Ident\022\032\n"
+      "\004clan\030\002 \001(\0132\014.NFMsg.Ident\022\014\n\004game\030\003 \001(\005\022"
+      "\r\n\005proxy\030\004 \001(\005\"h\n\021RoleOfflineNotify\022\032\n\004s"
+      "elf\030\001 \001(\0132\014.NFMsg.Ident\022\032\n\004clan\030\002 \001(\0132\014."
+      "NFMsg.Ident\022\014\n\004game\030\003 \001(\005\022\r\n\005proxy\030\004 \001(\005"
+      "\"~\n\014RoleDataPack\022\030\n\002id\030\001 \001(\0132\014.NFMsg.Ide"
+      "nt\022+\n\010property\030\002 \001(\0132\031.NFMsg.ObjectPrope"
+      "rtyList\022\'\n\006record\030\004 \001(\0132\027.NFMsg.ObjectRe"
+      "cordList*Z\n\014EServerState\022\r\n\tEST_CRASH\020\000\022"
+      "\016\n\nEST_NARMAL\020\001\022\014\n\010EST_BUSY\020\002\022\014\n\010EST_FIR"
+      "E\020\003\022\017\n\013EST_MAINTEN\020\004*J\n\nELoginMode\022\r\n\tEL"
+      "M_LOGIN\020\000\022\020\n\014ELM_REGISTER\020\001\022\033\n\027ELM_AUTO_"
+      "REGISTER_LOGIN\020\002*@\n\021ReqServerListType\022\025\n"
+      "\021RSLT_WORLD_SERVER\020\000\022\024\n\020RSLT_GAMES_ERVER"
+      "\020\001b\006proto3"
   };
   ::google::protobuf::DescriptorPool::InternalAddGeneratedFile(
-      descriptor, 2652);
+      descriptor, 2650);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "NFMsgPreGame.proto", &protobuf_RegisterTypes);
   ::protobuf_NFDefine_2eproto::AddDescriptors();
@@ -7581,7 +7581,7 @@ void ServerHeartBeat::InternalSwap(ServerHeartBeat* other) {
 void RoleOnlineNotify::InitAsDefaultInstance() {
   ::NFMsg::_RoleOnlineNotify_default_instance_._instance.get_mutable()->self_ = const_cast< ::NFMsg::Ident*>(
       ::NFMsg::Ident::internal_default_instance());
-  ::NFMsg::_RoleOnlineNotify_default_instance_._instance.get_mutable()->guild_ = const_cast< ::NFMsg::Ident*>(
+  ::NFMsg::_RoleOnlineNotify_default_instance_._instance.get_mutable()->clan_ = const_cast< ::NFMsg::Ident*>(
       ::NFMsg::Ident::internal_default_instance());
 }
 void RoleOnlineNotify::clear_self() {
@@ -7590,15 +7590,15 @@ void RoleOnlineNotify::clear_self() {
   }
   self_ = NULL;
 }
-void RoleOnlineNotify::clear_guild() {
-  if (GetArenaNoVirtual() == NULL && guild_ != NULL) {
-    delete guild_;
+void RoleOnlineNotify::clear_clan() {
+  if (GetArenaNoVirtual() == NULL && clan_ != NULL) {
+    delete clan_;
   }
-  guild_ = NULL;
+  clan_ = NULL;
 }
 #if !defined(_MSC_VER) || _MSC_VER >= 1900
 const int RoleOnlineNotify::kSelfFieldNumber;
-const int RoleOnlineNotify::kGuildFieldNumber;
+const int RoleOnlineNotify::kClanFieldNumber;
 const int RoleOnlineNotify::kGameFieldNumber;
 const int RoleOnlineNotify::kProxyFieldNumber;
 #endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
@@ -7619,10 +7619,10 @@ RoleOnlineNotify::RoleOnlineNotify(const RoleOnlineNotify& from)
   } else {
     self_ = NULL;
   }
-  if (from.has_guild()) {
-    guild_ = new ::NFMsg::Ident(*from.guild_);
+  if (from.has_clan()) {
+    clan_ = new ::NFMsg::Ident(*from.clan_);
   } else {
-    guild_ = NULL;
+    clan_ = NULL;
   }
   ::memcpy(&game_, &from.game_,
     static_cast<size_t>(reinterpret_cast<char*>(&proxy_) -
@@ -7643,7 +7643,7 @@ RoleOnlineNotify::~RoleOnlineNotify() {
 
 void RoleOnlineNotify::SharedDtor() {
   if (this != internal_default_instance()) delete self_;
-  if (this != internal_default_instance()) delete guild_;
+  if (this != internal_default_instance()) delete clan_;
 }
 
 void RoleOnlineNotify::SetCachedSize(int size) const {
@@ -7670,10 +7670,10 @@ void RoleOnlineNotify::Clear() {
     delete self_;
   }
   self_ = NULL;
-  if (GetArenaNoVirtual() == NULL && guild_ != NULL) {
-    delete guild_;
+  if (GetArenaNoVirtual() == NULL && clan_ != NULL) {
+    delete clan_;
   }
-  guild_ = NULL;
+  clan_ = NULL;
   ::memset(&game_, 0, static_cast<size_t>(
       reinterpret_cast<char*>(&proxy_) -
       reinterpret_cast<char*>(&game_)) + sizeof(proxy_));
@@ -7702,12 +7702,12 @@ bool RoleOnlineNotify::MergePartialFromCodedStream(
         break;
       }
 
-      // .NFMsg.Ident guild = 2;
+      // .NFMsg.Ident clan = 2;
       case 2: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
             static_cast< ::google::protobuf::uint8>(18u /* 18 & 0xFF */)) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadMessage(
-               input, mutable_guild()));
+               input, mutable_clan()));
         } else {
           goto handle_unusual;
         }
@@ -7774,10 +7774,10 @@ void RoleOnlineNotify::SerializeWithCachedSizes(
       1, this->_internal_self(), output);
   }
 
-  // .NFMsg.Ident guild = 2;
-  if (this->has_guild()) {
+  // .NFMsg.Ident clan = 2;
+  if (this->has_clan()) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      2, this->_internal_guild(), output);
+      2, this->_internal_clan(), output);
   }
 
   // int32 game = 3;
@@ -7811,11 +7811,11 @@ void RoleOnlineNotify::SerializeWithCachedSizes(
         1, this->_internal_self(), deterministic, target);
   }
 
-  // .NFMsg.Ident guild = 2;
-  if (this->has_guild()) {
+  // .NFMsg.Ident clan = 2;
+  if (this->has_clan()) {
     target = ::google::protobuf::internal::WireFormatLite::
       InternalWriteMessageToArray(
-        2, this->_internal_guild(), deterministic, target);
+        2, this->_internal_clan(), deterministic, target);
   }
 
   // int32 game = 3;
@@ -7852,11 +7852,11 @@ size_t RoleOnlineNotify::ByteSizeLong() const {
         *self_);
   }
 
-  // .NFMsg.Ident guild = 2;
-  if (this->has_guild()) {
+  // .NFMsg.Ident clan = 2;
+  if (this->has_clan()) {
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::MessageSize(
-        *guild_);
+        *clan_);
   }
 
   // int32 game = 3;
@@ -7903,8 +7903,8 @@ void RoleOnlineNotify::MergeFrom(const RoleOnlineNotify& from) {
   if (from.has_self()) {
     mutable_self()->::NFMsg::Ident::MergeFrom(from.self());
   }
-  if (from.has_guild()) {
-    mutable_guild()->::NFMsg::Ident::MergeFrom(from.guild());
+  if (from.has_clan()) {
+    mutable_clan()->::NFMsg::Ident::MergeFrom(from.clan());
   }
   if (from.game() != 0) {
     set_game(from.game());
@@ -7939,7 +7939,7 @@ void RoleOnlineNotify::Swap(RoleOnlineNotify* other) {
 void RoleOnlineNotify::InternalSwap(RoleOnlineNotify* other) {
   using std::swap;
   swap(self_, other->self_);
-  swap(guild_, other->guild_);
+  swap(clan_, other->clan_);
   swap(game_, other->game_);
   swap(proxy_, other->proxy_);
   _internal_metadata_.Swap(&other->_internal_metadata_);
@@ -7956,7 +7956,7 @@ void RoleOnlineNotify::InternalSwap(RoleOnlineNotify* other) {
 void RoleOfflineNotify::InitAsDefaultInstance() {
   ::NFMsg::_RoleOfflineNotify_default_instance_._instance.get_mutable()->self_ = const_cast< ::NFMsg::Ident*>(
       ::NFMsg::Ident::internal_default_instance());
-  ::NFMsg::_RoleOfflineNotify_default_instance_._instance.get_mutable()->guild_ = const_cast< ::NFMsg::Ident*>(
+  ::NFMsg::_RoleOfflineNotify_default_instance_._instance.get_mutable()->clan_ = const_cast< ::NFMsg::Ident*>(
       ::NFMsg::Ident::internal_default_instance());
 }
 void RoleOfflineNotify::clear_self() {
@@ -7965,15 +7965,15 @@ void RoleOfflineNotify::clear_self() {
   }
   self_ = NULL;
 }
-void RoleOfflineNotify::clear_guild() {
-  if (GetArenaNoVirtual() == NULL && guild_ != NULL) {
-    delete guild_;
+void RoleOfflineNotify::clear_clan() {
+  if (GetArenaNoVirtual() == NULL && clan_ != NULL) {
+    delete clan_;
   }
-  guild_ = NULL;
+  clan_ = NULL;
 }
 #if !defined(_MSC_VER) || _MSC_VER >= 1900
 const int RoleOfflineNotify::kSelfFieldNumber;
-const int RoleOfflineNotify::kGuildFieldNumber;
+const int RoleOfflineNotify::kClanFieldNumber;
 const int RoleOfflineNotify::kGameFieldNumber;
 const int RoleOfflineNotify::kProxyFieldNumber;
 #endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
@@ -7994,10 +7994,10 @@ RoleOfflineNotify::RoleOfflineNotify(const RoleOfflineNotify& from)
   } else {
     self_ = NULL;
   }
-  if (from.has_guild()) {
-    guild_ = new ::NFMsg::Ident(*from.guild_);
+  if (from.has_clan()) {
+    clan_ = new ::NFMsg::Ident(*from.clan_);
   } else {
-    guild_ = NULL;
+    clan_ = NULL;
   }
   ::memcpy(&game_, &from.game_,
     static_cast<size_t>(reinterpret_cast<char*>(&proxy_) -
@@ -8018,7 +8018,7 @@ RoleOfflineNotify::~RoleOfflineNotify() {
 
 void RoleOfflineNotify::SharedDtor() {
   if (this != internal_default_instance()) delete self_;
-  if (this != internal_default_instance()) delete guild_;
+  if (this != internal_default_instance()) delete clan_;
 }
 
 void RoleOfflineNotify::SetCachedSize(int size) const {
@@ -8045,10 +8045,10 @@ void RoleOfflineNotify::Clear() {
     delete self_;
   }
   self_ = NULL;
-  if (GetArenaNoVirtual() == NULL && guild_ != NULL) {
-    delete guild_;
+  if (GetArenaNoVirtual() == NULL && clan_ != NULL) {
+    delete clan_;
   }
-  guild_ = NULL;
+  clan_ = NULL;
   ::memset(&game_, 0, static_cast<size_t>(
       reinterpret_cast<char*>(&proxy_) -
       reinterpret_cast<char*>(&game_)) + sizeof(proxy_));
@@ -8077,12 +8077,12 @@ bool RoleOfflineNotify::MergePartialFromCodedStream(
         break;
       }
 
-      // .NFMsg.Ident guild = 2;
+      // .NFMsg.Ident clan = 2;
       case 2: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
             static_cast< ::google::protobuf::uint8>(18u /* 18 & 0xFF */)) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadMessage(
-               input, mutable_guild()));
+               input, mutable_clan()));
         } else {
           goto handle_unusual;
         }
@@ -8149,10 +8149,10 @@ void RoleOfflineNotify::SerializeWithCachedSizes(
       1, this->_internal_self(), output);
   }
 
-  // .NFMsg.Ident guild = 2;
-  if (this->has_guild()) {
+  // .NFMsg.Ident clan = 2;
+  if (this->has_clan()) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      2, this->_internal_guild(), output);
+      2, this->_internal_clan(), output);
   }
 
   // int32 game = 3;
@@ -8186,11 +8186,11 @@ void RoleOfflineNotify::SerializeWithCachedSizes(
         1, this->_internal_self(), deterministic, target);
   }
 
-  // .NFMsg.Ident guild = 2;
-  if (this->has_guild()) {
+  // .NFMsg.Ident clan = 2;
+  if (this->has_clan()) {
     target = ::google::protobuf::internal::WireFormatLite::
       InternalWriteMessageToArray(
-        2, this->_internal_guild(), deterministic, target);
+        2, this->_internal_clan(), deterministic, target);
   }
 
   // int32 game = 3;
@@ -8227,11 +8227,11 @@ size_t RoleOfflineNotify::ByteSizeLong() const {
         *self_);
   }
 
-  // .NFMsg.Ident guild = 2;
-  if (this->has_guild()) {
+  // .NFMsg.Ident clan = 2;
+  if (this->has_clan()) {
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::MessageSize(
-        *guild_);
+        *clan_);
   }
 
   // int32 game = 3;
@@ -8278,8 +8278,8 @@ void RoleOfflineNotify::MergeFrom(const RoleOfflineNotify& from) {
   if (from.has_self()) {
     mutable_self()->::NFMsg::Ident::MergeFrom(from.self());
   }
-  if (from.has_guild()) {
-    mutable_guild()->::NFMsg::Ident::MergeFrom(from.guild());
+  if (from.has_clan()) {
+    mutable_clan()->::NFMsg::Ident::MergeFrom(from.clan());
   }
   if (from.game() != 0) {
     set_game(from.game());
@@ -8314,7 +8314,7 @@ void RoleOfflineNotify::Swap(RoleOfflineNotify* other) {
 void RoleOfflineNotify::InternalSwap(RoleOfflineNotify* other) {
   using std::swap;
   swap(self_, other->self_);
-  swap(guild_, other->guild_);
+  swap(clan_, other->clan_);
   swap(game_, other->game_);
   swap(proxy_, other->proxy_);
   _internal_metadata_.Swap(&other->_internal_metadata_);

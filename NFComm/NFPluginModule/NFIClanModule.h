@@ -23,19 +23,22 @@
    limitations under the License.
 */
 
-#ifndef NFI_GUILD_REDIS_MODULE_H
-#define NFI_GUILD_REDIS_MODULE_H
+#ifndef NFI_CLAN_MODULE_H
+#define NFI_CLAN_MODULE_H
 
 #include "NFIModule.h"
 
-class NFIGuildRedisModule
+class NFIClanModule
     : public NFIModule
 {
 public:
-	virtual bool ExistGuild(const std::string& strName) = 0;
-	virtual bool CreateGuild(const NFGUID& self, const std::string& strGuildName, const NFGUID& xCreater) = 0;
-
-
+    enum MEMBER_TYPE
+    {
+		MT_MEMBER,
+		MT_ELDER,
+		MT_VP,
+		MT_PRESIDENT,
+    };
 
 };
 

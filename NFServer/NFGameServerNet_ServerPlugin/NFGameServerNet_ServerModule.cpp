@@ -78,11 +78,11 @@ bool NFGameServerNet_ServerModule::AfterInit()
 	//EGMI_ACK_RECORD_CLEAR = 228,
 	//EGMI_ACK_RECORD_SORT = 229,
 
-	m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_REQ_CREATE_GUILD, this, &NFGameServerNet_ServerModule::OnGuildTransWorld);
-	m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_REQ_JOIN_GUILD, this, &NFGameServerNet_ServerModule::OnGuildTransWorld);
-	m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_REQ_LEAVE_GUILD, this, &NFGameServerNet_ServerModule::OnGuildTransWorld);
-	m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_REQ_OPR_GUILD, this, &NFGameServerNet_ServerModule::OnGuildTransWorld);
-	m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_REQ_SEARCH_GUILD, this, &NFGameServerNet_ServerModule::OnGuildTransWorld);
+	m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_REQ_CREATE_CLAN, this, &NFGameServerNet_ServerModule::OnClanTransWorld);
+	m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_REQ_JOIN_CLAN, this, &NFGameServerNet_ServerModule::OnClanTransWorld);
+	m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_REQ_LEAVE_CLAN, this, &NFGameServerNet_ServerModule::OnClanTransWorld);
+	m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_REQ_OPR_CLAN, this, &NFGameServerNet_ServerModule::OnClanTransWorld);
+	m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_REQ_SEARCH_CLAN, this, &NFGameServerNet_ServerModule::OnClanTransWorld);
 
 	m_pNetModule->AddReceiveCallBack(NFMsg::EGEC_REQ_CREATE_CHATGROUP, this, &NFGameServerNet_ServerModule::OnTransWorld);
 	m_pNetModule->AddReceiveCallBack(NFMsg::EGEC_REQ_JOIN_CHATGROUP, this, &NFGameServerNet_ServerModule::OnTransWorld);
@@ -2183,19 +2183,19 @@ void NFGameServerNet_ServerModule::OnTransWorld(const NFSOCK nSockIndex, const i
 	m_pNetClientModule->SendBySuitWithOutHead(NF_SERVER_TYPES::NF_ST_WORLD, nHasKey, nMsgID, std::string(msg, nLen));
 }
 
-void NFGameServerNet_ServerModule::OnGuildTransWorld(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
+void NFGameServerNet_ServerModule::OnClanTransWorld(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
 {
 	switch (nMsgID)
 	{
-		case NFMsg::EGMI_REQ_CREATE_GUILD:
-		case NFMsg::EGMI_REQ_JOIN_GUILD:
+		case NFMsg::EGMI_REQ_CREATE_CLAN:
+		case NFMsg::EGMI_REQ_JOIN_CLAN:
 		{
 			std::string strMsg;
 			NFGUID nPlayer;
 			if (NFINetModule::ReceivePB(nMsgID, msg, nLen, strMsg, nPlayer) && !nPlayer.IsNull())
 			{
-				NFGUID xGuildID = m_pKernelModule->GetPropertyObject(nPlayer, NFrame::Player::GuildID());
-				if (xGuildID.IsNull())
+				NFGUID xClanID = m_pKernelModule->GetPropertyObject(nPlayer, NFrame::Player::Clan_ID());
+				if (xClanID.IsNull())
 				{
 					int nHashKey = nPlayer.nHead64;
 					m_pNetClientModule->SendBySuitWithOutHead(NF_SERVER_TYPES::NF_ST_WORLD, nHashKey, nMsgID, std::string(msg, nLen));
@@ -2203,13 +2203,13 @@ void NFGameServerNet_ServerModule::OnGuildTransWorld(const NFSOCK nSockIndex, co
 			}
 		}
 			break;
-		case NFMsg::EGMI_REQ_LEAVE_GUILD:
-		case NFMsg::EGMI_REQ_OPR_GUILD:
+		case NFMsg::EGMI_REQ_LEAVE_CLAN:
+		case NFMsg::EGMI_REQ_OPR_CLAN:
 		{
 
 		}
 			break;
-		case NFMsg::EGMI_REQ_SEARCH_GUILD:
+		case NFMsg::EGMI_REQ_SEARCH_CLAN:
 		{
 
 		}

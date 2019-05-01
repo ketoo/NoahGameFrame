@@ -24,12 +24,12 @@
 */
 
 
-#ifndef NFI_WORLD_GUILD_ECTYP_MODULE_H
-#define NFI_WORLD_GUILD_ECTYP_MODULE_H
+#ifndef NFI_WORLD_Clan_ECTYP_MODULE_H
+#define NFI_WORLD_Clan_ECTYP_MODULE_H
 
 #include "NFIModule.h"
 
-class NFIWorldGuildEctypeModule
+class NFIWorldClanEctypeModule
     : public NFIModule
 {
 public:

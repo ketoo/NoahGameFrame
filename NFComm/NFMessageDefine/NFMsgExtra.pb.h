@@ -41,7 +41,7 @@ namespace protobuf_NFMsgExtra_2eproto {
 struct LIBPROTOC_EXPORT TableStruct {
   static const ::google::protobuf::internal::ParseTableField entries[];
   static const ::google::protobuf::internal::AuxillaryParseTableField aux[];
-  static const ::google::protobuf::internal::ParseTable schema[28];
+  static const ::google::protobuf::internal::ParseTable schema[29];
   static const ::google::protobuf::internal::FieldMetadata field_metadata[];
   static const ::google::protobuf::internal::SerializationTable serialization_table[];
   static const ::google::protobuf::uint32 offsets[];
@@ -85,9 +85,12 @@ LIBPROTOC_EXPORT extern BigMapLeaveMsgDefaultTypeInternal _BigMapLeaveMsg_defaul
 class BigMapWarHistory;
 class BigMapWarHistoryDefaultTypeInternal;
 LIBPROTOC_EXPORT extern BigMapWarHistoryDefaultTypeInternal _BigMapWarHistory_default_instance_;
-class GridGuildBaseInfo;
-class GridGuildBaseInfoDefaultTypeInternal;
-LIBPROTOC_EXPORT extern GridGuildBaseInfoDefaultTypeInternal _GridGuildBaseInfo_default_instance_;
+class GridClanBaseInfo;
+class GridClanBaseInfoDefaultTypeInternal;
+LIBPROTOC_EXPORT extern GridClanBaseInfoDefaultTypeInternal _GridClanBaseInfo_default_instance_;
+class ReqAIOnwer;
+class ReqAIOnwerDefaultTypeInternal;
+LIBPROTOC_EXPORT extern ReqAIOnwerDefaultTypeInternal _ReqAIOnwer_default_instance_;
 class ReqAckCreateTeam;
 class ReqAckCreateTeamDefaultTypeInternal;
 LIBPROTOC_EXPORT extern ReqAckCreateTeamDefaultTypeInternal _ReqAckCreateTeam_default_instance_;
@@ -148,7 +151,8 @@ template<> LIBPROTOC_EXPORT ::NFMsg::BigMapGridBaseInfo* Arena::CreateMaybeMessa
 template<> LIBPROTOC_EXPORT ::NFMsg::BigMapGridDetailInfo* Arena::CreateMaybeMessage<::NFMsg::BigMapGridDetailInfo>(Arena*);
 template<> LIBPROTOC_EXPORT ::NFMsg::BigMapLeaveMsg* Arena::CreateMaybeMessage<::NFMsg::BigMapLeaveMsg>(Arena*);
 template<> LIBPROTOC_EXPORT ::NFMsg::BigMapWarHistory* Arena::CreateMaybeMessage<::NFMsg::BigMapWarHistory>(Arena*);
-template<> LIBPROTOC_EXPORT ::NFMsg::GridGuildBaseInfo* Arena::CreateMaybeMessage<::NFMsg::GridGuildBaseInfo>(Arena*);
+template<> LIBPROTOC_EXPORT ::NFMsg::GridClanBaseInfo* Arena::CreateMaybeMessage<::NFMsg::GridClanBaseInfo>(Arena*);
+template<> LIBPROTOC_EXPORT ::NFMsg::ReqAIOnwer* Arena::CreateMaybeMessage<::NFMsg::ReqAIOnwer>(Arena*);
 template<> LIBPROTOC_EXPORT ::NFMsg::ReqAckCreateTeam* Arena::CreateMaybeMessage<::NFMsg::ReqAckCreateTeam>(Arena*);
 template<> LIBPROTOC_EXPORT ::NFMsg::ReqAckInviteTeam* Arena::CreateMaybeMessage<::NFMsg::ReqAckInviteTeam>(Arena*);
 template<> LIBPROTOC_EXPORT ::NFMsg::ReqAckJoinTeam* Arena::CreateMaybeMessage<::NFMsg::ReqAckJoinTeam>(Arena*);
@@ -198,6 +202,115 @@ inline bool ReqAckOprTeamMember_EGTeamMemberOprType_Parse(
 }
 // ===================================================================
 
+class LIBPROTOC_EXPORT ReqAIOnwer : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:NFMsg.ReqAIOnwer) */ {
+ public:
+  ReqAIOnwer();
+  virtual ~ReqAIOnwer();
+
+  ReqAIOnwer(const ReqAIOnwer& from);
+
+  inline ReqAIOnwer& operator=(const ReqAIOnwer& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  #if LANG_CXX11
+  ReqAIOnwer(ReqAIOnwer&& from) noexcept
+    : ReqAIOnwer() {
+    *this = ::std::move(from);
+  }
+
+  inline ReqAIOnwer& operator=(ReqAIOnwer&& from) noexcept {
+    if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
+      if (this != &from) InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+  #endif
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const ReqAIOnwer& default_instance();
+
+  static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
+  static inline const ReqAIOnwer* internal_default_instance() {
+    return reinterpret_cast<const ReqAIOnwer*>(
+               &_ReqAIOnwer_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages =
+    0;
+
+  void Swap(ReqAIOnwer* other);
+  friend void swap(ReqAIOnwer& a, ReqAIOnwer& b) {
+    a.Swap(&b);
+  }
+
+  // implements Message ----------------------------------------------
+
+  inline ReqAIOnwer* New() const final {
+    return CreateMaybeMessage<ReqAIOnwer>(NULL);
+  }
+
+  ReqAIOnwer* New(::google::protobuf::Arena* arena) const final {
+    return CreateMaybeMessage<ReqAIOnwer>(arena);
+  }
+  void CopyFrom(const ::google::protobuf::Message& from) final;
+  void MergeFrom(const ::google::protobuf::Message& from) final;
+  void CopyFrom(const ReqAIOnwer& from);
+  void MergeFrom(const ReqAIOnwer& from);
+  void Clear() final;
+  bool IsInitialized() const final;
+
+  size_t ByteSizeLong() const final;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input) final;
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const final;
+  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
+      bool deterministic, ::google::protobuf::uint8* target) const final;
+  int GetCachedSize() const final { return _cached_size_.Get(); }
+
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const final;
+  void InternalSwap(ReqAIOnwer* other);
+  private:
+  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
+    return NULL;
+  }
+  inline void* MaybeArenaPtr() const {
+    return NULL;
+  }
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const final;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // .NFMsg.Ident ai_id = 1;
+  bool has_ai_id() const;
+  void clear_ai_id();
+  static const int kAiIdFieldNumber = 1;
+  private:
+  const ::NFMsg::Ident& _internal_ai_id() const;
+  public:
+  const ::NFMsg::Ident& ai_id() const;
+  ::NFMsg::Ident* release_ai_id();
+  ::NFMsg::Ident* mutable_ai_id();
+  void set_allocated_ai_id(::NFMsg::Ident* ai_id);
+
+  // @@protoc_insertion_point(class_scope:NFMsg.ReqAIOnwer)
+ private:
+
+  ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
+  ::NFMsg::Ident* ai_id_;
+  mutable ::google::protobuf::internal::CachedSize _cached_size_;
+  friend struct ::protobuf_NFMsgExtra_2eproto::TableStruct;
+};
+// -------------------------------------------------------------------
+
 class LIBPROTOC_EXPORT TeamInfo : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:NFMsg.TeamInfo) */ {
  public:
   TeamInfo();
@@ -233,7 +346,7 @@ class LIBPROTOC_EXPORT TeamInfo : public ::google::protobuf::Message /* @@protoc
                &_TeamInfo_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    0;
+    1;
 
   void Swap(TeamInfo* other);
   friend void swap(TeamInfo& a, TeamInfo& b) {
@@ -368,7 +481,7 @@ class LIBPROTOC_EXPORT TeammemberInfo : public ::google::protobuf::Message /* @@
                &_TeammemberInfo_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    1;
+    2;
 
   void Swap(TeammemberInfo* other);
   friend void swap(TeammemberInfo& a, TeammemberInfo& b) {
@@ -521,7 +634,7 @@ class LIBPROTOC_EXPORT ReqAckCreateTeam : public ::google::protobuf::Message /* 
                &_ReqAckCreateTeam_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    2;
+    3;
 
   void Swap(ReqAckCreateTeam* other);
   friend void swap(ReqAckCreateTeam& a, ReqAckCreateTeam& b) {
@@ -643,7 +756,7 @@ class LIBPROTOC_EXPORT ReqAckJoinTeam : public ::google::protobuf::Message /* @@
                &_ReqAckJoinTeam_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    3;
+    4;
 
   void Swap(ReqAckJoinTeam* other);
   friend void swap(ReqAckJoinTeam& a, ReqAckJoinTeam& b) {
@@ -765,7 +878,7 @@ class LIBPROTOC_EXPORT ReqAckLeaveTeam : public ::google::protobuf::Message /* @
                &_ReqAckLeaveTeam_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    4;
+    5;
 
   void Swap(ReqAckLeaveTeam* other);
   friend void swap(ReqAckLeaveTeam& a, ReqAckLeaveTeam& b) {
@@ -887,7 +1000,7 @@ class LIBPROTOC_EXPORT ReqAckOprTeamMember : public ::google::protobuf::Message 
                &_ReqAckOprTeamMember_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    5;
+    6;
 
   void Swap(ReqAckOprTeamMember* other);
   friend void swap(ReqAckOprTeamMember& a, ReqAckOprTeamMember& b) {
@@ -1069,7 +1182,7 @@ class LIBPROTOC_EXPORT ReqAckInviteTeam : public ::google::protobuf::Message /* 
                &_ReqAckInviteTeam_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    6;
+    7;
 
   void Swap(ReqAckInviteTeam* other);
   friend void swap(ReqAckInviteTeam& a, ReqAckInviteTeam& b) {
@@ -1204,7 +1317,7 @@ class LIBPROTOC_EXPORT ReqTeamEnterEctype : public ::google::protobuf::Message /
                &_ReqTeamEnterEctype_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    7;
+    8;
 
   void Swap(ReqTeamEnterEctype* other);
   friend void swap(ReqTeamEnterEctype& a, ReqTeamEnterEctype& b) {
@@ -1354,7 +1467,7 @@ class LIBPROTOC_EXPORT AckTeamEnterEctype : public ::google::protobuf::Message /
                &_AckTeamEnterEctype_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    8;
+    9;
 
   void Swap(AckTeamEnterEctype* other);
   friend void swap(AckTeamEnterEctype& a, AckTeamEnterEctype& b) {
@@ -1462,24 +1575,24 @@ class LIBPROTOC_EXPORT AckTeamEnterEctype : public ::google::protobuf::Message /
 };
 // -------------------------------------------------------------------
 
-class LIBPROTOC_EXPORT GridGuildBaseInfo : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:NFMsg.GridGuildBaseInfo) */ {
+class LIBPROTOC_EXPORT GridClanBaseInfo : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:NFMsg.GridClanBaseInfo) */ {
  public:
-  GridGuildBaseInfo();
-  virtual ~GridGuildBaseInfo();
+  GridClanBaseInfo();
+  virtual ~GridClanBaseInfo();
 
-  GridGuildBaseInfo(const GridGuildBaseInfo& from);
+  GridClanBaseInfo(const GridClanBaseInfo& from);
 
-  inline GridGuildBaseInfo& operator=(const GridGuildBaseInfo& from) {
+  inline GridClanBaseInfo& operator=(const GridClanBaseInfo& from) {
     CopyFrom(from);
     return *this;
   }
   #if LANG_CXX11
-  GridGuildBaseInfo(GridGuildBaseInfo&& from) noexcept
-    : GridGuildBaseInfo() {
+  GridClanBaseInfo(GridClanBaseInfo&& from) noexcept
+    : GridClanBaseInfo() {
     *this = ::std::move(from);
   }
 
-  inline GridGuildBaseInfo& operator=(GridGuildBaseInfo&& from) noexcept {
+  inline GridClanBaseInfo& operator=(GridClanBaseInfo&& from) noexcept {
     if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
       if (this != &from) InternalSwap(&from);
     } else {
@@ -1489,34 +1602,34 @@ class LIBPROTOC_EXPORT GridGuildBaseInfo : public ::google::protobuf::Message /*
   }
   #endif
   static const ::google::protobuf::Descriptor* descriptor();
-  static const GridGuildBaseInfo& default_instance();
+  static const GridClanBaseInfo& default_instance();
 
   static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
-  static inline const GridGuildBaseInfo* internal_default_instance() {
-    return reinterpret_cast<const GridGuildBaseInfo*>(
-               &_GridGuildBaseInfo_default_instance_);
+  static inline const GridClanBaseInfo* internal_default_instance() {
+    return reinterpret_cast<const GridClanBaseInfo*>(
+               &_GridClanBaseInfo_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    9;
+    10;
 
-  void Swap(GridGuildBaseInfo* other);
-  friend void swap(GridGuildBaseInfo& a, GridGuildBaseInfo& b) {
+  void Swap(GridClanBaseInfo* other);
+  friend void swap(GridClanBaseInfo& a, GridClanBaseInfo& b) {
     a.Swap(&b);
   }
 
   // implements Message ----------------------------------------------
 
-  inline GridGuildBaseInfo* New() const final {
-    return CreateMaybeMessage<GridGuildBaseInfo>(NULL);
+  inline GridClanBaseInfo* New() const final {
+    return CreateMaybeMessage<GridClanBaseInfo>(NULL);
   }
 
-  GridGuildBaseInfo* New(::google::protobuf::Arena* arena) const final {
-    return CreateMaybeMessage<GridGuildBaseInfo>(arena);
+  GridClanBaseInfo* New(::google::protobuf::Arena* arena) const final {
+    return CreateMaybeMessage<GridClanBaseInfo>(arena);
   }
   void CopyFrom(const ::google::protobuf::Message& from) final;
   void MergeFrom(const ::google::protobuf::Message& from) final;
-  void CopyFrom(const GridGuildBaseInfo& from);
-  void MergeFrom(const GridGuildBaseInfo& from);
+  void CopyFrom(const GridClanBaseInfo& from);
+  void MergeFrom(const GridClanBaseInfo& from);
   void Clear() final;
   bool IsInitialized() const final;
 
@@ -1533,7 +1646,7 @@ class LIBPROTOC_EXPORT GridGuildBaseInfo : public ::google::protobuf::Message /*
   void SharedCtor();
   void SharedDtor();
   void SetCachedSize(int size) const final;
-  void InternalSwap(GridGuildBaseInfo* other);
+  void InternalSwap(GridClanBaseInfo* other);
   private:
   inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
     return NULL;
@@ -1593,7 +1706,7 @@ class LIBPROTOC_EXPORT GridGuildBaseInfo : public ::google::protobuf::Message /*
   ::google::protobuf::int32 resource() const;
   void set_resource(::google::protobuf::int32 value);
 
-  // @@protoc_insertion_point(class_scope:NFMsg.GridGuildBaseInfo)
+  // @@protoc_insertion_point(class_scope:NFMsg.GridClanBaseInfo)
  private:
 
   ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
@@ -1642,7 +1755,7 @@ class LIBPROTOC_EXPORT ReqBigMapGridInfo : public ::google::protobuf::Message /*
                &_ReqBigMapGridInfo_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    10;
+    11;
 
   void Swap(ReqBigMapGridInfo* other);
   friend void swap(ReqBigMapGridInfo& a, ReqBigMapGridInfo& b) {
@@ -1761,7 +1874,7 @@ class LIBPROTOC_EXPORT BigMapGridBaseInfo : public ::google::protobuf::Message /
                &_BigMapGridBaseInfo_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    11;
+    12;
 
   void Swap(BigMapGridBaseInfo* other);
   friend void swap(BigMapGridBaseInfo& a, BigMapGridBaseInfo& b) {
@@ -1827,17 +1940,17 @@ class LIBPROTOC_EXPORT BigMapGridBaseInfo : public ::google::protobuf::Message /
   ::std::string* release_id();
   void set_allocated_id(::std::string* id);
 
-  // .NFMsg.GridGuildBaseInfo guild_info = 2;
+  // .NFMsg.GridClanBaseInfo guild_info = 2;
   bool has_guild_info() const;
   void clear_guild_info();
   static const int kGuildInfoFieldNumber = 2;
   private:
-  const ::NFMsg::GridGuildBaseInfo& _internal_guild_info() const;
+  const ::NFMsg::GridClanBaseInfo& _internal_guild_info() const;
   public:
-  const ::NFMsg::GridGuildBaseInfo& guild_info() const;
-  ::NFMsg::GridGuildBaseInfo* release_guild_info();
-  ::NFMsg::GridGuildBaseInfo* mutable_guild_info();
-  void set_allocated_guild_info(::NFMsg::GridGuildBaseInfo* guild_info);
+  const ::NFMsg::GridClanBaseInfo& guild_info() const;
+  ::NFMsg::GridClanBaseInfo* release_guild_info();
+  ::NFMsg::GridClanBaseInfo* mutable_guild_info();
+  void set_allocated_guild_info(::NFMsg::GridClanBaseInfo* guild_info);
 
   // .NFMsg.Ident kingwarrer = 11;
   bool has_kingwarrer() const;
@@ -1880,7 +1993,7 @@ class LIBPROTOC_EXPORT BigMapGridBaseInfo : public ::google::protobuf::Message /
 
   ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
   ::google::protobuf::internal::ArenaStringPtr id_;
-  ::NFMsg::GridGuildBaseInfo* guild_info_;
+  ::NFMsg::GridClanBaseInfo* guild_info_;
   ::NFMsg::Ident* kingwarrer_;
   ::NFMsg::Ident* hurter_;
   ::google::protobuf::int32 kingwar_time_;
@@ -1925,7 +2038,7 @@ class LIBPROTOC_EXPORT BigMapLeaveMsg : public ::google::protobuf::Message /* @@
                &_BigMapLeaveMsg_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    12;
+    13;
 
   void Swap(BigMapLeaveMsg* other);
   friend void swap(BigMapLeaveMsg& a, BigMapLeaveMsg& b) {
@@ -2078,7 +2191,7 @@ class LIBPROTOC_EXPORT BigMapWarHistory : public ::google::protobuf::Message /* 
                &_BigMapWarHistory_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    13;
+    14;
 
   void Swap(BigMapWarHistory* other);
   friend void swap(BigMapWarHistory& a, BigMapWarHistory& b) {
@@ -2130,29 +2243,29 @@ class LIBPROTOC_EXPORT BigMapWarHistory : public ::google::protobuf::Message /* 
 
   // accessors -------------------------------------------------------
 
-  // .NFMsg.GridGuildBaseInfo red_info = 1;
+  // .NFMsg.GridClanBaseInfo red_info = 1;
   bool has_red_info() const;
   void clear_red_info();
   static const int kRedInfoFieldNumber = 1;
   private:
-  const ::NFMsg::GridGuildBaseInfo& _internal_red_info() const;
+  const ::NFMsg::GridClanBaseInfo& _internal_red_info() const;
   public:
-  const ::NFMsg::GridGuildBaseInfo& red_info() const;
-  ::NFMsg::GridGuildBaseInfo* release_red_info();
-  ::NFMsg::GridGuildBaseInfo* mutable_red_info();
-  void set_allocated_red_info(::NFMsg::GridGuildBaseInfo* red_info);
+  const ::NFMsg::GridClanBaseInfo& red_info() const;
+  ::NFMsg::GridClanBaseInfo* release_red_info();
+  ::NFMsg::GridClanBaseInfo* mutable_red_info();
+  void set_allocated_red_info(::NFMsg::GridClanBaseInfo* red_info);
 
-  // .NFMsg.GridGuildBaseInfo blue_info = 2;
+  // .NFMsg.GridClanBaseInfo blue_info = 2;
   bool has_blue_info() const;
   void clear_blue_info();
   static const int kBlueInfoFieldNumber = 2;
   private:
-  const ::NFMsg::GridGuildBaseInfo& _internal_blue_info() const;
+  const ::NFMsg::GridClanBaseInfo& _internal_blue_info() const;
   public:
-  const ::NFMsg::GridGuildBaseInfo& blue_info() const;
-  ::NFMsg::GridGuildBaseInfo* release_blue_info();
-  ::NFMsg::GridGuildBaseInfo* mutable_blue_info();
-  void set_allocated_blue_info(::NFMsg::GridGuildBaseInfo* blue_info);
+  const ::NFMsg::GridClanBaseInfo& blue_info() const;
+  ::NFMsg::GridClanBaseInfo* release_blue_info();
+  ::NFMsg::GridClanBaseInfo* mutable_blue_info();
+  void set_allocated_blue_info(::NFMsg::GridClanBaseInfo* blue_info);
 
   // .NFMsg.Ident winner_id = 10;
   bool has_winner_id() const;
@@ -2176,8 +2289,8 @@ class LIBPROTOC_EXPORT BigMapWarHistory : public ::google::protobuf::Message /* 
  private:
 
   ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
-  ::NFMsg::GridGuildBaseInfo* red_info_;
-  ::NFMsg::GridGuildBaseInfo* blue_info_;
+  ::NFMsg::GridClanBaseInfo* red_info_;
+  ::NFMsg::GridClanBaseInfo* blue_info_;
   ::NFMsg::Ident* winner_id_;
   ::google::protobuf::int32 war_time_;
   mutable ::google::protobuf::internal::CachedSize _cached_size_;
@@ -2220,7 +2333,7 @@ class LIBPROTOC_EXPORT BigMapGridDetailInfo : public ::google::protobuf::Message
                &_BigMapGridDetailInfo_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    14;
+    15;
 
   void Swap(BigMapGridDetailInfo* other);
   friend void swap(BigMapGridDetailInfo& a, BigMapGridDetailInfo& b) {
@@ -2272,16 +2385,16 @@ class LIBPROTOC_EXPORT BigMapGridDetailInfo : public ::google::protobuf::Message
 
   // accessors -------------------------------------------------------
 
-  // repeated .NFMsg.GridGuildBaseInfo stay_guid_list = 2;
+  // repeated .NFMsg.GridClanBaseInfo stay_guid_list = 2;
   int stay_guid_list_size() const;
   void clear_stay_guid_list();
   static const int kStayGuidListFieldNumber = 2;
-  ::NFMsg::GridGuildBaseInfo* mutable_stay_guid_list(int index);
-  ::google::protobuf::RepeatedPtrField< ::NFMsg::GridGuildBaseInfo >*
+  ::NFMsg::GridClanBaseInfo* mutable_stay_guid_list(int index);
+  ::google::protobuf::RepeatedPtrField< ::NFMsg::GridClanBaseInfo >*
       mutable_stay_guid_list();
-  const ::NFMsg::GridGuildBaseInfo& stay_guid_list(int index) const;
-  ::NFMsg::GridGuildBaseInfo* add_stay_guid_list();
-  const ::google::protobuf::RepeatedPtrField< ::NFMsg::GridGuildBaseInfo >&
+  const ::NFMsg::GridClanBaseInfo& stay_guid_list(int index) const;
+  ::NFMsg::GridClanBaseInfo* add_stay_guid_list();
+  const ::google::protobuf::RepeatedPtrField< ::NFMsg::GridClanBaseInfo >&
       stay_guid_list() const;
 
   // repeated .NFMsg.BigMapLeaveMsg leave_msg = 3;
@@ -2324,7 +2437,7 @@ class LIBPROTOC_EXPORT BigMapGridDetailInfo : public ::google::protobuf::Message
  private:
 
   ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
-  ::google::protobuf::RepeatedPtrField< ::NFMsg::GridGuildBaseInfo > stay_guid_list_;
+  ::google::protobuf::RepeatedPtrField< ::NFMsg::GridClanBaseInfo > stay_guid_list_;
   ::google::protobuf::RepeatedPtrField< ::NFMsg::BigMapLeaveMsg > leave_msg_;
   ::google::protobuf::RepeatedPtrField< ::NFMsg::BigMapWarHistory > war_history_;
   ::NFMsg::BigMapGridBaseInfo* grid_base_info_;
@@ -2368,7 +2481,7 @@ class LIBPROTOC_EXPORT AckBigMapGridInfo : public ::google::protobuf::Message /*
                &_AckBigMapGridInfo_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    15;
+    16;
 
   void Swap(AckBigMapGridInfo* other);
   friend void swap(AckBigMapGridInfo& a, AckBigMapGridInfo& b) {
@@ -2477,7 +2590,7 @@ class LIBPROTOC_EXPORT ReqBigMapInfo : public ::google::protobuf::Message /* @@p
                &_ReqBigMapInfo_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    16;
+    17;
 
   void Swap(ReqBigMapInfo* other);
   friend void swap(ReqBigMapInfo& a, ReqBigMapInfo& b) {
@@ -2573,7 +2686,7 @@ class LIBPROTOC_EXPORT AckBigMapInfo : public ::google::protobuf::Message /* @@p
                &_AckBigMapInfo_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    17;
+    18;
 
   void Swap(AckBigMapInfo* other);
   friend void swap(AckBigMapInfo& a, AckBigMapInfo& b) {
@@ -2682,7 +2795,7 @@ class LIBPROTOC_EXPORT ReqHoldMapGrid : public ::google::protobuf::Message /* @@
                &_ReqHoldMapGrid_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    18;
+    19;
 
   void Swap(ReqHoldMapGrid* other);
   friend void swap(ReqHoldMapGrid& a, ReqHoldMapGrid& b) {
@@ -2806,7 +2919,7 @@ class LIBPROTOC_EXPORT AckHoldMapGrid : public ::google::protobuf::Message /* @@
                &_AckHoldMapGrid_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    19;
+    20;
 
   void Swap(AckHoldMapGrid* other);
   friend void swap(AckHoldMapGrid& a, AckHoldMapGrid& b) {
@@ -2902,7 +3015,7 @@ class LIBPROTOC_EXPORT ReqLeaveMapMsg : public ::google::protobuf::Message /* @@
                &_ReqLeaveMapMsg_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    20;
+    21;
 
   void Swap(ReqLeaveMapMsg* other);
   friend void swap(ReqLeaveMapMsg& a, ReqLeaveMapMsg& b) {
@@ -3026,7 +3139,7 @@ class LIBPROTOC_EXPORT AckLeaveMapMsg : public ::google::protobuf::Message /* @@
                &_AckLeaveMapMsg_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    21;
+    22;
 
   void Swap(AckLeaveMapMsg* other);
   friend void swap(AckLeaveMapMsg& a, AckLeaveMapMsg& b) {
@@ -3122,7 +3235,7 @@ class LIBPROTOC_EXPORT ReqGetMapAward : public ::google::protobuf::Message /* @@
                &_ReqGetMapAward_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    22;
+    23;
 
   void Swap(ReqGetMapAward* other);
   friend void swap(ReqGetMapAward& a, ReqGetMapAward& b) {
@@ -3233,7 +3346,7 @@ class LIBPROTOC_EXPORT AckGetMapAward : public ::google::protobuf::Message /* @@
                &_AckGetMapAward_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    23;
+    24;
 
   void Swap(AckGetMapAward* other);
   friend void swap(AckGetMapAward& a, AckGetMapAward& b) {
@@ -3329,7 +3442,7 @@ class LIBPROTOC_EXPORT ReqMapHunting : public ::google::protobuf::Message /* @@p
                &_ReqMapHunting_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    24;
+    25;
 
   void Swap(ReqMapHunting* other);
   friend void swap(ReqMapHunting& a, ReqMapHunting& b) {
@@ -3440,7 +3553,7 @@ class LIBPROTOC_EXPORT AckMapHunting : public ::google::protobuf::Message /* @@p
                &_AckMapHunting_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    25;
+    26;
 
   void Swap(AckMapHunting* other);
   friend void swap(AckMapHunting& a, AckMapHunting& b) {
@@ -3536,7 +3649,7 @@ class LIBPROTOC_EXPORT ReqMapKingWar : public ::google::protobuf::Message /* @@p
                &_ReqMapKingWar_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    26;
+    27;
 
   void Swap(ReqMapKingWar* other);
   friend void swap(ReqMapKingWar& a, ReqMapKingWar& b) {
@@ -3647,7 +3760,7 @@ class LIBPROTOC_EXPORT AckMapKingWar : public ::google::protobuf::Message /* @@p
                &_AckMapKingWar_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    27;
+    28;
 
   void Swap(AckMapKingWar* other);
   friend void swap(AckMapKingWar& a, AckMapKingWar& b) {
@@ -3730,6 +3843,58 @@ class LIBPROTOC_EXPORT AckMapKingWar : public ::google::protobuf::Message /* @@p
   #pragma GCC diagnostic push
   #pragma GCC diagnostic ignored "-Wstrict-aliasing"
 #endif  // __GNUC__
+// ReqAIOnwer
+
+// .NFMsg.Ident ai_id = 1;
+inline bool ReqAIOnwer::has_ai_id() const {
+  return this != internal_default_instance() && ai_id_ != NULL;
+}
+inline const ::NFMsg::Ident& ReqAIOnwer::_internal_ai_id() const {
+  return *ai_id_;
+}
+inline const ::NFMsg::Ident& ReqAIOnwer::ai_id() const {
+  const ::NFMsg::Ident* p = ai_id_;
+  // @@protoc_insertion_point(field_get:NFMsg.ReqAIOnwer.ai_id)
+  return p != NULL ? *p : *reinterpret_cast<const ::NFMsg::Ident*>(
+      &::NFMsg::_Ident_default_instance_);
+}
+inline ::NFMsg::Ident* ReqAIOnwer::release_ai_id() {
+  // @@protoc_insertion_point(field_release:NFMsg.ReqAIOnwer.ai_id)
+  
+  ::NFMsg::Ident* temp = ai_id_;
+  ai_id_ = NULL;
+  return temp;
+}
+inline ::NFMsg::Ident* ReqAIOnwer::mutable_ai_id() {
+  
+  if (ai_id_ == NULL) {
+    auto* p = CreateMaybeMessage<::NFMsg::Ident>(GetArenaNoVirtual());
+    ai_id_ = p;
+  }
+  // @@protoc_insertion_point(field_mutable:NFMsg.ReqAIOnwer.ai_id)
+  return ai_id_;
+}
+inline void ReqAIOnwer::set_allocated_ai_id(::NFMsg::Ident* ai_id) {
+  ::google::protobuf::Arena* message_arena = GetArenaNoVirtual();
+  if (message_arena == NULL) {
+    delete reinterpret_cast< ::google::protobuf::MessageLite*>(ai_id_);
+  }
+  if (ai_id) {
+    ::google::protobuf::Arena* submessage_arena = NULL;
+    if (message_arena != submessage_arena) {
+      ai_id = ::google::protobuf::internal::GetOwnedMessage(
+          message_arena, ai_id, submessage_arena);
+    }
+    
+  } else {
+    
+  }
+  ai_id_ = ai_id;
+  // @@protoc_insertion_point(field_set_allocated:NFMsg.ReqAIOnwer.ai_id)
+}
+
+// -------------------------------------------------------------------
+
 // TeamInfo
 
 // .NFMsg.Ident team_id = 1;
@@ -4978,38 +5143,38 @@ inline void AckTeamEnterEctype::set_nresult(::google::protobuf::int32 value) {
 
 // -------------------------------------------------------------------
 
-// GridGuildBaseInfo
+// GridClanBaseInfo
 
 // .NFMsg.Ident id = 1;
-inline bool GridGuildBaseInfo::has_id() const {
+inline bool GridClanBaseInfo::has_id() const {
   return this != internal_default_instance() && id_ != NULL;
 }
-inline const ::NFMsg::Ident& GridGuildBaseInfo::_internal_id() const {
+inline const ::NFMsg::Ident& GridClanBaseInfo::_internal_id() const {
   return *id_;
 }
-inline const ::NFMsg::Ident& GridGuildBaseInfo::id() const {
+inline const ::NFMsg::Ident& GridClanBaseInfo::id() const {
   const ::NFMsg::Ident* p = id_;
-  // @@protoc_insertion_point(field_get:NFMsg.GridGuildBaseInfo.id)
+  // @@protoc_insertion_point(field_get:NFMsg.GridClanBaseInfo.id)
   return p != NULL ? *p : *reinterpret_cast<const ::NFMsg::Ident*>(
       &::NFMsg::_Ident_default_instance_);
 }
-inline ::NFMsg::Ident* GridGuildBaseInfo::release_id() {
-  // @@protoc_insertion_point(field_release:NFMsg.GridGuildBaseInfo.id)
+inline ::NFMsg::Ident* GridClanBaseInfo::release_id() {
+  // @@protoc_insertion_point(field_release:NFMsg.GridClanBaseInfo.id)
   
   ::NFMsg::Ident* temp = id_;
   id_ = NULL;
   return temp;
 }
-inline ::NFMsg::Ident* GridGuildBaseInfo::mutable_id() {
+inline ::NFMsg::Ident* GridClanBaseInfo::mutable_id() {
   
   if (id_ == NULL) {
     auto* p = CreateMaybeMessage<::NFMsg::Ident>(GetArenaNoVirtual());
     id_ = p;
   }
-  // @@protoc_insertion_point(field_mutable:NFMsg.GridGuildBaseInfo.id)
+  // @@protoc_insertion_point(field_mutable:NFMsg.GridClanBaseInfo.id)
   return id_;
 }
-inline void GridGuildBaseInfo::set_allocated_id(::NFMsg::Ident* id) {
+inline void GridClanBaseInfo::set_allocated_id(::NFMsg::Ident* id) {
   ::google::protobuf::Arena* message_arena = GetArenaNoVirtual();
   if (message_arena == NULL) {
     delete reinterpret_cast< ::google::protobuf::MessageLite*>(id_);
@@ -5025,102 +5190,102 @@ inline void GridGuildBaseInfo::set_allocated_id(::NFMsg::Ident* id) {
     
   }
   id_ = id;
-  // @@protoc_insertion_point(field_set_allocated:NFMsg.GridGuildBaseInfo.id)
+  // @@protoc_insertion_point(field_set_allocated:NFMsg.GridClanBaseInfo.id)
 }
 
 // int32 level = 2;
-inline void GridGuildBaseInfo::clear_level() {
+inline void GridClanBaseInfo::clear_level() {
   level_ = 0;
 }
-inline ::google::protobuf::int32 GridGuildBaseInfo::level() const {
-  // @@protoc_insertion_point(field_get:NFMsg.GridGuildBaseInfo.level)
+inline ::google::protobuf::int32 GridClanBaseInfo::level() const {
+  // @@protoc_insertion_point(field_get:NFMsg.GridClanBaseInfo.level)
   return level_;
 }
-inline void GridGuildBaseInfo::set_level(::google::protobuf::int32 value) {
+inline void GridClanBaseInfo::set_level(::google::protobuf::int32 value) {
   
   level_ = value;
-  // @@protoc_insertion_point(field_set:NFMsg.GridGuildBaseInfo.level)
+  // @@protoc_insertion_point(field_set:NFMsg.GridClanBaseInfo.level)
 }
 
 // int32 count = 3;
-inline void GridGuildBaseInfo::clear_count() {
+inline void GridClanBaseInfo::clear_count() {
   count_ = 0;
 }
-inline ::google::protobuf::int32 GridGuildBaseInfo::count() const {
-  // @@protoc_insertion_point(field_get:NFMsg.GridGuildBaseInfo.count)
+inline ::google::protobuf::int32 GridClanBaseInfo::count() const {
+  // @@protoc_insertion_point(field_get:NFMsg.GridClanBaseInfo.count)
   return count_;
 }
-inline void GridGuildBaseInfo::set_count(::google::protobuf::int32 value) {
+inline void GridClanBaseInfo::set_count(::google::protobuf::int32 value) {
   
   count_ = value;
-  // @@protoc_insertion_point(field_set:NFMsg.GridGuildBaseInfo.count)
+  // @@protoc_insertion_point(field_set:NFMsg.GridClanBaseInfo.count)
 }
 
 // int32 resource = 4;
-inline void GridGuildBaseInfo::clear_resource() {
+inline void GridClanBaseInfo::clear_resource() {
   resource_ = 0;
 }
-inline ::google::protobuf::int32 GridGuildBaseInfo::resource() const {
-  // @@protoc_insertion_point(field_get:NFMsg.GridGuildBaseInfo.resource)
+inline ::google::protobuf::int32 GridClanBaseInfo::resource() const {
+  // @@protoc_insertion_point(field_get:NFMsg.GridClanBaseInfo.resource)
   return resource_;
 }
-inline void GridGuildBaseInfo::set_resource(::google::protobuf::int32 value) {
+inline void GridClanBaseInfo::set_resource(::google::protobuf::int32 value) {
   
   resource_ = value;
-  // @@protoc_insertion_point(field_set:NFMsg.GridGuildBaseInfo.resource)
+  // @@protoc_insertion_point(field_set:NFMsg.GridClanBaseInfo.resource)
 }
 
 // bytes icon = 5;
-inline void GridGuildBaseInfo::clear_icon() {
+inline void GridClanBaseInfo::clear_icon() {
   icon_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
-inline const ::std::string& GridGuildBaseInfo::icon() const {
-  // @@protoc_insertion_point(field_get:NFMsg.GridGuildBaseInfo.icon)
+inline const ::std::string& GridClanBaseInfo::icon() const {
+  // @@protoc_insertion_point(field_get:NFMsg.GridClanBaseInfo.icon)
   return icon_.GetNoArena();
 }
-inline void GridGuildBaseInfo::set_icon(const ::std::string& value) {
+inline void GridClanBaseInfo::set_icon(const ::std::string& value) {
   
   icon_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
-  // @@protoc_insertion_point(field_set:NFMsg.GridGuildBaseInfo.icon)
+  // @@protoc_insertion_point(field_set:NFMsg.GridClanBaseInfo.icon)
 }
 #if LANG_CXX11
-inline void GridGuildBaseInfo::set_icon(::std::string&& value) {
+inline void GridClanBaseInfo::set_icon(::std::string&& value) {
   
   icon_.SetNoArena(
     &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
-  // @@protoc_insertion_point(field_set_rvalue:NFMsg.GridGuildBaseInfo.icon)
+  // @@protoc_insertion_point(field_set_rvalue:NFMsg.GridClanBaseInfo.icon)
 }
 #endif
-inline void GridGuildBaseInfo::set_icon(const char* value) {
+inline void GridClanBaseInfo::set_icon(const char* value) {
   GOOGLE_DCHECK(value != NULL);
   
   icon_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
-  // @@protoc_insertion_point(field_set_char:NFMsg.GridGuildBaseInfo.icon)
+  // @@protoc_insertion_point(field_set_char:NFMsg.GridClanBaseInfo.icon)
 }
-inline void GridGuildBaseInfo::set_icon(const void* value, size_t size) {
+inline void GridClanBaseInfo::set_icon(const void* value, size_t size) {
   
   icon_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
       ::std::string(reinterpret_cast<const char*>(value), size));
-  // @@protoc_insertion_point(field_set_pointer:NFMsg.GridGuildBaseInfo.icon)
+  // @@protoc_insertion_point(field_set_pointer:NFMsg.GridClanBaseInfo.icon)
 }
-inline ::std::string* GridGuildBaseInfo::mutable_icon() {
+inline ::std::string* GridClanBaseInfo::mutable_icon() {
   
-  // @@protoc_insertion_point(field_mutable:NFMsg.GridGuildBaseInfo.icon)
+  // @@protoc_insertion_point(field_mutable:NFMsg.GridClanBaseInfo.icon)
   return icon_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
-inline ::std::string* GridGuildBaseInfo::release_icon() {
-  // @@protoc_insertion_point(field_release:NFMsg.GridGuildBaseInfo.icon)
+inline ::std::string* GridClanBaseInfo::release_icon() {
+  // @@protoc_insertion_point(field_release:NFMsg.GridClanBaseInfo.icon)
   
   return icon_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
-inline void GridGuildBaseInfo::set_allocated_icon(::std::string* icon) {
+inline void GridClanBaseInfo::set_allocated_icon(::std::string* icon) {
   if (icon != NULL) {
     
   } else {
     
   }
   icon_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), icon);
-  // @@protoc_insertion_point(field_set_allocated:NFMsg.GridGuildBaseInfo.icon)
+  // @@protoc_insertion_point(field_set_allocated:NFMsg.GridClanBaseInfo.icon)
 }
 
 // -------------------------------------------------------------------
@@ -5253,7 +5418,7 @@ inline void BigMapGridBaseInfo::set_allocated_id(::std::string* id) {
   // @@protoc_insertion_point(field_set_allocated:NFMsg.BigMapGridBaseInfo.id)
 }
 
-// .NFMsg.GridGuildBaseInfo guild_info = 2;
+// .NFMsg.GridClanBaseInfo guild_info = 2;
 inline bool BigMapGridBaseInfo::has_guild_info() const {
   return this != internal_default_instance() && guild_info_ != NULL;
 }
@@ -5263,32 +5428,32 @@ inline void BigMapGridBaseInfo::clear_guild_info() {
   }
   guild_info_ = NULL;
 }
-inline const ::NFMsg::GridGuildBaseInfo& BigMapGridBaseInfo::_internal_guild_info() const {
+inline const ::NFMsg::GridClanBaseInfo& BigMapGridBaseInfo::_internal_guild_info() const {
   return *guild_info_;
 }
-inline const ::NFMsg::GridGuildBaseInfo& BigMapGridBaseInfo::guild_info() const {
-  const ::NFMsg::GridGuildBaseInfo* p = guild_info_;
+inline const ::NFMsg::GridClanBaseInfo& BigMapGridBaseInfo::guild_info() const {
+  const ::NFMsg::GridClanBaseInfo* p = guild_info_;
   // @@protoc_insertion_point(field_get:NFMsg.BigMapGridBaseInfo.guild_info)
-  return p != NULL ? *p : *reinterpret_cast<const ::NFMsg::GridGuildBaseInfo*>(
-      &::NFMsg::_GridGuildBaseInfo_default_instance_);
+  return p != NULL ? *p : *reinterpret_cast<const ::NFMsg::GridClanBaseInfo*>(
+      &::NFMsg::_GridClanBaseInfo_default_instance_);
 }
-inline ::NFMsg::GridGuildBaseInfo* BigMapGridBaseInfo::release_guild_info() {
+inline ::NFMsg::GridClanBaseInfo* BigMapGridBaseInfo::release_guild_info() {
   // @@protoc_insertion_point(field_release:NFMsg.BigMapGridBaseInfo.guild_info)
   
-  ::NFMsg::GridGuildBaseInfo* temp = guild_info_;
+  ::NFMsg::GridClanBaseInfo* temp = guild_info_;
   guild_info_ = NULL;
   return temp;
 }
-inline ::NFMsg::GridGuildBaseInfo* BigMapGridBaseInfo::mutable_guild_info() {
+inline ::NFMsg::GridClanBaseInfo* BigMapGridBaseInfo::mutable_guild_info() {
   
   if (guild_info_ == NULL) {
-    auto* p = CreateMaybeMessage<::NFMsg::GridGuildBaseInfo>(GetArenaNoVirtual());
+    auto* p = CreateMaybeMessage<::NFMsg::GridClanBaseInfo>(GetArenaNoVirtual());
     guild_info_ = p;
   }
   // @@protoc_insertion_point(field_mutable:NFMsg.BigMapGridBaseInfo.guild_info)
   return guild_info_;
 }
-inline void BigMapGridBaseInfo::set_allocated_guild_info(::NFMsg::GridGuildBaseInfo* guild_info) {
+inline void BigMapGridBaseInfo::set_allocated_guild_info(::NFMsg::GridClanBaseInfo* guild_info) {
   ::google::protobuf::Arena* message_arena = GetArenaNoVirtual();
   if (message_arena == NULL) {
     delete guild_info_;
@@ -5621,7 +5786,7 @@ inline void BigMapLeaveMsg::set_owner_level(::google::protobuf::int32 value) {
 
 // BigMapWarHistory
 
-// .NFMsg.GridGuildBaseInfo red_info = 1;
+// .NFMsg.GridClanBaseInfo red_info = 1;
 inline bool BigMapWarHistory::has_red_info() const {
   return this != internal_default_instance() && red_info_ != NULL;
 }
@@ -5631,32 +5796,32 @@ inline void BigMapWarHistory::clear_red_info() {
   }
   red_info_ = NULL;
 }
-inline const ::NFMsg::GridGuildBaseInfo& BigMapWarHistory::_internal_red_info() const {
+inline const ::NFMsg::GridClanBaseInfo& BigMapWarHistory::_internal_red_info() const {
   return *red_info_;
 }
-inline const ::NFMsg::GridGuildBaseInfo& BigMapWarHistory::red_info() const {
-  const ::NFMsg::GridGuildBaseInfo* p = red_info_;
+inline const ::NFMsg::GridClanBaseInfo& BigMapWarHistory::red_info() const {
+  const ::NFMsg::GridClanBaseInfo* p = red_info_;
   // @@protoc_insertion_point(field_get:NFMsg.BigMapWarHistory.red_info)
-  return p != NULL ? *p : *reinterpret_cast<const ::NFMsg::GridGuildBaseInfo*>(
-      &::NFMsg::_GridGuildBaseInfo_default_instance_);
+  return p != NULL ? *p : *reinterpret_cast<const ::NFMsg::GridClanBaseInfo*>(
+      &::NFMsg::_GridClanBaseInfo_default_instance_);
 }
-inline ::NFMsg::GridGuildBaseInfo* BigMapWarHistory::release_red_info() {
+inline ::NFMsg::GridClanBaseInfo* BigMapWarHistory::release_red_info() {
   // @@protoc_insertion_point(field_release:NFMsg.BigMapWarHistory.red_info)
   
-  ::NFMsg::GridGuildBaseInfo* temp = red_info_;
+  ::NFMsg::GridClanBaseInfo* temp = red_info_;
   red_info_ = NULL;
   return temp;
 }
-inline ::NFMsg::GridGuildBaseInfo* BigMapWarHistory::mutable_red_info() {
+inline ::NFMsg::GridClanBaseInfo* BigMapWarHistory::mutable_red_info() {
   
   if (red_info_ == NULL) {
-    auto* p = CreateMaybeMessage<::NFMsg::GridGuildBaseInfo>(GetArenaNoVirtual());
+    auto* p = CreateMaybeMessage<::NFMsg::GridClanBaseInfo>(GetArenaNoVirtual());
     red_info_ = p;
   }
   // @@protoc_insertion_point(field_mutable:NFMsg.BigMapWarHistory.red_info)
   return red_info_;
 }
-inline void BigMapWarHistory::set_allocated_red_info(::NFMsg::GridGuildBaseInfo* red_info) {
+inline void BigMapWarHistory::set_allocated_red_info(::NFMsg::GridClanBaseInfo* red_info) {
   ::google::protobuf::Arena* message_arena = GetArenaNoVirtual();
   if (message_arena == NULL) {
     delete red_info_;
@@ -5675,7 +5840,7 @@ inline void BigMapWarHistory::set_allocated_red_info(::NFMsg::GridGuildBaseInfo*
   // @@protoc_insertion_point(field_set_allocated:NFMsg.BigMapWarHistory.red_info)
 }
 
-// .NFMsg.GridGuildBaseInfo blue_info = 2;
+// .NFMsg.GridClanBaseInfo blue_info = 2;
 inline bool BigMapWarHistory::has_blue_info() const {
   return this != internal_default_instance() && blue_info_ != NULL;
 }
@@ -5685,32 +5850,32 @@ inline void BigMapWarHistory::clear_blue_info() {
   }
   blue_info_ = NULL;
 }
-inline const ::NFMsg::GridGuildBaseInfo& BigMapWarHistory::_internal_blue_info() const {
+inline const ::NFMsg::GridClanBaseInfo& BigMapWarHistory::_internal_blue_info() const {
   return *blue_info_;
 }
-inline const ::NFMsg::GridGuildBaseInfo& BigMapWarHistory::blue_info() const {
-  const ::NFMsg::GridGuildBaseInfo* p = blue_info_;
+inline const ::NFMsg::GridClanBaseInfo& BigMapWarHistory::blue_info() const {
+  const ::NFMsg::GridClanBaseInfo* p = blue_info_;
   // @@protoc_insertion_point(field_get:NFMsg.BigMapWarHistory.blue_info)
-  return p != NULL ? *p : *reinterpret_cast<const ::NFMsg::GridGuildBaseInfo*>(
-      &::NFMsg::_GridGuildBaseInfo_default_instance_);
+  return p != NULL ? *p : *reinterpret_cast<const ::NFMsg::GridClanBaseInfo*>(
+      &::NFMsg::_GridClanBaseInfo_default_instance_);
 }
-inline ::NFMsg::GridGuildBaseInfo* BigMapWarHistory::release_blue_info() {
+inline ::NFMsg::GridClanBaseInfo* BigMapWarHistory::release_blue_info() {
   // @@protoc_insertion_point(field_release:NFMsg.BigMapWarHistory.blue_info)
   
-  ::NFMsg::GridGuildBaseInfo* temp = blue_info_;
+  ::NFMsg::GridClanBaseInfo* temp = blue_info_;
   blue_info_ = NULL;
   return temp;
 }
-inline ::NFMsg::GridGuildBaseInfo* BigMapWarHistory::mutable_blue_info() {
+inline ::NFMsg::GridClanBaseInfo* BigMapWarHistory::mutable_blue_info() {
   
   if (blue_info_ == NULL) {
-    auto* p = CreateMaybeMessage<::NFMsg::GridGuildBaseInfo>(GetArenaNoVirtual());
+    auto* p = CreateMaybeMessage<::NFMsg::GridClanBaseInfo>(GetArenaNoVirtual());
     blue_info_ = p;
   }
   // @@protoc_insertion_point(field_mutable:NFMsg.BigMapWarHistory.blue_info)
   return blue_info_;
 }
-inline void BigMapWarHistory::set_allocated_blue_info(::NFMsg::GridGuildBaseInfo* blue_info) {
+inline void BigMapWarHistory::set_allocated_blue_info(::NFMsg::GridClanBaseInfo* blue_info) {
   ::google::protobuf::Arena* message_arena = GetArenaNoVirtual();
   if (message_arena == NULL) {
     delete blue_info_;
@@ -5849,31 +6014,31 @@ inline void BigMapGridDetailInfo::set_allocated_grid_base_info(::NFMsg::BigMapGr
   // @@protoc_insertion_point(field_set_allocated:NFMsg.BigMapGridDetailInfo.grid_base_info)
 }
 
-// repeated .NFMsg.GridGuildBaseInfo stay_guid_list = 2;
+// repeated .NFMsg.GridClanBaseInfo stay_guid_list = 2;
 inline int BigMapGridDetailInfo::stay_guid_list_size() const {
   return stay_guid_list_.size();
 }
 inline void BigMapGridDetailInfo::clear_stay_guid_list() {
   stay_guid_list_.Clear();
 }
-inline ::NFMsg::GridGuildBaseInfo* BigMapGridDetailInfo::mutable_stay_guid_list(int index) {
+inline ::NFMsg::GridClanBaseInfo* BigMapGridDetailInfo::mutable_stay_guid_list(int index) {
   // @@protoc_insertion_point(field_mutable:NFMsg.BigMapGridDetailInfo.stay_guid_list)
   return stay_guid_list_.Mutable(index);
 }
-inline ::google::protobuf::RepeatedPtrField< ::NFMsg::GridGuildBaseInfo >*
+inline ::google::protobuf::RepeatedPtrField< ::NFMsg::GridClanBaseInfo >*
 BigMapGridDetailInfo::mutable_stay_guid_list() {
   // @@protoc_insertion_point(field_mutable_list:NFMsg.BigMapGridDetailInfo.stay_guid_list)
   return &stay_guid_list_;
 }
-inline const ::NFMsg::GridGuildBaseInfo& BigMapGridDetailInfo::stay_guid_list(int index) const {
+inline const ::NFMsg::GridClanBaseInfo& BigMapGridDetailInfo::stay_guid_list(int index) const {
   // @@protoc_insertion_point(field_get:NFMsg.BigMapGridDetailInfo.stay_guid_list)
   return stay_guid_list_.Get(index);
 }
-inline ::NFMsg::GridGuildBaseInfo* BigMapGridDetailInfo::add_stay_guid_list() {
+inline ::NFMsg::GridClanBaseInfo* BigMapGridDetailInfo::add_stay_guid_list() {
   // @@protoc_insertion_point(field_add:NFMsg.BigMapGridDetailInfo.stay_guid_list)
   return stay_guid_list_.Add();
 }
-inline const ::google::protobuf::RepeatedPtrField< ::NFMsg::GridGuildBaseInfo >&
+inline const ::google::protobuf::RepeatedPtrField< ::NFMsg::GridClanBaseInfo >&
 BigMapGridDetailInfo::stay_guid_list() const {
   // @@protoc_insertion_point(field_list:NFMsg.BigMapGridDetailInfo.stay_guid_list)
   return stay_guid_list_;
@@ -6474,6 +6639,8 @@ inline void AckMapKingWar::set_allocated_map_title(::std::string* map_title) {
 #ifdef __GNUC__
   #pragma GCC diagnostic pop
 #endif  // __GNUC__
+// -------------------------------------------------------------------
+
 // -------------------------------------------------------------------
 
 // -------------------------------------------------------------------

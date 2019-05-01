@@ -27,7 +27,7 @@
 #include "NFDBLogicPlugin.h"
 #include "NFRankRedisModule.h"
 #include "NFPlayerRedisModule.h"
-#include "NFGuildRedisModule.h"
+#include "NFClanRedisModule.h"
 #include "NFBigMapRedisModule.h"
 #include "NFCommonRedisModule.h"
 #include "NFMailRedisModule.h"
@@ -63,7 +63,7 @@ void NFDBLogicPlugin::Install()
 {
 	REGISTER_MODULE(pPluginManager, NFIRankRedisModule, NFRankRedisModule)
 	REGISTER_MODULE(pPluginManager, NFIPlayerRedisModule, NFPlayerRedisModule)
-	REGISTER_MODULE(pPluginManager, NFIGuildRedisModule, NFGuildRedisModule)
+	REGISTER_MODULE(pPluginManager, NFIClanRedisModule, NFClanRedisModule)
     REGISTER_MODULE(pPluginManager, NFIBigMapRedisModule, NFBigMapRedisModule)
 	REGISTER_MODULE(pPluginManager, NFICommonRedisModule, NFCommonRedisModule)
 	REGISTER_MODULE(pPluginManager, NFIMailRedisModule, NFMailRedisModule)
@@ -76,7 +76,7 @@ void NFDBLogicPlugin::Uninstall()
 	UNREGISTER_MODULE(pPluginManager, NFIMailRedisModule, NFMailRedisModule)
 	UNREGISTER_MODULE(pPluginManager, NFICommonRedisModule, NFCommonRedisModule)
 	UNREGISTER_MODULE(pPluginManager, NFIBigMapRedisModule, NFBigMapRedisModule)
-	UNREGISTER_MODULE(pPluginManager, NFIGuildRedisModule, NFGuildRedisModule)
+	UNREGISTER_MODULE(pPluginManager, NFIClanRedisModule, NFClanRedisModule)
 	UNREGISTER_MODULE(pPluginManager, NFIPlayerRedisModule, NFPlayerRedisModule)
 	UNREGISTER_MODULE(pPluginManager, NFIRankRedisModule, NFRankRedisModule)
 }

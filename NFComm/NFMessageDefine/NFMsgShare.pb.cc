@@ -28,7 +28,7 @@ extern PROTOBUF_INTERNAL_EXPORT_protobuf_NFMsgShare_2eproto ::google::protobuf::
 extern PROTOBUF_INTERNAL_EXPORT_protobuf_NFMsgShare_2eproto ::google::protobuf::internal::SCCInfo<0> scc_info_ItemStruct;
 extern PROTOBUF_INTERNAL_EXPORT_protobuf_NFMsgShare_2eproto ::google::protobuf::internal::SCCInfo<0> scc_info_ReqAckPlayerChat_ChatContainer;
 extern PROTOBUF_INTERNAL_EXPORT_protobuf_NFMsgShare_2eproto ::google::protobuf::internal::SCCInfo<0> scc_info_TileState;
-extern PROTOBUF_INTERNAL_EXPORT_protobuf_NFMsgShare_2eproto ::google::protobuf::internal::SCCInfo<1> scc_info_AckSearchGuild_SearchGuildObject;
+extern PROTOBUF_INTERNAL_EXPORT_protobuf_NFMsgShare_2eproto ::google::protobuf::internal::SCCInfo<1> scc_info_AckSearchClan_SearchClanObject;
 extern PROTOBUF_INTERNAL_EXPORT_protobuf_NFMsgShare_2eproto ::google::protobuf::internal::SCCInfo<1> scc_info_EffectData;
 extern PROTOBUF_INTERNAL_EXPORT_protobuf_NFMsgShare_2eproto ::google::protobuf::internal::SCCInfo<1> scc_info_PVPRoomInfo;
 extern PROTOBUF_INTERNAL_EXPORT_protobuf_NFMsgShare_2eproto ::google::protobuf::internal::SCCInfo<1> scc_info_PlayerEntryInfo;
@@ -172,46 +172,46 @@ class ReqAckJoinActivityDefaultTypeInternal {
   ::google::protobuf::internal::ExplicitlyConstructed<ReqAckJoinActivity>
       _instance;
 } _ReqAckJoinActivity_default_instance_;
-class ReqAckCreateGuildDefaultTypeInternal {
+class ReqAckCreateClanDefaultTypeInternal {
  public:
-  ::google::protobuf::internal::ExplicitlyConstructed<ReqAckCreateGuild>
+  ::google::protobuf::internal::ExplicitlyConstructed<ReqAckCreateClan>
       _instance;
-} _ReqAckCreateGuild_default_instance_;
-class ReqSearchGuildDefaultTypeInternal {
+} _ReqAckCreateClan_default_instance_;
+class ReqSearchClanDefaultTypeInternal {
  public:
-  ::google::protobuf::internal::ExplicitlyConstructed<ReqSearchGuild>
+  ::google::protobuf::internal::ExplicitlyConstructed<ReqSearchClan>
       _instance;
-} _ReqSearchGuild_default_instance_;
-class AckSearchGuild_SearchGuildObjectDefaultTypeInternal {
+} _ReqSearchClan_default_instance_;
+class AckSearchClan_SearchClanObjectDefaultTypeInternal {
  public:
-  ::google::protobuf::internal::ExplicitlyConstructed<AckSearchGuild_SearchGuildObject>
+  ::google::protobuf::internal::ExplicitlyConstructed<AckSearchClan_SearchClanObject>
       _instance;
-} _AckSearchGuild_SearchGuildObject_default_instance_;
-class AckSearchGuildDefaultTypeInternal {
+} _AckSearchClan_SearchClanObject_default_instance_;
+class AckSearchClanDefaultTypeInternal {
  public:
-  ::google::protobuf::internal::ExplicitlyConstructed<AckSearchGuild>
+  ::google::protobuf::internal::ExplicitlyConstructed<AckSearchClan>
       _instance;
-} _AckSearchGuild_default_instance_;
-class ReqAckJoinGuildDefaultTypeInternal {
+} _AckSearchClan_default_instance_;
+class ReqAckJoinClanDefaultTypeInternal {
  public:
-  ::google::protobuf::internal::ExplicitlyConstructed<ReqAckJoinGuild>
+  ::google::protobuf::internal::ExplicitlyConstructed<ReqAckJoinClan>
       _instance;
-} _ReqAckJoinGuild_default_instance_;
-class ReqAckLeaveGuildDefaultTypeInternal {
+} _ReqAckJoinClan_default_instance_;
+class ReqAckLeaveClanDefaultTypeInternal {
  public:
-  ::google::protobuf::internal::ExplicitlyConstructed<ReqAckLeaveGuild>
+  ::google::protobuf::internal::ExplicitlyConstructed<ReqAckLeaveClan>
       _instance;
-} _ReqAckLeaveGuild_default_instance_;
-class ReqAckOprGuildMemberDefaultTypeInternal {
+} _ReqAckLeaveClan_default_instance_;
+class ReqAckOprClanMemberDefaultTypeInternal {
  public:
-  ::google::protobuf::internal::ExplicitlyConstructed<ReqAckOprGuildMember>
+  ::google::protobuf::internal::ExplicitlyConstructed<ReqAckOprClanMember>
       _instance;
-} _ReqAckOprGuildMember_default_instance_;
-class ReqEnterGuildEctypeDefaultTypeInternal {
+} _ReqAckOprClanMember_default_instance_;
+class ReqEnterClanEctypeDefaultTypeInternal {
  public:
-  ::google::protobuf::internal::ExplicitlyConstructed<ReqEnterGuildEctype>
+  ::google::protobuf::internal::ExplicitlyConstructed<ReqEnterClanEctype>
       _instance;
-} _ReqEnterGuildEctype_default_instance_;
+} _ReqEnterClanEctype_default_instance_;
 class ReqSetFightHeroDefaultTypeInternal {
  public:
   ::google::protobuf::internal::ExplicitlyConstructed<ReqSetFightHero>
@@ -708,123 +708,123 @@ static void InitDefaultsReqAckJoinActivity() {
 LIBPROTOC_EXPORT ::google::protobuf::internal::SCCInfo<0> scc_info_ReqAckJoinActivity =
     {{ATOMIC_VAR_INIT(::google::protobuf::internal::SCCInfoBase::kUninitialized), 0, InitDefaultsReqAckJoinActivity}, {}};
 
-static void InitDefaultsReqAckCreateGuild() {
+static void InitDefaultsReqAckCreateClan() {
   GOOGLE_PROTOBUF_VERIFY_VERSION;
 
   {
-    void* ptr = &::NFMsg::_ReqAckCreateGuild_default_instance_;
-    new (ptr) ::NFMsg::ReqAckCreateGuild();
+    void* ptr = &::NFMsg::_ReqAckCreateClan_default_instance_;
+    new (ptr) ::NFMsg::ReqAckCreateClan();
     ::google::protobuf::internal::OnShutdownDestroyMessage(ptr);
   }
-  ::NFMsg::ReqAckCreateGuild::InitAsDefaultInstance();
+  ::NFMsg::ReqAckCreateClan::InitAsDefaultInstance();
 }
 
-LIBPROTOC_EXPORT ::google::protobuf::internal::SCCInfo<1> scc_info_ReqAckCreateGuild =
-    {{ATOMIC_VAR_INIT(::google::protobuf::internal::SCCInfoBase::kUninitialized), 1, InitDefaultsReqAckCreateGuild}, {
+LIBPROTOC_EXPORT ::google::protobuf::internal::SCCInfo<1> scc_info_ReqAckCreateClan =
+    {{ATOMIC_VAR_INIT(::google::protobuf::internal::SCCInfoBase::kUninitialized), 1, InitDefaultsReqAckCreateClan}, {
       &protobuf_NFMsgBase_2eproto::scc_info_Ident.base,}};
 
-static void InitDefaultsReqSearchGuild() {
+static void InitDefaultsReqSearchClan() {
   GOOGLE_PROTOBUF_VERIFY_VERSION;
 
   {
-    void* ptr = &::NFMsg::_ReqSearchGuild_default_instance_;
-    new (ptr) ::NFMsg::ReqSearchGuild();
+    void* ptr = &::NFMsg::_ReqSearchClan_default_instance_;
+    new (ptr) ::NFMsg::ReqSearchClan();
     ::google::protobuf::internal::OnShutdownDestroyMessage(ptr);
   }
-  ::NFMsg::ReqSearchGuild::InitAsDefaultInstance();
+  ::NFMsg::ReqSearchClan::InitAsDefaultInstance();
 }
 
-LIBPROTOC_EXPORT ::google::protobuf::internal::SCCInfo<0> scc_info_ReqSearchGuild =
-    {{ATOMIC_VAR_INIT(::google::protobuf::internal::SCCInfoBase::kUninitialized), 0, InitDefaultsReqSearchGuild}, {}};
+LIBPROTOC_EXPORT ::google::protobuf::internal::SCCInfo<0> scc_info_ReqSearchClan =
+    {{ATOMIC_VAR_INIT(::google::protobuf::internal::SCCInfoBase::kUninitialized), 0, InitDefaultsReqSearchClan}, {}};
 
-static void InitDefaultsAckSearchGuild_SearchGuildObject() {
+static void InitDefaultsAckSearchClan_SearchClanObject() {
   GOOGLE_PROTOBUF_VERIFY_VERSION;
 
   {
-    void* ptr = &::NFMsg::_AckSearchGuild_SearchGuildObject_default_instance_;
-    new (ptr) ::NFMsg::AckSearchGuild_SearchGuildObject();
+    void* ptr = &::NFMsg::_AckSearchClan_SearchClanObject_default_instance_;
+    new (ptr) ::NFMsg::AckSearchClan_SearchClanObject();
     ::google::protobuf::internal::OnShutdownDestroyMessage(ptr);
   }
-  ::NFMsg::AckSearchGuild_SearchGuildObject::InitAsDefaultInstance();
+  ::NFMsg::AckSearchClan_SearchClanObject::InitAsDefaultInstance();
 }
 
-LIBPROTOC_EXPORT ::google::protobuf::internal::SCCInfo<1> scc_info_AckSearchGuild_SearchGuildObject =
-    {{ATOMIC_VAR_INIT(::google::protobuf::internal::SCCInfoBase::kUninitialized), 1, InitDefaultsAckSearchGuild_SearchGuildObject}, {
+LIBPROTOC_EXPORT ::google::protobuf::internal::SCCInfo<1> scc_info_AckSearchClan_SearchClanObject =
+    {{ATOMIC_VAR_INIT(::google::protobuf::internal::SCCInfoBase::kUninitialized), 1, InitDefaultsAckSearchClan_SearchClanObject}, {
       &protobuf_NFMsgBase_2eproto::scc_info_Ident.base,}};
 
-static void InitDefaultsAckSearchGuild() {
+static void InitDefaultsAckSearchClan() {
   GOOGLE_PROTOBUF_VERIFY_VERSION;
 
   {
-    void* ptr = &::NFMsg::_AckSearchGuild_default_instance_;
-    new (ptr) ::NFMsg::AckSearchGuild();
+    void* ptr = &::NFMsg::_AckSearchClan_default_instance_;
+    new (ptr) ::NFMsg::AckSearchClan();
     ::google::protobuf::internal::OnShutdownDestroyMessage(ptr);
   }
-  ::NFMsg::AckSearchGuild::InitAsDefaultInstance();
+  ::NFMsg::AckSearchClan::InitAsDefaultInstance();
 }
 
-LIBPROTOC_EXPORT ::google::protobuf::internal::SCCInfo<1> scc_info_AckSearchGuild =
-    {{ATOMIC_VAR_INIT(::google::protobuf::internal::SCCInfoBase::kUninitialized), 1, InitDefaultsAckSearchGuild}, {
-      &protobuf_NFMsgShare_2eproto::scc_info_AckSearchGuild_SearchGuildObject.base,}};
+LIBPROTOC_EXPORT ::google::protobuf::internal::SCCInfo<1> scc_info_AckSearchClan =
+    {{ATOMIC_VAR_INIT(::google::protobuf::internal::SCCInfoBase::kUninitialized), 1, InitDefaultsAckSearchClan}, {
+      &protobuf_NFMsgShare_2eproto::scc_info_AckSearchClan_SearchClanObject.base,}};
 
-static void InitDefaultsReqAckJoinGuild() {
+static void InitDefaultsReqAckJoinClan() {
   GOOGLE_PROTOBUF_VERIFY_VERSION;
 
   {
-    void* ptr = &::NFMsg::_ReqAckJoinGuild_default_instance_;
-    new (ptr) ::NFMsg::ReqAckJoinGuild();
+    void* ptr = &::NFMsg::_ReqAckJoinClan_default_instance_;
+    new (ptr) ::NFMsg::ReqAckJoinClan();
     ::google::protobuf::internal::OnShutdownDestroyMessage(ptr);
   }
-  ::NFMsg::ReqAckJoinGuild::InitAsDefaultInstance();
+  ::NFMsg::ReqAckJoinClan::InitAsDefaultInstance();
 }
 
-LIBPROTOC_EXPORT ::google::protobuf::internal::SCCInfo<1> scc_info_ReqAckJoinGuild =
-    {{ATOMIC_VAR_INIT(::google::protobuf::internal::SCCInfoBase::kUninitialized), 1, InitDefaultsReqAckJoinGuild}, {
+LIBPROTOC_EXPORT ::google::protobuf::internal::SCCInfo<1> scc_info_ReqAckJoinClan =
+    {{ATOMIC_VAR_INIT(::google::protobuf::internal::SCCInfoBase::kUninitialized), 1, InitDefaultsReqAckJoinClan}, {
       &protobuf_NFMsgBase_2eproto::scc_info_Ident.base,}};
 
-static void InitDefaultsReqAckLeaveGuild() {
+static void InitDefaultsReqAckLeaveClan() {
   GOOGLE_PROTOBUF_VERIFY_VERSION;
 
   {
-    void* ptr = &::NFMsg::_ReqAckLeaveGuild_default_instance_;
-    new (ptr) ::NFMsg::ReqAckLeaveGuild();
+    void* ptr = &::NFMsg::_ReqAckLeaveClan_default_instance_;
+    new (ptr) ::NFMsg::ReqAckLeaveClan();
     ::google::protobuf::internal::OnShutdownDestroyMessage(ptr);
   }
-  ::NFMsg::ReqAckLeaveGuild::InitAsDefaultInstance();
+  ::NFMsg::ReqAckLeaveClan::InitAsDefaultInstance();
 }
 
-LIBPROTOC_EXPORT ::google::protobuf::internal::SCCInfo<1> scc_info_ReqAckLeaveGuild =
-    {{ATOMIC_VAR_INIT(::google::protobuf::internal::SCCInfoBase::kUninitialized), 1, InitDefaultsReqAckLeaveGuild}, {
+LIBPROTOC_EXPORT ::google::protobuf::internal::SCCInfo<1> scc_info_ReqAckLeaveClan =
+    {{ATOMIC_VAR_INIT(::google::protobuf::internal::SCCInfoBase::kUninitialized), 1, InitDefaultsReqAckLeaveClan}, {
       &protobuf_NFMsgBase_2eproto::scc_info_Ident.base,}};
 
-static void InitDefaultsReqAckOprGuildMember() {
+static void InitDefaultsReqAckOprClanMember() {
   GOOGLE_PROTOBUF_VERIFY_VERSION;
 
   {
-    void* ptr = &::NFMsg::_ReqAckOprGuildMember_default_instance_;
-    new (ptr) ::NFMsg::ReqAckOprGuildMember();
+    void* ptr = &::NFMsg::_ReqAckOprClanMember_default_instance_;
+    new (ptr) ::NFMsg::ReqAckOprClanMember();
     ::google::protobuf::internal::OnShutdownDestroyMessage(ptr);
   }
-  ::NFMsg::ReqAckOprGuildMember::InitAsDefaultInstance();
+  ::NFMsg::ReqAckOprClanMember::InitAsDefaultInstance();
 }
 
-LIBPROTOC_EXPORT ::google::protobuf::internal::SCCInfo<1> scc_info_ReqAckOprGuildMember =
-    {{ATOMIC_VAR_INIT(::google::protobuf::internal::SCCInfoBase::kUninitialized), 1, InitDefaultsReqAckOprGuildMember}, {
+LIBPROTOC_EXPORT ::google::protobuf::internal::SCCInfo<1> scc_info_ReqAckOprClanMember =
+    {{ATOMIC_VAR_INIT(::google::protobuf::internal::SCCInfoBase::kUninitialized), 1, InitDefaultsReqAckOprClanMember}, {
       &protobuf_NFMsgBase_2eproto::scc_info_Ident.base,}};
 
-static void InitDefaultsReqEnterGuildEctype() {
+static void InitDefaultsReqEnterClanEctype() {
   GOOGLE_PROTOBUF_VERIFY_VERSION;
 
   {
-    void* ptr = &::NFMsg::_ReqEnterGuildEctype_default_instance_;
-    new (ptr) ::NFMsg::ReqEnterGuildEctype();
+    void* ptr = &::NFMsg::_ReqEnterClanEctype_default_instance_;
+    new (ptr) ::NFMsg::ReqEnterClanEctype();
     ::google::protobuf::internal::OnShutdownDestroyMessage(ptr);
   }
-  ::NFMsg::ReqEnterGuildEctype::InitAsDefaultInstance();
+  ::NFMsg::ReqEnterClanEctype::InitAsDefaultInstance();
 }
 
-LIBPROTOC_EXPORT ::google::protobuf::internal::SCCInfo<1> scc_info_ReqEnterGuildEctype =
-    {{ATOMIC_VAR_INIT(::google::protobuf::internal::SCCInfoBase::kUninitialized), 1, InitDefaultsReqEnterGuildEctype}, {
+LIBPROTOC_EXPORT ::google::protobuf::internal::SCCInfo<1> scc_info_ReqEnterClanEctype =
+    {{ATOMIC_VAR_INIT(::google::protobuf::internal::SCCInfoBase::kUninitialized), 1, InitDefaultsReqEnterClanEctype}, {
       &protobuf_NFMsgBase_2eproto::scc_info_Ident.base,}};
 
 static void InitDefaultsReqSetFightHero() {
@@ -1144,14 +1144,14 @@ void InitDefaults() {
   ::google::protobuf::internal::InitSCC(&scc_info_ReqAcceptTask.base);
   ::google::protobuf::internal::InitSCC(&scc_info_ReqCompeleteTask.base);
   ::google::protobuf::internal::InitSCC(&scc_info_ReqAckJoinActivity.base);
-  ::google::protobuf::internal::InitSCC(&scc_info_ReqAckCreateGuild.base);
-  ::google::protobuf::internal::InitSCC(&scc_info_ReqSearchGuild.base);
-  ::google::protobuf::internal::InitSCC(&scc_info_AckSearchGuild_SearchGuildObject.base);
-  ::google::protobuf::internal::InitSCC(&scc_info_AckSearchGuild.base);
-  ::google::protobuf::internal::InitSCC(&scc_info_ReqAckJoinGuild.base);
-  ::google::protobuf::internal::InitSCC(&scc_info_ReqAckLeaveGuild.base);
-  ::google::protobuf::internal::InitSCC(&scc_info_ReqAckOprGuildMember.base);
-  ::google::protobuf::internal::InitSCC(&scc_info_ReqEnterGuildEctype.base);
+  ::google::protobuf::internal::InitSCC(&scc_info_ReqAckCreateClan.base);
+  ::google::protobuf::internal::InitSCC(&scc_info_ReqSearchClan.base);
+  ::google::protobuf::internal::InitSCC(&scc_info_AckSearchClan_SearchClanObject.base);
+  ::google::protobuf::internal::InitSCC(&scc_info_AckSearchClan.base);
+  ::google::protobuf::internal::InitSCC(&scc_info_ReqAckJoinClan.base);
+  ::google::protobuf::internal::InitSCC(&scc_info_ReqAckLeaveClan.base);
+  ::google::protobuf::internal::InitSCC(&scc_info_ReqAckOprClanMember.base);
+  ::google::protobuf::internal::InitSCC(&scc_info_ReqEnterClanEctype.base);
   ::google::protobuf::internal::InitSCC(&scc_info_ReqSetFightHero.base);
   ::google::protobuf::internal::InitSCC(&scc_info_ReqSwitchFightHero.base);
   ::google::protobuf::internal::InitSCC(&scc_info_ReqBuyItemFromShop.base);
@@ -1399,64 +1399,64 @@ const ::google::protobuf::uint32 TableStruct::offsets[] GOOGLE_PROTOBUF_ATTRIBUT
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NFMsg::ReqAckJoinActivity, activity_type_),
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NFMsg::ReqAckJoinActivity, sub_activity_type_),
   ~0u,  // no _has_bits_
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NFMsg::ReqAckCreateGuild, _internal_metadata_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NFMsg::ReqAckCreateClan, _internal_metadata_),
   ~0u,  // no _extensions_
   ~0u,  // no _oneof_case_
   ~0u,  // no _weak_field_map_
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NFMsg::ReqAckCreateGuild, guild_id_),
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NFMsg::ReqAckCreateGuild, guild_name_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NFMsg::ReqAckCreateClan, clan_id_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NFMsg::ReqAckCreateClan, clan_name_),
   ~0u,  // no _has_bits_
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NFMsg::ReqSearchGuild, _internal_metadata_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NFMsg::ReqSearchClan, _internal_metadata_),
   ~0u,  // no _extensions_
   ~0u,  // no _oneof_case_
   ~0u,  // no _weak_field_map_
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NFMsg::ReqSearchGuild, guild_name_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NFMsg::ReqSearchClan, clan_name_),
   ~0u,  // no _has_bits_
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NFMsg::AckSearchGuild_SearchGuildObject, _internal_metadata_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NFMsg::AckSearchClan_SearchClanObject, _internal_metadata_),
   ~0u,  // no _extensions_
   ~0u,  // no _oneof_case_
   ~0u,  // no _weak_field_map_
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NFMsg::AckSearchGuild_SearchGuildObject, guild_id_),
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NFMsg::AckSearchGuild_SearchGuildObject, guild_name_),
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NFMsg::AckSearchGuild_SearchGuildObject, guild_icon_),
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NFMsg::AckSearchGuild_SearchGuildObject, guild_member_count_),
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NFMsg::AckSearchGuild_SearchGuildObject, guild_member_max_count_),
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NFMsg::AckSearchGuild_SearchGuildObject, guild_honor_),
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NFMsg::AckSearchGuild_SearchGuildObject, guild_rank_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NFMsg::AckSearchClan_SearchClanObject, clan_id_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NFMsg::AckSearchClan_SearchClanObject, clan_name_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NFMsg::AckSearchClan_SearchClanObject, clan_icon_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NFMsg::AckSearchClan_SearchClanObject, clan_member_count_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NFMsg::AckSearchClan_SearchClanObject, clan_member_max_count_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NFMsg::AckSearchClan_SearchClanObject, clan_honor_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NFMsg::AckSearchClan_SearchClanObject, clan_rank_),
   ~0u,  // no _has_bits_
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NFMsg::AckSearchGuild, _internal_metadata_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NFMsg::AckSearchClan, _internal_metadata_),
   ~0u,  // no _extensions_
   ~0u,  // no _oneof_case_
   ~0u,  // no _weak_field_map_
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NFMsg::AckSearchGuild, guild_list_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NFMsg::AckSearchClan, clan_list_),
   ~0u,  // no _has_bits_
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NFMsg::ReqAckJoinGuild, _internal_metadata_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NFMsg::ReqAckJoinClan, _internal_metadata_),
   ~0u,  // no _extensions_
   ~0u,  // no _oneof_case_
   ~0u,  // no _weak_field_map_
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NFMsg::ReqAckJoinGuild, guild_id_),
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NFMsg::ReqAckJoinGuild, guild_name_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NFMsg::ReqAckJoinClan, clan_id_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NFMsg::ReqAckJoinClan, clan_name_),
   ~0u,  // no _has_bits_
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NFMsg::ReqAckLeaveGuild, _internal_metadata_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NFMsg::ReqAckLeaveClan, _internal_metadata_),
   ~0u,  // no _extensions_
   ~0u,  // no _oneof_case_
   ~0u,  // no _weak_field_map_
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NFMsg::ReqAckLeaveGuild, guild_id_),
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NFMsg::ReqAckLeaveGuild, guild_name_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NFMsg::ReqAckLeaveClan, clan_id_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NFMsg::ReqAckLeaveClan, clan_name_),
   ~0u,  // no _has_bits_
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NFMsg::ReqAckOprGuildMember, _internal_metadata_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NFMsg::ReqAckOprClanMember, _internal_metadata_),
   ~0u,  // no _extensions_
   ~0u,  // no _oneof_case_
   ~0u,  // no _weak_field_map_
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NFMsg::ReqAckOprGuildMember, guild_id_),
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NFMsg::ReqAckOprGuildMember, member_id_),
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NFMsg::ReqAckOprGuildMember, type_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NFMsg::ReqAckOprClanMember, clan_id_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NFMsg::ReqAckOprClanMember, member_id_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NFMsg::ReqAckOprClanMember, type_),
   ~0u,  // no _has_bits_
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NFMsg::ReqEnterGuildEctype, _internal_metadata_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NFMsg::ReqEnterClanEctype, _internal_metadata_),
   ~0u,  // no _extensions_
   ~0u,  // no _oneof_case_
   ~0u,  // no _weak_field_map_
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NFMsg::ReqEnterGuildEctype, guild_id_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NFMsg::ReqEnterClanEctype, clan_id_),
   ~0u,  // no _has_bits_
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NFMsg::ReqSetFightHero, _internal_metadata_),
   ~0u,  // no _extensions_
@@ -1665,14 +1665,14 @@ static const ::google::protobuf::internal::MigrationSchema schemas[] GOOGLE_PROT
   { 202, -1, sizeof(::NFMsg::ReqAcceptTask)},
   { 208, -1, sizeof(::NFMsg::ReqCompeleteTask)},
   { 214, -1, sizeof(::NFMsg::ReqAckJoinActivity)},
-  { 221, -1, sizeof(::NFMsg::ReqAckCreateGuild)},
-  { 228, -1, sizeof(::NFMsg::ReqSearchGuild)},
-  { 234, -1, sizeof(::NFMsg::AckSearchGuild_SearchGuildObject)},
-  { 246, -1, sizeof(::NFMsg::AckSearchGuild)},
-  { 252, -1, sizeof(::NFMsg::ReqAckJoinGuild)},
-  { 259, -1, sizeof(::NFMsg::ReqAckLeaveGuild)},
-  { 266, -1, sizeof(::NFMsg::ReqAckOprGuildMember)},
-  { 274, -1, sizeof(::NFMsg::ReqEnterGuildEctype)},
+  { 221, -1, sizeof(::NFMsg::ReqAckCreateClan)},
+  { 228, -1, sizeof(::NFMsg::ReqSearchClan)},
+  { 234, -1, sizeof(::NFMsg::AckSearchClan_SearchClanObject)},
+  { 246, -1, sizeof(::NFMsg::AckSearchClan)},
+  { 252, -1, sizeof(::NFMsg::ReqAckJoinClan)},
+  { 259, -1, sizeof(::NFMsg::ReqAckLeaveClan)},
+  { 266, -1, sizeof(::NFMsg::ReqAckOprClanMember)},
+  { 274, -1, sizeof(::NFMsg::ReqEnterClanEctype)},
   { 280, -1, sizeof(::NFMsg::ReqSetFightHero)},
   { 287, -1, sizeof(::NFMsg::ReqSwitchFightHero)},
   { 293, -1, sizeof(::NFMsg::ReqBuyItemFromShop)},
@@ -1722,14 +1722,14 @@ static ::google::protobuf::Message const * const file_default_instances[] = {
   reinterpret_cast<const ::google::protobuf::Message*>(&::NFMsg::_ReqAcceptTask_default_instance_),
   reinterpret_cast<const ::google::protobuf::Message*>(&::NFMsg::_ReqCompeleteTask_default_instance_),
   reinterpret_cast<const ::google::protobuf::Message*>(&::NFMsg::_ReqAckJoinActivity_default_instance_),
-  reinterpret_cast<const ::google::protobuf::Message*>(&::NFMsg::_ReqAckCreateGuild_default_instance_),
-  reinterpret_cast<const ::google::protobuf::Message*>(&::NFMsg::_ReqSearchGuild_default_instance_),
-  reinterpret_cast<const ::google::protobuf::Message*>(&::NFMsg::_AckSearchGuild_SearchGuildObject_default_instance_),
-  reinterpret_cast<const ::google::protobuf::Message*>(&::NFMsg::_AckSearchGuild_default_instance_),
-  reinterpret_cast<const ::google::protobuf::Message*>(&::NFMsg::_ReqAckJoinGuild_default_instance_),
-  reinterpret_cast<const ::google::protobuf::Message*>(&::NFMsg::_ReqAckLeaveGuild_default_instance_),
-  reinterpret_cast<const ::google::protobuf::Message*>(&::NFMsg::_ReqAckOprGuildMember_default_instance_),
-  reinterpret_cast<const ::google::protobuf::Message*>(&::NFMsg::_ReqEnterGuildEctype_default_instance_),
+  reinterpret_cast<const ::google::protobuf::Message*>(&::NFMsg::_ReqAckCreateClan_default_instance_),
+  reinterpret_cast<const ::google::protobuf::Message*>(&::NFMsg::_ReqSearchClan_default_instance_),
+  reinterpret_cast<const ::google::protobuf::Message*>(&::NFMsg::_AckSearchClan_SearchClanObject_default_instance_),
+  reinterpret_cast<const ::google::protobuf::Message*>(&::NFMsg::_AckSearchClan_default_instance_),
+  reinterpret_cast<const ::google::protobuf::Message*>(&::NFMsg::_ReqAckJoinClan_default_instance_),
+  reinterpret_cast<const ::google::protobuf::Message*>(&::NFMsg::_ReqAckLeaveClan_default_instance_),
+  reinterpret_cast<const ::google::protobuf::Message*>(&::NFMsg::_ReqAckOprClanMember_default_instance_),
+  reinterpret_cast<const ::google::protobuf::Message*>(&::NFMsg::_ReqEnterClanEctype_default_instance_),
   reinterpret_cast<const ::google::protobuf::Message*>(&::NFMsg::_ReqSetFightHero_default_instance_),
   reinterpret_cast<const ::google::protobuf::Message*>(&::NFMsg::_ReqSwitchFightHero_default_instance_),
   reinterpret_cast<const ::google::protobuf::Message*>(&::NFMsg::_ReqBuyItemFromShop_default_instance_),
@@ -1786,156 +1786,156 @@ void AddDescriptorsImpl() {
       "\001(\014\"A\n\022AckPlayerEntryList\022+\n\013object_list"
       "\030\001 \003(\0132\026.NFMsg.PlayerEntryInfo\"7\n\022AckPla"
       "yerLeaveList\022!\n\013object_list\030\001 \003(\0132\014.NFMs"
-      "g.Ident\"\207\002\n\rReqAckSynData\022\033\n\005syser\030\001 \001(\013"
+      "g.Ident\"\206\002\n\rReqAckSynData\022\033\n\005syser\030\001 \001(\013"
       "2\014.NFMsg.Ident\022!\n\013object_list\030\002 \003(\0132\014.NF"
       "Msg.Ident\022\014\n\004data\030\003 \001(\014\022.\n\010syn_type\030\004 \001("
       "\0162\034.NFMsg.ReqAckSynData.SynType\022 \n\006msg_i"
-      "d\030\005 \001(\0162\020.NFMsg.ESynMsgID\"V\n\007SynType\022\016\n\n"
+      "d\030\005 \001(\0162\020.NFMsg.ESynMsgID\"U\n\007SynType\022\016\n\n"
       "EST_UNKNOW\020\000\022\r\n\tEST_GROUP\020\001\022\r\n\tEST_SCENE"
-      "\020\002\022\r\n\tEST_GUILD\020\003\022\016\n\nEST_FRIEND\020\004\"\341\001\n\020Re"
-      "qAckPlayerMove\022\033\n\005mover\030\001 \001(\0132\014.NFMsg.Id"
-      "ent\022\020\n\010moveType\030\002 \001(\005\022\r\n\005speed\030\003 \001(\002\022\014\n\004"
-      "time\030\004 \001(\005\022\021\n\tlastState\030\005 \001(\005\022\"\n\ntarget_"
-      "pos\030\006 \003(\0132\016.NFMsg.Vector3\022\"\n\nsource_pos\030"
-      "\007 \003(\0132\016.NFMsg.Vector3\022&\n\016move_direction\030"
-      "\010 \003(\0132\016.NFMsg.Vector3\"\257\003\n\020ReqAckPlayerCh"
-      "at\022\035\n\007chat_id\030\001 \001(\0132\014.NFMsg.Ident\0228\n\tcha"
-      "t_type\030\002 \001(\0162%.NFMsg.ReqAckPlayerChat.EG"
-      "ameChatType\022\021\n\tchat_info\030\003 \001(\014\022\021\n\tchat_n"
-      "ame\030\004 \001(\014\022\037\n\ttarget_id\030\005 \001(\0132\014.NFMsg.Ide"
-      "nt\022=\n\016Container_data\030\006 \003(\0132%.NFMsg.ReqAc"
-      "kPlayerChat.ChatContainer\032j\n\rChatContain"
-      "er\022\025\n\rConTainerType\030\002 \001(\005\022\021\n\tdata_info\030\003"
-      " \001(\014\"/\n\rContainerType\022\017\n\013EGCT_UNKNOW\020\000\022\r"
-      "\n\tEGCT_ITEM\020\001\"P\n\rEGameChatType\022\016\n\nEGCT_G"
-      "UILD\020\000\022\020\n\014EGCT_PRIVATE\020\001\022\r\n\tEGCT_TEAM\020\002\022"
-      "\016\n\nEGCT_WORLD\020\003\"\277\001\n\023ReqAckPlayerPosSync\022"
-      "\033\n\005mover\030\001 \001(\0132\014.NFMsg.Ident\022\014\n\004time\030\002 \001"
-      "(\005\022\031\n\021InterpolationTime\030\003 \001(\002\022 \n\010positio"
-      "n\030\004 \001(\0132\016.NFMsg.Vector3\022!\n\tdirection\030\005 \001"
-      "(\0132\016.NFMsg.Vector3\022\016\n\006status\030\006 \001(\005\022\r\n\005fr"
-      "ame\030\007 \001(\005\"\323\001\n\nEffectData\022\"\n\014effect_ident"
-      "\030\001 \001(\0132\014.NFMsg.Ident\022\024\n\014effect_value\030\002 \001"
-      "(\005\0221\n\neffect_rlt\030\003 \001(\0162\035.NFMsg.EffectDat"
-      "a.EResultType\"X\n\013EResultType\022\014\n\010EET_FAIL"
-      "\020\000\022\017\n\013EET_SUCCESS\020\001\022\016\n\nEET_REFUSE\020\002\022\014\n\010E"
-      "ET_MISS\020\003\022\014\n\010EET_CRIT\020\004\"y\n\016ReqAckUseSkil"
-      "l\022\032\n\004user\030\001 \001(\0132\014.NFMsg.Ident\022\020\n\010skill_i"
-      "d\030\002 \001(\014\022\021\n\tuse_index\030\003 \001(\005\022&\n\013effect_dat"
-      "a\030\004 \003(\0132\021.NFMsg.EffectData\"\327\001\n\rReqAckUse"
-      "Item\022\032\n\004user\030\001 \001(\0132\014.NFMsg.Ident\022\037\n\titem"
-      "_guid\030\002 \001(\0132\014.NFMsg.Ident\022&\n\013effect_data"
-      "\030\003 \003(\0132\021.NFMsg.EffectData\022\037\n\004item\030\004 \001(\0132"
-      "\021.NFMsg.ItemStruct\022\036\n\010targetid\030\005 \001(\0132\014.N"
-      "FMsg.Ident\022 \n\010position\030\006 \001(\0132\016.NFMsg.Vec"
-      "tor3\"\363\001\n\017ReqAckSwapScene\022;\n\rtransfer_typ"
-      "e\030\001 \001(\0162$.NFMsg.ReqAckSwapScene.EGameSwa"
-      "pType\022\020\n\010scene_id\030\002 \001(\005\022\017\n\007line_id\030\003 \001(\005"
-      "\022\t\n\001x\030\004 \001(\002\022\t\n\001y\030\005 \001(\002\022\t\n\001z\030\006 \001(\002\022\014\n\004dat"
-      "a\030\007 \001(\014\"Q\n\rEGameSwapType\022\017\n\013EGST_NARMAL\020"
-      "\000\022\016\n\nEGST_CLONE\020\001\022\016\n\nEGST_ARENA\020\002\022\017\n\013EGS"
-      "T_MIRROR\020\003\"\037\n\017ReqAckHomeScene\022\014\n\004data\030\001 "
-      "\001(\014\"1\n\nItemStruct\022\017\n\007item_id\030\001 \001(\014\022\022\n\nit"
-      "em_count\030\002 \001(\005\"\?\n\016CurrencyStruct\022\025\n\rcurr"
-      "ency_type\030\001 \001(\005\022\026\n\016currency_count\030\002 \001(\005\""
-      "2\n\021ReqAckStartBattle\022\014\n\004gold\030\001 \001(\005\022\017\n\007di"
-      "amond\030\002 \001(\005\"\016\n\014ReqEndBattle\">\n\014ReqAckRel"
-      "ive\022\017\n\007diamond\030\001 \001(\005\022\035\n\007hero_id\030\002 \001(\0132\014."
-      "NFMsg.Ident\"{\n\014AckEndBattle\022\013\n\003win\030\001 \001(\005"
-      "\022\014\n\004star\030\002 \001(\005\022\014\n\004gold\030\003 \001(\005\022\013\n\003exp\030\004 \001("
-      "\005\022\017\n\007diamond\030\005 \001(\005\022$\n\titem_list\030\006 \003(\0132\021."
-      "NFMsg.ItemStruct\"2\n\017ReqPickDropItem\022\037\n\ti"
-      "tem_guid\030\002 \001(\0132\014.NFMsg.Ident\" \n\rReqAccep"
-      "tTask\022\017\n\007task_id\030\001 \001(\014\"#\n\020ReqCompeleteTa"
-      "sk\022\017\n\007task_id\030\001 \001(\014\"\357\001\n\022ReqAckJoinActivi"
-      "ty\022B\n\ractivity_type\030\001 \001(\0162+.NFMsg.ReqAck"
-      "JoinActivity.EGameActivityType\022I\n\021sub_ac"
-      "tivity_type\030\002 \001(\0162..NFMsg.ReqAckJoinActi"
-      "vity.EGameActivitySubType\"!\n\021EGameActivi"
-      "tyType\022\014\n\010EGAT_PVP\020\000\"\'\n\024EGameActivitySub"
-      "Type\022\017\n\013EGAT_NORMAL\020\000\"G\n\021ReqAckCreateGui"
-      "ld\022\036\n\010guild_id\030\001 \001(\0132\014.NFMsg.Ident\022\022\n\ngu"
-      "ild_name\030\002 \001(\014\"$\n\016ReqSearchGuild\022\022\n\nguil"
-      "d_name\030\001 \001(\014\"\220\002\n\016AckSearchGuild\022;\n\nguild"
-      "_list\030\001 \003(\0132\'.NFMsg.AckSearchGuild.Searc"
-      "hGuildObject\032\300\001\n\021SearchGuildObject\022\036\n\010gu"
-      "ild_ID\030\001 \001(\0132\014.NFMsg.Ident\022\022\n\nguild_name"
-      "\030\002 \001(\014\022\022\n\nguild_icon\030\003 \001(\014\022\032\n\022guild_memb"
-      "er_count\030\004 \001(\005\022\036\n\026guild_member_max_count"
-      "\030\005 \001(\005\022\023\n\013guild_honor\030\006 \001(\005\022\022\n\nguild_ran"
-      "k\030\007 \001(\005\"E\n\017ReqAckJoinGuild\022\036\n\010guild_id\030\001"
-      " \001(\0132\014.NFMsg.Ident\022\022\n\nguild_name\030\002 \001(\014\"F"
-      "\n\020ReqAckLeaveGuild\022\036\n\010guild_id\030\001 \001(\0132\014.N"
-      "FMsg.Ident\022\022\n\nguild_name\030\002 \001(\014\"\332\001\n\024ReqAc"
-      "kOprGuildMember\022\036\n\010guild_id\030\001 \001(\0132\014.NFMs"
-      "g.Ident\022\037\n\tmember_id\030\002 \001(\0132\014.NFMsg.Ident"
-      "\022>\n\004type\030\003 \001(\01620.NFMsg.ReqAckOprGuildMem"
-      "ber.EGGuildMemberOprType\"A\n\024EGGuildMembe"
-      "rOprType\022\r\n\tEGAT_DOWN\020\000\022\013\n\007EGAT_UP\020\001\022\r\n\t"
-      "EGAT_KICK\020\002\"5\n\023ReqEnterGuildEctype\022\036\n\010gu"
-      "ild_id\030\001 \001(\0132\014.NFMsg.Ident\"<\n\017ReqSetFigh"
-      "tHero\022\034\n\006Heroid\030\001 \001(\0132\014.NFMsg.Ident\022\013\n\003S"
-      "et\030\002 \001(\005\"2\n\022ReqSwitchFightHero\022\034\n\006Heroid"
-      "\030\001 \001(\0132\014.NFMsg.Ident\"3\n\022ReqBuyItemFromSh"
-      "op\022\016\n\006itemID\030\001 \001(\014\022\r\n\005count\030\002 \001(\005\"5\n\021Req"
-      "AddGambleValue\022\020\n\010property\030\001 \001(\014\022\016\n\006numb"
-      "er\030\002 \001(\005\"3\n\016ReqMiningTitle\022\t\n\001x\030\001 \001(\005\022\t\n"
-      "\001y\030\002 \001(\005\022\013\n\003opr\030\003 \001(\005\".\n\tTileState\022\t\n\001x\030"
-      "\001 \001(\005\022\t\n\001y\030\002 \001(\005\022\013\n\003opr\030\003 \001(\005\"R\n\014TileBui"
-      "lding\022\t\n\001x\030\001 \001(\005\022\t\n\001y\030\002 \001(\005\022\020\n\010configID\030"
-      "\003 \001(\014\022\032\n\004guid\030\004 \001(\0132\014.NFMsg.Ident\"M\n\007Til"
-      "eNPC\022\t\n\001x\030\001 \001(\005\022\t\n\001y\030\002 \001(\005\022\020\n\010configID\030\003"
-      " \001(\014\022\032\n\004guid\030\004 \001(\0132\014.NFMsg.Ident\"t\n\016AckM"
-      "iningTitle\022\036\n\004tile\030\001 \003(\0132\020.NFMsg.TileSta"
-      "te\022%\n\010building\030\002 \003(\0132\023.NFMsg.TileBuildin"
-      "g\022\033\n\003npc\030\003 \003(\0132\016.NFMsg.TileNPC\"&\n\020ReqSea"
-      "rchOppnent\022\022\n\nself_scene\030\001 \001(\005\"\377\003\n\020AckSe"
-      "archOppnent\022\020\n\010scene_id\030\001 \001(\005\022\014\n\004gold\030\002 "
-      "\001(\005\022\017\n\007diamond\030\003 \001(\005\022\r\n\005level\030\004 \001(\005\022\013\n\003c"
-      "up\030\005 \001(\005\022\014\n\004name\030\006 \001(\014\022\014\n\004head\030\007 \001(\014\022\021\n\t"
-      "hero_cnf1\030\010 \001(\014\022\022\n\nhero_star1\030\t \001(\005\022\021\n\th"
-      "ero_cnf2\030\n \001(\014\022\022\n\nhero_star2\030\013 \001(\005\022\021\n\the"
-      "ro_cnf3\030\014 \001(\014\022\022\n\nhero_star3\030\r \001(\005\022\036\n\010her"
-      "o_id1\030\024 \001(\0132\014.NFMsg.Ident\022\036\n\010hero_id2\030\025 "
-      "\001(\0132\014.NFMsg.Ident\022\036\n\010hero_id3\030\026 \001(\0132\014.NF"
-      "Msg.Ident\022!\n\thero_pos1\030\027 \001(\0132\016.NFMsg.Vec"
-      "tor3\022!\n\thero_pos2\030\030 \001(\0132\016.NFMsg.Vector3\022"
-      "!\n\thero_pos3\030\031 \001(\0132\016.NFMsg.Vector3\022$\n\005ti"
-      "tle\030\036 \001(\0132\025.NFMsg.AckMiningTitle\022\036\n\010oppo"
-      "nent\030\037 \001(\0132\014.NFMsg.Ident\"\201\001\n\013ReqSendMail"
-      "\022\036\n\010reciever\030\001 \001(\0132\014.NFMsg.Ident\022$\n\titem"
-      "_list\030\002 \003(\0132\021.NFMsg.ItemStruct\022,\n\rcurren"
-      "cy_list\030\003 \003(\0132\025.NFMsg.CurrencyStruct\"\271\001\n"
-      "\017ReqSwitchServer\022\034\n\006selfid\030\001 \001(\0132\014.NFMsg"
-      ".Ident\022\025\n\rself_serverid\030\002 \001(\003\022\027\n\017target_"
-      "serverid\030\003 \001(\003\022\025\n\rgate_serverid\030\004 \001(\003\022\017\n"
-      "\007SceneID\030\005 \001(\003\022\037\n\tclient_id\030\006 \001(\0132\014.NFMs"
-      "g.Ident\022\017\n\007groupID\030\007 \001(\003\"v\n\017AckSwitchSer"
-      "ver\022\034\n\006selfid\030\001 \001(\0132\014.NFMsg.Ident\022\025\n\rsel"
-      "f_serverid\030\002 \001(\003\022\027\n\017target_serverid\030\003 \001("
-      "\003\022\025\n\rgate_serverid\030\004 \001(\003\"\361\001\n\013PVPRoomInfo"
-      "\022\023\n\013nCellStatus\030\001 \001(\005\022\034\n\006RoomID\030\002 \001(\0132\014."
-      "NFMsg.Ident\022\020\n\010nPVPMode\030\003 \001(\005\022\021\n\tnPVPGra"
-      "de\030\004 \001(\005\022\021\n\tMaxPalyer\030\005 \001(\005\022 \n\nxRedPlaye"
-      "r\030\006 \003(\0132\014.NFMsg.Ident\022!\n\013xBluePlayer\030\007 \003"
-      "(\0132\014.NFMsg.Ident\022\020\n\010serverid\030\010 \001(\003\022\017\n\007Sc"
-      "eneID\030\t \001(\003\022\017\n\007groupID\030\n \001(\003\"\276\001\n\020ReqPVPA"
+      "\020\002\022\014\n\010EST_CLAN\020\003\022\016\n\nEST_FRIEND\020\004\"\341\001\n\020Req"
+      "AckPlayerMove\022\033\n\005mover\030\001 \001(\0132\014.NFMsg.Ide"
+      "nt\022\020\n\010moveType\030\002 \001(\005\022\r\n\005speed\030\003 \001(\002\022\014\n\004t"
+      "ime\030\004 \001(\005\022\021\n\tlastState\030\005 \001(\005\022\"\n\ntarget_p"
+      "os\030\006 \003(\0132\016.NFMsg.Vector3\022\"\n\nsource_pos\030\007"
+      " \003(\0132\016.NFMsg.Vector3\022&\n\016move_direction\030\010"
+      " \003(\0132\016.NFMsg.Vector3\"\256\003\n\020ReqAckPlayerCha"
+      "t\022\035\n\007chat_id\030\001 \001(\0132\014.NFMsg.Ident\0228\n\tchat"
+      "_type\030\002 \001(\0162%.NFMsg.ReqAckPlayerChat.EGa"
+      "meChatType\022\021\n\tchat_info\030\003 \001(\014\022\021\n\tchat_na"
+      "me\030\004 \001(\014\022\037\n\ttarget_id\030\005 \001(\0132\014.NFMsg.Iden"
+      "t\022=\n\016Container_data\030\006 \003(\0132%.NFMsg.ReqAck"
+      "PlayerChat.ChatContainer\032j\n\rChatContaine"
+      "r\022\025\n\rConTainerType\030\002 \001(\005\022\021\n\tdata_info\030\003 "
+      "\001(\014\"/\n\rContainerType\022\017\n\013EGCT_UNKNOW\020\000\022\r\n"
+      "\tEGCT_ITEM\020\001\"O\n\rEGameChatType\022\r\n\tEGCT_CL"
+      "AN\020\000\022\020\n\014EGCT_PRIVATE\020\001\022\r\n\tEGCT_TEAM\020\002\022\016\n"
+      "\nEGCT_WORLD\020\003\"\277\001\n\023ReqAckPlayerPosSync\022\033\n"
+      "\005mover\030\001 \001(\0132\014.NFMsg.Ident\022\014\n\004time\030\002 \001(\005"
+      "\022\031\n\021InterpolationTime\030\003 \001(\002\022 \n\010position\030"
+      "\004 \001(\0132\016.NFMsg.Vector3\022!\n\tdirection\030\005 \001(\013"
+      "2\016.NFMsg.Vector3\022\016\n\006status\030\006 \001(\005\022\r\n\005fram"
+      "e\030\007 \001(\005\"\323\001\n\nEffectData\022\"\n\014effect_ident\030\001"
+      " \001(\0132\014.NFMsg.Ident\022\024\n\014effect_value\030\002 \001(\005"
+      "\0221\n\neffect_rlt\030\003 \001(\0162\035.NFMsg.EffectData."
+      "EResultType\"X\n\013EResultType\022\014\n\010EET_FAIL\020\000"
+      "\022\017\n\013EET_SUCCESS\020\001\022\016\n\nEET_REFUSE\020\002\022\014\n\010EET"
+      "_MISS\020\003\022\014\n\010EET_CRIT\020\004\"y\n\016ReqAckUseSkill\022"
+      "\032\n\004user\030\001 \001(\0132\014.NFMsg.Ident\022\020\n\010skill_id\030"
+      "\002 \001(\014\022\021\n\tuse_index\030\003 \001(\005\022&\n\013effect_data\030"
+      "\004 \003(\0132\021.NFMsg.EffectData\"\327\001\n\rReqAckUseIt"
+      "em\022\032\n\004user\030\001 \001(\0132\014.NFMsg.Ident\022\037\n\titem_g"
+      "uid\030\002 \001(\0132\014.NFMsg.Ident\022&\n\013effect_data\030\003"
+      " \003(\0132\021.NFMsg.EffectData\022\037\n\004item\030\004 \001(\0132\021."
+      "NFMsg.ItemStruct\022\036\n\010targetid\030\005 \001(\0132\014.NFM"
+      "sg.Ident\022 \n\010position\030\006 \001(\0132\016.NFMsg.Vecto"
+      "r3\"\363\001\n\017ReqAckSwapScene\022;\n\rtransfer_type\030"
+      "\001 \001(\0162$.NFMsg.ReqAckSwapScene.EGameSwapT"
+      "ype\022\020\n\010scene_id\030\002 \001(\005\022\017\n\007line_id\030\003 \001(\005\022\t"
+      "\n\001x\030\004 \001(\002\022\t\n\001y\030\005 \001(\002\022\t\n\001z\030\006 \001(\002\022\014\n\004data\030"
+      "\007 \001(\014\"Q\n\rEGameSwapType\022\017\n\013EGST_NARMAL\020\000\022"
+      "\016\n\nEGST_CLONE\020\001\022\016\n\nEGST_ARENA\020\002\022\017\n\013EGST_"
+      "MIRROR\020\003\"\037\n\017ReqAckHomeScene\022\014\n\004data\030\001 \001("
+      "\014\"1\n\nItemStruct\022\017\n\007item_id\030\001 \001(\014\022\022\n\nitem"
+      "_count\030\002 \001(\005\"\?\n\016CurrencyStruct\022\025\n\rcurren"
+      "cy_type\030\001 \001(\005\022\026\n\016currency_count\030\002 \001(\005\"2\n"
+      "\021ReqAckStartBattle\022\014\n\004gold\030\001 \001(\005\022\017\n\007diam"
+      "ond\030\002 \001(\005\"\016\n\014ReqEndBattle\">\n\014ReqAckReliv"
+      "e\022\017\n\007diamond\030\001 \001(\005\022\035\n\007hero_id\030\002 \001(\0132\014.NF"
+      "Msg.Ident\"{\n\014AckEndBattle\022\013\n\003win\030\001 \001(\005\022\014"
+      "\n\004star\030\002 \001(\005\022\014\n\004gold\030\003 \001(\005\022\013\n\003exp\030\004 \001(\005\022"
+      "\017\n\007diamond\030\005 \001(\005\022$\n\titem_list\030\006 \003(\0132\021.NF"
+      "Msg.ItemStruct\"2\n\017ReqPickDropItem\022\037\n\tite"
+      "m_guid\030\002 \001(\0132\014.NFMsg.Ident\" \n\rReqAcceptT"
+      "ask\022\017\n\007task_id\030\001 \001(\014\"#\n\020ReqCompeleteTask"
+      "\022\017\n\007task_id\030\001 \001(\014\"\357\001\n\022ReqAckJoinActivity"
+      "\022B\n\ractivity_type\030\001 \001(\0162+.NFMsg.ReqAckJo"
+      "inActivity.EGameActivityType\022I\n\021sub_acti"
+      "vity_type\030\002 \001(\0162..NFMsg.ReqAckJoinActivi"
+      "ty.EGameActivitySubType\"!\n\021EGameActivity"
+      "Type\022\014\n\010EGAT_PVP\020\000\"\'\n\024EGameActivitySubTy"
+      "pe\022\017\n\013EGAT_NORMAL\020\000\"D\n\020ReqAckCreateClan\022"
+      "\035\n\007clan_id\030\001 \001(\0132\014.NFMsg.Ident\022\021\n\tclan_n"
+      "ame\030\002 \001(\014\"\"\n\rReqSearchClan\022\021\n\tclan_name\030"
+      "\001 \001(\014\"\204\002\n\rAckSearchClan\0228\n\tclan_list\030\001 \003"
+      "(\0132%.NFMsg.AckSearchClan.SearchClanObjec"
+      "t\032\270\001\n\020SearchClanObject\022\035\n\007clan_ID\030\001 \001(\0132"
+      "\014.NFMsg.Ident\022\021\n\tclan_name\030\002 \001(\014\022\021\n\tclan"
+      "_icon\030\003 \001(\014\022\031\n\021clan_member_count\030\004 \001(\005\022\035"
+      "\n\025clan_member_max_count\030\005 \001(\005\022\022\n\nclan_ho"
+      "nor\030\006 \001(\005\022\021\n\tclan_rank\030\007 \001(\005\"B\n\016ReqAckJo"
+      "inClan\022\035\n\007clan_id\030\001 \001(\0132\014.NFMsg.Ident\022\021\n"
+      "\tclan_name\030\002 \001(\014\"C\n\017ReqAckLeaveClan\022\035\n\007c"
+      "lan_id\030\001 \001(\0132\014.NFMsg.Ident\022\021\n\tclan_name\030"
+      "\002 \001(\014\"\325\001\n\023ReqAckOprClanMember\022\035\n\007clan_id"
+      "\030\001 \001(\0132\014.NFMsg.Ident\022\037\n\tmember_id\030\002 \001(\0132"
+      "\014.NFMsg.Ident\022<\n\004type\030\003 \001(\0162..NFMsg.ReqA"
+      "ckOprClanMember.EGClanMemberOprType\"@\n\023E"
+      "GClanMemberOprType\022\r\n\tEGAT_DOWN\020\000\022\013\n\007EGA"
+      "T_UP\020\001\022\r\n\tEGAT_KICK\020\002\"3\n\022ReqEnterClanEct"
+      "ype\022\035\n\007clan_id\030\001 \001(\0132\014.NFMsg.Ident\"<\n\017Re"
+      "qSetFightHero\022\034\n\006Heroid\030\001 \001(\0132\014.NFMsg.Id"
+      "ent\022\013\n\003Set\030\002 \001(\005\"2\n\022ReqSwitchFightHero\022\034"
+      "\n\006Heroid\030\001 \001(\0132\014.NFMsg.Ident\"3\n\022ReqBuyIt"
+      "emFromShop\022\016\n\006itemID\030\001 \001(\014\022\r\n\005count\030\002 \001("
+      "\005\"5\n\021ReqAddGambleValue\022\020\n\010property\030\001 \001(\014"
+      "\022\016\n\006number\030\002 \001(\005\"3\n\016ReqMiningTitle\022\t\n\001x\030"
+      "\001 \001(\005\022\t\n\001y\030\002 \001(\005\022\013\n\003opr\030\003 \001(\005\".\n\tTileSta"
+      "te\022\t\n\001x\030\001 \001(\005\022\t\n\001y\030\002 \001(\005\022\013\n\003opr\030\003 \001(\005\"R\n"
+      "\014TileBuilding\022\t\n\001x\030\001 \001(\005\022\t\n\001y\030\002 \001(\005\022\020\n\010c"
+      "onfigID\030\003 \001(\014\022\032\n\004guid\030\004 \001(\0132\014.NFMsg.Iden"
+      "t\"M\n\007TileNPC\022\t\n\001x\030\001 \001(\005\022\t\n\001y\030\002 \001(\005\022\020\n\010co"
+      "nfigID\030\003 \001(\014\022\032\n\004guid\030\004 \001(\0132\014.NFMsg.Ident"
+      "\"t\n\016AckMiningTitle\022\036\n\004tile\030\001 \003(\0132\020.NFMsg"
+      ".TileState\022%\n\010building\030\002 \003(\0132\023.NFMsg.Til"
+      "eBuilding\022\033\n\003npc\030\003 \003(\0132\016.NFMsg.TileNPC\"&"
+      "\n\020ReqSearchOppnent\022\022\n\nself_scene\030\001 \001(\005\"\377"
+      "\003\n\020AckSearchOppnent\022\020\n\010scene_id\030\001 \001(\005\022\014\n"
+      "\004gold\030\002 \001(\005\022\017\n\007diamond\030\003 \001(\005\022\r\n\005level\030\004 "
+      "\001(\005\022\013\n\003cup\030\005 \001(\005\022\014\n\004name\030\006 \001(\014\022\014\n\004head\030\007"
+      " \001(\014\022\021\n\thero_cnf1\030\010 \001(\014\022\022\n\nhero_star1\030\t "
+      "\001(\005\022\021\n\thero_cnf2\030\n \001(\014\022\022\n\nhero_star2\030\013 \001"
+      "(\005\022\021\n\thero_cnf3\030\014 \001(\014\022\022\n\nhero_star3\030\r \001("
+      "\005\022\036\n\010hero_id1\030\024 \001(\0132\014.NFMsg.Ident\022\036\n\010her"
+      "o_id2\030\025 \001(\0132\014.NFMsg.Ident\022\036\n\010hero_id3\030\026 "
+      "\001(\0132\014.NFMsg.Ident\022!\n\thero_pos1\030\027 \001(\0132\016.N"
+      "FMsg.Vector3\022!\n\thero_pos2\030\030 \001(\0132\016.NFMsg."
+      "Vector3\022!\n\thero_pos3\030\031 \001(\0132\016.NFMsg.Vecto"
+      "r3\022$\n\005title\030\036 \001(\0132\025.NFMsg.AckMiningTitle"
+      "\022\036\n\010opponent\030\037 \001(\0132\014.NFMsg.Ident\"\201\001\n\013Req"
+      "SendMail\022\036\n\010reciever\030\001 \001(\0132\014.NFMsg.Ident"
+      "\022$\n\titem_list\030\002 \003(\0132\021.NFMsg.ItemStruct\022,"
+      "\n\rcurrency_list\030\003 \003(\0132\025.NFMsg.CurrencySt"
+      "ruct\"\271\001\n\017ReqSwitchServer\022\034\n\006selfid\030\001 \001(\013"
+      "2\014.NFMsg.Ident\022\025\n\rself_serverid\030\002 \001(\003\022\027\n"
+      "\017target_serverid\030\003 \001(\003\022\025\n\rgate_serverid\030"
+      "\004 \001(\003\022\017\n\007SceneID\030\005 \001(\003\022\037\n\tclient_id\030\006 \001("
+      "\0132\014.NFMsg.Ident\022\017\n\007groupID\030\007 \001(\003\"v\n\017AckS"
+      "witchServer\022\034\n\006selfid\030\001 \001(\0132\014.NFMsg.Iden"
+      "t\022\025\n\rself_serverid\030\002 \001(\003\022\027\n\017target_serve"
+      "rid\030\003 \001(\003\022\025\n\rgate_serverid\030\004 \001(\003\"\361\001\n\013PVP"
+      "RoomInfo\022\023\n\013nCellStatus\030\001 \001(\005\022\034\n\006RoomID\030"
+      "\002 \001(\0132\014.NFMsg.Ident\022\020\n\010nPVPMode\030\003 \001(\005\022\021\n"
+      "\tnPVPGrade\030\004 \001(\005\022\021\n\tMaxPalyer\030\005 \001(\005\022 \n\nx"
+      "RedPlayer\030\006 \003(\0132\014.NFMsg.Ident\022!\n\013xBluePl"
+      "ayer\030\007 \003(\0132\014.NFMsg.Ident\022\020\n\010serverid\030\010 \001"
+      "(\003\022\017\n\007SceneID\030\t \001(\003\022\017\n\007groupID\030\n \001(\003\"\276\001\n"
+      "\020ReqPVPApplyMatch\022\035\n\007self_id\030\001 \001(\0132\014.NFM"
+      "sg.Ident\022\020\n\010nPVPMode\030\002 \001(\005\022\r\n\005score\030\003 \001("
+      "\003\022\021\n\tApplyType\030\004 \001(\005\022\035\n\007team_id\030\005 \001(\0132\014."
+      "NFMsg.Ident\"8\n\nEApplyType\022\025\n\021EApplyType_"
+      "Single\020\000\022\023\n\017EApplyType_Team\020\001\"|\n\020AckPVPA"
       "pplyMatch\022\035\n\007self_id\030\001 \001(\0132\014.NFMsg.Ident"
-      "\022\020\n\010nPVPMode\030\002 \001(\005\022\r\n\005score\030\003 \001(\003\022\021\n\tApp"
-      "lyType\030\004 \001(\005\022\035\n\007team_id\030\005 \001(\0132\014.NFMsg.Id"
-      "ent\"8\n\nEApplyType\022\025\n\021EApplyType_Single\020\000"
-      "\022\023\n\017EApplyType_Team\020\001\"|\n\020AckPVPApplyMatc"
-      "h\022\035\n\007self_id\030\001 \001(\0132\014.NFMsg.Ident\022%\n\txRoo"
-      "mInfo\030\002 \001(\0132\022.NFMsg.PVPRoomInfo\022\021\n\tApply"
-      "Type\030\003 \001(\005\022\017\n\007nResult\030\004 \001(\005\"Z\n\022ReqCreate"
-      "PVPEctype\022\035\n\007self_id\030\001 \001(\0132\014.NFMsg.Ident"
-      "\022%\n\txRoomInfo\030\002 \001(\0132\022.NFMsg.PVPRoomInfo\""
-      "m\n\022AckCreatePVPEctype\022\035\n\007self_id\030\001 \001(\0132\014"
-      ".NFMsg.Ident\022%\n\txRoomInfo\030\002 \001(\0132\022.NFMsg."
-      "PVPRoomInfo\022\021\n\tApplyType\030\003 \001(\005b\006proto3"
+      "\022%\n\txRoomInfo\030\002 \001(\0132\022.NFMsg.PVPRoomInfo\022"
+      "\021\n\tApplyType\030\003 \001(\005\022\017\n\007nResult\030\004 \001(\005\"Z\n\022R"
+      "eqCreatePVPEctype\022\035\n\007self_id\030\001 \001(\0132\014.NFM"
+      "sg.Ident\022%\n\txRoomInfo\030\002 \001(\0132\022.NFMsg.PVPR"
+      "oomInfo\"m\n\022AckCreatePVPEctype\022\035\n\007self_id"
+      "\030\001 \001(\0132\014.NFMsg.Ident\022%\n\txRoomInfo\030\002 \001(\0132"
+      "\022.NFMsg.PVPRoomInfo\022\021\n\tApplyType\030\003 \001(\005b\006"
+      "proto3"
   };
   ::google::protobuf::DescriptorPool::InternalAddGeneratedFile(
-      descriptor, 6438);
+      descriptor, 6406);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "NFMsgShare.proto", &protobuf_RegisterTypes);
   ::protobuf_NFDefine_2eproto::AddDescriptors();
@@ -1975,7 +1975,7 @@ bool ReqAckSynData_SynType_IsValid(int value) {
 const ReqAckSynData_SynType ReqAckSynData::EST_UNKNOW;
 const ReqAckSynData_SynType ReqAckSynData::EST_GROUP;
 const ReqAckSynData_SynType ReqAckSynData::EST_SCENE;
-const ReqAckSynData_SynType ReqAckSynData::EST_GUILD;
+const ReqAckSynData_SynType ReqAckSynData::EST_CLAN;
 const ReqAckSynData_SynType ReqAckSynData::EST_FRIEND;
 const ReqAckSynData_SynType ReqAckSynData::SynType_MIN;
 const ReqAckSynData_SynType ReqAckSynData::SynType_MAX;
@@ -2019,7 +2019,7 @@ bool ReqAckPlayerChat_EGameChatType_IsValid(int value) {
 }
 
 #if !defined(_MSC_VER) || _MSC_VER >= 1900
-const ReqAckPlayerChat_EGameChatType ReqAckPlayerChat::EGCT_GUILD;
+const ReqAckPlayerChat_EGameChatType ReqAckPlayerChat::EGCT_CLAN;
 const ReqAckPlayerChat_EGameChatType ReqAckPlayerChat::EGCT_PRIVATE;
 const ReqAckPlayerChat_EGameChatType ReqAckPlayerChat::EGCT_TEAM;
 const ReqAckPlayerChat_EGameChatType ReqAckPlayerChat::EGCT_WORLD;
@@ -2117,11 +2117,11 @@ const ReqAckJoinActivity_EGameActivitySubType ReqAckJoinActivity::EGameActivityS
 const ReqAckJoinActivity_EGameActivitySubType ReqAckJoinActivity::EGameActivitySubType_MAX;
 const int ReqAckJoinActivity::EGameActivitySubType_ARRAYSIZE;
 #endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
-const ::google::protobuf::EnumDescriptor* ReqAckOprGuildMember_EGGuildMemberOprType_descriptor() {
+const ::google::protobuf::EnumDescriptor* ReqAckOprClanMember_EGClanMemberOprType_descriptor() {
   protobuf_NFMsgShare_2eproto::protobuf_AssignDescriptorsOnce();
   return protobuf_NFMsgShare_2eproto::file_level_enum_descriptors[7];
 }
-bool ReqAckOprGuildMember_EGGuildMemberOprType_IsValid(int value) {
+bool ReqAckOprClanMember_EGClanMemberOprType_IsValid(int value) {
   switch (value) {
     case 0:
     case 1:
@@ -2133,12 +2133,12 @@ bool ReqAckOprGuildMember_EGGuildMemberOprType_IsValid(int value) {
 }
 
 #if !defined(_MSC_VER) || _MSC_VER >= 1900
-const ReqAckOprGuildMember_EGGuildMemberOprType ReqAckOprGuildMember::EGAT_DOWN;
-const ReqAckOprGuildMember_EGGuildMemberOprType ReqAckOprGuildMember::EGAT_UP;
-const ReqAckOprGuildMember_EGGuildMemberOprType ReqAckOprGuildMember::EGAT_KICK;
-const ReqAckOprGuildMember_EGGuildMemberOprType ReqAckOprGuildMember::EGGuildMemberOprType_MIN;
-const ReqAckOprGuildMember_EGGuildMemberOprType ReqAckOprGuildMember::EGGuildMemberOprType_MAX;
-const int ReqAckOprGuildMember::EGGuildMemberOprType_ARRAYSIZE;
+const ReqAckOprClanMember_EGClanMemberOprType ReqAckOprClanMember::EGAT_DOWN;
+const ReqAckOprClanMember_EGClanMemberOprType ReqAckOprClanMember::EGAT_UP;
+const ReqAckOprClanMember_EGClanMemberOprType ReqAckOprClanMember::EGAT_KICK;
+const ReqAckOprClanMember_EGClanMemberOprType ReqAckOprClanMember::EGClanMemberOprType_MIN;
+const ReqAckOprClanMember_EGClanMemberOprType ReqAckOprClanMember::EGClanMemberOprType_MAX;
+const int ReqAckOprClanMember::EGClanMemberOprType_ARRAYSIZE;
 #endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
 const ::google::protobuf::EnumDescriptor* ReqPVPApplyMatch_EApplyType_descriptor() {
   protobuf_NFMsgShare_2eproto::protobuf_AssignDescriptorsOnce();
@@ -10931,115 +10931,115 @@ void ReqAckJoinActivity::InternalSwap(ReqAckJoinActivity* other) {
 
 // ===================================================================
 
-void ReqAckCreateGuild::InitAsDefaultInstance() {
-  ::NFMsg::_ReqAckCreateGuild_default_instance_._instance.get_mutable()->guild_id_ = const_cast< ::NFMsg::Ident*>(
+void ReqAckCreateClan::InitAsDefaultInstance() {
+  ::NFMsg::_ReqAckCreateClan_default_instance_._instance.get_mutable()->clan_id_ = const_cast< ::NFMsg::Ident*>(
       ::NFMsg::Ident::internal_default_instance());
 }
-void ReqAckCreateGuild::clear_guild_id() {
-  if (GetArenaNoVirtual() == NULL && guild_id_ != NULL) {
-    delete guild_id_;
+void ReqAckCreateClan::clear_clan_id() {
+  if (GetArenaNoVirtual() == NULL && clan_id_ != NULL) {
+    delete clan_id_;
   }
-  guild_id_ = NULL;
+  clan_id_ = NULL;
 }
 #if !defined(_MSC_VER) || _MSC_VER >= 1900
-const int ReqAckCreateGuild::kGuildIdFieldNumber;
-const int ReqAckCreateGuild::kGuildNameFieldNumber;
+const int ReqAckCreateClan::kClanIdFieldNumber;
+const int ReqAckCreateClan::kClanNameFieldNumber;
 #endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
 
-ReqAckCreateGuild::ReqAckCreateGuild()
+ReqAckCreateClan::ReqAckCreateClan()
   : ::google::protobuf::Message(), _internal_metadata_(NULL) {
   ::google::protobuf::internal::InitSCC(
-      &protobuf_NFMsgShare_2eproto::scc_info_ReqAckCreateGuild.base);
+      &protobuf_NFMsgShare_2eproto::scc_info_ReqAckCreateClan.base);
   SharedCtor();
-  // @@protoc_insertion_point(constructor:NFMsg.ReqAckCreateGuild)
+  // @@protoc_insertion_point(constructor:NFMsg.ReqAckCreateClan)
 }
-ReqAckCreateGuild::ReqAckCreateGuild(const ReqAckCreateGuild& from)
+ReqAckCreateClan::ReqAckCreateClan(const ReqAckCreateClan& from)
   : ::google::protobuf::Message(),
       _internal_metadata_(NULL) {
   _internal_metadata_.MergeFrom(from._internal_metadata_);
-  guild_name_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  if (from.guild_name().size() > 0) {
-    guild_name_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.guild_name_);
+  clan_name_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  if (from.clan_name().size() > 0) {
+    clan_name_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.clan_name_);
   }
-  if (from.has_guild_id()) {
-    guild_id_ = new ::NFMsg::Ident(*from.guild_id_);
+  if (from.has_clan_id()) {
+    clan_id_ = new ::NFMsg::Ident(*from.clan_id_);
   } else {
-    guild_id_ = NULL;
+    clan_id_ = NULL;
   }
-  // @@protoc_insertion_point(copy_constructor:NFMsg.ReqAckCreateGuild)
+  // @@protoc_insertion_point(copy_constructor:NFMsg.ReqAckCreateClan)
 }
 
-void ReqAckCreateGuild::SharedCtor() {
-  guild_name_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  guild_id_ = NULL;
+void ReqAckCreateClan::SharedCtor() {
+  clan_name_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  clan_id_ = NULL;
 }
 
-ReqAckCreateGuild::~ReqAckCreateGuild() {
-  // @@protoc_insertion_point(destructor:NFMsg.ReqAckCreateGuild)
+ReqAckCreateClan::~ReqAckCreateClan() {
+  // @@protoc_insertion_point(destructor:NFMsg.ReqAckCreateClan)
   SharedDtor();
 }
 
-void ReqAckCreateGuild::SharedDtor() {
-  guild_name_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  if (this != internal_default_instance()) delete guild_id_;
+void ReqAckCreateClan::SharedDtor() {
+  clan_name_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  if (this != internal_default_instance()) delete clan_id_;
 }
 
-void ReqAckCreateGuild::SetCachedSize(int size) const {
+void ReqAckCreateClan::SetCachedSize(int size) const {
   _cached_size_.Set(size);
 }
-const ::google::protobuf::Descriptor* ReqAckCreateGuild::descriptor() {
+const ::google::protobuf::Descriptor* ReqAckCreateClan::descriptor() {
   ::protobuf_NFMsgShare_2eproto::protobuf_AssignDescriptorsOnce();
   return ::protobuf_NFMsgShare_2eproto::file_level_metadata[kIndexInFileMessages].descriptor;
 }
 
-const ReqAckCreateGuild& ReqAckCreateGuild::default_instance() {
-  ::google::protobuf::internal::InitSCC(&protobuf_NFMsgShare_2eproto::scc_info_ReqAckCreateGuild.base);
+const ReqAckCreateClan& ReqAckCreateClan::default_instance() {
+  ::google::protobuf::internal::InitSCC(&protobuf_NFMsgShare_2eproto::scc_info_ReqAckCreateClan.base);
   return *internal_default_instance();
 }
 
 
-void ReqAckCreateGuild::Clear() {
-// @@protoc_insertion_point(message_clear_start:NFMsg.ReqAckCreateGuild)
+void ReqAckCreateClan::Clear() {
+// @@protoc_insertion_point(message_clear_start:NFMsg.ReqAckCreateClan)
   ::google::protobuf::uint32 cached_has_bits = 0;
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  guild_name_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  if (GetArenaNoVirtual() == NULL && guild_id_ != NULL) {
-    delete guild_id_;
+  clan_name_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  if (GetArenaNoVirtual() == NULL && clan_id_ != NULL) {
+    delete clan_id_;
   }
-  guild_id_ = NULL;
+  clan_id_ = NULL;
   _internal_metadata_.Clear();
 }
 
-bool ReqAckCreateGuild::MergePartialFromCodedStream(
+bool ReqAckCreateClan::MergePartialFromCodedStream(
     ::google::protobuf::io::CodedInputStream* input) {
 #define DO_(EXPRESSION) if (!GOOGLE_PREDICT_TRUE(EXPRESSION)) goto failure
   ::google::protobuf::uint32 tag;
-  // @@protoc_insertion_point(parse_start:NFMsg.ReqAckCreateGuild)
+  // @@protoc_insertion_point(parse_start:NFMsg.ReqAckCreateClan)
   for (;;) {
     ::std::pair<::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
     tag = p.first;
     if (!p.second) goto handle_unusual;
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // .NFMsg.Ident guild_id = 1;
+      // .NFMsg.Ident clan_id = 1;
       case 1: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
             static_cast< ::google::protobuf::uint8>(10u /* 10 & 0xFF */)) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadMessage(
-               input, mutable_guild_id()));
+               input, mutable_clan_id()));
         } else {
           goto handle_unusual;
         }
         break;
       }
 
-      // bytes guild_name = 2;
+      // bytes clan_name = 2;
       case 2: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
             static_cast< ::google::protobuf::uint8>(18u /* 18 & 0xFF */)) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadBytes(
-                input, this->mutable_guild_name()));
+                input, this->mutable_clan_name()));
         } else {
           goto handle_unusual;
         }
@@ -11058,70 +11058,70 @@ bool ReqAckCreateGuild::MergePartialFromCodedStream(
     }
   }
 success:
-  // @@protoc_insertion_point(parse_success:NFMsg.ReqAckCreateGuild)
+  // @@protoc_insertion_point(parse_success:NFMsg.ReqAckCreateClan)
   return true;
 failure:
-  // @@protoc_insertion_point(parse_failure:NFMsg.ReqAckCreateGuild)
+  // @@protoc_insertion_point(parse_failure:NFMsg.ReqAckCreateClan)
   return false;
 #undef DO_
 }
 
-void ReqAckCreateGuild::SerializeWithCachedSizes(
+void ReqAckCreateClan::SerializeWithCachedSizes(
     ::google::protobuf::io::CodedOutputStream* output) const {
-  // @@protoc_insertion_point(serialize_start:NFMsg.ReqAckCreateGuild)
+  // @@protoc_insertion_point(serialize_start:NFMsg.ReqAckCreateClan)
   ::google::protobuf::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
-  // .NFMsg.Ident guild_id = 1;
-  if (this->has_guild_id()) {
+  // .NFMsg.Ident clan_id = 1;
+  if (this->has_clan_id()) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      1, this->_internal_guild_id(), output);
+      1, this->_internal_clan_id(), output);
   }
 
-  // bytes guild_name = 2;
-  if (this->guild_name().size() > 0) {
+  // bytes clan_name = 2;
+  if (this->clan_name().size() > 0) {
     ::google::protobuf::internal::WireFormatLite::WriteBytesMaybeAliased(
-      2, this->guild_name(), output);
+      2, this->clan_name(), output);
   }
 
   if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
     ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
         (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()), output);
   }
-  // @@protoc_insertion_point(serialize_end:NFMsg.ReqAckCreateGuild)
+  // @@protoc_insertion_point(serialize_end:NFMsg.ReqAckCreateClan)
 }
 
-::google::protobuf::uint8* ReqAckCreateGuild::InternalSerializeWithCachedSizesToArray(
+::google::protobuf::uint8* ReqAckCreateClan::InternalSerializeWithCachedSizesToArray(
     bool deterministic, ::google::protobuf::uint8* target) const {
   (void)deterministic; // Unused
-  // @@protoc_insertion_point(serialize_to_array_start:NFMsg.ReqAckCreateGuild)
+  // @@protoc_insertion_point(serialize_to_array_start:NFMsg.ReqAckCreateClan)
   ::google::protobuf::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
-  // .NFMsg.Ident guild_id = 1;
-  if (this->has_guild_id()) {
+  // .NFMsg.Ident clan_id = 1;
+  if (this->has_clan_id()) {
     target = ::google::protobuf::internal::WireFormatLite::
       InternalWriteMessageToArray(
-        1, this->_internal_guild_id(), deterministic, target);
+        1, this->_internal_clan_id(), deterministic, target);
   }
 
-  // bytes guild_name = 2;
-  if (this->guild_name().size() > 0) {
+  // bytes clan_name = 2;
+  if (this->clan_name().size() > 0) {
     target =
       ::google::protobuf::internal::WireFormatLite::WriteBytesToArray(
-        2, this->guild_name(), target);
+        2, this->clan_name(), target);
   }
 
   if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
     target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
         (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()), target);
   }
-  // @@protoc_insertion_point(serialize_to_array_end:NFMsg.ReqAckCreateGuild)
+  // @@protoc_insertion_point(serialize_to_array_end:NFMsg.ReqAckCreateClan)
   return target;
 }
 
-size_t ReqAckCreateGuild::ByteSizeLong() const {
-// @@protoc_insertion_point(message_byte_size_start:NFMsg.ReqAckCreateGuild)
+size_t ReqAckCreateClan::ByteSizeLong() const {
+// @@protoc_insertion_point(message_byte_size_start:NFMsg.ReqAckCreateClan)
   size_t total_size = 0;
 
   if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
@@ -11129,18 +11129,18 @@ size_t ReqAckCreateGuild::ByteSizeLong() const {
       ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
         (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()));
   }
-  // bytes guild_name = 2;
-  if (this->guild_name().size() > 0) {
+  // bytes clan_name = 2;
+  if (this->clan_name().size() > 0) {
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::BytesSize(
-        this->guild_name());
+        this->clan_name());
   }
 
-  // .NFMsg.Ident guild_id = 1;
-  if (this->has_guild_id()) {
+  // .NFMsg.Ident clan_id = 1;
+  if (this->has_clan_id()) {
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::MessageSize(
-        *guild_id_);
+        *clan_id_);
   }
 
   int cached_size = ::google::protobuf::internal::ToCachedSize(total_size);
@@ -11148,68 +11148,68 @@ size_t ReqAckCreateGuild::ByteSizeLong() const {
   return total_size;
 }
 
-void ReqAckCreateGuild::MergeFrom(const ::google::protobuf::Message& from) {
-// @@protoc_insertion_point(generalized_merge_from_start:NFMsg.ReqAckCreateGuild)
+void ReqAckCreateClan::MergeFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_merge_from_start:NFMsg.ReqAckCreateClan)
   GOOGLE_DCHECK_NE(&from, this);
-  const ReqAckCreateGuild* source =
-      ::google::protobuf::internal::DynamicCastToGenerated<const ReqAckCreateGuild>(
+  const ReqAckCreateClan* source =
+      ::google::protobuf::internal::DynamicCastToGenerated<const ReqAckCreateClan>(
           &from);
   if (source == NULL) {
-  // @@protoc_insertion_point(generalized_merge_from_cast_fail:NFMsg.ReqAckCreateGuild)
+  // @@protoc_insertion_point(generalized_merge_from_cast_fail:NFMsg.ReqAckCreateClan)
     ::google::protobuf::internal::ReflectionOps::Merge(from, this);
   } else {
-  // @@protoc_insertion_point(generalized_merge_from_cast_success:NFMsg.ReqAckCreateGuild)
+  // @@protoc_insertion_point(generalized_merge_from_cast_success:NFMsg.ReqAckCreateClan)
     MergeFrom(*source);
   }
 }
 
-void ReqAckCreateGuild::MergeFrom(const ReqAckCreateGuild& from) {
-// @@protoc_insertion_point(class_specific_merge_from_start:NFMsg.ReqAckCreateGuild)
+void ReqAckCreateClan::MergeFrom(const ReqAckCreateClan& from) {
+// @@protoc_insertion_point(class_specific_merge_from_start:NFMsg.ReqAckCreateClan)
   GOOGLE_DCHECK_NE(&from, this);
   _internal_metadata_.MergeFrom(from._internal_metadata_);
   ::google::protobuf::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
-  if (from.guild_name().size() > 0) {
+  if (from.clan_name().size() > 0) {
 
-    guild_name_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.guild_name_);
+    clan_name_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.clan_name_);
   }
-  if (from.has_guild_id()) {
-    mutable_guild_id()->::NFMsg::Ident::MergeFrom(from.guild_id());
+  if (from.has_clan_id()) {
+    mutable_clan_id()->::NFMsg::Ident::MergeFrom(from.clan_id());
   }
 }
 
-void ReqAckCreateGuild::CopyFrom(const ::google::protobuf::Message& from) {
-// @@protoc_insertion_point(generalized_copy_from_start:NFMsg.ReqAckCreateGuild)
+void ReqAckCreateClan::CopyFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_copy_from_start:NFMsg.ReqAckCreateClan)
   if (&from == this) return;
   Clear();
   MergeFrom(from);
 }
 
-void ReqAckCreateGuild::CopyFrom(const ReqAckCreateGuild& from) {
-// @@protoc_insertion_point(class_specific_copy_from_start:NFMsg.ReqAckCreateGuild)
+void ReqAckCreateClan::CopyFrom(const ReqAckCreateClan& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:NFMsg.ReqAckCreateClan)
   if (&from == this) return;
   Clear();
   MergeFrom(from);
 }
 
-bool ReqAckCreateGuild::IsInitialized() const {
+bool ReqAckCreateClan::IsInitialized() const {
   return true;
 }
 
-void ReqAckCreateGuild::Swap(ReqAckCreateGuild* other) {
+void ReqAckCreateClan::Swap(ReqAckCreateClan* other) {
   if (other == this) return;
   InternalSwap(other);
 }
-void ReqAckCreateGuild::InternalSwap(ReqAckCreateGuild* other) {
+void ReqAckCreateClan::InternalSwap(ReqAckCreateClan* other) {
   using std::swap;
-  guild_name_.Swap(&other->guild_name_, &::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+  clan_name_.Swap(&other->clan_name_, &::google::protobuf::internal::GetEmptyStringAlreadyInited(),
     GetArenaNoVirtual());
-  swap(guild_id_, other->guild_id_);
+  swap(clan_id_, other->clan_id_);
   _internal_metadata_.Swap(&other->_internal_metadata_);
 }
 
-::google::protobuf::Metadata ReqAckCreateGuild::GetMetadata() const {
+::google::protobuf::Metadata ReqAckCreateClan::GetMetadata() const {
   protobuf_NFMsgShare_2eproto::protobuf_AssignDescriptorsOnce();
   return ::protobuf_NFMsgShare_2eproto::file_level_metadata[kIndexInFileMessages];
 }
@@ -11217,83 +11217,83 @@ void ReqAckCreateGuild::InternalSwap(ReqAckCreateGuild* other) {
 
 // ===================================================================
 
-void ReqSearchGuild::InitAsDefaultInstance() {
+void ReqSearchClan::InitAsDefaultInstance() {
 }
 #if !defined(_MSC_VER) || _MSC_VER >= 1900
-const int ReqSearchGuild::kGuildNameFieldNumber;
+const int ReqSearchClan::kClanNameFieldNumber;
 #endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
 
-ReqSearchGuild::ReqSearchGuild()
+ReqSearchClan::ReqSearchClan()
   : ::google::protobuf::Message(), _internal_metadata_(NULL) {
   ::google::protobuf::internal::InitSCC(
-      &protobuf_NFMsgShare_2eproto::scc_info_ReqSearchGuild.base);
+      &protobuf_NFMsgShare_2eproto::scc_info_ReqSearchClan.base);
   SharedCtor();
-  // @@protoc_insertion_point(constructor:NFMsg.ReqSearchGuild)
+  // @@protoc_insertion_point(constructor:NFMsg.ReqSearchClan)
 }
-ReqSearchGuild::ReqSearchGuild(const ReqSearchGuild& from)
+ReqSearchClan::ReqSearchClan(const ReqSearchClan& from)
   : ::google::protobuf::Message(),
       _internal_metadata_(NULL) {
   _internal_metadata_.MergeFrom(from._internal_metadata_);
-  guild_name_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  if (from.guild_name().size() > 0) {
-    guild_name_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.guild_name_);
+  clan_name_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  if (from.clan_name().size() > 0) {
+    clan_name_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.clan_name_);
   }
-  // @@protoc_insertion_point(copy_constructor:NFMsg.ReqSearchGuild)
+  // @@protoc_insertion_point(copy_constructor:NFMsg.ReqSearchClan)
 }
 
-void ReqSearchGuild::SharedCtor() {
-  guild_name_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+void ReqSearchClan::SharedCtor() {
+  clan_name_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 
-ReqSearchGuild::~ReqSearchGuild() {
-  // @@protoc_insertion_point(destructor:NFMsg.ReqSearchGuild)
+ReqSearchClan::~ReqSearchClan() {
+  // @@protoc_insertion_point(destructor:NFMsg.ReqSearchClan)
   SharedDtor();
 }
 
-void ReqSearchGuild::SharedDtor() {
-  guild_name_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+void ReqSearchClan::SharedDtor() {
+  clan_name_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 
-void ReqSearchGuild::SetCachedSize(int size) const {
+void ReqSearchClan::SetCachedSize(int size) const {
   _cached_size_.Set(size);
 }
-const ::google::protobuf::Descriptor* ReqSearchGuild::descriptor() {
+const ::google::protobuf::Descriptor* ReqSearchClan::descriptor() {
   ::protobuf_NFMsgShare_2eproto::protobuf_AssignDescriptorsOnce();
   return ::protobuf_NFMsgShare_2eproto::file_level_metadata[kIndexInFileMessages].descriptor;
 }
 
-const ReqSearchGuild& ReqSearchGuild::default_instance() {
-  ::google::protobuf::internal::InitSCC(&protobuf_NFMsgShare_2eproto::scc_info_ReqSearchGuild.base);
+const ReqSearchClan& ReqSearchClan::default_instance() {
+  ::google::protobuf::internal::InitSCC(&protobuf_NFMsgShare_2eproto::scc_info_ReqSearchClan.base);
   return *internal_default_instance();
 }
 
 
-void ReqSearchGuild::Clear() {
-// @@protoc_insertion_point(message_clear_start:NFMsg.ReqSearchGuild)
+void ReqSearchClan::Clear() {
+// @@protoc_insertion_point(message_clear_start:NFMsg.ReqSearchClan)
   ::google::protobuf::uint32 cached_has_bits = 0;
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  guild_name_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  clan_name_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   _internal_metadata_.Clear();
 }
 
-bool ReqSearchGuild::MergePartialFromCodedStream(
+bool ReqSearchClan::MergePartialFromCodedStream(
     ::google::protobuf::io::CodedInputStream* input) {
 #define DO_(EXPRESSION) if (!GOOGLE_PREDICT_TRUE(EXPRESSION)) goto failure
   ::google::protobuf::uint32 tag;
-  // @@protoc_insertion_point(parse_start:NFMsg.ReqSearchGuild)
+  // @@protoc_insertion_point(parse_start:NFMsg.ReqSearchClan)
   for (;;) {
     ::std::pair<::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
     tag = p.first;
     if (!p.second) goto handle_unusual;
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // bytes guild_name = 1;
+      // bytes clan_name = 1;
       case 1: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
             static_cast< ::google::protobuf::uint8>(10u /* 10 & 0xFF */)) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadBytes(
-                input, this->mutable_guild_name()));
+                input, this->mutable_clan_name()));
         } else {
           goto handle_unusual;
         }
@@ -11312,57 +11312,57 @@ bool ReqSearchGuild::MergePartialFromCodedStream(
     }
   }
 success:
-  // @@protoc_insertion_point(parse_success:NFMsg.ReqSearchGuild)
+  // @@protoc_insertion_point(parse_success:NFMsg.ReqSearchClan)
   return true;
 failure:
-  // @@protoc_insertion_point(parse_failure:NFMsg.ReqSearchGuild)
+  // @@protoc_insertion_point(parse_failure:NFMsg.ReqSearchClan)
   return false;
 #undef DO_
 }
 
-void ReqSearchGuild::SerializeWithCachedSizes(
+void ReqSearchClan::SerializeWithCachedSizes(
     ::google::protobuf::io::CodedOutputStream* output) const {
-  // @@protoc_insertion_point(serialize_start:NFMsg.ReqSearchGuild)
+  // @@protoc_insertion_point(serialize_start:NFMsg.ReqSearchClan)
   ::google::protobuf::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
-  // bytes guild_name = 1;
-  if (this->guild_name().size() > 0) {
+  // bytes clan_name = 1;
+  if (this->clan_name().size() > 0) {
     ::google::protobuf::internal::WireFormatLite::WriteBytesMaybeAliased(
-      1, this->guild_name(), output);
+      1, this->clan_name(), output);
   }
 
   if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
     ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
         (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()), output);
   }
-  // @@protoc_insertion_point(serialize_end:NFMsg.ReqSearchGuild)
+  // @@protoc_insertion_point(serialize_end:NFMsg.ReqSearchClan)
 }
 
-::google::protobuf::uint8* ReqSearchGuild::InternalSerializeWithCachedSizesToArray(
+::google::protobuf::uint8* ReqSearchClan::InternalSerializeWithCachedSizesToArray(
     bool deterministic, ::google::protobuf::uint8* target) const {
   (void)deterministic; // Unused
-  // @@protoc_insertion_point(serialize_to_array_start:NFMsg.ReqSearchGuild)
+  // @@protoc_insertion_point(serialize_to_array_start:NFMsg.ReqSearchClan)
   ::google::protobuf::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
-  // bytes guild_name = 1;
-  if (this->guild_name().size() > 0) {
+  // bytes clan_name = 1;
+  if (this->clan_name().size() > 0) {
     target =
       ::google::protobuf::internal::WireFormatLite::WriteBytesToArray(
-        1, this->guild_name(), target);
+        1, this->clan_name(), target);
   }
 
   if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
     target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
         (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()), target);
   }
-  // @@protoc_insertion_point(serialize_to_array_end:NFMsg.ReqSearchGuild)
+  // @@protoc_insertion_point(serialize_to_array_end:NFMsg.ReqSearchClan)
   return target;
 }
 
-size_t ReqSearchGuild::ByteSizeLong() const {
-// @@protoc_insertion_point(message_byte_size_start:NFMsg.ReqSearchGuild)
+size_t ReqSearchClan::ByteSizeLong() const {
+// @@protoc_insertion_point(message_byte_size_start:NFMsg.ReqSearchClan)
   size_t total_size = 0;
 
   if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
@@ -11370,11 +11370,11 @@ size_t ReqSearchGuild::ByteSizeLong() const {
       ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
         (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()));
   }
-  // bytes guild_name = 1;
-  if (this->guild_name().size() > 0) {
+  // bytes clan_name = 1;
+  if (this->clan_name().size() > 0) {
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::BytesSize(
-        this->guild_name());
+        this->clan_name());
   }
 
   int cached_size = ::google::protobuf::internal::ToCachedSize(total_size);
@@ -11382,64 +11382,64 @@ size_t ReqSearchGuild::ByteSizeLong() const {
   return total_size;
 }
 
-void ReqSearchGuild::MergeFrom(const ::google::protobuf::Message& from) {
-// @@protoc_insertion_point(generalized_merge_from_start:NFMsg.ReqSearchGuild)
+void ReqSearchClan::MergeFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_merge_from_start:NFMsg.ReqSearchClan)
   GOOGLE_DCHECK_NE(&from, this);
-  const ReqSearchGuild* source =
-      ::google::protobuf::internal::DynamicCastToGenerated<const ReqSearchGuild>(
+  const ReqSearchClan* source =
+      ::google::protobuf::internal::DynamicCastToGenerated<const ReqSearchClan>(
           &from);
   if (source == NULL) {
-  // @@protoc_insertion_point(generalized_merge_from_cast_fail:NFMsg.ReqSearchGuild)
+  // @@protoc_insertion_point(generalized_merge_from_cast_fail:NFMsg.ReqSearchClan)
     ::google::protobuf::internal::ReflectionOps::Merge(from, this);
   } else {
-  // @@protoc_insertion_point(generalized_merge_from_cast_success:NFMsg.ReqSearchGuild)
+  // @@protoc_insertion_point(generalized_merge_from_cast_success:NFMsg.ReqSearchClan)
     MergeFrom(*source);
   }
 }
 
-void ReqSearchGuild::MergeFrom(const ReqSearchGuild& from) {
-// @@protoc_insertion_point(class_specific_merge_from_start:NFMsg.ReqSearchGuild)
+void ReqSearchClan::MergeFrom(const ReqSearchClan& from) {
+// @@protoc_insertion_point(class_specific_merge_from_start:NFMsg.ReqSearchClan)
   GOOGLE_DCHECK_NE(&from, this);
   _internal_metadata_.MergeFrom(from._internal_metadata_);
   ::google::protobuf::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
-  if (from.guild_name().size() > 0) {
+  if (from.clan_name().size() > 0) {
 
-    guild_name_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.guild_name_);
+    clan_name_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.clan_name_);
   }
 }
 
-void ReqSearchGuild::CopyFrom(const ::google::protobuf::Message& from) {
-// @@protoc_insertion_point(generalized_copy_from_start:NFMsg.ReqSearchGuild)
+void ReqSearchClan::CopyFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_copy_from_start:NFMsg.ReqSearchClan)
   if (&from == this) return;
   Clear();
   MergeFrom(from);
 }
 
-void ReqSearchGuild::CopyFrom(const ReqSearchGuild& from) {
-// @@protoc_insertion_point(class_specific_copy_from_start:NFMsg.ReqSearchGuild)
+void ReqSearchClan::CopyFrom(const ReqSearchClan& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:NFMsg.ReqSearchClan)
   if (&from == this) return;
   Clear();
   MergeFrom(from);
 }
 
-bool ReqSearchGuild::IsInitialized() const {
+bool ReqSearchClan::IsInitialized() const {
   return true;
 }
 
-void ReqSearchGuild::Swap(ReqSearchGuild* other) {
+void ReqSearchClan::Swap(ReqSearchClan* other) {
   if (other == this) return;
   InternalSwap(other);
 }
-void ReqSearchGuild::InternalSwap(ReqSearchGuild* other) {
+void ReqSearchClan::InternalSwap(ReqSearchClan* other) {
   using std::swap;
-  guild_name_.Swap(&other->guild_name_, &::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+  clan_name_.Swap(&other->clan_name_, &::google::protobuf::internal::GetEmptyStringAlreadyInited(),
     GetArenaNoVirtual());
   _internal_metadata_.Swap(&other->_internal_metadata_);
 }
 
-::google::protobuf::Metadata ReqSearchGuild::GetMetadata() const {
+::google::protobuf::Metadata ReqSearchClan::GetMetadata() const {
   protobuf_NFMsgShare_2eproto::protobuf_AssignDescriptorsOnce();
   return ::protobuf_NFMsgShare_2eproto::file_level_metadata[kIndexInFileMessages];
 }
@@ -11447,203 +11447,203 @@ void ReqSearchGuild::InternalSwap(ReqSearchGuild* other) {
 
 // ===================================================================
 
-void AckSearchGuild_SearchGuildObject::InitAsDefaultInstance() {
-  ::NFMsg::_AckSearchGuild_SearchGuildObject_default_instance_._instance.get_mutable()->guild_id_ = const_cast< ::NFMsg::Ident*>(
+void AckSearchClan_SearchClanObject::InitAsDefaultInstance() {
+  ::NFMsg::_AckSearchClan_SearchClanObject_default_instance_._instance.get_mutable()->clan_id_ = const_cast< ::NFMsg::Ident*>(
       ::NFMsg::Ident::internal_default_instance());
 }
-void AckSearchGuild_SearchGuildObject::clear_guild_id() {
-  if (GetArenaNoVirtual() == NULL && guild_id_ != NULL) {
-    delete guild_id_;
+void AckSearchClan_SearchClanObject::clear_clan_id() {
+  if (GetArenaNoVirtual() == NULL && clan_id_ != NULL) {
+    delete clan_id_;
   }
-  guild_id_ = NULL;
+  clan_id_ = NULL;
 }
 #if !defined(_MSC_VER) || _MSC_VER >= 1900
-const int AckSearchGuild_SearchGuildObject::kGuildIDFieldNumber;
-const int AckSearchGuild_SearchGuildObject::kGuildNameFieldNumber;
-const int AckSearchGuild_SearchGuildObject::kGuildIconFieldNumber;
-const int AckSearchGuild_SearchGuildObject::kGuildMemberCountFieldNumber;
-const int AckSearchGuild_SearchGuildObject::kGuildMemberMaxCountFieldNumber;
-const int AckSearchGuild_SearchGuildObject::kGuildHonorFieldNumber;
-const int AckSearchGuild_SearchGuildObject::kGuildRankFieldNumber;
+const int AckSearchClan_SearchClanObject::kClanIDFieldNumber;
+const int AckSearchClan_SearchClanObject::kClanNameFieldNumber;
+const int AckSearchClan_SearchClanObject::kClanIconFieldNumber;
+const int AckSearchClan_SearchClanObject::kClanMemberCountFieldNumber;
+const int AckSearchClan_SearchClanObject::kClanMemberMaxCountFieldNumber;
+const int AckSearchClan_SearchClanObject::kClanHonorFieldNumber;
+const int AckSearchClan_SearchClanObject::kClanRankFieldNumber;
 #endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
 
-AckSearchGuild_SearchGuildObject::AckSearchGuild_SearchGuildObject()
+AckSearchClan_SearchClanObject::AckSearchClan_SearchClanObject()
   : ::google::protobuf::Message(), _internal_metadata_(NULL) {
   ::google::protobuf::internal::InitSCC(
-      &protobuf_NFMsgShare_2eproto::scc_info_AckSearchGuild_SearchGuildObject.base);
+      &protobuf_NFMsgShare_2eproto::scc_info_AckSearchClan_SearchClanObject.base);
   SharedCtor();
-  // @@protoc_insertion_point(constructor:NFMsg.AckSearchGuild.SearchGuildObject)
+  // @@protoc_insertion_point(constructor:NFMsg.AckSearchClan.SearchClanObject)
 }
-AckSearchGuild_SearchGuildObject::AckSearchGuild_SearchGuildObject(const AckSearchGuild_SearchGuildObject& from)
+AckSearchClan_SearchClanObject::AckSearchClan_SearchClanObject(const AckSearchClan_SearchClanObject& from)
   : ::google::protobuf::Message(),
       _internal_metadata_(NULL) {
   _internal_metadata_.MergeFrom(from._internal_metadata_);
-  guild_name_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  if (from.guild_name().size() > 0) {
-    guild_name_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.guild_name_);
+  clan_name_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  if (from.clan_name().size() > 0) {
+    clan_name_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.clan_name_);
   }
-  guild_icon_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  if (from.guild_icon().size() > 0) {
-    guild_icon_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.guild_icon_);
+  clan_icon_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  if (from.clan_icon().size() > 0) {
+    clan_icon_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.clan_icon_);
   }
-  if (from.has_guild_id()) {
-    guild_id_ = new ::NFMsg::Ident(*from.guild_id_);
+  if (from.has_clan_id()) {
+    clan_id_ = new ::NFMsg::Ident(*from.clan_id_);
   } else {
-    guild_id_ = NULL;
+    clan_id_ = NULL;
   }
-  ::memcpy(&guild_member_count_, &from.guild_member_count_,
-    static_cast<size_t>(reinterpret_cast<char*>(&guild_rank_) -
-    reinterpret_cast<char*>(&guild_member_count_)) + sizeof(guild_rank_));
-  // @@protoc_insertion_point(copy_constructor:NFMsg.AckSearchGuild.SearchGuildObject)
+  ::memcpy(&clan_member_count_, &from.clan_member_count_,
+    static_cast<size_t>(reinterpret_cast<char*>(&clan_rank_) -
+    reinterpret_cast<char*>(&clan_member_count_)) + sizeof(clan_rank_));
+  // @@protoc_insertion_point(copy_constructor:NFMsg.AckSearchClan.SearchClanObject)
 }
 
-void AckSearchGuild_SearchGuildObject::SharedCtor() {
-  guild_name_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  guild_icon_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  ::memset(&guild_id_, 0, static_cast<size_t>(
-      reinterpret_cast<char*>(&guild_rank_) -
-      reinterpret_cast<char*>(&guild_id_)) + sizeof(guild_rank_));
+void AckSearchClan_SearchClanObject::SharedCtor() {
+  clan_name_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  clan_icon_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  ::memset(&clan_id_, 0, static_cast<size_t>(
+      reinterpret_cast<char*>(&clan_rank_) -
+      reinterpret_cast<char*>(&clan_id_)) + sizeof(clan_rank_));
 }
 
-AckSearchGuild_SearchGuildObject::~AckSearchGuild_SearchGuildObject() {
-  // @@protoc_insertion_point(destructor:NFMsg.AckSearchGuild.SearchGuildObject)
+AckSearchClan_SearchClanObject::~AckSearchClan_SearchClanObject() {
+  // @@protoc_insertion_point(destructor:NFMsg.AckSearchClan.SearchClanObject)
   SharedDtor();
 }
 
-void AckSearchGuild_SearchGuildObject::SharedDtor() {
-  guild_name_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  guild_icon_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  if (this != internal_default_instance()) delete guild_id_;
+void AckSearchClan_SearchClanObject::SharedDtor() {
+  clan_name_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  clan_icon_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  if (this != internal_default_instance()) delete clan_id_;
 }
 
-void AckSearchGuild_SearchGuildObject::SetCachedSize(int size) const {
+void AckSearchClan_SearchClanObject::SetCachedSize(int size) const {
   _cached_size_.Set(size);
 }
-const ::google::protobuf::Descriptor* AckSearchGuild_SearchGuildObject::descriptor() {
+const ::google::protobuf::Descriptor* AckSearchClan_SearchClanObject::descriptor() {
   ::protobuf_NFMsgShare_2eproto::protobuf_AssignDescriptorsOnce();
   return ::protobuf_NFMsgShare_2eproto::file_level_metadata[kIndexInFileMessages].descriptor;
 }
 
-const AckSearchGuild_SearchGuildObject& AckSearchGuild_SearchGuildObject::default_instance() {
-  ::google::protobuf::internal::InitSCC(&protobuf_NFMsgShare_2eproto::scc_info_AckSearchGuild_SearchGuildObject.base);
+const AckSearchClan_SearchClanObject& AckSearchClan_SearchClanObject::default_instance() {
+  ::google::protobuf::internal::InitSCC(&protobuf_NFMsgShare_2eproto::scc_info_AckSearchClan_SearchClanObject.base);
   return *internal_default_instance();
 }
 
 
-void AckSearchGuild_SearchGuildObject::Clear() {
-// @@protoc_insertion_point(message_clear_start:NFMsg.AckSearchGuild.SearchGuildObject)
+void AckSearchClan_SearchClanObject::Clear() {
+// @@protoc_insertion_point(message_clear_start:NFMsg.AckSearchClan.SearchClanObject)
   ::google::protobuf::uint32 cached_has_bits = 0;
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  guild_name_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  guild_icon_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  if (GetArenaNoVirtual() == NULL && guild_id_ != NULL) {
-    delete guild_id_;
+  clan_name_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  clan_icon_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  if (GetArenaNoVirtual() == NULL && clan_id_ != NULL) {
+    delete clan_id_;
   }
-  guild_id_ = NULL;
-  ::memset(&guild_member_count_, 0, static_cast<size_t>(
-      reinterpret_cast<char*>(&guild_rank_) -
-      reinterpret_cast<char*>(&guild_member_count_)) + sizeof(guild_rank_));
+  clan_id_ = NULL;
+  ::memset(&clan_member_count_, 0, static_cast<size_t>(
+      reinterpret_cast<char*>(&clan_rank_) -
+      reinterpret_cast<char*>(&clan_member_count_)) + sizeof(clan_rank_));
   _internal_metadata_.Clear();
 }
 
-bool AckSearchGuild_SearchGuildObject::MergePartialFromCodedStream(
+bool AckSearchClan_SearchClanObject::MergePartialFromCodedStream(
     ::google::protobuf::io::CodedInputStream* input) {
 #define DO_(EXPRESSION) if (!GOOGLE_PREDICT_TRUE(EXPRESSION)) goto failure
   ::google::protobuf::uint32 tag;
-  // @@protoc_insertion_point(parse_start:NFMsg.AckSearchGuild.SearchGuildObject)
+  // @@protoc_insertion_point(parse_start:NFMsg.AckSearchClan.SearchClanObject)
   for (;;) {
     ::std::pair<::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
     tag = p.first;
     if (!p.second) goto handle_unusual;
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // .NFMsg.Ident guild_ID = 1;
+      // .NFMsg.Ident clan_ID = 1;
       case 1: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
             static_cast< ::google::protobuf::uint8>(10u /* 10 & 0xFF */)) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadMessage(
-               input, mutable_guild_id()));
+               input, mutable_clan_id()));
         } else {
           goto handle_unusual;
         }
         break;
       }
 
-      // bytes guild_name = 2;
+      // bytes clan_name = 2;
       case 2: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
             static_cast< ::google::protobuf::uint8>(18u /* 18 & 0xFF */)) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadBytes(
-                input, this->mutable_guild_name()));
+                input, this->mutable_clan_name()));
         } else {
           goto handle_unusual;
         }
         break;
       }
 
-      // bytes guild_icon = 3;
+      // bytes clan_icon = 3;
       case 3: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
             static_cast< ::google::protobuf::uint8>(26u /* 26 & 0xFF */)) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadBytes(
-                input, this->mutable_guild_icon()));
+                input, this->mutable_clan_icon()));
         } else {
           goto handle_unusual;
         }
         break;
       }
 
-      // int32 guild_member_count = 4;
+      // int32 clan_member_count = 4;
       case 4: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
             static_cast< ::google::protobuf::uint8>(32u /* 32 & 0xFF */)) {
 
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
-                 input, &guild_member_count_)));
+                 input, &clan_member_count_)));
         } else {
           goto handle_unusual;
         }
         break;
       }
 
-      // int32 guild_member_max_count = 5;
+      // int32 clan_member_max_count = 5;
       case 5: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
             static_cast< ::google::protobuf::uint8>(40u /* 40 & 0xFF */)) {
 
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
-                 input, &guild_member_max_count_)));
+                 input, &clan_member_max_count_)));
         } else {
           goto handle_unusual;
         }
         break;
       }
 
-      // int32 guild_honor = 6;
+      // int32 clan_honor = 6;
       case 6: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
             static_cast< ::google::protobuf::uint8>(48u /* 48 & 0xFF */)) {
 
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
-                 input, &guild_honor_)));
+                 input, &clan_honor_)));
         } else {
           goto handle_unusual;
         }
         break;
       }
 
-      // int32 guild_rank = 7;
+      // int32 clan_rank = 7;
       case 7: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
             static_cast< ::google::protobuf::uint8>(56u /* 56 & 0xFF */)) {
 
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
-                 input, &guild_rank_)));
+                 input, &clan_rank_)));
         } else {
           goto handle_unusual;
         }
@@ -11662,123 +11662,123 @@ bool AckSearchGuild_SearchGuildObject::MergePartialFromCodedStream(
     }
   }
 success:
-  // @@protoc_insertion_point(parse_success:NFMsg.AckSearchGuild.SearchGuildObject)
+  // @@protoc_insertion_point(parse_success:NFMsg.AckSearchClan.SearchClanObject)
   return true;
 failure:
-  // @@protoc_insertion_point(parse_failure:NFMsg.AckSearchGuild.SearchGuildObject)
+  // @@protoc_insertion_point(parse_failure:NFMsg.AckSearchClan.SearchClanObject)
   return false;
 #undef DO_
 }
 
-void AckSearchGuild_SearchGuildObject::SerializeWithCachedSizes(
+void AckSearchClan_SearchClanObject::SerializeWithCachedSizes(
     ::google::protobuf::io::CodedOutputStream* output) const {
-  // @@protoc_insertion_point(serialize_start:NFMsg.AckSearchGuild.SearchGuildObject)
+  // @@protoc_insertion_point(serialize_start:NFMsg.AckSearchClan.SearchClanObject)
   ::google::protobuf::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
-  // .NFMsg.Ident guild_ID = 1;
-  if (this->has_guild_id()) {
+  // .NFMsg.Ident clan_ID = 1;
+  if (this->has_clan_id()) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      1, this->_internal_guild_id(), output);
+      1, this->_internal_clan_id(), output);
   }
 
-  // bytes guild_name = 2;
-  if (this->guild_name().size() > 0) {
+  // bytes clan_name = 2;
+  if (this->clan_name().size() > 0) {
     ::google::protobuf::internal::WireFormatLite::WriteBytesMaybeAliased(
-      2, this->guild_name(), output);
+      2, this->clan_name(), output);
   }
 
-  // bytes guild_icon = 3;
-  if (this->guild_icon().size() > 0) {
+  // bytes clan_icon = 3;
+  if (this->clan_icon().size() > 0) {
     ::google::protobuf::internal::WireFormatLite::WriteBytesMaybeAliased(
-      3, this->guild_icon(), output);
+      3, this->clan_icon(), output);
   }
 
-  // int32 guild_member_count = 4;
-  if (this->guild_member_count() != 0) {
-    ::google::protobuf::internal::WireFormatLite::WriteInt32(4, this->guild_member_count(), output);
+  // int32 clan_member_count = 4;
+  if (this->clan_member_count() != 0) {
+    ::google::protobuf::internal::WireFormatLite::WriteInt32(4, this->clan_member_count(), output);
   }
 
-  // int32 guild_member_max_count = 5;
-  if (this->guild_member_max_count() != 0) {
-    ::google::protobuf::internal::WireFormatLite::WriteInt32(5, this->guild_member_max_count(), output);
+  // int32 clan_member_max_count = 5;
+  if (this->clan_member_max_count() != 0) {
+    ::google::protobuf::internal::WireFormatLite::WriteInt32(5, this->clan_member_max_count(), output);
   }
 
-  // int32 guild_honor = 6;
-  if (this->guild_honor() != 0) {
-    ::google::protobuf::internal::WireFormatLite::WriteInt32(6, this->guild_honor(), output);
+  // int32 clan_honor = 6;
+  if (this->clan_honor() != 0) {
+    ::google::protobuf::internal::WireFormatLite::WriteInt32(6, this->clan_honor(), output);
   }
 
-  // int32 guild_rank = 7;
-  if (this->guild_rank() != 0) {
-    ::google::protobuf::internal::WireFormatLite::WriteInt32(7, this->guild_rank(), output);
+  // int32 clan_rank = 7;
+  if (this->clan_rank() != 0) {
+    ::google::protobuf::internal::WireFormatLite::WriteInt32(7, this->clan_rank(), output);
   }
 
   if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
     ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
         (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()), output);
   }
-  // @@protoc_insertion_point(serialize_end:NFMsg.AckSearchGuild.SearchGuildObject)
+  // @@protoc_insertion_point(serialize_end:NFMsg.AckSearchClan.SearchClanObject)
 }
 
-::google::protobuf::uint8* AckSearchGuild_SearchGuildObject::InternalSerializeWithCachedSizesToArray(
+::google::protobuf::uint8* AckSearchClan_SearchClanObject::InternalSerializeWithCachedSizesToArray(
     bool deterministic, ::google::protobuf::uint8* target) const {
   (void)deterministic; // Unused
-  // @@protoc_insertion_point(serialize_to_array_start:NFMsg.AckSearchGuild.SearchGuildObject)
+  // @@protoc_insertion_point(serialize_to_array_start:NFMsg.AckSearchClan.SearchClanObject)
   ::google::protobuf::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
-  // .NFMsg.Ident guild_ID = 1;
-  if (this->has_guild_id()) {
+  // .NFMsg.Ident clan_ID = 1;
+  if (this->has_clan_id()) {
     target = ::google::protobuf::internal::WireFormatLite::
       InternalWriteMessageToArray(
-        1, this->_internal_guild_id(), deterministic, target);
+        1, this->_internal_clan_id(), deterministic, target);
   }
 
-  // bytes guild_name = 2;
-  if (this->guild_name().size() > 0) {
+  // bytes clan_name = 2;
+  if (this->clan_name().size() > 0) {
     target =
       ::google::protobuf::internal::WireFormatLite::WriteBytesToArray(
-        2, this->guild_name(), target);
+        2, this->clan_name(), target);
   }
 
-  // bytes guild_icon = 3;
-  if (this->guild_icon().size() > 0) {
+  // bytes clan_icon = 3;
+  if (this->clan_icon().size() > 0) {
     target =
       ::google::protobuf::internal::WireFormatLite::WriteBytesToArray(
-        3, this->guild_icon(), target);
+        3, this->clan_icon(), target);
   }
 
-  // int32 guild_member_count = 4;
-  if (this->guild_member_count() != 0) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(4, this->guild_member_count(), target);
+  // int32 clan_member_count = 4;
+  if (this->clan_member_count() != 0) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(4, this->clan_member_count(), target);
   }
 
-  // int32 guild_member_max_count = 5;
-  if (this->guild_member_max_count() != 0) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(5, this->guild_member_max_count(), target);
+  // int32 clan_member_max_count = 5;
+  if (this->clan_member_max_count() != 0) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(5, this->clan_member_max_count(), target);
   }
 
-  // int32 guild_honor = 6;
-  if (this->guild_honor() != 0) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(6, this->guild_honor(), target);
+  // int32 clan_honor = 6;
+  if (this->clan_honor() != 0) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(6, this->clan_honor(), target);
   }
 
-  // int32 guild_rank = 7;
-  if (this->guild_rank() != 0) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(7, this->guild_rank(), target);
+  // int32 clan_rank = 7;
+  if (this->clan_rank() != 0) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(7, this->clan_rank(), target);
   }
 
   if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
     target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
         (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()), target);
   }
-  // @@protoc_insertion_point(serialize_to_array_end:NFMsg.AckSearchGuild.SearchGuildObject)
+  // @@protoc_insertion_point(serialize_to_array_end:NFMsg.AckSearchClan.SearchClanObject)
   return target;
 }
 
-size_t AckSearchGuild_SearchGuildObject::ByteSizeLong() const {
-// @@protoc_insertion_point(message_byte_size_start:NFMsg.AckSearchGuild.SearchGuildObject)
+size_t AckSearchClan_SearchClanObject::ByteSizeLong() const {
+// @@protoc_insertion_point(message_byte_size_start:NFMsg.AckSearchClan.SearchClanObject)
   size_t total_size = 0;
 
   if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
@@ -11786,53 +11786,53 @@ size_t AckSearchGuild_SearchGuildObject::ByteSizeLong() const {
       ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
         (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()));
   }
-  // bytes guild_name = 2;
-  if (this->guild_name().size() > 0) {
+  // bytes clan_name = 2;
+  if (this->clan_name().size() > 0) {
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::BytesSize(
-        this->guild_name());
+        this->clan_name());
   }
 
-  // bytes guild_icon = 3;
-  if (this->guild_icon().size() > 0) {
+  // bytes clan_icon = 3;
+  if (this->clan_icon().size() > 0) {
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::BytesSize(
-        this->guild_icon());
+        this->clan_icon());
   }
 
-  // .NFMsg.Ident guild_ID = 1;
-  if (this->has_guild_id()) {
+  // .NFMsg.Ident clan_ID = 1;
+  if (this->has_clan_id()) {
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::MessageSize(
-        *guild_id_);
+        *clan_id_);
   }
 
-  // int32 guild_member_count = 4;
-  if (this->guild_member_count() != 0) {
+  // int32 clan_member_count = 4;
+  if (this->clan_member_count() != 0) {
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::Int32Size(
-        this->guild_member_count());
+        this->clan_member_count());
   }
 
-  // int32 guild_member_max_count = 5;
-  if (this->guild_member_max_count() != 0) {
+  // int32 clan_member_max_count = 5;
+  if (this->clan_member_max_count() != 0) {
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::Int32Size(
-        this->guild_member_max_count());
+        this->clan_member_max_count());
   }
 
-  // int32 guild_honor = 6;
-  if (this->guild_honor() != 0) {
+  // int32 clan_honor = 6;
+  if (this->clan_honor() != 0) {
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::Int32Size(
-        this->guild_honor());
+        this->clan_honor());
   }
 
-  // int32 guild_rank = 7;
-  if (this->guild_rank() != 0) {
+  // int32 clan_rank = 7;
+  if (this->clan_rank() != 0) {
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::Int32Size(
-        this->guild_rank());
+        this->clan_rank());
   }
 
   int cached_size = ::google::protobuf::internal::ToCachedSize(total_size);
@@ -11840,90 +11840,90 @@ size_t AckSearchGuild_SearchGuildObject::ByteSizeLong() const {
   return total_size;
 }
 
-void AckSearchGuild_SearchGuildObject::MergeFrom(const ::google::protobuf::Message& from) {
-// @@protoc_insertion_point(generalized_merge_from_start:NFMsg.AckSearchGuild.SearchGuildObject)
+void AckSearchClan_SearchClanObject::MergeFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_merge_from_start:NFMsg.AckSearchClan.SearchClanObject)
   GOOGLE_DCHECK_NE(&from, this);
-  const AckSearchGuild_SearchGuildObject* source =
-      ::google::protobuf::internal::DynamicCastToGenerated<const AckSearchGuild_SearchGuildObject>(
+  const AckSearchClan_SearchClanObject* source =
+      ::google::protobuf::internal::DynamicCastToGenerated<const AckSearchClan_SearchClanObject>(
           &from);
   if (source == NULL) {
-  // @@protoc_insertion_point(generalized_merge_from_cast_fail:NFMsg.AckSearchGuild.SearchGuildObject)
+  // @@protoc_insertion_point(generalized_merge_from_cast_fail:NFMsg.AckSearchClan.SearchClanObject)
     ::google::protobuf::internal::ReflectionOps::Merge(from, this);
   } else {
-  // @@protoc_insertion_point(generalized_merge_from_cast_success:NFMsg.AckSearchGuild.SearchGuildObject)
+  // @@protoc_insertion_point(generalized_merge_from_cast_success:NFMsg.AckSearchClan.SearchClanObject)
     MergeFrom(*source);
   }
 }
 
-void AckSearchGuild_SearchGuildObject::MergeFrom(const AckSearchGuild_SearchGuildObject& from) {
-// @@protoc_insertion_point(class_specific_merge_from_start:NFMsg.AckSearchGuild.SearchGuildObject)
+void AckSearchClan_SearchClanObject::MergeFrom(const AckSearchClan_SearchClanObject& from) {
+// @@protoc_insertion_point(class_specific_merge_from_start:NFMsg.AckSearchClan.SearchClanObject)
   GOOGLE_DCHECK_NE(&from, this);
   _internal_metadata_.MergeFrom(from._internal_metadata_);
   ::google::protobuf::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
-  if (from.guild_name().size() > 0) {
+  if (from.clan_name().size() > 0) {
 
-    guild_name_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.guild_name_);
+    clan_name_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.clan_name_);
   }
-  if (from.guild_icon().size() > 0) {
+  if (from.clan_icon().size() > 0) {
 
-    guild_icon_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.guild_icon_);
+    clan_icon_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.clan_icon_);
   }
-  if (from.has_guild_id()) {
-    mutable_guild_id()->::NFMsg::Ident::MergeFrom(from.guild_id());
+  if (from.has_clan_id()) {
+    mutable_clan_id()->::NFMsg::Ident::MergeFrom(from.clan_id());
   }
-  if (from.guild_member_count() != 0) {
-    set_guild_member_count(from.guild_member_count());
+  if (from.clan_member_count() != 0) {
+    set_clan_member_count(from.clan_member_count());
   }
-  if (from.guild_member_max_count() != 0) {
-    set_guild_member_max_count(from.guild_member_max_count());
+  if (from.clan_member_max_count() != 0) {
+    set_clan_member_max_count(from.clan_member_max_count());
   }
-  if (from.guild_honor() != 0) {
-    set_guild_honor(from.guild_honor());
+  if (from.clan_honor() != 0) {
+    set_clan_honor(from.clan_honor());
   }
-  if (from.guild_rank() != 0) {
-    set_guild_rank(from.guild_rank());
+  if (from.clan_rank() != 0) {
+    set_clan_rank(from.clan_rank());
   }
 }
 
-void AckSearchGuild_SearchGuildObject::CopyFrom(const ::google::protobuf::Message& from) {
-// @@protoc_insertion_point(generalized_copy_from_start:NFMsg.AckSearchGuild.SearchGuildObject)
+void AckSearchClan_SearchClanObject::CopyFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_copy_from_start:NFMsg.AckSearchClan.SearchClanObject)
   if (&from == this) return;
   Clear();
   MergeFrom(from);
 }
 
-void AckSearchGuild_SearchGuildObject::CopyFrom(const AckSearchGuild_SearchGuildObject& from) {
-// @@protoc_insertion_point(class_specific_copy_from_start:NFMsg.AckSearchGuild.SearchGuildObject)
+void AckSearchClan_SearchClanObject::CopyFrom(const AckSearchClan_SearchClanObject& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:NFMsg.AckSearchClan.SearchClanObject)
   if (&from == this) return;
   Clear();
   MergeFrom(from);
 }
 
-bool AckSearchGuild_SearchGuildObject::IsInitialized() const {
+bool AckSearchClan_SearchClanObject::IsInitialized() const {
   return true;
 }
 
-void AckSearchGuild_SearchGuildObject::Swap(AckSearchGuild_SearchGuildObject* other) {
+void AckSearchClan_SearchClanObject::Swap(AckSearchClan_SearchClanObject* other) {
   if (other == this) return;
   InternalSwap(other);
 }
-void AckSearchGuild_SearchGuildObject::InternalSwap(AckSearchGuild_SearchGuildObject* other) {
+void AckSearchClan_SearchClanObject::InternalSwap(AckSearchClan_SearchClanObject* other) {
   using std::swap;
-  guild_name_.Swap(&other->guild_name_, &::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+  clan_name_.Swap(&other->clan_name_, &::google::protobuf::internal::GetEmptyStringAlreadyInited(),
     GetArenaNoVirtual());
-  guild_icon_.Swap(&other->guild_icon_, &::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+  clan_icon_.Swap(&other->clan_icon_, &::google::protobuf::internal::GetEmptyStringAlreadyInited(),
     GetArenaNoVirtual());
-  swap(guild_id_, other->guild_id_);
-  swap(guild_member_count_, other->guild_member_count_);
-  swap(guild_member_max_count_, other->guild_member_max_count_);
-  swap(guild_honor_, other->guild_honor_);
-  swap(guild_rank_, other->guild_rank_);
+  swap(clan_id_, other->clan_id_);
+  swap(clan_member_count_, other->clan_member_count_);
+  swap(clan_member_max_count_, other->clan_member_max_count_);
+  swap(clan_honor_, other->clan_honor_);
+  swap(clan_rank_, other->clan_rank_);
   _internal_metadata_.Swap(&other->_internal_metadata_);
 }
 
-::google::protobuf::Metadata AckSearchGuild_SearchGuildObject::GetMetadata() const {
+::google::protobuf::Metadata AckSearchClan_SearchClanObject::GetMetadata() const {
   protobuf_NFMsgShare_2eproto::protobuf_AssignDescriptorsOnce();
   return ::protobuf_NFMsgShare_2eproto::file_level_metadata[kIndexInFileMessages];
 }
@@ -11931,78 +11931,78 @@ void AckSearchGuild_SearchGuildObject::InternalSwap(AckSearchGuild_SearchGuildOb
 
 // ===================================================================
 
-void AckSearchGuild::InitAsDefaultInstance() {
+void AckSearchClan::InitAsDefaultInstance() {
 }
 #if !defined(_MSC_VER) || _MSC_VER >= 1900
-const int AckSearchGuild::kGuildListFieldNumber;
+const int AckSearchClan::kClanListFieldNumber;
 #endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
 
-AckSearchGuild::AckSearchGuild()
+AckSearchClan::AckSearchClan()
   : ::google::protobuf::Message(), _internal_metadata_(NULL) {
   ::google::protobuf::internal::InitSCC(
-      &protobuf_NFMsgShare_2eproto::scc_info_AckSearchGuild.base);
+      &protobuf_NFMsgShare_2eproto::scc_info_AckSearchClan.base);
   SharedCtor();
-  // @@protoc_insertion_point(constructor:NFMsg.AckSearchGuild)
+  // @@protoc_insertion_point(constructor:NFMsg.AckSearchClan)
 }
-AckSearchGuild::AckSearchGuild(const AckSearchGuild& from)
+AckSearchClan::AckSearchClan(const AckSearchClan& from)
   : ::google::protobuf::Message(),
       _internal_metadata_(NULL),
-      guild_list_(from.guild_list_) {
+      clan_list_(from.clan_list_) {
   _internal_metadata_.MergeFrom(from._internal_metadata_);
-  // @@protoc_insertion_point(copy_constructor:NFMsg.AckSearchGuild)
+  // @@protoc_insertion_point(copy_constructor:NFMsg.AckSearchClan)
 }
 
-void AckSearchGuild::SharedCtor() {
+void AckSearchClan::SharedCtor() {
 }
 
-AckSearchGuild::~AckSearchGuild() {
-  // @@protoc_insertion_point(destructor:NFMsg.AckSearchGuild)
+AckSearchClan::~AckSearchClan() {
+  // @@protoc_insertion_point(destructor:NFMsg.AckSearchClan)
   SharedDtor();
 }
 
-void AckSearchGuild::SharedDtor() {
+void AckSearchClan::SharedDtor() {
 }
 
-void AckSearchGuild::SetCachedSize(int size) const {
+void AckSearchClan::SetCachedSize(int size) const {
   _cached_size_.Set(size);
 }
-const ::google::protobuf::Descriptor* AckSearchGuild::descriptor() {
+const ::google::protobuf::Descriptor* AckSearchClan::descriptor() {
   ::protobuf_NFMsgShare_2eproto::protobuf_AssignDescriptorsOnce();
   return ::protobuf_NFMsgShare_2eproto::file_level_metadata[kIndexInFileMessages].descriptor;
 }
 
-const AckSearchGuild& AckSearchGuild::default_instance() {
-  ::google::protobuf::internal::InitSCC(&protobuf_NFMsgShare_2eproto::scc_info_AckSearchGuild.base);
+const AckSearchClan& AckSearchClan::default_instance() {
+  ::google::protobuf::internal::InitSCC(&protobuf_NFMsgShare_2eproto::scc_info_AckSearchClan.base);
   return *internal_default_instance();
 }
 
 
-void AckSearchGuild::Clear() {
-// @@protoc_insertion_point(message_clear_start:NFMsg.AckSearchGuild)
+void AckSearchClan::Clear() {
+// @@protoc_insertion_point(message_clear_start:NFMsg.AckSearchClan)
   ::google::protobuf::uint32 cached_has_bits = 0;
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  guild_list_.Clear();
+  clan_list_.Clear();
   _internal_metadata_.Clear();
 }
 
-bool AckSearchGuild::MergePartialFromCodedStream(
+bool AckSearchClan::MergePartialFromCodedStream(
     ::google::protobuf::io::CodedInputStream* input) {
 #define DO_(EXPRESSION) if (!GOOGLE_PREDICT_TRUE(EXPRESSION)) goto failure
   ::google::protobuf::uint32 tag;
-  // @@protoc_insertion_point(parse_start:NFMsg.AckSearchGuild)
+  // @@protoc_insertion_point(parse_start:NFMsg.AckSearchClan)
   for (;;) {
     ::std::pair<::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
     tag = p.first;
     if (!p.second) goto handle_unusual;
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // repeated .NFMsg.AckSearchGuild.SearchGuildObject guild_list = 1;
+      // repeated .NFMsg.AckSearchClan.SearchClanObject clan_list = 1;
       case 1: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
             static_cast< ::google::protobuf::uint8>(10u /* 10 & 0xFF */)) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadMessage(
-                input, add_guild_list()));
+                input, add_clan_list()));
         } else {
           goto handle_unusual;
         }
@@ -12021,26 +12021,26 @@ bool AckSearchGuild::MergePartialFromCodedStream(
     }
   }
 success:
-  // @@protoc_insertion_point(parse_success:NFMsg.AckSearchGuild)
+  // @@protoc_insertion_point(parse_success:NFMsg.AckSearchClan)
   return true;
 failure:
-  // @@protoc_insertion_point(parse_failure:NFMsg.AckSearchGuild)
+  // @@protoc_insertion_point(parse_failure:NFMsg.AckSearchClan)
   return false;
 #undef DO_
 }
 
-void AckSearchGuild::SerializeWithCachedSizes(
+void AckSearchClan::SerializeWithCachedSizes(
     ::google::protobuf::io::CodedOutputStream* output) const {
-  // @@protoc_insertion_point(serialize_start:NFMsg.AckSearchGuild)
+  // @@protoc_insertion_point(serialize_start:NFMsg.AckSearchClan)
   ::google::protobuf::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
-  // repeated .NFMsg.AckSearchGuild.SearchGuildObject guild_list = 1;
+  // repeated .NFMsg.AckSearchClan.SearchClanObject clan_list = 1;
   for (unsigned int i = 0,
-      n = static_cast<unsigned int>(this->guild_list_size()); i < n; i++) {
+      n = static_cast<unsigned int>(this->clan_list_size()); i < n; i++) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
       1,
-      this->guild_list(static_cast<int>(i)),
+      this->clan_list(static_cast<int>(i)),
       output);
   }
 
@@ -12048,34 +12048,34 @@ void AckSearchGuild::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
         (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()), output);
   }
-  // @@protoc_insertion_point(serialize_end:NFMsg.AckSearchGuild)
+  // @@protoc_insertion_point(serialize_end:NFMsg.AckSearchClan)
 }
 
-::google::protobuf::uint8* AckSearchGuild::InternalSerializeWithCachedSizesToArray(
+::google::protobuf::uint8* AckSearchClan::InternalSerializeWithCachedSizesToArray(
     bool deterministic, ::google::protobuf::uint8* target) const {
   (void)deterministic; // Unused
-  // @@protoc_insertion_point(serialize_to_array_start:NFMsg.AckSearchGuild)
+  // @@protoc_insertion_point(serialize_to_array_start:NFMsg.AckSearchClan)
   ::google::protobuf::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
-  // repeated .NFMsg.AckSearchGuild.SearchGuildObject guild_list = 1;
+  // repeated .NFMsg.AckSearchClan.SearchClanObject clan_list = 1;
   for (unsigned int i = 0,
-      n = static_cast<unsigned int>(this->guild_list_size()); i < n; i++) {
+      n = static_cast<unsigned int>(this->clan_list_size()); i < n; i++) {
     target = ::google::protobuf::internal::WireFormatLite::
       InternalWriteMessageToArray(
-        1, this->guild_list(static_cast<int>(i)), deterministic, target);
+        1, this->clan_list(static_cast<int>(i)), deterministic, target);
   }
 
   if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
     target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
         (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()), target);
   }
-  // @@protoc_insertion_point(serialize_to_array_end:NFMsg.AckSearchGuild)
+  // @@protoc_insertion_point(serialize_to_array_end:NFMsg.AckSearchClan)
   return target;
 }
 
-size_t AckSearchGuild::ByteSizeLong() const {
-// @@protoc_insertion_point(message_byte_size_start:NFMsg.AckSearchGuild)
+size_t AckSearchClan::ByteSizeLong() const {
+// @@protoc_insertion_point(message_byte_size_start:NFMsg.AckSearchClan)
   size_t total_size = 0;
 
   if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
@@ -12083,14 +12083,14 @@ size_t AckSearchGuild::ByteSizeLong() const {
       ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
         (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()));
   }
-  // repeated .NFMsg.AckSearchGuild.SearchGuildObject guild_list = 1;
+  // repeated .NFMsg.AckSearchClan.SearchClanObject clan_list = 1;
   {
-    unsigned int count = static_cast<unsigned int>(this->guild_list_size());
+    unsigned int count = static_cast<unsigned int>(this->clan_list_size());
     total_size += 1UL * count;
     for (unsigned int i = 0; i < count; i++) {
       total_size +=
         ::google::protobuf::internal::WireFormatLite::MessageSize(
-          this->guild_list(static_cast<int>(i)));
+          this->clan_list(static_cast<int>(i)));
     }
   }
 
@@ -12099,60 +12099,60 @@ size_t AckSearchGuild::ByteSizeLong() const {
   return total_size;
 }
 
-void AckSearchGuild::MergeFrom(const ::google::protobuf::Message& from) {
-// @@protoc_insertion_point(generalized_merge_from_start:NFMsg.AckSearchGuild)
+void AckSearchClan::MergeFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_merge_from_start:NFMsg.AckSearchClan)
   GOOGLE_DCHECK_NE(&from, this);
-  const AckSearchGuild* source =
-      ::google::protobuf::internal::DynamicCastToGenerated<const AckSearchGuild>(
+  const AckSearchClan* source =
+      ::google::protobuf::internal::DynamicCastToGenerated<const AckSearchClan>(
           &from);
   if (source == NULL) {
-  // @@protoc_insertion_point(generalized_merge_from_cast_fail:NFMsg.AckSearchGuild)
+  // @@protoc_insertion_point(generalized_merge_from_cast_fail:NFMsg.AckSearchClan)
     ::google::protobuf::internal::ReflectionOps::Merge(from, this);
   } else {
-  // @@protoc_insertion_point(generalized_merge_from_cast_success:NFMsg.AckSearchGuild)
+  // @@protoc_insertion_point(generalized_merge_from_cast_success:NFMsg.AckSearchClan)
     MergeFrom(*source);
   }
 }
 
-void AckSearchGuild::MergeFrom(const AckSearchGuild& from) {
-// @@protoc_insertion_point(class_specific_merge_from_start:NFMsg.AckSearchGuild)
+void AckSearchClan::MergeFrom(const AckSearchClan& from) {
+// @@protoc_insertion_point(class_specific_merge_from_start:NFMsg.AckSearchClan)
   GOOGLE_DCHECK_NE(&from, this);
   _internal_metadata_.MergeFrom(from._internal_metadata_);
   ::google::protobuf::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
-  guild_list_.MergeFrom(from.guild_list_);
+  clan_list_.MergeFrom(from.clan_list_);
 }
 
-void AckSearchGuild::CopyFrom(const ::google::protobuf::Message& from) {
-// @@protoc_insertion_point(generalized_copy_from_start:NFMsg.AckSearchGuild)
+void AckSearchClan::CopyFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_copy_from_start:NFMsg.AckSearchClan)
   if (&from == this) return;
   Clear();
   MergeFrom(from);
 }
 
-void AckSearchGuild::CopyFrom(const AckSearchGuild& from) {
-// @@protoc_insertion_point(class_specific_copy_from_start:NFMsg.AckSearchGuild)
+void AckSearchClan::CopyFrom(const AckSearchClan& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:NFMsg.AckSearchClan)
   if (&from == this) return;
   Clear();
   MergeFrom(from);
 }
 
-bool AckSearchGuild::IsInitialized() const {
+bool AckSearchClan::IsInitialized() const {
   return true;
 }
 
-void AckSearchGuild::Swap(AckSearchGuild* other) {
+void AckSearchClan::Swap(AckSearchClan* other) {
   if (other == this) return;
   InternalSwap(other);
 }
-void AckSearchGuild::InternalSwap(AckSearchGuild* other) {
+void AckSearchClan::InternalSwap(AckSearchClan* other) {
   using std::swap;
-  CastToBase(&guild_list_)->InternalSwap(CastToBase(&other->guild_list_));
+  CastToBase(&clan_list_)->InternalSwap(CastToBase(&other->clan_list_));
   _internal_metadata_.Swap(&other->_internal_metadata_);
 }
 
-::google::protobuf::Metadata AckSearchGuild::GetMetadata() const {
+::google::protobuf::Metadata AckSearchClan::GetMetadata() const {
   protobuf_NFMsgShare_2eproto::protobuf_AssignDescriptorsOnce();
   return ::protobuf_NFMsgShare_2eproto::file_level_metadata[kIndexInFileMessages];
 }
@@ -12160,115 +12160,115 @@ void AckSearchGuild::InternalSwap(AckSearchGuild* other) {
 
 // ===================================================================
 
-void ReqAckJoinGuild::InitAsDefaultInstance() {
-  ::NFMsg::_ReqAckJoinGuild_default_instance_._instance.get_mutable()->guild_id_ = const_cast< ::NFMsg::Ident*>(
+void ReqAckJoinClan::InitAsDefaultInstance() {
+  ::NFMsg::_ReqAckJoinClan_default_instance_._instance.get_mutable()->clan_id_ = const_cast< ::NFMsg::Ident*>(
       ::NFMsg::Ident::internal_default_instance());
 }
-void ReqAckJoinGuild::clear_guild_id() {
-  if (GetArenaNoVirtual() == NULL && guild_id_ != NULL) {
-    delete guild_id_;
+void ReqAckJoinClan::clear_clan_id() {
+  if (GetArenaNoVirtual() == NULL && clan_id_ != NULL) {
+    delete clan_id_;
   }
-  guild_id_ = NULL;
+  clan_id_ = NULL;
 }
 #if !defined(_MSC_VER) || _MSC_VER >= 1900
-const int ReqAckJoinGuild::kGuildIdFieldNumber;
-const int ReqAckJoinGuild::kGuildNameFieldNumber;
+const int ReqAckJoinClan::kClanIdFieldNumber;
+const int ReqAckJoinClan::kClanNameFieldNumber;
 #endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
 
-ReqAckJoinGuild::ReqAckJoinGuild()
+ReqAckJoinClan::ReqAckJoinClan()
   : ::google::protobuf::Message(), _internal_metadata_(NULL) {
   ::google::protobuf::internal::InitSCC(
-      &protobuf_NFMsgShare_2eproto::scc_info_ReqAckJoinGuild.base);
+      &protobuf_NFMsgShare_2eproto::scc_info_ReqAckJoinClan.base);
   SharedCtor();
-  // @@protoc_insertion_point(constructor:NFMsg.ReqAckJoinGuild)
+  // @@protoc_insertion_point(constructor:NFMsg.ReqAckJoinClan)
 }
-ReqAckJoinGuild::ReqAckJoinGuild(const ReqAckJoinGuild& from)
+ReqAckJoinClan::ReqAckJoinClan(const ReqAckJoinClan& from)
   : ::google::protobuf::Message(),
       _internal_metadata_(NULL) {
   _internal_metadata_.MergeFrom(from._internal_metadata_);
-  guild_name_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  if (from.guild_name().size() > 0) {
-    guild_name_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.guild_name_);
+  clan_name_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  if (from.clan_name().size() > 0) {
+    clan_name_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.clan_name_);
   }
-  if (from.has_guild_id()) {
-    guild_id_ = new ::NFMsg::Ident(*from.guild_id_);
+  if (from.has_clan_id()) {
+    clan_id_ = new ::NFMsg::Ident(*from.clan_id_);
   } else {
-    guild_id_ = NULL;
+    clan_id_ = NULL;
   }
-  // @@protoc_insertion_point(copy_constructor:NFMsg.ReqAckJoinGuild)
+  // @@protoc_insertion_point(copy_constructor:NFMsg.ReqAckJoinClan)
 }
 
-void ReqAckJoinGuild::SharedCtor() {
-  guild_name_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  guild_id_ = NULL;
+void ReqAckJoinClan::SharedCtor() {
+  clan_name_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  clan_id_ = NULL;
 }
 
-ReqAckJoinGuild::~ReqAckJoinGuild() {
-  // @@protoc_insertion_point(destructor:NFMsg.ReqAckJoinGuild)
+ReqAckJoinClan::~ReqAckJoinClan() {
+  // @@protoc_insertion_point(destructor:NFMsg.ReqAckJoinClan)
   SharedDtor();
 }
 
-void ReqAckJoinGuild::SharedDtor() {
-  guild_name_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  if (this != internal_default_instance()) delete guild_id_;
+void ReqAckJoinClan::SharedDtor() {
+  clan_name_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  if (this != internal_default_instance()) delete clan_id_;
 }
 
-void ReqAckJoinGuild::SetCachedSize(int size) const {
+void ReqAckJoinClan::SetCachedSize(int size) const {
   _cached_size_.Set(size);
 }
-const ::google::protobuf::Descriptor* ReqAckJoinGuild::descriptor() {
+const ::google::protobuf::Descriptor* ReqAckJoinClan::descriptor() {
   ::protobuf_NFMsgShare_2eproto::protobuf_AssignDescriptorsOnce();
   return ::protobuf_NFMsgShare_2eproto::file_level_metadata[kIndexInFileMessages].descriptor;
 }
 
-const ReqAckJoinGuild& ReqAckJoinGuild::default_instance() {
-  ::google::protobuf::internal::InitSCC(&protobuf_NFMsgShare_2eproto::scc_info_ReqAckJoinGuild.base);
+const ReqAckJoinClan& ReqAckJoinClan::default_instance() {
+  ::google::protobuf::internal::InitSCC(&protobuf_NFMsgShare_2eproto::scc_info_ReqAckJoinClan.base);
   return *internal_default_instance();
 }
 
 
-void ReqAckJoinGuild::Clear() {
-// @@protoc_insertion_point(message_clear_start:NFMsg.ReqAckJoinGuild)
+void ReqAckJoinClan::Clear() {
+// @@protoc_insertion_point(message_clear_start:NFMsg.ReqAckJoinClan)
   ::google::protobuf::uint32 cached_has_bits = 0;
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  guild_name_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  if (GetArenaNoVirtual() == NULL && guild_id_ != NULL) {
-    delete guild_id_;
+  clan_name_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  if (GetArenaNoVirtual() == NULL && clan_id_ != NULL) {
+    delete clan_id_;
   }
-  guild_id_ = NULL;
+  clan_id_ = NULL;
   _internal_metadata_.Clear();
 }
 
-bool ReqAckJoinGuild::MergePartialFromCodedStream(
+bool ReqAckJoinClan::MergePartialFromCodedStream(
     ::google::protobuf::io::CodedInputStream* input) {
 #define DO_(EXPRESSION) if (!GOOGLE_PREDICT_TRUE(EXPRESSION)) goto failure
   ::google::protobuf::uint32 tag;
-  // @@protoc_insertion_point(parse_start:NFMsg.ReqAckJoinGuild)
+  // @@protoc_insertion_point(parse_start:NFMsg.ReqAckJoinClan)
   for (;;) {
     ::std::pair<::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
     tag = p.first;
     if (!p.second) goto handle_unusual;
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // .NFMsg.Ident guild_id = 1;
+      // .NFMsg.Ident clan_id = 1;
       case 1: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
             static_cast< ::google::protobuf::uint8>(10u /* 10 & 0xFF */)) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadMessage(
-               input, mutable_guild_id()));
+               input, mutable_clan_id()));
         } else {
           goto handle_unusual;
         }
         break;
       }
 
-      // bytes guild_name = 2;
+      // bytes clan_name = 2;
       case 2: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
             static_cast< ::google::protobuf::uint8>(18u /* 18 & 0xFF */)) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadBytes(
-                input, this->mutable_guild_name()));
+                input, this->mutable_clan_name()));
         } else {
           goto handle_unusual;
         }
@@ -12287,70 +12287,70 @@ bool ReqAckJoinGuild::MergePartialFromCodedStream(
     }
   }
 success:
-  // @@protoc_insertion_point(parse_success:NFMsg.ReqAckJoinGuild)
+  // @@protoc_insertion_point(parse_success:NFMsg.ReqAckJoinClan)
   return true;
 failure:
-  // @@protoc_insertion_point(parse_failure:NFMsg.ReqAckJoinGuild)
+  // @@protoc_insertion_point(parse_failure:NFMsg.ReqAckJoinClan)
   return false;
 #undef DO_
 }
 
-void ReqAckJoinGuild::SerializeWithCachedSizes(
+void ReqAckJoinClan::SerializeWithCachedSizes(
     ::google::protobuf::io::CodedOutputStream* output) const {
-  // @@protoc_insertion_point(serialize_start:NFMsg.ReqAckJoinGuild)
+  // @@protoc_insertion_point(serialize_start:NFMsg.ReqAckJoinClan)
   ::google::protobuf::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
-  // .NFMsg.Ident guild_id = 1;
-  if (this->has_guild_id()) {
+  // .NFMsg.Ident clan_id = 1;
+  if (this->has_clan_id()) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      1, this->_internal_guild_id(), output);
+      1, this->_internal_clan_id(), output);
   }
 
-  // bytes guild_name = 2;
-  if (this->guild_name().size() > 0) {
+  // bytes clan_name = 2;
+  if (this->clan_name().size() > 0) {
     ::google::protobuf::internal::WireFormatLite::WriteBytesMaybeAliased(
-      2, this->guild_name(), output);
+      2, this->clan_name(), output);
   }
 
   if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
     ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
         (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()), output);
   }
-  // @@protoc_insertion_point(serialize_end:NFMsg.ReqAckJoinGuild)
+  // @@protoc_insertion_point(serialize_end:NFMsg.ReqAckJoinClan)
 }
 
-::google::protobuf::uint8* ReqAckJoinGuild::InternalSerializeWithCachedSizesToArray(
+::google::protobuf::uint8* ReqAckJoinClan::InternalSerializeWithCachedSizesToArray(
     bool deterministic, ::google::protobuf::uint8* target) const {
   (void)deterministic; // Unused
-  // @@protoc_insertion_point(serialize_to_array_start:NFMsg.ReqAckJoinGuild)
+  // @@protoc_insertion_point(serialize_to_array_start:NFMsg.ReqAckJoinClan)
   ::google::protobuf::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
-  // .NFMsg.Ident guild_id = 1;
-  if (this->has_guild_id()) {
+  // .NFMsg.Ident clan_id = 1;
+  if (this->has_clan_id()) {
     target = ::google::protobuf::internal::WireFormatLite::
       InternalWriteMessageToArray(
-        1, this->_internal_guild_id(), deterministic, target);
+        1, this->_internal_clan_id(), deterministic, target);
   }
 
-  // bytes guild_name = 2;
-  if (this->guild_name().size() > 0) {
+  // bytes clan_name = 2;
+  if (this->clan_name().size() > 0) {
     target =
       ::google::protobuf::internal::WireFormatLite::WriteBytesToArray(
-        2, this->guild_name(), target);
+        2, this->clan_name(), target);
   }
 
   if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
     target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
         (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()), target);
   }
-  // @@protoc_insertion_point(serialize_to_array_end:NFMsg.ReqAckJoinGuild)
+  // @@protoc_insertion_point(serialize_to_array_end:NFMsg.ReqAckJoinClan)
   return target;
 }
 
-size_t ReqAckJoinGuild::ByteSizeLong() const {
-// @@protoc_insertion_point(message_byte_size_start:NFMsg.ReqAckJoinGuild)
+size_t ReqAckJoinClan::ByteSizeLong() const {
+// @@protoc_insertion_point(message_byte_size_start:NFMsg.ReqAckJoinClan)
   size_t total_size = 0;
 
   if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
@@ -12358,18 +12358,18 @@ size_t ReqAckJoinGuild::ByteSizeLong() const {
       ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
         (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()));
   }
-  // bytes guild_name = 2;
-  if (this->guild_name().size() > 0) {
+  // bytes clan_name = 2;
+  if (this->clan_name().size() > 0) {
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::BytesSize(
-        this->guild_name());
+        this->clan_name());
   }
 
-  // .NFMsg.Ident guild_id = 1;
-  if (this->has_guild_id()) {
+  // .NFMsg.Ident clan_id = 1;
+  if (this->has_clan_id()) {
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::MessageSize(
-        *guild_id_);
+        *clan_id_);
   }
 
   int cached_size = ::google::protobuf::internal::ToCachedSize(total_size);
@@ -12377,68 +12377,68 @@ size_t ReqAckJoinGuild::ByteSizeLong() const {
   return total_size;
 }
 
-void ReqAckJoinGuild::MergeFrom(const ::google::protobuf::Message& from) {
-// @@protoc_insertion_point(generalized_merge_from_start:NFMsg.ReqAckJoinGuild)
+void ReqAckJoinClan::MergeFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_merge_from_start:NFMsg.ReqAckJoinClan)
   GOOGLE_DCHECK_NE(&from, this);
-  const ReqAckJoinGuild* source =
-      ::google::protobuf::internal::DynamicCastToGenerated<const ReqAckJoinGuild>(
+  const ReqAckJoinClan* source =
+      ::google::protobuf::internal::DynamicCastToGenerated<const ReqAckJoinClan>(
           &from);
   if (source == NULL) {
-  // @@protoc_insertion_point(generalized_merge_from_cast_fail:NFMsg.ReqAckJoinGuild)
+  // @@protoc_insertion_point(generalized_merge_from_cast_fail:NFMsg.ReqAckJoinClan)
     ::google::protobuf::internal::ReflectionOps::Merge(from, this);
   } else {
-  // @@protoc_insertion_point(generalized_merge_from_cast_success:NFMsg.ReqAckJoinGuild)
+  // @@protoc_insertion_point(generalized_merge_from_cast_success:NFMsg.ReqAckJoinClan)
     MergeFrom(*source);
   }
 }
 
-void ReqAckJoinGuild::MergeFrom(const ReqAckJoinGuild& from) {
-// @@protoc_insertion_point(class_specific_merge_from_start:NFMsg.ReqAckJoinGuild)
+void ReqAckJoinClan::MergeFrom(const ReqAckJoinClan& from) {
+// @@protoc_insertion_point(class_specific_merge_from_start:NFMsg.ReqAckJoinClan)
   GOOGLE_DCHECK_NE(&from, this);
   _internal_metadata_.MergeFrom(from._internal_metadata_);
   ::google::protobuf::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
-  if (from.guild_name().size() > 0) {
+  if (from.clan_name().size() > 0) {
 
-    guild_name_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.guild_name_);
+    clan_name_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.clan_name_);
   }
-  if (from.has_guild_id()) {
-    mutable_guild_id()->::NFMsg::Ident::MergeFrom(from.guild_id());
+  if (from.has_clan_id()) {
+    mutable_clan_id()->::NFMsg::Ident::MergeFrom(from.clan_id());
   }
 }
 
-void ReqAckJoinGuild::CopyFrom(const ::google::protobuf::Message& from) {
-// @@protoc_insertion_point(generalized_copy_from_start:NFMsg.ReqAckJoinGuild)
+void ReqAckJoinClan::CopyFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_copy_from_start:NFMsg.ReqAckJoinClan)
   if (&from == this) return;
   Clear();
   MergeFrom(from);
 }
 
-void ReqAckJoinGuild::CopyFrom(const ReqAckJoinGuild& from) {
-// @@protoc_insertion_point(class_specific_copy_from_start:NFMsg.ReqAckJoinGuild)
+void ReqAckJoinClan::CopyFrom(const ReqAckJoinClan& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:NFMsg.ReqAckJoinClan)
   if (&from == this) return;
   Clear();
   MergeFrom(from);
 }
 
-bool ReqAckJoinGuild::IsInitialized() const {
+bool ReqAckJoinClan::IsInitialized() const {
   return true;
 }
 
-void ReqAckJoinGuild::Swap(ReqAckJoinGuild* other) {
+void ReqAckJoinClan::Swap(ReqAckJoinClan* other) {
   if (other == this) return;
   InternalSwap(other);
 }
-void ReqAckJoinGuild::InternalSwap(ReqAckJoinGuild* other) {
+void ReqAckJoinClan::InternalSwap(ReqAckJoinClan* other) {
   using std::swap;
-  guild_name_.Swap(&other->guild_name_, &::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+  clan_name_.Swap(&other->clan_name_, &::google::protobuf::internal::GetEmptyStringAlreadyInited(),
     GetArenaNoVirtual());
-  swap(guild_id_, other->guild_id_);
+  swap(clan_id_, other->clan_id_);
   _internal_metadata_.Swap(&other->_internal_metadata_);
 }
 
-::google::protobuf::Metadata ReqAckJoinGuild::GetMetadata() const {
+::google::protobuf::Metadata ReqAckJoinClan::GetMetadata() const {
   protobuf_NFMsgShare_2eproto::protobuf_AssignDescriptorsOnce();
   return ::protobuf_NFMsgShare_2eproto::file_level_metadata[kIndexInFileMessages];
 }
@@ -12446,115 +12446,115 @@ void ReqAckJoinGuild::InternalSwap(ReqAckJoinGuild* other) {
 
 // ===================================================================
 
-void ReqAckLeaveGuild::InitAsDefaultInstance() {
-  ::NFMsg::_ReqAckLeaveGuild_default_instance_._instance.get_mutable()->guild_id_ = const_cast< ::NFMsg::Ident*>(
+void ReqAckLeaveClan::InitAsDefaultInstance() {
+  ::NFMsg::_ReqAckLeaveClan_default_instance_._instance.get_mutable()->clan_id_ = const_cast< ::NFMsg::Ident*>(
       ::NFMsg::Ident::internal_default_instance());
 }
-void ReqAckLeaveGuild::clear_guild_id() {
-  if (GetArenaNoVirtual() == NULL && guild_id_ != NULL) {
-    delete guild_id_;
+void ReqAckLeaveClan::clear_clan_id() {
+  if (GetArenaNoVirtual() == NULL && clan_id_ != NULL) {
+    delete clan_id_;
   }
-  guild_id_ = NULL;
+  clan_id_ = NULL;
 }
 #if !defined(_MSC_VER) || _MSC_VER >= 1900
-const int ReqAckLeaveGuild::kGuildIdFieldNumber;
-const int ReqAckLeaveGuild::kGuildNameFieldNumber;
+const int ReqAckLeaveClan::kClanIdFieldNumber;
+const int ReqAckLeaveClan::kClanNameFieldNumber;
 #endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
 
-ReqAckLeaveGuild::ReqAckLeaveGuild()
+ReqAckLeaveClan::ReqAckLeaveClan()
   : ::google::protobuf::Message(), _internal_metadata_(NULL) {
   ::google::protobuf::internal::InitSCC(
-      &protobuf_NFMsgShare_2eproto::scc_info_ReqAckLeaveGuild.base);
+      &protobuf_NFMsgShare_2eproto::scc_info_ReqAckLeaveClan.base);
   SharedCtor();
-  // @@protoc_insertion_point(constructor:NFMsg.ReqAckLeaveGuild)
+  // @@protoc_insertion_point(constructor:NFMsg.ReqAckLeaveClan)
 }
-ReqAckLeaveGuild::ReqAckLeaveGuild(const ReqAckLeaveGuild& from)
+ReqAckLeaveClan::ReqAckLeaveClan(const ReqAckLeaveClan& from)
   : ::google::protobuf::Message(),
       _internal_metadata_(NULL) {
   _internal_metadata_.MergeFrom(from._internal_metadata_);
-  guild_name_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  if (from.guild_name().size() > 0) {
-    guild_name_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.guild_name_);
+  clan_name_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  if (from.clan_name().size() > 0) {
+    clan_name_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.clan_name_);
   }
-  if (from.has_guild_id()) {
-    guild_id_ = new ::NFMsg::Ident(*from.guild_id_);
+  if (from.has_clan_id()) {
+    clan_id_ = new ::NFMsg::Ident(*from.clan_id_);
   } else {
-    guild_id_ = NULL;
+    clan_id_ = NULL;
   }
-  // @@protoc_insertion_point(copy_constructor:NFMsg.ReqAckLeaveGuild)
+  // @@protoc_insertion_point(copy_constructor:NFMsg.ReqAckLeaveClan)
 }
 
-void ReqAckLeaveGuild::SharedCtor() {
-  guild_name_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  guild_id_ = NULL;
+void ReqAckLeaveClan::SharedCtor() {
+  clan_name_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  clan_id_ = NULL;
 }
 
-ReqAckLeaveGuild::~ReqAckLeaveGuild() {
-  // @@protoc_insertion_point(destructor:NFMsg.ReqAckLeaveGuild)
+ReqAckLeaveClan::~ReqAckLeaveClan() {
+  // @@protoc_insertion_point(destructor:NFMsg.ReqAckLeaveClan)
   SharedDtor();
 }
 
-void ReqAckLeaveGuild::SharedDtor() {
-  guild_name_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  if (this != internal_default_instance()) delete guild_id_;
+void ReqAckLeaveClan::SharedDtor() {
+  clan_name_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  if (this != internal_default_instance()) delete clan_id_;
 }
 
-void ReqAckLeaveGuild::SetCachedSize(int size) const {
+void ReqAckLeaveClan::SetCachedSize(int size) const {
   _cached_size_.Set(size);
 }
-const ::google::protobuf::Descriptor* ReqAckLeaveGuild::descriptor() {
+const ::google::protobuf::Descriptor* ReqAckLeaveClan::descriptor() {
   ::protobuf_NFMsgShare_2eproto::protobuf_AssignDescriptorsOnce();
   return ::protobuf_NFMsgShare_2eproto::file_level_metadata[kIndexInFileMessages].descriptor;
 }
 
-const ReqAckLeaveGuild& ReqAckLeaveGuild::default_instance() {
-  ::google::protobuf::internal::InitSCC(&protobuf_NFMsgShare_2eproto::scc_info_ReqAckLeaveGuild.base);
+const ReqAckLeaveClan& ReqAckLeaveClan::default_instance() {
+  ::google::protobuf::internal::InitSCC(&protobuf_NFMsgShare_2eproto::scc_info_ReqAckLeaveClan.base);
   return *internal_default_instance();
 }
 
 
-void ReqAckLeaveGuild::Clear() {
-// @@protoc_insertion_point(message_clear_start:NFMsg.ReqAckLeaveGuild)
+void ReqAckLeaveClan::Clear() {
+// @@protoc_insertion_point(message_clear_start:NFMsg.ReqAckLeaveClan)
   ::google::protobuf::uint32 cached_has_bits = 0;
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  guild_name_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  if (GetArenaNoVirtual() == NULL && guild_id_ != NULL) {
-    delete guild_id_;
+  clan_name_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  if (GetArenaNoVirtual() == NULL && clan_id_ != NULL) {
+    delete clan_id_;
   }
-  guild_id_ = NULL;
+  clan_id_ = NULL;
   _internal_metadata_.Clear();
 }
 
-bool ReqAckLeaveGuild::MergePartialFromCodedStream(
+bool ReqAckLeaveClan::MergePartialFromCodedStream(
     ::google::protobuf::io::CodedInputStream* input) {
 #define DO_(EXPRESSION) if (!GOOGLE_PREDICT_TRUE(EXPRESSION)) goto failure
   ::google::protobuf::uint32 tag;
-  // @@protoc_insertion_point(parse_start:NFMsg.ReqAckLeaveGuild)
+  // @@protoc_insertion_point(parse_start:NFMsg.ReqAckLeaveClan)
   for (;;) {
     ::std::pair<::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
     tag = p.first;
     if (!p.second) goto handle_unusual;
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // .NFMsg.Ident guild_id = 1;
+      // .NFMsg.Ident clan_id = 1;
       case 1: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
             static_cast< ::google::protobuf::uint8>(10u /* 10 & 0xFF */)) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadMessage(
-               input, mutable_guild_id()));
+               input, mutable_clan_id()));
         } else {
           goto handle_unusual;
         }
         break;
       }
 
-      // bytes guild_name = 2;
+      // bytes clan_name = 2;
       case 2: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
             static_cast< ::google::protobuf::uint8>(18u /* 18 & 0xFF */)) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadBytes(
-                input, this->mutable_guild_name()));
+                input, this->mutable_clan_name()));
         } else {
           goto handle_unusual;
         }
@@ -12573,70 +12573,70 @@ bool ReqAckLeaveGuild::MergePartialFromCodedStream(
     }
   }
 success:
-  // @@protoc_insertion_point(parse_success:NFMsg.ReqAckLeaveGuild)
+  // @@protoc_insertion_point(parse_success:NFMsg.ReqAckLeaveClan)
   return true;
 failure:
-  // @@protoc_insertion_point(parse_failure:NFMsg.ReqAckLeaveGuild)
+  // @@protoc_insertion_point(parse_failure:NFMsg.ReqAckLeaveClan)
   return false;
 #undef DO_
 }
 
-void ReqAckLeaveGuild::SerializeWithCachedSizes(
+void ReqAckLeaveClan::SerializeWithCachedSizes(
     ::google::protobuf::io::CodedOutputStream* output) const {
-  // @@protoc_insertion_point(serialize_start:NFMsg.ReqAckLeaveGuild)
+  // @@protoc_insertion_point(serialize_start:NFMsg.ReqAckLeaveClan)
   ::google::protobuf::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
-  // .NFMsg.Ident guild_id = 1;
-  if (this->has_guild_id()) {
+  // .NFMsg.Ident clan_id = 1;
+  if (this->has_clan_id()) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      1, this->_internal_guild_id(), output);
+      1, this->_internal_clan_id(), output);
   }
 
-  // bytes guild_name = 2;
-  if (this->guild_name().size() > 0) {
+  // bytes clan_name = 2;
+  if (this->clan_name().size() > 0) {
     ::google::protobuf::internal::WireFormatLite::WriteBytesMaybeAliased(
-      2, this->guild_name(), output);
+      2, this->clan_name(), output);
   }
 
   if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
     ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
         (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()), output);
   }
-  // @@protoc_insertion_point(serialize_end:NFMsg.ReqAckLeaveGuild)
+  // @@protoc_insertion_point(serialize_end:NFMsg.ReqAckLeaveClan)
 }
 
-::google::protobuf::uint8* ReqAckLeaveGuild::InternalSerializeWithCachedSizesToArray(
+::google::protobuf::uint8* ReqAckLeaveClan::InternalSerializeWithCachedSizesToArray(
     bool deterministic, ::google::protobuf::uint8* target) const {
   (void)deterministic; // Unused
-  // @@protoc_insertion_point(serialize_to_array_start:NFMsg.ReqAckLeaveGuild)
+  // @@protoc_insertion_point(serialize_to_array_start:NFMsg.ReqAckLeaveClan)
   ::google::protobuf::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
-  // .NFMsg.Ident guild_id = 1;
-  if (this->has_guild_id()) {
+  // .NFMsg.Ident clan_id = 1;
+  if (this->has_clan_id()) {
     target = ::google::protobuf::internal::WireFormatLite::
       InternalWriteMessageToArray(
-        1, this->_internal_guild_id(), deterministic, target);
+        1, this->_internal_clan_id(), deterministic, target);
   }
 
-  // bytes guild_name = 2;
-  if (this->guild_name().size() > 0) {
+  // bytes clan_name = 2;
+  if (this->clan_name().size() > 0) {
     target =
       ::google::protobuf::internal::WireFormatLite::WriteBytesToArray(
-        2, this->guild_name(), target);
+        2, this->clan_name(), target);
   }
 
   if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
     target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
         (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()), target);
   }
-  // @@protoc_insertion_point(serialize_to_array_end:NFMsg.ReqAckLeaveGuild)
+  // @@protoc_insertion_point(serialize_to_array_end:NFMsg.ReqAckLeaveClan)
   return target;
 }
 
-size_t ReqAckLeaveGuild::ByteSizeLong() const {
-// @@protoc_insertion_point(message_byte_size_start:NFMsg.ReqAckLeaveGuild)
+size_t ReqAckLeaveClan::ByteSizeLong() const {
+// @@protoc_insertion_point(message_byte_size_start:NFMsg.ReqAckLeaveClan)
   size_t total_size = 0;
 
   if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
@@ -12644,18 +12644,18 @@ size_t ReqAckLeaveGuild::ByteSizeLong() const {
       ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
         (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()));
   }
-  // bytes guild_name = 2;
-  if (this->guild_name().size() > 0) {
+  // bytes clan_name = 2;
+  if (this->clan_name().size() > 0) {
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::BytesSize(
-        this->guild_name());
+        this->clan_name());
   }
 
-  // .NFMsg.Ident guild_id = 1;
-  if (this->has_guild_id()) {
+  // .NFMsg.Ident clan_id = 1;
+  if (this->has_clan_id()) {
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::MessageSize(
-        *guild_id_);
+        *clan_id_);
   }
 
   int cached_size = ::google::protobuf::internal::ToCachedSize(total_size);
@@ -12663,68 +12663,68 @@ size_t ReqAckLeaveGuild::ByteSizeLong() const {
   return total_size;
 }
 
-void ReqAckLeaveGuild::MergeFrom(const ::google::protobuf::Message& from) {
-// @@protoc_insertion_point(generalized_merge_from_start:NFMsg.ReqAckLeaveGuild)
+void ReqAckLeaveClan::MergeFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_merge_from_start:NFMsg.ReqAckLeaveClan)
   GOOGLE_DCHECK_NE(&from, this);
-  const ReqAckLeaveGuild* source =
-      ::google::protobuf::internal::DynamicCastToGenerated<const ReqAckLeaveGuild>(
+  const ReqAckLeaveClan* source =
+      ::google::protobuf::internal::DynamicCastToGenerated<const ReqAckLeaveClan>(
           &from);
   if (source == NULL) {
-  // @@protoc_insertion_point(generalized_merge_from_cast_fail:NFMsg.ReqAckLeaveGuild)
+  // @@protoc_insertion_point(generalized_merge_from_cast_fail:NFMsg.ReqAckLeaveClan)
     ::google::protobuf::internal::ReflectionOps::Merge(from, this);
   } else {
-  // @@protoc_insertion_point(generalized_merge_from_cast_success:NFMsg.ReqAckLeaveGuild)
+  // @@protoc_insertion_point(generalized_merge_from_cast_success:NFMsg.ReqAckLeaveClan)
     MergeFrom(*source);
   }
 }
 
-void ReqAckLeaveGuild::MergeFrom(const ReqAckLeaveGuild& from) {
-// @@protoc_insertion_point(class_specific_merge_from_start:NFMsg.ReqAckLeaveGuild)
+void ReqAckLeaveClan::MergeFrom(const ReqAckLeaveClan& from) {
+// @@protoc_insertion_point(class_specific_merge_from_start:NFMsg.ReqAckLeaveClan)
   GOOGLE_DCHECK_NE(&from, this);
   _internal_metadata_.MergeFrom(from._internal_metadata_);
   ::google::protobuf::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
-  if (from.guild_name().size() > 0) {
+  if (from.clan_name().size() > 0) {
 
-    guild_name_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.guild_name_);
+    clan_name_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.clan_name_);
   }
-  if (from.has_guild_id()) {
-    mutable_guild_id()->::NFMsg::Ident::MergeFrom(from.guild_id());
+  if (from.has_clan_id()) {
+    mutable_clan_id()->::NFMsg::Ident::MergeFrom(from.clan_id());
   }
 }
 
-void ReqAckLeaveGuild::CopyFrom(const ::google::protobuf::Message& from) {
-// @@protoc_insertion_point(generalized_copy_from_start:NFMsg.ReqAckLeaveGuild)
+void ReqAckLeaveClan::CopyFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_copy_from_start:NFMsg.ReqAckLeaveClan)
   if (&from == this) return;
   Clear();
   MergeFrom(from);
 }
 
-void ReqAckLeaveGuild::CopyFrom(const ReqAckLeaveGuild& from) {
-// @@protoc_insertion_point(class_specific_copy_from_start:NFMsg.ReqAckLeaveGuild)
+void ReqAckLeaveClan::CopyFrom(const ReqAckLeaveClan& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:NFMsg.ReqAckLeaveClan)
   if (&from == this) return;
   Clear();
   MergeFrom(from);
 }
 
-bool ReqAckLeaveGuild::IsInitialized() const {
+bool ReqAckLeaveClan::IsInitialized() const {
   return true;
 }
 
-void ReqAckLeaveGuild::Swap(ReqAckLeaveGuild* other) {
+void ReqAckLeaveClan::Swap(ReqAckLeaveClan* other) {
   if (other == this) return;
   InternalSwap(other);
 }
-void ReqAckLeaveGuild::InternalSwap(ReqAckLeaveGuild* other) {
+void ReqAckLeaveClan::InternalSwap(ReqAckLeaveClan* other) {
   using std::swap;
-  guild_name_.Swap(&other->guild_name_, &::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+  clan_name_.Swap(&other->clan_name_, &::google::protobuf::internal::GetEmptyStringAlreadyInited(),
     GetArenaNoVirtual());
-  swap(guild_id_, other->guild_id_);
+  swap(clan_id_, other->clan_id_);
   _internal_metadata_.Swap(&other->_internal_metadata_);
 }
 
-::google::protobuf::Metadata ReqAckLeaveGuild::GetMetadata() const {
+::google::protobuf::Metadata ReqAckLeaveClan::GetMetadata() const {
   protobuf_NFMsgShare_2eproto::protobuf_AssignDescriptorsOnce();
   return ::protobuf_NFMsgShare_2eproto::file_level_metadata[kIndexInFileMessages];
 }
@@ -12732,45 +12732,45 @@ void ReqAckLeaveGuild::InternalSwap(ReqAckLeaveGuild* other) {
 
 // ===================================================================
 
-void ReqAckOprGuildMember::InitAsDefaultInstance() {
-  ::NFMsg::_ReqAckOprGuildMember_default_instance_._instance.get_mutable()->guild_id_ = const_cast< ::NFMsg::Ident*>(
+void ReqAckOprClanMember::InitAsDefaultInstance() {
+  ::NFMsg::_ReqAckOprClanMember_default_instance_._instance.get_mutable()->clan_id_ = const_cast< ::NFMsg::Ident*>(
       ::NFMsg::Ident::internal_default_instance());
-  ::NFMsg::_ReqAckOprGuildMember_default_instance_._instance.get_mutable()->member_id_ = const_cast< ::NFMsg::Ident*>(
+  ::NFMsg::_ReqAckOprClanMember_default_instance_._instance.get_mutable()->member_id_ = const_cast< ::NFMsg::Ident*>(
       ::NFMsg::Ident::internal_default_instance());
 }
-void ReqAckOprGuildMember::clear_guild_id() {
-  if (GetArenaNoVirtual() == NULL && guild_id_ != NULL) {
-    delete guild_id_;
+void ReqAckOprClanMember::clear_clan_id() {
+  if (GetArenaNoVirtual() == NULL && clan_id_ != NULL) {
+    delete clan_id_;
   }
-  guild_id_ = NULL;
+  clan_id_ = NULL;
 }
-void ReqAckOprGuildMember::clear_member_id() {
+void ReqAckOprClanMember::clear_member_id() {
   if (GetArenaNoVirtual() == NULL && member_id_ != NULL) {
     delete member_id_;
   }
   member_id_ = NULL;
 }
 #if !defined(_MSC_VER) || _MSC_VER >= 1900
-const int ReqAckOprGuildMember::kGuildIdFieldNumber;
-const int ReqAckOprGuildMember::kMemberIdFieldNumber;
-const int ReqAckOprGuildMember::kTypeFieldNumber;
+const int ReqAckOprClanMember::kClanIdFieldNumber;
+const int ReqAckOprClanMember::kMemberIdFieldNumber;
+const int ReqAckOprClanMember::kTypeFieldNumber;
 #endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
 
-ReqAckOprGuildMember::ReqAckOprGuildMember()
+ReqAckOprClanMember::ReqAckOprClanMember()
   : ::google::protobuf::Message(), _internal_metadata_(NULL) {
   ::google::protobuf::internal::InitSCC(
-      &protobuf_NFMsgShare_2eproto::scc_info_ReqAckOprGuildMember.base);
+      &protobuf_NFMsgShare_2eproto::scc_info_ReqAckOprClanMember.base);
   SharedCtor();
-  // @@protoc_insertion_point(constructor:NFMsg.ReqAckOprGuildMember)
+  // @@protoc_insertion_point(constructor:NFMsg.ReqAckOprClanMember)
 }
-ReqAckOprGuildMember::ReqAckOprGuildMember(const ReqAckOprGuildMember& from)
+ReqAckOprClanMember::ReqAckOprClanMember(const ReqAckOprClanMember& from)
   : ::google::protobuf::Message(),
       _internal_metadata_(NULL) {
   _internal_metadata_.MergeFrom(from._internal_metadata_);
-  if (from.has_guild_id()) {
-    guild_id_ = new ::NFMsg::Ident(*from.guild_id_);
+  if (from.has_clan_id()) {
+    clan_id_ = new ::NFMsg::Ident(*from.clan_id_);
   } else {
-    guild_id_ = NULL;
+    clan_id_ = NULL;
   }
   if (from.has_member_id()) {
     member_id_ = new ::NFMsg::Ident(*from.member_id_);
@@ -12778,49 +12778,49 @@ ReqAckOprGuildMember::ReqAckOprGuildMember(const ReqAckOprGuildMember& from)
     member_id_ = NULL;
   }
   type_ = from.type_;
-  // @@protoc_insertion_point(copy_constructor:NFMsg.ReqAckOprGuildMember)
+  // @@protoc_insertion_point(copy_constructor:NFMsg.ReqAckOprClanMember)
 }
 
-void ReqAckOprGuildMember::SharedCtor() {
-  ::memset(&guild_id_, 0, static_cast<size_t>(
+void ReqAckOprClanMember::SharedCtor() {
+  ::memset(&clan_id_, 0, static_cast<size_t>(
       reinterpret_cast<char*>(&type_) -
-      reinterpret_cast<char*>(&guild_id_)) + sizeof(type_));
+      reinterpret_cast<char*>(&clan_id_)) + sizeof(type_));
 }
 
-ReqAckOprGuildMember::~ReqAckOprGuildMember() {
-  // @@protoc_insertion_point(destructor:NFMsg.ReqAckOprGuildMember)
+ReqAckOprClanMember::~ReqAckOprClanMember() {
+  // @@protoc_insertion_point(destructor:NFMsg.ReqAckOprClanMember)
   SharedDtor();
 }
 
-void ReqAckOprGuildMember::SharedDtor() {
-  if (this != internal_default_instance()) delete guild_id_;
+void ReqAckOprClanMember::SharedDtor() {
+  if (this != internal_default_instance()) delete clan_id_;
   if (this != internal_default_instance()) delete member_id_;
 }
 
-void ReqAckOprGuildMember::SetCachedSize(int size) const {
+void ReqAckOprClanMember::SetCachedSize(int size) const {
   _cached_size_.Set(size);
 }
-const ::google::protobuf::Descriptor* ReqAckOprGuildMember::descriptor() {
+const ::google::protobuf::Descriptor* ReqAckOprClanMember::descriptor() {
   ::protobuf_NFMsgShare_2eproto::protobuf_AssignDescriptorsOnce();
   return ::protobuf_NFMsgShare_2eproto::file_level_metadata[kIndexInFileMessages].descriptor;
 }
 
-const ReqAckOprGuildMember& ReqAckOprGuildMember::default_instance() {
-  ::google::protobuf::internal::InitSCC(&protobuf_NFMsgShare_2eproto::scc_info_ReqAckOprGuildMember.base);
+const ReqAckOprClanMember& ReqAckOprClanMember::default_instance() {
+  ::google::protobuf::internal::InitSCC(&protobuf_NFMsgShare_2eproto::scc_info_ReqAckOprClanMember.base);
   return *internal_default_instance();
 }
 
 
-void ReqAckOprGuildMember::Clear() {
-// @@protoc_insertion_point(message_clear_start:NFMsg.ReqAckOprGuildMember)
+void ReqAckOprClanMember::Clear() {
+// @@protoc_insertion_point(message_clear_start:NFMsg.ReqAckOprClanMember)
   ::google::protobuf::uint32 cached_has_bits = 0;
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  if (GetArenaNoVirtual() == NULL && guild_id_ != NULL) {
-    delete guild_id_;
+  if (GetArenaNoVirtual() == NULL && clan_id_ != NULL) {
+    delete clan_id_;
   }
-  guild_id_ = NULL;
+  clan_id_ = NULL;
   if (GetArenaNoVirtual() == NULL && member_id_ != NULL) {
     delete member_id_;
   }
@@ -12829,22 +12829,22 @@ void ReqAckOprGuildMember::Clear() {
   _internal_metadata_.Clear();
 }
 
-bool ReqAckOprGuildMember::MergePartialFromCodedStream(
+bool ReqAckOprClanMember::MergePartialFromCodedStream(
     ::google::protobuf::io::CodedInputStream* input) {
 #define DO_(EXPRESSION) if (!GOOGLE_PREDICT_TRUE(EXPRESSION)) goto failure
   ::google::protobuf::uint32 tag;
-  // @@protoc_insertion_point(parse_start:NFMsg.ReqAckOprGuildMember)
+  // @@protoc_insertion_point(parse_start:NFMsg.ReqAckOprClanMember)
   for (;;) {
     ::std::pair<::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
     tag = p.first;
     if (!p.second) goto handle_unusual;
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // .NFMsg.Ident guild_id = 1;
+      // .NFMsg.Ident clan_id = 1;
       case 1: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
             static_cast< ::google::protobuf::uint8>(10u /* 10 & 0xFF */)) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadMessage(
-               input, mutable_guild_id()));
+               input, mutable_clan_id()));
         } else {
           goto handle_unusual;
         }
@@ -12863,7 +12863,7 @@ bool ReqAckOprGuildMember::MergePartialFromCodedStream(
         break;
       }
 
-      // .NFMsg.ReqAckOprGuildMember.EGGuildMemberOprType type = 3;
+      // .NFMsg.ReqAckOprClanMember.EGClanMemberOprType type = 3;
       case 3: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
             static_cast< ::google::protobuf::uint8>(24u /* 24 & 0xFF */)) {
@@ -12871,7 +12871,7 @@ bool ReqAckOprGuildMember::MergePartialFromCodedStream(
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    int, ::google::protobuf::internal::WireFormatLite::TYPE_ENUM>(
                  input, &value)));
-          set_type(static_cast< ::NFMsg::ReqAckOprGuildMember_EGGuildMemberOprType >(value));
+          set_type(static_cast< ::NFMsg::ReqAckOprClanMember_EGClanMemberOprType >(value));
         } else {
           goto handle_unusual;
         }
@@ -12890,24 +12890,24 @@ bool ReqAckOprGuildMember::MergePartialFromCodedStream(
     }
   }
 success:
-  // @@protoc_insertion_point(parse_success:NFMsg.ReqAckOprGuildMember)
+  // @@protoc_insertion_point(parse_success:NFMsg.ReqAckOprClanMember)
   return true;
 failure:
-  // @@protoc_insertion_point(parse_failure:NFMsg.ReqAckOprGuildMember)
+  // @@protoc_insertion_point(parse_failure:NFMsg.ReqAckOprClanMember)
   return false;
 #undef DO_
 }
 
-void ReqAckOprGuildMember::SerializeWithCachedSizes(
+void ReqAckOprClanMember::SerializeWithCachedSizes(
     ::google::protobuf::io::CodedOutputStream* output) const {
-  // @@protoc_insertion_point(serialize_start:NFMsg.ReqAckOprGuildMember)
+  // @@protoc_insertion_point(serialize_start:NFMsg.ReqAckOprClanMember)
   ::google::protobuf::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
-  // .NFMsg.Ident guild_id = 1;
-  if (this->has_guild_id()) {
+  // .NFMsg.Ident clan_id = 1;
+  if (this->has_clan_id()) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      1, this->_internal_guild_id(), output);
+      1, this->_internal_clan_id(), output);
   }
 
   // .NFMsg.Ident member_id = 2;
@@ -12916,7 +12916,7 @@ void ReqAckOprGuildMember::SerializeWithCachedSizes(
       2, this->_internal_member_id(), output);
   }
 
-  // .NFMsg.ReqAckOprGuildMember.EGGuildMemberOprType type = 3;
+  // .NFMsg.ReqAckOprClanMember.EGClanMemberOprType type = 3;
   if (this->type() != 0) {
     ::google::protobuf::internal::WireFormatLite::WriteEnum(
       3, this->type(), output);
@@ -12926,21 +12926,21 @@ void ReqAckOprGuildMember::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
         (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()), output);
   }
-  // @@protoc_insertion_point(serialize_end:NFMsg.ReqAckOprGuildMember)
+  // @@protoc_insertion_point(serialize_end:NFMsg.ReqAckOprClanMember)
 }
 
-::google::protobuf::uint8* ReqAckOprGuildMember::InternalSerializeWithCachedSizesToArray(
+::google::protobuf::uint8* ReqAckOprClanMember::InternalSerializeWithCachedSizesToArray(
     bool deterministic, ::google::protobuf::uint8* target) const {
   (void)deterministic; // Unused
-  // @@protoc_insertion_point(serialize_to_array_start:NFMsg.ReqAckOprGuildMember)
+  // @@protoc_insertion_point(serialize_to_array_start:NFMsg.ReqAckOprClanMember)
   ::google::protobuf::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
-  // .NFMsg.Ident guild_id = 1;
-  if (this->has_guild_id()) {
+  // .NFMsg.Ident clan_id = 1;
+  if (this->has_clan_id()) {
     target = ::google::protobuf::internal::WireFormatLite::
       InternalWriteMessageToArray(
-        1, this->_internal_guild_id(), deterministic, target);
+        1, this->_internal_clan_id(), deterministic, target);
   }
 
   // .NFMsg.Ident member_id = 2;
@@ -12950,7 +12950,7 @@ void ReqAckOprGuildMember::SerializeWithCachedSizes(
         2, this->_internal_member_id(), deterministic, target);
   }
 
-  // .NFMsg.ReqAckOprGuildMember.EGGuildMemberOprType type = 3;
+  // .NFMsg.ReqAckOprClanMember.EGClanMemberOprType type = 3;
   if (this->type() != 0) {
     target = ::google::protobuf::internal::WireFormatLite::WriteEnumToArray(
       3, this->type(), target);
@@ -12960,12 +12960,12 @@ void ReqAckOprGuildMember::SerializeWithCachedSizes(
     target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
         (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()), target);
   }
-  // @@protoc_insertion_point(serialize_to_array_end:NFMsg.ReqAckOprGuildMember)
+  // @@protoc_insertion_point(serialize_to_array_end:NFMsg.ReqAckOprClanMember)
   return target;
 }
 
-size_t ReqAckOprGuildMember::ByteSizeLong() const {
-// @@protoc_insertion_point(message_byte_size_start:NFMsg.ReqAckOprGuildMember)
+size_t ReqAckOprClanMember::ByteSizeLong() const {
+// @@protoc_insertion_point(message_byte_size_start:NFMsg.ReqAckOprClanMember)
   size_t total_size = 0;
 
   if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
@@ -12973,11 +12973,11 @@ size_t ReqAckOprGuildMember::ByteSizeLong() const {
       ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
         (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()));
   }
-  // .NFMsg.Ident guild_id = 1;
-  if (this->has_guild_id()) {
+  // .NFMsg.Ident clan_id = 1;
+  if (this->has_clan_id()) {
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::MessageSize(
-        *guild_id_);
+        *clan_id_);
   }
 
   // .NFMsg.Ident member_id = 2;
@@ -12987,7 +12987,7 @@ size_t ReqAckOprGuildMember::ByteSizeLong() const {
         *member_id_);
   }
 
-  // .NFMsg.ReqAckOprGuildMember.EGGuildMemberOprType type = 3;
+  // .NFMsg.ReqAckOprClanMember.EGClanMemberOprType type = 3;
   if (this->type() != 0) {
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::EnumSize(this->type());
@@ -12998,30 +12998,30 @@ size_t ReqAckOprGuildMember::ByteSizeLong() const {
   return total_size;
 }
 
-void ReqAckOprGuildMember::MergeFrom(const ::google::protobuf::Message& from) {
-// @@protoc_insertion_point(generalized_merge_from_start:NFMsg.ReqAckOprGuildMember)
+void ReqAckOprClanMember::MergeFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_merge_from_start:NFMsg.ReqAckOprClanMember)
   GOOGLE_DCHECK_NE(&from, this);
-  const ReqAckOprGuildMember* source =
-      ::google::protobuf::internal::DynamicCastToGenerated<const ReqAckOprGuildMember>(
+  const ReqAckOprClanMember* source =
+      ::google::protobuf::internal::DynamicCastToGenerated<const ReqAckOprClanMember>(
           &from);
   if (source == NULL) {
-  // @@protoc_insertion_point(generalized_merge_from_cast_fail:NFMsg.ReqAckOprGuildMember)
+  // @@protoc_insertion_point(generalized_merge_from_cast_fail:NFMsg.ReqAckOprClanMember)
     ::google::protobuf::internal::ReflectionOps::Merge(from, this);
   } else {
-  // @@protoc_insertion_point(generalized_merge_from_cast_success:NFMsg.ReqAckOprGuildMember)
+  // @@protoc_insertion_point(generalized_merge_from_cast_success:NFMsg.ReqAckOprClanMember)
     MergeFrom(*source);
   }
 }
 
-void ReqAckOprGuildMember::MergeFrom(const ReqAckOprGuildMember& from) {
-// @@protoc_insertion_point(class_specific_merge_from_start:NFMsg.ReqAckOprGuildMember)
+void ReqAckOprClanMember::MergeFrom(const ReqAckOprClanMember& from) {
+// @@protoc_insertion_point(class_specific_merge_from_start:NFMsg.ReqAckOprClanMember)
   GOOGLE_DCHECK_NE(&from, this);
   _internal_metadata_.MergeFrom(from._internal_metadata_);
   ::google::protobuf::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
-  if (from.has_guild_id()) {
-    mutable_guild_id()->::NFMsg::Ident::MergeFrom(from.guild_id());
+  if (from.has_clan_id()) {
+    mutable_clan_id()->::NFMsg::Ident::MergeFrom(from.clan_id());
   }
   if (from.has_member_id()) {
     mutable_member_id()->::NFMsg::Ident::MergeFrom(from.member_id());
@@ -13031,37 +13031,37 @@ void ReqAckOprGuildMember::MergeFrom(const ReqAckOprGuildMember& from) {
   }
 }
 
-void ReqAckOprGuildMember::CopyFrom(const ::google::protobuf::Message& from) {
-// @@protoc_insertion_point(generalized_copy_from_start:NFMsg.ReqAckOprGuildMember)
+void ReqAckOprClanMember::CopyFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_copy_from_start:NFMsg.ReqAckOprClanMember)
   if (&from == this) return;
   Clear();
   MergeFrom(from);
 }
 
-void ReqAckOprGuildMember::CopyFrom(const ReqAckOprGuildMember& from) {
-// @@protoc_insertion_point(class_specific_copy_from_start:NFMsg.ReqAckOprGuildMember)
+void ReqAckOprClanMember::CopyFrom(const ReqAckOprClanMember& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:NFMsg.ReqAckOprClanMember)
   if (&from == this) return;
   Clear();
   MergeFrom(from);
 }
 
-bool ReqAckOprGuildMember::IsInitialized() const {
+bool ReqAckOprClanMember::IsInitialized() const {
   return true;
 }
 
-void ReqAckOprGuildMember::Swap(ReqAckOprGuildMember* other) {
+void ReqAckOprClanMember::Swap(ReqAckOprClanMember* other) {
   if (other == this) return;
   InternalSwap(other);
 }
-void ReqAckOprGuildMember::InternalSwap(ReqAckOprGuildMember* other) {
+void ReqAckOprClanMember::InternalSwap(ReqAckOprClanMember* other) {
   using std::swap;
-  swap(guild_id_, other->guild_id_);
+  swap(clan_id_, other->clan_id_);
   swap(member_id_, other->member_id_);
   swap(type_, other->type_);
   _internal_metadata_.Swap(&other->_internal_metadata_);
 }
 
-::google::protobuf::Metadata ReqAckOprGuildMember::GetMetadata() const {
+::google::protobuf::Metadata ReqAckOprClanMember::GetMetadata() const {
   protobuf_NFMsgShare_2eproto::protobuf_AssignDescriptorsOnce();
   return ::protobuf_NFMsgShare_2eproto::file_level_metadata[kIndexInFileMessages];
 }
@@ -13069,95 +13069,95 @@ void ReqAckOprGuildMember::InternalSwap(ReqAckOprGuildMember* other) {
 
 // ===================================================================
 
-void ReqEnterGuildEctype::InitAsDefaultInstance() {
-  ::NFMsg::_ReqEnterGuildEctype_default_instance_._instance.get_mutable()->guild_id_ = const_cast< ::NFMsg::Ident*>(
+void ReqEnterClanEctype::InitAsDefaultInstance() {
+  ::NFMsg::_ReqEnterClanEctype_default_instance_._instance.get_mutable()->clan_id_ = const_cast< ::NFMsg::Ident*>(
       ::NFMsg::Ident::internal_default_instance());
 }
-void ReqEnterGuildEctype::clear_guild_id() {
-  if (GetArenaNoVirtual() == NULL && guild_id_ != NULL) {
-    delete guild_id_;
+void ReqEnterClanEctype::clear_clan_id() {
+  if (GetArenaNoVirtual() == NULL && clan_id_ != NULL) {
+    delete clan_id_;
   }
-  guild_id_ = NULL;
+  clan_id_ = NULL;
 }
 #if !defined(_MSC_VER) || _MSC_VER >= 1900
-const int ReqEnterGuildEctype::kGuildIdFieldNumber;
+const int ReqEnterClanEctype::kClanIdFieldNumber;
 #endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
 
-ReqEnterGuildEctype::ReqEnterGuildEctype()
+ReqEnterClanEctype::ReqEnterClanEctype()
   : ::google::protobuf::Message(), _internal_metadata_(NULL) {
   ::google::protobuf::internal::InitSCC(
-      &protobuf_NFMsgShare_2eproto::scc_info_ReqEnterGuildEctype.base);
+      &protobuf_NFMsgShare_2eproto::scc_info_ReqEnterClanEctype.base);
   SharedCtor();
-  // @@protoc_insertion_point(constructor:NFMsg.ReqEnterGuildEctype)
+  // @@protoc_insertion_point(constructor:NFMsg.ReqEnterClanEctype)
 }
-ReqEnterGuildEctype::ReqEnterGuildEctype(const ReqEnterGuildEctype& from)
+ReqEnterClanEctype::ReqEnterClanEctype(const ReqEnterClanEctype& from)
   : ::google::protobuf::Message(),
       _internal_metadata_(NULL) {
   _internal_metadata_.MergeFrom(from._internal_metadata_);
-  if (from.has_guild_id()) {
-    guild_id_ = new ::NFMsg::Ident(*from.guild_id_);
+  if (from.has_clan_id()) {
+    clan_id_ = new ::NFMsg::Ident(*from.clan_id_);
   } else {
-    guild_id_ = NULL;
+    clan_id_ = NULL;
   }
-  // @@protoc_insertion_point(copy_constructor:NFMsg.ReqEnterGuildEctype)
+  // @@protoc_insertion_point(copy_constructor:NFMsg.ReqEnterClanEctype)
 }
 
-void ReqEnterGuildEctype::SharedCtor() {
-  guild_id_ = NULL;
+void ReqEnterClanEctype::SharedCtor() {
+  clan_id_ = NULL;
 }
 
-ReqEnterGuildEctype::~ReqEnterGuildEctype() {
-  // @@protoc_insertion_point(destructor:NFMsg.ReqEnterGuildEctype)
+ReqEnterClanEctype::~ReqEnterClanEctype() {
+  // @@protoc_insertion_point(destructor:NFMsg.ReqEnterClanEctype)
   SharedDtor();
 }
 
-void ReqEnterGuildEctype::SharedDtor() {
-  if (this != internal_default_instance()) delete guild_id_;
+void ReqEnterClanEctype::SharedDtor() {
+  if (this != internal_default_instance()) delete clan_id_;
 }
 
-void ReqEnterGuildEctype::SetCachedSize(int size) const {
+void ReqEnterClanEctype::SetCachedSize(int size) const {
   _cached_size_.Set(size);
 }
-const ::google::protobuf::Descriptor* ReqEnterGuildEctype::descriptor() {
+const ::google::protobuf::Descriptor* ReqEnterClanEctype::descriptor() {
   ::protobuf_NFMsgShare_2eproto::protobuf_AssignDescriptorsOnce();
   return ::protobuf_NFMsgShare_2eproto::file_level_metadata[kIndexInFileMessages].descriptor;
 }
 
-const ReqEnterGuildEctype& ReqEnterGuildEctype::default_instance() {
-  ::google::protobuf::internal::InitSCC(&protobuf_NFMsgShare_2eproto::scc_info_ReqEnterGuildEctype.base);
+const ReqEnterClanEctype& ReqEnterClanEctype::default_instance() {
+  ::google::protobuf::internal::InitSCC(&protobuf_NFMsgShare_2eproto::scc_info_ReqEnterClanEctype.base);
   return *internal_default_instance();
 }
 
 
-void ReqEnterGuildEctype::Clear() {
-// @@protoc_insertion_point(message_clear_start:NFMsg.ReqEnterGuildEctype)
+void ReqEnterClanEctype::Clear() {
+// @@protoc_insertion_point(message_clear_start:NFMsg.ReqEnterClanEctype)
   ::google::protobuf::uint32 cached_has_bits = 0;
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  if (GetArenaNoVirtual() == NULL && guild_id_ != NULL) {
-    delete guild_id_;
+  if (GetArenaNoVirtual() == NULL && clan_id_ != NULL) {
+    delete clan_id_;
   }
-  guild_id_ = NULL;
+  clan_id_ = NULL;
   _internal_metadata_.Clear();
 }
 
-bool ReqEnterGuildEctype::MergePartialFromCodedStream(
+bool ReqEnterClanEctype::MergePartialFromCodedStream(
     ::google::protobuf::io::CodedInputStream* input) {
 #define DO_(EXPRESSION) if (!GOOGLE_PREDICT_TRUE(EXPRESSION)) goto failure
   ::google::protobuf::uint32 tag;
-  // @@protoc_insertion_point(parse_start:NFMsg.ReqEnterGuildEctype)
+  // @@protoc_insertion_point(parse_start:NFMsg.ReqEnterClanEctype)
   for (;;) {
     ::std::pair<::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
     tag = p.first;
     if (!p.second) goto handle_unusual;
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // .NFMsg.Ident guild_id = 1;
+      // .NFMsg.Ident clan_id = 1;
       case 1: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
             static_cast< ::google::protobuf::uint8>(10u /* 10 & 0xFF */)) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadMessage(
-               input, mutable_guild_id()));
+               input, mutable_clan_id()));
         } else {
           goto handle_unusual;
         }
@@ -13176,57 +13176,57 @@ bool ReqEnterGuildEctype::MergePartialFromCodedStream(
     }
   }
 success:
-  // @@protoc_insertion_point(parse_success:NFMsg.ReqEnterGuildEctype)
+  // @@protoc_insertion_point(parse_success:NFMsg.ReqEnterClanEctype)
   return true;
 failure:
-  // @@protoc_insertion_point(parse_failure:NFMsg.ReqEnterGuildEctype)
+  // @@protoc_insertion_point(parse_failure:NFMsg.ReqEnterClanEctype)
   return false;
 #undef DO_
 }
 
-void ReqEnterGuildEctype::SerializeWithCachedSizes(
+void ReqEnterClanEctype::SerializeWithCachedSizes(
     ::google::protobuf::io::CodedOutputStream* output) const {
-  // @@protoc_insertion_point(serialize_start:NFMsg.ReqEnterGuildEctype)
+  // @@protoc_insertion_point(serialize_start:NFMsg.ReqEnterClanEctype)
   ::google::protobuf::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
-  // .NFMsg.Ident guild_id = 1;
-  if (this->has_guild_id()) {
+  // .NFMsg.Ident clan_id = 1;
+  if (this->has_clan_id()) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      1, this->_internal_guild_id(), output);
+      1, this->_internal_clan_id(), output);
   }
 
   if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
     ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
         (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()), output);
   }
-  // @@protoc_insertion_point(serialize_end:NFMsg.ReqEnterGuildEctype)
+  // @@protoc_insertion_point(serialize_end:NFMsg.ReqEnterClanEctype)
 }
 
-::google::protobuf::uint8* ReqEnterGuildEctype::InternalSerializeWithCachedSizesToArray(
+::google::protobuf::uint8* ReqEnterClanEctype::InternalSerializeWithCachedSizesToArray(
     bool deterministic, ::google::protobuf::uint8* target) const {
   (void)deterministic; // Unused
-  // @@protoc_insertion_point(serialize_to_array_start:NFMsg.ReqEnterGuildEctype)
+  // @@protoc_insertion_point(serialize_to_array_start:NFMsg.ReqEnterClanEctype)
   ::google::protobuf::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
-  // .NFMsg.Ident guild_id = 1;
-  if (this->has_guild_id()) {
+  // .NFMsg.Ident clan_id = 1;
+  if (this->has_clan_id()) {
     target = ::google::protobuf::internal::WireFormatLite::
       InternalWriteMessageToArray(
-        1, this->_internal_guild_id(), deterministic, target);
+        1, this->_internal_clan_id(), deterministic, target);
   }
 
   if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
     target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
         (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()), target);
   }
-  // @@protoc_insertion_point(serialize_to_array_end:NFMsg.ReqEnterGuildEctype)
+  // @@protoc_insertion_point(serialize_to_array_end:NFMsg.ReqEnterClanEctype)
   return target;
 }
 
-size_t ReqEnterGuildEctype::ByteSizeLong() const {
-// @@protoc_insertion_point(message_byte_size_start:NFMsg.ReqEnterGuildEctype)
+size_t ReqEnterClanEctype::ByteSizeLong() const {
+// @@protoc_insertion_point(message_byte_size_start:NFMsg.ReqEnterClanEctype)
   size_t total_size = 0;
 
   if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
@@ -13234,11 +13234,11 @@ size_t ReqEnterGuildEctype::ByteSizeLong() const {
       ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
         (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()));
   }
-  // .NFMsg.Ident guild_id = 1;
-  if (this->has_guild_id()) {
+  // .NFMsg.Ident clan_id = 1;
+  if (this->has_clan_id()) {
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::MessageSize(
-        *guild_id_);
+        *clan_id_);
   }
 
   int cached_size = ::google::protobuf::internal::ToCachedSize(total_size);
@@ -13246,62 +13246,62 @@ size_t ReqEnterGuildEctype::ByteSizeLong() const {
   return total_size;
 }
 
-void ReqEnterGuildEctype::MergeFrom(const ::google::protobuf::Message& from) {
-// @@protoc_insertion_point(generalized_merge_from_start:NFMsg.ReqEnterGuildEctype)
+void ReqEnterClanEctype::MergeFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_merge_from_start:NFMsg.ReqEnterClanEctype)
   GOOGLE_DCHECK_NE(&from, this);
-  const ReqEnterGuildEctype* source =
-      ::google::protobuf::internal::DynamicCastToGenerated<const ReqEnterGuildEctype>(
+  const ReqEnterClanEctype* source =
+      ::google::protobuf::internal::DynamicCastToGenerated<const ReqEnterClanEctype>(
           &from);
   if (source == NULL) {
-  // @@protoc_insertion_point(generalized_merge_from_cast_fail:NFMsg.ReqEnterGuildEctype)
+  // @@protoc_insertion_point(generalized_merge_from_cast_fail:NFMsg.ReqEnterClanEctype)
     ::google::protobuf::internal::ReflectionOps::Merge(from, this);
   } else {
-  // @@protoc_insertion_point(generalized_merge_from_cast_success:NFMsg.ReqEnterGuildEctype)
+  // @@protoc_insertion_point(generalized_merge_from_cast_success:NFMsg.ReqEnterClanEctype)
     MergeFrom(*source);
   }
 }
 
-void ReqEnterGuildEctype::MergeFrom(const ReqEnterGuildEctype& from) {
-// @@protoc_insertion_point(class_specific_merge_from_start:NFMsg.ReqEnterGuildEctype)
+void ReqEnterClanEctype::MergeFrom(const ReqEnterClanEctype& from) {
+// @@protoc_insertion_point(class_specific_merge_from_start:NFMsg.ReqEnterClanEctype)
   GOOGLE_DCHECK_NE(&from, this);
   _internal_metadata_.MergeFrom(from._internal_metadata_);
   ::google::protobuf::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
-  if (from.has_guild_id()) {
-    mutable_guild_id()->::NFMsg::Ident::MergeFrom(from.guild_id());
+  if (from.has_clan_id()) {
+    mutable_clan_id()->::NFMsg::Ident::MergeFrom(from.clan_id());
   }
 }
 
-void ReqEnterGuildEctype::CopyFrom(const ::google::protobuf::Message& from) {
-// @@protoc_insertion_point(generalized_copy_from_start:NFMsg.ReqEnterGuildEctype)
+void ReqEnterClanEctype::CopyFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_copy_from_start:NFMsg.ReqEnterClanEctype)
   if (&from == this) return;
   Clear();
   MergeFrom(from);
 }
 
-void ReqEnterGuildEctype::CopyFrom(const ReqEnterGuildEctype& from) {
-// @@protoc_insertion_point(class_specific_copy_from_start:NFMsg.ReqEnterGuildEctype)
+void ReqEnterClanEctype::CopyFrom(const ReqEnterClanEctype& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:NFMsg.ReqEnterClanEctype)
   if (&from == this) return;
   Clear();
   MergeFrom(from);
 }
 
-bool ReqEnterGuildEctype::IsInitialized() const {
+bool ReqEnterClanEctype::IsInitialized() const {
   return true;
 }
 
-void ReqEnterGuildEctype::Swap(ReqEnterGuildEctype* other) {
+void ReqEnterClanEctype::Swap(ReqEnterClanEctype* other) {
   if (other == this) return;
   InternalSwap(other);
 }
-void ReqEnterGuildEctype::InternalSwap(ReqEnterGuildEctype* other) {
+void ReqEnterClanEctype::InternalSwap(ReqEnterClanEctype* other) {
   using std::swap;
-  swap(guild_id_, other->guild_id_);
+  swap(clan_id_, other->clan_id_);
   _internal_metadata_.Swap(&other->_internal_metadata_);
 }
 
-::google::protobuf::Metadata ReqEnterGuildEctype::GetMetadata() const {
+::google::protobuf::Metadata ReqEnterClanEctype::GetMetadata() const {
   protobuf_NFMsgShare_2eproto::protobuf_AssignDescriptorsOnce();
   return ::protobuf_NFMsgShare_2eproto::file_level_metadata[kIndexInFileMessages];
 }
@@ -20636,29 +20636,29 @@ template<> GOOGLE_PROTOBUF_ATTRIBUTE_NOINLINE ::NFMsg::ReqCompeleteTask* Arena::
 template<> GOOGLE_PROTOBUF_ATTRIBUTE_NOINLINE ::NFMsg::ReqAckJoinActivity* Arena::CreateMaybeMessage< ::NFMsg::ReqAckJoinActivity >(Arena* arena) {
   return Arena::CreateInternal< ::NFMsg::ReqAckJoinActivity >(arena);
 }
-template<> GOOGLE_PROTOBUF_ATTRIBUTE_NOINLINE ::NFMsg::ReqAckCreateGuild* Arena::CreateMaybeMessage< ::NFMsg::ReqAckCreateGuild >(Arena* arena) {
-  return Arena::CreateInternal< ::NFMsg::ReqAckCreateGuild >(arena);
+template<> GOOGLE_PROTOBUF_ATTRIBUTE_NOINLINE ::NFMsg::ReqAckCreateClan* Arena::CreateMaybeMessage< ::NFMsg::ReqAckCreateClan >(Arena* arena) {
+  return Arena::CreateInternal< ::NFMsg::ReqAckCreateClan >(arena);
 }
-template<> GOOGLE_PROTOBUF_ATTRIBUTE_NOINLINE ::NFMsg::ReqSearchGuild* Arena::CreateMaybeMessage< ::NFMsg::ReqSearchGuild >(Arena* arena) {
-  return Arena::CreateInternal< ::NFMsg::ReqSearchGuild >(arena);
+template<> GOOGLE_PROTOBUF_ATTRIBUTE_NOINLINE ::NFMsg::ReqSearchClan* Arena::CreateMaybeMessage< ::NFMsg::ReqSearchClan >(Arena* arena) {
+  return Arena::CreateInternal< ::NFMsg::ReqSearchClan >(arena);
 }
-template<> GOOGLE_PROTOBUF_ATTRIBUTE_NOINLINE ::NFMsg::AckSearchGuild_SearchGuildObject* Arena::CreateMaybeMessage< ::NFMsg::AckSearchGuild_SearchGuildObject >(Arena* arena) {
-  return Arena::CreateInternal< ::NFMsg::AckSearchGuild_SearchGuildObject >(arena);
+template<> GOOGLE_PROTOBUF_ATTRIBUTE_NOINLINE ::NFMsg::AckSearchClan_SearchClanObject* Arena::CreateMaybeMessage< ::NFMsg::AckSearchClan_SearchClanObject >(Arena* arena) {
+  return Arena::CreateInternal< ::NFMsg::AckSearchClan_SearchClanObject >(arena);
 }
-template<> GOOGLE_PROTOBUF_ATTRIBUTE_NOINLINE ::NFMsg::AckSearchGuild* Arena::CreateMaybeMessage< ::NFMsg::AckSearchGuild >(Arena* arena) {
-  return Arena::CreateInternal< ::NFMsg::AckSearchGuild >(arena);
+template<> GOOGLE_PROTOBUF_ATTRIBUTE_NOINLINE ::NFMsg::AckSearchClan* Arena::CreateMaybeMessage< ::NFMsg::AckSearchClan >(Arena* arena) {
+  return Arena::CreateInternal< ::NFMsg::AckSearchClan >(arena);
 }
-template<> GOOGLE_PROTOBUF_ATTRIBUTE_NOINLINE ::NFMsg::ReqAckJoinGuild* Arena::CreateMaybeMessage< ::NFMsg::ReqAckJoinGuild >(Arena* arena) {
-  return Arena::CreateInternal< ::NFMsg::ReqAckJoinGuild >(arena);
+template<> GOOGLE_PROTOBUF_ATTRIBUTE_NOINLINE ::NFMsg::ReqAckJoinClan* Arena::CreateMaybeMessage< ::NFMsg::ReqAckJoinClan >(Arena* arena) {
+  return Arena::CreateInternal< ::NFMsg::ReqAckJoinClan >(arena);
 }
-template<> GOOGLE_PROTOBUF_ATTRIBUTE_NOINLINE ::NFMsg::ReqAckLeaveGuild* Arena::CreateMaybeMessage< ::NFMsg::ReqAckLeaveGuild >(Arena* arena) {
-  return Arena::CreateInternal< ::NFMsg::ReqAckLeaveGuild >(arena);
+template<> GOOGLE_PROTOBUF_ATTRIBUTE_NOINLINE ::NFMsg::ReqAckLeaveClan* Arena::CreateMaybeMessage< ::NFMsg::ReqAckLeaveClan >(Arena* arena) {
+  return Arena::CreateInternal< ::NFMsg::ReqAckLeaveClan >(arena);
 }
-template<> GOOGLE_PROTOBUF_ATTRIBUTE_NOINLINE ::NFMsg::ReqAckOprGuildMember* Arena::CreateMaybeMessage< ::NFMsg::ReqAckOprGuildMember >(Arena* arena) {
-  return Arena::CreateInternal< ::NFMsg::ReqAckOprGuildMember >(arena);
+template<> GOOGLE_PROTOBUF_ATTRIBUTE_NOINLINE ::NFMsg::ReqAckOprClanMember* Arena::CreateMaybeMessage< ::NFMsg::ReqAckOprClanMember >(Arena* arena) {
+  return Arena::CreateInternal< ::NFMsg::ReqAckOprClanMember >(arena);
 }
-template<> GOOGLE_PROTOBUF_ATTRIBUTE_NOINLINE ::NFMsg::ReqEnterGuildEctype* Arena::CreateMaybeMessage< ::NFMsg::ReqEnterGuildEctype >(Arena* arena) {
-  return Arena::CreateInternal< ::NFMsg::ReqEnterGuildEctype >(arena);
+template<> GOOGLE_PROTOBUF_ATTRIBUTE_NOINLINE ::NFMsg::ReqEnterClanEctype* Arena::CreateMaybeMessage< ::NFMsg::ReqEnterClanEctype >(Arena* arena) {
+  return Arena::CreateInternal< ::NFMsg::ReqEnterClanEctype >(arena);
 }
 template<> GOOGLE_PROTOBUF_ATTRIBUTE_NOINLINE ::NFMsg::ReqSetFightHero* Arena::CreateMaybeMessage< ::NFMsg::ReqSetFightHero >(Arena* arena) {
   return Arena::CreateInternal< ::NFMsg::ReqSetFightHero >(arena);

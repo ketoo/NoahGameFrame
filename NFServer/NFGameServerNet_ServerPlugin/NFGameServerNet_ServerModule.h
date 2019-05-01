@@ -94,7 +94,7 @@ protected:
 
     ///////////WORLD_START///////////////////////////////////////////////////////////////
     void OnTransWorld(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
-	void OnGuildTransWorld(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+	void OnClanTransWorld(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
 
 protected:
 	void OnClientPropertyIntProcess(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
