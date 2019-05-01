@@ -54,7 +54,7 @@ bool NFBigMapRedisModule::AfterInit()
 	m_pNoSqlModule = pPluginManager->FindModule<NFINoSqlModule>();
 	m_pElementModule = pPluginManager->FindModule<NFIElementModule>();
 	m_pLogicClassModule = pPluginManager->FindModule<NFIClassModule>();
-	m_pGuildRedisModule = pPluginManager->FindModule<NFIGuildRedisModule>();
+	m_pClanRedisModule = pPluginManager->FindModule<NFIClanRedisModule>();
 
 	return true;
 }
@@ -199,7 +199,7 @@ bool NFBigMapRedisModule::GetGridWarHistoryInfo(const std::string&strGridID, std
 	return false;
 }
 
-bool NFBigMapRedisModule::GetGridStationInfo(const std::string& strGridID, std::vector<NFMsg::GridGuildBaseInfo>& xWarHistoryList)
+bool NFBigMapRedisModule::GetGridStationInfo(const std::string& strGridID, std::vector<NFMsg::GridClanBaseInfo>& xWarHistoryList)
 {
 	/*
 	if (!m_pElementModule->ExistElement(strGridID))
@@ -220,27 +220,27 @@ bool NFBigMapRedisModule::GetGridStationInfo(const std::string& strGridID, std::
 				std::vector<std::pair<std::string, double> >::iterator it = memberScoreList.begin();
 				for (it; it != memberScoreList.end(); it++)
 				{
-					std::string strGuildID = it->first;
-					NFGUID xGuildID;
-					if (xGuildID.FromString(strGuildID))
+					std::string strClanID = it->first;
+					NFGUID xClanID;
+					if (xClanID.FromString(strClanID))
 					{
-						NF_SHARE_PTR<NFIPropertyManager> xPropertyManager = m_pGuildRedisModule->GetGuildCachePropertyInfo(xGuildID);
+						NF_SHARE_PTR<NFIPropertyManager> xPropertyManager = m_pClanRedisModule->GetClanCachePropertyInfo(xClanID);
 						if (xPropertyManager)
 						{
-							NFGUID xGuildID = xPropertyManager->GetPropertyObject(NFrame::Guild::GuildID());
-							const int nLevel = xPropertyManager->GetPropertyInt(NFrame::Guild::GuildLevel());
-							const int nCount = xPropertyManager->GetPropertyInt(NFrame::Guild::GuildMemeberCount());
-							const int nResource = xPropertyManager->GetPropertyInt(NFrame::Guild::KingWarResource());
-							const std::string& strIcon = xPropertyManager->GetPropertyString(NFrame::Guild::GuildIcon());
+							NFGUID xClanID = xPropertyManager->GetPropertyObject(NFrame::Clan::ClanID());
+							const int nLevel = xPropertyManager->GetPropertyInt(NFrame::Clan::ClanLevel());
+							const int nCount = xPropertyManager->GetPropertyInt(NFrame::Clan::ClanMemeberCount());
+							const int nResource = xPropertyManager->GetPropertyInt(NFrame::Clan::Clan::KingWarResource());
+							const std::string& strIcon = xPropertyManager->GetPropertyString(NFrame::Clan::ClanIcon());
 
-							NFMsg::GridGuildBaseInfo xGridGuildBaseInfo;
-							xGridGuildBaseInfo.mutable_id()->CopyFrom(NFINetModule::NFToPB(xGuildID));
-							xGridGuildBaseInfo.set_level(nLevel);
-							xGridGuildBaseInfo.set_count(nCount);
-							xGridGuildBaseInfo.set_resource(nResource);
-							xGridGuildBaseInfo.set_icon(strIcon);
+							NFMsg::GridClanBaseInfo xGridClanBaseInfo;
+							xGridClanBaseInfo.mutable_id()->CopyFrom(NFINetModule::NFToPB(xClanID));
+							xGridClanBaseInfo.set_level(nLevel);
+							xGridClanBaseInfo.set_count(nCount);
+							xGridClanBaseInfo.set_resource(nResource);
+							xGridClanBaseInfo.set_icon(strIcon);
 
-							xWarHistoryList.push_back(xGridGuildBaseInfo);
+							xWarHistoryList.push_back(xGridClanBaseInfo);
 						}
 					}
 				}

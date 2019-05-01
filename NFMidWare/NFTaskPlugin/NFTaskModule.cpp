@@ -73,11 +73,20 @@ int NFTaskModule::OnClassObjectEvent( const NFGUID& self, const std::string& str
     {
 
     }
-    else if ( CLASS_OBJECT_EVENT::COE_CREATE_NODATA == eClassEvent )
-    {
-    }
+	else if (CLASS_OBJECT_EVENT::COE_CREATE_NODATA == eClassEvent)
+	{
+	}
+	else if (CLASS_OBJECT_EVENT::COE_CREATE_FINISH == eClassEvent)
+	{
+		m_pKernelModule->AddPropertyCallBack(self, NFrame::Player::Level(), this, &NFTaskModule::OnPlayerLevelEvent);
+	}
 
     return 0;
+}
+
+int NFTaskModule::OnPlayerLevelEvent(const NFGUID & self, const std::string & strPropertyName, const NFData & oldVar, const NFData & newVar)
+{
+	return 0;
 }
 
 void NFTaskModule::OnClientAcceptTask(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)

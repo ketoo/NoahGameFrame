@@ -25,44 +25,44 @@
 
 
 
-#include "NFGuildPlugin.h"
-#include "NFGuildModule.h"
-//#include "NFGuildDataModule.h"
+#include "NFClanPlugin.h"
+#include "NFClanModule.h"
+//#include "NFClanDataModule.h"
 
 #ifdef NF_DYNAMIC_PLUGIN
 
 NF_EXPORT void DllStartPlugin(NFIPluginManager* pm)
 {
 
-    CREATE_PLUGIN(pm, NFGuildPlugin)
+    CREATE_PLUGIN(pm, NFClanPlugin)
 
 };
 
 NF_EXPORT void DllStopPlugin(NFIPluginManager* pm)
 {
-    DESTROY_PLUGIN(pm, NFGuildPlugin)
+    DESTROY_PLUGIN(pm, NFClanPlugin)
 };
 
 #endif
 //////////////////////////////////////////////////////////////////////////
 
-const int NFGuildPlugin::GetPluginVersion()
+const int NFClanPlugin::GetPluginVersion()
 {
     return 0;
 }
 
-const std::string NFGuildPlugin::GetPluginName()
+const std::string NFClanPlugin::GetPluginName()
 {
-	return GET_CLASS_NAME(NFGuildPlugin);
+	return GET_CLASS_NAME(NFClanPlugin);
 }
 
-void NFGuildPlugin::Install()
+void NFClanPlugin::Install()
 {
-	REGISTER_MODULE(pPluginManager, NFIGuildModule, NFGuildModule)
+	REGISTER_MODULE(pPluginManager, NFIClanModule, NFClanModule)
 
 }
 
-void NFGuildPlugin::Uninstall()
+void NFClanPlugin::Uninstall()
 {
-	UNREGISTER_MODULE(pPluginManager, NFIGuildModule, NFGuildModule)
+	UNREGISTER_MODULE(pPluginManager, NFIClanModule, NFClanModule)
 }

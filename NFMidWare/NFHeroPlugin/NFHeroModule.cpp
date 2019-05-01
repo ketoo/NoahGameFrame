@@ -368,7 +368,7 @@ bool NFHeroModule::SwitchFightHero(const NFGUID & self, const NFGUID & xHeroID)
 
 	if (eSceneType == E_SCENE_TYPE::SCENE_TYPE_SINGLE_CLONE_SCENE
 		|| eSceneType == E_SCENE_TYPE::SCENE_TYPE_MULTI_CLONE_SCENE
-		|| eSceneType == E_SCENE_TYPE::SCENE_TYPE_GUILD)
+		|| eSceneType == E_SCENE_TYPE::SCENE_TYPE_Clan)
 	{
 		if (nPos <= EConsHero_Pos::ECONSt_HERO_UNKNOW
 			|| nPos >= EConsHero_Pos::ECONSt_HERO_MAX)
@@ -460,7 +460,7 @@ int NFHeroModule::CalReliveTime(const NFGUID & self, const NFGUID & xHeroID, con
 
 	switch (reliveType)
 	{
-	case E_SCENE_TYPE::SCENE_TYPE_GUILD:
+	case E_SCENE_TYPE::SCENE_TYPE_Clan:
 		return (nLevel + nStar * 5) * 10 + NFGetTimeS();
 		break;
 	case E_SCENE_TYPE::SCENE_TYPE_NORMAL:
@@ -601,7 +601,7 @@ int NFHeroModule::AfterEnterSceneGroupEvent(const NFGUID & self, const int nScen
 	E_SCENE_TYPE eSceneType = (E_SCENE_TYPE)m_pElementModule->GetPropertyInt32(std::to_string(nSceneID), NFrame::Scene::Type());
 	if (eSceneType == E_SCENE_TYPE::SCENE_TYPE_SINGLE_CLONE_SCENE
 		|| eSceneType == E_SCENE_TYPE::SCENE_TYPE_MULTI_CLONE_SCENE
-		|| eSceneType == E_SCENE_TYPE::SCENE_TYPE_GUILD)
+		|| eSceneType == E_SCENE_TYPE::SCENE_TYPE_Clan)
 	{
 
 		NFGUID xFightingHeroID = m_pKernelModule->GetPropertyObject(self, NFrame::Player::FightHeroID());
