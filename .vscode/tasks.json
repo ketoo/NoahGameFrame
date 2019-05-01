@@ -5,7 +5,7 @@
     "tasks": [
   
         {
-            "label": "build NoahFrame",
+            "label": "build NoahFrame+Dep",
             "type": "shell",
             "command": "./install4cmake.sh",
             "group": {
@@ -15,7 +15,7 @@
             "problemMatcher": []
         },
         {
-            "label": "build GameServer",
+            "label": "build NoahFrame",
             "type": "shell",
             "command": "./buildServer.sh",
             "group": {
