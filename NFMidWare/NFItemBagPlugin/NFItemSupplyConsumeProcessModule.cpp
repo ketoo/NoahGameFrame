@@ -23,9 +23,9 @@
    limitations under the License.
 */
 
-#include "NFItemItemConsumeProcessModule.h"
+#include "NFItemSupplyConsumeProcessModule.h"
 
-bool NFItemItemConsumeProcessModule::Init()
+bool NFItemSupplyConsumeProcessModule::Init()
 {
 	m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>();
 	m_pPackModule = pPluginManager->FindModule<NFIPackModule>();
@@ -36,39 +36,40 @@ bool NFItemItemConsumeProcessModule::Init()
 	m_pHeroPropertyModule = pPluginManager->FindModule<NFIHeroPropertyModule>();
 	m_pPropertyModule = pPluginManager->FindModule<NFIPropertyModule>();
 	m_pLevelModule = pPluginManager->FindModule<NFILevelModule>();
-	m_pItemModule->ResgisterConsumeModule(NFMsg::EItemType::EIT_ITEM, this);
+
+	m_pItemModule->ResgisterConsumeModule(NFMsg::EItemType::EIT_SUPPLY, this);
 
 	return true;
 }
 
-bool NFItemItemConsumeProcessModule::AfterInit()
+bool NFItemSupplyConsumeProcessModule::AfterInit()
 {
 	return true;
 }
 
-bool NFItemItemConsumeProcessModule::Shut()
+bool NFItemSupplyConsumeProcessModule::Shut()
 {
 	return true;
 }
 
-bool NFItemItemConsumeProcessModule::Execute()
+bool NFItemSupplyConsumeProcessModule::Execute()
 {
 	return true;
 }
 
 
-int NFItemItemConsumeProcessModule::ConsumeLegal(const NFGUID& self, const std::string& strItemID, const NFDataList& targetID)
+int NFItemSupplyConsumeProcessModule::ConsumeLegal(const NFGUID& self, const std::string& strItemID, const NFDataList& targetID)
 {
 	return 0;
 }
 
-int NFItemItemConsumeProcessModule::ConsumeProcess(const NFGUID& self, const std::string& strItemID, const NFDataList& targetID)
+int NFItemSupplyConsumeProcessModule::ConsumeProcess(const NFGUID& self, const std::string& strItemID, const NFDataList& targetID)
 {
 
 	return ConsumeNormalProcess(self, strItemID, targetID);
 }
 
-int NFItemItemConsumeProcessModule::ConsumeNormalProcess(const NFGUID & self, const std::string & strItemID, const NFDataList & targetID)
+int NFItemSupplyConsumeProcessModule::ConsumeNormalProcess(const NFGUID & self, const std::string & strItemID, const NFDataList & targetID)
 {
 	NF_SHARE_PTR<NFIRecord> pBagItemList = m_pKernelModule->FindRecord(self, NFrame::Player::BagItemList::ThisName());
 	if (!pBagItemList)
@@ -106,7 +107,7 @@ int NFItemItemConsumeProcessModule::ConsumeNormalProcess(const NFGUID & self, co
 	const int nItemType = m_pElementModule->GetPropertyInt32(strItemID, NFrame::Item::ItemType());
 	const int nSubItemType = m_pElementModule->GetPropertyInt32(strItemID, NFrame::Item::ItemSubType());
 
-	if (nItemType != NFMsg::EItemType::EIT_ITEM)
+	if (nItemType != NFMsg::EItemType::EIT_SUPPLY)
 	{
 		return 5;
 	}
@@ -129,27 +130,27 @@ int NFItemItemConsumeProcessModule::ConsumeNormalProcess(const NFGUID & self, co
 
 	switch (nSubItemType)
 	{
-	case NFMsg::EGameItemSubType::EGIT_ITEM_WATER:
+	case NFMsg::EGameSupplySubType::EGIT_ITEM_WATER:
 	{
 		//don't know what to do, what is shengshui?
 	}
 	break;
-	case NFMsg::EGameItemSubType::EGIT_ITEM_DIAMOND:
+	case NFMsg::EGameSupplySubType::EGIT_ITEM_DIAMOND:
 		m_pPropertyModule->AddDiamond(self, nAwardPropertyValue * nItemCount);
 		break;
-	case NFMsg::EGameItemSubType::EGIT_ITEM_CURRENCY:
+	case NFMsg::EGameSupplySubType::EGIT_ITEM_CURRENCY:
 		m_pPropertyModule->AddGold(self, nAwardPropertyValue * nItemCount);
 		break;
-	case NFMsg::EGameItemSubType::EGIT_ITEM_EXP:
+	case NFMsg::EGameSupplySubType::EGIT_ITEM_EXP:
 		m_pLevelModule->AddExp(self, nAwardPropertyValue * nItemCount);
 		break;
-	case NFMsg::EGameItemSubType::EGIT_ITEM_HP:
+	case NFMsg::EGameSupplySubType::EGIT_ITEM_HP:
 		m_pPropertyModule->AddHP(xTargetID, nAwardPropertyValue * nItemCount);
 		break;
-	case NFMsg::EGameItemSubType::EGIT_ITEM_MP:
+	case NFMsg::EGameSupplySubType::EGIT_ITEM_MP:
 		m_pPropertyModule->AddMP(xTargetID, nAwardPropertyValue * nItemCount);
 		break;
-	case NFMsg::EGameItemSubType::EGIT_ITEM_SP:
+	case NFMsg::EGameSupplySubType::EGIT_ITEM_SP:
 		m_pPropertyModule->AddSP(xTargetID, nAwardPropertyValue * nItemCount);
 		break;
 

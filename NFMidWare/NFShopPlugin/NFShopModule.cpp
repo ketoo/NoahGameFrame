@@ -112,9 +112,8 @@ bool NFShopModule::ReqBuyItem(const NFGUID & self, const std::string & strShopIt
     {
         case NFMsg::EItemType::EIT_EQUIP:
         case NFMsg::EItemType::EIT_GEM:
-        case NFMsg::EItemType::EIT_ITEM:
-        case NFMsg::EItemType::EIT_CARD:
-        case NFMsg::EItemType::EIT_TOKEN:
+        case NFMsg::EItemType::EIT_SUPPLY:
+        case NFMsg::EItemType::EIT_SCROLL:
             m_pPackModule->CreateItem(self, strItem, nCount);
             break;
         default:

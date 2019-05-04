@@ -32,7 +32,7 @@
 
 class NFItemConsumeManagerModule
     : public NFIItemConsumeManagerModule,
-      NFMapEx<int, NFIItemConsumeProcessModule>
+      NFMapEx<int, NFIItemConsumeocessModule>
 {
 public:
 
@@ -45,9 +45,9 @@ public:
     virtual bool Execute();
     virtual bool AfterInit();
 
-    virtual bool ResgisterConsumeModule( const int nModuleType, NF_SHARE_PTR<NFIItemConsumeProcessModule> pModule );
+    virtual bool ResgisterConsumeModule( const int nModuleType, NF_SHARE_PTR<NFIItemConsumeocessModule> pModule );
 
-    virtual NF_SHARE_PTR<NFIItemConsumeProcessModule> GetConsumeModule( const int nModuleType );
+    virtual NF_SHARE_PTR<NFIItemConsumeocessModule> GetConsumeModule( const int nModuleType );
 
 };
 

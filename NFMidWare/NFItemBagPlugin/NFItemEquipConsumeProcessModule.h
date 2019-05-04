@@ -39,7 +39,7 @@
 #include "NFComm/NFPluginModule/NFIItemConsumeProcessModule.h"
 
 class NFItemEquipConsumeProcessModule
-	: public NFIItemConsumeProcessModule
+	: public NFIItemConsumeocessModule
 {
 
 public:

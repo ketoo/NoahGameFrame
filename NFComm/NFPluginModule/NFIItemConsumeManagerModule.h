@@ -34,8 +34,8 @@ class NFIItemConsumeManagerModule
     : public NFIModule
 {
 public:
-    virtual bool ResgisterConsumeModule(const int nModuleType, NF_SHARE_PTR<NFIItemConsumeProcessModule> pModule) = 0;
-	virtual NF_SHARE_PTR<NFIItemConsumeProcessModule> GetConsumeModule(const int nModuleType) = 0;
+    virtual bool ResgisterConsumeModule(const int nModuleType, NF_SHARE_PTR<NFIItemConsumeocessModule> pModule) = 0;
+	virtual NF_SHARE_PTR<NFIItemConsumeocessModule> GetConsumeModule(const int nModuleType) = 0;
 
 };
 

@@ -36,7 +36,7 @@
 #pragma warning(default: 4244 4267)
 #endif
 
-class NFIItemConsumeProcessModule
+class NFIItemConsumeocessModule
     : public NFIModule
 {
 public:

@@ -45,12 +45,12 @@ bool NFUserGiftModule::Init()
 
 bool NFUserGiftModule::AfterInit()
 {
-	std::vector<std::string> xGiftItemList = m_pElementModule->GetListByProperty(NFrame::Item::ThisName(), NFrame::Item::ItemType(), NFMsg::EItemType::EIT_ITEM);
+	std::vector<std::string> xGiftItemList = m_pElementModule->GetListByProperty(NFrame::Item::ThisName(), NFrame::Item::ItemType(), NFMsg::EItemType::EIT_SUPPLY);
 	for (int i = 0; i < xGiftItemList.size(); ++i)
 	{
 		const std::string& strItemID = xGiftItemList[i];
 		int nSubItem = m_pElementModule->GetPropertyInt32(strItemID, NFrame::Item::ItemSubType());
-		if (nSubItem == NFMsg::EGameItemSubType::EGIT_ITEM_PACK)
+		if (nSubItem == NFMsg::EGameSupplySubType::EGIT_ITEM_PACK)
 		{
 			int nLevel = m_pElementModule->GetPropertyInt32(strItemID, NFrame::Item::Level());
 			NF_SHARE_PTR<std::vector<std::string>> xItemList = mxGiftMap.GetElement(nLevel);

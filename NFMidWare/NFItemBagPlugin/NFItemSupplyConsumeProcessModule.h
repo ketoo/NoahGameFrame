@@ -5,7 +5,7 @@
 
    Copyright 2009 - 2018 NoahFrame(NoahGameFrame)
 
-   File creator: lvsheng.huang
+   File creator: yu.tang
    
    NoahFrame is open-source software and you can redistribute it and/or modify
    it under the terms of the License; besides, anyone who use this file/software must include this copyright announcement.
@@ -23,8 +23,9 @@
    limitations under the License.
 */
 
-#ifndef NF_ITEM_CARD_CONSUME_PROCESS_MODULE_H
-#define NF_ITEM_CARD_CONSUME_PROCESS_MODULE_H
+
+#ifndef NF_ITEM_SUPPLY_CONSUME_PROCESS_MODULE_H
+#define NF_ITEM_SUPPLY_CONSUME_PROCESS_MODULE_H
 
 #include <iostream>
 #include "NFComm/NFPluginModule/NFIKernelModule.h"
@@ -34,34 +35,44 @@
 #include "NFComm/NFPluginModule/NFIPluginManager.h"
 #include "NFComm/NFPluginModule/NFIItemModule.h"
 #include "NFComm/NFPluginModule/NFIHeroModule.h"
+#include "NFComm/NFPluginModule/NFIHeroPropertyModule.h"
+#include "NFComm/NFPluginModule/NFIPropertyModule.h"
 #include "NFComm/NFPluginModule/NFIItemConsumeProcessModule.h"
+#include "NFComm/NFPluginModule/NFILevelModule.h"
 
-class NFItemCardConsumeProcessModule
-    : public NFIItemConsumeProcessModule
+class NFItemSupplyConsumeProcessModule
+	: public NFIItemConsumeocessModule
 {
 
 public:
-    NFItemCardConsumeProcessModule( NFIPluginManager* p )
-    {
-        pPluginManager = p;
-    }
-    virtual bool Init();
-    virtual bool Shut();
-    virtual bool Execute();
-    virtual bool AfterInit();
+	NFItemSupplyConsumeProcessModule(NFIPluginManager* p)
+	{
+		pPluginManager = p;
+	}
+	virtual bool Init();
+	virtual bool Shut();
+	virtual bool Execute();
+	virtual bool AfterInit();
 
 	
 	virtual int ConsumeLegal(const NFGUID& self, const std::string& strItemID, const NFDataList& targetID);
 
+	
 	virtual int ConsumeProcess(const NFGUID& self, const std::string& strItemID, const NFDataList& targetID);
 
+protected:
+	virtual int ConsumeNormalProcess(const NFGUID& self, const std::string& strItemID, const NFDataList& targetID);
+
 private:
-    NFIKernelModule* m_pKernelModule;
-    NFILogModule* m_pLogModule;
-    NFIPackModule* m_pPackModule;
+	NFIKernelModule* m_pKernelModule;
+	NFILogModule* m_pLogModule;
+	NFIPackModule* m_pPackModule;
 	NFIElementModule* m_pElementModule;
 	NFIItemModule* m_pItemModule;
 	NFIHeroModule* m_pHeroModule;
+	NFIHeroPropertyModule* m_pHeroPropertyModule;
+	NFIPropertyModule* m_pPropertyModule;
+	NFILevelModule* m_pLevelModule;
 };
 
 #endif
