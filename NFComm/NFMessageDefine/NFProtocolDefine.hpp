@@ -205,13 +205,16 @@ namespace NFrame
 		static const std::string& BUFF_GATE(){ static std::string x = "BUFF_GATE"; return x; };// int
 		static const std::string& CRITICAL(){ static std::string x = "CRITICAL"; return x; };// int
 		static const std::string& DEF_DARK(){ static std::string x = "DEF_DARK"; return x; };// int
+		static const std::string& DEF_FIRE(){ static std::string x = "DEF_FIRE"; return x; };// int
 		static const std::string& DEF_ICE(){ static std::string x = "DEF_ICE"; return x; };// int
 		static const std::string& DEF_LIGHT(){ static std::string x = "DEF_LIGHT"; return x; };// int
 		static const std::string& DEF_POISON(){ static std::string x = "DEF_POISON"; return x; };// int
 		static const std::string& DEF_VALUE(){ static std::string x = "DEF_VALUE"; return x; };// int
 		static const std::string& DEF_WIND(){ static std::string x = "DEF_WIND"; return x; };// int
+		static const std::string& DIZZY_GATE(){ static std::string x = "DIZZY_GATE"; return x; };// int
 		static const std::string& HP(){ static std::string x = "HP"; return x; };// int
 		static const std::string& HPREGEN(){ static std::string x = "HPREGEN"; return x; };// int
+		static const std::string& LUCK(){ static std::string x = "LUCK"; return x; };// int
 		static const std::string& MAGIC_GATE(){ static std::string x = "MAGIC_GATE"; return x; };// int
 		static const std::string& MAXHP(){ static std::string x = "MAXHP"; return x; };// int
 		static const std::string& MAXMP(){ static std::string x = "MAXMP"; return x; };// int
@@ -603,6 +606,7 @@ namespace NFrame
 		static const std::string& Item3Count(){ static std::string x = "Item3Count"; return x; };// int
 		static const std::string& Item3UsedCount(){ static std::string x = "Item3UsedCount"; return x; };// int
 		static const std::string& Job(){ static std::string x = "Job"; return x; };// int
+		static const std::string& LUCK(){ static std::string x = "LUCK"; return x; };// int
 		static const std::string& LastOfflineTime(){ static std::string x = "LastOfflineTime"; return x; };// object
 		static const std::string& Level(){ static std::string x = "Level"; return x; };// int
 		static const std::string& MAGIC_GATE(){ static std::string x = "MAGIC_GATE"; return x; };// int
@@ -810,6 +814,7 @@ namespace NFrame
 			static const int PHYSICAL_GATE = 28;//int
 			static const int MAGIC_GATE = 29;//int
 			static const int BUFF_GATE = 30;//int
+			static const int LUCK = 31;//int
 
 		};
 		class Cooldown
@@ -868,6 +873,7 @@ namespace NFrame
 			static const int PHYSICAL_GATE = 28;//int
 			static const int MAGIC_GATE = 29;//int
 			static const int BUFF_GATE = 30;//int
+			static const int LUCK = 31;//int
 
 		};
 		class PlayerHero

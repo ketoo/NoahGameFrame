@@ -396,15 +396,14 @@ inline bool ESkillType_Parse(
 enum EItemType {
   EIT_EQUIP = 0,
   EIT_GEM = 1,
-  EIT_ITEM = 2,
-  EIT_CARD = 3,
-  EIT_TOKEN = 4,
+  EIT_SUPPLY = 2,
+  EIT_SCROLL = 3,
   EItemType_INT_MIN_SENTINEL_DO_NOT_USE_ = ::google::protobuf::kint32min,
   EItemType_INT_MAX_SENTINEL_DO_NOT_USE_ = ::google::protobuf::kint32max
 };
 LIBPROTOC_EXPORT bool EItemType_IsValid(int value);
 const EItemType EItemType_MIN = EIT_EQUIP;
-const EItemType EItemType_MAX = EIT_TOKEN;
+const EItemType EItemType_MAX = EIT_SCROLL;
 const int EItemType_ARRAYSIZE = EItemType_MAX + 1;
 
 LIBPROTOC_EXPORT const ::google::protobuf::EnumDescriptor* EItemType_descriptor();
@@ -468,7 +467,7 @@ inline bool EGameGemSubType_Parse(
   return ::google::protobuf::internal::ParseNamedEnum<EGameGemSubType>(
     EGameGemSubType_descriptor(), name, value);
 }
-enum EGameItemSubType {
+enum EGameSupplySubType {
   EGIT_ITEM_WATER = 0,
   EGIT_ITEM_DIAMOND = 1,
   EGIT_ITEM_CURRENCY = 2,
@@ -478,70 +477,47 @@ enum EGameItemSubType {
   EGIT_ITEM_SP = 6,
   EGIT_ITEM_PACK = 7,
   EGIT_ITEM_MEMORY_POS = 8,
-  EGameItemSubType_INT_MIN_SENTINEL_DO_NOT_USE_ = ::google::protobuf::kint32min,
-  EGameItemSubType_INT_MAX_SENTINEL_DO_NOT_USE_ = ::google::protobuf::kint32max
+  EGameSupplySubType_INT_MIN_SENTINEL_DO_NOT_USE_ = ::google::protobuf::kint32min,
+  EGameSupplySubType_INT_MAX_SENTINEL_DO_NOT_USE_ = ::google::protobuf::kint32max
 };
-LIBPROTOC_EXPORT bool EGameItemSubType_IsValid(int value);
-const EGameItemSubType EGameItemSubType_MIN = EGIT_ITEM_WATER;
-const EGameItemSubType EGameItemSubType_MAX = EGIT_ITEM_MEMORY_POS;
-const int EGameItemSubType_ARRAYSIZE = EGameItemSubType_MAX + 1;
+LIBPROTOC_EXPORT bool EGameSupplySubType_IsValid(int value);
+const EGameSupplySubType EGameSupplySubType_MIN = EGIT_ITEM_WATER;
+const EGameSupplySubType EGameSupplySubType_MAX = EGIT_ITEM_MEMORY_POS;
+const int EGameSupplySubType_ARRAYSIZE = EGameSupplySubType_MAX + 1;
 
-LIBPROTOC_EXPORT const ::google::protobuf::EnumDescriptor* EGameItemSubType_descriptor();
-inline const ::std::string& EGameItemSubType_Name(EGameItemSubType value) {
+LIBPROTOC_EXPORT const ::google::protobuf::EnumDescriptor* EGameSupplySubType_descriptor();
+inline const ::std::string& EGameSupplySubType_Name(EGameSupplySubType value) {
   return ::google::protobuf::internal::NameOfEnum(
-    EGameItemSubType_descriptor(), value);
+    EGameSupplySubType_descriptor(), value);
 }
-inline bool EGameItemSubType_Parse(
-    const ::std::string& name, EGameItemSubType* value) {
-  return ::google::protobuf::internal::ParseNamedEnum<EGameItemSubType>(
-    EGameItemSubType_descriptor(), name, value);
+inline bool EGameSupplySubType_Parse(
+    const ::std::string& name, EGameSupplySubType* value) {
+  return ::google::protobuf::internal::ParseNamedEnum<EGameSupplySubType>(
+    EGameSupplySubType_descriptor(), name, value);
 }
-enum EGameCardSubType {
-  EGCST_UNKNOW = 0,
-  EGCST_STRENGTH = 1,
-  EGCST_AGILITY = 2,
-  EGCST_INTELLIGENCE = 3,
-  EGameCardSubType_INT_MIN_SENTINEL_DO_NOT_USE_ = ::google::protobuf::kint32min,
-  EGameCardSubType_INT_MAX_SENTINEL_DO_NOT_USE_ = ::google::protobuf::kint32max
-};
-LIBPROTOC_EXPORT bool EGameCardSubType_IsValid(int value);
-const EGameCardSubType EGameCardSubType_MIN = EGCST_UNKNOW;
-const EGameCardSubType EGameCardSubType_MAX = EGCST_INTELLIGENCE;
-const int EGameCardSubType_ARRAYSIZE = EGameCardSubType_MAX + 1;
-
-LIBPROTOC_EXPORT const ::google::protobuf::EnumDescriptor* EGameCardSubType_descriptor();
-inline const ::std::string& EGameCardSubType_Name(EGameCardSubType value) {
-  return ::google::protobuf::internal::NameOfEnum(
-    EGameCardSubType_descriptor(), value);
-}
-inline bool EGameCardSubType_Parse(
-    const ::std::string& name, EGameCardSubType* value) {
-  return ::google::protobuf::internal::ParseNamedEnum<EGameCardSubType>(
-    EGameCardSubType_descriptor(), name, value);
-}
-enum EGameTokenSubType {
-  EGTST_TOKEN_REBORN = 0,
+enum EGameScrollSubType {
+  EGTST_TOKEN_HERO_CARD = 0,
   EGTST_TOKEN_POSITION = 1,
   EGTST_TOKEN_BOUNTY = 2,
   EGTST_TOKEN_ACTIVITY = 3,
   EGTST_TOKEN_BUILD = 4,
-  EGameTokenSubType_INT_MIN_SENTINEL_DO_NOT_USE_ = ::google::protobuf::kint32min,
-  EGameTokenSubType_INT_MAX_SENTINEL_DO_NOT_USE_ = ::google::protobuf::kint32max
+  EGameScrollSubType_INT_MIN_SENTINEL_DO_NOT_USE_ = ::google::protobuf::kint32min,
+  EGameScrollSubType_INT_MAX_SENTINEL_DO_NOT_USE_ = ::google::protobuf::kint32max
 };
-LIBPROTOC_EXPORT bool EGameTokenSubType_IsValid(int value);
-const EGameTokenSubType EGameTokenSubType_MIN = EGTST_TOKEN_REBORN;
-const EGameTokenSubType EGameTokenSubType_MAX = EGTST_TOKEN_BUILD;
-const int EGameTokenSubType_ARRAYSIZE = EGameTokenSubType_MAX + 1;
+LIBPROTOC_EXPORT bool EGameScrollSubType_IsValid(int value);
+const EGameScrollSubType EGameScrollSubType_MIN = EGTST_TOKEN_HERO_CARD;
+const EGameScrollSubType EGameScrollSubType_MAX = EGTST_TOKEN_BUILD;
+const int EGameScrollSubType_ARRAYSIZE = EGameScrollSubType_MAX + 1;
 
-LIBPROTOC_EXPORT const ::google::protobuf::EnumDescriptor* EGameTokenSubType_descriptor();
-inline const ::std::string& EGameTokenSubType_Name(EGameTokenSubType value) {
+LIBPROTOC_EXPORT const ::google::protobuf::EnumDescriptor* EGameScrollSubType_descriptor();
+inline const ::std::string& EGameScrollSubType_Name(EGameScrollSubType value) {
   return ::google::protobuf::internal::NameOfEnum(
-    EGameTokenSubType_descriptor(), value);
+    EGameScrollSubType_descriptor(), value);
 }
-inline bool EGameTokenSubType_Parse(
-    const ::std::string& name, EGameTokenSubType* value) {
-  return ::google::protobuf::internal::ParseNamedEnum<EGameTokenSubType>(
-    EGameTokenSubType_descriptor(), name, value);
+inline bool EGameScrollSubType_Parse(
+    const ::std::string& name, EGameScrollSubType* value) {
+  return ::google::protobuf::internal::ParseNamedEnum<EGameScrollSubType>(
+    EGameScrollSubType_descriptor(), name, value);
 }
 enum EGameItemExpiredType {
   EGIET_NONE = 0,
@@ -910,20 +886,15 @@ template <>
 inline const EnumDescriptor* GetEnumDescriptor< ::NFMsg::EGameGemSubType>() {
   return ::NFMsg::EGameGemSubType_descriptor();
 }
-template <> struct is_proto_enum< ::NFMsg::EGameItemSubType> : ::std::true_type {};
+template <> struct is_proto_enum< ::NFMsg::EGameSupplySubType> : ::std::true_type {};
 template <>
-inline const EnumDescriptor* GetEnumDescriptor< ::NFMsg::EGameItemSubType>() {
-  return ::NFMsg::EGameItemSubType_descriptor();
+inline const EnumDescriptor* GetEnumDescriptor< ::NFMsg::EGameSupplySubType>() {
+  return ::NFMsg::EGameSupplySubType_descriptor();
 }
-template <> struct is_proto_enum< ::NFMsg::EGameCardSubType> : ::std::true_type {};
+template <> struct is_proto_enum< ::NFMsg::EGameScrollSubType> : ::std::true_type {};
 template <>
-inline const EnumDescriptor* GetEnumDescriptor< ::NFMsg::EGameCardSubType>() {
-  return ::NFMsg::EGameCardSubType_descriptor();
-}
-template <> struct is_proto_enum< ::NFMsg::EGameTokenSubType> : ::std::true_type {};
-template <>
-inline const EnumDescriptor* GetEnumDescriptor< ::NFMsg::EGameTokenSubType>() {
-  return ::NFMsg::EGameTokenSubType_descriptor();
+inline const EnumDescriptor* GetEnumDescriptor< ::NFMsg::EGameScrollSubType>() {
+  return ::NFMsg::EGameScrollSubType_descriptor();
 }
 template <> struct is_proto_enum< ::NFMsg::EGameItemExpiredType> : ::std::true_type {};
 template <>

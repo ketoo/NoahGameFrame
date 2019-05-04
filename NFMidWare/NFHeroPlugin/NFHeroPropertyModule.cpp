@@ -50,6 +50,8 @@ bool NFHeroPropertyModule::AfterInit()
 	m_pEquipPropertyModule = pPluginManager->FindModule<NFIEquipPropertyModule>();
 	m_pPropertyModule = pPluginManager->FindModule<NFIPropertyModule>();
 	m_pHeroModule = pPluginManager->FindModule<NFIHeroModule>();
+	m_pPropertyConfigModule = pPluginManager->FindModule<NFIPropertyConfigModule>();
+	m_pLogModule = pPluginManager->FindModule<NFILogModule>();
 	
 	m_pKernelModule->AddClassCallBack(NFrame::Player::ThisName(), this, &NFHeroPropertyModule::OnPlayerClassEvent);
 
@@ -295,6 +297,16 @@ bool NFHeroPropertyModule::CalHeroAllProperty(const NFGUID& self, const NFGUID& 
 	NFDataList xHeroEquipValue;
 	CalHeroEquipProperty(self, xHeroGUID, xHeroEquipValue);
 
+	if (xHeroPropertyValue.GetCount() != pHeroPropertyRecord->GetCols()
+		|| xHeroTalentValue.GetCount() != pHeroPropertyRecord->GetCols()
+		|| xHeroEquipValue.GetCount() != pHeroPropertyRecord->GetCols())
+	{
+		std::ostringstream os;
+		os << "CRITICAL ERROR!!!!! SOME THINGS WRONG AS THE PROPERTY COUNT NOW DIFFERENT!!!";
+		m_pLogModule->LogError(os);
+		return false;
+	}
+
 	for (int i = 0; i < pHeroPropertyRecord->GetCols(); ++i)
 	{
 		int nPropertyValue = 0;
@@ -351,36 +363,18 @@ bool NFHeroPropertyModule::CalHeroBaseProperty(const NFGUID& self, const NFGUID&
 	const std::string& strConfigID = pHeroRecord->GetString(nRow, NFrame::Player::PlayerHero::ConfigID);
 	const std::string& strPropertyEffectData = m_pElementModule->GetPropertyString(strConfigID, NFrame::NPC::EffectData());
 
-	int nLeftStar = 0;
-	const int nDiamond = CalHeroDiamond(nHeroStar, nLeftStar);
-	float fPropsTime = 1.0f;
-	fPropsTime += (nDiamond + nLeftStar / float(5 - nDiamond + 1));
-
-	if (!strPropertyEffectData.empty())
+	int nLevel = nHeroStar * 4;
+	if (nLevel > 99)
 	{
-		for (int i = 0; i < pHeroPropertyRecord->GetCols(); ++i)
-		{
-			const std::string& strColTag = pHeroPropertyRecord->GetColTag(i);
-			int64_t nValue = m_pElementModule->GetPropertyInt(strPropertyEffectData, strColTag);
+		nLevel = 99;
+	}
 
-			switch (i)
-			{
-			case NFrame::Player::CommValue::MAXHP:
-			case NFrame::Player::CommValue::MAXMP:
-			case NFrame::Player::CommValue::MAXSP:
-			case NFrame::Player::CommValue::ATK_VALUE:
-			case NFrame::Player::CommValue::DEF_VALUE:
-			case NFrame::Player::CommValue::HPREGEN:
-			case NFrame::Player::CommValue::MPREGEN:
-			{
-				nValue = nValue * fPropsTime;
-			}
-			default:
-				break;
-			}
-
-			xDataList.AddInt(nValue);
-		}
+	int eJobType = m_pKernelModule->GetPropertyInt32(self, NFrame::Player::Job());
+	for (int i = 0; i < pHeroPropertyRecord->GetCols(); ++i)
+	{
+		const std::string& strColTag = pHeroPropertyRecord->GetColTag(i);
+		int64_t nValue = m_pPropertyConfigModule->CalculateBaseValue(eJobType, nLevel, strColTag);
+		xDataList.AddInt(nValue);
 	}
 
 	return true;

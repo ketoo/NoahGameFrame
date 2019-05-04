@@ -88,7 +88,7 @@ bool NFItemModule::UseItem(const NFGUID & self, const std::string & strItemID, c
 	}
 
 	NFMsg::EItemType eItemType = (NFMsg::EItemType)m_pElementModule->GetPropertyInt(strItemID, NFrame::Item::ItemType());
-	NF_SHARE_PTR<NFIItemConsumeProcessModule> pConsumeProcessModule = m_pItemConsumeManagerModule->GetConsumeModule(eItemType);
+	NF_SHARE_PTR<NFIItemConsumeocessModule> pConsumeProcessModule = m_pItemConsumeManagerModule->GetConsumeModule(eItemType);
 	if (!pConsumeProcessModule)
 	{
 		return false;
@@ -96,10 +96,9 @@ bool NFItemModule::UseItem(const NFGUID & self, const std::string & strItemID, c
 
 	switch (eItemType)
 	{
-	case NFMsg::EItemType::EIT_CARD:
 	case NFMsg::EItemType::EIT_EQUIP:
 	case NFMsg::EItemType::EIT_GEM:
-	case NFMsg::EItemType::EIT_TOKEN:
+	case NFMsg::EItemType::EIT_SCROLL:
 	{
 		if (pConsumeProcessModule->ConsumeLegal(self, strItemID, NFDataList()) == 0)
 		{
@@ -107,7 +106,7 @@ bool NFItemModule::UseItem(const NFGUID & self, const std::string & strItemID, c
 		}
 	}
 	break;
-	case NFMsg::EItemType::EIT_ITEM:
+	case NFMsg::EItemType::EIT_SUPPLY:
 	{
 		NFDataList xTarget;
 		xTarget.AddObject(xTargetID);

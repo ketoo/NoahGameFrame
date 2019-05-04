@@ -381,9 +381,8 @@ enum EItemType
 {
     EIT_EQUIP   			= 0; //the equipment which can add props
 	EIT_GEM   				= 1; //the gem ca be embed to the equipment
-	EIT_ITEM   				= 2; //expendable items for player, such as a medicine that cures
-	EIT_CARD   				= 3; //special items that can call a hero or others
-	EIT_TOKEN	   			= 4; //special items can do what you want to do
+	EIT_SUPPLY   			= 2; //expendable items for player, such as a medicine that cures
+	EIT_SCROLL   			= 3; //special items that can call a hero or others, special items can do what you want to do
 }
 
 //the sub items type of EIT_EQUIP
@@ -392,8 +391,8 @@ enum EGameEquipSubType
 	EQUIPTYPE_WEAPON            = 0;    //
 	EQUIPTYPE_HELMET            = 1;    //
 	EQUIPTYPE_ARMOR             = 2;    //
-	EQUIPTYPE_WRIST             = 3;    //
-	EQUIPTYPE_PANT              = 4;    //
+	EQUIPTYPE_HAND              = 3;    //
+	EQUIPTYPE_RING              = 4;    //
 	EQUIPTYPE_BOOT              = 5;   	//
 };
 
@@ -412,7 +411,7 @@ enum EGameGemSubType
 };
 
 //the sub items type of EIT_ITEM
-enum EGameItemSubType
+enum EGameSupplySubType
 {
 	EGIT_ITEM_WATER				= 0; 	//
 	EGIT_ITEM_DIAMOND			= 1;	//
@@ -425,19 +424,10 @@ enum EGameItemSubType
 	EGIT_ITEM_MEMORY_POS		= 8;	//
 };
 
-//the sub items type of EIT_CARD
-enum EGameCardSubType
-{
-	EGCST_UNKNOW				= 0;//
-	EGCST_STRENGTH 				= 1;//	
-	EGCST_AGILITY				= 2;//
-	EGCST_INTELLIGENCE			= 3;//
-};
-
 //the sub items type of EIT_TOKEN
-enum EGameTokenSubType
+enum EGameScrollSubType
 {
-	EGTST_TOKEN_REBORN					= 0; 	//
+	EGTST_TOKEN_HERO_CARD				= 0; 	//
 	EGTST_TOKEN_POSITION				= 1;	//
 	EGTST_TOKEN_BOUNTY   				= 2; 	//
 	EGTST_TOKEN_ACTIVITY				= 3;	//a token that can join a activity

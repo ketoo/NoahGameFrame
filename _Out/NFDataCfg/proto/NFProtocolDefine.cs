@@ -202,13 +202,16 @@ namespace NFrame
 		public static readonly String BUFF_GATE = "BUFF_GATE";// int
 		public static readonly String CRITICAL = "CRITICAL";// int
 		public static readonly String DEF_DARK = "DEF_DARK";// int
+		public static readonly String DEF_FIRE = "DEF_FIRE";// int
 		public static readonly String DEF_ICE = "DEF_ICE";// int
 		public static readonly String DEF_LIGHT = "DEF_LIGHT";// int
 		public static readonly String DEF_POISON = "DEF_POISON";// int
 		public static readonly String DEF_VALUE = "DEF_VALUE";// int
 		public static readonly String DEF_WIND = "DEF_WIND";// int
+		public static readonly String DIZZY_GATE = "DIZZY_GATE";// int
 		public static readonly String HP = "HP";// int
 		public static readonly String HPREGEN = "HPREGEN";// int
+		public static readonly String LUCK = "LUCK";// int
 		public static readonly String MAGIC_GATE = "MAGIC_GATE";// int
 		public static readonly String MAXHP = "MAXHP";// int
 		public static readonly String MAXMP = "MAXMP";// int
@@ -598,6 +601,7 @@ namespace NFrame
 		public static readonly String Item3Count = "Item3Count";// int
 		public static readonly String Item3UsedCount = "Item3UsedCount";// int
 		public static readonly String Job = "Job";// int
+		public static readonly String LUCK = "LUCK";// int
 		public static readonly String LastOfflineTime = "LastOfflineTime";// object
 		public static readonly String Level = "Level";// int
 		public static readonly String MAGIC_GATE = "MAGIC_GATE";// int
@@ -796,6 +800,7 @@ namespace NFrame
 			public const int PHYSICAL_GATE = 28;//int
 			public const int MAGIC_GATE = 29;//int
 			public const int BUFF_GATE = 30;//int
+			public const int LUCK = 31;//int
 
 		}
 		public class Cooldown
@@ -851,6 +856,7 @@ namespace NFrame
 			public const int PHYSICAL_GATE = 28;//int
 			public const int MAGIC_GATE = 29;//int
 			public const int BUFF_GATE = 30;//int
+			public const int LUCK = 31;//int
 
 		}
 		public class PlayerHero

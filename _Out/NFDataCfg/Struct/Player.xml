@@ -79,6 +79,7 @@
 		<Property Id="Item3Count" Cache="1" Desc="Item3Count" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="int" Upload="0" />
 		<Property Id="Item3UsedCount" Cache="0" Desc="Hero1" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="int" Upload="0" />
 		<Property Id="Job" Cache="1" Desc="职业" Force="0" Private="1" Public="1" Ref="0" Save="0" Type="int" Upload="0" />
+		<Property Id="LUCK" Cache="0" Force="0" Private="1" Public="1" Ref="0" Save="0" Type="int" Upload="0" />
 		<Property Id="LastOfflineTime" Cache="1" Desc="上次下线时间" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="object" Upload="0" />
 		<Property Id="Level" Cache="1" Desc="等级" Force="0" Private="1" Public="1" Ref="0" Save="0" Type="int" Upload="0" />
 		<Property Id="MAGIC_GATE" Cache="0" Desc="魔法免疫开关" Force="0" Private="1" Public="1" Ref="0" Save="0" Type="int" Upload="0" />
@@ -211,7 +212,7 @@
 			<Col Type ="object"	Tag="GUID"/><!--- Desc-->
 			<Col Type ="int"	Tag="Level"/>
 		</Record>
-		<Record Id="CommValue" Cache="0"	 Col="31"	 Force="0"	 Private="1"	 Public="1"	 Ref="0"	 Row="15"	 Save="0"	 Upload="0"	 >
+		<Record Id="CommValue" Cache="0"	 Col="32"	 Force="0"	 Private="1"	 Public="1"	 Ref="0"	 Row="15"	 Save="0"	 Upload="0"	 >
 			<Col Type ="int"	Tag="SUCKBLOOD"/><!--- Desc-->
 			<Col Type ="int"	Tag="REFLECTDAMAGE"/><!--- 0job_level,1equipment,2static_BUFF,3runtime_BUFF,4Hero-->
 			<Col Type ="int"	Tag="CRITICAL"/>
@@ -243,6 +244,7 @@
 			<Col Type ="int"	Tag="PHYSICAL_GATE"/>
 			<Col Type ="int"	Tag="MAGIC_GATE"/>
 			<Col Type ="int"	Tag="BUFF_GATE"/>
+			<Col Type ="int"	Tag="LUCK"/>
 		</Record>
 		<Record Id="Cooldown" Cache="1"	 Col="2"	 Force="0"	 Private="1"	 Public="0"	 Ref="0"	 Row="8"	 Save="0"	 Upload="0"	 >
 			<Col Type ="string"	Tag="SkillID"/><!--- Desc-->
@@ -254,7 +256,7 @@
 			<Col Type ="int"	Tag="ItemCount"/>
 			<Col Type ="vector3"	Tag="Postion"/>
 		</Record>
-		<Record Id="HeroValue" Cache="1"	 Col="31"	 Force="0"	 Private="1"	 Public="0"	 Ref="0"	 Row="64"	 Save="0"	 Upload="0"	 >
+		<Record Id="HeroValue" Cache="1"	 Col="32"	 Force="0"	 Private="1"	 Public="0"	 Ref="0"	 Row="64"	 Save="0"	 Upload="0"	 >
 			<Col Type ="int"	Tag="SUCKBLOOD"/><!--- Desc-->
 			<Col Type ="int"	Tag="REFLECTDAMAGE"/><!--- one hero one row to sotre the properties-->
 			<Col Type ="int"	Tag="CRITICAL"/>
@@ -286,6 +288,7 @@
 			<Col Type ="int"	Tag="PHYSICAL_GATE"/>
 			<Col Type ="int"	Tag="MAGIC_GATE"/>
 			<Col Type ="int"	Tag="BUFF_GATE"/>
+			<Col Type ="int"	Tag="LUCK"/>
 		</Record>
 		<Record Id="PlayerHero" Cache="1"	 Col="14"	 Force="0"	 Private="1"	 Public="0"	 Ref="0"	 Row="64"	 Save="0"	 Upload="0"	 >
 			<Col Type ="object"	Tag="GUID"/><!--- Desc-->
