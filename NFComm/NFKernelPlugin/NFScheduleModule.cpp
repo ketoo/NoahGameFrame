@@ -341,7 +341,7 @@ NF_SHARE_PTR<NFScheduleElement> NFScheduleModule::GetSchedule(const NFGUID self,
 	NF_SHARE_PTR< NFMapEx <std::string, NFScheduleElement >> xObjectScheduleMap = mObjectScheduleMap.GetElement(self);
 	if (NULL == xObjectScheduleMap)
 	{
-		return false;
+		return nullptr;
 	}
 
 	return xObjectScheduleMap->GetElement(strScheduleName);

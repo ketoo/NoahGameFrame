@@ -9,6 +9,7 @@ file(GLOB NFGameLogicPlugin_ROOT_Hpp
 file(GLOB RemoveItems_Cpp NFHomeModule.cpp NFMapModule.cpp NFTileMapModule.cpp NFTileModule.cpp NFSurvivalModule.cpp)
 list(REMOVE_ITEM NFGameLogicPlugin_ROOT_Cpp ${RemoveItems_Cpp})
 
+
 add_library(NFGameLogicPlugin STATIC
 	${NFGameLogicPlugin_ROOT_Cpp}
 	${NFGameLogicPlugin_ROOT_Hpp})
