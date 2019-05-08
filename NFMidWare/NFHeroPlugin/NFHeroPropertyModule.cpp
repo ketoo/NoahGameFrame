@@ -369,6 +369,11 @@ bool NFHeroPropertyModule::CalHeroBaseProperty(const NFGUID& self, const NFGUID&
 		nLevel = 99;
 	}
 
+	if (nLevel <= 0)
+	{
+		nLevel = 1;
+	}
+
 	int eJobType = m_pKernelModule->GetPropertyInt32(self, NFrame::Player::Job());
 	for (int i = 0; i < pHeroPropertyRecord->GetCols(); ++i)
 	{
