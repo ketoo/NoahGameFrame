@@ -450,6 +450,7 @@ namespace NFrame
 		public static readonly String Height = "Height";// float
 		public static readonly String HeroStar = "HeroStar";// int
 		public static readonly String Icon = "Icon";// string
+		public static readonly String LUCK = "LUCK";// int
 		public static readonly String LastAttacker = "LastAttacker";// object
 		public static readonly String Level = "Level";// int
 		public static readonly String MAGIC_GATE = "MAGIC_GATE";// int
