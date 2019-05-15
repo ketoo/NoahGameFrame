@@ -973,6 +973,7 @@ std::vector<NFGUID> NFWorldNet_ServerModule::getOnlinePlayers()
     auto iter=mPlayerGameIdMap.begin();
     while (iter != mPlayerGameIdMap.end()) {
         players.push_back(iter->first);
+        iter++;
     }
     return players;
 }
