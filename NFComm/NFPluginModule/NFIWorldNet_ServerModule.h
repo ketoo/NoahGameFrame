@@ -44,6 +44,8 @@ public:
 	virtual bool SendMsgToPlayer(const NFMsg::EGameMsgID eMsgID, google::protobuf::Message& xData, const NFGUID nPlayer) = 0;
 
 	virtual NF_SHARE_PTR<ServerData> GetSuitProxyForEnter() = 0;
+    virtual std::vector<NFGUID> getOnlinePlayers() = 0;
+
 };
 
 #endif

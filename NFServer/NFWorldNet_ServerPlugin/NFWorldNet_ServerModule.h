@@ -62,6 +62,7 @@ public:
     virtual NF_SHARE_PTR<ServerData> GetSuitProxyForEnter();
 
     virtual int GetPlayerGameID(const NFGUID self);
+    virtual std::vector<NFGUID> getOnlinePlayers();
 
 protected:
 
@@ -120,6 +121,7 @@ private:
 	NFConsistentHashMapEx<int, ServerData> mGameMap;
 	NFConsistentHashMapEx<int, ServerData> mProxyMap;
 	NFConsistentHashMapEx<int, ServerData> mDBMap;
+    std::map<NFGUID, int> mPlayerGameIdMap;
 
     NFIElementModule* m_pElementModule;
     NFIClassModule* m_pClassModule;
