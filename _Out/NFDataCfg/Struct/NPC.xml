@@ -30,7 +30,7 @@
 		<Property Id="DropProbability" Cache="0" Desc="掉落概率%" Force="0" Private="1" Public="0" Ref="1" Save="0" Type="int" Upload="0" />
 		<Property Id="EXP" Cache="0" Desc="经验获得,如果是怪物，则是掉落经验" Force="0" Private="1" Public="1" Ref="0" Save="1" Type="int" Upload="0" />
 		<Property Id="EffectData" Cache="0" Desc="绝对值属性包索引" Force="0" Private="1" Public="0" Ref="1" Save="0" Type="string" Upload="0" />
-		<Property Id="FearOfFire" Cache="0" Desc="0" Force="0" Private="1" Public="1" Ref="0" Save="0" Type="int" Upload="0" />
+		<Property Id="FearOfFire" Cache="0" Desc="Are monsters afraid of fire" Force="0" Private="1" Public="1" Ref="0" Save="0" Type="int" Upload="0" />
 		<Property Id="Gold" Cache="0" Desc="玩家游戏金币" Force="0" Private="1" Public="1" Ref="0" Save="1" Type="int" Upload="0" />
 		<Property Id="HP" Cache="0" Desc="生命值" Force="0" Private="1" Public="1" Ref="0" Save="1" Type="int" Upload="0" />
 		<Property Id="HPREGEN" Cache="0" Desc="生命值回复" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="int" Upload="0" />
@@ -50,7 +50,8 @@
 		<Property Id="MPREGEN" Cache="0" Desc="MP回复" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="int" Upload="0" />
 		<Property Id="MasterID" Cache="0" Desc="召唤者，主人" Force="0" Private="1" Public="1" Ref="0" Save="1" Type="object" Upload="0" />
 		<Property Id="MeleeType" Cache="0" Desc="Melee:0;MeleeDash:1;Ranger:2 EMeleeType" Force="0" Private="1" Public="1" Ref="0" Save="0" Type="int" Upload="0" />
-		<Property Id="NPCType" Cache="0" Desc="desc" Force="0" Private="1" Public="1" Ref="0" Save="0" Type="int" Upload="0" />
+		<Property Id="NPCSubType" Cache="0" Desc="ESubNPCType_TURRET" Force="0" Private="1" Public="1" Ref="0" Save="0" Type="int" Upload="0" />
+		<Property Id="NPCType" Cache="0" Desc="ENPCType" Force="0" Private="1" Public="1" Ref="0" Save="0" Type="int" Upload="0" />
 		<Property Id="PHYSICAL_GATE" Cache="0" Desc="物理免疫开关" Force="0" Private="1" Public="1" Ref="0" Save="0" Type="int" Upload="0" />
 		<Property Id="Prefab" Cache="0" Desc="客户端预设模型" Force="0" Private="1" Public="1" Ref="0" Save="0" Type="string" Upload="0" />
 		<Property Id="REFLECTDAMAGE" Cache="0" Desc="反伤" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="int" Upload="0" />

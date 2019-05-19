@@ -463,6 +463,7 @@ namespace NFrame
 		public static readonly String MPREGEN = "MPREGEN";// int
 		public static readonly String MasterID = "MasterID";// object
 		public static readonly String MeleeType = "MeleeType";// int
+		public static readonly String NPCSubType = "NPCSubType";// int
 		public static readonly String NPCType = "NPCType";// int
 		public static readonly String PHYSICAL_GATE = "PHYSICAL_GATE";// int
 		public static readonly String Prefab = "Prefab";// string

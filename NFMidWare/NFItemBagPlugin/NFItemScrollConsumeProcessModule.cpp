@@ -134,7 +134,7 @@ int NFItemScrollConsumeProcessModule::ConsumeProcess(const NFGUID& self, const s
 			xDataList->SetVector3(NFrame::Player::BuildingList::Pos, vPos);
 			pBuildRecord->AddRow(-1, *xDataList);
 
-			return 0;
+			//and we would tell the world server that we created a building in the world, the others should see it once them come into the scene
 		}
 
 		NFDataList xDataArg;
@@ -147,7 +147,7 @@ int NFItemScrollConsumeProcessModule::ConsumeProcess(const NFGUID& self, const s
 		xDataArg.AddString(NFrame::NPC::NPCType());
 		xDataArg.AddInt(NFMsg::ENPCType::ENPCTYPE_TURRET);
 
-		m_pKernelModule->CreateObject(xID, nSceneID, nGroupID, NFrame::NPC::ThisName(), strBuildingCnfID, NFDataList());
+		m_pKernelModule->CreateObject(xID, nSceneID, nGroupID, NFrame::NPC::ThisName(), strBuildingCnfID, xDataArg);
 
 
 	}
@@ -157,4 +157,5 @@ int NFItemScrollConsumeProcessModule::ConsumeProcess(const NFGUID& self, const s
 
 		return 100;
 	}
+	return 100;
 }
