@@ -57,6 +57,7 @@ public:
 
     virtual bool AfterInit();
 	virtual bool CheckConfig();
+	virtual bool ReadyExecute();
 
 private:
 	int OnObjectClassEvent(const NFGUID& self, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFDataList& var);

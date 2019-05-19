@@ -92,6 +92,7 @@ bool NFGameServerNet_ServerModule::AfterInit()
 	m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_REQ_MOVE, this, &NFGameServerNet_ServerModule::OnClientReqMoveProcess);
 	m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_REQ_MOVE_IMMUNE, this, &NFGameServerNet_ServerModule::OnClientReqMoveImmuneProcess);
 	m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_REQ_STATE_SYNC, this, &NFGameServerNet_ServerModule::OnClientReqStateSyncProcess);
+	m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_REQ_POS_SYNC, this, &NFGameServerNet_ServerModule::OnClientReqPosSyncProcess);
 
 	m_pNetModule->AddEventCallBack(this, &NFGameServerNet_ServerModule::OnSocketPSEvent);
 
@@ -1422,6 +1423,36 @@ void NFGameServerNet_ServerModule::OnClientReqStateSyncProcess(const NFSOCK nSoc
 	}
 
 	this->SendMsgPBToGate(NFMsg::EGMI_ACK_STATE_SYNC, xMsg, nSceneID, nGroupID);
+}
+
+void NFGameServerNet_ServerModule::OnClientReqPosSyncProcess(const NFSOCK nSockIndex, const int nMsgID, const char * msg, const uint32_t nLen)
+{
+	CLIENT_MSG_PROCESS(nMsgID, msg, nLen, NFMsg::ReqAckPlayerPosSync)
+	//only the player can send the message to the back-end
+	//the monter use the require move message to sync the position between different view
+	const NFGUID& xMover = NFINetModule::PBToNF(xMsg.mover());
+	if (xMover != nPlayerID)
+	{
+		const NFGUID xMasterID = m_pKernelModule->GetPropertyObject(xMover, NFrame::NPC::MasterID());
+		if (xMasterID != nPlayerID)
+		{
+			m_pLogModule->LogNormal(NFILogModule::NLL_ERROR_NORMAL, xMover, "Message come from player ", nPlayerID.ToString());
+			return;
+		}
+		return;
+	}
+
+	const int nSceneID = m_pKernelModule->GetPropertyInt32(xMover, NFrame::IObject::SceneID());
+	const int nGroupID = m_pKernelModule->GetPropertyInt32(xMover, NFrame::IObject::GroupID());
+
+	NFVector3 v;
+	v.SetX(xMsg.position().x());
+	v.SetY(xMsg.position().y());
+	v.SetZ(xMsg.position().z());
+
+	m_pKernelModule->SetPropertyVector3(xMover, NFrame::IObject::Position(), v);
+
+	this->SendMsgPBToGate(NFMsg::EGMI_ACK_POS_SYNC, xMsg, nSceneID, nGroupID);
 }
 
 void NFGameServerNet_ServerModule::OnClientPropertyIntProcess(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
