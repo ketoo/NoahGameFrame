@@ -837,11 +837,36 @@ void NFWorldNet_ServerModule::OnOnlineProcess(const NFSOCK nSockIndex, const int
 {
     CLIENT_MSG_PROCESS_NO_OBJECT(nMsgID, msg, nLen, NFMsg::RoleOnlineNotify);
 
+    NFGUID selfId = NFINetModule::PBToNF(xMsg.self());
+    int serverId = (int)xMsg.game();
+
+
+    auto itr = mPlayerGameIdMap.find(selfId);
+    if (itr == mPlayerGameIdMap.end())
+    {
+        mPlayerGameIdMap.insert(typename std::map<NFGUID, int>::value_type(selfId, serverId));
+        // mPlayerGameIdMap[selfId] = serverId;
+    }
+
+
+
+
 }
 
 void NFWorldNet_ServerModule::OnOfflineProcess(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
 {
     CLIENT_MSG_PROCESS_NO_OBJECT(nMsgID, msg, nLen, NFMsg::RoleOfflineNotify);
+    NFGUID selfId = NFINetModule::PBToNF(xMsg.self());
+    //mPlayerGameIdMap.RemoveElement(selfId);
+
+    std::map<NFGUID, int>::iterator itr = mPlayerGameIdMap.find(selfId);
+    if (itr != mPlayerGameIdMap.end())
+    {
+        mPlayerGameIdMap.erase(itr);
+
+    }
+
+
 }
 
 void NFWorldNet_ServerModule::OnTransmitServerReport(const NFSOCK nFd, const int msgId, const char *buffer,
@@ -922,8 +947,35 @@ NF_SHARE_PTR<ServerData> NFWorldNet_ServerModule::GetSuitProxyForEnter()
 
 int NFWorldNet_ServerModule::GetPlayerGameID(const NFGUID self)
 {
+
+
+    auto itr = mPlayerGameIdMap.find(self);
+    int xFD = -1;
+    if (itr != mPlayerGameIdMap.end())
+    {
+        xFD= itr->second;
+    }
+    else
+    {
+        xFD= NULL;
+    }
+
     //TODO
-    return -1;
+
+    return xFD;
+}
+
+
+std::vector<NFGUID> NFWorldNet_ServerModule::getOnlinePlayers()
+{
+    std::vector<NFGUID> players;
+    int size = mPlayerGameIdMap.size();
+    auto iter=mPlayerGameIdMap.begin();
+    while (iter != mPlayerGameIdMap.end()) {
+        players.push_back(iter->first);
+        iter++;
+    }
+    return players;
 }
 
 void NFWorldNet_ServerModule::ServerReport(int reportServerId, NFMsg::EServerState serverStatus)
