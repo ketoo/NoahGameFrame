@@ -70,6 +70,11 @@ bool NFScheduleModule::Init()
 
 bool NFScheduleModule::Execute()
 {
+	/*
+	we would optimize this function by saving a schedule element list by time sorting, then
+	we can pick the toppest schedule element to check the time to save the costs of CPU.
+	*/
+	
 	NFPerformance performanceObject;
 
 	//execute all tasks
