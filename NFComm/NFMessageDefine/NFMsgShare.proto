@@ -213,8 +213,8 @@ message ReqEndBattle
 {
 }
 
-//EGMI_REQ_ACK_RELIVE							= 180;			//
-message ReqAckRelive
+//EGEC_REQ_RELIVE_HERO						= 1522;		 //
+message ReqAckReliveHero
 {
 	int32	diamond 				= 1;
 	Ident 	hero_id = 2;

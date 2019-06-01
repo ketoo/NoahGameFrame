@@ -190,7 +190,6 @@ enum EGameMsgID {
   EGMI_ACK_SWAP_HOME_SCENE = 158,
   EGMI_REQ_ENTER_GAME_FINISH = 159,
   EGMI_ACK_ENTER_GAME_FINISH = 160,
-  EGMI_REQ_ACK_RELIVE = 180,
   EGMI_ACK_OBJECT_ENTRY = 200,
   EGMI_ACK_OBJECT_LEAVE = 201,
   EGMI_ACK_OBJECT_PROPERTY_ENTRY = 202,
@@ -289,6 +288,7 @@ enum EGameMsgID {
   EGEC_TAKEOFF_EQUIP = 1509,
   EGEC_REQ_SET_FIGHT_HERO = 1520,
   EGEC_REQ_SWITCH_FIGHT_HERO = 1521,
+  EGEC_REQ_RELIVE_HERO = 1522,
   EGEC_REQ_MINING_TITLE = 1600,
   EGEC_ACK_MINING_TITLE = 1601,
   EGEC_REQ_SEND_MAIL = 1700,
@@ -420,8 +420,8 @@ enum EGameEquipSubType {
   EQUIPTYPE_WEAPON = 0,
   EQUIPTYPE_HELMET = 1,
   EQUIPTYPE_ARMOR = 2,
-  EQUIPTYPE_WRIST = 3,
-  EQUIPTYPE_PANT = 4,
+  EQUIPTYPE_HAND = 3,
+  EQUIPTYPE_RING = 4,
   EQUIPTYPE_BOOT = 5,
   EGameEquipSubType_INT_MIN_SENTINEL_DO_NOT_USE_ = ::google::protobuf::kint32min,
   EGameEquipSubType_INT_MAX_SENTINEL_DO_NOT_USE_ = ::google::protobuf::kint32max
@@ -449,12 +449,13 @@ enum EGameGemSubType {
   EGGSTYPE_GEM_WIND = 5,
   EGGSTYPE_GEM_ICE = 6,
   EGGSTYPE_GEM_POISON = 7,
+  EGGSTYPE_GEM_DRAK = 8,
   EGameGemSubType_INT_MIN_SENTINEL_DO_NOT_USE_ = ::google::protobuf::kint32min,
   EGameGemSubType_INT_MAX_SENTINEL_DO_NOT_USE_ = ::google::protobuf::kint32max
 };
 LIBPROTOC_EXPORT bool EGameGemSubType_IsValid(int value);
 const EGameGemSubType EGameGemSubType_MIN = EGGSTYPE_GEM_ATK;
-const EGameGemSubType EGameGemSubType_MAX = EGGSTYPE_GEM_POISON;
+const EGameGemSubType EGameGemSubType_MAX = EGGSTYPE_GEM_DRAK;
 const int EGameGemSubType_ARRAYSIZE = EGameGemSubType_MAX + 1;
 
 LIBPROTOC_EXPORT const ::google::protobuf::EnumDescriptor* EGameGemSubType_descriptor();
@@ -736,6 +737,48 @@ inline bool ENPCType_Parse(
   return ::google::protobuf::internal::ParseNamedEnum<ENPCType>(
     ENPCType_descriptor(), name, value);
 }
+enum ESubNPCType_TURRET {
+  ENPCTYPE_SUB_TOWN = 0,
+  ENPCTYPE_SUB_GOLD_MINE = 1,
+  ENPCTYPE_SUB_ENEGER_MINE = 2,
+  ENPCTYPE_SUB_GOLD_STORE = 3,
+  ENPCTYPE_SUB_ENEGER_STORE = 4,
+  ENPCTYPE_SUB_CANNON = 10,
+  ENPCTYPE_SUB_ACID = 11,
+  ENPCTYPE_SUB_TESLA = 12,
+  ENPCTYPE_SUB_X_BOW = 13,
+  ENPCTYPE_SUB_CRYSTAL = 14,
+  ENPCTYPE_SUB_FIRE = 15,
+  ENPCTYPE_SUB_GATLING = 16,
+  ENPCTYPE_SUB_GAUSS = 17,
+  ENPCTYPE_SUB_HAMMER = 18,
+  ENPCTYPE_SUB_LASER = 19,
+  ENPCTYPE_SUB_MACGINEGUN = 20,
+  ENPCTYPE_SUB_MORTAR = 21,
+  ENPCTYPE_SUB_PLASMA = 22,
+  ENPCTYPE_SUB_RADAR = 23,
+  ENPCTYPE_SUB_ROCKET = 24,
+  ENPCTYPE_SUB_BOMB = 100,
+  ENPCTYPE_SUB_TRAP = 101,
+  ENPCTYPE_SUB_SPINE = 102,
+  ESubNPCType_TURRET_INT_MIN_SENTINEL_DO_NOT_USE_ = ::google::protobuf::kint32min,
+  ESubNPCType_TURRET_INT_MAX_SENTINEL_DO_NOT_USE_ = ::google::protobuf::kint32max
+};
+LIBPROTOC_EXPORT bool ESubNPCType_TURRET_IsValid(int value);
+const ESubNPCType_TURRET ESubNPCType_TURRET_MIN = ENPCTYPE_SUB_TOWN;
+const ESubNPCType_TURRET ESubNPCType_TURRET_MAX = ENPCTYPE_SUB_SPINE;
+const int ESubNPCType_TURRET_ARRAYSIZE = ESubNPCType_TURRET_MAX + 1;
+
+LIBPROTOC_EXPORT const ::google::protobuf::EnumDescriptor* ESubNPCType_TURRET_descriptor();
+inline const ::std::string& ESubNPCType_TURRET_Name(ESubNPCType_TURRET value) {
+  return ::google::protobuf::internal::NameOfEnum(
+    ESubNPCType_TURRET_descriptor(), value);
+}
+inline bool ESubNPCType_TURRET_Parse(
+    const ::std::string& name, ESubNPCType_TURRET* value) {
+  return ::google::protobuf::internal::ParseNamedEnum<ESubNPCType_TURRET>(
+    ESubNPCType_TURRET_descriptor(), name, value);
+}
 enum EMeleeType {
   ETYPE_MELEE = 0,
   ETYPE_MELEE_DASH = 1,
@@ -940,6 +983,11 @@ template <> struct is_proto_enum< ::NFMsg::ENPCType> : ::std::true_type {};
 template <>
 inline const EnumDescriptor* GetEnumDescriptor< ::NFMsg::ENPCType>() {
   return ::NFMsg::ENPCType_descriptor();
+}
+template <> struct is_proto_enum< ::NFMsg::ESubNPCType_TURRET> : ::std::true_type {};
+template <>
+inline const EnumDescriptor* GetEnumDescriptor< ::NFMsg::ESubNPCType_TURRET>() {
+  return ::NFMsg::ESubNPCType_TURRET_descriptor();
 }
 template <> struct is_proto_enum< ::NFMsg::EMeleeType> : ::std::true_type {};
 template <>

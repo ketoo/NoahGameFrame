@@ -429,7 +429,7 @@ namespace NFrame
 		static const std::string& ATK_WIND(){ static std::string x = "ATK_WIND"; return x; };// int
 		static const std::string& BUFF_GATE(){ static std::string x = "BUFF_GATE"; return x; };// int
 		static const std::string& CRITICAL(){ static std::string x = "CRITICAL"; return x; };// int
-		static const std::string& Camp(){ static std::string x = "Camp"; return x; };// int
+		static const std::string& Camp(){ static std::string x = "Camp"; return x; };// object
 		static const std::string& Climb(){ static std::string x = "Climb"; return x; };// int
 		static const std::string& ConsumeData(){ static std::string x = "ConsumeData"; return x; };// string
 		static const std::string& CrisisDis(){ static std::string x = "CrisisDis"; return x; };// float
@@ -542,7 +542,7 @@ namespace NFrame
 		static const std::string& Account(){ static std::string x = "Account"; return x; };// string
 		static const std::string& BUFF_GATE(){ static std::string x = "BUFF_GATE"; return x; };// int
 		static const std::string& CRITICAL(){ static std::string x = "CRITICAL"; return x; };// int
-		static const std::string& Camp(){ static std::string x = "Camp"; return x; };// int
+		static const std::string& Camp(){ static std::string x = "Camp"; return x; };// object
 		static const std::string& Clan_AD(){ static std::string x = "Clan_AD"; return x; };// string
 		static const std::string& Clan_ContinueDay(){ static std::string x = "Clan_ContinueDay"; return x; };// int
 		static const std::string& Clan_CreateTime(){ static std::string x = "Clan_CreateTime"; return x; };// int

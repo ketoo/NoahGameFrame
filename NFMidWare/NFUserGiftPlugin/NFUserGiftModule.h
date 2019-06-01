@@ -24,8 +24,8 @@
 */
 
 
-#ifndef NF_CHAT_MODULE_H
-#define NF_CHAT_MODULE_H
+#ifndef NF_USER_GIFT_MODULE_H
+#define NF_USER_GIFT_MODULE_H
 
 #include <memory>
 #include "NFComm/NFMessageDefine/NFMsgDefine.h"

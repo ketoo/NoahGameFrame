@@ -425,7 +425,7 @@ namespace NFrame
 		public static readonly String ATK_WIND = "ATK_WIND";// int
 		public static readonly String BUFF_GATE = "BUFF_GATE";// int
 		public static readonly String CRITICAL = "CRITICAL";// int
-		public static readonly String Camp = "Camp";// int
+		public static readonly String Camp = "Camp";// object
 		public static readonly String Climb = "Climb";// int
 		public static readonly String ConsumeData = "ConsumeData";// string
 		public static readonly String CrisisDis = "CrisisDis";// float
@@ -537,7 +537,7 @@ namespace NFrame
 		public static readonly String Account = "Account";// string
 		public static readonly String BUFF_GATE = "BUFF_GATE";// int
 		public static readonly String CRITICAL = "CRITICAL";// int
-		public static readonly String Camp = "Camp";// int
+		public static readonly String Camp = "Camp";// object
 		public static readonly String Clan_AD = "Clan_AD";// string
 		public static readonly String Clan_ContinueDay = "Clan_ContinueDay";// int
 		public static readonly String Clan_CreateTime = "Clan_CreateTime";// int

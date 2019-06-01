@@ -419,7 +419,7 @@ package nframe;
 		public static final String ATK_WIND = "ATK_WIND";// int
 		public static final String BUFF_GATE = "BUFF_GATE";// int
 		public static final String CRITICAL = "CRITICAL";// int
-		public static final String Camp = "Camp";// int
+		public static final String Camp = "Camp";// object
 		public static final String Climb = "Climb";// int
 		public static final String ConsumeData = "ConsumeData";// string
 		public static final String CrisisDis = "CrisisDis";// float
@@ -531,7 +531,7 @@ package nframe;
 		public static final String Account = "Account";// string
 		public static final String BUFF_GATE = "BUFF_GATE";// int
 		public static final String CRITICAL = "CRITICAL";// int
-		public static final String Camp = "Camp";// int
+		public static final String Camp = "Camp";// object
 		public static final String Clan_AD = "Clan_AD";// string
 		public static final String Clan_ContinueDay = "Clan_ContinueDay";// int
 		public static final String Clan_CreateTime = "Clan_CreateTime";// int

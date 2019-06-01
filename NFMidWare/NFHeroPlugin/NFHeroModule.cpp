@@ -61,6 +61,7 @@ bool NFHeroModule::AfterInit()
 
 	m_pNetModule->AddReceiveCallBack(NFMsg::EGEC_REQ_SET_FIGHT_HERO, this, &NFHeroModule::OnSetFightHeroMsg);
 	m_pNetModule->AddReceiveCallBack(NFMsg::EGEC_REQ_SWITCH_FIGHT_HERO, this, &NFHeroModule::OnSwitchFightHeroMsg);
+	m_pNetModule->AddReceiveCallBack(NFMsg::EGEC_REQ_RELIVE_HERO, this, &NFHeroModule::OnReliveHeroMsg);
 
 	m_pKernelModule->AddClassCallBack(NFrame::Player::ThisName(), this, &NFHeroModule::OnPlayerClassEvent);
 
@@ -385,6 +386,55 @@ bool NFHeroModule::SwitchFightHero(const NFGUID & self, const NFGUID & xHeroID)
 	return true;
 }
 
+bool NFHeroModule::ReliveHero(const NFGUID & self, const NFGUID & xHeroID, const int diamond)
+{
+	if (StillAlive(self, xHeroID))
+	{
+		NF_SHARE_PTR<NFIRecord> pHeroRecord = m_pKernelModule->FindRecord(self, NFrame::Player::PlayerHero::ThisName());
+		if (nullptr == pHeroRecord)
+		{
+			return false;
+		}
+
+		if (xHeroID.IsNull())
+		{
+			return false;
+		}
+
+		int nRow = pHeroRecord->FindObject(NFrame::Player::PlayerHero::GUID, xHeroID);
+		if (nRow < 0)
+		{
+			return false;
+		}
+
+		NF_SHARE_PTR<NFIRecord> pHeroValueRecord = m_pKernelModule->FindRecord(self, NFrame::Player::HeroValue::ThisName());
+		if (nullptr == pHeroValueRecord)
+		{
+			return false;
+		}
+
+		int nValueRow = pHeroValueRecord->FindObject(NFrame::Player::PlayerHero::GUID, xHeroID);
+		if (nValueRow < 0)
+		{
+			return false;
+		}
+
+		const int nMaxHP = pHeroValueRecord->GetInt(nValueRow, NFrame::Player::HeroValue::MAXHP);
+
+		pHeroRecord->SetInt(nRow, NFrame::Player::PlayerHero::ReliveTime, 0);
+		pHeroRecord->SetInt(nRow, NFrame::Player::PlayerHero::HP, nMaxHP);
+	}
+	else
+	{
+		if (diamond > 0)
+		{
+
+		}
+	}
+
+	return false;
+}
+
 NFGUID NFHeroModule::GetHeroGUID(const NFGUID& self, const std::string& strID)
 {
 	NF_SHARE_PTR<NFIRecord> pHeroRecord = m_pKernelModule->FindRecord(self, NFrame::Player::PlayerHero::ThisName());
@@ -420,6 +470,16 @@ void NFHeroModule::OnSwitchFightHeroMsg(const NFSOCK nSockIndex, const int nMsgI
 
 	SwitchFightHero(nPlayerID, xHero);
 	
+}
+
+void NFHeroModule::OnReliveHeroMsg(const NFSOCK nSockIndex, const int nMsgID, const char * msg, const uint32_t nLen)
+{
+	CLIENT_MSG_PROCESS(nMsgID, msg, nLen, NFMsg::ReqAckReliveHero);
+
+	const NFGUID xHero = NFINetModule::PBToNF(xMsg.hero_id());
+	const int diamond = xMsg.diamond();
+
+	ReliveHero(nPlayerID, xHero, diamond);
 }
 
 int NFHeroModule::CalReliveTime(const NFGUID & self, const NFGUID & xHeroID, const E_SCENE_TYPE reliveType)
@@ -486,12 +546,16 @@ bool NFHeroModule::StillAlive(const NFGUID & self, const NFGUID & xHeroID)
 	const int nHP = pHeroRecord->GetInt(nRow, NFrame::Player::PlayerHero::HP);
 	if (nHP <= 0)
 	{
-		return false;
-	}
+		int nTime = pHeroRecord->GetInt(nRow, NFrame::Player::PlayerHero::ReliveTime);
+		if (nowTimeMS < nTime)
+		{
+			return false;
+		}
+		else
+		{
+			return true;
+		}
 
-	int nTime = pHeroRecord->GetInt(nRow, NFrame::Player::PlayerHero::ReliveTime);
-	if (nowTimeMS < nTime)
-	{
 		return false;
 	}
 
@@ -539,6 +603,7 @@ int NFHeroModule::OnPlayerClassEvent(const NFGUID & self, const std::string & st
 	else if (CLASS_OBJECT_EVENT::COE_CREATE_FINISH == eClassEvent)
 	{
 		m_pKernelModule->AddPropertyCallBack(self, NFrame::NPC::HP(), this, &NFHeroModule::OnPlayerHPEvent);
+		// we need add a schedule to relive the heroes that dead
 	}
 	
 	return 0;
@@ -546,6 +611,7 @@ int NFHeroModule::OnPlayerClassEvent(const NFGUID & self, const std::string & st
 
 int NFHeroModule::OnPlayerHeroHPEvent(const NFGUID & self, const std::string & strPropertyName, const NFData & oldVar, const NFData & newVar)
 {
+	// we need add a schedule to relive the heroes that dead
 
 	return 0;
 }

@@ -130,9 +130,9 @@ LIBPROTOC_EXPORT extern ReqAckPlayerMoveDefaultTypeInternal _ReqAckPlayerMove_de
 class ReqAckPlayerPosSync;
 class ReqAckPlayerPosSyncDefaultTypeInternal;
 LIBPROTOC_EXPORT extern ReqAckPlayerPosSyncDefaultTypeInternal _ReqAckPlayerPosSync_default_instance_;
-class ReqAckRelive;
-class ReqAckReliveDefaultTypeInternal;
-LIBPROTOC_EXPORT extern ReqAckReliveDefaultTypeInternal _ReqAckRelive_default_instance_;
+class ReqAckReliveHero;
+class ReqAckReliveHeroDefaultTypeInternal;
+LIBPROTOC_EXPORT extern ReqAckReliveHeroDefaultTypeInternal _ReqAckReliveHero_default_instance_;
 class ReqAckStartBattle;
 class ReqAckStartBattleDefaultTypeInternal;
 LIBPROTOC_EXPORT extern ReqAckStartBattleDefaultTypeInternal _ReqAckStartBattle_default_instance_;
@@ -241,7 +241,7 @@ template<> LIBPROTOC_EXPORT ::NFMsg::ReqAckPlayerChat* Arena::CreateMaybeMessage
 template<> LIBPROTOC_EXPORT ::NFMsg::ReqAckPlayerChat_ChatContainer* Arena::CreateMaybeMessage<::NFMsg::ReqAckPlayerChat_ChatContainer>(Arena*);
 template<> LIBPROTOC_EXPORT ::NFMsg::ReqAckPlayerMove* Arena::CreateMaybeMessage<::NFMsg::ReqAckPlayerMove>(Arena*);
 template<> LIBPROTOC_EXPORT ::NFMsg::ReqAckPlayerPosSync* Arena::CreateMaybeMessage<::NFMsg::ReqAckPlayerPosSync>(Arena*);
-template<> LIBPROTOC_EXPORT ::NFMsg::ReqAckRelive* Arena::CreateMaybeMessage<::NFMsg::ReqAckRelive>(Arena*);
+template<> LIBPROTOC_EXPORT ::NFMsg::ReqAckReliveHero* Arena::CreateMaybeMessage<::NFMsg::ReqAckReliveHero>(Arena*);
 template<> LIBPROTOC_EXPORT ::NFMsg::ReqAckStartBattle* Arena::CreateMaybeMessage<::NFMsg::ReqAckStartBattle>(Arena*);
 template<> LIBPROTOC_EXPORT ::NFMsg::ReqAckSwapScene* Arena::CreateMaybeMessage<::NFMsg::ReqAckSwapScene>(Arena*);
 template<> LIBPROTOC_EXPORT ::NFMsg::ReqAckSynData* Arena::CreateMaybeMessage<::NFMsg::ReqAckSynData>(Arena*);
@@ -3397,24 +3397,24 @@ class LIBPROTOC_EXPORT ReqEndBattle : public ::google::protobuf::Message /* @@pr
 };
 // -------------------------------------------------------------------
 
-class LIBPROTOC_EXPORT ReqAckRelive : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:NFMsg.ReqAckRelive) */ {
+class LIBPROTOC_EXPORT ReqAckReliveHero : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:NFMsg.ReqAckReliveHero) */ {
  public:
-  ReqAckRelive();
-  virtual ~ReqAckRelive();
+  ReqAckReliveHero();
+  virtual ~ReqAckReliveHero();
 
-  ReqAckRelive(const ReqAckRelive& from);
+  ReqAckReliveHero(const ReqAckReliveHero& from);
 
-  inline ReqAckRelive& operator=(const ReqAckRelive& from) {
+  inline ReqAckReliveHero& operator=(const ReqAckReliveHero& from) {
     CopyFrom(from);
     return *this;
   }
   #if LANG_CXX11
-  ReqAckRelive(ReqAckRelive&& from) noexcept
-    : ReqAckRelive() {
+  ReqAckReliveHero(ReqAckReliveHero&& from) noexcept
+    : ReqAckReliveHero() {
     *this = ::std::move(from);
   }
 
-  inline ReqAckRelive& operator=(ReqAckRelive&& from) noexcept {
+  inline ReqAckReliveHero& operator=(ReqAckReliveHero&& from) noexcept {
     if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
       if (this != &from) InternalSwap(&from);
     } else {
@@ -3424,34 +3424,34 @@ class LIBPROTOC_EXPORT ReqAckRelive : public ::google::protobuf::Message /* @@pr
   }
   #endif
   static const ::google::protobuf::Descriptor* descriptor();
-  static const ReqAckRelive& default_instance();
+  static const ReqAckReliveHero& default_instance();
 
   static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
-  static inline const ReqAckRelive* internal_default_instance() {
-    return reinterpret_cast<const ReqAckRelive*>(
-               &_ReqAckRelive_default_instance_);
+  static inline const ReqAckReliveHero* internal_default_instance() {
+    return reinterpret_cast<const ReqAckReliveHero*>(
+               &_ReqAckReliveHero_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
     21;
 
-  void Swap(ReqAckRelive* other);
-  friend void swap(ReqAckRelive& a, ReqAckRelive& b) {
+  void Swap(ReqAckReliveHero* other);
+  friend void swap(ReqAckReliveHero& a, ReqAckReliveHero& b) {
     a.Swap(&b);
   }
 
   // implements Message ----------------------------------------------
 
-  inline ReqAckRelive* New() const final {
-    return CreateMaybeMessage<ReqAckRelive>(NULL);
+  inline ReqAckReliveHero* New() const final {
+    return CreateMaybeMessage<ReqAckReliveHero>(NULL);
   }
 
-  ReqAckRelive* New(::google::protobuf::Arena* arena) const final {
-    return CreateMaybeMessage<ReqAckRelive>(arena);
+  ReqAckReliveHero* New(::google::protobuf::Arena* arena) const final {
+    return CreateMaybeMessage<ReqAckReliveHero>(arena);
   }
   void CopyFrom(const ::google::protobuf::Message& from) final;
   void MergeFrom(const ::google::protobuf::Message& from) final;
-  void CopyFrom(const ReqAckRelive& from);
-  void MergeFrom(const ReqAckRelive& from);
+  void CopyFrom(const ReqAckReliveHero& from);
+  void MergeFrom(const ReqAckReliveHero& from);
   void Clear() final;
   bool IsInitialized() const final;
 
@@ -3468,7 +3468,7 @@ class LIBPROTOC_EXPORT ReqAckRelive : public ::google::protobuf::Message /* @@pr
   void SharedCtor();
   void SharedDtor();
   void SetCachedSize(int size) const final;
-  void InternalSwap(ReqAckRelive* other);
+  void InternalSwap(ReqAckReliveHero* other);
   private:
   inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
     return NULL;
@@ -3502,7 +3502,7 @@ class LIBPROTOC_EXPORT ReqAckRelive : public ::google::protobuf::Message /* @@pr
   ::google::protobuf::int32 diamond() const;
   void set_diamond(::google::protobuf::int32 value);
 
-  // @@protoc_insertion_point(class_scope:NFMsg.ReqAckRelive)
+  // @@protoc_insertion_point(class_scope:NFMsg.ReqAckReliveHero)
  private:
 
   ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
@@ -10135,52 +10135,52 @@ inline void ReqAckStartBattle::set_diamond(::google::protobuf::int32 value) {
 
 // -------------------------------------------------------------------
 
-// ReqAckRelive
+// ReqAckReliveHero
 
 // int32 diamond = 1;
-inline void ReqAckRelive::clear_diamond() {
+inline void ReqAckReliveHero::clear_diamond() {
   diamond_ = 0;
 }
-inline ::google::protobuf::int32 ReqAckRelive::diamond() const {
-  // @@protoc_insertion_point(field_get:NFMsg.ReqAckRelive.diamond)
+inline ::google::protobuf::int32 ReqAckReliveHero::diamond() const {
+  // @@protoc_insertion_point(field_get:NFMsg.ReqAckReliveHero.diamond)
   return diamond_;
 }
-inline void ReqAckRelive::set_diamond(::google::protobuf::int32 value) {
+inline void ReqAckReliveHero::set_diamond(::google::protobuf::int32 value) {
   
   diamond_ = value;
-  // @@protoc_insertion_point(field_set:NFMsg.ReqAckRelive.diamond)
+  // @@protoc_insertion_point(field_set:NFMsg.ReqAckReliveHero.diamond)
 }
 
 // .NFMsg.Ident hero_id = 2;
-inline bool ReqAckRelive::has_hero_id() const {
+inline bool ReqAckReliveHero::has_hero_id() const {
   return this != internal_default_instance() && hero_id_ != NULL;
 }
-inline const ::NFMsg::Ident& ReqAckRelive::_internal_hero_id() const {
+inline const ::NFMsg::Ident& ReqAckReliveHero::_internal_hero_id() const {
   return *hero_id_;
 }
-inline const ::NFMsg::Ident& ReqAckRelive::hero_id() const {
+inline const ::NFMsg::Ident& ReqAckReliveHero::hero_id() const {
   const ::NFMsg::Ident* p = hero_id_;
-  // @@protoc_insertion_point(field_get:NFMsg.ReqAckRelive.hero_id)
+  // @@protoc_insertion_point(field_get:NFMsg.ReqAckReliveHero.hero_id)
   return p != NULL ? *p : *reinterpret_cast<const ::NFMsg::Ident*>(
       &::NFMsg::_Ident_default_instance_);
 }
-inline ::NFMsg::Ident* ReqAckRelive::release_hero_id() {
-  // @@protoc_insertion_point(field_release:NFMsg.ReqAckRelive.hero_id)
+inline ::NFMsg::Ident* ReqAckReliveHero::release_hero_id() {
+  // @@protoc_insertion_point(field_release:NFMsg.ReqAckReliveHero.hero_id)
   
   ::NFMsg::Ident* temp = hero_id_;
   hero_id_ = NULL;
   return temp;
 }
-inline ::NFMsg::Ident* ReqAckRelive::mutable_hero_id() {
+inline ::NFMsg::Ident* ReqAckReliveHero::mutable_hero_id() {
   
   if (hero_id_ == NULL) {
     auto* p = CreateMaybeMessage<::NFMsg::Ident>(GetArenaNoVirtual());
     hero_id_ = p;
   }
-  // @@protoc_insertion_point(field_mutable:NFMsg.ReqAckRelive.hero_id)
+  // @@protoc_insertion_point(field_mutable:NFMsg.ReqAckReliveHero.hero_id)
   return hero_id_;
 }
-inline void ReqAckRelive::set_allocated_hero_id(::NFMsg::Ident* hero_id) {
+inline void ReqAckReliveHero::set_allocated_hero_id(::NFMsg::Ident* hero_id) {
   ::google::protobuf::Arena* message_arena = GetArenaNoVirtual();
   if (message_arena == NULL) {
     delete reinterpret_cast< ::google::protobuf::MessageLite*>(hero_id_);
@@ -10196,7 +10196,7 @@ inline void ReqAckRelive::set_allocated_hero_id(::NFMsg::Ident* hero_id) {
     
   }
   hero_id_ = hero_id;
-  // @@protoc_insertion_point(field_set_allocated:NFMsg.ReqAckRelive.hero_id)
+  // @@protoc_insertion_point(field_set_allocated:NFMsg.ReqAckReliveHero.hero_id)
 }
 
 // -------------------------------------------------------------------

@@ -131,7 +131,6 @@ enum EGameMsgID
 	EGMI_REQ_ENTER_GAME_FINISH					= 159;			//
 	EGMI_ACK_ENTER_GAME_FINISH					= 160;			//
 
-	EGMI_REQ_ACK_RELIVE							= 180;			//
 
 	EGMI_ACK_OBJECT_ENTRY						= 200;			//
 	EGMI_ACK_OBJECT_LEAVE						= 201;			//
@@ -263,6 +262,7 @@ enum EGameMsgID
 
 	EGEC_REQ_SET_FIGHT_HERO						= 1520;		 //
 	EGEC_REQ_SWITCH_FIGHT_HERO					= 1521;		 //
+	EGEC_REQ_RELIVE_HERO						= 1522;		 //
 
 	EGEC_REQ_MINING_TITLE						= 1600;		 //
 	EGEC_ACK_MINING_TITLE						= 1601;		 //

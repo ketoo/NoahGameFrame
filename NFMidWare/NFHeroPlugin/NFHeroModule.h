@@ -68,12 +68,15 @@ public:
 	//the hero who you want him fight for you right now
 	virtual bool SwitchFightHero(const NFGUID& self, const NFGUID& xHeroID);
 
+	virtual bool ReliveHero(const NFGUID& self, const NFGUID& xHeroID, const int diamond);
+
 	virtual NFGUID GetHeroGUID(const NFGUID& self, const std::string& strID);
 	EConsHero_Pos GetFightPos(const NFGUID& self, const NFGUID& xHeroID);
 
 protected:
 	void OnSetFightHeroMsg(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
-	void OnSwitchFightHeroMsg( const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen );
+	void OnSwitchFightHeroMsg(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+	void OnReliveHeroMsg(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
 
 	int CalReliveTime(const NFGUID& self, const NFGUID& xHeroID, const E_SCENE_TYPE reliveType);
 	bool StillAlive(const NFGUID& self, const NFGUID& xHeroID);

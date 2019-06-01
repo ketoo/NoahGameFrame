@@ -307,6 +307,11 @@ bool NFPackModule::CreateItemInNormalBag(const NFGUID & self, const std::string 
 		xRowData->SetInt(NFrame::Player::BagItemList::Date, pPluginManager->GetNowTime());
 
 		int row = pRecord->AddRow(-1, *xRowData);
+		if (row < 0)
+		{
+			m_pLogModule->LogError(self, " cant add item to bag " + strConfigName);
+			return false;
+		}
 	}
 	else
 	{
