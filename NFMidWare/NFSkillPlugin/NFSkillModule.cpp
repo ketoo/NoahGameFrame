@@ -105,7 +105,7 @@ void NFSkillModule::OnClienUseSkill(const NFSOCK nSockIndex, const int nMsgID, c
 {
 	CLIENT_MSG_PROCESS(nMsgID, msg, nLen, NFMsg::ReqAckUseSkill)
 
-		//bc
+	//bc
 	NFGUID xUser = NFINetModule::PBToNF(xMsg.user());
 	const std::string& strSkillID = xMsg.skill_id();
 	if (xUser != nPlayerID)
@@ -114,6 +114,7 @@ void NFSkillModule::OnClienUseSkill(const NFSOCK nSockIndex, const int nMsgID, c
 		if (xAIOnwer != nPlayerID)
 		{
 			m_pLogModule->LogError(xUser, "AIOwnerID " + xAIOnwer.ToString() + " not " + nPlayerID.ToString());
+
 			return;
 		}
 	}

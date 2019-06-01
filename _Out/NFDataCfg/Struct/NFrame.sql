@@ -62,7 +62,7 @@ ALTER TABLE `IObject` ADD `ConfigID` text COLLATE utf8mb4_unicode_ci  DEFAULT ''
 ALTER TABLE `Map` ADD `MaxCount` bigint(11) DEFAULT '0' COMMENT '最大入驻公会';
 ALTER TABLE `Map` ADD `Station` text COLLATE utf8mb4_unicode_ci  DEFAULT '' COMMENT '';
 ALTER TABLE `NPC` ADD `AIOwnerID` varchar(64) COLLATE utf8mb4_unicode_ci DEFAULT '' COMMENT 'AI';
-ALTER TABLE `NPC` ADD `Camp` bigint(11) DEFAULT '0' COMMENT '阵营';
+ALTER TABLE `NPC` ADD `Camp` varchar(64) COLLATE utf8mb4_unicode_ci DEFAULT '' COMMENT '阵营';
 ALTER TABLE `NPC` ADD `Diamond` bigint(11) DEFAULT '0' COMMENT '钻石';
 ALTER TABLE `NPC` ADD `EXP` bigint(11) DEFAULT '0' COMMENT '经验获得,如果是怪物，则是掉落经验';
 ALTER TABLE `NPC` ADD `Gold` bigint(11) DEFAULT '0' COMMENT '玩家游戏金币';
@@ -75,7 +75,7 @@ ALTER TABLE `NPC` ADD `VIPEXP` bigint(11) DEFAULT '0' COMMENT 'VIP经验';
 ALTER TABLE `NPC` ADD `Cooldown` text COLLATE utf8mb4_unicode_ci  DEFAULT '' COMMENT '';
 ALTER TABLE `Player` ADD `ATK_PVP` bigint(11) DEFAULT '0' COMMENT 'PVP攻击力';
 ALTER TABLE `Player` ADD `Account` text COLLATE utf8mb4_unicode_ci  DEFAULT '' COMMENT '玩家的帐号';
-ALTER TABLE `Player` ADD `Camp` bigint(11) DEFAULT '0' COMMENT '阵营';
+ALTER TABLE `Player` ADD `Camp` varchar(64) COLLATE utf8mb4_unicode_ci DEFAULT '' COMMENT '阵营';
 ALTER TABLE `Player` ADD `ConnectKey` text COLLATE utf8mb4_unicode_ci  DEFAULT '' COMMENT '玩家连接服务器的KEY';
 ALTER TABLE `Player` ADD `Cup` bigint(11) DEFAULT '0' COMMENT 'Cup';
 ALTER TABLE `Player` ADD `DEF_PVP` bigint(11) DEFAULT '0' COMMENT 'PVP防御力';

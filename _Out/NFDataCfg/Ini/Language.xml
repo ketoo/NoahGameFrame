@@ -32,9 +32,12 @@ Although they lack wisdom, but they very luckly which often double or even three
 	<Object Id="Desc_Item_bomb_1" Chinese="炸弹·一级" English="" French="" Spanish="" />
 	<Object Id="Desc_Item_bomb_2" Chinese="炸弹·二级" English="" French="" Spanish="" />
 	<Object Id="Desc_Item_bomb_3" Chinese="炸弹·三级" English="" French="" Spanish="" />
-	<Object Id="Desc_Item_connon_1" Chinese="加农炮·一级" English="" French="" Spanish="" />
-	<Object Id="Desc_Item_connon_2" Chinese="加农炮·二级" English="" French="" Spanish="" />
-	<Object Id="Desc_Item_connon_3" Chinese="加农炮·三级" English="" French="" Spanish="" />
+	<Object Id="Desc_Item_cannon_1" Chinese="加农炮·一级" English="" French="" Spanish="" />
+	<Object Id="Desc_Item_cannon_2" Chinese="加农炮·二级" English="" French="" Spanish="" />
+	<Object Id="Desc_Item_cannon_3" Chinese="加农炮·三级" English="" French="" Spanish="" />
+	<Object Id="Desc_Item_copter_1" Chinese="武装直升机·一级" English="" French="" Spanish="" />
+	<Object Id="Desc_Item_copter_2" Chinese="武装直升机·二级" English="" French="" Spanish="" />
+	<Object Id="Desc_Item_copter_3" Chinese="武装直升机·三级" English="" French="" Spanish="" />
 	<Object Id="Desc_Item_crystal_1" Chinese="警戒塔·一级 - 启动需要消耗能源 10点每小时，可探测6米内的可见单位" English="" French="" Spanish="" />
 	<Object Id="Desc_Item_crystal_2" Chinese="警戒塔·二级 - 启动需要消耗能源 20点每小时，可探测10米内的可见单位" English="" French="" Spanish="" />
 	<Object Id="Desc_Item_crystal_3" Chinese="警戒塔·三级 - 启动需要消耗能源 30点每小时，可探测15米内的可见单位" English="" French="" Spanish="" />
@@ -65,9 +68,9 @@ Although they lack wisdom, but they very luckly which often double or even three
 	<Object Id="Desc_Item_laser_1" Chinese="镭射激光器·一级" English="" French="" Spanish="" />
 	<Object Id="Desc_Item_laser_2" Chinese="镭射激光器·二级" English="" French="" Spanish="" />
 	<Object Id="Desc_Item_laser_3" Chinese="镭射激光器·三级" English="" French="" Spanish="" />
-	<Object Id="Desc_Item_macginegun_1" Chinese="麦肯锡机枪·一级" English="" French="" Spanish="" />
-	<Object Id="Desc_Item_macginegun_2" Chinese="麦肯锡机枪·二级" English="" French="" Spanish="" />
-	<Object Id="Desc_Item_macginegun_3" Chinese="麦肯锡机枪·三级" English="" French="" Spanish="" />
+	<Object Id="Desc_Item_machinegun_1" Chinese="麦肯锡机枪·一级" English="" French="" Spanish="" />
+	<Object Id="Desc_Item_machinegun_2" Chinese="麦肯锡机枪·二级" English="" French="" Spanish="" />
+	<Object Id="Desc_Item_machinegun_3" Chinese="麦肯锡机枪·三级" English="" French="" Spanish="" />
 	<Object Id="Desc_Item_mortar_1" Chinese="迫击炮·一级" English="" French="" Spanish="" />
 	<Object Id="Desc_Item_mortar_2" Chinese="迫击炮·二级" English="" French="" Spanish="" />
 	<Object Id="Desc_Item_mortar_3" Chinese="迫击炮·三级" English="" French="" Spanish="" />
@@ -77,9 +80,6 @@ Although they lack wisdom, but they very luckly which often double or even three
 	<Object Id="Desc_Item_radar_1" Chinese="雷达·一级 - 启动需要消耗能源 50点每小时，工会驻地的最佳防御武器，可探测6米内的隐形单位，如探测到敌对单位，将自动召唤6米内的火箭导弹进行攻击" English="" French="" Spanish="" />
 	<Object Id="Desc_Item_radar_2" Chinese="雷达·二级 - 启动需要消耗能源 100点每小时，工会驻地的最佳防御武器，可探测10米内的隐形单位，如探测到敌对单位，将自动召唤10米内直升机(如有)进行攻击" English="" French="" Spanish="" />
 	<Object Id="Desc_Item_radar_3" Chinese="雷达·三级 - 启动需要消耗能源 200点每小时，工会驻地的最佳防御武器，可探测15米内的隐形单位，如探测到敌对单位，将自动召唤15米内的战斗飞船(如有)进行攻击" English="" French="" Spanish="" />
-	<Object Id="Desc_Item_rcopter_1" Chinese="武装直升机·一级" English="" French="" Spanish="" />
-	<Object Id="Desc_Item_rcopter_2" Chinese="武装直升机·二级" English="" French="" Spanish="" />
-	<Object Id="Desc_Item_rcopter_3" Chinese="武装直升机·三级" English="" French="" Spanish="" />
 	<Object Id="Desc_Item_rocket_1" Chinese="火箭·一级" English="" French="" Spanish="" />
 	<Object Id="Desc_Item_rocket_2" Chinese="火箭·二级" English="" French="" Spanish="" />
 	<Object Id="Desc_Item_rocket_3" Chinese="火箭·三级" English="" French="" Spanish="" />
@@ -141,12 +141,6 @@ Although they lack wisdom, but they very luckly which often double or even three
 	<Object Id="LPID_SP" Chinese="体力" English="Langage_6" French="" Spanish="" />
 	<Object Id="LPID_SPREGEN" Chinese="体力回复" English="Langage_8" French="" Spanish="" />
 	<Object Id="LPID_SUCKBLOOD" Chinese="吸血" English="Langage_1" French="" Spanish="" />
-	<Object Id="Langage_Comm_1" Chinese="确认" English="Langage_1" French="" Spanish="" />
-	<Object Id="Langage_Comm_2" Chinese="取消" English="Langage_2" French="" Spanish="" />
-	<Object Id="Langage_Comm_3" Chinese="登录" English="Langage_3" French="" Spanish="" />
-	<Object Id="Langage_Comm_4" Chinese="创建角色" English="Langage_4" French="" Spanish="" />
-	<Object Id="Langage_Comm_5" Chinese="进入游戏" English="Langage_5" French="" Spanish="" />
-	<Object Id="Langage_Comm_6" Chinese="中文_6" English="Langage_6" French="" Spanish="" />
 	<Object Id="NameID_ATK_Water" Chinese="攻击药水" English="" French="" Spanish="" />
 	<Object Id="NameID_Avoid_Def_Water" Chinese="防御药水" English="" French="" Spanish="" />
 	<Object Id="NameID_Card_Dwarf_Warrior" Chinese="矮人·英雄卷轴" English="" French="" Spanish="" />
@@ -181,9 +175,12 @@ Although they lack wisdom, but they very luckly which often double or even three
 	<Object Id="Name_Item_bomb_1" Chinese="炸弹·一级" English="" French="" Spanish="" />
 	<Object Id="Name_Item_bomb_2" Chinese="炸弹·二级" English="" French="" Spanish="" />
 	<Object Id="Name_Item_bomb_3" Chinese="炸弹·三级" English="" French="" Spanish="" />
-	<Object Id="Name_Item_connon_1" Chinese="加农炮·一级" English="" French="" Spanish="" />
-	<Object Id="Name_Item_connon_2" Chinese="加农炮·二级" English="" French="" Spanish="" />
-	<Object Id="Name_Item_connon_3" Chinese="加农炮·三级" English="" French="" Spanish="" />
+	<Object Id="Name_Item_cannon_1" Chinese="加农炮·一级" English="" French="" Spanish="" />
+	<Object Id="Name_Item_cannon_2" Chinese="加农炮·二级" English="" French="" Spanish="" />
+	<Object Id="Name_Item_cannon_3" Chinese="加农炮·三级" English="" French="" Spanish="" />
+	<Object Id="Name_Item_copter_1" Chinese="直升机·一级" English="" French="" Spanish="" />
+	<Object Id="Name_Item_copter_2" Chinese="直升机·二级" English="" French="" Spanish="" />
+	<Object Id="Name_Item_copter_3" Chinese="直升机·三级" English="" French="" Spanish="" />
 	<Object Id="Name_Item_crystal_1" Chinese="警戒塔·一级" English="" French="" Spanish="" />
 	<Object Id="Name_Item_crystal_2" Chinese="警戒塔·二级" English="" French="" Spanish="" />
 	<Object Id="Name_Item_crystal_3" Chinese="警戒塔·三级" English="" French="" Spanish="" />
@@ -214,9 +211,9 @@ Although they lack wisdom, but they very luckly which often double or even three
 	<Object Id="Name_Item_laser_1" Chinese="镭射激光器·一级" English="" French="" Spanish="" />
 	<Object Id="Name_Item_laser_2" Chinese="镭射激光器·二级" English="" French="" Spanish="" />
 	<Object Id="Name_Item_laser_3" Chinese="镭射激光器·三级" English="" French="" Spanish="" />
-	<Object Id="Name_Item_macginegun_1" Chinese="麦肯锡机枪·一级" English="" French="" Spanish="" />
-	<Object Id="Name_Item_macginegun_2" Chinese="麦肯锡机枪·二级" English="" French="" Spanish="" />
-	<Object Id="Name_Item_macginegun_3" Chinese="麦肯锡机枪·三级" English="" French="" Spanish="" />
+	<Object Id="Name_Item_machinegun_1" Chinese="麦肯锡机枪·一级" English="" French="" Spanish="" />
+	<Object Id="Name_Item_machinegun_2" Chinese="麦肯锡机枪·二级" English="" French="" Spanish="" />
+	<Object Id="Name_Item_machinegun_3" Chinese="麦肯锡机枪·三级" English="" French="" Spanish="" />
 	<Object Id="Name_Item_mortar_1" Chinese="迫击炮·一级" English="" French="" Spanish="" />
 	<Object Id="Name_Item_mortar_2" Chinese="迫击炮·二级" English="" French="" Spanish="" />
 	<Object Id="Name_Item_mortar_3" Chinese="迫击炮·三级" English="" French="" Spanish="" />
@@ -226,9 +223,6 @@ Although they lack wisdom, but they very luckly which often double or even three
 	<Object Id="Name_Item_radar_1" Chinese="雷达·一级" English="" French="" Spanish="" />
 	<Object Id="Name_Item_radar_2" Chinese="雷达·二级" English="" French="" Spanish="" />
 	<Object Id="Name_Item_radar_3" Chinese="雷达·三级" English="" French="" Spanish="" />
-	<Object Id="Name_Item_rcopter_1" Chinese="直升机·一级" English="" French="" Spanish="" />
-	<Object Id="Name_Item_rcopter_2" Chinese="直升机·二级" English="" French="" Spanish="" />
-	<Object Id="Name_Item_rcopter_3" Chinese="直升机·三级" English="" French="" Spanish="" />
 	<Object Id="Name_Item_rocket_1" Chinese="火箭·一级" English="" French="" Spanish="" />
 	<Object Id="Name_Item_rocket_2" Chinese="火箭·二级" English="" French="" Spanish="" />
 	<Object Id="Name_Item_rocket_3" Chinese="火箭·三级" English="" French="" Spanish="" />
@@ -247,4 +241,9 @@ Although they lack wisdom, but they very luckly which often double or even three
 	<Object Id="Name_Item_x_bow_1" Chinese="穿刺弩·一级" English="" French="" Spanish="" />
 	<Object Id="Name_Item_x_bow_2" Chinese="穿刺弩·二级" English="" French="" Spanish="" />
 	<Object Id="Name_Item_x_bow_3" Chinese="穿刺弩·三级" English="" French="" Spanish="" />
+	<Object Id="ui_OK" Chinese="确认" English="OK" French="" Spanish="" />
+	<Object Id="ui_cancel" Chinese="取消" English="CANCEL" French="" Spanish="" />
+	<Object Id="ui_cn" Chinese="中文" English="Chinese" French="" Spanish="" />
+	<Object Id="ui_enter" Chinese="进入游戏" English="Enter" French="" Spanish="" />
+	<Object Id="ui_login" Chinese="登录" English="Login" French="" Spanish="" />
 </XML>

@@ -13,7 +13,7 @@
 		<Property Id="Account" Cache="1" Desc="玩家的帐号" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="string" Upload="0" />
 		<Property Id="BUFF_GATE" Cache="0" Desc="BUFF免疫开关" Force="0" Private="1" Public="1" Ref="0" Save="0" Type="int" Upload="0" />
 		<Property Id="CRITICAL" Cache="0" Desc="暴击" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="int" Upload="0" />
-		<Property Id="Camp" Cache="1" Desc="阵营" Force="0" Private="1" Public="1" Ref="0" Save="0" Type="int" Upload="0" />
+		<Property Id="Camp" Cache="1" Desc="阵营" Force="0" Private="1" Public="1" Ref="0" Save="0" Type="object" Upload="0" />
 		<Property Id="Clan_AD" Cache="0" Desc="工会公告" Force="0" Private="1" Public="1" Ref="0" Save="0" Type="string" Upload="0" />
 		<Property Id="Clan_ContinueDay" Cache="0" Desc="工会霸占排行榜天数" Force="0" Private="1" Public="1" Ref="0" Save="0" Type="int" Upload="0" />
 		<Property Id="Clan_CreateTime" Cache="0" Desc="公会创建时间" Force="0" Private="1" Public="1" Ref="0" Save="0" Type="int" Upload="0" />
@@ -159,7 +159,7 @@
 			<Col Type ="int"	Tag="ElementLevel4_ICE"/>
 			<Col Type ="int"	Tag="ElementLevel5_POISON"/>
 		</Record>
-		<Record Id="BagItemList" Cache="1"	 Col="5"	 Force="0"	 Private="1"	 Public="0"	 Ref="0"	 Row="128"	 Save="0"	 Upload="0"	 >
+		<Record Id="BagItemList" Cache="1"	 Col="5"	 Force="0"	 Private="1"	 Public="0"	 Ref="0"	 Row="512"	 Save="0"	 Upload="0"	 >
 			<Col Type ="string"	Tag="ConfigID"/><!--- Desc-->
 			<Col Type ="int"	Tag="ItemCount"/><!--- 普通背包-->
 			<Col Type ="int"	Tag="Bound"/>
