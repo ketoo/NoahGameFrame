@@ -413,13 +413,7 @@ bool NFHeroModule::ReliveHero(const NFGUID & self, const NFGUID & xHeroID, const
 			return false;
 		}
 
-		int nValueRow = pHeroValueRecord->FindObject(NFrame::Player::PlayerHero::GUID, xHeroID);
-		if (nValueRow < 0)
-		{
-			return false;
-		}
-
-		const int nMaxHP = pHeroValueRecord->GetInt(nValueRow, NFrame::Player::HeroValue::MAXHP);
+		const int nMaxHP = pHeroValueRecord->GetInt(nRow, NFrame::Player::HeroValue::MAXHP);
 
 		pHeroRecord->SetInt(nRow, NFrame::Player::PlayerHero::ReliveTime, 0);
 		pHeroRecord->SetInt(nRow, NFrame::Player::PlayerHero::HP, nMaxHP);

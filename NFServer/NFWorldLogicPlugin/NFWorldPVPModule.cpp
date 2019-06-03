@@ -210,9 +210,9 @@ bool NFWorldPVPModule::ProcessOpponentData(const NFGUID& opponent, NFMsg::AckSea
 			NFGUID xHero1(vValueList.at(12));
 			NFGUID xHero2(vValueList.at(13));
 			NFGUID xHero3(vValueList.at(14));
-			NFVector3 vec1(vValueList.at(15));
-			NFVector3 vec2(vValueList.at(16));
-			NFVector3 vec3(vValueList.at(17));
+			//NFVector3 vec1(vValueList.at(15));
+			//NFVector3 vec2(vValueList.at(16));
+			//NFVector3 vec3(vValueList.at(17));
 
 			/////
 			xAckData.set_gold(nGold);
@@ -232,9 +232,9 @@ bool NFWorldPVPModule::ProcessOpponentData(const NFGUID& opponent, NFMsg::AckSea
 			xAckData.mutable_hero_id2()->CopyFrom(NFINetModule::NFToPB(xHero2));
 			xAckData.mutable_hero_id3()->CopyFrom(NFINetModule::NFToPB(xHero3));
 
-			xAckData.mutable_hero_pos1()->CopyFrom(NFINetModule::NFToPB(vec1));
-			xAckData.mutable_hero_pos2()->CopyFrom(NFINetModule::NFToPB(vec2));
-			xAckData.mutable_hero_pos3()->CopyFrom(NFINetModule::NFToPB(vec3));
+			xAckData.mutable_hero_pos1()->CopyFrom(NFINetModule::NFToPB(NFVector3()));
+			xAckData.mutable_hero_pos2()->CopyFrom(NFINetModule::NFToPB(NFVector3()));
+			xAckData.mutable_hero_pos3()->CopyFrom(NFINetModule::NFToPB(NFVector3()));
 
 			xAckData.mutable_opponent()->CopyFrom(NFINetModule::NFToPB(opponent));
 
@@ -246,11 +246,11 @@ bool NFWorldPVPModule::ProcessOpponentData(const NFGUID& opponent, NFMsg::AckSea
 			stream << " diamond: " << nDiamond;
 			stream << " gold: " << nGold;
 			stream << " hero1: " << strHero1CnfID;
-			stream << " pos: " << vec1.ToString();
+			//stream << " pos: " << vec1.ToString();
 			stream << " hero2: " << strHero2CnfID;
-			stream << " pos: " << vec2.ToString();
+			//stream << " pos: " << vec2.ToString();
 			stream << " hero3: " << strHero3CnfID;
-			stream << " pos: " << vec3.ToString();
+			//stream << " pos: " << vec3.ToString();
 
 			m_pLogModule->LogInfo(stream);
 			return true;
