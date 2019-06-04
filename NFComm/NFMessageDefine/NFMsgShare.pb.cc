@@ -34,6 +34,7 @@ extern PROTOBUF_INTERNAL_EXPORT_protobuf_NFMsgShare_2eproto ::google::protobuf::
 extern PROTOBUF_INTERNAL_EXPORT_protobuf_NFMsgShare_2eproto ::google::protobuf::internal::SCCInfo<1> scc_info_PlayerEntryInfo;
 extern PROTOBUF_INTERNAL_EXPORT_protobuf_NFMsgShare_2eproto ::google::protobuf::internal::SCCInfo<1> scc_info_TileBuilding;
 extern PROTOBUF_INTERNAL_EXPORT_protobuf_NFMsgShare_2eproto ::google::protobuf::internal::SCCInfo<1> scc_info_TileNPC;
+extern PROTOBUF_INTERNAL_EXPORT_protobuf_NFMsgShare_2eproto ::google::protobuf::internal::SCCInfo<2> scc_info_ReqAddSceneBuilding;
 extern PROTOBUF_INTERNAL_EXPORT_protobuf_NFMsgShare_2eproto ::google::protobuf::internal::SCCInfo<3> scc_info_AckMiningTitle;
 }  // namespace protobuf_NFMsgShare_2eproto
 namespace NFMsg {
@@ -167,6 +168,21 @@ class ReqCompeleteTaskDefaultTypeInternal {
   ::google::protobuf::internal::ExplicitlyConstructed<ReqCompeleteTask>
       _instance;
 } _ReqCompeleteTask_default_instance_;
+class ReqAddSceneBuildingDefaultTypeInternal {
+ public:
+  ::google::protobuf::internal::ExplicitlyConstructed<ReqAddSceneBuilding>
+      _instance;
+} _ReqAddSceneBuilding_default_instance_;
+class ReqSceneBuildingsDefaultTypeInternal {
+ public:
+  ::google::protobuf::internal::ExplicitlyConstructed<ReqSceneBuildings>
+      _instance;
+} _ReqSceneBuildings_default_instance_;
+class AckSceneBuildingsDefaultTypeInternal {
+ public:
+  ::google::protobuf::internal::ExplicitlyConstructed<AckSceneBuildings>
+      _instance;
+} _AckSceneBuildings_default_instance_;
 class ReqAckJoinActivityDefaultTypeInternal {
  public:
   ::google::protobuf::internal::ExplicitlyConstructed<ReqAckJoinActivity>
@@ -694,6 +710,52 @@ static void InitDefaultsReqCompeleteTask() {
 LIBPROTOC_EXPORT ::google::protobuf::internal::SCCInfo<0> scc_info_ReqCompeleteTask =
     {{ATOMIC_VAR_INIT(::google::protobuf::internal::SCCInfoBase::kUninitialized), 0, InitDefaultsReqCompeleteTask}, {}};
 
+static void InitDefaultsReqAddSceneBuilding() {
+  GOOGLE_PROTOBUF_VERIFY_VERSION;
+
+  {
+    void* ptr = &::NFMsg::_ReqAddSceneBuilding_default_instance_;
+    new (ptr) ::NFMsg::ReqAddSceneBuilding();
+    ::google::protobuf::internal::OnShutdownDestroyMessage(ptr);
+  }
+  ::NFMsg::ReqAddSceneBuilding::InitAsDefaultInstance();
+}
+
+LIBPROTOC_EXPORT ::google::protobuf::internal::SCCInfo<2> scc_info_ReqAddSceneBuilding =
+    {{ATOMIC_VAR_INIT(::google::protobuf::internal::SCCInfoBase::kUninitialized), 2, InitDefaultsReqAddSceneBuilding}, {
+      &protobuf_NFMsgBase_2eproto::scc_info_Vector3.base,
+      &protobuf_NFMsgBase_2eproto::scc_info_Ident.base,}};
+
+static void InitDefaultsReqSceneBuildings() {
+  GOOGLE_PROTOBUF_VERIFY_VERSION;
+
+  {
+    void* ptr = &::NFMsg::_ReqSceneBuildings_default_instance_;
+    new (ptr) ::NFMsg::ReqSceneBuildings();
+    ::google::protobuf::internal::OnShutdownDestroyMessage(ptr);
+  }
+  ::NFMsg::ReqSceneBuildings::InitAsDefaultInstance();
+}
+
+LIBPROTOC_EXPORT ::google::protobuf::internal::SCCInfo<1> scc_info_ReqSceneBuildings =
+    {{ATOMIC_VAR_INIT(::google::protobuf::internal::SCCInfoBase::kUninitialized), 1, InitDefaultsReqSceneBuildings}, {
+      &protobuf_NFMsgBase_2eproto::scc_info_Vector3.base,}};
+
+static void InitDefaultsAckSceneBuildings() {
+  GOOGLE_PROTOBUF_VERIFY_VERSION;
+
+  {
+    void* ptr = &::NFMsg::_AckSceneBuildings_default_instance_;
+    new (ptr) ::NFMsg::AckSceneBuildings();
+    ::google::protobuf::internal::OnShutdownDestroyMessage(ptr);
+  }
+  ::NFMsg::AckSceneBuildings::InitAsDefaultInstance();
+}
+
+LIBPROTOC_EXPORT ::google::protobuf::internal::SCCInfo<1> scc_info_AckSceneBuildings =
+    {{ATOMIC_VAR_INIT(::google::protobuf::internal::SCCInfoBase::kUninitialized), 1, InitDefaultsAckSceneBuildings}, {
+      &protobuf_NFMsgShare_2eproto::scc_info_ReqAddSceneBuilding.base,}};
+
 static void InitDefaultsReqAckJoinActivity() {
   GOOGLE_PROTOBUF_VERIFY_VERSION;
 
@@ -1143,6 +1205,9 @@ void InitDefaults() {
   ::google::protobuf::internal::InitSCC(&scc_info_ReqPickDropItem.base);
   ::google::protobuf::internal::InitSCC(&scc_info_ReqAcceptTask.base);
   ::google::protobuf::internal::InitSCC(&scc_info_ReqCompeleteTask.base);
+  ::google::protobuf::internal::InitSCC(&scc_info_ReqAddSceneBuilding.base);
+  ::google::protobuf::internal::InitSCC(&scc_info_ReqSceneBuildings.base);
+  ::google::protobuf::internal::InitSCC(&scc_info_AckSceneBuildings.base);
   ::google::protobuf::internal::InitSCC(&scc_info_ReqAckJoinActivity.base);
   ::google::protobuf::internal::InitSCC(&scc_info_ReqAckCreateClan.base);
   ::google::protobuf::internal::InitSCC(&scc_info_ReqSearchClan.base);
@@ -1173,7 +1238,7 @@ void InitDefaults() {
   ::google::protobuf::internal::InitSCC(&scc_info_AckCreatePVPEctype.base);
 }
 
-::google::protobuf::Metadata file_level_metadata[54];
+::google::protobuf::Metadata file_level_metadata[57];
 const ::google::protobuf::EnumDescriptor* file_level_enum_descriptors[9];
 
 const ::google::protobuf::uint32 TableStruct::offsets[] GOOGLE_PROTOBUF_ATTRIBUTE_SECTION_VARIABLE(protodesc_cold) = {
@@ -1391,6 +1456,29 @@ const ::google::protobuf::uint32 TableStruct::offsets[] GOOGLE_PROTOBUF_ATTRIBUT
   ~0u,  // no _oneof_case_
   ~0u,  // no _weak_field_map_
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NFMsg::ReqCompeleteTask, task_id_),
+  ~0u,  // no _has_bits_
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NFMsg::ReqAddSceneBuilding, _internal_metadata_),
+  ~0u,  // no _extensions_
+  ~0u,  // no _oneof_case_
+  ~0u,  // no _weak_field_map_
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NFMsg::ReqAddSceneBuilding, pos_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NFMsg::ReqAddSceneBuilding, guid_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NFMsg::ReqAddSceneBuilding, master_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NFMsg::ReqAddSceneBuilding, config_id_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NFMsg::ReqAddSceneBuilding, scene_id_),
+  ~0u,  // no _has_bits_
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NFMsg::ReqSceneBuildings, _internal_metadata_),
+  ~0u,  // no _extensions_
+  ~0u,  // no _oneof_case_
+  ~0u,  // no _weak_field_map_
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NFMsg::ReqSceneBuildings, scene_id_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NFMsg::ReqSceneBuildings, pos_),
+  ~0u,  // no _has_bits_
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NFMsg::AckSceneBuildings, _internal_metadata_),
+  ~0u,  // no _extensions_
+  ~0u,  // no _oneof_case_
+  ~0u,  // no _weak_field_map_
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NFMsg::AckSceneBuildings, buildings_),
   ~0u,  // no _has_bits_
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NFMsg::ReqAckJoinActivity, _internal_metadata_),
   ~0u,  // no _extensions_
@@ -1664,34 +1752,37 @@ static const ::google::protobuf::internal::MigrationSchema schemas[] GOOGLE_PROT
   { 196, -1, sizeof(::NFMsg::ReqPickDropItem)},
   { 202, -1, sizeof(::NFMsg::ReqAcceptTask)},
   { 208, -1, sizeof(::NFMsg::ReqCompeleteTask)},
-  { 214, -1, sizeof(::NFMsg::ReqAckJoinActivity)},
-  { 221, -1, sizeof(::NFMsg::ReqAckCreateClan)},
-  { 228, -1, sizeof(::NFMsg::ReqSearchClan)},
-  { 234, -1, sizeof(::NFMsg::AckSearchClan_SearchClanObject)},
-  { 246, -1, sizeof(::NFMsg::AckSearchClan)},
-  { 252, -1, sizeof(::NFMsg::ReqAckJoinClan)},
-  { 259, -1, sizeof(::NFMsg::ReqAckLeaveClan)},
-  { 266, -1, sizeof(::NFMsg::ReqAckOprClanMember)},
-  { 274, -1, sizeof(::NFMsg::ReqEnterClanEctype)},
-  { 280, -1, sizeof(::NFMsg::ReqSetFightHero)},
-  { 287, -1, sizeof(::NFMsg::ReqSwitchFightHero)},
-  { 293, -1, sizeof(::NFMsg::ReqBuyItemFromShop)},
-  { 300, -1, sizeof(::NFMsg::ReqAddGambleValue)},
-  { 307, -1, sizeof(::NFMsg::ReqMiningTitle)},
-  { 315, -1, sizeof(::NFMsg::TileState)},
-  { 323, -1, sizeof(::NFMsg::TileBuilding)},
-  { 332, -1, sizeof(::NFMsg::TileNPC)},
-  { 341, -1, sizeof(::NFMsg::AckMiningTitle)},
-  { 349, -1, sizeof(::NFMsg::ReqSearchOppnent)},
-  { 355, -1, sizeof(::NFMsg::AckSearchOppnent)},
-  { 381, -1, sizeof(::NFMsg::ReqSendMail)},
-  { 389, -1, sizeof(::NFMsg::ReqSwitchServer)},
-  { 401, -1, sizeof(::NFMsg::AckSwitchServer)},
-  { 410, -1, sizeof(::NFMsg::PVPRoomInfo)},
-  { 425, -1, sizeof(::NFMsg::ReqPVPApplyMatch)},
-  { 435, -1, sizeof(::NFMsg::AckPVPApplyMatch)},
-  { 444, -1, sizeof(::NFMsg::ReqCreatePVPEctype)},
-  { 451, -1, sizeof(::NFMsg::AckCreatePVPEctype)},
+  { 214, -1, sizeof(::NFMsg::ReqAddSceneBuilding)},
+  { 224, -1, sizeof(::NFMsg::ReqSceneBuildings)},
+  { 231, -1, sizeof(::NFMsg::AckSceneBuildings)},
+  { 237, -1, sizeof(::NFMsg::ReqAckJoinActivity)},
+  { 244, -1, sizeof(::NFMsg::ReqAckCreateClan)},
+  { 251, -1, sizeof(::NFMsg::ReqSearchClan)},
+  { 257, -1, sizeof(::NFMsg::AckSearchClan_SearchClanObject)},
+  { 269, -1, sizeof(::NFMsg::AckSearchClan)},
+  { 275, -1, sizeof(::NFMsg::ReqAckJoinClan)},
+  { 282, -1, sizeof(::NFMsg::ReqAckLeaveClan)},
+  { 289, -1, sizeof(::NFMsg::ReqAckOprClanMember)},
+  { 297, -1, sizeof(::NFMsg::ReqEnterClanEctype)},
+  { 303, -1, sizeof(::NFMsg::ReqSetFightHero)},
+  { 310, -1, sizeof(::NFMsg::ReqSwitchFightHero)},
+  { 316, -1, sizeof(::NFMsg::ReqBuyItemFromShop)},
+  { 323, -1, sizeof(::NFMsg::ReqAddGambleValue)},
+  { 330, -1, sizeof(::NFMsg::ReqMiningTitle)},
+  { 338, -1, sizeof(::NFMsg::TileState)},
+  { 346, -1, sizeof(::NFMsg::TileBuilding)},
+  { 355, -1, sizeof(::NFMsg::TileNPC)},
+  { 364, -1, sizeof(::NFMsg::AckMiningTitle)},
+  { 372, -1, sizeof(::NFMsg::ReqSearchOppnent)},
+  { 378, -1, sizeof(::NFMsg::AckSearchOppnent)},
+  { 404, -1, sizeof(::NFMsg::ReqSendMail)},
+  { 412, -1, sizeof(::NFMsg::ReqSwitchServer)},
+  { 424, -1, sizeof(::NFMsg::AckSwitchServer)},
+  { 433, -1, sizeof(::NFMsg::PVPRoomInfo)},
+  { 448, -1, sizeof(::NFMsg::ReqPVPApplyMatch)},
+  { 458, -1, sizeof(::NFMsg::AckPVPApplyMatch)},
+  { 467, -1, sizeof(::NFMsg::ReqCreatePVPEctype)},
+  { 474, -1, sizeof(::NFMsg::AckCreatePVPEctype)},
 };
 
 static ::google::protobuf::Message const * const file_default_instances[] = {
@@ -1721,6 +1812,9 @@ static ::google::protobuf::Message const * const file_default_instances[] = {
   reinterpret_cast<const ::google::protobuf::Message*>(&::NFMsg::_ReqPickDropItem_default_instance_),
   reinterpret_cast<const ::google::protobuf::Message*>(&::NFMsg::_ReqAcceptTask_default_instance_),
   reinterpret_cast<const ::google::protobuf::Message*>(&::NFMsg::_ReqCompeleteTask_default_instance_),
+  reinterpret_cast<const ::google::protobuf::Message*>(&::NFMsg::_ReqAddSceneBuilding_default_instance_),
+  reinterpret_cast<const ::google::protobuf::Message*>(&::NFMsg::_ReqSceneBuildings_default_instance_),
+  reinterpret_cast<const ::google::protobuf::Message*>(&::NFMsg::_AckSceneBuildings_default_instance_),
   reinterpret_cast<const ::google::protobuf::Message*>(&::NFMsg::_ReqAckJoinActivity_default_instance_),
   reinterpret_cast<const ::google::protobuf::Message*>(&::NFMsg::_ReqAckCreateClan_default_instance_),
   reinterpret_cast<const ::google::protobuf::Message*>(&::NFMsg::_ReqSearchClan_default_instance_),
@@ -1766,7 +1860,7 @@ void protobuf_AssignDescriptorsOnce() {
 void protobuf_RegisterTypes(const ::std::string&) GOOGLE_PROTOBUF_ATTRIBUTE_COLD;
 void protobuf_RegisterTypes(const ::std::string&) {
   protobuf_AssignDescriptorsOnce();
-  ::google::protobuf::internal::RegisterAllTypes(file_level_metadata, 54);
+  ::google::protobuf::internal::RegisterAllTypes(file_level_metadata, 57);
 }
 
 void AddDescriptorsImpl() {
@@ -1847,95 +1941,102 @@ void AddDescriptorsImpl() {
       "\021.NFMsg.ItemStruct\"2\n\017ReqPickDropItem\022\037\n"
       "\titem_guid\030\002 \001(\0132\014.NFMsg.Ident\" \n\rReqAcc"
       "eptTask\022\017\n\007task_id\030\001 \001(\014\"#\n\020ReqCompelete"
-      "Task\022\017\n\007task_id\030\001 \001(\014\"\357\001\n\022ReqAckJoinActi"
-      "vity\022B\n\ractivity_type\030\001 \001(\0162+.NFMsg.ReqA"
-      "ckJoinActivity.EGameActivityType\022I\n\021sub_"
-      "activity_type\030\002 \001(\0162..NFMsg.ReqAckJoinAc"
-      "tivity.EGameActivitySubType\"!\n\021EGameActi"
-      "vityType\022\014\n\010EGAT_PVP\020\000\"\'\n\024EGameActivityS"
-      "ubType\022\017\n\013EGAT_NORMAL\020\000\"D\n\020ReqAckCreateC"
+      "Task\022\017\n\007task_id\030\001 \001(\014\"\221\001\n\023ReqAddSceneBui"
+      "lding\022\033\n\003pos\030\001 \001(\0132\016.NFMsg.Vector3\022\032\n\004gu"
+      "id\030\002 \001(\0132\014.NFMsg.Ident\022\034\n\006master\030\003 \001(\0132\014"
+      ".NFMsg.Ident\022\021\n\tconfig_id\030\004 \001(\014\022\020\n\010scene"
+      "_id\030\005 \001(\005\"B\n\021ReqSceneBuildings\022\020\n\010scene_"
+      "id\030\001 \001(\005\022\033\n\003pos\030\002 \001(\0132\016.NFMsg.Vector3\"B\n"
+      "\021AckSceneBuildings\022-\n\tbuildings\030\001 \003(\0132\032."
+      "NFMsg.ReqAddSceneBuilding\"\357\001\n\022ReqAckJoin"
+      "Activity\022B\n\ractivity_type\030\001 \001(\0162+.NFMsg."
+      "ReqAckJoinActivity.EGameActivityType\022I\n\021"
+      "sub_activity_type\030\002 \001(\0162..NFMsg.ReqAckJo"
+      "inActivity.EGameActivitySubType\"!\n\021EGame"
+      "ActivityType\022\014\n\010EGAT_PVP\020\000\"\'\n\024EGameActiv"
+      "itySubType\022\017\n\013EGAT_NORMAL\020\000\"D\n\020ReqAckCre"
+      "ateClan\022\035\n\007clan_id\030\001 \001(\0132\014.NFMsg.Ident\022\021"
+      "\n\tclan_name\030\002 \001(\014\"\"\n\rReqSearchClan\022\021\n\tcl"
+      "an_name\030\001 \001(\014\"\204\002\n\rAckSearchClan\0228\n\tclan_"
+      "list\030\001 \003(\0132%.NFMsg.AckSearchClan.SearchC"
+      "lanObject\032\270\001\n\020SearchClanObject\022\035\n\007clan_I"
+      "D\030\001 \001(\0132\014.NFMsg.Ident\022\021\n\tclan_name\030\002 \001(\014"
+      "\022\021\n\tclan_icon\030\003 \001(\014\022\031\n\021clan_member_count"
+      "\030\004 \001(\005\022\035\n\025clan_member_max_count\030\005 \001(\005\022\022\n"
+      "\nclan_honor\030\006 \001(\005\022\021\n\tclan_rank\030\007 \001(\005\"B\n\016"
+      "ReqAckJoinClan\022\035\n\007clan_id\030\001 \001(\0132\014.NFMsg."
+      "Ident\022\021\n\tclan_name\030\002 \001(\014\"C\n\017ReqAckLeaveC"
       "lan\022\035\n\007clan_id\030\001 \001(\0132\014.NFMsg.Ident\022\021\n\tcl"
-      "an_name\030\002 \001(\014\"\"\n\rReqSearchClan\022\021\n\tclan_n"
-      "ame\030\001 \001(\014\"\204\002\n\rAckSearchClan\0228\n\tclan_list"
-      "\030\001 \003(\0132%.NFMsg.AckSearchClan.SearchClanO"
-      "bject\032\270\001\n\020SearchClanObject\022\035\n\007clan_ID\030\001 "
-      "\001(\0132\014.NFMsg.Ident\022\021\n\tclan_name\030\002 \001(\014\022\021\n\t"
-      "clan_icon\030\003 \001(\014\022\031\n\021clan_member_count\030\004 \001"
-      "(\005\022\035\n\025clan_member_max_count\030\005 \001(\005\022\022\n\ncla"
-      "n_honor\030\006 \001(\005\022\021\n\tclan_rank\030\007 \001(\005\"B\n\016ReqA"
-      "ckJoinClan\022\035\n\007clan_id\030\001 \001(\0132\014.NFMsg.Iden"
-      "t\022\021\n\tclan_name\030\002 \001(\014\"C\n\017ReqAckLeaveClan\022"
-      "\035\n\007clan_id\030\001 \001(\0132\014.NFMsg.Ident\022\021\n\tclan_n"
-      "ame\030\002 \001(\014\"\325\001\n\023ReqAckOprClanMember\022\035\n\007cla"
-      "n_id\030\001 \001(\0132\014.NFMsg.Ident\022\037\n\tmember_id\030\002 "
-      "\001(\0132\014.NFMsg.Ident\022<\n\004type\030\003 \001(\0162..NFMsg."
-      "ReqAckOprClanMember.EGClanMemberOprType\""
-      "@\n\023EGClanMemberOprType\022\r\n\tEGAT_DOWN\020\000\022\013\n"
-      "\007EGAT_UP\020\001\022\r\n\tEGAT_KICK\020\002\"3\n\022ReqEnterCla"
-      "nEctype\022\035\n\007clan_id\030\001 \001(\0132\014.NFMsg.Ident\"<"
-      "\n\017ReqSetFightHero\022\034\n\006Heroid\030\001 \001(\0132\014.NFMs"
-      "g.Ident\022\013\n\003Set\030\002 \001(\005\"2\n\022ReqSwitchFightHe"
-      "ro\022\034\n\006Heroid\030\001 \001(\0132\014.NFMsg.Ident\"3\n\022ReqB"
-      "uyItemFromShop\022\016\n\006itemID\030\001 \001(\014\022\r\n\005count\030"
-      "\002 \001(\005\"5\n\021ReqAddGambleValue\022\020\n\010property\030\001"
-      " \001(\014\022\016\n\006number\030\002 \001(\005\"3\n\016ReqMiningTitle\022\t"
-      "\n\001x\030\001 \001(\005\022\t\n\001y\030\002 \001(\005\022\013\n\003opr\030\003 \001(\005\".\n\tTil"
-      "eState\022\t\n\001x\030\001 \001(\005\022\t\n\001y\030\002 \001(\005\022\013\n\003opr\030\003 \001("
-      "\005\"R\n\014TileBuilding\022\t\n\001x\030\001 \001(\005\022\t\n\001y\030\002 \001(\005\022"
-      "\020\n\010configID\030\003 \001(\014\022\032\n\004guid\030\004 \001(\0132\014.NFMsg."
-      "Ident\"M\n\007TileNPC\022\t\n\001x\030\001 \001(\005\022\t\n\001y\030\002 \001(\005\022\020"
-      "\n\010configID\030\003 \001(\014\022\032\n\004guid\030\004 \001(\0132\014.NFMsg.I"
-      "dent\"t\n\016AckMiningTitle\022\036\n\004tile\030\001 \003(\0132\020.N"
-      "FMsg.TileState\022%\n\010building\030\002 \003(\0132\023.NFMsg"
-      ".TileBuilding\022\033\n\003npc\030\003 \003(\0132\016.NFMsg.TileN"
-      "PC\"&\n\020ReqSearchOppnent\022\022\n\nself_scene\030\001 \001"
-      "(\005\"\377\003\n\020AckSearchOppnent\022\020\n\010scene_id\030\001 \001("
-      "\005\022\014\n\004gold\030\002 \001(\005\022\017\n\007diamond\030\003 \001(\005\022\r\n\005leve"
-      "l\030\004 \001(\005\022\013\n\003cup\030\005 \001(\005\022\014\n\004name\030\006 \001(\014\022\014\n\004he"
-      "ad\030\007 \001(\014\022\021\n\thero_cnf1\030\010 \001(\014\022\022\n\nhero_star"
-      "1\030\t \001(\005\022\021\n\thero_cnf2\030\n \001(\014\022\022\n\nhero_star2"
-      "\030\013 \001(\005\022\021\n\thero_cnf3\030\014 \001(\014\022\022\n\nhero_star3\030"
-      "\r \001(\005\022\036\n\010hero_id1\030\024 \001(\0132\014.NFMsg.Ident\022\036\n"
-      "\010hero_id2\030\025 \001(\0132\014.NFMsg.Ident\022\036\n\010hero_id"
-      "3\030\026 \001(\0132\014.NFMsg.Ident\022!\n\thero_pos1\030\027 \001(\013"
-      "2\016.NFMsg.Vector3\022!\n\thero_pos2\030\030 \001(\0132\016.NF"
-      "Msg.Vector3\022!\n\thero_pos3\030\031 \001(\0132\016.NFMsg.V"
-      "ector3\022$\n\005title\030\036 \001(\0132\025.NFMsg.AckMiningT"
-      "itle\022\036\n\010opponent\030\037 \001(\0132\014.NFMsg.Ident\"\201\001\n"
-      "\013ReqSendMail\022\036\n\010reciever\030\001 \001(\0132\014.NFMsg.I"
-      "dent\022$\n\titem_list\030\002 \003(\0132\021.NFMsg.ItemStru"
-      "ct\022,\n\rcurrency_list\030\003 \003(\0132\025.NFMsg.Curren"
-      "cyStruct\"\271\001\n\017ReqSwitchServer\022\034\n\006selfid\030\001"
-      " \001(\0132\014.NFMsg.Ident\022\025\n\rself_serverid\030\002 \001("
-      "\003\022\027\n\017target_serverid\030\003 \001(\003\022\025\n\rgate_serve"
-      "rid\030\004 \001(\003\022\017\n\007SceneID\030\005 \001(\003\022\037\n\tclient_id\030"
-      "\006 \001(\0132\014.NFMsg.Ident\022\017\n\007groupID\030\007 \001(\003\"v\n\017"
-      "AckSwitchServer\022\034\n\006selfid\030\001 \001(\0132\014.NFMsg."
-      "Ident\022\025\n\rself_serverid\030\002 \001(\003\022\027\n\017target_s"
-      "erverid\030\003 \001(\003\022\025\n\rgate_serverid\030\004 \001(\003\"\361\001\n"
-      "\013PVPRoomInfo\022\023\n\013nCellStatus\030\001 \001(\005\022\034\n\006Roo"
-      "mID\030\002 \001(\0132\014.NFMsg.Ident\022\020\n\010nPVPMode\030\003 \001("
-      "\005\022\021\n\tnPVPGrade\030\004 \001(\005\022\021\n\tMaxPalyer\030\005 \001(\005\022"
-      " \n\nxRedPlayer\030\006 \003(\0132\014.NFMsg.Ident\022!\n\013xBl"
-      "uePlayer\030\007 \003(\0132\014.NFMsg.Ident\022\020\n\010serverid"
-      "\030\010 \001(\003\022\017\n\007SceneID\030\t \001(\003\022\017\n\007groupID\030\n \001(\003"
-      "\"\276\001\n\020ReqPVPApplyMatch\022\035\n\007self_id\030\001 \001(\0132\014"
-      ".NFMsg.Ident\022\020\n\010nPVPMode\030\002 \001(\005\022\r\n\005score\030"
-      "\003 \001(\003\022\021\n\tApplyType\030\004 \001(\005\022\035\n\007team_id\030\005 \001("
-      "\0132\014.NFMsg.Ident\"8\n\nEApplyType\022\025\n\021EApplyT"
-      "ype_Single\020\000\022\023\n\017EApplyType_Team\020\001\"|\n\020Ack"
-      "PVPApplyMatch\022\035\n\007self_id\030\001 \001(\0132\014.NFMsg.I"
-      "dent\022%\n\txRoomInfo\030\002 \001(\0132\022.NFMsg.PVPRoomI"
-      "nfo\022\021\n\tApplyType\030\003 \001(\005\022\017\n\007nResult\030\004 \001(\005\""
-      "Z\n\022ReqCreatePVPEctype\022\035\n\007self_id\030\001 \001(\0132\014"
-      ".NFMsg.Ident\022%\n\txRoomInfo\030\002 \001(\0132\022.NFMsg."
-      "PVPRoomInfo\"m\n\022AckCreatePVPEctype\022\035\n\007sel"
-      "f_id\030\001 \001(\0132\014.NFMsg.Ident\022%\n\txRoomInfo\030\002 "
-      "\001(\0132\022.NFMsg.PVPRoomInfo\022\021\n\tApplyType\030\003 \001"
-      "(\005b\006proto3"
+      "an_name\030\002 \001(\014\"\325\001\n\023ReqAckOprClanMember\022\035\n"
+      "\007clan_id\030\001 \001(\0132\014.NFMsg.Ident\022\037\n\tmember_i"
+      "d\030\002 \001(\0132\014.NFMsg.Ident\022<\n\004type\030\003 \001(\0162..NF"
+      "Msg.ReqAckOprClanMember.EGClanMemberOprT"
+      "ype\"@\n\023EGClanMemberOprType\022\r\n\tEGAT_DOWN\020"
+      "\000\022\013\n\007EGAT_UP\020\001\022\r\n\tEGAT_KICK\020\002\"3\n\022ReqEnte"
+      "rClanEctype\022\035\n\007clan_id\030\001 \001(\0132\014.NFMsg.Ide"
+      "nt\"<\n\017ReqSetFightHero\022\034\n\006Heroid\030\001 \001(\0132\014."
+      "NFMsg.Ident\022\013\n\003Set\030\002 \001(\005\"2\n\022ReqSwitchFig"
+      "htHero\022\034\n\006Heroid\030\001 \001(\0132\014.NFMsg.Ident\"3\n\022"
+      "ReqBuyItemFromShop\022\016\n\006itemID\030\001 \001(\014\022\r\n\005co"
+      "unt\030\002 \001(\005\"5\n\021ReqAddGambleValue\022\020\n\010proper"
+      "ty\030\001 \001(\014\022\016\n\006number\030\002 \001(\005\"3\n\016ReqMiningTit"
+      "le\022\t\n\001x\030\001 \001(\005\022\t\n\001y\030\002 \001(\005\022\013\n\003opr\030\003 \001(\005\".\n"
+      "\tTileState\022\t\n\001x\030\001 \001(\005\022\t\n\001y\030\002 \001(\005\022\013\n\003opr\030"
+      "\003 \001(\005\"R\n\014TileBuilding\022\t\n\001x\030\001 \001(\005\022\t\n\001y\030\002 "
+      "\001(\005\022\020\n\010configID\030\003 \001(\014\022\032\n\004guid\030\004 \001(\0132\014.NF"
+      "Msg.Ident\"M\n\007TileNPC\022\t\n\001x\030\001 \001(\005\022\t\n\001y\030\002 \001"
+      "(\005\022\020\n\010configID\030\003 \001(\014\022\032\n\004guid\030\004 \001(\0132\014.NFM"
+      "sg.Ident\"t\n\016AckMiningTitle\022\036\n\004tile\030\001 \003(\013"
+      "2\020.NFMsg.TileState\022%\n\010building\030\002 \003(\0132\023.N"
+      "FMsg.TileBuilding\022\033\n\003npc\030\003 \003(\0132\016.NFMsg.T"
+      "ileNPC\"&\n\020ReqSearchOppnent\022\022\n\nself_scene"
+      "\030\001 \001(\005\"\377\003\n\020AckSearchOppnent\022\020\n\010scene_id\030"
+      "\001 \001(\005\022\014\n\004gold\030\002 \001(\005\022\017\n\007diamond\030\003 \001(\005\022\r\n\005"
+      "level\030\004 \001(\005\022\013\n\003cup\030\005 \001(\005\022\014\n\004name\030\006 \001(\014\022\014"
+      "\n\004head\030\007 \001(\014\022\021\n\thero_cnf1\030\010 \001(\014\022\022\n\nhero_"
+      "star1\030\t \001(\005\022\021\n\thero_cnf2\030\n \001(\014\022\022\n\nhero_s"
+      "tar2\030\013 \001(\005\022\021\n\thero_cnf3\030\014 \001(\014\022\022\n\nhero_st"
+      "ar3\030\r \001(\005\022\036\n\010hero_id1\030\024 \001(\0132\014.NFMsg.Iden"
+      "t\022\036\n\010hero_id2\030\025 \001(\0132\014.NFMsg.Ident\022\036\n\010her"
+      "o_id3\030\026 \001(\0132\014.NFMsg.Ident\022!\n\thero_pos1\030\027"
+      " \001(\0132\016.NFMsg.Vector3\022!\n\thero_pos2\030\030 \001(\0132"
+      "\016.NFMsg.Vector3\022!\n\thero_pos3\030\031 \001(\0132\016.NFM"
+      "sg.Vector3\022$\n\005title\030\036 \001(\0132\025.NFMsg.AckMin"
+      "ingTitle\022\036\n\010opponent\030\037 \001(\0132\014.NFMsg.Ident"
+      "\"\201\001\n\013ReqSendMail\022\036\n\010reciever\030\001 \001(\0132\014.NFM"
+      "sg.Ident\022$\n\titem_list\030\002 \003(\0132\021.NFMsg.Item"
+      "Struct\022,\n\rcurrency_list\030\003 \003(\0132\025.NFMsg.Cu"
+      "rrencyStruct\"\271\001\n\017ReqSwitchServer\022\034\n\006self"
+      "id\030\001 \001(\0132\014.NFMsg.Ident\022\025\n\rself_serverid\030"
+      "\002 \001(\003\022\027\n\017target_serverid\030\003 \001(\003\022\025\n\rgate_s"
+      "erverid\030\004 \001(\003\022\017\n\007SceneID\030\005 \001(\003\022\037\n\tclient"
+      "_id\030\006 \001(\0132\014.NFMsg.Ident\022\017\n\007groupID\030\007 \001(\003"
+      "\"v\n\017AckSwitchServer\022\034\n\006selfid\030\001 \001(\0132\014.NF"
+      "Msg.Ident\022\025\n\rself_serverid\030\002 \001(\003\022\027\n\017targ"
+      "et_serverid\030\003 \001(\003\022\025\n\rgate_serverid\030\004 \001(\003"
+      "\"\361\001\n\013PVPRoomInfo\022\023\n\013nCellStatus\030\001 \001(\005\022\034\n"
+      "\006RoomID\030\002 \001(\0132\014.NFMsg.Ident\022\020\n\010nPVPMode\030"
+      "\003 \001(\005\022\021\n\tnPVPGrade\030\004 \001(\005\022\021\n\tMaxPalyer\030\005 "
+      "\001(\005\022 \n\nxRedPlayer\030\006 \003(\0132\014.NFMsg.Ident\022!\n"
+      "\013xBluePlayer\030\007 \003(\0132\014.NFMsg.Ident\022\020\n\010serv"
+      "erid\030\010 \001(\003\022\017\n\007SceneID\030\t \001(\003\022\017\n\007groupID\030\n"
+      " \001(\003\"\276\001\n\020ReqPVPApplyMatch\022\035\n\007self_id\030\001 \001"
+      "(\0132\014.NFMsg.Ident\022\020\n\010nPVPMode\030\002 \001(\005\022\r\n\005sc"
+      "ore\030\003 \001(\003\022\021\n\tApplyType\030\004 \001(\005\022\035\n\007team_id\030"
+      "\005 \001(\0132\014.NFMsg.Ident\"8\n\nEApplyType\022\025\n\021EAp"
+      "plyType_Single\020\000\022\023\n\017EApplyType_Team\020\001\"|\n"
+      "\020AckPVPApplyMatch\022\035\n\007self_id\030\001 \001(\0132\014.NFM"
+      "sg.Ident\022%\n\txRoomInfo\030\002 \001(\0132\022.NFMsg.PVPR"
+      "oomInfo\022\021\n\tApplyType\030\003 \001(\005\022\017\n\007nResult\030\004 "
+      "\001(\005\"Z\n\022ReqCreatePVPEctype\022\035\n\007self_id\030\001 \001"
+      "(\0132\014.NFMsg.Ident\022%\n\txRoomInfo\030\002 \001(\0132\022.NF"
+      "Msg.PVPRoomInfo\"m\n\022AckCreatePVPEctype\022\035\n"
+      "\007self_id\030\001 \001(\0132\014.NFMsg.Ident\022%\n\txRoomInf"
+      "o\030\002 \001(\0132\022.NFMsg.PVPRoomInfo\022\021\n\tApplyType"
+      "\030\003 \001(\005b\006proto3"
   };
   ::google::protobuf::DescriptorPool::InternalAddGeneratedFile(
-      descriptor, 6410);
+      descriptor, 6694);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "NFMsgShare.proto", &protobuf_RegisterTypes);
   ::protobuf_NFDefine_2eproto::AddDescriptors();
@@ -10655,6 +10756,951 @@ void ReqCompeleteTask::InternalSwap(ReqCompeleteTask* other) {
 }
 
 ::google::protobuf::Metadata ReqCompeleteTask::GetMetadata() const {
+  protobuf_NFMsgShare_2eproto::protobuf_AssignDescriptorsOnce();
+  return ::protobuf_NFMsgShare_2eproto::file_level_metadata[kIndexInFileMessages];
+}
+
+
+// ===================================================================
+
+void ReqAddSceneBuilding::InitAsDefaultInstance() {
+  ::NFMsg::_ReqAddSceneBuilding_default_instance_._instance.get_mutable()->pos_ = const_cast< ::NFMsg::Vector3*>(
+      ::NFMsg::Vector3::internal_default_instance());
+  ::NFMsg::_ReqAddSceneBuilding_default_instance_._instance.get_mutable()->guid_ = const_cast< ::NFMsg::Ident*>(
+      ::NFMsg::Ident::internal_default_instance());
+  ::NFMsg::_ReqAddSceneBuilding_default_instance_._instance.get_mutable()->master_ = const_cast< ::NFMsg::Ident*>(
+      ::NFMsg::Ident::internal_default_instance());
+}
+void ReqAddSceneBuilding::clear_pos() {
+  if (GetArenaNoVirtual() == NULL && pos_ != NULL) {
+    delete pos_;
+  }
+  pos_ = NULL;
+}
+void ReqAddSceneBuilding::clear_guid() {
+  if (GetArenaNoVirtual() == NULL && guid_ != NULL) {
+    delete guid_;
+  }
+  guid_ = NULL;
+}
+void ReqAddSceneBuilding::clear_master() {
+  if (GetArenaNoVirtual() == NULL && master_ != NULL) {
+    delete master_;
+  }
+  master_ = NULL;
+}
+#if !defined(_MSC_VER) || _MSC_VER >= 1900
+const int ReqAddSceneBuilding::kPosFieldNumber;
+const int ReqAddSceneBuilding::kGuidFieldNumber;
+const int ReqAddSceneBuilding::kMasterFieldNumber;
+const int ReqAddSceneBuilding::kConfigIdFieldNumber;
+const int ReqAddSceneBuilding::kSceneIdFieldNumber;
+#endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
+
+ReqAddSceneBuilding::ReqAddSceneBuilding()
+  : ::google::protobuf::Message(), _internal_metadata_(NULL) {
+  ::google::protobuf::internal::InitSCC(
+      &protobuf_NFMsgShare_2eproto::scc_info_ReqAddSceneBuilding.base);
+  SharedCtor();
+  // @@protoc_insertion_point(constructor:NFMsg.ReqAddSceneBuilding)
+}
+ReqAddSceneBuilding::ReqAddSceneBuilding(const ReqAddSceneBuilding& from)
+  : ::google::protobuf::Message(),
+      _internal_metadata_(NULL) {
+  _internal_metadata_.MergeFrom(from._internal_metadata_);
+  config_id_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  if (from.config_id().size() > 0) {
+    config_id_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.config_id_);
+  }
+  if (from.has_pos()) {
+    pos_ = new ::NFMsg::Vector3(*from.pos_);
+  } else {
+    pos_ = NULL;
+  }
+  if (from.has_guid()) {
+    guid_ = new ::NFMsg::Ident(*from.guid_);
+  } else {
+    guid_ = NULL;
+  }
+  if (from.has_master()) {
+    master_ = new ::NFMsg::Ident(*from.master_);
+  } else {
+    master_ = NULL;
+  }
+  scene_id_ = from.scene_id_;
+  // @@protoc_insertion_point(copy_constructor:NFMsg.ReqAddSceneBuilding)
+}
+
+void ReqAddSceneBuilding::SharedCtor() {
+  config_id_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  ::memset(&pos_, 0, static_cast<size_t>(
+      reinterpret_cast<char*>(&scene_id_) -
+      reinterpret_cast<char*>(&pos_)) + sizeof(scene_id_));
+}
+
+ReqAddSceneBuilding::~ReqAddSceneBuilding() {
+  // @@protoc_insertion_point(destructor:NFMsg.ReqAddSceneBuilding)
+  SharedDtor();
+}
+
+void ReqAddSceneBuilding::SharedDtor() {
+  config_id_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  if (this != internal_default_instance()) delete pos_;
+  if (this != internal_default_instance()) delete guid_;
+  if (this != internal_default_instance()) delete master_;
+}
+
+void ReqAddSceneBuilding::SetCachedSize(int size) const {
+  _cached_size_.Set(size);
+}
+const ::google::protobuf::Descriptor* ReqAddSceneBuilding::descriptor() {
+  ::protobuf_NFMsgShare_2eproto::protobuf_AssignDescriptorsOnce();
+  return ::protobuf_NFMsgShare_2eproto::file_level_metadata[kIndexInFileMessages].descriptor;
+}
+
+const ReqAddSceneBuilding& ReqAddSceneBuilding::default_instance() {
+  ::google::protobuf::internal::InitSCC(&protobuf_NFMsgShare_2eproto::scc_info_ReqAddSceneBuilding.base);
+  return *internal_default_instance();
+}
+
+
+void ReqAddSceneBuilding::Clear() {
+// @@protoc_insertion_point(message_clear_start:NFMsg.ReqAddSceneBuilding)
+  ::google::protobuf::uint32 cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  config_id_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  if (GetArenaNoVirtual() == NULL && pos_ != NULL) {
+    delete pos_;
+  }
+  pos_ = NULL;
+  if (GetArenaNoVirtual() == NULL && guid_ != NULL) {
+    delete guid_;
+  }
+  guid_ = NULL;
+  if (GetArenaNoVirtual() == NULL && master_ != NULL) {
+    delete master_;
+  }
+  master_ = NULL;
+  scene_id_ = 0;
+  _internal_metadata_.Clear();
+}
+
+bool ReqAddSceneBuilding::MergePartialFromCodedStream(
+    ::google::protobuf::io::CodedInputStream* input) {
+#define DO_(EXPRESSION) if (!GOOGLE_PREDICT_TRUE(EXPRESSION)) goto failure
+  ::google::protobuf::uint32 tag;
+  // @@protoc_insertion_point(parse_start:NFMsg.ReqAddSceneBuilding)
+  for (;;) {
+    ::std::pair<::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
+    tag = p.first;
+    if (!p.second) goto handle_unusual;
+    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
+      // .NFMsg.Vector3 pos = 1;
+      case 1: {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(10u /* 10 & 0xFF */)) {
+          DO_(::google::protobuf::internal::WireFormatLite::ReadMessage(
+               input, mutable_pos()));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      // .NFMsg.Ident guid = 2;
+      case 2: {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(18u /* 18 & 0xFF */)) {
+          DO_(::google::protobuf::internal::WireFormatLite::ReadMessage(
+               input, mutable_guid()));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      // .NFMsg.Ident master = 3;
+      case 3: {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(26u /* 26 & 0xFF */)) {
+          DO_(::google::protobuf::internal::WireFormatLite::ReadMessage(
+               input, mutable_master()));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      // bytes config_id = 4;
+      case 4: {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(34u /* 34 & 0xFF */)) {
+          DO_(::google::protobuf::internal::WireFormatLite::ReadBytes(
+                input, this->mutable_config_id()));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      // int32 scene_id = 5;
+      case 5: {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(40u /* 40 & 0xFF */)) {
+
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
+                 input, &scene_id_)));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      default: {
+      handle_unusual:
+        if (tag == 0) {
+          goto success;
+        }
+        DO_(::google::protobuf::internal::WireFormat::SkipField(
+              input, tag, _internal_metadata_.mutable_unknown_fields()));
+        break;
+      }
+    }
+  }
+success:
+  // @@protoc_insertion_point(parse_success:NFMsg.ReqAddSceneBuilding)
+  return true;
+failure:
+  // @@protoc_insertion_point(parse_failure:NFMsg.ReqAddSceneBuilding)
+  return false;
+#undef DO_
+}
+
+void ReqAddSceneBuilding::SerializeWithCachedSizes(
+    ::google::protobuf::io::CodedOutputStream* output) const {
+  // @@protoc_insertion_point(serialize_start:NFMsg.ReqAddSceneBuilding)
+  ::google::protobuf::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  // .NFMsg.Vector3 pos = 1;
+  if (this->has_pos()) {
+    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+      1, this->_internal_pos(), output);
+  }
+
+  // .NFMsg.Ident guid = 2;
+  if (this->has_guid()) {
+    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+      2, this->_internal_guid(), output);
+  }
+
+  // .NFMsg.Ident master = 3;
+  if (this->has_master()) {
+    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+      3, this->_internal_master(), output);
+  }
+
+  // bytes config_id = 4;
+  if (this->config_id().size() > 0) {
+    ::google::protobuf::internal::WireFormatLite::WriteBytesMaybeAliased(
+      4, this->config_id(), output);
+  }
+
+  // int32 scene_id = 5;
+  if (this->scene_id() != 0) {
+    ::google::protobuf::internal::WireFormatLite::WriteInt32(5, this->scene_id(), output);
+  }
+
+  if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
+    ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
+        (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()), output);
+  }
+  // @@protoc_insertion_point(serialize_end:NFMsg.ReqAddSceneBuilding)
+}
+
+::google::protobuf::uint8* ReqAddSceneBuilding::InternalSerializeWithCachedSizesToArray(
+    bool deterministic, ::google::protobuf::uint8* target) const {
+  (void)deterministic; // Unused
+  // @@protoc_insertion_point(serialize_to_array_start:NFMsg.ReqAddSceneBuilding)
+  ::google::protobuf::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  // .NFMsg.Vector3 pos = 1;
+  if (this->has_pos()) {
+    target = ::google::protobuf::internal::WireFormatLite::
+      InternalWriteMessageToArray(
+        1, this->_internal_pos(), deterministic, target);
+  }
+
+  // .NFMsg.Ident guid = 2;
+  if (this->has_guid()) {
+    target = ::google::protobuf::internal::WireFormatLite::
+      InternalWriteMessageToArray(
+        2, this->_internal_guid(), deterministic, target);
+  }
+
+  // .NFMsg.Ident master = 3;
+  if (this->has_master()) {
+    target = ::google::protobuf::internal::WireFormatLite::
+      InternalWriteMessageToArray(
+        3, this->_internal_master(), deterministic, target);
+  }
+
+  // bytes config_id = 4;
+  if (this->config_id().size() > 0) {
+    target =
+      ::google::protobuf::internal::WireFormatLite::WriteBytesToArray(
+        4, this->config_id(), target);
+  }
+
+  // int32 scene_id = 5;
+  if (this->scene_id() != 0) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(5, this->scene_id(), target);
+  }
+
+  if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
+    target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
+        (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()), target);
+  }
+  // @@protoc_insertion_point(serialize_to_array_end:NFMsg.ReqAddSceneBuilding)
+  return target;
+}
+
+size_t ReqAddSceneBuilding::ByteSizeLong() const {
+// @@protoc_insertion_point(message_byte_size_start:NFMsg.ReqAddSceneBuilding)
+  size_t total_size = 0;
+
+  if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
+    total_size +=
+      ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
+        (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()));
+  }
+  // bytes config_id = 4;
+  if (this->config_id().size() > 0) {
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::BytesSize(
+        this->config_id());
+  }
+
+  // .NFMsg.Vector3 pos = 1;
+  if (this->has_pos()) {
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::MessageSize(
+        *pos_);
+  }
+
+  // .NFMsg.Ident guid = 2;
+  if (this->has_guid()) {
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::MessageSize(
+        *guid_);
+  }
+
+  // .NFMsg.Ident master = 3;
+  if (this->has_master()) {
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::MessageSize(
+        *master_);
+  }
+
+  // int32 scene_id = 5;
+  if (this->scene_id() != 0) {
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::Int32Size(
+        this->scene_id());
+  }
+
+  int cached_size = ::google::protobuf::internal::ToCachedSize(total_size);
+  SetCachedSize(cached_size);
+  return total_size;
+}
+
+void ReqAddSceneBuilding::MergeFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_merge_from_start:NFMsg.ReqAddSceneBuilding)
+  GOOGLE_DCHECK_NE(&from, this);
+  const ReqAddSceneBuilding* source =
+      ::google::protobuf::internal::DynamicCastToGenerated<const ReqAddSceneBuilding>(
+          &from);
+  if (source == NULL) {
+  // @@protoc_insertion_point(generalized_merge_from_cast_fail:NFMsg.ReqAddSceneBuilding)
+    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
+  } else {
+  // @@protoc_insertion_point(generalized_merge_from_cast_success:NFMsg.ReqAddSceneBuilding)
+    MergeFrom(*source);
+  }
+}
+
+void ReqAddSceneBuilding::MergeFrom(const ReqAddSceneBuilding& from) {
+// @@protoc_insertion_point(class_specific_merge_from_start:NFMsg.ReqAddSceneBuilding)
+  GOOGLE_DCHECK_NE(&from, this);
+  _internal_metadata_.MergeFrom(from._internal_metadata_);
+  ::google::protobuf::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  if (from.config_id().size() > 0) {
+
+    config_id_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.config_id_);
+  }
+  if (from.has_pos()) {
+    mutable_pos()->::NFMsg::Vector3::MergeFrom(from.pos());
+  }
+  if (from.has_guid()) {
+    mutable_guid()->::NFMsg::Ident::MergeFrom(from.guid());
+  }
+  if (from.has_master()) {
+    mutable_master()->::NFMsg::Ident::MergeFrom(from.master());
+  }
+  if (from.scene_id() != 0) {
+    set_scene_id(from.scene_id());
+  }
+}
+
+void ReqAddSceneBuilding::CopyFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_copy_from_start:NFMsg.ReqAddSceneBuilding)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+void ReqAddSceneBuilding::CopyFrom(const ReqAddSceneBuilding& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:NFMsg.ReqAddSceneBuilding)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool ReqAddSceneBuilding::IsInitialized() const {
+  return true;
+}
+
+void ReqAddSceneBuilding::Swap(ReqAddSceneBuilding* other) {
+  if (other == this) return;
+  InternalSwap(other);
+}
+void ReqAddSceneBuilding::InternalSwap(ReqAddSceneBuilding* other) {
+  using std::swap;
+  config_id_.Swap(&other->config_id_, &::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+    GetArenaNoVirtual());
+  swap(pos_, other->pos_);
+  swap(guid_, other->guid_);
+  swap(master_, other->master_);
+  swap(scene_id_, other->scene_id_);
+  _internal_metadata_.Swap(&other->_internal_metadata_);
+}
+
+::google::protobuf::Metadata ReqAddSceneBuilding::GetMetadata() const {
+  protobuf_NFMsgShare_2eproto::protobuf_AssignDescriptorsOnce();
+  return ::protobuf_NFMsgShare_2eproto::file_level_metadata[kIndexInFileMessages];
+}
+
+
+// ===================================================================
+
+void ReqSceneBuildings::InitAsDefaultInstance() {
+  ::NFMsg::_ReqSceneBuildings_default_instance_._instance.get_mutable()->pos_ = const_cast< ::NFMsg::Vector3*>(
+      ::NFMsg::Vector3::internal_default_instance());
+}
+void ReqSceneBuildings::clear_pos() {
+  if (GetArenaNoVirtual() == NULL && pos_ != NULL) {
+    delete pos_;
+  }
+  pos_ = NULL;
+}
+#if !defined(_MSC_VER) || _MSC_VER >= 1900
+const int ReqSceneBuildings::kSceneIdFieldNumber;
+const int ReqSceneBuildings::kPosFieldNumber;
+#endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
+
+ReqSceneBuildings::ReqSceneBuildings()
+  : ::google::protobuf::Message(), _internal_metadata_(NULL) {
+  ::google::protobuf::internal::InitSCC(
+      &protobuf_NFMsgShare_2eproto::scc_info_ReqSceneBuildings.base);
+  SharedCtor();
+  // @@protoc_insertion_point(constructor:NFMsg.ReqSceneBuildings)
+}
+ReqSceneBuildings::ReqSceneBuildings(const ReqSceneBuildings& from)
+  : ::google::protobuf::Message(),
+      _internal_metadata_(NULL) {
+  _internal_metadata_.MergeFrom(from._internal_metadata_);
+  if (from.has_pos()) {
+    pos_ = new ::NFMsg::Vector3(*from.pos_);
+  } else {
+    pos_ = NULL;
+  }
+  scene_id_ = from.scene_id_;
+  // @@protoc_insertion_point(copy_constructor:NFMsg.ReqSceneBuildings)
+}
+
+void ReqSceneBuildings::SharedCtor() {
+  ::memset(&pos_, 0, static_cast<size_t>(
+      reinterpret_cast<char*>(&scene_id_) -
+      reinterpret_cast<char*>(&pos_)) + sizeof(scene_id_));
+}
+
+ReqSceneBuildings::~ReqSceneBuildings() {
+  // @@protoc_insertion_point(destructor:NFMsg.ReqSceneBuildings)
+  SharedDtor();
+}
+
+void ReqSceneBuildings::SharedDtor() {
+  if (this != internal_default_instance()) delete pos_;
+}
+
+void ReqSceneBuildings::SetCachedSize(int size) const {
+  _cached_size_.Set(size);
+}
+const ::google::protobuf::Descriptor* ReqSceneBuildings::descriptor() {
+  ::protobuf_NFMsgShare_2eproto::protobuf_AssignDescriptorsOnce();
+  return ::protobuf_NFMsgShare_2eproto::file_level_metadata[kIndexInFileMessages].descriptor;
+}
+
+const ReqSceneBuildings& ReqSceneBuildings::default_instance() {
+  ::google::protobuf::internal::InitSCC(&protobuf_NFMsgShare_2eproto::scc_info_ReqSceneBuildings.base);
+  return *internal_default_instance();
+}
+
+
+void ReqSceneBuildings::Clear() {
+// @@protoc_insertion_point(message_clear_start:NFMsg.ReqSceneBuildings)
+  ::google::protobuf::uint32 cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  if (GetArenaNoVirtual() == NULL && pos_ != NULL) {
+    delete pos_;
+  }
+  pos_ = NULL;
+  scene_id_ = 0;
+  _internal_metadata_.Clear();
+}
+
+bool ReqSceneBuildings::MergePartialFromCodedStream(
+    ::google::protobuf::io::CodedInputStream* input) {
+#define DO_(EXPRESSION) if (!GOOGLE_PREDICT_TRUE(EXPRESSION)) goto failure
+  ::google::protobuf::uint32 tag;
+  // @@protoc_insertion_point(parse_start:NFMsg.ReqSceneBuildings)
+  for (;;) {
+    ::std::pair<::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
+    tag = p.first;
+    if (!p.second) goto handle_unusual;
+    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
+      // int32 scene_id = 1;
+      case 1: {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(8u /* 8 & 0xFF */)) {
+
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
+                 input, &scene_id_)));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      // .NFMsg.Vector3 pos = 2;
+      case 2: {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(18u /* 18 & 0xFF */)) {
+          DO_(::google::protobuf::internal::WireFormatLite::ReadMessage(
+               input, mutable_pos()));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      default: {
+      handle_unusual:
+        if (tag == 0) {
+          goto success;
+        }
+        DO_(::google::protobuf::internal::WireFormat::SkipField(
+              input, tag, _internal_metadata_.mutable_unknown_fields()));
+        break;
+      }
+    }
+  }
+success:
+  // @@protoc_insertion_point(parse_success:NFMsg.ReqSceneBuildings)
+  return true;
+failure:
+  // @@protoc_insertion_point(parse_failure:NFMsg.ReqSceneBuildings)
+  return false;
+#undef DO_
+}
+
+void ReqSceneBuildings::SerializeWithCachedSizes(
+    ::google::protobuf::io::CodedOutputStream* output) const {
+  // @@protoc_insertion_point(serialize_start:NFMsg.ReqSceneBuildings)
+  ::google::protobuf::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  // int32 scene_id = 1;
+  if (this->scene_id() != 0) {
+    ::google::protobuf::internal::WireFormatLite::WriteInt32(1, this->scene_id(), output);
+  }
+
+  // .NFMsg.Vector3 pos = 2;
+  if (this->has_pos()) {
+    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+      2, this->_internal_pos(), output);
+  }
+
+  if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
+    ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
+        (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()), output);
+  }
+  // @@protoc_insertion_point(serialize_end:NFMsg.ReqSceneBuildings)
+}
+
+::google::protobuf::uint8* ReqSceneBuildings::InternalSerializeWithCachedSizesToArray(
+    bool deterministic, ::google::protobuf::uint8* target) const {
+  (void)deterministic; // Unused
+  // @@protoc_insertion_point(serialize_to_array_start:NFMsg.ReqSceneBuildings)
+  ::google::protobuf::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  // int32 scene_id = 1;
+  if (this->scene_id() != 0) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(1, this->scene_id(), target);
+  }
+
+  // .NFMsg.Vector3 pos = 2;
+  if (this->has_pos()) {
+    target = ::google::protobuf::internal::WireFormatLite::
+      InternalWriteMessageToArray(
+        2, this->_internal_pos(), deterministic, target);
+  }
+
+  if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
+    target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
+        (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()), target);
+  }
+  // @@protoc_insertion_point(serialize_to_array_end:NFMsg.ReqSceneBuildings)
+  return target;
+}
+
+size_t ReqSceneBuildings::ByteSizeLong() const {
+// @@protoc_insertion_point(message_byte_size_start:NFMsg.ReqSceneBuildings)
+  size_t total_size = 0;
+
+  if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
+    total_size +=
+      ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
+        (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()));
+  }
+  // .NFMsg.Vector3 pos = 2;
+  if (this->has_pos()) {
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::MessageSize(
+        *pos_);
+  }
+
+  // int32 scene_id = 1;
+  if (this->scene_id() != 0) {
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::Int32Size(
+        this->scene_id());
+  }
+
+  int cached_size = ::google::protobuf::internal::ToCachedSize(total_size);
+  SetCachedSize(cached_size);
+  return total_size;
+}
+
+void ReqSceneBuildings::MergeFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_merge_from_start:NFMsg.ReqSceneBuildings)
+  GOOGLE_DCHECK_NE(&from, this);
+  const ReqSceneBuildings* source =
+      ::google::protobuf::internal::DynamicCastToGenerated<const ReqSceneBuildings>(
+          &from);
+  if (source == NULL) {
+  // @@protoc_insertion_point(generalized_merge_from_cast_fail:NFMsg.ReqSceneBuildings)
+    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
+  } else {
+  // @@protoc_insertion_point(generalized_merge_from_cast_success:NFMsg.ReqSceneBuildings)
+    MergeFrom(*source);
+  }
+}
+
+void ReqSceneBuildings::MergeFrom(const ReqSceneBuildings& from) {
+// @@protoc_insertion_point(class_specific_merge_from_start:NFMsg.ReqSceneBuildings)
+  GOOGLE_DCHECK_NE(&from, this);
+  _internal_metadata_.MergeFrom(from._internal_metadata_);
+  ::google::protobuf::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  if (from.has_pos()) {
+    mutable_pos()->::NFMsg::Vector3::MergeFrom(from.pos());
+  }
+  if (from.scene_id() != 0) {
+    set_scene_id(from.scene_id());
+  }
+}
+
+void ReqSceneBuildings::CopyFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_copy_from_start:NFMsg.ReqSceneBuildings)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+void ReqSceneBuildings::CopyFrom(const ReqSceneBuildings& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:NFMsg.ReqSceneBuildings)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool ReqSceneBuildings::IsInitialized() const {
+  return true;
+}
+
+void ReqSceneBuildings::Swap(ReqSceneBuildings* other) {
+  if (other == this) return;
+  InternalSwap(other);
+}
+void ReqSceneBuildings::InternalSwap(ReqSceneBuildings* other) {
+  using std::swap;
+  swap(pos_, other->pos_);
+  swap(scene_id_, other->scene_id_);
+  _internal_metadata_.Swap(&other->_internal_metadata_);
+}
+
+::google::protobuf::Metadata ReqSceneBuildings::GetMetadata() const {
+  protobuf_NFMsgShare_2eproto::protobuf_AssignDescriptorsOnce();
+  return ::protobuf_NFMsgShare_2eproto::file_level_metadata[kIndexInFileMessages];
+}
+
+
+// ===================================================================
+
+void AckSceneBuildings::InitAsDefaultInstance() {
+}
+#if !defined(_MSC_VER) || _MSC_VER >= 1900
+const int AckSceneBuildings::kBuildingsFieldNumber;
+#endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
+
+AckSceneBuildings::AckSceneBuildings()
+  : ::google::protobuf::Message(), _internal_metadata_(NULL) {
+  ::google::protobuf::internal::InitSCC(
+      &protobuf_NFMsgShare_2eproto::scc_info_AckSceneBuildings.base);
+  SharedCtor();
+  // @@protoc_insertion_point(constructor:NFMsg.AckSceneBuildings)
+}
+AckSceneBuildings::AckSceneBuildings(const AckSceneBuildings& from)
+  : ::google::protobuf::Message(),
+      _internal_metadata_(NULL),
+      buildings_(from.buildings_) {
+  _internal_metadata_.MergeFrom(from._internal_metadata_);
+  // @@protoc_insertion_point(copy_constructor:NFMsg.AckSceneBuildings)
+}
+
+void AckSceneBuildings::SharedCtor() {
+}
+
+AckSceneBuildings::~AckSceneBuildings() {
+  // @@protoc_insertion_point(destructor:NFMsg.AckSceneBuildings)
+  SharedDtor();
+}
+
+void AckSceneBuildings::SharedDtor() {
+}
+
+void AckSceneBuildings::SetCachedSize(int size) const {
+  _cached_size_.Set(size);
+}
+const ::google::protobuf::Descriptor* AckSceneBuildings::descriptor() {
+  ::protobuf_NFMsgShare_2eproto::protobuf_AssignDescriptorsOnce();
+  return ::protobuf_NFMsgShare_2eproto::file_level_metadata[kIndexInFileMessages].descriptor;
+}
+
+const AckSceneBuildings& AckSceneBuildings::default_instance() {
+  ::google::protobuf::internal::InitSCC(&protobuf_NFMsgShare_2eproto::scc_info_AckSceneBuildings.base);
+  return *internal_default_instance();
+}
+
+
+void AckSceneBuildings::Clear() {
+// @@protoc_insertion_point(message_clear_start:NFMsg.AckSceneBuildings)
+  ::google::protobuf::uint32 cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  buildings_.Clear();
+  _internal_metadata_.Clear();
+}
+
+bool AckSceneBuildings::MergePartialFromCodedStream(
+    ::google::protobuf::io::CodedInputStream* input) {
+#define DO_(EXPRESSION) if (!GOOGLE_PREDICT_TRUE(EXPRESSION)) goto failure
+  ::google::protobuf::uint32 tag;
+  // @@protoc_insertion_point(parse_start:NFMsg.AckSceneBuildings)
+  for (;;) {
+    ::std::pair<::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
+    tag = p.first;
+    if (!p.second) goto handle_unusual;
+    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
+      // repeated .NFMsg.ReqAddSceneBuilding buildings = 1;
+      case 1: {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(10u /* 10 & 0xFF */)) {
+          DO_(::google::protobuf::internal::WireFormatLite::ReadMessage(
+                input, add_buildings()));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      default: {
+      handle_unusual:
+        if (tag == 0) {
+          goto success;
+        }
+        DO_(::google::protobuf::internal::WireFormat::SkipField(
+              input, tag, _internal_metadata_.mutable_unknown_fields()));
+        break;
+      }
+    }
+  }
+success:
+  // @@protoc_insertion_point(parse_success:NFMsg.AckSceneBuildings)
+  return true;
+failure:
+  // @@protoc_insertion_point(parse_failure:NFMsg.AckSceneBuildings)
+  return false;
+#undef DO_
+}
+
+void AckSceneBuildings::SerializeWithCachedSizes(
+    ::google::protobuf::io::CodedOutputStream* output) const {
+  // @@protoc_insertion_point(serialize_start:NFMsg.AckSceneBuildings)
+  ::google::protobuf::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  // repeated .NFMsg.ReqAddSceneBuilding buildings = 1;
+  for (unsigned int i = 0,
+      n = static_cast<unsigned int>(this->buildings_size()); i < n; i++) {
+    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+      1,
+      this->buildings(static_cast<int>(i)),
+      output);
+  }
+
+  if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
+    ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
+        (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()), output);
+  }
+  // @@protoc_insertion_point(serialize_end:NFMsg.AckSceneBuildings)
+}
+
+::google::protobuf::uint8* AckSceneBuildings::InternalSerializeWithCachedSizesToArray(
+    bool deterministic, ::google::protobuf::uint8* target) const {
+  (void)deterministic; // Unused
+  // @@protoc_insertion_point(serialize_to_array_start:NFMsg.AckSceneBuildings)
+  ::google::protobuf::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  // repeated .NFMsg.ReqAddSceneBuilding buildings = 1;
+  for (unsigned int i = 0,
+      n = static_cast<unsigned int>(this->buildings_size()); i < n; i++) {
+    target = ::google::protobuf::internal::WireFormatLite::
+      InternalWriteMessageToArray(
+        1, this->buildings(static_cast<int>(i)), deterministic, target);
+  }
+
+  if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
+    target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
+        (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()), target);
+  }
+  // @@protoc_insertion_point(serialize_to_array_end:NFMsg.AckSceneBuildings)
+  return target;
+}
+
+size_t AckSceneBuildings::ByteSizeLong() const {
+// @@protoc_insertion_point(message_byte_size_start:NFMsg.AckSceneBuildings)
+  size_t total_size = 0;
+
+  if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
+    total_size +=
+      ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
+        (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()));
+  }
+  // repeated .NFMsg.ReqAddSceneBuilding buildings = 1;
+  {
+    unsigned int count = static_cast<unsigned int>(this->buildings_size());
+    total_size += 1UL * count;
+    for (unsigned int i = 0; i < count; i++) {
+      total_size +=
+        ::google::protobuf::internal::WireFormatLite::MessageSize(
+          this->buildings(static_cast<int>(i)));
+    }
+  }
+
+  int cached_size = ::google::protobuf::internal::ToCachedSize(total_size);
+  SetCachedSize(cached_size);
+  return total_size;
+}
+
+void AckSceneBuildings::MergeFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_merge_from_start:NFMsg.AckSceneBuildings)
+  GOOGLE_DCHECK_NE(&from, this);
+  const AckSceneBuildings* source =
+      ::google::protobuf::internal::DynamicCastToGenerated<const AckSceneBuildings>(
+          &from);
+  if (source == NULL) {
+  // @@protoc_insertion_point(generalized_merge_from_cast_fail:NFMsg.AckSceneBuildings)
+    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
+  } else {
+  // @@protoc_insertion_point(generalized_merge_from_cast_success:NFMsg.AckSceneBuildings)
+    MergeFrom(*source);
+  }
+}
+
+void AckSceneBuildings::MergeFrom(const AckSceneBuildings& from) {
+// @@protoc_insertion_point(class_specific_merge_from_start:NFMsg.AckSceneBuildings)
+  GOOGLE_DCHECK_NE(&from, this);
+  _internal_metadata_.MergeFrom(from._internal_metadata_);
+  ::google::protobuf::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  buildings_.MergeFrom(from.buildings_);
+}
+
+void AckSceneBuildings::CopyFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_copy_from_start:NFMsg.AckSceneBuildings)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+void AckSceneBuildings::CopyFrom(const AckSceneBuildings& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:NFMsg.AckSceneBuildings)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool AckSceneBuildings::IsInitialized() const {
+  return true;
+}
+
+void AckSceneBuildings::Swap(AckSceneBuildings* other) {
+  if (other == this) return;
+  InternalSwap(other);
+}
+void AckSceneBuildings::InternalSwap(AckSceneBuildings* other) {
+  using std::swap;
+  CastToBase(&buildings_)->InternalSwap(CastToBase(&other->buildings_));
+  _internal_metadata_.Swap(&other->_internal_metadata_);
+}
+
+::google::protobuf::Metadata AckSceneBuildings::GetMetadata() const {
   protobuf_NFMsgShare_2eproto::protobuf_AssignDescriptorsOnce();
   return ::protobuf_NFMsgShare_2eproto::file_level_metadata[kIndexInFileMessages];
 }
@@ -20632,6 +21678,15 @@ template<> GOOGLE_PROTOBUF_ATTRIBUTE_NOINLINE ::NFMsg::ReqAcceptTask* Arena::Cre
 }
 template<> GOOGLE_PROTOBUF_ATTRIBUTE_NOINLINE ::NFMsg::ReqCompeleteTask* Arena::CreateMaybeMessage< ::NFMsg::ReqCompeleteTask >(Arena* arena) {
   return Arena::CreateInternal< ::NFMsg::ReqCompeleteTask >(arena);
+}
+template<> GOOGLE_PROTOBUF_ATTRIBUTE_NOINLINE ::NFMsg::ReqAddSceneBuilding* Arena::CreateMaybeMessage< ::NFMsg::ReqAddSceneBuilding >(Arena* arena) {
+  return Arena::CreateInternal< ::NFMsg::ReqAddSceneBuilding >(arena);
+}
+template<> GOOGLE_PROTOBUF_ATTRIBUTE_NOINLINE ::NFMsg::ReqSceneBuildings* Arena::CreateMaybeMessage< ::NFMsg::ReqSceneBuildings >(Arena* arena) {
+  return Arena::CreateInternal< ::NFMsg::ReqSceneBuildings >(arena);
+}
+template<> GOOGLE_PROTOBUF_ATTRIBUTE_NOINLINE ::NFMsg::AckSceneBuildings* Arena::CreateMaybeMessage< ::NFMsg::AckSceneBuildings >(Arena* arena) {
+  return Arena::CreateInternal< ::NFMsg::AckSceneBuildings >(arena);
 }
 template<> GOOGLE_PROTOBUF_ATTRIBUTE_NOINLINE ::NFMsg::ReqAckJoinActivity* Arena::CreateMaybeMessage< ::NFMsg::ReqAckJoinActivity >(Arena* arena) {
   return Arena::CreateInternal< ::NFMsg::ReqAckJoinActivity >(arena);

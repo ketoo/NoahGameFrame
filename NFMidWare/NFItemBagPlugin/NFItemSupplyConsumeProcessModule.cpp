@@ -58,18 +58,18 @@ bool NFItemSupplyConsumeProcessModule::Execute()
 }
 
 
-int NFItemSupplyConsumeProcessModule::ConsumeLegal(const NFGUID& self, const std::string& strItemID, const NFDataList& targetID)
+int NFItemSupplyConsumeProcessModule::ConsumeLegal(const NFGUID& self, const std::string& strItemID, const NFDataList& targetID, const NFVector3& vector)
 {
 	return 0;
 }
 
-int NFItemSupplyConsumeProcessModule::ConsumeProcess(const NFGUID& self, const std::string& strItemID, const NFDataList& targetID)
+int NFItemSupplyConsumeProcessModule::ConsumeProcess(const NFGUID& self, const std::string& strItemID, const NFDataList& targetID, const NFVector3& vector)
 {
 
-	return ConsumeNormalProcess(self, strItemID, targetID);
+	return ConsumeNormalProcess(self, strItemID, targetID, vector);
 }
 
-int NFItemSupplyConsumeProcessModule::ConsumeNormalProcess(const NFGUID & self, const std::string & strItemID, const NFDataList & targetID)
+int NFItemSupplyConsumeProcessModule::ConsumeNormalProcess(const NFGUID & self, const std::string & strItemID, const NFDataList & targetID, const NFVector3& vector)
 {
 	NF_SHARE_PTR<NFIRecord> pBagItemList = m_pKernelModule->FindRecord(self, NFrame::Player::BagItemList::ThisName());
 	if (!pBagItemList)

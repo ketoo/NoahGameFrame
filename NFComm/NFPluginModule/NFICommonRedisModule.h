@@ -37,6 +37,7 @@ public:
 
 	virtual std::string GetAccountCacheKey(const std::string& strAccount) = 0;
 	virtual std::string GetTileCacheKey(const int& nSceneID) = 0;
+	virtual std::string GetCellCacheKey(const int& nSceneID) = 0;
 
 	virtual NF_SHARE_PTR<NFIPropertyManager> NewPropertyManager(const std::string& strClassName) = 0;
 	virtual NF_SHARE_PTR<NFIRecordManager> NewRecordManager(const std::string& strClassName) = 0;

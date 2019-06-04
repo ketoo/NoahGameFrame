@@ -57,12 +57,12 @@ bool NFItemGemConsumeProcessModule::Execute()
 }
 
 
-int NFItemGemConsumeProcessModule::ConsumeLegal(const NFGUID& self, const std::string& strItemID, const NFDataList& targetID)
+int NFItemGemConsumeProcessModule::ConsumeLegal(const NFGUID& self, const std::string& strItemID, const NFDataList& targetID, const NFVector3& vector)
 {
 	return 1;
 }
 
-int NFItemGemConsumeProcessModule::ConsumeProcess(const NFGUID& self, const std::string& strItemID, const NFDataList& targetID)
+int NFItemGemConsumeProcessModule::ConsumeProcess(const NFGUID& self, const std::string& strItemID, const NFDataList& targetID, const NFVector3& vector)
 {
 	return 1;
 }

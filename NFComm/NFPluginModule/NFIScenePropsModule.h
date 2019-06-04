@@ -23,29 +23,20 @@
    limitations under the License.
 */
 
-#ifndef NFI_ITEM_CONSUME_PROCESS_MODULE_H
-#define NFI_ITEM_CONSUME_PROCESS_MODULE_H
+#ifndef NFI_SCENE_PROPS_MODULE_H
+#define NFI_SCENE_PROPS_MODULE_H
 
 #include <iostream>
 #include "NFIModule.h"
-#ifdef _MSC_VER
-#pragma warning(disable: 4244 4267)
-#endif
-#include "NFComm/NFMessageDefine/NFDefine.pb.h"
-#ifdef _MSC_VER
-#pragma warning(default: 4244 4267)
-#endif
+#include "NFIBuffConfigModule.h"
 
-class NFIItemConsumeocessModule
+
+class NFIScenePropsModule
     : public NFIModule
 {
+
 public:
 
-	// > 0, error code
-    virtual int ConsumeLegal(const NFGUID& self, const std::string& strItemID, const NFDataList& targetID, const NFVector3& vector) = 0;
-
-	//> 0, error code
-    virtual int ConsumeProcess(const NFGUID& self, const std::string& strItemID, const NFDataList& targetID, const NFVector3& vector) = 0;
 
 };
 

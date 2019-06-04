@@ -55,6 +55,11 @@ std::string NFCommonRedisModule::GetTileCacheKey(const int & nSceneID)
 	return lexical_cast<std::string>(nSceneID) + "_TileInfo";
 }
 
+std::string NFCommonRedisModule::GetCellCacheKey(const int & nSceneID)
+{
+	return lexical_cast<std::string>(nSceneID) + "_CellInfo";
+}
+
 bool NFCommonRedisModule::AfterInit()
 {
 	m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>();

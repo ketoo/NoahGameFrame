@@ -232,7 +232,7 @@ bool NFUserGiftModule::ActiveteHero(const NFGUID & self)
 		int nHeroType = m_pElementModule->GetPropertyInt32(strItemID, NFrame::Item::HeroType());
 		if (nHeroType > 0)
 		{
-			m_pItemModule->UseItem(self, strItemID, self);
+			m_pItemModule->UseItem(self, strItemID, self, NFVector3());
 		}
 	}
 

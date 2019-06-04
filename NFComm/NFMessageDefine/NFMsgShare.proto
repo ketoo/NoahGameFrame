@@ -249,6 +249,26 @@ message ReqCompeleteTask//完成任务后申请领奖
 	bytes task_id = 1;
 }
 
+//EGMI_REQ_ADD_BUILDING						= 5000; 	//
+message ReqAddSceneBuilding
+{
+	Vector3 pos = 1;
+	Ident guid = 2;
+	Ident master = 3;
+	bytes config_id = 4;
+	int32 scene_id = 5;
+}
+
+message ReqSceneBuildings
+{
+	int32 scene_id = 1;
+	Vector3 pos = 2;
+}
+
+message AckSceneBuildings
+{
+	repeated ReqAddSceneBuilding buildings = 1;
+}
 ///////////////战斗/////////////////////////////////////////////////////////////////////////////////////
 
 message ReqAckJoinActivity

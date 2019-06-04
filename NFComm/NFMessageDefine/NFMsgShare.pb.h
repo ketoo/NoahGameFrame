@@ -41,7 +41,7 @@ namespace protobuf_NFMsgShare_2eproto {
 struct LIBPROTOC_EXPORT TableStruct {
   static const ::google::protobuf::internal::ParseTableField entries[];
   static const ::google::protobuf::internal::AuxillaryParseTableField aux[];
-  static const ::google::protobuf::internal::ParseTable schema[54];
+  static const ::google::protobuf::internal::ParseTable schema[57];
   static const ::google::protobuf::internal::FieldMetadata field_metadata[];
   static const ::google::protobuf::internal::SerializationTable serialization_table[];
   static const ::google::protobuf::uint32 offsets[];
@@ -67,6 +67,9 @@ LIBPROTOC_EXPORT extern AckPlayerEntryListDefaultTypeInternal _AckPlayerEntryLis
 class AckPlayerLeaveList;
 class AckPlayerLeaveListDefaultTypeInternal;
 LIBPROTOC_EXPORT extern AckPlayerLeaveListDefaultTypeInternal _AckPlayerLeaveList_default_instance_;
+class AckSceneBuildings;
+class AckSceneBuildingsDefaultTypeInternal;
+LIBPROTOC_EXPORT extern AckSceneBuildingsDefaultTypeInternal _AckSceneBuildings_default_instance_;
 class AckSearchClan;
 class AckSearchClanDefaultTypeInternal;
 LIBPROTOC_EXPORT extern AckSearchClanDefaultTypeInternal _AckSearchClan_default_instance_;
@@ -151,6 +154,9 @@ LIBPROTOC_EXPORT extern ReqAckUseSkillDefaultTypeInternal _ReqAckUseSkill_defaul
 class ReqAddGambleValue;
 class ReqAddGambleValueDefaultTypeInternal;
 LIBPROTOC_EXPORT extern ReqAddGambleValueDefaultTypeInternal _ReqAddGambleValue_default_instance_;
+class ReqAddSceneBuilding;
+class ReqAddSceneBuildingDefaultTypeInternal;
+LIBPROTOC_EXPORT extern ReqAddSceneBuildingDefaultTypeInternal _ReqAddSceneBuilding_default_instance_;
 class ReqBuyItemFromShop;
 class ReqBuyItemFromShopDefaultTypeInternal;
 LIBPROTOC_EXPORT extern ReqBuyItemFromShopDefaultTypeInternal _ReqBuyItemFromShop_default_instance_;
@@ -184,6 +190,9 @@ LIBPROTOC_EXPORT extern ReqPVPApplyMatchDefaultTypeInternal _ReqPVPApplyMatch_de
 class ReqPickDropItem;
 class ReqPickDropItemDefaultTypeInternal;
 LIBPROTOC_EXPORT extern ReqPickDropItemDefaultTypeInternal _ReqPickDropItem_default_instance_;
+class ReqSceneBuildings;
+class ReqSceneBuildingsDefaultTypeInternal;
+LIBPROTOC_EXPORT extern ReqSceneBuildingsDefaultTypeInternal _ReqSceneBuildings_default_instance_;
 class ReqSearchClan;
 class ReqSearchClanDefaultTypeInternal;
 LIBPROTOC_EXPORT extern ReqSearchClanDefaultTypeInternal _ReqSearchClan_default_instance_;
@@ -220,6 +229,7 @@ template<> LIBPROTOC_EXPORT ::NFMsg::AckMiningTitle* Arena::CreateMaybeMessage<:
 template<> LIBPROTOC_EXPORT ::NFMsg::AckPVPApplyMatch* Arena::CreateMaybeMessage<::NFMsg::AckPVPApplyMatch>(Arena*);
 template<> LIBPROTOC_EXPORT ::NFMsg::AckPlayerEntryList* Arena::CreateMaybeMessage<::NFMsg::AckPlayerEntryList>(Arena*);
 template<> LIBPROTOC_EXPORT ::NFMsg::AckPlayerLeaveList* Arena::CreateMaybeMessage<::NFMsg::AckPlayerLeaveList>(Arena*);
+template<> LIBPROTOC_EXPORT ::NFMsg::AckSceneBuildings* Arena::CreateMaybeMessage<::NFMsg::AckSceneBuildings>(Arena*);
 template<> LIBPROTOC_EXPORT ::NFMsg::AckSearchClan* Arena::CreateMaybeMessage<::NFMsg::AckSearchClan>(Arena*);
 template<> LIBPROTOC_EXPORT ::NFMsg::AckSearchClan_SearchClanObject* Arena::CreateMaybeMessage<::NFMsg::AckSearchClan_SearchClanObject>(Arena*);
 template<> LIBPROTOC_EXPORT ::NFMsg::AckSearchOppnent* Arena::CreateMaybeMessage<::NFMsg::AckSearchOppnent>(Arena*);
@@ -248,6 +258,7 @@ template<> LIBPROTOC_EXPORT ::NFMsg::ReqAckSynData* Arena::CreateMaybeMessage<::
 template<> LIBPROTOC_EXPORT ::NFMsg::ReqAckUseItem* Arena::CreateMaybeMessage<::NFMsg::ReqAckUseItem>(Arena*);
 template<> LIBPROTOC_EXPORT ::NFMsg::ReqAckUseSkill* Arena::CreateMaybeMessage<::NFMsg::ReqAckUseSkill>(Arena*);
 template<> LIBPROTOC_EXPORT ::NFMsg::ReqAddGambleValue* Arena::CreateMaybeMessage<::NFMsg::ReqAddGambleValue>(Arena*);
+template<> LIBPROTOC_EXPORT ::NFMsg::ReqAddSceneBuilding* Arena::CreateMaybeMessage<::NFMsg::ReqAddSceneBuilding>(Arena*);
 template<> LIBPROTOC_EXPORT ::NFMsg::ReqBuyItemFromShop* Arena::CreateMaybeMessage<::NFMsg::ReqBuyItemFromShop>(Arena*);
 template<> LIBPROTOC_EXPORT ::NFMsg::ReqCompeleteTask* Arena::CreateMaybeMessage<::NFMsg::ReqCompeleteTask>(Arena*);
 template<> LIBPROTOC_EXPORT ::NFMsg::ReqCreatePVPEctype* Arena::CreateMaybeMessage<::NFMsg::ReqCreatePVPEctype>(Arena*);
@@ -259,6 +270,7 @@ template<> LIBPROTOC_EXPORT ::NFMsg::ReqLeaveGameServer* Arena::CreateMaybeMessa
 template<> LIBPROTOC_EXPORT ::NFMsg::ReqMiningTitle* Arena::CreateMaybeMessage<::NFMsg::ReqMiningTitle>(Arena*);
 template<> LIBPROTOC_EXPORT ::NFMsg::ReqPVPApplyMatch* Arena::CreateMaybeMessage<::NFMsg::ReqPVPApplyMatch>(Arena*);
 template<> LIBPROTOC_EXPORT ::NFMsg::ReqPickDropItem* Arena::CreateMaybeMessage<::NFMsg::ReqPickDropItem>(Arena*);
+template<> LIBPROTOC_EXPORT ::NFMsg::ReqSceneBuildings* Arena::CreateMaybeMessage<::NFMsg::ReqSceneBuildings>(Arena*);
 template<> LIBPROTOC_EXPORT ::NFMsg::ReqSearchClan* Arena::CreateMaybeMessage<::NFMsg::ReqSearchClan>(Arena*);
 template<> LIBPROTOC_EXPORT ::NFMsg::ReqSearchOppnent* Arena::CreateMaybeMessage<::NFMsg::ReqSearchOppnent>(Arena*);
 template<> LIBPROTOC_EXPORT ::NFMsg::ReqSendMail* Arena::CreateMaybeMessage<::NFMsg::ReqSendMail>(Arena*);
@@ -3988,6 +4000,388 @@ class LIBPROTOC_EXPORT ReqCompeleteTask : public ::google::protobuf::Message /* 
 };
 // -------------------------------------------------------------------
 
+class LIBPROTOC_EXPORT ReqAddSceneBuilding : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:NFMsg.ReqAddSceneBuilding) */ {
+ public:
+  ReqAddSceneBuilding();
+  virtual ~ReqAddSceneBuilding();
+
+  ReqAddSceneBuilding(const ReqAddSceneBuilding& from);
+
+  inline ReqAddSceneBuilding& operator=(const ReqAddSceneBuilding& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  #if LANG_CXX11
+  ReqAddSceneBuilding(ReqAddSceneBuilding&& from) noexcept
+    : ReqAddSceneBuilding() {
+    *this = ::std::move(from);
+  }
+
+  inline ReqAddSceneBuilding& operator=(ReqAddSceneBuilding&& from) noexcept {
+    if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
+      if (this != &from) InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+  #endif
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const ReqAddSceneBuilding& default_instance();
+
+  static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
+  static inline const ReqAddSceneBuilding* internal_default_instance() {
+    return reinterpret_cast<const ReqAddSceneBuilding*>(
+               &_ReqAddSceneBuilding_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages =
+    26;
+
+  void Swap(ReqAddSceneBuilding* other);
+  friend void swap(ReqAddSceneBuilding& a, ReqAddSceneBuilding& b) {
+    a.Swap(&b);
+  }
+
+  // implements Message ----------------------------------------------
+
+  inline ReqAddSceneBuilding* New() const final {
+    return CreateMaybeMessage<ReqAddSceneBuilding>(NULL);
+  }
+
+  ReqAddSceneBuilding* New(::google::protobuf::Arena* arena) const final {
+    return CreateMaybeMessage<ReqAddSceneBuilding>(arena);
+  }
+  void CopyFrom(const ::google::protobuf::Message& from) final;
+  void MergeFrom(const ::google::protobuf::Message& from) final;
+  void CopyFrom(const ReqAddSceneBuilding& from);
+  void MergeFrom(const ReqAddSceneBuilding& from);
+  void Clear() final;
+  bool IsInitialized() const final;
+
+  size_t ByteSizeLong() const final;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input) final;
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const final;
+  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
+      bool deterministic, ::google::protobuf::uint8* target) const final;
+  int GetCachedSize() const final { return _cached_size_.Get(); }
+
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const final;
+  void InternalSwap(ReqAddSceneBuilding* other);
+  private:
+  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
+    return NULL;
+  }
+  inline void* MaybeArenaPtr() const {
+    return NULL;
+  }
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const final;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // bytes config_id = 4;
+  void clear_config_id();
+  static const int kConfigIdFieldNumber = 4;
+  const ::std::string& config_id() const;
+  void set_config_id(const ::std::string& value);
+  #if LANG_CXX11
+  void set_config_id(::std::string&& value);
+  #endif
+  void set_config_id(const char* value);
+  void set_config_id(const void* value, size_t size);
+  ::std::string* mutable_config_id();
+  ::std::string* release_config_id();
+  void set_allocated_config_id(::std::string* config_id);
+
+  // .NFMsg.Vector3 pos = 1;
+  bool has_pos() const;
+  void clear_pos();
+  static const int kPosFieldNumber = 1;
+  private:
+  const ::NFMsg::Vector3& _internal_pos() const;
+  public:
+  const ::NFMsg::Vector3& pos() const;
+  ::NFMsg::Vector3* release_pos();
+  ::NFMsg::Vector3* mutable_pos();
+  void set_allocated_pos(::NFMsg::Vector3* pos);
+
+  // .NFMsg.Ident guid = 2;
+  bool has_guid() const;
+  void clear_guid();
+  static const int kGuidFieldNumber = 2;
+  private:
+  const ::NFMsg::Ident& _internal_guid() const;
+  public:
+  const ::NFMsg::Ident& guid() const;
+  ::NFMsg::Ident* release_guid();
+  ::NFMsg::Ident* mutable_guid();
+  void set_allocated_guid(::NFMsg::Ident* guid);
+
+  // .NFMsg.Ident master = 3;
+  bool has_master() const;
+  void clear_master();
+  static const int kMasterFieldNumber = 3;
+  private:
+  const ::NFMsg::Ident& _internal_master() const;
+  public:
+  const ::NFMsg::Ident& master() const;
+  ::NFMsg::Ident* release_master();
+  ::NFMsg::Ident* mutable_master();
+  void set_allocated_master(::NFMsg::Ident* master);
+
+  // int32 scene_id = 5;
+  void clear_scene_id();
+  static const int kSceneIdFieldNumber = 5;
+  ::google::protobuf::int32 scene_id() const;
+  void set_scene_id(::google::protobuf::int32 value);
+
+  // @@protoc_insertion_point(class_scope:NFMsg.ReqAddSceneBuilding)
+ private:
+
+  ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
+  ::google::protobuf::internal::ArenaStringPtr config_id_;
+  ::NFMsg::Vector3* pos_;
+  ::NFMsg::Ident* guid_;
+  ::NFMsg::Ident* master_;
+  ::google::protobuf::int32 scene_id_;
+  mutable ::google::protobuf::internal::CachedSize _cached_size_;
+  friend struct ::protobuf_NFMsgShare_2eproto::TableStruct;
+};
+// -------------------------------------------------------------------
+
+class LIBPROTOC_EXPORT ReqSceneBuildings : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:NFMsg.ReqSceneBuildings) */ {
+ public:
+  ReqSceneBuildings();
+  virtual ~ReqSceneBuildings();
+
+  ReqSceneBuildings(const ReqSceneBuildings& from);
+
+  inline ReqSceneBuildings& operator=(const ReqSceneBuildings& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  #if LANG_CXX11
+  ReqSceneBuildings(ReqSceneBuildings&& from) noexcept
+    : ReqSceneBuildings() {
+    *this = ::std::move(from);
+  }
+
+  inline ReqSceneBuildings& operator=(ReqSceneBuildings&& from) noexcept {
+    if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
+      if (this != &from) InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+  #endif
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const ReqSceneBuildings& default_instance();
+
+  static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
+  static inline const ReqSceneBuildings* internal_default_instance() {
+    return reinterpret_cast<const ReqSceneBuildings*>(
+               &_ReqSceneBuildings_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages =
+    27;
+
+  void Swap(ReqSceneBuildings* other);
+  friend void swap(ReqSceneBuildings& a, ReqSceneBuildings& b) {
+    a.Swap(&b);
+  }
+
+  // implements Message ----------------------------------------------
+
+  inline ReqSceneBuildings* New() const final {
+    return CreateMaybeMessage<ReqSceneBuildings>(NULL);
+  }
+
+  ReqSceneBuildings* New(::google::protobuf::Arena* arena) const final {
+    return CreateMaybeMessage<ReqSceneBuildings>(arena);
+  }
+  void CopyFrom(const ::google::protobuf::Message& from) final;
+  void MergeFrom(const ::google::protobuf::Message& from) final;
+  void CopyFrom(const ReqSceneBuildings& from);
+  void MergeFrom(const ReqSceneBuildings& from);
+  void Clear() final;
+  bool IsInitialized() const final;
+
+  size_t ByteSizeLong() const final;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input) final;
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const final;
+  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
+      bool deterministic, ::google::protobuf::uint8* target) const final;
+  int GetCachedSize() const final { return _cached_size_.Get(); }
+
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const final;
+  void InternalSwap(ReqSceneBuildings* other);
+  private:
+  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
+    return NULL;
+  }
+  inline void* MaybeArenaPtr() const {
+    return NULL;
+  }
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const final;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // .NFMsg.Vector3 pos = 2;
+  bool has_pos() const;
+  void clear_pos();
+  static const int kPosFieldNumber = 2;
+  private:
+  const ::NFMsg::Vector3& _internal_pos() const;
+  public:
+  const ::NFMsg::Vector3& pos() const;
+  ::NFMsg::Vector3* release_pos();
+  ::NFMsg::Vector3* mutable_pos();
+  void set_allocated_pos(::NFMsg::Vector3* pos);
+
+  // int32 scene_id = 1;
+  void clear_scene_id();
+  static const int kSceneIdFieldNumber = 1;
+  ::google::protobuf::int32 scene_id() const;
+  void set_scene_id(::google::protobuf::int32 value);
+
+  // @@protoc_insertion_point(class_scope:NFMsg.ReqSceneBuildings)
+ private:
+
+  ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
+  ::NFMsg::Vector3* pos_;
+  ::google::protobuf::int32 scene_id_;
+  mutable ::google::protobuf::internal::CachedSize _cached_size_;
+  friend struct ::protobuf_NFMsgShare_2eproto::TableStruct;
+};
+// -------------------------------------------------------------------
+
+class LIBPROTOC_EXPORT AckSceneBuildings : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:NFMsg.AckSceneBuildings) */ {
+ public:
+  AckSceneBuildings();
+  virtual ~AckSceneBuildings();
+
+  AckSceneBuildings(const AckSceneBuildings& from);
+
+  inline AckSceneBuildings& operator=(const AckSceneBuildings& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  #if LANG_CXX11
+  AckSceneBuildings(AckSceneBuildings&& from) noexcept
+    : AckSceneBuildings() {
+    *this = ::std::move(from);
+  }
+
+  inline AckSceneBuildings& operator=(AckSceneBuildings&& from) noexcept {
+    if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
+      if (this != &from) InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+  #endif
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const AckSceneBuildings& default_instance();
+
+  static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
+  static inline const AckSceneBuildings* internal_default_instance() {
+    return reinterpret_cast<const AckSceneBuildings*>(
+               &_AckSceneBuildings_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages =
+    28;
+
+  void Swap(AckSceneBuildings* other);
+  friend void swap(AckSceneBuildings& a, AckSceneBuildings& b) {
+    a.Swap(&b);
+  }
+
+  // implements Message ----------------------------------------------
+
+  inline AckSceneBuildings* New() const final {
+    return CreateMaybeMessage<AckSceneBuildings>(NULL);
+  }
+
+  AckSceneBuildings* New(::google::protobuf::Arena* arena) const final {
+    return CreateMaybeMessage<AckSceneBuildings>(arena);
+  }
+  void CopyFrom(const ::google::protobuf::Message& from) final;
+  void MergeFrom(const ::google::protobuf::Message& from) final;
+  void CopyFrom(const AckSceneBuildings& from);
+  void MergeFrom(const AckSceneBuildings& from);
+  void Clear() final;
+  bool IsInitialized() const final;
+
+  size_t ByteSizeLong() const final;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input) final;
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const final;
+  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
+      bool deterministic, ::google::protobuf::uint8* target) const final;
+  int GetCachedSize() const final { return _cached_size_.Get(); }
+
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const final;
+  void InternalSwap(AckSceneBuildings* other);
+  private:
+  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
+    return NULL;
+  }
+  inline void* MaybeArenaPtr() const {
+    return NULL;
+  }
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const final;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // repeated .NFMsg.ReqAddSceneBuilding buildings = 1;
+  int buildings_size() const;
+  void clear_buildings();
+  static const int kBuildingsFieldNumber = 1;
+  ::NFMsg::ReqAddSceneBuilding* mutable_buildings(int index);
+  ::google::protobuf::RepeatedPtrField< ::NFMsg::ReqAddSceneBuilding >*
+      mutable_buildings();
+  const ::NFMsg::ReqAddSceneBuilding& buildings(int index) const;
+  ::NFMsg::ReqAddSceneBuilding* add_buildings();
+  const ::google::protobuf::RepeatedPtrField< ::NFMsg::ReqAddSceneBuilding >&
+      buildings() const;
+
+  // @@protoc_insertion_point(class_scope:NFMsg.AckSceneBuildings)
+ private:
+
+  ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
+  ::google::protobuf::RepeatedPtrField< ::NFMsg::ReqAddSceneBuilding > buildings_;
+  mutable ::google::protobuf::internal::CachedSize _cached_size_;
+  friend struct ::protobuf_NFMsgShare_2eproto::TableStruct;
+};
+// -------------------------------------------------------------------
+
 class LIBPROTOC_EXPORT ReqAckJoinActivity : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:NFMsg.ReqAckJoinActivity) */ {
  public:
   ReqAckJoinActivity();
@@ -4023,7 +4417,7 @@ class LIBPROTOC_EXPORT ReqAckJoinActivity : public ::google::protobuf::Message /
                &_ReqAckJoinActivity_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    26;
+    29;
 
   void Swap(ReqAckJoinActivity* other);
   friend void swap(ReqAckJoinActivity& a, ReqAckJoinActivity& b) {
@@ -4181,7 +4575,7 @@ class LIBPROTOC_EXPORT ReqAckCreateClan : public ::google::protobuf::Message /* 
                &_ReqAckCreateClan_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    27;
+    30;
 
   void Swap(ReqAckCreateClan* other);
   friend void swap(ReqAckCreateClan& a, ReqAckCreateClan& b) {
@@ -4305,7 +4699,7 @@ class LIBPROTOC_EXPORT ReqSearchClan : public ::google::protobuf::Message /* @@p
                &_ReqSearchClan_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    28;
+    31;
 
   void Swap(ReqSearchClan* other);
   friend void swap(ReqSearchClan& a, ReqSearchClan& b) {
@@ -4416,7 +4810,7 @@ class LIBPROTOC_EXPORT AckSearchClan_SearchClanObject : public ::google::protobu
                &_AckSearchClan_SearchClanObject_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    29;
+    32;
 
   void Swap(AckSearchClan_SearchClanObject* other);
   friend void swap(AckSearchClan_SearchClanObject& a, AckSearchClan_SearchClanObject& b) {
@@ -4583,7 +4977,7 @@ class LIBPROTOC_EXPORT AckSearchClan : public ::google::protobuf::Message /* @@p
                &_AckSearchClan_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    30;
+    33;
 
   void Swap(AckSearchClan* other);
   friend void swap(AckSearchClan& a, AckSearchClan& b) {
@@ -4694,7 +5088,7 @@ class LIBPROTOC_EXPORT ReqAckJoinClan : public ::google::protobuf::Message /* @@
                &_ReqAckJoinClan_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    31;
+    34;
 
   void Swap(ReqAckJoinClan* other);
   friend void swap(ReqAckJoinClan& a, ReqAckJoinClan& b) {
@@ -4818,7 +5212,7 @@ class LIBPROTOC_EXPORT ReqAckLeaveClan : public ::google::protobuf::Message /* @
                &_ReqAckLeaveClan_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    32;
+    35;
 
   void Swap(ReqAckLeaveClan* other);
   friend void swap(ReqAckLeaveClan& a, ReqAckLeaveClan& b) {
@@ -4942,7 +5336,7 @@ class LIBPROTOC_EXPORT ReqAckOprClanMember : public ::google::protobuf::Message 
                &_ReqAckOprClanMember_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    33;
+    36;
 
   void Swap(ReqAckOprClanMember* other);
   friend void swap(ReqAckOprClanMember& a, ReqAckOprClanMember& b) {
@@ -5099,7 +5493,7 @@ class LIBPROTOC_EXPORT ReqEnterClanEctype : public ::google::protobuf::Message /
                &_ReqEnterClanEctype_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    34;
+    37;
 
   void Swap(ReqEnterClanEctype* other);
   friend void swap(ReqEnterClanEctype& a, ReqEnterClanEctype& b) {
@@ -5208,7 +5602,7 @@ class LIBPROTOC_EXPORT ReqSetFightHero : public ::google::protobuf::Message /* @
                &_ReqSetFightHero_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    35;
+    38;
 
   void Swap(ReqSetFightHero* other);
   friend void swap(ReqSetFightHero& a, ReqSetFightHero& b) {
@@ -5324,7 +5718,7 @@ class LIBPROTOC_EXPORT ReqSwitchFightHero : public ::google::protobuf::Message /
                &_ReqSwitchFightHero_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    36;
+    39;
 
   void Swap(ReqSwitchFightHero* other);
   friend void swap(ReqSwitchFightHero& a, ReqSwitchFightHero& b) {
@@ -5433,7 +5827,7 @@ class LIBPROTOC_EXPORT ReqBuyItemFromShop : public ::google::protobuf::Message /
                &_ReqBuyItemFromShop_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    37;
+    40;
 
   void Swap(ReqBuyItemFromShop* other);
   friend void swap(ReqBuyItemFromShop& a, ReqBuyItemFromShop& b) {
@@ -5551,7 +5945,7 @@ class LIBPROTOC_EXPORT ReqAddGambleValue : public ::google::protobuf::Message /*
                &_ReqAddGambleValue_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    38;
+    41;
 
   void Swap(ReqAddGambleValue* other);
   friend void swap(ReqAddGambleValue& a, ReqAddGambleValue& b) {
@@ -5669,7 +6063,7 @@ class LIBPROTOC_EXPORT ReqMiningTitle : public ::google::protobuf::Message /* @@
                &_ReqMiningTitle_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    39;
+    42;
 
   void Swap(ReqMiningTitle* other);
   friend void swap(ReqMiningTitle& a, ReqMiningTitle& b) {
@@ -5786,7 +6180,7 @@ class LIBPROTOC_EXPORT TileState : public ::google::protobuf::Message /* @@proto
                &_TileState_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    40;
+    43;
 
   void Swap(TileState* other);
   friend void swap(TileState& a, TileState& b) {
@@ -5903,7 +6297,7 @@ class LIBPROTOC_EXPORT TileBuilding : public ::google::protobuf::Message /* @@pr
                &_TileBuilding_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    41;
+    44;
 
   void Swap(TileBuilding* other);
   friend void swap(TileBuilding& a, TileBuilding& b) {
@@ -6041,7 +6435,7 @@ class LIBPROTOC_EXPORT TileNPC : public ::google::protobuf::Message /* @@protoc_
                &_TileNPC_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    42;
+    45;
 
   void Swap(TileNPC* other);
   friend void swap(TileNPC& a, TileNPC& b) {
@@ -6179,7 +6573,7 @@ class LIBPROTOC_EXPORT AckMiningTitle : public ::google::protobuf::Message /* @@
                &_AckMiningTitle_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    43;
+    46;
 
   void Swap(AckMiningTitle* other);
   friend void swap(AckMiningTitle& a, AckMiningTitle& b) {
@@ -6314,7 +6708,7 @@ class LIBPROTOC_EXPORT ReqSearchOppnent : public ::google::protobuf::Message /* 
                &_ReqSearchOppnent_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    44;
+    47;
 
   void Swap(ReqSearchOppnent* other);
   friend void swap(ReqSearchOppnent& a, ReqSearchOppnent& b) {
@@ -6417,7 +6811,7 @@ class LIBPROTOC_EXPORT AckSearchOppnent : public ::google::protobuf::Message /* 
                &_AckSearchOppnent_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    45;
+    48;
 
   void Swap(AckSearchOppnent* other);
   friend void swap(AckSearchOppnent& a, AckSearchOppnent& b) {
@@ -6748,7 +7142,7 @@ class LIBPROTOC_EXPORT ReqSendMail : public ::google::protobuf::Message /* @@pro
                &_ReqSendMail_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    46;
+    49;
 
   void Swap(ReqSendMail* other);
   friend void swap(ReqSendMail& a, ReqSendMail& b) {
@@ -6883,7 +7277,7 @@ class LIBPROTOC_EXPORT ReqSwitchServer : public ::google::protobuf::Message /* @
                &_ReqSwitchServer_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    47;
+    50;
 
   void Swap(ReqSwitchServer* other);
   friend void swap(ReqSwitchServer& a, ReqSwitchServer& b) {
@@ -7040,7 +7434,7 @@ class LIBPROTOC_EXPORT AckSwitchServer : public ::google::protobuf::Message /* @
                &_AckSwitchServer_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    48;
+    51;
 
   void Swap(AckSwitchServer* other);
   friend void swap(AckSwitchServer& a, AckSwitchServer& b) {
@@ -7170,7 +7564,7 @@ class LIBPROTOC_EXPORT PVPRoomInfo : public ::google::protobuf::Message /* @@pro
                &_PVPRoomInfo_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    49;
+    52;
 
   void Swap(PVPRoomInfo* other);
   friend void swap(PVPRoomInfo& a, PVPRoomInfo& b) {
@@ -7354,7 +7748,7 @@ class LIBPROTOC_EXPORT ReqPVPApplyMatch : public ::google::protobuf::Message /* 
                &_ReqPVPApplyMatch_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    50;
+    53;
 
   void Swap(ReqPVPApplyMatch* other);
   friend void swap(ReqPVPApplyMatch& a, ReqPVPApplyMatch& b) {
@@ -7523,7 +7917,7 @@ class LIBPROTOC_EXPORT AckPVPApplyMatch : public ::google::protobuf::Message /* 
                &_AckPVPApplyMatch_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    51;
+    54;
 
   void Swap(AckPVPApplyMatch* other);
   friend void swap(AckPVPApplyMatch& a, AckPVPApplyMatch& b) {
@@ -7659,7 +8053,7 @@ class LIBPROTOC_EXPORT ReqCreatePVPEctype : public ::google::protobuf::Message /
                &_ReqCreatePVPEctype_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    52;
+    55;
 
   void Swap(ReqCreatePVPEctype* other);
   friend void swap(ReqCreatePVPEctype& a, ReqCreatePVPEctype& b) {
@@ -7781,7 +8175,7 @@ class LIBPROTOC_EXPORT AckCreatePVPEctype : public ::google::protobuf::Message /
                &_AckCreatePVPEctype_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    53;
+    56;
 
   void Swap(AckCreatePVPEctype* other);
   friend void swap(AckCreatePVPEctype& a, AckCreatePVPEctype& b) {
@@ -10467,6 +10861,321 @@ inline void ReqCompeleteTask::set_allocated_task_id(::std::string* task_id) {
   }
   task_id_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), task_id);
   // @@protoc_insertion_point(field_set_allocated:NFMsg.ReqCompeleteTask.task_id)
+}
+
+// -------------------------------------------------------------------
+
+// ReqAddSceneBuilding
+
+// .NFMsg.Vector3 pos = 1;
+inline bool ReqAddSceneBuilding::has_pos() const {
+  return this != internal_default_instance() && pos_ != NULL;
+}
+inline const ::NFMsg::Vector3& ReqAddSceneBuilding::_internal_pos() const {
+  return *pos_;
+}
+inline const ::NFMsg::Vector3& ReqAddSceneBuilding::pos() const {
+  const ::NFMsg::Vector3* p = pos_;
+  // @@protoc_insertion_point(field_get:NFMsg.ReqAddSceneBuilding.pos)
+  return p != NULL ? *p : *reinterpret_cast<const ::NFMsg::Vector3*>(
+      &::NFMsg::_Vector3_default_instance_);
+}
+inline ::NFMsg::Vector3* ReqAddSceneBuilding::release_pos() {
+  // @@protoc_insertion_point(field_release:NFMsg.ReqAddSceneBuilding.pos)
+  
+  ::NFMsg::Vector3* temp = pos_;
+  pos_ = NULL;
+  return temp;
+}
+inline ::NFMsg::Vector3* ReqAddSceneBuilding::mutable_pos() {
+  
+  if (pos_ == NULL) {
+    auto* p = CreateMaybeMessage<::NFMsg::Vector3>(GetArenaNoVirtual());
+    pos_ = p;
+  }
+  // @@protoc_insertion_point(field_mutable:NFMsg.ReqAddSceneBuilding.pos)
+  return pos_;
+}
+inline void ReqAddSceneBuilding::set_allocated_pos(::NFMsg::Vector3* pos) {
+  ::google::protobuf::Arena* message_arena = GetArenaNoVirtual();
+  if (message_arena == NULL) {
+    delete reinterpret_cast< ::google::protobuf::MessageLite*>(pos_);
+  }
+  if (pos) {
+    ::google::protobuf::Arena* submessage_arena = NULL;
+    if (message_arena != submessage_arena) {
+      pos = ::google::protobuf::internal::GetOwnedMessage(
+          message_arena, pos, submessage_arena);
+    }
+    
+  } else {
+    
+  }
+  pos_ = pos;
+  // @@protoc_insertion_point(field_set_allocated:NFMsg.ReqAddSceneBuilding.pos)
+}
+
+// .NFMsg.Ident guid = 2;
+inline bool ReqAddSceneBuilding::has_guid() const {
+  return this != internal_default_instance() && guid_ != NULL;
+}
+inline const ::NFMsg::Ident& ReqAddSceneBuilding::_internal_guid() const {
+  return *guid_;
+}
+inline const ::NFMsg::Ident& ReqAddSceneBuilding::guid() const {
+  const ::NFMsg::Ident* p = guid_;
+  // @@protoc_insertion_point(field_get:NFMsg.ReqAddSceneBuilding.guid)
+  return p != NULL ? *p : *reinterpret_cast<const ::NFMsg::Ident*>(
+      &::NFMsg::_Ident_default_instance_);
+}
+inline ::NFMsg::Ident* ReqAddSceneBuilding::release_guid() {
+  // @@protoc_insertion_point(field_release:NFMsg.ReqAddSceneBuilding.guid)
+  
+  ::NFMsg::Ident* temp = guid_;
+  guid_ = NULL;
+  return temp;
+}
+inline ::NFMsg::Ident* ReqAddSceneBuilding::mutable_guid() {
+  
+  if (guid_ == NULL) {
+    auto* p = CreateMaybeMessage<::NFMsg::Ident>(GetArenaNoVirtual());
+    guid_ = p;
+  }
+  // @@protoc_insertion_point(field_mutable:NFMsg.ReqAddSceneBuilding.guid)
+  return guid_;
+}
+inline void ReqAddSceneBuilding::set_allocated_guid(::NFMsg::Ident* guid) {
+  ::google::protobuf::Arena* message_arena = GetArenaNoVirtual();
+  if (message_arena == NULL) {
+    delete reinterpret_cast< ::google::protobuf::MessageLite*>(guid_);
+  }
+  if (guid) {
+    ::google::protobuf::Arena* submessage_arena = NULL;
+    if (message_arena != submessage_arena) {
+      guid = ::google::protobuf::internal::GetOwnedMessage(
+          message_arena, guid, submessage_arena);
+    }
+    
+  } else {
+    
+  }
+  guid_ = guid;
+  // @@protoc_insertion_point(field_set_allocated:NFMsg.ReqAddSceneBuilding.guid)
+}
+
+// .NFMsg.Ident master = 3;
+inline bool ReqAddSceneBuilding::has_master() const {
+  return this != internal_default_instance() && master_ != NULL;
+}
+inline const ::NFMsg::Ident& ReqAddSceneBuilding::_internal_master() const {
+  return *master_;
+}
+inline const ::NFMsg::Ident& ReqAddSceneBuilding::master() const {
+  const ::NFMsg::Ident* p = master_;
+  // @@protoc_insertion_point(field_get:NFMsg.ReqAddSceneBuilding.master)
+  return p != NULL ? *p : *reinterpret_cast<const ::NFMsg::Ident*>(
+      &::NFMsg::_Ident_default_instance_);
+}
+inline ::NFMsg::Ident* ReqAddSceneBuilding::release_master() {
+  // @@protoc_insertion_point(field_release:NFMsg.ReqAddSceneBuilding.master)
+  
+  ::NFMsg::Ident* temp = master_;
+  master_ = NULL;
+  return temp;
+}
+inline ::NFMsg::Ident* ReqAddSceneBuilding::mutable_master() {
+  
+  if (master_ == NULL) {
+    auto* p = CreateMaybeMessage<::NFMsg::Ident>(GetArenaNoVirtual());
+    master_ = p;
+  }
+  // @@protoc_insertion_point(field_mutable:NFMsg.ReqAddSceneBuilding.master)
+  return master_;
+}
+inline void ReqAddSceneBuilding::set_allocated_master(::NFMsg::Ident* master) {
+  ::google::protobuf::Arena* message_arena = GetArenaNoVirtual();
+  if (message_arena == NULL) {
+    delete reinterpret_cast< ::google::protobuf::MessageLite*>(master_);
+  }
+  if (master) {
+    ::google::protobuf::Arena* submessage_arena = NULL;
+    if (message_arena != submessage_arena) {
+      master = ::google::protobuf::internal::GetOwnedMessage(
+          message_arena, master, submessage_arena);
+    }
+    
+  } else {
+    
+  }
+  master_ = master;
+  // @@protoc_insertion_point(field_set_allocated:NFMsg.ReqAddSceneBuilding.master)
+}
+
+// bytes config_id = 4;
+inline void ReqAddSceneBuilding::clear_config_id() {
+  config_id_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline const ::std::string& ReqAddSceneBuilding::config_id() const {
+  // @@protoc_insertion_point(field_get:NFMsg.ReqAddSceneBuilding.config_id)
+  return config_id_.GetNoArena();
+}
+inline void ReqAddSceneBuilding::set_config_id(const ::std::string& value) {
+  
+  config_id_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
+  // @@protoc_insertion_point(field_set:NFMsg.ReqAddSceneBuilding.config_id)
+}
+#if LANG_CXX11
+inline void ReqAddSceneBuilding::set_config_id(::std::string&& value) {
+  
+  config_id_.SetNoArena(
+    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
+  // @@protoc_insertion_point(field_set_rvalue:NFMsg.ReqAddSceneBuilding.config_id)
+}
+#endif
+inline void ReqAddSceneBuilding::set_config_id(const char* value) {
+  GOOGLE_DCHECK(value != NULL);
+  
+  config_id_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:NFMsg.ReqAddSceneBuilding.config_id)
+}
+inline void ReqAddSceneBuilding::set_config_id(const void* value, size_t size) {
+  
+  config_id_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+      ::std::string(reinterpret_cast<const char*>(value), size));
+  // @@protoc_insertion_point(field_set_pointer:NFMsg.ReqAddSceneBuilding.config_id)
+}
+inline ::std::string* ReqAddSceneBuilding::mutable_config_id() {
+  
+  // @@protoc_insertion_point(field_mutable:NFMsg.ReqAddSceneBuilding.config_id)
+  return config_id_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline ::std::string* ReqAddSceneBuilding::release_config_id() {
+  // @@protoc_insertion_point(field_release:NFMsg.ReqAddSceneBuilding.config_id)
+  
+  return config_id_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline void ReqAddSceneBuilding::set_allocated_config_id(::std::string* config_id) {
+  if (config_id != NULL) {
+    
+  } else {
+    
+  }
+  config_id_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), config_id);
+  // @@protoc_insertion_point(field_set_allocated:NFMsg.ReqAddSceneBuilding.config_id)
+}
+
+// int32 scene_id = 5;
+inline void ReqAddSceneBuilding::clear_scene_id() {
+  scene_id_ = 0;
+}
+inline ::google::protobuf::int32 ReqAddSceneBuilding::scene_id() const {
+  // @@protoc_insertion_point(field_get:NFMsg.ReqAddSceneBuilding.scene_id)
+  return scene_id_;
+}
+inline void ReqAddSceneBuilding::set_scene_id(::google::protobuf::int32 value) {
+  
+  scene_id_ = value;
+  // @@protoc_insertion_point(field_set:NFMsg.ReqAddSceneBuilding.scene_id)
+}
+
+// -------------------------------------------------------------------
+
+// ReqSceneBuildings
+
+// int32 scene_id = 1;
+inline void ReqSceneBuildings::clear_scene_id() {
+  scene_id_ = 0;
+}
+inline ::google::protobuf::int32 ReqSceneBuildings::scene_id() const {
+  // @@protoc_insertion_point(field_get:NFMsg.ReqSceneBuildings.scene_id)
+  return scene_id_;
+}
+inline void ReqSceneBuildings::set_scene_id(::google::protobuf::int32 value) {
+  
+  scene_id_ = value;
+  // @@protoc_insertion_point(field_set:NFMsg.ReqSceneBuildings.scene_id)
+}
+
+// .NFMsg.Vector3 pos = 2;
+inline bool ReqSceneBuildings::has_pos() const {
+  return this != internal_default_instance() && pos_ != NULL;
+}
+inline const ::NFMsg::Vector3& ReqSceneBuildings::_internal_pos() const {
+  return *pos_;
+}
+inline const ::NFMsg::Vector3& ReqSceneBuildings::pos() const {
+  const ::NFMsg::Vector3* p = pos_;
+  // @@protoc_insertion_point(field_get:NFMsg.ReqSceneBuildings.pos)
+  return p != NULL ? *p : *reinterpret_cast<const ::NFMsg::Vector3*>(
+      &::NFMsg::_Vector3_default_instance_);
+}
+inline ::NFMsg::Vector3* ReqSceneBuildings::release_pos() {
+  // @@protoc_insertion_point(field_release:NFMsg.ReqSceneBuildings.pos)
+  
+  ::NFMsg::Vector3* temp = pos_;
+  pos_ = NULL;
+  return temp;
+}
+inline ::NFMsg::Vector3* ReqSceneBuildings::mutable_pos() {
+  
+  if (pos_ == NULL) {
+    auto* p = CreateMaybeMessage<::NFMsg::Vector3>(GetArenaNoVirtual());
+    pos_ = p;
+  }
+  // @@protoc_insertion_point(field_mutable:NFMsg.ReqSceneBuildings.pos)
+  return pos_;
+}
+inline void ReqSceneBuildings::set_allocated_pos(::NFMsg::Vector3* pos) {
+  ::google::protobuf::Arena* message_arena = GetArenaNoVirtual();
+  if (message_arena == NULL) {
+    delete reinterpret_cast< ::google::protobuf::MessageLite*>(pos_);
+  }
+  if (pos) {
+    ::google::protobuf::Arena* submessage_arena = NULL;
+    if (message_arena != submessage_arena) {
+      pos = ::google::protobuf::internal::GetOwnedMessage(
+          message_arena, pos, submessage_arena);
+    }
+    
+  } else {
+    
+  }
+  pos_ = pos;
+  // @@protoc_insertion_point(field_set_allocated:NFMsg.ReqSceneBuildings.pos)
+}
+
+// -------------------------------------------------------------------
+
+// AckSceneBuildings
+
+// repeated .NFMsg.ReqAddSceneBuilding buildings = 1;
+inline int AckSceneBuildings::buildings_size() const {
+  return buildings_.size();
+}
+inline void AckSceneBuildings::clear_buildings() {
+  buildings_.Clear();
+}
+inline ::NFMsg::ReqAddSceneBuilding* AckSceneBuildings::mutable_buildings(int index) {
+  // @@protoc_insertion_point(field_mutable:NFMsg.AckSceneBuildings.buildings)
+  return buildings_.Mutable(index);
+}
+inline ::google::protobuf::RepeatedPtrField< ::NFMsg::ReqAddSceneBuilding >*
+AckSceneBuildings::mutable_buildings() {
+  // @@protoc_insertion_point(field_mutable_list:NFMsg.AckSceneBuildings.buildings)
+  return &buildings_;
+}
+inline const ::NFMsg::ReqAddSceneBuilding& AckSceneBuildings::buildings(int index) const {
+  // @@protoc_insertion_point(field_get:NFMsg.AckSceneBuildings.buildings)
+  return buildings_.Get(index);
+}
+inline ::NFMsg::ReqAddSceneBuilding* AckSceneBuildings::add_buildings() {
+  // @@protoc_insertion_point(field_add:NFMsg.AckSceneBuildings.buildings)
+  return buildings_.Add();
+}
+inline const ::google::protobuf::RepeatedPtrField< ::NFMsg::ReqAddSceneBuilding >&
+AckSceneBuildings::buildings() const {
+  // @@protoc_insertion_point(field_list:NFMsg.AckSceneBuildings.buildings)
+  return buildings_;
 }
 
 // -------------------------------------------------------------------
@@ -13873,6 +14582,12 @@ inline void AckCreatePVPEctype::set_applytype(::google::protobuf::int32 value) {
 #ifdef __GNUC__
   #pragma GCC diagnostic pop
 #endif  // __GNUC__
+// -------------------------------------------------------------------
+
+// -------------------------------------------------------------------
+
+// -------------------------------------------------------------------
+
 // -------------------------------------------------------------------
 
 // -------------------------------------------------------------------

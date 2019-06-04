@@ -56,7 +56,7 @@ public:
     virtual bool Execute();
     virtual bool AfterInit();
 
-	virtual bool UseItem(const NFGUID& self, const std::string& strItemID, const NFGUID& targetID);
+	virtual bool UseItem(const NFGUID& self, const std::string& strItemID, const NFGUID& targetID, const NFVector3& vector);
 
 protected:
 	virtual bool CheckConfig();
