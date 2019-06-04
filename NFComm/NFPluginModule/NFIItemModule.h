@@ -54,7 +54,7 @@ public:
 	}
 
 public:
-	virtual bool UseItem(const NFGUID& self, const std::string& strItemID, const NFGUID& targetID) = 0;
+	virtual bool UseItem(const NFGUID& self, const std::string& strItemID, const NFGUID& targetID, const NFVector3& vector) = 0;
 };
 
 #endif

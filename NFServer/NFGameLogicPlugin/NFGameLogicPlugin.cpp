@@ -34,6 +34,7 @@
 //#include "NFTileMapModule.h"
 //#include "NFHomeModule.h"
 #include "NFSyncModule.h"
+#include "NFScenePropsModule.h"
 
 #ifdef NF_DYNAMIC_PLUGIN
 
@@ -63,7 +64,9 @@ const std::string NFGameLogicPlugin::GetPluginName()
 
 void NFGameLogicPlugin::Install()
 {
-    REGISTER_MODULE(pPluginManager, NFIBuffModule, NFBuffModule)
+	
+	REGISTER_MODULE(pPluginManager, NFIScenePropsModule, NFScenePropsModule)
+	REGISTER_MODULE(pPluginManager, NFIBuffModule, NFBuffModule)
 	REGISTER_MODULE(pPluginManager, NFICreateRoleModule, NFCreateRoleModule)
 	REGISTER_MODULE(pPluginManager, NFIGamePVPModule, NFGamePVPModule)
 	REGISTER_MODULE(pPluginManager, NFISyncModule, NFSyncModule)
@@ -81,6 +84,7 @@ void NFGameLogicPlugin::Uninstall()
 	//UNREGISTER_MODULE(pPluginManager, NFISurvivalModule, NFSurvivalModule);
 	//UNREGISTER_MODULE(pPluginManager, NFITileModule, NFTileModule);
 	//UNREGISTER_MODULE(pPluginManager, NFIMapModule, NFMapModule);
+	UNREGISTER_MODULE(pPluginManager, NFIScenePropsModule, NFScenePropsModule)
 	UNREGISTER_MODULE(pPluginManager, NFISyncModule, NFSyncModule)
 	UNREGISTER_MODULE(pPluginManager, NFIGamePVPModule, NFGamePVPModule)
     UNREGISTER_MODULE(pPluginManager, NFICreateRoleModule, NFCreateRoleModule)

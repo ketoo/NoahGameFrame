@@ -14,6 +14,9 @@
     <Filter Include="NFSyncModule">
       <UniqueIdentifier>{ad5d009c-1b04-4908-bad2-4fbb3fb70803}</UniqueIdentifier>
     </Filter>
+    <Filter Include="NFScenePropsModule">
+      <UniqueIdentifier>{a86b3f73-a5da-4bba-9d52-9d4ef540a9b7}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="NFGameLogicPlugin.h" />
@@ -28,6 +31,9 @@
     </ClInclude>
     <ClInclude Include="NFSyncModule.h">
       <Filter>NFSyncModule</Filter>
+    </ClInclude>
+    <ClInclude Include="NFScenePropsModule.h">
+      <Filter>NFScenePropsModule</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -44,6 +50,9 @@
     </ClCompile>
     <ClCompile Include="NFSyncModule.cpp">
       <Filter>NFSyncModule</Filter>
+    </ClCompile>
+    <ClCompile Include="NFScenePropsModule.cpp">
+      <Filter>NFScenePropsModule</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

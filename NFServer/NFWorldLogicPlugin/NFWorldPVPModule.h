@@ -66,11 +66,9 @@ public:
 
 protected:
 
-	int RandomTileScene(const int nExceptSceneID);
 	void OnReqSearchOpponentProcess(const NFSOCK nSockIndex, const int nMsgID, const char *msg, const uint32_t nLen);
-
-protected:
-	void InitAllTileScene();
+	void OnReqAddBuildingProcess(const NFSOCK nSockIndex, const int nMsgID, const char *msg, const uint32_t nLen);
+	void OnReqBuildingsProcess(const NFSOCK nSockIndex, const int nMsgID, const char *msg, const uint32_t nLen);
 
 protected:
 	
@@ -87,8 +85,6 @@ private:
 	NFIPlayerRedisModule* m_pPlayerRedisModule;
 	NFINoSqlModule* m_pNoSqlModule;
 	NFICommonRedisModule* m_pCommonRedisModule;
-
-	std::vector<int> mxTileSceneIDList;
 };
 
 

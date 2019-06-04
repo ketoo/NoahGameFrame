@@ -69,7 +69,7 @@ bool NFItemModule::AfterInit()
 	return true;
 }
 
-bool NFItemModule::UseItem(const NFGUID & self, const std::string & strItemID, const NFGUID & xTargetID)
+bool NFItemModule::UseItem(const NFGUID & self, const std::string & strItemID, const NFGUID & xTargetID, const NFVector3& vector)
 {
 	int nCount = 1;
 	if (!m_pElementModule->ExistElement(strItemID) || !m_pKernelModule->GetObject(xTargetID))
@@ -100,9 +100,9 @@ bool NFItemModule::UseItem(const NFGUID & self, const std::string & strItemID, c
 	case NFMsg::EItemType::EIT_GEM:
 	case NFMsg::EItemType::EIT_SCROLL:
 	{
-		if (pConsumeProcessModule->ConsumeLegal(self, strItemID, NFDataList()) == 0)
+		if (pConsumeProcessModule->ConsumeLegal(self, strItemID, NFDataList(), vector) == 0)
 		{
-			pConsumeProcessModule->ConsumeProcess(self, strItemID, NFDataList());
+			pConsumeProcessModule->ConsumeProcess(self, strItemID, NFDataList(), vector);
 		}
 	}
 	break;
@@ -113,9 +113,9 @@ bool NFItemModule::UseItem(const NFGUID & self, const std::string & strItemID, c
 		xTarget.AddString(strItemID);	//this is Item Config ID
 		xTarget.AddInt(nCount);	//this is Item Count to Consume
 
-		if (pConsumeProcessModule->ConsumeLegal(self, strItemID, xTarget) == 0)
+		if (pConsumeProcessModule->ConsumeLegal(self, strItemID, xTarget, vector) == 0)
 		{
-			pConsumeProcessModule->ConsumeProcess(self, strItemID, xTarget);
+			pConsumeProcessModule->ConsumeProcess(self, strItemID, xTarget, vector);
 		}
 	}
 	break;
@@ -382,9 +382,10 @@ void NFItemModule::OnClientUseItem(const NFSOCK nSockIndex, const int nMsgID, co
 	const NFGUID& self = NFINetModule::PBToNF(xMsg.user());
 	const std::string& strItemID = xMsg.item().item_id();
 	const NFGUID xTargetID = NFINetModule::PBToNF(xMsg.targetid());
+	const NFVector3 vector = NFINetModule::PBToNF(xMsg.position());
 	//const int nCount = xMsg.item().item_count();
 
-	UseItem(nPlayerID, strItemID, xTargetID);
+	UseItem(nPlayerID, strItemID, xTargetID, vector);
 }
 
 

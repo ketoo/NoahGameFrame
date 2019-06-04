@@ -61,9 +61,8 @@ bool NFWorldPVPModule::AfterInit()
 	m_pScheduleModule = pPluginManager->FindModule<NFIScheduleModule>();
 	m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>();
 
-	InitAllTileScene();
-
 	if (!m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_REQ_SEARCH_OPPNENT, this, &NFWorldPVPModule::OnReqSearchOpponentProcess)) { return false; }
+	if (!m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_REQ_ADD_BUILDING, this, &NFWorldPVPModule::OnReqAddBuildingProcess)) { return false; }
 
     return true;
 }
@@ -74,8 +73,7 @@ bool NFWorldPVPModule::ReadyExecute()
 	return false;
 }
 
-void NFWorldPVPModule::OnReqSearchOpponentProcess(const NFSOCK nSockIndex, const int nMsgID, const char *msg,
-                                              const uint32_t nLen)
+void NFWorldPVPModule::OnReqSearchOpponentProcess(const NFSOCK nSockIndex, const int nMsgID, const char *msg, const uint32_t nLen)
 {
 	CLIENT_MSG_PROCESS_NO_OBJECT( nMsgID, msg, nLen, NFMsg::ReqSearchOppnent);
 
@@ -98,26 +96,49 @@ void NFWorldPVPModule::OnReqSearchOpponentProcess(const NFSOCK nSockIndex, const
 	}
 }
 
-void NFWorldPVPModule::InitAllTileScene()
+void NFWorldPVPModule::OnReqAddBuildingProcess(const NFSOCK nSockIndex, const int nMsgID, const char * msg, const uint32_t nLen)
 {
-	//Tile
-	//mxTileSceneIDList
-	NF_SHARE_PTR<NFIClass> xLogicClass = m_pClassModule->GetElement(NFrame::Scene::ThisName());
-	if (xLogicClass)
-	{
-		const std::vector<std::string>& strIdList = xLogicClass->GetIDList();
-		for (int i = 0; i < strIdList.size(); ++i)
-		{
-			const std::string& strId = strIdList[i];
+	CLIENT_MSG_PROCESS_NO_OBJECT(nMsgID, msg, nLen, NFMsg::ReqAddSceneBuilding);
 
-			const int nSceneType = m_pElementModule->GetPropertyInt32(strId, NFrame::Scene::Tile());
-			if (nSceneType == 1 && strId != "1")
+	NFGUID posCell(xMsg.pos().x() / 100, xMsg.pos().z() / 100);
+	//store it by (position.x / cellWidth=100, position.z / cellWidth=100)
+	const std::string& strSceneKey = m_pCommonRedisModule->GetCellCacheKey(xMsg.scene_id());
+	const std::string& strCellKey = posCell.ToString();
+	const std::string& strCellValue = posCell.ToString() + "_CellInfo";
+	NF_SHARE_PTR<NFIRedisClient> xRedisClient = m_pNoSqlModule->GetDriverBySuit(strSceneKey);
+	if (xRedisClient)
+	{
+		//scene_id -> cell_id ->cell_id_ref -> cell_building_list
+		xRedisClient->HSET(strSceneKey, strCellKey, strCellValue);
+		xRedisClient->LPUSH(strCellValue, xMsg.SerializeAsString());
+	}
+}
+
+void NFWorldPVPModule::OnReqBuildingsProcess(const NFSOCK nSockIndex, const int nMsgID, const char * msg, const uint32_t nLen)
+{
+	CLIENT_MSG_PROCESS_NO_OBJECT(nMsgID, msg, nLen, NFMsg::ReqSceneBuildings);
+
+	NFGUID posCell(xMsg.pos().x() / 100, xMsg.pos().z() / 100);
+	//store it by (position.x / cellWidth=100, position.z / cellWidth=100)
+	const std::string& strSceneKey = m_pCommonRedisModule->GetCellCacheKey(xMsg.scene_id());
+	const std::string& strCellKey = posCell.ToString();
+	NF_SHARE_PTR<NFIRedisClient> xRedisClient = m_pNoSqlModule->GetDriverBySuit(strSceneKey);
+	if (xRedisClient)
+	{
+		//scene_id -> cell_id ->cell_id_ref -> cell_building_list
+		std::string strCellValue;
+		if (xRedisClient->HGET(strSceneKey, strCellKey, strCellValue))
+		{
+			std::vector<std::string> vector_string;
+			xRedisClient->LRANGE(strCellValue, 0, -1, vector_string);
+
+			if (vector_string.size() > 0)
 			{
-				int nSceneID = lexical_cast<int>(strId);
-				std::vector<int>::iterator it = std::find(mxTileSceneIDList.begin(), mxTileSceneIDList.end(), nSceneID);
-				if (it == mxTileSceneIDList.end())
+				NFMsg::AckSceneBuildings ackSceneBuildings;
+				for (int i = 0; i < vector_string.size(); ++i)
 				{
-					mxTileSceneIDList.push_back(nSceneID);
+					const std::string& data = vector_string[i];
+
 				}
 			}
 		}
@@ -126,7 +147,8 @@ void NFWorldPVPModule::InitAllTileScene()
 
 bool NFWorldPVPModule::SearchOpponent(const NFGUID & self, const int nExceptSceneID, const NFSOCK nSockIndex)
 {
-	int nSceneID = RandomTileScene(nExceptSceneID);
+	//search in the scene where the player at
+	int nSceneID = 1;// RandomTileScene(nExceptSceneID);
 	std::string strTileData;
 	NFGUID xViewOpponent;
 	if (m_pPlayerRedisModule->LoadPlayerTileRandom(nSceneID, xViewOpponent, strTileData) && !xViewOpponent.IsNull())
@@ -258,27 +280,4 @@ bool NFWorldPVPModule::ProcessOpponentData(const NFGUID& opponent, NFMsg::AckSea
 	}
 
 	return false;
-}
-
-int NFWorldPVPModule::RandomTileScene(const int nExceptSceneID)
-{
-	if (mxTileSceneIDList.size() > 1)
-	{
-		int nSceneID = mxTileSceneIDList.at(m_pKernelModule->Random(0, (int)mxTileSceneIDList.size()));
-		if (nExceptSceneID != nSceneID)
-		{
-			return nSceneID;
-		}
-
-		RandomTileScene(nExceptSceneID);
-	}
-	else
-	{
-		if (nExceptSceneID != mxTileSceneIDList[0])
-		{
-			return mxTileSceneIDList[0];
-		}
-	}
-
-	return 0;
 }

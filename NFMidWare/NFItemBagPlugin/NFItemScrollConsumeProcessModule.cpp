@@ -57,7 +57,7 @@ bool NFItemScrollConsumeProcessModule::Execute()
 }
 
 
-int NFItemScrollConsumeProcessModule::ConsumeLegal( const NFGUID& self, const std::string& strItemID, const NFDataList& targetID )
+int NFItemScrollConsumeProcessModule::ConsumeLegal( const NFGUID& self, const std::string& strItemID, const NFDataList& targetID, const NFVector3& vector)
 {
 	NF_SHARE_PTR<NFIRecord> pHeroRecord = m_pKernelModule->FindRecord(self, NFrame::Player::PlayerHero::ThisName());
 	if (nullptr == pHeroRecord)
@@ -77,7 +77,7 @@ int NFItemScrollConsumeProcessModule::ConsumeLegal( const NFGUID& self, const st
     return 100;
 }
 
-int NFItemScrollConsumeProcessModule::ConsumeProcess(const NFGUID& self, const std::string& strItemID, const NFDataList& targetID)
+int NFItemScrollConsumeProcessModule::ConsumeProcess(const NFGUID& self, const std::string& strItemID, const NFDataList& targetID, const NFVector3& vector)
 {
 	NF_SHARE_PTR<NFIRecord> pHero = m_pKernelModule->FindRecord(self, NFrame::Player::PlayerHero::ThisName());
 	if (nullptr == pHero)
@@ -120,7 +120,8 @@ int NFItemScrollConsumeProcessModule::ConsumeProcess(const NFGUID& self, const s
 			return  1;
 		}
 
-		const NFVector3 vPos = m_pKernelModule->GetPropertyVector3(self, NFrame::Player::Position());
+		const NFVector3 vPos = vector;
+		//const NFVector3 vPos = m_pKernelModule->GetPropertyVector3(self, NFrame::Player::Position());
 		const int nSceneID = m_pKernelModule->GetPropertyInt32(self, NFrame::Player::SceneID());
 		const int nGroupID = m_pKernelModule->GetPropertyInt32(self, NFrame::Player::GroupID());
 		const NFGUID xID = m_pKernelModule->CreateGUID();

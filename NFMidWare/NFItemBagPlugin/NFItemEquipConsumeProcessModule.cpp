@@ -58,12 +58,12 @@ bool NFItemEquipConsumeProcessModule::Execute()
 }
 
 
-int NFItemEquipConsumeProcessModule::ConsumeLegal(const NFGUID& self, const std::string& strItemID, const NFDataList& targetID)
+int NFItemEquipConsumeProcessModule::ConsumeLegal(const NFGUID& self, const std::string& strItemID, const NFDataList& targetID, const NFVector3& vector)
 {
 	return 1;
 }
 
-int NFItemEquipConsumeProcessModule::ConsumeProcess(const NFGUID& self, const std::string& strItemID, const NFDataList& targetID)
+int NFItemEquipConsumeProcessModule::ConsumeProcess(const NFGUID& self, const std::string& strItemID, const NFDataList& targetID, const NFVector3& vector)
 {
 	return 1;
 }
