@@ -3,7 +3,7 @@
                 NoahFrame
             https://github.com/ketoo/NoahGameFrame
 
-   Copyright 2009 - 2018 NoahFrame(NoahGameFrame)
+   Copyright 2009 - 2019 NoahFrame(NoahGameFrame)
 
    File creator: lvsheng.huang
    
@@ -57,10 +57,10 @@ public:
     virtual bool AfterInit();
 
     virtual void SendMsgPBToGate(const uint16_t nMsgID, google::protobuf::Message& xMsg, const NFGUID& self);
-	virtual void SendMsgPBToGate(const uint16_t nMsgID, google::protobuf::Message& xMsg, const int nSceneID, const int nGroupID);
+	virtual void SendGroupMsgPBToGate(const uint16_t nMsgID, google::protobuf::Message& xMsg, const int nSceneID, const int nGroupID);
 
 	virtual void SendMsgToGate(const uint16_t nMsgID, const std::string& strMsg, const NFGUID& self);
-	virtual void SendMsgPBToGate(const uint16_t nMsgID, const std::string& strMsg, const int nSceneID, const int nGroupID);
+	virtual void SendGroupMsgPBToGate(const uint16_t nMsgID, const std::string& strMsg, const int nSceneID, const int nGroupID);
 
     virtual bool AddPlayerGateInfo(const NFGUID& nRoleID, const NFGUID& nClientID, const int nGateID);
     virtual bool RemovePlayerGateInfo(const NFGUID& nRoleID);
@@ -117,22 +117,8 @@ protected:
 
 protected:
 
-	int OnObjectClassEvent(const NFGUID& self, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFDataList& var);
-
 	//////////////////////////////////////////
-	int OnSceneEvent(const NFGUID & self, const int nSceneID, const int nGroupID, const int nType, const NFDataList& argList);
 
-	//broad the data of argvar to self
-	int OnObjectListEnter(const NFDataList& self, const NFDataList& argVar);
-	int OnObjectDataFinished(const NFDataList& self, const NFDataList& argVar);
-	int OnObjectListLeave(const NFDataList& self, const NFDataList& argVar);
-
-	//broad the data of self to argvar 
-	int OnPropertyEnter(const NFDataList& argVar, const NFGUID& self);
-	int OnRecordEnter(const NFDataList& argVar, const NFGUID& self);
-
-	int OnPropertyEvent(const NFGUID& self, const std::string& strProperty, const NFData& oldVar, const NFData& newVar, const NFDataList& argVar);
-	int OnRecordEvent(const NFGUID& self, const std::string& strRecord, const RECORD_EVENT_DATA& xEventData, const NFData& oldVar, const NFData& newVar, const NFDataList& argVar);
 
 private:
     

@@ -3,7 +3,7 @@
                 NoahFrame
             https://github.com/ketoo/NoahGameFrame
 
-   Copyright 2009 - 2018 NoahFrame(NoahGameFrame)
+   Copyright 2009 - 2019 NoahFrame(NoahGameFrame)
 
    File creator: lvsheng.huang
    
@@ -35,8 +35,9 @@ bool NFSceneProcessModule::Init()
 	m_pLogModule = pPluginManager->FindModule<NFILogModule>();
 	m_pEventModule = pPluginManager->FindModule<NFIEventModule>();
 	m_pSceneModule = pPluginManager->FindModule<NFISceneModule>();
+	m_pCellModule = pPluginManager->FindModule<NFICellModule>();
 	m_pGameServerNet_ServerModule = pPluginManager->FindModule<NFIGameServerNet_ServerModule>();
-
+	
     return true;
 }
 
@@ -121,7 +122,7 @@ bool NFSceneProcessModule::RequestEnterScene(const NFGUID & self, const int nSce
 	{
 		const int nMaxGroup = m_pElementModule->GetPropertyInt32(std::to_string(nSceneID), NFrame::Scene::MaxGroup());
 		const int nMaxPlayer = m_pElementModule->GetPropertyInt32(std::to_string(nSceneID), NFrame::Scene::MaxGroupPlayers());
-		for (int i = 1; i < nMaxGroup; ++i)
+		for (int i = 1; i <= nMaxGroup; ++i)
 		{
 			NFDataList xList;
 			m_pKernelModule->GetGroupObjectList(nSceneID, i, xList, true);
@@ -136,7 +137,7 @@ bool NFSceneProcessModule::RequestEnterScene(const NFGUID & self, const int nSce
 	else if (eSceneType == E_SCENE_TYPE::SCENE_TYPE_Clan)
 	{
 		const int nMaxGroup = m_pElementModule->GetPropertyInt32(std::to_string(nSceneID), NFrame::Scene::MaxGroup());
-		for (int i = 1; i < nMaxGroup; ++i)
+		for (int i = 1; i <= nMaxGroup; ++i)
 		{
 
 		}
@@ -255,13 +256,14 @@ int NFSceneProcessModule::AfterEnterSceneGroupEvent(const NFGUID & self, const i
 	{
 		//change AI owner
 		NFDataList varObjectList;
-		if (m_pKernelModule->GetGroupObjectList(nSceneID, nGroupID, varObjectList, false) && varObjectList.GetCount() > 0)
+		const NFVector3& position = m_pKernelModule->GetPropertyVector3(self, NFrame::Player::Position());
+		if (m_pCellModule->GetCellObjectList(nSceneID, nGroupID, position, varObjectList, false) && varObjectList.GetCount() > 0)
 		{
 			for (int i = 0; i < varObjectList.GetCount(); ++i)
 			{
 				NFGUID npcID = varObjectList.Object(i);
 				NFGUID npcOnwerID = m_pKernelModule->GetPropertyObject(npcID, NFrame::NPC::AIOwnerID());
-				if (npcOnwerID.IsNull())
+				//if (npcOnwerID.IsNull())
 				{
 					m_pKernelModule->SetPropertyObject(npcID, NFrame::NPC::AIOwnerID(), self);
 				}
@@ -351,7 +353,7 @@ bool NFSceneProcessModule::CreateSceneBaseGroup(const std::string & strSceneIDNa
 		for (int i = 0; i < nMaxGroup; ++i)
 		{
 			int nGroupID = m_pKernelModule->RequestGroupScene(nSceneID);
-			if (nGroupID>= 0)
+			if (nGroupID > 0)
 			{
 				m_pSceneModule->CreateSceneNPC(nSceneID, nGroupID);
 			}

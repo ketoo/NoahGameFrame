@@ -3,7 +3,7 @@
                 NoahFrame
             https://github.com/ketoo/NoahGameFrame
 
-   Copyright 2009 - 2018 NoahFrame(NoahGameFrame)
+   Copyright 2009 - 2019 NoahFrame(NoahGameFrame)
 
    File creator: lvsheng.huang
    
@@ -30,11 +30,10 @@
 #include "NFComm/NFPluginModule/NFIModule.h"
 
 
-typedef std::string string_type;
-typedef std::vector<string_type> string_vector;
-typedef std::pair<string_type, string_type> string_pair;
+typedef std::vector<std::string> string_vector;
+typedef std::pair<std::string, std::string> string_pair;
 typedef std::vector<string_pair> string_pair_vector;
-typedef std::pair<string_type, double> string_score_pair;
+typedef std::pair<std::string, double> string_score_pair;
 typedef std::vector<string_score_pair> string_score_vector;
 
 

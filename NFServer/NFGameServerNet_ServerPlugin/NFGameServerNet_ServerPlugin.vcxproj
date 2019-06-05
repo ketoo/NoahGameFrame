@@ -92,6 +92,7 @@
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="NFAutoBroadcastModule.h" />
     <ClInclude Include="NFGameServerNet_ServerModule.h" />
     <ClInclude Include="NFGameServerNet_ServerPlugin.h" />
   </ItemGroup>
@@ -104,6 +105,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
       </PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="NFAutoBroadcastModule.cpp" />
     <ClCompile Include="NFGameServerNet_ServerModule.cpp" />
     <ClCompile Include="NFGameServerNet_ServerPlugin.cpp" />
   </ItemGroup>

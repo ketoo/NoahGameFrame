@@ -3,7 +3,7 @@
                 NoahFrame
             https://github.com/ketoo/NoahGameFrame
 
-   Copyright 2009 - 2018 NoahFrame(NoahGameFrame)
+   Copyright 2009 - 2019 NoahFrame(NoahGameFrame)
 
    File creator: lvsheng.huang
    
@@ -32,7 +32,8 @@ bool NFSceneModule::Init()
 	m_pElementModule = pPluginManager->FindModule<NFIElementModule>();
 	m_pLogModule = pPluginManager->FindModule<NFILogModule>();
 	m_pEventModule = pPluginManager->FindModule<NFIEventModule>();
-
+	m_pCellModule = pPluginManager->FindModule<NFICellModule>();
+	
 	m_pKernelModule->RegisterCommonClassEvent(this, &NFSceneModule::OnClassCommonEvent);
 	m_pKernelModule->RegisterCommonPropertyEvent(this, &NFSceneModule::OnPropertyCommonEvent);
 	m_pKernelModule->RegisterCommonRecordEvent(this, &NFSceneModule::OnRecordCommonEvent);
@@ -458,8 +459,9 @@ int NFSceneModule::OnClassCommonEvent(const NFGUID & self, const std::string & s
 			return 0;
 		}
 
+		const NFVector3& pos = m_pKernelModule->GetPropertyVector3(self, NFrame::Player::Position());
 		NFDataList valueAllPlayrNoSelfList;
-		m_pKernelModule->GetGroupObjectList(nObjectSceneID, nObjectGroupID, valueAllPlayrNoSelfList, true, self);
+		m_pCellModule->GetCellObjectList(nObjectSceneID, nObjectGroupID, pos, valueAllPlayrNoSelfList, true, self);
 
 		//tell other people that you want to leave from this scene or this group
 		//every one want to know you want to leave notmater you are a monster maybe you are a player
@@ -495,9 +497,9 @@ int NFSceneModule::OnClassCommonEvent(const NFGUID & self, const std::string & s
 			{
 				return 0;
 			}
-
+			const NFVector3& pos = m_pKernelModule->GetPropertyVector3(self, NFrame::Player::Position());
 			NFDataList valueAllPlayrObjectList;
-			m_pKernelModule->GetGroupObjectList(nObjectSceneID, nObjectGroupID, valueAllPlayrObjectList, true);
+			m_pCellModule->GetCellObjectList(nObjectSceneID, nObjectGroupID, pos, valueAllPlayrObjectList, true);
 
 			//monster or others need to tell all player
 			OnObjectListEnter(valueAllPlayrObjectList, NFDataList() << self);
@@ -518,7 +520,8 @@ int NFSceneModule::OnClassCommonEvent(const NFGUID & self, const std::string & s
 int NFSceneModule::OnPlayerGroupEvent(const NFGUID & self, const std::string & strPropertyName, const NFData & oldVar, const NFData & newVar)
 {
 	//this event only happened in the same scene
-	int nSceneID = m_pKernelModule->GetPropertyInt32(self, NFrame::IObject::SceneID());
+	const int nSceneID = m_pKernelModule->GetPropertyInt32(self, NFrame::IObject::SceneID());
+	const NFVector3 position = m_pKernelModule->GetPropertyVector3(self, NFrame::IObject::Position());
 	int nOldGroupID = oldVar.GetInt32();
 	int nNewGroupID = newVar.GetInt32();
 
@@ -534,8 +537,8 @@ int NFSceneModule::OnPlayerGroupEvent(const NFGUID & self, const std::string & s
 			//step1: leave
 			NFDataList valueAllOldNPCListNoSelf;
 			NFDataList valueAllOldPlayerListNoSelf;
-			m_pKernelModule->GetGroupObjectList(nSceneID, nOldGroupID, valueAllOldNPCListNoSelf, false, self);
-			m_pKernelModule->GetGroupObjectList(nSceneID, nOldGroupID, valueAllOldPlayerListNoSelf, true, self);
+			m_pCellModule->GetCellObjectList(nSceneID, nOldGroupID, position, valueAllOldNPCListNoSelf, false, self);
+			m_pCellModule->GetCellObjectList(nSceneID, nOldGroupID, position, valueAllOldPlayerListNoSelf, true, self);
 
 			OnObjectListLeave(valueAllOldPlayerListNoSelf, NFDataList() << self);
 			OnObjectListLeave(NFDataList() << self, valueAllOldPlayerListNoSelf);
@@ -551,8 +554,8 @@ int NFSceneModule::OnPlayerGroupEvent(const NFGUID & self, const std::string & s
 		NFDataList valueAllNewNPCListNoSelf;
 		NFDataList valueAllNewPlayerListNoSelf;
 
-		m_pKernelModule->GetGroupObjectList(nSceneID, nNewGroupID, valueAllNewNPCListNoSelf, false, self);
-		m_pKernelModule->GetGroupObjectList(nSceneID, nNewGroupID, valueAllNewPlayerListNoSelf, true, self);
+		m_pCellModule->GetCellObjectList(nSceneID, nNewGroupID, position, valueAllNewNPCListNoSelf, false, self);
+		m_pCellModule->GetCellObjectList(nSceneID, nNewGroupID, position, valueAllNewPlayerListNoSelf, true, self);
 
 		OnObjectListEnter(valueAllNewPlayerListNoSelf, NFDataList() << self);
 		OnObjectListEnter(NFDataList() << self, valueAllNewPlayerListNoSelf);
@@ -594,8 +597,8 @@ int NFSceneModule::OnPlayerGroupEvent(const NFGUID & self, const std::string & s
 			//step1: leave
 			NFDataList valueAllOldNPCListNoSelf;
 			NFDataList valueAllOldPlayerListNoSelf;
-			m_pKernelModule->GetGroupObjectList(nSceneID, nOldGroupID, valueAllOldNPCListNoSelf, false, self);
-			m_pKernelModule->GetGroupObjectList(nSceneID, nOldGroupID, valueAllOldPlayerListNoSelf, true, self);
+			m_pCellModule->GetCellObjectList(nSceneID, nOldGroupID, position, valueAllOldNPCListNoSelf, false, self);
+			m_pCellModule->GetCellObjectList(nSceneID, nOldGroupID, position, valueAllOldPlayerListNoSelf, true, self);
 
 			OnObjectListLeave(valueAllOldPlayerListNoSelf, NFDataList() << self);
 			OnObjectListLeave(NFDataList() << self, valueAllOldPlayerListNoSelf);
@@ -620,8 +623,9 @@ int NFSceneModule::OnPlayerSceneEvent(const NFGUID & self, const std::string & s
 
 int NFSceneModule::GetBroadCastObject(const NFGUID & self, const std::string & strPropertyName, const bool bTable, NFDataList & valueObject)
 {
-	int nObjectContainerID = m_pKernelModule->GetPropertyInt32(self, NFrame::IObject::SceneID());
-	int nObjectGroupID = m_pKernelModule->GetPropertyInt32(self, NFrame::IObject::GroupID());
+	const int nObjectContainerID = m_pKernelModule->GetPropertyInt32(self, NFrame::IObject::SceneID());
+	const int nObjectGroupID = m_pKernelModule->GetPropertyInt32(self, NFrame::IObject::GroupID());
+	const NFVector3& position = m_pKernelModule->GetPropertyVector3(self, NFrame::IObject::Position());
 
 	const std::string& strClassName = m_pKernelModule->GetPropertyString(self, NFrame::IObject::ClassName());
 	NF_SHARE_PTR<NFIRecordManager> pClassRecordManager = m_pClassModule->GetClassRecordManager(strClassName);
@@ -662,7 +666,7 @@ int NFSceneModule::GetBroadCastObject(const NFGUID & self, const std::string & s
 		{
 			if (pRecord->GetPublic())
 			{
-				m_pKernelModule->GetGroupObjectList(nObjectContainerID, nObjectGroupID, valueObject, true, self);
+				m_pCellModule->GetCellObjectList(nObjectContainerID, nObjectGroupID, position, valueObject, true, self);
 			}
 
 			if (pRecord->GetPrivate())
@@ -678,7 +682,7 @@ int NFSceneModule::GetBroadCastObject(const NFGUID & self, const std::string & s
 		{
 			if (pProperty->GetPublic())
 			{
-				m_pKernelModule->GetGroupObjectList(nObjectContainerID, nObjectGroupID, valueObject, true, self);
+				m_pCellModule->GetCellObjectList(nObjectContainerID, nObjectGroupID, position, valueObject, true, self);
 			}
 
 			if (pProperty->GetPrivate())
@@ -856,6 +860,24 @@ int NFSceneModule::OnRecordEvent(const NFGUID & self, const std::string& strProp
 		RECORD_SINGLE_EVENT_FUNCTOR_PTR& pFunPtr = *it;
 		RECORD_SINGLE_EVENT_FUNCTOR* pFunc = pFunPtr.get();
 		pFunc->operator()(self, strProperty, xEventData, oldVar, newVar, argVar);
+	}
+
+	return 0;
+}
+
+int NFSceneModule::OnMoveCellEvent(const NFGUID & self, const int & scene, const int & group, const NFGUID & fromCell, const NFGUID & toCell)
+{
+	if (fromCell.IsNull())
+	{
+		//enter a group
+	}
+	else if (toCell.IsNull())
+	{
+		//leave a group
+	}
+	else
+	{
+		//move between two groups
 	}
 
 	return 0;

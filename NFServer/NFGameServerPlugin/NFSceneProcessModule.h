@@ -3,7 +3,7 @@
                 NoahFrame
             https://github.com/ketoo/NoahGameFrame
 
-   Copyright 2009 - 2018 NoahFrame(NoahGameFrame)
+   Copyright 2009 - 2019 NoahFrame(NoahGameFrame)
 
    File creator: lvsheng.huang
    
@@ -47,6 +47,7 @@
 #include "NFComm/NFPluginModule/NFIPluginManager.h"
 #include "NFComm/NFPluginModule/NFIEventModule.h"
 #include "NFComm/NFPluginModule/NFISceneModule.h"
+#include "NFComm/NFPluginModule/NFICellModule.h"
 #include "NFComm/NFPluginModule/NFIGameServerNet_ServerModule.h"
 
 class NFSceneProcessModule
@@ -91,6 +92,7 @@ private:
     NFILogModule* m_pLogModule;
 	NFIEventModule* m_pEventModule;
 	NFISceneModule* m_pSceneModule;
+	NFICellModule* m_pCellModule;
     NFIGameServerNet_ServerModule* m_pGameServerNet_ServerModule;
 };
 

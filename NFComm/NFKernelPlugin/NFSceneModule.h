@@ -3,7 +3,7 @@
                 NoahFrame
             https://github.com/ketoo/NoahGameFrame
 
-   Copyright 2009 - 2018 NoahFrame(NoahGameFrame)
+   Copyright 2009 - 2019 NoahFrame(NoahGameFrame)
 
    File creator: lvsheng.huang
    
@@ -36,6 +36,7 @@
 #include "NFComm/NFPluginModule/NFIClassModule.h"
 #include "NFComm/NFPluginModule/NFIElementModule.h"
 #include "NFComm/NFPluginModule/NFIEventModule.h"
+#include "NFComm/NFPluginModule/NFICellModule.h"
 
 class NFSceneModule
     : public NFISceneModule
@@ -124,7 +125,9 @@ protected:
 
 	int OnPropertyEvent(const NFGUID& self, const std::string& strProperty, const NFData& oldVar, const NFData& newVar, const NFDataList& argVar);
 	int OnRecordEvent(const NFGUID& self, const std::string& strRecord, const RECORD_EVENT_DATA& xEventData, const NFData& oldVar, const NFData& newVar, const NFDataList& argVar);
+	
 	////////////////interface for broadcast event///////////////////////////////////
+	int OnMoveCellEvent(const NFGUID& self, const int& scene, const int& group, const NFGUID& fromCell, const NFGUID& toCell);
 
 private:
 
@@ -150,6 +153,7 @@ private:
 	NFILogModule* m_pLogModule;
 	NFIElementModule* m_pElementModule;
 	NFIEventModule* m_pEventModule;
+	NFICellModule* m_pCellModule;
 };
 
 #endif

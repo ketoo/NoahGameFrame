@@ -3,7 +3,7 @@
 				NoahFrame
 		https://github.com/ketoo/NoahGameFrame
 
-	Copyright 2009 - 2018 NoahFrame(NoahGameFrame)
+	Copyright 2009 - 2019 NoahFrame(NoahGameFrame)
 
 	File creator: lvsheng.huang
 
@@ -59,12 +59,19 @@ enum ECELL_AROUND
     ECELL_AROUND_25,
     ECELL_AROUND_ALL,
 };
+//id, scene_id, group_id, move_out_cell_id, move_in_cell_id
+typedef std::function<int(const NFGUID&, const int&, const int&, const NFGUID&, const NFGUID&)> CELL_MOVE_EVENT_FUNCTOR;
+typedef NF_SHARE_PTR<CELL_MOVE_EVENT_FUNCTOR> CELL_MOVE_EVENT_FUNCTOR_PTR;//EVENT
 
 class NFICellModule
 	: public NFIModule
 {
 public:
     virtual ~NFICellModule() {}
+
+	virtual const bool CreateGroupCell(const int& sceneID, const int& groupID) = 0;
+	virtual const bool DestroyGroupCell(const int& sceneID, const int& groupID) = 0;
+
     // the event that a object are moving
     virtual const NFGUID OnObjectMove(const NFGUID& self, const int& sceneID, const int& groupID,
                                          const NFGUID& lastGrid, const int nX, const int nY, const int nZ) = 0;
@@ -77,8 +84,26 @@ public:
     virtual const NFGUID OnObjectLeave(const NFGUID& self, const int& sceneID, const int& groupID,
 											const int nX, const int nY, const int nZ) = 0;
 
+
+	virtual bool GetCellObjectList(const int nSceneID, const int nGroupID, const NFVector3& pos, NFDataList& list, ECELL_AROUND eAround = ECELL_AROUND_9) = 0;
+	virtual bool GetCellObjectList(const int nSceneID, const int nGroupID, const NFVector3& pos, NFDataList& list, const NFGUID& noSelf, ECELL_AROUND eAround = ECELL_AROUND_9) = 0;
+	virtual bool GetCellObjectList(const int nSceneID, const int nGroupID, const NFVector3& pos, NFDataList& list, const bool bPlayer, ECELL_AROUND eAround = ECELL_AROUND_9) = 0;
+	virtual bool GetCellObjectList(const int nSceneID, const int nGroupID, const NFVector3& pos, NFDataList& list, const bool bPlayer, const NFGUID& noSelf, ECELL_AROUND eAround = ECELL_AROUND_9) = 0;
+	virtual bool GetCellObjectList(const int nSceneID, const int nGroupID, const NFVector3& pos, const std::string& strClassName, NFDataList& list, ECELL_AROUND eAround = ECELL_AROUND_9) = 0;
+	virtual bool GetCellObjectList(const int nSceneID, const int nGroupID, const NFVector3& pos, const std::string& strClassName, NFDataList& list, const NFGUID& noSelf, ECELL_AROUND eAround = ECELL_AROUND_9) = 0;
+
+
     //////////////////////////////////////////////////////////////////////////
-    
+
+	template<typename BaseType>
+	bool AddMoveEventCallBack(BaseType* pBase, int (BaseType::*handler)(const NFGUID&, const int&, const int&, const NFGUID&, const NFGUID&))
+	{
+		CELL_MOVE_EVENT_FUNCTOR functor = std::bind(handler, pBase, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3, std::placeholders::_4, std::placeholders::_5);
+		CELL_MOVE_EVENT_FUNCTOR_PTR functorPtr(new CELL_MOVE_EVENT_FUNCTOR(functor));
+
+		AddMoveEventCallBack(functorPtr);
+		return true;
+	}
 
 protected:
 private:

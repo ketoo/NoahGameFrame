@@ -1,5 +1,5 @@
 /*
-    Copyright 2009 - 2018 NoahGameFrame/NoahFrame
+    Copyright 2009 - 2019 NoahGameFrame/NoahFrame
     
    This source file is part of NoahGameFrame/NoahFrame.
    NoahGameFrame/NoahFrame is open-source software and you can redistribute it and/or modify

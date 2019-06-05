@@ -3,7 +3,7 @@
                 NoahFrame
             https://github.com/ketoo/NoahGameFrame
 
-   Copyright 2009 - 2018 NoahFrame(NoahGameFrame)
+   Copyright 2009 - 2019 NoahFrame(NoahGameFrame)
 
    File creator: lvsheng.huang
    
@@ -76,7 +76,8 @@ bool NFKernelModule::Init()
 	m_pLogModule = pPluginManager->FindModule<NFILogModule>();
 	m_pScheduleModule = pPluginManager->FindModule<NFIScheduleModule>();
 	m_pEventModule = pPluginManager->FindModule<NFIEventModule>();
-
+	m_pCellModule = pPluginManager->FindModule<NFICellModule>();
+	
 	return true;
 }
 
@@ -1057,6 +1058,8 @@ int NFKernelModule::RequestGroupScene(const int nSceneID)
 				if (pGroupInfo)
 				{
 					pSceneInfo->AddElement(nNewGroupID, pGroupInfo);
+
+					m_pCellModule->CreateGroupCell(nSceneID, nNewGroupID);
 					return nNewGroupID;
 				}
 			}
@@ -1074,6 +1077,8 @@ bool NFKernelModule::ReleaseGroupScene(const int nSceneID, const int nGroupID)
 		if (nGroupID > 0)
 		{
 			m_pSceneModule->DestroySceneNPC(nSceneID, nGroupID);
+
+			m_pCellModule->DestroyGroupCell(nSceneID, nGroupID);
 
 			pSceneInfo->RemoveElement(nGroupID);
 		}
