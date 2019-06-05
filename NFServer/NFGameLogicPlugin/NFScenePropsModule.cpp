@@ -84,15 +84,14 @@ int NFScenePropsModule::OnPlayerClassEvent(const NFGUID & self, const std::strin
 
 int NFScenePropsModule::OnPlayePositionPEvent(const NFGUID & self, const std::string & strPropertyName, const NFData & oldVar, const NFData & newVar)
 {
-	NFGUID posOldCell(oldVar.GetVector3().X() / 100, oldVar.GetVector3().Z() / 100);
 	NFGUID posNewCell(newVar.GetVector3().X() / 100, newVar.GetVector3().Z() / 100);
-	if (posOldCell != posNewCell)
+
+	if (mCellPullState.find(posNewCell) == mCellPullState.end())
 	{
-		if (mCellPullState.find(posNewCell) == mCellPullState.end())
-		{
-			const int sceneID = m_pKernelModule->GetPropertyInt(self, NFrame::Player::SceneID());
-			ReqBuildings(sceneID, newVar.GetVector3());
-		}
+		mCellPullState[posNewCell] = true;
+
+		const int sceneID = m_pKernelModule->GetPropertyInt(self, NFrame::Player::SceneID());
+		ReqBuildings(sceneID, newVar.GetVector3());
 	}
 
 	return 0;
