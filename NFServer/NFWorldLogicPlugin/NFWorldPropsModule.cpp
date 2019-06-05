@@ -118,7 +118,7 @@ void NFWorldPropsModule::OnReqBuildingsProcess(const NFSOCK nSockIndex, const in
 				}
 			}
 
-			m_pNetModule->SendMsgPB(NFMsg::EGMI_ACK_SEARCH_OPPNENT, ackSceneBuildings, nSockIndex);
+			m_pNetModule->SendMsgPB(NFMsg::EGMI_REQ_ACK_BUILDING_LIST, ackSceneBuildings, nSockIndex);
 		}
 	}
 }
