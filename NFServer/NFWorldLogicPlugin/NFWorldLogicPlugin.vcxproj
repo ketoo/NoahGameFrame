@@ -92,6 +92,7 @@
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="NFWorldPropsModule.h" />
     <ClInclude Include="NFWorldPVPModule.h" />
     <ClInclude Include="NFWorldLogicModule.h" />
     <ClInclude Include="NFWorldLogicPlugin.h" />
@@ -105,6 +106,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
       </PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="NFWorldPropsModule.cpp" />
     <ClCompile Include="NFWorldPVPModule.cpp" />
     <ClCompile Include="NFWorldLogicModule.cpp" />
     <ClCompile Include="NFWorldLogicPlugin.cpp" />

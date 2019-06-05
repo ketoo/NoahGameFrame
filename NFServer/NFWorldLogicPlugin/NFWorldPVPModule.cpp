@@ -3,7 +3,7 @@
                 NoahFrame
             https://github.com/ketoo/NoahGameFrame
 
-   Copyright 2009 - 2018 NoahFrame(NoahGameFrame)
+   Copyright 2009 - 2019 NoahFrame(NoahGameFrame)
 
    File creator: lvsheng.huang
    
@@ -62,7 +62,6 @@ bool NFWorldPVPModule::AfterInit()
 	m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>();
 
 	if (!m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_REQ_SEARCH_OPPNENT, this, &NFWorldPVPModule::OnReqSearchOpponentProcess)) { return false; }
-	if (!m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_REQ_ADD_BUILDING, this, &NFWorldPVPModule::OnReqAddBuildingProcess)) { return false; }
 
     return true;
 }
@@ -93,55 +92,6 @@ void NFWorldPVPModule::OnReqSearchOpponentProcess(const NFSOCK nSockIndex, const
 		m_pNetModule->SendMsgPB(NFMsg::EGMI_ACK_SEARCH_OPPNENT, xAckData, nSockIndex);
 
 		m_pLogModule->LogNormal(NFILogModule::NLL_ERROR_NORMAL, nPlayerID, "ERROR TO FIND A OPPNENT!", "", __FUNCTION__, __LINE__);
-	}
-}
-
-void NFWorldPVPModule::OnReqAddBuildingProcess(const NFSOCK nSockIndex, const int nMsgID, const char * msg, const uint32_t nLen)
-{
-	CLIENT_MSG_PROCESS_NO_OBJECT(nMsgID, msg, nLen, NFMsg::ReqAddSceneBuilding);
-
-	NFGUID posCell(xMsg.pos().x() / 100, xMsg.pos().z() / 100);
-	//store it by (position.x / cellWidth=100, position.z / cellWidth=100)
-	const std::string& strSceneKey = m_pCommonRedisModule->GetCellCacheKey(xMsg.scene_id());
-	const std::string& strCellKey = posCell.ToString();
-	const std::string& strCellValue = posCell.ToString() + "_CellInfo";
-	NF_SHARE_PTR<NFIRedisClient> xRedisClient = m_pNoSqlModule->GetDriverBySuit(strSceneKey);
-	if (xRedisClient)
-	{
-		//scene_id -> cell_id ->cell_id_ref -> cell_building_list
-		xRedisClient->HSET(strSceneKey, strCellKey, strCellValue);
-		xRedisClient->LPUSH(strCellValue, xMsg.SerializeAsString());
-	}
-}
-
-void NFWorldPVPModule::OnReqBuildingsProcess(const NFSOCK nSockIndex, const int nMsgID, const char * msg, const uint32_t nLen)
-{
-	CLIENT_MSG_PROCESS_NO_OBJECT(nMsgID, msg, nLen, NFMsg::ReqSceneBuildings);
-
-	NFGUID posCell(xMsg.pos().x() / 100, xMsg.pos().z() / 100);
-	//store it by (position.x / cellWidth=100, position.z / cellWidth=100)
-	const std::string& strSceneKey = m_pCommonRedisModule->GetCellCacheKey(xMsg.scene_id());
-	const std::string& strCellKey = posCell.ToString();
-	NF_SHARE_PTR<NFIRedisClient> xRedisClient = m_pNoSqlModule->GetDriverBySuit(strSceneKey);
-	if (xRedisClient)
-	{
-		//scene_id -> cell_id ->cell_id_ref -> cell_building_list
-		std::string strCellValue;
-		if (xRedisClient->HGET(strSceneKey, strCellKey, strCellValue))
-		{
-			std::vector<std::string> vector_string;
-			xRedisClient->LRANGE(strCellValue, 0, -1, vector_string);
-
-			if (vector_string.size() > 0)
-			{
-				NFMsg::AckSceneBuildings ackSceneBuildings;
-				for (int i = 0; i < vector_string.size(); ++i)
-				{
-					const std::string& data = vector_string[i];
-
-				}
-			}
-		}
 	}
 }
 

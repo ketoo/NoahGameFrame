@@ -3,7 +3,7 @@
                 NoahFrame
             https://github.com/ketoo/NoahGameFrame
 
-   Copyright 2009 - 2018 NoahFrame(NoahGameFrame)
+   Copyright 2009 - 2019 NoahFrame(NoahGameFrame)
 
    File creator: chuanbo.guo
    
@@ -55,9 +55,14 @@ std::string NFCommonRedisModule::GetTileCacheKey(const int & nSceneID)
 	return lexical_cast<std::string>(nSceneID) + "_TileInfo";
 }
 
-std::string NFCommonRedisModule::GetCellCacheKey(const int & nSceneID)
+std::string NFCommonRedisModule::GetSceneCacheKey(const int & nSceneID)
 {
-	return lexical_cast<std::string>(nSceneID) + "_CellInfo";
+	return lexical_cast<std::string>(nSceneID) + "_SceneProps";
+}
+
+std::string NFCommonRedisModule::GetCellCacheKey(const std::string & strCellID)
+{
+	return strCellID + "_CellInfo";
 }
 
 bool NFCommonRedisModule::AfterInit()

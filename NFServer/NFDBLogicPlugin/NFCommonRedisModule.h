@@ -3,7 +3,7 @@
                 NoahFrame
             https://github.com/ketoo/NoahGameFrame
 
-   Copyright 2009 - 2018 NoahFrame(NoahGameFrame)
+   Copyright 2009 - 2019 NoahFrame(NoahGameFrame)
 
    File creator: lvsheng.huang
    
@@ -48,7 +48,8 @@ public:
 
 	virtual std::string GetAccountCacheKey(const std::string& strAccount);
 	virtual std::string GetTileCacheKey(const int& nSceneID);
-	virtual std::string GetCellCacheKey(const int& nSceneID);
+	virtual std::string GetSceneCacheKey(const int& nSceneID);
+	virtual std::string GetCellCacheKey(const std::string& strCellID);
 
     virtual NF_SHARE_PTR<NFIPropertyManager> NewPropertyManager(const std::string& strClassName);
     virtual NF_SHARE_PTR<NFIRecordManager> NewRecordManager(const std::string& strClassName);
