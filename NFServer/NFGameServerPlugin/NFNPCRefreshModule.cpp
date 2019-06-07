@@ -208,49 +208,54 @@ int NFNPCRefreshModule::OnBuildingDeadDestroyHeart(const NFGUID & self, const st
 
 int NFNPCRefreshModule::OnObjectBeKilled( const NFGUID& self, const NFGUID& killer )
 {
-	if ( m_pKernelModule->GetObject( killer ) )
+	if ( m_pKernelModule->GetObject(killer) )
 	{
-		const int64_t nExp = m_pKernelModule->GetPropertyInt( self, NFrame::NPC::EXP() );
-		const int64_t nGold = m_pKernelModule->GetPropertyInt( self, NFrame::NPC::Gold() );
-		const int64_t nDiamond = m_pKernelModule->GetPropertyInt( self, NFrame::NPC::Diamond() );
-
-		m_pLevelModule->AddExp(killer, nExp);
-		m_pPropertyModule->AddGold(killer, nGold);
-		m_pPropertyModule->AddDiamond(killer, nDiamond);
-
-		//add drop off item
-		const int64_t nDropProbability = m_pKernelModule->GetPropertyInt(self, NFrame::NPC::DropProbability());
-		const int64_t nRan = m_pKernelModule->Random(0, 100);
-		if (nRan > nDropProbability)
+		//must player
+		NF_SHARE_PTR<NFIRecord> xDropItemList = m_pKernelModule->FindRecord(killer, NFrame::Player::DropItemList::ThisName());
+		if (xDropItemList)
 		{
-			return 0;
+			const int64_t nExp = m_pKernelModule->GetPropertyInt( self, NFrame::NPC::EXP() );
+			const int64_t nGold = m_pKernelModule->GetPropertyInt( self, NFrame::NPC::Gold() );
+			const int64_t nDiamond = m_pKernelModule->GetPropertyInt( self, NFrame::NPC::Diamond() );
+
+			m_pLevelModule->AddExp(killer, nExp);
+			m_pPropertyModule->AddGold(killer, nGold);
+			m_pPropertyModule->AddDiamond(killer, nDiamond);
+
+			//add drop off item
+			const int64_t nDropProbability = m_pKernelModule->GetPropertyInt(self, NFrame::NPC::DropProbability());
+			const int64_t nRan = m_pKernelModule->Random(0, 100);
+			if (nRan > nDropProbability)
+			{
+				return 0;
+			}
+
+			NF_SHARE_PTR<NFDataList> xRowData = xDropItemList->GetInitData();
+			const std::string& strDropPackList = m_pKernelModule->GetPropertyString(self, NFrame::NPC::DropPackList());
+			const NFVector3 vPos = m_pKernelModule->GetPropertyVector3(self, NFrame::NPC::Position());
+
+			NFDataList xItemList;
+			xItemList.Split(strDropPackList, ",");
+
+			for (int i = 0; i < xItemList.GetCount(); ++i)
+			{
+				const std::string& strItem = xItemList.String(i);
+
+				xRowData->SetObject(NFrame::Player::DropItemList::GUID, m_pKernelModule->CreateGUID());
+				xRowData->SetString(NFrame::Player::DropItemList::ConfigID, strItem);
+				xRowData->SetInt(NFrame::Player::DropItemList::ItemCount, 1);
+				xRowData->SetVector3(NFrame::Player::DropItemList::Postion, vPos);
+
+				xDropItemList->AddRow(-1, *xRowData);
+
+				m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, killer, "Add Exp for kill monster", nExp);
+			}
+		}
+		else
+		{
+			m_pLogModule->LogObject(NFILogModule::NLL_ERROR_NORMAL, killer, "There is no object", __FUNCTION__, __LINE__);
 		}
 
-		NF_SHARE_PTR<NFIRecord> xDropItemList =  m_pKernelModule->FindRecord(killer, NFrame::Player::DropItemList::ThisName());
-		NF_SHARE_PTR<NFDataList> xRowData = xDropItemList->GetInitData();
-		const std::string& strDropPackList = m_pKernelModule->GetPropertyString(self, NFrame::NPC::DropPackList());
-		const NFVector3 vPos = m_pKernelModule->GetPropertyVector3(self, NFrame::NPC::Position());
-
-		NFDataList xItemList;
-		xItemList.Split(strDropPackList, ",");
-
-		for (int i = 0; i < xItemList.GetCount(); ++i)
-		{
-			const std::string& strItem = xItemList.String(i);
-
-			xRowData->SetObject(NFrame::Player::DropItemList::GUID, m_pKernelModule->CreateGUID());
-			xRowData->SetString(NFrame::Player::DropItemList::ConfigID, strItem);
-			xRowData->SetInt(NFrame::Player::DropItemList::ItemCount, 1);
-			xRowData->SetVector3(NFrame::Player::DropItemList::Postion, vPos);
-
-			xDropItemList->AddRow(-1, *xRowData);
-
-			m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, killer, "Add Exp for kill monster", nExp);
-		}
-	}
-	else
-	{
-		m_pLogModule->LogObject(NFILogModule::NLL_ERROR_NORMAL, killer, "There is no object", __FUNCTION__, __LINE__);
 	}
 
 	return 0;

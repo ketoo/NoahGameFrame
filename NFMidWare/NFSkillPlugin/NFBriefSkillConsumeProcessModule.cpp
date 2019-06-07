@@ -66,28 +66,28 @@ int NFBriefSkillConsumeProcessModule::ConsumeLegal( const NFGUID& self, const st
     return 0;
 }
 
-int NFBriefSkillConsumeProcessModule::ConsumeProcess( const NFGUID& self, const std::string& strSkillName, const NFDataList& other, NFDataList& damageListValue, NFDataList& damageResultList )
+int NFBriefSkillConsumeProcessModule::ConsumeProcess( const NFGUID& self, const std::string& skillID, const NFDataList& other, NFDataList& damageListValue, NFDataList& damageResultList )
 {
-    if (!m_pElementModule->ExistElement(strSkillName))
+    if (!m_pElementModule->ExistElement(skillID))
     {
         return 1;
     }
 
 	const NFGUID xTeamID = m_pKernelModule->GetPropertyObject(self, NFrame::Player::TeamID());
-	const std::string& strConsumeProperty = m_pElementModule->GetPropertyString(strSkillName, NFrame::Skill::ConsumeProperty());
-	const NFINT64 nConsumeValue = m_pElementModule->GetPropertyInt(strSkillName, NFrame::Skill::ConsumeValue());
-	const NFINT64 nConsumeTYpe = m_pElementModule->GetPropertyInt(strSkillName, NFrame::Skill::ConsumeType());
+	const std::string& strConsumeProperty = m_pElementModule->GetPropertyString(skillID, NFrame::Skill::ConsumeProperty());
+	const NFINT64 nConsumeValue = m_pElementModule->GetPropertyInt(skillID, NFrame::Skill::ConsumeValue());
+	const NFINT64 nConsumeTYpe = m_pElementModule->GetPropertyInt(skillID, NFrame::Skill::ConsumeType());
 
-	const std::string& strDamageProperty = m_pElementModule->GetPropertyString(strSkillName, NFrame::Skill::DamageProperty());
-	const NFINT64 nDamageCnfValue = m_pElementModule->GetPropertyInt(strSkillName, NFrame::Skill::DamageValue());
-	const NFINT64 nDamageTYpe = m_pElementModule->GetPropertyInt(strSkillName, NFrame::Skill::DamageType());
+	const std::string& strDamageProperty = m_pElementModule->GetPropertyString(skillID, NFrame::Skill::DamageProperty());
+	const NFINT64 nDamageCnfValue = m_pElementModule->GetPropertyInt(skillID, NFrame::Skill::DamageValue());
+	const NFINT64 nDamageTYpe = m_pElementModule->GetPropertyInt(skillID, NFrame::Skill::DamageType());
 
-	const std::string& strGetBuffList = m_pElementModule->GetPropertyString(strSkillName, NFrame::Skill::GetBuffList());
-	const std::string& strSendBuffList = m_pElementModule->GetPropertyString(strSkillName, NFrame::Skill::SendBuffList());
+	const std::string& strGetBuffList = m_pElementModule->GetPropertyString(skillID, NFrame::Skill::GetBuffList());
+	const std::string& strSendBuffList = m_pElementModule->GetPropertyString(skillID, NFrame::Skill::SendBuffList());
 
-	const double fRequireDistance = m_pElementModule->GetPropertyFloat(strSkillName, NFrame::Skill::AtkDis());
-	const double fDamageDistance = m_pElementModule->GetPropertyFloat(strSkillName, NFrame::Skill::DamageDistance());
-	const NFINT64 nTargetType = m_pElementModule->GetPropertyInt(strSkillName, NFrame::Skill::EffectObjType());
+	const double fRequireDistance = m_pElementModule->GetPropertyFloat(skillID, NFrame::Skill::AtkDis());
+	const double fDamageDistance = m_pElementModule->GetPropertyFloat(skillID, NFrame::Skill::DamageDistance());
+	const NFINT64 nTargetType = m_pElementModule->GetPropertyInt(skillID, NFrame::Skill::EffectObjType());
 
 	int64_t nOldConsumeVaue = m_pKernelModule->GetPropertyInt(self, strConsumeProperty);
 	nOldConsumeVaue -= nConsumeValue;

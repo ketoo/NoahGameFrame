@@ -456,6 +456,7 @@ package nframe;
 		public static final String MP = "MP";// int
 		public static final String MPREGEN = "MPREGEN";// int
 		public static final String MasterID = "MasterID";// object
+		public static final String MasterName = "MasterName";// string
 		public static final String MeleeType = "MeleeType";// int
 		public static final String NPCSubType = "NPCSubType";// int
 		public static final String NPCType = "NPCType";// int

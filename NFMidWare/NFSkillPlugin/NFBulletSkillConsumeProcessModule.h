@@ -37,6 +37,7 @@
 #include "NFComm/NFPluginModule/NFIItemConsumeProcessModule.h"
 #include "NFComm/NFPluginModule/NFIItemConsumeManagerModule.h"
 #include "NFComm/NFPluginModule/NFIPluginManager.h"
+#include "NFComm/NFPluginModule/NFIPropertyModule.h"
 
 class NFBulletSkillConsumeProcessModule
     : public NFISkillConsumeProcessModule
@@ -53,14 +54,13 @@ public:
 
     virtual int ConsumeLegal( const NFGUID& self, const std::string& skillID,  const NFDataList& other );
 
-    virtual int ConsumeProcess( const NFGUID& self, const std::string& strItemName, const NFDataList& other, NFDataList& damageListValue, NFDataList& damageResultList );
+    virtual int ConsumeProcess( const NFGUID& self, const std::string& skillID, const NFDataList& other, NFDataList& damageListValue, NFDataList& damageResultList );
  
 private:
     NFIKernelModule* m_pKernelModule;
     NFISkillConsumeManagerModule* m_pSkillConsumeManagerModule;
     NFIElementModule* m_pElementModule;
-
-
+	NFIPropertyModule* m_pPropertyModule;
 };
 
 #endif

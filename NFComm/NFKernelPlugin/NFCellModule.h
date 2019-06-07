@@ -185,7 +185,7 @@ protected:
 		ECELL_AROUND eAround = ECELL_AROUND_9);
 
 
-	virtual const int AddMoveEventCallBack(CELL_MOVE_EVENT_FUNCTOR_PTR functorPtr);
+	virtual int AddMoveEventCallBack(CELL_MOVE_EVENT_FUNCTOR_PTR functorPtr);
 
 private:
 

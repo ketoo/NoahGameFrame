@@ -105,7 +105,10 @@ public:
 		return true;
 	}
 
+	//////////////////////////////////////////////////////////////////////////
 protected:
+	virtual int AddMoveEventCallBack(CELL_MOVE_EVENT_FUNCTOR_PTR functorPtr) = 0;
+
 private:
 };
 

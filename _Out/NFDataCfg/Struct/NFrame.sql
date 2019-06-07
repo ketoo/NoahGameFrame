@@ -70,6 +70,7 @@ ALTER TABLE `NPC` ADD `HP` bigint(11) DEFAULT '0' COMMENT '生命值';
 ALTER TABLE `NPC` ADD `Level` bigint(11) DEFAULT '0' COMMENT '';
 ALTER TABLE `NPC` ADD `MP` bigint(11) DEFAULT '0' COMMENT '法力值';
 ALTER TABLE `NPC` ADD `MasterID` varchar(64) COLLATE utf8mb4_unicode_ci DEFAULT '' COMMENT '召唤者，主人';
+ALTER TABLE `NPC` ADD `MasterName` text COLLATE utf8mb4_unicode_ci  DEFAULT '' COMMENT '召唤者，主人';
 ALTER TABLE `NPC` ADD `SP` bigint(11) DEFAULT '0' COMMENT '体力';
 ALTER TABLE `NPC` ADD `VIPEXP` bigint(11) DEFAULT '0' COMMENT 'VIP经验';
 ALTER TABLE `NPC` ADD `Cooldown` text COLLATE utf8mb4_unicode_ci  DEFAULT '' COMMENT '';
