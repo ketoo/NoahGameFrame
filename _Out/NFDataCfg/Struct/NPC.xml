@@ -49,6 +49,7 @@
 		<Property Id="MP" Cache="0" Desc="法力值" Force="0" Private="1" Public="1" Ref="0" Save="1" Type="int" Upload="0" />
 		<Property Id="MPREGEN" Cache="0" Desc="MP回复" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="int" Upload="0" />
 		<Property Id="MasterID" Cache="0" Desc="召唤者，主人" Force="0" Private="1" Public="1" Ref="0" Save="1" Type="object" Upload="0" />
+		<Property Id="MasterName" Cache="0" Desc="召唤者，主人" Force="0" Private="1" Public="1" Ref="0" Save="1" Type="string" Upload="0" />
 		<Property Id="MeleeType" Cache="0" Desc="Melee:0;MeleeDash:1;Ranger:2 EMeleeType" Force="0" Private="1" Public="1" Ref="0" Save="0" Type="int" Upload="0" />
 		<Property Id="NPCSubType" Cache="0" Desc="ESubNPCType_TURRET" Force="0" Private="1" Public="1" Ref="0" Save="0" Type="int" Upload="0" />
 		<Property Id="NPCType" Cache="0" Desc="ENPCType" Force="0" Private="1" Public="1" Ref="0" Save="0" Type="int" Upload="0" />

@@ -466,6 +466,7 @@ namespace NFrame
 		static const std::string& MP(){ static std::string x = "MP"; return x; };// int
 		static const std::string& MPREGEN(){ static std::string x = "MPREGEN"; return x; };// int
 		static const std::string& MasterID(){ static std::string x = "MasterID"; return x; };// object
+		static const std::string& MasterName(){ static std::string x = "MasterName"; return x; };// string
 		static const std::string& MeleeType(){ static std::string x = "MeleeType"; return x; };// int
 		static const std::string& NPCSubType(){ static std::string x = "NPCSubType"; return x; };// int
 		static const std::string& NPCType(){ static std::string x = "NPCType"; return x; };// int

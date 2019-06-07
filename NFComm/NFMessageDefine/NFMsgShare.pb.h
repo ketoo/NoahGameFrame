@@ -4101,6 +4101,20 @@ class LIBPROTOC_EXPORT ReqAddSceneBuilding : public ::google::protobuf::Message 
   ::std::string* release_config_id();
   void set_allocated_config_id(::std::string* config_id);
 
+  // bytes master_name = 6;
+  void clear_master_name();
+  static const int kMasterNameFieldNumber = 6;
+  const ::std::string& master_name() const;
+  void set_master_name(const ::std::string& value);
+  #if LANG_CXX11
+  void set_master_name(::std::string&& value);
+  #endif
+  void set_master_name(const char* value);
+  void set_master_name(const void* value, size_t size);
+  ::std::string* mutable_master_name();
+  ::std::string* release_master_name();
+  void set_allocated_master_name(::std::string* master_name);
+
   // .NFMsg.Vector3 pos = 1;
   bool has_pos() const;
   void clear_pos();
@@ -4148,6 +4162,7 @@ class LIBPROTOC_EXPORT ReqAddSceneBuilding : public ::google::protobuf::Message 
 
   ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
   ::google::protobuf::internal::ArenaStringPtr config_id_;
+  ::google::protobuf::internal::ArenaStringPtr master_name_;
   ::NFMsg::Vector3* pos_;
   ::NFMsg::Ident* guid_;
   ::NFMsg::Ident* master_;
@@ -11076,6 +11091,59 @@ inline void ReqAddSceneBuilding::set_scene_id(::google::protobuf::int32 value) {
   
   scene_id_ = value;
   // @@protoc_insertion_point(field_set:NFMsg.ReqAddSceneBuilding.scene_id)
+}
+
+// bytes master_name = 6;
+inline void ReqAddSceneBuilding::clear_master_name() {
+  master_name_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline const ::std::string& ReqAddSceneBuilding::master_name() const {
+  // @@protoc_insertion_point(field_get:NFMsg.ReqAddSceneBuilding.master_name)
+  return master_name_.GetNoArena();
+}
+inline void ReqAddSceneBuilding::set_master_name(const ::std::string& value) {
+  
+  master_name_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
+  // @@protoc_insertion_point(field_set:NFMsg.ReqAddSceneBuilding.master_name)
+}
+#if LANG_CXX11
+inline void ReqAddSceneBuilding::set_master_name(::std::string&& value) {
+  
+  master_name_.SetNoArena(
+    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
+  // @@protoc_insertion_point(field_set_rvalue:NFMsg.ReqAddSceneBuilding.master_name)
+}
+#endif
+inline void ReqAddSceneBuilding::set_master_name(const char* value) {
+  GOOGLE_DCHECK(value != NULL);
+  
+  master_name_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:NFMsg.ReqAddSceneBuilding.master_name)
+}
+inline void ReqAddSceneBuilding::set_master_name(const void* value, size_t size) {
+  
+  master_name_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+      ::std::string(reinterpret_cast<const char*>(value), size));
+  // @@protoc_insertion_point(field_set_pointer:NFMsg.ReqAddSceneBuilding.master_name)
+}
+inline ::std::string* ReqAddSceneBuilding::mutable_master_name() {
+  
+  // @@protoc_insertion_point(field_mutable:NFMsg.ReqAddSceneBuilding.master_name)
+  return master_name_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline ::std::string* ReqAddSceneBuilding::release_master_name() {
+  // @@protoc_insertion_point(field_release:NFMsg.ReqAddSceneBuilding.master_name)
+  
+  return master_name_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline void ReqAddSceneBuilding::set_allocated_master_name(::std::string* master_name) {
+  if (master_name != NULL) {
+    
+  } else {
+    
+  }
+  master_name_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), master_name);
+  // @@protoc_insertion_point(field_set_allocated:NFMsg.ReqAddSceneBuilding.master_name)
 }
 
 // -------------------------------------------------------------------

@@ -257,6 +257,7 @@ message ReqAddSceneBuilding
 	Ident master = 3;
 	bytes config_id = 4;
 	int32 scene_id = 5;
+	bytes master_name = 6;
 }
 
 message ReqSceneBuildings

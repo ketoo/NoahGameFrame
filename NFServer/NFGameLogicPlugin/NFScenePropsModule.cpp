@@ -106,6 +106,8 @@ int NFScenePropsModule::OnObjectBuildingRecordEvent(const NFGUID & self, const R
 		if (pRecord)
 		{
 			const int nSceneID = m_pKernelModule->GetPropertyInt(self, NFrame::Player::SceneID());
+			const std::string& strName = m_pKernelModule->GetPropertyString(self, NFrame::Player::Name());
+
 			const NFGUID& id = pRecord->GetObject(xEventData.nRow, NFrame::Player::BuildingList::BuildingGUID);
 			const NFVector3& vector = pRecord->GetVector3(xEventData.nRow, NFrame::Player::BuildingList::Pos);
 			const std::string& strCnfID = pRecord->GetString(xEventData.nRow, NFrame::Player::BuildingList::BuildingCnfID);
@@ -116,6 +118,7 @@ int NFScenePropsModule::OnObjectBuildingRecordEvent(const NFGUID & self, const R
 			*addBuilding.mutable_guid() = NFINetModule::NFToPB(id);
 			*addBuilding.mutable_pos() = NFINetModule::NFToPB(vector);
 			*addBuilding.mutable_master() = NFINetModule::NFToPB(self);
+			addBuilding.set_master_name(strName);
 
 			m_pNetClientModule->SendSuitByPB(NF_SERVER_TYPES::NF_ST_WORLD, nSceneID, NFMsg::EGMI_REQ_ADD_BUILDING, addBuilding);
 		}
@@ -139,10 +142,15 @@ void NFScenePropsModule::OnAckBuildingsProcess(const NFSOCK nSockIndex, const in
 			const NFVector3& pos = NFINetModule::PBToNF(xSceneBuilding.pos());
 			const NFGUID masterID = NFINetModule::PBToNF(xSceneBuilding.master());
 			const std::string& configID = xSceneBuilding.config_id();
+			const std::string& masterName = xSceneBuilding.master_name();
 
 			NFDataList arg;
 			arg.AddString(NFrame::NPC::Position());
 			arg.AddVector3(pos);
+			arg.AddString(NFrame::NPC::MasterName());
+			arg.AddString(masterName);
+			arg.AddString(NFrame::NPC::MasterID());
+			arg.AddObject(masterID);
 			m_pKernelModule->CreateObject(guid, sceneID, 1, NFrame::NPC::ThisName(),configID, arg);
 		}
 	}

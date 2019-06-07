@@ -428,7 +428,7 @@ const int NFCellModule::GetAroundObject(NF_SHARE_PTR<NFSceneCellInfo> pCellInfo,
     return objectList.GetCount();
 }
 
-const int NFCellModule::AddMoveEventCallBack(CELL_MOVE_EVENT_FUNCTOR_PTR functorPtr)
+int NFCellModule::AddMoveEventCallBack(CELL_MOVE_EVENT_FUNCTOR_PTR functorPtr)
 {
 	mMoveEventHandler.push_back(functorPtr);
 
