@@ -48,11 +48,7 @@ bool NFDeadState::Enter(const NFGUID& self, NFIStateMachine* pStateMachine)
 
 bool NFDeadState::Execute(const NFGUID& self, NFIStateMachine* pStateMachine)
 {
-    if (!NFIState::Execute(self, pStateMachine))
-    {
-        m_pKernelModule->DestroyObject(self);
-    }
-
+ 
     return true;
 }
 

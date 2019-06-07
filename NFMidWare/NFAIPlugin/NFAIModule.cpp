@@ -33,53 +33,34 @@ bool NFAIModule::Init()
 	m_pHateModule = pPluginManager->FindModule<NFIHateModule>();
 
     //////////////////////////////////////////////////////////////////////////
-
-    //mtStateMap.insert(TMAPSTATE::value_type(DeadState, new NFDeadState(5.0f, pPluginManager)));
-    //mtStateMap.insert(TMAPSTATE::value_type(FightState, new NFFightState(1.0f, pPluginManager)));
-    //mtStateMap.insert(TMAPSTATE::value_type(IdleState, new NFIdleState(3.0f, pPluginManager)));
-    //mtStateMap.insert(TMAPSTATE::value_type(PatrolState, new NFPatrolState(5.0f, pPluginManager)));
+	mtStateMap[IdleState] = new NFIdleState(3.0f, pPluginManager);
+	mtStateMap[FightState] = new NFFightState(1.0f, pPluginManager);
+	mtStateMap[PatrolState] = new NFPatrolState(5.0f, pPluginManager);
+	mtStateMap[ChaseState] = new NFChaseState(1.0f, pPluginManager);
+	mtStateMap[DeadState] = new NFDeadState(5.0f, pPluginManager);
 
     return true;
 }
 
 bool NFAIModule::Shut()
 {
-    TOBJECTSTATEMACHINE::iterator itObject = mtObjectStateMachine.begin();
-    for (itObject; itObject != mtObjectStateMachine.end(); itObject++)
-    {
-        delete itObject->second;
-    }
-
-    TMAPSTATE::iterator itState = mtStateMap.begin();
-    for (itState; itState != mtStateMap.end(); itState++)
-    {
-        delete itState->second;
-    }
-
-    delete m_pHateModule;
-    m_pHateModule = NULL;
+	mtObjectStateMachine.clear();
 
     return true;
 }
 
 NFIState* NFAIModule::GetState(const NFAI_STATE eState)
 {
-    TMAPSTATE::iterator it = mtStateMap.find(eState);
-    if (it != mtStateMap.end())
-    {
-        return it->second;
-    }
-
-    return NULL;
+    return mtStateMap[eState];
 }
 
 bool NFAIModule::CreateAIObject(const NFGUID& self)
 {
     //这里只是为了以后方便维护状态机时间，节约CPU
-    TOBJECTSTATEMACHINE::iterator it = mtObjectStateMachine.find(self);
+	std::map<NFGUID, NF_SHARE_PTR<NFIStateMachine>>::iterator it = mtObjectStateMachine.find(self);
     if (it == mtObjectStateMachine.end())
     {
-        //mtObjectStateMachine.insert(TOBJECTSTATEMACHINE::value_type(self, new NFStateMachine(self, this)));
+        mtObjectStateMachine.insert(std::map<NFGUID, NF_SHARE_PTR<NFIStateMachine>>::value_type(self, NF_SHARE_PTR<NFIStateMachine>(new NFStateMachine(self, pPluginManager))));
 
         return true;
     }
@@ -89,10 +70,9 @@ bool NFAIModule::CreateAIObject(const NFGUID& self)
 
 bool NFAIModule::DelAIObject(const NFGUID& self)
 {
-    TOBJECTSTATEMACHINE::iterator it = mtObjectStateMachine.find(self);
+	std::map<NFGUID, NF_SHARE_PTR<NFIStateMachine>>::iterator it = mtObjectStateMachine.find(self);
     if (it != mtObjectStateMachine.end())
     {
-        delete it->second;
         mtObjectStateMachine.erase(it);
         return true;
     }
@@ -102,7 +82,7 @@ bool NFAIModule::DelAIObject(const NFGUID& self)
 
 bool NFAIModule::Execute()
 {
-    TOBJECTSTATEMACHINE::iterator it = mtObjectStateMachine.begin();
+	std::map<NFGUID, NF_SHARE_PTR<NFIStateMachine>>::iterator it = mtObjectStateMachine.begin();
     for (it; it != mtObjectStateMachine.end(); it++)
     {
         it->second->Execute();
@@ -111,21 +91,20 @@ bool NFAIModule::Execute()
     return true;
 }
 
-NFIStateMachine* NFAIModule::GetStateMachine(const NFGUID& self)
+NF_SHARE_PTR<NFIStateMachine> NFAIModule::GetStateMachine(const NFGUID& self)
 {
-    TOBJECTSTATEMACHINE::iterator it = mtObjectStateMachine.find(self);
+	std::map<NFGUID, NF_SHARE_PTR<NFIStateMachine>>::iterator it = mtObjectStateMachine.find(self);
     if (it != mtObjectStateMachine.end())
     {
         return it->second;
     }
 
-    return NULL;
+    return nullptr;
 }
 
 void NFAIModule::OnBeKilled(const NFGUID& self, const NFGUID& other)
 {
-
-    TOBJECTSTATEMACHINE::iterator it = mtObjectStateMachine.find(self);
+	std::map<NFGUID, NF_SHARE_PTR<NFIStateMachine>>::iterator it = mtObjectStateMachine.find(self);
     if (it != mtObjectStateMachine.end())
     {
         it->second->ChangeState(DeadState);
@@ -136,15 +115,6 @@ void NFAIModule::OnBeAttack(const NFGUID& self, const NFGUID& other, const int n
 {
 	m_pHateModule->AddHate(self, other, nDamageValue);
 	m_pHateModule->CompSortList(self);
-
-    NFIStateMachine* pStateMachine = GetStateMachine(self);
-    if (pStateMachine)
-    {
-        if (FightState != pStateMachine->CurrentState())
-        {
-            pStateMachine->ChangeState(FightState);
-        }
-    }
 }
 
 void NFAIModule::OnSpring(const NFGUID& self, const NFGUID& other)
@@ -208,7 +178,14 @@ int NFAIModule::OnAIObjectEvent(const NFGUID& self, const std::string& strClassN
     else if (CLASS_OBJECT_EVENT::COE_CREATE_HASDATA == eClassEvent)
     {
         //m_pEventProcessModule->AddEventCallBack(self, NFED_ON_SERVER_MOVEING, OnMoveRquireEvent);
-        CreateAIObject(self);
+		const int nNPCType = m_pKernelModule->GetPropertyInt(self, NFrame::NPC::NPCType());
+		if (nNPCType == NFMsg::ENPCType::ENPCTYPE_TURRET)
+		{
+			CreateAIObject(self);
+		}
+		else if (nNPCType == NFMsg::ENPCType::ENPCTYPE_NORMAL)
+		{
+		}
     }
 
     return 0;
@@ -216,7 +193,6 @@ int NFAIModule::OnAIObjectEvent(const NFGUID& self, const std::string& strClassN
 
 bool NFAIModule::AfterInit()
 {
-	m_pKernelModule->AddClassCallBack(NFrame::NPC::ThisName(), this, &NFAIModule::OnAIObjectEvent);
 	m_pKernelModule->AddClassCallBack(NFrame::NPC::ThisName(), this, &NFAIModule::OnAIObjectEvent);
     return true;
 }
