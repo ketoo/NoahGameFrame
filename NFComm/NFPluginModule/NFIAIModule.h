@@ -32,6 +32,7 @@ class NFIAIModule
     : public NFIModule
 {
 public:
+	virtual NFIState* GetState(const NFAI_STATE eState) = 0;
 
 };
 

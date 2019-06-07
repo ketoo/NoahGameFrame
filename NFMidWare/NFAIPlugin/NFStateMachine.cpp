@@ -32,14 +32,15 @@ NFStateMachine::NFStateMachine(const NFGUID& self, NFIPluginManager* p)
 {
 	pPluginManager = p;
 
-    NFIState* pState = GetState(CurrentState());
-    mfHeartBeatTime = pState->GetHeartBeatTime();
-
 	m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>();
 	m_pAIModule = pPluginManager->FindModule<NFIAIModule>();
 	m_pMoveModule = pPluginManager->FindModule<NFIMoveModule>();
 	m_pElementModule = pPluginManager->FindModule<NFIElementModule>();
 	m_pHateModule = pPluginManager->FindModule<NFIHateModule>();
+
+
+	NFIState* pState = m_pAIModule->GetState(CurrentState());
+	mfHeartBeatTime = pState->GetHeartBeatTime();
 }
 
 NFStateMachine::~NFStateMachine()
@@ -49,32 +50,22 @@ NFStateMachine::~NFStateMachine()
 
 bool NFStateMachine::Execute()
 {
-    //same for the current state
-    if (State_Error != meCurrentState)
+    if (mfHeartBeatTime > 0)
     {
-        if (mfHeartBeatTime > 0)
-        {
-            mfHeartBeatTime -= 0.001f;
-        }
-        else
-        {
-            NFIState* pState = GetState(meCurrentState);
-            pState->Execute(mOwnerID, this);
+        mfHeartBeatTime -= 0.05f;
+    }
+    else
+    {
+        NFIState* pState = GetState(meCurrentState);
+        pState->Execute(mOwnerID, this);
 
-            //设置心跳时间
-            NFDataList xDataList;
-            m_pKernelModule->Random(0, 10, 1, xDataList);
+        //设置心跳时间
+        int rd = m_pKernelModule->Random(0, 10);
 
-            mfHeartBeatTime = pState->GetHeartBeatTime() + xDataList.Int(0);
-        }
+        mfHeartBeatTime = pState->GetHeartBeatTime() + rd;
     }
 
 	return true;
-}
-
-NFIState * NFStateMachine::GetState(const NFAI_STATE eState) const
-{
-	return nullptr;
 }
 
 void NFStateMachine::ChangeState(const NFAI_STATE eNewState)
@@ -96,4 +87,9 @@ void NFStateMachine::ChangeState(const NFAI_STATE eNewState)
 void NFStateMachine::RevertToLastState()
 {
     ChangeState(meLastState);
+}
+
+NFIState * NFStateMachine::GetState(const NFAI_STATE eState)
+{
+	return m_pAIModule->GetState(eState);
 }

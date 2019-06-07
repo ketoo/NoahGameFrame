@@ -44,10 +44,6 @@ public:
 
     virtual bool Execute();
 
-
-	virtual NFIState* GetState(const NFAI_STATE eState) const;
-	
-    //change to a new state
     virtual void ChangeState(const NFAI_STATE eState);
 
     virtual void RevertToLastState();
@@ -62,6 +58,7 @@ public:
         return meLastState;
     }
 
+	virtual NFIState* GetState(const NFAI_STATE eState);
 
 private:
     NFGUID mOwnerID;

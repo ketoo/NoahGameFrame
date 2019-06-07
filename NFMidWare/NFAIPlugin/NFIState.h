@@ -21,28 +21,21 @@
 #ifndef NFI_STATE_H
 #define NFI_STATE_H
 
+#include "NFComm/NFMessageDefine/NFMsgDefine.h"
 #include "NFComm/NFCore/NFDataList.hpp"
 #include "NFComm/NFPluginModule/NFIModule.h"
 #include "NFComm/NFPluginModule/NFIPluginManager.h"
 #include "NFComm/NFMessageDefine/NFProtocolDefine.hpp"
 
 //所有的状态
-enum NFAI_NPC_TYPE
-{
-	BUILDING_TYPE,
-	MASTER_TYPE,
-	HERO_TYPE,
-};
-
-//所有的状态
 enum NFAI_STATE
 {
-    State_Error = 0,
     IdleState,                  // 休闲状态
     PatrolState,                // 巡逻状态
     FightState,                 // 战斗状态
     ChaseState,                 // 追击状态
-    DeadState,                  // 死亡状态
+	DeadState,                  // 死亡状态
+	MAXState,                  // MAX
 };
 
 class NFIStateMachine;
@@ -95,7 +88,7 @@ public:
 
 protected:
     NFAI_STATE  meState;
-    float               mfHeartBeatTime;
+    float		mfHeartBeatTime;
 };
 
 #endif

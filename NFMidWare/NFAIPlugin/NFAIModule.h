@@ -26,7 +26,8 @@
 #ifndef NF_AI_MODULE_H
 #define NF_AI_MODULE_H
 
-#include "NFIStateMachine.h"
+#include "NFStateMachine.h"
+#include "NFComm/NFMessageDefine/NFMsgDefine.h"
 #include "NFComm/NFPluginModule/NFIMoveModule.h"
 #include "NFComm/NFPluginModule/NFIAIModule.h"
 #include "NFComm/NFPluginModule/NFIKernelModule.h"
@@ -77,16 +78,15 @@ protected:
 
     void OnSelect(const NFGUID& self, const NFGUID& other);
 
-	NFIStateMachine* GetStateMachine(const NFGUID& self);
+	NF_SHARE_PTR<NFIStateMachine> GetStateMachine(const NFGUID& self);
+
 	NFIState* GetState(const NFAI_STATE eState);
 
 private:
     //状态机
-    typedef std::map<NFAI_STATE, NFIState*> TMAPSTATE;
-    TMAPSTATE mtStateMap;
+	NFIState* mtStateMap[MAXState];
     //AI对象，状态机
-    typedef std::map<NFGUID, NFIStateMachine*> TOBJECTSTATEMACHINE;
-    TOBJECTSTATEMACHINE mtObjectStateMachine;
+    std::map<NFGUID, NF_SHARE_PTR<NFIStateMachine>> mtObjectStateMachine;
 
     NFIHateModule* m_pHateModule;
     NFIKernelModule* m_pKernelModule;
