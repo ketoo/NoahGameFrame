@@ -593,7 +593,8 @@ namespace NFrame
 		public static readonly String HeroStar1 = "HeroStar1";// int
 		public static readonly String HeroStar2 = "HeroStar2";// int
 		public static readonly String HeroStar3 = "HeroStar3";// int
-		public static readonly String HomeCellID = "HomeCellID";// string
+		public static readonly String HomeCellPos = "HomeCellPos";// vector3
+		public static readonly String HomeSceneID = "HomeSceneID";// int
 		public static readonly String Item1 = "Item1";// string
 		public static readonly String Item1Count = "Item1Count";// int
 		public static readonly String Item1UsedCount = "Item1UsedCount";// int
@@ -949,23 +950,16 @@ namespace NFrame
 		public static readonly String SceneID = "SceneID";// int
 		// Property
 		public static readonly String ActorID = "ActorID";// int
-		public static readonly String BossSoundList = "BossSoundList";// string
-		public static readonly String CamOffestPos = "CamOffestPos";// string
-		public static readonly String CamOffestRot = "CamOffestRot";// string
 		public static readonly String FilePath = "FilePath";// string
-		public static readonly String LeftBot = "LeftBot";// vector2
 		public static readonly String LoadingUI = "LoadingUI";// string
 		public static readonly String MaxGroup = "MaxGroup";// int
 		public static readonly String MaxGroupPlayers = "MaxGroupPlayers";// int
 		public static readonly String NavigationResPath = "NavigationResPath";// string
 		public static readonly String RelivePos = "RelivePos";// string
 		public static readonly String ResPath = "ResPath";// string
-		public static readonly String RightTop = "RightTop";// vector2
 		public static readonly String SceneName = "SceneName";// string
 		public static readonly String SceneShowName = "SceneShowName";// string
 		public static readonly String SoundList = "SoundList";// string
-		public static readonly String TagPos = "TagPos";// string
-		public static readonly String Tile = "Tile";// int
 		public static readonly String Type = "Type";// int
 		public static readonly String Width = "Width";// int
 		// Record

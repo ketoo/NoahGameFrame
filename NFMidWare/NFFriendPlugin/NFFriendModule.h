@@ -55,6 +55,7 @@ public:
 
     virtual bool AfterInit();
 
+	virtual bool IsEnemy(const NFGUID& self, const NFGUID& other);
 
 protected:
 

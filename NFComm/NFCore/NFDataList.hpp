@@ -537,6 +537,12 @@ public:
 	{
 	}
 
+	static const NFDataList& Empty()
+	{
+		static NFDataList data;
+		return data;
+	}
+
 	virtual std::string ToString() const
 	{
 		std::stringstream os;

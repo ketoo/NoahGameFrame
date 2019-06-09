@@ -33,7 +33,8 @@ bool NFItemScrollConsumeProcessModule::Init()
 	m_pLogModule = pPluginManager->FindModule<NFILogModule>();
 	m_pItemModule = pPluginManager->FindModule<NFIItemModule>();
 	m_pHeroModule = pPluginManager->FindModule<NFIHeroModule>();
-
+	m_pNetClientModule = pPluginManager->FindModule<NFINetClientModule>();
+	
 	m_pItemModule->ResgisterConsumeModule(NFMsg::EItemType::EIT_SCROLL, this);
 
     return true;
@@ -109,48 +110,72 @@ int NFItemScrollConsumeProcessModule::ConsumeProcess(const NFGUID& self, const s
 	break;
 	case  NFMsg::EGameScrollSubType::EGTST_TOKEN_BUILD:
 	{
-		const std::string& strBuildingCnfID = m_pElementModule->GetPropertyString(strItemID, NFrame::Item::Extend());
-		if (strBuildingCnfID.empty())
+		const int sceneID = m_pKernelModule->GetPropertyInt(self, NFrame::Player::SceneID());
+		const int homeSceneID = m_pKernelModule->GetPropertyInt(self, NFrame::Player::HomeSceneID());
+		if (homeSceneID == sceneID)
 		{
-			return 4;
+			const std::string& strBuildingCnfID = m_pElementModule->GetPropertyString(strItemID, NFrame::Item::Extend());
+			if (strBuildingCnfID.empty())
+			{
+				return 4;
+			}
+			NF_SHARE_PTR<NFIRecord> pBuildRecord = m_pKernelModule->FindRecord(self, NFrame::Player::BuildingList::ThisName());
+			if (nullptr == pBuildRecord)
+			{
+				return  1;
+			}
+
+			const NFVector3 vPos = vector;
+			const int nSceneID = m_pKernelModule->GetPropertyInt32(self, NFrame::Player::SceneID());
+			const int nGroupID = m_pKernelModule->GetPropertyInt32(self, NFrame::Player::GroupID());
+			const NFGUID xID = m_pKernelModule->CreateGUID();
+
+			NFMsg::ESceneType eSceneType = (NFMsg::ESceneType)m_pElementModule->GetPropertyInt32(std::to_string(nSceneID), NFrame::Scene::Type());
+			if (eSceneType == NFMsg::ESceneType::SCENE_HOME)
+			{
+				NF_SHARE_PTR<NFDataList> xDataList = pBuildRecord->GetInitData();
+				xDataList->SetString(NFrame::Player::BuildingList::BuildingCnfID, strBuildingCnfID);
+				xDataList->SetObject(NFrame::Player::BuildingList::BuildingGUID, xID);
+				xDataList->SetVector3(NFrame::Player::BuildingList::Pos, vPos);
+				pBuildRecord->AddRow(-1, *xDataList);
+			}
+			else if (eSceneType == NFMsg::ESceneType::SCENE_NORMAL)
+			{
+				//clan building
+				//check position
+				const int nSceneID = m_pKernelModule->GetPropertyInt(self, NFrame::Player::SceneID());
+				const std::string& strName = m_pKernelModule->GetPropertyString(self, NFrame::Player::Name());
+
+				NFMsg::ReqAddSceneBuilding addBuilding;
+				addBuilding.set_config_id(strBuildingCnfID);
+				addBuilding.set_master_name(strName);
+				addBuilding.set_scene_id(nSceneID);
+				addBuilding.set_is_home_scene(0);
+				addBuilding.set_is_building(1);
+
+				*addBuilding.mutable_guid() = NFINetModule::NFToPB(xID);
+				*addBuilding.mutable_pos() = NFINetModule::NFToPB(vector);
+				*addBuilding.mutable_master() = NFINetModule::NFToPB(self);
+
+				m_pNetClientModule->SendSuitByPB(NF_SERVER_TYPES::NF_ST_WORLD, nSceneID, NFMsg::EGMI_REQ_ADD_BUILDING, addBuilding);
+			}
+
+			NFDataList xDataArg;
+			xDataArg.AddString(NFrame::NPC::Position());
+			xDataArg.AddVector3(vPos);
+			xDataArg.AddString(NFrame::NPC::MasterID());
+			xDataArg.AddObject(self);
+			xDataArg.AddString(NFrame::NPC::AIOwnerID());
+			xDataArg.AddObject(self);
+			xDataArg.AddString(NFrame::NPC::NPCType());
+			xDataArg.AddInt(NFMsg::ENPCType::ENPCTYPE_TURRET);
+
+			m_pKernelModule->CreateObject(xID, nSceneID, nGroupID, NFrame::NPC::ThisName(), strBuildingCnfID, xDataArg);
 		}
-		NF_SHARE_PTR<NFIRecord> pBuildRecord = m_pKernelModule->FindRecord(self, NFrame::Player::BuildingList::ThisName());
-		if (nullptr == pBuildRecord)
+		else
 		{
-			return  1;
+			//check is that the player now in the clan scene
 		}
-
-		const NFVector3 vPos = vector;
-		//const NFVector3 vPos = m_pKernelModule->GetPropertyVector3(self, NFrame::Player::Position());
-		const int nSceneID = m_pKernelModule->GetPropertyInt32(self, NFrame::Player::SceneID());
-		const int nGroupID = m_pKernelModule->GetPropertyInt32(self, NFrame::Player::GroupID());
-		const NFGUID xID = m_pKernelModule->CreateGUID();
-
-		E_SCENE_TYPE eSceneType = (E_SCENE_TYPE)m_pElementModule->GetPropertyInt32(std::to_string(nSceneID), NFrame::Scene::Type());
-		if (eSceneType == E_SCENE_TYPE::SCENE_TYPE_NORMAL)
-		{
-			NF_SHARE_PTR<NFDataList> xDataList = pBuildRecord->GetInitData();
-			xDataList->SetString(NFrame::Player::BuildingList::BuildingCnfID, strBuildingCnfID);
-			xDataList->SetObject(NFrame::Player::BuildingList::BuildingGUID, xID);
-			xDataList->SetVector3(NFrame::Player::BuildingList::Pos, vPos);
-			pBuildRecord->AddRow(-1, *xDataList);
-
-			//and we would tell the world server that we created a building in the world, the others should see it once them come into the scene
-		}
-
-		NFDataList xDataArg;
-		xDataArg.AddString(NFrame::NPC::Position());
-		xDataArg.AddVector3(vPos);
-		xDataArg.AddString(NFrame::NPC::MasterID());
-		xDataArg.AddObject(self);
-		xDataArg.AddString(NFrame::NPC::AIOwnerID());
-		xDataArg.AddObject(self);
-		xDataArg.AddString(NFrame::NPC::NPCType());
-		xDataArg.AddInt(NFMsg::ENPCType::ENPCTYPE_TURRET);
-
-		m_pKernelModule->CreateObject(xID, nSceneID, nGroupID, NFrame::NPC::ThisName(), strBuildingCnfID, xDataArg);
-
-
 	}
 	break;
 	default:

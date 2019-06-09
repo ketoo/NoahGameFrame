@@ -63,6 +63,8 @@ bool NFWorldPVPModule::AfterInit()
 
 	if (!m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_REQ_SEARCH_OPPNENT, this, &NFWorldPVPModule::OnReqSearchOpponentProcess)) { return false; }
 
+	InitAllTileScene();
+
     return true;
 }
 
@@ -95,10 +97,37 @@ void NFWorldPVPModule::OnReqSearchOpponentProcess(const NFSOCK nSockIndex, const
 	}
 }
 
+int NFWorldPVPModule::RandomTileScene(const int nExceptSceneID)
+{
+	if (mxTileSceneIDList.size() > 1)
+	{
+		int index = m_pKernelModule->Random(0, (int)mxTileSceneIDList.size());
+		if (index < mxTileSceneIDList.size())
+		{
+			int nSceneID = mxTileSceneIDList.at(index);
+			if (nExceptSceneID != nSceneID)
+			{
+				return nSceneID;
+			}
+		}
+
+		RandomTileScene(nExceptSceneID);
+	}
+	else
+	{
+		if (nExceptSceneID != mxTileSceneIDList[0])
+		{
+			return mxTileSceneIDList[0];
+		}
+	}
+
+	return 0;
+}
+
 bool NFWorldPVPModule::SearchOpponent(const NFGUID & self, const int nExceptSceneID, const NFSOCK nSockIndex)
 {
 	//search in the scene where the player at
-	int nSceneID = 1;// RandomTileScene(nExceptSceneID);
+	int nSceneID = RandomTileScene(nExceptSceneID);
 	std::string strTileData;
 	NFGUID xViewOpponent;
 	if (m_pPlayerRedisModule->LoadPlayerTileRandom(nSceneID, xViewOpponent, strTileData) && !xViewOpponent.IsNull())
@@ -108,11 +137,11 @@ bool NFWorldPVPModule::SearchOpponent(const NFGUID & self, const int nExceptScen
 			return false;
 		}
 
-		NFMsg::AckMiningTitle xTileData;
+		NFMsg::ReqStoreSceneBuildings xTileData;
 		if (xTileData.ParseFromString(strTileData))
 		{
 			NFMsg::AckSearchOppnent xAckData;
-			xAckData.mutable_title()->CopyFrom(xTileData);
+			xAckData.mutable_buildings()->CopyFrom(xTileData.buildings());
 			xAckData.set_scene_id(nSceneID);
 
 			ProcessOpponentData(xViewOpponent, xAckData);
@@ -230,4 +259,33 @@ bool NFWorldPVPModule::ProcessOpponentData(const NFGUID& opponent, NFMsg::AckSea
 	}
 
 	return false;
+}
+
+
+void NFWorldPVPModule::InitAllTileScene()
+{
+	//Tile
+	//mxTileSceneIDList
+	NF_SHARE_PTR<NFIClass> xLogicClass = m_pClassModule->GetElement(NFrame::Scene::ThisName());
+	if (xLogicClass)
+	{
+		const std::vector<std::string>& strIdList = xLogicClass->GetIDList();
+		for (int i = 0; i < strIdList.size(); ++i)
+		{
+			const std::string& strId = strIdList[i];
+
+			const int nSceneType = m_pElementModule->GetPropertyInt32(strId, NFrame::Scene::Type());
+			if (nSceneType == NFMsg::ESceneType::SCENE_HOME)
+			{
+				int nSceneID = lexical_cast<int>(strId);
+				std::vector<int>::iterator it = std::find(mxTileSceneIDList.begin(), mxTileSceneIDList.end(), nSceneID);
+				if (it == mxTileSceneIDList.end())
+				{
+					mxTileSceneIDList.push_back(nSceneID);
+				}
+			}
+		}
+	}
+
+	//NFASSERT(0, "", __file__, __FUNCTION__);
 }

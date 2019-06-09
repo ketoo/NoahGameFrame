@@ -78,7 +78,7 @@ protected:
 	void OnSwitchFightHeroMsg(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
 	void OnReliveHeroMsg(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
 
-	int CalReliveTime(const NFGUID& self, const NFGUID& xHeroID, const E_SCENE_TYPE reliveType);
+	int CalReliveTime(const NFGUID& self, const NFGUID& xHeroID, const NFMsg::ESceneType reliveType);
 	bool StillAlive(const NFGUID& self, const NFGUID& xHeroID);
 protected:
 

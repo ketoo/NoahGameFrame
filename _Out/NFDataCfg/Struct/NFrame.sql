@@ -99,7 +99,8 @@ ALTER TABLE `Player` ADD `HeroID3` varchar(64) COLLATE utf8mb4_unicode_ci DEFAUL
 ALTER TABLE `Player` ADD `HeroStar1` bigint(11) DEFAULT '0' COMMENT '主要是给离线玩家看';
 ALTER TABLE `Player` ADD `HeroStar2` bigint(11) DEFAULT '0' COMMENT '主要是给离线玩家看';
 ALTER TABLE `Player` ADD `HeroStar3` bigint(11) DEFAULT '0' COMMENT '主要是给离线玩家看';
-ALTER TABLE `Player` ADD `HomeCellID` text COLLATE utf8mb4_unicode_ci  DEFAULT '' COMMENT '玩家下线的时候需要保存上次在线的场景';
+ALTER TABLE `Player` ADD `HomeCellPos` varchar(64) COLLATE utf8mb4_unicode_ci DEFAULT '' COMMENT '玩家下线的时候需要保存上次在线的场景';
+ALTER TABLE `Player` ADD `HomeSceneID` bigint(11) DEFAULT '0' COMMENT '玩家下线的时候需要保存上次在线的场景';
 ALTER TABLE `Player` ADD `Item1` text COLLATE utf8mb4_unicode_ci  DEFAULT '' COMMENT 'Skill4';
 ALTER TABLE `Player` ADD `Item1Count` bigint(11) DEFAULT '0' COMMENT 'Item1Count';
 ALTER TABLE `Player` ADD `Item2` text COLLATE utf8mb4_unicode_ci  DEFAULT '' COMMENT 'Skill5';

@@ -104,6 +104,11 @@ public:
 	{
 		return mCellID;
 	}
+	const bool Exist(const NFGUID& id)
+	{
+		return this->Find(id);
+	}
+
 protected:
 private:
     NF_SHARE_PTR<NFSceneCellInfo> mAroundCell[ECELL_DIRECTION_MAXCOUNT];
@@ -130,16 +135,13 @@ public:
 	virtual const bool DestroyGroupCell(const int& sceneID, const int& groupID);
 
     // the event that a object are moving
-    virtual const NFGUID OnObjectMove(const NFGUID& self, const int& sceneID, const int& groupID,
-                                         const NFGUID& lastGrid, const int nX, const int nY, const int nZ);
+    virtual const NFGUID OnObjectMove(const NFGUID& self, const int& sceneID, const int& groupID, const NFGUID& fromCell, const NFGUID& toCell);
 
     // the event that a object has entried
-    virtual const NFGUID OnObjectEntry(const NFGUID& self, const int& sceneID, const int& groupID,
-                                          const int nX, const int nY, const int nZ);
+    virtual const NFGUID OnObjectEntry(const NFGUID& self, const int& sceneID, const int& groupID, const NFGUID& toCell);
 
     // the event that a object has leaved
-    virtual const NFGUID OnObjectLeave(const NFGUID& self, const int& sceneID, const int& groupID,
-											const int nX, const int nY, const int nZ);
+    virtual const NFGUID OnObjectLeave(const NFGUID& self, const int& sceneID, const int& groupID, const NFGUID& fromCell);
 
 	virtual bool GetCellObjectList(const int nSceneID, const int nGroupID, const NFVector3& pos, NFDataList& list, ECELL_AROUND eAround = ECELL_AROUND_9);
 	virtual bool GetCellObjectList(const int nSceneID, const int nGroupID, const NFVector3& pos, NFDataList& list, const NFGUID& noSelf, ECELL_AROUND eAround = ECELL_AROUND_9);
@@ -151,6 +153,7 @@ public:
 	//////////////////////////////////////////////////////////////////////////
     // computer a id of this grid by position
 	virtual const NFGUID ComputeCellID(const int nX, const int nY, const int nZ);
+	virtual const NFGUID ComputeCellID(const NFVector3& vec);
 	//////////////////////////////////////////////////////////////////////////
 	// computer a id of this grid by position
 	virtual const NFGUID ComputeCellID(const NFGUID& selfGrid, ECELL_DIRECTION eDirection);
@@ -186,10 +189,17 @@ protected:
 
 
 	virtual int AddMoveEventCallBack(CELL_MOVE_EVENT_FUNCTOR_PTR functorPtr);
+	virtual int AddMoveInEventCallBack(CELL_MOVE_EVENT_FUNCTOR_PTR functorPtr);
+	virtual int AddMoveOutEventCallBack(CELL_MOVE_EVENT_FUNCTOR_PTR functorPtr);
+
+	int OnObjectEvent(const NFGUID& self, const std::string& strClassNames, const CLASS_OBJECT_EVENT eClassEvent, const NFDataList& var);
+	int OnPositionEvent(const NFGUID & self, const std::string & strPropertyName, const NFData & oldVar, const NFData & newVar);
 
 private:
 
-    bool OnMoveEvent(const NFGUID& self, const int& sceneID, const int& groupID, const NFGUID& fromCell, const NFGUID& toCell);
+	bool OnMoveEvent(const NFGUID& self, const int& sceneID, const int& groupID, const NFGUID& fromCell, const NFGUID& toCell);
+	bool OnMoveInEvent(const NFGUID& self, const int& sceneID, const int& groupID, const NFGUID& toCell);
+	bool OnMoveOutEvent(const NFGUID& self, const int& sceneID, const int& groupID, const NFGUID& fromCell);
 	
 	int BeforeLeaveSceneGroup(const NFGUID& self, const int nSceneID, const int nGroupID, const int nType, const NFDataList& argList);
 	int AfterEnterSceneGroup(const NFGUID& self, const int nSceneID, const int nGroupID, const int nType, const NFDataList& argList);
@@ -209,6 +219,8 @@ private:
 
 
 	std::vector<CELL_MOVE_EVENT_FUNCTOR_PTR> mMoveEventHandler;
+	std::vector<CELL_MOVE_EVENT_FUNCTOR_PTR> mMoveInEventHandler;
+	std::vector<CELL_MOVE_EVENT_FUNCTOR_PTR> mMoveOutEventHandler;
 private:
 	NFIKernelModule* m_pKernelModule;
 	NFIClassModule* m_pClassModule;

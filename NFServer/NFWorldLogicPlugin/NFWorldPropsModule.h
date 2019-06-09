@@ -63,6 +63,8 @@ public:
 
 
 private:
+	void OnReqStoreBuildingsProcess(const NFSOCK nSockIndex, const int nMsgID, const char * msg, const uint32_t nLen);
+
 	void OnReqAddBuildingProcess(const NFSOCK nSockIndex, const int nMsgID, const char * msg, const uint32_t nLen);
 	void OnReqBuildingsProcess(const NFSOCK nSockIndex, const int nMsgID, const char *msg, const uint32_t nLen);
 

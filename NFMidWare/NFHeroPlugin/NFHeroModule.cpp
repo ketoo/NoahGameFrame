@@ -350,12 +350,12 @@ bool NFHeroModule::SwitchFightHero(const NFGUID & self, const NFGUID & xHeroID)
 	//if now the player fighting in a clone scene, pos must be restricted between ECONSt_HERO_UNKNOW and ECONSt_HERO_MAX
 	//if now the player fighting in a town or suburb scene, we allow player switch any hero who still alive to fight again
 	const int nSceneID = m_pKernelModule->GetPropertyInt(self, NFrame::Player::SceneID());
-	E_SCENE_TYPE eSceneType = (E_SCENE_TYPE)m_pElementModule->GetPropertyInt32(std::to_string(nSceneID), NFrame::Scene::Type());
+	NFMsg::ESceneType eSceneType = (NFMsg::ESceneType)m_pElementModule->GetPropertyInt32(std::to_string(nSceneID), NFrame::Scene::Type());
 	EConsHero_Pos nPos = GetFightPos(self, xHeroID);
 
-	if (eSceneType == E_SCENE_TYPE::SCENE_TYPE_SINGLE_CLONE_SCENE
-		|| eSceneType == E_SCENE_TYPE::SCENE_TYPE_MULTI_CLONE_SCENE
-		|| eSceneType == E_SCENE_TYPE::SCENE_TYPE_Clan)
+	if (eSceneType == NFMsg::ESceneType::SCENE_SINGLE_CLONE
+		|| eSceneType == NFMsg::ESceneType::SCENE_MULTI_CLONE
+		|| eSceneType == NFMsg::ESceneType::SCENE_HOME)
 	{
 		if (nPos <= EConsHero_Pos::ECONSt_HERO_UNKNOW
 			|| nPos >= EConsHero_Pos::ECONSt_HERO_MAX)
@@ -476,7 +476,7 @@ void NFHeroModule::OnReliveHeroMsg(const NFSOCK nSockIndex, const int nMsgID, co
 	ReliveHero(nPlayerID, xHero, diamond);
 }
 
-int NFHeroModule::CalReliveTime(const NFGUID & self, const NFGUID & xHeroID, const E_SCENE_TYPE reliveType)
+int NFHeroModule::CalReliveTime(const NFGUID & self, const NFGUID & xHeroID, const NFMsg::ESceneType reliveType)
 {
 	NF_SHARE_PTR<NFIRecord> pHeroRecord = m_pKernelModule->FindRecord(self, NFrame::Player::PlayerHero::ThisName());
 	if (nullptr == pHeroRecord)
@@ -500,14 +500,14 @@ int NFHeroModule::CalReliveTime(const NFGUID & self, const NFGUID & xHeroID, con
 
 	switch (reliveType)
 	{
-	case E_SCENE_TYPE::SCENE_TYPE_Clan:
+	case NFMsg::ESceneType::SCENE_HOME:
 		return (nLevel + nStar * 5) * 10 + NFGetTimeS();
 		break;
-	case E_SCENE_TYPE::SCENE_TYPE_NORMAL:
+	case NFMsg::ESceneType::SCENE_NORMAL:
 		return (nLevel + nStar * 5) * 100 + NFGetTimeS();
 		break;
-	case E_SCENE_TYPE::SCENE_TYPE_MULTI_CLONE_SCENE:
-	case E_SCENE_TYPE::SCENE_TYPE_SINGLE_CLONE_SCENE:
+	case NFMsg::ESceneType::SCENE_MULTI_CLONE:
+	case NFMsg::ESceneType::SCENE_SINGLE_CLONE:
 		return (nLevel + nStar * 5) + NFGetTimeS();
 		break;
 	default:
@@ -626,7 +626,7 @@ int NFHeroModule::OnPlayerHPEvent(const NFGUID & self, const std::string & strPr
 	{
 		NFGUID id = pHeroRecord->GetObject(nRow, NFrame::Player::PlayerHero::GUID);
 		const int nSceneID = m_pKernelModule->GetPropertyInt(self, NFrame::Player::SceneID());
-		E_SCENE_TYPE sSceneType = (E_SCENE_TYPE)m_pElementModule->GetPropertyInt(std::to_string(nSceneID), NFrame::Scene::Type());
+		NFMsg::ESceneType sSceneType = (NFMsg::ESceneType)m_pElementModule->GetPropertyInt(std::to_string(nSceneID), NFrame::Scene::Type());
 		int nReliveTime = CalReliveTime(self, id, sSceneType);
 		pHeroRecord->SetInt(nRow, NFrame::Player::PlayerHero::ReliveTime, nReliveTime);
 
@@ -644,10 +644,10 @@ int NFHeroModule::BeforeEnterSceneGroupEvent(const NFGUID & self, const int nSce
 int NFHeroModule::AfterEnterSceneGroupEvent(const NFGUID & self, const int nSceneID, const int nGroupID, const int nType, const NFDataList & argList)
 {
 	//full hp for all fight heroes when entered a clone scene
-	E_SCENE_TYPE eSceneType = (E_SCENE_TYPE)m_pElementModule->GetPropertyInt32(std::to_string(nSceneID), NFrame::Scene::Type());
-	if (eSceneType == E_SCENE_TYPE::SCENE_TYPE_SINGLE_CLONE_SCENE
-		|| eSceneType == E_SCENE_TYPE::SCENE_TYPE_MULTI_CLONE_SCENE
-		|| eSceneType == E_SCENE_TYPE::SCENE_TYPE_Clan)
+	NFMsg::ESceneType eSceneType = (NFMsg::ESceneType)m_pElementModule->GetPropertyInt32(std::to_string(nSceneID), NFrame::Scene::Type());
+	if (eSceneType == NFMsg::ESceneType::SCENE_SINGLE_CLONE
+		|| eSceneType == NFMsg::ESceneType::SCENE_MULTI_CLONE
+		|| eSceneType == NFMsg::ESceneType::SCENE_HOME)
 	{
 
 		NFGUID xFightingHeroID = m_pKernelModule->GetPropertyObject(self, NFrame::Player::FightHeroID());

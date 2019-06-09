@@ -100,8 +100,8 @@ void NFSwitchGameServerModule::OnReqSwitchServer(const NFSOCK nSockIndex, const 
     pObject->SetPropertyInt(NFrame::Player::GameID(), pPluginManager->GetAppID());
 
     m_pKernelModule->DoEvent(pObject->Self(), NFrame::Player::ThisName(), CLASS_OBJECT_EVENT::COE_CREATE_FINISH, NFDataList());
-
-    m_pSceneModule->RequestEnterScene(pObject->Self(), nSceneID, nGroup, 0, NFDataList());
+	const NFVector3& pos = m_pSceneModule->GetRelivePosition(nSceneID, 0);
+    m_pSceneModule->RequestEnterScene(pObject->Self(), nSceneID, nGroup, 0, pos, NFDataList());
     //m_pEventModule->DoEvent(pObject->Self(), NFED_ON_CLIENT_ENTER_SCENE, varEntry);
 
     if (!m_pGameServerNet_ServerModule->AddPlayerGateInfo(nPlayerID, nClientID, nGateID))

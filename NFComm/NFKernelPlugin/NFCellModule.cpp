@@ -43,12 +43,14 @@ bool NFCellModule::Init()
 	m_pLogModule = pPluginManager->FindModule<NFILogModule>();
 	m_pEventModule = pPluginManager->FindModule<NFIEventModule>();
 
-
 	return true;
 }
 
 bool NFCellModule::AfterInit()
 {
+	m_pKernelModule->AddClassCallBack(NFrame::NPC::ThisName(), this, &NFCellModule::OnObjectEvent);
+	m_pKernelModule->AddClassCallBack(NFrame::Player::ThisName(), this, &NFCellModule::OnObjectEvent);
+
 	//NF SYNC
 	bool bCell = false;
 	std::shared_ptr<NFIClass> xServerLogicClass = m_pClassModule->GetElement(NFrame::Server::ThisName());
@@ -73,7 +75,7 @@ bool NFCellModule::AfterInit()
 	{
 		return true;
 	}
-
+	/*
 	//init all scene
 	NFList<NF_SHARE_PTR<NFSceneCellInfo>> cellList;
 
@@ -140,7 +142,7 @@ bool NFCellModule::AfterInit()
 	}
 
 	//prepare group cell pool to enhance the performance when requesting a new group 
-
+	*/
 	return true;
 }
 
@@ -163,6 +165,7 @@ bool NFCellModule::Execute()
 
 const bool NFCellModule::CreateGroupCell(const int & sceneID, const int & groupID)
 {
+	/*
 	//we would have a group cell pool
 	TMAP_SCENE_INFO::iterator it = mtCellInfoMap.find(sceneID);
 	if (it != mtCellInfoMap.end())
@@ -208,7 +211,7 @@ const bool NFCellModule::CreateGroupCell(const int & sceneID, const int & groupI
 
 		}
 	}
-
+	*/
 	return false;
 }
 
@@ -227,38 +230,35 @@ const bool NFCellModule::DestroyGroupCell(const int & sceneID, const int & group
 	return true;
 }
 
-const NFGUID NFCellModule::OnObjectMove(const NFGUID& self, const int& sceneID, const int& groupID, const NFGUID& lastGrid, const int nX, const int nY, const int nZ)
+const NFGUID NFCellModule::OnObjectMove(const NFGUID& self, const int& sceneID, const int& groupID, const NFGUID& fromCell, const NFGUID& toCell)
 {
-    const NFGUID& currGrid = ComputeCellID(nX, nY, nZ);
-    if (currGrid == lastGrid)
+    if (toCell == toCell)
     {
-        return lastGrid;
+        return toCell;
     }
 
-	OnMoveEvent(self, sceneID, groupID, lastGrid, currGrid);
+	OnMoveEvent(self, sceneID, groupID, fromCell, toCell);
 
-    return currGrid;
+    return toCell;
 }
 
-const NFGUID NFCellModule::OnObjectEntry(const NFGUID& self, const int& sceneID, const int& groupID, const int nX, const int nY, const int nZ)
+const NFGUID NFCellModule::OnObjectEntry(const NFGUID& self, const int& sceneID, const int& groupID, const NFGUID& toCell)
 {
-    NFGUID cellID = ComputeCellID(nX, nY, nZ);
-    NF_SHARE_PTR<NFSceneCellInfo> pGridInfo = GetCellInfo(sceneID, groupID, cellID);
-    if (pGridInfo)
+    NF_SHARE_PTR<NFSceneCellInfo> pCellInfo = GetCellInfo(sceneID, groupID, toCell);
+    if (pCellInfo)
     {
-		OnMoveEvent(self, sceneID, groupID, NFGUID(), cellID);
+		OnMoveInEvent(self, sceneID, groupID, toCell);
     }
 
-    return cellID;
+    return toCell;
 }
 
-const NFGUID NFCellModule::OnObjectLeave(const NFGUID& self, const int& sceneID, const int& groupID, const int nX, const int nY, const int nZ)
+const NFGUID NFCellModule::OnObjectLeave(const NFGUID& self, const int& sceneID, const int& groupID, const NFGUID& fromCell)
 {
-	NFGUID cellID = ComputeCellID(nX, nY, nZ);
-	NF_SHARE_PTR<NFSceneCellInfo> pCellInfo = GetCellInfo(sceneID, groupID, cellID);
+	NF_SHARE_PTR<NFSceneCellInfo> pCellInfo = GetCellInfo(sceneID, groupID, fromCell);
 	if (pCellInfo)
 	{
-		OnMoveEvent(self, sceneID, groupID, cellID, NFGUID());
+		OnMoveOutEvent(self, sceneID, groupID, fromCell);
 	}
 
     return NFGUID();
@@ -300,6 +300,11 @@ const NFGUID NFCellModule::ComputeCellID(const int nX, const int nY, const int n
     int nGridZIndex = nZ / nCellWidth;
 
     return NFGUID(nGridXIndex, nGridZIndex);
+}
+
+const NFGUID NFCellModule::ComputeCellID(const NFVector3 & vec)
+{
+	return ComputeCellID(vec.X(), vec.Y(), vec.Z());
 }
 
 const NFGUID NFCellModule::ComputeCellID(const NFGUID & selfGrid, ECELL_DIRECTION eDirection)
@@ -435,6 +440,41 @@ int NFCellModule::AddMoveEventCallBack(CELL_MOVE_EVENT_FUNCTOR_PTR functorPtr)
 	return 0;
 }
 
+int NFCellModule::AddMoveInEventCallBack(CELL_MOVE_EVENT_FUNCTOR_PTR functorPtr)
+{
+	mMoveInEventHandler.push_back(functorPtr);
+	return 0;
+}
+
+int NFCellModule::AddMoveOutEventCallBack(CELL_MOVE_EVENT_FUNCTOR_PTR functorPtr)
+{
+	mMoveOutEventHandler.push_back(functorPtr);
+	return 0;
+}
+
+int NFCellModule::OnObjectEvent(const NFGUID & self, const std::string & strClassNames, const CLASS_OBJECT_EVENT eClassEvent, const NFDataList & var)
+{
+	if (CLASS_OBJECT_EVENT::COE_CREATE_FINISH == eClassEvent)
+	{
+		m_pKernelModule->AddPropertyCallBack(self, NFrame::IObject::Position(), this, &NFCellModule::OnPositionEvent);
+	}
+
+	return 0;
+}
+
+int NFCellModule::OnPositionEvent(const NFGUID & self, const std::string & strPropertyName, const NFData & oldVar, const NFData & newVar)
+{
+	const int sceneID = m_pKernelModule->GetPropertyInt(self, NFrame::IObject::SceneID());
+	const int groupID = m_pKernelModule->GetPropertyInt(self, NFrame::IObject::GroupID());
+	const NFVector3& oldVec = oldVar.GetVector3();
+	const NFVector3& newVec = newVar.GetVector3();
+
+	NFGUID fromCell = ComputeCellID(oldVec);
+	NFGUID toCell =	ComputeCellID(newVec);
+	OnObjectMove(self, sceneID, groupID, fromCell, toCell);
+	return 0;
+}
+
 NF_SHARE_PTR<NFSceneCellInfo> NFCellModule::GetConnectCell(const int& sceneID, const int& groupID, const NFGUID& selfGrid, ECELL_DIRECTION eDirection)
 {
 	NF_SHARE_PTR<NFSceneCellInfo> pGridInfo = GetCellInfo(sceneID, groupID, selfGrid);
@@ -467,10 +507,33 @@ NF_SHARE_PTR<NFSceneCellInfo> NFCellModule::GetCellInfo(const int& sceneID, cons
 
 bool NFCellModule::OnMoveEvent(const NFGUID& self, const int& sceneID, const int& groupID, const NFGUID& fromCell, const NFGUID& toCell)
 {
+	if (groupID <= 0)
+	{
+		return false;
+	}
+
 	NF_SHARE_PTR<NFSceneCellInfo> pCellInfo = GetCellInfo(sceneID, groupID, toCell);
 	if (pCellInfo)
 	{
 		pCellInfo->Add(self);
+	}
+
+	NFGUID lastCell = fromCell;
+
+	if (!fromCell.IsNull())
+	{
+		NF_SHARE_PTR<NFSceneCellInfo> pCellInfo = GetCellInfo(sceneID, groupID, fromCell);
+		if (pCellInfo)
+		{
+			if (!pCellInfo->Exist(self))
+			{
+				lastCell = NFGUID();
+			}
+		}
+		else
+		{
+			lastCell = NFGUID();
+		}
 	}
 
 	//BC
@@ -478,9 +541,58 @@ bool NFCellModule::OnMoveEvent(const NFGUID& self, const int& sceneID, const int
 	{
 		CELL_MOVE_EVENT_FUNCTOR_PTR pFunPtr = mMoveEventHandler[i];
 		CELL_MOVE_EVENT_FUNCTOR* pFun = pFunPtr.get();
-		pFun->operator()(self, sceneID, groupID, fromCell, toCell);
+		pFun->operator()(self, sceneID, groupID, lastCell, toCell);
 	}
     return true;
+}
+
+bool NFCellModule::OnMoveInEvent(const NFGUID & self, const int & sceneID, const int & groupID, const NFGUID & toCell)
+{
+	if (groupID <= 0)
+	{
+		return false;
+	}
+
+	NF_SHARE_PTR<NFSceneCellInfo> pCellInfo = GetCellInfo(sceneID, groupID, toCell);
+	if (pCellInfo)
+	{
+		pCellInfo->Add(self);
+	}
+
+	//BC
+	for (int i = 0; i < mMoveInEventHandler.size(); ++i)
+	{
+		CELL_MOVE_EVENT_FUNCTOR_PTR pFunPtr = mMoveEventHandler[i];
+		CELL_MOVE_EVENT_FUNCTOR* pFun = pFunPtr.get();
+		pFun->operator()(self, sceneID, groupID, NFGUID(), toCell);
+	}
+
+	return true;
+}
+
+bool NFCellModule::OnMoveOutEvent(const NFGUID & self, const int & sceneID, const int & groupID, const NFGUID & fromCell)
+{
+	if (groupID <= 0)
+	{
+		return false;
+	}
+
+	NF_SHARE_PTR<NFSceneCellInfo> pCellInfo = GetCellInfo(sceneID, groupID, fromCell);
+	if (pCellInfo)
+	{
+		pCellInfo->Remove(self);
+	}
+
+	//BC
+	for (int i = 0; i < mMoveOutEventHandler.size(); ++i)
+	{
+		CELL_MOVE_EVENT_FUNCTOR_PTR pFunPtr = mMoveEventHandler[i];
+		CELL_MOVE_EVENT_FUNCTOR* pFun = pFunPtr.get();
+		pFun->operator()(self, sceneID, groupID, fromCell, NFGUID());
+	}
+
+
+	return true;
 }
 
 int NFCellModule::BeforeLeaveSceneGroup(const NFGUID & self, const int nSceneID, const int nGroupID, const int nType, const NFDataList & argList)

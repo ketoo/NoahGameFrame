@@ -69,9 +69,16 @@ protected:
 	void OnReqSearchOpponentProcess(const NFSOCK nSockIndex, const int nMsgID, const char *msg, const uint32_t nLen);
 
 protected:
-	
+	void InitAllTileScene();
+	int RandomTileScene(const int nExceptSceneID);
+
 	bool SearchOpponent(const NFGUID & self, const int nExceptSceneID, const NFSOCK nSockIndex);
 	bool ProcessOpponentData( const NFGUID& opponent, NFMsg::AckSearchOppnent& xAckData);
+
+
+protected:
+
+	std::vector<int> mxTileSceneIDList;
 
 private:
 	NFIKernelModule* m_pKernelModule;

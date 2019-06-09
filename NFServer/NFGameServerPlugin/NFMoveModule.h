@@ -23,49 +23,58 @@
    limitations under the License.
 */
 
-#ifndef NF_ITEM_SCROLLE_PROCESS_MODULE_H
-#define NF_ITEM_SCROLLE_PROCESS_MODULE_H
 
+#ifndef NF_MOVE_MODULE_H
+#define NF_MOVE_MODULE_H
+
+#include <string>
+#include <map>
 #include <iostream>
+#include "NFComm/NFCore/NFMap.hpp"
+#include "NFComm/NFCore/NFList.hpp"
+#include "Dependencies/RapidXML/rapidxml.hpp"
+#include "Dependencies/RapidXML/rapidxml_iterators.hpp"
+#include "Dependencies/RapidXML/rapidxml_print.hpp"
+#include "Dependencies/RapidXML/rapidxml_utils.hpp"
+#include "NFComm/NFMessageDefine/NFProtocolDefine.hpp"
 #include "NFComm/NFPluginModule/NFIKernelModule.h"
-#include "NFComm/NFPluginModule/NFIPackModule.h"
 #include "NFComm/NFPluginModule/NFIElementModule.h"
+#include "NFComm/NFPluginModule/NFIClassModule.h"
+#include "NFComm/NFPluginModule/NFIGameServerConfigModule.h"
+#include "NFComm/NFPluginModule/NFISceneProcessModule.h"
+#include "NFComm/NFPluginModule/NFIPropertyModule.h"
 #include "NFComm/NFPluginModule/NFILogModule.h"
 #include "NFComm/NFPluginModule/NFIPluginManager.h"
-#include "NFComm/NFPluginModule/NFIItemModule.h"
-#include "NFComm/NFPluginModule/NFIHeroModule.h"
-#include "NFComm/NFPluginModule/NFISceneModule.h"
-#include "NFComm/NFPluginModule/NFISceneProcessModule.h"
-#include "NFComm/NFPluginModule/NFIItemConsumeProcessModule.h"
-#include "NFComm/NFPluginModule/NFINetClientModule.h"
+#include "NFComm/NFPluginModule/NFIEventModule.h"
+#include "NFComm/NFPluginModule/NFIMoveModule.h"
+#include "NFComm/NFPluginModule/NFICellModule.h"
+#include "NFComm/NFPluginModule/NFIGameServerNet_ServerModule.h"
 
-class NFItemScrollConsumeProcessModule
-    : public NFIItemConsumeocessModule
+class NFMoveModule
+    : public NFIMoveModule
 {
-
 public:
-    NFItemScrollConsumeProcessModule( NFIPluginManager* p )
+	NFMoveModule(NFIPluginManager* p)
     {
         pPluginManager = p;
     }
+    virtual ~NFMoveModule() {};
+
     virtual bool Init();
     virtual bool Shut();
     virtual bool Execute();
     virtual bool AfterInit();
-
-	
-	virtual int ConsumeLegal(const NFGUID& self, const std::string& strItemID, const NFDataList& targetID, const NFVector3& vector);
-
-	virtual int ConsumeProcess(const NFGUID& self, const std::string& strItemID, const NFDataList& targetID, const NFVector3& vector);
+	virtual bool ReadyExecute();
 
 private:
+
+    NFIElementModule* m_pElementModule;
+    NFIClassModule* m_pClassModule;
     NFIKernelModule* m_pKernelModule;
     NFILogModule* m_pLogModule;
-    NFIPackModule* m_pPackModule;
-	NFIElementModule* m_pElementModule;
-	NFIItemModule* m_pItemModule;
-	NFIHeroModule* m_pHeroModule;
-	NFINetClientModule* m_pNetClientModule;
+	NFIEventModule* m_pEventModule;
+	NFICellModule* m_pCellModule;
+    NFIGameServerNet_ServerModule* m_pGameServerNet_ServerModule;
 };
 
 #endif

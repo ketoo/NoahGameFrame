@@ -46,6 +46,50 @@ bool NFFriendModule::AfterInit()
 	return true;
 }
 
+bool NFFriendModule::IsEnemy(const NFGUID & self, const NFGUID & other)
+{
+	if (self == other)
+	{
+		return false;
+	}
+	if (!m_pKernelModule->ExistObject(self)
+		|| !m_pKernelModule->ExistObject(other))
+	{
+		return false;
+	}
+
+	const std::string& selfClassName = m_pKernelModule->GetPropertyString(self, NFrame::IObject::ClassName());
+	NFGUID selfCampID = m_pKernelModule->GetPropertyObject(self, NFrame::NPC::Camp());
+	NFGUID selfMasterID = m_pKernelModule->GetPropertyObject(self, NFrame::NPC::MasterID());
+	long selfHP = m_pKernelModule->GetPropertyInt(self, NFrame::NPC::HP());
+
+	const std::string& enemyClassName = m_pKernelModule->GetPropertyString(self, NFrame::IObject::ClassName());
+	NFGUID enemyCampID = m_pKernelModule->GetPropertyObject(self, NFrame::NPC::Camp());
+	NFGUID enemyMasterID = m_pKernelModule->GetPropertyObject(self, NFrame::NPC::MasterID());
+	long enemyHP = m_pKernelModule->GetPropertyInt(self, NFrame::NPC::HP());
+
+	if (enemyHP <= 0)
+	{
+		return false;
+	}
+
+	if (selfMasterID == other
+		|| selfMasterID == enemyMasterID)
+	{
+		return false;
+	}
+
+	if (!selfCampID.IsNull() || !enemyCampID.IsNull())
+	{
+		if (selfCampID == enemyCampID)
+		{
+			return false;
+		}
+	}
+
+	return true;
+}
+
 bool NFFriendModule::Shut()
 {
 

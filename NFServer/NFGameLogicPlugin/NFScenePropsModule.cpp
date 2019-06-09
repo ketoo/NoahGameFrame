@@ -74,7 +74,7 @@ int NFScenePropsModule::OnPlayerClassEvent(const NFGUID & self, const std::strin
 {
 	if (CLASS_OBJECT_EVENT::COE_CREATE_FINISH == eClassEvent)
 	{
-		m_pKernelModule->AddPropertyCallBack(self, NFrame::Player::Position(), this, &NFScenePropsModule::OnPlayePositionPEvent);
+		m_pKernelModule->AddPropertyCallBack(self, NFrame::Player::Position(), this, &NFScenePropsModule::OnPlayePositionEvent);
 
 		m_pKernelModule->AddRecordCallBack(self, NFrame::Player::BuildingList::ThisName(), this, &NFScenePropsModule::OnObjectBuildingRecordEvent);
 
@@ -82,7 +82,7 @@ int NFScenePropsModule::OnPlayerClassEvent(const NFGUID & self, const std::strin
 	return 0;
 }
 
-int NFScenePropsModule::OnPlayePositionPEvent(const NFGUID & self, const std::string & strPropertyName, const NFData & oldVar, const NFData & newVar)
+int NFScenePropsModule::OnPlayePositionEvent(const NFGUID & self, const std::string & strPropertyName, const NFData & oldVar, const NFData & newVar)
 {
 	NFGUID posNewCell(newVar.GetVector3().X() / 100, newVar.GetVector3().Z() / 100);
 
@@ -99,28 +99,42 @@ int NFScenePropsModule::OnPlayePositionPEvent(const NFGUID & self, const std::st
 
 int NFScenePropsModule::OnObjectBuildingRecordEvent(const NFGUID & self, const RECORD_EVENT_DATA & xEventData, const NFData & oldVar, const NFData & newVar)
 {
-	if (xEventData.nOpType == RECORD_EVENT_DATA::RecordOptype::Add)
+	if (xEventData.nOpType == RECORD_EVENT_DATA::RecordOptype::Add
+		|| xEventData.nOpType == RECORD_EVENT_DATA::RecordOptype::Update)
 	{
 		//send message to world to store this building
 		NF_SHARE_PTR<NFIRecord> pRecord = m_pKernelModule->FindRecord(self, NFrame::Player::BuildingList::ThisName());
 		if (pRecord)
 		{
-			const int nSceneID = m_pKernelModule->GetPropertyInt(self, NFrame::Player::SceneID());
+			const int nHomeSceneID = m_pKernelModule->GetPropertyInt(self, NFrame::Player::HomeSceneID());
 			const std::string& strName = m_pKernelModule->GetPropertyString(self, NFrame::Player::Name());
 
-			const NFGUID& id = pRecord->GetObject(xEventData.nRow, NFrame::Player::BuildingList::BuildingGUID);
-			const NFVector3& vector = pRecord->GetVector3(xEventData.nRow, NFrame::Player::BuildingList::Pos);
-			const std::string& strCnfID = pRecord->GetString(xEventData.nRow, NFrame::Player::BuildingList::BuildingCnfID);
-	
-			NFMsg::ReqAddSceneBuilding addBuilding;
-			addBuilding.set_config_id(strCnfID);
-			addBuilding.set_scene_id(nSceneID);
-			*addBuilding.mutable_guid() = NFINetModule::NFToPB(id);
-			*addBuilding.mutable_pos() = NFINetModule::NFToPB(vector);
-			*addBuilding.mutable_master() = NFINetModule::NFToPB(self);
-			addBuilding.set_master_name(strName);
+			NFMsg::ReqStoreSceneBuildings sceneProps;
+			sceneProps.set_home_scene_id(nHomeSceneID);
+			*(sceneProps.mutable_guid()) = NFINetModule::NFToPB(self);
 
-			m_pNetClientModule->SendSuitByPB(NF_SERVER_TYPES::NF_ST_WORLD, nSceneID, NFMsg::EGMI_REQ_ADD_BUILDING, addBuilding);
+			for (int i = 0; i < pRecord->GetRows(); ++i)
+			{
+				if (pRecord->IsUsed(i))
+				{
+					const NFGUID& id = pRecord->GetObject(i, NFrame::Player::BuildingList::BuildingGUID);
+					const NFVector3& vector = pRecord->GetVector3(i, NFrame::Player::BuildingList::Pos);
+					const std::string& strCnfID = pRecord->GetString(i, NFrame::Player::BuildingList::BuildingCnfID);
+
+					NFMsg::ReqAddSceneBuilding* pAddBuilding = sceneProps.add_buildings();
+					pAddBuilding->set_config_id(strCnfID);
+					pAddBuilding->set_master_name(strName);
+					pAddBuilding->set_scene_id(nHomeSceneID);
+					pAddBuilding->set_is_home_scene(1);
+					pAddBuilding->set_is_building(1);
+
+					*(pAddBuilding->mutable_guid()) = NFINetModule::NFToPB(id);
+					*(pAddBuilding->mutable_pos()) = NFINetModule::NFToPB(vector);
+					*(pAddBuilding->mutable_master()) = NFINetModule::NFToPB(self);
+				}
+			}
+
+			m_pNetClientModule->SendSuitByPB(NF_SERVER_TYPES::NF_ST_WORLD, nHomeSceneID, NFMsg::EGMI_REQ_STORE_BUILDING_LIST, sceneProps);
 		}
 	}
 

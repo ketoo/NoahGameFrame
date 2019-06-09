@@ -86,9 +86,9 @@ bool NFSceneModule::Execute()
     return true;
 }
 
-bool NFSceneModule::RequestEnterScene(const NFGUID & self, const int nSceneID, const int nGrupID, const int nType, const NFDataList & argList)
+bool NFSceneModule::RequestEnterScene(const NFGUID & self, const int nSceneID, const int nGroupID, const int nType, const NFVector3& pos, const NFDataList & argList)
 {
-	if (nGrupID < 0)
+	if (nGroupID < 0)
 	{
 		return false;
 	}
@@ -97,7 +97,7 @@ bool NFSceneModule::RequestEnterScene(const NFGUID & self, const int nSceneID, c
 	const int nNowGroupID = m_pKernelModule->GetPropertyInt32(self, NFrame::Player::GroupID());
 	
 	if (nNowSceneID == nSceneID
-		&& nNowGroupID == nGrupID)
+		&& nNowGroupID == nGroupID)
 	{
 		m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, self, "in same scene and group but it not a clone scene", nSceneID);
 
@@ -117,16 +117,14 @@ bool NFSceneModule::RequestEnterScene(const NFGUID & self, const int nSceneID, c
 	}
 	*/
 
-	int nEnterConditionCode = EnterSceneCondition(self, nSceneID, nGrupID, nType, argList);
+	int nEnterConditionCode = EnterSceneCondition(self, nSceneID, nGroupID, nType, argList);
 	if (nEnterConditionCode != 0)
 	{
 		m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, self, "before enter condition code:", nEnterConditionCode);
 		return false;
 	}
 
-	
-	NFVector3 vRelivePos = GetRelivePosition(nSceneID, 0);
-	if (!SwitchScene(self, nSceneID, nGrupID, nType, vRelivePos, 0.0f, argList))
+	if (!SwitchScene(self, nSceneID, nGroupID, nType, pos, 0.0f, argList))
 	{
 		m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, self, "SwitchScene failed", nSceneID);
 
@@ -158,7 +156,7 @@ bool NFSceneModule::AddRelivePosition(const int nSceneID, const int nIndex, cons
 	return false;
 }
 
-NFVector3 NFSceneModule::GetRelivePosition(const int nSceneID, const int nIndex, const bool bRoll)
+const NFVector3& NFSceneModule::GetRelivePosition(const int nSceneID, const int nIndex, const bool bRoll)
 {
 	NF_SHARE_PTR<NFSceneInfo> pSceneInfo = GetElement(nSceneID);
 	if (pSceneInfo)
@@ -166,7 +164,7 @@ NFVector3 NFSceneModule::GetRelivePosition(const int nSceneID, const int nIndex,
 		return pSceneInfo->GetReliveInfo(nIndex, bRoll);
 	}
 
-	return NFVector3();
+	return NFVector3::Zero();
 }
 
 bool NFSceneModule::AddTagPosition(const int nSceneID, const int nIndex, const NFVector3 & vPos)
@@ -180,7 +178,7 @@ bool NFSceneModule::AddTagPosition(const int nSceneID, const int nIndex, const N
 	return false;
 }
 
-NFVector3 NFSceneModule::GetTagPosition(const int nSceneID, const int nIndex, const bool bRoll)
+const NFVector3& NFSceneModule::GetTagPosition(const int nSceneID, const int nIndex, const bool bRoll)
 {
 	NF_SHARE_PTR<NFSceneInfo> pSceneInfo = GetElement(nSceneID);
 	if (pSceneInfo)
@@ -188,7 +186,7 @@ NFVector3 NFSceneModule::GetTagPosition(const int nSceneID, const int nIndex, co
 		return pSceneInfo->GetTagInfo(nIndex, bRoll);
 	}
 
-	return NFVector3();
+	return NFVector3::Zero();
 }
 
 bool NFSceneModule::AddObjectEnterCallBack(const OBJECT_ENTER_EVENT_FUNCTOR_PTR & cb)
@@ -364,7 +362,12 @@ bool NFSceneModule::SwitchScene(const NFGUID& self, const int nTargetSceneID, co
 			return false;
 		}
 		/////////
+
+		const NFVector3& lastPos = m_pKernelModule->GetPropertyVector3(self, NFrame::IObject::Position());
 		BeforeLeaveSceneGroup(self, nOldSceneID, nOldGroupID, nType, arg);
+
+		const NFGUID lastCell = m_pCellModule->ComputeCellID(lastPos);
+		OnMoveCellEvent(self, nOldSceneID, nOldGroupID, lastCell, NFGUID());
 
 		pOldSceneInfo->RemoveObjectFromGroup(nOldGroupID, self, true);
 
@@ -386,6 +389,9 @@ bool NFSceneModule::SwitchScene(const NFGUID& self, const int nTargetSceneID, co
 
 		pNewSceneInfo->AddObjectToGroup(nTargetGroupID, self, true);
 		pObject->SetPropertyInt(NFrame::Scene::GroupID(), nTargetGroupID);
+
+		const NFGUID newCell = m_pCellModule->ComputeCellID(v);
+		OnMoveCellEvent(self, nTargetGroupID, nTargetGroupID, NFGUID(), newCell);
 
 		/////////
 		AfterEnterSceneGroup(self, nTargetSceneID, nTargetGroupID, nType, arg);
@@ -764,6 +770,7 @@ int NFSceneModule::OnSwapSceneEvent(const NFGUID & self, const int nSceneID, con
 
 int NFSceneModule::BeforeEnterSceneGroup(const NFGUID & self, const int nSceneID, const int nGroupID, const int nType, const NFDataList & argList)
 {
+
 	std::vector<SCENE_EVENT_FUNCTOR_PTR>::iterator it = mvBeforeEnterSceneCallback.begin();
 	for (; it != mvBeforeEnterSceneCallback.end(); it++)
 	{
@@ -870,14 +877,17 @@ int NFSceneModule::OnMoveCellEvent(const NFGUID & self, const int & scene, const
 	if (fromCell.IsNull())
 	{
 		//enter a group
+		m_pCellModule->OnObjectEntry(self, scene, group, toCell);
 	}
 	else if (toCell.IsNull())
 	{
 		//leave a group
+		m_pCellModule->OnObjectLeave(self, scene, group, fromCell);
 	}
 	else
 	{
 		//move between two groups
+		m_pCellModule->OnObjectMove(self, scene, group, fromCell, toCell);
 	}
 
 	return 0;
