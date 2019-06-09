@@ -66,8 +66,8 @@ public:
     virtual bool AfterInit();
 	virtual bool ReadyExecute();
 
-	virtual bool RequestEnterScene(const NFGUID & self, const int nSceneID, const int nType, const NFDataList & argList);
-	virtual bool RequestEnterScene(const NFGUID& self, const int nSceneID, const int nGroupID, const int nType, const NFDataList& argList);
+	virtual bool RequestEnterScene(const NFGUID & self, const int nSceneID, const int nType, const NFVector3& pos, const NFDataList & argList);
+	virtual bool RequestEnterScene(const NFGUID& self, const int nSceneID, const int nGroupID, const int nType, const NFVector3& pos, const NFDataList& argList);
 
 protected:
 	bool LoadSceneResource(const std::string& strSceneIDName);

@@ -200,7 +200,7 @@ public:
 		return mtSceneRelivePos.AddElement(nIndex, NF_SHARE_PTR<NFVector3>(NF_NEW NFVector3(vPos)));
 	}
 
-	NFVector3 GetReliveInfo(const int nIndex, const bool bRoll)
+	const NFVector3& GetReliveInfo(const int nIndex, const bool bRoll)
 	{
 		NF_SHARE_PTR<NFVector3> vPos = mtSceneRelivePos.GetElement(nIndex);
 		if (vPos)
@@ -213,7 +213,7 @@ public:
 			return *(mtSceneRelivePos.GetElement(0));
 		}
 
-		return NFVector3();
+		return NFVector3::Zero();
 	}
 
 	bool AddTagInfo(const int nIndex, const NFVector3& vPos)
@@ -383,12 +383,13 @@ public:
 		return AddAfterLeaveSceneGroupCallBack(functorPtr);
 	}
 
-	virtual bool RequestEnterScene(const NFGUID& self, const int nSceneID, const int nGroupID, const int nType, const NFDataList& argList) = 0;
+	virtual bool RequestEnterScene(const NFGUID& self, const int nSceneID, const int nGroupID, const int nType, const NFVector3& pos, const NFDataList& argList) = 0;
+	
 	virtual bool AddSeedData(const int nSceneID, const std::string& strSeedID, const std::string& strConfigID, const NFVector3& vPos, const int nHeight) = 0;
 	virtual bool AddRelivePosition(const int nSceneID, const int nIndex, const NFVector3& vPos) = 0;
-	virtual NFVector3 GetRelivePosition(const int nSceneID, const int nIndex, const bool bRoll = true) = 0;
+	virtual const NFVector3& GetRelivePosition(const int nSceneID, const int nIndex, const bool bRoll = true) = 0;
 	virtual bool AddTagPosition(const int nSceneID, const int nIndex, const NFVector3& vPos) = 0;
-	virtual NFVector3 GetTagPosition(const int nSceneID, const int nIndex, const bool bRoll = true) = 0;
+	virtual const NFVector3& GetTagPosition(const int nSceneID, const int nIndex, const bool bRoll = true) = 0;
 
 	virtual bool CreateSceneNPC(const int nSceneID, const int nGroupID) = 0;
 	virtual bool CreateSceneNPC(const int nSceneID, const int nGroupID, const NFDataList& argList) = 0;

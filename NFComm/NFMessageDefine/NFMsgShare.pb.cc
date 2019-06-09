@@ -27,15 +27,11 @@ namespace protobuf_NFMsgShare_2eproto {
 extern PROTOBUF_INTERNAL_EXPORT_protobuf_NFMsgShare_2eproto ::google::protobuf::internal::SCCInfo<0> scc_info_CurrencyStruct;
 extern PROTOBUF_INTERNAL_EXPORT_protobuf_NFMsgShare_2eproto ::google::protobuf::internal::SCCInfo<0> scc_info_ItemStruct;
 extern PROTOBUF_INTERNAL_EXPORT_protobuf_NFMsgShare_2eproto ::google::protobuf::internal::SCCInfo<0> scc_info_ReqAckPlayerChat_ChatContainer;
-extern PROTOBUF_INTERNAL_EXPORT_protobuf_NFMsgShare_2eproto ::google::protobuf::internal::SCCInfo<0> scc_info_TileState;
 extern PROTOBUF_INTERNAL_EXPORT_protobuf_NFMsgShare_2eproto ::google::protobuf::internal::SCCInfo<1> scc_info_AckSearchClan_SearchClanObject;
 extern PROTOBUF_INTERNAL_EXPORT_protobuf_NFMsgShare_2eproto ::google::protobuf::internal::SCCInfo<1> scc_info_EffectData;
 extern PROTOBUF_INTERNAL_EXPORT_protobuf_NFMsgShare_2eproto ::google::protobuf::internal::SCCInfo<1> scc_info_PVPRoomInfo;
 extern PROTOBUF_INTERNAL_EXPORT_protobuf_NFMsgShare_2eproto ::google::protobuf::internal::SCCInfo<1> scc_info_PlayerEntryInfo;
-extern PROTOBUF_INTERNAL_EXPORT_protobuf_NFMsgShare_2eproto ::google::protobuf::internal::SCCInfo<1> scc_info_TileBuilding;
-extern PROTOBUF_INTERNAL_EXPORT_protobuf_NFMsgShare_2eproto ::google::protobuf::internal::SCCInfo<1> scc_info_TileNPC;
 extern PROTOBUF_INTERNAL_EXPORT_protobuf_NFMsgShare_2eproto ::google::protobuf::internal::SCCInfo<2> scc_info_ReqAddSceneBuilding;
-extern PROTOBUF_INTERNAL_EXPORT_protobuf_NFMsgShare_2eproto ::google::protobuf::internal::SCCInfo<3> scc_info_AckMiningTitle;
 }  // namespace protobuf_NFMsgShare_2eproto
 namespace NFMsg {
 class ReqEnterGameServerDefaultTypeInternal {
@@ -183,6 +179,11 @@ class AckSceneBuildingsDefaultTypeInternal {
   ::google::protobuf::internal::ExplicitlyConstructed<AckSceneBuildings>
       _instance;
 } _AckSceneBuildings_default_instance_;
+class ReqStoreSceneBuildingsDefaultTypeInternal {
+ public:
+  ::google::protobuf::internal::ExplicitlyConstructed<ReqStoreSceneBuildings>
+      _instance;
+} _ReqStoreSceneBuildings_default_instance_;
 class ReqAckJoinActivityDefaultTypeInternal {
  public:
   ::google::protobuf::internal::ExplicitlyConstructed<ReqAckJoinActivity>
@@ -248,31 +249,6 @@ class ReqAddGambleValueDefaultTypeInternal {
   ::google::protobuf::internal::ExplicitlyConstructed<ReqAddGambleValue>
       _instance;
 } _ReqAddGambleValue_default_instance_;
-class ReqMiningTitleDefaultTypeInternal {
- public:
-  ::google::protobuf::internal::ExplicitlyConstructed<ReqMiningTitle>
-      _instance;
-} _ReqMiningTitle_default_instance_;
-class TileStateDefaultTypeInternal {
- public:
-  ::google::protobuf::internal::ExplicitlyConstructed<TileState>
-      _instance;
-} _TileState_default_instance_;
-class TileBuildingDefaultTypeInternal {
- public:
-  ::google::protobuf::internal::ExplicitlyConstructed<TileBuilding>
-      _instance;
-} _TileBuilding_default_instance_;
-class TileNPCDefaultTypeInternal {
- public:
-  ::google::protobuf::internal::ExplicitlyConstructed<TileNPC>
-      _instance;
-} _TileNPC_default_instance_;
-class AckMiningTitleDefaultTypeInternal {
- public:
-  ::google::protobuf::internal::ExplicitlyConstructed<AckMiningTitle>
-      _instance;
-} _AckMiningTitle_default_instance_;
 class ReqSearchOppnentDefaultTypeInternal {
  public:
   ::google::protobuf::internal::ExplicitlyConstructed<ReqSearchOppnent>
@@ -756,6 +732,22 @@ LIBPROTOC_EXPORT ::google::protobuf::internal::SCCInfo<1> scc_info_AckSceneBuild
     {{ATOMIC_VAR_INIT(::google::protobuf::internal::SCCInfoBase::kUninitialized), 1, InitDefaultsAckSceneBuildings}, {
       &protobuf_NFMsgShare_2eproto::scc_info_ReqAddSceneBuilding.base,}};
 
+static void InitDefaultsReqStoreSceneBuildings() {
+  GOOGLE_PROTOBUF_VERIFY_VERSION;
+
+  {
+    void* ptr = &::NFMsg::_ReqStoreSceneBuildings_default_instance_;
+    new (ptr) ::NFMsg::ReqStoreSceneBuildings();
+    ::google::protobuf::internal::OnShutdownDestroyMessage(ptr);
+  }
+  ::NFMsg::ReqStoreSceneBuildings::InitAsDefaultInstance();
+}
+
+LIBPROTOC_EXPORT ::google::protobuf::internal::SCCInfo<2> scc_info_ReqStoreSceneBuildings =
+    {{ATOMIC_VAR_INIT(::google::protobuf::internal::SCCInfoBase::kUninitialized), 2, InitDefaultsReqStoreSceneBuildings}, {
+      &protobuf_NFMsgBase_2eproto::scc_info_Ident.base,
+      &protobuf_NFMsgShare_2eproto::scc_info_ReqAddSceneBuilding.base,}};
+
 static void InitDefaultsReqAckJoinActivity() {
   GOOGLE_PROTOBUF_VERIFY_VERSION;
 
@@ -947,81 +939,6 @@ static void InitDefaultsReqAddGambleValue() {
 LIBPROTOC_EXPORT ::google::protobuf::internal::SCCInfo<0> scc_info_ReqAddGambleValue =
     {{ATOMIC_VAR_INIT(::google::protobuf::internal::SCCInfoBase::kUninitialized), 0, InitDefaultsReqAddGambleValue}, {}};
 
-static void InitDefaultsReqMiningTitle() {
-  GOOGLE_PROTOBUF_VERIFY_VERSION;
-
-  {
-    void* ptr = &::NFMsg::_ReqMiningTitle_default_instance_;
-    new (ptr) ::NFMsg::ReqMiningTitle();
-    ::google::protobuf::internal::OnShutdownDestroyMessage(ptr);
-  }
-  ::NFMsg::ReqMiningTitle::InitAsDefaultInstance();
-}
-
-LIBPROTOC_EXPORT ::google::protobuf::internal::SCCInfo<0> scc_info_ReqMiningTitle =
-    {{ATOMIC_VAR_INIT(::google::protobuf::internal::SCCInfoBase::kUninitialized), 0, InitDefaultsReqMiningTitle}, {}};
-
-static void InitDefaultsTileState() {
-  GOOGLE_PROTOBUF_VERIFY_VERSION;
-
-  {
-    void* ptr = &::NFMsg::_TileState_default_instance_;
-    new (ptr) ::NFMsg::TileState();
-    ::google::protobuf::internal::OnShutdownDestroyMessage(ptr);
-  }
-  ::NFMsg::TileState::InitAsDefaultInstance();
-}
-
-LIBPROTOC_EXPORT ::google::protobuf::internal::SCCInfo<0> scc_info_TileState =
-    {{ATOMIC_VAR_INIT(::google::protobuf::internal::SCCInfoBase::kUninitialized), 0, InitDefaultsTileState}, {}};
-
-static void InitDefaultsTileBuilding() {
-  GOOGLE_PROTOBUF_VERIFY_VERSION;
-
-  {
-    void* ptr = &::NFMsg::_TileBuilding_default_instance_;
-    new (ptr) ::NFMsg::TileBuilding();
-    ::google::protobuf::internal::OnShutdownDestroyMessage(ptr);
-  }
-  ::NFMsg::TileBuilding::InitAsDefaultInstance();
-}
-
-LIBPROTOC_EXPORT ::google::protobuf::internal::SCCInfo<1> scc_info_TileBuilding =
-    {{ATOMIC_VAR_INIT(::google::protobuf::internal::SCCInfoBase::kUninitialized), 1, InitDefaultsTileBuilding}, {
-      &protobuf_NFMsgBase_2eproto::scc_info_Ident.base,}};
-
-static void InitDefaultsTileNPC() {
-  GOOGLE_PROTOBUF_VERIFY_VERSION;
-
-  {
-    void* ptr = &::NFMsg::_TileNPC_default_instance_;
-    new (ptr) ::NFMsg::TileNPC();
-    ::google::protobuf::internal::OnShutdownDestroyMessage(ptr);
-  }
-  ::NFMsg::TileNPC::InitAsDefaultInstance();
-}
-
-LIBPROTOC_EXPORT ::google::protobuf::internal::SCCInfo<1> scc_info_TileNPC =
-    {{ATOMIC_VAR_INIT(::google::protobuf::internal::SCCInfoBase::kUninitialized), 1, InitDefaultsTileNPC}, {
-      &protobuf_NFMsgBase_2eproto::scc_info_Ident.base,}};
-
-static void InitDefaultsAckMiningTitle() {
-  GOOGLE_PROTOBUF_VERIFY_VERSION;
-
-  {
-    void* ptr = &::NFMsg::_AckMiningTitle_default_instance_;
-    new (ptr) ::NFMsg::AckMiningTitle();
-    ::google::protobuf::internal::OnShutdownDestroyMessage(ptr);
-  }
-  ::NFMsg::AckMiningTitle::InitAsDefaultInstance();
-}
-
-LIBPROTOC_EXPORT ::google::protobuf::internal::SCCInfo<3> scc_info_AckMiningTitle =
-    {{ATOMIC_VAR_INIT(::google::protobuf::internal::SCCInfoBase::kUninitialized), 3, InitDefaultsAckMiningTitle}, {
-      &protobuf_NFMsgShare_2eproto::scc_info_TileState.base,
-      &protobuf_NFMsgShare_2eproto::scc_info_TileBuilding.base,
-      &protobuf_NFMsgShare_2eproto::scc_info_TileNPC.base,}};
-
 static void InitDefaultsReqSearchOppnent() {
   GOOGLE_PROTOBUF_VERIFY_VERSION;
 
@@ -1051,7 +968,7 @@ LIBPROTOC_EXPORT ::google::protobuf::internal::SCCInfo<3> scc_info_AckSearchOppn
     {{ATOMIC_VAR_INIT(::google::protobuf::internal::SCCInfoBase::kUninitialized), 3, InitDefaultsAckSearchOppnent}, {
       &protobuf_NFMsgBase_2eproto::scc_info_Ident.base,
       &protobuf_NFMsgBase_2eproto::scc_info_Vector3.base,
-      &protobuf_NFMsgShare_2eproto::scc_info_AckMiningTitle.base,}};
+      &protobuf_NFMsgShare_2eproto::scc_info_ReqAddSceneBuilding.base,}};
 
 static void InitDefaultsReqSendMail() {
   GOOGLE_PROTOBUF_VERIFY_VERSION;
@@ -1208,6 +1125,7 @@ void InitDefaults() {
   ::google::protobuf::internal::InitSCC(&scc_info_ReqAddSceneBuilding.base);
   ::google::protobuf::internal::InitSCC(&scc_info_ReqSceneBuildings.base);
   ::google::protobuf::internal::InitSCC(&scc_info_AckSceneBuildings.base);
+  ::google::protobuf::internal::InitSCC(&scc_info_ReqStoreSceneBuildings.base);
   ::google::protobuf::internal::InitSCC(&scc_info_ReqAckJoinActivity.base);
   ::google::protobuf::internal::InitSCC(&scc_info_ReqAckCreateClan.base);
   ::google::protobuf::internal::InitSCC(&scc_info_ReqSearchClan.base);
@@ -1221,11 +1139,6 @@ void InitDefaults() {
   ::google::protobuf::internal::InitSCC(&scc_info_ReqSwitchFightHero.base);
   ::google::protobuf::internal::InitSCC(&scc_info_ReqBuyItemFromShop.base);
   ::google::protobuf::internal::InitSCC(&scc_info_ReqAddGambleValue.base);
-  ::google::protobuf::internal::InitSCC(&scc_info_ReqMiningTitle.base);
-  ::google::protobuf::internal::InitSCC(&scc_info_TileState.base);
-  ::google::protobuf::internal::InitSCC(&scc_info_TileBuilding.base);
-  ::google::protobuf::internal::InitSCC(&scc_info_TileNPC.base);
-  ::google::protobuf::internal::InitSCC(&scc_info_AckMiningTitle.base);
   ::google::protobuf::internal::InitSCC(&scc_info_ReqSearchOppnent.base);
   ::google::protobuf::internal::InitSCC(&scc_info_AckSearchOppnent.base);
   ::google::protobuf::internal::InitSCC(&scc_info_ReqSendMail.base);
@@ -1238,7 +1151,7 @@ void InitDefaults() {
   ::google::protobuf::internal::InitSCC(&scc_info_AckCreatePVPEctype.base);
 }
 
-::google::protobuf::Metadata file_level_metadata[57];
+::google::protobuf::Metadata file_level_metadata[53];
 const ::google::protobuf::EnumDescriptor* file_level_enum_descriptors[9];
 
 const ::google::protobuf::uint32 TableStruct::offsets[] GOOGLE_PROTOBUF_ATTRIBUTE_SECTION_VARIABLE(protodesc_cold) = {
@@ -1467,6 +1380,8 @@ const ::google::protobuf::uint32 TableStruct::offsets[] GOOGLE_PROTOBUF_ATTRIBUT
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NFMsg::ReqAddSceneBuilding, config_id_),
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NFMsg::ReqAddSceneBuilding, scene_id_),
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NFMsg::ReqAddSceneBuilding, master_name_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NFMsg::ReqAddSceneBuilding, is_home_scene_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NFMsg::ReqAddSceneBuilding, is_building_),
   ~0u,  // no _has_bits_
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NFMsg::ReqSceneBuildings, _internal_metadata_),
   ~0u,  // no _extensions_
@@ -1480,6 +1395,14 @@ const ::google::protobuf::uint32 TableStruct::offsets[] GOOGLE_PROTOBUF_ATTRIBUT
   ~0u,  // no _oneof_case_
   ~0u,  // no _weak_field_map_
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NFMsg::AckSceneBuildings, buildings_),
+  ~0u,  // no _has_bits_
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NFMsg::ReqStoreSceneBuildings, _internal_metadata_),
+  ~0u,  // no _extensions_
+  ~0u,  // no _oneof_case_
+  ~0u,  // no _weak_field_map_
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NFMsg::ReqStoreSceneBuildings, guid_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NFMsg::ReqStoreSceneBuildings, home_scene_id_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NFMsg::ReqStoreSceneBuildings, buildings_),
   ~0u,  // no _has_bits_
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NFMsg::ReqAckJoinActivity, _internal_metadata_),
   ~0u,  // no _extensions_
@@ -1574,48 +1497,6 @@ const ::google::protobuf::uint32 TableStruct::offsets[] GOOGLE_PROTOBUF_ATTRIBUT
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NFMsg::ReqAddGambleValue, property_),
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NFMsg::ReqAddGambleValue, number_),
   ~0u,  // no _has_bits_
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NFMsg::ReqMiningTitle, _internal_metadata_),
-  ~0u,  // no _extensions_
-  ~0u,  // no _oneof_case_
-  ~0u,  // no _weak_field_map_
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NFMsg::ReqMiningTitle, x_),
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NFMsg::ReqMiningTitle, y_),
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NFMsg::ReqMiningTitle, opr_),
-  ~0u,  // no _has_bits_
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NFMsg::TileState, _internal_metadata_),
-  ~0u,  // no _extensions_
-  ~0u,  // no _oneof_case_
-  ~0u,  // no _weak_field_map_
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NFMsg::TileState, x_),
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NFMsg::TileState, y_),
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NFMsg::TileState, opr_),
-  ~0u,  // no _has_bits_
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NFMsg::TileBuilding, _internal_metadata_),
-  ~0u,  // no _extensions_
-  ~0u,  // no _oneof_case_
-  ~0u,  // no _weak_field_map_
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NFMsg::TileBuilding, x_),
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NFMsg::TileBuilding, y_),
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NFMsg::TileBuilding, configid_),
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NFMsg::TileBuilding, guid_),
-  ~0u,  // no _has_bits_
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NFMsg::TileNPC, _internal_metadata_),
-  ~0u,  // no _extensions_
-  ~0u,  // no _oneof_case_
-  ~0u,  // no _weak_field_map_
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NFMsg::TileNPC, x_),
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NFMsg::TileNPC, y_),
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NFMsg::TileNPC, configid_),
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NFMsg::TileNPC, guid_),
-  ~0u,  // no _has_bits_
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NFMsg::AckMiningTitle, _internal_metadata_),
-  ~0u,  // no _extensions_
-  ~0u,  // no _oneof_case_
-  ~0u,  // no _weak_field_map_
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NFMsg::AckMiningTitle, tile_),
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NFMsg::AckMiningTitle, building_),
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NFMsg::AckMiningTitle, npc_),
-  ~0u,  // no _has_bits_
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NFMsg::ReqSearchOppnent, _internal_metadata_),
   ~0u,  // no _extensions_
   ~0u,  // no _oneof_case_
@@ -1645,7 +1526,7 @@ const ::google::protobuf::uint32 TableStruct::offsets[] GOOGLE_PROTOBUF_ATTRIBUT
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NFMsg::AckSearchOppnent, hero_pos1_),
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NFMsg::AckSearchOppnent, hero_pos2_),
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NFMsg::AckSearchOppnent, hero_pos3_),
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NFMsg::AckSearchOppnent, title_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NFMsg::AckSearchOppnent, buildings_),
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NFMsg::AckSearchOppnent, opponent_),
   ~0u,  // no _has_bits_
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NFMsg::ReqSendMail, _internal_metadata_),
@@ -1754,36 +1635,32 @@ static const ::google::protobuf::internal::MigrationSchema schemas[] GOOGLE_PROT
   { 202, -1, sizeof(::NFMsg::ReqAcceptTask)},
   { 208, -1, sizeof(::NFMsg::ReqCompeleteTask)},
   { 214, -1, sizeof(::NFMsg::ReqAddSceneBuilding)},
-  { 225, -1, sizeof(::NFMsg::ReqSceneBuildings)},
-  { 232, -1, sizeof(::NFMsg::AckSceneBuildings)},
-  { 238, -1, sizeof(::NFMsg::ReqAckJoinActivity)},
-  { 245, -1, sizeof(::NFMsg::ReqAckCreateClan)},
-  { 252, -1, sizeof(::NFMsg::ReqSearchClan)},
-  { 258, -1, sizeof(::NFMsg::AckSearchClan_SearchClanObject)},
-  { 270, -1, sizeof(::NFMsg::AckSearchClan)},
-  { 276, -1, sizeof(::NFMsg::ReqAckJoinClan)},
-  { 283, -1, sizeof(::NFMsg::ReqAckLeaveClan)},
-  { 290, -1, sizeof(::NFMsg::ReqAckOprClanMember)},
-  { 298, -1, sizeof(::NFMsg::ReqEnterClanEctype)},
-  { 304, -1, sizeof(::NFMsg::ReqSetFightHero)},
-  { 311, -1, sizeof(::NFMsg::ReqSwitchFightHero)},
-  { 317, -1, sizeof(::NFMsg::ReqBuyItemFromShop)},
-  { 324, -1, sizeof(::NFMsg::ReqAddGambleValue)},
-  { 331, -1, sizeof(::NFMsg::ReqMiningTitle)},
-  { 339, -1, sizeof(::NFMsg::TileState)},
-  { 347, -1, sizeof(::NFMsg::TileBuilding)},
-  { 356, -1, sizeof(::NFMsg::TileNPC)},
-  { 365, -1, sizeof(::NFMsg::AckMiningTitle)},
-  { 373, -1, sizeof(::NFMsg::ReqSearchOppnent)},
-  { 379, -1, sizeof(::NFMsg::AckSearchOppnent)},
-  { 405, -1, sizeof(::NFMsg::ReqSendMail)},
-  { 413, -1, sizeof(::NFMsg::ReqSwitchServer)},
-  { 425, -1, sizeof(::NFMsg::AckSwitchServer)},
-  { 434, -1, sizeof(::NFMsg::PVPRoomInfo)},
-  { 449, -1, sizeof(::NFMsg::ReqPVPApplyMatch)},
-  { 459, -1, sizeof(::NFMsg::AckPVPApplyMatch)},
-  { 468, -1, sizeof(::NFMsg::ReqCreatePVPEctype)},
-  { 475, -1, sizeof(::NFMsg::AckCreatePVPEctype)},
+  { 227, -1, sizeof(::NFMsg::ReqSceneBuildings)},
+  { 234, -1, sizeof(::NFMsg::AckSceneBuildings)},
+  { 240, -1, sizeof(::NFMsg::ReqStoreSceneBuildings)},
+  { 248, -1, sizeof(::NFMsg::ReqAckJoinActivity)},
+  { 255, -1, sizeof(::NFMsg::ReqAckCreateClan)},
+  { 262, -1, sizeof(::NFMsg::ReqSearchClan)},
+  { 268, -1, sizeof(::NFMsg::AckSearchClan_SearchClanObject)},
+  { 280, -1, sizeof(::NFMsg::AckSearchClan)},
+  { 286, -1, sizeof(::NFMsg::ReqAckJoinClan)},
+  { 293, -1, sizeof(::NFMsg::ReqAckLeaveClan)},
+  { 300, -1, sizeof(::NFMsg::ReqAckOprClanMember)},
+  { 308, -1, sizeof(::NFMsg::ReqEnterClanEctype)},
+  { 314, -1, sizeof(::NFMsg::ReqSetFightHero)},
+  { 321, -1, sizeof(::NFMsg::ReqSwitchFightHero)},
+  { 327, -1, sizeof(::NFMsg::ReqBuyItemFromShop)},
+  { 334, -1, sizeof(::NFMsg::ReqAddGambleValue)},
+  { 341, -1, sizeof(::NFMsg::ReqSearchOppnent)},
+  { 347, -1, sizeof(::NFMsg::AckSearchOppnent)},
+  { 373, -1, sizeof(::NFMsg::ReqSendMail)},
+  { 381, -1, sizeof(::NFMsg::ReqSwitchServer)},
+  { 393, -1, sizeof(::NFMsg::AckSwitchServer)},
+  { 402, -1, sizeof(::NFMsg::PVPRoomInfo)},
+  { 417, -1, sizeof(::NFMsg::ReqPVPApplyMatch)},
+  { 427, -1, sizeof(::NFMsg::AckPVPApplyMatch)},
+  { 436, -1, sizeof(::NFMsg::ReqCreatePVPEctype)},
+  { 443, -1, sizeof(::NFMsg::AckCreatePVPEctype)},
 };
 
 static ::google::protobuf::Message const * const file_default_instances[] = {
@@ -1816,6 +1693,7 @@ static ::google::protobuf::Message const * const file_default_instances[] = {
   reinterpret_cast<const ::google::protobuf::Message*>(&::NFMsg::_ReqAddSceneBuilding_default_instance_),
   reinterpret_cast<const ::google::protobuf::Message*>(&::NFMsg::_ReqSceneBuildings_default_instance_),
   reinterpret_cast<const ::google::protobuf::Message*>(&::NFMsg::_AckSceneBuildings_default_instance_),
+  reinterpret_cast<const ::google::protobuf::Message*>(&::NFMsg::_ReqStoreSceneBuildings_default_instance_),
   reinterpret_cast<const ::google::protobuf::Message*>(&::NFMsg::_ReqAckJoinActivity_default_instance_),
   reinterpret_cast<const ::google::protobuf::Message*>(&::NFMsg::_ReqAckCreateClan_default_instance_),
   reinterpret_cast<const ::google::protobuf::Message*>(&::NFMsg::_ReqSearchClan_default_instance_),
@@ -1829,11 +1707,6 @@ static ::google::protobuf::Message const * const file_default_instances[] = {
   reinterpret_cast<const ::google::protobuf::Message*>(&::NFMsg::_ReqSwitchFightHero_default_instance_),
   reinterpret_cast<const ::google::protobuf::Message*>(&::NFMsg::_ReqBuyItemFromShop_default_instance_),
   reinterpret_cast<const ::google::protobuf::Message*>(&::NFMsg::_ReqAddGambleValue_default_instance_),
-  reinterpret_cast<const ::google::protobuf::Message*>(&::NFMsg::_ReqMiningTitle_default_instance_),
-  reinterpret_cast<const ::google::protobuf::Message*>(&::NFMsg::_TileState_default_instance_),
-  reinterpret_cast<const ::google::protobuf::Message*>(&::NFMsg::_TileBuilding_default_instance_),
-  reinterpret_cast<const ::google::protobuf::Message*>(&::NFMsg::_TileNPC_default_instance_),
-  reinterpret_cast<const ::google::protobuf::Message*>(&::NFMsg::_AckMiningTitle_default_instance_),
   reinterpret_cast<const ::google::protobuf::Message*>(&::NFMsg::_ReqSearchOppnent_default_instance_),
   reinterpret_cast<const ::google::protobuf::Message*>(&::NFMsg::_AckSearchOppnent_default_instance_),
   reinterpret_cast<const ::google::protobuf::Message*>(&::NFMsg::_ReqSendMail_default_instance_),
@@ -1861,7 +1734,7 @@ void protobuf_AssignDescriptorsOnce() {
 void protobuf_RegisterTypes(const ::std::string&) GOOGLE_PROTOBUF_ATTRIBUTE_COLD;
 void protobuf_RegisterTypes(const ::std::string&) {
   protobuf_AssignDescriptorsOnce();
-  ::google::protobuf::internal::RegisterAllTypes(file_level_metadata, 57);
+  ::google::protobuf::internal::RegisterAllTypes(file_level_metadata, 53);
 }
 
 void AddDescriptorsImpl() {
@@ -1942,102 +1815,97 @@ void AddDescriptorsImpl() {
       "\021.NFMsg.ItemStruct\"2\n\017ReqPickDropItem\022\037\n"
       "\titem_guid\030\002 \001(\0132\014.NFMsg.Ident\" \n\rReqAcc"
       "eptTask\022\017\n\007task_id\030\001 \001(\014\"#\n\020ReqCompelete"
-      "Task\022\017\n\007task_id\030\001 \001(\014\"\246\001\n\023ReqAddSceneBui"
+      "Task\022\017\n\007task_id\030\001 \001(\014\"\322\001\n\023ReqAddSceneBui"
       "lding\022\033\n\003pos\030\001 \001(\0132\016.NFMsg.Vector3\022\032\n\004gu"
       "id\030\002 \001(\0132\014.NFMsg.Ident\022\034\n\006master\030\003 \001(\0132\014"
       ".NFMsg.Ident\022\021\n\tconfig_id\030\004 \001(\014\022\020\n\010scene"
-      "_id\030\005 \001(\005\022\023\n\013master_name\030\006 \001(\014\"B\n\021ReqSce"
-      "neBuildings\022\020\n\010scene_id\030\001 \001(\005\022\033\n\003pos\030\002 \001"
-      "(\0132\016.NFMsg.Vector3\"B\n\021AckSceneBuildings\022"
-      "-\n\tbuildings\030\001 \003(\0132\032.NFMsg.ReqAddSceneBu"
-      "ilding\"\357\001\n\022ReqAckJoinActivity\022B\n\ractivit"
-      "y_type\030\001 \001(\0162+.NFMsg.ReqAckJoinActivity."
-      "EGameActivityType\022I\n\021sub_activity_type\030\002"
-      " \001(\0162..NFMsg.ReqAckJoinActivity.EGameAct"
-      "ivitySubType\"!\n\021EGameActivityType\022\014\n\010EGA"
-      "T_PVP\020\000\"\'\n\024EGameActivitySubType\022\017\n\013EGAT_"
-      "NORMAL\020\000\"D\n\020ReqAckCreateClan\022\035\n\007clan_id\030"
-      "\001 \001(\0132\014.NFMsg.Ident\022\021\n\tclan_name\030\002 \001(\014\"\""
-      "\n\rReqSearchClan\022\021\n\tclan_name\030\001 \001(\014\"\204\002\n\rA"
-      "ckSearchClan\0228\n\tclan_list\030\001 \003(\0132%.NFMsg."
-      "AckSearchClan.SearchClanObject\032\270\001\n\020Searc"
-      "hClanObject\022\035\n\007clan_ID\030\001 \001(\0132\014.NFMsg.Ide"
-      "nt\022\021\n\tclan_name\030\002 \001(\014\022\021\n\tclan_icon\030\003 \001(\014"
-      "\022\031\n\021clan_member_count\030\004 \001(\005\022\035\n\025clan_memb"
-      "er_max_count\030\005 \001(\005\022\022\n\nclan_honor\030\006 \001(\005\022\021"
-      "\n\tclan_rank\030\007 \001(\005\"B\n\016ReqAckJoinClan\022\035\n\007c"
-      "lan_id\030\001 \001(\0132\014.NFMsg.Ident\022\021\n\tclan_name\030"
-      "\002 \001(\014\"C\n\017ReqAckLeaveClan\022\035\n\007clan_id\030\001 \001("
-      "\0132\014.NFMsg.Ident\022\021\n\tclan_name\030\002 \001(\014\"\325\001\n\023R"
-      "eqAckOprClanMember\022\035\n\007clan_id\030\001 \001(\0132\014.NF"
-      "Msg.Ident\022\037\n\tmember_id\030\002 \001(\0132\014.NFMsg.Ide"
-      "nt\022<\n\004type\030\003 \001(\0162..NFMsg.ReqAckOprClanMe"
-      "mber.EGClanMemberOprType\"@\n\023EGClanMember"
-      "OprType\022\r\n\tEGAT_DOWN\020\000\022\013\n\007EGAT_UP\020\001\022\r\n\tE"
-      "GAT_KICK\020\002\"3\n\022ReqEnterClanEctype\022\035\n\007clan"
-      "_id\030\001 \001(\0132\014.NFMsg.Ident\"<\n\017ReqSetFightHe"
-      "ro\022\034\n\006Heroid\030\001 \001(\0132\014.NFMsg.Ident\022\013\n\003Set\030"
-      "\002 \001(\005\"2\n\022ReqSwitchFightHero\022\034\n\006Heroid\030\001 "
-      "\001(\0132\014.NFMsg.Ident\"3\n\022ReqBuyItemFromShop\022"
-      "\016\n\006itemID\030\001 \001(\014\022\r\n\005count\030\002 \001(\005\"5\n\021ReqAdd"
-      "GambleValue\022\020\n\010property\030\001 \001(\014\022\016\n\006number\030"
-      "\002 \001(\005\"3\n\016ReqMiningTitle\022\t\n\001x\030\001 \001(\005\022\t\n\001y\030"
-      "\002 \001(\005\022\013\n\003opr\030\003 \001(\005\".\n\tTileState\022\t\n\001x\030\001 \001"
-      "(\005\022\t\n\001y\030\002 \001(\005\022\013\n\003opr\030\003 \001(\005\"R\n\014TileBuildi"
-      "ng\022\t\n\001x\030\001 \001(\005\022\t\n\001y\030\002 \001(\005\022\020\n\010configID\030\003 \001"
-      "(\014\022\032\n\004guid\030\004 \001(\0132\014.NFMsg.Ident\"M\n\007TileNP"
-      "C\022\t\n\001x\030\001 \001(\005\022\t\n\001y\030\002 \001(\005\022\020\n\010configID\030\003 \001("
-      "\014\022\032\n\004guid\030\004 \001(\0132\014.NFMsg.Ident\"t\n\016AckMini"
-      "ngTitle\022\036\n\004tile\030\001 \003(\0132\020.NFMsg.TileState\022"
-      "%\n\010building\030\002 \003(\0132\023.NFMsg.TileBuilding\022\033"
-      "\n\003npc\030\003 \003(\0132\016.NFMsg.TileNPC\"&\n\020ReqSearch"
-      "Oppnent\022\022\n\nself_scene\030\001 \001(\005\"\377\003\n\020AckSearc"
-      "hOppnent\022\020\n\010scene_id\030\001 \001(\005\022\014\n\004gold\030\002 \001(\005"
-      "\022\017\n\007diamond\030\003 \001(\005\022\r\n\005level\030\004 \001(\005\022\013\n\003cup\030"
-      "\005 \001(\005\022\014\n\004name\030\006 \001(\014\022\014\n\004head\030\007 \001(\014\022\021\n\ther"
-      "o_cnf1\030\010 \001(\014\022\022\n\nhero_star1\030\t \001(\005\022\021\n\thero"
-      "_cnf2\030\n \001(\014\022\022\n\nhero_star2\030\013 \001(\005\022\021\n\thero_"
-      "cnf3\030\014 \001(\014\022\022\n\nhero_star3\030\r \001(\005\022\036\n\010hero_i"
-      "d1\030\024 \001(\0132\014.NFMsg.Ident\022\036\n\010hero_id2\030\025 \001(\013"
-      "2\014.NFMsg.Ident\022\036\n\010hero_id3\030\026 \001(\0132\014.NFMsg"
-      ".Ident\022!\n\thero_pos1\030\027 \001(\0132\016.NFMsg.Vector"
-      "3\022!\n\thero_pos2\030\030 \001(\0132\016.NFMsg.Vector3\022!\n\t"
-      "hero_pos3\030\031 \001(\0132\016.NFMsg.Vector3\022$\n\005title"
-      "\030\036 \001(\0132\025.NFMsg.AckMiningTitle\022\036\n\010opponen"
-      "t\030\037 \001(\0132\014.NFMsg.Ident\"\201\001\n\013ReqSendMail\022\036\n"
-      "\010reciever\030\001 \001(\0132\014.NFMsg.Ident\022$\n\titem_li"
-      "st\030\002 \003(\0132\021.NFMsg.ItemStruct\022,\n\rcurrency_"
-      "list\030\003 \003(\0132\025.NFMsg.CurrencyStruct\"\271\001\n\017Re"
-      "qSwitchServer\022\034\n\006selfid\030\001 \001(\0132\014.NFMsg.Id"
-      "ent\022\025\n\rself_serverid\030\002 \001(\003\022\027\n\017target_ser"
-      "verid\030\003 \001(\003\022\025\n\rgate_serverid\030\004 \001(\003\022\017\n\007Sc"
-      "eneID\030\005 \001(\003\022\037\n\tclient_id\030\006 \001(\0132\014.NFMsg.I"
-      "dent\022\017\n\007groupID\030\007 \001(\003\"v\n\017AckSwitchServer"
-      "\022\034\n\006selfid\030\001 \001(\0132\014.NFMsg.Ident\022\025\n\rself_s"
-      "erverid\030\002 \001(\003\022\027\n\017target_serverid\030\003 \001(\003\022\025"
-      "\n\rgate_serverid\030\004 \001(\003\"\361\001\n\013PVPRoomInfo\022\023\n"
-      "\013nCellStatus\030\001 \001(\005\022\034\n\006RoomID\030\002 \001(\0132\014.NFM"
-      "sg.Ident\022\020\n\010nPVPMode\030\003 \001(\005\022\021\n\tnPVPGrade\030"
-      "\004 \001(\005\022\021\n\tMaxPalyer\030\005 \001(\005\022 \n\nxRedPlayer\030\006"
-      " \003(\0132\014.NFMsg.Ident\022!\n\013xBluePlayer\030\007 \003(\0132"
-      "\014.NFMsg.Ident\022\020\n\010serverid\030\010 \001(\003\022\017\n\007Scene"
-      "ID\030\t \001(\003\022\017\n\007groupID\030\n \001(\003\"\276\001\n\020ReqPVPAppl"
-      "yMatch\022\035\n\007self_id\030\001 \001(\0132\014.NFMsg.Ident\022\020\n"
-      "\010nPVPMode\030\002 \001(\005\022\r\n\005score\030\003 \001(\003\022\021\n\tApplyT"
-      "ype\030\004 \001(\005\022\035\n\007team_id\030\005 \001(\0132\014.NFMsg.Ident"
-      "\"8\n\nEApplyType\022\025\n\021EApplyType_Single\020\000\022\023\n"
-      "\017EApplyType_Team\020\001\"|\n\020AckPVPApplyMatch\022\035"
-      "\n\007self_id\030\001 \001(\0132\014.NFMsg.Ident\022%\n\txRoomIn"
-      "fo\030\002 \001(\0132\022.NFMsg.PVPRoomInfo\022\021\n\tApplyTyp"
-      "e\030\003 \001(\005\022\017\n\007nResult\030\004 \001(\005\"Z\n\022ReqCreatePVP"
-      "Ectype\022\035\n\007self_id\030\001 \001(\0132\014.NFMsg.Ident\022%\n"
-      "\txRoomInfo\030\002 \001(\0132\022.NFMsg.PVPRoomInfo\"m\n\022"
-      "AckCreatePVPEctype\022\035\n\007self_id\030\001 \001(\0132\014.NF"
-      "Msg.Ident\022%\n\txRoomInfo\030\002 \001(\0132\022.NFMsg.PVP"
-      "RoomInfo\022\021\n\tApplyType\030\003 \001(\005b\006proto3"
+      "_id\030\005 \001(\005\022\023\n\013master_name\030\006 \001(\014\022\025\n\ris_hom"
+      "e_scene\030\007 \001(\005\022\023\n\013is_building\030\010 \001(\005\"B\n\021Re"
+      "qSceneBuildings\022\020\n\010scene_id\030\001 \001(\005\022\033\n\003pos"
+      "\030\002 \001(\0132\016.NFMsg.Vector3\"B\n\021AckSceneBuildi"
+      "ngs\022-\n\tbuildings\030\001 \003(\0132\032.NFMsg.ReqAddSce"
+      "neBuilding\"z\n\026ReqStoreSceneBuildings\022\032\n\004"
+      "guid\030\001 \001(\0132\014.NFMsg.Ident\022\025\n\rhome_scene_i"
+      "d\030\002 \001(\005\022-\n\tbuildings\030\003 \003(\0132\032.NFMsg.ReqAd"
+      "dSceneBuilding\"\357\001\n\022ReqAckJoinActivity\022B\n"
+      "\ractivity_type\030\001 \001(\0162+.NFMsg.ReqAckJoinA"
+      "ctivity.EGameActivityType\022I\n\021sub_activit"
+      "y_type\030\002 \001(\0162..NFMsg.ReqAckJoinActivity."
+      "EGameActivitySubType\"!\n\021EGameActivityTyp"
+      "e\022\014\n\010EGAT_PVP\020\000\"\'\n\024EGameActivitySubType\022"
+      "\017\n\013EGAT_NORMAL\020\000\"D\n\020ReqAckCreateClan\022\035\n\007"
+      "clan_id\030\001 \001(\0132\014.NFMsg.Ident\022\021\n\tclan_name"
+      "\030\002 \001(\014\"\"\n\rReqSearchClan\022\021\n\tclan_name\030\001 \001"
+      "(\014\"\204\002\n\rAckSearchClan\0228\n\tclan_list\030\001 \003(\0132"
+      "%.NFMsg.AckSearchClan.SearchClanObject\032\270"
+      "\001\n\020SearchClanObject\022\035\n\007clan_ID\030\001 \001(\0132\014.N"
+      "FMsg.Ident\022\021\n\tclan_name\030\002 \001(\014\022\021\n\tclan_ic"
+      "on\030\003 \001(\014\022\031\n\021clan_member_count\030\004 \001(\005\022\035\n\025c"
+      "lan_member_max_count\030\005 \001(\005\022\022\n\nclan_honor"
+      "\030\006 \001(\005\022\021\n\tclan_rank\030\007 \001(\005\"B\n\016ReqAckJoinC"
+      "lan\022\035\n\007clan_id\030\001 \001(\0132\014.NFMsg.Ident\022\021\n\tcl"
+      "an_name\030\002 \001(\014\"C\n\017ReqAckLeaveClan\022\035\n\007clan"
+      "_id\030\001 \001(\0132\014.NFMsg.Ident\022\021\n\tclan_name\030\002 \001"
+      "(\014\"\325\001\n\023ReqAckOprClanMember\022\035\n\007clan_id\030\001 "
+      "\001(\0132\014.NFMsg.Ident\022\037\n\tmember_id\030\002 \001(\0132\014.N"
+      "FMsg.Ident\022<\n\004type\030\003 \001(\0162..NFMsg.ReqAckO"
+      "prClanMember.EGClanMemberOprType\"@\n\023EGCl"
+      "anMemberOprType\022\r\n\tEGAT_DOWN\020\000\022\013\n\007EGAT_U"
+      "P\020\001\022\r\n\tEGAT_KICK\020\002\"3\n\022ReqEnterClanEctype"
+      "\022\035\n\007clan_id\030\001 \001(\0132\014.NFMsg.Ident\"<\n\017ReqSe"
+      "tFightHero\022\034\n\006Heroid\030\001 \001(\0132\014.NFMsg.Ident"
+      "\022\013\n\003Set\030\002 \001(\005\"2\n\022ReqSwitchFightHero\022\034\n\006H"
+      "eroid\030\001 \001(\0132\014.NFMsg.Ident\"3\n\022ReqBuyItemF"
+      "romShop\022\016\n\006itemID\030\001 \001(\014\022\r\n\005count\030\002 \001(\005\"5"
+      "\n\021ReqAddGambleValue\022\020\n\010property\030\001 \001(\014\022\016\n"
+      "\006number\030\002 \001(\005\"&\n\020ReqSearchOppnent\022\022\n\nsel"
+      "f_scene\030\001 \001(\005\"\210\004\n\020AckSearchOppnent\022\020\n\010sc"
+      "ene_id\030\001 \001(\005\022\014\n\004gold\030\002 \001(\005\022\017\n\007diamond\030\003 "
+      "\001(\005\022\r\n\005level\030\004 \001(\005\022\013\n\003cup\030\005 \001(\005\022\014\n\004name\030"
+      "\006 \001(\014\022\014\n\004head\030\007 \001(\014\022\021\n\thero_cnf1\030\010 \001(\014\022\022"
+      "\n\nhero_star1\030\t \001(\005\022\021\n\thero_cnf2\030\n \001(\014\022\022\n"
+      "\nhero_star2\030\013 \001(\005\022\021\n\thero_cnf3\030\014 \001(\014\022\022\n\n"
+      "hero_star3\030\r \001(\005\022\036\n\010hero_id1\030\024 \001(\0132\014.NFM"
+      "sg.Ident\022\036\n\010hero_id2\030\025 \001(\0132\014.NFMsg.Ident"
+      "\022\036\n\010hero_id3\030\026 \001(\0132\014.NFMsg.Ident\022!\n\thero"
+      "_pos1\030\027 \001(\0132\016.NFMsg.Vector3\022!\n\thero_pos2"
+      "\030\030 \001(\0132\016.NFMsg.Vector3\022!\n\thero_pos3\030\031 \001("
+      "\0132\016.NFMsg.Vector3\022-\n\tbuildings\030\036 \003(\0132\032.N"
+      "FMsg.ReqAddSceneBuilding\022\036\n\010opponent\030\037 \001"
+      "(\0132\014.NFMsg.Ident\"\201\001\n\013ReqSendMail\022\036\n\010reci"
+      "ever\030\001 \001(\0132\014.NFMsg.Ident\022$\n\titem_list\030\002 "
+      "\003(\0132\021.NFMsg.ItemStruct\022,\n\rcurrency_list\030"
+      "\003 \003(\0132\025.NFMsg.CurrencyStruct\"\271\001\n\017ReqSwit"
+      "chServer\022\034\n\006selfid\030\001 \001(\0132\014.NFMsg.Ident\022\025"
+      "\n\rself_serverid\030\002 \001(\003\022\027\n\017target_serverid"
+      "\030\003 \001(\003\022\025\n\rgate_serverid\030\004 \001(\003\022\017\n\007SceneID"
+      "\030\005 \001(\003\022\037\n\tclient_id\030\006 \001(\0132\014.NFMsg.Ident\022"
+      "\017\n\007groupID\030\007 \001(\003\"v\n\017AckSwitchServer\022\034\n\006s"
+      "elfid\030\001 \001(\0132\014.NFMsg.Ident\022\025\n\rself_server"
+      "id\030\002 \001(\003\022\027\n\017target_serverid\030\003 \001(\003\022\025\n\rgat"
+      "e_serverid\030\004 \001(\003\"\361\001\n\013PVPRoomInfo\022\023\n\013nCel"
+      "lStatus\030\001 \001(\005\022\034\n\006RoomID\030\002 \001(\0132\014.NFMsg.Id"
+      "ent\022\020\n\010nPVPMode\030\003 \001(\005\022\021\n\tnPVPGrade\030\004 \001(\005"
+      "\022\021\n\tMaxPalyer\030\005 \001(\005\022 \n\nxRedPlayer\030\006 \003(\0132"
+      "\014.NFMsg.Ident\022!\n\013xBluePlayer\030\007 \003(\0132\014.NFM"
+      "sg.Ident\022\020\n\010serverid\030\010 \001(\003\022\017\n\007SceneID\030\t "
+      "\001(\003\022\017\n\007groupID\030\n \001(\003\"\276\001\n\020ReqPVPApplyMatc"
+      "h\022\035\n\007self_id\030\001 \001(\0132\014.NFMsg.Ident\022\020\n\010nPVP"
+      "Mode\030\002 \001(\005\022\r\n\005score\030\003 \001(\003\022\021\n\tApplyType\030\004"
+      " \001(\005\022\035\n\007team_id\030\005 \001(\0132\014.NFMsg.Ident\"8\n\nE"
+      "ApplyType\022\025\n\021EApplyType_Single\020\000\022\023\n\017EApp"
+      "lyType_Team\020\001\"|\n\020AckPVPApplyMatch\022\035\n\007sel"
+      "f_id\030\001 \001(\0132\014.NFMsg.Ident\022%\n\txRoomInfo\030\002 "
+      "\001(\0132\022.NFMsg.PVPRoomInfo\022\021\n\tApplyType\030\003 \001"
+      "(\005\022\017\n\007nResult\030\004 \001(\005\"Z\n\022ReqCreatePVPEctyp"
+      "e\022\035\n\007self_id\030\001 \001(\0132\014.NFMsg.Ident\022%\n\txRoo"
+      "mInfo\030\002 \001(\0132\022.NFMsg.PVPRoomInfo\"m\n\022AckCr"
+      "eatePVPEctype\022\035\n\007self_id\030\001 \001(\0132\014.NFMsg.I"
+      "dent\022%\n\txRoomInfo\030\002 \001(\0132\022.NFMsg.PVPRoomI"
+      "nfo\022\021\n\tApplyType\030\003 \001(\005b\006proto3"
   };
   ::google::protobuf::DescriptorPool::InternalAddGeneratedFile(
-      descriptor, 6715);
+      descriptor, 6510);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "NFMsgShare.proto", &protobuf_RegisterTypes);
   ::protobuf_NFDefine_2eproto::AddDescriptors();
@@ -10797,6 +10665,8 @@ const int ReqAddSceneBuilding::kMasterFieldNumber;
 const int ReqAddSceneBuilding::kConfigIdFieldNumber;
 const int ReqAddSceneBuilding::kSceneIdFieldNumber;
 const int ReqAddSceneBuilding::kMasterNameFieldNumber;
+const int ReqAddSceneBuilding::kIsHomeSceneFieldNumber;
+const int ReqAddSceneBuilding::kIsBuildingFieldNumber;
 #endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
 
 ReqAddSceneBuilding::ReqAddSceneBuilding()
@@ -10833,7 +10703,9 @@ ReqAddSceneBuilding::ReqAddSceneBuilding(const ReqAddSceneBuilding& from)
   } else {
     master_ = NULL;
   }
-  scene_id_ = from.scene_id_;
+  ::memcpy(&scene_id_, &from.scene_id_,
+    static_cast<size_t>(reinterpret_cast<char*>(&is_building_) -
+    reinterpret_cast<char*>(&scene_id_)) + sizeof(is_building_));
   // @@protoc_insertion_point(copy_constructor:NFMsg.ReqAddSceneBuilding)
 }
 
@@ -10841,8 +10713,8 @@ void ReqAddSceneBuilding::SharedCtor() {
   config_id_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   master_name_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   ::memset(&pos_, 0, static_cast<size_t>(
-      reinterpret_cast<char*>(&scene_id_) -
-      reinterpret_cast<char*>(&pos_)) + sizeof(scene_id_));
+      reinterpret_cast<char*>(&is_building_) -
+      reinterpret_cast<char*>(&pos_)) + sizeof(is_building_));
 }
 
 ReqAddSceneBuilding::~ReqAddSceneBuilding() {
@@ -10892,7 +10764,9 @@ void ReqAddSceneBuilding::Clear() {
     delete master_;
   }
   master_ = NULL;
-  scene_id_ = 0;
+  ::memset(&scene_id_, 0, static_cast<size_t>(
+      reinterpret_cast<char*>(&is_building_) -
+      reinterpret_cast<char*>(&scene_id_)) + sizeof(is_building_));
   _internal_metadata_.Clear();
 }
 
@@ -10980,6 +10854,34 @@ bool ReqAddSceneBuilding::MergePartialFromCodedStream(
         break;
       }
 
+      // int32 is_home_scene = 7;
+      case 7: {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(56u /* 56 & 0xFF */)) {
+
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
+                 input, &is_home_scene_)));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      // int32 is_building = 8;
+      case 8: {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(64u /* 64 & 0xFF */)) {
+
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
+                 input, &is_building_)));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
       default: {
       handle_unusual:
         if (tag == 0) {
@@ -11041,6 +10943,16 @@ void ReqAddSceneBuilding::SerializeWithCachedSizes(
       6, this->master_name(), output);
   }
 
+  // int32 is_home_scene = 7;
+  if (this->is_home_scene() != 0) {
+    ::google::protobuf::internal::WireFormatLite::WriteInt32(7, this->is_home_scene(), output);
+  }
+
+  // int32 is_building = 8;
+  if (this->is_building() != 0) {
+    ::google::protobuf::internal::WireFormatLite::WriteInt32(8, this->is_building(), output);
+  }
+
   if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
     ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
         (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()), output);
@@ -11093,6 +11005,16 @@ void ReqAddSceneBuilding::SerializeWithCachedSizes(
     target =
       ::google::protobuf::internal::WireFormatLite::WriteBytesToArray(
         6, this->master_name(), target);
+  }
+
+  // int32 is_home_scene = 7;
+  if (this->is_home_scene() != 0) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(7, this->is_home_scene(), target);
+  }
+
+  // int32 is_building = 8;
+  if (this->is_building() != 0) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(8, this->is_building(), target);
   }
 
   if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
@@ -11154,6 +11076,20 @@ size_t ReqAddSceneBuilding::ByteSizeLong() const {
         this->scene_id());
   }
 
+  // int32 is_home_scene = 7;
+  if (this->is_home_scene() != 0) {
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::Int32Size(
+        this->is_home_scene());
+  }
+
+  // int32 is_building = 8;
+  if (this->is_building() != 0) {
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::Int32Size(
+        this->is_building());
+  }
+
   int cached_size = ::google::protobuf::internal::ToCachedSize(total_size);
   SetCachedSize(cached_size);
   return total_size;
@@ -11201,6 +11137,12 @@ void ReqAddSceneBuilding::MergeFrom(const ReqAddSceneBuilding& from) {
   if (from.scene_id() != 0) {
     set_scene_id(from.scene_id());
   }
+  if (from.is_home_scene() != 0) {
+    set_is_home_scene(from.is_home_scene());
+  }
+  if (from.is_building() != 0) {
+    set_is_building(from.is_building());
+  }
 }
 
 void ReqAddSceneBuilding::CopyFrom(const ::google::protobuf::Message& from) {
@@ -11235,6 +11177,8 @@ void ReqAddSceneBuilding::InternalSwap(ReqAddSceneBuilding* other) {
   swap(guid_, other->guid_);
   swap(master_, other->master_);
   swap(scene_id_, other->scene_id_);
+  swap(is_home_scene_, other->is_home_scene_);
+  swap(is_building_, other->is_building_);
   _internal_metadata_.Swap(&other->_internal_metadata_);
 }
 
@@ -11748,6 +11692,331 @@ void AckSceneBuildings::InternalSwap(AckSceneBuildings* other) {
 }
 
 ::google::protobuf::Metadata AckSceneBuildings::GetMetadata() const {
+  protobuf_NFMsgShare_2eproto::protobuf_AssignDescriptorsOnce();
+  return ::protobuf_NFMsgShare_2eproto::file_level_metadata[kIndexInFileMessages];
+}
+
+
+// ===================================================================
+
+void ReqStoreSceneBuildings::InitAsDefaultInstance() {
+  ::NFMsg::_ReqStoreSceneBuildings_default_instance_._instance.get_mutable()->guid_ = const_cast< ::NFMsg::Ident*>(
+      ::NFMsg::Ident::internal_default_instance());
+}
+void ReqStoreSceneBuildings::clear_guid() {
+  if (GetArenaNoVirtual() == NULL && guid_ != NULL) {
+    delete guid_;
+  }
+  guid_ = NULL;
+}
+#if !defined(_MSC_VER) || _MSC_VER >= 1900
+const int ReqStoreSceneBuildings::kGuidFieldNumber;
+const int ReqStoreSceneBuildings::kHomeSceneIdFieldNumber;
+const int ReqStoreSceneBuildings::kBuildingsFieldNumber;
+#endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
+
+ReqStoreSceneBuildings::ReqStoreSceneBuildings()
+  : ::google::protobuf::Message(), _internal_metadata_(NULL) {
+  ::google::protobuf::internal::InitSCC(
+      &protobuf_NFMsgShare_2eproto::scc_info_ReqStoreSceneBuildings.base);
+  SharedCtor();
+  // @@protoc_insertion_point(constructor:NFMsg.ReqStoreSceneBuildings)
+}
+ReqStoreSceneBuildings::ReqStoreSceneBuildings(const ReqStoreSceneBuildings& from)
+  : ::google::protobuf::Message(),
+      _internal_metadata_(NULL),
+      buildings_(from.buildings_) {
+  _internal_metadata_.MergeFrom(from._internal_metadata_);
+  if (from.has_guid()) {
+    guid_ = new ::NFMsg::Ident(*from.guid_);
+  } else {
+    guid_ = NULL;
+  }
+  home_scene_id_ = from.home_scene_id_;
+  // @@protoc_insertion_point(copy_constructor:NFMsg.ReqStoreSceneBuildings)
+}
+
+void ReqStoreSceneBuildings::SharedCtor() {
+  ::memset(&guid_, 0, static_cast<size_t>(
+      reinterpret_cast<char*>(&home_scene_id_) -
+      reinterpret_cast<char*>(&guid_)) + sizeof(home_scene_id_));
+}
+
+ReqStoreSceneBuildings::~ReqStoreSceneBuildings() {
+  // @@protoc_insertion_point(destructor:NFMsg.ReqStoreSceneBuildings)
+  SharedDtor();
+}
+
+void ReqStoreSceneBuildings::SharedDtor() {
+  if (this != internal_default_instance()) delete guid_;
+}
+
+void ReqStoreSceneBuildings::SetCachedSize(int size) const {
+  _cached_size_.Set(size);
+}
+const ::google::protobuf::Descriptor* ReqStoreSceneBuildings::descriptor() {
+  ::protobuf_NFMsgShare_2eproto::protobuf_AssignDescriptorsOnce();
+  return ::protobuf_NFMsgShare_2eproto::file_level_metadata[kIndexInFileMessages].descriptor;
+}
+
+const ReqStoreSceneBuildings& ReqStoreSceneBuildings::default_instance() {
+  ::google::protobuf::internal::InitSCC(&protobuf_NFMsgShare_2eproto::scc_info_ReqStoreSceneBuildings.base);
+  return *internal_default_instance();
+}
+
+
+void ReqStoreSceneBuildings::Clear() {
+// @@protoc_insertion_point(message_clear_start:NFMsg.ReqStoreSceneBuildings)
+  ::google::protobuf::uint32 cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  buildings_.Clear();
+  if (GetArenaNoVirtual() == NULL && guid_ != NULL) {
+    delete guid_;
+  }
+  guid_ = NULL;
+  home_scene_id_ = 0;
+  _internal_metadata_.Clear();
+}
+
+bool ReqStoreSceneBuildings::MergePartialFromCodedStream(
+    ::google::protobuf::io::CodedInputStream* input) {
+#define DO_(EXPRESSION) if (!GOOGLE_PREDICT_TRUE(EXPRESSION)) goto failure
+  ::google::protobuf::uint32 tag;
+  // @@protoc_insertion_point(parse_start:NFMsg.ReqStoreSceneBuildings)
+  for (;;) {
+    ::std::pair<::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
+    tag = p.first;
+    if (!p.second) goto handle_unusual;
+    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
+      // .NFMsg.Ident guid = 1;
+      case 1: {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(10u /* 10 & 0xFF */)) {
+          DO_(::google::protobuf::internal::WireFormatLite::ReadMessage(
+               input, mutable_guid()));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      // int32 home_scene_id = 2;
+      case 2: {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(16u /* 16 & 0xFF */)) {
+
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
+                 input, &home_scene_id_)));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      // repeated .NFMsg.ReqAddSceneBuilding buildings = 3;
+      case 3: {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(26u /* 26 & 0xFF */)) {
+          DO_(::google::protobuf::internal::WireFormatLite::ReadMessage(
+                input, add_buildings()));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      default: {
+      handle_unusual:
+        if (tag == 0) {
+          goto success;
+        }
+        DO_(::google::protobuf::internal::WireFormat::SkipField(
+              input, tag, _internal_metadata_.mutable_unknown_fields()));
+        break;
+      }
+    }
+  }
+success:
+  // @@protoc_insertion_point(parse_success:NFMsg.ReqStoreSceneBuildings)
+  return true;
+failure:
+  // @@protoc_insertion_point(parse_failure:NFMsg.ReqStoreSceneBuildings)
+  return false;
+#undef DO_
+}
+
+void ReqStoreSceneBuildings::SerializeWithCachedSizes(
+    ::google::protobuf::io::CodedOutputStream* output) const {
+  // @@protoc_insertion_point(serialize_start:NFMsg.ReqStoreSceneBuildings)
+  ::google::protobuf::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  // .NFMsg.Ident guid = 1;
+  if (this->has_guid()) {
+    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+      1, this->_internal_guid(), output);
+  }
+
+  // int32 home_scene_id = 2;
+  if (this->home_scene_id() != 0) {
+    ::google::protobuf::internal::WireFormatLite::WriteInt32(2, this->home_scene_id(), output);
+  }
+
+  // repeated .NFMsg.ReqAddSceneBuilding buildings = 3;
+  for (unsigned int i = 0,
+      n = static_cast<unsigned int>(this->buildings_size()); i < n; i++) {
+    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+      3,
+      this->buildings(static_cast<int>(i)),
+      output);
+  }
+
+  if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
+    ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
+        (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()), output);
+  }
+  // @@protoc_insertion_point(serialize_end:NFMsg.ReqStoreSceneBuildings)
+}
+
+::google::protobuf::uint8* ReqStoreSceneBuildings::InternalSerializeWithCachedSizesToArray(
+    bool deterministic, ::google::protobuf::uint8* target) const {
+  (void)deterministic; // Unused
+  // @@protoc_insertion_point(serialize_to_array_start:NFMsg.ReqStoreSceneBuildings)
+  ::google::protobuf::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  // .NFMsg.Ident guid = 1;
+  if (this->has_guid()) {
+    target = ::google::protobuf::internal::WireFormatLite::
+      InternalWriteMessageToArray(
+        1, this->_internal_guid(), deterministic, target);
+  }
+
+  // int32 home_scene_id = 2;
+  if (this->home_scene_id() != 0) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(2, this->home_scene_id(), target);
+  }
+
+  // repeated .NFMsg.ReqAddSceneBuilding buildings = 3;
+  for (unsigned int i = 0,
+      n = static_cast<unsigned int>(this->buildings_size()); i < n; i++) {
+    target = ::google::protobuf::internal::WireFormatLite::
+      InternalWriteMessageToArray(
+        3, this->buildings(static_cast<int>(i)), deterministic, target);
+  }
+
+  if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
+    target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
+        (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()), target);
+  }
+  // @@protoc_insertion_point(serialize_to_array_end:NFMsg.ReqStoreSceneBuildings)
+  return target;
+}
+
+size_t ReqStoreSceneBuildings::ByteSizeLong() const {
+// @@protoc_insertion_point(message_byte_size_start:NFMsg.ReqStoreSceneBuildings)
+  size_t total_size = 0;
+
+  if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
+    total_size +=
+      ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
+        (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()));
+  }
+  // repeated .NFMsg.ReqAddSceneBuilding buildings = 3;
+  {
+    unsigned int count = static_cast<unsigned int>(this->buildings_size());
+    total_size += 1UL * count;
+    for (unsigned int i = 0; i < count; i++) {
+      total_size +=
+        ::google::protobuf::internal::WireFormatLite::MessageSize(
+          this->buildings(static_cast<int>(i)));
+    }
+  }
+
+  // .NFMsg.Ident guid = 1;
+  if (this->has_guid()) {
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::MessageSize(
+        *guid_);
+  }
+
+  // int32 home_scene_id = 2;
+  if (this->home_scene_id() != 0) {
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::Int32Size(
+        this->home_scene_id());
+  }
+
+  int cached_size = ::google::protobuf::internal::ToCachedSize(total_size);
+  SetCachedSize(cached_size);
+  return total_size;
+}
+
+void ReqStoreSceneBuildings::MergeFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_merge_from_start:NFMsg.ReqStoreSceneBuildings)
+  GOOGLE_DCHECK_NE(&from, this);
+  const ReqStoreSceneBuildings* source =
+      ::google::protobuf::internal::DynamicCastToGenerated<const ReqStoreSceneBuildings>(
+          &from);
+  if (source == NULL) {
+  // @@protoc_insertion_point(generalized_merge_from_cast_fail:NFMsg.ReqStoreSceneBuildings)
+    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
+  } else {
+  // @@protoc_insertion_point(generalized_merge_from_cast_success:NFMsg.ReqStoreSceneBuildings)
+    MergeFrom(*source);
+  }
+}
+
+void ReqStoreSceneBuildings::MergeFrom(const ReqStoreSceneBuildings& from) {
+// @@protoc_insertion_point(class_specific_merge_from_start:NFMsg.ReqStoreSceneBuildings)
+  GOOGLE_DCHECK_NE(&from, this);
+  _internal_metadata_.MergeFrom(from._internal_metadata_);
+  ::google::protobuf::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  buildings_.MergeFrom(from.buildings_);
+  if (from.has_guid()) {
+    mutable_guid()->::NFMsg::Ident::MergeFrom(from.guid());
+  }
+  if (from.home_scene_id() != 0) {
+    set_home_scene_id(from.home_scene_id());
+  }
+}
+
+void ReqStoreSceneBuildings::CopyFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_copy_from_start:NFMsg.ReqStoreSceneBuildings)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+void ReqStoreSceneBuildings::CopyFrom(const ReqStoreSceneBuildings& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:NFMsg.ReqStoreSceneBuildings)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool ReqStoreSceneBuildings::IsInitialized() const {
+  return true;
+}
+
+void ReqStoreSceneBuildings::Swap(ReqStoreSceneBuildings* other) {
+  if (other == this) return;
+  InternalSwap(other);
+}
+void ReqStoreSceneBuildings::InternalSwap(ReqStoreSceneBuildings* other) {
+  using std::swap;
+  CastToBase(&buildings_)->InternalSwap(CastToBase(&other->buildings_));
+  swap(guid_, other->guid_);
+  swap(home_scene_id_, other->home_scene_id_);
+  _internal_metadata_.Swap(&other->_internal_metadata_);
+}
+
+::google::protobuf::Metadata ReqStoreSceneBuildings::GetMetadata() const {
   protobuf_NFMsgShare_2eproto::protobuf_AssignDescriptorsOnce();
   return ::protobuf_NFMsgShare_2eproto::file_level_metadata[kIndexInFileMessages];
 }
@@ -15460,1659 +15729,6 @@ void ReqAddGambleValue::InternalSwap(ReqAddGambleValue* other) {
 
 // ===================================================================
 
-void ReqMiningTitle::InitAsDefaultInstance() {
-}
-#if !defined(_MSC_VER) || _MSC_VER >= 1900
-const int ReqMiningTitle::kXFieldNumber;
-const int ReqMiningTitle::kYFieldNumber;
-const int ReqMiningTitle::kOprFieldNumber;
-#endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
-
-ReqMiningTitle::ReqMiningTitle()
-  : ::google::protobuf::Message(), _internal_metadata_(NULL) {
-  ::google::protobuf::internal::InitSCC(
-      &protobuf_NFMsgShare_2eproto::scc_info_ReqMiningTitle.base);
-  SharedCtor();
-  // @@protoc_insertion_point(constructor:NFMsg.ReqMiningTitle)
-}
-ReqMiningTitle::ReqMiningTitle(const ReqMiningTitle& from)
-  : ::google::protobuf::Message(),
-      _internal_metadata_(NULL) {
-  _internal_metadata_.MergeFrom(from._internal_metadata_);
-  ::memcpy(&x_, &from.x_,
-    static_cast<size_t>(reinterpret_cast<char*>(&opr_) -
-    reinterpret_cast<char*>(&x_)) + sizeof(opr_));
-  // @@protoc_insertion_point(copy_constructor:NFMsg.ReqMiningTitle)
-}
-
-void ReqMiningTitle::SharedCtor() {
-  ::memset(&x_, 0, static_cast<size_t>(
-      reinterpret_cast<char*>(&opr_) -
-      reinterpret_cast<char*>(&x_)) + sizeof(opr_));
-}
-
-ReqMiningTitle::~ReqMiningTitle() {
-  // @@protoc_insertion_point(destructor:NFMsg.ReqMiningTitle)
-  SharedDtor();
-}
-
-void ReqMiningTitle::SharedDtor() {
-}
-
-void ReqMiningTitle::SetCachedSize(int size) const {
-  _cached_size_.Set(size);
-}
-const ::google::protobuf::Descriptor* ReqMiningTitle::descriptor() {
-  ::protobuf_NFMsgShare_2eproto::protobuf_AssignDescriptorsOnce();
-  return ::protobuf_NFMsgShare_2eproto::file_level_metadata[kIndexInFileMessages].descriptor;
-}
-
-const ReqMiningTitle& ReqMiningTitle::default_instance() {
-  ::google::protobuf::internal::InitSCC(&protobuf_NFMsgShare_2eproto::scc_info_ReqMiningTitle.base);
-  return *internal_default_instance();
-}
-
-
-void ReqMiningTitle::Clear() {
-// @@protoc_insertion_point(message_clear_start:NFMsg.ReqMiningTitle)
-  ::google::protobuf::uint32 cached_has_bits = 0;
-  // Prevent compiler warnings about cached_has_bits being unused
-  (void) cached_has_bits;
-
-  ::memset(&x_, 0, static_cast<size_t>(
-      reinterpret_cast<char*>(&opr_) -
-      reinterpret_cast<char*>(&x_)) + sizeof(opr_));
-  _internal_metadata_.Clear();
-}
-
-bool ReqMiningTitle::MergePartialFromCodedStream(
-    ::google::protobuf::io::CodedInputStream* input) {
-#define DO_(EXPRESSION) if (!GOOGLE_PREDICT_TRUE(EXPRESSION)) goto failure
-  ::google::protobuf::uint32 tag;
-  // @@protoc_insertion_point(parse_start:NFMsg.ReqMiningTitle)
-  for (;;) {
-    ::std::pair<::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
-    tag = p.first;
-    if (!p.second) goto handle_unusual;
-    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // int32 x = 1;
-      case 1: {
-        if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(8u /* 8 & 0xFF */)) {
-
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
-                 input, &x_)));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
-      // int32 y = 2;
-      case 2: {
-        if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(16u /* 16 & 0xFF */)) {
-
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
-                 input, &y_)));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
-      // int32 opr = 3;
-      case 3: {
-        if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(24u /* 24 & 0xFF */)) {
-
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
-                 input, &opr_)));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
-      default: {
-      handle_unusual:
-        if (tag == 0) {
-          goto success;
-        }
-        DO_(::google::protobuf::internal::WireFormat::SkipField(
-              input, tag, _internal_metadata_.mutable_unknown_fields()));
-        break;
-      }
-    }
-  }
-success:
-  // @@protoc_insertion_point(parse_success:NFMsg.ReqMiningTitle)
-  return true;
-failure:
-  // @@protoc_insertion_point(parse_failure:NFMsg.ReqMiningTitle)
-  return false;
-#undef DO_
-}
-
-void ReqMiningTitle::SerializeWithCachedSizes(
-    ::google::protobuf::io::CodedOutputStream* output) const {
-  // @@protoc_insertion_point(serialize_start:NFMsg.ReqMiningTitle)
-  ::google::protobuf::uint32 cached_has_bits = 0;
-  (void) cached_has_bits;
-
-  // int32 x = 1;
-  if (this->x() != 0) {
-    ::google::protobuf::internal::WireFormatLite::WriteInt32(1, this->x(), output);
-  }
-
-  // int32 y = 2;
-  if (this->y() != 0) {
-    ::google::protobuf::internal::WireFormatLite::WriteInt32(2, this->y(), output);
-  }
-
-  // int32 opr = 3;
-  if (this->opr() != 0) {
-    ::google::protobuf::internal::WireFormatLite::WriteInt32(3, this->opr(), output);
-  }
-
-  if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
-    ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
-        (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()), output);
-  }
-  // @@protoc_insertion_point(serialize_end:NFMsg.ReqMiningTitle)
-}
-
-::google::protobuf::uint8* ReqMiningTitle::InternalSerializeWithCachedSizesToArray(
-    bool deterministic, ::google::protobuf::uint8* target) const {
-  (void)deterministic; // Unused
-  // @@protoc_insertion_point(serialize_to_array_start:NFMsg.ReqMiningTitle)
-  ::google::protobuf::uint32 cached_has_bits = 0;
-  (void) cached_has_bits;
-
-  // int32 x = 1;
-  if (this->x() != 0) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(1, this->x(), target);
-  }
-
-  // int32 y = 2;
-  if (this->y() != 0) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(2, this->y(), target);
-  }
-
-  // int32 opr = 3;
-  if (this->opr() != 0) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(3, this->opr(), target);
-  }
-
-  if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
-    target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
-        (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()), target);
-  }
-  // @@protoc_insertion_point(serialize_to_array_end:NFMsg.ReqMiningTitle)
-  return target;
-}
-
-size_t ReqMiningTitle::ByteSizeLong() const {
-// @@protoc_insertion_point(message_byte_size_start:NFMsg.ReqMiningTitle)
-  size_t total_size = 0;
-
-  if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
-    total_size +=
-      ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
-        (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()));
-  }
-  // int32 x = 1;
-  if (this->x() != 0) {
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::Int32Size(
-        this->x());
-  }
-
-  // int32 y = 2;
-  if (this->y() != 0) {
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::Int32Size(
-        this->y());
-  }
-
-  // int32 opr = 3;
-  if (this->opr() != 0) {
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::Int32Size(
-        this->opr());
-  }
-
-  int cached_size = ::google::protobuf::internal::ToCachedSize(total_size);
-  SetCachedSize(cached_size);
-  return total_size;
-}
-
-void ReqMiningTitle::MergeFrom(const ::google::protobuf::Message& from) {
-// @@protoc_insertion_point(generalized_merge_from_start:NFMsg.ReqMiningTitle)
-  GOOGLE_DCHECK_NE(&from, this);
-  const ReqMiningTitle* source =
-      ::google::protobuf::internal::DynamicCastToGenerated<const ReqMiningTitle>(
-          &from);
-  if (source == NULL) {
-  // @@protoc_insertion_point(generalized_merge_from_cast_fail:NFMsg.ReqMiningTitle)
-    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
-  } else {
-  // @@protoc_insertion_point(generalized_merge_from_cast_success:NFMsg.ReqMiningTitle)
-    MergeFrom(*source);
-  }
-}
-
-void ReqMiningTitle::MergeFrom(const ReqMiningTitle& from) {
-// @@protoc_insertion_point(class_specific_merge_from_start:NFMsg.ReqMiningTitle)
-  GOOGLE_DCHECK_NE(&from, this);
-  _internal_metadata_.MergeFrom(from._internal_metadata_);
-  ::google::protobuf::uint32 cached_has_bits = 0;
-  (void) cached_has_bits;
-
-  if (from.x() != 0) {
-    set_x(from.x());
-  }
-  if (from.y() != 0) {
-    set_y(from.y());
-  }
-  if (from.opr() != 0) {
-    set_opr(from.opr());
-  }
-}
-
-void ReqMiningTitle::CopyFrom(const ::google::protobuf::Message& from) {
-// @@protoc_insertion_point(generalized_copy_from_start:NFMsg.ReqMiningTitle)
-  if (&from == this) return;
-  Clear();
-  MergeFrom(from);
-}
-
-void ReqMiningTitle::CopyFrom(const ReqMiningTitle& from) {
-// @@protoc_insertion_point(class_specific_copy_from_start:NFMsg.ReqMiningTitle)
-  if (&from == this) return;
-  Clear();
-  MergeFrom(from);
-}
-
-bool ReqMiningTitle::IsInitialized() const {
-  return true;
-}
-
-void ReqMiningTitle::Swap(ReqMiningTitle* other) {
-  if (other == this) return;
-  InternalSwap(other);
-}
-void ReqMiningTitle::InternalSwap(ReqMiningTitle* other) {
-  using std::swap;
-  swap(x_, other->x_);
-  swap(y_, other->y_);
-  swap(opr_, other->opr_);
-  _internal_metadata_.Swap(&other->_internal_metadata_);
-}
-
-::google::protobuf::Metadata ReqMiningTitle::GetMetadata() const {
-  protobuf_NFMsgShare_2eproto::protobuf_AssignDescriptorsOnce();
-  return ::protobuf_NFMsgShare_2eproto::file_level_metadata[kIndexInFileMessages];
-}
-
-
-// ===================================================================
-
-void TileState::InitAsDefaultInstance() {
-}
-#if !defined(_MSC_VER) || _MSC_VER >= 1900
-const int TileState::kXFieldNumber;
-const int TileState::kYFieldNumber;
-const int TileState::kOprFieldNumber;
-#endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
-
-TileState::TileState()
-  : ::google::protobuf::Message(), _internal_metadata_(NULL) {
-  ::google::protobuf::internal::InitSCC(
-      &protobuf_NFMsgShare_2eproto::scc_info_TileState.base);
-  SharedCtor();
-  // @@protoc_insertion_point(constructor:NFMsg.TileState)
-}
-TileState::TileState(const TileState& from)
-  : ::google::protobuf::Message(),
-      _internal_metadata_(NULL) {
-  _internal_metadata_.MergeFrom(from._internal_metadata_);
-  ::memcpy(&x_, &from.x_,
-    static_cast<size_t>(reinterpret_cast<char*>(&opr_) -
-    reinterpret_cast<char*>(&x_)) + sizeof(opr_));
-  // @@protoc_insertion_point(copy_constructor:NFMsg.TileState)
-}
-
-void TileState::SharedCtor() {
-  ::memset(&x_, 0, static_cast<size_t>(
-      reinterpret_cast<char*>(&opr_) -
-      reinterpret_cast<char*>(&x_)) + sizeof(opr_));
-}
-
-TileState::~TileState() {
-  // @@protoc_insertion_point(destructor:NFMsg.TileState)
-  SharedDtor();
-}
-
-void TileState::SharedDtor() {
-}
-
-void TileState::SetCachedSize(int size) const {
-  _cached_size_.Set(size);
-}
-const ::google::protobuf::Descriptor* TileState::descriptor() {
-  ::protobuf_NFMsgShare_2eproto::protobuf_AssignDescriptorsOnce();
-  return ::protobuf_NFMsgShare_2eproto::file_level_metadata[kIndexInFileMessages].descriptor;
-}
-
-const TileState& TileState::default_instance() {
-  ::google::protobuf::internal::InitSCC(&protobuf_NFMsgShare_2eproto::scc_info_TileState.base);
-  return *internal_default_instance();
-}
-
-
-void TileState::Clear() {
-// @@protoc_insertion_point(message_clear_start:NFMsg.TileState)
-  ::google::protobuf::uint32 cached_has_bits = 0;
-  // Prevent compiler warnings about cached_has_bits being unused
-  (void) cached_has_bits;
-
-  ::memset(&x_, 0, static_cast<size_t>(
-      reinterpret_cast<char*>(&opr_) -
-      reinterpret_cast<char*>(&x_)) + sizeof(opr_));
-  _internal_metadata_.Clear();
-}
-
-bool TileState::MergePartialFromCodedStream(
-    ::google::protobuf::io::CodedInputStream* input) {
-#define DO_(EXPRESSION) if (!GOOGLE_PREDICT_TRUE(EXPRESSION)) goto failure
-  ::google::protobuf::uint32 tag;
-  // @@protoc_insertion_point(parse_start:NFMsg.TileState)
-  for (;;) {
-    ::std::pair<::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
-    tag = p.first;
-    if (!p.second) goto handle_unusual;
-    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // int32 x = 1;
-      case 1: {
-        if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(8u /* 8 & 0xFF */)) {
-
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
-                 input, &x_)));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
-      // int32 y = 2;
-      case 2: {
-        if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(16u /* 16 & 0xFF */)) {
-
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
-                 input, &y_)));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
-      // int32 opr = 3;
-      case 3: {
-        if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(24u /* 24 & 0xFF */)) {
-
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
-                 input, &opr_)));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
-      default: {
-      handle_unusual:
-        if (tag == 0) {
-          goto success;
-        }
-        DO_(::google::protobuf::internal::WireFormat::SkipField(
-              input, tag, _internal_metadata_.mutable_unknown_fields()));
-        break;
-      }
-    }
-  }
-success:
-  // @@protoc_insertion_point(parse_success:NFMsg.TileState)
-  return true;
-failure:
-  // @@protoc_insertion_point(parse_failure:NFMsg.TileState)
-  return false;
-#undef DO_
-}
-
-void TileState::SerializeWithCachedSizes(
-    ::google::protobuf::io::CodedOutputStream* output) const {
-  // @@protoc_insertion_point(serialize_start:NFMsg.TileState)
-  ::google::protobuf::uint32 cached_has_bits = 0;
-  (void) cached_has_bits;
-
-  // int32 x = 1;
-  if (this->x() != 0) {
-    ::google::protobuf::internal::WireFormatLite::WriteInt32(1, this->x(), output);
-  }
-
-  // int32 y = 2;
-  if (this->y() != 0) {
-    ::google::protobuf::internal::WireFormatLite::WriteInt32(2, this->y(), output);
-  }
-
-  // int32 opr = 3;
-  if (this->opr() != 0) {
-    ::google::protobuf::internal::WireFormatLite::WriteInt32(3, this->opr(), output);
-  }
-
-  if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
-    ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
-        (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()), output);
-  }
-  // @@protoc_insertion_point(serialize_end:NFMsg.TileState)
-}
-
-::google::protobuf::uint8* TileState::InternalSerializeWithCachedSizesToArray(
-    bool deterministic, ::google::protobuf::uint8* target) const {
-  (void)deterministic; // Unused
-  // @@protoc_insertion_point(serialize_to_array_start:NFMsg.TileState)
-  ::google::protobuf::uint32 cached_has_bits = 0;
-  (void) cached_has_bits;
-
-  // int32 x = 1;
-  if (this->x() != 0) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(1, this->x(), target);
-  }
-
-  // int32 y = 2;
-  if (this->y() != 0) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(2, this->y(), target);
-  }
-
-  // int32 opr = 3;
-  if (this->opr() != 0) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(3, this->opr(), target);
-  }
-
-  if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
-    target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
-        (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()), target);
-  }
-  // @@protoc_insertion_point(serialize_to_array_end:NFMsg.TileState)
-  return target;
-}
-
-size_t TileState::ByteSizeLong() const {
-// @@protoc_insertion_point(message_byte_size_start:NFMsg.TileState)
-  size_t total_size = 0;
-
-  if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
-    total_size +=
-      ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
-        (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()));
-  }
-  // int32 x = 1;
-  if (this->x() != 0) {
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::Int32Size(
-        this->x());
-  }
-
-  // int32 y = 2;
-  if (this->y() != 0) {
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::Int32Size(
-        this->y());
-  }
-
-  // int32 opr = 3;
-  if (this->opr() != 0) {
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::Int32Size(
-        this->opr());
-  }
-
-  int cached_size = ::google::protobuf::internal::ToCachedSize(total_size);
-  SetCachedSize(cached_size);
-  return total_size;
-}
-
-void TileState::MergeFrom(const ::google::protobuf::Message& from) {
-// @@protoc_insertion_point(generalized_merge_from_start:NFMsg.TileState)
-  GOOGLE_DCHECK_NE(&from, this);
-  const TileState* source =
-      ::google::protobuf::internal::DynamicCastToGenerated<const TileState>(
-          &from);
-  if (source == NULL) {
-  // @@protoc_insertion_point(generalized_merge_from_cast_fail:NFMsg.TileState)
-    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
-  } else {
-  // @@protoc_insertion_point(generalized_merge_from_cast_success:NFMsg.TileState)
-    MergeFrom(*source);
-  }
-}
-
-void TileState::MergeFrom(const TileState& from) {
-// @@protoc_insertion_point(class_specific_merge_from_start:NFMsg.TileState)
-  GOOGLE_DCHECK_NE(&from, this);
-  _internal_metadata_.MergeFrom(from._internal_metadata_);
-  ::google::protobuf::uint32 cached_has_bits = 0;
-  (void) cached_has_bits;
-
-  if (from.x() != 0) {
-    set_x(from.x());
-  }
-  if (from.y() != 0) {
-    set_y(from.y());
-  }
-  if (from.opr() != 0) {
-    set_opr(from.opr());
-  }
-}
-
-void TileState::CopyFrom(const ::google::protobuf::Message& from) {
-// @@protoc_insertion_point(generalized_copy_from_start:NFMsg.TileState)
-  if (&from == this) return;
-  Clear();
-  MergeFrom(from);
-}
-
-void TileState::CopyFrom(const TileState& from) {
-// @@protoc_insertion_point(class_specific_copy_from_start:NFMsg.TileState)
-  if (&from == this) return;
-  Clear();
-  MergeFrom(from);
-}
-
-bool TileState::IsInitialized() const {
-  return true;
-}
-
-void TileState::Swap(TileState* other) {
-  if (other == this) return;
-  InternalSwap(other);
-}
-void TileState::InternalSwap(TileState* other) {
-  using std::swap;
-  swap(x_, other->x_);
-  swap(y_, other->y_);
-  swap(opr_, other->opr_);
-  _internal_metadata_.Swap(&other->_internal_metadata_);
-}
-
-::google::protobuf::Metadata TileState::GetMetadata() const {
-  protobuf_NFMsgShare_2eproto::protobuf_AssignDescriptorsOnce();
-  return ::protobuf_NFMsgShare_2eproto::file_level_metadata[kIndexInFileMessages];
-}
-
-
-// ===================================================================
-
-void TileBuilding::InitAsDefaultInstance() {
-  ::NFMsg::_TileBuilding_default_instance_._instance.get_mutable()->guid_ = const_cast< ::NFMsg::Ident*>(
-      ::NFMsg::Ident::internal_default_instance());
-}
-void TileBuilding::clear_guid() {
-  if (GetArenaNoVirtual() == NULL && guid_ != NULL) {
-    delete guid_;
-  }
-  guid_ = NULL;
-}
-#if !defined(_MSC_VER) || _MSC_VER >= 1900
-const int TileBuilding::kXFieldNumber;
-const int TileBuilding::kYFieldNumber;
-const int TileBuilding::kConfigIDFieldNumber;
-const int TileBuilding::kGuidFieldNumber;
-#endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
-
-TileBuilding::TileBuilding()
-  : ::google::protobuf::Message(), _internal_metadata_(NULL) {
-  ::google::protobuf::internal::InitSCC(
-      &protobuf_NFMsgShare_2eproto::scc_info_TileBuilding.base);
-  SharedCtor();
-  // @@protoc_insertion_point(constructor:NFMsg.TileBuilding)
-}
-TileBuilding::TileBuilding(const TileBuilding& from)
-  : ::google::protobuf::Message(),
-      _internal_metadata_(NULL) {
-  _internal_metadata_.MergeFrom(from._internal_metadata_);
-  configid_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  if (from.configid().size() > 0) {
-    configid_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.configid_);
-  }
-  if (from.has_guid()) {
-    guid_ = new ::NFMsg::Ident(*from.guid_);
-  } else {
-    guid_ = NULL;
-  }
-  ::memcpy(&x_, &from.x_,
-    static_cast<size_t>(reinterpret_cast<char*>(&y_) -
-    reinterpret_cast<char*>(&x_)) + sizeof(y_));
-  // @@protoc_insertion_point(copy_constructor:NFMsg.TileBuilding)
-}
-
-void TileBuilding::SharedCtor() {
-  configid_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  ::memset(&guid_, 0, static_cast<size_t>(
-      reinterpret_cast<char*>(&y_) -
-      reinterpret_cast<char*>(&guid_)) + sizeof(y_));
-}
-
-TileBuilding::~TileBuilding() {
-  // @@protoc_insertion_point(destructor:NFMsg.TileBuilding)
-  SharedDtor();
-}
-
-void TileBuilding::SharedDtor() {
-  configid_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  if (this != internal_default_instance()) delete guid_;
-}
-
-void TileBuilding::SetCachedSize(int size) const {
-  _cached_size_.Set(size);
-}
-const ::google::protobuf::Descriptor* TileBuilding::descriptor() {
-  ::protobuf_NFMsgShare_2eproto::protobuf_AssignDescriptorsOnce();
-  return ::protobuf_NFMsgShare_2eproto::file_level_metadata[kIndexInFileMessages].descriptor;
-}
-
-const TileBuilding& TileBuilding::default_instance() {
-  ::google::protobuf::internal::InitSCC(&protobuf_NFMsgShare_2eproto::scc_info_TileBuilding.base);
-  return *internal_default_instance();
-}
-
-
-void TileBuilding::Clear() {
-// @@protoc_insertion_point(message_clear_start:NFMsg.TileBuilding)
-  ::google::protobuf::uint32 cached_has_bits = 0;
-  // Prevent compiler warnings about cached_has_bits being unused
-  (void) cached_has_bits;
-
-  configid_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  if (GetArenaNoVirtual() == NULL && guid_ != NULL) {
-    delete guid_;
-  }
-  guid_ = NULL;
-  ::memset(&x_, 0, static_cast<size_t>(
-      reinterpret_cast<char*>(&y_) -
-      reinterpret_cast<char*>(&x_)) + sizeof(y_));
-  _internal_metadata_.Clear();
-}
-
-bool TileBuilding::MergePartialFromCodedStream(
-    ::google::protobuf::io::CodedInputStream* input) {
-#define DO_(EXPRESSION) if (!GOOGLE_PREDICT_TRUE(EXPRESSION)) goto failure
-  ::google::protobuf::uint32 tag;
-  // @@protoc_insertion_point(parse_start:NFMsg.TileBuilding)
-  for (;;) {
-    ::std::pair<::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
-    tag = p.first;
-    if (!p.second) goto handle_unusual;
-    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // int32 x = 1;
-      case 1: {
-        if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(8u /* 8 & 0xFF */)) {
-
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
-                 input, &x_)));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
-      // int32 y = 2;
-      case 2: {
-        if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(16u /* 16 & 0xFF */)) {
-
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
-                 input, &y_)));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
-      // bytes configID = 3;
-      case 3: {
-        if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(26u /* 26 & 0xFF */)) {
-          DO_(::google::protobuf::internal::WireFormatLite::ReadBytes(
-                input, this->mutable_configid()));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
-      // .NFMsg.Ident guid = 4;
-      case 4: {
-        if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(34u /* 34 & 0xFF */)) {
-          DO_(::google::protobuf::internal::WireFormatLite::ReadMessage(
-               input, mutable_guid()));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
-      default: {
-      handle_unusual:
-        if (tag == 0) {
-          goto success;
-        }
-        DO_(::google::protobuf::internal::WireFormat::SkipField(
-              input, tag, _internal_metadata_.mutable_unknown_fields()));
-        break;
-      }
-    }
-  }
-success:
-  // @@protoc_insertion_point(parse_success:NFMsg.TileBuilding)
-  return true;
-failure:
-  // @@protoc_insertion_point(parse_failure:NFMsg.TileBuilding)
-  return false;
-#undef DO_
-}
-
-void TileBuilding::SerializeWithCachedSizes(
-    ::google::protobuf::io::CodedOutputStream* output) const {
-  // @@protoc_insertion_point(serialize_start:NFMsg.TileBuilding)
-  ::google::protobuf::uint32 cached_has_bits = 0;
-  (void) cached_has_bits;
-
-  // int32 x = 1;
-  if (this->x() != 0) {
-    ::google::protobuf::internal::WireFormatLite::WriteInt32(1, this->x(), output);
-  }
-
-  // int32 y = 2;
-  if (this->y() != 0) {
-    ::google::protobuf::internal::WireFormatLite::WriteInt32(2, this->y(), output);
-  }
-
-  // bytes configID = 3;
-  if (this->configid().size() > 0) {
-    ::google::protobuf::internal::WireFormatLite::WriteBytesMaybeAliased(
-      3, this->configid(), output);
-  }
-
-  // .NFMsg.Ident guid = 4;
-  if (this->has_guid()) {
-    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      4, this->_internal_guid(), output);
-  }
-
-  if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
-    ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
-        (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()), output);
-  }
-  // @@protoc_insertion_point(serialize_end:NFMsg.TileBuilding)
-}
-
-::google::protobuf::uint8* TileBuilding::InternalSerializeWithCachedSizesToArray(
-    bool deterministic, ::google::protobuf::uint8* target) const {
-  (void)deterministic; // Unused
-  // @@protoc_insertion_point(serialize_to_array_start:NFMsg.TileBuilding)
-  ::google::protobuf::uint32 cached_has_bits = 0;
-  (void) cached_has_bits;
-
-  // int32 x = 1;
-  if (this->x() != 0) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(1, this->x(), target);
-  }
-
-  // int32 y = 2;
-  if (this->y() != 0) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(2, this->y(), target);
-  }
-
-  // bytes configID = 3;
-  if (this->configid().size() > 0) {
-    target =
-      ::google::protobuf::internal::WireFormatLite::WriteBytesToArray(
-        3, this->configid(), target);
-  }
-
-  // .NFMsg.Ident guid = 4;
-  if (this->has_guid()) {
-    target = ::google::protobuf::internal::WireFormatLite::
-      InternalWriteMessageToArray(
-        4, this->_internal_guid(), deterministic, target);
-  }
-
-  if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
-    target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
-        (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()), target);
-  }
-  // @@protoc_insertion_point(serialize_to_array_end:NFMsg.TileBuilding)
-  return target;
-}
-
-size_t TileBuilding::ByteSizeLong() const {
-// @@protoc_insertion_point(message_byte_size_start:NFMsg.TileBuilding)
-  size_t total_size = 0;
-
-  if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
-    total_size +=
-      ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
-        (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()));
-  }
-  // bytes configID = 3;
-  if (this->configid().size() > 0) {
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::BytesSize(
-        this->configid());
-  }
-
-  // .NFMsg.Ident guid = 4;
-  if (this->has_guid()) {
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::MessageSize(
-        *guid_);
-  }
-
-  // int32 x = 1;
-  if (this->x() != 0) {
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::Int32Size(
-        this->x());
-  }
-
-  // int32 y = 2;
-  if (this->y() != 0) {
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::Int32Size(
-        this->y());
-  }
-
-  int cached_size = ::google::protobuf::internal::ToCachedSize(total_size);
-  SetCachedSize(cached_size);
-  return total_size;
-}
-
-void TileBuilding::MergeFrom(const ::google::protobuf::Message& from) {
-// @@protoc_insertion_point(generalized_merge_from_start:NFMsg.TileBuilding)
-  GOOGLE_DCHECK_NE(&from, this);
-  const TileBuilding* source =
-      ::google::protobuf::internal::DynamicCastToGenerated<const TileBuilding>(
-          &from);
-  if (source == NULL) {
-  // @@protoc_insertion_point(generalized_merge_from_cast_fail:NFMsg.TileBuilding)
-    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
-  } else {
-  // @@protoc_insertion_point(generalized_merge_from_cast_success:NFMsg.TileBuilding)
-    MergeFrom(*source);
-  }
-}
-
-void TileBuilding::MergeFrom(const TileBuilding& from) {
-// @@protoc_insertion_point(class_specific_merge_from_start:NFMsg.TileBuilding)
-  GOOGLE_DCHECK_NE(&from, this);
-  _internal_metadata_.MergeFrom(from._internal_metadata_);
-  ::google::protobuf::uint32 cached_has_bits = 0;
-  (void) cached_has_bits;
-
-  if (from.configid().size() > 0) {
-
-    configid_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.configid_);
-  }
-  if (from.has_guid()) {
-    mutable_guid()->::NFMsg::Ident::MergeFrom(from.guid());
-  }
-  if (from.x() != 0) {
-    set_x(from.x());
-  }
-  if (from.y() != 0) {
-    set_y(from.y());
-  }
-}
-
-void TileBuilding::CopyFrom(const ::google::protobuf::Message& from) {
-// @@protoc_insertion_point(generalized_copy_from_start:NFMsg.TileBuilding)
-  if (&from == this) return;
-  Clear();
-  MergeFrom(from);
-}
-
-void TileBuilding::CopyFrom(const TileBuilding& from) {
-// @@protoc_insertion_point(class_specific_copy_from_start:NFMsg.TileBuilding)
-  if (&from == this) return;
-  Clear();
-  MergeFrom(from);
-}
-
-bool TileBuilding::IsInitialized() const {
-  return true;
-}
-
-void TileBuilding::Swap(TileBuilding* other) {
-  if (other == this) return;
-  InternalSwap(other);
-}
-void TileBuilding::InternalSwap(TileBuilding* other) {
-  using std::swap;
-  configid_.Swap(&other->configid_, &::google::protobuf::internal::GetEmptyStringAlreadyInited(),
-    GetArenaNoVirtual());
-  swap(guid_, other->guid_);
-  swap(x_, other->x_);
-  swap(y_, other->y_);
-  _internal_metadata_.Swap(&other->_internal_metadata_);
-}
-
-::google::protobuf::Metadata TileBuilding::GetMetadata() const {
-  protobuf_NFMsgShare_2eproto::protobuf_AssignDescriptorsOnce();
-  return ::protobuf_NFMsgShare_2eproto::file_level_metadata[kIndexInFileMessages];
-}
-
-
-// ===================================================================
-
-void TileNPC::InitAsDefaultInstance() {
-  ::NFMsg::_TileNPC_default_instance_._instance.get_mutable()->guid_ = const_cast< ::NFMsg::Ident*>(
-      ::NFMsg::Ident::internal_default_instance());
-}
-void TileNPC::clear_guid() {
-  if (GetArenaNoVirtual() == NULL && guid_ != NULL) {
-    delete guid_;
-  }
-  guid_ = NULL;
-}
-#if !defined(_MSC_VER) || _MSC_VER >= 1900
-const int TileNPC::kXFieldNumber;
-const int TileNPC::kYFieldNumber;
-const int TileNPC::kConfigIDFieldNumber;
-const int TileNPC::kGuidFieldNumber;
-#endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
-
-TileNPC::TileNPC()
-  : ::google::protobuf::Message(), _internal_metadata_(NULL) {
-  ::google::protobuf::internal::InitSCC(
-      &protobuf_NFMsgShare_2eproto::scc_info_TileNPC.base);
-  SharedCtor();
-  // @@protoc_insertion_point(constructor:NFMsg.TileNPC)
-}
-TileNPC::TileNPC(const TileNPC& from)
-  : ::google::protobuf::Message(),
-      _internal_metadata_(NULL) {
-  _internal_metadata_.MergeFrom(from._internal_metadata_);
-  configid_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  if (from.configid().size() > 0) {
-    configid_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.configid_);
-  }
-  if (from.has_guid()) {
-    guid_ = new ::NFMsg::Ident(*from.guid_);
-  } else {
-    guid_ = NULL;
-  }
-  ::memcpy(&x_, &from.x_,
-    static_cast<size_t>(reinterpret_cast<char*>(&y_) -
-    reinterpret_cast<char*>(&x_)) + sizeof(y_));
-  // @@protoc_insertion_point(copy_constructor:NFMsg.TileNPC)
-}
-
-void TileNPC::SharedCtor() {
-  configid_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  ::memset(&guid_, 0, static_cast<size_t>(
-      reinterpret_cast<char*>(&y_) -
-      reinterpret_cast<char*>(&guid_)) + sizeof(y_));
-}
-
-TileNPC::~TileNPC() {
-  // @@protoc_insertion_point(destructor:NFMsg.TileNPC)
-  SharedDtor();
-}
-
-void TileNPC::SharedDtor() {
-  configid_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  if (this != internal_default_instance()) delete guid_;
-}
-
-void TileNPC::SetCachedSize(int size) const {
-  _cached_size_.Set(size);
-}
-const ::google::protobuf::Descriptor* TileNPC::descriptor() {
-  ::protobuf_NFMsgShare_2eproto::protobuf_AssignDescriptorsOnce();
-  return ::protobuf_NFMsgShare_2eproto::file_level_metadata[kIndexInFileMessages].descriptor;
-}
-
-const TileNPC& TileNPC::default_instance() {
-  ::google::protobuf::internal::InitSCC(&protobuf_NFMsgShare_2eproto::scc_info_TileNPC.base);
-  return *internal_default_instance();
-}
-
-
-void TileNPC::Clear() {
-// @@protoc_insertion_point(message_clear_start:NFMsg.TileNPC)
-  ::google::protobuf::uint32 cached_has_bits = 0;
-  // Prevent compiler warnings about cached_has_bits being unused
-  (void) cached_has_bits;
-
-  configid_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  if (GetArenaNoVirtual() == NULL && guid_ != NULL) {
-    delete guid_;
-  }
-  guid_ = NULL;
-  ::memset(&x_, 0, static_cast<size_t>(
-      reinterpret_cast<char*>(&y_) -
-      reinterpret_cast<char*>(&x_)) + sizeof(y_));
-  _internal_metadata_.Clear();
-}
-
-bool TileNPC::MergePartialFromCodedStream(
-    ::google::protobuf::io::CodedInputStream* input) {
-#define DO_(EXPRESSION) if (!GOOGLE_PREDICT_TRUE(EXPRESSION)) goto failure
-  ::google::protobuf::uint32 tag;
-  // @@protoc_insertion_point(parse_start:NFMsg.TileNPC)
-  for (;;) {
-    ::std::pair<::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
-    tag = p.first;
-    if (!p.second) goto handle_unusual;
-    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // int32 x = 1;
-      case 1: {
-        if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(8u /* 8 & 0xFF */)) {
-
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
-                 input, &x_)));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
-      // int32 y = 2;
-      case 2: {
-        if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(16u /* 16 & 0xFF */)) {
-
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
-                 input, &y_)));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
-      // bytes configID = 3;
-      case 3: {
-        if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(26u /* 26 & 0xFF */)) {
-          DO_(::google::protobuf::internal::WireFormatLite::ReadBytes(
-                input, this->mutable_configid()));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
-      // .NFMsg.Ident guid = 4;
-      case 4: {
-        if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(34u /* 34 & 0xFF */)) {
-          DO_(::google::protobuf::internal::WireFormatLite::ReadMessage(
-               input, mutable_guid()));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
-      default: {
-      handle_unusual:
-        if (tag == 0) {
-          goto success;
-        }
-        DO_(::google::protobuf::internal::WireFormat::SkipField(
-              input, tag, _internal_metadata_.mutable_unknown_fields()));
-        break;
-      }
-    }
-  }
-success:
-  // @@protoc_insertion_point(parse_success:NFMsg.TileNPC)
-  return true;
-failure:
-  // @@protoc_insertion_point(parse_failure:NFMsg.TileNPC)
-  return false;
-#undef DO_
-}
-
-void TileNPC::SerializeWithCachedSizes(
-    ::google::protobuf::io::CodedOutputStream* output) const {
-  // @@protoc_insertion_point(serialize_start:NFMsg.TileNPC)
-  ::google::protobuf::uint32 cached_has_bits = 0;
-  (void) cached_has_bits;
-
-  // int32 x = 1;
-  if (this->x() != 0) {
-    ::google::protobuf::internal::WireFormatLite::WriteInt32(1, this->x(), output);
-  }
-
-  // int32 y = 2;
-  if (this->y() != 0) {
-    ::google::protobuf::internal::WireFormatLite::WriteInt32(2, this->y(), output);
-  }
-
-  // bytes configID = 3;
-  if (this->configid().size() > 0) {
-    ::google::protobuf::internal::WireFormatLite::WriteBytesMaybeAliased(
-      3, this->configid(), output);
-  }
-
-  // .NFMsg.Ident guid = 4;
-  if (this->has_guid()) {
-    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      4, this->_internal_guid(), output);
-  }
-
-  if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
-    ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
-        (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()), output);
-  }
-  // @@protoc_insertion_point(serialize_end:NFMsg.TileNPC)
-}
-
-::google::protobuf::uint8* TileNPC::InternalSerializeWithCachedSizesToArray(
-    bool deterministic, ::google::protobuf::uint8* target) const {
-  (void)deterministic; // Unused
-  // @@protoc_insertion_point(serialize_to_array_start:NFMsg.TileNPC)
-  ::google::protobuf::uint32 cached_has_bits = 0;
-  (void) cached_has_bits;
-
-  // int32 x = 1;
-  if (this->x() != 0) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(1, this->x(), target);
-  }
-
-  // int32 y = 2;
-  if (this->y() != 0) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(2, this->y(), target);
-  }
-
-  // bytes configID = 3;
-  if (this->configid().size() > 0) {
-    target =
-      ::google::protobuf::internal::WireFormatLite::WriteBytesToArray(
-        3, this->configid(), target);
-  }
-
-  // .NFMsg.Ident guid = 4;
-  if (this->has_guid()) {
-    target = ::google::protobuf::internal::WireFormatLite::
-      InternalWriteMessageToArray(
-        4, this->_internal_guid(), deterministic, target);
-  }
-
-  if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
-    target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
-        (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()), target);
-  }
-  // @@protoc_insertion_point(serialize_to_array_end:NFMsg.TileNPC)
-  return target;
-}
-
-size_t TileNPC::ByteSizeLong() const {
-// @@protoc_insertion_point(message_byte_size_start:NFMsg.TileNPC)
-  size_t total_size = 0;
-
-  if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
-    total_size +=
-      ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
-        (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()));
-  }
-  // bytes configID = 3;
-  if (this->configid().size() > 0) {
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::BytesSize(
-        this->configid());
-  }
-
-  // .NFMsg.Ident guid = 4;
-  if (this->has_guid()) {
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::MessageSize(
-        *guid_);
-  }
-
-  // int32 x = 1;
-  if (this->x() != 0) {
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::Int32Size(
-        this->x());
-  }
-
-  // int32 y = 2;
-  if (this->y() != 0) {
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::Int32Size(
-        this->y());
-  }
-
-  int cached_size = ::google::protobuf::internal::ToCachedSize(total_size);
-  SetCachedSize(cached_size);
-  return total_size;
-}
-
-void TileNPC::MergeFrom(const ::google::protobuf::Message& from) {
-// @@protoc_insertion_point(generalized_merge_from_start:NFMsg.TileNPC)
-  GOOGLE_DCHECK_NE(&from, this);
-  const TileNPC* source =
-      ::google::protobuf::internal::DynamicCastToGenerated<const TileNPC>(
-          &from);
-  if (source == NULL) {
-  // @@protoc_insertion_point(generalized_merge_from_cast_fail:NFMsg.TileNPC)
-    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
-  } else {
-  // @@protoc_insertion_point(generalized_merge_from_cast_success:NFMsg.TileNPC)
-    MergeFrom(*source);
-  }
-}
-
-void TileNPC::MergeFrom(const TileNPC& from) {
-// @@protoc_insertion_point(class_specific_merge_from_start:NFMsg.TileNPC)
-  GOOGLE_DCHECK_NE(&from, this);
-  _internal_metadata_.MergeFrom(from._internal_metadata_);
-  ::google::protobuf::uint32 cached_has_bits = 0;
-  (void) cached_has_bits;
-
-  if (from.configid().size() > 0) {
-
-    configid_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.configid_);
-  }
-  if (from.has_guid()) {
-    mutable_guid()->::NFMsg::Ident::MergeFrom(from.guid());
-  }
-  if (from.x() != 0) {
-    set_x(from.x());
-  }
-  if (from.y() != 0) {
-    set_y(from.y());
-  }
-}
-
-void TileNPC::CopyFrom(const ::google::protobuf::Message& from) {
-// @@protoc_insertion_point(generalized_copy_from_start:NFMsg.TileNPC)
-  if (&from == this) return;
-  Clear();
-  MergeFrom(from);
-}
-
-void TileNPC::CopyFrom(const TileNPC& from) {
-// @@protoc_insertion_point(class_specific_copy_from_start:NFMsg.TileNPC)
-  if (&from == this) return;
-  Clear();
-  MergeFrom(from);
-}
-
-bool TileNPC::IsInitialized() const {
-  return true;
-}
-
-void TileNPC::Swap(TileNPC* other) {
-  if (other == this) return;
-  InternalSwap(other);
-}
-void TileNPC::InternalSwap(TileNPC* other) {
-  using std::swap;
-  configid_.Swap(&other->configid_, &::google::protobuf::internal::GetEmptyStringAlreadyInited(),
-    GetArenaNoVirtual());
-  swap(guid_, other->guid_);
-  swap(x_, other->x_);
-  swap(y_, other->y_);
-  _internal_metadata_.Swap(&other->_internal_metadata_);
-}
-
-::google::protobuf::Metadata TileNPC::GetMetadata() const {
-  protobuf_NFMsgShare_2eproto::protobuf_AssignDescriptorsOnce();
-  return ::protobuf_NFMsgShare_2eproto::file_level_metadata[kIndexInFileMessages];
-}
-
-
-// ===================================================================
-
-void AckMiningTitle::InitAsDefaultInstance() {
-}
-#if !defined(_MSC_VER) || _MSC_VER >= 1900
-const int AckMiningTitle::kTileFieldNumber;
-const int AckMiningTitle::kBuildingFieldNumber;
-const int AckMiningTitle::kNpcFieldNumber;
-#endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
-
-AckMiningTitle::AckMiningTitle()
-  : ::google::protobuf::Message(), _internal_metadata_(NULL) {
-  ::google::protobuf::internal::InitSCC(
-      &protobuf_NFMsgShare_2eproto::scc_info_AckMiningTitle.base);
-  SharedCtor();
-  // @@protoc_insertion_point(constructor:NFMsg.AckMiningTitle)
-}
-AckMiningTitle::AckMiningTitle(const AckMiningTitle& from)
-  : ::google::protobuf::Message(),
-      _internal_metadata_(NULL),
-      tile_(from.tile_),
-      building_(from.building_),
-      npc_(from.npc_) {
-  _internal_metadata_.MergeFrom(from._internal_metadata_);
-  // @@protoc_insertion_point(copy_constructor:NFMsg.AckMiningTitle)
-}
-
-void AckMiningTitle::SharedCtor() {
-}
-
-AckMiningTitle::~AckMiningTitle() {
-  // @@protoc_insertion_point(destructor:NFMsg.AckMiningTitle)
-  SharedDtor();
-}
-
-void AckMiningTitle::SharedDtor() {
-}
-
-void AckMiningTitle::SetCachedSize(int size) const {
-  _cached_size_.Set(size);
-}
-const ::google::protobuf::Descriptor* AckMiningTitle::descriptor() {
-  ::protobuf_NFMsgShare_2eproto::protobuf_AssignDescriptorsOnce();
-  return ::protobuf_NFMsgShare_2eproto::file_level_metadata[kIndexInFileMessages].descriptor;
-}
-
-const AckMiningTitle& AckMiningTitle::default_instance() {
-  ::google::protobuf::internal::InitSCC(&protobuf_NFMsgShare_2eproto::scc_info_AckMiningTitle.base);
-  return *internal_default_instance();
-}
-
-
-void AckMiningTitle::Clear() {
-// @@protoc_insertion_point(message_clear_start:NFMsg.AckMiningTitle)
-  ::google::protobuf::uint32 cached_has_bits = 0;
-  // Prevent compiler warnings about cached_has_bits being unused
-  (void) cached_has_bits;
-
-  tile_.Clear();
-  building_.Clear();
-  npc_.Clear();
-  _internal_metadata_.Clear();
-}
-
-bool AckMiningTitle::MergePartialFromCodedStream(
-    ::google::protobuf::io::CodedInputStream* input) {
-#define DO_(EXPRESSION) if (!GOOGLE_PREDICT_TRUE(EXPRESSION)) goto failure
-  ::google::protobuf::uint32 tag;
-  // @@protoc_insertion_point(parse_start:NFMsg.AckMiningTitle)
-  for (;;) {
-    ::std::pair<::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
-    tag = p.first;
-    if (!p.second) goto handle_unusual;
-    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // repeated .NFMsg.TileState tile = 1;
-      case 1: {
-        if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(10u /* 10 & 0xFF */)) {
-          DO_(::google::protobuf::internal::WireFormatLite::ReadMessage(
-                input, add_tile()));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
-      // repeated .NFMsg.TileBuilding building = 2;
-      case 2: {
-        if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(18u /* 18 & 0xFF */)) {
-          DO_(::google::protobuf::internal::WireFormatLite::ReadMessage(
-                input, add_building()));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
-      // repeated .NFMsg.TileNPC npc = 3;
-      case 3: {
-        if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(26u /* 26 & 0xFF */)) {
-          DO_(::google::protobuf::internal::WireFormatLite::ReadMessage(
-                input, add_npc()));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
-      default: {
-      handle_unusual:
-        if (tag == 0) {
-          goto success;
-        }
-        DO_(::google::protobuf::internal::WireFormat::SkipField(
-              input, tag, _internal_metadata_.mutable_unknown_fields()));
-        break;
-      }
-    }
-  }
-success:
-  // @@protoc_insertion_point(parse_success:NFMsg.AckMiningTitle)
-  return true;
-failure:
-  // @@protoc_insertion_point(parse_failure:NFMsg.AckMiningTitle)
-  return false;
-#undef DO_
-}
-
-void AckMiningTitle::SerializeWithCachedSizes(
-    ::google::protobuf::io::CodedOutputStream* output) const {
-  // @@protoc_insertion_point(serialize_start:NFMsg.AckMiningTitle)
-  ::google::protobuf::uint32 cached_has_bits = 0;
-  (void) cached_has_bits;
-
-  // repeated .NFMsg.TileState tile = 1;
-  for (unsigned int i = 0,
-      n = static_cast<unsigned int>(this->tile_size()); i < n; i++) {
-    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      1,
-      this->tile(static_cast<int>(i)),
-      output);
-  }
-
-  // repeated .NFMsg.TileBuilding building = 2;
-  for (unsigned int i = 0,
-      n = static_cast<unsigned int>(this->building_size()); i < n; i++) {
-    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      2,
-      this->building(static_cast<int>(i)),
-      output);
-  }
-
-  // repeated .NFMsg.TileNPC npc = 3;
-  for (unsigned int i = 0,
-      n = static_cast<unsigned int>(this->npc_size()); i < n; i++) {
-    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      3,
-      this->npc(static_cast<int>(i)),
-      output);
-  }
-
-  if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
-    ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
-        (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()), output);
-  }
-  // @@protoc_insertion_point(serialize_end:NFMsg.AckMiningTitle)
-}
-
-::google::protobuf::uint8* AckMiningTitle::InternalSerializeWithCachedSizesToArray(
-    bool deterministic, ::google::protobuf::uint8* target) const {
-  (void)deterministic; // Unused
-  // @@protoc_insertion_point(serialize_to_array_start:NFMsg.AckMiningTitle)
-  ::google::protobuf::uint32 cached_has_bits = 0;
-  (void) cached_has_bits;
-
-  // repeated .NFMsg.TileState tile = 1;
-  for (unsigned int i = 0,
-      n = static_cast<unsigned int>(this->tile_size()); i < n; i++) {
-    target = ::google::protobuf::internal::WireFormatLite::
-      InternalWriteMessageToArray(
-        1, this->tile(static_cast<int>(i)), deterministic, target);
-  }
-
-  // repeated .NFMsg.TileBuilding building = 2;
-  for (unsigned int i = 0,
-      n = static_cast<unsigned int>(this->building_size()); i < n; i++) {
-    target = ::google::protobuf::internal::WireFormatLite::
-      InternalWriteMessageToArray(
-        2, this->building(static_cast<int>(i)), deterministic, target);
-  }
-
-  // repeated .NFMsg.TileNPC npc = 3;
-  for (unsigned int i = 0,
-      n = static_cast<unsigned int>(this->npc_size()); i < n; i++) {
-    target = ::google::protobuf::internal::WireFormatLite::
-      InternalWriteMessageToArray(
-        3, this->npc(static_cast<int>(i)), deterministic, target);
-  }
-
-  if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
-    target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
-        (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()), target);
-  }
-  // @@protoc_insertion_point(serialize_to_array_end:NFMsg.AckMiningTitle)
-  return target;
-}
-
-size_t AckMiningTitle::ByteSizeLong() const {
-// @@protoc_insertion_point(message_byte_size_start:NFMsg.AckMiningTitle)
-  size_t total_size = 0;
-
-  if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
-    total_size +=
-      ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
-        (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()));
-  }
-  // repeated .NFMsg.TileState tile = 1;
-  {
-    unsigned int count = static_cast<unsigned int>(this->tile_size());
-    total_size += 1UL * count;
-    for (unsigned int i = 0; i < count; i++) {
-      total_size +=
-        ::google::protobuf::internal::WireFormatLite::MessageSize(
-          this->tile(static_cast<int>(i)));
-    }
-  }
-
-  // repeated .NFMsg.TileBuilding building = 2;
-  {
-    unsigned int count = static_cast<unsigned int>(this->building_size());
-    total_size += 1UL * count;
-    for (unsigned int i = 0; i < count; i++) {
-      total_size +=
-        ::google::protobuf::internal::WireFormatLite::MessageSize(
-          this->building(static_cast<int>(i)));
-    }
-  }
-
-  // repeated .NFMsg.TileNPC npc = 3;
-  {
-    unsigned int count = static_cast<unsigned int>(this->npc_size());
-    total_size += 1UL * count;
-    for (unsigned int i = 0; i < count; i++) {
-      total_size +=
-        ::google::protobuf::internal::WireFormatLite::MessageSize(
-          this->npc(static_cast<int>(i)));
-    }
-  }
-
-  int cached_size = ::google::protobuf::internal::ToCachedSize(total_size);
-  SetCachedSize(cached_size);
-  return total_size;
-}
-
-void AckMiningTitle::MergeFrom(const ::google::protobuf::Message& from) {
-// @@protoc_insertion_point(generalized_merge_from_start:NFMsg.AckMiningTitle)
-  GOOGLE_DCHECK_NE(&from, this);
-  const AckMiningTitle* source =
-      ::google::protobuf::internal::DynamicCastToGenerated<const AckMiningTitle>(
-          &from);
-  if (source == NULL) {
-  // @@protoc_insertion_point(generalized_merge_from_cast_fail:NFMsg.AckMiningTitle)
-    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
-  } else {
-  // @@protoc_insertion_point(generalized_merge_from_cast_success:NFMsg.AckMiningTitle)
-    MergeFrom(*source);
-  }
-}
-
-void AckMiningTitle::MergeFrom(const AckMiningTitle& from) {
-// @@protoc_insertion_point(class_specific_merge_from_start:NFMsg.AckMiningTitle)
-  GOOGLE_DCHECK_NE(&from, this);
-  _internal_metadata_.MergeFrom(from._internal_metadata_);
-  ::google::protobuf::uint32 cached_has_bits = 0;
-  (void) cached_has_bits;
-
-  tile_.MergeFrom(from.tile_);
-  building_.MergeFrom(from.building_);
-  npc_.MergeFrom(from.npc_);
-}
-
-void AckMiningTitle::CopyFrom(const ::google::protobuf::Message& from) {
-// @@protoc_insertion_point(generalized_copy_from_start:NFMsg.AckMiningTitle)
-  if (&from == this) return;
-  Clear();
-  MergeFrom(from);
-}
-
-void AckMiningTitle::CopyFrom(const AckMiningTitle& from) {
-// @@protoc_insertion_point(class_specific_copy_from_start:NFMsg.AckMiningTitle)
-  if (&from == this) return;
-  Clear();
-  MergeFrom(from);
-}
-
-bool AckMiningTitle::IsInitialized() const {
-  return true;
-}
-
-void AckMiningTitle::Swap(AckMiningTitle* other) {
-  if (other == this) return;
-  InternalSwap(other);
-}
-void AckMiningTitle::InternalSwap(AckMiningTitle* other) {
-  using std::swap;
-  CastToBase(&tile_)->InternalSwap(CastToBase(&other->tile_));
-  CastToBase(&building_)->InternalSwap(CastToBase(&other->building_));
-  CastToBase(&npc_)->InternalSwap(CastToBase(&other->npc_));
-  _internal_metadata_.Swap(&other->_internal_metadata_);
-}
-
-::google::protobuf::Metadata AckMiningTitle::GetMetadata() const {
-  protobuf_NFMsgShare_2eproto::protobuf_AssignDescriptorsOnce();
-  return ::protobuf_NFMsgShare_2eproto::file_level_metadata[kIndexInFileMessages];
-}
-
-
-// ===================================================================
-
 void ReqSearchOppnent::InitAsDefaultInstance() {
 }
 #if !defined(_MSC_VER) || _MSC_VER >= 1900
@@ -17349,8 +15965,6 @@ void AckSearchOppnent::InitAsDefaultInstance() {
       ::NFMsg::Vector3::internal_default_instance());
   ::NFMsg::_AckSearchOppnent_default_instance_._instance.get_mutable()->hero_pos3_ = const_cast< ::NFMsg::Vector3*>(
       ::NFMsg::Vector3::internal_default_instance());
-  ::NFMsg::_AckSearchOppnent_default_instance_._instance.get_mutable()->title_ = const_cast< ::NFMsg::AckMiningTitle*>(
-      ::NFMsg::AckMiningTitle::internal_default_instance());
   ::NFMsg::_AckSearchOppnent_default_instance_._instance.get_mutable()->opponent_ = const_cast< ::NFMsg::Ident*>(
       ::NFMsg::Ident::internal_default_instance());
 }
@@ -17416,7 +16030,7 @@ const int AckSearchOppnent::kHeroId3FieldNumber;
 const int AckSearchOppnent::kHeroPos1FieldNumber;
 const int AckSearchOppnent::kHeroPos2FieldNumber;
 const int AckSearchOppnent::kHeroPos3FieldNumber;
-const int AckSearchOppnent::kTitleFieldNumber;
+const int AckSearchOppnent::kBuildingsFieldNumber;
 const int AckSearchOppnent::kOpponentFieldNumber;
 #endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
 
@@ -17429,7 +16043,8 @@ AckSearchOppnent::AckSearchOppnent()
 }
 AckSearchOppnent::AckSearchOppnent(const AckSearchOppnent& from)
   : ::google::protobuf::Message(),
-      _internal_metadata_(NULL) {
+      _internal_metadata_(NULL),
+      buildings_(from.buildings_) {
   _internal_metadata_.MergeFrom(from._internal_metadata_);
   name_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   if (from.name().size() > 0) {
@@ -17481,11 +16096,6 @@ AckSearchOppnent::AckSearchOppnent(const AckSearchOppnent& from)
   } else {
     hero_pos3_ = NULL;
   }
-  if (from.has_title()) {
-    title_ = new ::NFMsg::AckMiningTitle(*from.title_);
-  } else {
-    title_ = NULL;
-  }
   if (from.has_opponent()) {
     opponent_ = new ::NFMsg::Ident(*from.opponent_);
   } else {
@@ -17525,7 +16135,6 @@ void AckSearchOppnent::SharedDtor() {
   if (this != internal_default_instance()) delete hero_pos1_;
   if (this != internal_default_instance()) delete hero_pos2_;
   if (this != internal_default_instance()) delete hero_pos3_;
-  if (this != internal_default_instance()) delete title_;
   if (this != internal_default_instance()) delete opponent_;
 }
 
@@ -17549,6 +16158,7 @@ void AckSearchOppnent::Clear() {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
+  buildings_.Clear();
   name_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   head_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   hero_cnf1_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
@@ -17578,10 +16188,6 @@ void AckSearchOppnent::Clear() {
     delete hero_pos3_;
   }
   hero_pos3_ = NULL;
-  if (GetArenaNoVirtual() == NULL && title_ != NULL) {
-    delete title_;
-  }
-  title_ = NULL;
   if (GetArenaNoVirtual() == NULL && opponent_ != NULL) {
     delete opponent_;
   }
@@ -17846,12 +16452,12 @@ bool AckSearchOppnent::MergePartialFromCodedStream(
         break;
       }
 
-      // .NFMsg.AckMiningTitle title = 30;
+      // repeated .NFMsg.ReqAddSceneBuilding buildings = 30;
       case 30: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
             static_cast< ::google::protobuf::uint8>(242u /* 242 & 0xFF */)) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadMessage(
-               input, mutable_title()));
+                input, add_buildings()));
         } else {
           goto handle_unusual;
         }
@@ -18002,10 +16608,13 @@ void AckSearchOppnent::SerializeWithCachedSizes(
       25, this->_internal_hero_pos3(), output);
   }
 
-  // .NFMsg.AckMiningTitle title = 30;
-  if (this->has_title()) {
+  // repeated .NFMsg.ReqAddSceneBuilding buildings = 30;
+  for (unsigned int i = 0,
+      n = static_cast<unsigned int>(this->buildings_size()); i < n; i++) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      30, this->_internal_title(), output);
+      30,
+      this->buildings(static_cast<int>(i)),
+      output);
   }
 
   // .NFMsg.Ident opponent = 31;
@@ -18145,11 +16754,12 @@ void AckSearchOppnent::SerializeWithCachedSizes(
         25, this->_internal_hero_pos3(), deterministic, target);
   }
 
-  // .NFMsg.AckMiningTitle title = 30;
-  if (this->has_title()) {
+  // repeated .NFMsg.ReqAddSceneBuilding buildings = 30;
+  for (unsigned int i = 0,
+      n = static_cast<unsigned int>(this->buildings_size()); i < n; i++) {
     target = ::google::protobuf::internal::WireFormatLite::
       InternalWriteMessageToArray(
-        30, this->_internal_title(), deterministic, target);
+        30, this->buildings(static_cast<int>(i)), deterministic, target);
   }
 
   // .NFMsg.Ident opponent = 31;
@@ -18176,6 +16786,17 @@ size_t AckSearchOppnent::ByteSizeLong() const {
       ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
         (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()));
   }
+  // repeated .NFMsg.ReqAddSceneBuilding buildings = 30;
+  {
+    unsigned int count = static_cast<unsigned int>(this->buildings_size());
+    total_size += 2UL * count;
+    for (unsigned int i = 0; i < count; i++) {
+      total_size +=
+        ::google::protobuf::internal::WireFormatLite::MessageSize(
+          this->buildings(static_cast<int>(i)));
+    }
+  }
+
   // bytes name = 6;
   if (this->name().size() > 0) {
     total_size += 1 +
@@ -18251,13 +16872,6 @@ size_t AckSearchOppnent::ByteSizeLong() const {
     total_size += 2 +
       ::google::protobuf::internal::WireFormatLite::MessageSize(
         *hero_pos3_);
-  }
-
-  // .NFMsg.AckMiningTitle title = 30;
-  if (this->has_title()) {
-    total_size += 2 +
-      ::google::protobuf::internal::WireFormatLite::MessageSize(
-        *title_);
   }
 
   // .NFMsg.Ident opponent = 31;
@@ -18350,6 +16964,7 @@ void AckSearchOppnent::MergeFrom(const AckSearchOppnent& from) {
   ::google::protobuf::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
+  buildings_.MergeFrom(from.buildings_);
   if (from.name().size() > 0) {
 
     name_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.name_);
@@ -18387,9 +17002,6 @@ void AckSearchOppnent::MergeFrom(const AckSearchOppnent& from) {
   }
   if (from.has_hero_pos3()) {
     mutable_hero_pos3()->::NFMsg::Vector3::MergeFrom(from.hero_pos3());
-  }
-  if (from.has_title()) {
-    mutable_title()->::NFMsg::AckMiningTitle::MergeFrom(from.title());
   }
   if (from.has_opponent()) {
     mutable_opponent()->::NFMsg::Ident::MergeFrom(from.opponent());
@@ -18444,6 +17056,7 @@ void AckSearchOppnent::Swap(AckSearchOppnent* other) {
 }
 void AckSearchOppnent::InternalSwap(AckSearchOppnent* other) {
   using std::swap;
+  CastToBase(&buildings_)->InternalSwap(CastToBase(&other->buildings_));
   name_.Swap(&other->name_, &::google::protobuf::internal::GetEmptyStringAlreadyInited(),
     GetArenaNoVirtual());
   head_.Swap(&other->head_, &::google::protobuf::internal::GetEmptyStringAlreadyInited(),
@@ -18460,7 +17073,6 @@ void AckSearchOppnent::InternalSwap(AckSearchOppnent* other) {
   swap(hero_pos1_, other->hero_pos1_);
   swap(hero_pos2_, other->hero_pos2_);
   swap(hero_pos3_, other->hero_pos3_);
-  swap(title_, other->title_);
   swap(opponent_, other->opponent_);
   swap(scene_id_, other->scene_id_);
   swap(gold_, other->gold_);
@@ -21735,6 +20347,9 @@ template<> GOOGLE_PROTOBUF_ATTRIBUTE_NOINLINE ::NFMsg::ReqSceneBuildings* Arena:
 template<> GOOGLE_PROTOBUF_ATTRIBUTE_NOINLINE ::NFMsg::AckSceneBuildings* Arena::CreateMaybeMessage< ::NFMsg::AckSceneBuildings >(Arena* arena) {
   return Arena::CreateInternal< ::NFMsg::AckSceneBuildings >(arena);
 }
+template<> GOOGLE_PROTOBUF_ATTRIBUTE_NOINLINE ::NFMsg::ReqStoreSceneBuildings* Arena::CreateMaybeMessage< ::NFMsg::ReqStoreSceneBuildings >(Arena* arena) {
+  return Arena::CreateInternal< ::NFMsg::ReqStoreSceneBuildings >(arena);
+}
 template<> GOOGLE_PROTOBUF_ATTRIBUTE_NOINLINE ::NFMsg::ReqAckJoinActivity* Arena::CreateMaybeMessage< ::NFMsg::ReqAckJoinActivity >(Arena* arena) {
   return Arena::CreateInternal< ::NFMsg::ReqAckJoinActivity >(arena);
 }
@@ -21773,21 +20388,6 @@ template<> GOOGLE_PROTOBUF_ATTRIBUTE_NOINLINE ::NFMsg::ReqBuyItemFromShop* Arena
 }
 template<> GOOGLE_PROTOBUF_ATTRIBUTE_NOINLINE ::NFMsg::ReqAddGambleValue* Arena::CreateMaybeMessage< ::NFMsg::ReqAddGambleValue >(Arena* arena) {
   return Arena::CreateInternal< ::NFMsg::ReqAddGambleValue >(arena);
-}
-template<> GOOGLE_PROTOBUF_ATTRIBUTE_NOINLINE ::NFMsg::ReqMiningTitle* Arena::CreateMaybeMessage< ::NFMsg::ReqMiningTitle >(Arena* arena) {
-  return Arena::CreateInternal< ::NFMsg::ReqMiningTitle >(arena);
-}
-template<> GOOGLE_PROTOBUF_ATTRIBUTE_NOINLINE ::NFMsg::TileState* Arena::CreateMaybeMessage< ::NFMsg::TileState >(Arena* arena) {
-  return Arena::CreateInternal< ::NFMsg::TileState >(arena);
-}
-template<> GOOGLE_PROTOBUF_ATTRIBUTE_NOINLINE ::NFMsg::TileBuilding* Arena::CreateMaybeMessage< ::NFMsg::TileBuilding >(Arena* arena) {
-  return Arena::CreateInternal< ::NFMsg::TileBuilding >(arena);
-}
-template<> GOOGLE_PROTOBUF_ATTRIBUTE_NOINLINE ::NFMsg::TileNPC* Arena::CreateMaybeMessage< ::NFMsg::TileNPC >(Arena* arena) {
-  return Arena::CreateInternal< ::NFMsg::TileNPC >(arena);
-}
-template<> GOOGLE_PROTOBUF_ATTRIBUTE_NOINLINE ::NFMsg::AckMiningTitle* Arena::CreateMaybeMessage< ::NFMsg::AckMiningTitle >(Arena* arena) {
-  return Arena::CreateInternal< ::NFMsg::AckMiningTitle >(arena);
 }
 template<> GOOGLE_PROTOBUF_ATTRIBUTE_NOINLINE ::NFMsg::ReqSearchOppnent* Arena::CreateMaybeMessage< ::NFMsg::ReqSearchOppnent >(Arena* arena) {
   return Arena::CreateInternal< ::NFMsg::ReqSearchOppnent >(arena);

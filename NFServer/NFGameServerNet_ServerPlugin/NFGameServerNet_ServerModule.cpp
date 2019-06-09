@@ -258,7 +258,16 @@ void NFGameServerNet_ServerModule::OnClientEnterGameProcess(const NFSOCK nSockIn
 		return;
 	}
 
-	m_pSceneModule->RequestEnterScene(pObject->Self(), nSceneID, 1, 0, NFDataList());
+	const NFVector3& pos = pObject->GetPropertyVector3(NFrame::IObject::Position());
+	if (!pos.IsZero())
+	{
+		m_pSceneModule->RequestEnterScene(pObject->Self(), nSceneID, 1, 0, pos, NFDataList());
+	}
+	else
+	{
+		const NFVector3& pos = m_pSceneModule->GetRelivePosition(nSceneID, 0);
+		m_pSceneModule->RequestEnterScene(pObject->Self(), nSceneID, 1, 0, pos, NFDataList());
+	}
 }
 
 void NFGameServerNet_ServerModule::OnClientLeaveGameProcess(const NFSOCK nSockIndex, const int nMsgID, const char *msg,
@@ -356,9 +365,10 @@ void NFGameServerNet_ServerModule::OnClientEnterGameFinishProcess(const NFSOCK n
 
 void NFGameServerNet_ServerModule::OnClientSwapSceneProcess(const NFSOCK nSockIndex, const int nMsgID, const char *msg, const uint32_t nLen)
 {
-	CLIENT_MSG_PROCESS( nMsgID, msg, nLen, NFMsg::ReqAckSwapScene)
+	CLIENT_MSG_PROCESS(nMsgID, msg, nLen, NFMsg::ReqAckSwapScene)
 
-	m_pSceneProcessModule->RequestEnterScene(pObject->Self(), xMsg.scene_id(), 0, NFDataList());
+	const NFVector3& pos = m_pSceneModule->GetRelivePosition(xMsg.scene_id(), 0);
+	m_pSceneProcessModule->RequestEnterScene(pObject->Self(), xMsg.scene_id(), 0, pos, NFDataList());
 }
 
 void NFGameServerNet_ServerModule::OnClientReqMoveProcess(const NFSOCK nSockIndex, const int nMsgID, const char *msg,  const uint32_t nLen)

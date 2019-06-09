@@ -598,7 +598,8 @@ namespace NFrame
 		static const std::string& HeroStar1(){ static std::string x = "HeroStar1"; return x; };// int
 		static const std::string& HeroStar2(){ static std::string x = "HeroStar2"; return x; };// int
 		static const std::string& HeroStar3(){ static std::string x = "HeroStar3"; return x; };// int
-		static const std::string& HomeCellID(){ static std::string x = "HomeCellID"; return x; };// string
+		static const std::string& HomeCellPos(){ static std::string x = "HomeCellPos"; return x; };// vector3
+		static const std::string& HomeSceneID(){ static std::string x = "HomeSceneID"; return x; };// int
 		static const std::string& Item1(){ static std::string x = "Item1"; return x; };// string
 		static const std::string& Item1Count(){ static std::string x = "Item1Count"; return x; };// int
 		static const std::string& Item1UsedCount(){ static std::string x = "Item1UsedCount"; return x; };// int
@@ -971,23 +972,16 @@ namespace NFrame
 		static const std::string& SceneID(){ static std::string x = "SceneID"; return x; };// int
 		// Property
 		static const std::string& ActorID(){ static std::string x = "ActorID"; return x; };// int
-		static const std::string& BossSoundList(){ static std::string x = "BossSoundList"; return x; };// string
-		static const std::string& CamOffestPos(){ static std::string x = "CamOffestPos"; return x; };// string
-		static const std::string& CamOffestRot(){ static std::string x = "CamOffestRot"; return x; };// string
 		static const std::string& FilePath(){ static std::string x = "FilePath"; return x; };// string
-		static const std::string& LeftBot(){ static std::string x = "LeftBot"; return x; };// vector2
 		static const std::string& LoadingUI(){ static std::string x = "LoadingUI"; return x; };// string
 		static const std::string& MaxGroup(){ static std::string x = "MaxGroup"; return x; };// int
 		static const std::string& MaxGroupPlayers(){ static std::string x = "MaxGroupPlayers"; return x; };// int
 		static const std::string& NavigationResPath(){ static std::string x = "NavigationResPath"; return x; };// string
 		static const std::string& RelivePos(){ static std::string x = "RelivePos"; return x; };// string
 		static const std::string& ResPath(){ static std::string x = "ResPath"; return x; };// string
-		static const std::string& RightTop(){ static std::string x = "RightTop"; return x; };// vector2
 		static const std::string& SceneName(){ static std::string x = "SceneName"; return x; };// string
 		static const std::string& SceneShowName(){ static std::string x = "SceneShowName"; return x; };// string
 		static const std::string& SoundList(){ static std::string x = "SoundList"; return x; };// string
-		static const std::string& TagPos(){ static std::string x = "TagPos"; return x; };// string
-		static const std::string& Tile(){ static std::string x = "Tile"; return x; };// int
 		static const std::string& Type(){ static std::string x = "Type"; return x; };// int
 		static const std::string& Width(){ static std::string x = "Width"; return x; };// int
 		// Record

@@ -258,6 +258,8 @@ message ReqAddSceneBuilding
 	bytes config_id = 4;
 	int32 scene_id = 5;
 	bytes master_name = 6;
+	int32 is_home_scene = 7;//is home or clan scene
+	int32 is_building = 8;//building or tree
 }
 
 message ReqSceneBuildings
@@ -270,6 +272,14 @@ message AckSceneBuildings
 {
 	repeated ReqAddSceneBuilding buildings = 1;
 }
+
+message ReqStoreSceneBuildings
+{
+	Ident guid = 1;
+	int32 home_scene_id = 2;
+	repeated ReqAddSceneBuilding buildings = 3;
+}
+
 ///////////////战斗/////////////////////////////////////////////////////////////////////////////////////
 
 message ReqAckJoinActivity
@@ -379,46 +389,6 @@ message ReqAddGambleValue
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-//EGEC_REQ_MINING_TITLE							= 1600;		 // 挖矿
-message ReqMiningTitle
-{	
-	int32		x				= 1;//
-	int32		y				= 2;//
-	int32		opr 			= 3;//
-}
-
-message TileState
-{
-	int32		x				= 1;//
-	int32		y				= 2;//
-	int32		opr 			= 3;//0:rem;1:add
-}
-
-message TileBuilding
-{
-	int32		x				= 1;//
-	int32		y				= 2;//
-	bytes		configID 		= 3;
-	Ident		guid 			= 4;
-	
-}
-
-message TileNPC
-{
-	int32		x				= 1;//
-	int32		y				= 2;//
-	bytes		configID 		= 3;//
-	Ident		guid 			= 4;//
-}
-
-//EGEC_ACK_MINING_TITLE
-message AckMiningTitle
-{	
-	repeated TileState		tile			= 1;//
-	repeated TileBuilding	building		= 2;//
-	repeated TileNPC		npc				= 3;//
-}
-
 //EGMI_REQ_SEARCH_OPPNENT
 message ReqSearchOppnent
 {
@@ -435,6 +405,7 @@ message AckSearchOppnent
 	int32 cup = 5;
 	bytes name = 6;
 	bytes head = 7;
+	
 	bytes hero_cnf1 = 8;
 	int32 hero_star1 = 9;
 	bytes hero_cnf2 = 10;
@@ -446,12 +417,11 @@ message AckSearchOppnent
 	Ident hero_id2 = 21;
 	Ident hero_id3 = 22;
 	
-	
 	Vector3 hero_pos1 = 23;
 	Vector3 hero_pos2 = 24;
 	Vector3 hero_pos3 = 25;
 	
-	AckMiningTitle title = 30;
+	repeated ReqAddSceneBuilding buildings = 30;
     Ident opponent = 31;
 }
 

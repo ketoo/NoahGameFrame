@@ -30,22 +30,13 @@
 #include <iostream>
 #include "NFIModule.h"
 
-enum E_SCENE_TYPE
-{
-	SCENE_TYPE_NORMAL,
-	SCENE_TYPE_SINGLE_CLONE_SCENE,
-	SCENE_TYPE_MULTI_CLONE_SCENE,
-	SCENE_TYPE_Clan,
-	SCENE_TYPE_ERROR,
-};
-
 class NFISceneProcessModule
     : public NFIModule
 {
-
 public:
-	virtual bool RequestEnterScene(const NFGUID & self, const int nSceneID, const int nType, const NFDataList & argList) = 0;
-	virtual bool RequestEnterScene(const NFGUID& self, const int nSceneID, const int nGrupID, const int nType, const NFDataList& argList) = 0;
+
+	virtual bool RequestEnterScene(const NFGUID & self, const int nSceneID, const int nType, const NFVector3& pos, const NFDataList & argList) = 0;
+	virtual bool RequestEnterScene(const NFGUID& self, const int nSceneID, const int nGrupID, const int nType, const NFVector3& pos, const NFDataList& argList) = 0;
 };
 
 #endif

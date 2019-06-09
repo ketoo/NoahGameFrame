@@ -47,6 +47,8 @@ bool NFWorldPropsModule::AfterInit()
 	if (!m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_REQ_ADD_BUILDING, this, &NFWorldPropsModule::OnReqAddBuildingProcess)) { return false; }
 	if (!m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_REQ_ACK_BUILDING_LIST, this, &NFWorldPropsModule::OnReqBuildingsProcess)) { return false; }
 
+	if (!m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_REQ_STORE_BUILDING_LIST, this, &NFWorldPropsModule::OnReqStoreBuildingsProcess)) { return false; }
+
 	return true;
 }
 
@@ -60,32 +62,46 @@ bool NFWorldPropsModule::Execute()
 	return true;
 }
 
+void NFWorldPropsModule::OnReqStoreBuildingsProcess(const NFSOCK nSockIndex, const int nMsgID, const char * msg, const uint32_t nLen)
+{
+	CLIENT_MSG_PROCESS_NO_OBJECT(nMsgID, msg, nLen, NFMsg::ReqStoreSceneBuildings);
+
+	std::string data;
+	if (xMsg.SerializeToString(&data))
+	{
+		m_pPlayerRedisModule->SavePlayerTile(xMsg.home_scene_id(), NFINetModule::PBToNF(xMsg.guid()), data);
+	}
+}
+
 void NFWorldPropsModule::OnReqAddBuildingProcess(const NFSOCK nSockIndex, const int nMsgID, const char * msg, const uint32_t nLen)
 {
 	CLIENT_MSG_PROCESS_NO_OBJECT(nMsgID, msg, nLen, NFMsg::ReqAddSceneBuilding);
 
-	//store it by (position.x / cellWidth=100, position.z / cellWidth=100)
-	NFGUID posCell(xMsg.pos().x() / 100, xMsg.pos().z() / 100);
-	const std::string& strCellIDSKey = m_pCommonRedisModule->GetCellCacheKey(posCell.ToString());
-	const std::string& strSceneKey = m_pCommonRedisModule->GetSceneCacheKey(xMsg.scene_id());
-
-	NF_SHARE_PTR<NFIRedisClient> xRedisClient = m_pNoSqlModule->GetDriverBySuit(strSceneKey);
-	if (xRedisClient)
+	if (!xMsg.is_home_scene())
 	{
-		NFGUID id = NFINetModule::PBToNF(xMsg.guid());
-		if (!id.IsNull())
+		//store it by (position.x / cellWidth=100, position.z / cellWidth=100)
+		NFGUID posCell(xMsg.pos().x() / 100, xMsg.pos().z() / 100);
+		const std::string& strCellIDSKey = m_pCommonRedisModule->GetCellCacheKey(posCell.ToString());
+		const std::string& strSceneKey = m_pCommonRedisModule->GetSceneCacheKey(xMsg.scene_id());
+
+		NF_SHARE_PTR<NFIRedisClient> xRedisClient = m_pNoSqlModule->GetDriverBySuit(strSceneKey);
+		if (xRedisClient)
 		{
-			std::string value;
-			if (xRedisClient->HGET(strSceneKey, id.ToString(), value))
+			NFGUID id = NFINetModule::PBToNF(xMsg.guid());
+			if (!id.IsNull())
 			{
-				//if we have that building in the database that means the player wants to move the building
-				//we would delete the id from the old hashmap
-				xRedisClient->HDEL(value, id.ToString());
+				std::string value;
+				if (xRedisClient->HGET(strSceneKey, id.ToString(), value))
+				{
+					//if we have that building in the database that means the player wants to move the building
+					//we would delete the id from the old hashmap
+					xRedisClient->HDEL(value, id.ToString());
+				}
+
+				xRedisClient->HSET(strSceneKey, id.ToString(), strSceneKey + "_" + strCellIDSKey);
+
+				xRedisClient->HSET(strSceneKey + "_" + strCellIDSKey, id.ToString(), xMsg.SerializeAsString());
 			}
-
-			xRedisClient->HSET(strSceneKey, id.ToString(), strSceneKey + "_" + strCellIDSKey);
-
-			xRedisClient->HSET(strSceneKey + "_" + strCellIDSKey, id.ToString(), xMsg.SerializeAsString());
 		}
 	}
 }

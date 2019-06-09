@@ -41,7 +41,7 @@ namespace protobuf_NFMsgShare_2eproto {
 struct LIBPROTOC_EXPORT TableStruct {
   static const ::google::protobuf::internal::ParseTableField entries[];
   static const ::google::protobuf::internal::AuxillaryParseTableField aux[];
-  static const ::google::protobuf::internal::ParseTable schema[57];
+  static const ::google::protobuf::internal::ParseTable schema[53];
   static const ::google::protobuf::internal::FieldMetadata field_metadata[];
   static const ::google::protobuf::internal::SerializationTable serialization_table[];
   static const ::google::protobuf::uint32 offsets[];
@@ -55,9 +55,6 @@ LIBPROTOC_EXPORT extern AckCreatePVPEctypeDefaultTypeInternal _AckCreatePVPEctyp
 class AckEndBattle;
 class AckEndBattleDefaultTypeInternal;
 LIBPROTOC_EXPORT extern AckEndBattleDefaultTypeInternal _AckEndBattle_default_instance_;
-class AckMiningTitle;
-class AckMiningTitleDefaultTypeInternal;
-LIBPROTOC_EXPORT extern AckMiningTitleDefaultTypeInternal _AckMiningTitle_default_instance_;
 class AckPVPApplyMatch;
 class AckPVPApplyMatchDefaultTypeInternal;
 LIBPROTOC_EXPORT extern AckPVPApplyMatchDefaultTypeInternal _AckPVPApplyMatch_default_instance_;
@@ -181,9 +178,6 @@ LIBPROTOC_EXPORT extern ReqHeartBeatDefaultTypeInternal _ReqHeartBeat_default_in
 class ReqLeaveGameServer;
 class ReqLeaveGameServerDefaultTypeInternal;
 LIBPROTOC_EXPORT extern ReqLeaveGameServerDefaultTypeInternal _ReqLeaveGameServer_default_instance_;
-class ReqMiningTitle;
-class ReqMiningTitleDefaultTypeInternal;
-LIBPROTOC_EXPORT extern ReqMiningTitleDefaultTypeInternal _ReqMiningTitle_default_instance_;
 class ReqPVPApplyMatch;
 class ReqPVPApplyMatchDefaultTypeInternal;
 LIBPROTOC_EXPORT extern ReqPVPApplyMatchDefaultTypeInternal _ReqPVPApplyMatch_default_instance_;
@@ -205,27 +199,20 @@ LIBPROTOC_EXPORT extern ReqSendMailDefaultTypeInternal _ReqSendMail_default_inst
 class ReqSetFightHero;
 class ReqSetFightHeroDefaultTypeInternal;
 LIBPROTOC_EXPORT extern ReqSetFightHeroDefaultTypeInternal _ReqSetFightHero_default_instance_;
+class ReqStoreSceneBuildings;
+class ReqStoreSceneBuildingsDefaultTypeInternal;
+LIBPROTOC_EXPORT extern ReqStoreSceneBuildingsDefaultTypeInternal _ReqStoreSceneBuildings_default_instance_;
 class ReqSwitchFightHero;
 class ReqSwitchFightHeroDefaultTypeInternal;
 LIBPROTOC_EXPORT extern ReqSwitchFightHeroDefaultTypeInternal _ReqSwitchFightHero_default_instance_;
 class ReqSwitchServer;
 class ReqSwitchServerDefaultTypeInternal;
 LIBPROTOC_EXPORT extern ReqSwitchServerDefaultTypeInternal _ReqSwitchServer_default_instance_;
-class TileBuilding;
-class TileBuildingDefaultTypeInternal;
-LIBPROTOC_EXPORT extern TileBuildingDefaultTypeInternal _TileBuilding_default_instance_;
-class TileNPC;
-class TileNPCDefaultTypeInternal;
-LIBPROTOC_EXPORT extern TileNPCDefaultTypeInternal _TileNPC_default_instance_;
-class TileState;
-class TileStateDefaultTypeInternal;
-LIBPROTOC_EXPORT extern TileStateDefaultTypeInternal _TileState_default_instance_;
 }  // namespace NFMsg
 namespace google {
 namespace protobuf {
 template<> LIBPROTOC_EXPORT ::NFMsg::AckCreatePVPEctype* Arena::CreateMaybeMessage<::NFMsg::AckCreatePVPEctype>(Arena*);
 template<> LIBPROTOC_EXPORT ::NFMsg::AckEndBattle* Arena::CreateMaybeMessage<::NFMsg::AckEndBattle>(Arena*);
-template<> LIBPROTOC_EXPORT ::NFMsg::AckMiningTitle* Arena::CreateMaybeMessage<::NFMsg::AckMiningTitle>(Arena*);
 template<> LIBPROTOC_EXPORT ::NFMsg::AckPVPApplyMatch* Arena::CreateMaybeMessage<::NFMsg::AckPVPApplyMatch>(Arena*);
 template<> LIBPROTOC_EXPORT ::NFMsg::AckPlayerEntryList* Arena::CreateMaybeMessage<::NFMsg::AckPlayerEntryList>(Arena*);
 template<> LIBPROTOC_EXPORT ::NFMsg::AckPlayerLeaveList* Arena::CreateMaybeMessage<::NFMsg::AckPlayerLeaveList>(Arena*);
@@ -267,7 +254,6 @@ template<> LIBPROTOC_EXPORT ::NFMsg::ReqEnterClanEctype* Arena::CreateMaybeMessa
 template<> LIBPROTOC_EXPORT ::NFMsg::ReqEnterGameServer* Arena::CreateMaybeMessage<::NFMsg::ReqEnterGameServer>(Arena*);
 template<> LIBPROTOC_EXPORT ::NFMsg::ReqHeartBeat* Arena::CreateMaybeMessage<::NFMsg::ReqHeartBeat>(Arena*);
 template<> LIBPROTOC_EXPORT ::NFMsg::ReqLeaveGameServer* Arena::CreateMaybeMessage<::NFMsg::ReqLeaveGameServer>(Arena*);
-template<> LIBPROTOC_EXPORT ::NFMsg::ReqMiningTitle* Arena::CreateMaybeMessage<::NFMsg::ReqMiningTitle>(Arena*);
 template<> LIBPROTOC_EXPORT ::NFMsg::ReqPVPApplyMatch* Arena::CreateMaybeMessage<::NFMsg::ReqPVPApplyMatch>(Arena*);
 template<> LIBPROTOC_EXPORT ::NFMsg::ReqPickDropItem* Arena::CreateMaybeMessage<::NFMsg::ReqPickDropItem>(Arena*);
 template<> LIBPROTOC_EXPORT ::NFMsg::ReqSceneBuildings* Arena::CreateMaybeMessage<::NFMsg::ReqSceneBuildings>(Arena*);
@@ -275,11 +261,9 @@ template<> LIBPROTOC_EXPORT ::NFMsg::ReqSearchClan* Arena::CreateMaybeMessage<::
 template<> LIBPROTOC_EXPORT ::NFMsg::ReqSearchOppnent* Arena::CreateMaybeMessage<::NFMsg::ReqSearchOppnent>(Arena*);
 template<> LIBPROTOC_EXPORT ::NFMsg::ReqSendMail* Arena::CreateMaybeMessage<::NFMsg::ReqSendMail>(Arena*);
 template<> LIBPROTOC_EXPORT ::NFMsg::ReqSetFightHero* Arena::CreateMaybeMessage<::NFMsg::ReqSetFightHero>(Arena*);
+template<> LIBPROTOC_EXPORT ::NFMsg::ReqStoreSceneBuildings* Arena::CreateMaybeMessage<::NFMsg::ReqStoreSceneBuildings>(Arena*);
 template<> LIBPROTOC_EXPORT ::NFMsg::ReqSwitchFightHero* Arena::CreateMaybeMessage<::NFMsg::ReqSwitchFightHero>(Arena*);
 template<> LIBPROTOC_EXPORT ::NFMsg::ReqSwitchServer* Arena::CreateMaybeMessage<::NFMsg::ReqSwitchServer>(Arena*);
-template<> LIBPROTOC_EXPORT ::NFMsg::TileBuilding* Arena::CreateMaybeMessage<::NFMsg::TileBuilding>(Arena*);
-template<> LIBPROTOC_EXPORT ::NFMsg::TileNPC* Arena::CreateMaybeMessage<::NFMsg::TileNPC>(Arena*);
-template<> LIBPROTOC_EXPORT ::NFMsg::TileState* Arena::CreateMaybeMessage<::NFMsg::TileState>(Arena*);
 }  // namespace protobuf
 }  // namespace google
 namespace NFMsg {
@@ -4157,6 +4141,18 @@ class LIBPROTOC_EXPORT ReqAddSceneBuilding : public ::google::protobuf::Message 
   ::google::protobuf::int32 scene_id() const;
   void set_scene_id(::google::protobuf::int32 value);
 
+  // int32 is_home_scene = 7;
+  void clear_is_home_scene();
+  static const int kIsHomeSceneFieldNumber = 7;
+  ::google::protobuf::int32 is_home_scene() const;
+  void set_is_home_scene(::google::protobuf::int32 value);
+
+  // int32 is_building = 8;
+  void clear_is_building();
+  static const int kIsBuildingFieldNumber = 8;
+  ::google::protobuf::int32 is_building() const;
+  void set_is_building(::google::protobuf::int32 value);
+
   // @@protoc_insertion_point(class_scope:NFMsg.ReqAddSceneBuilding)
  private:
 
@@ -4167,6 +4163,8 @@ class LIBPROTOC_EXPORT ReqAddSceneBuilding : public ::google::protobuf::Message 
   ::NFMsg::Ident* guid_;
   ::NFMsg::Ident* master_;
   ::google::protobuf::int32 scene_id_;
+  ::google::protobuf::int32 is_home_scene_;
+  ::google::protobuf::int32 is_building_;
   mutable ::google::protobuf::internal::CachedSize _cached_size_;
   friend struct ::protobuf_NFMsgShare_2eproto::TableStruct;
 };
@@ -4397,6 +4395,135 @@ class LIBPROTOC_EXPORT AckSceneBuildings : public ::google::protobuf::Message /*
 };
 // -------------------------------------------------------------------
 
+class LIBPROTOC_EXPORT ReqStoreSceneBuildings : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:NFMsg.ReqStoreSceneBuildings) */ {
+ public:
+  ReqStoreSceneBuildings();
+  virtual ~ReqStoreSceneBuildings();
+
+  ReqStoreSceneBuildings(const ReqStoreSceneBuildings& from);
+
+  inline ReqStoreSceneBuildings& operator=(const ReqStoreSceneBuildings& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  #if LANG_CXX11
+  ReqStoreSceneBuildings(ReqStoreSceneBuildings&& from) noexcept
+    : ReqStoreSceneBuildings() {
+    *this = ::std::move(from);
+  }
+
+  inline ReqStoreSceneBuildings& operator=(ReqStoreSceneBuildings&& from) noexcept {
+    if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
+      if (this != &from) InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+  #endif
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const ReqStoreSceneBuildings& default_instance();
+
+  static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
+  static inline const ReqStoreSceneBuildings* internal_default_instance() {
+    return reinterpret_cast<const ReqStoreSceneBuildings*>(
+               &_ReqStoreSceneBuildings_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages =
+    29;
+
+  void Swap(ReqStoreSceneBuildings* other);
+  friend void swap(ReqStoreSceneBuildings& a, ReqStoreSceneBuildings& b) {
+    a.Swap(&b);
+  }
+
+  // implements Message ----------------------------------------------
+
+  inline ReqStoreSceneBuildings* New() const final {
+    return CreateMaybeMessage<ReqStoreSceneBuildings>(NULL);
+  }
+
+  ReqStoreSceneBuildings* New(::google::protobuf::Arena* arena) const final {
+    return CreateMaybeMessage<ReqStoreSceneBuildings>(arena);
+  }
+  void CopyFrom(const ::google::protobuf::Message& from) final;
+  void MergeFrom(const ::google::protobuf::Message& from) final;
+  void CopyFrom(const ReqStoreSceneBuildings& from);
+  void MergeFrom(const ReqStoreSceneBuildings& from);
+  void Clear() final;
+  bool IsInitialized() const final;
+
+  size_t ByteSizeLong() const final;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input) final;
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const final;
+  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
+      bool deterministic, ::google::protobuf::uint8* target) const final;
+  int GetCachedSize() const final { return _cached_size_.Get(); }
+
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const final;
+  void InternalSwap(ReqStoreSceneBuildings* other);
+  private:
+  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
+    return NULL;
+  }
+  inline void* MaybeArenaPtr() const {
+    return NULL;
+  }
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const final;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // repeated .NFMsg.ReqAddSceneBuilding buildings = 3;
+  int buildings_size() const;
+  void clear_buildings();
+  static const int kBuildingsFieldNumber = 3;
+  ::NFMsg::ReqAddSceneBuilding* mutable_buildings(int index);
+  ::google::protobuf::RepeatedPtrField< ::NFMsg::ReqAddSceneBuilding >*
+      mutable_buildings();
+  const ::NFMsg::ReqAddSceneBuilding& buildings(int index) const;
+  ::NFMsg::ReqAddSceneBuilding* add_buildings();
+  const ::google::protobuf::RepeatedPtrField< ::NFMsg::ReqAddSceneBuilding >&
+      buildings() const;
+
+  // .NFMsg.Ident guid = 1;
+  bool has_guid() const;
+  void clear_guid();
+  static const int kGuidFieldNumber = 1;
+  private:
+  const ::NFMsg::Ident& _internal_guid() const;
+  public:
+  const ::NFMsg::Ident& guid() const;
+  ::NFMsg::Ident* release_guid();
+  ::NFMsg::Ident* mutable_guid();
+  void set_allocated_guid(::NFMsg::Ident* guid);
+
+  // int32 home_scene_id = 2;
+  void clear_home_scene_id();
+  static const int kHomeSceneIdFieldNumber = 2;
+  ::google::protobuf::int32 home_scene_id() const;
+  void set_home_scene_id(::google::protobuf::int32 value);
+
+  // @@protoc_insertion_point(class_scope:NFMsg.ReqStoreSceneBuildings)
+ private:
+
+  ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
+  ::google::protobuf::RepeatedPtrField< ::NFMsg::ReqAddSceneBuilding > buildings_;
+  ::NFMsg::Ident* guid_;
+  ::google::protobuf::int32 home_scene_id_;
+  mutable ::google::protobuf::internal::CachedSize _cached_size_;
+  friend struct ::protobuf_NFMsgShare_2eproto::TableStruct;
+};
+// -------------------------------------------------------------------
+
 class LIBPROTOC_EXPORT ReqAckJoinActivity : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:NFMsg.ReqAckJoinActivity) */ {
  public:
   ReqAckJoinActivity();
@@ -4432,7 +4559,7 @@ class LIBPROTOC_EXPORT ReqAckJoinActivity : public ::google::protobuf::Message /
                &_ReqAckJoinActivity_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    29;
+    30;
 
   void Swap(ReqAckJoinActivity* other);
   friend void swap(ReqAckJoinActivity& a, ReqAckJoinActivity& b) {
@@ -4590,7 +4717,7 @@ class LIBPROTOC_EXPORT ReqAckCreateClan : public ::google::protobuf::Message /* 
                &_ReqAckCreateClan_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    30;
+    31;
 
   void Swap(ReqAckCreateClan* other);
   friend void swap(ReqAckCreateClan& a, ReqAckCreateClan& b) {
@@ -4714,7 +4841,7 @@ class LIBPROTOC_EXPORT ReqSearchClan : public ::google::protobuf::Message /* @@p
                &_ReqSearchClan_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    31;
+    32;
 
   void Swap(ReqSearchClan* other);
   friend void swap(ReqSearchClan& a, ReqSearchClan& b) {
@@ -4825,7 +4952,7 @@ class LIBPROTOC_EXPORT AckSearchClan_SearchClanObject : public ::google::protobu
                &_AckSearchClan_SearchClanObject_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    32;
+    33;
 
   void Swap(AckSearchClan_SearchClanObject* other);
   friend void swap(AckSearchClan_SearchClanObject& a, AckSearchClan_SearchClanObject& b) {
@@ -4992,7 +5119,7 @@ class LIBPROTOC_EXPORT AckSearchClan : public ::google::protobuf::Message /* @@p
                &_AckSearchClan_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    33;
+    34;
 
   void Swap(AckSearchClan* other);
   friend void swap(AckSearchClan& a, AckSearchClan& b) {
@@ -5103,7 +5230,7 @@ class LIBPROTOC_EXPORT ReqAckJoinClan : public ::google::protobuf::Message /* @@
                &_ReqAckJoinClan_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    34;
+    35;
 
   void Swap(ReqAckJoinClan* other);
   friend void swap(ReqAckJoinClan& a, ReqAckJoinClan& b) {
@@ -5227,7 +5354,7 @@ class LIBPROTOC_EXPORT ReqAckLeaveClan : public ::google::protobuf::Message /* @
                &_ReqAckLeaveClan_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    35;
+    36;
 
   void Swap(ReqAckLeaveClan* other);
   friend void swap(ReqAckLeaveClan& a, ReqAckLeaveClan& b) {
@@ -5351,7 +5478,7 @@ class LIBPROTOC_EXPORT ReqAckOprClanMember : public ::google::protobuf::Message 
                &_ReqAckOprClanMember_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    36;
+    37;
 
   void Swap(ReqAckOprClanMember* other);
   friend void swap(ReqAckOprClanMember& a, ReqAckOprClanMember& b) {
@@ -5508,7 +5635,7 @@ class LIBPROTOC_EXPORT ReqEnterClanEctype : public ::google::protobuf::Message /
                &_ReqEnterClanEctype_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    37;
+    38;
 
   void Swap(ReqEnterClanEctype* other);
   friend void swap(ReqEnterClanEctype& a, ReqEnterClanEctype& b) {
@@ -5617,7 +5744,7 @@ class LIBPROTOC_EXPORT ReqSetFightHero : public ::google::protobuf::Message /* @
                &_ReqSetFightHero_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    38;
+    39;
 
   void Swap(ReqSetFightHero* other);
   friend void swap(ReqSetFightHero& a, ReqSetFightHero& b) {
@@ -5733,7 +5860,7 @@ class LIBPROTOC_EXPORT ReqSwitchFightHero : public ::google::protobuf::Message /
                &_ReqSwitchFightHero_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    39;
+    40;
 
   void Swap(ReqSwitchFightHero* other);
   friend void swap(ReqSwitchFightHero& a, ReqSwitchFightHero& b) {
@@ -5842,7 +5969,7 @@ class LIBPROTOC_EXPORT ReqBuyItemFromShop : public ::google::protobuf::Message /
                &_ReqBuyItemFromShop_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    40;
+    41;
 
   void Swap(ReqBuyItemFromShop* other);
   friend void swap(ReqBuyItemFromShop& a, ReqBuyItemFromShop& b) {
@@ -5960,7 +6087,7 @@ class LIBPROTOC_EXPORT ReqAddGambleValue : public ::google::protobuf::Message /*
                &_ReqAddGambleValue_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    41;
+    42;
 
   void Swap(ReqAddGambleValue* other);
   friend void swap(ReqAddGambleValue& a, ReqAddGambleValue& b) {
@@ -6043,651 +6170,6 @@ class LIBPROTOC_EXPORT ReqAddGambleValue : public ::google::protobuf::Message /*
 };
 // -------------------------------------------------------------------
 
-class LIBPROTOC_EXPORT ReqMiningTitle : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:NFMsg.ReqMiningTitle) */ {
- public:
-  ReqMiningTitle();
-  virtual ~ReqMiningTitle();
-
-  ReqMiningTitle(const ReqMiningTitle& from);
-
-  inline ReqMiningTitle& operator=(const ReqMiningTitle& from) {
-    CopyFrom(from);
-    return *this;
-  }
-  #if LANG_CXX11
-  ReqMiningTitle(ReqMiningTitle&& from) noexcept
-    : ReqMiningTitle() {
-    *this = ::std::move(from);
-  }
-
-  inline ReqMiningTitle& operator=(ReqMiningTitle&& from) noexcept {
-    if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
-      if (this != &from) InternalSwap(&from);
-    } else {
-      CopyFrom(from);
-    }
-    return *this;
-  }
-  #endif
-  static const ::google::protobuf::Descriptor* descriptor();
-  static const ReqMiningTitle& default_instance();
-
-  static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
-  static inline const ReqMiningTitle* internal_default_instance() {
-    return reinterpret_cast<const ReqMiningTitle*>(
-               &_ReqMiningTitle_default_instance_);
-  }
-  static constexpr int kIndexInFileMessages =
-    42;
-
-  void Swap(ReqMiningTitle* other);
-  friend void swap(ReqMiningTitle& a, ReqMiningTitle& b) {
-    a.Swap(&b);
-  }
-
-  // implements Message ----------------------------------------------
-
-  inline ReqMiningTitle* New() const final {
-    return CreateMaybeMessage<ReqMiningTitle>(NULL);
-  }
-
-  ReqMiningTitle* New(::google::protobuf::Arena* arena) const final {
-    return CreateMaybeMessage<ReqMiningTitle>(arena);
-  }
-  void CopyFrom(const ::google::protobuf::Message& from) final;
-  void MergeFrom(const ::google::protobuf::Message& from) final;
-  void CopyFrom(const ReqMiningTitle& from);
-  void MergeFrom(const ReqMiningTitle& from);
-  void Clear() final;
-  bool IsInitialized() const final;
-
-  size_t ByteSizeLong() const final;
-  bool MergePartialFromCodedStream(
-      ::google::protobuf::io::CodedInputStream* input) final;
-  void SerializeWithCachedSizes(
-      ::google::protobuf::io::CodedOutputStream* output) const final;
-  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
-      bool deterministic, ::google::protobuf::uint8* target) const final;
-  int GetCachedSize() const final { return _cached_size_.Get(); }
-
-  private:
-  void SharedCtor();
-  void SharedDtor();
-  void SetCachedSize(int size) const final;
-  void InternalSwap(ReqMiningTitle* other);
-  private:
-  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
-    return NULL;
-  }
-  inline void* MaybeArenaPtr() const {
-    return NULL;
-  }
-  public:
-
-  ::google::protobuf::Metadata GetMetadata() const final;
-
-  // nested types ----------------------------------------------------
-
-  // accessors -------------------------------------------------------
-
-  // int32 x = 1;
-  void clear_x();
-  static const int kXFieldNumber = 1;
-  ::google::protobuf::int32 x() const;
-  void set_x(::google::protobuf::int32 value);
-
-  // int32 y = 2;
-  void clear_y();
-  static const int kYFieldNumber = 2;
-  ::google::protobuf::int32 y() const;
-  void set_y(::google::protobuf::int32 value);
-
-  // int32 opr = 3;
-  void clear_opr();
-  static const int kOprFieldNumber = 3;
-  ::google::protobuf::int32 opr() const;
-  void set_opr(::google::protobuf::int32 value);
-
-  // @@protoc_insertion_point(class_scope:NFMsg.ReqMiningTitle)
- private:
-
-  ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
-  ::google::protobuf::int32 x_;
-  ::google::protobuf::int32 y_;
-  ::google::protobuf::int32 opr_;
-  mutable ::google::protobuf::internal::CachedSize _cached_size_;
-  friend struct ::protobuf_NFMsgShare_2eproto::TableStruct;
-};
-// -------------------------------------------------------------------
-
-class LIBPROTOC_EXPORT TileState : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:NFMsg.TileState) */ {
- public:
-  TileState();
-  virtual ~TileState();
-
-  TileState(const TileState& from);
-
-  inline TileState& operator=(const TileState& from) {
-    CopyFrom(from);
-    return *this;
-  }
-  #if LANG_CXX11
-  TileState(TileState&& from) noexcept
-    : TileState() {
-    *this = ::std::move(from);
-  }
-
-  inline TileState& operator=(TileState&& from) noexcept {
-    if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
-      if (this != &from) InternalSwap(&from);
-    } else {
-      CopyFrom(from);
-    }
-    return *this;
-  }
-  #endif
-  static const ::google::protobuf::Descriptor* descriptor();
-  static const TileState& default_instance();
-
-  static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
-  static inline const TileState* internal_default_instance() {
-    return reinterpret_cast<const TileState*>(
-               &_TileState_default_instance_);
-  }
-  static constexpr int kIndexInFileMessages =
-    43;
-
-  void Swap(TileState* other);
-  friend void swap(TileState& a, TileState& b) {
-    a.Swap(&b);
-  }
-
-  // implements Message ----------------------------------------------
-
-  inline TileState* New() const final {
-    return CreateMaybeMessage<TileState>(NULL);
-  }
-
-  TileState* New(::google::protobuf::Arena* arena) const final {
-    return CreateMaybeMessage<TileState>(arena);
-  }
-  void CopyFrom(const ::google::protobuf::Message& from) final;
-  void MergeFrom(const ::google::protobuf::Message& from) final;
-  void CopyFrom(const TileState& from);
-  void MergeFrom(const TileState& from);
-  void Clear() final;
-  bool IsInitialized() const final;
-
-  size_t ByteSizeLong() const final;
-  bool MergePartialFromCodedStream(
-      ::google::protobuf::io::CodedInputStream* input) final;
-  void SerializeWithCachedSizes(
-      ::google::protobuf::io::CodedOutputStream* output) const final;
-  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
-      bool deterministic, ::google::protobuf::uint8* target) const final;
-  int GetCachedSize() const final { return _cached_size_.Get(); }
-
-  private:
-  void SharedCtor();
-  void SharedDtor();
-  void SetCachedSize(int size) const final;
-  void InternalSwap(TileState* other);
-  private:
-  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
-    return NULL;
-  }
-  inline void* MaybeArenaPtr() const {
-    return NULL;
-  }
-  public:
-
-  ::google::protobuf::Metadata GetMetadata() const final;
-
-  // nested types ----------------------------------------------------
-
-  // accessors -------------------------------------------------------
-
-  // int32 x = 1;
-  void clear_x();
-  static const int kXFieldNumber = 1;
-  ::google::protobuf::int32 x() const;
-  void set_x(::google::protobuf::int32 value);
-
-  // int32 y = 2;
-  void clear_y();
-  static const int kYFieldNumber = 2;
-  ::google::protobuf::int32 y() const;
-  void set_y(::google::protobuf::int32 value);
-
-  // int32 opr = 3;
-  void clear_opr();
-  static const int kOprFieldNumber = 3;
-  ::google::protobuf::int32 opr() const;
-  void set_opr(::google::protobuf::int32 value);
-
-  // @@protoc_insertion_point(class_scope:NFMsg.TileState)
- private:
-
-  ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
-  ::google::protobuf::int32 x_;
-  ::google::protobuf::int32 y_;
-  ::google::protobuf::int32 opr_;
-  mutable ::google::protobuf::internal::CachedSize _cached_size_;
-  friend struct ::protobuf_NFMsgShare_2eproto::TableStruct;
-};
-// -------------------------------------------------------------------
-
-class LIBPROTOC_EXPORT TileBuilding : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:NFMsg.TileBuilding) */ {
- public:
-  TileBuilding();
-  virtual ~TileBuilding();
-
-  TileBuilding(const TileBuilding& from);
-
-  inline TileBuilding& operator=(const TileBuilding& from) {
-    CopyFrom(from);
-    return *this;
-  }
-  #if LANG_CXX11
-  TileBuilding(TileBuilding&& from) noexcept
-    : TileBuilding() {
-    *this = ::std::move(from);
-  }
-
-  inline TileBuilding& operator=(TileBuilding&& from) noexcept {
-    if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
-      if (this != &from) InternalSwap(&from);
-    } else {
-      CopyFrom(from);
-    }
-    return *this;
-  }
-  #endif
-  static const ::google::protobuf::Descriptor* descriptor();
-  static const TileBuilding& default_instance();
-
-  static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
-  static inline const TileBuilding* internal_default_instance() {
-    return reinterpret_cast<const TileBuilding*>(
-               &_TileBuilding_default_instance_);
-  }
-  static constexpr int kIndexInFileMessages =
-    44;
-
-  void Swap(TileBuilding* other);
-  friend void swap(TileBuilding& a, TileBuilding& b) {
-    a.Swap(&b);
-  }
-
-  // implements Message ----------------------------------------------
-
-  inline TileBuilding* New() const final {
-    return CreateMaybeMessage<TileBuilding>(NULL);
-  }
-
-  TileBuilding* New(::google::protobuf::Arena* arena) const final {
-    return CreateMaybeMessage<TileBuilding>(arena);
-  }
-  void CopyFrom(const ::google::protobuf::Message& from) final;
-  void MergeFrom(const ::google::protobuf::Message& from) final;
-  void CopyFrom(const TileBuilding& from);
-  void MergeFrom(const TileBuilding& from);
-  void Clear() final;
-  bool IsInitialized() const final;
-
-  size_t ByteSizeLong() const final;
-  bool MergePartialFromCodedStream(
-      ::google::protobuf::io::CodedInputStream* input) final;
-  void SerializeWithCachedSizes(
-      ::google::protobuf::io::CodedOutputStream* output) const final;
-  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
-      bool deterministic, ::google::protobuf::uint8* target) const final;
-  int GetCachedSize() const final { return _cached_size_.Get(); }
-
-  private:
-  void SharedCtor();
-  void SharedDtor();
-  void SetCachedSize(int size) const final;
-  void InternalSwap(TileBuilding* other);
-  private:
-  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
-    return NULL;
-  }
-  inline void* MaybeArenaPtr() const {
-    return NULL;
-  }
-  public:
-
-  ::google::protobuf::Metadata GetMetadata() const final;
-
-  // nested types ----------------------------------------------------
-
-  // accessors -------------------------------------------------------
-
-  // bytes configID = 3;
-  void clear_configid();
-  static const int kConfigIDFieldNumber = 3;
-  const ::std::string& configid() const;
-  void set_configid(const ::std::string& value);
-  #if LANG_CXX11
-  void set_configid(::std::string&& value);
-  #endif
-  void set_configid(const char* value);
-  void set_configid(const void* value, size_t size);
-  ::std::string* mutable_configid();
-  ::std::string* release_configid();
-  void set_allocated_configid(::std::string* configid);
-
-  // .NFMsg.Ident guid = 4;
-  bool has_guid() const;
-  void clear_guid();
-  static const int kGuidFieldNumber = 4;
-  private:
-  const ::NFMsg::Ident& _internal_guid() const;
-  public:
-  const ::NFMsg::Ident& guid() const;
-  ::NFMsg::Ident* release_guid();
-  ::NFMsg::Ident* mutable_guid();
-  void set_allocated_guid(::NFMsg::Ident* guid);
-
-  // int32 x = 1;
-  void clear_x();
-  static const int kXFieldNumber = 1;
-  ::google::protobuf::int32 x() const;
-  void set_x(::google::protobuf::int32 value);
-
-  // int32 y = 2;
-  void clear_y();
-  static const int kYFieldNumber = 2;
-  ::google::protobuf::int32 y() const;
-  void set_y(::google::protobuf::int32 value);
-
-  // @@protoc_insertion_point(class_scope:NFMsg.TileBuilding)
- private:
-
-  ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
-  ::google::protobuf::internal::ArenaStringPtr configid_;
-  ::NFMsg::Ident* guid_;
-  ::google::protobuf::int32 x_;
-  ::google::protobuf::int32 y_;
-  mutable ::google::protobuf::internal::CachedSize _cached_size_;
-  friend struct ::protobuf_NFMsgShare_2eproto::TableStruct;
-};
-// -------------------------------------------------------------------
-
-class LIBPROTOC_EXPORT TileNPC : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:NFMsg.TileNPC) */ {
- public:
-  TileNPC();
-  virtual ~TileNPC();
-
-  TileNPC(const TileNPC& from);
-
-  inline TileNPC& operator=(const TileNPC& from) {
-    CopyFrom(from);
-    return *this;
-  }
-  #if LANG_CXX11
-  TileNPC(TileNPC&& from) noexcept
-    : TileNPC() {
-    *this = ::std::move(from);
-  }
-
-  inline TileNPC& operator=(TileNPC&& from) noexcept {
-    if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
-      if (this != &from) InternalSwap(&from);
-    } else {
-      CopyFrom(from);
-    }
-    return *this;
-  }
-  #endif
-  static const ::google::protobuf::Descriptor* descriptor();
-  static const TileNPC& default_instance();
-
-  static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
-  static inline const TileNPC* internal_default_instance() {
-    return reinterpret_cast<const TileNPC*>(
-               &_TileNPC_default_instance_);
-  }
-  static constexpr int kIndexInFileMessages =
-    45;
-
-  void Swap(TileNPC* other);
-  friend void swap(TileNPC& a, TileNPC& b) {
-    a.Swap(&b);
-  }
-
-  // implements Message ----------------------------------------------
-
-  inline TileNPC* New() const final {
-    return CreateMaybeMessage<TileNPC>(NULL);
-  }
-
-  TileNPC* New(::google::protobuf::Arena* arena) const final {
-    return CreateMaybeMessage<TileNPC>(arena);
-  }
-  void CopyFrom(const ::google::protobuf::Message& from) final;
-  void MergeFrom(const ::google::protobuf::Message& from) final;
-  void CopyFrom(const TileNPC& from);
-  void MergeFrom(const TileNPC& from);
-  void Clear() final;
-  bool IsInitialized() const final;
-
-  size_t ByteSizeLong() const final;
-  bool MergePartialFromCodedStream(
-      ::google::protobuf::io::CodedInputStream* input) final;
-  void SerializeWithCachedSizes(
-      ::google::protobuf::io::CodedOutputStream* output) const final;
-  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
-      bool deterministic, ::google::protobuf::uint8* target) const final;
-  int GetCachedSize() const final { return _cached_size_.Get(); }
-
-  private:
-  void SharedCtor();
-  void SharedDtor();
-  void SetCachedSize(int size) const final;
-  void InternalSwap(TileNPC* other);
-  private:
-  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
-    return NULL;
-  }
-  inline void* MaybeArenaPtr() const {
-    return NULL;
-  }
-  public:
-
-  ::google::protobuf::Metadata GetMetadata() const final;
-
-  // nested types ----------------------------------------------------
-
-  // accessors -------------------------------------------------------
-
-  // bytes configID = 3;
-  void clear_configid();
-  static const int kConfigIDFieldNumber = 3;
-  const ::std::string& configid() const;
-  void set_configid(const ::std::string& value);
-  #if LANG_CXX11
-  void set_configid(::std::string&& value);
-  #endif
-  void set_configid(const char* value);
-  void set_configid(const void* value, size_t size);
-  ::std::string* mutable_configid();
-  ::std::string* release_configid();
-  void set_allocated_configid(::std::string* configid);
-
-  // .NFMsg.Ident guid = 4;
-  bool has_guid() const;
-  void clear_guid();
-  static const int kGuidFieldNumber = 4;
-  private:
-  const ::NFMsg::Ident& _internal_guid() const;
-  public:
-  const ::NFMsg::Ident& guid() const;
-  ::NFMsg::Ident* release_guid();
-  ::NFMsg::Ident* mutable_guid();
-  void set_allocated_guid(::NFMsg::Ident* guid);
-
-  // int32 x = 1;
-  void clear_x();
-  static const int kXFieldNumber = 1;
-  ::google::protobuf::int32 x() const;
-  void set_x(::google::protobuf::int32 value);
-
-  // int32 y = 2;
-  void clear_y();
-  static const int kYFieldNumber = 2;
-  ::google::protobuf::int32 y() const;
-  void set_y(::google::protobuf::int32 value);
-
-  // @@protoc_insertion_point(class_scope:NFMsg.TileNPC)
- private:
-
-  ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
-  ::google::protobuf::internal::ArenaStringPtr configid_;
-  ::NFMsg::Ident* guid_;
-  ::google::protobuf::int32 x_;
-  ::google::protobuf::int32 y_;
-  mutable ::google::protobuf::internal::CachedSize _cached_size_;
-  friend struct ::protobuf_NFMsgShare_2eproto::TableStruct;
-};
-// -------------------------------------------------------------------
-
-class LIBPROTOC_EXPORT AckMiningTitle : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:NFMsg.AckMiningTitle) */ {
- public:
-  AckMiningTitle();
-  virtual ~AckMiningTitle();
-
-  AckMiningTitle(const AckMiningTitle& from);
-
-  inline AckMiningTitle& operator=(const AckMiningTitle& from) {
-    CopyFrom(from);
-    return *this;
-  }
-  #if LANG_CXX11
-  AckMiningTitle(AckMiningTitle&& from) noexcept
-    : AckMiningTitle() {
-    *this = ::std::move(from);
-  }
-
-  inline AckMiningTitle& operator=(AckMiningTitle&& from) noexcept {
-    if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
-      if (this != &from) InternalSwap(&from);
-    } else {
-      CopyFrom(from);
-    }
-    return *this;
-  }
-  #endif
-  static const ::google::protobuf::Descriptor* descriptor();
-  static const AckMiningTitle& default_instance();
-
-  static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
-  static inline const AckMiningTitle* internal_default_instance() {
-    return reinterpret_cast<const AckMiningTitle*>(
-               &_AckMiningTitle_default_instance_);
-  }
-  static constexpr int kIndexInFileMessages =
-    46;
-
-  void Swap(AckMiningTitle* other);
-  friend void swap(AckMiningTitle& a, AckMiningTitle& b) {
-    a.Swap(&b);
-  }
-
-  // implements Message ----------------------------------------------
-
-  inline AckMiningTitle* New() const final {
-    return CreateMaybeMessage<AckMiningTitle>(NULL);
-  }
-
-  AckMiningTitle* New(::google::protobuf::Arena* arena) const final {
-    return CreateMaybeMessage<AckMiningTitle>(arena);
-  }
-  void CopyFrom(const ::google::protobuf::Message& from) final;
-  void MergeFrom(const ::google::protobuf::Message& from) final;
-  void CopyFrom(const AckMiningTitle& from);
-  void MergeFrom(const AckMiningTitle& from);
-  void Clear() final;
-  bool IsInitialized() const final;
-
-  size_t ByteSizeLong() const final;
-  bool MergePartialFromCodedStream(
-      ::google::protobuf::io::CodedInputStream* input) final;
-  void SerializeWithCachedSizes(
-      ::google::protobuf::io::CodedOutputStream* output) const final;
-  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
-      bool deterministic, ::google::protobuf::uint8* target) const final;
-  int GetCachedSize() const final { return _cached_size_.Get(); }
-
-  private:
-  void SharedCtor();
-  void SharedDtor();
-  void SetCachedSize(int size) const final;
-  void InternalSwap(AckMiningTitle* other);
-  private:
-  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
-    return NULL;
-  }
-  inline void* MaybeArenaPtr() const {
-    return NULL;
-  }
-  public:
-
-  ::google::protobuf::Metadata GetMetadata() const final;
-
-  // nested types ----------------------------------------------------
-
-  // accessors -------------------------------------------------------
-
-  // repeated .NFMsg.TileState tile = 1;
-  int tile_size() const;
-  void clear_tile();
-  static const int kTileFieldNumber = 1;
-  ::NFMsg::TileState* mutable_tile(int index);
-  ::google::protobuf::RepeatedPtrField< ::NFMsg::TileState >*
-      mutable_tile();
-  const ::NFMsg::TileState& tile(int index) const;
-  ::NFMsg::TileState* add_tile();
-  const ::google::protobuf::RepeatedPtrField< ::NFMsg::TileState >&
-      tile() const;
-
-  // repeated .NFMsg.TileBuilding building = 2;
-  int building_size() const;
-  void clear_building();
-  static const int kBuildingFieldNumber = 2;
-  ::NFMsg::TileBuilding* mutable_building(int index);
-  ::google::protobuf::RepeatedPtrField< ::NFMsg::TileBuilding >*
-      mutable_building();
-  const ::NFMsg::TileBuilding& building(int index) const;
-  ::NFMsg::TileBuilding* add_building();
-  const ::google::protobuf::RepeatedPtrField< ::NFMsg::TileBuilding >&
-      building() const;
-
-  // repeated .NFMsg.TileNPC npc = 3;
-  int npc_size() const;
-  void clear_npc();
-  static const int kNpcFieldNumber = 3;
-  ::NFMsg::TileNPC* mutable_npc(int index);
-  ::google::protobuf::RepeatedPtrField< ::NFMsg::TileNPC >*
-      mutable_npc();
-  const ::NFMsg::TileNPC& npc(int index) const;
-  ::NFMsg::TileNPC* add_npc();
-  const ::google::protobuf::RepeatedPtrField< ::NFMsg::TileNPC >&
-      npc() const;
-
-  // @@protoc_insertion_point(class_scope:NFMsg.AckMiningTitle)
- private:
-
-  ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
-  ::google::protobuf::RepeatedPtrField< ::NFMsg::TileState > tile_;
-  ::google::protobuf::RepeatedPtrField< ::NFMsg::TileBuilding > building_;
-  ::google::protobuf::RepeatedPtrField< ::NFMsg::TileNPC > npc_;
-  mutable ::google::protobuf::internal::CachedSize _cached_size_;
-  friend struct ::protobuf_NFMsgShare_2eproto::TableStruct;
-};
-// -------------------------------------------------------------------
-
 class LIBPROTOC_EXPORT ReqSearchOppnent : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:NFMsg.ReqSearchOppnent) */ {
  public:
   ReqSearchOppnent();
@@ -6723,7 +6205,7 @@ class LIBPROTOC_EXPORT ReqSearchOppnent : public ::google::protobuf::Message /* 
                &_ReqSearchOppnent_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    47;
+    43;
 
   void Swap(ReqSearchOppnent* other);
   friend void swap(ReqSearchOppnent& a, ReqSearchOppnent& b) {
@@ -6826,7 +6308,7 @@ class LIBPROTOC_EXPORT AckSearchOppnent : public ::google::protobuf::Message /* 
                &_AckSearchOppnent_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    48;
+    44;
 
   void Swap(AckSearchOppnent* other);
   friend void swap(AckSearchOppnent& a, AckSearchOppnent& b) {
@@ -6877,6 +6359,18 @@ class LIBPROTOC_EXPORT AckSearchOppnent : public ::google::protobuf::Message /* 
   // nested types ----------------------------------------------------
 
   // accessors -------------------------------------------------------
+
+  // repeated .NFMsg.ReqAddSceneBuilding buildings = 30;
+  int buildings_size() const;
+  void clear_buildings();
+  static const int kBuildingsFieldNumber = 30;
+  ::NFMsg::ReqAddSceneBuilding* mutable_buildings(int index);
+  ::google::protobuf::RepeatedPtrField< ::NFMsg::ReqAddSceneBuilding >*
+      mutable_buildings();
+  const ::NFMsg::ReqAddSceneBuilding& buildings(int index) const;
+  ::NFMsg::ReqAddSceneBuilding* add_buildings();
+  const ::google::protobuf::RepeatedPtrField< ::NFMsg::ReqAddSceneBuilding >&
+      buildings() const;
 
   // bytes name = 6;
   void clear_name();
@@ -7020,18 +6514,6 @@ class LIBPROTOC_EXPORT AckSearchOppnent : public ::google::protobuf::Message /* 
   ::NFMsg::Vector3* mutable_hero_pos3();
   void set_allocated_hero_pos3(::NFMsg::Vector3* hero_pos3);
 
-  // .NFMsg.AckMiningTitle title = 30;
-  bool has_title() const;
-  void clear_title();
-  static const int kTitleFieldNumber = 30;
-  private:
-  const ::NFMsg::AckMiningTitle& _internal_title() const;
-  public:
-  const ::NFMsg::AckMiningTitle& title() const;
-  ::NFMsg::AckMiningTitle* release_title();
-  ::NFMsg::AckMiningTitle* mutable_title();
-  void set_allocated_title(::NFMsg::AckMiningTitle* title);
-
   // .NFMsg.Ident opponent = 31;
   bool has_opponent() const;
   void clear_opponent();
@@ -7096,6 +6578,7 @@ class LIBPROTOC_EXPORT AckSearchOppnent : public ::google::protobuf::Message /* 
  private:
 
   ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
+  ::google::protobuf::RepeatedPtrField< ::NFMsg::ReqAddSceneBuilding > buildings_;
   ::google::protobuf::internal::ArenaStringPtr name_;
   ::google::protobuf::internal::ArenaStringPtr head_;
   ::google::protobuf::internal::ArenaStringPtr hero_cnf1_;
@@ -7107,7 +6590,6 @@ class LIBPROTOC_EXPORT AckSearchOppnent : public ::google::protobuf::Message /* 
   ::NFMsg::Vector3* hero_pos1_;
   ::NFMsg::Vector3* hero_pos2_;
   ::NFMsg::Vector3* hero_pos3_;
-  ::NFMsg::AckMiningTitle* title_;
   ::NFMsg::Ident* opponent_;
   ::google::protobuf::int32 scene_id_;
   ::google::protobuf::int32 gold_;
@@ -7157,7 +6639,7 @@ class LIBPROTOC_EXPORT ReqSendMail : public ::google::protobuf::Message /* @@pro
                &_ReqSendMail_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    49;
+    45;
 
   void Swap(ReqSendMail* other);
   friend void swap(ReqSendMail& a, ReqSendMail& b) {
@@ -7292,7 +6774,7 @@ class LIBPROTOC_EXPORT ReqSwitchServer : public ::google::protobuf::Message /* @
                &_ReqSwitchServer_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    50;
+    46;
 
   void Swap(ReqSwitchServer* other);
   friend void swap(ReqSwitchServer& a, ReqSwitchServer& b) {
@@ -7449,7 +6931,7 @@ class LIBPROTOC_EXPORT AckSwitchServer : public ::google::protobuf::Message /* @
                &_AckSwitchServer_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    51;
+    47;
 
   void Swap(AckSwitchServer* other);
   friend void swap(AckSwitchServer& a, AckSwitchServer& b) {
@@ -7579,7 +7061,7 @@ class LIBPROTOC_EXPORT PVPRoomInfo : public ::google::protobuf::Message /* @@pro
                &_PVPRoomInfo_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    52;
+    48;
 
   void Swap(PVPRoomInfo* other);
   friend void swap(PVPRoomInfo& a, PVPRoomInfo& b) {
@@ -7763,7 +7245,7 @@ class LIBPROTOC_EXPORT ReqPVPApplyMatch : public ::google::protobuf::Message /* 
                &_ReqPVPApplyMatch_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    53;
+    49;
 
   void Swap(ReqPVPApplyMatch* other);
   friend void swap(ReqPVPApplyMatch& a, ReqPVPApplyMatch& b) {
@@ -7932,7 +7414,7 @@ class LIBPROTOC_EXPORT AckPVPApplyMatch : public ::google::protobuf::Message /* 
                &_AckPVPApplyMatch_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    54;
+    50;
 
   void Swap(AckPVPApplyMatch* other);
   friend void swap(AckPVPApplyMatch& a, AckPVPApplyMatch& b) {
@@ -8068,7 +7550,7 @@ class LIBPROTOC_EXPORT ReqCreatePVPEctype : public ::google::protobuf::Message /
                &_ReqCreatePVPEctype_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    55;
+    51;
 
   void Swap(ReqCreatePVPEctype* other);
   friend void swap(ReqCreatePVPEctype& a, ReqCreatePVPEctype& b) {
@@ -8190,7 +7672,7 @@ class LIBPROTOC_EXPORT AckCreatePVPEctype : public ::google::protobuf::Message /
                &_AckCreatePVPEctype_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    56;
+    52;
 
   void Swap(AckCreatePVPEctype* other);
   friend void swap(AckCreatePVPEctype& a, AckCreatePVPEctype& b) {
@@ -11146,6 +10628,34 @@ inline void ReqAddSceneBuilding::set_allocated_master_name(::std::string* master
   // @@protoc_insertion_point(field_set_allocated:NFMsg.ReqAddSceneBuilding.master_name)
 }
 
+// int32 is_home_scene = 7;
+inline void ReqAddSceneBuilding::clear_is_home_scene() {
+  is_home_scene_ = 0;
+}
+inline ::google::protobuf::int32 ReqAddSceneBuilding::is_home_scene() const {
+  // @@protoc_insertion_point(field_get:NFMsg.ReqAddSceneBuilding.is_home_scene)
+  return is_home_scene_;
+}
+inline void ReqAddSceneBuilding::set_is_home_scene(::google::protobuf::int32 value) {
+  
+  is_home_scene_ = value;
+  // @@protoc_insertion_point(field_set:NFMsg.ReqAddSceneBuilding.is_home_scene)
+}
+
+// int32 is_building = 8;
+inline void ReqAddSceneBuilding::clear_is_building() {
+  is_building_ = 0;
+}
+inline ::google::protobuf::int32 ReqAddSceneBuilding::is_building() const {
+  // @@protoc_insertion_point(field_get:NFMsg.ReqAddSceneBuilding.is_building)
+  return is_building_;
+}
+inline void ReqAddSceneBuilding::set_is_building(::google::protobuf::int32 value) {
+  
+  is_building_ = value;
+  // @@protoc_insertion_point(field_set:NFMsg.ReqAddSceneBuilding.is_building)
+}
+
 // -------------------------------------------------------------------
 
 // ReqSceneBuildings
@@ -11243,6 +10753,102 @@ inline ::NFMsg::ReqAddSceneBuilding* AckSceneBuildings::add_buildings() {
 inline const ::google::protobuf::RepeatedPtrField< ::NFMsg::ReqAddSceneBuilding >&
 AckSceneBuildings::buildings() const {
   // @@protoc_insertion_point(field_list:NFMsg.AckSceneBuildings.buildings)
+  return buildings_;
+}
+
+// -------------------------------------------------------------------
+
+// ReqStoreSceneBuildings
+
+// .NFMsg.Ident guid = 1;
+inline bool ReqStoreSceneBuildings::has_guid() const {
+  return this != internal_default_instance() && guid_ != NULL;
+}
+inline const ::NFMsg::Ident& ReqStoreSceneBuildings::_internal_guid() const {
+  return *guid_;
+}
+inline const ::NFMsg::Ident& ReqStoreSceneBuildings::guid() const {
+  const ::NFMsg::Ident* p = guid_;
+  // @@protoc_insertion_point(field_get:NFMsg.ReqStoreSceneBuildings.guid)
+  return p != NULL ? *p : *reinterpret_cast<const ::NFMsg::Ident*>(
+      &::NFMsg::_Ident_default_instance_);
+}
+inline ::NFMsg::Ident* ReqStoreSceneBuildings::release_guid() {
+  // @@protoc_insertion_point(field_release:NFMsg.ReqStoreSceneBuildings.guid)
+  
+  ::NFMsg::Ident* temp = guid_;
+  guid_ = NULL;
+  return temp;
+}
+inline ::NFMsg::Ident* ReqStoreSceneBuildings::mutable_guid() {
+  
+  if (guid_ == NULL) {
+    auto* p = CreateMaybeMessage<::NFMsg::Ident>(GetArenaNoVirtual());
+    guid_ = p;
+  }
+  // @@protoc_insertion_point(field_mutable:NFMsg.ReqStoreSceneBuildings.guid)
+  return guid_;
+}
+inline void ReqStoreSceneBuildings::set_allocated_guid(::NFMsg::Ident* guid) {
+  ::google::protobuf::Arena* message_arena = GetArenaNoVirtual();
+  if (message_arena == NULL) {
+    delete reinterpret_cast< ::google::protobuf::MessageLite*>(guid_);
+  }
+  if (guid) {
+    ::google::protobuf::Arena* submessage_arena = NULL;
+    if (message_arena != submessage_arena) {
+      guid = ::google::protobuf::internal::GetOwnedMessage(
+          message_arena, guid, submessage_arena);
+    }
+    
+  } else {
+    
+  }
+  guid_ = guid;
+  // @@protoc_insertion_point(field_set_allocated:NFMsg.ReqStoreSceneBuildings.guid)
+}
+
+// int32 home_scene_id = 2;
+inline void ReqStoreSceneBuildings::clear_home_scene_id() {
+  home_scene_id_ = 0;
+}
+inline ::google::protobuf::int32 ReqStoreSceneBuildings::home_scene_id() const {
+  // @@protoc_insertion_point(field_get:NFMsg.ReqStoreSceneBuildings.home_scene_id)
+  return home_scene_id_;
+}
+inline void ReqStoreSceneBuildings::set_home_scene_id(::google::protobuf::int32 value) {
+  
+  home_scene_id_ = value;
+  // @@protoc_insertion_point(field_set:NFMsg.ReqStoreSceneBuildings.home_scene_id)
+}
+
+// repeated .NFMsg.ReqAddSceneBuilding buildings = 3;
+inline int ReqStoreSceneBuildings::buildings_size() const {
+  return buildings_.size();
+}
+inline void ReqStoreSceneBuildings::clear_buildings() {
+  buildings_.Clear();
+}
+inline ::NFMsg::ReqAddSceneBuilding* ReqStoreSceneBuildings::mutable_buildings(int index) {
+  // @@protoc_insertion_point(field_mutable:NFMsg.ReqStoreSceneBuildings.buildings)
+  return buildings_.Mutable(index);
+}
+inline ::google::protobuf::RepeatedPtrField< ::NFMsg::ReqAddSceneBuilding >*
+ReqStoreSceneBuildings::mutable_buildings() {
+  // @@protoc_insertion_point(field_mutable_list:NFMsg.ReqStoreSceneBuildings.buildings)
+  return &buildings_;
+}
+inline const ::NFMsg::ReqAddSceneBuilding& ReqStoreSceneBuildings::buildings(int index) const {
+  // @@protoc_insertion_point(field_get:NFMsg.ReqStoreSceneBuildings.buildings)
+  return buildings_.Get(index);
+}
+inline ::NFMsg::ReqAddSceneBuilding* ReqStoreSceneBuildings::add_buildings() {
+  // @@protoc_insertion_point(field_add:NFMsg.ReqStoreSceneBuildings.buildings)
+  return buildings_.Add();
+}
+inline const ::google::protobuf::RepeatedPtrField< ::NFMsg::ReqAddSceneBuilding >&
+ReqStoreSceneBuildings::buildings() const {
+  // @@protoc_insertion_point(field_list:NFMsg.ReqStoreSceneBuildings.buildings)
   return buildings_;
 }
 
@@ -12326,458 +11932,6 @@ inline void ReqAddGambleValue::set_number(::google::protobuf::int32 value) {
 
 // -------------------------------------------------------------------
 
-// ReqMiningTitle
-
-// int32 x = 1;
-inline void ReqMiningTitle::clear_x() {
-  x_ = 0;
-}
-inline ::google::protobuf::int32 ReqMiningTitle::x() const {
-  // @@protoc_insertion_point(field_get:NFMsg.ReqMiningTitle.x)
-  return x_;
-}
-inline void ReqMiningTitle::set_x(::google::protobuf::int32 value) {
-  
-  x_ = value;
-  // @@protoc_insertion_point(field_set:NFMsg.ReqMiningTitle.x)
-}
-
-// int32 y = 2;
-inline void ReqMiningTitle::clear_y() {
-  y_ = 0;
-}
-inline ::google::protobuf::int32 ReqMiningTitle::y() const {
-  // @@protoc_insertion_point(field_get:NFMsg.ReqMiningTitle.y)
-  return y_;
-}
-inline void ReqMiningTitle::set_y(::google::protobuf::int32 value) {
-  
-  y_ = value;
-  // @@protoc_insertion_point(field_set:NFMsg.ReqMiningTitle.y)
-}
-
-// int32 opr = 3;
-inline void ReqMiningTitle::clear_opr() {
-  opr_ = 0;
-}
-inline ::google::protobuf::int32 ReqMiningTitle::opr() const {
-  // @@protoc_insertion_point(field_get:NFMsg.ReqMiningTitle.opr)
-  return opr_;
-}
-inline void ReqMiningTitle::set_opr(::google::protobuf::int32 value) {
-  
-  opr_ = value;
-  // @@protoc_insertion_point(field_set:NFMsg.ReqMiningTitle.opr)
-}
-
-// -------------------------------------------------------------------
-
-// TileState
-
-// int32 x = 1;
-inline void TileState::clear_x() {
-  x_ = 0;
-}
-inline ::google::protobuf::int32 TileState::x() const {
-  // @@protoc_insertion_point(field_get:NFMsg.TileState.x)
-  return x_;
-}
-inline void TileState::set_x(::google::protobuf::int32 value) {
-  
-  x_ = value;
-  // @@protoc_insertion_point(field_set:NFMsg.TileState.x)
-}
-
-// int32 y = 2;
-inline void TileState::clear_y() {
-  y_ = 0;
-}
-inline ::google::protobuf::int32 TileState::y() const {
-  // @@protoc_insertion_point(field_get:NFMsg.TileState.y)
-  return y_;
-}
-inline void TileState::set_y(::google::protobuf::int32 value) {
-  
-  y_ = value;
-  // @@protoc_insertion_point(field_set:NFMsg.TileState.y)
-}
-
-// int32 opr = 3;
-inline void TileState::clear_opr() {
-  opr_ = 0;
-}
-inline ::google::protobuf::int32 TileState::opr() const {
-  // @@protoc_insertion_point(field_get:NFMsg.TileState.opr)
-  return opr_;
-}
-inline void TileState::set_opr(::google::protobuf::int32 value) {
-  
-  opr_ = value;
-  // @@protoc_insertion_point(field_set:NFMsg.TileState.opr)
-}
-
-// -------------------------------------------------------------------
-
-// TileBuilding
-
-// int32 x = 1;
-inline void TileBuilding::clear_x() {
-  x_ = 0;
-}
-inline ::google::protobuf::int32 TileBuilding::x() const {
-  // @@protoc_insertion_point(field_get:NFMsg.TileBuilding.x)
-  return x_;
-}
-inline void TileBuilding::set_x(::google::protobuf::int32 value) {
-  
-  x_ = value;
-  // @@protoc_insertion_point(field_set:NFMsg.TileBuilding.x)
-}
-
-// int32 y = 2;
-inline void TileBuilding::clear_y() {
-  y_ = 0;
-}
-inline ::google::protobuf::int32 TileBuilding::y() const {
-  // @@protoc_insertion_point(field_get:NFMsg.TileBuilding.y)
-  return y_;
-}
-inline void TileBuilding::set_y(::google::protobuf::int32 value) {
-  
-  y_ = value;
-  // @@protoc_insertion_point(field_set:NFMsg.TileBuilding.y)
-}
-
-// bytes configID = 3;
-inline void TileBuilding::clear_configid() {
-  configid_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-}
-inline const ::std::string& TileBuilding::configid() const {
-  // @@protoc_insertion_point(field_get:NFMsg.TileBuilding.configID)
-  return configid_.GetNoArena();
-}
-inline void TileBuilding::set_configid(const ::std::string& value) {
-  
-  configid_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
-  // @@protoc_insertion_point(field_set:NFMsg.TileBuilding.configID)
-}
-#if LANG_CXX11
-inline void TileBuilding::set_configid(::std::string&& value) {
-  
-  configid_.SetNoArena(
-    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
-  // @@protoc_insertion_point(field_set_rvalue:NFMsg.TileBuilding.configID)
-}
-#endif
-inline void TileBuilding::set_configid(const char* value) {
-  GOOGLE_DCHECK(value != NULL);
-  
-  configid_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
-  // @@protoc_insertion_point(field_set_char:NFMsg.TileBuilding.configID)
-}
-inline void TileBuilding::set_configid(const void* value, size_t size) {
-  
-  configid_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
-      ::std::string(reinterpret_cast<const char*>(value), size));
-  // @@protoc_insertion_point(field_set_pointer:NFMsg.TileBuilding.configID)
-}
-inline ::std::string* TileBuilding::mutable_configid() {
-  
-  // @@protoc_insertion_point(field_mutable:NFMsg.TileBuilding.configID)
-  return configid_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-}
-inline ::std::string* TileBuilding::release_configid() {
-  // @@protoc_insertion_point(field_release:NFMsg.TileBuilding.configID)
-  
-  return configid_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-}
-inline void TileBuilding::set_allocated_configid(::std::string* configid) {
-  if (configid != NULL) {
-    
-  } else {
-    
-  }
-  configid_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), configid);
-  // @@protoc_insertion_point(field_set_allocated:NFMsg.TileBuilding.configID)
-}
-
-// .NFMsg.Ident guid = 4;
-inline bool TileBuilding::has_guid() const {
-  return this != internal_default_instance() && guid_ != NULL;
-}
-inline const ::NFMsg::Ident& TileBuilding::_internal_guid() const {
-  return *guid_;
-}
-inline const ::NFMsg::Ident& TileBuilding::guid() const {
-  const ::NFMsg::Ident* p = guid_;
-  // @@protoc_insertion_point(field_get:NFMsg.TileBuilding.guid)
-  return p != NULL ? *p : *reinterpret_cast<const ::NFMsg::Ident*>(
-      &::NFMsg::_Ident_default_instance_);
-}
-inline ::NFMsg::Ident* TileBuilding::release_guid() {
-  // @@protoc_insertion_point(field_release:NFMsg.TileBuilding.guid)
-  
-  ::NFMsg::Ident* temp = guid_;
-  guid_ = NULL;
-  return temp;
-}
-inline ::NFMsg::Ident* TileBuilding::mutable_guid() {
-  
-  if (guid_ == NULL) {
-    auto* p = CreateMaybeMessage<::NFMsg::Ident>(GetArenaNoVirtual());
-    guid_ = p;
-  }
-  // @@protoc_insertion_point(field_mutable:NFMsg.TileBuilding.guid)
-  return guid_;
-}
-inline void TileBuilding::set_allocated_guid(::NFMsg::Ident* guid) {
-  ::google::protobuf::Arena* message_arena = GetArenaNoVirtual();
-  if (message_arena == NULL) {
-    delete reinterpret_cast< ::google::protobuf::MessageLite*>(guid_);
-  }
-  if (guid) {
-    ::google::protobuf::Arena* submessage_arena = NULL;
-    if (message_arena != submessage_arena) {
-      guid = ::google::protobuf::internal::GetOwnedMessage(
-          message_arena, guid, submessage_arena);
-    }
-    
-  } else {
-    
-  }
-  guid_ = guid;
-  // @@protoc_insertion_point(field_set_allocated:NFMsg.TileBuilding.guid)
-}
-
-// -------------------------------------------------------------------
-
-// TileNPC
-
-// int32 x = 1;
-inline void TileNPC::clear_x() {
-  x_ = 0;
-}
-inline ::google::protobuf::int32 TileNPC::x() const {
-  // @@protoc_insertion_point(field_get:NFMsg.TileNPC.x)
-  return x_;
-}
-inline void TileNPC::set_x(::google::protobuf::int32 value) {
-  
-  x_ = value;
-  // @@protoc_insertion_point(field_set:NFMsg.TileNPC.x)
-}
-
-// int32 y = 2;
-inline void TileNPC::clear_y() {
-  y_ = 0;
-}
-inline ::google::protobuf::int32 TileNPC::y() const {
-  // @@protoc_insertion_point(field_get:NFMsg.TileNPC.y)
-  return y_;
-}
-inline void TileNPC::set_y(::google::protobuf::int32 value) {
-  
-  y_ = value;
-  // @@protoc_insertion_point(field_set:NFMsg.TileNPC.y)
-}
-
-// bytes configID = 3;
-inline void TileNPC::clear_configid() {
-  configid_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-}
-inline const ::std::string& TileNPC::configid() const {
-  // @@protoc_insertion_point(field_get:NFMsg.TileNPC.configID)
-  return configid_.GetNoArena();
-}
-inline void TileNPC::set_configid(const ::std::string& value) {
-  
-  configid_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
-  // @@protoc_insertion_point(field_set:NFMsg.TileNPC.configID)
-}
-#if LANG_CXX11
-inline void TileNPC::set_configid(::std::string&& value) {
-  
-  configid_.SetNoArena(
-    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
-  // @@protoc_insertion_point(field_set_rvalue:NFMsg.TileNPC.configID)
-}
-#endif
-inline void TileNPC::set_configid(const char* value) {
-  GOOGLE_DCHECK(value != NULL);
-  
-  configid_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
-  // @@protoc_insertion_point(field_set_char:NFMsg.TileNPC.configID)
-}
-inline void TileNPC::set_configid(const void* value, size_t size) {
-  
-  configid_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
-      ::std::string(reinterpret_cast<const char*>(value), size));
-  // @@protoc_insertion_point(field_set_pointer:NFMsg.TileNPC.configID)
-}
-inline ::std::string* TileNPC::mutable_configid() {
-  
-  // @@protoc_insertion_point(field_mutable:NFMsg.TileNPC.configID)
-  return configid_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-}
-inline ::std::string* TileNPC::release_configid() {
-  // @@protoc_insertion_point(field_release:NFMsg.TileNPC.configID)
-  
-  return configid_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-}
-inline void TileNPC::set_allocated_configid(::std::string* configid) {
-  if (configid != NULL) {
-    
-  } else {
-    
-  }
-  configid_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), configid);
-  // @@protoc_insertion_point(field_set_allocated:NFMsg.TileNPC.configID)
-}
-
-// .NFMsg.Ident guid = 4;
-inline bool TileNPC::has_guid() const {
-  return this != internal_default_instance() && guid_ != NULL;
-}
-inline const ::NFMsg::Ident& TileNPC::_internal_guid() const {
-  return *guid_;
-}
-inline const ::NFMsg::Ident& TileNPC::guid() const {
-  const ::NFMsg::Ident* p = guid_;
-  // @@protoc_insertion_point(field_get:NFMsg.TileNPC.guid)
-  return p != NULL ? *p : *reinterpret_cast<const ::NFMsg::Ident*>(
-      &::NFMsg::_Ident_default_instance_);
-}
-inline ::NFMsg::Ident* TileNPC::release_guid() {
-  // @@protoc_insertion_point(field_release:NFMsg.TileNPC.guid)
-  
-  ::NFMsg::Ident* temp = guid_;
-  guid_ = NULL;
-  return temp;
-}
-inline ::NFMsg::Ident* TileNPC::mutable_guid() {
-  
-  if (guid_ == NULL) {
-    auto* p = CreateMaybeMessage<::NFMsg::Ident>(GetArenaNoVirtual());
-    guid_ = p;
-  }
-  // @@protoc_insertion_point(field_mutable:NFMsg.TileNPC.guid)
-  return guid_;
-}
-inline void TileNPC::set_allocated_guid(::NFMsg::Ident* guid) {
-  ::google::protobuf::Arena* message_arena = GetArenaNoVirtual();
-  if (message_arena == NULL) {
-    delete reinterpret_cast< ::google::protobuf::MessageLite*>(guid_);
-  }
-  if (guid) {
-    ::google::protobuf::Arena* submessage_arena = NULL;
-    if (message_arena != submessage_arena) {
-      guid = ::google::protobuf::internal::GetOwnedMessage(
-          message_arena, guid, submessage_arena);
-    }
-    
-  } else {
-    
-  }
-  guid_ = guid;
-  // @@protoc_insertion_point(field_set_allocated:NFMsg.TileNPC.guid)
-}
-
-// -------------------------------------------------------------------
-
-// AckMiningTitle
-
-// repeated .NFMsg.TileState tile = 1;
-inline int AckMiningTitle::tile_size() const {
-  return tile_.size();
-}
-inline void AckMiningTitle::clear_tile() {
-  tile_.Clear();
-}
-inline ::NFMsg::TileState* AckMiningTitle::mutable_tile(int index) {
-  // @@protoc_insertion_point(field_mutable:NFMsg.AckMiningTitle.tile)
-  return tile_.Mutable(index);
-}
-inline ::google::protobuf::RepeatedPtrField< ::NFMsg::TileState >*
-AckMiningTitle::mutable_tile() {
-  // @@protoc_insertion_point(field_mutable_list:NFMsg.AckMiningTitle.tile)
-  return &tile_;
-}
-inline const ::NFMsg::TileState& AckMiningTitle::tile(int index) const {
-  // @@protoc_insertion_point(field_get:NFMsg.AckMiningTitle.tile)
-  return tile_.Get(index);
-}
-inline ::NFMsg::TileState* AckMiningTitle::add_tile() {
-  // @@protoc_insertion_point(field_add:NFMsg.AckMiningTitle.tile)
-  return tile_.Add();
-}
-inline const ::google::protobuf::RepeatedPtrField< ::NFMsg::TileState >&
-AckMiningTitle::tile() const {
-  // @@protoc_insertion_point(field_list:NFMsg.AckMiningTitle.tile)
-  return tile_;
-}
-
-// repeated .NFMsg.TileBuilding building = 2;
-inline int AckMiningTitle::building_size() const {
-  return building_.size();
-}
-inline void AckMiningTitle::clear_building() {
-  building_.Clear();
-}
-inline ::NFMsg::TileBuilding* AckMiningTitle::mutable_building(int index) {
-  // @@protoc_insertion_point(field_mutable:NFMsg.AckMiningTitle.building)
-  return building_.Mutable(index);
-}
-inline ::google::protobuf::RepeatedPtrField< ::NFMsg::TileBuilding >*
-AckMiningTitle::mutable_building() {
-  // @@protoc_insertion_point(field_mutable_list:NFMsg.AckMiningTitle.building)
-  return &building_;
-}
-inline const ::NFMsg::TileBuilding& AckMiningTitle::building(int index) const {
-  // @@protoc_insertion_point(field_get:NFMsg.AckMiningTitle.building)
-  return building_.Get(index);
-}
-inline ::NFMsg::TileBuilding* AckMiningTitle::add_building() {
-  // @@protoc_insertion_point(field_add:NFMsg.AckMiningTitle.building)
-  return building_.Add();
-}
-inline const ::google::protobuf::RepeatedPtrField< ::NFMsg::TileBuilding >&
-AckMiningTitle::building() const {
-  // @@protoc_insertion_point(field_list:NFMsg.AckMiningTitle.building)
-  return building_;
-}
-
-// repeated .NFMsg.TileNPC npc = 3;
-inline int AckMiningTitle::npc_size() const {
-  return npc_.size();
-}
-inline void AckMiningTitle::clear_npc() {
-  npc_.Clear();
-}
-inline ::NFMsg::TileNPC* AckMiningTitle::mutable_npc(int index) {
-  // @@protoc_insertion_point(field_mutable:NFMsg.AckMiningTitle.npc)
-  return npc_.Mutable(index);
-}
-inline ::google::protobuf::RepeatedPtrField< ::NFMsg::TileNPC >*
-AckMiningTitle::mutable_npc() {
-  // @@protoc_insertion_point(field_mutable_list:NFMsg.AckMiningTitle.npc)
-  return &npc_;
-}
-inline const ::NFMsg::TileNPC& AckMiningTitle::npc(int index) const {
-  // @@protoc_insertion_point(field_get:NFMsg.AckMiningTitle.npc)
-  return npc_.Get(index);
-}
-inline ::NFMsg::TileNPC* AckMiningTitle::add_npc() {
-  // @@protoc_insertion_point(field_add:NFMsg.AckMiningTitle.npc)
-  return npc_.Add();
-}
-inline const ::google::protobuf::RepeatedPtrField< ::NFMsg::TileNPC >&
-AckMiningTitle::npc() const {
-  // @@protoc_insertion_point(field_list:NFMsg.AckMiningTitle.npc)
-  return npc_;
-}
-
-// -------------------------------------------------------------------
-
 // ReqSearchOppnent
 
 // int32 self_scene = 1;
@@ -13463,58 +12617,34 @@ inline void AckSearchOppnent::set_allocated_hero_pos3(::NFMsg::Vector3* hero_pos
   // @@protoc_insertion_point(field_set_allocated:NFMsg.AckSearchOppnent.hero_pos3)
 }
 
-// .NFMsg.AckMiningTitle title = 30;
-inline bool AckSearchOppnent::has_title() const {
-  return this != internal_default_instance() && title_ != NULL;
+// repeated .NFMsg.ReqAddSceneBuilding buildings = 30;
+inline int AckSearchOppnent::buildings_size() const {
+  return buildings_.size();
 }
-inline void AckSearchOppnent::clear_title() {
-  if (GetArenaNoVirtual() == NULL && title_ != NULL) {
-    delete title_;
-  }
-  title_ = NULL;
+inline void AckSearchOppnent::clear_buildings() {
+  buildings_.Clear();
 }
-inline const ::NFMsg::AckMiningTitle& AckSearchOppnent::_internal_title() const {
-  return *title_;
+inline ::NFMsg::ReqAddSceneBuilding* AckSearchOppnent::mutable_buildings(int index) {
+  // @@protoc_insertion_point(field_mutable:NFMsg.AckSearchOppnent.buildings)
+  return buildings_.Mutable(index);
 }
-inline const ::NFMsg::AckMiningTitle& AckSearchOppnent::title() const {
-  const ::NFMsg::AckMiningTitle* p = title_;
-  // @@protoc_insertion_point(field_get:NFMsg.AckSearchOppnent.title)
-  return p != NULL ? *p : *reinterpret_cast<const ::NFMsg::AckMiningTitle*>(
-      &::NFMsg::_AckMiningTitle_default_instance_);
+inline ::google::protobuf::RepeatedPtrField< ::NFMsg::ReqAddSceneBuilding >*
+AckSearchOppnent::mutable_buildings() {
+  // @@protoc_insertion_point(field_mutable_list:NFMsg.AckSearchOppnent.buildings)
+  return &buildings_;
 }
-inline ::NFMsg::AckMiningTitle* AckSearchOppnent::release_title() {
-  // @@protoc_insertion_point(field_release:NFMsg.AckSearchOppnent.title)
-  
-  ::NFMsg::AckMiningTitle* temp = title_;
-  title_ = NULL;
-  return temp;
+inline const ::NFMsg::ReqAddSceneBuilding& AckSearchOppnent::buildings(int index) const {
+  // @@protoc_insertion_point(field_get:NFMsg.AckSearchOppnent.buildings)
+  return buildings_.Get(index);
 }
-inline ::NFMsg::AckMiningTitle* AckSearchOppnent::mutable_title() {
-  
-  if (title_ == NULL) {
-    auto* p = CreateMaybeMessage<::NFMsg::AckMiningTitle>(GetArenaNoVirtual());
-    title_ = p;
-  }
-  // @@protoc_insertion_point(field_mutable:NFMsg.AckSearchOppnent.title)
-  return title_;
+inline ::NFMsg::ReqAddSceneBuilding* AckSearchOppnent::add_buildings() {
+  // @@protoc_insertion_point(field_add:NFMsg.AckSearchOppnent.buildings)
+  return buildings_.Add();
 }
-inline void AckSearchOppnent::set_allocated_title(::NFMsg::AckMiningTitle* title) {
-  ::google::protobuf::Arena* message_arena = GetArenaNoVirtual();
-  if (message_arena == NULL) {
-    delete title_;
-  }
-  if (title) {
-    ::google::protobuf::Arena* submessage_arena = NULL;
-    if (message_arena != submessage_arena) {
-      title = ::google::protobuf::internal::GetOwnedMessage(
-          message_arena, title, submessage_arena);
-    }
-    
-  } else {
-    
-  }
-  title_ = title;
-  // @@protoc_insertion_point(field_set_allocated:NFMsg.AckSearchOppnent.title)
+inline const ::google::protobuf::RepeatedPtrField< ::NFMsg::ReqAddSceneBuilding >&
+AckSearchOppnent::buildings() const {
+  // @@protoc_insertion_point(field_list:NFMsg.AckSearchOppnent.buildings)
+  return buildings_;
 }
 
 // .NFMsg.Ident opponent = 31;
@@ -14650,14 +13780,6 @@ inline void AckCreatePVPEctype::set_applytype(::google::protobuf::int32 value) {
 #ifdef __GNUC__
   #pragma GCC diagnostic pop
 #endif  // __GNUC__
-// -------------------------------------------------------------------
-
-// -------------------------------------------------------------------
-
-// -------------------------------------------------------------------
-
-// -------------------------------------------------------------------
-
 // -------------------------------------------------------------------
 
 // -------------------------------------------------------------------

@@ -31,7 +31,8 @@ bool NFAIModule::Init()
 {
     m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>();
 	m_pHateModule = pPluginManager->FindModule<NFIHateModule>();
-
+	m_pFriendModule = pPluginManager->FindModule<NFIFriendModule>();
+	
     //////////////////////////////////////////////////////////////////////////
 	mtStateMap[IdleState] = new NFIdleState(3.0f, pPluginManager);
 	mtStateMap[FightState] = new NFFightState(1.0f, pPluginManager);
@@ -56,7 +57,6 @@ NFIState* NFAIModule::GetState(const NFAI_STATE eState)
 
 bool NFAIModule::CreateAIObject(const NFGUID& self)
 {
-    //这里只是为了以后方便维护状态机时间，节约CPU
 	std::map<NFGUID, NF_SHARE_PTR<NFIStateMachine>>::iterator it = mtObjectStateMachine.find(self);
     if (it == mtObjectStateMachine.end())
     {
@@ -102,15 +102,6 @@ NF_SHARE_PTR<NFIStateMachine> NFAIModule::GetStateMachine(const NFGUID& self)
     return nullptr;
 }
 
-void NFAIModule::OnBeKilled(const NFGUID& self, const NFGUID& other)
-{
-	std::map<NFGUID, NF_SHARE_PTR<NFIStateMachine>>::iterator it = mtObjectStateMachine.find(self);
-    if (it != mtObjectStateMachine.end())
-    {
-        it->second->ChangeState(DeadState);
-    }
-}
-
 void NFAIModule::OnBeAttack(const NFGUID& self, const NFGUID& other, const int nDamageValue)
 {
 	m_pHateModule->AddHate(self, other, nDamageValue);
@@ -119,54 +110,18 @@ void NFAIModule::OnBeAttack(const NFGUID& self, const NFGUID& other, const int n
 
 void NFAIModule::OnSpring(const NFGUID& self, const NFGUID& other)
 {
-	/*
     //根据职业,等级,血量,防御
     //战斗状态只打仇恨列表内的人，巡逻,休闲状态才重新找对象打
-    NF_AI_SUB_TYPE subType = (NF_AI_SUB_TYPE)m_pKernelModule->GetPropertyInt(self, "SubType");
-    if (NF_AI_SUB_TYPE::NFAST_INITATIVE == subType)
-    {
-        //玩家或者PET进入
-        const std::string& strClassName = m_pKernelModule->GetPropertyString(other, "ClassName");
-        if ("Player" == strClassName
-            || "Pet" == strClassName)
-        {
-            GetHateModule()->AddHate(self, other, 100);
-            GetHateModule()->CompSortList(self);
-            NFIStateMachine* pStateMachine = GetStateMachine(self);
-            if (pStateMachine)
-            {
-                if (NFAI_STATE::FightState != pStateMachine->CurrentState())
-                {
-                    NFIState* pState = GetState(pStateMachine->CurrentState());
-                    pState->Execute(self);
-                }
-            }
-        }
-    }
-	*/
+	if (m_pFriendModule->IsEnemy(self, other))
+	{
+		m_pHateModule->AddHate(self, other, 100);
+		m_pHateModule->CompSortList(self);
+	}
 }
 
 void NFAIModule::OnEndSpring(const NFGUID& self, const NFGUID& other)
 {
     m_pHateModule->SetHateValue(self, other, 0);
-}
-
-void NFAIModule::OnMotion(const NFGUID& self, int nResults)
-{
-}
-
-void NFAIModule::OnSelect(const NFGUID& self, const NFGUID& other)
-{
-}
-
-int NFAIModule::CanUseAnySkill(const NFGUID& self, const NFGUID& other)
-{
-    return 0;
-}
-
-float NFAIModule::UseAnySkill(const NFGUID& self, const NFGUID& other)
-{
-    return 0.5f;
 }
 
 int NFAIModule::OnAIObjectEvent(const NFGUID& self, const std::string& strClassNames, const CLASS_OBJECT_EVENT eClassEvent, const NFDataList& var)
@@ -187,8 +142,28 @@ int NFAIModule::OnAIObjectEvent(const NFGUID& self, const std::string& strClassN
 		{
 		}
     }
+	else if (CLASS_OBJECT_EVENT::COE_CREATE_FINISH == eClassEvent)
+	{
+		m_pKernelModule->AddPropertyCallBack(self, NFrame::NPC::HP(), this, &NFAIModule::OnNPCHPEvent);
+	}
 
     return 0;
+}
+
+int NFAIModule::OnNPCHPEvent(const NFGUID & self, const std::string & strPropertyName, const NFData & oldVar, const NFData & newVar)
+{
+	if (newVar.GetInt() <= 0)
+	{
+		std::map<NFGUID, NF_SHARE_PTR<NFIStateMachine>>::iterator it = mtObjectStateMachine.find(self);
+		if (it != mtObjectStateMachine.end())
+		{
+			it->second->ChangeState(DeadState);
+		}
+
+		//tell others
+	}
+
+	return 0;
 }
 
 bool NFAIModule::AfterInit()

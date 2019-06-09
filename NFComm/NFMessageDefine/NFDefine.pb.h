@@ -256,12 +256,7 @@ enum EGameMsgID {
   EGMI_ACK_OPR_CLAN = 1307,
   EGMI_REQ_SEARCH_CLAN = 1308,
   EGMI_ACK_SEARCH_CLAN = 1309,
-  EGMI_REQ_OPR_CLANINFO = 1310,
-  EGMI_ACK_OPR_CLANINFO = 1311,
-  EGMI_REQ_CLANECTYPEINFO = 1312,
-  EGMI_ACK_CLANECTYPEINFO = 1313,
-  EGMI_SET_CLANECTYPEINFO = 1314,
-  EGMI_ReqEnterGuildEctype = 1315,
+  EGMI_REQ_CANCEL_SEARCH_CLAN = 1310,
   EGEC_REQ_CREATE_CHATGROUP = 1400,
   EGEC_ACK_CREATE_CHATGROUP = 1401,
   EGEC_REQ_JOIN_CHATGROUP = 1402,
@@ -289,8 +284,6 @@ enum EGameMsgID {
   EGEC_REQ_SET_FIGHT_HERO = 1520,
   EGEC_REQ_SWITCH_FIGHT_HERO = 1521,
   EGEC_REQ_RELIVE_HERO = 1522,
-  EGEC_REQ_MINING_TITLE = 1600,
-  EGEC_ACK_MINING_TITLE = 1601,
   EGEC_REQ_SEND_MAIL = 1700,
   EGEC_REQ_DRAW_MAIL = 1701,
   EGEC_REQ_DELETE_MAIL = 1702,
@@ -331,6 +324,7 @@ enum EGameMsgID {
   EGMI_ACK_MAP_GRID_KING_WAR = 1919,
   EGMI_REQ_ADD_BUILDING = 5000,
   EGMI_REQ_ACK_BUILDING_LIST = 5001,
+  EGMI_REQ_STORE_BUILDING_LIST = 5010,
   EGMI_REQ_CMD_PROPERTY_INT = 10000,
   EGMI_REQ_CMD_PROPERTY_STR = 10001,
   EGMI_REQ_CMD_PROPERTY_OBJECT = 10002,
@@ -640,6 +634,29 @@ inline bool ETaskType_Parse(
     const ::std::string& name, ETaskType* value) {
   return ::google::protobuf::internal::ParseNamedEnum<ETaskType>(
     ETaskType_descriptor(), name, value);
+}
+enum ESceneType {
+  SCENE_NORMAL = 0,
+  SCENE_SINGLE_CLONE = 1,
+  SCENE_MULTI_CLONE = 2,
+  SCENE_HOME = 3,
+  ESceneType_INT_MIN_SENTINEL_DO_NOT_USE_ = ::google::protobuf::kint32min,
+  ESceneType_INT_MAX_SENTINEL_DO_NOT_USE_ = ::google::protobuf::kint32max
+};
+LIBPROTOC_EXPORT bool ESceneType_IsValid(int value);
+const ESceneType ESceneType_MIN = SCENE_NORMAL;
+const ESceneType ESceneType_MAX = SCENE_HOME;
+const int ESceneType_ARRAYSIZE = ESceneType_MAX + 1;
+
+LIBPROTOC_EXPORT const ::google::protobuf::EnumDescriptor* ESceneType_descriptor();
+inline const ::std::string& ESceneType_Name(ESceneType value) {
+  return ::google::protobuf::internal::NameOfEnum(
+    ESceneType_descriptor(), value);
+}
+inline bool ESceneType_Parse(
+    const ::std::string& name, ESceneType* value) {
+  return ::google::protobuf::internal::ParseNamedEnum<ESceneType>(
+    ESceneType_descriptor(), name, value);
 }
 enum EPVPType {
   PVP_HOME = 0,
@@ -965,6 +982,11 @@ template <> struct is_proto_enum< ::NFMsg::ETaskType> : ::std::true_type {};
 template <>
 inline const EnumDescriptor* GetEnumDescriptor< ::NFMsg::ETaskType>() {
   return ::NFMsg::ETaskType_descriptor();
+}
+template <> struct is_proto_enum< ::NFMsg::ESceneType> : ::std::true_type {};
+template <>
+inline const EnumDescriptor* GetEnumDescriptor< ::NFMsg::ESceneType>() {
+  return ::NFMsg::ESceneType_descriptor();
 }
 template <> struct is_proto_enum< ::NFMsg::EPVPType> : ::std::true_type {};
 template <>

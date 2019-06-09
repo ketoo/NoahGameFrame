@@ -41,6 +41,7 @@
 #include "NFComm/NFPluginModule/NFIWorldToMasterModule.h"
 #include "NFComm/NFPluginModule/NFIAccountRedisModule.h"
 #include "NFComm/NFPluginModule/NFIPlayerRedisModule.h"
+#include "NFComm/NFPluginModule/NFISceneProcessModule.h"
 
 class NFIDBNet_ServerModule : public NFIModule
 {

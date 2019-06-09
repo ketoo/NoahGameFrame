@@ -91,89 +91,84 @@ namespace NFMsg {
             "ES5ORk1zZy5JdGVtU3RydWN0IjIKD1JlcVBpY2tEcm9wSXRlbRIfCglpdGVt",
             "X2d1aWQYAiABKAsyDC5ORk1zZy5JZGVudCIgCg1SZXFBY2NlcHRUYXNrEg8K",
             "B3Rhc2tfaWQYASABKAwiIwoQUmVxQ29tcGVsZXRlVGFzaxIPCgd0YXNrX2lk",
-            "GAEgASgMIqYBChNSZXFBZGRTY2VuZUJ1aWxkaW5nEhsKA3BvcxgBIAEoCzIO",
+            "GAEgASgMItIBChNSZXFBZGRTY2VuZUJ1aWxkaW5nEhsKA3BvcxgBIAEoCzIO",
             "Lk5GTXNnLlZlY3RvcjMSGgoEZ3VpZBgCIAEoCzIMLk5GTXNnLklkZW50EhwK",
             "Bm1hc3RlchgDIAEoCzIMLk5GTXNnLklkZW50EhEKCWNvbmZpZ19pZBgEIAEo",
-            "DBIQCghzY2VuZV9pZBgFIAEoBRITCgttYXN0ZXJfbmFtZRgGIAEoDCJCChFS",
-            "ZXFTY2VuZUJ1aWxkaW5ncxIQCghzY2VuZV9pZBgBIAEoBRIbCgNwb3MYAiAB",
-            "KAsyDi5ORk1zZy5WZWN0b3IzIkIKEUFja1NjZW5lQnVpbGRpbmdzEi0KCWJ1",
-            "aWxkaW5ncxgBIAMoCzIaLk5GTXNnLlJlcUFkZFNjZW5lQnVpbGRpbmci7wEK",
-            "ElJlcUFja0pvaW5BY3Rpdml0eRJCCg1hY3Rpdml0eV90eXBlGAEgASgOMisu",
-            "TkZNc2cuUmVxQWNrSm9pbkFjdGl2aXR5LkVHYW1lQWN0aXZpdHlUeXBlEkkK",
-            "EXN1Yl9hY3Rpdml0eV90eXBlGAIgASgOMi4uTkZNc2cuUmVxQWNrSm9pbkFj",
-            "dGl2aXR5LkVHYW1lQWN0aXZpdHlTdWJUeXBlIiEKEUVHYW1lQWN0aXZpdHlU",
-            "eXBlEgwKCEVHQVRfUFZQEAAiJwoURUdhbWVBY3Rpdml0eVN1YlR5cGUSDwoL",
-            "RUdBVF9OT1JNQUwQACJEChBSZXFBY2tDcmVhdGVDbGFuEh0KB2NsYW5faWQY",
-            "ASABKAsyDC5ORk1zZy5JZGVudBIRCgljbGFuX25hbWUYAiABKAwiIgoNUmVx",
-            "U2VhcmNoQ2xhbhIRCgljbGFuX25hbWUYASABKAwihAIKDUFja1NlYXJjaENs",
-            "YW4SOAoJY2xhbl9saXN0GAEgAygLMiUuTkZNc2cuQWNrU2VhcmNoQ2xhbi5T",
-            "ZWFyY2hDbGFuT2JqZWN0GrgBChBTZWFyY2hDbGFuT2JqZWN0Eh0KB2NsYW5f",
-            "SUQYASABKAsyDC5ORk1zZy5JZGVudBIRCgljbGFuX25hbWUYAiABKAwSEQoJ",
-            "Y2xhbl9pY29uGAMgASgMEhkKEWNsYW5fbWVtYmVyX2NvdW50GAQgASgFEh0K",
-            "FWNsYW5fbWVtYmVyX21heF9jb3VudBgFIAEoBRISCgpjbGFuX2hvbm9yGAYg",
-            "ASgFEhEKCWNsYW5fcmFuaxgHIAEoBSJCCg5SZXFBY2tKb2luQ2xhbhIdCgdj",
-            "bGFuX2lkGAEgASgLMgwuTkZNc2cuSWRlbnQSEQoJY2xhbl9uYW1lGAIgASgM",
-            "IkMKD1JlcUFja0xlYXZlQ2xhbhIdCgdjbGFuX2lkGAEgASgLMgwuTkZNc2cu",
-            "SWRlbnQSEQoJY2xhbl9uYW1lGAIgASgMItUBChNSZXFBY2tPcHJDbGFuTWVt",
-            "YmVyEh0KB2NsYW5faWQYASABKAsyDC5ORk1zZy5JZGVudBIfCgltZW1iZXJf",
-            "aWQYAiABKAsyDC5ORk1zZy5JZGVudBI8CgR0eXBlGAMgASgOMi4uTkZNc2cu",
-            "UmVxQWNrT3ByQ2xhbk1lbWJlci5FR0NsYW5NZW1iZXJPcHJUeXBlIkAKE0VH",
-            "Q2xhbk1lbWJlck9wclR5cGUSDQoJRUdBVF9ET1dOEAASCwoHRUdBVF9VUBAB",
-            "Eg0KCUVHQVRfS0lDSxACIjMKElJlcUVudGVyQ2xhbkVjdHlwZRIdCgdjbGFu",
-            "X2lkGAEgASgLMgwuTkZNc2cuSWRlbnQiPAoPUmVxU2V0RmlnaHRIZXJvEhwK",
-            "Bkhlcm9pZBgBIAEoCzIMLk5GTXNnLklkZW50EgsKA1NldBgCIAEoBSIyChJS",
-            "ZXFTd2l0Y2hGaWdodEhlcm8SHAoGSGVyb2lkGAEgASgLMgwuTkZNc2cuSWRl",
-            "bnQiMwoSUmVxQnV5SXRlbUZyb21TaG9wEg4KBml0ZW1JRBgBIAEoDBINCgVj",
-            "b3VudBgCIAEoBSI1ChFSZXFBZGRHYW1ibGVWYWx1ZRIQCghwcm9wZXJ0eRgB",
-            "IAEoDBIOCgZudW1iZXIYAiABKAUiMwoOUmVxTWluaW5nVGl0bGUSCQoBeBgB",
-            "IAEoBRIJCgF5GAIgASgFEgsKA29wchgDIAEoBSIuCglUaWxlU3RhdGUSCQoB",
-            "eBgBIAEoBRIJCgF5GAIgASgFEgsKA29wchgDIAEoBSJSCgxUaWxlQnVpbGRp",
-            "bmcSCQoBeBgBIAEoBRIJCgF5GAIgASgFEhAKCGNvbmZpZ0lEGAMgASgMEhoK",
-            "BGd1aWQYBCABKAsyDC5ORk1zZy5JZGVudCJNCgdUaWxlTlBDEgkKAXgYASAB",
-            "KAUSCQoBeRgCIAEoBRIQCghjb25maWdJRBgDIAEoDBIaCgRndWlkGAQgASgL",
-            "MgwuTkZNc2cuSWRlbnQidAoOQWNrTWluaW5nVGl0bGUSHgoEdGlsZRgBIAMo",
-            "CzIQLk5GTXNnLlRpbGVTdGF0ZRIlCghidWlsZGluZxgCIAMoCzITLk5GTXNn",
-            "LlRpbGVCdWlsZGluZxIbCgNucGMYAyADKAsyDi5ORk1zZy5UaWxlTlBDIiYK",
-            "EFJlcVNlYXJjaE9wcG5lbnQSEgoKc2VsZl9zY2VuZRgBIAEoBSL/AwoQQWNr",
-            "U2VhcmNoT3BwbmVudBIQCghzY2VuZV9pZBgBIAEoBRIMCgRnb2xkGAIgASgF",
-            "Eg8KB2RpYW1vbmQYAyABKAUSDQoFbGV2ZWwYBCABKAUSCwoDY3VwGAUgASgF",
-            "EgwKBG5hbWUYBiABKAwSDAoEaGVhZBgHIAEoDBIRCgloZXJvX2NuZjEYCCAB",
-            "KAwSEgoKaGVyb19zdGFyMRgJIAEoBRIRCgloZXJvX2NuZjIYCiABKAwSEgoK",
-            "aGVyb19zdGFyMhgLIAEoBRIRCgloZXJvX2NuZjMYDCABKAwSEgoKaGVyb19z",
-            "dGFyMxgNIAEoBRIeCghoZXJvX2lkMRgUIAEoCzIMLk5GTXNnLklkZW50Eh4K",
-            "CGhlcm9faWQyGBUgASgLMgwuTkZNc2cuSWRlbnQSHgoIaGVyb19pZDMYFiAB",
-            "KAsyDC5ORk1zZy5JZGVudBIhCgloZXJvX3BvczEYFyABKAsyDi5ORk1zZy5W",
-            "ZWN0b3IzEiEKCWhlcm9fcG9zMhgYIAEoCzIOLk5GTXNnLlZlY3RvcjMSIQoJ",
-            "aGVyb19wb3MzGBkgASgLMg4uTkZNc2cuVmVjdG9yMxIkCgV0aXRsZRgeIAEo",
-            "CzIVLk5GTXNnLkFja01pbmluZ1RpdGxlEh4KCG9wcG9uZW50GB8gASgLMgwu",
-            "TkZNc2cuSWRlbnQigQEKC1JlcVNlbmRNYWlsEh4KCHJlY2lldmVyGAEgASgL",
-            "MgwuTkZNc2cuSWRlbnQSJAoJaXRlbV9saXN0GAIgAygLMhEuTkZNc2cuSXRl",
-            "bVN0cnVjdBIsCg1jdXJyZW5jeV9saXN0GAMgAygLMhUuTkZNc2cuQ3VycmVu",
-            "Y3lTdHJ1Y3QiuQEKD1JlcVN3aXRjaFNlcnZlchIcCgZzZWxmaWQYASABKAsy",
-            "DC5ORk1zZy5JZGVudBIVCg1zZWxmX3NlcnZlcmlkGAIgASgDEhcKD3Rhcmdl",
-            "dF9zZXJ2ZXJpZBgDIAEoAxIVCg1nYXRlX3NlcnZlcmlkGAQgASgDEg8KB1Nj",
-            "ZW5lSUQYBSABKAMSHwoJY2xpZW50X2lkGAYgASgLMgwuTkZNc2cuSWRlbnQS",
-            "DwoHZ3JvdXBJRBgHIAEoAyJ2Cg9BY2tTd2l0Y2hTZXJ2ZXISHAoGc2VsZmlk",
-            "GAEgASgLMgwuTkZNc2cuSWRlbnQSFQoNc2VsZl9zZXJ2ZXJpZBgCIAEoAxIX",
-            "Cg90YXJnZXRfc2VydmVyaWQYAyABKAMSFQoNZ2F0ZV9zZXJ2ZXJpZBgEIAEo",
-            "AyLxAQoLUFZQUm9vbUluZm8SEwoLbkNlbGxTdGF0dXMYASABKAUSHAoGUm9v",
-            "bUlEGAIgASgLMgwuTkZNc2cuSWRlbnQSEAoIblBWUE1vZGUYAyABKAUSEQoJ",
-            "blBWUEdyYWRlGAQgASgFEhEKCU1heFBhbHllchgFIAEoBRIgCgp4UmVkUGxh",
-            "eWVyGAYgAygLMgwuTkZNc2cuSWRlbnQSIQoLeEJsdWVQbGF5ZXIYByADKAsy",
-            "DC5ORk1zZy5JZGVudBIQCghzZXJ2ZXJpZBgIIAEoAxIPCgdTY2VuZUlEGAkg",
-            "ASgDEg8KB2dyb3VwSUQYCiABKAMivgEKEFJlcVBWUEFwcGx5TWF0Y2gSHQoH",
-            "c2VsZl9pZBgBIAEoCzIMLk5GTXNnLklkZW50EhAKCG5QVlBNb2RlGAIgASgF",
-            "Eg0KBXNjb3JlGAMgASgDEhEKCUFwcGx5VHlwZRgEIAEoBRIdCgd0ZWFtX2lk",
-            "GAUgASgLMgwuTkZNc2cuSWRlbnQiOAoKRUFwcGx5VHlwZRIVChFFQXBwbHlU",
-            "eXBlX1NpbmdsZRAAEhMKD0VBcHBseVR5cGVfVGVhbRABInwKEEFja1BWUEFw",
-            "cGx5TWF0Y2gSHQoHc2VsZl9pZBgBIAEoCzIMLk5GTXNnLklkZW50EiUKCXhS",
-            "b29tSW5mbxgCIAEoCzISLk5GTXNnLlBWUFJvb21JbmZvEhEKCUFwcGx5VHlw",
-            "ZRgDIAEoBRIPCgduUmVzdWx0GAQgASgFIloKElJlcUNyZWF0ZVBWUEVjdHlw",
-            "ZRIdCgdzZWxmX2lkGAEgASgLMgwuTkZNc2cuSWRlbnQSJQoJeFJvb21JbmZv",
-            "GAIgASgLMhIuTkZNc2cuUFZQUm9vbUluZm8ibQoSQWNrQ3JlYXRlUFZQRWN0",
-            "eXBlEh0KB3NlbGZfaWQYASABKAsyDC5ORk1zZy5JZGVudBIlCgl4Um9vbUlu",
-            "Zm8YAiABKAsyEi5ORk1zZy5QVlBSb29tSW5mbxIRCglBcHBseVR5cGUYAyAB",
-            "KAViBnByb3RvMw=="));
+            "DBIQCghzY2VuZV9pZBgFIAEoBRITCgttYXN0ZXJfbmFtZRgGIAEoDBIVCg1p",
+            "c19ob21lX3NjZW5lGAcgASgFEhMKC2lzX2J1aWxkaW5nGAggASgFIkIKEVJl",
+            "cVNjZW5lQnVpbGRpbmdzEhAKCHNjZW5lX2lkGAEgASgFEhsKA3BvcxgCIAEo",
+            "CzIOLk5GTXNnLlZlY3RvcjMiQgoRQWNrU2NlbmVCdWlsZGluZ3MSLQoJYnVp",
+            "bGRpbmdzGAEgAygLMhouTkZNc2cuUmVxQWRkU2NlbmVCdWlsZGluZyJ6ChZS",
+            "ZXFTdG9yZVNjZW5lQnVpbGRpbmdzEhoKBGd1aWQYASABKAsyDC5ORk1zZy5J",
+            "ZGVudBIVCg1ob21lX3NjZW5lX2lkGAIgASgFEi0KCWJ1aWxkaW5ncxgDIAMo",
+            "CzIaLk5GTXNnLlJlcUFkZFNjZW5lQnVpbGRpbmci7wEKElJlcUFja0pvaW5B",
+            "Y3Rpdml0eRJCCg1hY3Rpdml0eV90eXBlGAEgASgOMisuTkZNc2cuUmVxQWNr",
+            "Sm9pbkFjdGl2aXR5LkVHYW1lQWN0aXZpdHlUeXBlEkkKEXN1Yl9hY3Rpdml0",
+            "eV90eXBlGAIgASgOMi4uTkZNc2cuUmVxQWNrSm9pbkFjdGl2aXR5LkVHYW1l",
+            "QWN0aXZpdHlTdWJUeXBlIiEKEUVHYW1lQWN0aXZpdHlUeXBlEgwKCEVHQVRf",
+            "UFZQEAAiJwoURUdhbWVBY3Rpdml0eVN1YlR5cGUSDwoLRUdBVF9OT1JNQUwQ",
+            "ACJEChBSZXFBY2tDcmVhdGVDbGFuEh0KB2NsYW5faWQYASABKAsyDC5ORk1z",
+            "Zy5JZGVudBIRCgljbGFuX25hbWUYAiABKAwiIgoNUmVxU2VhcmNoQ2xhbhIR",
+            "CgljbGFuX25hbWUYASABKAwihAIKDUFja1NlYXJjaENsYW4SOAoJY2xhbl9s",
+            "aXN0GAEgAygLMiUuTkZNc2cuQWNrU2VhcmNoQ2xhbi5TZWFyY2hDbGFuT2Jq",
+            "ZWN0GrgBChBTZWFyY2hDbGFuT2JqZWN0Eh0KB2NsYW5fSUQYASABKAsyDC5O",
+            "Rk1zZy5JZGVudBIRCgljbGFuX25hbWUYAiABKAwSEQoJY2xhbl9pY29uGAMg",
+            "ASgMEhkKEWNsYW5fbWVtYmVyX2NvdW50GAQgASgFEh0KFWNsYW5fbWVtYmVy",
+            "X21heF9jb3VudBgFIAEoBRISCgpjbGFuX2hvbm9yGAYgASgFEhEKCWNsYW5f",
+            "cmFuaxgHIAEoBSJCCg5SZXFBY2tKb2luQ2xhbhIdCgdjbGFuX2lkGAEgASgL",
+            "MgwuTkZNc2cuSWRlbnQSEQoJY2xhbl9uYW1lGAIgASgMIkMKD1JlcUFja0xl",
+            "YXZlQ2xhbhIdCgdjbGFuX2lkGAEgASgLMgwuTkZNc2cuSWRlbnQSEQoJY2xh",
+            "bl9uYW1lGAIgASgMItUBChNSZXFBY2tPcHJDbGFuTWVtYmVyEh0KB2NsYW5f",
+            "aWQYASABKAsyDC5ORk1zZy5JZGVudBIfCgltZW1iZXJfaWQYAiABKAsyDC5O",
+            "Rk1zZy5JZGVudBI8CgR0eXBlGAMgASgOMi4uTkZNc2cuUmVxQWNrT3ByQ2xh",
+            "bk1lbWJlci5FR0NsYW5NZW1iZXJPcHJUeXBlIkAKE0VHQ2xhbk1lbWJlck9w",
+            "clR5cGUSDQoJRUdBVF9ET1dOEAASCwoHRUdBVF9VUBABEg0KCUVHQVRfS0lD",
+            "SxACIjMKElJlcUVudGVyQ2xhbkVjdHlwZRIdCgdjbGFuX2lkGAEgASgLMgwu",
+            "TkZNc2cuSWRlbnQiPAoPUmVxU2V0RmlnaHRIZXJvEhwKBkhlcm9pZBgBIAEo",
+            "CzIMLk5GTXNnLklkZW50EgsKA1NldBgCIAEoBSIyChJSZXFTd2l0Y2hGaWdo",
+            "dEhlcm8SHAoGSGVyb2lkGAEgASgLMgwuTkZNc2cuSWRlbnQiMwoSUmVxQnV5",
+            "SXRlbUZyb21TaG9wEg4KBml0ZW1JRBgBIAEoDBINCgVjb3VudBgCIAEoBSI1",
+            "ChFSZXFBZGRHYW1ibGVWYWx1ZRIQCghwcm9wZXJ0eRgBIAEoDBIOCgZudW1i",
+            "ZXIYAiABKAUiJgoQUmVxU2VhcmNoT3BwbmVudBISCgpzZWxmX3NjZW5lGAEg",
+            "ASgFIogEChBBY2tTZWFyY2hPcHBuZW50EhAKCHNjZW5lX2lkGAEgASgFEgwK",
+            "BGdvbGQYAiABKAUSDwoHZGlhbW9uZBgDIAEoBRINCgVsZXZlbBgEIAEoBRIL",
+            "CgNjdXAYBSABKAUSDAoEbmFtZRgGIAEoDBIMCgRoZWFkGAcgASgMEhEKCWhl",
+            "cm9fY25mMRgIIAEoDBISCgpoZXJvX3N0YXIxGAkgASgFEhEKCWhlcm9fY25m",
+            "MhgKIAEoDBISCgpoZXJvX3N0YXIyGAsgASgFEhEKCWhlcm9fY25mMxgMIAEo",
+            "DBISCgpoZXJvX3N0YXIzGA0gASgFEh4KCGhlcm9faWQxGBQgASgLMgwuTkZN",
+            "c2cuSWRlbnQSHgoIaGVyb19pZDIYFSABKAsyDC5ORk1zZy5JZGVudBIeCgho",
+            "ZXJvX2lkMxgWIAEoCzIMLk5GTXNnLklkZW50EiEKCWhlcm9fcG9zMRgXIAEo",
+            "CzIOLk5GTXNnLlZlY3RvcjMSIQoJaGVyb19wb3MyGBggASgLMg4uTkZNc2cu",
+            "VmVjdG9yMxIhCgloZXJvX3BvczMYGSABKAsyDi5ORk1zZy5WZWN0b3IzEi0K",
+            "CWJ1aWxkaW5ncxgeIAMoCzIaLk5GTXNnLlJlcUFkZFNjZW5lQnVpbGRpbmcS",
+            "HgoIb3Bwb25lbnQYHyABKAsyDC5ORk1zZy5JZGVudCKBAQoLUmVxU2VuZE1h",
+            "aWwSHgoIcmVjaWV2ZXIYASABKAsyDC5ORk1zZy5JZGVudBIkCglpdGVtX2xp",
+            "c3QYAiADKAsyES5ORk1zZy5JdGVtU3RydWN0EiwKDWN1cnJlbmN5X2xpc3QY",
+            "AyADKAsyFS5ORk1zZy5DdXJyZW5jeVN0cnVjdCK5AQoPUmVxU3dpdGNoU2Vy",
+            "dmVyEhwKBnNlbGZpZBgBIAEoCzIMLk5GTXNnLklkZW50EhUKDXNlbGZfc2Vy",
+            "dmVyaWQYAiABKAMSFwoPdGFyZ2V0X3NlcnZlcmlkGAMgASgDEhUKDWdhdGVf",
+            "c2VydmVyaWQYBCABKAMSDwoHU2NlbmVJRBgFIAEoAxIfCgljbGllbnRfaWQY",
+            "BiABKAsyDC5ORk1zZy5JZGVudBIPCgdncm91cElEGAcgASgDInYKD0Fja1N3",
+            "aXRjaFNlcnZlchIcCgZzZWxmaWQYASABKAsyDC5ORk1zZy5JZGVudBIVCg1z",
+            "ZWxmX3NlcnZlcmlkGAIgASgDEhcKD3RhcmdldF9zZXJ2ZXJpZBgDIAEoAxIV",
+            "Cg1nYXRlX3NlcnZlcmlkGAQgASgDIvEBCgtQVlBSb29tSW5mbxITCgtuQ2Vs",
+            "bFN0YXR1cxgBIAEoBRIcCgZSb29tSUQYAiABKAsyDC5ORk1zZy5JZGVudBIQ",
+            "CghuUFZQTW9kZRgDIAEoBRIRCgluUFZQR3JhZGUYBCABKAUSEQoJTWF4UGFs",
+            "eWVyGAUgASgFEiAKCnhSZWRQbGF5ZXIYBiADKAsyDC5ORk1zZy5JZGVudBIh",
+            "Cgt4Qmx1ZVBsYXllchgHIAMoCzIMLk5GTXNnLklkZW50EhAKCHNlcnZlcmlk",
+            "GAggASgDEg8KB1NjZW5lSUQYCSABKAMSDwoHZ3JvdXBJRBgKIAEoAyK+AQoQ",
+            "UmVxUFZQQXBwbHlNYXRjaBIdCgdzZWxmX2lkGAEgASgLMgwuTkZNc2cuSWRl",
+            "bnQSEAoIblBWUE1vZGUYAiABKAUSDQoFc2NvcmUYAyABKAMSEQoJQXBwbHlU",
+            "eXBlGAQgASgFEh0KB3RlYW1faWQYBSABKAsyDC5ORk1zZy5JZGVudCI4CgpF",
+            "QXBwbHlUeXBlEhUKEUVBcHBseVR5cGVfU2luZ2xlEAASEwoPRUFwcGx5VHlw",
+            "ZV9UZWFtEAEifAoQQWNrUFZQQXBwbHlNYXRjaBIdCgdzZWxmX2lkGAEgASgL",
+            "MgwuTkZNc2cuSWRlbnQSJQoJeFJvb21JbmZvGAIgASgLMhIuTkZNc2cuUFZQ",
+            "Um9vbUluZm8SEQoJQXBwbHlUeXBlGAMgASgFEg8KB25SZXN1bHQYBCABKAUi",
+            "WgoSUmVxQ3JlYXRlUFZQRWN0eXBlEh0KB3NlbGZfaWQYASABKAsyDC5ORk1z",
+            "Zy5JZGVudBIlCgl4Um9vbUluZm8YAiABKAsyEi5ORk1zZy5QVlBSb29tSW5m",
+            "byJtChJBY2tDcmVhdGVQVlBFY3R5cGUSHQoHc2VsZl9pZBgBIAEoCzIMLk5G",
+            "TXNnLklkZW50EiUKCXhSb29tSW5mbxgCIAEoCzISLk5GTXNnLlBWUFJvb21J",
+            "bmZvEhEKCUFwcGx5VHlwZRgDIAEoBWIGcHJvdG8z"));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { global::NFMsg.NFDefineReflection.Descriptor, global::NFMsg.NFMsgBaseReflection.Descriptor, },
           new pbr::GeneratedClrTypeInfo(null, new pbr::GeneratedClrTypeInfo[] {
@@ -202,9 +197,10 @@ namespace NFMsg {
             new pbr::GeneratedClrTypeInfo(typeof(global::NFMsg.ReqPickDropItem), global::NFMsg.ReqPickDropItem.Parser, new[]{ "item_guid" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::NFMsg.ReqAcceptTask), global::NFMsg.ReqAcceptTask.Parser, new[]{ "task_id" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::NFMsg.ReqCompeleteTask), global::NFMsg.ReqCompeleteTask.Parser, new[]{ "task_id" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::NFMsg.ReqAddSceneBuilding), global::NFMsg.ReqAddSceneBuilding.Parser, new[]{ "pos", "guid", "master", "config_id", "scene_id", "master_name" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::NFMsg.ReqAddSceneBuilding), global::NFMsg.ReqAddSceneBuilding.Parser, new[]{ "pos", "guid", "master", "config_id", "scene_id", "master_name", "is_home_scene", "is_building" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::NFMsg.ReqSceneBuildings), global::NFMsg.ReqSceneBuildings.Parser, new[]{ "scene_id", "pos" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::NFMsg.AckSceneBuildings), global::NFMsg.AckSceneBuildings.Parser, new[]{ "buildings" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::NFMsg.ReqStoreSceneBuildings), global::NFMsg.ReqStoreSceneBuildings.Parser, new[]{ "guid", "home_scene_id", "buildings" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::NFMsg.ReqAckJoinActivity), global::NFMsg.ReqAckJoinActivity.Parser, new[]{ "activity_type", "sub_activity_type" }, null, new[]{ typeof(global::NFMsg.ReqAckJoinActivity.Types.EGameActivityType), typeof(global::NFMsg.ReqAckJoinActivity.Types.EGameActivitySubType) }, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::NFMsg.ReqAckCreateClan), global::NFMsg.ReqAckCreateClan.Parser, new[]{ "clan_id", "clan_name" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::NFMsg.ReqSearchClan), global::NFMsg.ReqSearchClan.Parser, new[]{ "clan_name" }, null, null, null),
@@ -217,13 +213,8 @@ namespace NFMsg {
             new pbr::GeneratedClrTypeInfo(typeof(global::NFMsg.ReqSwitchFightHero), global::NFMsg.ReqSwitchFightHero.Parser, new[]{ "Heroid" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::NFMsg.ReqBuyItemFromShop), global::NFMsg.ReqBuyItemFromShop.Parser, new[]{ "itemID", "count" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::NFMsg.ReqAddGambleValue), global::NFMsg.ReqAddGambleValue.Parser, new[]{ "property", "number" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::NFMsg.ReqMiningTitle), global::NFMsg.ReqMiningTitle.Parser, new[]{ "x", "y", "opr" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::NFMsg.TileState), global::NFMsg.TileState.Parser, new[]{ "x", "y", "opr" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::NFMsg.TileBuilding), global::NFMsg.TileBuilding.Parser, new[]{ "x", "y", "configID", "guid" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::NFMsg.TileNPC), global::NFMsg.TileNPC.Parser, new[]{ "x", "y", "configID", "guid" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::NFMsg.AckMiningTitle), global::NFMsg.AckMiningTitle.Parser, new[]{ "tile", "building", "npc" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::NFMsg.ReqSearchOppnent), global::NFMsg.ReqSearchOppnent.Parser, new[]{ "self_scene" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::NFMsg.AckSearchOppnent), global::NFMsg.AckSearchOppnent.Parser, new[]{ "scene_id", "gold", "diamond", "level", "cup", "name", "head", "hero_cnf1", "hero_star1", "hero_cnf2", "hero_star2", "hero_cnf3", "hero_star3", "hero_id1", "hero_id2", "hero_id3", "hero_pos1", "hero_pos2", "hero_pos3", "title", "opponent" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::NFMsg.AckSearchOppnent), global::NFMsg.AckSearchOppnent.Parser, new[]{ "scene_id", "gold", "diamond", "level", "cup", "name", "head", "hero_cnf1", "hero_star1", "hero_cnf2", "hero_star2", "hero_cnf3", "hero_star3", "hero_id1", "hero_id2", "hero_id3", "hero_pos1", "hero_pos2", "hero_pos3", "buildings", "opponent" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::NFMsg.ReqSendMail), global::NFMsg.ReqSendMail.Parser, new[]{ "reciever", "item_list", "currency_list" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::NFMsg.ReqSwitchServer), global::NFMsg.ReqSwitchServer.Parser, new[]{ "selfid", "self_serverid", "target_serverid", "gate_serverid", "SceneID", "client_id", "groupID" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::NFMsg.AckSwitchServer), global::NFMsg.AckSwitchServer.Parser, new[]{ "selfid", "self_serverid", "target_serverid", "gate_serverid" }, null, null, null),
@@ -5446,6 +5437,8 @@ namespace NFMsg {
       configId_ = other.configId_;
       sceneId_ = other.sceneId_;
       masterName_ = other.masterName_;
+      isHomeScene_ = other.isHomeScene_;
+      isBuilding_ = other.isBuilding_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -5520,6 +5513,34 @@ namespace NFMsg {
       }
     }
 
+    /// <summary>Field number for the "is_home_scene" field.</summary>
+    public const int is_home_sceneFieldNumber = 7;
+    private int isHomeScene_;
+    /// <summary>
+    ///is home or clan scene
+    /// </summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int is_home_scene {
+      get { return isHomeScene_; }
+      set {
+        isHomeScene_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "is_building" field.</summary>
+    public const int is_buildingFieldNumber = 8;
+    private int isBuilding_;
+    /// <summary>
+    ///building or tree
+    /// </summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int is_building {
+      get { return isBuilding_; }
+      set {
+        isBuilding_ = value;
+      }
+    }
+
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override bool Equals(object other) {
       return Equals(other as ReqAddSceneBuilding);
@@ -5539,6 +5560,8 @@ namespace NFMsg {
       if (config_id != other.config_id) return false;
       if (scene_id != other.scene_id) return false;
       if (master_name != other.master_name) return false;
+      if (is_home_scene != other.is_home_scene) return false;
+      if (is_building != other.is_building) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -5551,6 +5574,8 @@ namespace NFMsg {
       if (config_id.Length != 0) hash ^= config_id.GetHashCode();
       if (scene_id != 0) hash ^= scene_id.GetHashCode();
       if (master_name.Length != 0) hash ^= master_name.GetHashCode();
+      if (is_home_scene != 0) hash ^= is_home_scene.GetHashCode();
+      if (is_building != 0) hash ^= is_building.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -5588,6 +5613,14 @@ namespace NFMsg {
         output.WriteRawTag(50);
         output.WriteBytes(master_name);
       }
+      if (is_home_scene != 0) {
+        output.WriteRawTag(56);
+        output.WriteInt32(is_home_scene);
+      }
+      if (is_building != 0) {
+        output.WriteRawTag(64);
+        output.WriteInt32(is_building);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
@@ -5613,6 +5646,12 @@ namespace NFMsg {
       }
       if (master_name.Length != 0) {
         size += 1 + pb::CodedOutputStream.ComputeBytesSize(master_name);
+      }
+      if (is_home_scene != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(is_home_scene);
+      }
+      if (is_building != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(is_building);
       }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
@@ -5651,6 +5690,12 @@ namespace NFMsg {
       }
       if (other.master_name.Length != 0) {
         master_name = other.master_name;
+      }
+      if (other.is_home_scene != 0) {
+        is_home_scene = other.is_home_scene;
+      }
+      if (other.is_building != 0) {
+        is_building = other.is_building;
       }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
@@ -5694,6 +5739,14 @@ namespace NFMsg {
           }
           case 50: {
             master_name = input.ReadBytes();
+            break;
+          }
+          case 56: {
+            is_home_scene = input.ReadInt32();
+            break;
+          }
+          case 64: {
+            is_building = input.ReadInt32();
             break;
           }
         }
@@ -5986,6 +6039,189 @@ namespace NFMsg {
 
   }
 
+  public sealed partial class ReqStoreSceneBuildings : pb::IMessage<ReqStoreSceneBuildings> {
+    private static readonly pb::MessageParser<ReqStoreSceneBuildings> _parser = new pb::MessageParser<ReqStoreSceneBuildings>(() => new ReqStoreSceneBuildings());
+    private pb::UnknownFieldSet _unknownFields;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::MessageParser<ReqStoreSceneBuildings> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::NFMsg.NFMsgShareReflection.Descriptor.MessageTypes[28]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public ReqStoreSceneBuildings() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public ReqStoreSceneBuildings(ReqStoreSceneBuildings other) : this() {
+      guid_ = other.guid_ != null ? other.guid_.Clone() : null;
+      homeSceneId_ = other.homeSceneId_;
+      buildings_ = other.buildings_.Clone();
+      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public ReqStoreSceneBuildings Clone() {
+      return new ReqStoreSceneBuildings(this);
+    }
+
+    /// <summary>Field number for the "guid" field.</summary>
+    public const int guidFieldNumber = 1;
+    private global::NFMsg.Ident guid_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public global::NFMsg.Ident guid {
+      get { return guid_; }
+      set {
+        guid_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "home_scene_id" field.</summary>
+    public const int home_scene_idFieldNumber = 2;
+    private int homeSceneId_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int home_scene_id {
+      get { return homeSceneId_; }
+      set {
+        homeSceneId_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "buildings" field.</summary>
+    public const int buildingsFieldNumber = 3;
+    private static readonly pb::FieldCodec<global::NFMsg.ReqAddSceneBuilding> _repeated_buildings_codec
+        = pb::FieldCodec.ForMessage(26, global::NFMsg.ReqAddSceneBuilding.Parser);
+    private readonly pbc::RepeatedField<global::NFMsg.ReqAddSceneBuilding> buildings_ = new pbc::RepeatedField<global::NFMsg.ReqAddSceneBuilding>();
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public pbc::RepeatedField<global::NFMsg.ReqAddSceneBuilding> buildings {
+      get { return buildings_; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override bool Equals(object other) {
+      return Equals(other as ReqStoreSceneBuildings);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Equals(ReqStoreSceneBuildings other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (!object.Equals(guid, other.guid)) return false;
+      if (home_scene_id != other.home_scene_id) return false;
+      if(!buildings_.Equals(other.buildings_)) return false;
+      return Equals(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (guid_ != null) hash ^= guid.GetHashCode();
+      if (home_scene_id != 0) hash ^= home_scene_id.GetHashCode();
+      hash ^= buildings_.GetHashCode();
+      if (_unknownFields != null) {
+        hash ^= _unknownFields.GetHashCode();
+      }
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void WriteTo(pb::CodedOutputStream output) {
+      if (guid_ != null) {
+        output.WriteRawTag(10);
+        output.WriteMessage(guid);
+      }
+      if (home_scene_id != 0) {
+        output.WriteRawTag(16);
+        output.WriteInt32(home_scene_id);
+      }
+      buildings_.WriteTo(output, _repeated_buildings_codec);
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(output);
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int CalculateSize() {
+      int size = 0;
+      if (guid_ != null) {
+        size += 1 + pb::CodedOutputStream.ComputeMessageSize(guid);
+      }
+      if (home_scene_id != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(home_scene_id);
+      }
+      size += buildings_.CalculateSize(_repeated_buildings_codec);
+      if (_unknownFields != null) {
+        size += _unknownFields.CalculateSize();
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(ReqStoreSceneBuildings other) {
+      if (other == null) {
+        return;
+      }
+      if (other.guid_ != null) {
+        if (guid_ == null) {
+          guid_ = new global::NFMsg.Ident();
+        }
+        guid.MergeFrom(other.guid);
+      }
+      if (other.home_scene_id != 0) {
+        home_scene_id = other.home_scene_id;
+      }
+      buildings_.Add(other.buildings_);
+      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(pb::CodedInputStream input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            break;
+          case 10: {
+            if (guid_ == null) {
+              guid_ = new global::NFMsg.Ident();
+            }
+            input.ReadMessage(guid_);
+            break;
+          }
+          case 16: {
+            home_scene_id = input.ReadInt32();
+            break;
+          }
+          case 26: {
+            buildings_.AddEntriesFrom(input, _repeated_buildings_codec);
+            break;
+          }
+        }
+      }
+    }
+
+  }
+
   public sealed partial class ReqAckJoinActivity : pb::IMessage<ReqAckJoinActivity> {
     private static readonly pb::MessageParser<ReqAckJoinActivity> _parser = new pb::MessageParser<ReqAckJoinActivity>(() => new ReqAckJoinActivity());
     private pb::UnknownFieldSet _unknownFields;
@@ -5994,7 +6230,7 @@ namespace NFMsg {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::NFMsg.NFMsgShareReflection.Descriptor.MessageTypes[28]; }
+      get { return global::NFMsg.NFMsgShareReflection.Descriptor.MessageTypes[29]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -6176,7 +6412,7 @@ namespace NFMsg {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::NFMsg.NFMsgShareReflection.Descriptor.MessageTypes[29]; }
+      get { return global::NFMsg.NFMsgShareReflection.Descriptor.MessageTypes[30]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -6342,7 +6578,7 @@ namespace NFMsg {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::NFMsg.NFMsgShareReflection.Descriptor.MessageTypes[30]; }
+      get { return global::NFMsg.NFMsgShareReflection.Descriptor.MessageTypes[31]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -6474,7 +6710,7 @@ namespace NFMsg {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::NFMsg.NFMsgShareReflection.Descriptor.MessageTypes[31]; }
+      get { return global::NFMsg.NFMsgShareReflection.Descriptor.MessageTypes[32]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -6908,7 +7144,7 @@ namespace NFMsg {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::NFMsg.NFMsgShareReflection.Descriptor.MessageTypes[32]; }
+      get { return global::NFMsg.NFMsgShareReflection.Descriptor.MessageTypes[33]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -7074,7 +7310,7 @@ namespace NFMsg {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::NFMsg.NFMsgShareReflection.Descriptor.MessageTypes[33]; }
+      get { return global::NFMsg.NFMsgShareReflection.Descriptor.MessageTypes[34]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -7240,7 +7476,7 @@ namespace NFMsg {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::NFMsg.NFMsgShareReflection.Descriptor.MessageTypes[34]; }
+      get { return global::NFMsg.NFMsgShareReflection.Descriptor.MessageTypes[35]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -7456,7 +7692,7 @@ namespace NFMsg {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::NFMsg.NFMsgShareReflection.Descriptor.MessageTypes[35]; }
+      get { return global::NFMsg.NFMsgShareReflection.Descriptor.MessageTypes[36]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -7594,7 +7830,7 @@ namespace NFMsg {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::NFMsg.NFMsgShareReflection.Descriptor.MessageTypes[36]; }
+      get { return global::NFMsg.NFMsgShareReflection.Descriptor.MessageTypes[37]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -7765,7 +8001,7 @@ namespace NFMsg {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::NFMsg.NFMsgShareReflection.Descriptor.MessageTypes[37]; }
+      get { return global::NFMsg.NFMsgShareReflection.Descriptor.MessageTypes[38]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -7903,7 +8139,7 @@ namespace NFMsg {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::NFMsg.NFMsgShareReflection.Descriptor.MessageTypes[38]; }
+      get { return global::NFMsg.NFMsgShareReflection.Descriptor.MessageTypes[39]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -8063,7 +8299,7 @@ namespace NFMsg {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::NFMsg.NFMsgShareReflection.Descriptor.MessageTypes[39]; }
+      get { return global::NFMsg.NFMsgShareReflection.Descriptor.MessageTypes[40]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -8213,1012 +8449,6 @@ namespace NFMsg {
   }
 
   /// <summary>
-  ///EGEC_REQ_MINING_TITLE							= 1600;		 // 挖矿
-  /// </summary>
-  public sealed partial class ReqMiningTitle : pb::IMessage<ReqMiningTitle> {
-    private static readonly pb::MessageParser<ReqMiningTitle> _parser = new pb::MessageParser<ReqMiningTitle>(() => new ReqMiningTitle());
-    private pb::UnknownFieldSet _unknownFields;
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public static pb::MessageParser<ReqMiningTitle> Parser { get { return _parser; } }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public static pbr::MessageDescriptor Descriptor {
-      get { return global::NFMsg.NFMsgShareReflection.Descriptor.MessageTypes[40]; }
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    pbr::MessageDescriptor pb::IMessage.Descriptor {
-      get { return Descriptor; }
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public ReqMiningTitle() {
-      OnConstruction();
-    }
-
-    partial void OnConstruction();
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public ReqMiningTitle(ReqMiningTitle other) : this() {
-      x_ = other.x_;
-      y_ = other.y_;
-      opr_ = other.opr_;
-      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public ReqMiningTitle Clone() {
-      return new ReqMiningTitle(this);
-    }
-
-    /// <summary>Field number for the "x" field.</summary>
-    public const int xFieldNumber = 1;
-    private int x_;
-    /// <summary>
-    /// </summary>
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public int x {
-      get { return x_; }
-      set {
-        x_ = value;
-      }
-    }
-
-    /// <summary>Field number for the "y" field.</summary>
-    public const int yFieldNumber = 2;
-    private int y_;
-    /// <summary>
-    /// </summary>
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public int y {
-      get { return y_; }
-      set {
-        y_ = value;
-      }
-    }
-
-    /// <summary>Field number for the "opr" field.</summary>
-    public const int oprFieldNumber = 3;
-    private int opr_;
-    /// <summary>
-    /// </summary>
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public int opr {
-      get { return opr_; }
-      set {
-        opr_ = value;
-      }
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public override bool Equals(object other) {
-      return Equals(other as ReqMiningTitle);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public bool Equals(ReqMiningTitle other) {
-      if (ReferenceEquals(other, null)) {
-        return false;
-      }
-      if (ReferenceEquals(other, this)) {
-        return true;
-      }
-      if (x != other.x) return false;
-      if (y != other.y) return false;
-      if (opr != other.opr) return false;
-      return Equals(_unknownFields, other._unknownFields);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public override int GetHashCode() {
-      int hash = 1;
-      if (x != 0) hash ^= x.GetHashCode();
-      if (y != 0) hash ^= y.GetHashCode();
-      if (opr != 0) hash ^= opr.GetHashCode();
-      if (_unknownFields != null) {
-        hash ^= _unknownFields.GetHashCode();
-      }
-      return hash;
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public override string ToString() {
-      return pb::JsonFormatter.ToDiagnosticString(this);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void WriteTo(pb::CodedOutputStream output) {
-      if (x != 0) {
-        output.WriteRawTag(8);
-        output.WriteInt32(x);
-      }
-      if (y != 0) {
-        output.WriteRawTag(16);
-        output.WriteInt32(y);
-      }
-      if (opr != 0) {
-        output.WriteRawTag(24);
-        output.WriteInt32(opr);
-      }
-      if (_unknownFields != null) {
-        _unknownFields.WriteTo(output);
-      }
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public int CalculateSize() {
-      int size = 0;
-      if (x != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeInt32Size(x);
-      }
-      if (y != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeInt32Size(y);
-      }
-      if (opr != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeInt32Size(opr);
-      }
-      if (_unknownFields != null) {
-        size += _unknownFields.CalculateSize();
-      }
-      return size;
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void MergeFrom(ReqMiningTitle other) {
-      if (other == null) {
-        return;
-      }
-      if (other.x != 0) {
-        x = other.x;
-      }
-      if (other.y != 0) {
-        y = other.y;
-      }
-      if (other.opr != 0) {
-        opr = other.opr;
-      }
-      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void MergeFrom(pb::CodedInputStream input) {
-      uint tag;
-      while ((tag = input.ReadTag()) != 0) {
-        switch(tag) {
-          default:
-            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
-            break;
-          case 8: {
-            x = input.ReadInt32();
-            break;
-          }
-          case 16: {
-            y = input.ReadInt32();
-            break;
-          }
-          case 24: {
-            opr = input.ReadInt32();
-            break;
-          }
-        }
-      }
-    }
-
-  }
-
-  public sealed partial class TileState : pb::IMessage<TileState> {
-    private static readonly pb::MessageParser<TileState> _parser = new pb::MessageParser<TileState>(() => new TileState());
-    private pb::UnknownFieldSet _unknownFields;
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public static pb::MessageParser<TileState> Parser { get { return _parser; } }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public static pbr::MessageDescriptor Descriptor {
-      get { return global::NFMsg.NFMsgShareReflection.Descriptor.MessageTypes[41]; }
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    pbr::MessageDescriptor pb::IMessage.Descriptor {
-      get { return Descriptor; }
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public TileState() {
-      OnConstruction();
-    }
-
-    partial void OnConstruction();
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public TileState(TileState other) : this() {
-      x_ = other.x_;
-      y_ = other.y_;
-      opr_ = other.opr_;
-      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public TileState Clone() {
-      return new TileState(this);
-    }
-
-    /// <summary>Field number for the "x" field.</summary>
-    public const int xFieldNumber = 1;
-    private int x_;
-    /// <summary>
-    /// </summary>
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public int x {
-      get { return x_; }
-      set {
-        x_ = value;
-      }
-    }
-
-    /// <summary>Field number for the "y" field.</summary>
-    public const int yFieldNumber = 2;
-    private int y_;
-    /// <summary>
-    /// </summary>
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public int y {
-      get { return y_; }
-      set {
-        y_ = value;
-      }
-    }
-
-    /// <summary>Field number for the "opr" field.</summary>
-    public const int oprFieldNumber = 3;
-    private int opr_;
-    /// <summary>
-    ///0:rem;1:add
-    /// </summary>
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public int opr {
-      get { return opr_; }
-      set {
-        opr_ = value;
-      }
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public override bool Equals(object other) {
-      return Equals(other as TileState);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public bool Equals(TileState other) {
-      if (ReferenceEquals(other, null)) {
-        return false;
-      }
-      if (ReferenceEquals(other, this)) {
-        return true;
-      }
-      if (x != other.x) return false;
-      if (y != other.y) return false;
-      if (opr != other.opr) return false;
-      return Equals(_unknownFields, other._unknownFields);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public override int GetHashCode() {
-      int hash = 1;
-      if (x != 0) hash ^= x.GetHashCode();
-      if (y != 0) hash ^= y.GetHashCode();
-      if (opr != 0) hash ^= opr.GetHashCode();
-      if (_unknownFields != null) {
-        hash ^= _unknownFields.GetHashCode();
-      }
-      return hash;
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public override string ToString() {
-      return pb::JsonFormatter.ToDiagnosticString(this);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void WriteTo(pb::CodedOutputStream output) {
-      if (x != 0) {
-        output.WriteRawTag(8);
-        output.WriteInt32(x);
-      }
-      if (y != 0) {
-        output.WriteRawTag(16);
-        output.WriteInt32(y);
-      }
-      if (opr != 0) {
-        output.WriteRawTag(24);
-        output.WriteInt32(opr);
-      }
-      if (_unknownFields != null) {
-        _unknownFields.WriteTo(output);
-      }
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public int CalculateSize() {
-      int size = 0;
-      if (x != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeInt32Size(x);
-      }
-      if (y != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeInt32Size(y);
-      }
-      if (opr != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeInt32Size(opr);
-      }
-      if (_unknownFields != null) {
-        size += _unknownFields.CalculateSize();
-      }
-      return size;
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void MergeFrom(TileState other) {
-      if (other == null) {
-        return;
-      }
-      if (other.x != 0) {
-        x = other.x;
-      }
-      if (other.y != 0) {
-        y = other.y;
-      }
-      if (other.opr != 0) {
-        opr = other.opr;
-      }
-      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void MergeFrom(pb::CodedInputStream input) {
-      uint tag;
-      while ((tag = input.ReadTag()) != 0) {
-        switch(tag) {
-          default:
-            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
-            break;
-          case 8: {
-            x = input.ReadInt32();
-            break;
-          }
-          case 16: {
-            y = input.ReadInt32();
-            break;
-          }
-          case 24: {
-            opr = input.ReadInt32();
-            break;
-          }
-        }
-      }
-    }
-
-  }
-
-  public sealed partial class TileBuilding : pb::IMessage<TileBuilding> {
-    private static readonly pb::MessageParser<TileBuilding> _parser = new pb::MessageParser<TileBuilding>(() => new TileBuilding());
-    private pb::UnknownFieldSet _unknownFields;
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public static pb::MessageParser<TileBuilding> Parser { get { return _parser; } }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public static pbr::MessageDescriptor Descriptor {
-      get { return global::NFMsg.NFMsgShareReflection.Descriptor.MessageTypes[42]; }
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    pbr::MessageDescriptor pb::IMessage.Descriptor {
-      get { return Descriptor; }
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public TileBuilding() {
-      OnConstruction();
-    }
-
-    partial void OnConstruction();
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public TileBuilding(TileBuilding other) : this() {
-      x_ = other.x_;
-      y_ = other.y_;
-      configID_ = other.configID_;
-      guid_ = other.guid_ != null ? other.guid_.Clone() : null;
-      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public TileBuilding Clone() {
-      return new TileBuilding(this);
-    }
-
-    /// <summary>Field number for the "x" field.</summary>
-    public const int xFieldNumber = 1;
-    private int x_;
-    /// <summary>
-    /// </summary>
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public int x {
-      get { return x_; }
-      set {
-        x_ = value;
-      }
-    }
-
-    /// <summary>Field number for the "y" field.</summary>
-    public const int yFieldNumber = 2;
-    private int y_;
-    /// <summary>
-    /// </summary>
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public int y {
-      get { return y_; }
-      set {
-        y_ = value;
-      }
-    }
-
-    /// <summary>Field number for the "configID" field.</summary>
-    public const int configIDFieldNumber = 3;
-    private pb::ByteString configID_ = pb::ByteString.Empty;
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public pb::ByteString configID {
-      get { return configID_; }
-      set {
-        configID_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
-      }
-    }
-
-    /// <summary>Field number for the "guid" field.</summary>
-    public const int guidFieldNumber = 4;
-    private global::NFMsg.Ident guid_;
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public global::NFMsg.Ident guid {
-      get { return guid_; }
-      set {
-        guid_ = value;
-      }
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public override bool Equals(object other) {
-      return Equals(other as TileBuilding);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public bool Equals(TileBuilding other) {
-      if (ReferenceEquals(other, null)) {
-        return false;
-      }
-      if (ReferenceEquals(other, this)) {
-        return true;
-      }
-      if (x != other.x) return false;
-      if (y != other.y) return false;
-      if (configID != other.configID) return false;
-      if (!object.Equals(guid, other.guid)) return false;
-      return Equals(_unknownFields, other._unknownFields);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public override int GetHashCode() {
-      int hash = 1;
-      if (x != 0) hash ^= x.GetHashCode();
-      if (y != 0) hash ^= y.GetHashCode();
-      if (configID.Length != 0) hash ^= configID.GetHashCode();
-      if (guid_ != null) hash ^= guid.GetHashCode();
-      if (_unknownFields != null) {
-        hash ^= _unknownFields.GetHashCode();
-      }
-      return hash;
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public override string ToString() {
-      return pb::JsonFormatter.ToDiagnosticString(this);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void WriteTo(pb::CodedOutputStream output) {
-      if (x != 0) {
-        output.WriteRawTag(8);
-        output.WriteInt32(x);
-      }
-      if (y != 0) {
-        output.WriteRawTag(16);
-        output.WriteInt32(y);
-      }
-      if (configID.Length != 0) {
-        output.WriteRawTag(26);
-        output.WriteBytes(configID);
-      }
-      if (guid_ != null) {
-        output.WriteRawTag(34);
-        output.WriteMessage(guid);
-      }
-      if (_unknownFields != null) {
-        _unknownFields.WriteTo(output);
-      }
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public int CalculateSize() {
-      int size = 0;
-      if (x != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeInt32Size(x);
-      }
-      if (y != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeInt32Size(y);
-      }
-      if (configID.Length != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeBytesSize(configID);
-      }
-      if (guid_ != null) {
-        size += 1 + pb::CodedOutputStream.ComputeMessageSize(guid);
-      }
-      if (_unknownFields != null) {
-        size += _unknownFields.CalculateSize();
-      }
-      return size;
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void MergeFrom(TileBuilding other) {
-      if (other == null) {
-        return;
-      }
-      if (other.x != 0) {
-        x = other.x;
-      }
-      if (other.y != 0) {
-        y = other.y;
-      }
-      if (other.configID.Length != 0) {
-        configID = other.configID;
-      }
-      if (other.guid_ != null) {
-        if (guid_ == null) {
-          guid_ = new global::NFMsg.Ident();
-        }
-        guid.MergeFrom(other.guid);
-      }
-      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void MergeFrom(pb::CodedInputStream input) {
-      uint tag;
-      while ((tag = input.ReadTag()) != 0) {
-        switch(tag) {
-          default:
-            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
-            break;
-          case 8: {
-            x = input.ReadInt32();
-            break;
-          }
-          case 16: {
-            y = input.ReadInt32();
-            break;
-          }
-          case 26: {
-            configID = input.ReadBytes();
-            break;
-          }
-          case 34: {
-            if (guid_ == null) {
-              guid_ = new global::NFMsg.Ident();
-            }
-            input.ReadMessage(guid_);
-            break;
-          }
-        }
-      }
-    }
-
-  }
-
-  public sealed partial class TileNPC : pb::IMessage<TileNPC> {
-    private static readonly pb::MessageParser<TileNPC> _parser = new pb::MessageParser<TileNPC>(() => new TileNPC());
-    private pb::UnknownFieldSet _unknownFields;
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public static pb::MessageParser<TileNPC> Parser { get { return _parser; } }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public static pbr::MessageDescriptor Descriptor {
-      get { return global::NFMsg.NFMsgShareReflection.Descriptor.MessageTypes[43]; }
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    pbr::MessageDescriptor pb::IMessage.Descriptor {
-      get { return Descriptor; }
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public TileNPC() {
-      OnConstruction();
-    }
-
-    partial void OnConstruction();
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public TileNPC(TileNPC other) : this() {
-      x_ = other.x_;
-      y_ = other.y_;
-      configID_ = other.configID_;
-      guid_ = other.guid_ != null ? other.guid_.Clone() : null;
-      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public TileNPC Clone() {
-      return new TileNPC(this);
-    }
-
-    /// <summary>Field number for the "x" field.</summary>
-    public const int xFieldNumber = 1;
-    private int x_;
-    /// <summary>
-    /// </summary>
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public int x {
-      get { return x_; }
-      set {
-        x_ = value;
-      }
-    }
-
-    /// <summary>Field number for the "y" field.</summary>
-    public const int yFieldNumber = 2;
-    private int y_;
-    /// <summary>
-    /// </summary>
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public int y {
-      get { return y_; }
-      set {
-        y_ = value;
-      }
-    }
-
-    /// <summary>Field number for the "configID" field.</summary>
-    public const int configIDFieldNumber = 3;
-    private pb::ByteString configID_ = pb::ByteString.Empty;
-    /// <summary>
-    /// </summary>
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public pb::ByteString configID {
-      get { return configID_; }
-      set {
-        configID_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
-      }
-    }
-
-    /// <summary>Field number for the "guid" field.</summary>
-    public const int guidFieldNumber = 4;
-    private global::NFMsg.Ident guid_;
-    /// <summary>
-    /// </summary>
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public global::NFMsg.Ident guid {
-      get { return guid_; }
-      set {
-        guid_ = value;
-      }
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public override bool Equals(object other) {
-      return Equals(other as TileNPC);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public bool Equals(TileNPC other) {
-      if (ReferenceEquals(other, null)) {
-        return false;
-      }
-      if (ReferenceEquals(other, this)) {
-        return true;
-      }
-      if (x != other.x) return false;
-      if (y != other.y) return false;
-      if (configID != other.configID) return false;
-      if (!object.Equals(guid, other.guid)) return false;
-      return Equals(_unknownFields, other._unknownFields);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public override int GetHashCode() {
-      int hash = 1;
-      if (x != 0) hash ^= x.GetHashCode();
-      if (y != 0) hash ^= y.GetHashCode();
-      if (configID.Length != 0) hash ^= configID.GetHashCode();
-      if (guid_ != null) hash ^= guid.GetHashCode();
-      if (_unknownFields != null) {
-        hash ^= _unknownFields.GetHashCode();
-      }
-      return hash;
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public override string ToString() {
-      return pb::JsonFormatter.ToDiagnosticString(this);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void WriteTo(pb::CodedOutputStream output) {
-      if (x != 0) {
-        output.WriteRawTag(8);
-        output.WriteInt32(x);
-      }
-      if (y != 0) {
-        output.WriteRawTag(16);
-        output.WriteInt32(y);
-      }
-      if (configID.Length != 0) {
-        output.WriteRawTag(26);
-        output.WriteBytes(configID);
-      }
-      if (guid_ != null) {
-        output.WriteRawTag(34);
-        output.WriteMessage(guid);
-      }
-      if (_unknownFields != null) {
-        _unknownFields.WriteTo(output);
-      }
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public int CalculateSize() {
-      int size = 0;
-      if (x != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeInt32Size(x);
-      }
-      if (y != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeInt32Size(y);
-      }
-      if (configID.Length != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeBytesSize(configID);
-      }
-      if (guid_ != null) {
-        size += 1 + pb::CodedOutputStream.ComputeMessageSize(guid);
-      }
-      if (_unknownFields != null) {
-        size += _unknownFields.CalculateSize();
-      }
-      return size;
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void MergeFrom(TileNPC other) {
-      if (other == null) {
-        return;
-      }
-      if (other.x != 0) {
-        x = other.x;
-      }
-      if (other.y != 0) {
-        y = other.y;
-      }
-      if (other.configID.Length != 0) {
-        configID = other.configID;
-      }
-      if (other.guid_ != null) {
-        if (guid_ == null) {
-          guid_ = new global::NFMsg.Ident();
-        }
-        guid.MergeFrom(other.guid);
-      }
-      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void MergeFrom(pb::CodedInputStream input) {
-      uint tag;
-      while ((tag = input.ReadTag()) != 0) {
-        switch(tag) {
-          default:
-            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
-            break;
-          case 8: {
-            x = input.ReadInt32();
-            break;
-          }
-          case 16: {
-            y = input.ReadInt32();
-            break;
-          }
-          case 26: {
-            configID = input.ReadBytes();
-            break;
-          }
-          case 34: {
-            if (guid_ == null) {
-              guid_ = new global::NFMsg.Ident();
-            }
-            input.ReadMessage(guid_);
-            break;
-          }
-        }
-      }
-    }
-
-  }
-
-  /// <summary>
-  ///EGEC_ACK_MINING_TITLE
-  /// </summary>
-  public sealed partial class AckMiningTitle : pb::IMessage<AckMiningTitle> {
-    private static readonly pb::MessageParser<AckMiningTitle> _parser = new pb::MessageParser<AckMiningTitle>(() => new AckMiningTitle());
-    private pb::UnknownFieldSet _unknownFields;
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public static pb::MessageParser<AckMiningTitle> Parser { get { return _parser; } }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public static pbr::MessageDescriptor Descriptor {
-      get { return global::NFMsg.NFMsgShareReflection.Descriptor.MessageTypes[44]; }
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    pbr::MessageDescriptor pb::IMessage.Descriptor {
-      get { return Descriptor; }
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public AckMiningTitle() {
-      OnConstruction();
-    }
-
-    partial void OnConstruction();
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public AckMiningTitle(AckMiningTitle other) : this() {
-      tile_ = other.tile_.Clone();
-      building_ = other.building_.Clone();
-      npc_ = other.npc_.Clone();
-      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public AckMiningTitle Clone() {
-      return new AckMiningTitle(this);
-    }
-
-    /// <summary>Field number for the "tile" field.</summary>
-    public const int tileFieldNumber = 1;
-    private static readonly pb::FieldCodec<global::NFMsg.TileState> _repeated_tile_codec
-        = pb::FieldCodec.ForMessage(10, global::NFMsg.TileState.Parser);
-    private readonly pbc::RepeatedField<global::NFMsg.TileState> tile_ = new pbc::RepeatedField<global::NFMsg.TileState>();
-    /// <summary>
-    /// </summary>
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public pbc::RepeatedField<global::NFMsg.TileState> tile {
-      get { return tile_; }
-    }
-
-    /// <summary>Field number for the "building" field.</summary>
-    public const int buildingFieldNumber = 2;
-    private static readonly pb::FieldCodec<global::NFMsg.TileBuilding> _repeated_building_codec
-        = pb::FieldCodec.ForMessage(18, global::NFMsg.TileBuilding.Parser);
-    private readonly pbc::RepeatedField<global::NFMsg.TileBuilding> building_ = new pbc::RepeatedField<global::NFMsg.TileBuilding>();
-    /// <summary>
-    /// </summary>
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public pbc::RepeatedField<global::NFMsg.TileBuilding> building {
-      get { return building_; }
-    }
-
-    /// <summary>Field number for the "npc" field.</summary>
-    public const int npcFieldNumber = 3;
-    private static readonly pb::FieldCodec<global::NFMsg.TileNPC> _repeated_npc_codec
-        = pb::FieldCodec.ForMessage(26, global::NFMsg.TileNPC.Parser);
-    private readonly pbc::RepeatedField<global::NFMsg.TileNPC> npc_ = new pbc::RepeatedField<global::NFMsg.TileNPC>();
-    /// <summary>
-    /// </summary>
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public pbc::RepeatedField<global::NFMsg.TileNPC> npc {
-      get { return npc_; }
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public override bool Equals(object other) {
-      return Equals(other as AckMiningTitle);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public bool Equals(AckMiningTitle other) {
-      if (ReferenceEquals(other, null)) {
-        return false;
-      }
-      if (ReferenceEquals(other, this)) {
-        return true;
-      }
-      if(!tile_.Equals(other.tile_)) return false;
-      if(!building_.Equals(other.building_)) return false;
-      if(!npc_.Equals(other.npc_)) return false;
-      return Equals(_unknownFields, other._unknownFields);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public override int GetHashCode() {
-      int hash = 1;
-      hash ^= tile_.GetHashCode();
-      hash ^= building_.GetHashCode();
-      hash ^= npc_.GetHashCode();
-      if (_unknownFields != null) {
-        hash ^= _unknownFields.GetHashCode();
-      }
-      return hash;
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public override string ToString() {
-      return pb::JsonFormatter.ToDiagnosticString(this);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void WriteTo(pb::CodedOutputStream output) {
-      tile_.WriteTo(output, _repeated_tile_codec);
-      building_.WriteTo(output, _repeated_building_codec);
-      npc_.WriteTo(output, _repeated_npc_codec);
-      if (_unknownFields != null) {
-        _unknownFields.WriteTo(output);
-      }
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public int CalculateSize() {
-      int size = 0;
-      size += tile_.CalculateSize(_repeated_tile_codec);
-      size += building_.CalculateSize(_repeated_building_codec);
-      size += npc_.CalculateSize(_repeated_npc_codec);
-      if (_unknownFields != null) {
-        size += _unknownFields.CalculateSize();
-      }
-      return size;
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void MergeFrom(AckMiningTitle other) {
-      if (other == null) {
-        return;
-      }
-      tile_.Add(other.tile_);
-      building_.Add(other.building_);
-      npc_.Add(other.npc_);
-      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void MergeFrom(pb::CodedInputStream input) {
-      uint tag;
-      while ((tag = input.ReadTag()) != 0) {
-        switch(tag) {
-          default:
-            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
-            break;
-          case 10: {
-            tile_.AddEntriesFrom(input, _repeated_tile_codec);
-            break;
-          }
-          case 18: {
-            building_.AddEntriesFrom(input, _repeated_building_codec);
-            break;
-          }
-          case 26: {
-            npc_.AddEntriesFrom(input, _repeated_npc_codec);
-            break;
-          }
-        }
-      }
-    }
-
-  }
-
-  /// <summary>
   ///EGMI_REQ_SEARCH_OPPNENT
   /// </summary>
   public sealed partial class ReqSearchOppnent : pb::IMessage<ReqSearchOppnent> {
@@ -9229,7 +8459,7 @@ namespace NFMsg {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::NFMsg.NFMsgShareReflection.Descriptor.MessageTypes[45]; }
+      get { return global::NFMsg.NFMsgShareReflection.Descriptor.MessageTypes[41]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -9361,7 +8591,7 @@ namespace NFMsg {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::NFMsg.NFMsgShareReflection.Descriptor.MessageTypes[46]; }
+      get { return global::NFMsg.NFMsgShareReflection.Descriptor.MessageTypes[42]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -9397,7 +8627,7 @@ namespace NFMsg {
       heroPos1_ = other.heroPos1_ != null ? other.heroPos1_.Clone() : null;
       heroPos2_ = other.heroPos2_ != null ? other.heroPos2_.Clone() : null;
       heroPos3_ = other.heroPos3_ != null ? other.heroPos3_.Clone() : null;
-      title_ = other.title_ != null ? other.title_.Clone() : null;
+      buildings_ = other.buildings_.Clone();
       opponent_ = other.opponent_ != null ? other.opponent_.Clone() : null;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
@@ -9616,15 +8846,14 @@ namespace NFMsg {
       }
     }
 
-    /// <summary>Field number for the "title" field.</summary>
-    public const int titleFieldNumber = 30;
-    private global::NFMsg.AckMiningTitle title_;
+    /// <summary>Field number for the "buildings" field.</summary>
+    public const int buildingsFieldNumber = 30;
+    private static readonly pb::FieldCodec<global::NFMsg.ReqAddSceneBuilding> _repeated_buildings_codec
+        = pb::FieldCodec.ForMessage(242, global::NFMsg.ReqAddSceneBuilding.Parser);
+    private readonly pbc::RepeatedField<global::NFMsg.ReqAddSceneBuilding> buildings_ = new pbc::RepeatedField<global::NFMsg.ReqAddSceneBuilding>();
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public global::NFMsg.AckMiningTitle title {
-      get { return title_; }
-      set {
-        title_ = value;
-      }
+    public pbc::RepeatedField<global::NFMsg.ReqAddSceneBuilding> buildings {
+      get { return buildings_; }
     }
 
     /// <summary>Field number for the "opponent" field.</summary>
@@ -9670,7 +8899,7 @@ namespace NFMsg {
       if (!object.Equals(hero_pos1, other.hero_pos1)) return false;
       if (!object.Equals(hero_pos2, other.hero_pos2)) return false;
       if (!object.Equals(hero_pos3, other.hero_pos3)) return false;
-      if (!object.Equals(title, other.title)) return false;
+      if(!buildings_.Equals(other.buildings_)) return false;
       if (!object.Equals(opponent, other.opponent)) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
@@ -9697,7 +8926,7 @@ namespace NFMsg {
       if (heroPos1_ != null) hash ^= hero_pos1.GetHashCode();
       if (heroPos2_ != null) hash ^= hero_pos2.GetHashCode();
       if (heroPos3_ != null) hash ^= hero_pos3.GetHashCode();
-      if (title_ != null) hash ^= title.GetHashCode();
+      hash ^= buildings_.GetHashCode();
       if (opponent_ != null) hash ^= opponent.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
@@ -9788,10 +9017,7 @@ namespace NFMsg {
         output.WriteRawTag(202, 1);
         output.WriteMessage(hero_pos3);
       }
-      if (title_ != null) {
-        output.WriteRawTag(242, 1);
-        output.WriteMessage(title);
-      }
+      buildings_.WriteTo(output, _repeated_buildings_codec);
       if (opponent_ != null) {
         output.WriteRawTag(250, 1);
         output.WriteMessage(opponent);
@@ -9861,9 +9087,7 @@ namespace NFMsg {
       if (heroPos3_ != null) {
         size += 2 + pb::CodedOutputStream.ComputeMessageSize(hero_pos3);
       }
-      if (title_ != null) {
-        size += 2 + pb::CodedOutputStream.ComputeMessageSize(title);
-      }
+      size += buildings_.CalculateSize(_repeated_buildings_codec);
       if (opponent_ != null) {
         size += 2 + pb::CodedOutputStream.ComputeMessageSize(opponent);
       }
@@ -9953,12 +9177,7 @@ namespace NFMsg {
         }
         hero_pos3.MergeFrom(other.hero_pos3);
       }
-      if (other.title_ != null) {
-        if (title_ == null) {
-          title_ = new global::NFMsg.AckMiningTitle();
-        }
-        title.MergeFrom(other.title);
-      }
+      buildings_.Add(other.buildings_);
       if (other.opponent_ != null) {
         if (opponent_ == null) {
           opponent_ = new global::NFMsg.Ident();
@@ -10071,10 +9290,7 @@ namespace NFMsg {
             break;
           }
           case 242: {
-            if (title_ == null) {
-              title_ = new global::NFMsg.AckMiningTitle();
-            }
-            input.ReadMessage(title_);
+            buildings_.AddEntriesFrom(input, _repeated_buildings_codec);
             break;
           }
           case 250: {
@@ -10101,7 +9317,7 @@ namespace NFMsg {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::NFMsg.NFMsgShareReflection.Descriptor.MessageTypes[47]; }
+      get { return global::NFMsg.NFMsgShareReflection.Descriptor.MessageTypes[43]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -10285,7 +9501,7 @@ namespace NFMsg {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::NFMsg.NFMsgShareReflection.Descriptor.MessageTypes[48]; }
+      get { return global::NFMsg.NFMsgShareReflection.Descriptor.MessageTypes[44]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -10618,7 +9834,7 @@ namespace NFMsg {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::NFMsg.NFMsgShareReflection.Descriptor.MessageTypes[49]; }
+      get { return global::NFMsg.NFMsgShareReflection.Descriptor.MessageTypes[45]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -10852,7 +10068,7 @@ namespace NFMsg {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::NFMsg.NFMsgShareReflection.Descriptor.MessageTypes[50]; }
+      get { return global::NFMsg.NFMsgShareReflection.Descriptor.MessageTypes[46]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -11247,7 +10463,7 @@ namespace NFMsg {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::NFMsg.NFMsgShareReflection.Descriptor.MessageTypes[51]; }
+      get { return global::NFMsg.NFMsgShareReflection.Descriptor.MessageTypes[47]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -11535,7 +10751,7 @@ namespace NFMsg {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::NFMsg.NFMsgShareReflection.Descriptor.MessageTypes[52]; }
+      get { return global::NFMsg.NFMsgShareReflection.Descriptor.MessageTypes[48]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -11771,7 +10987,7 @@ namespace NFMsg {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::NFMsg.NFMsgShareReflection.Descriptor.MessageTypes[53]; }
+      get { return global::NFMsg.NFMsgShareReflection.Descriptor.MessageTypes[49]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -11945,7 +11161,7 @@ namespace NFMsg {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::NFMsg.NFMsgShareReflection.Descriptor.MessageTypes[54]; }
+      get { return global::NFMsg.NFMsgShareReflection.Descriptor.MessageTypes[50]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]

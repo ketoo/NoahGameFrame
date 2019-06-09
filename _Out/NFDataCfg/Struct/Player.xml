@@ -68,7 +68,8 @@
 		<Property Id="HeroStar1" Cache="1" Desc="主要是给离线玩家看" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="int" Upload="0" />
 		<Property Id="HeroStar2" Cache="1" Desc="主要是给离线玩家看" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="int" Upload="0" />
 		<Property Id="HeroStar3" Cache="1" Desc="主要是给离线玩家看" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="int" Upload="0" />
-		<Property Id="HomeCellID" Cache="1" Desc="玩家下线的时候需要保存上次在线的场景" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="string" Upload="0" />
+		<Property Id="HomeCellPos" Cache="1" Desc="玩家下线的时候需要保存上次在线的场景" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="vector3" Upload="0" />
+		<Property Id="HomeSceneID" Cache="1" Desc="玩家下线的时候需要保存上次在线的场景" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="int" Upload="0" />
 		<Property Id="Item1" Cache="1" Desc="Skill4" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="string" Upload="0" />
 		<Property Id="Item1Count" Cache="1" Desc="Item1Count" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="int" Upload="0" />
 		<Property Id="Item1UsedCount" Cache="0" Desc="Hero1" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="int" Upload="0" />

@@ -23,15 +23,39 @@
    limitations under the License.
 */
 
-#ifndef NFI_FRIEND_MODULE_H
-#define NFI_FRIEND_MODULE_H
 
-#include "NFIModule.h"
+#include "NFMoveModule.h"
+#include "NFComm/NFMessageDefine/NFProtocolDefine.hpp"
 
-class NFIFriendModule : public NFIModule
+bool NFMoveModule::Init()
 {
-public:
-	virtual bool IsEnemy(const NFGUID& self, const NFGUID& other) = 0;
-};
+	m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>();
+	m_pElementModule = pPluginManager->FindModule<NFIElementModule>();
+	m_pClassModule = pPluginManager->FindModule<NFIClassModule>();
+	m_pLogModule = pPluginManager->FindModule<NFILogModule>();
+	m_pEventModule = pPluginManager->FindModule<NFIEventModule>();
+	m_pCellModule = pPluginManager->FindModule<NFICellModule>();
+	m_pGameServerNet_ServerModule = pPluginManager->FindModule<NFIGameServerNet_ServerModule>();
+	
+    return true;
+}
 
-#endif
+bool NFMoveModule::Shut()
+{
+	return true;
+}
+
+bool NFMoveModule::Execute()
+{
+	return true;
+}
+
+bool NFMoveModule::AfterInit()
+{
+	return true;
+}
+
+bool NFMoveModule::ReadyExecute()
+{
+	return true;
+}

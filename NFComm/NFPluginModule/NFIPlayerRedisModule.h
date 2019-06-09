@@ -42,7 +42,6 @@ public:
 
 	virtual bool LoadPlayerTile(const int nSceneID, const NFGUID& self, std::string& strTileData) = 0;
 	virtual bool LoadPlayerTileRandom(const int nSceneID, NFGUID& xPlayer, std::string& strTileData) = 0;
-	virtual bool LoadPlayerTileRandomCache(const NFGUID& xPlayer, std::string& strTileData) = 0;
 
 	virtual NFINT64 GetPropertyInt(const NFGUID& self, const std::string& strPropertyName) = 0;
 	virtual int GetPropertyInt32(const NFGUID& self, const std::string& strPropertyName) = 0;

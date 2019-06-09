@@ -157,12 +157,6 @@ bool NFPlayerRedisModule::LoadPlayerTileRandom(const int nSceneID, NFGUID& xPlay
 	return false;
 }
 
-bool NFPlayerRedisModule::LoadPlayerTileRandomCache(const NFGUID & xPlayer, std::string & strTileData)
-{
-
-	return false;
-}
-
 NFINT64 NFPlayerRedisModule::GetPropertyInt(const NFGUID & self, const std::string & strPropertyName)
 {
 	NF_SHARE_PTR<NFIRedisClient> pDriver = m_pNoSqlModule->GetDriverBySuit(self.ToString());
@@ -362,6 +356,12 @@ bool NFPlayerRedisModule::CreateRole(const std::string & strAccount, const std::
 				if (xProperty)
 				{
 					xProperty->SetString(strRoleName);
+				}
+
+				xProperty = xPropertyManager->GetElement(NFrame::Player::HomeSceneID());
+				if (xProperty)
+				{
+					xProperty->SetInt(nHomeSceneID);
 				}
 
 				m_pCommonRedisModule->SavePropertyInfo(id, xPropertyManager);

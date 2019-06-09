@@ -201,5 +201,5 @@ message RoleDataPack
 {
 	Ident 		id = 1;
 	ObjectPropertyList 	property = 2;
-	ObjectRecordList 		record = 4;
+	ObjectRecordList 		record = 3;
 }

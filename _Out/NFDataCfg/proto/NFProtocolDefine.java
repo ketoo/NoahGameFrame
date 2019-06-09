@@ -587,7 +587,8 @@ package nframe;
 		public static final String HeroStar1 = "HeroStar1";// int
 		public static final String HeroStar2 = "HeroStar2";// int
 		public static final String HeroStar3 = "HeroStar3";// int
-		public static final String HomeCellID = "HomeCellID";// string
+		public static final String HomeCellPos = "HomeCellPos";// vector3
+		public static final String HomeSceneID = "HomeSceneID";// int
 		public static final String Item1 = "Item1";// string
 		public static final String Item1Count = "Item1Count";// int
 		public static final String Item1UsedCount = "Item1UsedCount";// int
@@ -943,23 +944,16 @@ package nframe;
 		public static final String SceneID = "SceneID";// int
 		// Property
 		public static final String ActorID = "ActorID";// int
-		public static final String BossSoundList = "BossSoundList";// string
-		public static final String CamOffestPos = "CamOffestPos";// string
-		public static final String CamOffestRot = "CamOffestRot";// string
 		public static final String FilePath = "FilePath";// string
-		public static final String LeftBot = "LeftBot";// vector2
 		public static final String LoadingUI = "LoadingUI";// string
 		public static final String MaxGroup = "MaxGroup";// int
 		public static final String MaxGroupPlayers = "MaxGroupPlayers";// int
 		public static final String NavigationResPath = "NavigationResPath";// string
 		public static final String RelivePos = "RelivePos";// string
 		public static final String ResPath = "ResPath";// string
-		public static final String RightTop = "RightTop";// vector2
 		public static final String SceneName = "SceneName";// string
 		public static final String SceneShowName = "SceneShowName";// string
 		public static final String SoundList = "SoundList";// string
-		public static final String TagPos = "TagPos";// string
-		public static final String Tile = "Tile";// int
 		public static final String Type = "Type";// int
 		public static final String Width = "Width";// int
 		// Record
