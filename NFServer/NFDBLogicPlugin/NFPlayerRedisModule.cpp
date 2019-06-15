@@ -75,22 +75,77 @@ bool NFPlayerRedisModule::LoadPlayerData(const NFGUID & self, NFMsg::RoleDataPac
 	}
 
 	
-
-	/*
-	if (xRecordManager)
-	{
-		NF_SHARE_PTR<NFIRecord> xRecord = xRecordManager->First();
-		while (xRecord)
-		{
-			NFMsg::ObjectRecordBase* pRecord = roleData.mutable_record()->add_record_list();
-
-			pCommonRedisModule->ConvertRecordToPB(xRecord, pRecord);
-
-			xRecord = xRecordManager->Next();
-		}
-	}
-	*/
 	m_pLogModule->LogNormal(NFILogModule::NF_LOG_LEVEL::NLL_ERROR_NORMAL, self, "loaded data false", NFGetTimeMS());
+
+	return false;
+}
+
+bool NFPlayerRedisModule::LoadPlayerData(const NFGUID & self, NFMsg::PVPPlayerInfo & roleData)
+{
+	std::vector<std::string> fields;
+	std::vector<std::string> values;
+
+	fields.push_back(NFrame::Player::Level());//0
+	fields.push_back(NFrame::Player::Cup());//1
+	fields.push_back(NFrame::Player::Name());//2
+	fields.push_back(NFrame::Player::Head());//3
+
+	fields.push_back(NFrame::Player::HeroCnfID1());//4
+	fields.push_back(NFrame::Player::HeroCnfID2());//5
+	fields.push_back(NFrame::Player::HeroCnfID3());//6
+
+	fields.push_back(NFrame::Player::HeroStar1());//7
+	fields.push_back(NFrame::Player::HeroStar2());//8
+	fields.push_back(NFrame::Player::HeroStar3());//9
+
+	fields.push_back(NFrame::Player::HeroID1());//10
+	fields.push_back(NFrame::Player::HeroID2());//11
+	fields.push_back(NFrame::Player::HeroID3());//12
+
+	if (GetPropertyList(self, fields, values) 
+		&& fields.size() == values.size())
+	{
+
+		int level = lexical_cast<int>(values.at(0));
+		int battle_point = lexical_cast<int>(values.at(1));
+		std::string name = values.at(2);
+		std::string head = values.at(3);
+
+		std::string hero_cnf1 = values.at(4);
+		std::string hero_cnf2 = values.at(5);
+		std::string hero_cnf3 = values.at(6);
+
+		int hero_star1 = lexical_cast<int>(values.at(7));
+		int hero_star2 = lexical_cast<int>(values.at(8));
+		int hero_star3 = lexical_cast<int>(values.at(9));
+
+		NFGUID hero_id1 = values.at(10);
+		NFGUID hero_id2 = values.at(11);
+		NFGUID hero_id3 = values.at(12);
+		
+		*roleData.mutable_id() = NFINetModule::NFToPB(self);
+		roleData.set_level(level);
+		roleData.set_battle_point(battle_point);
+		roleData.set_name(name);
+		roleData.set_head(head);
+
+		roleData.set_hero_cnf1(hero_cnf1);
+		roleData.set_hero_cnf2(hero_cnf2);
+		roleData.set_hero_cnf3(hero_cnf3);
+
+
+		roleData.set_hero_star1(hero_star1);
+		roleData.set_hero_star2(hero_star2);
+		roleData.set_hero_star3(hero_star3);
+
+
+		*roleData.mutable_hero_id1() = NFINetModule::NFToPB(hero_id1);
+		*roleData.mutable_hero_id2() = NFINetModule::NFToPB(hero_id2);
+		*roleData.mutable_hero_id3() = NFINetModule::NFToPB(hero_id3);
+
+
+		return true;
+	}
 
 	return false;
 }
@@ -153,6 +208,24 @@ bool NFPlayerRedisModule::LoadPlayerTileRandom(const int nSceneID, NFGUID& xPlay
 			}
 		}
 	}
+
+	return false;
+}
+
+bool NFPlayerRedisModule::GetPropertyList(const NFGUID& self, const std::vector<std::string>& fields, std::vector<std::string>& values)
+{
+	NF_SHARE_PTR<NFIRedisClient> pDriver = m_pNoSqlModule->GetDriverBySuit(self.ToString());
+	if (!pDriver)
+	{
+		return false;
+	}
+
+	std::string strCacheKey = m_pCommonRedisModule->GetPropertyCacheKey(self);
+	if (pDriver->HMGET(strCacheKey, fields, values))
+	{
+		return true;
+	}
+
 
 	return false;
 }

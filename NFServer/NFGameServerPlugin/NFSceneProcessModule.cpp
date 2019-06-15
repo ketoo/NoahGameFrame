@@ -87,11 +87,6 @@ bool NFSceneProcessModule::ReadyExecute()
 	return true;
 }
 
-bool NFSceneProcessModule::RequestEnterScene(const NFGUID & self, const int nSceneID, const int nType, const NFVector3& pos, const NFDataList & argList)
-{
-	return RequestEnterScene(self, nSceneID, -1, nType, pos, argList);
-}
-
 bool NFSceneProcessModule::RequestEnterScene(const NFGUID & self, const int nSceneID, const int nGroupID, const int nType, const NFVector3& pos, const NFDataList & argList)
 {
 	NFMsg::ESceneType eSceneType = (NFMsg::ESceneType)m_pElementModule->GetPropertyInt32(std::to_string(nSceneID), NFrame::Scene::Type());
@@ -132,10 +127,17 @@ bool NFSceneProcessModule::RequestEnterScene(const NFGUID & self, const int nSce
 	}
 	else if (eSceneType == NFMsg::ESceneType::SCENE_HOME)
 	{
-		int nNewGroupID = m_pKernelModule->RequestGroupScene(nSceneID);
-		if (nNewGroupID > 0)
+		if (nGroupID > 0)
 		{
-			return m_pSceneModule->RequestEnterScene(self, nSceneID, nNewGroupID, nType, pos, argList);
+			return m_pSceneModule->RequestEnterScene(self, nSceneID, nGroupID, nType, pos, argList);
+		}
+		else
+		{
+			int nNewGroupID = m_pKernelModule->RequestGroupScene(nSceneID);
+			if (nNewGroupID > 0)
+			{
+				return m_pSceneModule->RequestEnterScene(self, nSceneID, nNewGroupID, nType, pos, argList);
+			}
 		}
 	}
 
@@ -168,7 +170,16 @@ int NFSceneProcessModule::AfterLeaveSceneGroupEvent(const NFGUID & self, const i
 			m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, self, "DestroyCloneSceneGroup", nGroupID);
 		}
 	}
+	else if (eSceneType == NFMsg::ESceneType::SCENE_HOME)
+	{
+		NFDataList varObjectList;
+		if (m_pKernelModule->GetGroupObjectList(nSceneID, nGroupID, varObjectList, true) && varObjectList.GetCount() <= 0)
+		{
+			m_pKernelModule->ReleaseGroupScene(nSceneID, nGroupID);
 
+			m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, self, "DestroyCloneSceneGroup", nGroupID);
+		}
+	}
 	return 0;
 }
 

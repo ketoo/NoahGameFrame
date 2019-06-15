@@ -30,7 +30,12 @@
 #include <string>
 #include <iostream>
 #include <map>
+#include "NFComm/NFMessageDefine/NFMsgDefine.h"
+#include "NFComm/NFPluginModule/NFIMoveModule.h"
+#include "NFComm/NFPluginModule/NFIKernelModule.h"
+#include "NFComm/NFPluginModule/NFIElementModule.h"
 #include "NFComm/NFPluginModule/NFIHateModule.h"
+#include "NFComm/NFPluginModule/NFIFriendModule.h"
 
 class NFHateModule
     : public NFIHateModule
@@ -40,40 +45,64 @@ public:
     {
         pPluginManager = pm;
     }
+	virtual bool Init();
 
-    virtual bool ClearHate(const NFGUID& self);
-    //仇恨列表是否为空
-    virtual bool Empty(const NFGUID& self);
+	virtual bool Shut();
+
+	virtual bool AfterInit();
+
+	virtual bool BeforeShut();
+
+	virtual bool Execute();
+
+    virtual bool ClearHateObjects(const NFGUID& self);
 
     //添加仇恨对象
     virtual bool AddHate(const NFGUID& self, const NFGUID& other, const int nValue);
 
     //设置仇恨值
-    virtual bool SetHateValue(const NFGUID& self, const NFGUID& other, const int nValue);
+    virtual bool EndSpring(const NFGUID& other);
+	virtual bool OnSpring(const NFGUID& self, const NFGUID& other);
 
     //把他人的仇恨copy到自己身上,BOSS,小弟
     virtual bool CopyHateList(const NFGUID& self, const NFGUID& other);
 
     //对仇恨排序，最高在前面
-    virtual void CompSortList(const NFGUID& self);
+    //virtual void CompSortList(const NFGUID& self);
 
     //得到最高仇恨的一个对象
-    virtual const NFGUID& QueryMaxHateObject(const NFGUID& self);
-
-    //得到最高仇恨的数个对象
-    virtual bool QueryMaxHateObject(const NFGUID& self, std::list<std::string>& HateList, const int nCount = 1);
+    virtual NFGUID QueryMaxHateObject(const NFGUID& self);
 
     //查询仇恨值
     virtual int QueryHateValue(const NFGUID& self, const NFGUID& other);
 
 protected:
+	bool SetHateValue(const NFGUID& self, const NFGUID& other, const int nValue);
+	int OnClassObjectEvent(const NFGUID& self, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFDataList& var);
+	int OnPositionEvent(const NFGUID & self, const std::string & strPropertyName, const NFData & oldVar, const NFData & newVar);
+	int OnNPCHPEvent(const NFGUID & self, const std::string & strPropertyName, const NFData & oldVar, const NFData & newVar);
 
-    typedef std::map<NFGUID, int> THATEMAP;
-    typedef std::map<NFGUID, THATEMAP*> TOBJECTHATEMAP;
+protected:
+	struct ObjectHateData
+	{
+		std::map<NFGUID, int> hateValue;
+	};
 
-    TOBJECTHATEMAP mtObjectHateMap;
+	struct SceneHateData
+	{
+		int sceneID;
+		int groupID;
+		NFMapEx<NFGUID, ObjectHateData> hateValue;
+	};
+	//by <sceneid, groupid> as guid
+	//scene_group_guid, NFMapEx<NFGUID, ObjectHateData>
+    NFMapEx<NFGUID, SceneHateData> mtObjectHateMap;
 
 private:
+	NFIHateModule* m_pHateModule;
+	NFIKernelModule* m_pKernelModule;
+	NFIElementModule* m_pElementModule;
+	NFIFriendModule* m_pFriendModule;
 };
 
 #endif

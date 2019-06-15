@@ -29,12 +29,13 @@
 
 bool NFAIModule::Init()
 {
-    m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>();
+	m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>();
+	m_pElementModule = pPluginManager->FindModule<NFIElementModule>();
 	m_pHateModule = pPluginManager->FindModule<NFIHateModule>();
 	m_pFriendModule = pPluginManager->FindModule<NFIFriendModule>();
 	
     //////////////////////////////////////////////////////////////////////////
-	mtStateMap[IdleState] = new NFIdleState(3.0f, pPluginManager);
+	mtStateMap[IdleState] = new NFIdleState(1.0f, pPluginManager);
 	mtStateMap[FightState] = new NFFightState(1.0f, pPluginManager);
 	mtStateMap[PatrolState] = new NFPatrolState(5.0f, pPluginManager);
 	mtStateMap[ChaseState] = new NFChaseState(1.0f, pPluginManager);
@@ -53,6 +54,82 @@ bool NFAIModule::Shut()
 NFIState* NFAIModule::GetState(const NFAI_STATE eState)
 {
     return mtStateMap[eState];
+}
+
+const std::string & NFAIModule::ChooseSkill(const NFGUID & self, const float fDis)
+{
+	const std::string & strCnfID = m_pKernelModule->GetPropertyString(self, NFrame::NPC::ConfigID());
+	const std::string & strNormal = m_pElementModule->GetPropertyString(strCnfID, NFrame::NPC::SkillNormal());
+
+	long nNPCType = m_pKernelModule->GetPropertyInt(self, NFrame::NPC::NPCType());
+	if (nNPCType == NFMsg::ENPCType::ENPCTYPE_TURRET)
+	{
+		return strNormal;
+	}
+
+	const std::string & strAttack = m_pElementModule->GetPropertyString(strCnfID, NFrame::NPC::SkillAttack());
+	const std::string & strThump = m_pElementModule->GetPropertyString(strCnfID, NFrame::NPC::SkillTHUMP());
+
+	float fNormal = (float)m_pElementModule->GetPropertyFloat(strNormal, NFrame::Skill::AtkDis());
+	float fAttack = (float)m_pElementModule->GetPropertyFloat(strAttack, NFrame::Skill::AtkDis());
+	float fThump = (float)m_pElementModule->GetPropertyFloat(strThump, NFrame::Skill::AtkDis());
+
+	if (fNormal < fDis
+		&& fAttack < fDis
+		&& fThump < fDis)
+	{
+		return "";
+	}
+
+	NF_SHARE_PTR<NFIRecord> xRecord = m_pKernelModule->FindRecord(self, NFrame::NPC::Cooldown::ThisName());
+	const int nCommonSKillRow = xRecord->FindString(NFrame::NPC::Cooldown::SkillID, "CommonSkillID");
+	if (nCommonSKillRow >= 0)
+	{
+		long nTime = xRecord->GetInt(nCommonSKillRow, NFrame::NPC::Cooldown::Time);
+		long milliseconds = NFGetTimeMS();
+		if (milliseconds < nTime)
+		{
+			return "";
+		}
+	}
+
+	int nRand = m_pKernelModule->Random(0, 10);
+	if (nRand <= 3)
+	{
+		if (fThump < fDis)
+		{
+			//cd
+			int nRow = xRecord->FindString(NFrame::NPC::Cooldown::SkillID, strThump);
+			if (nRow >= 0)
+			{
+				long nTime = xRecord->GetInt(nRow, NFrame::NPC::Cooldown::Time);
+				long milliseconds = NFGetTimeMS();
+				if (milliseconds >= nTime)
+				{
+					return strThump;
+				}
+			}
+		}
+	}
+	else if (nRand <= 6)
+	{
+		if (fAttack < fDis)
+		{
+			//cd
+			int nRow = xRecord->FindString(NFrame::NPC::Cooldown::SkillID, strAttack);
+			if (nRow >= 0)
+			{
+				long nTime = xRecord->GetInt(nRow, NFrame::NPC::Cooldown::Time);
+				long milliseconds = NFGetTimeMS();
+				if (milliseconds >= nTime)
+				{
+					return strAttack;
+				}
+			}
+		}
+	}
+
+	return strNormal;
 }
 
 bool NFAIModule::CreateAIObject(const NFGUID& self)
@@ -102,48 +179,19 @@ NF_SHARE_PTR<NFIStateMachine> NFAIModule::GetStateMachine(const NFGUID& self)
     return nullptr;
 }
 
-void NFAIModule::OnBeAttack(const NFGUID& self, const NFGUID& other, const int nDamageValue)
+int NFAIModule::OnClassObjectEvent(const NFGUID& self, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFDataList& var)
 {
-	m_pHateModule->AddHate(self, other, nDamageValue);
-	m_pHateModule->CompSortList(self);
-}
+	const int sceneID = m_pKernelModule->GetPropertyInt(self, NFrame::IObject::SceneID());
+	const int groupID = m_pKernelModule->GetPropertyInt(self, NFrame::IObject::GroupID());
 
-void NFAIModule::OnSpring(const NFGUID& self, const NFGUID& other)
-{
-    //根据职业,等级,血量,防御
-    //战斗状态只打仇恨列表内的人，巡逻,休闲状态才重新找对象打
-	if (m_pFriendModule->IsEnemy(self, other))
-	{
-		m_pHateModule->AddHate(self, other, 100);
-		m_pHateModule->CompSortList(self);
-	}
-}
-
-void NFAIModule::OnEndSpring(const NFGUID& self, const NFGUID& other)
-{
-    m_pHateModule->SetHateValue(self, other, 0);
-}
-
-int NFAIModule::OnAIObjectEvent(const NFGUID& self, const std::string& strClassNames, const CLASS_OBJECT_EVENT eClassEvent, const NFDataList& var)
-{
     if (CLASS_OBJECT_EVENT::COE_DESTROY == eClassEvent)
     {
-        DelAIObject(self);
+		DelAIObject(self);
     }
-    else if (CLASS_OBJECT_EVENT::COE_CREATE_HASDATA == eClassEvent)
-    {
-        //m_pEventProcessModule->AddEventCallBack(self, NFED_ON_SERVER_MOVEING, OnMoveRquireEvent);
-		const int nNPCType = m_pKernelModule->GetPropertyInt(self, NFrame::NPC::NPCType());
-		if (nNPCType == NFMsg::ENPCType::ENPCTYPE_TURRET)
-		{
-			CreateAIObject(self);
-		}
-		else if (nNPCType == NFMsg::ENPCType::ENPCTYPE_NORMAL)
-		{
-		}
-    }
-	else if (CLASS_OBJECT_EVENT::COE_CREATE_FINISH == eClassEvent)
+    else if (CLASS_OBJECT_EVENT::COE_CREATE_FINISH == eClassEvent)
 	{
+		CreateAIObject(self);
+
 		m_pKernelModule->AddPropertyCallBack(self, NFrame::NPC::HP(), this, &NFAIModule::OnNPCHPEvent);
 	}
 
@@ -152,6 +200,7 @@ int NFAIModule::OnAIObjectEvent(const NFGUID& self, const std::string& strClassN
 
 int NFAIModule::OnNPCHPEvent(const NFGUID & self, const std::string & strPropertyName, const NFData & oldVar, const NFData & newVar)
 {
+	const NFGUID& lastAttacker = m_pKernelModule->GetPropertyObject(self, NFrame::NPC::LastAttacker());
 	if (newVar.GetInt() <= 0)
 	{
 		std::map<NFGUID, NF_SHARE_PTR<NFIStateMachine>>::iterator it = mtObjectStateMachine.find(self);
@@ -159,8 +208,6 @@ int NFAIModule::OnNPCHPEvent(const NFGUID & self, const std::string & strPropert
 		{
 			it->second->ChangeState(DeadState);
 		}
-
-		//tell others
 	}
 
 	return 0;
@@ -168,7 +215,7 @@ int NFAIModule::OnNPCHPEvent(const NFGUID & self, const std::string & strPropert
 
 bool NFAIModule::AfterInit()
 {
-	m_pKernelModule->AddClassCallBack(NFrame::NPC::ThisName(), this, &NFAIModule::OnAIObjectEvent);
+	m_pKernelModule->AddClassCallBack(NFrame::NPC::ThisName(), this, &NFAIModule::OnClassObjectEvent);
     return true;
 }
 

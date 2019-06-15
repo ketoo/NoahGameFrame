@@ -33,7 +33,7 @@ class NFIAIModule
 {
 public:
 	virtual NFIState* GetState(const NFAI_STATE eState) = 0;
-
+	virtual const std::string& ChooseSkill(const NFGUID& self, const float fDis) = 0;
 };
 
 #endif

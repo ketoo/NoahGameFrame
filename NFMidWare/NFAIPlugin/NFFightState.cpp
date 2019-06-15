@@ -34,6 +34,7 @@ NFFightState::NFFightState(float fHeartBeatTime, NFIPluginManager* p)
 	m_pMoveModule = pPluginManager->FindModule<NFIMoveModule>();
 	m_pElementModule = pPluginManager->FindModule<NFIElementModule>();
 	m_pHateModule = pPluginManager->FindModule<NFIHateModule>();
+	m_pSkillModule = pPluginManager->FindModule<NFISkillModule>();
 }
 
 bool NFFightState::Enter(const NFGUID& self, NFIStateMachine* pStateMachine)
@@ -48,63 +49,46 @@ bool NFFightState::Enter(const NFGUID& self, NFIStateMachine* pStateMachine)
 
 bool NFFightState::Execute(const NFGUID& self, NFIStateMachine* pStateMachine)
 {
-	/*
-	NFAI_MOVE_TYPE eMoveType = (NFAI_MOVE_TYPE)(m_pKernelModule->GetPropertyInt(self, "MoveType"));
-    NFGUID ident = m_pHateModule->QueryMaxHateObject(self);
-    if (!ident.IsNull())
-    {
-        if (m_pKernelModule->GetPropertyInt(self, "HP") > 0)
-        {
-            if (m_pKernelModule->GetPropertyInt(ident, "HP") > 0)
-            {
-                NFSkillTestSkillResult eResult = (NFSkillTestSkillResult)m_pAIModule->CanUseAnySkill(self, ident);
-                if (NFSkillTestSkillResult::NFSTSR_OK == eResult)
-                {
-                    float fSkillConsumeTime = m_pAIModule->UseAnySkill(self, ident);
-                    m_pKernelModule->SetPropertyInt(self, "StateType", (int)NFObjectStateType::NOST_SKILLUSE);
-
-                    //添加心跳，还原状态StateType
-                    m_pKernelModule->AddHeartBeat(self, "OnSkillConsumeTime", this, &NFFightState::OnSkillConsumeTime, fSkillConsumeTime, 1);
-                }
-                else if (NFSkillTestSkillResult::NFSTSR_DISTANCE == eResult)
-                {
-					if (NFAI_MOVE_TYPE::NO_MOVE_TYPE != eMoveType)
-					{
-						RunCloseTarget(self, ident);
-					}
-					else
-					{
-						pStateMachine->ChangeState(IdleState);
-					}
-                }
-                else if (NFSkillTestSkillResult::NFSTSR_CD == eResult)
-                {
-					if (NFAI_MOVE_TYPE::NO_MOVE_TYPE != eMoveType)
-					{
-						RunInFightArea(self);
-					}
-					else
-					{
-						pStateMachine->ChangeState(IdleState);
-					}
-                }
-            }
-            else
-            {
-                m_pHateModule->SetHateValue(self, ident, 0);
-            }
-        }
-        else
-        {
-            pStateMachine->ChangeState(DeadState);
-        }
-    }
-	else
+	const NFGUID ident = m_pHateModule->QueryMaxHateObject(self);
+	if (ident.IsNull())
 	{
-		//目标挂了什么的,或者没目标
 		pStateMachine->ChangeState(IdleState);
+		return false;
 	}
-	*/
+
+	const int nNPCType = m_pKernelModule->GetPropertyInt(self, NFrame::NPC::NPCType());
+	if (nNPCType == NFMsg::ENPCType::ENPCTYPE_NORMAL)
+	{
+
+	}
+	else if (nNPCType == NFMsg::ENPCType::ENPCTYPE_TURRET)
+	{
+		if (m_pKernelModule->GetPropertyInt(self, NFrame::NPC::HP()) > 0)
+		{
+			if (m_pKernelModule->GetPropertyInt(ident, NFrame::NPC::HP()) > 0)
+			{
+				const NFVector3& selfPos = m_pKernelModule->GetPropertyVector3(self, NFrame::Player::Position());
+				const NFVector3& identPos = m_pKernelModule->GetPropertyVector3(ident, NFrame::Player::Position());
+				const float fDis = selfPos.Distance(identPos);
+
+				const std::string& strSkillCnfID = m_pAIModule->ChooseSkill(self, fDis);
+				if (strSkillCnfID.empty())
+				{
+					pStateMachine->ChangeState(IdleState);
+				}
+				else
+				{
+					m_pSkillModule->UseSkill(self, strSkillCnfID, ident);
+
+					pStateMachine->ChangeState(IdleState);
+				}
+			}
+		}
+		else
+		{
+			pStateMachine->ChangeState(DeadState);
+		}
+	}
 
     return true;
 }
@@ -113,26 +97,4 @@ bool NFFightState::Exit(const NFGUID& self, NFIStateMachine* pStateMachine)
 {
 
     return true;
-}
-
-bool NFFightState::DoRule(const NFGUID& self, NFIStateMachine* pStateMachine)
-{
-    return true;
-}
-
-bool NFFightState::RunInFightArea(const NFGUID& self, NFIStateMachine* pStateMachine)
-{
-    //需要回调知道已经走到了,moving事件
-    return true;
-}
-
-bool NFFightState::RunCloseTarget(const NFGUID& self, const NFGUID& target, NFIStateMachine* pStateMachine)
-{
-    return true;
-}
-
-int NFFightState::OnSkillConsumeTime( const NFGUID& self, const std::string& strHeartBeat, const float fTime, const int nCount)
-{
-	
-	return 0;
 }

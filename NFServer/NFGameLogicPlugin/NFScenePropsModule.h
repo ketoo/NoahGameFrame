@@ -71,6 +71,8 @@ private:
 	
 	void OnAckBuildingsProcess(const NFSOCK nSockIndex, const int nMsgID, const char * msg, const uint32_t nLen);
 	
+	int OnSceneGroupEvent(const NFGUID & self, const int nSceneID, const int nGroupID, const int nType, const NFDataList& argList);
+
 private:
 	NFILogModule* m_pLogModule;
 	NFISceneModule* m_pSceneModule;

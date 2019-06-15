@@ -82,10 +82,13 @@ bool NFUserGiftModule::AfterInit()
 
 	m_pKernelModule->AddClassCallBack(NFrame::Player::ThisName(), this, &NFUserGiftModule::OnObjectClassEvent);
 
-	std::string mstrInitPropertyConfig = pPluginManager->GetConfigPath();
+	mstrIniConfigPath = pPluginManager->GetConfigPath();
 
-	mstrInitPropertyConfig += "NFDataCfg/Ini/Common/EqupConfig.xml";
-	m_pCommonConfigModule->LoadConfig(mstrInitPropertyConfig);
+	std::string strInitEquipConfig = mstrIniConfigPath + "NFDataCfg/Ini/Common/EquipConfig.xml";
+	std::string strInitPropertyConfig = mstrIniConfigPath + "NFDataCfg/Ini/Common/PropertyConfig.xml";
+
+	m_pCommonConfigModule->LoadConfig(strInitEquipConfig);
+	m_pCommonConfigModule->LoadConfig(strInitPropertyConfig);
 
 
 	return true;
@@ -193,7 +196,7 @@ bool NFUserGiftModule::DoLevelAward(const NFGUID & self, const int nLevel)
 
 bool NFUserGiftModule::DoInitProperty(const NFGUID & self)
 {
-	std::vector<std::string> xList = m_pCommonConfigModule->GetSubKeyList(NFrame::Player::ThisName());
+	std::vector<std::string> xList = m_pCommonConfigModule->GetFieldList(NFrame::Player::ThisName());
 	for (int i = 0; i < xList.size(); ++i)
 	{
 		const std::string& strPropertyName = xList.at(i);

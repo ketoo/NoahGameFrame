@@ -59,3 +59,17 @@ bool NFMoveModule::ReadyExecute()
 {
 	return true;
 }
+
+int NFMoveModule::MoveToPos(const NFGUID & self, const NFVector3 & pos, const bool pathFinding)
+{
+	if (pathFinding)
+	{
+
+	}
+	else
+	{
+
+	}
+
+	return 0;
+}
