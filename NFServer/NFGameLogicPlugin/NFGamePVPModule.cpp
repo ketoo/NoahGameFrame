@@ -455,7 +455,6 @@ int NFGamePVPModule::OnNPCClassEvent(const NFGUID & self, const std::string & st
 	{
 		m_pKernelModule->AddPropertyCallBack(self, NFrame::NPC::HP(), this, &NFGamePVPModule::OnNPCHPEvent);
 	}
-
 	return 0;
 }
 
@@ -519,14 +518,13 @@ int NFGamePVPModule::OnPlayerClassEvent(const NFGUID & self, const std::string &
 		//reconnect?
 		const int homeSceneID = m_pKernelModule->GetPropertyInt(self, NFrame::Player::HomeSceneID());
 		const int sceneID = m_pKernelModule->GetPropertyInt(self, NFrame::Player::SceneID());
+		const NFGUID matchID = m_pKernelModule->GetPropertyObject(self, NFrame::Player::MatchID());
 		const NFMsg::ESceneType scenetype = (NFMsg::ESceneType)m_pElementModule->GetPropertyInt(std::to_string(sceneID), NFrame::Scene::Type());
-		if (scenetype == NFMsg::ESceneType::SCENE_HOME)
+		if (scenetype == NFMsg::ESceneType::SCENE_HOME
+			&& !matchID.IsNull())
 		{
-			if (sceneID != homeSceneID)
-			{
-				//single mode
-				EndTheBattle(self, 0);
-			}
+			//single mode
+			EndTheBattle(self, 0);
 		}
 		else
 		{

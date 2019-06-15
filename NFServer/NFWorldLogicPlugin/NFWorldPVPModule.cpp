@@ -80,6 +80,24 @@ bool NFWorldPVPModule::ReadyExecute()
 	return false;
 }
 
+void NFWorldPVPModule::OffLine(const NFGUID & self)
+{
+	NF_SHARE_PTR<NFMsg::PVPPlayerInfo> pvpPlayerInfo = mCandidatePool.GetElement(self);
+	if (pvpPlayerInfo)
+	{
+		if (pvpPlayerInfo->single() == 1)
+		{
+			mCandidatePool.RemoveElement(self);
+
+			mSingleModeCandidatePool.remove(self);
+		}
+		else
+		{
+
+		}
+	}
+}
+
 void NFWorldPVPModule::OnReqSearchOpponentProcess(const NFSOCK nSockIndex, const int nMsgID, const char *msg, const uint32_t nLen)
 {
 	CLIENT_MSG_PROCESS_NO_OBJECT( nMsgID, msg, nLen, NFMsg::ReqSearchOppnent);
@@ -94,11 +112,11 @@ void NFWorldPVPModule::OnReqSearchOpponentProcess(const NFSOCK nSockIndex, const
 			NFPlayerRedisModule* pPlayerRedisModule = (NFPlayerRedisModule*)m_pPlayerRedisModule;
 			if (pPlayerRedisModule->LoadPlayerData(nPlayerID, *pvpPlayerInfo))
 			{
+				pvpPlayerInfo->set_single(1);
+				mSingleModeCandidatePool.push_back(nPlayerID);
 				mCandidatePool.AddElement(nPlayerID, pvpPlayerInfo);
 			}
 		}
-
-		mSingleModeCandidatePool.push_back(nPlayerID);
 	}
 	else
 	{
@@ -107,13 +125,17 @@ void NFWorldPVPModule::OnReqSearchOpponentProcess(const NFSOCK nSockIndex, const
 		multiTeam->leaderID = nPlayerID;
 		multiTeam->diamond = xMsg.diamond();
 
-		NF_SHARE_PTR<NFMsg::PVPPlayerInfo> pvpPlayerInfo(NF_NEW NFMsg::PVPPlayerInfo());
-		NFPlayerRedisModule* pPlayerRedisModule = (NFPlayerRedisModule*)m_pPlayerRedisModule;
-		if (pPlayerRedisModule->LoadPlayerData(nPlayerID, *pvpPlayerInfo))
+		if (!mCandidatePool.ExistElement(nPlayerID))
 		{
-			mCandidatePool.AddElement(nPlayerID, pvpPlayerInfo);
-			multiTeam->members.push_back(nPlayerID);
+			NF_SHARE_PTR<NFMsg::PVPPlayerInfo> pvpPlayerInfo(NF_NEW NFMsg::PVPPlayerInfo());
+			NFPlayerRedisModule* pPlayerRedisModule = (NFPlayerRedisModule*)m_pPlayerRedisModule;
+			if (pPlayerRedisModule->LoadPlayerData(nPlayerID, *pvpPlayerInfo))
+			{
+				mCandidatePool.AddElement(nPlayerID, pvpPlayerInfo);
+				multiTeam->members.push_back(nPlayerID);
+			}
 		}
+		
 
 		//multi-player
 		int battlePoint = 0;
@@ -122,14 +144,17 @@ void NFWorldPVPModule::OnReqSearchOpponentProcess(const NFSOCK nSockIndex, const
 			for (int i = 0; i < xMsg.friends_size(); ++i)
 			{
 				NFGUID friendID = NFINetModule::PBToNF(xMsg.friends(i));
-				NF_SHARE_PTR<NFMsg::PVPPlayerInfo> pvpPlayerInfo(NF_NEW NFMsg::PVPPlayerInfo());
-				NFPlayerRedisModule* pPlayerRedisModule = (NFPlayerRedisModule*)m_pPlayerRedisModule;
-				if (pPlayerRedisModule->LoadPlayerData(friendID, *pvpPlayerInfo))
+				if (!mCandidatePool.ExistElement(nPlayerID))
 				{
-					mCandidatePool.AddElement(friendID, pvpPlayerInfo);
-					multiTeam->members.push_back(friendID);
+					NF_SHARE_PTR<NFMsg::PVPPlayerInfo> pvpPlayerInfo(NF_NEW NFMsg::PVPPlayerInfo());
+					NFPlayerRedisModule* pPlayerRedisModule = (NFPlayerRedisModule*)m_pPlayerRedisModule;
+					if (pPlayerRedisModule->LoadPlayerData(friendID, *pvpPlayerInfo))
+					{
+						mCandidatePool.AddElement(friendID, pvpPlayerInfo);
 
-					battlePoint += pvpPlayerInfo->battle_point();
+						multiTeam->members.push_back(friendID);
+						battlePoint += pvpPlayerInfo->battle_point();
+					}
 				}
 			}
 		}
