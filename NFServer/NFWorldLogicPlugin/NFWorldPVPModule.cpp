@@ -68,6 +68,7 @@ bool NFWorldPVPModule::AfterInit()
 	m_pScheduleModule->AddSchedule("DoMakeMatch", this, &NFWorldPVPModule::OnMakeMatch, 0.7f, -1);
 	
 	if (!m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_REQ_SEARCH_OPPNENT, this, &NFWorldPVPModule::OnReqSearchOpponentProcess)) { return false; }
+	if (!m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_ACK_END_OPPNENT, this, &NFWorldPVPModule::OnReqEndTheBattleProcess)) { return false; }
 
 	InitAllTileScene();
 
@@ -164,6 +165,12 @@ void NFWorldPVPModule::OnReqSearchOpponentProcess(const NFSOCK nSockIndex, const
 	}
 }
 
+void NFWorldPVPModule::OnReqEndTheBattleProcess(const NFSOCK nSockIndex, const int nMsgID, const char * msg, const uint32_t nLen)
+{
+	CLIENT_MSG_PROCESS_NO_OBJECT(nMsgID, msg, nLen, NFMsg::AckEndBattle);
+
+}
+
 int NFWorldPVPModule::RandomTileScene(const int nExceptSceneID)
 {
 	if (mxTileSceneIDList.size() > 1)
@@ -195,7 +202,14 @@ int NFWorldPVPModule::OnMakeTeam(const std::string & strHeartBeat, const float f
 {
 	//single mode dosen't has gamble permission
 	static int makeTeamCount = 0;
-	makeTeamCount++;
+	if (mSingleModeCandidatePool.size() > 0)
+	{
+		makeTeamCount++;
+	}
+	else
+	{
+		makeTeamCount = 0;
+	}
 
 	if (mSingleModeCandidatePool.size() >= 5)
 	{
@@ -312,8 +326,7 @@ int NFWorldPVPModule::OnMakeMatch(const std::string & strHeartBeat, const float 
 						for (int i = 0; i < teamData->members.size(); ++i)
 						{
 							NFGUID id = teamData->members[i];
-							mCandidatePool.RemoveElement(id);
-
+							
 							NFMsg::Ident* pIdent = xAckData.add_team_members();
 							*pIdent = NFINetModule::NFToPB(id);
 						}
@@ -324,6 +337,12 @@ int NFWorldPVPModule::OnMakeMatch(const std::string & strHeartBeat, const float 
 					}
 				}
 			}
+		}
+
+		for (int i = 0; i < teamData->members.size(); ++i)
+		{
+			NFGUID id = teamData->members[i];
+			mCandidatePool.RemoveElement(id);
 		}
 	}
 

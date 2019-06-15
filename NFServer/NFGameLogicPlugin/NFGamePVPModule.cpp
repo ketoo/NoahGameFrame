@@ -571,6 +571,8 @@ void NFGamePVPModule::EndTheBattle(const NFGUID & self, const int autoEnd)
 		int64_t nWinDiamond = m_pKernelModule->GetPropertyInt(self, NFrame::Player::GambleDiamond());
 		int64_t nWinCup = 50;
 		int64_t nCup = m_pKernelModule->GetPropertyInt(self, NFrame::Player::Cup());
+		NFGUID matchTeamID = m_pKernelModule->GetPropertyObject(self, NFrame::Player::MatchTeamID());
+		NFGUID matchID = m_pKernelModule->GetPropertyObject(self, NFrame::Player::MatchID());
 
 
 		bool bWin = false;
@@ -590,6 +592,15 @@ void NFGamePVPModule::EndTheBattle(const NFGUID & self, const int autoEnd)
 		m_pLevelModule->AddExp(self, nExp);
 
 		NFMsg::AckEndBattle xReqAckEndBattle;
+		xReqAckEndBattle.set_single(1);
+		*xReqAckEndBattle.mutable_team_id() = NFINetModule::NFToPB(matchTeamID);
+		*xReqAckEndBattle.mutable_match_id() = NFINetModule::NFToPB(matchID);
+		NFMsg::Ident* pMember = xReqAckEndBattle.add_members();
+		if (pMember)
+		{
+			*pMember = NFINetModule::NFToPB(self);
+		}
+
 		if (bWin)
 		{
 			xReqAckEndBattle.set_win(1);
@@ -629,6 +640,7 @@ void NFGamePVPModule::EndTheBattle(const NFGUID & self, const int autoEnd)
 
 		//just show the result ui
 		m_pGameServerNet_ServerModule->SendMsgPBToGate(NFMsg::EGMI_ACK_END_OPPNENT, xReqAckEndBattle, self);
+		m_pNetClientModule->SendToAllServerByPB(NF_SERVER_TYPES::NF_ST_WORLD, NFMsg::EGMI_ACK_END_OPPNENT, xReqAckEndBattle);
 	}
 	else
 	{

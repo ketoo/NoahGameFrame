@@ -201,24 +201,6 @@ message CurrencyStruct
 }
 
 
-//EGMI_REQ_END_OPPNENT
-message ReqEndBattle
-{
-	int32 auto_end = 1;
-}
-
-//EGMI_ACK_END_OPPNENT
-message AckEndBattle
-{
-	//下发的时候则为道具列表
-	//获得的金币等列表
-    int32 win            	= 1; //
-    int32 star            	= 2; //
-    int32 gold            	= 3; // 副本获得的金币
-    int32 exp              = 4; // 副本获得的经验
-    int32 diamond          = 5; //
-    repeated ItemStruct item_list   = 6; // 副本获得的道具列表
-}
 
 //EGEC_REQ_RELIVE_HERO						= 1522;		 //
 message ReqAckReliveHero
@@ -409,6 +391,28 @@ message AckSearchOppnent
 	repeated ReqAddSceneBuilding buildings = 20;
 }
 
+//EGMI_REQ_END_OPPNENT
+message ReqEndBattle
+{
+	int32 auto_end = 1;
+}
+
+//EGMI_ACK_END_OPPNENT
+message AckEndBattle
+{
+	//下发的时候则为道具列表
+	//获得的金币等列表
+    int32 win            	= 1; //
+    int32 star            	= 2; //
+    int32 gold            	= 3; // 副本获得的金币
+    int32 exp              = 4; // 副本获得的经验
+    int32 diamond          = 5; //
+    int32 single          	= 6; //
+	Ident 					team_id = 7;
+	Ident 					match_id = 8;
+    repeated Ident members   = 9;
+    repeated ItemStruct item_list   = 10; // 副本获得的道具列表
+}
 /////////////////////////////////////////////////////
 
 //EGEC_REQ_SEND_MAIL = 700; // 发送邮件

@@ -68,7 +68,8 @@ public:
 
 protected:
 	void OnReqSearchOpponentProcess(const NFSOCK nSockIndex, const int nMsgID, const char *msg, const uint32_t nLen);
-
+	void OnReqEndTheBattleProcess(const NFSOCK nSockIndex, const int nMsgID, const char *msg, const uint32_t nLen);
+	
 protected:
 	void InitAllTileScene();
 	int RandomTileScene(const int nExceptSceneID);

@@ -3098,253 +3098,6 @@ class LIBPROTOC_EXPORT CurrencyStruct : public ::google::protobuf::Message /* @@
 };
 // -------------------------------------------------------------------
 
-class LIBPROTOC_EXPORT ReqEndBattle : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:NFMsg.ReqEndBattle) */ {
- public:
-  ReqEndBattle();
-  virtual ~ReqEndBattle();
-
-  ReqEndBattle(const ReqEndBattle& from);
-
-  inline ReqEndBattle& operator=(const ReqEndBattle& from) {
-    CopyFrom(from);
-    return *this;
-  }
-  #if LANG_CXX11
-  ReqEndBattle(ReqEndBattle&& from) noexcept
-    : ReqEndBattle() {
-    *this = ::std::move(from);
-  }
-
-  inline ReqEndBattle& operator=(ReqEndBattle&& from) noexcept {
-    if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
-      if (this != &from) InternalSwap(&from);
-    } else {
-      CopyFrom(from);
-    }
-    return *this;
-  }
-  #endif
-  static const ::google::protobuf::Descriptor* descriptor();
-  static const ReqEndBattle& default_instance();
-
-  static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
-  static inline const ReqEndBattle* internal_default_instance() {
-    return reinterpret_cast<const ReqEndBattle*>(
-               &_ReqEndBattle_default_instance_);
-  }
-  static constexpr int kIndexInFileMessages =
-    19;
-
-  void Swap(ReqEndBattle* other);
-  friend void swap(ReqEndBattle& a, ReqEndBattle& b) {
-    a.Swap(&b);
-  }
-
-  // implements Message ----------------------------------------------
-
-  inline ReqEndBattle* New() const final {
-    return CreateMaybeMessage<ReqEndBattle>(NULL);
-  }
-
-  ReqEndBattle* New(::google::protobuf::Arena* arena) const final {
-    return CreateMaybeMessage<ReqEndBattle>(arena);
-  }
-  void CopyFrom(const ::google::protobuf::Message& from) final;
-  void MergeFrom(const ::google::protobuf::Message& from) final;
-  void CopyFrom(const ReqEndBattle& from);
-  void MergeFrom(const ReqEndBattle& from);
-  void Clear() final;
-  bool IsInitialized() const final;
-
-  size_t ByteSizeLong() const final;
-  bool MergePartialFromCodedStream(
-      ::google::protobuf::io::CodedInputStream* input) final;
-  void SerializeWithCachedSizes(
-      ::google::protobuf::io::CodedOutputStream* output) const final;
-  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
-      bool deterministic, ::google::protobuf::uint8* target) const final;
-  int GetCachedSize() const final { return _cached_size_.Get(); }
-
-  private:
-  void SharedCtor();
-  void SharedDtor();
-  void SetCachedSize(int size) const final;
-  void InternalSwap(ReqEndBattle* other);
-  private:
-  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
-    return NULL;
-  }
-  inline void* MaybeArenaPtr() const {
-    return NULL;
-  }
-  public:
-
-  ::google::protobuf::Metadata GetMetadata() const final;
-
-  // nested types ----------------------------------------------------
-
-  // accessors -------------------------------------------------------
-
-  // int32 auto_end = 1;
-  void clear_auto_end();
-  static const int kAutoEndFieldNumber = 1;
-  ::google::protobuf::int32 auto_end() const;
-  void set_auto_end(::google::protobuf::int32 value);
-
-  // @@protoc_insertion_point(class_scope:NFMsg.ReqEndBattle)
- private:
-
-  ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
-  ::google::protobuf::int32 auto_end_;
-  mutable ::google::protobuf::internal::CachedSize _cached_size_;
-  friend struct ::protobuf_NFMsgShare_2eproto::TableStruct;
-};
-// -------------------------------------------------------------------
-
-class LIBPROTOC_EXPORT AckEndBattle : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:NFMsg.AckEndBattle) */ {
- public:
-  AckEndBattle();
-  virtual ~AckEndBattle();
-
-  AckEndBattle(const AckEndBattle& from);
-
-  inline AckEndBattle& operator=(const AckEndBattle& from) {
-    CopyFrom(from);
-    return *this;
-  }
-  #if LANG_CXX11
-  AckEndBattle(AckEndBattle&& from) noexcept
-    : AckEndBattle() {
-    *this = ::std::move(from);
-  }
-
-  inline AckEndBattle& operator=(AckEndBattle&& from) noexcept {
-    if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
-      if (this != &from) InternalSwap(&from);
-    } else {
-      CopyFrom(from);
-    }
-    return *this;
-  }
-  #endif
-  static const ::google::protobuf::Descriptor* descriptor();
-  static const AckEndBattle& default_instance();
-
-  static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
-  static inline const AckEndBattle* internal_default_instance() {
-    return reinterpret_cast<const AckEndBattle*>(
-               &_AckEndBattle_default_instance_);
-  }
-  static constexpr int kIndexInFileMessages =
-    20;
-
-  void Swap(AckEndBattle* other);
-  friend void swap(AckEndBattle& a, AckEndBattle& b) {
-    a.Swap(&b);
-  }
-
-  // implements Message ----------------------------------------------
-
-  inline AckEndBattle* New() const final {
-    return CreateMaybeMessage<AckEndBattle>(NULL);
-  }
-
-  AckEndBattle* New(::google::protobuf::Arena* arena) const final {
-    return CreateMaybeMessage<AckEndBattle>(arena);
-  }
-  void CopyFrom(const ::google::protobuf::Message& from) final;
-  void MergeFrom(const ::google::protobuf::Message& from) final;
-  void CopyFrom(const AckEndBattle& from);
-  void MergeFrom(const AckEndBattle& from);
-  void Clear() final;
-  bool IsInitialized() const final;
-
-  size_t ByteSizeLong() const final;
-  bool MergePartialFromCodedStream(
-      ::google::protobuf::io::CodedInputStream* input) final;
-  void SerializeWithCachedSizes(
-      ::google::protobuf::io::CodedOutputStream* output) const final;
-  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
-      bool deterministic, ::google::protobuf::uint8* target) const final;
-  int GetCachedSize() const final { return _cached_size_.Get(); }
-
-  private:
-  void SharedCtor();
-  void SharedDtor();
-  void SetCachedSize(int size) const final;
-  void InternalSwap(AckEndBattle* other);
-  private:
-  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
-    return NULL;
-  }
-  inline void* MaybeArenaPtr() const {
-    return NULL;
-  }
-  public:
-
-  ::google::protobuf::Metadata GetMetadata() const final;
-
-  // nested types ----------------------------------------------------
-
-  // accessors -------------------------------------------------------
-
-  // repeated .NFMsg.ItemStruct item_list = 6;
-  int item_list_size() const;
-  void clear_item_list();
-  static const int kItemListFieldNumber = 6;
-  ::NFMsg::ItemStruct* mutable_item_list(int index);
-  ::google::protobuf::RepeatedPtrField< ::NFMsg::ItemStruct >*
-      mutable_item_list();
-  const ::NFMsg::ItemStruct& item_list(int index) const;
-  ::NFMsg::ItemStruct* add_item_list();
-  const ::google::protobuf::RepeatedPtrField< ::NFMsg::ItemStruct >&
-      item_list() const;
-
-  // int32 win = 1;
-  void clear_win();
-  static const int kWinFieldNumber = 1;
-  ::google::protobuf::int32 win() const;
-  void set_win(::google::protobuf::int32 value);
-
-  // int32 star = 2;
-  void clear_star();
-  static const int kStarFieldNumber = 2;
-  ::google::protobuf::int32 star() const;
-  void set_star(::google::protobuf::int32 value);
-
-  // int32 gold = 3;
-  void clear_gold();
-  static const int kGoldFieldNumber = 3;
-  ::google::protobuf::int32 gold() const;
-  void set_gold(::google::protobuf::int32 value);
-
-  // int32 exp = 4;
-  void clear_exp();
-  static const int kExpFieldNumber = 4;
-  ::google::protobuf::int32 exp() const;
-  void set_exp(::google::protobuf::int32 value);
-
-  // int32 diamond = 5;
-  void clear_diamond();
-  static const int kDiamondFieldNumber = 5;
-  ::google::protobuf::int32 diamond() const;
-  void set_diamond(::google::protobuf::int32 value);
-
-  // @@protoc_insertion_point(class_scope:NFMsg.AckEndBattle)
- private:
-
-  ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
-  ::google::protobuf::RepeatedPtrField< ::NFMsg::ItemStruct > item_list_;
-  ::google::protobuf::int32 win_;
-  ::google::protobuf::int32 star_;
-  ::google::protobuf::int32 gold_;
-  ::google::protobuf::int32 exp_;
-  ::google::protobuf::int32 diamond_;
-  mutable ::google::protobuf::internal::CachedSize _cached_size_;
-  friend struct ::protobuf_NFMsgShare_2eproto::TableStruct;
-};
-// -------------------------------------------------------------------
-
 class LIBPROTOC_EXPORT ReqAckReliveHero : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:NFMsg.ReqAckReliveHero) */ {
  public:
   ReqAckReliveHero();
@@ -3380,7 +3133,7 @@ class LIBPROTOC_EXPORT ReqAckReliveHero : public ::google::protobuf::Message /* 
                &_ReqAckReliveHero_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    21;
+    19;
 
   void Swap(ReqAckReliveHero* other);
   friend void swap(ReqAckReliveHero& a, ReqAckReliveHero& b) {
@@ -3496,7 +3249,7 @@ class LIBPROTOC_EXPORT ReqPickDropItem : public ::google::protobuf::Message /* @
                &_ReqPickDropItem_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    22;
+    20;
 
   void Swap(ReqPickDropItem* other);
   friend void swap(ReqPickDropItem& a, ReqPickDropItem& b) {
@@ -3605,7 +3358,7 @@ class LIBPROTOC_EXPORT ReqAcceptTask : public ::google::protobuf::Message /* @@p
                &_ReqAcceptTask_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    23;
+    21;
 
   void Swap(ReqAcceptTask* other);
   friend void swap(ReqAcceptTask& a, ReqAcceptTask& b) {
@@ -3716,7 +3469,7 @@ class LIBPROTOC_EXPORT ReqCompeleteTask : public ::google::protobuf::Message /* 
                &_ReqCompeleteTask_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    24;
+    22;
 
   void Swap(ReqCompeleteTask* other);
   friend void swap(ReqCompeleteTask& a, ReqCompeleteTask& b) {
@@ -3827,7 +3580,7 @@ class LIBPROTOC_EXPORT ReqAddSceneBuilding : public ::google::protobuf::Message 
                &_ReqAddSceneBuilding_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    25;
+    23;
 
   void Swap(ReqAddSceneBuilding* other);
   friend void swap(ReqAddSceneBuilding& a, ReqAddSceneBuilding& b) {
@@ -4013,7 +3766,7 @@ class LIBPROTOC_EXPORT ReqSceneBuildings : public ::google::protobuf::Message /*
                &_ReqSceneBuildings_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    26;
+    24;
 
   void Swap(ReqSceneBuildings* other);
   friend void swap(ReqSceneBuildings& a, ReqSceneBuildings& b) {
@@ -4129,7 +3882,7 @@ class LIBPROTOC_EXPORT AckSceneBuildings : public ::google::protobuf::Message /*
                &_AckSceneBuildings_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    27;
+    25;
 
   void Swap(AckSceneBuildings* other);
   friend void swap(AckSceneBuildings& a, AckSceneBuildings& b) {
@@ -4238,7 +3991,7 @@ class LIBPROTOC_EXPORT ReqStoreSceneBuildings : public ::google::protobuf::Messa
                &_ReqStoreSceneBuildings_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    28;
+    26;
 
   void Swap(ReqStoreSceneBuildings* other);
   friend void swap(ReqStoreSceneBuildings& a, ReqStoreSceneBuildings& b) {
@@ -4367,7 +4120,7 @@ class LIBPROTOC_EXPORT ReqAckCreateClan : public ::google::protobuf::Message /* 
                &_ReqAckCreateClan_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    29;
+    27;
 
   void Swap(ReqAckCreateClan* other);
   friend void swap(ReqAckCreateClan& a, ReqAckCreateClan& b) {
@@ -4491,7 +4244,7 @@ class LIBPROTOC_EXPORT ReqSearchClan : public ::google::protobuf::Message /* @@p
                &_ReqSearchClan_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    30;
+    28;
 
   void Swap(ReqSearchClan* other);
   friend void swap(ReqSearchClan& a, ReqSearchClan& b) {
@@ -4602,7 +4355,7 @@ class LIBPROTOC_EXPORT AckSearchClan_SearchClanObject : public ::google::protobu
                &_AckSearchClan_SearchClanObject_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    31;
+    29;
 
   void Swap(AckSearchClan_SearchClanObject* other);
   friend void swap(AckSearchClan_SearchClanObject& a, AckSearchClan_SearchClanObject& b) {
@@ -4769,7 +4522,7 @@ class LIBPROTOC_EXPORT AckSearchClan : public ::google::protobuf::Message /* @@p
                &_AckSearchClan_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    32;
+    30;
 
   void Swap(AckSearchClan* other);
   friend void swap(AckSearchClan& a, AckSearchClan& b) {
@@ -4880,7 +4633,7 @@ class LIBPROTOC_EXPORT ReqAckJoinClan : public ::google::protobuf::Message /* @@
                &_ReqAckJoinClan_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    33;
+    31;
 
   void Swap(ReqAckJoinClan* other);
   friend void swap(ReqAckJoinClan& a, ReqAckJoinClan& b) {
@@ -5004,7 +4757,7 @@ class LIBPROTOC_EXPORT ReqAckLeaveClan : public ::google::protobuf::Message /* @
                &_ReqAckLeaveClan_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    34;
+    32;
 
   void Swap(ReqAckLeaveClan* other);
   friend void swap(ReqAckLeaveClan& a, ReqAckLeaveClan& b) {
@@ -5128,7 +4881,7 @@ class LIBPROTOC_EXPORT ReqAckOprClanMember : public ::google::protobuf::Message 
                &_ReqAckOprClanMember_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    35;
+    33;
 
   void Swap(ReqAckOprClanMember* other);
   friend void swap(ReqAckOprClanMember& a, ReqAckOprClanMember& b) {
@@ -5285,7 +5038,7 @@ class LIBPROTOC_EXPORT ReqEnterClanEctype : public ::google::protobuf::Message /
                &_ReqEnterClanEctype_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    36;
+    34;
 
   void Swap(ReqEnterClanEctype* other);
   friend void swap(ReqEnterClanEctype& a, ReqEnterClanEctype& b) {
@@ -5394,7 +5147,7 @@ class LIBPROTOC_EXPORT ReqSetFightHero : public ::google::protobuf::Message /* @
                &_ReqSetFightHero_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    37;
+    35;
 
   void Swap(ReqSetFightHero* other);
   friend void swap(ReqSetFightHero& a, ReqSetFightHero& b) {
@@ -5510,7 +5263,7 @@ class LIBPROTOC_EXPORT ReqSwitchFightHero : public ::google::protobuf::Message /
                &_ReqSwitchFightHero_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    38;
+    36;
 
   void Swap(ReqSwitchFightHero* other);
   friend void swap(ReqSwitchFightHero& a, ReqSwitchFightHero& b) {
@@ -5619,7 +5372,7 @@ class LIBPROTOC_EXPORT ReqBuyItemFromShop : public ::google::protobuf::Message /
                &_ReqBuyItemFromShop_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    39;
+    37;
 
   void Swap(ReqBuyItemFromShop* other);
   friend void swap(ReqBuyItemFromShop& a, ReqBuyItemFromShop& b) {
@@ -5737,7 +5490,7 @@ class LIBPROTOC_EXPORT PVPPlayerInfo : public ::google::protobuf::Message /* @@p
                &_PVPPlayerInfo_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    40;
+    38;
 
   void Swap(PVPPlayerInfo* other);
   friend void swap(PVPPlayerInfo& a, PVPPlayerInfo& b) {
@@ -6002,7 +5755,7 @@ class LIBPROTOC_EXPORT ReqSearchOppnent : public ::google::protobuf::Message /* 
                &_ReqSearchOppnent_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    41;
+    39;
 
   void Swap(ReqSearchOppnent* other);
   friend void swap(ReqSearchOppnent& a, ReqSearchOppnent& b) {
@@ -6132,7 +5885,7 @@ class LIBPROTOC_EXPORT AckSearchOppnent : public ::google::protobuf::Message /* 
                &_AckSearchOppnent_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    42;
+    40;
 
   void Swap(AckSearchOppnent* other);
   friend void swap(AckSearchOppnent& a, AckSearchOppnent& b) {
@@ -6247,6 +6000,299 @@ class LIBPROTOC_EXPORT AckSearchOppnent : public ::google::protobuf::Message /* 
   ::NFMsg::Ident* team_id_;
   ::NFMsg::PVPPlayerInfo* opponent_;
   ::google::protobuf::int32 scene_id_;
+  mutable ::google::protobuf::internal::CachedSize _cached_size_;
+  friend struct ::protobuf_NFMsgShare_2eproto::TableStruct;
+};
+// -------------------------------------------------------------------
+
+class LIBPROTOC_EXPORT ReqEndBattle : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:NFMsg.ReqEndBattle) */ {
+ public:
+  ReqEndBattle();
+  virtual ~ReqEndBattle();
+
+  ReqEndBattle(const ReqEndBattle& from);
+
+  inline ReqEndBattle& operator=(const ReqEndBattle& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  #if LANG_CXX11
+  ReqEndBattle(ReqEndBattle&& from) noexcept
+    : ReqEndBattle() {
+    *this = ::std::move(from);
+  }
+
+  inline ReqEndBattle& operator=(ReqEndBattle&& from) noexcept {
+    if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
+      if (this != &from) InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+  #endif
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const ReqEndBattle& default_instance();
+
+  static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
+  static inline const ReqEndBattle* internal_default_instance() {
+    return reinterpret_cast<const ReqEndBattle*>(
+               &_ReqEndBattle_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages =
+    41;
+
+  void Swap(ReqEndBattle* other);
+  friend void swap(ReqEndBattle& a, ReqEndBattle& b) {
+    a.Swap(&b);
+  }
+
+  // implements Message ----------------------------------------------
+
+  inline ReqEndBattle* New() const final {
+    return CreateMaybeMessage<ReqEndBattle>(NULL);
+  }
+
+  ReqEndBattle* New(::google::protobuf::Arena* arena) const final {
+    return CreateMaybeMessage<ReqEndBattle>(arena);
+  }
+  void CopyFrom(const ::google::protobuf::Message& from) final;
+  void MergeFrom(const ::google::protobuf::Message& from) final;
+  void CopyFrom(const ReqEndBattle& from);
+  void MergeFrom(const ReqEndBattle& from);
+  void Clear() final;
+  bool IsInitialized() const final;
+
+  size_t ByteSizeLong() const final;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input) final;
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const final;
+  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
+      bool deterministic, ::google::protobuf::uint8* target) const final;
+  int GetCachedSize() const final { return _cached_size_.Get(); }
+
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const final;
+  void InternalSwap(ReqEndBattle* other);
+  private:
+  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
+    return NULL;
+  }
+  inline void* MaybeArenaPtr() const {
+    return NULL;
+  }
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const final;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // int32 auto_end = 1;
+  void clear_auto_end();
+  static const int kAutoEndFieldNumber = 1;
+  ::google::protobuf::int32 auto_end() const;
+  void set_auto_end(::google::protobuf::int32 value);
+
+  // @@protoc_insertion_point(class_scope:NFMsg.ReqEndBattle)
+ private:
+
+  ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
+  ::google::protobuf::int32 auto_end_;
+  mutable ::google::protobuf::internal::CachedSize _cached_size_;
+  friend struct ::protobuf_NFMsgShare_2eproto::TableStruct;
+};
+// -------------------------------------------------------------------
+
+class LIBPROTOC_EXPORT AckEndBattle : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:NFMsg.AckEndBattle) */ {
+ public:
+  AckEndBattle();
+  virtual ~AckEndBattle();
+
+  AckEndBattle(const AckEndBattle& from);
+
+  inline AckEndBattle& operator=(const AckEndBattle& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  #if LANG_CXX11
+  AckEndBattle(AckEndBattle&& from) noexcept
+    : AckEndBattle() {
+    *this = ::std::move(from);
+  }
+
+  inline AckEndBattle& operator=(AckEndBattle&& from) noexcept {
+    if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
+      if (this != &from) InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+  #endif
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const AckEndBattle& default_instance();
+
+  static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
+  static inline const AckEndBattle* internal_default_instance() {
+    return reinterpret_cast<const AckEndBattle*>(
+               &_AckEndBattle_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages =
+    42;
+
+  void Swap(AckEndBattle* other);
+  friend void swap(AckEndBattle& a, AckEndBattle& b) {
+    a.Swap(&b);
+  }
+
+  // implements Message ----------------------------------------------
+
+  inline AckEndBattle* New() const final {
+    return CreateMaybeMessage<AckEndBattle>(NULL);
+  }
+
+  AckEndBattle* New(::google::protobuf::Arena* arena) const final {
+    return CreateMaybeMessage<AckEndBattle>(arena);
+  }
+  void CopyFrom(const ::google::protobuf::Message& from) final;
+  void MergeFrom(const ::google::protobuf::Message& from) final;
+  void CopyFrom(const AckEndBattle& from);
+  void MergeFrom(const AckEndBattle& from);
+  void Clear() final;
+  bool IsInitialized() const final;
+
+  size_t ByteSizeLong() const final;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input) final;
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const final;
+  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
+      bool deterministic, ::google::protobuf::uint8* target) const final;
+  int GetCachedSize() const final { return _cached_size_.Get(); }
+
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const final;
+  void InternalSwap(AckEndBattle* other);
+  private:
+  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
+    return NULL;
+  }
+  inline void* MaybeArenaPtr() const {
+    return NULL;
+  }
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const final;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // repeated .NFMsg.Ident members = 9;
+  int members_size() const;
+  void clear_members();
+  static const int kMembersFieldNumber = 9;
+  ::NFMsg::Ident* mutable_members(int index);
+  ::google::protobuf::RepeatedPtrField< ::NFMsg::Ident >*
+      mutable_members();
+  const ::NFMsg::Ident& members(int index) const;
+  ::NFMsg::Ident* add_members();
+  const ::google::protobuf::RepeatedPtrField< ::NFMsg::Ident >&
+      members() const;
+
+  // repeated .NFMsg.ItemStruct item_list = 10;
+  int item_list_size() const;
+  void clear_item_list();
+  static const int kItemListFieldNumber = 10;
+  ::NFMsg::ItemStruct* mutable_item_list(int index);
+  ::google::protobuf::RepeatedPtrField< ::NFMsg::ItemStruct >*
+      mutable_item_list();
+  const ::NFMsg::ItemStruct& item_list(int index) const;
+  ::NFMsg::ItemStruct* add_item_list();
+  const ::google::protobuf::RepeatedPtrField< ::NFMsg::ItemStruct >&
+      item_list() const;
+
+  // .NFMsg.Ident team_id = 7;
+  bool has_team_id() const;
+  void clear_team_id();
+  static const int kTeamIdFieldNumber = 7;
+  private:
+  const ::NFMsg::Ident& _internal_team_id() const;
+  public:
+  const ::NFMsg::Ident& team_id() const;
+  ::NFMsg::Ident* release_team_id();
+  ::NFMsg::Ident* mutable_team_id();
+  void set_allocated_team_id(::NFMsg::Ident* team_id);
+
+  // .NFMsg.Ident match_id = 8;
+  bool has_match_id() const;
+  void clear_match_id();
+  static const int kMatchIdFieldNumber = 8;
+  private:
+  const ::NFMsg::Ident& _internal_match_id() const;
+  public:
+  const ::NFMsg::Ident& match_id() const;
+  ::NFMsg::Ident* release_match_id();
+  ::NFMsg::Ident* mutable_match_id();
+  void set_allocated_match_id(::NFMsg::Ident* match_id);
+
+  // int32 win = 1;
+  void clear_win();
+  static const int kWinFieldNumber = 1;
+  ::google::protobuf::int32 win() const;
+  void set_win(::google::protobuf::int32 value);
+
+  // int32 star = 2;
+  void clear_star();
+  static const int kStarFieldNumber = 2;
+  ::google::protobuf::int32 star() const;
+  void set_star(::google::protobuf::int32 value);
+
+  // int32 gold = 3;
+  void clear_gold();
+  static const int kGoldFieldNumber = 3;
+  ::google::protobuf::int32 gold() const;
+  void set_gold(::google::protobuf::int32 value);
+
+  // int32 exp = 4;
+  void clear_exp();
+  static const int kExpFieldNumber = 4;
+  ::google::protobuf::int32 exp() const;
+  void set_exp(::google::protobuf::int32 value);
+
+  // int32 diamond = 5;
+  void clear_diamond();
+  static const int kDiamondFieldNumber = 5;
+  ::google::protobuf::int32 diamond() const;
+  void set_diamond(::google::protobuf::int32 value);
+
+  // int32 single = 6;
+  void clear_single();
+  static const int kSingleFieldNumber = 6;
+  ::google::protobuf::int32 single() const;
+  void set_single(::google::protobuf::int32 value);
+
+  // @@protoc_insertion_point(class_scope:NFMsg.AckEndBattle)
+ private:
+
+  ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
+  ::google::protobuf::RepeatedPtrField< ::NFMsg::Ident > members_;
+  ::google::protobuf::RepeatedPtrField< ::NFMsg::ItemStruct > item_list_;
+  ::NFMsg::Ident* team_id_;
+  ::NFMsg::Ident* match_id_;
+  ::google::protobuf::int32 win_;
+  ::google::protobuf::int32 star_;
+  ::google::protobuf::int32 gold_;
+  ::google::protobuf::int32 exp_;
+  ::google::protobuf::int32 diamond_;
+  ::google::protobuf::int32 single_;
   mutable ::google::protobuf::internal::CachedSize _cached_size_;
   friend struct ::protobuf_NFMsgShare_2eproto::TableStruct;
 };
@@ -8898,128 +8944,6 @@ inline void CurrencyStruct::set_currency_count(::google::protobuf::int32 value) 
 
 // -------------------------------------------------------------------
 
-// ReqEndBattle
-
-// int32 auto_end = 1;
-inline void ReqEndBattle::clear_auto_end() {
-  auto_end_ = 0;
-}
-inline ::google::protobuf::int32 ReqEndBattle::auto_end() const {
-  // @@protoc_insertion_point(field_get:NFMsg.ReqEndBattle.auto_end)
-  return auto_end_;
-}
-inline void ReqEndBattle::set_auto_end(::google::protobuf::int32 value) {
-  
-  auto_end_ = value;
-  // @@protoc_insertion_point(field_set:NFMsg.ReqEndBattle.auto_end)
-}
-
-// -------------------------------------------------------------------
-
-// AckEndBattle
-
-// int32 win = 1;
-inline void AckEndBattle::clear_win() {
-  win_ = 0;
-}
-inline ::google::protobuf::int32 AckEndBattle::win() const {
-  // @@protoc_insertion_point(field_get:NFMsg.AckEndBattle.win)
-  return win_;
-}
-inline void AckEndBattle::set_win(::google::protobuf::int32 value) {
-  
-  win_ = value;
-  // @@protoc_insertion_point(field_set:NFMsg.AckEndBattle.win)
-}
-
-// int32 star = 2;
-inline void AckEndBattle::clear_star() {
-  star_ = 0;
-}
-inline ::google::protobuf::int32 AckEndBattle::star() const {
-  // @@protoc_insertion_point(field_get:NFMsg.AckEndBattle.star)
-  return star_;
-}
-inline void AckEndBattle::set_star(::google::protobuf::int32 value) {
-  
-  star_ = value;
-  // @@protoc_insertion_point(field_set:NFMsg.AckEndBattle.star)
-}
-
-// int32 gold = 3;
-inline void AckEndBattle::clear_gold() {
-  gold_ = 0;
-}
-inline ::google::protobuf::int32 AckEndBattle::gold() const {
-  // @@protoc_insertion_point(field_get:NFMsg.AckEndBattle.gold)
-  return gold_;
-}
-inline void AckEndBattle::set_gold(::google::protobuf::int32 value) {
-  
-  gold_ = value;
-  // @@protoc_insertion_point(field_set:NFMsg.AckEndBattle.gold)
-}
-
-// int32 exp = 4;
-inline void AckEndBattle::clear_exp() {
-  exp_ = 0;
-}
-inline ::google::protobuf::int32 AckEndBattle::exp() const {
-  // @@protoc_insertion_point(field_get:NFMsg.AckEndBattle.exp)
-  return exp_;
-}
-inline void AckEndBattle::set_exp(::google::protobuf::int32 value) {
-  
-  exp_ = value;
-  // @@protoc_insertion_point(field_set:NFMsg.AckEndBattle.exp)
-}
-
-// int32 diamond = 5;
-inline void AckEndBattle::clear_diamond() {
-  diamond_ = 0;
-}
-inline ::google::protobuf::int32 AckEndBattle::diamond() const {
-  // @@protoc_insertion_point(field_get:NFMsg.AckEndBattle.diamond)
-  return diamond_;
-}
-inline void AckEndBattle::set_diamond(::google::protobuf::int32 value) {
-  
-  diamond_ = value;
-  // @@protoc_insertion_point(field_set:NFMsg.AckEndBattle.diamond)
-}
-
-// repeated .NFMsg.ItemStruct item_list = 6;
-inline int AckEndBattle::item_list_size() const {
-  return item_list_.size();
-}
-inline void AckEndBattle::clear_item_list() {
-  item_list_.Clear();
-}
-inline ::NFMsg::ItemStruct* AckEndBattle::mutable_item_list(int index) {
-  // @@protoc_insertion_point(field_mutable:NFMsg.AckEndBattle.item_list)
-  return item_list_.Mutable(index);
-}
-inline ::google::protobuf::RepeatedPtrField< ::NFMsg::ItemStruct >*
-AckEndBattle::mutable_item_list() {
-  // @@protoc_insertion_point(field_mutable_list:NFMsg.AckEndBattle.item_list)
-  return &item_list_;
-}
-inline const ::NFMsg::ItemStruct& AckEndBattle::item_list(int index) const {
-  // @@protoc_insertion_point(field_get:NFMsg.AckEndBattle.item_list)
-  return item_list_.Get(index);
-}
-inline ::NFMsg::ItemStruct* AckEndBattle::add_item_list() {
-  // @@protoc_insertion_point(field_add:NFMsg.AckEndBattle.item_list)
-  return item_list_.Add();
-}
-inline const ::google::protobuf::RepeatedPtrField< ::NFMsg::ItemStruct >&
-AckEndBattle::item_list() const {
-  // @@protoc_insertion_point(field_list:NFMsg.AckEndBattle.item_list)
-  return item_list_;
-}
-
-// -------------------------------------------------------------------
-
 // ReqAckReliveHero
 
 // int32 diamond = 1;
@@ -11510,6 +11434,265 @@ inline const ::google::protobuf::RepeatedPtrField< ::NFMsg::ReqAddSceneBuilding 
 AckSearchOppnent::buildings() const {
   // @@protoc_insertion_point(field_list:NFMsg.AckSearchOppnent.buildings)
   return buildings_;
+}
+
+// -------------------------------------------------------------------
+
+// ReqEndBattle
+
+// int32 auto_end = 1;
+inline void ReqEndBattle::clear_auto_end() {
+  auto_end_ = 0;
+}
+inline ::google::protobuf::int32 ReqEndBattle::auto_end() const {
+  // @@protoc_insertion_point(field_get:NFMsg.ReqEndBattle.auto_end)
+  return auto_end_;
+}
+inline void ReqEndBattle::set_auto_end(::google::protobuf::int32 value) {
+  
+  auto_end_ = value;
+  // @@protoc_insertion_point(field_set:NFMsg.ReqEndBattle.auto_end)
+}
+
+// -------------------------------------------------------------------
+
+// AckEndBattle
+
+// int32 win = 1;
+inline void AckEndBattle::clear_win() {
+  win_ = 0;
+}
+inline ::google::protobuf::int32 AckEndBattle::win() const {
+  // @@protoc_insertion_point(field_get:NFMsg.AckEndBattle.win)
+  return win_;
+}
+inline void AckEndBattle::set_win(::google::protobuf::int32 value) {
+  
+  win_ = value;
+  // @@protoc_insertion_point(field_set:NFMsg.AckEndBattle.win)
+}
+
+// int32 star = 2;
+inline void AckEndBattle::clear_star() {
+  star_ = 0;
+}
+inline ::google::protobuf::int32 AckEndBattle::star() const {
+  // @@protoc_insertion_point(field_get:NFMsg.AckEndBattle.star)
+  return star_;
+}
+inline void AckEndBattle::set_star(::google::protobuf::int32 value) {
+  
+  star_ = value;
+  // @@protoc_insertion_point(field_set:NFMsg.AckEndBattle.star)
+}
+
+// int32 gold = 3;
+inline void AckEndBattle::clear_gold() {
+  gold_ = 0;
+}
+inline ::google::protobuf::int32 AckEndBattle::gold() const {
+  // @@protoc_insertion_point(field_get:NFMsg.AckEndBattle.gold)
+  return gold_;
+}
+inline void AckEndBattle::set_gold(::google::protobuf::int32 value) {
+  
+  gold_ = value;
+  // @@protoc_insertion_point(field_set:NFMsg.AckEndBattle.gold)
+}
+
+// int32 exp = 4;
+inline void AckEndBattle::clear_exp() {
+  exp_ = 0;
+}
+inline ::google::protobuf::int32 AckEndBattle::exp() const {
+  // @@protoc_insertion_point(field_get:NFMsg.AckEndBattle.exp)
+  return exp_;
+}
+inline void AckEndBattle::set_exp(::google::protobuf::int32 value) {
+  
+  exp_ = value;
+  // @@protoc_insertion_point(field_set:NFMsg.AckEndBattle.exp)
+}
+
+// int32 diamond = 5;
+inline void AckEndBattle::clear_diamond() {
+  diamond_ = 0;
+}
+inline ::google::protobuf::int32 AckEndBattle::diamond() const {
+  // @@protoc_insertion_point(field_get:NFMsg.AckEndBattle.diamond)
+  return diamond_;
+}
+inline void AckEndBattle::set_diamond(::google::protobuf::int32 value) {
+  
+  diamond_ = value;
+  // @@protoc_insertion_point(field_set:NFMsg.AckEndBattle.diamond)
+}
+
+// int32 single = 6;
+inline void AckEndBattle::clear_single() {
+  single_ = 0;
+}
+inline ::google::protobuf::int32 AckEndBattle::single() const {
+  // @@protoc_insertion_point(field_get:NFMsg.AckEndBattle.single)
+  return single_;
+}
+inline void AckEndBattle::set_single(::google::protobuf::int32 value) {
+  
+  single_ = value;
+  // @@protoc_insertion_point(field_set:NFMsg.AckEndBattle.single)
+}
+
+// .NFMsg.Ident team_id = 7;
+inline bool AckEndBattle::has_team_id() const {
+  return this != internal_default_instance() && team_id_ != NULL;
+}
+inline const ::NFMsg::Ident& AckEndBattle::_internal_team_id() const {
+  return *team_id_;
+}
+inline const ::NFMsg::Ident& AckEndBattle::team_id() const {
+  const ::NFMsg::Ident* p = team_id_;
+  // @@protoc_insertion_point(field_get:NFMsg.AckEndBattle.team_id)
+  return p != NULL ? *p : *reinterpret_cast<const ::NFMsg::Ident*>(
+      &::NFMsg::_Ident_default_instance_);
+}
+inline ::NFMsg::Ident* AckEndBattle::release_team_id() {
+  // @@protoc_insertion_point(field_release:NFMsg.AckEndBattle.team_id)
+  
+  ::NFMsg::Ident* temp = team_id_;
+  team_id_ = NULL;
+  return temp;
+}
+inline ::NFMsg::Ident* AckEndBattle::mutable_team_id() {
+  
+  if (team_id_ == NULL) {
+    auto* p = CreateMaybeMessage<::NFMsg::Ident>(GetArenaNoVirtual());
+    team_id_ = p;
+  }
+  // @@protoc_insertion_point(field_mutable:NFMsg.AckEndBattle.team_id)
+  return team_id_;
+}
+inline void AckEndBattle::set_allocated_team_id(::NFMsg::Ident* team_id) {
+  ::google::protobuf::Arena* message_arena = GetArenaNoVirtual();
+  if (message_arena == NULL) {
+    delete reinterpret_cast< ::google::protobuf::MessageLite*>(team_id_);
+  }
+  if (team_id) {
+    ::google::protobuf::Arena* submessage_arena = NULL;
+    if (message_arena != submessage_arena) {
+      team_id = ::google::protobuf::internal::GetOwnedMessage(
+          message_arena, team_id, submessage_arena);
+    }
+    
+  } else {
+    
+  }
+  team_id_ = team_id;
+  // @@protoc_insertion_point(field_set_allocated:NFMsg.AckEndBattle.team_id)
+}
+
+// .NFMsg.Ident match_id = 8;
+inline bool AckEndBattle::has_match_id() const {
+  return this != internal_default_instance() && match_id_ != NULL;
+}
+inline const ::NFMsg::Ident& AckEndBattle::_internal_match_id() const {
+  return *match_id_;
+}
+inline const ::NFMsg::Ident& AckEndBattle::match_id() const {
+  const ::NFMsg::Ident* p = match_id_;
+  // @@protoc_insertion_point(field_get:NFMsg.AckEndBattle.match_id)
+  return p != NULL ? *p : *reinterpret_cast<const ::NFMsg::Ident*>(
+      &::NFMsg::_Ident_default_instance_);
+}
+inline ::NFMsg::Ident* AckEndBattle::release_match_id() {
+  // @@protoc_insertion_point(field_release:NFMsg.AckEndBattle.match_id)
+  
+  ::NFMsg::Ident* temp = match_id_;
+  match_id_ = NULL;
+  return temp;
+}
+inline ::NFMsg::Ident* AckEndBattle::mutable_match_id() {
+  
+  if (match_id_ == NULL) {
+    auto* p = CreateMaybeMessage<::NFMsg::Ident>(GetArenaNoVirtual());
+    match_id_ = p;
+  }
+  // @@protoc_insertion_point(field_mutable:NFMsg.AckEndBattle.match_id)
+  return match_id_;
+}
+inline void AckEndBattle::set_allocated_match_id(::NFMsg::Ident* match_id) {
+  ::google::protobuf::Arena* message_arena = GetArenaNoVirtual();
+  if (message_arena == NULL) {
+    delete reinterpret_cast< ::google::protobuf::MessageLite*>(match_id_);
+  }
+  if (match_id) {
+    ::google::protobuf::Arena* submessage_arena = NULL;
+    if (message_arena != submessage_arena) {
+      match_id = ::google::protobuf::internal::GetOwnedMessage(
+          message_arena, match_id, submessage_arena);
+    }
+    
+  } else {
+    
+  }
+  match_id_ = match_id;
+  // @@protoc_insertion_point(field_set_allocated:NFMsg.AckEndBattle.match_id)
+}
+
+// repeated .NFMsg.Ident members = 9;
+inline int AckEndBattle::members_size() const {
+  return members_.size();
+}
+inline ::NFMsg::Ident* AckEndBattle::mutable_members(int index) {
+  // @@protoc_insertion_point(field_mutable:NFMsg.AckEndBattle.members)
+  return members_.Mutable(index);
+}
+inline ::google::protobuf::RepeatedPtrField< ::NFMsg::Ident >*
+AckEndBattle::mutable_members() {
+  // @@protoc_insertion_point(field_mutable_list:NFMsg.AckEndBattle.members)
+  return &members_;
+}
+inline const ::NFMsg::Ident& AckEndBattle::members(int index) const {
+  // @@protoc_insertion_point(field_get:NFMsg.AckEndBattle.members)
+  return members_.Get(index);
+}
+inline ::NFMsg::Ident* AckEndBattle::add_members() {
+  // @@protoc_insertion_point(field_add:NFMsg.AckEndBattle.members)
+  return members_.Add();
+}
+inline const ::google::protobuf::RepeatedPtrField< ::NFMsg::Ident >&
+AckEndBattle::members() const {
+  // @@protoc_insertion_point(field_list:NFMsg.AckEndBattle.members)
+  return members_;
+}
+
+// repeated .NFMsg.ItemStruct item_list = 10;
+inline int AckEndBattle::item_list_size() const {
+  return item_list_.size();
+}
+inline void AckEndBattle::clear_item_list() {
+  item_list_.Clear();
+}
+inline ::NFMsg::ItemStruct* AckEndBattle::mutable_item_list(int index) {
+  // @@protoc_insertion_point(field_mutable:NFMsg.AckEndBattle.item_list)
+  return item_list_.Mutable(index);
+}
+inline ::google::protobuf::RepeatedPtrField< ::NFMsg::ItemStruct >*
+AckEndBattle::mutable_item_list() {
+  // @@protoc_insertion_point(field_mutable_list:NFMsg.AckEndBattle.item_list)
+  return &item_list_;
+}
+inline const ::NFMsg::ItemStruct& AckEndBattle::item_list(int index) const {
+  // @@protoc_insertion_point(field_get:NFMsg.AckEndBattle.item_list)
+  return item_list_.Get(index);
+}
+inline ::NFMsg::ItemStruct* AckEndBattle::add_item_list() {
+  // @@protoc_insertion_point(field_add:NFMsg.AckEndBattle.item_list)
+  return item_list_.Add();
+}
+inline const ::google::protobuf::RepeatedPtrField< ::NFMsg::ItemStruct >&
+AckEndBattle::item_list() const {
+  // @@protoc_insertion_point(field_list:NFMsg.AckEndBattle.item_list)
+  return item_list_;
 }
 
 // -------------------------------------------------------------------
