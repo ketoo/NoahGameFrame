@@ -46,9 +46,53 @@ bool NFScenePropsModule::AfterInit()
 
 	m_pKernelModule->AddClassCallBack(NFrame::Player::ThisName(), this, &NFScenePropsModule::OnPlayerClassEvent);
 
+	m_pSceneModule->AddAfterEnterSceneGroupCallBack(this, &NFScenePropsModule::OnSceneGroupEvent);
+
 	if (!m_pNetClientModule->AddReceiveCallBack(NF_SERVER_TYPES::NF_ST_WORLD, NFMsg::EGMI_REQ_ACK_BUILDING_LIST, this, &NFScenePropsModule::OnAckBuildingsProcess)) { return false; }
 
 	return true;
+}
+
+int NFScenePropsModule::OnSceneGroupEvent(const NFGUID & self, const int nSceneID, const int nGroupID, const int nType, const NFDataList& argList)
+{
+	//buildings
+	const int type = m_pElementModule->GetPropertyInt(std::to_string(nSceneID), NFrame::Scene::Type());
+	if (type == NFMsg::SCENE_HOME)
+	{
+		const int& homeSceneID = m_pKernelModule->GetPropertyInt(self, NFrame::Player::HomeSceneID());
+		const NFGUID& matchID = m_pKernelModule->GetPropertyObject(self, NFrame::Player::MatchID());
+		if (matchID.IsNull() && homeSceneID == nSceneID)
+		{
+			//now he dosen't fighting with others, must be home, we build up he buildings for him
+			NF_SHARE_PTR<NFIRecord> pRecord = m_pKernelModule->FindRecord(self, NFrame::Player::BuildingList::ThisName());
+			if (pRecord)
+			{
+				for (int i = 0; i < pRecord->GetRows(); ++i)
+				{
+					if (pRecord->IsUsed(i))
+					{
+						const NFGUID& id = pRecord->GetObject(i, NFrame::Player::BuildingList::BuildingGUID);
+						const NFVector3& vector = pRecord->GetVector3(i, NFrame::Player::BuildingList::Pos);
+						const std::string& strCnfID = pRecord->GetString(i, NFrame::Player::BuildingList::BuildingCnfID);
+
+						NFDataList xDataArg;
+						xDataArg.AddString(NFrame::NPC::Position());
+						xDataArg.AddVector3(vector);
+						xDataArg.AddString(NFrame::NPC::MasterID());
+						xDataArg.AddObject(self);
+						xDataArg.AddString(NFrame::NPC::AIOwnerID());
+						xDataArg.AddObject(self);
+						xDataArg.AddString(NFrame::NPC::NPCType());
+						xDataArg.AddInt(NFMsg::ENPCType::ENPCTYPE_TURRET);
+
+						m_pKernelModule->CreateObject(id, nSceneID, nGroupID, NFrame::NPC::ThisName(), strCnfID, xDataArg);
+					}
+				}
+			}
+		}
+	}
+
+	return 0;
 }
 
 bool NFScenePropsModule::Shut()
@@ -99,42 +143,60 @@ int NFScenePropsModule::OnPlayePositionEvent(const NFGUID & self, const std::str
 
 int NFScenePropsModule::OnObjectBuildingRecordEvent(const NFGUID & self, const RECORD_EVENT_DATA & xEventData, const NFData & oldVar, const NFData & newVar)
 {
-	if (xEventData.nOpType == RECORD_EVENT_DATA::RecordOptype::Add
-		|| xEventData.nOpType == RECORD_EVENT_DATA::RecordOptype::Update)
+	if (xEventData.nOpType == RECORD_EVENT_DATA::RecordOptype::Add)
 	{
 		//send message to world to store this building
 		NF_SHARE_PTR<NFIRecord> pRecord = m_pKernelModule->FindRecord(self, NFrame::Player::BuildingList::ThisName());
 		if (pRecord)
 		{
 			const int nHomeSceneID = m_pKernelModule->GetPropertyInt(self, NFrame::Player::HomeSceneID());
+			const int nSceneID = m_pKernelModule->GetPropertyInt(self, NFrame::Player::SceneID());
+			const int nGroupID = m_pKernelModule->GetPropertyInt(self, NFrame::Player::GroupID());
+			const NFGUID& matchID = m_pKernelModule->GetPropertyObject(self, NFrame::Player::MatchID());
 			const std::string& strName = m_pKernelModule->GetPropertyString(self, NFrame::Player::Name());
-
-			NFMsg::ReqStoreSceneBuildings sceneProps;
-			sceneProps.set_home_scene_id(nHomeSceneID);
-			*(sceneProps.mutable_guid()) = NFINetModule::NFToPB(self);
-
-			for (int i = 0; i < pRecord->GetRows(); ++i)
+			if (nHomeSceneID == nSceneID
+				&& matchID.IsNull())
 			{
-				if (pRecord->IsUsed(i))
+
+				NFMsg::ReqStoreSceneBuildings sceneProps;
+				sceneProps.set_home_scene_id(nHomeSceneID);
+				*(sceneProps.mutable_guid()) = NFINetModule::NFToPB(self);
+
+				for (int i = 0; i < pRecord->GetRows(); ++i)
 				{
-					const NFGUID& id = pRecord->GetObject(i, NFrame::Player::BuildingList::BuildingGUID);
-					const NFVector3& vector = pRecord->GetVector3(i, NFrame::Player::BuildingList::Pos);
-					const std::string& strCnfID = pRecord->GetString(i, NFrame::Player::BuildingList::BuildingCnfID);
+					if (pRecord->IsUsed(i))
+					{
+						const NFGUID& id = pRecord->GetObject(i, NFrame::Player::BuildingList::BuildingGUID);
+						const NFVector3& vector = pRecord->GetVector3(i, NFrame::Player::BuildingList::Pos);
+						const std::string& strCnfID = pRecord->GetString(i, NFrame::Player::BuildingList::BuildingCnfID);
 
-					NFMsg::ReqAddSceneBuilding* pAddBuilding = sceneProps.add_buildings();
-					pAddBuilding->set_config_id(strCnfID);
-					pAddBuilding->set_master_name(strName);
-					pAddBuilding->set_scene_id(nHomeSceneID);
-					pAddBuilding->set_is_home_scene(1);
-					pAddBuilding->set_is_building(1);
+						NFMsg::ReqAddSceneBuilding* pAddBuilding = sceneProps.add_buildings();
+						pAddBuilding->set_config_id(strCnfID);
+						pAddBuilding->set_master_name(strName);
+						pAddBuilding->set_scene_id(nHomeSceneID);
+						pAddBuilding->set_is_home_scene(1);
+						pAddBuilding->set_is_building(1);
 
-					*(pAddBuilding->mutable_guid()) = NFINetModule::NFToPB(id);
-					*(pAddBuilding->mutable_pos()) = NFINetModule::NFToPB(vector);
-					*(pAddBuilding->mutable_master()) = NFINetModule::NFToPB(self);
+						*(pAddBuilding->mutable_guid()) = NFINetModule::NFToPB(id);
+						*(pAddBuilding->mutable_pos()) = NFINetModule::NFToPB(vector);
+						*(pAddBuilding->mutable_master()) = NFINetModule::NFToPB(self);
+
+						NFDataList xDataArg;
+						xDataArg.AddString(NFrame::NPC::Position());
+						xDataArg.AddVector3(vector);
+						xDataArg.AddString(NFrame::NPC::MasterID());
+						xDataArg.AddObject(self);
+						xDataArg.AddString(NFrame::NPC::AIOwnerID());
+						xDataArg.AddObject(self);
+						xDataArg.AddString(NFrame::NPC::NPCType());
+						xDataArg.AddInt(NFMsg::ENPCType::ENPCTYPE_TURRET);
+
+						m_pKernelModule->CreateObject(id, nSceneID, nGroupID, NFrame::NPC::ThisName(), strCnfID, xDataArg);
+					}
 				}
-			}
 
-			m_pNetClientModule->SendSuitByPB(NF_SERVER_TYPES::NF_ST_WORLD, nHomeSceneID, NFMsg::EGMI_REQ_STORE_BUILDING_LIST, sceneProps);
+				m_pNetClientModule->SendSuitByPB(NF_SERVER_TYPES::NF_ST_WORLD, nHomeSceneID, NFMsg::EGMI_REQ_STORE_BUILDING_LIST, sceneProps);
+			}
 		}
 	}
 

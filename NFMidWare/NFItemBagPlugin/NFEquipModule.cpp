@@ -54,12 +54,6 @@ bool NFEquipModule::Execute()
 
 bool NFEquipModule::AfterInit()
 {
-
-    std::string strEquipPath = pPluginManager->GetConfigPath();
-
-    strEquipPath += "NFDataCfg/Ini/Common/InitProperty.xml";
-    m_pCommonConfigModule->LoadConfig(strEquipPath);
-
     return true;
 }
 

@@ -66,6 +66,7 @@ public:
     virtual bool AfterInit();
 	virtual bool ReadyExecute();
 
+	virtual int MoveToPos(const NFGUID& self, const NFVector3& pos, const bool pathFinding = false);
 private:
 
     NFIElementModule* m_pElementModule;

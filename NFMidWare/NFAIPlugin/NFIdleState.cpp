@@ -81,6 +81,10 @@ bool NFIdleState::Execute(const NFGUID& self, NFIStateMachine* pStateMachine)
 						RandomIdle(self, pStateMachine);
 					}
 				}
+				else if (nNPCType == NFMsg::ENPCType::ENPCTYPE_TURRET)
+				{
+					//do nothing
+				}
             }
     }
 

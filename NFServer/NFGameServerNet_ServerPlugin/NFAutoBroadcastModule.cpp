@@ -98,6 +98,7 @@ int NFAutoBroadcastModule::OnObjectClassEvent(const NFGUID& self, const std::str
 
 	return 0;
 }
+
 int NFAutoBroadcastModule::OnSceneEvent(const NFGUID & self, const int nSceneID, const int nGroupID, const int nType, const NFDataList& argList)
 {
 	NFVector3 vRelivePos = m_pSceneModule->GetRelivePosition(nSceneID, 0);
@@ -110,6 +111,8 @@ int NFAutoBroadcastModule::OnSceneEvent(const NFGUID & self, const int nSceneID,
 	xAckSwapScene.set_y(vRelivePos.Y());
 	xAckSwapScene.set_z(vRelivePos.Z());
 	xAckSwapScene.set_data("");
+
+	//buildings
 
 	m_pGameServerNet_ServerModule->SendMsgPBToGate(NFMsg::EGMI_ACK_SWAP_SCENE, xAckSwapScene, self);
 
@@ -134,6 +137,9 @@ int NFAutoBroadcastModule::OnPropertyEnter(const NFDataList& argVar, const NFGUI
 		*(pPrivateData->mutable_player_id()) = NFINetModule::NFToPB(self);
 
 		NF_SHARE_PTR<NFIPropertyManager> pPropertyManager = pObject->GetPropertyManager();
+		std::cout << "auto " << pPropertyManager->Self().ToString() << std::endl;
+		std::cout << pPropertyManager->ToString() << std::endl;
+
 		NF_SHARE_PTR<NFIProperty> pPropertyInfo = pPropertyManager->First();
 		while (pPropertyInfo)
 		{

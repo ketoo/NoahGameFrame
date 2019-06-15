@@ -45,9 +45,6 @@ bool NFCommonConfigModule::Execute()
 
 bool NFCommonConfigModule::AfterInit()
 {
-	std::string strPlayerPath = pPluginManager->GetConfigPath();
-	strPlayerPath += "NFDataCfg/Ini/Common/AwardPackConfig.xml";
-	LoadConfig(strPlayerPath);
 
     return true;
 }
@@ -127,62 +124,49 @@ bool NFCommonConfigModule::LoadConfig(const std::string& strFile)
 
 		for (rapidxml::xml_node<>* pRootNode = pRoot->first_node(); pRootNode; pRootNode = pRootNode->next_sibling())
 		{
-			if (pRootNode)
+			NF_SHARE_PTR<CStructInfo> pAppSDKConfigInfo = mmData.GetElement(pRootNode->name());
+			if (!pAppSDKConfigInfo)
 			{
-				rapidxml::xml_attribute<>* pNameAttribute = pRootNode->first_attribute("Name");
-				if (NULL == pNameAttribute)
-				{
-					//foreach
+				pAppSDKConfigInfo = NF_SHARE_PTR<CStructInfo>(NF_NEW CStructInfo());
+				mmData.AddElement(pRootNode->name(), pAppSDKConfigInfo);
+			}
 
-					continue;
+			for (rapidxml::xml_attribute<>* pAttribute = pRootNode->first_attribute(); pAttribute; pAttribute = pAttribute->next_attribute())
+			{
+				const char* pstrConfigName = pAttribute->name();
+				const char* pstrConfigValue = pAttribute->value();
+
+				pAppSDKConfigInfo->mmStructAttribute.AddElement(pstrConfigName, NF_SHARE_PTR<std::string>(NF_NEW std::string(pstrConfigValue)));
+			}
+			
+			for (rapidxml::xml_node<>* pSDKInterfaceNode = pRootNode->first_node(); pSDKInterfaceNode; pSDKInterfaceNode = pSDKInterfaceNode->next_sibling())
+			{
+				if (pSDKInterfaceNode->first_attribute("ID") != NULL)
+				{
+					std::string strStructItemName = pSDKInterfaceNode->first_attribute("ID")->value();   
+					NF_SHARE_PTR<CAttributeList> pConfigData = pAppSDKConfigInfo->GetElement(strStructItemName);
+					if (!pConfigData)
+					{
+						pConfigData = NF_SHARE_PTR<CAttributeList>(NF_NEW CAttributeList());
+						pAppSDKConfigInfo->AddElement(strStructItemName, pConfigData);
+					}
+
+					for (rapidxml::xml_attribute<>* pAttribute = pSDKInterfaceNode->first_attribute(); pAttribute; pAttribute = pAttribute->next_attribute())
+					{
+						const char* pstrConfigName = pAttribute->name();
+						const char* pstrConfigValue = pAttribute->value();
+
+						pConfigData->AddElement(pstrConfigName, NF_SHARE_PTR<std::string>(NF_NEW std::string(pstrConfigValue)));
+					}
 				}
-
-				std::string strName = pNameAttribute->value();
-				NF_SHARE_PTR<CStructInfo> pAppSDKConfigInfo = mmData.GetElement(strName);
-				if (!pAppSDKConfigInfo)
+				else
 				{
-					pAppSDKConfigInfo = NF_SHARE_PTR<CStructInfo>(NF_NEW CStructInfo());
-					mmData.AddElement(strName, pAppSDKConfigInfo);
-				}
-
-				
-				for (rapidxml::xml_attribute<>* pAttribute = pRootNode->first_attribute(); pAttribute; pAttribute = pAttribute->next_attribute())
-				{
-					if (pAttribute)
+					for (rapidxml::xml_attribute<>* pAttribute = pSDKInterfaceNode->first_attribute(); pAttribute; pAttribute = pAttribute->next_attribute())
 					{
 						const char* pstrConfigName = pAttribute->name();
 						const char* pstrConfigValue = pAttribute->value();
 
 						pAppSDKConfigInfo->mmStructAttribute.AddElement(pstrConfigName, NF_SHARE_PTR<std::string>(NF_NEW std::string(pstrConfigValue)));
-					}
-				}
-
-				
-				for (rapidxml::xml_node<>* pSDKInterfaceNode = pRootNode->first_node(); pSDKInterfaceNode; pSDKInterfaceNode = pSDKInterfaceNode->next_sibling())
-				{
-					if (pSDKInterfaceNode)
-					{
-						if (pSDKInterfaceNode->first_attribute("Name") != NULL)
-						{
-							std::string strStructItemName = pSDKInterfaceNode->first_attribute("Name")->value();   
-							NF_SHARE_PTR<CAttributeList> pConfigData = pAppSDKConfigInfo->GetElement(strStructItemName);
-							if (!pConfigData)
-							{
-								pConfigData = NF_SHARE_PTR<CAttributeList>(NF_NEW CAttributeList());
-								pAppSDKConfigInfo->AddElement(strStructItemName, pConfigData);
-							}
-
-							for (rapidxml::xml_attribute<>* pAttribute = pSDKInterfaceNode->first_attribute(); pAttribute; pAttribute = pAttribute->next_attribute())
-							{
-								if (pAttribute)
-								{
-									const char* pstrConfigName = pAttribute->name();
-									const char* pstrConfigValue = pAttribute->value();
-
-									pConfigData->AddElement(pstrConfigName, NF_SHARE_PTR<std::string>(NF_NEW std::string(pstrConfigValue)));
-								}
-							}
-						}
 					}
 				}
 			}
@@ -204,6 +188,22 @@ std::vector<std::string> NFCommonConfigModule::GetSubKeyList(const std::string&s
 	{
 		std::string strStructName;
 		for (NF_SHARE_PTR<CAttributeList> pData = pStructTypeData->First(strStructName); pData != NULL; pData = pStructTypeData->Next(strStructName))
+		{
+			xList.push_back(strStructName);
+		}
+	}
+
+	return xList;
+}
+
+std::vector<std::string> NFCommonConfigModule::GetFieldList(const std::string & strStructName)
+{
+	std::vector<std::string> xList;
+	NF_SHARE_PTR<CStructInfo> pStructTypeData = mmData.GetElement(strStructName);
+	if (pStructTypeData)
+	{
+		std::string strStructName;
+		for (NF_SHARE_PTR<std::string> pData = pStructTypeData->mmStructAttribute.First(strStructName); pData != NULL; pData = pStructTypeData->mmStructAttribute.Next(strStructName))
 		{
 			xList.push_back(strStructName);
 		}

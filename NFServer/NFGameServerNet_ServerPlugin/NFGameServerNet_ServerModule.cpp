@@ -37,7 +37,8 @@ bool NFGameServerNet_ServerModule::Init()
 	m_pLogModule = pPluginManager->FindModule<NFILogModule>();
 	m_pEventModule = pPluginManager->FindModule<NFIEventModule>();
 	m_pSceneModule = pPluginManager->FindModule<NFISceneModule>();
-
+	m_pScheduleModule = pPluginManager->FindModule<NFIScheduleModule>();
+	
 	m_pNetModule = pPluginManager->FindModule<NFINetModule>();
 	m_pNetClientModule = pPluginManager->FindModule<NFINetClientModule>();
 
@@ -287,10 +288,27 @@ void NFGameServerNet_ServerModule::OnClientLeaveGameProcess(const NFSOCK nSockIn
 
 	if (m_pKernelModule->GetObject(nPlayerID))
 	{
-		m_pKernelModule->DestroyObject(nPlayerID);
+		//if the player now in the match, we wouldn't destroy him
+		//or if the player now fighting in the clan scene with other clan, we wouldn't destroy him too
+		const NFGUID matchID = m_pKernelModule->GetPropertyObject(nPlayerID, NFrame::Player::MatchID());
+		if (matchID.IsNull())
+		{
+		}
+		else
+		{
+			//add schedule
+			//single mode or multi-player mode
+			if (m_pKernelModule->GetPropertyInt(nPlayerID, NFrame::Player::MatchPlayers()) <= 1)
+			{
+				m_pKernelModule->DestroyObject(nPlayerID);
+			}
+			else
+			{
+				m_pKernelModule->SetPropertyObject(nPlayerID, NFrame::Player::GateID(), NFGUID());
+				m_pScheduleModule->AddSchedule(nPlayerID, "DestroyPlayerOnTime", this, &NFGameServerNet_ServerModule::DestroyPlayerByTime, 100.0f, -1);
+			}
+		}
 	}
-
-	//send to world server
 
 	RemovePlayerGateInfo(nPlayerID);
 }
@@ -367,8 +385,44 @@ void NFGameServerNet_ServerModule::OnClientSwapSceneProcess(const NFSOCK nSockIn
 {
 	CLIENT_MSG_PROCESS(nMsgID, msg, nLen, NFMsg::ReqAckSwapScene)
 
-	const NFVector3& pos = m_pSceneModule->GetRelivePosition(xMsg.scene_id(), 0);
-	m_pSceneProcessModule->RequestEnterScene(pObject->Self(), xMsg.scene_id(), 0, pos, NFDataList());
+	const NFMsg::ESceneType sceneType = (NFMsg::ESceneType)m_pElementModule->GetPropertyInt(std::to_string(xMsg.scene_id()), NFrame::Scene::Type());
+	const int homeSceneID = m_pKernelModule->GetPropertyInt(nPlayerID, NFrame::Player::HomeSceneID());
+	const int nowSceneID = m_pKernelModule->GetPropertyInt(nPlayerID, NFrame::Player::SceneID());
+	const NFGUID matchID = m_pKernelModule->GetPropertyObject(nPlayerID, NFrame::Player::MatchID());
+	const NFMsg::ESceneType nowSceneType = (NFMsg::ESceneType)m_pElementModule->GetPropertyInt(std::to_string(nowSceneID), NFrame::Scene::Type());
+
+	if (matchID.IsNull())
+	{
+		if (sceneType == NFMsg::ESceneType::SCENE_HOME
+			&& xMsg.scene_id() == homeSceneID)
+		{
+			//fighting now, want to end the fight
+			const NFVector3& pos = m_pSceneModule->GetRelivePosition(homeSceneID, 0);
+			m_pSceneProcessModule->RequestEnterScene(pObject->Self(), homeSceneID, -1, 0, pos, NFDataList());
+		}
+		else if (sceneType == NFMsg::ESceneType::SCENE_NORMAL)
+		{
+			const NFVector3& pos = m_pSceneModule->GetRelivePosition(xMsg.scene_id(), 0);
+			m_pSceneProcessModule->RequestEnterScene(pObject->Self(), xMsg.scene_id(), 1, 0, pos, NFDataList());
+		}
+	}
+	/*
+	if (nowSceneType == NFMsg::ESceneType::SCENE_HOME)
+	{
+		//fighting now, want to end the fight
+		const NFVector3& pos = m_pSceneModule->GetRelivePosition(homeSceneID, 0);
+		m_pSceneProcessModule->RequestEnterScene(pObject->Self(), homeSceneID, -1, pos, NFDataList());
+	}
+	else
+	{
+		if (sceneType == NFMsg::ESceneType::SCENE_HOME)
+		{
+			//
+			const NFVector3& pos = m_pSceneModule->GetRelivePosition(xMsg.scene_id(), 0);
+			m_pSceneProcessModule->RequestEnterScene(pObject->Self(), xMsg.scene_id(), -1, pos, NFDataList());
+		}
+	}
+	*/
 }
 
 void NFGameServerNet_ServerModule::OnClientReqMoveProcess(const NFSOCK nSockIndex, const int nMsgID, const char *msg,  const uint32_t nLen)
@@ -1022,6 +1076,18 @@ void NFGameServerNet_ServerModule::OnClientRecordVector3Process(const NFSOCK nSo
 			m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, nPlayerID, "Upload From Client vector3 set record", xMsg.record_name(), __FUNCTION__, __LINE__);
 		}
 	}
+}
+
+int NFGameServerNet_ServerModule::DestroyPlayerByTime(const NFGUID & self, const std::string & name, const float fIntervalTime, const int nCount)
+{
+	const NFGUID matchID = m_pKernelModule->GetPropertyObject(self, NFrame::Player::MatchID());
+	const NFGUID gateID = m_pKernelModule->GetPropertyObject(self, NFrame::Player::GateID());
+	if (matchID.IsNull() && gateID.IsNull())
+	{
+		m_pKernelModule->DestroyObject(self);
+	}
+
+	return 0;
 }
 
 void NFGameServerNet_ServerModule::OnProxyServerRegisteredProcess(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)

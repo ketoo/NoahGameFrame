@@ -39,6 +39,7 @@
 #include "NFComm/NFPluginModule/NFIGameServerToWorldModule.h"
 #include "NFComm/NFPluginModule/NFIGameServerNet_ServerModule.h"
 #include "NFComm/NFPluginModule/NFIGameServerNet_ServerModule.h"
+#include "NFComm/NFPluginModule/NFIScheduleModule.h"
 ////////////////////////////////////////////////////////////////////////////
 
 
@@ -116,6 +117,7 @@ protected:
 	void OnClientRecordVector3Process(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
 
 protected:
+	int DestroyPlayerByTime(const NFGUID& self, const std::string& name, const float fIntervalTime, const int nCount);
 
 	//////////////////////////////////////////
 
@@ -136,6 +138,7 @@ private:
 	NFINetModule* m_pNetModule;
 	NFIEventModule* m_pEventModule;
 	NFISceneModule* m_pSceneModule;
-    NFINetClientModule* m_pNetClientModule;
+	NFINetClientModule* m_pNetClientModule;
+	NFIScheduleModule* m_pScheduleModule;
 };
 #endif

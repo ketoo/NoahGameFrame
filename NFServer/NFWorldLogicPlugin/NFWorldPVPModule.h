@@ -45,6 +45,7 @@
 #include "NFComm/NFPluginModule/NFIHeroModule.h"
 #include "NFComm/NFPluginModule/NFIScheduleModule.h"
 #include "NFComm/NFPluginModule/NFIWorldPVPModule.h"
+#include "NFComm/NFPluginModule/NFIWorldNet_ServerModule.h"
 
 class NFWorldPVPModule
     : public NFIWorldPVPModule
@@ -65,20 +66,34 @@ public:
 
 
 protected:
-
 	void OnReqSearchOpponentProcess(const NFSOCK nSockIndex, const int nMsgID, const char *msg, const uint32_t nLen);
 
 protected:
 	void InitAllTileScene();
 	int RandomTileScene(const int nExceptSceneID);
 
-	bool SearchOpponent(const NFGUID & self, const int nExceptSceneID, const NFSOCK nSockIndex);
-	bool ProcessOpponentData( const NFGUID& opponent, NFMsg::AckSearchOppnent& xAckData);
-
+	int OnMakeTeam(const std::string& strHeartBeat, const float fTime, const int nCount);
+	int OnMakeMatch(const std::string& strHeartBeat, const float fTime, const int nCount);
 
 protected:
 
 	std::vector<int> mxTileSceneIDList;
+
+
+protected:
+	class MultiTeam
+	{
+	public:
+		NFGUID leaderID;
+		NFGUID teamID;
+		int avgBattlePoint = 0;
+		int diamond = 0;
+		std::vector<NFGUID> members;
+	};
+
+	std::list<NFGUID> mSingleModeCandidatePool;
+	NFMapEx<NFGUID, NFMsg::PVPPlayerInfo> mCandidatePool;
+	std::list<NF_SHARE_PTR<MultiTeam>> mTeamList;
 
 private:
 	NFIKernelModule* m_pKernelModule;
@@ -90,6 +105,7 @@ private:
 	NFIPlayerRedisModule* m_pPlayerRedisModule;
 	NFINoSqlModule* m_pNoSqlModule;
 	NFICommonRedisModule* m_pCommonRedisModule;
+	NFIWorldNet_ServerModule* m_pWorldNet_ServerModule;
 };
 
 

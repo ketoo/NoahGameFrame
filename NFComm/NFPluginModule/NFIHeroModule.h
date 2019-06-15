@@ -58,6 +58,9 @@ public:
 	virtual bool SetFightHero(const NFGUID& self, const NFGUID& xHeroID, const EConsHero_Pos nPos) = 0;
 	virtual bool SwitchFightHero(const NFGUID& self, const NFGUID& xHeroID) = 0;
 
+	virtual bool ReliveHero(const NFGUID& self, const NFGUID& xHeroID, const int diamond) = 0;
+	virtual bool ReliveAllHero(const NFGUID& self) = 0;
+
 	virtual NFGUID GetHeroGUID(const NFGUID& self, const std::string& strID) = 0;
 
 	virtual EConsHero_Pos GetFightPos(const NFGUID& self, const NFGUID& xHeroID) = 0;

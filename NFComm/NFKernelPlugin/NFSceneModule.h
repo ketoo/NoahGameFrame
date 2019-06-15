@@ -91,6 +91,8 @@ protected:
 	virtual bool AddBeforeLeaveSceneGroupCallBack(const SCENE_EVENT_FUNCTOR_PTR& cb);
 	virtual bool AddAfterLeaveSceneGroupCallBack(const SCENE_EVENT_FUNCTOR_PTR& cb);
 
+	virtual bool AddSceneGroupCreatedCallBack(const SCENE_EVENT_FUNCTOR_PTR& cb);
+	virtual bool AddSceneGroupDestroyedCallBack(const SCENE_EVENT_FUNCTOR_PTR& cb);
 protected:
 	bool SwitchScene(const NFGUID& self, const int nTargetSceneID, const int nTargetGroupID, const int nType, const NFVector3 v, const float fOrient, const NFDataList& arg);
 
@@ -111,6 +113,10 @@ protected:
 	int OnSwapSceneEvent(const NFGUID& self, const int nSceneID, const int nGroupID, const int nType, const NFDataList& argList);
 	int BeforeEnterSceneGroup(const NFGUID& self, const int nSceneID, const int nGroupID, const int nType, const NFDataList& argList);
 	int AfterEnterSceneGroup(const NFGUID& self, const int nSceneID, const int nGroupID, const int nType, const NFDataList& argList);
+
+	int SceneGroupCreatedEvent(const NFGUID& self, const int nSceneID, const int nGroupID, const int nType, const NFDataList& argList);
+	int SceneGroupDestroyedEvent(const NFGUID& self, const int nSceneID, const int nGroupID, const int nType, const NFDataList& argList);
+
 
 protected:
 	////////////////interface for broadcast event//////////////////////////////////
@@ -148,6 +154,9 @@ private:
 	std::vector<SCENE_EVENT_FUNCTOR_PTR> mvOnSwapSceneCallback;
 	std::vector<SCENE_EVENT_FUNCTOR_PTR> mvBeforeLeaveSceneCallback;
 	std::vector<SCENE_EVENT_FUNCTOR_PTR> mvAfterLeaveSceneCallback;
+
+	std::vector<SCENE_EVENT_FUNCTOR_PTR> mvSceneGroupCreatedCallback;
+	std::vector<SCENE_EVENT_FUNCTOR_PTR> mvSceneGroupDestroyedCallback;
 private:
 	NFIKernelModule* m_pKernelModule;
 	NFIClassModule* m_pClassModule;

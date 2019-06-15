@@ -56,7 +56,9 @@ public:
     virtual bool Execute();
     virtual bool AfterInit();
 
-    virtual int ExistSkill( const NFGUID& self, const std::string& strSkillName );
+	virtual int ExistSkill(const NFGUID& self, const std::string& strSkillName);
+	virtual int UseSkill(const NFGUID& self, const std::string& strSkillName, const NFGUID& target, const int index = -1);
+	virtual int UseSkill(const NFGUID& self, const std::string& strSkillName, const NFDataList& target, const int index = -1);
 
 protected:
     int OnClassObjectEvent( const NFGUID& self, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFDataList& var );

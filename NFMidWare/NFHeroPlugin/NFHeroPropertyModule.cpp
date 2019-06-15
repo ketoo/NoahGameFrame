@@ -263,6 +263,7 @@ bool NFHeroPropertyModule::AddHeroProperty(const NFGUID & self, const NFGUID & x
 	int nMAXHP = pHeroPropertyRecord->GetInt(nRow, NFrame::Player::HeroValue::MAXHP);
 	pHeroRecord->SetInt(nRow, NFrame::Player::PlayerHero::HP, nMAXHP);
 
+	std::cout << pHeroRecord->ToString() << std::endl;
 	return true;
 }
 

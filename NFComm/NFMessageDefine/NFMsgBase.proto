@@ -2,7 +2,6 @@ syntax = "proto3";
 
 package NFMsg; 
 
-import "NFDefine.proto";
 
 message Ident//The base protocol can not be transfer directly
 { 

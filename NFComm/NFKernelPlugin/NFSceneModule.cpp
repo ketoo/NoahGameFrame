@@ -267,6 +267,19 @@ bool NFSceneModule::AddAfterLeaveSceneGroupCallBack(const SCENE_EVENT_FUNCTOR_PT
 	return true;
 }
 
+bool NFSceneModule::AddSceneGroupCreatedCallBack(const SCENE_EVENT_FUNCTOR_PTR & cb)
+{
+
+	mvSceneGroupCreatedCallback.push_back(cb);
+	return true;
+}
+
+bool NFSceneModule::AddSceneGroupDestroyedCallBack(const SCENE_EVENT_FUNCTOR_PTR & cb)
+{
+	mvSceneGroupDestroyedCallback.push_back(cb);
+	return true;
+}
+
 bool NFSceneModule::CreateSceneNPC(const int nSceneID, const int nGroupID)
 {
 	return CreateSceneNPC(nSceneID, nGroupID, NFDataList());
@@ -721,6 +734,32 @@ int NFSceneModule::AfterEnterSceneGroup(const NFGUID & self, const int nSceneID,
 {
 	std::vector<SCENE_EVENT_FUNCTOR_PTR>::iterator it = mvAfterEnterSceneCallback.begin();
 	for (; it != mvAfterEnterSceneCallback.end(); it++)
+	{
+		SCENE_EVENT_FUNCTOR_PTR& pFunPtr = *it;
+		SCENE_EVENT_FUNCTOR* pFunc = pFunPtr.get();
+		pFunc->operator()(self, nSceneID, nGroupID, nType, argList);
+	}
+
+	return 0;
+}
+
+int NFSceneModule::SceneGroupCreatedEvent(const NFGUID & self, const int nSceneID, const int nGroupID, const int nType, const NFDataList & argList)
+{
+	std::vector<SCENE_EVENT_FUNCTOR_PTR>::iterator it = mvSceneGroupCreatedCallback.begin();
+	for (; it != mvSceneGroupCreatedCallback.end(); it++)
+	{
+		SCENE_EVENT_FUNCTOR_PTR& pFunPtr = *it;
+		SCENE_EVENT_FUNCTOR* pFunc = pFunPtr.get();
+		pFunc->operator()(self, nSceneID, nGroupID, nType, argList);
+	}
+
+	return 0;
+}
+
+int NFSceneModule::SceneGroupDestroyedEvent(const NFGUID & self, const int nSceneID, const int nGroupID, const int nType, const NFDataList & argList)
+{
+	std::vector<SCENE_EVENT_FUNCTOR_PTR>::iterator it = mvSceneGroupDestroyedCallback.begin();
+	for (; it != mvSceneGroupDestroyedCallback.end(); it++)
 	{
 		SCENE_EVENT_FUNCTOR_PTR& pFunPtr = *it;
 		SCENE_EVENT_FUNCTOR* pFunc = pFunPtr.get();

@@ -40,7 +40,6 @@ bool NFDeadState::Enter(const NFGUID& self, NFIStateMachine* pStateMachine)
 {
     if (!NFIState::Enter(self, pStateMachine))
     {
-        m_pHateModule->ClearHate(self);
     }
 
     return true;

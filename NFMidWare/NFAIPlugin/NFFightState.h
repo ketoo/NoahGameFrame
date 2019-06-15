@@ -32,6 +32,7 @@
 #include "NFComm/NFPluginModule/NFIKernelModule.h"
 #include "NFComm/NFPluginModule/NFIElementModule.h"
 #include "NFComm/NFPluginModule/NFIHateModule.h"
+#include "NFComm/NFPluginModule/NFISkillModule.h"
 
 class NFFightState
     : public NFIState
@@ -47,13 +48,8 @@ public:
 
     virtual bool Exit(const NFGUID& self, NFIStateMachine* pStateMachine);
 
-    virtual bool DoRule(const NFGUID& self, NFIStateMachine* pStateMachine);
-
+ 
 protected:
-    bool RunInFightArea(const NFGUID& self, NFIStateMachine* pStateMachine);
-    bool RunCloseTarget(const NFGUID& self, const NFGUID& target, NFIStateMachine* pStateMachine);
-
-	int OnSkillConsumeTime(const NFGUID& self, const std::string& strHeartBeat, const float fTime, const int nCount);
 
 private:
 	NFIAIModule* m_pAIModule;
@@ -61,6 +57,7 @@ private:
 	NFIKernelModule* m_pKernelModule;
 	NFIMoveModule* m_pMoveModule;
 	NFIElementModule* m_pElementModule;
+	NFISkillModule* m_pSkillModule;
 };
 
 #endif

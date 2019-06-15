@@ -69,7 +69,7 @@ private:
 
 private:
 	NFMapEx<int, std::vector<std::string>> mxGiftMap;
-
+	std::string mstrIniConfigPath;
 protected:
     //////////////////////////////////////////////////////////////////////////
 	NFIPackModule* m_pPackModule;

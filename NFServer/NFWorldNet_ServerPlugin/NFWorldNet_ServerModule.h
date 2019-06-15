@@ -55,14 +55,13 @@ public:
     virtual bool AfterInit();
 	virtual void OnServerInfoProcess(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
 
-    virtual bool SendMsgToGame(const int nGameID, const NFMsg::EGameMsgID eMsgID, google::protobuf::Message& xData, const NFGUID nPlayer = NFGUID());
-    virtual bool SendMsgToGame(const NFDataList& argObjectVar, const NFDataList& argGameID,  const NFMsg::EGameMsgID eMsgID, google::protobuf::Message& xData);
-    virtual bool SendMsgToPlayer(const NFMsg::EGameMsgID eMsgID, google::protobuf::Message& xData, const NFGUID nPlayer);
+    virtual bool SendMsgToGame(const NFGUID nPlayer, const NFMsg::EGameMsgID eMsgID, google::protobuf::Message& xData);
+    virtual bool SendMsgToGame(const NFDataList& argObjectVar, const NFMsg::EGameMsgID eMsgID, google::protobuf::Message& xData);
 
     virtual NF_SHARE_PTR<ServerData> GetSuitProxyForEnter();
 
     virtual int GetPlayerGameID(const NFGUID self);
-    virtual std::vector<NFGUID> getOnlinePlayers();
+    virtual const std::vector<NFGUID>& GetOnlinePlayers();
 
 protected:
 
@@ -113,7 +112,40 @@ protected:
     void LogGameServer();
 
 private:
+	class PlayerData
+	{
+	public:
+		PlayerData(const NFGUID id)
+		{
+			self = id;
+			gameID = 0;
+			gateID = 0;
+		}
 
+		~PlayerData()
+		{
+
+		}
+
+		void OnLine(const int gameSvrID, const int gateSvrID)
+		{
+			gameID = gameSvrID;
+			gateID = gateSvrID;
+		}
+
+		void OffLine()
+		{
+			gameID = 0;
+			gateID = 0;
+		}
+
+		int gameID;
+		int gateID;
+		NFGUID self;
+
+	};
+
+	NFMapEx<NFGUID, PlayerData> mPlayersData;
     NFINT64 mnLastCheckTime;
 
     //serverid,data
@@ -121,7 +153,6 @@ private:
 	NFConsistentHashMapEx<int, ServerData> mGameMap;
 	NFConsistentHashMapEx<int, ServerData> mProxyMap;
 	NFConsistentHashMapEx<int, ServerData> mDBMap;
-    std::map<NFGUID, int> mPlayerGameIdMap;
 
     NFIElementModule* m_pElementModule;
     NFIClassModule* m_pClassModule;

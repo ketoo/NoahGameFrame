@@ -143,6 +143,7 @@ int NFItemScrollConsumeProcessModule::ConsumeProcess(const NFGUID& self, const s
 			{
 				//clan building
 				//check position
+				/*
 				const int nSceneID = m_pKernelModule->GetPropertyInt(self, NFrame::Player::SceneID());
 				const std::string& strName = m_pKernelModule->GetPropertyString(self, NFrame::Player::Name());
 
@@ -158,19 +159,8 @@ int NFItemScrollConsumeProcessModule::ConsumeProcess(const NFGUID& self, const s
 				*addBuilding.mutable_master() = NFINetModule::NFToPB(self);
 
 				m_pNetClientModule->SendSuitByPB(NF_SERVER_TYPES::NF_ST_WORLD, nSceneID, NFMsg::EGMI_REQ_ADD_BUILDING, addBuilding);
+				*/
 			}
-
-			NFDataList xDataArg;
-			xDataArg.AddString(NFrame::NPC::Position());
-			xDataArg.AddVector3(vPos);
-			xDataArg.AddString(NFrame::NPC::MasterID());
-			xDataArg.AddObject(self);
-			xDataArg.AddString(NFrame::NPC::AIOwnerID());
-			xDataArg.AddObject(self);
-			xDataArg.AddString(NFrame::NPC::NPCType());
-			xDataArg.AddInt(NFMsg::ENPCType::ENPCTYPE_TURRET);
-
-			m_pKernelModule->CreateObject(xID, nSceneID, nGroupID, NFrame::NPC::ThisName(), strBuildingCnfID, xDataArg);
 		}
 		else
 		{

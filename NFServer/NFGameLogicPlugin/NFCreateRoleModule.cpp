@@ -114,7 +114,17 @@ void NFCreateRoleModule::OnClienEnterGameProcess(const NFSOCK nSockIndex, const 
 	if (m_pKernelModule->GetObject(nRoleID))
 	{
 		//it should be rebind with proxy's netobject
-		m_pKernelModule->DestroyObject(nRoleID);
+		m_pScheduleModule->RemoveSchedule(nRoleID, "DestroyPlayerOnTime");
+
+		const NFGUID matchID = m_pKernelModule->GetPropertyObject(nRoleID, NFrame::Player::MatchID());
+		if (!matchID.IsNull())
+		{
+			//reconnect to the match
+		}
+		else
+		{
+			m_pKernelModule->DestroyObject(nRoleID);
+		}
 	}
 
 	//////////////////////////////////////////////////////////////////////////
@@ -644,7 +654,7 @@ bool NFCreateRoleModule::ConvertPBToPropertyManager(const NFMsg::ObjectPropertyL
 		{
 			const NFMsg::PropertyInt& xData = pPropertyData.property_int_list(i);
 
-			if (pProps->ExistElement(xData.property_name()))
+			if (!pProps->ExistElement(xData.property_name()))
 			{
 				pProps->AddProperty(pProps->Self(), xData.property_name(), NFDATA_TYPE::TDATA_INT);
 			}
@@ -656,7 +666,7 @@ bool NFCreateRoleModule::ConvertPBToPropertyManager(const NFMsg::ObjectPropertyL
 		{
 			const NFMsg::PropertyFloat& xData = pPropertyData.property_float_list(i);
 
-			if (pProps->ExistElement(xData.property_name()))
+			if (!pProps->ExistElement(xData.property_name()))
 			{
 				pProps->AddProperty(pProps->Self(), xData.property_name(), NFDATA_TYPE::TDATA_FLOAT);
 			}
@@ -668,7 +678,7 @@ bool NFCreateRoleModule::ConvertPBToPropertyManager(const NFMsg::ObjectPropertyL
 		{
 			const NFMsg::PropertyString& xData = pPropertyData.property_string_list(i);
 
-			if (pProps->ExistElement(xData.property_name()))
+			if (!pProps->ExistElement(xData.property_name()))
 			{
 				pProps->AddProperty(pProps->Self(), xData.property_name(), NFDATA_TYPE::TDATA_STRING);
 			}
@@ -680,7 +690,7 @@ bool NFCreateRoleModule::ConvertPBToPropertyManager(const NFMsg::ObjectPropertyL
 		{
 			const NFMsg::PropertyObject& xData = pPropertyData.property_object_list(i);
 
-			if (pProps->ExistElement(xData.property_name()))
+			if (!pProps->ExistElement(xData.property_name()))
 			{
 				pProps->AddProperty(pProps->Self(), xData.property_name(), NFDATA_TYPE::TDATA_OBJECT);
 			}
@@ -692,7 +702,7 @@ bool NFCreateRoleModule::ConvertPBToPropertyManager(const NFMsg::ObjectPropertyL
 		{
 			const NFMsg::PropertyVector2& xData = pPropertyData.property_vector2_list(i);
 
-			if (pProps->ExistElement(xData.property_name()))
+			if (!pProps->ExistElement(xData.property_name()))
 			{
 				pProps->AddProperty(pProps->Self(), xData.property_name(), NFDATA_TYPE::TDATA_VECTOR2);
 			}
@@ -704,7 +714,7 @@ bool NFCreateRoleModule::ConvertPBToPropertyManager(const NFMsg::ObjectPropertyL
 		{
 			const NFMsg::PropertyVector3& xData = pPropertyData.property_vector3_list(i);
 
-			if (pProps->ExistElement(xData.property_name()))
+			if (!pProps->ExistElement(xData.property_name()))
 			{
 				pProps->AddProperty(pProps->Self(), xData.property_name(), NFDATA_TYPE::TDATA_VECTOR3);
 			}
