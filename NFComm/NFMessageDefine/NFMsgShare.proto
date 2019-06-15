@@ -362,6 +362,7 @@ message ReqBuyItemFromShop
 message PVPPlayerInfo
 {
 	Ident id = 1;
+	int32 single = 2;
 	int32 level = 4;
 	int32 battle_point = 5;
 	bytes name = 6;

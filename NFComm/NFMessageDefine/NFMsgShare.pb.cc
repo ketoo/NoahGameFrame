@@ -1336,6 +1336,7 @@ const ::google::protobuf::uint32 TableStruct::offsets[] GOOGLE_PROTOBUF_ATTRIBUT
   ~0u,  // no _oneof_case_
   ~0u,  // no _weak_field_map_
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NFMsg::PVPPlayerInfo, id_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NFMsg::PVPPlayerInfo, single_),
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NFMsg::PVPPlayerInfo, level_),
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NFMsg::PVPPlayerInfo, battle_point_),
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NFMsg::PVPPlayerInfo, name_),
@@ -1440,11 +1441,11 @@ static const ::google::protobuf::internal::MigrationSchema schemas[] GOOGLE_PROT
   { 308, -1, sizeof(::NFMsg::ReqSwitchFightHero)},
   { 314, -1, sizeof(::NFMsg::ReqBuyItemFromShop)},
   { 321, -1, sizeof(::NFMsg::PVPPlayerInfo)},
-  { 340, -1, sizeof(::NFMsg::ReqSearchOppnent)},
-  { 349, -1, sizeof(::NFMsg::AckSearchOppnent)},
-  { 359, -1, sizeof(::NFMsg::ReqSendMail)},
-  { 367, -1, sizeof(::NFMsg::ReqSwitchServer)},
-  { 379, -1, sizeof(::NFMsg::AckSwitchServer)},
+  { 341, -1, sizeof(::NFMsg::ReqSearchOppnent)},
+  { 350, -1, sizeof(::NFMsg::AckSearchOppnent)},
+  { 360, -1, sizeof(::NFMsg::ReqSendMail)},
+  { 368, -1, sizeof(::NFMsg::ReqSwitchServer)},
+  { 380, -1, sizeof(::NFMsg::AckSwitchServer)},
 };
 
 static ::google::protobuf::Message const * const file_default_instances[] = {
@@ -1627,36 +1628,37 @@ void AddDescriptorsImpl() {
       "dent\022\013\n\003Set\030\002 \001(\005\"2\n\022ReqSwitchFightHero\022"
       "\034\n\006Heroid\030\001 \001(\0132\014.NFMsg.Ident\"3\n\022ReqBuyI"
       "temFromShop\022\016\n\006itemID\030\001 \001(\014\022\r\n\005count\030\002 \001"
-      "(\005\"\277\002\n\rPVPPlayerInfo\022\030\n\002id\030\001 \001(\0132\014.NFMsg"
-      ".Ident\022\r\n\005level\030\004 \001(\005\022\024\n\014battle_point\030\005 "
-      "\001(\005\022\014\n\004name\030\006 \001(\014\022\014\n\004head\030\007 \001(\014\022\021\n\thero_"
-      "cnf1\030\010 \001(\014\022\021\n\thero_cnf2\030\t \001(\014\022\021\n\thero_cn"
-      "f3\030\n \001(\014\022\022\n\nhero_star1\030\013 \001(\005\022\022\n\nhero_sta"
-      "r2\030\014 \001(\005\022\022\n\nhero_star3\030\r \001(\005\022\036\n\010hero_id1"
-      "\030\024 \001(\0132\014.NFMsg.Ident\022\036\n\010hero_id2\030\025 \001(\0132\014"
-      ".NFMsg.Ident\022\036\n\010hero_id3\030\026 \001(\0132\014.NFMsg.I"
-      "dent\"l\n\020ReqSearchOppnent\022\022\n\nself_scene\030\001"
-      " \001(\005\022\017\n\007diamond\030\002 \001(\005\022\024\n\014battle_point\030\003 "
-      "\001(\005\022\035\n\007friends\030\n \003(\0132\014.NFMsg.Ident\"\276\001\n\020A"
-      "ckSearchOppnent\022\020\n\010scene_id\030\001 \001(\005\022\035\n\007tea"
-      "m_id\030\002 \001(\0132\014.NFMsg.Ident\022\"\n\014team_members"
-      "\030\005 \003(\0132\014.NFMsg.Ident\022&\n\010opponent\030\016 \001(\0132\024"
-      ".NFMsg.PVPPlayerInfo\022-\n\tbuildings\030\024 \003(\0132"
-      "\032.NFMsg.ReqAddSceneBuilding\"\201\001\n\013ReqSendM"
-      "ail\022\036\n\010reciever\030\001 \001(\0132\014.NFMsg.Ident\022$\n\ti"
-      "tem_list\030\002 \003(\0132\021.NFMsg.ItemStruct\022,\n\rcur"
-      "rency_list\030\003 \003(\0132\025.NFMsg.CurrencyStruct\""
-      "\271\001\n\017ReqSwitchServer\022\034\n\006selfid\030\001 \001(\0132\014.NF"
-      "Msg.Ident\022\025\n\rself_serverid\030\002 \001(\003\022\027\n\017targ"
-      "et_serverid\030\003 \001(\003\022\025\n\rgate_serverid\030\004 \001(\003"
-      "\022\017\n\007SceneID\030\005 \001(\003\022\037\n\tclient_id\030\006 \001(\0132\014.N"
-      "FMsg.Ident\022\017\n\007groupID\030\007 \001(\003\"v\n\017AckSwitch"
-      "Server\022\034\n\006selfid\030\001 \001(\0132\014.NFMsg.Ident\022\025\n\r"
-      "self_serverid\030\002 \001(\003\022\027\n\017target_serverid\030\003"
-      " \001(\003\022\025\n\rgate_serverid\030\004 \001(\003b\006proto3"
+      "(\005\"\317\002\n\rPVPPlayerInfo\022\030\n\002id\030\001 \001(\0132\014.NFMsg"
+      ".Ident\022\016\n\006single\030\002 \001(\005\022\r\n\005level\030\004 \001(\005\022\024\n"
+      "\014battle_point\030\005 \001(\005\022\014\n\004name\030\006 \001(\014\022\014\n\004hea"
+      "d\030\007 \001(\014\022\021\n\thero_cnf1\030\010 \001(\014\022\021\n\thero_cnf2\030"
+      "\t \001(\014\022\021\n\thero_cnf3\030\n \001(\014\022\022\n\nhero_star1\030\013"
+      " \001(\005\022\022\n\nhero_star2\030\014 \001(\005\022\022\n\nhero_star3\030\r"
+      " \001(\005\022\036\n\010hero_id1\030\024 \001(\0132\014.NFMsg.Ident\022\036\n\010"
+      "hero_id2\030\025 \001(\0132\014.NFMsg.Ident\022\036\n\010hero_id3"
+      "\030\026 \001(\0132\014.NFMsg.Ident\"l\n\020ReqSearchOppnent"
+      "\022\022\n\nself_scene\030\001 \001(\005\022\017\n\007diamond\030\002 \001(\005\022\024\n"
+      "\014battle_point\030\003 \001(\005\022\035\n\007friends\030\n \003(\0132\014.N"
+      "FMsg.Ident\"\276\001\n\020AckSearchOppnent\022\020\n\010scene"
+      "_id\030\001 \001(\005\022\035\n\007team_id\030\002 \001(\0132\014.NFMsg.Ident"
+      "\022\"\n\014team_members\030\005 \003(\0132\014.NFMsg.Ident\022&\n\010"
+      "opponent\030\016 \001(\0132\024.NFMsg.PVPPlayerInfo\022-\n\t"
+      "buildings\030\024 \003(\0132\032.NFMsg.ReqAddSceneBuild"
+      "ing\"\201\001\n\013ReqSendMail\022\036\n\010reciever\030\001 \001(\0132\014."
+      "NFMsg.Ident\022$\n\titem_list\030\002 \003(\0132\021.NFMsg.I"
+      "temStruct\022,\n\rcurrency_list\030\003 \003(\0132\025.NFMsg"
+      ".CurrencyStruct\"\271\001\n\017ReqSwitchServer\022\034\n\006s"
+      "elfid\030\001 \001(\0132\014.NFMsg.Ident\022\025\n\rself_server"
+      "id\030\002 \001(\003\022\027\n\017target_serverid\030\003 \001(\003\022\025\n\rgat"
+      "e_serverid\030\004 \001(\003\022\017\n\007SceneID\030\005 \001(\003\022\037\n\tcli"
+      "ent_id\030\006 \001(\0132\014.NFMsg.Ident\022\017\n\007groupID\030\007 "
+      "\001(\003\"v\n\017AckSwitchServer\022\034\n\006selfid\030\001 \001(\0132\014"
+      ".NFMsg.Ident\022\025\n\rself_serverid\030\002 \001(\003\022\027\n\017t"
+      "arget_serverid\030\003 \001(\003\022\025\n\rgate_serverid\030\004 "
+      "\001(\003b\006proto3"
   };
   ::google::protobuf::DescriptorPool::InternalAddGeneratedFile(
-      descriptor, 5475);
+      descriptor, 5491);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "NFMsgShare.proto", &protobuf_RegisterTypes);
   ::protobuf_NFDefine_2eproto::AddDescriptors();
@@ -14698,6 +14700,7 @@ void PVPPlayerInfo::clear_hero_id3() {
 }
 #if !defined(_MSC_VER) || _MSC_VER >= 1900
 const int PVPPlayerInfo::kIdFieldNumber;
+const int PVPPlayerInfo::kSingleFieldNumber;
 const int PVPPlayerInfo::kLevelFieldNumber;
 const int PVPPlayerInfo::kBattlePointFieldNumber;
 const int PVPPlayerInfo::kNameFieldNumber;
@@ -14764,9 +14767,9 @@ PVPPlayerInfo::PVPPlayerInfo(const PVPPlayerInfo& from)
   } else {
     hero_id3_ = NULL;
   }
-  ::memcpy(&level_, &from.level_,
+  ::memcpy(&single_, &from.single_,
     static_cast<size_t>(reinterpret_cast<char*>(&hero_star3_) -
-    reinterpret_cast<char*>(&level_)) + sizeof(hero_star3_));
+    reinterpret_cast<char*>(&single_)) + sizeof(hero_star3_));
   // @@protoc_insertion_point(copy_constructor:NFMsg.PVPPlayerInfo)
 }
 
@@ -14839,9 +14842,9 @@ void PVPPlayerInfo::Clear() {
     delete hero_id3_;
   }
   hero_id3_ = NULL;
-  ::memset(&level_, 0, static_cast<size_t>(
+  ::memset(&single_, 0, static_cast<size_t>(
       reinterpret_cast<char*>(&hero_star3_) -
-      reinterpret_cast<char*>(&level_)) + sizeof(hero_star3_));
+      reinterpret_cast<char*>(&single_)) + sizeof(hero_star3_));
   _internal_metadata_.Clear();
 }
 
@@ -14861,6 +14864,20 @@ bool PVPPlayerInfo::MergePartialFromCodedStream(
             static_cast< ::google::protobuf::uint8>(10u /* 10 & 0xFF */)) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadMessage(
                input, mutable_id()));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      // int32 single = 2;
+      case 2: {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(16u /* 16 & 0xFF */)) {
+
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
+                 input, &single_)));
         } else {
           goto handle_unusual;
         }
@@ -15065,6 +15082,11 @@ void PVPPlayerInfo::SerializeWithCachedSizes(
       1, this->_internal_id(), output);
   }
 
+  // int32 single = 2;
+  if (this->single() != 0) {
+    ::google::protobuf::internal::WireFormatLite::WriteInt32(2, this->single(), output);
+  }
+
   // int32 level = 4;
   if (this->level() != 0) {
     ::google::protobuf::internal::WireFormatLite::WriteInt32(4, this->level(), output);
@@ -15157,6 +15179,11 @@ void PVPPlayerInfo::SerializeWithCachedSizes(
     target = ::google::protobuf::internal::WireFormatLite::
       InternalWriteMessageToArray(
         1, this->_internal_id(), deterministic, target);
+  }
+
+  // int32 single = 2;
+  if (this->single() != 0) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(2, this->single(), target);
   }
 
   // int32 level = 4;
@@ -15320,6 +15347,13 @@ size_t PVPPlayerInfo::ByteSizeLong() const {
         *hero_id3_);
   }
 
+  // int32 single = 2;
+  if (this->single() != 0) {
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::Int32Size(
+        this->single());
+  }
+
   // int32 level = 4;
   if (this->level() != 0) {
     total_size += 1 +
@@ -15414,6 +15448,9 @@ void PVPPlayerInfo::MergeFrom(const PVPPlayerInfo& from) {
   if (from.has_hero_id3()) {
     mutable_hero_id3()->::NFMsg::Ident::MergeFrom(from.hero_id3());
   }
+  if (from.single() != 0) {
+    set_single(from.single());
+  }
   if (from.level() != 0) {
     set_level(from.level());
   }
@@ -15469,6 +15506,7 @@ void PVPPlayerInfo::InternalSwap(PVPPlayerInfo* other) {
   swap(hero_id1_, other->hero_id1_);
   swap(hero_id2_, other->hero_id2_);
   swap(hero_id3_, other->hero_id3_);
+  swap(single_, other->single_);
   swap(level_, other->level_);
   swap(battle_point_, other->battle_point_);
   swap(hero_star1_, other->hero_star1_);

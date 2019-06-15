@@ -5907,6 +5907,12 @@ class LIBPROTOC_EXPORT PVPPlayerInfo : public ::google::protobuf::Message /* @@p
   ::NFMsg::Ident* mutable_hero_id3();
   void set_allocated_hero_id3(::NFMsg::Ident* hero_id3);
 
+  // int32 single = 2;
+  void clear_single();
+  static const int kSingleFieldNumber = 2;
+  ::google::protobuf::int32 single() const;
+  void set_single(::google::protobuf::int32 value);
+
   // int32 level = 4;
   void clear_level();
   static const int kLevelFieldNumber = 4;
@@ -5950,6 +5956,7 @@ class LIBPROTOC_EXPORT PVPPlayerInfo : public ::google::protobuf::Message /* @@p
   ::NFMsg::Ident* hero_id1_;
   ::NFMsg::Ident* hero_id2_;
   ::NFMsg::Ident* hero_id3_;
+  ::google::protobuf::int32 single_;
   ::google::protobuf::int32 level_;
   ::google::protobuf::int32 battle_point_;
   ::google::protobuf::int32 hero_star1_;
@@ -10760,6 +10767,20 @@ inline void PVPPlayerInfo::set_allocated_id(::NFMsg::Ident* id) {
   }
   id_ = id;
   // @@protoc_insertion_point(field_set_allocated:NFMsg.PVPPlayerInfo.id)
+}
+
+// int32 single = 2;
+inline void PVPPlayerInfo::clear_single() {
+  single_ = 0;
+}
+inline ::google::protobuf::int32 PVPPlayerInfo::single() const {
+  // @@protoc_insertion_point(field_get:NFMsg.PVPPlayerInfo.single)
+  return single_;
+}
+inline void PVPPlayerInfo::set_single(::google::protobuf::int32 value) {
+  
+  single_ = value;
+  // @@protoc_insertion_point(field_set:NFMsg.PVPPlayerInfo.single)
 }
 
 // int32 level = 4;

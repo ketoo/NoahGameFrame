@@ -293,6 +293,7 @@ void NFGameServerNet_ServerModule::OnClientLeaveGameProcess(const NFSOCK nSockIn
 		const NFGUID matchID = m_pKernelModule->GetPropertyObject(nPlayerID, NFrame::Player::MatchID());
 		if (matchID.IsNull())
 		{
+			m_pKernelModule->DestroyObject(nPlayerID);
 		}
 		else
 		{

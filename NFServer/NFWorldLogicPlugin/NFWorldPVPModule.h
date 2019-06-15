@@ -64,6 +64,7 @@ public:
     virtual bool AfterInit();
 	virtual bool ReadyExecute();
 
+	virtual void OffLine(const NFGUID& self);
 
 protected:
 	void OnReqSearchOpponentProcess(const NFSOCK nSockIndex, const int nMsgID, const char *msg, const uint32_t nLen);

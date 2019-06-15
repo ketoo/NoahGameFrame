@@ -34,7 +34,7 @@ class NFIWorldPVPModule
     : public NFIModule
 {
 public:
-
+	virtual void OffLine(const NFGUID& self) = 0;
 };
 
 #endif

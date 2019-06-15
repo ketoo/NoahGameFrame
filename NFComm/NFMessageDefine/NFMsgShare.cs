@@ -121,31 +121,32 @@ namespace NFMsg {
             "SWRlbnQiPAoPUmVxU2V0RmlnaHRIZXJvEhwKBkhlcm9pZBgBIAEoCzIMLk5G",
             "TXNnLklkZW50EgsKA1NldBgCIAEoBSIyChJSZXFTd2l0Y2hGaWdodEhlcm8S",
             "HAoGSGVyb2lkGAEgASgLMgwuTkZNc2cuSWRlbnQiMwoSUmVxQnV5SXRlbUZy",
-            "b21TaG9wEg4KBml0ZW1JRBgBIAEoDBINCgVjb3VudBgCIAEoBSK/AgoNUFZQ",
-            "UGxheWVySW5mbxIYCgJpZBgBIAEoCzIMLk5GTXNnLklkZW50Eg0KBWxldmVs",
-            "GAQgASgFEhQKDGJhdHRsZV9wb2ludBgFIAEoBRIMCgRuYW1lGAYgASgMEgwK",
-            "BGhlYWQYByABKAwSEQoJaGVyb19jbmYxGAggASgMEhEKCWhlcm9fY25mMhgJ",
-            "IAEoDBIRCgloZXJvX2NuZjMYCiABKAwSEgoKaGVyb19zdGFyMRgLIAEoBRIS",
-            "CgpoZXJvX3N0YXIyGAwgASgFEhIKCmhlcm9fc3RhcjMYDSABKAUSHgoIaGVy",
-            "b19pZDEYFCABKAsyDC5ORk1zZy5JZGVudBIeCghoZXJvX2lkMhgVIAEoCzIM",
-            "Lk5GTXNnLklkZW50Eh4KCGhlcm9faWQzGBYgASgLMgwuTkZNc2cuSWRlbnQi",
-            "bAoQUmVxU2VhcmNoT3BwbmVudBISCgpzZWxmX3NjZW5lGAEgASgFEg8KB2Rp",
-            "YW1vbmQYAiABKAUSFAoMYmF0dGxlX3BvaW50GAMgASgFEh0KB2ZyaWVuZHMY",
-            "CiADKAsyDC5ORk1zZy5JZGVudCK+AQoQQWNrU2VhcmNoT3BwbmVudBIQCghz",
-            "Y2VuZV9pZBgBIAEoBRIdCgd0ZWFtX2lkGAIgASgLMgwuTkZNc2cuSWRlbnQS",
-            "IgoMdGVhbV9tZW1iZXJzGAUgAygLMgwuTkZNc2cuSWRlbnQSJgoIb3Bwb25l",
-            "bnQYDiABKAsyFC5ORk1zZy5QVlBQbGF5ZXJJbmZvEi0KCWJ1aWxkaW5ncxgU",
-            "IAMoCzIaLk5GTXNnLlJlcUFkZFNjZW5lQnVpbGRpbmcigQEKC1JlcVNlbmRN",
-            "YWlsEh4KCHJlY2lldmVyGAEgASgLMgwuTkZNc2cuSWRlbnQSJAoJaXRlbV9s",
-            "aXN0GAIgAygLMhEuTkZNc2cuSXRlbVN0cnVjdBIsCg1jdXJyZW5jeV9saXN0",
-            "GAMgAygLMhUuTkZNc2cuQ3VycmVuY3lTdHJ1Y3QiuQEKD1JlcVN3aXRjaFNl",
-            "cnZlchIcCgZzZWxmaWQYASABKAsyDC5ORk1zZy5JZGVudBIVCg1zZWxmX3Nl",
-            "cnZlcmlkGAIgASgDEhcKD3RhcmdldF9zZXJ2ZXJpZBgDIAEoAxIVCg1nYXRl",
-            "X3NlcnZlcmlkGAQgASgDEg8KB1NjZW5lSUQYBSABKAMSHwoJY2xpZW50X2lk",
-            "GAYgASgLMgwuTkZNc2cuSWRlbnQSDwoHZ3JvdXBJRBgHIAEoAyJ2Cg9BY2tT",
-            "d2l0Y2hTZXJ2ZXISHAoGc2VsZmlkGAEgASgLMgwuTkZNc2cuSWRlbnQSFQoN",
-            "c2VsZl9zZXJ2ZXJpZBgCIAEoAxIXCg90YXJnZXRfc2VydmVyaWQYAyABKAMS",
-            "FQoNZ2F0ZV9zZXJ2ZXJpZBgEIAEoA2IGcHJvdG8z"));
+            "b21TaG9wEg4KBml0ZW1JRBgBIAEoDBINCgVjb3VudBgCIAEoBSLPAgoNUFZQ",
+            "UGxheWVySW5mbxIYCgJpZBgBIAEoCzIMLk5GTXNnLklkZW50Eg4KBnNpbmds",
+            "ZRgCIAEoBRINCgVsZXZlbBgEIAEoBRIUCgxiYXR0bGVfcG9pbnQYBSABKAUS",
+            "DAoEbmFtZRgGIAEoDBIMCgRoZWFkGAcgASgMEhEKCWhlcm9fY25mMRgIIAEo",
+            "DBIRCgloZXJvX2NuZjIYCSABKAwSEQoJaGVyb19jbmYzGAogASgMEhIKCmhl",
+            "cm9fc3RhcjEYCyABKAUSEgoKaGVyb19zdGFyMhgMIAEoBRISCgpoZXJvX3N0",
+            "YXIzGA0gASgFEh4KCGhlcm9faWQxGBQgASgLMgwuTkZNc2cuSWRlbnQSHgoI",
+            "aGVyb19pZDIYFSABKAsyDC5ORk1zZy5JZGVudBIeCghoZXJvX2lkMxgWIAEo",
+            "CzIMLk5GTXNnLklkZW50ImwKEFJlcVNlYXJjaE9wcG5lbnQSEgoKc2VsZl9z",
+            "Y2VuZRgBIAEoBRIPCgdkaWFtb25kGAIgASgFEhQKDGJhdHRsZV9wb2ludBgD",
+            "IAEoBRIdCgdmcmllbmRzGAogAygLMgwuTkZNc2cuSWRlbnQivgEKEEFja1Nl",
+            "YXJjaE9wcG5lbnQSEAoIc2NlbmVfaWQYASABKAUSHQoHdGVhbV9pZBgCIAEo",
+            "CzIMLk5GTXNnLklkZW50EiIKDHRlYW1fbWVtYmVycxgFIAMoCzIMLk5GTXNn",
+            "LklkZW50EiYKCG9wcG9uZW50GA4gASgLMhQuTkZNc2cuUFZQUGxheWVySW5m",
+            "bxItCglidWlsZGluZ3MYFCADKAsyGi5ORk1zZy5SZXFBZGRTY2VuZUJ1aWxk",
+            "aW5nIoEBCgtSZXFTZW5kTWFpbBIeCghyZWNpZXZlchgBIAEoCzIMLk5GTXNn",
+            "LklkZW50EiQKCWl0ZW1fbGlzdBgCIAMoCzIRLk5GTXNnLkl0ZW1TdHJ1Y3QS",
+            "LAoNY3VycmVuY3lfbGlzdBgDIAMoCzIVLk5GTXNnLkN1cnJlbmN5U3RydWN0",
+            "IrkBCg9SZXFTd2l0Y2hTZXJ2ZXISHAoGc2VsZmlkGAEgASgLMgwuTkZNc2cu",
+            "SWRlbnQSFQoNc2VsZl9zZXJ2ZXJpZBgCIAEoAxIXCg90YXJnZXRfc2VydmVy",
+            "aWQYAyABKAMSFQoNZ2F0ZV9zZXJ2ZXJpZBgEIAEoAxIPCgdTY2VuZUlEGAUg",
+            "ASgDEh8KCWNsaWVudF9pZBgGIAEoCzIMLk5GTXNnLklkZW50Eg8KB2dyb3Vw",
+            "SUQYByABKAMidgoPQWNrU3dpdGNoU2VydmVyEhwKBnNlbGZpZBgBIAEoCzIM",
+            "Lk5GTXNnLklkZW50EhUKDXNlbGZfc2VydmVyaWQYAiABKAMSFwoPdGFyZ2V0",
+            "X3NlcnZlcmlkGAMgASgDEhUKDWdhdGVfc2VydmVyaWQYBCABKANiBnByb3Rv",
+            "Mw=="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { global::NFMsg.NFDefineReflection.Descriptor, global::NFMsg.NFMsgBaseReflection.Descriptor, },
           new pbr::GeneratedClrTypeInfo(null, new pbr::GeneratedClrTypeInfo[] {
@@ -187,7 +188,7 @@ namespace NFMsg {
             new pbr::GeneratedClrTypeInfo(typeof(global::NFMsg.ReqSetFightHero), global::NFMsg.ReqSetFightHero.Parser, new[]{ "Heroid", "Set" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::NFMsg.ReqSwitchFightHero), global::NFMsg.ReqSwitchFightHero.Parser, new[]{ "Heroid" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::NFMsg.ReqBuyItemFromShop), global::NFMsg.ReqBuyItemFromShop.Parser, new[]{ "itemID", "count" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::NFMsg.PVPPlayerInfo), global::NFMsg.PVPPlayerInfo.Parser, new[]{ "id", "level", "battle_point", "name", "head", "hero_cnf1", "hero_cnf2", "hero_cnf3", "hero_star1", "hero_star2", "hero_star3", "hero_id1", "hero_id2", "hero_id3" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::NFMsg.PVPPlayerInfo), global::NFMsg.PVPPlayerInfo.Parser, new[]{ "id", "single", "level", "battle_point", "name", "head", "hero_cnf1", "hero_cnf2", "hero_cnf3", "hero_star1", "hero_star2", "hero_star3", "hero_id1", "hero_id2", "hero_id3" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::NFMsg.ReqSearchOppnent), global::NFMsg.ReqSearchOppnent.Parser, new[]{ "self_scene", "diamond", "battle_point", "friends" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::NFMsg.AckSearchOppnent), global::NFMsg.AckSearchOppnent.Parser, new[]{ "scene_id", "team_id", "team_members", "opponent", "buildings" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::NFMsg.ReqSendMail), global::NFMsg.ReqSendMail.Parser, new[]{ "reciever", "item_list", "currency_list" }, null, null, null),
@@ -7967,6 +7968,7 @@ namespace NFMsg {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public PVPPlayerInfo(PVPPlayerInfo other) : this() {
       id_ = other.id_ != null ? other.id_.Clone() : null;
+      single_ = other.single_;
       level_ = other.level_;
       battlePoint_ = other.battlePoint_;
       name_ = other.name_;
@@ -7996,6 +7998,17 @@ namespace NFMsg {
       get { return id_; }
       set {
         id_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "single" field.</summary>
+    public const int singleFieldNumber = 2;
+    private int single_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int single {
+      get { return single_; }
+      set {
+        single_ = value;
       }
     }
 
@@ -8156,6 +8169,7 @@ namespace NFMsg {
         return true;
       }
       if (!object.Equals(id, other.id)) return false;
+      if (single != other.single) return false;
       if (level != other.level) return false;
       if (battle_point != other.battle_point) return false;
       if (name != other.name) return false;
@@ -8176,6 +8190,7 @@ namespace NFMsg {
     public override int GetHashCode() {
       int hash = 1;
       if (id_ != null) hash ^= id.GetHashCode();
+      if (single != 0) hash ^= single.GetHashCode();
       if (level != 0) hash ^= level.GetHashCode();
       if (battle_point != 0) hash ^= battle_point.GetHashCode();
       if (name.Length != 0) hash ^= name.GetHashCode();
@@ -8205,6 +8220,10 @@ namespace NFMsg {
       if (id_ != null) {
         output.WriteRawTag(10);
         output.WriteMessage(id);
+      }
+      if (single != 0) {
+        output.WriteRawTag(16);
+        output.WriteInt32(single);
       }
       if (level != 0) {
         output.WriteRawTag(32);
@@ -8269,6 +8288,9 @@ namespace NFMsg {
       if (id_ != null) {
         size += 1 + pb::CodedOutputStream.ComputeMessageSize(id);
       }
+      if (single != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(single);
+      }
       if (level != 0) {
         size += 1 + pb::CodedOutputStream.ComputeInt32Size(level);
       }
@@ -8324,6 +8346,9 @@ namespace NFMsg {
           id_ = new global::NFMsg.Ident();
         }
         id.MergeFrom(other.id);
+      }
+      if (other.single != 0) {
+        single = other.single;
       }
       if (other.level != 0) {
         level = other.level;
@@ -8389,6 +8414,10 @@ namespace NFMsg {
               id_ = new global::NFMsg.Ident();
             }
             input.ReadMessage(id_);
+            break;
+          }
+          case 16: {
+            single = input.ReadInt32();
             break;
           }
           case 32: {
