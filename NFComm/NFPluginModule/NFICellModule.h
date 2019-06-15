@@ -120,7 +120,7 @@ public:
 		CELL_MOVE_EVENT_FUNCTOR functor = std::bind(handler, pBase, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3, std::placeholders::_4, std::placeholders::_5);
 		CELL_MOVE_EVENT_FUNCTOR_PTR functorPtr(new CELL_MOVE_EVENT_FUNCTOR(functor));
 
-		AddMoveEventCaAddMoveOutEventCallBackllBack(functorPtr);
+		AddMoveOutEventCallBack(functorPtr);
 		return true;
 	}
 	//////////////////////////////////////////////////////////////////////////
