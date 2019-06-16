@@ -31,7 +31,6 @@
 #include <algorithm>
 #include <array>
 #include "NFIModule.h"
-#include "NFIModule.h"
 #include "NFGUID.h"
 
 class NFSceneCellInfo;

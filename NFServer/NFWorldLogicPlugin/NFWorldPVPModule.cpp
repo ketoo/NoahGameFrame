@@ -64,7 +64,7 @@ bool NFWorldPVPModule::AfterInit()
 	m_pWorldNet_ServerModule = pPluginManager->FindModule<NFIWorldNet_ServerModule>();
 	
 
-	m_pScheduleModule->AddSchedule("DoMakeTeam", this, &NFWorldPVPModule::OnMakeTeam, 1.5f, -1);
+	m_pScheduleModule->AddSchedule("DoMakeTeam", this, &NFWorldPVPModule::OnMakeTeam, 1.0f, -1);
 	m_pScheduleModule->AddSchedule("DoMakeMatch", this, &NFWorldPVPModule::OnMakeMatch, 0.7f, -1);
 	
 	if (!m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_REQ_SEARCH_OPPNENT, this, &NFWorldPVPModule::OnReqSearchOpponentProcess)) { return false; }
@@ -247,7 +247,7 @@ int NFWorldPVPModule::OnMakeTeam(const std::string & strHeartBeat, const float f
 		mTeamList.push_back(teamData);
 		makeTeamCount = 0;
 	}
-	else if (mSingleModeCandidatePool.size() >= 2 && makeTeamCount >= 10)
+	else if (mSingleModeCandidatePool.size() >= 2 && makeTeamCount >= 7)
 	{
 		NF_SHARE_PTR<MultiTeam> teamData(NF_NEW MultiTeam());
 		teamData->teamID = m_pKernelModule->CreateGUID();
@@ -265,7 +265,7 @@ int NFWorldPVPModule::OnMakeTeam(const std::string & strHeartBeat, const float f
 		mTeamList.push_back(teamData);
 		makeTeamCount = 0;
 	}
-	else if (mSingleModeCandidatePool.size() >= 1 && makeTeamCount >= 15)
+	else if (mSingleModeCandidatePool.size() >= 1 && makeTeamCount >= 9)
 	{
 
 		NFGUID id = mSingleModeCandidatePool.front();

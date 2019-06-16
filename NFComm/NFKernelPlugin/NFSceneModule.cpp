@@ -24,6 +24,8 @@
 */
 
 #include "NFSceneModule.h"
+#include "NFComm/NFCore/NFPropertyManager.h"
+#include "NFComm/NFCore/NFRecordManager.h"
 
 bool NFSceneModule::Init()
 {
@@ -86,6 +88,79 @@ bool NFSceneModule::Execute()
     return true;
 }
 
+int NFSceneModule::RequestGroupScene(const int nSceneID)
+{
+	NF_SHARE_PTR<NFSceneInfo> pSceneInfo = GetElement(nSceneID);
+	if (pSceneInfo)
+	{
+		int nNewGroupID = pSceneInfo->NewGroupID();
+		if (!pSceneInfo->GetElement(nNewGroupID))
+		{
+			NF_SHARE_PTR<NFIPropertyManager> pPropertyManager(NF_NEW NFPropertyManager(NFGUID(nSceneID, nNewGroupID)));
+			NF_SHARE_PTR<NFIRecordManager> pRecordManager(NF_NEW NFRecordManager(NFGUID(nSceneID, nNewGroupID)));
+			NF_SHARE_PTR<NFSceneGroupInfo> pGroupInfo(NF_NEW NFSceneGroupInfo(nSceneID, nNewGroupID, pPropertyManager, pRecordManager));
+			if (pGroupInfo)
+			{
+				NFGUID ident(nSceneID, nNewGroupID);
+
+				NF_SHARE_PTR<NFIPropertyManager> pStaticClassPropertyManager = m_pClassModule->GetClassPropertyManager(NFrame::Group::ThisName());
+				NF_SHARE_PTR<NFIRecordManager> pStaticClassRecordManager = m_pClassModule->GetClassRecordManager(NFrame::Group::ThisName());
+				if (pStaticClassPropertyManager && pStaticClassRecordManager)
+				{
+					NF_SHARE_PTR<NFIProperty> pStaticConfigPropertyInfo = pStaticClassPropertyManager->First();
+					while (pStaticConfigPropertyInfo)
+					{
+						NF_SHARE_PTR<NFIProperty> xProperty = pPropertyManager->AddProperty(ident, pStaticConfigPropertyInfo->GetKey(), pStaticConfigPropertyInfo->GetType());
+
+						xProperty->SetPublic(pStaticConfigPropertyInfo->GetPublic());
+						xProperty->SetPrivate(pStaticConfigPropertyInfo->GetPrivate());
+						xProperty->SetSave(pStaticConfigPropertyInfo->GetSave());
+						xProperty->SetCache(pStaticConfigPropertyInfo->GetCache());
+						xProperty->SetRef(pStaticConfigPropertyInfo->GetRef());
+						xProperty->SetUpload(pStaticConfigPropertyInfo->GetUpload());
+
+						PROPERTY_EVENT_FUNCTOR functor = std::bind(&NFSceneModule::OnScenePropertyCommonEvent, this, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3, std::placeholders::_4);
+						PROPERTY_EVENT_FUNCTOR_PTR functorPtr(NF_NEW PROPERTY_EVENT_FUNCTOR(functor));
+						pPropertyManager->RegisterCallback(pStaticConfigPropertyInfo->GetKey(), functorPtr);
+
+						pStaticConfigPropertyInfo = pStaticClassPropertyManager->Next();
+					}
+
+					NF_SHARE_PTR<NFIRecord> pConfigRecordInfo = pStaticClassRecordManager->First();
+					while (pConfigRecordInfo)
+					{
+						NF_SHARE_PTR<NFIRecord> xRecord = pRecordManager->AddRecord(ident,
+							pConfigRecordInfo->GetName(),
+							pConfigRecordInfo->GetInitData(),
+							pConfigRecordInfo->GetTag(),
+							pConfigRecordInfo->GetRows());
+
+						xRecord->SetPublic(pConfigRecordInfo->GetPublic());
+						xRecord->SetPrivate(pConfigRecordInfo->GetPrivate());
+						xRecord->SetSave(pConfigRecordInfo->GetSave());
+						xRecord->SetCache(pConfigRecordInfo->GetCache());
+						xRecord->SetUpload(pConfigRecordInfo->GetUpload());
+
+						RECORD_EVENT_FUNCTOR functor = std::bind(&NFSceneModule::OnSceneRecordCommonEvent, this, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3, std::placeholders::_4);
+						RECORD_EVENT_FUNCTOR_PTR functorPtr(NF_NEW RECORD_EVENT_FUNCTOR(functor));
+
+						//pObject->AddRecordCallBack(pConfigRecordInfo->GetName(), this, &NFSceneModule::OnSceneRecordCommonEvent);
+
+						pConfigRecordInfo = pStaticClassRecordManager->Next();
+					}
+				}
+
+				pSceneInfo->AddElement(nNewGroupID, pGroupInfo);
+
+				m_pCellModule->CreateGroupCell(nSceneID, nNewGroupID);
+				return nNewGroupID;
+			}
+		}
+	}
+
+	return 0;
+}
+
 bool NFSceneModule::RequestEnterScene(const NFGUID & self, const int nSceneID, const int nGroupID, const int nType, const NFVector3& pos, const NFDataList & argList)
 {
 	if (nGroupID < 0)
@@ -132,6 +207,26 @@ bool NFSceneModule::RequestEnterScene(const NFGUID & self, const int nSceneID, c
 	}
 
 	return true;
+}
+
+bool NFSceneModule::ReleaseGroupScene(const int nSceneID, const int nGroupID)
+{
+	NF_SHARE_PTR<NFSceneInfo> pSceneInfo = GetElement(nSceneID);
+	if (pSceneInfo)
+	{
+		if (nGroupID > 0)
+		{
+			DestroySceneNPC(nSceneID, nGroupID);
+
+			m_pCellModule->DestroyGroupCell(nSceneID, nGroupID);
+
+			pSceneInfo->RemoveElement(nGroupID);
+
+			return true;
+		}
+	}
+
+	return false;
 }
 
 bool NFSceneModule::AddSeedData(const int nSceneID, const std::string & strSeedID, const std::string & strConfigID, const NFVector3 & vPos, const int nWeight)
@@ -347,6 +442,495 @@ bool NFSceneModule::RemoveSwapSceneEventCallBack()
 	return true;
 }
 
+bool NFSceneModule::SetPropertyInt(const int scene, const int group, const std::string & strPropertyName, const NFINT64 nValue)
+{
+	NF_SHARE_PTR<NFSceneInfo> pSceneInfo = GetElement(scene);
+	if (pSceneInfo)
+	{
+		NF_SHARE_PTR<NFSceneGroupInfo> pGroupInfo = pSceneInfo->GetElement(group);
+		if (pGroupInfo)
+		{
+			return pGroupInfo->mxPropertyManager->SetPropertyInt(strPropertyName, nValue);
+		}
+	}
+
+	return false;
+}
+
+bool NFSceneModule::SetPropertyFloat(const int scene, const int group, const std::string & strPropertyName, const double dValue)
+{
+	NF_SHARE_PTR<NFSceneInfo> pSceneInfo = GetElement(scene);
+	if (pSceneInfo)
+	{
+		NF_SHARE_PTR<NFSceneGroupInfo> pGroupInfo = pSceneInfo->GetElement(group);
+		if (pGroupInfo)
+		{
+			return pGroupInfo->mxPropertyManager->SetPropertyFloat(strPropertyName, dValue);
+		}
+	}
+
+	return false;
+}
+
+bool NFSceneModule::SetPropertyString(const int scene, const int group, const std::string & strPropertyName, const std::string & strValue)
+{
+	NF_SHARE_PTR<NFSceneInfo> pSceneInfo = GetElement(scene);
+	if (pSceneInfo)
+	{
+		NF_SHARE_PTR<NFSceneGroupInfo> pGroupInfo = pSceneInfo->GetElement(group);
+		if (pGroupInfo)
+		{
+			return pGroupInfo->mxPropertyManager->SetPropertyString(strPropertyName, strValue);
+		}
+	}
+
+	return false;
+}
+
+bool NFSceneModule::SetPropertyObject(const int scene, const int group, const std::string & strPropertyName, const NFGUID & objectValue)
+{
+	NF_SHARE_PTR<NFSceneInfo> pSceneInfo = GetElement(scene);
+	if (pSceneInfo)
+	{
+		NF_SHARE_PTR<NFSceneGroupInfo> pGroupInfo = pSceneInfo->GetElement(group);
+		if (pGroupInfo)
+		{
+			return pGroupInfo->mxPropertyManager->SetPropertyObject(strPropertyName, objectValue);
+		}
+	}
+
+	return false;
+}
+
+bool NFSceneModule::SetPropertyVector2(const int scene, const int group, const std::string & strPropertyName, const NFVector2 & value)
+{
+	NF_SHARE_PTR<NFSceneInfo> pSceneInfo = GetElement(scene);
+	if (pSceneInfo)
+	{
+		NF_SHARE_PTR<NFSceneGroupInfo> pGroupInfo = pSceneInfo->GetElement(group);
+		if (pGroupInfo)
+		{
+			return pGroupInfo->mxPropertyManager->SetPropertyVector2(strPropertyName, value);
+		}
+	}
+
+	return false;
+}
+
+bool NFSceneModule::SetPropertyVector3(const int scene, const int group, const std::string & strPropertyName, const NFVector3 & value)
+{
+	NF_SHARE_PTR<NFSceneInfo> pSceneInfo = GetElement(scene);
+	if (pSceneInfo)
+	{
+		NF_SHARE_PTR<NFSceneGroupInfo> pGroupInfo = pSceneInfo->GetElement(group);
+		if (pGroupInfo)
+		{
+			return pGroupInfo->mxPropertyManager->SetPropertyVector3(strPropertyName, value);
+		}
+	}
+
+	return false;
+}
+
+NFINT64 NFSceneModule::GetPropertyInt(const int scene, const int group, const std::string & strPropertyName)
+{
+	NF_SHARE_PTR<NFSceneInfo> pSceneInfo = GetElement(scene);
+	if (pSceneInfo)
+	{
+		NF_SHARE_PTR<NFSceneGroupInfo> pGroupInfo = pSceneInfo->GetElement(group);
+		if (pGroupInfo)
+		{
+			return pGroupInfo->mxPropertyManager->GetPropertyInt(strPropertyName);
+		}
+	}
+
+	return 0;
+}
+
+int NFSceneModule::GetPropertyInt32(const int scene, const int group, const std::string & strPropertyName)
+{
+	return GetPropertyInt(scene, group, strPropertyName);
+}
+
+double NFSceneModule::GetPropertyFloat(const int scene, const int group, const std::string & strPropertyName)
+{
+	NF_SHARE_PTR<NFSceneInfo> pSceneInfo = GetElement(scene);
+	if (pSceneInfo)
+	{
+		NF_SHARE_PTR<NFSceneGroupInfo> pGroupInfo = pSceneInfo->GetElement(group);
+		if (pGroupInfo)
+		{
+			return pGroupInfo->mxPropertyManager->GetPropertyFloat(strPropertyName);
+		}
+	}
+
+	return 0.0;
+}
+
+const std::string & NFSceneModule::GetPropertyString(const int scene, const int group, const std::string & strPropertyName)
+{
+
+	NF_SHARE_PTR<NFSceneInfo> pSceneInfo = GetElement(scene);
+	if (pSceneInfo)
+	{
+		NF_SHARE_PTR<NFSceneGroupInfo> pGroupInfo = pSceneInfo->GetElement(group);
+		if (pGroupInfo)
+		{
+			return pGroupInfo->mxPropertyManager->GetPropertyString(strPropertyName);
+		}
+	}
+
+	return "";
+}
+
+const NFGUID & NFSceneModule::GetPropertyObject(const int scene, const int group, const std::string & strPropertyName)
+{
+
+	NF_SHARE_PTR<NFSceneInfo> pSceneInfo = GetElement(scene);
+	if (pSceneInfo)
+	{
+		NF_SHARE_PTR<NFSceneGroupInfo> pGroupInfo = pSceneInfo->GetElement(group);
+		if (pGroupInfo)
+		{
+			return pGroupInfo->mxPropertyManager->GetPropertyObject(strPropertyName);
+		}
+	}
+
+	return NULL_OBJECT;
+}
+
+const NFVector2 & NFSceneModule::GetPropertyVector2(const int scene, const int group, const std::string & strPropertyName)
+{
+	NF_SHARE_PTR<NFSceneInfo> pSceneInfo = GetElement(scene);
+	if (pSceneInfo)
+	{
+		NF_SHARE_PTR<NFSceneGroupInfo> pGroupInfo = pSceneInfo->GetElement(group);
+		if (pGroupInfo)
+		{
+			return pGroupInfo->mxPropertyManager->GetPropertyVector2(strPropertyName);
+		}
+	}
+
+	return NFVector2::Zero();
+}
+
+const NFVector3 & NFSceneModule::GetPropertyVector3(const int scene, const int group, const std::string & strPropertyName)
+{
+	NF_SHARE_PTR<NFSceneInfo> pSceneInfo = GetElement(scene);
+	if (pSceneInfo)
+	{
+		NF_SHARE_PTR<NFSceneGroupInfo> pGroupInfo = pSceneInfo->GetElement(group);
+		if (pGroupInfo)
+		{
+			return pGroupInfo->mxPropertyManager->GetPropertyVector3(strPropertyName);
+		}
+	}
+
+	return NFVector3::Zero();
+}
+
+NF_SHARE_PTR<NFIRecord> NFSceneModule::FindRecord(const int scene, const int group, const std::string & strRecordName)
+{
+	NF_SHARE_PTR<NFSceneInfo> pSceneInfo = GetElement(scene);
+	if (pSceneInfo)
+	{
+		NF_SHARE_PTR<NFSceneGroupInfo> pGroupInfo = pSceneInfo->GetElement(group);
+		if (pGroupInfo)
+		{
+			return pGroupInfo->mxRecordManager->GetElement(strRecordName);
+		}
+	}
+
+	return nullptr;
+}
+
+bool NFSceneModule::ClearRecord(const int scene, const int group, const std::string & strRecordName)
+{
+	NF_SHARE_PTR<NFIRecord> xRecord = FindRecord(scene, group, strRecordName);
+	if (xRecord)
+	{
+		return xRecord->Clear();
+	}
+
+	return false;
+}
+
+bool NFSceneModule::SetRecordInt(const int scene, const int group, const std::string & strRecordName, const int nRow, const int nCol, const NFINT64 nValue)
+{
+	NF_SHARE_PTR<NFIRecord> xRecord = FindRecord(scene, group, strRecordName);
+	if (xRecord)
+	{
+		return xRecord->SetInt(nRow, nCol, nValue);
+	}
+
+	return false;
+}
+
+bool NFSceneModule::SetRecordFloat(const int scene, const int group, const std::string & strRecordName, const int nRow, const int nCol, const double dwValue)
+{
+	NF_SHARE_PTR<NFIRecord> xRecord = FindRecord(scene, group, strRecordName);
+	if (xRecord)
+	{
+		return xRecord->SetFloat(nRow, nCol, dwValue);
+	}
+
+	return false;
+}
+
+bool NFSceneModule::SetRecordString(const int scene, const int group, const std::string & strRecordName, const int nRow, const int nCol, const std::string & strValue)
+{
+	NF_SHARE_PTR<NFIRecord> xRecord = FindRecord(scene, group, strRecordName);
+	if (xRecord)
+	{
+		return xRecord->SetString(nRow, nCol, strValue);
+	}
+
+	return false;
+}
+
+bool NFSceneModule::SetRecordObject(const int scene, const int group, const std::string & strRecordName, const int nRow, const int nCol, const NFGUID & objectValue)
+{
+	NF_SHARE_PTR<NFIRecord> xRecord = FindRecord(scene, group, strRecordName);
+	if (xRecord)
+	{
+		return xRecord->SetObject(nRow, nCol, objectValue);
+	}
+
+	return false;
+}
+
+bool NFSceneModule::SetRecordVector2(const int scene, const int group, const std::string & strRecordName, const int nRow, const int nCol, const NFVector2 & value)
+{
+	NF_SHARE_PTR<NFIRecord> xRecord = FindRecord(scene, group, strRecordName);
+	if (xRecord)
+	{
+		return xRecord->SetVector2(nRow, nCol, value);
+	}
+
+	return false;
+}
+
+bool NFSceneModule::SetRecordVector3(const int scene, const int group, const std::string & strRecordName, const int nRow, const int nCol, const NFVector3 & value)
+{
+	NF_SHARE_PTR<NFIRecord> xRecord = FindRecord(scene, group, strRecordName);
+	if (xRecord)
+	{
+		return xRecord->SetVector3(nRow, nCol, value);
+	}
+
+	return false;
+}
+
+bool NFSceneModule::SetRecordInt(const int scene, const int group, const std::string & strRecordName, const int nRow, const std::string & strColTag, const NFINT64 value)
+{
+	NF_SHARE_PTR<NFIRecord> xRecord = FindRecord(scene, group, strRecordName);
+	if (xRecord)
+	{
+		return xRecord->SetInt(nRow, strColTag, value);
+	}
+
+	return false;
+}
+
+bool NFSceneModule::SetRecordFloat(const int scene, const int group, const std::string & strRecordName, const int nRow, const std::string & strColTag, const double value)
+{
+	NF_SHARE_PTR<NFIRecord> xRecord = FindRecord(scene, group, strRecordName);
+	if (xRecord)
+	{
+		return xRecord->SetFloat(nRow, strColTag, value);
+	}
+
+	return false;
+}
+
+bool NFSceneModule::SetRecordString(const int scene, const int group, const std::string & strRecordName, const int nRow, const std::string & strColTag, const std::string & value)
+{
+	NF_SHARE_PTR<NFIRecord> xRecord = FindRecord(scene, group, strRecordName);
+	if (xRecord)
+	{
+		return xRecord->SetString(nRow, strColTag, value);
+	}
+
+	return false;
+}
+
+bool NFSceneModule::SetRecordObject(const int scene, const int group, const std::string & strRecordName, const int nRow, const std::string & strColTag, const NFGUID & value)
+{
+	NF_SHARE_PTR<NFIRecord> xRecord = FindRecord(scene, group, strRecordName);
+	if (xRecord)
+	{
+		return xRecord->SetObject(nRow, strColTag, value);
+	}
+
+	return false;
+}
+
+bool NFSceneModule::SetRecordVector2(const int scene, const int group, const std::string & strRecordName, const int nRow, const std::string & strColTag, const NFVector2 & value)
+{
+	NF_SHARE_PTR<NFIRecord> xRecord = FindRecord(scene, group, strRecordName);
+	if (xRecord)
+	{
+		return xRecord->SetVector2(nRow, strColTag, value);
+	}
+
+	return false;
+}
+
+bool NFSceneModule::SetRecordVector3(const int scene, const int group, const std::string & strRecordName, const int nRow, const std::string & strColTag, const NFVector3 & value)
+{
+	NF_SHARE_PTR<NFIRecord> xRecord = FindRecord(scene, group, strRecordName);
+	if (xRecord)
+	{
+		return xRecord->SetVector3(nRow, strColTag, value);
+	}
+
+	return false;
+}
+
+NFINT64 NFSceneModule::GetRecordInt(const int scene, const int group, const std::string & strRecordName, const int nRow, const int nCol)
+{
+	NF_SHARE_PTR<NFIRecord> xRecord = FindRecord(scene, group, strRecordName);
+	if (xRecord)
+	{
+		return xRecord->GetInt(nRow, nCol);
+	}
+
+	return 0;
+}
+
+double NFSceneModule::GetRecordFloat(const int scene, const int group, const std::string & strRecordName, const int nRow, const int nCol)
+{
+	NF_SHARE_PTR<NFIRecord> xRecord = FindRecord(scene, group, strRecordName);
+	if (xRecord)
+	{
+		return xRecord->GetFloat(nRow, nCol);
+	}
+
+	return 0.0;
+}
+
+const std::string & NFSceneModule::GetRecordString(const int scene, const int group, const std::string & strRecordName, const int nRow, const int nCol)
+{
+	NF_SHARE_PTR<NFIRecord> xRecord = FindRecord(scene, group, strRecordName);
+	if (xRecord)
+	{
+		return xRecord->GetString(nRow, nCol);
+	}
+
+	return "";
+}
+
+const NFGUID & NFSceneModule::GetRecordObject(const int scene, const int group, const std::string & strRecordName, const int nRow, const int nCol)
+{
+	NF_SHARE_PTR<NFIRecord> xRecord = FindRecord(scene, group, strRecordName);
+	if (xRecord)
+	{
+		return xRecord->GetObject(nRow, nCol);
+	}
+
+	return NULL_OBJECT;
+}
+
+const NFVector2 & NFSceneModule::GetRecordVector2(const int scene, const int group, const std::string & strRecordName, const int nRow, const int nCol)
+{
+	NF_SHARE_PTR<NFIRecord> xRecord = FindRecord(scene, group, strRecordName);
+	if (xRecord)
+	{
+		return xRecord->GetVector2(nRow, nCol);
+	}
+
+	return NFVector2::Zero();
+}
+
+const NFVector3 & NFSceneModule::GetRecordVector3(const int scene, const int group, const std::string & strRecordName, const int nRow, const int nCol)
+{
+	NF_SHARE_PTR<NFIRecord> xRecord = FindRecord(scene, group, strRecordName);
+	if (xRecord)
+	{
+		return xRecord->GetVector3(nRow, nCol);
+	}
+
+	return NFVector3::Zero();
+}
+
+NFINT64 NFSceneModule::GetRecordInt(const int scene, const int group, const std::string & strRecordName, const int nRow, const std::string & strColTag)
+{
+	NF_SHARE_PTR<NFIRecord> xRecord = FindRecord(scene, group, strRecordName);
+	if (xRecord)
+	{
+		return xRecord->GetInt(nRow, strColTag);
+	}
+
+	return 0;
+}
+
+double NFSceneModule::GetRecordFloat(const int scene, const int group, const std::string & strRecordName, const int nRow, const std::string & strColTag)
+{
+	NF_SHARE_PTR<NFIRecord> xRecord = FindRecord(scene, group, strRecordName);
+	if (xRecord)
+	{
+		return xRecord->GetFloat(nRow, strColTag);
+	}
+
+	return 0.0;
+}
+
+const std::string & NFSceneModule::GetRecordString(const int scene, const int group, const std::string & strRecordName, const int nRow, const std::string & strColTag)
+{
+	NF_SHARE_PTR<NFIRecord> xRecord = FindRecord(scene, group, strRecordName);
+	if (xRecord)
+	{
+		return xRecord->GetString(nRow, strColTag);
+	}
+
+	return "";
+}
+
+const NFGUID & NFSceneModule::GetRecordObject(const int scene, const int group, const std::string & strRecordName, const int nRow, const std::string & strColTag)
+{
+	NF_SHARE_PTR<NFIRecord> xRecord = FindRecord(scene, group, strRecordName);
+	if (xRecord)
+	{
+		return xRecord->GetObject(nRow, strColTag);
+	}
+
+	return NULL_OBJECT;
+}
+
+const NFVector2 & NFSceneModule::GetRecordVector2(const int scene, const int group, const std::string & strRecordName, const int nRow, const std::string & strColTag)
+{
+	NF_SHARE_PTR<NFIRecord> xRecord = FindRecord(scene, group, strRecordName);
+	if (xRecord)
+	{
+		return xRecord->GetVector2(nRow, strColTag);
+	}
+
+	return NFVector2::Zero();
+}
+
+const NFVector3 & NFSceneModule::GetRecordVector3(const int scene, const int group, const std::string & strRecordName, const int nRow, const std::string & strColTag)
+{
+	NF_SHARE_PTR<NFIRecord> xRecord = FindRecord(scene, group, strRecordName);
+	if (xRecord)
+	{
+		return xRecord->GetVector3(nRow, strColTag);
+	}
+
+	return NFVector3::Zero();
+}
+
+bool NFSceneModule::AddGroupPropertyCallBack(const PROPERTY_EVENT_FUNCTOR_PTR & cb)
+{
+	mvScenePropertyCallback.push_back(cb);
+	return true;
+}
+
+bool NFSceneModule::AddGroupRecordCallBack(const RECORD_EVENT_FUNCTOR_PTR & cb)
+{
+	mvSceneRecordCallback.push_back(cb);
+	return true;
+}
+
 bool NFSceneModule::SwitchScene(const NFGUID& self, const int nTargetSceneID, const int nTargetGroupID, const int nType, const NFVector3 v, const float fOrient, const NFDataList& arg)
 {
 	NF_SHARE_PTR<NFIObject> pObject = m_pKernelModule->GetObject(self);
@@ -415,6 +999,31 @@ bool NFSceneModule::SwitchScene(const NFGUID& self, const int nTargetSceneID, co
 	m_pLogModule->LogObject(NFILogModule::NLL_ERROR_NORMAL, self, "There is no object", __FUNCTION__, __LINE__);
 
 	return false;
+}
+
+int NFSceneModule::OnScenePropertyCommonEvent(const NFGUID & self, const std::string & strPropertyName, const NFData & oldVar, const NFData & newVar)
+{
+	std::vector<PROPERTY_EVENT_FUNCTOR_PTR>::iterator it = mvScenePropertyCallback.begin();
+	for (; it != mvScenePropertyCallback.end(); it++)
+	{
+		PROPERTY_EVENT_FUNCTOR_PTR& pFunPtr = *it;
+		PROPERTY_EVENT_FUNCTOR* pFunc = pFunPtr.get();
+		pFunc->operator()(self, strPropertyName, oldVar, newVar);
+	}
+
+	return 0;
+}
+
+int NFSceneModule::OnSceneRecordCommonEvent(const NFGUID & self, const RECORD_EVENT_DATA & xEventData, const NFData & oldVar, const NFData & newVar)
+{
+	std::vector<RECORD_EVENT_FUNCTOR_PTR>::iterator it = mvSceneRecordCallback.begin();
+	for (; it != mvSceneRecordCallback.end(); it++)
+	{
+		RECORD_EVENT_FUNCTOR_PTR& pFunPtr = *it;
+		RECORD_EVENT_FUNCTOR* pFunc = pFunPtr.get();
+		pFunc->operator()(self, xEventData, oldVar, newVar);
+	}
+	return 0;
 }
 
 int NFSceneModule::OnPropertyCommonEvent(const NFGUID & self, const std::string & strPropertyName, const NFData & oldVar, const NFData & newVar)
@@ -722,10 +1331,6 @@ int NFSceneModule::EnterSceneCondition(const NFGUID & self, const int nSceneID, 
 		SCENE_EVENT_FUNCTOR_PTR& pFunPtr = *it;
 		SCENE_EVENT_FUNCTOR* pFunc = pFunPtr.get();
 		const int nReason = pFunc->operator()(self, nSceneID, nGroupID, nType, argList);
-		if (nReason != 0)
-		{
-			return nReason;
-		}
 	}
 	return 0;
 }

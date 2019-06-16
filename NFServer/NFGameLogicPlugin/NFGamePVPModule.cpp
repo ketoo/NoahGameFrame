@@ -82,12 +82,12 @@ bool NFGamePVPModule::AfterInit()
 
 	if (!m_pNetClientModule->AddReceiveCallBack(NF_SERVER_TYPES::NF_ST_WORLD, NFMsg::EGMI_ACK_SEARCH_OPPNENT, this, &NFGamePVPModule::OnAckSearchOpponentProcess)) { return false; }
 
+	m_pSceneModule->AddGroupPropertyCallBack(NFrame::Group::ActorID(), this, &NFGamePVPModule::OnNPCHPEvent);
     return true;
 }
 
 bool NFGamePVPModule::ReadyExecute()
 {
-	m_pSceneModule->AddAfterEnterSceneGroupCallBack(this, &NFGamePVPModule::OnSceneGroupEvent);
 
 	return false;
 }
@@ -184,6 +184,9 @@ void NFGamePVPModule::OnAckSearchOpponentProcess(const NFSOCK nSockIndex, const 
 		m_pKernelModule->SetPropertyInt(id, NFrame::Player::MatchPlayers(), xMsg.team_members_size());
 		m_pKernelModule->SetPropertyObject(id, NFrame::Player::MatchTeamID(), matchData->teamID);
 		m_pKernelModule->SetPropertyInt(id, NFrame::Player::MatchStar(), 0);
+		
+		const NFGUID& xHeroID = m_pKernelModule->GetPropertyObject(id, NFrame::Player::HeroID1());
+		m_pHeroModule->SwitchFightHero(id, xHeroID);
 
 		m_pSceneProcessModule->RequestEnterScene(id, xMsg.scene_id(), groupID, 0, pos, NFDataList());
 
@@ -295,12 +298,6 @@ void NFGamePVPModule::OnReqEndPVPOpponentProcess(const NFSOCK nSockIndex, const 
 	EndTheBattle(nPlayerID, xMsg.auto_end());
 }
 
-int NFGamePVPModule::OnSceneGroupEvent(const NFGUID & self, const int nSceneID, const int nGroupID, const int nType, const NFDataList & argList)
-{
-	m_pHeroModule->ReliveAllHero(self);
-	return 0;
-}
-
 int NFGamePVPModule::EnterSceneConditionEvent(const NFGUID & self, const int nSceneID, const int nGroupID, const int nType, const NFDataList & argList)
 {
 	return 0;
@@ -317,7 +314,7 @@ int NFGamePVPModule::AfterEnterSceneGroupEvent(const NFGUID & self, const int nS
 	//create building if the player wants attack the others
 
 	//ResetPVPData(self);
-
+	m_pHeroModule->ReliveAllHero(self);
 	return 0;
 }
 
@@ -605,12 +602,10 @@ void NFGamePVPModule::EndTheBattle(const NFGUID & self, const int autoEnd)
 		{
 			xReqAckEndBattle.set_win(1);
 			xReqAckEndBattle.set_star(nFightingStar);
-			xReqAckEndBattle.set_exp(nExp);
 
 			xReqAckEndBattle.set_gold(nWinGold);
 			xReqAckEndBattle.set_diamond(nWinDiamond);
-			xReqAckEndBattle.set_exp(nWinCup);
-
+			xReqAckEndBattle.set_cup(nWinCup);
 			//how to reduce the money for that people who lose the game? maybe that guy onlien maybe not.
 		}
 		else
@@ -624,11 +619,10 @@ void NFGamePVPModule::EndTheBattle(const NFGUID & self, const int autoEnd)
 
 			xReqAckEndBattle.set_win(0);
 			xReqAckEndBattle.set_star(nFightingStar);
-			xReqAckEndBattle.set_exp(nExp);
 
 			xReqAckEndBattle.set_gold(-nWinGold);
 			xReqAckEndBattle.set_diamond(-nWinDiamond);
-			xReqAckEndBattle.set_exp(-nWinCup);
+			xReqAckEndBattle.set_cup(-nWinCup);
 
 			//how to increase the money for that people who won the game? maybe that guy onlien maybe not.
 		}
