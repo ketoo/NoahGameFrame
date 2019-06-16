@@ -280,6 +280,24 @@ package nframe;
 		// Record
 
 	}
+	public class Group
+	{
+		//Class name
+		public static final String ThisName = "Group";
+		// IObject
+		public static final String ClassName = "ClassName";// string
+		public static final String ConfigID = "ConfigID";// string
+		public static final String GroupID = "GroupID";// int
+		public static final String ID = "ID";// string
+		public static final String MoveTo = "MoveTo";// vector3
+		public static final String Position = "Position";// vector3
+		public static final String SceneID = "SceneID";// int
+		// Property
+		public static final String ActorID = "ActorID";// int
+		public static final String Width = "Width";// int
+		// Record
+
+	}
 	public class IObject
 	{
 		//Class name

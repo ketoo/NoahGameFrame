@@ -289,6 +289,24 @@ namespace NFrame
 		// Record
 
 	};
+	class Group
+	{
+	public:
+		//Class name
+		static const std::string& ThisName(){ static std::string x = "Group"; return x; };		// IObject
+		static const std::string& ClassName(){ static std::string x = "ClassName"; return x; };// string
+		static const std::string& ConfigID(){ static std::string x = "ConfigID"; return x; };// string
+		static const std::string& GroupID(){ static std::string x = "GroupID"; return x; };// int
+		static const std::string& ID(){ static std::string x = "ID"; return x; };// string
+		static const std::string& MoveTo(){ static std::string x = "MoveTo"; return x; };// vector3
+		static const std::string& Position(){ static std::string x = "Position"; return x; };// vector3
+		static const std::string& SceneID(){ static std::string x = "SceneID"; return x; };// int
+		// Property
+		static const std::string& ActorID(){ static std::string x = "ActorID"; return x; };// int
+		static const std::string& Width(){ static std::string x = "Width"; return x; };// int
+		// Record
+
+	};
 	class IObject
 	{
 	public:

@@ -405,7 +405,7 @@ message AckEndBattle
     int32 win            	= 1; //
     int32 star            	= 2; //
     int32 gold            	= 3; // 副本获得的金币
-    int32 exp              = 4; // 副本获得的经验
+    int32 cup              = 4; // 副本获得的经验
     int32 diamond          = 5; //
     int32 single          	= 6; //
 	Ident 					team_id = 7;

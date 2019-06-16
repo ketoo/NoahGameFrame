@@ -134,7 +134,7 @@ namespace NFMsg {
             "MhQuTkZNc2cuUFZQUGxheWVySW5mbxItCglidWlsZGluZ3MYFCADKAsyGi5O",
             "Rk1zZy5SZXFBZGRTY2VuZUJ1aWxkaW5nIiAKDFJlcUVuZEJhdHRsZRIQCghh",
             "dXRvX2VuZBgBIAEoBSLpAQoMQWNrRW5kQmF0dGxlEgsKA3dpbhgBIAEoBRIM",
-            "CgRzdGFyGAIgASgFEgwKBGdvbGQYAyABKAUSCwoDZXhwGAQgASgFEg8KB2Rp",
+            "CgRzdGFyGAIgASgFEgwKBGdvbGQYAyABKAUSCwoDY3VwGAQgASgFEg8KB2Rp",
             "YW1vbmQYBSABKAUSDgoGc2luZ2xlGAYgASgFEh0KB3RlYW1faWQYByABKAsy",
             "DC5ORk1zZy5JZGVudBIeCghtYXRjaF9pZBgIIAEoCzIMLk5GTXNnLklkZW50",
             "Eh0KB21lbWJlcnMYCSADKAsyDC5ORk1zZy5JZGVudBIkCglpdGVtX2xpc3QY",
@@ -192,7 +192,7 @@ namespace NFMsg {
             new pbr::GeneratedClrTypeInfo(typeof(global::NFMsg.ReqSearchOppnent), global::NFMsg.ReqSearchOppnent.Parser, new[]{ "self_scene", "diamond", "battle_point", "friends" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::NFMsg.AckSearchOppnent), global::NFMsg.AckSearchOppnent.Parser, new[]{ "scene_id", "team_id", "team_members", "opponent", "buildings" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::NFMsg.ReqEndBattle), global::NFMsg.ReqEndBattle.Parser, new[]{ "auto_end" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::NFMsg.AckEndBattle), global::NFMsg.AckEndBattle.Parser, new[]{ "win", "star", "gold", "exp", "diamond", "single", "team_id", "match_id", "members", "item_list" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::NFMsg.AckEndBattle), global::NFMsg.AckEndBattle.Parser, new[]{ "win", "star", "gold", "cup", "diamond", "single", "team_id", "match_id", "members", "item_list" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::NFMsg.ReqSendMail), global::NFMsg.ReqSendMail.Parser, new[]{ "reciever", "item_list", "currency_list" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::NFMsg.ReqSwitchServer), global::NFMsg.ReqSwitchServer.Parser, new[]{ "selfid", "self_serverid", "target_serverid", "gate_serverid", "SceneID", "client_id", "groupID" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::NFMsg.AckSwitchServer), global::NFMsg.AckSwitchServer.Parser, new[]{ "selfid", "self_serverid", "target_serverid", "gate_serverid" }, null, null, null)
@@ -8692,7 +8692,7 @@ namespace NFMsg {
       win_ = other.win_;
       star_ = other.star_;
       gold_ = other.gold_;
-      exp_ = other.exp_;
+      cup_ = other.cup_;
       diamond_ = other.diamond_;
       single_ = other.single_;
       teamId_ = other.teamId_ != null ? other.teamId_.Clone() : null;
@@ -8749,17 +8749,17 @@ namespace NFMsg {
       }
     }
 
-    /// <summary>Field number for the "exp" field.</summary>
-    public const int expFieldNumber = 4;
-    private int exp_;
+    /// <summary>Field number for the "cup" field.</summary>
+    public const int cupFieldNumber = 4;
+    private int cup_;
     /// <summary>
     /// 副本获得的经验
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public int exp {
-      get { return exp_; }
+    public int cup {
+      get { return cup_; }
       set {
-        exp_ = value;
+        cup_ = value;
       }
     }
 
@@ -8850,7 +8850,7 @@ namespace NFMsg {
       if (win != other.win) return false;
       if (star != other.star) return false;
       if (gold != other.gold) return false;
-      if (exp != other.exp) return false;
+      if (cup != other.cup) return false;
       if (diamond != other.diamond) return false;
       if (single != other.single) return false;
       if (!object.Equals(team_id, other.team_id)) return false;
@@ -8866,7 +8866,7 @@ namespace NFMsg {
       if (win != 0) hash ^= win.GetHashCode();
       if (star != 0) hash ^= star.GetHashCode();
       if (gold != 0) hash ^= gold.GetHashCode();
-      if (exp != 0) hash ^= exp.GetHashCode();
+      if (cup != 0) hash ^= cup.GetHashCode();
       if (diamond != 0) hash ^= diamond.GetHashCode();
       if (single != 0) hash ^= single.GetHashCode();
       if (teamId_ != null) hash ^= team_id.GetHashCode();
@@ -8898,9 +8898,9 @@ namespace NFMsg {
         output.WriteRawTag(24);
         output.WriteInt32(gold);
       }
-      if (exp != 0) {
+      if (cup != 0) {
         output.WriteRawTag(32);
-        output.WriteInt32(exp);
+        output.WriteInt32(cup);
       }
       if (diamond != 0) {
         output.WriteRawTag(40);
@@ -8937,8 +8937,8 @@ namespace NFMsg {
       if (gold != 0) {
         size += 1 + pb::CodedOutputStream.ComputeInt32Size(gold);
       }
-      if (exp != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeInt32Size(exp);
+      if (cup != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(cup);
       }
       if (diamond != 0) {
         size += 1 + pb::CodedOutputStream.ComputeInt32Size(diamond);
@@ -8974,8 +8974,8 @@ namespace NFMsg {
       if (other.gold != 0) {
         gold = other.gold;
       }
-      if (other.exp != 0) {
-        exp = other.exp;
+      if (other.cup != 0) {
+        cup = other.cup;
       }
       if (other.diamond != 0) {
         diamond = other.diamond;
@@ -9021,7 +9021,7 @@ namespace NFMsg {
             break;
           }
           case 32: {
-            exp = input.ReadInt32();
+            cup = input.ReadInt32();
             break;
           }
           case 40: {

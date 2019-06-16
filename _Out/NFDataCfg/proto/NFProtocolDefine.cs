@@ -286,6 +286,24 @@ namespace NFrame
 		// Record
 
 	}
+	public class Group
+	{
+		//Class name
+		public static readonly String ThisName = "Group";
+		// IObject
+		public static readonly String ClassName = "ClassName";// string
+		public static readonly String ConfigID = "ConfigID";// string
+		public static readonly String GroupID = "GroupID";// int
+		public static readonly String ID = "ID";// string
+		public static readonly String MoveTo = "MoveTo";// vector3
+		public static readonly String Position = "Position";// vector3
+		public static readonly String SceneID = "SceneID";// int
+		// Property
+		public static readonly String ActorID = "ActorID";// int
+		public static readonly String Width = "Width";// int
+		// Record
+
+	}
 	public class IObject
 	{
 		//Class name

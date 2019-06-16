@@ -24,10 +24,13 @@
 */
 
 #include "NFKernelModule.h"
+#include "NFSceneModule.h"
 #include "NFComm/NFCore/NFMemManager.hpp"
 #include "NFComm/NFCore/NFObject.h"
 #include "NFComm/NFCore/NFRecord.h"
 #include "NFComm/NFCore/NFPerformance.hpp"
+#include "NFComm/NFCore/NFPropertyManager.h"
+#include "NFComm/NFCore/NFRecordManager.h"
 #include "NFComm/NFPluginModule/NFGUID.h"
 #include "NFComm/NFMessageDefine/NFProtocolDefine.hpp"
 
@@ -994,8 +997,9 @@ bool NFKernelModule::CreateScene(const int nSceneID)
 	if (pSceneInfo)
 	{
 		m_pSceneModule->AddElement(nSceneID, pSceneInfo);
-
-		NF_SHARE_PTR<NFSceneGroupInfo> pGroupInfo = NF_SHARE_PTR<NFSceneGroupInfo>(NF_NEW NFSceneGroupInfo(nSceneID, 0));
+		NF_SHARE_PTR<NFIPropertyManager> pPropertyManager(NF_NEW NFPropertyManager(NFGUID(nSceneID, 0)));
+		NF_SHARE_PTR<NFIRecordManager> pRecordManager(NF_NEW NFRecordManager(NFGUID(nSceneID, 0)));
+		NF_SHARE_PTR<NFSceneGroupInfo> pGroupInfo = NF_SHARE_PTR<NFSceneGroupInfo>(NF_NEW NFSceneGroupInfo(nSceneID, 0, pPropertyManager, pRecordManager));
 		if (NULL != pGroupInfo)
 		{
 			pSceneInfo->AddElement(0, pGroupInfo);
@@ -1045,46 +1049,12 @@ int NFKernelModule::GetMaxOnLineCount()
 
 int NFKernelModule::RequestGroupScene(const int nSceneID)
 {
-	NF_SHARE_PTR<NFSceneInfo> pSceneInfo = m_pSceneModule->GetElement(nSceneID);
-	if (pSceneInfo)
-	{
-		int nNewGroupID = pSceneInfo->NewGroupID();
-		NF_SHARE_PTR<NFSceneInfo> pSceneInfo = m_pSceneModule->GetElement(nSceneID);
-		if (pSceneInfo)
-		{
-			if (!pSceneInfo->GetElement(nNewGroupID))
-			{
-				NF_SHARE_PTR<NFSceneGroupInfo> pGroupInfo(NF_NEW NFSceneGroupInfo(nSceneID, nNewGroupID, pSceneInfo->GetWidth()));
-				if (pGroupInfo)
-				{
-					pSceneInfo->AddElement(nNewGroupID, pGroupInfo);
-
-					m_pCellModule->CreateGroupCell(nSceneID, nNewGroupID);
-					return nNewGroupID;
-				}
-			}
-		}
-	}
-
-	return -1;
+	return m_pSceneModule->RequestGroupScene(nSceneID);
 }
 
 bool NFKernelModule::ReleaseGroupScene(const int nSceneID, const int nGroupID)
 {
-	NF_SHARE_PTR<NFSceneInfo> pSceneInfo = m_pSceneModule->GetElement(nSceneID);
-	if (pSceneInfo)
-	{
-		if (nGroupID > 0)
-		{
-			m_pSceneModule->DestroySceneNPC(nSceneID, nGroupID);
-
-			m_pCellModule->DestroyGroupCell(nSceneID, nGroupID);
-
-			pSceneInfo->RemoveElement(nGroupID);
-		}
-	}
-
-	return false;
+	return m_pSceneModule->ReleaseGroupScene(nSceneID, nGroupID);
 }
 
 bool NFKernelModule::ExitGroupScene(const int nSceneID, const int nGroupID)

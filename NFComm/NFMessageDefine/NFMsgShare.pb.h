@@ -6261,11 +6261,11 @@ class LIBPROTOC_EXPORT AckEndBattle : public ::google::protobuf::Message /* @@pr
   ::google::protobuf::int32 gold() const;
   void set_gold(::google::protobuf::int32 value);
 
-  // int32 exp = 4;
-  void clear_exp();
-  static const int kExpFieldNumber = 4;
-  ::google::protobuf::int32 exp() const;
-  void set_exp(::google::protobuf::int32 value);
+  // int32 cup = 4;
+  void clear_cup();
+  static const int kCupFieldNumber = 4;
+  ::google::protobuf::int32 cup() const;
+  void set_cup(::google::protobuf::int32 value);
 
   // int32 diamond = 5;
   void clear_diamond();
@@ -6290,7 +6290,7 @@ class LIBPROTOC_EXPORT AckEndBattle : public ::google::protobuf::Message /* @@pr
   ::google::protobuf::int32 win_;
   ::google::protobuf::int32 star_;
   ::google::protobuf::int32 gold_;
-  ::google::protobuf::int32 exp_;
+  ::google::protobuf::int32 cup_;
   ::google::protobuf::int32 diamond_;
   ::google::protobuf::int32 single_;
   mutable ::google::protobuf::internal::CachedSize _cached_size_;
@@ -11500,18 +11500,18 @@ inline void AckEndBattle::set_gold(::google::protobuf::int32 value) {
   // @@protoc_insertion_point(field_set:NFMsg.AckEndBattle.gold)
 }
 
-// int32 exp = 4;
-inline void AckEndBattle::clear_exp() {
-  exp_ = 0;
+// int32 cup = 4;
+inline void AckEndBattle::clear_cup() {
+  cup_ = 0;
 }
-inline ::google::protobuf::int32 AckEndBattle::exp() const {
-  // @@protoc_insertion_point(field_get:NFMsg.AckEndBattle.exp)
-  return exp_;
+inline ::google::protobuf::int32 AckEndBattle::cup() const {
+  // @@protoc_insertion_point(field_get:NFMsg.AckEndBattle.cup)
+  return cup_;
 }
-inline void AckEndBattle::set_exp(::google::protobuf::int32 value) {
+inline void AckEndBattle::set_cup(::google::protobuf::int32 value) {
   
-  exp_ = value;
-  // @@protoc_insertion_point(field_set:NFMsg.AckEndBattle.exp)
+  cup_ = value;
+  // @@protoc_insertion_point(field_set:NFMsg.AckEndBattle.cup)
 }
 
 // int32 diamond = 5;

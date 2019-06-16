@@ -1367,7 +1367,7 @@ const ::google::protobuf::uint32 TableStruct::offsets[] GOOGLE_PROTOBUF_ATTRIBUT
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NFMsg::AckEndBattle, win_),
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NFMsg::AckEndBattle, star_),
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NFMsg::AckEndBattle, gold_),
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NFMsg::AckEndBattle, exp_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NFMsg::AckEndBattle, cup_),
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NFMsg::AckEndBattle, diamond_),
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NFMsg::AckEndBattle, single_),
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NFMsg::AckEndBattle, team_id_),
@@ -1647,7 +1647,7 @@ void AddDescriptorsImpl() {
       "\tbuildings\030\024 \003(\0132\032.NFMsg.ReqAddSceneBuil"
       "ding\" \n\014ReqEndBattle\022\020\n\010auto_end\030\001 \001(\005\"\351"
       "\001\n\014AckEndBattle\022\013\n\003win\030\001 \001(\005\022\014\n\004star\030\002 \001"
-      "(\005\022\014\n\004gold\030\003 \001(\005\022\013\n\003exp\030\004 \001(\005\022\017\n\007diamond"
+      "(\005\022\014\n\004gold\030\003 \001(\005\022\013\n\003cup\030\004 \001(\005\022\017\n\007diamond"
       "\030\005 \001(\005\022\016\n\006single\030\006 \001(\005\022\035\n\007team_id\030\007 \001(\0132"
       "\014.NFMsg.Ident\022\036\n\010match_id\030\010 \001(\0132\014.NFMsg."
       "Ident\022\035\n\007members\030\t \003(\0132\014.NFMsg.Ident\022$\n\t"
@@ -15909,7 +15909,7 @@ void AckEndBattle::clear_members() {
 const int AckEndBattle::kWinFieldNumber;
 const int AckEndBattle::kStarFieldNumber;
 const int AckEndBattle::kGoldFieldNumber;
-const int AckEndBattle::kExpFieldNumber;
+const int AckEndBattle::kCupFieldNumber;
 const int AckEndBattle::kDiamondFieldNumber;
 const int AckEndBattle::kSingleFieldNumber;
 const int AckEndBattle::kTeamIdFieldNumber;
@@ -16051,14 +16051,14 @@ bool AckEndBattle::MergePartialFromCodedStream(
         break;
       }
 
-      // int32 exp = 4;
+      // int32 cup = 4;
       case 4: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
             static_cast< ::google::protobuf::uint8>(32u /* 32 & 0xFF */)) {
 
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
-                 input, &exp_)));
+                 input, &cup_)));
         } else {
           goto handle_unusual;
         }
@@ -16182,9 +16182,9 @@ void AckEndBattle::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormatLite::WriteInt32(3, this->gold(), output);
   }
 
-  // int32 exp = 4;
-  if (this->exp() != 0) {
-    ::google::protobuf::internal::WireFormatLite::WriteInt32(4, this->exp(), output);
+  // int32 cup = 4;
+  if (this->cup() != 0) {
+    ::google::protobuf::internal::WireFormatLite::WriteInt32(4, this->cup(), output);
   }
 
   // int32 diamond = 5;
@@ -16256,9 +16256,9 @@ void AckEndBattle::SerializeWithCachedSizes(
     target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(3, this->gold(), target);
   }
 
-  // int32 exp = 4;
-  if (this->exp() != 0) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(4, this->exp(), target);
+  // int32 cup = 4;
+  if (this->cup() != 0) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(4, this->cup(), target);
   }
 
   // int32 diamond = 5;
@@ -16375,11 +16375,11 @@ size_t AckEndBattle::ByteSizeLong() const {
         this->gold());
   }
 
-  // int32 exp = 4;
-  if (this->exp() != 0) {
+  // int32 cup = 4;
+  if (this->cup() != 0) {
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::Int32Size(
-        this->exp());
+        this->cup());
   }
 
   // int32 diamond = 5;
@@ -16440,8 +16440,8 @@ void AckEndBattle::MergeFrom(const AckEndBattle& from) {
   if (from.gold() != 0) {
     set_gold(from.gold());
   }
-  if (from.exp() != 0) {
-    set_exp(from.exp());
+  if (from.cup() != 0) {
+    set_cup(from.cup());
   }
   if (from.diamond() != 0) {
     set_diamond(from.diamond());
@@ -16482,7 +16482,7 @@ void AckEndBattle::InternalSwap(AckEndBattle* other) {
   swap(win_, other->win_);
   swap(star_, other->star_);
   swap(gold_, other->gold_);
-  swap(exp_, other->exp_);
+  swap(cup_, other->cup_);
   swap(diamond_, other->diamond_);
   swap(single_, other->single_);
   _internal_metadata_.Swap(&other->_internal_metadata_);
