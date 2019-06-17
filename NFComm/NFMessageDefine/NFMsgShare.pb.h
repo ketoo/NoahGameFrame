@@ -5570,9 +5570,9 @@ class LIBPROTOC_EXPORT PVPPlayerInfo : public ::google::protobuf::Message /* @@p
   ::std::string* release_head();
   void set_allocated_head(::std::string* head);
 
-  // bytes hero_cnf1 = 8;
+  // bytes hero_cnf1 = 20;
   void clear_hero_cnf1();
-  static const int kHeroCnf1FieldNumber = 8;
+  static const int kHeroCnf1FieldNumber = 20;
   const ::std::string& hero_cnf1() const;
   void set_hero_cnf1(const ::std::string& value);
   #if LANG_CXX11
@@ -5584,9 +5584,9 @@ class LIBPROTOC_EXPORT PVPPlayerInfo : public ::google::protobuf::Message /* @@p
   ::std::string* release_hero_cnf1();
   void set_allocated_hero_cnf1(::std::string* hero_cnf1);
 
-  // bytes hero_cnf2 = 9;
+  // bytes hero_cnf2 = 21;
   void clear_hero_cnf2();
-  static const int kHeroCnf2FieldNumber = 9;
+  static const int kHeroCnf2FieldNumber = 21;
   const ::std::string& hero_cnf2() const;
   void set_hero_cnf2(const ::std::string& value);
   #if LANG_CXX11
@@ -5598,9 +5598,9 @@ class LIBPROTOC_EXPORT PVPPlayerInfo : public ::google::protobuf::Message /* @@p
   ::std::string* release_hero_cnf2();
   void set_allocated_hero_cnf2(::std::string* hero_cnf2);
 
-  // bytes hero_cnf3 = 10;
+  // bytes hero_cnf3 = 22;
   void clear_hero_cnf3();
-  static const int kHeroCnf3FieldNumber = 10;
+  static const int kHeroCnf3FieldNumber = 22;
   const ::std::string& hero_cnf3() const;
   void set_hero_cnf3(const ::std::string& value);
   #if LANG_CXX11
@@ -5624,10 +5624,10 @@ class LIBPROTOC_EXPORT PVPPlayerInfo : public ::google::protobuf::Message /* @@p
   ::NFMsg::Ident* mutable_id();
   void set_allocated_id(::NFMsg::Ident* id);
 
-  // .NFMsg.Ident hero_id1 = 20;
+  // .NFMsg.Ident hero_id1 = 28;
   bool has_hero_id1() const;
   void clear_hero_id1();
-  static const int kHeroId1FieldNumber = 20;
+  static const int kHeroId1FieldNumber = 28;
   private:
   const ::NFMsg::Ident& _internal_hero_id1() const;
   public:
@@ -5636,10 +5636,10 @@ class LIBPROTOC_EXPORT PVPPlayerInfo : public ::google::protobuf::Message /* @@p
   ::NFMsg::Ident* mutable_hero_id1();
   void set_allocated_hero_id1(::NFMsg::Ident* hero_id1);
 
-  // .NFMsg.Ident hero_id2 = 21;
+  // .NFMsg.Ident hero_id2 = 29;
   bool has_hero_id2() const;
   void clear_hero_id2();
-  static const int kHeroId2FieldNumber = 21;
+  static const int kHeroId2FieldNumber = 29;
   private:
   const ::NFMsg::Ident& _internal_hero_id2() const;
   public:
@@ -5648,10 +5648,10 @@ class LIBPROTOC_EXPORT PVPPlayerInfo : public ::google::protobuf::Message /* @@p
   ::NFMsg::Ident* mutable_hero_id2();
   void set_allocated_hero_id2(::NFMsg::Ident* hero_id2);
 
-  // .NFMsg.Ident hero_id3 = 22;
+  // .NFMsg.Ident hero_id3 = 30;
   bool has_hero_id3() const;
   void clear_hero_id3();
-  static const int kHeroId3FieldNumber = 22;
+  static const int kHeroId3FieldNumber = 30;
   private:
   const ::NFMsg::Ident& _internal_hero_id3() const;
   public:
@@ -5678,21 +5678,33 @@ class LIBPROTOC_EXPORT PVPPlayerInfo : public ::google::protobuf::Message /* @@p
   ::google::protobuf::int32 battle_point() const;
   void set_battle_point(::google::protobuf::int32 value);
 
-  // int32 hero_star1 = 11;
+  // int32 gold = 8;
+  void clear_gold();
+  static const int kGoldFieldNumber = 8;
+  ::google::protobuf::int32 gold() const;
+  void set_gold(::google::protobuf::int32 value);
+
+  // int32 diamond = 9;
+  void clear_diamond();
+  static const int kDiamondFieldNumber = 9;
+  ::google::protobuf::int32 diamond() const;
+  void set_diamond(::google::protobuf::int32 value);
+
+  // int32 hero_star1 = 25;
   void clear_hero_star1();
-  static const int kHeroStar1FieldNumber = 11;
+  static const int kHeroStar1FieldNumber = 25;
   ::google::protobuf::int32 hero_star1() const;
   void set_hero_star1(::google::protobuf::int32 value);
 
-  // int32 hero_star2 = 12;
+  // int32 hero_star2 = 26;
   void clear_hero_star2();
-  static const int kHeroStar2FieldNumber = 12;
+  static const int kHeroStar2FieldNumber = 26;
   ::google::protobuf::int32 hero_star2() const;
   void set_hero_star2(::google::protobuf::int32 value);
 
-  // int32 hero_star3 = 13;
+  // int32 hero_star3 = 27;
   void clear_hero_star3();
-  static const int kHeroStar3FieldNumber = 13;
+  static const int kHeroStar3FieldNumber = 27;
   ::google::protobuf::int32 hero_star3() const;
   void set_hero_star3(::google::protobuf::int32 value);
 
@@ -5712,6 +5724,8 @@ class LIBPROTOC_EXPORT PVPPlayerInfo : public ::google::protobuf::Message /* @@p
   ::google::protobuf::int32 single_;
   ::google::protobuf::int32 level_;
   ::google::protobuf::int32 battle_point_;
+  ::google::protobuf::int32 gold_;
+  ::google::protobuf::int32 diamond_;
   ::google::protobuf::int32 hero_star1_;
   ::google::protobuf::int32 hero_star2_;
   ::google::protobuf::int32 hero_star3_;
@@ -5991,6 +6005,12 @@ class LIBPROTOC_EXPORT AckSearchOppnent : public ::google::protobuf::Message /* 
   ::google::protobuf::int32 scene_id() const;
   void set_scene_id(::google::protobuf::int32 value);
 
+  // int32 gamble_diamond = 3;
+  void clear_gamble_diamond();
+  static const int kGambleDiamondFieldNumber = 3;
+  ::google::protobuf::int32 gamble_diamond() const;
+  void set_gamble_diamond(::google::protobuf::int32 value);
+
   // @@protoc_insertion_point(class_scope:NFMsg.AckSearchOppnent)
  private:
 
@@ -6000,6 +6020,7 @@ class LIBPROTOC_EXPORT AckSearchOppnent : public ::google::protobuf::Message /* 
   ::NFMsg::Ident* team_id_;
   ::NFMsg::PVPPlayerInfo* opponent_;
   ::google::protobuf::int32 scene_id_;
+  ::google::protobuf::int32 gamble_diamond_;
   mutable ::google::protobuf::internal::CachedSize _cached_size_;
   friend struct ::protobuf_NFMsgShare_2eproto::TableStruct;
 };
@@ -10841,7 +10862,35 @@ inline void PVPPlayerInfo::set_allocated_head(::std::string* head) {
   // @@protoc_insertion_point(field_set_allocated:NFMsg.PVPPlayerInfo.head)
 }
 
-// bytes hero_cnf1 = 8;
+// int32 gold = 8;
+inline void PVPPlayerInfo::clear_gold() {
+  gold_ = 0;
+}
+inline ::google::protobuf::int32 PVPPlayerInfo::gold() const {
+  // @@protoc_insertion_point(field_get:NFMsg.PVPPlayerInfo.gold)
+  return gold_;
+}
+inline void PVPPlayerInfo::set_gold(::google::protobuf::int32 value) {
+  
+  gold_ = value;
+  // @@protoc_insertion_point(field_set:NFMsg.PVPPlayerInfo.gold)
+}
+
+// int32 diamond = 9;
+inline void PVPPlayerInfo::clear_diamond() {
+  diamond_ = 0;
+}
+inline ::google::protobuf::int32 PVPPlayerInfo::diamond() const {
+  // @@protoc_insertion_point(field_get:NFMsg.PVPPlayerInfo.diamond)
+  return diamond_;
+}
+inline void PVPPlayerInfo::set_diamond(::google::protobuf::int32 value) {
+  
+  diamond_ = value;
+  // @@protoc_insertion_point(field_set:NFMsg.PVPPlayerInfo.diamond)
+}
+
+// bytes hero_cnf1 = 20;
 inline void PVPPlayerInfo::clear_hero_cnf1() {
   hero_cnf1_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
@@ -10894,7 +10943,7 @@ inline void PVPPlayerInfo::set_allocated_hero_cnf1(::std::string* hero_cnf1) {
   // @@protoc_insertion_point(field_set_allocated:NFMsg.PVPPlayerInfo.hero_cnf1)
 }
 
-// bytes hero_cnf2 = 9;
+// bytes hero_cnf2 = 21;
 inline void PVPPlayerInfo::clear_hero_cnf2() {
   hero_cnf2_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
@@ -10947,7 +10996,7 @@ inline void PVPPlayerInfo::set_allocated_hero_cnf2(::std::string* hero_cnf2) {
   // @@protoc_insertion_point(field_set_allocated:NFMsg.PVPPlayerInfo.hero_cnf2)
 }
 
-// bytes hero_cnf3 = 10;
+// bytes hero_cnf3 = 22;
 inline void PVPPlayerInfo::clear_hero_cnf3() {
   hero_cnf3_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
@@ -11000,7 +11049,7 @@ inline void PVPPlayerInfo::set_allocated_hero_cnf3(::std::string* hero_cnf3) {
   // @@protoc_insertion_point(field_set_allocated:NFMsg.PVPPlayerInfo.hero_cnf3)
 }
 
-// int32 hero_star1 = 11;
+// int32 hero_star1 = 25;
 inline void PVPPlayerInfo::clear_hero_star1() {
   hero_star1_ = 0;
 }
@@ -11014,7 +11063,7 @@ inline void PVPPlayerInfo::set_hero_star1(::google::protobuf::int32 value) {
   // @@protoc_insertion_point(field_set:NFMsg.PVPPlayerInfo.hero_star1)
 }
 
-// int32 hero_star2 = 12;
+// int32 hero_star2 = 26;
 inline void PVPPlayerInfo::clear_hero_star2() {
   hero_star2_ = 0;
 }
@@ -11028,7 +11077,7 @@ inline void PVPPlayerInfo::set_hero_star2(::google::protobuf::int32 value) {
   // @@protoc_insertion_point(field_set:NFMsg.PVPPlayerInfo.hero_star2)
 }
 
-// int32 hero_star3 = 13;
+// int32 hero_star3 = 27;
 inline void PVPPlayerInfo::clear_hero_star3() {
   hero_star3_ = 0;
 }
@@ -11042,7 +11091,7 @@ inline void PVPPlayerInfo::set_hero_star3(::google::protobuf::int32 value) {
   // @@protoc_insertion_point(field_set:NFMsg.PVPPlayerInfo.hero_star3)
 }
 
-// .NFMsg.Ident hero_id1 = 20;
+// .NFMsg.Ident hero_id1 = 28;
 inline bool PVPPlayerInfo::has_hero_id1() const {
   return this != internal_default_instance() && hero_id1_ != NULL;
 }
@@ -11090,7 +11139,7 @@ inline void PVPPlayerInfo::set_allocated_hero_id1(::NFMsg::Ident* hero_id1) {
   // @@protoc_insertion_point(field_set_allocated:NFMsg.PVPPlayerInfo.hero_id1)
 }
 
-// .NFMsg.Ident hero_id2 = 21;
+// .NFMsg.Ident hero_id2 = 29;
 inline bool PVPPlayerInfo::has_hero_id2() const {
   return this != internal_default_instance() && hero_id2_ != NULL;
 }
@@ -11138,7 +11187,7 @@ inline void PVPPlayerInfo::set_allocated_hero_id2(::NFMsg::Ident* hero_id2) {
   // @@protoc_insertion_point(field_set_allocated:NFMsg.PVPPlayerInfo.hero_id2)
 }
 
-// .NFMsg.Ident hero_id3 = 22;
+// .NFMsg.Ident hero_id3 = 30;
 inline bool PVPPlayerInfo::has_hero_id3() const {
   return this != internal_default_instance() && hero_id3_ != NULL;
 }
@@ -11323,6 +11372,20 @@ inline void AckSearchOppnent::set_allocated_team_id(::NFMsg::Ident* team_id) {
   }
   team_id_ = team_id;
   // @@protoc_insertion_point(field_set_allocated:NFMsg.AckSearchOppnent.team_id)
+}
+
+// int32 gamble_diamond = 3;
+inline void AckSearchOppnent::clear_gamble_diamond() {
+  gamble_diamond_ = 0;
+}
+inline ::google::protobuf::int32 AckSearchOppnent::gamble_diamond() const {
+  // @@protoc_insertion_point(field_get:NFMsg.AckSearchOppnent.gamble_diamond)
+  return gamble_diamond_;
+}
+inline void AckSearchOppnent::set_gamble_diamond(::google::protobuf::int32 value) {
+  
+  gamble_diamond_ = value;
+  // @@protoc_insertion_point(field_set:NFMsg.AckSearchOppnent.gamble_diamond)
 }
 
 // repeated .NFMsg.Ident team_members = 5;

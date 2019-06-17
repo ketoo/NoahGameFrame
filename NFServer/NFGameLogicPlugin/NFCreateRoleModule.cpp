@@ -116,7 +116,9 @@ void NFCreateRoleModule::OnClienEnterGameProcess(const NFSOCK nSockIndex, const 
 		//it should be rebind with proxy's netobject
 		m_pScheduleModule->RemoveSchedule(nRoleID, "DestroyPlayerOnTime");
 
-		const NFGUID matchID = m_pKernelModule->GetPropertyObject(nRoleID, NFrame::Player::MatchID());
+		const int sceneID = m_pKernelModule->GetPropertyInt(nRoleID, NFrame::Player::SceneID());
+		const int groupID = m_pKernelModule->GetPropertyInt(nRoleID, NFrame::Player::GroupID());
+		const NFGUID matchID = m_pSceneModule->GetPropertyObject(sceneID, groupID, NFrame::Group::MatchID());
 		if (!matchID.IsNull())
 		{
 			//reconnect to the match

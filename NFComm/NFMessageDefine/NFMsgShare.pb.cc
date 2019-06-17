@@ -1325,6 +1325,8 @@ const ::google::protobuf::uint32 TableStruct::offsets[] GOOGLE_PROTOBUF_ATTRIBUT
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NFMsg::PVPPlayerInfo, battle_point_),
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NFMsg::PVPPlayerInfo, name_),
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NFMsg::PVPPlayerInfo, head_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NFMsg::PVPPlayerInfo, gold_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NFMsg::PVPPlayerInfo, diamond_),
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NFMsg::PVPPlayerInfo, hero_cnf1_),
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NFMsg::PVPPlayerInfo, hero_cnf2_),
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NFMsg::PVPPlayerInfo, hero_cnf3_),
@@ -1350,6 +1352,7 @@ const ::google::protobuf::uint32 TableStruct::offsets[] GOOGLE_PROTOBUF_ATTRIBUT
   ~0u,  // no _weak_field_map_
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NFMsg::AckSearchOppnent, scene_id_),
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NFMsg::AckSearchOppnent, team_id_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NFMsg::AckSearchOppnent, gamble_diamond_),
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NFMsg::AckSearchOppnent, team_members_),
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NFMsg::AckSearchOppnent, opponent_),
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NFMsg::AckSearchOppnent, buildings_),
@@ -1444,13 +1447,13 @@ static const ::google::protobuf::internal::MigrationSchema schemas[] GOOGLE_PROT
   { 291, -1, sizeof(::NFMsg::ReqSwitchFightHero)},
   { 297, -1, sizeof(::NFMsg::ReqBuyItemFromShop)},
   { 304, -1, sizeof(::NFMsg::PVPPlayerInfo)},
-  { 324, -1, sizeof(::NFMsg::ReqSearchOppnent)},
-  { 333, -1, sizeof(::NFMsg::AckSearchOppnent)},
-  { 343, -1, sizeof(::NFMsg::ReqEndBattle)},
-  { 349, -1, sizeof(::NFMsg::AckEndBattle)},
-  { 364, -1, sizeof(::NFMsg::ReqSendMail)},
-  { 372, -1, sizeof(::NFMsg::ReqSwitchServer)},
-  { 384, -1, sizeof(::NFMsg::AckSwitchServer)},
+  { 326, -1, sizeof(::NFMsg::ReqSearchOppnent)},
+  { 335, -1, sizeof(::NFMsg::AckSearchOppnent)},
+  { 346, -1, sizeof(::NFMsg::ReqEndBattle)},
+  { 352, -1, sizeof(::NFMsg::AckEndBattle)},
+  { 367, -1, sizeof(::NFMsg::ReqSendMail)},
+  { 375, -1, sizeof(::NFMsg::ReqSwitchServer)},
+  { 387, -1, sizeof(::NFMsg::AckSwitchServer)},
 };
 
 static ::google::protobuf::Message const * const file_default_instances[] = {
@@ -1629,44 +1632,45 @@ void AddDescriptorsImpl() {
       "Ident\022\013\n\003Set\030\002 \001(\005\"2\n\022ReqSwitchFightHero"
       "\022\034\n\006Heroid\030\001 \001(\0132\014.NFMsg.Ident\"3\n\022ReqBuy"
       "ItemFromShop\022\016\n\006itemID\030\001 \001(\014\022\r\n\005count\030\002 "
-      "\001(\005\"\317\002\n\rPVPPlayerInfo\022\030\n\002id\030\001 \001(\0132\014.NFMs"
+      "\001(\005\"\356\002\n\rPVPPlayerInfo\022\030\n\002id\030\001 \001(\0132\014.NFMs"
       "g.Ident\022\016\n\006single\030\002 \001(\005\022\r\n\005level\030\004 \001(\005\022\024"
       "\n\014battle_point\030\005 \001(\005\022\014\n\004name\030\006 \001(\014\022\014\n\004he"
-      "ad\030\007 \001(\014\022\021\n\thero_cnf1\030\010 \001(\014\022\021\n\thero_cnf2"
-      "\030\t \001(\014\022\021\n\thero_cnf3\030\n \001(\014\022\022\n\nhero_star1\030"
-      "\013 \001(\005\022\022\n\nhero_star2\030\014 \001(\005\022\022\n\nhero_star3\030"
-      "\r \001(\005\022\036\n\010hero_id1\030\024 \001(\0132\014.NFMsg.Ident\022\036\n"
-      "\010hero_id2\030\025 \001(\0132\014.NFMsg.Ident\022\036\n\010hero_id"
-      "3\030\026 \001(\0132\014.NFMsg.Ident\"l\n\020ReqSearchOppnen"
-      "t\022\022\n\nself_scene\030\001 \001(\005\022\017\n\007diamond\030\002 \001(\005\022\024"
-      "\n\014battle_point\030\003 \001(\005\022\035\n\007friends\030\n \003(\0132\014."
-      "NFMsg.Ident\"\276\001\n\020AckSearchOppnent\022\020\n\010scen"
-      "e_id\030\001 \001(\005\022\035\n\007team_id\030\002 \001(\0132\014.NFMsg.Iden"
-      "t\022\"\n\014team_members\030\005 \003(\0132\014.NFMsg.Ident\022&\n"
-      "\010opponent\030\016 \001(\0132\024.NFMsg.PVPPlayerInfo\022-\n"
-      "\tbuildings\030\024 \003(\0132\032.NFMsg.ReqAddSceneBuil"
-      "ding\" \n\014ReqEndBattle\022\020\n\010auto_end\030\001 \001(\005\"\351"
-      "\001\n\014AckEndBattle\022\013\n\003win\030\001 \001(\005\022\014\n\004star\030\002 \001"
-      "(\005\022\014\n\004gold\030\003 \001(\005\022\013\n\003cup\030\004 \001(\005\022\017\n\007diamond"
-      "\030\005 \001(\005\022\016\n\006single\030\006 \001(\005\022\035\n\007team_id\030\007 \001(\0132"
-      "\014.NFMsg.Ident\022\036\n\010match_id\030\010 \001(\0132\014.NFMsg."
-      "Ident\022\035\n\007members\030\t \003(\0132\014.NFMsg.Ident\022$\n\t"
-      "item_list\030\n \003(\0132\021.NFMsg.ItemStruct\"\201\001\n\013R"
-      "eqSendMail\022\036\n\010reciever\030\001 \001(\0132\014.NFMsg.Ide"
-      "nt\022$\n\titem_list\030\002 \003(\0132\021.NFMsg.ItemStruct"
-      "\022,\n\rcurrency_list\030\003 \003(\0132\025.NFMsg.Currency"
-      "Struct\"\271\001\n\017ReqSwitchServer\022\034\n\006selfid\030\001 \001"
-      "(\0132\014.NFMsg.Ident\022\025\n\rself_serverid\030\002 \001(\003\022"
-      "\027\n\017target_serverid\030\003 \001(\003\022\025\n\rgate_serveri"
-      "d\030\004 \001(\003\022\017\n\007SceneID\030\005 \001(\003\022\037\n\tclient_id\030\006 "
-      "\001(\0132\014.NFMsg.Ident\022\017\n\007groupID\030\007 \001(\003\"v\n\017Ac"
-      "kSwitchServer\022\034\n\006selfid\030\001 \001(\0132\014.NFMsg.Id"
-      "ent\022\025\n\rself_serverid\030\002 \001(\003\022\027\n\017target_ser"
-      "verid\030\003 \001(\003\022\025\n\rgate_serverid\030\004 \001(\003b\006prot"
-      "o3"
+      "ad\030\007 \001(\014\022\014\n\004gold\030\010 \001(\005\022\017\n\007diamond\030\t \001(\005\022"
+      "\021\n\thero_cnf1\030\024 \001(\014\022\021\n\thero_cnf2\030\025 \001(\014\022\021\n"
+      "\thero_cnf3\030\026 \001(\014\022\022\n\nhero_star1\030\031 \001(\005\022\022\n\n"
+      "hero_star2\030\032 \001(\005\022\022\n\nhero_star3\030\033 \001(\005\022\036\n\010"
+      "hero_id1\030\034 \001(\0132\014.NFMsg.Ident\022\036\n\010hero_id2"
+      "\030\035 \001(\0132\014.NFMsg.Ident\022\036\n\010hero_id3\030\036 \001(\0132\014"
+      ".NFMsg.Ident\"l\n\020ReqSearchOppnent\022\022\n\nself"
+      "_scene\030\001 \001(\005\022\017\n\007diamond\030\002 \001(\005\022\024\n\014battle_"
+      "point\030\003 \001(\005\022\035\n\007friends\030\n \003(\0132\014.NFMsg.Ide"
+      "nt\"\326\001\n\020AckSearchOppnent\022\020\n\010scene_id\030\001 \001("
+      "\005\022\035\n\007team_id\030\002 \001(\0132\014.NFMsg.Ident\022\026\n\016gamb"
+      "le_diamond\030\003 \001(\005\022\"\n\014team_members\030\005 \003(\0132\014"
+      ".NFMsg.Ident\022&\n\010opponent\030\016 \001(\0132\024.NFMsg.P"
+      "VPPlayerInfo\022-\n\tbuildings\030\024 \003(\0132\032.NFMsg."
+      "ReqAddSceneBuilding\" \n\014ReqEndBattle\022\020\n\010a"
+      "uto_end\030\001 \001(\005\"\351\001\n\014AckEndBattle\022\013\n\003win\030\001 "
+      "\001(\005\022\014\n\004star\030\002 \001(\005\022\014\n\004gold\030\003 \001(\005\022\013\n\003cup\030\004"
+      " \001(\005\022\017\n\007diamond\030\005 \001(\005\022\016\n\006single\030\006 \001(\005\022\035\n"
+      "\007team_id\030\007 \001(\0132\014.NFMsg.Ident\022\036\n\010match_id"
+      "\030\010 \001(\0132\014.NFMsg.Ident\022\035\n\007members\030\t \003(\0132\014."
+      "NFMsg.Ident\022$\n\titem_list\030\n \003(\0132\021.NFMsg.I"
+      "temStruct\"\201\001\n\013ReqSendMail\022\036\n\010reciever\030\001 "
+      "\001(\0132\014.NFMsg.Ident\022$\n\titem_list\030\002 \003(\0132\021.N"
+      "FMsg.ItemStruct\022,\n\rcurrency_list\030\003 \003(\0132\025"
+      ".NFMsg.CurrencyStruct\"\271\001\n\017ReqSwitchServe"
+      "r\022\034\n\006selfid\030\001 \001(\0132\014.NFMsg.Ident\022\025\n\rself_"
+      "serverid\030\002 \001(\003\022\027\n\017target_serverid\030\003 \001(\003\022"
+      "\025\n\rgate_serverid\030\004 \001(\003\022\017\n\007SceneID\030\005 \001(\003\022"
+      "\037\n\tclient_id\030\006 \001(\0132\014.NFMsg.Ident\022\017\n\007grou"
+      "pID\030\007 \001(\003\"v\n\017AckSwitchServer\022\034\n\006selfid\030\001"
+      " \001(\0132\014.NFMsg.Ident\022\025\n\rself_serverid\030\002 \001("
+      "\003\022\027\n\017target_serverid\030\003 \001(\003\022\025\n\rgate_serve"
+      "rid\030\004 \001(\003b\006proto3"
   };
   ::google::protobuf::DescriptorPool::InternalAddGeneratedFile(
-      descriptor, 5602);
+      descriptor, 5657);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "NFMsgShare.proto", &protobuf_RegisterTypes);
   ::protobuf_NFDefine_2eproto::AddDescriptors();
@@ -14072,6 +14076,8 @@ const int PVPPlayerInfo::kLevelFieldNumber;
 const int PVPPlayerInfo::kBattlePointFieldNumber;
 const int PVPPlayerInfo::kNameFieldNumber;
 const int PVPPlayerInfo::kHeadFieldNumber;
+const int PVPPlayerInfo::kGoldFieldNumber;
+const int PVPPlayerInfo::kDiamondFieldNumber;
 const int PVPPlayerInfo::kHeroCnf1FieldNumber;
 const int PVPPlayerInfo::kHeroCnf2FieldNumber;
 const int PVPPlayerInfo::kHeroCnf3FieldNumber;
@@ -14303,10 +14309,38 @@ bool PVPPlayerInfo::MergePartialFromCodedStream(
         break;
       }
 
-      // bytes hero_cnf1 = 8;
+      // int32 gold = 8;
       case 8: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(66u /* 66 & 0xFF */)) {
+            static_cast< ::google::protobuf::uint8>(64u /* 64 & 0xFF */)) {
+
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
+                 input, &gold_)));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      // int32 diamond = 9;
+      case 9: {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(72u /* 72 & 0xFF */)) {
+
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
+                 input, &diamond_)));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      // bytes hero_cnf1 = 20;
+      case 20: {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(162u /* 162 & 0xFF */)) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadBytes(
                 input, this->mutable_hero_cnf1()));
         } else {
@@ -14315,10 +14349,10 @@ bool PVPPlayerInfo::MergePartialFromCodedStream(
         break;
       }
 
-      // bytes hero_cnf2 = 9;
-      case 9: {
+      // bytes hero_cnf2 = 21;
+      case 21: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(74u /* 74 & 0xFF */)) {
+            static_cast< ::google::protobuf::uint8>(170u /* 170 & 0xFF */)) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadBytes(
                 input, this->mutable_hero_cnf2()));
         } else {
@@ -14327,10 +14361,10 @@ bool PVPPlayerInfo::MergePartialFromCodedStream(
         break;
       }
 
-      // bytes hero_cnf3 = 10;
-      case 10: {
+      // bytes hero_cnf3 = 22;
+      case 22: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(82u /* 82 & 0xFF */)) {
+            static_cast< ::google::protobuf::uint8>(178u /* 178 & 0xFF */)) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadBytes(
                 input, this->mutable_hero_cnf3()));
         } else {
@@ -14339,10 +14373,10 @@ bool PVPPlayerInfo::MergePartialFromCodedStream(
         break;
       }
 
-      // int32 hero_star1 = 11;
-      case 11: {
+      // int32 hero_star1 = 25;
+      case 25: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(88u /* 88 & 0xFF */)) {
+            static_cast< ::google::protobuf::uint8>(200u /* 200 & 0xFF */)) {
 
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
@@ -14353,10 +14387,10 @@ bool PVPPlayerInfo::MergePartialFromCodedStream(
         break;
       }
 
-      // int32 hero_star2 = 12;
-      case 12: {
+      // int32 hero_star2 = 26;
+      case 26: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(96u /* 96 & 0xFF */)) {
+            static_cast< ::google::protobuf::uint8>(208u /* 208 & 0xFF */)) {
 
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
@@ -14367,10 +14401,10 @@ bool PVPPlayerInfo::MergePartialFromCodedStream(
         break;
       }
 
-      // int32 hero_star3 = 13;
-      case 13: {
+      // int32 hero_star3 = 27;
+      case 27: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(104u /* 104 & 0xFF */)) {
+            static_cast< ::google::protobuf::uint8>(216u /* 216 & 0xFF */)) {
 
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
@@ -14381,10 +14415,10 @@ bool PVPPlayerInfo::MergePartialFromCodedStream(
         break;
       }
 
-      // .NFMsg.Ident hero_id1 = 20;
-      case 20: {
+      // .NFMsg.Ident hero_id1 = 28;
+      case 28: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(162u /* 162 & 0xFF */)) {
+            static_cast< ::google::protobuf::uint8>(226u /* 226 & 0xFF */)) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadMessage(
                input, mutable_hero_id1()));
         } else {
@@ -14393,10 +14427,10 @@ bool PVPPlayerInfo::MergePartialFromCodedStream(
         break;
       }
 
-      // .NFMsg.Ident hero_id2 = 21;
-      case 21: {
+      // .NFMsg.Ident hero_id2 = 29;
+      case 29: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(170u /* 170 & 0xFF */)) {
+            static_cast< ::google::protobuf::uint8>(234u /* 234 & 0xFF */)) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadMessage(
                input, mutable_hero_id2()));
         } else {
@@ -14405,10 +14439,10 @@ bool PVPPlayerInfo::MergePartialFromCodedStream(
         break;
       }
 
-      // .NFMsg.Ident hero_id3 = 22;
-      case 22: {
+      // .NFMsg.Ident hero_id3 = 30;
+      case 30: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(178u /* 178 & 0xFF */)) {
+            static_cast< ::google::protobuf::uint8>(242u /* 242 & 0xFF */)) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadMessage(
                input, mutable_hero_id3()));
         } else {
@@ -14476,55 +14510,65 @@ void PVPPlayerInfo::SerializeWithCachedSizes(
       7, this->head(), output);
   }
 
-  // bytes hero_cnf1 = 8;
+  // int32 gold = 8;
+  if (this->gold() != 0) {
+    ::google::protobuf::internal::WireFormatLite::WriteInt32(8, this->gold(), output);
+  }
+
+  // int32 diamond = 9;
+  if (this->diamond() != 0) {
+    ::google::protobuf::internal::WireFormatLite::WriteInt32(9, this->diamond(), output);
+  }
+
+  // bytes hero_cnf1 = 20;
   if (this->hero_cnf1().size() > 0) {
     ::google::protobuf::internal::WireFormatLite::WriteBytesMaybeAliased(
-      8, this->hero_cnf1(), output);
+      20, this->hero_cnf1(), output);
   }
 
-  // bytes hero_cnf2 = 9;
+  // bytes hero_cnf2 = 21;
   if (this->hero_cnf2().size() > 0) {
     ::google::protobuf::internal::WireFormatLite::WriteBytesMaybeAliased(
-      9, this->hero_cnf2(), output);
+      21, this->hero_cnf2(), output);
   }
 
-  // bytes hero_cnf3 = 10;
+  // bytes hero_cnf3 = 22;
   if (this->hero_cnf3().size() > 0) {
     ::google::protobuf::internal::WireFormatLite::WriteBytesMaybeAliased(
-      10, this->hero_cnf3(), output);
+      22, this->hero_cnf3(), output);
   }
 
-  // int32 hero_star1 = 11;
+  // int32 hero_star1 = 25;
   if (this->hero_star1() != 0) {
-    ::google::protobuf::internal::WireFormatLite::WriteInt32(11, this->hero_star1(), output);
+    ::google::protobuf::internal::WireFormatLite::WriteInt32(25, this->hero_star1(), output);
   }
 
-  // int32 hero_star2 = 12;
+  // int32 hero_star2 = 26;
   if (this->hero_star2() != 0) {
-    ::google::protobuf::internal::WireFormatLite::WriteInt32(12, this->hero_star2(), output);
+    ::google::protobuf::internal::WireFormatLite::WriteInt32(26, this->hero_star2(), output);
   }
 
-  // int32 hero_star3 = 13;
+  // int32 hero_star3 = 27;
   if (this->hero_star3() != 0) {
-    ::google::protobuf::internal::WireFormatLite::WriteInt32(13, this->hero_star3(), output);
+    ::google::protobuf::internal::WireFormatLite::WriteInt32(27, this->hero_star3(), output);
   }
 
-  // .NFMsg.Ident hero_id1 = 20;
+  // .NFMsg.Ident hero_id1 = 28;
   if (this->has_hero_id1()) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      20, this->_internal_hero_id1(), output);
+      28, this->_internal_hero_id1(), output);
   }
 
-  // .NFMsg.Ident hero_id2 = 21;
+  // .NFMsg.Ident hero_id2 = 29;
   if (this->has_hero_id2()) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      21, this->_internal_hero_id2(), output);
+      29, this->_internal_hero_id2(), output);
   }
 
-  // .NFMsg.Ident hero_id3 = 22;
+  // .NFMsg.Ident hero_id3 = 30;
   if (this->has_hero_id3()) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      22, this->_internal_hero_id3(), output);
+      30, this->_internal_hero_id3(), output);
   }
 
   if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
@@ -14577,61 +14621,71 @@ void PVPPlayerInfo::SerializeWithCachedSizes(
         7, this->head(), target);
   }
 
-  // bytes hero_cnf1 = 8;
+  // int32 gold = 8;
+  if (this->gold() != 0) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(8, this->gold(), target);
+  }
+
+  // int32 diamond = 9;
+  if (this->diamond() != 0) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(9, this->diamond(), target);
+  }
+
+  // bytes hero_cnf1 = 20;
   if (this->hero_cnf1().size() > 0) {
     target =
       ::google::protobuf::internal::WireFormatLite::WriteBytesToArray(
-        8, this->hero_cnf1(), target);
+        20, this->hero_cnf1(), target);
   }
 
-  // bytes hero_cnf2 = 9;
+  // bytes hero_cnf2 = 21;
   if (this->hero_cnf2().size() > 0) {
     target =
       ::google::protobuf::internal::WireFormatLite::WriteBytesToArray(
-        9, this->hero_cnf2(), target);
+        21, this->hero_cnf2(), target);
   }
 
-  // bytes hero_cnf3 = 10;
+  // bytes hero_cnf3 = 22;
   if (this->hero_cnf3().size() > 0) {
     target =
       ::google::protobuf::internal::WireFormatLite::WriteBytesToArray(
-        10, this->hero_cnf3(), target);
+        22, this->hero_cnf3(), target);
   }
 
-  // int32 hero_star1 = 11;
+  // int32 hero_star1 = 25;
   if (this->hero_star1() != 0) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(11, this->hero_star1(), target);
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(25, this->hero_star1(), target);
   }
 
-  // int32 hero_star2 = 12;
+  // int32 hero_star2 = 26;
   if (this->hero_star2() != 0) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(12, this->hero_star2(), target);
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(26, this->hero_star2(), target);
   }
 
-  // int32 hero_star3 = 13;
+  // int32 hero_star3 = 27;
   if (this->hero_star3() != 0) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(13, this->hero_star3(), target);
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(27, this->hero_star3(), target);
   }
 
-  // .NFMsg.Ident hero_id1 = 20;
+  // .NFMsg.Ident hero_id1 = 28;
   if (this->has_hero_id1()) {
     target = ::google::protobuf::internal::WireFormatLite::
       InternalWriteMessageToArray(
-        20, this->_internal_hero_id1(), deterministic, target);
+        28, this->_internal_hero_id1(), deterministic, target);
   }
 
-  // .NFMsg.Ident hero_id2 = 21;
+  // .NFMsg.Ident hero_id2 = 29;
   if (this->has_hero_id2()) {
     target = ::google::protobuf::internal::WireFormatLite::
       InternalWriteMessageToArray(
-        21, this->_internal_hero_id2(), deterministic, target);
+        29, this->_internal_hero_id2(), deterministic, target);
   }
 
-  // .NFMsg.Ident hero_id3 = 22;
+  // .NFMsg.Ident hero_id3 = 30;
   if (this->has_hero_id3()) {
     target = ::google::protobuf::internal::WireFormatLite::
       InternalWriteMessageToArray(
-        22, this->_internal_hero_id3(), deterministic, target);
+        30, this->_internal_hero_id3(), deterministic, target);
   }
 
   if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
@@ -14665,23 +14719,23 @@ size_t PVPPlayerInfo::ByteSizeLong() const {
         this->head());
   }
 
-  // bytes hero_cnf1 = 8;
+  // bytes hero_cnf1 = 20;
   if (this->hero_cnf1().size() > 0) {
-    total_size += 1 +
+    total_size += 2 +
       ::google::protobuf::internal::WireFormatLite::BytesSize(
         this->hero_cnf1());
   }
 
-  // bytes hero_cnf2 = 9;
+  // bytes hero_cnf2 = 21;
   if (this->hero_cnf2().size() > 0) {
-    total_size += 1 +
+    total_size += 2 +
       ::google::protobuf::internal::WireFormatLite::BytesSize(
         this->hero_cnf2());
   }
 
-  // bytes hero_cnf3 = 10;
+  // bytes hero_cnf3 = 22;
   if (this->hero_cnf3().size() > 0) {
-    total_size += 1 +
+    total_size += 2 +
       ::google::protobuf::internal::WireFormatLite::BytesSize(
         this->hero_cnf3());
   }
@@ -14693,21 +14747,21 @@ size_t PVPPlayerInfo::ByteSizeLong() const {
         *id_);
   }
 
-  // .NFMsg.Ident hero_id1 = 20;
+  // .NFMsg.Ident hero_id1 = 28;
   if (this->has_hero_id1()) {
     total_size += 2 +
       ::google::protobuf::internal::WireFormatLite::MessageSize(
         *hero_id1_);
   }
 
-  // .NFMsg.Ident hero_id2 = 21;
+  // .NFMsg.Ident hero_id2 = 29;
   if (this->has_hero_id2()) {
     total_size += 2 +
       ::google::protobuf::internal::WireFormatLite::MessageSize(
         *hero_id2_);
   }
 
-  // .NFMsg.Ident hero_id3 = 22;
+  // .NFMsg.Ident hero_id3 = 30;
   if (this->has_hero_id3()) {
     total_size += 2 +
       ::google::protobuf::internal::WireFormatLite::MessageSize(
@@ -14735,23 +14789,37 @@ size_t PVPPlayerInfo::ByteSizeLong() const {
         this->battle_point());
   }
 
-  // int32 hero_star1 = 11;
-  if (this->hero_star1() != 0) {
+  // int32 gold = 8;
+  if (this->gold() != 0) {
     total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::Int32Size(
+        this->gold());
+  }
+
+  // int32 diamond = 9;
+  if (this->diamond() != 0) {
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::Int32Size(
+        this->diamond());
+  }
+
+  // int32 hero_star1 = 25;
+  if (this->hero_star1() != 0) {
+    total_size += 2 +
       ::google::protobuf::internal::WireFormatLite::Int32Size(
         this->hero_star1());
   }
 
-  // int32 hero_star2 = 12;
+  // int32 hero_star2 = 26;
   if (this->hero_star2() != 0) {
-    total_size += 1 +
+    total_size += 2 +
       ::google::protobuf::internal::WireFormatLite::Int32Size(
         this->hero_star2());
   }
 
-  // int32 hero_star3 = 13;
+  // int32 hero_star3 = 27;
   if (this->hero_star3() != 0) {
-    total_size += 1 +
+    total_size += 2 +
       ::google::protobuf::internal::WireFormatLite::Int32Size(
         this->hero_star3());
   }
@@ -14824,6 +14892,12 @@ void PVPPlayerInfo::MergeFrom(const PVPPlayerInfo& from) {
   if (from.battle_point() != 0) {
     set_battle_point(from.battle_point());
   }
+  if (from.gold() != 0) {
+    set_gold(from.gold());
+  }
+  if (from.diamond() != 0) {
+    set_diamond(from.diamond());
+  }
   if (from.hero_star1() != 0) {
     set_hero_star1(from.hero_star1());
   }
@@ -14876,6 +14950,8 @@ void PVPPlayerInfo::InternalSwap(PVPPlayerInfo* other) {
   swap(single_, other->single_);
   swap(level_, other->level_);
   swap(battle_point_, other->battle_point_);
+  swap(gold_, other->gold_);
+  swap(diamond_, other->diamond_);
   swap(hero_star1_, other->hero_star1_);
   swap(hero_star2_, other->hero_star2_);
   swap(hero_star3_, other->hero_star3_);
@@ -15257,6 +15333,7 @@ void AckSearchOppnent::clear_team_members() {
 #if !defined(_MSC_VER) || _MSC_VER >= 1900
 const int AckSearchOppnent::kSceneIdFieldNumber;
 const int AckSearchOppnent::kTeamIdFieldNumber;
+const int AckSearchOppnent::kGambleDiamondFieldNumber;
 const int AckSearchOppnent::kTeamMembersFieldNumber;
 const int AckSearchOppnent::kOpponentFieldNumber;
 const int AckSearchOppnent::kBuildingsFieldNumber;
@@ -15285,14 +15362,16 @@ AckSearchOppnent::AckSearchOppnent(const AckSearchOppnent& from)
   } else {
     opponent_ = NULL;
   }
-  scene_id_ = from.scene_id_;
+  ::memcpy(&scene_id_, &from.scene_id_,
+    static_cast<size_t>(reinterpret_cast<char*>(&gamble_diamond_) -
+    reinterpret_cast<char*>(&scene_id_)) + sizeof(gamble_diamond_));
   // @@protoc_insertion_point(copy_constructor:NFMsg.AckSearchOppnent)
 }
 
 void AckSearchOppnent::SharedCtor() {
   ::memset(&team_id_, 0, static_cast<size_t>(
-      reinterpret_cast<char*>(&scene_id_) -
-      reinterpret_cast<char*>(&team_id_)) + sizeof(scene_id_));
+      reinterpret_cast<char*>(&gamble_diamond_) -
+      reinterpret_cast<char*>(&team_id_)) + sizeof(gamble_diamond_));
 }
 
 AckSearchOppnent::~AckSearchOppnent() {
@@ -15335,7 +15414,9 @@ void AckSearchOppnent::Clear() {
     delete opponent_;
   }
   opponent_ = NULL;
-  scene_id_ = 0;
+  ::memset(&scene_id_, 0, static_cast<size_t>(
+      reinterpret_cast<char*>(&gamble_diamond_) -
+      reinterpret_cast<char*>(&scene_id_)) + sizeof(gamble_diamond_));
   _internal_metadata_.Clear();
 }
 
@@ -15369,6 +15450,20 @@ bool AckSearchOppnent::MergePartialFromCodedStream(
             static_cast< ::google::protobuf::uint8>(18u /* 18 & 0xFF */)) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadMessage(
                input, mutable_team_id()));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      // int32 gamble_diamond = 3;
+      case 3: {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(24u /* 24 & 0xFF */)) {
+
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
+                 input, &gamble_diamond_)));
         } else {
           goto handle_unusual;
         }
@@ -15448,6 +15543,11 @@ void AckSearchOppnent::SerializeWithCachedSizes(
       2, this->_internal_team_id(), output);
   }
 
+  // int32 gamble_diamond = 3;
+  if (this->gamble_diamond() != 0) {
+    ::google::protobuf::internal::WireFormatLite::WriteInt32(3, this->gamble_diamond(), output);
+  }
+
   // repeated .NFMsg.Ident team_members = 5;
   for (unsigned int i = 0,
       n = static_cast<unsigned int>(this->team_members_size()); i < n; i++) {
@@ -15496,6 +15596,11 @@ void AckSearchOppnent::SerializeWithCachedSizes(
     target = ::google::protobuf::internal::WireFormatLite::
       InternalWriteMessageToArray(
         2, this->_internal_team_id(), deterministic, target);
+  }
+
+  // int32 gamble_diamond = 3;
+  if (this->gamble_diamond() != 0) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(3, this->gamble_diamond(), target);
   }
 
   // repeated .NFMsg.Ident team_members = 5;
@@ -15581,6 +15686,13 @@ size_t AckSearchOppnent::ByteSizeLong() const {
         this->scene_id());
   }
 
+  // int32 gamble_diamond = 3;
+  if (this->gamble_diamond() != 0) {
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::Int32Size(
+        this->gamble_diamond());
+  }
+
   int cached_size = ::google::protobuf::internal::ToCachedSize(total_size);
   SetCachedSize(cached_size);
   return total_size;
@@ -15619,6 +15731,9 @@ void AckSearchOppnent::MergeFrom(const AckSearchOppnent& from) {
   if (from.scene_id() != 0) {
     set_scene_id(from.scene_id());
   }
+  if (from.gamble_diamond() != 0) {
+    set_gamble_diamond(from.gamble_diamond());
+  }
 }
 
 void AckSearchOppnent::CopyFrom(const ::google::protobuf::Message& from) {
@@ -15650,6 +15765,7 @@ void AckSearchOppnent::InternalSwap(AckSearchOppnent* other) {
   swap(team_id_, other->team_id_);
   swap(opponent_, other->opponent_);
   swap(scene_id_, other->scene_id_);
+  swap(gamble_diamond_, other->gamble_diamond_);
   _internal_metadata_.Swap(&other->_internal_metadata_);
 }
 

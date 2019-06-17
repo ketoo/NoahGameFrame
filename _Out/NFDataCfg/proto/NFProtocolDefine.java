@@ -293,9 +293,36 @@ package nframe;
 		public static final String Position = "Position";// vector3
 		public static final String SceneID = "SceneID";// int
 		// Property
-		public static final String ActorID = "ActorID";// int
-		public static final String Width = "Width";// int
+		public static final String MatchDeathHero = "MatchDeathHero";// int
+		public static final String MatchGambleDiamond = "MatchGambleDiamond";// int
+		public static final String MatchID = "MatchID";// object
+		public static final String MatchKillHero = "MatchKillHero";// int
+		public static final String MatchOpponentCup = "MatchOpponentCup";// int
+		public static final String MatchOpponentDiamond = "MatchOpponentDiamond";// int
+		public static final String MatchOpponentGold = "MatchOpponentGold";// int
+		public static final String MatchOpponentHead = "MatchOpponentHead";// string
+		public static final String MatchOpponentHeroCnf1 = "MatchOpponentHeroCnf1";// string
+		public static final String MatchOpponentHeroCnf2 = "MatchOpponentHeroCnf2";// string
+		public static final String MatchOpponentHeroCnf3 = "MatchOpponentHeroCnf3";// string
+		public static final String MatchOpponentHeroID1 = "MatchOpponentHeroID1";// object
+		public static final String MatchOpponentHeroID2 = "MatchOpponentHeroID2";// object
+		public static final String MatchOpponentHeroID3 = "MatchOpponentHeroID3";// object
+		public static final String MatchOpponentHeroStar1 = "MatchOpponentHeroStar1";// int
+		public static final String MatchOpponentHeroStar2 = "MatchOpponentHeroStar2";// int
+		public static final String MatchOpponentHeroStar3 = "MatchOpponentHeroStar3";// int
+		public static final String MatchOpponentID = "MatchOpponentID";// object
+		public static final String MatchOpponentLevel = "MatchOpponentLevel";// int
+		public static final String MatchOpponentName = "MatchOpponentName";// string
+		public static final String MatchStar = "MatchStar";// int
+		public static final String MatchTeamID = "MatchTeamID";// object
 		// Record
+		public class MatchMember
+		{
+			//Class name
+			public static final String ThisName = "MatchMember";
+			public static final int GUID = 0;//object
+
+		}
 
 	}
 	public class IObject
@@ -600,10 +627,8 @@ package nframe;
 		public static final String EXP = "EXP";// int
 		public static final String FightHeroCnfID = "FightHeroCnfID";// string
 		public static final String FightHeroID = "FightHeroID";// object
-		public static final String FightHeroLevel = "FightHeroLevel";// int
 		public static final String FirstTarget = "FirstTarget";// object
 		public static final String GMLevel = "GMLevel";// int
-		public static final String GambleDiamond = "GambleDiamond";// int
 		public static final String GameID = "GameID";// int
 		public static final String GateID = "GateID";// int
 		public static final String Gold = "Gold";// int
@@ -624,13 +649,10 @@ package nframe;
 		public static final String HomeSceneID = "HomeSceneID";// int
 		public static final String Item1 = "Item1";// string
 		public static final String Item1Count = "Item1Count";// int
-		public static final String Item1UsedCount = "Item1UsedCount";// int
 		public static final String Item2 = "Item2";// string
 		public static final String Item2Count = "Item2Count";// int
-		public static final String Item2UsedCount = "Item2UsedCount";// int
 		public static final String Item3 = "Item3";// string
 		public static final String Item3Count = "Item3Count";// int
-		public static final String Item3UsedCount = "Item3UsedCount";// int
 		public static final String Job = "Job";// int
 		public static final String LUCK = "LUCK";// int
 		public static final String LastOfflineTime = "LastOfflineTime";// object
@@ -644,27 +666,9 @@ package nframe;
 		public static final String MOVE_SPEED = "MOVE_SPEED";// int
 		public static final String MP = "MP";// int
 		public static final String MPREGEN = "MPREGEN";// int
-		public static final String MatchID = "MatchID";// object
-		public static final String MatchPlayers = "MatchPlayers";// int
-		public static final String MatchStar = "MatchStar";// int
-		public static final String MatchTeamID = "MatchTeamID";// object
 		public static final String Name = "Name";// string
 		public static final String OnlineCount = "OnlineCount";// int
 		public static final String OnlineTime = "OnlineTime";// object
-		public static final String OpponentCup = "OpponentCup";// int
-		public static final String OpponentDiamond = "OpponentDiamond";// int
-		public static final String OpponentFighting = "OpponentFighting";// object
-		public static final String OpponentGold = "OpponentGold";// int
-		public static final String OpponentHead = "OpponentHead";// string
-		public static final String OpponentHero1 = "OpponentHero1";// string
-		public static final String OpponentHero2 = "OpponentHero2";// string
-		public static final String OpponentHero3 = "OpponentHero3";// string
-		public static final String OpponentHeroStar1 = "OpponentHeroStar1";// int
-		public static final String OpponentHeroStar2 = "OpponentHeroStar2";// int
-		public static final String OpponentHeroStar3 = "OpponentHeroStar3";// int
-		public static final String OpponentID = "OpponentID";// object
-		public static final String OpponentLevel = "OpponentLevel";// int
-		public static final String OpponentName = "OpponentName";// string
 		public static final String PHYSICAL_GATE = "PHYSICAL_GATE";// int
 		public static final String PrefabPath = "PrefabPath";// string
 		public static final String REFLECTDAMAGE = "REFLECTDAMAGE";// int
@@ -686,10 +690,6 @@ package nframe;
 		public static final String TotalTime = "TotalTime";// int
 		public static final String VIPEXP = "VIPEXP";// int
 		public static final String VIPLevel = "VIPLevel";// int
-		public static final String WarEventTime = "WarEventTime";// int
-		public static final String WinCup = "WinCup";// int
-		public static final String WinDiamond = "WinDiamond";// int
-		public static final String WinGold = "WinGold";// int
 		// Record
 		public class BagEquipList
 		{

@@ -349,20 +349,21 @@ message PVPPlayerInfo
 	int32 battle_point = 5;
 	bytes name = 6;
 	bytes head = 7;
+	int32 gold = 8;
+	int32 diamond = 9;
 	
-	bytes hero_cnf1 = 8;
-	bytes hero_cnf2 = 9;
-	bytes hero_cnf3 = 10;
+	bytes hero_cnf1 = 20;
+	bytes hero_cnf2 = 21;
+	bytes hero_cnf3 = 22;
 	
-	int32 hero_star1 = 11;
-	int32 hero_star2 = 12;
-	int32 hero_star3 = 13;
+	int32 hero_star1 = 25;
+	int32 hero_star2 = 26;
+	int32 hero_star3 = 27;
 	
 	
-	Ident hero_id1 = 20;
-	Ident hero_id2 = 21;
-	Ident hero_id3 = 22;
-	
+	Ident hero_id1 = 28;
+	Ident hero_id2 = 29;
+	Ident hero_id3 = 30;
 }
 
 
@@ -381,14 +382,13 @@ message AckSearchOppnent
 {
     int32 scene_id = 1;
 	Ident team_id = 2;
+	int32 gamble_diamond = 3;
 	repeated Ident team_members = 5;
 	
-	//PVPPlayerInfo player1 = 10;
-	//PVPPlayerInfo player2 = 11;
-	//PVPPlayerInfo player3 = 12;
 	PVPPlayerInfo opponent = 14;
 	
 	repeated ReqAddSceneBuilding buildings = 20;
+	
 }
 
 //EGMI_REQ_END_OPPNENT

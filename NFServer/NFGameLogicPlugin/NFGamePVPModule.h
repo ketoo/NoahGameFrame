@@ -83,34 +83,15 @@ protected:
 
 	int OnNPCClassEvent(const NFGUID& self, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFDataList& var);
 	int OnNPCHPEvent(const NFGUID& self, const std::string& strPropertyName, const NFData& oldVar, const NFData& newVar);
+	
+	int OnMatchKillsEvent(const NFGUID& self, const std::string& strPropertyName, const NFData& oldVar, const NFData& newVar);
+	int OnMatchDeathsEvent(const NFGUID& self, const std::string& strPropertyName, const NFData& oldVar, const NFData& newVar);
 
 	int OnPlayerClassEvent(const NFGUID& self, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFDataList& var);
 
 	void EndTheBattle(const NFGUID& self, const int autoEnd);
 
 protected:
-	class MatchData
-	{
-	public:
-		MatchData()
-		{
-			sceneID = 0;
-			groupID = 0;
-			deathHero = 0;
-		}
-
-		NFGUID teamID;
-		NFGUID matchID;
-
-		int sceneID;
-		int groupID;
-		int deathHero;
-		std::list<NFGUID> members;
-	};
-
-	//matchID, data
-	NFMapEx<NFGUID, MatchData> mMatchData;
-	std::map<NFGUID, NFGUID> mSceneMatchData;
 
 private:
 	
