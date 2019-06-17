@@ -300,6 +300,8 @@ public:
 	virtual const NFVector3& GetPropertyVector3(const int scene, const int group, const std::string& strPropertyName);
 
     //////////////////////////////////////////////////////////////////////////
+	virtual NF_SHARE_PTR<NFIPropertyManager> FindPropertyManager(const int scene, const int group);
+	virtual NF_SHARE_PTR<NFIRecordManager> FindRecordManager(const int scene, const int group);
     virtual NF_SHARE_PTR<NFIRecord> FindRecord(const int scene, const int group, const std::string& strRecordName);
     virtual bool ClearRecord(const int scene, const int group, const std::string& strRecordName);
 
@@ -333,9 +335,13 @@ public:
 
     ////////////////////////////////////////////////////////////////
 protected:
-	virtual bool AddGroupPropertyCallBack(const PROPERTY_EVENT_FUNCTOR_PTR& cb);
-	virtual bool AddGroupRecordCallBack(const RECORD_EVENT_FUNCTOR_PTR& cb);
+	//for scene && group
+	virtual bool AddGroupPropertyCallBack(const std::string& strName, const PROPERTY_EVENT_FUNCTOR_PTR& cb);
+	virtual bool AddGroupRecordCallBack(const std::string& strName, const RECORD_EVENT_FUNCTOR_PTR& cb);
+	virtual bool AddGroupPropertyCommCallBack(const PROPERTY_EVENT_FUNCTOR_PTR& cb);
+	virtual bool AddGroupRecordCommCallBack(const RECORD_EVENT_FUNCTOR_PTR& cb);
 
+	//for players
 	virtual bool AddObjectEnterCallBack(const OBJECT_ENTER_EVENT_FUNCTOR_PTR& cb);
 	virtual bool AddObjectDataFinishedCallBack(const OBJECT_ENTER_EVENT_FUNCTOR_PTR& cb);
 	virtual bool AddObjectLeaveCallBack(const OBJECT_LEAVE_EVENT_FUNCTOR_PTR& cb);
@@ -359,9 +365,12 @@ protected:
 	bool SwitchScene(const NFGUID& self, const int nTargetSceneID, const int nTargetGroupID, const int nType, const NFVector3 v, const float fOrient, const NFDataList& arg);
 
 protected:
+	//for scene && group
 	int OnScenePropertyCommonEvent(const NFGUID& self, const std::string& strPropertyName, const NFData& oldVar, const NFData& newVar);
 	int OnSceneRecordCommonEvent(const NFGUID& self, const RECORD_EVENT_DATA& xEventData, const NFData& oldVar, const NFData& newVar);
 
+
+	//for players
 	int OnPropertyCommonEvent(const NFGUID& self, const std::string& strPropertyName, const NFData& oldVar, const NFData& newVar);
 	int OnRecordCommonEvent(const NFGUID& self, const RECORD_EVENT_DATA& xEventData, const NFData& oldVar, const NFData& newVar);
 	int OnClassCommonEvent(const NFGUID& self, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFDataList& var);
@@ -404,9 +413,14 @@ protected:
 	int OnMoveCellEvent(const NFGUID& self, const int& scene, const int& group, const NFGUID& fromCell, const NFGUID& toCell);
 
 private:
-	std::vector<PROPERTY_EVENT_FUNCTOR_PTR> mvScenePropertyCallback;
-	std::vector<RECORD_EVENT_FUNCTOR_PTR> mvSceneRecordCallback;
 
+	//for scene & group
+	std::list<PROPERTY_EVENT_FUNCTOR_PTR> mtGroupPropertyCommCallBackList;
+	std::list<RECORD_EVENT_FUNCTOR_PTR> mtGroupRecordCallCommBackList;
+	std::map<std::string, std::list<PROPERTY_EVENT_FUNCTOR_PTR>> mtGroupPropertyCallBackList;
+	std::map<std::string, std::list<RECORD_EVENT_FUNCTOR_PTR>> mtGroupRecordCallBackList;
+
+	//for players & objects
 	std::vector<OBJECT_ENTER_EVENT_FUNCTOR_PTR> mvObjectEnterCallback;
 	std::vector<OBJECT_ENTER_EVENT_FUNCTOR_PTR> mvObjectDataFinishedCallBack;
 	std::vector<OBJECT_LEAVE_EVENT_FUNCTOR_PTR> mvObjectLeaveCallback;
@@ -426,6 +440,7 @@ private:
 
 	std::vector<SCENE_EVENT_FUNCTOR_PTR> mvSceneGroupCreatedCallback;
 	std::vector<SCENE_EVENT_FUNCTOR_PTR> mvSceneGroupDestroyedCallback;
+
 private:
 	NFIKernelModule* m_pKernelModule;
 	NFIClassModule* m_pClassModule;

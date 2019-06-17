@@ -290,7 +290,9 @@ void NFGameServerNet_ServerModule::OnClientLeaveGameProcess(const NFSOCK nSockIn
 	{
 		//if the player now in the match, we wouldn't destroy him
 		//or if the player now fighting in the clan scene with other clan, we wouldn't destroy him too
-		const NFGUID matchID = m_pKernelModule->GetPropertyObject(nPlayerID, NFrame::Player::MatchID());
+		const int sceneID = m_pKernelModule->GetPropertyInt(nPlayerID, NFrame::Player::SceneID());
+		const int groupID = m_pKernelModule->GetPropertyInt(nPlayerID, NFrame::Player::GroupID());
+		const NFGUID matchID = m_pSceneModule->GetPropertyObject(sceneID, groupID, NFrame::Group::MatchID());
 		if (matchID.IsNull())
 		{
 			m_pKernelModule->DestroyObject(nPlayerID);
@@ -299,15 +301,17 @@ void NFGameServerNet_ServerModule::OnClientLeaveGameProcess(const NFSOCK nSockIn
 		{
 			//add schedule
 			//single mode or multi-player mode
-			if (m_pKernelModule->GetPropertyInt(nPlayerID, NFrame::Player::MatchPlayers()) <= 1)
+			//if (m_pKernelModule->GetPropertyInt(nPlayerID, NFrame::Group::MatchPlayers()) <= 1)
 			{
 				m_pKernelModule->DestroyObject(nPlayerID);
 			}
+			/*
 			else
 			{
 				m_pKernelModule->SetPropertyObject(nPlayerID, NFrame::Player::GateID(), NFGUID());
 				m_pScheduleModule->AddSchedule(nPlayerID, "DestroyPlayerOnTime", this, &NFGameServerNet_ServerModule::DestroyPlayerByTime, 100.0f, -1);
 			}
+			*/
 		}
 	}
 
@@ -389,7 +393,8 @@ void NFGameServerNet_ServerModule::OnClientSwapSceneProcess(const NFSOCK nSockIn
 	const NFMsg::ESceneType sceneType = (NFMsg::ESceneType)m_pElementModule->GetPropertyInt(std::to_string(xMsg.scene_id()), NFrame::Scene::Type());
 	const int homeSceneID = m_pKernelModule->GetPropertyInt(nPlayerID, NFrame::Player::HomeSceneID());
 	const int nowSceneID = m_pKernelModule->GetPropertyInt(nPlayerID, NFrame::Player::SceneID());
-	const NFGUID matchID = m_pKernelModule->GetPropertyObject(nPlayerID, NFrame::Player::MatchID());
+	const int nowGroupID = m_pKernelModule->GetPropertyInt(nPlayerID, NFrame::Player::GroupID());
+	const NFGUID matchID = m_pSceneModule->GetPropertyObject(nowSceneID, nowGroupID, NFrame::Group::MatchID());
 	const NFMsg::ESceneType nowSceneType = (NFMsg::ESceneType)m_pElementModule->GetPropertyInt(std::to_string(nowSceneID), NFrame::Scene::Type());
 
 	if (matchID.IsNull())
@@ -1081,8 +1086,12 @@ void NFGameServerNet_ServerModule::OnClientRecordVector3Process(const NFSOCK nSo
 
 int NFGameServerNet_ServerModule::DestroyPlayerByTime(const NFGUID & self, const std::string & name, const float fIntervalTime, const int nCount)
 {
-	const NFGUID matchID = m_pKernelModule->GetPropertyObject(self, NFrame::Player::MatchID());
+	const int nSceneID = m_pKernelModule->GetPropertyInt(self, NFrame::Player::SceneID());
+	const int nGroupID = m_pKernelModule->GetPropertyInt(self, NFrame::Player::GroupID());
 	const NFGUID gateID = m_pKernelModule->GetPropertyObject(self, NFrame::Player::GateID());
+
+	const NFGUID& matchID = m_pSceneModule->GetPropertyObject(nSceneID, nGroupID, NFrame::Group::MatchID());
+
 	if (matchID.IsNull() && gateID.IsNull())
 	{
 		m_pKernelModule->DestroyObject(self);

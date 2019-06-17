@@ -60,7 +60,7 @@ int NFScenePropsModule::OnSceneGroupEvent(const NFGUID & self, const int nSceneI
 	if (type == NFMsg::SCENE_HOME)
 	{
 		const int& homeSceneID = m_pKernelModule->GetPropertyInt(self, NFrame::Player::HomeSceneID());
-		const NFGUID& matchID = m_pKernelModule->GetPropertyObject(self, NFrame::Player::MatchID());
+		const NFGUID& matchID = m_pSceneModule->GetPropertyObject(nSceneID, nGroupID, NFrame::Group::MatchID());
 		if (matchID.IsNull() && homeSceneID == nSceneID)
 		{
 			//now he dosen't fighting with others, must be home, we build up he buildings for him
@@ -152,7 +152,7 @@ int NFScenePropsModule::OnObjectBuildingRecordEvent(const NFGUID & self, const R
 			const int nHomeSceneID = m_pKernelModule->GetPropertyInt(self, NFrame::Player::HomeSceneID());
 			const int nSceneID = m_pKernelModule->GetPropertyInt(self, NFrame::Player::SceneID());
 			const int nGroupID = m_pKernelModule->GetPropertyInt(self, NFrame::Player::GroupID());
-			const NFGUID& matchID = m_pKernelModule->GetPropertyObject(self, NFrame::Player::MatchID());
+			const NFGUID& matchID = m_pSceneModule->GetPropertyObject(nSceneID, nGroupID, NFrame::Group::MatchID());
 			const std::string& strName = m_pKernelModule->GetPropertyString(self, NFrame::Player::Name());
 			if (nHomeSceneID == nSceneID
 				&& matchID.IsNull())

@@ -629,6 +629,36 @@ const NFVector3 & NFSceneModule::GetPropertyVector3(const int scene, const int g
 	return NFVector3::Zero();
 }
 
+NF_SHARE_PTR<NFIPropertyManager> NFSceneModule::FindPropertyManager(const int scene, const int group)
+{
+	NF_SHARE_PTR<NFSceneInfo> pSceneInfo = GetElement(scene);
+	if (pSceneInfo)
+	{
+		NF_SHARE_PTR<NFSceneGroupInfo> pGroupInfo = pSceneInfo->GetElement(group);
+		if (pGroupInfo)
+		{
+			return pGroupInfo->mxPropertyManager;
+		}
+	}
+
+	return nullptr;
+}
+
+NF_SHARE_PTR<NFIRecordManager> NFSceneModule::FindRecordManager(const int scene, const int group)
+{
+	NF_SHARE_PTR<NFSceneInfo> pSceneInfo = GetElement(scene);
+	if (pSceneInfo)
+	{
+		NF_SHARE_PTR<NFSceneGroupInfo> pGroupInfo = pSceneInfo->GetElement(group);
+		if (pGroupInfo)
+		{
+			return pGroupInfo->mxRecordManager;
+		}
+	}
+
+	return nullptr;
+}
+
 NF_SHARE_PTR<NFIRecord> NFSceneModule::FindRecord(const int scene, const int group, const std::string & strRecordName)
 {
 	NF_SHARE_PTR<NFSceneInfo> pSceneInfo = GetElement(scene);
@@ -919,15 +949,55 @@ const NFVector3 & NFSceneModule::GetRecordVector3(const int scene, const int gro
 	return NFVector3::Zero();
 }
 
-bool NFSceneModule::AddGroupPropertyCallBack(const PROPERTY_EVENT_FUNCTOR_PTR & cb)
+bool NFSceneModule::AddGroupPropertyCallBack(const std::string& strName, const PROPERTY_EVENT_FUNCTOR_PTR & cb)
 {
-	mvScenePropertyCallback.push_back(cb);
+	if (mtGroupPropertyCallBackList.find(strName) == mtGroupPropertyCallBackList.end())
+	{
+		std::list<PROPERTY_EVENT_FUNCTOR_PTR> xList;
+		xList.push_back(cb);
+
+		mtGroupPropertyCallBackList.insert(std::map< std::string, std::list<PROPERTY_EVENT_FUNCTOR_PTR>>::value_type(strName, xList));
+
+		return true;
+	}
+
+
+	std::map< std::string, std::list<PROPERTY_EVENT_FUNCTOR_PTR>>::iterator it = mtGroupPropertyCallBackList.find(strName);
+	it->second.push_back(cb);
+
 	return true;
 }
 
-bool NFSceneModule::AddGroupRecordCallBack(const RECORD_EVENT_FUNCTOR_PTR & cb)
+bool NFSceneModule::AddGroupRecordCallBack(const std::string& strName, const RECORD_EVENT_FUNCTOR_PTR & cb)
 {
-	mvSceneRecordCallback.push_back(cb);
+	if (mtGroupRecordCallBackList.find(strName) == mtGroupRecordCallBackList.end())
+	{
+		std::list<RECORD_EVENT_FUNCTOR_PTR> xList;
+		xList.push_back(cb);
+
+		mtGroupRecordCallBackList.insert(std::map< std::string, std::list<RECORD_EVENT_FUNCTOR_PTR>>::value_type(strName, xList));
+
+		return true;
+	}
+
+
+	std::map< std::string, std::list<RECORD_EVENT_FUNCTOR_PTR>>::iterator it = mtGroupRecordCallBackList.find(strName);
+	it->second.push_back(cb);
+
+	return true;
+}
+
+bool NFSceneModule::AddGroupPropertyCommCallBack(const PROPERTY_EVENT_FUNCTOR_PTR & cb)
+{
+	mtGroupPropertyCommCallBackList.push_back(cb);
+
+	return true;
+}
+
+bool NFSceneModule::AddGroupRecordCommCallBack(const RECORD_EVENT_FUNCTOR_PTR & cb)
+{
+	mtGroupRecordCallCommBackList.push_back(cb);
+
 	return true;
 }
 
@@ -1003,12 +1073,18 @@ bool NFSceneModule::SwitchScene(const NFGUID& self, const int nTargetSceneID, co
 
 int NFSceneModule::OnScenePropertyCommonEvent(const NFGUID & self, const std::string & strPropertyName, const NFData & oldVar, const NFData & newVar)
 {
-	std::vector<PROPERTY_EVENT_FUNCTOR_PTR>::iterator it = mvScenePropertyCallback.begin();
-	for (; it != mvScenePropertyCallback.end(); it++)
+	
+
+	auto it = mtGroupPropertyCallBackList.find(strPropertyName);
+	if (it != mtGroupPropertyCallBackList.end())
 	{
-		PROPERTY_EVENT_FUNCTOR_PTR& pFunPtr = *it;
-		PROPERTY_EVENT_FUNCTOR* pFunc = pFunPtr.get();
-		pFunc->operator()(self, strPropertyName, oldVar, newVar);
+		auto itList = it->second.begin();
+		for (; itList != it->second.end(); itList++)
+		{
+			PROPERTY_EVENT_FUNCTOR_PTR& pFunPtr = *itList;
+			PROPERTY_EVENT_FUNCTOR* pFunc = pFunPtr.get();
+			pFunc->operator()(self, strPropertyName, oldVar, newVar);
+		}
 	}
 
 	return 0;
@@ -1016,13 +1092,18 @@ int NFSceneModule::OnScenePropertyCommonEvent(const NFGUID & self, const std::st
 
 int NFSceneModule::OnSceneRecordCommonEvent(const NFGUID & self, const RECORD_EVENT_DATA & xEventData, const NFData & oldVar, const NFData & newVar)
 {
-	std::vector<RECORD_EVENT_FUNCTOR_PTR>::iterator it = mvSceneRecordCallback.begin();
-	for (; it != mvSceneRecordCallback.end(); it++)
+	auto it = mtGroupRecordCallBackList.find(xEventData.strRecordName);
+	if (it != mtGroupRecordCallBackList.end())
 	{
-		RECORD_EVENT_FUNCTOR_PTR& pFunPtr = *it;
-		RECORD_EVENT_FUNCTOR* pFunc = pFunPtr.get();
-		pFunc->operator()(self, xEventData, oldVar, newVar);
+		auto itList = it->second.begin();
+		for (; itList != it->second.end(); itList++)
+		{
+			RECORD_EVENT_FUNCTOR_PTR& pFunPtr = *itList;
+			RECORD_EVENT_FUNCTOR* pFunc = pFunPtr.get();
+			pFunc->operator()(self, xEventData, oldVar, newVar);
+		}
 	}
+
 	return 0;
 }
 

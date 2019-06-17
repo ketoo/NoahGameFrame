@@ -35,6 +35,8 @@
 #include "NFComm/NFCore/NFDataList.hpp"
 #include "NFComm/NFCore/NFIRecord.h"
 #include "NFComm/NFCore/NFIProperty.h"
+#include "NFComm/NFCore/NFIPropertyManager.h"
+#include "NFComm/NFCore/NFIRecordManager.h"
 #include "NFComm/NFPluginModule/NFGUID.h"
 #include "NFComm/NFPluginModule/NFIModule.h"
 
@@ -60,6 +62,7 @@ typedef std::function<int(const NFGUID&, const int, const int, const int, const 
 typedef NF_SHARE_PTR<SCENE_EVENT_FUNCTOR> SCENE_EVENT_FUNCTOR_PTR;
 
 class NFSceneInfo;
+class NFSceneGroupInfo;
 
 class NFISceneModule
     : public NFIModule,
@@ -71,12 +74,13 @@ public:
         ClearAll();
     }
 
+	/////////////these interfaces below are for scene & group//////////////////
 	template<typename BaseType>
 	bool AddGroupPropertyCallBack(const std::string& strPropertyName, BaseType* pBase, int (BaseType::*handler)(const NFGUID&, const std::string&, const NFData&, const NFData&))
 	{
 		PROPERTY_EVENT_FUNCTOR functor = std::bind(handler, pBase, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3, std::placeholders::_4);
 		PROPERTY_EVENT_FUNCTOR_PTR functorPtr(NF_NEW PROPERTY_EVENT_FUNCTOR(functor));
-		return AddGroupPropertyCallBack(functorPtr);
+		return AddGroupPropertyCallBack(strPropertyName, functorPtr);
 	}
 
 	template<typename BaseType>
@@ -84,11 +88,26 @@ public:
 	{
 		RECORD_EVENT_FUNCTOR functor = std::bind(handler, pBase, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3, std::placeholders::_4);
 		RECORD_EVENT_FUNCTOR_PTR functorPtr(NF_NEW RECORD_EVENT_FUNCTOR(functor));
-		return AddGroupRecordCallBack(functorPtr);
+		return AddGroupRecordCallBack(strPropertyName, functorPtr);
 	}
 
+	template<typename BaseType>
+	bool AddGroupPropertyCommCallBack(BaseType* pBase, int (BaseType::*handler)(const NFGUID&, const std::string&, const NFData&, const NFData&))
+	{
+		PROPERTY_EVENT_FUNCTOR functor = std::bind(handler, pBase, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3, std::placeholders::_4);
+		PROPERTY_EVENT_FUNCTOR_PTR functorPtr(NF_NEW PROPERTY_EVENT_FUNCTOR(functor));
+		return AddGroupPropertyCommCallBack(functorPtr);
+	}
 
-	///////////////////////////////
+	template<typename BaseType>
+	bool AddGroupRecordCommCallBack(BaseType* pBase, int (BaseType::*handler)(const NFGUID&, const RECORD_EVENT_DATA&, const NFData&, const NFData&))
+	{
+		RECORD_EVENT_FUNCTOR functor = std::bind(handler, pBase, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3, std::placeholders::_4);
+		RECORD_EVENT_FUNCTOR_PTR functorPtr(NF_NEW RECORD_EVENT_FUNCTOR(functor));
+		return AddGroupRecordCommCallBack(functorPtr);
+	}
+
+	/////////////these interfaces below are for player//////////////////
 
 	template<typename BaseType>
 	bool AddObjectEnterCallBack(BaseType* pBase, int (BaseType::*handler)(const NFDataList&, const NFDataList&))
@@ -226,7 +245,7 @@ public:
 	virtual bool CreateSceneNPC(const int nSceneID, const int nGroupID, const NFDataList& argList) = 0;
 	virtual bool DestroySceneNPC(const int nSceneID, const int nGroupID) = 0;
 
-	//////////////////////////////////////////////////////////////////////////
+	/////////////the interfaces below are for scene & group/////////////////////////////
 	virtual bool SetPropertyInt(const int scene, const int group, const std::string& strPropertyName, const NFINT64 nValue) = 0;
 	virtual bool SetPropertyFloat(const int scene, const int group, const std::string& strPropertyName, const double dValue) = 0;
 	virtual bool SetPropertyString(const int scene, const int group, const std::string& strPropertyName, const std::string& strValue) = 0;
@@ -242,7 +261,8 @@ public:
 	virtual const NFVector2& GetPropertyVector2(const int scene, const int group, const std::string& strPropertyName) = 0;
 	virtual const NFVector3& GetPropertyVector3(const int scene, const int group, const std::string& strPropertyName) = 0;
 
-	//////////////////////////////////////////////////////////////////////////
+	virtual NF_SHARE_PTR<NFIPropertyManager> FindPropertyManager(const int scene, const int group) = 0;
+	virtual NF_SHARE_PTR<NFIRecordManager> FindRecordManager(const int scene, const int group) = 0;
 	virtual NF_SHARE_PTR<NFIRecord> FindRecord(const int scene, const int group, const std::string& strRecordName) = 0;
 	virtual bool ClearRecord(const int scene, const int group, const std::string& strRecordName) = 0;
 
@@ -276,9 +296,13 @@ public:
 
 	////////////////////////////////////////////////////////////////
 protected:
-	virtual bool AddGroupRecordCallBack(const RECORD_EVENT_FUNCTOR_PTR& cb) = 0;
-	virtual bool AddGroupPropertyCallBack(const PROPERTY_EVENT_FUNCTOR_PTR& cb) = 0;
+	//for scne && group
+	virtual bool AddGroupRecordCallBack(const std::string& strName, const RECORD_EVENT_FUNCTOR_PTR& cb) = 0;
+	virtual bool AddGroupPropertyCallBack(const std::string& strName, const PROPERTY_EVENT_FUNCTOR_PTR& cb) = 0;
+	virtual bool AddGroupRecordCommCallBack(const RECORD_EVENT_FUNCTOR_PTR& cb) = 0;
+	virtual bool AddGroupPropertyCommCallBack(const PROPERTY_EVENT_FUNCTOR_PTR& cb) = 0;
 
+	//for players
 	virtual bool AddObjectEnterCallBack(const OBJECT_ENTER_EVENT_FUNCTOR_PTR& cb) = 0;
 	virtual bool AddObjectLeaveCallBack(const OBJECT_LEAVE_EVENT_FUNCTOR_PTR& cb) = 0;
 	virtual bool AddPropertyEnterCallBack(const PROPERTY_ENTER_EVENT_FUNCTOR_PTR& cb) = 0;
