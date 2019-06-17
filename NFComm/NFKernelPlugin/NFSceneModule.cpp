@@ -1073,7 +1073,13 @@ bool NFSceneModule::SwitchScene(const NFGUID& self, const int nTargetSceneID, co
 
 int NFSceneModule::OnScenePropertyCommonEvent(const NFGUID & self, const std::string & strPropertyName, const NFData & oldVar, const NFData & newVar)
 {
-	
+	auto itList = mtGroupPropertyCommCallBackList.begin();
+	for (; itList != mtGroupPropertyCommCallBackList.end(); itList++)
+	{
+		PROPERTY_EVENT_FUNCTOR_PTR& pFunPtr = *itList;
+		PROPERTY_EVENT_FUNCTOR* pFunc = pFunPtr.get();
+		pFunc->operator()(self, strPropertyName, oldVar, newVar);
+	}
 
 	auto it = mtGroupPropertyCallBackList.find(strPropertyName);
 	if (it != mtGroupPropertyCallBackList.end())
@@ -1092,6 +1098,14 @@ int NFSceneModule::OnScenePropertyCommonEvent(const NFGUID & self, const std::st
 
 int NFSceneModule::OnSceneRecordCommonEvent(const NFGUID & self, const RECORD_EVENT_DATA & xEventData, const NFData & oldVar, const NFData & newVar)
 {
+	auto itList = mtGroupRecordCallCommBackList.begin();
+	for (; itList != mtGroupRecordCallCommBackList.end(); itList++)
+	{
+		RECORD_EVENT_FUNCTOR_PTR& pFunPtr = *itList;
+		RECORD_EVENT_FUNCTOR* pFunc = pFunPtr.get();
+		pFunc->operator()(self, xEventData, oldVar, newVar);
+	}
+
 	auto it = mtGroupRecordCallBackList.find(xEventData.strRecordName);
 	if (it != mtGroupRecordCallBackList.end())
 	{
