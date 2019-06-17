@@ -417,17 +417,17 @@ int NFSceneAutoBroadcastModule::OnRecordEvent(const NFGUID & self, const RECORD_
 			*xRecordChanged.mutable_player_id() = NFINetModule::NFToPB(self);
 
 			xRecordChanged.set_record_name(xEventData.strRecordName);
-NFMsg::RecordObject* recordProperty = xRecordChanged.add_property_list();
-recordProperty->set_row(xEventData.nRow);
-recordProperty->set_col(xEventData.nCol);
-*recordProperty->mutable_data() = NFINetModule::NFToPB(newVar.GetObject());
+			NFMsg::RecordObject* recordProperty = xRecordChanged.add_property_list();
+			recordProperty->set_row(xEventData.nRow);
+			recordProperty->set_col(xEventData.nCol);
+			*recordProperty->mutable_data() = NFINetModule::NFToPB(newVar.GetObject());
 
-for (int i = 0; i < players.GetCount(); i++)
-{
-	NFGUID identOther = players.Object(i);
+			for (int i = 0; i < players.GetCount(); i++)
+			{
+				NFGUID identOther = players.Object(i);
 
-	m_pGameServerNet_ServerModule->SendMsgPBToGate(NFMsg::EGMI_ACK_RECORD_OBJECT, xRecordChanged, identOther);
-}
+				m_pGameServerNet_ServerModule->SendMsgPBToGate(NFMsg::EGMI_ACK_RECORD_OBJECT, xRecordChanged, identOther);
+			}
 		}
 		break;
 		case TDATA_VECTOR2:
