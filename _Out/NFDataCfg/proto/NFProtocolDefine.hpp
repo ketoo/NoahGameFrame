@@ -302,10 +302,10 @@ namespace NFrame
 		static const std::string& Position(){ static std::string x = "Position"; return x; };// vector3
 		static const std::string& SceneID(){ static std::string x = "SceneID"; return x; };// int
 		// Property
-		static const std::string& MatchDeathHero(){ static std::string x = "MatchDeathHero"; return x; };// int
+		static const std::string& MatchBeKilledHero(){ static std::string x = "MatchBeKilledHero"; return x; };// int
 		static const std::string& MatchGambleDiamond(){ static std::string x = "MatchGambleDiamond"; return x; };// int
 		static const std::string& MatchID(){ static std::string x = "MatchID"; return x; };// object
-		static const std::string& MatchKillHero(){ static std::string x = "MatchKillHero"; return x; };// int
+		static const std::string& MatchKilledHero(){ static std::string x = "MatchKilledHero"; return x; };// int
 		static const std::string& MatchOpponentCup(){ static std::string x = "MatchOpponentCup"; return x; };// int
 		static const std::string& MatchOpponentDiamond(){ static std::string x = "MatchOpponentDiamond"; return x; };// int
 		static const std::string& MatchOpponentGold(){ static std::string x = "MatchOpponentGold"; return x; };// int

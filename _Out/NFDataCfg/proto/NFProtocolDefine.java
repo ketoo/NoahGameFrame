@@ -293,10 +293,10 @@ package nframe;
 		public static final String Position = "Position";// vector3
 		public static final String SceneID = "SceneID";// int
 		// Property
-		public static final String MatchDeathHero = "MatchDeathHero";// int
+		public static final String MatchBeKilledHero = "MatchBeKilledHero";// int
 		public static final String MatchGambleDiamond = "MatchGambleDiamond";// int
 		public static final String MatchID = "MatchID";// object
-		public static final String MatchKillHero = "MatchKillHero";// int
+		public static final String MatchKilledHero = "MatchKilledHero";// int
 		public static final String MatchOpponentCup = "MatchOpponentCup";// int
 		public static final String MatchOpponentDiamond = "MatchOpponentDiamond";// int
 		public static final String MatchOpponentGold = "MatchOpponentGold";// int
