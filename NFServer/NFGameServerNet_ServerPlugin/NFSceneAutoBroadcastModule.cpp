@@ -67,15 +67,6 @@ bool NFSceneAutoBroadcastModule::Execute()
 
 int NFSceneAutoBroadcastModule::OnPropertyEvent(const NFGUID & self, const std::string & strProperty, const NFData & oldVar, const NFData & newVar)
 {
-	if (NFrame::Player::ThisName() == m_pKernelModule->GetPropertyString(self, NFrame::Player::ClassName()))
-	{
-		NF_SHARE_PTR<NFIObject> xObject = m_pKernelModule->GetObject(self);
-		if (xObject->GetState() != CLASS_OBJECT_EVENT::COE_CREATE_FINISH)
-		{
-			return 0;
-		}
-	}
-
 	NFDataList players;
 	m_pKernelModule->GetGroupObjectList(self.nHead64, self.nData64, players, true);
 
@@ -85,7 +76,7 @@ int NFSceneAutoBroadcastModule::OnPropertyEvent(const NFGUID & self, const std::
 	{
 		NFMsg::ObjectPropertyInt xPropertyInt;
 		NFMsg::Ident* pIdent = xPropertyInt.mutable_player_id();
-		*pIdent = NFINetModule::NFToPB(self);
+		*pIdent = NFINetModule::NFToPB(NFGUID());
 
 		NFMsg::PropertyInt* pDataInt = xPropertyInt.add_property_list();
 		pDataInt->set_property_name(strProperty);
@@ -104,7 +95,7 @@ int NFSceneAutoBroadcastModule::OnPropertyEvent(const NFGUID & self, const std::
 	{
 		NFMsg::ObjectPropertyFloat xPropertyFloat;
 		NFMsg::Ident* pIdent = xPropertyFloat.mutable_player_id();
-		*pIdent = NFINetModule::NFToPB(self);
+		*pIdent = NFINetModule::NFToPB(NFGUID());
 
 		NFMsg::PropertyFloat* pDataFloat = xPropertyFloat.add_property_list();
 		pDataFloat->set_property_name(strProperty);
@@ -123,7 +114,7 @@ int NFSceneAutoBroadcastModule::OnPropertyEvent(const NFGUID & self, const std::
 	{
 		NFMsg::ObjectPropertyString xPropertyString;
 		NFMsg::Ident* pIdent = xPropertyString.mutable_player_id();
-		*pIdent = NFINetModule::NFToPB(self);
+		*pIdent = NFINetModule::NFToPB(NFGUID());
 
 		NFMsg::PropertyString* pDataString = xPropertyString.add_property_list();
 		pDataString->set_property_name(strProperty);
@@ -142,7 +133,7 @@ int NFSceneAutoBroadcastModule::OnPropertyEvent(const NFGUID & self, const std::
 	{
 		NFMsg::ObjectPropertyObject xPropertyObject;
 		NFMsg::Ident* pIdent = xPropertyObject.mutable_player_id();
-		*pIdent = NFINetModule::NFToPB(self);
+		*pIdent = NFINetModule::NFToPB(NFGUID());
 
 		NFMsg::PropertyObject* pDataObject = xPropertyObject.add_property_list();
 		pDataObject->set_property_name(strProperty);
@@ -160,7 +151,7 @@ int NFSceneAutoBroadcastModule::OnPropertyEvent(const NFGUID & self, const std::
 	{
 		NFMsg::ObjectPropertyVector2 xPropertyVector2;
 		NFMsg::Ident* pIdent = xPropertyVector2.mutable_player_id();
-		*pIdent = NFINetModule::NFToPB(self);
+		*pIdent = NFINetModule::NFToPB(NFGUID());
 
 		NFMsg::PropertyVector2* pDataObject = xPropertyVector2.add_property_list();
 		pDataObject->set_property_name(strProperty);
@@ -178,7 +169,7 @@ int NFSceneAutoBroadcastModule::OnPropertyEvent(const NFGUID & self, const std::
 	{
 		NFMsg::ObjectPropertyVector3 xPropertyVector3;
 		NFMsg::Ident* pIdent = xPropertyVector3.mutable_player_id();
-		*pIdent = NFINetModule::NFToPB(self);
+		*pIdent = NFINetModule::NFToPB(NFGUID());
 
 		NFMsg::PropertyVector3* pDataObject = xPropertyVector3.add_property_list();
 		pDataObject->set_property_name(strProperty);
@@ -201,15 +192,6 @@ int NFSceneAutoBroadcastModule::OnPropertyEvent(const NFGUID & self, const std::
 
 int NFSceneAutoBroadcastModule::OnRecordEvent(const NFGUID & self, const RECORD_EVENT_DATA & xEventData, const NFData & oldVar, const NFData & newVar)
 {
-	if (NFrame::Player::ThisName() == m_pKernelModule->GetPropertyString(self, NFrame::Player::ClassName()))
-	{
-		NF_SHARE_PTR<NFIObject> xObject = m_pKernelModule->GetObject(self);
-		if (xObject->GetState() != CLASS_OBJECT_EVENT::COE_CREATE_FINISH)
-		{
-			return 0;
-		}
-	}
-
 	NFDataList players;
 	m_pKernelModule->GetGroupObjectList(self.nHead64, self.nData64, players, true);
 
@@ -219,7 +201,7 @@ int NFSceneAutoBroadcastModule::OnRecordEvent(const NFGUID & self, const RECORD_
 	{
 		NFMsg::ObjectRecordAddRow xAddRecordRow;
 		NFMsg::Ident* pIdent = xAddRecordRow.mutable_player_id();
-		*pIdent = NFINetModule::NFToPB(self);
+		*pIdent = NFINetModule::NFToPB(NFGUID());
 
 		xAddRecordRow.set_record_name(xEventData.strRecordName);
 
@@ -316,7 +298,7 @@ int NFSceneAutoBroadcastModule::OnRecordEvent(const NFGUID & self, const RECORD_
 		NFMsg::ObjectRecordRemove xReoveRecordRow;
 
 		NFMsg::Ident* pIdent = xReoveRecordRow.mutable_player_id();
-		*pIdent = NFINetModule::NFToPB(self);
+		*pIdent = NFINetModule::NFToPB(NFGUID());
 
 		xReoveRecordRow.set_record_name(xEventData.strRecordName);
 		xReoveRecordRow.add_remove_row(xEventData.nRow);
@@ -333,7 +315,7 @@ int NFSceneAutoBroadcastModule::OnRecordEvent(const NFGUID & self, const RECORD_
 	{
 
 		NFMsg::ObjectRecordSwap xSwapRecord;
-		*xSwapRecord.mutable_player_id() = NFINetModule::NFToPB(self);
+		*xSwapRecord.mutable_player_id() = NFINetModule::NFToPB(NFGUID());
 
 		xSwapRecord.set_origin_record_name(xEventData.strRecordName);
 		xSwapRecord.set_target_record_name(xEventData.strRecordName);
@@ -355,7 +337,7 @@ int NFSceneAutoBroadcastModule::OnRecordEvent(const NFGUID & self, const RECORD_
 		case TDATA_INT:
 		{
 			NFMsg::ObjectRecordInt xRecordChanged;
-			*xRecordChanged.mutable_player_id() = NFINetModule::NFToPB(self);
+			*xRecordChanged.mutable_player_id() = NFINetModule::NFToPB(NFGUID());
 
 			xRecordChanged.set_record_name(xEventData.strRecordName);
 			NFMsg::RecordInt* recordProperty = xRecordChanged.add_property_list();
@@ -376,7 +358,7 @@ int NFSceneAutoBroadcastModule::OnRecordEvent(const NFGUID & self, const RECORD_
 		case TDATA_FLOAT:
 		{
 			NFMsg::ObjectRecordFloat xRecordChanged;
-			*xRecordChanged.mutable_player_id() = NFINetModule::NFToPB(self);
+			*xRecordChanged.mutable_player_id() = NFINetModule::NFToPB(NFGUID());
 
 			xRecordChanged.set_record_name(xEventData.strRecordName);
 			NFMsg::RecordFloat* recordProperty = xRecordChanged.add_property_list();
@@ -395,7 +377,7 @@ int NFSceneAutoBroadcastModule::OnRecordEvent(const NFGUID & self, const RECORD_
 		case TDATA_STRING:
 		{
 			NFMsg::ObjectRecordString xRecordChanged;
-			*xRecordChanged.mutable_player_id() = NFINetModule::NFToPB(self);
+			*xRecordChanged.mutable_player_id() = NFINetModule::NFToPB(NFGUID());
 
 			xRecordChanged.set_record_name(xEventData.strRecordName);
 			NFMsg::RecordString* recordProperty = xRecordChanged.add_property_list();
@@ -414,7 +396,7 @@ int NFSceneAutoBroadcastModule::OnRecordEvent(const NFGUID & self, const RECORD_
 		case TDATA_OBJECT:
 		{
 			NFMsg::ObjectRecordObject xRecordChanged;
-			*xRecordChanged.mutable_player_id() = NFINetModule::NFToPB(self);
+			*xRecordChanged.mutable_player_id() = NFINetModule::NFToPB(NFGUID());
 
 			xRecordChanged.set_record_name(xEventData.strRecordName);
 			NFMsg::RecordObject* recordProperty = xRecordChanged.add_property_list();
@@ -433,7 +415,7 @@ int NFSceneAutoBroadcastModule::OnRecordEvent(const NFGUID & self, const RECORD_
 		case TDATA_VECTOR2:
 		{
 			NFMsg::ObjectRecordVector2 xRecordChanged;
-			*xRecordChanged.mutable_player_id() = NFINetModule::NFToPB(self);
+			*xRecordChanged.mutable_player_id() = NFINetModule::NFToPB(NFGUID());
 
 			xRecordChanged.set_record_name(xEventData.strRecordName);
 			NFMsg::RecordVector2* recordProperty = xRecordChanged.add_property_list();
@@ -452,7 +434,7 @@ int NFSceneAutoBroadcastModule::OnRecordEvent(const NFGUID & self, const RECORD_
 		case TDATA_VECTOR3:
 		{
 			NFMsg::ObjectRecordVector3 xRecordChanged;
-			*xRecordChanged.mutable_player_id() = NFINetModule::NFToPB(self);
+			*xRecordChanged.mutable_player_id() = NFINetModule::NFToPB(NFGUID());
 
 			xRecordChanged.set_record_name(xEventData.strRecordName);
 			NFMsg::RecordVector3* recordProperty = xRecordChanged.add_property_list();
@@ -502,7 +484,7 @@ int NFSceneAutoBroadcastModule::OnSceneEvent(const NFGUID & self, const int nSce
 	argVar << self;
 
 	OnPropertyEnter(argVar, nSceneID, nGroupID);
-	OnPropertyEnter(argVar, nSceneID, nGroupID);
+	OnRecordEnter(argVar, nSceneID, nGroupID);
 
 	return 0;
 }

@@ -299,10 +299,10 @@ namespace NFrame
 		public static readonly String Position = "Position";// vector3
 		public static readonly String SceneID = "SceneID";// int
 		// Property
-		public static readonly String MatchDeathHero = "MatchDeathHero";// int
+		public static readonly String MatchBeKilledHero = "MatchBeKilledHero";// int
 		public static readonly String MatchGambleDiamond = "MatchGambleDiamond";// int
 		public static readonly String MatchID = "MatchID";// object
-		public static readonly String MatchKillHero = "MatchKillHero";// int
+		public static readonly String MatchKilledHero = "MatchKilledHero";// int
 		public static readonly String MatchOpponentCup = "MatchOpponentCup";// int
 		public static readonly String MatchOpponentDiamond = "MatchOpponentDiamond";// int
 		public static readonly String MatchOpponentGold = "MatchOpponentGold";// int
