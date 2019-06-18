@@ -88,7 +88,7 @@ public:
 	{
 		RECORD_EVENT_FUNCTOR functor = std::bind(handler, pBase, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3, std::placeholders::_4);
 		RECORD_EVENT_FUNCTOR_PTR functorPtr(NF_NEW RECORD_EVENT_FUNCTOR(functor));
-		return AddGroupRecordCallBack(strPropertyName, functorPtr);
+		return AddGroupRecordCallBack(strRecordName, functorPtr);
 	}
 
 	template<typename BaseType>
