@@ -41,7 +41,7 @@ namespace protobuf_NFMsgShare_2eproto {
 struct LIBPROTOC_EXPORT TableStruct {
   static const ::google::protobuf::internal::ParseTableField entries[];
   static const ::google::protobuf::internal::AuxillaryParseTableField aux[];
-  static const ::google::protobuf::internal::ParseTable schema[46];
+  static const ::google::protobuf::internal::ParseTable schema[47];
   static const ::google::protobuf::internal::FieldMetadata field_metadata[];
   static const ::google::protobuf::internal::SerializationTable serialization_table[];
   static const ::google::protobuf::uint32 offsets[];
@@ -91,6 +91,9 @@ LIBPROTOC_EXPORT extern PlayerEntryInfoDefaultTypeInternal _PlayerEntryInfo_defa
 class ReqAcceptTask;
 class ReqAcceptTaskDefaultTypeInternal;
 LIBPROTOC_EXPORT extern ReqAcceptTaskDefaultTypeInternal _ReqAcceptTask_default_instance_;
+class ReqAckCancelSearch;
+class ReqAckCancelSearchDefaultTypeInternal;
+LIBPROTOC_EXPORT extern ReqAckCancelSearchDefaultTypeInternal _ReqAckCancelSearch_default_instance_;
 class ReqAckCreateClan;
 class ReqAckCreateClanDefaultTypeInternal;
 LIBPROTOC_EXPORT extern ReqAckCreateClanDefaultTypeInternal _ReqAckCreateClan_default_instance_;
@@ -204,6 +207,7 @@ template<> LIBPROTOC_EXPORT ::NFMsg::ItemStruct* Arena::CreateMaybeMessage<::NFM
 template<> LIBPROTOC_EXPORT ::NFMsg::PVPPlayerInfo* Arena::CreateMaybeMessage<::NFMsg::PVPPlayerInfo>(Arena*);
 template<> LIBPROTOC_EXPORT ::NFMsg::PlayerEntryInfo* Arena::CreateMaybeMessage<::NFMsg::PlayerEntryInfo>(Arena*);
 template<> LIBPROTOC_EXPORT ::NFMsg::ReqAcceptTask* Arena::CreateMaybeMessage<::NFMsg::ReqAcceptTask>(Arena*);
+template<> LIBPROTOC_EXPORT ::NFMsg::ReqAckCancelSearch* Arena::CreateMaybeMessage<::NFMsg::ReqAckCancelSearch>(Arena*);
 template<> LIBPROTOC_EXPORT ::NFMsg::ReqAckCreateClan* Arena::CreateMaybeMessage<::NFMsg::ReqAckCreateClan>(Arena*);
 template<> LIBPROTOC_EXPORT ::NFMsg::ReqAckEnterGameSuccess* Arena::CreateMaybeMessage<::NFMsg::ReqAckEnterGameSuccess>(Arena*);
 template<> LIBPROTOC_EXPORT ::NFMsg::ReqAckHomeScene* Arena::CreateMaybeMessage<::NFMsg::ReqAckHomeScene>(Arena*);
@@ -6026,6 +6030,115 @@ class LIBPROTOC_EXPORT AckSearchOppnent : public ::google::protobuf::Message /* 
 };
 // -------------------------------------------------------------------
 
+class LIBPROTOC_EXPORT ReqAckCancelSearch : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:NFMsg.ReqAckCancelSearch) */ {
+ public:
+  ReqAckCancelSearch();
+  virtual ~ReqAckCancelSearch();
+
+  ReqAckCancelSearch(const ReqAckCancelSearch& from);
+
+  inline ReqAckCancelSearch& operator=(const ReqAckCancelSearch& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  #if LANG_CXX11
+  ReqAckCancelSearch(ReqAckCancelSearch&& from) noexcept
+    : ReqAckCancelSearch() {
+    *this = ::std::move(from);
+  }
+
+  inline ReqAckCancelSearch& operator=(ReqAckCancelSearch&& from) noexcept {
+    if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
+      if (this != &from) InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+  #endif
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const ReqAckCancelSearch& default_instance();
+
+  static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
+  static inline const ReqAckCancelSearch* internal_default_instance() {
+    return reinterpret_cast<const ReqAckCancelSearch*>(
+               &_ReqAckCancelSearch_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages =
+    41;
+
+  void Swap(ReqAckCancelSearch* other);
+  friend void swap(ReqAckCancelSearch& a, ReqAckCancelSearch& b) {
+    a.Swap(&b);
+  }
+
+  // implements Message ----------------------------------------------
+
+  inline ReqAckCancelSearch* New() const final {
+    return CreateMaybeMessage<ReqAckCancelSearch>(NULL);
+  }
+
+  ReqAckCancelSearch* New(::google::protobuf::Arena* arena) const final {
+    return CreateMaybeMessage<ReqAckCancelSearch>(arena);
+  }
+  void CopyFrom(const ::google::protobuf::Message& from) final;
+  void MergeFrom(const ::google::protobuf::Message& from) final;
+  void CopyFrom(const ReqAckCancelSearch& from);
+  void MergeFrom(const ReqAckCancelSearch& from);
+  void Clear() final;
+  bool IsInitialized() const final;
+
+  size_t ByteSizeLong() const final;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input) final;
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const final;
+  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
+      bool deterministic, ::google::protobuf::uint8* target) const final;
+  int GetCachedSize() const final { return _cached_size_.Get(); }
+
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const final;
+  void InternalSwap(ReqAckCancelSearch* other);
+  private:
+  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
+    return NULL;
+  }
+  inline void* MaybeArenaPtr() const {
+    return NULL;
+  }
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const final;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // .NFMsg.Ident selfid = 1;
+  bool has_selfid() const;
+  void clear_selfid();
+  static const int kSelfidFieldNumber = 1;
+  private:
+  const ::NFMsg::Ident& _internal_selfid() const;
+  public:
+  const ::NFMsg::Ident& selfid() const;
+  ::NFMsg::Ident* release_selfid();
+  ::NFMsg::Ident* mutable_selfid();
+  void set_allocated_selfid(::NFMsg::Ident* selfid);
+
+  // @@protoc_insertion_point(class_scope:NFMsg.ReqAckCancelSearch)
+ private:
+
+  ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
+  ::NFMsg::Ident* selfid_;
+  mutable ::google::protobuf::internal::CachedSize _cached_size_;
+  friend struct ::protobuf_NFMsgShare_2eproto::TableStruct;
+};
+// -------------------------------------------------------------------
+
 class LIBPROTOC_EXPORT ReqEndBattle : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:NFMsg.ReqEndBattle) */ {
  public:
   ReqEndBattle();
@@ -6061,7 +6174,7 @@ class LIBPROTOC_EXPORT ReqEndBattle : public ::google::protobuf::Message /* @@pr
                &_ReqEndBattle_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    41;
+    42;
 
   void Swap(ReqEndBattle* other);
   friend void swap(ReqEndBattle& a, ReqEndBattle& b) {
@@ -6164,7 +6277,7 @@ class LIBPROTOC_EXPORT AckEndBattle : public ::google::protobuf::Message /* @@pr
                &_AckEndBattle_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    42;
+    43;
 
   void Swap(AckEndBattle* other);
   friend void swap(AckEndBattle& a, AckEndBattle& b) {
@@ -6354,7 +6467,7 @@ class LIBPROTOC_EXPORT ReqSendMail : public ::google::protobuf::Message /* @@pro
                &_ReqSendMail_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    43;
+    44;
 
   void Swap(ReqSendMail* other);
   friend void swap(ReqSendMail& a, ReqSendMail& b) {
@@ -6489,7 +6602,7 @@ class LIBPROTOC_EXPORT ReqSwitchServer : public ::google::protobuf::Message /* @
                &_ReqSwitchServer_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    44;
+    45;
 
   void Swap(ReqSwitchServer* other);
   friend void swap(ReqSwitchServer& a, ReqSwitchServer& b) {
@@ -6646,7 +6759,7 @@ class LIBPROTOC_EXPORT AckSwitchServer : public ::google::protobuf::Message /* @
                &_AckSwitchServer_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    45;
+    46;
 
   void Swap(AckSwitchServer* other);
   friend void swap(AckSwitchServer& a, AckSwitchServer& b) {
@@ -11501,6 +11614,58 @@ AckSearchOppnent::buildings() const {
 
 // -------------------------------------------------------------------
 
+// ReqAckCancelSearch
+
+// .NFMsg.Ident selfid = 1;
+inline bool ReqAckCancelSearch::has_selfid() const {
+  return this != internal_default_instance() && selfid_ != NULL;
+}
+inline const ::NFMsg::Ident& ReqAckCancelSearch::_internal_selfid() const {
+  return *selfid_;
+}
+inline const ::NFMsg::Ident& ReqAckCancelSearch::selfid() const {
+  const ::NFMsg::Ident* p = selfid_;
+  // @@protoc_insertion_point(field_get:NFMsg.ReqAckCancelSearch.selfid)
+  return p != NULL ? *p : *reinterpret_cast<const ::NFMsg::Ident*>(
+      &::NFMsg::_Ident_default_instance_);
+}
+inline ::NFMsg::Ident* ReqAckCancelSearch::release_selfid() {
+  // @@protoc_insertion_point(field_release:NFMsg.ReqAckCancelSearch.selfid)
+  
+  ::NFMsg::Ident* temp = selfid_;
+  selfid_ = NULL;
+  return temp;
+}
+inline ::NFMsg::Ident* ReqAckCancelSearch::mutable_selfid() {
+  
+  if (selfid_ == NULL) {
+    auto* p = CreateMaybeMessage<::NFMsg::Ident>(GetArenaNoVirtual());
+    selfid_ = p;
+  }
+  // @@protoc_insertion_point(field_mutable:NFMsg.ReqAckCancelSearch.selfid)
+  return selfid_;
+}
+inline void ReqAckCancelSearch::set_allocated_selfid(::NFMsg::Ident* selfid) {
+  ::google::protobuf::Arena* message_arena = GetArenaNoVirtual();
+  if (message_arena == NULL) {
+    delete reinterpret_cast< ::google::protobuf::MessageLite*>(selfid_);
+  }
+  if (selfid) {
+    ::google::protobuf::Arena* submessage_arena = NULL;
+    if (message_arena != submessage_arena) {
+      selfid = ::google::protobuf::internal::GetOwnedMessage(
+          message_arena, selfid, submessage_arena);
+    }
+    
+  } else {
+    
+  }
+  selfid_ = selfid;
+  // @@protoc_insertion_point(field_set_allocated:NFMsg.ReqAckCancelSearch.selfid)
+}
+
+// -------------------------------------------------------------------
+
 // ReqEndBattle
 
 // int32 auto_end = 1;
@@ -12137,6 +12302,8 @@ inline void AckSwitchServer::set_gate_serverid(::google::protobuf::int64 value) 
 #ifdef __GNUC__
   #pragma GCC diagnostic pop
 #endif  // __GNUC__
+// -------------------------------------------------------------------
+
 // -------------------------------------------------------------------
 
 // -------------------------------------------------------------------

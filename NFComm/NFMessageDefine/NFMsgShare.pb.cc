@@ -239,6 +239,11 @@ class AckSearchOppnentDefaultTypeInternal {
   ::google::protobuf::internal::ExplicitlyConstructed<AckSearchOppnent>
       _instance;
 } _AckSearchOppnent_default_instance_;
+class ReqAckCancelSearchDefaultTypeInternal {
+ public:
+  ::google::protobuf::internal::ExplicitlyConstructed<ReqAckCancelSearch>
+      _instance;
+} _ReqAckCancelSearch_default_instance_;
 class ReqEndBattleDefaultTypeInternal {
  public:
   ::google::protobuf::internal::ExplicitlyConstructed<ReqEndBattle>
@@ -880,6 +885,21 @@ LIBPROTOC_EXPORT ::google::protobuf::internal::SCCInfo<3> scc_info_AckSearchOppn
       &protobuf_NFMsgShare_2eproto::scc_info_PVPPlayerInfo.base,
       &protobuf_NFMsgShare_2eproto::scc_info_ReqAddSceneBuilding.base,}};
 
+static void InitDefaultsReqAckCancelSearch() {
+  GOOGLE_PROTOBUF_VERIFY_VERSION;
+
+  {
+    void* ptr = &::NFMsg::_ReqAckCancelSearch_default_instance_;
+    new (ptr) ::NFMsg::ReqAckCancelSearch();
+    ::google::protobuf::internal::OnShutdownDestroyMessage(ptr);
+  }
+  ::NFMsg::ReqAckCancelSearch::InitAsDefaultInstance();
+}
+
+LIBPROTOC_EXPORT ::google::protobuf::internal::SCCInfo<1> scc_info_ReqAckCancelSearch =
+    {{ATOMIC_VAR_INIT(::google::protobuf::internal::SCCInfoBase::kUninitialized), 1, InitDefaultsReqAckCancelSearch}, {
+      &protobuf_NFMsgBase_2eproto::scc_info_Ident.base,}};
+
 static void InitDefaultsReqEndBattle() {
   GOOGLE_PROTOBUF_VERIFY_VERSION;
 
@@ -999,6 +1019,7 @@ void InitDefaults() {
   ::google::protobuf::internal::InitSCC(&scc_info_PVPPlayerInfo.base);
   ::google::protobuf::internal::InitSCC(&scc_info_ReqSearchOppnent.base);
   ::google::protobuf::internal::InitSCC(&scc_info_AckSearchOppnent.base);
+  ::google::protobuf::internal::InitSCC(&scc_info_ReqAckCancelSearch.base);
   ::google::protobuf::internal::InitSCC(&scc_info_ReqEndBattle.base);
   ::google::protobuf::internal::InitSCC(&scc_info_AckEndBattle.base);
   ::google::protobuf::internal::InitSCC(&scc_info_ReqSendMail.base);
@@ -1006,7 +1027,7 @@ void InitDefaults() {
   ::google::protobuf::internal::InitSCC(&scc_info_AckSwitchServer.base);
 }
 
-::google::protobuf::Metadata file_level_metadata[46];
+::google::protobuf::Metadata file_level_metadata[47];
 const ::google::protobuf::EnumDescriptor* file_level_enum_descriptors[6];
 
 const ::google::protobuf::uint32 TableStruct::offsets[] GOOGLE_PROTOBUF_ATTRIBUTE_SECTION_VARIABLE(protodesc_cold) = {
@@ -1357,6 +1378,12 @@ const ::google::protobuf::uint32 TableStruct::offsets[] GOOGLE_PROTOBUF_ATTRIBUT
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NFMsg::AckSearchOppnent, opponent_),
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NFMsg::AckSearchOppnent, buildings_),
   ~0u,  // no _has_bits_
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NFMsg::ReqAckCancelSearch, _internal_metadata_),
+  ~0u,  // no _extensions_
+  ~0u,  // no _oneof_case_
+  ~0u,  // no _weak_field_map_
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NFMsg::ReqAckCancelSearch, selfid_),
+  ~0u,  // no _has_bits_
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NFMsg::ReqEndBattle, _internal_metadata_),
   ~0u,  // no _extensions_
   ~0u,  // no _oneof_case_
@@ -1449,11 +1476,12 @@ static const ::google::protobuf::internal::MigrationSchema schemas[] GOOGLE_PROT
   { 304, -1, sizeof(::NFMsg::PVPPlayerInfo)},
   { 326, -1, sizeof(::NFMsg::ReqSearchOppnent)},
   { 335, -1, sizeof(::NFMsg::AckSearchOppnent)},
-  { 346, -1, sizeof(::NFMsg::ReqEndBattle)},
-  { 352, -1, sizeof(::NFMsg::AckEndBattle)},
-  { 367, -1, sizeof(::NFMsg::ReqSendMail)},
-  { 375, -1, sizeof(::NFMsg::ReqSwitchServer)},
-  { 387, -1, sizeof(::NFMsg::AckSwitchServer)},
+  { 346, -1, sizeof(::NFMsg::ReqAckCancelSearch)},
+  { 352, -1, sizeof(::NFMsg::ReqEndBattle)},
+  { 358, -1, sizeof(::NFMsg::AckEndBattle)},
+  { 373, -1, sizeof(::NFMsg::ReqSendMail)},
+  { 381, -1, sizeof(::NFMsg::ReqSwitchServer)},
+  { 393, -1, sizeof(::NFMsg::AckSwitchServer)},
 };
 
 static ::google::protobuf::Message const * const file_default_instances[] = {
@@ -1498,6 +1526,7 @@ static ::google::protobuf::Message const * const file_default_instances[] = {
   reinterpret_cast<const ::google::protobuf::Message*>(&::NFMsg::_PVPPlayerInfo_default_instance_),
   reinterpret_cast<const ::google::protobuf::Message*>(&::NFMsg::_ReqSearchOppnent_default_instance_),
   reinterpret_cast<const ::google::protobuf::Message*>(&::NFMsg::_AckSearchOppnent_default_instance_),
+  reinterpret_cast<const ::google::protobuf::Message*>(&::NFMsg::_ReqAckCancelSearch_default_instance_),
   reinterpret_cast<const ::google::protobuf::Message*>(&::NFMsg::_ReqEndBattle_default_instance_),
   reinterpret_cast<const ::google::protobuf::Message*>(&::NFMsg::_AckEndBattle_default_instance_),
   reinterpret_cast<const ::google::protobuf::Message*>(&::NFMsg::_ReqSendMail_default_instance_),
@@ -1520,7 +1549,7 @@ void protobuf_AssignDescriptorsOnce() {
 void protobuf_RegisterTypes(const ::std::string&) GOOGLE_PROTOBUF_ATTRIBUTE_COLD;
 void protobuf_RegisterTypes(const ::std::string&) {
   protobuf_AssignDescriptorsOnce();
-  ::google::protobuf::internal::RegisterAllTypes(file_level_metadata, 46);
+  ::google::protobuf::internal::RegisterAllTypes(file_level_metadata, 47);
 }
 
 void AddDescriptorsImpl() {
@@ -1649,28 +1678,29 @@ void AddDescriptorsImpl() {
       "le_diamond\030\003 \001(\005\022\"\n\014team_members\030\005 \003(\0132\014"
       ".NFMsg.Ident\022&\n\010opponent\030\016 \001(\0132\024.NFMsg.P"
       "VPPlayerInfo\022-\n\tbuildings\030\024 \003(\0132\032.NFMsg."
-      "ReqAddSceneBuilding\" \n\014ReqEndBattle\022\020\n\010a"
-      "uto_end\030\001 \001(\005\"\351\001\n\014AckEndBattle\022\013\n\003win\030\001 "
-      "\001(\005\022\014\n\004star\030\002 \001(\005\022\014\n\004gold\030\003 \001(\005\022\013\n\003cup\030\004"
-      " \001(\005\022\017\n\007diamond\030\005 \001(\005\022\016\n\006single\030\006 \001(\005\022\035\n"
-      "\007team_id\030\007 \001(\0132\014.NFMsg.Ident\022\036\n\010match_id"
-      "\030\010 \001(\0132\014.NFMsg.Ident\022\035\n\007members\030\t \003(\0132\014."
-      "NFMsg.Ident\022$\n\titem_list\030\n \003(\0132\021.NFMsg.I"
-      "temStruct\"\201\001\n\013ReqSendMail\022\036\n\010reciever\030\001 "
-      "\001(\0132\014.NFMsg.Ident\022$\n\titem_list\030\002 \003(\0132\021.N"
-      "FMsg.ItemStruct\022,\n\rcurrency_list\030\003 \003(\0132\025"
-      ".NFMsg.CurrencyStruct\"\271\001\n\017ReqSwitchServe"
-      "r\022\034\n\006selfid\030\001 \001(\0132\014.NFMsg.Ident\022\025\n\rself_"
-      "serverid\030\002 \001(\003\022\027\n\017target_serverid\030\003 \001(\003\022"
-      "\025\n\rgate_serverid\030\004 \001(\003\022\017\n\007SceneID\030\005 \001(\003\022"
-      "\037\n\tclient_id\030\006 \001(\0132\014.NFMsg.Ident\022\017\n\007grou"
-      "pID\030\007 \001(\003\"v\n\017AckSwitchServer\022\034\n\006selfid\030\001"
-      " \001(\0132\014.NFMsg.Ident\022\025\n\rself_serverid\030\002 \001("
-      "\003\022\027\n\017target_serverid\030\003 \001(\003\022\025\n\rgate_serve"
-      "rid\030\004 \001(\003b\006proto3"
+      "ReqAddSceneBuilding\"2\n\022ReqAckCancelSearc"
+      "h\022\034\n\006selfid\030\001 \001(\0132\014.NFMsg.Ident\" \n\014ReqEn"
+      "dBattle\022\020\n\010auto_end\030\001 \001(\005\"\351\001\n\014AckEndBatt"
+      "le\022\013\n\003win\030\001 \001(\005\022\014\n\004star\030\002 \001(\005\022\014\n\004gold\030\003 "
+      "\001(\005\022\013\n\003cup\030\004 \001(\005\022\017\n\007diamond\030\005 \001(\005\022\016\n\006sin"
+      "gle\030\006 \001(\005\022\035\n\007team_id\030\007 \001(\0132\014.NFMsg.Ident"
+      "\022\036\n\010match_id\030\010 \001(\0132\014.NFMsg.Ident\022\035\n\007memb"
+      "ers\030\t \003(\0132\014.NFMsg.Ident\022$\n\titem_list\030\n \003"
+      "(\0132\021.NFMsg.ItemStruct\"\201\001\n\013ReqSendMail\022\036\n"
+      "\010reciever\030\001 \001(\0132\014.NFMsg.Ident\022$\n\titem_li"
+      "st\030\002 \003(\0132\021.NFMsg.ItemStruct\022,\n\rcurrency_"
+      "list\030\003 \003(\0132\025.NFMsg.CurrencyStruct\"\271\001\n\017Re"
+      "qSwitchServer\022\034\n\006selfid\030\001 \001(\0132\014.NFMsg.Id"
+      "ent\022\025\n\rself_serverid\030\002 \001(\003\022\027\n\017target_ser"
+      "verid\030\003 \001(\003\022\025\n\rgate_serverid\030\004 \001(\003\022\017\n\007Sc"
+      "eneID\030\005 \001(\003\022\037\n\tclient_id\030\006 \001(\0132\014.NFMsg.I"
+      "dent\022\017\n\007groupID\030\007 \001(\003\"v\n\017AckSwitchServer"
+      "\022\034\n\006selfid\030\001 \001(\0132\014.NFMsg.Ident\022\025\n\rself_s"
+      "erverid\030\002 \001(\003\022\027\n\017target_serverid\030\003 \001(\003\022\025"
+      "\n\rgate_serverid\030\004 \001(\003b\006proto3"
   };
   ::google::protobuf::DescriptorPool::InternalAddGeneratedFile(
-      descriptor, 5657);
+      descriptor, 5709);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "NFMsgShare.proto", &protobuf_RegisterTypes);
   ::protobuf_NFDefine_2eproto::AddDescriptors();
@@ -15777,6 +15807,246 @@ void AckSearchOppnent::InternalSwap(AckSearchOppnent* other) {
 
 // ===================================================================
 
+void ReqAckCancelSearch::InitAsDefaultInstance() {
+  ::NFMsg::_ReqAckCancelSearch_default_instance_._instance.get_mutable()->selfid_ = const_cast< ::NFMsg::Ident*>(
+      ::NFMsg::Ident::internal_default_instance());
+}
+void ReqAckCancelSearch::clear_selfid() {
+  if (GetArenaNoVirtual() == NULL && selfid_ != NULL) {
+    delete selfid_;
+  }
+  selfid_ = NULL;
+}
+#if !defined(_MSC_VER) || _MSC_VER >= 1900
+const int ReqAckCancelSearch::kSelfidFieldNumber;
+#endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
+
+ReqAckCancelSearch::ReqAckCancelSearch()
+  : ::google::protobuf::Message(), _internal_metadata_(NULL) {
+  ::google::protobuf::internal::InitSCC(
+      &protobuf_NFMsgShare_2eproto::scc_info_ReqAckCancelSearch.base);
+  SharedCtor();
+  // @@protoc_insertion_point(constructor:NFMsg.ReqAckCancelSearch)
+}
+ReqAckCancelSearch::ReqAckCancelSearch(const ReqAckCancelSearch& from)
+  : ::google::protobuf::Message(),
+      _internal_metadata_(NULL) {
+  _internal_metadata_.MergeFrom(from._internal_metadata_);
+  if (from.has_selfid()) {
+    selfid_ = new ::NFMsg::Ident(*from.selfid_);
+  } else {
+    selfid_ = NULL;
+  }
+  // @@protoc_insertion_point(copy_constructor:NFMsg.ReqAckCancelSearch)
+}
+
+void ReqAckCancelSearch::SharedCtor() {
+  selfid_ = NULL;
+}
+
+ReqAckCancelSearch::~ReqAckCancelSearch() {
+  // @@protoc_insertion_point(destructor:NFMsg.ReqAckCancelSearch)
+  SharedDtor();
+}
+
+void ReqAckCancelSearch::SharedDtor() {
+  if (this != internal_default_instance()) delete selfid_;
+}
+
+void ReqAckCancelSearch::SetCachedSize(int size) const {
+  _cached_size_.Set(size);
+}
+const ::google::protobuf::Descriptor* ReqAckCancelSearch::descriptor() {
+  ::protobuf_NFMsgShare_2eproto::protobuf_AssignDescriptorsOnce();
+  return ::protobuf_NFMsgShare_2eproto::file_level_metadata[kIndexInFileMessages].descriptor;
+}
+
+const ReqAckCancelSearch& ReqAckCancelSearch::default_instance() {
+  ::google::protobuf::internal::InitSCC(&protobuf_NFMsgShare_2eproto::scc_info_ReqAckCancelSearch.base);
+  return *internal_default_instance();
+}
+
+
+void ReqAckCancelSearch::Clear() {
+// @@protoc_insertion_point(message_clear_start:NFMsg.ReqAckCancelSearch)
+  ::google::protobuf::uint32 cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  if (GetArenaNoVirtual() == NULL && selfid_ != NULL) {
+    delete selfid_;
+  }
+  selfid_ = NULL;
+  _internal_metadata_.Clear();
+}
+
+bool ReqAckCancelSearch::MergePartialFromCodedStream(
+    ::google::protobuf::io::CodedInputStream* input) {
+#define DO_(EXPRESSION) if (!GOOGLE_PREDICT_TRUE(EXPRESSION)) goto failure
+  ::google::protobuf::uint32 tag;
+  // @@protoc_insertion_point(parse_start:NFMsg.ReqAckCancelSearch)
+  for (;;) {
+    ::std::pair<::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
+    tag = p.first;
+    if (!p.second) goto handle_unusual;
+    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
+      // .NFMsg.Ident selfid = 1;
+      case 1: {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(10u /* 10 & 0xFF */)) {
+          DO_(::google::protobuf::internal::WireFormatLite::ReadMessage(
+               input, mutable_selfid()));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      default: {
+      handle_unusual:
+        if (tag == 0) {
+          goto success;
+        }
+        DO_(::google::protobuf::internal::WireFormat::SkipField(
+              input, tag, _internal_metadata_.mutable_unknown_fields()));
+        break;
+      }
+    }
+  }
+success:
+  // @@protoc_insertion_point(parse_success:NFMsg.ReqAckCancelSearch)
+  return true;
+failure:
+  // @@protoc_insertion_point(parse_failure:NFMsg.ReqAckCancelSearch)
+  return false;
+#undef DO_
+}
+
+void ReqAckCancelSearch::SerializeWithCachedSizes(
+    ::google::protobuf::io::CodedOutputStream* output) const {
+  // @@protoc_insertion_point(serialize_start:NFMsg.ReqAckCancelSearch)
+  ::google::protobuf::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  // .NFMsg.Ident selfid = 1;
+  if (this->has_selfid()) {
+    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+      1, this->_internal_selfid(), output);
+  }
+
+  if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
+    ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
+        (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()), output);
+  }
+  // @@protoc_insertion_point(serialize_end:NFMsg.ReqAckCancelSearch)
+}
+
+::google::protobuf::uint8* ReqAckCancelSearch::InternalSerializeWithCachedSizesToArray(
+    bool deterministic, ::google::protobuf::uint8* target) const {
+  (void)deterministic; // Unused
+  // @@protoc_insertion_point(serialize_to_array_start:NFMsg.ReqAckCancelSearch)
+  ::google::protobuf::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  // .NFMsg.Ident selfid = 1;
+  if (this->has_selfid()) {
+    target = ::google::protobuf::internal::WireFormatLite::
+      InternalWriteMessageToArray(
+        1, this->_internal_selfid(), deterministic, target);
+  }
+
+  if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
+    target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
+        (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()), target);
+  }
+  // @@protoc_insertion_point(serialize_to_array_end:NFMsg.ReqAckCancelSearch)
+  return target;
+}
+
+size_t ReqAckCancelSearch::ByteSizeLong() const {
+// @@protoc_insertion_point(message_byte_size_start:NFMsg.ReqAckCancelSearch)
+  size_t total_size = 0;
+
+  if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
+    total_size +=
+      ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
+        (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()));
+  }
+  // .NFMsg.Ident selfid = 1;
+  if (this->has_selfid()) {
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::MessageSize(
+        *selfid_);
+  }
+
+  int cached_size = ::google::protobuf::internal::ToCachedSize(total_size);
+  SetCachedSize(cached_size);
+  return total_size;
+}
+
+void ReqAckCancelSearch::MergeFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_merge_from_start:NFMsg.ReqAckCancelSearch)
+  GOOGLE_DCHECK_NE(&from, this);
+  const ReqAckCancelSearch* source =
+      ::google::protobuf::internal::DynamicCastToGenerated<const ReqAckCancelSearch>(
+          &from);
+  if (source == NULL) {
+  // @@protoc_insertion_point(generalized_merge_from_cast_fail:NFMsg.ReqAckCancelSearch)
+    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
+  } else {
+  // @@protoc_insertion_point(generalized_merge_from_cast_success:NFMsg.ReqAckCancelSearch)
+    MergeFrom(*source);
+  }
+}
+
+void ReqAckCancelSearch::MergeFrom(const ReqAckCancelSearch& from) {
+// @@protoc_insertion_point(class_specific_merge_from_start:NFMsg.ReqAckCancelSearch)
+  GOOGLE_DCHECK_NE(&from, this);
+  _internal_metadata_.MergeFrom(from._internal_metadata_);
+  ::google::protobuf::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  if (from.has_selfid()) {
+    mutable_selfid()->::NFMsg::Ident::MergeFrom(from.selfid());
+  }
+}
+
+void ReqAckCancelSearch::CopyFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_copy_from_start:NFMsg.ReqAckCancelSearch)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+void ReqAckCancelSearch::CopyFrom(const ReqAckCancelSearch& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:NFMsg.ReqAckCancelSearch)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool ReqAckCancelSearch::IsInitialized() const {
+  return true;
+}
+
+void ReqAckCancelSearch::Swap(ReqAckCancelSearch* other) {
+  if (other == this) return;
+  InternalSwap(other);
+}
+void ReqAckCancelSearch::InternalSwap(ReqAckCancelSearch* other) {
+  using std::swap;
+  swap(selfid_, other->selfid_);
+  _internal_metadata_.Swap(&other->_internal_metadata_);
+}
+
+::google::protobuf::Metadata ReqAckCancelSearch::GetMetadata() const {
+  protobuf_NFMsgShare_2eproto::protobuf_AssignDescriptorsOnce();
+  return ::protobuf_NFMsgShare_2eproto::file_level_metadata[kIndexInFileMessages];
+}
+
+
+// ===================================================================
+
 void ReqEndBattle::InitAsDefaultInstance() {
 }
 #if !defined(_MSC_VER) || _MSC_VER >= 1900
@@ -17905,6 +18175,9 @@ template<> GOOGLE_PROTOBUF_ATTRIBUTE_NOINLINE ::NFMsg::ReqSearchOppnent* Arena::
 }
 template<> GOOGLE_PROTOBUF_ATTRIBUTE_NOINLINE ::NFMsg::AckSearchOppnent* Arena::CreateMaybeMessage< ::NFMsg::AckSearchOppnent >(Arena* arena) {
   return Arena::CreateInternal< ::NFMsg::AckSearchOppnent >(arena);
+}
+template<> GOOGLE_PROTOBUF_ATTRIBUTE_NOINLINE ::NFMsg::ReqAckCancelSearch* Arena::CreateMaybeMessage< ::NFMsg::ReqAckCancelSearch >(Arena* arena) {
+  return Arena::CreateInternal< ::NFMsg::ReqAckCancelSearch >(arena);
 }
 template<> GOOGLE_PROTOBUF_ATTRIBUTE_NOINLINE ::NFMsg::ReqEndBattle* Arena::CreateMaybeMessage< ::NFMsg::ReqEndBattle >(Arena* arena) {
   return Arena::CreateInternal< ::NFMsg::ReqEndBattle >(arena);

@@ -388,7 +388,12 @@ message AckSearchOppnent
 	PVPPlayerInfo opponent = 14;
 	
 	repeated ReqAddSceneBuilding buildings = 20;
-	
+}
+
+//EGMI_REQ_CANCEL_SEARCH
+message ReqAckCancelSearch
+{
+	Ident      selfid              	= 1; // 角色ID
 }
 
 //EGMI_REQ_END_OPPNENT

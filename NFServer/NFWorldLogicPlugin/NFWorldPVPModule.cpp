@@ -68,6 +68,7 @@ bool NFWorldPVPModule::AfterInit()
 	m_pScheduleModule->AddSchedule("DoMakeMatch", this, &NFWorldPVPModule::OnMakeMatch, 0.7f, -1);
 	
 	if (!m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_REQ_SEARCH_OPPNENT, this, &NFWorldPVPModule::OnReqSearchOpponentProcess)) { return false; }
+	if (!m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_REQ_CANCEL_SEARCH, this, &NFWorldPVPModule::OnReqCancelSearchProcess)) { return false; }
 	if (!m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_ACK_END_OPPNENT, this, &NFWorldPVPModule::OnReqEndTheBattleProcess)) { return false; }
 
 	InitAllTileScene();
@@ -162,6 +163,49 @@ void NFWorldPVPModule::OnReqSearchOpponentProcess(const NFSOCK nSockIndex, const
 
 		multiTeam->avgBattlePoint = battlePoint;
 		mTeamList.push_back(multiTeam);
+	}
+}
+
+void NFWorldPVPModule::OnReqCancelSearchProcess(const NFSOCK nSockIndex, const int nMsgID, const char * msg, const uint32_t nLen)
+{
+	CLIENT_MSG_PROCESS_NO_OBJECT(nMsgID, msg, nLen, NFMsg::ReqAckCancelSearch);
+
+	NF_SHARE_PTR<NFMsg::PVPPlayerInfo> pvpPlayerInfo = mCandidatePool.GetElement(nPlayerID);
+	if (pvpPlayerInfo)
+	{
+		mSingleModeCandidatePool.remove(nPlayerID);
+		mCandidatePool.RemoveElement(nPlayerID);
+
+		bool find = false;
+
+		for (auto it = mTeamList.begin(); it != mTeamList.end(); ++it)
+		{
+			int size = (*it)->members.size();
+			for (auto i = (*it)->members.begin(); i != (*it)->members.end(); ++i)
+			{
+				NFGUID id = *i;
+				if (id == nPlayerID)
+				{
+					if (size > 1)
+					{
+						(*it)->members.erase(i);
+						break;
+					}
+					else
+					{
+						find = true;
+					}
+				}
+			}
+
+			if (find)
+			{
+				mTeamList.erase(it);
+				break;
+			}
+		}
+
+		m_pWorldNet_ServerModule->SendMsgToGame(nPlayerID, NFMsg::EGMI_ACK_CANCEL_SEARCH, xMsg);
 	}
 }
 

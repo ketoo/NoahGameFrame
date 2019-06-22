@@ -77,10 +77,12 @@ bool NFGamePVPModule::AfterInit()
 	m_pSceneModule->AddAfterLeaveSceneGroupCallBack(this, &NFGamePVPModule::AfterLeaveSceneGroupEvent);
 
 	if (!m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_REQ_SEARCH_OPPNENT, this, &NFGamePVPModule::OnReqSearchOpponentProcess)) { return false; }
+	if (!m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_REQ_CANCEL_SEARCH, this, &NFGamePVPModule::OnReqCancelSearchProcess)) { return false; }
 	if (!m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_REQ_END_OPPNENT, this, &NFGamePVPModule::OnReqEndPVPOpponentProcess)) { return false; }
 	if (!m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_REQ_SWAP_HOME_SCENE, this, &NFGamePVPModule::OnReqSwapHomeSceneProcess)) { return false; }
 
 	if (!m_pNetClientModule->AddReceiveCallBack(NF_SERVER_TYPES::NF_ST_WORLD, NFMsg::EGMI_ACK_SEARCH_OPPNENT, this, &NFGamePVPModule::OnAckSearchOpponentProcess)) { return false; }
+	if (!m_pNetClientModule->AddReceiveCallBack(NF_SERVER_TYPES::NF_ST_WORLD, NFMsg::EGMI_ACK_CANCEL_SEARCH, this, &NFGamePVPModule::OnAckCancelSearchProcess)) { return false; }
 
 	m_pSceneModule->AddGroupPropertyCallBack(NFrame::Group::MatchKilledHero(), this, &NFGamePVPModule::OnMatchKillsEvent);
 	m_pSceneModule->AddGroupPropertyCallBack(NFrame::Group::MatchBeKilledHero(), this, &NFGamePVPModule::OnMatchDeathsEvent);
@@ -94,8 +96,7 @@ bool NFGamePVPModule::ReadyExecute()
 	return false;
 }
 
-void NFGamePVPModule::OnReqSearchOpponentProcess(const NFSOCK nSockIndex, const int nMsgID, const char *msg,
-	const uint32_t nLen)
+void NFGamePVPModule::OnReqSearchOpponentProcess(const NFSOCK nSockIndex, const int nMsgID, const char *msg, const uint32_t nLen)
 {
 	CLIENT_MSG_PROCESS(nMsgID, msg, nLen, NFMsg::ReqSearchOppnent);
 	for (int i = 0; i < xMsg.friends_size(); ++i)
@@ -144,10 +145,23 @@ void NFGamePVPModule::OnReqSearchOpponentProcess(const NFSOCK nSockIndex, const 
 	}
 }
 
+void NFGamePVPModule::OnReqCancelSearchProcess(const NFSOCK nSockIndex, const int nMsgID, const char * msg, const uint32_t nLen)
+{
+	CLIENT_MSG_PROCESS(nMsgID, msg, nLen, NFMsg::ReqAckCancelSearch);
+	*xMsg.mutable_selfid() = NFINetModule::NFToPB(nPlayerID);
+
+	m_pNetClientModule->SendSuitByPB(NF_SERVER_TYPES::NF_ST_WORLD, nPlayerID.nData64, nMsgID, xMsg, nPlayerID);
+}
+
 void NFGamePVPModule::OnAckSearchOpponentProcess(const NFSOCK nSockIndex, const int nMsgID, const char * msg, const uint32_t nLen)
 {
 	CLIENT_MSG_PROCESS(nMsgID, msg, nLen, NFMsg::AckSearchOppnent);
-	
+	if (xMsg.team_members_size() <= 0)
+	{
+		m_pLogModule->LogError("error for size == 0");
+		return;
+	}
+
 	const int sceneID = xMsg.scene_id();
 	const int groupID = m_pKernelModule->RequestGroupScene(xMsg.scene_id());
 	const NFVector3& pos = m_pSceneModule->GetRelivePosition(xMsg.scene_id(), 0);
@@ -291,6 +305,13 @@ void NFGamePVPModule::OnAckSearchOpponentProcess(const NFSOCK nSockIndex, const 
 
 		m_pKernelModule->CreateObject(xBuildingID, nSceneID, groupID, NFrame::NPC::ThisName(), strCnfID, xDataArg);
 	}
+}
+
+void NFGamePVPModule::OnAckCancelSearchProcess(const NFSOCK nSockIndex, const int nMsgID, const char * msg, const uint32_t nLen)
+{
+	CLIENT_MSG_PROCESS(nMsgID, msg, nLen, NFMsg::ReqAckCancelSearch);
+
+	m_pGameServerNet_ServerModule->SendMsgPBToGate(nMsgID, xMsg, nPlayerID);
 }
 
 void NFGamePVPModule::OnReqSwapHomeSceneProcess(const NFSOCK nSockIndex, const int nMsgID, const char * msg, const uint32_t nLen)
