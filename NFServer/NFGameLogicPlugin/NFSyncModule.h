@@ -38,6 +38,7 @@
 #include "NFComm/NFPluginModule/NFISceneModule.h"
 #include "NFComm/NFPluginModule/NFIClassModule.h"
 #include "NFComm/NFPluginModule/NFISyncModule.h"
+#include "NFComm/NFPluginModule/NFILogModule.h"
 
 class NFSyncModule
     : public NFISyncModule
@@ -73,8 +74,8 @@ private:
 	NFIScheduleModule* m_pScheduleModule;
 	NFINetModule* m_pNetModule;
 	NFIClassModule* m_pClassModule;
+	NFILogModule* m_pLogModule;
 	NFIKernelModule* m_pKernelModule;
-	NFIClassModule* m_pLogicClassModule;
 	NFIElementModule* m_pElementModule;
 	NFISceneModule* m_pSceneModule;
 	NFIGameServerNet_ServerModule* m_pGameServerNet_ServerModule;

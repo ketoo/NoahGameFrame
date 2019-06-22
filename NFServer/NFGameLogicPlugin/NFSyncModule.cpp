@@ -34,11 +34,11 @@ bool NFSyncModule::Init()
 	m_pScheduleModule = pPluginManager->FindModule<NFIScheduleModule>();
 	m_pNetModule = pPluginManager->FindModule<NFINetModule>();
 	m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>();
-	m_pLogicClassModule = pPluginManager->FindModule<NFIClassModule>();
 	m_pElementModule = pPluginManager->FindModule<NFIElementModule>();
 	m_pGameServerNet_ServerModule = pPluginManager->FindModule<NFIGameServerNet_ServerModule>();
 	m_pSceneModule = pPluginManager->FindModule<NFISceneModule>();
 	m_pClassModule = pPluginManager->FindModule<NFIClassModule>();
+	m_pLogModule = pPluginManager->FindModule<NFILogModule>();
 	
     return true;
 }
