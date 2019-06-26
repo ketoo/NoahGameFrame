@@ -229,6 +229,57 @@ bool NFSceneModule::ReleaseGroupScene(const int nSceneID, const int nGroupID)
 	return false;
 }
 
+bool NFSceneModule::LeaveSceneGroup(const NFGUID & self)
+{
+	NF_SHARE_PTR<NFIObject> pObject = m_pKernelModule->GetObject(self);
+	if (pObject)
+	{
+		int nOldSceneID = pObject->GetPropertyInt32(NFrame::Scene::SceneID());
+		int nOldGroupID = pObject->GetPropertyInt32(NFrame::Scene::GroupID());
+		if (nOldGroupID <= 0)
+		{
+			m_pLogModule->LogNormal(NFILogModule::NLL_ERROR_NORMAL, self, "no this group == 0", nOldSceneID);
+			return false;
+		}
+
+		NF_SHARE_PTR<NFSceneInfo> pOldSceneInfo = this->GetElement(nOldSceneID);
+		if (!pOldSceneInfo)
+		{
+			m_pLogModule->LogNormal(NFILogModule::NLL_ERROR_NORMAL, self, "no this container", nOldSceneID);
+			return false;
+		}
+
+		if (!pOldSceneInfo->GetElement(nOldGroupID))
+		{
+			m_pLogModule->LogNormal(NFILogModule::NLL_ERROR_NORMAL, self, "no this group", nOldGroupID);
+			return false;
+		}
+		/////////
+
+		const NFVector3& lastPos = m_pKernelModule->GetPropertyVector3(self, NFrame::IObject::Position());
+		BeforeLeaveSceneGroup(self, nOldSceneID, nOldGroupID, 0, NFDataList());
+
+		const NFGUID lastCell = m_pCellModule->ComputeCellID(lastPos);
+		OnMoveCellEvent(self, nOldSceneID, nOldGroupID, lastCell, NFGUID());
+
+		pOldSceneInfo->RemoveObjectFromGroup(nOldGroupID, self, true);
+
+		//if (nTargetSceneID != nOldSceneID)
+		{
+			pObject->SetPropertyInt(NFrame::Scene::GroupID(), 0);
+			/////////
+			AfterLeaveSceneGroup(self, nOldSceneID, nOldGroupID, 0, NFDataList());
+		}
+
+		return true;
+	}
+
+	m_pLogModule->LogObject(NFILogModule::NLL_ERROR_NORMAL, self, "There is no object", __FUNCTION__, __LINE__);
+
+
+	return false;
+}
+
 bool NFSceneModule::AddSeedData(const int nSceneID, const std::string & strSeedID, const std::string & strConfigID, const NFVector3 & vPos, const int nWeight)
 {
 	NF_SHARE_PTR<NFSceneInfo> pSceneInfo = GetElement(nSceneID);

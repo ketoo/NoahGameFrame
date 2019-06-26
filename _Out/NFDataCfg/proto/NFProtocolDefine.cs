@@ -327,6 +327,14 @@ namespace NFrame
 			//Class name
 			public static readonly String ThisName = "MatchMember";
 			public const int GUID = 0;//object
+			public const int Name = 1;//string
+			public const int K = 2;//int
+			public const int D = 3;//int
+			public const int A = 4;//int
+			public const int Diamond = 5;//int
+			public const int Cup = 6;//int
+			public const int MVP = 7;//int
+			public const int Streak = 8;//int
 
 		}
 
