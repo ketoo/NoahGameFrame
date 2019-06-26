@@ -1,5 +1,5 @@
 /*
-    Copyright 2009 - 2018 NoahGameFrame/NoahFrame
+    Copyright 2009 - 2019 NoahGameFrame/NoahFrame
 
    This source file is part of NoahGameFrame/NoahFrame.
    NoahGameFrame/NoahFrame is open-source software and you can redistribute it and/or modify
@@ -22,6 +22,11 @@
 #define NFI_STATE_MACHINE_H
 
 #include "NFIState.h"
+#include "NFIdleState.h"
+#include "NFFightState.h"
+#include "NFPatrolState.h"
+#include "NFDeadState.h"
+#include "NFChaseState.h"
 
 class NFIStateMachine
 	: public NFIModule
@@ -30,8 +35,7 @@ public:
 
     virtual const NFAI_STATE  CurrentState() const = 0;
 	virtual const NFAI_STATE  LastState() const = 0;
-
-	virtual NFIState* GetState(const NFAI_STATE eState) const = 0;
+	virtual NFIState* GetState(const NFAI_STATE eState) = 0;
 
     //change to a new state
     virtual void ChangeState(const NFAI_STATE eState) = 0;

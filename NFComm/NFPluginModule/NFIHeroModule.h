@@ -3,7 +3,7 @@
                 NoahFrame
             https://github.com/ketoo/NoahGameFrame
 
-   Copyright 2009 - 2018 NoahFrame(NoahGameFrame)
+   Copyright 2009 - 2019 NoahFrame(NoahGameFrame)
 
    File creator: lvsheng.huang
    
@@ -39,7 +39,7 @@ public:
     {
         ECONSTDEFINE_HERO_MAXLEVEL = 100,
 		ECONSTDEFINE_HERO_ONCELEVEEXP = 100,
-		ECONSTDEFINE_HERO_MAX_STAR = 20,
+		ECONSTDEFINE_HERO_MAX_STAR = 26,
     };
 	
 	enum EConsHero_Pos
@@ -57,6 +57,9 @@ public:
 
 	virtual bool SetFightHero(const NFGUID& self, const NFGUID& xHeroID, const EConsHero_Pos nPos) = 0;
 	virtual bool SwitchFightHero(const NFGUID& self, const NFGUID& xHeroID) = 0;
+
+	virtual bool ReliveHero(const NFGUID& self, const NFGUID& xHeroID, const int diamond) = 0;
+	virtual bool ReliveAllHero(const NFGUID& self) = 0;
 
 	virtual NFGUID GetHeroGUID(const NFGUID& self, const std::string& strID) = 0;
 

@@ -3,7 +3,7 @@
                 NoahFrame
             https://github.com/ketoo/NoahGameFrame
 
-   Copyright 2009 - 2018 NoahFrame(NoahGameFrame)
+   Copyright 2009 - 2019 NoahFrame(NoahGameFrame)
 
    File creator: lvsheng.huang
    
@@ -45,6 +45,7 @@
 #include "NFComm/NFPluginModule/NFIHeroModule.h"
 #include "NFComm/NFPluginModule/NFIScheduleModule.h"
 #include "NFComm/NFPluginModule/NFIWorldPVPModule.h"
+#include "NFComm/NFPluginModule/NFIWorldNet_ServerModule.h"
 
 class NFWorldPVPModule
     : public NFIWorldPVPModule
@@ -63,19 +64,39 @@ public:
     virtual bool AfterInit();
 	virtual bool ReadyExecute();
 
+	virtual void OffLine(const NFGUID& self);
 
 protected:
-
-	int RandomTileScene(const int nExceptSceneID);
 	void OnReqSearchOpponentProcess(const NFSOCK nSockIndex, const int nMsgID, const char *msg, const uint32_t nLen);
-
+	void OnReqCancelSearchProcess(const NFSOCK nSockIndex, const int nMsgID, const char *msg, const uint32_t nLen);
+	void OnReqEndTheBattleProcess(const NFSOCK nSockIndex, const int nMsgID, const char *msg, const uint32_t nLen);
+	
 protected:
 	void InitAllTileScene();
+	int RandomTileScene(const int nExceptSceneID);
+
+	int OnMakeTeam(const std::string& strHeartBeat, const float fTime, const int nCount);
+	int OnMakeMatch(const std::string& strHeartBeat, const float fTime, const int nCount);
 
 protected:
-	
-	bool SearchOpponent(const NFGUID & self, const int nExceptSceneID, const NFSOCK nSockIndex);
-	bool ProcessOpponentData( const NFGUID& opponent, NFMsg::AckSearchOppnent& xAckData);
+
+	std::vector<int> mxTileSceneIDList;
+
+
+protected:
+	class MultiTeam
+	{
+	public:
+		NFGUID leaderID;
+		NFGUID teamID;
+		int avgBattlePoint = 0;
+		int diamond = 0;
+		std::vector<NFGUID> members;
+	};
+
+	std::list<NFGUID> mSingleModeCandidatePool;
+	NFMapEx<NFGUID, NFMsg::PVPPlayerInfo> mCandidatePool;
+	std::list<NF_SHARE_PTR<MultiTeam>> mTeamList;
 
 private:
 	NFIKernelModule* m_pKernelModule;
@@ -87,8 +108,7 @@ private:
 	NFIPlayerRedisModule* m_pPlayerRedisModule;
 	NFINoSqlModule* m_pNoSqlModule;
 	NFICommonRedisModule* m_pCommonRedisModule;
-
-	std::vector<int> mxTileSceneIDList;
+	NFIWorldNet_ServerModule* m_pWorldNet_ServerModule;
 };
 
 

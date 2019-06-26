@@ -3,7 +3,7 @@
                 NoahFrame
             https://github.com/ketoo/NoahGameFrame
 
-   Copyright 2009 - 2018 NoahFrame(NoahGameFrame)
+   Copyright 2009 - 2019 NoahFrame(NoahGameFrame)
 
    File creator: lvsheng.huang
    
@@ -54,7 +54,7 @@ public:
 	}
 
 public:
-	virtual bool UseItem(const NFGUID& self, const std::string& strItemID, const NFGUID& targetID) = 0;
+	virtual bool UseItem(const NFGUID& self, const std::string& strItemID, const NFGUID& targetID, const NFVector3& vector) = 0;
 };
 
 #endif

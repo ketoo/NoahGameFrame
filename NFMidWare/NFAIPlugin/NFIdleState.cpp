@@ -3,7 +3,7 @@
                 NoahFrame
             https://github.com/ketoo/NoahGameFrame
 
-   Copyright 2009 - 2018 NoahFrame(NoahGameFrame)
+   Copyright 2009 - 2019 NoahFrame(NoahGameFrame)
 
    File creator: lvsheng.huang
    
@@ -45,7 +45,6 @@ bool NFIdleState::Enter(const NFGUID& self, NFIStateMachine* pStateMachine)
 {
     if (!NFIState::Enter(self, pStateMachine))
     {
-
 			//看是否有战斗能力
             switch (pStateMachine->LastState())
             {
@@ -66,7 +65,6 @@ bool NFIdleState::Execute(const NFGUID& self, NFIStateMachine* pStateMachine)
 {
     if (!NFIState::Execute(self, pStateMachine))
     {
-
             //查找是否有可以攻击的对象
             NFGUID ident = m_pHateModule->QueryMaxHateObject(self);
             if (!ident.IsNull())
@@ -75,10 +73,18 @@ bool NFIdleState::Execute(const NFGUID& self, NFIStateMachine* pStateMachine)
             }
             else
             {
-                if (m_pKernelModule->GetPropertyInt(self, "MoveSpeed") > 0)
-                {
-                    RandomIdle(self, pStateMachine);
-                }
+				const int nNPCType = m_pKernelModule->GetPropertyInt(self, NFrame::NPC::NPCType());
+				if (nNPCType == NFMsg::ENPCType::ENPCTYPE_NORMAL)
+				{
+					if (m_pKernelModule->GetPropertyInt(self, NFrame::NPC::MOVE_SPEED()) > 0)
+					{
+						RandomIdle(self, pStateMachine);
+					}
+				}
+				else if (nNPCType == NFMsg::ENPCType::ENPCTYPE_TURRET)
+				{
+					//do nothing
+				}
             }
     }
 
@@ -100,24 +106,25 @@ bool NFIdleState::DoRule(const NFGUID& self, NFIStateMachine* pStateMachine)
 bool NFIdleState::RandomIdle(const NFGUID& self, NFIStateMachine* pStateMachine)
 {
 	//如果是定点的，则不走，继续idle
-	NFAI_NPC_TYPE eMoveType = (NFAI_NPC_TYPE)(m_pKernelModule->GetPropertyInt(self, "MoveType"));
-
-	switch (eMoveType)
+	const int nNPCType = m_pKernelModule->GetPropertyInt(self, NFrame::NPC::NPCType());
+	if (nNPCType == NFMsg::ENPCType::ENPCTYPE_TURRET)
 	{
-	case NFAI_NPC_TYPE::MASTER_TYPE:
-	case NFAI_NPC_TYPE::HERO_TYPE:
-		{
-			float fRand = (float)(rand() / double(RAND_MAX));
-			if (fRand < 0.4f)
-			{
-				pStateMachine->ChangeState(PatrolState);
-			}
-		}
-		break;
 
-	default:
-		break;
 	}
+	else if (nNPCType == NFMsg::ENPCType::ENPCTYPE_NORMAL)
+	{
+		//change the status as PatrolState if the NPC has the move ability
+		/*
+		float fRand = (float)(rand() / double(RAND_MAX));
+		if (fRand < 0.4f)
+		{
+			pStateMachine->ChangeState(PatrolState);
+		}
+		*/
+		//else do nothing
+	}
+	
+	
 
     return false;
 }

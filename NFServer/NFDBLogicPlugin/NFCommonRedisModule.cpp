@@ -3,7 +3,7 @@
                 NoahFrame
             https://github.com/ketoo/NoahGameFrame
 
-   Copyright 2009 - 2018 NoahFrame(NoahGameFrame)
+   Copyright 2009 - 2019 NoahFrame(NoahGameFrame)
 
    File creator: chuanbo.guo
    
@@ -53,6 +53,16 @@ std::string NFCommonRedisModule::GetAccountCacheKey(const std::string & strAccou
 std::string NFCommonRedisModule::GetTileCacheKey(const int & nSceneID)
 {
 	return lexical_cast<std::string>(nSceneID) + "_TileInfo";
+}
+
+std::string NFCommonRedisModule::GetSceneCacheKey(const int & nSceneID)
+{
+	return lexical_cast<std::string>(nSceneID) + "_SceneProps";
+}
+
+std::string NFCommonRedisModule::GetCellCacheKey(const std::string & strCellID)
+{
+	return strCellID + "_CellInfo";
 }
 
 bool NFCommonRedisModule::AfterInit()
@@ -384,6 +394,8 @@ bool NFCommonRedisModule::ConvertVectorToPropertyManager(std::vector<std::string
 				continue;
 			}
 
+			std::cout << strKey << ":" << strValue << std::endl;
+
 			NF_SHARE_PTR<NFIProperty> pProperty = pPropertyManager->GetElement(strKey);
 			if (!pProperty->GetCache() && !pProperty->GetSave())
 			{
@@ -448,6 +460,8 @@ bool NFCommonRedisModule::ConvertPropertyManagerToVector(NF_SHARE_PTR<NFIPropert
 
 		const std::string& strPropertyName = pProperty->GetKey();
 		const std::string& strPropertyValue = pProperty->ToString();
+
+		std::cout << strPropertyName << ":" << strPropertyValue << std::endl;
 
 		vKeyList.push_back(strPropertyName);
 		vValueList.push_back(strPropertyValue);

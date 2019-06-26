@@ -3,7 +3,7 @@
                 NoahFrame
             https://github.com/ketoo/NoahGameFrame
 
-   Copyright 2009 - 2018 NoahFrame(NoahGameFrame)
+   Copyright 2009 - 2019 NoahFrame(NoahGameFrame)
 
    File creator: lvsheng.huang
    
@@ -24,21 +24,19 @@
 */
 
 #include "NFItemConsumeManagerModule.h"
-#include "NFItemCardConsumeProcessModule.h"
+#include "NFItemScrollConsumeProcessModule.h"
 #include "NFItemEquipConsumeProcessModule.h"
 #include "NFItemGemConsumeProcessModule.h"
-#include "NFItemTokenConsumeProcessModule.h"
-#include "NFItemItemConsumeProcessModule.h"
+#include "NFItemSupplyConsumeProcessModule.h"
 
 bool NFItemConsumeManagerModule::Init()
 {
-	ResgisterConsumeModule(NFMsg::EItemType::EIT_CARD, NF_SHARE_PTR<NFIItemConsumeProcessModule>(NF_NEW NFItemCardConsumeProcessModule(pPluginManager)));
-	ResgisterConsumeModule(NFMsg::EItemType::EIT_EQUIP, NF_SHARE_PTR<NFIItemConsumeProcessModule>(NF_NEW NFItemEquipConsumeProcessModule(pPluginManager)));
-	ResgisterConsumeModule(NFMsg::EItemType::EIT_GEM, NF_SHARE_PTR<NFIItemConsumeProcessModule>(NF_NEW NFItemGemConsumeProcessModule(pPluginManager)));
-	ResgisterConsumeModule(NFMsg::EItemType::EIT_TOKEN, NF_SHARE_PTR<NFIItemConsumeProcessModule>(NF_NEW NFItemTokenConsumeProcessModule(pPluginManager)));
-	ResgisterConsumeModule(NFMsg::EItemType::EIT_ITEM, NF_SHARE_PTR<NFIItemConsumeProcessModule>(NF_NEW NFItemItemConsumeProcessModule(pPluginManager)));
+	ResgisterConsumeModule(NFMsg::EItemType::EIT_SCROLL, NF_SHARE_PTR<NFIItemConsumeocessModule>(NF_NEW NFItemScrollConsumeProcessModule(pPluginManager)));
+	ResgisterConsumeModule(NFMsg::EItemType::EIT_EQUIP, NF_SHARE_PTR<NFIItemConsumeocessModule>(NF_NEW NFItemEquipConsumeProcessModule(pPluginManager)));
+	ResgisterConsumeModule(NFMsg::EItemType::EIT_GEM, NF_SHARE_PTR<NFIItemConsumeocessModule>(NF_NEW NFItemGemConsumeProcessModule(pPluginManager)));
+	ResgisterConsumeModule(NFMsg::EItemType::EIT_SUPPLY, NF_SHARE_PTR<NFIItemConsumeocessModule>(NF_NEW NFItemSupplyConsumeProcessModule(pPluginManager)));
 
-	for (NF_SHARE_PTR<NFIItemConsumeProcessModule> xModule = First(); xModule != nullptr; xModule = Next())
+	for (NF_SHARE_PTR<NFIItemConsumeocessModule> xModule = First(); xModule != nullptr; xModule = Next())
 	{
 		xModule->Init();
 	}
@@ -48,7 +46,7 @@ bool NFItemConsumeManagerModule::Init()
 
 bool NFItemConsumeManagerModule::Shut()
 {
-	for (NF_SHARE_PTR<NFIItemConsumeProcessModule> xModule = First(); xModule != nullptr; xModule = Next())
+	for (NF_SHARE_PTR<NFIItemConsumeocessModule> xModule = First(); xModule != nullptr; xModule = Next())
 	{
 		xModule->Shut();
 	}
@@ -58,7 +56,7 @@ bool NFItemConsumeManagerModule::Shut()
 
 bool NFItemConsumeManagerModule::Execute()
 {
-	for (NF_SHARE_PTR<NFIItemConsumeProcessModule> xModule = First(); xModule != nullptr; xModule = Next())
+	for (NF_SHARE_PTR<NFIItemConsumeocessModule> xModule = First(); xModule != nullptr; xModule = Next())
 	{
 		xModule->Execute();
 	}
@@ -67,7 +65,7 @@ bool NFItemConsumeManagerModule::Execute()
 
 bool NFItemConsumeManagerModule::AfterInit()
 {
-	for (NF_SHARE_PTR<NFIItemConsumeProcessModule> xModule = First(); xModule != nullptr; xModule = Next())
+	for (NF_SHARE_PTR<NFIItemConsumeocessModule> xModule = First(); xModule != nullptr; xModule = Next())
 	{
 		xModule->AfterInit();
 	}
@@ -75,7 +73,7 @@ bool NFItemConsumeManagerModule::AfterInit()
     return true;
 }
 
-bool NFItemConsumeManagerModule::ResgisterConsumeModule( const int nModuleType, NF_SHARE_PTR<NFIItemConsumeProcessModule> pModule )
+bool NFItemConsumeManagerModule::ResgisterConsumeModule( const int nModuleType, NF_SHARE_PTR<NFIItemConsumeocessModule> pModule )
 {
 	if (ExistElement(nModuleType))
 	{
@@ -86,7 +84,7 @@ bool NFItemConsumeManagerModule::ResgisterConsumeModule( const int nModuleType, 
     return AddElement( nModuleType, pModule );
 }
 
-NF_SHARE_PTR<NFIItemConsumeProcessModule> NFItemConsumeManagerModule::GetConsumeModule( const int nModuleType )
+NF_SHARE_PTR<NFIItemConsumeocessModule> NFItemConsumeManagerModule::GetConsumeModule( const int nModuleType )
 {
     return GetElement( nModuleType );
 }

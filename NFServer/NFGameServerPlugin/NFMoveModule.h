@@ -3,7 +3,7 @@
                 NoahFrame
             https://github.com/ketoo/NoahGameFrame
 
-   Copyright 2009 - 2018 NoahFrame(NoahGameFrame)
+   Copyright 2009 - 2019 NoahFrame(NoahGameFrame)
 
    File creator: lvsheng.huang
    
@@ -23,45 +23,59 @@
    limitations under the License.
 */
 
-#ifndef NF_ITEM_CARD_CONSUME_PROCESS_MODULE_H
-#define NF_ITEM_CARD_CONSUME_PROCESS_MODULE_H
 
+#ifndef NF_MOVE_MODULE_H
+#define NF_MOVE_MODULE_H
+
+#include <string>
+#include <map>
 #include <iostream>
+#include "NFComm/NFCore/NFMap.hpp"
+#include "NFComm/NFCore/NFList.hpp"
+#include "Dependencies/RapidXML/rapidxml.hpp"
+#include "Dependencies/RapidXML/rapidxml_iterators.hpp"
+#include "Dependencies/RapidXML/rapidxml_print.hpp"
+#include "Dependencies/RapidXML/rapidxml_utils.hpp"
+#include "NFComm/NFMessageDefine/NFProtocolDefine.hpp"
 #include "NFComm/NFPluginModule/NFIKernelModule.h"
-#include "NFComm/NFPluginModule/NFIPackModule.h"
 #include "NFComm/NFPluginModule/NFIElementModule.h"
+#include "NFComm/NFPluginModule/NFIClassModule.h"
+#include "NFComm/NFPluginModule/NFIGameServerConfigModule.h"
+#include "NFComm/NFPluginModule/NFISceneProcessModule.h"
+#include "NFComm/NFPluginModule/NFIPropertyModule.h"
 #include "NFComm/NFPluginModule/NFILogModule.h"
 #include "NFComm/NFPluginModule/NFIPluginManager.h"
-#include "NFComm/NFPluginModule/NFIItemModule.h"
-#include "NFComm/NFPluginModule/NFIHeroModule.h"
-#include "NFComm/NFPluginModule/NFIItemConsumeProcessModule.h"
+#include "NFComm/NFPluginModule/NFIEventModule.h"
+#include "NFComm/NFPluginModule/NFIMoveModule.h"
+#include "NFComm/NFPluginModule/NFICellModule.h"
+#include "NFComm/NFPluginModule/NFIGameServerNet_ServerModule.h"
 
-class NFItemCardConsumeProcessModule
-    : public NFIItemConsumeProcessModule
+class NFMoveModule
+    : public NFIMoveModule
 {
-
 public:
-    NFItemCardConsumeProcessModule( NFIPluginManager* p )
+	NFMoveModule(NFIPluginManager* p)
     {
         pPluginManager = p;
     }
+    virtual ~NFMoveModule() {};
+
     virtual bool Init();
     virtual bool Shut();
     virtual bool Execute();
     virtual bool AfterInit();
+	virtual bool ReadyExecute();
 
-	
-	virtual int ConsumeLegal(const NFGUID& self, const std::string& strItemID, const NFDataList& targetID);
-
-	virtual int ConsumeProcess(const NFGUID& self, const std::string& strItemID, const NFDataList& targetID);
-
+	virtual int MoveToPos(const NFGUID& self, const NFVector3& pos, const bool pathFinding = false);
 private:
+
+    NFIElementModule* m_pElementModule;
+    NFIClassModule* m_pClassModule;
     NFIKernelModule* m_pKernelModule;
     NFILogModule* m_pLogModule;
-    NFIPackModule* m_pPackModule;
-	NFIElementModule* m_pElementModule;
-	NFIItemModule* m_pItemModule;
-	NFIHeroModule* m_pHeroModule;
+	NFIEventModule* m_pEventModule;
+	NFICellModule* m_pCellModule;
+    NFIGameServerNet_ServerModule* m_pGameServerNet_ServerModule;
 };
 
 #endif

@@ -3,7 +3,7 @@
                 NoahFrame
             https://github.com/ketoo/NoahGameFrame
 
-   Copyright 2009 - 2018 NoahFrame(NoahGameFrame)
+   Copyright 2009 - 2019 NoahFrame(NoahGameFrame)
 
    File creator: lvsheng.huang
    
@@ -29,57 +29,115 @@
 
 bool NFAIModule::Init()
 {
-    m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>();
+	m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>();
+	m_pElementModule = pPluginManager->FindModule<NFIElementModule>();
 	m_pHateModule = pPluginManager->FindModule<NFIHateModule>();
-
+	m_pFriendModule = pPluginManager->FindModule<NFIFriendModule>();
+	
     //////////////////////////////////////////////////////////////////////////
-
-    //mtStateMap.insert(TMAPSTATE::value_type(DeadState, new NFDeadState(5.0f, pPluginManager)));
-    //mtStateMap.insert(TMAPSTATE::value_type(FightState, new NFFightState(1.0f, pPluginManager)));
-    //mtStateMap.insert(TMAPSTATE::value_type(IdleState, new NFIdleState(3.0f, pPluginManager)));
-    //mtStateMap.insert(TMAPSTATE::value_type(PatrolState, new NFPatrolState(5.0f, pPluginManager)));
+	mtStateMap[IdleState] = new NFIdleState(1.0f, pPluginManager);
+	mtStateMap[FightState] = new NFFightState(1.0f, pPluginManager);
+	mtStateMap[PatrolState] = new NFPatrolState(5.0f, pPluginManager);
+	mtStateMap[ChaseState] = new NFChaseState(1.0f, pPluginManager);
+	mtStateMap[DeadState] = new NFDeadState(5.0f, pPluginManager);
 
     return true;
 }
 
 bool NFAIModule::Shut()
 {
-    TOBJECTSTATEMACHINE::iterator itObject = mtObjectStateMachine.begin();
-    for (itObject; itObject != mtObjectStateMachine.end(); itObject++)
-    {
-        delete itObject->second;
-    }
-
-    TMAPSTATE::iterator itState = mtStateMap.begin();
-    for (itState; itState != mtStateMap.end(); itState++)
-    {
-        delete itState->second;
-    }
-
-    delete m_pHateModule;
-    m_pHateModule = NULL;
+	mtObjectStateMachine.clear();
 
     return true;
 }
 
 NFIState* NFAIModule::GetState(const NFAI_STATE eState)
 {
-    TMAPSTATE::iterator it = mtStateMap.find(eState);
-    if (it != mtStateMap.end())
-    {
-        return it->second;
-    }
+    return mtStateMap[eState];
+}
 
-    return NULL;
+const std::string & NFAIModule::ChooseSkill(const NFGUID & self, const float fDis)
+{
+	const std::string & strCnfID = m_pKernelModule->GetPropertyString(self, NFrame::NPC::ConfigID());
+	const std::string & strNormal = m_pElementModule->GetPropertyString(strCnfID, NFrame::NPC::SkillNormal());
+
+	long nNPCType = m_pKernelModule->GetPropertyInt(self, NFrame::NPC::NPCType());
+	if (nNPCType == NFMsg::ENPCType::ENPCTYPE_TURRET)
+	{
+		return strNormal;
+	}
+
+	const std::string & strAttack = m_pElementModule->GetPropertyString(strCnfID, NFrame::NPC::SkillAttack());
+	const std::string & strThump = m_pElementModule->GetPropertyString(strCnfID, NFrame::NPC::SkillTHUMP());
+
+	float fNormal = (float)m_pElementModule->GetPropertyFloat(strNormal, NFrame::Skill::AtkDis());
+	float fAttack = (float)m_pElementModule->GetPropertyFloat(strAttack, NFrame::Skill::AtkDis());
+	float fThump = (float)m_pElementModule->GetPropertyFloat(strThump, NFrame::Skill::AtkDis());
+
+	if (fNormal < fDis
+		&& fAttack < fDis
+		&& fThump < fDis)
+	{
+		return "";
+	}
+
+	NF_SHARE_PTR<NFIRecord> xRecord = m_pKernelModule->FindRecord(self, NFrame::NPC::Cooldown::ThisName());
+	const int nCommonSKillRow = xRecord->FindString(NFrame::NPC::Cooldown::SkillID, "CommonSkillID");
+	if (nCommonSKillRow >= 0)
+	{
+		long nTime = xRecord->GetInt(nCommonSKillRow, NFrame::NPC::Cooldown::Time);
+		long milliseconds = NFGetTimeMS();
+		if (milliseconds < nTime)
+		{
+			return "";
+		}
+	}
+
+	int nRand = m_pKernelModule->Random(0, 10);
+	if (nRand <= 3)
+	{
+		if (fThump < fDis)
+		{
+			//cd
+			int nRow = xRecord->FindString(NFrame::NPC::Cooldown::SkillID, strThump);
+			if (nRow >= 0)
+			{
+				long nTime = xRecord->GetInt(nRow, NFrame::NPC::Cooldown::Time);
+				long milliseconds = NFGetTimeMS();
+				if (milliseconds >= nTime)
+				{
+					return strThump;
+				}
+			}
+		}
+	}
+	else if (nRand <= 6)
+	{
+		if (fAttack < fDis)
+		{
+			//cd
+			int nRow = xRecord->FindString(NFrame::NPC::Cooldown::SkillID, strAttack);
+			if (nRow >= 0)
+			{
+				long nTime = xRecord->GetInt(nRow, NFrame::NPC::Cooldown::Time);
+				long milliseconds = NFGetTimeMS();
+				if (milliseconds >= nTime)
+				{
+					return strAttack;
+				}
+			}
+		}
+	}
+
+	return strNormal;
 }
 
 bool NFAIModule::CreateAIObject(const NFGUID& self)
 {
-    //这里只是为了以后方便维护状态机时间，节约CPU
-    TOBJECTSTATEMACHINE::iterator it = mtObjectStateMachine.find(self);
+	std::map<NFGUID, NF_SHARE_PTR<NFIStateMachine>>::iterator it = mtObjectStateMachine.find(self);
     if (it == mtObjectStateMachine.end())
     {
-        //mtObjectStateMachine.insert(TOBJECTSTATEMACHINE::value_type(self, new NFStateMachine(self, this)));
+        mtObjectStateMachine.insert(std::map<NFGUID, NF_SHARE_PTR<NFIStateMachine>>::value_type(self, NF_SHARE_PTR<NFIStateMachine>(new NFStateMachine(self, pPluginManager))));
 
         return true;
     }
@@ -89,10 +147,9 @@ bool NFAIModule::CreateAIObject(const NFGUID& self)
 
 bool NFAIModule::DelAIObject(const NFGUID& self)
 {
-    TOBJECTSTATEMACHINE::iterator it = mtObjectStateMachine.find(self);
+	std::map<NFGUID, NF_SHARE_PTR<NFIStateMachine>>::iterator it = mtObjectStateMachine.find(self);
     if (it != mtObjectStateMachine.end())
     {
-        delete it->second;
         mtObjectStateMachine.erase(it);
         return true;
     }
@@ -102,7 +159,7 @@ bool NFAIModule::DelAIObject(const NFGUID& self)
 
 bool NFAIModule::Execute()
 {
-    TOBJECTSTATEMACHINE::iterator it = mtObjectStateMachine.begin();
+	std::map<NFGUID, NF_SHARE_PTR<NFIStateMachine>>::iterator it = mtObjectStateMachine.begin();
     for (it; it != mtObjectStateMachine.end(); it++)
     {
         it->second->Execute();
@@ -111,113 +168,54 @@ bool NFAIModule::Execute()
     return true;
 }
 
-NFIStateMachine* NFAIModule::GetStateMachine(const NFGUID& self)
+NF_SHARE_PTR<NFIStateMachine> NFAIModule::GetStateMachine(const NFGUID& self)
 {
-    TOBJECTSTATEMACHINE::iterator it = mtObjectStateMachine.find(self);
+	std::map<NFGUID, NF_SHARE_PTR<NFIStateMachine>>::iterator it = mtObjectStateMachine.find(self);
     if (it != mtObjectStateMachine.end())
     {
         return it->second;
     }
 
-    return NULL;
+    return nullptr;
 }
 
-void NFAIModule::OnBeKilled(const NFGUID& self, const NFGUID& other)
+int NFAIModule::OnClassObjectEvent(const NFGUID& self, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFDataList& var)
 {
+	const int sceneID = m_pKernelModule->GetPropertyInt(self, NFrame::IObject::SceneID());
+	const int groupID = m_pKernelModule->GetPropertyInt(self, NFrame::IObject::GroupID());
 
-    TOBJECTSTATEMACHINE::iterator it = mtObjectStateMachine.find(self);
-    if (it != mtObjectStateMachine.end())
-    {
-        it->second->ChangeState(DeadState);
-    }
-}
-
-void NFAIModule::OnBeAttack(const NFGUID& self, const NFGUID& other, const int nDamageValue)
-{
-	m_pHateModule->AddHate(self, other, nDamageValue);
-	m_pHateModule->CompSortList(self);
-
-    NFIStateMachine* pStateMachine = GetStateMachine(self);
-    if (pStateMachine)
-    {
-        if (FightState != pStateMachine->CurrentState())
-        {
-            pStateMachine->ChangeState(FightState);
-        }
-    }
-}
-
-void NFAIModule::OnSpring(const NFGUID& self, const NFGUID& other)
-{
-	/*
-    //根据职业,等级,血量,防御
-    //战斗状态只打仇恨列表内的人，巡逻,休闲状态才重新找对象打
-    NF_AI_SUB_TYPE subType = (NF_AI_SUB_TYPE)m_pKernelModule->GetPropertyInt(self, "SubType");
-    if (NF_AI_SUB_TYPE::NFAST_INITATIVE == subType)
-    {
-        //玩家或者PET进入
-        const std::string& strClassName = m_pKernelModule->GetPropertyString(other, "ClassName");
-        if ("Player" == strClassName
-            || "Pet" == strClassName)
-        {
-            GetHateModule()->AddHate(self, other, 100);
-            GetHateModule()->CompSortList(self);
-            NFIStateMachine* pStateMachine = GetStateMachine(self);
-            if (pStateMachine)
-            {
-                if (NFAI_STATE::FightState != pStateMachine->CurrentState())
-                {
-                    NFIState* pState = GetState(pStateMachine->CurrentState());
-                    pState->Execute(self);
-                }
-            }
-        }
-    }
-	*/
-}
-
-void NFAIModule::OnEndSpring(const NFGUID& self, const NFGUID& other)
-{
-    m_pHateModule->SetHateValue(self, other, 0);
-}
-
-void NFAIModule::OnMotion(const NFGUID& self, int nResults)
-{
-}
-
-void NFAIModule::OnSelect(const NFGUID& self, const NFGUID& other)
-{
-}
-
-int NFAIModule::CanUseAnySkill(const NFGUID& self, const NFGUID& other)
-{
-    return 0;
-}
-
-float NFAIModule::UseAnySkill(const NFGUID& self, const NFGUID& other)
-{
-    return 0.5f;
-}
-
-int NFAIModule::OnAIObjectEvent(const NFGUID& self, const std::string& strClassNames, const CLASS_OBJECT_EVENT eClassEvent, const NFDataList& var)
-{
     if (CLASS_OBJECT_EVENT::COE_DESTROY == eClassEvent)
     {
-        DelAIObject(self);
+		DelAIObject(self);
     }
-    else if (CLASS_OBJECT_EVENT::COE_CREATE_HASDATA == eClassEvent)
-    {
-        //m_pEventProcessModule->AddEventCallBack(self, NFED_ON_SERVER_MOVEING, OnMoveRquireEvent);
-        CreateAIObject(self);
-    }
+    else if (CLASS_OBJECT_EVENT::COE_CREATE_FINISH == eClassEvent)
+	{
+		CreateAIObject(self);
+
+		m_pKernelModule->AddPropertyCallBack(self, NFrame::NPC::HP(), this, &NFAIModule::OnNPCHPEvent);
+	}
 
     return 0;
+}
+
+int NFAIModule::OnNPCHPEvent(const NFGUID & self, const std::string & strPropertyName, const NFData & oldVar, const NFData & newVar)
+{
+	const NFGUID& lastAttacker = m_pKernelModule->GetPropertyObject(self, NFrame::NPC::LastAttacker());
+	if (newVar.GetInt() <= 0)
+	{
+		std::map<NFGUID, NF_SHARE_PTR<NFIStateMachine>>::iterator it = mtObjectStateMachine.find(self);
+		if (it != mtObjectStateMachine.end())
+		{
+			it->second->ChangeState(DeadState);
+		}
+	}
+
+	return 0;
 }
 
 bool NFAIModule::AfterInit()
 {
-	m_pKernelModule->AddClassCallBack(NFrame::NPC::ThisName(), this, &NFAIModule::OnAIObjectEvent);
-	m_pKernelModule->AddClassCallBack(NFrame::NPC::ThisName(), this, &NFAIModule::OnAIObjectEvent);
+	m_pKernelModule->AddClassCallBack(NFrame::NPC::ThisName(), this, &NFAIModule::OnClassObjectEvent);
     return true;
 }
 

@@ -3,7 +3,7 @@
                 NoahFrame
             https://github.com/ketoo/NoahGameFrame
 
-   Copyright 2009 - 2018 NoahFrame(NoahGameFrame)
+   Copyright 2009 - 2019 NoahFrame(NoahGameFrame)
 
    File creator: lvsheng.huang
    
@@ -32,9 +32,8 @@
 class NFIMoveModule
     : public NFIModule
 {
-
 public:
-
+	virtual int MoveToPos(const NFGUID& self, const NFVector3& pos, const bool pathFinding = false) = 0;
 };
 
 #endif

@@ -3,7 +3,7 @@
                 NoahFrame
             https://github.com/ketoo/NoahGameFrame
 
-   Copyright 2009 - 2018 NoahFrame(NoahGameFrame)
+   Copyright 2009 - 2019 NoahFrame(NoahGameFrame)
 
    File creator: lvsheng.huang
    
@@ -54,12 +54,6 @@ bool NFEquipModule::Execute()
 
 bool NFEquipModule::AfterInit()
 {
-
-    std::string strEquipPath = pPluginManager->GetConfigPath();
-
-    strEquipPath += "NFDataCfg/Ini/Common/InitProperty.xml";
-    m_pCommonConfigModule->LoadConfig(strEquipPath);
-
     return true;
 }
 

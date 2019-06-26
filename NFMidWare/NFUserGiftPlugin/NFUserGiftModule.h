@@ -3,7 +3,7 @@
                 NoahFrame
             https://github.com/ketoo/NoahGameFrame
 
-   Copyright 2009 - 2018 NoahFrame(NoahGameFrame)
+   Copyright 2009 - 2019 NoahFrame(NoahGameFrame)
 
    File creator: lvsheng.huang
    
@@ -24,8 +24,8 @@
 */
 
 
-#ifndef NF_CHAT_MODULE_H
-#define NF_CHAT_MODULE_H
+#ifndef NF_USER_GIFT_MODULE_H
+#define NF_USER_GIFT_MODULE_H
 
 #include <memory>
 #include "NFComm/NFMessageDefine/NFMsgDefine.h"
@@ -57,6 +57,7 @@ public:
 
     virtual bool AfterInit();
 	virtual bool CheckConfig();
+	virtual bool ReadyExecute();
 
 private:
 	int OnObjectClassEvent(const NFGUID& self, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFDataList& var);
@@ -68,7 +69,7 @@ private:
 
 private:
 	NFMapEx<int, std::vector<std::string>> mxGiftMap;
-
+	std::string mstrIniConfigPath;
 protected:
     //////////////////////////////////////////////////////////////////////////
 	NFIPackModule* m_pPackModule;

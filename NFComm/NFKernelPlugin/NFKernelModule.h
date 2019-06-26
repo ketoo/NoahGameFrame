@@ -3,7 +3,7 @@
                 NoahFrame
             https://github.com/ketoo/NoahGameFrame
 
-   Copyright 2009 - 2018 NoahFrame(NoahGameFrame)
+   Copyright 2009 - 2019 NoahFrame(NoahGameFrame)
 
    File creator: lvsheng.huang
    
@@ -42,6 +42,7 @@
 #include "NFComm/NFPluginModule/NFISceneModule.h"
 #include "NFComm/NFPluginModule/NFIScheduleModule.h"
 #include "NFComm/NFPluginModule/NFIEventModule.h"
+#include "NFComm/NFPluginModule/NFICellModule.h"
 
 
 class NFKernelModule
@@ -208,6 +209,7 @@ private:
     NFIElementModule* m_pElementModule;
 	NFIScheduleModule* m_pScheduleModule;
 	NFIEventModule* m_pEventModule;
+	NFICellModule* m_pCellModule;
 };
 
 #endif

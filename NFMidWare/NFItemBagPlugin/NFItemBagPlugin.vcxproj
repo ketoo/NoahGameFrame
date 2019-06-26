@@ -102,26 +102,24 @@
     </ClCompile>
     <ClCompile Include="NFEquipModule.cpp" />
     <ClCompile Include="NFEquipPropertyModule.cpp" />
-    <ClCompile Include="NFItemCardConsumeProcessModule.cpp" />
     <ClCompile Include="NFItemConsumeManagerModule.cpp" />
     <ClCompile Include="NFItemEquipConsumeProcessModule.cpp" />
     <ClCompile Include="NFItemGemConsumeProcessModule.cpp" />
-    <ClCompile Include="NFItemItemConsumeProcessModule.cpp" />
     <ClCompile Include="NFItemModule.cpp" />
-    <ClCompile Include="NFItemTokenConsumeProcessModule.cpp" />
+    <ClCompile Include="NFItemScrollConsumeProcessModule.cpp" />
+    <ClCompile Include="NFItemSupplyConsumeProcessModule.cpp" />
     <ClCompile Include="NFPackModule.cpp" />
     <ClCompile Include="NFItemBagPlugin.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="NFEquipModule.h" />
     <ClInclude Include="NFEquipPropertyModule.h" />
-    <ClInclude Include="NFItemCardConsumeProcessModule.h" />
     <ClInclude Include="NFItemConsumeManagerModule.h" />
     <ClInclude Include="NFItemEquipConsumeProcessModule.h" />
     <ClInclude Include="NFItemGemConsumeProcessModule.h" />
-    <ClInclude Include="NFItemItemConsumeProcessModule.h" />
     <ClInclude Include="NFItemModule.h" />
-    <ClInclude Include="NFItemTokenConsumeProcessModule.h" />
+    <ClInclude Include="NFItemScrollConsumeProcessModule.h" />
+    <ClInclude Include="NFItemSupplyConsumeProcessModule.h" />
     <ClInclude Include="NFPackModule.h" />
     <ClInclude Include="NFItemBagPlugin.h" />
   </ItemGroup>

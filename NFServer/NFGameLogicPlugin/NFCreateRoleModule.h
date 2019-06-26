@@ -3,7 +3,7 @@
                 NoahFrame
             https://github.com/ketoo/NoahGameFrame
 
-   Copyright 2009 - 2018 NoahFrame(NoahGameFrame)
+   Copyright 2009 - 2019 NoahFrame(NoahGameFrame)
 
    File creator: lvsheng.huang
    
@@ -36,6 +36,7 @@
 #include "NFComm/NFPluginModule/NFIGameServerNet_ServerModule.h"
 #include "NFComm/NFPluginModule/NFIScheduleModule.h"
 #include "NFComm/NFPluginModule/NFIDataTailModule.h"
+#include "NFComm/NFPluginModule/NFISceneModule.h"
 
 class NFCreateRoleModule
     : public NFICreateRoleModule
@@ -90,7 +91,8 @@ private:
 	NFINetModule* m_pNetModule;
 	NFIClassModule* m_pClassModule;
 	NFIElementModule* m_pElementModule;
-    NFIKernelModule* m_pKernelModule;
+	NFIKernelModule* m_pKernelModule;
+	NFISceneModule* m_pSceneModule;
 	NFIGameServerNet_ServerModule* m_pGameServerNet_ServerModule;
 	NFIGameServerToDBModule* m_pGameToDBModule;
 	NFISceneProcessModule* m_pSceneProcessModule;

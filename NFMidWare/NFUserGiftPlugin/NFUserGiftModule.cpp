@@ -3,7 +3,7 @@
                 NoahFrame
             https://github.com/ketoo/NoahGameFrame
 
-   Copyright 2009 - 2018 NoahFrame(NoahGameFrame)
+   Copyright 2009 - 2019 NoahFrame(NoahGameFrame)
 
    File creator: lvsheng.huang
    
@@ -45,37 +45,84 @@ bool NFUserGiftModule::Init()
 
 bool NFUserGiftModule::AfterInit()
 {
-	std::vector<std::string> xGiftItemList = m_pElementModule->GetListByProperty(NFrame::Item::ThisName(), NFrame::Item::ItemType(), NFMsg::EItemType::EIT_ITEM);
-	for (int i = 0; i < xGiftItemList.size(); ++i)
+	NF_SHARE_PTR<NFIClass> xClass = m_pClassModule->GetElement(NFrame::Item::ThisName());
+	if (xClass)
 	{
-		const std::string& strItemID = xGiftItemList[i];
-		int nSubItem = m_pElementModule->GetPropertyInt32(strItemID, NFrame::Item::ItemSubType());
-		if (nSubItem == NFMsg::EGameItemSubType::EGIT_ITEM_PACK)
+		std::vector<std::string> xGiftItemList = xClass->GetIDList();
+		for (int i = 0; i < xGiftItemList.size(); ++i)
 		{
-			int nLevel = m_pElementModule->GetPropertyInt32(strItemID, NFrame::Item::Level());
-			NF_SHARE_PTR<std::vector<std::string>> xItemList = mxGiftMap.GetElement(nLevel);
-			if (!xItemList)
+			const std::string& strItemID = xGiftItemList[i];
+			if (!m_pElementModule->ExistElement(strItemID))
 			{
-				xItemList = NF_SHARE_PTR<std::vector<std::string>>(NF_NEW std::vector<std::string>());
-				mxGiftMap.AddElement(nLevel, xItemList);
+				//can't continue
+				m_pLogModule->LogError("error item id:" + strItemID);
+				continue;
 			}
 
-			xItemList->push_back(strItemID);
+			int nSubItem = m_pElementModule->GetPropertyInt32(strItemID, NFrame::Item::ItemSubType());
+			if (nSubItem == NFMsg::EGameSupplySubType::EGIT_ITEM_PACK)
+			{
+				int nLevel = m_pElementModule->GetPropertyInt32(strItemID, NFrame::Item::Level());
+				if (nLevel <= 1)
+				{
+					nLevel = 1;
+				}
+
+				NF_SHARE_PTR<std::vector<std::string>> xItemList = mxGiftMap.GetElement(nLevel);
+				if (!xItemList)
+				{
+					xItemList = NF_SHARE_PTR<std::vector<std::string>>(NF_NEW std::vector<std::string>());
+					mxGiftMap.AddElement(nLevel, xItemList);
+				}
+
+				xItemList->push_back(strItemID);
+			}
 		}
 	}
 
 	m_pKernelModule->AddClassCallBack(NFrame::Player::ThisName(), this, &NFUserGiftModule::OnObjectClassEvent);
 
-	std::string mstrInitPropertyConfig = pPluginManager->GetConfigPath();
+	mstrIniConfigPath = pPluginManager->GetConfigPath();
 
-	mstrInitPropertyConfig += "NFDataCfg/Ini/Common/EqupConfig.xml";
-	m_pCommonConfigModule->LoadConfig(mstrInitPropertyConfig);
+	std::string strInitEquipConfig = mstrIniConfigPath + "NFDataCfg/Ini/Common/EquipConfig.xml";
+	std::string strInitPropertyConfig = mstrIniConfigPath + "NFDataCfg/Ini/Common/PropertyConfig.xml";
+
+	m_pCommonConfigModule->LoadConfig(strInitEquipConfig);
+	m_pCommonConfigModule->LoadConfig(strInitPropertyConfig);
+
 
 	return true;
 }
 
 bool NFUserGiftModule::CheckConfig()
 {
+
+	return true;
+}
+
+bool NFUserGiftModule::ReadyExecute()
+{
+	//for test
+	NF_SHARE_PTR<NFIClass> xClass = m_pClassModule->GetElement(NFrame::Item::ThisName());
+	if (xClass)
+	{
+		NF_SHARE_PTR<std::vector<std::string>> xItemList = mxGiftMap.GetElement(1);
+		if (!xItemList)
+		{
+			xItemList = NF_SHARE_PTR<std::vector<std::string>>(NF_NEW std::vector<std::string>());
+			mxGiftMap.AddElement(1, xItemList);
+		}
+
+		std::vector<std::string> xGiftItemList = xClass->GetIDList();
+		for (int i = 0; i < xGiftItemList.size(); ++i)
+		{
+			const std::string& strItemID = xGiftItemList[i];
+			for (int j = 0; j < 10; j++)
+			{
+				xItemList->push_back(strItemID);
+			}
+		}
+	}
 
 	return true;
 }
@@ -116,20 +163,28 @@ bool NFUserGiftModule::DoLevelAward(const NFGUID & self, const int nLevel)
 		for (int i = 0; i < xItemList->size(); ++i)
 		{
 			const std::string& strGiftItemID = xItemList->at(i);
-			//
-			NF_SHARE_PTR<NFIPropertyManager> xPropertyManager = m_pElementModule->GetPropertyManager(strGiftItemID);
-			NF_SHARE_PTR<NFIProperty> xProperty = xPropertyManager->GetElement(NFrame::Item::AwardData());
-			const NF_SHARE_PTR<NFMapEx<std::string, std::string>> xEmbeddedMap = xProperty->GetEmbeddedMap();
-			if (xEmbeddedMap)
+			int nItemType = m_pElementModule->GetPropertyInt32(strGiftItemID, NFrame::Item::ItemType());
+			int nSubItemType = m_pElementModule->GetPropertyInt32(strGiftItemID, NFrame::Item::ItemSubType());
+			if (nItemType == NFMsg::EItemType::EIT_SUPPLY && nSubItemType == NFMsg::EGameSupplySubType::EGIT_ITEM_PACK)
 			{
-				std::string strItemID;
-				NF_SHARE_PTR<std::string> strItemCount = xEmbeddedMap->First(strItemID);
-				for (; strItemCount; strItemCount = xEmbeddedMap->Next(strItemID))
+				NF_SHARE_PTR<NFIPropertyManager> xPropertyManager = m_pElementModule->GetPropertyManager(strGiftItemID);
+				NF_SHARE_PTR<NFIProperty> xProperty = xPropertyManager->GetElement(NFrame::Item::AwardData());
+				const NF_SHARE_PTR<NFMapEx<std::string, std::string>> xEmbeddedMap = xProperty->GetEmbeddedMap();
+				if (xEmbeddedMap)
 				{
-					int nCount = lexical_cast<int>(*strItemCount);
+					std::string strItemID;
+					NF_SHARE_PTR<std::string> strItemCount = xEmbeddedMap->First(strItemID);
+					for (; strItemCount; strItemCount = xEmbeddedMap->Next(strItemID))
+					{
+						int nCount = lexical_cast<int>(*strItemCount);
 
-					m_pPackModule->CreateItem(self, strItemID, nCount);
+						m_pPackModule->CreateItem(self, strItemID, nCount);
+					}
 				}
+			}
+			else
+			{
+				m_pPackModule->CreateItem(self, strGiftItemID, 1);
 			}
 		}
 
@@ -141,7 +196,7 @@ bool NFUserGiftModule::DoLevelAward(const NFGUID & self, const int nLevel)
 
 bool NFUserGiftModule::DoInitProperty(const NFGUID & self)
 {
-	std::vector<std::string> xList = m_pCommonConfigModule->GetSubKeyList(NFrame::Player::ThisName());
+	std::vector<std::string> xList = m_pCommonConfigModule->GetFieldList(NFrame::Player::ThisName());
 	for (int i = 0; i < xList.size(); ++i)
 	{
 		const std::string& strPropertyName = xList.at(i);
@@ -180,7 +235,7 @@ bool NFUserGiftModule::ActiveteHero(const NFGUID & self)
 		int nHeroType = m_pElementModule->GetPropertyInt32(strItemID, NFrame::Item::HeroType());
 		if (nHeroType > 0)
 		{
-			m_pItemModule->UseItem(self, strItemID, self);
+			m_pItemModule->UseItem(self, strItemID, self, NFVector3());
 		}
 	}
 

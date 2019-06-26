@@ -3,7 +3,7 @@
                 NoahFrame
             https://github.com/ketoo/NoahGameFrame
 
-   Copyright 2009 - 2018 NoahFrame(NoahGameFrame)
+   Copyright 2009 - 2019 NoahFrame(NoahGameFrame)
 
    File creator: lvsheng.huang
    
@@ -57,12 +57,14 @@ public:
 	virtual bool GetRoleInfo(const std::string& strAccount, std::string& strRoleName, NFGUID& id);
 
 	virtual bool LoadPlayerData(const NFGUID& self, NFMsg::RoleDataPack& roleData);
+	virtual bool LoadPlayerData(const NFGUID& self, NFMsg::PVPPlayerInfo& roleData);
 	virtual bool SavePlayerData(const NFGUID& self, const NFMsg::RoleDataPack& roleData);
 
 	virtual bool SavePlayerTile(const int nSceneID, const NFGUID& self, const std::string& strTileData);
 	virtual bool LoadPlayerTile(const int nSceneID, const NFGUID& self, std::string& strTileData);
 	virtual bool LoadPlayerTileRandom(const int nSceneID, NFGUID& xPlayer, std::string& strTileData);
-	virtual bool LoadPlayerTileRandomCache(const NFGUID& xPlayer, std::string& strTileData);
+
+	virtual bool GetPropertyList(const NFGUID& self, const std::vector<std::string>& fields, std::vector<std::string>& values);
 
 	virtual NFINT64 GetPropertyInt(const NFGUID& self, const std::string& strPropertyName);
 	virtual int GetPropertyInt32(const NFGUID& self, const std::string& strPropertyName);

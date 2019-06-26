@@ -9,6 +9,7 @@
 		<Class Id="EffectData"	Path="NFDataCfg/Struct/EffectData.xml"	InstancePath="NFDataCfg/Ini/EffectData.xml"	/>
 		<Class Id="Equip"	Path="NFDataCfg/Struct/Equip.xml"	InstancePath="NFDataCfg/Ini/Equip.xml"	/>
 		<Class Id="GM"	Path="NFDataCfg/Struct/GM.xml"	InstancePath="NFDataCfg/Ini/GM.xml"	/>
+		<Class Id="Group"	Path="NFDataCfg/Struct/Group.xml"	InstancePath="NFDataCfg/Ini/Group.xml"	/>
 		<Class Id="InitProperty"	Path="NFDataCfg/Struct/InitProperty.xml"	InstancePath="NFDataCfg/Ini/InitProperty.xml"	/>
 		<Class Id="Item"	Path="NFDataCfg/Struct/Item.xml"	InstancePath="NFDataCfg/Ini/Item.xml"	/>
 		<Class Id="Language"	Path="NFDataCfg/Struct/Language.xml"	InstancePath="NFDataCfg/Ini/Language.xml"	/>

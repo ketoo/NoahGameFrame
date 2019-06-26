@@ -3,7 +3,7 @@
                 NoahFrame
             https://github.com/ketoo/NoahGameFrame
 
-   Copyright 2009 - 2018 NoahFrame(NoahGameFrame)
+   Copyright 2009 - 2019 NoahFrame(NoahGameFrame)
 
    File creator: yu.tang
    
@@ -24,8 +24,8 @@
 */
 
 
-#ifndef NF_ITEM_ITEM_CONSUME_PROCESS_MODULE_H
-#define NF_ITEM_ITEM_CONSUME_PROCESS_MODULE_H
+#ifndef NF_ITEM_SUPPLY_CONSUME_PROCESS_MODULE_H
+#define NF_ITEM_SUPPLY_CONSUME_PROCESS_MODULE_H
 
 #include <iostream>
 #include "NFComm/NFPluginModule/NFIKernelModule.h"
@@ -40,12 +40,12 @@
 #include "NFComm/NFPluginModule/NFIItemConsumeProcessModule.h"
 #include "NFComm/NFPluginModule/NFILevelModule.h"
 
-class NFItemItemConsumeProcessModule
-	: public NFIItemConsumeProcessModule
+class NFItemSupplyConsumeProcessModule
+	: public NFIItemConsumeocessModule
 {
 
 public:
-	NFItemItemConsumeProcessModule(NFIPluginManager* p)
+	NFItemSupplyConsumeProcessModule(NFIPluginManager* p)
 	{
 		pPluginManager = p;
 	}
@@ -55,13 +55,13 @@ public:
 	virtual bool AfterInit();
 
 	
-	virtual int ConsumeLegal(const NFGUID& self, const std::string& strItemID, const NFDataList& targetID);
+	virtual int ConsumeLegal(const NFGUID& self, const std::string& strItemID, const NFDataList& targetID, const NFVector3& vector);
 
 	
-	virtual int ConsumeProcess(const NFGUID& self, const std::string& strItemID, const NFDataList& targetID);
+	virtual int ConsumeProcess(const NFGUID& self, const std::string& strItemID, const NFDataList& targetID, const NFVector3& vector);
 
 protected:
-	virtual int ConsumeNormalProcess(const NFGUID& self, const std::string& strItemID, const NFDataList& targetID);
+	virtual int ConsumeNormalProcess(const NFGUID& self, const std::string& strItemID, const NFDataList& targetID, const NFVector3& vector);
 
 private:
 	NFIKernelModule* m_pKernelModule;

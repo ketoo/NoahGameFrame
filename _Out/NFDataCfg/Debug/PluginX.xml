@@ -21,6 +21,7 @@
 		<Plugin Name="NFMailPlugin" />
 		<Plugin Name="NFHeroPlugin" />
 		<Plugin Name="NFFriendPlugin" />	
+		<Plugin Name="NFAIPlugin" />
 	</GameServer>
 
 	<LoginServer>

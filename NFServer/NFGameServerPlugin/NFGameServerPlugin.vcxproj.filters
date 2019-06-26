@@ -33,6 +33,9 @@
     <ClInclude Include="NFLevelModule.h">
       <Filter>NFLevelModule</Filter>
     </ClInclude>
+    <ClInclude Include="NFMoveModule.h">
+      <Filter>NFSceneModule</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="dllmain.cpp" />
@@ -53,6 +56,9 @@
     </ClCompile>
     <ClCompile Include="NFLevelModule.cpp">
       <Filter>NFLevelModule</Filter>
+    </ClCompile>
+    <ClCompile Include="NFMoveModule.cpp">
+      <Filter>NFSceneModule</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

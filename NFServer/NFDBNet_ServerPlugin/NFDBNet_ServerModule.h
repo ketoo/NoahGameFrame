@@ -3,7 +3,7 @@
                 NoahFrame
             https://github.com/ketoo/NoahGameFrame
 
-   Copyright 2009 - 2018 NoahFrame(NoahGameFrame)
+   Copyright 2009 - 2019 NoahFrame(NoahGameFrame)
 
    File creator: lvsheng.huang
    
@@ -41,6 +41,7 @@
 #include "NFComm/NFPluginModule/NFIWorldToMasterModule.h"
 #include "NFComm/NFPluginModule/NFIAccountRedisModule.h"
 #include "NFComm/NFPluginModule/NFIPlayerRedisModule.h"
+#include "NFComm/NFPluginModule/NFISceneProcessModule.h"
 
 class NFIDBNet_ServerModule : public NFIModule
 {

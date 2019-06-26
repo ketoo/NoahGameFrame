@@ -3,7 +3,7 @@
                 NoahFrame
             https://github.com/ketoo/NoahGameFrame
 
-   Copyright 2009 - 2018 NoahFrame(NoahGameFrame)
+   Copyright 2009 - 2019 NoahFrame(NoahGameFrame)
 
    File creator: lvsheng.huang
    
@@ -43,10 +43,8 @@ public:
 	virtual const std::string& GetFieldString(const std::string& key1, const std::string& field) = 0;
     virtual const std::string& GetFieldString(const std::string& key1, const std::string& key2, const std::string& field) = 0;
 
-	//virtual std::vector<std::string> GetFieldList(const std::string& key1) = 0;
+	virtual std::vector<std::string> GetFieldList(const std::string& key1) = 0;
 	virtual std::vector<std::string> GetSubKeyList(const std::string& key1) = 0;
-
-	//virtual std::vector<std::string> GetFieldList(const std::string& key1, const std::string& key2) = 0;
 };
 
 #endif

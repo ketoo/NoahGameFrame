@@ -3,7 +3,7 @@
                 NoahFrame
             https://github.com/ketoo/NoahGameFrame
 
-   Copyright 2009 - 2018 NoahFrame(NoahGameFrame)
+   Copyright 2009 - 2019 NoahFrame(NoahGameFrame)
 
    File creator: lvsheng.huang
    
@@ -40,6 +40,7 @@
 #include "NFComm/NFPluginModule/NFIHeroPropertyModule.h"
 #include "NFComm/NFPluginModule/NFISceneModule.h"
 #include "NFComm/NFPluginModule/NFILogModule.h"
+#include "NFComm/NFPluginModule/NFIPropertyModule.h"
 
 class NFHeroModule
     : public NFIHeroModule
@@ -68,15 +69,17 @@ public:
 	//the hero who you want him fight for you right now
 	virtual bool SwitchFightHero(const NFGUID& self, const NFGUID& xHeroID);
 
+	virtual bool ReliveHero(const NFGUID& self, const NFGUID& xHeroID, const int diamond);
+	virtual bool ReliveAllHero(const NFGUID& self);
+
 	virtual NFGUID GetHeroGUID(const NFGUID& self, const std::string& strID);
 	EConsHero_Pos GetFightPos(const NFGUID& self, const NFGUID& xHeroID);
 
 protected:
 	void OnSetFightHeroMsg(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
-	void OnSwitchFightHeroMsg( const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen );
+	void OnSwitchFightHeroMsg(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+	void OnReliveHeroMsg(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
 
-	int CalReliveTime(const NFGUID& self, const NFGUID& xHeroID, const E_SCENE_TYPE reliveType);
-	bool StillAlive(const NFGUID& self, const NFGUID& xHeroID);
 protected:
 
 	int OnPlayerClassEvent(const NFGUID& self, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFDataList& var);
@@ -99,6 +102,7 @@ protected:
 	NFIHeroPropertyModule* m_pHeroPropertyModule;
 	NFIGameServerNet_ServerModule* m_pGameServerNet_ServerModule;
     NFISceneProcessModule* m_pSceneProcessModule;
+	NFIPropertyModule* m_pPropertyModule;
 private:
 };
 

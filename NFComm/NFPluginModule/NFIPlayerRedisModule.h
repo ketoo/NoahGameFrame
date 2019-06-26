@@ -3,7 +3,7 @@
                 NoahFrame
             https://github.com/ketoo/NoahGameFrame
 
-   Copyright 2009 - 2018 NoahFrame(NoahGameFrame)
+   Copyright 2009 - 2019 NoahFrame(NoahGameFrame)
 
    File creator: lvsheng.huang
    
@@ -37,12 +37,15 @@ public:
 	virtual bool ExistRoleName(const std::string& strRoleName) = 0;
 	virtual bool CreateRole(const std::string& strAccount, const std::string& strRoleName, const NFGUID& id, const int nHomeSceneID) = 0;
 	virtual bool GetRoleInfo(const std::string& strAccount, std::string& strRoleName, NFGUID& id) = 0;
-
+	
+	//virtual bool LoadPlayerData(const NFGUID& self, NFMsg::RoleDataPack& roleData) = 0;
+	//virtual bool LoadPlayerData(const NFGUID& self, NFMsg::PVPPlayerInfo& roleData) = 0;
 	virtual bool SavePlayerTile(const int nSceneID, const NFGUID& self, const std::string& strTileData) = 0;
 
 	virtual bool LoadPlayerTile(const int nSceneID, const NFGUID& self, std::string& strTileData) = 0;
 	virtual bool LoadPlayerTileRandom(const int nSceneID, NFGUID& xPlayer, std::string& strTileData) = 0;
-	virtual bool LoadPlayerTileRandomCache(const NFGUID& xPlayer, std::string& strTileData) = 0;
+
+	virtual bool GetPropertyList(const NFGUID& self, const std::vector<std::string>& fields, std::vector<std::string>& values) = 0;
 
 	virtual NFINT64 GetPropertyInt(const NFGUID& self, const std::string& strPropertyName) = 0;
 	virtual int GetPropertyInt32(const NFGUID& self, const std::string& strPropertyName) = 0;

@@ -3,7 +3,7 @@
                 NoahFrame
             https://github.com/ketoo/NoahGameFrame
 
-   Copyright 2009 - 2018 NoahFrame(NoahGameFrame)
+   Copyright 2009 - 2019 NoahFrame(NoahGameFrame)
 
    File creator: lvsheng.huang
    
@@ -35,9 +35,9 @@ class NFISkillModule
 {
 
 public:
-
     virtual int ExistSkill(const NFGUID& self, const std::string& strSkillName) = 0;
-
+	virtual int UseSkill(const NFGUID& self, const std::string& strSkillName, const NFGUID& target, const int index = -1) = 0;
+	virtual int UseSkill(const NFGUID& self, const std::string& strSkillName, const NFDataList& target, const int index = -1) = 0;
 };
 
 #endif

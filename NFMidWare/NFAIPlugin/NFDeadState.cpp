@@ -3,7 +3,7 @@
                 NoahFrame
             https://github.com/ketoo/NoahGameFrame
 
-   Copyright 2009 - 2018 NoahFrame(NoahGameFrame)
+   Copyright 2009 - 2019 NoahFrame(NoahGameFrame)
 
    File creator: lvsheng.huang
    
@@ -40,7 +40,6 @@ bool NFDeadState::Enter(const NFGUID& self, NFIStateMachine* pStateMachine)
 {
     if (!NFIState::Enter(self, pStateMachine))
     {
-        m_pHateModule->ClearHate(self);
     }
 
     return true;
@@ -48,11 +47,7 @@ bool NFDeadState::Enter(const NFGUID& self, NFIStateMachine* pStateMachine)
 
 bool NFDeadState::Execute(const NFGUID& self, NFIStateMachine* pStateMachine)
 {
-    if (!NFIState::Execute(self, pStateMachine))
-    {
-        m_pKernelModule->DestroyObject(self);
-    }
-
+ 
     return true;
 }
 

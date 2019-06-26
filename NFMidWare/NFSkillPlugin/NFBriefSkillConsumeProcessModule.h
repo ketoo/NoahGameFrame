@@ -3,7 +3,7 @@
                 NoahFrame
             https://github.com/ketoo/NoahGameFrame
 
-   Copyright 2009 - 2018 NoahFrame(NoahGameFrame)
+   Copyright 2009 - 2019 NoahFrame(NoahGameFrame)
 
    File creator: lvsheng.huang
    
@@ -53,7 +53,7 @@ public:
 
     virtual int ConsumeLegal( const NFGUID& self, const std::string& skillID,  const NFDataList& other );
 
-    virtual int ConsumeProcess( const NFGUID& self, const std::string& strSkillName, const NFDataList& other, NFDataList& damageListValue, NFDataList& damageResultList );
+    virtual int ConsumeProcess( const NFGUID& self, const std::string& skillID, const NFDataList& other, NFDataList& damageListValue, NFDataList& damageResultList );
 
 private:
     NFIKernelModule* m_pKernelModule;

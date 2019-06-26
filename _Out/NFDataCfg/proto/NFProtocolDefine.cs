@@ -20,6 +20,7 @@ namespace NFrame
 		public static readonly String ConfigID = "ConfigID";// string
 		public static readonly String GroupID = "GroupID";// int
 		public static readonly String ID = "ID";// string
+		public static readonly String MoveTo = "MoveTo";// vector3
 		public static readonly String Position = "Position";// vector3
 		public static readonly String SceneID = "SceneID";// int
 		// Property
@@ -44,6 +45,7 @@ namespace NFrame
 		public static readonly String ConfigID = "ConfigID";// string
 		public static readonly String GroupID = "GroupID";// int
 		public static readonly String ID = "ID";// string
+		public static readonly String MoveTo = "MoveTo";// vector3
 		public static readonly String Position = "Position";// vector3
 		public static readonly String SceneID = "SceneID";// int
 		// Property
@@ -122,6 +124,7 @@ namespace NFrame
 		public static readonly String ConfigID = "ConfigID";// string
 		public static readonly String GroupID = "GroupID";// int
 		public static readonly String ID = "ID";// string
+		public static readonly String MoveTo = "MoveTo";// vector3
 		public static readonly String Position = "Position";// vector3
 		public static readonly String SceneID = "SceneID";// int
 		// Property
@@ -144,6 +147,7 @@ namespace NFrame
 		public static readonly String ConfigID = "ConfigID";// string
 		public static readonly String GroupID = "GroupID";// int
 		public static readonly String ID = "ID";// string
+		public static readonly String MoveTo = "MoveTo";// vector3
 		public static readonly String Position = "Position";// vector3
 		public static readonly String SceneID = "SceneID";// int
 		// Property
@@ -166,6 +170,7 @@ namespace NFrame
 		public static readonly String ConfigID = "ConfigID";// string
 		public static readonly String GroupID = "GroupID";// int
 		public static readonly String ID = "ID";// string
+		public static readonly String MoveTo = "MoveTo";// vector3
 		public static readonly String Position = "Position";// vector3
 		public static readonly String SceneID = "SceneID";// int
 		// Property
@@ -188,6 +193,7 @@ namespace NFrame
 		public static readonly String ConfigID = "ConfigID";// string
 		public static readonly String GroupID = "GroupID";// int
 		public static readonly String ID = "ID";// string
+		public static readonly String MoveTo = "MoveTo";// vector3
 		public static readonly String Position = "Position";// vector3
 		public static readonly String SceneID = "SceneID";// int
 		// Property
@@ -202,13 +208,16 @@ namespace NFrame
 		public static readonly String BUFF_GATE = "BUFF_GATE";// int
 		public static readonly String CRITICAL = "CRITICAL";// int
 		public static readonly String DEF_DARK = "DEF_DARK";// int
+		public static readonly String DEF_FIRE = "DEF_FIRE";// int
 		public static readonly String DEF_ICE = "DEF_ICE";// int
 		public static readonly String DEF_LIGHT = "DEF_LIGHT";// int
 		public static readonly String DEF_POISON = "DEF_POISON";// int
 		public static readonly String DEF_VALUE = "DEF_VALUE";// int
 		public static readonly String DEF_WIND = "DEF_WIND";// int
+		public static readonly String DIZZY_GATE = "DIZZY_GATE";// int
 		public static readonly String HP = "HP";// int
 		public static readonly String HPREGEN = "HPREGEN";// int
+		public static readonly String LUCK = "LUCK";// int
 		public static readonly String MAGIC_GATE = "MAGIC_GATE";// int
 		public static readonly String MAXHP = "MAXHP";// int
 		public static readonly String MAXMP = "MAXMP";// int
@@ -235,6 +244,7 @@ namespace NFrame
 		public static readonly String ConfigID = "ConfigID";// string
 		public static readonly String GroupID = "GroupID";// int
 		public static readonly String ID = "ID";// string
+		public static readonly String MoveTo = "MoveTo";// vector3
 		public static readonly String Position = "Position";// vector3
 		public static readonly String SceneID = "SceneID";// int
 		// Property
@@ -268,11 +278,57 @@ namespace NFrame
 		public static readonly String ConfigID = "ConfigID";// string
 		public static readonly String GroupID = "GroupID";// int
 		public static readonly String ID = "ID";// string
+		public static readonly String MoveTo = "MoveTo";// vector3
 		public static readonly String Position = "Position";// vector3
 		public static readonly String SceneID = "SceneID";// int
 		// Property
 		public static readonly String Level = "Level";// int
 		// Record
+
+	}
+	public class Group
+	{
+		//Class name
+		public static readonly String ThisName = "Group";
+		// IObject
+		public static readonly String ClassName = "ClassName";// string
+		public static readonly String ConfigID = "ConfigID";// string
+		public static readonly String GroupID = "GroupID";// int
+		public static readonly String ID = "ID";// string
+		public static readonly String MoveTo = "MoveTo";// vector3
+		public static readonly String Position = "Position";// vector3
+		public static readonly String SceneID = "SceneID";// int
+		// Property
+		public static readonly String MatchBeKilledHero = "MatchBeKilledHero";// int
+		public static readonly String MatchGambleDiamond = "MatchGambleDiamond";// int
+		public static readonly String MatchID = "MatchID";// object
+		public static readonly String MatchKilledHero = "MatchKilledHero";// int
+		public static readonly String MatchOpponentCup = "MatchOpponentCup";// int
+		public static readonly String MatchOpponentDiamond = "MatchOpponentDiamond";// int
+		public static readonly String MatchOpponentGold = "MatchOpponentGold";// int
+		public static readonly String MatchOpponentHead = "MatchOpponentHead";// string
+		public static readonly String MatchOpponentHeroCnf1 = "MatchOpponentHeroCnf1";// string
+		public static readonly String MatchOpponentHeroCnf2 = "MatchOpponentHeroCnf2";// string
+		public static readonly String MatchOpponentHeroCnf3 = "MatchOpponentHeroCnf3";// string
+		public static readonly String MatchOpponentHeroID1 = "MatchOpponentHeroID1";// object
+		public static readonly String MatchOpponentHeroID2 = "MatchOpponentHeroID2";// object
+		public static readonly String MatchOpponentHeroID3 = "MatchOpponentHeroID3";// object
+		public static readonly String MatchOpponentHeroStar1 = "MatchOpponentHeroStar1";// int
+		public static readonly String MatchOpponentHeroStar2 = "MatchOpponentHeroStar2";// int
+		public static readonly String MatchOpponentHeroStar3 = "MatchOpponentHeroStar3";// int
+		public static readonly String MatchOpponentID = "MatchOpponentID";// object
+		public static readonly String MatchOpponentLevel = "MatchOpponentLevel";// int
+		public static readonly String MatchOpponentName = "MatchOpponentName";// string
+		public static readonly String MatchStar = "MatchStar";// int
+		public static readonly String MatchTeamID = "MatchTeamID";// object
+		// Record
+		public class MatchMember
+		{
+			//Class name
+			public static readonly String ThisName = "MatchMember";
+			public const int GUID = 0;//object
+
+		}
 
 	}
 	public class IObject
@@ -284,6 +340,7 @@ namespace NFrame
 		public static readonly String ConfigID = "ConfigID";// string
 		public static readonly String GroupID = "GroupID";// int
 		public static readonly String ID = "ID";// string
+		public static readonly String MoveTo = "MoveTo";// vector3
 		public static readonly String Position = "Position";// vector3
 		public static readonly String SceneID = "SceneID";// int
 		// Record
@@ -298,6 +355,7 @@ namespace NFrame
 		public static readonly String ConfigID = "ConfigID";// string
 		public static readonly String GroupID = "GroupID";// int
 		public static readonly String ID = "ID";// string
+		public static readonly String MoveTo = "MoveTo";// vector3
 		public static readonly String Position = "Position";// vector3
 		public static readonly String SceneID = "SceneID";// int
 		// Property
@@ -318,6 +376,7 @@ namespace NFrame
 		public static readonly String ConfigID = "ConfigID";// string
 		public static readonly String GroupID = "GroupID";// int
 		public static readonly String ID = "ID";// string
+		public static readonly String MoveTo = "MoveTo";// vector3
 		public static readonly String Position = "Position";// vector3
 		public static readonly String SceneID = "SceneID";// int
 		// Property
@@ -354,6 +413,7 @@ namespace NFrame
 		public static readonly String ConfigID = "ConfigID";// string
 		public static readonly String GroupID = "GroupID";// int
 		public static readonly String ID = "ID";// string
+		public static readonly String MoveTo = "MoveTo";// vector3
 		public static readonly String Position = "Position";// vector3
 		public static readonly String SceneID = "SceneID";// int
 		// Property
@@ -373,6 +433,7 @@ namespace NFrame
 		public static readonly String ConfigID = "ConfigID";// string
 		public static readonly String GroupID = "GroupID";// int
 		public static readonly String ID = "ID";// string
+		public static readonly String MoveTo = "MoveTo";// vector3
 		public static readonly String Position = "Position";// vector3
 		public static readonly String SceneID = "SceneID";// int
 		// Property
@@ -408,6 +469,7 @@ namespace NFrame
 		public static readonly String ConfigID = "ConfigID";// string
 		public static readonly String GroupID = "GroupID";// int
 		public static readonly String ID = "ID";// string
+		public static readonly String MoveTo = "MoveTo";// vector3
 		public static readonly String Position = "Position";// vector3
 		public static readonly String SceneID = "SceneID";// int
 		// Property
@@ -422,7 +484,7 @@ namespace NFrame
 		public static readonly String ATK_WIND = "ATK_WIND";// int
 		public static readonly String BUFF_GATE = "BUFF_GATE";// int
 		public static readonly String CRITICAL = "CRITICAL";// int
-		public static readonly String Camp = "Camp";// int
+		public static readonly String Camp = "Camp";// object
 		public static readonly String Climb = "Climb";// int
 		public static readonly String ConsumeData = "ConsumeData";// string
 		public static readonly String CrisisDis = "CrisisDis";// float
@@ -447,6 +509,7 @@ namespace NFrame
 		public static readonly String Height = "Height";// float
 		public static readonly String HeroStar = "HeroStar";// int
 		public static readonly String Icon = "Icon";// string
+		public static readonly String LUCK = "LUCK";// int
 		public static readonly String LastAttacker = "LastAttacker";// object
 		public static readonly String Level = "Level";// int
 		public static readonly String MAGIC_GATE = "MAGIC_GATE";// int
@@ -458,7 +521,9 @@ namespace NFrame
 		public static readonly String MP = "MP";// int
 		public static readonly String MPREGEN = "MPREGEN";// int
 		public static readonly String MasterID = "MasterID";// object
+		public static readonly String MasterName = "MasterName";// string
 		public static readonly String MeleeType = "MeleeType";// int
+		public static readonly String NPCSubType = "NPCSubType";// int
 		public static readonly String NPCType = "NPCType";// int
 		public static readonly String PHYSICAL_GATE = "PHYSICAL_GATE";// int
 		public static readonly String Prefab = "Prefab";// string
@@ -498,6 +563,7 @@ namespace NFrame
 		public static readonly String ConfigID = "ConfigID";// string
 		public static readonly String GroupID = "GroupID";// int
 		public static readonly String ID = "ID";// string
+		public static readonly String MoveTo = "MoveTo";// vector3
 		public static readonly String Position = "Position";// vector3
 		public static readonly String SceneID = "SceneID";// int
 		// Property
@@ -517,6 +583,7 @@ namespace NFrame
 		public static readonly String ConfigID = "ConfigID";// string
 		public static readonly String GroupID = "GroupID";// int
 		public static readonly String ID = "ID";// string
+		public static readonly String MoveTo = "MoveTo";// vector3
 		public static readonly String Position = "Position";// vector3
 		public static readonly String SceneID = "SceneID";// int
 		// Property
@@ -532,7 +599,7 @@ namespace NFrame
 		public static readonly String Account = "Account";// string
 		public static readonly String BUFF_GATE = "BUFF_GATE";// int
 		public static readonly String CRITICAL = "CRITICAL";// int
-		public static readonly String Camp = "Camp";// int
+		public static readonly String Camp = "Camp";// object
 		public static readonly String Clan_AD = "Clan_AD";// string
 		public static readonly String Clan_ContinueDay = "Clan_ContinueDay";// int
 		public static readonly String Clan_CreateTime = "Clan_CreateTime";// int
@@ -550,6 +617,7 @@ namespace NFrame
 		public static readonly String Clan_PresidentName = "Clan_PresidentName";// string
 		public static readonly String Cland_MemeberCount = "Cland_MemeberCount";// int
 		public static readonly String Cland_Rank = "Cland_Rank";// int
+		public static readonly String Commend = "Commend";// int
 		public static readonly String ConnectKey = "ConnectKey";// string
 		public static readonly String Cup = "Cup";// int
 		public static readonly String DEF_DARK = "DEF_DARK";// int
@@ -565,12 +633,8 @@ namespace NFrame
 		public static readonly String EXP = "EXP";// int
 		public static readonly String FightHeroCnfID = "FightHeroCnfID";// string
 		public static readonly String FightHeroID = "FightHeroID";// object
-		public static readonly String FightHeroLevel = "FightHeroLevel";// int
-		public static readonly String FightingStar = "FightingStar";// int
 		public static readonly String FirstTarget = "FirstTarget";// object
 		public static readonly String GMLevel = "GMLevel";// int
-		public static readonly String GambleDiamond = "GambleDiamond";// int
-		public static readonly String GambleGold = "GambleGold";// int
 		public static readonly String GameID = "GameID";// int
 		public static readonly String GateID = "GateID";// int
 		public static readonly String Gold = "Gold";// int
@@ -587,17 +651,16 @@ namespace NFrame
 		public static readonly String HeroStar1 = "HeroStar1";// int
 		public static readonly String HeroStar2 = "HeroStar2";// int
 		public static readonly String HeroStar3 = "HeroStar3";// int
-		public static readonly String HomeCellID = "HomeCellID";// string
+		public static readonly String HomeCellPos = "HomeCellPos";// vector3
+		public static readonly String HomeSceneID = "HomeSceneID";// int
 		public static readonly String Item1 = "Item1";// string
 		public static readonly String Item1Count = "Item1Count";// int
-		public static readonly String Item1UsedCount = "Item1UsedCount";// int
 		public static readonly String Item2 = "Item2";// string
 		public static readonly String Item2Count = "Item2Count";// int
-		public static readonly String Item2UsedCount = "Item2UsedCount";// int
 		public static readonly String Item3 = "Item3";// string
 		public static readonly String Item3Count = "Item3Count";// int
-		public static readonly String Item3UsedCount = "Item3UsedCount";// int
 		public static readonly String Job = "Job";// int
+		public static readonly String LUCK = "LUCK";// int
 		public static readonly String LastOfflineTime = "LastOfflineTime";// object
 		public static readonly String Level = "Level";// int
 		public static readonly String MAGIC_GATE = "MAGIC_GATE";// int
@@ -612,25 +675,12 @@ namespace NFrame
 		public static readonly String Name = "Name";// string
 		public static readonly String OnlineCount = "OnlineCount";// int
 		public static readonly String OnlineTime = "OnlineTime";// object
-		public static readonly String OpponentCup = "OpponentCup";// int
-		public static readonly String OpponentDiamond = "OpponentDiamond";// int
-		public static readonly String OpponentFighting = "OpponentFighting";// object
-		public static readonly String OpponentGold = "OpponentGold";// int
-		public static readonly String OpponentHead = "OpponentHead";// string
-		public static readonly String OpponentHero1 = "OpponentHero1";// string
-		public static readonly String OpponentHero2 = "OpponentHero2";// string
-		public static readonly String OpponentHero3 = "OpponentHero3";// string
-		public static readonly String OpponentHeroStar1 = "OpponentHeroStar1";// int
-		public static readonly String OpponentHeroStar2 = "OpponentHeroStar2";// int
-		public static readonly String OpponentHeroStar3 = "OpponentHeroStar3";// int
-		public static readonly String OpponentID = "OpponentID";// object
-		public static readonly String OpponentLevel = "OpponentLevel";// int
-		public static readonly String OpponentName = "OpponentName";// string
 		public static readonly String PHYSICAL_GATE = "PHYSICAL_GATE";// int
 		public static readonly String PrefabPath = "PrefabPath";// string
 		public static readonly String REFLECTDAMAGE = "REFLECTDAMAGE";// int
 		public static readonly String RELIVE_SOUL = "RELIVE_SOUL";// int
 		public static readonly String Race = "Race";// int
+		public static readonly String Report = "Report";// int
 		public static readonly String SKILL_GATE = "SKILL_GATE";// int
 		public static readonly String SP = "SP";// int
 		public static readonly String SPREGEN = "SPREGEN";// int
@@ -640,16 +690,12 @@ namespace NFrame
 		public static readonly String Skill1 = "Skill1";// string
 		public static readonly String Skill2 = "Skill2";// string
 		public static readonly String Skill3 = "Skill3";// string
+		public static readonly String Streak = "Streak";// int
 		public static readonly String TeamID = "TeamID";// object
 		public static readonly String TotalLineTime = "TotalLineTime";// object
 		public static readonly String TotalTime = "TotalTime";// int
 		public static readonly String VIPEXP = "VIPEXP";// int
 		public static readonly String VIPLevel = "VIPLevel";// int
-		public static readonly String WarEventTime = "WarEventTime";// int
-		public static readonly String WarID = "WarID";// object
-		public static readonly String WonCup = "WonCup";// int
-		public static readonly String WonDiamond = "WonDiamond";// int
-		public static readonly String WonGold = "WonGold";// int
 		// Record
 		public class BagEquipList
 		{
@@ -796,6 +842,7 @@ namespace NFrame
 			public const int PHYSICAL_GATE = 28;//int
 			public const int MAGIC_GATE = 29;//int
 			public const int BUFF_GATE = 30;//int
+			public const int LUCK = 31;//int
 
 		}
 		public class Cooldown
@@ -851,6 +898,7 @@ namespace NFrame
 			public const int PHYSICAL_GATE = 28;//int
 			public const int MAGIC_GATE = 29;//int
 			public const int BUFF_GATE = 30;//int
+			public const int LUCK = 31;//int
 
 		}
 		public class PlayerHero
@@ -863,14 +911,13 @@ namespace NFrame
 			public const int Level = 3;//int
 			public const int Exp = 4;//int
 			public const int Star = 5;//int
-			public const int ReliveTime = 6;//int
-			public const int HP = 7;//int
-			public const int Ice_Talent = 8;//int
-			public const int Fire_Talent = 9;//int
-			public const int Light_Talent = 10;//int
-			public const int Wind_Talent = 11;//int
-			public const int Poison_Talent = 12;//int
-			public const int Dark_Talent = 13;//int
+			public const int HP = 6;//int
+			public const int Ice_Talent = 7;//int
+			public const int Fire_Talent = 8;//int
+			public const int Light_Talent = 9;//int
+			public const int Wind_Talent = 10;//int
+			public const int Poison_Talent = 11;//int
+			public const int Dark_Talent = 12;//int
 
 		}
 		public class TaskList
@@ -936,27 +983,21 @@ namespace NFrame
 		public static readonly String ConfigID = "ConfigID";// string
 		public static readonly String GroupID = "GroupID";// int
 		public static readonly String ID = "ID";// string
+		public static readonly String MoveTo = "MoveTo";// vector3
 		public static readonly String Position = "Position";// vector3
 		public static readonly String SceneID = "SceneID";// int
 		// Property
 		public static readonly String ActorID = "ActorID";// int
-		public static readonly String BossSoundList = "BossSoundList";// string
-		public static readonly String CamOffestPos = "CamOffestPos";// string
-		public static readonly String CamOffestRot = "CamOffestRot";// string
 		public static readonly String FilePath = "FilePath";// string
-		public static readonly String LeftBot = "LeftBot";// vector2
 		public static readonly String LoadingUI = "LoadingUI";// string
 		public static readonly String MaxGroup = "MaxGroup";// int
 		public static readonly String MaxGroupPlayers = "MaxGroupPlayers";// int
 		public static readonly String NavigationResPath = "NavigationResPath";// string
 		public static readonly String RelivePos = "RelivePos";// string
 		public static readonly String ResPath = "ResPath";// string
-		public static readonly String RightTop = "RightTop";// vector2
 		public static readonly String SceneName = "SceneName";// string
 		public static readonly String SceneShowName = "SceneShowName";// string
 		public static readonly String SoundList = "SoundList";// string
-		public static readonly String TagPos = "TagPos";// string
-		public static readonly String Tile = "Tile";// int
 		public static readonly String Type = "Type";// int
 		public static readonly String Width = "Width";// int
 		// Record
@@ -971,6 +1012,7 @@ namespace NFrame
 		public static readonly String ConfigID = "ConfigID";// string
 		public static readonly String GroupID = "GroupID";// int
 		public static readonly String ID = "ID";// string
+		public static readonly String MoveTo = "MoveTo";// vector3
 		public static readonly String Position = "Position";// vector3
 		public static readonly String SceneID = "SceneID";// int
 		// Property
@@ -987,6 +1029,7 @@ namespace NFrame
 		public static readonly String ConfigID = "ConfigID";// string
 		public static readonly String GroupID = "GroupID";// int
 		public static readonly String ID = "ID";// string
+		public static readonly String MoveTo = "MoveTo";// vector3
 		public static readonly String Position = "Position";// vector3
 		public static readonly String SceneID = "SceneID";// int
 		// Property
@@ -1012,6 +1055,7 @@ namespace NFrame
 		public static readonly String ConfigID = "ConfigID";// string
 		public static readonly String GroupID = "GroupID";// int
 		public static readonly String ID = "ID";// string
+		public static readonly String MoveTo = "MoveTo";// vector3
 		public static readonly String Position = "Position";// vector3
 		public static readonly String SceneID = "SceneID";// int
 		// Property
@@ -1035,6 +1079,7 @@ namespace NFrame
 		public static readonly String ConfigID = "ConfigID";// string
 		public static readonly String GroupID = "GroupID";// int
 		public static readonly String ID = "ID";// string
+		public static readonly String MoveTo = "MoveTo";// vector3
 		public static readonly String Position = "Position";// vector3
 		public static readonly String SceneID = "SceneID";// int
 		// Property
@@ -1075,6 +1120,7 @@ namespace NFrame
 		public static readonly String ConfigID = "ConfigID";// string
 		public static readonly String GroupID = "GroupID";// int
 		public static readonly String ID = "ID";// string
+		public static readonly String MoveTo = "MoveTo";// vector3
 		public static readonly String Position = "Position";// vector3
 		public static readonly String SceneID = "SceneID";// int
 		// Property
@@ -1098,6 +1144,7 @@ namespace NFrame
 		public static readonly String ConfigID = "ConfigID";// string
 		public static readonly String GroupID = "GroupID";// int
 		public static readonly String ID = "ID";// string
+		public static readonly String MoveTo = "MoveTo";// vector3
 		public static readonly String Position = "Position";// vector3
 		public static readonly String SceneID = "SceneID";// int
 		// Property
@@ -1119,6 +1166,7 @@ namespace NFrame
 		public static readonly String ConfigID = "ConfigID";// string
 		public static readonly String GroupID = "GroupID";// int
 		public static readonly String ID = "ID";// string
+		public static readonly String MoveTo = "MoveTo";// vector3
 		public static readonly String Position = "Position";// vector3
 		public static readonly String SceneID = "SceneID";// int
 		// Property
@@ -1143,6 +1191,7 @@ namespace NFrame
 		public static readonly String ConfigID = "ConfigID";// string
 		public static readonly String GroupID = "GroupID";// int
 		public static readonly String ID = "ID";// string
+		public static readonly String MoveTo = "MoveTo";// vector3
 		public static readonly String Position = "Position";// vector3
 		public static readonly String SceneID = "SceneID";// int
 		// Property
