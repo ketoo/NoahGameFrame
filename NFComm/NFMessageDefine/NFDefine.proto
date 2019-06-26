@@ -483,10 +483,11 @@ enum ETaskType
 }
 enum ESceneType
 {
-	SCENE_NORMAL = 0;//clan
-	SCENE_SINGLE_CLONE = 1;
-	SCENE_MULTI_CLONE = 2;
+	SCENE_NORMAL = 0;//public town
+	SCENE_SINGLE_CLONE = 1;//single boss underground city
+	SCENE_MULTI_CLONE = 2;//world boss underground city
 	SCENE_HOME = 3;//private
+	SCENE_CLAN = 4;//private
 }
 //
 enum EPVPType

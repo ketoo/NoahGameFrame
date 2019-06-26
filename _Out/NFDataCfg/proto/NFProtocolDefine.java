@@ -321,6 +321,14 @@ package nframe;
 			//Class name
 			public static final String ThisName = "MatchMember";
 			public static final int GUID = 0;//object
+			public static final int Name = 1;//string
+			public static final int K = 2;//int
+			public static final int D = 3;//int
+			public static final int A = 4;//int
+			public static final int Diamond = 5;//int
+			public static final int Cup = 6;//int
+			public static final int MVP = 7;//int
+			public static final int Streak = 8;//int
 
 		}
 

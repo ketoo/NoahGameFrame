@@ -248,10 +248,6 @@ bool NFHeroModule::SetFightHero(const NFGUID& self, const NFGUID& xHeroID, const
 
 	NF_SHARE_PTR<NFIRecord> pHeroValueRecord = m_pKernelModule->FindRecord(self, NFrame::Player::HeroValue::ThisName());
 	NFGUID xFightHero = m_pKernelModule->GetPropertyObject(self, NFrame::Player::FightHeroID());
-	if (xFightHero == xHeroID)
-	{
-		return 0;
-	}
 
 	switch (nPos)
 	{

@@ -59,9 +59,11 @@ public:
 
     virtual void SendMsgPBToGate(const uint16_t nMsgID, google::protobuf::Message& xMsg, const NFGUID& self);
 	virtual void SendGroupMsgPBToGate(const uint16_t nMsgID, google::protobuf::Message& xMsg, const int nSceneID, const int nGroupID);
+	virtual void SendGroupMsgPBToGate(const uint16_t nMsgID, google::protobuf::Message& xMsg, const int nSceneID, const int nGroupID, const NFGUID exceptID);
 
 	virtual void SendMsgToGate(const uint16_t nMsgID, const std::string& strMsg, const NFGUID& self);
 	virtual void SendGroupMsgPBToGate(const uint16_t nMsgID, const std::string& strMsg, const int nSceneID, const int nGroupID);
+	virtual void SendGroupMsgPBToGate(const uint16_t nMsgID, const std::string& strMsg, const int nSceneID, const int nGroupID, const NFGUID exceptID);
 
     virtual bool AddPlayerGateInfo(const NFGUID& nRoleID, const NFGUID& nClientID, const int nGateID);
     virtual bool RemovePlayerGateInfo(const NFGUID& nRoleID);
