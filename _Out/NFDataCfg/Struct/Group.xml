@@ -1,0 +1,40 @@
+<?xml version='1.0' encoding='utf-8' ?>
+<XML>
+	<Propertys>
+		<Property Id="MatchBeKilledHero" Cache="0" Force="0" Private="0" Public="1" Ref="0" Save="0" Type="int" Upload="0" />
+		<Property Id="MatchGambleDiamond" Cache="0" Force="0" Private="0" Public="1" Ref="0" Save="0" Type="int" Upload="0" />
+		<Property Id="MatchID" Cache="0" Desc="" Force="0" Private="0" Public="1" Ref="0" Save="0" Type="object" Upload="0" />
+		<Property Id="MatchKilledHero" Cache="0" Force="0" Private="0" Public="1" Ref="0" Save="0" Type="int" Upload="0" />
+		<Property Id="MatchOpponentCup" Cache="0" Force="0" Private="0" Public="1" Ref="0" Save="0" Type="int" Upload="0" />
+		<Property Id="MatchOpponentDiamond" Cache="0" Force="0" Private="0" Public="1" Ref="0" Save="0" Type="int" Upload="0" />
+		<Property Id="MatchOpponentGold" Cache="0" Force="0" Private="0" Public="1" Ref="0" Save="0" Type="int" Upload="0" />
+		<Property Id="MatchOpponentHead" Cache="0" Force="0" Private="0" Public="1" Ref="0" Save="0" Type="string" Upload="0" />
+		<Property Id="MatchOpponentHeroCnf1" Cache="0" Force="0" Private="0" Public="1" Ref="0" Save="0" Type="string" Upload="0" />
+		<Property Id="MatchOpponentHeroCnf2" Cache="0" Force="0" Private="0" Public="1" Ref="0" Save="0" Type="string" Upload="0" />
+		<Property Id="MatchOpponentHeroCnf3" Cache="0" Force="0" Private="0" Public="1" Ref="0" Save="0" Type="string" Upload="0" />
+		<Property Id="MatchOpponentHeroID1" Cache="0" Force="0" Private="0" Public="1" Ref="0" Save="0" Type="object" Upload="0" />
+		<Property Id="MatchOpponentHeroID2" Cache="0" Force="0" Private="0" Public="1" Ref="0" Save="0" Type="object" Upload="0" />
+		<Property Id="MatchOpponentHeroID3" Cache="0" Force="0" Private="0" Public="1" Ref="0" Save="0" Type="object" Upload="0" />
+		<Property Id="MatchOpponentHeroStar1" Cache="0" Force="0" Private="0" Public="1" Ref="0" Save="0" Type="int" Upload="0" />
+		<Property Id="MatchOpponentHeroStar2" Cache="0" Force="0" Private="0" Public="1" Ref="0" Save="0" Type="int" Upload="0" />
+		<Property Id="MatchOpponentHeroStar3" Cache="0" Force="0" Private="0" Public="1" Ref="0" Save="0" Type="int" Upload="0" />
+		<Property Id="MatchOpponentID" Cache="0" Force="0" Private="0" Public="1" Ref="0" Save="0" Type="object" Upload="0" />
+		<Property Id="MatchOpponentLevel" Cache="0" Force="0" Private="0" Public="1" Ref="0" Save="0" Type="int" Upload="0" />
+		<Property Id="MatchOpponentName" Cache="0" Force="0" Private="0" Public="1" Ref="0" Save="0" Type="string" Upload="0" />
+		<Property Id="MatchStar" Cache="0" Force="0" Private="0" Public="1" Ref="0" Save="0" Type="int" Upload="0" />
+		<Property Id="MatchTeamID" Cache="0" Force="0" Private="0" Public="1" Ref="0" Save="0" Type="object" Upload="0" />
+	</Propertys>
+	<Records>
+		<Record Id="MatchMember" Cache="1"	 Col="9"	 Force="0"	 Private="1"	 Public="0"	 Ref="0"	 Row="64"	 Save="0"	 Upload="0"	 >
+			<Col Type ="object"	Tag="GUID"/><!--- Desc-->
+			<Col Type ="string"	Tag="Name"/><!--- Desc-->
+			<Col Type ="int"	Tag="K"/><!--- Desc-->
+			<Col Type ="int"	Tag="D"/><!--- Desc-->
+			<Col Type ="int"	Tag="A"/><!--- Desc-->
+			<Col Type ="int"	Tag="Diamond"/><!--- Desc-->
+			<Col Type ="int"	Tag="Cup"/><!--- Desc-->
+			<Col Type ="int"	Tag="MVP"/><!--- Desc-->
+			<Col Type ="int"	Tag="Streak"/><!--- Desc-->
+		</Record>
+	</Records>
+</XML>
