@@ -335,8 +335,10 @@ bool NFKernelModule::DestroyObject(const NFGUID& self)
 	if (pContainerInfo)
 	{
 		const std::string& strClassName = GetPropertyString(self, NFrame::IObject::ClassName());
-
-		pContainerInfo->RemoveObjectFromGroup(nGroupID, self, strClassName == NFrame::Player::ThisName() ? true : false);
+		if (strClassName == NFrame::Player::ThisName())
+		{
+			m_pSceneModule->LeaveSceneGroup(self);
+		}
 
 		DoEvent(self, strClassName, COE_BEFOREDESTROY, NFDataList());
 		DoEvent(self, strClassName, COE_DESTROY, NFDataList());

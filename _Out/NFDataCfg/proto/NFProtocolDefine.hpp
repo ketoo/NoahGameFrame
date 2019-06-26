@@ -331,6 +331,14 @@ namespace NFrame
 			//Class name
 			static const std::string& ThisName(){ static std::string x = "MatchMember"; return x; };
 			static const int GUID = 0;//object
+			static const int Name = 1;//string
+			static const int K = 2;//int
+			static const int D = 3;//int
+			static const int A = 4;//int
+			static const int Diamond = 5;//int
+			static const int Cup = 6;//int
+			static const int MVP = 7;//int
+			static const int Streak = 8;//int
 
 		};
 

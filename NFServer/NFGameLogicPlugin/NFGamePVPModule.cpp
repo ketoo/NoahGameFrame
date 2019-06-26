@@ -200,7 +200,7 @@ void NFGamePVPModule::OnAckSearchOpponentProcess(const NFSOCK nSockIndex, const 
 	m_pSceneModule->SetPropertyObject(sceneID, groupID, NFrame::Group::MatchOpponentHeroID2(), NFINetModule::PBToNF(pvpPlayerInfo.hero_id2()));
 	m_pSceneModule->SetPropertyString(sceneID, groupID, NFrame::Group::MatchOpponentHeroCnf2(), pvpPlayerInfo.hero_cnf2());
 	m_pSceneModule->SetPropertyInt(sceneID, groupID, NFrame::Group::MatchOpponentHeroStar2(), pvpPlayerInfo.hero_star2());
-	m_pSceneModule->SetPropertyObject(sceneID, groupID, NFrame::Group::MatchOpponentHeroID3(), NFINetModule::PBToNF(pvpPlayerInfo.hero_id2()));
+	m_pSceneModule->SetPropertyObject(sceneID, groupID, NFrame::Group::MatchOpponentHeroID3(), NFINetModule::PBToNF(pvpPlayerInfo.hero_id3()));
 	m_pSceneModule->SetPropertyString(sceneID, groupID, NFrame::Group::MatchOpponentHeroCnf3(), pvpPlayerInfo.hero_cnf3());
 	m_pSceneModule->SetPropertyInt(sceneID, groupID, NFrame::Group::MatchOpponentHeroStar3(), pvpPlayerInfo.hero_star3());
 
