@@ -1217,6 +1217,22 @@ void NFGameServerNet_ServerModule::SendGroupMsgPBToGate(const uint16_t nMsgID, g
 	}
 }
 
+void NFGameServerNet_ServerModule::SendGroupMsgPBToGate(const uint16_t nMsgID, google::protobuf::Message & xMsg, const int nSceneID, const int nGroupID, const NFGUID exceptID)
+{
+	NFDataList xList;
+	if (m_pKernelModule->GetGroupObjectList(nSceneID, nGroupID, xList, true))
+	{
+		for (int i = 0; i < xList.GetCount(); ++i)
+		{
+			NFGUID xObject = xList.Object(i);
+			if (xObject != exceptID)
+			{
+				this->SendMsgPBToGate(nMsgID, xMsg, xObject);
+			}
+		}
+	}
+}
+
 void NFGameServerNet_ServerModule::SendGroupMsgPBToGate(const uint16_t nMsgID, const std::string & strMsg, const int nSceneID, const int nGroupID)
 {
 	//care: batch
@@ -1227,6 +1243,22 @@ void NFGameServerNet_ServerModule::SendGroupMsgPBToGate(const uint16_t nMsgID, c
 		{
 			NFGUID xObject = xList.Object(i);
 			this->SendMsgToGate(nMsgID, strMsg, xObject);
+		}
+	}
+}
+
+void NFGameServerNet_ServerModule::SendGroupMsgPBToGate(const uint16_t nMsgID, const std::string & strMsg, const int nSceneID, const int nGroupID, const NFGUID exceptID)
+{
+	NFDataList xList;
+	if (m_pKernelModule->GetGroupObjectList(nSceneID, nGroupID, xList, true))
+	{
+		for (int i = 0; i < xList.GetCount(); ++i)
+		{
+			NFGUID xObject = xList.Object(i);
+			if (xObject != exceptID)
+			{
+				this->SendMsgToGate(nMsgID, strMsg, xObject);
+			}
 		}
 	}
 }

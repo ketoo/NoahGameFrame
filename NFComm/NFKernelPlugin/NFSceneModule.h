@@ -269,6 +269,7 @@ public:
 	virtual int RequestGroupScene(const int nSceneID);
 	virtual bool RequestEnterScene(const NFGUID& self, const int nSceneID, const int nGroupID, const int nType, const NFVector3& pos, const NFDataList& argList);
 	virtual bool ReleaseGroupScene(const int nSceneID, const int nGroupID);
+	virtual bool LeaveSceneGroup(const NFGUID& self);
 
 	virtual bool AddSeedData(const int nSceneID, const std::string& strSeedID, const std::string& strConfigID, const NFVector3& vPos, const int nWeight);
 	virtual bool AddRelivePosition(const int nSceneID, const int nIndex, const NFVector3& vPos);

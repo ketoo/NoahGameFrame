@@ -132,6 +132,7 @@ void NFGamePVPModule::OnReqSearchOpponentProcess(const NFSOCK nSockIndex, const 
 		return;
 	}
 
+
 	const int nSceneID = m_pKernelModule->GetPropertyInt(nPlayerID, NFrame::Player::SceneID());
 	const int nGroupID = m_pKernelModule->GetPropertyInt(nPlayerID, NFrame::Player::GroupID());
 	const NFGUID xWarID = m_pSceneModule->GetPropertyObject(nSceneID, nGroupID, NFrame::Group::MatchID());
@@ -143,6 +144,10 @@ void NFGamePVPModule::OnReqSearchOpponentProcess(const NFSOCK nSockIndex, const 
 		//check all friends in the same game server
 		m_pNetClientModule->SendSuitByPB(NF_SERVER_TYPES::NF_ST_WORLD, nHasKey, nMsgID, xMsg, nPlayerID);
 	}
+
+	std::ostringstream stream;
+	stream << nPlayerID.ToString() << " want to join a start a match, the match id now is:" << xWarID.ToString();
+	m_pLogModule->LogInfo(stream);
 }
 
 void NFGamePVPModule::OnReqCancelSearchProcess(const NFSOCK nSockIndex, const int nMsgID, const char * msg, const uint32_t nLen)
@@ -162,22 +167,47 @@ void NFGamePVPModule::OnAckSearchOpponentProcess(const NFSOCK nSockIndex, const 
 		return;
 	}
 
+	std::ostringstream stream;
+
 	const int sceneID = xMsg.scene_id();
 	const int groupID = m_pKernelModule->RequestGroupScene(xMsg.scene_id());
 	const NFVector3& pos = m_pSceneModule->GetRelivePosition(xMsg.scene_id(), 0);
 	const NFGUID matchID = m_pKernelModule->CreateGUID();
 
+	stream << " A match now start, the match id now is:" << matchID.ToString() << " team's id is:" << NFINetModule::PBToNF(xMsg.team_id()).ToString();
+	stream << " sceneID:" << sceneID << " groupID:" << groupID;
+
 	for (int i = 0; i < xMsg.team_members_size(); ++i)
 	{
 		NFGUID id = NFINetModule::PBToNF(xMsg.team_members(i));
+		stream << " member:" << i << " " << id.ToString();
 
-		if (!m_pKernelModule->ExistObject(nPlayerID))
+		if (!m_pKernelModule->ExistObject(id))
 		{
+			stream << " some one(team member) not in this game server:" << id.ToString();
+			m_pLogModule->LogError(stream);
 			return;
 		}
 	}
 
 	const NFMsg::PVPPlayerInfo& pvpPlayerInfo = xMsg.opponent();
+
+	stream << " MatchOpponentID:" << NFINetModule::PBToNF(pvpPlayerInfo.id()).ToString();
+	stream << " MatchGambleDiamond:" << xMsg.gamble_diamond();
+	stream << " MatchOpponentLevel:" << pvpPlayerInfo.level();
+	stream << " MatchOpponentCup:" << pvpPlayerInfo.battle_point();
+	stream << " MatchOpponentName:" << pvpPlayerInfo.name();
+
+	stream << " MatchOpponentHeroID1:" << NFINetModule::PBToNF(pvpPlayerInfo.hero_id1()).ToString();
+	stream << " MatchOpponentHeroID2:" << NFINetModule::PBToNF(pvpPlayerInfo.hero_id2()).ToString();
+	stream << " MatchOpponentHeroID3:" << NFINetModule::PBToNF(pvpPlayerInfo.hero_id3()).ToString();
+	stream << " MatchOpponentHeroCnf1:" << pvpPlayerInfo.hero_cnf1();
+	stream << " MatchOpponentHeroCnf2:" << pvpPlayerInfo.hero_cnf2();
+	stream << " MatchOpponentHeroCnf3:" << pvpPlayerInfo.hero_cnf3();
+	stream << " MatchOpponentHeroStar1:" << pvpPlayerInfo.hero_star1();
+	stream << " MatchOpponentHeroStar2:" << pvpPlayerInfo.hero_star2();
+	stream << " MatchOpponentHeroStar3:" << pvpPlayerInfo.hero_star3();
+	m_pLogModule->LogInfo(stream);
 
 	m_pSceneModule->SetPropertyObject(sceneID, groupID, NFrame::Group::MatchID(), matchID);
 	m_pSceneModule->SetPropertyObject(sceneID, groupID, NFrame::Group::MatchTeamID(), NFINetModule::PBToNF(xMsg.team_id()));
@@ -200,7 +230,7 @@ void NFGamePVPModule::OnAckSearchOpponentProcess(const NFSOCK nSockIndex, const 
 	m_pSceneModule->SetPropertyObject(sceneID, groupID, NFrame::Group::MatchOpponentHeroID2(), NFINetModule::PBToNF(pvpPlayerInfo.hero_id2()));
 	m_pSceneModule->SetPropertyString(sceneID, groupID, NFrame::Group::MatchOpponentHeroCnf2(), pvpPlayerInfo.hero_cnf2());
 	m_pSceneModule->SetPropertyInt(sceneID, groupID, NFrame::Group::MatchOpponentHeroStar2(), pvpPlayerInfo.hero_star2());
-	m_pSceneModule->SetPropertyObject(sceneID, groupID, NFrame::Group::MatchOpponentHeroID3(), NFINetModule::PBToNF(pvpPlayerInfo.hero_id2()));
+	m_pSceneModule->SetPropertyObject(sceneID, groupID, NFrame::Group::MatchOpponentHeroID3(), NFINetModule::PBToNF(pvpPlayerInfo.hero_id3()));
 	m_pSceneModule->SetPropertyString(sceneID, groupID, NFrame::Group::MatchOpponentHeroCnf3(), pvpPlayerInfo.hero_cnf3());
 	m_pSceneModule->SetPropertyInt(sceneID, groupID, NFrame::Group::MatchOpponentHeroStar3(), pvpPlayerInfo.hero_star3());
 
@@ -305,6 +335,7 @@ void NFGamePVPModule::OnAckSearchOpponentProcess(const NFSOCK nSockIndex, const 
 
 		m_pKernelModule->CreateObject(xBuildingID, nSceneID, groupID, NFrame::NPC::ThisName(), strCnfID, xDataArg);
 	}
+
 }
 
 void NFGamePVPModule::OnAckCancelSearchProcess(const NFSOCK nSockIndex, const int nMsgID, const char * msg, const uint32_t nLen)
@@ -624,11 +655,17 @@ void NFGamePVPModule::EndTheBattle(const NFGUID & self, const int autoEnd)
 		return;
 	}
 
+
 	const NFGUID& matchID = m_pSceneModule->GetPropertyObject(nSceneID, nGroupID, NFrame::Group::MatchID());
 	if (matchID.IsNull())
 	{
 		return;
 	}
+
+
+	std::ostringstream stream;
+	stream << self.ToString() << " want to end the match, match'id:" << matchID.ToString();
+
 	//depends play mode: single mode or multi mode
 	//if single mode, it would end the match if the player disconnect
 	//if multi-player mode, it would hold on the status if the player disconnect
@@ -686,6 +723,7 @@ void NFGamePVPModule::EndTheBattle(const NFGUID & self, const int autoEnd)
 			*pMember = NFINetModule::NFToPB(self);
 		}
 
+
 		if (bWin)
 		{
 			xReqAckEndBattle.set_win(1);
@@ -695,6 +733,9 @@ void NFGamePVPModule::EndTheBattle(const NFGUID & self, const int autoEnd)
 			xReqAckEndBattle.set_diamond(nWinDiamond);
 			xReqAckEndBattle.set_cup(nWinCup);
 			//how to reduce the money for that people who lose the game? maybe that guy onlien maybe not.
+
+			stream << "WIN:" << nWinCup << " STAR:" << nFightingStar;
+
 		}
 		else
 		{
@@ -713,6 +754,7 @@ void NFGamePVPModule::EndTheBattle(const NFGUID & self, const int autoEnd)
 			xReqAckEndBattle.set_cup(-nWinCup);
 
 			//how to increase the money for that people who won the game? maybe that guy onlien maybe not.
+			stream << " LOSE:" << nWinCup << " STAR:" << nFightingStar;
 		}
 
 
