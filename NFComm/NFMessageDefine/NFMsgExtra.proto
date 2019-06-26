@@ -2,7 +2,6 @@ syntax = "proto3";
 
 package NFMsg; 
 
-import "NFDefine.proto";
 import "NFMsgBase.proto";
 
 ///////////////AI/////////////////////////////////////////////////////////////////////////////////////
@@ -116,7 +115,7 @@ message GridClanBaseInfo
 	int32						resource = 4;		//资源
 	bytes						icon = 5;			//Icon
 }
-	
+
 //	EGMI_REQ_MAP_GRID_INFO
 message ReqBigMapGridInfo
 {	

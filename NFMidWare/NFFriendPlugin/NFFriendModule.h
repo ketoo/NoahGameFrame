@@ -3,7 +3,7 @@
                 NoahFrame
             https://github.com/ketoo/NoahGameFrame
 
-   Copyright 2009 - 2018 NoahFrame(NoahGameFrame)
+   Copyright 2009 - 2019 NoahFrame(NoahGameFrame)
 
    File creator: lvsheng.huang
    
@@ -55,6 +55,7 @@ public:
 
     virtual bool AfterInit();
 
+	virtual bool IsEnemy(const NFGUID& self, const NFGUID& other);
 
 protected:
 

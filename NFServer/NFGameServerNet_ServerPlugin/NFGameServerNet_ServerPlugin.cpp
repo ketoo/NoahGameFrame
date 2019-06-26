@@ -3,7 +3,7 @@
                 NoahFrame
             https://github.com/ketoo/NoahGameFrame
 
-   Copyright 2009 - 2018 NoahFrame(NoahGameFrame)
+   Copyright 2009 - 2019 NoahFrame(NoahGameFrame)
 
    File creator: lvsheng.huang
    
@@ -24,6 +24,8 @@
 */
 
 
+#include "NFAutoBroadcastModule.h"
+#include "NFSceneAutoBroadcastModule.h"
 #include "NFGameServerNet_ServerModule.h"
 #include "NFGameServerNet_ServerPlugin.h"
 
@@ -58,11 +60,14 @@ const std::string NFGameServerNet_ServerPlugin::GetPluginName()
 
 void NFGameServerNet_ServerPlugin::Install()
 {
-    REGISTER_MODULE(pPluginManager, NFIGameServerNet_ServerModule, NFGameServerNet_ServerModule)
-
+	REGISTER_MODULE(pPluginManager, NFIGameServerNet_ServerModule, NFGameServerNet_ServerModule)
+	REGISTER_MODULE(pPluginManager, NFIAutoBroadcastModule, NFAutoBroadcastModule)
+	REGISTER_MODULE(pPluginManager, NFISceneAutoBroadcastModule, NFSceneAutoBroadcastModule)
 }
 
 void NFGameServerNet_ServerPlugin::Uninstall()
 {
+	UNREGISTER_MODULE(pPluginManager, NFISceneAutoBroadcastModule, NFSceneAutoBroadcastModule)
+	UNREGISTER_MODULE(pPluginManager, NFIAutoBroadcastModule, NFAutoBroadcastModule)
     UNREGISTER_MODULE(pPluginManager, NFIGameServerNet_ServerModule, NFGameServerNet_ServerModule)
 }

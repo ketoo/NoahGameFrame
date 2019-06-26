@@ -200,39 +200,14 @@ message CurrencyStruct
     int32 currency_count       = 2;// 数量
 }
 
-//EGMI_REQ_START_OPPNENT						= 1220;
-//EGMI_ACK_START_OPPNENT						= 1221;
-message ReqAckStartBattle
-{
-    int32 gold            = 1; // 金币
-    int32 diamond          = 2; //
-}
 
-//EGMI_REQ_END_OPPNENT
-message ReqEndBattle
-{
-}
 
-//EGMI_REQ_ACK_RELIVE							= 180;			//
-message ReqAckRelive
+//EGEC_REQ_RELIVE_HERO						= 1522;		 //
+message ReqAckReliveHero
 {
 	int32	diamond 				= 1;
 	Ident 	hero_id = 2;
 }
-
-//EGMI_ACK_END_OPPNENT
-message AckEndBattle
-{
-	//下发的时候则为道具列表
-	//获得的金币等列表
-    int32 win            	= 1; //
-    int32 star            	= 2; //
-    int32 gold            	= 3; // 副本获得的金币
-    int32 exp              = 4; // 副本获得的经验
-    int32 diamond          = 5; // 副本获得的zhuanshi
-    repeated ItemStruct item_list   = 6; // 副本获得的道具列表
-}
-
 
 message ReqPickDropItem//拾取物品
 {
@@ -249,21 +224,35 @@ message ReqCompeleteTask//完成任务后申请领奖
 	bytes task_id = 1;
 }
 
-///////////////战斗/////////////////////////////////////////////////////////////////////////////////////
-
-message ReqAckJoinActivity
+//EGMI_REQ_ADD_BUILDING						= 5000; 	//
+message ReqAddSceneBuilding
 {
-	enum EGameActivityType
-	{
-		EGAT_PVP = 0;//普通PVP对战活动
-	}
-	
-	enum EGameActivitySubType
-	{
-		EGAT_NORMAL = 0;//普通难度
-	}
-    EGameActivityType		activity_type = 1;
-    EGameActivitySubType	sub_activity_type = 2;
+	Vector3 pos = 1;
+	Ident guid = 2;
+	Ident master = 3;
+	bytes config_id = 4;
+	int32 scene_id = 5;
+	bytes master_name = 6;
+	int32 is_home_scene = 7;//is home or clan scene
+	int32 is_building = 8;//building or tree
+}
+
+message ReqSceneBuildings
+{
+	int32 scene_id = 1;
+	Vector3 pos = 2;
+}
+
+message AckSceneBuildings
+{
+	repeated ReqAddSceneBuilding buildings = 1;
+}
+
+message ReqStoreSceneBuildings
+{
+	Ident guid = 1;
+	int32 home_scene_id = 2;
+	repeated ReqAddSceneBuilding buildings = 3;
 }
 
 
@@ -350,90 +339,86 @@ message ReqBuyItemFromShop
 	int32		count				= 2;
 }
 
-//EGMI_REQ_ADD_GAMBLE_VALUE
-message ReqAddGambleValue
-{
-	bytes		property				= 1;
-	int32		number				= 2;
-}
-////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////pvp//////////////////////////////////////////////////////////////////////////
 
-//EGEC_REQ_MINING_TITLE							= 1600;		 // 挖矿
-message ReqMiningTitle
-{	
-	int32		x				= 1;//
-	int32		y				= 2;//
-	int32		opr 			= 3;//
-}
-
-message TileState
+message PVPPlayerInfo
 {
-	int32		x				= 1;//
-	int32		y				= 2;//
-	int32		opr 			= 3;//0:rem;1:add
-}
-
-message TileBuilding
-{
-	int32		x				= 1;//
-	int32		y				= 2;//
-	bytes		configID 		= 3;
-	Ident		guid 			= 4;
+	Ident id = 1;
+	int32 single = 2;
+	int32 level = 4;
+	int32 battle_point = 5;
+	bytes name = 6;
+	bytes head = 7;
+	int32 gold = 8;
+	int32 diamond = 9;
 	
+	bytes hero_cnf1 = 20;
+	bytes hero_cnf2 = 21;
+	bytes hero_cnf3 = 22;
+	
+	int32 hero_star1 = 25;
+	int32 hero_star2 = 26;
+	int32 hero_star3 = 27;
+	
+	
+	Ident hero_id1 = 28;
+	Ident hero_id2 = 29;
+	Ident hero_id3 = 30;
 }
 
-message TileNPC
-{
-	int32		x				= 1;//
-	int32		y				= 2;//
-	bytes		configID 		= 3;//
-	Ident		guid 			= 4;//
-}
-
-//EGEC_ACK_MINING_TITLE
-message AckMiningTitle
-{	
-	repeated TileState		tile			= 1;//
-	repeated TileBuilding	building		= 2;//
-	repeated TileNPC		npc				= 3;//
-}
 
 //EGMI_REQ_SEARCH_OPPNENT
 message ReqSearchOppnent
 {
     int32		self_scene = 1;
+	int32 		diamond = 2;
+	int32 		battle_point = 3;
+
+	repeated Ident friends = 10;
 }
 
 //EGMI_ACK_SEARCH_OPPNENT
 message AckSearchOppnent
 {
     int32 scene_id = 1;
-	int32 gold = 2;
-	int32 diamond = 3;
-	int32 level = 4;
-	int32 cup = 5;
-	bytes name = 6;
-	bytes head = 7;
-	bytes hero_cnf1 = 8;
-	int32 hero_star1 = 9;
-	bytes hero_cnf2 = 10;
-	int32 hero_star2 = 11;
-	bytes hero_cnf3 = 12;
-	int32 hero_star3 = 13;
-
-	Ident hero_id1 = 20;
-	Ident hero_id2 = 21;
-	Ident hero_id3 = 22;
+	Ident team_id = 2;
+	int32 gamble_diamond = 3;
+	repeated Ident team_members = 5;
 	
+	PVPPlayerInfo opponent = 14;
 	
-	Vector3 hero_pos1 = 23;
-	Vector3 hero_pos2 = 24;
-	Vector3 hero_pos3 = 25;
-	
-	AckMiningTitle title = 30;
-    Ident opponent = 31;
+	repeated ReqAddSceneBuilding buildings = 20;
 }
 
+//EGMI_REQ_CANCEL_SEARCH
+message ReqAckCancelSearch
+{
+	Ident      selfid              	= 1; // 角色ID
+}
+
+//EGMI_REQ_END_OPPNENT
+message ReqEndBattle
+{
+	int32 auto_end = 1;
+}
+
+//EGMI_ACK_END_OPPNENT
+message AckEndBattle
+{
+	//下发的时候则为道具列表
+	//获得的金币等列表
+    int32 win            	= 1; //
+    int32 star            	= 2; //
+    int32 gold            	= 3; // 副本获得的金币
+    int32 cup              = 4; // 副本获得的经验
+    int32 diamond          = 5; //
+    int32 single          	= 6; //
+	Ident 					team_id = 7;
+	Ident 					match_id = 8;
+    repeated Ident members   = 9;
+    repeated ItemStruct item_list   = 10; // 副本获得的道具列表
+}
+/////////////////////////////////////////////////////
 
 //EGEC_REQ_SEND_MAIL = 700; // 发送邮件
 message ReqSendMail
@@ -462,59 +447,4 @@ message AckSwitchServer
 	int64      self_serverid		= 2; // 目标ID
 	int64      target_serverid		= 3; // 目标ID
 	int64      gate_serverid		= 4; // 目标ID
-}
-
-/////////////////////////pvp--///////////////////////////////////////////////////////////////////////////
-message PVPRoomInfo
-{
-	int32 nCellStatus				= 1;	// 状态
-	Ident RoomID					= 2;	// 房间ID
-	int32 nPVPMode					= 3;	// 匹配模式
-	int32 nPVPGrade				= 4;	// 房间所在的阶段
-	int32 MaxPalyer				= 5;			
-	repeated Ident xRedPlayer				= 6;
-	repeated Ident xBluePlayer				= 7;
-	int64      serverid			= 8; // 房间副本所在的serverid	
-	int64      SceneID				= 9; // 房间副本所在的场景id	
-	int64      groupID				= 10; // 房间副本所在的层
-}
-
-//EGMI_REQ_PVPAPPLYMACTCH						= 1100; 	// 申请匹配pvp
-message ReqPVPApplyMatch
-{	
-	enum EApplyType
-	{
-		EApplyType_Single				=0; // 个人匹配
-		EApplyType_Team					=1; // 队伍匹配
-	};
-	
-    Ident	self_id 				= 1;//
-	int32	nPVPMode				= 2;	// 匹配模式
-	int64 	score					= 3;	// 分数
-	int32	ApplyType 				= 4;	// 匹配方式，队伍申请还是个人申请
-	Ident	team_id 				= 5;	// 队伍ID 
-}
-
-//EGMI_ACK_PVPAPPLYMACTCH						= 1101; 	// 返回匹配pvp
-message AckPVPApplyMatch
-{	
-    Ident						self_id = 1;//
-	PVPRoomInfo				xRoomInfo = 2;
-	int32	ApplyType 				= 3;	// 匹配方式，队伍申请还是个人申请
-	int32	nResult 					= 4;	// 匹配的结果
-}
-
-//EGMI_REQ_CREATEPVPECTYPE					= 1102; 	// 申请pvp副本
-message ReqCreatePVPEctype
-{	
-    Ident						self_id = 1;//
-	PVPRoomInfo				xRoomInfo = 2;
-}
-
-//EGMI_ACK_CREATEPVPECTYPE					= 1103; 	// 返回pvp副本的信息，并拉人
-message AckCreatePVPEctype
-{	
-    Ident	self_id 				= 1;//
-	PVPRoomInfo	xRoomInfo 		= 2;
-	int32	ApplyType 				= 3;	// 匹配方式，队伍申请还是个人申请
 }

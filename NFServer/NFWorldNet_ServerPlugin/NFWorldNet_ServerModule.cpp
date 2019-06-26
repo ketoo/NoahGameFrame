@@ -3,7 +3,7 @@
                 NoahFrame
             https://github.com/ketoo/NoahGameFrame
 
-   Copyright 2009 - 2018 NoahFrame(NoahGameFrame)
+   Copyright 2009 - 2019 NoahFrame(NoahGameFrame)
 
    File creator: lvsheng.huang
    
@@ -35,7 +35,8 @@ bool NFWorldNet_ServerModule::Init()
 	m_pElementModule = pPluginManager->FindModule<NFIElementModule>();
 	m_pClassModule = pPluginManager->FindModule<NFIClassModule>();
 	m_pNetClientModule = pPluginManager->FindModule<NFINetClientModule>();
-
+	m_pWorldPVPModule = pPluginManager->FindModule<NFIWorldPVPModule>();
+	
     return true;
 }
 
@@ -543,7 +544,7 @@ void NFWorldNet_ServerModule::OnReqSwitchServer(const NFSOCK nSockIndex, const i
     //const NFGUID nClientID = NFINetModule::PBToNF(xMsg.client_id());
     //const int nGateID = (int)xMsg.gate_serverid();
     //const int nSceneID = (int)xMsg.sceneid();
-    SendMsgToGame((int)xMsg.target_serverid(), NFMsg::EGMI_REQSWICHSERVER, xMsg, nPlayerID);
+    SendMsgToGame(nPlayerID, NFMsg::EGMI_REQSWICHSERVER, xMsg);
 }
 
 void NFWorldNet_ServerModule::OnAckSwitchServer(const NFSOCK nSockIndex, const int nMsgID, const char *msg,
@@ -552,7 +553,7 @@ void NFWorldNet_ServerModule::OnAckSwitchServer(const NFSOCK nSockIndex, const i
     CLIENT_MSG_PROCESS_NO_OBJECT(nMsgID, msg, nLen, NFMsg::AckSwitchServer);
     nPlayerID = NFINetModule::PBToNF(xMsg.selfid());
 
-    SendMsgToGame((int)xMsg.self_serverid(), NFMsg::EGMI_ACKSWICHSERVER, xMsg, nPlayerID);
+	SendMsgToGame(nPlayerID, NFMsg::EGMI_ACKSWICHSERVER, xMsg);
 }
 
 void NFWorldNet_ServerModule::SynGameToProxy()
@@ -837,11 +838,33 @@ void NFWorldNet_ServerModule::OnOnlineProcess(const NFSOCK nSockIndex, const int
 {
     CLIENT_MSG_PROCESS_NO_OBJECT(nMsgID, msg, nLen, NFMsg::RoleOnlineNotify);
 
+    NFGUID selfId = NFINetModule::PBToNF(xMsg.self());
+
+    NF_SHARE_PTR<PlayerData> playerData = mPlayersData.GetElement(selfId);
+    if (playerData)
+    {
+		playerData->OnLine(xMsg.game(), xMsg.proxy());
+    }
+	else
+	{
+		playerData = NF_SHARE_PTR<PlayerData>(NF_NEW PlayerData(selfId));
+		playerData->OnLine(xMsg.game(), xMsg.proxy());
+		mPlayersData.AddElement(selfId, playerData);
+	}
 }
 
 void NFWorldNet_ServerModule::OnOfflineProcess(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
 {
     CLIENT_MSG_PROCESS_NO_OBJECT(nMsgID, msg, nLen, NFMsg::RoleOfflineNotify);
+    NFGUID self = NFINetModule::PBToNF(xMsg.self());
+
+	m_pWorldPVPModule->OffLine(self);
+
+	NF_SHARE_PTR<PlayerData> playerData = mPlayersData.GetElement(self);
+	if (playerData)
+	{
+		playerData->OffLine();
+	}
 }
 
 void NFWorldNet_ServerModule::OnTransmitServerReport(const NFSOCK nFd, const int msgId, const char *buffer,
@@ -859,45 +882,33 @@ void NFWorldNet_ServerModule::OnTransmitServerReport(const NFSOCK nFd, const int
 
 }
 
-bool NFWorldNet_ServerModule::SendMsgToGame(const int nGameID, const NFMsg::EGameMsgID eMsgID, google::protobuf::Message& xData, const NFGUID nPlayer)
+bool NFWorldNet_ServerModule::SendMsgToGame(const NFGUID nPlayer, const NFMsg::EGameMsgID eMsgID, google::protobuf::Message& xData)
 {
-    NF_SHARE_PTR<ServerData> pData = mGameMap.GetElement(nGameID);
-    if (pData)
-    {
-        const NFSOCK nFD = pData->nFD;
-		m_pNetModule->SendMsgPB(eMsgID, xData, nFD, nPlayer);
-    }
+	NF_SHARE_PTR<PlayerData> playerData = mPlayersData.GetElement(nPlayer);
+	if (playerData)
+	{
+		NF_SHARE_PTR<ServerData> pData = mGameMap.GetElement(playerData->gameID);
+		if (pData)
+		{
+			const NFSOCK nFD = pData->nFD;
+			m_pNetModule->SendMsgPB(eMsgID, xData, nFD, nPlayer);
 
-    return true;
+			return true;
+		}
+	}
+
+	return false;
 }
 
-bool NFWorldNet_ServerModule::SendMsgToGame(const NFDataList& argObjectVar, const NFDataList& argGameID, const NFMsg::EGameMsgID eMsgID, google::protobuf::Message& xData)
+bool NFWorldNet_ServerModule::SendMsgToGame(const NFDataList& argObjectVar, const NFMsg::EGameMsgID eMsgID, google::protobuf::Message& xData)
 {
-    if (argGameID.GetCount() != argObjectVar.GetCount())
-    {
-        return false;
-    }
-
     for (int i = 0; i < argObjectVar.GetCount(); i++)
     {
-        const NFGUID& identOther = argObjectVar.Object(i);
-        const int nGameID = (int) argGameID.Int(i);
-
-        SendMsgToGame(nGameID, eMsgID, xData, identOther);
+        const NFGUID& nPlayer = argObjectVar.Object(i);
+		SendMsgToGame(nPlayer, eMsgID, xData);
     }
 
     return true;
-}
-
-bool NFWorldNet_ServerModule::SendMsgToPlayer(const NFMsg::EGameMsgID eMsgID, google::protobuf::Message& xData, const NFGUID nPlayer)
-{
-    int nGameID = GetPlayerGameID(nPlayer);
-    if (nGameID < 0)
-    {
-        return false;
-    }
-
-    return SendMsgToGame(nGameID, eMsgID, xData, nPlayer);
 }
 
 NF_SHARE_PTR<ServerData> NFWorldNet_ServerModule::GetSuitProxyForEnter()
@@ -922,8 +933,30 @@ NF_SHARE_PTR<ServerData> NFWorldNet_ServerModule::GetSuitProxyForEnter()
 
 int NFWorldNet_ServerModule::GetPlayerGameID(const NFGUID self)
 {
-    //TODO
-    return -1;
+	NF_SHARE_PTR<PlayerData> playerData = mPlayersData.GetElement(self);
+	if (playerData)
+	{
+		return playerData->gameID;
+	}
+
+	return 0;
+}
+
+
+const std::vector<NFGUID>& NFWorldNet_ServerModule::GetOnlinePlayers()
+{
+	static std::vector<NFGUID> players;
+	players.clear();
+
+	NF_SHARE_PTR<PlayerData> playerData = mPlayersData.First();
+	while (playerData)
+	{
+		players.push_back(playerData->self);
+
+		playerData = mPlayersData.Next();
+	}
+
+    return players;
 }
 
 void NFWorldNet_ServerModule::ServerReport(int reportServerId, NFMsg::EServerState serverStatus)

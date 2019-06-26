@@ -3,7 +3,7 @@
                 NoahFrame
             https://github.com/ketoo/NoahGameFrame
 
-   Copyright 2009 - 2018 NoahFrame(NoahGameFrame)
+   Copyright 2009 - 2019 NoahFrame(NoahGameFrame)
 
    File creator: lvsheng.huang
    
@@ -40,6 +40,19 @@ class NFIKernelModule
 
 public:
 
+
+	template<typename BaseType>
+	bool AddPropertyCallBack(const NFGUID& self, const std::string& strPropertyName, BaseType* pBase, int (BaseType::*handler)(const NFGUID&, const std::string&, const NFData&, const NFData&))
+	{
+		NF_SHARE_PTR<NFIObject> pObject = GetObject(self);
+		if (pObject.get())
+		{
+			return pObject->AddPropertyCallBack(strPropertyName, pBase, handler);
+		}
+
+		return false;
+	}
+
     template<typename BaseType>
     bool AddRecordCallBack(const NFGUID& self, const std::string& strRecordName, BaseType* pBase, int (BaseType::*handler)(const NFGUID&, const RECORD_EVENT_DATA&, const NFData&, const NFData&))
     {
@@ -47,18 +60,6 @@ public:
         if (pObject.get())
         {
             return pObject->AddRecordCallBack(strRecordName, pBase, handler);
-        }
-
-        return false;
-    }
-
-    template<typename BaseType>
-    bool AddPropertyCallBack(const NFGUID& self, const std::string& strPropertyName, BaseType* pBase, int (BaseType::*handler)(const NFGUID&, const std::string&, const NFData&, const NFData&))
-    {
-        NF_SHARE_PTR<NFIObject> pObject = GetObject(self);
-        if (pObject.get())
-        {
-            return pObject->AddPropertyCallBack(strPropertyName, pBase, handler);
         }
 
         return false;

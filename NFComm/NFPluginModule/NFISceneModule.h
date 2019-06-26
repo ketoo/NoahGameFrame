@@ -3,7 +3,7 @@
                 NoahFrame
             https://github.com/ketoo/NoahGameFrame
 
-   Copyright 2009 - 2018 NoahFrame(NoahGameFrame)
+   Copyright 2009 - 2019 NoahFrame(NoahGameFrame)
 
    File creator: lvsheng.huang
    
@@ -23,228 +23,22 @@
    limitations under the License.
 */
 
-
 #ifndef NFI_SCENE_AOI_MODULE_H
 #define NFI_SCENE_AOI_MODULE_H
 
 #include <list>
 #include <iostream>
+#include <functional>
 #include <algorithm>
 #include "NFComm/NFCore/NFList.hpp"
 #include "NFComm/NFCore/NFMap.hpp"
 #include "NFComm/NFCore/NFDataList.hpp"
 #include "NFComm/NFCore/NFIRecord.h"
+#include "NFComm/NFCore/NFIProperty.h"
+#include "NFComm/NFCore/NFIPropertyManager.h"
+#include "NFComm/NFCore/NFIRecordManager.h"
 #include "NFComm/NFPluginModule/NFGUID.h"
 #include "NFComm/NFPluginModule/NFIModule.h"
-
-// all object in this group
-/*
-if a object in the group of '0', them it can be see by all object in this scene.
-*/
-struct SceneSeedResource
-{
-	std::string strSeedID;
-	std::string strConfigID;
-	NFVector3 vSeedPos;
-	int nWeight;
-};
-
-//SceneID,(SeedID,SeedData)
-//NFMapEx<int, NFMapEx<std::string, SceneSeedResource>> mtSceneResourceConfig;
-
-class NFSceneGroupInfo
-{
-public:
-    NFSceneGroupInfo(int nSceneID, int nGroupID)
-    {
-        mnGroupID = nGroupID;
-    }
-
-    NFSceneGroupInfo(int nSceneID, int nGroupID, int nWidth)
-    {
-        mnGroupID = nGroupID;
-    }
-
-    virtual ~NFSceneGroupInfo()
-    {
-    }
-
-    bool Execute()
-    {
-        return true;
-    }
-
-    NFMapEx<NFGUID, int> mxPlayerList;
-    NFMapEx<NFGUID, int> mxOtherList;
-    int mnGroupID;
-};
-
-// all group in this scene
-class NFSceneInfo
-    : public NFMapEx<int, NFSceneGroupInfo>
-{
-public:
-
-    NFSceneInfo(int nSceneID)
-    {
-        mnGroupIndex = -1;
-        mnSceneID = nSceneID;
-        mnWidth = 512;
-    }
-
-    NFSceneInfo(int nSceneID, int nWidth)
-    {
-        mnGroupIndex = -1;
-        mnSceneID = nSceneID;
-        mnWidth = nWidth;
-    }
-
-    virtual ~NFSceneInfo()
-    {
-        ClearAll();
-    }
-
-    int NewGroupID()
-    {
-		mnGroupIndex += 1;
-		return mnGroupIndex;
-    }
-
-    int GetWidth()
-    {
-        return mnWidth;
-    }
-
-    bool AddObjectToGroup(const int nGroupID, const NFGUID& ident, bool bPlayer)
-    {
-        NF_SHARE_PTR<NFSceneGroupInfo> pInfo = GetElement(nGroupID);
-        if (pInfo.get())
-        {
-            if (bPlayer)
-            {
-                return pInfo->mxPlayerList.AddElement(ident, NF_SHARE_PTR<int>(new int(0)));
-            }
-            else
-            {
-                return pInfo->mxOtherList.AddElement(ident, NF_SHARE_PTR<int>(new int(0)));
-            }
-        }
-
-        return false;
-    }
-
-    bool RemoveObjectFromGroup(const int nGroupID, const NFGUID& ident, bool bPlayer)
-    {
-        NF_SHARE_PTR<NFSceneGroupInfo> pInfo = GetElement(nGroupID);
-        if (pInfo.get())
-        {
-            if (bPlayer)
-            {
-                return pInfo->mxPlayerList.RemoveElement(ident);
-            }
-            else
-            {
-                return pInfo->mxOtherList.RemoveElement(ident);
-            }
-        }
-
-        return false;
-    }
-
-	bool ExistObjectInGroup(const int nGroupID, const NFGUID& ident)
-	{
-		NF_SHARE_PTR<NFSceneGroupInfo> pInfo = GetElement(nGroupID);
-		if (pInfo)
-		{
-			return pInfo->mxPlayerList.ExistElement(ident) || pInfo->mxOtherList.ExistElement(ident);
-		}
-
-		return false;
-	}
-
-    bool Execute()
-    {
-        NF_SHARE_PTR<NFSceneGroupInfo> pGroupInfo = First();
-        while (pGroupInfo.get())
-        {
-            pGroupInfo->Execute();
-
-            pGroupInfo = Next();
-        }
-        return true;
-    }
-
-	bool AddSeedObjectInfo(const std::string& strSeedID, const std::string& strConfigID, const NFVector3& vPos, const int nWeight)
-	{
-		NF_SHARE_PTR<SceneSeedResource> pInfo = mtSceneResourceConfig.GetElement(strSeedID);
-		if (!pInfo)
-		{
-			pInfo = NF_SHARE_PTR<SceneSeedResource>(new SceneSeedResource());
-			pInfo->strSeedID = strSeedID;
-			pInfo->strConfigID = strConfigID;
-			pInfo->vSeedPos = vPos;
-			pInfo->nWeight = nWeight;
-			return mtSceneResourceConfig.AddElement(strSeedID, pInfo);
-		}
-
-		return true;
-	}
-
-	bool RemoveSeedObject(const std::string& strSeedID)
-	{
-		return true;
-	}
-	
-	bool AddReliveInfo(const int nIndex, const NFVector3& vPos)
-	{
-		return mtSceneRelivePos.AddElement(nIndex, NF_SHARE_PTR<NFVector3>(NF_NEW NFVector3(vPos)));
-	}
-
-	NFVector3 GetReliveInfo(const int nIndex, const bool bRoll)
-	{
-		NF_SHARE_PTR<NFVector3> vPos = mtSceneRelivePos.GetElement(nIndex);
-		if (vPos)
-		{
-			return *vPos;
-		}
-
-		if (bRoll && mtSceneRelivePos.Count() > 0)
-		{
-			return *(mtSceneRelivePos.GetElement(0));
-		}
-
-		return NFVector3();
-	}
-
-	bool AddTagInfo(const int nIndex, const NFVector3& vPos)
-	{
-		return mtTagPos.AddElement(nIndex, NF_SHARE_PTR<NFVector3>(NF_NEW NFVector3(vPos)));
-	}
-
-	NFVector3 GetTagInfo(const int nIndex, const bool bRoll)
-	{
-		NF_SHARE_PTR<NFVector3> vPos = mtTagPos.GetElement(nIndex);
-		if (vPos)
-		{
-			return *vPos;
-		}
-
-		if (bRoll)
-		{
-			return *(mtTagPos.GetElement(0));
-		}
-
-		return NFVector3();
-	}
-
-    int mnGroupIndex;
-    int mnSceneID;
-    int mnWidth;
-	//seedID, seedInfo
-	NFMapEx<std::string, SceneSeedResource > mtSceneResourceConfig;
-	NFMapEx<int, NFVector3 > mtSceneRelivePos;
-	NFMapEx<int, NFVector3 > mtTagPos;
-};
 
 typedef std::function<int(const NFDataList&, const NFDataList&)> OBJECT_ENTER_EVENT_FUNCTOR;
 typedef NF_SHARE_PTR<OBJECT_ENTER_EVENT_FUNCTOR> OBJECT_ENTER_EVENT_FUNCTOR_PTR;//ObjectEnterCallBack
@@ -267,6 +61,8 @@ typedef NF_SHARE_PTR<RECORD_SINGLE_EVENT_FUNCTOR> RECORD_SINGLE_EVENT_FUNCTOR_PT
 typedef std::function<int(const NFGUID&, const int, const int, const int, const NFDataList&)> SCENE_EVENT_FUNCTOR;
 typedef NF_SHARE_PTR<SCENE_EVENT_FUNCTOR> SCENE_EVENT_FUNCTOR_PTR;
 
+class NFSceneInfo;
+class NFSceneGroupInfo;
 
 class NFISceneModule
     : public NFIModule,
@@ -277,6 +73,41 @@ public:
     {
         ClearAll();
     }
+
+	/////////////these interfaces below are for scene & group//////////////////
+	template<typename BaseType>
+	bool AddGroupPropertyCallBack(const std::string& strPropertyName, BaseType* pBase, int (BaseType::*handler)(const NFGUID&, const std::string&, const NFData&, const NFData&))
+	{
+		PROPERTY_EVENT_FUNCTOR functor = std::bind(handler, pBase, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3, std::placeholders::_4);
+		PROPERTY_EVENT_FUNCTOR_PTR functorPtr(NF_NEW PROPERTY_EVENT_FUNCTOR(functor));
+		return AddGroupPropertyCallBack(strPropertyName, functorPtr);
+	}
+
+	template<typename BaseType>
+	bool AddGroupRecordCallBack(const std::string& strRecordName, BaseType* pBase, int (BaseType::*handler)(const NFGUID&, const RECORD_EVENT_DATA&, const NFData&, const NFData&))
+	{
+		RECORD_EVENT_FUNCTOR functor = std::bind(handler, pBase, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3, std::placeholders::_4);
+		RECORD_EVENT_FUNCTOR_PTR functorPtr(NF_NEW RECORD_EVENT_FUNCTOR(functor));
+		return AddGroupRecordCallBack(strRecordName, functorPtr);
+	}
+
+	template<typename BaseType>
+	bool AddGroupPropertyCommCallBack(BaseType* pBase, int (BaseType::*handler)(const NFGUID&, const std::string&, const NFData&, const NFData&))
+	{
+		PROPERTY_EVENT_FUNCTOR functor = std::bind(handler, pBase, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3, std::placeholders::_4);
+		PROPERTY_EVENT_FUNCTOR_PTR functorPtr(NF_NEW PROPERTY_EVENT_FUNCTOR(functor));
+		return AddGroupPropertyCommCallBack(functorPtr);
+	}
+
+	template<typename BaseType>
+	bool AddGroupRecordCommCallBack(BaseType* pBase, int (BaseType::*handler)(const NFGUID&, const RECORD_EVENT_DATA&, const NFData&, const NFData&))
+	{
+		RECORD_EVENT_FUNCTOR functor = std::bind(handler, pBase, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3, std::placeholders::_4);
+		RECORD_EVENT_FUNCTOR_PTR functorPtr(NF_NEW RECORD_EVENT_FUNCTOR(functor));
+		return AddGroupRecordCommCallBack(functorPtr);
+	}
+
+	/////////////these interfaces below are for player//////////////////
 
 	template<typename BaseType>
 	bool AddObjectEnterCallBack(BaseType* pBase, int (BaseType::*handler)(const NFDataList&, const NFDataList&))
@@ -383,18 +214,95 @@ public:
 		return AddAfterLeaveSceneGroupCallBack(functorPtr);
 	}
 
-	virtual bool RequestEnterScene(const NFGUID& self, const int nSceneID, const int nGroupID, const int nType, const NFDataList& argList) = 0;
+	template<typename BaseType>
+	bool AddSceneGroupCreatedCallBack(BaseType* pBase, int (BaseType::*handler)(const NFGUID&, const int, const int, const int, const NFDataList&))
+	{
+		SCENE_EVENT_FUNCTOR functor = std::bind(handler, pBase, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3, std::placeholders::_4, std::placeholders::_5);
+		SCENE_EVENT_FUNCTOR_PTR functorPtr(new SCENE_EVENT_FUNCTOR(functor));
+		return AddSceneGroupCreatedCallBack(functorPtr);
+	}
+
+	template<typename BaseType>
+	bool AddSceneGroupDestroyedCallBack(BaseType* pBase, int (BaseType::*handler)(const NFGUID&, const int, const int, const int, const NFDataList&))
+	{
+		SCENE_EVENT_FUNCTOR functor = std::bind(handler, pBase, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3, std::placeholders::_4, std::placeholders::_5);
+		SCENE_EVENT_FUNCTOR_PTR functorPtr(new SCENE_EVENT_FUNCTOR(functor));
+		return AddSceneGroupDestroyedCallBack(functorPtr);
+	}
+
+
+	virtual int RequestGroupScene(const int nSceneID) = 0;
+	virtual bool RequestEnterScene(const NFGUID& self, const int nSceneID, const int nGroupID, const int nType, const NFVector3& pos, const NFDataList& argList) = 0;
+	virtual bool ReleaseGroupScene(const int nSceneID, const int nGroupID) = 0;
+
 	virtual bool AddSeedData(const int nSceneID, const std::string& strSeedID, const std::string& strConfigID, const NFVector3& vPos, const int nHeight) = 0;
 	virtual bool AddRelivePosition(const int nSceneID, const int nIndex, const NFVector3& vPos) = 0;
-	virtual NFVector3 GetRelivePosition(const int nSceneID, const int nIndex, const bool bRoll = true) = 0;
+	virtual const NFVector3& GetRelivePosition(const int nSceneID, const int nIndex, const bool bRoll = true) = 0;
 	virtual bool AddTagPosition(const int nSceneID, const int nIndex, const NFVector3& vPos) = 0;
-	virtual NFVector3 GetTagPosition(const int nSceneID, const int nIndex, const bool bRoll = true) = 0;
+	virtual const NFVector3& GetTagPosition(const int nSceneID, const int nIndex, const bool bRoll = true) = 0;
 
 	virtual bool CreateSceneNPC(const int nSceneID, const int nGroupID) = 0;
 	virtual bool CreateSceneNPC(const int nSceneID, const int nGroupID, const NFDataList& argList) = 0;
 	virtual bool DestroySceneNPC(const int nSceneID, const int nGroupID) = 0;
 
+	/////////////the interfaces below are for scene & group/////////////////////////////
+	virtual bool SetPropertyInt(const int scene, const int group, const std::string& strPropertyName, const NFINT64 nValue) = 0;
+	virtual bool SetPropertyFloat(const int scene, const int group, const std::string& strPropertyName, const double dValue) = 0;
+	virtual bool SetPropertyString(const int scene, const int group, const std::string& strPropertyName, const std::string& strValue) = 0;
+	virtual bool SetPropertyObject(const int scene, const int group, const std::string& strPropertyName, const NFGUID& objectValue) = 0;
+	virtual bool SetPropertyVector2(const int scene, const int group, const std::string& strPropertyName, const NFVector2& value) = 0;
+	virtual bool SetPropertyVector3(const int scene, const int group, const std::string& strPropertyName, const NFVector3& value) = 0;
+
+	virtual NFINT64 GetPropertyInt(const int scene, const int group, const std::string& strPropertyName) = 0;
+	virtual int GetPropertyInt32(const int scene, const int group, const std::string& strPropertyName) = 0;	//equal to (int)GetPropertyInt(...), to remove C4244 warning
+	virtual double GetPropertyFloat(const int scene, const int group, const std::string& strPropertyName) = 0;
+	virtual const std::string& GetPropertyString(const int scene, const int group, const std::string& strPropertyName) = 0;
+	virtual const NFGUID& GetPropertyObject(const int scene, const int group, const std::string& strPropertyName) = 0;
+	virtual const NFVector2& GetPropertyVector2(const int scene, const int group, const std::string& strPropertyName) = 0;
+	virtual const NFVector3& GetPropertyVector3(const int scene, const int group, const std::string& strPropertyName) = 0;
+
+	virtual NF_SHARE_PTR<NFIPropertyManager> FindPropertyManager(const int scene, const int group) = 0;
+	virtual NF_SHARE_PTR<NFIRecordManager> FindRecordManager(const int scene, const int group) = 0;
+	virtual NF_SHARE_PTR<NFIRecord> FindRecord(const int scene, const int group, const std::string& strRecordName) = 0;
+	virtual bool ClearRecord(const int scene, const int group, const std::string& strRecordName) = 0;
+
+	virtual bool SetRecordInt(const int scene, const int group, const std::string& strRecordName, const int nRow, const int nCol, const NFINT64 nValue) = 0;
+	virtual bool SetRecordFloat(const int scene, const int group, const std::string& strRecordName, const int nRow, const int nCol, const double dwValue) = 0;
+	virtual bool SetRecordString(const int scene, const int group, const std::string& strRecordName, const int nRow, const int nCol, const std::string& strValue) = 0;
+	virtual bool SetRecordObject(const int scene, const int group, const std::string& strRecordName, const int nRow, const int nCol, const NFGUID& objectValue) = 0;
+	virtual bool SetRecordVector2(const int scene, const int group, const std::string& strRecordName, const int nRow, const int nCol, const NFVector2& value) = 0;
+	virtual bool SetRecordVector3(const int scene, const int group, const std::string& strRecordName, const int nRow, const int nCol, const NFVector3& value) = 0;
+
+	virtual bool SetRecordInt(const int scene, const int group, const std::string& strRecordName, const int nRow, const std::string& strColTag, const NFINT64 value) = 0;
+	virtual bool SetRecordFloat(const int scene, const int group, const std::string& strRecordName, const int nRow, const std::string& strColTag, const double value) = 0;
+	virtual bool SetRecordString(const int scene, const int group, const std::string& strRecordName, const int nRow, const std::string& strColTag, const std::string& value) = 0;
+	virtual bool SetRecordObject(const int scene, const int group, const std::string& strRecordName, const int nRow, const std::string& strColTag, const NFGUID& value) = 0;
+	virtual bool SetRecordVector2(const int scene, const int group, const std::string& strRecordName, const int nRow, const std::string& strColTag, const NFVector2& value) = 0;
+	virtual bool SetRecordVector3(const int scene, const int group, const std::string& strRecordName, const int nRow, const std::string& strColTag, const NFVector3& value) = 0;
+
+	virtual NFINT64 GetRecordInt(const int scene, const int group, const std::string& strRecordName, const int nRow, const int nCol) = 0;
+	virtual double GetRecordFloat(const int scene, const int group, const std::string& strRecordName, const int nRow, const int nCol) = 0;
+	virtual const std::string& GetRecordString(const int scene, const int group, const std::string& strRecordName, const int nRow, const int nCol) = 0;
+	virtual const NFGUID& GetRecordObject(const int scene, const int group, const std::string& strRecordName, const int nRow, const int nCol) = 0;
+	virtual const NFVector2& GetRecordVector2(const int scene, const int group, const std::string& strRecordName, const int nRow, const int nCol) = 0;
+	virtual const NFVector3& GetRecordVector3(const int scene, const int group, const std::string& strRecordName, const int nRow, const int nCol) = 0;
+
+	virtual NFINT64 GetRecordInt(const int scene, const int group, const std::string& strRecordName, const int nRow, const std::string& strColTag) = 0;
+	virtual double GetRecordFloat(const int scene, const int group, const std::string& strRecordName, const int nRow, const std::string& strColTag) = 0;
+	virtual const std::string& GetRecordString(const int scene, const int group, const std::string& strRecordName, const int nRow, const std::string& strColTag) = 0;
+	virtual const NFGUID& GetRecordObject(const int scene, const int group, const std::string& strRecordName, const int nRow, const std::string& strColTag) = 0;
+	virtual const NFVector2& GetRecordVector2(const int scene, const int group, const std::string& strRecordName, const int nRow, const std::string& strColTag) = 0;
+	virtual const NFVector3& GetRecordVector3(const int scene, const int group, const std::string& strRecordName, const int nRow, const std::string& strColTag) = 0;
+
+	////////////////////////////////////////////////////////////////
 protected:
+	//for scne && group
+	virtual bool AddGroupRecordCallBack(const std::string& strName, const RECORD_EVENT_FUNCTOR_PTR& cb) = 0;
+	virtual bool AddGroupPropertyCallBack(const std::string& strName, const PROPERTY_EVENT_FUNCTOR_PTR& cb) = 0;
+	virtual bool AddGroupRecordCommCallBack(const RECORD_EVENT_FUNCTOR_PTR& cb) = 0;
+	virtual bool AddGroupPropertyCommCallBack(const PROPERTY_EVENT_FUNCTOR_PTR& cb) = 0;
+
+	//for players
 	virtual bool AddObjectEnterCallBack(const OBJECT_ENTER_EVENT_FUNCTOR_PTR& cb) = 0;
 	virtual bool AddObjectLeaveCallBack(const OBJECT_LEAVE_EVENT_FUNCTOR_PTR& cb) = 0;
 	virtual bool AddPropertyEnterCallBack(const PROPERTY_ENTER_EVENT_FUNCTOR_PTR& cb) = 0;
@@ -410,6 +318,9 @@ protected:
 	virtual bool AddSwapSceneEventCallBack(const SCENE_EVENT_FUNCTOR_PTR& cb) = 0;
 	virtual bool AddBeforeLeaveSceneGroupCallBack(const SCENE_EVENT_FUNCTOR_PTR& cb) = 0;
 	virtual bool AddAfterLeaveSceneGroupCallBack(const SCENE_EVENT_FUNCTOR_PTR& cb) = 0;
+
+	virtual bool AddSceneGroupCreatedCallBack(const SCENE_EVENT_FUNCTOR_PTR& cb) = 0;
+	virtual bool AddSceneGroupDestroyedCallBack(const SCENE_EVENT_FUNCTOR_PTR& cb) = 0;
 
 private:
 };

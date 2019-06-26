@@ -3,7 +3,7 @@
                 NoahFrame
             https://github.com/ketoo/NoahGameFrame
 
-   Copyright 2009 - 2018 NoahFrame(NoahGameFrame)
+   Copyright 2009 - 2019 NoahFrame(NoahGameFrame)
 
    File creator: lvsheng.huang
    
@@ -34,7 +34,7 @@ class NFIWorldPVPModule
     : public NFIModule
 {
 public:
-
+	virtual void OffLine(const NFGUID& self) = 0;
 };
 
 #endif

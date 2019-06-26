@@ -3,7 +3,7 @@
                 NoahFrame
             https://github.com/ketoo/NoahGameFrame
 
-   Copyright 2009 - 2018 NoahFrame(NoahGameFrame)
+   Copyright 2009 - 2019 NoahFrame(NoahGameFrame)
 
    File creator: lvsheng.huang
    
@@ -282,11 +282,12 @@ void NFGameServerToWorldModule::SendOnline(const NFGUID& self)
 {
 	NFMsg::RoleOnlineNotify xMsg;
 	const NFGUID& xClan = m_pKernelModule->GetPropertyObject(self, NFrame::Player::Clan_ID());
+	const int& gateID = m_pKernelModule->GetPropertyInt(self, NFrame::Player::GateID());
 
 	*xMsg.mutable_self() = NFINetModule::NFToPB(self);
 	*xMsg.mutable_clan() = NFINetModule::NFToPB(xClan);
 	xMsg.set_game(pPluginManager->GetAppID());
-	xMsg.set_proxy(0);
+	xMsg.set_proxy(gateID);
 	m_pNetClientModule->SendToAllServerByPB(NF_SERVER_TYPES::NF_ST_WORLD, NFMsg::EGMI_ACK_ONLINE_NOTIFY, xMsg);
 }
 

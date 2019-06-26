@@ -3,7 +3,7 @@
                 NoahFrame
             https://github.com/ketoo/NoahGameFrame
 
-   Copyright 2009 - 2018 NoahFrame(NoahGameFrame)
+   Copyright 2009 - 2019 NoahFrame(NoahGameFrame)
 
    File creator: lvsheng.huang
    
@@ -26,12 +26,14 @@
 #ifndef NF_AI_MODULE_H
 #define NF_AI_MODULE_H
 
-#include "NFIStateMachine.h"
+#include "NFStateMachine.h"
+#include "NFComm/NFMessageDefine/NFMsgDefine.h"
 #include "NFComm/NFPluginModule/NFIMoveModule.h"
 #include "NFComm/NFPluginModule/NFIAIModule.h"
 #include "NFComm/NFPluginModule/NFIKernelModule.h"
 #include "NFComm/NFPluginModule/NFIElementModule.h"
 #include "NFComm/NFPluginModule/NFIHateModule.h"
+#include "NFComm/NFPluginModule/NFIFriendModule.h"
 
 class NFAIModule
     : public NFIAIModule
@@ -51,45 +53,31 @@ public:
 
     virtual bool Execute();
 
-protected:
-	int CanUseAnySkill(const NFGUID& self, const NFGUID& other);
+	virtual NFIState* GetState(const NFAI_STATE eState);
 
-	float UseAnySkill(const NFGUID& self, const NFGUID& other);
-    
+	virtual const std::string& ChooseSkill(const NFGUID& self, const float fDis);
+
+protected:
 	bool CreateAIObject(const NFGUID& self);
 
     bool DelAIObject(const NFGUID& self);
 
     //////////////////////////////////////////////////////////////////////////
-    int OnAIObjectEvent(const NFGUID& self, const std::string& strClassNames, const CLASS_OBJECT_EVENT eClassEvent, const NFDataList& var);
+    int OnClassObjectEvent(const NFGUID& self, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFDataList& var);
+	int OnNPCHPEvent(const NFGUID & self, const std::string & strPropertyName, const NFData & oldVar, const NFData & newVar);
 
-    //////////////////////////////////////////////////////////////////////////
-
-    void OnBeKilled(const NFGUID& self, const NFGUID& other);
-
-    void OnBeAttack(const NFGUID& self, const NFGUID& other, const int nDamageValue);
-
-    void OnSpring(const NFGUID& self, const NFGUID& other);
-
-    void OnEndSpring(const NFGUID& self, const NFGUID& other);
-
-    void OnMotion(const NFGUID& self, int nResults);
-
-    void OnSelect(const NFGUID& self, const NFGUID& other);
-
-	NFIStateMachine* GetStateMachine(const NFGUID& self);
-	NFIState* GetState(const NFAI_STATE eState);
+	NF_SHARE_PTR<NFIStateMachine> GetStateMachine(const NFGUID& self);
 
 private:
     //状态机
-    typedef std::map<NFAI_STATE, NFIState*> TMAPSTATE;
-    TMAPSTATE mtStateMap;
+	NFIState* mtStateMap[MAXState];
     //AI对象，状态机
-    typedef std::map<NFGUID, NFIStateMachine*> TOBJECTSTATEMACHINE;
-    TOBJECTSTATEMACHINE mtObjectStateMachine;
+    std::map<NFGUID, NF_SHARE_PTR<NFIStateMachine>> mtObjectStateMachine;
 
     NFIHateModule* m_pHateModule;
-    NFIKernelModule* m_pKernelModule;
+	NFIKernelModule* m_pKernelModule;
+	NFIElementModule* m_pElementModule;
+	NFIFriendModule* m_pFriendModule;
 };
 
 #endif

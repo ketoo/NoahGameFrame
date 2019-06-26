@@ -3,7 +3,7 @@
                 NoahFrame
             https://github.com/ketoo/NoahGameFrame
 
-   Copyright 2009 - 2018 NoahFrame(NoahGameFrame)
+   Copyright 2009 - 2019 NoahFrame(NoahGameFrame)
 
    File creator: lvsheng.huang
    
@@ -535,6 +535,12 @@ public:
 
 	virtual ~NFDataList()
 	{
+	}
+
+	static const NFDataList& Empty()
+	{
+		static NFDataList data;
+		return data;
 	}
 
 	virtual std::string ToString() const

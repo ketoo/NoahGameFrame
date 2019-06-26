@@ -818,7 +818,7 @@ void AddDescriptorsImpl() {
       "NFMsg.Ident\022\014\n\004game\030\003 \001(\005\022\r\n\005proxy\030\004 \001(\005"
       "\"~\n\014RoleDataPack\022\030\n\002id\030\001 \001(\0132\014.NFMsg.Ide"
       "nt\022+\n\010property\030\002 \001(\0132\031.NFMsg.ObjectPrope"
-      "rtyList\022\'\n\006record\030\004 \001(\0132\027.NFMsg.ObjectRe"
+      "rtyList\022\'\n\006record\030\003 \001(\0132\027.NFMsg.ObjectRe"
       "cordList*Z\n\014EServerState\022\r\n\tEST_CRASH\020\000\022"
       "\016\n\nEST_NARMAL\020\001\022\014\n\010EST_BUSY\020\002\022\014\n\010EST_FIR"
       "E\020\003\022\017\n\013EST_MAINTEN\020\004*J\n\nELoginMode\022\r\n\tEL"
@@ -8475,10 +8475,10 @@ bool RoleDataPack::MergePartialFromCodedStream(
         break;
       }
 
-      // .NFMsg.ObjectRecordList record = 4;
-      case 4: {
+      // .NFMsg.ObjectRecordList record = 3;
+      case 3: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(34u /* 34 & 0xFF */)) {
+            static_cast< ::google::protobuf::uint8>(26u /* 26 & 0xFF */)) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadMessage(
                input, mutable_record()));
         } else {
@@ -8525,10 +8525,10 @@ void RoleDataPack::SerializeWithCachedSizes(
       2, this->_internal_property(), output);
   }
 
-  // .NFMsg.ObjectRecordList record = 4;
+  // .NFMsg.ObjectRecordList record = 3;
   if (this->has_record()) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      4, this->_internal_record(), output);
+      3, this->_internal_record(), output);
   }
 
   if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
@@ -8559,11 +8559,11 @@ void RoleDataPack::SerializeWithCachedSizes(
         2, this->_internal_property(), deterministic, target);
   }
 
-  // .NFMsg.ObjectRecordList record = 4;
+  // .NFMsg.ObjectRecordList record = 3;
   if (this->has_record()) {
     target = ::google::protobuf::internal::WireFormatLite::
       InternalWriteMessageToArray(
-        4, this->_internal_record(), deterministic, target);
+        3, this->_internal_record(), deterministic, target);
   }
 
   if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
@@ -8597,7 +8597,7 @@ size_t RoleDataPack::ByteSizeLong() const {
         *property_);
   }
 
-  // .NFMsg.ObjectRecordList record = 4;
+  // .NFMsg.ObjectRecordList record = 3;
   if (this->has_record()) {
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::MessageSize(

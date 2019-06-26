@@ -3,7 +3,7 @@
                 NoahFrame
             https://github.com/ketoo/NoahGameFrame
 
-   Copyright 2009 - 2018 NoahFrame(NoahGameFrame)
+   Copyright 2009 - 2019 NoahFrame(NoahGameFrame)
 
    File creator: lvsheng.huang
    
@@ -185,8 +185,8 @@ void NFDBNet_ServerModule::InitAllHomeScene()
 		{
 			const std::string& strId = strIdList[i];
 
-			const int nSceneType = m_pElementModule->GetPropertyInt32(strId, NFrame::Scene::Tile());
-			if (nSceneType == 1 && strId != "1")
+			const int nSceneType = m_pElementModule->GetPropertyInt32(strId, NFrame::Scene::Type());
+			if (nSceneType == NFMsg::ESceneType::SCENE_HOME)
 			{
 				int nSceneID = lexical_cast<int>(strId);
 				std::vector<int>::iterator it = std::find(mxTileSceneIDList.begin(), mxTileSceneIDList.end(), nSceneID);
@@ -197,13 +197,19 @@ void NFDBNet_ServerModule::InitAllHomeScene()
 			}
 		}
 	}
+
+	if (mxTileSceneIDList.size() <= 0)
+	{
+		NFASSERT(0, "at least one home scene", __FILE__, __FUNCTION__);
+	}
 }
 
 int NFDBNet_ServerModule::RandomHomeScene()
 {
-	if (mxTileSceneIDList.size() > 1)
+	int index = m_pKernelModule->Random(0, (int)mxTileSceneIDList.size());
+	if (index < mxTileSceneIDList.size())
 	{
-		return mxTileSceneIDList.at(m_pKernelModule->Random(0, (int)mxTileSceneIDList.size()));
+		return mxTileSceneIDList.at(index);
 	}
 
 	return mxTileSceneIDList[0];

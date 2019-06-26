@@ -3,7 +3,7 @@
                 NoahFrame
             https://github.com/ketoo/NoahGameFrame
 
-   Copyright 2009 - 2018 NoahFrame(NoahGameFrame)
+   Copyright 2009 - 2019 NoahFrame(NoahGameFrame)
 
    File creator: lvsheng.huang
    
@@ -69,7 +69,7 @@ bool NFItemModule::AfterInit()
 	return true;
 }
 
-bool NFItemModule::UseItem(const NFGUID & self, const std::string & strItemID, const NFGUID & xTargetID)
+bool NFItemModule::UseItem(const NFGUID & self, const std::string & strItemID, const NFGUID & xTargetID, const NFVector3& vector)
 {
 	int nCount = 1;
 	if (!m_pElementModule->ExistElement(strItemID) || !m_pKernelModule->GetObject(xTargetID))
@@ -88,7 +88,7 @@ bool NFItemModule::UseItem(const NFGUID & self, const std::string & strItemID, c
 	}
 
 	NFMsg::EItemType eItemType = (NFMsg::EItemType)m_pElementModule->GetPropertyInt(strItemID, NFrame::Item::ItemType());
-	NF_SHARE_PTR<NFIItemConsumeProcessModule> pConsumeProcessModule = m_pItemConsumeManagerModule->GetConsumeModule(eItemType);
+	NF_SHARE_PTR<NFIItemConsumeocessModule> pConsumeProcessModule = m_pItemConsumeManagerModule->GetConsumeModule(eItemType);
 	if (!pConsumeProcessModule)
 	{
 		return false;
@@ -96,27 +96,26 @@ bool NFItemModule::UseItem(const NFGUID & self, const std::string & strItemID, c
 
 	switch (eItemType)
 	{
-	case NFMsg::EItemType::EIT_CARD:
 	case NFMsg::EItemType::EIT_EQUIP:
 	case NFMsg::EItemType::EIT_GEM:
-	case NFMsg::EItemType::EIT_TOKEN:
+	case NFMsg::EItemType::EIT_SCROLL:
 	{
-		if (pConsumeProcessModule->ConsumeLegal(self, strItemID, NFDataList()) == 0)
+		if (pConsumeProcessModule->ConsumeLegal(self, strItemID, NFDataList(), vector) == 0)
 		{
-			pConsumeProcessModule->ConsumeProcess(self, strItemID, NFDataList());
+			pConsumeProcessModule->ConsumeProcess(self, strItemID, NFDataList(), vector);
 		}
 	}
 	break;
-	case NFMsg::EItemType::EIT_ITEM:
+	case NFMsg::EItemType::EIT_SUPPLY:
 	{
 		NFDataList xTarget;
 		xTarget.AddObject(xTargetID);
 		xTarget.AddString(strItemID);	//this is Item Config ID
 		xTarget.AddInt(nCount);	//this is Item Count to Consume
 
-		if (pConsumeProcessModule->ConsumeLegal(self, strItemID, xTarget) == 0)
+		if (pConsumeProcessModule->ConsumeLegal(self, strItemID, xTarget, vector) == 0)
 		{
-			pConsumeProcessModule->ConsumeProcess(self, strItemID, xTarget);
+			pConsumeProcessModule->ConsumeProcess(self, strItemID, xTarget, vector);
 		}
 	}
 	break;
@@ -383,9 +382,10 @@ void NFItemModule::OnClientUseItem(const NFSOCK nSockIndex, const int nMsgID, co
 	const NFGUID& self = NFINetModule::PBToNF(xMsg.user());
 	const std::string& strItemID = xMsg.item().item_id();
 	const NFGUID xTargetID = NFINetModule::PBToNF(xMsg.targetid());
+	const NFVector3 vector = NFINetModule::PBToNF(xMsg.position());
 	//const int nCount = xMsg.item().item_count();
 
-	UseItem(nPlayerID, strItemID, xTargetID);
+	UseItem(nPlayerID, strItemID, xTargetID, vector);
 }
 
 

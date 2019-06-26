@@ -3,7 +3,7 @@
                 NoahFrame
             https://github.com/ketoo/NoahGameFrame
 
-   Copyright 2009 - 2018 NoahFrame(NoahGameFrame)
+   Copyright 2009 - 2019 NoahFrame(NoahGameFrame)
 
    File creator: lvsheng.huang
    
@@ -50,6 +50,7 @@ bool NFPatrolState::Execute(const NFGUID& self, NFIStateMachine* pStateMachine)
 {
     if (!NFIState::Execute(self, pStateMachine))
     {
+		/*
 			NFGUID ident = m_pHateModule->QueryMaxHateObject(self);
 			NFAI_NPC_TYPE eMoveType = (NFAI_NPC_TYPE)(m_pKernelModule->GetPropertyInt(self, NFrame::NPC::NPCType()));
 
@@ -87,6 +88,7 @@ bool NFPatrolState::Execute(const NFGUID& self, NFIStateMachine* pStateMachine)
 			default:
 				break;
 			}
+			*/
     }
 
     return true;

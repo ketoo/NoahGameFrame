@@ -3201,10 +3201,10 @@ class LIBPROTOC_EXPORT RoleDataPack : public ::google::protobuf::Message /* @@pr
   ::NFMsg::ObjectPropertyList* mutable_property();
   void set_allocated_property(::NFMsg::ObjectPropertyList* property);
 
-  // .NFMsg.ObjectRecordList record = 4;
+  // .NFMsg.ObjectRecordList record = 3;
   bool has_record() const;
   void clear_record();
-  static const int kRecordFieldNumber = 4;
+  static const int kRecordFieldNumber = 3;
   private:
   const ::NFMsg::ObjectRecordList& _internal_record() const;
   public:
@@ -5944,7 +5944,7 @@ inline void RoleDataPack::set_allocated_property(::NFMsg::ObjectPropertyList* pr
   // @@protoc_insertion_point(field_set_allocated:NFMsg.RoleDataPack.property)
 }
 
-// .NFMsg.ObjectRecordList record = 4;
+// .NFMsg.ObjectRecordList record = 3;
 inline bool RoleDataPack::has_record() const {
   return this != internal_default_instance() && record_ != NULL;
 }

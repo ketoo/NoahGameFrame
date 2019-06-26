@@ -3,7 +3,7 @@
                 NoahFrame
             https://github.com/ketoo/NoahGameFrame
 
-   Copyright 2009 - 2018 NoahFrame(NoahGameFrame)
+   Copyright 2009 - 2019 NoahFrame(NoahGameFrame)
 
    File creator: lvsheng.huang
    
@@ -32,7 +32,8 @@ class NFIAIModule
     : public NFIModule
 {
 public:
-
+	virtual NFIState* GetState(const NFAI_STATE eState) = 0;
+	virtual const std::string& ChooseSkill(const NFGUID& self, const float fDis) = 0;
 };
 
 #endif

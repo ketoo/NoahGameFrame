@@ -99,6 +99,7 @@
     </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="NFScenePropsModule.h" />
     <ClInclude Include="NFBuffModule.h" />
     <ClInclude Include="NFCreateRoleModule.h" />
     <ClInclude Include="NFGamePVPModule.h" />
@@ -119,6 +120,7 @@
     <ClCompile Include="NFGamePVPModule.cpp" />
     <ClCompile Include="NFSyncModule.cpp" />
     <ClCompile Include="NFGameLogicPlugin.cpp" />
+    <ClCompile Include="NFScenePropsModule.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

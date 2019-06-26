@@ -3,7 +3,7 @@
                 NoahFrame
             https://github.com/ketoo/NoahGameFrame
 
-   Copyright 2009 - 2018 NoahFrame(NoahGameFrame)
+   Copyright 2009 - 2019 NoahFrame(NoahGameFrame)
 
    File creator: yu.tang
    
@@ -39,7 +39,7 @@
 #include "NFComm/NFPluginModule/NFIItemConsumeProcessModule.h"
 
 class NFItemEquipConsumeProcessModule
-	: public NFIItemConsumeProcessModule
+	: public NFIItemConsumeocessModule
 {
 
 public:
@@ -53,10 +53,10 @@ public:
 	virtual bool AfterInit();
 
 	
-	virtual int ConsumeLegal(const NFGUID& self, const std::string& strItemID, const NFDataList& targetID);
+	virtual int ConsumeLegal(const NFGUID& self, const std::string& strItemID, const NFDataList& targetID, const NFVector3& vector);
 
 	
-	virtual int ConsumeProcess(const NFGUID& self, const std::string& strItemID, const NFDataList& targetID);
+	virtual int ConsumeProcess(const NFGUID& self, const std::string& strItemID, const NFDataList& targetID, const NFVector3& vector);
 
 private:
 	NFIKernelModule* m_pKernelModule;

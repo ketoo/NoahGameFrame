@@ -1,5 +1,5 @@
 /*
-    Copyright 2009 - 2018 LvSheng.Huang
+    Copyright 2009 - 2019 LvSheng.Huang
 
    This source file is part of NoahGameFrame/NoahFrame.
    NoahGameFrame/NoahFrame is open-source software and you can redistribute it and/or modify

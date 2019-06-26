@@ -3,7 +3,7 @@
                 NoahFrame
             https://github.com/ketoo/NoahGameFrame
 
-   Copyright 2009 - 2018 NoahFrame(NoahGameFrame)
+   Copyright 2009 - 2019 NoahFrame(NoahGameFrame)
 
    File creator: lvsheng.huang
    
@@ -39,6 +39,8 @@
 #include "NFComm/NFPluginModule/NFIEquipPropertyModule.h"
 #include "NFComm/NFPluginModule/NFIPropertyModule.h"
 #include "NFComm/NFPluginModule/NFIHeroModule.h"
+#include "NFComm/NFPluginModule/NFIPropertyConfigModule.h"
+#include "NFComm/NFPluginModule/NFILogModule.h"
 
 class NFHeroPropertyModule
     : public NFIHeroPropertyModule
@@ -84,6 +86,8 @@ private:
 	NFIGameServerNet_ServerModule* m_pGameServerNet_ServerModule;
 	NFIEquipPropertyModule* m_pEquipPropertyModule;
 	NFIPropertyModule* m_pPropertyModule;
+	NFIPropertyConfigModule* m_pPropertyConfigModule;
+	NFILogModule* m_pLogModule;
 };
 
 #endif

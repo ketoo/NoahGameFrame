@@ -3,7 +3,7 @@
                 NoahFrame
             https://github.com/ketoo/NoahGameFrame
 
-   Copyright 2009 - 2018 NoahFrame(NoahGameFrame)
+   Copyright 2009 - 2019 NoahFrame(NoahGameFrame)
 
    File creator: lvsheng.huang
    
@@ -38,6 +38,7 @@ bool NFCreateRoleModule::Init()
 	m_pNetClientModule = pPluginManager->FindModule<NFINetClientModule>();
 	m_pScheduleModule = pPluginManager->FindModule<NFIScheduleModule>();
 	m_pDataTailModule = pPluginManager->FindModule<NFIDataTailModule>();
+	m_pSceneModule = pPluginManager->FindModule<NFISceneModule>();
 	
     return true;
 }
@@ -113,7 +114,19 @@ void NFCreateRoleModule::OnClienEnterGameProcess(const NFSOCK nSockIndex, const 
 	if (m_pKernelModule->GetObject(nRoleID))
 	{
 		//it should be rebind with proxy's netobject
-		m_pKernelModule->DestroyObject(nRoleID);
+		m_pScheduleModule->RemoveSchedule(nRoleID, "DestroyPlayerOnTime");
+
+		const int sceneID = m_pKernelModule->GetPropertyInt(nRoleID, NFrame::Player::SceneID());
+		const int groupID = m_pKernelModule->GetPropertyInt(nRoleID, NFrame::Player::GroupID());
+		const NFGUID matchID = m_pSceneModule->GetPropertyObject(sceneID, groupID, NFrame::Group::MatchID());
+		if (!matchID.IsNull())
+		{
+			//reconnect to the match
+		}
+		else
+		{
+			m_pKernelModule->DestroyObject(nRoleID);
+		}
 	}
 
 	//////////////////////////////////////////////////////////////////////////
@@ -197,6 +210,7 @@ void NFCreateRoleModule::OnDBLoadRoleDataProcess(const NFSOCK nSockIndex, const 
 
 	var.AddString(NFrame::Player::GameID());
 	var.AddInt(pPluginManager->GetAppID());
+
 	/*
 	var.AddString(NFrame::Player::HomeSceneID());
 	var.AddInt(1);
@@ -204,6 +218,7 @@ void NFCreateRoleModule::OnDBLoadRoleDataProcess(const NFSOCK nSockIndex, const 
 	var.AddString(NFrame::Player::SceneID());
 	var.AddInt(1);
 	*/
+
 	NF_SHARE_PTR<NFIObject> pObject = m_pKernelModule->CreateObject(nRoleID, 1, 0, NFrame::Player::ThisName(), "", var);
 	if (nullptr == pObject)
 	{
@@ -214,9 +229,9 @@ void NFCreateRoleModule::OnDBLoadRoleDataProcess(const NFSOCK nSockIndex, const 
 	}
 
 	//get data first then create player
-	//int nHomeSceneiD = pObject->GetPropertyInt(NFrame::Player::HomeSceneID());
-	//m_pSceneProcessModule->RequestEnterScene(pObject->Self(), nHomeSceneiD, -1, 0, NFDataList());
-	m_pSceneProcessModule->RequestEnterScene(pObject->Self(), 1, 1, 0, NFDataList());
+	const int nHomeSceneID = pObject->GetPropertyInt(NFrame::Player::HomeSceneID());
+	const NFVector3& pos = m_pSceneModule->GetRelivePosition(nHomeSceneID, 0);
+	m_pSceneProcessModule->RequestEnterScene(pObject->Self(), nHomeSceneID, -1, 0, pos, NFDataList());
 }
 
 int NFCreateRoleModule::OnObjectPlayerEvent(const NFGUID & self, const std::string & strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFDataList & var)
@@ -641,7 +656,7 @@ bool NFCreateRoleModule::ConvertPBToPropertyManager(const NFMsg::ObjectPropertyL
 		{
 			const NFMsg::PropertyInt& xData = pPropertyData.property_int_list(i);
 
-			if (pProps->ExistElement(xData.property_name()))
+			if (!pProps->ExistElement(xData.property_name()))
 			{
 				pProps->AddProperty(pProps->Self(), xData.property_name(), NFDATA_TYPE::TDATA_INT);
 			}
@@ -653,7 +668,7 @@ bool NFCreateRoleModule::ConvertPBToPropertyManager(const NFMsg::ObjectPropertyL
 		{
 			const NFMsg::PropertyFloat& xData = pPropertyData.property_float_list(i);
 
-			if (pProps->ExistElement(xData.property_name()))
+			if (!pProps->ExistElement(xData.property_name()))
 			{
 				pProps->AddProperty(pProps->Self(), xData.property_name(), NFDATA_TYPE::TDATA_FLOAT);
 			}
@@ -665,7 +680,7 @@ bool NFCreateRoleModule::ConvertPBToPropertyManager(const NFMsg::ObjectPropertyL
 		{
 			const NFMsg::PropertyString& xData = pPropertyData.property_string_list(i);
 
-			if (pProps->ExistElement(xData.property_name()))
+			if (!pProps->ExistElement(xData.property_name()))
 			{
 				pProps->AddProperty(pProps->Self(), xData.property_name(), NFDATA_TYPE::TDATA_STRING);
 			}
@@ -677,7 +692,7 @@ bool NFCreateRoleModule::ConvertPBToPropertyManager(const NFMsg::ObjectPropertyL
 		{
 			const NFMsg::PropertyObject& xData = pPropertyData.property_object_list(i);
 
-			if (pProps->ExistElement(xData.property_name()))
+			if (!pProps->ExistElement(xData.property_name()))
 			{
 				pProps->AddProperty(pProps->Self(), xData.property_name(), NFDATA_TYPE::TDATA_OBJECT);
 			}
@@ -689,7 +704,7 @@ bool NFCreateRoleModule::ConvertPBToPropertyManager(const NFMsg::ObjectPropertyL
 		{
 			const NFMsg::PropertyVector2& xData = pPropertyData.property_vector2_list(i);
 
-			if (pProps->ExistElement(xData.property_name()))
+			if (!pProps->ExistElement(xData.property_name()))
 			{
 				pProps->AddProperty(pProps->Self(), xData.property_name(), NFDATA_TYPE::TDATA_VECTOR2);
 			}
@@ -701,7 +716,7 @@ bool NFCreateRoleModule::ConvertPBToPropertyManager(const NFMsg::ObjectPropertyL
 		{
 			const NFMsg::PropertyVector3& xData = pPropertyData.property_vector3_list(i);
 
-			if (pProps->ExistElement(xData.property_name()))
+			if (!pProps->ExistElement(xData.property_name()))
 			{
 				pProps->AddProperty(pProps->Self(), xData.property_name(), NFDATA_TYPE::TDATA_VECTOR3);
 			}
