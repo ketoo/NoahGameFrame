@@ -129,14 +129,14 @@ bool NFPlayerRedisModule::LoadPlayerData(const NFGUID & self, NFMsg::PVPPlayerIn
 		roleData.set_name(name);
 		roleData.set_head(head);
 
+		roleData.set_hero_star1(hero_star1);
+		roleData.set_hero_star2(hero_star2);
+		roleData.set_hero_star3(hero_star3);
+
 		roleData.set_hero_cnf1(hero_cnf1);
 		roleData.set_hero_cnf2(hero_cnf2);
 		roleData.set_hero_cnf3(hero_cnf3);
 
-
-		roleData.set_hero_star1(hero_star1);
-		roleData.set_hero_star2(hero_star2);
-		roleData.set_hero_star3(hero_star3);
 
 
 		*roleData.mutable_hero_id1() = NFINetModule::NFToPB(hero_id1);

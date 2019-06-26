@@ -639,12 +639,13 @@ enum ESceneType {
   SCENE_SINGLE_CLONE = 1,
   SCENE_MULTI_CLONE = 2,
   SCENE_HOME = 3,
+  SCENE_CLAN = 4,
   ESceneType_INT_MIN_SENTINEL_DO_NOT_USE_ = ::google::protobuf::kint32min,
   ESceneType_INT_MAX_SENTINEL_DO_NOT_USE_ = ::google::protobuf::kint32max
 };
 LIBPROTOC_EXPORT bool ESceneType_IsValid(int value);
 const ESceneType ESceneType_MIN = SCENE_NORMAL;
-const ESceneType ESceneType_MAX = SCENE_HOME;
+const ESceneType ESceneType_MAX = SCENE_CLAN;
 const int ESceneType_ARRAYSIZE = ESceneType_MAX + 1;
 
 LIBPROTOC_EXPORT const ::google::protobuf::EnumDescriptor* ESceneType_descriptor();

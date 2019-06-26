@@ -106,6 +106,9 @@ void NFWorldPVPModule::OnReqSearchOpponentProcess(const NFSOCK nSockIndex, const
 	
 	if (xMsg.friends_size() == 0)
 	{
+		std::ostringstream stream;
+		stream << nPlayerID.ToString() << " want to join a single mode match, mCandidatePool's size:" << mCandidatePool.Count();
+
 		//single
 		if (!mCandidatePool.ExistElement(nPlayerID))
 		{
@@ -117,8 +120,13 @@ void NFWorldPVPModule::OnReqSearchOpponentProcess(const NFSOCK nSockIndex, const
 				pvpPlayerInfo->set_single(1);
 				mSingleModeCandidatePool.push_back(nPlayerID);
 				mCandidatePool.AddElement(nPlayerID, pvpPlayerInfo);
+
+
+				stream << " -----> mCandidatePool's size:" << mCandidatePool.Count();
 			}
 		}
+
+		m_pLogModule->LogInfo(stream);
 	}
 	else
 	{
@@ -126,6 +134,9 @@ void NFWorldPVPModule::OnReqSearchOpponentProcess(const NFSOCK nSockIndex, const
 		multiTeam->teamID = m_pKernelModule->CreateGUID();
 		multiTeam->leaderID = nPlayerID;
 		multiTeam->diamond = xMsg.diamond();
+
+		std::ostringstream stream;
+		stream << nPlayerID.ToString() << " want to join a team mode match, mCandidatePool's size:" << mCandidatePool.Count();
 
 		if (!mCandidatePool.ExistElement(nPlayerID))
 		{
@@ -163,12 +174,18 @@ void NFWorldPVPModule::OnReqSearchOpponentProcess(const NFSOCK nSockIndex, const
 
 		multiTeam->avgBattlePoint = battlePoint;
 		mTeamList.push_back(multiTeam);
+
+		stream << " -----> mCandidatePool's size:" << mCandidatePool.Count();
+		m_pLogModule->LogInfo(stream);
 	}
 }
 
 void NFWorldPVPModule::OnReqCancelSearchProcess(const NFSOCK nSockIndex, const int nMsgID, const char * msg, const uint32_t nLen)
 {
 	CLIENT_MSG_PROCESS_NO_OBJECT(nMsgID, msg, nLen, NFMsg::ReqAckCancelSearch);
+
+	std::ostringstream stream;
+	stream << nPlayerID.ToString() << " want to cancel a match search, mCandidatePool's size:" << mCandidatePool.Count();
 
 	NF_SHARE_PTR<NFMsg::PVPPlayerInfo> pvpPlayerInfo = mCandidatePool.GetElement(nPlayerID);
 	if (pvpPlayerInfo)
@@ -204,6 +221,9 @@ void NFWorldPVPModule::OnReqCancelSearchProcess(const NFSOCK nSockIndex, const i
 				break;
 			}
 		}
+
+		stream << " -----> mCandidatePool's size:" << mCandidatePool.Count();
+		m_pLogModule->LogInfo(stream);
 
 		m_pWorldNet_ServerModule->SendMsgToGame(nPlayerID, NFMsg::EGMI_ACK_CANCEL_SEARCH, xMsg);
 	}
@@ -259,6 +279,11 @@ int NFWorldPVPModule::OnMakeTeam(const std::string & strHeartBeat, const float f
 	{
 		NF_SHARE_PTR<MultiTeam> teamData(NF_NEW MultiTeam());
 		teamData->teamID = m_pKernelModule->CreateGUID();
+
+		std::ostringstream stream;
+		stream << " a team maked(single mode), mCandidatePool's size:" << mCandidatePool.Count();
+		stream << " -----> team id:" << teamData->teamID.ToString() << " team member:";
+
 		for (int i = 0; i < 5; ++i)
 		{
 			if (mSingleModeCandidatePool.size() > 0)
@@ -267,16 +292,26 @@ int NFWorldPVPModule::OnMakeTeam(const std::string & strHeartBeat, const float f
 				mSingleModeCandidatePool.pop_front();
 
 				teamData->members.push_back(id);
+
+				stream << id.ToString() << ",";
 			}
 		}
 
 		mTeamList.push_back(teamData);
 		makeTeamCount = 0;
+
+		stream << " -----> team size:" << mTeamList.size() << " mCandidatePool's size:" << mCandidatePool.Count();
+		m_pLogModule->LogInfo(stream, __FUNCTION__, __LINE__);
 	}
 	else if (mSingleModeCandidatePool.size() >= 3 && makeTeamCount >= 5)
 	{
 		NF_SHARE_PTR<MultiTeam> teamData(NF_NEW MultiTeam());
 		teamData->teamID = m_pKernelModule->CreateGUID();
+
+		std::ostringstream stream;
+		stream << " a team maked(single mode), mCandidatePool's size:" << mCandidatePool.Count();
+		stream << " -----> team id:" << teamData->teamID.ToString() << " team member:";
+
 		for (int i = 0; i < 3; ++i)
 		{
 			if (mSingleModeCandidatePool.size() > 0)
@@ -285,16 +320,26 @@ int NFWorldPVPModule::OnMakeTeam(const std::string & strHeartBeat, const float f
 				mSingleModeCandidatePool.pop_front();
 
 				teamData->members.push_back(id);
+
+				stream << id.ToString() << ",";
 			}
 		}
 
 		mTeamList.push_back(teamData);
 		makeTeamCount = 0;
+
+		stream << " -----> team size:" << mTeamList.size() << " mCandidatePool's size:" << mCandidatePool.Count();
+		m_pLogModule->LogInfo(stream, __FUNCTION__, __LINE__);
 	}
 	else if (mSingleModeCandidatePool.size() >= 2 && makeTeamCount >= 7)
 	{
 		NF_SHARE_PTR<MultiTeam> teamData(NF_NEW MultiTeam());
 		teamData->teamID = m_pKernelModule->CreateGUID();
+
+		std::ostringstream stream;
+		stream << " a team maked(single mode), mCandidatePool's size:" << mCandidatePool.Count();
+		stream << " -----> team id:" << teamData->teamID.ToString() << " team member:";
+
 		for (int i = 0; i < 2; ++i)
 		{
 			if (mSingleModeCandidatePool.size() > 0)
@@ -303,29 +348,44 @@ int NFWorldPVPModule::OnMakeTeam(const std::string & strHeartBeat, const float f
 				mSingleModeCandidatePool.pop_front();
 
 				teamData->members.push_back(id);
+
+				stream << id.ToString() << ",";
 			}
 		}
 
 		mTeamList.push_back(teamData);
 		makeTeamCount = 0;
+
+		stream << " -----> team size:" << mTeamList.size() << " mCandidatePool's size:" << mCandidatePool.Count();
+		m_pLogModule->LogInfo(stream, __FUNCTION__, __LINE__);
 	}
 	else if (mSingleModeCandidatePool.size() >= 1 && makeTeamCount >= 9)
 	{
-
 		NFGUID id = mSingleModeCandidatePool.front();
 		mSingleModeCandidatePool.pop_front();
-		
+
+		std::ostringstream stream;
+		stream << " a team maked(single mode), mCandidatePool's size:" << mCandidatePool.Count();
+		stream << " team member:" << id.ToString();
+
 		NF_SHARE_PTR<NFMsg::PVPPlayerInfo> pvpPlayerInfo = mCandidatePool.GetElement(id);
 		if (pvpPlayerInfo)
 		{
 			NF_SHARE_PTR<MultiTeam> teamData(NF_NEW MultiTeam());
 			teamData->teamID = m_pKernelModule->CreateGUID();
+			stream << " team id:" << teamData->teamID.ToString();
+
+
 			teamData->members.push_back(id);
 			teamData->avgBattlePoint = pvpPlayerInfo->battle_point();
 
 			mTeamList.push_back(teamData);
 			makeTeamCount = 0;
+
 		}
+
+		stream << " -----> team size:" << mTeamList.size() << " mCandidatePool's size:" << mCandidatePool.Count();
+		m_pLogModule->LogInfo(stream, __FUNCTION__, __LINE__);
 	}
 	return 0;
 }
@@ -354,6 +414,10 @@ int NFWorldPVPModule::OnMakeMatch(const std::string & strHeartBeat, const float 
 					}
 				}
 
+				std::ostringstream stream;
+				stream << " a match maked, nSceneID:" << nSceneID << " ViewOpponent:" << xViewOpponent.ToString();
+				stream << " team id:" << teamData->teamID.ToString();
+
 				NFMsg::ReqStoreSceneBuildings xTileData;
 				if (xTileData.ParseFromString(strTileData))
 				{
@@ -362,7 +426,7 @@ int NFWorldPVPModule::OnMakeMatch(const std::string & strHeartBeat, const float 
 					if (pPlayerRedisModule->LoadPlayerData(xViewOpponent, *pvpPlayerInfo))
 					{
 						NFMsg::AckSearchOppnent xAckData;
-
+						*xAckData.mutable_team_id() = NFINetModule::NFToPB(teamData->teamID);
 						xAckData.set_scene_id(nSceneID);
 						xAckData.mutable_buildings()->CopyFrom(xTileData.buildings());
 						xAckData.mutable_opponent()->CopyFrom(*pvpPlayerInfo);
@@ -371,10 +435,13 @@ int NFWorldPVPModule::OnMakeMatch(const std::string & strHeartBeat, const float 
 						{
 							NFGUID id = teamData->members[i];
 							
+							stream << " team member:" << id.ToString();
+
 							NFMsg::Ident* pIdent = xAckData.add_team_members();
 							*pIdent = NFINetModule::NFToPB(id);
 						}
 
+						m_pLogModule->LogInfo(stream, __FUNCTION__, __LINE__);
 						//must in the same game server (you would change the game server when you acceptted the invite)
 						NFGUID id = teamData->members[0];
 						m_pWorldNet_ServerModule->SendMsgToGame(id, NFMsg::EGMI_ACK_SEARCH_OPPNENT, xAckData);
