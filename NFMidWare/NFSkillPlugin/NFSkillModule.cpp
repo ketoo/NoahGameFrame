@@ -153,7 +153,10 @@ int NFSkillModule::UseSkill(const NFGUID & self, const std::string & strSkillID,
 					pNewEffectData->set_effect_rlt((NFMsg::EffectData_EResultType)xResultList.Int(i));
 				}
 
-				m_pGameServerNet_ServerModule->SendMsgPBToGate(NFMsg::EGMI_ACK_SKILL_OBJECTX, xReqAckUseSkill, self);
+				const int sceneID = m_pKernelModule->GetPropertyInt(self, NFrame::IObject::SceneID());
+				const int groupID = m_pKernelModule->GetPropertyInt(self, NFrame::IObject::GroupID());
+
+				m_pGameServerNet_ServerModule->SendGroupMsgPBToGate(NFMsg::EGMI_ACK_SKILL_OBJECTX, xReqAckUseSkill, sceneID, groupID);
 			}
 		}
 	}
