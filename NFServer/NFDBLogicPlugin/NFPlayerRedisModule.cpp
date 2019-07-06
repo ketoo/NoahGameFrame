@@ -106,24 +106,24 @@ bool NFPlayerRedisModule::LoadPlayerData(const NFGUID & self, NFMsg::PVPPlayerIn
 		&& fields.size() == values.size())
 	{
 
-		int level = lexical_cast<int>(values.at(0));
-		int battle_point = lexical_cast<int>(values.at(1));
-		std::string name = values.at(2);
-		std::string head = values.at(3);
+		const int level = lexical_cast<int>(values.at(0));
+		const int battle_point = lexical_cast<int>(values.at(1));
+		const std::string name = values.at(2);
+		const std::string head = values.at(3);
 
-		std::string hero_cnf1 = values.at(4);
-		std::string hero_cnf2 = values.at(5);
-		std::string hero_cnf3 = values.at(6);
+		const std::string hero_cnf1 = values.at(4);
+		const std::string hero_cnf2 = values.at(5);
+		const std::string hero_cnf3 = values.at(6);
 
-		int hero_star1 = lexical_cast<int>(values.at(7));
-		int hero_star2 = lexical_cast<int>(values.at(8));
-		int hero_star3 = lexical_cast<int>(values.at(9));
+		const int hero_star1 = lexical_cast<int>(values.at(7));
+		const int hero_star2 = lexical_cast<int>(values.at(8));
+		const int hero_star3 = lexical_cast<int>(values.at(9));
 
-		NFGUID hero_id1 = values.at(10);
-		NFGUID hero_id2 = values.at(11);
-		NFGUID hero_id3 = values.at(12);
+		const NFGUID hero_id1 = values.at(10);
+		const NFGUID hero_id2 = values.at(11);
+		const NFGUID hero_id3 = values.at(12);
 		
-		*roleData.mutable_id() = NFINetModule::NFToPB(self);
+		roleData.mutable_id()->CopyFrom(NFINetModule::NFToPB(self));
 		roleData.set_level(level);
 		roleData.set_battle_point(battle_point);
 		roleData.set_name(name);
@@ -137,12 +137,9 @@ bool NFPlayerRedisModule::LoadPlayerData(const NFGUID & self, NFMsg::PVPPlayerIn
 		roleData.set_hero_cnf2(hero_cnf2);
 		roleData.set_hero_cnf3(hero_cnf3);
 
-
-
-		*roleData.mutable_hero_id1() = NFINetModule::NFToPB(hero_id1);
-		*roleData.mutable_hero_id2() = NFINetModule::NFToPB(hero_id2);
-		*roleData.mutable_hero_id3() = NFINetModule::NFToPB(hero_id3);
-
+		*(roleData.mutable_hero_id1()) = NFINetModule::NFToPB(hero_id1);
+		*(roleData.mutable_hero_id2()) = NFINetModule::NFToPB(hero_id2);
+		*(roleData.mutable_hero_id3()) = NFINetModule::NFToPB(hero_id3);
 
 		return true;
 	}

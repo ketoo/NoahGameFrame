@@ -112,6 +112,7 @@ void NFWorldPVPModule::OnReqSearchOpponentProcess(const NFSOCK nSockIndex, const
 		//single
 		if (!mCandidatePool.ExistElement(nPlayerID))
 		{
+			NFMsg::PVPPlayerInfo pvpPlayerInfoTest;
 			NF_SHARE_PTR<NFMsg::PVPPlayerInfo> pvpPlayerInfo(NF_NEW NFMsg::PVPPlayerInfo());
 
 			NFPlayerRedisModule* pPlayerRedisModule = (NFPlayerRedisModule*)m_pPlayerRedisModule;
@@ -421,6 +422,7 @@ int NFWorldPVPModule::OnMakeMatch(const std::string & strHeartBeat, const float 
 				NFMsg::ReqStoreSceneBuildings xTileData;
 				if (xTileData.ParseFromString(strTileData))
 				{
+					NFMsg::PVPPlayerInfo pvpPlayerInfoTest;
 					NF_SHARE_PTR<NFMsg::PVPPlayerInfo> pvpPlayerInfo(NF_NEW NFMsg::PVPPlayerInfo());
 					NFPlayerRedisModule* pPlayerRedisModule = (NFPlayerRedisModule*)m_pPlayerRedisModule;
 					if (pPlayerRedisModule->LoadPlayerData(xViewOpponent, *pvpPlayerInfo))

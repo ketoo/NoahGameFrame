@@ -206,8 +206,16 @@ int NFBriefSkillConsumeProcessModule::ConsumeProcess( const NFGUID& self, const 
 		m_pPropertyModule->CalculatePropertyValue(identOther, strDamageProperty, NFIPropertyModule::NPG_ALL, -TotalDamage, true);
 
 		damageListValue.AddInt(TotalDamage);
-		damageResultList.AddInt(NFMsg::EffectData_EResultType::EffectData_EResultType_EET_SUCCESS);
 
+		int n = m_pKernelModule->Random(0, 100);
+		if (n < 20)
+		{
+			damageResultList.AddInt(NFMsg::EffectData_EResultType::EffectData_EResultType_EET_CRIT);
+		}
+		else
+		{
+			damageResultList.AddInt(NFMsg::EffectData_EResultType::EffectData_EResultType_EET_SUCCESS);
+		}
     }
 
     return 0;

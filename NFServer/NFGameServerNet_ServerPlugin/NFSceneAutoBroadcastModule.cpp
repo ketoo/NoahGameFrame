@@ -50,7 +50,8 @@ bool NFSceneAutoBroadcastModule::AfterInit()
 	m_pSceneModule->AddGroupPropertyCommCallBack(this, &NFSceneAutoBroadcastModule::OnPropertyEvent);
 	m_pSceneModule->AddGroupRecordCommCallBack(this, &NFSceneAutoBroadcastModule::OnRecordEvent);
 
-	m_pSceneModule->AddSwapSceneEventCallBack(this, &NFSceneAutoBroadcastModule::OnSceneEvent);
+	m_pSceneModule->AddBeforeLeaveSceneGroupCallBack(this, &NFSceneAutoBroadcastModule::OnBeforeLeaveSceneEvent);
+	m_pSceneModule->AddAfterEnterSceneGroupCallBack(this, &NFSceneAutoBroadcastModule::OnAfterEntrySceneEvent);
 	return true;
 }
 
@@ -478,7 +479,15 @@ int NFSceneAutoBroadcastModule::OnRecordEvent(const NFGUID & self, const RECORD_
 	return 0;
 }
 
-int NFSceneAutoBroadcastModule::OnSceneEvent(const NFGUID & self, const int nSceneID, const int nGroupID, const int nType, const NFDataList & argList)
+int NFSceneAutoBroadcastModule::OnBeforeLeaveSceneEvent(const NFGUID & self, const int nSceneID, const int nGroupID, const int nType, const NFDataList & argList)
+{
+	ClearProperty(self, nSceneID, nGroupID);
+	ClearRecord(self, nSceneID, nGroupID);
+
+	return 0;
+}
+
+int NFSceneAutoBroadcastModule::OnAfterEntrySceneEvent(const NFGUID & self, const int nSceneID, const int nGroupID, const int nType, const NFDataList & argList)
 {
 	NFDataList argVar;
 	argVar << self;
@@ -491,7 +500,6 @@ int NFSceneAutoBroadcastModule::OnSceneEvent(const NFGUID & self, const int nSce
 
 int NFSceneAutoBroadcastModule::OnPropertyEnter(const NFDataList & argVar, const int nSceneID, const int nGroupID)
 {
-
 	NFMsg::MultiObjectPropertyList xPublicMsg;
 	NF_SHARE_PTR<NFIPropertyManager> pPropertyManager = m_pSceneModule->FindPropertyManager(nSceneID, nGroupID);
 	if (pPropertyManager)
@@ -696,13 +704,11 @@ bool OnSceneRecordEnterPack(NF_SHARE_PTR<NFIRecord> pRecord, NFMsg::ObjectRecord
 int NFSceneAutoBroadcastModule::OnRecordEnter(const NFDataList & argVar, const int nSceneID, const int nGroupID)
 {
 	NFMsg::MultiObjectRecordList xPublicMsg;
-	NFMsg::MultiObjectRecordList xPrivateMsg;
 
 	NF_SHARE_PTR<NFIRecordManager> pRecordManager = m_pSceneModule->FindRecordManager(nSceneID, nGroupID);
 	if (pRecordManager)
 	{
 		NFMsg::ObjectRecordList* pPublicData = NULL;
-		NFMsg::ObjectRecordList* pPrivateData = NULL;
 
 		NF_SHARE_PTR<NFIRecord> pRecord = pRecordManager->First();
 		while (pRecord)
@@ -713,7 +719,6 @@ int NFSceneAutoBroadcastModule::OnRecordEnter(const NFDataList & argVar, const i
 				continue;
 			}
 
-			NFMsg::ObjectRecordBase* pPrivateRecordBase = NULL;
 			NFMsg::ObjectRecordBase* pPublicRecordBase = NULL;
 			if (pRecord->GetPublic())
 			{
@@ -739,6 +744,66 @@ int NFSceneAutoBroadcastModule::OnRecordEnter(const NFDataList & argVar, const i
 			{
 				m_pGameServerNet_ServerModule->SendMsgPBToGate(NFMsg::EGMI_ACK_OBJECT_RECORD_ENTRY, xPublicMsg, identOther);
 			}
+		}
+	}
+
+	return 0;
+}
+
+int NFSceneAutoBroadcastModule::ClearProperty(const NFGUID & self, const int nSceneID, const int nGroupID)
+{
+	NFMsg::MultiObjectPropertyList xPublicMsg;
+	NF_SHARE_PTR<NFIPropertyManager> pPropertyManager = m_pSceneModule->FindPropertyManager(nSceneID, nGroupID);
+	if (pPropertyManager)
+	{
+		NFMsg::ObjectPropertyList* pPublicData = xPublicMsg.add_multi_player_property();
+
+		*(pPublicData->mutable_player_id()) = NFINetModule::NFToPB(NFGUID(0, 0));
+
+
+		m_pGameServerNet_ServerModule->SendMsgPBToGate(NFMsg::EGMI_ACK_PROPERTY_CLEAR, xPublicMsg, self);
+	}
+
+	return 0;
+}
+
+int NFSceneAutoBroadcastModule::ClearRecord(const NFGUID & self, const int nSceneID, const int nGroupID)
+{
+	NFMsg::MultiObjectRecordList xPublicMsg;
+	NF_SHARE_PTR<NFIRecordManager> pRecordManager = m_pSceneModule->FindRecordManager(nSceneID, nGroupID);
+	if (pRecordManager)
+	{
+		NFMsg::ObjectRecordList* pPublicData = NULL;
+
+		NF_SHARE_PTR<NFIRecord> pRecord = pRecordManager->First();
+		while (pRecord)
+		{
+			if (!pRecord->GetPublic())
+			{
+				pRecord = pRecordManager->Next();
+				continue;
+			}
+
+			NFMsg::ObjectRecordBase* pPublicRecordBase = NULL;
+			if (pRecord->GetPublic())
+			{
+				if (!pPublicData)
+				{
+					pPublicData = xPublicMsg.add_multi_player_record();
+					*(pPublicData->mutable_player_id()) = NFINetModule::NFToPB(NFGUID(0, 0));
+				}
+
+				pPublicRecordBase = pPublicData->add_record_list();
+				pPublicRecordBase->set_record_name(pRecord->GetName());
+			}
+
+			pRecord = pRecordManager->Next();
+		}
+
+
+		if (xPublicMsg.multi_player_record_size() > 0)
+		{
+			m_pGameServerNet_ServerModule->SendMsgPBToGate(NFMsg::EGMI_ACK_RECORD_CLEAR, xPublicMsg, self);
 		}
 	}
 
