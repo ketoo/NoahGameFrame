@@ -329,6 +329,15 @@ package nframe;
 			public static final int Cup = 6;//int
 			public static final int MVP = 7;//int
 			public static final int Streak = 8;//int
+			public static final int HeroCnf1 = 9;//string
+			public static final int HeroCnf2 = 10;//string
+			public static final int HeroCnf3 = 11;//string
+			public static final int HeroStar1 = 12;//int
+			public static final int HeroStar2 = 13;//int
+			public static final int HeroStar3 = 14;//int
+			public static final int HP1 = 15;//int
+			public static final int HP2 = 16;//int
+			public static final int HP3 = 17;//int
 
 		}
 
@@ -688,7 +697,6 @@ package nframe;
 		public static final String SPREGEN = "SPREGEN";// int
 		public static final String SUCKBLOOD = "SUCKBLOOD";// int
 		public static final String Sex = "Sex";// int
-		public static final String ShowName = "ShowName";// string
 		public static final String Skill1 = "Skill1";// string
 		public static final String Skill2 = "Skill2";// string
 		public static final String Skill3 = "Skill3";// string

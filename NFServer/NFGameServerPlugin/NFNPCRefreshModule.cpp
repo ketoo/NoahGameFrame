@@ -172,6 +172,10 @@ int NFNPCRefreshModule::OnNPCDeadDestroyHeart( const NFGUID& self, const std::st
 		*/
 
 	}
+	else if (nNPCType == NFMsg::ENPCType::ENPCTYPE_HERO)
+	{
+		m_pKernelModule->DestroySelf(self);
+	}
 
     return 0;
 }

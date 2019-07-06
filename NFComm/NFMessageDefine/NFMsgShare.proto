@@ -405,6 +405,15 @@ message ReqEndBattle
 //EGMI_ACK_END_OPPNENT
 message AckEndBattle
 {
+	enum EBattleType
+	{
+		EBT_SINGLE_MODE = 0;
+		EBT_MULTI_MODE = 1;
+		EBT_CLAN_MODE = 2;
+		EBT_CLAN_BOSS_MODE = 3;
+		EBT_WORLD_BOSS_MODE = 4;
+	}
+	
 	//下发的时候则为道具列表
 	//获得的金币等列表
     int32 win            	= 1; //
@@ -412,7 +421,7 @@ message AckEndBattle
     int32 gold            	= 3; // 副本获得的金币
     int32 cup              = 4; // 副本获得的经验
     int32 diamond          = 5; //
-    int32 single          	= 6; //
+    EBattleType battle_mode          	= 6; //
 	Ident 					team_id = 7;
 	Ident 					match_id = 8;
     repeated Ident members   = 9;

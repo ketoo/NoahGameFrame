@@ -335,6 +335,15 @@ namespace NFrame
 			public const int Cup = 6;//int
 			public const int MVP = 7;//int
 			public const int Streak = 8;//int
+			public const int HeroCnf1 = 9;//string
+			public const int HeroCnf2 = 10;//string
+			public const int HeroCnf3 = 11;//string
+			public const int HeroStar1 = 12;//int
+			public const int HeroStar2 = 13;//int
+			public const int HeroStar3 = 14;//int
+			public const int HP1 = 15;//int
+			public const int HP2 = 16;//int
+			public const int HP3 = 17;//int
 
 		}
 
@@ -694,7 +703,6 @@ namespace NFrame
 		public static readonly String SPREGEN = "SPREGEN";// int
 		public static readonly String SUCKBLOOD = "SUCKBLOOD";// int
 		public static readonly String Sex = "Sex";// int
-		public static readonly String ShowName = "ShowName";// string
 		public static readonly String Skill1 = "Skill1";// string
 		public static readonly String Skill2 = "Skill2";// string
 		public static readonly String Skill3 = "Skill3";// string

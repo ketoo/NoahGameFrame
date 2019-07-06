@@ -145,6 +145,7 @@ enum EGameMsgID
 	EGMI_ACK_PROPERTY_OBJECT					= 214;			//
 	EGMI_ACK_PROPERTY_VECTOR2                   = 215;
 	EGMI_ACK_PROPERTY_VECTOR3                   = 216;
+	EGMI_ACK_PROPERTY_CLEAR                   	= 217;
 
 	EGMI_ACK_ADD_ROW							= 220;
 	EGMI_ACK_REMOVE_ROW							= 221;

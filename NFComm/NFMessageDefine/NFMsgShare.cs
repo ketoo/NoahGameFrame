@@ -135,22 +135,26 @@ namespace NFMsg {
             "bmVudBgOIAEoCzIULk5GTXNnLlBWUFBsYXllckluZm8SLQoJYnVpbGRpbmdz",
             "GBQgAygLMhouTkZNc2cuUmVxQWRkU2NlbmVCdWlsZGluZyIyChJSZXFBY2tD",
             "YW5jZWxTZWFyY2gSHAoGc2VsZmlkGAEgASgLMgwuTkZNc2cuSWRlbnQiIAoM",
-            "UmVxRW5kQmF0dGxlEhAKCGF1dG9fZW5kGAEgASgFIukBCgxBY2tFbmRCYXR0",
+            "UmVxRW5kQmF0dGxlEhAKCGF1dG9fZW5kGAEgASgFIosDCgxBY2tFbmRCYXR0",
             "bGUSCwoDd2luGAEgASgFEgwKBHN0YXIYAiABKAUSDAoEZ29sZBgDIAEoBRIL",
-            "CgNjdXAYBCABKAUSDwoHZGlhbW9uZBgFIAEoBRIOCgZzaW5nbGUYBiABKAUS",
-            "HQoHdGVhbV9pZBgHIAEoCzIMLk5GTXNnLklkZW50Eh4KCG1hdGNoX2lkGAgg",
-            "ASgLMgwuTkZNc2cuSWRlbnQSHQoHbWVtYmVycxgJIAMoCzIMLk5GTXNnLklk",
-            "ZW50EiQKCWl0ZW1fbGlzdBgKIAMoCzIRLk5GTXNnLkl0ZW1TdHJ1Y3QigQEK",
-            "C1JlcVNlbmRNYWlsEh4KCHJlY2lldmVyGAEgASgLMgwuTkZNc2cuSWRlbnQS",
-            "JAoJaXRlbV9saXN0GAIgAygLMhEuTkZNc2cuSXRlbVN0cnVjdBIsCg1jdXJy",
-            "ZW5jeV9saXN0GAMgAygLMhUuTkZNc2cuQ3VycmVuY3lTdHJ1Y3QiuQEKD1Jl",
-            "cVN3aXRjaFNlcnZlchIcCgZzZWxmaWQYASABKAsyDC5ORk1zZy5JZGVudBIV",
-            "Cg1zZWxmX3NlcnZlcmlkGAIgASgDEhcKD3RhcmdldF9zZXJ2ZXJpZBgDIAEo",
-            "AxIVCg1nYXRlX3NlcnZlcmlkGAQgASgDEg8KB1NjZW5lSUQYBSABKAMSHwoJ",
-            "Y2xpZW50X2lkGAYgASgLMgwuTkZNc2cuSWRlbnQSDwoHZ3JvdXBJRBgHIAEo",
-            "AyJ2Cg9BY2tTd2l0Y2hTZXJ2ZXISHAoGc2VsZmlkGAEgASgLMgwuTkZNc2cu",
-            "SWRlbnQSFQoNc2VsZl9zZXJ2ZXJpZBgCIAEoAxIXCg90YXJnZXRfc2VydmVy",
-            "aWQYAyABKAMSFQoNZ2F0ZV9zZXJ2ZXJpZBgEIAEoA2IGcHJvdG8z"));
+            "CgNjdXAYBCABKAUSDwoHZGlhbW9uZBgFIAEoBRI0CgtiYXR0bGVfbW9kZRgG",
+            "IAEoDjIfLk5GTXNnLkFja0VuZEJhdHRsZS5FQmF0dGxlVHlwZRIdCgd0ZWFt",
+            "X2lkGAcgASgLMgwuTkZNc2cuSWRlbnQSHgoIbWF0Y2hfaWQYCCABKAsyDC5O",
+            "Rk1zZy5JZGVudBIdCgdtZW1iZXJzGAkgAygLMgwuTkZNc2cuSWRlbnQSJAoJ",
+            "aXRlbV9saXN0GAogAygLMhEuTkZNc2cuSXRlbVN0cnVjdCJ6CgtFQmF0dGxl",
+            "VHlwZRITCg9FQlRfU0lOR0xFX01PREUQABISCg5FQlRfTVVMVElfTU9ERRAB",
+            "EhEKDUVCVF9DTEFOX01PREUQAhIWChJFQlRfQ0xBTl9CT1NTX01PREUQAxIX",
+            "ChNFQlRfV09STERfQk9TU19NT0RFEAQigQEKC1JlcVNlbmRNYWlsEh4KCHJl",
+            "Y2lldmVyGAEgASgLMgwuTkZNc2cuSWRlbnQSJAoJaXRlbV9saXN0GAIgAygL",
+            "MhEuTkZNc2cuSXRlbVN0cnVjdBIsCg1jdXJyZW5jeV9saXN0GAMgAygLMhUu",
+            "TkZNc2cuQ3VycmVuY3lTdHJ1Y3QiuQEKD1JlcVN3aXRjaFNlcnZlchIcCgZz",
+            "ZWxmaWQYASABKAsyDC5ORk1zZy5JZGVudBIVCg1zZWxmX3NlcnZlcmlkGAIg",
+            "ASgDEhcKD3RhcmdldF9zZXJ2ZXJpZBgDIAEoAxIVCg1nYXRlX3NlcnZlcmlk",
+            "GAQgASgDEg8KB1NjZW5lSUQYBSABKAMSHwoJY2xpZW50X2lkGAYgASgLMgwu",
+            "TkZNc2cuSWRlbnQSDwoHZ3JvdXBJRBgHIAEoAyJ2Cg9BY2tTd2l0Y2hTZXJ2",
+            "ZXISHAoGc2VsZmlkGAEgASgLMgwuTkZNc2cuSWRlbnQSFQoNc2VsZl9zZXJ2",
+            "ZXJpZBgCIAEoAxIXCg90YXJnZXRfc2VydmVyaWQYAyABKAMSFQoNZ2F0ZV9z",
+            "ZXJ2ZXJpZBgEIAEoA2IGcHJvdG8z"));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { global::NFMsg.NFDefineReflection.Descriptor, global::NFMsg.NFMsgBaseReflection.Descriptor, },
           new pbr::GeneratedClrTypeInfo(null, new pbr::GeneratedClrTypeInfo[] {
@@ -195,7 +199,7 @@ namespace NFMsg {
             new pbr::GeneratedClrTypeInfo(typeof(global::NFMsg.AckSearchOppnent), global::NFMsg.AckSearchOppnent.Parser, new[]{ "scene_id", "team_id", "gamble_diamond", "team_members", "opponent", "buildings" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::NFMsg.ReqAckCancelSearch), global::NFMsg.ReqAckCancelSearch.Parser, new[]{ "selfid" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::NFMsg.ReqEndBattle), global::NFMsg.ReqEndBattle.Parser, new[]{ "auto_end" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::NFMsg.AckEndBattle), global::NFMsg.AckEndBattle.Parser, new[]{ "win", "star", "gold", "cup", "diamond", "single", "team_id", "match_id", "members", "item_list" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::NFMsg.AckEndBattle), global::NFMsg.AckEndBattle.Parser, new[]{ "win", "star", "gold", "cup", "diamond", "battle_mode", "team_id", "match_id", "members", "item_list" }, null, new[]{ typeof(global::NFMsg.AckEndBattle.Types.EBattleType) }, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::NFMsg.ReqSendMail), global::NFMsg.ReqSendMail.Parser, new[]{ "reciever", "item_list", "currency_list" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::NFMsg.ReqSwitchServer), global::NFMsg.ReqSwitchServer.Parser, new[]{ "selfid", "self_serverid", "target_serverid", "gate_serverid", "SceneID", "client_id", "groupID" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::NFMsg.AckSwitchServer), global::NFMsg.AckSwitchServer.Parser, new[]{ "selfid", "self_serverid", "target_serverid", "gate_serverid" }, null, null, null)
@@ -8917,7 +8921,7 @@ namespace NFMsg {
       gold_ = other.gold_;
       cup_ = other.cup_;
       diamond_ = other.diamond_;
-      single_ = other.single_;
+      battleMode_ = other.battleMode_;
       teamId_ = other.teamId_ != null ? other.teamId_.Clone() : null;
       matchId_ = other.matchId_ != null ? other.matchId_.Clone() : null;
       members_ = other.members_.Clone();
@@ -8999,16 +9003,16 @@ namespace NFMsg {
       }
     }
 
-    /// <summary>Field number for the "single" field.</summary>
-    public const int singleFieldNumber = 6;
-    private int single_;
+    /// <summary>Field number for the "battle_mode" field.</summary>
+    public const int battle_modeFieldNumber = 6;
+    private global::NFMsg.AckEndBattle.Types.EBattleType battleMode_ = 0;
     /// <summary>
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public int single {
-      get { return single_; }
+    public global::NFMsg.AckEndBattle.Types.EBattleType battle_mode {
+      get { return battleMode_; }
       set {
-        single_ = value;
+        battleMode_ = value;
       }
     }
 
@@ -9075,7 +9079,7 @@ namespace NFMsg {
       if (gold != other.gold) return false;
       if (cup != other.cup) return false;
       if (diamond != other.diamond) return false;
-      if (single != other.single) return false;
+      if (battle_mode != other.battle_mode) return false;
       if (!object.Equals(team_id, other.team_id)) return false;
       if (!object.Equals(match_id, other.match_id)) return false;
       if(!members_.Equals(other.members_)) return false;
@@ -9091,7 +9095,7 @@ namespace NFMsg {
       if (gold != 0) hash ^= gold.GetHashCode();
       if (cup != 0) hash ^= cup.GetHashCode();
       if (diamond != 0) hash ^= diamond.GetHashCode();
-      if (single != 0) hash ^= single.GetHashCode();
+      if (battle_mode != 0) hash ^= battle_mode.GetHashCode();
       if (teamId_ != null) hash ^= team_id.GetHashCode();
       if (matchId_ != null) hash ^= match_id.GetHashCode();
       hash ^= members_.GetHashCode();
@@ -9129,9 +9133,9 @@ namespace NFMsg {
         output.WriteRawTag(40);
         output.WriteInt32(diamond);
       }
-      if (single != 0) {
+      if (battle_mode != 0) {
         output.WriteRawTag(48);
-        output.WriteInt32(single);
+        output.WriteEnum((int) battle_mode);
       }
       if (teamId_ != null) {
         output.WriteRawTag(58);
@@ -9166,8 +9170,8 @@ namespace NFMsg {
       if (diamond != 0) {
         size += 1 + pb::CodedOutputStream.ComputeInt32Size(diamond);
       }
-      if (single != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeInt32Size(single);
+      if (battle_mode != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeEnumSize((int) battle_mode);
       }
       if (teamId_ != null) {
         size += 1 + pb::CodedOutputStream.ComputeMessageSize(team_id);
@@ -9203,8 +9207,8 @@ namespace NFMsg {
       if (other.diamond != 0) {
         diamond = other.diamond;
       }
-      if (other.single != 0) {
-        single = other.single;
+      if (other.battle_mode != 0) {
+        battle_mode = other.battle_mode;
       }
       if (other.teamId_ != null) {
         if (teamId_ == null) {
@@ -9252,7 +9256,7 @@ namespace NFMsg {
             break;
           }
           case 48: {
-            single = input.ReadInt32();
+            battleMode_ = (global::NFMsg.AckEndBattle.Types.EBattleType) input.ReadEnum();
             break;
           }
           case 58: {
@@ -9280,6 +9284,21 @@ namespace NFMsg {
         }
       }
     }
+
+    #region Nested types
+    /// <summary>Container for nested types declared in the AckEndBattle message type.</summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static partial class Types {
+      public enum EBattleType {
+        [pbr::OriginalName("EBT_SINGLE_MODE")] EBT_SINGLE_MODE = 0,
+        [pbr::OriginalName("EBT_MULTI_MODE")] EBT_MULTI_MODE = 1,
+        [pbr::OriginalName("EBT_CLAN_MODE")] EBT_CLAN_MODE = 2,
+        [pbr::OriginalName("EBT_CLAN_BOSS_MODE")] EBT_CLAN_BOSS_MODE = 3,
+        [pbr::OriginalName("EBT_WORLD_BOSS_MODE")] EBT_WORLD_BOSS_MODE = 4,
+      }
+
+    }
+    #endregion
 
   }
 

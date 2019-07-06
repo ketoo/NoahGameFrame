@@ -244,10 +244,36 @@ void NFGamePVPModule::OnAckSearchOpponentProcess(const NFSOCK nSockIndex, const 
 
 	for (int i = 0; i < xMsg.team_members_size(); ++i)
 	{
-		NFGUID id = NFINetModule::PBToNF(xMsg.team_members(i));
+		const NFGUID id = NFINetModule::PBToNF(xMsg.team_members(i));
+		const std::string& strName = m_pKernelModule->GetPropertyString(id, NFrame::Player::Name());
+		const std::string& strHeroCnf1 = m_pKernelModule->GetPropertyString(id, NFrame::Player::HeroCnfID1());
+		const std::string& strHeroCnf2 = m_pKernelModule->GetPropertyString(id, NFrame::Player::HeroCnfID2());
+		const std::string& strHeroCnf3 = m_pKernelModule->GetPropertyString(id, NFrame::Player::HeroCnfID3());
+
+		const int nStar1 = m_pKernelModule->GetPropertyInt(id, NFrame::Player::HeroStar1());
+		const int nStar2 = m_pKernelModule->GetPropertyInt(id, NFrame::Player::HeroStar2());
+		const int nStar3 = m_pKernelModule->GetPropertyInt(id, NFrame::Player::HeroStar3());
 
 		NF_SHARE_PTR<NFDataList> xRowData = pMatchMemberRecord->GetInitData();
 		xRowData->SetObject(NFrame::Group::MatchMember::GUID, id);
+		xRowData->SetString(NFrame::Group::MatchMember::Name, strName);
+		xRowData->SetInt(NFrame::Group::MatchMember::K, 0);
+		xRowData->SetInt(NFrame::Group::MatchMember::D, 0);
+		xRowData->SetInt(NFrame::Group::MatchMember::A, 0);
+		xRowData->SetInt(NFrame::Group::MatchMember::Diamond, 0);
+		xRowData->SetInt(NFrame::Group::MatchMember::Cup, 0);
+		xRowData->SetInt(NFrame::Group::MatchMember::MVP, 0);
+		xRowData->SetInt(NFrame::Group::MatchMember::Streak, 0);
+		xRowData->SetString(NFrame::Group::MatchMember::HeroCnf1, strHeroCnf1);
+		xRowData->SetString(NFrame::Group::MatchMember::HeroCnf2, strHeroCnf2);
+		xRowData->SetString(NFrame::Group::MatchMember::HeroCnf3, strHeroCnf3);
+		xRowData->SetInt(NFrame::Group::MatchMember::HeroStar1, nStar1);
+		xRowData->SetInt(NFrame::Group::MatchMember::HeroStar2, nStar2);
+		xRowData->SetInt(NFrame::Group::MatchMember::HeroStar3, nStar3);
+		xRowData->SetInt(NFrame::Group::MatchMember::HP1, 0);
+		xRowData->SetInt(NFrame::Group::MatchMember::HP2, 0);
+		xRowData->SetInt(NFrame::Group::MatchMember::HP3, 0);
+
 		pMatchMemberRecord->AddRow(-1, *xRowData);
 
 		
@@ -714,7 +740,7 @@ void NFGamePVPModule::EndTheBattle(const NFGUID & self, const int autoEnd)
 
 
 		NFMsg::AckEndBattle xReqAckEndBattle;
-		xReqAckEndBattle.set_single(1);
+		xReqAckEndBattle.set_battle_mode(NFMsg::AckEndBattle::EBattleType::AckEndBattle_EBattleType_EBT_SINGLE_MODE);
 		*xReqAckEndBattle.mutable_team_id() = NFINetModule::NFToPB(matchTeamID);
 		*xReqAckEndBattle.mutable_match_id() = NFINetModule::NFToPB(matchID);
 		NFMsg::Ident* pMember = xReqAckEndBattle.add_members();
@@ -760,7 +786,7 @@ void NFGamePVPModule::EndTheBattle(const NFGUID & self, const int autoEnd)
 
 		RecordPVPData(self, nFightingStar, nWinGold, nWinDiamond);
 
-		ResetPVPData(self);
+		//ResetPVPData(self);
 
 		//just show the result ui
 		m_pGameServerNet_ServerModule->SendMsgPBToGate(NFMsg::EGMI_ACK_END_OPPNENT, xReqAckEndBattle, self);

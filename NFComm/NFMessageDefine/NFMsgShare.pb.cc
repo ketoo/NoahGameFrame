@@ -1028,7 +1028,7 @@ void InitDefaults() {
 }
 
 ::google::protobuf::Metadata file_level_metadata[47];
-const ::google::protobuf::EnumDescriptor* file_level_enum_descriptors[6];
+const ::google::protobuf::EnumDescriptor* file_level_enum_descriptors[7];
 
 const ::google::protobuf::uint32 TableStruct::offsets[] GOOGLE_PROTOBUF_ATTRIBUTE_SECTION_VARIABLE(protodesc_cold) = {
   ~0u,  // no _has_bits_
@@ -1399,7 +1399,7 @@ const ::google::protobuf::uint32 TableStruct::offsets[] GOOGLE_PROTOBUF_ATTRIBUT
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NFMsg::AckEndBattle, gold_),
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NFMsg::AckEndBattle, cup_),
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NFMsg::AckEndBattle, diamond_),
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NFMsg::AckEndBattle, single_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NFMsg::AckEndBattle, battle_mode_),
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NFMsg::AckEndBattle, team_id_),
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NFMsg::AckEndBattle, match_id_),
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NFMsg::AckEndBattle, members_),
@@ -1680,27 +1680,31 @@ void AddDescriptorsImpl() {
       "VPPlayerInfo\022-\n\tbuildings\030\024 \003(\0132\032.NFMsg."
       "ReqAddSceneBuilding\"2\n\022ReqAckCancelSearc"
       "h\022\034\n\006selfid\030\001 \001(\0132\014.NFMsg.Ident\" \n\014ReqEn"
-      "dBattle\022\020\n\010auto_end\030\001 \001(\005\"\351\001\n\014AckEndBatt"
+      "dBattle\022\020\n\010auto_end\030\001 \001(\005\"\213\003\n\014AckEndBatt"
       "le\022\013\n\003win\030\001 \001(\005\022\014\n\004star\030\002 \001(\005\022\014\n\004gold\030\003 "
-      "\001(\005\022\013\n\003cup\030\004 \001(\005\022\017\n\007diamond\030\005 \001(\005\022\016\n\006sin"
-      "gle\030\006 \001(\005\022\035\n\007team_id\030\007 \001(\0132\014.NFMsg.Ident"
-      "\022\036\n\010match_id\030\010 \001(\0132\014.NFMsg.Ident\022\035\n\007memb"
-      "ers\030\t \003(\0132\014.NFMsg.Ident\022$\n\titem_list\030\n \003"
-      "(\0132\021.NFMsg.ItemStruct\"\201\001\n\013ReqSendMail\022\036\n"
-      "\010reciever\030\001 \001(\0132\014.NFMsg.Ident\022$\n\titem_li"
-      "st\030\002 \003(\0132\021.NFMsg.ItemStruct\022,\n\rcurrency_"
-      "list\030\003 \003(\0132\025.NFMsg.CurrencyStruct\"\271\001\n\017Re"
-      "qSwitchServer\022\034\n\006selfid\030\001 \001(\0132\014.NFMsg.Id"
-      "ent\022\025\n\rself_serverid\030\002 \001(\003\022\027\n\017target_ser"
-      "verid\030\003 \001(\003\022\025\n\rgate_serverid\030\004 \001(\003\022\017\n\007Sc"
-      "eneID\030\005 \001(\003\022\037\n\tclient_id\030\006 \001(\0132\014.NFMsg.I"
-      "dent\022\017\n\007groupID\030\007 \001(\003\"v\n\017AckSwitchServer"
-      "\022\034\n\006selfid\030\001 \001(\0132\014.NFMsg.Ident\022\025\n\rself_s"
-      "erverid\030\002 \001(\003\022\027\n\017target_serverid\030\003 \001(\003\022\025"
-      "\n\rgate_serverid\030\004 \001(\003b\006proto3"
+      "\001(\005\022\013\n\003cup\030\004 \001(\005\022\017\n\007diamond\030\005 \001(\005\0224\n\013bat"
+      "tle_mode\030\006 \001(\0162\037.NFMsg.AckEndBattle.EBat"
+      "tleType\022\035\n\007team_id\030\007 \001(\0132\014.NFMsg.Ident\022\036"
+      "\n\010match_id\030\010 \001(\0132\014.NFMsg.Ident\022\035\n\007member"
+      "s\030\t \003(\0132\014.NFMsg.Ident\022$\n\titem_list\030\n \003(\013"
+      "2\021.NFMsg.ItemStruct\"z\n\013EBattleType\022\023\n\017EB"
+      "T_SINGLE_MODE\020\000\022\022\n\016EBT_MULTI_MODE\020\001\022\021\n\rE"
+      "BT_CLAN_MODE\020\002\022\026\n\022EBT_CLAN_BOSS_MODE\020\003\022\027"
+      "\n\023EBT_WORLD_BOSS_MODE\020\004\"\201\001\n\013ReqSendMail\022"
+      "\036\n\010reciever\030\001 \001(\0132\014.NFMsg.Ident\022$\n\titem_"
+      "list\030\002 \003(\0132\021.NFMsg.ItemStruct\022,\n\rcurrenc"
+      "y_list\030\003 \003(\0132\025.NFMsg.CurrencyStruct\"\271\001\n\017"
+      "ReqSwitchServer\022\034\n\006selfid\030\001 \001(\0132\014.NFMsg."
+      "Ident\022\025\n\rself_serverid\030\002 \001(\003\022\027\n\017target_s"
+      "erverid\030\003 \001(\003\022\025\n\rgate_serverid\030\004 \001(\003\022\017\n\007"
+      "SceneID\030\005 \001(\003\022\037\n\tclient_id\030\006 \001(\0132\014.NFMsg"
+      ".Ident\022\017\n\007groupID\030\007 \001(\003\"v\n\017AckSwitchServ"
+      "er\022\034\n\006selfid\030\001 \001(\0132\014.NFMsg.Ident\022\025\n\rself"
+      "_serverid\030\002 \001(\003\022\027\n\017target_serverid\030\003 \001(\003"
+      "\022\025\n\rgate_serverid\030\004 \001(\003b\006proto3"
   };
   ::google::protobuf::DescriptorPool::InternalAddGeneratedFile(
-      descriptor, 5709);
+      descriptor, 5871);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "NFMsgShare.proto", &protobuf_RegisterTypes);
   ::protobuf_NFDefine_2eproto::AddDescriptors();
@@ -1866,6 +1870,33 @@ const ReqAckOprClanMember_EGClanMemberOprType ReqAckOprClanMember::EGAT_KICK;
 const ReqAckOprClanMember_EGClanMemberOprType ReqAckOprClanMember::EGClanMemberOprType_MIN;
 const ReqAckOprClanMember_EGClanMemberOprType ReqAckOprClanMember::EGClanMemberOprType_MAX;
 const int ReqAckOprClanMember::EGClanMemberOprType_ARRAYSIZE;
+#endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
+const ::google::protobuf::EnumDescriptor* AckEndBattle_EBattleType_descriptor() {
+  protobuf_NFMsgShare_2eproto::protobuf_AssignDescriptorsOnce();
+  return protobuf_NFMsgShare_2eproto::file_level_enum_descriptors[6];
+}
+bool AckEndBattle_EBattleType_IsValid(int value) {
+  switch (value) {
+    case 0:
+    case 1:
+    case 2:
+    case 3:
+    case 4:
+      return true;
+    default:
+      return false;
+  }
+}
+
+#if !defined(_MSC_VER) || _MSC_VER >= 1900
+const AckEndBattle_EBattleType AckEndBattle::EBT_SINGLE_MODE;
+const AckEndBattle_EBattleType AckEndBattle::EBT_MULTI_MODE;
+const AckEndBattle_EBattleType AckEndBattle::EBT_CLAN_MODE;
+const AckEndBattle_EBattleType AckEndBattle::EBT_CLAN_BOSS_MODE;
+const AckEndBattle_EBattleType AckEndBattle::EBT_WORLD_BOSS_MODE;
+const AckEndBattle_EBattleType AckEndBattle::EBattleType_MIN;
+const AckEndBattle_EBattleType AckEndBattle::EBattleType_MAX;
+const int AckEndBattle::EBattleType_ARRAYSIZE;
 #endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
 
 // ===================================================================
@@ -16297,7 +16328,7 @@ const int AckEndBattle::kStarFieldNumber;
 const int AckEndBattle::kGoldFieldNumber;
 const int AckEndBattle::kCupFieldNumber;
 const int AckEndBattle::kDiamondFieldNumber;
-const int AckEndBattle::kSingleFieldNumber;
+const int AckEndBattle::kBattleModeFieldNumber;
 const int AckEndBattle::kTeamIdFieldNumber;
 const int AckEndBattle::kMatchIdFieldNumber;
 const int AckEndBattle::kMembersFieldNumber;
@@ -16328,15 +16359,15 @@ AckEndBattle::AckEndBattle(const AckEndBattle& from)
     match_id_ = NULL;
   }
   ::memcpy(&win_, &from.win_,
-    static_cast<size_t>(reinterpret_cast<char*>(&single_) -
-    reinterpret_cast<char*>(&win_)) + sizeof(single_));
+    static_cast<size_t>(reinterpret_cast<char*>(&battle_mode_) -
+    reinterpret_cast<char*>(&win_)) + sizeof(battle_mode_));
   // @@protoc_insertion_point(copy_constructor:NFMsg.AckEndBattle)
 }
 
 void AckEndBattle::SharedCtor() {
   ::memset(&team_id_, 0, static_cast<size_t>(
-      reinterpret_cast<char*>(&single_) -
-      reinterpret_cast<char*>(&team_id_)) + sizeof(single_));
+      reinterpret_cast<char*>(&battle_mode_) -
+      reinterpret_cast<char*>(&team_id_)) + sizeof(battle_mode_));
 }
 
 AckEndBattle::~AckEndBattle() {
@@ -16380,8 +16411,8 @@ void AckEndBattle::Clear() {
   }
   match_id_ = NULL;
   ::memset(&win_, 0, static_cast<size_t>(
-      reinterpret_cast<char*>(&single_) -
-      reinterpret_cast<char*>(&win_)) + sizeof(single_));
+      reinterpret_cast<char*>(&battle_mode_) -
+      reinterpret_cast<char*>(&win_)) + sizeof(battle_mode_));
   _internal_metadata_.Clear();
 }
 
@@ -16465,14 +16496,15 @@ bool AckEndBattle::MergePartialFromCodedStream(
         break;
       }
 
-      // int32 single = 6;
+      // .NFMsg.AckEndBattle.EBattleType battle_mode = 6;
       case 6: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
             static_cast< ::google::protobuf::uint8>(48u /* 48 & 0xFF */)) {
-
+          int value;
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
-                 input, &single_)));
+                   int, ::google::protobuf::internal::WireFormatLite::TYPE_ENUM>(
+                 input, &value)));
+          set_battle_mode(static_cast< ::NFMsg::AckEndBattle_EBattleType >(value));
         } else {
           goto handle_unusual;
         }
@@ -16578,9 +16610,10 @@ void AckEndBattle::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormatLite::WriteInt32(5, this->diamond(), output);
   }
 
-  // int32 single = 6;
-  if (this->single() != 0) {
-    ::google::protobuf::internal::WireFormatLite::WriteInt32(6, this->single(), output);
+  // .NFMsg.AckEndBattle.EBattleType battle_mode = 6;
+  if (this->battle_mode() != 0) {
+    ::google::protobuf::internal::WireFormatLite::WriteEnum(
+      6, this->battle_mode(), output);
   }
 
   // .NFMsg.Ident team_id = 7;
@@ -16652,9 +16685,10 @@ void AckEndBattle::SerializeWithCachedSizes(
     target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(5, this->diamond(), target);
   }
 
-  // int32 single = 6;
-  if (this->single() != 0) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(6, this->single(), target);
+  // .NFMsg.AckEndBattle.EBattleType battle_mode = 6;
+  if (this->battle_mode() != 0) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteEnumToArray(
+      6, this->battle_mode(), target);
   }
 
   // .NFMsg.Ident team_id = 7;
@@ -16775,11 +16809,10 @@ size_t AckEndBattle::ByteSizeLong() const {
         this->diamond());
   }
 
-  // int32 single = 6;
-  if (this->single() != 0) {
+  // .NFMsg.AckEndBattle.EBattleType battle_mode = 6;
+  if (this->battle_mode() != 0) {
     total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::Int32Size(
-        this->single());
+      ::google::protobuf::internal::WireFormatLite::EnumSize(this->battle_mode());
   }
 
   int cached_size = ::google::protobuf::internal::ToCachedSize(total_size);
@@ -16832,8 +16865,8 @@ void AckEndBattle::MergeFrom(const AckEndBattle& from) {
   if (from.diamond() != 0) {
     set_diamond(from.diamond());
   }
-  if (from.single() != 0) {
-    set_single(from.single());
+  if (from.battle_mode() != 0) {
+    set_battle_mode(from.battle_mode());
   }
 }
 
@@ -16870,7 +16903,7 @@ void AckEndBattle::InternalSwap(AckEndBattle* other) {
   swap(gold_, other->gold_);
   swap(cup_, other->cup_);
   swap(diamond_, other->diamond_);
-  swap(single_, other->single_);
+  swap(battle_mode_, other->battle_mode_);
   _internal_metadata_.Swap(&other->_internal_metadata_);
 }
 

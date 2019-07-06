@@ -339,6 +339,15 @@ namespace NFrame
 			static const int Cup = 6;//int
 			static const int MVP = 7;//int
 			static const int Streak = 8;//int
+			static const int HeroCnf1 = 9;//string
+			static const int HeroCnf2 = 10;//string
+			static const int HeroCnf3 = 11;//string
+			static const int HeroStar1 = 12;//int
+			static const int HeroStar2 = 13;//int
+			static const int HeroStar3 = 14;//int
+			static const int HP1 = 15;//int
+			static const int HP2 = 16;//int
+			static const int HP3 = 17;//int
 
 		};
 
@@ -700,7 +709,6 @@ namespace NFrame
 		static const std::string& SPREGEN(){ static std::string x = "SPREGEN"; return x; };// int
 		static const std::string& SUCKBLOOD(){ static std::string x = "SUCKBLOOD"; return x; };// int
 		static const std::string& Sex(){ static std::string x = "Sex"; return x; };// int
-		static const std::string& ShowName(){ static std::string x = "ShowName"; return x; };// string
 		static const std::string& Skill1(){ static std::string x = "Skill1"; return x; };// string
 		static const std::string& Skill2(){ static std::string x = "Skill2"; return x; };// string
 		static const std::string& Skill3(){ static std::string x = "Skill3"; return x; };// string

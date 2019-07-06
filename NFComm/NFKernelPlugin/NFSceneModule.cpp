@@ -144,7 +144,7 @@ int NFSceneModule::RequestGroupScene(const int nSceneID)
 						RECORD_EVENT_FUNCTOR functor = std::bind(&NFSceneModule::OnSceneRecordCommonEvent, this, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3, std::placeholders::_4);
 						RECORD_EVENT_FUNCTOR_PTR functorPtr(NF_NEW RECORD_EVENT_FUNCTOR(functor));
 
-						//pObject->AddRecordCallBack(pConfigRecordInfo->GetName(), this, &NFSceneModule::OnSceneRecordCommonEvent);
+						xRecord->AddRecordHook(functorPtr);
 
 						pConfigRecordInfo = pStaticClassRecordManager->Next();
 					}
