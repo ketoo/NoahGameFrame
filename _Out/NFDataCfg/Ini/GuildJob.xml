@@ -1,7 +1,0 @@
-<?xml version='1.0' encoding='utf-8' ?>
-<XML>
-	<Object Id="GuildJobg_Assistant" AcceptApply="1" ApplyDismiss="0" Appoint="0" Demise="0" DenyApply="1" EditAD="1" Fire="0" Job="2" JobCount="2" Kickout="1" Leave="1" LevelUp="0" PublishRecruit="1" SetRecruit="1" StopDismiss="1" />
-	<Object Id="GuildJobg_Elite" AcceptApply="1" ApplyDismiss="0" Appoint="0" Demise="0" DenyApply="1" EditAD="1" Fire="0" Job="3" JobCount="4" Kickout="0" Leave="1" LevelUp="0" PublishRecruit="1" SetRecruit="0" StopDismiss="1" />
-	<Object Id="GuildJobg_Master" AcceptApply="1" ApplyDismiss="1" Appoint="1" Demise="1" DenyApply="1" EditAD="1" Fire="1" Job="1" JobCount="1" Kickout="1" Leave="0" LevelUp="1" PublishRecruit="1" SetRecruit="1" StopDismiss="1" />
-	<Object Id="GuildJobg_Member" AcceptApply="0" ApplyDismiss="0" Appoint="0" Demise="0" DenyApply="0" EditAD="0" Fire="0" Job="4" JobCount="-1" Kickout="0" Leave="1" LevelUp="0" PublishRecruit="0" SetRecruit="0" StopDismiss="0" />
-</XML>

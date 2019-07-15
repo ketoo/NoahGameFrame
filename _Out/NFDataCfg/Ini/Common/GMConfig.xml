@@ -1,0 +1,15 @@
+<XML>
+	<GM>
+		<Init Level="1" Account="*test*"/>
+	</GM>
+	
+	<1>
+		<Init ID="1" Item="Item_HeroCard_Orc_Slinger" Count="1"/>
+		<Init ID="2" Item="Item_HeroCard_Dwarf_Warrior" Count="1"/>
+		<Init ID="3" Item="Item_HeroCard_Wererat_Soldier" Count="1"/>
+		<Init ID="4" Item="Item_HeroCard_Samurai" Count="1"/>
+			
+		<Init ID="5" Item="Item_town_1" Count="1"/>
+	</1>
+	
+</XML>

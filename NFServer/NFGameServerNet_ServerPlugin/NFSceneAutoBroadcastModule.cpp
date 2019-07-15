@@ -773,7 +773,8 @@ int NFSceneAutoBroadcastModule::ClearRecord(const NFGUID & self, const int nScen
 	NF_SHARE_PTR<NFIRecordManager> pRecordManager = m_pSceneModule->FindRecordManager(nSceneID, nGroupID);
 	if (pRecordManager)
 	{
-		NFMsg::ObjectRecordList* pPublicData = NULL;
+		NFMsg::ObjectRecordList* pPublicData = xPublicMsg.add_multi_player_record();
+		*(pPublicData->mutable_player_id()) = NFINetModule::NFToPB(NFGUID(0, 0));
 
 		NF_SHARE_PTR<NFIRecord> pRecord = pRecordManager->First();
 		while (pRecord)
@@ -784,16 +785,9 @@ int NFSceneAutoBroadcastModule::ClearRecord(const NFGUID & self, const int nScen
 				continue;
 			}
 
-			NFMsg::ObjectRecordBase* pPublicRecordBase = NULL;
 			if (pRecord->GetPublic())
 			{
-				if (!pPublicData)
-				{
-					pPublicData = xPublicMsg.add_multi_player_record();
-					*(pPublicData->mutable_player_id()) = NFINetModule::NFToPB(NFGUID(0, 0));
-				}
-
-				pPublicRecordBase = pPublicData->add_record_list();
+				NFMsg::ObjectRecordBase* pPublicRecordBase = pPublicData->add_record_list();
 				pPublicRecordBase->set_record_name(pRecord->GetName());
 			}
 

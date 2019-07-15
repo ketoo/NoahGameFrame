@@ -124,14 +124,6 @@ bool NFItemModule::UseItem(const NFGUID & self, const std::string & strItemID, c
 		break;
 	}
 
-	/*	AddItemEffectDataProperty(self, xTargetID, strItemID);
-
-	const std::string& strAwardPackID = m_pElementModule->GetPropertyString(strItemID, "AwardData");
-	if (!strAwardPackID.empty())
-	{
-	DoAwardPack( self, strAwardPackID);
-	}
-	*/
 	return false;
 }
 
@@ -244,7 +236,7 @@ int NFItemModule::AddItemEffectDataProperty(const NFGUID& self, const NFGUID& xT
 		return 1;
 	}
 
-	NF_SHARE_PTR<NFIProperty> pEffectDataProperty = pPropertyManager->GetElement("EffectData");
+	NF_SHARE_PTR<NFIProperty> pEffectDataProperty = pPropertyManager->GetElement(NFrame::Item::EffectData());
 	if (!pEffectDataProperty)
 	{
 		return 1;
@@ -335,41 +327,6 @@ bool NFItemModule::ConsumeDataItemProperty(const NFGUID& self, const std::string
 	if (nSP > 0 && !m_pPropertyModule->ConsumeSP(self, nSP))
 	{
 		return false;
-	}
-
-	return true;
-}
-
-bool NFItemModule::DoAwardPack(const NFGUID& self, const std::string& strAwardPack)
-{
-	std::vector<std::string> xList = m_pCommonConfigModule->GetSubKeyList(strAwardPack);
-
-	for (int i = 0; i < xList.size(); ++i)
-	{
-		const std::string& strItemID = xList[i];
-		const int nCount = m_pCommonConfigModule->GetFieldInt(strAwardPack, strItemID, "Count");
-		const int nIsHero = m_pCommonConfigModule->GetFieldInt(strAwardPack, strItemID, "IsHero");
-		if (m_pElementModule->ExistElement(strItemID))
-		{
-			if (nIsHero > 0)
-			{
-				m_pHeroModule->AddHero(self, strItemID);
-				continue;
-			}
-
-			const int nItemType = m_pElementModule->GetPropertyInt32(strItemID, NFrame::Item::ItemType());
-			switch (nItemType)
-			{
-			case NFMsg::EIT_EQUIP:
-			{
-				m_pPackModule->CreateEquip(self, strItemID);
-			}
-			break;
-			default:
-				m_pPackModule->CreateItem(self, strItemID, nCount);
-				break;
-			}
-		}
 	}
 
 	return true;
