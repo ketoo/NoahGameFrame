@@ -25,7 +25,7 @@
 		<Level23 ID="23" CostMoney="200" ConstItem="EquipIntensify_10001" ConstItemCount="1" IsDownLevel="1"/>
 	</IntensifylevelToEquip>
 	
-	<HoleToEquip">
+	<HoleToEquip>
 		<Count1 ID="1" CostMoney="100" ConstItem="EquipIntensify_10001" ConstItemCount="1"/>
 	</HoleToEquip>
 	

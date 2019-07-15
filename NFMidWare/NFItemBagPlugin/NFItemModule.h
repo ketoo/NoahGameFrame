@@ -66,7 +66,6 @@ protected:
 	int OnRequireUseItemPosEvent( const NFGUID& self, const NFEventDefine nEventID, const NFDataList& var );
     int AddItemEffectDataProperty( const NFGUID& self, const NFGUID& xTarget, const std::string& strItemID);
     bool ConsumeDataItemProperty( const NFGUID& self, const std::string& strID);
-	bool DoAwardPack( const NFGUID& self, const std::string& strAwardPack);
 
 protected:
 	void OnClientUseItem(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);

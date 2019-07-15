@@ -1,6 +1,0 @@
-<?xml version='1.0' encoding='utf-8' ?>
-<XML>
-	<Object Id="GuildConfig_1" DismissTime="1000" GuildLevel="1" Level="1" MaxMember="25" Money="100" SkillNum="1" VIP="0" />
-	<Object Id="GuildConfig_2" DismissTime="1000" GuildLevel="2" Level="25" MaxMember="45" Money="100" SkillNum="2" VIP="3" />
-	<Object Id="GuildConfig_3" DismissTime="1000" GuildLevel="3" Level="100" MaxMember="55" Money="100" SkillNum="3" VIP="100" />
-</XML>
