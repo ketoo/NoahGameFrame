@@ -458,7 +458,6 @@ void MainExecute()
 int main(int argc, char* argv[])
 {
 	std::cout << "__cplusplus:" << __cplusplus << std::endl;
-	std::cout << "_MSC_VER:" << _MSC_VER << std::endl;
 
 #if NF_PLATFORM == NF_PLATFORM_WIN
     SetUnhandledExceptionFilter((LPTOP_LEVEL_EXCEPTION_FILTER)ApplicationCrashHandler);
