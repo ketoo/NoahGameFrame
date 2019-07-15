@@ -293,17 +293,19 @@ package nframe;
 		public static final String Position = "Position";// vector3
 		public static final String SceneID = "SceneID";// int
 		// Property
-		public static final String MatchBeKilledHero = "MatchBeKilledHero";// int
 		public static final String MatchGambleDiamond = "MatchGambleDiamond";// int
 		public static final String MatchID = "MatchID";// object
-		public static final String MatchKilledHero = "MatchKilledHero";// int
 		public static final String MatchOpponentCup = "MatchOpponentCup";// int
+		public static final String MatchOpponentD = "MatchOpponentD";// int
 		public static final String MatchOpponentDiamond = "MatchOpponentDiamond";// int
 		public static final String MatchOpponentGold = "MatchOpponentGold";// int
 		public static final String MatchOpponentHead = "MatchOpponentHead";// string
 		public static final String MatchOpponentHeroCnf1 = "MatchOpponentHeroCnf1";// string
 		public static final String MatchOpponentHeroCnf2 = "MatchOpponentHeroCnf2";// string
 		public static final String MatchOpponentHeroCnf3 = "MatchOpponentHeroCnf3";// string
+		public static final String MatchOpponentHeroHP1 = "MatchOpponentHeroHP1";// int
+		public static final String MatchOpponentHeroHP2 = "MatchOpponentHeroHP2";// int
+		public static final String MatchOpponentHeroHP3 = "MatchOpponentHeroHP3";// int
 		public static final String MatchOpponentHeroID1 = "MatchOpponentHeroID1";// object
 		public static final String MatchOpponentHeroID2 = "MatchOpponentHeroID2";// object
 		public static final String MatchOpponentHeroID3 = "MatchOpponentHeroID3";// object
@@ -311,6 +313,7 @@ package nframe;
 		public static final String MatchOpponentHeroStar2 = "MatchOpponentHeroStar2";// int
 		public static final String MatchOpponentHeroStar3 = "MatchOpponentHeroStar3";// int
 		public static final String MatchOpponentID = "MatchOpponentID";// object
+		public static final String MatchOpponentK = "MatchOpponentK";// int
 		public static final String MatchOpponentLevel = "MatchOpponentLevel";// int
 		public static final String MatchOpponentName = "MatchOpponentName";// string
 		public static final String MatchStar = "MatchStar";// int

@@ -400,6 +400,8 @@ int NFWorldPVPModule::OnMakeMatch(const std::string & strHeartBeat, const float 
 		{
 			mTeamList.pop_front();
 
+			m_pLogModule->LogInfo(teamData->teamID.ToString() + " Team --> try to find a match", __FUNCTION__, __LINE__);
+
 			int nSceneID = RandomTileScene(1);
 			std::string strTileData;
 			NFGUID xViewOpponent;
@@ -409,7 +411,7 @@ int NFWorldPVPModule::OnMakeMatch(const std::string & strHeartBeat, const float 
 				{
 					if (teamData->members[i] == xViewOpponent)
 					{
-						m_pLogModule->LogWarning("the same player");
+						m_pLogModule->LogError(teamData->teamID, "the same team member, push back and try to find a match again");
 						mTeamList.push_back(teamData);
 						return 0;
 					}
@@ -449,6 +451,17 @@ int NFWorldPVPModule::OnMakeMatch(const std::string & strHeartBeat, const float 
 						m_pWorldNet_ServerModule->SendMsgToGame(id, NFMsg::EGMI_ACK_SEARCH_OPPNENT, xAckData);
 					}
 				}
+			}
+			else
+			{
+				mTeamList.push_back(teamData);
+
+				std::ostringstream stream;
+				stream << " can't load the scene, nSceneID:" << nSceneID << " ViewOpponent:" << xViewOpponent.ToString();
+				stream << " team id:" << teamData->teamID.ToString() << " push back and try to find a match again";
+
+				m_pLogModule->LogError(stream);
+				return 0;
 			}
 		}
 
