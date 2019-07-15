@@ -153,6 +153,8 @@ NFPluginManager::~NFPluginManager()
 
 bool NFPluginManager::LoadPlugin()
 {
+	std::cout << "----LoadPlugin----" << std::endl;
+
 	LoadPluginConfig();
 
 #ifndef NF_DYNAMIC_PLUGIN
@@ -178,6 +180,8 @@ bool NFPluginManager::LoadPlugin()
 
 bool NFPluginManager::Awake()
 {
+	std::cout << "----Awake----" << std::endl;
+
 	PluginInstanceMap::iterator itAfterInstance = mPluginInstanceMap.begin();
 	for (; itAfterInstance != mPluginInstanceMap.end(); itAfterInstance++)
 	{
@@ -190,6 +194,8 @@ bool NFPluginManager::Awake()
 
 inline bool NFPluginManager::Init()
 {
+	std::cout << "----Init----" << std::endl;
+
 	PluginInstanceMap::iterator itInstance = mPluginInstanceMap.begin();
 	for (; itInstance != mPluginInstanceMap.end(); itInstance++)
 	{
@@ -760,6 +766,8 @@ std::list<NFIModule*> NFPluginManager::Modules()
 
 bool NFPluginManager::AfterInit()
 {
+	std::cout << "----AfterInit----" << std::endl;
+
     PluginInstanceMap::iterator itAfterInstance = mPluginInstanceMap.begin();
     for (; itAfterInstance != mPluginInstanceMap.end(); itAfterInstance++)
     {
@@ -772,6 +780,8 @@ bool NFPluginManager::AfterInit()
 
 bool NFPluginManager::CheckConfig()
 {
+	std::cout << "----CheckConfig----" << std::endl;
+
     PluginInstanceMap::iterator itCheckInstance = mPluginInstanceMap.begin();
     for (; itCheckInstance != mPluginInstanceMap.end(); itCheckInstance++)
     {
@@ -784,6 +794,8 @@ bool NFPluginManager::CheckConfig()
 
 bool NFPluginManager::ReadyExecute()
 {
+	std::cout << "----ReadyExecute----" << std::endl;
+
     PluginInstanceMap::iterator itCheckInstance = mPluginInstanceMap.begin();
     for (; itCheckInstance != mPluginInstanceMap.end(); itCheckInstance++)
     {
