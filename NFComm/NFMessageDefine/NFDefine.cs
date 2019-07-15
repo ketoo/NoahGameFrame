@@ -239,29 +239,19 @@ namespace NFMsg {
             "EAISFAoQRVJUX1BMQVlFUl9NT05FWRADEhIKDkVSVF9DTEFOX0xFVkVMEAQS",
             "FwoTRVJUX0NMQU5fS0lOR1NPVVJDRRAFKkcKCEVOUENUeXBlEhMKD0VOUENU",
             "WVBFX05PUk1BTBAAEhEKDUVOUENUWVBFX0hFUk8QARITCg9FTlBDVFlQRV9U",
-            "VVJSRVQQAirbBAoSRVN1Yk5QQ1R5cGVfVFVSUkVUEhUKEUVOUENUWVBFX1NV",
-            "Ql9UT1dOEAASGgoWRU5QQ1RZUEVfU1VCX0dPTERfTUlORRABEhwKGEVOUENU",
-            "WVBFX1NVQl9FTkVHRVJfTUlORRACEhsKF0VOUENUWVBFX1NVQl9HT0xEX1NU",
-            "T1JFEAMSHQoZRU5QQ1RZUEVfU1VCX0VORUdFUl9TVE9SRRAEEhcKE0VOUENU",
-            "WVBFX1NVQl9DQU5OT04QChIVChFFTlBDVFlQRV9TVUJfQUNJRBALEhYKEkVO",
-            "UENUWVBFX1NVQl9URVNMQRAMEhYKEkVOUENUWVBFX1NVQl9YX0JPVxANEhgK",
-            "FEVOUENUWVBFX1NVQl9DUllTVEFMEA4SFQoRRU5QQ1RZUEVfU1VCX0ZJUkUQ",
-            "DxIYChRFTlBDVFlQRV9TVUJfR0FUTElORxAQEhYKEkVOUENUWVBFX1NVQl9H",
-            "QVVTUxAREhcKE0VOUENUWVBFX1NVQl9IQU1NRVIQEhIWChJFTlBDVFlQRV9T",
-            "VUJfTEFTRVIQExIbChdFTlBDVFlQRV9TVUJfTUFDR0lORUdVThAUEhcKE0VO",
-            "UENUWVBFX1NVQl9NT1JUQVIQFRIXChNFTlBDVFlQRV9TVUJfUExBU01BEBYS",
-            "FgoSRU5QQ1RZUEVfU1VCX1JBREFSEBcSFwoTRU5QQ1RZUEVfU1VCX1JPQ0tF",
-            "VBAYEhUKEUVOUENUWVBFX1NVQl9CT01CEGQSFQoRRU5QQ1RZUEVfU1VCX1RS",
-            "QVAQZRIWChJFTlBDVFlQRV9TVUJfU1BJTkUQZipFCgpFTWVsZWVUeXBlEg8K",
-            "C0VUWVBFX01FTEVFEAASFAoQRVRZUEVfTUVMRUVfREFTSBABEhAKDEVUWVBF",
-            "X1JBTkdFUhACKlUKDkVFZmZlY3RPYmpUeXBlEhUKEUVUQVJHRVRUWVBFX0VO",
-            "RU1ZEAASFAoQRVRBUkdFVFRZUEVfU0VMRhABEhYKEkVUQVJHRVRUWVBFX0ZS",
-            "SUVORBACKlgKDUVQcm9wZXJ0eVR5cGUSDgoKRVBUX1VOS05PVxAAEhAKDEVQ",
-            "VF9TVFJFTkdUSBABEg8KC0VQVF9BR0lMSVRZEAISFAoQRVBUX0lOVEVMTElH",
-            "RU5DRRADKp4BChBFR2FtZUVsZW1lbnRUeXBlEhUKEUVFTEVNRU5UVFlQRV9G",
-            "SVJFEAASFgoSRUVMRU1FTlRUWVBFX0xJR0hUEAESFQoRRUVMRU1FTlRUWVBF",
-            "X1dJTkQQAhIUChBFRUxFTUVOVFRZUEVfSUNFEAMSFwoTRUVMRU1FTlRUWVBF",
-            "X1BPSVNPThAEEhUKEUVFTEVNRU5UVFlQRV9EQVJLEAViBnByb3RvMw=="));
+            "VVJSRVQQAiqOAQoSRVN1Yk5QQ1R5cGVfVFVSUkVUEhgKFEVOUENUWVBFX1NV",
+            "Ql9TVE9SQUdFEAASGAoURU5QQ1RZUEVfU1VCX1dFQVBPTkUQARIWChJFTlBD",
+            "VFlQRV9TVUJfR1VBUkQQAhIVChFFTlBDVFlQRV9TVUJfQk9NQhADEhUKEUVO",
+            "UENUWVBFX1NVQl9UUkFQEAQqRQoKRU1lbGVlVHlwZRIPCgtFVFlQRV9NRUxF",
+            "RRAAEhQKEEVUWVBFX01FTEVFX0RBU0gQARIQCgxFVFlQRV9SQU5HRVIQAipV",
+            "Cg5FRWZmZWN0T2JqVHlwZRIVChFFVEFSR0VUVFlQRV9FTkVNWRAAEhQKEEVU",
+            "QVJHRVRUWVBFX1NFTEYQARIWChJFVEFSR0VUVFlQRV9GUklFTkQQAipYCg1F",
+            "UHJvcGVydHlUeXBlEg4KCkVQVF9VTktOT1cQABIQCgxFUFRfU1RSRU5HVEgQ",
+            "ARIPCgtFUFRfQUdJTElUWRACEhQKEEVQVF9JTlRFTExJR0VOQ0UQAyqeAQoQ",
+            "RUdhbWVFbGVtZW50VHlwZRIVChFFRUxFTUVOVFRZUEVfRklSRRAAEhYKEkVF",
+            "TEVNRU5UVFlQRV9MSUdIVBABEhUKEUVFTEVNRU5UVFlQRV9XSU5EEAISFAoQ",
+            "RUVMRU1FTlRUWVBFX0lDRRADEhcKE0VFTEVNRU5UVFlQRV9QT0lTT04QBBIV",
+            "ChFFRUxFTUVOVFRZUEVfREFSSxAFYgZwcm90bzM="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(new[] {typeof(global::NFMsg.EGameEventCode), typeof(global::NFMsg.ESynMsgID), typeof(global::NFMsg.EGameMsgID), typeof(global::NFMsg.ESkillType), typeof(global::NFMsg.EItemType), typeof(global::NFMsg.EGameEquipSubType), typeof(global::NFMsg.EGameGemSubType), typeof(global::NFMsg.EGameSupplySubType), typeof(global::NFMsg.EGameScrollSubType), typeof(global::NFMsg.EGameItemExpiredType), typeof(global::NFMsg.EDrawDropItemState), typeof(global::NFMsg.EGuildPowerType), typeof(global::NFMsg.ETaskState), typeof(global::NFMsg.ETaskType), typeof(global::NFMsg.ESceneType), typeof(global::NFMsg.EPVPType), typeof(global::NFMsg.EShopType), typeof(global::NFMsg.ERankType), typeof(global::NFMsg.ENPCType), typeof(global::NFMsg.ESubNPCType_TURRET), typeof(global::NFMsg.EMeleeType), typeof(global::NFMsg.EEffectObjType), typeof(global::NFMsg.EPropertyType), typeof(global::NFMsg.EGameElementType), }, null));
@@ -1260,75 +1250,11 @@ namespace NFMsg {
   }
 
   public enum ESubNPCType_TURRET {
-    /// <summary>
-    /// </summary>
-    [pbr::OriginalName("ENPCTYPE_SUB_TOWN")] ENPCTYPE_SUB_TOWN = 0,
-    /// <summary>
-    /// </summary>
-    [pbr::OriginalName("ENPCTYPE_SUB_GOLD_MINE")] ENPCTYPE_SUB_GOLD_MINE = 1,
-    /// <summary>
-    /// </summary>
-    [pbr::OriginalName("ENPCTYPE_SUB_ENEGER_MINE")] ENPCTYPE_SUB_ENEGER_MINE = 2,
-    /// <summary>
-    /// </summary>
-    [pbr::OriginalName("ENPCTYPE_SUB_GOLD_STORE")] ENPCTYPE_SUB_GOLD_STORE = 3,
-    /// <summary>
-    /// </summary>
-    [pbr::OriginalName("ENPCTYPE_SUB_ENEGER_STORE")] ENPCTYPE_SUB_ENEGER_STORE = 4,
-    /// <summary>
-    /// </summary>
-    [pbr::OriginalName("ENPCTYPE_SUB_CANNON")] ENPCTYPE_SUB_CANNON = 10,
-    /// <summary>
-    /// </summary>
-    [pbr::OriginalName("ENPCTYPE_SUB_ACID")] ENPCTYPE_SUB_ACID = 11,
-    /// <summary>
-    /// </summary>
-    [pbr::OriginalName("ENPCTYPE_SUB_TESLA")] ENPCTYPE_SUB_TESLA = 12,
-    /// <summary>
-    /// </summary>
-    [pbr::OriginalName("ENPCTYPE_SUB_X_BOW")] ENPCTYPE_SUB_X_BOW = 13,
-    /// <summary>
-    /// </summary>
-    [pbr::OriginalName("ENPCTYPE_SUB_CRYSTAL")] ENPCTYPE_SUB_CRYSTAL = 14,
-    /// <summary>
-    /// </summary>
-    [pbr::OriginalName("ENPCTYPE_SUB_FIRE")] ENPCTYPE_SUB_FIRE = 15,
-    /// <summary>
-    /// </summary>
-    [pbr::OriginalName("ENPCTYPE_SUB_GATLING")] ENPCTYPE_SUB_GATLING = 16,
-    /// <summary>
-    /// </summary>
-    [pbr::OriginalName("ENPCTYPE_SUB_GAUSS")] ENPCTYPE_SUB_GAUSS = 17,
-    /// <summary>
-    /// </summary>
-    [pbr::OriginalName("ENPCTYPE_SUB_HAMMER")] ENPCTYPE_SUB_HAMMER = 18,
-    /// <summary>
-    /// </summary>
-    [pbr::OriginalName("ENPCTYPE_SUB_LASER")] ENPCTYPE_SUB_LASER = 19,
-    /// <summary>
-    /// </summary>
-    [pbr::OriginalName("ENPCTYPE_SUB_MACGINEGUN")] ENPCTYPE_SUB_MACGINEGUN = 20,
-    /// <summary>
-    /// </summary>
-    [pbr::OriginalName("ENPCTYPE_SUB_MORTAR")] ENPCTYPE_SUB_MORTAR = 21,
-    /// <summary>
-    /// </summary>
-    [pbr::OriginalName("ENPCTYPE_SUB_PLASMA")] ENPCTYPE_SUB_PLASMA = 22,
-    /// <summary>
-    /// </summary>
-    [pbr::OriginalName("ENPCTYPE_SUB_RADAR")] ENPCTYPE_SUB_RADAR = 23,
-    /// <summary>
-    /// </summary>
-    [pbr::OriginalName("ENPCTYPE_SUB_ROCKET")] ENPCTYPE_SUB_ROCKET = 24,
-    /// <summary>
-    /// </summary>
-    [pbr::OriginalName("ENPCTYPE_SUB_BOMB")] ENPCTYPE_SUB_BOMB = 100,
-    /// <summary>
-    /// </summary>
-    [pbr::OriginalName("ENPCTYPE_SUB_TRAP")] ENPCTYPE_SUB_TRAP = 101,
-    /// <summary>
-    /// </summary>
-    [pbr::OriginalName("ENPCTYPE_SUB_SPINE")] ENPCTYPE_SUB_SPINE = 102,
+    [pbr::OriginalName("ENPCTYPE_SUB_STORAGE")] ENPCTYPE_SUB_STORAGE = 0,
+    [pbr::OriginalName("ENPCTYPE_SUB_WEAPONE")] ENPCTYPE_SUB_WEAPONE = 1,
+    [pbr::OriginalName("ENPCTYPE_SUB_GUARD")] ENPCTYPE_SUB_GUARD = 2,
+    [pbr::OriginalName("ENPCTYPE_SUB_BOMB")] ENPCTYPE_SUB_BOMB = 3,
+    [pbr::OriginalName("ENPCTYPE_SUB_TRAP")] ENPCTYPE_SUB_TRAP = 4,
   }
 
   public enum EMeleeType {
