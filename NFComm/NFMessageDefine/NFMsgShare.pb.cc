@@ -1028,7 +1028,7 @@ void InitDefaults() {
 }
 
 ::google::protobuf::Metadata file_level_metadata[47];
-const ::google::protobuf::EnumDescriptor* file_level_enum_descriptors[7];
+const ::google::protobuf::EnumDescriptor* file_level_enum_descriptors[6];
 
 const ::google::protobuf::uint32 TableStruct::offsets[] GOOGLE_PROTOBUF_ATTRIBUTE_SECTION_VARIABLE(protodesc_cold) = {
   ~0u,  // no _has_bits_
@@ -1341,7 +1341,7 @@ const ::google::protobuf::uint32 TableStruct::offsets[] GOOGLE_PROTOBUF_ATTRIBUT
   ~0u,  // no _oneof_case_
   ~0u,  // no _weak_field_map_
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NFMsg::PVPPlayerInfo, id_),
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NFMsg::PVPPlayerInfo, single_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NFMsg::PVPPlayerInfo, battle_mode_),
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NFMsg::PVPPlayerInfo, level_),
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NFMsg::PVPPlayerInfo, battle_point_),
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NFMsg::PVPPlayerInfo, name_),
@@ -1365,6 +1365,7 @@ const ::google::protobuf::uint32 TableStruct::offsets[] GOOGLE_PROTOBUF_ATTRIBUT
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NFMsg::ReqSearchOppnent, self_scene_),
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NFMsg::ReqSearchOppnent, diamond_),
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NFMsg::ReqSearchOppnent, battle_point_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NFMsg::ReqSearchOppnent, battle_mode_),
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NFMsg::ReqSearchOppnent, friends_),
   ~0u,  // no _has_bits_
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NFMsg::AckSearchOppnent, _internal_metadata_),
@@ -1475,13 +1476,13 @@ static const ::google::protobuf::internal::MigrationSchema schemas[] GOOGLE_PROT
   { 297, -1, sizeof(::NFMsg::ReqBuyItemFromShop)},
   { 304, -1, sizeof(::NFMsg::PVPPlayerInfo)},
   { 326, -1, sizeof(::NFMsg::ReqSearchOppnent)},
-  { 335, -1, sizeof(::NFMsg::AckSearchOppnent)},
-  { 346, -1, sizeof(::NFMsg::ReqAckCancelSearch)},
-  { 352, -1, sizeof(::NFMsg::ReqEndBattle)},
-  { 358, -1, sizeof(::NFMsg::AckEndBattle)},
-  { 373, -1, sizeof(::NFMsg::ReqSendMail)},
-  { 381, -1, sizeof(::NFMsg::ReqSwitchServer)},
-  { 393, -1, sizeof(::NFMsg::AckSwitchServer)},
+  { 336, -1, sizeof(::NFMsg::AckSearchOppnent)},
+  { 347, -1, sizeof(::NFMsg::ReqAckCancelSearch)},
+  { 353, -1, sizeof(::NFMsg::ReqEndBattle)},
+  { 359, -1, sizeof(::NFMsg::AckEndBattle)},
+  { 374, -1, sizeof(::NFMsg::ReqSendMail)},
+  { 382, -1, sizeof(::NFMsg::ReqSwitchServer)},
+  { 394, -1, sizeof(::NFMsg::AckSwitchServer)},
 };
 
 static ::google::protobuf::Message const * const file_default_instances[] = {
@@ -1661,50 +1662,49 @@ void AddDescriptorsImpl() {
       "Ident\022\013\n\003Set\030\002 \001(\005\"2\n\022ReqSwitchFightHero"
       "\022\034\n\006Heroid\030\001 \001(\0132\014.NFMsg.Ident\"3\n\022ReqBuy"
       "ItemFromShop\022\016\n\006itemID\030\001 \001(\014\022\r\n\005count\030\002 "
-      "\001(\005\"\356\002\n\rPVPPlayerInfo\022\030\n\002id\030\001 \001(\0132\014.NFMs"
-      "g.Ident\022\016\n\006single\030\002 \001(\005\022\r\n\005level\030\004 \001(\005\022\024"
-      "\n\014battle_point\030\005 \001(\005\022\014\n\004name\030\006 \001(\014\022\014\n\004he"
-      "ad\030\007 \001(\014\022\014\n\004gold\030\010 \001(\005\022\017\n\007diamond\030\t \001(\005\022"
-      "\021\n\thero_cnf1\030\024 \001(\014\022\021\n\thero_cnf2\030\025 \001(\014\022\021\n"
-      "\thero_cnf3\030\026 \001(\014\022\022\n\nhero_star1\030\031 \001(\005\022\022\n\n"
-      "hero_star2\030\032 \001(\005\022\022\n\nhero_star3\030\033 \001(\005\022\036\n\010"
-      "hero_id1\030\034 \001(\0132\014.NFMsg.Ident\022\036\n\010hero_id2"
-      "\030\035 \001(\0132\014.NFMsg.Ident\022\036\n\010hero_id3\030\036 \001(\0132\014"
-      ".NFMsg.Ident\"l\n\020ReqSearchOppnent\022\022\n\nself"
-      "_scene\030\001 \001(\005\022\017\n\007diamond\030\002 \001(\005\022\024\n\014battle_"
-      "point\030\003 \001(\005\022\035\n\007friends\030\n \003(\0132\014.NFMsg.Ide"
-      "nt\"\326\001\n\020AckSearchOppnent\022\020\n\010scene_id\030\001 \001("
-      "\005\022\035\n\007team_id\030\002 \001(\0132\014.NFMsg.Ident\022\026\n\016gamb"
-      "le_diamond\030\003 \001(\005\022\"\n\014team_members\030\005 \003(\0132\014"
-      ".NFMsg.Ident\022&\n\010opponent\030\016 \001(\0132\024.NFMsg.P"
-      "VPPlayerInfo\022-\n\tbuildings\030\024 \003(\0132\032.NFMsg."
-      "ReqAddSceneBuilding\"2\n\022ReqAckCancelSearc"
-      "h\022\034\n\006selfid\030\001 \001(\0132\014.NFMsg.Ident\" \n\014ReqEn"
-      "dBattle\022\020\n\010auto_end\030\001 \001(\005\"\213\003\n\014AckEndBatt"
-      "le\022\013\n\003win\030\001 \001(\005\022\014\n\004star\030\002 \001(\005\022\014\n\004gold\030\003 "
-      "\001(\005\022\013\n\003cup\030\004 \001(\005\022\017\n\007diamond\030\005 \001(\005\0224\n\013bat"
-      "tle_mode\030\006 \001(\0162\037.NFMsg.AckEndBattle.EBat"
-      "tleType\022\035\n\007team_id\030\007 \001(\0132\014.NFMsg.Ident\022\036"
-      "\n\010match_id\030\010 \001(\0132\014.NFMsg.Ident\022\035\n\007member"
-      "s\030\t \003(\0132\014.NFMsg.Ident\022$\n\titem_list\030\n \003(\013"
-      "2\021.NFMsg.ItemStruct\"z\n\013EBattleType\022\023\n\017EB"
-      "T_SINGLE_MODE\020\000\022\022\n\016EBT_MULTI_MODE\020\001\022\021\n\rE"
-      "BT_CLAN_MODE\020\002\022\026\n\022EBT_CLAN_BOSS_MODE\020\003\022\027"
-      "\n\023EBT_WORLD_BOSS_MODE\020\004\"\201\001\n\013ReqSendMail\022"
-      "\036\n\010reciever\030\001 \001(\0132\014.NFMsg.Ident\022$\n\titem_"
-      "list\030\002 \003(\0132\021.NFMsg.ItemStruct\022,\n\rcurrenc"
-      "y_list\030\003 \003(\0132\025.NFMsg.CurrencyStruct\"\271\001\n\017"
-      "ReqSwitchServer\022\034\n\006selfid\030\001 \001(\0132\014.NFMsg."
-      "Ident\022\025\n\rself_serverid\030\002 \001(\003\022\027\n\017target_s"
-      "erverid\030\003 \001(\003\022\025\n\rgate_serverid\030\004 \001(\003\022\017\n\007"
-      "SceneID\030\005 \001(\003\022\037\n\tclient_id\030\006 \001(\0132\014.NFMsg"
-      ".Ident\022\017\n\007groupID\030\007 \001(\003\"v\n\017AckSwitchServ"
-      "er\022\034\n\006selfid\030\001 \001(\0132\014.NFMsg.Ident\022\025\n\rself"
-      "_serverid\030\002 \001(\003\022\027\n\017target_serverid\030\003 \001(\003"
-      "\022\025\n\rgate_serverid\030\004 \001(\003b\006proto3"
+      "\001(\005\"\207\003\n\rPVPPlayerInfo\022\030\n\002id\030\001 \001(\0132\014.NFMs"
+      "g.Ident\022\'\n\013battle_mode\030\002 \001(\0162\022.NFMsg.EBa"
+      "ttleType\022\r\n\005level\030\004 \001(\005\022\024\n\014battle_point\030"
+      "\005 \001(\005\022\014\n\004name\030\006 \001(\014\022\014\n\004head\030\007 \001(\014\022\014\n\004gol"
+      "d\030\010 \001(\005\022\017\n\007diamond\030\t \001(\005\022\021\n\thero_cnf1\030\024 "
+      "\001(\014\022\021\n\thero_cnf2\030\025 \001(\014\022\021\n\thero_cnf3\030\026 \001("
+      "\014\022\022\n\nhero_star1\030\031 \001(\005\022\022\n\nhero_star2\030\032 \001("
+      "\005\022\022\n\nhero_star3\030\033 \001(\005\022\036\n\010hero_id1\030\034 \001(\0132"
+      "\014.NFMsg.Ident\022\036\n\010hero_id2\030\035 \001(\0132\014.NFMsg."
+      "Ident\022\036\n\010hero_id3\030\036 \001(\0132\014.NFMsg.Ident\"\225\001"
+      "\n\020ReqSearchOppnent\022\022\n\nself_scene\030\001 \001(\005\022\017"
+      "\n\007diamond\030\002 \001(\005\022\024\n\014battle_point\030\003 \001(\005\022\'\n"
+      "\013battle_mode\030\004 \001(\0162\022.NFMsg.EBattleType\022\035"
+      "\n\007friends\030\n \003(\0132\014.NFMsg.Ident\"\326\001\n\020AckSea"
+      "rchOppnent\022\020\n\010scene_id\030\001 \001(\005\022\035\n\007team_id\030"
+      "\002 \001(\0132\014.NFMsg.Ident\022\026\n\016gamble_diamond\030\003 "
+      "\001(\005\022\"\n\014team_members\030\005 \003(\0132\014.NFMsg.Ident\022"
+      "&\n\010opponent\030\016 \001(\0132\024.NFMsg.PVPPlayerInfo\022"
+      "-\n\tbuildings\030\024 \003(\0132\032.NFMsg.ReqAddSceneBu"
+      "ilding\"2\n\022ReqAckCancelSearch\022\034\n\006selfid\030\001"
+      " \001(\0132\014.NFMsg.Ident\" \n\014ReqEndBattle\022\020\n\010au"
+      "to_end\030\001 \001(\005\"\202\002\n\014AckEndBattle\022\013\n\003win\030\001 \001"
+      "(\005\022\014\n\004star\030\002 \001(\005\022\014\n\004gold\030\003 \001(\005\022\013\n\003cup\030\004 "
+      "\001(\005\022\017\n\007diamond\030\005 \001(\005\022\'\n\013battle_mode\030\006 \001("
+      "\0162\022.NFMsg.EBattleType\022\035\n\007team_id\030\007 \001(\0132\014"
+      ".NFMsg.Ident\022\036\n\010match_id\030\010 \001(\0132\014.NFMsg.I"
+      "dent\022\035\n\007members\030\t \003(\0132\014.NFMsg.Ident\022$\n\ti"
+      "tem_list\030\n \003(\0132\021.NFMsg.ItemStruct\"\201\001\n\013Re"
+      "qSendMail\022\036\n\010reciever\030\001 \001(\0132\014.NFMsg.Iden"
+      "t\022$\n\titem_list\030\002 \003(\0132\021.NFMsg.ItemStruct\022"
+      ",\n\rcurrency_list\030\003 \003(\0132\025.NFMsg.CurrencyS"
+      "truct\"\271\001\n\017ReqSwitchServer\022\034\n\006selfid\030\001 \001("
+      "\0132\014.NFMsg.Ident\022\025\n\rself_serverid\030\002 \001(\003\022\027"
+      "\n\017target_serverid\030\003 \001(\003\022\025\n\rgate_serverid"
+      "\030\004 \001(\003\022\017\n\007SceneID\030\005 \001(\003\022\037\n\tclient_id\030\006 \001"
+      "(\0132\014.NFMsg.Ident\022\017\n\007groupID\030\007 \001(\003\"v\n\017Ack"
+      "SwitchServer\022\034\n\006selfid\030\001 \001(\0132\014.NFMsg.Ide"
+      "nt\022\025\n\rself_serverid\030\002 \001(\003\022\027\n\017target_serv"
+      "erid\030\003 \001(\003\022\025\n\rgate_serverid\030\004 \001(\003b\006proto"
+      "3"
   };
   ::google::protobuf::DescriptorPool::InternalAddGeneratedFile(
-      descriptor, 5871);
+      descriptor, 5801);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "NFMsgShare.proto", &protobuf_RegisterTypes);
   ::protobuf_NFDefine_2eproto::AddDescriptors();
@@ -1870,33 +1870,6 @@ const ReqAckOprClanMember_EGClanMemberOprType ReqAckOprClanMember::EGAT_KICK;
 const ReqAckOprClanMember_EGClanMemberOprType ReqAckOprClanMember::EGClanMemberOprType_MIN;
 const ReqAckOprClanMember_EGClanMemberOprType ReqAckOprClanMember::EGClanMemberOprType_MAX;
 const int ReqAckOprClanMember::EGClanMemberOprType_ARRAYSIZE;
-#endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
-const ::google::protobuf::EnumDescriptor* AckEndBattle_EBattleType_descriptor() {
-  protobuf_NFMsgShare_2eproto::protobuf_AssignDescriptorsOnce();
-  return protobuf_NFMsgShare_2eproto::file_level_enum_descriptors[6];
-}
-bool AckEndBattle_EBattleType_IsValid(int value) {
-  switch (value) {
-    case 0:
-    case 1:
-    case 2:
-    case 3:
-    case 4:
-      return true;
-    default:
-      return false;
-  }
-}
-
-#if !defined(_MSC_VER) || _MSC_VER >= 1900
-const AckEndBattle_EBattleType AckEndBattle::EBT_SINGLE_MODE;
-const AckEndBattle_EBattleType AckEndBattle::EBT_MULTI_MODE;
-const AckEndBattle_EBattleType AckEndBattle::EBT_CLAN_MODE;
-const AckEndBattle_EBattleType AckEndBattle::EBT_CLAN_BOSS_MODE;
-const AckEndBattle_EBattleType AckEndBattle::EBT_WORLD_BOSS_MODE;
-const AckEndBattle_EBattleType AckEndBattle::EBattleType_MIN;
-const AckEndBattle_EBattleType AckEndBattle::EBattleType_MAX;
-const int AckEndBattle::EBattleType_ARRAYSIZE;
 #endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
 
 // ===================================================================
@@ -14132,7 +14105,7 @@ void PVPPlayerInfo::clear_hero_id3() {
 }
 #if !defined(_MSC_VER) || _MSC_VER >= 1900
 const int PVPPlayerInfo::kIdFieldNumber;
-const int PVPPlayerInfo::kSingleFieldNumber;
+const int PVPPlayerInfo::kBattleModeFieldNumber;
 const int PVPPlayerInfo::kLevelFieldNumber;
 const int PVPPlayerInfo::kBattlePointFieldNumber;
 const int PVPPlayerInfo::kNameFieldNumber;
@@ -14201,9 +14174,9 @@ PVPPlayerInfo::PVPPlayerInfo(const PVPPlayerInfo& from)
   } else {
     hero_id3_ = NULL;
   }
-  ::memcpy(&single_, &from.single_,
+  ::memcpy(&battle_mode_, &from.battle_mode_,
     static_cast<size_t>(reinterpret_cast<char*>(&hero_star3_) -
-    reinterpret_cast<char*>(&single_)) + sizeof(hero_star3_));
+    reinterpret_cast<char*>(&battle_mode_)) + sizeof(hero_star3_));
   // @@protoc_insertion_point(copy_constructor:NFMsg.PVPPlayerInfo)
 }
 
@@ -14276,9 +14249,9 @@ void PVPPlayerInfo::Clear() {
     delete hero_id3_;
   }
   hero_id3_ = NULL;
-  ::memset(&single_, 0, static_cast<size_t>(
+  ::memset(&battle_mode_, 0, static_cast<size_t>(
       reinterpret_cast<char*>(&hero_star3_) -
-      reinterpret_cast<char*>(&single_)) + sizeof(hero_star3_));
+      reinterpret_cast<char*>(&battle_mode_)) + sizeof(hero_star3_));
   _internal_metadata_.Clear();
 }
 
@@ -14304,14 +14277,15 @@ bool PVPPlayerInfo::MergePartialFromCodedStream(
         break;
       }
 
-      // int32 single = 2;
+      // .NFMsg.EBattleType battle_mode = 2;
       case 2: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
             static_cast< ::google::protobuf::uint8>(16u /* 16 & 0xFF */)) {
-
+          int value;
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
-                 input, &single_)));
+                   int, ::google::protobuf::internal::WireFormatLite::TYPE_ENUM>(
+                 input, &value)));
+          set_battle_mode(static_cast< ::NFMsg::EBattleType >(value));
         } else {
           goto handle_unusual;
         }
@@ -14544,9 +14518,10 @@ void PVPPlayerInfo::SerializeWithCachedSizes(
       1, this->_internal_id(), output);
   }
 
-  // int32 single = 2;
-  if (this->single() != 0) {
-    ::google::protobuf::internal::WireFormatLite::WriteInt32(2, this->single(), output);
+  // .NFMsg.EBattleType battle_mode = 2;
+  if (this->battle_mode() != 0) {
+    ::google::protobuf::internal::WireFormatLite::WriteEnum(
+      2, this->battle_mode(), output);
   }
 
   // int32 level = 4;
@@ -14653,9 +14628,10 @@ void PVPPlayerInfo::SerializeWithCachedSizes(
         1, this->_internal_id(), deterministic, target);
   }
 
-  // int32 single = 2;
-  if (this->single() != 0) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(2, this->single(), target);
+  // .NFMsg.EBattleType battle_mode = 2;
+  if (this->battle_mode() != 0) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteEnumToArray(
+      2, this->battle_mode(), target);
   }
 
   // int32 level = 4;
@@ -14829,11 +14805,10 @@ size_t PVPPlayerInfo::ByteSizeLong() const {
         *hero_id3_);
   }
 
-  // int32 single = 2;
-  if (this->single() != 0) {
+  // .NFMsg.EBattleType battle_mode = 2;
+  if (this->battle_mode() != 0) {
     total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::Int32Size(
-        this->single());
+      ::google::protobuf::internal::WireFormatLite::EnumSize(this->battle_mode());
   }
 
   // int32 level = 4;
@@ -14944,8 +14919,8 @@ void PVPPlayerInfo::MergeFrom(const PVPPlayerInfo& from) {
   if (from.has_hero_id3()) {
     mutable_hero_id3()->::NFMsg::Ident::MergeFrom(from.hero_id3());
   }
-  if (from.single() != 0) {
-    set_single(from.single());
+  if (from.battle_mode() != 0) {
+    set_battle_mode(from.battle_mode());
   }
   if (from.level() != 0) {
     set_level(from.level());
@@ -15008,7 +14983,7 @@ void PVPPlayerInfo::InternalSwap(PVPPlayerInfo* other) {
   swap(hero_id1_, other->hero_id1_);
   swap(hero_id2_, other->hero_id2_);
   swap(hero_id3_, other->hero_id3_);
-  swap(single_, other->single_);
+  swap(battle_mode_, other->battle_mode_);
   swap(level_, other->level_);
   swap(battle_point_, other->battle_point_);
   swap(gold_, other->gold_);
@@ -15036,6 +15011,7 @@ void ReqSearchOppnent::clear_friends() {
 const int ReqSearchOppnent::kSelfSceneFieldNumber;
 const int ReqSearchOppnent::kDiamondFieldNumber;
 const int ReqSearchOppnent::kBattlePointFieldNumber;
+const int ReqSearchOppnent::kBattleModeFieldNumber;
 const int ReqSearchOppnent::kFriendsFieldNumber;
 #endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
 
@@ -15052,15 +15028,15 @@ ReqSearchOppnent::ReqSearchOppnent(const ReqSearchOppnent& from)
       friends_(from.friends_) {
   _internal_metadata_.MergeFrom(from._internal_metadata_);
   ::memcpy(&self_scene_, &from.self_scene_,
-    static_cast<size_t>(reinterpret_cast<char*>(&battle_point_) -
-    reinterpret_cast<char*>(&self_scene_)) + sizeof(battle_point_));
+    static_cast<size_t>(reinterpret_cast<char*>(&battle_mode_) -
+    reinterpret_cast<char*>(&self_scene_)) + sizeof(battle_mode_));
   // @@protoc_insertion_point(copy_constructor:NFMsg.ReqSearchOppnent)
 }
 
 void ReqSearchOppnent::SharedCtor() {
   ::memset(&self_scene_, 0, static_cast<size_t>(
-      reinterpret_cast<char*>(&battle_point_) -
-      reinterpret_cast<char*>(&self_scene_)) + sizeof(battle_point_));
+      reinterpret_cast<char*>(&battle_mode_) -
+      reinterpret_cast<char*>(&self_scene_)) + sizeof(battle_mode_));
 }
 
 ReqSearchOppnent::~ReqSearchOppnent() {
@@ -15093,8 +15069,8 @@ void ReqSearchOppnent::Clear() {
 
   friends_.Clear();
   ::memset(&self_scene_, 0, static_cast<size_t>(
-      reinterpret_cast<char*>(&battle_point_) -
-      reinterpret_cast<char*>(&self_scene_)) + sizeof(battle_point_));
+      reinterpret_cast<char*>(&battle_mode_) -
+      reinterpret_cast<char*>(&self_scene_)) + sizeof(battle_mode_));
   _internal_metadata_.Clear();
 }
 
@@ -15144,6 +15120,21 @@ bool ReqSearchOppnent::MergePartialFromCodedStream(
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
                  input, &battle_point_)));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      // .NFMsg.EBattleType battle_mode = 4;
+      case 4: {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(32u /* 32 & 0xFF */)) {
+          int value;
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   int, ::google::protobuf::internal::WireFormatLite::TYPE_ENUM>(
+                 input, &value)));
+          set_battle_mode(static_cast< ::NFMsg::EBattleType >(value));
         } else {
           goto handle_unusual;
         }
@@ -15203,6 +15194,12 @@ void ReqSearchOppnent::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormatLite::WriteInt32(3, this->battle_point(), output);
   }
 
+  // .NFMsg.EBattleType battle_mode = 4;
+  if (this->battle_mode() != 0) {
+    ::google::protobuf::internal::WireFormatLite::WriteEnum(
+      4, this->battle_mode(), output);
+  }
+
   // repeated .NFMsg.Ident friends = 10;
   for (unsigned int i = 0,
       n = static_cast<unsigned int>(this->friends_size()); i < n; i++) {
@@ -15239,6 +15236,12 @@ void ReqSearchOppnent::SerializeWithCachedSizes(
   // int32 battle_point = 3;
   if (this->battle_point() != 0) {
     target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(3, this->battle_point(), target);
+  }
+
+  // .NFMsg.EBattleType battle_mode = 4;
+  if (this->battle_mode() != 0) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteEnumToArray(
+      4, this->battle_mode(), target);
   }
 
   // repeated .NFMsg.Ident friends = 10;
@@ -15298,6 +15301,12 @@ size_t ReqSearchOppnent::ByteSizeLong() const {
         this->battle_point());
   }
 
+  // .NFMsg.EBattleType battle_mode = 4;
+  if (this->battle_mode() != 0) {
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::EnumSize(this->battle_mode());
+  }
+
   int cached_size = ::google::protobuf::internal::ToCachedSize(total_size);
   SetCachedSize(cached_size);
   return total_size;
@@ -15335,6 +15344,9 @@ void ReqSearchOppnent::MergeFrom(const ReqSearchOppnent& from) {
   if (from.battle_point() != 0) {
     set_battle_point(from.battle_point());
   }
+  if (from.battle_mode() != 0) {
+    set_battle_mode(from.battle_mode());
+  }
 }
 
 void ReqSearchOppnent::CopyFrom(const ::google::protobuf::Message& from) {
@@ -15365,6 +15377,7 @@ void ReqSearchOppnent::InternalSwap(ReqSearchOppnent* other) {
   swap(self_scene_, other->self_scene_);
   swap(diamond_, other->diamond_);
   swap(battle_point_, other->battle_point_);
+  swap(battle_mode_, other->battle_mode_);
   _internal_metadata_.Swap(&other->_internal_metadata_);
 }
 
@@ -16496,7 +16509,7 @@ bool AckEndBattle::MergePartialFromCodedStream(
         break;
       }
 
-      // .NFMsg.AckEndBattle.EBattleType battle_mode = 6;
+      // .NFMsg.EBattleType battle_mode = 6;
       case 6: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
             static_cast< ::google::protobuf::uint8>(48u /* 48 & 0xFF */)) {
@@ -16504,7 +16517,7 @@ bool AckEndBattle::MergePartialFromCodedStream(
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    int, ::google::protobuf::internal::WireFormatLite::TYPE_ENUM>(
                  input, &value)));
-          set_battle_mode(static_cast< ::NFMsg::AckEndBattle_EBattleType >(value));
+          set_battle_mode(static_cast< ::NFMsg::EBattleType >(value));
         } else {
           goto handle_unusual;
         }
@@ -16610,7 +16623,7 @@ void AckEndBattle::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormatLite::WriteInt32(5, this->diamond(), output);
   }
 
-  // .NFMsg.AckEndBattle.EBattleType battle_mode = 6;
+  // .NFMsg.EBattleType battle_mode = 6;
   if (this->battle_mode() != 0) {
     ::google::protobuf::internal::WireFormatLite::WriteEnum(
       6, this->battle_mode(), output);
@@ -16685,7 +16698,7 @@ void AckEndBattle::SerializeWithCachedSizes(
     target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(5, this->diamond(), target);
   }
 
-  // .NFMsg.AckEndBattle.EBattleType battle_mode = 6;
+  // .NFMsg.EBattleType battle_mode = 6;
   if (this->battle_mode() != 0) {
     target = ::google::protobuf::internal::WireFormatLite::WriteEnumToArray(
       6, this->battle_mode(), target);
@@ -16809,7 +16822,7 @@ size_t AckEndBattle::ByteSizeLong() const {
         this->diamond());
   }
 
-  // .NFMsg.AckEndBattle.EBattleType battle_mode = 6;
+  // .NFMsg.EBattleType battle_mode = 6;
   if (this->battle_mode() != 0) {
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::EnumSize(this->battle_mode());

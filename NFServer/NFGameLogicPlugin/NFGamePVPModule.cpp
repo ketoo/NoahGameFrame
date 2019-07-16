@@ -740,7 +740,7 @@ void NFGamePVPModule::EndTheBattle(const NFGUID & self, const int autoEnd)
 
 
 		NFMsg::AckEndBattle xReqAckEndBattle;
-		xReqAckEndBattle.set_battle_mode(NFMsg::AckEndBattle::EBattleType::AckEndBattle_EBattleType_EBT_SINGLE_MODE);
+		xReqAckEndBattle.set_battle_mode(NFMsg::EBattleType::EBT_SINGLE_MODE);
 		*xReqAckEndBattle.mutable_team_id() = NFINetModule::NFToPB(matchTeamID);
 		*xReqAckEndBattle.mutable_match_id() = NFINetModule::NFToPB(matchID);
 		NFMsg::Ident* pMember = xReqAckEndBattle.add_members();

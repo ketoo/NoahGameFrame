@@ -95,6 +95,7 @@ protected:
 	};
 
 	std::list<NFGUID> mSingleModeCandidatePool;
+	std::list<NFGUID> mMultipleModeCandidatePool;
 	NFMapEx<NFGUID, NFMsg::PVPPlayerInfo> mCandidatePool;
 	std::list<NF_SHARE_PTR<MultiTeam>> mTeamList;
 

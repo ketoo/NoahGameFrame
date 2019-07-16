@@ -344,7 +344,7 @@ message ReqBuyItemFromShop
 message PVPPlayerInfo
 {
 	Ident id = 1;
-	int32 single = 2;
+	EBattleType battle_mode = 2;
 	int32 level = 4;
 	int32 battle_point = 5;
 	bytes name = 6;
@@ -373,6 +373,7 @@ message ReqSearchOppnent
     int32		self_scene = 1;
 	int32 		diamond = 2;
 	int32 		battle_point = 3;
+    EBattleType battle_mode = 4;
 
 	repeated Ident friends = 10;
 }
@@ -405,15 +406,6 @@ message ReqEndBattle
 //EGMI_ACK_END_OPPNENT
 message AckEndBattle
 {
-	enum EBattleType
-	{
-		EBT_SINGLE_MODE = 0;
-		EBT_MULTI_MODE = 1;
-		EBT_CLAN_MODE = 2;
-		EBT_CLAN_BOSS_MODE = 3;
-		EBT_WORLD_BOSS_MODE = 4;
-	}
-	
 	//下发的时候则为道具列表
 	//获得的金币等列表
     int32 win            	= 1; //

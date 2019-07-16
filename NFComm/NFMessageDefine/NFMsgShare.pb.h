@@ -381,30 +381,6 @@ inline bool ReqAckOprClanMember_EGClanMemberOprType_Parse(
   return ::google::protobuf::internal::ParseNamedEnum<ReqAckOprClanMember_EGClanMemberOprType>(
     ReqAckOprClanMember_EGClanMemberOprType_descriptor(), name, value);
 }
-enum AckEndBattle_EBattleType {
-  AckEndBattle_EBattleType_EBT_SINGLE_MODE = 0,
-  AckEndBattle_EBattleType_EBT_MULTI_MODE = 1,
-  AckEndBattle_EBattleType_EBT_CLAN_MODE = 2,
-  AckEndBattle_EBattleType_EBT_CLAN_BOSS_MODE = 3,
-  AckEndBattle_EBattleType_EBT_WORLD_BOSS_MODE = 4,
-  AckEndBattle_EBattleType_AckEndBattle_EBattleType_INT_MIN_SENTINEL_DO_NOT_USE_ = ::google::protobuf::kint32min,
-  AckEndBattle_EBattleType_AckEndBattle_EBattleType_INT_MAX_SENTINEL_DO_NOT_USE_ = ::google::protobuf::kint32max
-};
-LIBPROTOC_EXPORT bool AckEndBattle_EBattleType_IsValid(int value);
-const AckEndBattle_EBattleType AckEndBattle_EBattleType_EBattleType_MIN = AckEndBattle_EBattleType_EBT_SINGLE_MODE;
-const AckEndBattle_EBattleType AckEndBattle_EBattleType_EBattleType_MAX = AckEndBattle_EBattleType_EBT_WORLD_BOSS_MODE;
-const int AckEndBattle_EBattleType_EBattleType_ARRAYSIZE = AckEndBattle_EBattleType_EBattleType_MAX + 1;
-
-LIBPROTOC_EXPORT const ::google::protobuf::EnumDescriptor* AckEndBattle_EBattleType_descriptor();
-inline const ::std::string& AckEndBattle_EBattleType_Name(AckEndBattle_EBattleType value) {
-  return ::google::protobuf::internal::NameOfEnum(
-    AckEndBattle_EBattleType_descriptor(), value);
-}
-inline bool AckEndBattle_EBattleType_Parse(
-    const ::std::string& name, AckEndBattle_EBattleType* value) {
-  return ::google::protobuf::internal::ParseNamedEnum<AckEndBattle_EBattleType>(
-    AckEndBattle_EBattleType_descriptor(), name, value);
-}
 // ===================================================================
 
 class LIBPROTOC_EXPORT ReqEnterGameServer : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:NFMsg.ReqEnterGameServer) */ {
@@ -5688,11 +5664,11 @@ class LIBPROTOC_EXPORT PVPPlayerInfo : public ::google::protobuf::Message /* @@p
   ::NFMsg::Ident* mutable_hero_id3();
   void set_allocated_hero_id3(::NFMsg::Ident* hero_id3);
 
-  // int32 single = 2;
-  void clear_single();
-  static const int kSingleFieldNumber = 2;
-  ::google::protobuf::int32 single() const;
-  void set_single(::google::protobuf::int32 value);
+  // .NFMsg.EBattleType battle_mode = 2;
+  void clear_battle_mode();
+  static const int kBattleModeFieldNumber = 2;
+  ::NFMsg::EBattleType battle_mode() const;
+  void set_battle_mode(::NFMsg::EBattleType value);
 
   // int32 level = 4;
   void clear_level();
@@ -5749,7 +5725,7 @@ class LIBPROTOC_EXPORT PVPPlayerInfo : public ::google::protobuf::Message /* @@p
   ::NFMsg::Ident* hero_id1_;
   ::NFMsg::Ident* hero_id2_;
   ::NFMsg::Ident* hero_id3_;
-  ::google::protobuf::int32 single_;
+  int battle_mode_;
   ::google::protobuf::int32 level_;
   ::google::protobuf::int32 battle_point_;
   ::google::protobuf::int32 gold_;
@@ -5879,6 +5855,12 @@ class LIBPROTOC_EXPORT ReqSearchOppnent : public ::google::protobuf::Message /* 
   ::google::protobuf::int32 battle_point() const;
   void set_battle_point(::google::protobuf::int32 value);
 
+  // .NFMsg.EBattleType battle_mode = 4;
+  void clear_battle_mode();
+  static const int kBattleModeFieldNumber = 4;
+  ::NFMsg::EBattleType battle_mode() const;
+  void set_battle_mode(::NFMsg::EBattleType value);
+
   // @@protoc_insertion_point(class_scope:NFMsg.ReqSearchOppnent)
  private:
 
@@ -5887,6 +5869,7 @@ class LIBPROTOC_EXPORT ReqSearchOppnent : public ::google::protobuf::Message /* 
   ::google::protobuf::int32 self_scene_;
   ::google::protobuf::int32 diamond_;
   ::google::protobuf::int32 battle_point_;
+  int battle_mode_;
   mutable ::google::protobuf::internal::CachedSize _cached_size_;
   friend struct ::protobuf_NFMsgShare_2eproto::TableStruct;
 };
@@ -6351,38 +6334,6 @@ class LIBPROTOC_EXPORT AckEndBattle : public ::google::protobuf::Message /* @@pr
 
   // nested types ----------------------------------------------------
 
-  typedef AckEndBattle_EBattleType EBattleType;
-  static const EBattleType EBT_SINGLE_MODE =
-    AckEndBattle_EBattleType_EBT_SINGLE_MODE;
-  static const EBattleType EBT_MULTI_MODE =
-    AckEndBattle_EBattleType_EBT_MULTI_MODE;
-  static const EBattleType EBT_CLAN_MODE =
-    AckEndBattle_EBattleType_EBT_CLAN_MODE;
-  static const EBattleType EBT_CLAN_BOSS_MODE =
-    AckEndBattle_EBattleType_EBT_CLAN_BOSS_MODE;
-  static const EBattleType EBT_WORLD_BOSS_MODE =
-    AckEndBattle_EBattleType_EBT_WORLD_BOSS_MODE;
-  static inline bool EBattleType_IsValid(int value) {
-    return AckEndBattle_EBattleType_IsValid(value);
-  }
-  static const EBattleType EBattleType_MIN =
-    AckEndBattle_EBattleType_EBattleType_MIN;
-  static const EBattleType EBattleType_MAX =
-    AckEndBattle_EBattleType_EBattleType_MAX;
-  static const int EBattleType_ARRAYSIZE =
-    AckEndBattle_EBattleType_EBattleType_ARRAYSIZE;
-  static inline const ::google::protobuf::EnumDescriptor*
-  EBattleType_descriptor() {
-    return AckEndBattle_EBattleType_descriptor();
-  }
-  static inline const ::std::string& EBattleType_Name(EBattleType value) {
-    return AckEndBattle_EBattleType_Name(value);
-  }
-  static inline bool EBattleType_Parse(const ::std::string& name,
-      EBattleType* value) {
-    return AckEndBattle_EBattleType_Parse(name, value);
-  }
-
   // accessors -------------------------------------------------------
 
   // repeated .NFMsg.Ident members = 9;
@@ -6463,11 +6414,11 @@ class LIBPROTOC_EXPORT AckEndBattle : public ::google::protobuf::Message /* @@pr
   ::google::protobuf::int32 diamond() const;
   void set_diamond(::google::protobuf::int32 value);
 
-  // .NFMsg.AckEndBattle.EBattleType battle_mode = 6;
+  // .NFMsg.EBattleType battle_mode = 6;
   void clear_battle_mode();
   static const int kBattleModeFieldNumber = 6;
-  ::NFMsg::AckEndBattle_EBattleType battle_mode() const;
-  void set_battle_mode(::NFMsg::AckEndBattle_EBattleType value);
+  ::NFMsg::EBattleType battle_mode() const;
+  void set_battle_mode(::NFMsg::EBattleType value);
 
   // @@protoc_insertion_point(class_scope:NFMsg.AckEndBattle)
  private:
@@ -10883,18 +10834,18 @@ inline void PVPPlayerInfo::set_allocated_id(::NFMsg::Ident* id) {
   // @@protoc_insertion_point(field_set_allocated:NFMsg.PVPPlayerInfo.id)
 }
 
-// int32 single = 2;
-inline void PVPPlayerInfo::clear_single() {
-  single_ = 0;
+// .NFMsg.EBattleType battle_mode = 2;
+inline void PVPPlayerInfo::clear_battle_mode() {
+  battle_mode_ = 0;
 }
-inline ::google::protobuf::int32 PVPPlayerInfo::single() const {
-  // @@protoc_insertion_point(field_get:NFMsg.PVPPlayerInfo.single)
-  return single_;
+inline ::NFMsg::EBattleType PVPPlayerInfo::battle_mode() const {
+  // @@protoc_insertion_point(field_get:NFMsg.PVPPlayerInfo.battle_mode)
+  return static_cast< ::NFMsg::EBattleType >(battle_mode_);
 }
-inline void PVPPlayerInfo::set_single(::google::protobuf::int32 value) {
+inline void PVPPlayerInfo::set_battle_mode(::NFMsg::EBattleType value) {
   
-  single_ = value;
-  // @@protoc_insertion_point(field_set:NFMsg.PVPPlayerInfo.single)
+  battle_mode_ = value;
+  // @@protoc_insertion_point(field_set:NFMsg.PVPPlayerInfo.battle_mode)
 }
 
 // int32 level = 4;
@@ -11450,6 +11401,20 @@ inline void ReqSearchOppnent::set_battle_point(::google::protobuf::int32 value) 
   // @@protoc_insertion_point(field_set:NFMsg.ReqSearchOppnent.battle_point)
 }
 
+// .NFMsg.EBattleType battle_mode = 4;
+inline void ReqSearchOppnent::clear_battle_mode() {
+  battle_mode_ = 0;
+}
+inline ::NFMsg::EBattleType ReqSearchOppnent::battle_mode() const {
+  // @@protoc_insertion_point(field_get:NFMsg.ReqSearchOppnent.battle_mode)
+  return static_cast< ::NFMsg::EBattleType >(battle_mode_);
+}
+inline void ReqSearchOppnent::set_battle_mode(::NFMsg::EBattleType value) {
+  
+  battle_mode_ = value;
+  // @@protoc_insertion_point(field_set:NFMsg.ReqSearchOppnent.battle_mode)
+}
+
 // repeated .NFMsg.Ident friends = 10;
 inline int ReqSearchOppnent::friends_size() const {
   return friends_.size();
@@ -11812,15 +11777,15 @@ inline void AckEndBattle::set_diamond(::google::protobuf::int32 value) {
   // @@protoc_insertion_point(field_set:NFMsg.AckEndBattle.diamond)
 }
 
-// .NFMsg.AckEndBattle.EBattleType battle_mode = 6;
+// .NFMsg.EBattleType battle_mode = 6;
 inline void AckEndBattle::clear_battle_mode() {
   battle_mode_ = 0;
 }
-inline ::NFMsg::AckEndBattle_EBattleType AckEndBattle::battle_mode() const {
+inline ::NFMsg::EBattleType AckEndBattle::battle_mode() const {
   // @@protoc_insertion_point(field_get:NFMsg.AckEndBattle.battle_mode)
-  return static_cast< ::NFMsg::AckEndBattle_EBattleType >(battle_mode_);
+  return static_cast< ::NFMsg::EBattleType >(battle_mode_);
 }
-inline void AckEndBattle::set_battle_mode(::NFMsg::AckEndBattle_EBattleType value) {
+inline void AckEndBattle::set_battle_mode(::NFMsg::EBattleType value) {
   
   battle_mode_ = value;
   // @@protoc_insertion_point(field_set:NFMsg.AckEndBattle.battle_mode)
@@ -12487,11 +12452,6 @@ template <> struct is_proto_enum< ::NFMsg::ReqAckOprClanMember_EGClanMemberOprTy
 template <>
 inline const EnumDescriptor* GetEnumDescriptor< ::NFMsg::ReqAckOprClanMember_EGClanMemberOprType>() {
   return ::NFMsg::ReqAckOprClanMember_EGClanMemberOprType_descriptor();
-}
-template <> struct is_proto_enum< ::NFMsg::AckEndBattle_EBattleType> : ::std::true_type {};
-template <>
-inline const EnumDescriptor* GetEnumDescriptor< ::NFMsg::AckEndBattle_EBattleType>() {
-  return ::NFMsg::AckEndBattle_EBattleType_descriptor();
 }
 
 }  // namespace protobuf

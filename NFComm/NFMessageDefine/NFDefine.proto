@@ -577,4 +577,12 @@ enum EGameElementType
 	EELEMENTTYPE_DARK          		= 5;    //
 };
 
-
+enum EBattleType
+{
+	EBT_SINGLE_MODE = 0;
+	EBT_MULTI_MODE = 1;
+	EBT_CLAN_MODE = 2;
+	EBT_CLAN_BOSS_MODE = 3;
+	EBT_WORLD_BOSS_MODE = 4;
+	EBT_MOBA_MODE = 5;
+};

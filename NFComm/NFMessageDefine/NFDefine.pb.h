@@ -342,16 +342,13 @@ enum EGameMsgID {
   EGMI_REQ_UP_BUILD_LVL = 20101,
   EGMI_REQ_CREATE_ITEM = 20102,
   EGMI_REQ_BUILD_OPERATE = 20103,
-  EGMI_REQ_SEARCH_TO_SHARE = 30000,
-  EGMI_ACK_SEARCH_TO_SHARE = 30001,
-  EGMI_REQ_SHARE_TO_ATART = 30002,
-  EGMI_ACK_SHARE_TO_ATART = 30003,
+  EGMI_REQ_ADD_FRIEND = 50000,
   EGameMsgID_INT_MIN_SENTINEL_DO_NOT_USE_ = ::google::protobuf::kint32min,
   EGameMsgID_INT_MAX_SENTINEL_DO_NOT_USE_ = ::google::protobuf::kint32max
 };
 LIBPROTOC_EXPORT bool EGameMsgID_IsValid(int value);
 const EGameMsgID EGameMsgID_MIN = EGMI_UNKNOW;
-const EGameMsgID EGameMsgID_MAX = EGMI_ACK_SHARE_TO_ATART;
+const EGameMsgID EGameMsgID_MAX = EGMI_REQ_ADD_FRIEND;
 const int EGameMsgID_ARRAYSIZE = EGameMsgID_MAX + 1;
 
 LIBPROTOC_EXPORT const ::google::protobuf::EnumDescriptor* EGameMsgID_descriptor();
@@ -873,6 +870,31 @@ inline bool EGameElementType_Parse(
   return ::google::protobuf::internal::ParseNamedEnum<EGameElementType>(
     EGameElementType_descriptor(), name, value);
 }
+enum EBattleType {
+  EBT_SINGLE_MODE = 0,
+  EBT_MULTI_MODE = 1,
+  EBT_CLAN_MODE = 2,
+  EBT_CLAN_BOSS_MODE = 3,
+  EBT_WORLD_BOSS_MODE = 4,
+  EBT_MOBA_MODE = 5,
+  EBattleType_INT_MIN_SENTINEL_DO_NOT_USE_ = ::google::protobuf::kint32min,
+  EBattleType_INT_MAX_SENTINEL_DO_NOT_USE_ = ::google::protobuf::kint32max
+};
+LIBPROTOC_EXPORT bool EBattleType_IsValid(int value);
+const EBattleType EBattleType_MIN = EBT_SINGLE_MODE;
+const EBattleType EBattleType_MAX = EBT_MOBA_MODE;
+const int EBattleType_ARRAYSIZE = EBattleType_MAX + 1;
+
+LIBPROTOC_EXPORT const ::google::protobuf::EnumDescriptor* EBattleType_descriptor();
+inline const ::std::string& EBattleType_Name(EBattleType value) {
+  return ::google::protobuf::internal::NameOfEnum(
+    EBattleType_descriptor(), value);
+}
+inline bool EBattleType_Parse(
+    const ::std::string& name, EBattleType* value) {
+  return ::google::protobuf::internal::ParseNamedEnum<EBattleType>(
+    EBattleType_descriptor(), name, value);
+}
 // ===================================================================
 
 
@@ -1015,6 +1037,11 @@ template <> struct is_proto_enum< ::NFMsg::EGameElementType> : ::std::true_type 
 template <>
 inline const EnumDescriptor* GetEnumDescriptor< ::NFMsg::EGameElementType>() {
   return ::NFMsg::EGameElementType_descriptor();
+}
+template <> struct is_proto_enum< ::NFMsg::EBattleType> : ::std::true_type {};
+template <>
+inline const EnumDescriptor* GetEnumDescriptor< ::NFMsg::EBattleType>() {
+  return ::NFMsg::EBattleType_descriptor();
 }
 
 }  // namespace protobuf
