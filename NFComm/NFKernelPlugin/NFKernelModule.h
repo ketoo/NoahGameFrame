@@ -138,6 +138,7 @@ public:
     virtual bool ReleaseGroupScene(const int nSceneID, const int nGroupID);
     virtual bool ExitGroupScene(const int nSceneID, const int nGroupID);
 
+	virtual int GetGroupObjectList(const int nSceneID, const int nGroupID, const bool bPlayer, const NFGUID& noSelf = NFGUID());
 	virtual bool GetGroupObjectList(const int nSceneID, const int nGroupID, NFDataList& list);
 	virtual bool GetGroupObjectList(const int nSceneID, const int nGroupID, NFDataList& list, const NFGUID& noSelf);
 	virtual bool GetGroupObjectList(const int nSceneID, const int nGroupID, NFDataList& list, const bool bPlayer);

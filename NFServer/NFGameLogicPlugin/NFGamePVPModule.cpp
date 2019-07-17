@@ -426,8 +426,18 @@ int NFGamePVPModule::AfterEnterSceneGroupEvent(const NFGUID & self, const int nS
 
 int NFGamePVPModule::BeforeLeaveSceneGroupEvent(const NFGUID & self, const int nSceneID, const int nGroupID, const int nType, const NFDataList & argList)
 {
-	ResetPVPData(self);
-
+	NFMsg::ESceneType eSceneType = (NFMsg::ESceneType)m_pElementModule->GetPropertyInt32(std::to_string(nSceneID), NFrame::Scene::Type());
+	if (eSceneType == NFMsg::ESceneType::SCENE_SINGLE_CLONE)
+	{
+	}
+	else if (eSceneType == NFMsg::ESceneType::SCENE_MULTI_CLONE)
+	{
+	}
+	else if (eSceneType == NFMsg::ESceneType::SCENE_HOME)
+	{
+		ResetPVPData(self);
+	}
+	
 	return 0;
 }
 
@@ -438,42 +448,68 @@ int NFGamePVPModule::AfterLeaveSceneGroupEvent(const NFGUID & self, const int nS
 
 void NFGamePVPModule::ResetPVPData(const NFGUID & self)
 {
-
-	int sceneID = m_pKernelModule->GetPropertyInt32(self, NFrame::Player::SceneID());
-	int groupID = m_pKernelModule->GetPropertyInt32(self, NFrame::Player::GroupID());
+	const int sceneID = m_pKernelModule->GetPropertyInt32(self, NFrame::Player::SceneID());
+	const int groupID = m_pKernelModule->GetPropertyInt32(self, NFrame::Player::GroupID());
 	
 	if (!m_pSceneModule->GetPropertyObject(sceneID, groupID, NFrame::Group::MatchID()).IsNull())
 	{
-		m_pSceneModule->SetPropertyObject(sceneID, groupID, NFrame::Group::MatchID(), NFGUID());
-		m_pSceneModule->SetPropertyObject(sceneID, groupID, NFrame::Group::MatchTeamID(), NFGUID());
-		m_pSceneModule->SetPropertyObject(sceneID, groupID, NFrame::Group::MatchOpponentID(), NFGUID());
+		int playerCount = 0;
+		NF_SHARE_PTR<NFIRecord> record = m_pSceneModule->FindRecord(sceneID, groupID, NFrame::Group::MatchMember::ThisName());
+		if (record)
+		{
+			for (int i = 0; i < record->GetRows(); ++i)
+			{
+				if (record->IsUsed(i))
+				{
+					const NFGUID playerID = record->GetObject(i, NFrame::Group::MatchMember::GUID);
+					const int playerSceneID = m_pKernelModule->GetPropertyInt32(playerID, NFrame::Player::SceneID());
+					const int playerGroupID = m_pKernelModule->GetPropertyInt32(playerID, NFrame::Player::GroupID());
+					if (playerSceneID == sceneID
+						&& playerGroupID == groupID)
+					{
+						playerCount++;
+					}
+				}
+			}
 
-		//m_pSceneModule->SetPropertyInt(sceneID, groupID, NFrame::Group::WarEventTime(), 0);
-		m_pSceneModule->SetPropertyInt(sceneID, groupID, NFrame::Group::MatchStar(), 0);
-		m_pSceneModule->SetPropertyInt(sceneID, groupID, NFrame::Group::MatchGambleDiamond(), 0);
+			if (playerCount <= 1)
+			{
+				record->Clear();
 
-		m_pSceneModule->SetPropertyInt(sceneID, groupID, NFrame::Group::MatchOpponentGold(), 0);
-		m_pSceneModule->SetPropertyInt(sceneID, groupID, NFrame::Group::MatchOpponentDiamond(), 0);
-		m_pSceneModule->SetPropertyInt(sceneID, groupID, NFrame::Group::MatchOpponentLevel(), 0);
-		m_pSceneModule->SetPropertyInt(sceneID, groupID, NFrame::Group::MatchOpponentCup(), 0);
-		m_pSceneModule->SetPropertyString(sceneID, groupID, NFrame::Group::MatchOpponentName(), "");
-		m_pSceneModule->SetPropertyString(sceneID, groupID, NFrame::Group::MatchOpponentHead(), "");
 
-		m_pSceneModule->SetPropertyObject(sceneID, groupID, NFrame::Group::MatchOpponentHeroID1(), NFGUID());
-		m_pSceneModule->SetPropertyString(sceneID, groupID, NFrame::Group::MatchOpponentHeroCnf1(), "");
-		m_pSceneModule->SetPropertyInt(sceneID, groupID, NFrame::Group::MatchOpponentHeroStar1(), 0);
-		m_pSceneModule->SetPropertyObject(sceneID, groupID, NFrame::Group::MatchOpponentHeroID2(), NFGUID());
-		m_pSceneModule->SetPropertyString(sceneID, groupID, NFrame::Group::MatchOpponentHeroCnf2(), "");
-		m_pSceneModule->SetPropertyInt(sceneID, groupID, NFrame::Group::MatchOpponentHeroStar2(), 0);
-		m_pSceneModule->SetPropertyObject(sceneID, groupID, NFrame::Group::MatchOpponentHeroID3(), NFGUID());
-		m_pSceneModule->SetPropertyString(sceneID, groupID, NFrame::Group::MatchOpponentHeroCnf3(), "");
-		m_pSceneModule->SetPropertyInt(sceneID, groupID, NFrame::Group::MatchOpponentHeroStar3(), 0);
+				m_pSceneModule->SetPropertyObject(sceneID, groupID, NFrame::Group::MatchID(), NFGUID());
+				m_pSceneModule->SetPropertyObject(sceneID, groupID, NFrame::Group::MatchTeamID(), NFGUID());
+				m_pSceneModule->SetPropertyObject(sceneID, groupID, NFrame::Group::MatchOpponentID(), NFGUID());
 
-		/*
-		m_pSceneModule->SetPropertyInt(sceneID, groupID, NFrame::Group::MatchItem1UsedCount(), 0);
-		m_pSceneModule->SetPropertyInt(sceneID, groupID, NFrame::Group::MatchItem2UsedCount(), 0);
-		m_pSceneModule->SetPropertyInt(sceneID, groupID, NFrame::Group::MatchItem3UsedCount(), 0);
-		*/
+				//m_pSceneModule->SetPropertyInt(sceneID, groupID, NFrame::Group::WarEventTime(), 0);
+				m_pSceneModule->SetPropertyInt(sceneID, groupID, NFrame::Group::MatchStar(), 0);
+				m_pSceneModule->SetPropertyInt(sceneID, groupID, NFrame::Group::MatchGambleDiamond(), 0);
+
+				m_pSceneModule->SetPropertyInt(sceneID, groupID, NFrame::Group::MatchOpponentGold(), 0);
+				m_pSceneModule->SetPropertyInt(sceneID, groupID, NFrame::Group::MatchOpponentDiamond(), 0);
+				m_pSceneModule->SetPropertyInt(sceneID, groupID, NFrame::Group::MatchOpponentLevel(), 0);
+				m_pSceneModule->SetPropertyInt(sceneID, groupID, NFrame::Group::MatchOpponentCup(), 0);
+				m_pSceneModule->SetPropertyString(sceneID, groupID, NFrame::Group::MatchOpponentName(), "");
+				m_pSceneModule->SetPropertyString(sceneID, groupID, NFrame::Group::MatchOpponentHead(), "");
+
+				m_pSceneModule->SetPropertyObject(sceneID, groupID, NFrame::Group::MatchOpponentHeroID1(), NFGUID());
+				m_pSceneModule->SetPropertyString(sceneID, groupID, NFrame::Group::MatchOpponentHeroCnf1(), "");
+				m_pSceneModule->SetPropertyInt(sceneID, groupID, NFrame::Group::MatchOpponentHeroStar1(), 0);
+				m_pSceneModule->SetPropertyObject(sceneID, groupID, NFrame::Group::MatchOpponentHeroID2(), NFGUID());
+				m_pSceneModule->SetPropertyString(sceneID, groupID, NFrame::Group::MatchOpponentHeroCnf2(), "");
+				m_pSceneModule->SetPropertyInt(sceneID, groupID, NFrame::Group::MatchOpponentHeroStar2(), 0);
+				m_pSceneModule->SetPropertyObject(sceneID, groupID, NFrame::Group::MatchOpponentHeroID3(), NFGUID());
+				m_pSceneModule->SetPropertyString(sceneID, groupID, NFrame::Group::MatchOpponentHeroCnf3(), "");
+				m_pSceneModule->SetPropertyInt(sceneID, groupID, NFrame::Group::MatchOpponentHeroStar3(), 0);
+
+				/*
+				m_pSceneModule->SetPropertyInt(sceneID, groupID, NFrame::Group::MatchItem1UsedCount(), 0);
+				m_pSceneModule->SetPropertyInt(sceneID, groupID, NFrame::Group::MatchItem2UsedCount(), 0);
+				m_pSceneModule->SetPropertyInt(sceneID, groupID, NFrame::Group::MatchItem3UsedCount(), 0);
+				*/
+
+			}
+		}
 	}
 }
 
