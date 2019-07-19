@@ -29,6 +29,9 @@
 #include "NFComm/NFPluginModule/NFIKernelModule.h"
 #include "NFComm/NFPluginModule/NFIClassModule.h"
 #include "NFComm/NFPluginModule/NFIProxyLogicModule.h"
+#include "NFComm/NFPluginModule/NFILogModule.h"
+#include "NFComm/NFPluginModule/NFINetModule.h"
+#include "NFComm/NFPluginModule/NFINetClientModule.h"
 
 class NFProxyLogicModule
     : public NFIProxyLogicModule
@@ -45,13 +48,15 @@ public:
 
     virtual bool AfterInit();
 
-
 protected:
 
+	void OnLagTestProcess(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
 
 protected:
     NFIClassModule* m_pClassModule;
     NFIKernelModule* m_pKernelModule;
+	NFINetModule* m_pNetModule;
+	NFINetClientModule* m_pNetClientModule;
 private:
 };
 

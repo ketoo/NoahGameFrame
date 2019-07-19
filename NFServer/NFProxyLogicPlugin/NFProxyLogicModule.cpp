@@ -50,6 +50,24 @@ bool NFProxyLogicModule::AfterInit()
 {
     m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>();
     m_pClassModule = pPluginManager->FindModule<NFIClassModule>();
+	m_pNetModule = pPluginManager->FindModule<NFINetModule>();
+	m_pNetClientModule = pPluginManager->FindModule<NFINetClientModule>();
+
+
+	m_pNetModule->AddReceiveCallBack(NFMsg::EGEC_REQ_LAG_TEST, this, &NFProxyLogicModule::OnLagTestProcess);
 
     return true;
+}
+
+void NFProxyLogicModule::OnLagTestProcess(const NFSOCK nSockIndex, const int nMsgID, const char * msg, const uint32_t nLen)
+{
+	std::string msgDatag(msg, nLen);
+	m_pNetModule->SendMsgWithOutHead(NFMsg::EGameMsgID::EGEC_ACK_GATE_LAG_TEST, msgDatag, nSockIndex);
+
+	NetObject* pNetObject = m_pNetModule->GetNet()->GetNetObject(nSockIndex);
+	if (pNetObject)
+	{
+		const int gameID = pNetObject->GetGameID();
+		m_pNetClientModule->SendByServerIDWithOutHead(gameID, nMsgID, msgDatag);
+	}
 }
