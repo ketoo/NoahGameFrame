@@ -96,6 +96,8 @@ protected:
 	void OnClientReqPosSyncProcess(const NFSOCK nSockIndex, const int nMsgID, const char *msg, const uint32_t nLen);
 	void OnClientEnterGameFinishProcess(const NFSOCK nSockIndex, const int nMsgID, const char *msg, const uint32_t nLen);
 
+	void OnLagTestProcess(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+
     ///////////WORLD_START///////////////////////////////////////////////////////////////
     void OnTransWorld(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
 	void OnClanTransWorld(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);

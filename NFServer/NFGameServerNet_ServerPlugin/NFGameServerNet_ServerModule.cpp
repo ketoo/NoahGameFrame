@@ -95,6 +95,8 @@ bool NFGameServerNet_ServerModule::AfterInit()
 	m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_REQ_STATE_SYNC, this, &NFGameServerNet_ServerModule::OnClientReqStateSyncProcess);
 	m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_REQ_POS_SYNC, this, &NFGameServerNet_ServerModule::OnClientReqPosSyncProcess);
 
+	m_pNetModule->AddReceiveCallBack(NFMsg::EGEC_REQ_LAG_TEST, this, &NFGameServerNet_ServerModule::OnLagTestProcess);
+
 	m_pNetModule->AddEventCallBack(this, &NFGameServerNet_ServerModule::OnSocketPSEvent);
 
 
@@ -384,6 +386,13 @@ void NFGameServerNet_ServerModule::OnClientEnterGameFinishProcess(const NFSOCK n
 	m_pKernelModule->DoEvent(nPlayerID, NFrame::Player::ThisName(), CLASS_OBJECT_EVENT::COE_CREATE_CLIENT_FINISH, NFDataList());
 	
 	m_pNetModule->SendMsgPB(NFMsg::EGMI_ACK_ENTER_GAME_FINISH, xMsg, nSockIndex, nPlayerID);
+}
+
+void NFGameServerNet_ServerModule::OnLagTestProcess(const NFSOCK nSockIndex, const int nMsgID, const char * msg, const uint32_t nLen)
+{
+	CLIENT_MSG_PROCESS(nMsgID, msg, nLen, NFMsg::ReqAckLagTest);
+
+	m_pNetModule->SendMsgPB(NFMsg::EGEC_ACK_GAME_LAG_TEST, xMsg, nSockIndex, nPlayerID);
 }
 
 void NFGameServerNet_ServerModule::OnClientSwapSceneProcess(const NFSOCK nSockIndex, const int nMsgID, const char *msg, const uint32_t nLen)
