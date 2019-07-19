@@ -1,0 +1,16 @@
+<?xml version='1.0' encoding='utf-8' ?>
+<XML>
+	<Propertys>
+		<Property Id="ArgCnfID" Cache="0" Force="0" Private="0" Public="0" Ref="0" Save="0" Type="string" Upload="0" />
+		<Property Id="ArgCount" Cache="0" Force="0" Private="0" Public="0" Ref="0" Save="0" Type="int" Upload="0" />
+		<Property Id="AwardExp" Cache="0" Force="0" Private="0" Public="0" Ref="0" Save="0" Type="int" Upload="0" />
+		<Property Id="AwardGold" Cache="0" Force="0" Private="0" Public="0" Ref="0" Save="0" Type="int" Upload="0" />
+		<Property Id="AwardPack" Cache="0" Force="0" Private="0" Public="0" Ref="0" Save="0" Type="string" Upload="0" />
+		<Property Id="DescID" Cache="0" Force="0" Private="0" Public="0" Ref="0" Save="0" Type="string" Upload="0" />
+		<Property Id="LevelReq" Cache="0" Force="0" Private="0" Public="0" Ref="0" Save="0" Type="string" Upload="0" />
+		<Property Id="NextTaskID" Cache="0" Force="0" Private="0" Public="0" Ref="0" Save="0" Type="string" Upload="0" />
+		<Property Id="Type" Cache="0" Desc="TaskType" Force="0" Private="0" Public="0" Ref="0" Save="0" Type="int" Upload="0" />
+	</Propertys>
+	<Records>
+	</Records>
+</XML>

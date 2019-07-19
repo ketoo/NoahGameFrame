@@ -1,0 +1,11 @@
+<?xml version='1.0' encoding='utf-8' ?>
+<XML>
+	<Propertys>
+		<Property Id="Chinese" Cache="0" Desc="" Force="0" Private="0" Public="0" Ref="0" Save="0" Type="string" Upload="0" />
+		<Property Id="English" Cache="0" Desc="" Force="0" Private="0" Public="0" Ref="0" Save="0" Type="string" Upload="0" />
+		<Property Id="French" Cache="0" Desc="" Force="0" Private="0" Public="0" Ref="0" Save="0" Type="string" Upload="0" />
+		<Property Id="Spanish" Cache="0" Desc="" Force="0" Private="0" Public="0" Ref="0" Save="0" Type="string" Upload="0" />
+	</Propertys>
+	<Records>
+	</Records>
+</XML>

@@ -1,0 +1,8 @@
+<?xml version='1.0' encoding='utf-8' ?>
+<XML>
+	<Propertys>
+		<Property Id="Level" Cache="0" Desc="" Force="0" Private="0" Public="1" Ref="0" Save="0" Type="int" Upload="0" />
+	</Propertys>
+	<Records>
+	</Records>
+</XML>

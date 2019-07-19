@@ -1,0 +1,10 @@
+<?xml version='1.0' encoding='utf-8' ?>
+<XML>
+	<Object Id="Task1" ArgCnfID="AttackNpc1" ArgCount="1" AwardExp="100" AwardGold="110" AwardPack="DropBag_1" DescID="Desc_Task1" LevelReq="1" NextTaskID="Task2" Type="0" />
+	<Object Id="Task2" ArgCnfID="AttackNpc1" ArgCount="2" AwardExp="200" AwardGold="220" AwardPack="DropBag_1" DescID="Desc_Task2" LevelReq="2" NextTaskID="Task3" Type="0" />
+	<Object Id="Task3" ArgCnfID="AttackNpc1" ArgCount="3" AwardExp="300" AwardGold="330" AwardPack="DropBag_1" DescID="Desc_Task3" LevelReq="3" NextTaskID="Task4" Type="0" />
+	<Object Id="Task4" ArgCnfID="AttackNpc1" ArgCount="3" AwardExp="300" AwardGold="330" AwardPack="DropBag_1" DescID="Desc_Task3" LevelReq="3" NextTaskID="Task5" Type="0" />
+	<Object Id="Task5" ArgCnfID="AttackNpc1" ArgCount="3" AwardExp="300" AwardGold="330" AwardPack="DropBag_1" DescID="Desc_Task3" LevelReq="3" NextTaskID="Task6" Type="0" />
+	<Object Id="Task6" ArgCnfID="AttackNpc1" ArgCount="3" AwardExp="300" AwardGold="330" AwardPack="DropBag_1" DescID="Desc_Task3" LevelReq="3" NextTaskID="Task7" Type="0" />
+	<Object Id="Task7" ArgCnfID="AttackNpc1" ArgCount="3" AwardExp="300" AwardGold="330" AwardPack="DropBag_1" DescID="Desc_Task3" LevelReq="3" NextTaskID="Task8" Type="0" />
+</XML>

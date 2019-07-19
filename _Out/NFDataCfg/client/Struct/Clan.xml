@@ -1,0 +1,54 @@
+<?xml version='1.0' encoding='utf-8' ?>
+<XML>
+	<Propertys>
+		<Property Id="Clan_AD" Cache="0" Desc="工会公告" Force="0" Private="1" Public="1" Ref="0" Save="1" Type="string" Upload="0" />
+		<Property Id="Clan_CreateTime" Cache="0" Desc="公会创建时间" Force="0" Private="1" Public="1" Ref="0" Save="1" Type="int" Upload="0" />
+		<Property Id="Clan_Desc" Cache="0" Desc="工会描述" Force="0" Private="1" Public="1" Ref="0" Save="1" Type="string" Upload="0" />
+		<Property Id="Clan_Exp" Cache="0" Desc="公会经验" Force="0" Private="1" Public="1" Ref="0" Save="1" Type="int" Upload="0" />
+		<Property Id="Clan_Gold" Cache="0" Desc="工会财富" Force="0" Private="1" Public="1" Ref="0" Save="1" Type="int" Upload="0" />
+		<Property Id="Clan_Honor" Cache="0" Desc="公会荣誉" Force="0" Private="1" Public="1" Ref="0" Save="1" Type="int" Upload="0" />
+		<Property Id="Clan_Icon" Cache="0" Desc="公会头像" Force="0" Private="1" Public="1" Ref="0" Save="1" Type="string" Upload="0" />
+		<Property Id="Clan_Level" Cache="0" Desc="工会等级" Force="0" Private="1" Public="1" Ref="0" Save="1" Type="int" Upload="0" />
+		<Property Id="Clan_MemeberCount" Cache="0" Desc="成员数量(增加个字段，不然遍历Record太麻烦)" Force="0" Private="1" Public="1" Ref="0" Save="1" Type="int" Upload="0" />
+		<Property Id="Clan_MemeberMaxCount" Cache="0" Desc="成员最大数量" Force="0" Private="1" Public="1" Ref="0" Save="1" Type="int" Upload="0" />
+		<Property Id="Clan_Name" Cache="0" Desc="工会名" Force="0" Private="1" Public="1" Ref="0" Save="1" Type="string" Upload="0" />
+		<Property Id="Clan_PresidentID" Cache="0" Desc="会长ID" Force="0" Private="1" Public="1" Ref="0" Save="1" Type="object" Upload="0" />
+		<Property Id="Clan_PresidentName" Cache="0" Desc="会长名" Force="0" Private="1" Public="1" Ref="0" Save="1" Type="string" Upload="0" />
+		<Property Id="Clan_Rank" Cache="0" Desc="公会排名" Force="0" Private="1" Public="1" Ref="0" Save="1" Type="int" Upload="0" />
+		<Property Id="Guild_EctypID" Cache="0" Desc="工会副本ID" Force="0" Private="1" Public="0" Ref="0" Save="1" Type="int" Upload="0" />
+	</Propertys>
+	<Records>
+		<Record Id="Clan_AppyList" Cache="0"	 Col="4"	 Force="0"	 Private="1"	 Public="1"	 Ref="0"	 Row="50"	 Save="1"	 Upload="0"	 >
+			<Col Type ="object"	Tag="GUID"/><!--- Desc-->
+			<Col Type ="string"	Tag="Name"/><!--- guild-->
+			<Col Type ="int"	Tag="Level"/>
+			<Col Type ="int"	Tag="VIP"/>
+		</Record>
+		<Record Id="Clan_Building" Cache="0"	 Col="3"	 Force="0"	 Private="1"	 Public="0"	 Ref="0"	 Row="50"	 Save="1"	 Upload="0"	 >
+			<Col Type ="object"	Tag="GUID"/><!--- Desc-->
+			<Col Type ="string"	Tag="Name"/><!--- guild-->
+			<Col Type ="int"	Tag="Level"/>
+		</Record>
+		<Record Id="Clan_MemberList" Cache="0"	 Col="15"	 Force="0"	 Private="1"	 Public="1"	 Ref="0"	 Row="50"	 Save="1"	 Upload="0"	 >
+			<Col Type ="object"	Tag="GUID"/><!--- Desc-->
+			<Col Type ="string"	Tag="Name"/><!--- guild-->
+			<Col Type ="int"	Tag="Level"/>
+			<Col Type ="int"	Tag="Job"/>
+			<Col Type ="int"	Tag="Donation"/>
+			<Col Type ="int"	Tag="Receive"/>
+			<Col Type ="int"	Tag="VIP"/>
+			<Col Type ="int"	Tag="Online"/>
+			<Col Type ="int"	Tag="Power"/>
+			<Col Type ="int"	Tag="Title"/>
+			<Col Type ="int"	Tag="GameID"/>
+			<Col Type ="int"	Tag="JoinTime"/>
+			<Col Type ="int"	Tag="Contribution"/>
+			<Col Type ="string"	Tag="LastTime"/>
+			<Col Type ="int"	Tag="AllContribution"/>
+		</Record>
+		<Record Id="Clan_WarList" Cache="0"	 Col="2"	 Force="0"	 Private="1"	 Public="0"	 Ref="0"	 Row="50"	 Save="1"	 Upload="0"	 >
+			<Col Type ="object"	Tag="GUID"/><!--- Desc-->
+			<Col Type ="int"	Tag="Level"/>
+		</Record>
+	</Records>
+</XML>
