@@ -59,7 +59,6 @@ ALTER TABLE `ConsumeData` ADD `HP` bigint(11) DEFAULT '0' COMMENT '生命值';
 ALTER TABLE `ConsumeData` ADD `MP` bigint(11) DEFAULT '0' COMMENT '法力值';
 ALTER TABLE `ConsumeData` ADD `SP` bigint(11) DEFAULT '0' COMMENT '体力';
 ALTER TABLE `ConsumeData` ADD `VIPEXP` bigint(11) DEFAULT '0' COMMENT 'VIP经验';
-ALTER TABLE `Group` ADD `MatchMember` text COLLATE utf8mb4_unicode_ci  DEFAULT '' COMMENT '';
 ALTER TABLE `IObject` ADD `ConfigID` text COLLATE utf8mb4_unicode_ci  DEFAULT '' COMMENT '';
 ALTER TABLE `Map` ADD `MaxCount` bigint(11) DEFAULT '0' COMMENT '最大入驻公会';
 ALTER TABLE `Map` ADD `Station` text COLLATE utf8mb4_unicode_ci  DEFAULT '' COMMENT '';
@@ -121,7 +120,6 @@ ALTER TABLE `Player` ADD `RELIVE_SOUL` bigint(11) DEFAULT '0' COMMENT '转生次
 ALTER TABLE `Player` ADD `Race` bigint(11) DEFAULT '0' COMMENT '种族';
 ALTER TABLE `Player` ADD `Report` bigint(11) DEFAULT '0' COMMENT 'Cup';
 ALTER TABLE `Player` ADD `Sex` bigint(11) DEFAULT '0' COMMENT '性别';
-ALTER TABLE `Player` ADD `ShowName` text COLLATE utf8mb4_unicode_ci  DEFAULT '' COMMENT '显示的名字';
 ALTER TABLE `Player` ADD `Skill1` text COLLATE utf8mb4_unicode_ci  DEFAULT '' COMMENT 'Skill1';
 ALTER TABLE `Player` ADD `Skill2` text COLLATE utf8mb4_unicode_ci  DEFAULT '' COMMENT 'Skill2';
 ALTER TABLE `Player` ADD `Skill3` text COLLATE utf8mb4_unicode_ci  DEFAULT '' COMMENT 'Skill3';

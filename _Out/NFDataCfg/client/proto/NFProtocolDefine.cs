@@ -299,17 +299,19 @@ namespace NFrame
 		public static readonly String Position = "Position";// vector3
 		public static readonly String SceneID = "SceneID";// int
 		// Property
-		public static readonly String MatchBeKilledHero = "MatchBeKilledHero";// int
 		public static readonly String MatchGambleDiamond = "MatchGambleDiamond";// int
 		public static readonly String MatchID = "MatchID";// object
-		public static readonly String MatchKilledHero = "MatchKilledHero";// int
 		public static readonly String MatchOpponentCup = "MatchOpponentCup";// int
+		public static readonly String MatchOpponentD = "MatchOpponentD";// int
 		public static readonly String MatchOpponentDiamond = "MatchOpponentDiamond";// int
 		public static readonly String MatchOpponentGold = "MatchOpponentGold";// int
 		public static readonly String MatchOpponentHead = "MatchOpponentHead";// string
 		public static readonly String MatchOpponentHeroCnf1 = "MatchOpponentHeroCnf1";// string
 		public static readonly String MatchOpponentHeroCnf2 = "MatchOpponentHeroCnf2";// string
 		public static readonly String MatchOpponentHeroCnf3 = "MatchOpponentHeroCnf3";// string
+		public static readonly String MatchOpponentHeroHP1 = "MatchOpponentHeroHP1";// int
+		public static readonly String MatchOpponentHeroHP2 = "MatchOpponentHeroHP2";// int
+		public static readonly String MatchOpponentHeroHP3 = "MatchOpponentHeroHP3";// int
 		public static readonly String MatchOpponentHeroID1 = "MatchOpponentHeroID1";// object
 		public static readonly String MatchOpponentHeroID2 = "MatchOpponentHeroID2";// object
 		public static readonly String MatchOpponentHeroID3 = "MatchOpponentHeroID3";// object
@@ -317,6 +319,7 @@ namespace NFrame
 		public static readonly String MatchOpponentHeroStar2 = "MatchOpponentHeroStar2";// int
 		public static readonly String MatchOpponentHeroStar3 = "MatchOpponentHeroStar3";// int
 		public static readonly String MatchOpponentID = "MatchOpponentID";// object
+		public static readonly String MatchOpponentK = "MatchOpponentK";// int
 		public static readonly String MatchOpponentLevel = "MatchOpponentLevel";// int
 		public static readonly String MatchOpponentName = "MatchOpponentName";// string
 		public static readonly String MatchStar = "MatchStar";// int
@@ -335,6 +338,15 @@ namespace NFrame
 			public const int Cup = 6;//int
 			public const int MVP = 7;//int
 			public const int Streak = 8;//int
+			public const int HeroCnf1 = 9;//string
+			public const int HeroCnf2 = 10;//string
+			public const int HeroCnf3 = 11;//string
+			public const int HeroStar1 = 12;//int
+			public const int HeroStar2 = 13;//int
+			public const int HeroStar3 = 14;//int
+			public const int HP1 = 15;//int
+			public const int HP2 = 16;//int
+			public const int HP3 = 17;//int
 
 		}
 
@@ -694,7 +706,6 @@ namespace NFrame
 		public static readonly String SPREGEN = "SPREGEN";// int
 		public static readonly String SUCKBLOOD = "SUCKBLOOD";// int
 		public static readonly String Sex = "Sex";// int
-		public static readonly String ShowName = "ShowName";// string
 		public static readonly String Skill1 = "Skill1";// string
 		public static readonly String Skill2 = "Skill2";// string
 		public static readonly String Skill3 = "Skill3";// string
