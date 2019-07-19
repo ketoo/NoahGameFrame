@@ -39,7 +39,7 @@ namespace protobuf_NFMsgBase_2eproto {
 struct LIBPROTOC_EXPORT TableStruct {
   static const ::google::protobuf::internal::ParseTableField entries[];
   static const ::google::protobuf::internal::AuxillaryParseTableField aux[];
-  static const ::google::protobuf::internal::ParseTable schema[38];
+  static const ::google::protobuf::internal::ParseTable schema[39];
   static const ::google::protobuf::internal::FieldMetadata field_metadata[];
   static const ::google::protobuf::internal::SerializationTable serialization_table[];
   static const ::google::protobuf::uint32 offsets[];
@@ -152,6 +152,9 @@ LIBPROTOC_EXPORT extern RecordVector2DefaultTypeInternal _RecordVector2_default_
 class RecordVector3;
 class RecordVector3DefaultTypeInternal;
 LIBPROTOC_EXPORT extern RecordVector3DefaultTypeInternal _RecordVector3_default_instance_;
+class ReqAckLagTest;
+class ReqAckLagTestDefaultTypeInternal;
+LIBPROTOC_EXPORT extern ReqAckLagTestDefaultTypeInternal _ReqAckLagTest_default_instance_;
 class ReqCommand;
 class ReqCommandDefaultTypeInternal;
 LIBPROTOC_EXPORT extern ReqCommandDefaultTypeInternal _ReqCommand_default_instance_;
@@ -199,6 +202,7 @@ template<> LIBPROTOC_EXPORT ::NFMsg::RecordObject* Arena::CreateMaybeMessage<::N
 template<> LIBPROTOC_EXPORT ::NFMsg::RecordString* Arena::CreateMaybeMessage<::NFMsg::RecordString>(Arena*);
 template<> LIBPROTOC_EXPORT ::NFMsg::RecordVector2* Arena::CreateMaybeMessage<::NFMsg::RecordVector2>(Arena*);
 template<> LIBPROTOC_EXPORT ::NFMsg::RecordVector3* Arena::CreateMaybeMessage<::NFMsg::RecordVector3>(Arena*);
+template<> LIBPROTOC_EXPORT ::NFMsg::ReqAckLagTest* Arena::CreateMaybeMessage<::NFMsg::ReqAckLagTest>(Arena*);
 template<> LIBPROTOC_EXPORT ::NFMsg::ReqCommand* Arena::CreateMaybeMessage<::NFMsg::ReqCommand>(Arena*);
 template<> LIBPROTOC_EXPORT ::NFMsg::Vector2* Arena::CreateMaybeMessage<::NFMsg::Vector2>(Arena*);
 template<> LIBPROTOC_EXPORT ::NFMsg::Vector3* Arena::CreateMaybeMessage<::NFMsg::Vector3>(Arena*);
@@ -4994,6 +4998,109 @@ class LIBPROTOC_EXPORT MsgBase : public ::google::protobuf::Message /* @@protoc_
 };
 // -------------------------------------------------------------------
 
+class LIBPROTOC_EXPORT ReqAckLagTest : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:NFMsg.ReqAckLagTest) */ {
+ public:
+  ReqAckLagTest();
+  virtual ~ReqAckLagTest();
+
+  ReqAckLagTest(const ReqAckLagTest& from);
+
+  inline ReqAckLagTest& operator=(const ReqAckLagTest& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  #if LANG_CXX11
+  ReqAckLagTest(ReqAckLagTest&& from) noexcept
+    : ReqAckLagTest() {
+    *this = ::std::move(from);
+  }
+
+  inline ReqAckLagTest& operator=(ReqAckLagTest&& from) noexcept {
+    if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
+      if (this != &from) InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+  #endif
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const ReqAckLagTest& default_instance();
+
+  static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
+  static inline const ReqAckLagTest* internal_default_instance() {
+    return reinterpret_cast<const ReqAckLagTest*>(
+               &_ReqAckLagTest_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages =
+    37;
+
+  void Swap(ReqAckLagTest* other);
+  friend void swap(ReqAckLagTest& a, ReqAckLagTest& b) {
+    a.Swap(&b);
+  }
+
+  // implements Message ----------------------------------------------
+
+  inline ReqAckLagTest* New() const final {
+    return CreateMaybeMessage<ReqAckLagTest>(NULL);
+  }
+
+  ReqAckLagTest* New(::google::protobuf::Arena* arena) const final {
+    return CreateMaybeMessage<ReqAckLagTest>(arena);
+  }
+  void CopyFrom(const ::google::protobuf::Message& from) final;
+  void MergeFrom(const ::google::protobuf::Message& from) final;
+  void CopyFrom(const ReqAckLagTest& from);
+  void MergeFrom(const ReqAckLagTest& from);
+  void Clear() final;
+  bool IsInitialized() const final;
+
+  size_t ByteSizeLong() const final;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input) final;
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const final;
+  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
+      bool deterministic, ::google::protobuf::uint8* target) const final;
+  int GetCachedSize() const final { return _cached_size_.Get(); }
+
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const final;
+  void InternalSwap(ReqAckLagTest* other);
+  private:
+  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
+    return NULL;
+  }
+  inline void* MaybeArenaPtr() const {
+    return NULL;
+  }
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const final;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // int32 index = 1;
+  void clear_index();
+  static const int kIndexFieldNumber = 1;
+  ::google::protobuf::int32 index() const;
+  void set_index(::google::protobuf::int32 value);
+
+  // @@protoc_insertion_point(class_scope:NFMsg.ReqAckLagTest)
+ private:
+
+  ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
+  ::google::protobuf::int32 index_;
+  mutable ::google::protobuf::internal::CachedSize _cached_size_;
+  friend struct ::protobuf_NFMsgBase_2eproto::TableStruct;
+};
+// -------------------------------------------------------------------
+
 class LIBPROTOC_EXPORT ReqCommand : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:NFMsg.ReqCommand) */ {
  public:
   ReqCommand();
@@ -5029,7 +5136,7 @@ class LIBPROTOC_EXPORT ReqCommand : public ::google::protobuf::Message /* @@prot
                &_ReqCommand_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    37;
+    38;
 
   void Swap(ReqCommand* other);
   friend void swap(ReqCommand& a, ReqCommand& b) {
@@ -9070,6 +9177,24 @@ inline void MsgBase::set_allocated_hash_ident(::NFMsg::Ident* hash_ident) {
 
 // -------------------------------------------------------------------
 
+// ReqAckLagTest
+
+// int32 index = 1;
+inline void ReqAckLagTest::clear_index() {
+  index_ = 0;
+}
+inline ::google::protobuf::int32 ReqAckLagTest::index() const {
+  // @@protoc_insertion_point(field_get:NFMsg.ReqAckLagTest.index)
+  return index_;
+}
+inline void ReqAckLagTest::set_index(::google::protobuf::int32 value) {
+  
+  index_ = value;
+  // @@protoc_insertion_point(field_set:NFMsg.ReqAckLagTest.index)
+}
+
+// -------------------------------------------------------------------
+
 // ReqCommand
 
 // .NFMsg.Ident control_id = 1;
@@ -9359,6 +9484,8 @@ inline void ReqCommand::set_col(::google::protobuf::int32 value) {
 #ifdef __GNUC__
   #pragma GCC diagnostic pop
 #endif  // __GNUC__
+// -------------------------------------------------------------------
+
 // -------------------------------------------------------------------
 
 // -------------------------------------------------------------------

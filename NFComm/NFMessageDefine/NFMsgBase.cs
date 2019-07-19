@@ -107,16 +107,17 @@ namespace NFMsg {
             "X3JlY29yZBgBIAMoCzIXLk5GTXNnLk9iamVjdFJlY29yZExpc3QiiAEKB01z",
             "Z0Jhc2USHwoJcGxheWVyX2lkGAEgASgLMgwuTkZNc2cuSWRlbnQSEAoIbXNn",
             "X2RhdGEYAiABKAwSKAoScGxheWVyX0NsaWVudF9saXN0GAMgAygLMgwuTkZN",
-            "c2cuSWRlbnQSIAoKaGFzaF9pZGVudBgEIAEoCzIMLk5GTXNnLklkZW50IosD",
-            "CgpSZXFDb21tYW5kEiAKCmNvbnRyb2xfaWQYASABKAsyDC5ORk1zZy5JZGVu",
-            "dBI2Cgpjb21tYW5kX2lkGAIgASgOMiIuTkZNc2cuUmVxQ29tbWFuZC5FR2Ft",
-            "ZUNvbW1hbmRUeXBlEhkKEWNvbW1hbmRfc3RyX3ZhbHVlGAMgASgMEhkKEWNv",
-            "bW1hbmRfdmFsdWVfaW50GAQgASgDEhsKE2NvbW1hbmRfdmFsdWVfZmxvYXQY",
-            "BSABKAESGQoRY29tbWFuZF92YWx1ZV9zdHIYBiABKAwSKgoUY29tbWFuZF92",
-            "YWx1ZV9vYmplY3QYByABKAsyDC5ORk1zZy5JZGVudBILCgNyb3cYCCABKAUS",
-            "CwoDY29sGAkgASgFIm8KEEVHYW1lQ29tbWFuZFR5cGUSFwoTRUdDVF9NT0RJ",
-            "WV9QUk9QRVJUWRAAEhMKD0VHQ1RfTU9ESVlfSVRFTRABEhYKEkVHQ1RfQ1JF",
-            "QVRFX09CSkVDVBACEhUKEUVHQ1RfQUREX1JPTEVfRVhQEANiBnByb3RvMw=="));
+            "c2cuSWRlbnQSIAoKaGFzaF9pZGVudBgEIAEoCzIMLk5GTXNnLklkZW50Ih4K",
+            "DVJlcUFja0xhZ1Rlc3QSDQoFaW5kZXgYASABKAUiiwMKClJlcUNvbW1hbmQS",
+            "IAoKY29udHJvbF9pZBgBIAEoCzIMLk5GTXNnLklkZW50EjYKCmNvbW1hbmRf",
+            "aWQYAiABKA4yIi5ORk1zZy5SZXFDb21tYW5kLkVHYW1lQ29tbWFuZFR5cGUS",
+            "GQoRY29tbWFuZF9zdHJfdmFsdWUYAyABKAwSGQoRY29tbWFuZF92YWx1ZV9p",
+            "bnQYBCABKAMSGwoTY29tbWFuZF92YWx1ZV9mbG9hdBgFIAEoARIZChFjb21t",
+            "YW5kX3ZhbHVlX3N0chgGIAEoDBIqChRjb21tYW5kX3ZhbHVlX29iamVjdBgH",
+            "IAEoCzIMLk5GTXNnLklkZW50EgsKA3JvdxgIIAEoBRILCgNjb2wYCSABKAUi",
+            "bwoQRUdhbWVDb21tYW5kVHlwZRIXChNFR0NUX01PRElZX1BST1BFUlRZEAAS",
+            "EwoPRUdDVF9NT0RJWV9JVEVNEAESFgoSRUdDVF9DUkVBVEVfT0JKRUNUEAIS",
+            "FQoRRUdDVF9BRERfUk9MRV9FWFAQA2IGcHJvdG8z"));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(null, new pbr::GeneratedClrTypeInfo[] {
@@ -157,6 +158,7 @@ namespace NFMsg {
             new pbr::GeneratedClrTypeInfo(typeof(global::NFMsg.ObjectRecordList), global::NFMsg.ObjectRecordList.Parser, new[]{ "player_id", "record_list" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::NFMsg.MultiObjectRecordList), global::NFMsg.MultiObjectRecordList.Parser, new[]{ "multi_player_record" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::NFMsg.MsgBase), global::NFMsg.MsgBase.Parser, new[]{ "player_id", "msg_data", "player_Client_list", "hash_ident" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::NFMsg.ReqAckLagTest), global::NFMsg.ReqAckLagTest.Parser, new[]{ "index" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::NFMsg.ReqCommand), global::NFMsg.ReqCommand.Parser, new[]{ "control_id", "command_id", "command_str_value", "command_value_int", "command_value_float", "command_value_str", "command_value_object", "row", "col" }, null, new[]{ typeof(global::NFMsg.ReqCommand.Types.EGameCommandType) }, null)
           }));
     }
@@ -6669,6 +6671,135 @@ namespace NFMsg {
 
   }
 
+  public sealed partial class ReqAckLagTest : pb::IMessage<ReqAckLagTest> {
+    private static readonly pb::MessageParser<ReqAckLagTest> _parser = new pb::MessageParser<ReqAckLagTest>(() => new ReqAckLagTest());
+    private pb::UnknownFieldSet _unknownFields;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::MessageParser<ReqAckLagTest> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::NFMsg.NFMsgBaseReflection.Descriptor.MessageTypes[37]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public ReqAckLagTest() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public ReqAckLagTest(ReqAckLagTest other) : this() {
+      index_ = other.index_;
+      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public ReqAckLagTest Clone() {
+      return new ReqAckLagTest(this);
+    }
+
+    /// <summary>Field number for the "index" field.</summary>
+    public const int indexFieldNumber = 1;
+    private int index_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int index {
+      get { return index_; }
+      set {
+        index_ = value;
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override bool Equals(object other) {
+      return Equals(other as ReqAckLagTest);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Equals(ReqAckLagTest other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (index != other.index) return false;
+      return Equals(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (index != 0) hash ^= index.GetHashCode();
+      if (_unknownFields != null) {
+        hash ^= _unknownFields.GetHashCode();
+      }
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void WriteTo(pb::CodedOutputStream output) {
+      if (index != 0) {
+        output.WriteRawTag(8);
+        output.WriteInt32(index);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(output);
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int CalculateSize() {
+      int size = 0;
+      if (index != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(index);
+      }
+      if (_unknownFields != null) {
+        size += _unknownFields.CalculateSize();
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(ReqAckLagTest other) {
+      if (other == null) {
+        return;
+      }
+      if (other.index != 0) {
+        index = other.index;
+      }
+      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(pb::CodedInputStream input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            break;
+          case 8: {
+            index = input.ReadInt32();
+            break;
+          }
+        }
+      }
+    }
+
+  }
+
   public sealed partial class ReqCommand : pb::IMessage<ReqCommand> {
     private static readonly pb::MessageParser<ReqCommand> _parser = new pb::MessageParser<ReqCommand>(() => new ReqCommand());
     private pb::UnknownFieldSet _unknownFields;
@@ -6677,7 +6808,7 @@ namespace NFMsg {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::NFMsg.NFMsgBaseReflection.Descriptor.MessageTypes[37]; }
+      get { return global::NFMsg.NFMsgBaseReflection.Descriptor.MessageTypes[38]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]

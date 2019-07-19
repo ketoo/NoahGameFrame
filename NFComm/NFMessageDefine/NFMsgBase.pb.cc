@@ -226,6 +226,11 @@ class MsgBaseDefaultTypeInternal {
   ::google::protobuf::internal::ExplicitlyConstructed<MsgBase>
       _instance;
 } _MsgBase_default_instance_;
+class ReqAckLagTestDefaultTypeInternal {
+ public:
+  ::google::protobuf::internal::ExplicitlyConstructed<ReqAckLagTest>
+      _instance;
+} _ReqAckLagTest_default_instance_;
 class ReqCommandDefaultTypeInternal {
  public:
   ::google::protobuf::internal::ExplicitlyConstructed<ReqCommand>
@@ -804,6 +809,20 @@ LIBPROTOC_EXPORT ::google::protobuf::internal::SCCInfo<1> scc_info_MsgBase =
     {{ATOMIC_VAR_INIT(::google::protobuf::internal::SCCInfoBase::kUninitialized), 1, InitDefaultsMsgBase}, {
       &protobuf_NFMsgBase_2eproto::scc_info_Ident.base,}};
 
+static void InitDefaultsReqAckLagTest() {
+  GOOGLE_PROTOBUF_VERIFY_VERSION;
+
+  {
+    void* ptr = &::NFMsg::_ReqAckLagTest_default_instance_;
+    new (ptr) ::NFMsg::ReqAckLagTest();
+    ::google::protobuf::internal::OnShutdownDestroyMessage(ptr);
+  }
+  ::NFMsg::ReqAckLagTest::InitAsDefaultInstance();
+}
+
+LIBPROTOC_EXPORT ::google::protobuf::internal::SCCInfo<0> scc_info_ReqAckLagTest =
+    {{ATOMIC_VAR_INIT(::google::protobuf::internal::SCCInfoBase::kUninitialized), 0, InitDefaultsReqAckLagTest}, {}};
+
 static void InitDefaultsReqCommand() {
   GOOGLE_PROTOBUF_VERIFY_VERSION;
 
@@ -857,10 +876,11 @@ void InitDefaults() {
   ::google::protobuf::internal::InitSCC(&scc_info_ObjectRecordList.base);
   ::google::protobuf::internal::InitSCC(&scc_info_MultiObjectRecordList.base);
   ::google::protobuf::internal::InitSCC(&scc_info_MsgBase.base);
+  ::google::protobuf::internal::InitSCC(&scc_info_ReqAckLagTest.base);
   ::google::protobuf::internal::InitSCC(&scc_info_ReqCommand.base);
 }
 
-::google::protobuf::Metadata file_level_metadata[38];
+::google::protobuf::Metadata file_level_metadata[39];
 const ::google::protobuf::EnumDescriptor* file_level_enum_descriptors[1];
 
 const ::google::protobuf::uint32 TableStruct::offsets[] GOOGLE_PROTOBUF_ATTRIBUTE_SECTION_VARIABLE(protodesc_cold) = {
@@ -1152,6 +1172,12 @@ const ::google::protobuf::uint32 TableStruct::offsets[] GOOGLE_PROTOBUF_ATTRIBUT
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NFMsg::MsgBase, player_client_list_),
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NFMsg::MsgBase, hash_ident_),
   ~0u,  // no _has_bits_
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NFMsg::ReqAckLagTest, _internal_metadata_),
+  ~0u,  // no _extensions_
+  ~0u,  // no _oneof_case_
+  ~0u,  // no _weak_field_map_
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NFMsg::ReqAckLagTest, index_),
+  ~0u,  // no _has_bits_
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NFMsg::ReqCommand, _internal_metadata_),
   ~0u,  // no _extensions_
   ~0u,  // no _oneof_case_
@@ -1204,7 +1230,8 @@ static const ::google::protobuf::internal::MigrationSchema schemas[] GOOGLE_PROT
   { 265, -1, sizeof(::NFMsg::ObjectRecordList)},
   { 272, -1, sizeof(::NFMsg::MultiObjectRecordList)},
   { 278, -1, sizeof(::NFMsg::MsgBase)},
-  { 287, -1, sizeof(::NFMsg::ReqCommand)},
+  { 287, -1, sizeof(::NFMsg::ReqAckLagTest)},
+  { 293, -1, sizeof(::NFMsg::ReqCommand)},
 };
 
 static ::google::protobuf::Message const * const file_default_instances[] = {
@@ -1245,6 +1272,7 @@ static ::google::protobuf::Message const * const file_default_instances[] = {
   reinterpret_cast<const ::google::protobuf::Message*>(&::NFMsg::_ObjectRecordList_default_instance_),
   reinterpret_cast<const ::google::protobuf::Message*>(&::NFMsg::_MultiObjectRecordList_default_instance_),
   reinterpret_cast<const ::google::protobuf::Message*>(&::NFMsg::_MsgBase_default_instance_),
+  reinterpret_cast<const ::google::protobuf::Message*>(&::NFMsg::_ReqAckLagTest_default_instance_),
   reinterpret_cast<const ::google::protobuf::Message*>(&::NFMsg::_ReqCommand_default_instance_),
 };
 
@@ -1263,7 +1291,7 @@ void protobuf_AssignDescriptorsOnce() {
 void protobuf_RegisterTypes(const ::std::string&) GOOGLE_PROTOBUF_ATTRIBUTE_COLD;
 void protobuf_RegisterTypes(const ::std::string&) {
   protobuf_AssignDescriptorsOnce();
-  ::google::protobuf::internal::RegisterAllTypes(file_level_metadata, 38);
+  ::google::protobuf::internal::RegisterAllTypes(file_level_metadata, 39);
 }
 
 void AddDescriptorsImpl() {
@@ -1363,20 +1391,21 @@ void AddDescriptorsImpl() {
       "\001\n\007MsgBase\022\037\n\tplayer_id\030\001 \001(\0132\014.NFMsg.Id"
       "ent\022\020\n\010msg_data\030\002 \001(\014\022(\n\022player_Client_l"
       "ist\030\003 \003(\0132\014.NFMsg.Ident\022 \n\nhash_ident\030\004 "
-      "\001(\0132\014.NFMsg.Ident\"\213\003\n\nReqCommand\022 \n\ncont"
-      "rol_id\030\001 \001(\0132\014.NFMsg.Ident\0226\n\ncommand_id"
-      "\030\002 \001(\0162\".NFMsg.ReqCommand.EGameCommandTy"
-      "pe\022\031\n\021command_str_value\030\003 \001(\014\022\031\n\021command"
-      "_value_int\030\004 \001(\003\022\033\n\023command_value_float\030"
-      "\005 \001(\001\022\031\n\021command_value_str\030\006 \001(\014\022*\n\024comm"
-      "and_value_object\030\007 \001(\0132\014.NFMsg.Ident\022\013\n\003"
-      "row\030\010 \001(\005\022\013\n\003col\030\t \001(\005\"o\n\020EGameCommandTy"
-      "pe\022\027\n\023EGCT_MODIY_PROPERTY\020\000\022\023\n\017EGCT_MODI"
-      "Y_ITEM\020\001\022\026\n\022EGCT_CREATE_OBJECT\020\002\022\025\n\021EGCT"
-      "_ADD_ROLE_EXP\020\003b\006proto3"
+      "\001(\0132\014.NFMsg.Ident\"\036\n\rReqAckLagTest\022\r\n\005in"
+      "dex\030\001 \001(\005\"\213\003\n\nReqCommand\022 \n\ncontrol_id\030\001"
+      " \001(\0132\014.NFMsg.Ident\0226\n\ncommand_id\030\002 \001(\0162\""
+      ".NFMsg.ReqCommand.EGameCommandType\022\031\n\021co"
+      "mmand_str_value\030\003 \001(\014\022\031\n\021command_value_i"
+      "nt\030\004 \001(\003\022\033\n\023command_value_float\030\005 \001(\001\022\031\n"
+      "\021command_value_str\030\006 \001(\014\022*\n\024command_valu"
+      "e_object\030\007 \001(\0132\014.NFMsg.Ident\022\013\n\003row\030\010 \001("
+      "\005\022\013\n\003col\030\t \001(\005\"o\n\020EGameCommandType\022\027\n\023EG"
+      "CT_MODIY_PROPERTY\020\000\022\023\n\017EGCT_MODIY_ITEM\020\001"
+      "\022\026\n\022EGCT_CREATE_OBJECT\020\002\022\025\n\021EGCT_ADD_ROL"
+      "E_EXP\020\003b\006proto3"
   };
   ::google::protobuf::DescriptorPool::InternalAddGeneratedFile(
-      descriptor, 4183);
+      descriptor, 4215);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "NFMsgBase.proto", &protobuf_RegisterTypes);
 }
@@ -12831,6 +12860,229 @@ void MsgBase::InternalSwap(MsgBase* other) {
 
 // ===================================================================
 
+void ReqAckLagTest::InitAsDefaultInstance() {
+}
+#if !defined(_MSC_VER) || _MSC_VER >= 1900
+const int ReqAckLagTest::kIndexFieldNumber;
+#endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
+
+ReqAckLagTest::ReqAckLagTest()
+  : ::google::protobuf::Message(), _internal_metadata_(NULL) {
+  ::google::protobuf::internal::InitSCC(
+      &protobuf_NFMsgBase_2eproto::scc_info_ReqAckLagTest.base);
+  SharedCtor();
+  // @@protoc_insertion_point(constructor:NFMsg.ReqAckLagTest)
+}
+ReqAckLagTest::ReqAckLagTest(const ReqAckLagTest& from)
+  : ::google::protobuf::Message(),
+      _internal_metadata_(NULL) {
+  _internal_metadata_.MergeFrom(from._internal_metadata_);
+  index_ = from.index_;
+  // @@protoc_insertion_point(copy_constructor:NFMsg.ReqAckLagTest)
+}
+
+void ReqAckLagTest::SharedCtor() {
+  index_ = 0;
+}
+
+ReqAckLagTest::~ReqAckLagTest() {
+  // @@protoc_insertion_point(destructor:NFMsg.ReqAckLagTest)
+  SharedDtor();
+}
+
+void ReqAckLagTest::SharedDtor() {
+}
+
+void ReqAckLagTest::SetCachedSize(int size) const {
+  _cached_size_.Set(size);
+}
+const ::google::protobuf::Descriptor* ReqAckLagTest::descriptor() {
+  ::protobuf_NFMsgBase_2eproto::protobuf_AssignDescriptorsOnce();
+  return ::protobuf_NFMsgBase_2eproto::file_level_metadata[kIndexInFileMessages].descriptor;
+}
+
+const ReqAckLagTest& ReqAckLagTest::default_instance() {
+  ::google::protobuf::internal::InitSCC(&protobuf_NFMsgBase_2eproto::scc_info_ReqAckLagTest.base);
+  return *internal_default_instance();
+}
+
+
+void ReqAckLagTest::Clear() {
+// @@protoc_insertion_point(message_clear_start:NFMsg.ReqAckLagTest)
+  ::google::protobuf::uint32 cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  index_ = 0;
+  _internal_metadata_.Clear();
+}
+
+bool ReqAckLagTest::MergePartialFromCodedStream(
+    ::google::protobuf::io::CodedInputStream* input) {
+#define DO_(EXPRESSION) if (!GOOGLE_PREDICT_TRUE(EXPRESSION)) goto failure
+  ::google::protobuf::uint32 tag;
+  // @@protoc_insertion_point(parse_start:NFMsg.ReqAckLagTest)
+  for (;;) {
+    ::std::pair<::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
+    tag = p.first;
+    if (!p.second) goto handle_unusual;
+    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
+      // int32 index = 1;
+      case 1: {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(8u /* 8 & 0xFF */)) {
+
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
+                 input, &index_)));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      default: {
+      handle_unusual:
+        if (tag == 0) {
+          goto success;
+        }
+        DO_(::google::protobuf::internal::WireFormat::SkipField(
+              input, tag, _internal_metadata_.mutable_unknown_fields()));
+        break;
+      }
+    }
+  }
+success:
+  // @@protoc_insertion_point(parse_success:NFMsg.ReqAckLagTest)
+  return true;
+failure:
+  // @@protoc_insertion_point(parse_failure:NFMsg.ReqAckLagTest)
+  return false;
+#undef DO_
+}
+
+void ReqAckLagTest::SerializeWithCachedSizes(
+    ::google::protobuf::io::CodedOutputStream* output) const {
+  // @@protoc_insertion_point(serialize_start:NFMsg.ReqAckLagTest)
+  ::google::protobuf::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  // int32 index = 1;
+  if (this->index() != 0) {
+    ::google::protobuf::internal::WireFormatLite::WriteInt32(1, this->index(), output);
+  }
+
+  if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
+    ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
+        (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()), output);
+  }
+  // @@protoc_insertion_point(serialize_end:NFMsg.ReqAckLagTest)
+}
+
+::google::protobuf::uint8* ReqAckLagTest::InternalSerializeWithCachedSizesToArray(
+    bool deterministic, ::google::protobuf::uint8* target) const {
+  (void)deterministic; // Unused
+  // @@protoc_insertion_point(serialize_to_array_start:NFMsg.ReqAckLagTest)
+  ::google::protobuf::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  // int32 index = 1;
+  if (this->index() != 0) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(1, this->index(), target);
+  }
+
+  if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
+    target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
+        (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()), target);
+  }
+  // @@protoc_insertion_point(serialize_to_array_end:NFMsg.ReqAckLagTest)
+  return target;
+}
+
+size_t ReqAckLagTest::ByteSizeLong() const {
+// @@protoc_insertion_point(message_byte_size_start:NFMsg.ReqAckLagTest)
+  size_t total_size = 0;
+
+  if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
+    total_size +=
+      ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
+        (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()));
+  }
+  // int32 index = 1;
+  if (this->index() != 0) {
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::Int32Size(
+        this->index());
+  }
+
+  int cached_size = ::google::protobuf::internal::ToCachedSize(total_size);
+  SetCachedSize(cached_size);
+  return total_size;
+}
+
+void ReqAckLagTest::MergeFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_merge_from_start:NFMsg.ReqAckLagTest)
+  GOOGLE_DCHECK_NE(&from, this);
+  const ReqAckLagTest* source =
+      ::google::protobuf::internal::DynamicCastToGenerated<const ReqAckLagTest>(
+          &from);
+  if (source == NULL) {
+  // @@protoc_insertion_point(generalized_merge_from_cast_fail:NFMsg.ReqAckLagTest)
+    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
+  } else {
+  // @@protoc_insertion_point(generalized_merge_from_cast_success:NFMsg.ReqAckLagTest)
+    MergeFrom(*source);
+  }
+}
+
+void ReqAckLagTest::MergeFrom(const ReqAckLagTest& from) {
+// @@protoc_insertion_point(class_specific_merge_from_start:NFMsg.ReqAckLagTest)
+  GOOGLE_DCHECK_NE(&from, this);
+  _internal_metadata_.MergeFrom(from._internal_metadata_);
+  ::google::protobuf::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  if (from.index() != 0) {
+    set_index(from.index());
+  }
+}
+
+void ReqAckLagTest::CopyFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_copy_from_start:NFMsg.ReqAckLagTest)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+void ReqAckLagTest::CopyFrom(const ReqAckLagTest& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:NFMsg.ReqAckLagTest)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool ReqAckLagTest::IsInitialized() const {
+  return true;
+}
+
+void ReqAckLagTest::Swap(ReqAckLagTest* other) {
+  if (other == this) return;
+  InternalSwap(other);
+}
+void ReqAckLagTest::InternalSwap(ReqAckLagTest* other) {
+  using std::swap;
+  swap(index_, other->index_);
+  _internal_metadata_.Swap(&other->_internal_metadata_);
+}
+
+::google::protobuf::Metadata ReqAckLagTest::GetMetadata() const {
+  protobuf_NFMsgBase_2eproto::protobuf_AssignDescriptorsOnce();
+  return ::protobuf_NFMsgBase_2eproto::file_level_metadata[kIndexInFileMessages];
+}
+
+
+// ===================================================================
+
 void ReqCommand::InitAsDefaultInstance() {
   ::NFMsg::_ReqCommand_default_instance_._instance.get_mutable()->control_id_ = const_cast< ::NFMsg::Ident*>(
       ::NFMsg::Ident::internal_default_instance());
@@ -13506,6 +13758,9 @@ template<> GOOGLE_PROTOBUF_ATTRIBUTE_NOINLINE ::NFMsg::MultiObjectRecordList* Ar
 }
 template<> GOOGLE_PROTOBUF_ATTRIBUTE_NOINLINE ::NFMsg::MsgBase* Arena::CreateMaybeMessage< ::NFMsg::MsgBase >(Arena* arena) {
   return Arena::CreateInternal< ::NFMsg::MsgBase >(arena);
+}
+template<> GOOGLE_PROTOBUF_ATTRIBUTE_NOINLINE ::NFMsg::ReqAckLagTest* Arena::CreateMaybeMessage< ::NFMsg::ReqAckLagTest >(Arena* arena) {
+  return Arena::CreateInternal< ::NFMsg::ReqAckLagTest >(arena);
 }
 template<> GOOGLE_PROTOBUF_ATTRIBUTE_NOINLINE ::NFMsg::ReqCommand* Arena::CreateMaybeMessage< ::NFMsg::ReqCommand >(Arena* arena) {
   return Arena::CreateInternal< ::NFMsg::ReqCommand >(arena);
