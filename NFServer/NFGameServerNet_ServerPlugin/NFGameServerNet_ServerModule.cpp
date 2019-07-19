@@ -391,8 +391,7 @@ void NFGameServerNet_ServerModule::OnClientEnterGameFinishProcess(const NFSOCK n
 void NFGameServerNet_ServerModule::OnLagTestProcess(const NFSOCK nSockIndex, const int nMsgID, const char * msg, const uint32_t nLen)
 {
 	CLIENT_MSG_PROCESS(nMsgID, msg, nLen, NFMsg::ReqAckLagTest);
-
-	m_pNetModule->SendMsgPB(NFMsg::EGEC_ACK_GAME_LAG_TEST, xMsg, nSockIndex, nPlayerID);
+	this->SendMsgPBToGate(NFMsg::EGEC_ACK_GAME_LAG_TEST, xMsg, nPlayerID);
 }
 
 void NFGameServerNet_ServerModule::OnClientSwapSceneProcess(const NFSOCK nSockIndex, const int nMsgID, const char *msg, const uint32_t nLen)
