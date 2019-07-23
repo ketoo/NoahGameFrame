@@ -204,7 +204,6 @@ public:
 	
 	virtual int GetObjectByProperty(const int nSceneID, const int nGroupID, const std::string& strPropertyName, const NFDataList& valueArg, NFDataList& list) = 0;
 
-    virtual void Random(int nStart, int nEnd, int nCount, NFDataList& valueList) = 0;
 	virtual int Random(int nStart, int nEnd) = 0;
 	virtual float Random() = 0;
     virtual bool LogInfo(const NFGUID ident) = 0;

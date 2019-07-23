@@ -37,7 +37,7 @@ NF_EXPORT void DllStartPlugin(NFIPluginManager* pm)
 
 NF_EXPORT void DllStopPlugin(NFIPluginManager* pm)
 {
-    DESTROY_PLUGIN(pm, Tutorial2)
+    DESTROY_PLUGIN(pm, Tutorial5)
 };
 
 #endif

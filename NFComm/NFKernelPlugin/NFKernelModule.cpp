@@ -1602,14 +1602,6 @@ bool NFKernelModule::BeforeShut()
 	return true;
 }
 
-void NFKernelModule::Random(int nStart, int nEnd, int nCount, NFDataList& valueList)
-{
-	for (int i = 0; i < nCount; i++)
-	{
-		valueList.Add(static_cast<NFINT64>(Random(nStart, nEnd)));
-	}
-}
-
 int NFKernelModule::Random(int nStart, int nEnd)
 {
 	if (++mxRandomItor == mvRandom.cend())
