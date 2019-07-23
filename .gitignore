@@ -43,10 +43,20 @@
 #[cC][mM]ake[lL]ists.txt
 
 /_Out/Comm/*
+/_Out/Debug/
+/_Out/Release/
+/_Out/NFDataCfg/Tool/
+
 /Dependencies/gperftools-2.5
 /Dependencies/lib
 /Dependencies/boost_1_53_0
 /Dependencies/curl-7.37.1
+/Dependencies/libevent
+/Dependencies/lua
+/Dependencies/protobuf
+
+
+
 /Temp
 /NoahFrame.v11.suo
 /NoahFrame.opensdf
