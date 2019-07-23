@@ -148,7 +148,6 @@ public:
 	
 	virtual int GetObjectByProperty(const int nSceneID, const int nGroupID, const std::string& strPropertyName, const NFDataList& valueArgArg, NFDataList& list);
 
-	virtual void Random(int nStart, int nEnd, int nCount, NFDataList& valueList);		//return [nStart, nEnd)
 	virtual int Random(int nStart, int nEnd);											//return [nStart, nEnd)
 	virtual float Random();											//return [0f, 1f)
 

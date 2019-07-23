@@ -271,11 +271,7 @@ bool NFEquipModule::Ramdom( const int nNowLevel , const int nMaxLevel)
         return false;
     }
 
-    NFDataList varList;
-    m_pKernelModule->Random(0, nMaxLevel, 1, varList);
-
-    const NFINT64 nRandomNum = varList.Int(0);
-
+    const NFINT64 nRandomNum = m_pKernelModule->Random(0, nMaxLevel);
     if (nRandomNum > nNowLevel && nRandomNum <= nMaxLevel)
     {
         return true;

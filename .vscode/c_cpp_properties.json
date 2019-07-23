@@ -14,8 +14,7 @@
                 "${workspaceFolder}/Dependencies",
                 "${workspaceFolder}/Dependencies/lua",
                 "${workspaceFolder}/Dependencies/protobuf/src",
-                "${workspaceFolder}/Dependencies/Theron/Include",
-                "${workspaceFolder}/Dependencies/protobuf/gtest/include"
+                "${workspaceFolder}/Dependencies/Theron/Include"
             ],
             "defines": [],
             "macFrameworkPath": [
