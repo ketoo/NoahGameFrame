@@ -30,6 +30,7 @@
 #include "NFNet.h"
 #include "NFComm/NFCore/NFMapEx.hpp"
 #include "NFComm/NFCore/NFPerformance.hpp"
+#include "NFComm/NFMessageDefine/NFDefine.pb.h"
 #include "NFComm/NFPluginModule/NFIWSModule.h"
 #include "NFComm/NFPluginModule/NFILogModule.h"
 
