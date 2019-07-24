@@ -173,7 +173,8 @@ void NFWSModule::OnReceiveNetPack(const NFSOCK nSockIndex, const int nMsgID, con
 {
     if (nMsgID <= 0)
     {
-
+        NetObject* pNetObject =  m_pNet->GetNetObject(nSockIndex);
+        //pNetObject->GetBuffLen
     }
     else
     {
