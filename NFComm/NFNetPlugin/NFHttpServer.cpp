@@ -331,7 +331,7 @@ bool NFHttpServer::ResponseMsg(const NFHttpRequest& req, const std::string& strM
     struct evbuffer* eventBuffer = evbuffer_new();
 
     //send data
-    evbuffer_add_printf(eventBuffer, strMsg.c_str());
+    evbuffer_add_printf(eventBuffer, "%s", strMsg.c_str());
 
     evhttp_add_header(evhttp_request_get_output_headers(pHttpReq), "Content-Type", "application/json");
 	

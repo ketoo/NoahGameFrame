@@ -34,6 +34,7 @@
 #include <functional>
 #include <atomic>
 #include "NFPluginManager.h"
+#include "NFComm/NFCore/NFException.h"
 #include "NFComm/NFPluginModule/NFPlatform.h"
 #include "NFComm/NFLogPlugin/easylogging++.h"
 
@@ -60,68 +61,6 @@ std::string strAppName;
 std::string strAppID;
 std::string strTitleName;
 
-#if NF_PLATFORM != NF_PLATFORM_WIN
-class NFExceptFrame
-{
-public:
-	jmp_buf env;
-	int flag;
-	void clear()
-	{
-		flag = 0;
-		bzero(env, sizeof(env));
-	}
-	bool isDef()
-	{
-		return flag;
-	}
-	NFExceptFrame()
-	{
-		clear();
-	}
-};
-
-
-void StackTrace(int sig)
-{
-	LOG(FATAL) << "crash sig:" << sig;
-
-	int size = 16;
-	void * array[16];
-	int stack_num = backtrace(array, size);
-	char ** stacktrace = backtrace_symbols(array, stack_num);
-	for (int i = 0; i < stack_num; ++i)
-	{
-		//printf("%s\n", stacktrace[i]);
-		LOG(FATAL) << stacktrace[i];
-	}
-
-	free(stacktrace);
-}
-
-NFExceptFrame exceptStack;
-void CrashHandler(int sig)
-{
-	printf("received signal %d !!!\n", sig);
-	StackTrace(sig);
-	siglongjmp(exceptStack.env, 1);
-}
-
-#define NF_CRASH_TRY \
-exceptStack.flag = sigsetjmp(exceptStack.env,1);\
-if(!exceptStack.isDef()) \
-{ \
-signal(SIGSEGV,CrashHandler); \
-printf("start use TRY\n");
-#define NF_CRASH_END_TRY \
-}\
-else\
-{\
-exceptStack.clear();\
-}\
-printf("stop use TRY\n");
-
-#endif
 
 void MainExecute();
 
@@ -445,11 +384,11 @@ void MainExecute()
 #else
 	catch(const std::exception& e)
 	{
-		StackTrace(11);
+		NFException::StackTrace(11);
 	}
 	catch(...)
 	{
-		StackTrace(11);
+		NFException::StackTrace(11);
 	}
 #endif
     }
@@ -484,9 +423,9 @@ int main(int argc, char* argv[])
 #else
 	while (1)
 	{
-		NF_CRASH_TRY
+		//NF_CRASH_TRY
 		MainExecute();
-		NF_CRASH_END_TRY
+		//NF_CRASH_END_TRY
 	}
 #endif
 

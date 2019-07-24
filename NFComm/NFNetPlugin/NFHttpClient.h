@@ -29,7 +29,7 @@
 
 #include "NFIHttpClient.h"
 #include "NFIHttpServer.h"
-#include "NFComm/NFCore/NFException.hpp"
+#include "NFComm/NFCore/NFException.h"
 
 #if NF_PLATFORM == NF_PLATFORM_WIN
 #include <winsock2.h>

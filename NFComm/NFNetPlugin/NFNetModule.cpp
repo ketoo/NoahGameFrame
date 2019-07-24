@@ -400,7 +400,9 @@ void NFNetModule::OnReceiveNetPack(const NFSOCK nSockIndex, const int nMsgID, co
 		{
 			NET_RECEIVE_FUNCTOR_PTR& pFunPtr = *itList;
 			NET_RECEIVE_FUNCTOR* pFunc = pFunPtr.get();
+            NF_CRASH_TRY
 			pFunc->operator()(nSockIndex, nMsgID, msg, nLen);
+    		NF_CRASH_END_TRY
 		}
     } 
 	else
@@ -409,7 +411,9 @@ void NFNetModule::OnReceiveNetPack(const NFSOCK nSockIndex, const int nMsgID, co
         {
             NET_RECEIVE_FUNCTOR_PTR& pFunPtr = *itList;
             NET_RECEIVE_FUNCTOR* pFunc = pFunPtr.get();
+            NF_CRASH_TRY
             pFunc->operator()(nSockIndex, nMsgID, msg, nLen);
+    		NF_CRASH_END_TRY
         }
     }
 

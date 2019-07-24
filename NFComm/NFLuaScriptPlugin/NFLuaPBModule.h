@@ -33,7 +33,7 @@
 #include <google/protobuf/descriptor.pb.h>
 #include <google/protobuf/compiler/importer.h>
 #include <google/protobuf/dynamic_message.h>
-#include "NFComm/NFCore/NFException.hpp"
+#include "NFComm/NFCore/NFException.h"
 #include "NFComm/NFPluginModule/NFILuaScriptModule.h"
 #include "NFComm/NFPluginModule/NFILogModule.h"
 #include "NFComm/NFPluginModule/NFILuaPBModule.h"

@@ -31,6 +31,7 @@
 #include "NFNet.h"
 #include "NFComm/NFCore/NFQueue.hpp"
 #include "NFComm/NFCore/NFPerformance.hpp"
+#include "NFComm/NFCore/NFException.h"
 #include "NFComm/NFPluginModule/NFINetModule.h"
 #include "NFComm/NFPluginModule/NFILogModule.h"
 #include "NFComm/NFPluginModule/NFIPluginManager.h"
