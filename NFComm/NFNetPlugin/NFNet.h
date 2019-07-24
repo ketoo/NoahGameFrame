@@ -55,10 +55,11 @@ public:
         mnReceiveMsgTotal = 0;
 
 		mnBufferSize = 0;
+        mbTCPStream = false;
     }
 
     template<typename BaseType>
-    NFNet(BaseType* pBaseType, void (BaseType::*handleRecieve)(const NFSOCK, const int, const char*, const uint32_t), void (BaseType::*handleEvent)(const NFSOCK, const NF_NET_EVENT, NFINet*))
+    NFNet(BaseType* pBaseType, void (BaseType::*handleRecieve)(const NFSOCK, const int, const char*, const uint32_t), void (BaseType::*handleEvent)(const NFSOCK, const NF_NET_EVENT, NFINet*), bool tcpStream = false)
     {
         mxBase = NULL;
         listener = NULL;
@@ -75,7 +76,9 @@ public:
         mnReceiveMsgTotal = 0;
 
 		mnBufferSize = 0;
+        mbTCPStream = tcpStream;
     }
+    
     virtual ~NFNet() {};
 
 public:
@@ -87,13 +90,12 @@ public:
 
     virtual bool Final();
 
-    
+    virtual bool SendMsg(const char* msg, const size_t nLen, const NFSOCK nSockIndex);
+
     virtual bool SendMsgWithOutHead(const int16_t nMsgID, const char* msg, const size_t nLen, const NFSOCK nSockIndex);
 
-    
     virtual bool SendMsgWithOutHead(const int16_t nMsgID, const char* msg, const size_t nLen, const std::list<NFSOCK>& fdList);
 
-    
     virtual bool SendMsgToAllClientWithOutHead(const int16_t nMsgID, const char* msg, const size_t nLen);
 
 
@@ -108,7 +110,6 @@ private:
     bool SendMsgToAllClient(const char* msg, const size_t nLen);
     
     bool SendMsg(const char* msg, const size_t nLen, const std::list<NFSOCK>& fdList);
-    bool SendMsg(const char* msg, const size_t nLen, const NFSOCK nSockIndex);
 
 
 private:
@@ -149,6 +150,7 @@ private:
 	int mnBufferSize;
 
     bool mbWorking;
+    bool mbTCPStream;
 
     int64_t mnSendMsgTotal;
     int64_t mnReceiveMsgTotal;

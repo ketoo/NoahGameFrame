@@ -22,6 +22,7 @@
 #include "NFNetClientModule.h"
 #include "NFHttpClientModule.h"
 #include "NFHttpServerModule.h"
+#include "NFWSModule.h"
 #include "NFComm/NFPluginModule/NFIPluginManager.h"
 
 #ifdef NF_DYNAMIC_PLUGIN
@@ -55,8 +56,9 @@ const std::string NFNetPlugin::GetPluginName()
 void NFNetPlugin::Install()
 {
     REGISTER_MODULE(pPluginManager, NFINetModule, NFNetModule)
-    REGISTER_MODULE(pPluginManager, NFINetClientModule, NFNetClientModule)
+	REGISTER_MODULE(pPluginManager, NFIWSModule, NFWSModule)
 	REGISTER_MODULE(pPluginManager, NFIHttpServerModule, NFHttpServerModule)
+    REGISTER_MODULE(pPluginManager, NFINetClientModule, NFNetClientModule)
 	REGISTER_MODULE(pPluginManager, NFIHttpClientModule, NFHttpClientModule)
 }
 
@@ -64,6 +66,7 @@ void NFNetPlugin::Uninstall()
 {
 	UNREGISTER_MODULE(pPluginManager, NFIHttpClientModule, NFHttpClientModule)
     UNREGISTER_MODULE(pPluginManager, NFINetClientModule, NFNetClientModule)
-    UNREGISTER_MODULE(pPluginManager, NFINetModule, NFNetModule)
 	UNREGISTER_MODULE(pPluginManager, NFIHttpServerModule, NFHttpServerModule)
+	UNREGISTER_MODULE(pPluginManager, NFIWSModule, NFWSModule)
+    UNREGISTER_MODULE(pPluginManager, NFINetModule, NFNetModule)
 }
