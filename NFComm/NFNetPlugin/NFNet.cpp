@@ -182,11 +182,29 @@ void NFNet::conn_readcb(struct bufferevent* bev, void* user_data)
     pObject->AddBuff((const char *)pData, len);
     evbuffer_drain(input, len);
 
-    while (1)
+    if (pNet->mbTCPStream)
     {
-        if (!pNet->Dismantle(pObject))
+        int len = pObject->GetBuffLen();
+        if (len > 0)
         {
-            break;
+            if (pNet->mRecvCB)
+            {
+                pNet->mRecvCB(pObject->GetRealFD(), 0, pObject->GetBuff(), len);
+
+                pNet->mnReceiveMsgTotal++;
+            }
+
+            pObject->RemoveBuff(0, len);
+        }
+    }
+    else
+    {
+        while (1)
+        {
+            if (!pNet->Dismantle(pObject))
+            {
+                break;
+            }
         }
     }
 }
@@ -628,7 +646,6 @@ bool NFNet::SendMsgWithOutHead(const int16_t nMsgID, const char* msg, const size
     int nAllLen = EnCode(nMsgID, msg, nLen, strOutData);
     if (nAllLen == nLen + NFIMsgHead::NF_Head::NF_HEAD_LENGTH)
     {
-        
         return SendMsg(strOutData.c_str(), strOutData.length(), fdList);
     }
 
@@ -641,7 +658,6 @@ bool NFNet::SendMsgToAllClientWithOutHead(const int16_t nMsgID, const char* msg,
     int nAllLen = EnCode(nMsgID, msg, nLen, strOutData);
     if (nAllLen == nLen + NFIMsgHead::NF_Head::NF_HEAD_LENGTH)
     {
-        
         return SendMsgToAllClient(strOutData.c_str(), (uint32_t) strOutData.length());
     }
 
