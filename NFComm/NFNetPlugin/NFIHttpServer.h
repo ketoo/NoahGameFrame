@@ -124,6 +124,8 @@ typedef std::shared_ptr<HTTP_FILTER_FUNCTOR> HTTP_FILTER_FUNCTOR_PTR;
 class NFIHttpServer
 {
 public:
+	virtual ~NFIHttpServer(){}
+	
     virtual bool Execute() = 0;
 
     virtual int InitServer(const unsigned short nPort) = 0;

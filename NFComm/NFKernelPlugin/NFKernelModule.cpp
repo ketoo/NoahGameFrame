@@ -327,9 +327,7 @@ bool NFKernelModule::DestroyObject(const NFGUID& self)
 		return DestroySelf(self);
 	}
 
-
-	int nGroupID = GetPropertyInt32(self, NFrame::IObject::GroupID());
-	int nSceneID = GetPropertyInt32(self, NFrame::IObject::SceneID());
+	const int nSceneID = GetPropertyInt32(self, NFrame::IObject::SceneID());
 
 	NF_SHARE_PTR<NFSceneInfo> pContainerInfo = m_pSceneModule->GetElement(nSceneID);
 	if (pContainerInfo)

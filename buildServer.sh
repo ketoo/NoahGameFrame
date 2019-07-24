@@ -36,6 +36,9 @@ rm -rf ./_Out/Debug
 rm -rf ./_Out/Release
 
 cd BuildScript/linux/
+
+#find . -name "*.o" | xargs rm -rf
+
 chmod -R 755 ./BuildNF.CMake.Tools.sh
 ./BuildNF.CMake.Tools.sh
 cd ../../

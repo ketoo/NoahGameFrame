@@ -96,6 +96,7 @@ public:
 class NFIHasher
 {
 public:
+	virtual ~NFIHasher(){}
     virtual uint32_t GetHashValue(const NFIVirtualNode& vNode) = 0;
 };
 

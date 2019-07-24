@@ -72,6 +72,9 @@ private:
     NFLock& operator=(const NFLock& src);
 };
 
+//read prior or write prior?
+//it's different for these two situations
+
 template<typename T>
 class NFQueue : public NFLock
 {

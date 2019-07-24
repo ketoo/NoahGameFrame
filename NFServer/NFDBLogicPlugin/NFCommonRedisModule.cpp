@@ -452,7 +452,7 @@ bool NFCommonRedisModule::ConvertPropertyManagerToVector(NF_SHARE_PTR<NFIPropert
 {
 	for (NF_SHARE_PTR<NFIProperty> pProperty = pPropertyManager->First(); pProperty != NULL; pProperty = pPropertyManager->Next())
 	{
-		const int nType = pProperty->GetType();
+		//const int nType = pProperty->GetType();
 		if (!pProperty->GetCache() && !pProperty->GetSave())
 		{
 			continue;

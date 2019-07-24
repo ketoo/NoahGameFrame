@@ -34,6 +34,53 @@
 #include <stdarg.h>
 #include <stdlib.h>
 #include <exception>
+#include <time.h>
+#include <stdio.h>
+#include <iostream>
+#include <utility>
+#include <thread>
+#include <chrono>
+#include <future>
+#include <functional>
+#include <atomic>
+#include "NFComm/NFPluginModule/NFPlatform.h"
+#include "NFComm/NFLogPlugin/easylogging++.h"
+
+#if NF_PLATFORM != NF_PLATFORM_WIN
+#include <unistd.h>
+#include <netdb.h>
+#include <arpa/inet.h>
+#include <signal.h>
+#include <execinfo.h>
+#include <setjmp.h>
+
+#if NF_PLATFORM == NF_PLATFORM_LINUX
+#include <sys/prctl.h>
+#endif
+
+#endif
+
+#if NF_PLATFORM != NF_PLATFORM_WIN
+class NFExceptFrame
+{
+public:
+	jmp_buf env;
+	int flag;
+	void clear()
+	{
+		flag = 0;
+		bzero(env, sizeof(env));
+	}
+	bool isDef()
+	{
+		return flag;
+	}
+	NFExceptFrame()
+	{
+		clear();
+	}
+};
+
 
 class NFException
 {
@@ -41,7 +88,10 @@ private:
     NFException(){}
 
     std::string _msg;
+
 public:
+	static NFExceptFrame& ExceptStack();
+
 	NFException(const char *format, ...)
 	{
 		char buf[1024] = {0};
@@ -89,8 +139,47 @@ public:
 		_msg.append(file);
 		_msg.append(std::to_string(line));
 	}
- 
+
+	static void StackTrace(int sig)
+	{
+		LOG(FATAL) << "crash sig:" << sig;
+
+		int size = 16;
+		void * array[16];
+		int stack_num = backtrace(array, size);
+		char ** stacktrace = backtrace_symbols(array, stack_num);
+		for (int i = 0; i < stack_num; ++i)
+		{
+			//printf("%s\n", stacktrace[i]);
+			LOG(FATAL) << stacktrace[i];
+		}
+
+		free(stacktrace);
+	}
+
+	static void CrashHandler(int sig)
+	{
+		printf("received signal %d !!!\n", sig);
+		StackTrace(sig);
+		siglongjmp(ExceptStack().env, 1);
+	}
     char const * what() const noexcept{ return _msg.c_str(); }
 };
 
+
+#define NF_CRASH_TRY \
+NFException::ExceptStack().flag = sigsetjmp(NFException::ExceptStack().env,1);\
+if(!NFException::ExceptStack().isDef()) \
+{ \
+signal(SIGSEGV, NFException::CrashHandler); \
+printf("start use TRY\n");
+#define NF_CRASH_END_TRY \
+}\
+else\
+{\
+NFException::ExceptStack().clear();\
+}\
+printf("stop use TRY\n");
+
+#endif
 #endif
