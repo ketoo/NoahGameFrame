@@ -94,7 +94,7 @@ struct NFIMsgHead
 
     virtual void SetBodyLength(uint32_t nLength) = 0;
 
-    int64_t NF_HTONLL(int64_t nData)
+    static int64_t NF_HTONLL(int64_t nData)
     {
 #if NF_PLATFORM == NF_PLATFORM_WIN
         return htonll(nData);
@@ -105,7 +105,7 @@ struct NFIMsgHead
 #endif
     }
 
-    int64_t NF_NTOHLL(int64_t nData)
+    static int64_t NF_NTOHLL(int64_t nData)
     {
 #if NF_PLATFORM == NF_PLATFORM_WIN
         return ntohll(nData);
@@ -118,7 +118,7 @@ struct NFIMsgHead
 #endif
     }
 
-    int32_t NF_HTONL(int32_t nData)
+    static int32_t NF_HTONL(int32_t nData)
     {
 #if NF_PLATFORM == NF_PLATFORM_WIN
         return htonl(nData);
@@ -129,7 +129,7 @@ struct NFIMsgHead
 #endif
     }
 
-    int32_t NF_NTOHL(int32_t nData)
+    static int32_t NF_NTOHL(int32_t nData)
     {
 #if NF_PLATFORM == NF_PLATFORM_WIN
         return ntohl(nData);
@@ -142,7 +142,7 @@ struct NFIMsgHead
 #endif
     }
 
-    int16_t NF_HTONS(int16_t nData)
+    static int16_t NF_HTONS(int16_t nData)
     {
 #if NF_PLATFORM == NF_PLATFORM_WIN
         return htons(nData);
@@ -153,7 +153,7 @@ struct NFIMsgHead
 #endif
     }
 
-    int16_t NF_NTOHS(int16_t nData)
+    static int16_t NF_NTOHS(int16_t nData)
     {
 #if NF_PLATFORM == NF_PLATFORM_WIN
         return ntohs(nData);
