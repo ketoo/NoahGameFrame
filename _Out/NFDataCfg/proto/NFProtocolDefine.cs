@@ -1061,6 +1061,7 @@ namespace NFrame
 		public static readonly String Port = "Port";// int
 		public static readonly String ServerID = "ServerID";// int
 		public static readonly String Type = "Type";// int
+		public static readonly String WSPort = "WSPort";// int
 		public static readonly String WebPort = "WebPort";// int
 		// Record
 

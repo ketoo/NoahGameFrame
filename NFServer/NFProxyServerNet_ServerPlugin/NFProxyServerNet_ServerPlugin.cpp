@@ -24,6 +24,7 @@
 */
 
 #include "NFProxyServerNet_ServerModule.h"
+#include "NFProxyServerNet_WSModule.h"
 #include "NFProxyServerNet_ServerPlugin.h"
 
 //
@@ -58,10 +59,12 @@ const std::string NFProxyServerNet_ServerPlugin::GetPluginName()
 void NFProxyServerNet_ServerPlugin::Install()
 {
     REGISTER_MODULE(pPluginManager, NFIProxyServerNet_ServerModule, NFProxyServerNet_ServerModule)
+    REGISTER_MODULE(pPluginManager, NFIProxyServerNet_WSModule, NFProxyServerNet_WSModule)
 
 }
 
 void NFProxyServerNet_ServerPlugin::Uninstall()
 {
+    UNREGISTER_MODULE(pPluginManager, NFIProxyServerNet_WSModule, NFProxyServerNet_WSModule)
     UNREGISTER_MODULE(pPluginManager, NFIProxyServerNet_ServerModule, NFProxyServerNet_ServerModule)
 }

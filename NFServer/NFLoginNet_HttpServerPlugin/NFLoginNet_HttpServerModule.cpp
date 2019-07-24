@@ -67,7 +67,7 @@ bool NFLoginNet_HttpServerModule::AfterInit()
 			int nWebServerAppID = m_pElementModule->GetPropertyInt32(strId, NFrame::Server::ServerID());
 
 			//webserver only run one instance in each server
-			if (pPluginManager->GetAppID() == nWebServerAppID)
+			if (pPluginManager->GetAppID() == nWebServerAppID && nJsonPort > 0)
 			{
 				m_pHttpNetModule->InitServer(nJsonPort);
 
