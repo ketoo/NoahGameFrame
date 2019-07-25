@@ -1,0 +1,93 @@
+<html>
+	<head>
+		<script type="text/javascript">
+			var ws;
+			var b_connect = false;
+
+			function connect(host) {
+				if (!b_connect) {
+						chat_content_append('try to connect: ' + host);
+						ws = new WebSocket(host);
+						ws.onopen = function (evt) {
+							onOpen(evt)
+						};
+						ws.onclose = function (evt) {
+							onClose(evt)
+						};
+						ws.onmessage = function (evt) {
+							onMessage(evt)
+						};
+						ws.onerror = function (evt) {
+							onError(evt)
+						};
+				} else {
+					ws.close();
+				}
+			}
+
+			function onOpen(evt) {
+				b_connect = true;
+				document.getElementById('connect_button').value = 'disconnect';
+				chat_content_append("connect to server done");
+			}
+
+			function onClose(evt) {
+				b_connect = false;
+				document.getElementById('connect_button').value = 'connect';
+				chat_content_append("disconnected");
+			}
+
+			function onMessage(evt) {
+				chat_content_append('Receive:' + evt.data);
+			}
+
+			function onError(evt) {
+				chat_content_append('<span style="color: red;">ERROR:</span> ' + evt.data);
+			}
+
+			function sendMsg(message) {
+				if (b_connect) {
+					ws.send(message);
+				} else {
+					chat_content_append("please click 'connect' button to connect to the webchat server");
+				}
+			}
+
+			function doInit() {
+				var host = document.getElementById('connect_host').value;
+				if (host != '') {
+					connect(host);
+				}
+			}
+
+			function doSend() {
+				if (document.getElementById('chat_input').value != '') {
+					var message = document.getElementById('chat_input').value;
+					ws.send(message);
+					document.getElementById('chat_input').value = '';
+					chat_content_append('send:' + message);
+				}
+			}
+
+			function chat_content_append(line) {
+				var chat_area = document.getElementById('chat_content');
+				chat_area.value += line + "\n";
+				chat_area.scrollTop = chat_area.scrollHeight;
+			}
+		</script>
+	</head>
+	<body>
+		<h1>WebSocket Demo</h1>
+		Server:
+		<input type='text' id='connect_host' value='ws://127.0.0.1:25001' />
+		<input type='button' id='connect_button' value='connect' onclick='doInit()' />
+		<br />
+		Message:
+		<br/>
+		<textarea rows='20' cols='100' id='chat_content' readonly></textarea>
+		<br />
+		Input:
+		<input type='text' id='chat_input' />
+		<input type='button' value='send' onclick='doSend()' />
+	</body>
+</html>
