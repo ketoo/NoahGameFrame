@@ -188,15 +188,15 @@ bool NFWSModule::Execute()
     return m_pNet->Execute();
 }
 
-bool NFWSModule::SendMsg(const std::string& msg, const NFSOCK nSockIndex)
+bool NFWSModule::SendMsg(const std::string& msg, const NFSOCK nSockIndex, const bool text)
 {
-    auto frame = EncodeFrame(msg.data(), msg.size(), true);
+    auto frame = EncodeFrame(msg.data(), msg.size(), text);
     return SendRawMsg(frame, nSockIndex);
 }
 
-bool NFWSModule::SendMsgToAllClient(const std::string& msg)
+bool NFWSModule::SendMsgToAllClient(const std::string& msg, const bool text)
 {
-    auto frame = EncodeFrame(msg.data(), msg.size(), true);
+    auto frame = EncodeFrame(msg.data(), msg.size(), text);
 	bool bRet = m_pNet->SendMsgToAllClient(frame.c_str(), (uint32_t)frame.length());
 	if (!bRet)
 	{
