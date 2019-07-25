@@ -646,7 +646,7 @@ protected:
             DAY_CASE(Sunday);
 
             default:
-                throw NFException("Day %d is not in valid weekday range ( %d - %d )", day, ::DayOfWeek::Sunday, ::DayOfWeek::Saturday);
+                //throw NFException("Day %d is not in valid weekday range ( %d - %d )", day, ::DayOfWeek::Sunday, ::DayOfWeek::Saturday);
                 break;
         }
     }
@@ -669,7 +669,7 @@ protected:
             MONTH_CASE(December);
 
             default:
-                throw NFException("Month %d is not in valid range ( %d - %d )", month, ::Month::January, ::Month::December);
+                //throw NFException("Month %d is not in valid range ( %d - %d )", month, ::Month::January, ::Month::December);
                 break;
         }
     }
