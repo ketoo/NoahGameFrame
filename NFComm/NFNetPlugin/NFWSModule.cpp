@@ -279,7 +279,7 @@ void NFWSModule::OnReceiveNetPack(const NFSOCK nSockIndex, const int nMsgID, con
                         //OnError(nSockIndex, ec);
                         return;
                     }
-                    pNetObject->RemoveBuff(0, pos);
+                    pNetObject->RemoveBuff(0, pos+4);
                     pNetObject->SetConnectKeyState(ws_handshaked);
                     //may have more data, check it
                     ec = DecodeFrame(nSockIndex, pNetObject);
@@ -313,38 +313,35 @@ void NFWSModule::OnReceiveNetPack(const NFSOCK nSockIndex, const int nMsgID, con
     }
     else
     {
+        m_pLogModule->LogInfo("OnReceiveNetPack " + std::to_string(nMsgID), __FUNCTION__, __LINE__);
 
+        std::map<int, std::list<NET_RECEIVE_FUNCTOR_PTR>>::iterator it = mxReceiveCallBack.find(nMsgID);
+        if (mxReceiveCallBack.end() != it)
+        {
+            std::list<NET_RECEIVE_FUNCTOR_PTR>& xFunList = it->second;
+            for (std::list<NET_RECEIVE_FUNCTOR_PTR>::iterator itList = xFunList.begin(); itList != xFunList.end(); ++itList)
+            {
+                NET_RECEIVE_FUNCTOR_PTR& pFunPtr = *itList;
+                NET_RECEIVE_FUNCTOR* pFunc = pFunPtr.get();
+                //NF_CRASH_TRY
+                pFunc->operator()(nSockIndex, nMsgID, msg, nLen);
+                //NF_CRASH_END_TRY
+            }
+        } 
+        else
+        {
+            for (std::list<NET_RECEIVE_FUNCTOR_PTR>::iterator itList = mxCallBackList.begin(); itList != mxCallBackList.end(); ++itList)
+            {
+                NET_RECEIVE_FUNCTOR_PTR& pFunPtr = *itList;
+                NET_RECEIVE_FUNCTOR* pFunc = pFunPtr.get();
+                //NF_CRASH_TRY
+                pFunc->operator()(nSockIndex, nMsgID, msg, nLen);
+                //NF_CRASH_END_TRY
+            }
+        }
     }
-
-    m_pLogModule->LogInfo("OnReceiveNetPack " + std::to_string(nMsgID), __FUNCTION__, __LINE__);
 
     NFPerformance performance;
-
-    std::map<int, std::list<NET_RECEIVE_FUNCTOR_PTR>>::iterator it = mxReceiveCallBack.find(nMsgID);
-    if (mxReceiveCallBack.end() != it)
-    {
-        std::list<NET_RECEIVE_FUNCTOR_PTR>& xFunList = it->second;
-        for (std::list<NET_RECEIVE_FUNCTOR_PTR>::iterator itList = xFunList.begin(); itList != xFunList.end(); ++itList)
-        {
-            NET_RECEIVE_FUNCTOR_PTR& pFunPtr = *itList;
-            NET_RECEIVE_FUNCTOR* pFunc = pFunPtr.get();
-            //NF_CRASH_TRY
-            pFunc->operator()(nSockIndex, nMsgID, msg, nLen);
-            //NF_CRASH_END_TRY
-        }
-    }
-    else
-    {
-        for (std::list<NET_RECEIVE_FUNCTOR_PTR>::iterator itList = mxCallBackList.begin(); itList != mxCallBackList.end(); ++itList)
-        {
-            NET_RECEIVE_FUNCTOR_PTR& pFunPtr = *itList;
-            NET_RECEIVE_FUNCTOR* pFunc = pFunPtr.get();
-            //NF_CRASH_TRY
-            pFunc->operator()(nSockIndex, nMsgID, msg, nLen);
-            //NF_CRASH_END_TRY
-        }
-    }
-
     if (performance.CheckTimePoint(1))
     {
         std::ostringstream os;
@@ -650,8 +647,6 @@ std::string NFWSModule::EncodeFrame(const char * data, size_t size_, bool text)
         res.append(reinterpret_cast<const char*>(&size), sizeof(size));
     }
 
-    res.append(reinterpret_cast<const char*>(&payload_len), sizeof(payload_len));
-
     uint8_t opcode = FIN_FRAME_FLAG | static_cast<uint8_t>(opcode::binary);
     if (text)
     {
@@ -659,9 +654,9 @@ std::string NFWSModule::EncodeFrame(const char * data, size_t size_, bool text)
     }
 
     res.append(reinterpret_cast<const char*>(&opcode), sizeof(opcode));
+    res.append(reinterpret_cast<const char*>(&payload_len), sizeof(payload_len));
 
     res.append(data,size);
-
     return res;
 }
 
