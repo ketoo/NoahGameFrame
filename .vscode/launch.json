@@ -89,31 +89,11 @@
             "MIMode": "lldb"
         },
         {
-            "name": "NetServer",
+            "name": "ATTACH TO DEBUG NF",
             "type": "cppdbg",
-            "request": "launch",
-            //"request": "attach",
-            "program": "${workspaceFolder}/_Out/Debug/NFNetSvr",
-            "args": ["Server=GameServer", "ID=3", "PluginX.xml"],
-            "stopAtEntry": false,
-            "cwd": "${workspaceFolder}/_Out/Debug/",
-            "environment": [],
-            "externalConsole": true,
-            //for mac lldb
-            "MIMode": "lldb"
-        },
-        {
-            "name": "NetClient",
-            "type": "cppdbg",
-            "request": "launch",
-            //"request": "attach",
-            "program": "${workspaceFolder}/_Out/Debug/NFNetCli",
-            "args": ["Server=GameServer", "ID=3", "PluginX.xml"],
-            "stopAtEntry": false,
-            "cwd": "${workspaceFolder}/_Out/Debug/",
-            "environment": [],
-            "externalConsole": true,
-            //for mac lldb
+            "request": "attach",
+            "program": "${workspaceFolder}/_Out/Debug/NFPluginLoader_d",
+            "processId": "${command:pickProcess}",
             "MIMode": "lldb"
         }
     ]
