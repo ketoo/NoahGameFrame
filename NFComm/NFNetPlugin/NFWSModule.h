@@ -62,8 +62,8 @@ public:
 
     virtual bool Execute();
 
-    virtual bool SendMsg(const std::string& msg, const NFSOCK nSockIndex);
-    virtual bool SendMsgToAllClient(const std::string& msg);
+    virtual bool SendMsg(const std::string& msg, const NFSOCK nSockIndex, const bool text = true);
+    virtual bool SendMsgToAllClient(const std::string& msg, const bool text = true);
 
     virtual NFINet* GetNet();
 
