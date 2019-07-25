@@ -72,6 +72,8 @@ public:
 
     virtual void OnError(const NFSOCK nSockIndex, const std::error_code& e);
 protected:
+    bool SendRawMsg(const std::string& msg, const NFSOCK nSockIndex);
+
     void OnReceiveNetPack(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
 
     void OnSocketNetEvent(const NFSOCK nSockIndex, const NF_NET_EVENT eEvent, NFINet* pNet);
@@ -80,7 +82,7 @@ protected:
 
     std::error_code HandShake(const NFSOCK nSockIndex, const char* msg, const uint32_t nLen);
 
-    std::error_code DecodeFrame(NetObject* pNetObject);
+    std::error_code DecodeFrame(const NFSOCK nSockIndex,NetObject* pNetObject);
 
     std::string EncodeFrame(const char* data, size_t size, bool text);
     
