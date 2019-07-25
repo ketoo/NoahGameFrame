@@ -76,6 +76,8 @@ bool NFProxyServerNet_WSModule::AfterInit()
                     }
 
 	                m_pWSModule->AddEventCallBack(this, &NFProxyServerNet_WSModule::OnSocketClientEvent);
+                    m_pWSModule->AddReceiveCallBack(1, this, &NFProxyServerNet_WSModule::OnWebSocketTestProcess);
+
                     break;
                 }
                 
@@ -98,7 +100,7 @@ bool NFProxyServerNet_WSModule::Execute()
 
 void NFProxyServerNet_WSModule::OnWebSocketTestProcess(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
 {
-    
+    m_pWSModule->SendMsg(std::string(msg, nLen), nSockIndex);
 }
 
 void NFProxyServerNet_WSModule::OnSocketClientEvent(const NFSOCK nSockIndex, const NF_NET_EVENT eEvent, NFINet* pNet)
