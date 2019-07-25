@@ -31,7 +31,6 @@
 #include "NFNet.h"
 #include "NFComm/NFCore/NFQueue.hpp"
 #include "NFComm/NFCore/NFPerformance.hpp"
-#include "NFComm/NFCore/NFException.h"
 #include "NFComm/NFPluginModule/NFINetModule.h"
 #include "NFComm/NFPluginModule/NFILogModule.h"
 #include "NFComm/NFPluginModule/NFIPluginManager.h"
@@ -45,6 +44,10 @@
 
 #ifdef _MSC_VER
 #pragma warning(default: 4244 4267)
+#endif
+
+#if NF_PLATFORM != NF_PLATFORM_WIN
+#include "NFComm/NFCore/NFException.h"
 #endif
 
 class NFNetModule: public NFINetModule

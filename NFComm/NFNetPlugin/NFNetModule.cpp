@@ -25,7 +25,6 @@
 
 #include "NFNetModule.h"
 
-
 NFNetModule::NFNetModule(NFIPluginManager* p)
 {
     pPluginManager = p;
@@ -400,9 +399,13 @@ void NFNetModule::OnReceiveNetPack(const NFSOCK nSockIndex, const int nMsgID, co
 		{
 			NET_RECEIVE_FUNCTOR_PTR& pFunPtr = *itList;
 			NET_RECEIVE_FUNCTOR* pFunc = pFunPtr.get();
+#if NF_PLATFORM != NF_PLATFORM_WIN
             NF_CRASH_TRY
+#endif
 			pFunc->operator()(nSockIndex, nMsgID, msg, nLen);
+#if NF_PLATFORM != NF_PLATFORM_WIN
     		NF_CRASH_END_TRY
+#endif
 		}
     } 
 	else
@@ -411,9 +414,13 @@ void NFNetModule::OnReceiveNetPack(const NFSOCK nSockIndex, const int nMsgID, co
         {
             NET_RECEIVE_FUNCTOR_PTR& pFunPtr = *itList;
             NET_RECEIVE_FUNCTOR* pFunc = pFunPtr.get();
-            NF_CRASH_TRY
+#if NF_PLATFORM != NF_PLATFORM_WIN
+			NF_CRASH_TRY
+#endif
             pFunc->operator()(nSockIndex, nMsgID, msg, nLen);
-    		NF_CRASH_END_TRY
+#if NF_PLATFORM != NF_PLATFORM_WIN
+			NF_CRASH_END_TRY
+#endif
         }
     }
 
