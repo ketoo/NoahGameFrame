@@ -20,6 +20,7 @@
     <ClCompile Include="NFNetClientModule.cpp" />
     <ClCompile Include="NFNetModule.cpp" />
     <ClCompile Include="NFNetPlugin.cpp" />
+    <ClCompile Include="NFWSModule.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="NFHttpClient.h" />
@@ -33,6 +34,7 @@
     <ClInclude Include="NFIHttpServer.h" />
     <ClInclude Include="NFINet.h" />
     <ClInclude Include="NFNetPlugin.h" />
+    <ClInclude Include="NFWSModule.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{403EB74F-6AF5-4250-8DA5-9D3CBFB7E545}</ProjectGuid>
