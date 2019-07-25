@@ -76,7 +76,7 @@ bool NFProxyServerNet_WSModule::AfterInit()
                     }
 
 	                m_pWSModule->AddEventCallBack(this, &NFProxyServerNet_WSModule::OnSocketClientEvent);
-	                m_pWSModule->AddReceiveCallBack(1, this, &NFProxyServerNet_WSModule::OnWebSocketTestProcess);
+	                m_pWSModule->AddReceiveCallBack(this, &NFProxyServerNet_WSModule::OnWebSocketTestProcess);
                     break;
                 }
                 
