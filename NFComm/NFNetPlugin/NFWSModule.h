@@ -65,9 +65,6 @@ public:
     virtual bool SendMsg(const std::string& msg, const NFSOCK nSockIndex);
     virtual bool SendMsgToAllClient(const std::string& msg);
 
-    //websocket shoud use this function send data
-    virtual bool SendFrame(const std::string& msg, const NFSOCK nSockIndex, bool text = false);
-
     virtual NFINet* GetNet();
 
     virtual void OnError(const NFSOCK nSockIndex, const std::error_code& e);

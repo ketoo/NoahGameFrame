@@ -208,12 +208,6 @@ bool NFWSModule::SendMsgToAllClient(const std::string& msg)
 	return bRet;
 }
 
-bool NFWSModule::SendFrame(const std::string & msg, const NFSOCK nSockIndex, bool text)
-{
-    auto frame = EncodeFrame(msg.data(), msg.size(), text);
-    return  SendMsg(frame, nSockIndex);;
-}
-
 NFINet* NFWSModule::GetNet()
 {
     return m_pNet;
