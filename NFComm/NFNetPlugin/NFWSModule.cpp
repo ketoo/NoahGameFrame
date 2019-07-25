@@ -528,8 +528,7 @@ std::error_code NFWSModule::DecodeFrame(NetObject* pNetObject)
     case PAYLOAD_MID_LEN:
     {
         auto n = *(uint16_t*)(&tmp[2]);
-        //net2host(n);
-        reallen = n;
+        reallen = NFIMsgHead::NF_NTOHS(n);
         if (reallen < PAYLOAD_MID_LEN)
         {
             // length not canonical
@@ -540,7 +539,7 @@ std::error_code NFWSModule::DecodeFrame(NetObject* pNetObject)
     case PAYLOAD_MAX_LEN:
     {
         reallen = *(uint64_t*)(&tmp[2]);
-        //net2host(reallen);
+        reallen = NFIMsgHead::NF_NTOHLL(reallen);
         if (reallen < 65536)
         {
             // length not canonical
@@ -606,13 +605,13 @@ std::string NFWSModule::EncodeFrame(const char * data, size_t size_, bool text)
     {
         payload_len = static_cast<uint8_t>(PAYLOAD_MID_LEN);
         uint16_t n = (uint16_t)size;
-        //moon::host2net(n);
+        n = NFIMsgHead::NF_HTONS(n);
         res.append(reinterpret_cast<const char*>(&n), sizeof(n));
     }
     else
     {
         payload_len = static_cast<uint8_t>(PAYLOAD_MAX_LEN);
-        //moon::host2net(size);
+        size = NFIMsgHead::NF_HTONLL(size);
         res.append(reinterpret_cast<const char*>(&size), sizeof(size));
     }
 
