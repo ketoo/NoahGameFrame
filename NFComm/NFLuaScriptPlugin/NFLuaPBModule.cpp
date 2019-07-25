@@ -112,13 +112,16 @@ LuaIntf::LuaRef NFLuaPBModule::Decode(const std::string& strMsgTypeName, const s
 	const google::protobuf::Descriptor* pDescriptor = m_pImporter->pool()->FindMessageTypeByName(strMsgTypeName);
     if (!pDescriptor)
     {
-		throw NFException("unknow message struct name: " + strMsgTypeName);
+		//throw NFException("unknow message struct name: " + strMsgTypeName);
+		return LuaIntf::LuaRef(m_pLuaState, nullptr);
     }
 
     const google::protobuf::Message* pProtoType = m_pFactory->GetPrototype(pDescriptor);
     if (!pProtoType)
     {
-		throw NFException("cannot find the message body from factory: " + strMsgTypeName);
+		//throw NFException("cannot find the message body from factory: " + strMsgTypeName);
+
+		return LuaIntf::LuaRef(m_pLuaState, nullptr);
     }
 
     //GC

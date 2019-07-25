@@ -33,6 +33,7 @@
 #include "Dependencies/LuaIntf/LuaIntf.h"
 #include "Dependencies/LuaIntf/LuaRef.h"
 #include <google/protobuf/stubs/common.h>
+#include "NFComm/NFPluginModule/NFINetModule.h"
 #include "NFComm/NFPluginModule/NFIKernelModule.h"
 #include "NFComm/NFPluginModule/NFIClassModule.h"
 #include "NFComm/NFPluginModule/NFILuaScriptModule.h"
@@ -40,7 +41,6 @@
 #include "NFComm/NFPluginModule/NFIScheduleModule.h"
 #include "NFComm/NFPluginModule/NFIElementModule.h"
 #include "NFComm/NFPluginModule/NFINetClientModule.h"
-#include "NFComm/NFPluginModule/NFINetModule.h"
 #include "NFComm/NFPluginModule/NFILogModule.h"
 #include "NFComm/NFPluginModule/NFILuaPBModule.h"
 

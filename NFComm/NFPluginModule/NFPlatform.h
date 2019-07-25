@@ -315,6 +315,7 @@ typedef int64_t NFSOCK;
 #include <unistd.h>
 #define EPOCHFILETIME 11644473600000000ULL
 #else
+#include <WinSock2.h>
 #include <windows.h>
 #include <time.h>
 #include <process.h>
