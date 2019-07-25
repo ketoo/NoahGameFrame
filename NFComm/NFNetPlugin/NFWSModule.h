@@ -34,7 +34,6 @@
 #include "NFComm/NFPluginModule/NFIWSModule.h"
 #include "NFComm/NFPluginModule/NFILogModule.h"
 
-
 class NFWSModule: public NFIWSModule
 {
 public:
@@ -66,8 +65,12 @@ public:
     virtual bool SendMsg(const std::string& msg, const NFSOCK nSockIndex);
     virtual bool SendMsgToAllClient(const std::string& msg);
 
+    //websocket shoud use this function send data
+    virtual bool SendFrame(const std::string& msg, const NFSOCK nSockIndex, bool text = false);
+
     virtual NFINet* GetNet();
 
+    virtual void OnError(const NFSOCK nSockIndex, const std::error_code& e);
 protected:
     void OnReceiveNetPack(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
 
@@ -75,6 +78,14 @@ protected:
 
     void KeepAlive();
 
+    std::error_code HandShake(const NFSOCK nSockIndex, const char* msg, const uint32_t nLen);
+
+    std::error_code DecodeFrame(NetObject* pNetObject);
+
+    std::string EncodeFrame(const char* data, size_t size, bool text);
+    
+
+    std::string HashKey(const char* key, size_t len);
 private:
 
     int mnBufferSize;

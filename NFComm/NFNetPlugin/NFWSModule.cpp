@@ -24,7 +24,57 @@
 */
 
 #include "NFWSModule.h"
+#include "common/base64.hpp"
+#include "common/sha1.hpp"
+#include "common/string_ref.hpp"
+#include "common/http_util.hpp"
+#include "ws_error.hpp"
+#include "NFComm/NFNetPlugin/NFINet.h"
 
+enum ws_connection_state
+{
+    ws_init = 0,
+    ws_handshaked,
+};
+
+enum class opcode : std::uint8_t
+{
+    incomplete = 0,
+    text = 1,
+    binary = 2,
+    rsv3 = 3,
+    rsv4 = 4,
+    rsv5 = 5,
+    rsv6 = 6,
+    rsv7 = 7,
+    close = 8,
+    ping = 9,
+    pong = 10,
+    crsvb = 11,
+    crsvc = 12,
+    crsvd = 13,
+    crsve = 14,
+    crsvf = 15
+};
+
+struct frame_header
+{
+    bool fin;
+    bool rsv1;
+    bool rsv2;
+    bool rsv3;
+    bool mask;
+    opcode op;//4bit
+    uint8_t payload_len;//7 bit
+    std::uint32_t key;
+};
+
+static constexpr size_t HANDSHAKE_MAX_SIZE = 8192;
+
+static constexpr size_t PAYLOAD_MIN_LEN = 125;
+static constexpr size_t PAYLOAD_MID_LEN = 126;
+static constexpr size_t PAYLOAD_MAX_LEN = 127;
+static constexpr size_t FIN_FRAME_FLAG = 0x80;// 1 0 0 0 0 0 0 0
 
 NFWSModule::NFWSModule(NFIPluginManager* p)
 {
@@ -164,17 +214,78 @@ bool NFWSModule::SendMsgToAllClient(const std::string& msg)
 	return bRet;
 }
 
+bool NFWSModule::SendFrame(const std::string & msg, const NFSOCK nSockIndex, bool text)
+{
+    auto frame = EncodeFrame(msg.data(), msg.size(), text);
+    return  SendMsg(frame, nSockIndex);;
+}
+
 NFINet* NFWSModule::GetNet()
 {
     return m_pNet;
+}
+
+void NFWSModule::OnError(const NFSOCK nSockIndex, const std::error_code & e)
+{
+    // may write/print error log
+    // then close socket
 }
 
 void NFWSModule::OnReceiveNetPack(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
 {
     if (nMsgID <= 0)
     {
-        NetObject* pNetObject =  m_pNet->GetNetObject(nSockIndex);
-        //pNetObject->GetBuffLen
+        NetObject* pNetObject = m_pNet->GetNetObject(nSockIndex);
+        if (nullptr != pNetObject)
+        {
+            switch (pNetObject->GetConnectKeyState())
+            {
+            case ws_init:
+            {
+                string_view_t data(pNetObject->GetBuff(), pNetObject->GetBuffLen());
+                auto pos = data.find("\r\n\r\n");
+                if (pos != string_view_t::npos)
+                {
+                    auto ec = HandShake(nSockIndex, data.data(), pos);
+                    if (ec)
+                    {
+                        //mark need send then close here:
+                        SendMsg("HTTP/1.1 400 Bad Request\r\n\r\n", nSockIndex);
+                        //log ec.message()
+                        //OnError(nSockIndex, ec);
+                        return;
+                    }
+                    pNetObject->RemoveBuff(0, pos);
+                    pNetObject->SetConnectKeyState(ws_handshaked);
+                    //may have more data, check it
+                    ec = DecodeFrame(pNetObject);
+                    if (ec)
+                    {
+                        OnError(nSockIndex, ec);
+                        return;
+                    }
+                }
+                else if (data.size() > HANDSHAKE_MAX_SIZE)
+                {
+                    OnError(nSockIndex, websocket::make_error_code(websocket::error::buffer_overflow));
+                    return;
+                }
+                break;
+            }
+            case ws_handshaked:
+            {
+                auto ec = DecodeFrame(pNetObject);
+                if (ec)
+                {
+                    OnError(nSockIndex, ec);
+                    return;
+                }
+                break;
+            }
+            default:
+                break;
+            }
+        }
     }
     else
     {
@@ -249,4 +360,287 @@ void NFWSModule::KeepAlive()
     }
 
     nLastTime = GetPluginManager()->GetNowTime();
+}
+
+std::error_code NFWSModule::HandShake(const NFSOCK nSockIndex, const char * msg, const uint32_t nLen)
+{
+    string_view_t data{ msg,nLen };
+    string_view_t method;
+    string_view_t ignore;
+    string_view_t version;
+    http::util::case_insensitive_multimap_view header;
+    if (!http::util::request_parser::parse(data, method
+        , ignore
+        , ignore
+        , version
+        , header))
+    {
+        return websocket::make_error_code(websocket::error::ws_bad_http_header);
+    }
+
+    if (version<"1.0" || version>"1.1")
+    {
+        return make_error_code(websocket::error::ws_bad_http_version);
+    }
+
+    if (method != "GET")
+        return make_error_code(websocket::error::ws_bad_method);
+
+    string_view_t connection;
+    if (!http::util::try_get_header(header, "connection", connection))
+        return make_error_code(websocket::error::ws_no_connection);
+
+    string_view_t upgrade;
+    if (!http::util::try_get_header(header, "upgrade", upgrade))
+        return make_error_code(websocket::error::ws_no_upgrade);
+
+    if (!http::util::iequal_string(connection, string_view_t{ "upgrade" }))
+        return make_error_code(websocket::error::ws_no_connection_upgrade);
+
+    if (!http::util::iequal_string(upgrade, string_view_t{ "websocket" }))
+        return make_error_code(websocket::error::ws_no_upgrade_websocket);
+
+    string_view_t sec_ws_key;
+    if (!http::util::try_get_header(header, string_view_t{ "sec-websocket-key" }, sec_ws_key))
+        return make_error_code(websocket::error::ws_no_sec_key);
+
+    if (base64_decode(std::string{ sec_ws_key.data(), sec_ws_key.size() }).size() != 16)
+        return make_error_code(websocket::error::ws_bad_sec_key);
+
+    string_view_t sec_ws_version;
+    if (!http::util::try_get_header(header, "sec-websocket-version", sec_ws_version))
+        return make_error_code(websocket::error::ws_no_sec_version);
+
+    if (sec_ws_version != "13")
+    {
+        return make_error_code(websocket::error::ws_bad_sec_version);
+    }
+
+    string_view_t protocol;
+    http::util::try_get_header(header, "sec-websocket-protocol", protocol);
+
+    std::string response;
+    response.append("HTTP/1.1 101 Switching Protocols\r\n");
+    response.append("Upgrade: WebSocket\r\n");
+    response.append("Connection: Upgrade\r\n");
+    response.append("Sec-WebSocket-Accept: ");
+    response.append(HashKey(sec_ws_key.data(), sec_ws_key.size()));
+    response.append("\r\n", 2);
+    if (!protocol.empty())
+    {
+        response.append("Sec-WebSocket-Protocol: ");
+        response.append(protocol.data(), protocol.size());
+        response.append("\r\n", 2);
+    }
+    response.append("\r\n", 2);
+    SendMsg(response, nSockIndex);
+
+    //mark: call on connect
+
+    return std::error_code();
+}
+
+std::error_code NFWSModule::DecodeFrame(NetObject* pNetObject)
+{
+    const char* data = pNetObject->GetBuff();
+    size_t size = pNetObject->GetBuffLen();
+    const uint8_t* tmp = (const uint8_t*)(data);
+
+    if (size < 3)
+    {
+        return std::error_code();
+    }
+
+    size_t need = 2;
+    frame_header fh;
+
+    fh.payload_len = tmp[1] & 0x7F;
+    switch (fh.payload_len)
+    {
+    case PAYLOAD_MID_LEN: need += 2; break;
+    case PAYLOAD_MAX_LEN: need += 8; break;
+    default:
+        break;
+    }
+
+    fh.mask = (tmp[1] & 0x80) != 0;
+    //message client to server must masked.
+    if (!fh.mask)
+    {
+        return make_error_code(websocket::error::ws_bad_unmasked_frame);
+    }
+
+    if (fh.mask)
+    {
+        need += 4;
+    }
+
+    //need more data
+    if (size < need)
+    {
+        return std::error_code();
+    }
+
+    fh.op = static_cast<opcode>(tmp[0] & 0x0F);
+    fh.fin = (tmp[0] & 0x80) != 0;
+    fh.rsv1 = (tmp[0] & 0x40) != 0;
+    fh.rsv2 = (tmp[0] & 0x20) != 0;
+    fh.rsv3 = (tmp[0] & 0x10) != 0;
+
+    switch (fh.op)
+    {
+    case opcode::text:
+    case opcode::binary:
+        if (fh.rsv1 || fh.rsv2 || fh.rsv3)
+        {
+            // reserved bits not cleared
+            return make_error_code(websocket::error::ws_bad_reserved_bits);
+        }
+        break;
+    case opcode::incomplete:
+    {
+        //not support continuation frame
+        return make_error_code(websocket::error::ws_bad_continuation);
+        break;
+    }
+    default:
+        if (!fh.fin)
+        {
+            //not support fragmented control message
+            return make_error_code(websocket::error::ws_bad_control_fragment);
+        }
+        if (fh.payload_len > PAYLOAD_MIN_LEN)
+        {
+            // invalid length for control message
+            return make_error_code(websocket::error::ws_bad_control_size);
+        }
+        if (fh.rsv1 || fh.rsv2 || fh.rsv3)
+        {
+            // reserved bits not cleared
+            return make_error_code(websocket::error::ws_bad_reserved_bits);
+        }
+        break;
+    }
+
+    uint64_t reallen = 0;
+    switch (fh.payload_len)
+    {
+    case PAYLOAD_MID_LEN:
+    {
+        auto n = *(uint16_t*)(&tmp[2]);
+        //net2host(n);
+        reallen = n;
+        if (reallen < PAYLOAD_MID_LEN)
+        {
+            // length not canonical
+            return make_error_code(websocket::error::ws_bad_size);
+        }
+        break;
+    }
+    case PAYLOAD_MAX_LEN:
+    {
+        reallen = *(uint64_t*)(&tmp[2]);
+        //net2host(reallen);
+        if (reallen < 65536)
+        {
+            // length not canonical
+            return make_error_code(websocket::error::ws_bad_size);
+        }
+        break;
+    }
+    default:
+        reallen = fh.payload_len;
+        break;
+    }
+
+    if (size < need + reallen)
+    {
+        //need more data
+        return std::error_code();
+    }
+
+    if (fh.mask)
+    {
+        fh.key = *((uint32_t*)(tmp + (need - sizeof(fh.key))));
+        // unmask data:
+        uint8_t* d = (uint8_t*)(tmp + need);
+        for (uint64_t i = 0; i < reallen; i++)
+        {
+            d[i] = d[i] ^ ((uint8_t*)(&fh.key))[i % 4];
+        }
+    }
+
+    if (fh.op == opcode::close)
+    {
+        //mark: may have error msg
+        return websocket::make_error_code(websocket::error::ws_closed);
+    }
+
+    // mark:
+    // need : control frame len
+    // reallen : payload  len
+    // write on message callback here
+    // callback(data+need,reallen)
+
+    //remove control frame
+    size_t offset = need + reallen;
+    pNetObject->RemoveBuff(0, offset);
+
+    return DecodeFrame(pNetObject);
+}
+
+std::string NFWSModule::EncodeFrame(const char * data, size_t size_, bool text)
+{
+    //may write a buffer with headreserved space
+    std::string res;
+    res.reserve(size_ + 10);
+
+    uint64_t size = size_;
+
+    uint8_t payload_len = 0;
+    if (size <= PAYLOAD_MIN_LEN)
+    {
+        payload_len = static_cast<uint8_t>(size);
+    }
+    else if (size <= UINT16_MAX)
+    {
+        payload_len = static_cast<uint8_t>(PAYLOAD_MID_LEN);
+        uint16_t n = (uint16_t)size;
+        //moon::host2net(n);
+        res.append(reinterpret_cast<const char*>(&n), sizeof(n));
+    }
+    else
+    {
+        payload_len = static_cast<uint8_t>(PAYLOAD_MAX_LEN);
+        //moon::host2net(size);
+        res.append(reinterpret_cast<const char*>(&size), sizeof(size));
+    }
+
+    res.append(reinterpret_cast<const char*>(&payload_len), sizeof(payload_len));
+
+    uint8_t opcode = FIN_FRAME_FLAG | static_cast<uint8_t>(opcode::binary);
+    if (text)
+    {
+        opcode = FIN_FRAME_FLAG | static_cast<uint8_t>(opcode::text);
+    }
+
+    res.append(reinterpret_cast<const char*>(&opcode), sizeof(opcode));
+
+    res.append(data,size);
+
+    return res;
+}
+
+std::string NFWSModule::HashKey(const char * key, size_t len)
+{
+    uint8_t keybuf[60];
+    std::memcpy(keybuf, key, len);
+    std::memcpy(keybuf + len, "258EAFA5-E914-47DA-95CA-C5AB0DC85B11", 36);
+
+    uint8_t shakey[sha1::sha1_context::digest_size] = { 0 };
+    sha1::sha1_context ctx;
+    sha1::init(ctx);
+    sha1::update(ctx, keybuf, sizeof(keybuf));
+    sha1::finish(ctx, shakey);
+    return base64_encode(shakey, sizeof(shakey));
 }
