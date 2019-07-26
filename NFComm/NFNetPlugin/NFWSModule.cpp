@@ -561,14 +561,17 @@ std::error_code NFWSModule::DecodeFrame(const NFSOCK nSockIndex,NetObject* pNetO
     }
     case PAYLOAD_MAX_LEN:
     {
-        reallen = *(uint64_t*)(&tmp[2]);
-        reallen = NFIMsgHead::NF_NTOHLL(reallen);
-        if (reallen < 65536)
-        {
-            // length not canonical
-            return make_error_code(websocket::error::ws_bad_size);
-        }
-        break;
+        //unsupport 64bit len data frame
+        //game server 64K is enough for client to server
+        return make_error_code(websocket::error::ws_bad_size);
+        // reallen = *(uint64_t*)(&tmp[2]);
+        // reallen = NFIMsgHead::NF_NTOHLL(reallen);
+        // if (reallen < 65536)
+        // {
+        //     // length not canonical
+        //     return make_error_code(websocket::error::ws_bad_size);
+        // }
+        // break;
     }
     default:
         reallen = fh.payload_len;
