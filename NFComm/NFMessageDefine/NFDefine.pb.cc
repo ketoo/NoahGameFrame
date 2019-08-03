@@ -305,14 +305,14 @@ void AddDescriptorsImpl() {
       "EELEMENTTYPE_FIRE\020\000\022\026\n\022EELEMENTTYPE_LIGH"
       "T\020\001\022\025\n\021EELEMENTTYPE_WIND\020\002\022\024\n\020EELEMENTTY"
       "PE_ICE\020\003\022\027\n\023EELEMENTTYPE_POISON\020\004\022\025\n\021EEL"
-      "EMENTTYPE_DARK\020\005*\215\001\n\013EBattleType\022\023\n\017EBT_"
+      "EMENTTYPE_DARK\020\005*\244\001\n\013EBattleType\022\023\n\017EBT_"
       "SINGLE_MODE\020\000\022\022\n\016EBT_MULTI_MODE\020\001\022\021\n\rEBT"
       "_CLAN_MODE\020\002\022\026\n\022EBT_CLAN_BOSS_MODE\020\003\022\027\n\023"
       "EBT_WORLD_BOSS_MODE\020\004\022\021\n\rEBT_MOBA_MODE\020\005"
-      "b\006proto3"
+      "\022\025\n\021EBT_SURVIVAL_MODE\020\006b\006proto3"
   };
   ::google::protobuf::DescriptorPool::InternalAddGeneratedFile(
-      descriptor, 10368);
+      descriptor, 10391);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "NFDefine.proto", &protobuf_RegisterTypes);
 }
@@ -998,6 +998,7 @@ bool EBattleType_IsValid(int value) {
     case 3:
     case 4:
     case 5:
+    case 6:
       return true;
     default:
       return false;

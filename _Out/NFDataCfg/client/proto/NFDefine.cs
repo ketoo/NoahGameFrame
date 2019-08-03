@@ -251,10 +251,10 @@ namespace NFMsg {
             "RUVMRU1FTlRUWVBFX0ZJUkUQABIWChJFRUxFTUVOVFRZUEVfTElHSFQQARIV",
             "ChFFRUxFTUVOVFRZUEVfV0lORBACEhQKEEVFTEVNRU5UVFlQRV9JQ0UQAxIX",
             "ChNFRUxFTUVOVFRZUEVfUE9JU09OEAQSFQoRRUVMRU1FTlRUWVBFX0RBUksQ",
-            "BSqNAQoLRUJhdHRsZVR5cGUSEwoPRUJUX1NJTkdMRV9NT0RFEAASEgoORUJU",
+            "BSqkAQoLRUJhdHRsZVR5cGUSEwoPRUJUX1NJTkdMRV9NT0RFEAASEgoORUJU",
             "X01VTFRJX01PREUQARIRCg1FQlRfQ0xBTl9NT0RFEAISFgoSRUJUX0NMQU5f",
             "Qk9TU19NT0RFEAMSFwoTRUJUX1dPUkxEX0JPU1NfTU9ERRAEEhEKDUVCVF9N",
-            "T0JBX01PREUQBWIGcHJvdG8z"));
+            "T0JBX01PREUQBRIVChFFQlRfU1VSVklWQUxfTU9ERRAGYgZwcm90bzM="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(new[] {typeof(global::NFMsg.EGameEventCode), typeof(global::NFMsg.ESynMsgID), typeof(global::NFMsg.EGameMsgID), typeof(global::NFMsg.ESkillType), typeof(global::NFMsg.EItemType), typeof(global::NFMsg.EGameEquipSubType), typeof(global::NFMsg.EGameGemSubType), typeof(global::NFMsg.EGameSupplySubType), typeof(global::NFMsg.EGameScrollSubType), typeof(global::NFMsg.EGameItemExpiredType), typeof(global::NFMsg.EDrawDropItemState), typeof(global::NFMsg.EGuildPowerType), typeof(global::NFMsg.ETaskState), typeof(global::NFMsg.ETaskType), typeof(global::NFMsg.ESceneType), typeof(global::NFMsg.EPVPType), typeof(global::NFMsg.EShopType), typeof(global::NFMsg.ERankType), typeof(global::NFMsg.ENPCType), typeof(global::NFMsg.ESubNPCType_TURRET), typeof(global::NFMsg.EMeleeType), typeof(global::NFMsg.EEffectObjType), typeof(global::NFMsg.EPropertyType), typeof(global::NFMsg.EGameElementType), typeof(global::NFMsg.EBattleType), }, null));
@@ -1329,6 +1329,7 @@ namespace NFMsg {
     [pbr::OriginalName("EBT_CLAN_BOSS_MODE")] EBT_CLAN_BOSS_MODE = 3,
     [pbr::OriginalName("EBT_WORLD_BOSS_MODE")] EBT_WORLD_BOSS_MODE = 4,
     [pbr::OriginalName("EBT_MOBA_MODE")] EBT_MOBA_MODE = 5,
+    [pbr::OriginalName("EBT_SURVIVAL_MODE")] EBT_SURVIVAL_MODE = 6,
   }
 
   #endregion

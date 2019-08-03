@@ -880,12 +880,13 @@ enum EBattleType {
   EBT_CLAN_BOSS_MODE = 3,
   EBT_WORLD_BOSS_MODE = 4,
   EBT_MOBA_MODE = 5,
+  EBT_SURVIVAL_MODE = 6,
   EBattleType_INT_MIN_SENTINEL_DO_NOT_USE_ = ::google::protobuf::kint32min,
   EBattleType_INT_MAX_SENTINEL_DO_NOT_USE_ = ::google::protobuf::kint32max
 };
 LIBPROTOC_EXPORT bool EBattleType_IsValid(int value);
 const EBattleType EBattleType_MIN = EBT_SINGLE_MODE;
-const EBattleType EBattleType_MAX = EBT_MOBA_MODE;
+const EBattleType EBattleType_MAX = EBT_SURVIVAL_MODE;
 const int EBattleType_ARRAYSIZE = EBattleType_MAX + 1;
 
 LIBPROTOC_EXPORT const ::google::protobuf::EnumDescriptor* EBattleType_descriptor();
