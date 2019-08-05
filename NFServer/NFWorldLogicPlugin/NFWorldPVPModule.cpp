@@ -1,4 +1,4 @@
-/*
+﻿/*
             This file is part of: 
                 NoahFrame
             https://github.com/ketoo/NoahGameFrame
@@ -576,6 +576,8 @@ int NFWorldPVPModule::OnMakeSurvivalTeam(const int playerCount, const int robotC
 
 		mTeamList.push_back(teamData);
 	}
+
+	return 0;
 }
 
 int NFWorldPVPModule::OnMakeSurvivalTeam(const std::string & strHeartBeat, const float fTime, const int nCount)
