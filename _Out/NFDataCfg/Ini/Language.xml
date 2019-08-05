@@ -20,6 +20,26 @@ Although they lack wisdom, but they very luckly which often double or even three
 	<Object Id="DescID_Hero017" Chinese="" English="" French="" Spanish="" />
 	<Object Id="DescID_Hero018" Chinese="" English="" French="" Spanish="" />
 	<Object Id="DescID_Hero019" Chinese="" English="" French="" Spanish="" />
+	<Object Id="DescID_NPC001" Chinese="食人魔法师使用蝙蝠球火焰点燃他们的武器，然后追着他们在疯狂的杀戮。虽然他们缺少智慧，但是运气绝对好，经常打出双倍甚至三倍伤害。" English="Ogre mages use bat balls to fire their weapons and then chase them in frenzied killings. 
+Although they lack wisdom, but they very luckly which often double or even three times hurt." French="" Spanish="" />
+	<Object Id="DescID_NPC002" Chinese="矮人热衷于挖矿、铸造、手工艺和收集金银财货." English="A member of a mythical race of short, stocky human-like creatures who are generally skilled in mining and metalworking." French="" Spanish="" />
+	<Object Id="DescID_NPC003" Chinese="狼人是一个力量型近战英雄，拥有巨大的物理能力和可观的移动速度， 擅长推进建筑和增加队伍的攻击力和生命值" English="The wererat is one of several different types of animalistic forms. They are classified as 'lycanthropes', despite the fact that the term reflects a lupine, or wolven" French="" Spanish="" />
+	<Object Id="DescID_NPC004" Chinese="要离是人族最悲情的刺客--神魔大战中，自断一臂假意投靠鬼族，然而再次断臂换来重伤夜王." English="Yao Li was a famed assassin in the Spring and Autumn period." French="" Spanish="" />
+	<Object Id="DescID_NPC005" Chinese="" English="" French="" Spanish="" />
+	<Object Id="DescID_NPC006" Chinese="" English="" French="" Spanish="" />
+	<Object Id="DescID_NPC007" Chinese="" English="" French="" Spanish="" />
+	<Object Id="DescID_NPC008" Chinese="" English="" French="" Spanish="" />
+	<Object Id="DescID_NPC009" Chinese="" English="" French="" Spanish="" />
+	<Object Id="DescID_NPC010" Chinese="" English="" French="" Spanish="" />
+	<Object Id="DescID_NPC011" Chinese="" English="" French="" Spanish="" />
+	<Object Id="DescID_NPC012" Chinese="" English="" French="" Spanish="" />
+	<Object Id="DescID_NPC013" Chinese="" English="" French="" Spanish="" />
+	<Object Id="DescID_NPC014" Chinese="" English="" French="" Spanish="" />
+	<Object Id="DescID_NPC015" Chinese="" English="" French="" Spanish="" />
+	<Object Id="DescID_NPC016" Chinese="" English="" French="" Spanish="" />
+	<Object Id="DescID_NPC017" Chinese="" English="" French="" Spanish="" />
+	<Object Id="DescID_NPC018" Chinese="" English="" French="" Spanish="" />
+	<Object Id="DescID_NPC019" Chinese="" English="" French="" Spanish="" />
 	<Object Id="Desc_ATK_Water" Chinese="攻击药水，在一定时间内攻击翻倍！" English="" French="" Spanish="" />
 	<Object Id="Desc_Avoid_Def_Water" Chinese="在一定时间内，无视对方防御！" English="" French="" Spanish="" />
 	<Object Id="Desc_Card_Hero001" Chinese="英雄卷轴使用后可获得英雄 食人兽 /n 食人兽 介绍。。。" English="" French="" Spanish="" />
@@ -224,6 +244,25 @@ Although they lack wisdom, but they very luckly which often double or even three
 	<Object Id="NameID_Hero018" Chinese="" English="" French="" Spanish="" />
 	<Object Id="NameID_Hero019" Chinese="" English="" French="" Spanish="" />
 	<Object Id="NameID_MP" Chinese="蓝药" English="" French="" Spanish="" />
+	<Object Id="NameID_NPC001" Chinese="兽族 · 食人魔" English="Orcs · Slinger" French="" Spanish="" />
+	<Object Id="NameID_NPC002" Chinese="矮人 · 掘金者" English="Dwarf · Gold Digger" French="" Spanish="" />
+	<Object Id="NameID_NPC003" Chinese="兽族 · 狼人" English="Orcs · Wererat" French="" Spanish="" />
+	<Object Id="NameID_NPC004" Chinese="人族 · 要离" English="Human · Yao Li" French="" Spanish="" />
+	<Object Id="NameID_NPC005" Chinese="" English="" French="" Spanish="" />
+	<Object Id="NameID_NPC006" Chinese="" English="" French="" Spanish="" />
+	<Object Id="NameID_NPC007" Chinese="" English="" French="" Spanish="" />
+	<Object Id="NameID_NPC008" Chinese="" English="" French="" Spanish="" />
+	<Object Id="NameID_NPC009" Chinese="" English="" French="" Spanish="" />
+	<Object Id="NameID_NPC010" Chinese="" English="" French="" Spanish="" />
+	<Object Id="NameID_NPC011" Chinese="" English="" French="" Spanish="" />
+	<Object Id="NameID_NPC012" Chinese="" English="" French="" Spanish="" />
+	<Object Id="NameID_NPC013" Chinese="" English="" French="" Spanish="" />
+	<Object Id="NameID_NPC014" Chinese="" English="" French="" Spanish="" />
+	<Object Id="NameID_NPC015" Chinese="" English="" French="" Spanish="" />
+	<Object Id="NameID_NPC016" Chinese="" English="" French="" Spanish="" />
+	<Object Id="NameID_NPC017" Chinese="" English="" French="" Spanish="" />
+	<Object Id="NameID_NPC018" Chinese="" English="" French="" Spanish="" />
+	<Object Id="NameID_NPC019" Chinese="" English="" French="" Spanish="" />
 	<Object Id="NameID_NoobPack" Chinese="新手礼包" English="" French="" Spanish="" />
 	<Object Id="NameID_WarPack" Chinese="战争礼包" English="" French="" Spanish="" />
 	<Object Id="Name_Item_acid_1" Chinese="减甲炮·一级" English="" French="" Spanish="" />
