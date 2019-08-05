@@ -76,6 +76,9 @@ protected:
 	int RandomTileScene(const int nExceptSceneID);
 
 	int OnMakeTeam(const std::string& strHeartBeat, const float fTime, const int nCount);
+	int OnMakeSurvivalTeam(const int playerCount, const int robotCount);
+	int OnMakeSurvivalTeam(const std::string& strHeartBeat, const float fTime, const int nCount);
+
 	int OnMakeMatch(const std::string& strHeartBeat, const float fTime, const int nCount);
 
 protected:
@@ -87,6 +90,7 @@ protected:
 	class MultiTeam
 	{
 	public:
+		NFMsg::EBattleType battleType;
 		NFGUID leaderID;
 		NFGUID teamID;
 		int avgBattlePoint = 0;
@@ -96,6 +100,7 @@ protected:
 
 	std::list<NFGUID> mSingleModeCandidatePool;
 	std::list<NFGUID> mMultipleModeCandidatePool;
+	std::list<NFGUID> mSurvivalModeCandidatePool;
 	NFMapEx<NFGUID, NFMsg::PVPPlayerInfo> mCandidatePool;
 	std::list<NF_SHARE_PTR<MultiTeam>> mTeamList;
 

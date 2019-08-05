@@ -1,16 +1,46 @@
 <?xml version='1.0' encoding='utf-8' ?>
 <XML>
-	<Object Id="DescID_Dwarf_Warrior" Chinese="矮人热衷于挖矿、铸造、手工艺和收集金银财货." English="A member of a mythical race of short, stocky human-like creatures who are generally skilled in mining and metalworking." French="" Spanish="" />
-	<Object Id="DescID_Orc_Slinger" Chinese="食人魔法师使用蝙蝠球火焰点燃他们的武器，然后追着他们在疯狂的杀戮。虽然他们缺少智慧，但是运气绝对好，经常打出双倍甚至三倍伤害。" English="Ogre mages use bat balls to fire their weapons and then chase them in frenzied killings. 
+	<Object Id="DescID_Hero001" Chinese="食人魔法师使用蝙蝠球火焰点燃他们的武器，然后追着他们在疯狂的杀戮。虽然他们缺少智慧，但是运气绝对好，经常打出双倍甚至三倍伤害。" English="Ogre mages use bat balls to fire their weapons and then chase them in frenzied killings. 
 Although they lack wisdom, but they very luckly which often double or even three times hurt." French="" Spanish="" />
-	<Object Id="DescID_Samurai" Chinese="要离是人族最悲情的刺客--神魔大战中，自断一臂假意投靠鬼族，然而再次断臂换来重伤夜王." English="Yao Li was a famed assassin in the Spring and Autumn period." French="" Spanish="" />
-	<Object Id="DescID_Wererat_Soldier" Chinese="狼人是一个力量型近战英雄，拥有巨大的物理能力和可观的移动速度， 擅长推进建筑和增加队伍的攻击力和生命值" English="The wererat is one of several different types of animalistic forms. They are classified as 'lycanthropes', despite the fact that the term reflects a lupine, or wolven" French="" Spanish="" />
+	<Object Id="DescID_Hero002" Chinese="矮人热衷于挖矿、铸造、手工艺和收集金银财货." English="A member of a mythical race of short, stocky human-like creatures who are generally skilled in mining and metalworking." French="" Spanish="" />
+	<Object Id="DescID_Hero003" Chinese="狼人是一个力量型近战英雄，拥有巨大的物理能力和可观的移动速度， 擅长推进建筑和增加队伍的攻击力和生命值" English="The wererat is one of several different types of animalistic forms. They are classified as 'lycanthropes', despite the fact that the term reflects a lupine, or wolven" French="" Spanish="" />
+	<Object Id="DescID_Hero004" Chinese="要离是人族最悲情的刺客--神魔大战中，自断一臂假意投靠鬼族，然而再次断臂换来重伤夜王." English="Yao Li was a famed assassin in the Spring and Autumn period." French="" Spanish="" />
+	<Object Id="DescID_Hero005" Chinese="" English="" French="" Spanish="" />
+	<Object Id="DescID_Hero006" Chinese="" English="" French="" Spanish="" />
+	<Object Id="DescID_Hero007" Chinese="" English="" French="" Spanish="" />
+	<Object Id="DescID_Hero008" Chinese="" English="" French="" Spanish="" />
+	<Object Id="DescID_Hero009" Chinese="" English="" French="" Spanish="" />
+	<Object Id="DescID_Hero010" Chinese="" English="" French="" Spanish="" />
+	<Object Id="DescID_Hero011" Chinese="" English="" French="" Spanish="" />
+	<Object Id="DescID_Hero012" Chinese="" English="" French="" Spanish="" />
+	<Object Id="DescID_Hero013" Chinese="" English="" French="" Spanish="" />
+	<Object Id="DescID_Hero014" Chinese="" English="" French="" Spanish="" />
+	<Object Id="DescID_Hero015" Chinese="" English="" French="" Spanish="" />
+	<Object Id="DescID_Hero016" Chinese="" English="" French="" Spanish="" />
+	<Object Id="DescID_Hero017" Chinese="" English="" French="" Spanish="" />
+	<Object Id="DescID_Hero018" Chinese="" English="" French="" Spanish="" />
+	<Object Id="DescID_Hero019" Chinese="" English="" French="" Spanish="" />
 	<Object Id="Desc_ATK_Water" Chinese="攻击药水，在一定时间内攻击翻倍！" English="" French="" Spanish="" />
 	<Object Id="Desc_Avoid_Def_Water" Chinese="在一定时间内，无视对方防御！" English="" French="" Spanish="" />
-	<Object Id="Desc_Card_Dwarf_Warrior" Chinese="英雄卷轴使用后可获得英雄 矮人 /n 食人兽 介绍。。。" English="" French="" Spanish="" />
-	<Object Id="Desc_Card_Orc_Slinger" Chinese="英雄卷轴使用后可获得英雄 食人兽 /n 食人兽 介绍。。。" English="" French="" Spanish="" />
-	<Object Id="Desc_Card_Samurai" Chinese="英雄卷轴使用后可获得英雄  溪涧武士 /n 食人兽 介绍。。。" English="" French="" Spanish="" />
-	<Object Id="Desc_Card_Wererat_Soldier" Chinese="英雄卷轴使用后可获得英雄 鼠人 /n 食人兽 介绍。。。" English="" French="" Spanish="" />
+	<Object Id="Desc_Card_Hero001" Chinese="英雄卷轴使用后可获得英雄 食人兽 /n 食人兽 介绍。。。" English="" French="" Spanish="" />
+	<Object Id="Desc_Card_Hero002" Chinese="英雄卷轴使用后可获得英雄 矮人 /n 食人兽 介绍。。。" English="" French="" Spanish="" />
+	<Object Id="Desc_Card_Hero003" Chinese="英雄卷轴使用后可获得英雄 鼠人 /n 食人兽 介绍。。。" English="" French="" Spanish="" />
+	<Object Id="Desc_Card_Hero004" Chinese="英雄卷轴使用后可获得英雄  溪涧武士 /n 食人兽 介绍。。。" English="" French="" Spanish="" />
+	<Object Id="Desc_Card_Hero005" Chinese="" English="" French="" Spanish="" />
+	<Object Id="Desc_Card_Hero006" Chinese="" English="" French="" Spanish="" />
+	<Object Id="Desc_Card_Hero007" Chinese="" English="" French="" Spanish="" />
+	<Object Id="Desc_Card_Hero008" Chinese="" English="" French="" Spanish="" />
+	<Object Id="Desc_Card_Hero009" Chinese="" English="" French="" Spanish="" />
+	<Object Id="Desc_Card_Hero010" Chinese="" English="" French="" Spanish="" />
+	<Object Id="Desc_Card_Hero011" Chinese="" English="" French="" Spanish="" />
+	<Object Id="Desc_Card_Hero012" Chinese="" English="" French="" Spanish="" />
+	<Object Id="Desc_Card_Hero013" Chinese="" English="" French="" Spanish="" />
+	<Object Id="Desc_Card_Hero014" Chinese="" English="" French="" Spanish="" />
+	<Object Id="Desc_Card_Hero015" Chinese="" English="" French="" Spanish="" />
+	<Object Id="Desc_Card_Hero016" Chinese="" English="" French="" Spanish="" />
+	<Object Id="Desc_Card_Hero017" Chinese="" English="" French="" Spanish="" />
+	<Object Id="Desc_Card_Hero018" Chinese="" English="" French="" Spanish="" />
+	<Object Id="Desc_Card_Hero019" Chinese="" English="" French="" Spanish="" />
 	<Object Id="Desc_Damage_MP_Water" Chinese="进入范围内的英雄，自动丢蓝！" English="" French="" Spanish="" />
 	<Object Id="Desc_Diamond_Item1" Chinese="一包钻石，使用后获得钻石。" English="" French="" Spanish="" />
 	<Object Id="Desc_GEM_ATK" Chinese="攻击宝石！" English="" French="" Spanish="" />
@@ -143,13 +173,27 @@ Although they lack wisdom, but they very luckly which often double or even three
 	<Object Id="LPID_SUCKBLOOD" Chinese="吸血" English="Langage_1" French="" Spanish="" />
 	<Object Id="NameID_ATK_Water" Chinese="攻击药水" English="" French="" Spanish="" />
 	<Object Id="NameID_Avoid_Def_Water" Chinese="防御药水" English="" French="" Spanish="" />
-	<Object Id="NameID_Card_Dwarf_Warrior" Chinese="矮人·英雄卷轴" English="" French="" Spanish="" />
-	<Object Id="NameID_Card_Orc_Slinger" Chinese="食人兽·英雄卷轴" English="" French="" Spanish="" />
-	<Object Id="NameID_Card_Samurai" Chinese="溪涧武士·英雄卷轴" English="" French="" Spanish="" />
-	<Object Id="NameID_Card_Wererat_Soldier" Chinese="鼠人·英雄卷轴" English="" French="" Spanish="" />
+	<Object Id="NameID_Card_Hero001" Chinese="食人兽·英雄卷轴" English="" French="" Spanish="" />
+	<Object Id="NameID_Card_Hero002" Chinese="矮人·英雄卷轴" English="" French="" Spanish="" />
+	<Object Id="NameID_Card_Hero003" Chinese="鼠人·英雄卷轴" English="" French="" Spanish="" />
+	<Object Id="NameID_Card_Hero004" Chinese="溪涧武士·英雄卷轴" English="" French="" Spanish="" />
+	<Object Id="NameID_Card_Hero005" Chinese="" English="" French="" Spanish="" />
+	<Object Id="NameID_Card_Hero006" Chinese="" English="" French="" Spanish="" />
+	<Object Id="NameID_Card_Hero007" Chinese="" English="" French="" Spanish="" />
+	<Object Id="NameID_Card_Hero008" Chinese="" English="" French="" Spanish="" />
+	<Object Id="NameID_Card_Hero009" Chinese="" English="" French="" Spanish="" />
+	<Object Id="NameID_Card_Hero010" Chinese="" English="" French="" Spanish="" />
+	<Object Id="NameID_Card_Hero011" Chinese="" English="" French="" Spanish="" />
+	<Object Id="NameID_Card_Hero012" Chinese="" English="" French="" Spanish="" />
+	<Object Id="NameID_Card_Hero013" Chinese="" English="" French="" Spanish="" />
+	<Object Id="NameID_Card_Hero014" Chinese="" English="" French="" Spanish="" />
+	<Object Id="NameID_Card_Hero015" Chinese="" English="" French="" Spanish="" />
+	<Object Id="NameID_Card_Hero016" Chinese="" English="" French="" Spanish="" />
+	<Object Id="NameID_Card_Hero017" Chinese="" English="" French="" Spanish="" />
+	<Object Id="NameID_Card_Hero018" Chinese="" English="" French="" Spanish="" />
+	<Object Id="NameID_Card_Hero019" Chinese="" English="" French="" Spanish="" />
 	<Object Id="NameID_Damage_MP_Water" Chinese="消魔药水" English="" French="" Spanish="" />
 	<Object Id="NameID_Diamond_Item1" Chinese="钻石" English="" French="" Spanish="" />
-	<Object Id="NameID_Dwarf_Warrior" Chinese="矮人 · 掘金者" English="Dwarf · Gold Digger" French="" Spanish="" />
 	<Object Id="NameID_GEM_ATK" Chinese="攻击宝石" English="" French="" Spanish="" />
 	<Object Id="NameID_GEM_DEF" Chinese="防御宝石" English="" French="" Spanish="" />
 	<Object Id="NameID_GEM_FIRE" Chinese="火属性宝石" English="" French="" Spanish="" />
@@ -160,12 +204,28 @@ Although they lack wisdom, but they very luckly which often double or even three
 	<Object Id="NameID_Gold_Item1" Chinese="金币" English="" French="" Spanish="" />
 	<Object Id="NameID_HOLY_WATER" Chinese="圣水" English="" French="" Spanish="" />
 	<Object Id="NameID_HP" Chinese="血药" English="" French="" Spanish="" />
+	<Object Id="NameID_Hero001" Chinese="兽族 · 食人魔" English="Orcs · Slinger" French="" Spanish="" />
+	<Object Id="NameID_Hero002" Chinese="矮人 · 掘金者" English="Dwarf · Gold Digger" French="" Spanish="" />
+	<Object Id="NameID_Hero003" Chinese="兽族 · 狼人" English="Orcs · Wererat" French="" Spanish="" />
+	<Object Id="NameID_Hero004" Chinese="人族 · 要离" English="Human · Yao Li" French="" Spanish="" />
+	<Object Id="NameID_Hero005" Chinese="" English="" French="" Spanish="" />
+	<Object Id="NameID_Hero006" Chinese="" English="" French="" Spanish="" />
+	<Object Id="NameID_Hero007" Chinese="" English="" French="" Spanish="" />
+	<Object Id="NameID_Hero008" Chinese="" English="" French="" Spanish="" />
+	<Object Id="NameID_Hero009" Chinese="" English="" French="" Spanish="" />
+	<Object Id="NameID_Hero010" Chinese="" English="" French="" Spanish="" />
+	<Object Id="NameID_Hero011" Chinese="" English="" French="" Spanish="" />
+	<Object Id="NameID_Hero012" Chinese="" English="" French="" Spanish="" />
+	<Object Id="NameID_Hero013" Chinese="" English="" French="" Spanish="" />
+	<Object Id="NameID_Hero014" Chinese="" English="" French="" Spanish="" />
+	<Object Id="NameID_Hero015" Chinese="" English="" French="" Spanish="" />
+	<Object Id="NameID_Hero016" Chinese="" English="" French="" Spanish="" />
+	<Object Id="NameID_Hero017" Chinese="" English="" French="" Spanish="" />
+	<Object Id="NameID_Hero018" Chinese="" English="" French="" Spanish="" />
+	<Object Id="NameID_Hero019" Chinese="" English="" French="" Spanish="" />
 	<Object Id="NameID_MP" Chinese="蓝药" English="" French="" Spanish="" />
 	<Object Id="NameID_NoobPack" Chinese="新手礼包" English="" French="" Spanish="" />
-	<Object Id="NameID_Orc_Slinger" Chinese="兽族 · 食人魔" English="Orcs · Slinger" French="" Spanish="" />
-	<Object Id="NameID_Samurai" Chinese="人族 · 要离" English="Human · Yao Li" French="" Spanish="" />
 	<Object Id="NameID_WarPack" Chinese="战争礼包" English="" French="" Spanish="" />
-	<Object Id="NameID_Wererat_Soldier" Chinese="兽族 · 狼人" English="Orcs · Wererat" French="" Spanish="" />
 	<Object Id="Name_Item_acid_1" Chinese="减甲炮·一级" English="" French="" Spanish="" />
 	<Object Id="Name_Item_acid_2" Chinese="减甲炮·二级" English="" French="" Spanish="" />
 	<Object Id="Name_Item_acid_3" Chinese="减甲炮·三级" English="" French="" Spanish="" />
