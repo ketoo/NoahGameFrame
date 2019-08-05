@@ -1084,6 +1084,7 @@ namespace NFrame
 		static const std::string& Port(){ static std::string x = "Port"; return x; };// int
 		static const std::string& ServerID(){ static std::string x = "ServerID"; return x; };// int
 		static const std::string& Type(){ static std::string x = "Type"; return x; };// int
+		static const std::string& WSPort(){ static std::string x = "WSPort"; return x; };// int
 		static const std::string& WebPort(){ static std::string x = "WebPort"; return x; };// int
 		// Record
 

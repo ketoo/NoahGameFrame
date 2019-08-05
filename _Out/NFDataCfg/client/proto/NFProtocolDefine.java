@@ -1055,6 +1055,7 @@ package nframe;
 		public static final String Port = "Port";// int
 		public static final String ServerID = "ServerID";// int
 		public static final String Type = "Type";// int
+		public static final String WSPort = "WSPort";// int
 		public static final String WebPort = "WebPort";// int
 		// Record
 
