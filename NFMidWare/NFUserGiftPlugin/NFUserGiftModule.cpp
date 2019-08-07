@@ -57,28 +57,26 @@ bool NFUserGiftModule::AfterInit()
 	m_pCommonConfigModule->LoadConfig(strInitPropertyConfig);
 	m_pCommonConfigModule->LoadConfig(stGMConfig);
 
-	for (int i = 1; i < 100; ++i)
+	std::string strGiftKey = "Gift";
+	std::vector<std::string> xList = m_pCommonConfigModule->GetSubKeyList(strGiftKey);
+	for (int i = 0; i < xList.size(); ++i)
 	{
-		std::vector<std::string> xList = m_pCommonConfigModule->GetSubKeyList(std::to_string(i));
-		for (int j = 0; j < xList.size(); ++j)
-		{
-			const std::string& strItemCnfID = m_pCommonConfigModule->GetFieldString(std::to_string(i), xList.at(j), "Item");
-			const int nItemCount = m_pCommonConfigModule->GetFieldInt(std::to_string(i), xList.at(j), "Count");
+		const std::string& strItemCnfID = xList.at(i);
+		const int nItemCount = m_pCommonConfigModule->GetFieldInt(strGiftKey, strItemCnfID, "Count");
 			
-			NF_SHARE_PTR<std::vector<std::string>> xItemList = mxGiftMap.GetElement(i);
-			if (!xItemList)
-			{
-				xItemList = NF_SHARE_PTR<std::vector<std::string>>(NF_NEW std::vector<std::string>());
-				mxGiftMap.AddElement(i, xItemList);
-			}
+		NF_SHARE_PTR<std::vector<std::string>> xItemList = mxGiftMap.GetElement(1);
+		if (!xItemList)
+		{
+			xItemList = NF_SHARE_PTR<std::vector<std::string>>(NF_NEW std::vector<std::string>());
+			mxGiftMap.AddElement(1, xItemList);
+		}
 
-			for (int i = 0; i < nItemCount; ++i)
-			{
-				xItemList->push_back(strItemCnfID);
-			}
+		for (int j = 0; j < nItemCount; ++j)
+		{
+			xItemList->push_back(strItemCnfID);
 		}
 	}
-	
+
 	return true;
 }
 
