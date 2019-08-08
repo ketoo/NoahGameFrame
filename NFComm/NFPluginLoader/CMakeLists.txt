@@ -61,6 +61,14 @@ target_link_libraries(NFPluginLoader NFSkillPlugin)
 target_link_libraries(NFPluginLoader NFTaskPlugin)
 target_link_libraries(NFPluginLoader NFUserGiftPlugin)
 
+target_link_libraries(NFPluginLoader Tutorial1)
+target_link_libraries(NFPluginLoader Tutorial2)
+target_link_libraries(NFPluginLoader Tutorial3Plugin)
+target_link_libraries(NFPluginLoader Tutorial4Plugin)
+target_link_libraries(NFPluginLoader Tutorial5)
+target_link_libraries(NFPluginLoader Tutorial6)
+target_link_libraries(NFPluginLoader Tutorial7)
+
 
 if(UNIX)
 	add_dependencies(NFPluginLoader NFCore)

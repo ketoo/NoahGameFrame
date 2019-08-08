@@ -29,6 +29,7 @@
 
 #include <map>
 #include <string>
+#include "NFComm/NFPluginModule/NFPlatform.h"
 #include "NFComm/NFPluginModule/NFIThreadPoolModule.h"
 #include "NFComm/NFCore/NFQueue.hpp"
 
@@ -128,6 +129,8 @@ protected:
 private:
 
 	NFQueue<NFThreaTaskResult> mTaskResult;
+	
+	//std::vector<NF_SHARE_PTR<NFThreadCell>> mThreadPool;
 	NFConsistentHashMapEx<int, NFThreadCell> mThreadPool;
 };
 

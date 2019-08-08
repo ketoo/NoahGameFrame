@@ -111,6 +111,15 @@
 #include "NFMidWare/NFSkillPlugin/NFSkillPlugin.h"
 #include "NFMidWare/NFTaskPlugin/NFTaskPlugin.h"
 #include "NFMidWare/NFUserGiftPlugin/NFUserGiftPlugin.h"
+//TUTORIAL
+#include "Tutorial/Tutorial1/Tutorial1.h"
+#include "Tutorial/Tutorial2/Tutorial2.h"
+#include "Tutorial/Tutorial3/Tutorial3Plugin.h"
+#include "Tutorial/Tutorial4/Tutorial4Plugin.h"
+#include "Tutorial/Tutorial5/Tutorial5.h"
+#include "Tutorial/Tutorial6/Tutorial6.h"
+#include "Tutorial/Tutorial7/Tutorial7.h"
+
 #endif
 
 void CoroutineExecute(void* arg)
@@ -297,6 +306,16 @@ bool NFPluginManager::LoadStaticPlugin()
 	CREATE_PLUGIN(this, NFSkillPlugin)
 	CREATE_PLUGIN(this, NFTaskPlugin)
 	CREATE_PLUGIN(this, NFUserGiftPlugin)
+
+//TUTORIAL
+	CREATE_PLUGIN(this, Tutorial1)
+	CREATE_PLUGIN(this, Tutorial2)
+	CREATE_PLUGIN(this, Tutorial3Plugin)
+	CREATE_PLUGIN(this, Tutorial4Plugin)
+	CREATE_PLUGIN(this, Tutorial5)
+	CREATE_PLUGIN(this, Tutorial6)
+	CREATE_PLUGIN(this, Tutorial7)
+
 #endif
 
     return true;

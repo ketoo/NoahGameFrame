@@ -82,6 +82,9 @@ public:
 	NFIPlugin()
 	{
 	}
+    virtual ~NFIPlugin()
+	{
+	}
 
     virtual const int GetPluginVersion() = 0;
 

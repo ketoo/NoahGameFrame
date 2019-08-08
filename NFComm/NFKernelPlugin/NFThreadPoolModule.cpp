@@ -42,7 +42,7 @@ NFThreadPoolModule::~NFThreadPoolModule()
 
 bool NFThreadPoolModule::Init()
 {
-	for (int i = 0; i < 10; ++i)
+	for (int i = 0; i < NF_ACTOR_THREAD_COUNT; ++i)
 	{
 		mThreadPool.AddElement(i, NF_SHARE_PTR<NFThreadCell>(NF_NEW NFThreadCell(this)));
 	}

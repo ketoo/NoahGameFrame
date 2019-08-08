@@ -95,35 +95,42 @@ bool NFHelloWorld4Module::AfterInit()
 	}
 	*/
 
+	std::cout << "start Benchmarks " << std::endl;
+
+	int timeStart = NFGetTimeMS();
+	//10M
 	//example 4
-	for (int i = 0; i < 100; ++i)
+	for (int i = 0; i < 10000000; ++i)
 	{
 		m_pThreadPoolModule->DoAsyncTask("sas",
 			[](const NFGUID taskID, const std::string& strData) -> std::string
 		{
-			std::cout << "example 4 thread id: " << std::this_thread::get_id() << " task id:" << taskID.ToString() << " task data:" << strData << std::endl;
+			//std::cout << "example 4 thread id: " << std::this_thread::get_id() << " task id:" << taskID.ToString() << " task data:" << strData << std::endl;
 			return "aaaaaresulttttttt";
 		},
 			[](const NFGUID taskID, const std::string& strData) -> void
 		{
-			std::cout << "example 4 thread id: " << std::this_thread::get_id() << " task id:" << taskID.ToString() << " task result:" << strData << std::endl;
+			//std::cout << "example 4 thread id: " << std::this_thread::get_id() << " task id:" << taskID.ToString() << " task result:" << strData << std::endl;
 		});
 	}
 
+	int timeEnd = NFGetTimeMS();
+	std::cout << "end Benchmarks, cost: " << timeEnd - timeStart  << std::endl;
 	//example 5
-	for (int i = 0; i < 100; ++i)
+	for (int i = 0; i < 10000000; ++i)
 	{
 		m_pThreadPoolModule->DoAsyncTask(i, NFGUID(0, i), "sas",
 			[](const NFGUID taskID, const std::string& strData) -> std::string
 		{
-			std::cout << "example 5 thread id: " << std::this_thread::get_id() << " task id:" << taskID.ToString() << " task data:" << strData << std::endl;
+			//std::cout << "example 5 thread id: " << std::this_thread::get_id() << " task id:" << taskID.ToString() << " task data:" << strData << std::endl;
 			return "aaaaaresulttttttt";
 		},
 			[](const NFGUID taskID, const std::string& strData) -> void
 		{
-			std::cout << "example 5 thread id: " << std::this_thread::get_id() << " task id:" << taskID.ToString() << " task result:" << strData << std::endl;
+			//std::cout << "example 5 thread id: " << std::this_thread::get_id() << " task id:" << taskID.ToString() << " task result:" << strData << std::endl;
 		});
 	}
+
 
 
 	std::cout << "Hello, world4, AfterInit end" << std::endl;

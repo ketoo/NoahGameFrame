@@ -11,19 +11,21 @@ add_library(Tutorial3Plugin STATIC
 set_target_properties( Tutorial3Plugin PROPERTIES OUTPUT_NAME_DEBUG "Tutorial3Plugin_d")
 set_target_properties( Tutorial3Plugin PROPERTIES PREFIX "")
 set_target_properties( Tutorial3Plugin PROPERTIES 
-	FOLDER "Tutorial"
+	FOLDER "Tutorial/Tutorial3"
 	ARCHIVE_OUTPUT_DIRECTORY ${NFOutPutDir}
 	RUNTIME_OUTPUT_DIRECTORY ${NFOutPutDir}
 	LIBRARY_OUTPUT_DIRECTORY ${NFOutPutDir} )
 link_NFSDK("Tutorial3Plugin")
 
 if(UNIX)
+	target_link_libraries(Tutorial3Plugin -static-libstdc++)
 	add_definitions(
 		-D_USRDLL
 		-DELPP_NO_DEFAULT_LOG_FILE
 	)
 
 else()
+	target_link_libraries(Tutorial3Plugin -static-libstdc++)
 	add_definitions(
 		-DWIN
 		-D_USRDLL
