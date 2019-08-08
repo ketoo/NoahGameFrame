@@ -2,10 +2,10 @@
 
 export LC_ALL="C"
 
-cd Debug
+cd Release
 
-chmod -R 777  NFPluginLoader_d
+chmod -R 777  NFPluginLoader
 
-./NFPluginLoader_d Server=TutorialServer ID=0 Tutorial1.xml
+./NFPluginLoader Server=TutorialServer ID=0 Tutorial4.xml
 
 ps -A|grep NF
