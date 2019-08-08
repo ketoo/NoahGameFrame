@@ -4,6 +4,7 @@
     // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
     "version": "0.2.0",
     "configurations": [
+        
         {
             "name": "GameServer",
             "type": "cppdbg",
@@ -95,6 +96,20 @@
             "program": "${workspaceFolder}/_Out/Debug/NFPluginLoader_d",
             "processId": "${command:pickProcess}",
             "MIMode": "lldb"
-        }
+        },
+        {
+            "name": "Test",
+            "type": "cppdbg",
+            "request": "launch",
+            //"request": "attach",
+            "program": "${workspaceFolder}/_Out/Debug/NFPluginLoader_d",
+            "args": ["Server=TutorialServer", "ID=0", "Tutorial4.xml"],
+            "stopAtEntry": false,
+            "cwd": "${workspaceFolder}/_Out/Debug/",
+            "environment": [],
+            "externalConsole": true,
+            //for mac lldb
+            "MIMode": "lldb"
+        },
     ]
 }
