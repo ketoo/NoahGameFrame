@@ -50,7 +50,7 @@ const int Tutorial7::GetPluginVersion()
 
 const std::string Tutorial7::GetPluginName()
 {
-	return GET_CLASS_NAME(Tutorial6);
+	return GET_CLASS_NAME(Tutorial7);
 }
 
 void Tutorial7::Install()

@@ -11,19 +11,21 @@ add_library(Tutorial2 STATIC
 set_target_properties( Tutorial2 PROPERTIES OUTPUT_NAME_DEBUG "Tutorial2_d")
 set_target_properties( Tutorial2 PROPERTIES PREFIX "")
 set_target_properties( Tutorial2 PROPERTIES 
-	FOLDER "Tutorial"
+	FOLDER "Tutorial/Tutorial2"
 	ARCHIVE_OUTPUT_DIRECTORY ${NFOutPutDir}
 	RUNTIME_OUTPUT_DIRECTORY ${NFOutPutDir}
 	LIBRARY_OUTPUT_DIRECTORY ${NFOutPutDir} )
 link_NFSDK("Tutorial2")
 
 if(UNIX)
+	target_link_libraries(Tutorial2 -static-libstdc++)
 	add_definitions(
 		-D_USRDLL
 		-DELPP_NO_DEFAULT_LOG_FILE
 	)
 
 else()
+	target_link_libraries(Tutorial2 -static-libstdc++)
 	add_definitions(
 		-DWIN
 		-D_USRDLL
