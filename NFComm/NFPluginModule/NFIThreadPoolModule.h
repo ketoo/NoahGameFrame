@@ -41,16 +41,10 @@ public:
 
 	void DoAsyncTask(const std::string& data, TASK_PROCESS_FUNCTOR asyncFunctor, TASK_PROCESS_RESULT_FUNCTOR functor_end)
 	{
-		return DoAsyncTask(0, NFGUID(), data, asyncFunctor, functor_end);
+		return DoAsyncTask(NFGUID(), data, asyncFunctor, functor_end);
 	}
 
-	void DoAsyncTask(const NFGUID taskID, const std::string& data,
-		TASK_PROCESS_FUNCTOR asyncFunctor, TASK_PROCESS_RESULT_FUNCTOR functor_end)
-	{
-		return DoAsyncTask(0, taskID, data,  asyncFunctor, functor_end);
-	}
-
-	virtual void DoAsyncTask(const int hash, const NFGUID taskID, const std::string& data,
+	virtual void DoAsyncTask(const NFGUID taskID, const std::string& data,
 		TASK_PROCESS_FUNCTOR asyncFunctor, TASK_PROCESS_RESULT_FUNCTOR functor_end) = 0;
 
 	/////repush the result

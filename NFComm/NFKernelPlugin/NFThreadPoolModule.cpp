@@ -74,7 +74,7 @@ bool NFThreadPoolModule::Execute()
     return true;
 }
 
-void NFThreadPoolModule::DoAsyncTask(const int hash, const NFGUID taskID, const std::string & data, TASK_PROCESS_FUNCTOR asyncFunctor, TASK_PROCESS_RESULT_FUNCTOR functor_end)
+void NFThreadPoolModule::DoAsyncTask(const NFGUID taskID, const std::string & data, TASK_PROCESS_FUNCTOR asyncFunctor, TASK_PROCESS_RESULT_FUNCTOR functor_end)
 {
 	NFThreadTask task;
 	task.nTaskID = taskID;

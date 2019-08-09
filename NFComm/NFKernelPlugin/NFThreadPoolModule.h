@@ -116,7 +116,7 @@ public:
 
     virtual bool Execute();
 
-	virtual void DoAsyncTask(const int hash, const NFGUID taskID, const std::string& data,
+	virtual void DoAsyncTask(const NFGUID taskID, const std::string& data,
 		TASK_PROCESS_FUNCTOR asyncFunctor, TASK_PROCESS_RESULT_FUNCTOR functor_end);
 
 	virtual void TaskResult(const NFGUID taskID, const std::string& resultData, TASK_PROCESS_RESULT_FUNCTOR functor_end);
