@@ -64,6 +64,7 @@ void NFProxyLogicModule::OnLagTestProcess(const NFSOCK nSockIndex, const int nMs
 	std::string msgDatag(msg, nLen);
 	m_pNetModule->SendMsgWithOutHead(NFMsg::EGameMsgID::EGEC_ACK_GATE_LAG_TEST, msgDatag, nSockIndex);
 
+	//TODO improve performance
 	NetObject* pNetObject = m_pNetModule->GetNet()->GetNetObject(nSockIndex);
 	if (pNetObject)
 	{

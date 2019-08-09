@@ -82,16 +82,14 @@ protected:
 		while (true)
 		{
 			std::this_thread::sleep_for(std::chrono::milliseconds(1));
-			if (!mTaskList.Empty())
+			
+			//pick the first task and do it
+			NFThreadTask task;
+			if (mTaskList.TryPop(task))
 			{
-				//pick the first task and do it
-				NFThreadTask task;
-				if (mTaskList.TryPop(task))
-				{
-					std::string resultData = task.xThreadFunc(task.nTaskID, task.data);
-					//repush the result to the main thread
-					m_pThreadPoolModule->TaskResult(task.nTaskID, resultData, task.xEndFunc);
-				}
+				std::string resultData = task.xThreadFunc(task.nTaskID, task.data);
+				//repush the result to the main thread
+				m_pThreadPoolModule->TaskResult(task.nTaskID, resultData, task.xEndFunc);
 			}
 		}
 	}

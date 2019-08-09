@@ -101,6 +101,7 @@
     <ClInclude Include="NFObject.h" />
     <ClInclude Include="NFProperty.h" />
     <ClInclude Include="NFPropertyManager.h" />
+    <ClInclude Include="NFQueue.hpp" />
     <ClInclude Include="NFRecordManager.h" />
     <ClInclude Include="NFDataList.hpp" />
     <ClInclude Include="NFDateTime.hpp" />
