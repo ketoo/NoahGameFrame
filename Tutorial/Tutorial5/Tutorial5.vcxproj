@@ -104,11 +104,11 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
       </PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="HelloWorld.cpp" />
+    <ClCompile Include="HelloWorld5.cpp" />
     <ClCompile Include="Tutorial5.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="HelloWorld.h" />
+    <ClInclude Include="HelloWorld5.h" />
     <ClInclude Include="Tutorial5.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
