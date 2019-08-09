@@ -101,6 +101,9 @@
     <ClInclude Include="NFProperty.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="NFQueue.hpp">
+      <Filter>Unit</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="NFException.cpp">

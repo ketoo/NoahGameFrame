@@ -26,6 +26,8 @@
 #include "HelloWorld4Module.h"
 #include "NFComm/NFMessageDefine/NFProtocolDefine.hpp"
 #include "NFComm/NFPluginModule/NFIEventModule.h"
+#include "NFComm/NFCore/NFQueue.hpp"
+#include "Dependencies/concurrentqueue/concurrentqueue.h"
 
 bool NFHelloWorld4Module::Init()
 {
@@ -97,26 +99,161 @@ bool NFHelloWorld4Module::AfterInit()
 
 	std::cout << "start Benchmarks " << std::endl;
 
-	int timeStart = NFGetTimeMS();
-	//10M
-	//example 4
-	for (int i = 0; i < 10000000; ++i)
 	{
-		m_pThreadPoolModule->DoAsyncTask("sas",
-			[](const NFGUID taskID, const std::string& strData) -> std::string
+		std::cout << "Test for ConcurrentQueue" << std::endl;
+
+		moodycamel::ConcurrentQueue<int> q;
+		//100M
+		int messageCount = 100000000;
+
+		std::thread threads[6];
+
+		// Producers
+		for (int i = 0; i != 4; ++i)
 		{
-			//std::cout << "example 4 thread id: " << std::this_thread::get_id() << " task id:" << taskID.ToString() << " task data:" << strData << std::endl;
-			return "aaaaaresulttttttt";
-		},
-			[](const NFGUID taskID, const std::string& strData) -> void
+			threads[i] = std::thread(
+			[&]() 
+			{
+
+				int timeStart = NFGetTimeMS();
+
+				for (int j = 0; j != messageCount; ++j)
+				{
+					q.enqueue(j);
+				}
+
+				int timeEnd = NFGetTimeMS();
+				int timeCost = timeEnd - timeStart;
+				std::cout << "end Benchmarks, cost: " << timeCost << "ms for " << messageCount << ", qps: " << (messageCount / timeCost) * 1000 << std::endl;
+			});
+		}
+
+		// Consumers
+		for (int i = 4; i != 6; ++i) {
+			threads[i] = std::thread([&]() 
+			{
+				int item;
+				for (int j = 0; j != 20; ++j)
+				{
+					//if (q.try_dequeue(item))
+					{
+
+					}
+				}
+			});
+		}
+
+
+		// Wait for all threads
+		for (int i = 0; i != 6; ++i)
 		{
-			//std::cout << "example 4 thread id: " << std::this_thread::get_id() << " task id:" << taskID.ToString() << " task result:" << strData << std::endl;
-		});
+			threads[i].join();
+		}
+
+		// Collect any leftovers (could be some if e.g. consumers finish before producers)
+		int item;
+		//while (q.try_dequeue(item))
+		{
+
+		}
 	}
 
-	int timeEnd = NFGetTimeMS();
-	std::cout << "end Benchmarks, cost: " << timeEnd - timeStart  << std::endl;
+	{
+		std::cout << "Test for NFQuene" << std::endl;
+		NFQueue<int> q;
+		//100M
+		int messageCount = 100000000;
+
+		std::thread threads[6];
+		int threadCount = 2;
+		// Producers
+		for (int i = 0; i != threadCount; ++i)
+		{
+			threads[i] = std::thread(
+				[&]()
+			{
+
+				int timeStart = NFGetTimeMS();
+
+				for (int j = 0; j != messageCount; ++j)
+				{
+					q.Push(j);
+				}
+
+				int timeEnd = NFGetTimeMS();
+				int timeCost = timeEnd - timeStart;
+				std::cout << "end Benchmarks, cost: " << timeCost << "ms for " << messageCount << ", qps: " << (messageCount / timeCost) * 1000 << std::endl;
+			});
+		}
+
+		// Wait for all threads
+		for (int i = 0; i != threadCount; ++i)
+		{
+			threads[i].join();
+		}
+	}
+	{
+		std::cout << "Test for NFQuene std::string" << std::endl;
+		NFQueue<std::string> q;
+		//100M
+		int messageCount = 100000000;
+
+		std::thread threads[6];
+		int threadCount = 2;
+		// Producers
+		for (int i = 0; i != threadCount; ++i)
+		{
+			threads[i] = std::thread(
+				[&]()
+			{
+
+				int timeStart = NFGetTimeMS();
+
+				for (int j = 0; j != messageCount; ++j)
+				{
+					q.Push(std::to_string(j * j));
+				}
+
+				int timeEnd = NFGetTimeMS();
+				int timeCost = timeEnd - timeStart;
+				std::cout << "end Benchmarks, cost: " << timeCost << "ms for " << messageCount << ", qps: " << (messageCount / timeCost) * 1000 << std::endl;
+			});
+		}
+
+		// Wait for all threads
+		for (int i = 0; i != threadCount; ++i)
+		{
+			threads[i].join();
+		}
+	}
+	{
+		std::cout << "Test for Task" << std::endl;
+		int messageCount = 100000000;
+		int timeStart = NFGetTimeMS();
+		//100M
+		//example 4
+		for (int i = 0; i < messageCount; ++i)
+		{
+			m_pThreadPoolModule->DoAsyncTask("sas",
+				[&](const NFGUID taskID, const std::string& strData) -> std::string
+			{
+				//std::cout << "example 4 thread id: " << std::this_thread::get_id() << " task id:" << taskID.ToString() << " task data:" << strData << std::endl;
+				return "aaaaaresulttttttt";
+			},
+				[&](const NFGUID taskID, const std::string& strData) -> void
+			{
+				//std::cout << "example 4 thread id: " << std::this_thread::get_id() << " task id:" << taskID.ToString() << " task result:" << strData << std::endl;
+			});
+		}
+
+		int timeEnd = NFGetTimeMS();
+		int timeCost = timeEnd - timeStart;
+		std::cout << "end Benchmarks, cost: " << timeCost << "ms for " << messageCount << ", qps: " << (messageCount / timeCost) * 1000 << std::endl;
+
+	}
+	
 	//example 5
+	/*
 	for (int i = 0; i < 10000000; ++i)
 	{
 		m_pThreadPoolModule->DoAsyncTask(i, NFGUID(0, i), "sas",
@@ -130,6 +267,8 @@ bool NFHelloWorld4Module::AfterInit()
 			//std::cout << "example 5 thread id: " << std::this_thread::get_id() << " task id:" << taskID.ToString() << " task result:" << strData << std::endl;
 		});
 	}
+	*/
+	
 
 
 

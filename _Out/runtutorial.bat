@@ -1,4 +1,4 @@
 cd /d %~dp0
-cd Debug
+cd Release
 echo Starting NFTutorial...
-start "NFTutorialServer" "NFPluginLoader_d.exe" "Server=TutorialServer" "ID=0" "Tutorial5.xml"
+start "NFTutorialServer" "NFPluginLoader.exe" "Server=TutorialServer" "ID=0" "Tutorial4.xml"
