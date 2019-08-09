@@ -54,7 +54,7 @@ cd ..
 cd BuildScript/linux/
 chmod -R 755 ./BuildNF.CMake.Debug.sh
 chmod -R 755 ./BuildNF.CMake.Release.sh
-time ./BuildNF.CMake.Debug.sh
+#time ./BuildNF.CMake.Debug.sh
 time ./BuildNF.CMake.Release.sh
 cd ../../
 

@@ -5,7 +5,7 @@
 
    Copyright 2009 - 2019 NoahFrame(NoahGameFrame)
 
-   File creator: bluesky
+   File creator: lvsheng.huang
    
    NoahFrame is open-source software and you can redistribute it and/or modify
    it under the terms of the License; besides, anyone who use this file/software must include this copyright announcement.
@@ -32,20 +32,21 @@
 
 /*
 IN THIS PLUGIN:
-YOU WILL KNOW HOW TO USE THE "INavigationModule" TO FIND THE PATH FOR AI OBJECT
+YOU WILL KNOW HOW TO USE THE "IScriptModule" TO CALL LUA SCRIPT
 */
 
-class NFIHelloWorld
+
+class NFIHelloWorld7
 	: public NFIModule
 {
 
 };
 
-class NFHelloWorld
-    : public NFIHelloWorld
+class NFHelloWorld7
+    : public NFIHelloWorld7
 {
 public:
-    NFHelloWorld(NFIPluginManager* p)
+    NFHelloWorld7(NFIPluginManager* p)
     {
         pPluginManager = p;
     }
@@ -59,7 +60,6 @@ public:
     virtual bool Shut();
 
 protected:
-	NFINavigationModule* m_pNavigationModule;
 };
 
 #endif

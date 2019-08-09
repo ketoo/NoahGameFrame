@@ -1,3 +1,4 @@
+
 /*
             This file is part of: 
                 NoahFrame
@@ -5,7 +6,7 @@
 
    Copyright 2009 - 2019 NoahFrame(NoahGameFrame)
 
-   File creator: lvsheng.huang
+   File creator: bluesky
    
    NoahFrame is open-source software and you can redistribute it and/or modify
    it under the terms of the License; besides, anyone who use this file/software must include this copyright announcement.
@@ -23,39 +24,43 @@
    limitations under the License.
 */
 
-#include "HelloWorld.h"
+#ifndef NF_HELLO_WORLD_H
+#define NF_HELLO_WORLD_H
 
-bool NFHelloWorld::Init()
-{ 
+#include "NFComm/NFPluginModule/NFIPlugin.h"
+#include "NFComm/NFPluginModule/NFIPluginManager.h"
+#include "NFComm/NFPluginModule/NFINavigationModule.h"
 
-    std::cout << "Hello, world, Init" << std::endl;
+/*
+IN THIS PLUGIN:
+YOU WILL KNOW HOW TO USE THE "INavigationModule" TO FIND THE PATH FOR AI OBJECT
+*/
 
-    return true;
-}
-
-bool NFHelloWorld::AfterInit()
+class NFIHelloWorld6
+	: public NFIModule
 {
-	
-    return true;
-}
 
-bool NFHelloWorld::Execute()
+};
+
+class NFHelloWorld6
+    : public NFIHelloWorld6
 {
-    return true;
-}
+public:
+    NFHelloWorld6(NFIPluginManager* p)
+    {
+        pPluginManager = p;
+    }
 
-bool NFHelloWorld::BeforeShut()
-{
-    
-    std::cout << "Hello, world2, BeforeShut" << std::endl;
+    virtual bool Init();
+    virtual bool AfterInit();
 
-    return true;
-}
+    virtual bool Execute();
 
-bool NFHelloWorld::Shut()
-{
-    
-    std::cout << "Hello, world2, Shut" << std::endl;
+    virtual bool BeforeShut();
+    virtual bool Shut();
 
-    return true;
-}
+protected:
+	NFINavigationModule* m_pNavigationModule;
+};
+
+#endif
