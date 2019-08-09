@@ -23,10 +23,10 @@
    limitations under the License.
 */
 
-#include "HelloWorld.h"
+#include "HelloWorld5.h"
 
 
-bool NFHelloWorld::Init()
+bool NFHelloWorld5::Init()
 { 
 	m_pElementModule = pPluginManager->FindModule<NFIElementModule>();
 	m_pScheduleModule = pPluginManager->FindModule<NFIScheduleModule>();
@@ -37,32 +37,32 @@ bool NFHelloWorld::Init()
     return true;
 }
 
-bool NFHelloWorld::AfterInit()
+bool NFHelloWorld5::AfterInit()
 {
-	m_pScheduleModule->AddSchedule(NFGUID(0, 1), "OnHeartBeat1", this, &NFHelloWorld::OnHeartBeat, 5.0f, 10);
-	m_pScheduleModule->AddSchedule(NFGUID(0, 1), "OnHeartBeat2", this, &NFHelloWorld::OnHeartBeat, 5.0f, 10);
+	m_pScheduleModule->AddSchedule(NFGUID(0, 1), "OnHeartBeat1", this, &NFHelloWorld5::OnHeartBeat, 5.0f, 10);
+	m_pScheduleModule->AddSchedule(NFGUID(0, 1), "OnHeartBeat2", this, &NFHelloWorld5::OnHeartBeat, 5.0f, 10);
 
 	std::cout << "Hello, world, Init" << std::endl;
 	//http://127.0.0.1/json
-	m_pHttpNetModule->AddRequestHandler("/json", NFHttpType::NF_HTTP_REQ_GET, this, &NFHelloWorld::OnCommandQuery);
-	m_pHttpNetModule->AddRequestHandler("/json", NFHttpType::NF_HTTP_REQ_POST, this, &NFHelloWorld::OnCommandQuery);
-	m_pHttpNetModule->AddRequestHandler("/json", NFHttpType::NF_HTTP_REQ_DELETE, this, &NFHelloWorld::OnCommandQuery);
-	m_pHttpNetModule->AddRequestHandler("/json", NFHttpType::NF_HTTP_REQ_PUT, this, &NFHelloWorld::OnCommandQuery);
+	m_pHttpNetModule->AddRequestHandler("/json", NFHttpType::NF_HTTP_REQ_GET, this, &NFHelloWorld5::OnCommandQuery);
+	m_pHttpNetModule->AddRequestHandler("/json", NFHttpType::NF_HTTP_REQ_POST, this, &NFHelloWorld5::OnCommandQuery);
+	m_pHttpNetModule->AddRequestHandler("/json", NFHttpType::NF_HTTP_REQ_DELETE, this, &NFHelloWorld5::OnCommandQuery);
+	m_pHttpNetModule->AddRequestHandler("/json", NFHttpType::NF_HTTP_REQ_PUT, this, &NFHelloWorld5::OnCommandQuery);
 
-	m_pHttpNetModule->AddNetFilter("/json", this, &NFHelloWorld::OnFilter);
+	m_pHttpNetModule->AddNetFilter("/json", this, &NFHelloWorld5::OnFilter);
 
 	m_pHttpNetModule->InitServer(8080);
 
     return true;
 }
 
-bool NFHelloWorld::Execute()
+bool NFHelloWorld5::Execute()
 {
  
     return true;
 }
 
-bool NFHelloWorld::BeforeShut()
+bool NFHelloWorld5::BeforeShut()
 {
     
     std::cout << "Hello, world2, BeforeShut" << std::endl;
@@ -70,7 +70,7 @@ bool NFHelloWorld::BeforeShut()
     return true;
 }
 
-bool NFHelloWorld::Shut()
+bool NFHelloWorld5::Shut()
 {
     
     std::cout << "Hello, world2, Shut" << std::endl;
@@ -78,7 +78,7 @@ bool NFHelloWorld::Shut()
     return true;
 }
 
-bool NFHelloWorld::OnCommandQuery(const NFHttpRequest & req)
+bool NFHelloWorld5::OnCommandQuery(const NFHttpRequest & req)
 {
 	std::cout << "url: " << req.url << std::endl;
 	std::cout << "path: " << req.path << std::endl;
@@ -102,25 +102,25 @@ bool NFHelloWorld::OnCommandQuery(const NFHttpRequest & req)
 	return m_pHttpNetModule->ResponseMsg(req, "OnCommandQuery --- test1", NFWebStatus::WEB_OK);
 }
 
-NFWebStatus NFHelloWorld::OnFilter(const NFHttpRequest & req)
+NFWebStatus NFHelloWorld5::OnFilter(const NFHttpRequest & req)
 {
 	std::cout << "OnFilter ... " << std::endl;
 
 	return NFWebStatus::WEB_OK;
 }
 
-int NFHelloWorld::OnHeartBeat(const NFGUID & self, const std::string & strHeartBeat, const float fTime, const int nCount)
+int NFHelloWorld5::OnHeartBeat(const NFGUID & self, const std::string & strHeartBeat, const float fTime, const int nCount)
 {
 	std::cout << strHeartBeat << std::endl;
 
-	m_pHttpClientModule->DoGet("http://127.0.0.1:8080/json", this, &NFHelloWorld::OnGetCallBack);
+	m_pHttpClientModule->DoGet("http://127.0.0.1:8080/json", this, &NFHelloWorld5::OnGetCallBack);
 	m_pHttpClientModule->DoGet("http://127.0.0.1:8080/json", [](const NFGUID id, const int state_code, const std::string & strRespData, const std::string & strMemoData) -> void
 	{
 		std::cout << "OnGetCallBack" << std::endl;
 	});
 
     std::string strMemo = "Memo here";
-	m_pHttpClientModule->DoPost("http://127.0.0.1:8080/json", "OnHeartBeat post data---", this, &NFHelloWorld::OnPostCallBack, strMemo);
+	m_pHttpClientModule->DoPost("http://127.0.0.1:8080/json", "OnHeartBeat post data---", this, &NFHelloWorld5::OnPostCallBack, strMemo);
 
 	m_pHttpClientModule->DoPost("http://127.0.0.1:8080/json", "OnHeartBeat post data---", [](const NFGUID id, const int state_code, const std::string & strRespData, const std::string & strMemoData) -> void
 	{
@@ -130,12 +130,12 @@ int NFHelloWorld::OnHeartBeat(const NFGUID & self, const std::string & strHeartB
 	return 0;
 }
 
-void NFHelloWorld::OnGetCallBack(const NFGUID id, const int state_code, const std::string & strRespData)
+void NFHelloWorld5::OnGetCallBack(const NFGUID id, const int state_code, const std::string & strRespData)
 {
 	std::cout << "OnGetCallBack" << std::endl;
 }
 
-void NFHelloWorld::OnPostCallBack(const NFGUID id, const int state_code, const std::string& strRespData, const std::string& strMemoData)
+void NFHelloWorld5::OnPostCallBack(const NFGUID id, const int state_code, const std::string& strRespData, const std::string& strMemoData)
 {
     std::cout << "OnPostCallBack" << " "<< strMemoData <<std::endl;
 }

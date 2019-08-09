@@ -6,6 +6,6 @@ cd Release
 
 chmod -R 777  NFPluginLoader
 
-./NFPluginLoader Server=TutorialServer ID=0 Tutorial4.xml
+./NFPluginLoader Server=TutorialServer ID=4 Tutorial4.xml
 
 ps -A|grep NF

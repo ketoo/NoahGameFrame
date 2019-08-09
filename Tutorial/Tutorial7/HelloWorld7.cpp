@@ -23,43 +23,39 @@
    limitations under the License.
 */
 
-#ifndef NF_HELLO_WORLD_H
-#define NF_HELLO_WORLD_H
+#include "HelloWorld7.h"
 
-#include "NFComm/NFPluginModule/NFIPlugin.h"
-#include "NFComm/NFPluginModule/NFIPluginManager.h"
-#include "NFComm/NFPluginModule/NFINavigationModule.h"
+bool NFHelloWorld7::Init()
+{ 
 
-/*
-IN THIS PLUGIN:
-YOU WILL KNOW HOW TO USE THE "IScriptModule" TO CALL LUA SCRIPT
-*/
+    std::cout << "Hello, world, Init" << std::endl;
 
+    return true;
+}
 
-class NFIHelloWorld
-	: public NFIModule
+bool NFHelloWorld7::AfterInit()
 {
+	
+    return true;
+}
 
-};
-
-class NFHelloWorld
-    : public NFIHelloWorld
+bool NFHelloWorld7::Execute()
 {
-public:
-    NFHelloWorld(NFIPluginManager* p)
-    {
-        pPluginManager = p;
-    }
+    return true;
+}
 
-    virtual bool Init();
-    virtual bool AfterInit();
+bool NFHelloWorld7::BeforeShut()
+{
+    
+    std::cout << "Hello, world2, BeforeShut" << std::endl;
 
-    virtual bool Execute();
+    return true;
+}
 
-    virtual bool BeforeShut();
-    virtual bool Shut();
+bool NFHelloWorld7::Shut()
+{
+    
+    std::cout << "Hello, world2, Shut" << std::endl;
 
-protected:
-};
-
-#endif
+    return true;
+}

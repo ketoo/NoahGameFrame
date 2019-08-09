@@ -24,7 +24,7 @@
 */
 
 #include "Tutorial6.h"
-#include "HelloWorld.h"
+#include "HelloWorld6.h"
 
 #ifdef NF_DYNAMIC_PLUGIN
 
@@ -55,11 +55,11 @@ const std::string Tutorial6::GetPluginName()
 
 void Tutorial6::Install()
 {
-    REGISTER_MODULE(pPluginManager, NFIHelloWorld, NFHelloWorld)
+    REGISTER_MODULE(pPluginManager, NFIHelloWorld6, NFHelloWorld6)
     
 }
 
 void Tutorial6::Uninstall()
 {
-    UNREGISTER_MODULE(pPluginManager, NFIHelloWorld, NFHelloWorld)
+    UNREGISTER_MODULE(pPluginManager, NFIHelloWorld6, NFHelloWorld6)
 }

@@ -24,7 +24,7 @@
 */
 
 #include "Tutorial7.h"
-#include "HelloWorld.h"
+#include "HelloWorld7.h"
 
 #ifdef NF_DYNAMIC_PLUGIN
 
@@ -55,11 +55,11 @@ const std::string Tutorial7::GetPluginName()
 
 void Tutorial7::Install()
 {
-    REGISTER_MODULE(pPluginManager, NFIHelloWorld, NFHelloWorld)
+    REGISTER_MODULE(pPluginManager, NFIHelloWorld7, NFHelloWorld7)
     
 }
 
 void Tutorial7::Uninstall()
 {
-    UNREGISTER_MODULE(pPluginManager, NFIHelloWorld, NFHelloWorld)
+    UNREGISTER_MODULE(pPluginManager, NFIHelloWorld7, NFHelloWorld7)
 }

@@ -23,9 +23,9 @@
    limitations under the License.
 */
 
-#include "HelloWorld.h"
+#include "HelloWorld6.h"
 
-bool NFHelloWorld::Init()
+bool NFHelloWorld6::Init()
 { 
 
     std::cout << "Hello, world, Init" << std::endl;
@@ -33,7 +33,7 @@ bool NFHelloWorld::Init()
     return true;
 }
 
-bool NFHelloWorld::AfterInit()
+bool NFHelloWorld6::AfterInit()
 {
 	m_pNavigationModule = pPluginManager->FindModule<NFINavigationModule>();
 
@@ -54,12 +54,12 @@ bool NFHelloWorld::AfterInit()
     return true;
 }
 
-bool NFHelloWorld::Execute()
+bool NFHelloWorld6::Execute()
 {
     return true;
 }
 
-bool NFHelloWorld::BeforeShut()
+bool NFHelloWorld6::BeforeShut()
 {
     
     std::cout << "Hello, world2, BeforeShut" << std::endl;
@@ -67,7 +67,7 @@ bool NFHelloWorld::BeforeShut()
     return true;
 }
 
-bool NFHelloWorld::Shut()
+bool NFHelloWorld6::Shut()
 {
     
     std::cout << "Hello, world2, Shut" << std::endl;

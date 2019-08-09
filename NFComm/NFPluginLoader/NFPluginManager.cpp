@@ -240,6 +240,7 @@ bool NFPluginManager::LoadPluginConfig()
 
         mPluginNameMap.insert(PluginNameMap::value_type(strPluginName, true));
 
+		//std::cout << strPluginName << std::endl;
     }
 
     return true;
@@ -347,14 +348,24 @@ bool NFPluginManager::CheckStaticPlugin()
 			it++;
 		}
 	}
+
+	for (auto it = mPluginInstanceMap.begin(); it != mPluginInstanceMap.end(); ++it)
+	{
+		std::cout << it->first << std::endl;
+	}
+
+	std::cout << "-------------" << std::endl;
+
 	//////module
 	for (auto it = mModuleInstanceMap.begin(); it != mModuleInstanceMap.end();)
 	{
 		bool bFind = false;
 		const std::string& strModuleName = it->first;
+
 		for (int i = 0; i < mStaticPlugin.size(); ++i)
 		{
 			const std::string& strPluginName = mStaticPlugin[i];
+				
 			NFIPlugin* pPlugin = this->FindPlugin(strPluginName);
 			if (pPlugin)
 			{
@@ -375,6 +386,13 @@ bool NFPluginManager::CheckStaticPlugin()
 		{
 			it++;
 		}
+	}
+
+	std::cout << "-------------" << std::endl;
+
+	for (auto it = mModuleInstanceMap.begin(); it != mModuleInstanceMap.end(); ++it)
+	{
+		std::cout << it->first << std::endl;
 	}
 #endif
 

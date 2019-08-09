@@ -46,17 +46,17 @@ IN THIS PLUGIN:
 YOU WILL KNOW HOW TO USE THE "NFIHttpServerModule" AND "NFIHttpClientModule" TO PROCESS WEB SERVICES AND ACCESS WEB RESOURCES
 */
 
-class NFIHelloWorld
+class NFIHelloWorld5
 	: public NFIModule
 {
 
 };
 
-class NFHelloWorld
-    : public NFIHelloWorld
+class NFHelloWorld5
+    : public NFIHelloWorld5
 {
 public:
-    NFHelloWorld(NFIPluginManager* p)
+    NFHelloWorld5(NFIPluginManager* p)
     {
         pPluginManager = p;
     }
