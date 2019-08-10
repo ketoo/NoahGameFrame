@@ -14,7 +14,6 @@
                 "${workspaceFolder}/Dependencies",
                 "${workspaceFolder}/Dependencies/lua",
                 "${workspaceFolder}/Dependencies/protobuf/src",
-                "${workspaceFolder}/Dependencies/Theron/Include",
                 "${workspaceFolder}/Dependencies/libevent/include"
             ],
             "defines": ["DEBUG"],

@@ -26,9 +26,9 @@
 #include "NFActor.h"
 #include "NFComm/NFPluginModule/NFIPluginManager.h"
 
-NFActor::NFActor(Theron::Framework & framework, NFIActorModule* pModule)
-	: NFIActor(framework)
+NFActor::NFActor(const NFGUID id, NFIActorModule* pModule)
 {
+	this->id = id;
 	m_pActorModule = pModule;
 }
 
@@ -36,23 +36,34 @@ NFActor::~NFActor()
 {
 }
 
-void NFActor::HandlerEx(const NFIActorMessage& message, const Theron::Address from)
+const NFGUID NFActor::ID()
 {
-    m_pActorModule->HandlerEx(message, from.AsInteger());
+	return this->id;
 }
 
-void NFActor::AddComponent(NF_SHARE_PTR<NFIComponent> pComponent)
+bool NFActor::AddComponent(NF_SHARE_PTR<NFIComponent> pComponent)
 {
 	//if you want to add more components for the actor, please don't clear the component
-	mxComponent.ClearAll();
+	//mxComponent.ClearAll();
+	if (!mxComponent.ExistElement(pComponent->GetComponentName()))
+	{
+		mxComponent.AddElement(pComponent->GetComponentName(), pComponent);
+		pComponent->SetActor(NF_SHARE_PTR<NFIActor>(this));
 
-	mxComponent.AddElement(pComponent->GetComponentName(), pComponent);
-	pComponent->SetActor(this);
+		pComponent->Awake();
+		pComponent->Init();
+		pComponent->AfterInit();
+		pComponent->ReadyExecute();
 
-	pComponent->Awake();
-	pComponent->Init();
-	pComponent->AfterInit();
-	pComponent->ReadyExecute();
+		return true;
+	}
+
+	return false;
+}
+
+bool NFActor::RemoveComponent(const std::string& strComponentName)
+{
+	return false;
 }
 
 NF_SHARE_PTR<NFIComponent> NFActor::FindComponent(const std::string & strComponentName)
@@ -60,7 +71,7 @@ NF_SHARE_PTR<NFIComponent> NFActor::FindComponent(const std::string & strCompone
 	return mxComponent.GetElement(strComponentName);
 }
 
-bool NFActor::AddBeginFunc(const int nSubMsgID, ACTOR_PROCESS_FUNCTOR_PTR xBeginFunctor)
+bool NFActor::AddMessageHandler(const int nSubMsgID, ACTOR_PROCESS_FUNCTOR_PTR xBeginFunctor)
 {
 	if (mxProcessFuntor.GetElement(nSubMsgID))
 	{
@@ -71,26 +82,17 @@ bool NFActor::AddBeginFunc(const int nSubMsgID, ACTOR_PROCESS_FUNCTOR_PTR xBegin
 	return true;
 }
 
-bool NFActor::AddEndFunc(const int nSubMsgID, ACTOR_PROCESS_FUNCTOR_PTR xEndFunctor)
+bool NFActor::SendMsg(const NFActorMessage& message)
 {
-	if (mxEndProcessFuntor.GetElement(nSubMsgID))
-	{
-		return false;
-	}
+	return mMessageQueue.Push(message);
+}
 
-	mxEndProcessFuntor.AddElement(nSubMsgID, xEndFunctor);
+void NFActor::DefaultHandler(const NFActorMessage& message, const NFGUID from)
+{
 	
-	return true;
 }
-
-bool NFActor::AddDefaultEndFunc(ACTOR_PROCESS_FUNCTOR_PTR xEndFunctor)
-{
-	mxDefaultEndProcessFuntor = xEndFunctor;
-
-	return true;
-}
-
-void NFActor::Handler(const NFIActorMessage& message, const Theron::Address from)
+/*
+void NFActor::Handler(const NFIActorMessage& message, const NFGUID from)
 {
     std::string strData = message.data;
 
@@ -116,19 +118,7 @@ void NFActor::Handler(const NFIActorMessage& message, const Theron::Address from
 	{
 		xReturnMessage.xEndFuncptr = ptrEnd;
 	}
-	else
-	{
-		//default end function
-		if (mxDefaultEndProcessFuntor != nullptr)
-		{
-			xReturnMessage.xEndFuncptr = mxDefaultEndProcessFuntor;
-		}
-	}
 
     Send(xReturnMessage, from);
 }
-
-bool NFActor::SendMsg(const Theron::Address address, const NFIActorMessage& message)
-{
-    return Send(message, address);
-}
+*/

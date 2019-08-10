@@ -34,7 +34,6 @@ if (APPLE)
 
 		target_link_libraries(NFNetCli -static-libstdc++)
 	add_definitions(
-		-DTHERON_CPP11
 		-D_THREAD_SAFE
 	)
 elseif(UNIX)
@@ -54,7 +53,6 @@ elseif(UNIX)
 		target_link_libraries(NFNetCli NFMessageDefine)
 		target_link_libraries(NFNetCli -static-libstdc++)
 	add_definitions(
-		-DTHERON_CPP11
 	)
 else()
 	target_link_libraries(NFNetSvr NFNetPlugin)

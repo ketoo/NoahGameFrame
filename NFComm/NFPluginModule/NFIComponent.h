@@ -46,11 +46,11 @@ public:
 
     virtual ~NFIComponent() {}
 
-	virtual void SetActor(NFIActor* self)
+	virtual void SetActor(NF_SHARE_PTR<NFIActor> self)
 	{
 		mSelf = self;
 	}
-	virtual NFIActor* GetActor()
+	virtual NF_SHARE_PTR<NFIActor> GetActor()
 	{
 		return mSelf;
 	}
@@ -119,12 +119,12 @@ public:
 
 
 	template<typename BaseType>
-	bool AddMsgObserver(const int nSubMessage, BaseType* pBase, int (BaseType::*handler)(const int, const int, std::string&))
+	bool AddMsgHandler(const int nSubMessage, BaseType* pBase, int (BaseType::*handler)(const NFGUID, const int, std::string&))
 	{
 		ACTOR_PROCESS_FUNCTOR functor = std::bind(handler, pBase, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3);
 		ACTOR_PROCESS_FUNCTOR_PTR functorPtr(new ACTOR_PROCESS_FUNCTOR(functor));
-
-		return mSelf->AddBeginFunc(nSubMessage, functorPtr);
+		
+		return mSelf->AddMessageHandler(nSubMessage, functorPtr);
 	}
 
 	template <typename T>
@@ -141,7 +141,7 @@ public:
 
 private:
     bool mbEnable;
-	NFIActor* mSelf;
+	NF_SHARE_PTR<NFIActor> mSelf;
     std::string mstrName;
 };
 

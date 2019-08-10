@@ -27,23 +27,20 @@
 #include "NFActorModule.h"
 
 NFActorModule::NFActorModule(NFIPluginManager* p)
-	:mFramework(NF_ACTOR_THREAD_COUNT)
 {
 	pPluginManager = p;
 
     srand((unsigned)time(NULL));
-
-    m_pMainActor = NF_SHARE_PTR<NFIActor>(NF_NEW NFActor(mFramework, this));
 }
 
 NFActorModule::~NFActorModule()
 {
-	m_pMainActor.reset();
-	m_pMainActor = nullptr;
 }
 
 bool NFActorModule::Init()
 {
+	m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>();
+
     return true;
 }
 
@@ -72,47 +69,45 @@ bool NFActorModule::Execute()
 }
 
 
-int NFActorModule::RequireActor()
+NFGUID NFActorModule::RequireActor()
 {
 	NF_SHARE_PTR<NFIActor> pActor = nullptr;
-	if (mxActorPool.size() <= 0)
+	if (!mxActorPool.empty())
 	{
-		pActor = NF_SHARE_PTR<NFIActor>(NF_NEW NFActor(mFramework, this));
-		mxActorMap.AddElement(pActor->GetAddress().AsInteger(), pActor);
+		pActor = mxActorPool.front();
+		mxActorPool.pop();
 
-		return pActor->GetAddress().AsInteger();
+		if (pActor)
+		{
+			return pActor->ID();
+		}
 	}
 
-	std::map<int, int>::iterator it = mxActorPool.begin();
-	int nActorID = it->first;
-	mxActorPool.erase(it);
+	pActor = NF_SHARE_PTR<NFIActor>(NF_NEW NFActor(m_pKernelModule->CreateGUID(), this));
+	mxActorMap.AddElement(pActor->ID(), pActor);
 
-    return nActorID;
+	return pActor->ID();
 }
 
-NF_SHARE_PTR<NFIActor> NFActorModule::GetActor(const int nActorIndex)
+NF_SHARE_PTR<NFIActor> NFActorModule::GetActor(const NFGUID nActorIndex)
 {
 	return mxActorMap.GetElement(nActorIndex);
 }
 
-bool NFActorModule::HandlerEx(const NFIActorMessage & message, const int from)
+bool NFActorModule::AddResult(const NFActorMessage & message)
 {
-	if (message.msgType != NFIActorMessage::ACTOR_MSG_TYPE_COMPONENT)
-	{
-		return mxQueue.Push(message);
-	}
-
-	return false;
+	return mxQueue.Push(message);
 }
 
 bool NFActorModule::ExecuteEvent()
 {
-	NFIActorMessage xMsg;
+	/*
+	NFActorMessage xMsg;
 	bool bRet = false;
 	bRet = mxQueue.TryPop(xMsg);
 	while (bRet)
 	{
-		if (xMsg.msgType != NFIActorMessage::ACTOR_MSG_TYPE_COMPONENT && xMsg.xEndFuncptr != nullptr)
+		if (xMsg.msgType != NFActorMessage::ACTOR_MSG_TYPE_COMPONENT && xMsg.xEndFuncptr != nullptr)
 		{
 			//Actor can be reused in ActorPool mode, so we don't release it.
 			//>ReleaseActor(xMsg.nFormActor);
@@ -136,29 +131,27 @@ bool NFActorModule::ExecuteEvent()
 
 		bRet = mxQueue.TryPop(xMsg);
 	}
-
+*/
 	return true;
 }
 
-bool NFActorModule::SendMsgToActor(const int nActorIndex, const int nEventID, const std::string& strArg)
+bool NFActorModule::SendMsgToActor(const NFGUID nActorIndex, const int nEventID, const std::string& strArg)
 {
     NF_SHARE_PTR<NFIActor> pActor = GetActor(nActorIndex);
     if (nullptr != pActor)
     {
-        NFIActorMessage xMessage;
+        NFActorMessage xMessage;
 
-        xMessage.msgType = NFIActorMessage::ACTOR_MSG_TYPE_COMPONENT;
         xMessage.data = strArg;
         xMessage.nMsgID = nEventID;
-        xMessage.nFormActor = m_pMainActor->GetAddress().AsInteger();
 
-        return mFramework.Send(xMessage, m_pMainActor->GetAddress(), pActor->GetAddress());
+		return pActor->SendMsg(xMessage);
     }
 
     return false;
 }
 
-bool NFActorModule::AddComponent(const int nActorIndex, NF_SHARE_PTR<NFIComponent> pComponent)
+bool NFActorModule::AddComponent(const NFGUID nActorIndex, NF_SHARE_PTR<NFIComponent> pComponent)
 {
     NF_SHARE_PTR<NFIActor> pActor = GetActor(nActorIndex);
     if (nullptr != pActor)
@@ -171,29 +164,17 @@ bool NFActorModule::AddComponent(const int nActorIndex, NF_SHARE_PTR<NFIComponen
     return false;
 }
 
-bool NFActorModule::ReleaseActor(const int nActorIndex)
+bool NFActorModule::RemoveComponent(const NFGUID nActorIndex, const std::string& strComponentName)
 {
-	return mxActorMap.RemoveElement(nActorIndex);
-}
-
-bool NFActorModule::AddDefaultEndFunc(const int nActorIndex, ACTOR_PROCESS_FUNCTOR_PTR functorPtr_end)
-{
-	NF_SHARE_PTR<NFIActor> pActor = GetActor(nActorIndex);
-	if (nullptr != pActor)
-	{
-		return pActor->AddDefaultEndFunc(functorPtr_end);
-	}
-
 	return false;
 }
 
-bool NFActorModule::AddEndFunc(const int nActorIndex, const int nSubMsgID, ACTOR_PROCESS_FUNCTOR_PTR functorPtr)
+NF_SHARE_PTR<NFIComponent> NFActorModule::FindComponent(const NFGUID nActorIndex, const std::string& strComponentName)
 {
-    NF_SHARE_PTR<NFIActor> pActor = GetActor(nActorIndex);
-    if (nullptr != pActor)
-    {
-		return pActor->AddEndFunc(nSubMsgID, functorPtr);
-    }
+	return nullptr;
+}
 
-    return false;
+bool NFActorModule::ReleaseActor(const NFGUID nActorIndex)
+{
+	return mxActorMap.RemoveElement(nActorIndex);
 }

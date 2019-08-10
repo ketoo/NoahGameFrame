@@ -23,7 +23,6 @@
 					<Add option="-DELPP_NO_DEFAULT_LOG_FILE" />
 					<Add directory="$(SolutionDir)" />
 					<Add directory="$(SolutionDir)/Dependencies/" />
-					<Add directory="$(SolutionDir)/Dependencies/Theron/Include/" />
 					<Add directory="$(SolutionDir)/Dependencies/lua" />
 				</Compiler>
 				<Linker>
@@ -64,7 +63,6 @@
 					<Add option="-DELPP_NO_DEFAULT_LOG_FILE" />
 					<Add directory="$(SolutionDir)" />
 					<Add directory="$(SolutionDir)/Dependencies/" />
-					<Add directory="$(SolutionDir)/Dependencies/Theron/Include/" />
 					<Add directory="$(SolutionDir)/Dependencies/lua" />
 				</Compiler>
 				<Linker>

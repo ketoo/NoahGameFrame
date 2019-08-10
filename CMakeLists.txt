@@ -46,8 +46,6 @@ message("NFOutPutDir:${NFOutPutDir}")
 include_directories(
 ${SolutionDir} 
 ${SolutionDir}/Dependencies/ 
-${SolutionDir}/Dependencies/Theron/Include/ 
-${SolutionDir}/Dependencies/Theron/Include/External/ 
 ${SolutionDir}/Dependencies/protobuf/ 
 ${SolutionDir}/Dependencies/protobuf/src/
 ${SolutionDir}/Dependencies/libevent/

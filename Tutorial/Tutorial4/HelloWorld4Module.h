@@ -52,22 +52,22 @@ public:
 
 	virtual bool Init()
 	{
-		AddMsgObserver(0, this, &NFHttpComponent::OnMsgEvent);
-		AddMsgObserver(1, this, &NFHttpComponent::OnMsgEvent);
-		AddMsgObserver(2, this, &NFHttpComponent::OnMsgEvent);
-		AddMsgObserver(3, this, &NFHttpComponent::OnMsgEvent);
-		AddMsgObserver(4, this, &NFHttpComponent::OnMsgEvent);
-		AddMsgObserver(5, this, &NFHttpComponent::OnMsgEvent);
-		AddMsgObserver(6, this, &NFHttpComponent::OnMsgEvent);
-		AddMsgObserver(7, this, &NFHttpComponent::OnMsgEvent);
-		AddMsgObserver(8, this, &NFHttpComponent::OnMsgEvent);
-		AddMsgObserver(9, this, &NFHttpComponent::OnMsgEvent);
+		AddMsgHandler(0, this, &NFHttpComponent::OnMsgEvent);
+		AddMsgHandler(1, this, &NFHttpComponent::OnMsgEvent);
+		AddMsgHandler(2, this, &NFHttpComponent::OnMsgEvent);
+		AddMsgHandler(3, this, &NFHttpComponent::OnMsgEvent);
+		AddMsgHandler(4, this, &NFHttpComponent::OnMsgEvent);
+		AddMsgHandler(5, this, &NFHttpComponent::OnMsgEvent);
+		AddMsgHandler(6, this, &NFHttpComponent::OnMsgEvent);
+		AddMsgHandler(7, this, &NFHttpComponent::OnMsgEvent);
+		AddMsgHandler(8, this, &NFHttpComponent::OnMsgEvent);
+		AddMsgHandler(9, this, &NFHttpComponent::OnMsgEvent);
 
 		return true;
 	}
 
 
-	virtual int OnMsgEvent(const int from, const int event, std::string& arg)
+	virtual int OnMsgEvent(const NFGUID from, const int event, std::string& arg)
 	{
 
 		std::cout << "Thread: " << std::this_thread::get_id() << " MsgID: " << event << " Data:" << arg << std::endl;

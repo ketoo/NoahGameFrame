@@ -29,11 +29,12 @@
 
 #include <map>
 #include <string>
+#include <queue>
 #include "NFActor.h"
-#include "Theron/Theron.h"
 #include "NFComm/NFPluginModule/NFIComponent.h"
 #include "NFComm/NFPluginModule/NFIActor.h"
 #include "NFComm/NFPluginModule/NFIActorModule.h"
+#include "NFComm/NFPluginModule/NFIKernelModule.h"
 #include "NFComm/NFCore/NFQueue.hpp"
 
 class NFActorModule
@@ -53,33 +54,31 @@ public:
 
     virtual bool Execute();
 
-	virtual int RequireActor();
+	virtual NFGUID RequireActor();
+	virtual NF_SHARE_PTR<NFIActor> GetActor(const NFGUID nActorIndex);
+	virtual bool ReleaseActor(const NFGUID nActorIndex);
 
-    virtual bool SendMsgToActor(const int nActorIndex, const int nEventID, const std::string& strArg);
+    virtual bool SendMsgToActor(const NFGUID nActorIndex, const int messageID, const std::string& strArg);
 
-	virtual bool HandlerEx(const NFIActorMessage& message, const int from);
-
-	virtual bool ReleaseActor(const int nActorIndex);
-
-	virtual NF_SHARE_PTR<NFIActor> GetActor(const int nActorIndex);
-
+	virtual bool AddResult(const NFActorMessage& message);
 protected:
 
-	virtual bool AddDefaultEndFunc(const int nActorIndex, ACTOR_PROCESS_FUNCTOR_PTR functorPtr_end);
-	virtual bool AddEndFunc(const int nActorIndex, const int nSubMsgID, ACTOR_PROCESS_FUNCTOR_PTR functorPtr);
 
-    virtual bool AddComponent(const int nActorIndex, NF_SHARE_PTR<NFIComponent> pComponent);
+    virtual bool AddComponent(const NFGUID nActorIndex, NF_SHARE_PTR<NFIComponent> pComponent);
+	virtual bool RemoveComponent(const NFGUID nActorIndex, const std::string& strComponentName);
+	virtual NF_SHARE_PTR<NFIComponent> FindComponent(const NFGUID nActorIndex, const std::string& strComponentName);
+
 
 	virtual bool ExecuteEvent();
+
+
 private:
-	NF_SHARE_PTR<NFIActor> m_pMainActor;
+    NFIKernelModule* m_pKernelModule;
 
-    Theron::Framework mFramework;
-	NFMapEx<int, NFIActor> mxActorMap;
-	std::map<int, int> mxActorPool;
-	//NFQueue<NF_SHARE_PTR<NFIActor>> mxActorPool;
+	NFMapEx<NFGUID, NFIActor> mxActorMap;
+	std::queue<NF_SHARE_PTR<NFIActor>> mxActorPool;
 
-	NFQueue<NFIActorMessage> mxQueue;
+	NFQueue<NFActorMessage> mxQueue;
 };
 
 #endif

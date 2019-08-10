@@ -26,11 +26,6 @@
 
 #include "NFThreadPoolModule.h"
 
-void ThreadExecute()
-{
-	//return the thread to the idle thread pool
-}
-
 NFThreadPoolModule::NFThreadPoolModule(NFIPluginManager* p)
 {
 	pPluginManager = p;
@@ -44,7 +39,7 @@ bool NFThreadPoolModule::Init()
 {
 	for (int i = 0; i < NF_ACTOR_THREAD_COUNT; ++i)
 	{
-		mThreadPool.AddElement(i, NF_SHARE_PTR<NFThreadCell>(NF_NEW NFThreadCell(this)));
+		mThreadPool.push_back(NF_SHARE_PTR<NFThreadCell>(NF_NEW NFThreadCell(this)));
 	}
 
     return true;
@@ -81,8 +76,9 @@ void NFThreadPoolModule::DoAsyncTask(const NFGUID taskID, const std::string & da
 	task.data = data;
 	task.xThreadFunc = asyncFunctor;
 	task.xEndFunc = functor_end;
-
-	NF_SHARE_PTR<NFThreadCell> threadobject = mThreadPool.GetElementBySuit(hash);
+	
+	int index = taskID.nHead64 % mThreadPool.size();
+	NF_SHARE_PTR<NFThreadCell> threadobject = mThreadPool[index];
 	threadobject->AddTask(task);
 }
 
