@@ -41,6 +41,24 @@ const NFGUID NFActor::ID()
 	return this->id;
 }
 
+bool NFActor::Execute()
+{
+	//bulk
+	NFActorMessage messageObject;
+	while (mMessageQueue.TryPop(messageObject))
+	{
+		//must make sure that only one thread running this function at the same time
+		//mxProcessFuntor is not thread-safe
+		if (mxProcessFuntor.ExistElement(messageObject.nMsgID))
+		{
+			ACTOR_PROCESS_FUNCTOR_PTR xBeginFunctor = mxProcessFuntor.GetElement(messageObject.nMsgID);
+			xBeginFunctor->operator()(this->ID(), messageObject.nMsgID, messageObject.data);
+		}
+	}
+
+	return true;
+}
+
 bool NFActor::AddComponent(NF_SHARE_PTR<NFIComponent> pComponent)
 {
 	//if you want to add more components for the actor, please don't clear the component
@@ -73,7 +91,7 @@ NF_SHARE_PTR<NFIComponent> NFActor::FindComponent(const std::string & strCompone
 
 bool NFActor::AddMessageHandler(const int nSubMsgID, ACTOR_PROCESS_FUNCTOR_PTR xBeginFunctor)
 {
-	if (mxProcessFuntor.GetElement(nSubMsgID))
+	if (mxProcessFuntor.ExistElement(nSubMsgID))
 	{
 		return false;
 	}

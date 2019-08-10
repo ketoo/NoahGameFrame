@@ -47,6 +47,8 @@ public:
 
 	const NFGUID ID();
 	
+    virtual bool Execute();
+
     virtual bool AddComponent(NF_SHARE_PTR<NFIComponent> pComponent);
 	virtual bool RemoveComponent(const std::string& strComponentName);
 	virtual NF_SHARE_PTR<NFIComponent> FindComponent(const std::string& strComponentName);
@@ -69,6 +71,5 @@ protected:
 	NFMapEx<std::string, NFIComponent> mxComponent;
 
 	NFMapEx<int, ACTOR_PROCESS_FUNCTOR> mxProcessFuntor;
-	//NFMapEx<int, ACTOR_PROCESS_FUNCTOR> mxEndProcessFuntor;
 };
 #endif
