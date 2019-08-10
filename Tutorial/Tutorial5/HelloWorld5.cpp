@@ -33,6 +33,7 @@ bool NFHelloWorld5::Init()
 	m_pLogicClassModule = pPluginManager->FindModule<NFIClassModule>();
 	m_pHttpClientModule = pPluginManager->FindModule<NFIHttpClientModule>();
 	m_pHttpNetModule = pPluginManager->FindModule<NFIHttpServerModule>();
+	m_pWSModule = pPluginManager->FindModule<NFIWSModule>();
 	
     return true;
 }
@@ -52,6 +53,11 @@ bool NFHelloWorld5::AfterInit()
 	m_pHttpNetModule->AddNetFilter("/json", this, &NFHelloWorld5::OnFilter);
 
 	m_pHttpNetModule->InitServer(8080);
+
+
+    m_pWSModule->Initialization(9999, 8090, 4);
+
+	m_pWSModule->AddReceiveCallBack(this, &NFHelloWorld5::OnWebSocketTestProcess);
 
     return true;
 }
@@ -138,4 +144,13 @@ void NFHelloWorld5::OnGetCallBack(const NFGUID id, const int state_code, const s
 void NFHelloWorld5::OnPostCallBack(const NFGUID id, const int state_code, const std::string& strRespData, const std::string& strMemoData)
 {
     std::cout << "OnPostCallBack" << " "<< strMemoData <<std::endl;
+}
+
+///////////////////////////////////////web socket ////////////////////////////////////////
+
+void NFHelloWorld5::OnWebSocketTestProcess(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
+{
+	std::string s(msg, nLen);
+    std::cout << s << std::endl;
+    m_pWSModule->SendMsg(s, nSockIndex);
 }

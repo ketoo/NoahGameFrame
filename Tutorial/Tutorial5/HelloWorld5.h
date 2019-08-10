@@ -35,6 +35,7 @@
 #include "NFComm/NFPluginModule/NFPlatform.h"
 #include "NFComm/NFPluginModule/NFIHttpClientModule.h"
 #include "NFComm/NFPluginModule/NFIHttpServerModule.h"
+#include "NFComm/NFPluginModule/NFIWSModule.h"
 #include "NFComm/NFPluginModule/NFIPlugin.h"
 #include "NFComm/NFPluginModule/NFIPluginManager.h"
 #include "NFComm/NFPluginModule/NFIClassModule.h"
@@ -78,11 +79,14 @@ protected:
 
 	void OnGetCallBack(const NFGUID id, const int state_code, const std::string& strRespData);
 	void OnPostCallBack(const NFGUID id, const int state_code, const std::string& strRespData, const std::string& strMemoData);
+
+    void OnWebSocketTestProcess(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
 private:
 
 	NFIClassModule* m_pLogicClassModule;
 	NFIHttpServerModule* m_pHttpNetModule;
 	NFIHttpClientModule* m_pHttpClientModule;
+	NFIWSModule* m_pWSModule;
 	NFIElementModule* m_pElementModule;
 	NFIScheduleModule* m_pScheduleModule;
 };
