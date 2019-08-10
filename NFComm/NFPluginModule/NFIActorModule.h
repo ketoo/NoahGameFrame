@@ -80,42 +80,16 @@ public:
 		return false;
 	}
 
-/*
-
 	template<typename BaseType>
-	int AddDefaultEndFunc(const NFGUID nActorIndex,
-		BaseType* pBase, int (BaseType::*handler_end)(const int, const int, const std::string&))
+	int AddEndFunc(const int subMessageID,
+		BaseType* pBase, int (BaseType::*handler_end)(const NFGUID, const int, const std::string&))
 	{
 		ACTOR_PROCESS_FUNCTOR functor_end = std::bind(handler_end, pBase, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3);
 		ACTOR_PROCESS_FUNCTOR_PTR functorPtr_end(new ACTOR_PROCESS_FUNCTOR(functor_end));
 
-		return AddDefaultEndFunc(nActorIndex, functorPtr_end);
+		return AddEndFunc(subMessageID, functorPtr_end);
 	}
 
-	int AddDefaultEndFunc(const NFGUID nActorIndex, ACTOR_PROCESS_FUNCTOR functor_end)
-	{
-		ACTOR_PROCESS_FUNCTOR_PTR functorPtr_end(new ACTOR_PROCESS_FUNCTOR(functor_end));
-
-		return AddDefaultEndFunc(nActorIndex, functorPtr_end);
-	}
-
-	int AddAsyncFunc(const int nActorIndex, const int nSubMessageID,
-		ACTOR_PROCESS_FUNCTOR asyncFunctor, ACTOR_PROCESS_FUNCTOR functor_end)
-	{
-
-		NF_SHARE_PTR<NFIActor> pActor =  GetActor(nActorIndex);
-		if (pActor)
-		{
-			ACTOR_PROCESS_FUNCTOR_PTR functorPtr_begin(new ACTOR_PROCESS_FUNCTOR(asyncFunctor));
-			ACTOR_PROCESS_FUNCTOR_PTR functorPtr_end(new ACTOR_PROCESS_FUNCTOR(functor_end));
-
-			pActor->AddBeginFunc(nSubMessageID, functorPtr_begin);
-			return AddEndFunc(nActorIndex, nSubMessageID, functorPtr_end);
-		}
-
-		return 1;
-	}
-*/
 
 	virtual NFGUID RequireActor() = 0;
 	virtual NF_SHARE_PTR<NFIActor> GetActor(const NFGUID nActorIndex) = 0;
@@ -127,6 +101,9 @@ public:
     virtual bool AddResult(const NFActorMessage& message) = 0;
 
 protected:
+
+	virtual bool AddEndFunc(const int subMessageID, ACTOR_PROCESS_FUNCTOR_PTR functorPtr_end) = 0;
+	
     virtual bool AddComponent(const NFGUID nActorIndex, NF_SHARE_PTR<NFIComponent> pComponent) = 0;
 	virtual bool RemoveComponent(const NFGUID nActorIndex, const std::string& strComponentName) = 0;
 	virtual NF_SHARE_PTR<NFIComponent> FindComponent(const NFGUID nActorIndex, const std::string& strComponentName) = 0;

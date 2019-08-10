@@ -70,6 +70,6 @@ protected:
 
 	NFMapEx<std::string, NFIComponent> mxComponent;
 
-	NFMapEx<int, ACTOR_PROCESS_FUNCTOR> mxProcessFuntor;
+	NFMapEx<int, ACTOR_PROCESS_FUNCTOR> mxProcessFunctor;
 };
 #endif

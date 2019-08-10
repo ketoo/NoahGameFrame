@@ -100,7 +100,7 @@ public:
     virtual bool Shut();
 
 protected:
-	int RequestAsyEnd(const int nFormActor, const int nSubMsgID, const std::string& strData);
+	int RequestAsyEnd(const NFGUID nFormActor, const int nSubMsgID, const std::string& strData);
 	
 protected:
     NFIActorModule* m_pActorModule;
