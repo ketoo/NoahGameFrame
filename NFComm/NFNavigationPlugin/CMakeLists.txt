@@ -31,7 +31,6 @@ else()
 	target_link_libraries(NFNavigationPlugin -static-libstdc++)
 	add_definitions(
 			-D_USRDLL
-			-DTHERON_CPP11
 			-DWIN32_LEAN_AND_MEAN
 		)
 endif()

@@ -31,6 +31,8 @@
 #include <map>
 #include <string>
 #include "NFComm/NFCore/NFSingleton.hpp"
+#include "NFComm/NFCore/NFQueue.hpp"
+#include "NFComm/NFPluginModule/NFGUID.h"
 #include "NFComm/NFPluginModule/NFPlatform.h"
 #include "NFComm/NFPluginModule/NFIActor.h"
 #include "NFComm/NFPluginModule/NFIComponent.h"
@@ -40,32 +42,33 @@ class NFActor
     : public NFIActor
 {
 public:
-	NFActor(Theron::Framework& framework, NFIActorModule* pModule);
+	NFActor(const NFGUID id, NFIActorModule* pModule);
 	virtual ~NFActor();
 
+	const NFGUID ID();
 	
-    virtual void AddComponent(NF_SHARE_PTR<NFIComponent> pComponent);
+    virtual bool AddComponent(NF_SHARE_PTR<NFIComponent> pComponent);
+	virtual bool RemoveComponent(const std::string& strComponentName);
 	virtual NF_SHARE_PTR<NFIComponent> FindComponent(const std::string& strComponentName);
 
-	virtual bool AddBeginFunc(const int nSubMsgID, ACTOR_PROCESS_FUNCTOR_PTR xBeginFunctor);
-	virtual bool AddEndFunc(const int nSubMsgID, ACTOR_PROCESS_FUNCTOR_PTR xEndFunctor);
-	virtual bool AddDefaultEndFunc(ACTOR_PROCESS_FUNCTOR_PTR xEndFunctor);
+	virtual bool AddMessageHandler(const int nSubMsgID, ACTOR_PROCESS_FUNCTOR_PTR xBeginFunctor);
 
-    virtual bool SendMsg(const Theron::Address address, const NFIActorMessage& message);
+    virtual bool SendMsg(const NFActorMessage& message);
 
 protected:
-	//handler in component
-	virtual void Handler(const NFIActorMessage& message, const Theron::Address from);
 
-	//handler in main thread, the purpose is to push message to main thread
-	virtual void HandlerEx(const NFIActorMessage& message, const Theron::Address from);
+    virtual void DefaultHandler(const NFActorMessage& message, const NFGUID from);
 
 protected:
+	NFGUID id;
+
+	NFIActorModule* m_pActorModule;
+
+    NFQueue<NFActorMessage> mMessageQueue;
+
 	NFMapEx<std::string, NFIComponent> mxComponent;
 
 	NFMapEx<int, ACTOR_PROCESS_FUNCTOR> mxProcessFuntor;
-	NFMapEx<int, ACTOR_PROCESS_FUNCTOR> mxEndProcessFuntor;
-
-	ACTOR_PROCESS_FUNCTOR_PTR mxDefaultEndProcessFuntor;
+	//NFMapEx<int, ACTOR_PROCESS_FUNCTOR> mxEndProcessFuntor;
 };
 #endif

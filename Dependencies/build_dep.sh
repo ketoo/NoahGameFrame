@@ -46,18 +46,6 @@ cp -r -f ./src/.libs/*.a ../lib/Release/
 
 cd ../
 
-# compiling Theron
-cd Theron
-chmod -R 755 *
-make library mode=debug boost=off c++11=on posix=on shared=off
-cp -r -f ./Lib/*.a ../lib/Debug/
-
-make clean
-make library mode=release boost=off c++11=on posix=on shared=off
-cp -r -f ./Lib/*.a ../lib/Release/
-make clean
-cd ../
-
 # compiling lua
 echo Building lua...
 cd lua

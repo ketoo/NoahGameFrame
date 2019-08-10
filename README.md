@@ -17,7 +17,7 @@ NoahGameFrame (NF) is a lightweight, fast, scalable, distributed plugin framewor
 - Easy-to-use, interface-oriented design
 - An extensible plugin framework that makes getting your application running quick and easy
 - A clean, uncluttered design and stable engine that has been used in several commercial products
-- A high performance actor model (by Theron)
+- A high performance actor model (by a safe thread pool)
 - Event and attribute-driven, making it clear and easy to maintain your business
 - Based on standard C++ development, ensuring cross-platform support
 - An existing C++ and C# game client for rapid development

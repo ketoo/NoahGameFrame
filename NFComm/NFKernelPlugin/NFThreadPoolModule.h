@@ -128,8 +128,8 @@ private:
 
 	NFQueue<NFThreaTaskResult> mTaskResult;
 	
-	//std::vector<NF_SHARE_PTR<NFThreadCell>> mThreadPool;
-	NFConsistentHashMapEx<int, NFThreadCell> mThreadPool;
+	std::vector<NF_SHARE_PTR<NFThreadCell>> mThreadPool;
+	//NFConsistentHashMapEx<int, NFThreadCell> mThreadPool;
 };
 
 #endif

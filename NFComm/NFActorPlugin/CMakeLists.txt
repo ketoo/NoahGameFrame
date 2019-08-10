@@ -10,9 +10,9 @@ add_library(NFActorPlugin STATIC
 	
 if(UNIX)
 	if (CMAKE_BUILD_TYPE MATCHES "Release")
-		target_link_libraries(NFActorPlugin libtheron.a)
+		target_link_libraries(NFActorPlugin)
 	else()
-		target_link_libraries(NFActorPlugin libtherond.a)
+		target_link_libraries(NFActorPlugin)
 	endif()
 
 	target_link_libraries(NFActorPlugin -static-libstdc++)
@@ -26,7 +26,7 @@ if(UNIX)
 		)
 else()
 	add_dependencies(NFActorPlugin libprotobuf NFMessageDefine)
-	target_link_libraries(NFActorPlugin libprotobuf Theron NFMessageDefine)
+	target_link_libraries(NFActorPlugin libprotobuf NFMessageDefine)
 	target_link_libraries(NFActorPlugin -static-libstdc++)
 	
 	add_definitions(

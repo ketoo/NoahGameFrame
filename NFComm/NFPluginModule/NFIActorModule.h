@@ -38,47 +38,27 @@ class NFIActorModule : public NFIModule
 {
 public:
     template<typename TypeComponent>
-    int RequireActor()
+    NFGUID RequireActor()
     {
         if (!TIsDerived<TypeComponent, NFIComponent>::Result)
         {
             //BaseTypeComponent must inherit from NFIComponent;
-            return 0;
+            return NFGUID();
         }
 
-        int nActorID = RequireActor();
-        if (nActorID >= 0)
+        NFGUID nActorID = RequireActor();
+        if (!nActorID.IsNull())
         {
             AddComponent<TypeComponent>(nActorID);
 
             return nActorID;
         }
 
-        return -1;
+        return NFGUID();
     }
 
-	template<typename TypeComponent, typename BaseType>
-	int RequireActor(BaseType* pBase, int (BaseType::*handler_end)(const int, const int, const std::string&))
-	{
-		if (!TIsDerived<TypeComponent, NFIComponent>::Result)
-		{
-			//BaseTypeComponent must inherit from NFIComponent;
-			return 0;
-		}
-
-		int nActorID = RequireActor();
-		if (nActorID >= 0)
-		{
-			AddComponent<TypeComponent>(nActorID);
-			AddDefaultEndFunc<BaseType>(nActorID, pBase, handler_end);
-
-			return nActorID;
-		}
-
-		return -1;
-	}
 	template<typename TypeComponent>
-	bool AddComponent(const int nActorIndex)
+	bool AddComponent(const NFGUID nActorIndex)
 	{
 		if (!TIsDerived<TypeComponent, NFIComponent>::Result)
 		{
@@ -100,26 +80,10 @@ public:
 		return false;
 	}
 
-	template<typename BaseType>
-	int AddEndFunc(const int nActorIndex, const int nSubMessageID,
-		BaseType* pBase, int (BaseType::*handler_end)(const int, const int, const std::string&))
-	{
-		ACTOR_PROCESS_FUNCTOR functor_end = std::bind(handler_end, pBase, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3);
-		ACTOR_PROCESS_FUNCTOR_PTR functorPtr_end(new ACTOR_PROCESS_FUNCTOR(functor_end));
-
-		return AddEndFunc(nActorIndex, nSubMessageID, functorPtr_end);
-	}
-
-	int AddEndFunc(const int nActorIndex, const int nSubMessageID,
-		ACTOR_PROCESS_FUNCTOR functor_end)
-	{
-		ACTOR_PROCESS_FUNCTOR_PTR functorPtr_end(new ACTOR_PROCESS_FUNCTOR(functor_end));
-
-		return AddEndFunc(nActorIndex, nSubMessageID, functorPtr_end);
-	}
+/*
 
 	template<typename BaseType>
-	int AddDefaultEndFunc(const int nActorIndex,
+	int AddDefaultEndFunc(const NFGUID nActorIndex,
 		BaseType* pBase, int (BaseType::*handler_end)(const int, const int, const std::string&))
 	{
 		ACTOR_PROCESS_FUNCTOR functor_end = std::bind(handler_end, pBase, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3);
@@ -128,14 +92,12 @@ public:
 		return AddDefaultEndFunc(nActorIndex, functorPtr_end);
 	}
 
-	int AddDefaultEndFunc(const int nActorIndex,
-		ACTOR_PROCESS_FUNCTOR functor_end)
+	int AddDefaultEndFunc(const NFGUID nActorIndex, ACTOR_PROCESS_FUNCTOR functor_end)
 	{
 		ACTOR_PROCESS_FUNCTOR_PTR functorPtr_end(new ACTOR_PROCESS_FUNCTOR(functor_end));
 
 		return AddDefaultEndFunc(nActorIndex, functorPtr_end);
 	}
-
 
 	int AddAsyncFunc(const int nActorIndex, const int nSubMessageID,
 		ACTOR_PROCESS_FUNCTOR asyncFunctor, ACTOR_PROCESS_FUNCTOR functor_end)
@@ -153,19 +115,21 @@ public:
 
 		return 1;
 	}
+*/
 
+	virtual NFGUID RequireActor() = 0;
+	virtual NF_SHARE_PTR<NFIActor> GetActor(const NFGUID nActorIndex) = 0;
+	virtual bool ReleaseActor(const NFGUID nActorIndex) = 0;
 
-	virtual int RequireActor() = 0;
-    virtual bool SendMsgToActor(const int nActorIndex, const int nEventID, const std::string& strArg) = 0;
-	virtual bool HandlerEx(const NFIActorMessage& message, const int from) = 0;
-	virtual bool ReleaseActor(const int nActorIndex) = 0;
-	virtual NF_SHARE_PTR<NFIActor> GetActor(const int nActorIndex) = 0;
+    virtual bool SendMsgToActor(const NFGUID nActorIndex, const int messageID, const std::string& strArg) = 0;
+
+	//only be called by actor's processor
+    virtual bool AddResult(const NFActorMessage& message) = 0;
 
 protected:
-    virtual bool AddComponent(const int nActorIndex, NF_SHARE_PTR<NFIComponent> pComponent) = 0;
-
-	virtual bool AddDefaultEndFunc(const int nActorIndex, ACTOR_PROCESS_FUNCTOR_PTR functorPtr_end) = 0;
-	virtual bool AddEndFunc(const int nActorIndex, const int nSubMsgID, ACTOR_PROCESS_FUNCTOR_PTR functorPtr_end) = 0;
+    virtual bool AddComponent(const NFGUID nActorIndex, NF_SHARE_PTR<NFIComponent> pComponent) = 0;
+	virtual bool RemoveComponent(const NFGUID nActorIndex, const std::string& strComponentName) = 0;
+	virtual NF_SHARE_PTR<NFIComponent> FindComponent(const NFGUID nActorIndex, const std::string& strComponentName) = 0;
 };
 
 #endif

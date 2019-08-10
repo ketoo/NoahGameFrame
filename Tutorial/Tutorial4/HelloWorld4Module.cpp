@@ -50,16 +50,16 @@ bool NFHelloWorld4Module::AfterInit()
 
 	std::cout << "Hello, world4, AfterInit, Main thread: " << std::this_thread::get_id() << std::endl;
 
-	/*
+/*
 	//example 1
-	int nActorID1 = m_pActorModule->RequireActor();
-	m_pActorModule->AddComponent<NFHttpComponent>(nActorID1);
-	m_pActorModule->AddDefaultEndFunc(nActorID1, this, &NFHelloWorld4Module::RequestAsyEnd);
+	NFGUID actorID1 = m_pActorModule->RequireActor();
+	m_pActorModule->AddComponent<NFHttpComponent>(actorID1);
+	m_pActorModule->AddDefaultEndFunc(actorID1, this, &NFHelloWorld4Module::RequestAsyEnd);
 
 
 	for (int i = 0; i < 10; ++i)
 	{
-		m_pActorModule->SendMsgToActor(nActorID1, i, "Test actor!");
+		m_pActorModule->SendMsgToActor(actorID1, i, "Test actor!");
 	}
 
 
@@ -95,8 +95,7 @@ bool NFHelloWorld4Module::AfterInit()
 	{
 		m_pActorModule->SendMsgToActor(nActorID3, i, "Test actor!");
 	}
-	*/
-
+*/
 	std::cout << "start Benchmarks " << std::endl;
 
 	{
