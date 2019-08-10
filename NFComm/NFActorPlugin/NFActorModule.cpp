@@ -133,6 +133,7 @@ bool NFActorModule::SendMsgToActor(const NFGUID nActorIndex, const int nEventID,
     {
         NFActorMessage xMessage;
 
+		xMessage.id	= nActorIndex;
         xMessage.data = strArg;
         xMessage.nMsgID = nEventID;
 
@@ -170,4 +171,14 @@ NF_SHARE_PTR<NFIComponent> NFActorModule::FindComponent(const NFGUID nActorIndex
 bool NFActorModule::ReleaseActor(const NFGUID nActorIndex)
 {
 	return mxActorMap.RemoveElement(nActorIndex);
+}
+
+bool NFActorModule::AddEndFunc(const int subMessageID, ACTOR_PROCESS_FUNCTOR_PTR functorPtr_end)
+{
+	if (mxEndFunctor.ExistElement(subMessageID))
+	{
+		return false;
+	}
+
+	return mxEndFunctor.AddElement(subMessageID, functorPtr_end);
 }

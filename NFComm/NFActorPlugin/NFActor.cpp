@@ -48,11 +48,14 @@ bool NFActor::Execute()
 	while (mMessageQueue.TryPop(messageObject))
 	{
 		//must make sure that only one thread running this function at the same time
-		//mxProcessFuntor is not thread-safe
-		if (mxProcessFuntor.ExistElement(messageObject.nMsgID))
+		//mxProcessFunctor is not thread-safe
+		ACTOR_PROCESS_FUNCTOR_PTR xBeginFunctor = mxProcessFunctor.GetElement(messageObject.nMsgID);
+		if (xBeginFunctor != nullptr)
 		{
-			ACTOR_PROCESS_FUNCTOR_PTR xBeginFunctor = mxProcessFuntor.GetElement(messageObject.nMsgID);
 			xBeginFunctor->operator()(this->ID(), messageObject.nMsgID, messageObject.data);
+
+			//return the result to the main thread
+			m_pActorModule->AddResult(messageObject);
 		}
 	}
 
@@ -91,12 +94,12 @@ NF_SHARE_PTR<NFIComponent> NFActor::FindComponent(const std::string & strCompone
 
 bool NFActor::AddMessageHandler(const int nSubMsgID, ACTOR_PROCESS_FUNCTOR_PTR xBeginFunctor)
 {
-	if (mxProcessFuntor.ExistElement(nSubMsgID))
+	if (mxProcessFunctor.ExistElement(nSubMsgID))
 	{
 		return false;
 	}
 
-	mxProcessFuntor.AddElement(nSubMsgID, xBeginFunctor);
+	mxProcessFunctor.AddElement(nSubMsgID, xBeginFunctor);
 	return true;
 }
 
@@ -109,34 +112,3 @@ void NFActor::DefaultHandler(const NFActorMessage& message, const NFGUID from)
 {
 	
 }
-/*
-void NFActor::Handler(const NFIActorMessage& message, const NFGUID from)
-{
-    std::string strData = message.data;
-
-	ACTOR_PROCESS_FUNCTOR_PTR ptrBegin = mxProcessFuntor.GetElement(message.nMsgID);
-	if (ptrBegin != nullptr)
-	{
-		
-		ACTOR_PROCESS_FUNCTOR* pFun = ptrBegin.get();
-		pFun->operator()(message.nFormActor, message.nMsgID, strData);
-	}
- 
-    ////////////////////////////////////////////////////////
-	// it should return a message to the main thread
-    NFIActorMessage xReturnMessage;
-
-	xReturnMessage.msgType = NFIActorMessage::ACTOR_MSG_TYPE_END_FUNC;
-	xReturnMessage.nMsgID = message.nMsgID;
-    xReturnMessage.data = strData;
-    xReturnMessage.nFormActor = this->GetAddress().AsInteger();
-
-	ACTOR_PROCESS_FUNCTOR_PTR ptrEnd = mxEndProcessFuntor.GetElement(message.nMsgID);
-	if (ptrEnd != nullptr)
-	{
-		xReturnMessage.xEndFuncptr = ptrEnd;
-	}
-
-    Send(xReturnMessage, from);
-}
-*/

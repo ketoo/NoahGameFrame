@@ -37,9 +37,9 @@ bool NFHelloWorld4Module::Init()
 	return true;
 }
 
-int NFHelloWorld4Module::RequestAsyEnd(const int nFormActor, const int nSubMsgID, const std::string& strData)
+int NFHelloWorld4Module::RequestAsyEnd(const NFGUID nFormActor, const int nSubMsgID, const std::string& strData)
 {
-	std::cout << "Main thread: " << std::this_thread::get_id() << " Actor: " << nFormActor << " MsgID: " << nSubMsgID << " Data:" << strData << std::endl;
+	std::cout << "Main thread: " << std::this_thread::get_id() << " Actor: " << nFormActor.ToString() << " MsgID: " << nSubMsgID << " Data:" << strData << std::endl;
 
 	//int nActorID2 = m_pActorModule->RequireActor();
 	return 0;
@@ -54,11 +54,11 @@ bool NFHelloWorld4Module::AfterInit()
 	//example 1
 	NFGUID actorID1 = m_pActorModule->RequireActor();
 	m_pActorModule->AddComponent<NFHttpComponent>(actorID1);
-	m_pActorModule->AddDefaultEndFunc(actorID1, this, &NFHelloWorld4Module::RequestAsyEnd);
 
 
 	for (int i = 0; i < 10; ++i)
 	{
+		m_pActorModule->AddEndFunc(i, this, &NFHelloWorld4Module::RequestAsyEnd);
 		m_pActorModule->SendMsgToActor(actorID1, i, "Test actor!");
 	}
 

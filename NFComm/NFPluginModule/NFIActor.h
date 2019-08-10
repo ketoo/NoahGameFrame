@@ -47,8 +47,6 @@ public:
 	int nMsgID;
     NFGUID id;
 	std::string data;
-	////////////////////event/////////////////////////////////////////////////
-	ACTOR_PROCESS_FUNCTOR_PTR xEndFuncptr;
 protected:
 private:
 };
@@ -67,11 +65,6 @@ public:
 	virtual bool AddMessageHandler(const int nSubMsgID, ACTOR_PROCESS_FUNCTOR_PTR xBeginFunctor) = 0;
 
 	virtual bool SendMsg(const NFActorMessage& message) = 0;
-
-protected:
-
- 
-
 };
 
 #endif
