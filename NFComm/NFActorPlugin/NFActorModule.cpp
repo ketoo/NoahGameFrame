@@ -40,6 +40,7 @@ NFActorModule::~NFActorModule()
 bool NFActorModule::Init()
 {
 	m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>();
+	m_pThreadPoolModule = pPluginManager->FindModule<NFIThreadPoolModule>();
 
     return true;
 }
@@ -101,37 +102,27 @@ bool NFActorModule::AddResult(const NFActorMessage & message)
 
 bool NFActorModule::ExecuteEvent()
 {
-	/*
-	NFActorMessage xMsg;
-	bool bRet = false;
-	bRet = mxQueue.TryPop(xMsg);
-	while (bRet)
+	for (auto it : mActorMessageCount)
 	{
-		if (xMsg.msgType != NFActorMessage::ACTOR_MSG_TYPE_COMPONENT && xMsg.xEndFuncptr != nullptr)
+		const NFGUID id = it.first;
+		NF_SHARE_PTR<NFIActor> pActor = GetActor(id);
+		if (pActor)
 		{
-			//Actor can be reused in ActorPool mode, so we don't release it.
-			//>ReleaseActor(xMsg.nFormActor);
-			ACTOR_PROCESS_FUNCTOR* pFun = xMsg.xEndFuncptr.get();
-			pFun->operator()(xMsg.nFormActor, xMsg.nMsgID, xMsg.data);
-
-
-			NF_SHARE_PTR<NFIActor> xActor = mxActorMap.GetElement(xMsg.nFormActor);
-			if (xActor)
+			m_pThreadPoolModule->DoAsyncTask("",
+				[&](const NFGUID taskID, const std::string& strData) -> std::string
 			{
-				if (xActor->GetNumQueuedMessages() <= 0)
-				{
-					int nActorID = xActor->GetAddress().AsInteger();
-					if (mxActorPool.find(nActorID) == mxActorPool.end())
-					{
-						mxActorPool.insert(std::pair<int, int>(nActorID, 0));
-					}
-				}
-			}
+				pActor->Execute();
+				return "";
+			},
+			[&](const NFGUID taskID, const std::string& strData) -> void
+			{
+				//std::cout << "example 4 thread id: " << std::this_thread::get_id() << " task id:" << taskID.ToString() << " task result:" << strData << std::endl;
+			});
 		}
-
-		bRet = mxQueue.TryPop(xMsg);
 	}
-*/
+	
+	mActorMessageCount.clear();
+
 	return true;
 }
 
@@ -144,6 +135,8 @@ bool NFActorModule::SendMsgToActor(const NFGUID nActorIndex, const int nEventID,
 
         xMessage.data = strArg;
         xMessage.nMsgID = nEventID;
+
+		mActorMessageCount[pActor->ID()] = 1;
 
 		return pActor->SendMsg(xMessage);
     }

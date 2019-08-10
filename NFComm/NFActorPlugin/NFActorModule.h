@@ -35,6 +35,7 @@
 #include "NFComm/NFPluginModule/NFIActor.h"
 #include "NFComm/NFPluginModule/NFIActorModule.h"
 #include "NFComm/NFPluginModule/NFIKernelModule.h"
+#include "NFComm/NFPluginModule/NFIThreadPoolModule.h"
 #include "NFComm/NFCore/NFQueue.hpp"
 
 class NFActorModule
@@ -74,11 +75,15 @@ protected:
 
 private:
     NFIKernelModule* m_pKernelModule;
+    NFIThreadPoolModule* m_pThreadPoolModule;
 
 	NFMapEx<NFGUID, NFIActor> mxActorMap;
 	std::queue<NF_SHARE_PTR<NFIActor>> mxActorPool;
 
 	NFQueue<NFActorMessage> mxQueue;
+
+    //for schedule
+    std::map<NFGUID, int> mActorMessageCount;
 };
 
 #endif

@@ -57,9 +57,9 @@ class NFIActor
 {
 public:
 	virtual ~NFIActor() {}
-
 	virtual const NFGUID ID() = 0;
-
+    virtual bool Execute() = 0;
+    
 	virtual bool AddComponent(NF_SHARE_PTR<NFIComponent> pComponent) = 0;
 	virtual bool RemoveComponent(const std::string& strComponentName) = 0;
 	virtual NF_SHARE_PTR<NFIComponent> FindComponent(const std::string& strComponentName) = 0;
