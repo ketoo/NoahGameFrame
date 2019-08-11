@@ -49,10 +49,10 @@ bool NFActor::Execute()
 	{
 		//must make sure that only one thread running this function at the same time
 		//mxProcessFunctor is not thread-safe
-		ACTOR_PROCESS_FUNCTOR_PTR xBeginFunctor = mxProcessFunctor.GetElement(messageObject.nMsgID);
+		ACTOR_PROCESS_FUNCTOR_PTR xBeginFunctor = mxProcessFunctor.GetElement(messageObject.msgID);
 		if (xBeginFunctor != nullptr)
 		{
-			xBeginFunctor->operator()(this->ID(), messageObject.nMsgID, messageObject.data);
+			xBeginFunctor->operator()(messageObject);
 
 			//return the result to the main thread
 			m_pActorModule->AddResult(messageObject);
@@ -94,21 +94,10 @@ NF_SHARE_PTR<NFIComponent> NFActor::FindComponent(const std::string & strCompone
 
 bool NFActor::AddMessageHandler(const int nSubMsgID, ACTOR_PROCESS_FUNCTOR_PTR xBeginFunctor)
 {
-	if (mxProcessFunctor.ExistElement(nSubMsgID))
-	{
-		return false;
-	}
-
-	mxProcessFunctor.AddElement(nSubMsgID, xBeginFunctor);
-	return true;
+	return mxProcessFunctor.AddElement(nSubMsgID, xBeginFunctor);
 }
 
 bool NFActor::SendMsg(const NFActorMessage& message)
 {
 	return mMessageQueue.Push(message);
-}
-
-void NFActor::DefaultHandler(const NFActorMessage& message, const NFGUID from)
-{
-	
 }
