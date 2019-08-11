@@ -31,24 +31,61 @@
 
 ///////////////////////////////////////////////////
 
-typedef std::function<std::string(const NFGUID, std::string&)> TASK_PROCESS_FUNCTOR;
-typedef std::function<void(const NFGUID, std::string&)> TASK_PROCESS_RESULT_FUNCTOR;
+typedef std::function<void(const NFGUID, std::string&)> TASK_PROCESS_FUNCTOR;
+typedef std::shared_ptr<TASK_PROCESS_FUNCTOR> TASK_PROCESS_FUNCTOR_PTR;
 
+class NFThreadTask
+{
+public:
+	NFGUID nTaskID;
+	std::string data;
+	TASK_PROCESS_FUNCTOR_PTR xThreadFunc;
+	TASK_PROCESS_FUNCTOR_PTR xEndFunc;
+};
 
 class NFIThreadPoolModule : public NFIModule
 {
 public:
-
-	void DoAsyncTask(const std::string& data, TASK_PROCESS_FUNCTOR asyncFunctor, TASK_PROCESS_RESULT_FUNCTOR functor_end)
+template<typename BaseType>
+	void DoAsyncTask(const std::string& data, BaseType* pBase, void (BaseType::*handler_begin)(const NFGUID, std::string&))
 	{
-		return DoAsyncTask(NFGUID(), data, asyncFunctor, functor_end);
+        TASK_PROCESS_FUNCTOR functor_begin = std::bind(handler_begin, pBase, std::placeholders::_1, std::placeholders::_2);
+		TASK_PROCESS_FUNCTOR_PTR functorPtr_begin(new TASK_PROCESS_FUNCTOR(functor_begin));
+
+		DoAsyncTask(NFGUID(), data, functorPtr_begin, nullptr);
 	}
 
-	virtual void DoAsyncTask(const NFGUID taskID, const std::string& data,
-		TASK_PROCESS_FUNCTOR asyncFunctor, TASK_PROCESS_RESULT_FUNCTOR functor_end) = 0;
+	template<typename BaseType>
+	void DoAsyncTask(const std::string& data, BaseType* pBase, void (BaseType::*handler_begin)(const NFGUID, std::string&), void (BaseType::*handler_end)(const NFGUID, std::string&))
+	{
+        TASK_PROCESS_FUNCTOR functor_begin = std::bind(handler_begin, pBase, std::placeholders::_1, std::placeholders::_2);
+		TASK_PROCESS_FUNCTOR_PTR functorPtr_begin(new TASK_PROCESS_FUNCTOR(functor_begin));
+
+		TASK_PROCESS_FUNCTOR functor_end = std::bind(handler_end, pBase, std::placeholders::_1, std::placeholders::_2);
+		TASK_PROCESS_FUNCTOR_PTR functorPtr_end(new TASK_PROCESS_FUNCTOR(functor_end));
+
+		DoAsyncTask(NFGUID(), data, functorPtr_begin, functorPtr_end);
+	}
+
+    void DoAsyncTask(const std::string& data, TASK_PROCESS_FUNCTOR asyncFunctor)
+	{
+		TASK_PROCESS_FUNCTOR_PTR functorPtr_begin(new TASK_PROCESS_FUNCTOR(asyncFunctor));
+
+		DoAsyncTask(NFGUID(), data, functorPtr_begin, nullptr);
+	}
+
+    void DoAsyncTask(const std::string& data, TASK_PROCESS_FUNCTOR asyncFunctor, TASK_PROCESS_FUNCTOR functor_end)
+	{
+		TASK_PROCESS_FUNCTOR_PTR functorPtr_begin(new TASK_PROCESS_FUNCTOR(asyncFunctor));
+		TASK_PROCESS_FUNCTOR_PTR functorPtr_end(new TASK_PROCESS_FUNCTOR(functor_end));
+
+		DoAsyncTask(NFGUID(), data, functorPtr_begin, functorPtr_end);
+	}
+
+	virtual void DoAsyncTask(const NFGUID taskID, const std::string& data, TASK_PROCESS_FUNCTOR_PTR asyncFunctor, TASK_PROCESS_FUNCTOR_PTR functor_end) = 0;
 
 	/////repush the result
-	virtual void TaskResult(const NFGUID taskID, const std::string& resultData, TASK_PROCESS_RESULT_FUNCTOR functor_end) = 0;
+	virtual void TaskResult(const NFThreadTask& task) = 0;
 };
 
 #endif
