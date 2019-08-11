@@ -58,10 +58,6 @@ public:
     virtual bool SendMsg(const NFActorMessage& message);
 
 protected:
-
-    virtual void DefaultHandler(const NFActorMessage& message, const NFGUID from);
-
-protected:
 	NFGUID id;
 
 	NFIActorModule* m_pActorModule;

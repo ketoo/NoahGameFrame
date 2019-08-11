@@ -119,9 +119,9 @@ public:
 
 
 	template<typename BaseType>
-	bool AddMsgHandler(const int nSubMessage, BaseType* pBase, int (BaseType::*handler)(const NFGUID, const int, std::string&))
+	bool AddMsgHandler(const int nSubMessage, BaseType* pBase, int (BaseType::*handler)(NFActorMessage&))
 	{
-		ACTOR_PROCESS_FUNCTOR functor = std::bind(handler, pBase, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3);
+		ACTOR_PROCESS_FUNCTOR functor = std::bind(handler, pBase, std::placeholders::_1);
 		ACTOR_PROCESS_FUNCTOR_PTR functorPtr(new ACTOR_PROCESS_FUNCTOR(functor));
 		
 		return mSelf->AddMessageHandler(nSubMessage, functorPtr);

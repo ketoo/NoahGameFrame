@@ -32,8 +32,9 @@
 
 class NFIComponent;
 class NFIActorModule;
+class NFActorMessage;
 
-typedef std::function<void(const NFGUID, const int, std::string&)> ACTOR_PROCESS_FUNCTOR;
+typedef std::function<void(NFActorMessage&)> ACTOR_PROCESS_FUNCTOR;
 typedef NF_SHARE_PTR<ACTOR_PROCESS_FUNCTOR> ACTOR_PROCESS_FUNCTOR_PTR;
 
 class NFActorMessage
@@ -41,10 +42,10 @@ class NFActorMessage
 public:
 	NFActorMessage()
 	{
-		nMsgID = 0;
+		msgID = 0;
 	}
 
-	int nMsgID;
+	int msgID;
     NFGUID id;
 	std::string data;
 protected:

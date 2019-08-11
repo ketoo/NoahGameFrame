@@ -81,10 +81,9 @@ public:
 	}
 
 	template<typename BaseType>
-	int AddEndFunc(const int subMessageID,
-		BaseType* pBase, int (BaseType::*handler_end)(const NFGUID, const int, const std::string&))
+	int AddEndFunc(const int subMessageID, BaseType* pBase, void (BaseType::*handler_end)(NFActorMessage&))
 	{
-		ACTOR_PROCESS_FUNCTOR functor_end = std::bind(handler_end, pBase, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3);
+		ACTOR_PROCESS_FUNCTOR functor_end = std::bind(handler_end, pBase, std::placeholders::_1);
 		ACTOR_PROCESS_FUNCTOR_PTR functorPtr_end(new ACTOR_PROCESS_FUNCTOR(functor_end));
 
 		return AddEndFunc(subMessageID, functorPtr_end);

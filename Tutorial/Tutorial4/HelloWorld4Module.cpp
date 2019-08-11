@@ -37,12 +37,9 @@ bool NFHelloWorld4Module::Init()
 	return true;
 }
 
-int NFHelloWorld4Module::RequestAsyEnd(const NFGUID nFormActor, const int nSubMsgID, const std::string& strData)
+void NFHelloWorld4Module::RequestAsyEnd(NFActorMessage& actorMessage)
 {
-	std::cout << "Main thread: " << std::this_thread::get_id() << " Actor: " << nFormActor.ToString() << " MsgID: " << nSubMsgID << " Data:" << strData << std::endl;
-
-	//int nActorID2 = m_pActorModule->RequireActor();
-	return 0;
+	std::cout << "Main thread: " << std::this_thread::get_id() << " Actor: " << actorMessage.id.ToString() << " MsgID: " << actorMessage.msgID << " Data:" << actorMessage.data << std::endl;
 }
 
 bool NFHelloWorld4Module::AfterInit()
@@ -50,11 +47,11 @@ bool NFHelloWorld4Module::AfterInit()
 	std::cout << "Hello, world4, AfterInit, Main thread: " << std::this_thread::get_id() << std::endl;
 
 	///////////////////////////
-
 	std::cout << "start Benchmarks " << std::endl;
 	//100M
-	int messageCount = 100000000;
-
+	int messageCount = 10;
+	//int messageCount = 100000000;
+	/*
 	{
 		std::cout << "Test for ConcurrentQueue" << std::endl;
 		moodycamel::ConcurrentQueue<int> q;
@@ -77,7 +74,10 @@ bool NFHelloWorld4Module::AfterInit()
 
 				int timeEnd = NFGetTimeMS();
 				int timeCost = timeEnd - timeStart;
-				std::cout << "end Benchmarks, cost: " << timeCost << "ms for " << messageCount << ", qps: " << (messageCount / timeCost) * 1000 << std::endl;
+				if (timeCost > 0)
+				{
+					std::cout << "end Benchmarks, cost: " << timeCost << "ms for " << messageCount << ", qps: " << (messageCount / timeCost) * 1000 << std::endl;
+				}
 			});
 		}
 
@@ -133,7 +133,10 @@ bool NFHelloWorld4Module::AfterInit()
 
 				int timeEnd = NFGetTimeMS();
 				int timeCost = timeEnd - timeStart;
-				std::cout << "end Benchmarks, cost: " << timeCost << "ms for " << messageCount << ", qps: " << (messageCount / timeCost) * 1000 << std::endl;
+				if (timeCost > 0)
+				{
+					std::cout << "end Benchmarks, cost: " << timeCost << "ms for " << messageCount << ", qps: " << (messageCount / timeCost) * 1000 << std::endl;
+				}
 			});
 		}
 
@@ -165,7 +168,10 @@ bool NFHelloWorld4Module::AfterInit()
 
 				int timeEnd = NFGetTimeMS();
 				int timeCost = timeEnd - timeStart;
-				std::cout << "end Benchmarks, cost: " << timeCost << "ms for " << messageCount << ", qps: " << (messageCount / timeCost) * 1000 << std::endl;
+				if (timeCost > 0)
+				{
+					std::cout << "end Benchmarks, cost: " << timeCost << "ms for " << messageCount << ", qps: " << (messageCount / timeCost) * 1000 << std::endl;
+				}
 			});
 		}
 
@@ -175,6 +181,7 @@ bool NFHelloWorld4Module::AfterInit()
 			threads[i].join();
 		}
 	}
+	*/
 	{
 		std::cout << "Test for Task NO RESULT!" << std::endl;
 		int timeStart = NFGetTimeMS();
@@ -184,15 +191,17 @@ bool NFHelloWorld4Module::AfterInit()
 			m_pThreadPoolModule->DoAsyncTask("sas",
 				[&](NFThreadTask& task) -> void
 			{
-				//std::cout << "example 4 thread id: " << std::this_thread::get_id() << " task id:" << taskID.ToString() << " task data:" << strData << std::endl;
+				std::cout << "example 4 thread id: " << std::this_thread::get_id() << " task id:" << task.nTaskID.ToString() << " task data:" << task.data << std::endl;
 				task.data = "aaaaaresulttttttt";
 			});
 		}
 
 		int timeEnd = NFGetTimeMS();
 		int timeCost = timeEnd - timeStart;
-		std::cout << "end Benchmarks, cost: " << timeCost << "ms for " << messageCount << ", qps: " << (messageCount / timeCost) * 1000 << std::endl;
-
+		if (timeCost > 0)
+		{
+			std::cout << "end Benchmarks, cost: " << timeCost << "ms for " << messageCount << ", qps: " << (messageCount / timeCost) * 1000 << std::endl;
+		}
 	}
 	{
 		std::cout << "Test for Task WITH RESULT!" << std::endl;
@@ -215,8 +224,10 @@ bool NFHelloWorld4Module::AfterInit()
 
 		int timeEnd = NFGetTimeMS();
 		int timeCost = timeEnd - timeStart;
-		std::cout << "end Benchmarks, cost: " << timeCost << "ms for " << messageCount << ", qps: " << (messageCount / timeCost) * 1000 << std::endl;
-
+		if (timeCost > 0)
+		{
+			std::cout << "end Benchmarks, cost: " << timeCost << "ms for " << messageCount << ", qps: " << (messageCount / timeCost) * 1000 << std::endl;
+		}
 	}
 
 	//actor test
@@ -234,23 +245,25 @@ bool NFHelloWorld4Module::AfterInit()
 		
 		for (int i = 5; i < 10; ++i)
 		{
-			m_pActorModule->AddEndFunc(i, [](const NFGUID nFormActor, const int nSubMsgID, std::string& strData) -> void
+			m_pActorModule->AddEndFunc(i, [](NFActorMessage& actorMessage) -> void
 			{
-				std::cout << "example 2 AddEndFunc " << nFormActor.ToString() << " MSGID: " << nSubMsgID << std::endl;
+				std::cout << "example 2 AddEndFunc " << actorMessage.id.ToString() << " MSGID: " << actorMessage.msgID << std::endl;
 			});
 		}
 
 		for (int i = 0; i < messageCount; ++i)
 		{
-			int id = i % 10;
-			m_pActorModule->SendMsgToActor(actorID1, id, "Test actor!");
+			m_pActorModule->SendMsgToActor(actorID1, i, "test");
+			//m_pActorModule->SendMsgToActor(actorID1, i, std::to_string(i*i));
 		}
 
 		int timeEnd = NFGetTimeMS();
 		int timeCost = timeEnd - timeStart;
-		std::cout << "end Benchmarks, cost: " << timeCost << "ms for " << messageCount << ", qps: " << (messageCount / timeCost) * 1000 << std::endl;
+		if (timeCost > 0)
+		{
+			std::cout << "end Benchmarks, cost: " << timeCost << "ms for " << messageCount << ", qps: " << (messageCount / timeCost) * 1000 << std::endl;
+		}
 	}
-	
 
 	std::cout << "Hello, world4, AfterInit end" << std::endl;
 	return true;

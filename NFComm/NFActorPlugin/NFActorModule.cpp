@@ -99,9 +99,9 @@ bool NFActorModule::ExecuteEvent()
 		if (pActor)
 		{
 			m_pThreadPoolModule->DoAsyncTask("",
-				[&](const NFGUID taskID, std::string& strData) -> void
+				[&](NFThreadTask& threadTask) -> void
 			{
-				pActor->Execute();
+				//pActor->Execute();
 			});
 		}
 	}
@@ -116,10 +116,10 @@ bool NFActorModule::ExecuteResultEvent()
 	NFActorMessage actorMessage;
 	while (mxResultQueue.try_dequeue(actorMessage))
 	{
-		ACTOR_PROCESS_FUNCTOR_PTR functorPtr_end = mxEndFunctor.GetElement(actorMessage.nMsgID);
+		ACTOR_PROCESS_FUNCTOR_PTR functorPtr_end = mxEndFunctor.GetElement(actorMessage.msgID);
 		if (functorPtr_end)
 		{
-			functorPtr_end->operator()(actorMessage.id, actorMessage.nMsgID, actorMessage.data);
+			functorPtr_end->operator()(actorMessage);
 		}
 	}
 	
@@ -135,7 +135,7 @@ bool NFActorModule::SendMsgToActor(const NFGUID nActorIndex, const int nEventID,
 
 		xMessage.id	= nActorIndex;
         xMessage.data = strArg;
-        xMessage.nMsgID = nEventID;
+        xMessage.msgID = nEventID;
 
 		mActorMessageCount[pActor->ID()] = 1;
 
