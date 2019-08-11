@@ -66,25 +66,15 @@ bool NFActorModule::Shut()
 bool NFActorModule::Execute()
 {
 	ExecuteEvent();
+	ExecuteResultEvent();
+
     return true;
 }
 
 
 NFGUID NFActorModule::RequireActor()
 {
-	NF_SHARE_PTR<NFIActor> pActor = nullptr;
-	if (!mxActorPool.empty())
-	{
-		pActor = mxActorPool.front();
-		mxActorPool.pop();
-
-		if (pActor)
-		{
-			return pActor->ID();
-		}
-	}
-
-	pActor = NF_SHARE_PTR<NFIActor>(NF_NEW NFActor(m_pKernelModule->CreateGUID(), this));
+	NF_SHARE_PTR<NFIActor> pActor = NF_SHARE_PTR<NFIActor>(NF_NEW NFActor(m_pKernelModule->CreateGUID(), this));
 	mxActorMap.AddElement(pActor->ID(), pActor);
 
 	return pActor->ID();
@@ -97,7 +87,7 @@ NF_SHARE_PTR<NFIActor> NFActorModule::GetActor(const NFGUID nActorIndex)
 
 bool NFActorModule::AddResult(const NFActorMessage & message)
 {
-	return mxQueue.Push(message);
+	return mxResultQueue.Push(message);
 }
 
 bool NFActorModule::ExecuteEvent()
@@ -109,20 +99,30 @@ bool NFActorModule::ExecuteEvent()
 		if (pActor)
 		{
 			m_pThreadPoolModule->DoAsyncTask("",
-				[&](const NFGUID taskID, const std::string& strData) -> std::string
+				[&](const NFGUID taskID, std::string& strData) -> void
 			{
 				pActor->Execute();
-				return "";
-			},
-			[&](const NFGUID taskID, const std::string& strData) -> void
-			{
-				//std::cout << "example 4 thread id: " << std::this_thread::get_id() << " task id:" << taskID.ToString() << " task result:" << strData << std::endl;
 			});
 		}
 	}
 	
 	mActorMessageCount.clear();
 
+	return true;
+}
+
+bool NFActorModule::ExecuteResultEvent()
+{
+	NFActorMessage actorMessage;
+	while (mxResultQueue.try_dequeue(actorMessage))
+	{
+		ACTOR_PROCESS_FUNCTOR_PTR functorPtr_end = mxEndFunctor.GetElement(actorMessage.nMsgID);
+		if (functorPtr_end)
+		{
+			functorPtr_end->operator()(actorMessage.id, actorMessage.nMsgID, actorMessage.data);
+		}
+	}
+	
 	return true;
 }
 
@@ -175,10 +175,5 @@ bool NFActorModule::ReleaseActor(const NFGUID nActorIndex)
 
 bool NFActorModule::AddEndFunc(const int subMessageID, ACTOR_PROCESS_FUNCTOR_PTR functorPtr_end)
 {
-	if (mxEndFunctor.ExistElement(subMessageID))
-	{
-		return false;
-	}
-
 	return mxEndFunctor.AddElement(subMessageID, functorPtr_end);
 }

@@ -33,7 +33,7 @@
 class NFIComponent;
 class NFIActorModule;
 
-typedef std::function<int(const NFGUID, const int, std::string&)> ACTOR_PROCESS_FUNCTOR;
+typedef std::function<void(const NFGUID, const int, std::string&)> ACTOR_PROCESS_FUNCTOR;
 typedef NF_SHARE_PTR<ACTOR_PROCESS_FUNCTOR> ACTOR_PROCESS_FUNCTOR_PTR;
 
 class NFActorMessage

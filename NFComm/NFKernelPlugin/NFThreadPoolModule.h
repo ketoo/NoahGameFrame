@@ -60,7 +60,7 @@ protected:
 			NFThreadTask task;
 			if (mTaskList.TryPop(task))
 			{
-				task.xThreadFunc->operator()(task.nTaskID, task.data);
+				task.xThreadFunc->operator()(task);
 
 				//repush the result to the main thread
 				//and, do we must to tell the result?

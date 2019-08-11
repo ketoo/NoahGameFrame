@@ -47,63 +47,17 @@ int NFHelloWorld4Module::RequestAsyEnd(const NFGUID nFormActor, const int nSubMs
 
 bool NFHelloWorld4Module::AfterInit()
 {
-
 	std::cout << "Hello, world4, AfterInit, Main thread: " << std::this_thread::get_id() << std::endl;
 
+	///////////////////////////
 
-	//example 1
-	NFGUID actorID1 = m_pActorModule->RequireActor();
-	m_pActorModule->AddComponent<NFHttpComponent>(actorID1);
-
-
-	for (int i = 0; i < 10; ++i)
-	{
-		m_pActorModule->AddEndFunc(i, this, &NFHelloWorld4Module::RequestAsyEnd);
-		m_pActorModule->SendMsgToActor(actorID1, i, "Test actor!");
-	}
-
-/*
-	//example 2
-	int nActorID2 = m_pActorModule->RequireActor();
-	m_pActorModule->AddComponent<NFHttpComponent>(nActorID2);
-	m_pActorModule->AddEndFunc(nActorID2, 1, [nActorID2](const int nFormActor, const int nSubMsgID, std::string& strData) -> int
-	{
-		std::cout << "example 2 AddEndFunc" << nActorID2 << std::endl;
-		return nSubMsgID;
-	});
-
-	for (int i = 0; i < 10; ++i)
-	{
-		m_pActorModule->SendMsgToActor(nActorID2, i, "Test actor!");
-	}
-
-	//example 3
-	int nActorID3 = m_pActorModule->RequireActor();
-	m_pActorModule->AddAsyncFunc(nActorID3, 1,
-		[nActorID3](const int nFormActor, const int nSubMsgID, std::string& strData) -> int
-	{
-		std::cout << "example 3 Async " << nActorID3 << " " << nSubMsgID << std::endl;
-		return nSubMsgID;
-	},
-		[nActorID3](const int nFormActor, const int nSubMsgID, std::string& strData) -> int
-	{
-		std::cout << "example 3 end " << nActorID3 << " " << nSubMsgID  <<  std::endl;
-		return nSubMsgID;
-	});
-
-	for (int i = 0; i < 10; ++i)
-	{
-		m_pActorModule->SendMsgToActor(nActorID3, i, "Test actor!");
-	}
-*/
 	std::cout << "start Benchmarks " << std::endl;
+	//100M
+	int messageCount = 100000000;
 
 	{
 		std::cout << "Test for ConcurrentQueue" << std::endl;
-
 		moodycamel::ConcurrentQueue<int> q;
-		//100M
-		int messageCount = 100000000;
 
 		std::thread threads[6];
 
@@ -160,8 +114,6 @@ bool NFHelloWorld4Module::AfterInit()
 	{
 		std::cout << "Test for NFQuene" << std::endl;
 		NFQueue<int> q;
-		//100M
-		int messageCount = 100000000;
 
 		std::thread threads[6];
 		int threadCount = 2;
@@ -194,8 +146,6 @@ bool NFHelloWorld4Module::AfterInit()
 	{
 		std::cout << "Test for NFQuene std::string" << std::endl;
 		NFQueue<std::string> q;
-		//100M
-		int messageCount = 100000000;
 
 		std::thread threads[6];
 		int threadCount = 2;
@@ -226,20 +176,38 @@ bool NFHelloWorld4Module::AfterInit()
 		}
 	}
 	{
-		std::cout << "Test for Task" << std::endl;
-		int messageCount = 100000000;
+		std::cout << "Test for Task NO RESULT!" << std::endl;
+		int timeStart = NFGetTimeMS();
+		//example 4
+		for (int i = 0; i < messageCount; ++i)
+		{
+			m_pThreadPoolModule->DoAsyncTask("sas",
+				[&](NFThreadTask& task) -> void
+			{
+				//std::cout << "example 4 thread id: " << std::this_thread::get_id() << " task id:" << taskID.ToString() << " task data:" << strData << std::endl;
+				task.data = "aaaaaresulttttttt";
+			});
+		}
+
+		int timeEnd = NFGetTimeMS();
+		int timeCost = timeEnd - timeStart;
+		std::cout << "end Benchmarks, cost: " << timeCost << "ms for " << messageCount << ", qps: " << (messageCount / timeCost) * 1000 << std::endl;
+
+	}
+	{
+		std::cout << "Test for Task WITH RESULT!" << std::endl;
 		int timeStart = NFGetTimeMS();
 		//100M
 		//example 4
 		for (int i = 0; i < messageCount; ++i)
 		{
 			m_pThreadPoolModule->DoAsyncTask("sas",
-				[&](const NFGUID taskID, const std::string& strData) -> std::string
+				[&](NFThreadTask& task) -> void
 			{
 				//std::cout << "example 4 thread id: " << std::this_thread::get_id() << " task id:" << taskID.ToString() << " task data:" << strData << std::endl;
-				return "aaaaaresulttttttt";
+				task.data = "aaaaaresulttttttt";
 			},
-				[&](const NFGUID taskID, const std::string& strData) -> void
+				[&](NFThreadTask& task) -> void
 			{
 				//std::cout << "example 4 thread id: " << std::this_thread::get_id() << " task id:" << taskID.ToString() << " task result:" << strData << std::endl;
 			});
@@ -250,26 +218,39 @@ bool NFHelloWorld4Module::AfterInit()
 		std::cout << "end Benchmarks, cost: " << timeCost << "ms for " << messageCount << ", qps: " << (messageCount / timeCost) * 1000 << std::endl;
 
 	}
-	
-	//example 5
-	/*
-	for (int i = 0; i < 10000000; ++i)
+
+	//actor test
 	{
-		m_pThreadPoolModule->DoAsyncTask(i, NFGUID(0, i), "sas",
-			[](const NFGUID taskID, const std::string& strData) -> std::string
+		std::cout << "Test for actor mode" << std::endl;
+		int timeStart = NFGetTimeMS();
+
+		NFGUID actorID1 = m_pActorModule->RequireActor();
+		m_pActorModule->AddComponent<NFHttpComponent>(actorID1);
+		
+		for (int i = 0; i < 5; ++i)
 		{
-			//std::cout << "example 5 thread id: " << std::this_thread::get_id() << " task id:" << taskID.ToString() << " task data:" << strData << std::endl;
-			return "aaaaaresulttttttt";
-		},
-			[](const NFGUID taskID, const std::string& strData) -> void
+			m_pActorModule->AddEndFunc(i, this, &NFHelloWorld4Module::RequestAsyEnd);
+		}
+		
+		for (int i = 5; i < 10; ++i)
 		{
-			//std::cout << "example 5 thread id: " << std::this_thread::get_id() << " task id:" << taskID.ToString() << " task result:" << strData << std::endl;
-		});
+			m_pActorModule->AddEndFunc(i, [](const NFGUID nFormActor, const int nSubMsgID, std::string& strData) -> void
+			{
+				std::cout << "example 2 AddEndFunc " << nFormActor.ToString() << " MSGID: " << nSubMsgID << std::endl;
+			});
+		}
+
+		for (int i = 0; i < messageCount; ++i)
+		{
+			int id = i % 10;
+			m_pActorModule->SendMsgToActor(actorID1, id, "Test actor!");
+		}
+
+		int timeEnd = NFGetTimeMS();
+		int timeCost = timeEnd - timeStart;
+		std::cout << "end Benchmarks, cost: " << timeCost << "ms for " << messageCount << ", qps: " << (messageCount / timeCost) * 1000 << std::endl;
 	}
-	*/
 	
-
-
 
 	std::cout << "Hello, world4, AfterInit end" << std::endl;
 	return true;

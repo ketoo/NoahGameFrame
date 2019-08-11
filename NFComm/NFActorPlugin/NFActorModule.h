@@ -72,6 +72,7 @@ protected:
 
 
 	virtual bool ExecuteEvent();
+	virtual bool ExecuteResultEvent();
 
 
 private:
@@ -79,13 +80,12 @@ private:
     NFIThreadPoolModule* m_pThreadPoolModule;
 
 	NFMapEx<NFGUID, NFIActor> mxActorMap;
-	std::queue<NF_SHARE_PTR<NFIActor>> mxActorPool;
 
-	NFQueue<NFActorMessage> mxQueue;
+	NFQueue<NFActorMessage> mxResultQueue;
+	NFMapEx<int, ACTOR_PROCESS_FUNCTOR> mxEndFunctor;
 
     //for schedule
     std::map<NFGUID, int> mActorMessageCount;
-	NFMapEx<int, ACTOR_PROCESS_FUNCTOR> mxEndFunctor;
 };
 
 #endif
