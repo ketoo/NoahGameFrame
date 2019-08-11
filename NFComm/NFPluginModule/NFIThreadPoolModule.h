@@ -30,8 +30,9 @@
 #include <thread>
 
 ///////////////////////////////////////////////////
+class NFThreadTask;
 
-typedef std::function<void(const NFGUID, std::string&)> TASK_PROCESS_FUNCTOR;
+typedef std::function<void(NFThreadTask&)> TASK_PROCESS_FUNCTOR;
 typedef std::shared_ptr<TASK_PROCESS_FUNCTOR> TASK_PROCESS_FUNCTOR_PTR;
 
 class NFThreadTask
@@ -43,25 +44,26 @@ public:
 	TASK_PROCESS_FUNCTOR_PTR xEndFunc;
 };
 
+
 class NFIThreadPoolModule : public NFIModule
 {
 public:
 template<typename BaseType>
-	void DoAsyncTask(const std::string& data, BaseType* pBase, void (BaseType::*handler_begin)(const NFGUID, std::string&))
+	void DoAsyncTask(const std::string& data, BaseType* pBase, void (BaseType::*handler_begin)(NFThreadTask&&))
 	{
-        TASK_PROCESS_FUNCTOR functor_begin = std::bind(handler_begin, pBase, std::placeholders::_1, std::placeholders::_2);
+        TASK_PROCESS_FUNCTOR functor_begin = std::bind(handler_begin, pBase, std::placeholders::_1);
 		TASK_PROCESS_FUNCTOR_PTR functorPtr_begin(new TASK_PROCESS_FUNCTOR(functor_begin));
 
 		DoAsyncTask(NFGUID(), data, functorPtr_begin, nullptr);
 	}
 
 	template<typename BaseType>
-	void DoAsyncTask(const std::string& data, BaseType* pBase, void (BaseType::*handler_begin)(const NFGUID, std::string&), void (BaseType::*handler_end)(const NFGUID, std::string&))
+	void DoAsyncTask(const std::string& data, BaseType* pBase, void (BaseType::*handler_begin)(NFThreadTask&&), void (BaseType::*handler_end)(NFThreadTask&&))
 	{
-        TASK_PROCESS_FUNCTOR functor_begin = std::bind(handler_begin, pBase, std::placeholders::_1, std::placeholders::_2);
+        TASK_PROCESS_FUNCTOR functor_begin = std::bind(handler_begin, pBase, std::placeholders::_1);
 		TASK_PROCESS_FUNCTOR_PTR functorPtr_begin(new TASK_PROCESS_FUNCTOR(functor_begin));
 
-		TASK_PROCESS_FUNCTOR functor_end = std::bind(handler_end, pBase, std::placeholders::_1, std::placeholders::_2);
+		TASK_PROCESS_FUNCTOR functor_end = std::bind(handler_end, pBase, std::placeholders::_1);
 		TASK_PROCESS_FUNCTOR_PTR functorPtr_end(new TASK_PROCESS_FUNCTOR(functor_end));
 
 		DoAsyncTask(NFGUID(), data, functorPtr_begin, functorPtr_end);

@@ -89,7 +89,7 @@ void NFThreadPoolModule::ExecuteTaskResult()
 	{
 		if (xMsg.xEndFunc)
 		{
-			xMsg.xEndFunc->operator()(xMsg.nTaskID, xMsg.data);
+			xMsg.xEndFunc->operator()(xMsg);
 		}
 	}
 }

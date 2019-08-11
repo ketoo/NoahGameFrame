@@ -90,6 +90,12 @@ public:
 		return AddEndFunc(subMessageID, functorPtr_end);
 	}
 
+    int AddEndFunc(const int subMessageID, ACTOR_PROCESS_FUNCTOR functor_end)
+	{
+		ACTOR_PROCESS_FUNCTOR_PTR functorPtr_end(new ACTOR_PROCESS_FUNCTOR(functor_end));
+
+		return AddEndFunc(subMessageID, functorPtr_end);
+	}
 
 	virtual NFGUID RequireActor() = 0;
 	virtual NF_SHARE_PTR<NFIActor> GetActor(const NFGUID nActorIndex) = 0;

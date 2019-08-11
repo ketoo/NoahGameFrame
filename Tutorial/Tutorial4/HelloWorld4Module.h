@@ -66,7 +66,10 @@ public:
 		return true;
 	}
 
-
+	//it's very important to note here:
+	//sometimes, the function below not finished but other thread call it at the same time
+	//the reason is the main thread post a new message to this actor and the schedulel assigned another thread to take the execution right
+	//so, you wouldnot use the data which not thread-safe in this function
 	virtual int OnMsgEvent(const NFGUID from, const int event, std::string& arg)
 	{
 
