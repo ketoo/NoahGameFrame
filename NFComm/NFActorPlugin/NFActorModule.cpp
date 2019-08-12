@@ -99,9 +99,9 @@ bool NFActorModule::ExecuteEvent()
 		if (pActor)
 		{
 			m_pThreadPoolModule->DoAsyncTask("",
-				[&](NFThreadTask& threadTask) -> void
+				[pActor](NFThreadTask& threadTask) -> void
 			{
-				//pActor->Execute();
+				pActor->Execute();
 			});
 		}
 	}

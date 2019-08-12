@@ -80,7 +80,8 @@
         "ostream": "cpp",
         "sstream": "cpp",
         "streambuf": "cpp",
-        "typeindex": "cpp"
+        "typeindex": "cpp",
+        "complex": "cpp"
     },
     "C_Cpp.errorSquiggles": "Disabled"
 }
