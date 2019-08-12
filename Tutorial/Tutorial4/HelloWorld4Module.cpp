@@ -39,7 +39,7 @@ bool NFHelloWorld4Module::Init()
 
 void NFHelloWorld4Module::RequestAsyEnd(NFActorMessage& actorMessage)
 {
-	std::cout << "Main thread: " << std::this_thread::get_id() << " Actor: " << actorMessage.id.ToString() << " MsgID: " << actorMessage.msgID << " Data:" << actorMessage.data << std::endl;
+	//std::cout << "Main thread: " << std::this_thread::get_id() << " Actor: " << actorMessage.id.ToString() << " MsgID: " << actorMessage.msgID << " Data:" << actorMessage.data << std::endl;
 }
 
 bool NFHelloWorld4Module::AfterInit()
@@ -49,9 +49,7 @@ bool NFHelloWorld4Module::AfterInit()
 	///////////////////////////
 	std::cout << "start Benchmarks " << std::endl;
 	//100M
-	int messageCount = 10;
-	//int messageCount = 100000000;
-	/*
+	int messageCount = 100000000;
 	{
 		std::cout << "Test for ConcurrentQueue" << std::endl;
 		moodycamel::ConcurrentQueue<int> q;
@@ -181,7 +179,6 @@ bool NFHelloWorld4Module::AfterInit()
 			threads[i].join();
 		}
 	}
-	*/
 	{
 		std::cout << "Test for Task NO RESULT!" << std::endl;
 		int timeStart = NFGetTimeMS();
@@ -191,7 +188,7 @@ bool NFHelloWorld4Module::AfterInit()
 			m_pThreadPoolModule->DoAsyncTask("sas",
 				[&](NFThreadTask& task) -> void
 			{
-				std::cout << "example 4 thread id: " << std::this_thread::get_id() << " task id:" << task.nTaskID.ToString() << " task data:" << task.data << std::endl;
+				//std::cout << "example 4 thread id: " << std::this_thread::get_id() << " task id:" << task.nTaskID.ToString() << " task data:" << task.data << std::endl;
 				task.data = "aaaaaresulttttttt";
 			});
 		}
@@ -247,7 +244,7 @@ bool NFHelloWorld4Module::AfterInit()
 		{
 			m_pActorModule->AddEndFunc(i, [](NFActorMessage& actorMessage) -> void
 			{
-				std::cout << "example 2 AddEndFunc " << actorMessage.id.ToString() << " MSGID: " << actorMessage.msgID << std::endl;
+				//std::cout << "example 2 AddEndFunc " << actorMessage.id.ToString() << " MSGID: " << actorMessage.msgID << std::endl;
 			});
 		}
 

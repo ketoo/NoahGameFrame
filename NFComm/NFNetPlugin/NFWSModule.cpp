@@ -644,13 +644,13 @@ std::string NFWSModule::EncodeFrame(const char * data, size_t size_, bool text)
         res.append(reinterpret_cast<const char*>(&size), sizeof(size));
     }
 
-    uint8_t opcode = FIN_FRAME_FLAG | static_cast<uint8_t>(opcode::binary);
+    uint8_t ocode = FIN_FRAME_FLAG | static_cast<uint8_t>(opcode::binary);
     if (text)
     {
-        opcode = FIN_FRAME_FLAG | static_cast<uint8_t>(opcode::text);
+        ocode = FIN_FRAME_FLAG | static_cast<uint8_t>(opcode::text);
     }
 
-    res.append(reinterpret_cast<const char*>(&opcode), sizeof(opcode));
+    res.append(reinterpret_cast<const char*>(&ocode), sizeof(opcode));
     res.append(reinterpret_cast<const char*>(&payload_len), sizeof(payload_len));
 
     res.append(data,size);
