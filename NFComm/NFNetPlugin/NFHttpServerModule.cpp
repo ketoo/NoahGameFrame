@@ -60,13 +60,18 @@ int NFHttpServerModule::InitServer(const unsigned short nPort)
     return m_pHttpServer->InitServer(nPort);
 }
 
-bool NFHttpServerModule::OnReceiveNetPack(const NFHttpRequest& req)
+bool NFHttpServerModule::OnReceiveNetPack(NF_SHARE_PTR<NFHttpRequest> req)
 {
+	if (req == nullptr)
+	{
+		return false;
+	}
+
 	NFPerformance performance;
-	auto it = mMsgCBMap.GetElement(req.type);
+	auto it = mMsgCBMap.GetElement(req->type);
 	if (it)
 	{
-		auto itPath = it->find(req.path);
+		auto itPath = it->find(req->path);
 		if (it->end() != itPath)
 		{
 			HTTP_RECEIVE_FUNCTOR_PTR& pFunPtr = itPath->second;
@@ -89,16 +94,21 @@ bool NFHttpServerModule::OnReceiveNetPack(const NFHttpRequest& req)
 		os << "---------------net module performance problem------------------- ";
 		os << performance.TimeScope();
 		os << "---------- ";
-		os << req.path;
+		os << req->path;
 		m_pLogModule->LogWarning(NFGUID(), os, __FUNCTION__, __LINE__);
 	}
 
 	return ResponseMsg(req, "", NFWebStatus::WEB_ERROR);
 }
 
-NFWebStatus NFHttpServerModule::OnFilterPack(const NFHttpRequest & req)
+NFWebStatus NFHttpServerModule::OnFilterPack(NF_SHARE_PTR<NFHttpRequest> req)
 {
-	auto itPath = mMsgFliterMap.find(req.path);
+	if (req == nullptr)
+	{
+		return NFWebStatus::WEB_INTER_ERROR;
+	}
+
+	auto itPath = mMsgFliterMap.find(req->path);
 	if (mMsgFliterMap.end() != itPath)
 	{
 		HTTP_FILTER_FUNCTOR_PTR& pFunPtr = itPath->second;
@@ -144,18 +154,8 @@ bool NFHttpServerModule::AddFilterCB(const std::string& strCommand, const HTTP_F
     return true;
 }
 
-bool NFHttpServerModule::ResponseMsg(const NFHttpRequest& req, const std::string& strMsg, NFWebStatus code,
+bool NFHttpServerModule::ResponseMsg(NF_SHARE_PTR<NFHttpRequest> req, const std::string& strMsg, NFWebStatus code,
                                       const std::string& strReason)
 {
     return m_pHttpServer->ResponseMsg(req, strMsg, code, strReason);
 }
-
-/*
-bool NFHttpServerModule::ResponseMsg(const NFHttpRequest & req, const NFIResponse & xResponse)
-{
-	ajson::string_stream ss;
-	ajson::save_to(ss, xResponse);
-
-	return m_pHttpServer->ResponseMsg(req, ss.str(), NFWebStatus::WEB_OK);
-}
-*/

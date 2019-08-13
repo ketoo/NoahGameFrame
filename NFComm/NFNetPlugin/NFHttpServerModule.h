@@ -48,14 +48,11 @@ public:
 
     virtual bool Execute();
 
-    virtual bool ResponseMsg(const NFHttpRequest& req, const std::string& strMsg, NFWebStatus code = NFWebStatus::WEB_OK,
-                const std::string& reason = "OK");
-
-	//virtual bool ResponseMsg(const NFHttpRequest& req, const NFIResponse& xResponse);
+    virtual bool ResponseMsg(NF_SHARE_PTR<NFHttpRequest> req, const std::string& strMsg, NFWebStatus code = NFWebStatus::WEB_OK, const std::string& reason = "OK");
 
 private:
-	virtual bool OnReceiveNetPack(const NFHttpRequest& req);
-	virtual NFWebStatus OnFilterPack(const NFHttpRequest& req);
+	virtual bool OnReceiveNetPack(NF_SHARE_PTR<NFHttpRequest> req);
+	virtual NFWebStatus OnFilterPack(NF_SHARE_PTR<NFHttpRequest> req);
 
 	virtual bool AddMsgCB(const std::string& strCommand, const NFHttpType eRequestType, const HTTP_RECEIVE_FUNCTOR_PTR& cb);
 	virtual bool AddFilterCB(const std::string& strCommand, const HTTP_FILTER_FUNCTOR_PTR& cb);

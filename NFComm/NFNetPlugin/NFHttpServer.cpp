@@ -131,8 +131,8 @@ void NFHttpServer::listener_cb(struct evhttp_request* req, void* arg)
 		return;
 	}
 
-	NFHttpRequest* pRequest = pNet->AllowHttpRequest();
-	if (pRequest == NULL)
+	NF_SHARE_PTR<NFHttpRequest> pRequest = pNet->AllocHttpRequest();
+	if (pRequest == nullptr)
 	{
 		LOG(ERROR) << "pRequest ==NULL" << " " << __FUNCTION__ << " " << __LINE__;
 		evhttp_send_error(req, HTTP_BADREQUEST, 0);
@@ -252,24 +252,24 @@ void NFHttpServer::listener_cb(struct evhttp_request* req, void* arg)
 		//return 401
 		try
 		{
-			NFWebStatus xWebStatus = pNet->mFilter(*pRequest);
+			NFWebStatus xWebStatus = pNet->mFilter(pRequest);
 			if (xWebStatus != NFWebStatus::WEB_OK)
 			{
 
 				pNet->mxHttpRequestPool.push_back(pRequest);
 
 				//401
-				pNet->ResponseMsg(*pRequest, "Filter error", xWebStatus);
+				pNet->ResponseMsg(pRequest, "Filter error", xWebStatus);
 				return;
 			}
 		}
 		catch(std::exception& e)
 		{
-			pNet->ResponseMsg(*pRequest, e.what(), NFWebStatus::WEB_ERROR);
+			pNet->ResponseMsg(pRequest, e.what(), NFWebStatus::WEB_ERROR);
 		}
 		catch(...)
 		{
-			pNet->ResponseMsg(*pRequest, "UNKNOW ERROR", NFWebStatus::WEB_ERROR);
+			pNet->ResponseMsg(pRequest, "UNKNOW ERROR", NFWebStatus::WEB_ERROR);
 		}
 		
 	}
@@ -279,54 +279,51 @@ void NFHttpServer::listener_cb(struct evhttp_request* req, void* arg)
 	{
 		if (pNet->mReceiveCB)
 		{
-			pNet->mReceiveCB(*pRequest);
+			pNet->mReceiveCB(pRequest);
 		}
 		else
 		{
-			pNet->ResponseMsg(*pRequest, "NO PROCESSER", NFWebStatus::WEB_ERROR);
+			pNet->ResponseMsg(pRequest, "NO PROCESSER", NFWebStatus::WEB_ERROR);
 		}
 	}
 	catch(std::exception& e)
 	{
-		pNet->ResponseMsg(*pRequest, e.what(), NFWebStatus::WEB_ERROR);
+		pNet->ResponseMsg(pRequest, e.what(), NFWebStatus::WEB_ERROR);
 	}
 	catch(...)
 	{
-		pNet->ResponseMsg(*pRequest, "UNKNOW ERROR", NFWebStatus::WEB_ERROR);
+		pNet->ResponseMsg(pRequest, "UNKNOW ERROR", NFWebStatus::WEB_ERROR);
 	}
 	
 }
 
-NFHttpRequest* NFHttpServer::AllowHttpRequest()
+NF_SHARE_PTR<NFHttpRequest> NFHttpServer::AllocHttpRequest()
 {
 	if (mxHttpRequestPool.size() <= 0)
 	{
 		for (int i = 0; i < 100; ++i)
 		{
-			mxHttpRequestPool.push_back(NF_NEW NFHttpRequest());
+			NF_SHARE_PTR<NFHttpRequest> request = NF_SHARE_PTR<NFHttpRequest>(NF_NEW NFHttpRequest(++mIndex));
+			mxHttpRequestPool.push_back(request);
+        	mxHttpRequestMap.AddElement(request->id, request);
 		}
 	}
 
-	NFHttpRequest* pRequest = mxHttpRequestPool.front();
+	NF_SHARE_PTR<NFHttpRequest> pRequest = mxHttpRequestPool.front();
 	mxHttpRequestPool.pop_front();
 	pRequest->Reset();
-
-	pRequest->id = ++mnIndex;
 
 	return pRequest;
 }
 
-bool NFHttpServer::ResponseMsg(const NFHttpRequest& req, const std::string& strMsg, NFWebStatus code,
-                                const std::string& strReason)
+bool NFHttpServer::ResponseMsg(NF_SHARE_PTR<NFHttpRequest> req, const std::string& strMsg, NFWebStatus code, const std::string& strReason)
 {
-	auto it = mxHttpRequestMap.find(req.id);
-	if (it != mxHttpRequestMap.end())
+	if (req == nullptr)
 	{
-		mxHttpRequestPool.push_back(it->second);
-		mxHttpRequestMap.erase(it);
+		return false;
 	}
 
-	evhttp_request* pHttpReq = (evhttp_request*)req.req;
+	evhttp_request* pHttpReq = (evhttp_request*)req->req;
     //create buffer
     struct evbuffer* eventBuffer = evbuffer_new();
 
@@ -340,5 +337,12 @@ bool NFHttpServer::ResponseMsg(const NFHttpRequest& req, const std::string& strM
     //free
     evbuffer_free(eventBuffer);
 
+	mxHttpRequestPool.push_back(req);
+	
     return true;
+}
+
+NF_SHARE_PTR<NFHttpRequest> NFHttpServer::GetHttpRequest(const int64_t index)
+{
+	return mxHttpRequestMap.GetElement(index);
 }

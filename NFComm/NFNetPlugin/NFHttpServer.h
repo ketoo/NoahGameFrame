@@ -28,6 +28,7 @@
 
 #include "NFIHttpServer.h"
 #include "NFComm/NFCore/NFException.h"
+#include "NFComm/NFCore/NFMapEx.hpp"
 
 #if NF_PLATFORM == NF_PLATFORM_WIN
 #include <winsock2.h>
@@ -74,11 +75,10 @@ class NFHttpServer : public NFIHttpServer
 public:
     NFHttpServer()
     {
-		mnIndex = 0;
     }
 
     template<typename BaseType>
-    NFHttpServer(BaseType* pBaseType, bool (BaseType::*handleRecieve)(const NFHttpRequest& req), NFWebStatus (BaseType::*handleFilter)(const NFHttpRequest& req))
+    NFHttpServer(BaseType* pBaseType, bool (BaseType::*handleRecieve)(NF_SHARE_PTR<NFHttpRequest> req), NFWebStatus (BaseType::*handleFilter)(NF_SHARE_PTR<NFHttpRequest> req))
     {
         mxBase = NULL;
 		mReceiveCB = std::bind(handleRecieve, pBaseType, std::placeholders::_1);
@@ -92,27 +92,34 @@ public:
 			event_base_free(mxBase);
 			mxBase = NULL;
 		}
+
+        mxHttpRequestMap.ClearAll();
+        mxHttpRequestPool.clear();
 	};
+
 
     virtual bool Execute();
 
     virtual int InitServer(const unsigned short nPort);
 
-    virtual bool ResponseMsg(const NFHttpRequest& req, const std::string& strMsg, NFWebStatus code, const std::string& strReason = "OK");
+    virtual bool ResponseMsg(NF_SHARE_PTR<NFHttpRequest> req, const std::string& strMsg, NFWebStatus code, const std::string& strReason = "OK");
+
+    virtual NF_SHARE_PTR<NFHttpRequest> GetHttpRequest(const int64_t index);
 
 private:
     static void listener_cb(struct evhttp_request* req, void* arg);
 
-	NFHttpRequest* AllowHttpRequest();
+	NF_SHARE_PTR<NFHttpRequest> AllocHttpRequest();
 
 private:
+    int64_t mIndex = 0;
+
     struct event_base* mxBase;
 	HTTP_RECEIVE_FUNCTOR mReceiveCB;
 	HTTP_FILTER_FUNCTOR mFilter;
 
-	int64_t mnIndex;
-	std::map<int64_t, NFHttpRequest*> mxHttpRequestMap;
-	std::list<NFHttpRequest*> mxHttpRequestPool;
+	NFMapEx<int64_t, NFHttpRequest> mxHttpRequestMap;
+	std::list<NF_SHARE_PTR<NFHttpRequest>> mxHttpRequestPool;
 };
 
 #endif

@@ -85,14 +85,14 @@ enum NFHttpType
 class NFHttpRequest
 {
 public:
-	NFHttpRequest()
+	NFHttpRequest(const int64_t index)
 	{
+		id = index;
 		Reset();
 	}
 
 	void Reset()
 	{
-		id = 0;
 		url.clear();
 		path.clear();
 		remoteHost.clear();
@@ -101,9 +101,7 @@ public:
 		params.clear();
 		headers.clear();
 	}
-
 	int64_t id;
-
     void* req;
 	std::string url;
 	std::string path;
@@ -115,10 +113,10 @@ public:
 };
 
 //it should be
-typedef std::function<bool(const NFHttpRequest& req)> HTTP_RECEIVE_FUNCTOR;
+typedef std::function<bool(NF_SHARE_PTR<NFHttpRequest> req)> HTTP_RECEIVE_FUNCTOR;
 typedef std::shared_ptr<HTTP_RECEIVE_FUNCTOR> HTTP_RECEIVE_FUNCTOR_PTR;
 
-typedef std::function<NFWebStatus(const NFHttpRequest& req)> HTTP_FILTER_FUNCTOR;
+typedef std::function<NFWebStatus(NF_SHARE_PTR<NFHttpRequest> req)> HTTP_FILTER_FUNCTOR;
 typedef std::shared_ptr<HTTP_FILTER_FUNCTOR> HTTP_FILTER_FUNCTOR_PTR;
 
 class NFIHttpServer
@@ -130,7 +128,9 @@ public:
 
     virtual int InitServer(const unsigned short nPort) = 0;
 
-    virtual bool ResponseMsg(const NFHttpRequest& req, const std::string& strMsg, NFWebStatus code, const std::string& strReason = "OK") = 0;
+    virtual bool ResponseMsg(NF_SHARE_PTR<NFHttpRequest> req, const std::string& strMsg, NFWebStatus code, const std::string& strReason = "OK") = 0;
+
+    virtual NF_SHARE_PTR<NFHttpRequest> GetHttpRequest(const int64_t index) = 0;
 };
 
 #endif
