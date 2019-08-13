@@ -84,23 +84,23 @@ bool NFHelloWorld5::Shut()
     return true;
 }
 
-bool NFHelloWorld5::OnCommandQuery(const NFHttpRequest & req)
+bool NFHelloWorld5::OnCommandQuery(NF_SHARE_PTR<NFHttpRequest> req)
 {
-	std::cout << "url: " << req.url << std::endl;
-	std::cout << "path: " << req.path << std::endl;
-	std::cout << "type: " << req.type << std::endl;
-	std::cout << "body: " << req.body << std::endl;
+	std::cout << "url: " << req->url << std::endl;
+	std::cout << "path: " << req->path << std::endl;
+	std::cout << "type: " << req->type << std::endl;
+	std::cout << "body: " << req->body << std::endl;
 
 	std::cout << "params: " << std::endl;
 
-	for (auto item : req.params)
+	for (auto item : req->params)
 	{
 		std::cout << item.first << ":" << item.second << std::endl;
 	}
 
 	std::cout << "headers: " << std::endl;
 
-	for (auto item : req.headers)
+	for (auto item : req->headers)
 	{
 		std::cout << item.first << ":" << item.second << std::endl;
 	}
@@ -108,7 +108,7 @@ bool NFHelloWorld5::OnCommandQuery(const NFHttpRequest & req)
 	return m_pHttpNetModule->ResponseMsg(req, "OnCommandQuery --- test1", NFWebStatus::WEB_OK);
 }
 
-NFWebStatus NFHelloWorld5::OnFilter(const NFHttpRequest & req)
+NFWebStatus NFHelloWorld5::OnFilter(NF_SHARE_PTR<NFHttpRequest> req)
 {
 	std::cout << "OnFilter ... " << std::endl;
 
