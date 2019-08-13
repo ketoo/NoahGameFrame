@@ -85,13 +85,13 @@ bool NFLoginNet_HttpServerModule::Execute()
 	return true;
 }
 
-bool NFLoginNet_HttpServerModule::OnLogin(const NFHttpRequest& req)
+bool NFLoginNet_HttpServerModule::OnLogin(NF_SHARE_PTR<NFHttpRequest> req)
 {
 	std::string strResponse;
 	NFResponseLogin xResponsetLogin;
 
 	NFRequestLogin xRequestLogin;
-	ajson::load_from_buff(xRequestLogin, req.body.c_str());
+	ajson::load_from_buff(xRequestLogin, req->body.c_str());
 	if (xRequestLogin.user.empty()
 		|| xRequestLogin.password.empty())
 	{
@@ -119,7 +119,7 @@ bool NFLoginNet_HttpServerModule::OnLogin(const NFHttpRequest& req)
 	return m_pHttpNetModule->ResponseMsg(req, strResponse, NFWebStatus::WEB_OK);
 }
 
-bool NFLoginNet_HttpServerModule::OnWorldView(const NFHttpRequest & req)
+bool NFLoginNet_HttpServerModule::OnWorldView(NF_SHARE_PTR<NFHttpRequest> req)
 {
 	std::string strResponse;
 	NFResponseWorldList xResponsetWorldList;
@@ -147,7 +147,7 @@ bool NFLoginNet_HttpServerModule::OnWorldView(const NFHttpRequest & req)
 	return m_pHttpNetModule->ResponseMsg(req, strResponse, NFWebStatus::WEB_OK);
 }
 
-bool NFLoginNet_HttpServerModule::OnWorldSelect(const NFHttpRequest & req)
+bool NFLoginNet_HttpServerModule::OnWorldSelect(NF_SHARE_PTR<NFHttpRequest> req)
 {
 	std::string strResponse;
 	NFIResponse xResponse;
@@ -155,7 +155,7 @@ bool NFLoginNet_HttpServerModule::OnWorldSelect(const NFHttpRequest & req)
 	std::string user = GetUserID(req);
 
 	NFRequestSelectWorld xRequestSelectWorld;
-	ajson::load_from_buff(xRequestSelectWorld, req.body.c_str());
+	ajson::load_from_buff(xRequestSelectWorld, req->body.c_str());
 	if (xRequestSelectWorld.id == 0)
 	{
 		xResponse.code = NFIResponse::ResponseType::RES_TYPE_FAILED;
@@ -189,15 +189,15 @@ bool NFLoginNet_HttpServerModule::OnWorldSelect(const NFHttpRequest & req)
 	return m_pHttpNetModule->ResponseMsg(req, strResponse, NFWebStatus::WEB_OK);
 }
 
-bool NFLoginNet_HttpServerModule::OnCommonQuery(const NFHttpRequest& req)
+bool NFLoginNet_HttpServerModule::OnCommonQuery(NF_SHARE_PTR<NFHttpRequest> req)
 {
 	return m_pHttpNetModule->ResponseMsg(req, "OnCommonQuery", NFWebStatus::WEB_ERROR);
 }
 
-std::string NFLoginNet_HttpServerModule::GetUserID(const NFHttpRequest & req)
+std::string NFLoginNet_HttpServerModule::GetUserID(NF_SHARE_PTR<NFHttpRequest> req)
 {
-	auto it = req.headers.find("user");
-	if (it != req.headers.end())
+	auto it = req->headers.find("user");
+	if (it != req->headers.end())
 	{
 		return it->second;
 	}
@@ -205,10 +205,10 @@ std::string NFLoginNet_HttpServerModule::GetUserID(const NFHttpRequest & req)
 	return "";
 }
 
-std::string NFLoginNet_HttpServerModule::GetUserJWT(const NFHttpRequest & req)
+std::string NFLoginNet_HttpServerModule::GetUserJWT(NF_SHARE_PTR<NFHttpRequest> req)
 {
-	auto it = req.headers.find("jwt");
-	if (it != req.headers.end())
+	auto it = req->headers.find("jwt");
+	if (it != req->headers.end())
 	{
 		return it->second;
 	}
@@ -227,7 +227,7 @@ bool NFLoginNet_HttpServerModule::CheckUserJWT(const std::string & user, const s
 	return false;
 }
 
-NFWebStatus NFLoginNet_HttpServerModule::OnFilter(const NFHttpRequest & req)
+NFWebStatus NFLoginNet_HttpServerModule::OnFilter(NF_SHARE_PTR<NFHttpRequest> req)
 {
 	std::string user = GetUserID(req);
 	std::string jwt = GetUserJWT(req);

@@ -54,16 +54,16 @@ public:
 	virtual bool Execute();
 
 protected:
-	bool OnLogin(const NFHttpRequest& req);
-	bool OnWorldView(const NFHttpRequest& req);
-	bool OnWorldSelect(const NFHttpRequest& req);
+	bool OnLogin(NF_SHARE_PTR<NFHttpRequest> req);
+	bool OnWorldView(NF_SHARE_PTR<NFHttpRequest> req);
+	bool OnWorldSelect(NF_SHARE_PTR<NFHttpRequest>req);
 
-	bool OnCommonQuery(const NFHttpRequest& req);
+	bool OnCommonQuery(NF_SHARE_PTR<NFHttpRequest> req);
 
-	NFWebStatus OnFilter(const NFHttpRequest& req);
+	NFWebStatus OnFilter(NF_SHARE_PTR<NFHttpRequest> req);
 
-	std::string GetUserID(const NFHttpRequest & req);
-	std::string GetUserJWT(const NFHttpRequest & req);
+	std::string GetUserID(NF_SHARE_PTR<NFHttpRequest> req);
+	std::string GetUserJWT(NF_SHARE_PTR<NFHttpRequest> req);
 	bool CheckUserJWT(const std::string & user, const std::string & jwt);
 
 
