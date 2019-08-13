@@ -71,9 +71,9 @@ public:
     virtual bool Shut();
 
 protected:
-	bool OnCommandQuery(const NFHttpRequest& req);
+	bool OnCommandQuery(NF_SHARE_PTR<NFHttpRequest> req);
 
-	NFWebStatus OnFilter(const NFHttpRequest& req);
+	NFWebStatus OnFilter(NF_SHARE_PTR<NFHttpRequest> req);
 
 	int OnHeartBeat(const NFGUID& self, const std::string& strHeartBeat, const float fTime, const int nCount);
 
