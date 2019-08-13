@@ -26,6 +26,7 @@
 #ifndef NFI_HTTP_NET_MODULE_H
 #define NFI_HTTP_NET_MODULE_H
 
+#include "NFComm/NFPluginModule/NFPlatform.h"
 #include "NFComm/NFPluginModule/NFIModule.h"
 #include "NFComm/NFNetPlugin/NFIHttpServer.h"
 
