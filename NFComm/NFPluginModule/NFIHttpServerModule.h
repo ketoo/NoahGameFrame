@@ -37,7 +37,7 @@ public:
 
 	// register msg callback
 	template<typename BaseType>
-	bool AddRequestHandler(const std::string& strPath, const NFHttpType eRequestType, BaseType* pBase, bool (BaseType::*handleRecieve)(NF_SHARE_PTR<NFHttpRequest>req))
+	bool AddRequestHandler(const std::string& strPath, const NFHttpType eRequestType, BaseType* pBase, bool (BaseType::*handleRecieve)(NF_SHARE_PTR<NFHttpRequest> req))
 	{
 		HTTP_RECEIVE_FUNCTOR functor = std::bind(handleRecieve, pBase, std::placeholders::_1);
 		HTTP_RECEIVE_FUNCTOR_PTR functorPtr(new HTTP_RECEIVE_FUNCTOR(functor));
@@ -45,7 +45,7 @@ public:
 	}
 
 	template<typename BaseType>
-	bool AddNetFilter(const std::string& strPath, BaseType* pBase, NFWebStatus(BaseType::*handleFilter)(NF_SHARE_PTR<NFHttpRequest>req))
+	bool AddNetFilter(const std::string& strPath, BaseType* pBase, NFWebStatus(BaseType::*handleFilter)(NF_SHARE_PTR<NFHttpRequest> req))
 	{
 		HTTP_FILTER_FUNCTOR functor = std::bind(handleFilter, pBase, std::placeholders::_1);
 		HTTP_FILTER_FUNCTOR_PTR functorPtr(new HTTP_FILTER_FUNCTOR(functor));
