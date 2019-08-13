@@ -50,9 +50,9 @@ public:
 	virtual bool Execute();
 
 protected:
-	bool OnCommandQuery(const NFHttpRequest& req);
+	bool OnCommandQuery(NF_SHARE_PTR<NFHttpRequest> req);
 
-	NFWebStatus OnFilter(const NFHttpRequest& req);
+	NFWebStatus OnFilter(NF_SHARE_PTR<NFHttpRequest> req);
 
 private:
 	NFIKernelModule* m_pKernelModule;

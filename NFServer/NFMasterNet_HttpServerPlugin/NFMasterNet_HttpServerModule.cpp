@@ -81,23 +81,23 @@ bool NFMasterNet_HttpServerModule::Execute()
 	return true;
 }
 
-bool NFMasterNet_HttpServerModule::OnCommandQuery(const NFHttpRequest& req)
+bool NFMasterNet_HttpServerModule::OnCommandQuery(NF_SHARE_PTR<NFHttpRequest> req)
 {
-	std::cout << "url: " << req.url << std::endl;
-	std::cout << "path: " << req.path << std::endl;
-	std::cout << "type: " << req.type << std::endl;
-	std::cout << "body: " << req.body << std::endl;
+	std::cout << "url: " << req->url << std::endl;
+	std::cout << "path: " << req->path << std::endl;
+	std::cout << "type: " << req->type << std::endl;
+	std::cout << "body: " << req->body << std::endl;
 
 	std::cout << "params: " << std::endl;
 
-	for (auto item : req.params)
+	for (auto item : req->params)
 	{
 		std::cout << item.first << ":" << item.second << std::endl;
 	}
 
     std::cout << "headers: " << std::endl;
 
-	for (auto item : req.headers)
+	for (auto item : req->headers)
 	{
 		std::cout << item.first << ":" << item.second << std::endl;
 	}
@@ -106,25 +106,25 @@ bool NFMasterNet_HttpServerModule::OnCommandQuery(const NFHttpRequest& req)
 	return m_pHttpNetModule->ResponseMsg(req, str, NFWebStatus::WEB_OK);
 }
 
-NFWebStatus NFMasterNet_HttpServerModule::OnFilter(const NFHttpRequest & req)
+NFWebStatus NFMasterNet_HttpServerModule::OnFilter(NF_SHARE_PTR<NFHttpRequest> req)
 {
 	std::cout << "OnFilter: " << std::endl;
 
-	std::cout << "url: " << req.url << std::endl;
-	std::cout << "path: " << req.path << std::endl;
-	std::cout << "type: " << req.type << std::endl;
-	std::cout << "body: " << req.body << std::endl;
+	std::cout << "url: " << req->url << std::endl;
+	std::cout << "path: " << req->path << std::endl;
+	std::cout << "type: " << req->type << std::endl;
+	std::cout << "body: " << req->body << std::endl;
 
 	std::cout << "params: " << std::endl;
 
-	for (auto item : req.params)
+	for (auto item : req->params)
 	{
 		std::cout << item.first << ":" << item.second << std::endl;
 	}
 
 	std::cout << "headers: " << std::endl;
 
-	for (auto item : req.headers)
+	for (auto item : req->headers)
 	{
 		std::cout << item.first << ":" << item.second << std::endl;
 	}
