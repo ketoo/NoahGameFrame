@@ -256,7 +256,7 @@ bool NFClanModule::AddMember(const NFGUID & xClanID, const NFGUID & player, cons
 			xDataList->SetInt(NFrame::Clan::Clan_MemberList::Donation, 0);
 			xDataList->SetInt(NFrame::Clan::Clan_MemberList::Receive, 0);
 			xDataList->SetInt(NFrame::Clan::Clan_MemberList::VIP, m_pPlayerRedisModule->GetPropertyInt(player, NFrame::Player::VIPLevel()));
-			xDataList->SetInt(NFrame::Clan::Clan_MemberList::Online, 1);
+			xDataList->SetInt(NFrame::Clan::Clan_MemberList::Online, 1);//maybe offline
 			xDataList->SetInt(NFrame::Clan::Clan_MemberList::Power, 0);
 			xDataList->SetInt(NFrame::Clan::Clan_MemberList::Title, type);
 			xDataList->SetInt(NFrame::Clan::Clan_MemberList::GameID, 0);
@@ -269,6 +269,8 @@ bool NFClanModule::AddMember(const NFGUID & xClanID, const NFGUID & player, cons
 			xMemberRecord->AddRow(-1, *xDataList);
 
 			m_pKernelModule->SetPropertyInt(xClanID, NFrame::Clan::Clan_MemeberCount(), nCount + 1);
+
+			//send all members's infomation to this new member
 		}
 	}
 
@@ -442,6 +444,233 @@ int NFClanModule::OnPropertyCommonEvent(const NFGUID & self, const std::string &
 
 int NFClanModule::OnRecordCommonEvent(const NFGUID & self, const RECORD_EVENT_DATA & xEventData, const NFData & oldVar, const NFData & newVar)
 {
+	const std::string& strRecord = xEventData.strRecordName;
+	switch (xEventData.nOpType)
+	{
+	case RECORD_EVENT_DATA::Add:
+	{
+		NFMsg::ObjectRecordAddRow xAddRecordRow;
+		NFMsg::Ident* pIdent = xAddRecordRow.mutable_player_id();
+		*pIdent = NFINetModule::NFToPB(self);
+
+		xAddRecordRow.set_record_name(strRecord);
+
+		NFMsg::RecordAddRowStruct* pAddRowData = xAddRecordRow.add_row_data();
+		pAddRowData->set_row(xEventData.nRow);
+
+		NF_SHARE_PTR<NFIRecord> xRecord = m_pKernelModule->FindRecord(self, strRecord);
+		if (xRecord)
+		{
+			NFDataList xRowDataList;
+			if (xRecord->QueryRow(xEventData.nRow, xRowDataList))
+			{
+				for (int i = 0; i < xRowDataList.GetCount(); i++)
+				{
+					switch (xRowDataList.Type(i))
+					{
+					case TDATA_INT:
+					{
+						int64_t nValue = xRowDataList.Int(i);
+
+						NFMsg::RecordInt* pAddData = pAddRowData->add_record_int_list();
+						pAddData->set_col(i);
+						pAddData->set_row(xEventData.nRow);
+						pAddData->set_data(nValue);
+					}
+					break;
+					case TDATA_FLOAT:
+					{
+						double fValue = xRowDataList.Float(i);
+
+						NFMsg::RecordFloat* pAddData = pAddRowData->add_record_float_list();
+						pAddData->set_col(i);
+						pAddData->set_row(xEventData.nRow);
+						pAddData->set_data(fValue);
+					}
+					break;
+					case TDATA_STRING:
+					{
+						const std::string& str = xRowDataList.String(i);
+						NFMsg::RecordString* pAddData = pAddRowData->add_record_string_list();
+						pAddData->set_col(i);
+						pAddData->set_row(xEventData.nRow);
+						pAddData->set_data(str);
+					}
+					break;
+					case TDATA_OBJECT:
+					{
+						NFGUID identValue = xRowDataList.Object(i);
+						NFMsg::RecordObject* pAddData = pAddRowData->add_record_object_list();
+						pAddData->set_col(i);
+						pAddData->set_row(xEventData.nRow);
+
+						*pAddData->mutable_data() = NFINetModule::NFToPB(identValue);
+					}
+					break;
+					case TDATA_VECTOR2:
+					{
+						NFVector2 vPos = xRowDataList.Vector2(i);
+						NFMsg::RecordVector2* pAddData = pAddRowData->add_record_vector2_list();
+						pAddData->set_col(i);
+						pAddData->set_row(xEventData.nRow);
+						*pAddData->mutable_data() = NFINetModule::NFToPB(vPos);
+					}
+					break;
+					case TDATA_VECTOR3:
+					{
+						NFVector3 vPos = xRowDataList.Vector3(i);
+						NFMsg::RecordVector3* pAddData = pAddRowData->add_record_vector3_list();
+						pAddData->set_col(i);
+						pAddData->set_row(xEventData.nRow);
+						*pAddData->mutable_data() = NFINetModule::NFToPB(vPos);
+					}
+					break;
+
+					default:
+						break;
+					}
+				}
+
+				SendMessageToGameServer(self, NFMsg::EGMI_ACK_ADD_ROW, xAddRecordRow);
+			}
+		}
+	}
+	break;
+	case RECORD_EVENT_DATA::Del:
+	{
+		NFMsg::ObjectRecordRemove xReoveRecordRow;
+
+		NFMsg::Ident* pIdent = xReoveRecordRow.mutable_player_id();
+		*pIdent = NFINetModule::NFToPB(self);
+
+		xReoveRecordRow.set_record_name(strRecord);
+		xReoveRecordRow.add_remove_row(xEventData.nRow);
+
+		SendMessageToGameServer(self, NFMsg::EGMI_ACK_ADD_ROW, xReoveRecordRow);
+	}
+	break;
+	case RECORD_EVENT_DATA::Swap:
+	{
+
+		NFMsg::ObjectRecordSwap xSwapRecord;
+		*xSwapRecord.mutable_player_id() = NFINetModule::NFToPB(self);
+
+		xSwapRecord.set_origin_record_name(strRecord);
+		xSwapRecord.set_target_record_name(strRecord);
+		xSwapRecord.set_row_origin(xEventData.nRow);
+		xSwapRecord.set_row_target(xEventData.nCol);
+
+		SendMessageToGameServer(self, NFMsg::EGMI_ACK_SWAP_ROW, xSwapRecord);
+	}
+	break;
+	case RECORD_EVENT_DATA::Update:
+	{
+		switch (oldVar.GetType())
+		{
+		case TDATA_INT:
+		{
+			NFMsg::ObjectRecordInt xRecordChanged;
+			*xRecordChanged.mutable_player_id() = NFINetModule::NFToPB(self);
+
+			xRecordChanged.set_record_name(strRecord);
+			NFMsg::RecordInt* recordProperty = xRecordChanged.add_property_list();
+			recordProperty->set_row(xEventData.nRow);
+			recordProperty->set_col(xEventData.nCol);
+			int64_t nData = newVar.GetInt();
+			recordProperty->set_data(nData);
+
+			SendMessageToGameServer(self, NFMsg::EGMI_ACK_RECORD_INT, xRecordChanged);
+		}
+		break;
+
+		case TDATA_FLOAT:
+		{
+			NFMsg::ObjectRecordFloat xRecordChanged;
+			*xRecordChanged.mutable_player_id() = NFINetModule::NFToPB(self);
+
+			xRecordChanged.set_record_name(strRecord);
+			NFMsg::RecordFloat* recordProperty = xRecordChanged.add_property_list();
+			recordProperty->set_row(xEventData.nRow);
+			recordProperty->set_col(xEventData.nCol);
+			recordProperty->set_data(newVar.GetFloat());
+
+			SendMessageToGameServer(self, NFMsg::EGMI_ACK_RECORD_FLOAT, xRecordChanged);
+		}
+		break;
+		case TDATA_STRING:
+		{
+			NFMsg::ObjectRecordString xRecordChanged;
+			*xRecordChanged.mutable_player_id() = NFINetModule::NFToPB(self);
+
+			xRecordChanged.set_record_name(strRecord);
+			NFMsg::RecordString* recordProperty = xRecordChanged.add_property_list();
+			recordProperty->set_row(xEventData.nRow);
+			recordProperty->set_col(xEventData.nCol);
+			recordProperty->set_data(newVar.GetString());
+
+			SendMessageToGameServer(self, NFMsg::EGMI_ACK_RECORD_STRING, xRecordChanged);
+		}
+		break;
+		case TDATA_OBJECT:
+		{
+			NFMsg::ObjectRecordObject xRecordChanged;
+			*xRecordChanged.mutable_player_id() = NFINetModule::NFToPB(self);
+
+			xRecordChanged.set_record_name(strRecord);
+			NFMsg::RecordObject* recordProperty = xRecordChanged.add_property_list();
+			recordProperty->set_row(xEventData.nRow);
+			recordProperty->set_col(xEventData.nCol);
+			*recordProperty->mutable_data() = NFINetModule::NFToPB(newVar.GetObject());
+
+			SendMessageToGameServer(self, NFMsg::EGMI_ACK_RECORD_OBJECT, xRecordChanged);
+		}
+		break;
+		case TDATA_VECTOR2:
+		{
+			NFMsg::ObjectRecordVector2 xRecordChanged;
+			*xRecordChanged.mutable_player_id() = NFINetModule::NFToPB(self);
+
+			xRecordChanged.set_record_name(strRecord);
+			NFMsg::RecordVector2* recordProperty = xRecordChanged.add_property_list();
+			recordProperty->set_row(xEventData.nRow);
+			recordProperty->set_col(xEventData.nCol);
+			*recordProperty->mutable_data() = NFINetModule::NFToPB(newVar.GetVector2());
+
+			SendMessageToGameServer(self, NFMsg::EGMI_ACK_RECORD_VECTOR2, xRecordChanged);
+		}
+		break;
+		case TDATA_VECTOR3:
+		{
+			NFMsg::ObjectRecordVector3 xRecordChanged;
+			*xRecordChanged.mutable_player_id() = NFINetModule::NFToPB(self);
+
+			xRecordChanged.set_record_name(strRecord);
+			NFMsg::RecordVector3* recordProperty = xRecordChanged.add_property_list();
+			recordProperty->set_row(xEventData.nRow);
+			recordProperty->set_col(xEventData.nCol);
+			*recordProperty->mutable_data() = NFINetModule::NFToPB(newVar.GetVector3());
+
+			SendMessageToGameServer(self, NFMsg::EGMI_ACK_RECORD_VECTOR3, xRecordChanged);
+		}
+		break;
+		default:
+			return 0;
+			break;
+		}
+	}
+	break;
+	case RECORD_EVENT_DATA::Create:
+		return 0;
+		break;
+	case RECORD_EVENT_DATA::Cleared:
+	{
+
+	}
+	break;
+	default:
+		break;
+	}
+
 	return 0;
 }
 

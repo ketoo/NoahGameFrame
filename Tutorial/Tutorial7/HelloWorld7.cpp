@@ -26,9 +26,11 @@
 #include "HelloWorld7.h"
 
 bool NFHelloWorld7::Init()
-{ 
+{
+    mxRedisClient.Connect("127.0.0.1", 6379, "NoahGameFrame");
 
-    std::cout << "Hello, world, Init" << std::endl;
+
+    std::cout << "Hello, world, Init7" << std::endl;
 
     return true;
 }
@@ -41,6 +43,31 @@ bool NFHelloWorld7::AfterInit()
 
 bool NFHelloWorld7::Execute()
 {
+    mxRedisClient.Execute();
+
+	if (mxRedisClient.IsConnect())
+	{
+        if (!mxRedisClient.GetAuthKey().empty() && !mxRedisClient.AUTH(mxRedisClient.GetAuthKey()))
+        {
+            printf("password error!\n");
+        }
+        mxRedisClient.FLUSHALL();
+        
+        static bool tested = false;
+        if (!tested)
+        {
+            tested = true;
+   
+            NFPerformance performance;
+            mxRedisClient.SET("testkey", "123456");
+            std::string data;
+            mxRedisClient.GET("testkey", data);
+
+            performance.CheckTimePoint();
+            std::cout << "cost: " << performance.TimeScope() << " ==> " << data << std::endl;
+        }
+    }
+
     return true;
 }
 
