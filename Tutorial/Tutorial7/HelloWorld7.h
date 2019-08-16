@@ -29,6 +29,8 @@
 #include "NFComm/NFPluginModule/NFIPlugin.h"
 #include "NFComm/NFPluginModule/NFIPluginManager.h"
 #include "NFComm/NFPluginModule/NFINavigationModule.h"
+#include "NFComm/NFNoSqlPlugin/NFRedisClient.h"
+#include "NFComm/NFCore/NFPerformance.hpp"
 
 /*
 IN THIS PLUGIN:
@@ -60,6 +62,7 @@ public:
     virtual bool Shut();
 
 protected:
+    NFRedisClient mxRedisClient;
 };
 
 #endif
