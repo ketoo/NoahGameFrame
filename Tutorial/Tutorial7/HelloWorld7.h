@@ -62,6 +62,19 @@ public:
     virtual bool Shut();
 
 protected:
+
+	bool Test_1();
+	bool TestPerformance();
+
+    void TestHash();
+    void TestKey();
+    void TestList();
+    void TestSet();
+    void TestSort();
+    void TestString();
+	void TestPubSub();
+
+protected:
     NFRedisClient mxRedisClient;
 };
 
