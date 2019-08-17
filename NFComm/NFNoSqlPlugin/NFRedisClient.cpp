@@ -142,7 +142,7 @@ NF_SHARE_PTR<redisReply> NFRedisClient::ParseForReply()
 	struct redisReply* reply = nullptr;
 	while (true)
 	{
-		std::this_thread::sleep_for(std::chrono::milliseconds(1));
+		//std::this_thread::sleep_for(std::chrono::milliseconds(1));
 
 		// When the buffer is empty, reply will be null
 		int ret = redisReaderGetReply(m_pRedisClientSocket->GetRedisReader(), (void**)&reply);
