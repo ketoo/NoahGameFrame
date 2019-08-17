@@ -65,8 +65,11 @@ bool NFHelloWorld7::Execute()
 
             performance.CheckTimePoint();
             std::cout << "cost1: " << performance.TimeScope() << " ==> " << data << std::endl;
+	
+			TestPerformance();
 
             ////////
+			/*
             TestKey();
             TestString();
             TestList();
@@ -74,7 +77,8 @@ bool NFHelloWorld7::Execute()
             TestSet();
             TestSort();
             TestPubSub();
-        }
+			*/
+		}
     }
 
     return true;
@@ -100,15 +104,15 @@ bool NFHelloWorld7::TestPerformance()
 {
     NFPerformance performance;
 
-    //2W
-	int64_t num = 20000;
+    //20W
+	int64_t num = 200000;
     for (int i = 0; i < num; ++i)
     {
         mxRedisClient.SET("testkey", "123456");
     }
 
     performance.CheckTimePoint();
-    std::cout << "cost2: " << performance.TimeScope() << " QPS ==> " << (num / performance.TimeScope()) * 1000 << std::endl;
+    std::cout << num << " requests, cost: " << performance.TimeScope() << " QPS ==> " << (num / performance.TimeScope()) * 1000 << std::endl;
 
 	return true;
 }
