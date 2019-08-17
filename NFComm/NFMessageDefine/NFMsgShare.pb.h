@@ -4190,6 +4190,34 @@ class LIBPROTOC_EXPORT ReqAckCreateClan : public ::google::protobuf::Message /* 
   ::std::string* release_clan_name();
   void set_allocated_clan_name(::std::string* clan_name);
 
+  // bytes clan_desc = 3;
+  void clear_clan_desc();
+  static const int kClanDescFieldNumber = 3;
+  const ::std::string& clan_desc() const;
+  void set_clan_desc(const ::std::string& value);
+  #if LANG_CXX11
+  void set_clan_desc(::std::string&& value);
+  #endif
+  void set_clan_desc(const char* value);
+  void set_clan_desc(const void* value, size_t size);
+  ::std::string* mutable_clan_desc();
+  ::std::string* release_clan_desc();
+  void set_allocated_clan_desc(::std::string* clan_desc);
+
+  // bytes clan_player_name = 5;
+  void clear_clan_player_name();
+  static const int kClanPlayerNameFieldNumber = 5;
+  const ::std::string& clan_player_name() const;
+  void set_clan_player_name(const ::std::string& value);
+  #if LANG_CXX11
+  void set_clan_player_name(::std::string&& value);
+  #endif
+  void set_clan_player_name(const char* value);
+  void set_clan_player_name(const void* value, size_t size);
+  ::std::string* mutable_clan_player_name();
+  ::std::string* release_clan_player_name();
+  void set_allocated_clan_player_name(::std::string* clan_player_name);
+
   // .NFMsg.Ident clan_id = 1;
   bool has_clan_id() const;
   void clear_clan_id();
@@ -4202,12 +4230,34 @@ class LIBPROTOC_EXPORT ReqAckCreateClan : public ::google::protobuf::Message /* 
   ::NFMsg::Ident* mutable_clan_id();
   void set_allocated_clan_id(::NFMsg::Ident* clan_id);
 
+  // .NFMsg.Ident clan_player_id = 4;
+  bool has_clan_player_id() const;
+  void clear_clan_player_id();
+  static const int kClanPlayerIdFieldNumber = 4;
+  private:
+  const ::NFMsg::Ident& _internal_clan_player_id() const;
+  public:
+  const ::NFMsg::Ident& clan_player_id() const;
+  ::NFMsg::Ident* release_clan_player_id();
+  ::NFMsg::Ident* mutable_clan_player_id();
+  void set_allocated_clan_player_id(::NFMsg::Ident* clan_player_id);
+
+  // int32 clan_player_bp = 6;
+  void clear_clan_player_bp();
+  static const int kClanPlayerBpFieldNumber = 6;
+  ::google::protobuf::int32 clan_player_bp() const;
+  void set_clan_player_bp(::google::protobuf::int32 value);
+
   // @@protoc_insertion_point(class_scope:NFMsg.ReqAckCreateClan)
  private:
 
   ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
   ::google::protobuf::internal::ArenaStringPtr clan_name_;
+  ::google::protobuf::internal::ArenaStringPtr clan_desc_;
+  ::google::protobuf::internal::ArenaStringPtr clan_player_name_;
   ::NFMsg::Ident* clan_id_;
+  ::NFMsg::Ident* clan_player_id_;
+  ::google::protobuf::int32 clan_player_bp_;
   mutable ::google::protobuf::internal::CachedSize _cached_size_;
   friend struct ::protobuf_NFMsgShare_2eproto::TableStruct;
 };
@@ -4689,19 +4739,19 @@ class LIBPROTOC_EXPORT ReqAckJoinClan : public ::google::protobuf::Message /* @@
 
   // accessors -------------------------------------------------------
 
-  // bytes clan_name = 2;
-  void clear_clan_name();
-  static const int kClanNameFieldNumber = 2;
-  const ::std::string& clan_name() const;
-  void set_clan_name(const ::std::string& value);
+  // bytes clan_player_name = 5;
+  void clear_clan_player_name();
+  static const int kClanPlayerNameFieldNumber = 5;
+  const ::std::string& clan_player_name() const;
+  void set_clan_player_name(const ::std::string& value);
   #if LANG_CXX11
-  void set_clan_name(::std::string&& value);
+  void set_clan_player_name(::std::string&& value);
   #endif
-  void set_clan_name(const char* value);
-  void set_clan_name(const void* value, size_t size);
-  ::std::string* mutable_clan_name();
-  ::std::string* release_clan_name();
-  void set_allocated_clan_name(::std::string* clan_name);
+  void set_clan_player_name(const char* value);
+  void set_clan_player_name(const void* value, size_t size);
+  ::std::string* mutable_clan_player_name();
+  ::std::string* release_clan_player_name();
+  void set_allocated_clan_player_name(::std::string* clan_player_name);
 
   // .NFMsg.Ident clan_id = 1;
   bool has_clan_id() const;
@@ -4715,12 +4765,32 @@ class LIBPROTOC_EXPORT ReqAckJoinClan : public ::google::protobuf::Message /* @@
   ::NFMsg::Ident* mutable_clan_id();
   void set_allocated_clan_id(::NFMsg::Ident* clan_id);
 
+  // .NFMsg.Ident clan_player_id = 4;
+  bool has_clan_player_id() const;
+  void clear_clan_player_id();
+  static const int kClanPlayerIdFieldNumber = 4;
+  private:
+  const ::NFMsg::Ident& _internal_clan_player_id() const;
+  public:
+  const ::NFMsg::Ident& clan_player_id() const;
+  ::NFMsg::Ident* release_clan_player_id();
+  ::NFMsg::Ident* mutable_clan_player_id();
+  void set_allocated_clan_player_id(::NFMsg::Ident* clan_player_id);
+
+  // int32 clan_player_bp = 6;
+  void clear_clan_player_bp();
+  static const int kClanPlayerBpFieldNumber = 6;
+  ::google::protobuf::int32 clan_player_bp() const;
+  void set_clan_player_bp(::google::protobuf::int32 value);
+
   // @@protoc_insertion_point(class_scope:NFMsg.ReqAckJoinClan)
  private:
 
   ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
-  ::google::protobuf::internal::ArenaStringPtr clan_name_;
+  ::google::protobuf::internal::ArenaStringPtr clan_player_name_;
   ::NFMsg::Ident* clan_id_;
+  ::NFMsg::Ident* clan_player_id_;
+  ::google::protobuf::int32 clan_player_bp_;
   mutable ::google::protobuf::internal::CachedSize _cached_size_;
   friend struct ::protobuf_NFMsgShare_2eproto::TableStruct;
 };
@@ -4813,20 +4883,6 @@ class LIBPROTOC_EXPORT ReqAckLeaveClan : public ::google::protobuf::Message /* @
 
   // accessors -------------------------------------------------------
 
-  // bytes clan_name = 2;
-  void clear_clan_name();
-  static const int kClanNameFieldNumber = 2;
-  const ::std::string& clan_name() const;
-  void set_clan_name(const ::std::string& value);
-  #if LANG_CXX11
-  void set_clan_name(::std::string&& value);
-  #endif
-  void set_clan_name(const char* value);
-  void set_clan_name(const void* value, size_t size);
-  ::std::string* mutable_clan_name();
-  ::std::string* release_clan_name();
-  void set_allocated_clan_name(::std::string* clan_name);
-
   // .NFMsg.Ident clan_id = 1;
   bool has_clan_id() const;
   void clear_clan_id();
@@ -4839,12 +4895,24 @@ class LIBPROTOC_EXPORT ReqAckLeaveClan : public ::google::protobuf::Message /* @
   ::NFMsg::Ident* mutable_clan_id();
   void set_allocated_clan_id(::NFMsg::Ident* clan_id);
 
+  // .NFMsg.Ident clan_player_id = 2;
+  bool has_clan_player_id() const;
+  void clear_clan_player_id();
+  static const int kClanPlayerIdFieldNumber = 2;
+  private:
+  const ::NFMsg::Ident& _internal_clan_player_id() const;
+  public:
+  const ::NFMsg::Ident& clan_player_id() const;
+  ::NFMsg::Ident* release_clan_player_id();
+  ::NFMsg::Ident* mutable_clan_player_id();
+  void set_allocated_clan_player_id(::NFMsg::Ident* clan_player_id);
+
   // @@protoc_insertion_point(class_scope:NFMsg.ReqAckLeaveClan)
  private:
 
   ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
-  ::google::protobuf::internal::ArenaStringPtr clan_name_;
   ::NFMsg::Ident* clan_id_;
+  ::NFMsg::Ident* clan_player_id_;
   mutable ::google::protobuf::internal::CachedSize _cached_size_;
   friend struct ::protobuf_NFMsgShare_2eproto::TableStruct;
 };
@@ -4977,10 +5045,22 @@ class LIBPROTOC_EXPORT ReqAckOprClanMember : public ::google::protobuf::Message 
   ::NFMsg::Ident* mutable_clan_id();
   void set_allocated_clan_id(::NFMsg::Ident* clan_id);
 
-  // .NFMsg.Ident member_id = 2;
+  // .NFMsg.Ident player_id = 2;
+  bool has_player_id() const;
+  void clear_player_id();
+  static const int kPlayerIdFieldNumber = 2;
+  private:
+  const ::NFMsg::Ident& _internal_player_id() const;
+  public:
+  const ::NFMsg::Ident& player_id() const;
+  ::NFMsg::Ident* release_player_id();
+  ::NFMsg::Ident* mutable_player_id();
+  void set_allocated_player_id(::NFMsg::Ident* player_id);
+
+  // .NFMsg.Ident member_id = 3;
   bool has_member_id() const;
   void clear_member_id();
-  static const int kMemberIdFieldNumber = 2;
+  static const int kMemberIdFieldNumber = 3;
   private:
   const ::NFMsg::Ident& _internal_member_id() const;
   public:
@@ -4989,9 +5069,9 @@ class LIBPROTOC_EXPORT ReqAckOprClanMember : public ::google::protobuf::Message 
   ::NFMsg::Ident* mutable_member_id();
   void set_allocated_member_id(::NFMsg::Ident* member_id);
 
-  // .NFMsg.ReqAckOprClanMember.EGClanMemberOprType type = 3;
+  // .NFMsg.ReqAckOprClanMember.EGClanMemberOprType type = 4;
   void clear_type();
-  static const int kTypeFieldNumber = 3;
+  static const int kTypeFieldNumber = 4;
   ::NFMsg::ReqAckOprClanMember_EGClanMemberOprType type() const;
   void set_type(::NFMsg::ReqAckOprClanMember_EGClanMemberOprType value);
 
@@ -5000,6 +5080,7 @@ class LIBPROTOC_EXPORT ReqAckOprClanMember : public ::google::protobuf::Message 
 
   ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
   ::NFMsg::Ident* clan_id_;
+  ::NFMsg::Ident* player_id_;
   ::NFMsg::Ident* member_id_;
   int type_;
   mutable ::google::protobuf::internal::CachedSize _cached_size_;
@@ -9912,6 +9993,174 @@ inline void ReqAckCreateClan::set_allocated_clan_name(::std::string* clan_name) 
   // @@protoc_insertion_point(field_set_allocated:NFMsg.ReqAckCreateClan.clan_name)
 }
 
+// bytes clan_desc = 3;
+inline void ReqAckCreateClan::clear_clan_desc() {
+  clan_desc_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline const ::std::string& ReqAckCreateClan::clan_desc() const {
+  // @@protoc_insertion_point(field_get:NFMsg.ReqAckCreateClan.clan_desc)
+  return clan_desc_.GetNoArena();
+}
+inline void ReqAckCreateClan::set_clan_desc(const ::std::string& value) {
+  
+  clan_desc_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
+  // @@protoc_insertion_point(field_set:NFMsg.ReqAckCreateClan.clan_desc)
+}
+#if LANG_CXX11
+inline void ReqAckCreateClan::set_clan_desc(::std::string&& value) {
+  
+  clan_desc_.SetNoArena(
+    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
+  // @@protoc_insertion_point(field_set_rvalue:NFMsg.ReqAckCreateClan.clan_desc)
+}
+#endif
+inline void ReqAckCreateClan::set_clan_desc(const char* value) {
+  GOOGLE_DCHECK(value != NULL);
+  
+  clan_desc_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:NFMsg.ReqAckCreateClan.clan_desc)
+}
+inline void ReqAckCreateClan::set_clan_desc(const void* value, size_t size) {
+  
+  clan_desc_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+      ::std::string(reinterpret_cast<const char*>(value), size));
+  // @@protoc_insertion_point(field_set_pointer:NFMsg.ReqAckCreateClan.clan_desc)
+}
+inline ::std::string* ReqAckCreateClan::mutable_clan_desc() {
+  
+  // @@protoc_insertion_point(field_mutable:NFMsg.ReqAckCreateClan.clan_desc)
+  return clan_desc_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline ::std::string* ReqAckCreateClan::release_clan_desc() {
+  // @@protoc_insertion_point(field_release:NFMsg.ReqAckCreateClan.clan_desc)
+  
+  return clan_desc_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline void ReqAckCreateClan::set_allocated_clan_desc(::std::string* clan_desc) {
+  if (clan_desc != NULL) {
+    
+  } else {
+    
+  }
+  clan_desc_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), clan_desc);
+  // @@protoc_insertion_point(field_set_allocated:NFMsg.ReqAckCreateClan.clan_desc)
+}
+
+// .NFMsg.Ident clan_player_id = 4;
+inline bool ReqAckCreateClan::has_clan_player_id() const {
+  return this != internal_default_instance() && clan_player_id_ != NULL;
+}
+inline const ::NFMsg::Ident& ReqAckCreateClan::_internal_clan_player_id() const {
+  return *clan_player_id_;
+}
+inline const ::NFMsg::Ident& ReqAckCreateClan::clan_player_id() const {
+  const ::NFMsg::Ident* p = clan_player_id_;
+  // @@protoc_insertion_point(field_get:NFMsg.ReqAckCreateClan.clan_player_id)
+  return p != NULL ? *p : *reinterpret_cast<const ::NFMsg::Ident*>(
+      &::NFMsg::_Ident_default_instance_);
+}
+inline ::NFMsg::Ident* ReqAckCreateClan::release_clan_player_id() {
+  // @@protoc_insertion_point(field_release:NFMsg.ReqAckCreateClan.clan_player_id)
+  
+  ::NFMsg::Ident* temp = clan_player_id_;
+  clan_player_id_ = NULL;
+  return temp;
+}
+inline ::NFMsg::Ident* ReqAckCreateClan::mutable_clan_player_id() {
+  
+  if (clan_player_id_ == NULL) {
+    auto* p = CreateMaybeMessage<::NFMsg::Ident>(GetArenaNoVirtual());
+    clan_player_id_ = p;
+  }
+  // @@protoc_insertion_point(field_mutable:NFMsg.ReqAckCreateClan.clan_player_id)
+  return clan_player_id_;
+}
+inline void ReqAckCreateClan::set_allocated_clan_player_id(::NFMsg::Ident* clan_player_id) {
+  ::google::protobuf::Arena* message_arena = GetArenaNoVirtual();
+  if (message_arena == NULL) {
+    delete reinterpret_cast< ::google::protobuf::MessageLite*>(clan_player_id_);
+  }
+  if (clan_player_id) {
+    ::google::protobuf::Arena* submessage_arena = NULL;
+    if (message_arena != submessage_arena) {
+      clan_player_id = ::google::protobuf::internal::GetOwnedMessage(
+          message_arena, clan_player_id, submessage_arena);
+    }
+    
+  } else {
+    
+  }
+  clan_player_id_ = clan_player_id;
+  // @@protoc_insertion_point(field_set_allocated:NFMsg.ReqAckCreateClan.clan_player_id)
+}
+
+// bytes clan_player_name = 5;
+inline void ReqAckCreateClan::clear_clan_player_name() {
+  clan_player_name_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline const ::std::string& ReqAckCreateClan::clan_player_name() const {
+  // @@protoc_insertion_point(field_get:NFMsg.ReqAckCreateClan.clan_player_name)
+  return clan_player_name_.GetNoArena();
+}
+inline void ReqAckCreateClan::set_clan_player_name(const ::std::string& value) {
+  
+  clan_player_name_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
+  // @@protoc_insertion_point(field_set:NFMsg.ReqAckCreateClan.clan_player_name)
+}
+#if LANG_CXX11
+inline void ReqAckCreateClan::set_clan_player_name(::std::string&& value) {
+  
+  clan_player_name_.SetNoArena(
+    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
+  // @@protoc_insertion_point(field_set_rvalue:NFMsg.ReqAckCreateClan.clan_player_name)
+}
+#endif
+inline void ReqAckCreateClan::set_clan_player_name(const char* value) {
+  GOOGLE_DCHECK(value != NULL);
+  
+  clan_player_name_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:NFMsg.ReqAckCreateClan.clan_player_name)
+}
+inline void ReqAckCreateClan::set_clan_player_name(const void* value, size_t size) {
+  
+  clan_player_name_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+      ::std::string(reinterpret_cast<const char*>(value), size));
+  // @@protoc_insertion_point(field_set_pointer:NFMsg.ReqAckCreateClan.clan_player_name)
+}
+inline ::std::string* ReqAckCreateClan::mutable_clan_player_name() {
+  
+  // @@protoc_insertion_point(field_mutable:NFMsg.ReqAckCreateClan.clan_player_name)
+  return clan_player_name_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline ::std::string* ReqAckCreateClan::release_clan_player_name() {
+  // @@protoc_insertion_point(field_release:NFMsg.ReqAckCreateClan.clan_player_name)
+  
+  return clan_player_name_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline void ReqAckCreateClan::set_allocated_clan_player_name(::std::string* clan_player_name) {
+  if (clan_player_name != NULL) {
+    
+  } else {
+    
+  }
+  clan_player_name_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), clan_player_name);
+  // @@protoc_insertion_point(field_set_allocated:NFMsg.ReqAckCreateClan.clan_player_name)
+}
+
+// int32 clan_player_bp = 6;
+inline void ReqAckCreateClan::clear_clan_player_bp() {
+  clan_player_bp_ = 0;
+}
+inline ::google::protobuf::int32 ReqAckCreateClan::clan_player_bp() const {
+  // @@protoc_insertion_point(field_get:NFMsg.ReqAckCreateClan.clan_player_bp)
+  return clan_player_bp_;
+}
+inline void ReqAckCreateClan::set_clan_player_bp(::google::protobuf::int32 value) {
+  
+  clan_player_bp_ = value;
+  // @@protoc_insertion_point(field_set:NFMsg.ReqAckCreateClan.clan_player_bp)
+}
+
 // -------------------------------------------------------------------
 
 // ReqSearchClan
@@ -10269,57 +10518,119 @@ inline void ReqAckJoinClan::set_allocated_clan_id(::NFMsg::Ident* clan_id) {
   // @@protoc_insertion_point(field_set_allocated:NFMsg.ReqAckJoinClan.clan_id)
 }
 
-// bytes clan_name = 2;
-inline void ReqAckJoinClan::clear_clan_name() {
-  clan_name_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+// .NFMsg.Ident clan_player_id = 4;
+inline bool ReqAckJoinClan::has_clan_player_id() const {
+  return this != internal_default_instance() && clan_player_id_ != NULL;
 }
-inline const ::std::string& ReqAckJoinClan::clan_name() const {
-  // @@protoc_insertion_point(field_get:NFMsg.ReqAckJoinClan.clan_name)
-  return clan_name_.GetNoArena();
+inline const ::NFMsg::Ident& ReqAckJoinClan::_internal_clan_player_id() const {
+  return *clan_player_id_;
 }
-inline void ReqAckJoinClan::set_clan_name(const ::std::string& value) {
+inline const ::NFMsg::Ident& ReqAckJoinClan::clan_player_id() const {
+  const ::NFMsg::Ident* p = clan_player_id_;
+  // @@protoc_insertion_point(field_get:NFMsg.ReqAckJoinClan.clan_player_id)
+  return p != NULL ? *p : *reinterpret_cast<const ::NFMsg::Ident*>(
+      &::NFMsg::_Ident_default_instance_);
+}
+inline ::NFMsg::Ident* ReqAckJoinClan::release_clan_player_id() {
+  // @@protoc_insertion_point(field_release:NFMsg.ReqAckJoinClan.clan_player_id)
   
-  clan_name_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
-  // @@protoc_insertion_point(field_set:NFMsg.ReqAckJoinClan.clan_name)
+  ::NFMsg::Ident* temp = clan_player_id_;
+  clan_player_id_ = NULL;
+  return temp;
 }
-#if LANG_CXX11
-inline void ReqAckJoinClan::set_clan_name(::std::string&& value) {
+inline ::NFMsg::Ident* ReqAckJoinClan::mutable_clan_player_id() {
   
-  clan_name_.SetNoArena(
-    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
-  // @@protoc_insertion_point(field_set_rvalue:NFMsg.ReqAckJoinClan.clan_name)
+  if (clan_player_id_ == NULL) {
+    auto* p = CreateMaybeMessage<::NFMsg::Ident>(GetArenaNoVirtual());
+    clan_player_id_ = p;
+  }
+  // @@protoc_insertion_point(field_mutable:NFMsg.ReqAckJoinClan.clan_player_id)
+  return clan_player_id_;
 }
-#endif
-inline void ReqAckJoinClan::set_clan_name(const char* value) {
-  GOOGLE_DCHECK(value != NULL);
-  
-  clan_name_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
-  // @@protoc_insertion_point(field_set_char:NFMsg.ReqAckJoinClan.clan_name)
-}
-inline void ReqAckJoinClan::set_clan_name(const void* value, size_t size) {
-  
-  clan_name_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
-      ::std::string(reinterpret_cast<const char*>(value), size));
-  // @@protoc_insertion_point(field_set_pointer:NFMsg.ReqAckJoinClan.clan_name)
-}
-inline ::std::string* ReqAckJoinClan::mutable_clan_name() {
-  
-  // @@protoc_insertion_point(field_mutable:NFMsg.ReqAckJoinClan.clan_name)
-  return clan_name_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-}
-inline ::std::string* ReqAckJoinClan::release_clan_name() {
-  // @@protoc_insertion_point(field_release:NFMsg.ReqAckJoinClan.clan_name)
-  
-  return clan_name_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-}
-inline void ReqAckJoinClan::set_allocated_clan_name(::std::string* clan_name) {
-  if (clan_name != NULL) {
+inline void ReqAckJoinClan::set_allocated_clan_player_id(::NFMsg::Ident* clan_player_id) {
+  ::google::protobuf::Arena* message_arena = GetArenaNoVirtual();
+  if (message_arena == NULL) {
+    delete reinterpret_cast< ::google::protobuf::MessageLite*>(clan_player_id_);
+  }
+  if (clan_player_id) {
+    ::google::protobuf::Arena* submessage_arena = NULL;
+    if (message_arena != submessage_arena) {
+      clan_player_id = ::google::protobuf::internal::GetOwnedMessage(
+          message_arena, clan_player_id, submessage_arena);
+    }
     
   } else {
     
   }
-  clan_name_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), clan_name);
-  // @@protoc_insertion_point(field_set_allocated:NFMsg.ReqAckJoinClan.clan_name)
+  clan_player_id_ = clan_player_id;
+  // @@protoc_insertion_point(field_set_allocated:NFMsg.ReqAckJoinClan.clan_player_id)
+}
+
+// bytes clan_player_name = 5;
+inline void ReqAckJoinClan::clear_clan_player_name() {
+  clan_player_name_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline const ::std::string& ReqAckJoinClan::clan_player_name() const {
+  // @@protoc_insertion_point(field_get:NFMsg.ReqAckJoinClan.clan_player_name)
+  return clan_player_name_.GetNoArena();
+}
+inline void ReqAckJoinClan::set_clan_player_name(const ::std::string& value) {
+  
+  clan_player_name_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
+  // @@protoc_insertion_point(field_set:NFMsg.ReqAckJoinClan.clan_player_name)
+}
+#if LANG_CXX11
+inline void ReqAckJoinClan::set_clan_player_name(::std::string&& value) {
+  
+  clan_player_name_.SetNoArena(
+    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
+  // @@protoc_insertion_point(field_set_rvalue:NFMsg.ReqAckJoinClan.clan_player_name)
+}
+#endif
+inline void ReqAckJoinClan::set_clan_player_name(const char* value) {
+  GOOGLE_DCHECK(value != NULL);
+  
+  clan_player_name_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:NFMsg.ReqAckJoinClan.clan_player_name)
+}
+inline void ReqAckJoinClan::set_clan_player_name(const void* value, size_t size) {
+  
+  clan_player_name_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+      ::std::string(reinterpret_cast<const char*>(value), size));
+  // @@protoc_insertion_point(field_set_pointer:NFMsg.ReqAckJoinClan.clan_player_name)
+}
+inline ::std::string* ReqAckJoinClan::mutable_clan_player_name() {
+  
+  // @@protoc_insertion_point(field_mutable:NFMsg.ReqAckJoinClan.clan_player_name)
+  return clan_player_name_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline ::std::string* ReqAckJoinClan::release_clan_player_name() {
+  // @@protoc_insertion_point(field_release:NFMsg.ReqAckJoinClan.clan_player_name)
+  
+  return clan_player_name_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline void ReqAckJoinClan::set_allocated_clan_player_name(::std::string* clan_player_name) {
+  if (clan_player_name != NULL) {
+    
+  } else {
+    
+  }
+  clan_player_name_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), clan_player_name);
+  // @@protoc_insertion_point(field_set_allocated:NFMsg.ReqAckJoinClan.clan_player_name)
+}
+
+// int32 clan_player_bp = 6;
+inline void ReqAckJoinClan::clear_clan_player_bp() {
+  clan_player_bp_ = 0;
+}
+inline ::google::protobuf::int32 ReqAckJoinClan::clan_player_bp() const {
+  // @@protoc_insertion_point(field_get:NFMsg.ReqAckJoinClan.clan_player_bp)
+  return clan_player_bp_;
+}
+inline void ReqAckJoinClan::set_clan_player_bp(::google::protobuf::int32 value) {
+  
+  clan_player_bp_ = value;
+  // @@protoc_insertion_point(field_set:NFMsg.ReqAckJoinClan.clan_player_bp)
 }
 
 // -------------------------------------------------------------------
@@ -10374,57 +10685,52 @@ inline void ReqAckLeaveClan::set_allocated_clan_id(::NFMsg::Ident* clan_id) {
   // @@protoc_insertion_point(field_set_allocated:NFMsg.ReqAckLeaveClan.clan_id)
 }
 
-// bytes clan_name = 2;
-inline void ReqAckLeaveClan::clear_clan_name() {
-  clan_name_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+// .NFMsg.Ident clan_player_id = 2;
+inline bool ReqAckLeaveClan::has_clan_player_id() const {
+  return this != internal_default_instance() && clan_player_id_ != NULL;
 }
-inline const ::std::string& ReqAckLeaveClan::clan_name() const {
-  // @@protoc_insertion_point(field_get:NFMsg.ReqAckLeaveClan.clan_name)
-  return clan_name_.GetNoArena();
+inline const ::NFMsg::Ident& ReqAckLeaveClan::_internal_clan_player_id() const {
+  return *clan_player_id_;
 }
-inline void ReqAckLeaveClan::set_clan_name(const ::std::string& value) {
+inline const ::NFMsg::Ident& ReqAckLeaveClan::clan_player_id() const {
+  const ::NFMsg::Ident* p = clan_player_id_;
+  // @@protoc_insertion_point(field_get:NFMsg.ReqAckLeaveClan.clan_player_id)
+  return p != NULL ? *p : *reinterpret_cast<const ::NFMsg::Ident*>(
+      &::NFMsg::_Ident_default_instance_);
+}
+inline ::NFMsg::Ident* ReqAckLeaveClan::release_clan_player_id() {
+  // @@protoc_insertion_point(field_release:NFMsg.ReqAckLeaveClan.clan_player_id)
   
-  clan_name_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
-  // @@protoc_insertion_point(field_set:NFMsg.ReqAckLeaveClan.clan_name)
+  ::NFMsg::Ident* temp = clan_player_id_;
+  clan_player_id_ = NULL;
+  return temp;
 }
-#if LANG_CXX11
-inline void ReqAckLeaveClan::set_clan_name(::std::string&& value) {
+inline ::NFMsg::Ident* ReqAckLeaveClan::mutable_clan_player_id() {
   
-  clan_name_.SetNoArena(
-    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
-  // @@protoc_insertion_point(field_set_rvalue:NFMsg.ReqAckLeaveClan.clan_name)
+  if (clan_player_id_ == NULL) {
+    auto* p = CreateMaybeMessage<::NFMsg::Ident>(GetArenaNoVirtual());
+    clan_player_id_ = p;
+  }
+  // @@protoc_insertion_point(field_mutable:NFMsg.ReqAckLeaveClan.clan_player_id)
+  return clan_player_id_;
 }
-#endif
-inline void ReqAckLeaveClan::set_clan_name(const char* value) {
-  GOOGLE_DCHECK(value != NULL);
-  
-  clan_name_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
-  // @@protoc_insertion_point(field_set_char:NFMsg.ReqAckLeaveClan.clan_name)
-}
-inline void ReqAckLeaveClan::set_clan_name(const void* value, size_t size) {
-  
-  clan_name_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
-      ::std::string(reinterpret_cast<const char*>(value), size));
-  // @@protoc_insertion_point(field_set_pointer:NFMsg.ReqAckLeaveClan.clan_name)
-}
-inline ::std::string* ReqAckLeaveClan::mutable_clan_name() {
-  
-  // @@protoc_insertion_point(field_mutable:NFMsg.ReqAckLeaveClan.clan_name)
-  return clan_name_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-}
-inline ::std::string* ReqAckLeaveClan::release_clan_name() {
-  // @@protoc_insertion_point(field_release:NFMsg.ReqAckLeaveClan.clan_name)
-  
-  return clan_name_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-}
-inline void ReqAckLeaveClan::set_allocated_clan_name(::std::string* clan_name) {
-  if (clan_name != NULL) {
+inline void ReqAckLeaveClan::set_allocated_clan_player_id(::NFMsg::Ident* clan_player_id) {
+  ::google::protobuf::Arena* message_arena = GetArenaNoVirtual();
+  if (message_arena == NULL) {
+    delete reinterpret_cast< ::google::protobuf::MessageLite*>(clan_player_id_);
+  }
+  if (clan_player_id) {
+    ::google::protobuf::Arena* submessage_arena = NULL;
+    if (message_arena != submessage_arena) {
+      clan_player_id = ::google::protobuf::internal::GetOwnedMessage(
+          message_arena, clan_player_id, submessage_arena);
+    }
     
   } else {
     
   }
-  clan_name_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), clan_name);
-  // @@protoc_insertion_point(field_set_allocated:NFMsg.ReqAckLeaveClan.clan_name)
+  clan_player_id_ = clan_player_id;
+  // @@protoc_insertion_point(field_set_allocated:NFMsg.ReqAckLeaveClan.clan_player_id)
 }
 
 // -------------------------------------------------------------------
@@ -10479,7 +10785,55 @@ inline void ReqAckOprClanMember::set_allocated_clan_id(::NFMsg::Ident* clan_id) 
   // @@protoc_insertion_point(field_set_allocated:NFMsg.ReqAckOprClanMember.clan_id)
 }
 
-// .NFMsg.Ident member_id = 2;
+// .NFMsg.Ident player_id = 2;
+inline bool ReqAckOprClanMember::has_player_id() const {
+  return this != internal_default_instance() && player_id_ != NULL;
+}
+inline const ::NFMsg::Ident& ReqAckOprClanMember::_internal_player_id() const {
+  return *player_id_;
+}
+inline const ::NFMsg::Ident& ReqAckOprClanMember::player_id() const {
+  const ::NFMsg::Ident* p = player_id_;
+  // @@protoc_insertion_point(field_get:NFMsg.ReqAckOprClanMember.player_id)
+  return p != NULL ? *p : *reinterpret_cast<const ::NFMsg::Ident*>(
+      &::NFMsg::_Ident_default_instance_);
+}
+inline ::NFMsg::Ident* ReqAckOprClanMember::release_player_id() {
+  // @@protoc_insertion_point(field_release:NFMsg.ReqAckOprClanMember.player_id)
+  
+  ::NFMsg::Ident* temp = player_id_;
+  player_id_ = NULL;
+  return temp;
+}
+inline ::NFMsg::Ident* ReqAckOprClanMember::mutable_player_id() {
+  
+  if (player_id_ == NULL) {
+    auto* p = CreateMaybeMessage<::NFMsg::Ident>(GetArenaNoVirtual());
+    player_id_ = p;
+  }
+  // @@protoc_insertion_point(field_mutable:NFMsg.ReqAckOprClanMember.player_id)
+  return player_id_;
+}
+inline void ReqAckOprClanMember::set_allocated_player_id(::NFMsg::Ident* player_id) {
+  ::google::protobuf::Arena* message_arena = GetArenaNoVirtual();
+  if (message_arena == NULL) {
+    delete reinterpret_cast< ::google::protobuf::MessageLite*>(player_id_);
+  }
+  if (player_id) {
+    ::google::protobuf::Arena* submessage_arena = NULL;
+    if (message_arena != submessage_arena) {
+      player_id = ::google::protobuf::internal::GetOwnedMessage(
+          message_arena, player_id, submessage_arena);
+    }
+    
+  } else {
+    
+  }
+  player_id_ = player_id;
+  // @@protoc_insertion_point(field_set_allocated:NFMsg.ReqAckOprClanMember.player_id)
+}
+
+// .NFMsg.Ident member_id = 3;
 inline bool ReqAckOprClanMember::has_member_id() const {
   return this != internal_default_instance() && member_id_ != NULL;
 }
@@ -10527,7 +10881,7 @@ inline void ReqAckOprClanMember::set_allocated_member_id(::NFMsg::Ident* member_
   // @@protoc_insertion_point(field_set_allocated:NFMsg.ReqAckOprClanMember.member_id)
 }
 
-// .NFMsg.ReqAckOprClanMember.EGClanMemberOprType type = 3;
+// .NFMsg.ReqAckOprClanMember.EGClanMemberOprType type = 4;
 inline void ReqAckOprClanMember::clear_type() {
   type_ = 0;
 }

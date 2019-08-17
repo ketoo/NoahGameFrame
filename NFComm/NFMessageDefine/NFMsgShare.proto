@@ -260,8 +260,12 @@ message ReqStoreSceneBuildings
 //EGMI_REQ_CREATE_CLAN                       = 300; // 申请创建公会 EGMI_ACK_CREATE_CLAN						= 301; // 创建公会结果
 message ReqAckCreateClan
 {
-    Ident		clan_id = 1;
-    bytes 		clan_name = 2;
+    Ident    clan_id = 1;
+    bytes    clan_name = 2;
+    bytes    clan_desc = 3;
+    Ident    clan_player_id = 4;
+    bytes    clan_player_name = 5;
+    int32    clan_player_bp = 6;
 }
 //EGMI_REQ_SEARCH_CLAN                       = 308; // 申请搜索公会
 message ReqSearchClan
@@ -287,14 +291,16 @@ message AckSearchClan
 //EGMI_REQ_JOIN_CLAN                         = 302; // 申请加入公会 EGMI_ACK_JOIN_CLAN							= 303; // 加入公会结果
 message ReqAckJoinClan
 {
-    Ident		clan_id = 1;
-    bytes		clan_name = 2;
+    Ident	 clan_id = 1;
+    Ident    clan_player_id = 4;
+    bytes    clan_player_name = 5;
+    int32    clan_player_bp = 6;
 }
 //EGMI_ACK_LEAVE_CLAN						= 305; // 离开公会结果 
 message ReqAckLeaveClan
 {
-    Ident		clan_id = 1;
-    bytes		clan_name = 2;
+    Ident    clan_id = 1;
+    Ident    clan_player_id = 2;
 }
 
 
@@ -308,8 +314,9 @@ message ReqAckOprClanMember
 		EGAT_KICK = 2;
 	}
     Ident						clan_id = 1;
-    Ident						member_id = 2;//被操作的ID
-    EGClanMemberOprType		type = 3;
+    Ident                       player_id = 2;
+    Ident						member_id = 3;//被操作的ID
+    EGClanMemberOprType		    type = 4;
 }
 
 
