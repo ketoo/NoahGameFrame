@@ -196,7 +196,7 @@ bool NFClanModule::DemotionMember(const NFGUID& xClanID, const NFGUID& self, con
 
 bool NFClanModule::MemberOnline(const NFGUID& xClanID, const NFGUID& self, const int bp)
 {
-	NF_SHARE_PTR<NFIRecord> xRecord = m_pKernelModule->FindRecord(xClan, NFrame::Clan::Clan::ThisName());
+	NF_SHARE_PTR<NFIRecord> xRecord = m_pKernelModule->FindRecord(xClanID, NFrame::Clan::Clan::ThisName());
 	if (xRecord && !self.IsNull())
 	{
 		const int nRow = xRecord->FindObject(NFrame::Clan::Clan_MemberList::GUID, self);
@@ -215,7 +215,7 @@ bool NFClanModule::MemberOnline(const NFGUID& xClanID, const NFGUID& self, const
 
 bool NFClanModule::MemberOffline(const NFGUID& xClanID, const NFGUID& self, const int bp)
 {
-	NF_SHARE_PTR<NFIRecord> xRecord = m_pKernelModule->FindRecord(xClan, NFrame::Clan::Clan::ThisName());
+	NF_SHARE_PTR<NFIRecord> xRecord = m_pKernelModule->FindRecord(xClanID, NFrame::Clan::Clan::ThisName());
 	if (xRecord && !self.IsNull())
 	{
 		const int nRow = xRecord->FindObject(NFrame::Clan::Clan_MemberList::GUID, self);
@@ -318,7 +318,7 @@ void NFClanModule::OnCreateClanProcess(const NFSOCK nSockIndex, const int nMsgID
     NFGUID clanID = CreateClan(xMsg.clan_name(), xMsg.clan_desc());
 	if (!clanID.IsNull())
 	{
-		AddMember(clanID, xMsg.clan_player_id(), xMsg.clan_player_name(), xMsg.clan_player_bp());
+		AddMember(clanID, NFINetModule::PBToNF(xMsg.clan_player_id()), xMsg.clan_player_name(), xMsg.clan_player_bp(), NFIClanModule::MT_PRESIDENT);
 	}
 }
 
@@ -326,10 +326,10 @@ void NFClanModule::OnJoinClanProcess(const NFSOCK nSockIndex, const int nMsgID, 
 {
 	CLIENT_MSG_PROCESS_NO_OBJECT(nMsgID, msg, nLen, NFMsg::ReqAckJoinClan);
 
-	NF_SHARE_PTR<NFIObject> clanObject = m_pKernelModule->GetObject(xMsg.clan_id());
+	NF_SHARE_PTR<NFIObject> clanObject = m_pKernelModule->GetObject(NFINetModule::PBToNF(xMsg.clan_id()));
 	if (clanObject)
 	{
-		AddMember(clanObject->Self(), xMsg.clan_player_id(), xMsg.clan_player_name(), xMsg.clan_player_bp());
+		AddMember(clanObject->Self(), NFINetModule::PBToNF(xMsg.clan_player_id()), xMsg.clan_player_name(), xMsg.clan_player_bp(), NFIClanModule::MT_MEMBER);
 	}
 }
 
@@ -337,10 +337,10 @@ void NFClanModule::OnLeaveClanProcess(const NFSOCK nSockIndex, const int nMsgID,
 {
 	CLIENT_MSG_PROCESS_NO_OBJECT(nMsgID, msg, nLen, NFMsg::ReqAckLeaveClan);
 	
-	NF_SHARE_PTR<NFIObject> clanObject = m_pKernelModule->GetObject(xMsg.clan_id());
+	NF_SHARE_PTR<NFIObject> clanObject = m_pKernelModule->GetObject(NFINetModule::PBToNF(xMsg.clan_id()));
 	if (clanObject)
 	{
-		LeaveClan(clanObject->Self(), xMsg.clan_player_id());
+		LeaveClan(clanObject->Self(), NFINetModule::PBToNF(xMsg.clan_player_id()));
 	}
 }
 
@@ -348,16 +348,16 @@ void NFClanModule::OnOprClanMemberProcess(const NFSOCK nSockIndex, const int nMs
 {
 	CLIENT_MSG_PROCESS_NO_OBJECT(nMsgID, msg, nLen, NFMsg::ReqAckOprClanMember);
 
-	NF_SHARE_PTR<NFIObject> clanObject = m_pKernelModule->GetObject(xMsg.clan_id());
+	NF_SHARE_PTR<NFIObject> clanObject = m_pKernelModule->GetObject(NFINetModule::PBToNF(xMsg.clan_id()));
 	if (clanObject)
 	{
 		if (xMsg.type() == NFMsg::ReqAckOprClanMember::EGAT_UP)
 		{
-			PromotionMember(clanObject->Self(), xMsg.player_id(), xMsg.member_id());
+			PromotionMember(clanObject->Self(), NFINetModule::PBToNF(xMsg.player_id()), NFINetModule::PBToNF(xMsg.member_id()));
 		}
-		else if (xMsg.type() == NFMsg::ReqAckOprClanMember::EGAT_DOWN))
+		else if (xMsg.type() == NFMsg::ReqAckOprClanMember::EGAT_DOWN)
 		{
-    		DemotionMember(clanObject->Self(), xMsg.player_id(), xMsg.member_id());
+    		DemotionMember(clanObject->Self(), NFINetModule::PBToNF(xMsg.player_id()), NFINetModule::PBToNF(xMsg.member_id()));
 		}
 	}
 }
