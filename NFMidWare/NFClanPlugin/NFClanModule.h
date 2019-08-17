@@ -55,22 +55,22 @@ public:
 
 protected:
 
-    bool CreateClan(const NFGUID& self, const NFGUID& xClanID, const std::string& strClanName);
-    bool JoinClan(const NFGUID& self, const NFGUID& xClanID);
-    bool LeaveClan(const NFGUID& self, const NFGUID& xClanID);
-    bool PromotionMember(const NFGUID& self, const NFGUID& xClanID, const NFGUID& xMember);
-    bool DemotionMember(const NFGUID& self, const NFGUID& xClanID, const NFGUID& xMember);
+    NFGUID CreateClan(const std::string& strClanName, const std::string& strClanDesc);
 
-    bool MemberOnline(const NFGUID& self, const NFGUID& xClan);
-    bool MemberOffline(const NFGUID& self, const NFGUID& xClan);
+	bool AddMember(const NFGUID& xClanID, const NFGUID& player, const std::string& strPlayerName, const int bp, const MEMBER_TYPE type);
+    bool LeaveClan(const NFGUID& xClanID, const NFGUID& self);
 
+    bool PromotionMember(const NFGUID& xClanID, const NFGUID& self, const NFGUID& xMember);
+    bool DemotionMember(const NFGUID& xClanID, const NFGUID& self, const NFGUID& xMember);
+
+    bool MemberOnline(const NFGUID& self, const NFGUID& xClan, const int bp);
+    bool MemberOffline(const NFGUID& self, const NFGUID& xClan, const int bp);
 
     void OnClanOnlineProcess(const NFGUID& xClanID);
     void OnClanOfflineProcess(const NFGUID& xClanID);
 
-	bool AddMember(const NFGUID& xClanID, const NFGUID& player, const MEMBER_TYPE type);
 
-	NFIClanModule::MEMBER_TYPE CheckPower(const NFGUID& self, const NFGUID& xClanID);
+	NFIClanModule::MEMBER_TYPE CheckPower(const NFGUID& xClanID, const NFGUID& self);
 
 protected:
 
@@ -88,6 +88,9 @@ protected:
 	int OnRecordCommonEvent(const NFGUID& self, const RECORD_EVENT_DATA& xEventData, const NFData& oldVar, const NFData& newVar);
 
 	void SendMessageToGameServer(const NFGUID& Clan, const int nMessageID, google::protobuf::Message& msg);
+
+private:
+    int mnMaxCount = 50;
 
 protected:
 	NFILogModule* m_pLogModule;

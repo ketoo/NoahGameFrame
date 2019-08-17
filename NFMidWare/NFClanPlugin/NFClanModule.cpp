@@ -68,54 +68,46 @@ bool NFClanModule::AfterInit()
     return true;
 }
 
-bool NFClanModule::CreateClan(const NFGUID& self, const NFGUID& xClanID, const std::string& strClanName)
+NFGUID NFClanModule::CreateClan(const std::string& strClanName, const std::string& strClanDesc)
 {
-	NF_SHARE_PTR<NFIObject> xClanObject = m_pKernelModule->CreateObject(xClanID, 0, 0, NFrame::Clan::Clan::ThisName(), "", NFDataList());
+	NF_SHARE_PTR<NFIObject> xClanObject = m_pKernelModule->CreateObject(NFGUID(), 0, 0, NFrame::Clan::Clan::ThisName(), "", NFDataList());
 	if (xClanObject)
 	{
-		m_pKernelModule->SetPropertyInt(xClanID, NFrame::Clan::Clan_CreateTime(), 0);
+		const NFGUID xClanID = xClanObject->Self();
+		m_pKernelModule->SetPropertyInt(xClanID, NFrame::Clan::Clan_CreateTime(), NFGetTimeS());
 		m_pKernelModule->SetPropertyInt(xClanID, NFrame::Clan::Clan_Level(), 1);
 		m_pKernelModule->SetPropertyObject(xClanID, NFrame::Clan::ID(), xClanID);
-		m_pKernelModule->SetPropertyInt(xClanID, NFrame::Clan::Clan_MemeberMaxCount(), 50);
 		m_pKernelModule->SetPropertyString(xClanID, NFrame::Clan::Clan_Name(), strClanName);
-		m_pKernelModule->SetPropertyObject(xClanID, NFrame::Clan::Clan_PresidentID(), self);
-		m_pKernelModule->SetPropertyString(xClanID, NFrame::Clan::Clan_PresidentName(), m_pPlayerRedisModule->GetPropertyString(self, NFrame::Player::Name()));
+		m_pKernelModule->SetPropertyString(xClanID, NFrame::Clan::Clan_Desc(), strClanDesc);
+		//m_pKernelModule->SetPropertyObject(xClanID, NFrame::Clan::Clan_PresidentID(), self);
+		//m_pKernelModule->SetPropertyString(xClanID, NFrame::Clan::Clan_PresidentName(), "");
 
-		AddMember(xClanID, self, MEMBER_TYPE::MT_PRESIDENT);
-		
+		//AddMember(xClanID, self, MEMBER_TYPE::MT_PRESIDENT);
+
+		//m_pLogModule->LogInfo();
+
+		return xClanID;
 	}
 
-    return false;
+    return NFGUID();
 }
 
-bool NFClanModule::JoinClan(const NFGUID& self, const NFGUID& xClanID)
+bool NFClanModule::LeaveClan(const NFGUID& xClanID, const NFGUID& self)
 {
 	NF_SHARE_PTR<NFIRecord> xMemberRecord = m_pKernelModule->FindRecord(xClanID, NFrame::Clan::Clan_MemberList::ThisName());
-	if (xMemberRecord)
-	{
-		int nRow = xMemberRecord->FindObject(NFrame::Clan::Clan_MemberList::GUID, self);
-		if (nRow < 0)
-		{
-			return AddMember(xClanID, self, MEMBER_TYPE::MT_MEMBER);
-		}
-	}
-
-    return false;
-
-}
-
-bool NFClanModule::LeaveClan(const NFGUID& self, const NFGUID& xClanID)
-{
-	NF_SHARE_PTR<NFIRecord> xMemberRecord = m_pKernelModule->FindRecord(xClanID, NFrame::Clan::Clan_MemberList::ThisName());
-	if (xMemberRecord)
+	if (xMemberRecord && !self.IsNull())
 	{
 		int nRow = xMemberRecord->FindObject(NFrame::Clan::Clan_MemberList::GUID, self);
 		if (nRow >= 0)
 		{
-			xMemberRecord->Remove(nRow);
+			NFIClanModule::MEMBER_TYPE memberType = (MEMBER_TYPE)xMemberRecord->GetInt(nRow, NFrame::Clan::Clan_MemberList::Title);
+			if (memberType == NFIClanModule::MEMBER_TYPE::MT_PRESIDENT)
+			{
+				//find a elder and let him work as the leader
+				//how many members now? if the member count is ZERO then we destroy the clan
+			}
 
-			int nCount = m_pKernelModule->GetPropertyInt(xClanID, NFrame::Clan::Clan_MemeberCount());
-			m_pKernelModule->SetPropertyInt(xClanID, NFrame::Clan::Clan_MemeberCount(), nCount - 1);
+			xMemberRecord->Remove(nRow);
 		}
 
 	}
@@ -123,14 +115,14 @@ bool NFClanModule::LeaveClan(const NFGUID& self, const NFGUID& xClanID)
     return false;
 }
 
-bool NFClanModule::PromotionMember(const NFGUID& self, const NFGUID& xClanID, const NFGUID& xMember)
+bool NFClanModule::PromotionMember(const NFGUID& xClanID, const NFGUID& self, const NFGUID& xMember)
 {
-	NFIClanModule::MEMBER_TYPE eMemberLevelOperater = CheckPower(self, xClanID);
-	NFIClanModule::MEMBER_TYPE eMemberLevel = CheckPower(xMember, xClanID);
-	if (eMemberLevelOperater > eMemberLevel)
+	NF_SHARE_PTR<NFIRecord> xMemberRecord = m_pKernelModule->FindRecord(xClanID, NFrame::Clan::Clan_MemberList::ThisName());
+	if (xMemberRecord && !self.IsNull() && !xMember.IsNull())
 	{
-		NF_SHARE_PTR<NFIRecord> xMemberRecord = m_pKernelModule->FindRecord(xClanID, NFrame::Clan::Clan_MemberList::ThisName());
-		if (xMemberRecord)
+		NFIClanModule::MEMBER_TYPE eMemberLevelOperater = CheckPower(self, xClanID);
+		NFIClanModule::MEMBER_TYPE eMemberLevel = CheckPower(xMember, xClanID);
+		if (eMemberLevelOperater > eMemberLevel)
 		{
 			int nSelfRow = xMemberRecord->FindObject(NFrame::Clan::Clan_MemberList::GUID, self);
 			int nMemberRow = xMemberRecord->FindObject(NFrame::Clan::Clan_MemberList::GUID, xMember);
@@ -173,14 +165,14 @@ bool NFClanModule::PromotionMember(const NFGUID& self, const NFGUID& xClanID, co
     return false;
 }
 
-bool NFClanModule::DemotionMember(const NFGUID& self, const NFGUID& xClanID, const NFGUID& xMember)
+bool NFClanModule::DemotionMember(const NFGUID& xClanID, const NFGUID& self, const NFGUID& xMember)
 {
-	NFIClanModule::MEMBER_TYPE eMemberLevelOperater = CheckPower(self, xClanID);
-	NFIClanModule::MEMBER_TYPE eMemberLevel = CheckPower(xMember, xClanID);
-	if (eMemberLevelOperater > eMemberLevel)
+	NF_SHARE_PTR<NFIRecord> xMemberRecord = m_pKernelModule->FindRecord(xClanID, NFrame::Clan::Clan_MemberList::ThisName());
+	if (xMemberRecord && !self.IsNull() && !xMember.IsNull())
 	{
-		NF_SHARE_PTR<NFIRecord> xMemberRecord = m_pKernelModule->FindRecord(xClanID, NFrame::Clan::Clan_MemberList::ThisName());
-		if (xMemberRecord)
+		NFIClanModule::MEMBER_TYPE eMemberLevelOperater = CheckPower(self, xClanID);
+		NFIClanModule::MEMBER_TYPE eMemberLevel = CheckPower(xMember, xClanID);
+		if (eMemberLevelOperater > eMemberLevel)
 		{
 			int nRow = xMemberRecord->FindObject(NFrame::Clan::Clan_MemberList::GUID, xMember);
 			if (nRow >= 0)
@@ -202,65 +194,78 @@ bool NFClanModule::DemotionMember(const NFGUID& self, const NFGUID& xClanID, con
 	return false;
 }
 
-bool NFClanModule::MemberOnline(const NFGUID& self, const NFGUID& xClan)
+bool NFClanModule::MemberOnline(const NFGUID& xClanID, const NFGUID& self, const int bp)
 {
 	NF_SHARE_PTR<NFIRecord> xRecord = m_pKernelModule->FindRecord(xClan, NFrame::Clan::Clan::ThisName());
-	const int nRow = xRecord->FindObject(NFrame::Clan::Clan_MemberList::GUID, self);
-	if (nRow >= 0)
+	if (xRecord && !self.IsNull())
 	{
-		xRecord->SetInt(nRow, NFrame::Clan::Clan_MemberList::Online, 1);
-		xRecord->SetInt(nRow, NFrame::Clan::Clan_MemberList::GameID, 1);
+		const int nRow = xRecord->FindObject(NFrame::Clan::Clan_MemberList::GUID, self);
+		if (nRow >= 0)
+		{
+			xRecord->SetInt(nRow, NFrame::Clan::Clan_MemberList::Online, 1);
+			xRecord->SetInt(nRow, NFrame::Clan::Clan_MemberList::GameID, 1);
 
-		return true;
+			return true;
+		}
 	}
+		
 
 	return false;
 }
 
-bool NFClanModule::MemberOffline(const NFGUID& self, const NFGUID& xClan)
+bool NFClanModule::MemberOffline(const NFGUID& xClanID, const NFGUID& self, const int bp)
 {
 	NF_SHARE_PTR<NFIRecord> xRecord = m_pKernelModule->FindRecord(xClan, NFrame::Clan::Clan::ThisName());
-	const int nRow = xRecord->FindObject(NFrame::Clan::Clan_MemberList::GUID, self);
-	if (nRow >= 0)
+	if (xRecord && !self.IsNull())
 	{
-		xRecord->SetString(nRow, NFrame::Clan::Clan_MemberList::Name, m_pPlayerRedisModule->GetPropertyString(self, NFrame::Player::Name()));
-		xRecord->SetInt(nRow, NFrame::Clan::Clan_MemberList::Level, m_pPlayerRedisModule->GetPropertyInt(self, NFrame::Player::Level()));
+		const int nRow = xRecord->FindObject(NFrame::Clan::Clan_MemberList::GUID, self);
+		if (nRow >= 0)
+		{
+			xRecord->SetString(nRow, NFrame::Clan::Clan_MemberList::Name, m_pPlayerRedisModule->GetPropertyString(self, NFrame::Player::Name()));
+			xRecord->SetInt(nRow, NFrame::Clan::Clan_MemberList::Level, m_pPlayerRedisModule->GetPropertyInt(self, NFrame::Player::Level()));
 
-		xRecord->SetInt(nRow, NFrame::Clan::Clan_MemberList::Online, 0);
-		xRecord->SetInt(nRow, NFrame::Clan::Clan_MemberList::GameID, 0);
+			xRecord->SetInt(nRow, NFrame::Clan::Clan_MemberList::Online, 0);
+			xRecord->SetInt(nRow, NFrame::Clan::Clan_MemberList::GameID, 0);
 
-		NFDateTime xTime = NFDateTime::Now();
-		xRecord->SetString(nRow, NFrame::Clan::Clan_MemberList::LastTime, xTime.ToString());
+			NFDateTime xTime = NFDateTime::Now();
+			xRecord->SetString(nRow, NFrame::Clan::Clan_MemberList::LastTime, xTime.ToString());
 
-		return true;
+			return true;
+		}
 	}
-
+	
     return false;
 }
 
-bool NFClanModule::AddMember(const NFGUID & xClanID, const NFGUID & player, const MEMBER_TYPE type)
+bool NFClanModule::AddMember(const NFGUID& xClanID, const NFGUID& player, const std::string& strPlayerName, const int bp, const MEMBER_TYPE type)
 {
 	NF_SHARE_PTR<NFIRecord> xMemberRecord = m_pKernelModule->FindRecord(xClanID, NFrame::Clan::Clan_MemberList::ThisName());
-	if (xMemberRecord)
+	if (xMemberRecord && !player.IsNull())
 	{
-		int nCount = m_pKernelModule->GetPropertyInt(xClanID, NFrame::Clan::Clan_MemeberCount());
-		int nMaxCount = m_pKernelModule->GetPropertyInt(xClanID, NFrame::Clan::Clan_MemeberMaxCount());
-		if (nCount < nMaxCount)
+		int memberCount = 0;
+		for (int i = 0; i < xMemberRecord->GetRows(); ++i)
+		{
+			if (xMemberRecord->IsUsed(i))
+			{
+				memberCount++;
+			}
+		}
+
+		if (memberCount < mnMaxCount)
 		{
 			NF_SHARE_PTR<NFDataList> xDataList = xMemberRecord->GetInitData();
 
 			xDataList->SetObject(NFrame::Clan::Clan_MemberList::GUID, player);
-			xDataList->SetString(NFrame::Clan::Clan_MemberList::Name, m_pPlayerRedisModule->GetPropertyString(player,  NFrame::Player::Name()));
-			xDataList->SetInt(NFrame::Clan::Clan_MemberList::Level, m_pPlayerRedisModule->GetPropertyInt(player, NFrame::Player::Level()));
-			xDataList->SetInt(NFrame::Clan::Clan_MemberList::Job, m_pPlayerRedisModule->GetPropertyInt(player, NFrame::Player::Job()));
+			xDataList->SetString(NFrame::Clan::Clan_MemberList::Name, strPlayerName);
+			xDataList->SetInt(NFrame::Clan::Clan_MemberList::Level, 0);
+			xDataList->SetInt(NFrame::Clan::Clan_MemberList::Job, 0);
 			xDataList->SetInt(NFrame::Clan::Clan_MemberList::Donation, 0);
 			xDataList->SetInt(NFrame::Clan::Clan_MemberList::Receive, 0);
-			xDataList->SetInt(NFrame::Clan::Clan_MemberList::VIP, m_pPlayerRedisModule->GetPropertyInt(player, NFrame::Player::VIPLevel()));
+			xDataList->SetInt(NFrame::Clan::Clan_MemberList::BP, bp);
 			xDataList->SetInt(NFrame::Clan::Clan_MemberList::Online, 1);//maybe offline
-			xDataList->SetInt(NFrame::Clan::Clan_MemberList::Power, 0);
 			xDataList->SetInt(NFrame::Clan::Clan_MemberList::Title, type);
 			xDataList->SetInt(NFrame::Clan::Clan_MemberList::GameID, 0);
-			xDataList->SetInt(NFrame::Clan::Clan_MemberList::JoinTime, 0);
+			xDataList->SetInt(NFrame::Clan::Clan_MemberList::JoinTime, NFGetTimeS());
 			xDataList->SetInt(NFrame::Clan::Clan_MemberList::Contribution, 0);
 			xDataList->SetInt(NFrame::Clan::Clan_MemberList::LastTime, 0);
 			xDataList->SetInt(NFrame::Clan::Clan_MemberList::AllContribution, 0);
@@ -268,8 +273,11 @@ bool NFClanModule::AddMember(const NFGUID & xClanID, const NFGUID & player, cons
 
 			xMemberRecord->AddRow(-1, *xDataList);
 
-			m_pKernelModule->SetPropertyInt(xClanID, NFrame::Clan::Clan_MemeberCount(), nCount + 1);
-
+			if (type == MEMBER_TYPE::MT_PRESIDENT)
+			{
+				m_pKernelModule->SetPropertyObject(xClanID, NFrame::Clan::Clan_PresidentID(), player);
+				m_pKernelModule->SetPropertyString(xClanID, NFrame::Clan::Clan_PresidentName(), strPlayerName);
+			}
 			//send all members's infomation to this new member
 		}
 	}
@@ -278,10 +286,10 @@ bool NFClanModule::AddMember(const NFGUID & xClanID, const NFGUID & player, cons
 }
 
 
-NFIClanModule::MEMBER_TYPE NFClanModule::CheckPower(const NFGUID& self, const NFGUID& xClanID)
+NFIClanModule::MEMBER_TYPE NFClanModule::CheckPower(const NFGUID& xClanID, const NFGUID& self)
 {
 	NF_SHARE_PTR<NFIRecord> xMemberRecord = m_pKernelModule->FindRecord(xClanID, NFrame::Clan::Clan_MemberList::ThisName());
-	if (xMemberRecord)
+	if (xMemberRecord && !self.IsNull())
 	{
 		int nRow = xMemberRecord->FindObject(NFrame::Clan::Clan_MemberList::GUID, self);
 		if (nRow >= 0)
@@ -307,22 +315,51 @@ void NFClanModule::OnCreateClanProcess(const NFSOCK nSockIndex, const int nMsgID
 {
 	CLIENT_MSG_PROCESS_NO_OBJECT(nMsgID, msg, nLen, NFMsg::ReqAckCreateClan);
 
-    //CreateClan(NFGUID(), xMsg.name xMsg.Clan_name(), );
+    NFGUID clanID = CreateClan(xMsg.clan_name(), xMsg.clan_desc());
+	if (!clanID.IsNull())
+	{
+		AddMember(clanID, xMsg.clan_player_id(), xMsg.clan_player_name(), xMsg.clan_player_bp());
+	}
 }
 
 void NFClanModule::OnJoinClanProcess(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
 {
 	CLIENT_MSG_PROCESS_NO_OBJECT(nMsgID, msg, nLen, NFMsg::ReqAckJoinClan);
+
+	NF_SHARE_PTR<NFIObject> clanObject = m_pKernelModule->GetObject(xMsg.clan_id());
+	if (clanObject)
+	{
+		AddMember(clanObject->Self(), xMsg.clan_player_id(), xMsg.clan_player_name(), xMsg.clan_player_bp());
+	}
 }
 
 void NFClanModule::OnLeaveClanProcess(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
 {
 	CLIENT_MSG_PROCESS_NO_OBJECT(nMsgID, msg, nLen, NFMsg::ReqAckLeaveClan);
+	
+	NF_SHARE_PTR<NFIObject> clanObject = m_pKernelModule->GetObject(xMsg.clan_id());
+	if (clanObject)
+	{
+		LeaveClan(clanObject->Self(), xMsg.clan_player_id());
+	}
 }
 
 void NFClanModule::OnOprClanMemberProcess(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
 {
 	CLIENT_MSG_PROCESS_NO_OBJECT(nMsgID, msg, nLen, NFMsg::ReqAckOprClanMember);
+
+	NF_SHARE_PTR<NFIObject> clanObject = m_pKernelModule->GetObject(xMsg.clan_id());
+	if (clanObject)
+	{
+		if (xMsg.type() == NFMsg::ReqAckOprClanMember::EGAT_UP)
+		{
+			PromotionMember(clanObject->Self(), xMsg.player_id(), xMsg.member_id());
+		}
+		else if (xMsg.type() == NFMsg::ReqAckOprClanMember::EGAT_DOWN))
+		{
+    		DemotionMember(clanObject->Self(), xMsg.player_id(), xMsg.member_id());
+		}
+	}
 }
 
 void NFClanModule::OnSearchClanProcess(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)

@@ -30,6 +30,8 @@ make
 cp -R -f ./.libs/*.a ../lib/Debug/
 cp -R -f ./.libs/*.a ../lib/Release/
 
+cp -R -f ./.libs/*.a ../lib/Release/
+
 cd ../
 
 
@@ -37,12 +39,14 @@ cd ../
 cd protobuf
 make clean
 chmod -R 755 *
-./configure --disable-shared
+./configure --disable-shared --with-protoc
 make
 make check
 
 cp -r -f ./src/.libs/*.a ../lib/Debug/
 cp -r -f ./src/.libs/*.a ../lib/Release/
+
+cp -r -f ./src/protoc ../../NFComm/NFMessageDefine/protoc
 
 cd ../
 
