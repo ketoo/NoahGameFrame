@@ -36,13 +36,9 @@ ALTER TABLE `Buff` ADD `WashGroupID` bigint(11) DEFAULT '0' COMMENT '每次间�
 ALTER TABLE `Clan` ADD `Clan_AD` text COLLATE utf8mb4_unicode_ci  DEFAULT '' COMMENT '工会公告';
 ALTER TABLE `Clan` ADD `Clan_CreateTime` bigint(11) DEFAULT '0' COMMENT '公会创建时间';
 ALTER TABLE `Clan` ADD `Clan_Desc` text COLLATE utf8mb4_unicode_ci  DEFAULT '' COMMENT '工会描述';
-ALTER TABLE `Clan` ADD `Clan_Exp` bigint(11) DEFAULT '0' COMMENT '公会经验';
 ALTER TABLE `Clan` ADD `Clan_Gold` bigint(11) DEFAULT '0' COMMENT '工会财富';
-ALTER TABLE `Clan` ADD `Clan_Honor` bigint(11) DEFAULT '0' COMMENT '公会荣誉';
 ALTER TABLE `Clan` ADD `Clan_Icon` text COLLATE utf8mb4_unicode_ci  DEFAULT '' COMMENT '公会头像';
 ALTER TABLE `Clan` ADD `Clan_Level` bigint(11) DEFAULT '0' COMMENT '工会等级';
-ALTER TABLE `Clan` ADD `Clan_MemeberCount` bigint(11) DEFAULT '0' COMMENT '成员数量(增加个字段，不然遍历Record太麻烦)';
-ALTER TABLE `Clan` ADD `Clan_MemeberMaxCount` bigint(11) DEFAULT '0' COMMENT '成员最大数量';
 ALTER TABLE `Clan` ADD `Clan_Name` text COLLATE utf8mb4_unicode_ci  DEFAULT '' COMMENT '工会名';
 ALTER TABLE `Clan` ADD `Clan_PresidentID` varchar(64) COLLATE utf8mb4_unicode_ci DEFAULT '' COMMENT '会长ID';
 ALTER TABLE `Clan` ADD `Clan_PresidentName` text COLLATE utf8mb4_unicode_ci  DEFAULT '' COMMENT '会长名';

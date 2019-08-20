@@ -52,13 +52,9 @@ namespace NFrame
 		public static readonly String Clan_AD = "Clan_AD";// string
 		public static readonly String Clan_CreateTime = "Clan_CreateTime";// int
 		public static readonly String Clan_Desc = "Clan_Desc";// string
-		public static readonly String Clan_Exp = "Clan_Exp";// int
 		public static readonly String Clan_Gold = "Clan_Gold";// int
-		public static readonly String Clan_Honor = "Clan_Honor";// int
 		public static readonly String Clan_Icon = "Clan_Icon";// string
 		public static readonly String Clan_Level = "Clan_Level";// int
-		public static readonly String Clan_MemeberCount = "Clan_MemeberCount";// int
-		public static readonly String Clan_MemeberMaxCount = "Clan_MemeberMaxCount";// int
 		public static readonly String Clan_Name = "Clan_Name";// string
 		public static readonly String Clan_PresidentID = "Clan_PresidentID";// object
 		public static readonly String Clan_PresidentName = "Clan_PresidentName";// string
@@ -94,15 +90,14 @@ namespace NFrame
 			public const int Job = 3;//int
 			public const int Donation = 4;//int
 			public const int Receive = 5;//int
-			public const int VIP = 6;//int
+			public const int BP = 6;//int
 			public const int Online = 7;//int
-			public const int Power = 8;//int
-			public const int Title = 9;//int
-			public const int GameID = 10;//int
-			public const int JoinTime = 11;//int
-			public const int Contribution = 12;//int
-			public const int LastTime = 13;//string
-			public const int AllContribution = 14;//int
+			public const int Title = 8;//int
+			public const int GameID = 9;//int
+			public const int JoinTime = 10;//int
+			public const int Contribution = 11;//int
+			public const int LastTime = 12;//string
+			public const int AllContribution = 13;//int
 
 		}
 		public class Clan_WarList
@@ -555,8 +550,9 @@ namespace NFrame
 		public static readonly String SeedID = "SeedID";// string
 		public static readonly String ShowCard = "ShowCard";// string
 		public static readonly String ShowName = "ShowName";// string
-		public static readonly String SkillAttack = "SkillAttack";// string
 		public static readonly String SkillNormal = "SkillNormal";// string
+		public static readonly String SkillSpecial1 = "SkillSpecial1";// string
+		public static readonly String SkillSpecial2 = "SkillSpecial2";// string
 		public static readonly String SkillTHUMP = "SkillTHUMP";// string
 		public static readonly String SpriteFile = "SpriteFile";// string
 		public static readonly String TargetX = "TargetX";// float

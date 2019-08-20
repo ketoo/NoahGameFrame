@@ -46,13 +46,9 @@ package nframe;
 		public static final String Clan_AD = "Clan_AD";// string
 		public static final String Clan_CreateTime = "Clan_CreateTime";// int
 		public static final String Clan_Desc = "Clan_Desc";// string
-		public static final String Clan_Exp = "Clan_Exp";// int
 		public static final String Clan_Gold = "Clan_Gold";// int
-		public static final String Clan_Honor = "Clan_Honor";// int
 		public static final String Clan_Icon = "Clan_Icon";// string
 		public static final String Clan_Level = "Clan_Level";// int
-		public static final String Clan_MemeberCount = "Clan_MemeberCount";// int
-		public static final String Clan_MemeberMaxCount = "Clan_MemeberMaxCount";// int
 		public static final String Clan_Name = "Clan_Name";// string
 		public static final String Clan_PresidentID = "Clan_PresidentID";// object
 		public static final String Clan_PresidentName = "Clan_PresidentName";// string
@@ -88,15 +84,14 @@ package nframe;
 			public static final int Job = 3;//int
 			public static final int Donation = 4;//int
 			public static final int Receive = 5;//int
-			public static final int VIP = 6;//int
+			public static final int BP = 6;//int
 			public static final int Online = 7;//int
-			public static final int Power = 8;//int
-			public static final int Title = 9;//int
-			public static final int GameID = 10;//int
-			public static final int JoinTime = 11;//int
-			public static final int Contribution = 12;//int
-			public static final int LastTime = 13;//string
-			public static final int AllContribution = 14;//int
+			public static final int Title = 8;//int
+			public static final int GameID = 9;//int
+			public static final int JoinTime = 10;//int
+			public static final int Contribution = 11;//int
+			public static final int LastTime = 12;//string
+			public static final int AllContribution = 13;//int
 
 		}
 		public class Clan_WarList
@@ -549,8 +544,9 @@ package nframe;
 		public static final String SeedID = "SeedID";// string
 		public static final String ShowCard = "ShowCard";// string
 		public static final String ShowName = "ShowName";// string
-		public static final String SkillAttack = "SkillAttack";// string
 		public static final String SkillNormal = "SkillNormal";// string
+		public static final String SkillSpecial1 = "SkillSpecial1";// string
+		public static final String SkillSpecial2 = "SkillSpecial2";// string
 		public static final String SkillTHUMP = "SkillTHUMP";// string
 		public static final String SpriteFile = "SpriteFile";// string
 		public static final String TargetX = "TargetX";// float
