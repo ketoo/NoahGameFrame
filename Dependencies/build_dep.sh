@@ -78,25 +78,15 @@ echo Building hiredis finish...
 
 
 # TODO: other libs
-#unzip -o gperftools-2.5.zip -d ./
-#cd gperftools-2.5
-#chmod -R 755 *
-#./configure --enable-frame-pointers
-#make && make install
+#unzip -o gperftools-2.7.zip -d ./
+cd gperftools-2.7
+chmod -R 755 *
+./configure --enable-frame-pointers --disable-heap-profiler --disable-heap-checker
+make
 
-#cp -R -f ./.libs/*.a ../lib/Debug/
-#cp -R -f ./.libs/*.a ../lib/Release/
+cp -R -f ./.libs/*.a ../lib/Debug/
+cp -R -f ./.libs/*.a ../lib/Release/
 
-#cp -r -f ./.libs/*.so ../../_Out/Debug/
-#cp -r -f ./.libs/*.so.* ../../_Out/Debug/
-#cp -r -f ./.libs/*.so ../../_Out/Release/
-#cp -r -f ./.libs/*.so.* ../../_Out/Release/
-
-#cp -r -f ./.libs/*.dylib ../../_Out/Debug/
-#cp -r -f ./.libs/*.dylib.* ../../_Out/Debug/
-#cp -r -f ./.libs/*.dylib ../../_Out/Release/
-#cp -r -f ./.libs/*.dylib.* ../../_Out/Release/
-#cd ../
 
 #-ltcmalloc
 #-lprofiler
