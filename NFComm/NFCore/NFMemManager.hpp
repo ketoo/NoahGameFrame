@@ -30,7 +30,7 @@
 #include "NFComm/NFPluginModule/NFPlatform.h"
 
 #ifdef NF_USE_TCMALLOC
-#include "Dependencies/gperftools-2.5/src/gperftools/malloc_extension.h"
+#include "Dependencies/gperftools-2.7/src/gperftools/malloc_extension.h"
 #endif
 
 #ifdef NF_USE_TCMALLOC
