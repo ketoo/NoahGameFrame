@@ -24,7 +24,7 @@
 		<Property Id="DEF_VALUE" Cache="0" Desc="物理防御力" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="int" Upload="0" />
 		<Property Id="DEF_WIND" Cache="0" Desc="抗" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="int" Upload="0" />
 		<Property Id="DIZZY_GATE" Cache="0" Desc="眩晕开关" Force="0" Private="1" Public="1" Ref="0" Save="0" Type="int" Upload="0" />
-		<Property Id="DescID" Cache="0" Desc="desc" Force="0" Private="1" Public="1" Ref="0" Save="0" Type="string" Upload="0" />
+		<Property Id="DescID" Cache="0" Desc="desc" Force="0" Private="1" Public="1" Ref="1" Save="0" Type="string" Upload="0" />
 		<Property Id="Diamond" Cache="0" Desc="钻石" Force="0" Private="1" Public="1" Ref="0" Save="1" Type="int" Upload="0" />
 		<Property Id="DropPackList" Cache="0" Desc="掉落列表" Force="0" Private="1" Public="0" Ref="1" Save="0" Type="string" Upload="0" />
 		<Property Id="DropProbability" Cache="0" Desc="掉落概率%" Force="0" Private="1" Public="0" Ref="1" Save="0" Type="int" Upload="0" />
@@ -63,8 +63,9 @@
 		<Property Id="SeedID" Cache="0" Desc="种子ID" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="string" Upload="0" />
 		<Property Id="ShowCard" Cache="0" Desc="卡牌背景" Force="0" Private="1" Public="1" Ref="0" Save="0" Type="string" Upload="0" />
 		<Property Id="ShowName" Cache="0" Desc="显示名字" Force="0" Private="1" Public="1" Ref="1" Save="0" Type="string" Upload="0" />
-		<Property Id="SkillAttack" Cache="0" Desc="技能列表索引" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="string" Upload="0" />
 		<Property Id="SkillNormal" Cache="0" Desc="技能列表索引" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="string" Upload="0" />
+		<Property Id="SkillSpecial1" Cache="0" Desc="技能列表索引" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="string" Upload="0" />
+		<Property Id="SkillSpecial2" Cache="0" Desc="技能列表索引" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="string" Upload="0" />
 		<Property Id="SkillTHUMP" Cache="0" Desc="技能列表索引" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="string" Upload="0" />
 		<Property Id="SpriteFile" Cache="0" Desc="SpriteFile" Force="0" Private="1" Public="1" Ref="0" Save="0" Type="string" Upload="0" />
 		<Property Id="TargetX" Cache="0" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="float" Upload="0" />

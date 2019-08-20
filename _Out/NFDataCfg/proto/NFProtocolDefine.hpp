@@ -51,13 +51,9 @@ namespace NFrame
 		static const std::string& Clan_AD(){ static std::string x = "Clan_AD"; return x; };// string
 		static const std::string& Clan_CreateTime(){ static std::string x = "Clan_CreateTime"; return x; };// int
 		static const std::string& Clan_Desc(){ static std::string x = "Clan_Desc"; return x; };// string
-		static const std::string& Clan_Exp(){ static std::string x = "Clan_Exp"; return x; };// int
 		static const std::string& Clan_Gold(){ static std::string x = "Clan_Gold"; return x; };// int
-		static const std::string& Clan_Honor(){ static std::string x = "Clan_Honor"; return x; };// int
 		static const std::string& Clan_Icon(){ static std::string x = "Clan_Icon"; return x; };// string
 		static const std::string& Clan_Level(){ static std::string x = "Clan_Level"; return x; };// int
-		static const std::string& Clan_MemeberCount(){ static std::string x = "Clan_MemeberCount"; return x; };// int
-		static const std::string& Clan_MemeberMaxCount(){ static std::string x = "Clan_MemeberMaxCount"; return x; };// int
 		static const std::string& Clan_Name(){ static std::string x = "Clan_Name"; return x; };// string
 		static const std::string& Clan_PresidentID(){ static std::string x = "Clan_PresidentID"; return x; };// object
 		static const std::string& Clan_PresidentName(){ static std::string x = "Clan_PresidentName"; return x; };// string
@@ -96,15 +92,14 @@ namespace NFrame
 			static const int Job = 3;//int
 			static const int Donation = 4;//int
 			static const int Receive = 5;//int
-			static const int VIP = 6;//int
+			static const int BP = 6;//int
 			static const int Online = 7;//int
-			static const int Power = 8;//int
-			static const int Title = 9;//int
-			static const int GameID = 10;//int
-			static const int JoinTime = 11;//int
-			static const int Contribution = 12;//int
-			static const int LastTime = 13;//string
-			static const int AllContribution = 14;//int
+			static const int Title = 8;//int
+			static const int GameID = 9;//int
+			static const int JoinTime = 10;//int
+			static const int Contribution = 11;//int
+			static const int LastTime = 12;//string
+			static const int AllContribution = 13;//int
 
 		};
 		class Clan_WarList
@@ -560,8 +555,9 @@ namespace NFrame
 		static const std::string& SeedID(){ static std::string x = "SeedID"; return x; };// string
 		static const std::string& ShowCard(){ static std::string x = "ShowCard"; return x; };// string
 		static const std::string& ShowName(){ static std::string x = "ShowName"; return x; };// string
-		static const std::string& SkillAttack(){ static std::string x = "SkillAttack"; return x; };// string
 		static const std::string& SkillNormal(){ static std::string x = "SkillNormal"; return x; };// string
+		static const std::string& SkillSpecial1(){ static std::string x = "SkillSpecial1"; return x; };// string
+		static const std::string& SkillSpecial2(){ static std::string x = "SkillSpecial2"; return x; };// string
 		static const std::string& SkillTHUMP(){ static std::string x = "SkillTHUMP"; return x; };// string
 		static const std::string& SpriteFile(){ static std::string x = "SpriteFile"; return x; };// string
 		static const std::string& TargetX(){ static std::string x = "TargetX"; return x; };// float

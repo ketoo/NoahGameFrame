@@ -3,66 +3,72 @@
 	<Object Id="DescID_Building000" Chinese="营地·一级" English="" French="" Spanish="" />
 	<Object Id="DescID_Building001" Chinese="营地·二级" English="" French="" Spanish="" />
 	<Object Id="DescID_Building002" Chinese="营地·三级" English="" French="" Spanish="" />
-	<Object Id="DescID_Building010" Chinese="金矿·一级" English="" French="" Spanish="" />
-	<Object Id="DescID_Building011" Chinese="金矿·二级" English="" French="" Spanish="" />
-	<Object Id="DescID_Building012" Chinese="金矿·三级" English="" French="" Spanish="" />
-	<Object Id="DescID_Building020" Chinese="能源收集器·一级" English="" French="" Spanish="" />
-	<Object Id="DescID_Building021" Chinese="能源收集器·二级" English="" French="" Spanish="" />
-	<Object Id="DescID_Building022" Chinese="能源收集器·三级" English="" French="" Spanish="" />
-	<Object Id="DescID_Building030" Chinese="储金罐·一级" English="" French="" Spanish="" />
-	<Object Id="DescID_Building031" Chinese="储金罐·二级" English="" French="" Spanish="" />
-	<Object Id="DescID_Building032" Chinese="储金罐·三级" English="" French="" Spanish="" />
-	<Object Id="DescID_Building040" Chinese="能源存储器·一级" English="" French="" Spanish="" />
-	<Object Id="DescID_Building041" Chinese="能源存储器·二级" English="" French="" Spanish="" />
-	<Object Id="DescID_Building042" Chinese="能源存储器·三级" English="" French="" Spanish="" />
-	<Object Id="DescID_Building050" Chinese="加农炮·一级" English="" French="" Spanish="" />
-	<Object Id="DescID_Building051" Chinese="加农炮·二级" English="" French="" Spanish="" />
-	<Object Id="DescID_Building052" Chinese="加农炮·三级" English="" French="" Spanish="" />
-	<Object Id="DescID_Building060" Chinese="减甲炮·一级" English="" French="" Spanish="" />
-	<Object Id="DescID_Building061" Chinese="减甲炮·二级" English="" French="" Spanish="" />
-	<Object Id="DescID_Building062" Chinese="减甲炮·三级" English="" French="" Spanish="" />
-	<Object Id="DescID_Building070" Chinese="特斯拉雷射器·一级" English="" French="" Spanish="" />
-	<Object Id="DescID_Building071" Chinese="特斯拉雷射器·二级" English="" French="" Spanish="" />
-	<Object Id="DescID_Building072" Chinese="特斯拉雷射器·三级" English="" French="" Spanish="" />
-	<Object Id="DescID_Building080" Chinese="穿刺弩·一级" English="" French="" Spanish="" />
-	<Object Id="DescID_Building081" Chinese="穿刺弩·二级" English="" French="" Spanish="" />
-	<Object Id="DescID_Building082" Chinese="穿刺弩·三级" English="" French="" Spanish="" />
-	<Object Id="DescID_Building090" Chinese="警戒塔·一级 - 启动需要消耗能源 10点每小时，可探测6米内的可见单位" English="" French="" Spanish="" />
-	<Object Id="DescID_Building091" Chinese="警戒塔·二级 - 启动需要消耗能源 20点每小时，可探测10米内的可见单位" English="" French="" Spanish="" />
-	<Object Id="DescID_Building092" Chinese="警戒塔·三级 - 启动需要消耗能源 30点每小时，可探测15米内的可见单位" English="" French="" Spanish="" />
-	<Object Id="DescID_Building100" Chinese="火焰发射器·一级" English="" French="" Spanish="" />
-	<Object Id="DescID_Building101" Chinese="火焰发射器·二级" English="" French="" Spanish="" />
-	<Object Id="DescID_Building102" Chinese="火焰发射器·三级" English="" French="" Spanish="" />
-	<Object Id="DescID_Building110" Chinese="加特林机枪·一级" English="" French="" Spanish="" />
-	<Object Id="DescID_Building111" Chinese="加特林机枪·二级" English="" French="" Spanish="" />
-	<Object Id="DescID_Building112" Chinese="加特林机枪·三级" English="" French="" Spanish="" />
-	<Object Id="DescID_Building120" Chinese="高斯电磁炮·一级" English="" French="" Spanish="" />
-	<Object Id="DescID_Building121" Chinese="高斯电磁炮·二级" English="" French="" Spanish="" />
-	<Object Id="DescID_Building122" Chinese="高斯电磁炮·三级" English="" French="" Spanish="" />
-	<Object Id="DescID_Building130" Chinese="重锤·一级" English="" French="" Spanish="" />
-	<Object Id="DescID_Building131" Chinese="重锤·二级" English="" French="" Spanish="" />
-	<Object Id="DescID_Building132" Chinese="重锤·三级" English="" French="" Spanish="" />
-	<Object Id="DescID_Building140" Chinese="镭射激光器·一级" English="" French="" Spanish="" />
-	<Object Id="DescID_Building141" Chinese="镭射激光器·二级" English="" French="" Spanish="" />
-	<Object Id="DescID_Building142" Chinese="镭射激光器·三级" English="" French="" Spanish="" />
-	<Object Id="DescID_Building150" Chinese="麦肯锡机枪·一级" English="" French="" Spanish="" />
-	<Object Id="DescID_Building151" Chinese="麦肯锡机枪·二级" English="" French="" Spanish="" />
-	<Object Id="DescID_Building152" Chinese="麦肯锡机枪·三级" English="" French="" Spanish="" />
-	<Object Id="DescID_Building160" Chinese="迫击炮·一级" English="" French="" Spanish="" />
-	<Object Id="DescID_Building161" Chinese="迫击炮·二级" English="" French="" Spanish="" />
-	<Object Id="DescID_Building162" Chinese="迫击炮·三级" English="" French="" Spanish="" />
-	<Object Id="DescID_Building170" Chinese="等离子炮·一级" English="" French="" Spanish="" />
-	<Object Id="DescID_Building171" Chinese="等离子炮·二级" English="" French="" Spanish="" />
-	<Object Id="DescID_Building172" Chinese="等离子炮·三级" English="" French="" Spanish="" />
+	<Object Id="DescID_Building010" Chinese="炸弹·一级" English="" French="" Spanish="" />
+	<Object Id="DescID_Building011" Chinese="炸弹·二级" English="" French="" Spanish="" />
+	<Object Id="DescID_Building012" Chinese="炸弹·三级" English="" French="" Spanish="" />
+	<Object Id="DescID_Building020" Chinese="减甲炮·一级" English="" French="" Spanish="" />
+	<Object Id="DescID_Building021" Chinese="减甲炮·二级" English="" French="" Spanish="" />
+	<Object Id="DescID_Building022" Chinese="减甲炮·三级" English="" French="" Spanish="" />
+	<Object Id="DescID_Building030" Chinese="加农炮·一级" English="" French="" Spanish="" />
+	<Object Id="DescID_Building031" Chinese="加农炮·二级" English="" French="" Spanish="" />
+	<Object Id="DescID_Building032" Chinese="加农炮·三级" English="" French="" Spanish="" />
+	<Object Id="DescID_Building040" Chinese="冰塔·一级" English="" French="" Spanish="" />
+	<Object Id="DescID_Building041" Chinese="冰塔·二级" English="" French="" Spanish="" />
+	<Object Id="DescID_Building042" Chinese="冰塔·三级" English="" French="" Spanish="" />
+	<Object Id="DescID_Building050" Chinese="能源产生器·一级" English="" French="" Spanish="" />
+	<Object Id="DescID_Building051" Chinese="能源产生器·二级" English="" French="" Spanish="" />
+	<Object Id="DescID_Building052" Chinese="能源产生器·三级" English="" French="" Spanish="" />
+	<Object Id="DescID_Building060" Chinese="能源存储器·一级" English="" French="" Spanish="" />
+	<Object Id="DescID_Building061" Chinese="能源存储器·二级" English="" French="" Spanish="" />
+	<Object Id="DescID_Building062" Chinese="能源存储器·三级" English="" French="" Spanish="" />
+	<Object Id="DescID_Building070" Chinese="火焰发射器·一级" English="" French="" Spanish="" />
+	<Object Id="DescID_Building071" Chinese="火焰发射器·二级" English="" French="" Spanish="" />
+	<Object Id="DescID_Building072" Chinese="火焰发射器·三级" English="" French="" Spanish="" />
+	<Object Id="DescID_Building080" Chinese="加特林机枪·一级" English="" French="" Spanish="" />
+	<Object Id="DescID_Building081" Chinese="加特林机枪·二级" English="" French="" Spanish="" />
+	<Object Id="DescID_Building082" Chinese="加特林机枪·三级" English="" French="" Spanish="" />
+	<Object Id="DescID_Building090" Chinese="高斯电磁炮·一级" English="" French="" Spanish="" />
+	<Object Id="DescID_Building091" Chinese="高斯电磁炮·二级" English="" French="" Spanish="" />
+	<Object Id="DescID_Building092" Chinese="高斯电磁炮·三级" English="" French="" Spanish="" />
+	<Object Id="DescID_Building100" Chinese="金矿·一级" English="" French="" Spanish="" />
+	<Object Id="DescID_Building101" Chinese="金矿·二级" English="" French="" Spanish="" />
+	<Object Id="DescID_Building102" Chinese="金矿·三级" English="" French="" Spanish="" />
+	<Object Id="DescID_Building110" Chinese="金罐·一级" English="" French="" Spanish="" />
+	<Object Id="DescID_Building111" Chinese="金罐·二级" English="" French="" Spanish="" />
+	<Object Id="DescID_Building112" Chinese="金罐·三级" English="" French="" Spanish="" />
+	<Object Id="DescID_Building120" Chinese="重锤·一级" English="" French="" Spanish="" />
+	<Object Id="DescID_Building121" Chinese="重锤·二级" English="" French="" Spanish="" />
+	<Object Id="DescID_Building122" Chinese="重锤·三级" English="" French="" Spanish="" />
+	<Object Id="DescID_Building130" Chinese="镭射激光器·一级" English="" French="" Spanish="" />
+	<Object Id="DescID_Building131" Chinese="镭射激光器·二级" English="" French="" Spanish="" />
+	<Object Id="DescID_Building132" Chinese="镭射激光器·三级" English="" French="" Spanish="" />
+	<Object Id="DescID_Building140" Chinese="麦肯锡机枪·一级" English="" French="" Spanish="" />
+	<Object Id="DescID_Building141" Chinese="麦肯锡机枪·二级" English="" French="" Spanish="" />
+	<Object Id="DescID_Building142" Chinese="麦肯锡机枪·三级" English="" French="" Spanish="" />
+	<Object Id="DescID_Building150" Chinese="迫击炮·一级" English="" French="" Spanish="" />
+	<Object Id="DescID_Building151" Chinese="迫击炮·二级" English="" French="" Spanish="" />
+	<Object Id="DescID_Building152" Chinese="迫击炮·三级" English="" French="" Spanish="" />
+	<Object Id="DescID_Building160" Chinese="等离子炮·一级" English="" French="" Spanish="" />
+	<Object Id="DescID_Building161" Chinese="等离子炮·二级" English="" French="" Spanish="" />
+	<Object Id="DescID_Building162" Chinese="等离子炮·三级" English="" French="" Spanish="" />
+	<Object Id="DescID_Building170" Chinese="探照灯·一级 - 启动需要消耗能源 50点每小时，工会驻地的最佳防御武器，可探测6米内的隐形单位，如探测到敌对单位，将自动召唤6米内的火箭导弹进行攻击" English="" French="" Spanish="" />
+	<Object Id="DescID_Building171" Chinese="探照灯·二级 - 启动需要消耗能源 100点每小时，工会驻地的最佳防御武器，可探测10米内的隐形单位，如探测到敌对单位，将自动召唤10米内直升机(如有)进行攻击" English="" French="" Spanish="" />
+	<Object Id="DescID_Building172" Chinese="探照灯·三级 - 启动需要消耗能源 200点每小时，工会驻地的最佳防御武器，可探测15米内的隐形单位，如探测到敌对单位，将自动召唤15米内的战斗飞船(如有)进行攻击" English="" French="" Spanish="" />
 	<Object Id="DescID_Building180" Chinese="雷达·一级 - 启动需要消耗能源 50点每小时，工会驻地的最佳防御武器，可探测6米内的隐形单位，如探测到敌对单位，将自动召唤6米内的火箭导弹进行攻击" English="" French="" Spanish="" />
 	<Object Id="DescID_Building181" Chinese="雷达·二级 - 启动需要消耗能源 100点每小时，工会驻地的最佳防御武器，可探测10米内的隐形单位，如探测到敌对单位，将自动召唤10米内直升机(如有)进行攻击" English="" French="" Spanish="" />
 	<Object Id="DescID_Building182" Chinese="雷达·三级 - 启动需要消耗能源 200点每小时，工会驻地的最佳防御武器，可探测15米内的隐形单位，如探测到敌对单位，将自动召唤15米内的战斗飞船(如有)进行攻击" English="" French="" Spanish="" />
 	<Object Id="DescID_Building190" Chinese="火箭·一级" English="" French="" Spanish="" />
 	<Object Id="DescID_Building191" Chinese="火箭·二级" English="" French="" Spanish="" />
 	<Object Id="DescID_Building192" Chinese="火箭·三级" English="" French="" Spanish="" />
-	<Object Id="DescID_Building200" Chinese="火龙炮·一级" English="" French="" Spanish="" />
-	<Object Id="DescID_Building201" Chinese="火龙炮·二级" English="" French="" Spanish="" />
-	<Object Id="DescID_Building202" Chinese="火龙炮·三级" English="" French="" Spanish="" />
+	<Object Id="DescID_Building200" Chinese="雷电发射器·一级" English="" French="" Spanish="" />
+	<Object Id="DescID_Building201" Chinese="雷电发射器·二级" English="" French="" Spanish="" />
+	<Object Id="DescID_Building202" Chinese="雷电发射器·三级" English="" French="" Spanish="" />
+	<Object Id="DescID_Building210" Chinese="穿刺怒·一级" English="" French="" Spanish="" />
+	<Object Id="DescID_Building211" Chinese="穿刺怒·二级" English="" French="" Spanish="" />
+	<Object Id="DescID_Building212" Chinese="穿刺怒·三级" English="" French="" Spanish="" />
+	<Object Id="DescID_Building220" Chinese="火龙炮·一级" English="" French="" Spanish="" />
+	<Object Id="DescID_Building221" Chinese="火龙炮·二级" English="" French="" Spanish="" />
+	<Object Id="DescID_Building222" Chinese="火龙炮·三级" English="" French="" Spanish="" />
 	<Object Id="DescID_Hero001" Chinese="食人魔法师使用蝙蝠球火焰点燃他们的武器，然后追着他们在疯狂的杀戮。虽然他们缺少智慧，但是运气绝对好，经常打出双倍甚至三倍伤害。" English="Ogre mages use bat balls to fire their weapons and then chase them in frenzied killings. 
 Although they lack wisdom, but they very luckly which often double or even three times hurt." French="" Spanish="" />
 	<Object Id="DescID_Hero002" Chinese="矮人热衷于挖矿、铸造、手工艺和收集金银财货." English="A member of a mythical race of short, stocky human-like creatures who are generally skilled in mining and metalworking." French="" Spanish="" />
@@ -103,6 +109,63 @@ Although they lack wisdom, but they very luckly which often double or even three
 	<Object Id="DescID_NPC017" Chinese="" English="" French="" Spanish="" />
 	<Object Id="DescID_NPC018" Chinese="" English="" French="" Spanish="" />
 	<Object Id="DescID_NPC019" Chinese="" English="" French="" Spanish="" />
+	<Object Id="DescID_Special1_Hero001" Chinese="技能1描述*英雄001" English="" French="" Spanish="" />
+	<Object Id="DescID_Special1_Hero002" Chinese="技能1描述*英雄002" English="" French="" Spanish="" />
+	<Object Id="DescID_Special1_Hero003" Chinese="技能1描述*英雄003" English="" French="" Spanish="" />
+	<Object Id="DescID_Special1_Hero004" Chinese="技能1描述*英雄004" English="" French="" Spanish="" />
+	<Object Id="DescID_Special1_Hero005" Chinese="技能1描述*英雄005" English="" French="" Spanish="" />
+	<Object Id="DescID_Special1_Hero006" Chinese="技能1描述*英雄006" English="" French="" Spanish="" />
+	<Object Id="DescID_Special1_Hero007" Chinese="技能1描述*英雄007" English="" French="" Spanish="" />
+	<Object Id="DescID_Special1_Hero008" Chinese="技能1描述*英雄008" English="" French="" Spanish="" />
+	<Object Id="DescID_Special1_Hero009" Chinese="技能1描述*英雄009" English="" French="" Spanish="" />
+	<Object Id="DescID_Special1_Hero010" Chinese="技能1描述*英雄010" English="" French="" Spanish="" />
+	<Object Id="DescID_Special1_Hero011" Chinese="技能1描述*英雄011" English="" French="" Spanish="" />
+	<Object Id="DescID_Special1_Hero012" Chinese="技能1描述*英雄012" English="" French="" Spanish="" />
+	<Object Id="DescID_Special1_Hero013" Chinese="技能1描述*英雄013" English="" French="" Spanish="" />
+	<Object Id="DescID_Special1_Hero014" Chinese="技能1描述*英雄014" English="" French="" Spanish="" />
+	<Object Id="DescID_Special1_Hero015" Chinese="技能1描述*英雄015" English="" French="" Spanish="" />
+	<Object Id="DescID_Special1_Hero016" Chinese="技能1描述*英雄016" English="" French="" Spanish="" />
+	<Object Id="DescID_Special1_Hero017" Chinese="技能1描述*英雄017" English="" French="" Spanish="" />
+	<Object Id="DescID_Special1_Hero018" Chinese="技能1描述*英雄018" English="" French="" Spanish="" />
+	<Object Id="DescID_Special1_Hero019" Chinese="技能1描述*英雄019" English="" French="" Spanish="" />
+	<Object Id="DescID_Special2_Hero001" Chinese="技能2描述*英雄001" English="" French="" Spanish="" />
+	<Object Id="DescID_Special2_Hero002" Chinese="技能2描述*英雄002" English="" French="" Spanish="" />
+	<Object Id="DescID_Special2_Hero003" Chinese="技能2描述*英雄003" English="" French="" Spanish="" />
+	<Object Id="DescID_Special2_Hero004" Chinese="技能2描述*英雄004" English="" French="" Spanish="" />
+	<Object Id="DescID_Special2_Hero005" Chinese="技能2描述*英雄005" English="" French="" Spanish="" />
+	<Object Id="DescID_Special2_Hero006" Chinese="技能2描述*英雄006" English="" French="" Spanish="" />
+	<Object Id="DescID_Special2_Hero007" Chinese="技能2描述*英雄007" English="" French="" Spanish="" />
+	<Object Id="DescID_Special2_Hero008" Chinese="技能2描述*英雄008" English="" French="" Spanish="" />
+	<Object Id="DescID_Special2_Hero009" Chinese="技能2描述*英雄009" English="" French="" Spanish="" />
+	<Object Id="DescID_Special2_Hero010" Chinese="技能2描述*英雄010" English="" French="" Spanish="" />
+	<Object Id="DescID_Special2_Hero011" Chinese="技能2描述*英雄011" English="" French="" Spanish="" />
+	<Object Id="DescID_Special2_Hero012" Chinese="技能2描述*英雄012" English="" French="" Spanish="" />
+	<Object Id="DescID_Special2_Hero013" Chinese="技能2描述*英雄013" English="" French="" Spanish="" />
+	<Object Id="DescID_Special2_Hero014" Chinese="技能2描述*英雄014" English="" French="" Spanish="" />
+	<Object Id="DescID_Special2_Hero015" Chinese="技能2描述*英雄015" English="" French="" Spanish="" />
+	<Object Id="DescID_Special2_Hero016" Chinese="技能2描述*英雄016" English="" French="" Spanish="" />
+	<Object Id="DescID_Special2_Hero017" Chinese="技能2描述*英雄017" English="" French="" Spanish="" />
+	<Object Id="DescID_Special2_Hero018" Chinese="技能2描述*英雄018" English="" French="" Spanish="" />
+	<Object Id="DescID_Special2_Hero019" Chinese="技能2描述*英雄019" English="" French="" Spanish="" />
+	<Object Id="DescID_THUMP_Hero001" Chinese="觉醒技能描述*英雄001" English="" French="" Spanish="" />
+	<Object Id="DescID_THUMP_Hero002" Chinese="觉醒技能描述*英雄002" English="" French="" Spanish="" />
+	<Object Id="DescID_THUMP_Hero003" Chinese="觉醒技能描述*英雄003" English="" French="" Spanish="" />
+	<Object Id="DescID_THUMP_Hero004" Chinese="觉醒技能描述*英雄004" English="" French="" Spanish="" />
+	<Object Id="DescID_THUMP_Hero005" Chinese="觉醒技能描述*英雄005" English="" French="" Spanish="" />
+	<Object Id="DescID_THUMP_Hero006" Chinese="觉醒技能描述*英雄006" English="" French="" Spanish="" />
+	<Object Id="DescID_THUMP_Hero007" Chinese="觉醒技能描述*英雄007" English="" French="" Spanish="" />
+	<Object Id="DescID_THUMP_Hero008" Chinese="觉醒技能描述*英雄008" English="" French="" Spanish="" />
+	<Object Id="DescID_THUMP_Hero009" Chinese="觉醒技能描述*英雄009" English="" French="" Spanish="" />
+	<Object Id="DescID_THUMP_Hero010" Chinese="觉醒技能描述*英雄010" English="" French="" Spanish="" />
+	<Object Id="DescID_THUMP_Hero011" Chinese="觉醒技能描述*英雄011" English="" French="" Spanish="" />
+	<Object Id="DescID_THUMP_Hero012" Chinese="觉醒技能描述*英雄012" English="" French="" Spanish="" />
+	<Object Id="DescID_THUMP_Hero013" Chinese="觉醒技能描述*英雄013" English="" French="" Spanish="" />
+	<Object Id="DescID_THUMP_Hero014" Chinese="觉醒技能描述*英雄014" English="" French="" Spanish="" />
+	<Object Id="DescID_THUMP_Hero015" Chinese="觉醒技能描述*英雄015" English="" French="" Spanish="" />
+	<Object Id="DescID_THUMP_Hero016" Chinese="觉醒技能描述*英雄016" English="" French="" Spanish="" />
+	<Object Id="DescID_THUMP_Hero017" Chinese="觉醒技能描述*英雄017" English="" French="" Spanish="" />
+	<Object Id="DescID_THUMP_Hero018" Chinese="觉醒技能描述*英雄018" English="" French="" Spanish="" />
+	<Object Id="DescID_THUMP_Hero019" Chinese="觉醒技能描述*英雄019" English="" French="" Spanish="" />
 	<Object Id="Desc_ATK_Water" Chinese="攻击药水，在一定时间内攻击翻倍！" English="" French="" Spanish="" />
 	<Object Id="Desc_Avoid_Def_Water" Chinese="在一定时间内，无视对方防御！" English="" French="" Spanish="" />
 	<Object Id="Desc_Card_Hero001" Chinese="英雄卷轴使用后可获得英雄 食人兽 /n 食人兽 介绍。。。" English="" French="" Spanish="" />
@@ -184,66 +247,72 @@ Although they lack wisdom, but they very luckly which often double or even three
 	<Object Id="NameID_Building000" Chinese="营地·一级" English="" French="" Spanish="" />
 	<Object Id="NameID_Building001" Chinese="营地·二级" English="" French="" Spanish="" />
 	<Object Id="NameID_Building002" Chinese="营地·三级" English="" French="" Spanish="" />
-	<Object Id="NameID_Building010" Chinese="金矿·一级" English="" French="" Spanish="" />
-	<Object Id="NameID_Building011" Chinese="金矿·二级" English="" French="" Spanish="" />
-	<Object Id="NameID_Building012" Chinese="金矿·三级" English="" French="" Spanish="" />
-	<Object Id="NameID_Building020" Chinese="能源收集器·一级" English="" French="" Spanish="" />
-	<Object Id="NameID_Building021" Chinese="能源收集器·二级" English="" French="" Spanish="" />
-	<Object Id="NameID_Building022" Chinese="能源收集器·三级" English="" French="" Spanish="" />
-	<Object Id="NameID_Building030" Chinese="储金罐·一级" English="" French="" Spanish="" />
-	<Object Id="NameID_Building031" Chinese="储金罐·二级" English="" French="" Spanish="" />
-	<Object Id="NameID_Building032" Chinese="储金罐·三级" English="" French="" Spanish="" />
-	<Object Id="NameID_Building040" Chinese="能源存储器·一级" English="" French="" Spanish="" />
-	<Object Id="NameID_Building041" Chinese="能源存储器·二级" English="" French="" Spanish="" />
-	<Object Id="NameID_Building042" Chinese="能源存储器·三级" English="" French="" Spanish="" />
-	<Object Id="NameID_Building050" Chinese="加农炮·一级" English="" French="" Spanish="" />
-	<Object Id="NameID_Building051" Chinese="加农炮·二级" English="" French="" Spanish="" />
-	<Object Id="NameID_Building052" Chinese="加农炮·三级" English="" French="" Spanish="" />
-	<Object Id="NameID_Building060" Chinese="减甲炮·一级" English="" French="" Spanish="" />
-	<Object Id="NameID_Building061" Chinese="减甲炮·二级" English="" French="" Spanish="" />
-	<Object Id="NameID_Building062" Chinese="减甲炮·三级" English="" French="" Spanish="" />
-	<Object Id="NameID_Building070" Chinese="特斯拉雷射器·一级" English="" French="" Spanish="" />
-	<Object Id="NameID_Building071" Chinese="特斯拉雷射器·二级" English="" French="" Spanish="" />
-	<Object Id="NameID_Building072" Chinese="特斯拉雷射器·三级" English="" French="" Spanish="" />
-	<Object Id="NameID_Building080" Chinese="穿刺弩·一级" English="" French="" Spanish="" />
-	<Object Id="NameID_Building081" Chinese="穿刺弩·二级" English="" French="" Spanish="" />
-	<Object Id="NameID_Building082" Chinese="穿刺弩·三级" English="" French="" Spanish="" />
-	<Object Id="NameID_Building090" Chinese="警戒塔·一级" English="" French="" Spanish="" />
-	<Object Id="NameID_Building091" Chinese="警戒塔·二级" English="" French="" Spanish="" />
-	<Object Id="NameID_Building092" Chinese="警戒塔·三级" English="" French="" Spanish="" />
-	<Object Id="NameID_Building100" Chinese="火焰发射器·一级" English="" French="" Spanish="" />
-	<Object Id="NameID_Building101" Chinese="火焰发射器·二级" English="" French="" Spanish="" />
-	<Object Id="NameID_Building102" Chinese="火焰发射器·三级" English="" French="" Spanish="" />
-	<Object Id="NameID_Building110" Chinese="加特林机枪·一级" English="" French="" Spanish="" />
-	<Object Id="NameID_Building111" Chinese="加特林机枪·二级" English="" French="" Spanish="" />
-	<Object Id="NameID_Building112" Chinese="加特林机枪·三级" English="" French="" Spanish="" />
-	<Object Id="NameID_Building120" Chinese="高斯电磁炮·一级" English="" French="" Spanish="" />
-	<Object Id="NameID_Building121" Chinese="高斯电磁炮·二级" English="" French="" Spanish="" />
-	<Object Id="NameID_Building122" Chinese="高斯电磁炮·三级" English="" French="" Spanish="" />
-	<Object Id="NameID_Building130" Chinese="重锤·一级" English="" French="" Spanish="" />
-	<Object Id="NameID_Building131" Chinese="重锤·二级" English="" French="" Spanish="" />
-	<Object Id="NameID_Building132" Chinese="重锤·三级" English="" French="" Spanish="" />
-	<Object Id="NameID_Building140" Chinese="镭射激光器·一级" English="" French="" Spanish="" />
-	<Object Id="NameID_Building141" Chinese="镭射激光器·二级" English="" French="" Spanish="" />
-	<Object Id="NameID_Building142" Chinese="镭射激光器·三级" English="" French="" Spanish="" />
-	<Object Id="NameID_Building150" Chinese="麦肯锡机枪·一级" English="" French="" Spanish="" />
-	<Object Id="NameID_Building151" Chinese="麦肯锡机枪·二级" English="" French="" Spanish="" />
-	<Object Id="NameID_Building152" Chinese="麦肯锡机枪·三级" English="" French="" Spanish="" />
-	<Object Id="NameID_Building160" Chinese="迫击炮·一级" English="" French="" Spanish="" />
-	<Object Id="NameID_Building161" Chinese="迫击炮·二级" English="" French="" Spanish="" />
-	<Object Id="NameID_Building162" Chinese="迫击炮·三级" English="" French="" Spanish="" />
-	<Object Id="NameID_Building170" Chinese="等离子炮·一级" English="" French="" Spanish="" />
-	<Object Id="NameID_Building171" Chinese="等离子炮·二级" English="" French="" Spanish="" />
-	<Object Id="NameID_Building172" Chinese="等离子炮·三级" English="" French="" Spanish="" />
+	<Object Id="NameID_Building010" Chinese="炸弹·一级" English="" French="" Spanish="" />
+	<Object Id="NameID_Building011" Chinese="炸弹·二级" English="" French="" Spanish="" />
+	<Object Id="NameID_Building012" Chinese="炸弹·三级" English="" French="" Spanish="" />
+	<Object Id="NameID_Building020" Chinese="减甲炮·一级" English="" French="" Spanish="" />
+	<Object Id="NameID_Building021" Chinese="减甲炮·二级" English="" French="" Spanish="" />
+	<Object Id="NameID_Building022" Chinese="减甲炮·三级" English="" French="" Spanish="" />
+	<Object Id="NameID_Building030" Chinese="加农炮·一级" English="" French="" Spanish="" />
+	<Object Id="NameID_Building031" Chinese="加农炮·二级" English="" French="" Spanish="" />
+	<Object Id="NameID_Building032" Chinese="加农炮·三级" English="" French="" Spanish="" />
+	<Object Id="NameID_Building040" Chinese="冰塔·一级" English="" French="" Spanish="" />
+	<Object Id="NameID_Building041" Chinese="冰塔·二级" English="" French="" Spanish="" />
+	<Object Id="NameID_Building042" Chinese="冰塔·三级" English="" French="" Spanish="" />
+	<Object Id="NameID_Building050" Chinese="能源产生器·一级" English="" French="" Spanish="" />
+	<Object Id="NameID_Building051" Chinese="能源产生器·二级" English="" French="" Spanish="" />
+	<Object Id="NameID_Building052" Chinese="能源产生器·三级" English="" French="" Spanish="" />
+	<Object Id="NameID_Building060" Chinese="能源存储器·一级" English="" French="" Spanish="" />
+	<Object Id="NameID_Building061" Chinese="能源存储器·二级" English="" French="" Spanish="" />
+	<Object Id="NameID_Building062" Chinese="能源存储器·三级" English="" French="" Spanish="" />
+	<Object Id="NameID_Building070" Chinese="火焰发射器·一级" English="" French="" Spanish="" />
+	<Object Id="NameID_Building071" Chinese="火焰发射器·二级" English="" French="" Spanish="" />
+	<Object Id="NameID_Building072" Chinese="火焰发射器·三级" English="" French="" Spanish="" />
+	<Object Id="NameID_Building080" Chinese="加特林机枪·一级" English="" French="" Spanish="" />
+	<Object Id="NameID_Building081" Chinese="加特林机枪·二级" English="" French="" Spanish="" />
+	<Object Id="NameID_Building082" Chinese="加特林机枪·三级" English="" French="" Spanish="" />
+	<Object Id="NameID_Building090" Chinese="高斯电磁炮·一级" English="" French="" Spanish="" />
+	<Object Id="NameID_Building091" Chinese="高斯电磁炮·二级" English="" French="" Spanish="" />
+	<Object Id="NameID_Building092" Chinese="高斯电磁炮·三级" English="" French="" Spanish="" />
+	<Object Id="NameID_Building100" Chinese="金矿·一级" English="" French="" Spanish="" />
+	<Object Id="NameID_Building101" Chinese="金矿·二级" English="" French="" Spanish="" />
+	<Object Id="NameID_Building102" Chinese="金矿·三级" English="" French="" Spanish="" />
+	<Object Id="NameID_Building110" Chinese="金罐·一级" English="" French="" Spanish="" />
+	<Object Id="NameID_Building111" Chinese="金罐·二级" English="" French="" Spanish="" />
+	<Object Id="NameID_Building112" Chinese="金罐·三级" English="" French="" Spanish="" />
+	<Object Id="NameID_Building120" Chinese="重锤·一级" English="" French="" Spanish="" />
+	<Object Id="NameID_Building121" Chinese="重锤·二级" English="" French="" Spanish="" />
+	<Object Id="NameID_Building122" Chinese="重锤·三级" English="" French="" Spanish="" />
+	<Object Id="NameID_Building130" Chinese="镭射激光器·一级" English="" French="" Spanish="" />
+	<Object Id="NameID_Building131" Chinese="镭射激光器·二级" English="" French="" Spanish="" />
+	<Object Id="NameID_Building132" Chinese="镭射激光器·三级" English="" French="" Spanish="" />
+	<Object Id="NameID_Building140" Chinese="麦肯锡机枪·一级" English="" French="" Spanish="" />
+	<Object Id="NameID_Building141" Chinese="麦肯锡机枪·二级" English="" French="" Spanish="" />
+	<Object Id="NameID_Building142" Chinese="麦肯锡机枪·三级" English="" French="" Spanish="" />
+	<Object Id="NameID_Building150" Chinese="迫击炮·一级" English="" French="" Spanish="" />
+	<Object Id="NameID_Building151" Chinese="迫击炮·二级" English="" French="" Spanish="" />
+	<Object Id="NameID_Building152" Chinese="迫击炮·三级" English="" French="" Spanish="" />
+	<Object Id="NameID_Building160" Chinese="等离子炮·一级" English="" French="" Spanish="" />
+	<Object Id="NameID_Building161" Chinese="等离子炮·二级" English="" French="" Spanish="" />
+	<Object Id="NameID_Building162" Chinese="等离子炮·三级" English="" French="" Spanish="" />
+	<Object Id="NameID_Building170" Chinese="探照灯·一级" English="" French="" Spanish="" />
+	<Object Id="NameID_Building171" Chinese="探照灯·二级" English="" French="" Spanish="" />
+	<Object Id="NameID_Building172" Chinese="探照灯·三级" English="" French="" Spanish="" />
 	<Object Id="NameID_Building180" Chinese="雷达·一级" English="" French="" Spanish="" />
 	<Object Id="NameID_Building181" Chinese="雷达·二级" English="" French="" Spanish="" />
 	<Object Id="NameID_Building182" Chinese="雷达·三级" English="" French="" Spanish="" />
 	<Object Id="NameID_Building190" Chinese="火箭·一级" English="" French="" Spanish="" />
 	<Object Id="NameID_Building191" Chinese="火箭·二级" English="" French="" Spanish="" />
 	<Object Id="NameID_Building192" Chinese="火箭·三级" English="" French="" Spanish="" />
-	<Object Id="NameID_Building200" Chinese="火龙炮·一级" English="" French="" Spanish="" />
-	<Object Id="NameID_Building201" Chinese="火龙炮·二级" English="" French="" Spanish="" />
-	<Object Id="NameID_Building202" Chinese="火龙炮·三级" English="" French="" Spanish="" />
+	<Object Id="NameID_Building200" Chinese="雷电发射器·一级" English="" French="" Spanish="" />
+	<Object Id="NameID_Building201" Chinese="雷电发射器·二级" English="" French="" Spanish="" />
+	<Object Id="NameID_Building202" Chinese="雷电发射器·三级" English="" French="" Spanish="" />
+	<Object Id="NameID_Building210" Chinese="穿刺怒·一级" English="" French="" Spanish="" />
+	<Object Id="NameID_Building211" Chinese="穿刺怒·二级" English="" French="" Spanish="" />
+	<Object Id="NameID_Building212" Chinese="穿刺怒·三级" English="" French="" Spanish="" />
+	<Object Id="NameID_Building220" Chinese="火龙炮·一级" English="" French="" Spanish="" />
+	<Object Id="NameID_Building221" Chinese="火龙炮·二级" English="" French="" Spanish="" />
+	<Object Id="NameID_Building222" Chinese="火龙炮·三级" English="" French="" Spanish="" />
 	<Object Id="NameID_Card_Hero001" Chinese="暗影刺客·英雄卷轴" English="" French="" Spanish="" />
 	<Object Id="NameID_Card_Hero002" Chinese="唐僧·英雄卷轴" English="" French="" Spanish="" />
 	<Object Id="NameID_Card_Hero003" Chinese="东洋忍者·英雄卷轴" English="" French="" Spanish="" />
@@ -315,6 +384,63 @@ Although they lack wisdom, but they very luckly which often double or even three
 	<Object Id="NameID_NPC018" Chinese="" English="" French="" Spanish="" />
 	<Object Id="NameID_NPC019" Chinese="" English="" French="" Spanish="" />
 	<Object Id="NameID_NoobPack" Chinese="新手礼包" English="" French="" Spanish="" />
+	<Object Id="NameID_Special1_Hero001" Chinese="技能1*英雄1" English="" French="" Spanish="" />
+	<Object Id="NameID_Special1_Hero002" Chinese="技能1*英雄2" English="" French="" Spanish="" />
+	<Object Id="NameID_Special1_Hero003" Chinese="技能1*英雄3" English="" French="" Spanish="" />
+	<Object Id="NameID_Special1_Hero004" Chinese="技能1*英雄4" English="" French="" Spanish="" />
+	<Object Id="NameID_Special1_Hero005" Chinese="技能1*英雄5" English="" French="" Spanish="" />
+	<Object Id="NameID_Special1_Hero006" Chinese="技能1*英雄6" English="" French="" Spanish="" />
+	<Object Id="NameID_Special1_Hero007" Chinese="技能1*英雄7" English="" French="" Spanish="" />
+	<Object Id="NameID_Special1_Hero008" Chinese="技能1*英雄8" English="" French="" Spanish="" />
+	<Object Id="NameID_Special1_Hero009" Chinese="技能1*英雄9" English="" French="" Spanish="" />
+	<Object Id="NameID_Special1_Hero010" Chinese="技能1*英雄10" English="" French="" Spanish="" />
+	<Object Id="NameID_Special1_Hero011" Chinese="技能1*英雄11" English="" French="" Spanish="" />
+	<Object Id="NameID_Special1_Hero012" Chinese="技能1*英雄12" English="" French="" Spanish="" />
+	<Object Id="NameID_Special1_Hero013" Chinese="技能1*英雄13" English="" French="" Spanish="" />
+	<Object Id="NameID_Special1_Hero014" Chinese="技能1*英雄14" English="" French="" Spanish="" />
+	<Object Id="NameID_Special1_Hero015" Chinese="技能1*英雄15" English="" French="" Spanish="" />
+	<Object Id="NameID_Special1_Hero016" Chinese="技能1*英雄16" English="" French="" Spanish="" />
+	<Object Id="NameID_Special1_Hero017" Chinese="技能1*英雄17" English="" French="" Spanish="" />
+	<Object Id="NameID_Special1_Hero018" Chinese="技能1*英雄18" English="" French="" Spanish="" />
+	<Object Id="NameID_Special1_Hero019" Chinese="技能1*英雄19" English="" French="" Spanish="" />
+	<Object Id="NameID_Special2_Hero001" Chinese="技能2*英雄1" English="" French="" Spanish="" />
+	<Object Id="NameID_Special2_Hero002" Chinese="技能2*英雄2" English="" French="" Spanish="" />
+	<Object Id="NameID_Special2_Hero003" Chinese="技能2*英雄3" English="" French="" Spanish="" />
+	<Object Id="NameID_Special2_Hero004" Chinese="技能2*英雄4" English="" French="" Spanish="" />
+	<Object Id="NameID_Special2_Hero005" Chinese="技能2*英雄5" English="" French="" Spanish="" />
+	<Object Id="NameID_Special2_Hero006" Chinese="技能2*英雄6" English="" French="" Spanish="" />
+	<Object Id="NameID_Special2_Hero007" Chinese="技能2*英雄7" English="" French="" Spanish="" />
+	<Object Id="NameID_Special2_Hero008" Chinese="技能2*英雄8" English="" French="" Spanish="" />
+	<Object Id="NameID_Special2_Hero009" Chinese="技能2*英雄9" English="" French="" Spanish="" />
+	<Object Id="NameID_Special2_Hero010" Chinese="技能2*英雄10" English="" French="" Spanish="" />
+	<Object Id="NameID_Special2_Hero011" Chinese="技能2*英雄11" English="" French="" Spanish="" />
+	<Object Id="NameID_Special2_Hero012" Chinese="技能2*英雄12" English="" French="" Spanish="" />
+	<Object Id="NameID_Special2_Hero013" Chinese="技能2*英雄13" English="" French="" Spanish="" />
+	<Object Id="NameID_Special2_Hero014" Chinese="技能2*英雄14" English="" French="" Spanish="" />
+	<Object Id="NameID_Special2_Hero015" Chinese="技能2*英雄15" English="" French="" Spanish="" />
+	<Object Id="NameID_Special2_Hero016" Chinese="技能2*英雄16" English="" French="" Spanish="" />
+	<Object Id="NameID_Special2_Hero017" Chinese="技能2*英雄17" English="" French="" Spanish="" />
+	<Object Id="NameID_Special2_Hero018" Chinese="技能2*英雄18" English="" French="" Spanish="" />
+	<Object Id="NameID_Special2_Hero019" Chinese="技能2*英雄19" English="" French="" Spanish="" />
+	<Object Id="NameID_THUMP_Hero001" Chinese="觉醒技能*英雄001" English="" French="" Spanish="" />
+	<Object Id="NameID_THUMP_Hero002" Chinese="觉醒技能*英雄002" English="" French="" Spanish="" />
+	<Object Id="NameID_THUMP_Hero003" Chinese="觉醒技能*英雄003" English="" French="" Spanish="" />
+	<Object Id="NameID_THUMP_Hero004" Chinese="觉醒技能*英雄004" English="" French="" Spanish="" />
+	<Object Id="NameID_THUMP_Hero005" Chinese="觉醒技能*英雄005" English="" French="" Spanish="" />
+	<Object Id="NameID_THUMP_Hero006" Chinese="觉醒技能*英雄006" English="" French="" Spanish="" />
+	<Object Id="NameID_THUMP_Hero007" Chinese="觉醒技能*英雄007" English="" French="" Spanish="" />
+	<Object Id="NameID_THUMP_Hero008" Chinese="觉醒技能*英雄008" English="" French="" Spanish="" />
+	<Object Id="NameID_THUMP_Hero009" Chinese="觉醒技能*英雄009" English="" French="" Spanish="" />
+	<Object Id="NameID_THUMP_Hero010" Chinese="觉醒技能*英雄010" English="" French="" Spanish="" />
+	<Object Id="NameID_THUMP_Hero011" Chinese="觉醒技能*英雄011" English="" French="" Spanish="" />
+	<Object Id="NameID_THUMP_Hero012" Chinese="觉醒技能*英雄012" English="" French="" Spanish="" />
+	<Object Id="NameID_THUMP_Hero013" Chinese="觉醒技能*英雄013" English="" French="" Spanish="" />
+	<Object Id="NameID_THUMP_Hero014" Chinese="觉醒技能*英雄014" English="" French="" Spanish="" />
+	<Object Id="NameID_THUMP_Hero015" Chinese="觉醒技能*英雄015" English="" French="" Spanish="" />
+	<Object Id="NameID_THUMP_Hero016" Chinese="觉醒技能*英雄016" English="" French="" Spanish="" />
+	<Object Id="NameID_THUMP_Hero017" Chinese="觉醒技能*英雄017" English="" French="" Spanish="" />
+	<Object Id="NameID_THUMP_Hero018" Chinese="觉醒技能*英雄018" English="" French="" Spanish="" />
+	<Object Id="NameID_THUMP_Hero019" Chinese="觉醒技能*英雄019" English="" French="" Spanish="" />
 	<Object Id="NameID_WarPack" Chinese="战争礼包" English="" French="" Spanish="" />
 	<Object Id="ui_OK" Chinese="确认" English="OK" French="" Spanish="" />
 	<Object Id="ui_cancel" Chinese="取消" English="CANCEL" French="" Spanish="" />

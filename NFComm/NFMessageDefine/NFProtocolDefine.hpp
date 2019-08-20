@@ -555,8 +555,9 @@ namespace NFrame
 		static const std::string& SeedID(){ static std::string x = "SeedID"; return x; };// string
 		static const std::string& ShowCard(){ static std::string x = "ShowCard"; return x; };// string
 		static const std::string& ShowName(){ static std::string x = "ShowName"; return x; };// string
-		static const std::string& SkillAttack(){ static std::string x = "SkillAttack"; return x; };// string
 		static const std::string& SkillNormal(){ static std::string x = "SkillNormal"; return x; };// string
+		static const std::string& SkillSpecial1(){ static std::string x = "SkillSpecial1"; return x; };// string
+		static const std::string& SkillSpecial2(){ static std::string x = "SkillSpecial2"; return x; };// string
 		static const std::string& SkillTHUMP(){ static std::string x = "SkillTHUMP"; return x; };// string
 		static const std::string& SpriteFile(){ static std::string x = "SpriteFile"; return x; };// string
 		static const std::string& TargetX(){ static std::string x = "TargetX"; return x; };// float
