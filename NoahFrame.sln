@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+VisualStudioVersion = 14.0.24720.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "NFSDK", "NFSDK", "{410C8A08-63DC-45B2-ADB9-08CD991861F0}"
 EndProject
@@ -364,7 +364,9 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "lua", "Dependencies\lua\lua
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Tutorial7", "Tutorial\Tutorial7\Tutorial7.vcxproj", "{52715C7E-7383-4998-8978-82AA8F84917C}"
 	ProjectSection(ProjectDependencies) = postProject
+		{3F68CD92-8AA1-48C4-84EF-CD63690C8DCB} = {3F68CD92-8AA1-48C4-84EF-CD63690C8DCB}
 		{B9833FE8-8C0B-40D6-BA01-3CDADEB21166} = {B9833FE8-8C0B-40D6-BA01-3CDADEB21166}
+		{C627AAF0-CC57-4933-813E-916FEE450511} = {C627AAF0-CC57-4933-813E-916FEE450511}
 	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "gtest", "Dependencies\googletest-release-1.8.0\googletest\msvc\gtest.vcxproj", "{C8F6C172-56F2-4E76-B5FA-C3B423B31BE7}"
