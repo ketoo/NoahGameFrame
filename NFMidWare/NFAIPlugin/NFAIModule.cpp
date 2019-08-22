@@ -67,12 +67,12 @@ const std::string & NFAIModule::ChooseSkill(const NFGUID & self, const float fDi
 		return strNormal;
 	}
 
-	const std::string & strAttack = m_pElementModule->GetPropertyString(strCnfID, NFrame::NPC::SkillAttack());
-	const std::string & strThump = m_pElementModule->GetPropertyString(strCnfID, NFrame::NPC::SkillTHUMP());
+	const std::string & strSkillSpecial1 = m_pElementModule->GetPropertyString(strCnfID, NFrame::NPC::SkillSpecial1());
+	const std::string & strSkillSpecial2 = m_pElementModule->GetPropertyString(strCnfID, NFrame::NPC::SkillSpecial2());
 
 	float fNormal = (float)m_pElementModule->GetPropertyFloat(strNormal, NFrame::Skill::AtkDis());
-	float fAttack = (float)m_pElementModule->GetPropertyFloat(strAttack, NFrame::Skill::AtkDis());
-	float fThump = (float)m_pElementModule->GetPropertyFloat(strThump, NFrame::Skill::AtkDis());
+	float fAttack = (float)m_pElementModule->GetPropertyFloat(strSkillSpecial1, NFrame::Skill::AtkDis());
+	float fThump = (float)m_pElementModule->GetPropertyFloat(strSkillSpecial2, NFrame::Skill::AtkDis());
 
 	if (fNormal < fDis
 		&& fAttack < fDis
@@ -99,14 +99,14 @@ const std::string & NFAIModule::ChooseSkill(const NFGUID & self, const float fDi
 		if (fThump < fDis)
 		{
 			//cd
-			int nRow = xRecord->FindString(NFrame::NPC::Cooldown::SkillID, strThump);
+			int nRow = xRecord->FindString(NFrame::NPC::Cooldown::SkillID, strSkillSpecial2);
 			if (nRow >= 0)
 			{
 				long nTime = xRecord->GetInt(nRow, NFrame::NPC::Cooldown::Time);
 				long milliseconds = NFGetTimeMS();
 				if (milliseconds >= nTime)
 				{
-					return strThump;
+					return strSkillSpecial2;
 				}
 			}
 		}
@@ -116,14 +116,14 @@ const std::string & NFAIModule::ChooseSkill(const NFGUID & self, const float fDi
 		if (fAttack < fDis)
 		{
 			//cd
-			int nRow = xRecord->FindString(NFrame::NPC::Cooldown::SkillID, strAttack);
+			int nRow = xRecord->FindString(NFrame::NPC::Cooldown::SkillID, strSkillSpecial1);
 			if (nRow >= 0)
 			{
 				long nTime = xRecord->GetInt(nRow, NFrame::NPC::Cooldown::Time);
 				long milliseconds = NFGetTimeMS();
 				if (milliseconds >= nTime)
 				{
-					return strAttack;
+					return strSkillSpecial1;
 				}
 			}
 		}
