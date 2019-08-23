@@ -67,12 +67,12 @@ void NFChatModule::OnClienChatProcess(const NFSOCK nSockIndex, const int nMsgID,
 
 	switch (xMsg.chat_type())
 	{
-	case NFMsg::ReqAckPlayerChat_EGameChatType::ReqAckPlayerChat_EGameChatType_EGCT_WORLD:
+	case NFMsg::ReqAckPlayerChat::EGCT_WORLD:
 	{
 		m_pNetModule->SendMsgPBToAllClient(NFMsg::EGMI_ACK_CHAT, xMsg);
 	}
 	break;
-	case NFMsg::ReqAckPlayerChat_EGameChatType::ReqAckPlayerChat_EGameChatType_EGCT_CLAN:
+	case NFMsg::ReqAckPlayerChat::EGCT_CLAN:
 	{
 		NFGUID xTargetID = NFINetModule::PBToNF(xMsg.target_id());
 		NFGUID xClanID = m_pKernelModule->GetPropertyObject(nPlayerID, NFrame::Player::Clan_ID());
@@ -83,25 +83,26 @@ void NFChatModule::OnClienChatProcess(const NFSOCK nSockIndex, const int nMsgID,
 		}
 	}
 	break;
-	case NFMsg::ReqAckPlayerChat_EGameChatType::ReqAckPlayerChat_EGameChatType_EGCT_PRIVATE:
-	case NFMsg::ReqAckPlayerChat_EGameChatType::ReqAckPlayerChat_EGameChatType_EGCT_TEAM:
+	case NFMsg::ReqAckPlayerChat::EGCT_PRIVATE:
 	{
-		if (xMsg.has_target_id())
+		NFGUID xTargetID = NFINetModule::PBToNF(xMsg.target_id());
+		if (m_pKernelModule->ExistObject(xTargetID))
 		{
-			NFGUID xTargetID = NFINetModule::PBToNF(xMsg.target_id());
-			if (!xTargetID.IsNull())
-			{
-				if (m_pKernelModule->GetObject(xTargetID))
-				{
-
-				}
-				else
-				{
-					//send to world server
-					m_pGameServerToWorldModule->TransmitToWorld(xTargetID.nData64, nMsgID, xMsg);
-				}
-			}
+			m_pGameServerNet_ServerModule->SendMsgPBToGate(nMsgID, xMsg, xTargetID);
 		}
+		else
+		{
+			//send to world server
+			m_pGameServerToWorldModule->TransmitToWorld(xTargetID.nData64, nMsgID, xMsg);
+		}
+	}
+	break;
+	case NFMsg::ReqAckPlayerChat::EGCT_TEAM:
+	{
+		const int sceneID = m_pKernelModule->GetPropertyInt(nPlayerID, NFrame::Player::SceneID());
+		const int groupID = m_pKernelModule->GetPropertyInt(nPlayerID, NFrame::Player::GroupID());
+
+		m_pGameServerNet_ServerModule->SendGroupMsgPBToGate(nMsgID, xMsg, sceneID, groupID);
 	}
 	break;
 	default:
