@@ -52,7 +52,7 @@ typedef void(*CoroutineStartFunction)();
 static CoroutineYieldFunction YieldFunction = NULL;
 static CoroutineStartFunction StartFunction = NULL;
 
-class NFRedisClient : public NFIRedisClient
+class _NFExport NFRedisClient : public NFIRedisClient
 {
 public:
 	NFRedisClient();
