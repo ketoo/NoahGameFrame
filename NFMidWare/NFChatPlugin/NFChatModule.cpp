@@ -88,7 +88,7 @@ void NFChatModule::OnClienChatProcess(const NFSOCK nSockIndex, const int nMsgID,
 		NFGUID xTargetID = NFINetModule::PBToNF(xMsg.target_id());
 		if (m_pKernelModule->ExistObject(xTargetID))
 		{
-			m_pGameServerNet_ServerModule->SendMsgPBToGate(nMsgID, xMsg, xTargetID);
+			m_pGameServerNet_ServerModule->SendMsgPBToGate(NFMsg::EGMI_ACK_CHAT, xMsg, xTargetID);
 		}
 		else
 		{
@@ -102,7 +102,7 @@ void NFChatModule::OnClienChatProcess(const NFSOCK nSockIndex, const int nMsgID,
 		const int sceneID = m_pKernelModule->GetPropertyInt(nPlayerID, NFrame::Player::SceneID());
 		const int groupID = m_pKernelModule->GetPropertyInt(nPlayerID, NFrame::Player::GroupID());
 
-		m_pGameServerNet_ServerModule->SendGroupMsgPBToGate(nMsgID, xMsg, sceneID, groupID);
+		m_pGameServerNet_ServerModule->SendGroupMsgPBToGate(NFMsg::EGMI_ACK_CHAT, xMsg, sceneID, groupID);
 	}
 	break;
 	default:
