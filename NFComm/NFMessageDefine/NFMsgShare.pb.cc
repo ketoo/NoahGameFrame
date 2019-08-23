@@ -26,7 +26,6 @@ extern PROTOBUF_INTERNAL_EXPORT_protobuf_NFMsgBase_2eproto ::google::protobuf::i
 namespace protobuf_NFMsgShare_2eproto {
 extern PROTOBUF_INTERNAL_EXPORT_protobuf_NFMsgShare_2eproto ::google::protobuf::internal::SCCInfo<0> scc_info_CurrencyStruct;
 extern PROTOBUF_INTERNAL_EXPORT_protobuf_NFMsgShare_2eproto ::google::protobuf::internal::SCCInfo<0> scc_info_ItemStruct;
-extern PROTOBUF_INTERNAL_EXPORT_protobuf_NFMsgShare_2eproto ::google::protobuf::internal::SCCInfo<0> scc_info_ReqAckPlayerChat_ChatContainer;
 extern PROTOBUF_INTERNAL_EXPORT_protobuf_NFMsgShare_2eproto ::google::protobuf::internal::SCCInfo<1> scc_info_AckSearchClan_SearchClanObject;
 extern PROTOBUF_INTERNAL_EXPORT_protobuf_NFMsgShare_2eproto ::google::protobuf::internal::SCCInfo<1> scc_info_EffectData;
 extern PROTOBUF_INTERNAL_EXPORT_protobuf_NFMsgShare_2eproto ::google::protobuf::internal::SCCInfo<1> scc_info_PVPPlayerInfo;
@@ -79,11 +78,6 @@ class ReqAckPlayerMoveDefaultTypeInternal {
   ::google::protobuf::internal::ExplicitlyConstructed<ReqAckPlayerMove>
       _instance;
 } _ReqAckPlayerMove_default_instance_;
-class ReqAckPlayerChat_ChatContainerDefaultTypeInternal {
- public:
-  ::google::protobuf::internal::ExplicitlyConstructed<ReqAckPlayerChat_ChatContainer>
-      _instance;
-} _ReqAckPlayerChat_ChatContainer_default_instance_;
 class ReqAckPlayerChatDefaultTypeInternal {
  public:
   ::google::protobuf::internal::ExplicitlyConstructed<ReqAckPlayerChat>
@@ -404,20 +398,6 @@ LIBPROTOC_EXPORT ::google::protobuf::internal::SCCInfo<2> scc_info_ReqAckPlayerM
       &protobuf_NFMsgBase_2eproto::scc_info_Ident.base,
       &protobuf_NFMsgBase_2eproto::scc_info_Vector3.base,}};
 
-static void InitDefaultsReqAckPlayerChat_ChatContainer() {
-  GOOGLE_PROTOBUF_VERIFY_VERSION;
-
-  {
-    void* ptr = &::NFMsg::_ReqAckPlayerChat_ChatContainer_default_instance_;
-    new (ptr) ::NFMsg::ReqAckPlayerChat_ChatContainer();
-    ::google::protobuf::internal::OnShutdownDestroyMessage(ptr);
-  }
-  ::NFMsg::ReqAckPlayerChat_ChatContainer::InitAsDefaultInstance();
-}
-
-LIBPROTOC_EXPORT ::google::protobuf::internal::SCCInfo<0> scc_info_ReqAckPlayerChat_ChatContainer =
-    {{ATOMIC_VAR_INIT(::google::protobuf::internal::SCCInfoBase::kUninitialized), 0, InitDefaultsReqAckPlayerChat_ChatContainer}, {}};
-
 static void InitDefaultsReqAckPlayerChat() {
   GOOGLE_PROTOBUF_VERIFY_VERSION;
 
@@ -429,10 +409,9 @@ static void InitDefaultsReqAckPlayerChat() {
   ::NFMsg::ReqAckPlayerChat::InitAsDefaultInstance();
 }
 
-LIBPROTOC_EXPORT ::google::protobuf::internal::SCCInfo<2> scc_info_ReqAckPlayerChat =
-    {{ATOMIC_VAR_INIT(::google::protobuf::internal::SCCInfoBase::kUninitialized), 2, InitDefaultsReqAckPlayerChat}, {
-      &protobuf_NFMsgBase_2eproto::scc_info_Ident.base,
-      &protobuf_NFMsgShare_2eproto::scc_info_ReqAckPlayerChat_ChatContainer.base,}};
+LIBPROTOC_EXPORT ::google::protobuf::internal::SCCInfo<1> scc_info_ReqAckPlayerChat =
+    {{ATOMIC_VAR_INIT(::google::protobuf::internal::SCCInfoBase::kUninitialized), 1, InitDefaultsReqAckPlayerChat}, {
+      &protobuf_NFMsgBase_2eproto::scc_info_Ident.base,}};
 
 static void InitDefaultsReqAckPlayerPosSync() {
   GOOGLE_PROTOBUF_VERIFY_VERSION;
@@ -987,7 +966,6 @@ void InitDefaults() {
   ::google::protobuf::internal::InitSCC(&scc_info_AckPlayerLeaveList.base);
   ::google::protobuf::internal::InitSCC(&scc_info_ReqAckSynData.base);
   ::google::protobuf::internal::InitSCC(&scc_info_ReqAckPlayerMove.base);
-  ::google::protobuf::internal::InitSCC(&scc_info_ReqAckPlayerChat_ChatContainer.base);
   ::google::protobuf::internal::InitSCC(&scc_info_ReqAckPlayerChat.base);
   ::google::protobuf::internal::InitSCC(&scc_info_ReqAckPlayerPosSync.base);
   ::google::protobuf::internal::InitSCC(&scc_info_EffectData.base);
@@ -1027,7 +1005,7 @@ void InitDefaults() {
   ::google::protobuf::internal::InitSCC(&scc_info_AckSwitchServer.base);
 }
 
-::google::protobuf::Metadata file_level_metadata[47];
+::google::protobuf::Metadata file_level_metadata[46];
 const ::google::protobuf::EnumDescriptor* file_level_enum_descriptors[6];
 
 const ::google::protobuf::uint32 TableStruct::offsets[] GOOGLE_PROTOBUF_ATTRIBUTE_SECTION_VARIABLE(protodesc_cold) = {
@@ -1108,23 +1086,18 @@ const ::google::protobuf::uint32 TableStruct::offsets[] GOOGLE_PROTOBUF_ATTRIBUT
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NFMsg::ReqAckPlayerMove, source_pos_),
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NFMsg::ReqAckPlayerMove, move_direction_),
   ~0u,  // no _has_bits_
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NFMsg::ReqAckPlayerChat_ChatContainer, _internal_metadata_),
-  ~0u,  // no _extensions_
-  ~0u,  // no _oneof_case_
-  ~0u,  // no _weak_field_map_
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NFMsg::ReqAckPlayerChat_ChatContainer, containertype_),
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NFMsg::ReqAckPlayerChat_ChatContainer, data_info_),
-  ~0u,  // no _has_bits_
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NFMsg::ReqAckPlayerChat, _internal_metadata_),
   ~0u,  // no _extensions_
   ~0u,  // no _oneof_case_
   ~0u,  // no _weak_field_map_
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NFMsg::ReqAckPlayerChat, chat_id_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NFMsg::ReqAckPlayerChat, player_id_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NFMsg::ReqAckPlayerChat, player_name_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NFMsg::ReqAckPlayerChat, player_hero_id_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NFMsg::ReqAckPlayerChat, player_hero_level_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NFMsg::ReqAckPlayerChat, chat_channel_),
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NFMsg::ReqAckPlayerChat, chat_type_),
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NFMsg::ReqAckPlayerChat, chat_info_),
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NFMsg::ReqAckPlayerChat, chat_name_),
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NFMsg::ReqAckPlayerChat, target_id_),
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NFMsg::ReqAckPlayerChat, container_data_),
   ~0u,  // no _has_bits_
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NFMsg::ReqAckPlayerPosSync, _internal_metadata_),
   ~0u,  // no _extensions_
@@ -1452,44 +1425,43 @@ static const ::google::protobuf::internal::MigrationSchema schemas[] GOOGLE_PROT
   { 47, -1, sizeof(::NFMsg::AckPlayerLeaveList)},
   { 53, -1, sizeof(::NFMsg::ReqAckSynData)},
   { 63, -1, sizeof(::NFMsg::ReqAckPlayerMove)},
-  { 76, -1, sizeof(::NFMsg::ReqAckPlayerChat_ChatContainer)},
-  { 83, -1, sizeof(::NFMsg::ReqAckPlayerChat)},
-  { 94, -1, sizeof(::NFMsg::ReqAckPlayerPosSync)},
-  { 106, -1, sizeof(::NFMsg::EffectData)},
-  { 114, -1, sizeof(::NFMsg::ReqAckUseSkill)},
-  { 123, -1, sizeof(::NFMsg::ReqAckUseItem)},
-  { 134, -1, sizeof(::NFMsg::ReqAckSwapScene)},
-  { 146, -1, sizeof(::NFMsg::ReqAckHomeScene)},
-  { 152, -1, sizeof(::NFMsg::ItemStruct)},
-  { 159, -1, sizeof(::NFMsg::CurrencyStruct)},
-  { 166, -1, sizeof(::NFMsg::ReqAckReliveHero)},
-  { 173, -1, sizeof(::NFMsg::ReqPickDropItem)},
-  { 179, -1, sizeof(::NFMsg::ReqAcceptTask)},
-  { 185, -1, sizeof(::NFMsg::ReqCompeleteTask)},
-  { 191, -1, sizeof(::NFMsg::ReqAddSceneBuilding)},
-  { 204, -1, sizeof(::NFMsg::ReqSceneBuildings)},
-  { 211, -1, sizeof(::NFMsg::AckSceneBuildings)},
-  { 217, -1, sizeof(::NFMsg::ReqStoreSceneBuildings)},
-  { 225, -1, sizeof(::NFMsg::ReqAckCreateClan)},
-  { 236, -1, sizeof(::NFMsg::ReqSearchClan)},
-  { 242, -1, sizeof(::NFMsg::AckSearchClan_SearchClanObject)},
-  { 254, -1, sizeof(::NFMsg::AckSearchClan)},
-  { 260, -1, sizeof(::NFMsg::ReqAckJoinClan)},
-  { 269, -1, sizeof(::NFMsg::ReqAckLeaveClan)},
-  { 276, -1, sizeof(::NFMsg::ReqAckOprClanMember)},
-  { 285, -1, sizeof(::NFMsg::ReqEnterClanEctype)},
-  { 291, -1, sizeof(::NFMsg::ReqSetFightHero)},
-  { 298, -1, sizeof(::NFMsg::ReqSwitchFightHero)},
-  { 304, -1, sizeof(::NFMsg::ReqBuyItemFromShop)},
-  { 311, -1, sizeof(::NFMsg::PVPPlayerInfo)},
-  { 333, -1, sizeof(::NFMsg::ReqSearchOppnent)},
-  { 343, -1, sizeof(::NFMsg::AckSearchOppnent)},
-  { 354, -1, sizeof(::NFMsg::ReqAckCancelSearch)},
-  { 360, -1, sizeof(::NFMsg::ReqEndBattle)},
-  { 366, -1, sizeof(::NFMsg::AckEndBattle)},
-  { 381, -1, sizeof(::NFMsg::ReqSendMail)},
-  { 389, -1, sizeof(::NFMsg::ReqSwitchServer)},
-  { 401, -1, sizeof(::NFMsg::AckSwitchServer)},
+  { 76, -1, sizeof(::NFMsg::ReqAckPlayerChat)},
+  { 89, -1, sizeof(::NFMsg::ReqAckPlayerPosSync)},
+  { 101, -1, sizeof(::NFMsg::EffectData)},
+  { 109, -1, sizeof(::NFMsg::ReqAckUseSkill)},
+  { 118, -1, sizeof(::NFMsg::ReqAckUseItem)},
+  { 129, -1, sizeof(::NFMsg::ReqAckSwapScene)},
+  { 141, -1, sizeof(::NFMsg::ReqAckHomeScene)},
+  { 147, -1, sizeof(::NFMsg::ItemStruct)},
+  { 154, -1, sizeof(::NFMsg::CurrencyStruct)},
+  { 161, -1, sizeof(::NFMsg::ReqAckReliveHero)},
+  { 168, -1, sizeof(::NFMsg::ReqPickDropItem)},
+  { 174, -1, sizeof(::NFMsg::ReqAcceptTask)},
+  { 180, -1, sizeof(::NFMsg::ReqCompeleteTask)},
+  { 186, -1, sizeof(::NFMsg::ReqAddSceneBuilding)},
+  { 199, -1, sizeof(::NFMsg::ReqSceneBuildings)},
+  { 206, -1, sizeof(::NFMsg::AckSceneBuildings)},
+  { 212, -1, sizeof(::NFMsg::ReqStoreSceneBuildings)},
+  { 220, -1, sizeof(::NFMsg::ReqAckCreateClan)},
+  { 231, -1, sizeof(::NFMsg::ReqSearchClan)},
+  { 237, -1, sizeof(::NFMsg::AckSearchClan_SearchClanObject)},
+  { 249, -1, sizeof(::NFMsg::AckSearchClan)},
+  { 255, -1, sizeof(::NFMsg::ReqAckJoinClan)},
+  { 264, -1, sizeof(::NFMsg::ReqAckLeaveClan)},
+  { 271, -1, sizeof(::NFMsg::ReqAckOprClanMember)},
+  { 280, -1, sizeof(::NFMsg::ReqEnterClanEctype)},
+  { 286, -1, sizeof(::NFMsg::ReqSetFightHero)},
+  { 293, -1, sizeof(::NFMsg::ReqSwitchFightHero)},
+  { 299, -1, sizeof(::NFMsg::ReqBuyItemFromShop)},
+  { 306, -1, sizeof(::NFMsg::PVPPlayerInfo)},
+  { 328, -1, sizeof(::NFMsg::ReqSearchOppnent)},
+  { 338, -1, sizeof(::NFMsg::AckSearchOppnent)},
+  { 349, -1, sizeof(::NFMsg::ReqAckCancelSearch)},
+  { 355, -1, sizeof(::NFMsg::ReqEndBattle)},
+  { 361, -1, sizeof(::NFMsg::AckEndBattle)},
+  { 376, -1, sizeof(::NFMsg::ReqSendMail)},
+  { 384, -1, sizeof(::NFMsg::ReqSwitchServer)},
+  { 396, -1, sizeof(::NFMsg::AckSwitchServer)},
 };
 
 static ::google::protobuf::Message const * const file_default_instances[] = {
@@ -1502,7 +1474,6 @@ static ::google::protobuf::Message const * const file_default_instances[] = {
   reinterpret_cast<const ::google::protobuf::Message*>(&::NFMsg::_AckPlayerLeaveList_default_instance_),
   reinterpret_cast<const ::google::protobuf::Message*>(&::NFMsg::_ReqAckSynData_default_instance_),
   reinterpret_cast<const ::google::protobuf::Message*>(&::NFMsg::_ReqAckPlayerMove_default_instance_),
-  reinterpret_cast<const ::google::protobuf::Message*>(&::NFMsg::_ReqAckPlayerChat_ChatContainer_default_instance_),
   reinterpret_cast<const ::google::protobuf::Message*>(&::NFMsg::_ReqAckPlayerChat_default_instance_),
   reinterpret_cast<const ::google::protobuf::Message*>(&::NFMsg::_ReqAckPlayerPosSync_default_instance_),
   reinterpret_cast<const ::google::protobuf::Message*>(&::NFMsg::_EffectData_default_instance_),
@@ -1557,7 +1528,7 @@ void protobuf_AssignDescriptorsOnce() {
 void protobuf_RegisterTypes(const ::std::string&) GOOGLE_PROTOBUF_ATTRIBUTE_COLD;
 void protobuf_RegisterTypes(const ::std::string&) {
   protobuf_AssignDescriptorsOnce();
-  ::google::protobuf::internal::RegisterAllTypes(file_level_metadata, 47);
+  ::google::protobuf::internal::RegisterAllTypes(file_level_metadata, 46);
 }
 
 void AddDescriptorsImpl() {
@@ -1589,134 +1560,137 @@ void AddDescriptorsImpl() {
       "ime\030\004 \001(\005\022\021\n\tlastState\030\005 \001(\005\022\"\n\ntarget_p"
       "os\030\006 \003(\0132\016.NFMsg.Vector3\022\"\n\nsource_pos\030\007"
       " \003(\0132\016.NFMsg.Vector3\022&\n\016move_direction\030\010"
-      " \003(\0132\016.NFMsg.Vector3\"\256\003\n\020ReqAckPlayerCha"
-      "t\022\035\n\007chat_id\030\001 \001(\0132\014.NFMsg.Ident\0228\n\tchat"
-      "_type\030\002 \001(\0162%.NFMsg.ReqAckPlayerChat.EGa"
-      "meChatType\022\021\n\tchat_info\030\003 \001(\014\022\021\n\tchat_na"
-      "me\030\004 \001(\014\022\037\n\ttarget_id\030\005 \001(\0132\014.NFMsg.Iden"
-      "t\022=\n\016Container_data\030\006 \003(\0132%.NFMsg.ReqAck"
-      "PlayerChat.ChatContainer\032j\n\rChatContaine"
-      "r\022\025\n\rConTainerType\030\002 \001(\005\022\021\n\tdata_info\030\003 "
-      "\001(\014\"/\n\rContainerType\022\017\n\013EGCT_UNKNOW\020\000\022\r\n"
-      "\tEGCT_ITEM\020\001\"O\n\rEGameChatType\022\r\n\tEGCT_CL"
-      "AN\020\000\022\020\n\014EGCT_PRIVATE\020\001\022\r\n\tEGCT_TEAM\020\002\022\016\n"
-      "\nEGCT_WORLD\020\003\"\277\001\n\023ReqAckPlayerPosSync\022\033\n"
-      "\005mover\030\001 \001(\0132\014.NFMsg.Ident\022\014\n\004time\030\002 \001(\005"
-      "\022\031\n\021InterpolationTime\030\003 \001(\002\022 \n\010position\030"
-      "\004 \001(\0132\016.NFMsg.Vector3\022!\n\tdirection\030\005 \001(\013"
-      "2\016.NFMsg.Vector3\022\016\n\006status\030\006 \001(\005\022\r\n\005fram"
-      "e\030\007 \001(\005\"\323\001\n\nEffectData\022\"\n\014effect_ident\030\001"
-      " \001(\0132\014.NFMsg.Ident\022\024\n\014effect_value\030\002 \001(\005"
-      "\0221\n\neffect_rlt\030\003 \001(\0162\035.NFMsg.EffectData."
-      "EResultType\"X\n\013EResultType\022\014\n\010EET_FAIL\020\000"
-      "\022\017\n\013EET_SUCCESS\020\001\022\016\n\nEET_REFUSE\020\002\022\014\n\010EET"
-      "_MISS\020\003\022\014\n\010EET_CRIT\020\004\"y\n\016ReqAckUseSkill\022"
-      "\032\n\004user\030\001 \001(\0132\014.NFMsg.Ident\022\020\n\010skill_id\030"
-      "\002 \001(\014\022\021\n\tuse_index\030\003 \001(\005\022&\n\013effect_data\030"
-      "\004 \003(\0132\021.NFMsg.EffectData\"\327\001\n\rReqAckUseIt"
-      "em\022\032\n\004user\030\001 \001(\0132\014.NFMsg.Ident\022\037\n\titem_g"
-      "uid\030\002 \001(\0132\014.NFMsg.Ident\022&\n\013effect_data\030\003"
-      " \003(\0132\021.NFMsg.EffectData\022\037\n\004item\030\004 \001(\0132\021."
-      "NFMsg.ItemStruct\022\036\n\010targetid\030\005 \001(\0132\014.NFM"
-      "sg.Ident\022 \n\010position\030\006 \001(\0132\016.NFMsg.Vecto"
-      "r3\"\363\001\n\017ReqAckSwapScene\022;\n\rtransfer_type\030"
-      "\001 \001(\0162$.NFMsg.ReqAckSwapScene.EGameSwapT"
-      "ype\022\020\n\010scene_id\030\002 \001(\005\022\017\n\007line_id\030\003 \001(\005\022\t"
-      "\n\001x\030\004 \001(\002\022\t\n\001y\030\005 \001(\002\022\t\n\001z\030\006 \001(\002\022\014\n\004data\030"
-      "\007 \001(\014\"Q\n\rEGameSwapType\022\017\n\013EGST_NARMAL\020\000\022"
-      "\016\n\nEGST_CLONE\020\001\022\016\n\nEGST_ARENA\020\002\022\017\n\013EGST_"
-      "MIRROR\020\003\"\037\n\017ReqAckHomeScene\022\014\n\004data\030\001 \001("
-      "\014\"1\n\nItemStruct\022\017\n\007item_id\030\001 \001(\014\022\022\n\nitem"
-      "_count\030\002 \001(\005\"\?\n\016CurrencyStruct\022\025\n\rcurren"
-      "cy_type\030\001 \001(\005\022\026\n\016currency_count\030\002 \001(\005\"B\n"
-      "\020ReqAckReliveHero\022\017\n\007diamond\030\001 \001(\005\022\035\n\007he"
-      "ro_id\030\002 \001(\0132\014.NFMsg.Ident\"2\n\017ReqPickDrop"
-      "Item\022\037\n\titem_guid\030\002 \001(\0132\014.NFMsg.Ident\" \n"
-      "\rReqAcceptTask\022\017\n\007task_id\030\001 \001(\014\"#\n\020ReqCo"
-      "mpeleteTask\022\017\n\007task_id\030\001 \001(\014\"\322\001\n\023ReqAddS"
-      "ceneBuilding\022\033\n\003pos\030\001 \001(\0132\016.NFMsg.Vector"
-      "3\022\032\n\004guid\030\002 \001(\0132\014.NFMsg.Ident\022\034\n\006master\030"
-      "\003 \001(\0132\014.NFMsg.Ident\022\021\n\tconfig_id\030\004 \001(\014\022\020"
-      "\n\010scene_id\030\005 \001(\005\022\023\n\013master_name\030\006 \001(\014\022\025\n"
-      "\ris_home_scene\030\007 \001(\005\022\023\n\013is_building\030\010 \001("
-      "\005\"B\n\021ReqSceneBuildings\022\020\n\010scene_id\030\001 \001(\005"
-      "\022\033\n\003pos\030\002 \001(\0132\016.NFMsg.Vector3\"B\n\021AckScen"
-      "eBuildings\022-\n\tbuildings\030\001 \003(\0132\032.NFMsg.Re"
-      "qAddSceneBuilding\"z\n\026ReqStoreSceneBuildi"
-      "ngs\022\032\n\004guid\030\001 \001(\0132\014.NFMsg.Ident\022\025\n\rhome_"
-      "scene_id\030\002 \001(\005\022-\n\tbuildings\030\003 \003(\0132\032.NFMs"
-      "g.ReqAddSceneBuilding\"\257\001\n\020ReqAckCreateCl"
-      "an\022\035\n\007clan_id\030\001 \001(\0132\014.NFMsg.Ident\022\021\n\tcla"
-      "n_name\030\002 \001(\014\022\021\n\tclan_desc\030\003 \001(\014\022$\n\016clan_"
-      "player_id\030\004 \001(\0132\014.NFMsg.Ident\022\030\n\020clan_pl"
-      "ayer_name\030\005 \001(\014\022\026\n\016clan_player_bp\030\006 \001(\005\""
-      "\"\n\rReqSearchClan\022\021\n\tclan_name\030\001 \001(\014\"\204\002\n\r"
-      "AckSearchClan\0228\n\tclan_list\030\001 \003(\0132%.NFMsg"
-      ".AckSearchClan.SearchClanObject\032\270\001\n\020Sear"
-      "chClanObject\022\035\n\007clan_ID\030\001 \001(\0132\014.NFMsg.Id"
-      "ent\022\021\n\tclan_name\030\002 \001(\014\022\021\n\tclan_icon\030\003 \001("
-      "\014\022\031\n\021clan_member_count\030\004 \001(\005\022\035\n\025clan_mem"
-      "ber_max_count\030\005 \001(\005\022\022\n\nclan_honor\030\006 \001(\005\022"
-      "\021\n\tclan_rank\030\007 \001(\005\"\207\001\n\016ReqAckJoinClan\022\035\n"
-      "\007clan_id\030\001 \001(\0132\014.NFMsg.Ident\022$\n\016clan_pla"
-      "yer_id\030\004 \001(\0132\014.NFMsg.Ident\022\030\n\020clan_playe"
-      "r_name\030\005 \001(\014\022\026\n\016clan_player_bp\030\006 \001(\005\"V\n\017"
-      "ReqAckLeaveClan\022\035\n\007clan_id\030\001 \001(\0132\014.NFMsg"
-      ".Ident\022$\n\016clan_player_id\030\002 \001(\0132\014.NFMsg.I"
-      "dent\"\366\001\n\023ReqAckOprClanMember\022\035\n\007clan_id\030"
-      "\001 \001(\0132\014.NFMsg.Ident\022\037\n\tplayer_id\030\002 \001(\0132\014"
-      ".NFMsg.Ident\022\037\n\tmember_id\030\003 \001(\0132\014.NFMsg."
-      "Ident\022<\n\004type\030\004 \001(\0162..NFMsg.ReqAckOprCla"
-      "nMember.EGClanMemberOprType\"@\n\023EGClanMem"
-      "berOprType\022\r\n\tEGAT_DOWN\020\000\022\013\n\007EGAT_UP\020\001\022\r"
-      "\n\tEGAT_KICK\020\002\"3\n\022ReqEnterClanEctype\022\035\n\007c"
-      "lan_id\030\001 \001(\0132\014.NFMsg.Ident\"<\n\017ReqSetFigh"
-      "tHero\022\034\n\006Heroid\030\001 \001(\0132\014.NFMsg.Ident\022\013\n\003S"
-      "et\030\002 \001(\005\"2\n\022ReqSwitchFightHero\022\034\n\006Heroid"
-      "\030\001 \001(\0132\014.NFMsg.Ident\"3\n\022ReqBuyItemFromSh"
-      "op\022\016\n\006itemID\030\001 \001(\014\022\r\n\005count\030\002 \001(\005\"\207\003\n\rPV"
-      "PPlayerInfo\022\030\n\002id\030\001 \001(\0132\014.NFMsg.Ident\022\'\n"
-      "\013battle_mode\030\002 \001(\0162\022.NFMsg.EBattleType\022\r"
-      "\n\005level\030\004 \001(\005\022\024\n\014battle_point\030\005 \001(\005\022\014\n\004n"
-      "ame\030\006 \001(\014\022\014\n\004head\030\007 \001(\014\022\014\n\004gold\030\010 \001(\005\022\017\n"
-      "\007diamond\030\t \001(\005\022\021\n\thero_cnf1\030\024 \001(\014\022\021\n\ther"
-      "o_cnf2\030\025 \001(\014\022\021\n\thero_cnf3\030\026 \001(\014\022\022\n\nhero_"
-      "star1\030\031 \001(\005\022\022\n\nhero_star2\030\032 \001(\005\022\022\n\nhero_"
-      "star3\030\033 \001(\005\022\036\n\010hero_id1\030\034 \001(\0132\014.NFMsg.Id"
-      "ent\022\036\n\010hero_id2\030\035 \001(\0132\014.NFMsg.Ident\022\036\n\010h"
-      "ero_id3\030\036 \001(\0132\014.NFMsg.Ident\"\225\001\n\020ReqSearc"
-      "hOppnent\022\022\n\nself_scene\030\001 \001(\005\022\017\n\007diamond\030"
-      "\002 \001(\005\022\024\n\014battle_point\030\003 \001(\005\022\'\n\013battle_mo"
-      "de\030\004 \001(\0162\022.NFMsg.EBattleType\022\035\n\007friends\030"
-      "\n \003(\0132\014.NFMsg.Ident\"\326\001\n\020AckSearchOppnent"
-      "\022\020\n\010scene_id\030\001 \001(\005\022\035\n\007team_id\030\002 \001(\0132\014.NF"
-      "Msg.Ident\022\026\n\016gamble_diamond\030\003 \001(\005\022\"\n\014tea"
-      "m_members\030\005 \003(\0132\014.NFMsg.Ident\022&\n\010opponen"
-      "t\030\016 \001(\0132\024.NFMsg.PVPPlayerInfo\022-\n\tbuildin"
-      "gs\030\024 \003(\0132\032.NFMsg.ReqAddSceneBuilding\"2\n\022"
-      "ReqAckCancelSearch\022\034\n\006selfid\030\001 \001(\0132\014.NFM"
-      "sg.Ident\" \n\014ReqEndBattle\022\020\n\010auto_end\030\001 \001"
-      "(\005\"\202\002\n\014AckEndBattle\022\013\n\003win\030\001 \001(\005\022\014\n\004star"
-      "\030\002 \001(\005\022\014\n\004gold\030\003 \001(\005\022\013\n\003cup\030\004 \001(\005\022\017\n\007dia"
-      "mond\030\005 \001(\005\022\'\n\013battle_mode\030\006 \001(\0162\022.NFMsg."
-      "EBattleType\022\035\n\007team_id\030\007 \001(\0132\014.NFMsg.Ide"
-      "nt\022\036\n\010match_id\030\010 \001(\0132\014.NFMsg.Ident\022\035\n\007me"
-      "mbers\030\t \003(\0132\014.NFMsg.Ident\022$\n\titem_list\030\n"
-      " \003(\0132\021.NFMsg.ItemStruct\"\201\001\n\013ReqSendMail\022"
-      "\036\n\010reciever\030\001 \001(\0132\014.NFMsg.Ident\022$\n\titem_"
-      "list\030\002 \003(\0132\021.NFMsg.ItemStruct\022,\n\rcurrenc"
-      "y_list\030\003 \003(\0132\025.NFMsg.CurrencyStruct\"\271\001\n\017"
-      "ReqSwitchServer\022\034\n\006selfid\030\001 \001(\0132\014.NFMsg."
-      "Ident\022\025\n\rself_serverid\030\002 \001(\003\022\027\n\017target_s"
-      "erverid\030\003 \001(\003\022\025\n\rgate_serverid\030\004 \001(\003\022\017\n\007"
-      "SceneID\030\005 \001(\003\022\037\n\tclient_id\030\006 \001(\0132\014.NFMsg"
-      ".Ident\022\017\n\007groupID\030\007 \001(\003\"v\n\017AckSwitchServ"
-      "er\022\034\n\006selfid\030\001 \001(\0132\014.NFMsg.Ident\022\025\n\rself"
-      "_serverid\030\002 \001(\003\022\027\n\017target_serverid\030\003 \001(\003"
-      "\022\025\n\rgate_serverid\030\004 \001(\003b\006proto3"
+      " \003(\0132\016.NFMsg.Vector3\"\244\004\n\020ReqAckPlayerCha"
+      "t\022\037\n\tplayer_id\030\001 \001(\0132\014.NFMsg.Ident\022\023\n\013pl"
+      "ayer_name\030\002 \001(\014\022\026\n\016player_hero_id\030\003 \001(\014\022"
+      "\031\n\021player_hero_level\030\004 \001(\014\022>\n\014chat_chann"
+      "el\030\005 \001(\0162(.NFMsg.ReqAckPlayerChat.EGameC"
+      "hatChannel\0228\n\tchat_type\030\006 \001(\0162%.NFMsg.Re"
+      "qAckPlayerChat.EGameChatType\022\021\n\tchat_inf"
+      "o\030\007 \001(\014\022\037\n\ttarget_id\030\010 \001(\0132\014.NFMsg.Ident"
+      "\"r\n\020EGameChatChannel\022\017\n\013EGCC_GLOBAL\020\000\022\r\n"
+      "\tEGCC_CLAN\020\001\022\017\n\013EGCC_FRIEND\020\002\022\017\n\013EGCC_BA"
+      "TTLE\020\003\022\r\n\tEGCC_TEAM\020\004\022\r\n\tEGCC_ROOM\020\005\"\204\001\n"
+      "\rEGameChatType\022\r\n\tEGCT_TEXT\020\000\022\016\n\nEGCT_VO"
+      "ICE\020\001\022\016\n\nEGCT_EMOJI\020\002\022\024\n\020EGCT_DONATE_HER"
+      "O\020\n\022\030\n\024EGCT_DONATE_BUILDING\020\013\022\024\n\020EGCT_DO"
+      "NATE_ITEM\020\014\"\277\001\n\023ReqAckPlayerPosSync\022\033\n\005m"
+      "over\030\001 \001(\0132\014.NFMsg.Ident\022\014\n\004time\030\002 \001(\005\022\031"
+      "\n\021InterpolationTime\030\003 \001(\002\022 \n\010position\030\004 "
+      "\001(\0132\016.NFMsg.Vector3\022!\n\tdirection\030\005 \001(\0132\016"
+      ".NFMsg.Vector3\022\016\n\006status\030\006 \001(\005\022\r\n\005frame\030"
+      "\007 \001(\005\"\323\001\n\nEffectData\022\"\n\014effect_ident\030\001 \001"
+      "(\0132\014.NFMsg.Ident\022\024\n\014effect_value\030\002 \001(\005\0221"
+      "\n\neffect_rlt\030\003 \001(\0162\035.NFMsg.EffectData.ER"
+      "esultType\"X\n\013EResultType\022\014\n\010EET_FAIL\020\000\022\017"
+      "\n\013EET_SUCCESS\020\001\022\016\n\nEET_REFUSE\020\002\022\014\n\010EET_M"
+      "ISS\020\003\022\014\n\010EET_CRIT\020\004\"y\n\016ReqAckUseSkill\022\032\n"
+      "\004user\030\001 \001(\0132\014.NFMsg.Ident\022\020\n\010skill_id\030\002 "
+      "\001(\014\022\021\n\tuse_index\030\003 \001(\005\022&\n\013effect_data\030\004 "
+      "\003(\0132\021.NFMsg.EffectData\"\327\001\n\rReqAckUseItem"
+      "\022\032\n\004user\030\001 \001(\0132\014.NFMsg.Ident\022\037\n\titem_gui"
+      "d\030\002 \001(\0132\014.NFMsg.Ident\022&\n\013effect_data\030\003 \003"
+      "(\0132\021.NFMsg.EffectData\022\037\n\004item\030\004 \001(\0132\021.NF"
+      "Msg.ItemStruct\022\036\n\010targetid\030\005 \001(\0132\014.NFMsg"
+      ".Ident\022 \n\010position\030\006 \001(\0132\016.NFMsg.Vector3"
+      "\"\363\001\n\017ReqAckSwapScene\022;\n\rtransfer_type\030\001 "
+      "\001(\0162$.NFMsg.ReqAckSwapScene.EGameSwapTyp"
+      "e\022\020\n\010scene_id\030\002 \001(\005\022\017\n\007line_id\030\003 \001(\005\022\t\n\001"
+      "x\030\004 \001(\002\022\t\n\001y\030\005 \001(\002\022\t\n\001z\030\006 \001(\002\022\014\n\004data\030\007 "
+      "\001(\014\"Q\n\rEGameSwapType\022\017\n\013EGST_NARMAL\020\000\022\016\n"
+      "\nEGST_CLONE\020\001\022\016\n\nEGST_ARENA\020\002\022\017\n\013EGST_MI"
+      "RROR\020\003\"\037\n\017ReqAckHomeScene\022\014\n\004data\030\001 \001(\014\""
+      "1\n\nItemStruct\022\017\n\007item_id\030\001 \001(\014\022\022\n\nitem_c"
+      "ount\030\002 \001(\005\"\?\n\016CurrencyStruct\022\025\n\rcurrency"
+      "_type\030\001 \001(\005\022\026\n\016currency_count\030\002 \001(\005\"B\n\020R"
+      "eqAckReliveHero\022\017\n\007diamond\030\001 \001(\005\022\035\n\007hero"
+      "_id\030\002 \001(\0132\014.NFMsg.Ident\"2\n\017ReqPickDropIt"
+      "em\022\037\n\titem_guid\030\002 \001(\0132\014.NFMsg.Ident\" \n\rR"
+      "eqAcceptTask\022\017\n\007task_id\030\001 \001(\014\"#\n\020ReqComp"
+      "eleteTask\022\017\n\007task_id\030\001 \001(\014\"\322\001\n\023ReqAddSce"
+      "neBuilding\022\033\n\003pos\030\001 \001(\0132\016.NFMsg.Vector3\022"
+      "\032\n\004guid\030\002 \001(\0132\014.NFMsg.Ident\022\034\n\006master\030\003 "
+      "\001(\0132\014.NFMsg.Ident\022\021\n\tconfig_id\030\004 \001(\014\022\020\n\010"
+      "scene_id\030\005 \001(\005\022\023\n\013master_name\030\006 \001(\014\022\025\n\ri"
+      "s_home_scene\030\007 \001(\005\022\023\n\013is_building\030\010 \001(\005\""
+      "B\n\021ReqSceneBuildings\022\020\n\010scene_id\030\001 \001(\005\022\033"
+      "\n\003pos\030\002 \001(\0132\016.NFMsg.Vector3\"B\n\021AckSceneB"
+      "uildings\022-\n\tbuildings\030\001 \003(\0132\032.NFMsg.ReqA"
+      "ddSceneBuilding\"z\n\026ReqStoreSceneBuilding"
+      "s\022\032\n\004guid\030\001 \001(\0132\014.NFMsg.Ident\022\025\n\rhome_sc"
+      "ene_id\030\002 \001(\005\022-\n\tbuildings\030\003 \003(\0132\032.NFMsg."
+      "ReqAddSceneBuilding\"\257\001\n\020ReqAckCreateClan"
+      "\022\035\n\007clan_id\030\001 \001(\0132\014.NFMsg.Ident\022\021\n\tclan_"
+      "name\030\002 \001(\014\022\021\n\tclan_desc\030\003 \001(\014\022$\n\016clan_pl"
+      "ayer_id\030\004 \001(\0132\014.NFMsg.Ident\022\030\n\020clan_play"
+      "er_name\030\005 \001(\014\022\026\n\016clan_player_bp\030\006 \001(\005\"\"\n"
+      "\rReqSearchClan\022\021\n\tclan_name\030\001 \001(\014\"\204\002\n\rAc"
+      "kSearchClan\0228\n\tclan_list\030\001 \003(\0132%.NFMsg.A"
+      "ckSearchClan.SearchClanObject\032\270\001\n\020Search"
+      "ClanObject\022\035\n\007clan_ID\030\001 \001(\0132\014.NFMsg.Iden"
+      "t\022\021\n\tclan_name\030\002 \001(\014\022\021\n\tclan_icon\030\003 \001(\014\022"
+      "\031\n\021clan_member_count\030\004 \001(\005\022\035\n\025clan_membe"
+      "r_max_count\030\005 \001(\005\022\022\n\nclan_honor\030\006 \001(\005\022\021\n"
+      "\tclan_rank\030\007 \001(\005\"\207\001\n\016ReqAckJoinClan\022\035\n\007c"
+      "lan_id\030\001 \001(\0132\014.NFMsg.Ident\022$\n\016clan_playe"
+      "r_id\030\004 \001(\0132\014.NFMsg.Ident\022\030\n\020clan_player_"
+      "name\030\005 \001(\014\022\026\n\016clan_player_bp\030\006 \001(\005\"V\n\017Re"
+      "qAckLeaveClan\022\035\n\007clan_id\030\001 \001(\0132\014.NFMsg.I"
+      "dent\022$\n\016clan_player_id\030\002 \001(\0132\014.NFMsg.Ide"
+      "nt\"\366\001\n\023ReqAckOprClanMember\022\035\n\007clan_id\030\001 "
+      "\001(\0132\014.NFMsg.Ident\022\037\n\tplayer_id\030\002 \001(\0132\014.N"
+      "FMsg.Ident\022\037\n\tmember_id\030\003 \001(\0132\014.NFMsg.Id"
+      "ent\022<\n\004type\030\004 \001(\0162..NFMsg.ReqAckOprClanM"
+      "ember.EGClanMemberOprType\"@\n\023EGClanMembe"
+      "rOprType\022\r\n\tEGAT_DOWN\020\000\022\013\n\007EGAT_UP\020\001\022\r\n\t"
+      "EGAT_KICK\020\002\"3\n\022ReqEnterClanEctype\022\035\n\007cla"
+      "n_id\030\001 \001(\0132\014.NFMsg.Ident\"<\n\017ReqSetFightH"
+      "ero\022\034\n\006Heroid\030\001 \001(\0132\014.NFMsg.Ident\022\013\n\003Set"
+      "\030\002 \001(\005\"2\n\022ReqSwitchFightHero\022\034\n\006Heroid\030\001"
+      " \001(\0132\014.NFMsg.Ident\"3\n\022ReqBuyItemFromShop"
+      "\022\016\n\006itemID\030\001 \001(\014\022\r\n\005count\030\002 \001(\005\"\207\003\n\rPVPP"
+      "layerInfo\022\030\n\002id\030\001 \001(\0132\014.NFMsg.Ident\022\'\n\013b"
+      "attle_mode\030\002 \001(\0162\022.NFMsg.EBattleType\022\r\n\005"
+      "level\030\004 \001(\005\022\024\n\014battle_point\030\005 \001(\005\022\014\n\004nam"
+      "e\030\006 \001(\014\022\014\n\004head\030\007 \001(\014\022\014\n\004gold\030\010 \001(\005\022\017\n\007d"
+      "iamond\030\t \001(\005\022\021\n\thero_cnf1\030\024 \001(\014\022\021\n\thero_"
+      "cnf2\030\025 \001(\014\022\021\n\thero_cnf3\030\026 \001(\014\022\022\n\nhero_st"
+      "ar1\030\031 \001(\005\022\022\n\nhero_star2\030\032 \001(\005\022\022\n\nhero_st"
+      "ar3\030\033 \001(\005\022\036\n\010hero_id1\030\034 \001(\0132\014.NFMsg.Iden"
+      "t\022\036\n\010hero_id2\030\035 \001(\0132\014.NFMsg.Ident\022\036\n\010her"
+      "o_id3\030\036 \001(\0132\014.NFMsg.Ident\"\225\001\n\020ReqSearchO"
+      "ppnent\022\022\n\nself_scene\030\001 \001(\005\022\017\n\007diamond\030\002 "
+      "\001(\005\022\024\n\014battle_point\030\003 \001(\005\022\'\n\013battle_mode"
+      "\030\004 \001(\0162\022.NFMsg.EBattleType\022\035\n\007friends\030\n "
+      "\003(\0132\014.NFMsg.Ident\"\326\001\n\020AckSearchOppnent\022\020"
+      "\n\010scene_id\030\001 \001(\005\022\035\n\007team_id\030\002 \001(\0132\014.NFMs"
+      "g.Ident\022\026\n\016gamble_diamond\030\003 \001(\005\022\"\n\014team_"
+      "members\030\005 \003(\0132\014.NFMsg.Ident\022&\n\010opponent\030"
+      "\016 \001(\0132\024.NFMsg.PVPPlayerInfo\022-\n\tbuildings"
+      "\030\024 \003(\0132\032.NFMsg.ReqAddSceneBuilding\"2\n\022Re"
+      "qAckCancelSearch\022\034\n\006selfid\030\001 \001(\0132\014.NFMsg"
+      ".Ident\" \n\014ReqEndBattle\022\020\n\010auto_end\030\001 \001(\005"
+      "\"\202\002\n\014AckEndBattle\022\013\n\003win\030\001 \001(\005\022\014\n\004star\030\002"
+      " \001(\005\022\014\n\004gold\030\003 \001(\005\022\013\n\003cup\030\004 \001(\005\022\017\n\007diamo"
+      "nd\030\005 \001(\005\022\'\n\013battle_mode\030\006 \001(\0162\022.NFMsg.EB"
+      "attleType\022\035\n\007team_id\030\007 \001(\0132\014.NFMsg.Ident"
+      "\022\036\n\010match_id\030\010 \001(\0132\014.NFMsg.Ident\022\035\n\007memb"
+      "ers\030\t \003(\0132\014.NFMsg.Ident\022$\n\titem_list\030\n \003"
+      "(\0132\021.NFMsg.ItemStruct\"\201\001\n\013ReqSendMail\022\036\n"
+      "\010reciever\030\001 \001(\0132\014.NFMsg.Ident\022$\n\titem_li"
+      "st\030\002 \003(\0132\021.NFMsg.ItemStruct\022,\n\rcurrency_"
+      "list\030\003 \003(\0132\025.NFMsg.CurrencyStruct\"\271\001\n\017Re"
+      "qSwitchServer\022\034\n\006selfid\030\001 \001(\0132\014.NFMsg.Id"
+      "ent\022\025\n\rself_serverid\030\002 \001(\003\022\027\n\017target_ser"
+      "verid\030\003 \001(\003\022\025\n\rgate_serverid\030\004 \001(\003\022\017\n\007Sc"
+      "eneID\030\005 \001(\003\022\037\n\tclient_id\030\006 \001(\0132\014.NFMsg.I"
+      "dent\022\017\n\007groupID\030\007 \001(\003\"v\n\017AckSwitchServer"
+      "\022\034\n\006selfid\030\001 \001(\0132\014.NFMsg.Ident\022\025\n\rself_s"
+      "erverid\030\002 \001(\003\022\027\n\017target_serverid\030\003 \001(\003\022\025"
+      "\n\rgate_serverid\030\004 \001(\003b\006proto3"
   };
   ::google::protobuf::DescriptorPool::InternalAddGeneratedFile(
-      descriptor, 6031);
+      descriptor, 6149);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "NFMsgShare.proto", &protobuf_RegisterTypes);
   ::protobuf_NFDefine_2eproto::AddDescriptors();
@@ -1762,14 +1736,18 @@ const ReqAckSynData_SynType ReqAckSynData::SynType_MIN;
 const ReqAckSynData_SynType ReqAckSynData::SynType_MAX;
 const int ReqAckSynData::SynType_ARRAYSIZE;
 #endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
-const ::google::protobuf::EnumDescriptor* ReqAckPlayerChat_ChatContainer_ContainerType_descriptor() {
+const ::google::protobuf::EnumDescriptor* ReqAckPlayerChat_EGameChatChannel_descriptor() {
   protobuf_NFMsgShare_2eproto::protobuf_AssignDescriptorsOnce();
   return protobuf_NFMsgShare_2eproto::file_level_enum_descriptors[1];
 }
-bool ReqAckPlayerChat_ChatContainer_ContainerType_IsValid(int value) {
+bool ReqAckPlayerChat_EGameChatChannel_IsValid(int value) {
   switch (value) {
     case 0:
     case 1:
+    case 2:
+    case 3:
+    case 4:
+    case 5:
       return true;
     default:
       return false;
@@ -1777,11 +1755,15 @@ bool ReqAckPlayerChat_ChatContainer_ContainerType_IsValid(int value) {
 }
 
 #if !defined(_MSC_VER) || _MSC_VER >= 1900
-const ReqAckPlayerChat_ChatContainer_ContainerType ReqAckPlayerChat_ChatContainer::EGCT_UNKNOW;
-const ReqAckPlayerChat_ChatContainer_ContainerType ReqAckPlayerChat_ChatContainer::EGCT_ITEM;
-const ReqAckPlayerChat_ChatContainer_ContainerType ReqAckPlayerChat_ChatContainer::ContainerType_MIN;
-const ReqAckPlayerChat_ChatContainer_ContainerType ReqAckPlayerChat_ChatContainer::ContainerType_MAX;
-const int ReqAckPlayerChat_ChatContainer::ContainerType_ARRAYSIZE;
+const ReqAckPlayerChat_EGameChatChannel ReqAckPlayerChat::EGCC_GLOBAL;
+const ReqAckPlayerChat_EGameChatChannel ReqAckPlayerChat::EGCC_CLAN;
+const ReqAckPlayerChat_EGameChatChannel ReqAckPlayerChat::EGCC_FRIEND;
+const ReqAckPlayerChat_EGameChatChannel ReqAckPlayerChat::EGCC_BATTLE;
+const ReqAckPlayerChat_EGameChatChannel ReqAckPlayerChat::EGCC_TEAM;
+const ReqAckPlayerChat_EGameChatChannel ReqAckPlayerChat::EGCC_ROOM;
+const ReqAckPlayerChat_EGameChatChannel ReqAckPlayerChat::EGameChatChannel_MIN;
+const ReqAckPlayerChat_EGameChatChannel ReqAckPlayerChat::EGameChatChannel_MAX;
+const int ReqAckPlayerChat::EGameChatChannel_ARRAYSIZE;
 #endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
 const ::google::protobuf::EnumDescriptor* ReqAckPlayerChat_EGameChatType_descriptor() {
   protobuf_NFMsgShare_2eproto::protobuf_AssignDescriptorsOnce();
@@ -1792,7 +1774,9 @@ bool ReqAckPlayerChat_EGameChatType_IsValid(int value) {
     case 0:
     case 1:
     case 2:
-    case 3:
+    case 10:
+    case 11:
+    case 12:
       return true;
     default:
       return false;
@@ -1800,10 +1784,12 @@ bool ReqAckPlayerChat_EGameChatType_IsValid(int value) {
 }
 
 #if !defined(_MSC_VER) || _MSC_VER >= 1900
-const ReqAckPlayerChat_EGameChatType ReqAckPlayerChat::EGCT_CLAN;
-const ReqAckPlayerChat_EGameChatType ReqAckPlayerChat::EGCT_PRIVATE;
-const ReqAckPlayerChat_EGameChatType ReqAckPlayerChat::EGCT_TEAM;
-const ReqAckPlayerChat_EGameChatType ReqAckPlayerChat::EGCT_WORLD;
+const ReqAckPlayerChat_EGameChatType ReqAckPlayerChat::EGCT_TEXT;
+const ReqAckPlayerChat_EGameChatType ReqAckPlayerChat::EGCT_VOICE;
+const ReqAckPlayerChat_EGameChatType ReqAckPlayerChat::EGCT_EMOJI;
+const ReqAckPlayerChat_EGameChatType ReqAckPlayerChat::EGCT_DONATE_HERO;
+const ReqAckPlayerChat_EGameChatType ReqAckPlayerChat::EGCT_DONATE_BUILDING;
+const ReqAckPlayerChat_EGameChatType ReqAckPlayerChat::EGCT_DONATE_ITEM;
 const ReqAckPlayerChat_EGameChatType ReqAckPlayerChat::EGameChatType_MIN;
 const ReqAckPlayerChat_EGameChatType ReqAckPlayerChat::EGameChatType_MAX;
 const int ReqAckPlayerChat::EGameChatType_ARRAYSIZE;
@@ -4890,286 +4876,17 @@ void ReqAckPlayerMove::InternalSwap(ReqAckPlayerMove* other) {
 
 // ===================================================================
 
-void ReqAckPlayerChat_ChatContainer::InitAsDefaultInstance() {
-}
-#if !defined(_MSC_VER) || _MSC_VER >= 1900
-const int ReqAckPlayerChat_ChatContainer::kConTainerTypeFieldNumber;
-const int ReqAckPlayerChat_ChatContainer::kDataInfoFieldNumber;
-#endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
-
-ReqAckPlayerChat_ChatContainer::ReqAckPlayerChat_ChatContainer()
-  : ::google::protobuf::Message(), _internal_metadata_(NULL) {
-  ::google::protobuf::internal::InitSCC(
-      &protobuf_NFMsgShare_2eproto::scc_info_ReqAckPlayerChat_ChatContainer.base);
-  SharedCtor();
-  // @@protoc_insertion_point(constructor:NFMsg.ReqAckPlayerChat.ChatContainer)
-}
-ReqAckPlayerChat_ChatContainer::ReqAckPlayerChat_ChatContainer(const ReqAckPlayerChat_ChatContainer& from)
-  : ::google::protobuf::Message(),
-      _internal_metadata_(NULL) {
-  _internal_metadata_.MergeFrom(from._internal_metadata_);
-  data_info_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  if (from.data_info().size() > 0) {
-    data_info_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.data_info_);
-  }
-  containertype_ = from.containertype_;
-  // @@protoc_insertion_point(copy_constructor:NFMsg.ReqAckPlayerChat.ChatContainer)
-}
-
-void ReqAckPlayerChat_ChatContainer::SharedCtor() {
-  data_info_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  containertype_ = 0;
-}
-
-ReqAckPlayerChat_ChatContainer::~ReqAckPlayerChat_ChatContainer() {
-  // @@protoc_insertion_point(destructor:NFMsg.ReqAckPlayerChat.ChatContainer)
-  SharedDtor();
-}
-
-void ReqAckPlayerChat_ChatContainer::SharedDtor() {
-  data_info_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-}
-
-void ReqAckPlayerChat_ChatContainer::SetCachedSize(int size) const {
-  _cached_size_.Set(size);
-}
-const ::google::protobuf::Descriptor* ReqAckPlayerChat_ChatContainer::descriptor() {
-  ::protobuf_NFMsgShare_2eproto::protobuf_AssignDescriptorsOnce();
-  return ::protobuf_NFMsgShare_2eproto::file_level_metadata[kIndexInFileMessages].descriptor;
-}
-
-const ReqAckPlayerChat_ChatContainer& ReqAckPlayerChat_ChatContainer::default_instance() {
-  ::google::protobuf::internal::InitSCC(&protobuf_NFMsgShare_2eproto::scc_info_ReqAckPlayerChat_ChatContainer.base);
-  return *internal_default_instance();
-}
-
-
-void ReqAckPlayerChat_ChatContainer::Clear() {
-// @@protoc_insertion_point(message_clear_start:NFMsg.ReqAckPlayerChat.ChatContainer)
-  ::google::protobuf::uint32 cached_has_bits = 0;
-  // Prevent compiler warnings about cached_has_bits being unused
-  (void) cached_has_bits;
-
-  data_info_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  containertype_ = 0;
-  _internal_metadata_.Clear();
-}
-
-bool ReqAckPlayerChat_ChatContainer::MergePartialFromCodedStream(
-    ::google::protobuf::io::CodedInputStream* input) {
-#define DO_(EXPRESSION) if (!GOOGLE_PREDICT_TRUE(EXPRESSION)) goto failure
-  ::google::protobuf::uint32 tag;
-  // @@protoc_insertion_point(parse_start:NFMsg.ReqAckPlayerChat.ChatContainer)
-  for (;;) {
-    ::std::pair<::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
-    tag = p.first;
-    if (!p.second) goto handle_unusual;
-    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // int32 ConTainerType = 2;
-      case 2: {
-        if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(16u /* 16 & 0xFF */)) {
-
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
-                 input, &containertype_)));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
-      // bytes data_info = 3;
-      case 3: {
-        if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(26u /* 26 & 0xFF */)) {
-          DO_(::google::protobuf::internal::WireFormatLite::ReadBytes(
-                input, this->mutable_data_info()));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
-      default: {
-      handle_unusual:
-        if (tag == 0) {
-          goto success;
-        }
-        DO_(::google::protobuf::internal::WireFormat::SkipField(
-              input, tag, _internal_metadata_.mutable_unknown_fields()));
-        break;
-      }
-    }
-  }
-success:
-  // @@protoc_insertion_point(parse_success:NFMsg.ReqAckPlayerChat.ChatContainer)
-  return true;
-failure:
-  // @@protoc_insertion_point(parse_failure:NFMsg.ReqAckPlayerChat.ChatContainer)
-  return false;
-#undef DO_
-}
-
-void ReqAckPlayerChat_ChatContainer::SerializeWithCachedSizes(
-    ::google::protobuf::io::CodedOutputStream* output) const {
-  // @@protoc_insertion_point(serialize_start:NFMsg.ReqAckPlayerChat.ChatContainer)
-  ::google::protobuf::uint32 cached_has_bits = 0;
-  (void) cached_has_bits;
-
-  // int32 ConTainerType = 2;
-  if (this->containertype() != 0) {
-    ::google::protobuf::internal::WireFormatLite::WriteInt32(2, this->containertype(), output);
-  }
-
-  // bytes data_info = 3;
-  if (this->data_info().size() > 0) {
-    ::google::protobuf::internal::WireFormatLite::WriteBytesMaybeAliased(
-      3, this->data_info(), output);
-  }
-
-  if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
-    ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
-        (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()), output);
-  }
-  // @@protoc_insertion_point(serialize_end:NFMsg.ReqAckPlayerChat.ChatContainer)
-}
-
-::google::protobuf::uint8* ReqAckPlayerChat_ChatContainer::InternalSerializeWithCachedSizesToArray(
-    bool deterministic, ::google::protobuf::uint8* target) const {
-  (void)deterministic; // Unused
-  // @@protoc_insertion_point(serialize_to_array_start:NFMsg.ReqAckPlayerChat.ChatContainer)
-  ::google::protobuf::uint32 cached_has_bits = 0;
-  (void) cached_has_bits;
-
-  // int32 ConTainerType = 2;
-  if (this->containertype() != 0) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(2, this->containertype(), target);
-  }
-
-  // bytes data_info = 3;
-  if (this->data_info().size() > 0) {
-    target =
-      ::google::protobuf::internal::WireFormatLite::WriteBytesToArray(
-        3, this->data_info(), target);
-  }
-
-  if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
-    target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
-        (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()), target);
-  }
-  // @@protoc_insertion_point(serialize_to_array_end:NFMsg.ReqAckPlayerChat.ChatContainer)
-  return target;
-}
-
-size_t ReqAckPlayerChat_ChatContainer::ByteSizeLong() const {
-// @@protoc_insertion_point(message_byte_size_start:NFMsg.ReqAckPlayerChat.ChatContainer)
-  size_t total_size = 0;
-
-  if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
-    total_size +=
-      ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
-        (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()));
-  }
-  // bytes data_info = 3;
-  if (this->data_info().size() > 0) {
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::BytesSize(
-        this->data_info());
-  }
-
-  // int32 ConTainerType = 2;
-  if (this->containertype() != 0) {
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::Int32Size(
-        this->containertype());
-  }
-
-  int cached_size = ::google::protobuf::internal::ToCachedSize(total_size);
-  SetCachedSize(cached_size);
-  return total_size;
-}
-
-void ReqAckPlayerChat_ChatContainer::MergeFrom(const ::google::protobuf::Message& from) {
-// @@protoc_insertion_point(generalized_merge_from_start:NFMsg.ReqAckPlayerChat.ChatContainer)
-  GOOGLE_DCHECK_NE(&from, this);
-  const ReqAckPlayerChat_ChatContainer* source =
-      ::google::protobuf::internal::DynamicCastToGenerated<const ReqAckPlayerChat_ChatContainer>(
-          &from);
-  if (source == NULL) {
-  // @@protoc_insertion_point(generalized_merge_from_cast_fail:NFMsg.ReqAckPlayerChat.ChatContainer)
-    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
-  } else {
-  // @@protoc_insertion_point(generalized_merge_from_cast_success:NFMsg.ReqAckPlayerChat.ChatContainer)
-    MergeFrom(*source);
-  }
-}
-
-void ReqAckPlayerChat_ChatContainer::MergeFrom(const ReqAckPlayerChat_ChatContainer& from) {
-// @@protoc_insertion_point(class_specific_merge_from_start:NFMsg.ReqAckPlayerChat.ChatContainer)
-  GOOGLE_DCHECK_NE(&from, this);
-  _internal_metadata_.MergeFrom(from._internal_metadata_);
-  ::google::protobuf::uint32 cached_has_bits = 0;
-  (void) cached_has_bits;
-
-  if (from.data_info().size() > 0) {
-
-    data_info_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.data_info_);
-  }
-  if (from.containertype() != 0) {
-    set_containertype(from.containertype());
-  }
-}
-
-void ReqAckPlayerChat_ChatContainer::CopyFrom(const ::google::protobuf::Message& from) {
-// @@protoc_insertion_point(generalized_copy_from_start:NFMsg.ReqAckPlayerChat.ChatContainer)
-  if (&from == this) return;
-  Clear();
-  MergeFrom(from);
-}
-
-void ReqAckPlayerChat_ChatContainer::CopyFrom(const ReqAckPlayerChat_ChatContainer& from) {
-// @@protoc_insertion_point(class_specific_copy_from_start:NFMsg.ReqAckPlayerChat.ChatContainer)
-  if (&from == this) return;
-  Clear();
-  MergeFrom(from);
-}
-
-bool ReqAckPlayerChat_ChatContainer::IsInitialized() const {
-  return true;
-}
-
-void ReqAckPlayerChat_ChatContainer::Swap(ReqAckPlayerChat_ChatContainer* other) {
-  if (other == this) return;
-  InternalSwap(other);
-}
-void ReqAckPlayerChat_ChatContainer::InternalSwap(ReqAckPlayerChat_ChatContainer* other) {
-  using std::swap;
-  data_info_.Swap(&other->data_info_, &::google::protobuf::internal::GetEmptyStringAlreadyInited(),
-    GetArenaNoVirtual());
-  swap(containertype_, other->containertype_);
-  _internal_metadata_.Swap(&other->_internal_metadata_);
-}
-
-::google::protobuf::Metadata ReqAckPlayerChat_ChatContainer::GetMetadata() const {
-  protobuf_NFMsgShare_2eproto::protobuf_AssignDescriptorsOnce();
-  return ::protobuf_NFMsgShare_2eproto::file_level_metadata[kIndexInFileMessages];
-}
-
-
-// ===================================================================
-
 void ReqAckPlayerChat::InitAsDefaultInstance() {
-  ::NFMsg::_ReqAckPlayerChat_default_instance_._instance.get_mutable()->chat_id_ = const_cast< ::NFMsg::Ident*>(
+  ::NFMsg::_ReqAckPlayerChat_default_instance_._instance.get_mutable()->player_id_ = const_cast< ::NFMsg::Ident*>(
       ::NFMsg::Ident::internal_default_instance());
   ::NFMsg::_ReqAckPlayerChat_default_instance_._instance.get_mutable()->target_id_ = const_cast< ::NFMsg::Ident*>(
       ::NFMsg::Ident::internal_default_instance());
 }
-void ReqAckPlayerChat::clear_chat_id() {
-  if (GetArenaNoVirtual() == NULL && chat_id_ != NULL) {
-    delete chat_id_;
+void ReqAckPlayerChat::clear_player_id() {
+  if (GetArenaNoVirtual() == NULL && player_id_ != NULL) {
+    delete player_id_;
   }
-  chat_id_ = NULL;
+  player_id_ = NULL;
 }
 void ReqAckPlayerChat::clear_target_id() {
   if (GetArenaNoVirtual() == NULL && target_id_ != NULL) {
@@ -5178,12 +4895,14 @@ void ReqAckPlayerChat::clear_target_id() {
   target_id_ = NULL;
 }
 #if !defined(_MSC_VER) || _MSC_VER >= 1900
-const int ReqAckPlayerChat::kChatIdFieldNumber;
+const int ReqAckPlayerChat::kPlayerIdFieldNumber;
+const int ReqAckPlayerChat::kPlayerNameFieldNumber;
+const int ReqAckPlayerChat::kPlayerHeroIdFieldNumber;
+const int ReqAckPlayerChat::kPlayerHeroLevelFieldNumber;
+const int ReqAckPlayerChat::kChatChannelFieldNumber;
 const int ReqAckPlayerChat::kChatTypeFieldNumber;
 const int ReqAckPlayerChat::kChatInfoFieldNumber;
-const int ReqAckPlayerChat::kChatNameFieldNumber;
 const int ReqAckPlayerChat::kTargetIdFieldNumber;
-const int ReqAckPlayerChat::kContainerDataFieldNumber;
 #endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
 
 ReqAckPlayerChat::ReqAckPlayerChat()
@@ -5195,37 +4914,48 @@ ReqAckPlayerChat::ReqAckPlayerChat()
 }
 ReqAckPlayerChat::ReqAckPlayerChat(const ReqAckPlayerChat& from)
   : ::google::protobuf::Message(),
-      _internal_metadata_(NULL),
-      container_data_(from.container_data_) {
+      _internal_metadata_(NULL) {
   _internal_metadata_.MergeFrom(from._internal_metadata_);
+  player_name_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  if (from.player_name().size() > 0) {
+    player_name_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.player_name_);
+  }
+  player_hero_id_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  if (from.player_hero_id().size() > 0) {
+    player_hero_id_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.player_hero_id_);
+  }
+  player_hero_level_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  if (from.player_hero_level().size() > 0) {
+    player_hero_level_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.player_hero_level_);
+  }
   chat_info_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   if (from.chat_info().size() > 0) {
     chat_info_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.chat_info_);
   }
-  chat_name_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  if (from.chat_name().size() > 0) {
-    chat_name_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.chat_name_);
-  }
-  if (from.has_chat_id()) {
-    chat_id_ = new ::NFMsg::Ident(*from.chat_id_);
+  if (from.has_player_id()) {
+    player_id_ = new ::NFMsg::Ident(*from.player_id_);
   } else {
-    chat_id_ = NULL;
+    player_id_ = NULL;
   }
   if (from.has_target_id()) {
     target_id_ = new ::NFMsg::Ident(*from.target_id_);
   } else {
     target_id_ = NULL;
   }
-  chat_type_ = from.chat_type_;
+  ::memcpy(&chat_channel_, &from.chat_channel_,
+    static_cast<size_t>(reinterpret_cast<char*>(&chat_type_) -
+    reinterpret_cast<char*>(&chat_channel_)) + sizeof(chat_type_));
   // @@protoc_insertion_point(copy_constructor:NFMsg.ReqAckPlayerChat)
 }
 
 void ReqAckPlayerChat::SharedCtor() {
+  player_name_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  player_hero_id_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  player_hero_level_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   chat_info_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  chat_name_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  ::memset(&chat_id_, 0, static_cast<size_t>(
+  ::memset(&player_id_, 0, static_cast<size_t>(
       reinterpret_cast<char*>(&chat_type_) -
-      reinterpret_cast<char*>(&chat_id_)) + sizeof(chat_type_));
+      reinterpret_cast<char*>(&player_id_)) + sizeof(chat_type_));
 }
 
 ReqAckPlayerChat::~ReqAckPlayerChat() {
@@ -5234,9 +4964,11 @@ ReqAckPlayerChat::~ReqAckPlayerChat() {
 }
 
 void ReqAckPlayerChat::SharedDtor() {
+  player_name_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  player_hero_id_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  player_hero_level_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   chat_info_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  chat_name_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  if (this != internal_default_instance()) delete chat_id_;
+  if (this != internal_default_instance()) delete player_id_;
   if (this != internal_default_instance()) delete target_id_;
 }
 
@@ -5260,18 +4992,21 @@ void ReqAckPlayerChat::Clear() {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  container_data_.Clear();
+  player_name_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  player_hero_id_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  player_hero_level_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   chat_info_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  chat_name_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  if (GetArenaNoVirtual() == NULL && chat_id_ != NULL) {
-    delete chat_id_;
+  if (GetArenaNoVirtual() == NULL && player_id_ != NULL) {
+    delete player_id_;
   }
-  chat_id_ = NULL;
+  player_id_ = NULL;
   if (GetArenaNoVirtual() == NULL && target_id_ != NULL) {
     delete target_id_;
   }
   target_id_ = NULL;
-  chat_type_ = 0;
+  ::memset(&chat_channel_, 0, static_cast<size_t>(
+      reinterpret_cast<char*>(&chat_type_) -
+      reinterpret_cast<char*>(&chat_channel_)) + sizeof(chat_type_));
   _internal_metadata_.Clear();
 }
 
@@ -5285,22 +5020,73 @@ bool ReqAckPlayerChat::MergePartialFromCodedStream(
     tag = p.first;
     if (!p.second) goto handle_unusual;
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // .NFMsg.Ident chat_id = 1;
+      // .NFMsg.Ident player_id = 1;
       case 1: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
             static_cast< ::google::protobuf::uint8>(10u /* 10 & 0xFF */)) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadMessage(
-               input, mutable_chat_id()));
+               input, mutable_player_id()));
         } else {
           goto handle_unusual;
         }
         break;
       }
 
-      // .NFMsg.ReqAckPlayerChat.EGameChatType chat_type = 2;
+      // bytes player_name = 2;
       case 2: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(16u /* 16 & 0xFF */)) {
+            static_cast< ::google::protobuf::uint8>(18u /* 18 & 0xFF */)) {
+          DO_(::google::protobuf::internal::WireFormatLite::ReadBytes(
+                input, this->mutable_player_name()));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      // bytes player_hero_id = 3;
+      case 3: {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(26u /* 26 & 0xFF */)) {
+          DO_(::google::protobuf::internal::WireFormatLite::ReadBytes(
+                input, this->mutable_player_hero_id()));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      // bytes player_hero_level = 4;
+      case 4: {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(34u /* 34 & 0xFF */)) {
+          DO_(::google::protobuf::internal::WireFormatLite::ReadBytes(
+                input, this->mutable_player_hero_level()));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      // .NFMsg.ReqAckPlayerChat.EGameChatChannel chat_channel = 5;
+      case 5: {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(40u /* 40 & 0xFF */)) {
+          int value;
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   int, ::google::protobuf::internal::WireFormatLite::TYPE_ENUM>(
+                 input, &value)));
+          set_chat_channel(static_cast< ::NFMsg::ReqAckPlayerChat_EGameChatChannel >(value));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      // .NFMsg.ReqAckPlayerChat.EGameChatType chat_type = 6;
+      case 6: {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(48u /* 48 & 0xFF */)) {
           int value;
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    int, ::google::protobuf::internal::WireFormatLite::TYPE_ENUM>(
@@ -5312,10 +5098,10 @@ bool ReqAckPlayerChat::MergePartialFromCodedStream(
         break;
       }
 
-      // bytes chat_info = 3;
-      case 3: {
+      // bytes chat_info = 7;
+      case 7: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(26u /* 26 & 0xFF */)) {
+            static_cast< ::google::protobuf::uint8>(58u /* 58 & 0xFF */)) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadBytes(
                 input, this->mutable_chat_info()));
         } else {
@@ -5324,36 +5110,12 @@ bool ReqAckPlayerChat::MergePartialFromCodedStream(
         break;
       }
 
-      // bytes chat_name = 4;
-      case 4: {
+      // .NFMsg.Ident target_id = 8;
+      case 8: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(34u /* 34 & 0xFF */)) {
-          DO_(::google::protobuf::internal::WireFormatLite::ReadBytes(
-                input, this->mutable_chat_name()));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
-      // .NFMsg.Ident target_id = 5;
-      case 5: {
-        if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(42u /* 42 & 0xFF */)) {
+            static_cast< ::google::protobuf::uint8>(66u /* 66 & 0xFF */)) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadMessage(
                input, mutable_target_id()));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
-      // repeated .NFMsg.ReqAckPlayerChat.ChatContainer Container_data = 6;
-      case 6: {
-        if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(50u /* 50 & 0xFF */)) {
-          DO_(::google::protobuf::internal::WireFormatLite::ReadMessage(
-                input, add_container_data()));
         } else {
           goto handle_unusual;
         }
@@ -5386,43 +5148,52 @@ void ReqAckPlayerChat::SerializeWithCachedSizes(
   ::google::protobuf::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
-  // .NFMsg.Ident chat_id = 1;
-  if (this->has_chat_id()) {
+  // .NFMsg.Ident player_id = 1;
+  if (this->has_player_id()) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      1, this->_internal_chat_id(), output);
+      1, this->_internal_player_id(), output);
   }
 
-  // .NFMsg.ReqAckPlayerChat.EGameChatType chat_type = 2;
+  // bytes player_name = 2;
+  if (this->player_name().size() > 0) {
+    ::google::protobuf::internal::WireFormatLite::WriteBytesMaybeAliased(
+      2, this->player_name(), output);
+  }
+
+  // bytes player_hero_id = 3;
+  if (this->player_hero_id().size() > 0) {
+    ::google::protobuf::internal::WireFormatLite::WriteBytesMaybeAliased(
+      3, this->player_hero_id(), output);
+  }
+
+  // bytes player_hero_level = 4;
+  if (this->player_hero_level().size() > 0) {
+    ::google::protobuf::internal::WireFormatLite::WriteBytesMaybeAliased(
+      4, this->player_hero_level(), output);
+  }
+
+  // .NFMsg.ReqAckPlayerChat.EGameChatChannel chat_channel = 5;
+  if (this->chat_channel() != 0) {
+    ::google::protobuf::internal::WireFormatLite::WriteEnum(
+      5, this->chat_channel(), output);
+  }
+
+  // .NFMsg.ReqAckPlayerChat.EGameChatType chat_type = 6;
   if (this->chat_type() != 0) {
     ::google::protobuf::internal::WireFormatLite::WriteEnum(
-      2, this->chat_type(), output);
+      6, this->chat_type(), output);
   }
 
-  // bytes chat_info = 3;
+  // bytes chat_info = 7;
   if (this->chat_info().size() > 0) {
     ::google::protobuf::internal::WireFormatLite::WriteBytesMaybeAliased(
-      3, this->chat_info(), output);
+      7, this->chat_info(), output);
   }
 
-  // bytes chat_name = 4;
-  if (this->chat_name().size() > 0) {
-    ::google::protobuf::internal::WireFormatLite::WriteBytesMaybeAliased(
-      4, this->chat_name(), output);
-  }
-
-  // .NFMsg.Ident target_id = 5;
+  // .NFMsg.Ident target_id = 8;
   if (this->has_target_id()) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      5, this->_internal_target_id(), output);
-  }
-
-  // repeated .NFMsg.ReqAckPlayerChat.ChatContainer Container_data = 6;
-  for (unsigned int i = 0,
-      n = static_cast<unsigned int>(this->container_data_size()); i < n; i++) {
-    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      6,
-      this->container_data(static_cast<int>(i)),
-      output);
+      8, this->_internal_target_id(), output);
   }
 
   if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
@@ -5439,46 +5210,58 @@ void ReqAckPlayerChat::SerializeWithCachedSizes(
   ::google::protobuf::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
-  // .NFMsg.Ident chat_id = 1;
-  if (this->has_chat_id()) {
+  // .NFMsg.Ident player_id = 1;
+  if (this->has_player_id()) {
     target = ::google::protobuf::internal::WireFormatLite::
       InternalWriteMessageToArray(
-        1, this->_internal_chat_id(), deterministic, target);
+        1, this->_internal_player_id(), deterministic, target);
   }
 
-  // .NFMsg.ReqAckPlayerChat.EGameChatType chat_type = 2;
+  // bytes player_name = 2;
+  if (this->player_name().size() > 0) {
+    target =
+      ::google::protobuf::internal::WireFormatLite::WriteBytesToArray(
+        2, this->player_name(), target);
+  }
+
+  // bytes player_hero_id = 3;
+  if (this->player_hero_id().size() > 0) {
+    target =
+      ::google::protobuf::internal::WireFormatLite::WriteBytesToArray(
+        3, this->player_hero_id(), target);
+  }
+
+  // bytes player_hero_level = 4;
+  if (this->player_hero_level().size() > 0) {
+    target =
+      ::google::protobuf::internal::WireFormatLite::WriteBytesToArray(
+        4, this->player_hero_level(), target);
+  }
+
+  // .NFMsg.ReqAckPlayerChat.EGameChatChannel chat_channel = 5;
+  if (this->chat_channel() != 0) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteEnumToArray(
+      5, this->chat_channel(), target);
+  }
+
+  // .NFMsg.ReqAckPlayerChat.EGameChatType chat_type = 6;
   if (this->chat_type() != 0) {
     target = ::google::protobuf::internal::WireFormatLite::WriteEnumToArray(
-      2, this->chat_type(), target);
+      6, this->chat_type(), target);
   }
 
-  // bytes chat_info = 3;
+  // bytes chat_info = 7;
   if (this->chat_info().size() > 0) {
     target =
       ::google::protobuf::internal::WireFormatLite::WriteBytesToArray(
-        3, this->chat_info(), target);
+        7, this->chat_info(), target);
   }
 
-  // bytes chat_name = 4;
-  if (this->chat_name().size() > 0) {
-    target =
-      ::google::protobuf::internal::WireFormatLite::WriteBytesToArray(
-        4, this->chat_name(), target);
-  }
-
-  // .NFMsg.Ident target_id = 5;
+  // .NFMsg.Ident target_id = 8;
   if (this->has_target_id()) {
     target = ::google::protobuf::internal::WireFormatLite::
       InternalWriteMessageToArray(
-        5, this->_internal_target_id(), deterministic, target);
-  }
-
-  // repeated .NFMsg.ReqAckPlayerChat.ChatContainer Container_data = 6;
-  for (unsigned int i = 0,
-      n = static_cast<unsigned int>(this->container_data_size()); i < n; i++) {
-    target = ::google::protobuf::internal::WireFormatLite::
-      InternalWriteMessageToArray(
-        6, this->container_data(static_cast<int>(i)), deterministic, target);
+        8, this->_internal_target_id(), deterministic, target);
   }
 
   if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
@@ -5498,46 +5281,55 @@ size_t ReqAckPlayerChat::ByteSizeLong() const {
       ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
         (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()));
   }
-  // repeated .NFMsg.ReqAckPlayerChat.ChatContainer Container_data = 6;
-  {
-    unsigned int count = static_cast<unsigned int>(this->container_data_size());
-    total_size += 1UL * count;
-    for (unsigned int i = 0; i < count; i++) {
-      total_size +=
-        ::google::protobuf::internal::WireFormatLite::MessageSize(
-          this->container_data(static_cast<int>(i)));
-    }
+  // bytes player_name = 2;
+  if (this->player_name().size() > 0) {
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::BytesSize(
+        this->player_name());
   }
 
-  // bytes chat_info = 3;
+  // bytes player_hero_id = 3;
+  if (this->player_hero_id().size() > 0) {
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::BytesSize(
+        this->player_hero_id());
+  }
+
+  // bytes player_hero_level = 4;
+  if (this->player_hero_level().size() > 0) {
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::BytesSize(
+        this->player_hero_level());
+  }
+
+  // bytes chat_info = 7;
   if (this->chat_info().size() > 0) {
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::BytesSize(
         this->chat_info());
   }
 
-  // bytes chat_name = 4;
-  if (this->chat_name().size() > 0) {
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::BytesSize(
-        this->chat_name());
-  }
-
-  // .NFMsg.Ident chat_id = 1;
-  if (this->has_chat_id()) {
+  // .NFMsg.Ident player_id = 1;
+  if (this->has_player_id()) {
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::MessageSize(
-        *chat_id_);
+        *player_id_);
   }
 
-  // .NFMsg.Ident target_id = 5;
+  // .NFMsg.Ident target_id = 8;
   if (this->has_target_id()) {
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::MessageSize(
         *target_id_);
   }
 
-  // .NFMsg.ReqAckPlayerChat.EGameChatType chat_type = 2;
+  // .NFMsg.ReqAckPlayerChat.EGameChatChannel chat_channel = 5;
+  if (this->chat_channel() != 0) {
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::EnumSize(this->chat_channel());
+  }
+
+  // .NFMsg.ReqAckPlayerChat.EGameChatType chat_type = 6;
   if (this->chat_type() != 0) {
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::EnumSize(this->chat_type());
@@ -5570,20 +5362,30 @@ void ReqAckPlayerChat::MergeFrom(const ReqAckPlayerChat& from) {
   ::google::protobuf::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
-  container_data_.MergeFrom(from.container_data_);
+  if (from.player_name().size() > 0) {
+
+    player_name_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.player_name_);
+  }
+  if (from.player_hero_id().size() > 0) {
+
+    player_hero_id_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.player_hero_id_);
+  }
+  if (from.player_hero_level().size() > 0) {
+
+    player_hero_level_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.player_hero_level_);
+  }
   if (from.chat_info().size() > 0) {
 
     chat_info_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.chat_info_);
   }
-  if (from.chat_name().size() > 0) {
-
-    chat_name_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.chat_name_);
-  }
-  if (from.has_chat_id()) {
-    mutable_chat_id()->::NFMsg::Ident::MergeFrom(from.chat_id());
+  if (from.has_player_id()) {
+    mutable_player_id()->::NFMsg::Ident::MergeFrom(from.player_id());
   }
   if (from.has_target_id()) {
     mutable_target_id()->::NFMsg::Ident::MergeFrom(from.target_id());
+  }
+  if (from.chat_channel() != 0) {
+    set_chat_channel(from.chat_channel());
   }
   if (from.chat_type() != 0) {
     set_chat_type(from.chat_type());
@@ -5614,13 +5416,17 @@ void ReqAckPlayerChat::Swap(ReqAckPlayerChat* other) {
 }
 void ReqAckPlayerChat::InternalSwap(ReqAckPlayerChat* other) {
   using std::swap;
-  CastToBase(&container_data_)->InternalSwap(CastToBase(&other->container_data_));
+  player_name_.Swap(&other->player_name_, &::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+    GetArenaNoVirtual());
+  player_hero_id_.Swap(&other->player_hero_id_, &::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+    GetArenaNoVirtual());
+  player_hero_level_.Swap(&other->player_hero_level_, &::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+    GetArenaNoVirtual());
   chat_info_.Swap(&other->chat_info_, &::google::protobuf::internal::GetEmptyStringAlreadyInited(),
     GetArenaNoVirtual());
-  chat_name_.Swap(&other->chat_name_, &::google::protobuf::internal::GetEmptyStringAlreadyInited(),
-    GetArenaNoVirtual());
-  swap(chat_id_, other->chat_id_);
+  swap(player_id_, other->player_id_);
   swap(target_id_, other->target_id_);
+  swap(chat_channel_, other->chat_channel_);
   swap(chat_type_, other->chat_type_);
   _internal_metadata_.Swap(&other->_internal_metadata_);
 }
@@ -18485,9 +18291,6 @@ template<> GOOGLE_PROTOBUF_ATTRIBUTE_NOINLINE ::NFMsg::ReqAckSynData* Arena::Cre
 }
 template<> GOOGLE_PROTOBUF_ATTRIBUTE_NOINLINE ::NFMsg::ReqAckPlayerMove* Arena::CreateMaybeMessage< ::NFMsg::ReqAckPlayerMove >(Arena* arena) {
   return Arena::CreateInternal< ::NFMsg::ReqAckPlayerMove >(arena);
-}
-template<> GOOGLE_PROTOBUF_ATTRIBUTE_NOINLINE ::NFMsg::ReqAckPlayerChat_ChatContainer* Arena::CreateMaybeMessage< ::NFMsg::ReqAckPlayerChat_ChatContainer >(Arena* arena) {
-  return Arena::CreateInternal< ::NFMsg::ReqAckPlayerChat_ChatContainer >(arena);
 }
 template<> GOOGLE_PROTOBUF_ATTRIBUTE_NOINLINE ::NFMsg::ReqAckPlayerChat* Arena::CreateMaybeMessage< ::NFMsg::ReqAckPlayerChat >(Arena* arena) {
   return Arena::CreateInternal< ::NFMsg::ReqAckPlayerChat >(arena);

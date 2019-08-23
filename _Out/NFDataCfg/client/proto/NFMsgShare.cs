@@ -47,118 +47,120 @@ namespace NFMsg {
             "Eg0KBXNwZWVkGAMgASgCEgwKBHRpbWUYBCABKAUSEQoJbGFzdFN0YXRlGAUg",
             "ASgFEiIKCnRhcmdldF9wb3MYBiADKAsyDi5ORk1zZy5WZWN0b3IzEiIKCnNv",
             "dXJjZV9wb3MYByADKAsyDi5ORk1zZy5WZWN0b3IzEiYKDm1vdmVfZGlyZWN0",
-            "aW9uGAggAygLMg4uTkZNc2cuVmVjdG9yMyKuAwoQUmVxQWNrUGxheWVyQ2hh",
-            "dBIdCgdjaGF0X2lkGAEgASgLMgwuTkZNc2cuSWRlbnQSOAoJY2hhdF90eXBl",
-            "GAIgASgOMiUuTkZNc2cuUmVxQWNrUGxheWVyQ2hhdC5FR2FtZUNoYXRUeXBl",
-            "EhEKCWNoYXRfaW5mbxgDIAEoDBIRCgljaGF0X25hbWUYBCABKAwSHwoJdGFy",
-            "Z2V0X2lkGAUgASgLMgwuTkZNc2cuSWRlbnQSPQoOQ29udGFpbmVyX2RhdGEY",
-            "BiADKAsyJS5ORk1zZy5SZXFBY2tQbGF5ZXJDaGF0LkNoYXRDb250YWluZXIa",
-            "agoNQ2hhdENvbnRhaW5lchIVCg1Db25UYWluZXJUeXBlGAIgASgFEhEKCWRh",
-            "dGFfaW5mbxgDIAEoDCIvCg1Db250YWluZXJUeXBlEg8KC0VHQ1RfVU5LTk9X",
-            "EAASDQoJRUdDVF9JVEVNEAEiTwoNRUdhbWVDaGF0VHlwZRINCglFR0NUX0NM",
-            "QU4QABIQCgxFR0NUX1BSSVZBVEUQARINCglFR0NUX1RFQU0QAhIOCgpFR0NU",
-            "X1dPUkxEEAMivwEKE1JlcUFja1BsYXllclBvc1N5bmMSGwoFbW92ZXIYASAB",
-            "KAsyDC5ORk1zZy5JZGVudBIMCgR0aW1lGAIgASgFEhkKEUludGVycG9sYXRp",
-            "b25UaW1lGAMgASgCEiAKCHBvc2l0aW9uGAQgASgLMg4uTkZNc2cuVmVjdG9y",
-            "MxIhCglkaXJlY3Rpb24YBSABKAsyDi5ORk1zZy5WZWN0b3IzEg4KBnN0YXR1",
-            "cxgGIAEoBRINCgVmcmFtZRgHIAEoBSLTAQoKRWZmZWN0RGF0YRIiCgxlZmZl",
-            "Y3RfaWRlbnQYASABKAsyDC5ORk1zZy5JZGVudBIUCgxlZmZlY3RfdmFsdWUY",
-            "AiABKAUSMQoKZWZmZWN0X3JsdBgDIAEoDjIdLk5GTXNnLkVmZmVjdERhdGEu",
-            "RVJlc3VsdFR5cGUiWAoLRVJlc3VsdFR5cGUSDAoIRUVUX0ZBSUwQABIPCgtF",
-            "RVRfU1VDQ0VTUxABEg4KCkVFVF9SRUZVU0UQAhIMCghFRVRfTUlTUxADEgwK",
-            "CEVFVF9DUklUEAQieQoOUmVxQWNrVXNlU2tpbGwSGgoEdXNlchgBIAEoCzIM",
-            "Lk5GTXNnLklkZW50EhAKCHNraWxsX2lkGAIgASgMEhEKCXVzZV9pbmRleBgD",
-            "IAEoBRImCgtlZmZlY3RfZGF0YRgEIAMoCzIRLk5GTXNnLkVmZmVjdERhdGEi",
-            "1wEKDVJlcUFja1VzZUl0ZW0SGgoEdXNlchgBIAEoCzIMLk5GTXNnLklkZW50",
-            "Eh8KCWl0ZW1fZ3VpZBgCIAEoCzIMLk5GTXNnLklkZW50EiYKC2VmZmVjdF9k",
-            "YXRhGAMgAygLMhEuTkZNc2cuRWZmZWN0RGF0YRIfCgRpdGVtGAQgASgLMhEu",
-            "TkZNc2cuSXRlbVN0cnVjdBIeCgh0YXJnZXRpZBgFIAEoCzIMLk5GTXNnLklk",
-            "ZW50EiAKCHBvc2l0aW9uGAYgASgLMg4uTkZNc2cuVmVjdG9yMyLzAQoPUmVx",
-            "QWNrU3dhcFNjZW5lEjsKDXRyYW5zZmVyX3R5cGUYASABKA4yJC5ORk1zZy5S",
-            "ZXFBY2tTd2FwU2NlbmUuRUdhbWVTd2FwVHlwZRIQCghzY2VuZV9pZBgCIAEo",
-            "BRIPCgdsaW5lX2lkGAMgASgFEgkKAXgYBCABKAISCQoBeRgFIAEoAhIJCgF6",
-            "GAYgASgCEgwKBGRhdGEYByABKAwiUQoNRUdhbWVTd2FwVHlwZRIPCgtFR1NU",
-            "X05BUk1BTBAAEg4KCkVHU1RfQ0xPTkUQARIOCgpFR1NUX0FSRU5BEAISDwoL",
-            "RUdTVF9NSVJST1IQAyIfCg9SZXFBY2tIb21lU2NlbmUSDAoEZGF0YRgBIAEo",
-            "DCIxCgpJdGVtU3RydWN0Eg8KB2l0ZW1faWQYASABKAwSEgoKaXRlbV9jb3Vu",
-            "dBgCIAEoBSI/Cg5DdXJyZW5jeVN0cnVjdBIVCg1jdXJyZW5jeV90eXBlGAEg",
-            "ASgFEhYKDmN1cnJlbmN5X2NvdW50GAIgASgFIkIKEFJlcUFja1JlbGl2ZUhl",
-            "cm8SDwoHZGlhbW9uZBgBIAEoBRIdCgdoZXJvX2lkGAIgASgLMgwuTkZNc2cu",
-            "SWRlbnQiMgoPUmVxUGlja0Ryb3BJdGVtEh8KCWl0ZW1fZ3VpZBgCIAEoCzIM",
-            "Lk5GTXNnLklkZW50IiAKDVJlcUFjY2VwdFRhc2sSDwoHdGFza19pZBgBIAEo",
-            "DCIjChBSZXFDb21wZWxldGVUYXNrEg8KB3Rhc2tfaWQYASABKAwi0gEKE1Jl",
-            "cUFkZFNjZW5lQnVpbGRpbmcSGwoDcG9zGAEgASgLMg4uTkZNc2cuVmVjdG9y",
-            "MxIaCgRndWlkGAIgASgLMgwuTkZNc2cuSWRlbnQSHAoGbWFzdGVyGAMgASgL",
-            "MgwuTkZNc2cuSWRlbnQSEQoJY29uZmlnX2lkGAQgASgMEhAKCHNjZW5lX2lk",
-            "GAUgASgFEhMKC21hc3Rlcl9uYW1lGAYgASgMEhUKDWlzX2hvbWVfc2NlbmUY",
-            "ByABKAUSEwoLaXNfYnVpbGRpbmcYCCABKAUiQgoRUmVxU2NlbmVCdWlsZGlu",
-            "Z3MSEAoIc2NlbmVfaWQYASABKAUSGwoDcG9zGAIgASgLMg4uTkZNc2cuVmVj",
-            "dG9yMyJCChFBY2tTY2VuZUJ1aWxkaW5ncxItCglidWlsZGluZ3MYASADKAsy",
-            "Gi5ORk1zZy5SZXFBZGRTY2VuZUJ1aWxkaW5nInoKFlJlcVN0b3JlU2NlbmVC",
-            "dWlsZGluZ3MSGgoEZ3VpZBgBIAEoCzIMLk5GTXNnLklkZW50EhUKDWhvbWVf",
-            "c2NlbmVfaWQYAiABKAUSLQoJYnVpbGRpbmdzGAMgAygLMhouTkZNc2cuUmVx",
-            "QWRkU2NlbmVCdWlsZGluZyKvAQoQUmVxQWNrQ3JlYXRlQ2xhbhIdCgdjbGFu",
-            "X2lkGAEgASgLMgwuTkZNc2cuSWRlbnQSEQoJY2xhbl9uYW1lGAIgASgMEhEK",
-            "CWNsYW5fZGVzYxgDIAEoDBIkCg5jbGFuX3BsYXllcl9pZBgEIAEoCzIMLk5G",
-            "TXNnLklkZW50EhgKEGNsYW5fcGxheWVyX25hbWUYBSABKAwSFgoOY2xhbl9w",
-            "bGF5ZXJfYnAYBiABKAUiIgoNUmVxU2VhcmNoQ2xhbhIRCgljbGFuX25hbWUY",
-            "ASABKAwihAIKDUFja1NlYXJjaENsYW4SOAoJY2xhbl9saXN0GAEgAygLMiUu",
-            "TkZNc2cuQWNrU2VhcmNoQ2xhbi5TZWFyY2hDbGFuT2JqZWN0GrgBChBTZWFy",
-            "Y2hDbGFuT2JqZWN0Eh0KB2NsYW5fSUQYASABKAsyDC5ORk1zZy5JZGVudBIR",
-            "CgljbGFuX25hbWUYAiABKAwSEQoJY2xhbl9pY29uGAMgASgMEhkKEWNsYW5f",
-            "bWVtYmVyX2NvdW50GAQgASgFEh0KFWNsYW5fbWVtYmVyX21heF9jb3VudBgF",
-            "IAEoBRISCgpjbGFuX2hvbm9yGAYgASgFEhEKCWNsYW5fcmFuaxgHIAEoBSKH",
-            "AQoOUmVxQWNrSm9pbkNsYW4SHQoHY2xhbl9pZBgBIAEoCzIMLk5GTXNnLklk",
-            "ZW50EiQKDmNsYW5fcGxheWVyX2lkGAQgASgLMgwuTkZNc2cuSWRlbnQSGAoQ",
-            "Y2xhbl9wbGF5ZXJfbmFtZRgFIAEoDBIWCg5jbGFuX3BsYXllcl9icBgGIAEo",
-            "BSJWCg9SZXFBY2tMZWF2ZUNsYW4SHQoHY2xhbl9pZBgBIAEoCzIMLk5GTXNn",
-            "LklkZW50EiQKDmNsYW5fcGxheWVyX2lkGAIgASgLMgwuTkZNc2cuSWRlbnQi",
-            "9gEKE1JlcUFja09wckNsYW5NZW1iZXISHQoHY2xhbl9pZBgBIAEoCzIMLk5G",
-            "TXNnLklkZW50Eh8KCXBsYXllcl9pZBgCIAEoCzIMLk5GTXNnLklkZW50Eh8K",
-            "CW1lbWJlcl9pZBgDIAEoCzIMLk5GTXNnLklkZW50EjwKBHR5cGUYBCABKA4y",
-            "Li5ORk1zZy5SZXFBY2tPcHJDbGFuTWVtYmVyLkVHQ2xhbk1lbWJlck9wclR5",
-            "cGUiQAoTRUdDbGFuTWVtYmVyT3ByVHlwZRINCglFR0FUX0RPV04QABILCgdF",
-            "R0FUX1VQEAESDQoJRUdBVF9LSUNLEAIiMwoSUmVxRW50ZXJDbGFuRWN0eXBl",
-            "Eh0KB2NsYW5faWQYASABKAsyDC5ORk1zZy5JZGVudCI8Cg9SZXFTZXRGaWdo",
-            "dEhlcm8SHAoGSGVyb2lkGAEgASgLMgwuTkZNc2cuSWRlbnQSCwoDU2V0GAIg",
-            "ASgFIjIKElJlcVN3aXRjaEZpZ2h0SGVybxIcCgZIZXJvaWQYASABKAsyDC5O",
-            "Rk1zZy5JZGVudCIzChJSZXFCdXlJdGVtRnJvbVNob3ASDgoGaXRlbUlEGAEg",
-            "ASgMEg0KBWNvdW50GAIgASgFIocDCg1QVlBQbGF5ZXJJbmZvEhgKAmlkGAEg",
-            "ASgLMgwuTkZNc2cuSWRlbnQSJwoLYmF0dGxlX21vZGUYAiABKA4yEi5ORk1z",
-            "Zy5FQmF0dGxlVHlwZRINCgVsZXZlbBgEIAEoBRIUCgxiYXR0bGVfcG9pbnQY",
-            "BSABKAUSDAoEbmFtZRgGIAEoDBIMCgRoZWFkGAcgASgMEgwKBGdvbGQYCCAB",
-            "KAUSDwoHZGlhbW9uZBgJIAEoBRIRCgloZXJvX2NuZjEYFCABKAwSEQoJaGVy",
-            "b19jbmYyGBUgASgMEhEKCWhlcm9fY25mMxgWIAEoDBISCgpoZXJvX3N0YXIx",
-            "GBkgASgFEhIKCmhlcm9fc3RhcjIYGiABKAUSEgoKaGVyb19zdGFyMxgbIAEo",
-            "BRIeCghoZXJvX2lkMRgcIAEoCzIMLk5GTXNnLklkZW50Eh4KCGhlcm9faWQy",
-            "GB0gASgLMgwuTkZNc2cuSWRlbnQSHgoIaGVyb19pZDMYHiABKAsyDC5ORk1z",
-            "Zy5JZGVudCKVAQoQUmVxU2VhcmNoT3BwbmVudBISCgpzZWxmX3NjZW5lGAEg",
-            "ASgFEg8KB2RpYW1vbmQYAiABKAUSFAoMYmF0dGxlX3BvaW50GAMgASgFEicK",
-            "C2JhdHRsZV9tb2RlGAQgASgOMhIuTkZNc2cuRUJhdHRsZVR5cGUSHQoHZnJp",
-            "ZW5kcxgKIAMoCzIMLk5GTXNnLklkZW50ItYBChBBY2tTZWFyY2hPcHBuZW50",
-            "EhAKCHNjZW5lX2lkGAEgASgFEh0KB3RlYW1faWQYAiABKAsyDC5ORk1zZy5J",
-            "ZGVudBIWCg5nYW1ibGVfZGlhbW9uZBgDIAEoBRIiCgx0ZWFtX21lbWJlcnMY",
-            "BSADKAsyDC5ORk1zZy5JZGVudBImCghvcHBvbmVudBgOIAEoCzIULk5GTXNn",
-            "LlBWUFBsYXllckluZm8SLQoJYnVpbGRpbmdzGBQgAygLMhouTkZNc2cuUmVx",
-            "QWRkU2NlbmVCdWlsZGluZyIyChJSZXFBY2tDYW5jZWxTZWFyY2gSHAoGc2Vs",
-            "ZmlkGAEgASgLMgwuTkZNc2cuSWRlbnQiIAoMUmVxRW5kQmF0dGxlEhAKCGF1",
-            "dG9fZW5kGAEgASgFIoICCgxBY2tFbmRCYXR0bGUSCwoDd2luGAEgASgFEgwK",
-            "BHN0YXIYAiABKAUSDAoEZ29sZBgDIAEoBRILCgNjdXAYBCABKAUSDwoHZGlh",
-            "bW9uZBgFIAEoBRInCgtiYXR0bGVfbW9kZRgGIAEoDjISLk5GTXNnLkVCYXR0",
-            "bGVUeXBlEh0KB3RlYW1faWQYByABKAsyDC5ORk1zZy5JZGVudBIeCghtYXRj",
-            "aF9pZBgIIAEoCzIMLk5GTXNnLklkZW50Eh0KB21lbWJlcnMYCSADKAsyDC5O",
-            "Rk1zZy5JZGVudBIkCglpdGVtX2xpc3QYCiADKAsyES5ORk1zZy5JdGVtU3Ry",
-            "dWN0IoEBCgtSZXFTZW5kTWFpbBIeCghyZWNpZXZlchgBIAEoCzIMLk5GTXNn",
-            "LklkZW50EiQKCWl0ZW1fbGlzdBgCIAMoCzIRLk5GTXNnLkl0ZW1TdHJ1Y3QS",
-            "LAoNY3VycmVuY3lfbGlzdBgDIAMoCzIVLk5GTXNnLkN1cnJlbmN5U3RydWN0",
-            "IrkBCg9SZXFTd2l0Y2hTZXJ2ZXISHAoGc2VsZmlkGAEgASgLMgwuTkZNc2cu",
-            "SWRlbnQSFQoNc2VsZl9zZXJ2ZXJpZBgCIAEoAxIXCg90YXJnZXRfc2VydmVy",
-            "aWQYAyABKAMSFQoNZ2F0ZV9zZXJ2ZXJpZBgEIAEoAxIPCgdTY2VuZUlEGAUg",
-            "ASgDEh8KCWNsaWVudF9pZBgGIAEoCzIMLk5GTXNnLklkZW50Eg8KB2dyb3Vw",
-            "SUQYByABKAMidgoPQWNrU3dpdGNoU2VydmVyEhwKBnNlbGZpZBgBIAEoCzIM",
-            "Lk5GTXNnLklkZW50EhUKDXNlbGZfc2VydmVyaWQYAiABKAMSFwoPdGFyZ2V0",
-            "X3NlcnZlcmlkGAMgASgDEhUKDWdhdGVfc2VydmVyaWQYBCABKANiBnByb3Rv",
-            "Mw=="));
+            "aW9uGAggAygLMg4uTkZNc2cuVmVjdG9yMyKkBAoQUmVxQWNrUGxheWVyQ2hh",
+            "dBIfCglwbGF5ZXJfaWQYASABKAsyDC5ORk1zZy5JZGVudBITCgtwbGF5ZXJf",
+            "bmFtZRgCIAEoDBIWCg5wbGF5ZXJfaGVyb19pZBgDIAEoDBIZChFwbGF5ZXJf",
+            "aGVyb19sZXZlbBgEIAEoDBI+CgxjaGF0X2NoYW5uZWwYBSABKA4yKC5ORk1z",
+            "Zy5SZXFBY2tQbGF5ZXJDaGF0LkVHYW1lQ2hhdENoYW5uZWwSOAoJY2hhdF90",
+            "eXBlGAYgASgOMiUuTkZNc2cuUmVxQWNrUGxheWVyQ2hhdC5FR2FtZUNoYXRU",
+            "eXBlEhEKCWNoYXRfaW5mbxgHIAEoDBIfCgl0YXJnZXRfaWQYCCABKAsyDC5O",
+            "Rk1zZy5JZGVudCJyChBFR2FtZUNoYXRDaGFubmVsEg8KC0VHQ0NfR0xPQkFM",
+            "EAASDQoJRUdDQ19DTEFOEAESDwoLRUdDQ19GUklFTkQQAhIPCgtFR0NDX0JB",
+            "VFRMRRADEg0KCUVHQ0NfVEVBTRAEEg0KCUVHQ0NfUk9PTRAFIoQBCg1FR2Ft",
+            "ZUNoYXRUeXBlEg0KCUVHQ1RfVEVYVBAAEg4KCkVHQ1RfVk9JQ0UQARIOCgpF",
+            "R0NUX0VNT0pJEAISFAoQRUdDVF9ET05BVEVfSEVSTxAKEhgKFEVHQ1RfRE9O",
+            "QVRFX0JVSUxESU5HEAsSFAoQRUdDVF9ET05BVEVfSVRFTRAMIr8BChNSZXFB",
+            "Y2tQbGF5ZXJQb3NTeW5jEhsKBW1vdmVyGAEgASgLMgwuTkZNc2cuSWRlbnQS",
+            "DAoEdGltZRgCIAEoBRIZChFJbnRlcnBvbGF0aW9uVGltZRgDIAEoAhIgCghw",
+            "b3NpdGlvbhgEIAEoCzIOLk5GTXNnLlZlY3RvcjMSIQoJZGlyZWN0aW9uGAUg",
+            "ASgLMg4uTkZNc2cuVmVjdG9yMxIOCgZzdGF0dXMYBiABKAUSDQoFZnJhbWUY",
+            "ByABKAUi0wEKCkVmZmVjdERhdGESIgoMZWZmZWN0X2lkZW50GAEgASgLMgwu",
+            "TkZNc2cuSWRlbnQSFAoMZWZmZWN0X3ZhbHVlGAIgASgFEjEKCmVmZmVjdF9y",
+            "bHQYAyABKA4yHS5ORk1zZy5FZmZlY3REYXRhLkVSZXN1bHRUeXBlIlgKC0VS",
+            "ZXN1bHRUeXBlEgwKCEVFVF9GQUlMEAASDwoLRUVUX1NVQ0NFU1MQARIOCgpF",
+            "RVRfUkVGVVNFEAISDAoIRUVUX01JU1MQAxIMCghFRVRfQ1JJVBAEInkKDlJl",
+            "cUFja1VzZVNraWxsEhoKBHVzZXIYASABKAsyDC5ORk1zZy5JZGVudBIQCghz",
+            "a2lsbF9pZBgCIAEoDBIRCgl1c2VfaW5kZXgYAyABKAUSJgoLZWZmZWN0X2Rh",
+            "dGEYBCADKAsyES5ORk1zZy5FZmZlY3REYXRhItcBCg1SZXFBY2tVc2VJdGVt",
+            "EhoKBHVzZXIYASABKAsyDC5ORk1zZy5JZGVudBIfCglpdGVtX2d1aWQYAiAB",
+            "KAsyDC5ORk1zZy5JZGVudBImCgtlZmZlY3RfZGF0YRgDIAMoCzIRLk5GTXNn",
+            "LkVmZmVjdERhdGESHwoEaXRlbRgEIAEoCzIRLk5GTXNnLkl0ZW1TdHJ1Y3QS",
+            "HgoIdGFyZ2V0aWQYBSABKAsyDC5ORk1zZy5JZGVudBIgCghwb3NpdGlvbhgG",
+            "IAEoCzIOLk5GTXNnLlZlY3RvcjMi8wEKD1JlcUFja1N3YXBTY2VuZRI7Cg10",
+            "cmFuc2Zlcl90eXBlGAEgASgOMiQuTkZNc2cuUmVxQWNrU3dhcFNjZW5lLkVH",
+            "YW1lU3dhcFR5cGUSEAoIc2NlbmVfaWQYAiABKAUSDwoHbGluZV9pZBgDIAEo",
+            "BRIJCgF4GAQgASgCEgkKAXkYBSABKAISCQoBehgGIAEoAhIMCgRkYXRhGAcg",
+            "ASgMIlEKDUVHYW1lU3dhcFR5cGUSDwoLRUdTVF9OQVJNQUwQABIOCgpFR1NU",
+            "X0NMT05FEAESDgoKRUdTVF9BUkVOQRACEg8KC0VHU1RfTUlSUk9SEAMiHwoP",
+            "UmVxQWNrSG9tZVNjZW5lEgwKBGRhdGEYASABKAwiMQoKSXRlbVN0cnVjdBIP",
+            "CgdpdGVtX2lkGAEgASgMEhIKCml0ZW1fY291bnQYAiABKAUiPwoOQ3VycmVu",
+            "Y3lTdHJ1Y3QSFQoNY3VycmVuY3lfdHlwZRgBIAEoBRIWCg5jdXJyZW5jeV9j",
+            "b3VudBgCIAEoBSJCChBSZXFBY2tSZWxpdmVIZXJvEg8KB2RpYW1vbmQYASAB",
+            "KAUSHQoHaGVyb19pZBgCIAEoCzIMLk5GTXNnLklkZW50IjIKD1JlcVBpY2tE",
+            "cm9wSXRlbRIfCglpdGVtX2d1aWQYAiABKAsyDC5ORk1zZy5JZGVudCIgCg1S",
+            "ZXFBY2NlcHRUYXNrEg8KB3Rhc2tfaWQYASABKAwiIwoQUmVxQ29tcGVsZXRl",
+            "VGFzaxIPCgd0YXNrX2lkGAEgASgMItIBChNSZXFBZGRTY2VuZUJ1aWxkaW5n",
+            "EhsKA3BvcxgBIAEoCzIOLk5GTXNnLlZlY3RvcjMSGgoEZ3VpZBgCIAEoCzIM",
+            "Lk5GTXNnLklkZW50EhwKBm1hc3RlchgDIAEoCzIMLk5GTXNnLklkZW50EhEK",
+            "CWNvbmZpZ19pZBgEIAEoDBIQCghzY2VuZV9pZBgFIAEoBRITCgttYXN0ZXJf",
+            "bmFtZRgGIAEoDBIVCg1pc19ob21lX3NjZW5lGAcgASgFEhMKC2lzX2J1aWxk",
+            "aW5nGAggASgFIkIKEVJlcVNjZW5lQnVpbGRpbmdzEhAKCHNjZW5lX2lkGAEg",
+            "ASgFEhsKA3BvcxgCIAEoCzIOLk5GTXNnLlZlY3RvcjMiQgoRQWNrU2NlbmVC",
+            "dWlsZGluZ3MSLQoJYnVpbGRpbmdzGAEgAygLMhouTkZNc2cuUmVxQWRkU2Nl",
+            "bmVCdWlsZGluZyJ6ChZSZXFTdG9yZVNjZW5lQnVpbGRpbmdzEhoKBGd1aWQY",
+            "ASABKAsyDC5ORk1zZy5JZGVudBIVCg1ob21lX3NjZW5lX2lkGAIgASgFEi0K",
+            "CWJ1aWxkaW5ncxgDIAMoCzIaLk5GTXNnLlJlcUFkZFNjZW5lQnVpbGRpbmci",
+            "rwEKEFJlcUFja0NyZWF0ZUNsYW4SHQoHY2xhbl9pZBgBIAEoCzIMLk5GTXNn",
+            "LklkZW50EhEKCWNsYW5fbmFtZRgCIAEoDBIRCgljbGFuX2Rlc2MYAyABKAwS",
+            "JAoOY2xhbl9wbGF5ZXJfaWQYBCABKAsyDC5ORk1zZy5JZGVudBIYChBjbGFu",
+            "X3BsYXllcl9uYW1lGAUgASgMEhYKDmNsYW5fcGxheWVyX2JwGAYgASgFIiIK",
+            "DVJlcVNlYXJjaENsYW4SEQoJY2xhbl9uYW1lGAEgASgMIoQCCg1BY2tTZWFy",
+            "Y2hDbGFuEjgKCWNsYW5fbGlzdBgBIAMoCzIlLk5GTXNnLkFja1NlYXJjaENs",
+            "YW4uU2VhcmNoQ2xhbk9iamVjdBq4AQoQU2VhcmNoQ2xhbk9iamVjdBIdCgdj",
+            "bGFuX0lEGAEgASgLMgwuTkZNc2cuSWRlbnQSEQoJY2xhbl9uYW1lGAIgASgM",
+            "EhEKCWNsYW5faWNvbhgDIAEoDBIZChFjbGFuX21lbWJlcl9jb3VudBgEIAEo",
+            "BRIdChVjbGFuX21lbWJlcl9tYXhfY291bnQYBSABKAUSEgoKY2xhbl9ob25v",
+            "chgGIAEoBRIRCgljbGFuX3JhbmsYByABKAUihwEKDlJlcUFja0pvaW5DbGFu",
+            "Eh0KB2NsYW5faWQYASABKAsyDC5ORk1zZy5JZGVudBIkCg5jbGFuX3BsYXll",
+            "cl9pZBgEIAEoCzIMLk5GTXNnLklkZW50EhgKEGNsYW5fcGxheWVyX25hbWUY",
+            "BSABKAwSFgoOY2xhbl9wbGF5ZXJfYnAYBiABKAUiVgoPUmVxQWNrTGVhdmVD",
+            "bGFuEh0KB2NsYW5faWQYASABKAsyDC5ORk1zZy5JZGVudBIkCg5jbGFuX3Bs",
+            "YXllcl9pZBgCIAEoCzIMLk5GTXNnLklkZW50IvYBChNSZXFBY2tPcHJDbGFu",
+            "TWVtYmVyEh0KB2NsYW5faWQYASABKAsyDC5ORk1zZy5JZGVudBIfCglwbGF5",
+            "ZXJfaWQYAiABKAsyDC5ORk1zZy5JZGVudBIfCgltZW1iZXJfaWQYAyABKAsy",
+            "DC5ORk1zZy5JZGVudBI8CgR0eXBlGAQgASgOMi4uTkZNc2cuUmVxQWNrT3By",
+            "Q2xhbk1lbWJlci5FR0NsYW5NZW1iZXJPcHJUeXBlIkAKE0VHQ2xhbk1lbWJl",
+            "ck9wclR5cGUSDQoJRUdBVF9ET1dOEAASCwoHRUdBVF9VUBABEg0KCUVHQVRf",
+            "S0lDSxACIjMKElJlcUVudGVyQ2xhbkVjdHlwZRIdCgdjbGFuX2lkGAEgASgL",
+            "MgwuTkZNc2cuSWRlbnQiPAoPUmVxU2V0RmlnaHRIZXJvEhwKBkhlcm9pZBgB",
+            "IAEoCzIMLk5GTXNnLklkZW50EgsKA1NldBgCIAEoBSIyChJSZXFTd2l0Y2hG",
+            "aWdodEhlcm8SHAoGSGVyb2lkGAEgASgLMgwuTkZNc2cuSWRlbnQiMwoSUmVx",
+            "QnV5SXRlbUZyb21TaG9wEg4KBml0ZW1JRBgBIAEoDBINCgVjb3VudBgCIAEo",
+            "BSKHAwoNUFZQUGxheWVySW5mbxIYCgJpZBgBIAEoCzIMLk5GTXNnLklkZW50",
+            "EicKC2JhdHRsZV9tb2RlGAIgASgOMhIuTkZNc2cuRUJhdHRsZVR5cGUSDQoF",
+            "bGV2ZWwYBCABKAUSFAoMYmF0dGxlX3BvaW50GAUgASgFEgwKBG5hbWUYBiAB",
+            "KAwSDAoEaGVhZBgHIAEoDBIMCgRnb2xkGAggASgFEg8KB2RpYW1vbmQYCSAB",
+            "KAUSEQoJaGVyb19jbmYxGBQgASgMEhEKCWhlcm9fY25mMhgVIAEoDBIRCglo",
+            "ZXJvX2NuZjMYFiABKAwSEgoKaGVyb19zdGFyMRgZIAEoBRISCgpoZXJvX3N0",
+            "YXIyGBogASgFEhIKCmhlcm9fc3RhcjMYGyABKAUSHgoIaGVyb19pZDEYHCAB",
+            "KAsyDC5ORk1zZy5JZGVudBIeCghoZXJvX2lkMhgdIAEoCzIMLk5GTXNnLklk",
+            "ZW50Eh4KCGhlcm9faWQzGB4gASgLMgwuTkZNc2cuSWRlbnQilQEKEFJlcVNl",
+            "YXJjaE9wcG5lbnQSEgoKc2VsZl9zY2VuZRgBIAEoBRIPCgdkaWFtb25kGAIg",
+            "ASgFEhQKDGJhdHRsZV9wb2ludBgDIAEoBRInCgtiYXR0bGVfbW9kZRgEIAEo",
+            "DjISLk5GTXNnLkVCYXR0bGVUeXBlEh0KB2ZyaWVuZHMYCiADKAsyDC5ORk1z",
+            "Zy5JZGVudCLWAQoQQWNrU2VhcmNoT3BwbmVudBIQCghzY2VuZV9pZBgBIAEo",
+            "BRIdCgd0ZWFtX2lkGAIgASgLMgwuTkZNc2cuSWRlbnQSFgoOZ2FtYmxlX2Rp",
+            "YW1vbmQYAyABKAUSIgoMdGVhbV9tZW1iZXJzGAUgAygLMgwuTkZNc2cuSWRl",
+            "bnQSJgoIb3Bwb25lbnQYDiABKAsyFC5ORk1zZy5QVlBQbGF5ZXJJbmZvEi0K",
+            "CWJ1aWxkaW5ncxgUIAMoCzIaLk5GTXNnLlJlcUFkZFNjZW5lQnVpbGRpbmci",
+            "MgoSUmVxQWNrQ2FuY2VsU2VhcmNoEhwKBnNlbGZpZBgBIAEoCzIMLk5GTXNn",
+            "LklkZW50IiAKDFJlcUVuZEJhdHRsZRIQCghhdXRvX2VuZBgBIAEoBSKCAgoM",
+            "QWNrRW5kQmF0dGxlEgsKA3dpbhgBIAEoBRIMCgRzdGFyGAIgASgFEgwKBGdv",
+            "bGQYAyABKAUSCwoDY3VwGAQgASgFEg8KB2RpYW1vbmQYBSABKAUSJwoLYmF0",
+            "dGxlX21vZGUYBiABKA4yEi5ORk1zZy5FQmF0dGxlVHlwZRIdCgd0ZWFtX2lk",
+            "GAcgASgLMgwuTkZNc2cuSWRlbnQSHgoIbWF0Y2hfaWQYCCABKAsyDC5ORk1z",
+            "Zy5JZGVudBIdCgdtZW1iZXJzGAkgAygLMgwuTkZNc2cuSWRlbnQSJAoJaXRl",
+            "bV9saXN0GAogAygLMhEuTkZNc2cuSXRlbVN0cnVjdCKBAQoLUmVxU2VuZE1h",
+            "aWwSHgoIcmVjaWV2ZXIYASABKAsyDC5ORk1zZy5JZGVudBIkCglpdGVtX2xp",
+            "c3QYAiADKAsyES5ORk1zZy5JdGVtU3RydWN0EiwKDWN1cnJlbmN5X2xpc3QY",
+            "AyADKAsyFS5ORk1zZy5DdXJyZW5jeVN0cnVjdCK5AQoPUmVxU3dpdGNoU2Vy",
+            "dmVyEhwKBnNlbGZpZBgBIAEoCzIMLk5GTXNnLklkZW50EhUKDXNlbGZfc2Vy",
+            "dmVyaWQYAiABKAMSFwoPdGFyZ2V0X3NlcnZlcmlkGAMgASgDEhUKDWdhdGVf",
+            "c2VydmVyaWQYBCABKAMSDwoHU2NlbmVJRBgFIAEoAxIfCgljbGllbnRfaWQY",
+            "BiABKAsyDC5ORk1zZy5JZGVudBIPCgdncm91cElEGAcgASgDInYKD0Fja1N3",
+            "aXRjaFNlcnZlchIcCgZzZWxmaWQYASABKAsyDC5ORk1zZy5JZGVudBIVCg1z",
+            "ZWxmX3NlcnZlcmlkGAIgASgDEhcKD3RhcmdldF9zZXJ2ZXJpZBgDIAEoAxIV",
+            "Cg1nYXRlX3NlcnZlcmlkGAQgASgDYgZwcm90bzM="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { global::NFMsg.NFDefineReflection.Descriptor, global::NFMsg.NFMsgBaseReflection.Descriptor, },
           new pbr::GeneratedClrTypeInfo(null, new pbr::GeneratedClrTypeInfo[] {
@@ -171,7 +173,7 @@ namespace NFMsg {
             new pbr::GeneratedClrTypeInfo(typeof(global::NFMsg.AckPlayerLeaveList), global::NFMsg.AckPlayerLeaveList.Parser, new[]{ "object_list" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::NFMsg.ReqAckSynData), global::NFMsg.ReqAckSynData.Parser, new[]{ "syser", "object_list", "data", "syn_type", "msg_id" }, null, new[]{ typeof(global::NFMsg.ReqAckSynData.Types.SynType) }, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::NFMsg.ReqAckPlayerMove), global::NFMsg.ReqAckPlayerMove.Parser, new[]{ "mover", "moveType", "speed", "time", "lastState", "target_pos", "source_pos", "move_direction" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::NFMsg.ReqAckPlayerChat), global::NFMsg.ReqAckPlayerChat.Parser, new[]{ "chat_id", "chat_type", "chat_info", "chat_name", "target_id", "Container_data" }, null, new[]{ typeof(global::NFMsg.ReqAckPlayerChat.Types.EGameChatType) }, new pbr::GeneratedClrTypeInfo[] { new pbr::GeneratedClrTypeInfo(typeof(global::NFMsg.ReqAckPlayerChat.Types.ChatContainer), global::NFMsg.ReqAckPlayerChat.Types.ChatContainer.Parser, new[]{ "ConTainerType", "data_info" }, null, new[]{ typeof(global::NFMsg.ReqAckPlayerChat.Types.ChatContainer.Types.ContainerType) }, null)}),
+            new pbr::GeneratedClrTypeInfo(typeof(global::NFMsg.ReqAckPlayerChat), global::NFMsg.ReqAckPlayerChat.Parser, new[]{ "player_id", "player_name", "player_hero_id", "player_hero_level", "chat_channel", "chat_type", "chat_info", "target_id" }, null, new[]{ typeof(global::NFMsg.ReqAckPlayerChat.Types.EGameChatChannel), typeof(global::NFMsg.ReqAckPlayerChat.Types.EGameChatType) }, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::NFMsg.ReqAckPlayerPosSync), global::NFMsg.ReqAckPlayerPosSync.Parser, new[]{ "mover", "time", "InterpolationTime", "position", "direction", "status", "frame" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::NFMsg.EffectData), global::NFMsg.EffectData.Parser, new[]{ "effect_ident", "effect_value", "effect_rlt" }, null, new[]{ typeof(global::NFMsg.EffectData.Types.EResultType) }, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::NFMsg.ReqAckUseSkill), global::NFMsg.ReqAckUseSkill.Parser, new[]{ "user", "skill_id", "use_index", "effect_data" }, null, null, null),
@@ -2029,12 +2031,14 @@ namespace NFMsg {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public ReqAckPlayerChat(ReqAckPlayerChat other) : this() {
-      chatId_ = other.chatId_ != null ? other.chatId_.Clone() : null;
+      playerId_ = other.playerId_ != null ? other.playerId_.Clone() : null;
+      playerName_ = other.playerName_;
+      playerHeroId_ = other.playerHeroId_;
+      playerHeroLevel_ = other.playerHeroLevel_;
+      chatChannel_ = other.chatChannel_;
       chatType_ = other.chatType_;
       chatInfo_ = other.chatInfo_;
-      chatName_ = other.chatName_;
       targetId_ = other.targetId_ != null ? other.targetId_.Clone() : null;
-      containerData_ = other.containerData_.Clone();
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -2043,19 +2047,63 @@ namespace NFMsg {
       return new ReqAckPlayerChat(this);
     }
 
-    /// <summary>Field number for the "chat_id" field.</summary>
-    public const int chat_idFieldNumber = 1;
-    private global::NFMsg.Ident chatId_;
+    /// <summary>Field number for the "player_id" field.</summary>
+    public const int player_idFieldNumber = 1;
+    private global::NFMsg.Ident playerId_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public global::NFMsg.Ident chat_id {
-      get { return chatId_; }
+    public global::NFMsg.Ident player_id {
+      get { return playerId_; }
       set {
-        chatId_ = value;
+        playerId_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "player_name" field.</summary>
+    public const int player_nameFieldNumber = 2;
+    private pb::ByteString playerName_ = pb::ByteString.Empty;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public pb::ByteString player_name {
+      get { return playerName_; }
+      set {
+        playerName_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    /// <summary>Field number for the "player_hero_id" field.</summary>
+    public const int player_hero_idFieldNumber = 3;
+    private pb::ByteString playerHeroId_ = pb::ByteString.Empty;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public pb::ByteString player_hero_id {
+      get { return playerHeroId_; }
+      set {
+        playerHeroId_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    /// <summary>Field number for the "player_hero_level" field.</summary>
+    public const int player_hero_levelFieldNumber = 4;
+    private pb::ByteString playerHeroLevel_ = pb::ByteString.Empty;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public pb::ByteString player_hero_level {
+      get { return playerHeroLevel_; }
+      set {
+        playerHeroLevel_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    /// <summary>Field number for the "chat_channel" field.</summary>
+    public const int chat_channelFieldNumber = 5;
+    private global::NFMsg.ReqAckPlayerChat.Types.EGameChatChannel chatChannel_ = 0;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public global::NFMsg.ReqAckPlayerChat.Types.EGameChatChannel chat_channel {
+      get { return chatChannel_; }
+      set {
+        chatChannel_ = value;
       }
     }
 
     /// <summary>Field number for the "chat_type" field.</summary>
-    public const int chat_typeFieldNumber = 2;
+    public const int chat_typeFieldNumber = 6;
     private global::NFMsg.ReqAckPlayerChat.Types.EGameChatType chatType_ = 0;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public global::NFMsg.ReqAckPlayerChat.Types.EGameChatType chat_type {
@@ -2066,7 +2114,7 @@ namespace NFMsg {
     }
 
     /// <summary>Field number for the "chat_info" field.</summary>
-    public const int chat_infoFieldNumber = 3;
+    public const int chat_infoFieldNumber = 7;
     private pb::ByteString chatInfo_ = pb::ByteString.Empty;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public pb::ByteString chat_info {
@@ -2076,19 +2124,8 @@ namespace NFMsg {
       }
     }
 
-    /// <summary>Field number for the "chat_name" field.</summary>
-    public const int chat_nameFieldNumber = 4;
-    private pb::ByteString chatName_ = pb::ByteString.Empty;
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public pb::ByteString chat_name {
-      get { return chatName_; }
-      set {
-        chatName_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
-      }
-    }
-
     /// <summary>Field number for the "target_id" field.</summary>
-    public const int target_idFieldNumber = 5;
+    public const int target_idFieldNumber = 8;
     private global::NFMsg.Ident targetId_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public global::NFMsg.Ident target_id {
@@ -2096,16 +2133,6 @@ namespace NFMsg {
       set {
         targetId_ = value;
       }
-    }
-
-    /// <summary>Field number for the "Container_data" field.</summary>
-    public const int Container_dataFieldNumber = 6;
-    private static readonly pb::FieldCodec<global::NFMsg.ReqAckPlayerChat.Types.ChatContainer> _repeated_containerData_codec
-        = pb::FieldCodec.ForMessage(50, global::NFMsg.ReqAckPlayerChat.Types.ChatContainer.Parser);
-    private readonly pbc::RepeatedField<global::NFMsg.ReqAckPlayerChat.Types.ChatContainer> containerData_ = new pbc::RepeatedField<global::NFMsg.ReqAckPlayerChat.Types.ChatContainer>();
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public pbc::RepeatedField<global::NFMsg.ReqAckPlayerChat.Types.ChatContainer> Container_data {
-      get { return containerData_; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -2121,24 +2148,28 @@ namespace NFMsg {
       if (ReferenceEquals(other, this)) {
         return true;
       }
-      if (!object.Equals(chat_id, other.chat_id)) return false;
+      if (!object.Equals(player_id, other.player_id)) return false;
+      if (player_name != other.player_name) return false;
+      if (player_hero_id != other.player_hero_id) return false;
+      if (player_hero_level != other.player_hero_level) return false;
+      if (chat_channel != other.chat_channel) return false;
       if (chat_type != other.chat_type) return false;
       if (chat_info != other.chat_info) return false;
-      if (chat_name != other.chat_name) return false;
       if (!object.Equals(target_id, other.target_id)) return false;
-      if(!containerData_.Equals(other.containerData_)) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override int GetHashCode() {
       int hash = 1;
-      if (chatId_ != null) hash ^= chat_id.GetHashCode();
+      if (playerId_ != null) hash ^= player_id.GetHashCode();
+      if (player_name.Length != 0) hash ^= player_name.GetHashCode();
+      if (player_hero_id.Length != 0) hash ^= player_hero_id.GetHashCode();
+      if (player_hero_level.Length != 0) hash ^= player_hero_level.GetHashCode();
+      if (chat_channel != 0) hash ^= chat_channel.GetHashCode();
       if (chat_type != 0) hash ^= chat_type.GetHashCode();
       if (chat_info.Length != 0) hash ^= chat_info.GetHashCode();
-      if (chat_name.Length != 0) hash ^= chat_name.GetHashCode();
       if (targetId_ != null) hash ^= target_id.GetHashCode();
-      hash ^= containerData_.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -2152,27 +2183,38 @@ namespace NFMsg {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public void WriteTo(pb::CodedOutputStream output) {
-      if (chatId_ != null) {
+      if (playerId_ != null) {
         output.WriteRawTag(10);
-        output.WriteMessage(chat_id);
+        output.WriteMessage(player_id);
+      }
+      if (player_name.Length != 0) {
+        output.WriteRawTag(18);
+        output.WriteBytes(player_name);
+      }
+      if (player_hero_id.Length != 0) {
+        output.WriteRawTag(26);
+        output.WriteBytes(player_hero_id);
+      }
+      if (player_hero_level.Length != 0) {
+        output.WriteRawTag(34);
+        output.WriteBytes(player_hero_level);
+      }
+      if (chat_channel != 0) {
+        output.WriteRawTag(40);
+        output.WriteEnum((int) chat_channel);
       }
       if (chat_type != 0) {
-        output.WriteRawTag(16);
+        output.WriteRawTag(48);
         output.WriteEnum((int) chat_type);
       }
       if (chat_info.Length != 0) {
-        output.WriteRawTag(26);
+        output.WriteRawTag(58);
         output.WriteBytes(chat_info);
       }
-      if (chat_name.Length != 0) {
-        output.WriteRawTag(34);
-        output.WriteBytes(chat_name);
-      }
       if (targetId_ != null) {
-        output.WriteRawTag(42);
+        output.WriteRawTag(66);
         output.WriteMessage(target_id);
       }
-      containerData_.WriteTo(output, _repeated_containerData_codec);
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
@@ -2181,8 +2223,20 @@ namespace NFMsg {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public int CalculateSize() {
       int size = 0;
-      if (chatId_ != null) {
-        size += 1 + pb::CodedOutputStream.ComputeMessageSize(chat_id);
+      if (playerId_ != null) {
+        size += 1 + pb::CodedOutputStream.ComputeMessageSize(player_id);
+      }
+      if (player_name.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeBytesSize(player_name);
+      }
+      if (player_hero_id.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeBytesSize(player_hero_id);
+      }
+      if (player_hero_level.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeBytesSize(player_hero_level);
+      }
+      if (chat_channel != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeEnumSize((int) chat_channel);
       }
       if (chat_type != 0) {
         size += 1 + pb::CodedOutputStream.ComputeEnumSize((int) chat_type);
@@ -2190,13 +2244,9 @@ namespace NFMsg {
       if (chat_info.Length != 0) {
         size += 1 + pb::CodedOutputStream.ComputeBytesSize(chat_info);
       }
-      if (chat_name.Length != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeBytesSize(chat_name);
-      }
       if (targetId_ != null) {
         size += 1 + pb::CodedOutputStream.ComputeMessageSize(target_id);
       }
-      size += containerData_.CalculateSize(_repeated_containerData_codec);
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
       }
@@ -2208,11 +2258,23 @@ namespace NFMsg {
       if (other == null) {
         return;
       }
-      if (other.chatId_ != null) {
-        if (chatId_ == null) {
-          chatId_ = new global::NFMsg.Ident();
+      if (other.playerId_ != null) {
+        if (playerId_ == null) {
+          playerId_ = new global::NFMsg.Ident();
         }
-        chat_id.MergeFrom(other.chat_id);
+        player_id.MergeFrom(other.player_id);
+      }
+      if (other.player_name.Length != 0) {
+        player_name = other.player_name;
+      }
+      if (other.player_hero_id.Length != 0) {
+        player_hero_id = other.player_hero_id;
+      }
+      if (other.player_hero_level.Length != 0) {
+        player_hero_level = other.player_hero_level;
+      }
+      if (other.chat_channel != 0) {
+        chat_channel = other.chat_channel;
       }
       if (other.chat_type != 0) {
         chat_type = other.chat_type;
@@ -2220,16 +2282,12 @@ namespace NFMsg {
       if (other.chat_info.Length != 0) {
         chat_info = other.chat_info;
       }
-      if (other.chat_name.Length != 0) {
-        chat_name = other.chat_name;
-      }
       if (other.targetId_ != null) {
         if (targetId_ == null) {
           targetId_ = new global::NFMsg.Ident();
         }
         target_id.MergeFrom(other.target_id);
       }
-      containerData_.Add(other.containerData_);
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
 
@@ -2242,33 +2300,41 @@ namespace NFMsg {
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
           case 10: {
-            if (chatId_ == null) {
-              chatId_ = new global::NFMsg.Ident();
+            if (playerId_ == null) {
+              playerId_ = new global::NFMsg.Ident();
             }
-            input.ReadMessage(chatId_);
+            input.ReadMessage(playerId_);
             break;
           }
-          case 16: {
-            chatType_ = (global::NFMsg.ReqAckPlayerChat.Types.EGameChatType) input.ReadEnum();
+          case 18: {
+            player_name = input.ReadBytes();
             break;
           }
           case 26: {
-            chat_info = input.ReadBytes();
+            player_hero_id = input.ReadBytes();
             break;
           }
           case 34: {
-            chat_name = input.ReadBytes();
+            player_hero_level = input.ReadBytes();
             break;
           }
-          case 42: {
+          case 40: {
+            chatChannel_ = (global::NFMsg.ReqAckPlayerChat.Types.EGameChatChannel) input.ReadEnum();
+            break;
+          }
+          case 48: {
+            chatType_ = (global::NFMsg.ReqAckPlayerChat.Types.EGameChatType) input.ReadEnum();
+            break;
+          }
+          case 58: {
+            chat_info = input.ReadBytes();
+            break;
+          }
+          case 66: {
             if (targetId_ == null) {
               targetId_ = new global::NFMsg.Ident();
             }
             input.ReadMessage(targetId_);
-            break;
-          }
-          case 50: {
-            containerData_.AddEntriesFrom(input, _repeated_containerData_codec);
             break;
           }
         }
@@ -2279,185 +2345,22 @@ namespace NFMsg {
     /// <summary>Container for nested types declared in the ReqAckPlayerChat message type.</summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static partial class Types {
-      public enum EGameChatType {
-        [pbr::OriginalName("EGCT_CLAN")] EGCT_CLAN = 0,
-        [pbr::OriginalName("EGCT_PRIVATE")] EGCT_PRIVATE = 1,
-        [pbr::OriginalName("EGCT_TEAM")] EGCT_TEAM = 2,
-        [pbr::OriginalName("EGCT_WORLD")] EGCT_WORLD = 3,
+      public enum EGameChatChannel {
+        [pbr::OriginalName("EGCC_GLOBAL")] EGCC_GLOBAL = 0,
+        [pbr::OriginalName("EGCC_CLAN")] EGCC_CLAN = 1,
+        [pbr::OriginalName("EGCC_FRIEND")] EGCC_FRIEND = 2,
+        [pbr::OriginalName("EGCC_BATTLE")] EGCC_BATTLE = 3,
+        [pbr::OriginalName("EGCC_TEAM")] EGCC_TEAM = 4,
+        [pbr::OriginalName("EGCC_ROOM")] EGCC_ROOM = 5,
       }
 
-      public sealed partial class ChatContainer : pb::IMessage<ChatContainer> {
-        private static readonly pb::MessageParser<ChatContainer> _parser = new pb::MessageParser<ChatContainer>(() => new ChatContainer());
-        private pb::UnknownFieldSet _unknownFields;
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-        public static pb::MessageParser<ChatContainer> Parser { get { return _parser; } }
-
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-        public static pbr::MessageDescriptor Descriptor {
-          get { return global::NFMsg.ReqAckPlayerChat.Descriptor.NestedTypes[0]; }
-        }
-
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-        pbr::MessageDescriptor pb::IMessage.Descriptor {
-          get { return Descriptor; }
-        }
-
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-        public ChatContainer() {
-          OnConstruction();
-        }
-
-        partial void OnConstruction();
-
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-        public ChatContainer(ChatContainer other) : this() {
-          conTainerType_ = other.conTainerType_;
-          dataInfo_ = other.dataInfo_;
-          _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
-        }
-
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-        public ChatContainer Clone() {
-          return new ChatContainer(this);
-        }
-
-        /// <summary>Field number for the "ConTainerType" field.</summary>
-        public const int ConTainerTypeFieldNumber = 2;
-        private int conTainerType_;
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-        public int ConTainerType {
-          get { return conTainerType_; }
-          set {
-            conTainerType_ = value;
-          }
-        }
-
-        /// <summary>Field number for the "data_info" field.</summary>
-        public const int data_infoFieldNumber = 3;
-        private pb::ByteString dataInfo_ = pb::ByteString.Empty;
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-        public pb::ByteString data_info {
-          get { return dataInfo_; }
-          set {
-            dataInfo_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
-          }
-        }
-
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-        public override bool Equals(object other) {
-          return Equals(other as ChatContainer);
-        }
-
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-        public bool Equals(ChatContainer other) {
-          if (ReferenceEquals(other, null)) {
-            return false;
-          }
-          if (ReferenceEquals(other, this)) {
-            return true;
-          }
-          if (ConTainerType != other.ConTainerType) return false;
-          if (data_info != other.data_info) return false;
-          return Equals(_unknownFields, other._unknownFields);
-        }
-
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-        public override int GetHashCode() {
-          int hash = 1;
-          if (ConTainerType != 0) hash ^= ConTainerType.GetHashCode();
-          if (data_info.Length != 0) hash ^= data_info.GetHashCode();
-          if (_unknownFields != null) {
-            hash ^= _unknownFields.GetHashCode();
-          }
-          return hash;
-        }
-
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-        public override string ToString() {
-          return pb::JsonFormatter.ToDiagnosticString(this);
-        }
-
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-        public void WriteTo(pb::CodedOutputStream output) {
-          if (ConTainerType != 0) {
-            output.WriteRawTag(16);
-            output.WriteInt32(ConTainerType);
-          }
-          if (data_info.Length != 0) {
-            output.WriteRawTag(26);
-            output.WriteBytes(data_info);
-          }
-          if (_unknownFields != null) {
-            _unknownFields.WriteTo(output);
-          }
-        }
-
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-        public int CalculateSize() {
-          int size = 0;
-          if (ConTainerType != 0) {
-            size += 1 + pb::CodedOutputStream.ComputeInt32Size(ConTainerType);
-          }
-          if (data_info.Length != 0) {
-            size += 1 + pb::CodedOutputStream.ComputeBytesSize(data_info);
-          }
-          if (_unknownFields != null) {
-            size += _unknownFields.CalculateSize();
-          }
-          return size;
-        }
-
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-        public void MergeFrom(ChatContainer other) {
-          if (other == null) {
-            return;
-          }
-          if (other.ConTainerType != 0) {
-            ConTainerType = other.ConTainerType;
-          }
-          if (other.data_info.Length != 0) {
-            data_info = other.data_info;
-          }
-          _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
-        }
-
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-        public void MergeFrom(pb::CodedInputStream input) {
-          uint tag;
-          while ((tag = input.ReadTag()) != 0) {
-            switch(tag) {
-              default:
-                _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
-                break;
-              case 16: {
-                ConTainerType = input.ReadInt32();
-                break;
-              }
-              case 26: {
-                data_info = input.ReadBytes();
-                break;
-              }
-            }
-          }
-        }
-
-        #region Nested types
-        /// <summary>Container for nested types declared in the ChatContainer message type.</summary>
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-        public static partial class Types {
-          public enum ContainerType {
-            /// <summary>
-            /// </summary>
-            [pbr::OriginalName("EGCT_UNKNOW")] EGCT_UNKNOW = 0,
-            /// <summary>
-            ///道具
-            /// </summary>
-            [pbr::OriginalName("EGCT_ITEM")] EGCT_ITEM = 1,
-          }
-
-        }
-        #endregion
-
+      public enum EGameChatType {
+        [pbr::OriginalName("EGCT_TEXT")] EGCT_TEXT = 0,
+        [pbr::OriginalName("EGCT_VOICE")] EGCT_VOICE = 1,
+        [pbr::OriginalName("EGCT_EMOJI")] EGCT_EMOJI = 2,
+        [pbr::OriginalName("EGCT_DONATE_HERO")] EGCT_DONATE_HERO = 10,
+        [pbr::OriginalName("EGCT_DONATE_BUILDING")] EGCT_DONATE_BUILDING = 11,
+        [pbr::OriginalName("EGCT_DONATE_ITEM")] EGCT_DONATE_ITEM = 12,
       }
 
     }

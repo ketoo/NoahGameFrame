@@ -41,7 +41,7 @@ namespace protobuf_NFMsgShare_2eproto {
 struct LIBPROTOC_EXPORT TableStruct {
   static const ::google::protobuf::internal::ParseTableField entries[];
   static const ::google::protobuf::internal::AuxillaryParseTableField aux[];
-  static const ::google::protobuf::internal::ParseTable schema[47];
+  static const ::google::protobuf::internal::ParseTable schema[46];
   static const ::google::protobuf::internal::FieldMetadata field_metadata[];
   static const ::google::protobuf::internal::SerializationTable serialization_table[];
   static const ::google::protobuf::uint32 offsets[];
@@ -115,9 +115,6 @@ LIBPROTOC_EXPORT extern ReqAckOprClanMemberDefaultTypeInternal _ReqAckOprClanMem
 class ReqAckPlayerChat;
 class ReqAckPlayerChatDefaultTypeInternal;
 LIBPROTOC_EXPORT extern ReqAckPlayerChatDefaultTypeInternal _ReqAckPlayerChat_default_instance_;
-class ReqAckPlayerChat_ChatContainer;
-class ReqAckPlayerChat_ChatContainerDefaultTypeInternal;
-LIBPROTOC_EXPORT extern ReqAckPlayerChat_ChatContainerDefaultTypeInternal _ReqAckPlayerChat_ChatContainer_default_instance_;
 class ReqAckPlayerMove;
 class ReqAckPlayerMoveDefaultTypeInternal;
 LIBPROTOC_EXPORT extern ReqAckPlayerMoveDefaultTypeInternal _ReqAckPlayerMove_default_instance_;
@@ -215,7 +212,6 @@ template<> LIBPROTOC_EXPORT ::NFMsg::ReqAckJoinClan* Arena::CreateMaybeMessage<:
 template<> LIBPROTOC_EXPORT ::NFMsg::ReqAckLeaveClan* Arena::CreateMaybeMessage<::NFMsg::ReqAckLeaveClan>(Arena*);
 template<> LIBPROTOC_EXPORT ::NFMsg::ReqAckOprClanMember* Arena::CreateMaybeMessage<::NFMsg::ReqAckOprClanMember>(Arena*);
 template<> LIBPROTOC_EXPORT ::NFMsg::ReqAckPlayerChat* Arena::CreateMaybeMessage<::NFMsg::ReqAckPlayerChat>(Arena*);
-template<> LIBPROTOC_EXPORT ::NFMsg::ReqAckPlayerChat_ChatContainer* Arena::CreateMaybeMessage<::NFMsg::ReqAckPlayerChat_ChatContainer>(Arena*);
 template<> LIBPROTOC_EXPORT ::NFMsg::ReqAckPlayerMove* Arena::CreateMaybeMessage<::NFMsg::ReqAckPlayerMove>(Arena*);
 template<> LIBPROTOC_EXPORT ::NFMsg::ReqAckPlayerPosSync* Arena::CreateMaybeMessage<::NFMsg::ReqAckPlayerPosSync>(Arena*);
 template<> LIBPROTOC_EXPORT ::NFMsg::ReqAckReliveHero* Arena::CreateMaybeMessage<::NFMsg::ReqAckReliveHero>(Arena*);
@@ -268,38 +264,44 @@ inline bool ReqAckSynData_SynType_Parse(
   return ::google::protobuf::internal::ParseNamedEnum<ReqAckSynData_SynType>(
     ReqAckSynData_SynType_descriptor(), name, value);
 }
-enum ReqAckPlayerChat_ChatContainer_ContainerType {
-  ReqAckPlayerChat_ChatContainer_ContainerType_EGCT_UNKNOW = 0,
-  ReqAckPlayerChat_ChatContainer_ContainerType_EGCT_ITEM = 1,
-  ReqAckPlayerChat_ChatContainer_ContainerType_ReqAckPlayerChat_ChatContainer_ContainerType_INT_MIN_SENTINEL_DO_NOT_USE_ = ::google::protobuf::kint32min,
-  ReqAckPlayerChat_ChatContainer_ContainerType_ReqAckPlayerChat_ChatContainer_ContainerType_INT_MAX_SENTINEL_DO_NOT_USE_ = ::google::protobuf::kint32max
+enum ReqAckPlayerChat_EGameChatChannel {
+  ReqAckPlayerChat_EGameChatChannel_EGCC_GLOBAL = 0,
+  ReqAckPlayerChat_EGameChatChannel_EGCC_CLAN = 1,
+  ReqAckPlayerChat_EGameChatChannel_EGCC_FRIEND = 2,
+  ReqAckPlayerChat_EGameChatChannel_EGCC_BATTLE = 3,
+  ReqAckPlayerChat_EGameChatChannel_EGCC_TEAM = 4,
+  ReqAckPlayerChat_EGameChatChannel_EGCC_ROOM = 5,
+  ReqAckPlayerChat_EGameChatChannel_ReqAckPlayerChat_EGameChatChannel_INT_MIN_SENTINEL_DO_NOT_USE_ = ::google::protobuf::kint32min,
+  ReqAckPlayerChat_EGameChatChannel_ReqAckPlayerChat_EGameChatChannel_INT_MAX_SENTINEL_DO_NOT_USE_ = ::google::protobuf::kint32max
 };
-LIBPROTOC_EXPORT bool ReqAckPlayerChat_ChatContainer_ContainerType_IsValid(int value);
-const ReqAckPlayerChat_ChatContainer_ContainerType ReqAckPlayerChat_ChatContainer_ContainerType_ContainerType_MIN = ReqAckPlayerChat_ChatContainer_ContainerType_EGCT_UNKNOW;
-const ReqAckPlayerChat_ChatContainer_ContainerType ReqAckPlayerChat_ChatContainer_ContainerType_ContainerType_MAX = ReqAckPlayerChat_ChatContainer_ContainerType_EGCT_ITEM;
-const int ReqAckPlayerChat_ChatContainer_ContainerType_ContainerType_ARRAYSIZE = ReqAckPlayerChat_ChatContainer_ContainerType_ContainerType_MAX + 1;
+LIBPROTOC_EXPORT bool ReqAckPlayerChat_EGameChatChannel_IsValid(int value);
+const ReqAckPlayerChat_EGameChatChannel ReqAckPlayerChat_EGameChatChannel_EGameChatChannel_MIN = ReqAckPlayerChat_EGameChatChannel_EGCC_GLOBAL;
+const ReqAckPlayerChat_EGameChatChannel ReqAckPlayerChat_EGameChatChannel_EGameChatChannel_MAX = ReqAckPlayerChat_EGameChatChannel_EGCC_ROOM;
+const int ReqAckPlayerChat_EGameChatChannel_EGameChatChannel_ARRAYSIZE = ReqAckPlayerChat_EGameChatChannel_EGameChatChannel_MAX + 1;
 
-LIBPROTOC_EXPORT const ::google::protobuf::EnumDescriptor* ReqAckPlayerChat_ChatContainer_ContainerType_descriptor();
-inline const ::std::string& ReqAckPlayerChat_ChatContainer_ContainerType_Name(ReqAckPlayerChat_ChatContainer_ContainerType value) {
+LIBPROTOC_EXPORT const ::google::protobuf::EnumDescriptor* ReqAckPlayerChat_EGameChatChannel_descriptor();
+inline const ::std::string& ReqAckPlayerChat_EGameChatChannel_Name(ReqAckPlayerChat_EGameChatChannel value) {
   return ::google::protobuf::internal::NameOfEnum(
-    ReqAckPlayerChat_ChatContainer_ContainerType_descriptor(), value);
+    ReqAckPlayerChat_EGameChatChannel_descriptor(), value);
 }
-inline bool ReqAckPlayerChat_ChatContainer_ContainerType_Parse(
-    const ::std::string& name, ReqAckPlayerChat_ChatContainer_ContainerType* value) {
-  return ::google::protobuf::internal::ParseNamedEnum<ReqAckPlayerChat_ChatContainer_ContainerType>(
-    ReqAckPlayerChat_ChatContainer_ContainerType_descriptor(), name, value);
+inline bool ReqAckPlayerChat_EGameChatChannel_Parse(
+    const ::std::string& name, ReqAckPlayerChat_EGameChatChannel* value) {
+  return ::google::protobuf::internal::ParseNamedEnum<ReqAckPlayerChat_EGameChatChannel>(
+    ReqAckPlayerChat_EGameChatChannel_descriptor(), name, value);
 }
 enum ReqAckPlayerChat_EGameChatType {
-  ReqAckPlayerChat_EGameChatType_EGCT_CLAN = 0,
-  ReqAckPlayerChat_EGameChatType_EGCT_PRIVATE = 1,
-  ReqAckPlayerChat_EGameChatType_EGCT_TEAM = 2,
-  ReqAckPlayerChat_EGameChatType_EGCT_WORLD = 3,
+  ReqAckPlayerChat_EGameChatType_EGCT_TEXT = 0,
+  ReqAckPlayerChat_EGameChatType_EGCT_VOICE = 1,
+  ReqAckPlayerChat_EGameChatType_EGCT_EMOJI = 2,
+  ReqAckPlayerChat_EGameChatType_EGCT_DONATE_HERO = 10,
+  ReqAckPlayerChat_EGameChatType_EGCT_DONATE_BUILDING = 11,
+  ReqAckPlayerChat_EGameChatType_EGCT_DONATE_ITEM = 12,
   ReqAckPlayerChat_EGameChatType_ReqAckPlayerChat_EGameChatType_INT_MIN_SENTINEL_DO_NOT_USE_ = ::google::protobuf::kint32min,
   ReqAckPlayerChat_EGameChatType_ReqAckPlayerChat_EGameChatType_INT_MAX_SENTINEL_DO_NOT_USE_ = ::google::protobuf::kint32max
 };
 LIBPROTOC_EXPORT bool ReqAckPlayerChat_EGameChatType_IsValid(int value);
-const ReqAckPlayerChat_EGameChatType ReqAckPlayerChat_EGameChatType_EGameChatType_MIN = ReqAckPlayerChat_EGameChatType_EGCT_CLAN;
-const ReqAckPlayerChat_EGameChatType ReqAckPlayerChat_EGameChatType_EGameChatType_MAX = ReqAckPlayerChat_EGameChatType_EGCT_WORLD;
+const ReqAckPlayerChat_EGameChatType ReqAckPlayerChat_EGameChatType_EGameChatType_MIN = ReqAckPlayerChat_EGameChatType_EGCT_TEXT;
+const ReqAckPlayerChat_EGameChatType ReqAckPlayerChat_EGameChatType_EGameChatType_MAX = ReqAckPlayerChat_EGameChatType_EGCT_DONATE_ITEM;
 const int ReqAckPlayerChat_EGameChatType_EGameChatType_ARRAYSIZE = ReqAckPlayerChat_EGameChatType_EGameChatType_MAX + 1;
 
 LIBPROTOC_EXPORT const ::google::protobuf::EnumDescriptor* ReqAckPlayerChat_EGameChatType_descriptor();
@@ -1596,150 +1598,6 @@ class LIBPROTOC_EXPORT ReqAckPlayerMove : public ::google::protobuf::Message /* 
 };
 // -------------------------------------------------------------------
 
-class LIBPROTOC_EXPORT ReqAckPlayerChat_ChatContainer : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:NFMsg.ReqAckPlayerChat.ChatContainer) */ {
- public:
-  ReqAckPlayerChat_ChatContainer();
-  virtual ~ReqAckPlayerChat_ChatContainer();
-
-  ReqAckPlayerChat_ChatContainer(const ReqAckPlayerChat_ChatContainer& from);
-
-  inline ReqAckPlayerChat_ChatContainer& operator=(const ReqAckPlayerChat_ChatContainer& from) {
-    CopyFrom(from);
-    return *this;
-  }
-  #if LANG_CXX11
-  ReqAckPlayerChat_ChatContainer(ReqAckPlayerChat_ChatContainer&& from) noexcept
-    : ReqAckPlayerChat_ChatContainer() {
-    *this = ::std::move(from);
-  }
-
-  inline ReqAckPlayerChat_ChatContainer& operator=(ReqAckPlayerChat_ChatContainer&& from) noexcept {
-    if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
-      if (this != &from) InternalSwap(&from);
-    } else {
-      CopyFrom(from);
-    }
-    return *this;
-  }
-  #endif
-  static const ::google::protobuf::Descriptor* descriptor();
-  static const ReqAckPlayerChat_ChatContainer& default_instance();
-
-  static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
-  static inline const ReqAckPlayerChat_ChatContainer* internal_default_instance() {
-    return reinterpret_cast<const ReqAckPlayerChat_ChatContainer*>(
-               &_ReqAckPlayerChat_ChatContainer_default_instance_);
-  }
-  static constexpr int kIndexInFileMessages =
-    9;
-
-  void Swap(ReqAckPlayerChat_ChatContainer* other);
-  friend void swap(ReqAckPlayerChat_ChatContainer& a, ReqAckPlayerChat_ChatContainer& b) {
-    a.Swap(&b);
-  }
-
-  // implements Message ----------------------------------------------
-
-  inline ReqAckPlayerChat_ChatContainer* New() const final {
-    return CreateMaybeMessage<ReqAckPlayerChat_ChatContainer>(NULL);
-  }
-
-  ReqAckPlayerChat_ChatContainer* New(::google::protobuf::Arena* arena) const final {
-    return CreateMaybeMessage<ReqAckPlayerChat_ChatContainer>(arena);
-  }
-  void CopyFrom(const ::google::protobuf::Message& from) final;
-  void MergeFrom(const ::google::protobuf::Message& from) final;
-  void CopyFrom(const ReqAckPlayerChat_ChatContainer& from);
-  void MergeFrom(const ReqAckPlayerChat_ChatContainer& from);
-  void Clear() final;
-  bool IsInitialized() const final;
-
-  size_t ByteSizeLong() const final;
-  bool MergePartialFromCodedStream(
-      ::google::protobuf::io::CodedInputStream* input) final;
-  void SerializeWithCachedSizes(
-      ::google::protobuf::io::CodedOutputStream* output) const final;
-  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
-      bool deterministic, ::google::protobuf::uint8* target) const final;
-  int GetCachedSize() const final { return _cached_size_.Get(); }
-
-  private:
-  void SharedCtor();
-  void SharedDtor();
-  void SetCachedSize(int size) const final;
-  void InternalSwap(ReqAckPlayerChat_ChatContainer* other);
-  private:
-  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
-    return NULL;
-  }
-  inline void* MaybeArenaPtr() const {
-    return NULL;
-  }
-  public:
-
-  ::google::protobuf::Metadata GetMetadata() const final;
-
-  // nested types ----------------------------------------------------
-
-  typedef ReqAckPlayerChat_ChatContainer_ContainerType ContainerType;
-  static const ContainerType EGCT_UNKNOW =
-    ReqAckPlayerChat_ChatContainer_ContainerType_EGCT_UNKNOW;
-  static const ContainerType EGCT_ITEM =
-    ReqAckPlayerChat_ChatContainer_ContainerType_EGCT_ITEM;
-  static inline bool ContainerType_IsValid(int value) {
-    return ReqAckPlayerChat_ChatContainer_ContainerType_IsValid(value);
-  }
-  static const ContainerType ContainerType_MIN =
-    ReqAckPlayerChat_ChatContainer_ContainerType_ContainerType_MIN;
-  static const ContainerType ContainerType_MAX =
-    ReqAckPlayerChat_ChatContainer_ContainerType_ContainerType_MAX;
-  static const int ContainerType_ARRAYSIZE =
-    ReqAckPlayerChat_ChatContainer_ContainerType_ContainerType_ARRAYSIZE;
-  static inline const ::google::protobuf::EnumDescriptor*
-  ContainerType_descriptor() {
-    return ReqAckPlayerChat_ChatContainer_ContainerType_descriptor();
-  }
-  static inline const ::std::string& ContainerType_Name(ContainerType value) {
-    return ReqAckPlayerChat_ChatContainer_ContainerType_Name(value);
-  }
-  static inline bool ContainerType_Parse(const ::std::string& name,
-      ContainerType* value) {
-    return ReqAckPlayerChat_ChatContainer_ContainerType_Parse(name, value);
-  }
-
-  // accessors -------------------------------------------------------
-
-  // bytes data_info = 3;
-  void clear_data_info();
-  static const int kDataInfoFieldNumber = 3;
-  const ::std::string& data_info() const;
-  void set_data_info(const ::std::string& value);
-  #if LANG_CXX11
-  void set_data_info(::std::string&& value);
-  #endif
-  void set_data_info(const char* value);
-  void set_data_info(const void* value, size_t size);
-  ::std::string* mutable_data_info();
-  ::std::string* release_data_info();
-  void set_allocated_data_info(::std::string* data_info);
-
-  // int32 ConTainerType = 2;
-  void clear_containertype();
-  static const int kConTainerTypeFieldNumber = 2;
-  ::google::protobuf::int32 containertype() const;
-  void set_containertype(::google::protobuf::int32 value);
-
-  // @@protoc_insertion_point(class_scope:NFMsg.ReqAckPlayerChat.ChatContainer)
- private:
-
-  ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
-  ::google::protobuf::internal::ArenaStringPtr data_info_;
-  ::google::protobuf::int32 containertype_;
-  mutable ::google::protobuf::internal::CachedSize _cached_size_;
-  friend struct ::protobuf_NFMsgShare_2eproto::TableStruct;
-};
-// -------------------------------------------------------------------
-
 class LIBPROTOC_EXPORT ReqAckPlayerChat : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:NFMsg.ReqAckPlayerChat) */ {
  public:
   ReqAckPlayerChat();
@@ -1775,7 +1633,7 @@ class LIBPROTOC_EXPORT ReqAckPlayerChat : public ::google::protobuf::Message /* 
                &_ReqAckPlayerChat_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    10;
+    9;
 
   void Swap(ReqAckPlayerChat* other);
   friend void swap(ReqAckPlayerChat& a, ReqAckPlayerChat& b) {
@@ -1825,17 +1683,53 @@ class LIBPROTOC_EXPORT ReqAckPlayerChat : public ::google::protobuf::Message /* 
 
   // nested types ----------------------------------------------------
 
-  typedef ReqAckPlayerChat_ChatContainer ChatContainer;
+  typedef ReqAckPlayerChat_EGameChatChannel EGameChatChannel;
+  static const EGameChatChannel EGCC_GLOBAL =
+    ReqAckPlayerChat_EGameChatChannel_EGCC_GLOBAL;
+  static const EGameChatChannel EGCC_CLAN =
+    ReqAckPlayerChat_EGameChatChannel_EGCC_CLAN;
+  static const EGameChatChannel EGCC_FRIEND =
+    ReqAckPlayerChat_EGameChatChannel_EGCC_FRIEND;
+  static const EGameChatChannel EGCC_BATTLE =
+    ReqAckPlayerChat_EGameChatChannel_EGCC_BATTLE;
+  static const EGameChatChannel EGCC_TEAM =
+    ReqAckPlayerChat_EGameChatChannel_EGCC_TEAM;
+  static const EGameChatChannel EGCC_ROOM =
+    ReqAckPlayerChat_EGameChatChannel_EGCC_ROOM;
+  static inline bool EGameChatChannel_IsValid(int value) {
+    return ReqAckPlayerChat_EGameChatChannel_IsValid(value);
+  }
+  static const EGameChatChannel EGameChatChannel_MIN =
+    ReqAckPlayerChat_EGameChatChannel_EGameChatChannel_MIN;
+  static const EGameChatChannel EGameChatChannel_MAX =
+    ReqAckPlayerChat_EGameChatChannel_EGameChatChannel_MAX;
+  static const int EGameChatChannel_ARRAYSIZE =
+    ReqAckPlayerChat_EGameChatChannel_EGameChatChannel_ARRAYSIZE;
+  static inline const ::google::protobuf::EnumDescriptor*
+  EGameChatChannel_descriptor() {
+    return ReqAckPlayerChat_EGameChatChannel_descriptor();
+  }
+  static inline const ::std::string& EGameChatChannel_Name(EGameChatChannel value) {
+    return ReqAckPlayerChat_EGameChatChannel_Name(value);
+  }
+  static inline bool EGameChatChannel_Parse(const ::std::string& name,
+      EGameChatChannel* value) {
+    return ReqAckPlayerChat_EGameChatChannel_Parse(name, value);
+  }
 
   typedef ReqAckPlayerChat_EGameChatType EGameChatType;
-  static const EGameChatType EGCT_CLAN =
-    ReqAckPlayerChat_EGameChatType_EGCT_CLAN;
-  static const EGameChatType EGCT_PRIVATE =
-    ReqAckPlayerChat_EGameChatType_EGCT_PRIVATE;
-  static const EGameChatType EGCT_TEAM =
-    ReqAckPlayerChat_EGameChatType_EGCT_TEAM;
-  static const EGameChatType EGCT_WORLD =
-    ReqAckPlayerChat_EGameChatType_EGCT_WORLD;
+  static const EGameChatType EGCT_TEXT =
+    ReqAckPlayerChat_EGameChatType_EGCT_TEXT;
+  static const EGameChatType EGCT_VOICE =
+    ReqAckPlayerChat_EGameChatType_EGCT_VOICE;
+  static const EGameChatType EGCT_EMOJI =
+    ReqAckPlayerChat_EGameChatType_EGCT_EMOJI;
+  static const EGameChatType EGCT_DONATE_HERO =
+    ReqAckPlayerChat_EGameChatType_EGCT_DONATE_HERO;
+  static const EGameChatType EGCT_DONATE_BUILDING =
+    ReqAckPlayerChat_EGameChatType_EGCT_DONATE_BUILDING;
+  static const EGameChatType EGCT_DONATE_ITEM =
+    ReqAckPlayerChat_EGameChatType_EGCT_DONATE_ITEM;
   static inline bool EGameChatType_IsValid(int value) {
     return ReqAckPlayerChat_EGameChatType_IsValid(value);
   }
@@ -1859,21 +1753,51 @@ class LIBPROTOC_EXPORT ReqAckPlayerChat : public ::google::protobuf::Message /* 
 
   // accessors -------------------------------------------------------
 
-  // repeated .NFMsg.ReqAckPlayerChat.ChatContainer Container_data = 6;
-  int container_data_size() const;
-  void clear_container_data();
-  static const int kContainerDataFieldNumber = 6;
-  ::NFMsg::ReqAckPlayerChat_ChatContainer* mutable_container_data(int index);
-  ::google::protobuf::RepeatedPtrField< ::NFMsg::ReqAckPlayerChat_ChatContainer >*
-      mutable_container_data();
-  const ::NFMsg::ReqAckPlayerChat_ChatContainer& container_data(int index) const;
-  ::NFMsg::ReqAckPlayerChat_ChatContainer* add_container_data();
-  const ::google::protobuf::RepeatedPtrField< ::NFMsg::ReqAckPlayerChat_ChatContainer >&
-      container_data() const;
+  // bytes player_name = 2;
+  void clear_player_name();
+  static const int kPlayerNameFieldNumber = 2;
+  const ::std::string& player_name() const;
+  void set_player_name(const ::std::string& value);
+  #if LANG_CXX11
+  void set_player_name(::std::string&& value);
+  #endif
+  void set_player_name(const char* value);
+  void set_player_name(const void* value, size_t size);
+  ::std::string* mutable_player_name();
+  ::std::string* release_player_name();
+  void set_allocated_player_name(::std::string* player_name);
 
-  // bytes chat_info = 3;
+  // bytes player_hero_id = 3;
+  void clear_player_hero_id();
+  static const int kPlayerHeroIdFieldNumber = 3;
+  const ::std::string& player_hero_id() const;
+  void set_player_hero_id(const ::std::string& value);
+  #if LANG_CXX11
+  void set_player_hero_id(::std::string&& value);
+  #endif
+  void set_player_hero_id(const char* value);
+  void set_player_hero_id(const void* value, size_t size);
+  ::std::string* mutable_player_hero_id();
+  ::std::string* release_player_hero_id();
+  void set_allocated_player_hero_id(::std::string* player_hero_id);
+
+  // bytes player_hero_level = 4;
+  void clear_player_hero_level();
+  static const int kPlayerHeroLevelFieldNumber = 4;
+  const ::std::string& player_hero_level() const;
+  void set_player_hero_level(const ::std::string& value);
+  #if LANG_CXX11
+  void set_player_hero_level(::std::string&& value);
+  #endif
+  void set_player_hero_level(const char* value);
+  void set_player_hero_level(const void* value, size_t size);
+  ::std::string* mutable_player_hero_level();
+  ::std::string* release_player_hero_level();
+  void set_allocated_player_hero_level(::std::string* player_hero_level);
+
+  // bytes chat_info = 7;
   void clear_chat_info();
-  static const int kChatInfoFieldNumber = 3;
+  static const int kChatInfoFieldNumber = 7;
   const ::std::string& chat_info() const;
   void set_chat_info(const ::std::string& value);
   #if LANG_CXX11
@@ -1885,36 +1809,22 @@ class LIBPROTOC_EXPORT ReqAckPlayerChat : public ::google::protobuf::Message /* 
   ::std::string* release_chat_info();
   void set_allocated_chat_info(::std::string* chat_info);
 
-  // bytes chat_name = 4;
-  void clear_chat_name();
-  static const int kChatNameFieldNumber = 4;
-  const ::std::string& chat_name() const;
-  void set_chat_name(const ::std::string& value);
-  #if LANG_CXX11
-  void set_chat_name(::std::string&& value);
-  #endif
-  void set_chat_name(const char* value);
-  void set_chat_name(const void* value, size_t size);
-  ::std::string* mutable_chat_name();
-  ::std::string* release_chat_name();
-  void set_allocated_chat_name(::std::string* chat_name);
-
-  // .NFMsg.Ident chat_id = 1;
-  bool has_chat_id() const;
-  void clear_chat_id();
-  static const int kChatIdFieldNumber = 1;
+  // .NFMsg.Ident player_id = 1;
+  bool has_player_id() const;
+  void clear_player_id();
+  static const int kPlayerIdFieldNumber = 1;
   private:
-  const ::NFMsg::Ident& _internal_chat_id() const;
+  const ::NFMsg::Ident& _internal_player_id() const;
   public:
-  const ::NFMsg::Ident& chat_id() const;
-  ::NFMsg::Ident* release_chat_id();
-  ::NFMsg::Ident* mutable_chat_id();
-  void set_allocated_chat_id(::NFMsg::Ident* chat_id);
+  const ::NFMsg::Ident& player_id() const;
+  ::NFMsg::Ident* release_player_id();
+  ::NFMsg::Ident* mutable_player_id();
+  void set_allocated_player_id(::NFMsg::Ident* player_id);
 
-  // .NFMsg.Ident target_id = 5;
+  // .NFMsg.Ident target_id = 8;
   bool has_target_id() const;
   void clear_target_id();
-  static const int kTargetIdFieldNumber = 5;
+  static const int kTargetIdFieldNumber = 8;
   private:
   const ::NFMsg::Ident& _internal_target_id() const;
   public:
@@ -1923,9 +1833,15 @@ class LIBPROTOC_EXPORT ReqAckPlayerChat : public ::google::protobuf::Message /* 
   ::NFMsg::Ident* mutable_target_id();
   void set_allocated_target_id(::NFMsg::Ident* target_id);
 
-  // .NFMsg.ReqAckPlayerChat.EGameChatType chat_type = 2;
+  // .NFMsg.ReqAckPlayerChat.EGameChatChannel chat_channel = 5;
+  void clear_chat_channel();
+  static const int kChatChannelFieldNumber = 5;
+  ::NFMsg::ReqAckPlayerChat_EGameChatChannel chat_channel() const;
+  void set_chat_channel(::NFMsg::ReqAckPlayerChat_EGameChatChannel value);
+
+  // .NFMsg.ReqAckPlayerChat.EGameChatType chat_type = 6;
   void clear_chat_type();
-  static const int kChatTypeFieldNumber = 2;
+  static const int kChatTypeFieldNumber = 6;
   ::NFMsg::ReqAckPlayerChat_EGameChatType chat_type() const;
   void set_chat_type(::NFMsg::ReqAckPlayerChat_EGameChatType value);
 
@@ -1933,11 +1849,13 @@ class LIBPROTOC_EXPORT ReqAckPlayerChat : public ::google::protobuf::Message /* 
  private:
 
   ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
-  ::google::protobuf::RepeatedPtrField< ::NFMsg::ReqAckPlayerChat_ChatContainer > container_data_;
+  ::google::protobuf::internal::ArenaStringPtr player_name_;
+  ::google::protobuf::internal::ArenaStringPtr player_hero_id_;
+  ::google::protobuf::internal::ArenaStringPtr player_hero_level_;
   ::google::protobuf::internal::ArenaStringPtr chat_info_;
-  ::google::protobuf::internal::ArenaStringPtr chat_name_;
-  ::NFMsg::Ident* chat_id_;
+  ::NFMsg::Ident* player_id_;
   ::NFMsg::Ident* target_id_;
+  int chat_channel_;
   int chat_type_;
   mutable ::google::protobuf::internal::CachedSize _cached_size_;
   friend struct ::protobuf_NFMsgShare_2eproto::TableStruct;
@@ -1979,7 +1897,7 @@ class LIBPROTOC_EXPORT ReqAckPlayerPosSync : public ::google::protobuf::Message 
                &_ReqAckPlayerPosSync_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    11;
+    10;
 
   void Swap(ReqAckPlayerPosSync* other);
   friend void swap(ReqAckPlayerPosSync& a, ReqAckPlayerPosSync& b) {
@@ -2142,7 +2060,7 @@ class LIBPROTOC_EXPORT EffectData : public ::google::protobuf::Message /* @@prot
                &_EffectData_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    12;
+    11;
 
   void Swap(EffectData* other);
   friend void swap(EffectData& a, EffectData& b) {
@@ -2297,7 +2215,7 @@ class LIBPROTOC_EXPORT ReqAckUseSkill : public ::google::protobuf::Message /* @@
                &_ReqAckUseSkill_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    13;
+    12;
 
   void Swap(ReqAckUseSkill* other);
   friend void swap(ReqAckUseSkill& a, ReqAckUseSkill& b) {
@@ -2441,7 +2359,7 @@ class LIBPROTOC_EXPORT ReqAckUseItem : public ::google::protobuf::Message /* @@p
                &_ReqAckUseItem_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    14;
+    13;
 
   void Swap(ReqAckUseItem* other);
   friend void swap(ReqAckUseItem& a, ReqAckUseItem& b) {
@@ -2615,7 +2533,7 @@ class LIBPROTOC_EXPORT ReqAckSwapScene : public ::google::protobuf::Message /* @
                &_ReqAckSwapScene_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    15;
+    14;
 
   void Swap(ReqAckSwapScene* other);
   friend void swap(ReqAckSwapScene& a, ReqAckSwapScene& b) {
@@ -2798,7 +2716,7 @@ class LIBPROTOC_EXPORT ReqAckHomeScene : public ::google::protobuf::Message /* @
                &_ReqAckHomeScene_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    16;
+    15;
 
   void Swap(ReqAckHomeScene* other);
   friend void swap(ReqAckHomeScene& a, ReqAckHomeScene& b) {
@@ -2909,7 +2827,7 @@ class LIBPROTOC_EXPORT ItemStruct : public ::google::protobuf::Message /* @@prot
                &_ItemStruct_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    17;
+    16;
 
   void Swap(ItemStruct* other);
   friend void swap(ItemStruct& a, ItemStruct& b) {
@@ -3027,7 +2945,7 @@ class LIBPROTOC_EXPORT CurrencyStruct : public ::google::protobuf::Message /* @@
                &_CurrencyStruct_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    18;
+    17;
 
   void Swap(CurrencyStruct* other);
   friend void swap(CurrencyStruct& a, CurrencyStruct& b) {
@@ -3137,7 +3055,7 @@ class LIBPROTOC_EXPORT ReqAckReliveHero : public ::google::protobuf::Message /* 
                &_ReqAckReliveHero_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    19;
+    18;
 
   void Swap(ReqAckReliveHero* other);
   friend void swap(ReqAckReliveHero& a, ReqAckReliveHero& b) {
@@ -3253,7 +3171,7 @@ class LIBPROTOC_EXPORT ReqPickDropItem : public ::google::protobuf::Message /* @
                &_ReqPickDropItem_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    20;
+    19;
 
   void Swap(ReqPickDropItem* other);
   friend void swap(ReqPickDropItem& a, ReqPickDropItem& b) {
@@ -3362,7 +3280,7 @@ class LIBPROTOC_EXPORT ReqAcceptTask : public ::google::protobuf::Message /* @@p
                &_ReqAcceptTask_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    21;
+    20;
 
   void Swap(ReqAcceptTask* other);
   friend void swap(ReqAcceptTask& a, ReqAcceptTask& b) {
@@ -3473,7 +3391,7 @@ class LIBPROTOC_EXPORT ReqCompeleteTask : public ::google::protobuf::Message /* 
                &_ReqCompeleteTask_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    22;
+    21;
 
   void Swap(ReqCompeleteTask* other);
   friend void swap(ReqCompeleteTask& a, ReqCompeleteTask& b) {
@@ -3584,7 +3502,7 @@ class LIBPROTOC_EXPORT ReqAddSceneBuilding : public ::google::protobuf::Message 
                &_ReqAddSceneBuilding_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    23;
+    22;
 
   void Swap(ReqAddSceneBuilding* other);
   friend void swap(ReqAddSceneBuilding& a, ReqAddSceneBuilding& b) {
@@ -3770,7 +3688,7 @@ class LIBPROTOC_EXPORT ReqSceneBuildings : public ::google::protobuf::Message /*
                &_ReqSceneBuildings_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    24;
+    23;
 
   void Swap(ReqSceneBuildings* other);
   friend void swap(ReqSceneBuildings& a, ReqSceneBuildings& b) {
@@ -3886,7 +3804,7 @@ class LIBPROTOC_EXPORT AckSceneBuildings : public ::google::protobuf::Message /*
                &_AckSceneBuildings_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    25;
+    24;
 
   void Swap(AckSceneBuildings* other);
   friend void swap(AckSceneBuildings& a, AckSceneBuildings& b) {
@@ -3995,7 +3913,7 @@ class LIBPROTOC_EXPORT ReqStoreSceneBuildings : public ::google::protobuf::Messa
                &_ReqStoreSceneBuildings_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    26;
+    25;
 
   void Swap(ReqStoreSceneBuildings* other);
   friend void swap(ReqStoreSceneBuildings& a, ReqStoreSceneBuildings& b) {
@@ -4124,7 +4042,7 @@ class LIBPROTOC_EXPORT ReqAckCreateClan : public ::google::protobuf::Message /* 
                &_ReqAckCreateClan_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    27;
+    26;
 
   void Swap(ReqAckCreateClan* other);
   friend void swap(ReqAckCreateClan& a, ReqAckCreateClan& b) {
@@ -4298,7 +4216,7 @@ class LIBPROTOC_EXPORT ReqSearchClan : public ::google::protobuf::Message /* @@p
                &_ReqSearchClan_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    28;
+    27;
 
   void Swap(ReqSearchClan* other);
   friend void swap(ReqSearchClan& a, ReqSearchClan& b) {
@@ -4409,7 +4327,7 @@ class LIBPROTOC_EXPORT AckSearchClan_SearchClanObject : public ::google::protobu
                &_AckSearchClan_SearchClanObject_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    29;
+    28;
 
   void Swap(AckSearchClan_SearchClanObject* other);
   friend void swap(AckSearchClan_SearchClanObject& a, AckSearchClan_SearchClanObject& b) {
@@ -4576,7 +4494,7 @@ class LIBPROTOC_EXPORT AckSearchClan : public ::google::protobuf::Message /* @@p
                &_AckSearchClan_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    30;
+    29;
 
   void Swap(AckSearchClan* other);
   friend void swap(AckSearchClan& a, AckSearchClan& b) {
@@ -4687,7 +4605,7 @@ class LIBPROTOC_EXPORT ReqAckJoinClan : public ::google::protobuf::Message /* @@
                &_ReqAckJoinClan_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    31;
+    30;
 
   void Swap(ReqAckJoinClan* other);
   friend void swap(ReqAckJoinClan& a, ReqAckJoinClan& b) {
@@ -4831,7 +4749,7 @@ class LIBPROTOC_EXPORT ReqAckLeaveClan : public ::google::protobuf::Message /* @
                &_ReqAckLeaveClan_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    32;
+    31;
 
   void Swap(ReqAckLeaveClan* other);
   friend void swap(ReqAckLeaveClan& a, ReqAckLeaveClan& b) {
@@ -4953,7 +4871,7 @@ class LIBPROTOC_EXPORT ReqAckOprClanMember : public ::google::protobuf::Message 
                &_ReqAckOprClanMember_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    33;
+    32;
 
   void Swap(ReqAckOprClanMember* other);
   friend void swap(ReqAckOprClanMember& a, ReqAckOprClanMember& b) {
@@ -5123,7 +5041,7 @@ class LIBPROTOC_EXPORT ReqEnterClanEctype : public ::google::protobuf::Message /
                &_ReqEnterClanEctype_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    34;
+    33;
 
   void Swap(ReqEnterClanEctype* other);
   friend void swap(ReqEnterClanEctype& a, ReqEnterClanEctype& b) {
@@ -5232,7 +5150,7 @@ class LIBPROTOC_EXPORT ReqSetFightHero : public ::google::protobuf::Message /* @
                &_ReqSetFightHero_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    35;
+    34;
 
   void Swap(ReqSetFightHero* other);
   friend void swap(ReqSetFightHero& a, ReqSetFightHero& b) {
@@ -5348,7 +5266,7 @@ class LIBPROTOC_EXPORT ReqSwitchFightHero : public ::google::protobuf::Message /
                &_ReqSwitchFightHero_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    36;
+    35;
 
   void Swap(ReqSwitchFightHero* other);
   friend void swap(ReqSwitchFightHero& a, ReqSwitchFightHero& b) {
@@ -5457,7 +5375,7 @@ class LIBPROTOC_EXPORT ReqBuyItemFromShop : public ::google::protobuf::Message /
                &_ReqBuyItemFromShop_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    37;
+    36;
 
   void Swap(ReqBuyItemFromShop* other);
   friend void swap(ReqBuyItemFromShop& a, ReqBuyItemFromShop& b) {
@@ -5575,7 +5493,7 @@ class LIBPROTOC_EXPORT PVPPlayerInfo : public ::google::protobuf::Message /* @@p
                &_PVPPlayerInfo_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    38;
+    37;
 
   void Swap(PVPPlayerInfo* other);
   friend void swap(PVPPlayerInfo& a, PVPPlayerInfo& b) {
@@ -5854,7 +5772,7 @@ class LIBPROTOC_EXPORT ReqSearchOppnent : public ::google::protobuf::Message /* 
                &_ReqSearchOppnent_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    39;
+    38;
 
   void Swap(ReqSearchOppnent* other);
   friend void swap(ReqSearchOppnent& a, ReqSearchOppnent& b) {
@@ -5991,7 +5909,7 @@ class LIBPROTOC_EXPORT AckSearchOppnent : public ::google::protobuf::Message /* 
                &_AckSearchOppnent_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    40;
+    39;
 
   void Swap(AckSearchOppnent* other);
   friend void swap(AckSearchOppnent& a, AckSearchOppnent& b) {
@@ -6153,7 +6071,7 @@ class LIBPROTOC_EXPORT ReqAckCancelSearch : public ::google::protobuf::Message /
                &_ReqAckCancelSearch_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    41;
+    40;
 
   void Swap(ReqAckCancelSearch* other);
   friend void swap(ReqAckCancelSearch& a, ReqAckCancelSearch& b) {
@@ -6262,7 +6180,7 @@ class LIBPROTOC_EXPORT ReqEndBattle : public ::google::protobuf::Message /* @@pr
                &_ReqEndBattle_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    42;
+    41;
 
   void Swap(ReqEndBattle* other);
   friend void swap(ReqEndBattle& a, ReqEndBattle& b) {
@@ -6365,7 +6283,7 @@ class LIBPROTOC_EXPORT AckEndBattle : public ::google::protobuf::Message /* @@pr
                &_AckEndBattle_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    43;
+    42;
 
   void Swap(AckEndBattle* other);
   friend void swap(AckEndBattle& a, AckEndBattle& b) {
@@ -6555,7 +6473,7 @@ class LIBPROTOC_EXPORT ReqSendMail : public ::google::protobuf::Message /* @@pro
                &_ReqSendMail_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    44;
+    43;
 
   void Swap(ReqSendMail* other);
   friend void swap(ReqSendMail& a, ReqSendMail& b) {
@@ -6690,7 +6608,7 @@ class LIBPROTOC_EXPORT ReqSwitchServer : public ::google::protobuf::Message /* @
                &_ReqSwitchServer_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    45;
+    44;
 
   void Swap(ReqSwitchServer* other);
   friend void swap(ReqSwitchServer& a, ReqSwitchServer& b) {
@@ -6847,7 +6765,7 @@ class LIBPROTOC_EXPORT AckSwitchServer : public ::google::protobuf::Message /* @
                &_AckSwitchServer_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    46;
+    45;
 
   void Swap(AckSwitchServer* other);
   friend void swap(AckSwitchServer& a, AckSwitchServer& b) {
@@ -7831,128 +7749,230 @@ ReqAckPlayerMove::move_direction() const {
 
 // -------------------------------------------------------------------
 
-// ReqAckPlayerChat_ChatContainer
-
-// int32 ConTainerType = 2;
-inline void ReqAckPlayerChat_ChatContainer::clear_containertype() {
-  containertype_ = 0;
-}
-inline ::google::protobuf::int32 ReqAckPlayerChat_ChatContainer::containertype() const {
-  // @@protoc_insertion_point(field_get:NFMsg.ReqAckPlayerChat.ChatContainer.ConTainerType)
-  return containertype_;
-}
-inline void ReqAckPlayerChat_ChatContainer::set_containertype(::google::protobuf::int32 value) {
-  
-  containertype_ = value;
-  // @@protoc_insertion_point(field_set:NFMsg.ReqAckPlayerChat.ChatContainer.ConTainerType)
-}
-
-// bytes data_info = 3;
-inline void ReqAckPlayerChat_ChatContainer::clear_data_info() {
-  data_info_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-}
-inline const ::std::string& ReqAckPlayerChat_ChatContainer::data_info() const {
-  // @@protoc_insertion_point(field_get:NFMsg.ReqAckPlayerChat.ChatContainer.data_info)
-  return data_info_.GetNoArena();
-}
-inline void ReqAckPlayerChat_ChatContainer::set_data_info(const ::std::string& value) {
-  
-  data_info_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
-  // @@protoc_insertion_point(field_set:NFMsg.ReqAckPlayerChat.ChatContainer.data_info)
-}
-#if LANG_CXX11
-inline void ReqAckPlayerChat_ChatContainer::set_data_info(::std::string&& value) {
-  
-  data_info_.SetNoArena(
-    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
-  // @@protoc_insertion_point(field_set_rvalue:NFMsg.ReqAckPlayerChat.ChatContainer.data_info)
-}
-#endif
-inline void ReqAckPlayerChat_ChatContainer::set_data_info(const char* value) {
-  GOOGLE_DCHECK(value != NULL);
-  
-  data_info_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
-  // @@protoc_insertion_point(field_set_char:NFMsg.ReqAckPlayerChat.ChatContainer.data_info)
-}
-inline void ReqAckPlayerChat_ChatContainer::set_data_info(const void* value, size_t size) {
-  
-  data_info_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
-      ::std::string(reinterpret_cast<const char*>(value), size));
-  // @@protoc_insertion_point(field_set_pointer:NFMsg.ReqAckPlayerChat.ChatContainer.data_info)
-}
-inline ::std::string* ReqAckPlayerChat_ChatContainer::mutable_data_info() {
-  
-  // @@protoc_insertion_point(field_mutable:NFMsg.ReqAckPlayerChat.ChatContainer.data_info)
-  return data_info_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-}
-inline ::std::string* ReqAckPlayerChat_ChatContainer::release_data_info() {
-  // @@protoc_insertion_point(field_release:NFMsg.ReqAckPlayerChat.ChatContainer.data_info)
-  
-  return data_info_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-}
-inline void ReqAckPlayerChat_ChatContainer::set_allocated_data_info(::std::string* data_info) {
-  if (data_info != NULL) {
-    
-  } else {
-    
-  }
-  data_info_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), data_info);
-  // @@protoc_insertion_point(field_set_allocated:NFMsg.ReqAckPlayerChat.ChatContainer.data_info)
-}
-
-// -------------------------------------------------------------------
-
 // ReqAckPlayerChat
 
-// .NFMsg.Ident chat_id = 1;
-inline bool ReqAckPlayerChat::has_chat_id() const {
-  return this != internal_default_instance() && chat_id_ != NULL;
+// .NFMsg.Ident player_id = 1;
+inline bool ReqAckPlayerChat::has_player_id() const {
+  return this != internal_default_instance() && player_id_ != NULL;
 }
-inline const ::NFMsg::Ident& ReqAckPlayerChat::_internal_chat_id() const {
-  return *chat_id_;
+inline const ::NFMsg::Ident& ReqAckPlayerChat::_internal_player_id() const {
+  return *player_id_;
 }
-inline const ::NFMsg::Ident& ReqAckPlayerChat::chat_id() const {
-  const ::NFMsg::Ident* p = chat_id_;
-  // @@protoc_insertion_point(field_get:NFMsg.ReqAckPlayerChat.chat_id)
+inline const ::NFMsg::Ident& ReqAckPlayerChat::player_id() const {
+  const ::NFMsg::Ident* p = player_id_;
+  // @@protoc_insertion_point(field_get:NFMsg.ReqAckPlayerChat.player_id)
   return p != NULL ? *p : *reinterpret_cast<const ::NFMsg::Ident*>(
       &::NFMsg::_Ident_default_instance_);
 }
-inline ::NFMsg::Ident* ReqAckPlayerChat::release_chat_id() {
-  // @@protoc_insertion_point(field_release:NFMsg.ReqAckPlayerChat.chat_id)
+inline ::NFMsg::Ident* ReqAckPlayerChat::release_player_id() {
+  // @@protoc_insertion_point(field_release:NFMsg.ReqAckPlayerChat.player_id)
   
-  ::NFMsg::Ident* temp = chat_id_;
-  chat_id_ = NULL;
+  ::NFMsg::Ident* temp = player_id_;
+  player_id_ = NULL;
   return temp;
 }
-inline ::NFMsg::Ident* ReqAckPlayerChat::mutable_chat_id() {
+inline ::NFMsg::Ident* ReqAckPlayerChat::mutable_player_id() {
   
-  if (chat_id_ == NULL) {
+  if (player_id_ == NULL) {
     auto* p = CreateMaybeMessage<::NFMsg::Ident>(GetArenaNoVirtual());
-    chat_id_ = p;
+    player_id_ = p;
   }
-  // @@protoc_insertion_point(field_mutable:NFMsg.ReqAckPlayerChat.chat_id)
-  return chat_id_;
+  // @@protoc_insertion_point(field_mutable:NFMsg.ReqAckPlayerChat.player_id)
+  return player_id_;
 }
-inline void ReqAckPlayerChat::set_allocated_chat_id(::NFMsg::Ident* chat_id) {
+inline void ReqAckPlayerChat::set_allocated_player_id(::NFMsg::Ident* player_id) {
   ::google::protobuf::Arena* message_arena = GetArenaNoVirtual();
   if (message_arena == NULL) {
-    delete reinterpret_cast< ::google::protobuf::MessageLite*>(chat_id_);
+    delete reinterpret_cast< ::google::protobuf::MessageLite*>(player_id_);
   }
-  if (chat_id) {
+  if (player_id) {
     ::google::protobuf::Arena* submessage_arena = NULL;
     if (message_arena != submessage_arena) {
-      chat_id = ::google::protobuf::internal::GetOwnedMessage(
-          message_arena, chat_id, submessage_arena);
+      player_id = ::google::protobuf::internal::GetOwnedMessage(
+          message_arena, player_id, submessage_arena);
     }
     
   } else {
     
   }
-  chat_id_ = chat_id;
-  // @@protoc_insertion_point(field_set_allocated:NFMsg.ReqAckPlayerChat.chat_id)
+  player_id_ = player_id;
+  // @@protoc_insertion_point(field_set_allocated:NFMsg.ReqAckPlayerChat.player_id)
 }
 
-// .NFMsg.ReqAckPlayerChat.EGameChatType chat_type = 2;
+// bytes player_name = 2;
+inline void ReqAckPlayerChat::clear_player_name() {
+  player_name_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline const ::std::string& ReqAckPlayerChat::player_name() const {
+  // @@protoc_insertion_point(field_get:NFMsg.ReqAckPlayerChat.player_name)
+  return player_name_.GetNoArena();
+}
+inline void ReqAckPlayerChat::set_player_name(const ::std::string& value) {
+  
+  player_name_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
+  // @@protoc_insertion_point(field_set:NFMsg.ReqAckPlayerChat.player_name)
+}
+#if LANG_CXX11
+inline void ReqAckPlayerChat::set_player_name(::std::string&& value) {
+  
+  player_name_.SetNoArena(
+    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
+  // @@protoc_insertion_point(field_set_rvalue:NFMsg.ReqAckPlayerChat.player_name)
+}
+#endif
+inline void ReqAckPlayerChat::set_player_name(const char* value) {
+  GOOGLE_DCHECK(value != NULL);
+  
+  player_name_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:NFMsg.ReqAckPlayerChat.player_name)
+}
+inline void ReqAckPlayerChat::set_player_name(const void* value, size_t size) {
+  
+  player_name_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+      ::std::string(reinterpret_cast<const char*>(value), size));
+  // @@protoc_insertion_point(field_set_pointer:NFMsg.ReqAckPlayerChat.player_name)
+}
+inline ::std::string* ReqAckPlayerChat::mutable_player_name() {
+  
+  // @@protoc_insertion_point(field_mutable:NFMsg.ReqAckPlayerChat.player_name)
+  return player_name_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline ::std::string* ReqAckPlayerChat::release_player_name() {
+  // @@protoc_insertion_point(field_release:NFMsg.ReqAckPlayerChat.player_name)
+  
+  return player_name_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline void ReqAckPlayerChat::set_allocated_player_name(::std::string* player_name) {
+  if (player_name != NULL) {
+    
+  } else {
+    
+  }
+  player_name_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), player_name);
+  // @@protoc_insertion_point(field_set_allocated:NFMsg.ReqAckPlayerChat.player_name)
+}
+
+// bytes player_hero_id = 3;
+inline void ReqAckPlayerChat::clear_player_hero_id() {
+  player_hero_id_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline const ::std::string& ReqAckPlayerChat::player_hero_id() const {
+  // @@protoc_insertion_point(field_get:NFMsg.ReqAckPlayerChat.player_hero_id)
+  return player_hero_id_.GetNoArena();
+}
+inline void ReqAckPlayerChat::set_player_hero_id(const ::std::string& value) {
+  
+  player_hero_id_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
+  // @@protoc_insertion_point(field_set:NFMsg.ReqAckPlayerChat.player_hero_id)
+}
+#if LANG_CXX11
+inline void ReqAckPlayerChat::set_player_hero_id(::std::string&& value) {
+  
+  player_hero_id_.SetNoArena(
+    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
+  // @@protoc_insertion_point(field_set_rvalue:NFMsg.ReqAckPlayerChat.player_hero_id)
+}
+#endif
+inline void ReqAckPlayerChat::set_player_hero_id(const char* value) {
+  GOOGLE_DCHECK(value != NULL);
+  
+  player_hero_id_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:NFMsg.ReqAckPlayerChat.player_hero_id)
+}
+inline void ReqAckPlayerChat::set_player_hero_id(const void* value, size_t size) {
+  
+  player_hero_id_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+      ::std::string(reinterpret_cast<const char*>(value), size));
+  // @@protoc_insertion_point(field_set_pointer:NFMsg.ReqAckPlayerChat.player_hero_id)
+}
+inline ::std::string* ReqAckPlayerChat::mutable_player_hero_id() {
+  
+  // @@protoc_insertion_point(field_mutable:NFMsg.ReqAckPlayerChat.player_hero_id)
+  return player_hero_id_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline ::std::string* ReqAckPlayerChat::release_player_hero_id() {
+  // @@protoc_insertion_point(field_release:NFMsg.ReqAckPlayerChat.player_hero_id)
+  
+  return player_hero_id_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline void ReqAckPlayerChat::set_allocated_player_hero_id(::std::string* player_hero_id) {
+  if (player_hero_id != NULL) {
+    
+  } else {
+    
+  }
+  player_hero_id_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), player_hero_id);
+  // @@protoc_insertion_point(field_set_allocated:NFMsg.ReqAckPlayerChat.player_hero_id)
+}
+
+// bytes player_hero_level = 4;
+inline void ReqAckPlayerChat::clear_player_hero_level() {
+  player_hero_level_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline const ::std::string& ReqAckPlayerChat::player_hero_level() const {
+  // @@protoc_insertion_point(field_get:NFMsg.ReqAckPlayerChat.player_hero_level)
+  return player_hero_level_.GetNoArena();
+}
+inline void ReqAckPlayerChat::set_player_hero_level(const ::std::string& value) {
+  
+  player_hero_level_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
+  // @@protoc_insertion_point(field_set:NFMsg.ReqAckPlayerChat.player_hero_level)
+}
+#if LANG_CXX11
+inline void ReqAckPlayerChat::set_player_hero_level(::std::string&& value) {
+  
+  player_hero_level_.SetNoArena(
+    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
+  // @@protoc_insertion_point(field_set_rvalue:NFMsg.ReqAckPlayerChat.player_hero_level)
+}
+#endif
+inline void ReqAckPlayerChat::set_player_hero_level(const char* value) {
+  GOOGLE_DCHECK(value != NULL);
+  
+  player_hero_level_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:NFMsg.ReqAckPlayerChat.player_hero_level)
+}
+inline void ReqAckPlayerChat::set_player_hero_level(const void* value, size_t size) {
+  
+  player_hero_level_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+      ::std::string(reinterpret_cast<const char*>(value), size));
+  // @@protoc_insertion_point(field_set_pointer:NFMsg.ReqAckPlayerChat.player_hero_level)
+}
+inline ::std::string* ReqAckPlayerChat::mutable_player_hero_level() {
+  
+  // @@protoc_insertion_point(field_mutable:NFMsg.ReqAckPlayerChat.player_hero_level)
+  return player_hero_level_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline ::std::string* ReqAckPlayerChat::release_player_hero_level() {
+  // @@protoc_insertion_point(field_release:NFMsg.ReqAckPlayerChat.player_hero_level)
+  
+  return player_hero_level_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline void ReqAckPlayerChat::set_allocated_player_hero_level(::std::string* player_hero_level) {
+  if (player_hero_level != NULL) {
+    
+  } else {
+    
+  }
+  player_hero_level_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), player_hero_level);
+  // @@protoc_insertion_point(field_set_allocated:NFMsg.ReqAckPlayerChat.player_hero_level)
+}
+
+// .NFMsg.ReqAckPlayerChat.EGameChatChannel chat_channel = 5;
+inline void ReqAckPlayerChat::clear_chat_channel() {
+  chat_channel_ = 0;
+}
+inline ::NFMsg::ReqAckPlayerChat_EGameChatChannel ReqAckPlayerChat::chat_channel() const {
+  // @@protoc_insertion_point(field_get:NFMsg.ReqAckPlayerChat.chat_channel)
+  return static_cast< ::NFMsg::ReqAckPlayerChat_EGameChatChannel >(chat_channel_);
+}
+inline void ReqAckPlayerChat::set_chat_channel(::NFMsg::ReqAckPlayerChat_EGameChatChannel value) {
+  
+  chat_channel_ = value;
+  // @@protoc_insertion_point(field_set:NFMsg.ReqAckPlayerChat.chat_channel)
+}
+
+// .NFMsg.ReqAckPlayerChat.EGameChatType chat_type = 6;
 inline void ReqAckPlayerChat::clear_chat_type() {
   chat_type_ = 0;
 }
@@ -7966,7 +7986,7 @@ inline void ReqAckPlayerChat::set_chat_type(::NFMsg::ReqAckPlayerChat_EGameChatT
   // @@protoc_insertion_point(field_set:NFMsg.ReqAckPlayerChat.chat_type)
 }
 
-// bytes chat_info = 3;
+// bytes chat_info = 7;
 inline void ReqAckPlayerChat::clear_chat_info() {
   chat_info_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
@@ -8019,60 +8039,7 @@ inline void ReqAckPlayerChat::set_allocated_chat_info(::std::string* chat_info) 
   // @@protoc_insertion_point(field_set_allocated:NFMsg.ReqAckPlayerChat.chat_info)
 }
 
-// bytes chat_name = 4;
-inline void ReqAckPlayerChat::clear_chat_name() {
-  chat_name_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-}
-inline const ::std::string& ReqAckPlayerChat::chat_name() const {
-  // @@protoc_insertion_point(field_get:NFMsg.ReqAckPlayerChat.chat_name)
-  return chat_name_.GetNoArena();
-}
-inline void ReqAckPlayerChat::set_chat_name(const ::std::string& value) {
-  
-  chat_name_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
-  // @@protoc_insertion_point(field_set:NFMsg.ReqAckPlayerChat.chat_name)
-}
-#if LANG_CXX11
-inline void ReqAckPlayerChat::set_chat_name(::std::string&& value) {
-  
-  chat_name_.SetNoArena(
-    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
-  // @@protoc_insertion_point(field_set_rvalue:NFMsg.ReqAckPlayerChat.chat_name)
-}
-#endif
-inline void ReqAckPlayerChat::set_chat_name(const char* value) {
-  GOOGLE_DCHECK(value != NULL);
-  
-  chat_name_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
-  // @@protoc_insertion_point(field_set_char:NFMsg.ReqAckPlayerChat.chat_name)
-}
-inline void ReqAckPlayerChat::set_chat_name(const void* value, size_t size) {
-  
-  chat_name_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
-      ::std::string(reinterpret_cast<const char*>(value), size));
-  // @@protoc_insertion_point(field_set_pointer:NFMsg.ReqAckPlayerChat.chat_name)
-}
-inline ::std::string* ReqAckPlayerChat::mutable_chat_name() {
-  
-  // @@protoc_insertion_point(field_mutable:NFMsg.ReqAckPlayerChat.chat_name)
-  return chat_name_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-}
-inline ::std::string* ReqAckPlayerChat::release_chat_name() {
-  // @@protoc_insertion_point(field_release:NFMsg.ReqAckPlayerChat.chat_name)
-  
-  return chat_name_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-}
-inline void ReqAckPlayerChat::set_allocated_chat_name(::std::string* chat_name) {
-  if (chat_name != NULL) {
-    
-  } else {
-    
-  }
-  chat_name_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), chat_name);
-  // @@protoc_insertion_point(field_set_allocated:NFMsg.ReqAckPlayerChat.chat_name)
-}
-
-// .NFMsg.Ident target_id = 5;
+// .NFMsg.Ident target_id = 8;
 inline bool ReqAckPlayerChat::has_target_id() const {
   return this != internal_default_instance() && target_id_ != NULL;
 }
@@ -8118,36 +8085,6 @@ inline void ReqAckPlayerChat::set_allocated_target_id(::NFMsg::Ident* target_id)
   }
   target_id_ = target_id;
   // @@protoc_insertion_point(field_set_allocated:NFMsg.ReqAckPlayerChat.target_id)
-}
-
-// repeated .NFMsg.ReqAckPlayerChat.ChatContainer Container_data = 6;
-inline int ReqAckPlayerChat::container_data_size() const {
-  return container_data_.size();
-}
-inline void ReqAckPlayerChat::clear_container_data() {
-  container_data_.Clear();
-}
-inline ::NFMsg::ReqAckPlayerChat_ChatContainer* ReqAckPlayerChat::mutable_container_data(int index) {
-  // @@protoc_insertion_point(field_mutable:NFMsg.ReqAckPlayerChat.Container_data)
-  return container_data_.Mutable(index);
-}
-inline ::google::protobuf::RepeatedPtrField< ::NFMsg::ReqAckPlayerChat_ChatContainer >*
-ReqAckPlayerChat::mutable_container_data() {
-  // @@protoc_insertion_point(field_mutable_list:NFMsg.ReqAckPlayerChat.Container_data)
-  return &container_data_;
-}
-inline const ::NFMsg::ReqAckPlayerChat_ChatContainer& ReqAckPlayerChat::container_data(int index) const {
-  // @@protoc_insertion_point(field_get:NFMsg.ReqAckPlayerChat.Container_data)
-  return container_data_.Get(index);
-}
-inline ::NFMsg::ReqAckPlayerChat_ChatContainer* ReqAckPlayerChat::add_container_data() {
-  // @@protoc_insertion_point(field_add:NFMsg.ReqAckPlayerChat.Container_data)
-  return container_data_.Add();
-}
-inline const ::google::protobuf::RepeatedPtrField< ::NFMsg::ReqAckPlayerChat_ChatContainer >&
-ReqAckPlayerChat::container_data() const {
-  // @@protoc_insertion_point(field_list:NFMsg.ReqAckPlayerChat.Container_data)
-  return container_data_;
 }
 
 // -------------------------------------------------------------------
@@ -12767,8 +12704,6 @@ inline void AckSwitchServer::set_gate_serverid(::google::protobuf::int64 value) 
 
 // -------------------------------------------------------------------
 
-// -------------------------------------------------------------------
-
 
 // @@protoc_insertion_point(namespace_scope)
 
@@ -12782,10 +12717,10 @@ template <>
 inline const EnumDescriptor* GetEnumDescriptor< ::NFMsg::ReqAckSynData_SynType>() {
   return ::NFMsg::ReqAckSynData_SynType_descriptor();
 }
-template <> struct is_proto_enum< ::NFMsg::ReqAckPlayerChat_ChatContainer_ContainerType> : ::std::true_type {};
+template <> struct is_proto_enum< ::NFMsg::ReqAckPlayerChat_EGameChatChannel> : ::std::true_type {};
 template <>
-inline const EnumDescriptor* GetEnumDescriptor< ::NFMsg::ReqAckPlayerChat_ChatContainer_ContainerType>() {
-  return ::NFMsg::ReqAckPlayerChat_ChatContainer_ContainerType_descriptor();
+inline const EnumDescriptor* GetEnumDescriptor< ::NFMsg::ReqAckPlayerChat_EGameChatChannel>() {
+  return ::NFMsg::ReqAckPlayerChat_EGameChatChannel_descriptor();
 }
 template <> struct is_proto_enum< ::NFMsg::ReqAckPlayerChat_EGameChatType> : ::std::true_type {};
 template <>

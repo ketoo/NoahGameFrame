@@ -87,33 +87,33 @@ message ReqAckPlayerMove
 		
 message ReqAckPlayerChat
 {
+	enum EGameChatChannel
+	{
+		EGCC_GLOBAL = 0;
+		EGCC_CLAN = 1;
+		EGCC_FRIEND = 2;
+		EGCC_BATTLE = 3;
+		EGCC_TEAM = 4;
+		EGCC_ROOM = 5;
+	}
 	enum EGameChatType
 	{
-		EGCT_CLAN = 0;
-		EGCT_PRIVATE = 1;
-		EGCT_TEAM = 2;
-		EGCT_WORLD = 3;
-	}
-	
-	message ChatContainer
-	{
-		enum ContainerType
-		{
-			EGCT_UNKNOW = 0;//
-			EGCT_ITEM = 1;	//道具
-		}
-	
-		int32 ConTainerType = 2;
-		bytes data_info = 3;
+		EGCT_TEXT= 0;
+		EGCT_VOICE = 1;
+		EGCT_EMOJI = 2;
+		EGCT_DONATE_HERO = 10;
+		EGCT_DONATE_BUILDING = 11;
+		EGCT_DONATE_ITEM = 12;
 	}
 
-
-	Ident	chat_id = 1;
-	EGameChatType  chat_type = 2;
-	bytes chat_info = 3;
-	bytes chat_name = 4;
-	Ident	target_id = 5;
-	repeated ChatContainer Container_data = 6;
+	Ident	player_id = 1;
+	bytes 	player_name = 2;
+	bytes 	player_hero_id = 3;
+	bytes 	player_hero_level = 4;
+	EGameChatChannel  chat_channel = 5;
+	EGameChatType  chat_type = 6;
+	bytes chat_info = 7;
+	Ident	target_id = 8;
 }
 
 message ReqAckPlayerPosSync
