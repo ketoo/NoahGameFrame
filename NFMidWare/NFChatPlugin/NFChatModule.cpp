@@ -65,7 +65,7 @@ void NFChatModule::OnClienChatProcess(const NFSOCK nSockIndex, const int nMsgID,
 {
 	CLIENT_MSG_PROCESS( nMsgID, msg, nLen, NFMsg::ReqAckPlayerChat);
 
-	switch (xMsg.chat_type())
+	switch (xMsg.chat_channel())
 	{
 	case NFMsg::ReqAckPlayerChat::EGCC_GLOBAL:
 	{
