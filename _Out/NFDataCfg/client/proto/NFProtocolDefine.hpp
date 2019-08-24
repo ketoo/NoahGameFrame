@@ -708,9 +708,10 @@ namespace NFrame
 		static const std::string& SPREGEN(){ static std::string x = "SPREGEN"; return x; };// int
 		static const std::string& SUCKBLOOD(){ static std::string x = "SUCKBLOOD"; return x; };// int
 		static const std::string& Sex(){ static std::string x = "Sex"; return x; };// int
-		static const std::string& Skill1(){ static std::string x = "Skill1"; return x; };// string
-		static const std::string& Skill2(){ static std::string x = "Skill2"; return x; };// string
-		static const std::string& Skill3(){ static std::string x = "Skill3"; return x; };// string
+		static const std::string& SkillNormal(){ static std::string x = "SkillNormal"; return x; };// string
+		static const std::string& SkillSpecial1(){ static std::string x = "SkillSpecial1"; return x; };// string
+		static const std::string& SkillSpecial2(){ static std::string x = "SkillSpecial2"; return x; };// string
+		static const std::string& SkillTHUMP(){ static std::string x = "SkillTHUMP"; return x; };// string
 		static const std::string& Streak(){ static std::string x = "Streak"; return x; };// int
 		static const std::string& TeamID(){ static std::string x = "TeamID"; return x; };// object
 		static const std::string& TotalLineTime(){ static std::string x = "TotalLineTime"; return x; };// object

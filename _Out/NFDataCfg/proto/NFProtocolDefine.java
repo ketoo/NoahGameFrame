@@ -696,9 +696,10 @@ package nframe;
 		public static final String SPREGEN = "SPREGEN";// int
 		public static final String SUCKBLOOD = "SUCKBLOOD";// int
 		public static final String Sex = "Sex";// int
-		public static final String Skill1 = "Skill1";// string
-		public static final String Skill2 = "Skill2";// string
-		public static final String Skill3 = "Skill3";// string
+		public static final String SkillNormal = "SkillNormal";// string
+		public static final String SkillSpecial1 = "SkillSpecial1";// string
+		public static final String SkillSpecial2 = "SkillSpecial2";// string
+		public static final String SkillTHUMP = "SkillTHUMP";// string
 		public static final String Streak = "Streak";// int
 		public static final String TeamID = "TeamID";// object
 		public static final String TotalLineTime = "TotalLineTime";// object

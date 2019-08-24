@@ -359,9 +359,9 @@ bool NFHeroModule::SwitchFightHero(const NFGUID & self, const NFGUID & xHeroID)
 	const std::string& strSkill2 = m_pElementModule->GetPropertyString(strCnfID, NFrame::NPC::SkillSpecial1());
 	const std::string& strSkill3 = m_pElementModule->GetPropertyString(strCnfID, NFrame::NPC::SkillSpecial2());
 
-	m_pKernelModule->SetPropertyString(self, NFrame::Player::Skill1(), strSkill1);
-	m_pKernelModule->SetPropertyString(self, NFrame::Player::Skill2(), strSkill2);
-	m_pKernelModule->SetPropertyString(self, NFrame::Player::Skill3(), strSkill3);
+	m_pKernelModule->SetPropertyString(self, NFrame::Player::SkillNormal(), strSkill1);
+	m_pKernelModule->SetPropertyString(self, NFrame::Player::SkillSpecial1(), strSkill2);
+	m_pKernelModule->SetPropertyString(self, NFrame::Player::SkillSpecial2(), strSkill3);
 
 	m_pHeroPropertyModule->CalFightintHeroProperty(self);
 

@@ -116,9 +116,10 @@ ALTER TABLE `Player` ADD `RELIVE_SOUL` bigint(11) DEFAULT '0' COMMENT '转生次
 ALTER TABLE `Player` ADD `Race` bigint(11) DEFAULT '0' COMMENT '种族';
 ALTER TABLE `Player` ADD `Report` bigint(11) DEFAULT '0' COMMENT 'Cup';
 ALTER TABLE `Player` ADD `Sex` bigint(11) DEFAULT '0' COMMENT '性别';
-ALTER TABLE `Player` ADD `Skill1` text COLLATE utf8mb4_unicode_ci  DEFAULT '' COMMENT 'Skill1';
-ALTER TABLE `Player` ADD `Skill2` text COLLATE utf8mb4_unicode_ci  DEFAULT '' COMMENT 'Skill2';
-ALTER TABLE `Player` ADD `Skill3` text COLLATE utf8mb4_unicode_ci  DEFAULT '' COMMENT 'Skill3';
+ALTER TABLE `Player` ADD `SkillNormal` text COLLATE utf8mb4_unicode_ci  DEFAULT '' COMMENT 'Skill1';
+ALTER TABLE `Player` ADD `SkillSpecial1` text COLLATE utf8mb4_unicode_ci  DEFAULT '' COMMENT 'Skill1';
+ALTER TABLE `Player` ADD `SkillSpecial2` text COLLATE utf8mb4_unicode_ci  DEFAULT '' COMMENT 'Skill2';
+ALTER TABLE `Player` ADD `SkillTHUMP` text COLLATE utf8mb4_unicode_ci  DEFAULT '' COMMENT 'Skill3';
 ALTER TABLE `Player` ADD `Streak` bigint(11) DEFAULT '0' COMMENT 'streak win count';
 ALTER TABLE `Player` ADD `TeamID` varchar(64) COLLATE utf8mb4_unicode_ci DEFAULT '' COMMENT '所在队伍ID';
 ALTER TABLE `Player` ADD `TotalLineTime` varchar(64) COLLATE utf8mb4_unicode_ci DEFAULT '' COMMENT '今日在线时长{截至至本次上线时间}';
