@@ -52,12 +52,12 @@
 
 #endif
 
-#include <netinet/in.h>
-
 #ifdef _XOPEN_SOURCE_EXTENDED
 #  include <arpa/inet.h>
 # endif
 
+#include <netinet/in.h>
+#include <netinet/tcp.h> 
 #include <sys/socket.h>
 #include <unistd.h>
 

@@ -127,7 +127,6 @@ void NFNet::listener_cb(struct evconnlistener* listener, evutil_socket_t fd, str
     struct bufferevent* bev = bufferevent_socket_new(mxBase, fd, BEV_OPT_CLOSE_ON_FREE);
     if (!bev)
     {
-        
         fprintf(stderr, "Error constructing bufferevent!");
         return;
     }
@@ -138,7 +137,16 @@ void NFNet::listener_cb(struct evconnlistener* listener, evutil_socket_t fd, str
     NetObject* pObject = new NetObject(pNet, fd, *pSin, bev);
     pObject->GetNet()->AddNetObject(fd, pObject);
 
-    
+#if NF_PLATFORM != NF_PLATFORM_WIN
+    int optval = 1;
+    int result = setsockopt(fd, IPPROTO_TCP, TCP_NODELAY, &optval, sizeof(optval));
+    //setsockopt(fd, IPPROTO_TCP, TCP_CORK, &optval, sizeof(optval));
+    if (result < 0)
+    {
+        std::cout << "setsockopt TCP_NODELAY ERROR !!!" << std::endl;
+    }
+#endif
+
     bufferevent_setcb(bev, conn_readcb, conn_writecb, conn_eventcb, (void*)pObject);
 
     bufferevent_enable(bev, EV_READ | EV_WRITE | EV_CLOSED | EV_TIMEOUT | EV_PERSIST);
@@ -416,7 +424,7 @@ int NFNet::InitClientNet()
     struct sockaddr_in addr;
     struct bufferevent* bev = NULL;
 
-#ifdef _MSC_VER
+#if NF_PLATFORM == NF_PLATFORM_WIN
     WSADATA wsa_data;
     WSAStartup(0x0201, &wsa_data);
 #endif
@@ -462,6 +470,16 @@ int NFNet::InitClientNet()
     }
 
     mbServer = false;
+
+#if NF_PLATFORM != NF_PLATFORM_WIN
+    int optval = 1;
+    int result = setsockopt(sockfd, IPPROTO_TCP, TCP_NODELAY, &optval, sizeof(optval));
+    //setsockopt(fd, IPPROTO_TCP, TCP_CORK, &optval, sizeof(optval));
+    if (result < 0)
+    {
+        std::cout << "setsockopt TCP_NODELAY ERROR !!!" << std::endl;
+    }
+#endif
 
     bufferevent_setcb(bev, conn_readcb, conn_writecb, conn_eventcb, (void*)pObject);
     bufferevent_enable(bev, EV_READ | EV_WRITE | EV_CLOSED | EV_TIMEOUT | EV_PERSIST);
