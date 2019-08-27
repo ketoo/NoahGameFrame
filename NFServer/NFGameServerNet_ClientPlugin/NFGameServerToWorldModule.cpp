@@ -283,11 +283,16 @@ void NFGameServerToWorldModule::SendOnline(const NFGUID& self)
 	NFMsg::RoleOnlineNotify xMsg;
 	const NFGUID& xClan = m_pKernelModule->GetPropertyObject(self, NFrame::Player::Clan_ID());
 	const int& gateID = m_pKernelModule->GetPropertyInt(self, NFrame::Player::GateID());
+	const std::string& playerName = m_pKernelModule->GetPropertyString(self, NFrame::Player::Name());
+	const int& bp = m_pKernelModule->GetPropertyInt(self, NFrame::Player::Cup());
 
 	*xMsg.mutable_self() = NFINetModule::NFToPB(self);
 	*xMsg.mutable_clan() = NFINetModule::NFToPB(xClan);
 	xMsg.set_game(pPluginManager->GetAppID());
 	xMsg.set_proxy(gateID);
+	xMsg.set_name(playerName);
+	xMsg.set_bp(bp);
+
 	m_pNetClientModule->SendToAllServerByPB(NF_SERVER_TYPES::NF_ST_WORLD, NFMsg::EGMI_ACK_ONLINE_NOTIFY, xMsg);
 }
 

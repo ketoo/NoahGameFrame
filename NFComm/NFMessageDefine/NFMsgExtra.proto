@@ -11,13 +11,52 @@ message ReqAIOnwer
     Ident	ai_id 		= 1;
 }
 
-///////////////组队/////////////////////////////////////////////////////////////////////////////////////
-message TeamInfo
+
+///////////////friend system/////////////////////////////////////////////////////////////////////////////////////
+
+message FriendData
 {
-    Ident					team_id 		= 1;			//队伍ID
-	Ident					captain_id 		= 2;			//队长ID
-	repeated TeammemberInfo 		teammemberInfo 	= 3;			//队伍成员
+    Ident		id 				= 1;
+	string		name 			= 2;
 }
+
+message ReqAckFriendList
+{
+	repeated FriendData 	friendList 	= 1;
+}
+
+message ReqAckInviteList
+{
+	repeated FriendData 	inviteList 	= 1;
+}
+
+message ReqAckDeleteFriend
+{
+    Ident	stranger 				= 1;
+}
+
+message ReqAckSendInvite
+{
+    Ident	stranger 				= 1;
+}
+
+message ReqAckAcceptInvite
+{
+    Ident	stranger 				= 1;
+}
+
+message ReqAckRejectInvite
+{
+    Ident	stranger 				= 1;
+}
+
+message ReqAckIgnoreInvite
+{
+    Ident	stranger 				= 1;
+}
+
+
+///////////////组队/////////////////////////////////////////////////////////////////////////////////////
 
 message TeammemberInfo
 {
@@ -27,6 +66,14 @@ message TeammemberInfo
 	int32		job 			= 4;			//职业
 	string		HeadIcon		= 5;			//头像
 }
+
+message TeamInfo
+{
+    Ident					team_id 		= 1;			//队伍ID
+	Ident					captain_id 		= 2;			//队长ID
+	repeated TeammemberInfo 		teammemberInfo 	= 3;			//队伍成员
+}
+
 
 //EGMI_REQ_CREATE_TEAM                       		= 860; 	// 申请创建队伍
 //EGMI_ACK_CREATE_TEAM							= 861; 	// 创建队伍结果

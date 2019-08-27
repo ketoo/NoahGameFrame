@@ -5,4 +5,4 @@
 ./protoc --csharp_out="./" --proto_path="./" NFMsgShare.proto
 ./protoc --csharp_out="./" --proto_path="./" NFMsgExtra.proto
 
-cp -a *.cs ../../_Out/client/proto/
+cp -a *.cs ../../_Out/NFDataCfg/client/proto/

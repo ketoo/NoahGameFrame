@@ -23,27 +23,18 @@
    limitations under the License.
 */
 
-#ifndef NFI_FRIEND_MODULE_H
-#define NFI_FRIEND_MODULE_H
+#ifndef NFI_MAIL_REDIS_MODULE_H
+#define NFI_MAIL_REDIS_MODULE_H
 
 #include "NFIModule.h"
-#include "NFIFriendRedisModule.h"
 
-class NFIFriendModule : public NFIModule
+class NFIMailRedisModule
+    : public NFIModule
 {
+
 public:
 
-    virtual void GetFriendsList(const NFGUID& self, NFList<NFIFriendRedisModule::FriendData>& friendList) = 0;
-    virtual void GetInvitationList(const NFGUID& self, NFList<NFIFriendRedisModule::FriendData>& friendList) = 0;
-    virtual void DeleteFriend(const NFGUID& self, const NFGUID& other) = 0;
 
-    virtual void SendInvite(const NFGUID& self, const std::string& selfName, const NFGUID& stranger) = 0;
-    virtual void AcceptInvite(const NFGUID& self, const std::string& selfName, const NFGUID& inviter) = 0;
-    virtual void RejectInvite(const NFGUID& self, const std::string& selfName, const NFGUID& inviter) = 0;
-    virtual void IgnoreInvite(const NFGUID& self, const NFGUID& inviter) = 0;
-
-    virtual void BlockPlayer(const NFGUID& self, const NFGUID& other) = 0;
-    virtual void UnBlockPlayer(const NFGUID& self, const NFGUID& other) = 0;
 };
 
 #endif

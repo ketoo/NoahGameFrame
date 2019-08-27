@@ -2905,6 +2905,20 @@ class LIBPROTOC_EXPORT RoleOnlineNotify : public ::google::protobuf::Message /* 
 
   // accessors -------------------------------------------------------
 
+  // bytes name = 5;
+  void clear_name();
+  static const int kNameFieldNumber = 5;
+  const ::std::string& name() const;
+  void set_name(const ::std::string& value);
+  #if LANG_CXX11
+  void set_name(::std::string&& value);
+  #endif
+  void set_name(const char* value);
+  void set_name(const void* value, size_t size);
+  ::std::string* mutable_name();
+  ::std::string* release_name();
+  void set_allocated_name(::std::string* name);
+
   // .NFMsg.Ident self = 1;
   bool has_self() const;
   void clear_self();
@@ -2941,14 +2955,22 @@ class LIBPROTOC_EXPORT RoleOnlineNotify : public ::google::protobuf::Message /* 
   ::google::protobuf::int32 proxy() const;
   void set_proxy(::google::protobuf::int32 value);
 
+  // int32 bp = 6;
+  void clear_bp();
+  static const int kBpFieldNumber = 6;
+  ::google::protobuf::int32 bp() const;
+  void set_bp(::google::protobuf::int32 value);
+
   // @@protoc_insertion_point(class_scope:NFMsg.RoleOnlineNotify)
  private:
 
   ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
+  ::google::protobuf::internal::ArenaStringPtr name_;
   ::NFMsg::Ident* self_;
   ::NFMsg::Ident* clan_;
   ::google::protobuf::int32 game_;
   ::google::protobuf::int32 proxy_;
+  ::google::protobuf::int32 bp_;
   mutable ::google::protobuf::internal::CachedSize _cached_size_;
   friend struct ::protobuf_NFMsgPreGame_2eproto::TableStruct;
 };
@@ -5714,6 +5736,73 @@ inline void RoleOnlineNotify::set_proxy(::google::protobuf::int32 value) {
   
   proxy_ = value;
   // @@protoc_insertion_point(field_set:NFMsg.RoleOnlineNotify.proxy)
+}
+
+// bytes name = 5;
+inline void RoleOnlineNotify::clear_name() {
+  name_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline const ::std::string& RoleOnlineNotify::name() const {
+  // @@protoc_insertion_point(field_get:NFMsg.RoleOnlineNotify.name)
+  return name_.GetNoArena();
+}
+inline void RoleOnlineNotify::set_name(const ::std::string& value) {
+  
+  name_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
+  // @@protoc_insertion_point(field_set:NFMsg.RoleOnlineNotify.name)
+}
+#if LANG_CXX11
+inline void RoleOnlineNotify::set_name(::std::string&& value) {
+  
+  name_.SetNoArena(
+    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
+  // @@protoc_insertion_point(field_set_rvalue:NFMsg.RoleOnlineNotify.name)
+}
+#endif
+inline void RoleOnlineNotify::set_name(const char* value) {
+  GOOGLE_DCHECK(value != NULL);
+  
+  name_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:NFMsg.RoleOnlineNotify.name)
+}
+inline void RoleOnlineNotify::set_name(const void* value, size_t size) {
+  
+  name_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+      ::std::string(reinterpret_cast<const char*>(value), size));
+  // @@protoc_insertion_point(field_set_pointer:NFMsg.RoleOnlineNotify.name)
+}
+inline ::std::string* RoleOnlineNotify::mutable_name() {
+  
+  // @@protoc_insertion_point(field_mutable:NFMsg.RoleOnlineNotify.name)
+  return name_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline ::std::string* RoleOnlineNotify::release_name() {
+  // @@protoc_insertion_point(field_release:NFMsg.RoleOnlineNotify.name)
+  
+  return name_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline void RoleOnlineNotify::set_allocated_name(::std::string* name) {
+  if (name != NULL) {
+    
+  } else {
+    
+  }
+  name_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), name);
+  // @@protoc_insertion_point(field_set_allocated:NFMsg.RoleOnlineNotify.name)
+}
+
+// int32 bp = 6;
+inline void RoleOnlineNotify::clear_bp() {
+  bp_ = 0;
+}
+inline ::google::protobuf::int32 RoleOnlineNotify::bp() const {
+  // @@protoc_insertion_point(field_get:NFMsg.RoleOnlineNotify.bp)
+  return bp_;
+}
+inline void RoleOnlineNotify::set_bp(::google::protobuf::int32 value) {
+  
+  bp_ = value;
+  // @@protoc_insertion_point(field_set:NFMsg.RoleOnlineNotify.bp)
 }
 
 // -------------------------------------------------------------------

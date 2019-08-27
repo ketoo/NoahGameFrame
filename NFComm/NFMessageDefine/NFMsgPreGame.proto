@@ -187,6 +187,8 @@ message RoleOnlineNotify
 	Ident clan = 2;
 	int32 game = 3;
 	int32 proxy = 4;
+	bytes name = 5;
+	int32 bp = 6;
 }
 
 message RoleOfflineNotify

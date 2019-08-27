@@ -121,6 +121,7 @@ private:
 			self = id;
 			gameID = 0;
 			gateID = 0;
+            bp = 0;
 		}
 
 		~PlayerData()
@@ -143,6 +144,8 @@ private:
 		int gameID;
 		int gateID;
 		NFGUID self;
+		int bp;
+        std::string name;
 
 	};
 

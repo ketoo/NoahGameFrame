@@ -670,6 +670,8 @@ const ::google::protobuf::uint32 TableStruct::offsets[] GOOGLE_PROTOBUF_ATTRIBUT
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NFMsg::RoleOnlineNotify, clan_),
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NFMsg::RoleOnlineNotify, game_),
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NFMsg::RoleOnlineNotify, proxy_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NFMsg::RoleOnlineNotify, name_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NFMsg::RoleOnlineNotify, bp_),
   ~0u,  // no _has_bits_
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NFMsg::RoleOfflineNotify, _internal_metadata_),
   ~0u,  // no _extensions_
@@ -709,8 +711,8 @@ static const ::google::protobuf::internal::MigrationSchema schemas[] GOOGLE_PROT
   { 156, -1, sizeof(::NFMsg::ReqRecoverRole)},
   { 164, -1, sizeof(::NFMsg::ServerHeartBeat)},
   { 170, -1, sizeof(::NFMsg::RoleOnlineNotify)},
-  { 179, -1, sizeof(::NFMsg::RoleOfflineNotify)},
-  { 188, -1, sizeof(::NFMsg::RoleDataPack)},
+  { 181, -1, sizeof(::NFMsg::RoleOfflineNotify)},
+  { 190, -1, sizeof(::NFMsg::RoleDataPack)},
 };
 
 static ::google::protobuf::Message const * const file_default_instances[] = {
@@ -810,25 +812,25 @@ void AddDescriptorsImpl() {
       "e\022\017\n\007account\030\001 \001(\014\022\014\n\004name\030\002 \001(\014\022\017\n\007game"
       "_id\030\003 \001(\005\"@\n\016ReqRecoverRole\022\017\n\007account\030\001"
       " \001(\014\022\014\n\004name\030\002 \001(\014\022\017\n\007game_id\030\003 \001(\005\" \n\017S"
-      "erverHeartBeat\022\r\n\005count\030\001 \001(\005\"g\n\020RoleOnl"
-      "ineNotify\022\032\n\004self\030\001 \001(\0132\014.NFMsg.Ident\022\032\n"
-      "\004clan\030\002 \001(\0132\014.NFMsg.Ident\022\014\n\004game\030\003 \001(\005\022"
-      "\r\n\005proxy\030\004 \001(\005\"h\n\021RoleOfflineNotify\022\032\n\004s"
-      "elf\030\001 \001(\0132\014.NFMsg.Ident\022\032\n\004clan\030\002 \001(\0132\014."
-      "NFMsg.Ident\022\014\n\004game\030\003 \001(\005\022\r\n\005proxy\030\004 \001(\005"
-      "\"~\n\014RoleDataPack\022\030\n\002id\030\001 \001(\0132\014.NFMsg.Ide"
-      "nt\022+\n\010property\030\002 \001(\0132\031.NFMsg.ObjectPrope"
-      "rtyList\022\'\n\006record\030\003 \001(\0132\027.NFMsg.ObjectRe"
-      "cordList*Z\n\014EServerState\022\r\n\tEST_CRASH\020\000\022"
-      "\016\n\nEST_NARMAL\020\001\022\014\n\010EST_BUSY\020\002\022\014\n\010EST_FIR"
-      "E\020\003\022\017\n\013EST_MAINTEN\020\004*J\n\nELoginMode\022\r\n\tEL"
-      "M_LOGIN\020\000\022\020\n\014ELM_REGISTER\020\001\022\033\n\027ELM_AUTO_"
-      "REGISTER_LOGIN\020\002*@\n\021ReqServerListType\022\025\n"
-      "\021RSLT_WORLD_SERVER\020\000\022\024\n\020RSLT_GAMES_ERVER"
-      "\020\001b\006proto3"
+      "erverHeartBeat\022\r\n\005count\030\001 \001(\005\"\201\001\n\020RoleOn"
+      "lineNotify\022\032\n\004self\030\001 \001(\0132\014.NFMsg.Ident\022\032"
+      "\n\004clan\030\002 \001(\0132\014.NFMsg.Ident\022\014\n\004game\030\003 \001(\005"
+      "\022\r\n\005proxy\030\004 \001(\005\022\014\n\004name\030\005 \001(\014\022\n\n\002bp\030\006 \001("
+      "\005\"h\n\021RoleOfflineNotify\022\032\n\004self\030\001 \001(\0132\014.N"
+      "FMsg.Ident\022\032\n\004clan\030\002 \001(\0132\014.NFMsg.Ident\022\014"
+      "\n\004game\030\003 \001(\005\022\r\n\005proxy\030\004 \001(\005\"~\n\014RoleDataP"
+      "ack\022\030\n\002id\030\001 \001(\0132\014.NFMsg.Ident\022+\n\010propert"
+      "y\030\002 \001(\0132\031.NFMsg.ObjectPropertyList\022\'\n\006re"
+      "cord\030\003 \001(\0132\027.NFMsg.ObjectRecordList*Z\n\014E"
+      "ServerState\022\r\n\tEST_CRASH\020\000\022\016\n\nEST_NARMAL"
+      "\020\001\022\014\n\010EST_BUSY\020\002\022\014\n\010EST_FIRE\020\003\022\017\n\013EST_MA"
+      "INTEN\020\004*J\n\nELoginMode\022\r\n\tELM_LOGIN\020\000\022\020\n\014"
+      "ELM_REGISTER\020\001\022\033\n\027ELM_AUTO_REGISTER_LOGI"
+      "N\020\002*@\n\021ReqServerListType\022\025\n\021RSLT_WORLD_S"
+      "ERVER\020\000\022\024\n\020RSLT_GAMES_ERVER\020\001b\006proto3"
   };
   ::google::protobuf::DescriptorPool::InternalAddGeneratedFile(
-      descriptor, 2650);
+      descriptor, 2677);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "NFMsgPreGame.proto", &protobuf_RegisterTypes);
   ::protobuf_NFDefine_2eproto::AddDescriptors();
@@ -7601,6 +7603,8 @@ const int RoleOnlineNotify::kSelfFieldNumber;
 const int RoleOnlineNotify::kClanFieldNumber;
 const int RoleOnlineNotify::kGameFieldNumber;
 const int RoleOnlineNotify::kProxyFieldNumber;
+const int RoleOnlineNotify::kNameFieldNumber;
+const int RoleOnlineNotify::kBpFieldNumber;
 #endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
 
 RoleOnlineNotify::RoleOnlineNotify()
@@ -7614,6 +7618,10 @@ RoleOnlineNotify::RoleOnlineNotify(const RoleOnlineNotify& from)
   : ::google::protobuf::Message(),
       _internal_metadata_(NULL) {
   _internal_metadata_.MergeFrom(from._internal_metadata_);
+  name_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  if (from.name().size() > 0) {
+    name_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.name_);
+  }
   if (from.has_self()) {
     self_ = new ::NFMsg::Ident(*from.self_);
   } else {
@@ -7625,15 +7633,16 @@ RoleOnlineNotify::RoleOnlineNotify(const RoleOnlineNotify& from)
     clan_ = NULL;
   }
   ::memcpy(&game_, &from.game_,
-    static_cast<size_t>(reinterpret_cast<char*>(&proxy_) -
-    reinterpret_cast<char*>(&game_)) + sizeof(proxy_));
+    static_cast<size_t>(reinterpret_cast<char*>(&bp_) -
+    reinterpret_cast<char*>(&game_)) + sizeof(bp_));
   // @@protoc_insertion_point(copy_constructor:NFMsg.RoleOnlineNotify)
 }
 
 void RoleOnlineNotify::SharedCtor() {
+  name_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   ::memset(&self_, 0, static_cast<size_t>(
-      reinterpret_cast<char*>(&proxy_) -
-      reinterpret_cast<char*>(&self_)) + sizeof(proxy_));
+      reinterpret_cast<char*>(&bp_) -
+      reinterpret_cast<char*>(&self_)) + sizeof(bp_));
 }
 
 RoleOnlineNotify::~RoleOnlineNotify() {
@@ -7642,6 +7651,7 @@ RoleOnlineNotify::~RoleOnlineNotify() {
 }
 
 void RoleOnlineNotify::SharedDtor() {
+  name_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   if (this != internal_default_instance()) delete self_;
   if (this != internal_default_instance()) delete clan_;
 }
@@ -7666,6 +7676,7 @@ void RoleOnlineNotify::Clear() {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
+  name_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   if (GetArenaNoVirtual() == NULL && self_ != NULL) {
     delete self_;
   }
@@ -7675,8 +7686,8 @@ void RoleOnlineNotify::Clear() {
   }
   clan_ = NULL;
   ::memset(&game_, 0, static_cast<size_t>(
-      reinterpret_cast<char*>(&proxy_) -
-      reinterpret_cast<char*>(&game_)) + sizeof(proxy_));
+      reinterpret_cast<char*>(&bp_) -
+      reinterpret_cast<char*>(&game_)) + sizeof(bp_));
   _internal_metadata_.Clear();
 }
 
@@ -7742,6 +7753,32 @@ bool RoleOnlineNotify::MergePartialFromCodedStream(
         break;
       }
 
+      // bytes name = 5;
+      case 5: {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(42u /* 42 & 0xFF */)) {
+          DO_(::google::protobuf::internal::WireFormatLite::ReadBytes(
+                input, this->mutable_name()));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      // int32 bp = 6;
+      case 6: {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(48u /* 48 & 0xFF */)) {
+
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
+                 input, &bp_)));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
       default: {
       handle_unusual:
         if (tag == 0) {
@@ -7790,6 +7827,17 @@ void RoleOnlineNotify::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormatLite::WriteInt32(4, this->proxy(), output);
   }
 
+  // bytes name = 5;
+  if (this->name().size() > 0) {
+    ::google::protobuf::internal::WireFormatLite::WriteBytesMaybeAliased(
+      5, this->name(), output);
+  }
+
+  // int32 bp = 6;
+  if (this->bp() != 0) {
+    ::google::protobuf::internal::WireFormatLite::WriteInt32(6, this->bp(), output);
+  }
+
   if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
     ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
         (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()), output);
@@ -7828,6 +7876,18 @@ void RoleOnlineNotify::SerializeWithCachedSizes(
     target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(4, this->proxy(), target);
   }
 
+  // bytes name = 5;
+  if (this->name().size() > 0) {
+    target =
+      ::google::protobuf::internal::WireFormatLite::WriteBytesToArray(
+        5, this->name(), target);
+  }
+
+  // int32 bp = 6;
+  if (this->bp() != 0) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(6, this->bp(), target);
+  }
+
   if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
     target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
         (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()), target);
@@ -7845,6 +7905,13 @@ size_t RoleOnlineNotify::ByteSizeLong() const {
       ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
         (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()));
   }
+  // bytes name = 5;
+  if (this->name().size() > 0) {
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::BytesSize(
+        this->name());
+  }
+
   // .NFMsg.Ident self = 1;
   if (this->has_self()) {
     total_size += 1 +
@@ -7871,6 +7938,13 @@ size_t RoleOnlineNotify::ByteSizeLong() const {
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::Int32Size(
         this->proxy());
+  }
+
+  // int32 bp = 6;
+  if (this->bp() != 0) {
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::Int32Size(
+        this->bp());
   }
 
   int cached_size = ::google::protobuf::internal::ToCachedSize(total_size);
@@ -7900,6 +7974,10 @@ void RoleOnlineNotify::MergeFrom(const RoleOnlineNotify& from) {
   ::google::protobuf::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
+  if (from.name().size() > 0) {
+
+    name_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.name_);
+  }
   if (from.has_self()) {
     mutable_self()->::NFMsg::Ident::MergeFrom(from.self());
   }
@@ -7911,6 +7989,9 @@ void RoleOnlineNotify::MergeFrom(const RoleOnlineNotify& from) {
   }
   if (from.proxy() != 0) {
     set_proxy(from.proxy());
+  }
+  if (from.bp() != 0) {
+    set_bp(from.bp());
   }
 }
 
@@ -7938,10 +8019,13 @@ void RoleOnlineNotify::Swap(RoleOnlineNotify* other) {
 }
 void RoleOnlineNotify::InternalSwap(RoleOnlineNotify* other) {
   using std::swap;
+  name_.Swap(&other->name_, &::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+    GetArenaNoVirtual());
   swap(self_, other->self_);
   swap(clan_, other->clan_);
   swap(game_, other->game_);
   swap(proxy_, other->proxy_);
+  swap(bp_, other->bp_);
   _internal_metadata_.Swap(&other->_internal_metadata_);
 }
 

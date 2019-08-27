@@ -32,6 +32,7 @@
 #include "NFCommonRedisModule.h"
 #include "NFMailRedisModule.h"
 #include "NFAccountRedisModule.h"
+#include "NFFriendRedisModule.h"
 
 #ifdef NF_DYNAMIC_PLUGIN
 
@@ -68,10 +69,12 @@ void NFDBLogicPlugin::Install()
 	REGISTER_MODULE(pPluginManager, NFICommonRedisModule, NFCommonRedisModule)
 	REGISTER_MODULE(pPluginManager, NFIMailRedisModule, NFMailRedisModule)
 	REGISTER_MODULE(pPluginManager, NFIAccountRedisModule, NFAccountRedisModule)
+	REGISTER_MODULE(pPluginManager, NFIFriendRedisModule, NFFriendRedisModule)
 }
 
 void NFDBLogicPlugin::Uninstall()
 {
+	UNREGISTER_MODULE(pPluginManager, NFIFriendRedisModule, NFFriendRedisModule)
 	UNREGISTER_MODULE(pPluginManager, NFIAccountRedisModule, NFAccountRedisModule)
 	UNREGISTER_MODULE(pPluginManager, NFIMailRedisModule, NFMailRedisModule)
 	UNREGISTER_MODULE(pPluginManager, NFICommonRedisModule, NFCommonRedisModule)

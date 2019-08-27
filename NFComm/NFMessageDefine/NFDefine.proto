@@ -361,7 +361,16 @@ enum EGameMsgID
 
 	/////////////////////client-world MSG/////////////////////////////////////
 
-	EGMI_REQ_ADD_FRIEND = 50000;
+	EGMI_REQ_ACK_FRIEND_LIST = 50001;
+	EGMI_REQ_ACK_INVITE_LIST = 50002;
+
+	EGMI_REQ_ACK_SEND_INVITE = 50010;
+	EGMI_REQ_ACK_ACCEPT_INVITE = 50011;
+	EGMI_REQ_ACK_REJECT_INVITE = 50012;
+	EGMI_REQ_ACK_IGNORE_INVITE = 50013;
+
+	EGMI_REQ_ACK_BLOCK_PLAYER = 50020;
+	EGMI_REQ_ACK_UNBLOCK_PLAYER = 50021;
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////

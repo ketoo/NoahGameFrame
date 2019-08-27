@@ -34,6 +34,9 @@ class NFICommonRedisModule
 public:
 	virtual std::string GetPropertyCacheKey(const NFGUID& self) = 0;
 	virtual std::string GetRecordCacheKey(const NFGUID& self) = 0;
+	virtual std::string GetFriendCacheKey(const NFGUID& self) = 0;
+	virtual std::string GetFriendInviteCacheKey(const NFGUID& self) = 0;
+	virtual std::string GetBlockCacheKey(const NFGUID& self) = 0;
 
 	virtual std::string GetAccountCacheKey(const std::string& strAccount) = 0;
 	virtual std::string GetTileCacheKey(const int& nSceneID) = 0;
