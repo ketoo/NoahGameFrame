@@ -31,7 +31,6 @@ bool NFHateModule::Init()
 	m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>();
 	m_pElementModule = pPluginManager->FindModule<NFIElementModule>();
 	m_pHateModule = pPluginManager->FindModule<NFIHateModule>();
-	m_pFriendModule = pPluginManager->FindModule<NFIFriendModule>();
 
 	return true;
 }
@@ -61,6 +60,50 @@ bool NFHateModule::Execute()
 bool NFHateModule::ClearHateObjects(const NFGUID& self)
 {
 	mtObjectHateMap.RemoveElement(self);
+
+	return true;
+}
+
+bool NFHateModule::IsEnemy(const NFGUID & self, const NFGUID & other)
+{
+	if (self == other)
+	{
+		return false;
+	}
+	if (!m_pKernelModule->ExistObject(self)
+		|| !m_pKernelModule->ExistObject(other))
+	{
+		return false;
+	}
+
+	const std::string& selfClassName = m_pKernelModule->GetPropertyString(self, NFrame::IObject::ClassName());
+	NFGUID selfCampID = m_pKernelModule->GetPropertyObject(self, NFrame::NPC::Camp());
+	NFGUID selfMasterID = m_pKernelModule->GetPropertyObject(self, NFrame::NPC::MasterID());
+	long selfHP = m_pKernelModule->GetPropertyInt(self, NFrame::NPC::HP());
+
+	const std::string& enemyClassName = m_pKernelModule->GetPropertyString(self, NFrame::IObject::ClassName());
+	NFGUID enemyCampID = m_pKernelModule->GetPropertyObject(self, NFrame::NPC::Camp());
+	NFGUID enemyMasterID = m_pKernelModule->GetPropertyObject(self, NFrame::NPC::MasterID());
+	long enemyHP = m_pKernelModule->GetPropertyInt(self, NFrame::NPC::HP());
+
+	if (enemyHP <= 0)
+	{
+		return false;
+	}
+
+	if (selfMasterID == other
+		|| selfMasterID == enemyMasterID)
+	{
+		return false;
+	}
+
+	if (!selfCampID.IsNull() || !enemyCampID.IsNull())
+	{
+		if (selfCampID == enemyCampID)
+		{
+			return false;
+		}
+	}
 
 	return true;
 }
@@ -122,7 +165,7 @@ bool NFHateModule::OnSpring(const NFGUID & self, const NFGUID & other)
 {
 	//根据职业,等级,血量,防御
 	//战斗状态只打仇恨列表内的人，巡逻,休闲状态才重新找对象打
-	if (m_pFriendModule->IsEnemy(self, other))
+	if (IsEnemy(self, other))
 	{
 		const int hp = m_pKernelModule->GetPropertyInt(other, NFrame::NPC::HP());
 		int initialValue = 100;

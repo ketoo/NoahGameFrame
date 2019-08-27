@@ -19,8 +19,7 @@
 		<Plugin Name="NFTaskPlugin" />
 		<Plugin Name="NFSkillPlugin" />
 		<Plugin Name="NFMailPlugin" />
-		<Plugin Name="NFHeroPlugin" />
-		<Plugin Name="NFFriendPlugin" />	
+		<Plugin Name="NFHeroPlugin" />	
 		<Plugin Name="NFAIPlugin" />
 	</GameServer>
 
@@ -72,6 +71,7 @@
 		<Plugin Name="NFNoSqlPlugin" />
 		<Plugin Name="NFSecurityPlugin" />	
 		<Plugin Name="NFClanPlugin" />	
+		<Plugin Name="NFFriendPlugin" />
 		
 		<Plugin Name="NFRankPlugin" />
 	</WorldServer>

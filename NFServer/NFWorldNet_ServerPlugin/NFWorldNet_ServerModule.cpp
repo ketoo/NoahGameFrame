@@ -535,8 +535,7 @@ void NFWorldNet_ServerModule::OnSocketEvent(const NFSOCK nSockIndex, const NF_NE
     }
 }
 
-void NFWorldNet_ServerModule::OnReqSwitchServer(const NFSOCK nSockIndex, const int nMsgID, const char *msg,
-                                                  const uint32_t nLen)
+void NFWorldNet_ServerModule::OnReqSwitchServer(const NFSOCK nSockIndex, const int nMsgID, const char *msg, const uint32_t nLen)
 {
     CLIENT_MSG_PROCESS_NO_OBJECT(nMsgID, msg, nLen, NFMsg::ReqSwitchServer);
     nPlayerID = NFINetModule::PBToNF(xMsg.selfid());
@@ -547,8 +546,7 @@ void NFWorldNet_ServerModule::OnReqSwitchServer(const NFSOCK nSockIndex, const i
     SendMsgToGame(nPlayerID, NFMsg::EGMI_REQSWICHSERVER, xMsg);
 }
 
-void NFWorldNet_ServerModule::OnAckSwitchServer(const NFSOCK nSockIndex, const int nMsgID, const char *msg,
-                                                  const uint32_t nLen)
+void NFWorldNet_ServerModule::OnAckSwitchServer(const NFSOCK nSockIndex, const int nMsgID, const char *msg, const uint32_t nLen)
 {
     CLIENT_MSG_PROCESS_NO_OBJECT(nMsgID, msg, nLen, NFMsg::AckSwitchServer);
     nPlayerID = NFINetModule::PBToNF(xMsg.selfid());
@@ -843,12 +841,20 @@ void NFWorldNet_ServerModule::OnOnlineProcess(const NFSOCK nSockIndex, const int
     NF_SHARE_PTR<PlayerData> playerData = mPlayersData.GetElement(selfId);
     if (playerData)
     {
+		playerData->name = xMsg.name();
+		playerData->bp = xMsg.bp();
+
 		playerData->OnLine(xMsg.game(), xMsg.proxy());
     }
 	else
 	{
 		playerData = NF_SHARE_PTR<PlayerData>(NF_NEW PlayerData(selfId));
+
+		playerData->name = xMsg.name();
+		playerData->bp = xMsg.bp();
+		
 		playerData->OnLine(xMsg.game(), xMsg.proxy());
+
 		mPlayersData.AddElement(selfId, playerData);
 	}
 }

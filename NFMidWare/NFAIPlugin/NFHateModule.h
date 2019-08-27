@@ -35,7 +35,6 @@
 #include "NFComm/NFPluginModule/NFIKernelModule.h"
 #include "NFComm/NFPluginModule/NFIElementModule.h"
 #include "NFComm/NFPluginModule/NFIHateModule.h"
-#include "NFComm/NFPluginModule/NFIFriendModule.h"
 
 class NFHateModule
     : public NFIHateModule
@@ -77,6 +76,8 @@ public:
     virtual int QueryHateValue(const NFGUID& self, const NFGUID& other);
 
 protected:
+    bool IsEnemy(const NFGUID & self, const NFGUID & other);
+
 	bool SetHateValue(const NFGUID& self, const NFGUID& other, const int nValue);
 	int OnClassObjectEvent(const NFGUID& self, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFDataList& var);
 	int OnPositionEvent(const NFGUID & self, const std::string & strPropertyName, const NFData & oldVar, const NFData & newVar);
@@ -102,7 +103,6 @@ private:
 	NFIHateModule* m_pHateModule;
 	NFIKernelModule* m_pKernelModule;
 	NFIElementModule* m_pElementModule;
-	NFIFriendModule* m_pFriendModule;
 };
 
 #endif

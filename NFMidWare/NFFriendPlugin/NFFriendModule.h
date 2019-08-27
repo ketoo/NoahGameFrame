@@ -37,6 +37,7 @@
 #include "NFComm/NFPluginModule/NFIElementModule.h"
 #include "NFComm/NFPluginModule/NFIEventModule.h"
 #include "NFComm/NFPluginModule/NFISceneModule.h"
+#include "NFComm/NFPluginModule/NFIFriendRedisModule.h"
 ////////////////////////////////////////////////////////////////////////////
 
 
@@ -55,9 +56,33 @@ public:
 
     virtual bool AfterInit();
 
-	virtual bool IsEnemy(const NFGUID& self, const NFGUID& other);
+    ////////////
 
+    virtual void GetFriendsList(const NFGUID& self, NFList<NFIFriendRedisModule::FriendData>& friendList);
+    virtual void GetInvitationList(const NFGUID& self, NFList<NFIFriendRedisModule::FriendData>& friendList);
+    virtual void DeleteFriend(const NFGUID& self, const NFGUID& other);
+
+    virtual void SendInvite(const NFGUID& self, const std::string& selfName, const NFGUID& stranger);
+    virtual void AcceptInvite(const NFGUID& self, const std::string& selfName, const NFGUID& inviter);
+    virtual void RejectInvite(const NFGUID& self, const std::string& selfName, const NFGUID& inviter);
+    virtual void IgnoreInvite(const NFGUID& self, const NFGUID& inviter);
+
+    virtual void BlockPlayer(const NFGUID& self, const NFGUID& other);
+    virtual void UnBlockPlayer(const NFGUID& self, const NFGUID& other);
     
+protected:
+
+    void OnReqFriendList(const NFSOCK nSockIndex, const int nMsgID, const char *msg, const uint32_t nLen);
+    void OnReqInviteList(const NFSOCK nSockIndex, const int nMsgID, const char *msg, const uint32_t nLen);
+
+    void OnReqSendInvite(const NFSOCK nSockIndex, const int nMsgID, const char *msg, const uint32_t nLen);
+    void OnReqAcceptInvite(const NFSOCK nSockIndex, const int nMsgID, const char *msg, const uint32_t nLen);
+    void OnReqRejectInvite(const NFSOCK nSockIndex, const int nMsgID, const char *msg, const uint32_t nLen);
+    void OnReqIgnoreInvite(const NFSOCK nSockIndex, const int nMsgID, const char *msg, const uint32_t nLen);
+
+    void OnReqBlockPlayer(const NFSOCK nSockIndex, const int nMsgID, const char *msg, const uint32_t nLen);
+    void OnReqUnBlockPlayer(const NFSOCK nSockIndex, const int nMsgID, const char *msg, const uint32_t nLen);
+
 protected:
 
     //////////////////////////////////////////////////////////////////////////
@@ -68,6 +93,7 @@ protected:
 	NFINetModule* m_pNetModule;
 	NFIEventModule* m_pEventModule;
 	NFISceneModule* m_pSceneModule;
+    NFIFriendRedisModule* m_pFriendRedisModule;
     //////////////////////////////////////////////////////////////////////////
 };
 #endif

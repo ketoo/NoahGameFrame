@@ -45,6 +45,9 @@ public:
 public:
     virtual std::string GetPropertyCacheKey(const NFGUID& self);
 	virtual std::string GetRecordCacheKey(const NFGUID& self);
+	virtual std::string GetFriendCacheKey(const NFGUID& self);
+	virtual std::string GetFriendInviteCacheKey(const NFGUID& self);
+	virtual std::string GetBlockCacheKey(const NFGUID& self);
 
 	virtual std::string GetAccountCacheKey(const std::string& strAccount);
 	virtual std::string GetTileCacheKey(const int& nSceneID);

@@ -45,6 +45,21 @@ std::string NFCommonRedisModule::GetRecordCacheKey(const NFGUID& self)
     return self.ToString() + "_ObjectRecord";
 }
 
+std::string NFCommonRedisModule::GetFriendCacheKey(const NFGUID& self)
+{
+    return self.ToString() + "_ObjectFriend";
+}
+
+std::string NFCommonRedisModule::GetFriendInviteCacheKey(const NFGUID& self)
+{
+    return self.ToString() + "_ObjectFriendInvite";
+}
+
+std::string NFCommonRedisModule::GetBlockCacheKey(const NFGUID& self)
+{
+    return self.ToString() + "_ObjectBlock";
+}
+
 std::string NFCommonRedisModule::GetAccountCacheKey(const std::string & strAccount)
 {
 	return strAccount + "_AccountInfo";

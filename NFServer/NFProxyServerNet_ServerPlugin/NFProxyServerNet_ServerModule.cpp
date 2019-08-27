@@ -150,7 +150,15 @@ void NFProxyServerNet_ServerModule::OnOtherMessage(const NFSOCK nSockIndex, cons
 	}
 	else
 	{
-		m_pNetClientModule->SendByServerIDWithOutHead(pNetObject->GetGameID(), nMsgID, strMsg);
+        if (nMsgID >= 50000)
+        {
+			m_pNetClientModule->SendBySuitWithOutHead(NF_SERVER_TYPES::NF_ST_WORLD, pNetObject->GetUserID().ToString(), nMsgID, strMsg);
+        }
+        else
+        {
+		    m_pNetClientModule->SendByServerIDWithOutHead(pNetObject->GetGameID(), nMsgID, strMsg);
+        }
+        
 	}
 }
 
