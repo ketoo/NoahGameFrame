@@ -99,6 +99,7 @@
     </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="NFFriendAgentModule.h" />
     <ClInclude Include="NFScenePropsModule.h" />
     <ClInclude Include="NFBuffModule.h" />
     <ClInclude Include="NFCreateRoleModule.h" />
@@ -117,6 +118,7 @@
     </ClCompile>
     <ClCompile Include="NFBuffModule.cpp" />
     <ClCompile Include="NFCreateRoleModule.cpp" />
+    <ClCompile Include="NFFriendAgentModule.cpp" />
     <ClCompile Include="NFGamePVPModule.cpp" />
     <ClCompile Include="NFSyncModule.cpp" />
     <ClCompile Include="NFGameLogicPlugin.cpp" />
