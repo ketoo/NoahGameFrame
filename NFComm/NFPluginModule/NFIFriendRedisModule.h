@@ -23,17 +23,35 @@
    limitations under the License.
 */
 
-#ifndef NFI_MAIL_REDIS_MODULE_H
-#define NFI_MAIL_REDIS_MODULE_H
+#ifndef NFI_FRIEND_REDIS_MODULE_H
+#define NFI_FRIEND_REDIS_MODULE_H
 
 #include "NFIModule.h"
 
-class NFIMailRedisModule
+class NFIFriendRedisModule
     : public NFIModule
 {
 
 public:
+    struct FriendData
+    {
+        NFGUID id;
+        std::string name;
+    };
 
+    virtual bool GetFriendsList(const NFGUID& self, std::vector<FriendData>& friendList) = 0;
+    virtual bool GetInvitationList(const NFGUID& self, std::vector<FriendData>& friendList) = 0;
+    virtual bool AddFriend(const NFGUID& self, const NFGUID& stranger, const std::string& strangerName) = 0;
+    virtual bool DeleteFriend(const NFGUID& self, const NFGUID& other) = 0;
+    
+    virtual bool SendInvite(const NFGUID& self, const std::string& selfName, const NFGUID& stranger) = 0;
+    virtual bool AcceptInvite(const NFGUID& self, const std::string& selfName, const NFGUID& inviter) = 0;
+    virtual bool RejectInvite(const NFGUID& self, const NFGUID& inviter) = 0;
+    virtual bool IgnoreInvite(const NFGUID& self, const NFGUID& inviter) = 0;
+
+    virtual bool BlockPlayer(const NFGUID& self, const NFGUID& other) = 0;
+    virtual bool UnBlockPlayer(const NFGUID& self, const NFGUID& other) = 0;
+    virtual bool IsBlockPlayer(const NFGUID& self, const NFGUID& other) = 0;
 
 };
 

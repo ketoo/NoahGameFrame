@@ -965,6 +965,11 @@ const std::vector<NFGUID>& NFWorldNet_ServerModule::GetOnlinePlayers()
     return players;
 }
 
+NF_SHARE_PTR<NFIWorldNet_ServerModule::PlayerData> NFWorldNet_ServerModule::GetPlayerData(const NFGUID& id)
+{
+	return mPlayersData.GetElement(id);
+}
+
 void NFWorldNet_ServerModule::ServerReport(int reportServerId, NFMsg::EServerState serverStatus)
 {
 	std::shared_ptr<NFIClass> xLogicClass = m_pClassModule->GetElement(NFrame::Server::ThisName());

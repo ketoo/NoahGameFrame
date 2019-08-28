@@ -476,21 +476,23 @@ void NFHttpClient::OnHttpReqDone(struct evhttp_request* req, void* ctx)
         }
     }
 
+#if NF_PLATFORM != NF_PLATFORM_WIN
+			NF_CRASH_TRY
+#endif
+
     if (pHttpObj->m_pCB)
     {
         if (pHttpObj->m_pCB.get())
         {
-            try
-            {
-                HTTP_RESP_FUNCTOR fun(*pHttpObj->m_pCB.get());
-                fun(pHttpObj->mID, nRespCode, strResp,pHttpObj->strMemo);
-            }
-            catch(...)
-            {
-                //i dont know why cant throw a exception(I u throw a exception than u will got a error when u request a new access request)
-            }
+            HTTP_RESP_FUNCTOR fun(*pHttpObj->m_pCB.get());
+            fun(pHttpObj->mID, nRespCode, strResp,pHttpObj->strMemo);
         }
     }
+
+#if NF_PLATFORM != NF_PLATFORM_WIN
+			NF_CRASH_END_TRY
+#endif
+    
 
     NFHttpClient* pHttpClient = (NFHttpClient*)(pHttpObj->m_pHttpClient);
     pHttpClient->mlHttpObject.push_back(pHttpObj);

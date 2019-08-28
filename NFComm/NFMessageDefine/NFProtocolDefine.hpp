@@ -761,6 +761,14 @@ namespace NFrame
 			static const int Date = 4;//int
 
 		};
+		class BlockList
+		{
+		public:
+			//Class name
+			static const std::string& ThisName(){ static std::string x = "BlockList"; return x; };
+			static const int GUID = 0;//object
+
+		};
 		class BuildingList
 		{
 		public:
@@ -896,6 +904,18 @@ namespace NFrame
 			static const int Postion = 3;//vector3
 
 		};
+		class FriendList
+		{
+		public:
+			//Class name
+			static const std::string& ThisName(){ static std::string x = "FriendList"; return x; };
+			static const int GUID = 0;//object
+			static const int Name = 1;//string
+			static const int Online = 2;//int
+			static const int Time = 3;//int
+			static const int GameID = 4;//int
+
+		};
 		class HeroValue
 		{
 		public:
@@ -935,6 +955,17 @@ namespace NFrame
 			static const int LUCK = 31;//int
 
 		};
+		class InviteList
+		{
+		public:
+			//Class name
+			static const std::string& ThisName(){ static std::string x = "InviteList"; return x; };
+			static const int GUID = 0;//object
+			static const int Name = 1;//string
+			static const int Level = 2;//int
+			static const int BP = 3;//int
+
+		};
 		class PlayerHero
 		{
 		public:
@@ -953,6 +984,15 @@ namespace NFrame
 			static const int Wind_Talent = 10;//int
 			static const int Poison_Talent = 11;//int
 			static const int Dark_Talent = 12;//int
+
+		};
+		class SentList
+		{
+		public:
+			//Class name
+			static const std::string& ThisName(){ static std::string x = "SentList"; return x; };
+			static const int GUID = 0;//object
+			static const int Name = 1;//string
 
 		};
 		class TaskList

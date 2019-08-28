@@ -22,12 +22,8 @@ message FriendData
 
 message ReqAckFriendList
 {
-	repeated FriendData 	friendList 	= 1;
-}
-
-message ReqAckInviteList
-{
 	repeated FriendData 	inviteList 	= 1;
+	repeated FriendData 	friendList 	= 2;
 }
 
 message ReqAckDeleteFriend
@@ -55,7 +51,15 @@ message ReqAckIgnoreInvite
     Ident	stranger 				= 1;
 }
 
+message ReqAckBlockInvite
+{
+    Ident	stranger 				= 1;
+}
 
+message ReqAckUnBlockInvite
+{
+    Ident	stranger 				= 1;
+}
 ///////////////组队/////////////////////////////////////////////////////////////////////////////////////
 
 message TeammemberInfo

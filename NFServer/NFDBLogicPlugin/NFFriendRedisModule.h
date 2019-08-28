@@ -49,8 +49,8 @@ public:
 
 	virtual bool AfterInit();
 
-    virtual bool GetFriendsList(const NFGUID& self, NFList<FriendData>& friendList);
-    virtual bool GetInvitationList(const NFGUID& self, NFList<FriendData>& friendList);
+    virtual bool GetFriendsList(const NFGUID& self, std::vector<FriendData>& friendList);
+    virtual bool GetInvitationList(const NFGUID& self, std::vector<FriendData>& friendList);
     virtual bool AddFriend(const NFGUID& self, const NFGUID& stranger, const std::string& strangerName);
     virtual bool DeleteFriend(const NFGUID& self, const NFGUID& other);
     
