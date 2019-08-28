@@ -33,17 +33,6 @@ class NFIFriendModule : public NFIModule
 {
 public:
 
-    virtual void GetFriendsList(const NFGUID& self, NFList<NFIFriendRedisModule::FriendData>& friendList) = 0;
-    virtual void GetInvitationList(const NFGUID& self, NFList<NFIFriendRedisModule::FriendData>& friendList) = 0;
-    virtual void DeleteFriend(const NFGUID& self, const NFGUID& other) = 0;
-
-    virtual void SendInvite(const NFGUID& self, const std::string& selfName, const NFGUID& stranger) = 0;
-    virtual void AcceptInvite(const NFGUID& self, const std::string& selfName, const NFGUID& inviter) = 0;
-    virtual void RejectInvite(const NFGUID& self, const std::string& selfName, const NFGUID& inviter) = 0;
-    virtual void IgnoreInvite(const NFGUID& self, const NFGUID& inviter) = 0;
-
-    virtual void BlockPlayer(const NFGUID& self, const NFGUID& other) = 0;
-    virtual void UnBlockPlayer(const NFGUID& self, const NFGUID& other) = 0;
 };
 
 #endif

@@ -64,6 +64,7 @@ public:
     virtual int GetPlayerGameID(const NFGUID self);
     virtual const std::vector<NFGUID>& GetOnlinePlayers();
 
+    virtual NF_SHARE_PTR<NFIWorldNet_ServerModule::PlayerData> GetPlayerData(const NFGUID& id);
 protected:
 
     void OnSocketEvent(const NFSOCK nSockIndex, const NF_NET_EVENT eEvent, NFINet* pNet);
@@ -113,41 +114,7 @@ protected:
     void LogGameServer();
 
 private:
-	class PlayerData
-	{
-	public:
-		PlayerData(const NFGUID id)
-		{
-			self = id;
-			gameID = 0;
-			gateID = 0;
-            bp = 0;
-		}
 
-		~PlayerData()
-		{
-
-		}
-
-		void OnLine(const int gameSvrID, const int gateSvrID)
-		{
-			gameID = gameSvrID;
-			gateID = gateSvrID;
-		}
-
-		void OffLine()
-		{
-			gameID = 0;
-			gateID = 0;
-		}
-
-		int gameID;
-		int gateID;
-		NFGUID self;
-		int bp;
-        std::string name;
-
-	};
 
 	NFMapEx<NFGUID, PlayerData> mPlayersData;
     NFINT64 mnLastCheckTime;

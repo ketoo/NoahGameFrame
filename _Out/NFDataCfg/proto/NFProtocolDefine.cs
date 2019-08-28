@@ -753,6 +753,13 @@ namespace NFrame
 			public const int Date = 4;//int
 
 		}
+		public class BlockList
+		{
+			//Class name
+			public static readonly String ThisName = "BlockList";
+			public const int GUID = 0;//object
+
+		}
 		public class BuildingList
 		{
 			//Class name
@@ -879,6 +886,17 @@ namespace NFrame
 			public const int Postion = 3;//vector3
 
 		}
+		public class FriendList
+		{
+			//Class name
+			public static readonly String ThisName = "FriendList";
+			public const int GUID = 0;//object
+			public const int Name = 1;//string
+			public const int Online = 2;//int
+			public const int Time = 3;//int
+			public const int GameID = 4;//int
+
+		}
 		public class HeroValue
 		{
 			//Class name
@@ -917,6 +935,16 @@ namespace NFrame
 			public const int LUCK = 31;//int
 
 		}
+		public class InviteList
+		{
+			//Class name
+			public static readonly String ThisName = "InviteList";
+			public const int GUID = 0;//object
+			public const int Name = 1;//string
+			public const int Level = 2;//int
+			public const int BP = 3;//int
+
+		}
 		public class PlayerHero
 		{
 			//Class name
@@ -934,6 +962,14 @@ namespace NFrame
 			public const int Wind_Talent = 10;//int
 			public const int Poison_Talent = 11;//int
 			public const int Dark_Talent = 12;//int
+
+		}
+		public class SentList
+		{
+			//Class name
+			public static readonly String ThisName = "SentList";
+			public const int GUID = 0;//object
+			public const int Name = 1;//string
 
 		}
 		public class TaskList

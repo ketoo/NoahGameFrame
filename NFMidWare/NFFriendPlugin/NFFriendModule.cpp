@@ -43,31 +43,19 @@ bool NFFriendModule::AfterInit()
 	m_pSceneModule = pPluginManager->FindModule<NFISceneModule>();
 	m_pFriendRedisModule = pPluginManager->FindModule<NFIFriendRedisModule>();
 	m_pNetModule = pPluginManager->FindModule<NFINetModule>();
+	m_pWorldNet_ServerModule = pPluginManager->FindModule<NFIWorldNet_ServerModule>();
 
 
-    if (!m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_REQ_ACK_FRIEND_LIST, this, &NFFriendModule::OnReqFriendList)) { return false; }
-    if (!m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_REQ_ACK_INVITE_LIST, this, &NFFriendModule::OnReqInviteList)) { return false; }
+    if (!m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_REQ_ACK_FRIEND_LIST, this, &NFFriendModule::OnReqFriendListProcess)) { return false; }
 
-    if (!m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_REQ_ACK_SEND_INVITE, this, &NFFriendModule::OnReqSendInvite)) { return false; }
-    if (!m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_REQ_ACK_ACCEPT_INVITE, this, &NFFriendModule::OnReqAcceptInvite)) { return false; }
-    if (!m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_REQ_ACK_REJECT_INVITE, this, &NFFriendModule::OnReqRejectInvite)) { return false; }
-    if (!m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_REQ_ACK_IGNORE_INVITE, this, &NFFriendModule::OnReqIgnoreInvite)) { return false; }
+    if (!m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_REQ_ACK_SEND_INVITE, this, &NFFriendModule::OnReqSendInviteProcess)) { return false; }
+    if (!m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_REQ_ACK_ACCEPT_INVITE, this, &NFFriendModule::OnReqAcceptInviteProcess)) { return false; }
+    if (!m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_REQ_ACK_REJECT_INVITE, this, &NFFriendModule::OnReqRejectInviteProcess)) { return false; }
+    if (!m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_REQ_ACK_IGNORE_INVITE, this, &NFFriendModule::OnReqIgnoreInviteProcess)) { return false; }
 
-    if (!m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_REQ_ACK_BLOCK_PLAYER, this, &NFFriendModule::OnReqBlockPlayer)) { return false; }
-    if (!m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_REQ_ACK_UNBLOCK_PLAYER, this, &NFFriendModule::OnReqUnBlockPlayer)) { return false; }
+    if (!m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_REQ_ACK_BLOCK_PLAYER, this, &NFFriendModule::OnReqBlockPlayerProcess)) { return false; }
+    if (!m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_REQ_ACK_UNBLOCK_PLAYER, this, &NFFriendModule::OnReqUnBlockPlayerProcess)) { return false; }
 
-    /*
-	EGMI_REQ_ACK_FRIEND_LIST = 50001;
-	EGMI_REQ_ACK_INVITE_LIST = 50002;
-
-	EGMI_REQ_ACK_SEND_INVITE = 50010;
-	EGMI_REQ_ACK_ACCEPT_INVITE = 50011;
-	EGMI_REQ_ACK_REJECT_INVITE = 50012;
-	EGMI_REQ_ACK_IGNORE_INVITE = 50013;
-
-	EGMI_REQ_ACK_BLOCK_PLAYER = 50020;
-	EGMI_REQ_ACK_UNBLOCK_PLAYER = 50021;
-*/
 	return true;
 }
 
@@ -82,93 +70,124 @@ bool NFFriendModule::Execute()
 	return true;
 }
 
-void NFFriendModule::GetFriendsList(const NFGUID& self, NFList<NFIFriendRedisModule::FriendData>& friendList)
-{
-    m_pFriendRedisModule->GetFriendsList(self, friendList);
-}
-
-void NFFriendModule::GetInvitationList(const NFGUID& self, NFList<NFIFriendRedisModule::FriendData>& friendList)
-{
-    m_pFriendRedisModule->GetInvitationList(self, friendList);
-}
-
-void NFFriendModule::DeleteFriend(const NFGUID& self, const NFGUID& other)
-{
-    m_pFriendRedisModule->DeleteFriend(self, other);
-}
-
-void NFFriendModule::SendInvite(const NFGUID& self, const std::string& selfName, const NFGUID& stranger)
-{
-    m_pFriendRedisModule->SendInvite(self, selfName, stranger);
-}
-
-void NFFriendModule::AcceptInvite(const NFGUID& self, const std::string& selfName, const NFGUID& inviter)
-{
-    m_pFriendRedisModule->AcceptInvite(self, selfName, inviter);
-}
-
-void NFFriendModule::IgnoreInvite(const NFGUID& self, const NFGUID& inviter)
-{
-    m_pFriendRedisModule->IgnoreInvite(self, inviter);
-}
-
-void NFFriendModule::RejectInvite(const NFGUID& self, const std::string& selfName, const NFGUID& inviter)
-{
-    m_pFriendRedisModule->RejectInvite(self, inviter);
-}
-
-void NFFriendModule::BlockPlayer(const NFGUID& self, const NFGUID& other)
-{
-    m_pFriendRedisModule->BlockPlayer(self, other);
-}
-
-void NFFriendModule::UnBlockPlayer(const NFGUID& self, const NFGUID& other)
-{
-    m_pFriendRedisModule->UnBlockPlayer(self, other);
-}
-
-void NFFriendModule::OnReqFriendList(const NFSOCK nSockIndex, const int nMsgID, const char *msg, const uint32_t nLen)
+void NFFriendModule::OnReqFriendListProcess(const NFSOCK nSockIndex, const int nMsgID, const char *msg, const uint32_t nLen)
 {
 	CLIENT_MSG_PROCESS_NO_OBJECT(nMsgID, msg, nLen, NFMsg::ReqAckFriendList)
-
+    
     std::cout << nPlayerID.ToString() << std::endl;
-    //xMsg.
-    //nPlayerID
+
+    std::vector<NFIFriendRedisModule::FriendData> friendList;
+    m_pFriendRedisModule->GetFriendsList(nPlayerID, friendList);
+
+    std::vector<NFIFriendRedisModule::FriendData> inviteList;
+    m_pFriendRedisModule->GetInvitationList(nPlayerID, inviteList);
+
+    for (int i = 0; i < friendList.size(); ++i)
+    {
+        NFMsg::FriendData* pData = xMsg.add_friendlist();
+        if (pData)
+        {
+            pData->set_name(friendList[i].name);
+            *pData->mutable_id() = NFINetModule::NFToPB(friendList[i].id);
+        }
+    }
+
+    for (int i = 0; i < inviteList.size(); ++i)
+    {
+        NFMsg::FriendData* pData = xMsg.add_invitelist();
+        if (pData)
+        {
+            pData->set_name(friendList[i].name);
+            *pData->mutable_id() = NFINetModule::NFToPB(friendList[i].id);
+        }
+    }
+
+    m_pNetModule->SendMsgPB(NFMsg::EGMI_REQ_ACK_FRIEND_LIST, xMsg, nSockIndex, nPlayerID);
 }
 
-void NFFriendModule::OnReqInviteList(const NFSOCK nSockIndex, const int nMsgID, const char *msg, const uint32_t nLen)
+void NFFriendModule::OnReqDeleteFriendProcess(const NFSOCK nSockIndex, const int nMsgID, const char *msg, const uint32_t nLen)
 {
-	CLIENT_MSG_PROCESS_NO_OBJECT(nMsgID, msg, nLen, NFMsg::ReqAckInviteList)
+    CLIENT_MSG_PROCESS_NO_OBJECT(nMsgID, msg, nLen, NFMsg::ReqAckDeleteFriend)
 
+    NFGUID stranger = NFINetModule::PBToNF(xMsg.stranger());
+
+    m_pFriendRedisModule->DeleteFriend(nPlayerID, stranger);
 }
 
-
-void NFFriendModule::OnReqSendInvite(const NFSOCK nSockIndex, const int nMsgID, const char *msg, const uint32_t nLen)
+void NFFriendModule::OnReqSendInviteProcess(const NFSOCK nSockIndex, const int nMsgID, const char *msg, const uint32_t nLen)
 {
+    CLIENT_MSG_PROCESS_NO_OBJECT(nMsgID, msg, nLen, NFMsg::ReqAckSendInvite)
 
+    NFGUID stranger = NFINetModule::PBToNF(xMsg.stranger());
+
+    NF_SHARE_PTR<NFIWorldNet_ServerModule::PlayerData> pPlayerData = m_pWorldNet_ServerModule->GetPlayerData(nPlayerID);
+    if (pPlayerData)
+    {
+        m_pFriendRedisModule->SendInvite(nPlayerID, pPlayerData->name, stranger);
+    }
 }
 
-void NFFriendModule::OnReqAcceptInvite(const NFSOCK nSockIndex, const int nMsgID, const char *msg, const uint32_t nLen)
+void NFFriendModule::OnReqAcceptInviteProcess(const NFSOCK nSockIndex, const int nMsgID, const char *msg, const uint32_t nLen)
 {
+    CLIENT_MSG_PROCESS_NO_OBJECT(nMsgID, msg, nLen, NFMsg::ReqAckSendInvite)
 
+    NFGUID stranger = NFINetModule::PBToNF(xMsg.stranger());
+
+    NF_SHARE_PTR<NFIWorldNet_ServerModule::PlayerData> pPlayerData = m_pWorldNet_ServerModule->GetPlayerData(nPlayerID);
+    if (pPlayerData)
+    {
+        m_pFriendRedisModule->SendInvite(nPlayerID, pPlayerData->name, stranger);
+    }
 }
 
-void NFFriendModule::OnReqRejectInvite(const NFSOCK nSockIndex, const int nMsgID, const char *msg, const uint32_t nLen)
+void NFFriendModule::OnReqRejectInviteProcess(const NFSOCK nSockIndex, const int nMsgID, const char *msg, const uint32_t nLen)
 {
+   CLIENT_MSG_PROCESS_NO_OBJECT(nMsgID, msg, nLen, NFMsg::ReqAckAcceptInvite)
 
+    NFGUID stranger = NFINetModule::PBToNF(xMsg.stranger());
+
+    NF_SHARE_PTR<NFIWorldNet_ServerModule::PlayerData> pPlayerData = m_pWorldNet_ServerModule->GetPlayerData(nPlayerID);
+    if (pPlayerData)
+    {
+        m_pFriendRedisModule->RejectInvite(nPlayerID, stranger);
+    }
 }
 
-void NFFriendModule::OnReqIgnoreInvite(const NFSOCK nSockIndex, const int nMsgID, const char *msg, const uint32_t nLen)
+void NFFriendModule::OnReqIgnoreInviteProcess(const NFSOCK nSockIndex, const int nMsgID, const char *msg, const uint32_t nLen)
 {
+   CLIENT_MSG_PROCESS_NO_OBJECT(nMsgID, msg, nLen, NFMsg::ReqAckIgnoreInvite)
 
+    NFGUID stranger = NFINetModule::PBToNF(xMsg.stranger());
+
+    NF_SHARE_PTR<NFIWorldNet_ServerModule::PlayerData> pPlayerData = m_pWorldNet_ServerModule->GetPlayerData(nPlayerID);
+    if (pPlayerData)
+    {
+        m_pFriendRedisModule->IgnoreInvite(nPlayerID, stranger);
+    }
 }
 
-void NFFriendModule::OnReqBlockPlayer(const NFSOCK nSockIndex, const int nMsgID, const char *msg, const uint32_t nLen)
+void NFFriendModule::OnReqBlockPlayerProcess(const NFSOCK nSockIndex, const int nMsgID, const char *msg, const uint32_t nLen)
 {
+   CLIENT_MSG_PROCESS_NO_OBJECT(nMsgID, msg, nLen, NFMsg::ReqAckBlockInvite)
 
+    NFGUID stranger = NFINetModule::PBToNF(xMsg.stranger());
+
+    NF_SHARE_PTR<NFIWorldNet_ServerModule::PlayerData> pPlayerData = m_pWorldNet_ServerModule->GetPlayerData(nPlayerID);
+    if (pPlayerData)
+    {
+        m_pFriendRedisModule->BlockPlayer(nPlayerID, stranger);
+    }
 }
 
-void NFFriendModule::OnReqUnBlockPlayer(const NFSOCK nSockIndex, const int nMsgID, const char *msg, const uint32_t nLen)
+void NFFriendModule::OnReqUnBlockPlayerProcess(const NFSOCK nSockIndex, const int nMsgID, const char *msg, const uint32_t nLen)
 {
+   CLIENT_MSG_PROCESS_NO_OBJECT(nMsgID, msg, nLen, NFMsg::ReqAckUnBlockInvite)
 
+    NFGUID stranger = NFINetModule::PBToNF(xMsg.stranger());
+
+    NF_SHARE_PTR<NFIWorldNet_ServerModule::PlayerData> pPlayerData = m_pWorldNet_ServerModule->GetPlayerData(nPlayerID);
+    if (pPlayerData)
+    {
+        m_pFriendRedisModule->UnBlockPlayer(nPlayerID, stranger);
+    }
 }

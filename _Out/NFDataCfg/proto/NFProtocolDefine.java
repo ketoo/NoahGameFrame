@@ -747,6 +747,13 @@ package nframe;
 			public static final int Date = 4;//int
 
 		}
+		public class BlockList
+		{
+			//Class name
+			public static final String ThisName = "BlockList";
+			public static final int GUID = 0;//object
+
+		}
 		public class BuildingList
 		{
 			//Class name
@@ -873,6 +880,17 @@ package nframe;
 			public static final int Postion = 3;//vector3
 
 		}
+		public class FriendList
+		{
+			//Class name
+			public static final String ThisName = "FriendList";
+			public static final int GUID = 0;//object
+			public static final int Name = 1;//string
+			public static final int Online = 2;//int
+			public static final int Time = 3;//int
+			public static final int GameID = 4;//int
+
+		}
 		public class HeroValue
 		{
 			//Class name
@@ -911,6 +929,16 @@ package nframe;
 			public static final int LUCK = 31;//int
 
 		}
+		public class InviteList
+		{
+			//Class name
+			public static final String ThisName = "InviteList";
+			public static final int GUID = 0;//object
+			public static final int Name = 1;//string
+			public static final int Level = 2;//int
+			public static final int BP = 3;//int
+
+		}
 		public class PlayerHero
 		{
 			//Class name
@@ -928,6 +956,14 @@ package nframe;
 			public static final int Wind_Talent = 10;//int
 			public static final int Poison_Talent = 11;//int
 			public static final int Dark_Talent = 12;//int
+
+		}
+		public class SentList
+		{
+			//Class name
+			public static final String ThisName = "SentList";
+			public static final int GUID = 0;//object
+			public static final int Name = 1;//string
 
 		}
 		public class TaskList

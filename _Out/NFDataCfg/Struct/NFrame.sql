@@ -128,6 +128,7 @@ ALTER TABLE `Player` ADD `VIPEXP` bigint(11) DEFAULT '0' COMMENT 'VIP经验';
 ALTER TABLE `Player` ADD `VIPLevel` bigint(11) DEFAULT '0' COMMENT '经验获得,如果是怪物，则是掉落经验';
 ALTER TABLE `Player` ADD `BagEquipList` text COLLATE utf8mb4_unicode_ci  DEFAULT '' COMMENT '';
 ALTER TABLE `Player` ADD `BagItemList` text COLLATE utf8mb4_unicode_ci  DEFAULT '' COMMENT '';
+ALTER TABLE `Player` ADD `BlockList` text COLLATE utf8mb4_unicode_ci  DEFAULT '' COMMENT '';
 ALTER TABLE `Player` ADD `BuildingList` text COLLATE utf8mb4_unicode_ci  DEFAULT '' COMMENT '';
 ALTER TABLE `Player` ADD `BuildingListProduce` text COLLATE utf8mb4_unicode_ci  DEFAULT '' COMMENT '';
 ALTER TABLE `Player` ADD `Clan_AppyList` text COLLATE utf8mb4_unicode_ci  DEFAULT '' COMMENT '';
@@ -137,6 +138,7 @@ ALTER TABLE `Player` ADD `Clan_WarList` text COLLATE utf8mb4_unicode_ci  DEFAULT
 ALTER TABLE `Player` ADD `Cooldown` text COLLATE utf8mb4_unicode_ci  DEFAULT '' COMMENT '';
 ALTER TABLE `Player` ADD `HeroValue` text COLLATE utf8mb4_unicode_ci  DEFAULT '' COMMENT '';
 ALTER TABLE `Player` ADD `PlayerHero` text COLLATE utf8mb4_unicode_ci  DEFAULT '' COMMENT '';
+ALTER TABLE `Player` ADD `SentList` text COLLATE utf8mb4_unicode_ci  DEFAULT '' COMMENT '';
 ALTER TABLE `Player` ADD `TaskList` text COLLATE utf8mb4_unicode_ci  DEFAULT '' COMMENT '';
 ALTER TABLE `Player` ADD `WarList` text COLLATE utf8mb4_unicode_ci  DEFAULT '' COMMENT '';
 ALTER TABLE `Shop` ADD `Count` bigint(11) DEFAULT '0' COMMENT '';

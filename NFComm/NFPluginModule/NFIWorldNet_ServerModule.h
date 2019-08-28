@@ -35,8 +35,43 @@
 class NFIWorldNet_ServerModule
     : public NFIModule
 {
-
 public:
+	class PlayerData
+	{
+	public:
+		PlayerData(const NFGUID id)
+		{
+			self = id;
+			gameID = 0;
+			gateID = 0;
+            bp = 0;
+		}
+
+		~PlayerData()
+		{
+
+		}
+
+		void OnLine(const int gameSvrID, const int gateSvrID)
+		{
+			gameID = gameSvrID;
+			gateID = gateSvrID;
+		}
+
+		void OffLine()
+		{
+			gameID = 0;
+			gateID = 0;
+		}
+
+		int gameID;
+		int gateID;
+		NFGUID self;
+		int bp;
+        std::string name;
+
+	};
+
 	virtual void OnServerInfoProcess(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen) = 0;
 
 	virtual bool SendMsgToGame(const NFGUID nPlayer, const NFMsg::EGameMsgID eMsgID, google::protobuf::Message& xData) = 0;
@@ -44,6 +79,8 @@ public:
 
 	virtual NF_SHARE_PTR<ServerData> GetSuitProxyForEnter() = 0;
     virtual const std::vector<NFGUID>& GetOnlinePlayers() = 0;
+
+    virtual NF_SHARE_PTR<PlayerData> GetPlayerData(const NFGUID& id) = 0;
 
 
 };

@@ -54,7 +54,7 @@ bool NFFriendRedisModule::AfterInit()
 	return true;
 }
 
-bool NFFriendRedisModule::GetFriendsList(const NFGUID& self, NFList<FriendData>& friendList)
+bool NFFriendRedisModule::GetFriendsList(const NFGUID& self, std::vector<FriendData>& friendList)
 {
 	std::string strKey = m_pCommonRedisModule->GetFriendCacheKey(self);
 	NF_SHARE_PTR<NFIRedisClient> xNoSqlDriver = m_pNoSqlModule->GetDriverBySuit(strKey);
@@ -69,7 +69,7 @@ bool NFFriendRedisModule::GetFriendsList(const NFGUID& self, NFList<FriendData>&
 				friendData.id = values[i].first;
 				friendData.name = values[i].second;
 
-				friendList.Add(friendData);
+				friendList.push_back(friendData);
 			}
 
 			return true;
@@ -78,7 +78,7 @@ bool NFFriendRedisModule::GetFriendsList(const NFGUID& self, NFList<FriendData>&
     return false;
 }
 
-bool NFFriendRedisModule::GetInvitationList(const NFGUID& self, NFList<FriendData>& friendList)
+bool NFFriendRedisModule::GetInvitationList(const NFGUID& self, std::vector<FriendData>& friendList)
 {
 	std::string strKey = m_pCommonRedisModule->GetFriendInviteCacheKey(self);
 	NF_SHARE_PTR<NFIRedisClient> xNoSqlDriver = m_pNoSqlModule->GetDriverBySuit(strKey);
@@ -93,7 +93,7 @@ bool NFFriendRedisModule::GetInvitationList(const NFGUID& self, NFList<FriendDat
 				friendData.id = values[i].first;
 				friendData.name = values[i].second;
 
-				friendList.Add(friendData);
+				friendList.push_back(friendData);
 			}
 
 			return true;

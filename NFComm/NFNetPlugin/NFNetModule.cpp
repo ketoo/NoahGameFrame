@@ -429,7 +429,8 @@ void NFNetModule::OnReceiveNetPack(const NFSOCK nSockIndex, const int nMsgID, co
 		std::ostringstream os;
 		os << "---------------net module performance problem------------------- ";
 		os << performance.TimeScope();
-		os << "---------- ";
+		os << "---------- MsgID: ";
+		os << nMsgID;
 		m_pLogModule->LogWarning(NFGUID(0, nMsgID), os, __FUNCTION__, __LINE__);
 	}
 }
