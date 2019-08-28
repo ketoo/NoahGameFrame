@@ -77,7 +77,6 @@ private:
     NFIHateModule* m_pHateModule;
 	NFIKernelModule* m_pKernelModule;
 	NFIElementModule* m_pElementModule;
-	NFIFriendModule* m_pFriendModule;
 };
 
 #endif

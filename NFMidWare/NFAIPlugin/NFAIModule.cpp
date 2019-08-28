@@ -32,7 +32,6 @@ bool NFAIModule::Init()
 	m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>();
 	m_pElementModule = pPluginManager->FindModule<NFIElementModule>();
 	m_pHateModule = pPluginManager->FindModule<NFIHateModule>();
-	m_pFriendModule = pPluginManager->FindModule<NFIFriendModule>();
 	
     //////////////////////////////////////////////////////////////////////////
 	mtStateMap[IdleState] = new NFIdleState(1.0f, pPluginManager);
