@@ -17,6 +17,9 @@
     <Filter Include="NFScenePropsModule">
       <UniqueIdentifier>{a86b3f73-a5da-4bba-9d52-9d4ef540a9b7}</UniqueIdentifier>
     </Filter>
+    <Filter Include="NFFriendAgent">
+      <UniqueIdentifier>{a50b2f7c-a0b6-478c-91b7-6e17255eb757}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="NFGameLogicPlugin.h" />
@@ -35,7 +38,9 @@
     <ClInclude Include="NFScenePropsModule.h">
       <Filter>NFScenePropsModule</Filter>
     </ClInclude>
-    <ClInclude Include="NFFriendAgentModule.h" />
+    <ClInclude Include="NFFriendAgentModule.h">
+      <Filter>NFFriendAgent</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="dllmain.cpp" />
@@ -56,7 +61,7 @@
       <Filter>NFScenePropsModule</Filter>
     </ClCompile>
     <ClCompile Include="NFFriendAgentModule.cpp">
-      <Filter>NFBuffModule</Filter>
+      <Filter>NFFriendAgent</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
