@@ -192,7 +192,7 @@ void NFFriendAgentModule::OnAckReceivedInviteProcess(const NFSOCK nSockIndex, co
             NF_SHARE_PTR<NFDataList> dataList = pRecord->GetInitData();
             if (dataList)
             {
-                dataList->SetObject(NFrame::Player::InviteList::GUID, NFNetModule::PBToNF(friendData.id()));
+                dataList->SetObject(NFrame::Player::InviteList::GUID, NFINetModule::PBToNF(friendData.id()));
                 dataList->SetString(NFrame::Player::InviteList::Name, friendData.name());
 
                 pRecord->AddRow(-1, *dataList);
@@ -206,20 +206,24 @@ void NFFriendAgentModule::OnReqSendInviteProcess(const NFSOCK nSockIndex, const 
     //come from client
 	CLIENT_MSG_PROCESS(nMsgID, msg, nLen, NFMsg::ReqAckSendInvite)
 
-    NF_SHARE_PTR<NFIRecord> pRecord = pObject->GetRecordManager()->GetEleIment(NFrame::Player::SentList::ThisName());
+    NF_SHARE_PTR<NFIRecord> pRecord = pObject->GetRecordManager()->GetElement(NFrame::Player::SentList::ThisName());
     if (pRecord)
     {
-        NF_SHARE_PTR<NFDataList> dataList = pRecord->GetInitData();
-        if (dataList)
-        {
-            dataList->SetObject(NFrame::Player::SentList::GUID, NFINetModule::PBToNF(xMsg.id()));
-            dataList->SetString(NFrame::Player::SentList::Name, xMsg.name());
+		const int row = pRecord->FindObject(NFrame::Player::SentList::GUID, NFINetModule::PBToNF(xMsg.id()));
+		if (row < 0)
+		{
+			NF_SHARE_PTR<NFDataList> dataList = pRecord->GetInitData();
+			if (dataList)
+			{
+				dataList->SetObject(NFrame::Player::SentList::GUID, NFINetModule::PBToNF(xMsg.id()));
+				dataList->SetString(NFrame::Player::SentList::Name, xMsg.name());
 
-            pRecord->AddRow(-1, *dataList);
-        }
+				pRecord->AddRow(-1, *dataList);
+			}
+
+			m_pNetClientModule->SendSuitByPB(NF_SERVER_TYPES::NF_ST_WORLD, nPlayerID.GetData(), NFMsg::EGMI_REQ_ACK_SEND_INVITE, xMsg, nPlayerID);
+		}
     }
-
-    m_pNetClientModule->SendSuitByPB(NF_SERVER_TYPES::NF_ST_WORLD, nPlayerID.GetData(), NFMsg::EGMI_REQ_ACK_SEND_INVITE, xMsg, nPlayerID);
 }
 
 void NFFriendAgentModule::OnReqAcceptInviteProcess(const NFSOCK nSockIndex, const int nMsgID, const char *msg, const uint32_t nLen)
