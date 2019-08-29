@@ -109,7 +109,7 @@ void NFFriendModule::OnReqDeleteFriendProcess(const NFSOCK nSockIndex, const int
 {
     CLIENT_MSG_PROCESS_NO_OBJECT(nMsgID, msg, nLen, NFMsg::ReqAckDeleteFriend)
 
-    NFGUID stranger = NFINetModule::PBToNF(xMsg.stranger());
+    NFGUID stranger = NFINetModule::PBToNF(xMsg.id());
 
     m_pFriendRedisModule->DeleteFriend(nPlayerID, stranger);
 }
@@ -118,33 +118,77 @@ void NFFriendModule::OnReqSendInviteProcess(const NFSOCK nSockIndex, const int n
 {
     CLIENT_MSG_PROCESS_NO_OBJECT(nMsgID, msg, nLen, NFMsg::ReqAckSendInvite)
 
-    NFGUID stranger = NFINetModule::PBToNF(xMsg.stranger());
+    NFGUID stranger = NFINetModule::PBToNF(xMsg.id());
+    const std::string& name = xMsg.name();
+    m_pFriendRedisModule->SendInvite(nPlayerID, name, stranger);
 
+    NF_SHARE_PTR<NFIWorldNet_ServerModule::PlayerData> pStrangerData = m_pWorldNet_ServerModule->GetPlayerData(stranger);
     NF_SHARE_PTR<NFIWorldNet_ServerModule::PlayerData> pPlayerData = m_pWorldNet_ServerModule->GetPlayerData(nPlayerID);
-    if (pPlayerData)
+    if (pPlayerData && pStrangerData)
     {
-        m_pFriendRedisModule->SendInvite(nPlayerID, pPlayerData->name, stranger);
+        //send message to the game server
+        NFMsg::ReqAckFriendList xReqAckFriendList;
+        NFMsg::FriendData* pData = xReqAckFriendList.add_invitelist();
+        if (pData)
+        {
+            pData->set_name(pPlayerData->name);
+            *(pData->mutable_id()) = NFINetModule::NFToPB(nPlayerID);
+            m_pWorldNet_ServerModule->SendMsgToGame(stranger, NFMsg::EGMI_ACK_INVITE_ADD, xReqAckFriendList);
+        }
     }
 }
 
 void NFFriendModule::OnReqAcceptInviteProcess(const NFSOCK nSockIndex, const int nMsgID, const char *msg, const uint32_t nLen)
 {
-    CLIENT_MSG_PROCESS_NO_OBJECT(nMsgID, msg, nLen, NFMsg::ReqAckSendInvite)
+    CLIENT_MSG_PROCESS_NO_OBJECT(nMsgID, msg, nLen, NFMsg::ReqAckAcceptInvite)
 
-    NFGUID stranger = NFINetModule::PBToNF(xMsg.stranger());
-
-    NF_SHARE_PTR<NFIWorldNet_ServerModule::PlayerData> pPlayerData = m_pWorldNet_ServerModule->GetPlayerData(nPlayerID);
-    if (pPlayerData)
+    NFGUID stranger = NFINetModule::PBToNF(xMsg.id());
+    if (m_pFriendRedisModule->AcceptInvite(nPlayerID, "", stranger))
     {
-        m_pFriendRedisModule->SendInvite(nPlayerID, pPlayerData->name, stranger);
+        NF_SHARE_PTR<NFIWorldNet_ServerModule::PlayerData> pStrangerData = m_pWorldNet_ServerModule->GetPlayerData(stranger);
+        NF_SHARE_PTR<NFIWorldNet_ServerModule::PlayerData> pPlayerData = m_pWorldNet_ServerModule->GetPlayerData(nPlayerID);
+        if (pPlayerData)
+        {
+            //send message to the game server
+            NFMsg::ReqAckFriendList xReqAckFriendList;
+            NFMsg::FriendData* pData = xReqAckFriendList.add_friendlist();
+            if (pData)
+            {
+                if (pStrangerData)
+                {
+                    pData->set_name(pStrangerData->name);
+                }
+                *(pData->mutable_id()) = NFINetModule::NFToPB(stranger);
+                m_pWorldNet_ServerModule->SendMsgToGame(stranger, NFMsg::EGMI_ACK_FRIEND_ADD, xReqAckFriendList);
+            }
+        }
+
+        //send message to the game server
+        if (pStrangerData)
+        {
+            //send message to the game server       
+            NFMsg::ReqAckFriendList xReqAckFriendList;
+            NFMsg::FriendData* pData = xReqAckFriendList.add_friendlist();
+            if (pData)
+            {
+                if (pPlayerData)
+                {
+                    pData->set_name(pPlayerData->name);
+                }
+                *(pData->mutable_id()) = NFINetModule::NFToPB(nPlayerID);
+                m_pWorldNet_ServerModule->SendMsgToGame(stranger, NFMsg::EGMI_ACK_FRIEND_ADD, xReqAckFriendList);
+            }
+        }
+
+
     }
 }
 
 void NFFriendModule::OnReqRejectInviteProcess(const NFSOCK nSockIndex, const int nMsgID, const char *msg, const uint32_t nLen)
 {
-   CLIENT_MSG_PROCESS_NO_OBJECT(nMsgID, msg, nLen, NFMsg::ReqAckAcceptInvite)
+   CLIENT_MSG_PROCESS_NO_OBJECT(nMsgID, msg, nLen, NFMsg::ReqAckRejectInvite)
 
-    NFGUID stranger = NFINetModule::PBToNF(xMsg.stranger());
+    NFGUID stranger = NFINetModule::PBToNF(xMsg.id());
 
     NF_SHARE_PTR<NFIWorldNet_ServerModule::PlayerData> pPlayerData = m_pWorldNet_ServerModule->GetPlayerData(nPlayerID);
     if (pPlayerData)
@@ -157,7 +201,7 @@ void NFFriendModule::OnReqIgnoreInviteProcess(const NFSOCK nSockIndex, const int
 {
    CLIENT_MSG_PROCESS_NO_OBJECT(nMsgID, msg, nLen, NFMsg::ReqAckIgnoreInvite)
 
-    NFGUID stranger = NFINetModule::PBToNF(xMsg.stranger());
+    NFGUID stranger = NFINetModule::PBToNF(xMsg.id());
 
     NF_SHARE_PTR<NFIWorldNet_ServerModule::PlayerData> pPlayerData = m_pWorldNet_ServerModule->GetPlayerData(nPlayerID);
     if (pPlayerData)
@@ -168,9 +212,9 @@ void NFFriendModule::OnReqIgnoreInviteProcess(const NFSOCK nSockIndex, const int
 
 void NFFriendModule::OnReqBlockPlayerProcess(const NFSOCK nSockIndex, const int nMsgID, const char *msg, const uint32_t nLen)
 {
-   CLIENT_MSG_PROCESS_NO_OBJECT(nMsgID, msg, nLen, NFMsg::ReqAckBlockInvite)
+   CLIENT_MSG_PROCESS_NO_OBJECT(nMsgID, msg, nLen, NFMsg::ReqAckBlockPlayer)
 
-    NFGUID stranger = NFINetModule::PBToNF(xMsg.stranger());
+    NFGUID stranger = NFINetModule::PBToNF(xMsg.id());
 
     NF_SHARE_PTR<NFIWorldNet_ServerModule::PlayerData> pPlayerData = m_pWorldNet_ServerModule->GetPlayerData(nPlayerID);
     if (pPlayerData)
@@ -181,9 +225,9 @@ void NFFriendModule::OnReqBlockPlayerProcess(const NFSOCK nSockIndex, const int 
 
 void NFFriendModule::OnReqUnBlockPlayerProcess(const NFSOCK nSockIndex, const int nMsgID, const char *msg, const uint32_t nLen)
 {
-   CLIENT_MSG_PROCESS_NO_OBJECT(nMsgID, msg, nLen, NFMsg::ReqAckUnBlockInvite)
+   CLIENT_MSG_PROCESS_NO_OBJECT(nMsgID, msg, nLen, NFMsg::ReqAckBlockPlayer)
 
-    NFGUID stranger = NFINetModule::PBToNF(xMsg.stranger());
+    NFGUID stranger = NFINetModule::PBToNF(xMsg.id());
 
     NF_SHARE_PTR<NFIWorldNet_ServerModule::PlayerData> pPlayerData = m_pWorldNet_ServerModule->GetPlayerData(nPlayerID);
     if (pPlayerData)

@@ -25,91 +25,70 @@ namespace NFMsg {
       byte[] descriptorData = global::System.Convert.FromBase64String(
           string.Concat(
             "ChBORk1zZ0V4dHJhLnByb3RvEgVORk1zZxoPTkZNc2dCYXNlLnByb3RvIikK",
-            "ClJlcUFJT253ZXISGwoFYWlfaWQYASABKAsyDC5ORk1zZy5JZGVudCI0CgpG",
-            "cmllbmREYXRhEhgKAmlkGAEgASgLMgwuTkZNc2cuSWRlbnQSDAoEbmFtZRgC",
-            "IAEoCSJgChBSZXFBY2tGcmllbmRMaXN0EiUKCmludml0ZUxpc3QYASADKAsy",
-            "ES5ORk1zZy5GcmllbmREYXRhEiUKCmZyaWVuZExpc3QYAiADKAsyES5ORk1z",
-            "Zy5GcmllbmREYXRhIjQKElJlcUFja0RlbGV0ZUZyaWVuZBIeCghzdHJhbmdl",
-            "chgBIAEoCzIMLk5GTXNnLklkZW50IjIKEFJlcUFja1NlbmRJbnZpdGUSHgoI",
-            "c3RyYW5nZXIYASABKAsyDC5ORk1zZy5JZGVudCI0ChJSZXFBY2tBY2NlcHRJ",
-            "bnZpdGUSHgoIc3RyYW5nZXIYASABKAsyDC5ORk1zZy5JZGVudCI0ChJSZXFB",
-            "Y2tSZWplY3RJbnZpdGUSHgoIc3RyYW5nZXIYASABKAsyDC5ORk1zZy5JZGVu",
-            "dCI0ChJSZXFBY2tJZ25vcmVJbnZpdGUSHgoIc3RyYW5nZXIYASABKAsyDC5O",
-            "Rk1zZy5JZGVudCIzChFSZXFBY2tCbG9ja0ludml0ZRIeCghzdHJhbmdlchgB",
-            "IAEoCzIMLk5GTXNnLklkZW50IjUKE1JlcUFja1VuQmxvY2tJbnZpdGUSHgoI",
-            "c3RyYW5nZXIYASABKAsyDC5ORk1zZy5JZGVudCJuCg5UZWFtbWVtYmVySW5m",
-            "bxIfCglwbGF5ZXJfaWQYASABKAsyDC5ORk1zZy5JZGVudBIMCgRuYW1lGAIg",
-            "ASgJEg4KBm5MZXZlbBgDIAEoBRILCgNqb2IYBCABKAUSEAoISGVhZEljb24Y",
-            "BSABKAkiegoIVGVhbUluZm8SHQoHdGVhbV9pZBgBIAEoCzIMLk5GTXNnLklk",
-            "ZW50EiAKCmNhcHRhaW5faWQYAiABKAsyDC5ORk1zZy5JZGVudBItCg50ZWFt",
-            "bWVtYmVySW5mbxgDIAMoCzIVLk5GTXNnLlRlYW1tZW1iZXJJbmZvIlUKEFJl",
-            "cUFja0NyZWF0ZVRlYW0SHQoHdGVhbV9pZBgBIAEoCzIMLk5GTXNnLklkZW50",
-            "EiIKCXhUZWFtSW5mbxgCIAEoCzIPLk5GTXNnLlRlYW1JbmZvIlMKDlJlcUFj",
-            "a0pvaW5UZWFtEh0KB3RlYW1faWQYASABKAsyDC5ORk1zZy5JZGVudBIiCgl4",
-            "VGVhbUluZm8YAiABKAsyDy5ORk1zZy5UZWFtSW5mbyJUCg9SZXFBY2tMZWF2",
-            "ZVRlYW0SHQoHdGVhbV9pZBgBIAEoCzIMLk5GTXNnLklkZW50EiIKCXhUZWFt",
-            "SW5mbxgCIAEoCzIPLk5GTXNnLlRlYW1JbmZvIugCChNSZXFBY2tPcHJUZWFt",
-            "TWVtYmVyEh0KB3RlYW1faWQYASABKAsyDC5ORk1zZy5JZGVudBIfCgltZW1i",
-            "ZXJfaWQYAiABKAsyDC5ORk1zZy5JZGVudBI8CgR0eXBlGAMgASgOMi4uTkZN",
-            "c2cuUmVxQWNrT3ByVGVhbU1lbWJlci5FR1RlYW1NZW1iZXJPcHJUeXBlEiIK",
-            "CXhUZWFtSW5mbxgEIAEoCzIPLk5GTXNnLlRlYW1JbmZvIq4BChNFR1RlYW1N",
-            "ZW1iZXJPcHJUeXBlEg0KCUVHQVRfRE9XThAAEgsKB0VHQVRfVVAQARINCglF",
-            "R0FUX0tJQ0sQAhIQCgxFR0FUX0FQUE9JTlQQAxINCglFR0FUX0ZJUkUQBBIP",
-            "CgtFR0FUX0RFTUlTRRAFEhQKEEVHQVRfQUNDRVBUQVBQTFkQBhISCg5FR0FU",
-            "X0RFTllBUFBMWRAHEhAKDEVHQVRfS0lDS09VVBAIIngKEFJlcUFja0ludml0",
-            "ZVRlYW0SHQoHdGVhbV9pZBgBIAEoCzIMLk5GTXNnLklkZW50Eh0KB3NlbGZf",
-            "aWQYAiABKAsyDC5ORk1zZy5JZGVudBImChBpbnZpdGVfdGFyZ2V0X2lkGAMg",
-            "ASgLMgwuTkZNc2cuSWRlbnQimwEKElJlcVRlYW1FbnRlckVjdHlwZRIdCgd0",
-            "ZWFtX2lkGAEgASgLMgwuTkZNc2cuSWRlbnQSHQoHc2VsZl9pZBgCIAEoCzIM",
-            "Lk5GTXNnLklkZW50EhEKCW5FY3R5cGVJRBgDIAEoBRIQCghuR3JvdXBJRBgE",
-            "IAEoBRIPCgduUmVzdWx0GAUgASgFEhEKCW5TZXJ2ZXJJRBgGIAEoBSKIAQoS",
-            "QWNrVGVhbUVudGVyRWN0eXBlEh0KB3RlYW1faWQYASABKAsyDC5ORk1zZy5J",
-            "ZGVudBIdCgdzZWxmX2lkGAIgASgLMgwuTkZNc2cuSWRlbnQSEQoJbkVjdHlw",
-            "ZUlEGAMgASgFEhAKCG5Hcm91cElEGAQgASgFEg8KB25SZXN1bHQYBSABKAUi",
-            "agoQR3JpZENsYW5CYXNlSW5mbxIYCgJpZBgBIAEoCzIMLk5GTXNnLklkZW50",
-            "Eg0KBWxldmVsGAIgASgFEg0KBWNvdW50GAMgASgFEhAKCHJlc291cmNlGAQg",
-            "ASgFEgwKBGljb24YBSABKAwiKQoRUmVxQmlnTWFwR3JpZEluZm8SFAoMbWFw",
-            "X3RpdGxlX2lkGAEgAygMIrkBChJCaWdNYXBHcmlkQmFzZUluZm8SCgoCaWQY",
-            "ASABKAwSKwoKZ3VpbGRfaW5mbxgCIAEoCzIXLk5GTXNnLkdyaWRDbGFuQmFz",
-            "ZUluZm8SFAoMa2luZ3dhcl90aW1lGAogASgFEiAKCmtpbmd3YXJyZXIYCyAB",
-            "KAsyDC5ORk1zZy5JZGVudBIUCgxodXJ0aW5nX3RpbWUYFCABKAUSHAoGaHVy",
-            "dGVyGBUgASgLMgwuTkZNc2cuSWRlbnQiegoOQmlnTWFwTGVhdmVNc2cSGwoF",
-            "b3duZXIYASABKAsyDC5ORk1zZy5JZGVudBISCgpvd25lcl9uYW1lGAIgASgM",
-            "EhAKCG1zZ19kYXRhGAMgASgMEhAKCG1zZ190aW1lGAQgASgFEhMKC293bmVy",
-            "X2xldmVsGAUgASgFIpwBChBCaWdNYXBXYXJIaXN0b3J5EikKCHJlZF9pbmZv",
-            "GAEgASgLMhcuTkZNc2cuR3JpZENsYW5CYXNlSW5mbxIqCglibHVlX2luZm8Y",
-            "AiABKAsyFy5ORk1zZy5HcmlkQ2xhbkJhc2VJbmZvEh8KCXdpbm5lcl9pZBgK",
-            "IAEoCzIMLk5GTXNnLklkZW50EhAKCHdhcl90aW1lGAsgASgFItIBChRCaWdN",
-            "YXBHcmlkRGV0YWlsSW5mbxIxCg5ncmlkX2Jhc2VfaW5mbxgBIAEoCzIZLk5G",
-            "TXNnLkJpZ01hcEdyaWRCYXNlSW5mbxIvCg5zdGF5X2d1aWRfbGlzdBgCIAMo",
-            "CzIXLk5GTXNnLkdyaWRDbGFuQmFzZUluZm8SKAoJbGVhdmVfbXNnGAMgAygL",
-            "MhUuTkZNc2cuQmlnTWFwTGVhdmVNc2cSLAoLd2FyX2hpc3RvcnkYBCADKAsy",
-            "Fy5ORk1zZy5CaWdNYXBXYXJIaXN0b3J5IkIKEUFja0JpZ01hcEdyaWRJbmZv",
-            "Ei0KCG1hcF9kYXRhGAEgAygLMhsuTkZNc2cuQmlnTWFwR3JpZERldGFpbElu",
-            "Zm8iDwoNUmVxQmlnTWFwSW5mbyJCCg1BY2tCaWdNYXBJbmZvEjEKDmdyaWRf",
-            "YmFzZV9pbmZvGAEgAygLMhkuTkZNc2cuQmlnTWFwR3JpZEJhc2VJbmZvIkYK",
-            "DlJlcUhvbGRNYXBHcmlkEhQKDG1hcF90aXRsZV9pZBgBIAEoDBIeCghndWls",
-            "ZF9pZBgCIAEoCzIMLk5GTXNnLklkZW50IhAKDkFja0hvbGRNYXBHcmlkIlAK",
-            "DlJlcUxlYXZlTWFwTXNnEhQKDG1hcF90aXRsZV9pZBgBIAEoDBIoCglsZWF2",
-            "ZV9tc2cYAiABKAsyFS5ORk1zZy5CaWdNYXBMZWF2ZU1zZyIQCg5BY2tMZWF2",
-            "ZU1hcE1zZyImCg5SZXFHZXRNYXBBd2FyZBIUCgxtYXBfdGl0bGVfaWQYASAB",
-            "KAwiEAoOQWNrR2V0TWFwQXdhcmQiJQoNUmVxTWFwSHVudGluZxIUCgxtYXBf",
-            "dGl0bGVfaWQYASABKAwiDwoNQWNrTWFwSHVudGluZyIiCg1SZXFNYXBLaW5n",
-            "V2FyEhEKCW1hcF90aXRsZRgBIAEoDCIiCg1BY2tNYXBLaW5nV2FyEhEKCW1h",
-            "cF90aXRsZRgBIAEoDGIGcHJvdG8z"));
+            "ClJlcUFJT253ZXISGwoFYWlfaWQYASABKAsyDC5ORk1zZy5JZGVudCJuCg5U",
+            "ZWFtbWVtYmVySW5mbxIfCglwbGF5ZXJfaWQYASABKAsyDC5ORk1zZy5JZGVu",
+            "dBIMCgRuYW1lGAIgASgJEg4KBm5MZXZlbBgDIAEoBRILCgNqb2IYBCABKAUS",
+            "EAoISGVhZEljb24YBSABKAkiegoIVGVhbUluZm8SHQoHdGVhbV9pZBgBIAEo",
+            "CzIMLk5GTXNnLklkZW50EiAKCmNhcHRhaW5faWQYAiABKAsyDC5ORk1zZy5J",
+            "ZGVudBItCg50ZWFtbWVtYmVySW5mbxgDIAMoCzIVLk5GTXNnLlRlYW1tZW1i",
+            "ZXJJbmZvIlUKEFJlcUFja0NyZWF0ZVRlYW0SHQoHdGVhbV9pZBgBIAEoCzIM",
+            "Lk5GTXNnLklkZW50EiIKCXhUZWFtSW5mbxgCIAEoCzIPLk5GTXNnLlRlYW1J",
+            "bmZvIlMKDlJlcUFja0pvaW5UZWFtEh0KB3RlYW1faWQYASABKAsyDC5ORk1z",
+            "Zy5JZGVudBIiCgl4VGVhbUluZm8YAiABKAsyDy5ORk1zZy5UZWFtSW5mbyJU",
+            "Cg9SZXFBY2tMZWF2ZVRlYW0SHQoHdGVhbV9pZBgBIAEoCzIMLk5GTXNnLklk",
+            "ZW50EiIKCXhUZWFtSW5mbxgCIAEoCzIPLk5GTXNnLlRlYW1JbmZvIugCChNS",
+            "ZXFBY2tPcHJUZWFtTWVtYmVyEh0KB3RlYW1faWQYASABKAsyDC5ORk1zZy5J",
+            "ZGVudBIfCgltZW1iZXJfaWQYAiABKAsyDC5ORk1zZy5JZGVudBI8CgR0eXBl",
+            "GAMgASgOMi4uTkZNc2cuUmVxQWNrT3ByVGVhbU1lbWJlci5FR1RlYW1NZW1i",
+            "ZXJPcHJUeXBlEiIKCXhUZWFtSW5mbxgEIAEoCzIPLk5GTXNnLlRlYW1JbmZv",
+            "Iq4BChNFR1RlYW1NZW1iZXJPcHJUeXBlEg0KCUVHQVRfRE9XThAAEgsKB0VH",
+            "QVRfVVAQARINCglFR0FUX0tJQ0sQAhIQCgxFR0FUX0FQUE9JTlQQAxINCglF",
+            "R0FUX0ZJUkUQBBIPCgtFR0FUX0RFTUlTRRAFEhQKEEVHQVRfQUNDRVBUQVBQ",
+            "TFkQBhISCg5FR0FUX0RFTllBUFBMWRAHEhAKDEVHQVRfS0lDS09VVBAIIngK",
+            "EFJlcUFja0ludml0ZVRlYW0SHQoHdGVhbV9pZBgBIAEoCzIMLk5GTXNnLklk",
+            "ZW50Eh0KB3NlbGZfaWQYAiABKAsyDC5ORk1zZy5JZGVudBImChBpbnZpdGVf",
+            "dGFyZ2V0X2lkGAMgASgLMgwuTkZNc2cuSWRlbnQimwEKElJlcVRlYW1FbnRl",
+            "ckVjdHlwZRIdCgd0ZWFtX2lkGAEgASgLMgwuTkZNc2cuSWRlbnQSHQoHc2Vs",
+            "Zl9pZBgCIAEoCzIMLk5GTXNnLklkZW50EhEKCW5FY3R5cGVJRBgDIAEoBRIQ",
+            "CghuR3JvdXBJRBgEIAEoBRIPCgduUmVzdWx0GAUgASgFEhEKCW5TZXJ2ZXJJ",
+            "RBgGIAEoBSKIAQoSQWNrVGVhbUVudGVyRWN0eXBlEh0KB3RlYW1faWQYASAB",
+            "KAsyDC5ORk1zZy5JZGVudBIdCgdzZWxmX2lkGAIgASgLMgwuTkZNc2cuSWRl",
+            "bnQSEQoJbkVjdHlwZUlEGAMgASgFEhAKCG5Hcm91cElEGAQgASgFEg8KB25S",
+            "ZXN1bHQYBSABKAUiagoQR3JpZENsYW5CYXNlSW5mbxIYCgJpZBgBIAEoCzIM",
+            "Lk5GTXNnLklkZW50Eg0KBWxldmVsGAIgASgFEg0KBWNvdW50GAMgASgFEhAK",
+            "CHJlc291cmNlGAQgASgFEgwKBGljb24YBSABKAwiKQoRUmVxQmlnTWFwR3Jp",
+            "ZEluZm8SFAoMbWFwX3RpdGxlX2lkGAEgAygMIrkBChJCaWdNYXBHcmlkQmFz",
+            "ZUluZm8SCgoCaWQYASABKAwSKwoKZ3VpbGRfaW5mbxgCIAEoCzIXLk5GTXNn",
+            "LkdyaWRDbGFuQmFzZUluZm8SFAoMa2luZ3dhcl90aW1lGAogASgFEiAKCmtp",
+            "bmd3YXJyZXIYCyABKAsyDC5ORk1zZy5JZGVudBIUCgxodXJ0aW5nX3RpbWUY",
+            "FCABKAUSHAoGaHVydGVyGBUgASgLMgwuTkZNc2cuSWRlbnQiegoOQmlnTWFw",
+            "TGVhdmVNc2cSGwoFb3duZXIYASABKAsyDC5ORk1zZy5JZGVudBISCgpvd25l",
+            "cl9uYW1lGAIgASgMEhAKCG1zZ19kYXRhGAMgASgMEhAKCG1zZ190aW1lGAQg",
+            "ASgFEhMKC293bmVyX2xldmVsGAUgASgFIpwBChBCaWdNYXBXYXJIaXN0b3J5",
+            "EikKCHJlZF9pbmZvGAEgASgLMhcuTkZNc2cuR3JpZENsYW5CYXNlSW5mbxIq",
+            "CglibHVlX2luZm8YAiABKAsyFy5ORk1zZy5HcmlkQ2xhbkJhc2VJbmZvEh8K",
+            "CXdpbm5lcl9pZBgKIAEoCzIMLk5GTXNnLklkZW50EhAKCHdhcl90aW1lGAsg",
+            "ASgFItIBChRCaWdNYXBHcmlkRGV0YWlsSW5mbxIxCg5ncmlkX2Jhc2VfaW5m",
+            "bxgBIAEoCzIZLk5GTXNnLkJpZ01hcEdyaWRCYXNlSW5mbxIvCg5zdGF5X2d1",
+            "aWRfbGlzdBgCIAMoCzIXLk5GTXNnLkdyaWRDbGFuQmFzZUluZm8SKAoJbGVh",
+            "dmVfbXNnGAMgAygLMhUuTkZNc2cuQmlnTWFwTGVhdmVNc2cSLAoLd2FyX2hp",
+            "c3RvcnkYBCADKAsyFy5ORk1zZy5CaWdNYXBXYXJIaXN0b3J5IkIKEUFja0Jp",
+            "Z01hcEdyaWRJbmZvEi0KCG1hcF9kYXRhGAEgAygLMhsuTkZNc2cuQmlnTWFw",
+            "R3JpZERldGFpbEluZm8iDwoNUmVxQmlnTWFwSW5mbyJCCg1BY2tCaWdNYXBJ",
+            "bmZvEjEKDmdyaWRfYmFzZV9pbmZvGAEgAygLMhkuTkZNc2cuQmlnTWFwR3Jp",
+            "ZEJhc2VJbmZvIkYKDlJlcUhvbGRNYXBHcmlkEhQKDG1hcF90aXRsZV9pZBgB",
+            "IAEoDBIeCghndWlsZF9pZBgCIAEoCzIMLk5GTXNnLklkZW50IhAKDkFja0hv",
+            "bGRNYXBHcmlkIlAKDlJlcUxlYXZlTWFwTXNnEhQKDG1hcF90aXRsZV9pZBgB",
+            "IAEoDBIoCglsZWF2ZV9tc2cYAiABKAsyFS5ORk1zZy5CaWdNYXBMZWF2ZU1z",
+            "ZyIQCg5BY2tMZWF2ZU1hcE1zZyImCg5SZXFHZXRNYXBBd2FyZBIUCgxtYXBf",
+            "dGl0bGVfaWQYASABKAwiEAoOQWNrR2V0TWFwQXdhcmQiJQoNUmVxTWFwSHVu",
+            "dGluZxIUCgxtYXBfdGl0bGVfaWQYASABKAwiDwoNQWNrTWFwSHVudGluZyIi",
+            "Cg1SZXFNYXBLaW5nV2FyEhEKCW1hcF90aXRsZRgBIAEoDCIiCg1BY2tNYXBL",
+            "aW5nV2FyEhEKCW1hcF90aXRsZRgBIAEoDGIGcHJvdG8z"));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { global::NFMsg.NFMsgBaseReflection.Descriptor, },
           new pbr::GeneratedClrTypeInfo(null, new pbr::GeneratedClrTypeInfo[] {
             new pbr::GeneratedClrTypeInfo(typeof(global::NFMsg.ReqAIOnwer), global::NFMsg.ReqAIOnwer.Parser, new[]{ "ai_id" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::NFMsg.FriendData), global::NFMsg.FriendData.Parser, new[]{ "id", "name" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::NFMsg.ReqAckFriendList), global::NFMsg.ReqAckFriendList.Parser, new[]{ "inviteList", "friendList" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::NFMsg.ReqAckDeleteFriend), global::NFMsg.ReqAckDeleteFriend.Parser, new[]{ "stranger" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::NFMsg.ReqAckSendInvite), global::NFMsg.ReqAckSendInvite.Parser, new[]{ "stranger" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::NFMsg.ReqAckAcceptInvite), global::NFMsg.ReqAckAcceptInvite.Parser, new[]{ "stranger" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::NFMsg.ReqAckRejectInvite), global::NFMsg.ReqAckRejectInvite.Parser, new[]{ "stranger" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::NFMsg.ReqAckIgnoreInvite), global::NFMsg.ReqAckIgnoreInvite.Parser, new[]{ "stranger" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::NFMsg.ReqAckBlockInvite), global::NFMsg.ReqAckBlockInvite.Parser, new[]{ "stranger" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::NFMsg.ReqAckUnBlockInvite), global::NFMsg.ReqAckUnBlockInvite.Parser, new[]{ "stranger" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::NFMsg.TeammemberInfo), global::NFMsg.TeammemberInfo.Parser, new[]{ "player_id", "name", "nLevel", "job", "HeadIcon" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::NFMsg.TeamInfo), global::NFMsg.TeamInfo.Parser, new[]{ "team_id", "captain_id", "teammemberInfo" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::NFMsg.ReqAckCreateTeam), global::NFMsg.ReqAckCreateTeam.Parser, new[]{ "team_id", "xTeamInfo" }, null, null, null),
@@ -283,1255 +262,6 @@ namespace NFMsg {
 
   }
 
-  public sealed partial class FriendData : pb::IMessage<FriendData> {
-    private static readonly pb::MessageParser<FriendData> _parser = new pb::MessageParser<FriendData>(() => new FriendData());
-    private pb::UnknownFieldSet _unknownFields;
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public static pb::MessageParser<FriendData> Parser { get { return _parser; } }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public static pbr::MessageDescriptor Descriptor {
-      get { return global::NFMsg.NFMsgExtraReflection.Descriptor.MessageTypes[1]; }
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    pbr::MessageDescriptor pb::IMessage.Descriptor {
-      get { return Descriptor; }
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public FriendData() {
-      OnConstruction();
-    }
-
-    partial void OnConstruction();
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public FriendData(FriendData other) : this() {
-      id_ = other.id_ != null ? other.id_.Clone() : null;
-      name_ = other.name_;
-      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public FriendData Clone() {
-      return new FriendData(this);
-    }
-
-    /// <summary>Field number for the "id" field.</summary>
-    public const int idFieldNumber = 1;
-    private global::NFMsg.Ident id_;
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public global::NFMsg.Ident id {
-      get { return id_; }
-      set {
-        id_ = value;
-      }
-    }
-
-    /// <summary>Field number for the "name" field.</summary>
-    public const int nameFieldNumber = 2;
-    private string name_ = "";
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public string name {
-      get { return name_; }
-      set {
-        name_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
-      }
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public override bool Equals(object other) {
-      return Equals(other as FriendData);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public bool Equals(FriendData other) {
-      if (ReferenceEquals(other, null)) {
-        return false;
-      }
-      if (ReferenceEquals(other, this)) {
-        return true;
-      }
-      if (!object.Equals(id, other.id)) return false;
-      if (name != other.name) return false;
-      return Equals(_unknownFields, other._unknownFields);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public override int GetHashCode() {
-      int hash = 1;
-      if (id_ != null) hash ^= id.GetHashCode();
-      if (name.Length != 0) hash ^= name.GetHashCode();
-      if (_unknownFields != null) {
-        hash ^= _unknownFields.GetHashCode();
-      }
-      return hash;
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public override string ToString() {
-      return pb::JsonFormatter.ToDiagnosticString(this);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void WriteTo(pb::CodedOutputStream output) {
-      if (id_ != null) {
-        output.WriteRawTag(10);
-        output.WriteMessage(id);
-      }
-      if (name.Length != 0) {
-        output.WriteRawTag(18);
-        output.WriteString(name);
-      }
-      if (_unknownFields != null) {
-        _unknownFields.WriteTo(output);
-      }
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public int CalculateSize() {
-      int size = 0;
-      if (id_ != null) {
-        size += 1 + pb::CodedOutputStream.ComputeMessageSize(id);
-      }
-      if (name.Length != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeStringSize(name);
-      }
-      if (_unknownFields != null) {
-        size += _unknownFields.CalculateSize();
-      }
-      return size;
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void MergeFrom(FriendData other) {
-      if (other == null) {
-        return;
-      }
-      if (other.id_ != null) {
-        if (id_ == null) {
-          id_ = new global::NFMsg.Ident();
-        }
-        id.MergeFrom(other.id);
-      }
-      if (other.name.Length != 0) {
-        name = other.name;
-      }
-      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void MergeFrom(pb::CodedInputStream input) {
-      uint tag;
-      while ((tag = input.ReadTag()) != 0) {
-        switch(tag) {
-          default:
-            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
-            break;
-          case 10: {
-            if (id_ == null) {
-              id_ = new global::NFMsg.Ident();
-            }
-            input.ReadMessage(id_);
-            break;
-          }
-          case 18: {
-            name = input.ReadString();
-            break;
-          }
-        }
-      }
-    }
-
-  }
-
-  public sealed partial class ReqAckFriendList : pb::IMessage<ReqAckFriendList> {
-    private static readonly pb::MessageParser<ReqAckFriendList> _parser = new pb::MessageParser<ReqAckFriendList>(() => new ReqAckFriendList());
-    private pb::UnknownFieldSet _unknownFields;
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public static pb::MessageParser<ReqAckFriendList> Parser { get { return _parser; } }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public static pbr::MessageDescriptor Descriptor {
-      get { return global::NFMsg.NFMsgExtraReflection.Descriptor.MessageTypes[2]; }
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    pbr::MessageDescriptor pb::IMessage.Descriptor {
-      get { return Descriptor; }
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public ReqAckFriendList() {
-      OnConstruction();
-    }
-
-    partial void OnConstruction();
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public ReqAckFriendList(ReqAckFriendList other) : this() {
-      inviteList_ = other.inviteList_.Clone();
-      friendList_ = other.friendList_.Clone();
-      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public ReqAckFriendList Clone() {
-      return new ReqAckFriendList(this);
-    }
-
-    /// <summary>Field number for the "inviteList" field.</summary>
-    public const int inviteListFieldNumber = 1;
-    private static readonly pb::FieldCodec<global::NFMsg.FriendData> _repeated_inviteList_codec
-        = pb::FieldCodec.ForMessage(10, global::NFMsg.FriendData.Parser);
-    private readonly pbc::RepeatedField<global::NFMsg.FriendData> inviteList_ = new pbc::RepeatedField<global::NFMsg.FriendData>();
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public pbc::RepeatedField<global::NFMsg.FriendData> inviteList {
-      get { return inviteList_; }
-    }
-
-    /// <summary>Field number for the "friendList" field.</summary>
-    public const int friendListFieldNumber = 2;
-    private static readonly pb::FieldCodec<global::NFMsg.FriendData> _repeated_friendList_codec
-        = pb::FieldCodec.ForMessage(18, global::NFMsg.FriendData.Parser);
-    private readonly pbc::RepeatedField<global::NFMsg.FriendData> friendList_ = new pbc::RepeatedField<global::NFMsg.FriendData>();
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public pbc::RepeatedField<global::NFMsg.FriendData> friendList {
-      get { return friendList_; }
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public override bool Equals(object other) {
-      return Equals(other as ReqAckFriendList);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public bool Equals(ReqAckFriendList other) {
-      if (ReferenceEquals(other, null)) {
-        return false;
-      }
-      if (ReferenceEquals(other, this)) {
-        return true;
-      }
-      if(!inviteList_.Equals(other.inviteList_)) return false;
-      if(!friendList_.Equals(other.friendList_)) return false;
-      return Equals(_unknownFields, other._unknownFields);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public override int GetHashCode() {
-      int hash = 1;
-      hash ^= inviteList_.GetHashCode();
-      hash ^= friendList_.GetHashCode();
-      if (_unknownFields != null) {
-        hash ^= _unknownFields.GetHashCode();
-      }
-      return hash;
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public override string ToString() {
-      return pb::JsonFormatter.ToDiagnosticString(this);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void WriteTo(pb::CodedOutputStream output) {
-      inviteList_.WriteTo(output, _repeated_inviteList_codec);
-      friendList_.WriteTo(output, _repeated_friendList_codec);
-      if (_unknownFields != null) {
-        _unknownFields.WriteTo(output);
-      }
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public int CalculateSize() {
-      int size = 0;
-      size += inviteList_.CalculateSize(_repeated_inviteList_codec);
-      size += friendList_.CalculateSize(_repeated_friendList_codec);
-      if (_unknownFields != null) {
-        size += _unknownFields.CalculateSize();
-      }
-      return size;
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void MergeFrom(ReqAckFriendList other) {
-      if (other == null) {
-        return;
-      }
-      inviteList_.Add(other.inviteList_);
-      friendList_.Add(other.friendList_);
-      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void MergeFrom(pb::CodedInputStream input) {
-      uint tag;
-      while ((tag = input.ReadTag()) != 0) {
-        switch(tag) {
-          default:
-            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
-            break;
-          case 10: {
-            inviteList_.AddEntriesFrom(input, _repeated_inviteList_codec);
-            break;
-          }
-          case 18: {
-            friendList_.AddEntriesFrom(input, _repeated_friendList_codec);
-            break;
-          }
-        }
-      }
-    }
-
-  }
-
-  public sealed partial class ReqAckDeleteFriend : pb::IMessage<ReqAckDeleteFriend> {
-    private static readonly pb::MessageParser<ReqAckDeleteFriend> _parser = new pb::MessageParser<ReqAckDeleteFriend>(() => new ReqAckDeleteFriend());
-    private pb::UnknownFieldSet _unknownFields;
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public static pb::MessageParser<ReqAckDeleteFriend> Parser { get { return _parser; } }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public static pbr::MessageDescriptor Descriptor {
-      get { return global::NFMsg.NFMsgExtraReflection.Descriptor.MessageTypes[3]; }
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    pbr::MessageDescriptor pb::IMessage.Descriptor {
-      get { return Descriptor; }
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public ReqAckDeleteFriend() {
-      OnConstruction();
-    }
-
-    partial void OnConstruction();
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public ReqAckDeleteFriend(ReqAckDeleteFriend other) : this() {
-      stranger_ = other.stranger_ != null ? other.stranger_.Clone() : null;
-      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public ReqAckDeleteFriend Clone() {
-      return new ReqAckDeleteFriend(this);
-    }
-
-    /// <summary>Field number for the "stranger" field.</summary>
-    public const int strangerFieldNumber = 1;
-    private global::NFMsg.Ident stranger_;
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public global::NFMsg.Ident stranger {
-      get { return stranger_; }
-      set {
-        stranger_ = value;
-      }
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public override bool Equals(object other) {
-      return Equals(other as ReqAckDeleteFriend);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public bool Equals(ReqAckDeleteFriend other) {
-      if (ReferenceEquals(other, null)) {
-        return false;
-      }
-      if (ReferenceEquals(other, this)) {
-        return true;
-      }
-      if (!object.Equals(stranger, other.stranger)) return false;
-      return Equals(_unknownFields, other._unknownFields);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public override int GetHashCode() {
-      int hash = 1;
-      if (stranger_ != null) hash ^= stranger.GetHashCode();
-      if (_unknownFields != null) {
-        hash ^= _unknownFields.GetHashCode();
-      }
-      return hash;
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public override string ToString() {
-      return pb::JsonFormatter.ToDiagnosticString(this);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void WriteTo(pb::CodedOutputStream output) {
-      if (stranger_ != null) {
-        output.WriteRawTag(10);
-        output.WriteMessage(stranger);
-      }
-      if (_unknownFields != null) {
-        _unknownFields.WriteTo(output);
-      }
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public int CalculateSize() {
-      int size = 0;
-      if (stranger_ != null) {
-        size += 1 + pb::CodedOutputStream.ComputeMessageSize(stranger);
-      }
-      if (_unknownFields != null) {
-        size += _unknownFields.CalculateSize();
-      }
-      return size;
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void MergeFrom(ReqAckDeleteFriend other) {
-      if (other == null) {
-        return;
-      }
-      if (other.stranger_ != null) {
-        if (stranger_ == null) {
-          stranger_ = new global::NFMsg.Ident();
-        }
-        stranger.MergeFrom(other.stranger);
-      }
-      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void MergeFrom(pb::CodedInputStream input) {
-      uint tag;
-      while ((tag = input.ReadTag()) != 0) {
-        switch(tag) {
-          default:
-            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
-            break;
-          case 10: {
-            if (stranger_ == null) {
-              stranger_ = new global::NFMsg.Ident();
-            }
-            input.ReadMessage(stranger_);
-            break;
-          }
-        }
-      }
-    }
-
-  }
-
-  public sealed partial class ReqAckSendInvite : pb::IMessage<ReqAckSendInvite> {
-    private static readonly pb::MessageParser<ReqAckSendInvite> _parser = new pb::MessageParser<ReqAckSendInvite>(() => new ReqAckSendInvite());
-    private pb::UnknownFieldSet _unknownFields;
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public static pb::MessageParser<ReqAckSendInvite> Parser { get { return _parser; } }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public static pbr::MessageDescriptor Descriptor {
-      get { return global::NFMsg.NFMsgExtraReflection.Descriptor.MessageTypes[4]; }
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    pbr::MessageDescriptor pb::IMessage.Descriptor {
-      get { return Descriptor; }
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public ReqAckSendInvite() {
-      OnConstruction();
-    }
-
-    partial void OnConstruction();
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public ReqAckSendInvite(ReqAckSendInvite other) : this() {
-      stranger_ = other.stranger_ != null ? other.stranger_.Clone() : null;
-      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public ReqAckSendInvite Clone() {
-      return new ReqAckSendInvite(this);
-    }
-
-    /// <summary>Field number for the "stranger" field.</summary>
-    public const int strangerFieldNumber = 1;
-    private global::NFMsg.Ident stranger_;
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public global::NFMsg.Ident stranger {
-      get { return stranger_; }
-      set {
-        stranger_ = value;
-      }
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public override bool Equals(object other) {
-      return Equals(other as ReqAckSendInvite);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public bool Equals(ReqAckSendInvite other) {
-      if (ReferenceEquals(other, null)) {
-        return false;
-      }
-      if (ReferenceEquals(other, this)) {
-        return true;
-      }
-      if (!object.Equals(stranger, other.stranger)) return false;
-      return Equals(_unknownFields, other._unknownFields);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public override int GetHashCode() {
-      int hash = 1;
-      if (stranger_ != null) hash ^= stranger.GetHashCode();
-      if (_unknownFields != null) {
-        hash ^= _unknownFields.GetHashCode();
-      }
-      return hash;
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public override string ToString() {
-      return pb::JsonFormatter.ToDiagnosticString(this);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void WriteTo(pb::CodedOutputStream output) {
-      if (stranger_ != null) {
-        output.WriteRawTag(10);
-        output.WriteMessage(stranger);
-      }
-      if (_unknownFields != null) {
-        _unknownFields.WriteTo(output);
-      }
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public int CalculateSize() {
-      int size = 0;
-      if (stranger_ != null) {
-        size += 1 + pb::CodedOutputStream.ComputeMessageSize(stranger);
-      }
-      if (_unknownFields != null) {
-        size += _unknownFields.CalculateSize();
-      }
-      return size;
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void MergeFrom(ReqAckSendInvite other) {
-      if (other == null) {
-        return;
-      }
-      if (other.stranger_ != null) {
-        if (stranger_ == null) {
-          stranger_ = new global::NFMsg.Ident();
-        }
-        stranger.MergeFrom(other.stranger);
-      }
-      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void MergeFrom(pb::CodedInputStream input) {
-      uint tag;
-      while ((tag = input.ReadTag()) != 0) {
-        switch(tag) {
-          default:
-            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
-            break;
-          case 10: {
-            if (stranger_ == null) {
-              stranger_ = new global::NFMsg.Ident();
-            }
-            input.ReadMessage(stranger_);
-            break;
-          }
-        }
-      }
-    }
-
-  }
-
-  public sealed partial class ReqAckAcceptInvite : pb::IMessage<ReqAckAcceptInvite> {
-    private static readonly pb::MessageParser<ReqAckAcceptInvite> _parser = new pb::MessageParser<ReqAckAcceptInvite>(() => new ReqAckAcceptInvite());
-    private pb::UnknownFieldSet _unknownFields;
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public static pb::MessageParser<ReqAckAcceptInvite> Parser { get { return _parser; } }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public static pbr::MessageDescriptor Descriptor {
-      get { return global::NFMsg.NFMsgExtraReflection.Descriptor.MessageTypes[5]; }
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    pbr::MessageDescriptor pb::IMessage.Descriptor {
-      get { return Descriptor; }
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public ReqAckAcceptInvite() {
-      OnConstruction();
-    }
-
-    partial void OnConstruction();
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public ReqAckAcceptInvite(ReqAckAcceptInvite other) : this() {
-      stranger_ = other.stranger_ != null ? other.stranger_.Clone() : null;
-      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public ReqAckAcceptInvite Clone() {
-      return new ReqAckAcceptInvite(this);
-    }
-
-    /// <summary>Field number for the "stranger" field.</summary>
-    public const int strangerFieldNumber = 1;
-    private global::NFMsg.Ident stranger_;
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public global::NFMsg.Ident stranger {
-      get { return stranger_; }
-      set {
-        stranger_ = value;
-      }
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public override bool Equals(object other) {
-      return Equals(other as ReqAckAcceptInvite);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public bool Equals(ReqAckAcceptInvite other) {
-      if (ReferenceEquals(other, null)) {
-        return false;
-      }
-      if (ReferenceEquals(other, this)) {
-        return true;
-      }
-      if (!object.Equals(stranger, other.stranger)) return false;
-      return Equals(_unknownFields, other._unknownFields);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public override int GetHashCode() {
-      int hash = 1;
-      if (stranger_ != null) hash ^= stranger.GetHashCode();
-      if (_unknownFields != null) {
-        hash ^= _unknownFields.GetHashCode();
-      }
-      return hash;
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public override string ToString() {
-      return pb::JsonFormatter.ToDiagnosticString(this);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void WriteTo(pb::CodedOutputStream output) {
-      if (stranger_ != null) {
-        output.WriteRawTag(10);
-        output.WriteMessage(stranger);
-      }
-      if (_unknownFields != null) {
-        _unknownFields.WriteTo(output);
-      }
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public int CalculateSize() {
-      int size = 0;
-      if (stranger_ != null) {
-        size += 1 + pb::CodedOutputStream.ComputeMessageSize(stranger);
-      }
-      if (_unknownFields != null) {
-        size += _unknownFields.CalculateSize();
-      }
-      return size;
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void MergeFrom(ReqAckAcceptInvite other) {
-      if (other == null) {
-        return;
-      }
-      if (other.stranger_ != null) {
-        if (stranger_ == null) {
-          stranger_ = new global::NFMsg.Ident();
-        }
-        stranger.MergeFrom(other.stranger);
-      }
-      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void MergeFrom(pb::CodedInputStream input) {
-      uint tag;
-      while ((tag = input.ReadTag()) != 0) {
-        switch(tag) {
-          default:
-            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
-            break;
-          case 10: {
-            if (stranger_ == null) {
-              stranger_ = new global::NFMsg.Ident();
-            }
-            input.ReadMessage(stranger_);
-            break;
-          }
-        }
-      }
-    }
-
-  }
-
-  public sealed partial class ReqAckRejectInvite : pb::IMessage<ReqAckRejectInvite> {
-    private static readonly pb::MessageParser<ReqAckRejectInvite> _parser = new pb::MessageParser<ReqAckRejectInvite>(() => new ReqAckRejectInvite());
-    private pb::UnknownFieldSet _unknownFields;
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public static pb::MessageParser<ReqAckRejectInvite> Parser { get { return _parser; } }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public static pbr::MessageDescriptor Descriptor {
-      get { return global::NFMsg.NFMsgExtraReflection.Descriptor.MessageTypes[6]; }
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    pbr::MessageDescriptor pb::IMessage.Descriptor {
-      get { return Descriptor; }
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public ReqAckRejectInvite() {
-      OnConstruction();
-    }
-
-    partial void OnConstruction();
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public ReqAckRejectInvite(ReqAckRejectInvite other) : this() {
-      stranger_ = other.stranger_ != null ? other.stranger_.Clone() : null;
-      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public ReqAckRejectInvite Clone() {
-      return new ReqAckRejectInvite(this);
-    }
-
-    /// <summary>Field number for the "stranger" field.</summary>
-    public const int strangerFieldNumber = 1;
-    private global::NFMsg.Ident stranger_;
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public global::NFMsg.Ident stranger {
-      get { return stranger_; }
-      set {
-        stranger_ = value;
-      }
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public override bool Equals(object other) {
-      return Equals(other as ReqAckRejectInvite);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public bool Equals(ReqAckRejectInvite other) {
-      if (ReferenceEquals(other, null)) {
-        return false;
-      }
-      if (ReferenceEquals(other, this)) {
-        return true;
-      }
-      if (!object.Equals(stranger, other.stranger)) return false;
-      return Equals(_unknownFields, other._unknownFields);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public override int GetHashCode() {
-      int hash = 1;
-      if (stranger_ != null) hash ^= stranger.GetHashCode();
-      if (_unknownFields != null) {
-        hash ^= _unknownFields.GetHashCode();
-      }
-      return hash;
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public override string ToString() {
-      return pb::JsonFormatter.ToDiagnosticString(this);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void WriteTo(pb::CodedOutputStream output) {
-      if (stranger_ != null) {
-        output.WriteRawTag(10);
-        output.WriteMessage(stranger);
-      }
-      if (_unknownFields != null) {
-        _unknownFields.WriteTo(output);
-      }
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public int CalculateSize() {
-      int size = 0;
-      if (stranger_ != null) {
-        size += 1 + pb::CodedOutputStream.ComputeMessageSize(stranger);
-      }
-      if (_unknownFields != null) {
-        size += _unknownFields.CalculateSize();
-      }
-      return size;
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void MergeFrom(ReqAckRejectInvite other) {
-      if (other == null) {
-        return;
-      }
-      if (other.stranger_ != null) {
-        if (stranger_ == null) {
-          stranger_ = new global::NFMsg.Ident();
-        }
-        stranger.MergeFrom(other.stranger);
-      }
-      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void MergeFrom(pb::CodedInputStream input) {
-      uint tag;
-      while ((tag = input.ReadTag()) != 0) {
-        switch(tag) {
-          default:
-            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
-            break;
-          case 10: {
-            if (stranger_ == null) {
-              stranger_ = new global::NFMsg.Ident();
-            }
-            input.ReadMessage(stranger_);
-            break;
-          }
-        }
-      }
-    }
-
-  }
-
-  public sealed partial class ReqAckIgnoreInvite : pb::IMessage<ReqAckIgnoreInvite> {
-    private static readonly pb::MessageParser<ReqAckIgnoreInvite> _parser = new pb::MessageParser<ReqAckIgnoreInvite>(() => new ReqAckIgnoreInvite());
-    private pb::UnknownFieldSet _unknownFields;
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public static pb::MessageParser<ReqAckIgnoreInvite> Parser { get { return _parser; } }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public static pbr::MessageDescriptor Descriptor {
-      get { return global::NFMsg.NFMsgExtraReflection.Descriptor.MessageTypes[7]; }
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    pbr::MessageDescriptor pb::IMessage.Descriptor {
-      get { return Descriptor; }
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public ReqAckIgnoreInvite() {
-      OnConstruction();
-    }
-
-    partial void OnConstruction();
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public ReqAckIgnoreInvite(ReqAckIgnoreInvite other) : this() {
-      stranger_ = other.stranger_ != null ? other.stranger_.Clone() : null;
-      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public ReqAckIgnoreInvite Clone() {
-      return new ReqAckIgnoreInvite(this);
-    }
-
-    /// <summary>Field number for the "stranger" field.</summary>
-    public const int strangerFieldNumber = 1;
-    private global::NFMsg.Ident stranger_;
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public global::NFMsg.Ident stranger {
-      get { return stranger_; }
-      set {
-        stranger_ = value;
-      }
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public override bool Equals(object other) {
-      return Equals(other as ReqAckIgnoreInvite);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public bool Equals(ReqAckIgnoreInvite other) {
-      if (ReferenceEquals(other, null)) {
-        return false;
-      }
-      if (ReferenceEquals(other, this)) {
-        return true;
-      }
-      if (!object.Equals(stranger, other.stranger)) return false;
-      return Equals(_unknownFields, other._unknownFields);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public override int GetHashCode() {
-      int hash = 1;
-      if (stranger_ != null) hash ^= stranger.GetHashCode();
-      if (_unknownFields != null) {
-        hash ^= _unknownFields.GetHashCode();
-      }
-      return hash;
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public override string ToString() {
-      return pb::JsonFormatter.ToDiagnosticString(this);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void WriteTo(pb::CodedOutputStream output) {
-      if (stranger_ != null) {
-        output.WriteRawTag(10);
-        output.WriteMessage(stranger);
-      }
-      if (_unknownFields != null) {
-        _unknownFields.WriteTo(output);
-      }
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public int CalculateSize() {
-      int size = 0;
-      if (stranger_ != null) {
-        size += 1 + pb::CodedOutputStream.ComputeMessageSize(stranger);
-      }
-      if (_unknownFields != null) {
-        size += _unknownFields.CalculateSize();
-      }
-      return size;
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void MergeFrom(ReqAckIgnoreInvite other) {
-      if (other == null) {
-        return;
-      }
-      if (other.stranger_ != null) {
-        if (stranger_ == null) {
-          stranger_ = new global::NFMsg.Ident();
-        }
-        stranger.MergeFrom(other.stranger);
-      }
-      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void MergeFrom(pb::CodedInputStream input) {
-      uint tag;
-      while ((tag = input.ReadTag()) != 0) {
-        switch(tag) {
-          default:
-            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
-            break;
-          case 10: {
-            if (stranger_ == null) {
-              stranger_ = new global::NFMsg.Ident();
-            }
-            input.ReadMessage(stranger_);
-            break;
-          }
-        }
-      }
-    }
-
-  }
-
-  public sealed partial class ReqAckBlockInvite : pb::IMessage<ReqAckBlockInvite> {
-    private static readonly pb::MessageParser<ReqAckBlockInvite> _parser = new pb::MessageParser<ReqAckBlockInvite>(() => new ReqAckBlockInvite());
-    private pb::UnknownFieldSet _unknownFields;
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public static pb::MessageParser<ReqAckBlockInvite> Parser { get { return _parser; } }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public static pbr::MessageDescriptor Descriptor {
-      get { return global::NFMsg.NFMsgExtraReflection.Descriptor.MessageTypes[8]; }
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    pbr::MessageDescriptor pb::IMessage.Descriptor {
-      get { return Descriptor; }
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public ReqAckBlockInvite() {
-      OnConstruction();
-    }
-
-    partial void OnConstruction();
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public ReqAckBlockInvite(ReqAckBlockInvite other) : this() {
-      stranger_ = other.stranger_ != null ? other.stranger_.Clone() : null;
-      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public ReqAckBlockInvite Clone() {
-      return new ReqAckBlockInvite(this);
-    }
-
-    /// <summary>Field number for the "stranger" field.</summary>
-    public const int strangerFieldNumber = 1;
-    private global::NFMsg.Ident stranger_;
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public global::NFMsg.Ident stranger {
-      get { return stranger_; }
-      set {
-        stranger_ = value;
-      }
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public override bool Equals(object other) {
-      return Equals(other as ReqAckBlockInvite);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public bool Equals(ReqAckBlockInvite other) {
-      if (ReferenceEquals(other, null)) {
-        return false;
-      }
-      if (ReferenceEquals(other, this)) {
-        return true;
-      }
-      if (!object.Equals(stranger, other.stranger)) return false;
-      return Equals(_unknownFields, other._unknownFields);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public override int GetHashCode() {
-      int hash = 1;
-      if (stranger_ != null) hash ^= stranger.GetHashCode();
-      if (_unknownFields != null) {
-        hash ^= _unknownFields.GetHashCode();
-      }
-      return hash;
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public override string ToString() {
-      return pb::JsonFormatter.ToDiagnosticString(this);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void WriteTo(pb::CodedOutputStream output) {
-      if (stranger_ != null) {
-        output.WriteRawTag(10);
-        output.WriteMessage(stranger);
-      }
-      if (_unknownFields != null) {
-        _unknownFields.WriteTo(output);
-      }
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public int CalculateSize() {
-      int size = 0;
-      if (stranger_ != null) {
-        size += 1 + pb::CodedOutputStream.ComputeMessageSize(stranger);
-      }
-      if (_unknownFields != null) {
-        size += _unknownFields.CalculateSize();
-      }
-      return size;
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void MergeFrom(ReqAckBlockInvite other) {
-      if (other == null) {
-        return;
-      }
-      if (other.stranger_ != null) {
-        if (stranger_ == null) {
-          stranger_ = new global::NFMsg.Ident();
-        }
-        stranger.MergeFrom(other.stranger);
-      }
-      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void MergeFrom(pb::CodedInputStream input) {
-      uint tag;
-      while ((tag = input.ReadTag()) != 0) {
-        switch(tag) {
-          default:
-            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
-            break;
-          case 10: {
-            if (stranger_ == null) {
-              stranger_ = new global::NFMsg.Ident();
-            }
-            input.ReadMessage(stranger_);
-            break;
-          }
-        }
-      }
-    }
-
-  }
-
-  public sealed partial class ReqAckUnBlockInvite : pb::IMessage<ReqAckUnBlockInvite> {
-    private static readonly pb::MessageParser<ReqAckUnBlockInvite> _parser = new pb::MessageParser<ReqAckUnBlockInvite>(() => new ReqAckUnBlockInvite());
-    private pb::UnknownFieldSet _unknownFields;
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public static pb::MessageParser<ReqAckUnBlockInvite> Parser { get { return _parser; } }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public static pbr::MessageDescriptor Descriptor {
-      get { return global::NFMsg.NFMsgExtraReflection.Descriptor.MessageTypes[9]; }
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    pbr::MessageDescriptor pb::IMessage.Descriptor {
-      get { return Descriptor; }
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public ReqAckUnBlockInvite() {
-      OnConstruction();
-    }
-
-    partial void OnConstruction();
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public ReqAckUnBlockInvite(ReqAckUnBlockInvite other) : this() {
-      stranger_ = other.stranger_ != null ? other.stranger_.Clone() : null;
-      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public ReqAckUnBlockInvite Clone() {
-      return new ReqAckUnBlockInvite(this);
-    }
-
-    /// <summary>Field number for the "stranger" field.</summary>
-    public const int strangerFieldNumber = 1;
-    private global::NFMsg.Ident stranger_;
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public global::NFMsg.Ident stranger {
-      get { return stranger_; }
-      set {
-        stranger_ = value;
-      }
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public override bool Equals(object other) {
-      return Equals(other as ReqAckUnBlockInvite);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public bool Equals(ReqAckUnBlockInvite other) {
-      if (ReferenceEquals(other, null)) {
-        return false;
-      }
-      if (ReferenceEquals(other, this)) {
-        return true;
-      }
-      if (!object.Equals(stranger, other.stranger)) return false;
-      return Equals(_unknownFields, other._unknownFields);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public override int GetHashCode() {
-      int hash = 1;
-      if (stranger_ != null) hash ^= stranger.GetHashCode();
-      if (_unknownFields != null) {
-        hash ^= _unknownFields.GetHashCode();
-      }
-      return hash;
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public override string ToString() {
-      return pb::JsonFormatter.ToDiagnosticString(this);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void WriteTo(pb::CodedOutputStream output) {
-      if (stranger_ != null) {
-        output.WriteRawTag(10);
-        output.WriteMessage(stranger);
-      }
-      if (_unknownFields != null) {
-        _unknownFields.WriteTo(output);
-      }
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public int CalculateSize() {
-      int size = 0;
-      if (stranger_ != null) {
-        size += 1 + pb::CodedOutputStream.ComputeMessageSize(stranger);
-      }
-      if (_unknownFields != null) {
-        size += _unknownFields.CalculateSize();
-      }
-      return size;
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void MergeFrom(ReqAckUnBlockInvite other) {
-      if (other == null) {
-        return;
-      }
-      if (other.stranger_ != null) {
-        if (stranger_ == null) {
-          stranger_ = new global::NFMsg.Ident();
-        }
-        stranger.MergeFrom(other.stranger);
-      }
-      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void MergeFrom(pb::CodedInputStream input) {
-      uint tag;
-      while ((tag = input.ReadTag()) != 0) {
-        switch(tag) {
-          default:
-            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
-            break;
-          case 10: {
-            if (stranger_ == null) {
-              stranger_ = new global::NFMsg.Ident();
-            }
-            input.ReadMessage(stranger_);
-            break;
-          }
-        }
-      }
-    }
-
-  }
-
   public sealed partial class TeammemberInfo : pb::IMessage<TeammemberInfo> {
     private static readonly pb::MessageParser<TeammemberInfo> _parser = new pb::MessageParser<TeammemberInfo>(() => new TeammemberInfo());
     private pb::UnknownFieldSet _unknownFields;
@@ -1540,7 +270,7 @@ namespace NFMsg {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::NFMsg.NFMsgExtraReflection.Descriptor.MessageTypes[10]; }
+      get { return global::NFMsg.NFMsgExtraReflection.Descriptor.MessageTypes[1]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -1802,7 +532,7 @@ namespace NFMsg {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::NFMsg.NFMsgExtraReflection.Descriptor.MessageTypes[11]; }
+      get { return global::NFMsg.NFMsgExtraReflection.Descriptor.MessageTypes[2]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -2004,7 +734,7 @@ namespace NFMsg {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::NFMsg.NFMsgExtraReflection.Descriptor.MessageTypes[12]; }
+      get { return global::NFMsg.NFMsgExtraReflection.Descriptor.MessageTypes[3]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -2180,7 +910,7 @@ namespace NFMsg {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::NFMsg.NFMsgExtraReflection.Descriptor.MessageTypes[13]; }
+      get { return global::NFMsg.NFMsgExtraReflection.Descriptor.MessageTypes[4]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -2356,7 +1086,7 @@ namespace NFMsg {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::NFMsg.NFMsgExtraReflection.Descriptor.MessageTypes[14]; }
+      get { return global::NFMsg.NFMsgExtraReflection.Descriptor.MessageTypes[5]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -2532,7 +1262,7 @@ namespace NFMsg {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::NFMsg.NFMsgExtraReflection.Descriptor.MessageTypes[15]; }
+      get { return global::NFMsg.NFMsgExtraReflection.Descriptor.MessageTypes[6]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -2809,7 +1539,7 @@ namespace NFMsg {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::NFMsg.NFMsgExtraReflection.Descriptor.MessageTypes[16]; }
+      get { return global::NFMsg.NFMsgExtraReflection.Descriptor.MessageTypes[7]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -3019,7 +1749,7 @@ namespace NFMsg {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::NFMsg.NFMsgExtraReflection.Descriptor.MessageTypes[17]; }
+      get { return global::NFMsg.NFMsgExtraReflection.Descriptor.MessageTypes[8]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -3313,7 +2043,7 @@ namespace NFMsg {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::NFMsg.NFMsgExtraReflection.Descriptor.MessageTypes[18]; }
+      get { return global::NFMsg.NFMsgExtraReflection.Descriptor.MessageTypes[9]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -3577,7 +2307,7 @@ namespace NFMsg {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::NFMsg.NFMsgExtraReflection.Descriptor.MessageTypes[19]; }
+      get { return global::NFMsg.NFMsgExtraReflection.Descriptor.MessageTypes[10]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -3842,7 +2572,7 @@ namespace NFMsg {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::NFMsg.NFMsgExtraReflection.Descriptor.MessageTypes[20]; }
+      get { return global::NFMsg.NFMsgExtraReflection.Descriptor.MessageTypes[11]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -3963,7 +2693,7 @@ namespace NFMsg {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::NFMsg.NFMsgExtraReflection.Descriptor.MessageTypes[21]; }
+      get { return global::NFMsg.NFMsgExtraReflection.Descriptor.MessageTypes[12]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -4268,7 +2998,7 @@ namespace NFMsg {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::NFMsg.NFMsgExtraReflection.Descriptor.MessageTypes[22]; }
+      get { return global::NFMsg.NFMsgExtraReflection.Descriptor.MessageTypes[13]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -4530,7 +3260,7 @@ namespace NFMsg {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::NFMsg.NFMsgExtraReflection.Descriptor.MessageTypes[23]; }
+      get { return global::NFMsg.NFMsgExtraReflection.Descriptor.MessageTypes[14]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -4773,7 +3503,7 @@ namespace NFMsg {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::NFMsg.NFMsgExtraReflection.Descriptor.MessageTypes[24]; }
+      get { return global::NFMsg.NFMsgExtraReflection.Descriptor.MessageTypes[15]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -4979,7 +3709,7 @@ namespace NFMsg {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::NFMsg.NFMsgExtraReflection.Descriptor.MessageTypes[25]; }
+      get { return global::NFMsg.NFMsgExtraReflection.Descriptor.MessageTypes[16]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -5103,7 +3833,7 @@ namespace NFMsg {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::NFMsg.NFMsgExtraReflection.Descriptor.MessageTypes[26]; }
+      get { return global::NFMsg.NFMsgExtraReflection.Descriptor.MessageTypes[17]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -5207,7 +3937,7 @@ namespace NFMsg {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::NFMsg.NFMsgExtraReflection.Descriptor.MessageTypes[27]; }
+      get { return global::NFMsg.NFMsgExtraReflection.Descriptor.MessageTypes[18]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -5331,7 +4061,7 @@ namespace NFMsg {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::NFMsg.NFMsgExtraReflection.Descriptor.MessageTypes[28]; }
+      get { return global::NFMsg.NFMsgExtraReflection.Descriptor.MessageTypes[19]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -5497,7 +4227,7 @@ namespace NFMsg {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::NFMsg.NFMsgExtraReflection.Descriptor.MessageTypes[29]; }
+      get { return global::NFMsg.NFMsgExtraReflection.Descriptor.MessageTypes[20]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -5601,7 +4331,7 @@ namespace NFMsg {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::NFMsg.NFMsgExtraReflection.Descriptor.MessageTypes[30]; }
+      get { return global::NFMsg.NFMsgExtraReflection.Descriptor.MessageTypes[21]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -5767,7 +4497,7 @@ namespace NFMsg {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::NFMsg.NFMsgExtraReflection.Descriptor.MessageTypes[31]; }
+      get { return global::NFMsg.NFMsgExtraReflection.Descriptor.MessageTypes[22]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -5871,7 +4601,7 @@ namespace NFMsg {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::NFMsg.NFMsgExtraReflection.Descriptor.MessageTypes[32]; }
+      get { return global::NFMsg.NFMsgExtraReflection.Descriptor.MessageTypes[23]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -6003,7 +4733,7 @@ namespace NFMsg {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::NFMsg.NFMsgExtraReflection.Descriptor.MessageTypes[33]; }
+      get { return global::NFMsg.NFMsgExtraReflection.Descriptor.MessageTypes[24]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -6107,7 +4837,7 @@ namespace NFMsg {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::NFMsg.NFMsgExtraReflection.Descriptor.MessageTypes[34]; }
+      get { return global::NFMsg.NFMsgExtraReflection.Descriptor.MessageTypes[25]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -6239,7 +4969,7 @@ namespace NFMsg {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::NFMsg.NFMsgExtraReflection.Descriptor.MessageTypes[35]; }
+      get { return global::NFMsg.NFMsgExtraReflection.Descriptor.MessageTypes[26]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -6343,7 +5073,7 @@ namespace NFMsg {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::NFMsg.NFMsgExtraReflection.Descriptor.MessageTypes[36]; }
+      get { return global::NFMsg.NFMsgExtraReflection.Descriptor.MessageTypes[27]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -6475,7 +5205,7 @@ namespace NFMsg {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::NFMsg.NFMsgExtraReflection.Descriptor.MessageTypes[37]; }
+      get { return global::NFMsg.NFMsgExtraReflection.Descriptor.MessageTypes[28]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]

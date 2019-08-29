@@ -12,55 +12,6 @@ message ReqAIOnwer
 }
 
 
-///////////////friend system/////////////////////////////////////////////////////////////////////////////////////
-
-message FriendData
-{
-    Ident		id 				= 1;
-	string		name 			= 2;
-}
-
-message ReqAckFriendList
-{
-	repeated FriendData 	inviteList 	= 1;
-	repeated FriendData 	friendList 	= 2;
-}
-
-message ReqAckDeleteFriend
-{
-    Ident	stranger 				= 1;
-}
-
-message ReqAckSendInvite
-{
-    Ident	stranger 				= 1;
-}
-
-message ReqAckAcceptInvite
-{
-    Ident	stranger 				= 1;
-}
-
-message ReqAckRejectInvite
-{
-    Ident	stranger 				= 1;
-}
-
-message ReqAckIgnoreInvite
-{
-    Ident	stranger 				= 1;
-}
-
-message ReqAckBlockInvite
-{
-    Ident	stranger 				= 1;
-}
-
-message ReqAckUnBlockInvite
-{
-    Ident	stranger 				= 1;
-}
-///////////////组队/////////////////////////////////////////////////////////////////////////////////////
 
 message TeammemberInfo
 {

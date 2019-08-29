@@ -334,6 +334,23 @@ enum EGameMsgID
 
 	EGMI_REQ_STORE_BUILDING_LIST						= 5010;
 
+	/////////////////////FRIEND MSG START/////////////////////////////////////
+	
+	EGMI_REQ_ACK_FRIEND_LIST = 6000;
+	EGMI_ACK_FRIEND_DELETE = 6001;
+	EGMI_ACK_FRIEND_ADD = 6002;
+	EGMI_ACK_INVITE_ADD = 6003;
+
+	EGMI_REQ_ACK_SEND_INVITE = 6010;
+	EGMI_REQ_ACK_ACCEPT_INVITE = 6011;
+	EGMI_REQ_ACK_REJECT_INVITE = 6012;
+	EGMI_REQ_ACK_IGNORE_INVITE = 6013;
+
+	EGMI_REQ_ACK_BLOCK_PLAYER = 6014;
+	EGMI_REQ_ACK_UNBLOCK_PLAYER = 6015;
+
+	/////////////////////FRIEND MSG END/////////////////////////////////////
+
 
 	/////////////////////GM MSG/////////////////////////////////////
 	EGMI_REQ_CMD_PROPERTY_INT					= 10000;			//
@@ -361,19 +378,10 @@ enum EGameMsgID
 
 	/////////////////////game-world MSG/////////////////////////////////////
 
-	EGMI_REQ_ACK_FRIEND_LIST = 30001;
-	EGMI_ACK_FRIEND_DELETE = 30002;
-	EGMI_ACK_FRIEND_ADD = 30003;
-	EGMI_ACK_INVITE_ADD = 30004;
+
 
 	/////////////////////client-game MSG/////////////////////////////////////
-	EGMI_REQ_ACK_SEND_INVITE = 30010;
-	EGMI_REQ_ACK_ACCEPT_INVITE = 30011;
-	EGMI_REQ_ACK_REJECT_INVITE = 30012;
-	EGMI_REQ_ACK_IGNORE_INVITE = 30013;
 
-	EGMI_REQ_ACK_BLOCK_PLAYER = 30020;
-	EGMI_REQ_ACK_UNBLOCK_PLAYER = 30021;
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
