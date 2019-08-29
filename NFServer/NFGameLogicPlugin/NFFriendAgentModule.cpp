@@ -30,6 +30,7 @@ bool NFFriendAgentModule::Init()
     m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>();
     m_pNetModule = pPluginManager->FindModule<NFINetModule>();
     m_pNetClientModule = pPluginManager->FindModule<NFINetClientModule>();
+    m_pLogModule = pPluginManager->FindModule<NFILogModule>();
 
     return true;
 }
@@ -59,8 +60,8 @@ bool NFFriendAgentModule::AfterInit()
 	m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_REQ_ACK_REJECT_INVITE, this, &NFFriendAgentModule::OnReqRejectInviteProcess);
 	m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_REQ_ACK_IGNORE_INVITE, this, &NFFriendAgentModule::OnReqIgnoreInviteProcess);
     //from client
-	m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_REQ_ACK_BLOCK_PLAYER, this, &NFFriendAgentModule::OnReqBlockInviteProcess);
-	m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_REQ_ACK_UNBLOCK_PLAYER, this, &NFFriendAgentModule::OnReqUnBlockInviteProcess);
+	m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_REQ_ACK_BLOCK_PLAYER, this, &NFFriendAgentModule::OnReqBlockPlayerProcess);
+	m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_REQ_ACK_UNBLOCK_PLAYER, this, &NFFriendAgentModule::OnReqUnBlockPlayerProcess);
 
     return true;
 }
@@ -87,50 +88,231 @@ void NFFriendAgentModule::ReqFriendList(const NFGUID & self)
 
 void NFFriendAgentModule::OnAckFriendListProcess(const NFSOCK nSockIndex, const int nMsgID, const char *msg, const uint32_t nLen)
 {
+    //come from world
+	CLIENT_MSG_PROCESS(nMsgID, msg, nLen, NFMsg::ReqAckFriendList)
 
+    //should batch
+    for (int i = 0; i < xMsg.friendlist_size(); ++i)
+    {
+        const NFMsg::FriendData& friendData = xMsg.friendlist(i);
+
+        NF_SHARE_PTR<NFIRecord> pRecord = pObject->GetRecordManager()->GetElement(NFrame::Player::FriendList::ThisName());
+        if (pRecord)
+        {
+            NF_SHARE_PTR<NFDataList> dataList = pRecord->GetInitData();
+            if (dataList)
+            {
+                dataList->SetObject(NFrame::Player::FriendList::GUID, NFINetModule::PBToNF(friendData.id()));
+                dataList->SetString(NFrame::Player::FriendList::Name, friendData.name());
+
+                pRecord->AddRow(-1, *dataList);
+            }
+        }
+    }
+
+    for (int i = 0; i < xMsg.invitelist_size(); ++i)
+    {
+        const NFMsg::FriendData& friendData = xMsg.invitelist(i);
+
+        NF_SHARE_PTR<NFIRecord> pRecord = pObject->GetRecordManager()->GetElement(NFrame::Player::InviteList::ThisName());
+        if (pRecord)
+        {
+            NF_SHARE_PTR<NFDataList> dataList = pRecord->GetInitData();
+            if (dataList)
+            {
+                dataList->SetObject(NFrame::Player::InviteList::GUID, NFINetModule::PBToNF(friendData.id()));
+                dataList->SetString(NFrame::Player::InviteList::Name, friendData.name());
+
+                pRecord->AddRow(-1, *dataList);
+            }
+        }
+    }
 }
 
 void NFFriendAgentModule::OnAckAddFriendProcess(const NFSOCK nSockIndex, const int nMsgID, const char *msg, const uint32_t nLen)
 {
+    //come from world
+    CLIENT_MSG_PROCESS(nMsgID, msg, nLen, NFMsg::ReqAckFriendList)
 
+    //should batch
+    for (int i = 0; i < xMsg.friendlist_size(); ++i)
+    {
+        const NFMsg::FriendData& friendData = xMsg.friendlist(i);
+
+        NF_SHARE_PTR<NFIRecord> pRecord = pObject->GetRecordManager()->GetElement(NFrame::Player::FriendList::ThisName());
+        if (pRecord)
+        {
+            NF_SHARE_PTR<NFDataList> dataList = pRecord->GetInitData();
+            if (dataList)
+            {
+                dataList->SetObject(NFrame::Player::FriendList::GUID, NFINetModule::PBToNF(friendData.id()));
+                dataList->SetString(NFrame::Player::FriendList::Name, friendData.name());
+
+                pRecord->AddRow(-1, *dataList);
+            }
+        }
+    }
 }
 
 void NFFriendAgentModule::OnAckDeleteFriendProcess(const NFSOCK nSockIndex, const int nMsgID, const char *msg, const uint32_t nLen)
 {
+    //come from world
+    CLIENT_MSG_PROCESS(nMsgID, msg, nLen, NFMsg::ReqAckFriendList)
 
+    //should batch
+    for (int i = 0; i < xMsg.friendlist_size(); ++i)
+    {
+        const NFMsg::FriendData& friendData = xMsg.friendlist(i);
+
+        NF_SHARE_PTR<NFIRecord> pRecord = pObject->GetRecordManager()->GetElement(NFrame::Player::FriendList::ThisName());
+        if (pRecord)
+        {
+            int row = pRecord->FindObject(NFrame::Player::FriendList::GUID, NFINetModule::PBToNF(friendData.id()));
+            if (row >= 0)
+            {
+                pRecord->Remove(row);
+            }
+        }
+    }
 }
 
 void NFFriendAgentModule::OnAckReceivedInviteProcess(const NFSOCK nSockIndex, const int nMsgID, const char *msg, const uint32_t nLen)
 {
+    //come from world
+    CLIENT_MSG_PROCESS(nMsgID, msg, nLen, NFMsg::ReqAckFriendList)
 
+    //should batch
+    for (int i = 0; i < xMsg.invitelist_size(); ++i)
+    {
+        const NFMsg::FriendData& friendData = xMsg.invitelist(i);
+
+        NF_SHARE_PTR<NFIRecord> pRecord = pObject->GetRecordManager()->GetElement(NFrame::Player::InviteList::ThisName());
+        if (pRecord)
+        {
+            NF_SHARE_PTR<NFDataList> dataList = pRecord->GetInitData();
+            if (dataList)
+            {
+                dataList->SetObject(NFrame::Player::InviteList::GUID, NFNetModule::PBToNF(friendData.id()));
+                dataList->SetString(NFrame::Player::InviteList::Name, friendData.name());
+
+                pRecord->AddRow(-1, *dataList);
+            }
+        }
+    }
 }
 
 void NFFriendAgentModule::OnReqSendInviteProcess(const NFSOCK nSockIndex, const int nMsgID, const char *msg, const uint32_t nLen)
 {
+    //come from client
+	CLIENT_MSG_PROCESS(nMsgID, msg, nLen, NFMsg::ReqAckSendInvite)
 
+    NF_SHARE_PTR<NFIRecord> pRecord = pObject->GetRecordManager()->GetEleIment(NFrame::Player::SentList::ThisName());
+    if (pRecord)
+    {
+        NF_SHARE_PTR<NFDataList> dataList = pRecord->GetInitData();
+        if (dataList)
+        {
+            dataList->SetObject(NFrame::Player::SentList::GUID, NFINetModule::PBToNF(xMsg.id()));
+            dataList->SetString(NFrame::Player::SentList::Name, xMsg.name());
+
+            pRecord->AddRow(-1, *dataList);
+        }
+    }
+
+    m_pNetClientModule->SendSuitByPB(NF_SERVER_TYPES::NF_ST_WORLD, nPlayerID.GetData(), NFMsg::EGMI_REQ_ACK_SEND_INVITE, xMsg, nPlayerID);
 }
 
 void NFFriendAgentModule::OnReqAcceptInviteProcess(const NFSOCK nSockIndex, const int nMsgID, const char *msg, const uint32_t nLen)
 {
+    //come from client
+	CLIENT_MSG_PROCESS(nMsgID, msg, nLen, NFMsg::ReqAckAcceptInvite)
 
+    NF_SHARE_PTR<NFIRecord> pRecord = pObject->GetRecordManager()->GetElement(NFrame::Player::SentList::ThisName());
+    if (pRecord)
+    {
+        int row = pRecord->FindObject(NFrame::Player::SentList::GUID, NFINetModule::PBToNF(xMsg.id()));
+        if (row >= 0)
+        {
+            pRecord->Remove(row);
+        }
+    }
+
+    m_pNetClientModule->SendSuitByPB(NF_SERVER_TYPES::NF_ST_WORLD, nPlayerID.GetData(), NFMsg::EGMI_REQ_ACK_ACCEPT_INVITE, xMsg, nPlayerID);
 }
 
 void NFFriendAgentModule::OnReqRejectInviteProcess(const NFSOCK nSockIndex, const int nMsgID, const char *msg, const uint32_t nLen)
 {
+    //come from client
+	CLIENT_MSG_PROCESS(nMsgID, msg, nLen, NFMsg::ReqAckAcceptInvite)
+
+    NF_SHARE_PTR<NFIRecord> pRecord = pObject->GetRecordManager()->GetElement(NFrame::Player::SentList::ThisName());
+    if (pRecord)
+    {
+        int row = pRecord->FindObject(NFrame::Player::SentList::GUID, NFINetModule::PBToNF(xMsg.id()));
+        if (row >= 0)
+        {
+            pRecord->Remove(row);
+        }
+    }
+
+    m_pNetClientModule->SendSuitByPB(NF_SERVER_TYPES::NF_ST_WORLD, nPlayerID.GetData(), NFMsg::EGMI_REQ_ACK_REJECT_INVITE, xMsg, nPlayerID);
 
 }
 
 void NFFriendAgentModule::OnReqIgnoreInviteProcess(const NFSOCK nSockIndex, const int nMsgID, const char *msg, const uint32_t nLen)
 {
+    //come from client
+	CLIENT_MSG_PROCESS(nMsgID, msg, nLen, NFMsg::ReqAckIgnoreInvite)
+
+    NF_SHARE_PTR<NFIRecord> pRecord = pObject->GetRecordManager()->GetElement(NFrame::Player::SentList::ThisName());
+    if (pRecord)
+    {
+        int row = pRecord->FindObject(NFrame::Player::SentList::GUID, NFINetModule::PBToNF(xMsg.id()));
+        if (row >= 0)
+        {
+            pRecord->Remove(row);
+        }
+    }
+
+    m_pNetClientModule->SendSuitByPB(NF_SERVER_TYPES::NF_ST_WORLD, nPlayerID.GetData(), NFMsg::EGMI_REQ_ACK_IGNORE_INVITE, xMsg, nPlayerID);
 
 }
 
-void NFFriendAgentModule::OnReqBlockInviteProcess(const NFSOCK nSockIndex, const int nMsgID, const char *msg, const uint32_t nLen)
+void NFFriendAgentModule::OnReqBlockPlayerProcess(const NFSOCK nSockIndex, const int nMsgID, const char *msg, const uint32_t nLen)
 {
+    //come from client
+	CLIENT_MSG_PROCESS(nMsgID, msg, nLen, NFMsg::ReqAckBlockPlayer)
+
+    NF_SHARE_PTR<NFIRecord> pRecord = pObject->GetRecordManager()->GetElement(NFrame::Player::BlockList::ThisName());
+    if (pRecord)
+    {
+        NF_SHARE_PTR<NFDataList> dataList = pRecord->GetInitData();
+        if (dataList)
+        {
+            dataList->SetObject(NFrame::Player::BlockList::GUID, NFINetModule::PBToNF(xMsg.id()));
+
+            pRecord->AddRow(-1, *dataList);
+        }
+    }
+
+    m_pNetClientModule->SendSuitByPB(NF_SERVER_TYPES::NF_ST_WORLD, nPlayerID.GetData(), NFMsg::EGMI_REQ_ACK_BLOCK_PLAYER, xMsg, nPlayerID);
 
 }
 
-void NFFriendAgentModule::OnReqUnBlockInviteProcess(const NFSOCK nSockIndex, const int nMsgID, const char *msg, const uint32_t nLen)
+void NFFriendAgentModule::OnReqUnBlockPlayerProcess(const NFSOCK nSockIndex, const int nMsgID, const char *msg, const uint32_t nLen)
 {
+    //come from client
+	CLIENT_MSG_PROCESS(nMsgID, msg, nLen, NFMsg::ReqAckBlockPlayer)
 
+    NF_SHARE_PTR<NFIRecord> pRecord = pObject->GetRecordManager()->GetElement(NFrame::Player::BlockList::ThisName());
+    if (pRecord)
+    {
+        int row = pRecord->FindObject(NFrame::Player::BlockList::GUID, NFINetModule::PBToNF(xMsg.id()));
+        if (row >= 0)
+        {
+            pRecord->Remove(row);
+        }
+    }
+
+    m_pNetClientModule->SendSuitByPB(NF_SERVER_TYPES::NF_ST_WORLD, nPlayerID.GetData(), NFMsg::EGMI_REQ_ACK_UNBLOCK_PLAYER, xMsg, nPlayerID);
 }

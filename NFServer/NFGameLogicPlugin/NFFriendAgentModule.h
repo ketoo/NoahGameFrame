@@ -73,14 +73,15 @@ protected:
 	void OnReqAcceptInviteProcess(const NFSOCK nSockIndex, const int nMsgID, const char *msg, const uint32_t nLen);
 	void OnReqRejectInviteProcess(const NFSOCK nSockIndex, const int nMsgID, const char *msg, const uint32_t nLen);
 	void OnReqIgnoreInviteProcess(const NFSOCK nSockIndex, const int nMsgID, const char *msg, const uint32_t nLen);
-	void OnReqBlockInviteProcess(const NFSOCK nSockIndex, const int nMsgID, const char *msg, const uint32_t nLen);
-	void OnReqUnBlockInviteProcess(const NFSOCK nSockIndex, const int nMsgID, const char *msg, const uint32_t nLen);
+	void OnReqBlockPlayerProcess(const NFSOCK nSockIndex, const int nMsgID, const char *msg, const uint32_t nLen);
+	void OnReqUnBlockPlayerProcess(const NFSOCK nSockIndex, const int nMsgID, const char *msg, const uint32_t nLen);
 
 
 private:
     NFINetClientModule* m_pNetClientModule;
 	NFINetModule* m_pNetModule;
     NFIKernelModule* m_pKernelModule;
+    NFILogModule* m_pLogModule;
 };
 
 
