@@ -97,8 +97,8 @@ void NFFriendModule::OnReqFriendListProcess(const NFSOCK nSockIndex, const int n
         NFMsg::FriendData* pData = xMsg.add_invitelist();
         if (pData)
         {
-            pData->set_name(friendList[i].name);
-            *pData->mutable_id() = NFINetModule::NFToPB(friendList[i].id);
+            pData->set_name(inviteList[i].name);
+            *pData->mutable_id() = NFINetModule::NFToPB(inviteList[i].id);
         }
     }
 
