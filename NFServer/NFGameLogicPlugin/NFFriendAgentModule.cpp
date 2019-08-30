@@ -231,10 +231,10 @@ void NFFriendAgentModule::OnReqAcceptInviteProcess(const NFSOCK nSockIndex, cons
     //come from client
 	CLIENT_MSG_PROCESS(nMsgID, msg, nLen, NFMsg::ReqAckAcceptInvite)
 
-    NF_SHARE_PTR<NFIRecord> pRecord = pObject->GetRecordManager()->GetElement(NFrame::Player::SentList::ThisName());
+    NF_SHARE_PTR<NFIRecord> pRecord = pObject->GetRecordManager()->GetElement(NFrame::Player::InviteList::ThisName());
     if (pRecord)
     {
-        int row = pRecord->FindObject(NFrame::Player::SentList::GUID, NFINetModule::PBToNF(xMsg.id()));
+        int row = pRecord->FindObject(NFrame::Player::InviteList::GUID, NFINetModule::PBToNF(xMsg.id()));
         if (row >= 0)
         {
             pRecord->Remove(row);
@@ -249,10 +249,10 @@ void NFFriendAgentModule::OnReqRejectInviteProcess(const NFSOCK nSockIndex, cons
     //come from client
 	CLIENT_MSG_PROCESS(nMsgID, msg, nLen, NFMsg::ReqAckAcceptInvite)
 
-    NF_SHARE_PTR<NFIRecord> pRecord = pObject->GetRecordManager()->GetElement(NFrame::Player::SentList::ThisName());
+    NF_SHARE_PTR<NFIRecord> pRecord = pObject->GetRecordManager()->GetElement(NFrame::Player::InviteList::ThisName());
     if (pRecord)
     {
-        int row = pRecord->FindObject(NFrame::Player::SentList::GUID, NFINetModule::PBToNF(xMsg.id()));
+        int row = pRecord->FindObject(NFrame::Player::InviteList::GUID, NFINetModule::PBToNF(xMsg.id()));
         if (row >= 0)
         {
             pRecord->Remove(row);
@@ -268,10 +268,10 @@ void NFFriendAgentModule::OnReqIgnoreInviteProcess(const NFSOCK nSockIndex, cons
     //come from client
 	CLIENT_MSG_PROCESS(nMsgID, msg, nLen, NFMsg::ReqAckIgnoreInvite)
 
-    NF_SHARE_PTR<NFIRecord> pRecord = pObject->GetRecordManager()->GetElement(NFrame::Player::SentList::ThisName());
+    NF_SHARE_PTR<NFIRecord> pRecord = pObject->GetRecordManager()->GetElement(NFrame::Player::InviteList::ThisName());
     if (pRecord)
     {
-        int row = pRecord->FindObject(NFrame::Player::SentList::GUID, NFINetModule::PBToNF(xMsg.id()));
+        int row = pRecord->FindObject(NFrame::Player::InviteList::GUID, NFINetModule::PBToNF(xMsg.id()));
         if (row >= 0)
         {
             pRecord->Remove(row);
