@@ -49,10 +49,10 @@ bool NFFriendAgentModule::AfterInit()
 {
 	m_pKernelModule->AddClassCallBack(NFrame::Player::ThisName(), this, &NFFriendAgentModule::OnPlayerClassEvent);
 
-	m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_REQ_ACK_FRIEND_LIST, this, &NFFriendAgentModule::OnAckFriendListProcess);
-	m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_ACK_FRIEND_DELETE, this, &NFFriendAgentModule::OnAckAddFriendProcess);
-	m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_ACK_FRIEND_ADD, this, &NFFriendAgentModule::OnAckAddFriendProcess);
-	m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_ACK_INVITE_ADD, this, &NFFriendAgentModule::OnAckReceivedInviteProcess);
+	m_pNetClientModule->AddReceiveCallBack(NF_SERVER_TYPES::NF_ST_WORLD, NFMsg::EGMI_REQ_ACK_FRIEND_LIST, this, &NFFriendAgentModule::OnAckFriendListProcess);
+	m_pNetClientModule->AddReceiveCallBack(NF_SERVER_TYPES::NF_ST_WORLD, NFMsg::EGMI_ACK_FRIEND_DELETE, this, &NFFriendAgentModule::OnAckAddFriendProcess);
+	m_pNetClientModule->AddReceiveCallBack(NF_SERVER_TYPES::NF_ST_WORLD, NFMsg::EGMI_ACK_FRIEND_ADD, this, &NFFriendAgentModule::OnAckAddFriendProcess);
+	m_pNetClientModule->AddReceiveCallBack(NF_SERVER_TYPES::NF_ST_WORLD, NFMsg::EGMI_ACK_INVITE_ADD, this, &NFFriendAgentModule::OnAckReceivedInviteProcess);
 
     //from client
 	m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_REQ_ACK_SEND_INVITE, this, &NFFriendAgentModule::OnReqSendInviteProcess);
