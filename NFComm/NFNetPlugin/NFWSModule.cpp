@@ -623,8 +623,9 @@ std::string NFWSModule::EncodeFrame(const char * data, size_t size_, bool text)
     std::string res;
     res.reserve(size_ + 10);
 
+    std::string sizebuf;
     uint64_t size = size_;
-
+    
     uint8_t payload_len = 0;
     if (size <= PAYLOAD_MIN_LEN)
     {
@@ -635,13 +636,13 @@ std::string NFWSModule::EncodeFrame(const char * data, size_t size_, bool text)
         payload_len = static_cast<uint8_t>(PAYLOAD_MID_LEN);
         uint16_t n = (uint16_t)size;
         n = NFIMsgHead::NF_HTONS(n);
-        res.append(reinterpret_cast<const char*>(&n), sizeof(n));
+        sizebuf.append(reinterpret_cast<const char*>(&n), sizeof(n));
     }
     else
     {
         payload_len = static_cast<uint8_t>(PAYLOAD_MAX_LEN);
         size = NFIMsgHead::NF_HTONLL(size);
-        res.append(reinterpret_cast<const char*>(&size), sizeof(size));
+        sizebuf.append(reinterpret_cast<const char*>(&size), sizeof(size));
     }
 
     uint8_t ocode = FIN_FRAME_FLAG | static_cast<uint8_t>(opcode::binary);
@@ -652,6 +653,8 @@ std::string NFWSModule::EncodeFrame(const char * data, size_t size_, bool text)
 
     res.append(reinterpret_cast<const char*>(&ocode), sizeof(opcode));
     res.append(reinterpret_cast<const char*>(&payload_len), sizeof(payload_len));
+    if(!sizebuf.empty())
+        res.append(sizebuf);
 
     res.append(data,size);
     return res;
