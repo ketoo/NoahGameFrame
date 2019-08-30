@@ -141,14 +141,14 @@ void NFFriendModule::OnReqSendInviteProcess(const NFSOCK nSockIndex, const int n
 void NFFriendModule::OnReqAcceptInviteProcess(const NFSOCK nSockIndex, const int nMsgID, const char *msg, const uint32_t nLen)
 {
     CLIENT_MSG_PROCESS_NO_OBJECT(nMsgID, msg, nLen, NFMsg::ReqAckAcceptInvite)
+	NFGUID stranger = NFINetModule::PBToNF(xMsg.id());
 
-    NFGUID stranger = NFINetModule::PBToNF(xMsg.id());
-    if (m_pFriendRedisModule->AcceptInvite(nPlayerID, "", stranger))
-    {
-        NF_SHARE_PTR<NFIWorldNet_ServerModule::PlayerData> pStrangerData = m_pWorldNet_ServerModule->GetPlayerData(stranger);
-        NF_SHARE_PTR<NFIWorldNet_ServerModule::PlayerData> pPlayerData = m_pWorldNet_ServerModule->GetPlayerData(nPlayerID);
-        if (pPlayerData)
-        {
+	NF_SHARE_PTR<NFIWorldNet_ServerModule::PlayerData> pStrangerData = m_pWorldNet_ServerModule->GetPlayerData(stranger);
+	NF_SHARE_PTR<NFIWorldNet_ServerModule::PlayerData> pPlayerData = m_pWorldNet_ServerModule->GetPlayerData(nPlayerID);
+	if (pPlayerData)
+	{
+		if (m_pFriendRedisModule->AcceptInvite(nPlayerID, pPlayerData->name, stranger))
+		{
             //send message to the game server
             NFMsg::ReqAckFriendList xReqAckFriendList;
             NFMsg::FriendData* pData = xReqAckFriendList.add_friendlist();
@@ -159,7 +159,7 @@ void NFFriendModule::OnReqAcceptInviteProcess(const NFSOCK nSockIndex, const int
                     pData->set_name(pStrangerData->name);
                 }
                 *(pData->mutable_id()) = NFINetModule::NFToPB(stranger);
-                m_pWorldNet_ServerModule->SendMsgToGame(stranger, NFMsg::EGMI_ACK_FRIEND_ADD, xReqAckFriendList);
+                m_pWorldNet_ServerModule->SendMsgToGame(nPlayerID, NFMsg::EGMI_ACK_FRIEND_ADD, xReqAckFriendList);
             }
         }
 

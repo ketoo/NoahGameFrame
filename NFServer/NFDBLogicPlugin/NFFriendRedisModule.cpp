@@ -126,6 +126,8 @@ bool NFFriendRedisModule::AcceptInvite(const NFGUID& self, const std::string& se
         std::string strangerName;
 		if (xNoSqlDriver->HGET(strKey, inviter.ToString(), strangerName))
 		{
+			xNoSqlDriver->HDEL(strKey, inviter.ToString());
+
             AddFriend(self, inviter, strangerName);
             AddFriend(inviter, self, selfName);
 			return true;
