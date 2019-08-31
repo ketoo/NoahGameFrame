@@ -119,13 +119,12 @@ void NFFriendModule::OnReqSendInviteProcess(const NFSOCK nSockIndex, const int n
     CLIENT_MSG_PROCESS_NO_OBJECT(nMsgID, msg, nLen, NFMsg::ReqAckSendInvite)
 
     NFGUID stranger = NFINetModule::PBToNF(xMsg.id());
-    const std::string& name = xMsg.name();
-    m_pFriendRedisModule->SendInvite(nPlayerID, name, stranger);
 
-    NF_SHARE_PTR<NFIWorldNet_ServerModule::PlayerData> pStrangerData = m_pWorldNet_ServerModule->GetPlayerData(stranger);
     NF_SHARE_PTR<NFIWorldNet_ServerModule::PlayerData> pPlayerData = m_pWorldNet_ServerModule->GetPlayerData(nPlayerID);
-    if (pPlayerData && pStrangerData)
+    if (pPlayerData)
     {
+		m_pFriendRedisModule->SendInvite(nPlayerID, pPlayerData->name, stranger);
+
         //send message to the game server
         NFMsg::ReqAckFriendList xReqAckFriendList;
         NFMsg::FriendData* pData = xReqAckFriendList.add_invitelist();

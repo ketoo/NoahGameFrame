@@ -145,10 +145,21 @@ void NFFriendAgentModule::OnAckAddFriendProcess(const NFSOCK nSockIndex, const i
             NF_SHARE_PTR<NFDataList> dataList = pRecord->GetInitData();
             if (dataList)
             {
-                dataList->SetObject(NFrame::Player::FriendList::GUID, NFINetModule::PBToNF(friendData.id()));
+				const NFGUID id = NFINetModule::PBToNF(friendData.id());
+                dataList->SetObject(NFrame::Player::FriendList::GUID, id);
                 dataList->SetString(NFrame::Player::FriendList::Name, friendData.name());
 
                 pRecord->AddRow(-1, *dataList);
+
+				NF_SHARE_PTR<NFIRecord> pSendRecord = pObject->GetRecordManager()->GetElement(NFrame::Player::SentList::ThisName());
+				if (pSendRecord)
+				{
+					int row = pSendRecord->FindObject(NFrame::Player::SentList::GUID, id);
+					if (row >= 0)
+					{
+						pSendRecord->Remove(row);
+					}
+				}
             }
         }
     }
