@@ -20,6 +20,9 @@
     <Filter Include="NFFriendAgent">
       <UniqueIdentifier>{a50b2f7c-a0b6-478c-91b7-6e17255eb757}</UniqueIdentifier>
     </Filter>
+    <Filter Include="NFTeamAgent">
+      <UniqueIdentifier>{d6ab6f07-0d23-44f5-8043-43d5395af353}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="NFGameLogicPlugin.h" />

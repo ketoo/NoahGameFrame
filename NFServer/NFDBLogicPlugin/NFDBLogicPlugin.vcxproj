@@ -14,22 +14,14 @@
     <ClCompile Include="dllmain.cpp" />
     <ClCompile Include="NFAccountRedisModule.cpp" />
     <ClCompile Include="NFBigMapRedisModule.cpp" />
-    <ClCompile Include="NFClanRedisModule.cpp" />
-    <ClCompile Include="NFFriendRedisModule.cpp" />
-    <ClCompile Include="NFMailRedisModule.cpp" />
     <ClCompile Include="NFPlayerRedisModule.cpp" />
-    <ClCompile Include="NFRankRedisModule.cpp" />
     <ClCompile Include="NFCommonRedisModule.cpp" />
     <ClCompile Include="NFDBLogicPlugin.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="NFAccountRedisModule.h" />
     <ClInclude Include="NFBigMapRedisModule.h" />
-    <ClInclude Include="NFClanRedisModule.h" />
-    <ClInclude Include="NFFriendRedisModule.h" />
-    <ClInclude Include="NFMailRedisModule.h" />
     <ClInclude Include="NFPlayerRedisModule.h" />
-    <ClInclude Include="NFRankRedisModule.h" />
     <ClInclude Include="NFCommonRedisModule.h" />
     <ClInclude Include="NFDBLogicPlugin.h" />
   </ItemGroup>

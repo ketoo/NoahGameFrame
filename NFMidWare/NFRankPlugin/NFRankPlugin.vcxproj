@@ -102,10 +102,12 @@
     </ClCompile>
     <ClCompile Include="NFRankModule.cpp" />
     <ClCompile Include="NFRankPlugin.cpp" />
+    <ClCompile Include="NFRankRedisModule.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="NFRankModule.h" />
     <ClInclude Include="NFRankPlugin.h" />
+    <ClInclude Include="NFRankRedisModule.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

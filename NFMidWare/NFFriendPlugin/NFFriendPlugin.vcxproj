@@ -94,6 +94,7 @@
   <ItemGroup>
     <ClInclude Include="NFFriendModule.h" />
     <ClInclude Include="NFFriendPlugin.h" />
+    <ClInclude Include="NFFriendRedisModule.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="dllmain.cpp">
@@ -106,6 +107,7 @@
     </ClCompile>
     <ClCompile Include="NFFriendModule.cpp" />
     <ClCompile Include="NFFriendPlugin.cpp" />
+    <ClCompile Include="NFFriendRedisModule.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

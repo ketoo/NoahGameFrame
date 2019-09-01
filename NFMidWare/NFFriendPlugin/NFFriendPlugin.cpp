@@ -25,6 +25,7 @@
 
 
 #include "NFFriendModule.h"
+#include "NFFriendRedisModule.h"
 #include "NFFriendPlugin.h"
 
 //
@@ -58,11 +59,13 @@ const std::string NFFriendPlugin::GetPluginName()
 
 void NFFriendPlugin::Install()
 {
-    REGISTER_MODULE(pPluginManager, NFIFriendModule, NFFriendModule)
+	REGISTER_MODULE(pPluginManager, NFIFriendModule, NFFriendModule)
+	REGISTER_MODULE(pPluginManager, NFIFriendRedisModule, NFFriendRedisModule)
 
 }
 
 void NFFriendPlugin::Uninstall()
 {
-    UNREGISTER_MODULE(pPluginManager, NFIFriendModule, NFFriendModule)
+	UNREGISTER_MODULE(pPluginManager, NFIFriendRedisModule, NFFriendRedisModule)
+	UNREGISTER_MODULE(pPluginManager, NFIFriendModule, NFFriendModule)
 }
