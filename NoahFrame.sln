@@ -401,6 +401,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "NFLoginNet_HttpServerPlugin
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "NFClanPlugin", "NFMidWare\NFClanPlugin\NFClanPlugin.vcxproj", "{7642169F-2530-4B2F-8FEF-6390D8FECA4A}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "NFTeamPlugin", "NFMidWare\NFTeamPlugin\NFTeamPlugin.vcxproj", "{A3118C49-4E6B-4C9F-894A-E608FB988648}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -669,6 +671,10 @@ Global
 		{7642169F-2530-4B2F-8FEF-6390D8FECA4A}.Debug|x64.Build.0 = Debug|x64
 		{7642169F-2530-4B2F-8FEF-6390D8FECA4A}.Release|x64.ActiveCfg = Release|x64
 		{7642169F-2530-4B2F-8FEF-6390D8FECA4A}.Release|x64.Build.0 = Release|x64
+		{A3118C49-4E6B-4C9F-894A-E608FB988648}.Debug|x64.ActiveCfg = Debug|x64
+		{A3118C49-4E6B-4C9F-894A-E608FB988648}.Debug|x64.Build.0 = Debug|x64
+		{A3118C49-4E6B-4C9F-894A-E608FB988648}.Release|x64.ActiveCfg = Release|x64
+		{A3118C49-4E6B-4C9F-894A-E608FB988648}.Release|x64.Build.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -745,6 +751,7 @@ Global
 		{B7132059-C4A0-472A-9D58-BEB40B9528DB} = {A44988B7-63AD-4A21-8C91-4DC7BD6D964E}
 		{5EBB5D6A-5C7B-4A18-8F60-4094173771BD} = {9F68A20B-2B35-4C33-9C36-872C1CA2D5BE}
 		{7642169F-2530-4B2F-8FEF-6390D8FECA4A} = {6B130DD9-F73D-4692-84C4-2623D2DEF7D4}
+		{A3118C49-4E6B-4C9F-894A-E608FB988648} = {6B130DD9-F73D-4692-84C4-2623D2DEF7D4}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {0FB8E2D6-BCE5-48BD-93AE-A041C5B39F3D}
