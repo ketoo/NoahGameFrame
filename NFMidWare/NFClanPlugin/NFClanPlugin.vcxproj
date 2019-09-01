@@ -102,10 +102,12 @@
     </ClCompile>
     <ClCompile Include="NFClanModule.cpp" />
     <ClCompile Include="NFClanPlugin.cpp" />
+    <ClCompile Include="NFClanRedisModule.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="NFClanModule.h" />
     <ClInclude Include="NFClanPlugin.h" />
+    <ClInclude Include="NFClanRedisModule.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

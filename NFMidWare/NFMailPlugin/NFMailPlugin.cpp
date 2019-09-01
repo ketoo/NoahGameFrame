@@ -26,6 +26,7 @@
 
 
 #include "NFMailModule.h"
+#include "NFMailRedisModule.h"
 #include "NFMailPlugin.h"
 
 //
@@ -59,11 +60,13 @@ const std::string NFMailPlugin::GetPluginName()
 
 void NFMailPlugin::Install()
 {
-    REGISTER_MODULE(pPluginManager, NFIMailModule, NFMailModule)
+	REGISTER_MODULE(pPluginManager, NFIMailModule, NFMailModule)
+	REGISTER_MODULE(pPluginManager, NFIMailRedisModule, NFMailRedisModule)
 
 }
 
 void NFMailPlugin::Uninstall()
 {
-    UNREGISTER_MODULE(pPluginManager, NFIMailModule, NFMailModule)
+	UNREGISTER_MODULE(pPluginManager, NFIMailRedisModule, NFMailRedisModule)
+	UNREGISTER_MODULE(pPluginManager, NFIMailModule, NFMailModule)
 }

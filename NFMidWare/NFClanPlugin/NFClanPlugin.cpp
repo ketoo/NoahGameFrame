@@ -27,7 +27,7 @@
 
 #include "NFClanPlugin.h"
 #include "NFClanModule.h"
-//#include "NFClanDataModule.h"
+#include "NFClanRedisModule.h"
 
 #ifdef NF_DYNAMIC_PLUGIN
 
@@ -59,10 +59,12 @@ const std::string NFClanPlugin::GetPluginName()
 void NFClanPlugin::Install()
 {
 	REGISTER_MODULE(pPluginManager, NFIClanModule, NFClanModule)
+	REGISTER_MODULE(pPluginManager, NFIClanRedisModule, NFClanRedisModule)
 
 }
 
 void NFClanPlugin::Uninstall()
 {
+	UNREGISTER_MODULE(pPluginManager, NFIClanRedisModule, NFClanRedisModule)
 	UNREGISTER_MODULE(pPluginManager, NFIClanModule, NFClanModule)
 }

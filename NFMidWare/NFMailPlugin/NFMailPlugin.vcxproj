@@ -94,6 +94,7 @@
   <ItemGroup>
     <ClInclude Include="NFMailModule.h" />
     <ClInclude Include="NFMailPlugin.h" />
+    <ClInclude Include="NFMailRedisModule.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="dllmain.cpp">
@@ -106,6 +107,7 @@
     </ClCompile>
     <ClCompile Include="NFMailModule.cpp" />
     <ClCompile Include="NFMailPlugin.cpp" />
+    <ClCompile Include="NFMailRedisModule.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
