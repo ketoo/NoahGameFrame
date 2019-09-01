@@ -44,6 +44,9 @@
     <ClInclude Include="NFFriendAgentModule.h">
       <Filter>NFFriendAgent</Filter>
     </ClInclude>
+    <ClInclude Include="NFTeamAgentModule.h">
+      <Filter>NFTeamAgent</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="dllmain.cpp" />
@@ -65,6 +68,9 @@
     </ClCompile>
     <ClCompile Include="NFFriendAgentModule.cpp">
       <Filter>NFFriendAgent</Filter>
+    </ClCompile>
+    <ClCompile Include="NFTeamAgentModule.cpp">
+      <Filter>NFTeamAgent</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
