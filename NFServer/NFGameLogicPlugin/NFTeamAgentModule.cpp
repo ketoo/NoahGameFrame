@@ -48,17 +48,18 @@ bool NFTeamAgentModule::Execute()
 bool NFTeamAgentModule::AfterInit()
 {
 	m_pKernelModule->AddClassCallBack(NFrame::Player::ThisName(), this, &NFTeamAgentModule::OnPlayerClassEvent);
-	/*
-	m_pNetClientModule->AddReceiveCallBack(NF_SERVER_TYPES::NF_ST_WORLD, NFMsg::EGMI_ACK_FRIEND_DELETE, this, &NFTeamAgentModule::OnAckCreateTeamProcess);
-	m_pNetClientModule->AddReceiveCallBack(NF_SERVER_TYPES::NF_ST_WORLD, NFMsg::EGMI_ACK_FRIEND_ADD, this, &NFTeamAgentModule::OnAckLeaveTeamProcess);
-	m_pNetClientModule->AddReceiveCallBack(NF_SERVER_TYPES::NF_ST_WORLD, NFMsg::EGMI_ACK_INVITE_ADD, this, &NFTeamAgentModule::OnAckReceivedInviteProcess);
+
+	m_pNetClientModule->AddReceiveCallBack(NF_SERVER_TYPES::NF_ST_WORLD, NFMsg::EGMI_ACK_TEAM_LIST, this, &NFTeamAgentModule::OnAckTeammateListProcess);
+	m_pNetClientModule->AddReceiveCallBack(NF_SERVER_TYPES::NF_ST_WORLD, NFMsg::EGMI_ACK_TEAM_ADD, this, &NFTeamAgentModule::OnAckPlayerAddProcess);
+	m_pNetClientModule->AddReceiveCallBack(NF_SERVER_TYPES::NF_ST_WORLD, NFMsg::EGMI_ACK_TEAM_LEAVE, this, &NFTeamAgentModule::OnAckPlayerLeaveProcess);
+	m_pNetClientModule->AddReceiveCallBack(NF_SERVER_TYPES::NF_ST_WORLD, NFMsg::EGMI_ACK_TEAM_INVITE, this, &NFTeamAgentModule::OnAckPlayerLeaveProcess);
 
 	//from client
-	m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_REQ_ACK_SEND_INVITE, this, &NFTeamAgentModule::OnReqSendInviteProcess);
-	m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_REQ_ACK_ACCEPT_INVITE, this, &NFTeamAgentModule::OnReqAcceptInviteProcess);
-	m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_REQ_ACK_REJECT_INVITE, this, &NFTeamAgentModule::OnReqRejectInviteProcess);
+	m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_REQ_ACK_SEND_TEAM_INVITE, this, &NFTeamAgentModule::OnReqSendInviteProcess);
+	m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_REQ_ACK_CANCEL_TEAM_INVITE, this, &NFTeamAgentModule::OnReqCancelInviteProcess);
+	m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_REQ_ACK_ACCEPT_TEAM_INVITE, this, &NFTeamAgentModule::OnReqAcceptInviteProcess);
+	m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_REQ_ACK_REJECT_TEAM_INVITE, this, &NFTeamAgentModule::OnReqRejectInviteProcess);
 
-	*/
 
     return true;
 }
@@ -75,86 +76,85 @@ int NFTeamAgentModule::OnPlayerClassEvent(const NFGUID & self, const std::string
 	}
 
 	return 0;
-}    
+}
 
-
-void NFTeamAgentModule::OnAckCreateTeamProcess(const NFSOCK nSockIndex, const int nMsgID, const char *msg, const uint32_t nLen)
+void NFTeamAgentModule::OnAckTeammateListProcess(const NFSOCK nSockIndex, const int nMsgID, const char * msg, const uint32_t nLen)
 {
-    //come from world
-    CLIENT_MSG_PROCESS(nMsgID, msg, nLen, NFMsg::ReqAckFriendList)
+	CLIENT_MSG_PROCESS(nMsgID, msg, nLen, NFMsg::ReqAckTeamMemberList)
+
+	for (int i = 0; i < xMsg.memberlist_size(); ++i)
+	{
+		const NFMsg::TeamMemberInfo& memberTeamInfo = xMsg.memberlist(i);
+
+		const NFGUID player = NFINetModule::PBToNF(memberTeamInfo.id());
+		NF_SHARE_PTR<NFIRecord> pTeamMember = m_pKernelModule->FindRecord(player, NFrame::Player::TeamMemberList::ThisName());
+		if (pTeamMember)
+		{
+			NF_SHARE_PTR<NFDataList> pData = pTeamMember->GetInitData();
+			if (pData)
+			{
+				pData->SetObject(NFrame::Player::TeamMemberList::GUID, NFINetModule::PBToNF(memberTeamInfo.id()));
+				pData->SetString(NFrame::Player::TeamMemberList::Name, memberTeamInfo.name());
+				pData->SetInt(NFrame::Player::TeamMemberList::bp, memberTeamInfo.bp());
+				pData->SetInt(NFrame::Player::TeamMemberList::Leader, memberTeamInfo.leader());
+				pData->SetInt(NFrame::Player::TeamMemberList::Pending, 0);
+
+				pTeamMember->AddRow(-1, *pData);
+			}
+		}
+	}
+
+	for (int i = 0; i < xMsg.invitelist_size(); ++i)
+	{
+		const NFMsg::TeamMemberInfo& memberTeamInfo = xMsg.invitelist(i);
+
+		const NFGUID player = NFINetModule::PBToNF(memberTeamInfo.id());
+		NF_SHARE_PTR<NFIRecord> pTeamMember = m_pKernelModule->FindRecord(player, NFrame::Player::TeamMemberList::ThisName());
+		if (pTeamMember)
+		{
+			NF_SHARE_PTR<NFDataList> pData = pTeamMember->GetInitData();
+			if (pData)
+			{
+				pData->SetObject(NFrame::Player::TeamMemberList::GUID, NFINetModule::PBToNF(memberTeamInfo.id()));
+				pData->SetString(NFrame::Player::TeamMemberList::Name, memberTeamInfo.name());
+				pData->SetInt(NFrame::Player::TeamMemberList::bp, memberTeamInfo.bp());
+				pData->SetInt(NFrame::Player::TeamMemberList::Leader, memberTeamInfo.leader());
+				pData->SetInt(NFrame::Player::TeamMemberList::Pending, 1);
+
+				pTeamMember->AddRow(-1, *pData);
+			}
+		}
+
+	}
+}
+
+void NFTeamAgentModule::OnAckTeamInviteProcess(const NFSOCK nSockIndex, const int nMsgID, const char * msg, const uint32_t nLen)
+{
 
 }
 
-void NFTeamAgentModule::OnAckLeaveTeamProcess(const NFSOCK nSockIndex, const int nMsgID, const char *msg, const uint32_t nLen)
+void NFTeamAgentModule::OnAckPlayerAddProcess(const NFSOCK nSockIndex, const int nMsgID, const char * msg, const uint32_t nLen)
 {
-    //come from world
-    CLIENT_MSG_PROCESS(nMsgID, msg, nLen, NFMsg::ReqAckFriendList)
 
-    //should batch
-    for (int i = 0; i < xMsg.friendlist_size(); ++i)
-    {
-        const NFMsg::FriendData& friendData = xMsg.friendlist(i);
-
-        NF_SHARE_PTR<NFIRecord> pRecord = pObject->GetRecordManager()->GetElement(NFrame::Player::FriendList::ThisName());
-        if (pRecord)
-        {
-            int row = pRecord->FindObject(NFrame::Player::FriendList::GUID, NFINetModule::PBToNF(friendData.id()));
-            if (row >= 0)
-            {
-                pRecord->Remove(row);
-            }
-        }
-    }
 }
 
-void NFTeamAgentModule::OnAckReceivedInviteProcess(const NFSOCK nSockIndex, const int nMsgID, const char *msg, const uint32_t nLen)
+void NFTeamAgentModule::OnAckPlayerLeaveProcess(const NFSOCK nSockIndex, const int nMsgID, const char * msg, const uint32_t nLen)
 {
-    //come from world
-    CLIENT_MSG_PROCESS(nMsgID, msg, nLen, NFMsg::ReqAckFriendList)
 
-    //should batch
-    for (int i = 0; i < xMsg.invitelist_size(); ++i)
-    {
-        const NFMsg::FriendData& friendData = xMsg.invitelist(i);
-
-        NF_SHARE_PTR<NFIRecord> pRecord = pObject->GetRecordManager()->GetElement(NFrame::Player::InviteList::ThisName());
-        if (pRecord)
-        {
-            NF_SHARE_PTR<NFDataList> dataList = pRecord->GetInitData();
-            if (dataList)
-            {
-                dataList->SetObject(NFrame::Player::InviteList::GUID, NFINetModule::PBToNF(friendData.id()));
-                dataList->SetString(NFrame::Player::InviteList::Name, friendData.name());
-
-                pRecord->AddRow(-1, *dataList);
-            }
-        }
-    }
 }
 
 void NFTeamAgentModule::OnReqSendInviteProcess(const NFSOCK nSockIndex, const int nMsgID, const char *msg, const uint32_t nLen)
 {
     //come from client
-	CLIENT_MSG_PROCESS(nMsgID, msg, nLen, NFMsg::ReqAckSendInvite)
+	CLIENT_MSG_PROCESS(nMsgID, msg, nLen, NFMsg::ReqInviteToTeam)
 
-    NF_SHARE_PTR<NFIRecord> pRecord = pObject->GetRecordManager()->GetElement(NFrame::Player::SentList::ThisName());
-    if (pRecord)
-    {
-		const int row = pRecord->FindObject(NFrame::Player::SentList::GUID, NFINetModule::PBToNF(xMsg.id()));
-		if (row < 0)
-		{
-			NF_SHARE_PTR<NFDataList> dataList = pRecord->GetInitData();
-			if (dataList)
-			{
-				dataList->SetObject(NFrame::Player::SentList::GUID, NFINetModule::PBToNF(xMsg.id()));
-				dataList->SetString(NFrame::Player::SentList::Name, xMsg.name());
+	m_pNetClientModule->SendSuitByPB(NF_SERVER_TYPES::NF_ST_WORLD, nPlayerID.GetData(), nMsgID, xMsg, nPlayerID);
 
-				pRecord->AddRow(-1, *dataList);
-			}
+}
 
-			m_pNetClientModule->SendSuitByPB(NF_SERVER_TYPES::NF_ST_WORLD, nPlayerID.GetData(), NFMsg::EGMI_REQ_ACK_SEND_INVITE, xMsg, nPlayerID);
-		}
-    }
+void NFTeamAgentModule::OnReqCancelInviteProcess(const NFSOCK nSockIndex, const int nMsgID, const char * msg, const uint32_t nLen)
+{
+
 }
 
 void NFTeamAgentModule::OnReqAcceptInviteProcess(const NFSOCK nSockIndex, const int nMsgID, const char *msg, const uint32_t nLen)
@@ -162,17 +162,8 @@ void NFTeamAgentModule::OnReqAcceptInviteProcess(const NFSOCK nSockIndex, const 
     //come from client
 	CLIENT_MSG_PROCESS(nMsgID, msg, nLen, NFMsg::ReqAckAcceptInvite)
 
-    NF_SHARE_PTR<NFIRecord> pRecord = pObject->GetRecordManager()->GetElement(NFrame::Player::InviteList::ThisName());
-    if (pRecord)
-    {
-        int row = pRecord->FindObject(NFrame::Player::InviteList::GUID, NFINetModule::PBToNF(xMsg.id()));
-        if (row >= 0)
-        {
-            pRecord->Remove(row);
-        }
-    }
 
-    m_pNetClientModule->SendSuitByPB(NF_SERVER_TYPES::NF_ST_WORLD, nPlayerID.GetData(), NFMsg::EGMI_REQ_ACK_ACCEPT_INVITE, xMsg, nPlayerID);
+    //m_pNetClientModule->SendSuitByPB(NF_SERVER_TYPES::NF_ST_WORLD, nPlayerID.GetData(), NFMsg::EGMI_REQ_ACK_ACCEPT_INVITE, xMsg, nPlayerID);
 }
 
 void NFTeamAgentModule::OnReqRejectInviteProcess(const NFSOCK nSockIndex, const int nMsgID, const char *msg, const uint32_t nLen)
@@ -180,16 +171,7 @@ void NFTeamAgentModule::OnReqRejectInviteProcess(const NFSOCK nSockIndex, const 
     //come from client
 	CLIENT_MSG_PROCESS(nMsgID, msg, nLen, NFMsg::ReqAckAcceptInvite)
 
-    NF_SHARE_PTR<NFIRecord> pRecord = pObject->GetRecordManager()->GetElement(NFrame::Player::InviteList::ThisName());
-    if (pRecord)
-    {
-        int row = pRecord->FindObject(NFrame::Player::InviteList::GUID, NFINetModule::PBToNF(xMsg.id()));
-        if (row >= 0)
-        {
-            pRecord->Remove(row);
-        }
-    }
 
-    m_pNetClientModule->SendSuitByPB(NF_SERVER_TYPES::NF_ST_WORLD, nPlayerID.GetData(), NFMsg::EGMI_REQ_ACK_REJECT_INVITE, xMsg, nPlayerID);
+    //m_pNetClientModule->SendSuitByPB(NF_SERVER_TYPES::NF_ST_WORLD, nPlayerID.GetData(), NFMsg::EGMI_REQ_ACK_REJECT_INVITE, xMsg, nPlayerID);
 
 }

@@ -886,6 +886,17 @@ namespace NFrame
 			public const int Postion = 3;//vector3
 
 		}
+		public class FriendInviteList
+		{
+			//Class name
+			public static readonly String ThisName = "FriendInviteList";
+			public const int GUID = 0;//object
+			public const int Name = 1;//string
+			public const int Level = 2;//int
+			public const int BP = 3;//int
+			public const int Leader = 4;//int
+
+		}
 		public class FriendList
 		{
 			//Class name
@@ -895,6 +906,14 @@ namespace NFrame
 			public const int Online = 2;//int
 			public const int Time = 3;//int
 			public const int GameID = 4;//int
+
+		}
+		public class FriendSentList
+		{
+			//Class name
+			public static readonly String ThisName = "FriendSentList";
+			public const int GUID = 0;//object
+			public const int Name = 1;//string
 
 		}
 		public class HeroValue
@@ -935,16 +954,6 @@ namespace NFrame
 			public const int LUCK = 31;//int
 
 		}
-		public class InviteList
-		{
-			//Class name
-			public static readonly String ThisName = "InviteList";
-			public const int GUID = 0;//object
-			public const int Name = 1;//string
-			public const int Level = 2;//int
-			public const int BP = 3;//int
-
-		}
 		public class PlayerHero
 		{
 			//Class name
@@ -964,14 +973,6 @@ namespace NFrame
 			public const int Dark_Talent = 12;//int
 
 		}
-		public class SentList
-		{
-			//Class name
-			public static readonly String ThisName = "SentList";
-			public const int GUID = 0;//object
-			public const int Name = 1;//string
-
-		}
 		public class TaskList
 		{
 			//Class name
@@ -980,6 +981,18 @@ namespace NFrame
 			public const int TaskStatus = 1;//int
 			public const int ArgCnfID = 2;//string
 			public const int ArgCount = 3;//int
+
+		}
+		public class TeamMemberList
+		{
+			//Class name
+			public static readonly String ThisName = "TeamMemberList";
+			public const int GUID = 0;//object
+			public const int Name = 1;//string
+			public const int Leader = 2;//int
+			public const int bp = 3;//int
+			public const int GameID = 4;//int
+			public const int Pending = 5;//int
 
 		}
 		public class TempItemList

@@ -136,9 +136,9 @@ ALTER TABLE `Player` ADD `Clan_Building` text COLLATE utf8mb4_unicode_ci  DEFAUL
 ALTER TABLE `Player` ADD `Clan_MemberList` text COLLATE utf8mb4_unicode_ci  DEFAULT '' COMMENT '';
 ALTER TABLE `Player` ADD `Clan_WarList` text COLLATE utf8mb4_unicode_ci  DEFAULT '' COMMENT '';
 ALTER TABLE `Player` ADD `Cooldown` text COLLATE utf8mb4_unicode_ci  DEFAULT '' COMMENT '';
+ALTER TABLE `Player` ADD `FriendSentList` text COLLATE utf8mb4_unicode_ci  DEFAULT '' COMMENT '';
 ALTER TABLE `Player` ADD `HeroValue` text COLLATE utf8mb4_unicode_ci  DEFAULT '' COMMENT '';
 ALTER TABLE `Player` ADD `PlayerHero` text COLLATE utf8mb4_unicode_ci  DEFAULT '' COMMENT '';
-ALTER TABLE `Player` ADD `SentList` text COLLATE utf8mb4_unicode_ci  DEFAULT '' COMMENT '';
 ALTER TABLE `Player` ADD `TaskList` text COLLATE utf8mb4_unicode_ci  DEFAULT '' COMMENT '';
 ALTER TABLE `Player` ADD `WarList` text COLLATE utf8mb4_unicode_ci  DEFAULT '' COMMENT '';
 ALTER TABLE `Shop` ADD `Count` bigint(11) DEFAULT '0' COMMENT '';

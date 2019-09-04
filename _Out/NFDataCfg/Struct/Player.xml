@@ -237,12 +237,23 @@
 			<Col Type ="int"	Tag="ItemCount"/>
 			<Col Type ="vector3"	Tag="Postion"/>
 		</Record>
+		<Record Id="FriendInviteList" Cache="0"	 Col="5"	 Force="0"	 Private="1"	 Public="0"	 Ref="0"	 Row="50"	 Save="0"	 Upload="0"	 >
+			<Col Type ="object"	Tag="GUID"/><!--- Desc-->
+			<Col Type ="string"	Tag="Name"/><!--- guild-->
+			<Col Type ="int"	Tag="Level"/>
+			<Col Type ="int"	Tag="BP"/>
+			<Col Type ="int"	Tag="Leader"/>
+		</Record>
 		<Record Id="FriendList" Cache="0"	 Col="5"	 Force="0"	 Private="1"	 Public="0"	 Ref="0"	 Row="50"	 Save="0"	 Upload="0"	 >
 			<Col Type ="object"	Tag="GUID"/><!--- Desc-->
 			<Col Type ="string"	Tag="Name"/><!--- guild-->
 			<Col Type ="int"	Tag="Online"/>
 			<Col Type ="int"	Tag="Time"/>
 			<Col Type ="int"	Tag="GameID"/>
+		</Record>
+		<Record Id="FriendSentList" Cache="0"	 Col="2"	 Force="0"	 Private="1"	 Public="0"	 Ref="0"	 Row="50"	 Save="1"	 Upload="0"	 >
+			<Col Type ="object"	Tag="GUID"/><!--- Desc-->
+			<Col Type ="string"	Tag="Name"/><!--- guild-->
 		</Record>
 		<Record Id="HeroValue" Cache="1"	 Col="32"	 Force="0"	 Private="1"	 Public="0"	 Ref="0"	 Row="64"	 Save="0"	 Upload="0"	 >
 			<Col Type ="int"	Tag="SUCKBLOOD"/><!--- Desc-->
@@ -278,12 +289,6 @@
 			<Col Type ="int"	Tag="BUFF_GATE"/>
 			<Col Type ="int"	Tag="LUCK"/>
 		</Record>
-		<Record Id="InviteList" Cache="0"	 Col="4"	 Force="0"	 Private="1"	 Public="0"	 Ref="0"	 Row="50"	 Save="0"	 Upload="0"	 >
-			<Col Type ="object"	Tag="GUID"/><!--- Desc-->
-			<Col Type ="string"	Tag="Name"/><!--- guild-->
-			<Col Type ="int"	Tag="Level"/>
-			<Col Type ="int"	Tag="BP"/>
-		</Record>
 		<Record Id="PlayerHero" Cache="1"	 Col="13"	 Force="0"	 Private="1"	 Public="0"	 Ref="0"	 Row="64"	 Save="0"	 Upload="0"	 >
 			<Col Type ="object"	Tag="GUID"/><!--- Desc-->
 			<Col Type ="string"	Tag="ConfigID"/>
@@ -299,15 +304,19 @@
 			<Col Type ="int"	Tag="Poison_Talent"/>
 			<Col Type ="int"	Tag="Dark_Talent"/>
 		</Record>
-		<Record Id="SentList" Cache="0"	 Col="2"	 Force="0"	 Private="1"	 Public="0"	 Ref="0"	 Row="50"	 Save="1"	 Upload="0"	 >
-			<Col Type ="object"	Tag="GUID"/><!--- Desc-->
-			<Col Type ="string"	Tag="Name"/><!--- guild-->
-		</Record>
 		<Record Id="TaskList" Cache="1"	 Col="4"	 Force="0"	 Private="1"	 Public="0"	 Ref="0"	 Row="512"	 Save="0"	 Upload="0"	 >
 			<Col Type ="string"	Tag="TaskID"/><!--- Desc-->
 			<Col Type ="int"	Tag="TaskStatus"/>
 			<Col Type ="string"	Tag="ArgCnfID"/>
 			<Col Type ="int"	Tag="ArgCount"/>
+		</Record>
+		<Record Id="TeamMemberList" Cache="0"	 Col="6"	 Force="0"	 Private="1"	 Public="0"	 Ref="0"	 Row="50"	 Save="0"	 Upload="0"	 >
+			<Col Type ="object"	Tag="GUID"/><!--- Desc-->
+			<Col Type ="string"	Tag="Name"/><!--- guild-->
+			<Col Type ="int"	Tag="Leader"/>
+			<Col Type ="int"	Tag="bp"/>
+			<Col Type ="int"	Tag="GameID"/>
+			<Col Type ="int"	Tag="Pending"/>
 		</Record>
 		<Record Id="TempItemList" Cache="0"	 Col="2"	 Force="0"	 Private="1"	 Public="0"	 Ref="0"	 Row="8"	 Save="0"	 Upload="0"	 >
 			<Col Type ="string"	Tag="ConfigID"/><!--- Desc-->

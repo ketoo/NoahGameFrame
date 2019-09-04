@@ -49,12 +49,16 @@ public:
 
 	virtual bool AfterInit();
 
-    virtual bool CreateTeam(const NFGUID& self, const NFGUID& stranger, const std::string& strangerName);
-    virtual bool LeaveTeam(const NFGUID& self, const NFGUID& other);
+	virtual bool GetMemberList(const NFGUID& teamID, std::vector<MemberData>& teamMember);
+	virtual bool GetMemberInvitationList(const NFGUID& teamID, std::vector<MemberData>& teamMember);
+
+    virtual bool CreateTeam(const NFGUID& self, const NFGUID& name, const NFGUID& teamID);
+	virtual bool AddToTeam(const NFGUID& teamID, const NFGUID& other);
+	virtual bool LeaveFromTeam(const NFGUID& teamID, const NFGUID& other);
     
-    virtual bool SendInvite(const NFGUID& self, const std::string& selfName, const NFGUID& stranger);
-    virtual bool AcceptInvite(const NFGUID& self, const std::string& selfName, const NFGUID& inviter);
-    virtual bool RejectInvite(const NFGUID& self, const NFGUID& inviter);
+    virtual bool SendInvite(const NFGUID& teamID, const NFGUID& stranger);
+    virtual bool AcceptInvite(const NFGUID& teamID, const NFGUID& stranger);
+    virtual bool RejectInvite(const NFGUID& teamID, const NFGUID& stranger);
 
 
 private:

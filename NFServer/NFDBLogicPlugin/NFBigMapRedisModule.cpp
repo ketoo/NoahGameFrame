@@ -54,7 +54,7 @@ bool NFBigMapRedisModule::AfterInit()
 	m_pNoSqlModule = pPluginManager->FindModule<NFINoSqlModule>();
 	m_pElementModule = pPluginManager->FindModule<NFIElementModule>();
 	m_pLogicClassModule = pPluginManager->FindModule<NFIClassModule>();
-	m_pClanRedisModule = pPluginManager->FindModule<NFIClanRedisModule>();
+	//m_pClanRedisModule = pPluginManager->FindModule<NFIClanRedisModule>();
 
 	return true;
 }
