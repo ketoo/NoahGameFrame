@@ -880,6 +880,17 @@ package nframe;
 			public static final int Postion = 3;//vector3
 
 		}
+		public class FriendInviteList
+		{
+			//Class name
+			public static final String ThisName = "FriendInviteList";
+			public static final int GUID = 0;//object
+			public static final int Name = 1;//string
+			public static final int Level = 2;//int
+			public static final int BP = 3;//int
+			public static final int Leader = 4;//int
+
+		}
 		public class FriendList
 		{
 			//Class name
@@ -889,6 +900,14 @@ package nframe;
 			public static final int Online = 2;//int
 			public static final int Time = 3;//int
 			public static final int GameID = 4;//int
+
+		}
+		public class FriendSentList
+		{
+			//Class name
+			public static final String ThisName = "FriendSentList";
+			public static final int GUID = 0;//object
+			public static final int Name = 1;//string
 
 		}
 		public class HeroValue
@@ -929,16 +948,6 @@ package nframe;
 			public static final int LUCK = 31;//int
 
 		}
-		public class InviteList
-		{
-			//Class name
-			public static final String ThisName = "InviteList";
-			public static final int GUID = 0;//object
-			public static final int Name = 1;//string
-			public static final int Level = 2;//int
-			public static final int BP = 3;//int
-
-		}
 		public class PlayerHero
 		{
 			//Class name
@@ -958,14 +967,6 @@ package nframe;
 			public static final int Dark_Talent = 12;//int
 
 		}
-		public class SentList
-		{
-			//Class name
-			public static final String ThisName = "SentList";
-			public static final int GUID = 0;//object
-			public static final int Name = 1;//string
-
-		}
 		public class TaskList
 		{
 			//Class name
@@ -974,6 +975,18 @@ package nframe;
 			public static final int TaskStatus = 1;//int
 			public static final int ArgCnfID = 2;//string
 			public static final int ArgCount = 3;//int
+
+		}
+		public class TeamMemberList
+		{
+			//Class name
+			public static final String ThisName = "TeamMemberList";
+			public static final int GUID = 0;//object
+			public static final int Name = 1;//string
+			public static final int Leader = 2;//int
+			public static final int bp = 3;//int
+			public static final int GameID = 4;//int
+			public static final int Pending = 5;//int
 
 		}
 		public class TempItemList

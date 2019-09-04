@@ -19,6 +19,7 @@
 #include "NFMsgShare.pb.h"
 #include "NFMsgExtra.pb.h"
 #include "NFMsgFriend.pb.h"
+#include "NFMsgTeam.pb.h"
 #include "NFProtocolDefine.hpp"
 
 #ifdef _MSC_VER

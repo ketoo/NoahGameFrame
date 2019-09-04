@@ -350,6 +350,24 @@ enum EGameMsgID
 	EGMI_REQ_ACK_UNBLOCK_PLAYER = 6015;
 
 	/////////////////////FRIEND MSG END/////////////////////////////////////
+	
+	/////////////////////TEAM MSG START/////////////////////////////////////
+	
+	EGMI_ACK_TEAM_INVITE = 6100;
+	EGMI_ACK_TEAM_LIST = 6105;
+	EGMI_ACK_TEAM_ADD = 6106;
+	EGMI_ACK_TEAM_LEAVE = 6107;
+	
+	EGMI_REQ_ACK_SEND_TEAM_INVITE = 6120;
+	EGMI_REQ_ACK_CANCEL_TEAM_INVITE = 6121;
+	EGMI_REQ_ACK_ACCEPT_TEAM_INVITE = 6122;
+	EGMI_REQ_ACK_REJECT_TEAM_INVITE = 6123;
+	
+	EGMI_REQ_ACK_SEND_TEAM_READY = 6130;
+	EGMI_REQ_ACK_ACCEPT_TEAM_READY = 6131;
+	EGMI_REQ_ACK_REJECT_TEAM_READY = 6132;
+	
+	/////////////////////TEAM MSG END/////////////////////////////////////
 
 
 	/////////////////////GM MSG/////////////////////////////////////

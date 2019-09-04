@@ -33,17 +33,23 @@ class NFITeamRedisModule
 {
 
 public:
-    struct TeamData
+    struct MemberData
     {
         NFGUID id;
         std::string name;
+		int bp;
+		int leader;
     };
 
-    virtual bool CreateTeam(const NFGUID& self, const NFGUID& stranger, const std::string& strangerName) = 0;
-    virtual bool LeaveTeam(const NFGUID& self, const NFGUID& other) = 0;
+	virtual bool GetMemberList(const NFGUID& teamID, std::vector<MemberData>& teamMember) = 0;
+	virtual bool GetMemberInvitationList(const NFGUID& teamID, std::vector<MemberData>& teamMember) = 0;
+
+    virtual bool CreateTeam(const NFGUID& self, const NFGUID& name, const NFGUID& teamID) = 0;
+	virtual bool AddToTeam(const NFGUID& teamID, const NFGUID& other) = 0;
+	virtual bool LeaveFromTeam(const NFGUID& teamID, const NFGUID& other) = 0;
     
-    virtual bool SendInvite(const NFGUID& self, const std::string& selfName, const NFGUID& stranger) = 0;
-    virtual bool AcceptInvite(const NFGUID& self, const std::string& selfName, const NFGUID& inviter) = 0;
+    virtual bool SendInvite(const NFGUID& self, const NFGUID& stranger) = 0;
+    virtual bool AcceptInvite(const NFGUID& self, const NFGUID& inviter) = 0;
     virtual bool RejectInvite(const NFGUID& self, const NFGUID& inviter) = 0;
 
 

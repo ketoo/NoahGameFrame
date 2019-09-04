@@ -9,6 +9,7 @@
     <ClInclude Include="NFProtocolDefine.hpp" />
     <ClInclude Include="NFMsgExtra.pb.h" />
     <ClInclude Include="NFMsgFriend.pb.h" />
+    <ClInclude Include="NFMsgTeam.pb.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="NFMsgShare.pb.cc" />
@@ -17,5 +18,6 @@
     <ClCompile Include="NFMsgPreGame.pb.cc" />
     <ClCompile Include="NFMsgExtra.pb.cc" />
     <ClCompile Include="NFMsgFriend.pb.cc" />
+    <ClCompile Include="NFMsgTeam.pb.cc" />
   </ItemGroup>
 </Project>

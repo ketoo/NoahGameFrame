@@ -54,23 +54,38 @@ bool NFTeamRedisModule::AfterInit()
 	return true;
 }
 
-bool NFTeamRedisModule::CreateTeam(const NFGUID & self, const NFGUID & stranger, const std::string & strangerName)
+bool NFTeamRedisModule::GetMemberList(const NFGUID & teamID, std::vector<MemberData>& teamMember)
 {
 	return false;
 }
 
-bool NFTeamRedisModule::LeaveTeam(const NFGUID & self, const NFGUID & other)
+bool NFTeamRedisModule::GetMemberInvitationList(const NFGUID & teamID, std::vector<MemberData>& teamMember)
 {
 	return false;
 }
 
-bool NFTeamRedisModule::SendInvite(const NFGUID& self, const std::string& selfName, const NFGUID& stranger)
+bool NFTeamRedisModule::CreateTeam(const NFGUID& self, const NFGUID& name, const NFGUID& teamID)
+{
+	return false;
+}
+
+bool NFTeamRedisModule::AddToTeam(const NFGUID & teamID, const NFGUID & other)
+{
+	return false;
+}
+
+bool NFTeamRedisModule::LeaveFromTeam(const NFGUID & teamID, const NFGUID & other)
+{
+	return false;
+}
+
+bool NFTeamRedisModule::SendInvite(const NFGUID& teamID, const NFGUID& stranger)
 {
     std::string strKey = m_pCommonRedisModule->GetFriendInviteCacheKey(stranger);
 	NF_SHARE_PTR<NFIRedisClient> xNoSqlDriver = m_pNoSqlModule->GetDriverBySuit(strKey);
 	if (xNoSqlDriver)
 	{
-		if (xNoSqlDriver->HSET(strKey, self.ToString(), selfName))
+		//if (xNoSqlDriver->HSET(strKey, teamID.ToString(), selfName))
 		{
 			return true;
 		}
@@ -79,9 +94,9 @@ bool NFTeamRedisModule::SendInvite(const NFGUID& self, const std::string& selfNa
     return false;
 }
 
-bool NFTeamRedisModule::AcceptInvite(const NFGUID& self, const std::string& selfName, const NFGUID& inviter)
+bool NFTeamRedisModule::AcceptInvite(const NFGUID& teamID, const NFGUID& inviter)
 {
-    std::string strKey = m_pCommonRedisModule->GetFriendInviteCacheKey(self);
+    std::string strKey = m_pCommonRedisModule->GetFriendInviteCacheKey(teamID);
 	NF_SHARE_PTR<NFIRedisClient> xNoSqlDriver = m_pNoSqlModule->GetDriverBySuit(strKey);
 	if (xNoSqlDriver)
 	{
@@ -99,13 +114,13 @@ bool NFTeamRedisModule::AcceptInvite(const NFGUID& self, const std::string& self
     return false;
 }
 
-bool NFTeamRedisModule::RejectInvite(const NFGUID& self, const NFGUID& inviter)
+bool NFTeamRedisModule::RejectInvite(const NFGUID& teamID, const NFGUID& stranger)
 {
-    std::string strKey = m_pCommonRedisModule->GetFriendInviteCacheKey(self);
+    std::string strKey = m_pCommonRedisModule->GetFriendInviteCacheKey(teamID);
 	NF_SHARE_PTR<NFIRedisClient> xNoSqlDriver = m_pNoSqlModule->GetDriverBySuit(strKey);
 	if (xNoSqlDriver)
 	{
-        xNoSqlDriver->HDEL(strKey, inviter.ToString());
+        xNoSqlDriver->HDEL(strKey, stranger.ToString());
 		return true;
 	}
 

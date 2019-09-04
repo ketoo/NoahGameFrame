@@ -60,13 +60,11 @@ public:
 
 protected:
 
-	void OnReqCreateTeamProcess(const NFSOCK nSockIndex, const int nMsgID, const char *msg, const uint32_t nLen);
-    void OnReqLeaveTeamProcess(const NFSOCK nSockIndex, const int nMsgID, const char *msg, const uint32_t nLen);
-
     void OnReqSendInviteProcess(const NFSOCK nSockIndex, const int nMsgID, const char *msg, const uint32_t nLen);
+	void OnReqCanceltInviteProcess(const NFSOCK nSockIndex, const int nMsgID, const char *msg, const uint32_t nLen);
     void OnReqAcceptInviteProcess(const NFSOCK nSockIndex, const int nMsgID, const char *msg, const uint32_t nLen);
     void OnReqRejectInviteProcess(const NFSOCK nSockIndex, const int nMsgID, const char *msg, const uint32_t nLen);
-   
+
 protected:
 
     //////////////////////////////////////////////////////////////////////////

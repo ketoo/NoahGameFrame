@@ -29,7 +29,6 @@
 #include <google/protobuf/message.h>
 #include <google/protobuf/repeated_field.h>  // IWYU pragma: export
 #include <google/protobuf/extension_set.h>  // IWYU pragma: export
-#include <google/protobuf/generated_enum_reflection.h>
 #include <google/protobuf/unknown_field_set.h>
 #include "NFMsgBase.pb.h"
 // @@protoc_insertion_point(includes)
@@ -40,7 +39,7 @@ namespace protobuf_NFMsgTeam_2eproto {
 struct LIBPROTOC_EXPORT TableStruct {
   static const ::google::protobuf::internal::ParseTableField entries[];
   static const ::google::protobuf::internal::AuxillaryParseTableField aux[];
-  static const ::google::protobuf::internal::ParseTable schema[9];
+  static const ::google::protobuf::internal::ParseTable schema[8];
   static const ::google::protobuf::internal::FieldMetadata field_metadata[];
   static const ::google::protobuf::internal::SerializationTable serialization_table[];
   static const ::google::protobuf::uint32 offsets[];
@@ -48,97 +47,65 @@ struct LIBPROTOC_EXPORT TableStruct {
 void LIBPROTOC_EXPORT AddDescriptors();
 }  // namespace protobuf_NFMsgTeam_2eproto
 namespace NFMsg {
-class AckTeamEnterEctype;
-class AckTeamEnterEctypeDefaultTypeInternal;
-LIBPROTOC_EXPORT extern AckTeamEnterEctypeDefaultTypeInternal _AckTeamEnterEctype_default_instance_;
-class ReqAckCreateTeam;
-class ReqAckCreateTeamDefaultTypeInternal;
-LIBPROTOC_EXPORT extern ReqAckCreateTeamDefaultTypeInternal _ReqAckCreateTeam_default_instance_;
-class ReqAckInviteTeam;
-class ReqAckInviteTeamDefaultTypeInternal;
-LIBPROTOC_EXPORT extern ReqAckInviteTeamDefaultTypeInternal _ReqAckInviteTeam_default_instance_;
-class ReqAckJoinTeam;
-class ReqAckJoinTeamDefaultTypeInternal;
-LIBPROTOC_EXPORT extern ReqAckJoinTeamDefaultTypeInternal _ReqAckJoinTeam_default_instance_;
-class ReqAckLeaveTeam;
-class ReqAckLeaveTeamDefaultTypeInternal;
-LIBPROTOC_EXPORT extern ReqAckLeaveTeamDefaultTypeInternal _ReqAckLeaveTeam_default_instance_;
-class ReqAckOprTeamMember;
-class ReqAckOprTeamMemberDefaultTypeInternal;
-LIBPROTOC_EXPORT extern ReqAckOprTeamMemberDefaultTypeInternal _ReqAckOprTeamMember_default_instance_;
-class ReqTeamEnterEctype;
-class ReqTeamEnterEctypeDefaultTypeInternal;
-LIBPROTOC_EXPORT extern ReqTeamEnterEctypeDefaultTypeInternal _ReqTeamEnterEctype_default_instance_;
-class TeamInfo;
-class TeamInfoDefaultTypeInternal;
-LIBPROTOC_EXPORT extern TeamInfoDefaultTypeInternal _TeamInfo_default_instance_;
-class TeammemberInfo;
-class TeammemberInfoDefaultTypeInternal;
-LIBPROTOC_EXPORT extern TeammemberInfoDefaultTypeInternal _TeammemberInfo_default_instance_;
+class AckInviteToTeam;
+class AckInviteToTeamDefaultTypeInternal;
+LIBPROTOC_EXPORT extern AckInviteToTeamDefaultTypeInternal _AckInviteToTeam_default_instance_;
+class AckTeamMemberAdd;
+class AckTeamMemberAddDefaultTypeInternal;
+LIBPROTOC_EXPORT extern AckTeamMemberAddDefaultTypeInternal _AckTeamMemberAdd_default_instance_;
+class AckTeamMemberLeave;
+class AckTeamMemberLeaveDefaultTypeInternal;
+LIBPROTOC_EXPORT extern AckTeamMemberLeaveDefaultTypeInternal _AckTeamMemberLeave_default_instance_;
+class ReqAckAcceptTeamInvite;
+class ReqAckAcceptTeamInviteDefaultTypeInternal;
+LIBPROTOC_EXPORT extern ReqAckAcceptTeamInviteDefaultTypeInternal _ReqAckAcceptTeamInvite_default_instance_;
+class ReqAckRejectTeamInvite;
+class ReqAckRejectTeamInviteDefaultTypeInternal;
+LIBPROTOC_EXPORT extern ReqAckRejectTeamInviteDefaultTypeInternal _ReqAckRejectTeamInvite_default_instance_;
+class ReqAckTeamMemberList;
+class ReqAckTeamMemberListDefaultTypeInternal;
+LIBPROTOC_EXPORT extern ReqAckTeamMemberListDefaultTypeInternal _ReqAckTeamMemberList_default_instance_;
+class ReqInviteToTeam;
+class ReqInviteToTeamDefaultTypeInternal;
+LIBPROTOC_EXPORT extern ReqInviteToTeamDefaultTypeInternal _ReqInviteToTeam_default_instance_;
+class TeamMemberInfo;
+class TeamMemberInfoDefaultTypeInternal;
+LIBPROTOC_EXPORT extern TeamMemberInfoDefaultTypeInternal _TeamMemberInfo_default_instance_;
 }  // namespace NFMsg
 namespace google {
 namespace protobuf {
-template<> LIBPROTOC_EXPORT ::NFMsg::AckTeamEnterEctype* Arena::CreateMaybeMessage<::NFMsg::AckTeamEnterEctype>(Arena*);
-template<> LIBPROTOC_EXPORT ::NFMsg::ReqAckCreateTeam* Arena::CreateMaybeMessage<::NFMsg::ReqAckCreateTeam>(Arena*);
-template<> LIBPROTOC_EXPORT ::NFMsg::ReqAckInviteTeam* Arena::CreateMaybeMessage<::NFMsg::ReqAckInviteTeam>(Arena*);
-template<> LIBPROTOC_EXPORT ::NFMsg::ReqAckJoinTeam* Arena::CreateMaybeMessage<::NFMsg::ReqAckJoinTeam>(Arena*);
-template<> LIBPROTOC_EXPORT ::NFMsg::ReqAckLeaveTeam* Arena::CreateMaybeMessage<::NFMsg::ReqAckLeaveTeam>(Arena*);
-template<> LIBPROTOC_EXPORT ::NFMsg::ReqAckOprTeamMember* Arena::CreateMaybeMessage<::NFMsg::ReqAckOprTeamMember>(Arena*);
-template<> LIBPROTOC_EXPORT ::NFMsg::ReqTeamEnterEctype* Arena::CreateMaybeMessage<::NFMsg::ReqTeamEnterEctype>(Arena*);
-template<> LIBPROTOC_EXPORT ::NFMsg::TeamInfo* Arena::CreateMaybeMessage<::NFMsg::TeamInfo>(Arena*);
-template<> LIBPROTOC_EXPORT ::NFMsg::TeammemberInfo* Arena::CreateMaybeMessage<::NFMsg::TeammemberInfo>(Arena*);
+template<> LIBPROTOC_EXPORT ::NFMsg::AckInviteToTeam* Arena::CreateMaybeMessage<::NFMsg::AckInviteToTeam>(Arena*);
+template<> LIBPROTOC_EXPORT ::NFMsg::AckTeamMemberAdd* Arena::CreateMaybeMessage<::NFMsg::AckTeamMemberAdd>(Arena*);
+template<> LIBPROTOC_EXPORT ::NFMsg::AckTeamMemberLeave* Arena::CreateMaybeMessage<::NFMsg::AckTeamMemberLeave>(Arena*);
+template<> LIBPROTOC_EXPORT ::NFMsg::ReqAckAcceptTeamInvite* Arena::CreateMaybeMessage<::NFMsg::ReqAckAcceptTeamInvite>(Arena*);
+template<> LIBPROTOC_EXPORT ::NFMsg::ReqAckRejectTeamInvite* Arena::CreateMaybeMessage<::NFMsg::ReqAckRejectTeamInvite>(Arena*);
+template<> LIBPROTOC_EXPORT ::NFMsg::ReqAckTeamMemberList* Arena::CreateMaybeMessage<::NFMsg::ReqAckTeamMemberList>(Arena*);
+template<> LIBPROTOC_EXPORT ::NFMsg::ReqInviteToTeam* Arena::CreateMaybeMessage<::NFMsg::ReqInviteToTeam>(Arena*);
+template<> LIBPROTOC_EXPORT ::NFMsg::TeamMemberInfo* Arena::CreateMaybeMessage<::NFMsg::TeamMemberInfo>(Arena*);
 }  // namespace protobuf
 }  // namespace google
 namespace NFMsg {
 
-enum ReqAckOprTeamMember_EGTeamMemberOprType {
-  ReqAckOprTeamMember_EGTeamMemberOprType_EGAT_DOWN = 0,
-  ReqAckOprTeamMember_EGTeamMemberOprType_EGAT_UP = 1,
-  ReqAckOprTeamMember_EGTeamMemberOprType_EGAT_KICK = 2,
-  ReqAckOprTeamMember_EGTeamMemberOprType_EGAT_APPOINT = 3,
-  ReqAckOprTeamMember_EGTeamMemberOprType_EGAT_FIRE = 4,
-  ReqAckOprTeamMember_EGTeamMemberOprType_EGAT_DEMISE = 5,
-  ReqAckOprTeamMember_EGTeamMemberOprType_EGAT_ACCEPTAPPLY = 6,
-  ReqAckOprTeamMember_EGTeamMemberOprType_EGAT_DENYAPPLY = 7,
-  ReqAckOprTeamMember_EGTeamMemberOprType_EGAT_KICKOUT = 8,
-  ReqAckOprTeamMember_EGTeamMemberOprType_ReqAckOprTeamMember_EGTeamMemberOprType_INT_MIN_SENTINEL_DO_NOT_USE_ = ::google::protobuf::kint32min,
-  ReqAckOprTeamMember_EGTeamMemberOprType_ReqAckOprTeamMember_EGTeamMemberOprType_INT_MAX_SENTINEL_DO_NOT_USE_ = ::google::protobuf::kint32max
-};
-LIBPROTOC_EXPORT bool ReqAckOprTeamMember_EGTeamMemberOprType_IsValid(int value);
-const ReqAckOprTeamMember_EGTeamMemberOprType ReqAckOprTeamMember_EGTeamMemberOprType_EGTeamMemberOprType_MIN = ReqAckOprTeamMember_EGTeamMemberOprType_EGAT_DOWN;
-const ReqAckOprTeamMember_EGTeamMemberOprType ReqAckOprTeamMember_EGTeamMemberOprType_EGTeamMemberOprType_MAX = ReqAckOprTeamMember_EGTeamMemberOprType_EGAT_KICKOUT;
-const int ReqAckOprTeamMember_EGTeamMemberOprType_EGTeamMemberOprType_ARRAYSIZE = ReqAckOprTeamMember_EGTeamMemberOprType_EGTeamMemberOprType_MAX + 1;
-
-LIBPROTOC_EXPORT const ::google::protobuf::EnumDescriptor* ReqAckOprTeamMember_EGTeamMemberOprType_descriptor();
-inline const ::std::string& ReqAckOprTeamMember_EGTeamMemberOprType_Name(ReqAckOprTeamMember_EGTeamMemberOprType value) {
-  return ::google::protobuf::internal::NameOfEnum(
-    ReqAckOprTeamMember_EGTeamMemberOprType_descriptor(), value);
-}
-inline bool ReqAckOprTeamMember_EGTeamMemberOprType_Parse(
-    const ::std::string& name, ReqAckOprTeamMember_EGTeamMemberOprType* value) {
-  return ::google::protobuf::internal::ParseNamedEnum<ReqAckOprTeamMember_EGTeamMemberOprType>(
-    ReqAckOprTeamMember_EGTeamMemberOprType_descriptor(), name, value);
-}
 // ===================================================================
 
-class LIBPROTOC_EXPORT TeammemberInfo : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:NFMsg.TeammemberInfo) */ {
+class LIBPROTOC_EXPORT TeamMemberInfo : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:NFMsg.TeamMemberInfo) */ {
  public:
-  TeammemberInfo();
-  virtual ~TeammemberInfo();
+  TeamMemberInfo();
+  virtual ~TeamMemberInfo();
 
-  TeammemberInfo(const TeammemberInfo& from);
+  TeamMemberInfo(const TeamMemberInfo& from);
 
-  inline TeammemberInfo& operator=(const TeammemberInfo& from) {
+  inline TeamMemberInfo& operator=(const TeamMemberInfo& from) {
     CopyFrom(from);
     return *this;
   }
   #if LANG_CXX11
-  TeammemberInfo(TeammemberInfo&& from) noexcept
-    : TeammemberInfo() {
+  TeamMemberInfo(TeamMemberInfo&& from) noexcept
+    : TeamMemberInfo() {
     *this = ::std::move(from);
   }
 
-  inline TeammemberInfo& operator=(TeammemberInfo&& from) noexcept {
+  inline TeamMemberInfo& operator=(TeamMemberInfo&& from) noexcept {
     if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
       if (this != &from) InternalSwap(&from);
     } else {
@@ -148,34 +115,34 @@ class LIBPROTOC_EXPORT TeammemberInfo : public ::google::protobuf::Message /* @@
   }
   #endif
   static const ::google::protobuf::Descriptor* descriptor();
-  static const TeammemberInfo& default_instance();
+  static const TeamMemberInfo& default_instance();
 
   static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
-  static inline const TeammemberInfo* internal_default_instance() {
-    return reinterpret_cast<const TeammemberInfo*>(
-               &_TeammemberInfo_default_instance_);
+  static inline const TeamMemberInfo* internal_default_instance() {
+    return reinterpret_cast<const TeamMemberInfo*>(
+               &_TeamMemberInfo_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
     0;
 
-  void Swap(TeammemberInfo* other);
-  friend void swap(TeammemberInfo& a, TeammemberInfo& b) {
+  void Swap(TeamMemberInfo* other);
+  friend void swap(TeamMemberInfo& a, TeamMemberInfo& b) {
     a.Swap(&b);
   }
 
   // implements Message ----------------------------------------------
 
-  inline TeammemberInfo* New() const final {
-    return CreateMaybeMessage<TeammemberInfo>(NULL);
+  inline TeamMemberInfo* New() const final {
+    return CreateMaybeMessage<TeamMemberInfo>(NULL);
   }
 
-  TeammemberInfo* New(::google::protobuf::Arena* arena) const final {
-    return CreateMaybeMessage<TeammemberInfo>(arena);
+  TeamMemberInfo* New(::google::protobuf::Arena* arena) const final {
+    return CreateMaybeMessage<TeamMemberInfo>(arena);
   }
   void CopyFrom(const ::google::protobuf::Message& from) final;
   void MergeFrom(const ::google::protobuf::Message& from) final;
-  void CopyFrom(const TeammemberInfo& from);
-  void MergeFrom(const TeammemberInfo& from);
+  void CopyFrom(const TeamMemberInfo& from);
+  void MergeFrom(const TeamMemberInfo& from);
   void Clear() final;
   bool IsInitialized() const final;
 
@@ -192,7 +159,7 @@ class LIBPROTOC_EXPORT TeammemberInfo : public ::google::protobuf::Message /* @@
   void SharedCtor();
   void SharedDtor();
   void SetCachedSize(int size) const final;
-  void InternalSwap(TeammemberInfo* other);
+  void InternalSwap(TeamMemberInfo* other);
   private:
   inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
     return NULL;
@@ -222,76 +189,61 @@ class LIBPROTOC_EXPORT TeammemberInfo : public ::google::protobuf::Message /* @@
   ::std::string* release_name();
   void set_allocated_name(::std::string* name);
 
-  // string HeadIcon = 5;
-  void clear_headicon();
-  static const int kHeadIconFieldNumber = 5;
-  const ::std::string& headicon() const;
-  void set_headicon(const ::std::string& value);
-  #if LANG_CXX11
-  void set_headicon(::std::string&& value);
-  #endif
-  void set_headicon(const char* value);
-  void set_headicon(const char* value, size_t size);
-  ::std::string* mutable_headicon();
-  ::std::string* release_headicon();
-  void set_allocated_headicon(::std::string* headicon);
-
-  // .NFMsg.Ident player_id = 1;
-  bool has_player_id() const;
-  void clear_player_id();
-  static const int kPlayerIdFieldNumber = 1;
+  // .NFMsg.Ident id = 1;
+  bool has_id() const;
+  void clear_id();
+  static const int kIdFieldNumber = 1;
   private:
-  const ::NFMsg::Ident& _internal_player_id() const;
+  const ::NFMsg::Ident& _internal_id() const;
   public:
-  const ::NFMsg::Ident& player_id() const;
-  ::NFMsg::Ident* release_player_id();
-  ::NFMsg::Ident* mutable_player_id();
-  void set_allocated_player_id(::NFMsg::Ident* player_id);
+  const ::NFMsg::Ident& id() const;
+  ::NFMsg::Ident* release_id();
+  ::NFMsg::Ident* mutable_id();
+  void set_allocated_id(::NFMsg::Ident* id);
 
-  // int32 nLevel = 3;
-  void clear_nlevel();
-  static const int kNLevelFieldNumber = 3;
-  ::google::protobuf::int32 nlevel() const;
-  void set_nlevel(::google::protobuf::int32 value);
+  // int32 bp = 3;
+  void clear_bp();
+  static const int kBpFieldNumber = 3;
+  ::google::protobuf::int32 bp() const;
+  void set_bp(::google::protobuf::int32 value);
 
-  // int32 job = 4;
-  void clear_job();
-  static const int kJobFieldNumber = 4;
-  ::google::protobuf::int32 job() const;
-  void set_job(::google::protobuf::int32 value);
+  // int32 leader = 4;
+  void clear_leader();
+  static const int kLeaderFieldNumber = 4;
+  ::google::protobuf::int32 leader() const;
+  void set_leader(::google::protobuf::int32 value);
 
-  // @@protoc_insertion_point(class_scope:NFMsg.TeammemberInfo)
+  // @@protoc_insertion_point(class_scope:NFMsg.TeamMemberInfo)
  private:
 
   ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
   ::google::protobuf::internal::ArenaStringPtr name_;
-  ::google::protobuf::internal::ArenaStringPtr headicon_;
-  ::NFMsg::Ident* player_id_;
-  ::google::protobuf::int32 nlevel_;
-  ::google::protobuf::int32 job_;
+  ::NFMsg::Ident* id_;
+  ::google::protobuf::int32 bp_;
+  ::google::protobuf::int32 leader_;
   mutable ::google::protobuf::internal::CachedSize _cached_size_;
   friend struct ::protobuf_NFMsgTeam_2eproto::TableStruct;
 };
 // -------------------------------------------------------------------
 
-class LIBPROTOC_EXPORT TeamInfo : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:NFMsg.TeamInfo) */ {
+class LIBPROTOC_EXPORT ReqAckTeamMemberList : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:NFMsg.ReqAckTeamMemberList) */ {
  public:
-  TeamInfo();
-  virtual ~TeamInfo();
+  ReqAckTeamMemberList();
+  virtual ~ReqAckTeamMemberList();
 
-  TeamInfo(const TeamInfo& from);
+  ReqAckTeamMemberList(const ReqAckTeamMemberList& from);
 
-  inline TeamInfo& operator=(const TeamInfo& from) {
+  inline ReqAckTeamMemberList& operator=(const ReqAckTeamMemberList& from) {
     CopyFrom(from);
     return *this;
   }
   #if LANG_CXX11
-  TeamInfo(TeamInfo&& from) noexcept
-    : TeamInfo() {
+  ReqAckTeamMemberList(ReqAckTeamMemberList&& from) noexcept
+    : ReqAckTeamMemberList() {
     *this = ::std::move(from);
   }
 
-  inline TeamInfo& operator=(TeamInfo&& from) noexcept {
+  inline ReqAckTeamMemberList& operator=(ReqAckTeamMemberList&& from) noexcept {
     if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
       if (this != &from) InternalSwap(&from);
     } else {
@@ -301,34 +253,34 @@ class LIBPROTOC_EXPORT TeamInfo : public ::google::protobuf::Message /* @@protoc
   }
   #endif
   static const ::google::protobuf::Descriptor* descriptor();
-  static const TeamInfo& default_instance();
+  static const ReqAckTeamMemberList& default_instance();
 
   static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
-  static inline const TeamInfo* internal_default_instance() {
-    return reinterpret_cast<const TeamInfo*>(
-               &_TeamInfo_default_instance_);
+  static inline const ReqAckTeamMemberList* internal_default_instance() {
+    return reinterpret_cast<const ReqAckTeamMemberList*>(
+               &_ReqAckTeamMemberList_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
     1;
 
-  void Swap(TeamInfo* other);
-  friend void swap(TeamInfo& a, TeamInfo& b) {
+  void Swap(ReqAckTeamMemberList* other);
+  friend void swap(ReqAckTeamMemberList& a, ReqAckTeamMemberList& b) {
     a.Swap(&b);
   }
 
   // implements Message ----------------------------------------------
 
-  inline TeamInfo* New() const final {
-    return CreateMaybeMessage<TeamInfo>(NULL);
+  inline ReqAckTeamMemberList* New() const final {
+    return CreateMaybeMessage<ReqAckTeamMemberList>(NULL);
   }
 
-  TeamInfo* New(::google::protobuf::Arena* arena) const final {
-    return CreateMaybeMessage<TeamInfo>(arena);
+  ReqAckTeamMemberList* New(::google::protobuf::Arena* arena) const final {
+    return CreateMaybeMessage<ReqAckTeamMemberList>(arena);
   }
   void CopyFrom(const ::google::protobuf::Message& from) final;
   void MergeFrom(const ::google::protobuf::Message& from) final;
-  void CopyFrom(const TeamInfo& from);
-  void MergeFrom(const TeamInfo& from);
+  void CopyFrom(const ReqAckTeamMemberList& from);
+  void MergeFrom(const ReqAckTeamMemberList& from);
   void Clear() final;
   bool IsInitialized() const final;
 
@@ -345,7 +297,7 @@ class LIBPROTOC_EXPORT TeamInfo : public ::google::protobuf::Message /* @@protoc
   void SharedCtor();
   void SharedDtor();
   void SetCachedSize(int size) const final;
-  void InternalSwap(TeamInfo* other);
+  void InternalSwap(ReqAckTeamMemberList* other);
   private:
   inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
     return NULL;
@@ -361,17 +313,29 @@ class LIBPROTOC_EXPORT TeamInfo : public ::google::protobuf::Message /* @@protoc
 
   // accessors -------------------------------------------------------
 
-  // repeated .NFMsg.TeammemberInfo teammemberInfo = 3;
-  int teammemberinfo_size() const;
-  void clear_teammemberinfo();
-  static const int kTeammemberInfoFieldNumber = 3;
-  ::NFMsg::TeammemberInfo* mutable_teammemberinfo(int index);
-  ::google::protobuf::RepeatedPtrField< ::NFMsg::TeammemberInfo >*
-      mutable_teammemberinfo();
-  const ::NFMsg::TeammemberInfo& teammemberinfo(int index) const;
-  ::NFMsg::TeammemberInfo* add_teammemberinfo();
-  const ::google::protobuf::RepeatedPtrField< ::NFMsg::TeammemberInfo >&
-      teammemberinfo() const;
+  // repeated .NFMsg.TeamMemberInfo inviteList = 2;
+  int invitelist_size() const;
+  void clear_invitelist();
+  static const int kInviteListFieldNumber = 2;
+  ::NFMsg::TeamMemberInfo* mutable_invitelist(int index);
+  ::google::protobuf::RepeatedPtrField< ::NFMsg::TeamMemberInfo >*
+      mutable_invitelist();
+  const ::NFMsg::TeamMemberInfo& invitelist(int index) const;
+  ::NFMsg::TeamMemberInfo* add_invitelist();
+  const ::google::protobuf::RepeatedPtrField< ::NFMsg::TeamMemberInfo >&
+      invitelist() const;
+
+  // repeated .NFMsg.TeamMemberInfo memberList = 3;
+  int memberlist_size() const;
+  void clear_memberlist();
+  static const int kMemberListFieldNumber = 3;
+  ::NFMsg::TeamMemberInfo* mutable_memberlist(int index);
+  ::google::protobuf::RepeatedPtrField< ::NFMsg::TeamMemberInfo >*
+      mutable_memberlist();
+  const ::NFMsg::TeamMemberInfo& memberlist(int index) const;
+  ::NFMsg::TeamMemberInfo* add_memberlist();
+  const ::google::protobuf::RepeatedPtrField< ::NFMsg::TeamMemberInfo >&
+      memberlist() const;
 
   // .NFMsg.Ident team_id = 1;
   bool has_team_id() const;
@@ -385,48 +349,36 @@ class LIBPROTOC_EXPORT TeamInfo : public ::google::protobuf::Message /* @@protoc
   ::NFMsg::Ident* mutable_team_id();
   void set_allocated_team_id(::NFMsg::Ident* team_id);
 
-  // .NFMsg.Ident captain_id = 2;
-  bool has_captain_id() const;
-  void clear_captain_id();
-  static const int kCaptainIdFieldNumber = 2;
-  private:
-  const ::NFMsg::Ident& _internal_captain_id() const;
-  public:
-  const ::NFMsg::Ident& captain_id() const;
-  ::NFMsg::Ident* release_captain_id();
-  ::NFMsg::Ident* mutable_captain_id();
-  void set_allocated_captain_id(::NFMsg::Ident* captain_id);
-
-  // @@protoc_insertion_point(class_scope:NFMsg.TeamInfo)
+  // @@protoc_insertion_point(class_scope:NFMsg.ReqAckTeamMemberList)
  private:
 
   ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
-  ::google::protobuf::RepeatedPtrField< ::NFMsg::TeammemberInfo > teammemberinfo_;
+  ::google::protobuf::RepeatedPtrField< ::NFMsg::TeamMemberInfo > invitelist_;
+  ::google::protobuf::RepeatedPtrField< ::NFMsg::TeamMemberInfo > memberlist_;
   ::NFMsg::Ident* team_id_;
-  ::NFMsg::Ident* captain_id_;
   mutable ::google::protobuf::internal::CachedSize _cached_size_;
   friend struct ::protobuf_NFMsgTeam_2eproto::TableStruct;
 };
 // -------------------------------------------------------------------
 
-class LIBPROTOC_EXPORT ReqAckCreateTeam : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:NFMsg.ReqAckCreateTeam) */ {
+class LIBPROTOC_EXPORT AckTeamMemberAdd : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:NFMsg.AckTeamMemberAdd) */ {
  public:
-  ReqAckCreateTeam();
-  virtual ~ReqAckCreateTeam();
+  AckTeamMemberAdd();
+  virtual ~AckTeamMemberAdd();
 
-  ReqAckCreateTeam(const ReqAckCreateTeam& from);
+  AckTeamMemberAdd(const AckTeamMemberAdd& from);
 
-  inline ReqAckCreateTeam& operator=(const ReqAckCreateTeam& from) {
+  inline AckTeamMemberAdd& operator=(const AckTeamMemberAdd& from) {
     CopyFrom(from);
     return *this;
   }
   #if LANG_CXX11
-  ReqAckCreateTeam(ReqAckCreateTeam&& from) noexcept
-    : ReqAckCreateTeam() {
+  AckTeamMemberAdd(AckTeamMemberAdd&& from) noexcept
+    : AckTeamMemberAdd() {
     *this = ::std::move(from);
   }
 
-  inline ReqAckCreateTeam& operator=(ReqAckCreateTeam&& from) noexcept {
+  inline AckTeamMemberAdd& operator=(AckTeamMemberAdd&& from) noexcept {
     if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
       if (this != &from) InternalSwap(&from);
     } else {
@@ -436,34 +388,34 @@ class LIBPROTOC_EXPORT ReqAckCreateTeam : public ::google::protobuf::Message /* 
   }
   #endif
   static const ::google::protobuf::Descriptor* descriptor();
-  static const ReqAckCreateTeam& default_instance();
+  static const AckTeamMemberAdd& default_instance();
 
   static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
-  static inline const ReqAckCreateTeam* internal_default_instance() {
-    return reinterpret_cast<const ReqAckCreateTeam*>(
-               &_ReqAckCreateTeam_default_instance_);
+  static inline const AckTeamMemberAdd* internal_default_instance() {
+    return reinterpret_cast<const AckTeamMemberAdd*>(
+               &_AckTeamMemberAdd_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
     2;
 
-  void Swap(ReqAckCreateTeam* other);
-  friend void swap(ReqAckCreateTeam& a, ReqAckCreateTeam& b) {
+  void Swap(AckTeamMemberAdd* other);
+  friend void swap(AckTeamMemberAdd& a, AckTeamMemberAdd& b) {
     a.Swap(&b);
   }
 
   // implements Message ----------------------------------------------
 
-  inline ReqAckCreateTeam* New() const final {
-    return CreateMaybeMessage<ReqAckCreateTeam>(NULL);
+  inline AckTeamMemberAdd* New() const final {
+    return CreateMaybeMessage<AckTeamMemberAdd>(NULL);
   }
 
-  ReqAckCreateTeam* New(::google::protobuf::Arena* arena) const final {
-    return CreateMaybeMessage<ReqAckCreateTeam>(arena);
+  AckTeamMemberAdd* New(::google::protobuf::Arena* arena) const final {
+    return CreateMaybeMessage<AckTeamMemberAdd>(arena);
   }
   void CopyFrom(const ::google::protobuf::Message& from) final;
   void MergeFrom(const ::google::protobuf::Message& from) final;
-  void CopyFrom(const ReqAckCreateTeam& from);
-  void MergeFrom(const ReqAckCreateTeam& from);
+  void CopyFrom(const AckTeamMemberAdd& from);
+  void MergeFrom(const AckTeamMemberAdd& from);
   void Clear() final;
   bool IsInitialized() const final;
 
@@ -480,7 +432,7 @@ class LIBPROTOC_EXPORT ReqAckCreateTeam : public ::google::protobuf::Message /* 
   void SharedCtor();
   void SharedDtor();
   void SetCachedSize(int size) const final;
-  void InternalSwap(ReqAckCreateTeam* other);
+  void InternalSwap(AckTeamMemberAdd* other);
   private:
   inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
     return NULL;
@@ -496,6 +448,18 @@ class LIBPROTOC_EXPORT ReqAckCreateTeam : public ::google::protobuf::Message /* 
 
   // accessors -------------------------------------------------------
 
+  // repeated .NFMsg.TeamMemberInfo member = 2;
+  int member_size() const;
+  void clear_member();
+  static const int kMemberFieldNumber = 2;
+  ::NFMsg::TeamMemberInfo* mutable_member(int index);
+  ::google::protobuf::RepeatedPtrField< ::NFMsg::TeamMemberInfo >*
+      mutable_member();
+  const ::NFMsg::TeamMemberInfo& member(int index) const;
+  ::NFMsg::TeamMemberInfo* add_member();
+  const ::google::protobuf::RepeatedPtrField< ::NFMsg::TeamMemberInfo >&
+      member() const;
+
   // .NFMsg.Ident team_id = 1;
   bool has_team_id() const;
   void clear_team_id();
@@ -508,47 +472,35 @@ class LIBPROTOC_EXPORT ReqAckCreateTeam : public ::google::protobuf::Message /* 
   ::NFMsg::Ident* mutable_team_id();
   void set_allocated_team_id(::NFMsg::Ident* team_id);
 
-  // .NFMsg.TeamInfo xTeamInfo = 2;
-  bool has_xteaminfo() const;
-  void clear_xteaminfo();
-  static const int kXTeamInfoFieldNumber = 2;
-  private:
-  const ::NFMsg::TeamInfo& _internal_xteaminfo() const;
-  public:
-  const ::NFMsg::TeamInfo& xteaminfo() const;
-  ::NFMsg::TeamInfo* release_xteaminfo();
-  ::NFMsg::TeamInfo* mutable_xteaminfo();
-  void set_allocated_xteaminfo(::NFMsg::TeamInfo* xteaminfo);
-
-  // @@protoc_insertion_point(class_scope:NFMsg.ReqAckCreateTeam)
+  // @@protoc_insertion_point(class_scope:NFMsg.AckTeamMemberAdd)
  private:
 
   ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
+  ::google::protobuf::RepeatedPtrField< ::NFMsg::TeamMemberInfo > member_;
   ::NFMsg::Ident* team_id_;
-  ::NFMsg::TeamInfo* xteaminfo_;
   mutable ::google::protobuf::internal::CachedSize _cached_size_;
   friend struct ::protobuf_NFMsgTeam_2eproto::TableStruct;
 };
 // -------------------------------------------------------------------
 
-class LIBPROTOC_EXPORT ReqAckJoinTeam : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:NFMsg.ReqAckJoinTeam) */ {
+class LIBPROTOC_EXPORT AckTeamMemberLeave : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:NFMsg.AckTeamMemberLeave) */ {
  public:
-  ReqAckJoinTeam();
-  virtual ~ReqAckJoinTeam();
+  AckTeamMemberLeave();
+  virtual ~AckTeamMemberLeave();
 
-  ReqAckJoinTeam(const ReqAckJoinTeam& from);
+  AckTeamMemberLeave(const AckTeamMemberLeave& from);
 
-  inline ReqAckJoinTeam& operator=(const ReqAckJoinTeam& from) {
+  inline AckTeamMemberLeave& operator=(const AckTeamMemberLeave& from) {
     CopyFrom(from);
     return *this;
   }
   #if LANG_CXX11
-  ReqAckJoinTeam(ReqAckJoinTeam&& from) noexcept
-    : ReqAckJoinTeam() {
+  AckTeamMemberLeave(AckTeamMemberLeave&& from) noexcept
+    : AckTeamMemberLeave() {
     *this = ::std::move(from);
   }
 
-  inline ReqAckJoinTeam& operator=(ReqAckJoinTeam&& from) noexcept {
+  inline AckTeamMemberLeave& operator=(AckTeamMemberLeave&& from) noexcept {
     if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
       if (this != &from) InternalSwap(&from);
     } else {
@@ -558,34 +510,34 @@ class LIBPROTOC_EXPORT ReqAckJoinTeam : public ::google::protobuf::Message /* @@
   }
   #endif
   static const ::google::protobuf::Descriptor* descriptor();
-  static const ReqAckJoinTeam& default_instance();
+  static const AckTeamMemberLeave& default_instance();
 
   static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
-  static inline const ReqAckJoinTeam* internal_default_instance() {
-    return reinterpret_cast<const ReqAckJoinTeam*>(
-               &_ReqAckJoinTeam_default_instance_);
+  static inline const AckTeamMemberLeave* internal_default_instance() {
+    return reinterpret_cast<const AckTeamMemberLeave*>(
+               &_AckTeamMemberLeave_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
     3;
 
-  void Swap(ReqAckJoinTeam* other);
-  friend void swap(ReqAckJoinTeam& a, ReqAckJoinTeam& b) {
+  void Swap(AckTeamMemberLeave* other);
+  friend void swap(AckTeamMemberLeave& a, AckTeamMemberLeave& b) {
     a.Swap(&b);
   }
 
   // implements Message ----------------------------------------------
 
-  inline ReqAckJoinTeam* New() const final {
-    return CreateMaybeMessage<ReqAckJoinTeam>(NULL);
+  inline AckTeamMemberLeave* New() const final {
+    return CreateMaybeMessage<AckTeamMemberLeave>(NULL);
   }
 
-  ReqAckJoinTeam* New(::google::protobuf::Arena* arena) const final {
-    return CreateMaybeMessage<ReqAckJoinTeam>(arena);
+  AckTeamMemberLeave* New(::google::protobuf::Arena* arena) const final {
+    return CreateMaybeMessage<AckTeamMemberLeave>(arena);
   }
   void CopyFrom(const ::google::protobuf::Message& from) final;
   void MergeFrom(const ::google::protobuf::Message& from) final;
-  void CopyFrom(const ReqAckJoinTeam& from);
-  void MergeFrom(const ReqAckJoinTeam& from);
+  void CopyFrom(const AckTeamMemberLeave& from);
+  void MergeFrom(const AckTeamMemberLeave& from);
   void Clear() final;
   bool IsInitialized() const final;
 
@@ -602,7 +554,7 @@ class LIBPROTOC_EXPORT ReqAckJoinTeam : public ::google::protobuf::Message /* @@
   void SharedCtor();
   void SharedDtor();
   void SetCachedSize(int size) const final;
-  void InternalSwap(ReqAckJoinTeam* other);
+  void InternalSwap(AckTeamMemberLeave* other);
   private:
   inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
     return NULL;
@@ -618,6 +570,18 @@ class LIBPROTOC_EXPORT ReqAckJoinTeam : public ::google::protobuf::Message /* @@
 
   // accessors -------------------------------------------------------
 
+  // repeated .NFMsg.TeamMemberInfo member = 2;
+  int member_size() const;
+  void clear_member();
+  static const int kMemberFieldNumber = 2;
+  ::NFMsg::TeamMemberInfo* mutable_member(int index);
+  ::google::protobuf::RepeatedPtrField< ::NFMsg::TeamMemberInfo >*
+      mutable_member();
+  const ::NFMsg::TeamMemberInfo& member(int index) const;
+  ::NFMsg::TeamMemberInfo* add_member();
+  const ::google::protobuf::RepeatedPtrField< ::NFMsg::TeamMemberInfo >&
+      member() const;
+
   // .NFMsg.Ident team_id = 1;
   bool has_team_id() const;
   void clear_team_id();
@@ -630,47 +594,35 @@ class LIBPROTOC_EXPORT ReqAckJoinTeam : public ::google::protobuf::Message /* @@
   ::NFMsg::Ident* mutable_team_id();
   void set_allocated_team_id(::NFMsg::Ident* team_id);
 
-  // .NFMsg.TeamInfo xTeamInfo = 2;
-  bool has_xteaminfo() const;
-  void clear_xteaminfo();
-  static const int kXTeamInfoFieldNumber = 2;
-  private:
-  const ::NFMsg::TeamInfo& _internal_xteaminfo() const;
-  public:
-  const ::NFMsg::TeamInfo& xteaminfo() const;
-  ::NFMsg::TeamInfo* release_xteaminfo();
-  ::NFMsg::TeamInfo* mutable_xteaminfo();
-  void set_allocated_xteaminfo(::NFMsg::TeamInfo* xteaminfo);
-
-  // @@protoc_insertion_point(class_scope:NFMsg.ReqAckJoinTeam)
+  // @@protoc_insertion_point(class_scope:NFMsg.AckTeamMemberLeave)
  private:
 
   ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
+  ::google::protobuf::RepeatedPtrField< ::NFMsg::TeamMemberInfo > member_;
   ::NFMsg::Ident* team_id_;
-  ::NFMsg::TeamInfo* xteaminfo_;
   mutable ::google::protobuf::internal::CachedSize _cached_size_;
   friend struct ::protobuf_NFMsgTeam_2eproto::TableStruct;
 };
 // -------------------------------------------------------------------
 
-class LIBPROTOC_EXPORT ReqAckLeaveTeam : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:NFMsg.ReqAckLeaveTeam) */ {
+class LIBPROTOC_EXPORT ReqInviteToTeam : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:NFMsg.ReqInviteToTeam) */ {
  public:
-  ReqAckLeaveTeam();
-  virtual ~ReqAckLeaveTeam();
+  ReqInviteToTeam();
+  virtual ~ReqInviteToTeam();
 
-  ReqAckLeaveTeam(const ReqAckLeaveTeam& from);
+  ReqInviteToTeam(const ReqInviteToTeam& from);
 
-  inline ReqAckLeaveTeam& operator=(const ReqAckLeaveTeam& from) {
+  inline ReqInviteToTeam& operator=(const ReqInviteToTeam& from) {
     CopyFrom(from);
     return *this;
   }
   #if LANG_CXX11
-  ReqAckLeaveTeam(ReqAckLeaveTeam&& from) noexcept
-    : ReqAckLeaveTeam() {
+  ReqInviteToTeam(ReqInviteToTeam&& from) noexcept
+    : ReqInviteToTeam() {
     *this = ::std::move(from);
   }
 
-  inline ReqAckLeaveTeam& operator=(ReqAckLeaveTeam&& from) noexcept {
+  inline ReqInviteToTeam& operator=(ReqInviteToTeam&& from) noexcept {
     if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
       if (this != &from) InternalSwap(&from);
     } else {
@@ -680,34 +632,34 @@ class LIBPROTOC_EXPORT ReqAckLeaveTeam : public ::google::protobuf::Message /* @
   }
   #endif
   static const ::google::protobuf::Descriptor* descriptor();
-  static const ReqAckLeaveTeam& default_instance();
+  static const ReqInviteToTeam& default_instance();
 
   static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
-  static inline const ReqAckLeaveTeam* internal_default_instance() {
-    return reinterpret_cast<const ReqAckLeaveTeam*>(
-               &_ReqAckLeaveTeam_default_instance_);
+  static inline const ReqInviteToTeam* internal_default_instance() {
+    return reinterpret_cast<const ReqInviteToTeam*>(
+               &_ReqInviteToTeam_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
     4;
 
-  void Swap(ReqAckLeaveTeam* other);
-  friend void swap(ReqAckLeaveTeam& a, ReqAckLeaveTeam& b) {
+  void Swap(ReqInviteToTeam* other);
+  friend void swap(ReqInviteToTeam& a, ReqInviteToTeam& b) {
     a.Swap(&b);
   }
 
   // implements Message ----------------------------------------------
 
-  inline ReqAckLeaveTeam* New() const final {
-    return CreateMaybeMessage<ReqAckLeaveTeam>(NULL);
+  inline ReqInviteToTeam* New() const final {
+    return CreateMaybeMessage<ReqInviteToTeam>(NULL);
   }
 
-  ReqAckLeaveTeam* New(::google::protobuf::Arena* arena) const final {
-    return CreateMaybeMessage<ReqAckLeaveTeam>(arena);
+  ReqInviteToTeam* New(::google::protobuf::Arena* arena) const final {
+    return CreateMaybeMessage<ReqInviteToTeam>(arena);
   }
   void CopyFrom(const ::google::protobuf::Message& from) final;
   void MergeFrom(const ::google::protobuf::Message& from) final;
-  void CopyFrom(const ReqAckLeaveTeam& from);
-  void MergeFrom(const ReqAckLeaveTeam& from);
+  void CopyFrom(const ReqInviteToTeam& from);
+  void MergeFrom(const ReqInviteToTeam& from);
   void Clear() final;
   bool IsInitialized() const final;
 
@@ -724,7 +676,7 @@ class LIBPROTOC_EXPORT ReqAckLeaveTeam : public ::google::protobuf::Message /* @
   void SharedCtor();
   void SharedDtor();
   void SetCachedSize(int size) const final;
-  void InternalSwap(ReqAckLeaveTeam* other);
+  void InternalSwap(ReqInviteToTeam* other);
   private:
   inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
     return NULL;
@@ -740,59 +692,46 @@ class LIBPROTOC_EXPORT ReqAckLeaveTeam : public ::google::protobuf::Message /* @
 
   // accessors -------------------------------------------------------
 
-  // .NFMsg.Ident team_id = 1;
-  bool has_team_id() const;
-  void clear_team_id();
-  static const int kTeamIdFieldNumber = 1;
+  // .NFMsg.Ident stranger = 1;
+  bool has_stranger() const;
+  void clear_stranger();
+  static const int kStrangerFieldNumber = 1;
   private:
-  const ::NFMsg::Ident& _internal_team_id() const;
+  const ::NFMsg::Ident& _internal_stranger() const;
   public:
-  const ::NFMsg::Ident& team_id() const;
-  ::NFMsg::Ident* release_team_id();
-  ::NFMsg::Ident* mutable_team_id();
-  void set_allocated_team_id(::NFMsg::Ident* team_id);
+  const ::NFMsg::Ident& stranger() const;
+  ::NFMsg::Ident* release_stranger();
+  ::NFMsg::Ident* mutable_stranger();
+  void set_allocated_stranger(::NFMsg::Ident* stranger);
 
-  // .NFMsg.TeamInfo xTeamInfo = 2;
-  bool has_xteaminfo() const;
-  void clear_xteaminfo();
-  static const int kXTeamInfoFieldNumber = 2;
-  private:
-  const ::NFMsg::TeamInfo& _internal_xteaminfo() const;
-  public:
-  const ::NFMsg::TeamInfo& xteaminfo() const;
-  ::NFMsg::TeamInfo* release_xteaminfo();
-  ::NFMsg::TeamInfo* mutable_xteaminfo();
-  void set_allocated_xteaminfo(::NFMsg::TeamInfo* xteaminfo);
-
-  // @@protoc_insertion_point(class_scope:NFMsg.ReqAckLeaveTeam)
+  // @@protoc_insertion_point(class_scope:NFMsg.ReqInviteToTeam)
  private:
 
   ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
-  ::NFMsg::Ident* team_id_;
-  ::NFMsg::TeamInfo* xteaminfo_;
+  ::NFMsg::Ident* stranger_;
   mutable ::google::protobuf::internal::CachedSize _cached_size_;
   friend struct ::protobuf_NFMsgTeam_2eproto::TableStruct;
 };
 // -------------------------------------------------------------------
 
-class LIBPROTOC_EXPORT ReqAckOprTeamMember : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:NFMsg.ReqAckOprTeamMember) */ {
+class LIBPROTOC_EXPORT AckInviteToTeam : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:NFMsg.AckInviteToTeam) */ {
  public:
-  ReqAckOprTeamMember();
-  virtual ~ReqAckOprTeamMember();
+  AckInviteToTeam();
+  virtual ~AckInviteToTeam();
 
-  ReqAckOprTeamMember(const ReqAckOprTeamMember& from);
+  AckInviteToTeam(const AckInviteToTeam& from);
 
-  inline ReqAckOprTeamMember& operator=(const ReqAckOprTeamMember& from) {
+  inline AckInviteToTeam& operator=(const AckInviteToTeam& from) {
     CopyFrom(from);
     return *this;
   }
   #if LANG_CXX11
-  ReqAckOprTeamMember(ReqAckOprTeamMember&& from) noexcept
-    : ReqAckOprTeamMember() {
+  AckInviteToTeam(AckInviteToTeam&& from) noexcept
+    : AckInviteToTeam() {
     *this = ::std::move(from);
   }
 
-  inline ReqAckOprTeamMember& operator=(ReqAckOprTeamMember&& from) noexcept {
+  inline AckInviteToTeam& operator=(AckInviteToTeam&& from) noexcept {
     if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
       if (this != &from) InternalSwap(&from);
     } else {
@@ -802,34 +741,34 @@ class LIBPROTOC_EXPORT ReqAckOprTeamMember : public ::google::protobuf::Message 
   }
   #endif
   static const ::google::protobuf::Descriptor* descriptor();
-  static const ReqAckOprTeamMember& default_instance();
+  static const AckInviteToTeam& default_instance();
 
   static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
-  static inline const ReqAckOprTeamMember* internal_default_instance() {
-    return reinterpret_cast<const ReqAckOprTeamMember*>(
-               &_ReqAckOprTeamMember_default_instance_);
+  static inline const AckInviteToTeam* internal_default_instance() {
+    return reinterpret_cast<const AckInviteToTeam*>(
+               &_AckInviteToTeam_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
     5;
 
-  void Swap(ReqAckOprTeamMember* other);
-  friend void swap(ReqAckOprTeamMember& a, ReqAckOprTeamMember& b) {
+  void Swap(AckInviteToTeam* other);
+  friend void swap(AckInviteToTeam& a, AckInviteToTeam& b) {
     a.Swap(&b);
   }
 
   // implements Message ----------------------------------------------
 
-  inline ReqAckOprTeamMember* New() const final {
-    return CreateMaybeMessage<ReqAckOprTeamMember>(NULL);
+  inline AckInviteToTeam* New() const final {
+    return CreateMaybeMessage<AckInviteToTeam>(NULL);
   }
 
-  ReqAckOprTeamMember* New(::google::protobuf::Arena* arena) const final {
-    return CreateMaybeMessage<ReqAckOprTeamMember>(arena);
+  AckInviteToTeam* New(::google::protobuf::Arena* arena) const final {
+    return CreateMaybeMessage<AckInviteToTeam>(arena);
   }
   void CopyFrom(const ::google::protobuf::Message& from) final;
   void MergeFrom(const ::google::protobuf::Message& from) final;
-  void CopyFrom(const ReqAckOprTeamMember& from);
-  void MergeFrom(const ReqAckOprTeamMember& from);
+  void CopyFrom(const AckInviteToTeam& from);
+  void MergeFrom(const AckInviteToTeam& from);
   void Clear() final;
   bool IsInitialized() const final;
 
@@ -846,7 +785,7 @@ class LIBPROTOC_EXPORT ReqAckOprTeamMember : public ::google::protobuf::Message 
   void SharedCtor();
   void SharedDtor();
   void SetCachedSize(int size) const final;
-  void InternalSwap(ReqAckOprTeamMember* other);
+  void InternalSwap(AckInviteToTeam* other);
   private:
   inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
     return NULL;
@@ -860,47 +799,21 @@ class LIBPROTOC_EXPORT ReqAckOprTeamMember : public ::google::protobuf::Message 
 
   // nested types ----------------------------------------------------
 
-  typedef ReqAckOprTeamMember_EGTeamMemberOprType EGTeamMemberOprType;
-  static const EGTeamMemberOprType EGAT_DOWN =
-    ReqAckOprTeamMember_EGTeamMemberOprType_EGAT_DOWN;
-  static const EGTeamMemberOprType EGAT_UP =
-    ReqAckOprTeamMember_EGTeamMemberOprType_EGAT_UP;
-  static const EGTeamMemberOprType EGAT_KICK =
-    ReqAckOprTeamMember_EGTeamMemberOprType_EGAT_KICK;
-  static const EGTeamMemberOprType EGAT_APPOINT =
-    ReqAckOprTeamMember_EGTeamMemberOprType_EGAT_APPOINT;
-  static const EGTeamMemberOprType EGAT_FIRE =
-    ReqAckOprTeamMember_EGTeamMemberOprType_EGAT_FIRE;
-  static const EGTeamMemberOprType EGAT_DEMISE =
-    ReqAckOprTeamMember_EGTeamMemberOprType_EGAT_DEMISE;
-  static const EGTeamMemberOprType EGAT_ACCEPTAPPLY =
-    ReqAckOprTeamMember_EGTeamMemberOprType_EGAT_ACCEPTAPPLY;
-  static const EGTeamMemberOprType EGAT_DENYAPPLY =
-    ReqAckOprTeamMember_EGTeamMemberOprType_EGAT_DENYAPPLY;
-  static const EGTeamMemberOprType EGAT_KICKOUT =
-    ReqAckOprTeamMember_EGTeamMemberOprType_EGAT_KICKOUT;
-  static inline bool EGTeamMemberOprType_IsValid(int value) {
-    return ReqAckOprTeamMember_EGTeamMemberOprType_IsValid(value);
-  }
-  static const EGTeamMemberOprType EGTeamMemberOprType_MIN =
-    ReqAckOprTeamMember_EGTeamMemberOprType_EGTeamMemberOprType_MIN;
-  static const EGTeamMemberOprType EGTeamMemberOprType_MAX =
-    ReqAckOprTeamMember_EGTeamMemberOprType_EGTeamMemberOprType_MAX;
-  static const int EGTeamMemberOprType_ARRAYSIZE =
-    ReqAckOprTeamMember_EGTeamMemberOprType_EGTeamMemberOprType_ARRAYSIZE;
-  static inline const ::google::protobuf::EnumDescriptor*
-  EGTeamMemberOprType_descriptor() {
-    return ReqAckOprTeamMember_EGTeamMemberOprType_descriptor();
-  }
-  static inline const ::std::string& EGTeamMemberOprType_Name(EGTeamMemberOprType value) {
-    return ReqAckOprTeamMember_EGTeamMemberOprType_Name(value);
-  }
-  static inline bool EGTeamMemberOprType_Parse(const ::std::string& name,
-      EGTeamMemberOprType* value) {
-    return ReqAckOprTeamMember_EGTeamMemberOprType_Parse(name, value);
-  }
-
   // accessors -------------------------------------------------------
+
+  // string name = 3;
+  void clear_name();
+  static const int kNameFieldNumber = 3;
+  const ::std::string& name() const;
+  void set_name(const ::std::string& value);
+  #if LANG_CXX11
+  void set_name(::std::string&& value);
+  #endif
+  void set_name(const char* value);
+  void set_name(const char* value, size_t size);
+  ::std::string* mutable_name();
+  ::std::string* release_name();
+  void set_allocated_name(::std::string* name);
 
   // .NFMsg.Ident team_id = 1;
   bool has_team_id() const;
@@ -914,67 +827,61 @@ class LIBPROTOC_EXPORT ReqAckOprTeamMember : public ::google::protobuf::Message 
   ::NFMsg::Ident* mutable_team_id();
   void set_allocated_team_id(::NFMsg::Ident* team_id);
 
-  // .NFMsg.Ident member_id = 2;
-  bool has_member_id() const;
-  void clear_member_id();
-  static const int kMemberIdFieldNumber = 2;
+  // .NFMsg.Ident inviter = 2;
+  bool has_inviter() const;
+  void clear_inviter();
+  static const int kInviterFieldNumber = 2;
   private:
-  const ::NFMsg::Ident& _internal_member_id() const;
+  const ::NFMsg::Ident& _internal_inviter() const;
   public:
-  const ::NFMsg::Ident& member_id() const;
-  ::NFMsg::Ident* release_member_id();
-  ::NFMsg::Ident* mutable_member_id();
-  void set_allocated_member_id(::NFMsg::Ident* member_id);
+  const ::NFMsg::Ident& inviter() const;
+  ::NFMsg::Ident* release_inviter();
+  ::NFMsg::Ident* mutable_inviter();
+  void set_allocated_inviter(::NFMsg::Ident* inviter);
 
-  // .NFMsg.TeamInfo xTeamInfo = 4;
-  bool has_xteaminfo() const;
-  void clear_xteaminfo();
-  static const int kXTeamInfoFieldNumber = 4;
+  // .NFMsg.Ident stranger = 4;
+  bool has_stranger() const;
+  void clear_stranger();
+  static const int kStrangerFieldNumber = 4;
   private:
-  const ::NFMsg::TeamInfo& _internal_xteaminfo() const;
+  const ::NFMsg::Ident& _internal_stranger() const;
   public:
-  const ::NFMsg::TeamInfo& xteaminfo() const;
-  ::NFMsg::TeamInfo* release_xteaminfo();
-  ::NFMsg::TeamInfo* mutable_xteaminfo();
-  void set_allocated_xteaminfo(::NFMsg::TeamInfo* xteaminfo);
+  const ::NFMsg::Ident& stranger() const;
+  ::NFMsg::Ident* release_stranger();
+  ::NFMsg::Ident* mutable_stranger();
+  void set_allocated_stranger(::NFMsg::Ident* stranger);
 
-  // .NFMsg.ReqAckOprTeamMember.EGTeamMemberOprType type = 3;
-  void clear_type();
-  static const int kTypeFieldNumber = 3;
-  ::NFMsg::ReqAckOprTeamMember_EGTeamMemberOprType type() const;
-  void set_type(::NFMsg::ReqAckOprTeamMember_EGTeamMemberOprType value);
-
-  // @@protoc_insertion_point(class_scope:NFMsg.ReqAckOprTeamMember)
+  // @@protoc_insertion_point(class_scope:NFMsg.AckInviteToTeam)
  private:
 
   ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
+  ::google::protobuf::internal::ArenaStringPtr name_;
   ::NFMsg::Ident* team_id_;
-  ::NFMsg::Ident* member_id_;
-  ::NFMsg::TeamInfo* xteaminfo_;
-  int type_;
+  ::NFMsg::Ident* inviter_;
+  ::NFMsg::Ident* stranger_;
   mutable ::google::protobuf::internal::CachedSize _cached_size_;
   friend struct ::protobuf_NFMsgTeam_2eproto::TableStruct;
 };
 // -------------------------------------------------------------------
 
-class LIBPROTOC_EXPORT ReqAckInviteTeam : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:NFMsg.ReqAckInviteTeam) */ {
+class LIBPROTOC_EXPORT ReqAckAcceptTeamInvite : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:NFMsg.ReqAckAcceptTeamInvite) */ {
  public:
-  ReqAckInviteTeam();
-  virtual ~ReqAckInviteTeam();
+  ReqAckAcceptTeamInvite();
+  virtual ~ReqAckAcceptTeamInvite();
 
-  ReqAckInviteTeam(const ReqAckInviteTeam& from);
+  ReqAckAcceptTeamInvite(const ReqAckAcceptTeamInvite& from);
 
-  inline ReqAckInviteTeam& operator=(const ReqAckInviteTeam& from) {
+  inline ReqAckAcceptTeamInvite& operator=(const ReqAckAcceptTeamInvite& from) {
     CopyFrom(from);
     return *this;
   }
   #if LANG_CXX11
-  ReqAckInviteTeam(ReqAckInviteTeam&& from) noexcept
-    : ReqAckInviteTeam() {
+  ReqAckAcceptTeamInvite(ReqAckAcceptTeamInvite&& from) noexcept
+    : ReqAckAcceptTeamInvite() {
     *this = ::std::move(from);
   }
 
-  inline ReqAckInviteTeam& operator=(ReqAckInviteTeam&& from) noexcept {
+  inline ReqAckAcceptTeamInvite& operator=(ReqAckAcceptTeamInvite&& from) noexcept {
     if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
       if (this != &from) InternalSwap(&from);
     } else {
@@ -984,34 +891,34 @@ class LIBPROTOC_EXPORT ReqAckInviteTeam : public ::google::protobuf::Message /* 
   }
   #endif
   static const ::google::protobuf::Descriptor* descriptor();
-  static const ReqAckInviteTeam& default_instance();
+  static const ReqAckAcceptTeamInvite& default_instance();
 
   static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
-  static inline const ReqAckInviteTeam* internal_default_instance() {
-    return reinterpret_cast<const ReqAckInviteTeam*>(
-               &_ReqAckInviteTeam_default_instance_);
+  static inline const ReqAckAcceptTeamInvite* internal_default_instance() {
+    return reinterpret_cast<const ReqAckAcceptTeamInvite*>(
+               &_ReqAckAcceptTeamInvite_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
     6;
 
-  void Swap(ReqAckInviteTeam* other);
-  friend void swap(ReqAckInviteTeam& a, ReqAckInviteTeam& b) {
+  void Swap(ReqAckAcceptTeamInvite* other);
+  friend void swap(ReqAckAcceptTeamInvite& a, ReqAckAcceptTeamInvite& b) {
     a.Swap(&b);
   }
 
   // implements Message ----------------------------------------------
 
-  inline ReqAckInviteTeam* New() const final {
-    return CreateMaybeMessage<ReqAckInviteTeam>(NULL);
+  inline ReqAckAcceptTeamInvite* New() const final {
+    return CreateMaybeMessage<ReqAckAcceptTeamInvite>(NULL);
   }
 
-  ReqAckInviteTeam* New(::google::protobuf::Arena* arena) const final {
-    return CreateMaybeMessage<ReqAckInviteTeam>(arena);
+  ReqAckAcceptTeamInvite* New(::google::protobuf::Arena* arena) const final {
+    return CreateMaybeMessage<ReqAckAcceptTeamInvite>(arena);
   }
   void CopyFrom(const ::google::protobuf::Message& from) final;
   void MergeFrom(const ::google::protobuf::Message& from) final;
-  void CopyFrom(const ReqAckInviteTeam& from);
-  void MergeFrom(const ReqAckInviteTeam& from);
+  void CopyFrom(const ReqAckAcceptTeamInvite& from);
+  void MergeFrom(const ReqAckAcceptTeamInvite& from);
   void Clear() final;
   bool IsInitialized() const final;
 
@@ -1028,7 +935,7 @@ class LIBPROTOC_EXPORT ReqAckInviteTeam : public ::google::protobuf::Message /* 
   void SharedCtor();
   void SharedDtor();
   void SetCachedSize(int size) const final;
-  void InternalSwap(ReqAckInviteTeam* other);
+  void InternalSwap(ReqAckAcceptTeamInvite* other);
   private:
   inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
     return NULL;
@@ -1056,60 +963,34 @@ class LIBPROTOC_EXPORT ReqAckInviteTeam : public ::google::protobuf::Message /* 
   ::NFMsg::Ident* mutable_team_id();
   void set_allocated_team_id(::NFMsg::Ident* team_id);
 
-  // .NFMsg.Ident self_id = 2;
-  bool has_self_id() const;
-  void clear_self_id();
-  static const int kSelfIdFieldNumber = 2;
-  private:
-  const ::NFMsg::Ident& _internal_self_id() const;
-  public:
-  const ::NFMsg::Ident& self_id() const;
-  ::NFMsg::Ident* release_self_id();
-  ::NFMsg::Ident* mutable_self_id();
-  void set_allocated_self_id(::NFMsg::Ident* self_id);
-
-  // .NFMsg.Ident invite_target_id = 3;
-  bool has_invite_target_id() const;
-  void clear_invite_target_id();
-  static const int kInviteTargetIdFieldNumber = 3;
-  private:
-  const ::NFMsg::Ident& _internal_invite_target_id() const;
-  public:
-  const ::NFMsg::Ident& invite_target_id() const;
-  ::NFMsg::Ident* release_invite_target_id();
-  ::NFMsg::Ident* mutable_invite_target_id();
-  void set_allocated_invite_target_id(::NFMsg::Ident* invite_target_id);
-
-  // @@protoc_insertion_point(class_scope:NFMsg.ReqAckInviteTeam)
+  // @@protoc_insertion_point(class_scope:NFMsg.ReqAckAcceptTeamInvite)
  private:
 
   ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
   ::NFMsg::Ident* team_id_;
-  ::NFMsg::Ident* self_id_;
-  ::NFMsg::Ident* invite_target_id_;
   mutable ::google::protobuf::internal::CachedSize _cached_size_;
   friend struct ::protobuf_NFMsgTeam_2eproto::TableStruct;
 };
 // -------------------------------------------------------------------
 
-class LIBPROTOC_EXPORT ReqTeamEnterEctype : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:NFMsg.ReqTeamEnterEctype) */ {
+class LIBPROTOC_EXPORT ReqAckRejectTeamInvite : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:NFMsg.ReqAckRejectTeamInvite) */ {
  public:
-  ReqTeamEnterEctype();
-  virtual ~ReqTeamEnterEctype();
+  ReqAckRejectTeamInvite();
+  virtual ~ReqAckRejectTeamInvite();
 
-  ReqTeamEnterEctype(const ReqTeamEnterEctype& from);
+  ReqAckRejectTeamInvite(const ReqAckRejectTeamInvite& from);
 
-  inline ReqTeamEnterEctype& operator=(const ReqTeamEnterEctype& from) {
+  inline ReqAckRejectTeamInvite& operator=(const ReqAckRejectTeamInvite& from) {
     CopyFrom(from);
     return *this;
   }
   #if LANG_CXX11
-  ReqTeamEnterEctype(ReqTeamEnterEctype&& from) noexcept
-    : ReqTeamEnterEctype() {
+  ReqAckRejectTeamInvite(ReqAckRejectTeamInvite&& from) noexcept
+    : ReqAckRejectTeamInvite() {
     *this = ::std::move(from);
   }
 
-  inline ReqTeamEnterEctype& operator=(ReqTeamEnterEctype&& from) noexcept {
+  inline ReqAckRejectTeamInvite& operator=(ReqAckRejectTeamInvite&& from) noexcept {
     if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
       if (this != &from) InternalSwap(&from);
     } else {
@@ -1119,34 +1000,34 @@ class LIBPROTOC_EXPORT ReqTeamEnterEctype : public ::google::protobuf::Message /
   }
   #endif
   static const ::google::protobuf::Descriptor* descriptor();
-  static const ReqTeamEnterEctype& default_instance();
+  static const ReqAckRejectTeamInvite& default_instance();
 
   static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
-  static inline const ReqTeamEnterEctype* internal_default_instance() {
-    return reinterpret_cast<const ReqTeamEnterEctype*>(
-               &_ReqTeamEnterEctype_default_instance_);
+  static inline const ReqAckRejectTeamInvite* internal_default_instance() {
+    return reinterpret_cast<const ReqAckRejectTeamInvite*>(
+               &_ReqAckRejectTeamInvite_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
     7;
 
-  void Swap(ReqTeamEnterEctype* other);
-  friend void swap(ReqTeamEnterEctype& a, ReqTeamEnterEctype& b) {
+  void Swap(ReqAckRejectTeamInvite* other);
+  friend void swap(ReqAckRejectTeamInvite& a, ReqAckRejectTeamInvite& b) {
     a.Swap(&b);
   }
 
   // implements Message ----------------------------------------------
 
-  inline ReqTeamEnterEctype* New() const final {
-    return CreateMaybeMessage<ReqTeamEnterEctype>(NULL);
+  inline ReqAckRejectTeamInvite* New() const final {
+    return CreateMaybeMessage<ReqAckRejectTeamInvite>(NULL);
   }
 
-  ReqTeamEnterEctype* New(::google::protobuf::Arena* arena) const final {
-    return CreateMaybeMessage<ReqTeamEnterEctype>(arena);
+  ReqAckRejectTeamInvite* New(::google::protobuf::Arena* arena) const final {
+    return CreateMaybeMessage<ReqAckRejectTeamInvite>(arena);
   }
   void CopyFrom(const ::google::protobuf::Message& from) final;
   void MergeFrom(const ::google::protobuf::Message& from) final;
-  void CopyFrom(const ReqTeamEnterEctype& from);
-  void MergeFrom(const ReqTeamEnterEctype& from);
+  void CopyFrom(const ReqAckRejectTeamInvite& from);
+  void MergeFrom(const ReqAckRejectTeamInvite& from);
   void Clear() final;
   bool IsInitialized() const final;
 
@@ -1163,7 +1044,7 @@ class LIBPROTOC_EXPORT ReqTeamEnterEctype : public ::google::protobuf::Message /
   void SharedCtor();
   void SharedDtor();
   void SetCachedSize(int size) const final;
-  void InternalSwap(ReqTeamEnterEctype* other);
+  void InternalSwap(ReqAckRejectTeamInvite* other);
   private:
   inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
     return NULL;
@@ -1191,195 +1072,11 @@ class LIBPROTOC_EXPORT ReqTeamEnterEctype : public ::google::protobuf::Message /
   ::NFMsg::Ident* mutable_team_id();
   void set_allocated_team_id(::NFMsg::Ident* team_id);
 
-  // .NFMsg.Ident self_id = 2;
-  bool has_self_id() const;
-  void clear_self_id();
-  static const int kSelfIdFieldNumber = 2;
-  private:
-  const ::NFMsg::Ident& _internal_self_id() const;
-  public:
-  const ::NFMsg::Ident& self_id() const;
-  ::NFMsg::Ident* release_self_id();
-  ::NFMsg::Ident* mutable_self_id();
-  void set_allocated_self_id(::NFMsg::Ident* self_id);
-
-  // int32 nEctypeID = 3;
-  void clear_nectypeid();
-  static const int kNEctypeIDFieldNumber = 3;
-  ::google::protobuf::int32 nectypeid() const;
-  void set_nectypeid(::google::protobuf::int32 value);
-
-  // int32 nGroupID = 4;
-  void clear_ngroupid();
-  static const int kNGroupIDFieldNumber = 4;
-  ::google::protobuf::int32 ngroupid() const;
-  void set_ngroupid(::google::protobuf::int32 value);
-
-  // int32 nResult = 5;
-  void clear_nresult();
-  static const int kNResultFieldNumber = 5;
-  ::google::protobuf::int32 nresult() const;
-  void set_nresult(::google::protobuf::int32 value);
-
-  // int32 nServerID = 6;
-  void clear_nserverid();
-  static const int kNServerIDFieldNumber = 6;
-  ::google::protobuf::int32 nserverid() const;
-  void set_nserverid(::google::protobuf::int32 value);
-
-  // @@protoc_insertion_point(class_scope:NFMsg.ReqTeamEnterEctype)
+  // @@protoc_insertion_point(class_scope:NFMsg.ReqAckRejectTeamInvite)
  private:
 
   ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
   ::NFMsg::Ident* team_id_;
-  ::NFMsg::Ident* self_id_;
-  ::google::protobuf::int32 nectypeid_;
-  ::google::protobuf::int32 ngroupid_;
-  ::google::protobuf::int32 nresult_;
-  ::google::protobuf::int32 nserverid_;
-  mutable ::google::protobuf::internal::CachedSize _cached_size_;
-  friend struct ::protobuf_NFMsgTeam_2eproto::TableStruct;
-};
-// -------------------------------------------------------------------
-
-class LIBPROTOC_EXPORT AckTeamEnterEctype : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:NFMsg.AckTeamEnterEctype) */ {
- public:
-  AckTeamEnterEctype();
-  virtual ~AckTeamEnterEctype();
-
-  AckTeamEnterEctype(const AckTeamEnterEctype& from);
-
-  inline AckTeamEnterEctype& operator=(const AckTeamEnterEctype& from) {
-    CopyFrom(from);
-    return *this;
-  }
-  #if LANG_CXX11
-  AckTeamEnterEctype(AckTeamEnterEctype&& from) noexcept
-    : AckTeamEnterEctype() {
-    *this = ::std::move(from);
-  }
-
-  inline AckTeamEnterEctype& operator=(AckTeamEnterEctype&& from) noexcept {
-    if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
-      if (this != &from) InternalSwap(&from);
-    } else {
-      CopyFrom(from);
-    }
-    return *this;
-  }
-  #endif
-  static const ::google::protobuf::Descriptor* descriptor();
-  static const AckTeamEnterEctype& default_instance();
-
-  static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
-  static inline const AckTeamEnterEctype* internal_default_instance() {
-    return reinterpret_cast<const AckTeamEnterEctype*>(
-               &_AckTeamEnterEctype_default_instance_);
-  }
-  static constexpr int kIndexInFileMessages =
-    8;
-
-  void Swap(AckTeamEnterEctype* other);
-  friend void swap(AckTeamEnterEctype& a, AckTeamEnterEctype& b) {
-    a.Swap(&b);
-  }
-
-  // implements Message ----------------------------------------------
-
-  inline AckTeamEnterEctype* New() const final {
-    return CreateMaybeMessage<AckTeamEnterEctype>(NULL);
-  }
-
-  AckTeamEnterEctype* New(::google::protobuf::Arena* arena) const final {
-    return CreateMaybeMessage<AckTeamEnterEctype>(arena);
-  }
-  void CopyFrom(const ::google::protobuf::Message& from) final;
-  void MergeFrom(const ::google::protobuf::Message& from) final;
-  void CopyFrom(const AckTeamEnterEctype& from);
-  void MergeFrom(const AckTeamEnterEctype& from);
-  void Clear() final;
-  bool IsInitialized() const final;
-
-  size_t ByteSizeLong() const final;
-  bool MergePartialFromCodedStream(
-      ::google::protobuf::io::CodedInputStream* input) final;
-  void SerializeWithCachedSizes(
-      ::google::protobuf::io::CodedOutputStream* output) const final;
-  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
-      bool deterministic, ::google::protobuf::uint8* target) const final;
-  int GetCachedSize() const final { return _cached_size_.Get(); }
-
-  private:
-  void SharedCtor();
-  void SharedDtor();
-  void SetCachedSize(int size) const final;
-  void InternalSwap(AckTeamEnterEctype* other);
-  private:
-  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
-    return NULL;
-  }
-  inline void* MaybeArenaPtr() const {
-    return NULL;
-  }
-  public:
-
-  ::google::protobuf::Metadata GetMetadata() const final;
-
-  // nested types ----------------------------------------------------
-
-  // accessors -------------------------------------------------------
-
-  // .NFMsg.Ident team_id = 1;
-  bool has_team_id() const;
-  void clear_team_id();
-  static const int kTeamIdFieldNumber = 1;
-  private:
-  const ::NFMsg::Ident& _internal_team_id() const;
-  public:
-  const ::NFMsg::Ident& team_id() const;
-  ::NFMsg::Ident* release_team_id();
-  ::NFMsg::Ident* mutable_team_id();
-  void set_allocated_team_id(::NFMsg::Ident* team_id);
-
-  // .NFMsg.Ident self_id = 2;
-  bool has_self_id() const;
-  void clear_self_id();
-  static const int kSelfIdFieldNumber = 2;
-  private:
-  const ::NFMsg::Ident& _internal_self_id() const;
-  public:
-  const ::NFMsg::Ident& self_id() const;
-  ::NFMsg::Ident* release_self_id();
-  ::NFMsg::Ident* mutable_self_id();
-  void set_allocated_self_id(::NFMsg::Ident* self_id);
-
-  // int32 nEctypeID = 3;
-  void clear_nectypeid();
-  static const int kNEctypeIDFieldNumber = 3;
-  ::google::protobuf::int32 nectypeid() const;
-  void set_nectypeid(::google::protobuf::int32 value);
-
-  // int32 nGroupID = 4;
-  void clear_ngroupid();
-  static const int kNGroupIDFieldNumber = 4;
-  ::google::protobuf::int32 ngroupid() const;
-  void set_ngroupid(::google::protobuf::int32 value);
-
-  // int32 nResult = 5;
-  void clear_nresult();
-  static const int kNResultFieldNumber = 5;
-  ::google::protobuf::int32 nresult() const;
-  void set_nresult(::google::protobuf::int32 value);
-
-  // @@protoc_insertion_point(class_scope:NFMsg.AckTeamEnterEctype)
- private:
-
-  ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
-  ::NFMsg::Ident* team_id_;
-  ::NFMsg::Ident* self_id_;
-  ::google::protobuf::int32 nectypeid_;
-  ::google::protobuf::int32 ngroupid_;
-  ::google::protobuf::int32 nresult_;
   mutable ::google::protobuf::internal::CachedSize _cached_size_;
   friend struct ::protobuf_NFMsgTeam_2eproto::TableStruct;
 };
@@ -1392,224 +1089,700 @@ class LIBPROTOC_EXPORT AckTeamEnterEctype : public ::google::protobuf::Message /
   #pragma GCC diagnostic push
   #pragma GCC diagnostic ignored "-Wstrict-aliasing"
 #endif  // __GNUC__
-// TeammemberInfo
+// TeamMemberInfo
 
-// .NFMsg.Ident player_id = 1;
-inline bool TeammemberInfo::has_player_id() const {
-  return this != internal_default_instance() && player_id_ != NULL;
+// .NFMsg.Ident id = 1;
+inline bool TeamMemberInfo::has_id() const {
+  return this != internal_default_instance() && id_ != NULL;
 }
-inline const ::NFMsg::Ident& TeammemberInfo::_internal_player_id() const {
-  return *player_id_;
+inline const ::NFMsg::Ident& TeamMemberInfo::_internal_id() const {
+  return *id_;
 }
-inline const ::NFMsg::Ident& TeammemberInfo::player_id() const {
-  const ::NFMsg::Ident* p = player_id_;
-  // @@protoc_insertion_point(field_get:NFMsg.TeammemberInfo.player_id)
+inline const ::NFMsg::Ident& TeamMemberInfo::id() const {
+  const ::NFMsg::Ident* p = id_;
+  // @@protoc_insertion_point(field_get:NFMsg.TeamMemberInfo.id)
   return p != NULL ? *p : *reinterpret_cast<const ::NFMsg::Ident*>(
       &::NFMsg::_Ident_default_instance_);
 }
-inline ::NFMsg::Ident* TeammemberInfo::release_player_id() {
-  // @@protoc_insertion_point(field_release:NFMsg.TeammemberInfo.player_id)
+inline ::NFMsg::Ident* TeamMemberInfo::release_id() {
+  // @@protoc_insertion_point(field_release:NFMsg.TeamMemberInfo.id)
   
-  ::NFMsg::Ident* temp = player_id_;
-  player_id_ = NULL;
+  ::NFMsg::Ident* temp = id_;
+  id_ = NULL;
   return temp;
 }
-inline ::NFMsg::Ident* TeammemberInfo::mutable_player_id() {
+inline ::NFMsg::Ident* TeamMemberInfo::mutable_id() {
   
-  if (player_id_ == NULL) {
+  if (id_ == NULL) {
     auto* p = CreateMaybeMessage<::NFMsg::Ident>(GetArenaNoVirtual());
-    player_id_ = p;
+    id_ = p;
   }
-  // @@protoc_insertion_point(field_mutable:NFMsg.TeammemberInfo.player_id)
-  return player_id_;
+  // @@protoc_insertion_point(field_mutable:NFMsg.TeamMemberInfo.id)
+  return id_;
 }
-inline void TeammemberInfo::set_allocated_player_id(::NFMsg::Ident* player_id) {
+inline void TeamMemberInfo::set_allocated_id(::NFMsg::Ident* id) {
   ::google::protobuf::Arena* message_arena = GetArenaNoVirtual();
   if (message_arena == NULL) {
-    delete reinterpret_cast< ::google::protobuf::MessageLite*>(player_id_);
+    delete reinterpret_cast< ::google::protobuf::MessageLite*>(id_);
   }
-  if (player_id) {
+  if (id) {
     ::google::protobuf::Arena* submessage_arena = NULL;
     if (message_arena != submessage_arena) {
-      player_id = ::google::protobuf::internal::GetOwnedMessage(
-          message_arena, player_id, submessage_arena);
+      id = ::google::protobuf::internal::GetOwnedMessage(
+          message_arena, id, submessage_arena);
     }
     
   } else {
     
   }
-  player_id_ = player_id;
-  // @@protoc_insertion_point(field_set_allocated:NFMsg.TeammemberInfo.player_id)
+  id_ = id;
+  // @@protoc_insertion_point(field_set_allocated:NFMsg.TeamMemberInfo.id)
 }
 
 // string name = 2;
-inline void TeammemberInfo::clear_name() {
+inline void TeamMemberInfo::clear_name() {
   name_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
-inline const ::std::string& TeammemberInfo::name() const {
-  // @@protoc_insertion_point(field_get:NFMsg.TeammemberInfo.name)
+inline const ::std::string& TeamMemberInfo::name() const {
+  // @@protoc_insertion_point(field_get:NFMsg.TeamMemberInfo.name)
   return name_.GetNoArena();
 }
-inline void TeammemberInfo::set_name(const ::std::string& value) {
+inline void TeamMemberInfo::set_name(const ::std::string& value) {
   
   name_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
-  // @@protoc_insertion_point(field_set:NFMsg.TeammemberInfo.name)
+  // @@protoc_insertion_point(field_set:NFMsg.TeamMemberInfo.name)
 }
 #if LANG_CXX11
-inline void TeammemberInfo::set_name(::std::string&& value) {
+inline void TeamMemberInfo::set_name(::std::string&& value) {
   
   name_.SetNoArena(
     &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
-  // @@protoc_insertion_point(field_set_rvalue:NFMsg.TeammemberInfo.name)
+  // @@protoc_insertion_point(field_set_rvalue:NFMsg.TeamMemberInfo.name)
 }
 #endif
-inline void TeammemberInfo::set_name(const char* value) {
+inline void TeamMemberInfo::set_name(const char* value) {
   GOOGLE_DCHECK(value != NULL);
   
   name_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
-  // @@protoc_insertion_point(field_set_char:NFMsg.TeammemberInfo.name)
+  // @@protoc_insertion_point(field_set_char:NFMsg.TeamMemberInfo.name)
 }
-inline void TeammemberInfo::set_name(const char* value, size_t size) {
+inline void TeamMemberInfo::set_name(const char* value, size_t size) {
   
   name_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
       ::std::string(reinterpret_cast<const char*>(value), size));
-  // @@protoc_insertion_point(field_set_pointer:NFMsg.TeammemberInfo.name)
+  // @@protoc_insertion_point(field_set_pointer:NFMsg.TeamMemberInfo.name)
 }
-inline ::std::string* TeammemberInfo::mutable_name() {
+inline ::std::string* TeamMemberInfo::mutable_name() {
   
-  // @@protoc_insertion_point(field_mutable:NFMsg.TeammemberInfo.name)
+  // @@protoc_insertion_point(field_mutable:NFMsg.TeamMemberInfo.name)
   return name_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
-inline ::std::string* TeammemberInfo::release_name() {
-  // @@protoc_insertion_point(field_release:NFMsg.TeammemberInfo.name)
+inline ::std::string* TeamMemberInfo::release_name() {
+  // @@protoc_insertion_point(field_release:NFMsg.TeamMemberInfo.name)
   
   return name_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
-inline void TeammemberInfo::set_allocated_name(::std::string* name) {
+inline void TeamMemberInfo::set_allocated_name(::std::string* name) {
   if (name != NULL) {
     
   } else {
     
   }
   name_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), name);
-  // @@protoc_insertion_point(field_set_allocated:NFMsg.TeammemberInfo.name)
+  // @@protoc_insertion_point(field_set_allocated:NFMsg.TeamMemberInfo.name)
 }
 
-// int32 nLevel = 3;
-inline void TeammemberInfo::clear_nlevel() {
-  nlevel_ = 0;
+// int32 bp = 3;
+inline void TeamMemberInfo::clear_bp() {
+  bp_ = 0;
 }
-inline ::google::protobuf::int32 TeammemberInfo::nlevel() const {
-  // @@protoc_insertion_point(field_get:NFMsg.TeammemberInfo.nLevel)
-  return nlevel_;
+inline ::google::protobuf::int32 TeamMemberInfo::bp() const {
+  // @@protoc_insertion_point(field_get:NFMsg.TeamMemberInfo.bp)
+  return bp_;
 }
-inline void TeammemberInfo::set_nlevel(::google::protobuf::int32 value) {
+inline void TeamMemberInfo::set_bp(::google::protobuf::int32 value) {
   
-  nlevel_ = value;
-  // @@protoc_insertion_point(field_set:NFMsg.TeammemberInfo.nLevel)
+  bp_ = value;
+  // @@protoc_insertion_point(field_set:NFMsg.TeamMemberInfo.bp)
 }
 
-// int32 job = 4;
-inline void TeammemberInfo::clear_job() {
-  job_ = 0;
+// int32 leader = 4;
+inline void TeamMemberInfo::clear_leader() {
+  leader_ = 0;
 }
-inline ::google::protobuf::int32 TeammemberInfo::job() const {
-  // @@protoc_insertion_point(field_get:NFMsg.TeammemberInfo.job)
-  return job_;
+inline ::google::protobuf::int32 TeamMemberInfo::leader() const {
+  // @@protoc_insertion_point(field_get:NFMsg.TeamMemberInfo.leader)
+  return leader_;
 }
-inline void TeammemberInfo::set_job(::google::protobuf::int32 value) {
+inline void TeamMemberInfo::set_leader(::google::protobuf::int32 value) {
   
-  job_ = value;
-  // @@protoc_insertion_point(field_set:NFMsg.TeammemberInfo.job)
+  leader_ = value;
+  // @@protoc_insertion_point(field_set:NFMsg.TeamMemberInfo.leader)
 }
 
-// string HeadIcon = 5;
-inline void TeammemberInfo::clear_headicon() {
-  headicon_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+// -------------------------------------------------------------------
+
+// ReqAckTeamMemberList
+
+// .NFMsg.Ident team_id = 1;
+inline bool ReqAckTeamMemberList::has_team_id() const {
+  return this != internal_default_instance() && team_id_ != NULL;
 }
-inline const ::std::string& TeammemberInfo::headicon() const {
-  // @@protoc_insertion_point(field_get:NFMsg.TeammemberInfo.HeadIcon)
-  return headicon_.GetNoArena();
+inline const ::NFMsg::Ident& ReqAckTeamMemberList::_internal_team_id() const {
+  return *team_id_;
 }
-inline void TeammemberInfo::set_headicon(const ::std::string& value) {
+inline const ::NFMsg::Ident& ReqAckTeamMemberList::team_id() const {
+  const ::NFMsg::Ident* p = team_id_;
+  // @@protoc_insertion_point(field_get:NFMsg.ReqAckTeamMemberList.team_id)
+  return p != NULL ? *p : *reinterpret_cast<const ::NFMsg::Ident*>(
+      &::NFMsg::_Ident_default_instance_);
+}
+inline ::NFMsg::Ident* ReqAckTeamMemberList::release_team_id() {
+  // @@protoc_insertion_point(field_release:NFMsg.ReqAckTeamMemberList.team_id)
   
-  headicon_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
-  // @@protoc_insertion_point(field_set:NFMsg.TeammemberInfo.HeadIcon)
+  ::NFMsg::Ident* temp = team_id_;
+  team_id_ = NULL;
+  return temp;
+}
+inline ::NFMsg::Ident* ReqAckTeamMemberList::mutable_team_id() {
+  
+  if (team_id_ == NULL) {
+    auto* p = CreateMaybeMessage<::NFMsg::Ident>(GetArenaNoVirtual());
+    team_id_ = p;
+  }
+  // @@protoc_insertion_point(field_mutable:NFMsg.ReqAckTeamMemberList.team_id)
+  return team_id_;
+}
+inline void ReqAckTeamMemberList::set_allocated_team_id(::NFMsg::Ident* team_id) {
+  ::google::protobuf::Arena* message_arena = GetArenaNoVirtual();
+  if (message_arena == NULL) {
+    delete reinterpret_cast< ::google::protobuf::MessageLite*>(team_id_);
+  }
+  if (team_id) {
+    ::google::protobuf::Arena* submessage_arena = NULL;
+    if (message_arena != submessage_arena) {
+      team_id = ::google::protobuf::internal::GetOwnedMessage(
+          message_arena, team_id, submessage_arena);
+    }
+    
+  } else {
+    
+  }
+  team_id_ = team_id;
+  // @@protoc_insertion_point(field_set_allocated:NFMsg.ReqAckTeamMemberList.team_id)
+}
+
+// repeated .NFMsg.TeamMemberInfo inviteList = 2;
+inline int ReqAckTeamMemberList::invitelist_size() const {
+  return invitelist_.size();
+}
+inline void ReqAckTeamMemberList::clear_invitelist() {
+  invitelist_.Clear();
+}
+inline ::NFMsg::TeamMemberInfo* ReqAckTeamMemberList::mutable_invitelist(int index) {
+  // @@protoc_insertion_point(field_mutable:NFMsg.ReqAckTeamMemberList.inviteList)
+  return invitelist_.Mutable(index);
+}
+inline ::google::protobuf::RepeatedPtrField< ::NFMsg::TeamMemberInfo >*
+ReqAckTeamMemberList::mutable_invitelist() {
+  // @@protoc_insertion_point(field_mutable_list:NFMsg.ReqAckTeamMemberList.inviteList)
+  return &invitelist_;
+}
+inline const ::NFMsg::TeamMemberInfo& ReqAckTeamMemberList::invitelist(int index) const {
+  // @@protoc_insertion_point(field_get:NFMsg.ReqAckTeamMemberList.inviteList)
+  return invitelist_.Get(index);
+}
+inline ::NFMsg::TeamMemberInfo* ReqAckTeamMemberList::add_invitelist() {
+  // @@protoc_insertion_point(field_add:NFMsg.ReqAckTeamMemberList.inviteList)
+  return invitelist_.Add();
+}
+inline const ::google::protobuf::RepeatedPtrField< ::NFMsg::TeamMemberInfo >&
+ReqAckTeamMemberList::invitelist() const {
+  // @@protoc_insertion_point(field_list:NFMsg.ReqAckTeamMemberList.inviteList)
+  return invitelist_;
+}
+
+// repeated .NFMsg.TeamMemberInfo memberList = 3;
+inline int ReqAckTeamMemberList::memberlist_size() const {
+  return memberlist_.size();
+}
+inline void ReqAckTeamMemberList::clear_memberlist() {
+  memberlist_.Clear();
+}
+inline ::NFMsg::TeamMemberInfo* ReqAckTeamMemberList::mutable_memberlist(int index) {
+  // @@protoc_insertion_point(field_mutable:NFMsg.ReqAckTeamMemberList.memberList)
+  return memberlist_.Mutable(index);
+}
+inline ::google::protobuf::RepeatedPtrField< ::NFMsg::TeamMemberInfo >*
+ReqAckTeamMemberList::mutable_memberlist() {
+  // @@protoc_insertion_point(field_mutable_list:NFMsg.ReqAckTeamMemberList.memberList)
+  return &memberlist_;
+}
+inline const ::NFMsg::TeamMemberInfo& ReqAckTeamMemberList::memberlist(int index) const {
+  // @@protoc_insertion_point(field_get:NFMsg.ReqAckTeamMemberList.memberList)
+  return memberlist_.Get(index);
+}
+inline ::NFMsg::TeamMemberInfo* ReqAckTeamMemberList::add_memberlist() {
+  // @@protoc_insertion_point(field_add:NFMsg.ReqAckTeamMemberList.memberList)
+  return memberlist_.Add();
+}
+inline const ::google::protobuf::RepeatedPtrField< ::NFMsg::TeamMemberInfo >&
+ReqAckTeamMemberList::memberlist() const {
+  // @@protoc_insertion_point(field_list:NFMsg.ReqAckTeamMemberList.memberList)
+  return memberlist_;
+}
+
+// -------------------------------------------------------------------
+
+// AckTeamMemberAdd
+
+// .NFMsg.Ident team_id = 1;
+inline bool AckTeamMemberAdd::has_team_id() const {
+  return this != internal_default_instance() && team_id_ != NULL;
+}
+inline const ::NFMsg::Ident& AckTeamMemberAdd::_internal_team_id() const {
+  return *team_id_;
+}
+inline const ::NFMsg::Ident& AckTeamMemberAdd::team_id() const {
+  const ::NFMsg::Ident* p = team_id_;
+  // @@protoc_insertion_point(field_get:NFMsg.AckTeamMemberAdd.team_id)
+  return p != NULL ? *p : *reinterpret_cast<const ::NFMsg::Ident*>(
+      &::NFMsg::_Ident_default_instance_);
+}
+inline ::NFMsg::Ident* AckTeamMemberAdd::release_team_id() {
+  // @@protoc_insertion_point(field_release:NFMsg.AckTeamMemberAdd.team_id)
+  
+  ::NFMsg::Ident* temp = team_id_;
+  team_id_ = NULL;
+  return temp;
+}
+inline ::NFMsg::Ident* AckTeamMemberAdd::mutable_team_id() {
+  
+  if (team_id_ == NULL) {
+    auto* p = CreateMaybeMessage<::NFMsg::Ident>(GetArenaNoVirtual());
+    team_id_ = p;
+  }
+  // @@protoc_insertion_point(field_mutable:NFMsg.AckTeamMemberAdd.team_id)
+  return team_id_;
+}
+inline void AckTeamMemberAdd::set_allocated_team_id(::NFMsg::Ident* team_id) {
+  ::google::protobuf::Arena* message_arena = GetArenaNoVirtual();
+  if (message_arena == NULL) {
+    delete reinterpret_cast< ::google::protobuf::MessageLite*>(team_id_);
+  }
+  if (team_id) {
+    ::google::protobuf::Arena* submessage_arena = NULL;
+    if (message_arena != submessage_arena) {
+      team_id = ::google::protobuf::internal::GetOwnedMessage(
+          message_arena, team_id, submessage_arena);
+    }
+    
+  } else {
+    
+  }
+  team_id_ = team_id;
+  // @@protoc_insertion_point(field_set_allocated:NFMsg.AckTeamMemberAdd.team_id)
+}
+
+// repeated .NFMsg.TeamMemberInfo member = 2;
+inline int AckTeamMemberAdd::member_size() const {
+  return member_.size();
+}
+inline void AckTeamMemberAdd::clear_member() {
+  member_.Clear();
+}
+inline ::NFMsg::TeamMemberInfo* AckTeamMemberAdd::mutable_member(int index) {
+  // @@protoc_insertion_point(field_mutable:NFMsg.AckTeamMemberAdd.member)
+  return member_.Mutable(index);
+}
+inline ::google::protobuf::RepeatedPtrField< ::NFMsg::TeamMemberInfo >*
+AckTeamMemberAdd::mutable_member() {
+  // @@protoc_insertion_point(field_mutable_list:NFMsg.AckTeamMemberAdd.member)
+  return &member_;
+}
+inline const ::NFMsg::TeamMemberInfo& AckTeamMemberAdd::member(int index) const {
+  // @@protoc_insertion_point(field_get:NFMsg.AckTeamMemberAdd.member)
+  return member_.Get(index);
+}
+inline ::NFMsg::TeamMemberInfo* AckTeamMemberAdd::add_member() {
+  // @@protoc_insertion_point(field_add:NFMsg.AckTeamMemberAdd.member)
+  return member_.Add();
+}
+inline const ::google::protobuf::RepeatedPtrField< ::NFMsg::TeamMemberInfo >&
+AckTeamMemberAdd::member() const {
+  // @@protoc_insertion_point(field_list:NFMsg.AckTeamMemberAdd.member)
+  return member_;
+}
+
+// -------------------------------------------------------------------
+
+// AckTeamMemberLeave
+
+// .NFMsg.Ident team_id = 1;
+inline bool AckTeamMemberLeave::has_team_id() const {
+  return this != internal_default_instance() && team_id_ != NULL;
+}
+inline const ::NFMsg::Ident& AckTeamMemberLeave::_internal_team_id() const {
+  return *team_id_;
+}
+inline const ::NFMsg::Ident& AckTeamMemberLeave::team_id() const {
+  const ::NFMsg::Ident* p = team_id_;
+  // @@protoc_insertion_point(field_get:NFMsg.AckTeamMemberLeave.team_id)
+  return p != NULL ? *p : *reinterpret_cast<const ::NFMsg::Ident*>(
+      &::NFMsg::_Ident_default_instance_);
+}
+inline ::NFMsg::Ident* AckTeamMemberLeave::release_team_id() {
+  // @@protoc_insertion_point(field_release:NFMsg.AckTeamMemberLeave.team_id)
+  
+  ::NFMsg::Ident* temp = team_id_;
+  team_id_ = NULL;
+  return temp;
+}
+inline ::NFMsg::Ident* AckTeamMemberLeave::mutable_team_id() {
+  
+  if (team_id_ == NULL) {
+    auto* p = CreateMaybeMessage<::NFMsg::Ident>(GetArenaNoVirtual());
+    team_id_ = p;
+  }
+  // @@protoc_insertion_point(field_mutable:NFMsg.AckTeamMemberLeave.team_id)
+  return team_id_;
+}
+inline void AckTeamMemberLeave::set_allocated_team_id(::NFMsg::Ident* team_id) {
+  ::google::protobuf::Arena* message_arena = GetArenaNoVirtual();
+  if (message_arena == NULL) {
+    delete reinterpret_cast< ::google::protobuf::MessageLite*>(team_id_);
+  }
+  if (team_id) {
+    ::google::protobuf::Arena* submessage_arena = NULL;
+    if (message_arena != submessage_arena) {
+      team_id = ::google::protobuf::internal::GetOwnedMessage(
+          message_arena, team_id, submessage_arena);
+    }
+    
+  } else {
+    
+  }
+  team_id_ = team_id;
+  // @@protoc_insertion_point(field_set_allocated:NFMsg.AckTeamMemberLeave.team_id)
+}
+
+// repeated .NFMsg.TeamMemberInfo member = 2;
+inline int AckTeamMemberLeave::member_size() const {
+  return member_.size();
+}
+inline void AckTeamMemberLeave::clear_member() {
+  member_.Clear();
+}
+inline ::NFMsg::TeamMemberInfo* AckTeamMemberLeave::mutable_member(int index) {
+  // @@protoc_insertion_point(field_mutable:NFMsg.AckTeamMemberLeave.member)
+  return member_.Mutable(index);
+}
+inline ::google::protobuf::RepeatedPtrField< ::NFMsg::TeamMemberInfo >*
+AckTeamMemberLeave::mutable_member() {
+  // @@protoc_insertion_point(field_mutable_list:NFMsg.AckTeamMemberLeave.member)
+  return &member_;
+}
+inline const ::NFMsg::TeamMemberInfo& AckTeamMemberLeave::member(int index) const {
+  // @@protoc_insertion_point(field_get:NFMsg.AckTeamMemberLeave.member)
+  return member_.Get(index);
+}
+inline ::NFMsg::TeamMemberInfo* AckTeamMemberLeave::add_member() {
+  // @@protoc_insertion_point(field_add:NFMsg.AckTeamMemberLeave.member)
+  return member_.Add();
+}
+inline const ::google::protobuf::RepeatedPtrField< ::NFMsg::TeamMemberInfo >&
+AckTeamMemberLeave::member() const {
+  // @@protoc_insertion_point(field_list:NFMsg.AckTeamMemberLeave.member)
+  return member_;
+}
+
+// -------------------------------------------------------------------
+
+// ReqInviteToTeam
+
+// .NFMsg.Ident stranger = 1;
+inline bool ReqInviteToTeam::has_stranger() const {
+  return this != internal_default_instance() && stranger_ != NULL;
+}
+inline const ::NFMsg::Ident& ReqInviteToTeam::_internal_stranger() const {
+  return *stranger_;
+}
+inline const ::NFMsg::Ident& ReqInviteToTeam::stranger() const {
+  const ::NFMsg::Ident* p = stranger_;
+  // @@protoc_insertion_point(field_get:NFMsg.ReqInviteToTeam.stranger)
+  return p != NULL ? *p : *reinterpret_cast<const ::NFMsg::Ident*>(
+      &::NFMsg::_Ident_default_instance_);
+}
+inline ::NFMsg::Ident* ReqInviteToTeam::release_stranger() {
+  // @@protoc_insertion_point(field_release:NFMsg.ReqInviteToTeam.stranger)
+  
+  ::NFMsg::Ident* temp = stranger_;
+  stranger_ = NULL;
+  return temp;
+}
+inline ::NFMsg::Ident* ReqInviteToTeam::mutable_stranger() {
+  
+  if (stranger_ == NULL) {
+    auto* p = CreateMaybeMessage<::NFMsg::Ident>(GetArenaNoVirtual());
+    stranger_ = p;
+  }
+  // @@protoc_insertion_point(field_mutable:NFMsg.ReqInviteToTeam.stranger)
+  return stranger_;
+}
+inline void ReqInviteToTeam::set_allocated_stranger(::NFMsg::Ident* stranger) {
+  ::google::protobuf::Arena* message_arena = GetArenaNoVirtual();
+  if (message_arena == NULL) {
+    delete reinterpret_cast< ::google::protobuf::MessageLite*>(stranger_);
+  }
+  if (stranger) {
+    ::google::protobuf::Arena* submessage_arena = NULL;
+    if (message_arena != submessage_arena) {
+      stranger = ::google::protobuf::internal::GetOwnedMessage(
+          message_arena, stranger, submessage_arena);
+    }
+    
+  } else {
+    
+  }
+  stranger_ = stranger;
+  // @@protoc_insertion_point(field_set_allocated:NFMsg.ReqInviteToTeam.stranger)
+}
+
+// -------------------------------------------------------------------
+
+// AckInviteToTeam
+
+// .NFMsg.Ident team_id = 1;
+inline bool AckInviteToTeam::has_team_id() const {
+  return this != internal_default_instance() && team_id_ != NULL;
+}
+inline const ::NFMsg::Ident& AckInviteToTeam::_internal_team_id() const {
+  return *team_id_;
+}
+inline const ::NFMsg::Ident& AckInviteToTeam::team_id() const {
+  const ::NFMsg::Ident* p = team_id_;
+  // @@protoc_insertion_point(field_get:NFMsg.AckInviteToTeam.team_id)
+  return p != NULL ? *p : *reinterpret_cast<const ::NFMsg::Ident*>(
+      &::NFMsg::_Ident_default_instance_);
+}
+inline ::NFMsg::Ident* AckInviteToTeam::release_team_id() {
+  // @@protoc_insertion_point(field_release:NFMsg.AckInviteToTeam.team_id)
+  
+  ::NFMsg::Ident* temp = team_id_;
+  team_id_ = NULL;
+  return temp;
+}
+inline ::NFMsg::Ident* AckInviteToTeam::mutable_team_id() {
+  
+  if (team_id_ == NULL) {
+    auto* p = CreateMaybeMessage<::NFMsg::Ident>(GetArenaNoVirtual());
+    team_id_ = p;
+  }
+  // @@protoc_insertion_point(field_mutable:NFMsg.AckInviteToTeam.team_id)
+  return team_id_;
+}
+inline void AckInviteToTeam::set_allocated_team_id(::NFMsg::Ident* team_id) {
+  ::google::protobuf::Arena* message_arena = GetArenaNoVirtual();
+  if (message_arena == NULL) {
+    delete reinterpret_cast< ::google::protobuf::MessageLite*>(team_id_);
+  }
+  if (team_id) {
+    ::google::protobuf::Arena* submessage_arena = NULL;
+    if (message_arena != submessage_arena) {
+      team_id = ::google::protobuf::internal::GetOwnedMessage(
+          message_arena, team_id, submessage_arena);
+    }
+    
+  } else {
+    
+  }
+  team_id_ = team_id;
+  // @@protoc_insertion_point(field_set_allocated:NFMsg.AckInviteToTeam.team_id)
+}
+
+// .NFMsg.Ident inviter = 2;
+inline bool AckInviteToTeam::has_inviter() const {
+  return this != internal_default_instance() && inviter_ != NULL;
+}
+inline const ::NFMsg::Ident& AckInviteToTeam::_internal_inviter() const {
+  return *inviter_;
+}
+inline const ::NFMsg::Ident& AckInviteToTeam::inviter() const {
+  const ::NFMsg::Ident* p = inviter_;
+  // @@protoc_insertion_point(field_get:NFMsg.AckInviteToTeam.inviter)
+  return p != NULL ? *p : *reinterpret_cast<const ::NFMsg::Ident*>(
+      &::NFMsg::_Ident_default_instance_);
+}
+inline ::NFMsg::Ident* AckInviteToTeam::release_inviter() {
+  // @@protoc_insertion_point(field_release:NFMsg.AckInviteToTeam.inviter)
+  
+  ::NFMsg::Ident* temp = inviter_;
+  inviter_ = NULL;
+  return temp;
+}
+inline ::NFMsg::Ident* AckInviteToTeam::mutable_inviter() {
+  
+  if (inviter_ == NULL) {
+    auto* p = CreateMaybeMessage<::NFMsg::Ident>(GetArenaNoVirtual());
+    inviter_ = p;
+  }
+  // @@protoc_insertion_point(field_mutable:NFMsg.AckInviteToTeam.inviter)
+  return inviter_;
+}
+inline void AckInviteToTeam::set_allocated_inviter(::NFMsg::Ident* inviter) {
+  ::google::protobuf::Arena* message_arena = GetArenaNoVirtual();
+  if (message_arena == NULL) {
+    delete reinterpret_cast< ::google::protobuf::MessageLite*>(inviter_);
+  }
+  if (inviter) {
+    ::google::protobuf::Arena* submessage_arena = NULL;
+    if (message_arena != submessage_arena) {
+      inviter = ::google::protobuf::internal::GetOwnedMessage(
+          message_arena, inviter, submessage_arena);
+    }
+    
+  } else {
+    
+  }
+  inviter_ = inviter;
+  // @@protoc_insertion_point(field_set_allocated:NFMsg.AckInviteToTeam.inviter)
+}
+
+// string name = 3;
+inline void AckInviteToTeam::clear_name() {
+  name_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline const ::std::string& AckInviteToTeam::name() const {
+  // @@protoc_insertion_point(field_get:NFMsg.AckInviteToTeam.name)
+  return name_.GetNoArena();
+}
+inline void AckInviteToTeam::set_name(const ::std::string& value) {
+  
+  name_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
+  // @@protoc_insertion_point(field_set:NFMsg.AckInviteToTeam.name)
 }
 #if LANG_CXX11
-inline void TeammemberInfo::set_headicon(::std::string&& value) {
+inline void AckInviteToTeam::set_name(::std::string&& value) {
   
-  headicon_.SetNoArena(
+  name_.SetNoArena(
     &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
-  // @@protoc_insertion_point(field_set_rvalue:NFMsg.TeammemberInfo.HeadIcon)
+  // @@protoc_insertion_point(field_set_rvalue:NFMsg.AckInviteToTeam.name)
 }
 #endif
-inline void TeammemberInfo::set_headicon(const char* value) {
+inline void AckInviteToTeam::set_name(const char* value) {
   GOOGLE_DCHECK(value != NULL);
   
-  headicon_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
-  // @@protoc_insertion_point(field_set_char:NFMsg.TeammemberInfo.HeadIcon)
+  name_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:NFMsg.AckInviteToTeam.name)
 }
-inline void TeammemberInfo::set_headicon(const char* value, size_t size) {
+inline void AckInviteToTeam::set_name(const char* value, size_t size) {
   
-  headicon_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+  name_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
       ::std::string(reinterpret_cast<const char*>(value), size));
-  // @@protoc_insertion_point(field_set_pointer:NFMsg.TeammemberInfo.HeadIcon)
+  // @@protoc_insertion_point(field_set_pointer:NFMsg.AckInviteToTeam.name)
 }
-inline ::std::string* TeammemberInfo::mutable_headicon() {
+inline ::std::string* AckInviteToTeam::mutable_name() {
   
-  // @@protoc_insertion_point(field_mutable:NFMsg.TeammemberInfo.HeadIcon)
-  return headicon_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  // @@protoc_insertion_point(field_mutable:NFMsg.AckInviteToTeam.name)
+  return name_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
-inline ::std::string* TeammemberInfo::release_headicon() {
-  // @@protoc_insertion_point(field_release:NFMsg.TeammemberInfo.HeadIcon)
+inline ::std::string* AckInviteToTeam::release_name() {
+  // @@protoc_insertion_point(field_release:NFMsg.AckInviteToTeam.name)
   
-  return headicon_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  return name_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
-inline void TeammemberInfo::set_allocated_headicon(::std::string* headicon) {
-  if (headicon != NULL) {
+inline void AckInviteToTeam::set_allocated_name(::std::string* name) {
+  if (name != NULL) {
     
   } else {
     
   }
-  headicon_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), headicon);
-  // @@protoc_insertion_point(field_set_allocated:NFMsg.TeammemberInfo.HeadIcon)
+  name_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), name);
+  // @@protoc_insertion_point(field_set_allocated:NFMsg.AckInviteToTeam.name)
+}
+
+// .NFMsg.Ident stranger = 4;
+inline bool AckInviteToTeam::has_stranger() const {
+  return this != internal_default_instance() && stranger_ != NULL;
+}
+inline const ::NFMsg::Ident& AckInviteToTeam::_internal_stranger() const {
+  return *stranger_;
+}
+inline const ::NFMsg::Ident& AckInviteToTeam::stranger() const {
+  const ::NFMsg::Ident* p = stranger_;
+  // @@protoc_insertion_point(field_get:NFMsg.AckInviteToTeam.stranger)
+  return p != NULL ? *p : *reinterpret_cast<const ::NFMsg::Ident*>(
+      &::NFMsg::_Ident_default_instance_);
+}
+inline ::NFMsg::Ident* AckInviteToTeam::release_stranger() {
+  // @@protoc_insertion_point(field_release:NFMsg.AckInviteToTeam.stranger)
+  
+  ::NFMsg::Ident* temp = stranger_;
+  stranger_ = NULL;
+  return temp;
+}
+inline ::NFMsg::Ident* AckInviteToTeam::mutable_stranger() {
+  
+  if (stranger_ == NULL) {
+    auto* p = CreateMaybeMessage<::NFMsg::Ident>(GetArenaNoVirtual());
+    stranger_ = p;
+  }
+  // @@protoc_insertion_point(field_mutable:NFMsg.AckInviteToTeam.stranger)
+  return stranger_;
+}
+inline void AckInviteToTeam::set_allocated_stranger(::NFMsg::Ident* stranger) {
+  ::google::protobuf::Arena* message_arena = GetArenaNoVirtual();
+  if (message_arena == NULL) {
+    delete reinterpret_cast< ::google::protobuf::MessageLite*>(stranger_);
+  }
+  if (stranger) {
+    ::google::protobuf::Arena* submessage_arena = NULL;
+    if (message_arena != submessage_arena) {
+      stranger = ::google::protobuf::internal::GetOwnedMessage(
+          message_arena, stranger, submessage_arena);
+    }
+    
+  } else {
+    
+  }
+  stranger_ = stranger;
+  // @@protoc_insertion_point(field_set_allocated:NFMsg.AckInviteToTeam.stranger)
 }
 
 // -------------------------------------------------------------------
 
-// TeamInfo
+// ReqAckAcceptTeamInvite
 
 // .NFMsg.Ident team_id = 1;
-inline bool TeamInfo::has_team_id() const {
+inline bool ReqAckAcceptTeamInvite::has_team_id() const {
   return this != internal_default_instance() && team_id_ != NULL;
 }
-inline const ::NFMsg::Ident& TeamInfo::_internal_team_id() const {
+inline const ::NFMsg::Ident& ReqAckAcceptTeamInvite::_internal_team_id() const {
   return *team_id_;
 }
-inline const ::NFMsg::Ident& TeamInfo::team_id() const {
+inline const ::NFMsg::Ident& ReqAckAcceptTeamInvite::team_id() const {
   const ::NFMsg::Ident* p = team_id_;
-  // @@protoc_insertion_point(field_get:NFMsg.TeamInfo.team_id)
+  // @@protoc_insertion_point(field_get:NFMsg.ReqAckAcceptTeamInvite.team_id)
   return p != NULL ? *p : *reinterpret_cast<const ::NFMsg::Ident*>(
       &::NFMsg::_Ident_default_instance_);
 }
-inline ::NFMsg::Ident* TeamInfo::release_team_id() {
-  // @@protoc_insertion_point(field_release:NFMsg.TeamInfo.team_id)
+inline ::NFMsg::Ident* ReqAckAcceptTeamInvite::release_team_id() {
+  // @@protoc_insertion_point(field_release:NFMsg.ReqAckAcceptTeamInvite.team_id)
   
   ::NFMsg::Ident* temp = team_id_;
   team_id_ = NULL;
   return temp;
 }
-inline ::NFMsg::Ident* TeamInfo::mutable_team_id() {
+inline ::NFMsg::Ident* ReqAckAcceptTeamInvite::mutable_team_id() {
   
   if (team_id_ == NULL) {
     auto* p = CreateMaybeMessage<::NFMsg::Ident>(GetArenaNoVirtual());
     team_id_ = p;
   }
-  // @@protoc_insertion_point(field_mutable:NFMsg.TeamInfo.team_id)
+  // @@protoc_insertion_point(field_mutable:NFMsg.ReqAckAcceptTeamInvite.team_id)
   return team_id_;
 }
-inline void TeamInfo::set_allocated_team_id(::NFMsg::Ident* team_id) {
+inline void ReqAckAcceptTeamInvite::set_allocated_team_id(::NFMsg::Ident* team_id) {
   ::google::protobuf::Arena* message_arena = GetArenaNoVirtual();
   if (message_arena == NULL) {
     delete reinterpret_cast< ::google::protobuf::MessageLite*>(team_id_);
@@ -1625,121 +1798,43 @@ inline void TeamInfo::set_allocated_team_id(::NFMsg::Ident* team_id) {
     
   }
   team_id_ = team_id;
-  // @@protoc_insertion_point(field_set_allocated:NFMsg.TeamInfo.team_id)
-}
-
-// .NFMsg.Ident captain_id = 2;
-inline bool TeamInfo::has_captain_id() const {
-  return this != internal_default_instance() && captain_id_ != NULL;
-}
-inline const ::NFMsg::Ident& TeamInfo::_internal_captain_id() const {
-  return *captain_id_;
-}
-inline const ::NFMsg::Ident& TeamInfo::captain_id() const {
-  const ::NFMsg::Ident* p = captain_id_;
-  // @@protoc_insertion_point(field_get:NFMsg.TeamInfo.captain_id)
-  return p != NULL ? *p : *reinterpret_cast<const ::NFMsg::Ident*>(
-      &::NFMsg::_Ident_default_instance_);
-}
-inline ::NFMsg::Ident* TeamInfo::release_captain_id() {
-  // @@protoc_insertion_point(field_release:NFMsg.TeamInfo.captain_id)
-  
-  ::NFMsg::Ident* temp = captain_id_;
-  captain_id_ = NULL;
-  return temp;
-}
-inline ::NFMsg::Ident* TeamInfo::mutable_captain_id() {
-  
-  if (captain_id_ == NULL) {
-    auto* p = CreateMaybeMessage<::NFMsg::Ident>(GetArenaNoVirtual());
-    captain_id_ = p;
-  }
-  // @@protoc_insertion_point(field_mutable:NFMsg.TeamInfo.captain_id)
-  return captain_id_;
-}
-inline void TeamInfo::set_allocated_captain_id(::NFMsg::Ident* captain_id) {
-  ::google::protobuf::Arena* message_arena = GetArenaNoVirtual();
-  if (message_arena == NULL) {
-    delete reinterpret_cast< ::google::protobuf::MessageLite*>(captain_id_);
-  }
-  if (captain_id) {
-    ::google::protobuf::Arena* submessage_arena = NULL;
-    if (message_arena != submessage_arena) {
-      captain_id = ::google::protobuf::internal::GetOwnedMessage(
-          message_arena, captain_id, submessage_arena);
-    }
-    
-  } else {
-    
-  }
-  captain_id_ = captain_id;
-  // @@protoc_insertion_point(field_set_allocated:NFMsg.TeamInfo.captain_id)
-}
-
-// repeated .NFMsg.TeammemberInfo teammemberInfo = 3;
-inline int TeamInfo::teammemberinfo_size() const {
-  return teammemberinfo_.size();
-}
-inline void TeamInfo::clear_teammemberinfo() {
-  teammemberinfo_.Clear();
-}
-inline ::NFMsg::TeammemberInfo* TeamInfo::mutable_teammemberinfo(int index) {
-  // @@protoc_insertion_point(field_mutable:NFMsg.TeamInfo.teammemberInfo)
-  return teammemberinfo_.Mutable(index);
-}
-inline ::google::protobuf::RepeatedPtrField< ::NFMsg::TeammemberInfo >*
-TeamInfo::mutable_teammemberinfo() {
-  // @@protoc_insertion_point(field_mutable_list:NFMsg.TeamInfo.teammemberInfo)
-  return &teammemberinfo_;
-}
-inline const ::NFMsg::TeammemberInfo& TeamInfo::teammemberinfo(int index) const {
-  // @@protoc_insertion_point(field_get:NFMsg.TeamInfo.teammemberInfo)
-  return teammemberinfo_.Get(index);
-}
-inline ::NFMsg::TeammemberInfo* TeamInfo::add_teammemberinfo() {
-  // @@protoc_insertion_point(field_add:NFMsg.TeamInfo.teammemberInfo)
-  return teammemberinfo_.Add();
-}
-inline const ::google::protobuf::RepeatedPtrField< ::NFMsg::TeammemberInfo >&
-TeamInfo::teammemberinfo() const {
-  // @@protoc_insertion_point(field_list:NFMsg.TeamInfo.teammemberInfo)
-  return teammemberinfo_;
+  // @@protoc_insertion_point(field_set_allocated:NFMsg.ReqAckAcceptTeamInvite.team_id)
 }
 
 // -------------------------------------------------------------------
 
-// ReqAckCreateTeam
+// ReqAckRejectTeamInvite
 
 // .NFMsg.Ident team_id = 1;
-inline bool ReqAckCreateTeam::has_team_id() const {
+inline bool ReqAckRejectTeamInvite::has_team_id() const {
   return this != internal_default_instance() && team_id_ != NULL;
 }
-inline const ::NFMsg::Ident& ReqAckCreateTeam::_internal_team_id() const {
+inline const ::NFMsg::Ident& ReqAckRejectTeamInvite::_internal_team_id() const {
   return *team_id_;
 }
-inline const ::NFMsg::Ident& ReqAckCreateTeam::team_id() const {
+inline const ::NFMsg::Ident& ReqAckRejectTeamInvite::team_id() const {
   const ::NFMsg::Ident* p = team_id_;
-  // @@protoc_insertion_point(field_get:NFMsg.ReqAckCreateTeam.team_id)
+  // @@protoc_insertion_point(field_get:NFMsg.ReqAckRejectTeamInvite.team_id)
   return p != NULL ? *p : *reinterpret_cast<const ::NFMsg::Ident*>(
       &::NFMsg::_Ident_default_instance_);
 }
-inline ::NFMsg::Ident* ReqAckCreateTeam::release_team_id() {
-  // @@protoc_insertion_point(field_release:NFMsg.ReqAckCreateTeam.team_id)
+inline ::NFMsg::Ident* ReqAckRejectTeamInvite::release_team_id() {
+  // @@protoc_insertion_point(field_release:NFMsg.ReqAckRejectTeamInvite.team_id)
   
   ::NFMsg::Ident* temp = team_id_;
   team_id_ = NULL;
   return temp;
 }
-inline ::NFMsg::Ident* ReqAckCreateTeam::mutable_team_id() {
+inline ::NFMsg::Ident* ReqAckRejectTeamInvite::mutable_team_id() {
   
   if (team_id_ == NULL) {
     auto* p = CreateMaybeMessage<::NFMsg::Ident>(GetArenaNoVirtual());
     team_id_ = p;
   }
-  // @@protoc_insertion_point(field_mutable:NFMsg.ReqAckCreateTeam.team_id)
+  // @@protoc_insertion_point(field_mutable:NFMsg.ReqAckRejectTeamInvite.team_id)
   return team_id_;
 }
-inline void ReqAckCreateTeam::set_allocated_team_id(::NFMsg::Ident* team_id) {
+inline void ReqAckRejectTeamInvite::set_allocated_team_id(::NFMsg::Ident* team_id) {
   ::google::protobuf::Arena* message_arena = GetArenaNoVirtual();
   if (message_arena == NULL) {
     delete reinterpret_cast< ::google::protobuf::MessageLite*>(team_id_);
@@ -1755,887 +1850,7 @@ inline void ReqAckCreateTeam::set_allocated_team_id(::NFMsg::Ident* team_id) {
     
   }
   team_id_ = team_id;
-  // @@protoc_insertion_point(field_set_allocated:NFMsg.ReqAckCreateTeam.team_id)
-}
-
-// .NFMsg.TeamInfo xTeamInfo = 2;
-inline bool ReqAckCreateTeam::has_xteaminfo() const {
-  return this != internal_default_instance() && xteaminfo_ != NULL;
-}
-inline void ReqAckCreateTeam::clear_xteaminfo() {
-  if (GetArenaNoVirtual() == NULL && xteaminfo_ != NULL) {
-    delete xteaminfo_;
-  }
-  xteaminfo_ = NULL;
-}
-inline const ::NFMsg::TeamInfo& ReqAckCreateTeam::_internal_xteaminfo() const {
-  return *xteaminfo_;
-}
-inline const ::NFMsg::TeamInfo& ReqAckCreateTeam::xteaminfo() const {
-  const ::NFMsg::TeamInfo* p = xteaminfo_;
-  // @@protoc_insertion_point(field_get:NFMsg.ReqAckCreateTeam.xTeamInfo)
-  return p != NULL ? *p : *reinterpret_cast<const ::NFMsg::TeamInfo*>(
-      &::NFMsg::_TeamInfo_default_instance_);
-}
-inline ::NFMsg::TeamInfo* ReqAckCreateTeam::release_xteaminfo() {
-  // @@protoc_insertion_point(field_release:NFMsg.ReqAckCreateTeam.xTeamInfo)
-  
-  ::NFMsg::TeamInfo* temp = xteaminfo_;
-  xteaminfo_ = NULL;
-  return temp;
-}
-inline ::NFMsg::TeamInfo* ReqAckCreateTeam::mutable_xteaminfo() {
-  
-  if (xteaminfo_ == NULL) {
-    auto* p = CreateMaybeMessage<::NFMsg::TeamInfo>(GetArenaNoVirtual());
-    xteaminfo_ = p;
-  }
-  // @@protoc_insertion_point(field_mutable:NFMsg.ReqAckCreateTeam.xTeamInfo)
-  return xteaminfo_;
-}
-inline void ReqAckCreateTeam::set_allocated_xteaminfo(::NFMsg::TeamInfo* xteaminfo) {
-  ::google::protobuf::Arena* message_arena = GetArenaNoVirtual();
-  if (message_arena == NULL) {
-    delete xteaminfo_;
-  }
-  if (xteaminfo) {
-    ::google::protobuf::Arena* submessage_arena = NULL;
-    if (message_arena != submessage_arena) {
-      xteaminfo = ::google::protobuf::internal::GetOwnedMessage(
-          message_arena, xteaminfo, submessage_arena);
-    }
-    
-  } else {
-    
-  }
-  xteaminfo_ = xteaminfo;
-  // @@protoc_insertion_point(field_set_allocated:NFMsg.ReqAckCreateTeam.xTeamInfo)
-}
-
-// -------------------------------------------------------------------
-
-// ReqAckJoinTeam
-
-// .NFMsg.Ident team_id = 1;
-inline bool ReqAckJoinTeam::has_team_id() const {
-  return this != internal_default_instance() && team_id_ != NULL;
-}
-inline const ::NFMsg::Ident& ReqAckJoinTeam::_internal_team_id() const {
-  return *team_id_;
-}
-inline const ::NFMsg::Ident& ReqAckJoinTeam::team_id() const {
-  const ::NFMsg::Ident* p = team_id_;
-  // @@protoc_insertion_point(field_get:NFMsg.ReqAckJoinTeam.team_id)
-  return p != NULL ? *p : *reinterpret_cast<const ::NFMsg::Ident*>(
-      &::NFMsg::_Ident_default_instance_);
-}
-inline ::NFMsg::Ident* ReqAckJoinTeam::release_team_id() {
-  // @@protoc_insertion_point(field_release:NFMsg.ReqAckJoinTeam.team_id)
-  
-  ::NFMsg::Ident* temp = team_id_;
-  team_id_ = NULL;
-  return temp;
-}
-inline ::NFMsg::Ident* ReqAckJoinTeam::mutable_team_id() {
-  
-  if (team_id_ == NULL) {
-    auto* p = CreateMaybeMessage<::NFMsg::Ident>(GetArenaNoVirtual());
-    team_id_ = p;
-  }
-  // @@protoc_insertion_point(field_mutable:NFMsg.ReqAckJoinTeam.team_id)
-  return team_id_;
-}
-inline void ReqAckJoinTeam::set_allocated_team_id(::NFMsg::Ident* team_id) {
-  ::google::protobuf::Arena* message_arena = GetArenaNoVirtual();
-  if (message_arena == NULL) {
-    delete reinterpret_cast< ::google::protobuf::MessageLite*>(team_id_);
-  }
-  if (team_id) {
-    ::google::protobuf::Arena* submessage_arena = NULL;
-    if (message_arena != submessage_arena) {
-      team_id = ::google::protobuf::internal::GetOwnedMessage(
-          message_arena, team_id, submessage_arena);
-    }
-    
-  } else {
-    
-  }
-  team_id_ = team_id;
-  // @@protoc_insertion_point(field_set_allocated:NFMsg.ReqAckJoinTeam.team_id)
-}
-
-// .NFMsg.TeamInfo xTeamInfo = 2;
-inline bool ReqAckJoinTeam::has_xteaminfo() const {
-  return this != internal_default_instance() && xteaminfo_ != NULL;
-}
-inline void ReqAckJoinTeam::clear_xteaminfo() {
-  if (GetArenaNoVirtual() == NULL && xteaminfo_ != NULL) {
-    delete xteaminfo_;
-  }
-  xteaminfo_ = NULL;
-}
-inline const ::NFMsg::TeamInfo& ReqAckJoinTeam::_internal_xteaminfo() const {
-  return *xteaminfo_;
-}
-inline const ::NFMsg::TeamInfo& ReqAckJoinTeam::xteaminfo() const {
-  const ::NFMsg::TeamInfo* p = xteaminfo_;
-  // @@protoc_insertion_point(field_get:NFMsg.ReqAckJoinTeam.xTeamInfo)
-  return p != NULL ? *p : *reinterpret_cast<const ::NFMsg::TeamInfo*>(
-      &::NFMsg::_TeamInfo_default_instance_);
-}
-inline ::NFMsg::TeamInfo* ReqAckJoinTeam::release_xteaminfo() {
-  // @@protoc_insertion_point(field_release:NFMsg.ReqAckJoinTeam.xTeamInfo)
-  
-  ::NFMsg::TeamInfo* temp = xteaminfo_;
-  xteaminfo_ = NULL;
-  return temp;
-}
-inline ::NFMsg::TeamInfo* ReqAckJoinTeam::mutable_xteaminfo() {
-  
-  if (xteaminfo_ == NULL) {
-    auto* p = CreateMaybeMessage<::NFMsg::TeamInfo>(GetArenaNoVirtual());
-    xteaminfo_ = p;
-  }
-  // @@protoc_insertion_point(field_mutable:NFMsg.ReqAckJoinTeam.xTeamInfo)
-  return xteaminfo_;
-}
-inline void ReqAckJoinTeam::set_allocated_xteaminfo(::NFMsg::TeamInfo* xteaminfo) {
-  ::google::protobuf::Arena* message_arena = GetArenaNoVirtual();
-  if (message_arena == NULL) {
-    delete xteaminfo_;
-  }
-  if (xteaminfo) {
-    ::google::protobuf::Arena* submessage_arena = NULL;
-    if (message_arena != submessage_arena) {
-      xteaminfo = ::google::protobuf::internal::GetOwnedMessage(
-          message_arena, xteaminfo, submessage_arena);
-    }
-    
-  } else {
-    
-  }
-  xteaminfo_ = xteaminfo;
-  // @@protoc_insertion_point(field_set_allocated:NFMsg.ReqAckJoinTeam.xTeamInfo)
-}
-
-// -------------------------------------------------------------------
-
-// ReqAckLeaveTeam
-
-// .NFMsg.Ident team_id = 1;
-inline bool ReqAckLeaveTeam::has_team_id() const {
-  return this != internal_default_instance() && team_id_ != NULL;
-}
-inline const ::NFMsg::Ident& ReqAckLeaveTeam::_internal_team_id() const {
-  return *team_id_;
-}
-inline const ::NFMsg::Ident& ReqAckLeaveTeam::team_id() const {
-  const ::NFMsg::Ident* p = team_id_;
-  // @@protoc_insertion_point(field_get:NFMsg.ReqAckLeaveTeam.team_id)
-  return p != NULL ? *p : *reinterpret_cast<const ::NFMsg::Ident*>(
-      &::NFMsg::_Ident_default_instance_);
-}
-inline ::NFMsg::Ident* ReqAckLeaveTeam::release_team_id() {
-  // @@protoc_insertion_point(field_release:NFMsg.ReqAckLeaveTeam.team_id)
-  
-  ::NFMsg::Ident* temp = team_id_;
-  team_id_ = NULL;
-  return temp;
-}
-inline ::NFMsg::Ident* ReqAckLeaveTeam::mutable_team_id() {
-  
-  if (team_id_ == NULL) {
-    auto* p = CreateMaybeMessage<::NFMsg::Ident>(GetArenaNoVirtual());
-    team_id_ = p;
-  }
-  // @@protoc_insertion_point(field_mutable:NFMsg.ReqAckLeaveTeam.team_id)
-  return team_id_;
-}
-inline void ReqAckLeaveTeam::set_allocated_team_id(::NFMsg::Ident* team_id) {
-  ::google::protobuf::Arena* message_arena = GetArenaNoVirtual();
-  if (message_arena == NULL) {
-    delete reinterpret_cast< ::google::protobuf::MessageLite*>(team_id_);
-  }
-  if (team_id) {
-    ::google::protobuf::Arena* submessage_arena = NULL;
-    if (message_arena != submessage_arena) {
-      team_id = ::google::protobuf::internal::GetOwnedMessage(
-          message_arena, team_id, submessage_arena);
-    }
-    
-  } else {
-    
-  }
-  team_id_ = team_id;
-  // @@protoc_insertion_point(field_set_allocated:NFMsg.ReqAckLeaveTeam.team_id)
-}
-
-// .NFMsg.TeamInfo xTeamInfo = 2;
-inline bool ReqAckLeaveTeam::has_xteaminfo() const {
-  return this != internal_default_instance() && xteaminfo_ != NULL;
-}
-inline void ReqAckLeaveTeam::clear_xteaminfo() {
-  if (GetArenaNoVirtual() == NULL && xteaminfo_ != NULL) {
-    delete xteaminfo_;
-  }
-  xteaminfo_ = NULL;
-}
-inline const ::NFMsg::TeamInfo& ReqAckLeaveTeam::_internal_xteaminfo() const {
-  return *xteaminfo_;
-}
-inline const ::NFMsg::TeamInfo& ReqAckLeaveTeam::xteaminfo() const {
-  const ::NFMsg::TeamInfo* p = xteaminfo_;
-  // @@protoc_insertion_point(field_get:NFMsg.ReqAckLeaveTeam.xTeamInfo)
-  return p != NULL ? *p : *reinterpret_cast<const ::NFMsg::TeamInfo*>(
-      &::NFMsg::_TeamInfo_default_instance_);
-}
-inline ::NFMsg::TeamInfo* ReqAckLeaveTeam::release_xteaminfo() {
-  // @@protoc_insertion_point(field_release:NFMsg.ReqAckLeaveTeam.xTeamInfo)
-  
-  ::NFMsg::TeamInfo* temp = xteaminfo_;
-  xteaminfo_ = NULL;
-  return temp;
-}
-inline ::NFMsg::TeamInfo* ReqAckLeaveTeam::mutable_xteaminfo() {
-  
-  if (xteaminfo_ == NULL) {
-    auto* p = CreateMaybeMessage<::NFMsg::TeamInfo>(GetArenaNoVirtual());
-    xteaminfo_ = p;
-  }
-  // @@protoc_insertion_point(field_mutable:NFMsg.ReqAckLeaveTeam.xTeamInfo)
-  return xteaminfo_;
-}
-inline void ReqAckLeaveTeam::set_allocated_xteaminfo(::NFMsg::TeamInfo* xteaminfo) {
-  ::google::protobuf::Arena* message_arena = GetArenaNoVirtual();
-  if (message_arena == NULL) {
-    delete xteaminfo_;
-  }
-  if (xteaminfo) {
-    ::google::protobuf::Arena* submessage_arena = NULL;
-    if (message_arena != submessage_arena) {
-      xteaminfo = ::google::protobuf::internal::GetOwnedMessage(
-          message_arena, xteaminfo, submessage_arena);
-    }
-    
-  } else {
-    
-  }
-  xteaminfo_ = xteaminfo;
-  // @@protoc_insertion_point(field_set_allocated:NFMsg.ReqAckLeaveTeam.xTeamInfo)
-}
-
-// -------------------------------------------------------------------
-
-// ReqAckOprTeamMember
-
-// .NFMsg.Ident team_id = 1;
-inline bool ReqAckOprTeamMember::has_team_id() const {
-  return this != internal_default_instance() && team_id_ != NULL;
-}
-inline const ::NFMsg::Ident& ReqAckOprTeamMember::_internal_team_id() const {
-  return *team_id_;
-}
-inline const ::NFMsg::Ident& ReqAckOprTeamMember::team_id() const {
-  const ::NFMsg::Ident* p = team_id_;
-  // @@protoc_insertion_point(field_get:NFMsg.ReqAckOprTeamMember.team_id)
-  return p != NULL ? *p : *reinterpret_cast<const ::NFMsg::Ident*>(
-      &::NFMsg::_Ident_default_instance_);
-}
-inline ::NFMsg::Ident* ReqAckOprTeamMember::release_team_id() {
-  // @@protoc_insertion_point(field_release:NFMsg.ReqAckOprTeamMember.team_id)
-  
-  ::NFMsg::Ident* temp = team_id_;
-  team_id_ = NULL;
-  return temp;
-}
-inline ::NFMsg::Ident* ReqAckOprTeamMember::mutable_team_id() {
-  
-  if (team_id_ == NULL) {
-    auto* p = CreateMaybeMessage<::NFMsg::Ident>(GetArenaNoVirtual());
-    team_id_ = p;
-  }
-  // @@protoc_insertion_point(field_mutable:NFMsg.ReqAckOprTeamMember.team_id)
-  return team_id_;
-}
-inline void ReqAckOprTeamMember::set_allocated_team_id(::NFMsg::Ident* team_id) {
-  ::google::protobuf::Arena* message_arena = GetArenaNoVirtual();
-  if (message_arena == NULL) {
-    delete reinterpret_cast< ::google::protobuf::MessageLite*>(team_id_);
-  }
-  if (team_id) {
-    ::google::protobuf::Arena* submessage_arena = NULL;
-    if (message_arena != submessage_arena) {
-      team_id = ::google::protobuf::internal::GetOwnedMessage(
-          message_arena, team_id, submessage_arena);
-    }
-    
-  } else {
-    
-  }
-  team_id_ = team_id;
-  // @@protoc_insertion_point(field_set_allocated:NFMsg.ReqAckOprTeamMember.team_id)
-}
-
-// .NFMsg.Ident member_id = 2;
-inline bool ReqAckOprTeamMember::has_member_id() const {
-  return this != internal_default_instance() && member_id_ != NULL;
-}
-inline const ::NFMsg::Ident& ReqAckOprTeamMember::_internal_member_id() const {
-  return *member_id_;
-}
-inline const ::NFMsg::Ident& ReqAckOprTeamMember::member_id() const {
-  const ::NFMsg::Ident* p = member_id_;
-  // @@protoc_insertion_point(field_get:NFMsg.ReqAckOprTeamMember.member_id)
-  return p != NULL ? *p : *reinterpret_cast<const ::NFMsg::Ident*>(
-      &::NFMsg::_Ident_default_instance_);
-}
-inline ::NFMsg::Ident* ReqAckOprTeamMember::release_member_id() {
-  // @@protoc_insertion_point(field_release:NFMsg.ReqAckOprTeamMember.member_id)
-  
-  ::NFMsg::Ident* temp = member_id_;
-  member_id_ = NULL;
-  return temp;
-}
-inline ::NFMsg::Ident* ReqAckOprTeamMember::mutable_member_id() {
-  
-  if (member_id_ == NULL) {
-    auto* p = CreateMaybeMessage<::NFMsg::Ident>(GetArenaNoVirtual());
-    member_id_ = p;
-  }
-  // @@protoc_insertion_point(field_mutable:NFMsg.ReqAckOprTeamMember.member_id)
-  return member_id_;
-}
-inline void ReqAckOprTeamMember::set_allocated_member_id(::NFMsg::Ident* member_id) {
-  ::google::protobuf::Arena* message_arena = GetArenaNoVirtual();
-  if (message_arena == NULL) {
-    delete reinterpret_cast< ::google::protobuf::MessageLite*>(member_id_);
-  }
-  if (member_id) {
-    ::google::protobuf::Arena* submessage_arena = NULL;
-    if (message_arena != submessage_arena) {
-      member_id = ::google::protobuf::internal::GetOwnedMessage(
-          message_arena, member_id, submessage_arena);
-    }
-    
-  } else {
-    
-  }
-  member_id_ = member_id;
-  // @@protoc_insertion_point(field_set_allocated:NFMsg.ReqAckOprTeamMember.member_id)
-}
-
-// .NFMsg.ReqAckOprTeamMember.EGTeamMemberOprType type = 3;
-inline void ReqAckOprTeamMember::clear_type() {
-  type_ = 0;
-}
-inline ::NFMsg::ReqAckOprTeamMember_EGTeamMemberOprType ReqAckOprTeamMember::type() const {
-  // @@protoc_insertion_point(field_get:NFMsg.ReqAckOprTeamMember.type)
-  return static_cast< ::NFMsg::ReqAckOprTeamMember_EGTeamMemberOprType >(type_);
-}
-inline void ReqAckOprTeamMember::set_type(::NFMsg::ReqAckOprTeamMember_EGTeamMemberOprType value) {
-  
-  type_ = value;
-  // @@protoc_insertion_point(field_set:NFMsg.ReqAckOprTeamMember.type)
-}
-
-// .NFMsg.TeamInfo xTeamInfo = 4;
-inline bool ReqAckOprTeamMember::has_xteaminfo() const {
-  return this != internal_default_instance() && xteaminfo_ != NULL;
-}
-inline void ReqAckOprTeamMember::clear_xteaminfo() {
-  if (GetArenaNoVirtual() == NULL && xteaminfo_ != NULL) {
-    delete xteaminfo_;
-  }
-  xteaminfo_ = NULL;
-}
-inline const ::NFMsg::TeamInfo& ReqAckOprTeamMember::_internal_xteaminfo() const {
-  return *xteaminfo_;
-}
-inline const ::NFMsg::TeamInfo& ReqAckOprTeamMember::xteaminfo() const {
-  const ::NFMsg::TeamInfo* p = xteaminfo_;
-  // @@protoc_insertion_point(field_get:NFMsg.ReqAckOprTeamMember.xTeamInfo)
-  return p != NULL ? *p : *reinterpret_cast<const ::NFMsg::TeamInfo*>(
-      &::NFMsg::_TeamInfo_default_instance_);
-}
-inline ::NFMsg::TeamInfo* ReqAckOprTeamMember::release_xteaminfo() {
-  // @@protoc_insertion_point(field_release:NFMsg.ReqAckOprTeamMember.xTeamInfo)
-  
-  ::NFMsg::TeamInfo* temp = xteaminfo_;
-  xteaminfo_ = NULL;
-  return temp;
-}
-inline ::NFMsg::TeamInfo* ReqAckOprTeamMember::mutable_xteaminfo() {
-  
-  if (xteaminfo_ == NULL) {
-    auto* p = CreateMaybeMessage<::NFMsg::TeamInfo>(GetArenaNoVirtual());
-    xteaminfo_ = p;
-  }
-  // @@protoc_insertion_point(field_mutable:NFMsg.ReqAckOprTeamMember.xTeamInfo)
-  return xteaminfo_;
-}
-inline void ReqAckOprTeamMember::set_allocated_xteaminfo(::NFMsg::TeamInfo* xteaminfo) {
-  ::google::protobuf::Arena* message_arena = GetArenaNoVirtual();
-  if (message_arena == NULL) {
-    delete xteaminfo_;
-  }
-  if (xteaminfo) {
-    ::google::protobuf::Arena* submessage_arena = NULL;
-    if (message_arena != submessage_arena) {
-      xteaminfo = ::google::protobuf::internal::GetOwnedMessage(
-          message_arena, xteaminfo, submessage_arena);
-    }
-    
-  } else {
-    
-  }
-  xteaminfo_ = xteaminfo;
-  // @@protoc_insertion_point(field_set_allocated:NFMsg.ReqAckOprTeamMember.xTeamInfo)
-}
-
-// -------------------------------------------------------------------
-
-// ReqAckInviteTeam
-
-// .NFMsg.Ident team_id = 1;
-inline bool ReqAckInviteTeam::has_team_id() const {
-  return this != internal_default_instance() && team_id_ != NULL;
-}
-inline const ::NFMsg::Ident& ReqAckInviteTeam::_internal_team_id() const {
-  return *team_id_;
-}
-inline const ::NFMsg::Ident& ReqAckInviteTeam::team_id() const {
-  const ::NFMsg::Ident* p = team_id_;
-  // @@protoc_insertion_point(field_get:NFMsg.ReqAckInviteTeam.team_id)
-  return p != NULL ? *p : *reinterpret_cast<const ::NFMsg::Ident*>(
-      &::NFMsg::_Ident_default_instance_);
-}
-inline ::NFMsg::Ident* ReqAckInviteTeam::release_team_id() {
-  // @@protoc_insertion_point(field_release:NFMsg.ReqAckInviteTeam.team_id)
-  
-  ::NFMsg::Ident* temp = team_id_;
-  team_id_ = NULL;
-  return temp;
-}
-inline ::NFMsg::Ident* ReqAckInviteTeam::mutable_team_id() {
-  
-  if (team_id_ == NULL) {
-    auto* p = CreateMaybeMessage<::NFMsg::Ident>(GetArenaNoVirtual());
-    team_id_ = p;
-  }
-  // @@protoc_insertion_point(field_mutable:NFMsg.ReqAckInviteTeam.team_id)
-  return team_id_;
-}
-inline void ReqAckInviteTeam::set_allocated_team_id(::NFMsg::Ident* team_id) {
-  ::google::protobuf::Arena* message_arena = GetArenaNoVirtual();
-  if (message_arena == NULL) {
-    delete reinterpret_cast< ::google::protobuf::MessageLite*>(team_id_);
-  }
-  if (team_id) {
-    ::google::protobuf::Arena* submessage_arena = NULL;
-    if (message_arena != submessage_arena) {
-      team_id = ::google::protobuf::internal::GetOwnedMessage(
-          message_arena, team_id, submessage_arena);
-    }
-    
-  } else {
-    
-  }
-  team_id_ = team_id;
-  // @@protoc_insertion_point(field_set_allocated:NFMsg.ReqAckInviteTeam.team_id)
-}
-
-// .NFMsg.Ident self_id = 2;
-inline bool ReqAckInviteTeam::has_self_id() const {
-  return this != internal_default_instance() && self_id_ != NULL;
-}
-inline const ::NFMsg::Ident& ReqAckInviteTeam::_internal_self_id() const {
-  return *self_id_;
-}
-inline const ::NFMsg::Ident& ReqAckInviteTeam::self_id() const {
-  const ::NFMsg::Ident* p = self_id_;
-  // @@protoc_insertion_point(field_get:NFMsg.ReqAckInviteTeam.self_id)
-  return p != NULL ? *p : *reinterpret_cast<const ::NFMsg::Ident*>(
-      &::NFMsg::_Ident_default_instance_);
-}
-inline ::NFMsg::Ident* ReqAckInviteTeam::release_self_id() {
-  // @@protoc_insertion_point(field_release:NFMsg.ReqAckInviteTeam.self_id)
-  
-  ::NFMsg::Ident* temp = self_id_;
-  self_id_ = NULL;
-  return temp;
-}
-inline ::NFMsg::Ident* ReqAckInviteTeam::mutable_self_id() {
-  
-  if (self_id_ == NULL) {
-    auto* p = CreateMaybeMessage<::NFMsg::Ident>(GetArenaNoVirtual());
-    self_id_ = p;
-  }
-  // @@protoc_insertion_point(field_mutable:NFMsg.ReqAckInviteTeam.self_id)
-  return self_id_;
-}
-inline void ReqAckInviteTeam::set_allocated_self_id(::NFMsg::Ident* self_id) {
-  ::google::protobuf::Arena* message_arena = GetArenaNoVirtual();
-  if (message_arena == NULL) {
-    delete reinterpret_cast< ::google::protobuf::MessageLite*>(self_id_);
-  }
-  if (self_id) {
-    ::google::protobuf::Arena* submessage_arena = NULL;
-    if (message_arena != submessage_arena) {
-      self_id = ::google::protobuf::internal::GetOwnedMessage(
-          message_arena, self_id, submessage_arena);
-    }
-    
-  } else {
-    
-  }
-  self_id_ = self_id;
-  // @@protoc_insertion_point(field_set_allocated:NFMsg.ReqAckInviteTeam.self_id)
-}
-
-// .NFMsg.Ident invite_target_id = 3;
-inline bool ReqAckInviteTeam::has_invite_target_id() const {
-  return this != internal_default_instance() && invite_target_id_ != NULL;
-}
-inline const ::NFMsg::Ident& ReqAckInviteTeam::_internal_invite_target_id() const {
-  return *invite_target_id_;
-}
-inline const ::NFMsg::Ident& ReqAckInviteTeam::invite_target_id() const {
-  const ::NFMsg::Ident* p = invite_target_id_;
-  // @@protoc_insertion_point(field_get:NFMsg.ReqAckInviteTeam.invite_target_id)
-  return p != NULL ? *p : *reinterpret_cast<const ::NFMsg::Ident*>(
-      &::NFMsg::_Ident_default_instance_);
-}
-inline ::NFMsg::Ident* ReqAckInviteTeam::release_invite_target_id() {
-  // @@protoc_insertion_point(field_release:NFMsg.ReqAckInviteTeam.invite_target_id)
-  
-  ::NFMsg::Ident* temp = invite_target_id_;
-  invite_target_id_ = NULL;
-  return temp;
-}
-inline ::NFMsg::Ident* ReqAckInviteTeam::mutable_invite_target_id() {
-  
-  if (invite_target_id_ == NULL) {
-    auto* p = CreateMaybeMessage<::NFMsg::Ident>(GetArenaNoVirtual());
-    invite_target_id_ = p;
-  }
-  // @@protoc_insertion_point(field_mutable:NFMsg.ReqAckInviteTeam.invite_target_id)
-  return invite_target_id_;
-}
-inline void ReqAckInviteTeam::set_allocated_invite_target_id(::NFMsg::Ident* invite_target_id) {
-  ::google::protobuf::Arena* message_arena = GetArenaNoVirtual();
-  if (message_arena == NULL) {
-    delete reinterpret_cast< ::google::protobuf::MessageLite*>(invite_target_id_);
-  }
-  if (invite_target_id) {
-    ::google::protobuf::Arena* submessage_arena = NULL;
-    if (message_arena != submessage_arena) {
-      invite_target_id = ::google::protobuf::internal::GetOwnedMessage(
-          message_arena, invite_target_id, submessage_arena);
-    }
-    
-  } else {
-    
-  }
-  invite_target_id_ = invite_target_id;
-  // @@protoc_insertion_point(field_set_allocated:NFMsg.ReqAckInviteTeam.invite_target_id)
-}
-
-// -------------------------------------------------------------------
-
-// ReqTeamEnterEctype
-
-// .NFMsg.Ident team_id = 1;
-inline bool ReqTeamEnterEctype::has_team_id() const {
-  return this != internal_default_instance() && team_id_ != NULL;
-}
-inline const ::NFMsg::Ident& ReqTeamEnterEctype::_internal_team_id() const {
-  return *team_id_;
-}
-inline const ::NFMsg::Ident& ReqTeamEnterEctype::team_id() const {
-  const ::NFMsg::Ident* p = team_id_;
-  // @@protoc_insertion_point(field_get:NFMsg.ReqTeamEnterEctype.team_id)
-  return p != NULL ? *p : *reinterpret_cast<const ::NFMsg::Ident*>(
-      &::NFMsg::_Ident_default_instance_);
-}
-inline ::NFMsg::Ident* ReqTeamEnterEctype::release_team_id() {
-  // @@protoc_insertion_point(field_release:NFMsg.ReqTeamEnterEctype.team_id)
-  
-  ::NFMsg::Ident* temp = team_id_;
-  team_id_ = NULL;
-  return temp;
-}
-inline ::NFMsg::Ident* ReqTeamEnterEctype::mutable_team_id() {
-  
-  if (team_id_ == NULL) {
-    auto* p = CreateMaybeMessage<::NFMsg::Ident>(GetArenaNoVirtual());
-    team_id_ = p;
-  }
-  // @@protoc_insertion_point(field_mutable:NFMsg.ReqTeamEnterEctype.team_id)
-  return team_id_;
-}
-inline void ReqTeamEnterEctype::set_allocated_team_id(::NFMsg::Ident* team_id) {
-  ::google::protobuf::Arena* message_arena = GetArenaNoVirtual();
-  if (message_arena == NULL) {
-    delete reinterpret_cast< ::google::protobuf::MessageLite*>(team_id_);
-  }
-  if (team_id) {
-    ::google::protobuf::Arena* submessage_arena = NULL;
-    if (message_arena != submessage_arena) {
-      team_id = ::google::protobuf::internal::GetOwnedMessage(
-          message_arena, team_id, submessage_arena);
-    }
-    
-  } else {
-    
-  }
-  team_id_ = team_id;
-  // @@protoc_insertion_point(field_set_allocated:NFMsg.ReqTeamEnterEctype.team_id)
-}
-
-// .NFMsg.Ident self_id = 2;
-inline bool ReqTeamEnterEctype::has_self_id() const {
-  return this != internal_default_instance() && self_id_ != NULL;
-}
-inline const ::NFMsg::Ident& ReqTeamEnterEctype::_internal_self_id() const {
-  return *self_id_;
-}
-inline const ::NFMsg::Ident& ReqTeamEnterEctype::self_id() const {
-  const ::NFMsg::Ident* p = self_id_;
-  // @@protoc_insertion_point(field_get:NFMsg.ReqTeamEnterEctype.self_id)
-  return p != NULL ? *p : *reinterpret_cast<const ::NFMsg::Ident*>(
-      &::NFMsg::_Ident_default_instance_);
-}
-inline ::NFMsg::Ident* ReqTeamEnterEctype::release_self_id() {
-  // @@protoc_insertion_point(field_release:NFMsg.ReqTeamEnterEctype.self_id)
-  
-  ::NFMsg::Ident* temp = self_id_;
-  self_id_ = NULL;
-  return temp;
-}
-inline ::NFMsg::Ident* ReqTeamEnterEctype::mutable_self_id() {
-  
-  if (self_id_ == NULL) {
-    auto* p = CreateMaybeMessage<::NFMsg::Ident>(GetArenaNoVirtual());
-    self_id_ = p;
-  }
-  // @@protoc_insertion_point(field_mutable:NFMsg.ReqTeamEnterEctype.self_id)
-  return self_id_;
-}
-inline void ReqTeamEnterEctype::set_allocated_self_id(::NFMsg::Ident* self_id) {
-  ::google::protobuf::Arena* message_arena = GetArenaNoVirtual();
-  if (message_arena == NULL) {
-    delete reinterpret_cast< ::google::protobuf::MessageLite*>(self_id_);
-  }
-  if (self_id) {
-    ::google::protobuf::Arena* submessage_arena = NULL;
-    if (message_arena != submessage_arena) {
-      self_id = ::google::protobuf::internal::GetOwnedMessage(
-          message_arena, self_id, submessage_arena);
-    }
-    
-  } else {
-    
-  }
-  self_id_ = self_id;
-  // @@protoc_insertion_point(field_set_allocated:NFMsg.ReqTeamEnterEctype.self_id)
-}
-
-// int32 nEctypeID = 3;
-inline void ReqTeamEnterEctype::clear_nectypeid() {
-  nectypeid_ = 0;
-}
-inline ::google::protobuf::int32 ReqTeamEnterEctype::nectypeid() const {
-  // @@protoc_insertion_point(field_get:NFMsg.ReqTeamEnterEctype.nEctypeID)
-  return nectypeid_;
-}
-inline void ReqTeamEnterEctype::set_nectypeid(::google::protobuf::int32 value) {
-  
-  nectypeid_ = value;
-  // @@protoc_insertion_point(field_set:NFMsg.ReqTeamEnterEctype.nEctypeID)
-}
-
-// int32 nGroupID = 4;
-inline void ReqTeamEnterEctype::clear_ngroupid() {
-  ngroupid_ = 0;
-}
-inline ::google::protobuf::int32 ReqTeamEnterEctype::ngroupid() const {
-  // @@protoc_insertion_point(field_get:NFMsg.ReqTeamEnterEctype.nGroupID)
-  return ngroupid_;
-}
-inline void ReqTeamEnterEctype::set_ngroupid(::google::protobuf::int32 value) {
-  
-  ngroupid_ = value;
-  // @@protoc_insertion_point(field_set:NFMsg.ReqTeamEnterEctype.nGroupID)
-}
-
-// int32 nResult = 5;
-inline void ReqTeamEnterEctype::clear_nresult() {
-  nresult_ = 0;
-}
-inline ::google::protobuf::int32 ReqTeamEnterEctype::nresult() const {
-  // @@protoc_insertion_point(field_get:NFMsg.ReqTeamEnterEctype.nResult)
-  return nresult_;
-}
-inline void ReqTeamEnterEctype::set_nresult(::google::protobuf::int32 value) {
-  
-  nresult_ = value;
-  // @@protoc_insertion_point(field_set:NFMsg.ReqTeamEnterEctype.nResult)
-}
-
-// int32 nServerID = 6;
-inline void ReqTeamEnterEctype::clear_nserverid() {
-  nserverid_ = 0;
-}
-inline ::google::protobuf::int32 ReqTeamEnterEctype::nserverid() const {
-  // @@protoc_insertion_point(field_get:NFMsg.ReqTeamEnterEctype.nServerID)
-  return nserverid_;
-}
-inline void ReqTeamEnterEctype::set_nserverid(::google::protobuf::int32 value) {
-  
-  nserverid_ = value;
-  // @@protoc_insertion_point(field_set:NFMsg.ReqTeamEnterEctype.nServerID)
-}
-
-// -------------------------------------------------------------------
-
-// AckTeamEnterEctype
-
-// .NFMsg.Ident team_id = 1;
-inline bool AckTeamEnterEctype::has_team_id() const {
-  return this != internal_default_instance() && team_id_ != NULL;
-}
-inline const ::NFMsg::Ident& AckTeamEnterEctype::_internal_team_id() const {
-  return *team_id_;
-}
-inline const ::NFMsg::Ident& AckTeamEnterEctype::team_id() const {
-  const ::NFMsg::Ident* p = team_id_;
-  // @@protoc_insertion_point(field_get:NFMsg.AckTeamEnterEctype.team_id)
-  return p != NULL ? *p : *reinterpret_cast<const ::NFMsg::Ident*>(
-      &::NFMsg::_Ident_default_instance_);
-}
-inline ::NFMsg::Ident* AckTeamEnterEctype::release_team_id() {
-  // @@protoc_insertion_point(field_release:NFMsg.AckTeamEnterEctype.team_id)
-  
-  ::NFMsg::Ident* temp = team_id_;
-  team_id_ = NULL;
-  return temp;
-}
-inline ::NFMsg::Ident* AckTeamEnterEctype::mutable_team_id() {
-  
-  if (team_id_ == NULL) {
-    auto* p = CreateMaybeMessage<::NFMsg::Ident>(GetArenaNoVirtual());
-    team_id_ = p;
-  }
-  // @@protoc_insertion_point(field_mutable:NFMsg.AckTeamEnterEctype.team_id)
-  return team_id_;
-}
-inline void AckTeamEnterEctype::set_allocated_team_id(::NFMsg::Ident* team_id) {
-  ::google::protobuf::Arena* message_arena = GetArenaNoVirtual();
-  if (message_arena == NULL) {
-    delete reinterpret_cast< ::google::protobuf::MessageLite*>(team_id_);
-  }
-  if (team_id) {
-    ::google::protobuf::Arena* submessage_arena = NULL;
-    if (message_arena != submessage_arena) {
-      team_id = ::google::protobuf::internal::GetOwnedMessage(
-          message_arena, team_id, submessage_arena);
-    }
-    
-  } else {
-    
-  }
-  team_id_ = team_id;
-  // @@protoc_insertion_point(field_set_allocated:NFMsg.AckTeamEnterEctype.team_id)
-}
-
-// .NFMsg.Ident self_id = 2;
-inline bool AckTeamEnterEctype::has_self_id() const {
-  return this != internal_default_instance() && self_id_ != NULL;
-}
-inline const ::NFMsg::Ident& AckTeamEnterEctype::_internal_self_id() const {
-  return *self_id_;
-}
-inline const ::NFMsg::Ident& AckTeamEnterEctype::self_id() const {
-  const ::NFMsg::Ident* p = self_id_;
-  // @@protoc_insertion_point(field_get:NFMsg.AckTeamEnterEctype.self_id)
-  return p != NULL ? *p : *reinterpret_cast<const ::NFMsg::Ident*>(
-      &::NFMsg::_Ident_default_instance_);
-}
-inline ::NFMsg::Ident* AckTeamEnterEctype::release_self_id() {
-  // @@protoc_insertion_point(field_release:NFMsg.AckTeamEnterEctype.self_id)
-  
-  ::NFMsg::Ident* temp = self_id_;
-  self_id_ = NULL;
-  return temp;
-}
-inline ::NFMsg::Ident* AckTeamEnterEctype::mutable_self_id() {
-  
-  if (self_id_ == NULL) {
-    auto* p = CreateMaybeMessage<::NFMsg::Ident>(GetArenaNoVirtual());
-    self_id_ = p;
-  }
-  // @@protoc_insertion_point(field_mutable:NFMsg.AckTeamEnterEctype.self_id)
-  return self_id_;
-}
-inline void AckTeamEnterEctype::set_allocated_self_id(::NFMsg::Ident* self_id) {
-  ::google::protobuf::Arena* message_arena = GetArenaNoVirtual();
-  if (message_arena == NULL) {
-    delete reinterpret_cast< ::google::protobuf::MessageLite*>(self_id_);
-  }
-  if (self_id) {
-    ::google::protobuf::Arena* submessage_arena = NULL;
-    if (message_arena != submessage_arena) {
-      self_id = ::google::protobuf::internal::GetOwnedMessage(
-          message_arena, self_id, submessage_arena);
-    }
-    
-  } else {
-    
-  }
-  self_id_ = self_id;
-  // @@protoc_insertion_point(field_set_allocated:NFMsg.AckTeamEnterEctype.self_id)
-}
-
-// int32 nEctypeID = 3;
-inline void AckTeamEnterEctype::clear_nectypeid() {
-  nectypeid_ = 0;
-}
-inline ::google::protobuf::int32 AckTeamEnterEctype::nectypeid() const {
-  // @@protoc_insertion_point(field_get:NFMsg.AckTeamEnterEctype.nEctypeID)
-  return nectypeid_;
-}
-inline void AckTeamEnterEctype::set_nectypeid(::google::protobuf::int32 value) {
-  
-  nectypeid_ = value;
-  // @@protoc_insertion_point(field_set:NFMsg.AckTeamEnterEctype.nEctypeID)
-}
-
-// int32 nGroupID = 4;
-inline void AckTeamEnterEctype::clear_ngroupid() {
-  ngroupid_ = 0;
-}
-inline ::google::protobuf::int32 AckTeamEnterEctype::ngroupid() const {
-  // @@protoc_insertion_point(field_get:NFMsg.AckTeamEnterEctype.nGroupID)
-  return ngroupid_;
-}
-inline void AckTeamEnterEctype::set_ngroupid(::google::protobuf::int32 value) {
-  
-  ngroupid_ = value;
-  // @@protoc_insertion_point(field_set:NFMsg.AckTeamEnterEctype.nGroupID)
-}
-
-// int32 nResult = 5;
-inline void AckTeamEnterEctype::clear_nresult() {
-  nresult_ = 0;
-}
-inline ::google::protobuf::int32 AckTeamEnterEctype::nresult() const {
-  // @@protoc_insertion_point(field_get:NFMsg.AckTeamEnterEctype.nResult)
-  return nresult_;
-}
-inline void AckTeamEnterEctype::set_nresult(::google::protobuf::int32 value) {
-  
-  nresult_ = value;
-  // @@protoc_insertion_point(field_set:NFMsg.AckTeamEnterEctype.nResult)
+  // @@protoc_insertion_point(field_set_allocated:NFMsg.ReqAckRejectTeamInvite.team_id)
 }
 
 #ifdef __GNUC__
@@ -2655,24 +1870,10 @@ inline void AckTeamEnterEctype::set_nresult(::google::protobuf::int32 value) {
 
 // -------------------------------------------------------------------
 
-// -------------------------------------------------------------------
-
 
 // @@protoc_insertion_point(namespace_scope)
 
 }  // namespace NFMsg
-
-namespace google {
-namespace protobuf {
-
-template <> struct is_proto_enum< ::NFMsg::ReqAckOprTeamMember_EGTeamMemberOprType> : ::std::true_type {};
-template <>
-inline const EnumDescriptor* GetEnumDescriptor< ::NFMsg::ReqAckOprTeamMember_EGTeamMemberOprType>() {
-  return ::NFMsg::ReqAckOprTeamMember_EGTeamMemberOprType_descriptor();
-}
-
-}  // namespace protobuf
-}  // namespace google
 
 // @@protoc_insertion_point(global_scope)
 

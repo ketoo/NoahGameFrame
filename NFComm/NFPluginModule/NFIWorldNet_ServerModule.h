@@ -67,6 +67,7 @@ public:
 		int gameID;
 		int gateID;
 		NFGUID self;
+		NFGUID team;
 		int bp;
         std::string name;
 

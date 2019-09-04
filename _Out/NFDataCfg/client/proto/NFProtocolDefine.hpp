@@ -904,6 +904,18 @@ namespace NFrame
 			static const int Postion = 3;//vector3
 
 		};
+		class FriendInviteList
+		{
+		public:
+			//Class name
+			static const std::string& ThisName(){ static std::string x = "FriendInviteList"; return x; };
+			static const int GUID = 0;//object
+			static const int Name = 1;//string
+			static const int Level = 2;//int
+			static const int BP = 3;//int
+			static const int Leader = 4;//int
+
+		};
 		class FriendList
 		{
 		public:
@@ -914,6 +926,15 @@ namespace NFrame
 			static const int Online = 2;//int
 			static const int Time = 3;//int
 			static const int GameID = 4;//int
+
+		};
+		class FriendSentList
+		{
+		public:
+			//Class name
+			static const std::string& ThisName(){ static std::string x = "FriendSentList"; return x; };
+			static const int GUID = 0;//object
+			static const int Name = 1;//string
 
 		};
 		class HeroValue
@@ -955,17 +976,6 @@ namespace NFrame
 			static const int LUCK = 31;//int
 
 		};
-		class InviteList
-		{
-		public:
-			//Class name
-			static const std::string& ThisName(){ static std::string x = "InviteList"; return x; };
-			static const int GUID = 0;//object
-			static const int Name = 1;//string
-			static const int Level = 2;//int
-			static const int BP = 3;//int
-
-		};
 		class PlayerHero
 		{
 		public:
@@ -986,15 +996,6 @@ namespace NFrame
 			static const int Dark_Talent = 12;//int
 
 		};
-		class SentList
-		{
-		public:
-			//Class name
-			static const std::string& ThisName(){ static std::string x = "SentList"; return x; };
-			static const int GUID = 0;//object
-			static const int Name = 1;//string
-
-		};
 		class TaskList
 		{
 		public:
@@ -1004,6 +1005,19 @@ namespace NFrame
 			static const int TaskStatus = 1;//int
 			static const int ArgCnfID = 2;//string
 			static const int ArgCount = 3;//int
+
+		};
+		class TeamMemberList
+		{
+		public:
+			//Class name
+			static const std::string& ThisName(){ static std::string x = "TeamMemberList"; return x; };
+			static const int GUID = 0;//object
+			static const int Name = 1;//string
+			static const int Leader = 2;//int
+			static const int bp = 3;//int
+			static const int GameID = 4;//int
+			static const int Pending = 5;//int
 
 		};
 		class TempItemList
