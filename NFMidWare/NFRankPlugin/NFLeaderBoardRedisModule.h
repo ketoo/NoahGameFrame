@@ -33,13 +33,13 @@
 #include "NFComm/NFPluginModule/NFIClassModule.h"
 #include "NFComm/NFPluginModule/NFILogModule.h"
 #include "NFComm/NFPluginModule/NFIElementModule.h"
-#include "NFComm/NFPluginModule/NFIRankRedisModule.h"
+#include "NFComm/NFPluginModule/NFILeaderBoardRedisModule.h"
 #include "NFComm/NFPluginModule/NFINoSqlModule.h"
 
-class NFRankRedisModule : public NFIRankRedisModule
+class NFLeaderBoardRedisModule : public NFILeaderBoardRedisModule
 {
 public:
-	NFRankRedisModule(NFIPluginManager* p);
+	NFLeaderBoardRedisModule(NFIPluginManager* p);
 
 	virtual bool Init();
 	virtual bool Shut();

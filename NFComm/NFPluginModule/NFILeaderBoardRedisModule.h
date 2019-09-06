@@ -24,12 +24,12 @@
 */
 
 
-#ifndef NFI_RANK_REDIS_MODULE_H
-#define NFI_RANK_REDIS_MODULE_H
+#ifndef NFI_LEADER_BOARD_REDIS_MODULE_H
+#define NFI_LEADER_BOARD_REDIS_MODULE
 
 #include "NFIModule.h"
 
-class NFIRankRedisModule
+class NFILeaderBoardRedisModule
     : public NFIModule
 {
 
