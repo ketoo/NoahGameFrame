@@ -100,14 +100,14 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
       </PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="NFRankModule.cpp" />
+    <ClCompile Include="NFLeaderBoardModule.cpp" />
     <ClCompile Include="NFRankPlugin.cpp" />
-    <ClCompile Include="NFRankRedisModule.cpp" />
+    <ClCompile Include="NFLeaderBoardRedisModule.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="NFRankModule.h" />
+    <ClInclude Include="NFLeaderBoardModule.h" />
     <ClInclude Include="NFRankPlugin.h" />
-    <ClInclude Include="NFRankRedisModule.h" />
+    <ClInclude Include="NFLeaderBoardRedisModule.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -24,9 +24,9 @@
 */
 
 
-#include "NFRankModule.h"
+#include "NFLeaderBoardModule.h"
 
-bool NFRankModule::Init()
+bool NFLeaderBoardModule::Init()
 {
 
     m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>();
@@ -34,23 +34,23 @@ bool NFRankModule::Init()
     return true;
 }
 
-bool NFRankModule::Shut()
+bool NFLeaderBoardModule::Shut()
 {
     return true;
 }
 
-bool NFRankModule::Execute()
+bool NFLeaderBoardModule::Execute()
 {
     return true;
 }
 
-bool NFRankModule::AfterInit()
+bool NFLeaderBoardModule::AfterInit()
 {
 
     return true;
 }
 
-std::string NFRankModule::MakeRanKey(const RANK_TYPE type, const int64_t nAreaID)
+std::string NFLeaderBoardModule::MakeRanKey(const RANK_TYPE type, const int64_t nAreaID)
 {
     if(nAreaID > 0)
     {
@@ -60,49 +60,49 @@ std::string NFRankModule::MakeRanKey(const RANK_TYPE type, const int64_t nAreaID
     return "Rank_" + to_string(type);
 }
 
-void NFRankModule::AddValue(const NFGUID& self, const NFIRankModule::RANK_TYPE type, NFINT64 value)
+void NFLeaderBoardModule::AddValue(const NFGUID& self, const NFILeaderBoardModule::RANK_TYPE type, NFINT64 value)
 {
     AddValue(0, self, type, value);
 
 }
 
-void NFRankModule::SetValue(const NFGUID& self, const NFIRankModule::RANK_TYPE type, NFINT64 value)
+void NFLeaderBoardModule::SetValue(const NFGUID& self, const NFILeaderBoardModule::RANK_TYPE type, NFINT64 value)
 {
     SetValue(0, self, type, value);
 }
 
-void NFRankModule::SubValue(const NFGUID& self, const NFIRankModule::RANK_TYPE type, NFINT64 value)
+void NFLeaderBoardModule::SubValue(const NFGUID& self, const NFILeaderBoardModule::RANK_TYPE type, NFINT64 value)
 {
     SubValue(0, self, type, value);
 }
 
-void NFRankModule::RemoveValue(const NFGUID& self, const NFIRankModule::RANK_TYPE type)
+void NFLeaderBoardModule::RemoveValue(const NFGUID& self, const NFILeaderBoardModule::RANK_TYPE type)
 {
     RemoveValue(0, self, type);
 }
 
-NFRankModule::RankValue NFRankModule::GetIndex(const NFGUID& self, const NFIRankModule::RANK_TYPE type)
+NFLeaderBoardModule::RankValue NFLeaderBoardModule::GetIndex(const NFGUID& self, const NFILeaderBoardModule::RANK_TYPE type)
 {
     return GetIndex(0, self, type);
 }
 
-int NFRankModule::RangeByIndex(const NFINT64 startIndex, const NFINT64 endIndex, const NFIRankModule::RANK_TYPE type, std::vector<NFIRankModule::RankValue>& vector)
+int NFLeaderBoardModule::RangeByIndex(const NFINT64 startIndex, const NFINT64 endIndex, const NFILeaderBoardModule::RANK_TYPE type, std::vector<NFILeaderBoardModule::RankValue>& vector)
 {
     return RangeByIndex(0, startIndex, endIndex, type, vector);
 }
 
-int NFRankModule::RangeByScore(const NFINT64 startScore, const NFINT64 endScore, const NFIRankModule::RANK_TYPE type, std::vector<NFIRankModule::RankValue>& vector)
+int NFLeaderBoardModule::RangeByScore(const NFINT64 startScore, const NFINT64 endScore, const NFILeaderBoardModule::RANK_TYPE type, std::vector<NFILeaderBoardModule::RankValue>& vector)
 {
     return RangeByScore(0, startScore, endScore, type, vector);
 }
 
-int NFRankModule::GetRankListCount(const NFIRankModule::RANK_TYPE type)
+int NFLeaderBoardModule::GetRankListCount(const NFILeaderBoardModule::RANK_TYPE type)
 {
     return GetRankListCount(0, type);
 }
 
 //for area
-void NFRankModule::AddValue(const int64_t nAreaID, const NFGUID& self, const RANK_TYPE type, NFINT64 value)
+void NFLeaderBoardModule::AddValue(const int64_t nAreaID, const NFGUID& self, const RANK_TYPE type, NFINT64 value)
 {
     std::string strRankKey = MakeRanKey(type, nAreaID);
     NF_SHARE_PTR<NFIRedisClient> xNoSqlDriver = m_pNoSqlModule->GetDriver(strRankKey);
@@ -113,7 +113,7 @@ void NFRankModule::AddValue(const int64_t nAreaID, const NFGUID& self, const RAN
     }
 }
 
-void NFRankModule::SetValue(const int64_t nAreaID, const NFGUID& self, const RANK_TYPE type, NFINT64 value)
+void NFLeaderBoardModule::SetValue(const int64_t nAreaID, const NFGUID& self, const RANK_TYPE type, NFINT64 value)
 {
     std::string strRankKey = MakeRanKey(type, nAreaID);
     NF_SHARE_PTR<NFIRedisClient> xNoSqlDriver = m_pNoSqlModule->GetDriver(strRankKey);
@@ -123,7 +123,7 @@ void NFRankModule::SetValue(const int64_t nAreaID, const NFGUID& self, const RAN
     }
 }
 
-void NFRankModule::SubValue(const int64_t nAreaID, const NFGUID& self, const RANK_TYPE type, NFINT64 value)
+void NFLeaderBoardModule::SubValue(const int64_t nAreaID, const NFGUID& self, const RANK_TYPE type, NFINT64 value)
 {
     std::string strRankKey = MakeRanKey(type, nAreaID);
     NF_SHARE_PTR<NFIRedisClient> xNoSqlDriver = m_pNoSqlModule->GetDriver(strRankKey);
@@ -134,7 +134,7 @@ void NFRankModule::SubValue(const int64_t nAreaID, const NFGUID& self, const RAN
     }
 }
 
-void NFRankModule::RemoveValue(const int64_t nAreaID, const NFGUID& self, const NFIRankModule::RANK_TYPE type)
+void NFLeaderBoardModule::RemoveValue(const int64_t nAreaID, const NFGUID& self, const NFILeaderBoardModule::RANK_TYPE type)
 {
     std::string strRankKey = MakeRanKey(type, nAreaID);
     NF_SHARE_PTR<NFIRedisClient> xNoSqlDriver = m_pNoSqlModule->GetDriver(strRankKey);
@@ -144,9 +144,9 @@ void NFRankModule::RemoveValue(const int64_t nAreaID, const NFGUID& self, const 
     }
 }
 
-NFIRankModule::RankValue NFRankModule::GetIndex(const int64_t nAreaID, const NFGUID& self, const NFIRankModule::RANK_TYPE type)
+NFILeaderBoardModule::RankValue NFLeaderBoardModule::GetIndex(const int64_t nAreaID, const NFGUID& self, const NFILeaderBoardModule::RANK_TYPE type)
 {
-    NFRankModule::RankValue xRankValue;
+    NFLeaderBoardModule::RankValue xRankValue;
     std::string strRankKey = MakeRanKey(type, nAreaID);
 
     NF_SHARE_PTR<NFIRedisClient> xNoSqlDriver = m_pNoSqlModule->GetDriver(strRankKey);
@@ -165,7 +165,7 @@ NFIRankModule::RankValue NFRankModule::GetIndex(const int64_t nAreaID, const NFG
     return xRankValue;
 }
 
-int NFRankModule::RangeByIndex(const int64_t nAreaID, const NFINT64 startIndex, const NFINT64 endIndex, const RANK_TYPE type, std::vector<NFIRankModule::RankValue>& vector)
+int NFLeaderBoardModule::RangeByIndex(const int64_t nAreaID, const NFINT64 startIndex, const NFINT64 endIndex, const RANK_TYPE type, std::vector<NFILeaderBoardModule::RankValue>& vector)
 {
     std::string strRankKey = MakeRanKey(type, nAreaID);
 
@@ -189,7 +189,7 @@ int NFRankModule::RangeByIndex(const int64_t nAreaID, const NFINT64 startIndex, 
     return vector.size();
 }
 
-int NFRankModule::RangeByScore(const int64_t nAreaID, const NFINT64 startScore, const NFINT64 endScore, const RANK_TYPE type, std::vector<NFIRankModule::RankValue>& vector)
+int NFLeaderBoardModule::RangeByScore(const int64_t nAreaID, const NFINT64 startScore, const NFINT64 endScore, const RANK_TYPE type, std::vector<NFILeaderBoardModule::RankValue>& vector)
 {
     std::string strRankKey = MakeRanKey(type, nAreaID);
 
@@ -216,7 +216,7 @@ int NFRankModule::RangeByScore(const int64_t nAreaID, const NFINT64 startScore, 
 }
 
 
-int NFRankModule::GetRankListCount(const int64_t nAreaID, const NFIRankModule::RANK_TYPE type)
+int NFLeaderBoardModule::GetRankListCount(const int64_t nAreaID, const NFILeaderBoardModule::RANK_TYPE type)
 {
     std::string strRankKey = MakeRanKey(type, nAreaID);
 

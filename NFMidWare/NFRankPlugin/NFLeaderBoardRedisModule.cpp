@@ -23,36 +23,36 @@
    limitations under the License.
 */
 
-#include "NFRankRedisModule.h"
+#include "NFLeaderBoardRedisModule.h"
 
-NFRankRedisModule::NFRankRedisModule(NFIPluginManager * p)
+NFLeaderBoardRedisModule::NFLeaderBoardRedisModule(NFIPluginManager * p)
 {
 	pPluginManager = p;
 }
 
-bool NFRankRedisModule::Init()
+bool NFLeaderBoardRedisModule::Init()
 {
 	return true;
 }
 
-bool NFRankRedisModule::Shut()
+bool NFLeaderBoardRedisModule::Shut()
 {
 	return true;
 }
 
-bool NFRankRedisModule::Execute()
+bool NFLeaderBoardRedisModule::Execute()
 {
 	return true;
 }
 
-bool NFRankRedisModule::AfterInit()
+bool NFLeaderBoardRedisModule::AfterInit()
 {
 	m_pNoSqlModule = pPluginManager->FindModule<NFINoSqlModule>();
 
 	return true;
 }
 
-bool NFRankRedisModule::SetRankValue(const NFMsg::ERankType eRankType, const NFGUID& self, const double value)
+bool NFLeaderBoardRedisModule::SetRankValue(const NFMsg::ERankType eRankType, const NFGUID& self, const double value)
 {
 	std::string strRankKey = MakeRedisKey(eRankType);
 	NF_SHARE_PTR<NFIRedisClient> pNoSqlDriver = m_pNoSqlModule->GetDriverBySuit(strRankKey);
@@ -64,7 +64,7 @@ bool NFRankRedisModule::SetRankValue(const NFMsg::ERankType eRankType, const NFG
 	return pNoSqlDriver->ZADD(strRankKey, self.ToString(), value);
 }
 
-bool NFRankRedisModule::IncrRankValue(const NFMsg::ERankType eRankType, const NFGUID & self, const double value)
+bool NFLeaderBoardRedisModule::IncrRankValue(const NFMsg::ERankType eRankType, const NFGUID & self, const double value)
 {
 	std::string strRankKey = MakeRedisKey(eRankType);
 	NF_SHARE_PTR<NFIRedisClient> pNoSqlDriver = m_pNoSqlModule->GetDriverBySuit(strRankKey);
@@ -77,7 +77,7 @@ bool NFRankRedisModule::IncrRankValue(const NFMsg::ERankType eRankType, const NF
 	return pNoSqlDriver->ZINCRBY(strRankKey, self.ToString(), value, newValue);
 }
 
-bool NFRankRedisModule::RemoveRankValue(const NFMsg::ERankType eRankType, const NFGUID & self)
+bool NFLeaderBoardRedisModule::RemoveRankValue(const NFMsg::ERankType eRankType, const NFGUID & self)
 {
 	std::string strRankKey = MakeRedisKey(eRankType);
 	NF_SHARE_PTR<NFIRedisClient> pNoSqlDriver = m_pNoSqlModule->GetDriverBySuit(strRankKey);
@@ -89,7 +89,7 @@ bool NFRankRedisModule::RemoveRankValue(const NFMsg::ERankType eRankType, const 
 	return pNoSqlDriver->ZREM(strRankKey, self.ToString());
 }
 
-bool NFRankRedisModule::RemoveRangeByRank(const NFMsg::ERankType eRankType, const int nStart, const int nStop)
+bool NFLeaderBoardRedisModule::RemoveRangeByRank(const NFMsg::ERankType eRankType, const int nStart, const int nStop)
 {
 	std::string strRankKey = MakeRedisKey(eRankType);
 	NF_SHARE_PTR<NFIRedisClient> pNoSqlDriver = m_pNoSqlModule->GetDriverBySuit(strRankKey);
@@ -101,7 +101,7 @@ bool NFRankRedisModule::RemoveRangeByRank(const NFMsg::ERankType eRankType, cons
 	return pNoSqlDriver->ZREMRANGEBYRANK(strRankKey, nStart, nStop);
 }
 
-bool NFRankRedisModule::RemoveRangeByScore(const NFMsg::ERankType eRankType, const int nMin, const int nMax)
+bool NFLeaderBoardRedisModule::RemoveRangeByScore(const NFMsg::ERankType eRankType, const int nMin, const int nMax)
 {
 	std::string strRankKey = MakeRedisKey(eRankType);
 	NF_SHARE_PTR<NFIRedisClient> pNoSqlDriver = m_pNoSqlModule->GetDriverBySuit(strRankKey);
@@ -113,7 +113,7 @@ bool NFRankRedisModule::RemoveRangeByScore(const NFMsg::ERankType eRankType, con
 	return pNoSqlDriver->ZREMRANGEBYSCORE(strRankKey, nMin, nMax);
 }
 
-bool NFRankRedisModule::GetRankValue(const NFMsg::ERankType eRankType, const NFGUID & self, double& dwValue)
+bool NFLeaderBoardRedisModule::GetRankValue(const NFMsg::ERankType eRankType, const NFGUID & self, double& dwValue)
 {
 	std::string strRankKey = MakeRedisKey(eRankType);
 	NF_SHARE_PTR<NFIRedisClient> pNoSqlDriver = m_pNoSqlModule->GetDriverBySuit(strRankKey);
@@ -125,7 +125,7 @@ bool NFRankRedisModule::GetRankValue(const NFMsg::ERankType eRankType, const NFG
 	return pNoSqlDriver->ZSCORE(strRankKey, self.ToString(), dwValue);
 }
 
-bool NFRankRedisModule::GetRange(const NFMsg::ERankType eRankType, const int nStart, const int nStop, std::vector<std::pair<std::string, double>>& memberScoreVec)
+bool NFLeaderBoardRedisModule::GetRange(const NFMsg::ERankType eRankType, const int nStart, const int nStop, std::vector<std::pair<std::string, double>>& memberScoreVec)
 {
 	std::string strRankKey = MakeRedisKey(eRankType);
 	NF_SHARE_PTR<NFIRedisClient> pNoSqlDriver = m_pNoSqlModule->GetDriverBySuit(strRankKey);
@@ -137,7 +137,7 @@ bool NFRankRedisModule::GetRange(const NFMsg::ERankType eRankType, const int nSt
 	return pNoSqlDriver->ZREVRANGE(strRankKey, nStart, nStop, memberScoreVec);
 }
 
-bool NFRankRedisModule::GetRangeByScore(const NFMsg::ERankType eRankType, const int nMin, const int nMax, std::vector<std::pair<std::string, double>>& memberScoreVec)
+bool NFLeaderBoardRedisModule::GetRangeByScore(const NFMsg::ERankType eRankType, const int nMin, const int nMax, std::vector<std::pair<std::string, double>>& memberScoreVec)
 {
 	std::string strRankKey = MakeRedisKey(eRankType);
 	NF_SHARE_PTR<NFIRedisClient> pNoSqlDriver = m_pNoSqlModule->GetDriverBySuit(strRankKey);
@@ -149,7 +149,7 @@ bool NFRankRedisModule::GetRangeByScore(const NFMsg::ERankType eRankType, const 
 	return pNoSqlDriver->ZRANGEBYSCORE(strRankKey, nMin, nMax, memberScoreVec);
 }
 
-int NFRankRedisModule::GetRankMemberCount(const NFMsg::ERankType eRankType)
+int NFLeaderBoardRedisModule::GetRankMemberCount(const NFMsg::ERankType eRankType)
 {
 	std::string strRankKey = MakeRedisKey(eRankType);
 	NF_SHARE_PTR<NFIRedisClient> pNoSqlDriver = m_pNoSqlModule->GetDriverBySuit(strRankKey);
@@ -164,7 +164,7 @@ int NFRankRedisModule::GetRankMemberCount(const NFMsg::ERankType eRankType)
 	return nCount;
 }
 
-int NFRankRedisModule::GetRankRangeMemberCount(const NFMsg::ERankType eRankType, const int nMin, const int nMax)
+int NFLeaderBoardRedisModule::GetRankRangeMemberCount(const NFMsg::ERankType eRankType, const int nMin, const int nMax)
 {
 	std::string strRankKey = MakeRedisKey(eRankType);
 	NF_SHARE_PTR<NFIRedisClient> pNoSqlDriver = m_pNoSqlModule->GetDriverBySuit(strRankKey);
@@ -179,7 +179,7 @@ int NFRankRedisModule::GetRankRangeMemberCount(const NFMsg::ERankType eRankType,
 	return nCount;
 }
 
-std::string NFRankRedisModule::MakeRedisKey(const NFMsg::ERankType eRankType)
+std::string NFLeaderBoardRedisModule::MakeRedisKey(const NFMsg::ERankType eRankType)
 {
 	std::string szKey = "Rank_" + ERankType_Name(eRankType);
 	
