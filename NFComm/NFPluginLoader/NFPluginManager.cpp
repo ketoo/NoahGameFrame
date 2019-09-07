@@ -98,7 +98,7 @@
 #include "NFMidWare/NFAOIPlugin/NFAOIPlugin.h"
 #include "NFMidWare/NFChatPlugin/NFChatPlugin.h"
 #include "NFMidWare/NFFriendPlugin/NFFriendPlugin.h"
-#include "NFMidWare/NFFriendPlugin/NFTeamPlugin.h"
+#include "NFMidWare/NFTeamPlugin/NFTeamPlugin.h"
 #include "NFMidWare/NFClanPlugin/NFClanPlugin.h"
 #include "NFMidWare/NFHeroPlugin/NFHeroPlugin.h"
 #include "NFMidWare/NFItemBagPlugin/NFItemBagPlugin.h"
