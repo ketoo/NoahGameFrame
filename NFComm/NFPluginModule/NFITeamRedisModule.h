@@ -45,12 +45,15 @@ public:
 	virtual bool GetMemberInvitationList(const NFGUID& teamID, std::vector<MemberData>& teamMember) = 0;
 
     virtual bool CreateTeam(const NFGUID& self, const std::string& name, const NFGUID& teamID) = 0;
+	virtual bool DeleteTeam(const NFGUID& teamID) = 0;
+
 	virtual bool AddToTeam(const NFGUID& teamID, const NFGUID& other, const std::string& name) = 0;
 	virtual bool LeaveFromTeam(const NFGUID& teamID, const NFGUID& other) = 0;
 	virtual bool IsTeamMember(const NFGUID& teamID, const NFGUID& other) = 0;
     
     virtual bool SendInvite(const NFGUID& self, const NFGUID& stranger, const std::string& name) = 0;
 	virtual bool DeleteInvite(const NFGUID& teamID, const NFGUID& stranger) = 0;
+	virtual bool DeleteAllInvite(const NFGUID& teamID) = 0;
 	virtual bool IsInvited(const NFGUID& teamID, const NFGUID& stranger) = 0;
 
 

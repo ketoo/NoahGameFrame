@@ -189,6 +189,13 @@ message RoleOnlineNotify
 	int32 proxy = 4;
 	bytes name = 5;
 	int32 bp = 6;
+		
+	repeated PropertyInt property_int_list = 20;
+	repeated PropertyFloat property_float_list = 21;
+	repeated PropertyString property_string_list = 22;
+	repeated PropertyObject property_object_list = 23;
+	repeated PropertyVector2 property_vector2_list = 24;
+	repeated PropertyVector3 property_vector3_list = 25;
 }
 
 message RoleOfflineNotify

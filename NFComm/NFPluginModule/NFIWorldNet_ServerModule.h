@@ -45,9 +45,11 @@ public:
 			gameID = 0;
 			gateID = 0;
             bp = 0;
+
+			onLine = false;
 		}
 
-		~PlayerData()
+		virtual ~PlayerData()
 		{
 
 		}
@@ -56,14 +58,17 @@ public:
 		{
 			gameID = gameSvrID;
 			gateID = gateSvrID;
+			onLine = true;
 		}
 
 		void OffLine()
 		{
 			gameID = 0;
 			gateID = 0;
+			onLine = false;
 		}
 
+		bool onLine;
 		int gameID;
 		int gateID;
 		NFGUID self;

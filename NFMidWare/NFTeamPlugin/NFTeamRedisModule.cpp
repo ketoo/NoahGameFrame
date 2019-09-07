@@ -56,11 +56,63 @@ bool NFTeamRedisModule::AfterInit()
 
 bool NFTeamRedisModule::GetMemberList(const NFGUID & teamID, std::vector<MemberData>& teamMember)
 {
+	std::string strKey = m_pCommonRedisModule->GetTeamCacheKey(teamID);
+	NF_SHARE_PTR<NFIRedisClient> xNoSqlDriver = m_pNoSqlModule->GetDriverBySuit(strKey);
+	if (xNoSqlDriver)
+	{
+		if (xNoSqlDriver->EXISTS(strKey))
+		{
+			std::vector<string_pair> values;
+			if (xNoSqlDriver->HGETALL(strKey, values))
+			{
+				for (auto member : values)
+				{
+					MemberData memberData;
+					NFGUID id(member.first);
+					const std::string& name = member.second;
+
+					memberData.id = id;
+					memberData.name = name;
+
+					teamMember.push_back(memberData);
+				}
+
+				return true;
+			}
+		}
+	}
+
 	return false;
 }
 
 bool NFTeamRedisModule::GetMemberInvitationList(const NFGUID & teamID, std::vector<MemberData>& teamMember)
 {
+	std::string strKey = m_pCommonRedisModule->GetTeamInviteCacheKey(teamID);
+	NF_SHARE_PTR<NFIRedisClient> xNoSqlDriver = m_pNoSqlModule->GetDriverBySuit(strKey);
+	if (xNoSqlDriver)
+	{
+		if (xNoSqlDriver->EXISTS(strKey))
+		{
+			std::vector<string_pair> values;
+			if (xNoSqlDriver->HGETALL(strKey, values))
+			{
+				for (auto member : values)
+				{
+					MemberData memberData;
+					NFGUID id(member.first);
+					const std::string& name = member.second;
+
+					memberData.id = id;
+					memberData.name = name;
+
+					teamMember.push_back(memberData);
+				}
+
+				return true;
+			}
+		}
+	}
+
 	return false;
 }
 
@@ -73,6 +125,21 @@ bool NFTeamRedisModule::CreateTeam(const NFGUID& self, const std::string& name, 
 		if (xNoSqlDriver->HSET(strKey, self.ToString(), name))
 		{
 			//xNoSqlDriver->EXPIRE(strKey, 3600 * 24 * 30);
+			return true;
+		}
+	}
+
+	return false;
+}
+
+bool NFTeamRedisModule::DeleteTeam(const NFGUID & teamID)
+{
+	std::string strKey = m_pCommonRedisModule->GetTeamCacheKey(teamID);
+	NF_SHARE_PTR<NFIRedisClient> xNoSqlDriver = m_pNoSqlModule->GetDriverBySuit(strKey);
+	if (xNoSqlDriver)
+	{
+		if (xNoSqlDriver->HDEL(strKey, teamID.ToString()))
+		{
 			return true;
 		}
 	}
@@ -118,7 +185,7 @@ bool NFTeamRedisModule::LeaveFromTeam(const NFGUID & teamID, const NFGUID & othe
 
 bool NFTeamRedisModule::IsTeamMember(const NFGUID & teamID, const NFGUID & other)
 {
-	std::string strKey = m_pCommonRedisModule->GetTeamCacheKey(other);
+	std::string strKey = m_pCommonRedisModule->GetTeamCacheKey(teamID);
 	NF_SHARE_PTR<NFIRedisClient> xNoSqlDriver = m_pNoSqlModule->GetDriverBySuit(strKey);
 	if (xNoSqlDriver)
 	{
@@ -130,7 +197,7 @@ bool NFTeamRedisModule::IsTeamMember(const NFGUID & teamID, const NFGUID & other
 
 bool NFTeamRedisModule::SendInvite(const NFGUID& teamID, const NFGUID& stranger, const std::string& name)
 {
-    std::string strKey = m_pCommonRedisModule->GetTeamInviteCacheKey(stranger);
+    std::string strKey = m_pCommonRedisModule->GetTeamInviteCacheKey(teamID);
 	NF_SHARE_PTR<NFIRedisClient> xNoSqlDriver = m_pNoSqlModule->GetDriverBySuit(strKey);
 	if (xNoSqlDriver)
 	{
@@ -145,7 +212,7 @@ bool NFTeamRedisModule::SendInvite(const NFGUID& teamID, const NFGUID& stranger,
 
 bool NFTeamRedisModule::DeleteInvite(const NFGUID & teamID, const NFGUID & stranger)
 {
-	std::string strKey = m_pCommonRedisModule->GetTeamInviteCacheKey(stranger);
+	std::string strKey = m_pCommonRedisModule->GetTeamInviteCacheKey(teamID);
 	NF_SHARE_PTR<NFIRedisClient> xNoSqlDriver = m_pNoSqlModule->GetDriverBySuit(strKey);
 	if (xNoSqlDriver)
 	{
@@ -158,9 +225,24 @@ bool NFTeamRedisModule::DeleteInvite(const NFGUID & teamID, const NFGUID & stran
 	return false;
 }
 
+bool NFTeamRedisModule::DeleteAllInvite(const NFGUID & teamID)
+{
+	std::string strKey = m_pCommonRedisModule->GetTeamInviteCacheKey(teamID);
+	NF_SHARE_PTR<NFIRedisClient> xNoSqlDriver = m_pNoSqlModule->GetDriverBySuit(strKey);
+	if (xNoSqlDriver)
+	{
+		if (xNoSqlDriver->DEL(strKey))
+		{
+			return true;
+		}
+	}
+
+	return false;
+}
+
 bool NFTeamRedisModule::IsInvited(const NFGUID & teamID, const NFGUID & stranger)
 {
-	std::string strKey = m_pCommonRedisModule->GetTeamInviteCacheKey(stranger);
+	std::string strKey = m_pCommonRedisModule->GetTeamInviteCacheKey(teamID);
 	NF_SHARE_PTR<NFIRedisClient> xNoSqlDriver = m_pNoSqlModule->GetDriverBySuit(strKey);
 	if (xNoSqlDriver)
 	{

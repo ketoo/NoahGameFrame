@@ -58,12 +58,17 @@ public:
 
     virtual bool AfterInit();
 
+	virtual void OnLine(const NFGUID& self);
+	virtual void OffLine(const NFGUID& self);
+
 protected:
 
     void OnReqSendInviteProcess(const NFSOCK nSockIndex, const int nMsgID, const char *msg, const uint32_t nLen);
 	void OnReqCanceltInviteProcess(const NFSOCK nSockIndex, const int nMsgID, const char *msg, const uint32_t nLen);
     void OnReqAcceptInviteProcess(const NFSOCK nSockIndex, const int nMsgID, const char *msg, const uint32_t nLen);
     void OnReqRejectInviteProcess(const NFSOCK nSockIndex, const int nMsgID, const char *msg, const uint32_t nLen);
+
+	void OnReqAskReadyProcess(const NFSOCK nSockIndex, const int nMsgID, const char *msg, const uint32_t nLen);
 
 protected:
 

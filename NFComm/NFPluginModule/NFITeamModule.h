@@ -33,7 +33,8 @@ class NFITeamModule
 {
 
 public:
-
+	virtual void OnLine(const NFGUID& self) = 0;
+	virtual void OffLine(const NFGUID& self) = 0;
 };
 
 #endif
