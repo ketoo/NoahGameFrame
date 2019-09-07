@@ -60,6 +60,16 @@ std::string NFCommonRedisModule::GetBlockCacheKey(const NFGUID& self)
     return self.ToString() + "_ObjectBlock";
 }
 
+std::string NFCommonRedisModule::GetTeamCacheKey(const NFGUID & self)
+{
+	return self.ToString() + "_Team";
+}
+
+std::string NFCommonRedisModule::GetTeamInviteCacheKey(const NFGUID & self)
+{
+	return self.ToString() + "_TeamInvite";
+}
+
 std::string NFCommonRedisModule::GetAccountCacheKey(const std::string & strAccount)
 {
 	return strAccount + "_AccountInfo";

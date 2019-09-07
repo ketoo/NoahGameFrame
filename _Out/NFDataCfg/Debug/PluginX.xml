@@ -73,6 +73,7 @@
 		<Plugin Name="NFClanPlugin" />	
 		<Plugin Name="NFFriendPlugin" />
 		
+		<Plugin Name="NFTeamPlugin" />
 		<Plugin Name="NFRankPlugin" />
 	</WorldServer>
 	<DBServer>
