@@ -36,6 +36,7 @@ bool NFWorldNet_ServerModule::Init()
 	m_pClassModule = pPluginManager->FindModule<NFIClassModule>();
 	m_pNetClientModule = pPluginManager->FindModule<NFINetClientModule>();
 	m_pWorldPVPModule = pPluginManager->FindModule<NFIWorldPVPModule>();
+	m_pTeamModule = pPluginManager->FindModule<NFITeamModule>();
 	
     return true;
 }
@@ -844,7 +845,6 @@ void NFWorldNet_ServerModule::OnOnlineProcess(const NFSOCK nSockIndex, const int
 		playerData->name = xMsg.name();
 		playerData->bp = xMsg.bp();
 
-		playerData->OnLine(xMsg.game(), xMsg.proxy());
     }
 	else
 	{
@@ -852,11 +852,13 @@ void NFWorldNet_ServerModule::OnOnlineProcess(const NFSOCK nSockIndex, const int
 
 		playerData->name = xMsg.name();
 		playerData->bp = xMsg.bp();
-		
-		playerData->OnLine(xMsg.game(), xMsg.proxy());
 
 		mPlayersData.AddElement(selfId, playerData);
 	}
+
+	playerData->OnLine(xMsg.game(), xMsg.proxy());
+	//m_pWorldPVPModule->OnLine(self);
+	m_pTeamModule->OnLine(selfId);
 }
 
 void NFWorldNet_ServerModule::OnOfflineProcess(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
@@ -864,13 +866,15 @@ void NFWorldNet_ServerModule::OnOfflineProcess(const NFSOCK nSockIndex, const in
     CLIENT_MSG_PROCESS_NO_OBJECT(nMsgID, msg, nLen, NFMsg::RoleOfflineNotify);
     NFGUID self = NFINetModule::PBToNF(xMsg.self());
 
-	m_pWorldPVPModule->OffLine(self);
 
 	NF_SHARE_PTR<PlayerData> playerData = mPlayersData.GetElement(self);
 	if (playerData)
 	{
 		playerData->OffLine();
 	}
+
+	m_pWorldPVPModule->OffLine(self);
+	m_pTeamModule->OnLine(self);
 }
 
 void NFWorldNet_ServerModule::OnTransmitServerReport(const NFSOCK nFd, const int msgId, const char *buffer,

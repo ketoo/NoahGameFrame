@@ -38,6 +38,7 @@
 #include "NFComm/NFPluginModule/NFILoginNet_ServerModule.h"
 #include "NFComm/NFPluginModule/NFIWorldToMasterModule.h"
 #include "NFComm/NFPluginModule/NFIWorldPVPModule.h"
+#include "NFComm/NFPluginModule/NFITeamModule.h"
 
 class NFWorldNet_ServerModule
     : public NFIWorldNet_ServerModule
@@ -132,6 +133,7 @@ private:
 	NFINetModule* m_pNetModule;
 	NFINetClientModule* m_pNetClientModule;
 	NFIWorldPVPModule* m_pWorldPVPModule;
+	NFITeamModule* m_pTeamModule;
 };
 
 #endif

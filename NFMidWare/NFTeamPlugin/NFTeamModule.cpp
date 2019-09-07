@@ -53,6 +53,66 @@ bool NFTeamModule::AfterInit()
 	return true;
 }
 
+void NFTeamModule::OnLine(const NFGUID & self)
+{
+	NF_SHARE_PTR<NFIWorldNet_ServerModule::PlayerData> pPlayerData = m_pWorldNet_ServerModule->GetPlayerData(self);
+	if (pPlayerData)
+	{
+		if (!pPlayerData->team.IsNull())
+		{
+			std::vector<NFITeamRedisModule::MemberData> teamMember;
+			if (m_pTeamRedisModule->GetMemberList(pPlayerData->team, teamMember))
+			{
+				for (auto member : teamMember)
+				{
+					NF_SHARE_PTR<NFIWorldNet_ServerModule::PlayerData> pData = m_pWorldNet_ServerModule->GetPlayerData(member.id);
+					if (pData)
+					{
+						if (pData->onLine)
+						{
+							//broadcast
+						}
+					}
+				}
+			}
+		}
+	}
+}
+
+void NFTeamModule::OffLine(const NFGUID & self)
+{
+	NF_SHARE_PTR<NFIWorldNet_ServerModule::PlayerData> pPlayerData = m_pWorldNet_ServerModule->GetPlayerData(self);
+	if (pPlayerData)
+	{
+		if (!pPlayerData->team.IsNull())
+		{
+			bool allOffLine = true;
+			std::vector<NFITeamRedisModule::MemberData> teamMember;
+			if (m_pTeamRedisModule->GetMemberList(pPlayerData->team, teamMember))
+			{
+				for (auto member : teamMember)
+				{
+					NF_SHARE_PTR<NFIWorldNet_ServerModule::PlayerData> pData = m_pWorldNet_ServerModule->GetPlayerData(member.id);
+					if (pData)
+					{
+						if (pData->onLine)
+						{
+							allOffLine = false;
+
+							//broadcast
+						}
+					}
+				}
+
+				if (allOffLine)
+				{
+					m_pTeamRedisModule->DeleteTeam(pPlayerData->team);
+				}
+			}
+		}
+	}
+}
+
 bool NFTeamModule::Shut()
 {
 
@@ -92,7 +152,7 @@ void NFTeamModule::OnReqSendInviteProcess(const NFSOCK nSockIndex, const int nMs
 				}
 			}
 
-			if (pPlayerData->team.IsNull())
+			if (!pPlayerData->team.IsNull())
 			{
 				if (m_pTeamRedisModule->SendInvite(pPlayerData->team, strangerID, pStrangerData->name))
 				{
@@ -251,4 +311,9 @@ void NFTeamModule::OnReqRejectInviteProcess(const NFSOCK nSockIndex, const int n
 {
    CLIENT_MSG_PROCESS_NO_OBJECT(nMsgID, msg, nLen, NFMsg::ReqAckRejectTeamInvite)
 
+}
+
+void NFTeamModule::OnReqAskReadyProcess(const NFSOCK nSockIndex, const int nMsgID, const char * msg, const uint32_t nLen)
+{
+	//delete all invitation
 }
