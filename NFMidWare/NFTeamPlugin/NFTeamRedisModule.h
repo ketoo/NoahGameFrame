@@ -52,14 +52,14 @@ public:
 	virtual bool GetMemberList(const NFGUID& teamID, std::vector<MemberData>& teamMember);
 	virtual bool GetMemberInvitationList(const NFGUID& teamID, std::vector<MemberData>& teamMember);
 
-    virtual bool CreateTeam(const NFGUID& self, const NFGUID& name, const NFGUID& teamID);
-	virtual bool AddToTeam(const NFGUID& teamID, const NFGUID& other);
+    virtual bool CreateTeam(const NFGUID& self, const std::string& name, const NFGUID& teamID);
+	virtual bool AddToTeam(const NFGUID& teamID, const NFGUID& other, const std::string& name);
 	virtual bool LeaveFromTeam(const NFGUID& teamID, const NFGUID& other);
+	virtual bool IsTeamMember(const NFGUID& teamID, const NFGUID& other);
     
-    virtual bool SendInvite(const NFGUID& teamID, const NFGUID& stranger);
-    virtual bool AcceptInvite(const NFGUID& teamID, const NFGUID& stranger);
-    virtual bool RejectInvite(const NFGUID& teamID, const NFGUID& stranger);
-
+    virtual bool SendInvite(const NFGUID& teamID, const NFGUID& stranger, const std::string& name);
+	virtual bool DeleteInvite(const NFGUID& teamID, const NFGUID& stranger);
+	virtual bool IsInvited(const NFGUID& teamID, const NFGUID& stranger);
 
 private:
     NFICommonRedisModule* m_pCommonRedisModule;

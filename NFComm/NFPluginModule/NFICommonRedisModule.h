@@ -38,6 +38,9 @@ public:
 	virtual std::string GetFriendInviteCacheKey(const NFGUID& self) = 0;
 	virtual std::string GetBlockCacheKey(const NFGUID& self) = 0;
 
+	virtual std::string GetTeamCacheKey(const NFGUID& self) = 0;
+	virtual std::string GetTeamInviteCacheKey(const NFGUID& self) = 0;
+
 	virtual std::string GetAccountCacheKey(const std::string& strAccount) = 0;
 	virtual std::string GetTileCacheKey(const int& nSceneID) = 0;
 	virtual std::string GetSceneCacheKey(const int& nSceneID) = 0;

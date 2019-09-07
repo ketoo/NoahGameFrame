@@ -64,28 +64,77 @@ bool NFTeamRedisModule::GetMemberInvitationList(const NFGUID & teamID, std::vect
 	return false;
 }
 
-bool NFTeamRedisModule::CreateTeam(const NFGUID& self, const NFGUID& name, const NFGUID& teamID)
+bool NFTeamRedisModule::CreateTeam(const NFGUID& self, const std::string& name, const NFGUID& teamID)
 {
+	std::string strKey = m_pCommonRedisModule->GetTeamCacheKey(teamID);
+	NF_SHARE_PTR<NFIRedisClient> xNoSqlDriver = m_pNoSqlModule->GetDriverBySuit(strKey);
+	if (xNoSqlDriver)
+	{
+		if (xNoSqlDriver->HSET(strKey, self.ToString(), name))
+		{
+			//xNoSqlDriver->EXPIRE(strKey, 3600 * 24 * 30);
+			return true;
+		}
+	}
+
 	return false;
 }
 
-bool NFTeamRedisModule::AddToTeam(const NFGUID & teamID, const NFGUID & other)
+bool NFTeamRedisModule::AddToTeam(const NFGUID & teamID, const NFGUID & other, const std::string& name)
 {
+	std::string strKey = m_pCommonRedisModule->GetTeamCacheKey(teamID);
+	NF_SHARE_PTR<NFIRedisClient> xNoSqlDriver = m_pNoSqlModule->GetDriverBySuit(strKey);
+	if (xNoSqlDriver)
+	{
+		if (xNoSqlDriver->EXISTS(strKey))
+		{
+			if (xNoSqlDriver->HSET(strKey, other.ToString(), name))
+			{
+				return true;
+			}
+		}
+	}
+
 	return false;
 }
 
 bool NFTeamRedisModule::LeaveFromTeam(const NFGUID & teamID, const NFGUID & other)
 {
+	std::string strKey = m_pCommonRedisModule->GetTeamCacheKey(teamID);
+	NF_SHARE_PTR<NFIRedisClient> xNoSqlDriver = m_pNoSqlModule->GetDriverBySuit(strKey);
+	if (xNoSqlDriver)
+	{
+		if (xNoSqlDriver->EXISTS(strKey))
+		{
+			if (xNoSqlDriver->HDEL(strKey, other.ToString()))
+			{
+				return true;
+			}
+		}
+	}
+
 	return false;
 }
 
-bool NFTeamRedisModule::SendInvite(const NFGUID& teamID, const NFGUID& stranger)
+bool NFTeamRedisModule::IsTeamMember(const NFGUID & teamID, const NFGUID & other)
 {
-    std::string strKey = m_pCommonRedisModule->GetFriendInviteCacheKey(stranger);
+	std::string strKey = m_pCommonRedisModule->GetTeamCacheKey(other);
 	NF_SHARE_PTR<NFIRedisClient> xNoSqlDriver = m_pNoSqlModule->GetDriverBySuit(strKey);
 	if (xNoSqlDriver)
 	{
-		//if (xNoSqlDriver->HSET(strKey, teamID.ToString(), selfName))
+		return xNoSqlDriver->HEXISTS(strKey, other.ToString());
+	}
+
+	return false;
+}
+
+bool NFTeamRedisModule::SendInvite(const NFGUID& teamID, const NFGUID& stranger, const std::string& name)
+{
+    std::string strKey = m_pCommonRedisModule->GetTeamInviteCacheKey(stranger);
+	NF_SHARE_PTR<NFIRedisClient> xNoSqlDriver = m_pNoSqlModule->GetDriverBySuit(strKey);
+	if (xNoSqlDriver)
+	{
+		if (xNoSqlDriver->HSET(strKey, stranger.ToString(), name))
 		{
 			return true;
 		}
@@ -94,35 +143,29 @@ bool NFTeamRedisModule::SendInvite(const NFGUID& teamID, const NFGUID& stranger)
     return false;
 }
 
-bool NFTeamRedisModule::AcceptInvite(const NFGUID& teamID, const NFGUID& inviter)
+bool NFTeamRedisModule::DeleteInvite(const NFGUID & teamID, const NFGUID & stranger)
 {
-    std::string strKey = m_pCommonRedisModule->GetFriendInviteCacheKey(teamID);
+	std::string strKey = m_pCommonRedisModule->GetTeamInviteCacheKey(stranger);
 	NF_SHARE_PTR<NFIRedisClient> xNoSqlDriver = m_pNoSqlModule->GetDriverBySuit(strKey);
 	if (xNoSqlDriver)
 	{
-        std::string strangerName;
-		if (xNoSqlDriver->HGET(strKey, inviter.ToString(), strangerName))
+		if (xNoSqlDriver->HDEL(strKey, stranger.ToString()))
 		{
-			xNoSqlDriver->HDEL(strKey, inviter.ToString());
-
-            //AddFriend(self, inviter, strangerName);
-            //AddFriend(inviter, self, selfName);
 			return true;
 		}
 	}
 
-    return false;
+	return false;
 }
 
-bool NFTeamRedisModule::RejectInvite(const NFGUID& teamID, const NFGUID& stranger)
+bool NFTeamRedisModule::IsInvited(const NFGUID & teamID, const NFGUID & stranger)
 {
-    std::string strKey = m_pCommonRedisModule->GetFriendInviteCacheKey(teamID);
+	std::string strKey = m_pCommonRedisModule->GetTeamInviteCacheKey(stranger);
 	NF_SHARE_PTR<NFIRedisClient> xNoSqlDriver = m_pNoSqlModule->GetDriverBySuit(strKey);
 	if (xNoSqlDriver)
 	{
-        xNoSqlDriver->HDEL(strKey, stranger.ToString());
-		return true;
+		return xNoSqlDriver->HEXISTS(strKey, stranger.ToString());
 	}
 
-    return false;
+	return false;
 }

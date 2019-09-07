@@ -44,13 +44,14 @@ public:
 	virtual bool GetMemberList(const NFGUID& teamID, std::vector<MemberData>& teamMember) = 0;
 	virtual bool GetMemberInvitationList(const NFGUID& teamID, std::vector<MemberData>& teamMember) = 0;
 
-    virtual bool CreateTeam(const NFGUID& self, const NFGUID& name, const NFGUID& teamID) = 0;
-	virtual bool AddToTeam(const NFGUID& teamID, const NFGUID& other) = 0;
+    virtual bool CreateTeam(const NFGUID& self, const std::string& name, const NFGUID& teamID) = 0;
+	virtual bool AddToTeam(const NFGUID& teamID, const NFGUID& other, const std::string& name) = 0;
 	virtual bool LeaveFromTeam(const NFGUID& teamID, const NFGUID& other) = 0;
+	virtual bool IsTeamMember(const NFGUID& teamID, const NFGUID& other) = 0;
     
-    virtual bool SendInvite(const NFGUID& self, const NFGUID& stranger) = 0;
-    virtual bool AcceptInvite(const NFGUID& self, const NFGUID& inviter) = 0;
-    virtual bool RejectInvite(const NFGUID& self, const NFGUID& inviter) = 0;
+    virtual bool SendInvite(const NFGUID& self, const NFGUID& stranger, const std::string& name) = 0;
+	virtual bool DeleteInvite(const NFGUID& teamID, const NFGUID& stranger) = 0;
+	virtual bool IsInvited(const NFGUID& teamID, const NFGUID& stranger) = 0;
 
 
 };
