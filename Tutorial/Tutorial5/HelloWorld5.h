@@ -41,6 +41,7 @@
 #include "NFComm/NFPluginModule/NFIClassModule.h"
 #include "NFComm/NFPluginModule/NFIElementModule.h"
 #include "NFComm/NFPluginModule/NFIScheduleModule.h"
+#include "NFComm/NFPluginModule/NFINetModule.h"
 
 /*
 IN THIS PLUGIN:
@@ -81,6 +82,11 @@ protected:
 	void OnPostCallBack(const NFGUID id, const int state_code, const std::string& strRespData, const std::string& strMemoData);
 
     void OnWebSocketTestProcess(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+
+	void OnTCPEvent(const NFSOCK fd, const NF_NET_EVENT event, NFINet* pNet);
+
+	void OnLoginProcess(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+
 private:
 
 	NFIClassModule* m_pLogicClassModule;
@@ -89,6 +95,7 @@ private:
 	NFIWSModule* m_pWSModule;
 	NFIElementModule* m_pElementModule;
 	NFIScheduleModule* m_pScheduleModule;
+	NFINetModule* m_pNetModule;
 };
 
 #endif
