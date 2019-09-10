@@ -32,6 +32,7 @@
 #include "NFComm/NFPluginModule/NFITeamAgentModule.h"
 #include "NFComm/NFPluginModule/NFINetModule.h"
 #include "NFComm/NFPluginModule/NFINetClientModule.h"
+#include "NFComm/NFPluginModule/NFIGameServerNet_ServerModule.h"
 
 class NFTeamAgentModule
     : public NFITeamAgentModule
@@ -72,6 +73,7 @@ protected:
 
 
 private:
+	NFIGameServerNet_ServerModule* m_pGameServerNet_ServerModule;
     NFINetClientModule* m_pNetClientModule;
 	NFINetModule* m_pNetModule;
     NFIKernelModule* m_pKernelModule;

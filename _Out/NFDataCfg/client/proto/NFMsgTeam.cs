@@ -26,7 +26,7 @@ namespace NFMsg {
           string.Concat(
             "Cg9ORk1zZ1RlYW0ucHJvdG8SBU5GTXNnGg9ORk1zZ0Jhc2UucHJvdG8iVAoO",
             "VGVhbU1lbWJlckluZm8SGAoCaWQYASABKAsyDC5ORk1zZy5JZGVudBIMCgRu",
-            "YW1lGAIgASgJEgoKAmJwGAMgASgFEg4KBmxlYWRlchgEIAEoBSKLAQoUUmVx",
+            "YW1lGAIgASgMEgoKAmJwGAMgASgFEg4KBmxlYWRlchgEIAEoBSKLAQoUUmVx",
             "QWNrVGVhbU1lbWJlckxpc3QSHQoHdGVhbV9pZBgBIAEoCzIMLk5GTXNnLklk",
             "ZW50EikKCmludml0ZUxpc3QYAiADKAsyFS5ORk1zZy5UZWFtTWVtYmVySW5m",
             "bxIpCgptZW1iZXJMaXN0GAMgAygLMhUuTkZNc2cuVGVhbU1lbWJlckluZm8i",
@@ -37,7 +37,7 @@ namespace NFMsg {
             "byIxCg9SZXFJbnZpdGVUb1RlYW0SHgoIc3RyYW5nZXIYASABKAsyDC5ORk1z",
             "Zy5JZGVudCJ9Cg9BY2tJbnZpdGVUb1RlYW0SHQoHdGVhbV9pZBgBIAEoCzIM",
             "Lk5GTXNnLklkZW50Eh0KB2ludml0ZXIYAiABKAsyDC5ORk1zZy5JZGVudBIM",
-            "CgRuYW1lGAMgASgJEh4KCHN0cmFuZ2VyGAQgASgLMgwuTkZNc2cuSWRlbnQi",
+            "CgRuYW1lGAMgASgMEh4KCHN0cmFuZ2VyGAQgASgLMgwuTkZNc2cuSWRlbnQi",
             "NwoWUmVxQWNrQWNjZXB0VGVhbUludml0ZRIdCgd0ZWFtX2lkGAEgASgLMgwu",
             "TkZNc2cuSWRlbnQiNwoWUmVxQWNrUmVqZWN0VGVhbUludml0ZRIdCgd0ZWFt",
             "X2lkGAEgASgLMgwuTkZNc2cuSWRlbnRiBnByb3RvMw=="));
@@ -108,9 +108,9 @@ namespace NFMsg {
 
     /// <summary>Field number for the "name" field.</summary>
     public const int nameFieldNumber = 2;
-    private string name_ = "";
+    private pb::ByteString name_ = pb::ByteString.Empty;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public string name {
+    public pb::ByteString name {
       get { return name_; }
       set {
         name_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
@@ -185,7 +185,7 @@ namespace NFMsg {
       }
       if (name.Length != 0) {
         output.WriteRawTag(18);
-        output.WriteString(name);
+        output.WriteBytes(name);
       }
       if (bp != 0) {
         output.WriteRawTag(24);
@@ -207,7 +207,7 @@ namespace NFMsg {
         size += 1 + pb::CodedOutputStream.ComputeMessageSize(id);
       }
       if (name.Length != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeStringSize(name);
+        size += 1 + pb::CodedOutputStream.ComputeBytesSize(name);
       }
       if (bp != 0) {
         size += 1 + pb::CodedOutputStream.ComputeInt32Size(bp);
@@ -260,7 +260,7 @@ namespace NFMsg {
             break;
           }
           case 18: {
-            name = input.ReadString();
+            name = input.ReadBytes();
             break;
           }
           case 24: {
@@ -958,9 +958,9 @@ namespace NFMsg {
 
     /// <summary>Field number for the "name" field.</summary>
     public const int nameFieldNumber = 3;
-    private string name_ = "";
+    private pb::ByteString name_ = pb::ByteString.Empty;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public string name {
+    public pb::ByteString name {
       get { return name_; }
       set {
         name_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
@@ -1028,7 +1028,7 @@ namespace NFMsg {
       }
       if (name.Length != 0) {
         output.WriteRawTag(26);
-        output.WriteString(name);
+        output.WriteBytes(name);
       }
       if (stranger_ != null) {
         output.WriteRawTag(34);
@@ -1049,7 +1049,7 @@ namespace NFMsg {
         size += 1 + pb::CodedOutputStream.ComputeMessageSize(inviter);
       }
       if (name.Length != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeStringSize(name);
+        size += 1 + pb::CodedOutputStream.ComputeBytesSize(name);
       }
       if (stranger_ != null) {
         size += 1 + pb::CodedOutputStream.ComputeMessageSize(stranger);
@@ -1112,7 +1112,7 @@ namespace NFMsg {
             break;
           }
           case 26: {
-            name = input.ReadString();
+            name = input.ReadBytes();
             break;
           }
           case 34: {

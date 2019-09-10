@@ -30,8 +30,9 @@ bool NFTeamAgentModule::Init()
     m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>();
     m_pNetModule = pPluginManager->FindModule<NFINetModule>();
     m_pNetClientModule = pPluginManager->FindModule<NFINetClientModule>();
-    m_pLogModule = pPluginManager->FindModule<NFILogModule>();
-
+	m_pLogModule = pPluginManager->FindModule<NFILogModule>();
+	m_pGameServerNet_ServerModule = pPluginManager->FindModule<NFIGameServerNet_ServerModule>();
+	
     return true;
 }
 
@@ -52,7 +53,7 @@ bool NFTeamAgentModule::AfterInit()
 	m_pNetClientModule->AddReceiveCallBack(NF_SERVER_TYPES::NF_ST_WORLD, NFMsg::EGMI_ACK_TEAM_LIST, this, &NFTeamAgentModule::OnAckTeammateListProcess);
 	m_pNetClientModule->AddReceiveCallBack(NF_SERVER_TYPES::NF_ST_WORLD, NFMsg::EGMI_ACK_TEAM_ADD, this, &NFTeamAgentModule::OnAckPlayerAddProcess);
 	m_pNetClientModule->AddReceiveCallBack(NF_SERVER_TYPES::NF_ST_WORLD, NFMsg::EGMI_ACK_TEAM_LEAVE, this, &NFTeamAgentModule::OnAckPlayerLeaveProcess);
-	m_pNetClientModule->AddReceiveCallBack(NF_SERVER_TYPES::NF_ST_WORLD, NFMsg::EGMI_ACK_TEAM_INVITE, this, &NFTeamAgentModule::OnAckPlayerLeaveProcess);
+	m_pNetClientModule->AddReceiveCallBack(NF_SERVER_TYPES::NF_ST_WORLD, NFMsg::EGMI_ACK_TEAM_INVITE, this, &NFTeamAgentModule::OnAckTeamInviteProcess);
 
 	//from client
 	m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_REQ_ACK_SEND_TEAM_INVITE, this, &NFTeamAgentModule::OnReqSendInviteProcess);
@@ -130,7 +131,16 @@ void NFTeamAgentModule::OnAckTeammateListProcess(const NFSOCK nSockIndex, const 
 
 void NFTeamAgentModule::OnAckTeamInviteProcess(const NFSOCK nSockIndex, const int nMsgID, const char * msg, const uint32_t nLen)
 {
-
+	CLIENT_MSG_PROCESS(nMsgID, msg, nLen, NFMsg::AckInviteToTeam)
+	NF_SHARE_PTR<NFIGameServerNet_ServerModule::GateBaseInfo> pGateBaseInfo = m_pGameServerNet_ServerModule->GetPlayerGateInfo(nPlayerID);
+	if (pGateBaseInfo)
+	{
+		NF_SHARE_PTR<NFIGameServerNet_ServerModule::GateServerInfo> pGateServerInfo = m_pGameServerNet_ServerModule->GetGateServerInfo(pGateBaseInfo->nGateID);
+		if (pGateServerInfo)
+		{
+			m_pNetModule->SendMsg(nMsgID, std::string(msg, nLen), pGateServerInfo->xServerData.nFD, nPlayerID);
+		}
+	}
 }
 
 void NFTeamAgentModule::OnAckPlayerAddProcess(const NFSOCK nSockIndex, const int nMsgID, const char * msg, const uint32_t nLen)

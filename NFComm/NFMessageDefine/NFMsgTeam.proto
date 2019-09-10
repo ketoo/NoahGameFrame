@@ -9,7 +9,7 @@ import "NFMsgBase.proto";
 message TeamMemberInfo
 {
     Ident		id 		= 1;
-	string		name 			= 2;
+	bytes		name 			= 2;
 	int32		bp 			= 3;
 	int32		leader 			= 4;
 }
@@ -42,7 +42,7 @@ message AckInviteToTeam
 {
     Ident						team_id = 1;
 	Ident						inviter = 2;
-	string						name = 3;
+	bytes						name = 3;
 	Ident						stranger = 4;
 }
 

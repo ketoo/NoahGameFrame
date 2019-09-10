@@ -21,6 +21,12 @@
 
 namespace protobuf_NFMsgBase_2eproto {
 extern PROTOBUF_INTERNAL_EXPORT_protobuf_NFMsgBase_2eproto ::google::protobuf::internal::SCCInfo<0> scc_info_Ident;
+extern PROTOBUF_INTERNAL_EXPORT_protobuf_NFMsgBase_2eproto ::google::protobuf::internal::SCCInfo<0> scc_info_PropertyFloat;
+extern PROTOBUF_INTERNAL_EXPORT_protobuf_NFMsgBase_2eproto ::google::protobuf::internal::SCCInfo<0> scc_info_PropertyInt;
+extern PROTOBUF_INTERNAL_EXPORT_protobuf_NFMsgBase_2eproto ::google::protobuf::internal::SCCInfo<0> scc_info_PropertyString;
+extern PROTOBUF_INTERNAL_EXPORT_protobuf_NFMsgBase_2eproto ::google::protobuf::internal::SCCInfo<1> scc_info_PropertyObject;
+extern PROTOBUF_INTERNAL_EXPORT_protobuf_NFMsgBase_2eproto ::google::protobuf::internal::SCCInfo<1> scc_info_PropertyVector2;
+extern PROTOBUF_INTERNAL_EXPORT_protobuf_NFMsgBase_2eproto ::google::protobuf::internal::SCCInfo<1> scc_info_PropertyVector3;
 extern PROTOBUF_INTERNAL_EXPORT_protobuf_NFMsgBase_2eproto ::google::protobuf::internal::SCCInfo<2> scc_info_ObjectRecordList;
 extern PROTOBUF_INTERNAL_EXPORT_protobuf_NFMsgBase_2eproto ::google::protobuf::internal::SCCInfo<7> scc_info_ObjectPropertyList;
 }  // namespace protobuf_NFMsgBase_2eproto
@@ -426,9 +432,15 @@ static void InitDefaultsRoleOnlineNotify() {
   ::NFMsg::RoleOnlineNotify::InitAsDefaultInstance();
 }
 
-LIBPROTOC_EXPORT ::google::protobuf::internal::SCCInfo<1> scc_info_RoleOnlineNotify =
-    {{ATOMIC_VAR_INIT(::google::protobuf::internal::SCCInfoBase::kUninitialized), 1, InitDefaultsRoleOnlineNotify}, {
-      &protobuf_NFMsgBase_2eproto::scc_info_Ident.base,}};
+LIBPROTOC_EXPORT ::google::protobuf::internal::SCCInfo<7> scc_info_RoleOnlineNotify =
+    {{ATOMIC_VAR_INIT(::google::protobuf::internal::SCCInfoBase::kUninitialized), 7, InitDefaultsRoleOnlineNotify}, {
+      &protobuf_NFMsgBase_2eproto::scc_info_Ident.base,
+      &protobuf_NFMsgBase_2eproto::scc_info_PropertyInt.base,
+      &protobuf_NFMsgBase_2eproto::scc_info_PropertyFloat.base,
+      &protobuf_NFMsgBase_2eproto::scc_info_PropertyString.base,
+      &protobuf_NFMsgBase_2eproto::scc_info_PropertyObject.base,
+      &protobuf_NFMsgBase_2eproto::scc_info_PropertyVector2.base,
+      &protobuf_NFMsgBase_2eproto::scc_info_PropertyVector3.base,}};
 
 static void InitDefaultsRoleOfflineNotify() {
   GOOGLE_PROTOBUF_VERIFY_VERSION;
@@ -672,6 +684,12 @@ const ::google::protobuf::uint32 TableStruct::offsets[] GOOGLE_PROTOBUF_ATTRIBUT
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NFMsg::RoleOnlineNotify, proxy_),
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NFMsg::RoleOnlineNotify, name_),
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NFMsg::RoleOnlineNotify, bp_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NFMsg::RoleOnlineNotify, property_int_list_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NFMsg::RoleOnlineNotify, property_float_list_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NFMsg::RoleOnlineNotify, property_string_list_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NFMsg::RoleOnlineNotify, property_object_list_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NFMsg::RoleOnlineNotify, property_vector2_list_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NFMsg::RoleOnlineNotify, property_vector3_list_),
   ~0u,  // no _has_bits_
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NFMsg::RoleOfflineNotify, _internal_metadata_),
   ~0u,  // no _extensions_
@@ -711,8 +729,8 @@ static const ::google::protobuf::internal::MigrationSchema schemas[] GOOGLE_PROT
   { 156, -1, sizeof(::NFMsg::ReqRecoverRole)},
   { 164, -1, sizeof(::NFMsg::ServerHeartBeat)},
   { 170, -1, sizeof(::NFMsg::RoleOnlineNotify)},
-  { 181, -1, sizeof(::NFMsg::RoleOfflineNotify)},
-  { 190, -1, sizeof(::NFMsg::RoleDataPack)},
+  { 187, -1, sizeof(::NFMsg::RoleOfflineNotify)},
+  { 196, -1, sizeof(::NFMsg::RoleDataPack)},
 };
 
 static ::google::protobuf::Message const * const file_default_instances[] = {
@@ -812,25 +830,33 @@ void AddDescriptorsImpl() {
       "e\022\017\n\007account\030\001 \001(\014\022\014\n\004name\030\002 \001(\014\022\017\n\007game"
       "_id\030\003 \001(\005\"@\n\016ReqRecoverRole\022\017\n\007account\030\001"
       " \001(\014\022\014\n\004name\030\002 \001(\014\022\017\n\007game_id\030\003 \001(\005\" \n\017S"
-      "erverHeartBeat\022\r\n\005count\030\001 \001(\005\"\201\001\n\020RoleOn"
+      "erverHeartBeat\022\r\n\005count\030\001 \001(\005\"\273\003\n\020RoleOn"
       "lineNotify\022\032\n\004self\030\001 \001(\0132\014.NFMsg.Ident\022\032"
       "\n\004clan\030\002 \001(\0132\014.NFMsg.Ident\022\014\n\004game\030\003 \001(\005"
       "\022\r\n\005proxy\030\004 \001(\005\022\014\n\004name\030\005 \001(\014\022\n\n\002bp\030\006 \001("
-      "\005\"h\n\021RoleOfflineNotify\022\032\n\004self\030\001 \001(\0132\014.N"
-      "FMsg.Ident\022\032\n\004clan\030\002 \001(\0132\014.NFMsg.Ident\022\014"
-      "\n\004game\030\003 \001(\005\022\r\n\005proxy\030\004 \001(\005\"~\n\014RoleDataP"
-      "ack\022\030\n\002id\030\001 \001(\0132\014.NFMsg.Ident\022+\n\010propert"
-      "y\030\002 \001(\0132\031.NFMsg.ObjectPropertyList\022\'\n\006re"
-      "cord\030\003 \001(\0132\027.NFMsg.ObjectRecordList*Z\n\014E"
-      "ServerState\022\r\n\tEST_CRASH\020\000\022\016\n\nEST_NARMAL"
-      "\020\001\022\014\n\010EST_BUSY\020\002\022\014\n\010EST_FIRE\020\003\022\017\n\013EST_MA"
-      "INTEN\020\004*J\n\nELoginMode\022\r\n\tELM_LOGIN\020\000\022\020\n\014"
-      "ELM_REGISTER\020\001\022\033\n\027ELM_AUTO_REGISTER_LOGI"
-      "N\020\002*@\n\021ReqServerListType\022\025\n\021RSLT_WORLD_S"
-      "ERVER\020\000\022\024\n\020RSLT_GAMES_ERVER\020\001b\006proto3"
+      "\005\022-\n\021property_int_list\030\024 \003(\0132\022.NFMsg.Pro"
+      "pertyInt\0221\n\023property_float_list\030\025 \003(\0132\024."
+      "NFMsg.PropertyFloat\0223\n\024property_string_l"
+      "ist\030\026 \003(\0132\025.NFMsg.PropertyString\0223\n\024prop"
+      "erty_object_list\030\027 \003(\0132\025.NFMsg.PropertyO"
+      "bject\0225\n\025property_vector2_list\030\030 \003(\0132\026.N"
+      "FMsg.PropertyVector2\0225\n\025property_vector3"
+      "_list\030\031 \003(\0132\026.NFMsg.PropertyVector3\"h\n\021R"
+      "oleOfflineNotify\022\032\n\004self\030\001 \001(\0132\014.NFMsg.I"
+      "dent\022\032\n\004clan\030\002 \001(\0132\014.NFMsg.Ident\022\014\n\004game"
+      "\030\003 \001(\005\022\r\n\005proxy\030\004 \001(\005\"~\n\014RoleDataPack\022\030\n"
+      "\002id\030\001 \001(\0132\014.NFMsg.Ident\022+\n\010property\030\002 \001("
+      "\0132\031.NFMsg.ObjectPropertyList\022\'\n\006record\030\003"
+      " \001(\0132\027.NFMsg.ObjectRecordList*Z\n\014EServer"
+      "State\022\r\n\tEST_CRASH\020\000\022\016\n\nEST_NARMAL\020\001\022\014\n\010"
+      "EST_BUSY\020\002\022\014\n\010EST_FIRE\020\003\022\017\n\013EST_MAINTEN\020"
+      "\004*J\n\nELoginMode\022\r\n\tELM_LOGIN\020\000\022\020\n\014ELM_RE"
+      "GISTER\020\001\022\033\n\027ELM_AUTO_REGISTER_LOGIN\020\002*@\n"
+      "\021ReqServerListType\022\025\n\021RSLT_WORLD_SERVER\020"
+      "\000\022\024\n\020RSLT_GAMES_ERVER\020\001b\006proto3"
   };
   ::google::protobuf::DescriptorPool::InternalAddGeneratedFile(
-      descriptor, 2677);
+      descriptor, 2991);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "NFMsgPreGame.proto", &protobuf_RegisterTypes);
   ::protobuf_NFDefine_2eproto::AddDescriptors();
@@ -7598,6 +7624,24 @@ void RoleOnlineNotify::clear_clan() {
   }
   clan_ = NULL;
 }
+void RoleOnlineNotify::clear_property_int_list() {
+  property_int_list_.Clear();
+}
+void RoleOnlineNotify::clear_property_float_list() {
+  property_float_list_.Clear();
+}
+void RoleOnlineNotify::clear_property_string_list() {
+  property_string_list_.Clear();
+}
+void RoleOnlineNotify::clear_property_object_list() {
+  property_object_list_.Clear();
+}
+void RoleOnlineNotify::clear_property_vector2_list() {
+  property_vector2_list_.Clear();
+}
+void RoleOnlineNotify::clear_property_vector3_list() {
+  property_vector3_list_.Clear();
+}
 #if !defined(_MSC_VER) || _MSC_VER >= 1900
 const int RoleOnlineNotify::kSelfFieldNumber;
 const int RoleOnlineNotify::kClanFieldNumber;
@@ -7605,6 +7649,12 @@ const int RoleOnlineNotify::kGameFieldNumber;
 const int RoleOnlineNotify::kProxyFieldNumber;
 const int RoleOnlineNotify::kNameFieldNumber;
 const int RoleOnlineNotify::kBpFieldNumber;
+const int RoleOnlineNotify::kPropertyIntListFieldNumber;
+const int RoleOnlineNotify::kPropertyFloatListFieldNumber;
+const int RoleOnlineNotify::kPropertyStringListFieldNumber;
+const int RoleOnlineNotify::kPropertyObjectListFieldNumber;
+const int RoleOnlineNotify::kPropertyVector2ListFieldNumber;
+const int RoleOnlineNotify::kPropertyVector3ListFieldNumber;
 #endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
 
 RoleOnlineNotify::RoleOnlineNotify()
@@ -7616,7 +7666,13 @@ RoleOnlineNotify::RoleOnlineNotify()
 }
 RoleOnlineNotify::RoleOnlineNotify(const RoleOnlineNotify& from)
   : ::google::protobuf::Message(),
-      _internal_metadata_(NULL) {
+      _internal_metadata_(NULL),
+      property_int_list_(from.property_int_list_),
+      property_float_list_(from.property_float_list_),
+      property_string_list_(from.property_string_list_),
+      property_object_list_(from.property_object_list_),
+      property_vector2_list_(from.property_vector2_list_),
+      property_vector3_list_(from.property_vector3_list_) {
   _internal_metadata_.MergeFrom(from._internal_metadata_);
   name_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   if (from.name().size() > 0) {
@@ -7676,6 +7732,12 @@ void RoleOnlineNotify::Clear() {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
+  property_int_list_.Clear();
+  property_float_list_.Clear();
+  property_string_list_.Clear();
+  property_object_list_.Clear();
+  property_vector2_list_.Clear();
+  property_vector3_list_.Clear();
   name_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   if (GetArenaNoVirtual() == NULL && self_ != NULL) {
     delete self_;
@@ -7697,7 +7759,7 @@ bool RoleOnlineNotify::MergePartialFromCodedStream(
   ::google::protobuf::uint32 tag;
   // @@protoc_insertion_point(parse_start:NFMsg.RoleOnlineNotify)
   for (;;) {
-    ::std::pair<::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
+    ::std::pair<::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(16383u);
     tag = p.first;
     if (!p.second) goto handle_unusual;
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
@@ -7779,6 +7841,78 @@ bool RoleOnlineNotify::MergePartialFromCodedStream(
         break;
       }
 
+      // repeated .NFMsg.PropertyInt property_int_list = 20;
+      case 20: {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(162u /* 162 & 0xFF */)) {
+          DO_(::google::protobuf::internal::WireFormatLite::ReadMessage(
+                input, add_property_int_list()));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      // repeated .NFMsg.PropertyFloat property_float_list = 21;
+      case 21: {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(170u /* 170 & 0xFF */)) {
+          DO_(::google::protobuf::internal::WireFormatLite::ReadMessage(
+                input, add_property_float_list()));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      // repeated .NFMsg.PropertyString property_string_list = 22;
+      case 22: {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(178u /* 178 & 0xFF */)) {
+          DO_(::google::protobuf::internal::WireFormatLite::ReadMessage(
+                input, add_property_string_list()));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      // repeated .NFMsg.PropertyObject property_object_list = 23;
+      case 23: {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(186u /* 186 & 0xFF */)) {
+          DO_(::google::protobuf::internal::WireFormatLite::ReadMessage(
+                input, add_property_object_list()));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      // repeated .NFMsg.PropertyVector2 property_vector2_list = 24;
+      case 24: {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(194u /* 194 & 0xFF */)) {
+          DO_(::google::protobuf::internal::WireFormatLite::ReadMessage(
+                input, add_property_vector2_list()));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      // repeated .NFMsg.PropertyVector3 property_vector3_list = 25;
+      case 25: {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(202u /* 202 & 0xFF */)) {
+          DO_(::google::protobuf::internal::WireFormatLite::ReadMessage(
+                input, add_property_vector3_list()));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
       default: {
       handle_unusual:
         if (tag == 0) {
@@ -7838,6 +7972,60 @@ void RoleOnlineNotify::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormatLite::WriteInt32(6, this->bp(), output);
   }
 
+  // repeated .NFMsg.PropertyInt property_int_list = 20;
+  for (unsigned int i = 0,
+      n = static_cast<unsigned int>(this->property_int_list_size()); i < n; i++) {
+    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+      20,
+      this->property_int_list(static_cast<int>(i)),
+      output);
+  }
+
+  // repeated .NFMsg.PropertyFloat property_float_list = 21;
+  for (unsigned int i = 0,
+      n = static_cast<unsigned int>(this->property_float_list_size()); i < n; i++) {
+    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+      21,
+      this->property_float_list(static_cast<int>(i)),
+      output);
+  }
+
+  // repeated .NFMsg.PropertyString property_string_list = 22;
+  for (unsigned int i = 0,
+      n = static_cast<unsigned int>(this->property_string_list_size()); i < n; i++) {
+    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+      22,
+      this->property_string_list(static_cast<int>(i)),
+      output);
+  }
+
+  // repeated .NFMsg.PropertyObject property_object_list = 23;
+  for (unsigned int i = 0,
+      n = static_cast<unsigned int>(this->property_object_list_size()); i < n; i++) {
+    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+      23,
+      this->property_object_list(static_cast<int>(i)),
+      output);
+  }
+
+  // repeated .NFMsg.PropertyVector2 property_vector2_list = 24;
+  for (unsigned int i = 0,
+      n = static_cast<unsigned int>(this->property_vector2_list_size()); i < n; i++) {
+    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+      24,
+      this->property_vector2_list(static_cast<int>(i)),
+      output);
+  }
+
+  // repeated .NFMsg.PropertyVector3 property_vector3_list = 25;
+  for (unsigned int i = 0,
+      n = static_cast<unsigned int>(this->property_vector3_list_size()); i < n; i++) {
+    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+      25,
+      this->property_vector3_list(static_cast<int>(i)),
+      output);
+  }
+
   if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
     ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
         (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()), output);
@@ -7888,6 +8076,54 @@ void RoleOnlineNotify::SerializeWithCachedSizes(
     target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(6, this->bp(), target);
   }
 
+  // repeated .NFMsg.PropertyInt property_int_list = 20;
+  for (unsigned int i = 0,
+      n = static_cast<unsigned int>(this->property_int_list_size()); i < n; i++) {
+    target = ::google::protobuf::internal::WireFormatLite::
+      InternalWriteMessageToArray(
+        20, this->property_int_list(static_cast<int>(i)), deterministic, target);
+  }
+
+  // repeated .NFMsg.PropertyFloat property_float_list = 21;
+  for (unsigned int i = 0,
+      n = static_cast<unsigned int>(this->property_float_list_size()); i < n; i++) {
+    target = ::google::protobuf::internal::WireFormatLite::
+      InternalWriteMessageToArray(
+        21, this->property_float_list(static_cast<int>(i)), deterministic, target);
+  }
+
+  // repeated .NFMsg.PropertyString property_string_list = 22;
+  for (unsigned int i = 0,
+      n = static_cast<unsigned int>(this->property_string_list_size()); i < n; i++) {
+    target = ::google::protobuf::internal::WireFormatLite::
+      InternalWriteMessageToArray(
+        22, this->property_string_list(static_cast<int>(i)), deterministic, target);
+  }
+
+  // repeated .NFMsg.PropertyObject property_object_list = 23;
+  for (unsigned int i = 0,
+      n = static_cast<unsigned int>(this->property_object_list_size()); i < n; i++) {
+    target = ::google::protobuf::internal::WireFormatLite::
+      InternalWriteMessageToArray(
+        23, this->property_object_list(static_cast<int>(i)), deterministic, target);
+  }
+
+  // repeated .NFMsg.PropertyVector2 property_vector2_list = 24;
+  for (unsigned int i = 0,
+      n = static_cast<unsigned int>(this->property_vector2_list_size()); i < n; i++) {
+    target = ::google::protobuf::internal::WireFormatLite::
+      InternalWriteMessageToArray(
+        24, this->property_vector2_list(static_cast<int>(i)), deterministic, target);
+  }
+
+  // repeated .NFMsg.PropertyVector3 property_vector3_list = 25;
+  for (unsigned int i = 0,
+      n = static_cast<unsigned int>(this->property_vector3_list_size()); i < n; i++) {
+    target = ::google::protobuf::internal::WireFormatLite::
+      InternalWriteMessageToArray(
+        25, this->property_vector3_list(static_cast<int>(i)), deterministic, target);
+  }
+
   if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
     target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
         (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()), target);
@@ -7905,6 +8141,72 @@ size_t RoleOnlineNotify::ByteSizeLong() const {
       ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
         (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()));
   }
+  // repeated .NFMsg.PropertyInt property_int_list = 20;
+  {
+    unsigned int count = static_cast<unsigned int>(this->property_int_list_size());
+    total_size += 2UL * count;
+    for (unsigned int i = 0; i < count; i++) {
+      total_size +=
+        ::google::protobuf::internal::WireFormatLite::MessageSize(
+          this->property_int_list(static_cast<int>(i)));
+    }
+  }
+
+  // repeated .NFMsg.PropertyFloat property_float_list = 21;
+  {
+    unsigned int count = static_cast<unsigned int>(this->property_float_list_size());
+    total_size += 2UL * count;
+    for (unsigned int i = 0; i < count; i++) {
+      total_size +=
+        ::google::protobuf::internal::WireFormatLite::MessageSize(
+          this->property_float_list(static_cast<int>(i)));
+    }
+  }
+
+  // repeated .NFMsg.PropertyString property_string_list = 22;
+  {
+    unsigned int count = static_cast<unsigned int>(this->property_string_list_size());
+    total_size += 2UL * count;
+    for (unsigned int i = 0; i < count; i++) {
+      total_size +=
+        ::google::protobuf::internal::WireFormatLite::MessageSize(
+          this->property_string_list(static_cast<int>(i)));
+    }
+  }
+
+  // repeated .NFMsg.PropertyObject property_object_list = 23;
+  {
+    unsigned int count = static_cast<unsigned int>(this->property_object_list_size());
+    total_size += 2UL * count;
+    for (unsigned int i = 0; i < count; i++) {
+      total_size +=
+        ::google::protobuf::internal::WireFormatLite::MessageSize(
+          this->property_object_list(static_cast<int>(i)));
+    }
+  }
+
+  // repeated .NFMsg.PropertyVector2 property_vector2_list = 24;
+  {
+    unsigned int count = static_cast<unsigned int>(this->property_vector2_list_size());
+    total_size += 2UL * count;
+    for (unsigned int i = 0; i < count; i++) {
+      total_size +=
+        ::google::protobuf::internal::WireFormatLite::MessageSize(
+          this->property_vector2_list(static_cast<int>(i)));
+    }
+  }
+
+  // repeated .NFMsg.PropertyVector3 property_vector3_list = 25;
+  {
+    unsigned int count = static_cast<unsigned int>(this->property_vector3_list_size());
+    total_size += 2UL * count;
+    for (unsigned int i = 0; i < count; i++) {
+      total_size +=
+        ::google::protobuf::internal::WireFormatLite::MessageSize(
+          this->property_vector3_list(static_cast<int>(i)));
+    }
+  }
+
   // bytes name = 5;
   if (this->name().size() > 0) {
     total_size += 1 +
@@ -7974,6 +8276,12 @@ void RoleOnlineNotify::MergeFrom(const RoleOnlineNotify& from) {
   ::google::protobuf::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
+  property_int_list_.MergeFrom(from.property_int_list_);
+  property_float_list_.MergeFrom(from.property_float_list_);
+  property_string_list_.MergeFrom(from.property_string_list_);
+  property_object_list_.MergeFrom(from.property_object_list_);
+  property_vector2_list_.MergeFrom(from.property_vector2_list_);
+  property_vector3_list_.MergeFrom(from.property_vector3_list_);
   if (from.name().size() > 0) {
 
     name_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.name_);
@@ -8019,6 +8327,12 @@ void RoleOnlineNotify::Swap(RoleOnlineNotify* other) {
 }
 void RoleOnlineNotify::InternalSwap(RoleOnlineNotify* other) {
   using std::swap;
+  CastToBase(&property_int_list_)->InternalSwap(CastToBase(&other->property_int_list_));
+  CastToBase(&property_float_list_)->InternalSwap(CastToBase(&other->property_float_list_));
+  CastToBase(&property_string_list_)->InternalSwap(CastToBase(&other->property_string_list_));
+  CastToBase(&property_object_list_)->InternalSwap(CastToBase(&other->property_object_list_));
+  CastToBase(&property_vector2_list_)->InternalSwap(CastToBase(&other->property_vector2_list_));
+  CastToBase(&property_vector3_list_)->InternalSwap(CastToBase(&other->property_vector3_list_));
   name_.Swap(&other->name_, &::google::protobuf::internal::GetEmptyStringAlreadyInited(),
     GetArenaNoVirtual());
   swap(self_, other->self_);

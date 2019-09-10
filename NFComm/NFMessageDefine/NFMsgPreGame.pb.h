@@ -2905,6 +2905,78 @@ class LIBPROTOC_EXPORT RoleOnlineNotify : public ::google::protobuf::Message /* 
 
   // accessors -------------------------------------------------------
 
+  // repeated .NFMsg.PropertyInt property_int_list = 20;
+  int property_int_list_size() const;
+  void clear_property_int_list();
+  static const int kPropertyIntListFieldNumber = 20;
+  ::NFMsg::PropertyInt* mutable_property_int_list(int index);
+  ::google::protobuf::RepeatedPtrField< ::NFMsg::PropertyInt >*
+      mutable_property_int_list();
+  const ::NFMsg::PropertyInt& property_int_list(int index) const;
+  ::NFMsg::PropertyInt* add_property_int_list();
+  const ::google::protobuf::RepeatedPtrField< ::NFMsg::PropertyInt >&
+      property_int_list() const;
+
+  // repeated .NFMsg.PropertyFloat property_float_list = 21;
+  int property_float_list_size() const;
+  void clear_property_float_list();
+  static const int kPropertyFloatListFieldNumber = 21;
+  ::NFMsg::PropertyFloat* mutable_property_float_list(int index);
+  ::google::protobuf::RepeatedPtrField< ::NFMsg::PropertyFloat >*
+      mutable_property_float_list();
+  const ::NFMsg::PropertyFloat& property_float_list(int index) const;
+  ::NFMsg::PropertyFloat* add_property_float_list();
+  const ::google::protobuf::RepeatedPtrField< ::NFMsg::PropertyFloat >&
+      property_float_list() const;
+
+  // repeated .NFMsg.PropertyString property_string_list = 22;
+  int property_string_list_size() const;
+  void clear_property_string_list();
+  static const int kPropertyStringListFieldNumber = 22;
+  ::NFMsg::PropertyString* mutable_property_string_list(int index);
+  ::google::protobuf::RepeatedPtrField< ::NFMsg::PropertyString >*
+      mutable_property_string_list();
+  const ::NFMsg::PropertyString& property_string_list(int index) const;
+  ::NFMsg::PropertyString* add_property_string_list();
+  const ::google::protobuf::RepeatedPtrField< ::NFMsg::PropertyString >&
+      property_string_list() const;
+
+  // repeated .NFMsg.PropertyObject property_object_list = 23;
+  int property_object_list_size() const;
+  void clear_property_object_list();
+  static const int kPropertyObjectListFieldNumber = 23;
+  ::NFMsg::PropertyObject* mutable_property_object_list(int index);
+  ::google::protobuf::RepeatedPtrField< ::NFMsg::PropertyObject >*
+      mutable_property_object_list();
+  const ::NFMsg::PropertyObject& property_object_list(int index) const;
+  ::NFMsg::PropertyObject* add_property_object_list();
+  const ::google::protobuf::RepeatedPtrField< ::NFMsg::PropertyObject >&
+      property_object_list() const;
+
+  // repeated .NFMsg.PropertyVector2 property_vector2_list = 24;
+  int property_vector2_list_size() const;
+  void clear_property_vector2_list();
+  static const int kPropertyVector2ListFieldNumber = 24;
+  ::NFMsg::PropertyVector2* mutable_property_vector2_list(int index);
+  ::google::protobuf::RepeatedPtrField< ::NFMsg::PropertyVector2 >*
+      mutable_property_vector2_list();
+  const ::NFMsg::PropertyVector2& property_vector2_list(int index) const;
+  ::NFMsg::PropertyVector2* add_property_vector2_list();
+  const ::google::protobuf::RepeatedPtrField< ::NFMsg::PropertyVector2 >&
+      property_vector2_list() const;
+
+  // repeated .NFMsg.PropertyVector3 property_vector3_list = 25;
+  int property_vector3_list_size() const;
+  void clear_property_vector3_list();
+  static const int kPropertyVector3ListFieldNumber = 25;
+  ::NFMsg::PropertyVector3* mutable_property_vector3_list(int index);
+  ::google::protobuf::RepeatedPtrField< ::NFMsg::PropertyVector3 >*
+      mutable_property_vector3_list();
+  const ::NFMsg::PropertyVector3& property_vector3_list(int index) const;
+  ::NFMsg::PropertyVector3* add_property_vector3_list();
+  const ::google::protobuf::RepeatedPtrField< ::NFMsg::PropertyVector3 >&
+      property_vector3_list() const;
+
   // bytes name = 5;
   void clear_name();
   static const int kNameFieldNumber = 5;
@@ -2965,6 +3037,12 @@ class LIBPROTOC_EXPORT RoleOnlineNotify : public ::google::protobuf::Message /* 
  private:
 
   ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
+  ::google::protobuf::RepeatedPtrField< ::NFMsg::PropertyInt > property_int_list_;
+  ::google::protobuf::RepeatedPtrField< ::NFMsg::PropertyFloat > property_float_list_;
+  ::google::protobuf::RepeatedPtrField< ::NFMsg::PropertyString > property_string_list_;
+  ::google::protobuf::RepeatedPtrField< ::NFMsg::PropertyObject > property_object_list_;
+  ::google::protobuf::RepeatedPtrField< ::NFMsg::PropertyVector2 > property_vector2_list_;
+  ::google::protobuf::RepeatedPtrField< ::NFMsg::PropertyVector3 > property_vector3_list_;
   ::google::protobuf::internal::ArenaStringPtr name_;
   ::NFMsg::Ident* self_;
   ::NFMsg::Ident* clan_;
@@ -5803,6 +5881,168 @@ inline void RoleOnlineNotify::set_bp(::google::protobuf::int32 value) {
   
   bp_ = value;
   // @@protoc_insertion_point(field_set:NFMsg.RoleOnlineNotify.bp)
+}
+
+// repeated .NFMsg.PropertyInt property_int_list = 20;
+inline int RoleOnlineNotify::property_int_list_size() const {
+  return property_int_list_.size();
+}
+inline ::NFMsg::PropertyInt* RoleOnlineNotify::mutable_property_int_list(int index) {
+  // @@protoc_insertion_point(field_mutable:NFMsg.RoleOnlineNotify.property_int_list)
+  return property_int_list_.Mutable(index);
+}
+inline ::google::protobuf::RepeatedPtrField< ::NFMsg::PropertyInt >*
+RoleOnlineNotify::mutable_property_int_list() {
+  // @@protoc_insertion_point(field_mutable_list:NFMsg.RoleOnlineNotify.property_int_list)
+  return &property_int_list_;
+}
+inline const ::NFMsg::PropertyInt& RoleOnlineNotify::property_int_list(int index) const {
+  // @@protoc_insertion_point(field_get:NFMsg.RoleOnlineNotify.property_int_list)
+  return property_int_list_.Get(index);
+}
+inline ::NFMsg::PropertyInt* RoleOnlineNotify::add_property_int_list() {
+  // @@protoc_insertion_point(field_add:NFMsg.RoleOnlineNotify.property_int_list)
+  return property_int_list_.Add();
+}
+inline const ::google::protobuf::RepeatedPtrField< ::NFMsg::PropertyInt >&
+RoleOnlineNotify::property_int_list() const {
+  // @@protoc_insertion_point(field_list:NFMsg.RoleOnlineNotify.property_int_list)
+  return property_int_list_;
+}
+
+// repeated .NFMsg.PropertyFloat property_float_list = 21;
+inline int RoleOnlineNotify::property_float_list_size() const {
+  return property_float_list_.size();
+}
+inline ::NFMsg::PropertyFloat* RoleOnlineNotify::mutable_property_float_list(int index) {
+  // @@protoc_insertion_point(field_mutable:NFMsg.RoleOnlineNotify.property_float_list)
+  return property_float_list_.Mutable(index);
+}
+inline ::google::protobuf::RepeatedPtrField< ::NFMsg::PropertyFloat >*
+RoleOnlineNotify::mutable_property_float_list() {
+  // @@protoc_insertion_point(field_mutable_list:NFMsg.RoleOnlineNotify.property_float_list)
+  return &property_float_list_;
+}
+inline const ::NFMsg::PropertyFloat& RoleOnlineNotify::property_float_list(int index) const {
+  // @@protoc_insertion_point(field_get:NFMsg.RoleOnlineNotify.property_float_list)
+  return property_float_list_.Get(index);
+}
+inline ::NFMsg::PropertyFloat* RoleOnlineNotify::add_property_float_list() {
+  // @@protoc_insertion_point(field_add:NFMsg.RoleOnlineNotify.property_float_list)
+  return property_float_list_.Add();
+}
+inline const ::google::protobuf::RepeatedPtrField< ::NFMsg::PropertyFloat >&
+RoleOnlineNotify::property_float_list() const {
+  // @@protoc_insertion_point(field_list:NFMsg.RoleOnlineNotify.property_float_list)
+  return property_float_list_;
+}
+
+// repeated .NFMsg.PropertyString property_string_list = 22;
+inline int RoleOnlineNotify::property_string_list_size() const {
+  return property_string_list_.size();
+}
+inline ::NFMsg::PropertyString* RoleOnlineNotify::mutable_property_string_list(int index) {
+  // @@protoc_insertion_point(field_mutable:NFMsg.RoleOnlineNotify.property_string_list)
+  return property_string_list_.Mutable(index);
+}
+inline ::google::protobuf::RepeatedPtrField< ::NFMsg::PropertyString >*
+RoleOnlineNotify::mutable_property_string_list() {
+  // @@protoc_insertion_point(field_mutable_list:NFMsg.RoleOnlineNotify.property_string_list)
+  return &property_string_list_;
+}
+inline const ::NFMsg::PropertyString& RoleOnlineNotify::property_string_list(int index) const {
+  // @@protoc_insertion_point(field_get:NFMsg.RoleOnlineNotify.property_string_list)
+  return property_string_list_.Get(index);
+}
+inline ::NFMsg::PropertyString* RoleOnlineNotify::add_property_string_list() {
+  // @@protoc_insertion_point(field_add:NFMsg.RoleOnlineNotify.property_string_list)
+  return property_string_list_.Add();
+}
+inline const ::google::protobuf::RepeatedPtrField< ::NFMsg::PropertyString >&
+RoleOnlineNotify::property_string_list() const {
+  // @@protoc_insertion_point(field_list:NFMsg.RoleOnlineNotify.property_string_list)
+  return property_string_list_;
+}
+
+// repeated .NFMsg.PropertyObject property_object_list = 23;
+inline int RoleOnlineNotify::property_object_list_size() const {
+  return property_object_list_.size();
+}
+inline ::NFMsg::PropertyObject* RoleOnlineNotify::mutable_property_object_list(int index) {
+  // @@protoc_insertion_point(field_mutable:NFMsg.RoleOnlineNotify.property_object_list)
+  return property_object_list_.Mutable(index);
+}
+inline ::google::protobuf::RepeatedPtrField< ::NFMsg::PropertyObject >*
+RoleOnlineNotify::mutable_property_object_list() {
+  // @@protoc_insertion_point(field_mutable_list:NFMsg.RoleOnlineNotify.property_object_list)
+  return &property_object_list_;
+}
+inline const ::NFMsg::PropertyObject& RoleOnlineNotify::property_object_list(int index) const {
+  // @@protoc_insertion_point(field_get:NFMsg.RoleOnlineNotify.property_object_list)
+  return property_object_list_.Get(index);
+}
+inline ::NFMsg::PropertyObject* RoleOnlineNotify::add_property_object_list() {
+  // @@protoc_insertion_point(field_add:NFMsg.RoleOnlineNotify.property_object_list)
+  return property_object_list_.Add();
+}
+inline const ::google::protobuf::RepeatedPtrField< ::NFMsg::PropertyObject >&
+RoleOnlineNotify::property_object_list() const {
+  // @@protoc_insertion_point(field_list:NFMsg.RoleOnlineNotify.property_object_list)
+  return property_object_list_;
+}
+
+// repeated .NFMsg.PropertyVector2 property_vector2_list = 24;
+inline int RoleOnlineNotify::property_vector2_list_size() const {
+  return property_vector2_list_.size();
+}
+inline ::NFMsg::PropertyVector2* RoleOnlineNotify::mutable_property_vector2_list(int index) {
+  // @@protoc_insertion_point(field_mutable:NFMsg.RoleOnlineNotify.property_vector2_list)
+  return property_vector2_list_.Mutable(index);
+}
+inline ::google::protobuf::RepeatedPtrField< ::NFMsg::PropertyVector2 >*
+RoleOnlineNotify::mutable_property_vector2_list() {
+  // @@protoc_insertion_point(field_mutable_list:NFMsg.RoleOnlineNotify.property_vector2_list)
+  return &property_vector2_list_;
+}
+inline const ::NFMsg::PropertyVector2& RoleOnlineNotify::property_vector2_list(int index) const {
+  // @@protoc_insertion_point(field_get:NFMsg.RoleOnlineNotify.property_vector2_list)
+  return property_vector2_list_.Get(index);
+}
+inline ::NFMsg::PropertyVector2* RoleOnlineNotify::add_property_vector2_list() {
+  // @@protoc_insertion_point(field_add:NFMsg.RoleOnlineNotify.property_vector2_list)
+  return property_vector2_list_.Add();
+}
+inline const ::google::protobuf::RepeatedPtrField< ::NFMsg::PropertyVector2 >&
+RoleOnlineNotify::property_vector2_list() const {
+  // @@protoc_insertion_point(field_list:NFMsg.RoleOnlineNotify.property_vector2_list)
+  return property_vector2_list_;
+}
+
+// repeated .NFMsg.PropertyVector3 property_vector3_list = 25;
+inline int RoleOnlineNotify::property_vector3_list_size() const {
+  return property_vector3_list_.size();
+}
+inline ::NFMsg::PropertyVector3* RoleOnlineNotify::mutable_property_vector3_list(int index) {
+  // @@protoc_insertion_point(field_mutable:NFMsg.RoleOnlineNotify.property_vector3_list)
+  return property_vector3_list_.Mutable(index);
+}
+inline ::google::protobuf::RepeatedPtrField< ::NFMsg::PropertyVector3 >*
+RoleOnlineNotify::mutable_property_vector3_list() {
+  // @@protoc_insertion_point(field_mutable_list:NFMsg.RoleOnlineNotify.property_vector3_list)
+  return &property_vector3_list_;
+}
+inline const ::NFMsg::PropertyVector3& RoleOnlineNotify::property_vector3_list(int index) const {
+  // @@protoc_insertion_point(field_get:NFMsg.RoleOnlineNotify.property_vector3_list)
+  return property_vector3_list_.Get(index);
+}
+inline ::NFMsg::PropertyVector3* RoleOnlineNotify::add_property_vector3_list() {
+  // @@protoc_insertion_point(field_add:NFMsg.RoleOnlineNotify.property_vector3_list)
+  return property_vector3_list_.Add();
+}
+inline const ::google::protobuf::RepeatedPtrField< ::NFMsg::PropertyVector3 >&
+RoleOnlineNotify::property_vector3_list() const {
+  // @@protoc_insertion_point(field_list:NFMsg.RoleOnlineNotify.property_vector3_list)
+  return property_vector3_list_;
 }
 
 // -------------------------------------------------------------------

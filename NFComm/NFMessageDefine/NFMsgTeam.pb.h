@@ -175,7 +175,7 @@ class LIBPROTOC_EXPORT TeamMemberInfo : public ::google::protobuf::Message /* @@
 
   // accessors -------------------------------------------------------
 
-  // string name = 2;
+  // bytes name = 2;
   void clear_name();
   static const int kNameFieldNumber = 2;
   const ::std::string& name() const;
@@ -184,7 +184,7 @@ class LIBPROTOC_EXPORT TeamMemberInfo : public ::google::protobuf::Message /* @@
   void set_name(::std::string&& value);
   #endif
   void set_name(const char* value);
-  void set_name(const char* value, size_t size);
+  void set_name(const void* value, size_t size);
   ::std::string* mutable_name();
   ::std::string* release_name();
   void set_allocated_name(::std::string* name);
@@ -801,7 +801,7 @@ class LIBPROTOC_EXPORT AckInviteToTeam : public ::google::protobuf::Message /* @
 
   // accessors -------------------------------------------------------
 
-  // string name = 3;
+  // bytes name = 3;
   void clear_name();
   static const int kNameFieldNumber = 3;
   const ::std::string& name() const;
@@ -810,7 +810,7 @@ class LIBPROTOC_EXPORT AckInviteToTeam : public ::google::protobuf::Message /* @
   void set_name(::std::string&& value);
   #endif
   void set_name(const char* value);
-  void set_name(const char* value, size_t size);
+  void set_name(const void* value, size_t size);
   ::std::string* mutable_name();
   ::std::string* release_name();
   void set_allocated_name(::std::string* name);
@@ -1139,7 +1139,7 @@ inline void TeamMemberInfo::set_allocated_id(::NFMsg::Ident* id) {
   // @@protoc_insertion_point(field_set_allocated:NFMsg.TeamMemberInfo.id)
 }
 
-// string name = 2;
+// bytes name = 2;
 inline void TeamMemberInfo::clear_name() {
   name_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
@@ -1166,7 +1166,7 @@ inline void TeamMemberInfo::set_name(const char* value) {
   name_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
   // @@protoc_insertion_point(field_set_char:NFMsg.TeamMemberInfo.name)
 }
-inline void TeamMemberInfo::set_name(const char* value, size_t size) {
+inline void TeamMemberInfo::set_name(const void* value, size_t size) {
   
   name_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
       ::std::string(reinterpret_cast<const char*>(value), size));
@@ -1648,7 +1648,7 @@ inline void AckInviteToTeam::set_allocated_inviter(::NFMsg::Ident* inviter) {
   // @@protoc_insertion_point(field_set_allocated:NFMsg.AckInviteToTeam.inviter)
 }
 
-// string name = 3;
+// bytes name = 3;
 inline void AckInviteToTeam::clear_name() {
   name_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
@@ -1675,7 +1675,7 @@ inline void AckInviteToTeam::set_name(const char* value) {
   name_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
   // @@protoc_insertion_point(field_set_char:NFMsg.AckInviteToTeam.name)
 }
-inline void AckInviteToTeam::set_name(const char* value, size_t size) {
+inline void AckInviteToTeam::set_name(const void* value, size_t size) {
   
   name_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
       ::std::string(reinterpret_cast<const char*>(value), size));

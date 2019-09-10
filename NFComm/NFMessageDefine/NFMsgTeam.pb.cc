@@ -309,7 +309,7 @@ void AddDescriptorsImpl() {
   static const char descriptor[] GOOGLE_PROTOBUF_ATTRIBUTE_SECTION_VARIABLE(protodesc_cold) = {
       "\n\017NFMsgTeam.proto\022\005NFMsg\032\017NFMsgBase.prot"
       "o\"T\n\016TeamMemberInfo\022\030\n\002id\030\001 \001(\0132\014.NFMsg."
-      "Ident\022\014\n\004name\030\002 \001(\t\022\n\n\002bp\030\003 \001(\005\022\016\n\006leade"
+      "Ident\022\014\n\004name\030\002 \001(\014\022\n\n\002bp\030\003 \001(\005\022\016\n\006leade"
       "r\030\004 \001(\005\"\213\001\n\024ReqAckTeamMemberList\022\035\n\007team"
       "_id\030\001 \001(\0132\014.NFMsg.Ident\022)\n\ninviteList\030\002 "
       "\003(\0132\025.NFMsg.TeamMemberInfo\022)\n\nmemberList"
@@ -321,7 +321,7 @@ void AddDescriptorsImpl() {
       "mMemberInfo\"1\n\017ReqInviteToTeam\022\036\n\010strang"
       "er\030\001 \001(\0132\014.NFMsg.Ident\"}\n\017AckInviteToTea"
       "m\022\035\n\007team_id\030\001 \001(\0132\014.NFMsg.Ident\022\035\n\007invi"
-      "ter\030\002 \001(\0132\014.NFMsg.Ident\022\014\n\004name\030\003 \001(\t\022\036\n"
+      "ter\030\002 \001(\0132\014.NFMsg.Ident\022\014\n\004name\030\003 \001(\014\022\036\n"
       "\010stranger\030\004 \001(\0132\014.NFMsg.Ident\"7\n\026ReqAckA"
       "cceptTeamInvite\022\035\n\007team_id\030\001 \001(\0132\014.NFMsg"
       ".Ident\"7\n\026ReqAckRejectTeamInvite\022\035\n\007team"
@@ -462,16 +462,12 @@ bool TeamMemberInfo::MergePartialFromCodedStream(
         break;
       }
 
-      // string name = 2;
+      // bytes name = 2;
       case 2: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
             static_cast< ::google::protobuf::uint8>(18u /* 18 & 0xFF */)) {
-          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
+          DO_(::google::protobuf::internal::WireFormatLite::ReadBytes(
                 input, this->mutable_name()));
-          DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
-            this->name().data(), static_cast<int>(this->name().length()),
-            ::google::protobuf::internal::WireFormatLite::PARSE,
-            "NFMsg.TeamMemberInfo.name"));
         } else {
           goto handle_unusual;
         }
@@ -538,13 +534,9 @@ void TeamMemberInfo::SerializeWithCachedSizes(
       1, this->_internal_id(), output);
   }
 
-  // string name = 2;
+  // bytes name = 2;
   if (this->name().size() > 0) {
-    ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
-      this->name().data(), static_cast<int>(this->name().length()),
-      ::google::protobuf::internal::WireFormatLite::SERIALIZE,
-      "NFMsg.TeamMemberInfo.name");
-    ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
+    ::google::protobuf::internal::WireFormatLite::WriteBytesMaybeAliased(
       2, this->name(), output);
   }
 
@@ -579,14 +571,10 @@ void TeamMemberInfo::SerializeWithCachedSizes(
         1, this->_internal_id(), deterministic, target);
   }
 
-  // string name = 2;
+  // bytes name = 2;
   if (this->name().size() > 0) {
-    ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
-      this->name().data(), static_cast<int>(this->name().length()),
-      ::google::protobuf::internal::WireFormatLite::SERIALIZE,
-      "NFMsg.TeamMemberInfo.name");
     target =
-      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
+      ::google::protobuf::internal::WireFormatLite::WriteBytesToArray(
         2, this->name(), target);
   }
 
@@ -617,10 +605,10 @@ size_t TeamMemberInfo::ByteSizeLong() const {
       ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
         (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()));
   }
-  // string name = 2;
+  // bytes name = 2;
   if (this->name().size() > 0) {
     total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::StringSize(
+      ::google::protobuf::internal::WireFormatLite::BytesSize(
         this->name());
   }
 
@@ -2022,16 +2010,12 @@ bool AckInviteToTeam::MergePartialFromCodedStream(
         break;
       }
 
-      // string name = 3;
+      // bytes name = 3;
       case 3: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
             static_cast< ::google::protobuf::uint8>(26u /* 26 & 0xFF */)) {
-          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
+          DO_(::google::protobuf::internal::WireFormatLite::ReadBytes(
                 input, this->mutable_name()));
-          DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
-            this->name().data(), static_cast<int>(this->name().length()),
-            ::google::protobuf::internal::WireFormatLite::PARSE,
-            "NFMsg.AckInviteToTeam.name"));
         } else {
           goto handle_unusual;
         }
@@ -2088,13 +2072,9 @@ void AckInviteToTeam::SerializeWithCachedSizes(
       2, this->_internal_inviter(), output);
   }
 
-  // string name = 3;
+  // bytes name = 3;
   if (this->name().size() > 0) {
-    ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
-      this->name().data(), static_cast<int>(this->name().length()),
-      ::google::protobuf::internal::WireFormatLite::SERIALIZE,
-      "NFMsg.AckInviteToTeam.name");
-    ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
+    ::google::protobuf::internal::WireFormatLite::WriteBytesMaybeAliased(
       3, this->name(), output);
   }
 
@@ -2132,14 +2112,10 @@ void AckInviteToTeam::SerializeWithCachedSizes(
         2, this->_internal_inviter(), deterministic, target);
   }
 
-  // string name = 3;
+  // bytes name = 3;
   if (this->name().size() > 0) {
-    ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
-      this->name().data(), static_cast<int>(this->name().length()),
-      ::google::protobuf::internal::WireFormatLite::SERIALIZE,
-      "NFMsg.AckInviteToTeam.name");
     target =
-      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
+      ::google::protobuf::internal::WireFormatLite::WriteBytesToArray(
         3, this->name(), target);
   }
 
@@ -2167,10 +2143,10 @@ size_t AckInviteToTeam::ByteSizeLong() const {
       ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
         (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()));
   }
-  // string name = 3;
+  // bytes name = 3;
   if (this->name().size() > 0) {
     total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::StringSize(
+      ::google::protobuf::internal::WireFormatLite::BytesSize(
         this->name());
   }
 

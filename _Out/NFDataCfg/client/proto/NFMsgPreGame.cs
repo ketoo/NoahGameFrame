@@ -70,20 +70,27 @@ namespace NFMsg {
             "ASgMEgwKBG5hbWUYAiABKAwSDwoHZ2FtZV9pZBgDIAEoBSJACg5SZXFSZWNv",
             "dmVyUm9sZRIPCgdhY2NvdW50GAEgASgMEgwKBG5hbWUYAiABKAwSDwoHZ2Ft",
             "ZV9pZBgDIAEoBSIgCg9TZXJ2ZXJIZWFydEJlYXQSDQoFY291bnQYASABKAUi",
-            "gQEKEFJvbGVPbmxpbmVOb3RpZnkSGgoEc2VsZhgBIAEoCzIMLk5GTXNnLklk",
+            "uwMKEFJvbGVPbmxpbmVOb3RpZnkSGgoEc2VsZhgBIAEoCzIMLk5GTXNnLklk",
             "ZW50EhoKBGNsYW4YAiABKAsyDC5ORk1zZy5JZGVudBIMCgRnYW1lGAMgASgF",
-            "Eg0KBXByb3h5GAQgASgFEgwKBG5hbWUYBSABKAwSCgoCYnAYBiABKAUiaAoR",
-            "Um9sZU9mZmxpbmVOb3RpZnkSGgoEc2VsZhgBIAEoCzIMLk5GTXNnLklkZW50",
-            "EhoKBGNsYW4YAiABKAsyDC5ORk1zZy5JZGVudBIMCgRnYW1lGAMgASgFEg0K",
-            "BXByb3h5GAQgASgFIn4KDFJvbGVEYXRhUGFjaxIYCgJpZBgBIAEoCzIMLk5G",
-            "TXNnLklkZW50EisKCHByb3BlcnR5GAIgASgLMhkuTkZNc2cuT2JqZWN0UHJv",
-            "cGVydHlMaXN0EicKBnJlY29yZBgDIAEoCzIXLk5GTXNnLk9iamVjdFJlY29y",
-            "ZExpc3QqWgoMRVNlcnZlclN0YXRlEg0KCUVTVF9DUkFTSBAAEg4KCkVTVF9O",
-            "QVJNQUwQARIMCghFU1RfQlVTWRACEgwKCEVTVF9GSVJFEAMSDwoLRVNUX01B",
-            "SU5URU4QBCpKCgpFTG9naW5Nb2RlEg0KCUVMTV9MT0dJThAAEhAKDEVMTV9S",
-            "RUdJU1RFUhABEhsKF0VMTV9BVVRPX1JFR0lTVEVSX0xPR0lOEAIqQAoRUmVx",
-            "U2VydmVyTGlzdFR5cGUSFQoRUlNMVF9XT1JMRF9TRVJWRVIQABIUChBSU0xU",
-            "X0dBTUVTX0VSVkVSEAFiBnByb3RvMw=="));
+            "Eg0KBXByb3h5GAQgASgFEgwKBG5hbWUYBSABKAwSCgoCYnAYBiABKAUSLQoR",
+            "cHJvcGVydHlfaW50X2xpc3QYFCADKAsyEi5ORk1zZy5Qcm9wZXJ0eUludBIx",
+            "ChNwcm9wZXJ0eV9mbG9hdF9saXN0GBUgAygLMhQuTkZNc2cuUHJvcGVydHlG",
+            "bG9hdBIzChRwcm9wZXJ0eV9zdHJpbmdfbGlzdBgWIAMoCzIVLk5GTXNnLlBy",
+            "b3BlcnR5U3RyaW5nEjMKFHByb3BlcnR5X29iamVjdF9saXN0GBcgAygLMhUu",
+            "TkZNc2cuUHJvcGVydHlPYmplY3QSNQoVcHJvcGVydHlfdmVjdG9yMl9saXN0",
+            "GBggAygLMhYuTkZNc2cuUHJvcGVydHlWZWN0b3IyEjUKFXByb3BlcnR5X3Zl",
+            "Y3RvcjNfbGlzdBgZIAMoCzIWLk5GTXNnLlByb3BlcnR5VmVjdG9yMyJoChFS",
+            "b2xlT2ZmbGluZU5vdGlmeRIaCgRzZWxmGAEgASgLMgwuTkZNc2cuSWRlbnQS",
+            "GgoEY2xhbhgCIAEoCzIMLk5GTXNnLklkZW50EgwKBGdhbWUYAyABKAUSDQoF",
+            "cHJveHkYBCABKAUifgoMUm9sZURhdGFQYWNrEhgKAmlkGAEgASgLMgwuTkZN",
+            "c2cuSWRlbnQSKwoIcHJvcGVydHkYAiABKAsyGS5ORk1zZy5PYmplY3RQcm9w",
+            "ZXJ0eUxpc3QSJwoGcmVjb3JkGAMgASgLMhcuTkZNc2cuT2JqZWN0UmVjb3Jk",
+            "TGlzdCpaCgxFU2VydmVyU3RhdGUSDQoJRVNUX0NSQVNIEAASDgoKRVNUX05B",
+            "Uk1BTBABEgwKCEVTVF9CVVNZEAISDAoIRVNUX0ZJUkUQAxIPCgtFU1RfTUFJ",
+            "TlRFThAEKkoKCkVMb2dpbk1vZGUSDQoJRUxNX0xPR0lOEAASEAoMRUxNX1JF",
+            "R0lTVEVSEAESGwoXRUxNX0FVVE9fUkVHSVNURVJfTE9HSU4QAipAChFSZXFT",
+            "ZXJ2ZXJMaXN0VHlwZRIVChFSU0xUX1dPUkxEX1NFUlZFUhAAEhQKEFJTTFRf",
+            "R0FNRVNfRVJWRVIQAWIGcHJvdG8z"));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { global::NFMsg.NFDefineReflection.Descriptor, global::NFMsg.NFMsgBaseReflection.Descriptor, },
           new pbr::GeneratedClrTypeInfo(new[] {typeof(global::NFMsg.EServerState), typeof(global::NFMsg.ELoginMode), typeof(global::NFMsg.ReqServerListType), }, new pbr::GeneratedClrTypeInfo[] {
@@ -106,7 +113,7 @@ namespace NFMsg {
             new pbr::GeneratedClrTypeInfo(typeof(global::NFMsg.ReqDeleteRole), global::NFMsg.ReqDeleteRole.Parser, new[]{ "account", "name", "game_id" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::NFMsg.ReqRecoverRole), global::NFMsg.ReqRecoverRole.Parser, new[]{ "account", "name", "game_id" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::NFMsg.ServerHeartBeat), global::NFMsg.ServerHeartBeat.Parser, new[]{ "count" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::NFMsg.RoleOnlineNotify), global::NFMsg.RoleOnlineNotify.Parser, new[]{ "self", "clan", "game", "proxy", "name", "bp" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::NFMsg.RoleOnlineNotify), global::NFMsg.RoleOnlineNotify.Parser, new[]{ "self", "clan", "game", "proxy", "name", "bp", "property_int_list", "property_float_list", "property_string_list", "property_object_list", "property_vector2_list", "property_vector3_list" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::NFMsg.RoleOfflineNotify), global::NFMsg.RoleOfflineNotify.Parser, new[]{ "self", "clan", "game", "proxy" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::NFMsg.RoleDataPack), global::NFMsg.RoleDataPack.Parser, new[]{ "id", "property", "record" }, null, null, null)
           }));
@@ -4208,6 +4215,12 @@ namespace NFMsg {
       proxy_ = other.proxy_;
       name_ = other.name_;
       bp_ = other.bp_;
+      propertyIntList_ = other.propertyIntList_.Clone();
+      propertyFloatList_ = other.propertyFloatList_.Clone();
+      propertyStringList_ = other.propertyStringList_.Clone();
+      propertyObjectList_ = other.propertyObjectList_.Clone();
+      propertyVector2List_ = other.propertyVector2List_.Clone();
+      propertyVector3List_ = other.propertyVector3List_.Clone();
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -4282,6 +4295,66 @@ namespace NFMsg {
       }
     }
 
+    /// <summary>Field number for the "property_int_list" field.</summary>
+    public const int property_int_listFieldNumber = 20;
+    private static readonly pb::FieldCodec<global::NFMsg.PropertyInt> _repeated_propertyIntList_codec
+        = pb::FieldCodec.ForMessage(162, global::NFMsg.PropertyInt.Parser);
+    private readonly pbc::RepeatedField<global::NFMsg.PropertyInt> propertyIntList_ = new pbc::RepeatedField<global::NFMsg.PropertyInt>();
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public pbc::RepeatedField<global::NFMsg.PropertyInt> property_int_list {
+      get { return propertyIntList_; }
+    }
+
+    /// <summary>Field number for the "property_float_list" field.</summary>
+    public const int property_float_listFieldNumber = 21;
+    private static readonly pb::FieldCodec<global::NFMsg.PropertyFloat> _repeated_propertyFloatList_codec
+        = pb::FieldCodec.ForMessage(170, global::NFMsg.PropertyFloat.Parser);
+    private readonly pbc::RepeatedField<global::NFMsg.PropertyFloat> propertyFloatList_ = new pbc::RepeatedField<global::NFMsg.PropertyFloat>();
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public pbc::RepeatedField<global::NFMsg.PropertyFloat> property_float_list {
+      get { return propertyFloatList_; }
+    }
+
+    /// <summary>Field number for the "property_string_list" field.</summary>
+    public const int property_string_listFieldNumber = 22;
+    private static readonly pb::FieldCodec<global::NFMsg.PropertyString> _repeated_propertyStringList_codec
+        = pb::FieldCodec.ForMessage(178, global::NFMsg.PropertyString.Parser);
+    private readonly pbc::RepeatedField<global::NFMsg.PropertyString> propertyStringList_ = new pbc::RepeatedField<global::NFMsg.PropertyString>();
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public pbc::RepeatedField<global::NFMsg.PropertyString> property_string_list {
+      get { return propertyStringList_; }
+    }
+
+    /// <summary>Field number for the "property_object_list" field.</summary>
+    public const int property_object_listFieldNumber = 23;
+    private static readonly pb::FieldCodec<global::NFMsg.PropertyObject> _repeated_propertyObjectList_codec
+        = pb::FieldCodec.ForMessage(186, global::NFMsg.PropertyObject.Parser);
+    private readonly pbc::RepeatedField<global::NFMsg.PropertyObject> propertyObjectList_ = new pbc::RepeatedField<global::NFMsg.PropertyObject>();
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public pbc::RepeatedField<global::NFMsg.PropertyObject> property_object_list {
+      get { return propertyObjectList_; }
+    }
+
+    /// <summary>Field number for the "property_vector2_list" field.</summary>
+    public const int property_vector2_listFieldNumber = 24;
+    private static readonly pb::FieldCodec<global::NFMsg.PropertyVector2> _repeated_propertyVector2List_codec
+        = pb::FieldCodec.ForMessage(194, global::NFMsg.PropertyVector2.Parser);
+    private readonly pbc::RepeatedField<global::NFMsg.PropertyVector2> propertyVector2List_ = new pbc::RepeatedField<global::NFMsg.PropertyVector2>();
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public pbc::RepeatedField<global::NFMsg.PropertyVector2> property_vector2_list {
+      get { return propertyVector2List_; }
+    }
+
+    /// <summary>Field number for the "property_vector3_list" field.</summary>
+    public const int property_vector3_listFieldNumber = 25;
+    private static readonly pb::FieldCodec<global::NFMsg.PropertyVector3> _repeated_propertyVector3List_codec
+        = pb::FieldCodec.ForMessage(202, global::NFMsg.PropertyVector3.Parser);
+    private readonly pbc::RepeatedField<global::NFMsg.PropertyVector3> propertyVector3List_ = new pbc::RepeatedField<global::NFMsg.PropertyVector3>();
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public pbc::RepeatedField<global::NFMsg.PropertyVector3> property_vector3_list {
+      get { return propertyVector3List_; }
+    }
+
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override bool Equals(object other) {
       return Equals(other as RoleOnlineNotify);
@@ -4301,6 +4374,12 @@ namespace NFMsg {
       if (proxy != other.proxy) return false;
       if (name != other.name) return false;
       if (bp != other.bp) return false;
+      if(!propertyIntList_.Equals(other.propertyIntList_)) return false;
+      if(!propertyFloatList_.Equals(other.propertyFloatList_)) return false;
+      if(!propertyStringList_.Equals(other.propertyStringList_)) return false;
+      if(!propertyObjectList_.Equals(other.propertyObjectList_)) return false;
+      if(!propertyVector2List_.Equals(other.propertyVector2List_)) return false;
+      if(!propertyVector3List_.Equals(other.propertyVector3List_)) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -4313,6 +4392,12 @@ namespace NFMsg {
       if (proxy != 0) hash ^= proxy.GetHashCode();
       if (name.Length != 0) hash ^= name.GetHashCode();
       if (bp != 0) hash ^= bp.GetHashCode();
+      hash ^= propertyIntList_.GetHashCode();
+      hash ^= propertyFloatList_.GetHashCode();
+      hash ^= propertyStringList_.GetHashCode();
+      hash ^= propertyObjectList_.GetHashCode();
+      hash ^= propertyVector2List_.GetHashCode();
+      hash ^= propertyVector3List_.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -4350,6 +4435,12 @@ namespace NFMsg {
         output.WriteRawTag(48);
         output.WriteInt32(bp);
       }
+      propertyIntList_.WriteTo(output, _repeated_propertyIntList_codec);
+      propertyFloatList_.WriteTo(output, _repeated_propertyFloatList_codec);
+      propertyStringList_.WriteTo(output, _repeated_propertyStringList_codec);
+      propertyObjectList_.WriteTo(output, _repeated_propertyObjectList_codec);
+      propertyVector2List_.WriteTo(output, _repeated_propertyVector2List_codec);
+      propertyVector3List_.WriteTo(output, _repeated_propertyVector3List_codec);
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
@@ -4376,6 +4467,12 @@ namespace NFMsg {
       if (bp != 0) {
         size += 1 + pb::CodedOutputStream.ComputeInt32Size(bp);
       }
+      size += propertyIntList_.CalculateSize(_repeated_propertyIntList_codec);
+      size += propertyFloatList_.CalculateSize(_repeated_propertyFloatList_codec);
+      size += propertyStringList_.CalculateSize(_repeated_propertyStringList_codec);
+      size += propertyObjectList_.CalculateSize(_repeated_propertyObjectList_codec);
+      size += propertyVector2List_.CalculateSize(_repeated_propertyVector2List_codec);
+      size += propertyVector3List_.CalculateSize(_repeated_propertyVector3List_codec);
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
       }
@@ -4411,6 +4508,12 @@ namespace NFMsg {
       if (other.bp != 0) {
         bp = other.bp;
       }
+      propertyIntList_.Add(other.propertyIntList_);
+      propertyFloatList_.Add(other.propertyFloatList_);
+      propertyStringList_.Add(other.propertyStringList_);
+      propertyObjectList_.Add(other.propertyObjectList_);
+      propertyVector2List_.Add(other.propertyVector2List_);
+      propertyVector3List_.Add(other.propertyVector3List_);
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
 
@@ -4450,6 +4553,30 @@ namespace NFMsg {
           }
           case 48: {
             bp = input.ReadInt32();
+            break;
+          }
+          case 162: {
+            propertyIntList_.AddEntriesFrom(input, _repeated_propertyIntList_codec);
+            break;
+          }
+          case 170: {
+            propertyFloatList_.AddEntriesFrom(input, _repeated_propertyFloatList_codec);
+            break;
+          }
+          case 178: {
+            propertyStringList_.AddEntriesFrom(input, _repeated_propertyStringList_codec);
+            break;
+          }
+          case 186: {
+            propertyObjectList_.AddEntriesFrom(input, _repeated_propertyObjectList_codec);
+            break;
+          }
+          case 194: {
+            propertyVector2List_.AddEntriesFrom(input, _repeated_propertyVector2List_codec);
+            break;
+          }
+          case 202: {
+            propertyVector3List_.AddEntriesFrom(input, _repeated_propertyVector3List_codec);
             break;
           }
         }
