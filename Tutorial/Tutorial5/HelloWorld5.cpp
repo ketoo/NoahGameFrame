@@ -34,6 +34,7 @@ bool NFHelloWorld5::Init()
 	m_pHttpClientModule = pPluginManager->FindModule<NFIHttpClientModule>();
 	m_pHttpNetModule = pPluginManager->FindModule<NFIHttpServerModule>();
 	m_pWSModule = pPluginManager->FindModule<NFIWSModule>();
+	m_pNetModule = pPluginManager->FindModule<NFINetModule>();
 	
     return true;
 }
@@ -58,6 +59,10 @@ bool NFHelloWorld5::AfterInit()
     m_pWSModule->Initialization(9999, 8090, 4);
 
 	m_pWSModule->AddReceiveCallBack(this, &NFHelloWorld5::OnWebSocketTestProcess);
+
+	m_pNetModule->Initialization(9999, 5001);
+	m_pNetModule->AddEventCallBack( this, &NFHelloWorld5::OnTCPEvent);
+	m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_REQ_LOGIN, this, &NFHelloWorld5::OnLoginProcess);
 
     return true;
 }
@@ -153,4 +158,21 @@ void NFHelloWorld5::OnWebSocketTestProcess(const NFSOCK nSockIndex, const int nM
 	std::string s(msg, nLen);
     std::cout << s << std::endl;
     m_pWSModule->SendMsg(s, nSockIndex);
+}
+
+void NFHelloWorld5::OnTCPEvent(const NFSOCK fd, const NF_NET_EVENT event, NFINet * pNet)
+{
+	std::cout << "fd:" << fd << " event " << event << std::endl;
+}
+
+void NFHelloWorld5::OnLoginProcess(const NFSOCK nSockIndex, const int nMsgID, const char * msg, const uint32_t nLen)
+{
+	NFGUID nPlayerID;
+	NFMsg::ReqAccountLogin xMsg;
+	if (!m_pNetModule->ReceivePB(nMsgID, msg, nLen, xMsg, nPlayerID))
+	{
+		return;
+	}
+
+	std::cout << xMsg.account() << " " << xMsg.password() << std::endl;
 }
