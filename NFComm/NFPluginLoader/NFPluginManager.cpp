@@ -303,7 +303,7 @@ bool NFPluginManager::LoadStaticPlugin()
 	CREATE_PLUGIN(this, NFShopPlugin)
 	CREATE_PLUGIN(this, NFSkillPlugin)
 	CREATE_PLUGIN(this, NFTaskPlugin)
-	CREATE_PLUGIN(this, NFUserGiftPlugin
+	CREATE_PLUGIN(this, NFUserGiftPlugin)
 	CREATE_PLUGIN(this, NFTeamtPlugin)
 
 //TUTORIAL
