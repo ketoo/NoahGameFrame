@@ -60,6 +60,7 @@ target_link_libraries(NFPluginLoader NFShopPlugin)
 target_link_libraries(NFPluginLoader NFSkillPlugin)
 target_link_libraries(NFPluginLoader NFTaskPlugin)
 target_link_libraries(NFPluginLoader NFUserGiftPlugin)
+target_link_libraries(NFPluginLoader NFTeamPlugin)
 
 target_link_libraries(NFPluginLoader Tutorial1)
 target_link_libraries(NFPluginLoader Tutorial2)
