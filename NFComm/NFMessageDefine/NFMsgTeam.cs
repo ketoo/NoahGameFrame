@@ -24,31 +24,33 @@ namespace NFMsg {
     static NFMsgTeamReflection() {
       byte[] descriptorData = global::System.Convert.FromBase64String(
           string.Concat(
-            "Cg9ORk1zZ1RlYW0ucHJvdG8SBU5GTXNnGg9ORk1zZ0Jhc2UucHJvdG8iVAoO",
+            "Cg9ORk1zZ1RlYW0ucHJvdG8SBU5GTXNnGg9ORk1zZ0Jhc2UucHJvdG8iZQoO",
             "VGVhbU1lbWJlckluZm8SGAoCaWQYASABKAsyDC5ORk1zZy5JZGVudBIMCgRu",
-            "YW1lGAIgASgMEgoKAmJwGAMgASgFEg4KBmxlYWRlchgEIAEoBSKLAQoUUmVx",
-            "QWNrVGVhbU1lbWJlckxpc3QSHQoHdGVhbV9pZBgBIAEoCzIMLk5GTXNnLklk",
-            "ZW50EikKCmludml0ZUxpc3QYAiADKAsyFS5ORk1zZy5UZWFtTWVtYmVySW5m",
-            "bxIpCgptZW1iZXJMaXN0GAMgAygLMhUuTkZNc2cuVGVhbU1lbWJlckluZm8i",
-            "WAoQQWNrVGVhbU1lbWJlckFkZBIdCgd0ZWFtX2lkGAEgASgLMgwuTkZNc2cu",
-            "SWRlbnQSJQoGbWVtYmVyGAIgAygLMhUuTkZNc2cuVGVhbU1lbWJlckluZm8i",
-            "WgoSQWNrVGVhbU1lbWJlckxlYXZlEh0KB3RlYW1faWQYASABKAsyDC5ORk1z",
-            "Zy5JZGVudBIlCgZtZW1iZXIYAiADKAsyFS5ORk1zZy5UZWFtTWVtYmVySW5m",
-            "byIxCg9SZXFJbnZpdGVUb1RlYW0SHgoIc3RyYW5nZXIYASABKAsyDC5ORk1z",
-            "Zy5JZGVudCJ9Cg9BY2tJbnZpdGVUb1RlYW0SHQoHdGVhbV9pZBgBIAEoCzIM",
-            "Lk5GTXNnLklkZW50Eh0KB2ludml0ZXIYAiABKAsyDC5ORk1zZy5JZGVudBIM",
-            "CgRuYW1lGAMgASgMEh4KCHN0cmFuZ2VyGAQgASgLMgwuTkZNc2cuSWRlbnQi",
-            "NwoWUmVxQWNrQWNjZXB0VGVhbUludml0ZRIdCgd0ZWFtX2lkGAEgASgLMgwu",
-            "TkZNc2cuSWRlbnQiNwoWUmVxQWNrUmVqZWN0VGVhbUludml0ZRIdCgd0ZWFt",
-            "X2lkGAEgASgLMgwuTkZNc2cuSWRlbnRiBnByb3RvMw=="));
+            "YW1lGAIgASgMEgoKAmJwGAMgASgFEg4KBmxlYWRlchgEIAEoBRIPCgdwZW5k",
+            "aW5nGAUgASgFImAKFFJlcUFja1RlYW1NZW1iZXJMaXN0Eh0KB3RlYW1faWQY",
+            "ASABKAsyDC5ORk1zZy5JZGVudBIpCgptZW1iZXJMaXN0GAIgAygLMhUuTkZN",
+            "c2cuVGVhbU1lbWJlckluZm8iWAoQQWNrVGVhbU1lbWJlckFkZBIdCgd0ZWFt",
+            "X2lkGAEgASgLMgwuTkZNc2cuSWRlbnQSJQoGbWVtYmVyGAIgAygLMhUuTkZN",
+            "c2cuVGVhbU1lbWJlckluZm8iUQoSQWNrVGVhbU1lbWJlckxlYXZlEh0KB3Rl",
+            "YW1faWQYASABKAsyDC5ORk1zZy5JZGVudBIcCgZtZW1iZXIYAiADKAsyDC5O",
+            "Rk1zZy5JZGVudCIxCg9SZXFJbnZpdGVUb1RlYW0SHgoIc3RyYW5nZXIYASAB",
+            "KAsyDC5ORk1zZy5JZGVudCI3ChVSZXFDYW5jZWxJbnZpdGVUb1RlYW0SHgoI",
+            "c3RyYW5nZXIYASABKAsyDC5ORk1zZy5JZGVudCJ9Cg9BY2tJbnZpdGVUb1Rl",
+            "YW0SHQoHdGVhbV9pZBgBIAEoCzIMLk5GTXNnLklkZW50Eh0KB2ludml0ZXIY",
+            "AiABKAsyDC5ORk1zZy5JZGVudBIMCgRuYW1lGAMgASgMEh4KCHN0cmFuZ2Vy",
+            "GAQgASgLMgwuTkZNc2cuSWRlbnQiNwoWUmVxQWNrQWNjZXB0VGVhbUludml0",
+            "ZRIdCgd0ZWFtX2lkGAEgASgLMgwuTkZNc2cuSWRlbnQiNwoWUmVxQWNrUmVq",
+            "ZWN0VGVhbUludml0ZRIdCgd0ZWFtX2lkGAEgASgLMgwuTkZNc2cuSWRlbnRi",
+            "BnByb3RvMw=="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { global::NFMsg.NFMsgBaseReflection.Descriptor, },
           new pbr::GeneratedClrTypeInfo(null, new pbr::GeneratedClrTypeInfo[] {
-            new pbr::GeneratedClrTypeInfo(typeof(global::NFMsg.TeamMemberInfo), global::NFMsg.TeamMemberInfo.Parser, new[]{ "id", "name", "bp", "leader" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::NFMsg.ReqAckTeamMemberList), global::NFMsg.ReqAckTeamMemberList.Parser, new[]{ "team_id", "inviteList", "memberList" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::NFMsg.TeamMemberInfo), global::NFMsg.TeamMemberInfo.Parser, new[]{ "id", "name", "bp", "leader", "pending" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::NFMsg.ReqAckTeamMemberList), global::NFMsg.ReqAckTeamMemberList.Parser, new[]{ "team_id", "memberList" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::NFMsg.AckTeamMemberAdd), global::NFMsg.AckTeamMemberAdd.Parser, new[]{ "team_id", "member" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::NFMsg.AckTeamMemberLeave), global::NFMsg.AckTeamMemberLeave.Parser, new[]{ "team_id", "member" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::NFMsg.ReqInviteToTeam), global::NFMsg.ReqInviteToTeam.Parser, new[]{ "stranger" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::NFMsg.ReqCancelInviteToTeam), global::NFMsg.ReqCancelInviteToTeam.Parser, new[]{ "stranger" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::NFMsg.AckInviteToTeam), global::NFMsg.AckInviteToTeam.Parser, new[]{ "team_id", "inviter", "name", "stranger" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::NFMsg.ReqAckAcceptTeamInvite), global::NFMsg.ReqAckAcceptTeamInvite.Parser, new[]{ "team_id" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::NFMsg.ReqAckRejectTeamInvite), global::NFMsg.ReqAckRejectTeamInvite.Parser, new[]{ "team_id" }, null, null, null)
@@ -87,6 +89,7 @@ namespace NFMsg {
       name_ = other.name_;
       bp_ = other.bp_;
       leader_ = other.leader_;
+      pending_ = other.pending_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -139,6 +142,17 @@ namespace NFMsg {
       }
     }
 
+    /// <summary>Field number for the "pending" field.</summary>
+    public const int pendingFieldNumber = 5;
+    private int pending_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int pending {
+      get { return pending_; }
+      set {
+        pending_ = value;
+      }
+    }
+
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override bool Equals(object other) {
       return Equals(other as TeamMemberInfo);
@@ -156,6 +170,7 @@ namespace NFMsg {
       if (name != other.name) return false;
       if (bp != other.bp) return false;
       if (leader != other.leader) return false;
+      if (pending != other.pending) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -166,6 +181,7 @@ namespace NFMsg {
       if (name.Length != 0) hash ^= name.GetHashCode();
       if (bp != 0) hash ^= bp.GetHashCode();
       if (leader != 0) hash ^= leader.GetHashCode();
+      if (pending != 0) hash ^= pending.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -195,6 +211,10 @@ namespace NFMsg {
         output.WriteRawTag(32);
         output.WriteInt32(leader);
       }
+      if (pending != 0) {
+        output.WriteRawTag(40);
+        output.WriteInt32(pending);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
@@ -214,6 +234,9 @@ namespace NFMsg {
       }
       if (leader != 0) {
         size += 1 + pb::CodedOutputStream.ComputeInt32Size(leader);
+      }
+      if (pending != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(pending);
       }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
@@ -240,6 +263,9 @@ namespace NFMsg {
       }
       if (other.leader != 0) {
         leader = other.leader;
+      }
+      if (other.pending != 0) {
+        pending = other.pending;
       }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
@@ -269,6 +295,10 @@ namespace NFMsg {
           }
           case 32: {
             leader = input.ReadInt32();
+            break;
+          }
+          case 40: {
+            pending = input.ReadInt32();
             break;
           }
         }
@@ -303,7 +333,6 @@ namespace NFMsg {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public ReqAckTeamMemberList(ReqAckTeamMemberList other) : this() {
       teamId_ = other.teamId_ != null ? other.teamId_.Clone() : null;
-      inviteList_ = other.inviteList_.Clone();
       memberList_ = other.memberList_.Clone();
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
@@ -324,20 +353,10 @@ namespace NFMsg {
       }
     }
 
-    /// <summary>Field number for the "inviteList" field.</summary>
-    public const int inviteListFieldNumber = 2;
-    private static readonly pb::FieldCodec<global::NFMsg.TeamMemberInfo> _repeated_inviteList_codec
-        = pb::FieldCodec.ForMessage(18, global::NFMsg.TeamMemberInfo.Parser);
-    private readonly pbc::RepeatedField<global::NFMsg.TeamMemberInfo> inviteList_ = new pbc::RepeatedField<global::NFMsg.TeamMemberInfo>();
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public pbc::RepeatedField<global::NFMsg.TeamMemberInfo> inviteList {
-      get { return inviteList_; }
-    }
-
     /// <summary>Field number for the "memberList" field.</summary>
-    public const int memberListFieldNumber = 3;
+    public const int memberListFieldNumber = 2;
     private static readonly pb::FieldCodec<global::NFMsg.TeamMemberInfo> _repeated_memberList_codec
-        = pb::FieldCodec.ForMessage(26, global::NFMsg.TeamMemberInfo.Parser);
+        = pb::FieldCodec.ForMessage(18, global::NFMsg.TeamMemberInfo.Parser);
     private readonly pbc::RepeatedField<global::NFMsg.TeamMemberInfo> memberList_ = new pbc::RepeatedField<global::NFMsg.TeamMemberInfo>();
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public pbc::RepeatedField<global::NFMsg.TeamMemberInfo> memberList {
@@ -358,7 +377,6 @@ namespace NFMsg {
         return true;
       }
       if (!object.Equals(team_id, other.team_id)) return false;
-      if(!inviteList_.Equals(other.inviteList_)) return false;
       if(!memberList_.Equals(other.memberList_)) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
@@ -367,7 +385,6 @@ namespace NFMsg {
     public override int GetHashCode() {
       int hash = 1;
       if (teamId_ != null) hash ^= team_id.GetHashCode();
-      hash ^= inviteList_.GetHashCode();
       hash ^= memberList_.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
@@ -386,7 +403,6 @@ namespace NFMsg {
         output.WriteRawTag(10);
         output.WriteMessage(team_id);
       }
-      inviteList_.WriteTo(output, _repeated_inviteList_codec);
       memberList_.WriteTo(output, _repeated_memberList_codec);
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
@@ -399,7 +415,6 @@ namespace NFMsg {
       if (teamId_ != null) {
         size += 1 + pb::CodedOutputStream.ComputeMessageSize(team_id);
       }
-      size += inviteList_.CalculateSize(_repeated_inviteList_codec);
       size += memberList_.CalculateSize(_repeated_memberList_codec);
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
@@ -418,7 +433,6 @@ namespace NFMsg {
         }
         team_id.MergeFrom(other.team_id);
       }
-      inviteList_.Add(other.inviteList_);
       memberList_.Add(other.memberList_);
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
@@ -439,10 +453,6 @@ namespace NFMsg {
             break;
           }
           case 18: {
-            inviteList_.AddEntriesFrom(input, _repeated_inviteList_codec);
-            break;
-          }
-          case 26: {
             memberList_.AddEntriesFrom(input, _repeated_memberList_codec);
             break;
           }
@@ -655,11 +665,11 @@ namespace NFMsg {
 
     /// <summary>Field number for the "member" field.</summary>
     public const int memberFieldNumber = 2;
-    private static readonly pb::FieldCodec<global::NFMsg.TeamMemberInfo> _repeated_member_codec
-        = pb::FieldCodec.ForMessage(18, global::NFMsg.TeamMemberInfo.Parser);
-    private readonly pbc::RepeatedField<global::NFMsg.TeamMemberInfo> member_ = new pbc::RepeatedField<global::NFMsg.TeamMemberInfo>();
+    private static readonly pb::FieldCodec<global::NFMsg.Ident> _repeated_member_codec
+        = pb::FieldCodec.ForMessage(18, global::NFMsg.Ident.Parser);
+    private readonly pbc::RepeatedField<global::NFMsg.Ident> member_ = new pbc::RepeatedField<global::NFMsg.Ident>();
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public pbc::RepeatedField<global::NFMsg.TeamMemberInfo> member {
+    public pbc::RepeatedField<global::NFMsg.Ident> member {
       get { return member_; }
     }
 
@@ -897,6 +907,141 @@ namespace NFMsg {
 
   }
 
+  public sealed partial class ReqCancelInviteToTeam : pb::IMessage<ReqCancelInviteToTeam> {
+    private static readonly pb::MessageParser<ReqCancelInviteToTeam> _parser = new pb::MessageParser<ReqCancelInviteToTeam>(() => new ReqCancelInviteToTeam());
+    private pb::UnknownFieldSet _unknownFields;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::MessageParser<ReqCancelInviteToTeam> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::NFMsg.NFMsgTeamReflection.Descriptor.MessageTypes[5]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public ReqCancelInviteToTeam() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public ReqCancelInviteToTeam(ReqCancelInviteToTeam other) : this() {
+      stranger_ = other.stranger_ != null ? other.stranger_.Clone() : null;
+      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public ReqCancelInviteToTeam Clone() {
+      return new ReqCancelInviteToTeam(this);
+    }
+
+    /// <summary>Field number for the "stranger" field.</summary>
+    public const int strangerFieldNumber = 1;
+    private global::NFMsg.Ident stranger_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public global::NFMsg.Ident stranger {
+      get { return stranger_; }
+      set {
+        stranger_ = value;
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override bool Equals(object other) {
+      return Equals(other as ReqCancelInviteToTeam);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Equals(ReqCancelInviteToTeam other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (!object.Equals(stranger, other.stranger)) return false;
+      return Equals(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (stranger_ != null) hash ^= stranger.GetHashCode();
+      if (_unknownFields != null) {
+        hash ^= _unknownFields.GetHashCode();
+      }
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void WriteTo(pb::CodedOutputStream output) {
+      if (stranger_ != null) {
+        output.WriteRawTag(10);
+        output.WriteMessage(stranger);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(output);
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int CalculateSize() {
+      int size = 0;
+      if (stranger_ != null) {
+        size += 1 + pb::CodedOutputStream.ComputeMessageSize(stranger);
+      }
+      if (_unknownFields != null) {
+        size += _unknownFields.CalculateSize();
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(ReqCancelInviteToTeam other) {
+      if (other == null) {
+        return;
+      }
+      if (other.stranger_ != null) {
+        if (stranger_ == null) {
+          stranger_ = new global::NFMsg.Ident();
+        }
+        stranger.MergeFrom(other.stranger);
+      }
+      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(pb::CodedInputStream input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            break;
+          case 10: {
+            if (stranger_ == null) {
+              stranger_ = new global::NFMsg.Ident();
+            }
+            input.ReadMessage(stranger_);
+            break;
+          }
+        }
+      }
+    }
+
+  }
+
   public sealed partial class AckInviteToTeam : pb::IMessage<AckInviteToTeam> {
     private static readonly pb::MessageParser<AckInviteToTeam> _parser = new pb::MessageParser<AckInviteToTeam>(() => new AckInviteToTeam());
     private pb::UnknownFieldSet _unknownFields;
@@ -905,7 +1050,7 @@ namespace NFMsg {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::NFMsg.NFMsgTeamReflection.Descriptor.MessageTypes[5]; }
+      get { return global::NFMsg.NFMsgTeamReflection.Descriptor.MessageTypes[6]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -1136,7 +1281,7 @@ namespace NFMsg {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::NFMsg.NFMsgTeamReflection.Descriptor.MessageTypes[6]; }
+      get { return global::NFMsg.NFMsgTeamReflection.Descriptor.MessageTypes[7]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -1271,7 +1416,7 @@ namespace NFMsg {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::NFMsg.NFMsgTeamReflection.Descriptor.MessageTypes[7]; }
+      get { return global::NFMsg.NFMsgTeamReflection.Descriptor.MessageTypes[8]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]

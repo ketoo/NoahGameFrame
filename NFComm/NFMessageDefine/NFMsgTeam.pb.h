@@ -39,7 +39,7 @@ namespace protobuf_NFMsgTeam_2eproto {
 struct LIBPROTOC_EXPORT TableStruct {
   static const ::google::protobuf::internal::ParseTableField entries[];
   static const ::google::protobuf::internal::AuxillaryParseTableField aux[];
-  static const ::google::protobuf::internal::ParseTable schema[8];
+  static const ::google::protobuf::internal::ParseTable schema[9];
   static const ::google::protobuf::internal::FieldMetadata field_metadata[];
   static const ::google::protobuf::internal::SerializationTable serialization_table[];
   static const ::google::protobuf::uint32 offsets[];
@@ -65,6 +65,9 @@ LIBPROTOC_EXPORT extern ReqAckRejectTeamInviteDefaultTypeInternal _ReqAckRejectT
 class ReqAckTeamMemberList;
 class ReqAckTeamMemberListDefaultTypeInternal;
 LIBPROTOC_EXPORT extern ReqAckTeamMemberListDefaultTypeInternal _ReqAckTeamMemberList_default_instance_;
+class ReqCancelInviteToTeam;
+class ReqCancelInviteToTeamDefaultTypeInternal;
+LIBPROTOC_EXPORT extern ReqCancelInviteToTeamDefaultTypeInternal _ReqCancelInviteToTeam_default_instance_;
 class ReqInviteToTeam;
 class ReqInviteToTeamDefaultTypeInternal;
 LIBPROTOC_EXPORT extern ReqInviteToTeamDefaultTypeInternal _ReqInviteToTeam_default_instance_;
@@ -80,6 +83,7 @@ template<> LIBPROTOC_EXPORT ::NFMsg::AckTeamMemberLeave* Arena::CreateMaybeMessa
 template<> LIBPROTOC_EXPORT ::NFMsg::ReqAckAcceptTeamInvite* Arena::CreateMaybeMessage<::NFMsg::ReqAckAcceptTeamInvite>(Arena*);
 template<> LIBPROTOC_EXPORT ::NFMsg::ReqAckRejectTeamInvite* Arena::CreateMaybeMessage<::NFMsg::ReqAckRejectTeamInvite>(Arena*);
 template<> LIBPROTOC_EXPORT ::NFMsg::ReqAckTeamMemberList* Arena::CreateMaybeMessage<::NFMsg::ReqAckTeamMemberList>(Arena*);
+template<> LIBPROTOC_EXPORT ::NFMsg::ReqCancelInviteToTeam* Arena::CreateMaybeMessage<::NFMsg::ReqCancelInviteToTeam>(Arena*);
 template<> LIBPROTOC_EXPORT ::NFMsg::ReqInviteToTeam* Arena::CreateMaybeMessage<::NFMsg::ReqInviteToTeam>(Arena*);
 template<> LIBPROTOC_EXPORT ::NFMsg::TeamMemberInfo* Arena::CreateMaybeMessage<::NFMsg::TeamMemberInfo>(Arena*);
 }  // namespace protobuf
@@ -213,6 +217,12 @@ class LIBPROTOC_EXPORT TeamMemberInfo : public ::google::protobuf::Message /* @@
   ::google::protobuf::int32 leader() const;
   void set_leader(::google::protobuf::int32 value);
 
+  // int32 pending = 5;
+  void clear_pending();
+  static const int kPendingFieldNumber = 5;
+  ::google::protobuf::int32 pending() const;
+  void set_pending(::google::protobuf::int32 value);
+
   // @@protoc_insertion_point(class_scope:NFMsg.TeamMemberInfo)
  private:
 
@@ -221,6 +231,7 @@ class LIBPROTOC_EXPORT TeamMemberInfo : public ::google::protobuf::Message /* @@
   ::NFMsg::Ident* id_;
   ::google::protobuf::int32 bp_;
   ::google::protobuf::int32 leader_;
+  ::google::protobuf::int32 pending_;
   mutable ::google::protobuf::internal::CachedSize _cached_size_;
   friend struct ::protobuf_NFMsgTeam_2eproto::TableStruct;
 };
@@ -313,22 +324,10 @@ class LIBPROTOC_EXPORT ReqAckTeamMemberList : public ::google::protobuf::Message
 
   // accessors -------------------------------------------------------
 
-  // repeated .NFMsg.TeamMemberInfo inviteList = 2;
-  int invitelist_size() const;
-  void clear_invitelist();
-  static const int kInviteListFieldNumber = 2;
-  ::NFMsg::TeamMemberInfo* mutable_invitelist(int index);
-  ::google::protobuf::RepeatedPtrField< ::NFMsg::TeamMemberInfo >*
-      mutable_invitelist();
-  const ::NFMsg::TeamMemberInfo& invitelist(int index) const;
-  ::NFMsg::TeamMemberInfo* add_invitelist();
-  const ::google::protobuf::RepeatedPtrField< ::NFMsg::TeamMemberInfo >&
-      invitelist() const;
-
-  // repeated .NFMsg.TeamMemberInfo memberList = 3;
+  // repeated .NFMsg.TeamMemberInfo memberList = 2;
   int memberlist_size() const;
   void clear_memberlist();
-  static const int kMemberListFieldNumber = 3;
+  static const int kMemberListFieldNumber = 2;
   ::NFMsg::TeamMemberInfo* mutable_memberlist(int index);
   ::google::protobuf::RepeatedPtrField< ::NFMsg::TeamMemberInfo >*
       mutable_memberlist();
@@ -353,7 +352,6 @@ class LIBPROTOC_EXPORT ReqAckTeamMemberList : public ::google::protobuf::Message
  private:
 
   ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
-  ::google::protobuf::RepeatedPtrField< ::NFMsg::TeamMemberInfo > invitelist_;
   ::google::protobuf::RepeatedPtrField< ::NFMsg::TeamMemberInfo > memberlist_;
   ::NFMsg::Ident* team_id_;
   mutable ::google::protobuf::internal::CachedSize _cached_size_;
@@ -570,16 +568,16 @@ class LIBPROTOC_EXPORT AckTeamMemberLeave : public ::google::protobuf::Message /
 
   // accessors -------------------------------------------------------
 
-  // repeated .NFMsg.TeamMemberInfo member = 2;
+  // repeated .NFMsg.Ident member = 2;
   int member_size() const;
   void clear_member();
   static const int kMemberFieldNumber = 2;
-  ::NFMsg::TeamMemberInfo* mutable_member(int index);
-  ::google::protobuf::RepeatedPtrField< ::NFMsg::TeamMemberInfo >*
+  ::NFMsg::Ident* mutable_member(int index);
+  ::google::protobuf::RepeatedPtrField< ::NFMsg::Ident >*
       mutable_member();
-  const ::NFMsg::TeamMemberInfo& member(int index) const;
-  ::NFMsg::TeamMemberInfo* add_member();
-  const ::google::protobuf::RepeatedPtrField< ::NFMsg::TeamMemberInfo >&
+  const ::NFMsg::Ident& member(int index) const;
+  ::NFMsg::Ident* add_member();
+  const ::google::protobuf::RepeatedPtrField< ::NFMsg::Ident >&
       member() const;
 
   // .NFMsg.Ident team_id = 1;
@@ -598,7 +596,7 @@ class LIBPROTOC_EXPORT AckTeamMemberLeave : public ::google::protobuf::Message /
  private:
 
   ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
-  ::google::protobuf::RepeatedPtrField< ::NFMsg::TeamMemberInfo > member_;
+  ::google::protobuf::RepeatedPtrField< ::NFMsg::Ident > member_;
   ::NFMsg::Ident* team_id_;
   mutable ::google::protobuf::internal::CachedSize _cached_size_;
   friend struct ::protobuf_NFMsgTeam_2eproto::TableStruct;
@@ -714,6 +712,115 @@ class LIBPROTOC_EXPORT ReqInviteToTeam : public ::google::protobuf::Message /* @
 };
 // -------------------------------------------------------------------
 
+class LIBPROTOC_EXPORT ReqCancelInviteToTeam : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:NFMsg.ReqCancelInviteToTeam) */ {
+ public:
+  ReqCancelInviteToTeam();
+  virtual ~ReqCancelInviteToTeam();
+
+  ReqCancelInviteToTeam(const ReqCancelInviteToTeam& from);
+
+  inline ReqCancelInviteToTeam& operator=(const ReqCancelInviteToTeam& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  #if LANG_CXX11
+  ReqCancelInviteToTeam(ReqCancelInviteToTeam&& from) noexcept
+    : ReqCancelInviteToTeam() {
+    *this = ::std::move(from);
+  }
+
+  inline ReqCancelInviteToTeam& operator=(ReqCancelInviteToTeam&& from) noexcept {
+    if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
+      if (this != &from) InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+  #endif
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const ReqCancelInviteToTeam& default_instance();
+
+  static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
+  static inline const ReqCancelInviteToTeam* internal_default_instance() {
+    return reinterpret_cast<const ReqCancelInviteToTeam*>(
+               &_ReqCancelInviteToTeam_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages =
+    5;
+
+  void Swap(ReqCancelInviteToTeam* other);
+  friend void swap(ReqCancelInviteToTeam& a, ReqCancelInviteToTeam& b) {
+    a.Swap(&b);
+  }
+
+  // implements Message ----------------------------------------------
+
+  inline ReqCancelInviteToTeam* New() const final {
+    return CreateMaybeMessage<ReqCancelInviteToTeam>(NULL);
+  }
+
+  ReqCancelInviteToTeam* New(::google::protobuf::Arena* arena) const final {
+    return CreateMaybeMessage<ReqCancelInviteToTeam>(arena);
+  }
+  void CopyFrom(const ::google::protobuf::Message& from) final;
+  void MergeFrom(const ::google::protobuf::Message& from) final;
+  void CopyFrom(const ReqCancelInviteToTeam& from);
+  void MergeFrom(const ReqCancelInviteToTeam& from);
+  void Clear() final;
+  bool IsInitialized() const final;
+
+  size_t ByteSizeLong() const final;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input) final;
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const final;
+  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
+      bool deterministic, ::google::protobuf::uint8* target) const final;
+  int GetCachedSize() const final { return _cached_size_.Get(); }
+
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const final;
+  void InternalSwap(ReqCancelInviteToTeam* other);
+  private:
+  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
+    return NULL;
+  }
+  inline void* MaybeArenaPtr() const {
+    return NULL;
+  }
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const final;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // .NFMsg.Ident stranger = 1;
+  bool has_stranger() const;
+  void clear_stranger();
+  static const int kStrangerFieldNumber = 1;
+  private:
+  const ::NFMsg::Ident& _internal_stranger() const;
+  public:
+  const ::NFMsg::Ident& stranger() const;
+  ::NFMsg::Ident* release_stranger();
+  ::NFMsg::Ident* mutable_stranger();
+  void set_allocated_stranger(::NFMsg::Ident* stranger);
+
+  // @@protoc_insertion_point(class_scope:NFMsg.ReqCancelInviteToTeam)
+ private:
+
+  ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
+  ::NFMsg::Ident* stranger_;
+  mutable ::google::protobuf::internal::CachedSize _cached_size_;
+  friend struct ::protobuf_NFMsgTeam_2eproto::TableStruct;
+};
+// -------------------------------------------------------------------
+
 class LIBPROTOC_EXPORT AckInviteToTeam : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:NFMsg.AckInviteToTeam) */ {
  public:
   AckInviteToTeam();
@@ -749,7 +856,7 @@ class LIBPROTOC_EXPORT AckInviteToTeam : public ::google::protobuf::Message /* @
                &_AckInviteToTeam_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    5;
+    6;
 
   void Swap(AckInviteToTeam* other);
   friend void swap(AckInviteToTeam& a, AckInviteToTeam& b) {
@@ -899,7 +1006,7 @@ class LIBPROTOC_EXPORT ReqAckAcceptTeamInvite : public ::google::protobuf::Messa
                &_ReqAckAcceptTeamInvite_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    6;
+    7;
 
   void Swap(ReqAckAcceptTeamInvite* other);
   friend void swap(ReqAckAcceptTeamInvite& a, ReqAckAcceptTeamInvite& b) {
@@ -1008,7 +1115,7 @@ class LIBPROTOC_EXPORT ReqAckRejectTeamInvite : public ::google::protobuf::Messa
                &_ReqAckRejectTeamInvite_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    7;
+    8;
 
   void Swap(ReqAckRejectTeamInvite* other);
   friend void swap(ReqAckRejectTeamInvite& a, ReqAckRejectTeamInvite& b) {
@@ -1220,6 +1327,20 @@ inline void TeamMemberInfo::set_leader(::google::protobuf::int32 value) {
   // @@protoc_insertion_point(field_set:NFMsg.TeamMemberInfo.leader)
 }
 
+// int32 pending = 5;
+inline void TeamMemberInfo::clear_pending() {
+  pending_ = 0;
+}
+inline ::google::protobuf::int32 TeamMemberInfo::pending() const {
+  // @@protoc_insertion_point(field_get:NFMsg.TeamMemberInfo.pending)
+  return pending_;
+}
+inline void TeamMemberInfo::set_pending(::google::protobuf::int32 value) {
+  
+  pending_ = value;
+  // @@protoc_insertion_point(field_set:NFMsg.TeamMemberInfo.pending)
+}
+
 // -------------------------------------------------------------------
 
 // ReqAckTeamMemberList
@@ -1272,37 +1393,7 @@ inline void ReqAckTeamMemberList::set_allocated_team_id(::NFMsg::Ident* team_id)
   // @@protoc_insertion_point(field_set_allocated:NFMsg.ReqAckTeamMemberList.team_id)
 }
 
-// repeated .NFMsg.TeamMemberInfo inviteList = 2;
-inline int ReqAckTeamMemberList::invitelist_size() const {
-  return invitelist_.size();
-}
-inline void ReqAckTeamMemberList::clear_invitelist() {
-  invitelist_.Clear();
-}
-inline ::NFMsg::TeamMemberInfo* ReqAckTeamMemberList::mutable_invitelist(int index) {
-  // @@protoc_insertion_point(field_mutable:NFMsg.ReqAckTeamMemberList.inviteList)
-  return invitelist_.Mutable(index);
-}
-inline ::google::protobuf::RepeatedPtrField< ::NFMsg::TeamMemberInfo >*
-ReqAckTeamMemberList::mutable_invitelist() {
-  // @@protoc_insertion_point(field_mutable_list:NFMsg.ReqAckTeamMemberList.inviteList)
-  return &invitelist_;
-}
-inline const ::NFMsg::TeamMemberInfo& ReqAckTeamMemberList::invitelist(int index) const {
-  // @@protoc_insertion_point(field_get:NFMsg.ReqAckTeamMemberList.inviteList)
-  return invitelist_.Get(index);
-}
-inline ::NFMsg::TeamMemberInfo* ReqAckTeamMemberList::add_invitelist() {
-  // @@protoc_insertion_point(field_add:NFMsg.ReqAckTeamMemberList.inviteList)
-  return invitelist_.Add();
-}
-inline const ::google::protobuf::RepeatedPtrField< ::NFMsg::TeamMemberInfo >&
-ReqAckTeamMemberList::invitelist() const {
-  // @@protoc_insertion_point(field_list:NFMsg.ReqAckTeamMemberList.inviteList)
-  return invitelist_;
-}
-
-// repeated .NFMsg.TeamMemberInfo memberList = 3;
+// repeated .NFMsg.TeamMemberInfo memberList = 2;
 inline int ReqAckTeamMemberList::memberlist_size() const {
   return memberlist_.size();
 }
@@ -1466,31 +1557,28 @@ inline void AckTeamMemberLeave::set_allocated_team_id(::NFMsg::Ident* team_id) {
   // @@protoc_insertion_point(field_set_allocated:NFMsg.AckTeamMemberLeave.team_id)
 }
 
-// repeated .NFMsg.TeamMemberInfo member = 2;
+// repeated .NFMsg.Ident member = 2;
 inline int AckTeamMemberLeave::member_size() const {
   return member_.size();
 }
-inline void AckTeamMemberLeave::clear_member() {
-  member_.Clear();
-}
-inline ::NFMsg::TeamMemberInfo* AckTeamMemberLeave::mutable_member(int index) {
+inline ::NFMsg::Ident* AckTeamMemberLeave::mutable_member(int index) {
   // @@protoc_insertion_point(field_mutable:NFMsg.AckTeamMemberLeave.member)
   return member_.Mutable(index);
 }
-inline ::google::protobuf::RepeatedPtrField< ::NFMsg::TeamMemberInfo >*
+inline ::google::protobuf::RepeatedPtrField< ::NFMsg::Ident >*
 AckTeamMemberLeave::mutable_member() {
   // @@protoc_insertion_point(field_mutable_list:NFMsg.AckTeamMemberLeave.member)
   return &member_;
 }
-inline const ::NFMsg::TeamMemberInfo& AckTeamMemberLeave::member(int index) const {
+inline const ::NFMsg::Ident& AckTeamMemberLeave::member(int index) const {
   // @@protoc_insertion_point(field_get:NFMsg.AckTeamMemberLeave.member)
   return member_.Get(index);
 }
-inline ::NFMsg::TeamMemberInfo* AckTeamMemberLeave::add_member() {
+inline ::NFMsg::Ident* AckTeamMemberLeave::add_member() {
   // @@protoc_insertion_point(field_add:NFMsg.AckTeamMemberLeave.member)
   return member_.Add();
 }
-inline const ::google::protobuf::RepeatedPtrField< ::NFMsg::TeamMemberInfo >&
+inline const ::google::protobuf::RepeatedPtrField< ::NFMsg::Ident >&
 AckTeamMemberLeave::member() const {
   // @@protoc_insertion_point(field_list:NFMsg.AckTeamMemberLeave.member)
   return member_;
@@ -1546,6 +1634,58 @@ inline void ReqInviteToTeam::set_allocated_stranger(::NFMsg::Ident* stranger) {
   }
   stranger_ = stranger;
   // @@protoc_insertion_point(field_set_allocated:NFMsg.ReqInviteToTeam.stranger)
+}
+
+// -------------------------------------------------------------------
+
+// ReqCancelInviteToTeam
+
+// .NFMsg.Ident stranger = 1;
+inline bool ReqCancelInviteToTeam::has_stranger() const {
+  return this != internal_default_instance() && stranger_ != NULL;
+}
+inline const ::NFMsg::Ident& ReqCancelInviteToTeam::_internal_stranger() const {
+  return *stranger_;
+}
+inline const ::NFMsg::Ident& ReqCancelInviteToTeam::stranger() const {
+  const ::NFMsg::Ident* p = stranger_;
+  // @@protoc_insertion_point(field_get:NFMsg.ReqCancelInviteToTeam.stranger)
+  return p != NULL ? *p : *reinterpret_cast<const ::NFMsg::Ident*>(
+      &::NFMsg::_Ident_default_instance_);
+}
+inline ::NFMsg::Ident* ReqCancelInviteToTeam::release_stranger() {
+  // @@protoc_insertion_point(field_release:NFMsg.ReqCancelInviteToTeam.stranger)
+  
+  ::NFMsg::Ident* temp = stranger_;
+  stranger_ = NULL;
+  return temp;
+}
+inline ::NFMsg::Ident* ReqCancelInviteToTeam::mutable_stranger() {
+  
+  if (stranger_ == NULL) {
+    auto* p = CreateMaybeMessage<::NFMsg::Ident>(GetArenaNoVirtual());
+    stranger_ = p;
+  }
+  // @@protoc_insertion_point(field_mutable:NFMsg.ReqCancelInviteToTeam.stranger)
+  return stranger_;
+}
+inline void ReqCancelInviteToTeam::set_allocated_stranger(::NFMsg::Ident* stranger) {
+  ::google::protobuf::Arena* message_arena = GetArenaNoVirtual();
+  if (message_arena == NULL) {
+    delete reinterpret_cast< ::google::protobuf::MessageLite*>(stranger_);
+  }
+  if (stranger) {
+    ::google::protobuf::Arena* submessage_arena = NULL;
+    if (message_arena != submessage_arena) {
+      stranger = ::google::protobuf::internal::GetOwnedMessage(
+          message_arena, stranger, submessage_arena);
+    }
+    
+  } else {
+    
+  }
+  stranger_ = stranger;
+  // @@protoc_insertion_point(field_set_allocated:NFMsg.ReqCancelInviteToTeam.stranger)
 }
 
 // -------------------------------------------------------------------
@@ -1856,6 +1996,8 @@ inline void ReqAckRejectTeamInvite::set_allocated_team_id(::NFMsg::Ident* team_i
 #ifdef __GNUC__
   #pragma GCC diagnostic pop
 #endif  // __GNUC__
+// -------------------------------------------------------------------
+
 // -------------------------------------------------------------------
 
 // -------------------------------------------------------------------

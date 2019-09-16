@@ -12,13 +12,13 @@ message TeamMemberInfo
 	bytes		name 			= 2;
 	int32		bp 			= 3;
 	int32		leader 			= 4;
+	int32		pending 			= 5;
 }
 
 message ReqAckTeamMemberList
 {
     Ident		team_id 		= 1;
-	repeated TeamMemberInfo 	inviteList 	= 2;
-	repeated TeamMemberInfo 	memberList 	= 3;
+	repeated TeamMemberInfo 	memberList 	= 2;
 }
 
 message AckTeamMemberAdd
@@ -30,10 +30,15 @@ message AckTeamMemberAdd
 message AckTeamMemberLeave
 {
     Ident		team_id = 1;
-	repeated TeamMemberInfo member	= 2;
+	repeated Ident member	= 2;
 }
 
 message ReqInviteToTeam
+{
+	Ident						stranger = 1;
+}
+
+message ReqCancelInviteToTeam
 {
 	Ident						stranger = 1;
 }

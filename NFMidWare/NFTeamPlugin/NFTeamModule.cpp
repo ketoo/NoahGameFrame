@@ -161,6 +161,30 @@ void NFTeamModule::OnReqSendInviteProcess(const NFSOCK nSockIndex, const int nMs
 					ackInviteToTeam.set_name(pPlayerData->name);
 
 					m_pNetModule->SendMsgPB(NFMsg::EGMI_ACK_TEAM_INVITE, ackInviteToTeam, nSockIndex, strangerID);
+
+					//tell all people that we invited a new member
+					std::vector<NFITeamRedisModule::MemberData> memberList;
+					m_pTeamRedisModule->GetMemberList(pPlayerData->team, memberList);
+
+					for (int i = 0; i < memberList.size(); ++i)
+					{
+						const NFGUID member = memberList[i].id;
+
+						NFMsg::AckTeamMemberAdd ackInviteToTeam;
+
+						*(ackInviteToTeam.mutable_team_id()) = NFINetModule::NFToPB(pPlayerData->team);
+						NFMsg::TeamMemberInfo* pData = ackInviteToTeam.add_member();
+						if (pData)
+						{
+							*(pData->mutable_id()) = NFINetModule::NFToPB(strangerID);
+							pData->set_leader(0);
+							pData->set_name(pStrangerData->name);
+							pData->set_bp(pStrangerData->bp);
+							pData->set_pending(1);
+						}
+
+						m_pNetModule->SendMsgPB(NFMsg::EGMI_ACK_TEAM_ADD, ackInviteToTeam, nSockIndex, member);
+					}
 				}
 
 				if (initial)
@@ -183,41 +207,24 @@ void NFTeamModule::OnReqSendInviteProcess(const NFSOCK nSockIndex, const int nMs
 							pData->set_leader(1);
 							pData->set_name(memberList[i].name);
 							pData->set_bp(memberList[i].bp);
+							pData->set_pending(0);
 						}
 					}
 
 					for (int i = 0; i < inviteList.size(); ++i)
 					{
-						NFMsg::TeamMemberInfo* pData = xReqAckTeamMemberList.add_invitelist();
+						NFMsg::TeamMemberInfo* pData = xReqAckTeamMemberList.add_memberlist();
 						if (pData)
 						{
 							*(pData->mutable_id()) = NFINetModule::NFToPB(inviteList[i].id);
 							pData->set_leader(0);
 							pData->set_name(inviteList[i].name);
 							pData->set_bp(inviteList[i].bp);
+							pData->set_pending(1);
 						}
 					}
 
 					m_pNetModule->SendMsgPB(NFMsg::EGMI_ACK_TEAM_LIST, xReqAckTeamMemberList, nSockIndex, nPlayerID);
-				}
-				else
-				{
-					//tell all people that we invited a new member
-					std::vector<NFITeamRedisModule::MemberData> memberList;
-					m_pTeamRedisModule->GetMemberList(pPlayerData->team, memberList);
-
-					for (int i = 0; i < memberList.size(); ++i)
-					{
-						const NFGUID member = memberList[i].id;
-
-						NFMsg::AckInviteToTeam ackInviteToTeam;
-
-						*(ackInviteToTeam.mutable_inviter()) = NFINetModule::NFToPB(nPlayerID);
-						ackInviteToTeam.set_name(pPlayerData->name);
-						*(ackInviteToTeam.mutable_stranger()) = NFINetModule::NFToPB(strangerID);
-
-						m_pNetModule->SendMsgPB(NFMsg::EGMI_ACK_TEAM_INVITE, ackInviteToTeam, nSockIndex, member);
-					}
 				}
 			}
 		}
@@ -247,6 +254,12 @@ void NFTeamModule::OnReqAcceptInviteProcess(const NFSOCK nSockIndex, const int n
 				if (m_pTeamRedisModule->DeleteInvite(teamID, nPlayerID) && m_pTeamRedisModule->AddToTeam(teamID, nPlayerID, pPlayerData->name))
 				{
 					pPlayerData->team = teamID;
+					if (m_pTeamRedisModule->AddToTeam(teamID, nPlayerID, pPlayerData->name))
+					{
+						pPlayerData->team = teamID;
+					}
+
+					///////////////////
 
 					NFMsg::ReqAckTeamMemberList xReqAckTeamMemberList;
 					std::vector<NFITeamRedisModule::MemberData> memberList;
@@ -264,23 +277,26 @@ void NFTeamModule::OnReqAcceptInviteProcess(const NFSOCK nSockIndex, const int n
 							pData->set_leader(memberList[i].leader);
 							pData->set_name(memberList[i].name);
 							pData->set_bp(memberList[i].bp);
+							pData->set_pending(0);
 						}
 					}
 
 					for (int i = 0; i < inviteList.size(); ++i)
 					{
-						NFMsg::TeamMemberInfo* pData = xReqAckTeamMemberList.add_invitelist();
+						NFMsg::TeamMemberInfo* pData = xReqAckTeamMemberList.add_memberlist();
 						if (pData)
 						{
 							*(pData->mutable_id()) = NFINetModule::NFToPB(inviteList[i].id);
 							pData->set_leader(0);
 							pData->set_name(inviteList[i].name);
 							pData->set_bp(inviteList[i].bp);
+							pData->set_pending(1);
 						}
 					}
 
 					m_pNetModule->SendMsgPB(NFMsg::EGMI_ACK_TEAM_LIST, xReqAckTeamMemberList, nSockIndex, nPlayerID);
 
+					/////tell other people that the team added a new member
 					NFMsg::ReqAckTeamMemberList ackTeamMemberList;
 					NFMsg::TeamMemberInfo* pData = ackTeamMemberList.add_memberlist();
 					if (pData)
@@ -289,6 +305,7 @@ void NFTeamModule::OnReqAcceptInviteProcess(const NFSOCK nSockIndex, const int n
 						pData->set_leader(0);
 						pData->set_name(pPlayerData->name);
 						pData->set_bp(pPlayerData->bp);
+						pData->set_pending(0);
 
 						for (int i = 0; i < memberList.size(); ++i)
 						{
