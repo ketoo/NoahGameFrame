@@ -201,37 +201,38 @@ void NFCreateRoleModule::OnDBLoadRoleDataProcess(const NFSOCK nSockIndex, const 
 		{
 			pGateInfo->eStatus = NFIGameServerNet_ServerModule::GateBaseInfo::E_LOADED;
 		}
+
+
+		NFDataList var;
+
+		var.AddString(NFrame::Player::GateID());
+		var.AddInt(pGateInfo->nGateID);
+
+		var.AddString(NFrame::Player::GameID());
+		var.AddInt(pPluginManager->GetAppID());
+
+		/*
+		var.AddString(NFrame::Player::HomeSceneID());
+		var.AddInt(1);
+
+		var.AddString(NFrame::Player::SceneID());
+		var.AddInt(1);
+		*/
+
+		NF_SHARE_PTR<NFIObject> pObject = m_pKernelModule->CreateObject(nRoleID, 1, 0, NFrame::Player::ThisName(), "", var);
+		if (nullptr == pObject)
+		{
+			//mRoleBaseData
+			//mRoleFDData
+			mxObjectDataCache.erase(nRoleID);
+			return;
+		}
+
+		//get data first then create player
+		const int nHomeSceneID = pObject->GetPropertyInt(NFrame::Player::HomeSceneID());
+		const NFVector3& pos = m_pSceneModule->GetRelivePosition(nHomeSceneID, 0);
+		m_pSceneProcessModule->RequestEnterScene(pObject->Self(), nHomeSceneID, -1, 0, pos, NFDataList());
 	}
-
-	NFDataList var;
-
-	var.AddString(NFrame::Player::GateID());
-	var.AddInt(pGateInfo->nGateID);
-
-	var.AddString(NFrame::Player::GameID());
-	var.AddInt(pPluginManager->GetAppID());
-
-	/*
-	var.AddString(NFrame::Player::HomeSceneID());
-	var.AddInt(1);
-
-	var.AddString(NFrame::Player::SceneID());
-	var.AddInt(1);
-	*/
-
-	NF_SHARE_PTR<NFIObject> pObject = m_pKernelModule->CreateObject(nRoleID, 1, 0, NFrame::Player::ThisName(), "", var);
-	if (nullptr == pObject)
-	{
-		//mRoleBaseData
-		//mRoleFDData
-		mxObjectDataCache.erase(nRoleID);
-		return;
-	}
-
-	//get data first then create player
-	const int nHomeSceneID = pObject->GetPropertyInt(NFrame::Player::HomeSceneID());
-	const NFVector3& pos = m_pSceneModule->GetRelivePosition(nHomeSceneID, 0);
-	m_pSceneProcessModule->RequestEnterScene(pObject->Self(), nHomeSceneID, -1, 0, pos, NFDataList());
 }
 
 int NFCreateRoleModule::OnObjectPlayerEvent(const NFGUID & self, const std::string & strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFDataList & var)
