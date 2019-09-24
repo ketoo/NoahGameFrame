@@ -1,5 +1,7 @@
 echo Building dependencies...
 
+git submodule update --init --recursive
+
 sudo apt-get install automake
 sudo apt-get install zip unzip
 
@@ -18,6 +20,7 @@ sudo apt-get install libreadline-dev
 #cp -r -f ./*.a ../lib/Debug/
 #cp -r -f ./*.a ../lib/Release/
 #cd ../
+
 
 # compiling libevent
 cd libevent
