@@ -118,6 +118,7 @@ echo finished protobuf..................................................
 echo Building lua...................................................
 
 rm -rf lua
+rm lua-5.3.5.tar.gz
 wget http://www.lua.org/ftp/lua-5.3.5.tar.gz
 mkdir lua
 tar zxf lua-5.3.5.tar.gz
