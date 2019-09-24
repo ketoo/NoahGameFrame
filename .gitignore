@@ -13,6 +13,8 @@
 *.la
 *.a
 *.lib
+*.zip
+*.gz
 
 # Executables
 *.exe

@@ -38,6 +38,13 @@ if [ $? -ne 0 ]; then
     exit 1
 fi
 
+wget --version
+if [ $? -ne 0 ]; then
+    echo "[ERROR] Please install wget first."
+    echo "[ubuntu] sudo apt-get install wget [centos] yum install wget or [mac] brew install wget"
+    exit 1
+fi
+
 openssl version
 if [ $? -ne 0 ]; then
     echo "[ERROR] Please install openssl first."
@@ -103,12 +110,18 @@ cp -r -f ./src/.libs/*.a ../lib/Release/
 
 cp -r -f ./src/protoc ../../NFComm/NFMessageDefine/protoc
 
-echo finished protobuf..................................................
-
 cd ../
+
+echo finished protobuf..................................................
 
 # compiling lua
 echo Building lua...................................................
+
+rm -rf lua
+wget http://www.lua.org/ftp/lua-5.3.5.tar.gz
+mkdir lua
+tar zxf lua-5.3.5.tar.gz
+mv lua-5.3.5 lua
 cd lua
 
 if [ $sysOS == "Darwin" ];then
@@ -119,7 +132,9 @@ fi
 
 cp -r -f ./src/*.a ../lib/Debug/
 cp -r -f ./src/*.a ../lib/Release/
+
 cd ../
+
 echo Building lua finish...
 
 # compiling hiredis
