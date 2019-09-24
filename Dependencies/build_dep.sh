@@ -1,16 +1,62 @@
 echo Building dependencies...
 
-git submodule update --init --recursive
+rm -rf libevent
+rm -rf lua
+rm -rf protobuf
+rm -rf lib
 
-sudo apt-get install automake
-sudo apt-get install zip unzip
+sysOS=`uname -s`
+
+cmake --version
+if [ $? -ne 0 ]; then
+    echo "[ERROR] Please install cmake first."
+    echo "[ubuntu] apt-get install cmake or [centos] yum install cmake or [mac] brew install cmake"
+    exit 1
+fi
+
+unzip -v
+if [ $? -ne 0 ]; then
+    echo "[ERROR] Please install unzip first."
+    echo "[ubuntu] sudo apt-get install unzip or [centos] yum install unzip or [mac] brew install unzip"
+    exit 1
+fi
+
+g++ --version
+if [ $? -ne 0 ]; then
+    echo "[ERROR] Please install g++ first."
+    echo "[ubuntu] sudo apt-get install g++ or [centos] yum install g++ or [mac] brew install g++"
+    exit 1
+fi
+
+automake --version
+if [ $? -ne 0 ]; then
+    echo "[ERROR] Please install automake first."
+    echo "[ubuntu] sudo apt-get install automake or [centos] yum install automake or [mac] brew install automake"
+    exit 1
+fi
+
+openssl version
+if [ $? -ne 0 ]; then
+    echo "[ERROR] Please install openssl first."
+    echo "[ubuntu] sudo apt-get install libssl-dev or [centos] yum install libssl-dev or [mac] brew install openssl"
+    exit 1
+fi
+
+
+git submodule update --init --recursive
 
 rm -rf ./lib
 mkdir -p lib/Debug/
 mkdir -p lib/Release/
 
-sudo apt-get install libssl-dev
-sudo apt-get install libreadline-dev 
+if [ $sysOS == "Darwin" ];then
+    echo "what are you want to do???"
+elif [ $sysOS == "Linux" ];then
+	sudo apt-get install libreadline6-dev 
+	sudo apt-get install libncurses5-dev
+fi
+
+
 #cd openssl-1.1.0h
 #rm -rf *.a
 #chmod -R 755 *
@@ -23,8 +69,11 @@ sudo apt-get install libreadline-dev
 
 
 # compiling libevent
+echo Start to build  libevent...................................................
 cd libevent
-make clean
+chmod 777 *.sh
+./autogen.sh
+
 chmod +x ./configure
 #./configure --disable-shared --disable-openssl
 ./configure --disable-shared --disable-openssl
@@ -33,36 +82,35 @@ make
 cp -R -f ./.libs/*.a ../lib/Debug/
 cp -R -f ./.libs/*.a ../lib/Release/
 
-cp -R -f ./.libs/*.a ../lib/Release/
-
+echo finished libevent..................................................
 cd ../
 
 
 # compiling protobuf
+echo Start to build protobuf...................................................
 cd protobuf
-make clean
-chmod -R 755 *
+chmod 777 *.sh
+./autogen.sh
 ./configure --disable-shared --with-protoc
 make
-make check
+# make check
 
 cp -r -f ./src/.libs/*.a ../lib/Debug/
 cp -r -f ./src/.libs/*.a ../lib/Release/
 
 cp -r -f ./src/protoc ../../NFComm/NFMessageDefine/protoc
 
+echo finished protobuf..................................................
+
 cd ../
 
 # compiling lua
-echo Building lua...
+echo Building lua...................................................
 cd lua
 
-sysOS=`uname -s`
 if [ $sysOS == "Darwin" ];then
     make macosx test
 elif [ $sysOS == "Linux" ];then
-	sudo apt-get install libreadline6-dev 
-	sudo apt-get install libncurses5-dev
     make linux test
 fi
 

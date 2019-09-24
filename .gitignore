@@ -76,6 +76,9 @@
 /_Out/Comm/Release/*.pdb
 /_Out/Comm/Release/*.dll
 
+/_Out/Comm/NFMessageDefine/protoc
+/_Out/Comm/NFMessageDefine/protoc.exe
+
 /_Out/Server/NFDataCfg/Ini/
 /_Out/Server/NFDataCfg/Struct/
 /_Out/Server/NFDataCfg/Proto/
