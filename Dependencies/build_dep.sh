@@ -1,6 +1,6 @@
 echo Building dependencies...
 
-#git submodule update --init --recursive
+git submodule update --init --recursive
 
 sudo apt-get install automake
 sudo apt-get install zip unzip
