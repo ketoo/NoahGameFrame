@@ -10,3 +10,6 @@
 [submodule "Dependencies/ajson"]
 	path = Dependencies/ajson
 	url = https://github.com/lordoffox/ajson.git
+[submodule "Dependencies/concurrentqueue"]
+	path = Dependencies/concurrentqueue
+	url = https://github.com/cameron314/concurrentqueue.git
