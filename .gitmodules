@@ -7,3 +7,6 @@
 [submodule "Dependencies/lua"]
 	path = Dependencies/lua
 	url = https://github.com/lua/lua.git
+[submodule "Dependencies/ajson"]
+	path = Dependencies/ajson
+	url = https://github.com/lordoffox/ajson.git
