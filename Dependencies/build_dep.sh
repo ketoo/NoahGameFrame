@@ -120,7 +120,6 @@ echo Building lua...................................................
 rm -rf lua
 rm lua-5.3.5.tar.gz
 wget http://www.lua.org/ftp/lua-5.3.5.tar.gz
-mkdir lua
 tar zxf lua-5.3.5.tar.gz
 mv lua-5.3.5 lua
 cd lua
@@ -136,13 +135,17 @@ cp -r -f ./src/*.a ../lib/Release/
 
 cd ../
 
-echo Building lua finish...
+echo Building lua finish.............................................
+
+cd LuaIntf
+
+cd ..
 
 # compiling hiredis
-echo Building hiredis...
+echo Building hiredis.............................................
 chmod 777 build_hiredis.sh
 ./build_hiredis.sh
-echo Building hiredis finish...
+echo Building hiredis finish.............................................
 
 
 
