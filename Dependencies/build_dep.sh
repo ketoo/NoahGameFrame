@@ -62,6 +62,7 @@ mkdir -p lib/Release/
 if [ $sysOS == "Darwin" ];then
     echo "what are you want to do???"
 elif [ $sysOS == "Linux" ];then
+    sudo apt-get install libtool
 	sudo apt-get install libreadline6-dev 
 	sudo apt-get install libncurses5-dev
 fi
