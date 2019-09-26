@@ -5,283 +5,254 @@
 
 #include <algorithm>
 
-#include <google/protobuf/stubs/common.h>
-#include <google/protobuf/stubs/port.h>
 #include <google/protobuf/io/coded_stream.h>
-#include <google/protobuf/wire_format_lite_inl.h>
+#include <google/protobuf/extension_set.h>
+#include <google/protobuf/wire_format_lite.h>
 #include <google/protobuf/descriptor.h>
 #include <google/protobuf/generated_message_reflection.h>
 #include <google/protobuf/reflection_ops.h>
 #include <google/protobuf/wire_format.h>
-// This is a temporary google only hack
-#ifdef GOOGLE_PROTOBUF_ENFORCE_UNIQUENESS
-#include "third_party/protobuf/version.h"
-#endif
 // @@protoc_insertion_point(includes)
-
-namespace protobuf_NFMsgBase_2eproto {
-extern PROTOBUF_INTERNAL_EXPORT_protobuf_NFMsgBase_2eproto ::google::protobuf::internal::SCCInfo<0> scc_info_Ident;
-}  // namespace protobuf_NFMsgBase_2eproto
-namespace protobuf_NFMsgFriend_2eproto {
-extern PROTOBUF_INTERNAL_EXPORT_protobuf_NFMsgFriend_2eproto ::google::protobuf::internal::SCCInfo<1> scc_info_FriendData;
-}  // namespace protobuf_NFMsgFriend_2eproto
+#include <google/protobuf/port_def.inc>
+extern PROTOBUF_INTERNAL_EXPORT_NFMsgFriend_2eproto ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_FriendData_NFMsgFriend_2eproto;
+extern PROTOBUF_INTERNAL_EXPORT_NFMsgBase_2eproto ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_Ident_NFMsgBase_2eproto;
 namespace NFMsg {
 class FriendDataDefaultTypeInternal {
  public:
-  ::google::protobuf::internal::ExplicitlyConstructed<FriendData>
-      _instance;
+  ::PROTOBUF_NAMESPACE_ID::internal::ExplicitlyConstructed<FriendData> _instance;
 } _FriendData_default_instance_;
 class ReqAckFriendListDefaultTypeInternal {
  public:
-  ::google::protobuf::internal::ExplicitlyConstructed<ReqAckFriendList>
-      _instance;
+  ::PROTOBUF_NAMESPACE_ID::internal::ExplicitlyConstructed<ReqAckFriendList> _instance;
 } _ReqAckFriendList_default_instance_;
 class ReqAckDeleteFriendDefaultTypeInternal {
  public:
-  ::google::protobuf::internal::ExplicitlyConstructed<ReqAckDeleteFriend>
-      _instance;
+  ::PROTOBUF_NAMESPACE_ID::internal::ExplicitlyConstructed<ReqAckDeleteFriend> _instance;
 } _ReqAckDeleteFriend_default_instance_;
 class ReqAckSendInviteDefaultTypeInternal {
  public:
-  ::google::protobuf::internal::ExplicitlyConstructed<ReqAckSendInvite>
-      _instance;
+  ::PROTOBUF_NAMESPACE_ID::internal::ExplicitlyConstructed<ReqAckSendInvite> _instance;
 } _ReqAckSendInvite_default_instance_;
 class ReqAckAcceptInviteDefaultTypeInternal {
  public:
-  ::google::protobuf::internal::ExplicitlyConstructed<ReqAckAcceptInvite>
-      _instance;
+  ::PROTOBUF_NAMESPACE_ID::internal::ExplicitlyConstructed<ReqAckAcceptInvite> _instance;
 } _ReqAckAcceptInvite_default_instance_;
 class ReqAckRejectInviteDefaultTypeInternal {
  public:
-  ::google::protobuf::internal::ExplicitlyConstructed<ReqAckRejectInvite>
-      _instance;
+  ::PROTOBUF_NAMESPACE_ID::internal::ExplicitlyConstructed<ReqAckRejectInvite> _instance;
 } _ReqAckRejectInvite_default_instance_;
 class ReqAckIgnoreInviteDefaultTypeInternal {
  public:
-  ::google::protobuf::internal::ExplicitlyConstructed<ReqAckIgnoreInvite>
-      _instance;
+  ::PROTOBUF_NAMESPACE_ID::internal::ExplicitlyConstructed<ReqAckIgnoreInvite> _instance;
 } _ReqAckIgnoreInvite_default_instance_;
 class ReqAckBlockPlayerDefaultTypeInternal {
  public:
-  ::google::protobuf::internal::ExplicitlyConstructed<ReqAckBlockPlayer>
-      _instance;
+  ::PROTOBUF_NAMESPACE_ID::internal::ExplicitlyConstructed<ReqAckBlockPlayer> _instance;
 } _ReqAckBlockPlayer_default_instance_;
 class ReqAckUnBlockPlayerDefaultTypeInternal {
  public:
-  ::google::protobuf::internal::ExplicitlyConstructed<ReqAckUnBlockPlayer>
-      _instance;
+  ::PROTOBUF_NAMESPACE_ID::internal::ExplicitlyConstructed<ReqAckUnBlockPlayer> _instance;
 } _ReqAckUnBlockPlayer_default_instance_;
 }  // namespace NFMsg
-namespace protobuf_NFMsgFriend_2eproto {
-static void InitDefaultsFriendData() {
+static void InitDefaultsscc_info_FriendData_NFMsgFriend_2eproto() {
   GOOGLE_PROTOBUF_VERIFY_VERSION;
 
   {
     void* ptr = &::NFMsg::_FriendData_default_instance_;
     new (ptr) ::NFMsg::FriendData();
-    ::google::protobuf::internal::OnShutdownDestroyMessage(ptr);
+    ::PROTOBUF_NAMESPACE_ID::internal::OnShutdownDestroyMessage(ptr);
   }
   ::NFMsg::FriendData::InitAsDefaultInstance();
 }
 
-LIBPROTOC_EXPORT ::google::protobuf::internal::SCCInfo<1> scc_info_FriendData =
-    {{ATOMIC_VAR_INIT(::google::protobuf::internal::SCCInfoBase::kUninitialized), 1, InitDefaultsFriendData}, {
-      &protobuf_NFMsgBase_2eproto::scc_info_Ident.base,}};
+LIBPROTOC_EXPORT ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_FriendData_NFMsgFriend_2eproto =
+    {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 1, 0, InitDefaultsscc_info_FriendData_NFMsgFriend_2eproto}, {
+      &scc_info_Ident_NFMsgBase_2eproto.base,}};
 
-static void InitDefaultsReqAckFriendList() {
-  GOOGLE_PROTOBUF_VERIFY_VERSION;
-
-  {
-    void* ptr = &::NFMsg::_ReqAckFriendList_default_instance_;
-    new (ptr) ::NFMsg::ReqAckFriendList();
-    ::google::protobuf::internal::OnShutdownDestroyMessage(ptr);
-  }
-  ::NFMsg::ReqAckFriendList::InitAsDefaultInstance();
-}
-
-LIBPROTOC_EXPORT ::google::protobuf::internal::SCCInfo<1> scc_info_ReqAckFriendList =
-    {{ATOMIC_VAR_INIT(::google::protobuf::internal::SCCInfoBase::kUninitialized), 1, InitDefaultsReqAckFriendList}, {
-      &protobuf_NFMsgFriend_2eproto::scc_info_FriendData.base,}};
-
-static void InitDefaultsReqAckDeleteFriend() {
-  GOOGLE_PROTOBUF_VERIFY_VERSION;
-
-  {
-    void* ptr = &::NFMsg::_ReqAckDeleteFriend_default_instance_;
-    new (ptr) ::NFMsg::ReqAckDeleteFriend();
-    ::google::protobuf::internal::OnShutdownDestroyMessage(ptr);
-  }
-  ::NFMsg::ReqAckDeleteFriend::InitAsDefaultInstance();
-}
-
-LIBPROTOC_EXPORT ::google::protobuf::internal::SCCInfo<1> scc_info_ReqAckDeleteFriend =
-    {{ATOMIC_VAR_INIT(::google::protobuf::internal::SCCInfoBase::kUninitialized), 1, InitDefaultsReqAckDeleteFriend}, {
-      &protobuf_NFMsgBase_2eproto::scc_info_Ident.base,}};
-
-static void InitDefaultsReqAckSendInvite() {
-  GOOGLE_PROTOBUF_VERIFY_VERSION;
-
-  {
-    void* ptr = &::NFMsg::_ReqAckSendInvite_default_instance_;
-    new (ptr) ::NFMsg::ReqAckSendInvite();
-    ::google::protobuf::internal::OnShutdownDestroyMessage(ptr);
-  }
-  ::NFMsg::ReqAckSendInvite::InitAsDefaultInstance();
-}
-
-LIBPROTOC_EXPORT ::google::protobuf::internal::SCCInfo<1> scc_info_ReqAckSendInvite =
-    {{ATOMIC_VAR_INIT(::google::protobuf::internal::SCCInfoBase::kUninitialized), 1, InitDefaultsReqAckSendInvite}, {
-      &protobuf_NFMsgBase_2eproto::scc_info_Ident.base,}};
-
-static void InitDefaultsReqAckAcceptInvite() {
+static void InitDefaultsscc_info_ReqAckAcceptInvite_NFMsgFriend_2eproto() {
   GOOGLE_PROTOBUF_VERIFY_VERSION;
 
   {
     void* ptr = &::NFMsg::_ReqAckAcceptInvite_default_instance_;
     new (ptr) ::NFMsg::ReqAckAcceptInvite();
-    ::google::protobuf::internal::OnShutdownDestroyMessage(ptr);
+    ::PROTOBUF_NAMESPACE_ID::internal::OnShutdownDestroyMessage(ptr);
   }
   ::NFMsg::ReqAckAcceptInvite::InitAsDefaultInstance();
 }
 
-LIBPROTOC_EXPORT ::google::protobuf::internal::SCCInfo<1> scc_info_ReqAckAcceptInvite =
-    {{ATOMIC_VAR_INIT(::google::protobuf::internal::SCCInfoBase::kUninitialized), 1, InitDefaultsReqAckAcceptInvite}, {
-      &protobuf_NFMsgBase_2eproto::scc_info_Ident.base,}};
+LIBPROTOC_EXPORT ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_ReqAckAcceptInvite_NFMsgFriend_2eproto =
+    {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 1, 0, InitDefaultsscc_info_ReqAckAcceptInvite_NFMsgFriend_2eproto}, {
+      &scc_info_Ident_NFMsgBase_2eproto.base,}};
 
-static void InitDefaultsReqAckRejectInvite() {
-  GOOGLE_PROTOBUF_VERIFY_VERSION;
-
-  {
-    void* ptr = &::NFMsg::_ReqAckRejectInvite_default_instance_;
-    new (ptr) ::NFMsg::ReqAckRejectInvite();
-    ::google::protobuf::internal::OnShutdownDestroyMessage(ptr);
-  }
-  ::NFMsg::ReqAckRejectInvite::InitAsDefaultInstance();
-}
-
-LIBPROTOC_EXPORT ::google::protobuf::internal::SCCInfo<1> scc_info_ReqAckRejectInvite =
-    {{ATOMIC_VAR_INIT(::google::protobuf::internal::SCCInfoBase::kUninitialized), 1, InitDefaultsReqAckRejectInvite}, {
-      &protobuf_NFMsgBase_2eproto::scc_info_Ident.base,}};
-
-static void InitDefaultsReqAckIgnoreInvite() {
-  GOOGLE_PROTOBUF_VERIFY_VERSION;
-
-  {
-    void* ptr = &::NFMsg::_ReqAckIgnoreInvite_default_instance_;
-    new (ptr) ::NFMsg::ReqAckIgnoreInvite();
-    ::google::protobuf::internal::OnShutdownDestroyMessage(ptr);
-  }
-  ::NFMsg::ReqAckIgnoreInvite::InitAsDefaultInstance();
-}
-
-LIBPROTOC_EXPORT ::google::protobuf::internal::SCCInfo<1> scc_info_ReqAckIgnoreInvite =
-    {{ATOMIC_VAR_INIT(::google::protobuf::internal::SCCInfoBase::kUninitialized), 1, InitDefaultsReqAckIgnoreInvite}, {
-      &protobuf_NFMsgBase_2eproto::scc_info_Ident.base,}};
-
-static void InitDefaultsReqAckBlockPlayer() {
+static void InitDefaultsscc_info_ReqAckBlockPlayer_NFMsgFriend_2eproto() {
   GOOGLE_PROTOBUF_VERIFY_VERSION;
 
   {
     void* ptr = &::NFMsg::_ReqAckBlockPlayer_default_instance_;
     new (ptr) ::NFMsg::ReqAckBlockPlayer();
-    ::google::protobuf::internal::OnShutdownDestroyMessage(ptr);
+    ::PROTOBUF_NAMESPACE_ID::internal::OnShutdownDestroyMessage(ptr);
   }
   ::NFMsg::ReqAckBlockPlayer::InitAsDefaultInstance();
 }
 
-LIBPROTOC_EXPORT ::google::protobuf::internal::SCCInfo<1> scc_info_ReqAckBlockPlayer =
-    {{ATOMIC_VAR_INIT(::google::protobuf::internal::SCCInfoBase::kUninitialized), 1, InitDefaultsReqAckBlockPlayer}, {
-      &protobuf_NFMsgBase_2eproto::scc_info_Ident.base,}};
+LIBPROTOC_EXPORT ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_ReqAckBlockPlayer_NFMsgFriend_2eproto =
+    {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 1, 0, InitDefaultsscc_info_ReqAckBlockPlayer_NFMsgFriend_2eproto}, {
+      &scc_info_Ident_NFMsgBase_2eproto.base,}};
 
-static void InitDefaultsReqAckUnBlockPlayer() {
+static void InitDefaultsscc_info_ReqAckDeleteFriend_NFMsgFriend_2eproto() {
+  GOOGLE_PROTOBUF_VERIFY_VERSION;
+
+  {
+    void* ptr = &::NFMsg::_ReqAckDeleteFriend_default_instance_;
+    new (ptr) ::NFMsg::ReqAckDeleteFriend();
+    ::PROTOBUF_NAMESPACE_ID::internal::OnShutdownDestroyMessage(ptr);
+  }
+  ::NFMsg::ReqAckDeleteFriend::InitAsDefaultInstance();
+}
+
+LIBPROTOC_EXPORT ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_ReqAckDeleteFriend_NFMsgFriend_2eproto =
+    {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 1, 0, InitDefaultsscc_info_ReqAckDeleteFriend_NFMsgFriend_2eproto}, {
+      &scc_info_Ident_NFMsgBase_2eproto.base,}};
+
+static void InitDefaultsscc_info_ReqAckFriendList_NFMsgFriend_2eproto() {
+  GOOGLE_PROTOBUF_VERIFY_VERSION;
+
+  {
+    void* ptr = &::NFMsg::_ReqAckFriendList_default_instance_;
+    new (ptr) ::NFMsg::ReqAckFriendList();
+    ::PROTOBUF_NAMESPACE_ID::internal::OnShutdownDestroyMessage(ptr);
+  }
+  ::NFMsg::ReqAckFriendList::InitAsDefaultInstance();
+}
+
+LIBPROTOC_EXPORT ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_ReqAckFriendList_NFMsgFriend_2eproto =
+    {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 1, 0, InitDefaultsscc_info_ReqAckFriendList_NFMsgFriend_2eproto}, {
+      &scc_info_FriendData_NFMsgFriend_2eproto.base,}};
+
+static void InitDefaultsscc_info_ReqAckIgnoreInvite_NFMsgFriend_2eproto() {
+  GOOGLE_PROTOBUF_VERIFY_VERSION;
+
+  {
+    void* ptr = &::NFMsg::_ReqAckIgnoreInvite_default_instance_;
+    new (ptr) ::NFMsg::ReqAckIgnoreInvite();
+    ::PROTOBUF_NAMESPACE_ID::internal::OnShutdownDestroyMessage(ptr);
+  }
+  ::NFMsg::ReqAckIgnoreInvite::InitAsDefaultInstance();
+}
+
+LIBPROTOC_EXPORT ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_ReqAckIgnoreInvite_NFMsgFriend_2eproto =
+    {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 1, 0, InitDefaultsscc_info_ReqAckIgnoreInvite_NFMsgFriend_2eproto}, {
+      &scc_info_Ident_NFMsgBase_2eproto.base,}};
+
+static void InitDefaultsscc_info_ReqAckRejectInvite_NFMsgFriend_2eproto() {
+  GOOGLE_PROTOBUF_VERIFY_VERSION;
+
+  {
+    void* ptr = &::NFMsg::_ReqAckRejectInvite_default_instance_;
+    new (ptr) ::NFMsg::ReqAckRejectInvite();
+    ::PROTOBUF_NAMESPACE_ID::internal::OnShutdownDestroyMessage(ptr);
+  }
+  ::NFMsg::ReqAckRejectInvite::InitAsDefaultInstance();
+}
+
+LIBPROTOC_EXPORT ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_ReqAckRejectInvite_NFMsgFriend_2eproto =
+    {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 1, 0, InitDefaultsscc_info_ReqAckRejectInvite_NFMsgFriend_2eproto}, {
+      &scc_info_Ident_NFMsgBase_2eproto.base,}};
+
+static void InitDefaultsscc_info_ReqAckSendInvite_NFMsgFriend_2eproto() {
+  GOOGLE_PROTOBUF_VERIFY_VERSION;
+
+  {
+    void* ptr = &::NFMsg::_ReqAckSendInvite_default_instance_;
+    new (ptr) ::NFMsg::ReqAckSendInvite();
+    ::PROTOBUF_NAMESPACE_ID::internal::OnShutdownDestroyMessage(ptr);
+  }
+  ::NFMsg::ReqAckSendInvite::InitAsDefaultInstance();
+}
+
+LIBPROTOC_EXPORT ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_ReqAckSendInvite_NFMsgFriend_2eproto =
+    {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 1, 0, InitDefaultsscc_info_ReqAckSendInvite_NFMsgFriend_2eproto}, {
+      &scc_info_Ident_NFMsgBase_2eproto.base,}};
+
+static void InitDefaultsscc_info_ReqAckUnBlockPlayer_NFMsgFriend_2eproto() {
   GOOGLE_PROTOBUF_VERIFY_VERSION;
 
   {
     void* ptr = &::NFMsg::_ReqAckUnBlockPlayer_default_instance_;
     new (ptr) ::NFMsg::ReqAckUnBlockPlayer();
-    ::google::protobuf::internal::OnShutdownDestroyMessage(ptr);
+    ::PROTOBUF_NAMESPACE_ID::internal::OnShutdownDestroyMessage(ptr);
   }
   ::NFMsg::ReqAckUnBlockPlayer::InitAsDefaultInstance();
 }
 
-LIBPROTOC_EXPORT ::google::protobuf::internal::SCCInfo<1> scc_info_ReqAckUnBlockPlayer =
-    {{ATOMIC_VAR_INIT(::google::protobuf::internal::SCCInfoBase::kUninitialized), 1, InitDefaultsReqAckUnBlockPlayer}, {
-      &protobuf_NFMsgBase_2eproto::scc_info_Ident.base,}};
+LIBPROTOC_EXPORT ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_ReqAckUnBlockPlayer_NFMsgFriend_2eproto =
+    {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 1, 0, InitDefaultsscc_info_ReqAckUnBlockPlayer_NFMsgFriend_2eproto}, {
+      &scc_info_Ident_NFMsgBase_2eproto.base,}};
 
-void InitDefaults() {
-  ::google::protobuf::internal::InitSCC(&scc_info_FriendData.base);
-  ::google::protobuf::internal::InitSCC(&scc_info_ReqAckFriendList.base);
-  ::google::protobuf::internal::InitSCC(&scc_info_ReqAckDeleteFriend.base);
-  ::google::protobuf::internal::InitSCC(&scc_info_ReqAckSendInvite.base);
-  ::google::protobuf::internal::InitSCC(&scc_info_ReqAckAcceptInvite.base);
-  ::google::protobuf::internal::InitSCC(&scc_info_ReqAckRejectInvite.base);
-  ::google::protobuf::internal::InitSCC(&scc_info_ReqAckIgnoreInvite.base);
-  ::google::protobuf::internal::InitSCC(&scc_info_ReqAckBlockPlayer.base);
-  ::google::protobuf::internal::InitSCC(&scc_info_ReqAckUnBlockPlayer.base);
-}
+static ::PROTOBUF_NAMESPACE_ID::Metadata file_level_metadata_NFMsgFriend_2eproto[9];
+static constexpr ::PROTOBUF_NAMESPACE_ID::EnumDescriptor const** file_level_enum_descriptors_NFMsgFriend_2eproto = nullptr;
+static constexpr ::PROTOBUF_NAMESPACE_ID::ServiceDescriptor const** file_level_service_descriptors_NFMsgFriend_2eproto = nullptr;
 
-::google::protobuf::Metadata file_level_metadata[9];
-
-const ::google::protobuf::uint32 TableStruct::offsets[] GOOGLE_PROTOBUF_ATTRIBUTE_SECTION_VARIABLE(protodesc_cold) = {
+const ::PROTOBUF_NAMESPACE_ID::uint32 TableStruct_NFMsgFriend_2eproto::offsets[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) = {
   ~0u,  // no _has_bits_
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NFMsg::FriendData, _internal_metadata_),
+  PROTOBUF_FIELD_OFFSET(::NFMsg::FriendData, _internal_metadata_),
   ~0u,  // no _extensions_
   ~0u,  // no _oneof_case_
   ~0u,  // no _weak_field_map_
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NFMsg::FriendData, id_),
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NFMsg::FriendData, name_),
+  PROTOBUF_FIELD_OFFSET(::NFMsg::FriendData, id_),
+  PROTOBUF_FIELD_OFFSET(::NFMsg::FriendData, name_),
   ~0u,  // no _has_bits_
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NFMsg::ReqAckFriendList, _internal_metadata_),
+  PROTOBUF_FIELD_OFFSET(::NFMsg::ReqAckFriendList, _internal_metadata_),
   ~0u,  // no _extensions_
   ~0u,  // no _oneof_case_
   ~0u,  // no _weak_field_map_
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NFMsg::ReqAckFriendList, invitelist_),
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NFMsg::ReqAckFriendList, friendlist_),
+  PROTOBUF_FIELD_OFFSET(::NFMsg::ReqAckFriendList, invitelist_),
+  PROTOBUF_FIELD_OFFSET(::NFMsg::ReqAckFriendList, friendlist_),
   ~0u,  // no _has_bits_
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NFMsg::ReqAckDeleteFriend, _internal_metadata_),
+  PROTOBUF_FIELD_OFFSET(::NFMsg::ReqAckDeleteFriend, _internal_metadata_),
   ~0u,  // no _extensions_
   ~0u,  // no _oneof_case_
   ~0u,  // no _weak_field_map_
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NFMsg::ReqAckDeleteFriend, id_),
+  PROTOBUF_FIELD_OFFSET(::NFMsg::ReqAckDeleteFriend, id_),
   ~0u,  // no _has_bits_
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NFMsg::ReqAckSendInvite, _internal_metadata_),
+  PROTOBUF_FIELD_OFFSET(::NFMsg::ReqAckSendInvite, _internal_metadata_),
   ~0u,  // no _extensions_
   ~0u,  // no _oneof_case_
   ~0u,  // no _weak_field_map_
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NFMsg::ReqAckSendInvite, id_),
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NFMsg::ReqAckSendInvite, name_),
+  PROTOBUF_FIELD_OFFSET(::NFMsg::ReqAckSendInvite, id_),
+  PROTOBUF_FIELD_OFFSET(::NFMsg::ReqAckSendInvite, name_),
   ~0u,  // no _has_bits_
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NFMsg::ReqAckAcceptInvite, _internal_metadata_),
+  PROTOBUF_FIELD_OFFSET(::NFMsg::ReqAckAcceptInvite, _internal_metadata_),
   ~0u,  // no _extensions_
   ~0u,  // no _oneof_case_
   ~0u,  // no _weak_field_map_
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NFMsg::ReqAckAcceptInvite, id_),
+  PROTOBUF_FIELD_OFFSET(::NFMsg::ReqAckAcceptInvite, id_),
   ~0u,  // no _has_bits_
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NFMsg::ReqAckRejectInvite, _internal_metadata_),
+  PROTOBUF_FIELD_OFFSET(::NFMsg::ReqAckRejectInvite, _internal_metadata_),
   ~0u,  // no _extensions_
   ~0u,  // no _oneof_case_
   ~0u,  // no _weak_field_map_
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NFMsg::ReqAckRejectInvite, id_),
+  PROTOBUF_FIELD_OFFSET(::NFMsg::ReqAckRejectInvite, id_),
   ~0u,  // no _has_bits_
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NFMsg::ReqAckIgnoreInvite, _internal_metadata_),
+  PROTOBUF_FIELD_OFFSET(::NFMsg::ReqAckIgnoreInvite, _internal_metadata_),
   ~0u,  // no _extensions_
   ~0u,  // no _oneof_case_
   ~0u,  // no _weak_field_map_
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NFMsg::ReqAckIgnoreInvite, id_),
+  PROTOBUF_FIELD_OFFSET(::NFMsg::ReqAckIgnoreInvite, id_),
   ~0u,  // no _has_bits_
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NFMsg::ReqAckBlockPlayer, _internal_metadata_),
+  PROTOBUF_FIELD_OFFSET(::NFMsg::ReqAckBlockPlayer, _internal_metadata_),
   ~0u,  // no _extensions_
   ~0u,  // no _oneof_case_
   ~0u,  // no _weak_field_map_
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NFMsg::ReqAckBlockPlayer, id_),
+  PROTOBUF_FIELD_OFFSET(::NFMsg::ReqAckBlockPlayer, id_),
   ~0u,  // no _has_bits_
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NFMsg::ReqAckUnBlockPlayer, _internal_metadata_),
+  PROTOBUF_FIELD_OFFSET(::NFMsg::ReqAckUnBlockPlayer, _internal_metadata_),
   ~0u,  // no _extensions_
   ~0u,  // no _oneof_case_
   ~0u,  // no _weak_field_map_
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NFMsg::ReqAckUnBlockPlayer, id_),
+  PROTOBUF_FIELD_OFFSET(::NFMsg::ReqAckUnBlockPlayer, id_),
 };
-static const ::google::protobuf::internal::MigrationSchema schemas[] GOOGLE_PROTOBUF_ATTRIBUTE_SECTION_VARIABLE(protodesc_cold) = {
+static const ::PROTOBUF_NAMESPACE_ID::internal::MigrationSchema schemas[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) = {
   { 0, -1, sizeof(::NFMsg::FriendData)},
   { 7, -1, sizeof(::NFMsg::ReqAckFriendList)},
   { 14, -1, sizeof(::NFMsg::ReqAckDeleteFriend)},
@@ -293,72 +264,59 @@ static const ::google::protobuf::internal::MigrationSchema schemas[] GOOGLE_PROT
   { 51, -1, sizeof(::NFMsg::ReqAckUnBlockPlayer)},
 };
 
-static ::google::protobuf::Message const * const file_default_instances[] = {
-  reinterpret_cast<const ::google::protobuf::Message*>(&::NFMsg::_FriendData_default_instance_),
-  reinterpret_cast<const ::google::protobuf::Message*>(&::NFMsg::_ReqAckFriendList_default_instance_),
-  reinterpret_cast<const ::google::protobuf::Message*>(&::NFMsg::_ReqAckDeleteFriend_default_instance_),
-  reinterpret_cast<const ::google::protobuf::Message*>(&::NFMsg::_ReqAckSendInvite_default_instance_),
-  reinterpret_cast<const ::google::protobuf::Message*>(&::NFMsg::_ReqAckAcceptInvite_default_instance_),
-  reinterpret_cast<const ::google::protobuf::Message*>(&::NFMsg::_ReqAckRejectInvite_default_instance_),
-  reinterpret_cast<const ::google::protobuf::Message*>(&::NFMsg::_ReqAckIgnoreInvite_default_instance_),
-  reinterpret_cast<const ::google::protobuf::Message*>(&::NFMsg::_ReqAckBlockPlayer_default_instance_),
-  reinterpret_cast<const ::google::protobuf::Message*>(&::NFMsg::_ReqAckUnBlockPlayer_default_instance_),
+static ::PROTOBUF_NAMESPACE_ID::Message const * const file_default_instances[] = {
+  reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::NFMsg::_FriendData_default_instance_),
+  reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::NFMsg::_ReqAckFriendList_default_instance_),
+  reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::NFMsg::_ReqAckDeleteFriend_default_instance_),
+  reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::NFMsg::_ReqAckSendInvite_default_instance_),
+  reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::NFMsg::_ReqAckAcceptInvite_default_instance_),
+  reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::NFMsg::_ReqAckRejectInvite_default_instance_),
+  reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::NFMsg::_ReqAckIgnoreInvite_default_instance_),
+  reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::NFMsg::_ReqAckBlockPlayer_default_instance_),
+  reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::NFMsg::_ReqAckUnBlockPlayer_default_instance_),
 };
 
-void protobuf_AssignDescriptors() {
-  AddDescriptors();
-  AssignDescriptors(
-      "NFMsgFriend.proto", schemas, file_default_instances, TableStruct::offsets,
-      file_level_metadata, NULL, NULL);
-}
+const char descriptor_table_protodef_NFMsgFriend_2eproto[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) =
+  "\n\021NFMsgFriend.proto\022\005NFMsg\032\017NFMsgBase.pr"
+  "oto\"4\n\nFriendData\022\030\n\002id\030\001 \001(\0132\014.NFMsg.Id"
+  "ent\022\014\n\004name\030\002 \001(\014\"`\n\020ReqAckFriendList\022%\n"
+  "\ninviteList\030\001 \003(\0132\021.NFMsg.FriendData\022%\n\n"
+  "friendList\030\002 \003(\0132\021.NFMsg.FriendData\".\n\022R"
+  "eqAckDeleteFriend\022\030\n\002id\030\001 \001(\0132\014.NFMsg.Id"
+  "ent\":\n\020ReqAckSendInvite\022\030\n\002id\030\001 \001(\0132\014.NF"
+  "Msg.Ident\022\014\n\004name\030\002 \001(\014\".\n\022ReqAckAcceptI"
+  "nvite\022\030\n\002id\030\001 \001(\0132\014.NFMsg.Ident\".\n\022ReqAc"
+  "kRejectInvite\022\030\n\002id\030\001 \001(\0132\014.NFMsg.Ident\""
+  ".\n\022ReqAckIgnoreInvite\022\030\n\002id\030\001 \001(\0132\014.NFMs"
+  "g.Ident\"-\n\021ReqAckBlockPlayer\022\030\n\002id\030\001 \001(\013"
+  "2\014.NFMsg.Ident\"/\n\023ReqAckUnBlockPlayer\022\030\n"
+  "\002id\030\001 \001(\0132\014.NFMsg.Identb\006proto3"
+  ;
+static const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable*const descriptor_table_NFMsgFriend_2eproto_deps[1] = {
+  &::descriptor_table_NFMsgBase_2eproto,
+};
+static ::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase*const descriptor_table_NFMsgFriend_2eproto_sccs[9] = {
+  &scc_info_FriendData_NFMsgFriend_2eproto.base,
+  &scc_info_ReqAckAcceptInvite_NFMsgFriend_2eproto.base,
+  &scc_info_ReqAckBlockPlayer_NFMsgFriend_2eproto.base,
+  &scc_info_ReqAckDeleteFriend_NFMsgFriend_2eproto.base,
+  &scc_info_ReqAckFriendList_NFMsgFriend_2eproto.base,
+  &scc_info_ReqAckIgnoreInvite_NFMsgFriend_2eproto.base,
+  &scc_info_ReqAckRejectInvite_NFMsgFriend_2eproto.base,
+  &scc_info_ReqAckSendInvite_NFMsgFriend_2eproto.base,
+  &scc_info_ReqAckUnBlockPlayer_NFMsgFriend_2eproto.base,
+};
+static ::PROTOBUF_NAMESPACE_ID::internal::once_flag descriptor_table_NFMsgFriend_2eproto_once;
+static bool descriptor_table_NFMsgFriend_2eproto_initialized = false;
+const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable descriptor_table_NFMsgFriend_2eproto = {
+  &descriptor_table_NFMsgFriend_2eproto_initialized, descriptor_table_protodef_NFMsgFriend_2eproto, "NFMsgFriend.proto", 551,
+  &descriptor_table_NFMsgFriend_2eproto_once, descriptor_table_NFMsgFriend_2eproto_sccs, descriptor_table_NFMsgFriend_2eproto_deps, 9, 1,
+  schemas, file_default_instances, TableStruct_NFMsgFriend_2eproto::offsets,
+  file_level_metadata_NFMsgFriend_2eproto, 9, file_level_enum_descriptors_NFMsgFriend_2eproto, file_level_service_descriptors_NFMsgFriend_2eproto,
+};
 
-void protobuf_AssignDescriptorsOnce() {
-  static ::google::protobuf::internal::once_flag once;
-  ::google::protobuf::internal::call_once(once, protobuf_AssignDescriptors);
-}
-
-void protobuf_RegisterTypes(const ::std::string&) GOOGLE_PROTOBUF_ATTRIBUTE_COLD;
-void protobuf_RegisterTypes(const ::std::string&) {
-  protobuf_AssignDescriptorsOnce();
-  ::google::protobuf::internal::RegisterAllTypes(file_level_metadata, 9);
-}
-
-void AddDescriptorsImpl() {
-  InitDefaults();
-  static const char descriptor[] GOOGLE_PROTOBUF_ATTRIBUTE_SECTION_VARIABLE(protodesc_cold) = {
-      "\n\021NFMsgFriend.proto\022\005NFMsg\032\017NFMsgBase.pr"
-      "oto\"4\n\nFriendData\022\030\n\002id\030\001 \001(\0132\014.NFMsg.Id"
-      "ent\022\014\n\004name\030\002 \001(\014\"`\n\020ReqAckFriendList\022%\n"
-      "\ninviteList\030\001 \003(\0132\021.NFMsg.FriendData\022%\n\n"
-      "friendList\030\002 \003(\0132\021.NFMsg.FriendData\".\n\022R"
-      "eqAckDeleteFriend\022\030\n\002id\030\001 \001(\0132\014.NFMsg.Id"
-      "ent\":\n\020ReqAckSendInvite\022\030\n\002id\030\001 \001(\0132\014.NF"
-      "Msg.Ident\022\014\n\004name\030\002 \001(\014\".\n\022ReqAckAcceptI"
-      "nvite\022\030\n\002id\030\001 \001(\0132\014.NFMsg.Ident\".\n\022ReqAc"
-      "kRejectInvite\022\030\n\002id\030\001 \001(\0132\014.NFMsg.Ident\""
-      ".\n\022ReqAckIgnoreInvite\022\030\n\002id\030\001 \001(\0132\014.NFMs"
-      "g.Ident\"-\n\021ReqAckBlockPlayer\022\030\n\002id\030\001 \001(\013"
-      "2\014.NFMsg.Ident\"/\n\023ReqAckUnBlockPlayer\022\030\n"
-      "\002id\030\001 \001(\0132\014.NFMsg.Identb\006proto3"
-  };
-  ::google::protobuf::DescriptorPool::InternalAddGeneratedFile(
-      descriptor, 551);
-  ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
-    "NFMsgFriend.proto", &protobuf_RegisterTypes);
-  ::protobuf_NFMsgBase_2eproto::AddDescriptors();
-}
-
-void AddDescriptors() {
-  static ::google::protobuf::internal::once_flag once;
-  ::google::protobuf::internal::call_once(once, AddDescriptorsImpl);
-}
-// Force AddDescriptors() to be called at dynamic initialization time.
-struct StaticDescriptorInitializer {
-  StaticDescriptorInitializer() {
-    AddDescriptors();
-  }
-} static_descriptor_initializer;
-}  // namespace protobuf_NFMsgFriend_2eproto
+// Force running AddDescriptors() at dynamic initialization time.
+static bool dynamic_init_dummy_NFMsgFriend_2eproto = (  ::PROTOBUF_NAMESPACE_ID::internal::AddDescriptors(&descriptor_table_NFMsgFriend_2eproto), true);
 namespace NFMsg {
 
 // ===================================================================
@@ -367,43 +325,46 @@ void FriendData::InitAsDefaultInstance() {
   ::NFMsg::_FriendData_default_instance_._instance.get_mutable()->id_ = const_cast< ::NFMsg::Ident*>(
       ::NFMsg::Ident::internal_default_instance());
 }
+class FriendData::_Internal {
+ public:
+  static const ::NFMsg::Ident& id(const FriendData* msg);
+};
+
+const ::NFMsg::Ident&
+FriendData::_Internal::id(const FriendData* msg) {
+  return *msg->id_;
+}
 void FriendData::clear_id() {
-  if (GetArenaNoVirtual() == NULL && id_ != NULL) {
+  if (GetArenaNoVirtual() == nullptr && id_ != nullptr) {
     delete id_;
   }
-  id_ = NULL;
+  id_ = nullptr;
 }
-#if !defined(_MSC_VER) || _MSC_VER >= 1900
-const int FriendData::kIdFieldNumber;
-const int FriendData::kNameFieldNumber;
-#endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
-
 FriendData::FriendData()
-  : ::google::protobuf::Message(), _internal_metadata_(NULL) {
-  ::google::protobuf::internal::InitSCC(
-      &protobuf_NFMsgFriend_2eproto::scc_info_FriendData.base);
+  : ::PROTOBUF_NAMESPACE_ID::Message(), _internal_metadata_(nullptr) {
   SharedCtor();
   // @@protoc_insertion_point(constructor:NFMsg.FriendData)
 }
 FriendData::FriendData(const FriendData& from)
-  : ::google::protobuf::Message(),
-      _internal_metadata_(NULL) {
+  : ::PROTOBUF_NAMESPACE_ID::Message(),
+      _internal_metadata_(nullptr) {
   _internal_metadata_.MergeFrom(from._internal_metadata_);
-  name_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  if (from.name().size() > 0) {
-    name_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.name_);
+  name_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  if (!from._internal_name().empty()) {
+    name_.AssignWithDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), from.name_);
   }
-  if (from.has_id()) {
+  if (from._internal_has_id()) {
     id_ = new ::NFMsg::Ident(*from.id_);
   } else {
-    id_ = NULL;
+    id_ = nullptr;
   }
   // @@protoc_insertion_point(copy_constructor:NFMsg.FriendData)
 }
 
 void FriendData::SharedCtor() {
-  name_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  id_ = NULL;
+  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&scc_info_FriendData_NFMsgFriend_2eproto.base);
+  name_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  id_ = nullptr;
 }
 
 FriendData::~FriendData() {
@@ -412,141 +373,97 @@ FriendData::~FriendData() {
 }
 
 void FriendData::SharedDtor() {
-  name_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  name_.DestroyNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
   if (this != internal_default_instance()) delete id_;
 }
 
 void FriendData::SetCachedSize(int size) const {
   _cached_size_.Set(size);
 }
-const ::google::protobuf::Descriptor* FriendData::descriptor() {
-  ::protobuf_NFMsgFriend_2eproto::protobuf_AssignDescriptorsOnce();
-  return ::protobuf_NFMsgFriend_2eproto::file_level_metadata[kIndexInFileMessages].descriptor;
-}
-
 const FriendData& FriendData::default_instance() {
-  ::google::protobuf::internal::InitSCC(&protobuf_NFMsgFriend_2eproto::scc_info_FriendData.base);
+  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&::scc_info_FriendData_NFMsgFriend_2eproto.base);
   return *internal_default_instance();
 }
 
 
 void FriendData::Clear() {
 // @@protoc_insertion_point(message_clear_start:NFMsg.FriendData)
-  ::google::protobuf::uint32 cached_has_bits = 0;
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  name_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  if (GetArenaNoVirtual() == NULL && id_ != NULL) {
+  name_.ClearToEmptyNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  if (GetArenaNoVirtual() == nullptr && id_ != nullptr) {
     delete id_;
   }
-  id_ = NULL;
+  id_ = nullptr;
   _internal_metadata_.Clear();
 }
 
-bool FriendData::MergePartialFromCodedStream(
-    ::google::protobuf::io::CodedInputStream* input) {
-#define DO_(EXPRESSION) if (!GOOGLE_PREDICT_TRUE(EXPRESSION)) goto failure
-  ::google::protobuf::uint32 tag;
-  // @@protoc_insertion_point(parse_start:NFMsg.FriendData)
-  for (;;) {
-    ::std::pair<::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
-    tag = p.first;
-    if (!p.second) goto handle_unusual;
-    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
+const char* FriendData::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) {
+#define CHK_(x) if (PROTOBUF_PREDICT_FALSE(!(x))) goto failure
+  while (!ctx->Done(&ptr)) {
+    ::PROTOBUF_NAMESPACE_ID::uint32 tag;
+    ptr = ::PROTOBUF_NAMESPACE_ID::internal::ReadTag(ptr, &tag);
+    CHK_(ptr);
+    switch (tag >> 3) {
       // .NFMsg.Ident id = 1;
-      case 1: {
-        if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(10u /* 10 & 0xFF */)) {
-          DO_(::google::protobuf::internal::WireFormatLite::ReadMessage(
-               input, mutable_id()));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
+      case 1:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 10)) {
+          ptr = ctx->ParseMessage(_internal_mutable_id(), ptr);
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
       // bytes name = 2;
-      case 2: {
-        if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(18u /* 18 & 0xFF */)) {
-          DO_(::google::protobuf::internal::WireFormatLite::ReadBytes(
-                input, this->mutable_name()));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
+      case 2:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 18)) {
+          ptr = ::PROTOBUF_NAMESPACE_ID::internal::InlineGreedyStringParser(_internal_mutable_name(), ptr, ctx);
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
       default: {
       handle_unusual:
-        if (tag == 0) {
+        if ((tag & 7) == 4 || tag == 0) {
+          ctx->SetLastTag(tag);
           goto success;
         }
-        DO_(::google::protobuf::internal::WireFormat::SkipField(
-              input, tag, _internal_metadata_.mutable_unknown_fields()));
-        break;
+        ptr = UnknownFieldParse(tag, &_internal_metadata_, ptr, ctx);
+        CHK_(ptr != nullptr);
+        continue;
       }
-    }
-  }
+    }  // switch
+  }  // while
 success:
-  // @@protoc_insertion_point(parse_success:NFMsg.FriendData)
-  return true;
+  return ptr;
 failure:
-  // @@protoc_insertion_point(parse_failure:NFMsg.FriendData)
-  return false;
-#undef DO_
+  ptr = nullptr;
+  goto success;
+#undef CHK_
 }
 
-void FriendData::SerializeWithCachedSizes(
-    ::google::protobuf::io::CodedOutputStream* output) const {
-  // @@protoc_insertion_point(serialize_start:NFMsg.FriendData)
-  ::google::protobuf::uint32 cached_has_bits = 0;
-  (void) cached_has_bits;
-
-  // .NFMsg.Ident id = 1;
-  if (this->has_id()) {
-    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      1, this->_internal_id(), output);
-  }
-
-  // bytes name = 2;
-  if (this->name().size() > 0) {
-    ::google::protobuf::internal::WireFormatLite::WriteBytesMaybeAliased(
-      2, this->name(), output);
-  }
-
-  if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
-    ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
-        (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()), output);
-  }
-  // @@protoc_insertion_point(serialize_end:NFMsg.FriendData)
-}
-
-::google::protobuf::uint8* FriendData::InternalSerializeWithCachedSizesToArray(
-    bool deterministic, ::google::protobuf::uint8* target) const {
-  (void)deterministic; // Unused
+::PROTOBUF_NAMESPACE_ID::uint8* FriendData::InternalSerializeWithCachedSizesToArray(
+    ::PROTOBUF_NAMESPACE_ID::uint8* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const {
   // @@protoc_insertion_point(serialize_to_array_start:NFMsg.FriendData)
-  ::google::protobuf::uint32 cached_has_bits = 0;
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
   // .NFMsg.Ident id = 1;
   if (this->has_id()) {
-    target = ::google::protobuf::internal::WireFormatLite::
+    target = stream->EnsureSpace(target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
       InternalWriteMessageToArray(
-        1, this->_internal_id(), deterministic, target);
+        1, _Internal::id(this), target, stream);
   }
 
   // bytes name = 2;
   if (this->name().size() > 0) {
-    target =
-      ::google::protobuf::internal::WireFormatLite::WriteBytesToArray(
-        2, this->name(), target);
+    target = stream->WriteBytesMaybeAliased(
+        2, this->_internal_name(), target);
   }
 
-  if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
-    target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
-        (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()), target);
+  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::InternalSerializeUnknownFieldsToArray(
+        _internal_metadata_.unknown_fields(), target, stream);
   }
   // @@protoc_insertion_point(serialize_to_array_end:NFMsg.FriendData)
   return target;
@@ -556,39 +473,42 @@ size_t FriendData::ByteSizeLong() const {
 // @@protoc_insertion_point(message_byte_size_start:NFMsg.FriendData)
   size_t total_size = 0;
 
-  if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
-    total_size +=
-      ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
-        (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()));
-  }
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
   // bytes name = 2;
   if (this->name().size() > 0) {
     total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::BytesSize(
-        this->name());
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::BytesSize(
+        this->_internal_name());
   }
 
   // .NFMsg.Ident id = 1;
   if (this->has_id()) {
     total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::MessageSize(
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
         *id_);
   }
 
-  int cached_size = ::google::protobuf::internal::ToCachedSize(total_size);
+  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
+    return ::PROTOBUF_NAMESPACE_ID::internal::ComputeUnknownFieldsSize(
+        _internal_metadata_, total_size, &_cached_size_);
+  }
+  int cached_size = ::PROTOBUF_NAMESPACE_ID::internal::ToCachedSize(total_size);
   SetCachedSize(cached_size);
   return total_size;
 }
 
-void FriendData::MergeFrom(const ::google::protobuf::Message& from) {
+void FriendData::MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
 // @@protoc_insertion_point(generalized_merge_from_start:NFMsg.FriendData)
   GOOGLE_DCHECK_NE(&from, this);
   const FriendData* source =
-      ::google::protobuf::internal::DynamicCastToGenerated<const FriendData>(
+      ::PROTOBUF_NAMESPACE_ID::DynamicCastToGenerated<FriendData>(
           &from);
-  if (source == NULL) {
+  if (source == nullptr) {
   // @@protoc_insertion_point(generalized_merge_from_cast_fail:NFMsg.FriendData)
-    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
+    ::PROTOBUF_NAMESPACE_ID::internal::ReflectionOps::Merge(from, this);
   } else {
   // @@protoc_insertion_point(generalized_merge_from_cast_success:NFMsg.FriendData)
     MergeFrom(*source);
@@ -599,19 +519,19 @@ void FriendData::MergeFrom(const FriendData& from) {
 // @@protoc_insertion_point(class_specific_merge_from_start:NFMsg.FriendData)
   GOOGLE_DCHECK_NE(&from, this);
   _internal_metadata_.MergeFrom(from._internal_metadata_);
-  ::google::protobuf::uint32 cached_has_bits = 0;
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
   if (from.name().size() > 0) {
 
-    name_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.name_);
+    name_.AssignWithDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), from.name_);
   }
   if (from.has_id()) {
-    mutable_id()->::NFMsg::Ident::MergeFrom(from.id());
+    _internal_mutable_id()->::NFMsg::Ident::MergeFrom(from._internal_id());
   }
 }
 
-void FriendData::CopyFrom(const ::google::protobuf::Message& from) {
+void FriendData::CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
 // @@protoc_insertion_point(generalized_copy_from_start:NFMsg.FriendData)
   if (&from == this) return;
   Clear();
@@ -629,21 +549,16 @@ bool FriendData::IsInitialized() const {
   return true;
 }
 
-void FriendData::Swap(FriendData* other) {
-  if (other == this) return;
-  InternalSwap(other);
-}
 void FriendData::InternalSwap(FriendData* other) {
   using std::swap;
-  name_.Swap(&other->name_, &::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+  _internal_metadata_.Swap(&other->_internal_metadata_);
+  name_.Swap(&other->name_, &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(),
     GetArenaNoVirtual());
   swap(id_, other->id_);
-  _internal_metadata_.Swap(&other->_internal_metadata_);
 }
 
-::google::protobuf::Metadata FriendData::GetMetadata() const {
-  protobuf_NFMsgFriend_2eproto::protobuf_AssignDescriptorsOnce();
-  return ::protobuf_NFMsgFriend_2eproto::file_level_metadata[kIndexInFileMessages];
+::PROTOBUF_NAMESPACE_ID::Metadata FriendData::GetMetadata() const {
+  return GetMetadataStatic();
 }
 
 
@@ -651,21 +566,18 @@ void FriendData::InternalSwap(FriendData* other) {
 
 void ReqAckFriendList::InitAsDefaultInstance() {
 }
-#if !defined(_MSC_VER) || _MSC_VER >= 1900
-const int ReqAckFriendList::kInviteListFieldNumber;
-const int ReqAckFriendList::kFriendListFieldNumber;
-#endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
+class ReqAckFriendList::_Internal {
+ public:
+};
 
 ReqAckFriendList::ReqAckFriendList()
-  : ::google::protobuf::Message(), _internal_metadata_(NULL) {
-  ::google::protobuf::internal::InitSCC(
-      &protobuf_NFMsgFriend_2eproto::scc_info_ReqAckFriendList.base);
+  : ::PROTOBUF_NAMESPACE_ID::Message(), _internal_metadata_(nullptr) {
   SharedCtor();
   // @@protoc_insertion_point(constructor:NFMsg.ReqAckFriendList)
 }
 ReqAckFriendList::ReqAckFriendList(const ReqAckFriendList& from)
-  : ::google::protobuf::Message(),
-      _internal_metadata_(NULL),
+  : ::PROTOBUF_NAMESPACE_ID::Message(),
+      _internal_metadata_(nullptr),
       invitelist_(from.invitelist_),
       friendlist_(from.friendlist_) {
   _internal_metadata_.MergeFrom(from._internal_metadata_);
@@ -673,6 +585,7 @@ ReqAckFriendList::ReqAckFriendList(const ReqAckFriendList& from)
 }
 
 void ReqAckFriendList::SharedCtor() {
+  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&scc_info_ReqAckFriendList_NFMsgFriend_2eproto.base);
 }
 
 ReqAckFriendList::~ReqAckFriendList() {
@@ -686,20 +599,15 @@ void ReqAckFriendList::SharedDtor() {
 void ReqAckFriendList::SetCachedSize(int size) const {
   _cached_size_.Set(size);
 }
-const ::google::protobuf::Descriptor* ReqAckFriendList::descriptor() {
-  ::protobuf_NFMsgFriend_2eproto::protobuf_AssignDescriptorsOnce();
-  return ::protobuf_NFMsgFriend_2eproto::file_level_metadata[kIndexInFileMessages].descriptor;
-}
-
 const ReqAckFriendList& ReqAckFriendList::default_instance() {
-  ::google::protobuf::internal::InitSCC(&protobuf_NFMsgFriend_2eproto::scc_info_ReqAckFriendList.base);
+  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&::scc_info_ReqAckFriendList_NFMsgFriend_2eproto.base);
   return *internal_default_instance();
 }
 
 
 void ReqAckFriendList::Clear() {
 // @@protoc_insertion_point(message_clear_start:NFMsg.ReqAckFriendList)
-  ::google::protobuf::uint32 cached_has_bits = 0;
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
@@ -708,117 +616,82 @@ void ReqAckFriendList::Clear() {
   _internal_metadata_.Clear();
 }
 
-bool ReqAckFriendList::MergePartialFromCodedStream(
-    ::google::protobuf::io::CodedInputStream* input) {
-#define DO_(EXPRESSION) if (!GOOGLE_PREDICT_TRUE(EXPRESSION)) goto failure
-  ::google::protobuf::uint32 tag;
-  // @@protoc_insertion_point(parse_start:NFMsg.ReqAckFriendList)
-  for (;;) {
-    ::std::pair<::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
-    tag = p.first;
-    if (!p.second) goto handle_unusual;
-    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
+const char* ReqAckFriendList::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) {
+#define CHK_(x) if (PROTOBUF_PREDICT_FALSE(!(x))) goto failure
+  while (!ctx->Done(&ptr)) {
+    ::PROTOBUF_NAMESPACE_ID::uint32 tag;
+    ptr = ::PROTOBUF_NAMESPACE_ID::internal::ReadTag(ptr, &tag);
+    CHK_(ptr);
+    switch (tag >> 3) {
       // repeated .NFMsg.FriendData inviteList = 1;
-      case 1: {
-        if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(10u /* 10 & 0xFF */)) {
-          DO_(::google::protobuf::internal::WireFormatLite::ReadMessage(
-                input, add_invitelist()));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
+      case 1:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 10)) {
+          ptr -= 1;
+          do {
+            ptr += 1;
+            ptr = ctx->ParseMessage(_internal_add_invitelist(), ptr);
+            CHK_(ptr);
+            if (!ctx->DataAvailable(ptr)) break;
+          } while (::PROTOBUF_NAMESPACE_ID::internal::ExpectTag<10>(ptr));
+        } else goto handle_unusual;
+        continue;
       // repeated .NFMsg.FriendData friendList = 2;
-      case 2: {
-        if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(18u /* 18 & 0xFF */)) {
-          DO_(::google::protobuf::internal::WireFormatLite::ReadMessage(
-                input, add_friendlist()));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
+      case 2:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 18)) {
+          ptr -= 1;
+          do {
+            ptr += 1;
+            ptr = ctx->ParseMessage(_internal_add_friendlist(), ptr);
+            CHK_(ptr);
+            if (!ctx->DataAvailable(ptr)) break;
+          } while (::PROTOBUF_NAMESPACE_ID::internal::ExpectTag<18>(ptr));
+        } else goto handle_unusual;
+        continue;
       default: {
       handle_unusual:
-        if (tag == 0) {
+        if ((tag & 7) == 4 || tag == 0) {
+          ctx->SetLastTag(tag);
           goto success;
         }
-        DO_(::google::protobuf::internal::WireFormat::SkipField(
-              input, tag, _internal_metadata_.mutable_unknown_fields()));
-        break;
+        ptr = UnknownFieldParse(tag, &_internal_metadata_, ptr, ctx);
+        CHK_(ptr != nullptr);
+        continue;
       }
-    }
-  }
+    }  // switch
+  }  // while
 success:
-  // @@protoc_insertion_point(parse_success:NFMsg.ReqAckFriendList)
-  return true;
+  return ptr;
 failure:
-  // @@protoc_insertion_point(parse_failure:NFMsg.ReqAckFriendList)
-  return false;
-#undef DO_
+  ptr = nullptr;
+  goto success;
+#undef CHK_
 }
 
-void ReqAckFriendList::SerializeWithCachedSizes(
-    ::google::protobuf::io::CodedOutputStream* output) const {
-  // @@protoc_insertion_point(serialize_start:NFMsg.ReqAckFriendList)
-  ::google::protobuf::uint32 cached_has_bits = 0;
-  (void) cached_has_bits;
-
-  // repeated .NFMsg.FriendData inviteList = 1;
-  for (unsigned int i = 0,
-      n = static_cast<unsigned int>(this->invitelist_size()); i < n; i++) {
-    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      1,
-      this->invitelist(static_cast<int>(i)),
-      output);
-  }
-
-  // repeated .NFMsg.FriendData friendList = 2;
-  for (unsigned int i = 0,
-      n = static_cast<unsigned int>(this->friendlist_size()); i < n; i++) {
-    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      2,
-      this->friendlist(static_cast<int>(i)),
-      output);
-  }
-
-  if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
-    ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
-        (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()), output);
-  }
-  // @@protoc_insertion_point(serialize_end:NFMsg.ReqAckFriendList)
-}
-
-::google::protobuf::uint8* ReqAckFriendList::InternalSerializeWithCachedSizesToArray(
-    bool deterministic, ::google::protobuf::uint8* target) const {
-  (void)deterministic; // Unused
+::PROTOBUF_NAMESPACE_ID::uint8* ReqAckFriendList::InternalSerializeWithCachedSizesToArray(
+    ::PROTOBUF_NAMESPACE_ID::uint8* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const {
   // @@protoc_insertion_point(serialize_to_array_start:NFMsg.ReqAckFriendList)
-  ::google::protobuf::uint32 cached_has_bits = 0;
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
   // repeated .NFMsg.FriendData inviteList = 1;
   for (unsigned int i = 0,
-      n = static_cast<unsigned int>(this->invitelist_size()); i < n; i++) {
-    target = ::google::protobuf::internal::WireFormatLite::
-      InternalWriteMessageToArray(
-        1, this->invitelist(static_cast<int>(i)), deterministic, target);
+      n = static_cast<unsigned int>(this->_internal_invitelist_size()); i < n; i++) {
+    target = stream->EnsureSpace(target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
+      InternalWriteMessageToArray(1, this->_internal_invitelist(i), target, stream);
   }
 
   // repeated .NFMsg.FriendData friendList = 2;
   for (unsigned int i = 0,
-      n = static_cast<unsigned int>(this->friendlist_size()); i < n; i++) {
-    target = ::google::protobuf::internal::WireFormatLite::
-      InternalWriteMessageToArray(
-        2, this->friendlist(static_cast<int>(i)), deterministic, target);
+      n = static_cast<unsigned int>(this->_internal_friendlist_size()); i < n; i++) {
+    target = stream->EnsureSpace(target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
+      InternalWriteMessageToArray(2, this->_internal_friendlist(i), target, stream);
   }
 
-  if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
-    target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
-        (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()), target);
+  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::InternalSerializeUnknownFieldsToArray(
+        _internal_metadata_.unknown_fields(), target, stream);
   }
   // @@protoc_insertion_point(serialize_to_array_end:NFMsg.ReqAckFriendList)
   return target;
@@ -828,47 +701,42 @@ size_t ReqAckFriendList::ByteSizeLong() const {
 // @@protoc_insertion_point(message_byte_size_start:NFMsg.ReqAckFriendList)
   size_t total_size = 0;
 
-  if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
-    total_size +=
-      ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
-        (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()));
-  }
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
   // repeated .NFMsg.FriendData inviteList = 1;
-  {
-    unsigned int count = static_cast<unsigned int>(this->invitelist_size());
-    total_size += 1UL * count;
-    for (unsigned int i = 0; i < count; i++) {
-      total_size +=
-        ::google::protobuf::internal::WireFormatLite::MessageSize(
-          this->invitelist(static_cast<int>(i)));
-    }
+  total_size += 1UL * this->_internal_invitelist_size();
+  for (const auto& msg : this->invitelist_) {
+    total_size +=
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(msg);
   }
 
   // repeated .NFMsg.FriendData friendList = 2;
-  {
-    unsigned int count = static_cast<unsigned int>(this->friendlist_size());
-    total_size += 1UL * count;
-    for (unsigned int i = 0; i < count; i++) {
-      total_size +=
-        ::google::protobuf::internal::WireFormatLite::MessageSize(
-          this->friendlist(static_cast<int>(i)));
-    }
+  total_size += 1UL * this->_internal_friendlist_size();
+  for (const auto& msg : this->friendlist_) {
+    total_size +=
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(msg);
   }
 
-  int cached_size = ::google::protobuf::internal::ToCachedSize(total_size);
+  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
+    return ::PROTOBUF_NAMESPACE_ID::internal::ComputeUnknownFieldsSize(
+        _internal_metadata_, total_size, &_cached_size_);
+  }
+  int cached_size = ::PROTOBUF_NAMESPACE_ID::internal::ToCachedSize(total_size);
   SetCachedSize(cached_size);
   return total_size;
 }
 
-void ReqAckFriendList::MergeFrom(const ::google::protobuf::Message& from) {
+void ReqAckFriendList::MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
 // @@protoc_insertion_point(generalized_merge_from_start:NFMsg.ReqAckFriendList)
   GOOGLE_DCHECK_NE(&from, this);
   const ReqAckFriendList* source =
-      ::google::protobuf::internal::DynamicCastToGenerated<const ReqAckFriendList>(
+      ::PROTOBUF_NAMESPACE_ID::DynamicCastToGenerated<ReqAckFriendList>(
           &from);
-  if (source == NULL) {
+  if (source == nullptr) {
   // @@protoc_insertion_point(generalized_merge_from_cast_fail:NFMsg.ReqAckFriendList)
-    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
+    ::PROTOBUF_NAMESPACE_ID::internal::ReflectionOps::Merge(from, this);
   } else {
   // @@protoc_insertion_point(generalized_merge_from_cast_success:NFMsg.ReqAckFriendList)
     MergeFrom(*source);
@@ -879,14 +747,14 @@ void ReqAckFriendList::MergeFrom(const ReqAckFriendList& from) {
 // @@protoc_insertion_point(class_specific_merge_from_start:NFMsg.ReqAckFriendList)
   GOOGLE_DCHECK_NE(&from, this);
   _internal_metadata_.MergeFrom(from._internal_metadata_);
-  ::google::protobuf::uint32 cached_has_bits = 0;
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
   invitelist_.MergeFrom(from.invitelist_);
   friendlist_.MergeFrom(from.friendlist_);
 }
 
-void ReqAckFriendList::CopyFrom(const ::google::protobuf::Message& from) {
+void ReqAckFriendList::CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
 // @@protoc_insertion_point(generalized_copy_from_start:NFMsg.ReqAckFriendList)
   if (&from == this) return;
   Clear();
@@ -904,20 +772,15 @@ bool ReqAckFriendList::IsInitialized() const {
   return true;
 }
 
-void ReqAckFriendList::Swap(ReqAckFriendList* other) {
-  if (other == this) return;
-  InternalSwap(other);
-}
 void ReqAckFriendList::InternalSwap(ReqAckFriendList* other) {
   using std::swap;
-  CastToBase(&invitelist_)->InternalSwap(CastToBase(&other->invitelist_));
-  CastToBase(&friendlist_)->InternalSwap(CastToBase(&other->friendlist_));
   _internal_metadata_.Swap(&other->_internal_metadata_);
+  invitelist_.InternalSwap(&other->invitelist_);
+  friendlist_.InternalSwap(&other->friendlist_);
 }
 
-::google::protobuf::Metadata ReqAckFriendList::GetMetadata() const {
-  protobuf_NFMsgFriend_2eproto::protobuf_AssignDescriptorsOnce();
-  return ::protobuf_NFMsgFriend_2eproto::file_level_metadata[kIndexInFileMessages];
+::PROTOBUF_NAMESPACE_ID::Metadata ReqAckFriendList::GetMetadata() const {
+  return GetMetadataStatic();
 }
 
 
@@ -927,37 +790,41 @@ void ReqAckDeleteFriend::InitAsDefaultInstance() {
   ::NFMsg::_ReqAckDeleteFriend_default_instance_._instance.get_mutable()->id_ = const_cast< ::NFMsg::Ident*>(
       ::NFMsg::Ident::internal_default_instance());
 }
+class ReqAckDeleteFriend::_Internal {
+ public:
+  static const ::NFMsg::Ident& id(const ReqAckDeleteFriend* msg);
+};
+
+const ::NFMsg::Ident&
+ReqAckDeleteFriend::_Internal::id(const ReqAckDeleteFriend* msg) {
+  return *msg->id_;
+}
 void ReqAckDeleteFriend::clear_id() {
-  if (GetArenaNoVirtual() == NULL && id_ != NULL) {
+  if (GetArenaNoVirtual() == nullptr && id_ != nullptr) {
     delete id_;
   }
-  id_ = NULL;
+  id_ = nullptr;
 }
-#if !defined(_MSC_VER) || _MSC_VER >= 1900
-const int ReqAckDeleteFriend::kIdFieldNumber;
-#endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
-
 ReqAckDeleteFriend::ReqAckDeleteFriend()
-  : ::google::protobuf::Message(), _internal_metadata_(NULL) {
-  ::google::protobuf::internal::InitSCC(
-      &protobuf_NFMsgFriend_2eproto::scc_info_ReqAckDeleteFriend.base);
+  : ::PROTOBUF_NAMESPACE_ID::Message(), _internal_metadata_(nullptr) {
   SharedCtor();
   // @@protoc_insertion_point(constructor:NFMsg.ReqAckDeleteFriend)
 }
 ReqAckDeleteFriend::ReqAckDeleteFriend(const ReqAckDeleteFriend& from)
-  : ::google::protobuf::Message(),
-      _internal_metadata_(NULL) {
+  : ::PROTOBUF_NAMESPACE_ID::Message(),
+      _internal_metadata_(nullptr) {
   _internal_metadata_.MergeFrom(from._internal_metadata_);
-  if (from.has_id()) {
+  if (from._internal_has_id()) {
     id_ = new ::NFMsg::Ident(*from.id_);
   } else {
-    id_ = NULL;
+    id_ = nullptr;
   }
   // @@protoc_insertion_point(copy_constructor:NFMsg.ReqAckDeleteFriend)
 }
 
 void ReqAckDeleteFriend::SharedCtor() {
-  id_ = NULL;
+  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&scc_info_ReqAckDeleteFriend_NFMsgFriend_2eproto.base);
+  id_ = nullptr;
 }
 
 ReqAckDeleteFriend::~ReqAckDeleteFriend() {
@@ -972,108 +839,76 @@ void ReqAckDeleteFriend::SharedDtor() {
 void ReqAckDeleteFriend::SetCachedSize(int size) const {
   _cached_size_.Set(size);
 }
-const ::google::protobuf::Descriptor* ReqAckDeleteFriend::descriptor() {
-  ::protobuf_NFMsgFriend_2eproto::protobuf_AssignDescriptorsOnce();
-  return ::protobuf_NFMsgFriend_2eproto::file_level_metadata[kIndexInFileMessages].descriptor;
-}
-
 const ReqAckDeleteFriend& ReqAckDeleteFriend::default_instance() {
-  ::google::protobuf::internal::InitSCC(&protobuf_NFMsgFriend_2eproto::scc_info_ReqAckDeleteFriend.base);
+  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&::scc_info_ReqAckDeleteFriend_NFMsgFriend_2eproto.base);
   return *internal_default_instance();
 }
 
 
 void ReqAckDeleteFriend::Clear() {
 // @@protoc_insertion_point(message_clear_start:NFMsg.ReqAckDeleteFriend)
-  ::google::protobuf::uint32 cached_has_bits = 0;
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  if (GetArenaNoVirtual() == NULL && id_ != NULL) {
+  if (GetArenaNoVirtual() == nullptr && id_ != nullptr) {
     delete id_;
   }
-  id_ = NULL;
+  id_ = nullptr;
   _internal_metadata_.Clear();
 }
 
-bool ReqAckDeleteFriend::MergePartialFromCodedStream(
-    ::google::protobuf::io::CodedInputStream* input) {
-#define DO_(EXPRESSION) if (!GOOGLE_PREDICT_TRUE(EXPRESSION)) goto failure
-  ::google::protobuf::uint32 tag;
-  // @@protoc_insertion_point(parse_start:NFMsg.ReqAckDeleteFriend)
-  for (;;) {
-    ::std::pair<::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
-    tag = p.first;
-    if (!p.second) goto handle_unusual;
-    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
+const char* ReqAckDeleteFriend::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) {
+#define CHK_(x) if (PROTOBUF_PREDICT_FALSE(!(x))) goto failure
+  while (!ctx->Done(&ptr)) {
+    ::PROTOBUF_NAMESPACE_ID::uint32 tag;
+    ptr = ::PROTOBUF_NAMESPACE_ID::internal::ReadTag(ptr, &tag);
+    CHK_(ptr);
+    switch (tag >> 3) {
       // .NFMsg.Ident id = 1;
-      case 1: {
-        if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(10u /* 10 & 0xFF */)) {
-          DO_(::google::protobuf::internal::WireFormatLite::ReadMessage(
-               input, mutable_id()));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
+      case 1:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 10)) {
+          ptr = ctx->ParseMessage(_internal_mutable_id(), ptr);
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
       default: {
       handle_unusual:
-        if (tag == 0) {
+        if ((tag & 7) == 4 || tag == 0) {
+          ctx->SetLastTag(tag);
           goto success;
         }
-        DO_(::google::protobuf::internal::WireFormat::SkipField(
-              input, tag, _internal_metadata_.mutable_unknown_fields()));
-        break;
+        ptr = UnknownFieldParse(tag, &_internal_metadata_, ptr, ctx);
+        CHK_(ptr != nullptr);
+        continue;
       }
-    }
-  }
+    }  // switch
+  }  // while
 success:
-  // @@protoc_insertion_point(parse_success:NFMsg.ReqAckDeleteFriend)
-  return true;
+  return ptr;
 failure:
-  // @@protoc_insertion_point(parse_failure:NFMsg.ReqAckDeleteFriend)
-  return false;
-#undef DO_
+  ptr = nullptr;
+  goto success;
+#undef CHK_
 }
 
-void ReqAckDeleteFriend::SerializeWithCachedSizes(
-    ::google::protobuf::io::CodedOutputStream* output) const {
-  // @@protoc_insertion_point(serialize_start:NFMsg.ReqAckDeleteFriend)
-  ::google::protobuf::uint32 cached_has_bits = 0;
-  (void) cached_has_bits;
-
-  // .NFMsg.Ident id = 1;
-  if (this->has_id()) {
-    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      1, this->_internal_id(), output);
-  }
-
-  if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
-    ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
-        (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()), output);
-  }
-  // @@protoc_insertion_point(serialize_end:NFMsg.ReqAckDeleteFriend)
-}
-
-::google::protobuf::uint8* ReqAckDeleteFriend::InternalSerializeWithCachedSizesToArray(
-    bool deterministic, ::google::protobuf::uint8* target) const {
-  (void)deterministic; // Unused
+::PROTOBUF_NAMESPACE_ID::uint8* ReqAckDeleteFriend::InternalSerializeWithCachedSizesToArray(
+    ::PROTOBUF_NAMESPACE_ID::uint8* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const {
   // @@protoc_insertion_point(serialize_to_array_start:NFMsg.ReqAckDeleteFriend)
-  ::google::protobuf::uint32 cached_has_bits = 0;
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
   // .NFMsg.Ident id = 1;
   if (this->has_id()) {
-    target = ::google::protobuf::internal::WireFormatLite::
+    target = stream->EnsureSpace(target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
       InternalWriteMessageToArray(
-        1, this->_internal_id(), deterministic, target);
+        1, _Internal::id(this), target, stream);
   }
 
-  if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
-    target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
-        (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()), target);
+  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::InternalSerializeUnknownFieldsToArray(
+        _internal_metadata_.unknown_fields(), target, stream);
   }
   // @@protoc_insertion_point(serialize_to_array_end:NFMsg.ReqAckDeleteFriend)
   return target;
@@ -1083,32 +918,35 @@ size_t ReqAckDeleteFriend::ByteSizeLong() const {
 // @@protoc_insertion_point(message_byte_size_start:NFMsg.ReqAckDeleteFriend)
   size_t total_size = 0;
 
-  if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
-    total_size +=
-      ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
-        (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()));
-  }
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
   // .NFMsg.Ident id = 1;
   if (this->has_id()) {
     total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::MessageSize(
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
         *id_);
   }
 
-  int cached_size = ::google::protobuf::internal::ToCachedSize(total_size);
+  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
+    return ::PROTOBUF_NAMESPACE_ID::internal::ComputeUnknownFieldsSize(
+        _internal_metadata_, total_size, &_cached_size_);
+  }
+  int cached_size = ::PROTOBUF_NAMESPACE_ID::internal::ToCachedSize(total_size);
   SetCachedSize(cached_size);
   return total_size;
 }
 
-void ReqAckDeleteFriend::MergeFrom(const ::google::protobuf::Message& from) {
+void ReqAckDeleteFriend::MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
 // @@protoc_insertion_point(generalized_merge_from_start:NFMsg.ReqAckDeleteFriend)
   GOOGLE_DCHECK_NE(&from, this);
   const ReqAckDeleteFriend* source =
-      ::google::protobuf::internal::DynamicCastToGenerated<const ReqAckDeleteFriend>(
+      ::PROTOBUF_NAMESPACE_ID::DynamicCastToGenerated<ReqAckDeleteFriend>(
           &from);
-  if (source == NULL) {
+  if (source == nullptr) {
   // @@protoc_insertion_point(generalized_merge_from_cast_fail:NFMsg.ReqAckDeleteFriend)
-    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
+    ::PROTOBUF_NAMESPACE_ID::internal::ReflectionOps::Merge(from, this);
   } else {
   // @@protoc_insertion_point(generalized_merge_from_cast_success:NFMsg.ReqAckDeleteFriend)
     MergeFrom(*source);
@@ -1119,15 +957,15 @@ void ReqAckDeleteFriend::MergeFrom(const ReqAckDeleteFriend& from) {
 // @@protoc_insertion_point(class_specific_merge_from_start:NFMsg.ReqAckDeleteFriend)
   GOOGLE_DCHECK_NE(&from, this);
   _internal_metadata_.MergeFrom(from._internal_metadata_);
-  ::google::protobuf::uint32 cached_has_bits = 0;
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
   if (from.has_id()) {
-    mutable_id()->::NFMsg::Ident::MergeFrom(from.id());
+    _internal_mutable_id()->::NFMsg::Ident::MergeFrom(from._internal_id());
   }
 }
 
-void ReqAckDeleteFriend::CopyFrom(const ::google::protobuf::Message& from) {
+void ReqAckDeleteFriend::CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
 // @@protoc_insertion_point(generalized_copy_from_start:NFMsg.ReqAckDeleteFriend)
   if (&from == this) return;
   Clear();
@@ -1145,19 +983,14 @@ bool ReqAckDeleteFriend::IsInitialized() const {
   return true;
 }
 
-void ReqAckDeleteFriend::Swap(ReqAckDeleteFriend* other) {
-  if (other == this) return;
-  InternalSwap(other);
-}
 void ReqAckDeleteFriend::InternalSwap(ReqAckDeleteFriend* other) {
   using std::swap;
-  swap(id_, other->id_);
   _internal_metadata_.Swap(&other->_internal_metadata_);
+  swap(id_, other->id_);
 }
 
-::google::protobuf::Metadata ReqAckDeleteFriend::GetMetadata() const {
-  protobuf_NFMsgFriend_2eproto::protobuf_AssignDescriptorsOnce();
-  return ::protobuf_NFMsgFriend_2eproto::file_level_metadata[kIndexInFileMessages];
+::PROTOBUF_NAMESPACE_ID::Metadata ReqAckDeleteFriend::GetMetadata() const {
+  return GetMetadataStatic();
 }
 
 
@@ -1167,43 +1000,46 @@ void ReqAckSendInvite::InitAsDefaultInstance() {
   ::NFMsg::_ReqAckSendInvite_default_instance_._instance.get_mutable()->id_ = const_cast< ::NFMsg::Ident*>(
       ::NFMsg::Ident::internal_default_instance());
 }
+class ReqAckSendInvite::_Internal {
+ public:
+  static const ::NFMsg::Ident& id(const ReqAckSendInvite* msg);
+};
+
+const ::NFMsg::Ident&
+ReqAckSendInvite::_Internal::id(const ReqAckSendInvite* msg) {
+  return *msg->id_;
+}
 void ReqAckSendInvite::clear_id() {
-  if (GetArenaNoVirtual() == NULL && id_ != NULL) {
+  if (GetArenaNoVirtual() == nullptr && id_ != nullptr) {
     delete id_;
   }
-  id_ = NULL;
+  id_ = nullptr;
 }
-#if !defined(_MSC_VER) || _MSC_VER >= 1900
-const int ReqAckSendInvite::kIdFieldNumber;
-const int ReqAckSendInvite::kNameFieldNumber;
-#endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
-
 ReqAckSendInvite::ReqAckSendInvite()
-  : ::google::protobuf::Message(), _internal_metadata_(NULL) {
-  ::google::protobuf::internal::InitSCC(
-      &protobuf_NFMsgFriend_2eproto::scc_info_ReqAckSendInvite.base);
+  : ::PROTOBUF_NAMESPACE_ID::Message(), _internal_metadata_(nullptr) {
   SharedCtor();
   // @@protoc_insertion_point(constructor:NFMsg.ReqAckSendInvite)
 }
 ReqAckSendInvite::ReqAckSendInvite(const ReqAckSendInvite& from)
-  : ::google::protobuf::Message(),
-      _internal_metadata_(NULL) {
+  : ::PROTOBUF_NAMESPACE_ID::Message(),
+      _internal_metadata_(nullptr) {
   _internal_metadata_.MergeFrom(from._internal_metadata_);
-  name_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  if (from.name().size() > 0) {
-    name_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.name_);
+  name_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  if (!from._internal_name().empty()) {
+    name_.AssignWithDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), from.name_);
   }
-  if (from.has_id()) {
+  if (from._internal_has_id()) {
     id_ = new ::NFMsg::Ident(*from.id_);
   } else {
-    id_ = NULL;
+    id_ = nullptr;
   }
   // @@protoc_insertion_point(copy_constructor:NFMsg.ReqAckSendInvite)
 }
 
 void ReqAckSendInvite::SharedCtor() {
-  name_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  id_ = NULL;
+  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&scc_info_ReqAckSendInvite_NFMsgFriend_2eproto.base);
+  name_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  id_ = nullptr;
 }
 
 ReqAckSendInvite::~ReqAckSendInvite() {
@@ -1212,141 +1048,97 @@ ReqAckSendInvite::~ReqAckSendInvite() {
 }
 
 void ReqAckSendInvite::SharedDtor() {
-  name_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  name_.DestroyNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
   if (this != internal_default_instance()) delete id_;
 }
 
 void ReqAckSendInvite::SetCachedSize(int size) const {
   _cached_size_.Set(size);
 }
-const ::google::protobuf::Descriptor* ReqAckSendInvite::descriptor() {
-  ::protobuf_NFMsgFriend_2eproto::protobuf_AssignDescriptorsOnce();
-  return ::protobuf_NFMsgFriend_2eproto::file_level_metadata[kIndexInFileMessages].descriptor;
-}
-
 const ReqAckSendInvite& ReqAckSendInvite::default_instance() {
-  ::google::protobuf::internal::InitSCC(&protobuf_NFMsgFriend_2eproto::scc_info_ReqAckSendInvite.base);
+  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&::scc_info_ReqAckSendInvite_NFMsgFriend_2eproto.base);
   return *internal_default_instance();
 }
 
 
 void ReqAckSendInvite::Clear() {
 // @@protoc_insertion_point(message_clear_start:NFMsg.ReqAckSendInvite)
-  ::google::protobuf::uint32 cached_has_bits = 0;
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  name_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  if (GetArenaNoVirtual() == NULL && id_ != NULL) {
+  name_.ClearToEmptyNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  if (GetArenaNoVirtual() == nullptr && id_ != nullptr) {
     delete id_;
   }
-  id_ = NULL;
+  id_ = nullptr;
   _internal_metadata_.Clear();
 }
 
-bool ReqAckSendInvite::MergePartialFromCodedStream(
-    ::google::protobuf::io::CodedInputStream* input) {
-#define DO_(EXPRESSION) if (!GOOGLE_PREDICT_TRUE(EXPRESSION)) goto failure
-  ::google::protobuf::uint32 tag;
-  // @@protoc_insertion_point(parse_start:NFMsg.ReqAckSendInvite)
-  for (;;) {
-    ::std::pair<::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
-    tag = p.first;
-    if (!p.second) goto handle_unusual;
-    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
+const char* ReqAckSendInvite::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) {
+#define CHK_(x) if (PROTOBUF_PREDICT_FALSE(!(x))) goto failure
+  while (!ctx->Done(&ptr)) {
+    ::PROTOBUF_NAMESPACE_ID::uint32 tag;
+    ptr = ::PROTOBUF_NAMESPACE_ID::internal::ReadTag(ptr, &tag);
+    CHK_(ptr);
+    switch (tag >> 3) {
       // .NFMsg.Ident id = 1;
-      case 1: {
-        if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(10u /* 10 & 0xFF */)) {
-          DO_(::google::protobuf::internal::WireFormatLite::ReadMessage(
-               input, mutable_id()));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
+      case 1:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 10)) {
+          ptr = ctx->ParseMessage(_internal_mutable_id(), ptr);
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
       // bytes name = 2;
-      case 2: {
-        if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(18u /* 18 & 0xFF */)) {
-          DO_(::google::protobuf::internal::WireFormatLite::ReadBytes(
-                input, this->mutable_name()));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
+      case 2:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 18)) {
+          ptr = ::PROTOBUF_NAMESPACE_ID::internal::InlineGreedyStringParser(_internal_mutable_name(), ptr, ctx);
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
       default: {
       handle_unusual:
-        if (tag == 0) {
+        if ((tag & 7) == 4 || tag == 0) {
+          ctx->SetLastTag(tag);
           goto success;
         }
-        DO_(::google::protobuf::internal::WireFormat::SkipField(
-              input, tag, _internal_metadata_.mutable_unknown_fields()));
-        break;
+        ptr = UnknownFieldParse(tag, &_internal_metadata_, ptr, ctx);
+        CHK_(ptr != nullptr);
+        continue;
       }
-    }
-  }
+    }  // switch
+  }  // while
 success:
-  // @@protoc_insertion_point(parse_success:NFMsg.ReqAckSendInvite)
-  return true;
+  return ptr;
 failure:
-  // @@protoc_insertion_point(parse_failure:NFMsg.ReqAckSendInvite)
-  return false;
-#undef DO_
+  ptr = nullptr;
+  goto success;
+#undef CHK_
 }
 
-void ReqAckSendInvite::SerializeWithCachedSizes(
-    ::google::protobuf::io::CodedOutputStream* output) const {
-  // @@protoc_insertion_point(serialize_start:NFMsg.ReqAckSendInvite)
-  ::google::protobuf::uint32 cached_has_bits = 0;
-  (void) cached_has_bits;
-
-  // .NFMsg.Ident id = 1;
-  if (this->has_id()) {
-    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      1, this->_internal_id(), output);
-  }
-
-  // bytes name = 2;
-  if (this->name().size() > 0) {
-    ::google::protobuf::internal::WireFormatLite::WriteBytesMaybeAliased(
-      2, this->name(), output);
-  }
-
-  if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
-    ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
-        (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()), output);
-  }
-  // @@protoc_insertion_point(serialize_end:NFMsg.ReqAckSendInvite)
-}
-
-::google::protobuf::uint8* ReqAckSendInvite::InternalSerializeWithCachedSizesToArray(
-    bool deterministic, ::google::protobuf::uint8* target) const {
-  (void)deterministic; // Unused
+::PROTOBUF_NAMESPACE_ID::uint8* ReqAckSendInvite::InternalSerializeWithCachedSizesToArray(
+    ::PROTOBUF_NAMESPACE_ID::uint8* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const {
   // @@protoc_insertion_point(serialize_to_array_start:NFMsg.ReqAckSendInvite)
-  ::google::protobuf::uint32 cached_has_bits = 0;
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
   // .NFMsg.Ident id = 1;
   if (this->has_id()) {
-    target = ::google::protobuf::internal::WireFormatLite::
+    target = stream->EnsureSpace(target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
       InternalWriteMessageToArray(
-        1, this->_internal_id(), deterministic, target);
+        1, _Internal::id(this), target, stream);
   }
 
   // bytes name = 2;
   if (this->name().size() > 0) {
-    target =
-      ::google::protobuf::internal::WireFormatLite::WriteBytesToArray(
-        2, this->name(), target);
+    target = stream->WriteBytesMaybeAliased(
+        2, this->_internal_name(), target);
   }
 
-  if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
-    target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
-        (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()), target);
+  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::InternalSerializeUnknownFieldsToArray(
+        _internal_metadata_.unknown_fields(), target, stream);
   }
   // @@protoc_insertion_point(serialize_to_array_end:NFMsg.ReqAckSendInvite)
   return target;
@@ -1356,39 +1148,42 @@ size_t ReqAckSendInvite::ByteSizeLong() const {
 // @@protoc_insertion_point(message_byte_size_start:NFMsg.ReqAckSendInvite)
   size_t total_size = 0;
 
-  if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
-    total_size +=
-      ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
-        (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()));
-  }
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
   // bytes name = 2;
   if (this->name().size() > 0) {
     total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::BytesSize(
-        this->name());
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::BytesSize(
+        this->_internal_name());
   }
 
   // .NFMsg.Ident id = 1;
   if (this->has_id()) {
     total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::MessageSize(
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
         *id_);
   }
 
-  int cached_size = ::google::protobuf::internal::ToCachedSize(total_size);
+  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
+    return ::PROTOBUF_NAMESPACE_ID::internal::ComputeUnknownFieldsSize(
+        _internal_metadata_, total_size, &_cached_size_);
+  }
+  int cached_size = ::PROTOBUF_NAMESPACE_ID::internal::ToCachedSize(total_size);
   SetCachedSize(cached_size);
   return total_size;
 }
 
-void ReqAckSendInvite::MergeFrom(const ::google::protobuf::Message& from) {
+void ReqAckSendInvite::MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
 // @@protoc_insertion_point(generalized_merge_from_start:NFMsg.ReqAckSendInvite)
   GOOGLE_DCHECK_NE(&from, this);
   const ReqAckSendInvite* source =
-      ::google::protobuf::internal::DynamicCastToGenerated<const ReqAckSendInvite>(
+      ::PROTOBUF_NAMESPACE_ID::DynamicCastToGenerated<ReqAckSendInvite>(
           &from);
-  if (source == NULL) {
+  if (source == nullptr) {
   // @@protoc_insertion_point(generalized_merge_from_cast_fail:NFMsg.ReqAckSendInvite)
-    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
+    ::PROTOBUF_NAMESPACE_ID::internal::ReflectionOps::Merge(from, this);
   } else {
   // @@protoc_insertion_point(generalized_merge_from_cast_success:NFMsg.ReqAckSendInvite)
     MergeFrom(*source);
@@ -1399,19 +1194,19 @@ void ReqAckSendInvite::MergeFrom(const ReqAckSendInvite& from) {
 // @@protoc_insertion_point(class_specific_merge_from_start:NFMsg.ReqAckSendInvite)
   GOOGLE_DCHECK_NE(&from, this);
   _internal_metadata_.MergeFrom(from._internal_metadata_);
-  ::google::protobuf::uint32 cached_has_bits = 0;
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
   if (from.name().size() > 0) {
 
-    name_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.name_);
+    name_.AssignWithDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), from.name_);
   }
   if (from.has_id()) {
-    mutable_id()->::NFMsg::Ident::MergeFrom(from.id());
+    _internal_mutable_id()->::NFMsg::Ident::MergeFrom(from._internal_id());
   }
 }
 
-void ReqAckSendInvite::CopyFrom(const ::google::protobuf::Message& from) {
+void ReqAckSendInvite::CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
 // @@protoc_insertion_point(generalized_copy_from_start:NFMsg.ReqAckSendInvite)
   if (&from == this) return;
   Clear();
@@ -1429,21 +1224,16 @@ bool ReqAckSendInvite::IsInitialized() const {
   return true;
 }
 
-void ReqAckSendInvite::Swap(ReqAckSendInvite* other) {
-  if (other == this) return;
-  InternalSwap(other);
-}
 void ReqAckSendInvite::InternalSwap(ReqAckSendInvite* other) {
   using std::swap;
-  name_.Swap(&other->name_, &::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+  _internal_metadata_.Swap(&other->_internal_metadata_);
+  name_.Swap(&other->name_, &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(),
     GetArenaNoVirtual());
   swap(id_, other->id_);
-  _internal_metadata_.Swap(&other->_internal_metadata_);
 }
 
-::google::protobuf::Metadata ReqAckSendInvite::GetMetadata() const {
-  protobuf_NFMsgFriend_2eproto::protobuf_AssignDescriptorsOnce();
-  return ::protobuf_NFMsgFriend_2eproto::file_level_metadata[kIndexInFileMessages];
+::PROTOBUF_NAMESPACE_ID::Metadata ReqAckSendInvite::GetMetadata() const {
+  return GetMetadataStatic();
 }
 
 
@@ -1453,37 +1243,41 @@ void ReqAckAcceptInvite::InitAsDefaultInstance() {
   ::NFMsg::_ReqAckAcceptInvite_default_instance_._instance.get_mutable()->id_ = const_cast< ::NFMsg::Ident*>(
       ::NFMsg::Ident::internal_default_instance());
 }
+class ReqAckAcceptInvite::_Internal {
+ public:
+  static const ::NFMsg::Ident& id(const ReqAckAcceptInvite* msg);
+};
+
+const ::NFMsg::Ident&
+ReqAckAcceptInvite::_Internal::id(const ReqAckAcceptInvite* msg) {
+  return *msg->id_;
+}
 void ReqAckAcceptInvite::clear_id() {
-  if (GetArenaNoVirtual() == NULL && id_ != NULL) {
+  if (GetArenaNoVirtual() == nullptr && id_ != nullptr) {
     delete id_;
   }
-  id_ = NULL;
+  id_ = nullptr;
 }
-#if !defined(_MSC_VER) || _MSC_VER >= 1900
-const int ReqAckAcceptInvite::kIdFieldNumber;
-#endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
-
 ReqAckAcceptInvite::ReqAckAcceptInvite()
-  : ::google::protobuf::Message(), _internal_metadata_(NULL) {
-  ::google::protobuf::internal::InitSCC(
-      &protobuf_NFMsgFriend_2eproto::scc_info_ReqAckAcceptInvite.base);
+  : ::PROTOBUF_NAMESPACE_ID::Message(), _internal_metadata_(nullptr) {
   SharedCtor();
   // @@protoc_insertion_point(constructor:NFMsg.ReqAckAcceptInvite)
 }
 ReqAckAcceptInvite::ReqAckAcceptInvite(const ReqAckAcceptInvite& from)
-  : ::google::protobuf::Message(),
-      _internal_metadata_(NULL) {
+  : ::PROTOBUF_NAMESPACE_ID::Message(),
+      _internal_metadata_(nullptr) {
   _internal_metadata_.MergeFrom(from._internal_metadata_);
-  if (from.has_id()) {
+  if (from._internal_has_id()) {
     id_ = new ::NFMsg::Ident(*from.id_);
   } else {
-    id_ = NULL;
+    id_ = nullptr;
   }
   // @@protoc_insertion_point(copy_constructor:NFMsg.ReqAckAcceptInvite)
 }
 
 void ReqAckAcceptInvite::SharedCtor() {
-  id_ = NULL;
+  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&scc_info_ReqAckAcceptInvite_NFMsgFriend_2eproto.base);
+  id_ = nullptr;
 }
 
 ReqAckAcceptInvite::~ReqAckAcceptInvite() {
@@ -1498,108 +1292,76 @@ void ReqAckAcceptInvite::SharedDtor() {
 void ReqAckAcceptInvite::SetCachedSize(int size) const {
   _cached_size_.Set(size);
 }
-const ::google::protobuf::Descriptor* ReqAckAcceptInvite::descriptor() {
-  ::protobuf_NFMsgFriend_2eproto::protobuf_AssignDescriptorsOnce();
-  return ::protobuf_NFMsgFriend_2eproto::file_level_metadata[kIndexInFileMessages].descriptor;
-}
-
 const ReqAckAcceptInvite& ReqAckAcceptInvite::default_instance() {
-  ::google::protobuf::internal::InitSCC(&protobuf_NFMsgFriend_2eproto::scc_info_ReqAckAcceptInvite.base);
+  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&::scc_info_ReqAckAcceptInvite_NFMsgFriend_2eproto.base);
   return *internal_default_instance();
 }
 
 
 void ReqAckAcceptInvite::Clear() {
 // @@protoc_insertion_point(message_clear_start:NFMsg.ReqAckAcceptInvite)
-  ::google::protobuf::uint32 cached_has_bits = 0;
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  if (GetArenaNoVirtual() == NULL && id_ != NULL) {
+  if (GetArenaNoVirtual() == nullptr && id_ != nullptr) {
     delete id_;
   }
-  id_ = NULL;
+  id_ = nullptr;
   _internal_metadata_.Clear();
 }
 
-bool ReqAckAcceptInvite::MergePartialFromCodedStream(
-    ::google::protobuf::io::CodedInputStream* input) {
-#define DO_(EXPRESSION) if (!GOOGLE_PREDICT_TRUE(EXPRESSION)) goto failure
-  ::google::protobuf::uint32 tag;
-  // @@protoc_insertion_point(parse_start:NFMsg.ReqAckAcceptInvite)
-  for (;;) {
-    ::std::pair<::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
-    tag = p.first;
-    if (!p.second) goto handle_unusual;
-    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
+const char* ReqAckAcceptInvite::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) {
+#define CHK_(x) if (PROTOBUF_PREDICT_FALSE(!(x))) goto failure
+  while (!ctx->Done(&ptr)) {
+    ::PROTOBUF_NAMESPACE_ID::uint32 tag;
+    ptr = ::PROTOBUF_NAMESPACE_ID::internal::ReadTag(ptr, &tag);
+    CHK_(ptr);
+    switch (tag >> 3) {
       // .NFMsg.Ident id = 1;
-      case 1: {
-        if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(10u /* 10 & 0xFF */)) {
-          DO_(::google::protobuf::internal::WireFormatLite::ReadMessage(
-               input, mutable_id()));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
+      case 1:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 10)) {
+          ptr = ctx->ParseMessage(_internal_mutable_id(), ptr);
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
       default: {
       handle_unusual:
-        if (tag == 0) {
+        if ((tag & 7) == 4 || tag == 0) {
+          ctx->SetLastTag(tag);
           goto success;
         }
-        DO_(::google::protobuf::internal::WireFormat::SkipField(
-              input, tag, _internal_metadata_.mutable_unknown_fields()));
-        break;
+        ptr = UnknownFieldParse(tag, &_internal_metadata_, ptr, ctx);
+        CHK_(ptr != nullptr);
+        continue;
       }
-    }
-  }
+    }  // switch
+  }  // while
 success:
-  // @@protoc_insertion_point(parse_success:NFMsg.ReqAckAcceptInvite)
-  return true;
+  return ptr;
 failure:
-  // @@protoc_insertion_point(parse_failure:NFMsg.ReqAckAcceptInvite)
-  return false;
-#undef DO_
+  ptr = nullptr;
+  goto success;
+#undef CHK_
 }
 
-void ReqAckAcceptInvite::SerializeWithCachedSizes(
-    ::google::protobuf::io::CodedOutputStream* output) const {
-  // @@protoc_insertion_point(serialize_start:NFMsg.ReqAckAcceptInvite)
-  ::google::protobuf::uint32 cached_has_bits = 0;
-  (void) cached_has_bits;
-
-  // .NFMsg.Ident id = 1;
-  if (this->has_id()) {
-    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      1, this->_internal_id(), output);
-  }
-
-  if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
-    ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
-        (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()), output);
-  }
-  // @@protoc_insertion_point(serialize_end:NFMsg.ReqAckAcceptInvite)
-}
-
-::google::protobuf::uint8* ReqAckAcceptInvite::InternalSerializeWithCachedSizesToArray(
-    bool deterministic, ::google::protobuf::uint8* target) const {
-  (void)deterministic; // Unused
+::PROTOBUF_NAMESPACE_ID::uint8* ReqAckAcceptInvite::InternalSerializeWithCachedSizesToArray(
+    ::PROTOBUF_NAMESPACE_ID::uint8* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const {
   // @@protoc_insertion_point(serialize_to_array_start:NFMsg.ReqAckAcceptInvite)
-  ::google::protobuf::uint32 cached_has_bits = 0;
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
   // .NFMsg.Ident id = 1;
   if (this->has_id()) {
-    target = ::google::protobuf::internal::WireFormatLite::
+    target = stream->EnsureSpace(target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
       InternalWriteMessageToArray(
-        1, this->_internal_id(), deterministic, target);
+        1, _Internal::id(this), target, stream);
   }
 
-  if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
-    target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
-        (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()), target);
+  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::InternalSerializeUnknownFieldsToArray(
+        _internal_metadata_.unknown_fields(), target, stream);
   }
   // @@protoc_insertion_point(serialize_to_array_end:NFMsg.ReqAckAcceptInvite)
   return target;
@@ -1609,32 +1371,35 @@ size_t ReqAckAcceptInvite::ByteSizeLong() const {
 // @@protoc_insertion_point(message_byte_size_start:NFMsg.ReqAckAcceptInvite)
   size_t total_size = 0;
 
-  if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
-    total_size +=
-      ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
-        (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()));
-  }
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
   // .NFMsg.Ident id = 1;
   if (this->has_id()) {
     total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::MessageSize(
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
         *id_);
   }
 
-  int cached_size = ::google::protobuf::internal::ToCachedSize(total_size);
+  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
+    return ::PROTOBUF_NAMESPACE_ID::internal::ComputeUnknownFieldsSize(
+        _internal_metadata_, total_size, &_cached_size_);
+  }
+  int cached_size = ::PROTOBUF_NAMESPACE_ID::internal::ToCachedSize(total_size);
   SetCachedSize(cached_size);
   return total_size;
 }
 
-void ReqAckAcceptInvite::MergeFrom(const ::google::protobuf::Message& from) {
+void ReqAckAcceptInvite::MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
 // @@protoc_insertion_point(generalized_merge_from_start:NFMsg.ReqAckAcceptInvite)
   GOOGLE_DCHECK_NE(&from, this);
   const ReqAckAcceptInvite* source =
-      ::google::protobuf::internal::DynamicCastToGenerated<const ReqAckAcceptInvite>(
+      ::PROTOBUF_NAMESPACE_ID::DynamicCastToGenerated<ReqAckAcceptInvite>(
           &from);
-  if (source == NULL) {
+  if (source == nullptr) {
   // @@protoc_insertion_point(generalized_merge_from_cast_fail:NFMsg.ReqAckAcceptInvite)
-    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
+    ::PROTOBUF_NAMESPACE_ID::internal::ReflectionOps::Merge(from, this);
   } else {
   // @@protoc_insertion_point(generalized_merge_from_cast_success:NFMsg.ReqAckAcceptInvite)
     MergeFrom(*source);
@@ -1645,15 +1410,15 @@ void ReqAckAcceptInvite::MergeFrom(const ReqAckAcceptInvite& from) {
 // @@protoc_insertion_point(class_specific_merge_from_start:NFMsg.ReqAckAcceptInvite)
   GOOGLE_DCHECK_NE(&from, this);
   _internal_metadata_.MergeFrom(from._internal_metadata_);
-  ::google::protobuf::uint32 cached_has_bits = 0;
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
   if (from.has_id()) {
-    mutable_id()->::NFMsg::Ident::MergeFrom(from.id());
+    _internal_mutable_id()->::NFMsg::Ident::MergeFrom(from._internal_id());
   }
 }
 
-void ReqAckAcceptInvite::CopyFrom(const ::google::protobuf::Message& from) {
+void ReqAckAcceptInvite::CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
 // @@protoc_insertion_point(generalized_copy_from_start:NFMsg.ReqAckAcceptInvite)
   if (&from == this) return;
   Clear();
@@ -1671,19 +1436,14 @@ bool ReqAckAcceptInvite::IsInitialized() const {
   return true;
 }
 
-void ReqAckAcceptInvite::Swap(ReqAckAcceptInvite* other) {
-  if (other == this) return;
-  InternalSwap(other);
-}
 void ReqAckAcceptInvite::InternalSwap(ReqAckAcceptInvite* other) {
   using std::swap;
-  swap(id_, other->id_);
   _internal_metadata_.Swap(&other->_internal_metadata_);
+  swap(id_, other->id_);
 }
 
-::google::protobuf::Metadata ReqAckAcceptInvite::GetMetadata() const {
-  protobuf_NFMsgFriend_2eproto::protobuf_AssignDescriptorsOnce();
-  return ::protobuf_NFMsgFriend_2eproto::file_level_metadata[kIndexInFileMessages];
+::PROTOBUF_NAMESPACE_ID::Metadata ReqAckAcceptInvite::GetMetadata() const {
+  return GetMetadataStatic();
 }
 
 
@@ -1693,37 +1453,41 @@ void ReqAckRejectInvite::InitAsDefaultInstance() {
   ::NFMsg::_ReqAckRejectInvite_default_instance_._instance.get_mutable()->id_ = const_cast< ::NFMsg::Ident*>(
       ::NFMsg::Ident::internal_default_instance());
 }
+class ReqAckRejectInvite::_Internal {
+ public:
+  static const ::NFMsg::Ident& id(const ReqAckRejectInvite* msg);
+};
+
+const ::NFMsg::Ident&
+ReqAckRejectInvite::_Internal::id(const ReqAckRejectInvite* msg) {
+  return *msg->id_;
+}
 void ReqAckRejectInvite::clear_id() {
-  if (GetArenaNoVirtual() == NULL && id_ != NULL) {
+  if (GetArenaNoVirtual() == nullptr && id_ != nullptr) {
     delete id_;
   }
-  id_ = NULL;
+  id_ = nullptr;
 }
-#if !defined(_MSC_VER) || _MSC_VER >= 1900
-const int ReqAckRejectInvite::kIdFieldNumber;
-#endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
-
 ReqAckRejectInvite::ReqAckRejectInvite()
-  : ::google::protobuf::Message(), _internal_metadata_(NULL) {
-  ::google::protobuf::internal::InitSCC(
-      &protobuf_NFMsgFriend_2eproto::scc_info_ReqAckRejectInvite.base);
+  : ::PROTOBUF_NAMESPACE_ID::Message(), _internal_metadata_(nullptr) {
   SharedCtor();
   // @@protoc_insertion_point(constructor:NFMsg.ReqAckRejectInvite)
 }
 ReqAckRejectInvite::ReqAckRejectInvite(const ReqAckRejectInvite& from)
-  : ::google::protobuf::Message(),
-      _internal_metadata_(NULL) {
+  : ::PROTOBUF_NAMESPACE_ID::Message(),
+      _internal_metadata_(nullptr) {
   _internal_metadata_.MergeFrom(from._internal_metadata_);
-  if (from.has_id()) {
+  if (from._internal_has_id()) {
     id_ = new ::NFMsg::Ident(*from.id_);
   } else {
-    id_ = NULL;
+    id_ = nullptr;
   }
   // @@protoc_insertion_point(copy_constructor:NFMsg.ReqAckRejectInvite)
 }
 
 void ReqAckRejectInvite::SharedCtor() {
-  id_ = NULL;
+  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&scc_info_ReqAckRejectInvite_NFMsgFriend_2eproto.base);
+  id_ = nullptr;
 }
 
 ReqAckRejectInvite::~ReqAckRejectInvite() {
@@ -1738,108 +1502,76 @@ void ReqAckRejectInvite::SharedDtor() {
 void ReqAckRejectInvite::SetCachedSize(int size) const {
   _cached_size_.Set(size);
 }
-const ::google::protobuf::Descriptor* ReqAckRejectInvite::descriptor() {
-  ::protobuf_NFMsgFriend_2eproto::protobuf_AssignDescriptorsOnce();
-  return ::protobuf_NFMsgFriend_2eproto::file_level_metadata[kIndexInFileMessages].descriptor;
-}
-
 const ReqAckRejectInvite& ReqAckRejectInvite::default_instance() {
-  ::google::protobuf::internal::InitSCC(&protobuf_NFMsgFriend_2eproto::scc_info_ReqAckRejectInvite.base);
+  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&::scc_info_ReqAckRejectInvite_NFMsgFriend_2eproto.base);
   return *internal_default_instance();
 }
 
 
 void ReqAckRejectInvite::Clear() {
 // @@protoc_insertion_point(message_clear_start:NFMsg.ReqAckRejectInvite)
-  ::google::protobuf::uint32 cached_has_bits = 0;
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  if (GetArenaNoVirtual() == NULL && id_ != NULL) {
+  if (GetArenaNoVirtual() == nullptr && id_ != nullptr) {
     delete id_;
   }
-  id_ = NULL;
+  id_ = nullptr;
   _internal_metadata_.Clear();
 }
 
-bool ReqAckRejectInvite::MergePartialFromCodedStream(
-    ::google::protobuf::io::CodedInputStream* input) {
-#define DO_(EXPRESSION) if (!GOOGLE_PREDICT_TRUE(EXPRESSION)) goto failure
-  ::google::protobuf::uint32 tag;
-  // @@protoc_insertion_point(parse_start:NFMsg.ReqAckRejectInvite)
-  for (;;) {
-    ::std::pair<::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
-    tag = p.first;
-    if (!p.second) goto handle_unusual;
-    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
+const char* ReqAckRejectInvite::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) {
+#define CHK_(x) if (PROTOBUF_PREDICT_FALSE(!(x))) goto failure
+  while (!ctx->Done(&ptr)) {
+    ::PROTOBUF_NAMESPACE_ID::uint32 tag;
+    ptr = ::PROTOBUF_NAMESPACE_ID::internal::ReadTag(ptr, &tag);
+    CHK_(ptr);
+    switch (tag >> 3) {
       // .NFMsg.Ident id = 1;
-      case 1: {
-        if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(10u /* 10 & 0xFF */)) {
-          DO_(::google::protobuf::internal::WireFormatLite::ReadMessage(
-               input, mutable_id()));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
+      case 1:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 10)) {
+          ptr = ctx->ParseMessage(_internal_mutable_id(), ptr);
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
       default: {
       handle_unusual:
-        if (tag == 0) {
+        if ((tag & 7) == 4 || tag == 0) {
+          ctx->SetLastTag(tag);
           goto success;
         }
-        DO_(::google::protobuf::internal::WireFormat::SkipField(
-              input, tag, _internal_metadata_.mutable_unknown_fields()));
-        break;
+        ptr = UnknownFieldParse(tag, &_internal_metadata_, ptr, ctx);
+        CHK_(ptr != nullptr);
+        continue;
       }
-    }
-  }
+    }  // switch
+  }  // while
 success:
-  // @@protoc_insertion_point(parse_success:NFMsg.ReqAckRejectInvite)
-  return true;
+  return ptr;
 failure:
-  // @@protoc_insertion_point(parse_failure:NFMsg.ReqAckRejectInvite)
-  return false;
-#undef DO_
+  ptr = nullptr;
+  goto success;
+#undef CHK_
 }
 
-void ReqAckRejectInvite::SerializeWithCachedSizes(
-    ::google::protobuf::io::CodedOutputStream* output) const {
-  // @@protoc_insertion_point(serialize_start:NFMsg.ReqAckRejectInvite)
-  ::google::protobuf::uint32 cached_has_bits = 0;
-  (void) cached_has_bits;
-
-  // .NFMsg.Ident id = 1;
-  if (this->has_id()) {
-    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      1, this->_internal_id(), output);
-  }
-
-  if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
-    ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
-        (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()), output);
-  }
-  // @@protoc_insertion_point(serialize_end:NFMsg.ReqAckRejectInvite)
-}
-
-::google::protobuf::uint8* ReqAckRejectInvite::InternalSerializeWithCachedSizesToArray(
-    bool deterministic, ::google::protobuf::uint8* target) const {
-  (void)deterministic; // Unused
+::PROTOBUF_NAMESPACE_ID::uint8* ReqAckRejectInvite::InternalSerializeWithCachedSizesToArray(
+    ::PROTOBUF_NAMESPACE_ID::uint8* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const {
   // @@protoc_insertion_point(serialize_to_array_start:NFMsg.ReqAckRejectInvite)
-  ::google::protobuf::uint32 cached_has_bits = 0;
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
   // .NFMsg.Ident id = 1;
   if (this->has_id()) {
-    target = ::google::protobuf::internal::WireFormatLite::
+    target = stream->EnsureSpace(target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
       InternalWriteMessageToArray(
-        1, this->_internal_id(), deterministic, target);
+        1, _Internal::id(this), target, stream);
   }
 
-  if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
-    target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
-        (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()), target);
+  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::InternalSerializeUnknownFieldsToArray(
+        _internal_metadata_.unknown_fields(), target, stream);
   }
   // @@protoc_insertion_point(serialize_to_array_end:NFMsg.ReqAckRejectInvite)
   return target;
@@ -1849,32 +1581,35 @@ size_t ReqAckRejectInvite::ByteSizeLong() const {
 // @@protoc_insertion_point(message_byte_size_start:NFMsg.ReqAckRejectInvite)
   size_t total_size = 0;
 
-  if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
-    total_size +=
-      ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
-        (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()));
-  }
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
   // .NFMsg.Ident id = 1;
   if (this->has_id()) {
     total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::MessageSize(
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
         *id_);
   }
 
-  int cached_size = ::google::protobuf::internal::ToCachedSize(total_size);
+  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
+    return ::PROTOBUF_NAMESPACE_ID::internal::ComputeUnknownFieldsSize(
+        _internal_metadata_, total_size, &_cached_size_);
+  }
+  int cached_size = ::PROTOBUF_NAMESPACE_ID::internal::ToCachedSize(total_size);
   SetCachedSize(cached_size);
   return total_size;
 }
 
-void ReqAckRejectInvite::MergeFrom(const ::google::protobuf::Message& from) {
+void ReqAckRejectInvite::MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
 // @@protoc_insertion_point(generalized_merge_from_start:NFMsg.ReqAckRejectInvite)
   GOOGLE_DCHECK_NE(&from, this);
   const ReqAckRejectInvite* source =
-      ::google::protobuf::internal::DynamicCastToGenerated<const ReqAckRejectInvite>(
+      ::PROTOBUF_NAMESPACE_ID::DynamicCastToGenerated<ReqAckRejectInvite>(
           &from);
-  if (source == NULL) {
+  if (source == nullptr) {
   // @@protoc_insertion_point(generalized_merge_from_cast_fail:NFMsg.ReqAckRejectInvite)
-    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
+    ::PROTOBUF_NAMESPACE_ID::internal::ReflectionOps::Merge(from, this);
   } else {
   // @@protoc_insertion_point(generalized_merge_from_cast_success:NFMsg.ReqAckRejectInvite)
     MergeFrom(*source);
@@ -1885,15 +1620,15 @@ void ReqAckRejectInvite::MergeFrom(const ReqAckRejectInvite& from) {
 // @@protoc_insertion_point(class_specific_merge_from_start:NFMsg.ReqAckRejectInvite)
   GOOGLE_DCHECK_NE(&from, this);
   _internal_metadata_.MergeFrom(from._internal_metadata_);
-  ::google::protobuf::uint32 cached_has_bits = 0;
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
   if (from.has_id()) {
-    mutable_id()->::NFMsg::Ident::MergeFrom(from.id());
+    _internal_mutable_id()->::NFMsg::Ident::MergeFrom(from._internal_id());
   }
 }
 
-void ReqAckRejectInvite::CopyFrom(const ::google::protobuf::Message& from) {
+void ReqAckRejectInvite::CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
 // @@protoc_insertion_point(generalized_copy_from_start:NFMsg.ReqAckRejectInvite)
   if (&from == this) return;
   Clear();
@@ -1911,19 +1646,14 @@ bool ReqAckRejectInvite::IsInitialized() const {
   return true;
 }
 
-void ReqAckRejectInvite::Swap(ReqAckRejectInvite* other) {
-  if (other == this) return;
-  InternalSwap(other);
-}
 void ReqAckRejectInvite::InternalSwap(ReqAckRejectInvite* other) {
   using std::swap;
-  swap(id_, other->id_);
   _internal_metadata_.Swap(&other->_internal_metadata_);
+  swap(id_, other->id_);
 }
 
-::google::protobuf::Metadata ReqAckRejectInvite::GetMetadata() const {
-  protobuf_NFMsgFriend_2eproto::protobuf_AssignDescriptorsOnce();
-  return ::protobuf_NFMsgFriend_2eproto::file_level_metadata[kIndexInFileMessages];
+::PROTOBUF_NAMESPACE_ID::Metadata ReqAckRejectInvite::GetMetadata() const {
+  return GetMetadataStatic();
 }
 
 
@@ -1933,37 +1663,41 @@ void ReqAckIgnoreInvite::InitAsDefaultInstance() {
   ::NFMsg::_ReqAckIgnoreInvite_default_instance_._instance.get_mutable()->id_ = const_cast< ::NFMsg::Ident*>(
       ::NFMsg::Ident::internal_default_instance());
 }
+class ReqAckIgnoreInvite::_Internal {
+ public:
+  static const ::NFMsg::Ident& id(const ReqAckIgnoreInvite* msg);
+};
+
+const ::NFMsg::Ident&
+ReqAckIgnoreInvite::_Internal::id(const ReqAckIgnoreInvite* msg) {
+  return *msg->id_;
+}
 void ReqAckIgnoreInvite::clear_id() {
-  if (GetArenaNoVirtual() == NULL && id_ != NULL) {
+  if (GetArenaNoVirtual() == nullptr && id_ != nullptr) {
     delete id_;
   }
-  id_ = NULL;
+  id_ = nullptr;
 }
-#if !defined(_MSC_VER) || _MSC_VER >= 1900
-const int ReqAckIgnoreInvite::kIdFieldNumber;
-#endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
-
 ReqAckIgnoreInvite::ReqAckIgnoreInvite()
-  : ::google::protobuf::Message(), _internal_metadata_(NULL) {
-  ::google::protobuf::internal::InitSCC(
-      &protobuf_NFMsgFriend_2eproto::scc_info_ReqAckIgnoreInvite.base);
+  : ::PROTOBUF_NAMESPACE_ID::Message(), _internal_metadata_(nullptr) {
   SharedCtor();
   // @@protoc_insertion_point(constructor:NFMsg.ReqAckIgnoreInvite)
 }
 ReqAckIgnoreInvite::ReqAckIgnoreInvite(const ReqAckIgnoreInvite& from)
-  : ::google::protobuf::Message(),
-      _internal_metadata_(NULL) {
+  : ::PROTOBUF_NAMESPACE_ID::Message(),
+      _internal_metadata_(nullptr) {
   _internal_metadata_.MergeFrom(from._internal_metadata_);
-  if (from.has_id()) {
+  if (from._internal_has_id()) {
     id_ = new ::NFMsg::Ident(*from.id_);
   } else {
-    id_ = NULL;
+    id_ = nullptr;
   }
   // @@protoc_insertion_point(copy_constructor:NFMsg.ReqAckIgnoreInvite)
 }
 
 void ReqAckIgnoreInvite::SharedCtor() {
-  id_ = NULL;
+  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&scc_info_ReqAckIgnoreInvite_NFMsgFriend_2eproto.base);
+  id_ = nullptr;
 }
 
 ReqAckIgnoreInvite::~ReqAckIgnoreInvite() {
@@ -1978,108 +1712,76 @@ void ReqAckIgnoreInvite::SharedDtor() {
 void ReqAckIgnoreInvite::SetCachedSize(int size) const {
   _cached_size_.Set(size);
 }
-const ::google::protobuf::Descriptor* ReqAckIgnoreInvite::descriptor() {
-  ::protobuf_NFMsgFriend_2eproto::protobuf_AssignDescriptorsOnce();
-  return ::protobuf_NFMsgFriend_2eproto::file_level_metadata[kIndexInFileMessages].descriptor;
-}
-
 const ReqAckIgnoreInvite& ReqAckIgnoreInvite::default_instance() {
-  ::google::protobuf::internal::InitSCC(&protobuf_NFMsgFriend_2eproto::scc_info_ReqAckIgnoreInvite.base);
+  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&::scc_info_ReqAckIgnoreInvite_NFMsgFriend_2eproto.base);
   return *internal_default_instance();
 }
 
 
 void ReqAckIgnoreInvite::Clear() {
 // @@protoc_insertion_point(message_clear_start:NFMsg.ReqAckIgnoreInvite)
-  ::google::protobuf::uint32 cached_has_bits = 0;
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  if (GetArenaNoVirtual() == NULL && id_ != NULL) {
+  if (GetArenaNoVirtual() == nullptr && id_ != nullptr) {
     delete id_;
   }
-  id_ = NULL;
+  id_ = nullptr;
   _internal_metadata_.Clear();
 }
 
-bool ReqAckIgnoreInvite::MergePartialFromCodedStream(
-    ::google::protobuf::io::CodedInputStream* input) {
-#define DO_(EXPRESSION) if (!GOOGLE_PREDICT_TRUE(EXPRESSION)) goto failure
-  ::google::protobuf::uint32 tag;
-  // @@protoc_insertion_point(parse_start:NFMsg.ReqAckIgnoreInvite)
-  for (;;) {
-    ::std::pair<::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
-    tag = p.first;
-    if (!p.second) goto handle_unusual;
-    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
+const char* ReqAckIgnoreInvite::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) {
+#define CHK_(x) if (PROTOBUF_PREDICT_FALSE(!(x))) goto failure
+  while (!ctx->Done(&ptr)) {
+    ::PROTOBUF_NAMESPACE_ID::uint32 tag;
+    ptr = ::PROTOBUF_NAMESPACE_ID::internal::ReadTag(ptr, &tag);
+    CHK_(ptr);
+    switch (tag >> 3) {
       // .NFMsg.Ident id = 1;
-      case 1: {
-        if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(10u /* 10 & 0xFF */)) {
-          DO_(::google::protobuf::internal::WireFormatLite::ReadMessage(
-               input, mutable_id()));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
+      case 1:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 10)) {
+          ptr = ctx->ParseMessage(_internal_mutable_id(), ptr);
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
       default: {
       handle_unusual:
-        if (tag == 0) {
+        if ((tag & 7) == 4 || tag == 0) {
+          ctx->SetLastTag(tag);
           goto success;
         }
-        DO_(::google::protobuf::internal::WireFormat::SkipField(
-              input, tag, _internal_metadata_.mutable_unknown_fields()));
-        break;
+        ptr = UnknownFieldParse(tag, &_internal_metadata_, ptr, ctx);
+        CHK_(ptr != nullptr);
+        continue;
       }
-    }
-  }
+    }  // switch
+  }  // while
 success:
-  // @@protoc_insertion_point(parse_success:NFMsg.ReqAckIgnoreInvite)
-  return true;
+  return ptr;
 failure:
-  // @@protoc_insertion_point(parse_failure:NFMsg.ReqAckIgnoreInvite)
-  return false;
-#undef DO_
+  ptr = nullptr;
+  goto success;
+#undef CHK_
 }
 
-void ReqAckIgnoreInvite::SerializeWithCachedSizes(
-    ::google::protobuf::io::CodedOutputStream* output) const {
-  // @@protoc_insertion_point(serialize_start:NFMsg.ReqAckIgnoreInvite)
-  ::google::protobuf::uint32 cached_has_bits = 0;
-  (void) cached_has_bits;
-
-  // .NFMsg.Ident id = 1;
-  if (this->has_id()) {
-    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      1, this->_internal_id(), output);
-  }
-
-  if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
-    ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
-        (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()), output);
-  }
-  // @@protoc_insertion_point(serialize_end:NFMsg.ReqAckIgnoreInvite)
-}
-
-::google::protobuf::uint8* ReqAckIgnoreInvite::InternalSerializeWithCachedSizesToArray(
-    bool deterministic, ::google::protobuf::uint8* target) const {
-  (void)deterministic; // Unused
+::PROTOBUF_NAMESPACE_ID::uint8* ReqAckIgnoreInvite::InternalSerializeWithCachedSizesToArray(
+    ::PROTOBUF_NAMESPACE_ID::uint8* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const {
   // @@protoc_insertion_point(serialize_to_array_start:NFMsg.ReqAckIgnoreInvite)
-  ::google::protobuf::uint32 cached_has_bits = 0;
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
   // .NFMsg.Ident id = 1;
   if (this->has_id()) {
-    target = ::google::protobuf::internal::WireFormatLite::
+    target = stream->EnsureSpace(target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
       InternalWriteMessageToArray(
-        1, this->_internal_id(), deterministic, target);
+        1, _Internal::id(this), target, stream);
   }
 
-  if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
-    target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
-        (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()), target);
+  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::InternalSerializeUnknownFieldsToArray(
+        _internal_metadata_.unknown_fields(), target, stream);
   }
   // @@protoc_insertion_point(serialize_to_array_end:NFMsg.ReqAckIgnoreInvite)
   return target;
@@ -2089,32 +1791,35 @@ size_t ReqAckIgnoreInvite::ByteSizeLong() const {
 // @@protoc_insertion_point(message_byte_size_start:NFMsg.ReqAckIgnoreInvite)
   size_t total_size = 0;
 
-  if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
-    total_size +=
-      ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
-        (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()));
-  }
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
   // .NFMsg.Ident id = 1;
   if (this->has_id()) {
     total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::MessageSize(
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
         *id_);
   }
 
-  int cached_size = ::google::protobuf::internal::ToCachedSize(total_size);
+  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
+    return ::PROTOBUF_NAMESPACE_ID::internal::ComputeUnknownFieldsSize(
+        _internal_metadata_, total_size, &_cached_size_);
+  }
+  int cached_size = ::PROTOBUF_NAMESPACE_ID::internal::ToCachedSize(total_size);
   SetCachedSize(cached_size);
   return total_size;
 }
 
-void ReqAckIgnoreInvite::MergeFrom(const ::google::protobuf::Message& from) {
+void ReqAckIgnoreInvite::MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
 // @@protoc_insertion_point(generalized_merge_from_start:NFMsg.ReqAckIgnoreInvite)
   GOOGLE_DCHECK_NE(&from, this);
   const ReqAckIgnoreInvite* source =
-      ::google::protobuf::internal::DynamicCastToGenerated<const ReqAckIgnoreInvite>(
+      ::PROTOBUF_NAMESPACE_ID::DynamicCastToGenerated<ReqAckIgnoreInvite>(
           &from);
-  if (source == NULL) {
+  if (source == nullptr) {
   // @@protoc_insertion_point(generalized_merge_from_cast_fail:NFMsg.ReqAckIgnoreInvite)
-    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
+    ::PROTOBUF_NAMESPACE_ID::internal::ReflectionOps::Merge(from, this);
   } else {
   // @@protoc_insertion_point(generalized_merge_from_cast_success:NFMsg.ReqAckIgnoreInvite)
     MergeFrom(*source);
@@ -2125,15 +1830,15 @@ void ReqAckIgnoreInvite::MergeFrom(const ReqAckIgnoreInvite& from) {
 // @@protoc_insertion_point(class_specific_merge_from_start:NFMsg.ReqAckIgnoreInvite)
   GOOGLE_DCHECK_NE(&from, this);
   _internal_metadata_.MergeFrom(from._internal_metadata_);
-  ::google::protobuf::uint32 cached_has_bits = 0;
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
   if (from.has_id()) {
-    mutable_id()->::NFMsg::Ident::MergeFrom(from.id());
+    _internal_mutable_id()->::NFMsg::Ident::MergeFrom(from._internal_id());
   }
 }
 
-void ReqAckIgnoreInvite::CopyFrom(const ::google::protobuf::Message& from) {
+void ReqAckIgnoreInvite::CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
 // @@protoc_insertion_point(generalized_copy_from_start:NFMsg.ReqAckIgnoreInvite)
   if (&from == this) return;
   Clear();
@@ -2151,19 +1856,14 @@ bool ReqAckIgnoreInvite::IsInitialized() const {
   return true;
 }
 
-void ReqAckIgnoreInvite::Swap(ReqAckIgnoreInvite* other) {
-  if (other == this) return;
-  InternalSwap(other);
-}
 void ReqAckIgnoreInvite::InternalSwap(ReqAckIgnoreInvite* other) {
   using std::swap;
-  swap(id_, other->id_);
   _internal_metadata_.Swap(&other->_internal_metadata_);
+  swap(id_, other->id_);
 }
 
-::google::protobuf::Metadata ReqAckIgnoreInvite::GetMetadata() const {
-  protobuf_NFMsgFriend_2eproto::protobuf_AssignDescriptorsOnce();
-  return ::protobuf_NFMsgFriend_2eproto::file_level_metadata[kIndexInFileMessages];
+::PROTOBUF_NAMESPACE_ID::Metadata ReqAckIgnoreInvite::GetMetadata() const {
+  return GetMetadataStatic();
 }
 
 
@@ -2173,37 +1873,41 @@ void ReqAckBlockPlayer::InitAsDefaultInstance() {
   ::NFMsg::_ReqAckBlockPlayer_default_instance_._instance.get_mutable()->id_ = const_cast< ::NFMsg::Ident*>(
       ::NFMsg::Ident::internal_default_instance());
 }
+class ReqAckBlockPlayer::_Internal {
+ public:
+  static const ::NFMsg::Ident& id(const ReqAckBlockPlayer* msg);
+};
+
+const ::NFMsg::Ident&
+ReqAckBlockPlayer::_Internal::id(const ReqAckBlockPlayer* msg) {
+  return *msg->id_;
+}
 void ReqAckBlockPlayer::clear_id() {
-  if (GetArenaNoVirtual() == NULL && id_ != NULL) {
+  if (GetArenaNoVirtual() == nullptr && id_ != nullptr) {
     delete id_;
   }
-  id_ = NULL;
+  id_ = nullptr;
 }
-#if !defined(_MSC_VER) || _MSC_VER >= 1900
-const int ReqAckBlockPlayer::kIdFieldNumber;
-#endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
-
 ReqAckBlockPlayer::ReqAckBlockPlayer()
-  : ::google::protobuf::Message(), _internal_metadata_(NULL) {
-  ::google::protobuf::internal::InitSCC(
-      &protobuf_NFMsgFriend_2eproto::scc_info_ReqAckBlockPlayer.base);
+  : ::PROTOBUF_NAMESPACE_ID::Message(), _internal_metadata_(nullptr) {
   SharedCtor();
   // @@protoc_insertion_point(constructor:NFMsg.ReqAckBlockPlayer)
 }
 ReqAckBlockPlayer::ReqAckBlockPlayer(const ReqAckBlockPlayer& from)
-  : ::google::protobuf::Message(),
-      _internal_metadata_(NULL) {
+  : ::PROTOBUF_NAMESPACE_ID::Message(),
+      _internal_metadata_(nullptr) {
   _internal_metadata_.MergeFrom(from._internal_metadata_);
-  if (from.has_id()) {
+  if (from._internal_has_id()) {
     id_ = new ::NFMsg::Ident(*from.id_);
   } else {
-    id_ = NULL;
+    id_ = nullptr;
   }
   // @@protoc_insertion_point(copy_constructor:NFMsg.ReqAckBlockPlayer)
 }
 
 void ReqAckBlockPlayer::SharedCtor() {
-  id_ = NULL;
+  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&scc_info_ReqAckBlockPlayer_NFMsgFriend_2eproto.base);
+  id_ = nullptr;
 }
 
 ReqAckBlockPlayer::~ReqAckBlockPlayer() {
@@ -2218,108 +1922,76 @@ void ReqAckBlockPlayer::SharedDtor() {
 void ReqAckBlockPlayer::SetCachedSize(int size) const {
   _cached_size_.Set(size);
 }
-const ::google::protobuf::Descriptor* ReqAckBlockPlayer::descriptor() {
-  ::protobuf_NFMsgFriend_2eproto::protobuf_AssignDescriptorsOnce();
-  return ::protobuf_NFMsgFriend_2eproto::file_level_metadata[kIndexInFileMessages].descriptor;
-}
-
 const ReqAckBlockPlayer& ReqAckBlockPlayer::default_instance() {
-  ::google::protobuf::internal::InitSCC(&protobuf_NFMsgFriend_2eproto::scc_info_ReqAckBlockPlayer.base);
+  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&::scc_info_ReqAckBlockPlayer_NFMsgFriend_2eproto.base);
   return *internal_default_instance();
 }
 
 
 void ReqAckBlockPlayer::Clear() {
 // @@protoc_insertion_point(message_clear_start:NFMsg.ReqAckBlockPlayer)
-  ::google::protobuf::uint32 cached_has_bits = 0;
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  if (GetArenaNoVirtual() == NULL && id_ != NULL) {
+  if (GetArenaNoVirtual() == nullptr && id_ != nullptr) {
     delete id_;
   }
-  id_ = NULL;
+  id_ = nullptr;
   _internal_metadata_.Clear();
 }
 
-bool ReqAckBlockPlayer::MergePartialFromCodedStream(
-    ::google::protobuf::io::CodedInputStream* input) {
-#define DO_(EXPRESSION) if (!GOOGLE_PREDICT_TRUE(EXPRESSION)) goto failure
-  ::google::protobuf::uint32 tag;
-  // @@protoc_insertion_point(parse_start:NFMsg.ReqAckBlockPlayer)
-  for (;;) {
-    ::std::pair<::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
-    tag = p.first;
-    if (!p.second) goto handle_unusual;
-    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
+const char* ReqAckBlockPlayer::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) {
+#define CHK_(x) if (PROTOBUF_PREDICT_FALSE(!(x))) goto failure
+  while (!ctx->Done(&ptr)) {
+    ::PROTOBUF_NAMESPACE_ID::uint32 tag;
+    ptr = ::PROTOBUF_NAMESPACE_ID::internal::ReadTag(ptr, &tag);
+    CHK_(ptr);
+    switch (tag >> 3) {
       // .NFMsg.Ident id = 1;
-      case 1: {
-        if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(10u /* 10 & 0xFF */)) {
-          DO_(::google::protobuf::internal::WireFormatLite::ReadMessage(
-               input, mutable_id()));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
+      case 1:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 10)) {
+          ptr = ctx->ParseMessage(_internal_mutable_id(), ptr);
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
       default: {
       handle_unusual:
-        if (tag == 0) {
+        if ((tag & 7) == 4 || tag == 0) {
+          ctx->SetLastTag(tag);
           goto success;
         }
-        DO_(::google::protobuf::internal::WireFormat::SkipField(
-              input, tag, _internal_metadata_.mutable_unknown_fields()));
-        break;
+        ptr = UnknownFieldParse(tag, &_internal_metadata_, ptr, ctx);
+        CHK_(ptr != nullptr);
+        continue;
       }
-    }
-  }
+    }  // switch
+  }  // while
 success:
-  // @@protoc_insertion_point(parse_success:NFMsg.ReqAckBlockPlayer)
-  return true;
+  return ptr;
 failure:
-  // @@protoc_insertion_point(parse_failure:NFMsg.ReqAckBlockPlayer)
-  return false;
-#undef DO_
+  ptr = nullptr;
+  goto success;
+#undef CHK_
 }
 
-void ReqAckBlockPlayer::SerializeWithCachedSizes(
-    ::google::protobuf::io::CodedOutputStream* output) const {
-  // @@protoc_insertion_point(serialize_start:NFMsg.ReqAckBlockPlayer)
-  ::google::protobuf::uint32 cached_has_bits = 0;
-  (void) cached_has_bits;
-
-  // .NFMsg.Ident id = 1;
-  if (this->has_id()) {
-    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      1, this->_internal_id(), output);
-  }
-
-  if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
-    ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
-        (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()), output);
-  }
-  // @@protoc_insertion_point(serialize_end:NFMsg.ReqAckBlockPlayer)
-}
-
-::google::protobuf::uint8* ReqAckBlockPlayer::InternalSerializeWithCachedSizesToArray(
-    bool deterministic, ::google::protobuf::uint8* target) const {
-  (void)deterministic; // Unused
+::PROTOBUF_NAMESPACE_ID::uint8* ReqAckBlockPlayer::InternalSerializeWithCachedSizesToArray(
+    ::PROTOBUF_NAMESPACE_ID::uint8* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const {
   // @@protoc_insertion_point(serialize_to_array_start:NFMsg.ReqAckBlockPlayer)
-  ::google::protobuf::uint32 cached_has_bits = 0;
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
   // .NFMsg.Ident id = 1;
   if (this->has_id()) {
-    target = ::google::protobuf::internal::WireFormatLite::
+    target = stream->EnsureSpace(target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
       InternalWriteMessageToArray(
-        1, this->_internal_id(), deterministic, target);
+        1, _Internal::id(this), target, stream);
   }
 
-  if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
-    target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
-        (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()), target);
+  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::InternalSerializeUnknownFieldsToArray(
+        _internal_metadata_.unknown_fields(), target, stream);
   }
   // @@protoc_insertion_point(serialize_to_array_end:NFMsg.ReqAckBlockPlayer)
   return target;
@@ -2329,32 +2001,35 @@ size_t ReqAckBlockPlayer::ByteSizeLong() const {
 // @@protoc_insertion_point(message_byte_size_start:NFMsg.ReqAckBlockPlayer)
   size_t total_size = 0;
 
-  if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
-    total_size +=
-      ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
-        (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()));
-  }
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
   // .NFMsg.Ident id = 1;
   if (this->has_id()) {
     total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::MessageSize(
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
         *id_);
   }
 
-  int cached_size = ::google::protobuf::internal::ToCachedSize(total_size);
+  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
+    return ::PROTOBUF_NAMESPACE_ID::internal::ComputeUnknownFieldsSize(
+        _internal_metadata_, total_size, &_cached_size_);
+  }
+  int cached_size = ::PROTOBUF_NAMESPACE_ID::internal::ToCachedSize(total_size);
   SetCachedSize(cached_size);
   return total_size;
 }
 
-void ReqAckBlockPlayer::MergeFrom(const ::google::protobuf::Message& from) {
+void ReqAckBlockPlayer::MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
 // @@protoc_insertion_point(generalized_merge_from_start:NFMsg.ReqAckBlockPlayer)
   GOOGLE_DCHECK_NE(&from, this);
   const ReqAckBlockPlayer* source =
-      ::google::protobuf::internal::DynamicCastToGenerated<const ReqAckBlockPlayer>(
+      ::PROTOBUF_NAMESPACE_ID::DynamicCastToGenerated<ReqAckBlockPlayer>(
           &from);
-  if (source == NULL) {
+  if (source == nullptr) {
   // @@protoc_insertion_point(generalized_merge_from_cast_fail:NFMsg.ReqAckBlockPlayer)
-    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
+    ::PROTOBUF_NAMESPACE_ID::internal::ReflectionOps::Merge(from, this);
   } else {
   // @@protoc_insertion_point(generalized_merge_from_cast_success:NFMsg.ReqAckBlockPlayer)
     MergeFrom(*source);
@@ -2365,15 +2040,15 @@ void ReqAckBlockPlayer::MergeFrom(const ReqAckBlockPlayer& from) {
 // @@protoc_insertion_point(class_specific_merge_from_start:NFMsg.ReqAckBlockPlayer)
   GOOGLE_DCHECK_NE(&from, this);
   _internal_metadata_.MergeFrom(from._internal_metadata_);
-  ::google::protobuf::uint32 cached_has_bits = 0;
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
   if (from.has_id()) {
-    mutable_id()->::NFMsg::Ident::MergeFrom(from.id());
+    _internal_mutable_id()->::NFMsg::Ident::MergeFrom(from._internal_id());
   }
 }
 
-void ReqAckBlockPlayer::CopyFrom(const ::google::protobuf::Message& from) {
+void ReqAckBlockPlayer::CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
 // @@protoc_insertion_point(generalized_copy_from_start:NFMsg.ReqAckBlockPlayer)
   if (&from == this) return;
   Clear();
@@ -2391,19 +2066,14 @@ bool ReqAckBlockPlayer::IsInitialized() const {
   return true;
 }
 
-void ReqAckBlockPlayer::Swap(ReqAckBlockPlayer* other) {
-  if (other == this) return;
-  InternalSwap(other);
-}
 void ReqAckBlockPlayer::InternalSwap(ReqAckBlockPlayer* other) {
   using std::swap;
-  swap(id_, other->id_);
   _internal_metadata_.Swap(&other->_internal_metadata_);
+  swap(id_, other->id_);
 }
 
-::google::protobuf::Metadata ReqAckBlockPlayer::GetMetadata() const {
-  protobuf_NFMsgFriend_2eproto::protobuf_AssignDescriptorsOnce();
-  return ::protobuf_NFMsgFriend_2eproto::file_level_metadata[kIndexInFileMessages];
+::PROTOBUF_NAMESPACE_ID::Metadata ReqAckBlockPlayer::GetMetadata() const {
+  return GetMetadataStatic();
 }
 
 
@@ -2413,37 +2083,41 @@ void ReqAckUnBlockPlayer::InitAsDefaultInstance() {
   ::NFMsg::_ReqAckUnBlockPlayer_default_instance_._instance.get_mutable()->id_ = const_cast< ::NFMsg::Ident*>(
       ::NFMsg::Ident::internal_default_instance());
 }
+class ReqAckUnBlockPlayer::_Internal {
+ public:
+  static const ::NFMsg::Ident& id(const ReqAckUnBlockPlayer* msg);
+};
+
+const ::NFMsg::Ident&
+ReqAckUnBlockPlayer::_Internal::id(const ReqAckUnBlockPlayer* msg) {
+  return *msg->id_;
+}
 void ReqAckUnBlockPlayer::clear_id() {
-  if (GetArenaNoVirtual() == NULL && id_ != NULL) {
+  if (GetArenaNoVirtual() == nullptr && id_ != nullptr) {
     delete id_;
   }
-  id_ = NULL;
+  id_ = nullptr;
 }
-#if !defined(_MSC_VER) || _MSC_VER >= 1900
-const int ReqAckUnBlockPlayer::kIdFieldNumber;
-#endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
-
 ReqAckUnBlockPlayer::ReqAckUnBlockPlayer()
-  : ::google::protobuf::Message(), _internal_metadata_(NULL) {
-  ::google::protobuf::internal::InitSCC(
-      &protobuf_NFMsgFriend_2eproto::scc_info_ReqAckUnBlockPlayer.base);
+  : ::PROTOBUF_NAMESPACE_ID::Message(), _internal_metadata_(nullptr) {
   SharedCtor();
   // @@protoc_insertion_point(constructor:NFMsg.ReqAckUnBlockPlayer)
 }
 ReqAckUnBlockPlayer::ReqAckUnBlockPlayer(const ReqAckUnBlockPlayer& from)
-  : ::google::protobuf::Message(),
-      _internal_metadata_(NULL) {
+  : ::PROTOBUF_NAMESPACE_ID::Message(),
+      _internal_metadata_(nullptr) {
   _internal_metadata_.MergeFrom(from._internal_metadata_);
-  if (from.has_id()) {
+  if (from._internal_has_id()) {
     id_ = new ::NFMsg::Ident(*from.id_);
   } else {
-    id_ = NULL;
+    id_ = nullptr;
   }
   // @@protoc_insertion_point(copy_constructor:NFMsg.ReqAckUnBlockPlayer)
 }
 
 void ReqAckUnBlockPlayer::SharedCtor() {
-  id_ = NULL;
+  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&scc_info_ReqAckUnBlockPlayer_NFMsgFriend_2eproto.base);
+  id_ = nullptr;
 }
 
 ReqAckUnBlockPlayer::~ReqAckUnBlockPlayer() {
@@ -2458,108 +2132,76 @@ void ReqAckUnBlockPlayer::SharedDtor() {
 void ReqAckUnBlockPlayer::SetCachedSize(int size) const {
   _cached_size_.Set(size);
 }
-const ::google::protobuf::Descriptor* ReqAckUnBlockPlayer::descriptor() {
-  ::protobuf_NFMsgFriend_2eproto::protobuf_AssignDescriptorsOnce();
-  return ::protobuf_NFMsgFriend_2eproto::file_level_metadata[kIndexInFileMessages].descriptor;
-}
-
 const ReqAckUnBlockPlayer& ReqAckUnBlockPlayer::default_instance() {
-  ::google::protobuf::internal::InitSCC(&protobuf_NFMsgFriend_2eproto::scc_info_ReqAckUnBlockPlayer.base);
+  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&::scc_info_ReqAckUnBlockPlayer_NFMsgFriend_2eproto.base);
   return *internal_default_instance();
 }
 
 
 void ReqAckUnBlockPlayer::Clear() {
 // @@protoc_insertion_point(message_clear_start:NFMsg.ReqAckUnBlockPlayer)
-  ::google::protobuf::uint32 cached_has_bits = 0;
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  if (GetArenaNoVirtual() == NULL && id_ != NULL) {
+  if (GetArenaNoVirtual() == nullptr && id_ != nullptr) {
     delete id_;
   }
-  id_ = NULL;
+  id_ = nullptr;
   _internal_metadata_.Clear();
 }
 
-bool ReqAckUnBlockPlayer::MergePartialFromCodedStream(
-    ::google::protobuf::io::CodedInputStream* input) {
-#define DO_(EXPRESSION) if (!GOOGLE_PREDICT_TRUE(EXPRESSION)) goto failure
-  ::google::protobuf::uint32 tag;
-  // @@protoc_insertion_point(parse_start:NFMsg.ReqAckUnBlockPlayer)
-  for (;;) {
-    ::std::pair<::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
-    tag = p.first;
-    if (!p.second) goto handle_unusual;
-    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
+const char* ReqAckUnBlockPlayer::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) {
+#define CHK_(x) if (PROTOBUF_PREDICT_FALSE(!(x))) goto failure
+  while (!ctx->Done(&ptr)) {
+    ::PROTOBUF_NAMESPACE_ID::uint32 tag;
+    ptr = ::PROTOBUF_NAMESPACE_ID::internal::ReadTag(ptr, &tag);
+    CHK_(ptr);
+    switch (tag >> 3) {
       // .NFMsg.Ident id = 1;
-      case 1: {
-        if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(10u /* 10 & 0xFF */)) {
-          DO_(::google::protobuf::internal::WireFormatLite::ReadMessage(
-               input, mutable_id()));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
+      case 1:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 10)) {
+          ptr = ctx->ParseMessage(_internal_mutable_id(), ptr);
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
       default: {
       handle_unusual:
-        if (tag == 0) {
+        if ((tag & 7) == 4 || tag == 0) {
+          ctx->SetLastTag(tag);
           goto success;
         }
-        DO_(::google::protobuf::internal::WireFormat::SkipField(
-              input, tag, _internal_metadata_.mutable_unknown_fields()));
-        break;
+        ptr = UnknownFieldParse(tag, &_internal_metadata_, ptr, ctx);
+        CHK_(ptr != nullptr);
+        continue;
       }
-    }
-  }
+    }  // switch
+  }  // while
 success:
-  // @@protoc_insertion_point(parse_success:NFMsg.ReqAckUnBlockPlayer)
-  return true;
+  return ptr;
 failure:
-  // @@protoc_insertion_point(parse_failure:NFMsg.ReqAckUnBlockPlayer)
-  return false;
-#undef DO_
+  ptr = nullptr;
+  goto success;
+#undef CHK_
 }
 
-void ReqAckUnBlockPlayer::SerializeWithCachedSizes(
-    ::google::protobuf::io::CodedOutputStream* output) const {
-  // @@protoc_insertion_point(serialize_start:NFMsg.ReqAckUnBlockPlayer)
-  ::google::protobuf::uint32 cached_has_bits = 0;
-  (void) cached_has_bits;
-
-  // .NFMsg.Ident id = 1;
-  if (this->has_id()) {
-    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      1, this->_internal_id(), output);
-  }
-
-  if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
-    ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
-        (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()), output);
-  }
-  // @@protoc_insertion_point(serialize_end:NFMsg.ReqAckUnBlockPlayer)
-}
-
-::google::protobuf::uint8* ReqAckUnBlockPlayer::InternalSerializeWithCachedSizesToArray(
-    bool deterministic, ::google::protobuf::uint8* target) const {
-  (void)deterministic; // Unused
+::PROTOBUF_NAMESPACE_ID::uint8* ReqAckUnBlockPlayer::InternalSerializeWithCachedSizesToArray(
+    ::PROTOBUF_NAMESPACE_ID::uint8* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const {
   // @@protoc_insertion_point(serialize_to_array_start:NFMsg.ReqAckUnBlockPlayer)
-  ::google::protobuf::uint32 cached_has_bits = 0;
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
   // .NFMsg.Ident id = 1;
   if (this->has_id()) {
-    target = ::google::protobuf::internal::WireFormatLite::
+    target = stream->EnsureSpace(target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
       InternalWriteMessageToArray(
-        1, this->_internal_id(), deterministic, target);
+        1, _Internal::id(this), target, stream);
   }
 
-  if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
-    target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
-        (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()), target);
+  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::InternalSerializeUnknownFieldsToArray(
+        _internal_metadata_.unknown_fields(), target, stream);
   }
   // @@protoc_insertion_point(serialize_to_array_end:NFMsg.ReqAckUnBlockPlayer)
   return target;
@@ -2569,32 +2211,35 @@ size_t ReqAckUnBlockPlayer::ByteSizeLong() const {
 // @@protoc_insertion_point(message_byte_size_start:NFMsg.ReqAckUnBlockPlayer)
   size_t total_size = 0;
 
-  if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
-    total_size +=
-      ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
-        (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()));
-  }
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
   // .NFMsg.Ident id = 1;
   if (this->has_id()) {
     total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::MessageSize(
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
         *id_);
   }
 
-  int cached_size = ::google::protobuf::internal::ToCachedSize(total_size);
+  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
+    return ::PROTOBUF_NAMESPACE_ID::internal::ComputeUnknownFieldsSize(
+        _internal_metadata_, total_size, &_cached_size_);
+  }
+  int cached_size = ::PROTOBUF_NAMESPACE_ID::internal::ToCachedSize(total_size);
   SetCachedSize(cached_size);
   return total_size;
 }
 
-void ReqAckUnBlockPlayer::MergeFrom(const ::google::protobuf::Message& from) {
+void ReqAckUnBlockPlayer::MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
 // @@protoc_insertion_point(generalized_merge_from_start:NFMsg.ReqAckUnBlockPlayer)
   GOOGLE_DCHECK_NE(&from, this);
   const ReqAckUnBlockPlayer* source =
-      ::google::protobuf::internal::DynamicCastToGenerated<const ReqAckUnBlockPlayer>(
+      ::PROTOBUF_NAMESPACE_ID::DynamicCastToGenerated<ReqAckUnBlockPlayer>(
           &from);
-  if (source == NULL) {
+  if (source == nullptr) {
   // @@protoc_insertion_point(generalized_merge_from_cast_fail:NFMsg.ReqAckUnBlockPlayer)
-    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
+    ::PROTOBUF_NAMESPACE_ID::internal::ReflectionOps::Merge(from, this);
   } else {
   // @@protoc_insertion_point(generalized_merge_from_cast_success:NFMsg.ReqAckUnBlockPlayer)
     MergeFrom(*source);
@@ -2605,15 +2250,15 @@ void ReqAckUnBlockPlayer::MergeFrom(const ReqAckUnBlockPlayer& from) {
 // @@protoc_insertion_point(class_specific_merge_from_start:NFMsg.ReqAckUnBlockPlayer)
   GOOGLE_DCHECK_NE(&from, this);
   _internal_metadata_.MergeFrom(from._internal_metadata_);
-  ::google::protobuf::uint32 cached_has_bits = 0;
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
   if (from.has_id()) {
-    mutable_id()->::NFMsg::Ident::MergeFrom(from.id());
+    _internal_mutable_id()->::NFMsg::Ident::MergeFrom(from._internal_id());
   }
 }
 
-void ReqAckUnBlockPlayer::CopyFrom(const ::google::protobuf::Message& from) {
+void ReqAckUnBlockPlayer::CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
 // @@protoc_insertion_point(generalized_copy_from_start:NFMsg.ReqAckUnBlockPlayer)
   if (&from == this) return;
   Clear();
@@ -2631,54 +2276,48 @@ bool ReqAckUnBlockPlayer::IsInitialized() const {
   return true;
 }
 
-void ReqAckUnBlockPlayer::Swap(ReqAckUnBlockPlayer* other) {
-  if (other == this) return;
-  InternalSwap(other);
-}
 void ReqAckUnBlockPlayer::InternalSwap(ReqAckUnBlockPlayer* other) {
   using std::swap;
-  swap(id_, other->id_);
   _internal_metadata_.Swap(&other->_internal_metadata_);
+  swap(id_, other->id_);
 }
 
-::google::protobuf::Metadata ReqAckUnBlockPlayer::GetMetadata() const {
-  protobuf_NFMsgFriend_2eproto::protobuf_AssignDescriptorsOnce();
-  return ::protobuf_NFMsgFriend_2eproto::file_level_metadata[kIndexInFileMessages];
+::PROTOBUF_NAMESPACE_ID::Metadata ReqAckUnBlockPlayer::GetMetadata() const {
+  return GetMetadataStatic();
 }
 
 
 // @@protoc_insertion_point(namespace_scope)
 }  // namespace NFMsg
-namespace google {
-namespace protobuf {
-template<> GOOGLE_PROTOBUF_ATTRIBUTE_NOINLINE ::NFMsg::FriendData* Arena::CreateMaybeMessage< ::NFMsg::FriendData >(Arena* arena) {
+PROTOBUF_NAMESPACE_OPEN
+template<> PROTOBUF_NOINLINE ::NFMsg::FriendData* Arena::CreateMaybeMessage< ::NFMsg::FriendData >(Arena* arena) {
   return Arena::CreateInternal< ::NFMsg::FriendData >(arena);
 }
-template<> GOOGLE_PROTOBUF_ATTRIBUTE_NOINLINE ::NFMsg::ReqAckFriendList* Arena::CreateMaybeMessage< ::NFMsg::ReqAckFriendList >(Arena* arena) {
+template<> PROTOBUF_NOINLINE ::NFMsg::ReqAckFriendList* Arena::CreateMaybeMessage< ::NFMsg::ReqAckFriendList >(Arena* arena) {
   return Arena::CreateInternal< ::NFMsg::ReqAckFriendList >(arena);
 }
-template<> GOOGLE_PROTOBUF_ATTRIBUTE_NOINLINE ::NFMsg::ReqAckDeleteFriend* Arena::CreateMaybeMessage< ::NFMsg::ReqAckDeleteFriend >(Arena* arena) {
+template<> PROTOBUF_NOINLINE ::NFMsg::ReqAckDeleteFriend* Arena::CreateMaybeMessage< ::NFMsg::ReqAckDeleteFriend >(Arena* arena) {
   return Arena::CreateInternal< ::NFMsg::ReqAckDeleteFriend >(arena);
 }
-template<> GOOGLE_PROTOBUF_ATTRIBUTE_NOINLINE ::NFMsg::ReqAckSendInvite* Arena::CreateMaybeMessage< ::NFMsg::ReqAckSendInvite >(Arena* arena) {
+template<> PROTOBUF_NOINLINE ::NFMsg::ReqAckSendInvite* Arena::CreateMaybeMessage< ::NFMsg::ReqAckSendInvite >(Arena* arena) {
   return Arena::CreateInternal< ::NFMsg::ReqAckSendInvite >(arena);
 }
-template<> GOOGLE_PROTOBUF_ATTRIBUTE_NOINLINE ::NFMsg::ReqAckAcceptInvite* Arena::CreateMaybeMessage< ::NFMsg::ReqAckAcceptInvite >(Arena* arena) {
+template<> PROTOBUF_NOINLINE ::NFMsg::ReqAckAcceptInvite* Arena::CreateMaybeMessage< ::NFMsg::ReqAckAcceptInvite >(Arena* arena) {
   return Arena::CreateInternal< ::NFMsg::ReqAckAcceptInvite >(arena);
 }
-template<> GOOGLE_PROTOBUF_ATTRIBUTE_NOINLINE ::NFMsg::ReqAckRejectInvite* Arena::CreateMaybeMessage< ::NFMsg::ReqAckRejectInvite >(Arena* arena) {
+template<> PROTOBUF_NOINLINE ::NFMsg::ReqAckRejectInvite* Arena::CreateMaybeMessage< ::NFMsg::ReqAckRejectInvite >(Arena* arena) {
   return Arena::CreateInternal< ::NFMsg::ReqAckRejectInvite >(arena);
 }
-template<> GOOGLE_PROTOBUF_ATTRIBUTE_NOINLINE ::NFMsg::ReqAckIgnoreInvite* Arena::CreateMaybeMessage< ::NFMsg::ReqAckIgnoreInvite >(Arena* arena) {
+template<> PROTOBUF_NOINLINE ::NFMsg::ReqAckIgnoreInvite* Arena::CreateMaybeMessage< ::NFMsg::ReqAckIgnoreInvite >(Arena* arena) {
   return Arena::CreateInternal< ::NFMsg::ReqAckIgnoreInvite >(arena);
 }
-template<> GOOGLE_PROTOBUF_ATTRIBUTE_NOINLINE ::NFMsg::ReqAckBlockPlayer* Arena::CreateMaybeMessage< ::NFMsg::ReqAckBlockPlayer >(Arena* arena) {
+template<> PROTOBUF_NOINLINE ::NFMsg::ReqAckBlockPlayer* Arena::CreateMaybeMessage< ::NFMsg::ReqAckBlockPlayer >(Arena* arena) {
   return Arena::CreateInternal< ::NFMsg::ReqAckBlockPlayer >(arena);
 }
-template<> GOOGLE_PROTOBUF_ATTRIBUTE_NOINLINE ::NFMsg::ReqAckUnBlockPlayer* Arena::CreateMaybeMessage< ::NFMsg::ReqAckUnBlockPlayer >(Arena* arena) {
+template<> PROTOBUF_NOINLINE ::NFMsg::ReqAckUnBlockPlayer* Arena::CreateMaybeMessage< ::NFMsg::ReqAckUnBlockPlayer >(Arena* arena) {
   return Arena::CreateInternal< ::NFMsg::ReqAckUnBlockPlayer >(arena);
 }
-}  // namespace protobuf
-}  // namespace google
+PROTOBUF_NAMESPACE_CLOSE
 
 // @@protoc_insertion_point(global_scope)
+#include <google/protobuf/port_undef.inc>

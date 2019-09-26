@@ -5,592 +5,541 @@
 
 #include <algorithm>
 
-#include <google/protobuf/stubs/common.h>
-#include <google/protobuf/stubs/port.h>
 #include <google/protobuf/io/coded_stream.h>
-#include <google/protobuf/wire_format_lite_inl.h>
+#include <google/protobuf/extension_set.h>
+#include <google/protobuf/wire_format_lite.h>
 #include <google/protobuf/descriptor.h>
 #include <google/protobuf/generated_message_reflection.h>
 #include <google/protobuf/reflection_ops.h>
 #include <google/protobuf/wire_format.h>
-// This is a temporary google only hack
-#ifdef GOOGLE_PROTOBUF_ENFORCE_UNIQUENESS
-#include "third_party/protobuf/version.h"
-#endif
 // @@protoc_insertion_point(includes)
-
-namespace protobuf_NFMsgBase_2eproto {
-extern PROTOBUF_INTERNAL_EXPORT_protobuf_NFMsgBase_2eproto ::google::protobuf::internal::SCCInfo<0> scc_info_Ident;
-}  // namespace protobuf_NFMsgBase_2eproto
-namespace protobuf_NFMsgExtra_2eproto {
-extern PROTOBUF_INTERNAL_EXPORT_protobuf_NFMsgExtra_2eproto ::google::protobuf::internal::SCCInfo<1> scc_info_BigMapLeaveMsg;
-extern PROTOBUF_INTERNAL_EXPORT_protobuf_NFMsgExtra_2eproto ::google::protobuf::internal::SCCInfo<1> scc_info_GridClanBaseInfo;
-extern PROTOBUF_INTERNAL_EXPORT_protobuf_NFMsgExtra_2eproto ::google::protobuf::internal::SCCInfo<2> scc_info_BigMapGridBaseInfo;
-extern PROTOBUF_INTERNAL_EXPORT_protobuf_NFMsgExtra_2eproto ::google::protobuf::internal::SCCInfo<2> scc_info_BigMapWarHistory;
-extern PROTOBUF_INTERNAL_EXPORT_protobuf_NFMsgExtra_2eproto ::google::protobuf::internal::SCCInfo<4> scc_info_BigMapGridDetailInfo;
-}  // namespace protobuf_NFMsgExtra_2eproto
+#include <google/protobuf/port_def.inc>
+extern PROTOBUF_INTERNAL_EXPORT_NFMsgExtra_2eproto ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<2> scc_info_BigMapGridBaseInfo_NFMsgExtra_2eproto;
+extern PROTOBUF_INTERNAL_EXPORT_NFMsgExtra_2eproto ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<4> scc_info_BigMapGridDetailInfo_NFMsgExtra_2eproto;
+extern PROTOBUF_INTERNAL_EXPORT_NFMsgExtra_2eproto ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_BigMapLeaveMsg_NFMsgExtra_2eproto;
+extern PROTOBUF_INTERNAL_EXPORT_NFMsgExtra_2eproto ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<2> scc_info_BigMapWarHistory_NFMsgExtra_2eproto;
+extern PROTOBUF_INTERNAL_EXPORT_NFMsgExtra_2eproto ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_GridClanBaseInfo_NFMsgExtra_2eproto;
+extern PROTOBUF_INTERNAL_EXPORT_NFMsgBase_2eproto ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_Ident_NFMsgBase_2eproto;
 namespace NFMsg {
 class ReqAIOnwerDefaultTypeInternal {
  public:
-  ::google::protobuf::internal::ExplicitlyConstructed<ReqAIOnwer>
-      _instance;
+  ::PROTOBUF_NAMESPACE_ID::internal::ExplicitlyConstructed<ReqAIOnwer> _instance;
 } _ReqAIOnwer_default_instance_;
 class GridClanBaseInfoDefaultTypeInternal {
  public:
-  ::google::protobuf::internal::ExplicitlyConstructed<GridClanBaseInfo>
-      _instance;
+  ::PROTOBUF_NAMESPACE_ID::internal::ExplicitlyConstructed<GridClanBaseInfo> _instance;
 } _GridClanBaseInfo_default_instance_;
 class ReqBigMapGridInfoDefaultTypeInternal {
  public:
-  ::google::protobuf::internal::ExplicitlyConstructed<ReqBigMapGridInfo>
-      _instance;
+  ::PROTOBUF_NAMESPACE_ID::internal::ExplicitlyConstructed<ReqBigMapGridInfo> _instance;
 } _ReqBigMapGridInfo_default_instance_;
 class BigMapGridBaseInfoDefaultTypeInternal {
  public:
-  ::google::protobuf::internal::ExplicitlyConstructed<BigMapGridBaseInfo>
-      _instance;
+  ::PROTOBUF_NAMESPACE_ID::internal::ExplicitlyConstructed<BigMapGridBaseInfo> _instance;
 } _BigMapGridBaseInfo_default_instance_;
 class BigMapLeaveMsgDefaultTypeInternal {
  public:
-  ::google::protobuf::internal::ExplicitlyConstructed<BigMapLeaveMsg>
-      _instance;
+  ::PROTOBUF_NAMESPACE_ID::internal::ExplicitlyConstructed<BigMapLeaveMsg> _instance;
 } _BigMapLeaveMsg_default_instance_;
 class BigMapWarHistoryDefaultTypeInternal {
  public:
-  ::google::protobuf::internal::ExplicitlyConstructed<BigMapWarHistory>
-      _instance;
+  ::PROTOBUF_NAMESPACE_ID::internal::ExplicitlyConstructed<BigMapWarHistory> _instance;
 } _BigMapWarHistory_default_instance_;
 class BigMapGridDetailInfoDefaultTypeInternal {
  public:
-  ::google::protobuf::internal::ExplicitlyConstructed<BigMapGridDetailInfo>
-      _instance;
+  ::PROTOBUF_NAMESPACE_ID::internal::ExplicitlyConstructed<BigMapGridDetailInfo> _instance;
 } _BigMapGridDetailInfo_default_instance_;
 class AckBigMapGridInfoDefaultTypeInternal {
  public:
-  ::google::protobuf::internal::ExplicitlyConstructed<AckBigMapGridInfo>
-      _instance;
+  ::PROTOBUF_NAMESPACE_ID::internal::ExplicitlyConstructed<AckBigMapGridInfo> _instance;
 } _AckBigMapGridInfo_default_instance_;
 class ReqBigMapInfoDefaultTypeInternal {
  public:
-  ::google::protobuf::internal::ExplicitlyConstructed<ReqBigMapInfo>
-      _instance;
+  ::PROTOBUF_NAMESPACE_ID::internal::ExplicitlyConstructed<ReqBigMapInfo> _instance;
 } _ReqBigMapInfo_default_instance_;
 class AckBigMapInfoDefaultTypeInternal {
  public:
-  ::google::protobuf::internal::ExplicitlyConstructed<AckBigMapInfo>
-      _instance;
+  ::PROTOBUF_NAMESPACE_ID::internal::ExplicitlyConstructed<AckBigMapInfo> _instance;
 } _AckBigMapInfo_default_instance_;
 class ReqHoldMapGridDefaultTypeInternal {
  public:
-  ::google::protobuf::internal::ExplicitlyConstructed<ReqHoldMapGrid>
-      _instance;
+  ::PROTOBUF_NAMESPACE_ID::internal::ExplicitlyConstructed<ReqHoldMapGrid> _instance;
 } _ReqHoldMapGrid_default_instance_;
 class AckHoldMapGridDefaultTypeInternal {
  public:
-  ::google::protobuf::internal::ExplicitlyConstructed<AckHoldMapGrid>
-      _instance;
+  ::PROTOBUF_NAMESPACE_ID::internal::ExplicitlyConstructed<AckHoldMapGrid> _instance;
 } _AckHoldMapGrid_default_instance_;
 class ReqLeaveMapMsgDefaultTypeInternal {
  public:
-  ::google::protobuf::internal::ExplicitlyConstructed<ReqLeaveMapMsg>
-      _instance;
+  ::PROTOBUF_NAMESPACE_ID::internal::ExplicitlyConstructed<ReqLeaveMapMsg> _instance;
 } _ReqLeaveMapMsg_default_instance_;
 class AckLeaveMapMsgDefaultTypeInternal {
  public:
-  ::google::protobuf::internal::ExplicitlyConstructed<AckLeaveMapMsg>
-      _instance;
+  ::PROTOBUF_NAMESPACE_ID::internal::ExplicitlyConstructed<AckLeaveMapMsg> _instance;
 } _AckLeaveMapMsg_default_instance_;
 class ReqGetMapAwardDefaultTypeInternal {
  public:
-  ::google::protobuf::internal::ExplicitlyConstructed<ReqGetMapAward>
-      _instance;
+  ::PROTOBUF_NAMESPACE_ID::internal::ExplicitlyConstructed<ReqGetMapAward> _instance;
 } _ReqGetMapAward_default_instance_;
 class AckGetMapAwardDefaultTypeInternal {
  public:
-  ::google::protobuf::internal::ExplicitlyConstructed<AckGetMapAward>
-      _instance;
+  ::PROTOBUF_NAMESPACE_ID::internal::ExplicitlyConstructed<AckGetMapAward> _instance;
 } _AckGetMapAward_default_instance_;
 class ReqMapHuntingDefaultTypeInternal {
  public:
-  ::google::protobuf::internal::ExplicitlyConstructed<ReqMapHunting>
-      _instance;
+  ::PROTOBUF_NAMESPACE_ID::internal::ExplicitlyConstructed<ReqMapHunting> _instance;
 } _ReqMapHunting_default_instance_;
 class AckMapHuntingDefaultTypeInternal {
  public:
-  ::google::protobuf::internal::ExplicitlyConstructed<AckMapHunting>
-      _instance;
+  ::PROTOBUF_NAMESPACE_ID::internal::ExplicitlyConstructed<AckMapHunting> _instance;
 } _AckMapHunting_default_instance_;
 class ReqMapKingWarDefaultTypeInternal {
  public:
-  ::google::protobuf::internal::ExplicitlyConstructed<ReqMapKingWar>
-      _instance;
+  ::PROTOBUF_NAMESPACE_ID::internal::ExplicitlyConstructed<ReqMapKingWar> _instance;
 } _ReqMapKingWar_default_instance_;
 class AckMapKingWarDefaultTypeInternal {
  public:
-  ::google::protobuf::internal::ExplicitlyConstructed<AckMapKingWar>
-      _instance;
+  ::PROTOBUF_NAMESPACE_ID::internal::ExplicitlyConstructed<AckMapKingWar> _instance;
 } _AckMapKingWar_default_instance_;
 }  // namespace NFMsg
-namespace protobuf_NFMsgExtra_2eproto {
-static void InitDefaultsReqAIOnwer() {
-  GOOGLE_PROTOBUF_VERIFY_VERSION;
-
-  {
-    void* ptr = &::NFMsg::_ReqAIOnwer_default_instance_;
-    new (ptr) ::NFMsg::ReqAIOnwer();
-    ::google::protobuf::internal::OnShutdownDestroyMessage(ptr);
-  }
-  ::NFMsg::ReqAIOnwer::InitAsDefaultInstance();
-}
-
-LIBPROTOC_EXPORT ::google::protobuf::internal::SCCInfo<1> scc_info_ReqAIOnwer =
-    {{ATOMIC_VAR_INIT(::google::protobuf::internal::SCCInfoBase::kUninitialized), 1, InitDefaultsReqAIOnwer}, {
-      &protobuf_NFMsgBase_2eproto::scc_info_Ident.base,}};
-
-static void InitDefaultsGridClanBaseInfo() {
-  GOOGLE_PROTOBUF_VERIFY_VERSION;
-
-  {
-    void* ptr = &::NFMsg::_GridClanBaseInfo_default_instance_;
-    new (ptr) ::NFMsg::GridClanBaseInfo();
-    ::google::protobuf::internal::OnShutdownDestroyMessage(ptr);
-  }
-  ::NFMsg::GridClanBaseInfo::InitAsDefaultInstance();
-}
-
-LIBPROTOC_EXPORT ::google::protobuf::internal::SCCInfo<1> scc_info_GridClanBaseInfo =
-    {{ATOMIC_VAR_INIT(::google::protobuf::internal::SCCInfoBase::kUninitialized), 1, InitDefaultsGridClanBaseInfo}, {
-      &protobuf_NFMsgBase_2eproto::scc_info_Ident.base,}};
-
-static void InitDefaultsReqBigMapGridInfo() {
-  GOOGLE_PROTOBUF_VERIFY_VERSION;
-
-  {
-    void* ptr = &::NFMsg::_ReqBigMapGridInfo_default_instance_;
-    new (ptr) ::NFMsg::ReqBigMapGridInfo();
-    ::google::protobuf::internal::OnShutdownDestroyMessage(ptr);
-  }
-  ::NFMsg::ReqBigMapGridInfo::InitAsDefaultInstance();
-}
-
-LIBPROTOC_EXPORT ::google::protobuf::internal::SCCInfo<0> scc_info_ReqBigMapGridInfo =
-    {{ATOMIC_VAR_INIT(::google::protobuf::internal::SCCInfoBase::kUninitialized), 0, InitDefaultsReqBigMapGridInfo}, {}};
-
-static void InitDefaultsBigMapGridBaseInfo() {
-  GOOGLE_PROTOBUF_VERIFY_VERSION;
-
-  {
-    void* ptr = &::NFMsg::_BigMapGridBaseInfo_default_instance_;
-    new (ptr) ::NFMsg::BigMapGridBaseInfo();
-    ::google::protobuf::internal::OnShutdownDestroyMessage(ptr);
-  }
-  ::NFMsg::BigMapGridBaseInfo::InitAsDefaultInstance();
-}
-
-LIBPROTOC_EXPORT ::google::protobuf::internal::SCCInfo<2> scc_info_BigMapGridBaseInfo =
-    {{ATOMIC_VAR_INIT(::google::protobuf::internal::SCCInfoBase::kUninitialized), 2, InitDefaultsBigMapGridBaseInfo}, {
-      &protobuf_NFMsgExtra_2eproto::scc_info_GridClanBaseInfo.base,
-      &protobuf_NFMsgBase_2eproto::scc_info_Ident.base,}};
-
-static void InitDefaultsBigMapLeaveMsg() {
-  GOOGLE_PROTOBUF_VERIFY_VERSION;
-
-  {
-    void* ptr = &::NFMsg::_BigMapLeaveMsg_default_instance_;
-    new (ptr) ::NFMsg::BigMapLeaveMsg();
-    ::google::protobuf::internal::OnShutdownDestroyMessage(ptr);
-  }
-  ::NFMsg::BigMapLeaveMsg::InitAsDefaultInstance();
-}
-
-LIBPROTOC_EXPORT ::google::protobuf::internal::SCCInfo<1> scc_info_BigMapLeaveMsg =
-    {{ATOMIC_VAR_INIT(::google::protobuf::internal::SCCInfoBase::kUninitialized), 1, InitDefaultsBigMapLeaveMsg}, {
-      &protobuf_NFMsgBase_2eproto::scc_info_Ident.base,}};
-
-static void InitDefaultsBigMapWarHistory() {
-  GOOGLE_PROTOBUF_VERIFY_VERSION;
-
-  {
-    void* ptr = &::NFMsg::_BigMapWarHistory_default_instance_;
-    new (ptr) ::NFMsg::BigMapWarHistory();
-    ::google::protobuf::internal::OnShutdownDestroyMessage(ptr);
-  }
-  ::NFMsg::BigMapWarHistory::InitAsDefaultInstance();
-}
-
-LIBPROTOC_EXPORT ::google::protobuf::internal::SCCInfo<2> scc_info_BigMapWarHistory =
-    {{ATOMIC_VAR_INIT(::google::protobuf::internal::SCCInfoBase::kUninitialized), 2, InitDefaultsBigMapWarHistory}, {
-      &protobuf_NFMsgExtra_2eproto::scc_info_GridClanBaseInfo.base,
-      &protobuf_NFMsgBase_2eproto::scc_info_Ident.base,}};
-
-static void InitDefaultsBigMapGridDetailInfo() {
-  GOOGLE_PROTOBUF_VERIFY_VERSION;
-
-  {
-    void* ptr = &::NFMsg::_BigMapGridDetailInfo_default_instance_;
-    new (ptr) ::NFMsg::BigMapGridDetailInfo();
-    ::google::protobuf::internal::OnShutdownDestroyMessage(ptr);
-  }
-  ::NFMsg::BigMapGridDetailInfo::InitAsDefaultInstance();
-}
-
-LIBPROTOC_EXPORT ::google::protobuf::internal::SCCInfo<4> scc_info_BigMapGridDetailInfo =
-    {{ATOMIC_VAR_INIT(::google::protobuf::internal::SCCInfoBase::kUninitialized), 4, InitDefaultsBigMapGridDetailInfo}, {
-      &protobuf_NFMsgExtra_2eproto::scc_info_BigMapGridBaseInfo.base,
-      &protobuf_NFMsgExtra_2eproto::scc_info_GridClanBaseInfo.base,
-      &protobuf_NFMsgExtra_2eproto::scc_info_BigMapLeaveMsg.base,
-      &protobuf_NFMsgExtra_2eproto::scc_info_BigMapWarHistory.base,}};
-
-static void InitDefaultsAckBigMapGridInfo() {
+static void InitDefaultsscc_info_AckBigMapGridInfo_NFMsgExtra_2eproto() {
   GOOGLE_PROTOBUF_VERIFY_VERSION;
 
   {
     void* ptr = &::NFMsg::_AckBigMapGridInfo_default_instance_;
     new (ptr) ::NFMsg::AckBigMapGridInfo();
-    ::google::protobuf::internal::OnShutdownDestroyMessage(ptr);
+    ::PROTOBUF_NAMESPACE_ID::internal::OnShutdownDestroyMessage(ptr);
   }
   ::NFMsg::AckBigMapGridInfo::InitAsDefaultInstance();
 }
 
-LIBPROTOC_EXPORT ::google::protobuf::internal::SCCInfo<1> scc_info_AckBigMapGridInfo =
-    {{ATOMIC_VAR_INIT(::google::protobuf::internal::SCCInfoBase::kUninitialized), 1, InitDefaultsAckBigMapGridInfo}, {
-      &protobuf_NFMsgExtra_2eproto::scc_info_BigMapGridDetailInfo.base,}};
+LIBPROTOC_EXPORT ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_AckBigMapGridInfo_NFMsgExtra_2eproto =
+    {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 1, 0, InitDefaultsscc_info_AckBigMapGridInfo_NFMsgExtra_2eproto}, {
+      &scc_info_BigMapGridDetailInfo_NFMsgExtra_2eproto.base,}};
 
-static void InitDefaultsReqBigMapInfo() {
-  GOOGLE_PROTOBUF_VERIFY_VERSION;
-
-  {
-    void* ptr = &::NFMsg::_ReqBigMapInfo_default_instance_;
-    new (ptr) ::NFMsg::ReqBigMapInfo();
-    ::google::protobuf::internal::OnShutdownDestroyMessage(ptr);
-  }
-  ::NFMsg::ReqBigMapInfo::InitAsDefaultInstance();
-}
-
-LIBPROTOC_EXPORT ::google::protobuf::internal::SCCInfo<0> scc_info_ReqBigMapInfo =
-    {{ATOMIC_VAR_INIT(::google::protobuf::internal::SCCInfoBase::kUninitialized), 0, InitDefaultsReqBigMapInfo}, {}};
-
-static void InitDefaultsAckBigMapInfo() {
+static void InitDefaultsscc_info_AckBigMapInfo_NFMsgExtra_2eproto() {
   GOOGLE_PROTOBUF_VERIFY_VERSION;
 
   {
     void* ptr = &::NFMsg::_AckBigMapInfo_default_instance_;
     new (ptr) ::NFMsg::AckBigMapInfo();
-    ::google::protobuf::internal::OnShutdownDestroyMessage(ptr);
+    ::PROTOBUF_NAMESPACE_ID::internal::OnShutdownDestroyMessage(ptr);
   }
   ::NFMsg::AckBigMapInfo::InitAsDefaultInstance();
 }
 
-LIBPROTOC_EXPORT ::google::protobuf::internal::SCCInfo<1> scc_info_AckBigMapInfo =
-    {{ATOMIC_VAR_INIT(::google::protobuf::internal::SCCInfoBase::kUninitialized), 1, InitDefaultsAckBigMapInfo}, {
-      &protobuf_NFMsgExtra_2eproto::scc_info_BigMapGridBaseInfo.base,}};
+LIBPROTOC_EXPORT ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_AckBigMapInfo_NFMsgExtra_2eproto =
+    {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 1, 0, InitDefaultsscc_info_AckBigMapInfo_NFMsgExtra_2eproto}, {
+      &scc_info_BigMapGridBaseInfo_NFMsgExtra_2eproto.base,}};
 
-static void InitDefaultsReqHoldMapGrid() {
-  GOOGLE_PROTOBUF_VERIFY_VERSION;
-
-  {
-    void* ptr = &::NFMsg::_ReqHoldMapGrid_default_instance_;
-    new (ptr) ::NFMsg::ReqHoldMapGrid();
-    ::google::protobuf::internal::OnShutdownDestroyMessage(ptr);
-  }
-  ::NFMsg::ReqHoldMapGrid::InitAsDefaultInstance();
-}
-
-LIBPROTOC_EXPORT ::google::protobuf::internal::SCCInfo<1> scc_info_ReqHoldMapGrid =
-    {{ATOMIC_VAR_INIT(::google::protobuf::internal::SCCInfoBase::kUninitialized), 1, InitDefaultsReqHoldMapGrid}, {
-      &protobuf_NFMsgBase_2eproto::scc_info_Ident.base,}};
-
-static void InitDefaultsAckHoldMapGrid() {
-  GOOGLE_PROTOBUF_VERIFY_VERSION;
-
-  {
-    void* ptr = &::NFMsg::_AckHoldMapGrid_default_instance_;
-    new (ptr) ::NFMsg::AckHoldMapGrid();
-    ::google::protobuf::internal::OnShutdownDestroyMessage(ptr);
-  }
-  ::NFMsg::AckHoldMapGrid::InitAsDefaultInstance();
-}
-
-LIBPROTOC_EXPORT ::google::protobuf::internal::SCCInfo<0> scc_info_AckHoldMapGrid =
-    {{ATOMIC_VAR_INIT(::google::protobuf::internal::SCCInfoBase::kUninitialized), 0, InitDefaultsAckHoldMapGrid}, {}};
-
-static void InitDefaultsReqLeaveMapMsg() {
-  GOOGLE_PROTOBUF_VERIFY_VERSION;
-
-  {
-    void* ptr = &::NFMsg::_ReqLeaveMapMsg_default_instance_;
-    new (ptr) ::NFMsg::ReqLeaveMapMsg();
-    ::google::protobuf::internal::OnShutdownDestroyMessage(ptr);
-  }
-  ::NFMsg::ReqLeaveMapMsg::InitAsDefaultInstance();
-}
-
-LIBPROTOC_EXPORT ::google::protobuf::internal::SCCInfo<1> scc_info_ReqLeaveMapMsg =
-    {{ATOMIC_VAR_INIT(::google::protobuf::internal::SCCInfoBase::kUninitialized), 1, InitDefaultsReqLeaveMapMsg}, {
-      &protobuf_NFMsgExtra_2eproto::scc_info_BigMapLeaveMsg.base,}};
-
-static void InitDefaultsAckLeaveMapMsg() {
-  GOOGLE_PROTOBUF_VERIFY_VERSION;
-
-  {
-    void* ptr = &::NFMsg::_AckLeaveMapMsg_default_instance_;
-    new (ptr) ::NFMsg::AckLeaveMapMsg();
-    ::google::protobuf::internal::OnShutdownDestroyMessage(ptr);
-  }
-  ::NFMsg::AckLeaveMapMsg::InitAsDefaultInstance();
-}
-
-LIBPROTOC_EXPORT ::google::protobuf::internal::SCCInfo<0> scc_info_AckLeaveMapMsg =
-    {{ATOMIC_VAR_INIT(::google::protobuf::internal::SCCInfoBase::kUninitialized), 0, InitDefaultsAckLeaveMapMsg}, {}};
-
-static void InitDefaultsReqGetMapAward() {
-  GOOGLE_PROTOBUF_VERIFY_VERSION;
-
-  {
-    void* ptr = &::NFMsg::_ReqGetMapAward_default_instance_;
-    new (ptr) ::NFMsg::ReqGetMapAward();
-    ::google::protobuf::internal::OnShutdownDestroyMessage(ptr);
-  }
-  ::NFMsg::ReqGetMapAward::InitAsDefaultInstance();
-}
-
-LIBPROTOC_EXPORT ::google::protobuf::internal::SCCInfo<0> scc_info_ReqGetMapAward =
-    {{ATOMIC_VAR_INIT(::google::protobuf::internal::SCCInfoBase::kUninitialized), 0, InitDefaultsReqGetMapAward}, {}};
-
-static void InitDefaultsAckGetMapAward() {
+static void InitDefaultsscc_info_AckGetMapAward_NFMsgExtra_2eproto() {
   GOOGLE_PROTOBUF_VERIFY_VERSION;
 
   {
     void* ptr = &::NFMsg::_AckGetMapAward_default_instance_;
     new (ptr) ::NFMsg::AckGetMapAward();
-    ::google::protobuf::internal::OnShutdownDestroyMessage(ptr);
+    ::PROTOBUF_NAMESPACE_ID::internal::OnShutdownDestroyMessage(ptr);
   }
   ::NFMsg::AckGetMapAward::InitAsDefaultInstance();
 }
 
-LIBPROTOC_EXPORT ::google::protobuf::internal::SCCInfo<0> scc_info_AckGetMapAward =
-    {{ATOMIC_VAR_INIT(::google::protobuf::internal::SCCInfoBase::kUninitialized), 0, InitDefaultsAckGetMapAward}, {}};
+LIBPROTOC_EXPORT ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_AckGetMapAward_NFMsgExtra_2eproto =
+    {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 0, 0, InitDefaultsscc_info_AckGetMapAward_NFMsgExtra_2eproto}, {}};
 
-static void InitDefaultsReqMapHunting() {
+static void InitDefaultsscc_info_AckHoldMapGrid_NFMsgExtra_2eproto() {
   GOOGLE_PROTOBUF_VERIFY_VERSION;
 
   {
-    void* ptr = &::NFMsg::_ReqMapHunting_default_instance_;
-    new (ptr) ::NFMsg::ReqMapHunting();
-    ::google::protobuf::internal::OnShutdownDestroyMessage(ptr);
+    void* ptr = &::NFMsg::_AckHoldMapGrid_default_instance_;
+    new (ptr) ::NFMsg::AckHoldMapGrid();
+    ::PROTOBUF_NAMESPACE_ID::internal::OnShutdownDestroyMessage(ptr);
   }
-  ::NFMsg::ReqMapHunting::InitAsDefaultInstance();
+  ::NFMsg::AckHoldMapGrid::InitAsDefaultInstance();
 }
 
-LIBPROTOC_EXPORT ::google::protobuf::internal::SCCInfo<0> scc_info_ReqMapHunting =
-    {{ATOMIC_VAR_INIT(::google::protobuf::internal::SCCInfoBase::kUninitialized), 0, InitDefaultsReqMapHunting}, {}};
+LIBPROTOC_EXPORT ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_AckHoldMapGrid_NFMsgExtra_2eproto =
+    {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 0, 0, InitDefaultsscc_info_AckHoldMapGrid_NFMsgExtra_2eproto}, {}};
 
-static void InitDefaultsAckMapHunting() {
+static void InitDefaultsscc_info_AckLeaveMapMsg_NFMsgExtra_2eproto() {
+  GOOGLE_PROTOBUF_VERIFY_VERSION;
+
+  {
+    void* ptr = &::NFMsg::_AckLeaveMapMsg_default_instance_;
+    new (ptr) ::NFMsg::AckLeaveMapMsg();
+    ::PROTOBUF_NAMESPACE_ID::internal::OnShutdownDestroyMessage(ptr);
+  }
+  ::NFMsg::AckLeaveMapMsg::InitAsDefaultInstance();
+}
+
+LIBPROTOC_EXPORT ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_AckLeaveMapMsg_NFMsgExtra_2eproto =
+    {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 0, 0, InitDefaultsscc_info_AckLeaveMapMsg_NFMsgExtra_2eproto}, {}};
+
+static void InitDefaultsscc_info_AckMapHunting_NFMsgExtra_2eproto() {
   GOOGLE_PROTOBUF_VERIFY_VERSION;
 
   {
     void* ptr = &::NFMsg::_AckMapHunting_default_instance_;
     new (ptr) ::NFMsg::AckMapHunting();
-    ::google::protobuf::internal::OnShutdownDestroyMessage(ptr);
+    ::PROTOBUF_NAMESPACE_ID::internal::OnShutdownDestroyMessage(ptr);
   }
   ::NFMsg::AckMapHunting::InitAsDefaultInstance();
 }
 
-LIBPROTOC_EXPORT ::google::protobuf::internal::SCCInfo<0> scc_info_AckMapHunting =
-    {{ATOMIC_VAR_INIT(::google::protobuf::internal::SCCInfoBase::kUninitialized), 0, InitDefaultsAckMapHunting}, {}};
+LIBPROTOC_EXPORT ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_AckMapHunting_NFMsgExtra_2eproto =
+    {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 0, 0, InitDefaultsscc_info_AckMapHunting_NFMsgExtra_2eproto}, {}};
 
-static void InitDefaultsReqMapKingWar() {
-  GOOGLE_PROTOBUF_VERIFY_VERSION;
-
-  {
-    void* ptr = &::NFMsg::_ReqMapKingWar_default_instance_;
-    new (ptr) ::NFMsg::ReqMapKingWar();
-    ::google::protobuf::internal::OnShutdownDestroyMessage(ptr);
-  }
-  ::NFMsg::ReqMapKingWar::InitAsDefaultInstance();
-}
-
-LIBPROTOC_EXPORT ::google::protobuf::internal::SCCInfo<0> scc_info_ReqMapKingWar =
-    {{ATOMIC_VAR_INIT(::google::protobuf::internal::SCCInfoBase::kUninitialized), 0, InitDefaultsReqMapKingWar}, {}};
-
-static void InitDefaultsAckMapKingWar() {
+static void InitDefaultsscc_info_AckMapKingWar_NFMsgExtra_2eproto() {
   GOOGLE_PROTOBUF_VERIFY_VERSION;
 
   {
     void* ptr = &::NFMsg::_AckMapKingWar_default_instance_;
     new (ptr) ::NFMsg::AckMapKingWar();
-    ::google::protobuf::internal::OnShutdownDestroyMessage(ptr);
+    ::PROTOBUF_NAMESPACE_ID::internal::OnShutdownDestroyMessage(ptr);
   }
   ::NFMsg::AckMapKingWar::InitAsDefaultInstance();
 }
 
-LIBPROTOC_EXPORT ::google::protobuf::internal::SCCInfo<0> scc_info_AckMapKingWar =
-    {{ATOMIC_VAR_INIT(::google::protobuf::internal::SCCInfoBase::kUninitialized), 0, InitDefaultsAckMapKingWar}, {}};
+LIBPROTOC_EXPORT ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_AckMapKingWar_NFMsgExtra_2eproto =
+    {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 0, 0, InitDefaultsscc_info_AckMapKingWar_NFMsgExtra_2eproto}, {}};
 
-void InitDefaults() {
-  ::google::protobuf::internal::InitSCC(&scc_info_ReqAIOnwer.base);
-  ::google::protobuf::internal::InitSCC(&scc_info_GridClanBaseInfo.base);
-  ::google::protobuf::internal::InitSCC(&scc_info_ReqBigMapGridInfo.base);
-  ::google::protobuf::internal::InitSCC(&scc_info_BigMapGridBaseInfo.base);
-  ::google::protobuf::internal::InitSCC(&scc_info_BigMapLeaveMsg.base);
-  ::google::protobuf::internal::InitSCC(&scc_info_BigMapWarHistory.base);
-  ::google::protobuf::internal::InitSCC(&scc_info_BigMapGridDetailInfo.base);
-  ::google::protobuf::internal::InitSCC(&scc_info_AckBigMapGridInfo.base);
-  ::google::protobuf::internal::InitSCC(&scc_info_ReqBigMapInfo.base);
-  ::google::protobuf::internal::InitSCC(&scc_info_AckBigMapInfo.base);
-  ::google::protobuf::internal::InitSCC(&scc_info_ReqHoldMapGrid.base);
-  ::google::protobuf::internal::InitSCC(&scc_info_AckHoldMapGrid.base);
-  ::google::protobuf::internal::InitSCC(&scc_info_ReqLeaveMapMsg.base);
-  ::google::protobuf::internal::InitSCC(&scc_info_AckLeaveMapMsg.base);
-  ::google::protobuf::internal::InitSCC(&scc_info_ReqGetMapAward.base);
-  ::google::protobuf::internal::InitSCC(&scc_info_AckGetMapAward.base);
-  ::google::protobuf::internal::InitSCC(&scc_info_ReqMapHunting.base);
-  ::google::protobuf::internal::InitSCC(&scc_info_AckMapHunting.base);
-  ::google::protobuf::internal::InitSCC(&scc_info_ReqMapKingWar.base);
-  ::google::protobuf::internal::InitSCC(&scc_info_AckMapKingWar.base);
+static void InitDefaultsscc_info_BigMapGridBaseInfo_NFMsgExtra_2eproto() {
+  GOOGLE_PROTOBUF_VERIFY_VERSION;
+
+  {
+    void* ptr = &::NFMsg::_BigMapGridBaseInfo_default_instance_;
+    new (ptr) ::NFMsg::BigMapGridBaseInfo();
+    ::PROTOBUF_NAMESPACE_ID::internal::OnShutdownDestroyMessage(ptr);
+  }
+  ::NFMsg::BigMapGridBaseInfo::InitAsDefaultInstance();
 }
 
-::google::protobuf::Metadata file_level_metadata[20];
+LIBPROTOC_EXPORT ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<2> scc_info_BigMapGridBaseInfo_NFMsgExtra_2eproto =
+    {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 2, 0, InitDefaultsscc_info_BigMapGridBaseInfo_NFMsgExtra_2eproto}, {
+      &scc_info_GridClanBaseInfo_NFMsgExtra_2eproto.base,
+      &scc_info_Ident_NFMsgBase_2eproto.base,}};
 
-const ::google::protobuf::uint32 TableStruct::offsets[] GOOGLE_PROTOBUF_ATTRIBUTE_SECTION_VARIABLE(protodesc_cold) = {
+static void InitDefaultsscc_info_BigMapGridDetailInfo_NFMsgExtra_2eproto() {
+  GOOGLE_PROTOBUF_VERIFY_VERSION;
+
+  {
+    void* ptr = &::NFMsg::_BigMapGridDetailInfo_default_instance_;
+    new (ptr) ::NFMsg::BigMapGridDetailInfo();
+    ::PROTOBUF_NAMESPACE_ID::internal::OnShutdownDestroyMessage(ptr);
+  }
+  ::NFMsg::BigMapGridDetailInfo::InitAsDefaultInstance();
+}
+
+LIBPROTOC_EXPORT ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<4> scc_info_BigMapGridDetailInfo_NFMsgExtra_2eproto =
+    {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 4, 0, InitDefaultsscc_info_BigMapGridDetailInfo_NFMsgExtra_2eproto}, {
+      &scc_info_BigMapGridBaseInfo_NFMsgExtra_2eproto.base,
+      &scc_info_GridClanBaseInfo_NFMsgExtra_2eproto.base,
+      &scc_info_BigMapLeaveMsg_NFMsgExtra_2eproto.base,
+      &scc_info_BigMapWarHistory_NFMsgExtra_2eproto.base,}};
+
+static void InitDefaultsscc_info_BigMapLeaveMsg_NFMsgExtra_2eproto() {
+  GOOGLE_PROTOBUF_VERIFY_VERSION;
+
+  {
+    void* ptr = &::NFMsg::_BigMapLeaveMsg_default_instance_;
+    new (ptr) ::NFMsg::BigMapLeaveMsg();
+    ::PROTOBUF_NAMESPACE_ID::internal::OnShutdownDestroyMessage(ptr);
+  }
+  ::NFMsg::BigMapLeaveMsg::InitAsDefaultInstance();
+}
+
+LIBPROTOC_EXPORT ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_BigMapLeaveMsg_NFMsgExtra_2eproto =
+    {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 1, 0, InitDefaultsscc_info_BigMapLeaveMsg_NFMsgExtra_2eproto}, {
+      &scc_info_Ident_NFMsgBase_2eproto.base,}};
+
+static void InitDefaultsscc_info_BigMapWarHistory_NFMsgExtra_2eproto() {
+  GOOGLE_PROTOBUF_VERIFY_VERSION;
+
+  {
+    void* ptr = &::NFMsg::_BigMapWarHistory_default_instance_;
+    new (ptr) ::NFMsg::BigMapWarHistory();
+    ::PROTOBUF_NAMESPACE_ID::internal::OnShutdownDestroyMessage(ptr);
+  }
+  ::NFMsg::BigMapWarHistory::InitAsDefaultInstance();
+}
+
+LIBPROTOC_EXPORT ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<2> scc_info_BigMapWarHistory_NFMsgExtra_2eproto =
+    {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 2, 0, InitDefaultsscc_info_BigMapWarHistory_NFMsgExtra_2eproto}, {
+      &scc_info_GridClanBaseInfo_NFMsgExtra_2eproto.base,
+      &scc_info_Ident_NFMsgBase_2eproto.base,}};
+
+static void InitDefaultsscc_info_GridClanBaseInfo_NFMsgExtra_2eproto() {
+  GOOGLE_PROTOBUF_VERIFY_VERSION;
+
+  {
+    void* ptr = &::NFMsg::_GridClanBaseInfo_default_instance_;
+    new (ptr) ::NFMsg::GridClanBaseInfo();
+    ::PROTOBUF_NAMESPACE_ID::internal::OnShutdownDestroyMessage(ptr);
+  }
+  ::NFMsg::GridClanBaseInfo::InitAsDefaultInstance();
+}
+
+LIBPROTOC_EXPORT ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_GridClanBaseInfo_NFMsgExtra_2eproto =
+    {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 1, 0, InitDefaultsscc_info_GridClanBaseInfo_NFMsgExtra_2eproto}, {
+      &scc_info_Ident_NFMsgBase_2eproto.base,}};
+
+static void InitDefaultsscc_info_ReqAIOnwer_NFMsgExtra_2eproto() {
+  GOOGLE_PROTOBUF_VERIFY_VERSION;
+
+  {
+    void* ptr = &::NFMsg::_ReqAIOnwer_default_instance_;
+    new (ptr) ::NFMsg::ReqAIOnwer();
+    ::PROTOBUF_NAMESPACE_ID::internal::OnShutdownDestroyMessage(ptr);
+  }
+  ::NFMsg::ReqAIOnwer::InitAsDefaultInstance();
+}
+
+LIBPROTOC_EXPORT ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_ReqAIOnwer_NFMsgExtra_2eproto =
+    {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 1, 0, InitDefaultsscc_info_ReqAIOnwer_NFMsgExtra_2eproto}, {
+      &scc_info_Ident_NFMsgBase_2eproto.base,}};
+
+static void InitDefaultsscc_info_ReqBigMapGridInfo_NFMsgExtra_2eproto() {
+  GOOGLE_PROTOBUF_VERIFY_VERSION;
+
+  {
+    void* ptr = &::NFMsg::_ReqBigMapGridInfo_default_instance_;
+    new (ptr) ::NFMsg::ReqBigMapGridInfo();
+    ::PROTOBUF_NAMESPACE_ID::internal::OnShutdownDestroyMessage(ptr);
+  }
+  ::NFMsg::ReqBigMapGridInfo::InitAsDefaultInstance();
+}
+
+LIBPROTOC_EXPORT ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_ReqBigMapGridInfo_NFMsgExtra_2eproto =
+    {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 0, 0, InitDefaultsscc_info_ReqBigMapGridInfo_NFMsgExtra_2eproto}, {}};
+
+static void InitDefaultsscc_info_ReqBigMapInfo_NFMsgExtra_2eproto() {
+  GOOGLE_PROTOBUF_VERIFY_VERSION;
+
+  {
+    void* ptr = &::NFMsg::_ReqBigMapInfo_default_instance_;
+    new (ptr) ::NFMsg::ReqBigMapInfo();
+    ::PROTOBUF_NAMESPACE_ID::internal::OnShutdownDestroyMessage(ptr);
+  }
+  ::NFMsg::ReqBigMapInfo::InitAsDefaultInstance();
+}
+
+LIBPROTOC_EXPORT ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_ReqBigMapInfo_NFMsgExtra_2eproto =
+    {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 0, 0, InitDefaultsscc_info_ReqBigMapInfo_NFMsgExtra_2eproto}, {}};
+
+static void InitDefaultsscc_info_ReqGetMapAward_NFMsgExtra_2eproto() {
+  GOOGLE_PROTOBUF_VERIFY_VERSION;
+
+  {
+    void* ptr = &::NFMsg::_ReqGetMapAward_default_instance_;
+    new (ptr) ::NFMsg::ReqGetMapAward();
+    ::PROTOBUF_NAMESPACE_ID::internal::OnShutdownDestroyMessage(ptr);
+  }
+  ::NFMsg::ReqGetMapAward::InitAsDefaultInstance();
+}
+
+LIBPROTOC_EXPORT ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_ReqGetMapAward_NFMsgExtra_2eproto =
+    {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 0, 0, InitDefaultsscc_info_ReqGetMapAward_NFMsgExtra_2eproto}, {}};
+
+static void InitDefaultsscc_info_ReqHoldMapGrid_NFMsgExtra_2eproto() {
+  GOOGLE_PROTOBUF_VERIFY_VERSION;
+
+  {
+    void* ptr = &::NFMsg::_ReqHoldMapGrid_default_instance_;
+    new (ptr) ::NFMsg::ReqHoldMapGrid();
+    ::PROTOBUF_NAMESPACE_ID::internal::OnShutdownDestroyMessage(ptr);
+  }
+  ::NFMsg::ReqHoldMapGrid::InitAsDefaultInstance();
+}
+
+LIBPROTOC_EXPORT ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_ReqHoldMapGrid_NFMsgExtra_2eproto =
+    {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 1, 0, InitDefaultsscc_info_ReqHoldMapGrid_NFMsgExtra_2eproto}, {
+      &scc_info_Ident_NFMsgBase_2eproto.base,}};
+
+static void InitDefaultsscc_info_ReqLeaveMapMsg_NFMsgExtra_2eproto() {
+  GOOGLE_PROTOBUF_VERIFY_VERSION;
+
+  {
+    void* ptr = &::NFMsg::_ReqLeaveMapMsg_default_instance_;
+    new (ptr) ::NFMsg::ReqLeaveMapMsg();
+    ::PROTOBUF_NAMESPACE_ID::internal::OnShutdownDestroyMessage(ptr);
+  }
+  ::NFMsg::ReqLeaveMapMsg::InitAsDefaultInstance();
+}
+
+LIBPROTOC_EXPORT ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_ReqLeaveMapMsg_NFMsgExtra_2eproto =
+    {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 1, 0, InitDefaultsscc_info_ReqLeaveMapMsg_NFMsgExtra_2eproto}, {
+      &scc_info_BigMapLeaveMsg_NFMsgExtra_2eproto.base,}};
+
+static void InitDefaultsscc_info_ReqMapHunting_NFMsgExtra_2eproto() {
+  GOOGLE_PROTOBUF_VERIFY_VERSION;
+
+  {
+    void* ptr = &::NFMsg::_ReqMapHunting_default_instance_;
+    new (ptr) ::NFMsg::ReqMapHunting();
+    ::PROTOBUF_NAMESPACE_ID::internal::OnShutdownDestroyMessage(ptr);
+  }
+  ::NFMsg::ReqMapHunting::InitAsDefaultInstance();
+}
+
+LIBPROTOC_EXPORT ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_ReqMapHunting_NFMsgExtra_2eproto =
+    {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 0, 0, InitDefaultsscc_info_ReqMapHunting_NFMsgExtra_2eproto}, {}};
+
+static void InitDefaultsscc_info_ReqMapKingWar_NFMsgExtra_2eproto() {
+  GOOGLE_PROTOBUF_VERIFY_VERSION;
+
+  {
+    void* ptr = &::NFMsg::_ReqMapKingWar_default_instance_;
+    new (ptr) ::NFMsg::ReqMapKingWar();
+    ::PROTOBUF_NAMESPACE_ID::internal::OnShutdownDestroyMessage(ptr);
+  }
+  ::NFMsg::ReqMapKingWar::InitAsDefaultInstance();
+}
+
+LIBPROTOC_EXPORT ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_ReqMapKingWar_NFMsgExtra_2eproto =
+    {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 0, 0, InitDefaultsscc_info_ReqMapKingWar_NFMsgExtra_2eproto}, {}};
+
+static ::PROTOBUF_NAMESPACE_ID::Metadata file_level_metadata_NFMsgExtra_2eproto[20];
+static constexpr ::PROTOBUF_NAMESPACE_ID::EnumDescriptor const** file_level_enum_descriptors_NFMsgExtra_2eproto = nullptr;
+static constexpr ::PROTOBUF_NAMESPACE_ID::ServiceDescriptor const** file_level_service_descriptors_NFMsgExtra_2eproto = nullptr;
+
+const ::PROTOBUF_NAMESPACE_ID::uint32 TableStruct_NFMsgExtra_2eproto::offsets[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) = {
   ~0u,  // no _has_bits_
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NFMsg::ReqAIOnwer, _internal_metadata_),
+  PROTOBUF_FIELD_OFFSET(::NFMsg::ReqAIOnwer, _internal_metadata_),
   ~0u,  // no _extensions_
   ~0u,  // no _oneof_case_
   ~0u,  // no _weak_field_map_
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NFMsg::ReqAIOnwer, ai_id_),
+  PROTOBUF_FIELD_OFFSET(::NFMsg::ReqAIOnwer, ai_id_),
   ~0u,  // no _has_bits_
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NFMsg::GridClanBaseInfo, _internal_metadata_),
+  PROTOBUF_FIELD_OFFSET(::NFMsg::GridClanBaseInfo, _internal_metadata_),
   ~0u,  // no _extensions_
   ~0u,  // no _oneof_case_
   ~0u,  // no _weak_field_map_
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NFMsg::GridClanBaseInfo, id_),
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NFMsg::GridClanBaseInfo, level_),
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NFMsg::GridClanBaseInfo, count_),
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NFMsg::GridClanBaseInfo, resource_),
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NFMsg::GridClanBaseInfo, icon_),
+  PROTOBUF_FIELD_OFFSET(::NFMsg::GridClanBaseInfo, id_),
+  PROTOBUF_FIELD_OFFSET(::NFMsg::GridClanBaseInfo, level_),
+  PROTOBUF_FIELD_OFFSET(::NFMsg::GridClanBaseInfo, count_),
+  PROTOBUF_FIELD_OFFSET(::NFMsg::GridClanBaseInfo, resource_),
+  PROTOBUF_FIELD_OFFSET(::NFMsg::GridClanBaseInfo, icon_),
   ~0u,  // no _has_bits_
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NFMsg::ReqBigMapGridInfo, _internal_metadata_),
+  PROTOBUF_FIELD_OFFSET(::NFMsg::ReqBigMapGridInfo, _internal_metadata_),
   ~0u,  // no _extensions_
   ~0u,  // no _oneof_case_
   ~0u,  // no _weak_field_map_
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NFMsg::ReqBigMapGridInfo, map_title_id_),
+  PROTOBUF_FIELD_OFFSET(::NFMsg::ReqBigMapGridInfo, map_title_id_),
   ~0u,  // no _has_bits_
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NFMsg::BigMapGridBaseInfo, _internal_metadata_),
+  PROTOBUF_FIELD_OFFSET(::NFMsg::BigMapGridBaseInfo, _internal_metadata_),
   ~0u,  // no _extensions_
   ~0u,  // no _oneof_case_
   ~0u,  // no _weak_field_map_
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NFMsg::BigMapGridBaseInfo, id_),
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NFMsg::BigMapGridBaseInfo, guild_info_),
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NFMsg::BigMapGridBaseInfo, kingwar_time_),
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NFMsg::BigMapGridBaseInfo, kingwarrer_),
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NFMsg::BigMapGridBaseInfo, hurting_time_),
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NFMsg::BigMapGridBaseInfo, hurter_),
+  PROTOBUF_FIELD_OFFSET(::NFMsg::BigMapGridBaseInfo, id_),
+  PROTOBUF_FIELD_OFFSET(::NFMsg::BigMapGridBaseInfo, guild_info_),
+  PROTOBUF_FIELD_OFFSET(::NFMsg::BigMapGridBaseInfo, kingwar_time_),
+  PROTOBUF_FIELD_OFFSET(::NFMsg::BigMapGridBaseInfo, kingwarrer_),
+  PROTOBUF_FIELD_OFFSET(::NFMsg::BigMapGridBaseInfo, hurting_time_),
+  PROTOBUF_FIELD_OFFSET(::NFMsg::BigMapGridBaseInfo, hurter_),
   ~0u,  // no _has_bits_
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NFMsg::BigMapLeaveMsg, _internal_metadata_),
+  PROTOBUF_FIELD_OFFSET(::NFMsg::BigMapLeaveMsg, _internal_metadata_),
   ~0u,  // no _extensions_
   ~0u,  // no _oneof_case_
   ~0u,  // no _weak_field_map_
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NFMsg::BigMapLeaveMsg, owner_),
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NFMsg::BigMapLeaveMsg, owner_name_),
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NFMsg::BigMapLeaveMsg, msg_data_),
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NFMsg::BigMapLeaveMsg, msg_time_),
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NFMsg::BigMapLeaveMsg, owner_level_),
+  PROTOBUF_FIELD_OFFSET(::NFMsg::BigMapLeaveMsg, owner_),
+  PROTOBUF_FIELD_OFFSET(::NFMsg::BigMapLeaveMsg, owner_name_),
+  PROTOBUF_FIELD_OFFSET(::NFMsg::BigMapLeaveMsg, msg_data_),
+  PROTOBUF_FIELD_OFFSET(::NFMsg::BigMapLeaveMsg, msg_time_),
+  PROTOBUF_FIELD_OFFSET(::NFMsg::BigMapLeaveMsg, owner_level_),
   ~0u,  // no _has_bits_
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NFMsg::BigMapWarHistory, _internal_metadata_),
+  PROTOBUF_FIELD_OFFSET(::NFMsg::BigMapWarHistory, _internal_metadata_),
   ~0u,  // no _extensions_
   ~0u,  // no _oneof_case_
   ~0u,  // no _weak_field_map_
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NFMsg::BigMapWarHistory, red_info_),
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NFMsg::BigMapWarHistory, blue_info_),
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NFMsg::BigMapWarHistory, winner_id_),
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NFMsg::BigMapWarHistory, war_time_),
+  PROTOBUF_FIELD_OFFSET(::NFMsg::BigMapWarHistory, red_info_),
+  PROTOBUF_FIELD_OFFSET(::NFMsg::BigMapWarHistory, blue_info_),
+  PROTOBUF_FIELD_OFFSET(::NFMsg::BigMapWarHistory, winner_id_),
+  PROTOBUF_FIELD_OFFSET(::NFMsg::BigMapWarHistory, war_time_),
   ~0u,  // no _has_bits_
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NFMsg::BigMapGridDetailInfo, _internal_metadata_),
+  PROTOBUF_FIELD_OFFSET(::NFMsg::BigMapGridDetailInfo, _internal_metadata_),
   ~0u,  // no _extensions_
   ~0u,  // no _oneof_case_
   ~0u,  // no _weak_field_map_
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NFMsg::BigMapGridDetailInfo, grid_base_info_),
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NFMsg::BigMapGridDetailInfo, stay_guid_list_),
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NFMsg::BigMapGridDetailInfo, leave_msg_),
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NFMsg::BigMapGridDetailInfo, war_history_),
+  PROTOBUF_FIELD_OFFSET(::NFMsg::BigMapGridDetailInfo, grid_base_info_),
+  PROTOBUF_FIELD_OFFSET(::NFMsg::BigMapGridDetailInfo, stay_guid_list_),
+  PROTOBUF_FIELD_OFFSET(::NFMsg::BigMapGridDetailInfo, leave_msg_),
+  PROTOBUF_FIELD_OFFSET(::NFMsg::BigMapGridDetailInfo, war_history_),
   ~0u,  // no _has_bits_
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NFMsg::AckBigMapGridInfo, _internal_metadata_),
+  PROTOBUF_FIELD_OFFSET(::NFMsg::AckBigMapGridInfo, _internal_metadata_),
   ~0u,  // no _extensions_
   ~0u,  // no _oneof_case_
   ~0u,  // no _weak_field_map_
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NFMsg::AckBigMapGridInfo, map_data_),
+  PROTOBUF_FIELD_OFFSET(::NFMsg::AckBigMapGridInfo, map_data_),
   ~0u,  // no _has_bits_
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NFMsg::ReqBigMapInfo, _internal_metadata_),
-  ~0u,  // no _extensions_
-  ~0u,  // no _oneof_case_
-  ~0u,  // no _weak_field_map_
-  ~0u,  // no _has_bits_
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NFMsg::AckBigMapInfo, _internal_metadata_),
-  ~0u,  // no _extensions_
-  ~0u,  // no _oneof_case_
-  ~0u,  // no _weak_field_map_
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NFMsg::AckBigMapInfo, grid_base_info_),
-  ~0u,  // no _has_bits_
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NFMsg::ReqHoldMapGrid, _internal_metadata_),
-  ~0u,  // no _extensions_
-  ~0u,  // no _oneof_case_
-  ~0u,  // no _weak_field_map_
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NFMsg::ReqHoldMapGrid, map_title_id_),
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NFMsg::ReqHoldMapGrid, guild_id_),
-  ~0u,  // no _has_bits_
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NFMsg::AckHoldMapGrid, _internal_metadata_),
+  PROTOBUF_FIELD_OFFSET(::NFMsg::ReqBigMapInfo, _internal_metadata_),
   ~0u,  // no _extensions_
   ~0u,  // no _oneof_case_
   ~0u,  // no _weak_field_map_
   ~0u,  // no _has_bits_
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NFMsg::ReqLeaveMapMsg, _internal_metadata_),
+  PROTOBUF_FIELD_OFFSET(::NFMsg::AckBigMapInfo, _internal_metadata_),
   ~0u,  // no _extensions_
   ~0u,  // no _oneof_case_
   ~0u,  // no _weak_field_map_
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NFMsg::ReqLeaveMapMsg, map_title_id_),
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NFMsg::ReqLeaveMapMsg, leave_msg_),
+  PROTOBUF_FIELD_OFFSET(::NFMsg::AckBigMapInfo, grid_base_info_),
   ~0u,  // no _has_bits_
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NFMsg::AckLeaveMapMsg, _internal_metadata_),
+  PROTOBUF_FIELD_OFFSET(::NFMsg::ReqHoldMapGrid, _internal_metadata_),
   ~0u,  // no _extensions_
   ~0u,  // no _oneof_case_
   ~0u,  // no _weak_field_map_
+  PROTOBUF_FIELD_OFFSET(::NFMsg::ReqHoldMapGrid, map_title_id_),
+  PROTOBUF_FIELD_OFFSET(::NFMsg::ReqHoldMapGrid, guild_id_),
   ~0u,  // no _has_bits_
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NFMsg::ReqGetMapAward, _internal_metadata_),
-  ~0u,  // no _extensions_
-  ~0u,  // no _oneof_case_
-  ~0u,  // no _weak_field_map_
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NFMsg::ReqGetMapAward, map_title_id_),
-  ~0u,  // no _has_bits_
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NFMsg::AckGetMapAward, _internal_metadata_),
+  PROTOBUF_FIELD_OFFSET(::NFMsg::AckHoldMapGrid, _internal_metadata_),
   ~0u,  // no _extensions_
   ~0u,  // no _oneof_case_
   ~0u,  // no _weak_field_map_
   ~0u,  // no _has_bits_
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NFMsg::ReqMapHunting, _internal_metadata_),
+  PROTOBUF_FIELD_OFFSET(::NFMsg::ReqLeaveMapMsg, _internal_metadata_),
   ~0u,  // no _extensions_
   ~0u,  // no _oneof_case_
   ~0u,  // no _weak_field_map_
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NFMsg::ReqMapHunting, map_title_id_),
+  PROTOBUF_FIELD_OFFSET(::NFMsg::ReqLeaveMapMsg, map_title_id_),
+  PROTOBUF_FIELD_OFFSET(::NFMsg::ReqLeaveMapMsg, leave_msg_),
   ~0u,  // no _has_bits_
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NFMsg::AckMapHunting, _internal_metadata_),
+  PROTOBUF_FIELD_OFFSET(::NFMsg::AckLeaveMapMsg, _internal_metadata_),
   ~0u,  // no _extensions_
   ~0u,  // no _oneof_case_
   ~0u,  // no _weak_field_map_
   ~0u,  // no _has_bits_
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NFMsg::ReqMapKingWar, _internal_metadata_),
+  PROTOBUF_FIELD_OFFSET(::NFMsg::ReqGetMapAward, _internal_metadata_),
   ~0u,  // no _extensions_
   ~0u,  // no _oneof_case_
   ~0u,  // no _weak_field_map_
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NFMsg::ReqMapKingWar, map_title_),
+  PROTOBUF_FIELD_OFFSET(::NFMsg::ReqGetMapAward, map_title_id_),
   ~0u,  // no _has_bits_
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NFMsg::AckMapKingWar, _internal_metadata_),
+  PROTOBUF_FIELD_OFFSET(::NFMsg::AckGetMapAward, _internal_metadata_),
   ~0u,  // no _extensions_
   ~0u,  // no _oneof_case_
   ~0u,  // no _weak_field_map_
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NFMsg::AckMapKingWar, map_title_),
+  ~0u,  // no _has_bits_
+  PROTOBUF_FIELD_OFFSET(::NFMsg::ReqMapHunting, _internal_metadata_),
+  ~0u,  // no _extensions_
+  ~0u,  // no _oneof_case_
+  ~0u,  // no _weak_field_map_
+  PROTOBUF_FIELD_OFFSET(::NFMsg::ReqMapHunting, map_title_id_),
+  ~0u,  // no _has_bits_
+  PROTOBUF_FIELD_OFFSET(::NFMsg::AckMapHunting, _internal_metadata_),
+  ~0u,  // no _extensions_
+  ~0u,  // no _oneof_case_
+  ~0u,  // no _weak_field_map_
+  ~0u,  // no _has_bits_
+  PROTOBUF_FIELD_OFFSET(::NFMsg::ReqMapKingWar, _internal_metadata_),
+  ~0u,  // no _extensions_
+  ~0u,  // no _oneof_case_
+  ~0u,  // no _weak_field_map_
+  PROTOBUF_FIELD_OFFSET(::NFMsg::ReqMapKingWar, map_title_),
+  ~0u,  // no _has_bits_
+  PROTOBUF_FIELD_OFFSET(::NFMsg::AckMapKingWar, _internal_metadata_),
+  ~0u,  // no _extensions_
+  ~0u,  // no _oneof_case_
+  ~0u,  // no _weak_field_map_
+  PROTOBUF_FIELD_OFFSET(::NFMsg::AckMapKingWar, map_title_),
 };
-static const ::google::protobuf::internal::MigrationSchema schemas[] GOOGLE_PROTOBUF_ATTRIBUTE_SECTION_VARIABLE(protodesc_cold) = {
+static const ::PROTOBUF_NAMESPACE_ID::internal::MigrationSchema schemas[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) = {
   { 0, -1, sizeof(::NFMsg::ReqAIOnwer)},
   { 6, -1, sizeof(::NFMsg::GridClanBaseInfo)},
   { 16, -1, sizeof(::NFMsg::ReqBigMapGridInfo)},
@@ -613,106 +562,104 @@ static const ::google::protobuf::internal::MigrationSchema schemas[] GOOGLE_PROT
   { 130, -1, sizeof(::NFMsg::AckMapKingWar)},
 };
 
-static ::google::protobuf::Message const * const file_default_instances[] = {
-  reinterpret_cast<const ::google::protobuf::Message*>(&::NFMsg::_ReqAIOnwer_default_instance_),
-  reinterpret_cast<const ::google::protobuf::Message*>(&::NFMsg::_GridClanBaseInfo_default_instance_),
-  reinterpret_cast<const ::google::protobuf::Message*>(&::NFMsg::_ReqBigMapGridInfo_default_instance_),
-  reinterpret_cast<const ::google::protobuf::Message*>(&::NFMsg::_BigMapGridBaseInfo_default_instance_),
-  reinterpret_cast<const ::google::protobuf::Message*>(&::NFMsg::_BigMapLeaveMsg_default_instance_),
-  reinterpret_cast<const ::google::protobuf::Message*>(&::NFMsg::_BigMapWarHistory_default_instance_),
-  reinterpret_cast<const ::google::protobuf::Message*>(&::NFMsg::_BigMapGridDetailInfo_default_instance_),
-  reinterpret_cast<const ::google::protobuf::Message*>(&::NFMsg::_AckBigMapGridInfo_default_instance_),
-  reinterpret_cast<const ::google::protobuf::Message*>(&::NFMsg::_ReqBigMapInfo_default_instance_),
-  reinterpret_cast<const ::google::protobuf::Message*>(&::NFMsg::_AckBigMapInfo_default_instance_),
-  reinterpret_cast<const ::google::protobuf::Message*>(&::NFMsg::_ReqHoldMapGrid_default_instance_),
-  reinterpret_cast<const ::google::protobuf::Message*>(&::NFMsg::_AckHoldMapGrid_default_instance_),
-  reinterpret_cast<const ::google::protobuf::Message*>(&::NFMsg::_ReqLeaveMapMsg_default_instance_),
-  reinterpret_cast<const ::google::protobuf::Message*>(&::NFMsg::_AckLeaveMapMsg_default_instance_),
-  reinterpret_cast<const ::google::protobuf::Message*>(&::NFMsg::_ReqGetMapAward_default_instance_),
-  reinterpret_cast<const ::google::protobuf::Message*>(&::NFMsg::_AckGetMapAward_default_instance_),
-  reinterpret_cast<const ::google::protobuf::Message*>(&::NFMsg::_ReqMapHunting_default_instance_),
-  reinterpret_cast<const ::google::protobuf::Message*>(&::NFMsg::_AckMapHunting_default_instance_),
-  reinterpret_cast<const ::google::protobuf::Message*>(&::NFMsg::_ReqMapKingWar_default_instance_),
-  reinterpret_cast<const ::google::protobuf::Message*>(&::NFMsg::_AckMapKingWar_default_instance_),
+static ::PROTOBUF_NAMESPACE_ID::Message const * const file_default_instances[] = {
+  reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::NFMsg::_ReqAIOnwer_default_instance_),
+  reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::NFMsg::_GridClanBaseInfo_default_instance_),
+  reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::NFMsg::_ReqBigMapGridInfo_default_instance_),
+  reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::NFMsg::_BigMapGridBaseInfo_default_instance_),
+  reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::NFMsg::_BigMapLeaveMsg_default_instance_),
+  reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::NFMsg::_BigMapWarHistory_default_instance_),
+  reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::NFMsg::_BigMapGridDetailInfo_default_instance_),
+  reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::NFMsg::_AckBigMapGridInfo_default_instance_),
+  reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::NFMsg::_ReqBigMapInfo_default_instance_),
+  reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::NFMsg::_AckBigMapInfo_default_instance_),
+  reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::NFMsg::_ReqHoldMapGrid_default_instance_),
+  reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::NFMsg::_AckHoldMapGrid_default_instance_),
+  reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::NFMsg::_ReqLeaveMapMsg_default_instance_),
+  reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::NFMsg::_AckLeaveMapMsg_default_instance_),
+  reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::NFMsg::_ReqGetMapAward_default_instance_),
+  reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::NFMsg::_AckGetMapAward_default_instance_),
+  reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::NFMsg::_ReqMapHunting_default_instance_),
+  reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::NFMsg::_AckMapHunting_default_instance_),
+  reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::NFMsg::_ReqMapKingWar_default_instance_),
+  reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::NFMsg::_AckMapKingWar_default_instance_),
 };
 
-void protobuf_AssignDescriptors() {
-  AddDescriptors();
-  AssignDescriptors(
-      "NFMsgExtra.proto", schemas, file_default_instances, TableStruct::offsets,
-      file_level_metadata, NULL, NULL);
-}
+const char descriptor_table_protodef_NFMsgExtra_2eproto[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) =
+  "\n\020NFMsgExtra.proto\022\005NFMsg\032\017NFMsgBase.pro"
+  "to\")\n\nReqAIOnwer\022\033\n\005ai_id\030\001 \001(\0132\014.NFMsg."
+  "Ident\"j\n\020GridClanBaseInfo\022\030\n\002id\030\001 \001(\0132\014."
+  "NFMsg.Ident\022\r\n\005level\030\002 \001(\005\022\r\n\005count\030\003 \001("
+  "\005\022\020\n\010resource\030\004 \001(\005\022\014\n\004icon\030\005 \001(\014\")\n\021Req"
+  "BigMapGridInfo\022\024\n\014map_title_id\030\001 \003(\014\"\271\001\n"
+  "\022BigMapGridBaseInfo\022\n\n\002id\030\001 \001(\014\022+\n\nguild"
+  "_info\030\002 \001(\0132\027.NFMsg.GridClanBaseInfo\022\024\n\014"
+  "kingwar_time\030\n \001(\005\022 \n\nkingwarrer\030\013 \001(\0132\014"
+  ".NFMsg.Ident\022\024\n\014hurting_time\030\024 \001(\005\022\034\n\006hu"
+  "rter\030\025 \001(\0132\014.NFMsg.Ident\"z\n\016BigMapLeaveM"
+  "sg\022\033\n\005owner\030\001 \001(\0132\014.NFMsg.Ident\022\022\n\nowner"
+  "_name\030\002 \001(\014\022\020\n\010msg_data\030\003 \001(\014\022\020\n\010msg_tim"
+  "e\030\004 \001(\005\022\023\n\013owner_level\030\005 \001(\005\"\234\001\n\020BigMapW"
+  "arHistory\022)\n\010red_info\030\001 \001(\0132\027.NFMsg.Grid"
+  "ClanBaseInfo\022*\n\tblue_info\030\002 \001(\0132\027.NFMsg."
+  "GridClanBaseInfo\022\037\n\twinner_id\030\n \001(\0132\014.NF"
+  "Msg.Ident\022\020\n\010war_time\030\013 \001(\005\"\322\001\n\024BigMapGr"
+  "idDetailInfo\0221\n\016grid_base_info\030\001 \001(\0132\031.N"
+  "FMsg.BigMapGridBaseInfo\022/\n\016stay_guid_lis"
+  "t\030\002 \003(\0132\027.NFMsg.GridClanBaseInfo\022(\n\tleav"
+  "e_msg\030\003 \003(\0132\025.NFMsg.BigMapLeaveMsg\022,\n\013wa"
+  "r_history\030\004 \003(\0132\027.NFMsg.BigMapWarHistory"
+  "\"B\n\021AckBigMapGridInfo\022-\n\010map_data\030\001 \003(\0132"
+  "\033.NFMsg.BigMapGridDetailInfo\"\017\n\rReqBigMa"
+  "pInfo\"B\n\rAckBigMapInfo\0221\n\016grid_base_info"
+  "\030\001 \003(\0132\031.NFMsg.BigMapGridBaseInfo\"F\n\016Req"
+  "HoldMapGrid\022\024\n\014map_title_id\030\001 \001(\014\022\036\n\010gui"
+  "ld_id\030\002 \001(\0132\014.NFMsg.Ident\"\020\n\016AckHoldMapG"
+  "rid\"P\n\016ReqLeaveMapMsg\022\024\n\014map_title_id\030\001 "
+  "\001(\014\022(\n\tleave_msg\030\002 \001(\0132\025.NFMsg.BigMapLea"
+  "veMsg\"\020\n\016AckLeaveMapMsg\"&\n\016ReqGetMapAwar"
+  "d\022\024\n\014map_title_id\030\001 \001(\014\"\020\n\016AckGetMapAwar"
+  "d\"%\n\rReqMapHunting\022\024\n\014map_title_id\030\001 \001(\014"
+  "\"\017\n\rAckMapHunting\"\"\n\rReqMapKingWar\022\021\n\tma"
+  "p_title\030\001 \001(\014\"\"\n\rAckMapKingWar\022\021\n\tmap_ti"
+  "tle\030\001 \001(\014b\006proto3"
+  ;
+static const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable*const descriptor_table_NFMsgExtra_2eproto_deps[1] = {
+  &::descriptor_table_NFMsgBase_2eproto,
+};
+static ::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase*const descriptor_table_NFMsgExtra_2eproto_sccs[20] = {
+  &scc_info_AckBigMapGridInfo_NFMsgExtra_2eproto.base,
+  &scc_info_AckBigMapInfo_NFMsgExtra_2eproto.base,
+  &scc_info_AckGetMapAward_NFMsgExtra_2eproto.base,
+  &scc_info_AckHoldMapGrid_NFMsgExtra_2eproto.base,
+  &scc_info_AckLeaveMapMsg_NFMsgExtra_2eproto.base,
+  &scc_info_AckMapHunting_NFMsgExtra_2eproto.base,
+  &scc_info_AckMapKingWar_NFMsgExtra_2eproto.base,
+  &scc_info_BigMapGridBaseInfo_NFMsgExtra_2eproto.base,
+  &scc_info_BigMapGridDetailInfo_NFMsgExtra_2eproto.base,
+  &scc_info_BigMapLeaveMsg_NFMsgExtra_2eproto.base,
+  &scc_info_BigMapWarHistory_NFMsgExtra_2eproto.base,
+  &scc_info_GridClanBaseInfo_NFMsgExtra_2eproto.base,
+  &scc_info_ReqAIOnwer_NFMsgExtra_2eproto.base,
+  &scc_info_ReqBigMapGridInfo_NFMsgExtra_2eproto.base,
+  &scc_info_ReqBigMapInfo_NFMsgExtra_2eproto.base,
+  &scc_info_ReqGetMapAward_NFMsgExtra_2eproto.base,
+  &scc_info_ReqHoldMapGrid_NFMsgExtra_2eproto.base,
+  &scc_info_ReqLeaveMapMsg_NFMsgExtra_2eproto.base,
+  &scc_info_ReqMapHunting_NFMsgExtra_2eproto.base,
+  &scc_info_ReqMapKingWar_NFMsgExtra_2eproto.base,
+};
+static ::PROTOBUF_NAMESPACE_ID::internal::once_flag descriptor_table_NFMsgExtra_2eproto_once;
+static bool descriptor_table_NFMsgExtra_2eproto_initialized = false;
+const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable descriptor_table_NFMsgExtra_2eproto = {
+  &descriptor_table_NFMsgExtra_2eproto_initialized, descriptor_table_protodef_NFMsgExtra_2eproto, "NFMsgExtra.proto", 1457,
+  &descriptor_table_NFMsgExtra_2eproto_once, descriptor_table_NFMsgExtra_2eproto_sccs, descriptor_table_NFMsgExtra_2eproto_deps, 20, 1,
+  schemas, file_default_instances, TableStruct_NFMsgExtra_2eproto::offsets,
+  file_level_metadata_NFMsgExtra_2eproto, 20, file_level_enum_descriptors_NFMsgExtra_2eproto, file_level_service_descriptors_NFMsgExtra_2eproto,
+};
 
-void protobuf_AssignDescriptorsOnce() {
-  static ::google::protobuf::internal::once_flag once;
-  ::google::protobuf::internal::call_once(once, protobuf_AssignDescriptors);
-}
-
-void protobuf_RegisterTypes(const ::std::string&) GOOGLE_PROTOBUF_ATTRIBUTE_COLD;
-void protobuf_RegisterTypes(const ::std::string&) {
-  protobuf_AssignDescriptorsOnce();
-  ::google::protobuf::internal::RegisterAllTypes(file_level_metadata, 20);
-}
-
-void AddDescriptorsImpl() {
-  InitDefaults();
-  static const char descriptor[] GOOGLE_PROTOBUF_ATTRIBUTE_SECTION_VARIABLE(protodesc_cold) = {
-      "\n\020NFMsgExtra.proto\022\005NFMsg\032\017NFMsgBase.pro"
-      "to\")\n\nReqAIOnwer\022\033\n\005ai_id\030\001 \001(\0132\014.NFMsg."
-      "Ident\"j\n\020GridClanBaseInfo\022\030\n\002id\030\001 \001(\0132\014."
-      "NFMsg.Ident\022\r\n\005level\030\002 \001(\005\022\r\n\005count\030\003 \001("
-      "\005\022\020\n\010resource\030\004 \001(\005\022\014\n\004icon\030\005 \001(\014\")\n\021Req"
-      "BigMapGridInfo\022\024\n\014map_title_id\030\001 \003(\014\"\271\001\n"
-      "\022BigMapGridBaseInfo\022\n\n\002id\030\001 \001(\014\022+\n\nguild"
-      "_info\030\002 \001(\0132\027.NFMsg.GridClanBaseInfo\022\024\n\014"
-      "kingwar_time\030\n \001(\005\022 \n\nkingwarrer\030\013 \001(\0132\014"
-      ".NFMsg.Ident\022\024\n\014hurting_time\030\024 \001(\005\022\034\n\006hu"
-      "rter\030\025 \001(\0132\014.NFMsg.Ident\"z\n\016BigMapLeaveM"
-      "sg\022\033\n\005owner\030\001 \001(\0132\014.NFMsg.Ident\022\022\n\nowner"
-      "_name\030\002 \001(\014\022\020\n\010msg_data\030\003 \001(\014\022\020\n\010msg_tim"
-      "e\030\004 \001(\005\022\023\n\013owner_level\030\005 \001(\005\"\234\001\n\020BigMapW"
-      "arHistory\022)\n\010red_info\030\001 \001(\0132\027.NFMsg.Grid"
-      "ClanBaseInfo\022*\n\tblue_info\030\002 \001(\0132\027.NFMsg."
-      "GridClanBaseInfo\022\037\n\twinner_id\030\n \001(\0132\014.NF"
-      "Msg.Ident\022\020\n\010war_time\030\013 \001(\005\"\322\001\n\024BigMapGr"
-      "idDetailInfo\0221\n\016grid_base_info\030\001 \001(\0132\031.N"
-      "FMsg.BigMapGridBaseInfo\022/\n\016stay_guid_lis"
-      "t\030\002 \003(\0132\027.NFMsg.GridClanBaseInfo\022(\n\tleav"
-      "e_msg\030\003 \003(\0132\025.NFMsg.BigMapLeaveMsg\022,\n\013wa"
-      "r_history\030\004 \003(\0132\027.NFMsg.BigMapWarHistory"
-      "\"B\n\021AckBigMapGridInfo\022-\n\010map_data\030\001 \003(\0132"
-      "\033.NFMsg.BigMapGridDetailInfo\"\017\n\rReqBigMa"
-      "pInfo\"B\n\rAckBigMapInfo\0221\n\016grid_base_info"
-      "\030\001 \003(\0132\031.NFMsg.BigMapGridBaseInfo\"F\n\016Req"
-      "HoldMapGrid\022\024\n\014map_title_id\030\001 \001(\014\022\036\n\010gui"
-      "ld_id\030\002 \001(\0132\014.NFMsg.Ident\"\020\n\016AckHoldMapG"
-      "rid\"P\n\016ReqLeaveMapMsg\022\024\n\014map_title_id\030\001 "
-      "\001(\014\022(\n\tleave_msg\030\002 \001(\0132\025.NFMsg.BigMapLea"
-      "veMsg\"\020\n\016AckLeaveMapMsg\"&\n\016ReqGetMapAwar"
-      "d\022\024\n\014map_title_id\030\001 \001(\014\"\020\n\016AckGetMapAwar"
-      "d\"%\n\rReqMapHunting\022\024\n\014map_title_id\030\001 \001(\014"
-      "\"\017\n\rAckMapHunting\"\"\n\rReqMapKingWar\022\021\n\tma"
-      "p_title\030\001 \001(\014\"\"\n\rAckMapKingWar\022\021\n\tmap_ti"
-      "tle\030\001 \001(\014b\006proto3"
-  };
-  ::google::protobuf::DescriptorPool::InternalAddGeneratedFile(
-      descriptor, 1457);
-  ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
-    "NFMsgExtra.proto", &protobuf_RegisterTypes);
-  ::protobuf_NFMsgBase_2eproto::AddDescriptors();
-}
-
-void AddDescriptors() {
-  static ::google::protobuf::internal::once_flag once;
-  ::google::protobuf::internal::call_once(once, AddDescriptorsImpl);
-}
-// Force AddDescriptors() to be called at dynamic initialization time.
-struct StaticDescriptorInitializer {
-  StaticDescriptorInitializer() {
-    AddDescriptors();
-  }
-} static_descriptor_initializer;
-}  // namespace protobuf_NFMsgExtra_2eproto
+// Force running AddDescriptors() at dynamic initialization time.
+static bool dynamic_init_dummy_NFMsgExtra_2eproto = (  ::PROTOBUF_NAMESPACE_ID::internal::AddDescriptors(&descriptor_table_NFMsgExtra_2eproto), true);
 namespace NFMsg {
 
 // ===================================================================
@@ -721,37 +668,41 @@ void ReqAIOnwer::InitAsDefaultInstance() {
   ::NFMsg::_ReqAIOnwer_default_instance_._instance.get_mutable()->ai_id_ = const_cast< ::NFMsg::Ident*>(
       ::NFMsg::Ident::internal_default_instance());
 }
+class ReqAIOnwer::_Internal {
+ public:
+  static const ::NFMsg::Ident& ai_id(const ReqAIOnwer* msg);
+};
+
+const ::NFMsg::Ident&
+ReqAIOnwer::_Internal::ai_id(const ReqAIOnwer* msg) {
+  return *msg->ai_id_;
+}
 void ReqAIOnwer::clear_ai_id() {
-  if (GetArenaNoVirtual() == NULL && ai_id_ != NULL) {
+  if (GetArenaNoVirtual() == nullptr && ai_id_ != nullptr) {
     delete ai_id_;
   }
-  ai_id_ = NULL;
+  ai_id_ = nullptr;
 }
-#if !defined(_MSC_VER) || _MSC_VER >= 1900
-const int ReqAIOnwer::kAiIdFieldNumber;
-#endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
-
 ReqAIOnwer::ReqAIOnwer()
-  : ::google::protobuf::Message(), _internal_metadata_(NULL) {
-  ::google::protobuf::internal::InitSCC(
-      &protobuf_NFMsgExtra_2eproto::scc_info_ReqAIOnwer.base);
+  : ::PROTOBUF_NAMESPACE_ID::Message(), _internal_metadata_(nullptr) {
   SharedCtor();
   // @@protoc_insertion_point(constructor:NFMsg.ReqAIOnwer)
 }
 ReqAIOnwer::ReqAIOnwer(const ReqAIOnwer& from)
-  : ::google::protobuf::Message(),
-      _internal_metadata_(NULL) {
+  : ::PROTOBUF_NAMESPACE_ID::Message(),
+      _internal_metadata_(nullptr) {
   _internal_metadata_.MergeFrom(from._internal_metadata_);
-  if (from.has_ai_id()) {
+  if (from._internal_has_ai_id()) {
     ai_id_ = new ::NFMsg::Ident(*from.ai_id_);
   } else {
-    ai_id_ = NULL;
+    ai_id_ = nullptr;
   }
   // @@protoc_insertion_point(copy_constructor:NFMsg.ReqAIOnwer)
 }
 
 void ReqAIOnwer::SharedCtor() {
-  ai_id_ = NULL;
+  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&scc_info_ReqAIOnwer_NFMsgExtra_2eproto.base);
+  ai_id_ = nullptr;
 }
 
 ReqAIOnwer::~ReqAIOnwer() {
@@ -766,108 +717,76 @@ void ReqAIOnwer::SharedDtor() {
 void ReqAIOnwer::SetCachedSize(int size) const {
   _cached_size_.Set(size);
 }
-const ::google::protobuf::Descriptor* ReqAIOnwer::descriptor() {
-  ::protobuf_NFMsgExtra_2eproto::protobuf_AssignDescriptorsOnce();
-  return ::protobuf_NFMsgExtra_2eproto::file_level_metadata[kIndexInFileMessages].descriptor;
-}
-
 const ReqAIOnwer& ReqAIOnwer::default_instance() {
-  ::google::protobuf::internal::InitSCC(&protobuf_NFMsgExtra_2eproto::scc_info_ReqAIOnwer.base);
+  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&::scc_info_ReqAIOnwer_NFMsgExtra_2eproto.base);
   return *internal_default_instance();
 }
 
 
 void ReqAIOnwer::Clear() {
 // @@protoc_insertion_point(message_clear_start:NFMsg.ReqAIOnwer)
-  ::google::protobuf::uint32 cached_has_bits = 0;
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  if (GetArenaNoVirtual() == NULL && ai_id_ != NULL) {
+  if (GetArenaNoVirtual() == nullptr && ai_id_ != nullptr) {
     delete ai_id_;
   }
-  ai_id_ = NULL;
+  ai_id_ = nullptr;
   _internal_metadata_.Clear();
 }
 
-bool ReqAIOnwer::MergePartialFromCodedStream(
-    ::google::protobuf::io::CodedInputStream* input) {
-#define DO_(EXPRESSION) if (!GOOGLE_PREDICT_TRUE(EXPRESSION)) goto failure
-  ::google::protobuf::uint32 tag;
-  // @@protoc_insertion_point(parse_start:NFMsg.ReqAIOnwer)
-  for (;;) {
-    ::std::pair<::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
-    tag = p.first;
-    if (!p.second) goto handle_unusual;
-    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
+const char* ReqAIOnwer::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) {
+#define CHK_(x) if (PROTOBUF_PREDICT_FALSE(!(x))) goto failure
+  while (!ctx->Done(&ptr)) {
+    ::PROTOBUF_NAMESPACE_ID::uint32 tag;
+    ptr = ::PROTOBUF_NAMESPACE_ID::internal::ReadTag(ptr, &tag);
+    CHK_(ptr);
+    switch (tag >> 3) {
       // .NFMsg.Ident ai_id = 1;
-      case 1: {
-        if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(10u /* 10 & 0xFF */)) {
-          DO_(::google::protobuf::internal::WireFormatLite::ReadMessage(
-               input, mutable_ai_id()));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
+      case 1:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 10)) {
+          ptr = ctx->ParseMessage(_internal_mutable_ai_id(), ptr);
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
       default: {
       handle_unusual:
-        if (tag == 0) {
+        if ((tag & 7) == 4 || tag == 0) {
+          ctx->SetLastTag(tag);
           goto success;
         }
-        DO_(::google::protobuf::internal::WireFormat::SkipField(
-              input, tag, _internal_metadata_.mutable_unknown_fields()));
-        break;
+        ptr = UnknownFieldParse(tag, &_internal_metadata_, ptr, ctx);
+        CHK_(ptr != nullptr);
+        continue;
       }
-    }
-  }
+    }  // switch
+  }  // while
 success:
-  // @@protoc_insertion_point(parse_success:NFMsg.ReqAIOnwer)
-  return true;
+  return ptr;
 failure:
-  // @@protoc_insertion_point(parse_failure:NFMsg.ReqAIOnwer)
-  return false;
-#undef DO_
+  ptr = nullptr;
+  goto success;
+#undef CHK_
 }
 
-void ReqAIOnwer::SerializeWithCachedSizes(
-    ::google::protobuf::io::CodedOutputStream* output) const {
-  // @@protoc_insertion_point(serialize_start:NFMsg.ReqAIOnwer)
-  ::google::protobuf::uint32 cached_has_bits = 0;
-  (void) cached_has_bits;
-
-  // .NFMsg.Ident ai_id = 1;
-  if (this->has_ai_id()) {
-    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      1, this->_internal_ai_id(), output);
-  }
-
-  if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
-    ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
-        (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()), output);
-  }
-  // @@protoc_insertion_point(serialize_end:NFMsg.ReqAIOnwer)
-}
-
-::google::protobuf::uint8* ReqAIOnwer::InternalSerializeWithCachedSizesToArray(
-    bool deterministic, ::google::protobuf::uint8* target) const {
-  (void)deterministic; // Unused
+::PROTOBUF_NAMESPACE_ID::uint8* ReqAIOnwer::InternalSerializeWithCachedSizesToArray(
+    ::PROTOBUF_NAMESPACE_ID::uint8* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const {
   // @@protoc_insertion_point(serialize_to_array_start:NFMsg.ReqAIOnwer)
-  ::google::protobuf::uint32 cached_has_bits = 0;
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
   // .NFMsg.Ident ai_id = 1;
   if (this->has_ai_id()) {
-    target = ::google::protobuf::internal::WireFormatLite::
+    target = stream->EnsureSpace(target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
       InternalWriteMessageToArray(
-        1, this->_internal_ai_id(), deterministic, target);
+        1, _Internal::ai_id(this), target, stream);
   }
 
-  if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
-    target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
-        (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()), target);
+  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::InternalSerializeUnknownFieldsToArray(
+        _internal_metadata_.unknown_fields(), target, stream);
   }
   // @@protoc_insertion_point(serialize_to_array_end:NFMsg.ReqAIOnwer)
   return target;
@@ -877,32 +796,35 @@ size_t ReqAIOnwer::ByteSizeLong() const {
 // @@protoc_insertion_point(message_byte_size_start:NFMsg.ReqAIOnwer)
   size_t total_size = 0;
 
-  if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
-    total_size +=
-      ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
-        (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()));
-  }
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
   // .NFMsg.Ident ai_id = 1;
   if (this->has_ai_id()) {
     total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::MessageSize(
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
         *ai_id_);
   }
 
-  int cached_size = ::google::protobuf::internal::ToCachedSize(total_size);
+  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
+    return ::PROTOBUF_NAMESPACE_ID::internal::ComputeUnknownFieldsSize(
+        _internal_metadata_, total_size, &_cached_size_);
+  }
+  int cached_size = ::PROTOBUF_NAMESPACE_ID::internal::ToCachedSize(total_size);
   SetCachedSize(cached_size);
   return total_size;
 }
 
-void ReqAIOnwer::MergeFrom(const ::google::protobuf::Message& from) {
+void ReqAIOnwer::MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
 // @@protoc_insertion_point(generalized_merge_from_start:NFMsg.ReqAIOnwer)
   GOOGLE_DCHECK_NE(&from, this);
   const ReqAIOnwer* source =
-      ::google::protobuf::internal::DynamicCastToGenerated<const ReqAIOnwer>(
+      ::PROTOBUF_NAMESPACE_ID::DynamicCastToGenerated<ReqAIOnwer>(
           &from);
-  if (source == NULL) {
+  if (source == nullptr) {
   // @@protoc_insertion_point(generalized_merge_from_cast_fail:NFMsg.ReqAIOnwer)
-    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
+    ::PROTOBUF_NAMESPACE_ID::internal::ReflectionOps::Merge(from, this);
   } else {
   // @@protoc_insertion_point(generalized_merge_from_cast_success:NFMsg.ReqAIOnwer)
     MergeFrom(*source);
@@ -913,15 +835,15 @@ void ReqAIOnwer::MergeFrom(const ReqAIOnwer& from) {
 // @@protoc_insertion_point(class_specific_merge_from_start:NFMsg.ReqAIOnwer)
   GOOGLE_DCHECK_NE(&from, this);
   _internal_metadata_.MergeFrom(from._internal_metadata_);
-  ::google::protobuf::uint32 cached_has_bits = 0;
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
   if (from.has_ai_id()) {
-    mutable_ai_id()->::NFMsg::Ident::MergeFrom(from.ai_id());
+    _internal_mutable_ai_id()->::NFMsg::Ident::MergeFrom(from._internal_ai_id());
   }
 }
 
-void ReqAIOnwer::CopyFrom(const ::google::protobuf::Message& from) {
+void ReqAIOnwer::CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
 // @@protoc_insertion_point(generalized_copy_from_start:NFMsg.ReqAIOnwer)
   if (&from == this) return;
   Clear();
@@ -939,19 +861,14 @@ bool ReqAIOnwer::IsInitialized() const {
   return true;
 }
 
-void ReqAIOnwer::Swap(ReqAIOnwer* other) {
-  if (other == this) return;
-  InternalSwap(other);
-}
 void ReqAIOnwer::InternalSwap(ReqAIOnwer* other) {
   using std::swap;
-  swap(ai_id_, other->ai_id_);
   _internal_metadata_.Swap(&other->_internal_metadata_);
+  swap(ai_id_, other->ai_id_);
 }
 
-::google::protobuf::Metadata ReqAIOnwer::GetMetadata() const {
-  protobuf_NFMsgExtra_2eproto::protobuf_AssignDescriptorsOnce();
-  return ::protobuf_NFMsgExtra_2eproto::file_level_metadata[kIndexInFileMessages];
+::PROTOBUF_NAMESPACE_ID::Metadata ReqAIOnwer::GetMetadata() const {
+  return GetMetadataStatic();
 }
 
 
@@ -961,39 +878,38 @@ void GridClanBaseInfo::InitAsDefaultInstance() {
   ::NFMsg::_GridClanBaseInfo_default_instance_._instance.get_mutable()->id_ = const_cast< ::NFMsg::Ident*>(
       ::NFMsg::Ident::internal_default_instance());
 }
+class GridClanBaseInfo::_Internal {
+ public:
+  static const ::NFMsg::Ident& id(const GridClanBaseInfo* msg);
+};
+
+const ::NFMsg::Ident&
+GridClanBaseInfo::_Internal::id(const GridClanBaseInfo* msg) {
+  return *msg->id_;
+}
 void GridClanBaseInfo::clear_id() {
-  if (GetArenaNoVirtual() == NULL && id_ != NULL) {
+  if (GetArenaNoVirtual() == nullptr && id_ != nullptr) {
     delete id_;
   }
-  id_ = NULL;
+  id_ = nullptr;
 }
-#if !defined(_MSC_VER) || _MSC_VER >= 1900
-const int GridClanBaseInfo::kIdFieldNumber;
-const int GridClanBaseInfo::kLevelFieldNumber;
-const int GridClanBaseInfo::kCountFieldNumber;
-const int GridClanBaseInfo::kResourceFieldNumber;
-const int GridClanBaseInfo::kIconFieldNumber;
-#endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
-
 GridClanBaseInfo::GridClanBaseInfo()
-  : ::google::protobuf::Message(), _internal_metadata_(NULL) {
-  ::google::protobuf::internal::InitSCC(
-      &protobuf_NFMsgExtra_2eproto::scc_info_GridClanBaseInfo.base);
+  : ::PROTOBUF_NAMESPACE_ID::Message(), _internal_metadata_(nullptr) {
   SharedCtor();
   // @@protoc_insertion_point(constructor:NFMsg.GridClanBaseInfo)
 }
 GridClanBaseInfo::GridClanBaseInfo(const GridClanBaseInfo& from)
-  : ::google::protobuf::Message(),
-      _internal_metadata_(NULL) {
+  : ::PROTOBUF_NAMESPACE_ID::Message(),
+      _internal_metadata_(nullptr) {
   _internal_metadata_.MergeFrom(from._internal_metadata_);
-  icon_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  if (from.icon().size() > 0) {
-    icon_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.icon_);
+  icon_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  if (!from._internal_icon().empty()) {
+    icon_.AssignWithDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), from.icon_);
   }
-  if (from.has_id()) {
+  if (from._internal_has_id()) {
     id_ = new ::NFMsg::Ident(*from.id_);
   } else {
-    id_ = NULL;
+    id_ = nullptr;
   }
   ::memcpy(&level_, &from.level_,
     static_cast<size_t>(reinterpret_cast<char*>(&resource_) -
@@ -1002,7 +918,8 @@ GridClanBaseInfo::GridClanBaseInfo(const GridClanBaseInfo& from)
 }
 
 void GridClanBaseInfo::SharedCtor() {
-  icon_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&scc_info_GridClanBaseInfo_NFMsgExtra_2eproto.base);
+  icon_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
   ::memset(&id_, 0, static_cast<size_t>(
       reinterpret_cast<char*>(&resource_) -
       reinterpret_cast<char*>(&id_)) + sizeof(resource_));
@@ -1014,216 +931,139 @@ GridClanBaseInfo::~GridClanBaseInfo() {
 }
 
 void GridClanBaseInfo::SharedDtor() {
-  icon_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  icon_.DestroyNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
   if (this != internal_default_instance()) delete id_;
 }
 
 void GridClanBaseInfo::SetCachedSize(int size) const {
   _cached_size_.Set(size);
 }
-const ::google::protobuf::Descriptor* GridClanBaseInfo::descriptor() {
-  ::protobuf_NFMsgExtra_2eproto::protobuf_AssignDescriptorsOnce();
-  return ::protobuf_NFMsgExtra_2eproto::file_level_metadata[kIndexInFileMessages].descriptor;
-}
-
 const GridClanBaseInfo& GridClanBaseInfo::default_instance() {
-  ::google::protobuf::internal::InitSCC(&protobuf_NFMsgExtra_2eproto::scc_info_GridClanBaseInfo.base);
+  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&::scc_info_GridClanBaseInfo_NFMsgExtra_2eproto.base);
   return *internal_default_instance();
 }
 
 
 void GridClanBaseInfo::Clear() {
 // @@protoc_insertion_point(message_clear_start:NFMsg.GridClanBaseInfo)
-  ::google::protobuf::uint32 cached_has_bits = 0;
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  icon_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  if (GetArenaNoVirtual() == NULL && id_ != NULL) {
+  icon_.ClearToEmptyNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  if (GetArenaNoVirtual() == nullptr && id_ != nullptr) {
     delete id_;
   }
-  id_ = NULL;
+  id_ = nullptr;
   ::memset(&level_, 0, static_cast<size_t>(
       reinterpret_cast<char*>(&resource_) -
       reinterpret_cast<char*>(&level_)) + sizeof(resource_));
   _internal_metadata_.Clear();
 }
 
-bool GridClanBaseInfo::MergePartialFromCodedStream(
-    ::google::protobuf::io::CodedInputStream* input) {
-#define DO_(EXPRESSION) if (!GOOGLE_PREDICT_TRUE(EXPRESSION)) goto failure
-  ::google::protobuf::uint32 tag;
-  // @@protoc_insertion_point(parse_start:NFMsg.GridClanBaseInfo)
-  for (;;) {
-    ::std::pair<::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
-    tag = p.first;
-    if (!p.second) goto handle_unusual;
-    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
+const char* GridClanBaseInfo::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) {
+#define CHK_(x) if (PROTOBUF_PREDICT_FALSE(!(x))) goto failure
+  while (!ctx->Done(&ptr)) {
+    ::PROTOBUF_NAMESPACE_ID::uint32 tag;
+    ptr = ::PROTOBUF_NAMESPACE_ID::internal::ReadTag(ptr, &tag);
+    CHK_(ptr);
+    switch (tag >> 3) {
       // .NFMsg.Ident id = 1;
-      case 1: {
-        if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(10u /* 10 & 0xFF */)) {
-          DO_(::google::protobuf::internal::WireFormatLite::ReadMessage(
-               input, mutable_id()));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
+      case 1:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 10)) {
+          ptr = ctx->ParseMessage(_internal_mutable_id(), ptr);
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
       // int32 level = 2;
-      case 2: {
-        if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(16u /* 16 & 0xFF */)) {
-
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
-                 input, &level_)));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
+      case 2:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 16)) {
+          level_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint(&ptr);
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
       // int32 count = 3;
-      case 3: {
-        if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(24u /* 24 & 0xFF */)) {
-
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
-                 input, &count_)));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
+      case 3:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 24)) {
+          count_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint(&ptr);
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
       // int32 resource = 4;
-      case 4: {
-        if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(32u /* 32 & 0xFF */)) {
-
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
-                 input, &resource_)));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
+      case 4:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 32)) {
+          resource_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint(&ptr);
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
       // bytes icon = 5;
-      case 5: {
-        if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(42u /* 42 & 0xFF */)) {
-          DO_(::google::protobuf::internal::WireFormatLite::ReadBytes(
-                input, this->mutable_icon()));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
+      case 5:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 42)) {
+          ptr = ::PROTOBUF_NAMESPACE_ID::internal::InlineGreedyStringParser(_internal_mutable_icon(), ptr, ctx);
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
       default: {
       handle_unusual:
-        if (tag == 0) {
+        if ((tag & 7) == 4 || tag == 0) {
+          ctx->SetLastTag(tag);
           goto success;
         }
-        DO_(::google::protobuf::internal::WireFormat::SkipField(
-              input, tag, _internal_metadata_.mutable_unknown_fields()));
-        break;
+        ptr = UnknownFieldParse(tag, &_internal_metadata_, ptr, ctx);
+        CHK_(ptr != nullptr);
+        continue;
       }
-    }
-  }
+    }  // switch
+  }  // while
 success:
-  // @@protoc_insertion_point(parse_success:NFMsg.GridClanBaseInfo)
-  return true;
+  return ptr;
 failure:
-  // @@protoc_insertion_point(parse_failure:NFMsg.GridClanBaseInfo)
-  return false;
-#undef DO_
+  ptr = nullptr;
+  goto success;
+#undef CHK_
 }
 
-void GridClanBaseInfo::SerializeWithCachedSizes(
-    ::google::protobuf::io::CodedOutputStream* output) const {
-  // @@protoc_insertion_point(serialize_start:NFMsg.GridClanBaseInfo)
-  ::google::protobuf::uint32 cached_has_bits = 0;
-  (void) cached_has_bits;
-
-  // .NFMsg.Ident id = 1;
-  if (this->has_id()) {
-    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      1, this->_internal_id(), output);
-  }
-
-  // int32 level = 2;
-  if (this->level() != 0) {
-    ::google::protobuf::internal::WireFormatLite::WriteInt32(2, this->level(), output);
-  }
-
-  // int32 count = 3;
-  if (this->count() != 0) {
-    ::google::protobuf::internal::WireFormatLite::WriteInt32(3, this->count(), output);
-  }
-
-  // int32 resource = 4;
-  if (this->resource() != 0) {
-    ::google::protobuf::internal::WireFormatLite::WriteInt32(4, this->resource(), output);
-  }
-
-  // bytes icon = 5;
-  if (this->icon().size() > 0) {
-    ::google::protobuf::internal::WireFormatLite::WriteBytesMaybeAliased(
-      5, this->icon(), output);
-  }
-
-  if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
-    ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
-        (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()), output);
-  }
-  // @@protoc_insertion_point(serialize_end:NFMsg.GridClanBaseInfo)
-}
-
-::google::protobuf::uint8* GridClanBaseInfo::InternalSerializeWithCachedSizesToArray(
-    bool deterministic, ::google::protobuf::uint8* target) const {
-  (void)deterministic; // Unused
+::PROTOBUF_NAMESPACE_ID::uint8* GridClanBaseInfo::InternalSerializeWithCachedSizesToArray(
+    ::PROTOBUF_NAMESPACE_ID::uint8* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const {
   // @@protoc_insertion_point(serialize_to_array_start:NFMsg.GridClanBaseInfo)
-  ::google::protobuf::uint32 cached_has_bits = 0;
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
   // .NFMsg.Ident id = 1;
   if (this->has_id()) {
-    target = ::google::protobuf::internal::WireFormatLite::
+    target = stream->EnsureSpace(target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
       InternalWriteMessageToArray(
-        1, this->_internal_id(), deterministic, target);
+        1, _Internal::id(this), target, stream);
   }
 
   // int32 level = 2;
   if (this->level() != 0) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(2, this->level(), target);
+    target = stream->EnsureSpace(target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt32ToArray(2, this->_internal_level(), target);
   }
 
   // int32 count = 3;
   if (this->count() != 0) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(3, this->count(), target);
+    target = stream->EnsureSpace(target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt32ToArray(3, this->_internal_count(), target);
   }
 
   // int32 resource = 4;
   if (this->resource() != 0) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(4, this->resource(), target);
+    target = stream->EnsureSpace(target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt32ToArray(4, this->_internal_resource(), target);
   }
 
   // bytes icon = 5;
   if (this->icon().size() > 0) {
-    target =
-      ::google::protobuf::internal::WireFormatLite::WriteBytesToArray(
-        5, this->icon(), target);
+    target = stream->WriteBytesMaybeAliased(
+        5, this->_internal_icon(), target);
   }
 
-  if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
-    target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
-        (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()), target);
+  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::InternalSerializeUnknownFieldsToArray(
+        _internal_metadata_.unknown_fields(), target, stream);
   }
   // @@protoc_insertion_point(serialize_to_array_end:NFMsg.GridClanBaseInfo)
   return target;
@@ -1233,60 +1073,63 @@ size_t GridClanBaseInfo::ByteSizeLong() const {
 // @@protoc_insertion_point(message_byte_size_start:NFMsg.GridClanBaseInfo)
   size_t total_size = 0;
 
-  if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
-    total_size +=
-      ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
-        (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()));
-  }
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
   // bytes icon = 5;
   if (this->icon().size() > 0) {
     total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::BytesSize(
-        this->icon());
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::BytesSize(
+        this->_internal_icon());
   }
 
   // .NFMsg.Ident id = 1;
   if (this->has_id()) {
     total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::MessageSize(
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
         *id_);
   }
 
   // int32 level = 2;
   if (this->level() != 0) {
     total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::Int32Size(
-        this->level());
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::Int32Size(
+        this->_internal_level());
   }
 
   // int32 count = 3;
   if (this->count() != 0) {
     total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::Int32Size(
-        this->count());
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::Int32Size(
+        this->_internal_count());
   }
 
   // int32 resource = 4;
   if (this->resource() != 0) {
     total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::Int32Size(
-        this->resource());
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::Int32Size(
+        this->_internal_resource());
   }
 
-  int cached_size = ::google::protobuf::internal::ToCachedSize(total_size);
+  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
+    return ::PROTOBUF_NAMESPACE_ID::internal::ComputeUnknownFieldsSize(
+        _internal_metadata_, total_size, &_cached_size_);
+  }
+  int cached_size = ::PROTOBUF_NAMESPACE_ID::internal::ToCachedSize(total_size);
   SetCachedSize(cached_size);
   return total_size;
 }
 
-void GridClanBaseInfo::MergeFrom(const ::google::protobuf::Message& from) {
+void GridClanBaseInfo::MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
 // @@protoc_insertion_point(generalized_merge_from_start:NFMsg.GridClanBaseInfo)
   GOOGLE_DCHECK_NE(&from, this);
   const GridClanBaseInfo* source =
-      ::google::protobuf::internal::DynamicCastToGenerated<const GridClanBaseInfo>(
+      ::PROTOBUF_NAMESPACE_ID::DynamicCastToGenerated<GridClanBaseInfo>(
           &from);
-  if (source == NULL) {
+  if (source == nullptr) {
   // @@protoc_insertion_point(generalized_merge_from_cast_fail:NFMsg.GridClanBaseInfo)
-    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
+    ::PROTOBUF_NAMESPACE_ID::internal::ReflectionOps::Merge(from, this);
   } else {
   // @@protoc_insertion_point(generalized_merge_from_cast_success:NFMsg.GridClanBaseInfo)
     MergeFrom(*source);
@@ -1297,28 +1140,28 @@ void GridClanBaseInfo::MergeFrom(const GridClanBaseInfo& from) {
 // @@protoc_insertion_point(class_specific_merge_from_start:NFMsg.GridClanBaseInfo)
   GOOGLE_DCHECK_NE(&from, this);
   _internal_metadata_.MergeFrom(from._internal_metadata_);
-  ::google::protobuf::uint32 cached_has_bits = 0;
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
   if (from.icon().size() > 0) {
 
-    icon_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.icon_);
+    icon_.AssignWithDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), from.icon_);
   }
   if (from.has_id()) {
-    mutable_id()->::NFMsg::Ident::MergeFrom(from.id());
+    _internal_mutable_id()->::NFMsg::Ident::MergeFrom(from._internal_id());
   }
   if (from.level() != 0) {
-    set_level(from.level());
+    _internal_set_level(from._internal_level());
   }
   if (from.count() != 0) {
-    set_count(from.count());
+    _internal_set_count(from._internal_count());
   }
   if (from.resource() != 0) {
-    set_resource(from.resource());
+    _internal_set_resource(from._internal_resource());
   }
 }
 
-void GridClanBaseInfo::CopyFrom(const ::google::protobuf::Message& from) {
+void GridClanBaseInfo::CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
 // @@protoc_insertion_point(generalized_copy_from_start:NFMsg.GridClanBaseInfo)
   if (&from == this) return;
   Clear();
@@ -1336,24 +1179,19 @@ bool GridClanBaseInfo::IsInitialized() const {
   return true;
 }
 
-void GridClanBaseInfo::Swap(GridClanBaseInfo* other) {
-  if (other == this) return;
-  InternalSwap(other);
-}
 void GridClanBaseInfo::InternalSwap(GridClanBaseInfo* other) {
   using std::swap;
-  icon_.Swap(&other->icon_, &::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+  _internal_metadata_.Swap(&other->_internal_metadata_);
+  icon_.Swap(&other->icon_, &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(),
     GetArenaNoVirtual());
   swap(id_, other->id_);
   swap(level_, other->level_);
   swap(count_, other->count_);
   swap(resource_, other->resource_);
-  _internal_metadata_.Swap(&other->_internal_metadata_);
 }
 
-::google::protobuf::Metadata GridClanBaseInfo::GetMetadata() const {
-  protobuf_NFMsgExtra_2eproto::protobuf_AssignDescriptorsOnce();
-  return ::protobuf_NFMsgExtra_2eproto::file_level_metadata[kIndexInFileMessages];
+::PROTOBUF_NAMESPACE_ID::Metadata GridClanBaseInfo::GetMetadata() const {
+  return GetMetadataStatic();
 }
 
 
@@ -1361,26 +1199,25 @@ void GridClanBaseInfo::InternalSwap(GridClanBaseInfo* other) {
 
 void ReqBigMapGridInfo::InitAsDefaultInstance() {
 }
-#if !defined(_MSC_VER) || _MSC_VER >= 1900
-const int ReqBigMapGridInfo::kMapTitleIdFieldNumber;
-#endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
+class ReqBigMapGridInfo::_Internal {
+ public:
+};
 
 ReqBigMapGridInfo::ReqBigMapGridInfo()
-  : ::google::protobuf::Message(), _internal_metadata_(NULL) {
-  ::google::protobuf::internal::InitSCC(
-      &protobuf_NFMsgExtra_2eproto::scc_info_ReqBigMapGridInfo.base);
+  : ::PROTOBUF_NAMESPACE_ID::Message(), _internal_metadata_(nullptr) {
   SharedCtor();
   // @@protoc_insertion_point(constructor:NFMsg.ReqBigMapGridInfo)
 }
 ReqBigMapGridInfo::ReqBigMapGridInfo(const ReqBigMapGridInfo& from)
-  : ::google::protobuf::Message(),
-      _internal_metadata_(NULL),
+  : ::PROTOBUF_NAMESPACE_ID::Message(),
+      _internal_metadata_(nullptr),
       map_title_id_(from.map_title_id_) {
   _internal_metadata_.MergeFrom(from._internal_metadata_);
   // @@protoc_insertion_point(copy_constructor:NFMsg.ReqBigMapGridInfo)
 }
 
 void ReqBigMapGridInfo::SharedCtor() {
+  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&scc_info_ReqBigMapGridInfo_NFMsgExtra_2eproto.base);
 }
 
 ReqBigMapGridInfo::~ReqBigMapGridInfo() {
@@ -1394,20 +1231,15 @@ void ReqBigMapGridInfo::SharedDtor() {
 void ReqBigMapGridInfo::SetCachedSize(int size) const {
   _cached_size_.Set(size);
 }
-const ::google::protobuf::Descriptor* ReqBigMapGridInfo::descriptor() {
-  ::protobuf_NFMsgExtra_2eproto::protobuf_AssignDescriptorsOnce();
-  return ::protobuf_NFMsgExtra_2eproto::file_level_metadata[kIndexInFileMessages].descriptor;
-}
-
 const ReqBigMapGridInfo& ReqBigMapGridInfo::default_instance() {
-  ::google::protobuf::internal::InitSCC(&protobuf_NFMsgExtra_2eproto::scc_info_ReqBigMapGridInfo.base);
+  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&::scc_info_ReqBigMapGridInfo_NFMsgExtra_2eproto.base);
   return *internal_default_instance();
 }
 
 
 void ReqBigMapGridInfo::Clear() {
 // @@protoc_insertion_point(message_clear_start:NFMsg.ReqBigMapGridInfo)
-  ::google::protobuf::uint32 cached_has_bits = 0;
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
@@ -1415,83 +1247,60 @@ void ReqBigMapGridInfo::Clear() {
   _internal_metadata_.Clear();
 }
 
-bool ReqBigMapGridInfo::MergePartialFromCodedStream(
-    ::google::protobuf::io::CodedInputStream* input) {
-#define DO_(EXPRESSION) if (!GOOGLE_PREDICT_TRUE(EXPRESSION)) goto failure
-  ::google::protobuf::uint32 tag;
-  // @@protoc_insertion_point(parse_start:NFMsg.ReqBigMapGridInfo)
-  for (;;) {
-    ::std::pair<::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
-    tag = p.first;
-    if (!p.second) goto handle_unusual;
-    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
+const char* ReqBigMapGridInfo::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) {
+#define CHK_(x) if (PROTOBUF_PREDICT_FALSE(!(x))) goto failure
+  while (!ctx->Done(&ptr)) {
+    ::PROTOBUF_NAMESPACE_ID::uint32 tag;
+    ptr = ::PROTOBUF_NAMESPACE_ID::internal::ReadTag(ptr, &tag);
+    CHK_(ptr);
+    switch (tag >> 3) {
       // repeated bytes map_title_id = 1;
-      case 1: {
-        if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(10u /* 10 & 0xFF */)) {
-          DO_(::google::protobuf::internal::WireFormatLite::ReadBytes(
-                input, this->add_map_title_id()));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
+      case 1:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 10)) {
+          ptr -= 1;
+          do {
+            ptr += 1;
+            ptr = ::PROTOBUF_NAMESPACE_ID::internal::InlineGreedyStringParser(_internal_add_map_title_id(), ptr, ctx);
+            CHK_(ptr);
+            if (!ctx->DataAvailable(ptr)) break;
+          } while (::PROTOBUF_NAMESPACE_ID::internal::ExpectTag<10>(ptr));
+        } else goto handle_unusual;
+        continue;
       default: {
       handle_unusual:
-        if (tag == 0) {
+        if ((tag & 7) == 4 || tag == 0) {
+          ctx->SetLastTag(tag);
           goto success;
         }
-        DO_(::google::protobuf::internal::WireFormat::SkipField(
-              input, tag, _internal_metadata_.mutable_unknown_fields()));
-        break;
+        ptr = UnknownFieldParse(tag, &_internal_metadata_, ptr, ctx);
+        CHK_(ptr != nullptr);
+        continue;
       }
-    }
-  }
+    }  // switch
+  }  // while
 success:
-  // @@protoc_insertion_point(parse_success:NFMsg.ReqBigMapGridInfo)
-  return true;
+  return ptr;
 failure:
-  // @@protoc_insertion_point(parse_failure:NFMsg.ReqBigMapGridInfo)
-  return false;
-#undef DO_
+  ptr = nullptr;
+  goto success;
+#undef CHK_
 }
 
-void ReqBigMapGridInfo::SerializeWithCachedSizes(
-    ::google::protobuf::io::CodedOutputStream* output) const {
-  // @@protoc_insertion_point(serialize_start:NFMsg.ReqBigMapGridInfo)
-  ::google::protobuf::uint32 cached_has_bits = 0;
-  (void) cached_has_bits;
-
-  // repeated bytes map_title_id = 1;
-  for (int i = 0, n = this->map_title_id_size(); i < n; i++) {
-    ::google::protobuf::internal::WireFormatLite::WriteBytes(
-      1, this->map_title_id(i), output);
-  }
-
-  if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
-    ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
-        (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()), output);
-  }
-  // @@protoc_insertion_point(serialize_end:NFMsg.ReqBigMapGridInfo)
-}
-
-::google::protobuf::uint8* ReqBigMapGridInfo::InternalSerializeWithCachedSizesToArray(
-    bool deterministic, ::google::protobuf::uint8* target) const {
-  (void)deterministic; // Unused
+::PROTOBUF_NAMESPACE_ID::uint8* ReqBigMapGridInfo::InternalSerializeWithCachedSizesToArray(
+    ::PROTOBUF_NAMESPACE_ID::uint8* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const {
   // @@protoc_insertion_point(serialize_to_array_start:NFMsg.ReqBigMapGridInfo)
-  ::google::protobuf::uint32 cached_has_bits = 0;
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
   // repeated bytes map_title_id = 1;
-  for (int i = 0, n = this->map_title_id_size(); i < n; i++) {
-    target = ::google::protobuf::internal::WireFormatLite::
-      WriteBytesToArray(1, this->map_title_id(i), target);
+  for (int i = 0, n = this->_internal_map_title_id_size(); i < n; i++) {
+    const auto& s = this->_internal_map_title_id(i);
+    target = stream->WriteBytes(1, s, target);
   }
 
-  if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
-    target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
-        (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()), target);
+  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::InternalSerializeUnknownFieldsToArray(
+        _internal_metadata_.unknown_fields(), target, stream);
   }
   // @@protoc_insertion_point(serialize_to_array_end:NFMsg.ReqBigMapGridInfo)
   return target;
@@ -1501,33 +1310,36 @@ size_t ReqBigMapGridInfo::ByteSizeLong() const {
 // @@protoc_insertion_point(message_byte_size_start:NFMsg.ReqBigMapGridInfo)
   size_t total_size = 0;
 
-  if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
-    total_size +=
-      ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
-        (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()));
-  }
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
   // repeated bytes map_title_id = 1;
   total_size += 1 *
-      ::google::protobuf::internal::FromIntSize(this->map_title_id_size());
-  for (int i = 0, n = this->map_title_id_size(); i < n; i++) {
-    total_size += ::google::protobuf::internal::WireFormatLite::BytesSize(
-      this->map_title_id(i));
+      ::PROTOBUF_NAMESPACE_ID::internal::FromIntSize(map_title_id_.size());
+  for (int i = 0, n = map_title_id_.size(); i < n; i++) {
+    total_size += ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::BytesSize(
+      map_title_id_.Get(i));
   }
 
-  int cached_size = ::google::protobuf::internal::ToCachedSize(total_size);
+  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
+    return ::PROTOBUF_NAMESPACE_ID::internal::ComputeUnknownFieldsSize(
+        _internal_metadata_, total_size, &_cached_size_);
+  }
+  int cached_size = ::PROTOBUF_NAMESPACE_ID::internal::ToCachedSize(total_size);
   SetCachedSize(cached_size);
   return total_size;
 }
 
-void ReqBigMapGridInfo::MergeFrom(const ::google::protobuf::Message& from) {
+void ReqBigMapGridInfo::MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
 // @@protoc_insertion_point(generalized_merge_from_start:NFMsg.ReqBigMapGridInfo)
   GOOGLE_DCHECK_NE(&from, this);
   const ReqBigMapGridInfo* source =
-      ::google::protobuf::internal::DynamicCastToGenerated<const ReqBigMapGridInfo>(
+      ::PROTOBUF_NAMESPACE_ID::DynamicCastToGenerated<ReqBigMapGridInfo>(
           &from);
-  if (source == NULL) {
+  if (source == nullptr) {
   // @@protoc_insertion_point(generalized_merge_from_cast_fail:NFMsg.ReqBigMapGridInfo)
-    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
+    ::PROTOBUF_NAMESPACE_ID::internal::ReflectionOps::Merge(from, this);
   } else {
   // @@protoc_insertion_point(generalized_merge_from_cast_success:NFMsg.ReqBigMapGridInfo)
     MergeFrom(*source);
@@ -1538,13 +1350,13 @@ void ReqBigMapGridInfo::MergeFrom(const ReqBigMapGridInfo& from) {
 // @@protoc_insertion_point(class_specific_merge_from_start:NFMsg.ReqBigMapGridInfo)
   GOOGLE_DCHECK_NE(&from, this);
   _internal_metadata_.MergeFrom(from._internal_metadata_);
-  ::google::protobuf::uint32 cached_has_bits = 0;
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
   map_title_id_.MergeFrom(from.map_title_id_);
 }
 
-void ReqBigMapGridInfo::CopyFrom(const ::google::protobuf::Message& from) {
+void ReqBigMapGridInfo::CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
 // @@protoc_insertion_point(generalized_copy_from_start:NFMsg.ReqBigMapGridInfo)
   if (&from == this) return;
   Clear();
@@ -1562,19 +1374,14 @@ bool ReqBigMapGridInfo::IsInitialized() const {
   return true;
 }
 
-void ReqBigMapGridInfo::Swap(ReqBigMapGridInfo* other) {
-  if (other == this) return;
-  InternalSwap(other);
-}
 void ReqBigMapGridInfo::InternalSwap(ReqBigMapGridInfo* other) {
   using std::swap;
-  map_title_id_.InternalSwap(CastToBase(&other->map_title_id_));
   _internal_metadata_.Swap(&other->_internal_metadata_);
+  map_title_id_.InternalSwap(&other->map_title_id_);
 }
 
-::google::protobuf::Metadata ReqBigMapGridInfo::GetMetadata() const {
-  protobuf_NFMsgExtra_2eproto::protobuf_AssignDescriptorsOnce();
-  return ::protobuf_NFMsgExtra_2eproto::file_level_metadata[kIndexInFileMessages];
+::PROTOBUF_NAMESPACE_ID::Metadata ReqBigMapGridInfo::GetMetadata() const {
+  return GetMetadataStatic();
 }
 
 
@@ -1588,56 +1395,64 @@ void BigMapGridBaseInfo::InitAsDefaultInstance() {
   ::NFMsg::_BigMapGridBaseInfo_default_instance_._instance.get_mutable()->hurter_ = const_cast< ::NFMsg::Ident*>(
       ::NFMsg::Ident::internal_default_instance());
 }
+class BigMapGridBaseInfo::_Internal {
+ public:
+  static const ::NFMsg::GridClanBaseInfo& guild_info(const BigMapGridBaseInfo* msg);
+  static const ::NFMsg::Ident& kingwarrer(const BigMapGridBaseInfo* msg);
+  static const ::NFMsg::Ident& hurter(const BigMapGridBaseInfo* msg);
+};
+
+const ::NFMsg::GridClanBaseInfo&
+BigMapGridBaseInfo::_Internal::guild_info(const BigMapGridBaseInfo* msg) {
+  return *msg->guild_info_;
+}
+const ::NFMsg::Ident&
+BigMapGridBaseInfo::_Internal::kingwarrer(const BigMapGridBaseInfo* msg) {
+  return *msg->kingwarrer_;
+}
+const ::NFMsg::Ident&
+BigMapGridBaseInfo::_Internal::hurter(const BigMapGridBaseInfo* msg) {
+  return *msg->hurter_;
+}
 void BigMapGridBaseInfo::clear_kingwarrer() {
-  if (GetArenaNoVirtual() == NULL && kingwarrer_ != NULL) {
+  if (GetArenaNoVirtual() == nullptr && kingwarrer_ != nullptr) {
     delete kingwarrer_;
   }
-  kingwarrer_ = NULL;
+  kingwarrer_ = nullptr;
 }
 void BigMapGridBaseInfo::clear_hurter() {
-  if (GetArenaNoVirtual() == NULL && hurter_ != NULL) {
+  if (GetArenaNoVirtual() == nullptr && hurter_ != nullptr) {
     delete hurter_;
   }
-  hurter_ = NULL;
+  hurter_ = nullptr;
 }
-#if !defined(_MSC_VER) || _MSC_VER >= 1900
-const int BigMapGridBaseInfo::kIdFieldNumber;
-const int BigMapGridBaseInfo::kGuildInfoFieldNumber;
-const int BigMapGridBaseInfo::kKingwarTimeFieldNumber;
-const int BigMapGridBaseInfo::kKingwarrerFieldNumber;
-const int BigMapGridBaseInfo::kHurtingTimeFieldNumber;
-const int BigMapGridBaseInfo::kHurterFieldNumber;
-#endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
-
 BigMapGridBaseInfo::BigMapGridBaseInfo()
-  : ::google::protobuf::Message(), _internal_metadata_(NULL) {
-  ::google::protobuf::internal::InitSCC(
-      &protobuf_NFMsgExtra_2eproto::scc_info_BigMapGridBaseInfo.base);
+  : ::PROTOBUF_NAMESPACE_ID::Message(), _internal_metadata_(nullptr) {
   SharedCtor();
   // @@protoc_insertion_point(constructor:NFMsg.BigMapGridBaseInfo)
 }
 BigMapGridBaseInfo::BigMapGridBaseInfo(const BigMapGridBaseInfo& from)
-  : ::google::protobuf::Message(),
-      _internal_metadata_(NULL) {
+  : ::PROTOBUF_NAMESPACE_ID::Message(),
+      _internal_metadata_(nullptr) {
   _internal_metadata_.MergeFrom(from._internal_metadata_);
-  id_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  if (from.id().size() > 0) {
-    id_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.id_);
+  id_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  if (!from._internal_id().empty()) {
+    id_.AssignWithDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), from.id_);
   }
-  if (from.has_guild_info()) {
+  if (from._internal_has_guild_info()) {
     guild_info_ = new ::NFMsg::GridClanBaseInfo(*from.guild_info_);
   } else {
-    guild_info_ = NULL;
+    guild_info_ = nullptr;
   }
-  if (from.has_kingwarrer()) {
+  if (from._internal_has_kingwarrer()) {
     kingwarrer_ = new ::NFMsg::Ident(*from.kingwarrer_);
   } else {
-    kingwarrer_ = NULL;
+    kingwarrer_ = nullptr;
   }
-  if (from.has_hurter()) {
+  if (from._internal_has_hurter()) {
     hurter_ = new ::NFMsg::Ident(*from.hurter_);
   } else {
-    hurter_ = NULL;
+    hurter_ = nullptr;
   }
   ::memcpy(&kingwar_time_, &from.kingwar_time_,
     static_cast<size_t>(reinterpret_cast<char*>(&hurting_time_) -
@@ -1646,7 +1461,8 @@ BigMapGridBaseInfo::BigMapGridBaseInfo(const BigMapGridBaseInfo& from)
 }
 
 void BigMapGridBaseInfo::SharedCtor() {
-  id_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&scc_info_BigMapGridBaseInfo_NFMsgExtra_2eproto.base);
+  id_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
   ::memset(&guild_info_, 0, static_cast<size_t>(
       reinterpret_cast<char*>(&hurting_time_) -
       reinterpret_cast<char*>(&guild_info_)) + sizeof(hurting_time_));
@@ -1658,7 +1474,7 @@ BigMapGridBaseInfo::~BigMapGridBaseInfo() {
 }
 
 void BigMapGridBaseInfo::SharedDtor() {
-  id_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  id_.DestroyNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
   if (this != internal_default_instance()) delete guild_info_;
   if (this != internal_default_instance()) delete kingwarrer_;
   if (this != internal_default_instance()) delete hurter_;
@@ -1667,243 +1483,157 @@ void BigMapGridBaseInfo::SharedDtor() {
 void BigMapGridBaseInfo::SetCachedSize(int size) const {
   _cached_size_.Set(size);
 }
-const ::google::protobuf::Descriptor* BigMapGridBaseInfo::descriptor() {
-  ::protobuf_NFMsgExtra_2eproto::protobuf_AssignDescriptorsOnce();
-  return ::protobuf_NFMsgExtra_2eproto::file_level_metadata[kIndexInFileMessages].descriptor;
-}
-
 const BigMapGridBaseInfo& BigMapGridBaseInfo::default_instance() {
-  ::google::protobuf::internal::InitSCC(&protobuf_NFMsgExtra_2eproto::scc_info_BigMapGridBaseInfo.base);
+  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&::scc_info_BigMapGridBaseInfo_NFMsgExtra_2eproto.base);
   return *internal_default_instance();
 }
 
 
 void BigMapGridBaseInfo::Clear() {
 // @@protoc_insertion_point(message_clear_start:NFMsg.BigMapGridBaseInfo)
-  ::google::protobuf::uint32 cached_has_bits = 0;
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  id_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  if (GetArenaNoVirtual() == NULL && guild_info_ != NULL) {
+  id_.ClearToEmptyNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  if (GetArenaNoVirtual() == nullptr && guild_info_ != nullptr) {
     delete guild_info_;
   }
-  guild_info_ = NULL;
-  if (GetArenaNoVirtual() == NULL && kingwarrer_ != NULL) {
+  guild_info_ = nullptr;
+  if (GetArenaNoVirtual() == nullptr && kingwarrer_ != nullptr) {
     delete kingwarrer_;
   }
-  kingwarrer_ = NULL;
-  if (GetArenaNoVirtual() == NULL && hurter_ != NULL) {
+  kingwarrer_ = nullptr;
+  if (GetArenaNoVirtual() == nullptr && hurter_ != nullptr) {
     delete hurter_;
   }
-  hurter_ = NULL;
+  hurter_ = nullptr;
   ::memset(&kingwar_time_, 0, static_cast<size_t>(
       reinterpret_cast<char*>(&hurting_time_) -
       reinterpret_cast<char*>(&kingwar_time_)) + sizeof(hurting_time_));
   _internal_metadata_.Clear();
 }
 
-bool BigMapGridBaseInfo::MergePartialFromCodedStream(
-    ::google::protobuf::io::CodedInputStream* input) {
-#define DO_(EXPRESSION) if (!GOOGLE_PREDICT_TRUE(EXPRESSION)) goto failure
-  ::google::protobuf::uint32 tag;
-  // @@protoc_insertion_point(parse_start:NFMsg.BigMapGridBaseInfo)
-  for (;;) {
-    ::std::pair<::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(16383u);
-    tag = p.first;
-    if (!p.second) goto handle_unusual;
-    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
+const char* BigMapGridBaseInfo::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) {
+#define CHK_(x) if (PROTOBUF_PREDICT_FALSE(!(x))) goto failure
+  while (!ctx->Done(&ptr)) {
+    ::PROTOBUF_NAMESPACE_ID::uint32 tag;
+    ptr = ::PROTOBUF_NAMESPACE_ID::internal::ReadTag(ptr, &tag);
+    CHK_(ptr);
+    switch (tag >> 3) {
       // bytes id = 1;
-      case 1: {
-        if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(10u /* 10 & 0xFF */)) {
-          DO_(::google::protobuf::internal::WireFormatLite::ReadBytes(
-                input, this->mutable_id()));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
+      case 1:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 10)) {
+          ptr = ::PROTOBUF_NAMESPACE_ID::internal::InlineGreedyStringParser(_internal_mutable_id(), ptr, ctx);
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
       // .NFMsg.GridClanBaseInfo guild_info = 2;
-      case 2: {
-        if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(18u /* 18 & 0xFF */)) {
-          DO_(::google::protobuf::internal::WireFormatLite::ReadMessage(
-               input, mutable_guild_info()));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
+      case 2:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 18)) {
+          ptr = ctx->ParseMessage(_internal_mutable_guild_info(), ptr);
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
       // int32 kingwar_time = 10;
-      case 10: {
-        if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(80u /* 80 & 0xFF */)) {
-
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
-                 input, &kingwar_time_)));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
+      case 10:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 80)) {
+          kingwar_time_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint(&ptr);
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
       // .NFMsg.Ident kingwarrer = 11;
-      case 11: {
-        if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(90u /* 90 & 0xFF */)) {
-          DO_(::google::protobuf::internal::WireFormatLite::ReadMessage(
-               input, mutable_kingwarrer()));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
+      case 11:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 90)) {
+          ptr = ctx->ParseMessage(_internal_mutable_kingwarrer(), ptr);
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
       // int32 hurting_time = 20;
-      case 20: {
-        if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(160u /* 160 & 0xFF */)) {
-
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
-                 input, &hurting_time_)));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
+      case 20:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 160)) {
+          hurting_time_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint(&ptr);
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
       // .NFMsg.Ident hurter = 21;
-      case 21: {
-        if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(170u /* 170 & 0xFF */)) {
-          DO_(::google::protobuf::internal::WireFormatLite::ReadMessage(
-               input, mutable_hurter()));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
+      case 21:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 170)) {
+          ptr = ctx->ParseMessage(_internal_mutable_hurter(), ptr);
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
       default: {
       handle_unusual:
-        if (tag == 0) {
+        if ((tag & 7) == 4 || tag == 0) {
+          ctx->SetLastTag(tag);
           goto success;
         }
-        DO_(::google::protobuf::internal::WireFormat::SkipField(
-              input, tag, _internal_metadata_.mutable_unknown_fields()));
-        break;
+        ptr = UnknownFieldParse(tag, &_internal_metadata_, ptr, ctx);
+        CHK_(ptr != nullptr);
+        continue;
       }
-    }
-  }
+    }  // switch
+  }  // while
 success:
-  // @@protoc_insertion_point(parse_success:NFMsg.BigMapGridBaseInfo)
-  return true;
+  return ptr;
 failure:
-  // @@protoc_insertion_point(parse_failure:NFMsg.BigMapGridBaseInfo)
-  return false;
-#undef DO_
+  ptr = nullptr;
+  goto success;
+#undef CHK_
 }
 
-void BigMapGridBaseInfo::SerializeWithCachedSizes(
-    ::google::protobuf::io::CodedOutputStream* output) const {
-  // @@protoc_insertion_point(serialize_start:NFMsg.BigMapGridBaseInfo)
-  ::google::protobuf::uint32 cached_has_bits = 0;
-  (void) cached_has_bits;
-
-  // bytes id = 1;
-  if (this->id().size() > 0) {
-    ::google::protobuf::internal::WireFormatLite::WriteBytesMaybeAliased(
-      1, this->id(), output);
-  }
-
-  // .NFMsg.GridClanBaseInfo guild_info = 2;
-  if (this->has_guild_info()) {
-    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      2, this->_internal_guild_info(), output);
-  }
-
-  // int32 kingwar_time = 10;
-  if (this->kingwar_time() != 0) {
-    ::google::protobuf::internal::WireFormatLite::WriteInt32(10, this->kingwar_time(), output);
-  }
-
-  // .NFMsg.Ident kingwarrer = 11;
-  if (this->has_kingwarrer()) {
-    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      11, this->_internal_kingwarrer(), output);
-  }
-
-  // int32 hurting_time = 20;
-  if (this->hurting_time() != 0) {
-    ::google::protobuf::internal::WireFormatLite::WriteInt32(20, this->hurting_time(), output);
-  }
-
-  // .NFMsg.Ident hurter = 21;
-  if (this->has_hurter()) {
-    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      21, this->_internal_hurter(), output);
-  }
-
-  if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
-    ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
-        (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()), output);
-  }
-  // @@protoc_insertion_point(serialize_end:NFMsg.BigMapGridBaseInfo)
-}
-
-::google::protobuf::uint8* BigMapGridBaseInfo::InternalSerializeWithCachedSizesToArray(
-    bool deterministic, ::google::protobuf::uint8* target) const {
-  (void)deterministic; // Unused
+::PROTOBUF_NAMESPACE_ID::uint8* BigMapGridBaseInfo::InternalSerializeWithCachedSizesToArray(
+    ::PROTOBUF_NAMESPACE_ID::uint8* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const {
   // @@protoc_insertion_point(serialize_to_array_start:NFMsg.BigMapGridBaseInfo)
-  ::google::protobuf::uint32 cached_has_bits = 0;
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
   // bytes id = 1;
   if (this->id().size() > 0) {
-    target =
-      ::google::protobuf::internal::WireFormatLite::WriteBytesToArray(
-        1, this->id(), target);
+    target = stream->WriteBytesMaybeAliased(
+        1, this->_internal_id(), target);
   }
 
   // .NFMsg.GridClanBaseInfo guild_info = 2;
   if (this->has_guild_info()) {
-    target = ::google::protobuf::internal::WireFormatLite::
+    target = stream->EnsureSpace(target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
       InternalWriteMessageToArray(
-        2, this->_internal_guild_info(), deterministic, target);
+        2, _Internal::guild_info(this), target, stream);
   }
 
   // int32 kingwar_time = 10;
   if (this->kingwar_time() != 0) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(10, this->kingwar_time(), target);
+    target = stream->EnsureSpace(target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt32ToArray(10, this->_internal_kingwar_time(), target);
   }
 
   // .NFMsg.Ident kingwarrer = 11;
   if (this->has_kingwarrer()) {
-    target = ::google::protobuf::internal::WireFormatLite::
+    target = stream->EnsureSpace(target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
       InternalWriteMessageToArray(
-        11, this->_internal_kingwarrer(), deterministic, target);
+        11, _Internal::kingwarrer(this), target, stream);
   }
 
   // int32 hurting_time = 20;
   if (this->hurting_time() != 0) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(20, this->hurting_time(), target);
+    target = stream->EnsureSpace(target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt32ToArray(20, this->_internal_hurting_time(), target);
   }
 
   // .NFMsg.Ident hurter = 21;
   if (this->has_hurter()) {
-    target = ::google::protobuf::internal::WireFormatLite::
+    target = stream->EnsureSpace(target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
       InternalWriteMessageToArray(
-        21, this->_internal_hurter(), deterministic, target);
+        21, _Internal::hurter(this), target, stream);
   }
 
-  if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
-    target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
-        (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()), target);
+  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::InternalSerializeUnknownFieldsToArray(
+        _internal_metadata_.unknown_fields(), target, stream);
   }
   // @@protoc_insertion_point(serialize_to_array_end:NFMsg.BigMapGridBaseInfo)
   return target;
@@ -1913,67 +1643,70 @@ size_t BigMapGridBaseInfo::ByteSizeLong() const {
 // @@protoc_insertion_point(message_byte_size_start:NFMsg.BigMapGridBaseInfo)
   size_t total_size = 0;
 
-  if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
-    total_size +=
-      ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
-        (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()));
-  }
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
   // bytes id = 1;
   if (this->id().size() > 0) {
     total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::BytesSize(
-        this->id());
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::BytesSize(
+        this->_internal_id());
   }
 
   // .NFMsg.GridClanBaseInfo guild_info = 2;
   if (this->has_guild_info()) {
     total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::MessageSize(
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
         *guild_info_);
   }
 
   // .NFMsg.Ident kingwarrer = 11;
   if (this->has_kingwarrer()) {
     total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::MessageSize(
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
         *kingwarrer_);
   }
 
   // .NFMsg.Ident hurter = 21;
   if (this->has_hurter()) {
     total_size += 2 +
-      ::google::protobuf::internal::WireFormatLite::MessageSize(
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
         *hurter_);
   }
 
   // int32 kingwar_time = 10;
   if (this->kingwar_time() != 0) {
     total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::Int32Size(
-        this->kingwar_time());
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::Int32Size(
+        this->_internal_kingwar_time());
   }
 
   // int32 hurting_time = 20;
   if (this->hurting_time() != 0) {
     total_size += 2 +
-      ::google::protobuf::internal::WireFormatLite::Int32Size(
-        this->hurting_time());
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::Int32Size(
+        this->_internal_hurting_time());
   }
 
-  int cached_size = ::google::protobuf::internal::ToCachedSize(total_size);
+  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
+    return ::PROTOBUF_NAMESPACE_ID::internal::ComputeUnknownFieldsSize(
+        _internal_metadata_, total_size, &_cached_size_);
+  }
+  int cached_size = ::PROTOBUF_NAMESPACE_ID::internal::ToCachedSize(total_size);
   SetCachedSize(cached_size);
   return total_size;
 }
 
-void BigMapGridBaseInfo::MergeFrom(const ::google::protobuf::Message& from) {
+void BigMapGridBaseInfo::MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
 // @@protoc_insertion_point(generalized_merge_from_start:NFMsg.BigMapGridBaseInfo)
   GOOGLE_DCHECK_NE(&from, this);
   const BigMapGridBaseInfo* source =
-      ::google::protobuf::internal::DynamicCastToGenerated<const BigMapGridBaseInfo>(
+      ::PROTOBUF_NAMESPACE_ID::DynamicCastToGenerated<BigMapGridBaseInfo>(
           &from);
-  if (source == NULL) {
+  if (source == nullptr) {
   // @@protoc_insertion_point(generalized_merge_from_cast_fail:NFMsg.BigMapGridBaseInfo)
-    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
+    ::PROTOBUF_NAMESPACE_ID::internal::ReflectionOps::Merge(from, this);
   } else {
   // @@protoc_insertion_point(generalized_merge_from_cast_success:NFMsg.BigMapGridBaseInfo)
     MergeFrom(*source);
@@ -1984,31 +1717,31 @@ void BigMapGridBaseInfo::MergeFrom(const BigMapGridBaseInfo& from) {
 // @@protoc_insertion_point(class_specific_merge_from_start:NFMsg.BigMapGridBaseInfo)
   GOOGLE_DCHECK_NE(&from, this);
   _internal_metadata_.MergeFrom(from._internal_metadata_);
-  ::google::protobuf::uint32 cached_has_bits = 0;
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
   if (from.id().size() > 0) {
 
-    id_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.id_);
+    id_.AssignWithDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), from.id_);
   }
   if (from.has_guild_info()) {
-    mutable_guild_info()->::NFMsg::GridClanBaseInfo::MergeFrom(from.guild_info());
+    _internal_mutable_guild_info()->::NFMsg::GridClanBaseInfo::MergeFrom(from._internal_guild_info());
   }
   if (from.has_kingwarrer()) {
-    mutable_kingwarrer()->::NFMsg::Ident::MergeFrom(from.kingwarrer());
+    _internal_mutable_kingwarrer()->::NFMsg::Ident::MergeFrom(from._internal_kingwarrer());
   }
   if (from.has_hurter()) {
-    mutable_hurter()->::NFMsg::Ident::MergeFrom(from.hurter());
+    _internal_mutable_hurter()->::NFMsg::Ident::MergeFrom(from._internal_hurter());
   }
   if (from.kingwar_time() != 0) {
-    set_kingwar_time(from.kingwar_time());
+    _internal_set_kingwar_time(from._internal_kingwar_time());
   }
   if (from.hurting_time() != 0) {
-    set_hurting_time(from.hurting_time());
+    _internal_set_hurting_time(from._internal_hurting_time());
   }
 }
 
-void BigMapGridBaseInfo::CopyFrom(const ::google::protobuf::Message& from) {
+void BigMapGridBaseInfo::CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
 // @@protoc_insertion_point(generalized_copy_from_start:NFMsg.BigMapGridBaseInfo)
   if (&from == this) return;
   Clear();
@@ -2026,25 +1759,20 @@ bool BigMapGridBaseInfo::IsInitialized() const {
   return true;
 }
 
-void BigMapGridBaseInfo::Swap(BigMapGridBaseInfo* other) {
-  if (other == this) return;
-  InternalSwap(other);
-}
 void BigMapGridBaseInfo::InternalSwap(BigMapGridBaseInfo* other) {
   using std::swap;
-  id_.Swap(&other->id_, &::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+  _internal_metadata_.Swap(&other->_internal_metadata_);
+  id_.Swap(&other->id_, &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(),
     GetArenaNoVirtual());
   swap(guild_info_, other->guild_info_);
   swap(kingwarrer_, other->kingwarrer_);
   swap(hurter_, other->hurter_);
   swap(kingwar_time_, other->kingwar_time_);
   swap(hurting_time_, other->hurting_time_);
-  _internal_metadata_.Swap(&other->_internal_metadata_);
 }
 
-::google::protobuf::Metadata BigMapGridBaseInfo::GetMetadata() const {
-  protobuf_NFMsgExtra_2eproto::protobuf_AssignDescriptorsOnce();
-  return ::protobuf_NFMsgExtra_2eproto::file_level_metadata[kIndexInFileMessages];
+::PROTOBUF_NAMESPACE_ID::Metadata BigMapGridBaseInfo::GetMetadata() const {
+  return GetMetadataStatic();
 }
 
 
@@ -2054,43 +1782,42 @@ void BigMapLeaveMsg::InitAsDefaultInstance() {
   ::NFMsg::_BigMapLeaveMsg_default_instance_._instance.get_mutable()->owner_ = const_cast< ::NFMsg::Ident*>(
       ::NFMsg::Ident::internal_default_instance());
 }
+class BigMapLeaveMsg::_Internal {
+ public:
+  static const ::NFMsg::Ident& owner(const BigMapLeaveMsg* msg);
+};
+
+const ::NFMsg::Ident&
+BigMapLeaveMsg::_Internal::owner(const BigMapLeaveMsg* msg) {
+  return *msg->owner_;
+}
 void BigMapLeaveMsg::clear_owner() {
-  if (GetArenaNoVirtual() == NULL && owner_ != NULL) {
+  if (GetArenaNoVirtual() == nullptr && owner_ != nullptr) {
     delete owner_;
   }
-  owner_ = NULL;
+  owner_ = nullptr;
 }
-#if !defined(_MSC_VER) || _MSC_VER >= 1900
-const int BigMapLeaveMsg::kOwnerFieldNumber;
-const int BigMapLeaveMsg::kOwnerNameFieldNumber;
-const int BigMapLeaveMsg::kMsgDataFieldNumber;
-const int BigMapLeaveMsg::kMsgTimeFieldNumber;
-const int BigMapLeaveMsg::kOwnerLevelFieldNumber;
-#endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
-
 BigMapLeaveMsg::BigMapLeaveMsg()
-  : ::google::protobuf::Message(), _internal_metadata_(NULL) {
-  ::google::protobuf::internal::InitSCC(
-      &protobuf_NFMsgExtra_2eproto::scc_info_BigMapLeaveMsg.base);
+  : ::PROTOBUF_NAMESPACE_ID::Message(), _internal_metadata_(nullptr) {
   SharedCtor();
   // @@protoc_insertion_point(constructor:NFMsg.BigMapLeaveMsg)
 }
 BigMapLeaveMsg::BigMapLeaveMsg(const BigMapLeaveMsg& from)
-  : ::google::protobuf::Message(),
-      _internal_metadata_(NULL) {
+  : ::PROTOBUF_NAMESPACE_ID::Message(),
+      _internal_metadata_(nullptr) {
   _internal_metadata_.MergeFrom(from._internal_metadata_);
-  owner_name_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  if (from.owner_name().size() > 0) {
-    owner_name_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.owner_name_);
+  owner_name_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  if (!from._internal_owner_name().empty()) {
+    owner_name_.AssignWithDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), from.owner_name_);
   }
-  msg_data_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  if (from.msg_data().size() > 0) {
-    msg_data_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.msg_data_);
+  msg_data_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  if (!from._internal_msg_data().empty()) {
+    msg_data_.AssignWithDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), from.msg_data_);
   }
-  if (from.has_owner()) {
+  if (from._internal_has_owner()) {
     owner_ = new ::NFMsg::Ident(*from.owner_);
   } else {
-    owner_ = NULL;
+    owner_ = nullptr;
   }
   ::memcpy(&msg_time_, &from.msg_time_,
     static_cast<size_t>(reinterpret_cast<char*>(&owner_level_) -
@@ -2099,8 +1826,9 @@ BigMapLeaveMsg::BigMapLeaveMsg(const BigMapLeaveMsg& from)
 }
 
 void BigMapLeaveMsg::SharedCtor() {
-  owner_name_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  msg_data_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&scc_info_BigMapLeaveMsg_NFMsgExtra_2eproto.base);
+  owner_name_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  msg_data_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
   ::memset(&owner_, 0, static_cast<size_t>(
       reinterpret_cast<char*>(&owner_level_) -
       reinterpret_cast<char*>(&owner_)) + sizeof(owner_level_));
@@ -2112,219 +1840,141 @@ BigMapLeaveMsg::~BigMapLeaveMsg() {
 }
 
 void BigMapLeaveMsg::SharedDtor() {
-  owner_name_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  msg_data_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  owner_name_.DestroyNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  msg_data_.DestroyNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
   if (this != internal_default_instance()) delete owner_;
 }
 
 void BigMapLeaveMsg::SetCachedSize(int size) const {
   _cached_size_.Set(size);
 }
-const ::google::protobuf::Descriptor* BigMapLeaveMsg::descriptor() {
-  ::protobuf_NFMsgExtra_2eproto::protobuf_AssignDescriptorsOnce();
-  return ::protobuf_NFMsgExtra_2eproto::file_level_metadata[kIndexInFileMessages].descriptor;
-}
-
 const BigMapLeaveMsg& BigMapLeaveMsg::default_instance() {
-  ::google::protobuf::internal::InitSCC(&protobuf_NFMsgExtra_2eproto::scc_info_BigMapLeaveMsg.base);
+  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&::scc_info_BigMapLeaveMsg_NFMsgExtra_2eproto.base);
   return *internal_default_instance();
 }
 
 
 void BigMapLeaveMsg::Clear() {
 // @@protoc_insertion_point(message_clear_start:NFMsg.BigMapLeaveMsg)
-  ::google::protobuf::uint32 cached_has_bits = 0;
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  owner_name_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  msg_data_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  if (GetArenaNoVirtual() == NULL && owner_ != NULL) {
+  owner_name_.ClearToEmptyNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  msg_data_.ClearToEmptyNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  if (GetArenaNoVirtual() == nullptr && owner_ != nullptr) {
     delete owner_;
   }
-  owner_ = NULL;
+  owner_ = nullptr;
   ::memset(&msg_time_, 0, static_cast<size_t>(
       reinterpret_cast<char*>(&owner_level_) -
       reinterpret_cast<char*>(&msg_time_)) + sizeof(owner_level_));
   _internal_metadata_.Clear();
 }
 
-bool BigMapLeaveMsg::MergePartialFromCodedStream(
-    ::google::protobuf::io::CodedInputStream* input) {
-#define DO_(EXPRESSION) if (!GOOGLE_PREDICT_TRUE(EXPRESSION)) goto failure
-  ::google::protobuf::uint32 tag;
-  // @@protoc_insertion_point(parse_start:NFMsg.BigMapLeaveMsg)
-  for (;;) {
-    ::std::pair<::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
-    tag = p.first;
-    if (!p.second) goto handle_unusual;
-    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
+const char* BigMapLeaveMsg::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) {
+#define CHK_(x) if (PROTOBUF_PREDICT_FALSE(!(x))) goto failure
+  while (!ctx->Done(&ptr)) {
+    ::PROTOBUF_NAMESPACE_ID::uint32 tag;
+    ptr = ::PROTOBUF_NAMESPACE_ID::internal::ReadTag(ptr, &tag);
+    CHK_(ptr);
+    switch (tag >> 3) {
       // .NFMsg.Ident owner = 1;
-      case 1: {
-        if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(10u /* 10 & 0xFF */)) {
-          DO_(::google::protobuf::internal::WireFormatLite::ReadMessage(
-               input, mutable_owner()));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
+      case 1:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 10)) {
+          ptr = ctx->ParseMessage(_internal_mutable_owner(), ptr);
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
       // bytes owner_name = 2;
-      case 2: {
-        if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(18u /* 18 & 0xFF */)) {
-          DO_(::google::protobuf::internal::WireFormatLite::ReadBytes(
-                input, this->mutable_owner_name()));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
+      case 2:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 18)) {
+          ptr = ::PROTOBUF_NAMESPACE_ID::internal::InlineGreedyStringParser(_internal_mutable_owner_name(), ptr, ctx);
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
       // bytes msg_data = 3;
-      case 3: {
-        if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(26u /* 26 & 0xFF */)) {
-          DO_(::google::protobuf::internal::WireFormatLite::ReadBytes(
-                input, this->mutable_msg_data()));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
+      case 3:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 26)) {
+          ptr = ::PROTOBUF_NAMESPACE_ID::internal::InlineGreedyStringParser(_internal_mutable_msg_data(), ptr, ctx);
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
       // int32 msg_time = 4;
-      case 4: {
-        if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(32u /* 32 & 0xFF */)) {
-
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
-                 input, &msg_time_)));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
+      case 4:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 32)) {
+          msg_time_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint(&ptr);
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
       // int32 owner_level = 5;
-      case 5: {
-        if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(40u /* 40 & 0xFF */)) {
-
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
-                 input, &owner_level_)));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
+      case 5:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 40)) {
+          owner_level_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint(&ptr);
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
       default: {
       handle_unusual:
-        if (tag == 0) {
+        if ((tag & 7) == 4 || tag == 0) {
+          ctx->SetLastTag(tag);
           goto success;
         }
-        DO_(::google::protobuf::internal::WireFormat::SkipField(
-              input, tag, _internal_metadata_.mutable_unknown_fields()));
-        break;
+        ptr = UnknownFieldParse(tag, &_internal_metadata_, ptr, ctx);
+        CHK_(ptr != nullptr);
+        continue;
       }
-    }
-  }
+    }  // switch
+  }  // while
 success:
-  // @@protoc_insertion_point(parse_success:NFMsg.BigMapLeaveMsg)
-  return true;
+  return ptr;
 failure:
-  // @@protoc_insertion_point(parse_failure:NFMsg.BigMapLeaveMsg)
-  return false;
-#undef DO_
+  ptr = nullptr;
+  goto success;
+#undef CHK_
 }
 
-void BigMapLeaveMsg::SerializeWithCachedSizes(
-    ::google::protobuf::io::CodedOutputStream* output) const {
-  // @@protoc_insertion_point(serialize_start:NFMsg.BigMapLeaveMsg)
-  ::google::protobuf::uint32 cached_has_bits = 0;
-  (void) cached_has_bits;
-
-  // .NFMsg.Ident owner = 1;
-  if (this->has_owner()) {
-    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      1, this->_internal_owner(), output);
-  }
-
-  // bytes owner_name = 2;
-  if (this->owner_name().size() > 0) {
-    ::google::protobuf::internal::WireFormatLite::WriteBytesMaybeAliased(
-      2, this->owner_name(), output);
-  }
-
-  // bytes msg_data = 3;
-  if (this->msg_data().size() > 0) {
-    ::google::protobuf::internal::WireFormatLite::WriteBytesMaybeAliased(
-      3, this->msg_data(), output);
-  }
-
-  // int32 msg_time = 4;
-  if (this->msg_time() != 0) {
-    ::google::protobuf::internal::WireFormatLite::WriteInt32(4, this->msg_time(), output);
-  }
-
-  // int32 owner_level = 5;
-  if (this->owner_level() != 0) {
-    ::google::protobuf::internal::WireFormatLite::WriteInt32(5, this->owner_level(), output);
-  }
-
-  if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
-    ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
-        (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()), output);
-  }
-  // @@protoc_insertion_point(serialize_end:NFMsg.BigMapLeaveMsg)
-}
-
-::google::protobuf::uint8* BigMapLeaveMsg::InternalSerializeWithCachedSizesToArray(
-    bool deterministic, ::google::protobuf::uint8* target) const {
-  (void)deterministic; // Unused
+::PROTOBUF_NAMESPACE_ID::uint8* BigMapLeaveMsg::InternalSerializeWithCachedSizesToArray(
+    ::PROTOBUF_NAMESPACE_ID::uint8* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const {
   // @@protoc_insertion_point(serialize_to_array_start:NFMsg.BigMapLeaveMsg)
-  ::google::protobuf::uint32 cached_has_bits = 0;
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
   // .NFMsg.Ident owner = 1;
   if (this->has_owner()) {
-    target = ::google::protobuf::internal::WireFormatLite::
+    target = stream->EnsureSpace(target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
       InternalWriteMessageToArray(
-        1, this->_internal_owner(), deterministic, target);
+        1, _Internal::owner(this), target, stream);
   }
 
   // bytes owner_name = 2;
   if (this->owner_name().size() > 0) {
-    target =
-      ::google::protobuf::internal::WireFormatLite::WriteBytesToArray(
-        2, this->owner_name(), target);
+    target = stream->WriteBytesMaybeAliased(
+        2, this->_internal_owner_name(), target);
   }
 
   // bytes msg_data = 3;
   if (this->msg_data().size() > 0) {
-    target =
-      ::google::protobuf::internal::WireFormatLite::WriteBytesToArray(
-        3, this->msg_data(), target);
+    target = stream->WriteBytesMaybeAliased(
+        3, this->_internal_msg_data(), target);
   }
 
   // int32 msg_time = 4;
   if (this->msg_time() != 0) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(4, this->msg_time(), target);
+    target = stream->EnsureSpace(target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt32ToArray(4, this->_internal_msg_time(), target);
   }
 
   // int32 owner_level = 5;
   if (this->owner_level() != 0) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(5, this->owner_level(), target);
+    target = stream->EnsureSpace(target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt32ToArray(5, this->_internal_owner_level(), target);
   }
 
-  if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
-    target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
-        (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()), target);
+  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::InternalSerializeUnknownFieldsToArray(
+        _internal_metadata_.unknown_fields(), target, stream);
   }
   // @@protoc_insertion_point(serialize_to_array_end:NFMsg.BigMapLeaveMsg)
   return target;
@@ -2334,60 +1984,63 @@ size_t BigMapLeaveMsg::ByteSizeLong() const {
 // @@protoc_insertion_point(message_byte_size_start:NFMsg.BigMapLeaveMsg)
   size_t total_size = 0;
 
-  if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
-    total_size +=
-      ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
-        (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()));
-  }
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
   // bytes owner_name = 2;
   if (this->owner_name().size() > 0) {
     total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::BytesSize(
-        this->owner_name());
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::BytesSize(
+        this->_internal_owner_name());
   }
 
   // bytes msg_data = 3;
   if (this->msg_data().size() > 0) {
     total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::BytesSize(
-        this->msg_data());
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::BytesSize(
+        this->_internal_msg_data());
   }
 
   // .NFMsg.Ident owner = 1;
   if (this->has_owner()) {
     total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::MessageSize(
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
         *owner_);
   }
 
   // int32 msg_time = 4;
   if (this->msg_time() != 0) {
     total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::Int32Size(
-        this->msg_time());
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::Int32Size(
+        this->_internal_msg_time());
   }
 
   // int32 owner_level = 5;
   if (this->owner_level() != 0) {
     total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::Int32Size(
-        this->owner_level());
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::Int32Size(
+        this->_internal_owner_level());
   }
 
-  int cached_size = ::google::protobuf::internal::ToCachedSize(total_size);
+  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
+    return ::PROTOBUF_NAMESPACE_ID::internal::ComputeUnknownFieldsSize(
+        _internal_metadata_, total_size, &_cached_size_);
+  }
+  int cached_size = ::PROTOBUF_NAMESPACE_ID::internal::ToCachedSize(total_size);
   SetCachedSize(cached_size);
   return total_size;
 }
 
-void BigMapLeaveMsg::MergeFrom(const ::google::protobuf::Message& from) {
+void BigMapLeaveMsg::MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
 // @@protoc_insertion_point(generalized_merge_from_start:NFMsg.BigMapLeaveMsg)
   GOOGLE_DCHECK_NE(&from, this);
   const BigMapLeaveMsg* source =
-      ::google::protobuf::internal::DynamicCastToGenerated<const BigMapLeaveMsg>(
+      ::PROTOBUF_NAMESPACE_ID::DynamicCastToGenerated<BigMapLeaveMsg>(
           &from);
-  if (source == NULL) {
+  if (source == nullptr) {
   // @@protoc_insertion_point(generalized_merge_from_cast_fail:NFMsg.BigMapLeaveMsg)
-    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
+    ::PROTOBUF_NAMESPACE_ID::internal::ReflectionOps::Merge(from, this);
   } else {
   // @@protoc_insertion_point(generalized_merge_from_cast_success:NFMsg.BigMapLeaveMsg)
     MergeFrom(*source);
@@ -2398,29 +2051,29 @@ void BigMapLeaveMsg::MergeFrom(const BigMapLeaveMsg& from) {
 // @@protoc_insertion_point(class_specific_merge_from_start:NFMsg.BigMapLeaveMsg)
   GOOGLE_DCHECK_NE(&from, this);
   _internal_metadata_.MergeFrom(from._internal_metadata_);
-  ::google::protobuf::uint32 cached_has_bits = 0;
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
   if (from.owner_name().size() > 0) {
 
-    owner_name_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.owner_name_);
+    owner_name_.AssignWithDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), from.owner_name_);
   }
   if (from.msg_data().size() > 0) {
 
-    msg_data_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.msg_data_);
+    msg_data_.AssignWithDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), from.msg_data_);
   }
   if (from.has_owner()) {
-    mutable_owner()->::NFMsg::Ident::MergeFrom(from.owner());
+    _internal_mutable_owner()->::NFMsg::Ident::MergeFrom(from._internal_owner());
   }
   if (from.msg_time() != 0) {
-    set_msg_time(from.msg_time());
+    _internal_set_msg_time(from._internal_msg_time());
   }
   if (from.owner_level() != 0) {
-    set_owner_level(from.owner_level());
+    _internal_set_owner_level(from._internal_owner_level());
   }
 }
 
-void BigMapLeaveMsg::CopyFrom(const ::google::protobuf::Message& from) {
+void BigMapLeaveMsg::CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
 // @@protoc_insertion_point(generalized_copy_from_start:NFMsg.BigMapLeaveMsg)
   if (&from == this) return;
   Clear();
@@ -2438,25 +2091,20 @@ bool BigMapLeaveMsg::IsInitialized() const {
   return true;
 }
 
-void BigMapLeaveMsg::Swap(BigMapLeaveMsg* other) {
-  if (other == this) return;
-  InternalSwap(other);
-}
 void BigMapLeaveMsg::InternalSwap(BigMapLeaveMsg* other) {
   using std::swap;
-  owner_name_.Swap(&other->owner_name_, &::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+  _internal_metadata_.Swap(&other->_internal_metadata_);
+  owner_name_.Swap(&other->owner_name_, &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(),
     GetArenaNoVirtual());
-  msg_data_.Swap(&other->msg_data_, &::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+  msg_data_.Swap(&other->msg_data_, &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(),
     GetArenaNoVirtual());
   swap(owner_, other->owner_);
   swap(msg_time_, other->msg_time_);
   swap(owner_level_, other->owner_level_);
-  _internal_metadata_.Swap(&other->_internal_metadata_);
 }
 
-::google::protobuf::Metadata BigMapLeaveMsg::GetMetadata() const {
-  protobuf_NFMsgExtra_2eproto::protobuf_AssignDescriptorsOnce();
-  return ::protobuf_NFMsgExtra_2eproto::file_level_metadata[kIndexInFileMessages];
+::PROTOBUF_NAMESPACE_ID::Metadata BigMapLeaveMsg::GetMetadata() const {
+  return GetMetadataStatic();
 }
 
 
@@ -2470,50 +2118,61 @@ void BigMapWarHistory::InitAsDefaultInstance() {
   ::NFMsg::_BigMapWarHistory_default_instance_._instance.get_mutable()->winner_id_ = const_cast< ::NFMsg::Ident*>(
       ::NFMsg::Ident::internal_default_instance());
 }
+class BigMapWarHistory::_Internal {
+ public:
+  static const ::NFMsg::GridClanBaseInfo& red_info(const BigMapWarHistory* msg);
+  static const ::NFMsg::GridClanBaseInfo& blue_info(const BigMapWarHistory* msg);
+  static const ::NFMsg::Ident& winner_id(const BigMapWarHistory* msg);
+};
+
+const ::NFMsg::GridClanBaseInfo&
+BigMapWarHistory::_Internal::red_info(const BigMapWarHistory* msg) {
+  return *msg->red_info_;
+}
+const ::NFMsg::GridClanBaseInfo&
+BigMapWarHistory::_Internal::blue_info(const BigMapWarHistory* msg) {
+  return *msg->blue_info_;
+}
+const ::NFMsg::Ident&
+BigMapWarHistory::_Internal::winner_id(const BigMapWarHistory* msg) {
+  return *msg->winner_id_;
+}
 void BigMapWarHistory::clear_winner_id() {
-  if (GetArenaNoVirtual() == NULL && winner_id_ != NULL) {
+  if (GetArenaNoVirtual() == nullptr && winner_id_ != nullptr) {
     delete winner_id_;
   }
-  winner_id_ = NULL;
+  winner_id_ = nullptr;
 }
-#if !defined(_MSC_VER) || _MSC_VER >= 1900
-const int BigMapWarHistory::kRedInfoFieldNumber;
-const int BigMapWarHistory::kBlueInfoFieldNumber;
-const int BigMapWarHistory::kWinnerIdFieldNumber;
-const int BigMapWarHistory::kWarTimeFieldNumber;
-#endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
-
 BigMapWarHistory::BigMapWarHistory()
-  : ::google::protobuf::Message(), _internal_metadata_(NULL) {
-  ::google::protobuf::internal::InitSCC(
-      &protobuf_NFMsgExtra_2eproto::scc_info_BigMapWarHistory.base);
+  : ::PROTOBUF_NAMESPACE_ID::Message(), _internal_metadata_(nullptr) {
   SharedCtor();
   // @@protoc_insertion_point(constructor:NFMsg.BigMapWarHistory)
 }
 BigMapWarHistory::BigMapWarHistory(const BigMapWarHistory& from)
-  : ::google::protobuf::Message(),
-      _internal_metadata_(NULL) {
+  : ::PROTOBUF_NAMESPACE_ID::Message(),
+      _internal_metadata_(nullptr) {
   _internal_metadata_.MergeFrom(from._internal_metadata_);
-  if (from.has_red_info()) {
+  if (from._internal_has_red_info()) {
     red_info_ = new ::NFMsg::GridClanBaseInfo(*from.red_info_);
   } else {
-    red_info_ = NULL;
+    red_info_ = nullptr;
   }
-  if (from.has_blue_info()) {
+  if (from._internal_has_blue_info()) {
     blue_info_ = new ::NFMsg::GridClanBaseInfo(*from.blue_info_);
   } else {
-    blue_info_ = NULL;
+    blue_info_ = nullptr;
   }
-  if (from.has_winner_id()) {
+  if (from._internal_has_winner_id()) {
     winner_id_ = new ::NFMsg::Ident(*from.winner_id_);
   } else {
-    winner_id_ = NULL;
+    winner_id_ = nullptr;
   }
   war_time_ = from.war_time_;
   // @@protoc_insertion_point(copy_constructor:NFMsg.BigMapWarHistory)
 }
 
 void BigMapWarHistory::SharedCtor() {
+  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&scc_info_BigMapWarHistory_NFMsgExtra_2eproto.base);
   ::memset(&red_info_, 0, static_cast<size_t>(
       reinterpret_cast<char*>(&war_time_) -
       reinterpret_cast<char*>(&red_info_)) + sizeof(war_time_));
@@ -2533,191 +2192,128 @@ void BigMapWarHistory::SharedDtor() {
 void BigMapWarHistory::SetCachedSize(int size) const {
   _cached_size_.Set(size);
 }
-const ::google::protobuf::Descriptor* BigMapWarHistory::descriptor() {
-  ::protobuf_NFMsgExtra_2eproto::protobuf_AssignDescriptorsOnce();
-  return ::protobuf_NFMsgExtra_2eproto::file_level_metadata[kIndexInFileMessages].descriptor;
-}
-
 const BigMapWarHistory& BigMapWarHistory::default_instance() {
-  ::google::protobuf::internal::InitSCC(&protobuf_NFMsgExtra_2eproto::scc_info_BigMapWarHistory.base);
+  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&::scc_info_BigMapWarHistory_NFMsgExtra_2eproto.base);
   return *internal_default_instance();
 }
 
 
 void BigMapWarHistory::Clear() {
 // @@protoc_insertion_point(message_clear_start:NFMsg.BigMapWarHistory)
-  ::google::protobuf::uint32 cached_has_bits = 0;
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  if (GetArenaNoVirtual() == NULL && red_info_ != NULL) {
+  if (GetArenaNoVirtual() == nullptr && red_info_ != nullptr) {
     delete red_info_;
   }
-  red_info_ = NULL;
-  if (GetArenaNoVirtual() == NULL && blue_info_ != NULL) {
+  red_info_ = nullptr;
+  if (GetArenaNoVirtual() == nullptr && blue_info_ != nullptr) {
     delete blue_info_;
   }
-  blue_info_ = NULL;
-  if (GetArenaNoVirtual() == NULL && winner_id_ != NULL) {
+  blue_info_ = nullptr;
+  if (GetArenaNoVirtual() == nullptr && winner_id_ != nullptr) {
     delete winner_id_;
   }
-  winner_id_ = NULL;
+  winner_id_ = nullptr;
   war_time_ = 0;
   _internal_metadata_.Clear();
 }
 
-bool BigMapWarHistory::MergePartialFromCodedStream(
-    ::google::protobuf::io::CodedInputStream* input) {
-#define DO_(EXPRESSION) if (!GOOGLE_PREDICT_TRUE(EXPRESSION)) goto failure
-  ::google::protobuf::uint32 tag;
-  // @@protoc_insertion_point(parse_start:NFMsg.BigMapWarHistory)
-  for (;;) {
-    ::std::pair<::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
-    tag = p.first;
-    if (!p.second) goto handle_unusual;
-    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
+const char* BigMapWarHistory::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) {
+#define CHK_(x) if (PROTOBUF_PREDICT_FALSE(!(x))) goto failure
+  while (!ctx->Done(&ptr)) {
+    ::PROTOBUF_NAMESPACE_ID::uint32 tag;
+    ptr = ::PROTOBUF_NAMESPACE_ID::internal::ReadTag(ptr, &tag);
+    CHK_(ptr);
+    switch (tag >> 3) {
       // .NFMsg.GridClanBaseInfo red_info = 1;
-      case 1: {
-        if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(10u /* 10 & 0xFF */)) {
-          DO_(::google::protobuf::internal::WireFormatLite::ReadMessage(
-               input, mutable_red_info()));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
+      case 1:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 10)) {
+          ptr = ctx->ParseMessage(_internal_mutable_red_info(), ptr);
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
       // .NFMsg.GridClanBaseInfo blue_info = 2;
-      case 2: {
-        if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(18u /* 18 & 0xFF */)) {
-          DO_(::google::protobuf::internal::WireFormatLite::ReadMessage(
-               input, mutable_blue_info()));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
+      case 2:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 18)) {
+          ptr = ctx->ParseMessage(_internal_mutable_blue_info(), ptr);
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
       // .NFMsg.Ident winner_id = 10;
-      case 10: {
-        if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(82u /* 82 & 0xFF */)) {
-          DO_(::google::protobuf::internal::WireFormatLite::ReadMessage(
-               input, mutable_winner_id()));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
+      case 10:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 82)) {
+          ptr = ctx->ParseMessage(_internal_mutable_winner_id(), ptr);
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
       // int32 war_time = 11;
-      case 11: {
-        if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(88u /* 88 & 0xFF */)) {
-
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
-                 input, &war_time_)));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
+      case 11:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 88)) {
+          war_time_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint(&ptr);
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
       default: {
       handle_unusual:
-        if (tag == 0) {
+        if ((tag & 7) == 4 || tag == 0) {
+          ctx->SetLastTag(tag);
           goto success;
         }
-        DO_(::google::protobuf::internal::WireFormat::SkipField(
-              input, tag, _internal_metadata_.mutable_unknown_fields()));
-        break;
+        ptr = UnknownFieldParse(tag, &_internal_metadata_, ptr, ctx);
+        CHK_(ptr != nullptr);
+        continue;
       }
-    }
-  }
+    }  // switch
+  }  // while
 success:
-  // @@protoc_insertion_point(parse_success:NFMsg.BigMapWarHistory)
-  return true;
+  return ptr;
 failure:
-  // @@protoc_insertion_point(parse_failure:NFMsg.BigMapWarHistory)
-  return false;
-#undef DO_
+  ptr = nullptr;
+  goto success;
+#undef CHK_
 }
 
-void BigMapWarHistory::SerializeWithCachedSizes(
-    ::google::protobuf::io::CodedOutputStream* output) const {
-  // @@protoc_insertion_point(serialize_start:NFMsg.BigMapWarHistory)
-  ::google::protobuf::uint32 cached_has_bits = 0;
-  (void) cached_has_bits;
-
-  // .NFMsg.GridClanBaseInfo red_info = 1;
-  if (this->has_red_info()) {
-    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      1, this->_internal_red_info(), output);
-  }
-
-  // .NFMsg.GridClanBaseInfo blue_info = 2;
-  if (this->has_blue_info()) {
-    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      2, this->_internal_blue_info(), output);
-  }
-
-  // .NFMsg.Ident winner_id = 10;
-  if (this->has_winner_id()) {
-    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      10, this->_internal_winner_id(), output);
-  }
-
-  // int32 war_time = 11;
-  if (this->war_time() != 0) {
-    ::google::protobuf::internal::WireFormatLite::WriteInt32(11, this->war_time(), output);
-  }
-
-  if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
-    ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
-        (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()), output);
-  }
-  // @@protoc_insertion_point(serialize_end:NFMsg.BigMapWarHistory)
-}
-
-::google::protobuf::uint8* BigMapWarHistory::InternalSerializeWithCachedSizesToArray(
-    bool deterministic, ::google::protobuf::uint8* target) const {
-  (void)deterministic; // Unused
+::PROTOBUF_NAMESPACE_ID::uint8* BigMapWarHistory::InternalSerializeWithCachedSizesToArray(
+    ::PROTOBUF_NAMESPACE_ID::uint8* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const {
   // @@protoc_insertion_point(serialize_to_array_start:NFMsg.BigMapWarHistory)
-  ::google::protobuf::uint32 cached_has_bits = 0;
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
   // .NFMsg.GridClanBaseInfo red_info = 1;
   if (this->has_red_info()) {
-    target = ::google::protobuf::internal::WireFormatLite::
+    target = stream->EnsureSpace(target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
       InternalWriteMessageToArray(
-        1, this->_internal_red_info(), deterministic, target);
+        1, _Internal::red_info(this), target, stream);
   }
 
   // .NFMsg.GridClanBaseInfo blue_info = 2;
   if (this->has_blue_info()) {
-    target = ::google::protobuf::internal::WireFormatLite::
+    target = stream->EnsureSpace(target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
       InternalWriteMessageToArray(
-        2, this->_internal_blue_info(), deterministic, target);
+        2, _Internal::blue_info(this), target, stream);
   }
 
   // .NFMsg.Ident winner_id = 10;
   if (this->has_winner_id()) {
-    target = ::google::protobuf::internal::WireFormatLite::
+    target = stream->EnsureSpace(target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
       InternalWriteMessageToArray(
-        10, this->_internal_winner_id(), deterministic, target);
+        10, _Internal::winner_id(this), target, stream);
   }
 
   // int32 war_time = 11;
   if (this->war_time() != 0) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(11, this->war_time(), target);
+    target = stream->EnsureSpace(target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt32ToArray(11, this->_internal_war_time(), target);
   }
 
-  if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
-    target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
-        (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()), target);
+  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::InternalSerializeUnknownFieldsToArray(
+        _internal_metadata_.unknown_fields(), target, stream);
   }
   // @@protoc_insertion_point(serialize_to_array_end:NFMsg.BigMapWarHistory)
   return target;
@@ -2727,53 +2323,56 @@ size_t BigMapWarHistory::ByteSizeLong() const {
 // @@protoc_insertion_point(message_byte_size_start:NFMsg.BigMapWarHistory)
   size_t total_size = 0;
 
-  if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
-    total_size +=
-      ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
-        (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()));
-  }
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
   // .NFMsg.GridClanBaseInfo red_info = 1;
   if (this->has_red_info()) {
     total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::MessageSize(
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
         *red_info_);
   }
 
   // .NFMsg.GridClanBaseInfo blue_info = 2;
   if (this->has_blue_info()) {
     total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::MessageSize(
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
         *blue_info_);
   }
 
   // .NFMsg.Ident winner_id = 10;
   if (this->has_winner_id()) {
     total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::MessageSize(
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
         *winner_id_);
   }
 
   // int32 war_time = 11;
   if (this->war_time() != 0) {
     total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::Int32Size(
-        this->war_time());
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::Int32Size(
+        this->_internal_war_time());
   }
 
-  int cached_size = ::google::protobuf::internal::ToCachedSize(total_size);
+  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
+    return ::PROTOBUF_NAMESPACE_ID::internal::ComputeUnknownFieldsSize(
+        _internal_metadata_, total_size, &_cached_size_);
+  }
+  int cached_size = ::PROTOBUF_NAMESPACE_ID::internal::ToCachedSize(total_size);
   SetCachedSize(cached_size);
   return total_size;
 }
 
-void BigMapWarHistory::MergeFrom(const ::google::protobuf::Message& from) {
+void BigMapWarHistory::MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
 // @@protoc_insertion_point(generalized_merge_from_start:NFMsg.BigMapWarHistory)
   GOOGLE_DCHECK_NE(&from, this);
   const BigMapWarHistory* source =
-      ::google::protobuf::internal::DynamicCastToGenerated<const BigMapWarHistory>(
+      ::PROTOBUF_NAMESPACE_ID::DynamicCastToGenerated<BigMapWarHistory>(
           &from);
-  if (source == NULL) {
+  if (source == nullptr) {
   // @@protoc_insertion_point(generalized_merge_from_cast_fail:NFMsg.BigMapWarHistory)
-    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
+    ::PROTOBUF_NAMESPACE_ID::internal::ReflectionOps::Merge(from, this);
   } else {
   // @@protoc_insertion_point(generalized_merge_from_cast_success:NFMsg.BigMapWarHistory)
     MergeFrom(*source);
@@ -2784,24 +2383,24 @@ void BigMapWarHistory::MergeFrom(const BigMapWarHistory& from) {
 // @@protoc_insertion_point(class_specific_merge_from_start:NFMsg.BigMapWarHistory)
   GOOGLE_DCHECK_NE(&from, this);
   _internal_metadata_.MergeFrom(from._internal_metadata_);
-  ::google::protobuf::uint32 cached_has_bits = 0;
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
   if (from.has_red_info()) {
-    mutable_red_info()->::NFMsg::GridClanBaseInfo::MergeFrom(from.red_info());
+    _internal_mutable_red_info()->::NFMsg::GridClanBaseInfo::MergeFrom(from._internal_red_info());
   }
   if (from.has_blue_info()) {
-    mutable_blue_info()->::NFMsg::GridClanBaseInfo::MergeFrom(from.blue_info());
+    _internal_mutable_blue_info()->::NFMsg::GridClanBaseInfo::MergeFrom(from._internal_blue_info());
   }
   if (from.has_winner_id()) {
-    mutable_winner_id()->::NFMsg::Ident::MergeFrom(from.winner_id());
+    _internal_mutable_winner_id()->::NFMsg::Ident::MergeFrom(from._internal_winner_id());
   }
   if (from.war_time() != 0) {
-    set_war_time(from.war_time());
+    _internal_set_war_time(from._internal_war_time());
   }
 }
 
-void BigMapWarHistory::CopyFrom(const ::google::protobuf::Message& from) {
+void BigMapWarHistory::CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
 // @@protoc_insertion_point(generalized_copy_from_start:NFMsg.BigMapWarHistory)
   if (&from == this) return;
   Clear();
@@ -2819,22 +2418,17 @@ bool BigMapWarHistory::IsInitialized() const {
   return true;
 }
 
-void BigMapWarHistory::Swap(BigMapWarHistory* other) {
-  if (other == this) return;
-  InternalSwap(other);
-}
 void BigMapWarHistory::InternalSwap(BigMapWarHistory* other) {
   using std::swap;
+  _internal_metadata_.Swap(&other->_internal_metadata_);
   swap(red_info_, other->red_info_);
   swap(blue_info_, other->blue_info_);
   swap(winner_id_, other->winner_id_);
   swap(war_time_, other->war_time_);
-  _internal_metadata_.Swap(&other->_internal_metadata_);
 }
 
-::google::protobuf::Metadata BigMapWarHistory::GetMetadata() const {
-  protobuf_NFMsgExtra_2eproto::protobuf_AssignDescriptorsOnce();
-  return ::protobuf_NFMsgExtra_2eproto::file_level_metadata[kIndexInFileMessages];
+::PROTOBUF_NAMESPACE_ID::Metadata BigMapWarHistory::GetMetadata() const {
+  return GetMetadataStatic();
 }
 
 
@@ -2844,37 +2438,38 @@ void BigMapGridDetailInfo::InitAsDefaultInstance() {
   ::NFMsg::_BigMapGridDetailInfo_default_instance_._instance.get_mutable()->grid_base_info_ = const_cast< ::NFMsg::BigMapGridBaseInfo*>(
       ::NFMsg::BigMapGridBaseInfo::internal_default_instance());
 }
-#if !defined(_MSC_VER) || _MSC_VER >= 1900
-const int BigMapGridDetailInfo::kGridBaseInfoFieldNumber;
-const int BigMapGridDetailInfo::kStayGuidListFieldNumber;
-const int BigMapGridDetailInfo::kLeaveMsgFieldNumber;
-const int BigMapGridDetailInfo::kWarHistoryFieldNumber;
-#endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
+class BigMapGridDetailInfo::_Internal {
+ public:
+  static const ::NFMsg::BigMapGridBaseInfo& grid_base_info(const BigMapGridDetailInfo* msg);
+};
 
+const ::NFMsg::BigMapGridBaseInfo&
+BigMapGridDetailInfo::_Internal::grid_base_info(const BigMapGridDetailInfo* msg) {
+  return *msg->grid_base_info_;
+}
 BigMapGridDetailInfo::BigMapGridDetailInfo()
-  : ::google::protobuf::Message(), _internal_metadata_(NULL) {
-  ::google::protobuf::internal::InitSCC(
-      &protobuf_NFMsgExtra_2eproto::scc_info_BigMapGridDetailInfo.base);
+  : ::PROTOBUF_NAMESPACE_ID::Message(), _internal_metadata_(nullptr) {
   SharedCtor();
   // @@protoc_insertion_point(constructor:NFMsg.BigMapGridDetailInfo)
 }
 BigMapGridDetailInfo::BigMapGridDetailInfo(const BigMapGridDetailInfo& from)
-  : ::google::protobuf::Message(),
-      _internal_metadata_(NULL),
+  : ::PROTOBUF_NAMESPACE_ID::Message(),
+      _internal_metadata_(nullptr),
       stay_guid_list_(from.stay_guid_list_),
       leave_msg_(from.leave_msg_),
       war_history_(from.war_history_) {
   _internal_metadata_.MergeFrom(from._internal_metadata_);
-  if (from.has_grid_base_info()) {
+  if (from._internal_has_grid_base_info()) {
     grid_base_info_ = new ::NFMsg::BigMapGridBaseInfo(*from.grid_base_info_);
   } else {
-    grid_base_info_ = NULL;
+    grid_base_info_ = nullptr;
   }
   // @@protoc_insertion_point(copy_constructor:NFMsg.BigMapGridDetailInfo)
 }
 
 void BigMapGridDetailInfo::SharedCtor() {
-  grid_base_info_ = NULL;
+  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&scc_info_BigMapGridDetailInfo_NFMsgExtra_2eproto.base);
+  grid_base_info_ = nullptr;
 }
 
 BigMapGridDetailInfo::~BigMapGridDetailInfo() {
@@ -2889,198 +2484,139 @@ void BigMapGridDetailInfo::SharedDtor() {
 void BigMapGridDetailInfo::SetCachedSize(int size) const {
   _cached_size_.Set(size);
 }
-const ::google::protobuf::Descriptor* BigMapGridDetailInfo::descriptor() {
-  ::protobuf_NFMsgExtra_2eproto::protobuf_AssignDescriptorsOnce();
-  return ::protobuf_NFMsgExtra_2eproto::file_level_metadata[kIndexInFileMessages].descriptor;
-}
-
 const BigMapGridDetailInfo& BigMapGridDetailInfo::default_instance() {
-  ::google::protobuf::internal::InitSCC(&protobuf_NFMsgExtra_2eproto::scc_info_BigMapGridDetailInfo.base);
+  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&::scc_info_BigMapGridDetailInfo_NFMsgExtra_2eproto.base);
   return *internal_default_instance();
 }
 
 
 void BigMapGridDetailInfo::Clear() {
 // @@protoc_insertion_point(message_clear_start:NFMsg.BigMapGridDetailInfo)
-  ::google::protobuf::uint32 cached_has_bits = 0;
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
   stay_guid_list_.Clear();
   leave_msg_.Clear();
   war_history_.Clear();
-  if (GetArenaNoVirtual() == NULL && grid_base_info_ != NULL) {
+  if (GetArenaNoVirtual() == nullptr && grid_base_info_ != nullptr) {
     delete grid_base_info_;
   }
-  grid_base_info_ = NULL;
+  grid_base_info_ = nullptr;
   _internal_metadata_.Clear();
 }
 
-bool BigMapGridDetailInfo::MergePartialFromCodedStream(
-    ::google::protobuf::io::CodedInputStream* input) {
-#define DO_(EXPRESSION) if (!GOOGLE_PREDICT_TRUE(EXPRESSION)) goto failure
-  ::google::protobuf::uint32 tag;
-  // @@protoc_insertion_point(parse_start:NFMsg.BigMapGridDetailInfo)
-  for (;;) {
-    ::std::pair<::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
-    tag = p.first;
-    if (!p.second) goto handle_unusual;
-    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
+const char* BigMapGridDetailInfo::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) {
+#define CHK_(x) if (PROTOBUF_PREDICT_FALSE(!(x))) goto failure
+  while (!ctx->Done(&ptr)) {
+    ::PROTOBUF_NAMESPACE_ID::uint32 tag;
+    ptr = ::PROTOBUF_NAMESPACE_ID::internal::ReadTag(ptr, &tag);
+    CHK_(ptr);
+    switch (tag >> 3) {
       // .NFMsg.BigMapGridBaseInfo grid_base_info = 1;
-      case 1: {
-        if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(10u /* 10 & 0xFF */)) {
-          DO_(::google::protobuf::internal::WireFormatLite::ReadMessage(
-               input, mutable_grid_base_info()));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
+      case 1:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 10)) {
+          ptr = ctx->ParseMessage(_internal_mutable_grid_base_info(), ptr);
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
       // repeated .NFMsg.GridClanBaseInfo stay_guid_list = 2;
-      case 2: {
-        if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(18u /* 18 & 0xFF */)) {
-          DO_(::google::protobuf::internal::WireFormatLite::ReadMessage(
-                input, add_stay_guid_list()));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
+      case 2:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 18)) {
+          ptr -= 1;
+          do {
+            ptr += 1;
+            ptr = ctx->ParseMessage(_internal_add_stay_guid_list(), ptr);
+            CHK_(ptr);
+            if (!ctx->DataAvailable(ptr)) break;
+          } while (::PROTOBUF_NAMESPACE_ID::internal::ExpectTag<18>(ptr));
+        } else goto handle_unusual;
+        continue;
       // repeated .NFMsg.BigMapLeaveMsg leave_msg = 3;
-      case 3: {
-        if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(26u /* 26 & 0xFF */)) {
-          DO_(::google::protobuf::internal::WireFormatLite::ReadMessage(
-                input, add_leave_msg()));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
+      case 3:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 26)) {
+          ptr -= 1;
+          do {
+            ptr += 1;
+            ptr = ctx->ParseMessage(_internal_add_leave_msg(), ptr);
+            CHK_(ptr);
+            if (!ctx->DataAvailable(ptr)) break;
+          } while (::PROTOBUF_NAMESPACE_ID::internal::ExpectTag<26>(ptr));
+        } else goto handle_unusual;
+        continue;
       // repeated .NFMsg.BigMapWarHistory war_history = 4;
-      case 4: {
-        if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(34u /* 34 & 0xFF */)) {
-          DO_(::google::protobuf::internal::WireFormatLite::ReadMessage(
-                input, add_war_history()));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
+      case 4:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 34)) {
+          ptr -= 1;
+          do {
+            ptr += 1;
+            ptr = ctx->ParseMessage(_internal_add_war_history(), ptr);
+            CHK_(ptr);
+            if (!ctx->DataAvailable(ptr)) break;
+          } while (::PROTOBUF_NAMESPACE_ID::internal::ExpectTag<34>(ptr));
+        } else goto handle_unusual;
+        continue;
       default: {
       handle_unusual:
-        if (tag == 0) {
+        if ((tag & 7) == 4 || tag == 0) {
+          ctx->SetLastTag(tag);
           goto success;
         }
-        DO_(::google::protobuf::internal::WireFormat::SkipField(
-              input, tag, _internal_metadata_.mutable_unknown_fields()));
-        break;
+        ptr = UnknownFieldParse(tag, &_internal_metadata_, ptr, ctx);
+        CHK_(ptr != nullptr);
+        continue;
       }
-    }
-  }
+    }  // switch
+  }  // while
 success:
-  // @@protoc_insertion_point(parse_success:NFMsg.BigMapGridDetailInfo)
-  return true;
+  return ptr;
 failure:
-  // @@protoc_insertion_point(parse_failure:NFMsg.BigMapGridDetailInfo)
-  return false;
-#undef DO_
+  ptr = nullptr;
+  goto success;
+#undef CHK_
 }
 
-void BigMapGridDetailInfo::SerializeWithCachedSizes(
-    ::google::protobuf::io::CodedOutputStream* output) const {
-  // @@protoc_insertion_point(serialize_start:NFMsg.BigMapGridDetailInfo)
-  ::google::protobuf::uint32 cached_has_bits = 0;
-  (void) cached_has_bits;
-
-  // .NFMsg.BigMapGridBaseInfo grid_base_info = 1;
-  if (this->has_grid_base_info()) {
-    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      1, this->_internal_grid_base_info(), output);
-  }
-
-  // repeated .NFMsg.GridClanBaseInfo stay_guid_list = 2;
-  for (unsigned int i = 0,
-      n = static_cast<unsigned int>(this->stay_guid_list_size()); i < n; i++) {
-    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      2,
-      this->stay_guid_list(static_cast<int>(i)),
-      output);
-  }
-
-  // repeated .NFMsg.BigMapLeaveMsg leave_msg = 3;
-  for (unsigned int i = 0,
-      n = static_cast<unsigned int>(this->leave_msg_size()); i < n; i++) {
-    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      3,
-      this->leave_msg(static_cast<int>(i)),
-      output);
-  }
-
-  // repeated .NFMsg.BigMapWarHistory war_history = 4;
-  for (unsigned int i = 0,
-      n = static_cast<unsigned int>(this->war_history_size()); i < n; i++) {
-    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      4,
-      this->war_history(static_cast<int>(i)),
-      output);
-  }
-
-  if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
-    ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
-        (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()), output);
-  }
-  // @@protoc_insertion_point(serialize_end:NFMsg.BigMapGridDetailInfo)
-}
-
-::google::protobuf::uint8* BigMapGridDetailInfo::InternalSerializeWithCachedSizesToArray(
-    bool deterministic, ::google::protobuf::uint8* target) const {
-  (void)deterministic; // Unused
+::PROTOBUF_NAMESPACE_ID::uint8* BigMapGridDetailInfo::InternalSerializeWithCachedSizesToArray(
+    ::PROTOBUF_NAMESPACE_ID::uint8* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const {
   // @@protoc_insertion_point(serialize_to_array_start:NFMsg.BigMapGridDetailInfo)
-  ::google::protobuf::uint32 cached_has_bits = 0;
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
   // .NFMsg.BigMapGridBaseInfo grid_base_info = 1;
   if (this->has_grid_base_info()) {
-    target = ::google::protobuf::internal::WireFormatLite::
+    target = stream->EnsureSpace(target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
       InternalWriteMessageToArray(
-        1, this->_internal_grid_base_info(), deterministic, target);
+        1, _Internal::grid_base_info(this), target, stream);
   }
 
   // repeated .NFMsg.GridClanBaseInfo stay_guid_list = 2;
   for (unsigned int i = 0,
-      n = static_cast<unsigned int>(this->stay_guid_list_size()); i < n; i++) {
-    target = ::google::protobuf::internal::WireFormatLite::
-      InternalWriteMessageToArray(
-        2, this->stay_guid_list(static_cast<int>(i)), deterministic, target);
+      n = static_cast<unsigned int>(this->_internal_stay_guid_list_size()); i < n; i++) {
+    target = stream->EnsureSpace(target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
+      InternalWriteMessageToArray(2, this->_internal_stay_guid_list(i), target, stream);
   }
 
   // repeated .NFMsg.BigMapLeaveMsg leave_msg = 3;
   for (unsigned int i = 0,
-      n = static_cast<unsigned int>(this->leave_msg_size()); i < n; i++) {
-    target = ::google::protobuf::internal::WireFormatLite::
-      InternalWriteMessageToArray(
-        3, this->leave_msg(static_cast<int>(i)), deterministic, target);
+      n = static_cast<unsigned int>(this->_internal_leave_msg_size()); i < n; i++) {
+    target = stream->EnsureSpace(target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
+      InternalWriteMessageToArray(3, this->_internal_leave_msg(i), target, stream);
   }
 
   // repeated .NFMsg.BigMapWarHistory war_history = 4;
   for (unsigned int i = 0,
-      n = static_cast<unsigned int>(this->war_history_size()); i < n; i++) {
-    target = ::google::protobuf::internal::WireFormatLite::
-      InternalWriteMessageToArray(
-        4, this->war_history(static_cast<int>(i)), deterministic, target);
+      n = static_cast<unsigned int>(this->_internal_war_history_size()); i < n; i++) {
+    target = stream->EnsureSpace(target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
+      InternalWriteMessageToArray(4, this->_internal_war_history(i), target, stream);
   }
 
-  if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
-    target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
-        (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()), target);
+  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::InternalSerializeUnknownFieldsToArray(
+        _internal_metadata_.unknown_fields(), target, stream);
   }
   // @@protoc_insertion_point(serialize_to_array_end:NFMsg.BigMapGridDetailInfo)
   return target;
@@ -3090,65 +2626,56 @@ size_t BigMapGridDetailInfo::ByteSizeLong() const {
 // @@protoc_insertion_point(message_byte_size_start:NFMsg.BigMapGridDetailInfo)
   size_t total_size = 0;
 
-  if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
-    total_size +=
-      ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
-        (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()));
-  }
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
   // repeated .NFMsg.GridClanBaseInfo stay_guid_list = 2;
-  {
-    unsigned int count = static_cast<unsigned int>(this->stay_guid_list_size());
-    total_size += 1UL * count;
-    for (unsigned int i = 0; i < count; i++) {
-      total_size +=
-        ::google::protobuf::internal::WireFormatLite::MessageSize(
-          this->stay_guid_list(static_cast<int>(i)));
-    }
+  total_size += 1UL * this->_internal_stay_guid_list_size();
+  for (const auto& msg : this->stay_guid_list_) {
+    total_size +=
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(msg);
   }
 
   // repeated .NFMsg.BigMapLeaveMsg leave_msg = 3;
-  {
-    unsigned int count = static_cast<unsigned int>(this->leave_msg_size());
-    total_size += 1UL * count;
-    for (unsigned int i = 0; i < count; i++) {
-      total_size +=
-        ::google::protobuf::internal::WireFormatLite::MessageSize(
-          this->leave_msg(static_cast<int>(i)));
-    }
+  total_size += 1UL * this->_internal_leave_msg_size();
+  for (const auto& msg : this->leave_msg_) {
+    total_size +=
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(msg);
   }
 
   // repeated .NFMsg.BigMapWarHistory war_history = 4;
-  {
-    unsigned int count = static_cast<unsigned int>(this->war_history_size());
-    total_size += 1UL * count;
-    for (unsigned int i = 0; i < count; i++) {
-      total_size +=
-        ::google::protobuf::internal::WireFormatLite::MessageSize(
-          this->war_history(static_cast<int>(i)));
-    }
+  total_size += 1UL * this->_internal_war_history_size();
+  for (const auto& msg : this->war_history_) {
+    total_size +=
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(msg);
   }
 
   // .NFMsg.BigMapGridBaseInfo grid_base_info = 1;
   if (this->has_grid_base_info()) {
     total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::MessageSize(
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
         *grid_base_info_);
   }
 
-  int cached_size = ::google::protobuf::internal::ToCachedSize(total_size);
+  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
+    return ::PROTOBUF_NAMESPACE_ID::internal::ComputeUnknownFieldsSize(
+        _internal_metadata_, total_size, &_cached_size_);
+  }
+  int cached_size = ::PROTOBUF_NAMESPACE_ID::internal::ToCachedSize(total_size);
   SetCachedSize(cached_size);
   return total_size;
 }
 
-void BigMapGridDetailInfo::MergeFrom(const ::google::protobuf::Message& from) {
+void BigMapGridDetailInfo::MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
 // @@protoc_insertion_point(generalized_merge_from_start:NFMsg.BigMapGridDetailInfo)
   GOOGLE_DCHECK_NE(&from, this);
   const BigMapGridDetailInfo* source =
-      ::google::protobuf::internal::DynamicCastToGenerated<const BigMapGridDetailInfo>(
+      ::PROTOBUF_NAMESPACE_ID::DynamicCastToGenerated<BigMapGridDetailInfo>(
           &from);
-  if (source == NULL) {
+  if (source == nullptr) {
   // @@protoc_insertion_point(generalized_merge_from_cast_fail:NFMsg.BigMapGridDetailInfo)
-    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
+    ::PROTOBUF_NAMESPACE_ID::internal::ReflectionOps::Merge(from, this);
   } else {
   // @@protoc_insertion_point(generalized_merge_from_cast_success:NFMsg.BigMapGridDetailInfo)
     MergeFrom(*source);
@@ -3159,18 +2686,18 @@ void BigMapGridDetailInfo::MergeFrom(const BigMapGridDetailInfo& from) {
 // @@protoc_insertion_point(class_specific_merge_from_start:NFMsg.BigMapGridDetailInfo)
   GOOGLE_DCHECK_NE(&from, this);
   _internal_metadata_.MergeFrom(from._internal_metadata_);
-  ::google::protobuf::uint32 cached_has_bits = 0;
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
   stay_guid_list_.MergeFrom(from.stay_guid_list_);
   leave_msg_.MergeFrom(from.leave_msg_);
   war_history_.MergeFrom(from.war_history_);
   if (from.has_grid_base_info()) {
-    mutable_grid_base_info()->::NFMsg::BigMapGridBaseInfo::MergeFrom(from.grid_base_info());
+    _internal_mutable_grid_base_info()->::NFMsg::BigMapGridBaseInfo::MergeFrom(from._internal_grid_base_info());
   }
 }
 
-void BigMapGridDetailInfo::CopyFrom(const ::google::protobuf::Message& from) {
+void BigMapGridDetailInfo::CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
 // @@protoc_insertion_point(generalized_copy_from_start:NFMsg.BigMapGridDetailInfo)
   if (&from == this) return;
   Clear();
@@ -3188,22 +2715,17 @@ bool BigMapGridDetailInfo::IsInitialized() const {
   return true;
 }
 
-void BigMapGridDetailInfo::Swap(BigMapGridDetailInfo* other) {
-  if (other == this) return;
-  InternalSwap(other);
-}
 void BigMapGridDetailInfo::InternalSwap(BigMapGridDetailInfo* other) {
   using std::swap;
-  CastToBase(&stay_guid_list_)->InternalSwap(CastToBase(&other->stay_guid_list_));
-  CastToBase(&leave_msg_)->InternalSwap(CastToBase(&other->leave_msg_));
-  CastToBase(&war_history_)->InternalSwap(CastToBase(&other->war_history_));
-  swap(grid_base_info_, other->grid_base_info_);
   _internal_metadata_.Swap(&other->_internal_metadata_);
+  stay_guid_list_.InternalSwap(&other->stay_guid_list_);
+  leave_msg_.InternalSwap(&other->leave_msg_);
+  war_history_.InternalSwap(&other->war_history_);
+  swap(grid_base_info_, other->grid_base_info_);
 }
 
-::google::protobuf::Metadata BigMapGridDetailInfo::GetMetadata() const {
-  protobuf_NFMsgExtra_2eproto::protobuf_AssignDescriptorsOnce();
-  return ::protobuf_NFMsgExtra_2eproto::file_level_metadata[kIndexInFileMessages];
+::PROTOBUF_NAMESPACE_ID::Metadata BigMapGridDetailInfo::GetMetadata() const {
+  return GetMetadataStatic();
 }
 
 
@@ -3211,26 +2733,25 @@ void BigMapGridDetailInfo::InternalSwap(BigMapGridDetailInfo* other) {
 
 void AckBigMapGridInfo::InitAsDefaultInstance() {
 }
-#if !defined(_MSC_VER) || _MSC_VER >= 1900
-const int AckBigMapGridInfo::kMapDataFieldNumber;
-#endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
+class AckBigMapGridInfo::_Internal {
+ public:
+};
 
 AckBigMapGridInfo::AckBigMapGridInfo()
-  : ::google::protobuf::Message(), _internal_metadata_(NULL) {
-  ::google::protobuf::internal::InitSCC(
-      &protobuf_NFMsgExtra_2eproto::scc_info_AckBigMapGridInfo.base);
+  : ::PROTOBUF_NAMESPACE_ID::Message(), _internal_metadata_(nullptr) {
   SharedCtor();
   // @@protoc_insertion_point(constructor:NFMsg.AckBigMapGridInfo)
 }
 AckBigMapGridInfo::AckBigMapGridInfo(const AckBigMapGridInfo& from)
-  : ::google::protobuf::Message(),
-      _internal_metadata_(NULL),
+  : ::PROTOBUF_NAMESPACE_ID::Message(),
+      _internal_metadata_(nullptr),
       map_data_(from.map_data_) {
   _internal_metadata_.MergeFrom(from._internal_metadata_);
   // @@protoc_insertion_point(copy_constructor:NFMsg.AckBigMapGridInfo)
 }
 
 void AckBigMapGridInfo::SharedCtor() {
+  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&scc_info_AckBigMapGridInfo_NFMsgExtra_2eproto.base);
 }
 
 AckBigMapGridInfo::~AckBigMapGridInfo() {
@@ -3244,20 +2765,15 @@ void AckBigMapGridInfo::SharedDtor() {
 void AckBigMapGridInfo::SetCachedSize(int size) const {
   _cached_size_.Set(size);
 }
-const ::google::protobuf::Descriptor* AckBigMapGridInfo::descriptor() {
-  ::protobuf_NFMsgExtra_2eproto::protobuf_AssignDescriptorsOnce();
-  return ::protobuf_NFMsgExtra_2eproto::file_level_metadata[kIndexInFileMessages].descriptor;
-}
-
 const AckBigMapGridInfo& AckBigMapGridInfo::default_instance() {
-  ::google::protobuf::internal::InitSCC(&protobuf_NFMsgExtra_2eproto::scc_info_AckBigMapGridInfo.base);
+  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&::scc_info_AckBigMapGridInfo_NFMsgExtra_2eproto.base);
   return *internal_default_instance();
 }
 
 
 void AckBigMapGridInfo::Clear() {
 // @@protoc_insertion_point(message_clear_start:NFMsg.AckBigMapGridInfo)
-  ::google::protobuf::uint32 cached_has_bits = 0;
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
@@ -3265,88 +2781,62 @@ void AckBigMapGridInfo::Clear() {
   _internal_metadata_.Clear();
 }
 
-bool AckBigMapGridInfo::MergePartialFromCodedStream(
-    ::google::protobuf::io::CodedInputStream* input) {
-#define DO_(EXPRESSION) if (!GOOGLE_PREDICT_TRUE(EXPRESSION)) goto failure
-  ::google::protobuf::uint32 tag;
-  // @@protoc_insertion_point(parse_start:NFMsg.AckBigMapGridInfo)
-  for (;;) {
-    ::std::pair<::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
-    tag = p.first;
-    if (!p.second) goto handle_unusual;
-    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
+const char* AckBigMapGridInfo::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) {
+#define CHK_(x) if (PROTOBUF_PREDICT_FALSE(!(x))) goto failure
+  while (!ctx->Done(&ptr)) {
+    ::PROTOBUF_NAMESPACE_ID::uint32 tag;
+    ptr = ::PROTOBUF_NAMESPACE_ID::internal::ReadTag(ptr, &tag);
+    CHK_(ptr);
+    switch (tag >> 3) {
       // repeated .NFMsg.BigMapGridDetailInfo map_data = 1;
-      case 1: {
-        if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(10u /* 10 & 0xFF */)) {
-          DO_(::google::protobuf::internal::WireFormatLite::ReadMessage(
-                input, add_map_data()));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
+      case 1:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 10)) {
+          ptr -= 1;
+          do {
+            ptr += 1;
+            ptr = ctx->ParseMessage(_internal_add_map_data(), ptr);
+            CHK_(ptr);
+            if (!ctx->DataAvailable(ptr)) break;
+          } while (::PROTOBUF_NAMESPACE_ID::internal::ExpectTag<10>(ptr));
+        } else goto handle_unusual;
+        continue;
       default: {
       handle_unusual:
-        if (tag == 0) {
+        if ((tag & 7) == 4 || tag == 0) {
+          ctx->SetLastTag(tag);
           goto success;
         }
-        DO_(::google::protobuf::internal::WireFormat::SkipField(
-              input, tag, _internal_metadata_.mutable_unknown_fields()));
-        break;
+        ptr = UnknownFieldParse(tag, &_internal_metadata_, ptr, ctx);
+        CHK_(ptr != nullptr);
+        continue;
       }
-    }
-  }
+    }  // switch
+  }  // while
 success:
-  // @@protoc_insertion_point(parse_success:NFMsg.AckBigMapGridInfo)
-  return true;
+  return ptr;
 failure:
-  // @@protoc_insertion_point(parse_failure:NFMsg.AckBigMapGridInfo)
-  return false;
-#undef DO_
+  ptr = nullptr;
+  goto success;
+#undef CHK_
 }
 
-void AckBigMapGridInfo::SerializeWithCachedSizes(
-    ::google::protobuf::io::CodedOutputStream* output) const {
-  // @@protoc_insertion_point(serialize_start:NFMsg.AckBigMapGridInfo)
-  ::google::protobuf::uint32 cached_has_bits = 0;
-  (void) cached_has_bits;
-
-  // repeated .NFMsg.BigMapGridDetailInfo map_data = 1;
-  for (unsigned int i = 0,
-      n = static_cast<unsigned int>(this->map_data_size()); i < n; i++) {
-    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      1,
-      this->map_data(static_cast<int>(i)),
-      output);
-  }
-
-  if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
-    ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
-        (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()), output);
-  }
-  // @@protoc_insertion_point(serialize_end:NFMsg.AckBigMapGridInfo)
-}
-
-::google::protobuf::uint8* AckBigMapGridInfo::InternalSerializeWithCachedSizesToArray(
-    bool deterministic, ::google::protobuf::uint8* target) const {
-  (void)deterministic; // Unused
+::PROTOBUF_NAMESPACE_ID::uint8* AckBigMapGridInfo::InternalSerializeWithCachedSizesToArray(
+    ::PROTOBUF_NAMESPACE_ID::uint8* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const {
   // @@protoc_insertion_point(serialize_to_array_start:NFMsg.AckBigMapGridInfo)
-  ::google::protobuf::uint32 cached_has_bits = 0;
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
   // repeated .NFMsg.BigMapGridDetailInfo map_data = 1;
   for (unsigned int i = 0,
-      n = static_cast<unsigned int>(this->map_data_size()); i < n; i++) {
-    target = ::google::protobuf::internal::WireFormatLite::
-      InternalWriteMessageToArray(
-        1, this->map_data(static_cast<int>(i)), deterministic, target);
+      n = static_cast<unsigned int>(this->_internal_map_data_size()); i < n; i++) {
+    target = stream->EnsureSpace(target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
+      InternalWriteMessageToArray(1, this->_internal_map_data(i), target, stream);
   }
 
-  if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
-    target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
-        (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()), target);
+  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::InternalSerializeUnknownFieldsToArray(
+        _internal_metadata_.unknown_fields(), target, stream);
   }
   // @@protoc_insertion_point(serialize_to_array_end:NFMsg.AckBigMapGridInfo)
   return target;
@@ -3356,36 +2846,35 @@ size_t AckBigMapGridInfo::ByteSizeLong() const {
 // @@protoc_insertion_point(message_byte_size_start:NFMsg.AckBigMapGridInfo)
   size_t total_size = 0;
 
-  if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
-    total_size +=
-      ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
-        (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()));
-  }
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
   // repeated .NFMsg.BigMapGridDetailInfo map_data = 1;
-  {
-    unsigned int count = static_cast<unsigned int>(this->map_data_size());
-    total_size += 1UL * count;
-    for (unsigned int i = 0; i < count; i++) {
-      total_size +=
-        ::google::protobuf::internal::WireFormatLite::MessageSize(
-          this->map_data(static_cast<int>(i)));
-    }
+  total_size += 1UL * this->_internal_map_data_size();
+  for (const auto& msg : this->map_data_) {
+    total_size +=
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(msg);
   }
 
-  int cached_size = ::google::protobuf::internal::ToCachedSize(total_size);
+  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
+    return ::PROTOBUF_NAMESPACE_ID::internal::ComputeUnknownFieldsSize(
+        _internal_metadata_, total_size, &_cached_size_);
+  }
+  int cached_size = ::PROTOBUF_NAMESPACE_ID::internal::ToCachedSize(total_size);
   SetCachedSize(cached_size);
   return total_size;
 }
 
-void AckBigMapGridInfo::MergeFrom(const ::google::protobuf::Message& from) {
+void AckBigMapGridInfo::MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
 // @@protoc_insertion_point(generalized_merge_from_start:NFMsg.AckBigMapGridInfo)
   GOOGLE_DCHECK_NE(&from, this);
   const AckBigMapGridInfo* source =
-      ::google::protobuf::internal::DynamicCastToGenerated<const AckBigMapGridInfo>(
+      ::PROTOBUF_NAMESPACE_ID::DynamicCastToGenerated<AckBigMapGridInfo>(
           &from);
-  if (source == NULL) {
+  if (source == nullptr) {
   // @@protoc_insertion_point(generalized_merge_from_cast_fail:NFMsg.AckBigMapGridInfo)
-    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
+    ::PROTOBUF_NAMESPACE_ID::internal::ReflectionOps::Merge(from, this);
   } else {
   // @@protoc_insertion_point(generalized_merge_from_cast_success:NFMsg.AckBigMapGridInfo)
     MergeFrom(*source);
@@ -3396,13 +2885,13 @@ void AckBigMapGridInfo::MergeFrom(const AckBigMapGridInfo& from) {
 // @@protoc_insertion_point(class_specific_merge_from_start:NFMsg.AckBigMapGridInfo)
   GOOGLE_DCHECK_NE(&from, this);
   _internal_metadata_.MergeFrom(from._internal_metadata_);
-  ::google::protobuf::uint32 cached_has_bits = 0;
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
   map_data_.MergeFrom(from.map_data_);
 }
 
-void AckBigMapGridInfo::CopyFrom(const ::google::protobuf::Message& from) {
+void AckBigMapGridInfo::CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
 // @@protoc_insertion_point(generalized_copy_from_start:NFMsg.AckBigMapGridInfo)
   if (&from == this) return;
   Clear();
@@ -3420,19 +2909,14 @@ bool AckBigMapGridInfo::IsInitialized() const {
   return true;
 }
 
-void AckBigMapGridInfo::Swap(AckBigMapGridInfo* other) {
-  if (other == this) return;
-  InternalSwap(other);
-}
 void AckBigMapGridInfo::InternalSwap(AckBigMapGridInfo* other) {
   using std::swap;
-  CastToBase(&map_data_)->InternalSwap(CastToBase(&other->map_data_));
   _internal_metadata_.Swap(&other->_internal_metadata_);
+  map_data_.InternalSwap(&other->map_data_);
 }
 
-::google::protobuf::Metadata AckBigMapGridInfo::GetMetadata() const {
-  protobuf_NFMsgExtra_2eproto::protobuf_AssignDescriptorsOnce();
-  return ::protobuf_NFMsgExtra_2eproto::file_level_metadata[kIndexInFileMessages];
+::PROTOBUF_NAMESPACE_ID::Metadata AckBigMapGridInfo::GetMetadata() const {
+  return GetMetadataStatic();
 }
 
 
@@ -3440,19 +2924,18 @@ void AckBigMapGridInfo::InternalSwap(AckBigMapGridInfo* other) {
 
 void ReqBigMapInfo::InitAsDefaultInstance() {
 }
-#if !defined(_MSC_VER) || _MSC_VER >= 1900
-#endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
+class ReqBigMapInfo::_Internal {
+ public:
+};
 
 ReqBigMapInfo::ReqBigMapInfo()
-  : ::google::protobuf::Message(), _internal_metadata_(NULL) {
-  ::google::protobuf::internal::InitSCC(
-      &protobuf_NFMsgExtra_2eproto::scc_info_ReqBigMapInfo.base);
+  : ::PROTOBUF_NAMESPACE_ID::Message(), _internal_metadata_(nullptr) {
   SharedCtor();
   // @@protoc_insertion_point(constructor:NFMsg.ReqBigMapInfo)
 }
 ReqBigMapInfo::ReqBigMapInfo(const ReqBigMapInfo& from)
-  : ::google::protobuf::Message(),
-      _internal_metadata_(NULL) {
+  : ::PROTOBUF_NAMESPACE_ID::Message(),
+      _internal_metadata_(nullptr) {
   _internal_metadata_.MergeFrom(from._internal_metadata_);
   // @@protoc_insertion_point(copy_constructor:NFMsg.ReqBigMapInfo)
 }
@@ -3471,74 +2954,56 @@ void ReqBigMapInfo::SharedDtor() {
 void ReqBigMapInfo::SetCachedSize(int size) const {
   _cached_size_.Set(size);
 }
-const ::google::protobuf::Descriptor* ReqBigMapInfo::descriptor() {
-  ::protobuf_NFMsgExtra_2eproto::protobuf_AssignDescriptorsOnce();
-  return ::protobuf_NFMsgExtra_2eproto::file_level_metadata[kIndexInFileMessages].descriptor;
-}
-
 const ReqBigMapInfo& ReqBigMapInfo::default_instance() {
-  ::google::protobuf::internal::InitSCC(&protobuf_NFMsgExtra_2eproto::scc_info_ReqBigMapInfo.base);
+  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&::scc_info_ReqBigMapInfo_NFMsgExtra_2eproto.base);
   return *internal_default_instance();
 }
 
 
 void ReqBigMapInfo::Clear() {
 // @@protoc_insertion_point(message_clear_start:NFMsg.ReqBigMapInfo)
-  ::google::protobuf::uint32 cached_has_bits = 0;
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
   _internal_metadata_.Clear();
 }
 
-bool ReqBigMapInfo::MergePartialFromCodedStream(
-    ::google::protobuf::io::CodedInputStream* input) {
-#define DO_(EXPRESSION) if (!GOOGLE_PREDICT_TRUE(EXPRESSION)) goto failure
-  ::google::protobuf::uint32 tag;
-  // @@protoc_insertion_point(parse_start:NFMsg.ReqBigMapInfo)
-  for (;;) {
-    ::std::pair<::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
-    tag = p.first;
-    if (!p.second) goto handle_unusual;
-  handle_unusual:
-    if (tag == 0) {
-      goto success;
-    }
-    DO_(::google::protobuf::internal::WireFormat::SkipField(
-          input, tag, _internal_metadata_.mutable_unknown_fields()));
-  }
+const char* ReqBigMapInfo::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) {
+#define CHK_(x) if (PROTOBUF_PREDICT_FALSE(!(x))) goto failure
+  while (!ctx->Done(&ptr)) {
+    ::PROTOBUF_NAMESPACE_ID::uint32 tag;
+    ptr = ::PROTOBUF_NAMESPACE_ID::internal::ReadTag(ptr, &tag);
+    CHK_(ptr);
+    switch (tag >> 3) {
+      default: {
+        if ((tag & 7) == 4 || tag == 0) {
+          ctx->SetLastTag(tag);
+          goto success;
+        }
+        ptr = UnknownFieldParse(tag, &_internal_metadata_, ptr, ctx);
+        CHK_(ptr != nullptr);
+        continue;
+      }
+    }  // switch
+  }  // while
 success:
-  // @@protoc_insertion_point(parse_success:NFMsg.ReqBigMapInfo)
-  return true;
+  return ptr;
 failure:
-  // @@protoc_insertion_point(parse_failure:NFMsg.ReqBigMapInfo)
-  return false;
-#undef DO_
+  ptr = nullptr;
+  goto success;
+#undef CHK_
 }
 
-void ReqBigMapInfo::SerializeWithCachedSizes(
-    ::google::protobuf::io::CodedOutputStream* output) const {
-  // @@protoc_insertion_point(serialize_start:NFMsg.ReqBigMapInfo)
-  ::google::protobuf::uint32 cached_has_bits = 0;
-  (void) cached_has_bits;
-
-  if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
-    ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
-        (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()), output);
-  }
-  // @@protoc_insertion_point(serialize_end:NFMsg.ReqBigMapInfo)
-}
-
-::google::protobuf::uint8* ReqBigMapInfo::InternalSerializeWithCachedSizesToArray(
-    bool deterministic, ::google::protobuf::uint8* target) const {
-  (void)deterministic; // Unused
+::PROTOBUF_NAMESPACE_ID::uint8* ReqBigMapInfo::InternalSerializeWithCachedSizesToArray(
+    ::PROTOBUF_NAMESPACE_ID::uint8* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const {
   // @@protoc_insertion_point(serialize_to_array_start:NFMsg.ReqBigMapInfo)
-  ::google::protobuf::uint32 cached_has_bits = 0;
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
-  if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
-    target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
-        (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()), target);
+  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::InternalSerializeUnknownFieldsToArray(
+        _internal_metadata_.unknown_fields(), target, stream);
   }
   // @@protoc_insertion_point(serialize_to_array_end:NFMsg.ReqBigMapInfo)
   return target;
@@ -3548,25 +3013,28 @@ size_t ReqBigMapInfo::ByteSizeLong() const {
 // @@protoc_insertion_point(message_byte_size_start:NFMsg.ReqBigMapInfo)
   size_t total_size = 0;
 
-  if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
-    total_size +=
-      ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
-        (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()));
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
+    return ::PROTOBUF_NAMESPACE_ID::internal::ComputeUnknownFieldsSize(
+        _internal_metadata_, total_size, &_cached_size_);
   }
-  int cached_size = ::google::protobuf::internal::ToCachedSize(total_size);
+  int cached_size = ::PROTOBUF_NAMESPACE_ID::internal::ToCachedSize(total_size);
   SetCachedSize(cached_size);
   return total_size;
 }
 
-void ReqBigMapInfo::MergeFrom(const ::google::protobuf::Message& from) {
+void ReqBigMapInfo::MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
 // @@protoc_insertion_point(generalized_merge_from_start:NFMsg.ReqBigMapInfo)
   GOOGLE_DCHECK_NE(&from, this);
   const ReqBigMapInfo* source =
-      ::google::protobuf::internal::DynamicCastToGenerated<const ReqBigMapInfo>(
+      ::PROTOBUF_NAMESPACE_ID::DynamicCastToGenerated<ReqBigMapInfo>(
           &from);
-  if (source == NULL) {
+  if (source == nullptr) {
   // @@protoc_insertion_point(generalized_merge_from_cast_fail:NFMsg.ReqBigMapInfo)
-    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
+    ::PROTOBUF_NAMESPACE_ID::internal::ReflectionOps::Merge(from, this);
   } else {
   // @@protoc_insertion_point(generalized_merge_from_cast_success:NFMsg.ReqBigMapInfo)
     MergeFrom(*source);
@@ -3577,12 +3045,12 @@ void ReqBigMapInfo::MergeFrom(const ReqBigMapInfo& from) {
 // @@protoc_insertion_point(class_specific_merge_from_start:NFMsg.ReqBigMapInfo)
   GOOGLE_DCHECK_NE(&from, this);
   _internal_metadata_.MergeFrom(from._internal_metadata_);
-  ::google::protobuf::uint32 cached_has_bits = 0;
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
 }
 
-void ReqBigMapInfo::CopyFrom(const ::google::protobuf::Message& from) {
+void ReqBigMapInfo::CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
 // @@protoc_insertion_point(generalized_copy_from_start:NFMsg.ReqBigMapInfo)
   if (&from == this) return;
   Clear();
@@ -3600,18 +3068,13 @@ bool ReqBigMapInfo::IsInitialized() const {
   return true;
 }
 
-void ReqBigMapInfo::Swap(ReqBigMapInfo* other) {
-  if (other == this) return;
-  InternalSwap(other);
-}
 void ReqBigMapInfo::InternalSwap(ReqBigMapInfo* other) {
   using std::swap;
   _internal_metadata_.Swap(&other->_internal_metadata_);
 }
 
-::google::protobuf::Metadata ReqBigMapInfo::GetMetadata() const {
-  protobuf_NFMsgExtra_2eproto::protobuf_AssignDescriptorsOnce();
-  return ::protobuf_NFMsgExtra_2eproto::file_level_metadata[kIndexInFileMessages];
+::PROTOBUF_NAMESPACE_ID::Metadata ReqBigMapInfo::GetMetadata() const {
+  return GetMetadataStatic();
 }
 
 
@@ -3619,26 +3082,25 @@ void ReqBigMapInfo::InternalSwap(ReqBigMapInfo* other) {
 
 void AckBigMapInfo::InitAsDefaultInstance() {
 }
-#if !defined(_MSC_VER) || _MSC_VER >= 1900
-const int AckBigMapInfo::kGridBaseInfoFieldNumber;
-#endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
+class AckBigMapInfo::_Internal {
+ public:
+};
 
 AckBigMapInfo::AckBigMapInfo()
-  : ::google::protobuf::Message(), _internal_metadata_(NULL) {
-  ::google::protobuf::internal::InitSCC(
-      &protobuf_NFMsgExtra_2eproto::scc_info_AckBigMapInfo.base);
+  : ::PROTOBUF_NAMESPACE_ID::Message(), _internal_metadata_(nullptr) {
   SharedCtor();
   // @@protoc_insertion_point(constructor:NFMsg.AckBigMapInfo)
 }
 AckBigMapInfo::AckBigMapInfo(const AckBigMapInfo& from)
-  : ::google::protobuf::Message(),
-      _internal_metadata_(NULL),
+  : ::PROTOBUF_NAMESPACE_ID::Message(),
+      _internal_metadata_(nullptr),
       grid_base_info_(from.grid_base_info_) {
   _internal_metadata_.MergeFrom(from._internal_metadata_);
   // @@protoc_insertion_point(copy_constructor:NFMsg.AckBigMapInfo)
 }
 
 void AckBigMapInfo::SharedCtor() {
+  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&scc_info_AckBigMapInfo_NFMsgExtra_2eproto.base);
 }
 
 AckBigMapInfo::~AckBigMapInfo() {
@@ -3652,20 +3114,15 @@ void AckBigMapInfo::SharedDtor() {
 void AckBigMapInfo::SetCachedSize(int size) const {
   _cached_size_.Set(size);
 }
-const ::google::protobuf::Descriptor* AckBigMapInfo::descriptor() {
-  ::protobuf_NFMsgExtra_2eproto::protobuf_AssignDescriptorsOnce();
-  return ::protobuf_NFMsgExtra_2eproto::file_level_metadata[kIndexInFileMessages].descriptor;
-}
-
 const AckBigMapInfo& AckBigMapInfo::default_instance() {
-  ::google::protobuf::internal::InitSCC(&protobuf_NFMsgExtra_2eproto::scc_info_AckBigMapInfo.base);
+  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&::scc_info_AckBigMapInfo_NFMsgExtra_2eproto.base);
   return *internal_default_instance();
 }
 
 
 void AckBigMapInfo::Clear() {
 // @@protoc_insertion_point(message_clear_start:NFMsg.AckBigMapInfo)
-  ::google::protobuf::uint32 cached_has_bits = 0;
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
@@ -3673,88 +3130,62 @@ void AckBigMapInfo::Clear() {
   _internal_metadata_.Clear();
 }
 
-bool AckBigMapInfo::MergePartialFromCodedStream(
-    ::google::protobuf::io::CodedInputStream* input) {
-#define DO_(EXPRESSION) if (!GOOGLE_PREDICT_TRUE(EXPRESSION)) goto failure
-  ::google::protobuf::uint32 tag;
-  // @@protoc_insertion_point(parse_start:NFMsg.AckBigMapInfo)
-  for (;;) {
-    ::std::pair<::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
-    tag = p.first;
-    if (!p.second) goto handle_unusual;
-    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
+const char* AckBigMapInfo::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) {
+#define CHK_(x) if (PROTOBUF_PREDICT_FALSE(!(x))) goto failure
+  while (!ctx->Done(&ptr)) {
+    ::PROTOBUF_NAMESPACE_ID::uint32 tag;
+    ptr = ::PROTOBUF_NAMESPACE_ID::internal::ReadTag(ptr, &tag);
+    CHK_(ptr);
+    switch (tag >> 3) {
       // repeated .NFMsg.BigMapGridBaseInfo grid_base_info = 1;
-      case 1: {
-        if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(10u /* 10 & 0xFF */)) {
-          DO_(::google::protobuf::internal::WireFormatLite::ReadMessage(
-                input, add_grid_base_info()));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
+      case 1:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 10)) {
+          ptr -= 1;
+          do {
+            ptr += 1;
+            ptr = ctx->ParseMessage(_internal_add_grid_base_info(), ptr);
+            CHK_(ptr);
+            if (!ctx->DataAvailable(ptr)) break;
+          } while (::PROTOBUF_NAMESPACE_ID::internal::ExpectTag<10>(ptr));
+        } else goto handle_unusual;
+        continue;
       default: {
       handle_unusual:
-        if (tag == 0) {
+        if ((tag & 7) == 4 || tag == 0) {
+          ctx->SetLastTag(tag);
           goto success;
         }
-        DO_(::google::protobuf::internal::WireFormat::SkipField(
-              input, tag, _internal_metadata_.mutable_unknown_fields()));
-        break;
+        ptr = UnknownFieldParse(tag, &_internal_metadata_, ptr, ctx);
+        CHK_(ptr != nullptr);
+        continue;
       }
-    }
-  }
+    }  // switch
+  }  // while
 success:
-  // @@protoc_insertion_point(parse_success:NFMsg.AckBigMapInfo)
-  return true;
+  return ptr;
 failure:
-  // @@protoc_insertion_point(parse_failure:NFMsg.AckBigMapInfo)
-  return false;
-#undef DO_
+  ptr = nullptr;
+  goto success;
+#undef CHK_
 }
 
-void AckBigMapInfo::SerializeWithCachedSizes(
-    ::google::protobuf::io::CodedOutputStream* output) const {
-  // @@protoc_insertion_point(serialize_start:NFMsg.AckBigMapInfo)
-  ::google::protobuf::uint32 cached_has_bits = 0;
-  (void) cached_has_bits;
-
-  // repeated .NFMsg.BigMapGridBaseInfo grid_base_info = 1;
-  for (unsigned int i = 0,
-      n = static_cast<unsigned int>(this->grid_base_info_size()); i < n; i++) {
-    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      1,
-      this->grid_base_info(static_cast<int>(i)),
-      output);
-  }
-
-  if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
-    ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
-        (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()), output);
-  }
-  // @@protoc_insertion_point(serialize_end:NFMsg.AckBigMapInfo)
-}
-
-::google::protobuf::uint8* AckBigMapInfo::InternalSerializeWithCachedSizesToArray(
-    bool deterministic, ::google::protobuf::uint8* target) const {
-  (void)deterministic; // Unused
+::PROTOBUF_NAMESPACE_ID::uint8* AckBigMapInfo::InternalSerializeWithCachedSizesToArray(
+    ::PROTOBUF_NAMESPACE_ID::uint8* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const {
   // @@protoc_insertion_point(serialize_to_array_start:NFMsg.AckBigMapInfo)
-  ::google::protobuf::uint32 cached_has_bits = 0;
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
   // repeated .NFMsg.BigMapGridBaseInfo grid_base_info = 1;
   for (unsigned int i = 0,
-      n = static_cast<unsigned int>(this->grid_base_info_size()); i < n; i++) {
-    target = ::google::protobuf::internal::WireFormatLite::
-      InternalWriteMessageToArray(
-        1, this->grid_base_info(static_cast<int>(i)), deterministic, target);
+      n = static_cast<unsigned int>(this->_internal_grid_base_info_size()); i < n; i++) {
+    target = stream->EnsureSpace(target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
+      InternalWriteMessageToArray(1, this->_internal_grid_base_info(i), target, stream);
   }
 
-  if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
-    target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
-        (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()), target);
+  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::InternalSerializeUnknownFieldsToArray(
+        _internal_metadata_.unknown_fields(), target, stream);
   }
   // @@protoc_insertion_point(serialize_to_array_end:NFMsg.AckBigMapInfo)
   return target;
@@ -3764,36 +3195,35 @@ size_t AckBigMapInfo::ByteSizeLong() const {
 // @@protoc_insertion_point(message_byte_size_start:NFMsg.AckBigMapInfo)
   size_t total_size = 0;
 
-  if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
-    total_size +=
-      ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
-        (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()));
-  }
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
   // repeated .NFMsg.BigMapGridBaseInfo grid_base_info = 1;
-  {
-    unsigned int count = static_cast<unsigned int>(this->grid_base_info_size());
-    total_size += 1UL * count;
-    for (unsigned int i = 0; i < count; i++) {
-      total_size +=
-        ::google::protobuf::internal::WireFormatLite::MessageSize(
-          this->grid_base_info(static_cast<int>(i)));
-    }
+  total_size += 1UL * this->_internal_grid_base_info_size();
+  for (const auto& msg : this->grid_base_info_) {
+    total_size +=
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(msg);
   }
 
-  int cached_size = ::google::protobuf::internal::ToCachedSize(total_size);
+  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
+    return ::PROTOBUF_NAMESPACE_ID::internal::ComputeUnknownFieldsSize(
+        _internal_metadata_, total_size, &_cached_size_);
+  }
+  int cached_size = ::PROTOBUF_NAMESPACE_ID::internal::ToCachedSize(total_size);
   SetCachedSize(cached_size);
   return total_size;
 }
 
-void AckBigMapInfo::MergeFrom(const ::google::protobuf::Message& from) {
+void AckBigMapInfo::MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
 // @@protoc_insertion_point(generalized_merge_from_start:NFMsg.AckBigMapInfo)
   GOOGLE_DCHECK_NE(&from, this);
   const AckBigMapInfo* source =
-      ::google::protobuf::internal::DynamicCastToGenerated<const AckBigMapInfo>(
+      ::PROTOBUF_NAMESPACE_ID::DynamicCastToGenerated<AckBigMapInfo>(
           &from);
-  if (source == NULL) {
+  if (source == nullptr) {
   // @@protoc_insertion_point(generalized_merge_from_cast_fail:NFMsg.AckBigMapInfo)
-    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
+    ::PROTOBUF_NAMESPACE_ID::internal::ReflectionOps::Merge(from, this);
   } else {
   // @@protoc_insertion_point(generalized_merge_from_cast_success:NFMsg.AckBigMapInfo)
     MergeFrom(*source);
@@ -3804,13 +3234,13 @@ void AckBigMapInfo::MergeFrom(const AckBigMapInfo& from) {
 // @@protoc_insertion_point(class_specific_merge_from_start:NFMsg.AckBigMapInfo)
   GOOGLE_DCHECK_NE(&from, this);
   _internal_metadata_.MergeFrom(from._internal_metadata_);
-  ::google::protobuf::uint32 cached_has_bits = 0;
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
   grid_base_info_.MergeFrom(from.grid_base_info_);
 }
 
-void AckBigMapInfo::CopyFrom(const ::google::protobuf::Message& from) {
+void AckBigMapInfo::CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
 // @@protoc_insertion_point(generalized_copy_from_start:NFMsg.AckBigMapInfo)
   if (&from == this) return;
   Clear();
@@ -3828,19 +3258,14 @@ bool AckBigMapInfo::IsInitialized() const {
   return true;
 }
 
-void AckBigMapInfo::Swap(AckBigMapInfo* other) {
-  if (other == this) return;
-  InternalSwap(other);
-}
 void AckBigMapInfo::InternalSwap(AckBigMapInfo* other) {
   using std::swap;
-  CastToBase(&grid_base_info_)->InternalSwap(CastToBase(&other->grid_base_info_));
   _internal_metadata_.Swap(&other->_internal_metadata_);
+  grid_base_info_.InternalSwap(&other->grid_base_info_);
 }
 
-::google::protobuf::Metadata AckBigMapInfo::GetMetadata() const {
-  protobuf_NFMsgExtra_2eproto::protobuf_AssignDescriptorsOnce();
-  return ::protobuf_NFMsgExtra_2eproto::file_level_metadata[kIndexInFileMessages];
+::PROTOBUF_NAMESPACE_ID::Metadata AckBigMapInfo::GetMetadata() const {
+  return GetMetadataStatic();
 }
 
 
@@ -3850,43 +3275,46 @@ void ReqHoldMapGrid::InitAsDefaultInstance() {
   ::NFMsg::_ReqHoldMapGrid_default_instance_._instance.get_mutable()->guild_id_ = const_cast< ::NFMsg::Ident*>(
       ::NFMsg::Ident::internal_default_instance());
 }
+class ReqHoldMapGrid::_Internal {
+ public:
+  static const ::NFMsg::Ident& guild_id(const ReqHoldMapGrid* msg);
+};
+
+const ::NFMsg::Ident&
+ReqHoldMapGrid::_Internal::guild_id(const ReqHoldMapGrid* msg) {
+  return *msg->guild_id_;
+}
 void ReqHoldMapGrid::clear_guild_id() {
-  if (GetArenaNoVirtual() == NULL && guild_id_ != NULL) {
+  if (GetArenaNoVirtual() == nullptr && guild_id_ != nullptr) {
     delete guild_id_;
   }
-  guild_id_ = NULL;
+  guild_id_ = nullptr;
 }
-#if !defined(_MSC_VER) || _MSC_VER >= 1900
-const int ReqHoldMapGrid::kMapTitleIdFieldNumber;
-const int ReqHoldMapGrid::kGuildIdFieldNumber;
-#endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
-
 ReqHoldMapGrid::ReqHoldMapGrid()
-  : ::google::protobuf::Message(), _internal_metadata_(NULL) {
-  ::google::protobuf::internal::InitSCC(
-      &protobuf_NFMsgExtra_2eproto::scc_info_ReqHoldMapGrid.base);
+  : ::PROTOBUF_NAMESPACE_ID::Message(), _internal_metadata_(nullptr) {
   SharedCtor();
   // @@protoc_insertion_point(constructor:NFMsg.ReqHoldMapGrid)
 }
 ReqHoldMapGrid::ReqHoldMapGrid(const ReqHoldMapGrid& from)
-  : ::google::protobuf::Message(),
-      _internal_metadata_(NULL) {
+  : ::PROTOBUF_NAMESPACE_ID::Message(),
+      _internal_metadata_(nullptr) {
   _internal_metadata_.MergeFrom(from._internal_metadata_);
-  map_title_id_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  if (from.map_title_id().size() > 0) {
-    map_title_id_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.map_title_id_);
+  map_title_id_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  if (!from._internal_map_title_id().empty()) {
+    map_title_id_.AssignWithDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), from.map_title_id_);
   }
-  if (from.has_guild_id()) {
+  if (from._internal_has_guild_id()) {
     guild_id_ = new ::NFMsg::Ident(*from.guild_id_);
   } else {
-    guild_id_ = NULL;
+    guild_id_ = nullptr;
   }
   // @@protoc_insertion_point(copy_constructor:NFMsg.ReqHoldMapGrid)
 }
 
 void ReqHoldMapGrid::SharedCtor() {
-  map_title_id_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  guild_id_ = NULL;
+  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&scc_info_ReqHoldMapGrid_NFMsgExtra_2eproto.base);
+  map_title_id_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  guild_id_ = nullptr;
 }
 
 ReqHoldMapGrid::~ReqHoldMapGrid() {
@@ -3895,141 +3323,97 @@ ReqHoldMapGrid::~ReqHoldMapGrid() {
 }
 
 void ReqHoldMapGrid::SharedDtor() {
-  map_title_id_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  map_title_id_.DestroyNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
   if (this != internal_default_instance()) delete guild_id_;
 }
 
 void ReqHoldMapGrid::SetCachedSize(int size) const {
   _cached_size_.Set(size);
 }
-const ::google::protobuf::Descriptor* ReqHoldMapGrid::descriptor() {
-  ::protobuf_NFMsgExtra_2eproto::protobuf_AssignDescriptorsOnce();
-  return ::protobuf_NFMsgExtra_2eproto::file_level_metadata[kIndexInFileMessages].descriptor;
-}
-
 const ReqHoldMapGrid& ReqHoldMapGrid::default_instance() {
-  ::google::protobuf::internal::InitSCC(&protobuf_NFMsgExtra_2eproto::scc_info_ReqHoldMapGrid.base);
+  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&::scc_info_ReqHoldMapGrid_NFMsgExtra_2eproto.base);
   return *internal_default_instance();
 }
 
 
 void ReqHoldMapGrid::Clear() {
 // @@protoc_insertion_point(message_clear_start:NFMsg.ReqHoldMapGrid)
-  ::google::protobuf::uint32 cached_has_bits = 0;
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  map_title_id_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  if (GetArenaNoVirtual() == NULL && guild_id_ != NULL) {
+  map_title_id_.ClearToEmptyNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  if (GetArenaNoVirtual() == nullptr && guild_id_ != nullptr) {
     delete guild_id_;
   }
-  guild_id_ = NULL;
+  guild_id_ = nullptr;
   _internal_metadata_.Clear();
 }
 
-bool ReqHoldMapGrid::MergePartialFromCodedStream(
-    ::google::protobuf::io::CodedInputStream* input) {
-#define DO_(EXPRESSION) if (!GOOGLE_PREDICT_TRUE(EXPRESSION)) goto failure
-  ::google::protobuf::uint32 tag;
-  // @@protoc_insertion_point(parse_start:NFMsg.ReqHoldMapGrid)
-  for (;;) {
-    ::std::pair<::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
-    tag = p.first;
-    if (!p.second) goto handle_unusual;
-    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
+const char* ReqHoldMapGrid::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) {
+#define CHK_(x) if (PROTOBUF_PREDICT_FALSE(!(x))) goto failure
+  while (!ctx->Done(&ptr)) {
+    ::PROTOBUF_NAMESPACE_ID::uint32 tag;
+    ptr = ::PROTOBUF_NAMESPACE_ID::internal::ReadTag(ptr, &tag);
+    CHK_(ptr);
+    switch (tag >> 3) {
       // bytes map_title_id = 1;
-      case 1: {
-        if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(10u /* 10 & 0xFF */)) {
-          DO_(::google::protobuf::internal::WireFormatLite::ReadBytes(
-                input, this->mutable_map_title_id()));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
+      case 1:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 10)) {
+          ptr = ::PROTOBUF_NAMESPACE_ID::internal::InlineGreedyStringParser(_internal_mutable_map_title_id(), ptr, ctx);
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
       // .NFMsg.Ident guild_id = 2;
-      case 2: {
-        if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(18u /* 18 & 0xFF */)) {
-          DO_(::google::protobuf::internal::WireFormatLite::ReadMessage(
-               input, mutable_guild_id()));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
+      case 2:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 18)) {
+          ptr = ctx->ParseMessage(_internal_mutable_guild_id(), ptr);
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
       default: {
       handle_unusual:
-        if (tag == 0) {
+        if ((tag & 7) == 4 || tag == 0) {
+          ctx->SetLastTag(tag);
           goto success;
         }
-        DO_(::google::protobuf::internal::WireFormat::SkipField(
-              input, tag, _internal_metadata_.mutable_unknown_fields()));
-        break;
+        ptr = UnknownFieldParse(tag, &_internal_metadata_, ptr, ctx);
+        CHK_(ptr != nullptr);
+        continue;
       }
-    }
-  }
+    }  // switch
+  }  // while
 success:
-  // @@protoc_insertion_point(parse_success:NFMsg.ReqHoldMapGrid)
-  return true;
+  return ptr;
 failure:
-  // @@protoc_insertion_point(parse_failure:NFMsg.ReqHoldMapGrid)
-  return false;
-#undef DO_
+  ptr = nullptr;
+  goto success;
+#undef CHK_
 }
 
-void ReqHoldMapGrid::SerializeWithCachedSizes(
-    ::google::protobuf::io::CodedOutputStream* output) const {
-  // @@protoc_insertion_point(serialize_start:NFMsg.ReqHoldMapGrid)
-  ::google::protobuf::uint32 cached_has_bits = 0;
-  (void) cached_has_bits;
-
-  // bytes map_title_id = 1;
-  if (this->map_title_id().size() > 0) {
-    ::google::protobuf::internal::WireFormatLite::WriteBytesMaybeAliased(
-      1, this->map_title_id(), output);
-  }
-
-  // .NFMsg.Ident guild_id = 2;
-  if (this->has_guild_id()) {
-    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      2, this->_internal_guild_id(), output);
-  }
-
-  if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
-    ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
-        (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()), output);
-  }
-  // @@protoc_insertion_point(serialize_end:NFMsg.ReqHoldMapGrid)
-}
-
-::google::protobuf::uint8* ReqHoldMapGrid::InternalSerializeWithCachedSizesToArray(
-    bool deterministic, ::google::protobuf::uint8* target) const {
-  (void)deterministic; // Unused
+::PROTOBUF_NAMESPACE_ID::uint8* ReqHoldMapGrid::InternalSerializeWithCachedSizesToArray(
+    ::PROTOBUF_NAMESPACE_ID::uint8* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const {
   // @@protoc_insertion_point(serialize_to_array_start:NFMsg.ReqHoldMapGrid)
-  ::google::protobuf::uint32 cached_has_bits = 0;
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
   // bytes map_title_id = 1;
   if (this->map_title_id().size() > 0) {
-    target =
-      ::google::protobuf::internal::WireFormatLite::WriteBytesToArray(
-        1, this->map_title_id(), target);
+    target = stream->WriteBytesMaybeAliased(
+        1, this->_internal_map_title_id(), target);
   }
 
   // .NFMsg.Ident guild_id = 2;
   if (this->has_guild_id()) {
-    target = ::google::protobuf::internal::WireFormatLite::
+    target = stream->EnsureSpace(target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
       InternalWriteMessageToArray(
-        2, this->_internal_guild_id(), deterministic, target);
+        2, _Internal::guild_id(this), target, stream);
   }
 
-  if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
-    target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
-        (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()), target);
+  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::InternalSerializeUnknownFieldsToArray(
+        _internal_metadata_.unknown_fields(), target, stream);
   }
   // @@protoc_insertion_point(serialize_to_array_end:NFMsg.ReqHoldMapGrid)
   return target;
@@ -4039,39 +3423,42 @@ size_t ReqHoldMapGrid::ByteSizeLong() const {
 // @@protoc_insertion_point(message_byte_size_start:NFMsg.ReqHoldMapGrid)
   size_t total_size = 0;
 
-  if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
-    total_size +=
-      ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
-        (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()));
-  }
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
   // bytes map_title_id = 1;
   if (this->map_title_id().size() > 0) {
     total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::BytesSize(
-        this->map_title_id());
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::BytesSize(
+        this->_internal_map_title_id());
   }
 
   // .NFMsg.Ident guild_id = 2;
   if (this->has_guild_id()) {
     total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::MessageSize(
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
         *guild_id_);
   }
 
-  int cached_size = ::google::protobuf::internal::ToCachedSize(total_size);
+  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
+    return ::PROTOBUF_NAMESPACE_ID::internal::ComputeUnknownFieldsSize(
+        _internal_metadata_, total_size, &_cached_size_);
+  }
+  int cached_size = ::PROTOBUF_NAMESPACE_ID::internal::ToCachedSize(total_size);
   SetCachedSize(cached_size);
   return total_size;
 }
 
-void ReqHoldMapGrid::MergeFrom(const ::google::protobuf::Message& from) {
+void ReqHoldMapGrid::MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
 // @@protoc_insertion_point(generalized_merge_from_start:NFMsg.ReqHoldMapGrid)
   GOOGLE_DCHECK_NE(&from, this);
   const ReqHoldMapGrid* source =
-      ::google::protobuf::internal::DynamicCastToGenerated<const ReqHoldMapGrid>(
+      ::PROTOBUF_NAMESPACE_ID::DynamicCastToGenerated<ReqHoldMapGrid>(
           &from);
-  if (source == NULL) {
+  if (source == nullptr) {
   // @@protoc_insertion_point(generalized_merge_from_cast_fail:NFMsg.ReqHoldMapGrid)
-    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
+    ::PROTOBUF_NAMESPACE_ID::internal::ReflectionOps::Merge(from, this);
   } else {
   // @@protoc_insertion_point(generalized_merge_from_cast_success:NFMsg.ReqHoldMapGrid)
     MergeFrom(*source);
@@ -4082,19 +3469,19 @@ void ReqHoldMapGrid::MergeFrom(const ReqHoldMapGrid& from) {
 // @@protoc_insertion_point(class_specific_merge_from_start:NFMsg.ReqHoldMapGrid)
   GOOGLE_DCHECK_NE(&from, this);
   _internal_metadata_.MergeFrom(from._internal_metadata_);
-  ::google::protobuf::uint32 cached_has_bits = 0;
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
   if (from.map_title_id().size() > 0) {
 
-    map_title_id_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.map_title_id_);
+    map_title_id_.AssignWithDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), from.map_title_id_);
   }
   if (from.has_guild_id()) {
-    mutable_guild_id()->::NFMsg::Ident::MergeFrom(from.guild_id());
+    _internal_mutable_guild_id()->::NFMsg::Ident::MergeFrom(from._internal_guild_id());
   }
 }
 
-void ReqHoldMapGrid::CopyFrom(const ::google::protobuf::Message& from) {
+void ReqHoldMapGrid::CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
 // @@protoc_insertion_point(generalized_copy_from_start:NFMsg.ReqHoldMapGrid)
   if (&from == this) return;
   Clear();
@@ -4112,21 +3499,16 @@ bool ReqHoldMapGrid::IsInitialized() const {
   return true;
 }
 
-void ReqHoldMapGrid::Swap(ReqHoldMapGrid* other) {
-  if (other == this) return;
-  InternalSwap(other);
-}
 void ReqHoldMapGrid::InternalSwap(ReqHoldMapGrid* other) {
   using std::swap;
-  map_title_id_.Swap(&other->map_title_id_, &::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+  _internal_metadata_.Swap(&other->_internal_metadata_);
+  map_title_id_.Swap(&other->map_title_id_, &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(),
     GetArenaNoVirtual());
   swap(guild_id_, other->guild_id_);
-  _internal_metadata_.Swap(&other->_internal_metadata_);
 }
 
-::google::protobuf::Metadata ReqHoldMapGrid::GetMetadata() const {
-  protobuf_NFMsgExtra_2eproto::protobuf_AssignDescriptorsOnce();
-  return ::protobuf_NFMsgExtra_2eproto::file_level_metadata[kIndexInFileMessages];
+::PROTOBUF_NAMESPACE_ID::Metadata ReqHoldMapGrid::GetMetadata() const {
+  return GetMetadataStatic();
 }
 
 
@@ -4134,19 +3516,18 @@ void ReqHoldMapGrid::InternalSwap(ReqHoldMapGrid* other) {
 
 void AckHoldMapGrid::InitAsDefaultInstance() {
 }
-#if !defined(_MSC_VER) || _MSC_VER >= 1900
-#endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
+class AckHoldMapGrid::_Internal {
+ public:
+};
 
 AckHoldMapGrid::AckHoldMapGrid()
-  : ::google::protobuf::Message(), _internal_metadata_(NULL) {
-  ::google::protobuf::internal::InitSCC(
-      &protobuf_NFMsgExtra_2eproto::scc_info_AckHoldMapGrid.base);
+  : ::PROTOBUF_NAMESPACE_ID::Message(), _internal_metadata_(nullptr) {
   SharedCtor();
   // @@protoc_insertion_point(constructor:NFMsg.AckHoldMapGrid)
 }
 AckHoldMapGrid::AckHoldMapGrid(const AckHoldMapGrid& from)
-  : ::google::protobuf::Message(),
-      _internal_metadata_(NULL) {
+  : ::PROTOBUF_NAMESPACE_ID::Message(),
+      _internal_metadata_(nullptr) {
   _internal_metadata_.MergeFrom(from._internal_metadata_);
   // @@protoc_insertion_point(copy_constructor:NFMsg.AckHoldMapGrid)
 }
@@ -4165,74 +3546,56 @@ void AckHoldMapGrid::SharedDtor() {
 void AckHoldMapGrid::SetCachedSize(int size) const {
   _cached_size_.Set(size);
 }
-const ::google::protobuf::Descriptor* AckHoldMapGrid::descriptor() {
-  ::protobuf_NFMsgExtra_2eproto::protobuf_AssignDescriptorsOnce();
-  return ::protobuf_NFMsgExtra_2eproto::file_level_metadata[kIndexInFileMessages].descriptor;
-}
-
 const AckHoldMapGrid& AckHoldMapGrid::default_instance() {
-  ::google::protobuf::internal::InitSCC(&protobuf_NFMsgExtra_2eproto::scc_info_AckHoldMapGrid.base);
+  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&::scc_info_AckHoldMapGrid_NFMsgExtra_2eproto.base);
   return *internal_default_instance();
 }
 
 
 void AckHoldMapGrid::Clear() {
 // @@protoc_insertion_point(message_clear_start:NFMsg.AckHoldMapGrid)
-  ::google::protobuf::uint32 cached_has_bits = 0;
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
   _internal_metadata_.Clear();
 }
 
-bool AckHoldMapGrid::MergePartialFromCodedStream(
-    ::google::protobuf::io::CodedInputStream* input) {
-#define DO_(EXPRESSION) if (!GOOGLE_PREDICT_TRUE(EXPRESSION)) goto failure
-  ::google::protobuf::uint32 tag;
-  // @@protoc_insertion_point(parse_start:NFMsg.AckHoldMapGrid)
-  for (;;) {
-    ::std::pair<::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
-    tag = p.first;
-    if (!p.second) goto handle_unusual;
-  handle_unusual:
-    if (tag == 0) {
-      goto success;
-    }
-    DO_(::google::protobuf::internal::WireFormat::SkipField(
-          input, tag, _internal_metadata_.mutable_unknown_fields()));
-  }
+const char* AckHoldMapGrid::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) {
+#define CHK_(x) if (PROTOBUF_PREDICT_FALSE(!(x))) goto failure
+  while (!ctx->Done(&ptr)) {
+    ::PROTOBUF_NAMESPACE_ID::uint32 tag;
+    ptr = ::PROTOBUF_NAMESPACE_ID::internal::ReadTag(ptr, &tag);
+    CHK_(ptr);
+    switch (tag >> 3) {
+      default: {
+        if ((tag & 7) == 4 || tag == 0) {
+          ctx->SetLastTag(tag);
+          goto success;
+        }
+        ptr = UnknownFieldParse(tag, &_internal_metadata_, ptr, ctx);
+        CHK_(ptr != nullptr);
+        continue;
+      }
+    }  // switch
+  }  // while
 success:
-  // @@protoc_insertion_point(parse_success:NFMsg.AckHoldMapGrid)
-  return true;
+  return ptr;
 failure:
-  // @@protoc_insertion_point(parse_failure:NFMsg.AckHoldMapGrid)
-  return false;
-#undef DO_
+  ptr = nullptr;
+  goto success;
+#undef CHK_
 }
 
-void AckHoldMapGrid::SerializeWithCachedSizes(
-    ::google::protobuf::io::CodedOutputStream* output) const {
-  // @@protoc_insertion_point(serialize_start:NFMsg.AckHoldMapGrid)
-  ::google::protobuf::uint32 cached_has_bits = 0;
-  (void) cached_has_bits;
-
-  if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
-    ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
-        (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()), output);
-  }
-  // @@protoc_insertion_point(serialize_end:NFMsg.AckHoldMapGrid)
-}
-
-::google::protobuf::uint8* AckHoldMapGrid::InternalSerializeWithCachedSizesToArray(
-    bool deterministic, ::google::protobuf::uint8* target) const {
-  (void)deterministic; // Unused
+::PROTOBUF_NAMESPACE_ID::uint8* AckHoldMapGrid::InternalSerializeWithCachedSizesToArray(
+    ::PROTOBUF_NAMESPACE_ID::uint8* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const {
   // @@protoc_insertion_point(serialize_to_array_start:NFMsg.AckHoldMapGrid)
-  ::google::protobuf::uint32 cached_has_bits = 0;
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
-  if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
-    target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
-        (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()), target);
+  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::InternalSerializeUnknownFieldsToArray(
+        _internal_metadata_.unknown_fields(), target, stream);
   }
   // @@protoc_insertion_point(serialize_to_array_end:NFMsg.AckHoldMapGrid)
   return target;
@@ -4242,25 +3605,28 @@ size_t AckHoldMapGrid::ByteSizeLong() const {
 // @@protoc_insertion_point(message_byte_size_start:NFMsg.AckHoldMapGrid)
   size_t total_size = 0;
 
-  if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
-    total_size +=
-      ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
-        (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()));
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
+    return ::PROTOBUF_NAMESPACE_ID::internal::ComputeUnknownFieldsSize(
+        _internal_metadata_, total_size, &_cached_size_);
   }
-  int cached_size = ::google::protobuf::internal::ToCachedSize(total_size);
+  int cached_size = ::PROTOBUF_NAMESPACE_ID::internal::ToCachedSize(total_size);
   SetCachedSize(cached_size);
   return total_size;
 }
 
-void AckHoldMapGrid::MergeFrom(const ::google::protobuf::Message& from) {
+void AckHoldMapGrid::MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
 // @@protoc_insertion_point(generalized_merge_from_start:NFMsg.AckHoldMapGrid)
   GOOGLE_DCHECK_NE(&from, this);
   const AckHoldMapGrid* source =
-      ::google::protobuf::internal::DynamicCastToGenerated<const AckHoldMapGrid>(
+      ::PROTOBUF_NAMESPACE_ID::DynamicCastToGenerated<AckHoldMapGrid>(
           &from);
-  if (source == NULL) {
+  if (source == nullptr) {
   // @@protoc_insertion_point(generalized_merge_from_cast_fail:NFMsg.AckHoldMapGrid)
-    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
+    ::PROTOBUF_NAMESPACE_ID::internal::ReflectionOps::Merge(from, this);
   } else {
   // @@protoc_insertion_point(generalized_merge_from_cast_success:NFMsg.AckHoldMapGrid)
     MergeFrom(*source);
@@ -4271,12 +3637,12 @@ void AckHoldMapGrid::MergeFrom(const AckHoldMapGrid& from) {
 // @@protoc_insertion_point(class_specific_merge_from_start:NFMsg.AckHoldMapGrid)
   GOOGLE_DCHECK_NE(&from, this);
   _internal_metadata_.MergeFrom(from._internal_metadata_);
-  ::google::protobuf::uint32 cached_has_bits = 0;
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
 }
 
-void AckHoldMapGrid::CopyFrom(const ::google::protobuf::Message& from) {
+void AckHoldMapGrid::CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
 // @@protoc_insertion_point(generalized_copy_from_start:NFMsg.AckHoldMapGrid)
   if (&from == this) return;
   Clear();
@@ -4294,18 +3660,13 @@ bool AckHoldMapGrid::IsInitialized() const {
   return true;
 }
 
-void AckHoldMapGrid::Swap(AckHoldMapGrid* other) {
-  if (other == this) return;
-  InternalSwap(other);
-}
 void AckHoldMapGrid::InternalSwap(AckHoldMapGrid* other) {
   using std::swap;
   _internal_metadata_.Swap(&other->_internal_metadata_);
 }
 
-::google::protobuf::Metadata AckHoldMapGrid::GetMetadata() const {
-  protobuf_NFMsgExtra_2eproto::protobuf_AssignDescriptorsOnce();
-  return ::protobuf_NFMsgExtra_2eproto::file_level_metadata[kIndexInFileMessages];
+::PROTOBUF_NAMESPACE_ID::Metadata AckHoldMapGrid::GetMetadata() const {
+  return GetMetadataStatic();
 }
 
 
@@ -4315,37 +3676,40 @@ void ReqLeaveMapMsg::InitAsDefaultInstance() {
   ::NFMsg::_ReqLeaveMapMsg_default_instance_._instance.get_mutable()->leave_msg_ = const_cast< ::NFMsg::BigMapLeaveMsg*>(
       ::NFMsg::BigMapLeaveMsg::internal_default_instance());
 }
-#if !defined(_MSC_VER) || _MSC_VER >= 1900
-const int ReqLeaveMapMsg::kMapTitleIdFieldNumber;
-const int ReqLeaveMapMsg::kLeaveMsgFieldNumber;
-#endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
+class ReqLeaveMapMsg::_Internal {
+ public:
+  static const ::NFMsg::BigMapLeaveMsg& leave_msg(const ReqLeaveMapMsg* msg);
+};
 
+const ::NFMsg::BigMapLeaveMsg&
+ReqLeaveMapMsg::_Internal::leave_msg(const ReqLeaveMapMsg* msg) {
+  return *msg->leave_msg_;
+}
 ReqLeaveMapMsg::ReqLeaveMapMsg()
-  : ::google::protobuf::Message(), _internal_metadata_(NULL) {
-  ::google::protobuf::internal::InitSCC(
-      &protobuf_NFMsgExtra_2eproto::scc_info_ReqLeaveMapMsg.base);
+  : ::PROTOBUF_NAMESPACE_ID::Message(), _internal_metadata_(nullptr) {
   SharedCtor();
   // @@protoc_insertion_point(constructor:NFMsg.ReqLeaveMapMsg)
 }
 ReqLeaveMapMsg::ReqLeaveMapMsg(const ReqLeaveMapMsg& from)
-  : ::google::protobuf::Message(),
-      _internal_metadata_(NULL) {
+  : ::PROTOBUF_NAMESPACE_ID::Message(),
+      _internal_metadata_(nullptr) {
   _internal_metadata_.MergeFrom(from._internal_metadata_);
-  map_title_id_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  if (from.map_title_id().size() > 0) {
-    map_title_id_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.map_title_id_);
+  map_title_id_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  if (!from._internal_map_title_id().empty()) {
+    map_title_id_.AssignWithDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), from.map_title_id_);
   }
-  if (from.has_leave_msg()) {
+  if (from._internal_has_leave_msg()) {
     leave_msg_ = new ::NFMsg::BigMapLeaveMsg(*from.leave_msg_);
   } else {
-    leave_msg_ = NULL;
+    leave_msg_ = nullptr;
   }
   // @@protoc_insertion_point(copy_constructor:NFMsg.ReqLeaveMapMsg)
 }
 
 void ReqLeaveMapMsg::SharedCtor() {
-  map_title_id_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  leave_msg_ = NULL;
+  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&scc_info_ReqLeaveMapMsg_NFMsgExtra_2eproto.base);
+  map_title_id_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  leave_msg_ = nullptr;
 }
 
 ReqLeaveMapMsg::~ReqLeaveMapMsg() {
@@ -4354,141 +3718,97 @@ ReqLeaveMapMsg::~ReqLeaveMapMsg() {
 }
 
 void ReqLeaveMapMsg::SharedDtor() {
-  map_title_id_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  map_title_id_.DestroyNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
   if (this != internal_default_instance()) delete leave_msg_;
 }
 
 void ReqLeaveMapMsg::SetCachedSize(int size) const {
   _cached_size_.Set(size);
 }
-const ::google::protobuf::Descriptor* ReqLeaveMapMsg::descriptor() {
-  ::protobuf_NFMsgExtra_2eproto::protobuf_AssignDescriptorsOnce();
-  return ::protobuf_NFMsgExtra_2eproto::file_level_metadata[kIndexInFileMessages].descriptor;
-}
-
 const ReqLeaveMapMsg& ReqLeaveMapMsg::default_instance() {
-  ::google::protobuf::internal::InitSCC(&protobuf_NFMsgExtra_2eproto::scc_info_ReqLeaveMapMsg.base);
+  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&::scc_info_ReqLeaveMapMsg_NFMsgExtra_2eproto.base);
   return *internal_default_instance();
 }
 
 
 void ReqLeaveMapMsg::Clear() {
 // @@protoc_insertion_point(message_clear_start:NFMsg.ReqLeaveMapMsg)
-  ::google::protobuf::uint32 cached_has_bits = 0;
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  map_title_id_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  if (GetArenaNoVirtual() == NULL && leave_msg_ != NULL) {
+  map_title_id_.ClearToEmptyNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  if (GetArenaNoVirtual() == nullptr && leave_msg_ != nullptr) {
     delete leave_msg_;
   }
-  leave_msg_ = NULL;
+  leave_msg_ = nullptr;
   _internal_metadata_.Clear();
 }
 
-bool ReqLeaveMapMsg::MergePartialFromCodedStream(
-    ::google::protobuf::io::CodedInputStream* input) {
-#define DO_(EXPRESSION) if (!GOOGLE_PREDICT_TRUE(EXPRESSION)) goto failure
-  ::google::protobuf::uint32 tag;
-  // @@protoc_insertion_point(parse_start:NFMsg.ReqLeaveMapMsg)
-  for (;;) {
-    ::std::pair<::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
-    tag = p.first;
-    if (!p.second) goto handle_unusual;
-    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
+const char* ReqLeaveMapMsg::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) {
+#define CHK_(x) if (PROTOBUF_PREDICT_FALSE(!(x))) goto failure
+  while (!ctx->Done(&ptr)) {
+    ::PROTOBUF_NAMESPACE_ID::uint32 tag;
+    ptr = ::PROTOBUF_NAMESPACE_ID::internal::ReadTag(ptr, &tag);
+    CHK_(ptr);
+    switch (tag >> 3) {
       // bytes map_title_id = 1;
-      case 1: {
-        if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(10u /* 10 & 0xFF */)) {
-          DO_(::google::protobuf::internal::WireFormatLite::ReadBytes(
-                input, this->mutable_map_title_id()));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
+      case 1:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 10)) {
+          ptr = ::PROTOBUF_NAMESPACE_ID::internal::InlineGreedyStringParser(_internal_mutable_map_title_id(), ptr, ctx);
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
       // .NFMsg.BigMapLeaveMsg leave_msg = 2;
-      case 2: {
-        if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(18u /* 18 & 0xFF */)) {
-          DO_(::google::protobuf::internal::WireFormatLite::ReadMessage(
-               input, mutable_leave_msg()));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
+      case 2:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 18)) {
+          ptr = ctx->ParseMessage(_internal_mutable_leave_msg(), ptr);
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
       default: {
       handle_unusual:
-        if (tag == 0) {
+        if ((tag & 7) == 4 || tag == 0) {
+          ctx->SetLastTag(tag);
           goto success;
         }
-        DO_(::google::protobuf::internal::WireFormat::SkipField(
-              input, tag, _internal_metadata_.mutable_unknown_fields()));
-        break;
+        ptr = UnknownFieldParse(tag, &_internal_metadata_, ptr, ctx);
+        CHK_(ptr != nullptr);
+        continue;
       }
-    }
-  }
+    }  // switch
+  }  // while
 success:
-  // @@protoc_insertion_point(parse_success:NFMsg.ReqLeaveMapMsg)
-  return true;
+  return ptr;
 failure:
-  // @@protoc_insertion_point(parse_failure:NFMsg.ReqLeaveMapMsg)
-  return false;
-#undef DO_
+  ptr = nullptr;
+  goto success;
+#undef CHK_
 }
 
-void ReqLeaveMapMsg::SerializeWithCachedSizes(
-    ::google::protobuf::io::CodedOutputStream* output) const {
-  // @@protoc_insertion_point(serialize_start:NFMsg.ReqLeaveMapMsg)
-  ::google::protobuf::uint32 cached_has_bits = 0;
-  (void) cached_has_bits;
-
-  // bytes map_title_id = 1;
-  if (this->map_title_id().size() > 0) {
-    ::google::protobuf::internal::WireFormatLite::WriteBytesMaybeAliased(
-      1, this->map_title_id(), output);
-  }
-
-  // .NFMsg.BigMapLeaveMsg leave_msg = 2;
-  if (this->has_leave_msg()) {
-    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      2, this->_internal_leave_msg(), output);
-  }
-
-  if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
-    ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
-        (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()), output);
-  }
-  // @@protoc_insertion_point(serialize_end:NFMsg.ReqLeaveMapMsg)
-}
-
-::google::protobuf::uint8* ReqLeaveMapMsg::InternalSerializeWithCachedSizesToArray(
-    bool deterministic, ::google::protobuf::uint8* target) const {
-  (void)deterministic; // Unused
+::PROTOBUF_NAMESPACE_ID::uint8* ReqLeaveMapMsg::InternalSerializeWithCachedSizesToArray(
+    ::PROTOBUF_NAMESPACE_ID::uint8* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const {
   // @@protoc_insertion_point(serialize_to_array_start:NFMsg.ReqLeaveMapMsg)
-  ::google::protobuf::uint32 cached_has_bits = 0;
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
   // bytes map_title_id = 1;
   if (this->map_title_id().size() > 0) {
-    target =
-      ::google::protobuf::internal::WireFormatLite::WriteBytesToArray(
-        1, this->map_title_id(), target);
+    target = stream->WriteBytesMaybeAliased(
+        1, this->_internal_map_title_id(), target);
   }
 
   // .NFMsg.BigMapLeaveMsg leave_msg = 2;
   if (this->has_leave_msg()) {
-    target = ::google::protobuf::internal::WireFormatLite::
+    target = stream->EnsureSpace(target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
       InternalWriteMessageToArray(
-        2, this->_internal_leave_msg(), deterministic, target);
+        2, _Internal::leave_msg(this), target, stream);
   }
 
-  if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
-    target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
-        (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()), target);
+  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::InternalSerializeUnknownFieldsToArray(
+        _internal_metadata_.unknown_fields(), target, stream);
   }
   // @@protoc_insertion_point(serialize_to_array_end:NFMsg.ReqLeaveMapMsg)
   return target;
@@ -4498,39 +3818,42 @@ size_t ReqLeaveMapMsg::ByteSizeLong() const {
 // @@protoc_insertion_point(message_byte_size_start:NFMsg.ReqLeaveMapMsg)
   size_t total_size = 0;
 
-  if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
-    total_size +=
-      ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
-        (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()));
-  }
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
   // bytes map_title_id = 1;
   if (this->map_title_id().size() > 0) {
     total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::BytesSize(
-        this->map_title_id());
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::BytesSize(
+        this->_internal_map_title_id());
   }
 
   // .NFMsg.BigMapLeaveMsg leave_msg = 2;
   if (this->has_leave_msg()) {
     total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::MessageSize(
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
         *leave_msg_);
   }
 
-  int cached_size = ::google::protobuf::internal::ToCachedSize(total_size);
+  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
+    return ::PROTOBUF_NAMESPACE_ID::internal::ComputeUnknownFieldsSize(
+        _internal_metadata_, total_size, &_cached_size_);
+  }
+  int cached_size = ::PROTOBUF_NAMESPACE_ID::internal::ToCachedSize(total_size);
   SetCachedSize(cached_size);
   return total_size;
 }
 
-void ReqLeaveMapMsg::MergeFrom(const ::google::protobuf::Message& from) {
+void ReqLeaveMapMsg::MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
 // @@protoc_insertion_point(generalized_merge_from_start:NFMsg.ReqLeaveMapMsg)
   GOOGLE_DCHECK_NE(&from, this);
   const ReqLeaveMapMsg* source =
-      ::google::protobuf::internal::DynamicCastToGenerated<const ReqLeaveMapMsg>(
+      ::PROTOBUF_NAMESPACE_ID::DynamicCastToGenerated<ReqLeaveMapMsg>(
           &from);
-  if (source == NULL) {
+  if (source == nullptr) {
   // @@protoc_insertion_point(generalized_merge_from_cast_fail:NFMsg.ReqLeaveMapMsg)
-    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
+    ::PROTOBUF_NAMESPACE_ID::internal::ReflectionOps::Merge(from, this);
   } else {
   // @@protoc_insertion_point(generalized_merge_from_cast_success:NFMsg.ReqLeaveMapMsg)
     MergeFrom(*source);
@@ -4541,19 +3864,19 @@ void ReqLeaveMapMsg::MergeFrom(const ReqLeaveMapMsg& from) {
 // @@protoc_insertion_point(class_specific_merge_from_start:NFMsg.ReqLeaveMapMsg)
   GOOGLE_DCHECK_NE(&from, this);
   _internal_metadata_.MergeFrom(from._internal_metadata_);
-  ::google::protobuf::uint32 cached_has_bits = 0;
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
   if (from.map_title_id().size() > 0) {
 
-    map_title_id_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.map_title_id_);
+    map_title_id_.AssignWithDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), from.map_title_id_);
   }
   if (from.has_leave_msg()) {
-    mutable_leave_msg()->::NFMsg::BigMapLeaveMsg::MergeFrom(from.leave_msg());
+    _internal_mutable_leave_msg()->::NFMsg::BigMapLeaveMsg::MergeFrom(from._internal_leave_msg());
   }
 }
 
-void ReqLeaveMapMsg::CopyFrom(const ::google::protobuf::Message& from) {
+void ReqLeaveMapMsg::CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
 // @@protoc_insertion_point(generalized_copy_from_start:NFMsg.ReqLeaveMapMsg)
   if (&from == this) return;
   Clear();
@@ -4571,21 +3894,16 @@ bool ReqLeaveMapMsg::IsInitialized() const {
   return true;
 }
 
-void ReqLeaveMapMsg::Swap(ReqLeaveMapMsg* other) {
-  if (other == this) return;
-  InternalSwap(other);
-}
 void ReqLeaveMapMsg::InternalSwap(ReqLeaveMapMsg* other) {
   using std::swap;
-  map_title_id_.Swap(&other->map_title_id_, &::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+  _internal_metadata_.Swap(&other->_internal_metadata_);
+  map_title_id_.Swap(&other->map_title_id_, &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(),
     GetArenaNoVirtual());
   swap(leave_msg_, other->leave_msg_);
-  _internal_metadata_.Swap(&other->_internal_metadata_);
 }
 
-::google::protobuf::Metadata ReqLeaveMapMsg::GetMetadata() const {
-  protobuf_NFMsgExtra_2eproto::protobuf_AssignDescriptorsOnce();
-  return ::protobuf_NFMsgExtra_2eproto::file_level_metadata[kIndexInFileMessages];
+::PROTOBUF_NAMESPACE_ID::Metadata ReqLeaveMapMsg::GetMetadata() const {
+  return GetMetadataStatic();
 }
 
 
@@ -4593,19 +3911,18 @@ void ReqLeaveMapMsg::InternalSwap(ReqLeaveMapMsg* other) {
 
 void AckLeaveMapMsg::InitAsDefaultInstance() {
 }
-#if !defined(_MSC_VER) || _MSC_VER >= 1900
-#endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
+class AckLeaveMapMsg::_Internal {
+ public:
+};
 
 AckLeaveMapMsg::AckLeaveMapMsg()
-  : ::google::protobuf::Message(), _internal_metadata_(NULL) {
-  ::google::protobuf::internal::InitSCC(
-      &protobuf_NFMsgExtra_2eproto::scc_info_AckLeaveMapMsg.base);
+  : ::PROTOBUF_NAMESPACE_ID::Message(), _internal_metadata_(nullptr) {
   SharedCtor();
   // @@protoc_insertion_point(constructor:NFMsg.AckLeaveMapMsg)
 }
 AckLeaveMapMsg::AckLeaveMapMsg(const AckLeaveMapMsg& from)
-  : ::google::protobuf::Message(),
-      _internal_metadata_(NULL) {
+  : ::PROTOBUF_NAMESPACE_ID::Message(),
+      _internal_metadata_(nullptr) {
   _internal_metadata_.MergeFrom(from._internal_metadata_);
   // @@protoc_insertion_point(copy_constructor:NFMsg.AckLeaveMapMsg)
 }
@@ -4624,74 +3941,56 @@ void AckLeaveMapMsg::SharedDtor() {
 void AckLeaveMapMsg::SetCachedSize(int size) const {
   _cached_size_.Set(size);
 }
-const ::google::protobuf::Descriptor* AckLeaveMapMsg::descriptor() {
-  ::protobuf_NFMsgExtra_2eproto::protobuf_AssignDescriptorsOnce();
-  return ::protobuf_NFMsgExtra_2eproto::file_level_metadata[kIndexInFileMessages].descriptor;
-}
-
 const AckLeaveMapMsg& AckLeaveMapMsg::default_instance() {
-  ::google::protobuf::internal::InitSCC(&protobuf_NFMsgExtra_2eproto::scc_info_AckLeaveMapMsg.base);
+  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&::scc_info_AckLeaveMapMsg_NFMsgExtra_2eproto.base);
   return *internal_default_instance();
 }
 
 
 void AckLeaveMapMsg::Clear() {
 // @@protoc_insertion_point(message_clear_start:NFMsg.AckLeaveMapMsg)
-  ::google::protobuf::uint32 cached_has_bits = 0;
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
   _internal_metadata_.Clear();
 }
 
-bool AckLeaveMapMsg::MergePartialFromCodedStream(
-    ::google::protobuf::io::CodedInputStream* input) {
-#define DO_(EXPRESSION) if (!GOOGLE_PREDICT_TRUE(EXPRESSION)) goto failure
-  ::google::protobuf::uint32 tag;
-  // @@protoc_insertion_point(parse_start:NFMsg.AckLeaveMapMsg)
-  for (;;) {
-    ::std::pair<::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
-    tag = p.first;
-    if (!p.second) goto handle_unusual;
-  handle_unusual:
-    if (tag == 0) {
-      goto success;
-    }
-    DO_(::google::protobuf::internal::WireFormat::SkipField(
-          input, tag, _internal_metadata_.mutable_unknown_fields()));
-  }
+const char* AckLeaveMapMsg::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) {
+#define CHK_(x) if (PROTOBUF_PREDICT_FALSE(!(x))) goto failure
+  while (!ctx->Done(&ptr)) {
+    ::PROTOBUF_NAMESPACE_ID::uint32 tag;
+    ptr = ::PROTOBUF_NAMESPACE_ID::internal::ReadTag(ptr, &tag);
+    CHK_(ptr);
+    switch (tag >> 3) {
+      default: {
+        if ((tag & 7) == 4 || tag == 0) {
+          ctx->SetLastTag(tag);
+          goto success;
+        }
+        ptr = UnknownFieldParse(tag, &_internal_metadata_, ptr, ctx);
+        CHK_(ptr != nullptr);
+        continue;
+      }
+    }  // switch
+  }  // while
 success:
-  // @@protoc_insertion_point(parse_success:NFMsg.AckLeaveMapMsg)
-  return true;
+  return ptr;
 failure:
-  // @@protoc_insertion_point(parse_failure:NFMsg.AckLeaveMapMsg)
-  return false;
-#undef DO_
+  ptr = nullptr;
+  goto success;
+#undef CHK_
 }
 
-void AckLeaveMapMsg::SerializeWithCachedSizes(
-    ::google::protobuf::io::CodedOutputStream* output) const {
-  // @@protoc_insertion_point(serialize_start:NFMsg.AckLeaveMapMsg)
-  ::google::protobuf::uint32 cached_has_bits = 0;
-  (void) cached_has_bits;
-
-  if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
-    ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
-        (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()), output);
-  }
-  // @@protoc_insertion_point(serialize_end:NFMsg.AckLeaveMapMsg)
-}
-
-::google::protobuf::uint8* AckLeaveMapMsg::InternalSerializeWithCachedSizesToArray(
-    bool deterministic, ::google::protobuf::uint8* target) const {
-  (void)deterministic; // Unused
+::PROTOBUF_NAMESPACE_ID::uint8* AckLeaveMapMsg::InternalSerializeWithCachedSizesToArray(
+    ::PROTOBUF_NAMESPACE_ID::uint8* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const {
   // @@protoc_insertion_point(serialize_to_array_start:NFMsg.AckLeaveMapMsg)
-  ::google::protobuf::uint32 cached_has_bits = 0;
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
-  if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
-    target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
-        (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()), target);
+  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::InternalSerializeUnknownFieldsToArray(
+        _internal_metadata_.unknown_fields(), target, stream);
   }
   // @@protoc_insertion_point(serialize_to_array_end:NFMsg.AckLeaveMapMsg)
   return target;
@@ -4701,25 +4000,28 @@ size_t AckLeaveMapMsg::ByteSizeLong() const {
 // @@protoc_insertion_point(message_byte_size_start:NFMsg.AckLeaveMapMsg)
   size_t total_size = 0;
 
-  if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
-    total_size +=
-      ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
-        (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()));
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
+    return ::PROTOBUF_NAMESPACE_ID::internal::ComputeUnknownFieldsSize(
+        _internal_metadata_, total_size, &_cached_size_);
   }
-  int cached_size = ::google::protobuf::internal::ToCachedSize(total_size);
+  int cached_size = ::PROTOBUF_NAMESPACE_ID::internal::ToCachedSize(total_size);
   SetCachedSize(cached_size);
   return total_size;
 }
 
-void AckLeaveMapMsg::MergeFrom(const ::google::protobuf::Message& from) {
+void AckLeaveMapMsg::MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
 // @@protoc_insertion_point(generalized_merge_from_start:NFMsg.AckLeaveMapMsg)
   GOOGLE_DCHECK_NE(&from, this);
   const AckLeaveMapMsg* source =
-      ::google::protobuf::internal::DynamicCastToGenerated<const AckLeaveMapMsg>(
+      ::PROTOBUF_NAMESPACE_ID::DynamicCastToGenerated<AckLeaveMapMsg>(
           &from);
-  if (source == NULL) {
+  if (source == nullptr) {
   // @@protoc_insertion_point(generalized_merge_from_cast_fail:NFMsg.AckLeaveMapMsg)
-    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
+    ::PROTOBUF_NAMESPACE_ID::internal::ReflectionOps::Merge(from, this);
   } else {
   // @@protoc_insertion_point(generalized_merge_from_cast_success:NFMsg.AckLeaveMapMsg)
     MergeFrom(*source);
@@ -4730,12 +4032,12 @@ void AckLeaveMapMsg::MergeFrom(const AckLeaveMapMsg& from) {
 // @@protoc_insertion_point(class_specific_merge_from_start:NFMsg.AckLeaveMapMsg)
   GOOGLE_DCHECK_NE(&from, this);
   _internal_metadata_.MergeFrom(from._internal_metadata_);
-  ::google::protobuf::uint32 cached_has_bits = 0;
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
 }
 
-void AckLeaveMapMsg::CopyFrom(const ::google::protobuf::Message& from) {
+void AckLeaveMapMsg::CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
 // @@protoc_insertion_point(generalized_copy_from_start:NFMsg.AckLeaveMapMsg)
   if (&from == this) return;
   Clear();
@@ -4753,18 +4055,13 @@ bool AckLeaveMapMsg::IsInitialized() const {
   return true;
 }
 
-void AckLeaveMapMsg::Swap(AckLeaveMapMsg* other) {
-  if (other == this) return;
-  InternalSwap(other);
-}
 void AckLeaveMapMsg::InternalSwap(AckLeaveMapMsg* other) {
   using std::swap;
   _internal_metadata_.Swap(&other->_internal_metadata_);
 }
 
-::google::protobuf::Metadata AckLeaveMapMsg::GetMetadata() const {
-  protobuf_NFMsgExtra_2eproto::protobuf_AssignDescriptorsOnce();
-  return ::protobuf_NFMsgExtra_2eproto::file_level_metadata[kIndexInFileMessages];
+::PROTOBUF_NAMESPACE_ID::Metadata AckLeaveMapMsg::GetMetadata() const {
+  return GetMetadataStatic();
 }
 
 
@@ -4772,30 +4069,29 @@ void AckLeaveMapMsg::InternalSwap(AckLeaveMapMsg* other) {
 
 void ReqGetMapAward::InitAsDefaultInstance() {
 }
-#if !defined(_MSC_VER) || _MSC_VER >= 1900
-const int ReqGetMapAward::kMapTitleIdFieldNumber;
-#endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
+class ReqGetMapAward::_Internal {
+ public:
+};
 
 ReqGetMapAward::ReqGetMapAward()
-  : ::google::protobuf::Message(), _internal_metadata_(NULL) {
-  ::google::protobuf::internal::InitSCC(
-      &protobuf_NFMsgExtra_2eproto::scc_info_ReqGetMapAward.base);
+  : ::PROTOBUF_NAMESPACE_ID::Message(), _internal_metadata_(nullptr) {
   SharedCtor();
   // @@protoc_insertion_point(constructor:NFMsg.ReqGetMapAward)
 }
 ReqGetMapAward::ReqGetMapAward(const ReqGetMapAward& from)
-  : ::google::protobuf::Message(),
-      _internal_metadata_(NULL) {
+  : ::PROTOBUF_NAMESPACE_ID::Message(),
+      _internal_metadata_(nullptr) {
   _internal_metadata_.MergeFrom(from._internal_metadata_);
-  map_title_id_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  if (from.map_title_id().size() > 0) {
-    map_title_id_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.map_title_id_);
+  map_title_id_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  if (!from._internal_map_title_id().empty()) {
+    map_title_id_.AssignWithDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), from.map_title_id_);
   }
   // @@protoc_insertion_point(copy_constructor:NFMsg.ReqGetMapAward)
 }
 
 void ReqGetMapAward::SharedCtor() {
-  map_title_id_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&scc_info_ReqGetMapAward_NFMsgExtra_2eproto.base);
+  map_title_id_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
 }
 
 ReqGetMapAward::~ReqGetMapAward() {
@@ -4804,111 +4100,77 @@ ReqGetMapAward::~ReqGetMapAward() {
 }
 
 void ReqGetMapAward::SharedDtor() {
-  map_title_id_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  map_title_id_.DestroyNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
 }
 
 void ReqGetMapAward::SetCachedSize(int size) const {
   _cached_size_.Set(size);
 }
-const ::google::protobuf::Descriptor* ReqGetMapAward::descriptor() {
-  ::protobuf_NFMsgExtra_2eproto::protobuf_AssignDescriptorsOnce();
-  return ::protobuf_NFMsgExtra_2eproto::file_level_metadata[kIndexInFileMessages].descriptor;
-}
-
 const ReqGetMapAward& ReqGetMapAward::default_instance() {
-  ::google::protobuf::internal::InitSCC(&protobuf_NFMsgExtra_2eproto::scc_info_ReqGetMapAward.base);
+  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&::scc_info_ReqGetMapAward_NFMsgExtra_2eproto.base);
   return *internal_default_instance();
 }
 
 
 void ReqGetMapAward::Clear() {
 // @@protoc_insertion_point(message_clear_start:NFMsg.ReqGetMapAward)
-  ::google::protobuf::uint32 cached_has_bits = 0;
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  map_title_id_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  map_title_id_.ClearToEmptyNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
   _internal_metadata_.Clear();
 }
 
-bool ReqGetMapAward::MergePartialFromCodedStream(
-    ::google::protobuf::io::CodedInputStream* input) {
-#define DO_(EXPRESSION) if (!GOOGLE_PREDICT_TRUE(EXPRESSION)) goto failure
-  ::google::protobuf::uint32 tag;
-  // @@protoc_insertion_point(parse_start:NFMsg.ReqGetMapAward)
-  for (;;) {
-    ::std::pair<::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
-    tag = p.first;
-    if (!p.second) goto handle_unusual;
-    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
+const char* ReqGetMapAward::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) {
+#define CHK_(x) if (PROTOBUF_PREDICT_FALSE(!(x))) goto failure
+  while (!ctx->Done(&ptr)) {
+    ::PROTOBUF_NAMESPACE_ID::uint32 tag;
+    ptr = ::PROTOBUF_NAMESPACE_ID::internal::ReadTag(ptr, &tag);
+    CHK_(ptr);
+    switch (tag >> 3) {
       // bytes map_title_id = 1;
-      case 1: {
-        if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(10u /* 10 & 0xFF */)) {
-          DO_(::google::protobuf::internal::WireFormatLite::ReadBytes(
-                input, this->mutable_map_title_id()));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
+      case 1:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 10)) {
+          ptr = ::PROTOBUF_NAMESPACE_ID::internal::InlineGreedyStringParser(_internal_mutable_map_title_id(), ptr, ctx);
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
       default: {
       handle_unusual:
-        if (tag == 0) {
+        if ((tag & 7) == 4 || tag == 0) {
+          ctx->SetLastTag(tag);
           goto success;
         }
-        DO_(::google::protobuf::internal::WireFormat::SkipField(
-              input, tag, _internal_metadata_.mutable_unknown_fields()));
-        break;
+        ptr = UnknownFieldParse(tag, &_internal_metadata_, ptr, ctx);
+        CHK_(ptr != nullptr);
+        continue;
       }
-    }
-  }
+    }  // switch
+  }  // while
 success:
-  // @@protoc_insertion_point(parse_success:NFMsg.ReqGetMapAward)
-  return true;
+  return ptr;
 failure:
-  // @@protoc_insertion_point(parse_failure:NFMsg.ReqGetMapAward)
-  return false;
-#undef DO_
+  ptr = nullptr;
+  goto success;
+#undef CHK_
 }
 
-void ReqGetMapAward::SerializeWithCachedSizes(
-    ::google::protobuf::io::CodedOutputStream* output) const {
-  // @@protoc_insertion_point(serialize_start:NFMsg.ReqGetMapAward)
-  ::google::protobuf::uint32 cached_has_bits = 0;
-  (void) cached_has_bits;
-
-  // bytes map_title_id = 1;
-  if (this->map_title_id().size() > 0) {
-    ::google::protobuf::internal::WireFormatLite::WriteBytesMaybeAliased(
-      1, this->map_title_id(), output);
-  }
-
-  if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
-    ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
-        (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()), output);
-  }
-  // @@protoc_insertion_point(serialize_end:NFMsg.ReqGetMapAward)
-}
-
-::google::protobuf::uint8* ReqGetMapAward::InternalSerializeWithCachedSizesToArray(
-    bool deterministic, ::google::protobuf::uint8* target) const {
-  (void)deterministic; // Unused
+::PROTOBUF_NAMESPACE_ID::uint8* ReqGetMapAward::InternalSerializeWithCachedSizesToArray(
+    ::PROTOBUF_NAMESPACE_ID::uint8* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const {
   // @@protoc_insertion_point(serialize_to_array_start:NFMsg.ReqGetMapAward)
-  ::google::protobuf::uint32 cached_has_bits = 0;
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
   // bytes map_title_id = 1;
   if (this->map_title_id().size() > 0) {
-    target =
-      ::google::protobuf::internal::WireFormatLite::WriteBytesToArray(
-        1, this->map_title_id(), target);
+    target = stream->WriteBytesMaybeAliased(
+        1, this->_internal_map_title_id(), target);
   }
 
-  if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
-    target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
-        (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()), target);
+  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::InternalSerializeUnknownFieldsToArray(
+        _internal_metadata_.unknown_fields(), target, stream);
   }
   // @@protoc_insertion_point(serialize_to_array_end:NFMsg.ReqGetMapAward)
   return target;
@@ -4918,32 +4180,35 @@ size_t ReqGetMapAward::ByteSizeLong() const {
 // @@protoc_insertion_point(message_byte_size_start:NFMsg.ReqGetMapAward)
   size_t total_size = 0;
 
-  if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
-    total_size +=
-      ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
-        (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()));
-  }
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
   // bytes map_title_id = 1;
   if (this->map_title_id().size() > 0) {
     total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::BytesSize(
-        this->map_title_id());
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::BytesSize(
+        this->_internal_map_title_id());
   }
 
-  int cached_size = ::google::protobuf::internal::ToCachedSize(total_size);
+  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
+    return ::PROTOBUF_NAMESPACE_ID::internal::ComputeUnknownFieldsSize(
+        _internal_metadata_, total_size, &_cached_size_);
+  }
+  int cached_size = ::PROTOBUF_NAMESPACE_ID::internal::ToCachedSize(total_size);
   SetCachedSize(cached_size);
   return total_size;
 }
 
-void ReqGetMapAward::MergeFrom(const ::google::protobuf::Message& from) {
+void ReqGetMapAward::MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
 // @@protoc_insertion_point(generalized_merge_from_start:NFMsg.ReqGetMapAward)
   GOOGLE_DCHECK_NE(&from, this);
   const ReqGetMapAward* source =
-      ::google::protobuf::internal::DynamicCastToGenerated<const ReqGetMapAward>(
+      ::PROTOBUF_NAMESPACE_ID::DynamicCastToGenerated<ReqGetMapAward>(
           &from);
-  if (source == NULL) {
+  if (source == nullptr) {
   // @@protoc_insertion_point(generalized_merge_from_cast_fail:NFMsg.ReqGetMapAward)
-    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
+    ::PROTOBUF_NAMESPACE_ID::internal::ReflectionOps::Merge(from, this);
   } else {
   // @@protoc_insertion_point(generalized_merge_from_cast_success:NFMsg.ReqGetMapAward)
     MergeFrom(*source);
@@ -4954,16 +4219,16 @@ void ReqGetMapAward::MergeFrom(const ReqGetMapAward& from) {
 // @@protoc_insertion_point(class_specific_merge_from_start:NFMsg.ReqGetMapAward)
   GOOGLE_DCHECK_NE(&from, this);
   _internal_metadata_.MergeFrom(from._internal_metadata_);
-  ::google::protobuf::uint32 cached_has_bits = 0;
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
   if (from.map_title_id().size() > 0) {
 
-    map_title_id_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.map_title_id_);
+    map_title_id_.AssignWithDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), from.map_title_id_);
   }
 }
 
-void ReqGetMapAward::CopyFrom(const ::google::protobuf::Message& from) {
+void ReqGetMapAward::CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
 // @@protoc_insertion_point(generalized_copy_from_start:NFMsg.ReqGetMapAward)
   if (&from == this) return;
   Clear();
@@ -4981,20 +4246,15 @@ bool ReqGetMapAward::IsInitialized() const {
   return true;
 }
 
-void ReqGetMapAward::Swap(ReqGetMapAward* other) {
-  if (other == this) return;
-  InternalSwap(other);
-}
 void ReqGetMapAward::InternalSwap(ReqGetMapAward* other) {
   using std::swap;
-  map_title_id_.Swap(&other->map_title_id_, &::google::protobuf::internal::GetEmptyStringAlreadyInited(),
-    GetArenaNoVirtual());
   _internal_metadata_.Swap(&other->_internal_metadata_);
+  map_title_id_.Swap(&other->map_title_id_, &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(),
+    GetArenaNoVirtual());
 }
 
-::google::protobuf::Metadata ReqGetMapAward::GetMetadata() const {
-  protobuf_NFMsgExtra_2eproto::protobuf_AssignDescriptorsOnce();
-  return ::protobuf_NFMsgExtra_2eproto::file_level_metadata[kIndexInFileMessages];
+::PROTOBUF_NAMESPACE_ID::Metadata ReqGetMapAward::GetMetadata() const {
+  return GetMetadataStatic();
 }
 
 
@@ -5002,19 +4262,18 @@ void ReqGetMapAward::InternalSwap(ReqGetMapAward* other) {
 
 void AckGetMapAward::InitAsDefaultInstance() {
 }
-#if !defined(_MSC_VER) || _MSC_VER >= 1900
-#endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
+class AckGetMapAward::_Internal {
+ public:
+};
 
 AckGetMapAward::AckGetMapAward()
-  : ::google::protobuf::Message(), _internal_metadata_(NULL) {
-  ::google::protobuf::internal::InitSCC(
-      &protobuf_NFMsgExtra_2eproto::scc_info_AckGetMapAward.base);
+  : ::PROTOBUF_NAMESPACE_ID::Message(), _internal_metadata_(nullptr) {
   SharedCtor();
   // @@protoc_insertion_point(constructor:NFMsg.AckGetMapAward)
 }
 AckGetMapAward::AckGetMapAward(const AckGetMapAward& from)
-  : ::google::protobuf::Message(),
-      _internal_metadata_(NULL) {
+  : ::PROTOBUF_NAMESPACE_ID::Message(),
+      _internal_metadata_(nullptr) {
   _internal_metadata_.MergeFrom(from._internal_metadata_);
   // @@protoc_insertion_point(copy_constructor:NFMsg.AckGetMapAward)
 }
@@ -5033,74 +4292,56 @@ void AckGetMapAward::SharedDtor() {
 void AckGetMapAward::SetCachedSize(int size) const {
   _cached_size_.Set(size);
 }
-const ::google::protobuf::Descriptor* AckGetMapAward::descriptor() {
-  ::protobuf_NFMsgExtra_2eproto::protobuf_AssignDescriptorsOnce();
-  return ::protobuf_NFMsgExtra_2eproto::file_level_metadata[kIndexInFileMessages].descriptor;
-}
-
 const AckGetMapAward& AckGetMapAward::default_instance() {
-  ::google::protobuf::internal::InitSCC(&protobuf_NFMsgExtra_2eproto::scc_info_AckGetMapAward.base);
+  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&::scc_info_AckGetMapAward_NFMsgExtra_2eproto.base);
   return *internal_default_instance();
 }
 
 
 void AckGetMapAward::Clear() {
 // @@protoc_insertion_point(message_clear_start:NFMsg.AckGetMapAward)
-  ::google::protobuf::uint32 cached_has_bits = 0;
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
   _internal_metadata_.Clear();
 }
 
-bool AckGetMapAward::MergePartialFromCodedStream(
-    ::google::protobuf::io::CodedInputStream* input) {
-#define DO_(EXPRESSION) if (!GOOGLE_PREDICT_TRUE(EXPRESSION)) goto failure
-  ::google::protobuf::uint32 tag;
-  // @@protoc_insertion_point(parse_start:NFMsg.AckGetMapAward)
-  for (;;) {
-    ::std::pair<::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
-    tag = p.first;
-    if (!p.second) goto handle_unusual;
-  handle_unusual:
-    if (tag == 0) {
-      goto success;
-    }
-    DO_(::google::protobuf::internal::WireFormat::SkipField(
-          input, tag, _internal_metadata_.mutable_unknown_fields()));
-  }
+const char* AckGetMapAward::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) {
+#define CHK_(x) if (PROTOBUF_PREDICT_FALSE(!(x))) goto failure
+  while (!ctx->Done(&ptr)) {
+    ::PROTOBUF_NAMESPACE_ID::uint32 tag;
+    ptr = ::PROTOBUF_NAMESPACE_ID::internal::ReadTag(ptr, &tag);
+    CHK_(ptr);
+    switch (tag >> 3) {
+      default: {
+        if ((tag & 7) == 4 || tag == 0) {
+          ctx->SetLastTag(tag);
+          goto success;
+        }
+        ptr = UnknownFieldParse(tag, &_internal_metadata_, ptr, ctx);
+        CHK_(ptr != nullptr);
+        continue;
+      }
+    }  // switch
+  }  // while
 success:
-  // @@protoc_insertion_point(parse_success:NFMsg.AckGetMapAward)
-  return true;
+  return ptr;
 failure:
-  // @@protoc_insertion_point(parse_failure:NFMsg.AckGetMapAward)
-  return false;
-#undef DO_
+  ptr = nullptr;
+  goto success;
+#undef CHK_
 }
 
-void AckGetMapAward::SerializeWithCachedSizes(
-    ::google::protobuf::io::CodedOutputStream* output) const {
-  // @@protoc_insertion_point(serialize_start:NFMsg.AckGetMapAward)
-  ::google::protobuf::uint32 cached_has_bits = 0;
-  (void) cached_has_bits;
-
-  if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
-    ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
-        (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()), output);
-  }
-  // @@protoc_insertion_point(serialize_end:NFMsg.AckGetMapAward)
-}
-
-::google::protobuf::uint8* AckGetMapAward::InternalSerializeWithCachedSizesToArray(
-    bool deterministic, ::google::protobuf::uint8* target) const {
-  (void)deterministic; // Unused
+::PROTOBUF_NAMESPACE_ID::uint8* AckGetMapAward::InternalSerializeWithCachedSizesToArray(
+    ::PROTOBUF_NAMESPACE_ID::uint8* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const {
   // @@protoc_insertion_point(serialize_to_array_start:NFMsg.AckGetMapAward)
-  ::google::protobuf::uint32 cached_has_bits = 0;
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
-  if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
-    target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
-        (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()), target);
+  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::InternalSerializeUnknownFieldsToArray(
+        _internal_metadata_.unknown_fields(), target, stream);
   }
   // @@protoc_insertion_point(serialize_to_array_end:NFMsg.AckGetMapAward)
   return target;
@@ -5110,25 +4351,28 @@ size_t AckGetMapAward::ByteSizeLong() const {
 // @@protoc_insertion_point(message_byte_size_start:NFMsg.AckGetMapAward)
   size_t total_size = 0;
 
-  if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
-    total_size +=
-      ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
-        (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()));
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
+    return ::PROTOBUF_NAMESPACE_ID::internal::ComputeUnknownFieldsSize(
+        _internal_metadata_, total_size, &_cached_size_);
   }
-  int cached_size = ::google::protobuf::internal::ToCachedSize(total_size);
+  int cached_size = ::PROTOBUF_NAMESPACE_ID::internal::ToCachedSize(total_size);
   SetCachedSize(cached_size);
   return total_size;
 }
 
-void AckGetMapAward::MergeFrom(const ::google::protobuf::Message& from) {
+void AckGetMapAward::MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
 // @@protoc_insertion_point(generalized_merge_from_start:NFMsg.AckGetMapAward)
   GOOGLE_DCHECK_NE(&from, this);
   const AckGetMapAward* source =
-      ::google::protobuf::internal::DynamicCastToGenerated<const AckGetMapAward>(
+      ::PROTOBUF_NAMESPACE_ID::DynamicCastToGenerated<AckGetMapAward>(
           &from);
-  if (source == NULL) {
+  if (source == nullptr) {
   // @@protoc_insertion_point(generalized_merge_from_cast_fail:NFMsg.AckGetMapAward)
-    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
+    ::PROTOBUF_NAMESPACE_ID::internal::ReflectionOps::Merge(from, this);
   } else {
   // @@protoc_insertion_point(generalized_merge_from_cast_success:NFMsg.AckGetMapAward)
     MergeFrom(*source);
@@ -5139,12 +4383,12 @@ void AckGetMapAward::MergeFrom(const AckGetMapAward& from) {
 // @@protoc_insertion_point(class_specific_merge_from_start:NFMsg.AckGetMapAward)
   GOOGLE_DCHECK_NE(&from, this);
   _internal_metadata_.MergeFrom(from._internal_metadata_);
-  ::google::protobuf::uint32 cached_has_bits = 0;
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
 }
 
-void AckGetMapAward::CopyFrom(const ::google::protobuf::Message& from) {
+void AckGetMapAward::CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
 // @@protoc_insertion_point(generalized_copy_from_start:NFMsg.AckGetMapAward)
   if (&from == this) return;
   Clear();
@@ -5162,18 +4406,13 @@ bool AckGetMapAward::IsInitialized() const {
   return true;
 }
 
-void AckGetMapAward::Swap(AckGetMapAward* other) {
-  if (other == this) return;
-  InternalSwap(other);
-}
 void AckGetMapAward::InternalSwap(AckGetMapAward* other) {
   using std::swap;
   _internal_metadata_.Swap(&other->_internal_metadata_);
 }
 
-::google::protobuf::Metadata AckGetMapAward::GetMetadata() const {
-  protobuf_NFMsgExtra_2eproto::protobuf_AssignDescriptorsOnce();
-  return ::protobuf_NFMsgExtra_2eproto::file_level_metadata[kIndexInFileMessages];
+::PROTOBUF_NAMESPACE_ID::Metadata AckGetMapAward::GetMetadata() const {
+  return GetMetadataStatic();
 }
 
 
@@ -5181,30 +4420,29 @@ void AckGetMapAward::InternalSwap(AckGetMapAward* other) {
 
 void ReqMapHunting::InitAsDefaultInstance() {
 }
-#if !defined(_MSC_VER) || _MSC_VER >= 1900
-const int ReqMapHunting::kMapTitleIdFieldNumber;
-#endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
+class ReqMapHunting::_Internal {
+ public:
+};
 
 ReqMapHunting::ReqMapHunting()
-  : ::google::protobuf::Message(), _internal_metadata_(NULL) {
-  ::google::protobuf::internal::InitSCC(
-      &protobuf_NFMsgExtra_2eproto::scc_info_ReqMapHunting.base);
+  : ::PROTOBUF_NAMESPACE_ID::Message(), _internal_metadata_(nullptr) {
   SharedCtor();
   // @@protoc_insertion_point(constructor:NFMsg.ReqMapHunting)
 }
 ReqMapHunting::ReqMapHunting(const ReqMapHunting& from)
-  : ::google::protobuf::Message(),
-      _internal_metadata_(NULL) {
+  : ::PROTOBUF_NAMESPACE_ID::Message(),
+      _internal_metadata_(nullptr) {
   _internal_metadata_.MergeFrom(from._internal_metadata_);
-  map_title_id_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  if (from.map_title_id().size() > 0) {
-    map_title_id_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.map_title_id_);
+  map_title_id_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  if (!from._internal_map_title_id().empty()) {
+    map_title_id_.AssignWithDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), from.map_title_id_);
   }
   // @@protoc_insertion_point(copy_constructor:NFMsg.ReqMapHunting)
 }
 
 void ReqMapHunting::SharedCtor() {
-  map_title_id_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&scc_info_ReqMapHunting_NFMsgExtra_2eproto.base);
+  map_title_id_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
 }
 
 ReqMapHunting::~ReqMapHunting() {
@@ -5213,111 +4451,77 @@ ReqMapHunting::~ReqMapHunting() {
 }
 
 void ReqMapHunting::SharedDtor() {
-  map_title_id_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  map_title_id_.DestroyNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
 }
 
 void ReqMapHunting::SetCachedSize(int size) const {
   _cached_size_.Set(size);
 }
-const ::google::protobuf::Descriptor* ReqMapHunting::descriptor() {
-  ::protobuf_NFMsgExtra_2eproto::protobuf_AssignDescriptorsOnce();
-  return ::protobuf_NFMsgExtra_2eproto::file_level_metadata[kIndexInFileMessages].descriptor;
-}
-
 const ReqMapHunting& ReqMapHunting::default_instance() {
-  ::google::protobuf::internal::InitSCC(&protobuf_NFMsgExtra_2eproto::scc_info_ReqMapHunting.base);
+  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&::scc_info_ReqMapHunting_NFMsgExtra_2eproto.base);
   return *internal_default_instance();
 }
 
 
 void ReqMapHunting::Clear() {
 // @@protoc_insertion_point(message_clear_start:NFMsg.ReqMapHunting)
-  ::google::protobuf::uint32 cached_has_bits = 0;
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  map_title_id_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  map_title_id_.ClearToEmptyNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
   _internal_metadata_.Clear();
 }
 
-bool ReqMapHunting::MergePartialFromCodedStream(
-    ::google::protobuf::io::CodedInputStream* input) {
-#define DO_(EXPRESSION) if (!GOOGLE_PREDICT_TRUE(EXPRESSION)) goto failure
-  ::google::protobuf::uint32 tag;
-  // @@protoc_insertion_point(parse_start:NFMsg.ReqMapHunting)
-  for (;;) {
-    ::std::pair<::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
-    tag = p.first;
-    if (!p.second) goto handle_unusual;
-    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
+const char* ReqMapHunting::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) {
+#define CHK_(x) if (PROTOBUF_PREDICT_FALSE(!(x))) goto failure
+  while (!ctx->Done(&ptr)) {
+    ::PROTOBUF_NAMESPACE_ID::uint32 tag;
+    ptr = ::PROTOBUF_NAMESPACE_ID::internal::ReadTag(ptr, &tag);
+    CHK_(ptr);
+    switch (tag >> 3) {
       // bytes map_title_id = 1;
-      case 1: {
-        if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(10u /* 10 & 0xFF */)) {
-          DO_(::google::protobuf::internal::WireFormatLite::ReadBytes(
-                input, this->mutable_map_title_id()));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
+      case 1:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 10)) {
+          ptr = ::PROTOBUF_NAMESPACE_ID::internal::InlineGreedyStringParser(_internal_mutable_map_title_id(), ptr, ctx);
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
       default: {
       handle_unusual:
-        if (tag == 0) {
+        if ((tag & 7) == 4 || tag == 0) {
+          ctx->SetLastTag(tag);
           goto success;
         }
-        DO_(::google::protobuf::internal::WireFormat::SkipField(
-              input, tag, _internal_metadata_.mutable_unknown_fields()));
-        break;
+        ptr = UnknownFieldParse(tag, &_internal_metadata_, ptr, ctx);
+        CHK_(ptr != nullptr);
+        continue;
       }
-    }
-  }
+    }  // switch
+  }  // while
 success:
-  // @@protoc_insertion_point(parse_success:NFMsg.ReqMapHunting)
-  return true;
+  return ptr;
 failure:
-  // @@protoc_insertion_point(parse_failure:NFMsg.ReqMapHunting)
-  return false;
-#undef DO_
+  ptr = nullptr;
+  goto success;
+#undef CHK_
 }
 
-void ReqMapHunting::SerializeWithCachedSizes(
-    ::google::protobuf::io::CodedOutputStream* output) const {
-  // @@protoc_insertion_point(serialize_start:NFMsg.ReqMapHunting)
-  ::google::protobuf::uint32 cached_has_bits = 0;
-  (void) cached_has_bits;
-
-  // bytes map_title_id = 1;
-  if (this->map_title_id().size() > 0) {
-    ::google::protobuf::internal::WireFormatLite::WriteBytesMaybeAliased(
-      1, this->map_title_id(), output);
-  }
-
-  if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
-    ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
-        (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()), output);
-  }
-  // @@protoc_insertion_point(serialize_end:NFMsg.ReqMapHunting)
-}
-
-::google::protobuf::uint8* ReqMapHunting::InternalSerializeWithCachedSizesToArray(
-    bool deterministic, ::google::protobuf::uint8* target) const {
-  (void)deterministic; // Unused
+::PROTOBUF_NAMESPACE_ID::uint8* ReqMapHunting::InternalSerializeWithCachedSizesToArray(
+    ::PROTOBUF_NAMESPACE_ID::uint8* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const {
   // @@protoc_insertion_point(serialize_to_array_start:NFMsg.ReqMapHunting)
-  ::google::protobuf::uint32 cached_has_bits = 0;
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
   // bytes map_title_id = 1;
   if (this->map_title_id().size() > 0) {
-    target =
-      ::google::protobuf::internal::WireFormatLite::WriteBytesToArray(
-        1, this->map_title_id(), target);
+    target = stream->WriteBytesMaybeAliased(
+        1, this->_internal_map_title_id(), target);
   }
 
-  if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
-    target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
-        (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()), target);
+  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::InternalSerializeUnknownFieldsToArray(
+        _internal_metadata_.unknown_fields(), target, stream);
   }
   // @@protoc_insertion_point(serialize_to_array_end:NFMsg.ReqMapHunting)
   return target;
@@ -5327,32 +4531,35 @@ size_t ReqMapHunting::ByteSizeLong() const {
 // @@protoc_insertion_point(message_byte_size_start:NFMsg.ReqMapHunting)
   size_t total_size = 0;
 
-  if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
-    total_size +=
-      ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
-        (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()));
-  }
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
   // bytes map_title_id = 1;
   if (this->map_title_id().size() > 0) {
     total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::BytesSize(
-        this->map_title_id());
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::BytesSize(
+        this->_internal_map_title_id());
   }
 
-  int cached_size = ::google::protobuf::internal::ToCachedSize(total_size);
+  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
+    return ::PROTOBUF_NAMESPACE_ID::internal::ComputeUnknownFieldsSize(
+        _internal_metadata_, total_size, &_cached_size_);
+  }
+  int cached_size = ::PROTOBUF_NAMESPACE_ID::internal::ToCachedSize(total_size);
   SetCachedSize(cached_size);
   return total_size;
 }
 
-void ReqMapHunting::MergeFrom(const ::google::protobuf::Message& from) {
+void ReqMapHunting::MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
 // @@protoc_insertion_point(generalized_merge_from_start:NFMsg.ReqMapHunting)
   GOOGLE_DCHECK_NE(&from, this);
   const ReqMapHunting* source =
-      ::google::protobuf::internal::DynamicCastToGenerated<const ReqMapHunting>(
+      ::PROTOBUF_NAMESPACE_ID::DynamicCastToGenerated<ReqMapHunting>(
           &from);
-  if (source == NULL) {
+  if (source == nullptr) {
   // @@protoc_insertion_point(generalized_merge_from_cast_fail:NFMsg.ReqMapHunting)
-    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
+    ::PROTOBUF_NAMESPACE_ID::internal::ReflectionOps::Merge(from, this);
   } else {
   // @@protoc_insertion_point(generalized_merge_from_cast_success:NFMsg.ReqMapHunting)
     MergeFrom(*source);
@@ -5363,16 +4570,16 @@ void ReqMapHunting::MergeFrom(const ReqMapHunting& from) {
 // @@protoc_insertion_point(class_specific_merge_from_start:NFMsg.ReqMapHunting)
   GOOGLE_DCHECK_NE(&from, this);
   _internal_metadata_.MergeFrom(from._internal_metadata_);
-  ::google::protobuf::uint32 cached_has_bits = 0;
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
   if (from.map_title_id().size() > 0) {
 
-    map_title_id_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.map_title_id_);
+    map_title_id_.AssignWithDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), from.map_title_id_);
   }
 }
 
-void ReqMapHunting::CopyFrom(const ::google::protobuf::Message& from) {
+void ReqMapHunting::CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
 // @@protoc_insertion_point(generalized_copy_from_start:NFMsg.ReqMapHunting)
   if (&from == this) return;
   Clear();
@@ -5390,20 +4597,15 @@ bool ReqMapHunting::IsInitialized() const {
   return true;
 }
 
-void ReqMapHunting::Swap(ReqMapHunting* other) {
-  if (other == this) return;
-  InternalSwap(other);
-}
 void ReqMapHunting::InternalSwap(ReqMapHunting* other) {
   using std::swap;
-  map_title_id_.Swap(&other->map_title_id_, &::google::protobuf::internal::GetEmptyStringAlreadyInited(),
-    GetArenaNoVirtual());
   _internal_metadata_.Swap(&other->_internal_metadata_);
+  map_title_id_.Swap(&other->map_title_id_, &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(),
+    GetArenaNoVirtual());
 }
 
-::google::protobuf::Metadata ReqMapHunting::GetMetadata() const {
-  protobuf_NFMsgExtra_2eproto::protobuf_AssignDescriptorsOnce();
-  return ::protobuf_NFMsgExtra_2eproto::file_level_metadata[kIndexInFileMessages];
+::PROTOBUF_NAMESPACE_ID::Metadata ReqMapHunting::GetMetadata() const {
+  return GetMetadataStatic();
 }
 
 
@@ -5411,19 +4613,18 @@ void ReqMapHunting::InternalSwap(ReqMapHunting* other) {
 
 void AckMapHunting::InitAsDefaultInstance() {
 }
-#if !defined(_MSC_VER) || _MSC_VER >= 1900
-#endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
+class AckMapHunting::_Internal {
+ public:
+};
 
 AckMapHunting::AckMapHunting()
-  : ::google::protobuf::Message(), _internal_metadata_(NULL) {
-  ::google::protobuf::internal::InitSCC(
-      &protobuf_NFMsgExtra_2eproto::scc_info_AckMapHunting.base);
+  : ::PROTOBUF_NAMESPACE_ID::Message(), _internal_metadata_(nullptr) {
   SharedCtor();
   // @@protoc_insertion_point(constructor:NFMsg.AckMapHunting)
 }
 AckMapHunting::AckMapHunting(const AckMapHunting& from)
-  : ::google::protobuf::Message(),
-      _internal_metadata_(NULL) {
+  : ::PROTOBUF_NAMESPACE_ID::Message(),
+      _internal_metadata_(nullptr) {
   _internal_metadata_.MergeFrom(from._internal_metadata_);
   // @@protoc_insertion_point(copy_constructor:NFMsg.AckMapHunting)
 }
@@ -5442,74 +4643,56 @@ void AckMapHunting::SharedDtor() {
 void AckMapHunting::SetCachedSize(int size) const {
   _cached_size_.Set(size);
 }
-const ::google::protobuf::Descriptor* AckMapHunting::descriptor() {
-  ::protobuf_NFMsgExtra_2eproto::protobuf_AssignDescriptorsOnce();
-  return ::protobuf_NFMsgExtra_2eproto::file_level_metadata[kIndexInFileMessages].descriptor;
-}
-
 const AckMapHunting& AckMapHunting::default_instance() {
-  ::google::protobuf::internal::InitSCC(&protobuf_NFMsgExtra_2eproto::scc_info_AckMapHunting.base);
+  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&::scc_info_AckMapHunting_NFMsgExtra_2eproto.base);
   return *internal_default_instance();
 }
 
 
 void AckMapHunting::Clear() {
 // @@protoc_insertion_point(message_clear_start:NFMsg.AckMapHunting)
-  ::google::protobuf::uint32 cached_has_bits = 0;
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
   _internal_metadata_.Clear();
 }
 
-bool AckMapHunting::MergePartialFromCodedStream(
-    ::google::protobuf::io::CodedInputStream* input) {
-#define DO_(EXPRESSION) if (!GOOGLE_PREDICT_TRUE(EXPRESSION)) goto failure
-  ::google::protobuf::uint32 tag;
-  // @@protoc_insertion_point(parse_start:NFMsg.AckMapHunting)
-  for (;;) {
-    ::std::pair<::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
-    tag = p.first;
-    if (!p.second) goto handle_unusual;
-  handle_unusual:
-    if (tag == 0) {
-      goto success;
-    }
-    DO_(::google::protobuf::internal::WireFormat::SkipField(
-          input, tag, _internal_metadata_.mutable_unknown_fields()));
-  }
+const char* AckMapHunting::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) {
+#define CHK_(x) if (PROTOBUF_PREDICT_FALSE(!(x))) goto failure
+  while (!ctx->Done(&ptr)) {
+    ::PROTOBUF_NAMESPACE_ID::uint32 tag;
+    ptr = ::PROTOBUF_NAMESPACE_ID::internal::ReadTag(ptr, &tag);
+    CHK_(ptr);
+    switch (tag >> 3) {
+      default: {
+        if ((tag & 7) == 4 || tag == 0) {
+          ctx->SetLastTag(tag);
+          goto success;
+        }
+        ptr = UnknownFieldParse(tag, &_internal_metadata_, ptr, ctx);
+        CHK_(ptr != nullptr);
+        continue;
+      }
+    }  // switch
+  }  // while
 success:
-  // @@protoc_insertion_point(parse_success:NFMsg.AckMapHunting)
-  return true;
+  return ptr;
 failure:
-  // @@protoc_insertion_point(parse_failure:NFMsg.AckMapHunting)
-  return false;
-#undef DO_
+  ptr = nullptr;
+  goto success;
+#undef CHK_
 }
 
-void AckMapHunting::SerializeWithCachedSizes(
-    ::google::protobuf::io::CodedOutputStream* output) const {
-  // @@protoc_insertion_point(serialize_start:NFMsg.AckMapHunting)
-  ::google::protobuf::uint32 cached_has_bits = 0;
-  (void) cached_has_bits;
-
-  if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
-    ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
-        (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()), output);
-  }
-  // @@protoc_insertion_point(serialize_end:NFMsg.AckMapHunting)
-}
-
-::google::protobuf::uint8* AckMapHunting::InternalSerializeWithCachedSizesToArray(
-    bool deterministic, ::google::protobuf::uint8* target) const {
-  (void)deterministic; // Unused
+::PROTOBUF_NAMESPACE_ID::uint8* AckMapHunting::InternalSerializeWithCachedSizesToArray(
+    ::PROTOBUF_NAMESPACE_ID::uint8* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const {
   // @@protoc_insertion_point(serialize_to_array_start:NFMsg.AckMapHunting)
-  ::google::protobuf::uint32 cached_has_bits = 0;
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
-  if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
-    target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
-        (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()), target);
+  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::InternalSerializeUnknownFieldsToArray(
+        _internal_metadata_.unknown_fields(), target, stream);
   }
   // @@protoc_insertion_point(serialize_to_array_end:NFMsg.AckMapHunting)
   return target;
@@ -5519,25 +4702,28 @@ size_t AckMapHunting::ByteSizeLong() const {
 // @@protoc_insertion_point(message_byte_size_start:NFMsg.AckMapHunting)
   size_t total_size = 0;
 
-  if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
-    total_size +=
-      ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
-        (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()));
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
+    return ::PROTOBUF_NAMESPACE_ID::internal::ComputeUnknownFieldsSize(
+        _internal_metadata_, total_size, &_cached_size_);
   }
-  int cached_size = ::google::protobuf::internal::ToCachedSize(total_size);
+  int cached_size = ::PROTOBUF_NAMESPACE_ID::internal::ToCachedSize(total_size);
   SetCachedSize(cached_size);
   return total_size;
 }
 
-void AckMapHunting::MergeFrom(const ::google::protobuf::Message& from) {
+void AckMapHunting::MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
 // @@protoc_insertion_point(generalized_merge_from_start:NFMsg.AckMapHunting)
   GOOGLE_DCHECK_NE(&from, this);
   const AckMapHunting* source =
-      ::google::protobuf::internal::DynamicCastToGenerated<const AckMapHunting>(
+      ::PROTOBUF_NAMESPACE_ID::DynamicCastToGenerated<AckMapHunting>(
           &from);
-  if (source == NULL) {
+  if (source == nullptr) {
   // @@protoc_insertion_point(generalized_merge_from_cast_fail:NFMsg.AckMapHunting)
-    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
+    ::PROTOBUF_NAMESPACE_ID::internal::ReflectionOps::Merge(from, this);
   } else {
   // @@protoc_insertion_point(generalized_merge_from_cast_success:NFMsg.AckMapHunting)
     MergeFrom(*source);
@@ -5548,12 +4734,12 @@ void AckMapHunting::MergeFrom(const AckMapHunting& from) {
 // @@protoc_insertion_point(class_specific_merge_from_start:NFMsg.AckMapHunting)
   GOOGLE_DCHECK_NE(&from, this);
   _internal_metadata_.MergeFrom(from._internal_metadata_);
-  ::google::protobuf::uint32 cached_has_bits = 0;
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
 }
 
-void AckMapHunting::CopyFrom(const ::google::protobuf::Message& from) {
+void AckMapHunting::CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
 // @@protoc_insertion_point(generalized_copy_from_start:NFMsg.AckMapHunting)
   if (&from == this) return;
   Clear();
@@ -5571,18 +4757,13 @@ bool AckMapHunting::IsInitialized() const {
   return true;
 }
 
-void AckMapHunting::Swap(AckMapHunting* other) {
-  if (other == this) return;
-  InternalSwap(other);
-}
 void AckMapHunting::InternalSwap(AckMapHunting* other) {
   using std::swap;
   _internal_metadata_.Swap(&other->_internal_metadata_);
 }
 
-::google::protobuf::Metadata AckMapHunting::GetMetadata() const {
-  protobuf_NFMsgExtra_2eproto::protobuf_AssignDescriptorsOnce();
-  return ::protobuf_NFMsgExtra_2eproto::file_level_metadata[kIndexInFileMessages];
+::PROTOBUF_NAMESPACE_ID::Metadata AckMapHunting::GetMetadata() const {
+  return GetMetadataStatic();
 }
 
 
@@ -5590,30 +4771,29 @@ void AckMapHunting::InternalSwap(AckMapHunting* other) {
 
 void ReqMapKingWar::InitAsDefaultInstance() {
 }
-#if !defined(_MSC_VER) || _MSC_VER >= 1900
-const int ReqMapKingWar::kMapTitleFieldNumber;
-#endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
+class ReqMapKingWar::_Internal {
+ public:
+};
 
 ReqMapKingWar::ReqMapKingWar()
-  : ::google::protobuf::Message(), _internal_metadata_(NULL) {
-  ::google::protobuf::internal::InitSCC(
-      &protobuf_NFMsgExtra_2eproto::scc_info_ReqMapKingWar.base);
+  : ::PROTOBUF_NAMESPACE_ID::Message(), _internal_metadata_(nullptr) {
   SharedCtor();
   // @@protoc_insertion_point(constructor:NFMsg.ReqMapKingWar)
 }
 ReqMapKingWar::ReqMapKingWar(const ReqMapKingWar& from)
-  : ::google::protobuf::Message(),
-      _internal_metadata_(NULL) {
+  : ::PROTOBUF_NAMESPACE_ID::Message(),
+      _internal_metadata_(nullptr) {
   _internal_metadata_.MergeFrom(from._internal_metadata_);
-  map_title_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  if (from.map_title().size() > 0) {
-    map_title_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.map_title_);
+  map_title_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  if (!from._internal_map_title().empty()) {
+    map_title_.AssignWithDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), from.map_title_);
   }
   // @@protoc_insertion_point(copy_constructor:NFMsg.ReqMapKingWar)
 }
 
 void ReqMapKingWar::SharedCtor() {
-  map_title_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&scc_info_ReqMapKingWar_NFMsgExtra_2eproto.base);
+  map_title_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
 }
 
 ReqMapKingWar::~ReqMapKingWar() {
@@ -5622,111 +4802,77 @@ ReqMapKingWar::~ReqMapKingWar() {
 }
 
 void ReqMapKingWar::SharedDtor() {
-  map_title_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  map_title_.DestroyNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
 }
 
 void ReqMapKingWar::SetCachedSize(int size) const {
   _cached_size_.Set(size);
 }
-const ::google::protobuf::Descriptor* ReqMapKingWar::descriptor() {
-  ::protobuf_NFMsgExtra_2eproto::protobuf_AssignDescriptorsOnce();
-  return ::protobuf_NFMsgExtra_2eproto::file_level_metadata[kIndexInFileMessages].descriptor;
-}
-
 const ReqMapKingWar& ReqMapKingWar::default_instance() {
-  ::google::protobuf::internal::InitSCC(&protobuf_NFMsgExtra_2eproto::scc_info_ReqMapKingWar.base);
+  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&::scc_info_ReqMapKingWar_NFMsgExtra_2eproto.base);
   return *internal_default_instance();
 }
 
 
 void ReqMapKingWar::Clear() {
 // @@protoc_insertion_point(message_clear_start:NFMsg.ReqMapKingWar)
-  ::google::protobuf::uint32 cached_has_bits = 0;
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  map_title_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  map_title_.ClearToEmptyNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
   _internal_metadata_.Clear();
 }
 
-bool ReqMapKingWar::MergePartialFromCodedStream(
-    ::google::protobuf::io::CodedInputStream* input) {
-#define DO_(EXPRESSION) if (!GOOGLE_PREDICT_TRUE(EXPRESSION)) goto failure
-  ::google::protobuf::uint32 tag;
-  // @@protoc_insertion_point(parse_start:NFMsg.ReqMapKingWar)
-  for (;;) {
-    ::std::pair<::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
-    tag = p.first;
-    if (!p.second) goto handle_unusual;
-    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
+const char* ReqMapKingWar::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) {
+#define CHK_(x) if (PROTOBUF_PREDICT_FALSE(!(x))) goto failure
+  while (!ctx->Done(&ptr)) {
+    ::PROTOBUF_NAMESPACE_ID::uint32 tag;
+    ptr = ::PROTOBUF_NAMESPACE_ID::internal::ReadTag(ptr, &tag);
+    CHK_(ptr);
+    switch (tag >> 3) {
       // bytes map_title = 1;
-      case 1: {
-        if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(10u /* 10 & 0xFF */)) {
-          DO_(::google::protobuf::internal::WireFormatLite::ReadBytes(
-                input, this->mutable_map_title()));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
+      case 1:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 10)) {
+          ptr = ::PROTOBUF_NAMESPACE_ID::internal::InlineGreedyStringParser(_internal_mutable_map_title(), ptr, ctx);
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
       default: {
       handle_unusual:
-        if (tag == 0) {
+        if ((tag & 7) == 4 || tag == 0) {
+          ctx->SetLastTag(tag);
           goto success;
         }
-        DO_(::google::protobuf::internal::WireFormat::SkipField(
-              input, tag, _internal_metadata_.mutable_unknown_fields()));
-        break;
+        ptr = UnknownFieldParse(tag, &_internal_metadata_, ptr, ctx);
+        CHK_(ptr != nullptr);
+        continue;
       }
-    }
-  }
+    }  // switch
+  }  // while
 success:
-  // @@protoc_insertion_point(parse_success:NFMsg.ReqMapKingWar)
-  return true;
+  return ptr;
 failure:
-  // @@protoc_insertion_point(parse_failure:NFMsg.ReqMapKingWar)
-  return false;
-#undef DO_
+  ptr = nullptr;
+  goto success;
+#undef CHK_
 }
 
-void ReqMapKingWar::SerializeWithCachedSizes(
-    ::google::protobuf::io::CodedOutputStream* output) const {
-  // @@protoc_insertion_point(serialize_start:NFMsg.ReqMapKingWar)
-  ::google::protobuf::uint32 cached_has_bits = 0;
-  (void) cached_has_bits;
-
-  // bytes map_title = 1;
-  if (this->map_title().size() > 0) {
-    ::google::protobuf::internal::WireFormatLite::WriteBytesMaybeAliased(
-      1, this->map_title(), output);
-  }
-
-  if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
-    ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
-        (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()), output);
-  }
-  // @@protoc_insertion_point(serialize_end:NFMsg.ReqMapKingWar)
-}
-
-::google::protobuf::uint8* ReqMapKingWar::InternalSerializeWithCachedSizesToArray(
-    bool deterministic, ::google::protobuf::uint8* target) const {
-  (void)deterministic; // Unused
+::PROTOBUF_NAMESPACE_ID::uint8* ReqMapKingWar::InternalSerializeWithCachedSizesToArray(
+    ::PROTOBUF_NAMESPACE_ID::uint8* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const {
   // @@protoc_insertion_point(serialize_to_array_start:NFMsg.ReqMapKingWar)
-  ::google::protobuf::uint32 cached_has_bits = 0;
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
   // bytes map_title = 1;
   if (this->map_title().size() > 0) {
-    target =
-      ::google::protobuf::internal::WireFormatLite::WriteBytesToArray(
-        1, this->map_title(), target);
+    target = stream->WriteBytesMaybeAliased(
+        1, this->_internal_map_title(), target);
   }
 
-  if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
-    target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
-        (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()), target);
+  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::InternalSerializeUnknownFieldsToArray(
+        _internal_metadata_.unknown_fields(), target, stream);
   }
   // @@protoc_insertion_point(serialize_to_array_end:NFMsg.ReqMapKingWar)
   return target;
@@ -5736,32 +4882,35 @@ size_t ReqMapKingWar::ByteSizeLong() const {
 // @@protoc_insertion_point(message_byte_size_start:NFMsg.ReqMapKingWar)
   size_t total_size = 0;
 
-  if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
-    total_size +=
-      ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
-        (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()));
-  }
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
   // bytes map_title = 1;
   if (this->map_title().size() > 0) {
     total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::BytesSize(
-        this->map_title());
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::BytesSize(
+        this->_internal_map_title());
   }
 
-  int cached_size = ::google::protobuf::internal::ToCachedSize(total_size);
+  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
+    return ::PROTOBUF_NAMESPACE_ID::internal::ComputeUnknownFieldsSize(
+        _internal_metadata_, total_size, &_cached_size_);
+  }
+  int cached_size = ::PROTOBUF_NAMESPACE_ID::internal::ToCachedSize(total_size);
   SetCachedSize(cached_size);
   return total_size;
 }
 
-void ReqMapKingWar::MergeFrom(const ::google::protobuf::Message& from) {
+void ReqMapKingWar::MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
 // @@protoc_insertion_point(generalized_merge_from_start:NFMsg.ReqMapKingWar)
   GOOGLE_DCHECK_NE(&from, this);
   const ReqMapKingWar* source =
-      ::google::protobuf::internal::DynamicCastToGenerated<const ReqMapKingWar>(
+      ::PROTOBUF_NAMESPACE_ID::DynamicCastToGenerated<ReqMapKingWar>(
           &from);
-  if (source == NULL) {
+  if (source == nullptr) {
   // @@protoc_insertion_point(generalized_merge_from_cast_fail:NFMsg.ReqMapKingWar)
-    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
+    ::PROTOBUF_NAMESPACE_ID::internal::ReflectionOps::Merge(from, this);
   } else {
   // @@protoc_insertion_point(generalized_merge_from_cast_success:NFMsg.ReqMapKingWar)
     MergeFrom(*source);
@@ -5772,16 +4921,16 @@ void ReqMapKingWar::MergeFrom(const ReqMapKingWar& from) {
 // @@protoc_insertion_point(class_specific_merge_from_start:NFMsg.ReqMapKingWar)
   GOOGLE_DCHECK_NE(&from, this);
   _internal_metadata_.MergeFrom(from._internal_metadata_);
-  ::google::protobuf::uint32 cached_has_bits = 0;
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
   if (from.map_title().size() > 0) {
 
-    map_title_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.map_title_);
+    map_title_.AssignWithDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), from.map_title_);
   }
 }
 
-void ReqMapKingWar::CopyFrom(const ::google::protobuf::Message& from) {
+void ReqMapKingWar::CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
 // @@protoc_insertion_point(generalized_copy_from_start:NFMsg.ReqMapKingWar)
   if (&from == this) return;
   Clear();
@@ -5799,20 +4948,15 @@ bool ReqMapKingWar::IsInitialized() const {
   return true;
 }
 
-void ReqMapKingWar::Swap(ReqMapKingWar* other) {
-  if (other == this) return;
-  InternalSwap(other);
-}
 void ReqMapKingWar::InternalSwap(ReqMapKingWar* other) {
   using std::swap;
-  map_title_.Swap(&other->map_title_, &::google::protobuf::internal::GetEmptyStringAlreadyInited(),
-    GetArenaNoVirtual());
   _internal_metadata_.Swap(&other->_internal_metadata_);
+  map_title_.Swap(&other->map_title_, &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(),
+    GetArenaNoVirtual());
 }
 
-::google::protobuf::Metadata ReqMapKingWar::GetMetadata() const {
-  protobuf_NFMsgExtra_2eproto::protobuf_AssignDescriptorsOnce();
-  return ::protobuf_NFMsgExtra_2eproto::file_level_metadata[kIndexInFileMessages];
+::PROTOBUF_NAMESPACE_ID::Metadata ReqMapKingWar::GetMetadata() const {
+  return GetMetadataStatic();
 }
 
 
@@ -5820,30 +4964,29 @@ void ReqMapKingWar::InternalSwap(ReqMapKingWar* other) {
 
 void AckMapKingWar::InitAsDefaultInstance() {
 }
-#if !defined(_MSC_VER) || _MSC_VER >= 1900
-const int AckMapKingWar::kMapTitleFieldNumber;
-#endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
+class AckMapKingWar::_Internal {
+ public:
+};
 
 AckMapKingWar::AckMapKingWar()
-  : ::google::protobuf::Message(), _internal_metadata_(NULL) {
-  ::google::protobuf::internal::InitSCC(
-      &protobuf_NFMsgExtra_2eproto::scc_info_AckMapKingWar.base);
+  : ::PROTOBUF_NAMESPACE_ID::Message(), _internal_metadata_(nullptr) {
   SharedCtor();
   // @@protoc_insertion_point(constructor:NFMsg.AckMapKingWar)
 }
 AckMapKingWar::AckMapKingWar(const AckMapKingWar& from)
-  : ::google::protobuf::Message(),
-      _internal_metadata_(NULL) {
+  : ::PROTOBUF_NAMESPACE_ID::Message(),
+      _internal_metadata_(nullptr) {
   _internal_metadata_.MergeFrom(from._internal_metadata_);
-  map_title_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  if (from.map_title().size() > 0) {
-    map_title_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.map_title_);
+  map_title_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  if (!from._internal_map_title().empty()) {
+    map_title_.AssignWithDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), from.map_title_);
   }
   // @@protoc_insertion_point(copy_constructor:NFMsg.AckMapKingWar)
 }
 
 void AckMapKingWar::SharedCtor() {
-  map_title_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&scc_info_AckMapKingWar_NFMsgExtra_2eproto.base);
+  map_title_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
 }
 
 AckMapKingWar::~AckMapKingWar() {
@@ -5852,111 +4995,77 @@ AckMapKingWar::~AckMapKingWar() {
 }
 
 void AckMapKingWar::SharedDtor() {
-  map_title_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  map_title_.DestroyNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
 }
 
 void AckMapKingWar::SetCachedSize(int size) const {
   _cached_size_.Set(size);
 }
-const ::google::protobuf::Descriptor* AckMapKingWar::descriptor() {
-  ::protobuf_NFMsgExtra_2eproto::protobuf_AssignDescriptorsOnce();
-  return ::protobuf_NFMsgExtra_2eproto::file_level_metadata[kIndexInFileMessages].descriptor;
-}
-
 const AckMapKingWar& AckMapKingWar::default_instance() {
-  ::google::protobuf::internal::InitSCC(&protobuf_NFMsgExtra_2eproto::scc_info_AckMapKingWar.base);
+  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&::scc_info_AckMapKingWar_NFMsgExtra_2eproto.base);
   return *internal_default_instance();
 }
 
 
 void AckMapKingWar::Clear() {
 // @@protoc_insertion_point(message_clear_start:NFMsg.AckMapKingWar)
-  ::google::protobuf::uint32 cached_has_bits = 0;
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  map_title_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  map_title_.ClearToEmptyNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
   _internal_metadata_.Clear();
 }
 
-bool AckMapKingWar::MergePartialFromCodedStream(
-    ::google::protobuf::io::CodedInputStream* input) {
-#define DO_(EXPRESSION) if (!GOOGLE_PREDICT_TRUE(EXPRESSION)) goto failure
-  ::google::protobuf::uint32 tag;
-  // @@protoc_insertion_point(parse_start:NFMsg.AckMapKingWar)
-  for (;;) {
-    ::std::pair<::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
-    tag = p.first;
-    if (!p.second) goto handle_unusual;
-    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
+const char* AckMapKingWar::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) {
+#define CHK_(x) if (PROTOBUF_PREDICT_FALSE(!(x))) goto failure
+  while (!ctx->Done(&ptr)) {
+    ::PROTOBUF_NAMESPACE_ID::uint32 tag;
+    ptr = ::PROTOBUF_NAMESPACE_ID::internal::ReadTag(ptr, &tag);
+    CHK_(ptr);
+    switch (tag >> 3) {
       // bytes map_title = 1;
-      case 1: {
-        if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(10u /* 10 & 0xFF */)) {
-          DO_(::google::protobuf::internal::WireFormatLite::ReadBytes(
-                input, this->mutable_map_title()));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
+      case 1:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 10)) {
+          ptr = ::PROTOBUF_NAMESPACE_ID::internal::InlineGreedyStringParser(_internal_mutable_map_title(), ptr, ctx);
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
       default: {
       handle_unusual:
-        if (tag == 0) {
+        if ((tag & 7) == 4 || tag == 0) {
+          ctx->SetLastTag(tag);
           goto success;
         }
-        DO_(::google::protobuf::internal::WireFormat::SkipField(
-              input, tag, _internal_metadata_.mutable_unknown_fields()));
-        break;
+        ptr = UnknownFieldParse(tag, &_internal_metadata_, ptr, ctx);
+        CHK_(ptr != nullptr);
+        continue;
       }
-    }
-  }
+    }  // switch
+  }  // while
 success:
-  // @@protoc_insertion_point(parse_success:NFMsg.AckMapKingWar)
-  return true;
+  return ptr;
 failure:
-  // @@protoc_insertion_point(parse_failure:NFMsg.AckMapKingWar)
-  return false;
-#undef DO_
+  ptr = nullptr;
+  goto success;
+#undef CHK_
 }
 
-void AckMapKingWar::SerializeWithCachedSizes(
-    ::google::protobuf::io::CodedOutputStream* output) const {
-  // @@protoc_insertion_point(serialize_start:NFMsg.AckMapKingWar)
-  ::google::protobuf::uint32 cached_has_bits = 0;
-  (void) cached_has_bits;
-
-  // bytes map_title = 1;
-  if (this->map_title().size() > 0) {
-    ::google::protobuf::internal::WireFormatLite::WriteBytesMaybeAliased(
-      1, this->map_title(), output);
-  }
-
-  if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
-    ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
-        (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()), output);
-  }
-  // @@protoc_insertion_point(serialize_end:NFMsg.AckMapKingWar)
-}
-
-::google::protobuf::uint8* AckMapKingWar::InternalSerializeWithCachedSizesToArray(
-    bool deterministic, ::google::protobuf::uint8* target) const {
-  (void)deterministic; // Unused
+::PROTOBUF_NAMESPACE_ID::uint8* AckMapKingWar::InternalSerializeWithCachedSizesToArray(
+    ::PROTOBUF_NAMESPACE_ID::uint8* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const {
   // @@protoc_insertion_point(serialize_to_array_start:NFMsg.AckMapKingWar)
-  ::google::protobuf::uint32 cached_has_bits = 0;
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
   // bytes map_title = 1;
   if (this->map_title().size() > 0) {
-    target =
-      ::google::protobuf::internal::WireFormatLite::WriteBytesToArray(
-        1, this->map_title(), target);
+    target = stream->WriteBytesMaybeAliased(
+        1, this->_internal_map_title(), target);
   }
 
-  if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
-    target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
-        (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()), target);
+  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::InternalSerializeUnknownFieldsToArray(
+        _internal_metadata_.unknown_fields(), target, stream);
   }
   // @@protoc_insertion_point(serialize_to_array_end:NFMsg.AckMapKingWar)
   return target;
@@ -5966,32 +5075,35 @@ size_t AckMapKingWar::ByteSizeLong() const {
 // @@protoc_insertion_point(message_byte_size_start:NFMsg.AckMapKingWar)
   size_t total_size = 0;
 
-  if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
-    total_size +=
-      ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
-        (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()));
-  }
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
   // bytes map_title = 1;
   if (this->map_title().size() > 0) {
     total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::BytesSize(
-        this->map_title());
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::BytesSize(
+        this->_internal_map_title());
   }
 
-  int cached_size = ::google::protobuf::internal::ToCachedSize(total_size);
+  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
+    return ::PROTOBUF_NAMESPACE_ID::internal::ComputeUnknownFieldsSize(
+        _internal_metadata_, total_size, &_cached_size_);
+  }
+  int cached_size = ::PROTOBUF_NAMESPACE_ID::internal::ToCachedSize(total_size);
   SetCachedSize(cached_size);
   return total_size;
 }
 
-void AckMapKingWar::MergeFrom(const ::google::protobuf::Message& from) {
+void AckMapKingWar::MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
 // @@protoc_insertion_point(generalized_merge_from_start:NFMsg.AckMapKingWar)
   GOOGLE_DCHECK_NE(&from, this);
   const AckMapKingWar* source =
-      ::google::protobuf::internal::DynamicCastToGenerated<const AckMapKingWar>(
+      ::PROTOBUF_NAMESPACE_ID::DynamicCastToGenerated<AckMapKingWar>(
           &from);
-  if (source == NULL) {
+  if (source == nullptr) {
   // @@protoc_insertion_point(generalized_merge_from_cast_fail:NFMsg.AckMapKingWar)
-    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
+    ::PROTOBUF_NAMESPACE_ID::internal::ReflectionOps::Merge(from, this);
   } else {
   // @@protoc_insertion_point(generalized_merge_from_cast_success:NFMsg.AckMapKingWar)
     MergeFrom(*source);
@@ -6002,16 +5114,16 @@ void AckMapKingWar::MergeFrom(const AckMapKingWar& from) {
 // @@protoc_insertion_point(class_specific_merge_from_start:NFMsg.AckMapKingWar)
   GOOGLE_DCHECK_NE(&from, this);
   _internal_metadata_.MergeFrom(from._internal_metadata_);
-  ::google::protobuf::uint32 cached_has_bits = 0;
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
   if (from.map_title().size() > 0) {
 
-    map_title_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.map_title_);
+    map_title_.AssignWithDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), from.map_title_);
   }
 }
 
-void AckMapKingWar::CopyFrom(const ::google::protobuf::Message& from) {
+void AckMapKingWar::CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
 // @@protoc_insertion_point(generalized_copy_from_start:NFMsg.AckMapKingWar)
   if (&from == this) return;
   Clear();
@@ -6029,88 +5141,82 @@ bool AckMapKingWar::IsInitialized() const {
   return true;
 }
 
-void AckMapKingWar::Swap(AckMapKingWar* other) {
-  if (other == this) return;
-  InternalSwap(other);
-}
 void AckMapKingWar::InternalSwap(AckMapKingWar* other) {
   using std::swap;
-  map_title_.Swap(&other->map_title_, &::google::protobuf::internal::GetEmptyStringAlreadyInited(),
-    GetArenaNoVirtual());
   _internal_metadata_.Swap(&other->_internal_metadata_);
+  map_title_.Swap(&other->map_title_, &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(),
+    GetArenaNoVirtual());
 }
 
-::google::protobuf::Metadata AckMapKingWar::GetMetadata() const {
-  protobuf_NFMsgExtra_2eproto::protobuf_AssignDescriptorsOnce();
-  return ::protobuf_NFMsgExtra_2eproto::file_level_metadata[kIndexInFileMessages];
+::PROTOBUF_NAMESPACE_ID::Metadata AckMapKingWar::GetMetadata() const {
+  return GetMetadataStatic();
 }
 
 
 // @@protoc_insertion_point(namespace_scope)
 }  // namespace NFMsg
-namespace google {
-namespace protobuf {
-template<> GOOGLE_PROTOBUF_ATTRIBUTE_NOINLINE ::NFMsg::ReqAIOnwer* Arena::CreateMaybeMessage< ::NFMsg::ReqAIOnwer >(Arena* arena) {
+PROTOBUF_NAMESPACE_OPEN
+template<> PROTOBUF_NOINLINE ::NFMsg::ReqAIOnwer* Arena::CreateMaybeMessage< ::NFMsg::ReqAIOnwer >(Arena* arena) {
   return Arena::CreateInternal< ::NFMsg::ReqAIOnwer >(arena);
 }
-template<> GOOGLE_PROTOBUF_ATTRIBUTE_NOINLINE ::NFMsg::GridClanBaseInfo* Arena::CreateMaybeMessage< ::NFMsg::GridClanBaseInfo >(Arena* arena) {
+template<> PROTOBUF_NOINLINE ::NFMsg::GridClanBaseInfo* Arena::CreateMaybeMessage< ::NFMsg::GridClanBaseInfo >(Arena* arena) {
   return Arena::CreateInternal< ::NFMsg::GridClanBaseInfo >(arena);
 }
-template<> GOOGLE_PROTOBUF_ATTRIBUTE_NOINLINE ::NFMsg::ReqBigMapGridInfo* Arena::CreateMaybeMessage< ::NFMsg::ReqBigMapGridInfo >(Arena* arena) {
+template<> PROTOBUF_NOINLINE ::NFMsg::ReqBigMapGridInfo* Arena::CreateMaybeMessage< ::NFMsg::ReqBigMapGridInfo >(Arena* arena) {
   return Arena::CreateInternal< ::NFMsg::ReqBigMapGridInfo >(arena);
 }
-template<> GOOGLE_PROTOBUF_ATTRIBUTE_NOINLINE ::NFMsg::BigMapGridBaseInfo* Arena::CreateMaybeMessage< ::NFMsg::BigMapGridBaseInfo >(Arena* arena) {
+template<> PROTOBUF_NOINLINE ::NFMsg::BigMapGridBaseInfo* Arena::CreateMaybeMessage< ::NFMsg::BigMapGridBaseInfo >(Arena* arena) {
   return Arena::CreateInternal< ::NFMsg::BigMapGridBaseInfo >(arena);
 }
-template<> GOOGLE_PROTOBUF_ATTRIBUTE_NOINLINE ::NFMsg::BigMapLeaveMsg* Arena::CreateMaybeMessage< ::NFMsg::BigMapLeaveMsg >(Arena* arena) {
+template<> PROTOBUF_NOINLINE ::NFMsg::BigMapLeaveMsg* Arena::CreateMaybeMessage< ::NFMsg::BigMapLeaveMsg >(Arena* arena) {
   return Arena::CreateInternal< ::NFMsg::BigMapLeaveMsg >(arena);
 }
-template<> GOOGLE_PROTOBUF_ATTRIBUTE_NOINLINE ::NFMsg::BigMapWarHistory* Arena::CreateMaybeMessage< ::NFMsg::BigMapWarHistory >(Arena* arena) {
+template<> PROTOBUF_NOINLINE ::NFMsg::BigMapWarHistory* Arena::CreateMaybeMessage< ::NFMsg::BigMapWarHistory >(Arena* arena) {
   return Arena::CreateInternal< ::NFMsg::BigMapWarHistory >(arena);
 }
-template<> GOOGLE_PROTOBUF_ATTRIBUTE_NOINLINE ::NFMsg::BigMapGridDetailInfo* Arena::CreateMaybeMessage< ::NFMsg::BigMapGridDetailInfo >(Arena* arena) {
+template<> PROTOBUF_NOINLINE ::NFMsg::BigMapGridDetailInfo* Arena::CreateMaybeMessage< ::NFMsg::BigMapGridDetailInfo >(Arena* arena) {
   return Arena::CreateInternal< ::NFMsg::BigMapGridDetailInfo >(arena);
 }
-template<> GOOGLE_PROTOBUF_ATTRIBUTE_NOINLINE ::NFMsg::AckBigMapGridInfo* Arena::CreateMaybeMessage< ::NFMsg::AckBigMapGridInfo >(Arena* arena) {
+template<> PROTOBUF_NOINLINE ::NFMsg::AckBigMapGridInfo* Arena::CreateMaybeMessage< ::NFMsg::AckBigMapGridInfo >(Arena* arena) {
   return Arena::CreateInternal< ::NFMsg::AckBigMapGridInfo >(arena);
 }
-template<> GOOGLE_PROTOBUF_ATTRIBUTE_NOINLINE ::NFMsg::ReqBigMapInfo* Arena::CreateMaybeMessage< ::NFMsg::ReqBigMapInfo >(Arena* arena) {
+template<> PROTOBUF_NOINLINE ::NFMsg::ReqBigMapInfo* Arena::CreateMaybeMessage< ::NFMsg::ReqBigMapInfo >(Arena* arena) {
   return Arena::CreateInternal< ::NFMsg::ReqBigMapInfo >(arena);
 }
-template<> GOOGLE_PROTOBUF_ATTRIBUTE_NOINLINE ::NFMsg::AckBigMapInfo* Arena::CreateMaybeMessage< ::NFMsg::AckBigMapInfo >(Arena* arena) {
+template<> PROTOBUF_NOINLINE ::NFMsg::AckBigMapInfo* Arena::CreateMaybeMessage< ::NFMsg::AckBigMapInfo >(Arena* arena) {
   return Arena::CreateInternal< ::NFMsg::AckBigMapInfo >(arena);
 }
-template<> GOOGLE_PROTOBUF_ATTRIBUTE_NOINLINE ::NFMsg::ReqHoldMapGrid* Arena::CreateMaybeMessage< ::NFMsg::ReqHoldMapGrid >(Arena* arena) {
+template<> PROTOBUF_NOINLINE ::NFMsg::ReqHoldMapGrid* Arena::CreateMaybeMessage< ::NFMsg::ReqHoldMapGrid >(Arena* arena) {
   return Arena::CreateInternal< ::NFMsg::ReqHoldMapGrid >(arena);
 }
-template<> GOOGLE_PROTOBUF_ATTRIBUTE_NOINLINE ::NFMsg::AckHoldMapGrid* Arena::CreateMaybeMessage< ::NFMsg::AckHoldMapGrid >(Arena* arena) {
+template<> PROTOBUF_NOINLINE ::NFMsg::AckHoldMapGrid* Arena::CreateMaybeMessage< ::NFMsg::AckHoldMapGrid >(Arena* arena) {
   return Arena::CreateInternal< ::NFMsg::AckHoldMapGrid >(arena);
 }
-template<> GOOGLE_PROTOBUF_ATTRIBUTE_NOINLINE ::NFMsg::ReqLeaveMapMsg* Arena::CreateMaybeMessage< ::NFMsg::ReqLeaveMapMsg >(Arena* arena) {
+template<> PROTOBUF_NOINLINE ::NFMsg::ReqLeaveMapMsg* Arena::CreateMaybeMessage< ::NFMsg::ReqLeaveMapMsg >(Arena* arena) {
   return Arena::CreateInternal< ::NFMsg::ReqLeaveMapMsg >(arena);
 }
-template<> GOOGLE_PROTOBUF_ATTRIBUTE_NOINLINE ::NFMsg::AckLeaveMapMsg* Arena::CreateMaybeMessage< ::NFMsg::AckLeaveMapMsg >(Arena* arena) {
+template<> PROTOBUF_NOINLINE ::NFMsg::AckLeaveMapMsg* Arena::CreateMaybeMessage< ::NFMsg::AckLeaveMapMsg >(Arena* arena) {
   return Arena::CreateInternal< ::NFMsg::AckLeaveMapMsg >(arena);
 }
-template<> GOOGLE_PROTOBUF_ATTRIBUTE_NOINLINE ::NFMsg::ReqGetMapAward* Arena::CreateMaybeMessage< ::NFMsg::ReqGetMapAward >(Arena* arena) {
+template<> PROTOBUF_NOINLINE ::NFMsg::ReqGetMapAward* Arena::CreateMaybeMessage< ::NFMsg::ReqGetMapAward >(Arena* arena) {
   return Arena::CreateInternal< ::NFMsg::ReqGetMapAward >(arena);
 }
-template<> GOOGLE_PROTOBUF_ATTRIBUTE_NOINLINE ::NFMsg::AckGetMapAward* Arena::CreateMaybeMessage< ::NFMsg::AckGetMapAward >(Arena* arena) {
+template<> PROTOBUF_NOINLINE ::NFMsg::AckGetMapAward* Arena::CreateMaybeMessage< ::NFMsg::AckGetMapAward >(Arena* arena) {
   return Arena::CreateInternal< ::NFMsg::AckGetMapAward >(arena);
 }
-template<> GOOGLE_PROTOBUF_ATTRIBUTE_NOINLINE ::NFMsg::ReqMapHunting* Arena::CreateMaybeMessage< ::NFMsg::ReqMapHunting >(Arena* arena) {
+template<> PROTOBUF_NOINLINE ::NFMsg::ReqMapHunting* Arena::CreateMaybeMessage< ::NFMsg::ReqMapHunting >(Arena* arena) {
   return Arena::CreateInternal< ::NFMsg::ReqMapHunting >(arena);
 }
-template<> GOOGLE_PROTOBUF_ATTRIBUTE_NOINLINE ::NFMsg::AckMapHunting* Arena::CreateMaybeMessage< ::NFMsg::AckMapHunting >(Arena* arena) {
+template<> PROTOBUF_NOINLINE ::NFMsg::AckMapHunting* Arena::CreateMaybeMessage< ::NFMsg::AckMapHunting >(Arena* arena) {
   return Arena::CreateInternal< ::NFMsg::AckMapHunting >(arena);
 }
-template<> GOOGLE_PROTOBUF_ATTRIBUTE_NOINLINE ::NFMsg::ReqMapKingWar* Arena::CreateMaybeMessage< ::NFMsg::ReqMapKingWar >(Arena* arena) {
+template<> PROTOBUF_NOINLINE ::NFMsg::ReqMapKingWar* Arena::CreateMaybeMessage< ::NFMsg::ReqMapKingWar >(Arena* arena) {
   return Arena::CreateInternal< ::NFMsg::ReqMapKingWar >(arena);
 }
-template<> GOOGLE_PROTOBUF_ATTRIBUTE_NOINLINE ::NFMsg::AckMapKingWar* Arena::CreateMaybeMessage< ::NFMsg::AckMapKingWar >(Arena* arena) {
+template<> PROTOBUF_NOINLINE ::NFMsg::AckMapKingWar* Arena::CreateMaybeMessage< ::NFMsg::AckMapKingWar >(Arena* arena) {
   return Arena::CreateInternal< ::NFMsg::AckMapKingWar >(arena);
 }
-}  // namespace protobuf
-}  // namespace google
+PROTOBUF_NAMESPACE_CLOSE
 
 // @@protoc_insertion_point(global_scope)
+#include <google/protobuf/port_undef.inc>

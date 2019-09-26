@@ -120,46 +120,46 @@ namespace NFMsg {
             "FQoRRUdDVF9BRERfUk9MRV9FWFAQA2IGcHJvdG8z"));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
-          new pbr::GeneratedClrTypeInfo(null, new pbr::GeneratedClrTypeInfo[] {
-            new pbr::GeneratedClrTypeInfo(typeof(global::NFMsg.Ident), global::NFMsg.Ident.Parser, new[]{ "svrid", "index" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::NFMsg.Vector2), global::NFMsg.Vector2.Parser, new[]{ "x", "y" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::NFMsg.Vector3), global::NFMsg.Vector3.Parser, new[]{ "x", "y", "z" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::NFMsg.PropertyInt), global::NFMsg.PropertyInt.Parser, new[]{ "property_name", "data" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::NFMsg.PropertyFloat), global::NFMsg.PropertyFloat.Parser, new[]{ "property_name", "data" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::NFMsg.PropertyString), global::NFMsg.PropertyString.Parser, new[]{ "property_name", "data" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::NFMsg.PropertyObject), global::NFMsg.PropertyObject.Parser, new[]{ "property_name", "data" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::NFMsg.PropertyVector2), global::NFMsg.PropertyVector2.Parser, new[]{ "property_name", "data" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::NFMsg.PropertyVector3), global::NFMsg.PropertyVector3.Parser, new[]{ "property_name", "data" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::NFMsg.RecordInt), global::NFMsg.RecordInt.Parser, new[]{ "row", "col", "data" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::NFMsg.RecordFloat), global::NFMsg.RecordFloat.Parser, new[]{ "row", "col", "data" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::NFMsg.RecordString), global::NFMsg.RecordString.Parser, new[]{ "row", "col", "data" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::NFMsg.RecordObject), global::NFMsg.RecordObject.Parser, new[]{ "row", "col", "data" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::NFMsg.RecordVector2), global::NFMsg.RecordVector2.Parser, new[]{ "row", "col", "data" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::NFMsg.RecordVector3), global::NFMsg.RecordVector3.Parser, new[]{ "row", "col", "data" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::NFMsg.RecordAddRowStruct), global::NFMsg.RecordAddRowStruct.Parser, new[]{ "row", "record_int_list", "record_float_list", "record_string_list", "record_object_list", "record_vector2_list", "record_vector3_list" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::NFMsg.ObjectRecordBase), global::NFMsg.ObjectRecordBase.Parser, new[]{ "record_name", "row_struct" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::NFMsg.ObjectPropertyInt), global::NFMsg.ObjectPropertyInt.Parser, new[]{ "player_id", "property_list" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::NFMsg.ObjectPropertyFloat), global::NFMsg.ObjectPropertyFloat.Parser, new[]{ "player_id", "property_list" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::NFMsg.ObjectPropertyString), global::NFMsg.ObjectPropertyString.Parser, new[]{ "player_id", "property_list" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::NFMsg.ObjectPropertyObject), global::NFMsg.ObjectPropertyObject.Parser, new[]{ "player_id", "property_list" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::NFMsg.ObjectPropertyVector2), global::NFMsg.ObjectPropertyVector2.Parser, new[]{ "player_id", "property_list" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::NFMsg.ObjectPropertyVector3), global::NFMsg.ObjectPropertyVector3.Parser, new[]{ "player_id", "property_list" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::NFMsg.ObjectRecordInt), global::NFMsg.ObjectRecordInt.Parser, new[]{ "player_id", "record_name", "property_list" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::NFMsg.ObjectRecordFloat), global::NFMsg.ObjectRecordFloat.Parser, new[]{ "player_id", "record_name", "property_list" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::NFMsg.ObjectRecordString), global::NFMsg.ObjectRecordString.Parser, new[]{ "player_id", "record_name", "property_list" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::NFMsg.ObjectRecordObject), global::NFMsg.ObjectRecordObject.Parser, new[]{ "player_id", "record_name", "property_list" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::NFMsg.ObjectRecordVector2), global::NFMsg.ObjectRecordVector2.Parser, new[]{ "player_id", "record_name", "property_list" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::NFMsg.ObjectRecordVector3), global::NFMsg.ObjectRecordVector3.Parser, new[]{ "player_id", "record_name", "property_list" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::NFMsg.ObjectRecordSwap), global::NFMsg.ObjectRecordSwap.Parser, new[]{ "player_id", "origin_record_name", "target_record_name", "row_origin", "row_target" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::NFMsg.ObjectRecordAddRow), global::NFMsg.ObjectRecordAddRow.Parser, new[]{ "player_id", "record_name", "row_data" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::NFMsg.ObjectRecordRemove), global::NFMsg.ObjectRecordRemove.Parser, new[]{ "player_id", "record_name", "remove_row" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::NFMsg.ObjectPropertyList), global::NFMsg.ObjectPropertyList.Parser, new[]{ "player_id", "property_int_list", "property_float_list", "property_string_list", "property_object_list", "property_vector2_list", "property_vector3_list" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::NFMsg.MultiObjectPropertyList), global::NFMsg.MultiObjectPropertyList.Parser, new[]{ "multi_player_property" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::NFMsg.ObjectRecordList), global::NFMsg.ObjectRecordList.Parser, new[]{ "player_id", "record_list" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::NFMsg.MultiObjectRecordList), global::NFMsg.MultiObjectRecordList.Parser, new[]{ "multi_player_record" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::NFMsg.MsgBase), global::NFMsg.MsgBase.Parser, new[]{ "player_id", "msg_data", "player_Client_list", "hash_ident" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::NFMsg.ReqAckLagTest), global::NFMsg.ReqAckLagTest.Parser, new[]{ "index" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::NFMsg.ReqCommand), global::NFMsg.ReqCommand.Parser, new[]{ "control_id", "command_id", "command_str_value", "command_value_int", "command_value_float", "command_value_str", "command_value_object", "row", "col" }, null, new[]{ typeof(global::NFMsg.ReqCommand.Types.EGameCommandType) }, null)
+          new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
+            new pbr::GeneratedClrTypeInfo(typeof(global::NFMsg.Ident), global::NFMsg.Ident.Parser, new[]{ "Svrid", "Index" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::NFMsg.Vector2), global::NFMsg.Vector2.Parser, new[]{ "X", "Y" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::NFMsg.Vector3), global::NFMsg.Vector3.Parser, new[]{ "X", "Y", "Z" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::NFMsg.PropertyInt), global::NFMsg.PropertyInt.Parser, new[]{ "PropertyName", "Data" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::NFMsg.PropertyFloat), global::NFMsg.PropertyFloat.Parser, new[]{ "PropertyName", "Data" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::NFMsg.PropertyString), global::NFMsg.PropertyString.Parser, new[]{ "PropertyName", "Data" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::NFMsg.PropertyObject), global::NFMsg.PropertyObject.Parser, new[]{ "PropertyName", "Data" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::NFMsg.PropertyVector2), global::NFMsg.PropertyVector2.Parser, new[]{ "PropertyName", "Data" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::NFMsg.PropertyVector3), global::NFMsg.PropertyVector3.Parser, new[]{ "PropertyName", "Data" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::NFMsg.RecordInt), global::NFMsg.RecordInt.Parser, new[]{ "Row", "Col", "Data" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::NFMsg.RecordFloat), global::NFMsg.RecordFloat.Parser, new[]{ "Row", "Col", "Data" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::NFMsg.RecordString), global::NFMsg.RecordString.Parser, new[]{ "Row", "Col", "Data" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::NFMsg.RecordObject), global::NFMsg.RecordObject.Parser, new[]{ "Row", "Col", "Data" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::NFMsg.RecordVector2), global::NFMsg.RecordVector2.Parser, new[]{ "Row", "Col", "Data" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::NFMsg.RecordVector3), global::NFMsg.RecordVector3.Parser, new[]{ "Row", "Col", "Data" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::NFMsg.RecordAddRowStruct), global::NFMsg.RecordAddRowStruct.Parser, new[]{ "Row", "RecordIntList", "RecordFloatList", "RecordStringList", "RecordObjectList", "RecordVector2List", "RecordVector3List" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::NFMsg.ObjectRecordBase), global::NFMsg.ObjectRecordBase.Parser, new[]{ "RecordName", "RowStruct" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::NFMsg.ObjectPropertyInt), global::NFMsg.ObjectPropertyInt.Parser, new[]{ "PlayerId", "PropertyList" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::NFMsg.ObjectPropertyFloat), global::NFMsg.ObjectPropertyFloat.Parser, new[]{ "PlayerId", "PropertyList" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::NFMsg.ObjectPropertyString), global::NFMsg.ObjectPropertyString.Parser, new[]{ "PlayerId", "PropertyList" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::NFMsg.ObjectPropertyObject), global::NFMsg.ObjectPropertyObject.Parser, new[]{ "PlayerId", "PropertyList" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::NFMsg.ObjectPropertyVector2), global::NFMsg.ObjectPropertyVector2.Parser, new[]{ "PlayerId", "PropertyList" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::NFMsg.ObjectPropertyVector3), global::NFMsg.ObjectPropertyVector3.Parser, new[]{ "PlayerId", "PropertyList" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::NFMsg.ObjectRecordInt), global::NFMsg.ObjectRecordInt.Parser, new[]{ "PlayerId", "RecordName", "PropertyList" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::NFMsg.ObjectRecordFloat), global::NFMsg.ObjectRecordFloat.Parser, new[]{ "PlayerId", "RecordName", "PropertyList" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::NFMsg.ObjectRecordString), global::NFMsg.ObjectRecordString.Parser, new[]{ "PlayerId", "RecordName", "PropertyList" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::NFMsg.ObjectRecordObject), global::NFMsg.ObjectRecordObject.Parser, new[]{ "PlayerId", "RecordName", "PropertyList" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::NFMsg.ObjectRecordVector2), global::NFMsg.ObjectRecordVector2.Parser, new[]{ "PlayerId", "RecordName", "PropertyList" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::NFMsg.ObjectRecordVector3), global::NFMsg.ObjectRecordVector3.Parser, new[]{ "PlayerId", "RecordName", "PropertyList" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::NFMsg.ObjectRecordSwap), global::NFMsg.ObjectRecordSwap.Parser, new[]{ "PlayerId", "OriginRecordName", "TargetRecordName", "RowOrigin", "RowTarget" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::NFMsg.ObjectRecordAddRow), global::NFMsg.ObjectRecordAddRow.Parser, new[]{ "PlayerId", "RecordName", "RowData" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::NFMsg.ObjectRecordRemove), global::NFMsg.ObjectRecordRemove.Parser, new[]{ "PlayerId", "RecordName", "RemoveRow" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::NFMsg.ObjectPropertyList), global::NFMsg.ObjectPropertyList.Parser, new[]{ "PlayerId", "PropertyIntList", "PropertyFloatList", "PropertyStringList", "PropertyObjectList", "PropertyVector2List", "PropertyVector3List" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::NFMsg.MultiObjectPropertyList), global::NFMsg.MultiObjectPropertyList.Parser, new[]{ "MultiPlayerProperty" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::NFMsg.ObjectRecordList), global::NFMsg.ObjectRecordList.Parser, new[]{ "PlayerId", "RecordList" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::NFMsg.MultiObjectRecordList), global::NFMsg.MultiObjectRecordList.Parser, new[]{ "MultiPlayerRecord" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::NFMsg.MsgBase), global::NFMsg.MsgBase.Parser, new[]{ "PlayerId", "MsgData", "PlayerClientList", "HashIdent" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::NFMsg.ReqAckLagTest), global::NFMsg.ReqAckLagTest.Parser, new[]{ "Index" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::NFMsg.ReqCommand), global::NFMsg.ReqCommand.Parser, new[]{ "ControlId", "CommandId", "CommandStrValue", "CommandValueInt", "CommandValueFloat", "CommandValueStr", "CommandValueObject", "Row", "Col" }, null, new[]{ typeof(global::NFMsg.ReqCommand.Types.EGameCommandType) }, null, null)
           }));
     }
     #endregion
@@ -202,10 +202,10 @@ namespace NFMsg {
     }
 
     /// <summary>Field number for the "svrid" field.</summary>
-    public const int svridFieldNumber = 1;
+    public const int SvridFieldNumber = 1;
     private long svrid_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public long svrid {
+    public long Svrid {
       get { return svrid_; }
       set {
         svrid_ = value;
@@ -213,10 +213,10 @@ namespace NFMsg {
     }
 
     /// <summary>Field number for the "index" field.</summary>
-    public const int indexFieldNumber = 2;
+    public const int IndexFieldNumber = 2;
     private long index_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public long index {
+    public long Index {
       get { return index_; }
       set {
         index_ = value;
@@ -236,16 +236,16 @@ namespace NFMsg {
       if (ReferenceEquals(other, this)) {
         return true;
       }
-      if (svrid != other.svrid) return false;
-      if (index != other.index) return false;
+      if (Svrid != other.Svrid) return false;
+      if (Index != other.Index) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override int GetHashCode() {
       int hash = 1;
-      if (svrid != 0L) hash ^= svrid.GetHashCode();
-      if (index != 0L) hash ^= index.GetHashCode();
+      if (Svrid != 0L) hash ^= Svrid.GetHashCode();
+      if (Index != 0L) hash ^= Index.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -259,13 +259,13 @@ namespace NFMsg {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public void WriteTo(pb::CodedOutputStream output) {
-      if (svrid != 0L) {
+      if (Svrid != 0L) {
         output.WriteRawTag(8);
-        output.WriteInt64(svrid);
+        output.WriteInt64(Svrid);
       }
-      if (index != 0L) {
+      if (Index != 0L) {
         output.WriteRawTag(16);
-        output.WriteInt64(index);
+        output.WriteInt64(Index);
       }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
@@ -275,11 +275,11 @@ namespace NFMsg {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public int CalculateSize() {
       int size = 0;
-      if (svrid != 0L) {
-        size += 1 + pb::CodedOutputStream.ComputeInt64Size(svrid);
+      if (Svrid != 0L) {
+        size += 1 + pb::CodedOutputStream.ComputeInt64Size(Svrid);
       }
-      if (index != 0L) {
-        size += 1 + pb::CodedOutputStream.ComputeInt64Size(index);
+      if (Index != 0L) {
+        size += 1 + pb::CodedOutputStream.ComputeInt64Size(Index);
       }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
@@ -292,11 +292,11 @@ namespace NFMsg {
       if (other == null) {
         return;
       }
-      if (other.svrid != 0L) {
-        svrid = other.svrid;
+      if (other.Svrid != 0L) {
+        Svrid = other.Svrid;
       }
-      if (other.index != 0L) {
-        index = other.index;
+      if (other.Index != 0L) {
+        Index = other.Index;
       }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
@@ -310,11 +310,11 @@ namespace NFMsg {
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
           case 8: {
-            svrid = input.ReadInt64();
+            Svrid = input.ReadInt64();
             break;
           }
           case 16: {
-            index = input.ReadInt64();
+            Index = input.ReadInt64();
             break;
           }
         }
@@ -359,10 +359,10 @@ namespace NFMsg {
     }
 
     /// <summary>Field number for the "x" field.</summary>
-    public const int xFieldNumber = 1;
+    public const int XFieldNumber = 1;
     private float x_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public float x {
+    public float X {
       get { return x_; }
       set {
         x_ = value;
@@ -370,10 +370,10 @@ namespace NFMsg {
     }
 
     /// <summary>Field number for the "y" field.</summary>
-    public const int yFieldNumber = 2;
+    public const int YFieldNumber = 2;
     private float y_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public float y {
+    public float Y {
       get { return y_; }
       set {
         y_ = value;
@@ -393,16 +393,16 @@ namespace NFMsg {
       if (ReferenceEquals(other, this)) {
         return true;
       }
-      if (!pbc::ProtobufEqualityComparers.BitwiseSingleEqualityComparer.Equals(x, other.x)) return false;
-      if (!pbc::ProtobufEqualityComparers.BitwiseSingleEqualityComparer.Equals(y, other.y)) return false;
+      if (!pbc::ProtobufEqualityComparers.BitwiseSingleEqualityComparer.Equals(X, other.X)) return false;
+      if (!pbc::ProtobufEqualityComparers.BitwiseSingleEqualityComparer.Equals(Y, other.Y)) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override int GetHashCode() {
       int hash = 1;
-      if (x != 0F) hash ^= pbc::ProtobufEqualityComparers.BitwiseSingleEqualityComparer.GetHashCode(x);
-      if (y != 0F) hash ^= pbc::ProtobufEqualityComparers.BitwiseSingleEqualityComparer.GetHashCode(y);
+      if (X != 0F) hash ^= pbc::ProtobufEqualityComparers.BitwiseSingleEqualityComparer.GetHashCode(X);
+      if (Y != 0F) hash ^= pbc::ProtobufEqualityComparers.BitwiseSingleEqualityComparer.GetHashCode(Y);
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -416,13 +416,13 @@ namespace NFMsg {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public void WriteTo(pb::CodedOutputStream output) {
-      if (x != 0F) {
+      if (X != 0F) {
         output.WriteRawTag(13);
-        output.WriteFloat(x);
+        output.WriteFloat(X);
       }
-      if (y != 0F) {
+      if (Y != 0F) {
         output.WriteRawTag(21);
-        output.WriteFloat(y);
+        output.WriteFloat(Y);
       }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
@@ -432,10 +432,10 @@ namespace NFMsg {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public int CalculateSize() {
       int size = 0;
-      if (x != 0F) {
+      if (X != 0F) {
         size += 1 + 4;
       }
-      if (y != 0F) {
+      if (Y != 0F) {
         size += 1 + 4;
       }
       if (_unknownFields != null) {
@@ -449,11 +449,11 @@ namespace NFMsg {
       if (other == null) {
         return;
       }
-      if (other.x != 0F) {
-        x = other.x;
+      if (other.X != 0F) {
+        X = other.X;
       }
-      if (other.y != 0F) {
-        y = other.y;
+      if (other.Y != 0F) {
+        Y = other.Y;
       }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
@@ -467,11 +467,11 @@ namespace NFMsg {
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
           case 13: {
-            x = input.ReadFloat();
+            X = input.ReadFloat();
             break;
           }
           case 21: {
-            y = input.ReadFloat();
+            Y = input.ReadFloat();
             break;
           }
         }
@@ -517,10 +517,10 @@ namespace NFMsg {
     }
 
     /// <summary>Field number for the "x" field.</summary>
-    public const int xFieldNumber = 1;
+    public const int XFieldNumber = 1;
     private float x_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public float x {
+    public float X {
       get { return x_; }
       set {
         x_ = value;
@@ -528,10 +528,10 @@ namespace NFMsg {
     }
 
     /// <summary>Field number for the "y" field.</summary>
-    public const int yFieldNumber = 2;
+    public const int YFieldNumber = 2;
     private float y_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public float y {
+    public float Y {
       get { return y_; }
       set {
         y_ = value;
@@ -539,10 +539,10 @@ namespace NFMsg {
     }
 
     /// <summary>Field number for the "z" field.</summary>
-    public const int zFieldNumber = 3;
+    public const int ZFieldNumber = 3;
     private float z_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public float z {
+    public float Z {
       get { return z_; }
       set {
         z_ = value;
@@ -562,18 +562,18 @@ namespace NFMsg {
       if (ReferenceEquals(other, this)) {
         return true;
       }
-      if (!pbc::ProtobufEqualityComparers.BitwiseSingleEqualityComparer.Equals(x, other.x)) return false;
-      if (!pbc::ProtobufEqualityComparers.BitwiseSingleEqualityComparer.Equals(y, other.y)) return false;
-      if (!pbc::ProtobufEqualityComparers.BitwiseSingleEqualityComparer.Equals(z, other.z)) return false;
+      if (!pbc::ProtobufEqualityComparers.BitwiseSingleEqualityComparer.Equals(X, other.X)) return false;
+      if (!pbc::ProtobufEqualityComparers.BitwiseSingleEqualityComparer.Equals(Y, other.Y)) return false;
+      if (!pbc::ProtobufEqualityComparers.BitwiseSingleEqualityComparer.Equals(Z, other.Z)) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override int GetHashCode() {
       int hash = 1;
-      if (x != 0F) hash ^= pbc::ProtobufEqualityComparers.BitwiseSingleEqualityComparer.GetHashCode(x);
-      if (y != 0F) hash ^= pbc::ProtobufEqualityComparers.BitwiseSingleEqualityComparer.GetHashCode(y);
-      if (z != 0F) hash ^= pbc::ProtobufEqualityComparers.BitwiseSingleEqualityComparer.GetHashCode(z);
+      if (X != 0F) hash ^= pbc::ProtobufEqualityComparers.BitwiseSingleEqualityComparer.GetHashCode(X);
+      if (Y != 0F) hash ^= pbc::ProtobufEqualityComparers.BitwiseSingleEqualityComparer.GetHashCode(Y);
+      if (Z != 0F) hash ^= pbc::ProtobufEqualityComparers.BitwiseSingleEqualityComparer.GetHashCode(Z);
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -587,17 +587,17 @@ namespace NFMsg {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public void WriteTo(pb::CodedOutputStream output) {
-      if (x != 0F) {
+      if (X != 0F) {
         output.WriteRawTag(13);
-        output.WriteFloat(x);
+        output.WriteFloat(X);
       }
-      if (y != 0F) {
+      if (Y != 0F) {
         output.WriteRawTag(21);
-        output.WriteFloat(y);
+        output.WriteFloat(Y);
       }
-      if (z != 0F) {
+      if (Z != 0F) {
         output.WriteRawTag(29);
-        output.WriteFloat(z);
+        output.WriteFloat(Z);
       }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
@@ -607,13 +607,13 @@ namespace NFMsg {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public int CalculateSize() {
       int size = 0;
-      if (x != 0F) {
+      if (X != 0F) {
         size += 1 + 4;
       }
-      if (y != 0F) {
+      if (Y != 0F) {
         size += 1 + 4;
       }
-      if (z != 0F) {
+      if (Z != 0F) {
         size += 1 + 4;
       }
       if (_unknownFields != null) {
@@ -627,14 +627,14 @@ namespace NFMsg {
       if (other == null) {
         return;
       }
-      if (other.x != 0F) {
-        x = other.x;
+      if (other.X != 0F) {
+        X = other.X;
       }
-      if (other.y != 0F) {
-        y = other.y;
+      if (other.Y != 0F) {
+        Y = other.Y;
       }
-      if (other.z != 0F) {
-        z = other.z;
+      if (other.Z != 0F) {
+        Z = other.Z;
       }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
@@ -648,15 +648,15 @@ namespace NFMsg {
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
           case 13: {
-            x = input.ReadFloat();
+            X = input.ReadFloat();
             break;
           }
           case 21: {
-            y = input.ReadFloat();
+            Y = input.ReadFloat();
             break;
           }
           case 29: {
-            z = input.ReadFloat();
+            Z = input.ReadFloat();
             break;
           }
         }
@@ -704,10 +704,10 @@ namespace NFMsg {
     }
 
     /// <summary>Field number for the "property_name" field.</summary>
-    public const int property_nameFieldNumber = 1;
+    public const int PropertyNameFieldNumber = 1;
     private pb::ByteString propertyName_ = pb::ByteString.Empty;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public pb::ByteString property_name {
+    public pb::ByteString PropertyName {
       get { return propertyName_; }
       set {
         propertyName_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
@@ -715,10 +715,10 @@ namespace NFMsg {
     }
 
     /// <summary>Field number for the "data" field.</summary>
-    public const int dataFieldNumber = 2;
+    public const int DataFieldNumber = 2;
     private long data_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public long data {
+    public long Data {
       get { return data_; }
       set {
         data_ = value;
@@ -738,16 +738,16 @@ namespace NFMsg {
       if (ReferenceEquals(other, this)) {
         return true;
       }
-      if (property_name != other.property_name) return false;
-      if (data != other.data) return false;
+      if (PropertyName != other.PropertyName) return false;
+      if (Data != other.Data) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override int GetHashCode() {
       int hash = 1;
-      if (property_name.Length != 0) hash ^= property_name.GetHashCode();
-      if (data != 0L) hash ^= data.GetHashCode();
+      if (PropertyName.Length != 0) hash ^= PropertyName.GetHashCode();
+      if (Data != 0L) hash ^= Data.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -761,13 +761,13 @@ namespace NFMsg {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public void WriteTo(pb::CodedOutputStream output) {
-      if (property_name.Length != 0) {
+      if (PropertyName.Length != 0) {
         output.WriteRawTag(10);
-        output.WriteBytes(property_name);
+        output.WriteBytes(PropertyName);
       }
-      if (data != 0L) {
+      if (Data != 0L) {
         output.WriteRawTag(16);
-        output.WriteInt64(data);
+        output.WriteInt64(Data);
       }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
@@ -777,11 +777,11 @@ namespace NFMsg {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public int CalculateSize() {
       int size = 0;
-      if (property_name.Length != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeBytesSize(property_name);
+      if (PropertyName.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeBytesSize(PropertyName);
       }
-      if (data != 0L) {
-        size += 1 + pb::CodedOutputStream.ComputeInt64Size(data);
+      if (Data != 0L) {
+        size += 1 + pb::CodedOutputStream.ComputeInt64Size(Data);
       }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
@@ -794,11 +794,11 @@ namespace NFMsg {
       if (other == null) {
         return;
       }
-      if (other.property_name.Length != 0) {
-        property_name = other.property_name;
+      if (other.PropertyName.Length != 0) {
+        PropertyName = other.PropertyName;
       }
-      if (other.data != 0L) {
-        data = other.data;
+      if (other.Data != 0L) {
+        Data = other.Data;
       }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
@@ -812,11 +812,11 @@ namespace NFMsg {
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
           case 10: {
-            property_name = input.ReadBytes();
+            PropertyName = input.ReadBytes();
             break;
           }
           case 16: {
-            data = input.ReadInt64();
+            Data = input.ReadInt64();
             break;
           }
         }
@@ -861,10 +861,10 @@ namespace NFMsg {
     }
 
     /// <summary>Field number for the "property_name" field.</summary>
-    public const int property_nameFieldNumber = 1;
+    public const int PropertyNameFieldNumber = 1;
     private pb::ByteString propertyName_ = pb::ByteString.Empty;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public pb::ByteString property_name {
+    public pb::ByteString PropertyName {
       get { return propertyName_; }
       set {
         propertyName_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
@@ -872,10 +872,10 @@ namespace NFMsg {
     }
 
     /// <summary>Field number for the "data" field.</summary>
-    public const int dataFieldNumber = 2;
+    public const int DataFieldNumber = 2;
     private float data_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public float data {
+    public float Data {
       get { return data_; }
       set {
         data_ = value;
@@ -895,16 +895,16 @@ namespace NFMsg {
       if (ReferenceEquals(other, this)) {
         return true;
       }
-      if (property_name != other.property_name) return false;
-      if (!pbc::ProtobufEqualityComparers.BitwiseSingleEqualityComparer.Equals(data, other.data)) return false;
+      if (PropertyName != other.PropertyName) return false;
+      if (!pbc::ProtobufEqualityComparers.BitwiseSingleEqualityComparer.Equals(Data, other.Data)) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override int GetHashCode() {
       int hash = 1;
-      if (property_name.Length != 0) hash ^= property_name.GetHashCode();
-      if (data != 0F) hash ^= pbc::ProtobufEqualityComparers.BitwiseSingleEqualityComparer.GetHashCode(data);
+      if (PropertyName.Length != 0) hash ^= PropertyName.GetHashCode();
+      if (Data != 0F) hash ^= pbc::ProtobufEqualityComparers.BitwiseSingleEqualityComparer.GetHashCode(Data);
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -918,13 +918,13 @@ namespace NFMsg {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public void WriteTo(pb::CodedOutputStream output) {
-      if (property_name.Length != 0) {
+      if (PropertyName.Length != 0) {
         output.WriteRawTag(10);
-        output.WriteBytes(property_name);
+        output.WriteBytes(PropertyName);
       }
-      if (data != 0F) {
+      if (Data != 0F) {
         output.WriteRawTag(21);
-        output.WriteFloat(data);
+        output.WriteFloat(Data);
       }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
@@ -934,10 +934,10 @@ namespace NFMsg {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public int CalculateSize() {
       int size = 0;
-      if (property_name.Length != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeBytesSize(property_name);
+      if (PropertyName.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeBytesSize(PropertyName);
       }
-      if (data != 0F) {
+      if (Data != 0F) {
         size += 1 + 4;
       }
       if (_unknownFields != null) {
@@ -951,11 +951,11 @@ namespace NFMsg {
       if (other == null) {
         return;
       }
-      if (other.property_name.Length != 0) {
-        property_name = other.property_name;
+      if (other.PropertyName.Length != 0) {
+        PropertyName = other.PropertyName;
       }
-      if (other.data != 0F) {
-        data = other.data;
+      if (other.Data != 0F) {
+        Data = other.Data;
       }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
@@ -969,11 +969,11 @@ namespace NFMsg {
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
           case 10: {
-            property_name = input.ReadBytes();
+            PropertyName = input.ReadBytes();
             break;
           }
           case 21: {
-            data = input.ReadFloat();
+            Data = input.ReadFloat();
             break;
           }
         }
@@ -1018,10 +1018,10 @@ namespace NFMsg {
     }
 
     /// <summary>Field number for the "property_name" field.</summary>
-    public const int property_nameFieldNumber = 1;
+    public const int PropertyNameFieldNumber = 1;
     private pb::ByteString propertyName_ = pb::ByteString.Empty;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public pb::ByteString property_name {
+    public pb::ByteString PropertyName {
       get { return propertyName_; }
       set {
         propertyName_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
@@ -1029,10 +1029,10 @@ namespace NFMsg {
     }
 
     /// <summary>Field number for the "data" field.</summary>
-    public const int dataFieldNumber = 2;
+    public const int DataFieldNumber = 2;
     private pb::ByteString data_ = pb::ByteString.Empty;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public pb::ByteString data {
+    public pb::ByteString Data {
       get { return data_; }
       set {
         data_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
@@ -1052,16 +1052,16 @@ namespace NFMsg {
       if (ReferenceEquals(other, this)) {
         return true;
       }
-      if (property_name != other.property_name) return false;
-      if (data != other.data) return false;
+      if (PropertyName != other.PropertyName) return false;
+      if (Data != other.Data) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override int GetHashCode() {
       int hash = 1;
-      if (property_name.Length != 0) hash ^= property_name.GetHashCode();
-      if (data.Length != 0) hash ^= data.GetHashCode();
+      if (PropertyName.Length != 0) hash ^= PropertyName.GetHashCode();
+      if (Data.Length != 0) hash ^= Data.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -1075,13 +1075,13 @@ namespace NFMsg {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public void WriteTo(pb::CodedOutputStream output) {
-      if (property_name.Length != 0) {
+      if (PropertyName.Length != 0) {
         output.WriteRawTag(10);
-        output.WriteBytes(property_name);
+        output.WriteBytes(PropertyName);
       }
-      if (data.Length != 0) {
+      if (Data.Length != 0) {
         output.WriteRawTag(18);
-        output.WriteBytes(data);
+        output.WriteBytes(Data);
       }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
@@ -1091,11 +1091,11 @@ namespace NFMsg {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public int CalculateSize() {
       int size = 0;
-      if (property_name.Length != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeBytesSize(property_name);
+      if (PropertyName.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeBytesSize(PropertyName);
       }
-      if (data.Length != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeBytesSize(data);
+      if (Data.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeBytesSize(Data);
       }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
@@ -1108,11 +1108,11 @@ namespace NFMsg {
       if (other == null) {
         return;
       }
-      if (other.property_name.Length != 0) {
-        property_name = other.property_name;
+      if (other.PropertyName.Length != 0) {
+        PropertyName = other.PropertyName;
       }
-      if (other.data.Length != 0) {
-        data = other.data;
+      if (other.Data.Length != 0) {
+        Data = other.Data;
       }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
@@ -1126,11 +1126,11 @@ namespace NFMsg {
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
           case 10: {
-            property_name = input.ReadBytes();
+            PropertyName = input.ReadBytes();
             break;
           }
           case 18: {
-            data = input.ReadBytes();
+            Data = input.ReadBytes();
             break;
           }
         }
@@ -1175,10 +1175,10 @@ namespace NFMsg {
     }
 
     /// <summary>Field number for the "property_name" field.</summary>
-    public const int property_nameFieldNumber = 1;
+    public const int PropertyNameFieldNumber = 1;
     private pb::ByteString propertyName_ = pb::ByteString.Empty;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public pb::ByteString property_name {
+    public pb::ByteString PropertyName {
       get { return propertyName_; }
       set {
         propertyName_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
@@ -1186,10 +1186,10 @@ namespace NFMsg {
     }
 
     /// <summary>Field number for the "data" field.</summary>
-    public const int dataFieldNumber = 2;
+    public const int DataFieldNumber = 2;
     private global::NFMsg.Ident data_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public global::NFMsg.Ident data {
+    public global::NFMsg.Ident Data {
       get { return data_; }
       set {
         data_ = value;
@@ -1209,16 +1209,16 @@ namespace NFMsg {
       if (ReferenceEquals(other, this)) {
         return true;
       }
-      if (property_name != other.property_name) return false;
-      if (!object.Equals(data, other.data)) return false;
+      if (PropertyName != other.PropertyName) return false;
+      if (!object.Equals(Data, other.Data)) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override int GetHashCode() {
       int hash = 1;
-      if (property_name.Length != 0) hash ^= property_name.GetHashCode();
-      if (data_ != null) hash ^= data.GetHashCode();
+      if (PropertyName.Length != 0) hash ^= PropertyName.GetHashCode();
+      if (data_ != null) hash ^= Data.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -1232,13 +1232,13 @@ namespace NFMsg {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public void WriteTo(pb::CodedOutputStream output) {
-      if (property_name.Length != 0) {
+      if (PropertyName.Length != 0) {
         output.WriteRawTag(10);
-        output.WriteBytes(property_name);
+        output.WriteBytes(PropertyName);
       }
       if (data_ != null) {
         output.WriteRawTag(18);
-        output.WriteMessage(data);
+        output.WriteMessage(Data);
       }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
@@ -1248,11 +1248,11 @@ namespace NFMsg {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public int CalculateSize() {
       int size = 0;
-      if (property_name.Length != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeBytesSize(property_name);
+      if (PropertyName.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeBytesSize(PropertyName);
       }
       if (data_ != null) {
-        size += 1 + pb::CodedOutputStream.ComputeMessageSize(data);
+        size += 1 + pb::CodedOutputStream.ComputeMessageSize(Data);
       }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
@@ -1265,14 +1265,14 @@ namespace NFMsg {
       if (other == null) {
         return;
       }
-      if (other.property_name.Length != 0) {
-        property_name = other.property_name;
+      if (other.PropertyName.Length != 0) {
+        PropertyName = other.PropertyName;
       }
       if (other.data_ != null) {
         if (data_ == null) {
-          data_ = new global::NFMsg.Ident();
+          Data = new global::NFMsg.Ident();
         }
-        data.MergeFrom(other.data);
+        Data.MergeFrom(other.Data);
       }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
@@ -1286,14 +1286,14 @@ namespace NFMsg {
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
           case 10: {
-            property_name = input.ReadBytes();
+            PropertyName = input.ReadBytes();
             break;
           }
           case 18: {
             if (data_ == null) {
-              data_ = new global::NFMsg.Ident();
+              Data = new global::NFMsg.Ident();
             }
-            input.ReadMessage(data_);
+            input.ReadMessage(Data);
             break;
           }
         }
@@ -1338,10 +1338,10 @@ namespace NFMsg {
     }
 
     /// <summary>Field number for the "property_name" field.</summary>
-    public const int property_nameFieldNumber = 1;
+    public const int PropertyNameFieldNumber = 1;
     private pb::ByteString propertyName_ = pb::ByteString.Empty;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public pb::ByteString property_name {
+    public pb::ByteString PropertyName {
       get { return propertyName_; }
       set {
         propertyName_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
@@ -1349,10 +1349,10 @@ namespace NFMsg {
     }
 
     /// <summary>Field number for the "data" field.</summary>
-    public const int dataFieldNumber = 2;
+    public const int DataFieldNumber = 2;
     private global::NFMsg.Vector2 data_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public global::NFMsg.Vector2 data {
+    public global::NFMsg.Vector2 Data {
       get { return data_; }
       set {
         data_ = value;
@@ -1372,16 +1372,16 @@ namespace NFMsg {
       if (ReferenceEquals(other, this)) {
         return true;
       }
-      if (property_name != other.property_name) return false;
-      if (!object.Equals(data, other.data)) return false;
+      if (PropertyName != other.PropertyName) return false;
+      if (!object.Equals(Data, other.Data)) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override int GetHashCode() {
       int hash = 1;
-      if (property_name.Length != 0) hash ^= property_name.GetHashCode();
-      if (data_ != null) hash ^= data.GetHashCode();
+      if (PropertyName.Length != 0) hash ^= PropertyName.GetHashCode();
+      if (data_ != null) hash ^= Data.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -1395,13 +1395,13 @@ namespace NFMsg {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public void WriteTo(pb::CodedOutputStream output) {
-      if (property_name.Length != 0) {
+      if (PropertyName.Length != 0) {
         output.WriteRawTag(10);
-        output.WriteBytes(property_name);
+        output.WriteBytes(PropertyName);
       }
       if (data_ != null) {
         output.WriteRawTag(18);
-        output.WriteMessage(data);
+        output.WriteMessage(Data);
       }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
@@ -1411,11 +1411,11 @@ namespace NFMsg {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public int CalculateSize() {
       int size = 0;
-      if (property_name.Length != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeBytesSize(property_name);
+      if (PropertyName.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeBytesSize(PropertyName);
       }
       if (data_ != null) {
-        size += 1 + pb::CodedOutputStream.ComputeMessageSize(data);
+        size += 1 + pb::CodedOutputStream.ComputeMessageSize(Data);
       }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
@@ -1428,14 +1428,14 @@ namespace NFMsg {
       if (other == null) {
         return;
       }
-      if (other.property_name.Length != 0) {
-        property_name = other.property_name;
+      if (other.PropertyName.Length != 0) {
+        PropertyName = other.PropertyName;
       }
       if (other.data_ != null) {
         if (data_ == null) {
-          data_ = new global::NFMsg.Vector2();
+          Data = new global::NFMsg.Vector2();
         }
-        data.MergeFrom(other.data);
+        Data.MergeFrom(other.Data);
       }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
@@ -1449,14 +1449,14 @@ namespace NFMsg {
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
           case 10: {
-            property_name = input.ReadBytes();
+            PropertyName = input.ReadBytes();
             break;
           }
           case 18: {
             if (data_ == null) {
-              data_ = new global::NFMsg.Vector2();
+              Data = new global::NFMsg.Vector2();
             }
-            input.ReadMessage(data_);
+            input.ReadMessage(Data);
             break;
           }
         }
@@ -1501,10 +1501,10 @@ namespace NFMsg {
     }
 
     /// <summary>Field number for the "property_name" field.</summary>
-    public const int property_nameFieldNumber = 1;
+    public const int PropertyNameFieldNumber = 1;
     private pb::ByteString propertyName_ = pb::ByteString.Empty;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public pb::ByteString property_name {
+    public pb::ByteString PropertyName {
       get { return propertyName_; }
       set {
         propertyName_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
@@ -1512,10 +1512,10 @@ namespace NFMsg {
     }
 
     /// <summary>Field number for the "data" field.</summary>
-    public const int dataFieldNumber = 2;
+    public const int DataFieldNumber = 2;
     private global::NFMsg.Vector3 data_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public global::NFMsg.Vector3 data {
+    public global::NFMsg.Vector3 Data {
       get { return data_; }
       set {
         data_ = value;
@@ -1535,16 +1535,16 @@ namespace NFMsg {
       if (ReferenceEquals(other, this)) {
         return true;
       }
-      if (property_name != other.property_name) return false;
-      if (!object.Equals(data, other.data)) return false;
+      if (PropertyName != other.PropertyName) return false;
+      if (!object.Equals(Data, other.Data)) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override int GetHashCode() {
       int hash = 1;
-      if (property_name.Length != 0) hash ^= property_name.GetHashCode();
-      if (data_ != null) hash ^= data.GetHashCode();
+      if (PropertyName.Length != 0) hash ^= PropertyName.GetHashCode();
+      if (data_ != null) hash ^= Data.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -1558,13 +1558,13 @@ namespace NFMsg {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public void WriteTo(pb::CodedOutputStream output) {
-      if (property_name.Length != 0) {
+      if (PropertyName.Length != 0) {
         output.WriteRawTag(10);
-        output.WriteBytes(property_name);
+        output.WriteBytes(PropertyName);
       }
       if (data_ != null) {
         output.WriteRawTag(18);
-        output.WriteMessage(data);
+        output.WriteMessage(Data);
       }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
@@ -1574,11 +1574,11 @@ namespace NFMsg {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public int CalculateSize() {
       int size = 0;
-      if (property_name.Length != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeBytesSize(property_name);
+      if (PropertyName.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeBytesSize(PropertyName);
       }
       if (data_ != null) {
-        size += 1 + pb::CodedOutputStream.ComputeMessageSize(data);
+        size += 1 + pb::CodedOutputStream.ComputeMessageSize(Data);
       }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
@@ -1591,14 +1591,14 @@ namespace NFMsg {
       if (other == null) {
         return;
       }
-      if (other.property_name.Length != 0) {
-        property_name = other.property_name;
+      if (other.PropertyName.Length != 0) {
+        PropertyName = other.PropertyName;
       }
       if (other.data_ != null) {
         if (data_ == null) {
-          data_ = new global::NFMsg.Vector3();
+          Data = new global::NFMsg.Vector3();
         }
-        data.MergeFrom(other.data);
+        Data.MergeFrom(other.Data);
       }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
@@ -1612,14 +1612,14 @@ namespace NFMsg {
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
           case 10: {
-            property_name = input.ReadBytes();
+            PropertyName = input.ReadBytes();
             break;
           }
           case 18: {
             if (data_ == null) {
-              data_ = new global::NFMsg.Vector3();
+              Data = new global::NFMsg.Vector3();
             }
-            input.ReadMessage(data_);
+            input.ReadMessage(Data);
             break;
           }
         }
@@ -1665,10 +1665,10 @@ namespace NFMsg {
     }
 
     /// <summary>Field number for the "row" field.</summary>
-    public const int rowFieldNumber = 1;
+    public const int RowFieldNumber = 1;
     private int row_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public int row {
+    public int Row {
       get { return row_; }
       set {
         row_ = value;
@@ -1676,10 +1676,10 @@ namespace NFMsg {
     }
 
     /// <summary>Field number for the "col" field.</summary>
-    public const int colFieldNumber = 2;
+    public const int ColFieldNumber = 2;
     private int col_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public int col {
+    public int Col {
       get { return col_; }
       set {
         col_ = value;
@@ -1687,10 +1687,10 @@ namespace NFMsg {
     }
 
     /// <summary>Field number for the "data" field.</summary>
-    public const int dataFieldNumber = 3;
+    public const int DataFieldNumber = 3;
     private long data_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public long data {
+    public long Data {
       get { return data_; }
       set {
         data_ = value;
@@ -1710,18 +1710,18 @@ namespace NFMsg {
       if (ReferenceEquals(other, this)) {
         return true;
       }
-      if (row != other.row) return false;
-      if (col != other.col) return false;
-      if (data != other.data) return false;
+      if (Row != other.Row) return false;
+      if (Col != other.Col) return false;
+      if (Data != other.Data) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override int GetHashCode() {
       int hash = 1;
-      if (row != 0) hash ^= row.GetHashCode();
-      if (col != 0) hash ^= col.GetHashCode();
-      if (data != 0L) hash ^= data.GetHashCode();
+      if (Row != 0) hash ^= Row.GetHashCode();
+      if (Col != 0) hash ^= Col.GetHashCode();
+      if (Data != 0L) hash ^= Data.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -1735,17 +1735,17 @@ namespace NFMsg {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public void WriteTo(pb::CodedOutputStream output) {
-      if (row != 0) {
+      if (Row != 0) {
         output.WriteRawTag(8);
-        output.WriteInt32(row);
+        output.WriteInt32(Row);
       }
-      if (col != 0) {
+      if (Col != 0) {
         output.WriteRawTag(16);
-        output.WriteInt32(col);
+        output.WriteInt32(Col);
       }
-      if (data != 0L) {
+      if (Data != 0L) {
         output.WriteRawTag(24);
-        output.WriteInt64(data);
+        output.WriteInt64(Data);
       }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
@@ -1755,14 +1755,14 @@ namespace NFMsg {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public int CalculateSize() {
       int size = 0;
-      if (row != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeInt32Size(row);
+      if (Row != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(Row);
       }
-      if (col != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeInt32Size(col);
+      if (Col != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(Col);
       }
-      if (data != 0L) {
-        size += 1 + pb::CodedOutputStream.ComputeInt64Size(data);
+      if (Data != 0L) {
+        size += 1 + pb::CodedOutputStream.ComputeInt64Size(Data);
       }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
@@ -1775,14 +1775,14 @@ namespace NFMsg {
       if (other == null) {
         return;
       }
-      if (other.row != 0) {
-        row = other.row;
+      if (other.Row != 0) {
+        Row = other.Row;
       }
-      if (other.col != 0) {
-        col = other.col;
+      if (other.Col != 0) {
+        Col = other.Col;
       }
-      if (other.data != 0L) {
-        data = other.data;
+      if (other.Data != 0L) {
+        Data = other.Data;
       }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
@@ -1796,15 +1796,15 @@ namespace NFMsg {
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
           case 8: {
-            row = input.ReadInt32();
+            Row = input.ReadInt32();
             break;
           }
           case 16: {
-            col = input.ReadInt32();
+            Col = input.ReadInt32();
             break;
           }
           case 24: {
-            data = input.ReadInt64();
+            Data = input.ReadInt64();
             break;
           }
         }
@@ -1850,10 +1850,10 @@ namespace NFMsg {
     }
 
     /// <summary>Field number for the "row" field.</summary>
-    public const int rowFieldNumber = 1;
+    public const int RowFieldNumber = 1;
     private int row_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public int row {
+    public int Row {
       get { return row_; }
       set {
         row_ = value;
@@ -1861,10 +1861,10 @@ namespace NFMsg {
     }
 
     /// <summary>Field number for the "col" field.</summary>
-    public const int colFieldNumber = 2;
+    public const int ColFieldNumber = 2;
     private int col_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public int col {
+    public int Col {
       get { return col_; }
       set {
         col_ = value;
@@ -1872,10 +1872,10 @@ namespace NFMsg {
     }
 
     /// <summary>Field number for the "data" field.</summary>
-    public const int dataFieldNumber = 3;
+    public const int DataFieldNumber = 3;
     private float data_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public float data {
+    public float Data {
       get { return data_; }
       set {
         data_ = value;
@@ -1895,18 +1895,18 @@ namespace NFMsg {
       if (ReferenceEquals(other, this)) {
         return true;
       }
-      if (row != other.row) return false;
-      if (col != other.col) return false;
-      if (!pbc::ProtobufEqualityComparers.BitwiseSingleEqualityComparer.Equals(data, other.data)) return false;
+      if (Row != other.Row) return false;
+      if (Col != other.Col) return false;
+      if (!pbc::ProtobufEqualityComparers.BitwiseSingleEqualityComparer.Equals(Data, other.Data)) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override int GetHashCode() {
       int hash = 1;
-      if (row != 0) hash ^= row.GetHashCode();
-      if (col != 0) hash ^= col.GetHashCode();
-      if (data != 0F) hash ^= pbc::ProtobufEqualityComparers.BitwiseSingleEqualityComparer.GetHashCode(data);
+      if (Row != 0) hash ^= Row.GetHashCode();
+      if (Col != 0) hash ^= Col.GetHashCode();
+      if (Data != 0F) hash ^= pbc::ProtobufEqualityComparers.BitwiseSingleEqualityComparer.GetHashCode(Data);
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -1920,17 +1920,17 @@ namespace NFMsg {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public void WriteTo(pb::CodedOutputStream output) {
-      if (row != 0) {
+      if (Row != 0) {
         output.WriteRawTag(8);
-        output.WriteInt32(row);
+        output.WriteInt32(Row);
       }
-      if (col != 0) {
+      if (Col != 0) {
         output.WriteRawTag(16);
-        output.WriteInt32(col);
+        output.WriteInt32(Col);
       }
-      if (data != 0F) {
+      if (Data != 0F) {
         output.WriteRawTag(29);
-        output.WriteFloat(data);
+        output.WriteFloat(Data);
       }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
@@ -1940,13 +1940,13 @@ namespace NFMsg {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public int CalculateSize() {
       int size = 0;
-      if (row != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeInt32Size(row);
+      if (Row != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(Row);
       }
-      if (col != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeInt32Size(col);
+      if (Col != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(Col);
       }
-      if (data != 0F) {
+      if (Data != 0F) {
         size += 1 + 4;
       }
       if (_unknownFields != null) {
@@ -1960,14 +1960,14 @@ namespace NFMsg {
       if (other == null) {
         return;
       }
-      if (other.row != 0) {
-        row = other.row;
+      if (other.Row != 0) {
+        Row = other.Row;
       }
-      if (other.col != 0) {
-        col = other.col;
+      if (other.Col != 0) {
+        Col = other.Col;
       }
-      if (other.data != 0F) {
-        data = other.data;
+      if (other.Data != 0F) {
+        Data = other.Data;
       }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
@@ -1981,15 +1981,15 @@ namespace NFMsg {
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
           case 8: {
-            row = input.ReadInt32();
+            Row = input.ReadInt32();
             break;
           }
           case 16: {
-            col = input.ReadInt32();
+            Col = input.ReadInt32();
             break;
           }
           case 29: {
-            data = input.ReadFloat();
+            Data = input.ReadFloat();
             break;
           }
         }
@@ -2035,10 +2035,10 @@ namespace NFMsg {
     }
 
     /// <summary>Field number for the "row" field.</summary>
-    public const int rowFieldNumber = 1;
+    public const int RowFieldNumber = 1;
     private int row_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public int row {
+    public int Row {
       get { return row_; }
       set {
         row_ = value;
@@ -2046,10 +2046,10 @@ namespace NFMsg {
     }
 
     /// <summary>Field number for the "col" field.</summary>
-    public const int colFieldNumber = 2;
+    public const int ColFieldNumber = 2;
     private int col_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public int col {
+    public int Col {
       get { return col_; }
       set {
         col_ = value;
@@ -2057,10 +2057,10 @@ namespace NFMsg {
     }
 
     /// <summary>Field number for the "data" field.</summary>
-    public const int dataFieldNumber = 3;
+    public const int DataFieldNumber = 3;
     private pb::ByteString data_ = pb::ByteString.Empty;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public pb::ByteString data {
+    public pb::ByteString Data {
       get { return data_; }
       set {
         data_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
@@ -2080,18 +2080,18 @@ namespace NFMsg {
       if (ReferenceEquals(other, this)) {
         return true;
       }
-      if (row != other.row) return false;
-      if (col != other.col) return false;
-      if (data != other.data) return false;
+      if (Row != other.Row) return false;
+      if (Col != other.Col) return false;
+      if (Data != other.Data) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override int GetHashCode() {
       int hash = 1;
-      if (row != 0) hash ^= row.GetHashCode();
-      if (col != 0) hash ^= col.GetHashCode();
-      if (data.Length != 0) hash ^= data.GetHashCode();
+      if (Row != 0) hash ^= Row.GetHashCode();
+      if (Col != 0) hash ^= Col.GetHashCode();
+      if (Data.Length != 0) hash ^= Data.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -2105,17 +2105,17 @@ namespace NFMsg {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public void WriteTo(pb::CodedOutputStream output) {
-      if (row != 0) {
+      if (Row != 0) {
         output.WriteRawTag(8);
-        output.WriteInt32(row);
+        output.WriteInt32(Row);
       }
-      if (col != 0) {
+      if (Col != 0) {
         output.WriteRawTag(16);
-        output.WriteInt32(col);
+        output.WriteInt32(Col);
       }
-      if (data.Length != 0) {
+      if (Data.Length != 0) {
         output.WriteRawTag(26);
-        output.WriteBytes(data);
+        output.WriteBytes(Data);
       }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
@@ -2125,14 +2125,14 @@ namespace NFMsg {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public int CalculateSize() {
       int size = 0;
-      if (row != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeInt32Size(row);
+      if (Row != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(Row);
       }
-      if (col != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeInt32Size(col);
+      if (Col != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(Col);
       }
-      if (data.Length != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeBytesSize(data);
+      if (Data.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeBytesSize(Data);
       }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
@@ -2145,14 +2145,14 @@ namespace NFMsg {
       if (other == null) {
         return;
       }
-      if (other.row != 0) {
-        row = other.row;
+      if (other.Row != 0) {
+        Row = other.Row;
       }
-      if (other.col != 0) {
-        col = other.col;
+      if (other.Col != 0) {
+        Col = other.Col;
       }
-      if (other.data.Length != 0) {
-        data = other.data;
+      if (other.Data.Length != 0) {
+        Data = other.Data;
       }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
@@ -2166,15 +2166,15 @@ namespace NFMsg {
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
           case 8: {
-            row = input.ReadInt32();
+            Row = input.ReadInt32();
             break;
           }
           case 16: {
-            col = input.ReadInt32();
+            Col = input.ReadInt32();
             break;
           }
           case 26: {
-            data = input.ReadBytes();
+            Data = input.ReadBytes();
             break;
           }
         }
@@ -2220,10 +2220,10 @@ namespace NFMsg {
     }
 
     /// <summary>Field number for the "row" field.</summary>
-    public const int rowFieldNumber = 1;
+    public const int RowFieldNumber = 1;
     private int row_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public int row {
+    public int Row {
       get { return row_; }
       set {
         row_ = value;
@@ -2231,10 +2231,10 @@ namespace NFMsg {
     }
 
     /// <summary>Field number for the "col" field.</summary>
-    public const int colFieldNumber = 2;
+    public const int ColFieldNumber = 2;
     private int col_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public int col {
+    public int Col {
       get { return col_; }
       set {
         col_ = value;
@@ -2242,10 +2242,10 @@ namespace NFMsg {
     }
 
     /// <summary>Field number for the "data" field.</summary>
-    public const int dataFieldNumber = 3;
+    public const int DataFieldNumber = 3;
     private global::NFMsg.Ident data_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public global::NFMsg.Ident data {
+    public global::NFMsg.Ident Data {
       get { return data_; }
       set {
         data_ = value;
@@ -2265,18 +2265,18 @@ namespace NFMsg {
       if (ReferenceEquals(other, this)) {
         return true;
       }
-      if (row != other.row) return false;
-      if (col != other.col) return false;
-      if (!object.Equals(data, other.data)) return false;
+      if (Row != other.Row) return false;
+      if (Col != other.Col) return false;
+      if (!object.Equals(Data, other.Data)) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override int GetHashCode() {
       int hash = 1;
-      if (row != 0) hash ^= row.GetHashCode();
-      if (col != 0) hash ^= col.GetHashCode();
-      if (data_ != null) hash ^= data.GetHashCode();
+      if (Row != 0) hash ^= Row.GetHashCode();
+      if (Col != 0) hash ^= Col.GetHashCode();
+      if (data_ != null) hash ^= Data.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -2290,17 +2290,17 @@ namespace NFMsg {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public void WriteTo(pb::CodedOutputStream output) {
-      if (row != 0) {
+      if (Row != 0) {
         output.WriteRawTag(8);
-        output.WriteInt32(row);
+        output.WriteInt32(Row);
       }
-      if (col != 0) {
+      if (Col != 0) {
         output.WriteRawTag(16);
-        output.WriteInt32(col);
+        output.WriteInt32(Col);
       }
       if (data_ != null) {
         output.WriteRawTag(26);
-        output.WriteMessage(data);
+        output.WriteMessage(Data);
       }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
@@ -2310,14 +2310,14 @@ namespace NFMsg {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public int CalculateSize() {
       int size = 0;
-      if (row != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeInt32Size(row);
+      if (Row != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(Row);
       }
-      if (col != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeInt32Size(col);
+      if (Col != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(Col);
       }
       if (data_ != null) {
-        size += 1 + pb::CodedOutputStream.ComputeMessageSize(data);
+        size += 1 + pb::CodedOutputStream.ComputeMessageSize(Data);
       }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
@@ -2330,17 +2330,17 @@ namespace NFMsg {
       if (other == null) {
         return;
       }
-      if (other.row != 0) {
-        row = other.row;
+      if (other.Row != 0) {
+        Row = other.Row;
       }
-      if (other.col != 0) {
-        col = other.col;
+      if (other.Col != 0) {
+        Col = other.Col;
       }
       if (other.data_ != null) {
         if (data_ == null) {
-          data_ = new global::NFMsg.Ident();
+          Data = new global::NFMsg.Ident();
         }
-        data.MergeFrom(other.data);
+        Data.MergeFrom(other.Data);
       }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
@@ -2354,18 +2354,18 @@ namespace NFMsg {
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
           case 8: {
-            row = input.ReadInt32();
+            Row = input.ReadInt32();
             break;
           }
           case 16: {
-            col = input.ReadInt32();
+            Col = input.ReadInt32();
             break;
           }
           case 26: {
             if (data_ == null) {
-              data_ = new global::NFMsg.Ident();
+              Data = new global::NFMsg.Ident();
             }
-            input.ReadMessage(data_);
+            input.ReadMessage(Data);
             break;
           }
         }
@@ -2411,10 +2411,10 @@ namespace NFMsg {
     }
 
     /// <summary>Field number for the "row" field.</summary>
-    public const int rowFieldNumber = 1;
+    public const int RowFieldNumber = 1;
     private int row_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public int row {
+    public int Row {
       get { return row_; }
       set {
         row_ = value;
@@ -2422,10 +2422,10 @@ namespace NFMsg {
     }
 
     /// <summary>Field number for the "col" field.</summary>
-    public const int colFieldNumber = 2;
+    public const int ColFieldNumber = 2;
     private int col_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public int col {
+    public int Col {
       get { return col_; }
       set {
         col_ = value;
@@ -2433,10 +2433,10 @@ namespace NFMsg {
     }
 
     /// <summary>Field number for the "data" field.</summary>
-    public const int dataFieldNumber = 3;
+    public const int DataFieldNumber = 3;
     private global::NFMsg.Vector2 data_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public global::NFMsg.Vector2 data {
+    public global::NFMsg.Vector2 Data {
       get { return data_; }
       set {
         data_ = value;
@@ -2456,18 +2456,18 @@ namespace NFMsg {
       if (ReferenceEquals(other, this)) {
         return true;
       }
-      if (row != other.row) return false;
-      if (col != other.col) return false;
-      if (!object.Equals(data, other.data)) return false;
+      if (Row != other.Row) return false;
+      if (Col != other.Col) return false;
+      if (!object.Equals(Data, other.Data)) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override int GetHashCode() {
       int hash = 1;
-      if (row != 0) hash ^= row.GetHashCode();
-      if (col != 0) hash ^= col.GetHashCode();
-      if (data_ != null) hash ^= data.GetHashCode();
+      if (Row != 0) hash ^= Row.GetHashCode();
+      if (Col != 0) hash ^= Col.GetHashCode();
+      if (data_ != null) hash ^= Data.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -2481,17 +2481,17 @@ namespace NFMsg {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public void WriteTo(pb::CodedOutputStream output) {
-      if (row != 0) {
+      if (Row != 0) {
         output.WriteRawTag(8);
-        output.WriteInt32(row);
+        output.WriteInt32(Row);
       }
-      if (col != 0) {
+      if (Col != 0) {
         output.WriteRawTag(16);
-        output.WriteInt32(col);
+        output.WriteInt32(Col);
       }
       if (data_ != null) {
         output.WriteRawTag(26);
-        output.WriteMessage(data);
+        output.WriteMessage(Data);
       }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
@@ -2501,14 +2501,14 @@ namespace NFMsg {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public int CalculateSize() {
       int size = 0;
-      if (row != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeInt32Size(row);
+      if (Row != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(Row);
       }
-      if (col != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeInt32Size(col);
+      if (Col != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(Col);
       }
       if (data_ != null) {
-        size += 1 + pb::CodedOutputStream.ComputeMessageSize(data);
+        size += 1 + pb::CodedOutputStream.ComputeMessageSize(Data);
       }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
@@ -2521,17 +2521,17 @@ namespace NFMsg {
       if (other == null) {
         return;
       }
-      if (other.row != 0) {
-        row = other.row;
+      if (other.Row != 0) {
+        Row = other.Row;
       }
-      if (other.col != 0) {
-        col = other.col;
+      if (other.Col != 0) {
+        Col = other.Col;
       }
       if (other.data_ != null) {
         if (data_ == null) {
-          data_ = new global::NFMsg.Vector2();
+          Data = new global::NFMsg.Vector2();
         }
-        data.MergeFrom(other.data);
+        Data.MergeFrom(other.Data);
       }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
@@ -2545,18 +2545,18 @@ namespace NFMsg {
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
           case 8: {
-            row = input.ReadInt32();
+            Row = input.ReadInt32();
             break;
           }
           case 16: {
-            col = input.ReadInt32();
+            Col = input.ReadInt32();
             break;
           }
           case 26: {
             if (data_ == null) {
-              data_ = new global::NFMsg.Vector2();
+              Data = new global::NFMsg.Vector2();
             }
-            input.ReadMessage(data_);
+            input.ReadMessage(Data);
             break;
           }
         }
@@ -2602,10 +2602,10 @@ namespace NFMsg {
     }
 
     /// <summary>Field number for the "row" field.</summary>
-    public const int rowFieldNumber = 1;
+    public const int RowFieldNumber = 1;
     private int row_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public int row {
+    public int Row {
       get { return row_; }
       set {
         row_ = value;
@@ -2613,10 +2613,10 @@ namespace NFMsg {
     }
 
     /// <summary>Field number for the "col" field.</summary>
-    public const int colFieldNumber = 2;
+    public const int ColFieldNumber = 2;
     private int col_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public int col {
+    public int Col {
       get { return col_; }
       set {
         col_ = value;
@@ -2624,10 +2624,10 @@ namespace NFMsg {
     }
 
     /// <summary>Field number for the "data" field.</summary>
-    public const int dataFieldNumber = 3;
+    public const int DataFieldNumber = 3;
     private global::NFMsg.Vector3 data_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public global::NFMsg.Vector3 data {
+    public global::NFMsg.Vector3 Data {
       get { return data_; }
       set {
         data_ = value;
@@ -2647,18 +2647,18 @@ namespace NFMsg {
       if (ReferenceEquals(other, this)) {
         return true;
       }
-      if (row != other.row) return false;
-      if (col != other.col) return false;
-      if (!object.Equals(data, other.data)) return false;
+      if (Row != other.Row) return false;
+      if (Col != other.Col) return false;
+      if (!object.Equals(Data, other.Data)) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override int GetHashCode() {
       int hash = 1;
-      if (row != 0) hash ^= row.GetHashCode();
-      if (col != 0) hash ^= col.GetHashCode();
-      if (data_ != null) hash ^= data.GetHashCode();
+      if (Row != 0) hash ^= Row.GetHashCode();
+      if (Col != 0) hash ^= Col.GetHashCode();
+      if (data_ != null) hash ^= Data.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -2672,17 +2672,17 @@ namespace NFMsg {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public void WriteTo(pb::CodedOutputStream output) {
-      if (row != 0) {
+      if (Row != 0) {
         output.WriteRawTag(8);
-        output.WriteInt32(row);
+        output.WriteInt32(Row);
       }
-      if (col != 0) {
+      if (Col != 0) {
         output.WriteRawTag(16);
-        output.WriteInt32(col);
+        output.WriteInt32(Col);
       }
       if (data_ != null) {
         output.WriteRawTag(26);
-        output.WriteMessage(data);
+        output.WriteMessage(Data);
       }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
@@ -2692,14 +2692,14 @@ namespace NFMsg {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public int CalculateSize() {
       int size = 0;
-      if (row != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeInt32Size(row);
+      if (Row != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(Row);
       }
-      if (col != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeInt32Size(col);
+      if (Col != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(Col);
       }
       if (data_ != null) {
-        size += 1 + pb::CodedOutputStream.ComputeMessageSize(data);
+        size += 1 + pb::CodedOutputStream.ComputeMessageSize(Data);
       }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
@@ -2712,17 +2712,17 @@ namespace NFMsg {
       if (other == null) {
         return;
       }
-      if (other.row != 0) {
-        row = other.row;
+      if (other.Row != 0) {
+        Row = other.Row;
       }
-      if (other.col != 0) {
-        col = other.col;
+      if (other.Col != 0) {
+        Col = other.Col;
       }
       if (other.data_ != null) {
         if (data_ == null) {
-          data_ = new global::NFMsg.Vector3();
+          Data = new global::NFMsg.Vector3();
         }
-        data.MergeFrom(other.data);
+        Data.MergeFrom(other.Data);
       }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
@@ -2736,18 +2736,18 @@ namespace NFMsg {
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
           case 8: {
-            row = input.ReadInt32();
+            Row = input.ReadInt32();
             break;
           }
           case 16: {
-            col = input.ReadInt32();
+            Col = input.ReadInt32();
             break;
           }
           case 26: {
             if (data_ == null) {
-              data_ = new global::NFMsg.Vector3();
+              Data = new global::NFMsg.Vector3();
             }
-            input.ReadMessage(data_);
+            input.ReadMessage(Data);
             break;
           }
         }
@@ -2797,10 +2797,10 @@ namespace NFMsg {
     }
 
     /// <summary>Field number for the "row" field.</summary>
-    public const int rowFieldNumber = 1;
+    public const int RowFieldNumber = 1;
     private int row_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public int row {
+    public int Row {
       get { return row_; }
       set {
         row_ = value;
@@ -2808,62 +2808,62 @@ namespace NFMsg {
     }
 
     /// <summary>Field number for the "record_int_list" field.</summary>
-    public const int record_int_listFieldNumber = 2;
+    public const int RecordIntListFieldNumber = 2;
     private static readonly pb::FieldCodec<global::NFMsg.RecordInt> _repeated_recordIntList_codec
         = pb::FieldCodec.ForMessage(18, global::NFMsg.RecordInt.Parser);
     private readonly pbc::RepeatedField<global::NFMsg.RecordInt> recordIntList_ = new pbc::RepeatedField<global::NFMsg.RecordInt>();
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public pbc::RepeatedField<global::NFMsg.RecordInt> record_int_list {
+    public pbc::RepeatedField<global::NFMsg.RecordInt> RecordIntList {
       get { return recordIntList_; }
     }
 
     /// <summary>Field number for the "record_float_list" field.</summary>
-    public const int record_float_listFieldNumber = 3;
+    public const int RecordFloatListFieldNumber = 3;
     private static readonly pb::FieldCodec<global::NFMsg.RecordFloat> _repeated_recordFloatList_codec
         = pb::FieldCodec.ForMessage(26, global::NFMsg.RecordFloat.Parser);
     private readonly pbc::RepeatedField<global::NFMsg.RecordFloat> recordFloatList_ = new pbc::RepeatedField<global::NFMsg.RecordFloat>();
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public pbc::RepeatedField<global::NFMsg.RecordFloat> record_float_list {
+    public pbc::RepeatedField<global::NFMsg.RecordFloat> RecordFloatList {
       get { return recordFloatList_; }
     }
 
     /// <summary>Field number for the "record_string_list" field.</summary>
-    public const int record_string_listFieldNumber = 4;
+    public const int RecordStringListFieldNumber = 4;
     private static readonly pb::FieldCodec<global::NFMsg.RecordString> _repeated_recordStringList_codec
         = pb::FieldCodec.ForMessage(34, global::NFMsg.RecordString.Parser);
     private readonly pbc::RepeatedField<global::NFMsg.RecordString> recordStringList_ = new pbc::RepeatedField<global::NFMsg.RecordString>();
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public pbc::RepeatedField<global::NFMsg.RecordString> record_string_list {
+    public pbc::RepeatedField<global::NFMsg.RecordString> RecordStringList {
       get { return recordStringList_; }
     }
 
     /// <summary>Field number for the "record_object_list" field.</summary>
-    public const int record_object_listFieldNumber = 5;
+    public const int RecordObjectListFieldNumber = 5;
     private static readonly pb::FieldCodec<global::NFMsg.RecordObject> _repeated_recordObjectList_codec
         = pb::FieldCodec.ForMessage(42, global::NFMsg.RecordObject.Parser);
     private readonly pbc::RepeatedField<global::NFMsg.RecordObject> recordObjectList_ = new pbc::RepeatedField<global::NFMsg.RecordObject>();
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public pbc::RepeatedField<global::NFMsg.RecordObject> record_object_list {
+    public pbc::RepeatedField<global::NFMsg.RecordObject> RecordObjectList {
       get { return recordObjectList_; }
     }
 
     /// <summary>Field number for the "record_vector2_list" field.</summary>
-    public const int record_vector2_listFieldNumber = 6;
+    public const int RecordVector2ListFieldNumber = 6;
     private static readonly pb::FieldCodec<global::NFMsg.RecordVector2> _repeated_recordVector2List_codec
         = pb::FieldCodec.ForMessage(50, global::NFMsg.RecordVector2.Parser);
     private readonly pbc::RepeatedField<global::NFMsg.RecordVector2> recordVector2List_ = new pbc::RepeatedField<global::NFMsg.RecordVector2>();
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public pbc::RepeatedField<global::NFMsg.RecordVector2> record_vector2_list {
+    public pbc::RepeatedField<global::NFMsg.RecordVector2> RecordVector2List {
       get { return recordVector2List_; }
     }
 
     /// <summary>Field number for the "record_vector3_list" field.</summary>
-    public const int record_vector3_listFieldNumber = 7;
+    public const int RecordVector3ListFieldNumber = 7;
     private static readonly pb::FieldCodec<global::NFMsg.RecordVector3> _repeated_recordVector3List_codec
         = pb::FieldCodec.ForMessage(58, global::NFMsg.RecordVector3.Parser);
     private readonly pbc::RepeatedField<global::NFMsg.RecordVector3> recordVector3List_ = new pbc::RepeatedField<global::NFMsg.RecordVector3>();
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public pbc::RepeatedField<global::NFMsg.RecordVector3> record_vector3_list {
+    public pbc::RepeatedField<global::NFMsg.RecordVector3> RecordVector3List {
       get { return recordVector3List_; }
     }
 
@@ -2880,7 +2880,7 @@ namespace NFMsg {
       if (ReferenceEquals(other, this)) {
         return true;
       }
-      if (row != other.row) return false;
+      if (Row != other.Row) return false;
       if(!recordIntList_.Equals(other.recordIntList_)) return false;
       if(!recordFloatList_.Equals(other.recordFloatList_)) return false;
       if(!recordStringList_.Equals(other.recordStringList_)) return false;
@@ -2893,7 +2893,7 @@ namespace NFMsg {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override int GetHashCode() {
       int hash = 1;
-      if (row != 0) hash ^= row.GetHashCode();
+      if (Row != 0) hash ^= Row.GetHashCode();
       hash ^= recordIntList_.GetHashCode();
       hash ^= recordFloatList_.GetHashCode();
       hash ^= recordStringList_.GetHashCode();
@@ -2913,9 +2913,9 @@ namespace NFMsg {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public void WriteTo(pb::CodedOutputStream output) {
-      if (row != 0) {
+      if (Row != 0) {
         output.WriteRawTag(8);
-        output.WriteInt32(row);
+        output.WriteInt32(Row);
       }
       recordIntList_.WriteTo(output, _repeated_recordIntList_codec);
       recordFloatList_.WriteTo(output, _repeated_recordFloatList_codec);
@@ -2931,8 +2931,8 @@ namespace NFMsg {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public int CalculateSize() {
       int size = 0;
-      if (row != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeInt32Size(row);
+      if (Row != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(Row);
       }
       size += recordIntList_.CalculateSize(_repeated_recordIntList_codec);
       size += recordFloatList_.CalculateSize(_repeated_recordFloatList_codec);
@@ -2951,8 +2951,8 @@ namespace NFMsg {
       if (other == null) {
         return;
       }
-      if (other.row != 0) {
-        row = other.row;
+      if (other.Row != 0) {
+        Row = other.Row;
       }
       recordIntList_.Add(other.recordIntList_);
       recordFloatList_.Add(other.recordFloatList_);
@@ -2972,7 +2972,7 @@ namespace NFMsg {
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
           case 8: {
-            row = input.ReadInt32();
+            Row = input.ReadInt32();
             break;
           }
           case 18: {
@@ -3041,10 +3041,10 @@ namespace NFMsg {
     }
 
     /// <summary>Field number for the "record_name" field.</summary>
-    public const int record_nameFieldNumber = 1;
+    public const int RecordNameFieldNumber = 1;
     private pb::ByteString recordName_ = pb::ByteString.Empty;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public pb::ByteString record_name {
+    public pb::ByteString RecordName {
       get { return recordName_; }
       set {
         recordName_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
@@ -3052,12 +3052,12 @@ namespace NFMsg {
     }
 
     /// <summary>Field number for the "row_struct" field.</summary>
-    public const int row_structFieldNumber = 2;
+    public const int RowStructFieldNumber = 2;
     private static readonly pb::FieldCodec<global::NFMsg.RecordAddRowStruct> _repeated_rowStruct_codec
         = pb::FieldCodec.ForMessage(18, global::NFMsg.RecordAddRowStruct.Parser);
     private readonly pbc::RepeatedField<global::NFMsg.RecordAddRowStruct> rowStruct_ = new pbc::RepeatedField<global::NFMsg.RecordAddRowStruct>();
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public pbc::RepeatedField<global::NFMsg.RecordAddRowStruct> row_struct {
+    public pbc::RepeatedField<global::NFMsg.RecordAddRowStruct> RowStruct {
       get { return rowStruct_; }
     }
 
@@ -3074,7 +3074,7 @@ namespace NFMsg {
       if (ReferenceEquals(other, this)) {
         return true;
       }
-      if (record_name != other.record_name) return false;
+      if (RecordName != other.RecordName) return false;
       if(!rowStruct_.Equals(other.rowStruct_)) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
@@ -3082,7 +3082,7 @@ namespace NFMsg {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override int GetHashCode() {
       int hash = 1;
-      if (record_name.Length != 0) hash ^= record_name.GetHashCode();
+      if (RecordName.Length != 0) hash ^= RecordName.GetHashCode();
       hash ^= rowStruct_.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
@@ -3097,9 +3097,9 @@ namespace NFMsg {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public void WriteTo(pb::CodedOutputStream output) {
-      if (record_name.Length != 0) {
+      if (RecordName.Length != 0) {
         output.WriteRawTag(10);
-        output.WriteBytes(record_name);
+        output.WriteBytes(RecordName);
       }
       rowStruct_.WriteTo(output, _repeated_rowStruct_codec);
       if (_unknownFields != null) {
@@ -3110,8 +3110,8 @@ namespace NFMsg {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public int CalculateSize() {
       int size = 0;
-      if (record_name.Length != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeBytesSize(record_name);
+      if (RecordName.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeBytesSize(RecordName);
       }
       size += rowStruct_.CalculateSize(_repeated_rowStruct_codec);
       if (_unknownFields != null) {
@@ -3125,8 +3125,8 @@ namespace NFMsg {
       if (other == null) {
         return;
       }
-      if (other.record_name.Length != 0) {
-        record_name = other.record_name;
+      if (other.RecordName.Length != 0) {
+        RecordName = other.RecordName;
       }
       rowStruct_.Add(other.rowStruct_);
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
@@ -3141,7 +3141,7 @@ namespace NFMsg {
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
           case 10: {
-            record_name = input.ReadBytes();
+            RecordName = input.ReadBytes();
             break;
           }
           case 18: {
@@ -3190,10 +3190,10 @@ namespace NFMsg {
     }
 
     /// <summary>Field number for the "player_id" field.</summary>
-    public const int player_idFieldNumber = 1;
+    public const int PlayerIdFieldNumber = 1;
     private global::NFMsg.Ident playerId_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public global::NFMsg.Ident player_id {
+    public global::NFMsg.Ident PlayerId {
       get { return playerId_; }
       set {
         playerId_ = value;
@@ -3201,12 +3201,12 @@ namespace NFMsg {
     }
 
     /// <summary>Field number for the "property_list" field.</summary>
-    public const int property_listFieldNumber = 2;
+    public const int PropertyListFieldNumber = 2;
     private static readonly pb::FieldCodec<global::NFMsg.PropertyInt> _repeated_propertyList_codec
         = pb::FieldCodec.ForMessage(18, global::NFMsg.PropertyInt.Parser);
     private readonly pbc::RepeatedField<global::NFMsg.PropertyInt> propertyList_ = new pbc::RepeatedField<global::NFMsg.PropertyInt>();
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public pbc::RepeatedField<global::NFMsg.PropertyInt> property_list {
+    public pbc::RepeatedField<global::NFMsg.PropertyInt> PropertyList {
       get { return propertyList_; }
     }
 
@@ -3223,7 +3223,7 @@ namespace NFMsg {
       if (ReferenceEquals(other, this)) {
         return true;
       }
-      if (!object.Equals(player_id, other.player_id)) return false;
+      if (!object.Equals(PlayerId, other.PlayerId)) return false;
       if(!propertyList_.Equals(other.propertyList_)) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
@@ -3231,7 +3231,7 @@ namespace NFMsg {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override int GetHashCode() {
       int hash = 1;
-      if (playerId_ != null) hash ^= player_id.GetHashCode();
+      if (playerId_ != null) hash ^= PlayerId.GetHashCode();
       hash ^= propertyList_.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
@@ -3248,7 +3248,7 @@ namespace NFMsg {
     public void WriteTo(pb::CodedOutputStream output) {
       if (playerId_ != null) {
         output.WriteRawTag(10);
-        output.WriteMessage(player_id);
+        output.WriteMessage(PlayerId);
       }
       propertyList_.WriteTo(output, _repeated_propertyList_codec);
       if (_unknownFields != null) {
@@ -3260,7 +3260,7 @@ namespace NFMsg {
     public int CalculateSize() {
       int size = 0;
       if (playerId_ != null) {
-        size += 1 + pb::CodedOutputStream.ComputeMessageSize(player_id);
+        size += 1 + pb::CodedOutputStream.ComputeMessageSize(PlayerId);
       }
       size += propertyList_.CalculateSize(_repeated_propertyList_codec);
       if (_unknownFields != null) {
@@ -3276,9 +3276,9 @@ namespace NFMsg {
       }
       if (other.playerId_ != null) {
         if (playerId_ == null) {
-          playerId_ = new global::NFMsg.Ident();
+          PlayerId = new global::NFMsg.Ident();
         }
-        player_id.MergeFrom(other.player_id);
+        PlayerId.MergeFrom(other.PlayerId);
       }
       propertyList_.Add(other.propertyList_);
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
@@ -3294,9 +3294,9 @@ namespace NFMsg {
             break;
           case 10: {
             if (playerId_ == null) {
-              playerId_ = new global::NFMsg.Ident();
+              PlayerId = new global::NFMsg.Ident();
             }
-            input.ReadMessage(playerId_);
+            input.ReadMessage(PlayerId);
             break;
           }
           case 18: {
@@ -3345,10 +3345,10 @@ namespace NFMsg {
     }
 
     /// <summary>Field number for the "player_id" field.</summary>
-    public const int player_idFieldNumber = 1;
+    public const int PlayerIdFieldNumber = 1;
     private global::NFMsg.Ident playerId_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public global::NFMsg.Ident player_id {
+    public global::NFMsg.Ident PlayerId {
       get { return playerId_; }
       set {
         playerId_ = value;
@@ -3356,12 +3356,12 @@ namespace NFMsg {
     }
 
     /// <summary>Field number for the "property_list" field.</summary>
-    public const int property_listFieldNumber = 2;
+    public const int PropertyListFieldNumber = 2;
     private static readonly pb::FieldCodec<global::NFMsg.PropertyFloat> _repeated_propertyList_codec
         = pb::FieldCodec.ForMessage(18, global::NFMsg.PropertyFloat.Parser);
     private readonly pbc::RepeatedField<global::NFMsg.PropertyFloat> propertyList_ = new pbc::RepeatedField<global::NFMsg.PropertyFloat>();
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public pbc::RepeatedField<global::NFMsg.PropertyFloat> property_list {
+    public pbc::RepeatedField<global::NFMsg.PropertyFloat> PropertyList {
       get { return propertyList_; }
     }
 
@@ -3378,7 +3378,7 @@ namespace NFMsg {
       if (ReferenceEquals(other, this)) {
         return true;
       }
-      if (!object.Equals(player_id, other.player_id)) return false;
+      if (!object.Equals(PlayerId, other.PlayerId)) return false;
       if(!propertyList_.Equals(other.propertyList_)) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
@@ -3386,7 +3386,7 @@ namespace NFMsg {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override int GetHashCode() {
       int hash = 1;
-      if (playerId_ != null) hash ^= player_id.GetHashCode();
+      if (playerId_ != null) hash ^= PlayerId.GetHashCode();
       hash ^= propertyList_.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
@@ -3403,7 +3403,7 @@ namespace NFMsg {
     public void WriteTo(pb::CodedOutputStream output) {
       if (playerId_ != null) {
         output.WriteRawTag(10);
-        output.WriteMessage(player_id);
+        output.WriteMessage(PlayerId);
       }
       propertyList_.WriteTo(output, _repeated_propertyList_codec);
       if (_unknownFields != null) {
@@ -3415,7 +3415,7 @@ namespace NFMsg {
     public int CalculateSize() {
       int size = 0;
       if (playerId_ != null) {
-        size += 1 + pb::CodedOutputStream.ComputeMessageSize(player_id);
+        size += 1 + pb::CodedOutputStream.ComputeMessageSize(PlayerId);
       }
       size += propertyList_.CalculateSize(_repeated_propertyList_codec);
       if (_unknownFields != null) {
@@ -3431,9 +3431,9 @@ namespace NFMsg {
       }
       if (other.playerId_ != null) {
         if (playerId_ == null) {
-          playerId_ = new global::NFMsg.Ident();
+          PlayerId = new global::NFMsg.Ident();
         }
-        player_id.MergeFrom(other.player_id);
+        PlayerId.MergeFrom(other.PlayerId);
       }
       propertyList_.Add(other.propertyList_);
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
@@ -3449,9 +3449,9 @@ namespace NFMsg {
             break;
           case 10: {
             if (playerId_ == null) {
-              playerId_ = new global::NFMsg.Ident();
+              PlayerId = new global::NFMsg.Ident();
             }
-            input.ReadMessage(playerId_);
+            input.ReadMessage(PlayerId);
             break;
           }
           case 18: {
@@ -3500,10 +3500,10 @@ namespace NFMsg {
     }
 
     /// <summary>Field number for the "player_id" field.</summary>
-    public const int player_idFieldNumber = 1;
+    public const int PlayerIdFieldNumber = 1;
     private global::NFMsg.Ident playerId_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public global::NFMsg.Ident player_id {
+    public global::NFMsg.Ident PlayerId {
       get { return playerId_; }
       set {
         playerId_ = value;
@@ -3511,12 +3511,12 @@ namespace NFMsg {
     }
 
     /// <summary>Field number for the "property_list" field.</summary>
-    public const int property_listFieldNumber = 2;
+    public const int PropertyListFieldNumber = 2;
     private static readonly pb::FieldCodec<global::NFMsg.PropertyString> _repeated_propertyList_codec
         = pb::FieldCodec.ForMessage(18, global::NFMsg.PropertyString.Parser);
     private readonly pbc::RepeatedField<global::NFMsg.PropertyString> propertyList_ = new pbc::RepeatedField<global::NFMsg.PropertyString>();
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public pbc::RepeatedField<global::NFMsg.PropertyString> property_list {
+    public pbc::RepeatedField<global::NFMsg.PropertyString> PropertyList {
       get { return propertyList_; }
     }
 
@@ -3533,7 +3533,7 @@ namespace NFMsg {
       if (ReferenceEquals(other, this)) {
         return true;
       }
-      if (!object.Equals(player_id, other.player_id)) return false;
+      if (!object.Equals(PlayerId, other.PlayerId)) return false;
       if(!propertyList_.Equals(other.propertyList_)) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
@@ -3541,7 +3541,7 @@ namespace NFMsg {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override int GetHashCode() {
       int hash = 1;
-      if (playerId_ != null) hash ^= player_id.GetHashCode();
+      if (playerId_ != null) hash ^= PlayerId.GetHashCode();
       hash ^= propertyList_.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
@@ -3558,7 +3558,7 @@ namespace NFMsg {
     public void WriteTo(pb::CodedOutputStream output) {
       if (playerId_ != null) {
         output.WriteRawTag(10);
-        output.WriteMessage(player_id);
+        output.WriteMessage(PlayerId);
       }
       propertyList_.WriteTo(output, _repeated_propertyList_codec);
       if (_unknownFields != null) {
@@ -3570,7 +3570,7 @@ namespace NFMsg {
     public int CalculateSize() {
       int size = 0;
       if (playerId_ != null) {
-        size += 1 + pb::CodedOutputStream.ComputeMessageSize(player_id);
+        size += 1 + pb::CodedOutputStream.ComputeMessageSize(PlayerId);
       }
       size += propertyList_.CalculateSize(_repeated_propertyList_codec);
       if (_unknownFields != null) {
@@ -3586,9 +3586,9 @@ namespace NFMsg {
       }
       if (other.playerId_ != null) {
         if (playerId_ == null) {
-          playerId_ = new global::NFMsg.Ident();
+          PlayerId = new global::NFMsg.Ident();
         }
-        player_id.MergeFrom(other.player_id);
+        PlayerId.MergeFrom(other.PlayerId);
       }
       propertyList_.Add(other.propertyList_);
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
@@ -3604,9 +3604,9 @@ namespace NFMsg {
             break;
           case 10: {
             if (playerId_ == null) {
-              playerId_ = new global::NFMsg.Ident();
+              PlayerId = new global::NFMsg.Ident();
             }
-            input.ReadMessage(playerId_);
+            input.ReadMessage(PlayerId);
             break;
           }
           case 18: {
@@ -3655,10 +3655,10 @@ namespace NFMsg {
     }
 
     /// <summary>Field number for the "player_id" field.</summary>
-    public const int player_idFieldNumber = 1;
+    public const int PlayerIdFieldNumber = 1;
     private global::NFMsg.Ident playerId_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public global::NFMsg.Ident player_id {
+    public global::NFMsg.Ident PlayerId {
       get { return playerId_; }
       set {
         playerId_ = value;
@@ -3666,12 +3666,12 @@ namespace NFMsg {
     }
 
     /// <summary>Field number for the "property_list" field.</summary>
-    public const int property_listFieldNumber = 2;
+    public const int PropertyListFieldNumber = 2;
     private static readonly pb::FieldCodec<global::NFMsg.PropertyObject> _repeated_propertyList_codec
         = pb::FieldCodec.ForMessage(18, global::NFMsg.PropertyObject.Parser);
     private readonly pbc::RepeatedField<global::NFMsg.PropertyObject> propertyList_ = new pbc::RepeatedField<global::NFMsg.PropertyObject>();
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public pbc::RepeatedField<global::NFMsg.PropertyObject> property_list {
+    public pbc::RepeatedField<global::NFMsg.PropertyObject> PropertyList {
       get { return propertyList_; }
     }
 
@@ -3688,7 +3688,7 @@ namespace NFMsg {
       if (ReferenceEquals(other, this)) {
         return true;
       }
-      if (!object.Equals(player_id, other.player_id)) return false;
+      if (!object.Equals(PlayerId, other.PlayerId)) return false;
       if(!propertyList_.Equals(other.propertyList_)) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
@@ -3696,7 +3696,7 @@ namespace NFMsg {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override int GetHashCode() {
       int hash = 1;
-      if (playerId_ != null) hash ^= player_id.GetHashCode();
+      if (playerId_ != null) hash ^= PlayerId.GetHashCode();
       hash ^= propertyList_.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
@@ -3713,7 +3713,7 @@ namespace NFMsg {
     public void WriteTo(pb::CodedOutputStream output) {
       if (playerId_ != null) {
         output.WriteRawTag(10);
-        output.WriteMessage(player_id);
+        output.WriteMessage(PlayerId);
       }
       propertyList_.WriteTo(output, _repeated_propertyList_codec);
       if (_unknownFields != null) {
@@ -3725,7 +3725,7 @@ namespace NFMsg {
     public int CalculateSize() {
       int size = 0;
       if (playerId_ != null) {
-        size += 1 + pb::CodedOutputStream.ComputeMessageSize(player_id);
+        size += 1 + pb::CodedOutputStream.ComputeMessageSize(PlayerId);
       }
       size += propertyList_.CalculateSize(_repeated_propertyList_codec);
       if (_unknownFields != null) {
@@ -3741,9 +3741,9 @@ namespace NFMsg {
       }
       if (other.playerId_ != null) {
         if (playerId_ == null) {
-          playerId_ = new global::NFMsg.Ident();
+          PlayerId = new global::NFMsg.Ident();
         }
-        player_id.MergeFrom(other.player_id);
+        PlayerId.MergeFrom(other.PlayerId);
       }
       propertyList_.Add(other.propertyList_);
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
@@ -3759,9 +3759,9 @@ namespace NFMsg {
             break;
           case 10: {
             if (playerId_ == null) {
-              playerId_ = new global::NFMsg.Ident();
+              PlayerId = new global::NFMsg.Ident();
             }
-            input.ReadMessage(playerId_);
+            input.ReadMessage(PlayerId);
             break;
           }
           case 18: {
@@ -3810,10 +3810,10 @@ namespace NFMsg {
     }
 
     /// <summary>Field number for the "player_id" field.</summary>
-    public const int player_idFieldNumber = 1;
+    public const int PlayerIdFieldNumber = 1;
     private global::NFMsg.Ident playerId_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public global::NFMsg.Ident player_id {
+    public global::NFMsg.Ident PlayerId {
       get { return playerId_; }
       set {
         playerId_ = value;
@@ -3821,12 +3821,12 @@ namespace NFMsg {
     }
 
     /// <summary>Field number for the "property_list" field.</summary>
-    public const int property_listFieldNumber = 2;
+    public const int PropertyListFieldNumber = 2;
     private static readonly pb::FieldCodec<global::NFMsg.PropertyVector2> _repeated_propertyList_codec
         = pb::FieldCodec.ForMessage(18, global::NFMsg.PropertyVector2.Parser);
     private readonly pbc::RepeatedField<global::NFMsg.PropertyVector2> propertyList_ = new pbc::RepeatedField<global::NFMsg.PropertyVector2>();
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public pbc::RepeatedField<global::NFMsg.PropertyVector2> property_list {
+    public pbc::RepeatedField<global::NFMsg.PropertyVector2> PropertyList {
       get { return propertyList_; }
     }
 
@@ -3843,7 +3843,7 @@ namespace NFMsg {
       if (ReferenceEquals(other, this)) {
         return true;
       }
-      if (!object.Equals(player_id, other.player_id)) return false;
+      if (!object.Equals(PlayerId, other.PlayerId)) return false;
       if(!propertyList_.Equals(other.propertyList_)) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
@@ -3851,7 +3851,7 @@ namespace NFMsg {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override int GetHashCode() {
       int hash = 1;
-      if (playerId_ != null) hash ^= player_id.GetHashCode();
+      if (playerId_ != null) hash ^= PlayerId.GetHashCode();
       hash ^= propertyList_.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
@@ -3868,7 +3868,7 @@ namespace NFMsg {
     public void WriteTo(pb::CodedOutputStream output) {
       if (playerId_ != null) {
         output.WriteRawTag(10);
-        output.WriteMessage(player_id);
+        output.WriteMessage(PlayerId);
       }
       propertyList_.WriteTo(output, _repeated_propertyList_codec);
       if (_unknownFields != null) {
@@ -3880,7 +3880,7 @@ namespace NFMsg {
     public int CalculateSize() {
       int size = 0;
       if (playerId_ != null) {
-        size += 1 + pb::CodedOutputStream.ComputeMessageSize(player_id);
+        size += 1 + pb::CodedOutputStream.ComputeMessageSize(PlayerId);
       }
       size += propertyList_.CalculateSize(_repeated_propertyList_codec);
       if (_unknownFields != null) {
@@ -3896,9 +3896,9 @@ namespace NFMsg {
       }
       if (other.playerId_ != null) {
         if (playerId_ == null) {
-          playerId_ = new global::NFMsg.Ident();
+          PlayerId = new global::NFMsg.Ident();
         }
-        player_id.MergeFrom(other.player_id);
+        PlayerId.MergeFrom(other.PlayerId);
       }
       propertyList_.Add(other.propertyList_);
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
@@ -3914,9 +3914,9 @@ namespace NFMsg {
             break;
           case 10: {
             if (playerId_ == null) {
-              playerId_ = new global::NFMsg.Ident();
+              PlayerId = new global::NFMsg.Ident();
             }
-            input.ReadMessage(playerId_);
+            input.ReadMessage(PlayerId);
             break;
           }
           case 18: {
@@ -3965,10 +3965,10 @@ namespace NFMsg {
     }
 
     /// <summary>Field number for the "player_id" field.</summary>
-    public const int player_idFieldNumber = 1;
+    public const int PlayerIdFieldNumber = 1;
     private global::NFMsg.Ident playerId_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public global::NFMsg.Ident player_id {
+    public global::NFMsg.Ident PlayerId {
       get { return playerId_; }
       set {
         playerId_ = value;
@@ -3976,12 +3976,12 @@ namespace NFMsg {
     }
 
     /// <summary>Field number for the "property_list" field.</summary>
-    public const int property_listFieldNumber = 2;
+    public const int PropertyListFieldNumber = 2;
     private static readonly pb::FieldCodec<global::NFMsg.PropertyVector3> _repeated_propertyList_codec
         = pb::FieldCodec.ForMessage(18, global::NFMsg.PropertyVector3.Parser);
     private readonly pbc::RepeatedField<global::NFMsg.PropertyVector3> propertyList_ = new pbc::RepeatedField<global::NFMsg.PropertyVector3>();
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public pbc::RepeatedField<global::NFMsg.PropertyVector3> property_list {
+    public pbc::RepeatedField<global::NFMsg.PropertyVector3> PropertyList {
       get { return propertyList_; }
     }
 
@@ -3998,7 +3998,7 @@ namespace NFMsg {
       if (ReferenceEquals(other, this)) {
         return true;
       }
-      if (!object.Equals(player_id, other.player_id)) return false;
+      if (!object.Equals(PlayerId, other.PlayerId)) return false;
       if(!propertyList_.Equals(other.propertyList_)) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
@@ -4006,7 +4006,7 @@ namespace NFMsg {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override int GetHashCode() {
       int hash = 1;
-      if (playerId_ != null) hash ^= player_id.GetHashCode();
+      if (playerId_ != null) hash ^= PlayerId.GetHashCode();
       hash ^= propertyList_.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
@@ -4023,7 +4023,7 @@ namespace NFMsg {
     public void WriteTo(pb::CodedOutputStream output) {
       if (playerId_ != null) {
         output.WriteRawTag(10);
-        output.WriteMessage(player_id);
+        output.WriteMessage(PlayerId);
       }
       propertyList_.WriteTo(output, _repeated_propertyList_codec);
       if (_unknownFields != null) {
@@ -4035,7 +4035,7 @@ namespace NFMsg {
     public int CalculateSize() {
       int size = 0;
       if (playerId_ != null) {
-        size += 1 + pb::CodedOutputStream.ComputeMessageSize(player_id);
+        size += 1 + pb::CodedOutputStream.ComputeMessageSize(PlayerId);
       }
       size += propertyList_.CalculateSize(_repeated_propertyList_codec);
       if (_unknownFields != null) {
@@ -4051,9 +4051,9 @@ namespace NFMsg {
       }
       if (other.playerId_ != null) {
         if (playerId_ == null) {
-          playerId_ = new global::NFMsg.Ident();
+          PlayerId = new global::NFMsg.Ident();
         }
-        player_id.MergeFrom(other.player_id);
+        PlayerId.MergeFrom(other.PlayerId);
       }
       propertyList_.Add(other.propertyList_);
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
@@ -4069,9 +4069,9 @@ namespace NFMsg {
             break;
           case 10: {
             if (playerId_ == null) {
-              playerId_ = new global::NFMsg.Ident();
+              PlayerId = new global::NFMsg.Ident();
             }
-            input.ReadMessage(playerId_);
+            input.ReadMessage(PlayerId);
             break;
           }
           case 18: {
@@ -4121,10 +4121,10 @@ namespace NFMsg {
     }
 
     /// <summary>Field number for the "player_id" field.</summary>
-    public const int player_idFieldNumber = 1;
+    public const int PlayerIdFieldNumber = 1;
     private global::NFMsg.Ident playerId_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public global::NFMsg.Ident player_id {
+    public global::NFMsg.Ident PlayerId {
       get { return playerId_; }
       set {
         playerId_ = value;
@@ -4132,10 +4132,10 @@ namespace NFMsg {
     }
 
     /// <summary>Field number for the "record_name" field.</summary>
-    public const int record_nameFieldNumber = 2;
+    public const int RecordNameFieldNumber = 2;
     private pb::ByteString recordName_ = pb::ByteString.Empty;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public pb::ByteString record_name {
+    public pb::ByteString RecordName {
       get { return recordName_; }
       set {
         recordName_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
@@ -4143,12 +4143,12 @@ namespace NFMsg {
     }
 
     /// <summary>Field number for the "property_list" field.</summary>
-    public const int property_listFieldNumber = 3;
+    public const int PropertyListFieldNumber = 3;
     private static readonly pb::FieldCodec<global::NFMsg.RecordInt> _repeated_propertyList_codec
         = pb::FieldCodec.ForMessage(26, global::NFMsg.RecordInt.Parser);
     private readonly pbc::RepeatedField<global::NFMsg.RecordInt> propertyList_ = new pbc::RepeatedField<global::NFMsg.RecordInt>();
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public pbc::RepeatedField<global::NFMsg.RecordInt> property_list {
+    public pbc::RepeatedField<global::NFMsg.RecordInt> PropertyList {
       get { return propertyList_; }
     }
 
@@ -4165,8 +4165,8 @@ namespace NFMsg {
       if (ReferenceEquals(other, this)) {
         return true;
       }
-      if (!object.Equals(player_id, other.player_id)) return false;
-      if (record_name != other.record_name) return false;
+      if (!object.Equals(PlayerId, other.PlayerId)) return false;
+      if (RecordName != other.RecordName) return false;
       if(!propertyList_.Equals(other.propertyList_)) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
@@ -4174,8 +4174,8 @@ namespace NFMsg {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override int GetHashCode() {
       int hash = 1;
-      if (playerId_ != null) hash ^= player_id.GetHashCode();
-      if (record_name.Length != 0) hash ^= record_name.GetHashCode();
+      if (playerId_ != null) hash ^= PlayerId.GetHashCode();
+      if (RecordName.Length != 0) hash ^= RecordName.GetHashCode();
       hash ^= propertyList_.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
@@ -4192,11 +4192,11 @@ namespace NFMsg {
     public void WriteTo(pb::CodedOutputStream output) {
       if (playerId_ != null) {
         output.WriteRawTag(10);
-        output.WriteMessage(player_id);
+        output.WriteMessage(PlayerId);
       }
-      if (record_name.Length != 0) {
+      if (RecordName.Length != 0) {
         output.WriteRawTag(18);
-        output.WriteBytes(record_name);
+        output.WriteBytes(RecordName);
       }
       propertyList_.WriteTo(output, _repeated_propertyList_codec);
       if (_unknownFields != null) {
@@ -4208,10 +4208,10 @@ namespace NFMsg {
     public int CalculateSize() {
       int size = 0;
       if (playerId_ != null) {
-        size += 1 + pb::CodedOutputStream.ComputeMessageSize(player_id);
+        size += 1 + pb::CodedOutputStream.ComputeMessageSize(PlayerId);
       }
-      if (record_name.Length != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeBytesSize(record_name);
+      if (RecordName.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeBytesSize(RecordName);
       }
       size += propertyList_.CalculateSize(_repeated_propertyList_codec);
       if (_unknownFields != null) {
@@ -4227,12 +4227,12 @@ namespace NFMsg {
       }
       if (other.playerId_ != null) {
         if (playerId_ == null) {
-          playerId_ = new global::NFMsg.Ident();
+          PlayerId = new global::NFMsg.Ident();
         }
-        player_id.MergeFrom(other.player_id);
+        PlayerId.MergeFrom(other.PlayerId);
       }
-      if (other.record_name.Length != 0) {
-        record_name = other.record_name;
+      if (other.RecordName.Length != 0) {
+        RecordName = other.RecordName;
       }
       propertyList_.Add(other.propertyList_);
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
@@ -4248,13 +4248,13 @@ namespace NFMsg {
             break;
           case 10: {
             if (playerId_ == null) {
-              playerId_ = new global::NFMsg.Ident();
+              PlayerId = new global::NFMsg.Ident();
             }
-            input.ReadMessage(playerId_);
+            input.ReadMessage(PlayerId);
             break;
           }
           case 18: {
-            record_name = input.ReadBytes();
+            RecordName = input.ReadBytes();
             break;
           }
           case 26: {
@@ -4304,10 +4304,10 @@ namespace NFMsg {
     }
 
     /// <summary>Field number for the "player_id" field.</summary>
-    public const int player_idFieldNumber = 1;
+    public const int PlayerIdFieldNumber = 1;
     private global::NFMsg.Ident playerId_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public global::NFMsg.Ident player_id {
+    public global::NFMsg.Ident PlayerId {
       get { return playerId_; }
       set {
         playerId_ = value;
@@ -4315,10 +4315,10 @@ namespace NFMsg {
     }
 
     /// <summary>Field number for the "record_name" field.</summary>
-    public const int record_nameFieldNumber = 2;
+    public const int RecordNameFieldNumber = 2;
     private pb::ByteString recordName_ = pb::ByteString.Empty;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public pb::ByteString record_name {
+    public pb::ByteString RecordName {
       get { return recordName_; }
       set {
         recordName_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
@@ -4326,12 +4326,12 @@ namespace NFMsg {
     }
 
     /// <summary>Field number for the "property_list" field.</summary>
-    public const int property_listFieldNumber = 3;
+    public const int PropertyListFieldNumber = 3;
     private static readonly pb::FieldCodec<global::NFMsg.RecordFloat> _repeated_propertyList_codec
         = pb::FieldCodec.ForMessage(26, global::NFMsg.RecordFloat.Parser);
     private readonly pbc::RepeatedField<global::NFMsg.RecordFloat> propertyList_ = new pbc::RepeatedField<global::NFMsg.RecordFloat>();
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public pbc::RepeatedField<global::NFMsg.RecordFloat> property_list {
+    public pbc::RepeatedField<global::NFMsg.RecordFloat> PropertyList {
       get { return propertyList_; }
     }
 
@@ -4348,8 +4348,8 @@ namespace NFMsg {
       if (ReferenceEquals(other, this)) {
         return true;
       }
-      if (!object.Equals(player_id, other.player_id)) return false;
-      if (record_name != other.record_name) return false;
+      if (!object.Equals(PlayerId, other.PlayerId)) return false;
+      if (RecordName != other.RecordName) return false;
       if(!propertyList_.Equals(other.propertyList_)) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
@@ -4357,8 +4357,8 @@ namespace NFMsg {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override int GetHashCode() {
       int hash = 1;
-      if (playerId_ != null) hash ^= player_id.GetHashCode();
-      if (record_name.Length != 0) hash ^= record_name.GetHashCode();
+      if (playerId_ != null) hash ^= PlayerId.GetHashCode();
+      if (RecordName.Length != 0) hash ^= RecordName.GetHashCode();
       hash ^= propertyList_.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
@@ -4375,11 +4375,11 @@ namespace NFMsg {
     public void WriteTo(pb::CodedOutputStream output) {
       if (playerId_ != null) {
         output.WriteRawTag(10);
-        output.WriteMessage(player_id);
+        output.WriteMessage(PlayerId);
       }
-      if (record_name.Length != 0) {
+      if (RecordName.Length != 0) {
         output.WriteRawTag(18);
-        output.WriteBytes(record_name);
+        output.WriteBytes(RecordName);
       }
       propertyList_.WriteTo(output, _repeated_propertyList_codec);
       if (_unknownFields != null) {
@@ -4391,10 +4391,10 @@ namespace NFMsg {
     public int CalculateSize() {
       int size = 0;
       if (playerId_ != null) {
-        size += 1 + pb::CodedOutputStream.ComputeMessageSize(player_id);
+        size += 1 + pb::CodedOutputStream.ComputeMessageSize(PlayerId);
       }
-      if (record_name.Length != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeBytesSize(record_name);
+      if (RecordName.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeBytesSize(RecordName);
       }
       size += propertyList_.CalculateSize(_repeated_propertyList_codec);
       if (_unknownFields != null) {
@@ -4410,12 +4410,12 @@ namespace NFMsg {
       }
       if (other.playerId_ != null) {
         if (playerId_ == null) {
-          playerId_ = new global::NFMsg.Ident();
+          PlayerId = new global::NFMsg.Ident();
         }
-        player_id.MergeFrom(other.player_id);
+        PlayerId.MergeFrom(other.PlayerId);
       }
-      if (other.record_name.Length != 0) {
-        record_name = other.record_name;
+      if (other.RecordName.Length != 0) {
+        RecordName = other.RecordName;
       }
       propertyList_.Add(other.propertyList_);
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
@@ -4431,13 +4431,13 @@ namespace NFMsg {
             break;
           case 10: {
             if (playerId_ == null) {
-              playerId_ = new global::NFMsg.Ident();
+              PlayerId = new global::NFMsg.Ident();
             }
-            input.ReadMessage(playerId_);
+            input.ReadMessage(PlayerId);
             break;
           }
           case 18: {
-            record_name = input.ReadBytes();
+            RecordName = input.ReadBytes();
             break;
           }
           case 26: {
@@ -4487,10 +4487,10 @@ namespace NFMsg {
     }
 
     /// <summary>Field number for the "player_id" field.</summary>
-    public const int player_idFieldNumber = 1;
+    public const int PlayerIdFieldNumber = 1;
     private global::NFMsg.Ident playerId_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public global::NFMsg.Ident player_id {
+    public global::NFMsg.Ident PlayerId {
       get { return playerId_; }
       set {
         playerId_ = value;
@@ -4498,10 +4498,10 @@ namespace NFMsg {
     }
 
     /// <summary>Field number for the "record_name" field.</summary>
-    public const int record_nameFieldNumber = 2;
+    public const int RecordNameFieldNumber = 2;
     private pb::ByteString recordName_ = pb::ByteString.Empty;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public pb::ByteString record_name {
+    public pb::ByteString RecordName {
       get { return recordName_; }
       set {
         recordName_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
@@ -4509,12 +4509,12 @@ namespace NFMsg {
     }
 
     /// <summary>Field number for the "property_list" field.</summary>
-    public const int property_listFieldNumber = 3;
+    public const int PropertyListFieldNumber = 3;
     private static readonly pb::FieldCodec<global::NFMsg.RecordString> _repeated_propertyList_codec
         = pb::FieldCodec.ForMessage(26, global::NFMsg.RecordString.Parser);
     private readonly pbc::RepeatedField<global::NFMsg.RecordString> propertyList_ = new pbc::RepeatedField<global::NFMsg.RecordString>();
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public pbc::RepeatedField<global::NFMsg.RecordString> property_list {
+    public pbc::RepeatedField<global::NFMsg.RecordString> PropertyList {
       get { return propertyList_; }
     }
 
@@ -4531,8 +4531,8 @@ namespace NFMsg {
       if (ReferenceEquals(other, this)) {
         return true;
       }
-      if (!object.Equals(player_id, other.player_id)) return false;
-      if (record_name != other.record_name) return false;
+      if (!object.Equals(PlayerId, other.PlayerId)) return false;
+      if (RecordName != other.RecordName) return false;
       if(!propertyList_.Equals(other.propertyList_)) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
@@ -4540,8 +4540,8 @@ namespace NFMsg {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override int GetHashCode() {
       int hash = 1;
-      if (playerId_ != null) hash ^= player_id.GetHashCode();
-      if (record_name.Length != 0) hash ^= record_name.GetHashCode();
+      if (playerId_ != null) hash ^= PlayerId.GetHashCode();
+      if (RecordName.Length != 0) hash ^= RecordName.GetHashCode();
       hash ^= propertyList_.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
@@ -4558,11 +4558,11 @@ namespace NFMsg {
     public void WriteTo(pb::CodedOutputStream output) {
       if (playerId_ != null) {
         output.WriteRawTag(10);
-        output.WriteMessage(player_id);
+        output.WriteMessage(PlayerId);
       }
-      if (record_name.Length != 0) {
+      if (RecordName.Length != 0) {
         output.WriteRawTag(18);
-        output.WriteBytes(record_name);
+        output.WriteBytes(RecordName);
       }
       propertyList_.WriteTo(output, _repeated_propertyList_codec);
       if (_unknownFields != null) {
@@ -4574,10 +4574,10 @@ namespace NFMsg {
     public int CalculateSize() {
       int size = 0;
       if (playerId_ != null) {
-        size += 1 + pb::CodedOutputStream.ComputeMessageSize(player_id);
+        size += 1 + pb::CodedOutputStream.ComputeMessageSize(PlayerId);
       }
-      if (record_name.Length != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeBytesSize(record_name);
+      if (RecordName.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeBytesSize(RecordName);
       }
       size += propertyList_.CalculateSize(_repeated_propertyList_codec);
       if (_unknownFields != null) {
@@ -4593,12 +4593,12 @@ namespace NFMsg {
       }
       if (other.playerId_ != null) {
         if (playerId_ == null) {
-          playerId_ = new global::NFMsg.Ident();
+          PlayerId = new global::NFMsg.Ident();
         }
-        player_id.MergeFrom(other.player_id);
+        PlayerId.MergeFrom(other.PlayerId);
       }
-      if (other.record_name.Length != 0) {
-        record_name = other.record_name;
+      if (other.RecordName.Length != 0) {
+        RecordName = other.RecordName;
       }
       propertyList_.Add(other.propertyList_);
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
@@ -4614,13 +4614,13 @@ namespace NFMsg {
             break;
           case 10: {
             if (playerId_ == null) {
-              playerId_ = new global::NFMsg.Ident();
+              PlayerId = new global::NFMsg.Ident();
             }
-            input.ReadMessage(playerId_);
+            input.ReadMessage(PlayerId);
             break;
           }
           case 18: {
-            record_name = input.ReadBytes();
+            RecordName = input.ReadBytes();
             break;
           }
           case 26: {
@@ -4670,10 +4670,10 @@ namespace NFMsg {
     }
 
     /// <summary>Field number for the "player_id" field.</summary>
-    public const int player_idFieldNumber = 1;
+    public const int PlayerIdFieldNumber = 1;
     private global::NFMsg.Ident playerId_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public global::NFMsg.Ident player_id {
+    public global::NFMsg.Ident PlayerId {
       get { return playerId_; }
       set {
         playerId_ = value;
@@ -4681,10 +4681,10 @@ namespace NFMsg {
     }
 
     /// <summary>Field number for the "record_name" field.</summary>
-    public const int record_nameFieldNumber = 2;
+    public const int RecordNameFieldNumber = 2;
     private pb::ByteString recordName_ = pb::ByteString.Empty;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public pb::ByteString record_name {
+    public pb::ByteString RecordName {
       get { return recordName_; }
       set {
         recordName_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
@@ -4692,12 +4692,12 @@ namespace NFMsg {
     }
 
     /// <summary>Field number for the "property_list" field.</summary>
-    public const int property_listFieldNumber = 3;
+    public const int PropertyListFieldNumber = 3;
     private static readonly pb::FieldCodec<global::NFMsg.RecordObject> _repeated_propertyList_codec
         = pb::FieldCodec.ForMessage(26, global::NFMsg.RecordObject.Parser);
     private readonly pbc::RepeatedField<global::NFMsg.RecordObject> propertyList_ = new pbc::RepeatedField<global::NFMsg.RecordObject>();
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public pbc::RepeatedField<global::NFMsg.RecordObject> property_list {
+    public pbc::RepeatedField<global::NFMsg.RecordObject> PropertyList {
       get { return propertyList_; }
     }
 
@@ -4714,8 +4714,8 @@ namespace NFMsg {
       if (ReferenceEquals(other, this)) {
         return true;
       }
-      if (!object.Equals(player_id, other.player_id)) return false;
-      if (record_name != other.record_name) return false;
+      if (!object.Equals(PlayerId, other.PlayerId)) return false;
+      if (RecordName != other.RecordName) return false;
       if(!propertyList_.Equals(other.propertyList_)) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
@@ -4723,8 +4723,8 @@ namespace NFMsg {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override int GetHashCode() {
       int hash = 1;
-      if (playerId_ != null) hash ^= player_id.GetHashCode();
-      if (record_name.Length != 0) hash ^= record_name.GetHashCode();
+      if (playerId_ != null) hash ^= PlayerId.GetHashCode();
+      if (RecordName.Length != 0) hash ^= RecordName.GetHashCode();
       hash ^= propertyList_.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
@@ -4741,11 +4741,11 @@ namespace NFMsg {
     public void WriteTo(pb::CodedOutputStream output) {
       if (playerId_ != null) {
         output.WriteRawTag(10);
-        output.WriteMessage(player_id);
+        output.WriteMessage(PlayerId);
       }
-      if (record_name.Length != 0) {
+      if (RecordName.Length != 0) {
         output.WriteRawTag(18);
-        output.WriteBytes(record_name);
+        output.WriteBytes(RecordName);
       }
       propertyList_.WriteTo(output, _repeated_propertyList_codec);
       if (_unknownFields != null) {
@@ -4757,10 +4757,10 @@ namespace NFMsg {
     public int CalculateSize() {
       int size = 0;
       if (playerId_ != null) {
-        size += 1 + pb::CodedOutputStream.ComputeMessageSize(player_id);
+        size += 1 + pb::CodedOutputStream.ComputeMessageSize(PlayerId);
       }
-      if (record_name.Length != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeBytesSize(record_name);
+      if (RecordName.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeBytesSize(RecordName);
       }
       size += propertyList_.CalculateSize(_repeated_propertyList_codec);
       if (_unknownFields != null) {
@@ -4776,12 +4776,12 @@ namespace NFMsg {
       }
       if (other.playerId_ != null) {
         if (playerId_ == null) {
-          playerId_ = new global::NFMsg.Ident();
+          PlayerId = new global::NFMsg.Ident();
         }
-        player_id.MergeFrom(other.player_id);
+        PlayerId.MergeFrom(other.PlayerId);
       }
-      if (other.record_name.Length != 0) {
-        record_name = other.record_name;
+      if (other.RecordName.Length != 0) {
+        RecordName = other.RecordName;
       }
       propertyList_.Add(other.propertyList_);
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
@@ -4797,13 +4797,13 @@ namespace NFMsg {
             break;
           case 10: {
             if (playerId_ == null) {
-              playerId_ = new global::NFMsg.Ident();
+              PlayerId = new global::NFMsg.Ident();
             }
-            input.ReadMessage(playerId_);
+            input.ReadMessage(PlayerId);
             break;
           }
           case 18: {
-            record_name = input.ReadBytes();
+            RecordName = input.ReadBytes();
             break;
           }
           case 26: {
@@ -4853,10 +4853,10 @@ namespace NFMsg {
     }
 
     /// <summary>Field number for the "player_id" field.</summary>
-    public const int player_idFieldNumber = 1;
+    public const int PlayerIdFieldNumber = 1;
     private global::NFMsg.Ident playerId_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public global::NFMsg.Ident player_id {
+    public global::NFMsg.Ident PlayerId {
       get { return playerId_; }
       set {
         playerId_ = value;
@@ -4864,10 +4864,10 @@ namespace NFMsg {
     }
 
     /// <summary>Field number for the "record_name" field.</summary>
-    public const int record_nameFieldNumber = 2;
+    public const int RecordNameFieldNumber = 2;
     private pb::ByteString recordName_ = pb::ByteString.Empty;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public pb::ByteString record_name {
+    public pb::ByteString RecordName {
       get { return recordName_; }
       set {
         recordName_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
@@ -4875,12 +4875,12 @@ namespace NFMsg {
     }
 
     /// <summary>Field number for the "property_list" field.</summary>
-    public const int property_listFieldNumber = 3;
+    public const int PropertyListFieldNumber = 3;
     private static readonly pb::FieldCodec<global::NFMsg.RecordVector2> _repeated_propertyList_codec
         = pb::FieldCodec.ForMessage(26, global::NFMsg.RecordVector2.Parser);
     private readonly pbc::RepeatedField<global::NFMsg.RecordVector2> propertyList_ = new pbc::RepeatedField<global::NFMsg.RecordVector2>();
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public pbc::RepeatedField<global::NFMsg.RecordVector2> property_list {
+    public pbc::RepeatedField<global::NFMsg.RecordVector2> PropertyList {
       get { return propertyList_; }
     }
 
@@ -4897,8 +4897,8 @@ namespace NFMsg {
       if (ReferenceEquals(other, this)) {
         return true;
       }
-      if (!object.Equals(player_id, other.player_id)) return false;
-      if (record_name != other.record_name) return false;
+      if (!object.Equals(PlayerId, other.PlayerId)) return false;
+      if (RecordName != other.RecordName) return false;
       if(!propertyList_.Equals(other.propertyList_)) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
@@ -4906,8 +4906,8 @@ namespace NFMsg {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override int GetHashCode() {
       int hash = 1;
-      if (playerId_ != null) hash ^= player_id.GetHashCode();
-      if (record_name.Length != 0) hash ^= record_name.GetHashCode();
+      if (playerId_ != null) hash ^= PlayerId.GetHashCode();
+      if (RecordName.Length != 0) hash ^= RecordName.GetHashCode();
       hash ^= propertyList_.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
@@ -4924,11 +4924,11 @@ namespace NFMsg {
     public void WriteTo(pb::CodedOutputStream output) {
       if (playerId_ != null) {
         output.WriteRawTag(10);
-        output.WriteMessage(player_id);
+        output.WriteMessage(PlayerId);
       }
-      if (record_name.Length != 0) {
+      if (RecordName.Length != 0) {
         output.WriteRawTag(18);
-        output.WriteBytes(record_name);
+        output.WriteBytes(RecordName);
       }
       propertyList_.WriteTo(output, _repeated_propertyList_codec);
       if (_unknownFields != null) {
@@ -4940,10 +4940,10 @@ namespace NFMsg {
     public int CalculateSize() {
       int size = 0;
       if (playerId_ != null) {
-        size += 1 + pb::CodedOutputStream.ComputeMessageSize(player_id);
+        size += 1 + pb::CodedOutputStream.ComputeMessageSize(PlayerId);
       }
-      if (record_name.Length != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeBytesSize(record_name);
+      if (RecordName.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeBytesSize(RecordName);
       }
       size += propertyList_.CalculateSize(_repeated_propertyList_codec);
       if (_unknownFields != null) {
@@ -4959,12 +4959,12 @@ namespace NFMsg {
       }
       if (other.playerId_ != null) {
         if (playerId_ == null) {
-          playerId_ = new global::NFMsg.Ident();
+          PlayerId = new global::NFMsg.Ident();
         }
-        player_id.MergeFrom(other.player_id);
+        PlayerId.MergeFrom(other.PlayerId);
       }
-      if (other.record_name.Length != 0) {
-        record_name = other.record_name;
+      if (other.RecordName.Length != 0) {
+        RecordName = other.RecordName;
       }
       propertyList_.Add(other.propertyList_);
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
@@ -4980,13 +4980,13 @@ namespace NFMsg {
             break;
           case 10: {
             if (playerId_ == null) {
-              playerId_ = new global::NFMsg.Ident();
+              PlayerId = new global::NFMsg.Ident();
             }
-            input.ReadMessage(playerId_);
+            input.ReadMessage(PlayerId);
             break;
           }
           case 18: {
-            record_name = input.ReadBytes();
+            RecordName = input.ReadBytes();
             break;
           }
           case 26: {
@@ -5036,10 +5036,10 @@ namespace NFMsg {
     }
 
     /// <summary>Field number for the "player_id" field.</summary>
-    public const int player_idFieldNumber = 1;
+    public const int PlayerIdFieldNumber = 1;
     private global::NFMsg.Ident playerId_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public global::NFMsg.Ident player_id {
+    public global::NFMsg.Ident PlayerId {
       get { return playerId_; }
       set {
         playerId_ = value;
@@ -5047,10 +5047,10 @@ namespace NFMsg {
     }
 
     /// <summary>Field number for the "record_name" field.</summary>
-    public const int record_nameFieldNumber = 2;
+    public const int RecordNameFieldNumber = 2;
     private pb::ByteString recordName_ = pb::ByteString.Empty;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public pb::ByteString record_name {
+    public pb::ByteString RecordName {
       get { return recordName_; }
       set {
         recordName_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
@@ -5058,12 +5058,12 @@ namespace NFMsg {
     }
 
     /// <summary>Field number for the "property_list" field.</summary>
-    public const int property_listFieldNumber = 3;
+    public const int PropertyListFieldNumber = 3;
     private static readonly pb::FieldCodec<global::NFMsg.RecordVector3> _repeated_propertyList_codec
         = pb::FieldCodec.ForMessage(26, global::NFMsg.RecordVector3.Parser);
     private readonly pbc::RepeatedField<global::NFMsg.RecordVector3> propertyList_ = new pbc::RepeatedField<global::NFMsg.RecordVector3>();
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public pbc::RepeatedField<global::NFMsg.RecordVector3> property_list {
+    public pbc::RepeatedField<global::NFMsg.RecordVector3> PropertyList {
       get { return propertyList_; }
     }
 
@@ -5080,8 +5080,8 @@ namespace NFMsg {
       if (ReferenceEquals(other, this)) {
         return true;
       }
-      if (!object.Equals(player_id, other.player_id)) return false;
-      if (record_name != other.record_name) return false;
+      if (!object.Equals(PlayerId, other.PlayerId)) return false;
+      if (RecordName != other.RecordName) return false;
       if(!propertyList_.Equals(other.propertyList_)) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
@@ -5089,8 +5089,8 @@ namespace NFMsg {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override int GetHashCode() {
       int hash = 1;
-      if (playerId_ != null) hash ^= player_id.GetHashCode();
-      if (record_name.Length != 0) hash ^= record_name.GetHashCode();
+      if (playerId_ != null) hash ^= PlayerId.GetHashCode();
+      if (RecordName.Length != 0) hash ^= RecordName.GetHashCode();
       hash ^= propertyList_.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
@@ -5107,11 +5107,11 @@ namespace NFMsg {
     public void WriteTo(pb::CodedOutputStream output) {
       if (playerId_ != null) {
         output.WriteRawTag(10);
-        output.WriteMessage(player_id);
+        output.WriteMessage(PlayerId);
       }
-      if (record_name.Length != 0) {
+      if (RecordName.Length != 0) {
         output.WriteRawTag(18);
-        output.WriteBytes(record_name);
+        output.WriteBytes(RecordName);
       }
       propertyList_.WriteTo(output, _repeated_propertyList_codec);
       if (_unknownFields != null) {
@@ -5123,10 +5123,10 @@ namespace NFMsg {
     public int CalculateSize() {
       int size = 0;
       if (playerId_ != null) {
-        size += 1 + pb::CodedOutputStream.ComputeMessageSize(player_id);
+        size += 1 + pb::CodedOutputStream.ComputeMessageSize(PlayerId);
       }
-      if (record_name.Length != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeBytesSize(record_name);
+      if (RecordName.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeBytesSize(RecordName);
       }
       size += propertyList_.CalculateSize(_repeated_propertyList_codec);
       if (_unknownFields != null) {
@@ -5142,12 +5142,12 @@ namespace NFMsg {
       }
       if (other.playerId_ != null) {
         if (playerId_ == null) {
-          playerId_ = new global::NFMsg.Ident();
+          PlayerId = new global::NFMsg.Ident();
         }
-        player_id.MergeFrom(other.player_id);
+        PlayerId.MergeFrom(other.PlayerId);
       }
-      if (other.record_name.Length != 0) {
-        record_name = other.record_name;
+      if (other.RecordName.Length != 0) {
+        RecordName = other.RecordName;
       }
       propertyList_.Add(other.propertyList_);
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
@@ -5163,13 +5163,13 @@ namespace NFMsg {
             break;
           case 10: {
             if (playerId_ == null) {
-              playerId_ = new global::NFMsg.Ident();
+              PlayerId = new global::NFMsg.Ident();
             }
-            input.ReadMessage(playerId_);
+            input.ReadMessage(PlayerId);
             break;
           }
           case 18: {
-            record_name = input.ReadBytes();
+            RecordName = input.ReadBytes();
             break;
           }
           case 26: {
@@ -5221,10 +5221,10 @@ namespace NFMsg {
     }
 
     /// <summary>Field number for the "player_id" field.</summary>
-    public const int player_idFieldNumber = 1;
+    public const int PlayerIdFieldNumber = 1;
     private global::NFMsg.Ident playerId_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public global::NFMsg.Ident player_id {
+    public global::NFMsg.Ident PlayerId {
       get { return playerId_; }
       set {
         playerId_ = value;
@@ -5232,10 +5232,10 @@ namespace NFMsg {
     }
 
     /// <summary>Field number for the "origin_record_name" field.</summary>
-    public const int origin_record_nameFieldNumber = 2;
+    public const int OriginRecordNameFieldNumber = 2;
     private pb::ByteString originRecordName_ = pb::ByteString.Empty;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public pb::ByteString origin_record_name {
+    public pb::ByteString OriginRecordName {
       get { return originRecordName_; }
       set {
         originRecordName_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
@@ -5243,10 +5243,10 @@ namespace NFMsg {
     }
 
     /// <summary>Field number for the "target_record_name" field.</summary>
-    public const int target_record_nameFieldNumber = 3;
+    public const int TargetRecordNameFieldNumber = 3;
     private pb::ByteString targetRecordName_ = pb::ByteString.Empty;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public pb::ByteString target_record_name {
+    public pb::ByteString TargetRecordName {
       get { return targetRecordName_; }
       set {
         targetRecordName_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
@@ -5254,10 +5254,10 @@ namespace NFMsg {
     }
 
     /// <summary>Field number for the "row_origin" field.</summary>
-    public const int row_originFieldNumber = 4;
+    public const int RowOriginFieldNumber = 4;
     private int rowOrigin_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public int row_origin {
+    public int RowOrigin {
       get { return rowOrigin_; }
       set {
         rowOrigin_ = value;
@@ -5265,10 +5265,10 @@ namespace NFMsg {
     }
 
     /// <summary>Field number for the "row_target" field.</summary>
-    public const int row_targetFieldNumber = 5;
+    public const int RowTargetFieldNumber = 5;
     private int rowTarget_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public int row_target {
+    public int RowTarget {
       get { return rowTarget_; }
       set {
         rowTarget_ = value;
@@ -5288,22 +5288,22 @@ namespace NFMsg {
       if (ReferenceEquals(other, this)) {
         return true;
       }
-      if (!object.Equals(player_id, other.player_id)) return false;
-      if (origin_record_name != other.origin_record_name) return false;
-      if (target_record_name != other.target_record_name) return false;
-      if (row_origin != other.row_origin) return false;
-      if (row_target != other.row_target) return false;
+      if (!object.Equals(PlayerId, other.PlayerId)) return false;
+      if (OriginRecordName != other.OriginRecordName) return false;
+      if (TargetRecordName != other.TargetRecordName) return false;
+      if (RowOrigin != other.RowOrigin) return false;
+      if (RowTarget != other.RowTarget) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override int GetHashCode() {
       int hash = 1;
-      if (playerId_ != null) hash ^= player_id.GetHashCode();
-      if (origin_record_name.Length != 0) hash ^= origin_record_name.GetHashCode();
-      if (target_record_name.Length != 0) hash ^= target_record_name.GetHashCode();
-      if (row_origin != 0) hash ^= row_origin.GetHashCode();
-      if (row_target != 0) hash ^= row_target.GetHashCode();
+      if (playerId_ != null) hash ^= PlayerId.GetHashCode();
+      if (OriginRecordName.Length != 0) hash ^= OriginRecordName.GetHashCode();
+      if (TargetRecordName.Length != 0) hash ^= TargetRecordName.GetHashCode();
+      if (RowOrigin != 0) hash ^= RowOrigin.GetHashCode();
+      if (RowTarget != 0) hash ^= RowTarget.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -5319,23 +5319,23 @@ namespace NFMsg {
     public void WriteTo(pb::CodedOutputStream output) {
       if (playerId_ != null) {
         output.WriteRawTag(10);
-        output.WriteMessage(player_id);
+        output.WriteMessage(PlayerId);
       }
-      if (origin_record_name.Length != 0) {
+      if (OriginRecordName.Length != 0) {
         output.WriteRawTag(18);
-        output.WriteBytes(origin_record_name);
+        output.WriteBytes(OriginRecordName);
       }
-      if (target_record_name.Length != 0) {
+      if (TargetRecordName.Length != 0) {
         output.WriteRawTag(26);
-        output.WriteBytes(target_record_name);
+        output.WriteBytes(TargetRecordName);
       }
-      if (row_origin != 0) {
+      if (RowOrigin != 0) {
         output.WriteRawTag(32);
-        output.WriteInt32(row_origin);
+        output.WriteInt32(RowOrigin);
       }
-      if (row_target != 0) {
+      if (RowTarget != 0) {
         output.WriteRawTag(40);
-        output.WriteInt32(row_target);
+        output.WriteInt32(RowTarget);
       }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
@@ -5346,19 +5346,19 @@ namespace NFMsg {
     public int CalculateSize() {
       int size = 0;
       if (playerId_ != null) {
-        size += 1 + pb::CodedOutputStream.ComputeMessageSize(player_id);
+        size += 1 + pb::CodedOutputStream.ComputeMessageSize(PlayerId);
       }
-      if (origin_record_name.Length != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeBytesSize(origin_record_name);
+      if (OriginRecordName.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeBytesSize(OriginRecordName);
       }
-      if (target_record_name.Length != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeBytesSize(target_record_name);
+      if (TargetRecordName.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeBytesSize(TargetRecordName);
       }
-      if (row_origin != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeInt32Size(row_origin);
+      if (RowOrigin != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(RowOrigin);
       }
-      if (row_target != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeInt32Size(row_target);
+      if (RowTarget != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(RowTarget);
       }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
@@ -5373,21 +5373,21 @@ namespace NFMsg {
       }
       if (other.playerId_ != null) {
         if (playerId_ == null) {
-          playerId_ = new global::NFMsg.Ident();
+          PlayerId = new global::NFMsg.Ident();
         }
-        player_id.MergeFrom(other.player_id);
+        PlayerId.MergeFrom(other.PlayerId);
       }
-      if (other.origin_record_name.Length != 0) {
-        origin_record_name = other.origin_record_name;
+      if (other.OriginRecordName.Length != 0) {
+        OriginRecordName = other.OriginRecordName;
       }
-      if (other.target_record_name.Length != 0) {
-        target_record_name = other.target_record_name;
+      if (other.TargetRecordName.Length != 0) {
+        TargetRecordName = other.TargetRecordName;
       }
-      if (other.row_origin != 0) {
-        row_origin = other.row_origin;
+      if (other.RowOrigin != 0) {
+        RowOrigin = other.RowOrigin;
       }
-      if (other.row_target != 0) {
-        row_target = other.row_target;
+      if (other.RowTarget != 0) {
+        RowTarget = other.RowTarget;
       }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
@@ -5402,25 +5402,25 @@ namespace NFMsg {
             break;
           case 10: {
             if (playerId_ == null) {
-              playerId_ = new global::NFMsg.Ident();
+              PlayerId = new global::NFMsg.Ident();
             }
-            input.ReadMessage(playerId_);
+            input.ReadMessage(PlayerId);
             break;
           }
           case 18: {
-            origin_record_name = input.ReadBytes();
+            OriginRecordName = input.ReadBytes();
             break;
           }
           case 26: {
-            target_record_name = input.ReadBytes();
+            TargetRecordName = input.ReadBytes();
             break;
           }
           case 32: {
-            row_origin = input.ReadInt32();
+            RowOrigin = input.ReadInt32();
             break;
           }
           case 40: {
-            row_target = input.ReadInt32();
+            RowTarget = input.ReadInt32();
             break;
           }
         }
@@ -5466,10 +5466,10 @@ namespace NFMsg {
     }
 
     /// <summary>Field number for the "player_id" field.</summary>
-    public const int player_idFieldNumber = 1;
+    public const int PlayerIdFieldNumber = 1;
     private global::NFMsg.Ident playerId_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public global::NFMsg.Ident player_id {
+    public global::NFMsg.Ident PlayerId {
       get { return playerId_; }
       set {
         playerId_ = value;
@@ -5477,10 +5477,10 @@ namespace NFMsg {
     }
 
     /// <summary>Field number for the "record_name" field.</summary>
-    public const int record_nameFieldNumber = 2;
+    public const int RecordNameFieldNumber = 2;
     private pb::ByteString recordName_ = pb::ByteString.Empty;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public pb::ByteString record_name {
+    public pb::ByteString RecordName {
       get { return recordName_; }
       set {
         recordName_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
@@ -5488,12 +5488,12 @@ namespace NFMsg {
     }
 
     /// <summary>Field number for the "row_data" field.</summary>
-    public const int row_dataFieldNumber = 3;
+    public const int RowDataFieldNumber = 3;
     private static readonly pb::FieldCodec<global::NFMsg.RecordAddRowStruct> _repeated_rowData_codec
         = pb::FieldCodec.ForMessage(26, global::NFMsg.RecordAddRowStruct.Parser);
     private readonly pbc::RepeatedField<global::NFMsg.RecordAddRowStruct> rowData_ = new pbc::RepeatedField<global::NFMsg.RecordAddRowStruct>();
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public pbc::RepeatedField<global::NFMsg.RecordAddRowStruct> row_data {
+    public pbc::RepeatedField<global::NFMsg.RecordAddRowStruct> RowData {
       get { return rowData_; }
     }
 
@@ -5510,8 +5510,8 @@ namespace NFMsg {
       if (ReferenceEquals(other, this)) {
         return true;
       }
-      if (!object.Equals(player_id, other.player_id)) return false;
-      if (record_name != other.record_name) return false;
+      if (!object.Equals(PlayerId, other.PlayerId)) return false;
+      if (RecordName != other.RecordName) return false;
       if(!rowData_.Equals(other.rowData_)) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
@@ -5519,8 +5519,8 @@ namespace NFMsg {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override int GetHashCode() {
       int hash = 1;
-      if (playerId_ != null) hash ^= player_id.GetHashCode();
-      if (record_name.Length != 0) hash ^= record_name.GetHashCode();
+      if (playerId_ != null) hash ^= PlayerId.GetHashCode();
+      if (RecordName.Length != 0) hash ^= RecordName.GetHashCode();
       hash ^= rowData_.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
@@ -5537,11 +5537,11 @@ namespace NFMsg {
     public void WriteTo(pb::CodedOutputStream output) {
       if (playerId_ != null) {
         output.WriteRawTag(10);
-        output.WriteMessage(player_id);
+        output.WriteMessage(PlayerId);
       }
-      if (record_name.Length != 0) {
+      if (RecordName.Length != 0) {
         output.WriteRawTag(18);
-        output.WriteBytes(record_name);
+        output.WriteBytes(RecordName);
       }
       rowData_.WriteTo(output, _repeated_rowData_codec);
       if (_unknownFields != null) {
@@ -5553,10 +5553,10 @@ namespace NFMsg {
     public int CalculateSize() {
       int size = 0;
       if (playerId_ != null) {
-        size += 1 + pb::CodedOutputStream.ComputeMessageSize(player_id);
+        size += 1 + pb::CodedOutputStream.ComputeMessageSize(PlayerId);
       }
-      if (record_name.Length != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeBytesSize(record_name);
+      if (RecordName.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeBytesSize(RecordName);
       }
       size += rowData_.CalculateSize(_repeated_rowData_codec);
       if (_unknownFields != null) {
@@ -5572,12 +5572,12 @@ namespace NFMsg {
       }
       if (other.playerId_ != null) {
         if (playerId_ == null) {
-          playerId_ = new global::NFMsg.Ident();
+          PlayerId = new global::NFMsg.Ident();
         }
-        player_id.MergeFrom(other.player_id);
+        PlayerId.MergeFrom(other.PlayerId);
       }
-      if (other.record_name.Length != 0) {
-        record_name = other.record_name;
+      if (other.RecordName.Length != 0) {
+        RecordName = other.RecordName;
       }
       rowData_.Add(other.rowData_);
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
@@ -5593,13 +5593,13 @@ namespace NFMsg {
             break;
           case 10: {
             if (playerId_ == null) {
-              playerId_ = new global::NFMsg.Ident();
+              PlayerId = new global::NFMsg.Ident();
             }
-            input.ReadMessage(playerId_);
+            input.ReadMessage(PlayerId);
             break;
           }
           case 18: {
-            record_name = input.ReadBytes();
+            RecordName = input.ReadBytes();
             break;
           }
           case 26: {
@@ -5649,10 +5649,10 @@ namespace NFMsg {
     }
 
     /// <summary>Field number for the "player_id" field.</summary>
-    public const int player_idFieldNumber = 1;
+    public const int PlayerIdFieldNumber = 1;
     private global::NFMsg.Ident playerId_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public global::NFMsg.Ident player_id {
+    public global::NFMsg.Ident PlayerId {
       get { return playerId_; }
       set {
         playerId_ = value;
@@ -5660,10 +5660,10 @@ namespace NFMsg {
     }
 
     /// <summary>Field number for the "record_name" field.</summary>
-    public const int record_nameFieldNumber = 2;
+    public const int RecordNameFieldNumber = 2;
     private pb::ByteString recordName_ = pb::ByteString.Empty;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public pb::ByteString record_name {
+    public pb::ByteString RecordName {
       get { return recordName_; }
       set {
         recordName_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
@@ -5671,12 +5671,12 @@ namespace NFMsg {
     }
 
     /// <summary>Field number for the "remove_row" field.</summary>
-    public const int remove_rowFieldNumber = 3;
+    public const int RemoveRowFieldNumber = 3;
     private static readonly pb::FieldCodec<int> _repeated_removeRow_codec
         = pb::FieldCodec.ForInt32(26);
     private readonly pbc::RepeatedField<int> removeRow_ = new pbc::RepeatedField<int>();
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public pbc::RepeatedField<int> remove_row {
+    public pbc::RepeatedField<int> RemoveRow {
       get { return removeRow_; }
     }
 
@@ -5693,8 +5693,8 @@ namespace NFMsg {
       if (ReferenceEquals(other, this)) {
         return true;
       }
-      if (!object.Equals(player_id, other.player_id)) return false;
-      if (record_name != other.record_name) return false;
+      if (!object.Equals(PlayerId, other.PlayerId)) return false;
+      if (RecordName != other.RecordName) return false;
       if(!removeRow_.Equals(other.removeRow_)) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
@@ -5702,8 +5702,8 @@ namespace NFMsg {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override int GetHashCode() {
       int hash = 1;
-      if (playerId_ != null) hash ^= player_id.GetHashCode();
-      if (record_name.Length != 0) hash ^= record_name.GetHashCode();
+      if (playerId_ != null) hash ^= PlayerId.GetHashCode();
+      if (RecordName.Length != 0) hash ^= RecordName.GetHashCode();
       hash ^= removeRow_.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
@@ -5720,11 +5720,11 @@ namespace NFMsg {
     public void WriteTo(pb::CodedOutputStream output) {
       if (playerId_ != null) {
         output.WriteRawTag(10);
-        output.WriteMessage(player_id);
+        output.WriteMessage(PlayerId);
       }
-      if (record_name.Length != 0) {
+      if (RecordName.Length != 0) {
         output.WriteRawTag(18);
-        output.WriteBytes(record_name);
+        output.WriteBytes(RecordName);
       }
       removeRow_.WriteTo(output, _repeated_removeRow_codec);
       if (_unknownFields != null) {
@@ -5736,10 +5736,10 @@ namespace NFMsg {
     public int CalculateSize() {
       int size = 0;
       if (playerId_ != null) {
-        size += 1 + pb::CodedOutputStream.ComputeMessageSize(player_id);
+        size += 1 + pb::CodedOutputStream.ComputeMessageSize(PlayerId);
       }
-      if (record_name.Length != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeBytesSize(record_name);
+      if (RecordName.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeBytesSize(RecordName);
       }
       size += removeRow_.CalculateSize(_repeated_removeRow_codec);
       if (_unknownFields != null) {
@@ -5755,12 +5755,12 @@ namespace NFMsg {
       }
       if (other.playerId_ != null) {
         if (playerId_ == null) {
-          playerId_ = new global::NFMsg.Ident();
+          PlayerId = new global::NFMsg.Ident();
         }
-        player_id.MergeFrom(other.player_id);
+        PlayerId.MergeFrom(other.PlayerId);
       }
-      if (other.record_name.Length != 0) {
-        record_name = other.record_name;
+      if (other.RecordName.Length != 0) {
+        RecordName = other.RecordName;
       }
       removeRow_.Add(other.removeRow_);
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
@@ -5776,13 +5776,13 @@ namespace NFMsg {
             break;
           case 10: {
             if (playerId_ == null) {
-              playerId_ = new global::NFMsg.Ident();
+              PlayerId = new global::NFMsg.Ident();
             }
-            input.ReadMessage(playerId_);
+            input.ReadMessage(PlayerId);
             break;
           }
           case 18: {
-            record_name = input.ReadBytes();
+            RecordName = input.ReadBytes();
             break;
           }
           case 26:
@@ -5837,10 +5837,10 @@ namespace NFMsg {
     }
 
     /// <summary>Field number for the "player_id" field.</summary>
-    public const int player_idFieldNumber = 1;
+    public const int PlayerIdFieldNumber = 1;
     private global::NFMsg.Ident playerId_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public global::NFMsg.Ident player_id {
+    public global::NFMsg.Ident PlayerId {
       get { return playerId_; }
       set {
         playerId_ = value;
@@ -5848,62 +5848,62 @@ namespace NFMsg {
     }
 
     /// <summary>Field number for the "property_int_list" field.</summary>
-    public const int property_int_listFieldNumber = 2;
+    public const int PropertyIntListFieldNumber = 2;
     private static readonly pb::FieldCodec<global::NFMsg.PropertyInt> _repeated_propertyIntList_codec
         = pb::FieldCodec.ForMessage(18, global::NFMsg.PropertyInt.Parser);
     private readonly pbc::RepeatedField<global::NFMsg.PropertyInt> propertyIntList_ = new pbc::RepeatedField<global::NFMsg.PropertyInt>();
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public pbc::RepeatedField<global::NFMsg.PropertyInt> property_int_list {
+    public pbc::RepeatedField<global::NFMsg.PropertyInt> PropertyIntList {
       get { return propertyIntList_; }
     }
 
     /// <summary>Field number for the "property_float_list" field.</summary>
-    public const int property_float_listFieldNumber = 3;
+    public const int PropertyFloatListFieldNumber = 3;
     private static readonly pb::FieldCodec<global::NFMsg.PropertyFloat> _repeated_propertyFloatList_codec
         = pb::FieldCodec.ForMessage(26, global::NFMsg.PropertyFloat.Parser);
     private readonly pbc::RepeatedField<global::NFMsg.PropertyFloat> propertyFloatList_ = new pbc::RepeatedField<global::NFMsg.PropertyFloat>();
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public pbc::RepeatedField<global::NFMsg.PropertyFloat> property_float_list {
+    public pbc::RepeatedField<global::NFMsg.PropertyFloat> PropertyFloatList {
       get { return propertyFloatList_; }
     }
 
     /// <summary>Field number for the "property_string_list" field.</summary>
-    public const int property_string_listFieldNumber = 4;
+    public const int PropertyStringListFieldNumber = 4;
     private static readonly pb::FieldCodec<global::NFMsg.PropertyString> _repeated_propertyStringList_codec
         = pb::FieldCodec.ForMessage(34, global::NFMsg.PropertyString.Parser);
     private readonly pbc::RepeatedField<global::NFMsg.PropertyString> propertyStringList_ = new pbc::RepeatedField<global::NFMsg.PropertyString>();
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public pbc::RepeatedField<global::NFMsg.PropertyString> property_string_list {
+    public pbc::RepeatedField<global::NFMsg.PropertyString> PropertyStringList {
       get { return propertyStringList_; }
     }
 
     /// <summary>Field number for the "property_object_list" field.</summary>
-    public const int property_object_listFieldNumber = 5;
+    public const int PropertyObjectListFieldNumber = 5;
     private static readonly pb::FieldCodec<global::NFMsg.PropertyObject> _repeated_propertyObjectList_codec
         = pb::FieldCodec.ForMessage(42, global::NFMsg.PropertyObject.Parser);
     private readonly pbc::RepeatedField<global::NFMsg.PropertyObject> propertyObjectList_ = new pbc::RepeatedField<global::NFMsg.PropertyObject>();
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public pbc::RepeatedField<global::NFMsg.PropertyObject> property_object_list {
+    public pbc::RepeatedField<global::NFMsg.PropertyObject> PropertyObjectList {
       get { return propertyObjectList_; }
     }
 
     /// <summary>Field number for the "property_vector2_list" field.</summary>
-    public const int property_vector2_listFieldNumber = 6;
+    public const int PropertyVector2ListFieldNumber = 6;
     private static readonly pb::FieldCodec<global::NFMsg.PropertyVector2> _repeated_propertyVector2List_codec
         = pb::FieldCodec.ForMessage(50, global::NFMsg.PropertyVector2.Parser);
     private readonly pbc::RepeatedField<global::NFMsg.PropertyVector2> propertyVector2List_ = new pbc::RepeatedField<global::NFMsg.PropertyVector2>();
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public pbc::RepeatedField<global::NFMsg.PropertyVector2> property_vector2_list {
+    public pbc::RepeatedField<global::NFMsg.PropertyVector2> PropertyVector2List {
       get { return propertyVector2List_; }
     }
 
     /// <summary>Field number for the "property_vector3_list" field.</summary>
-    public const int property_vector3_listFieldNumber = 7;
+    public const int PropertyVector3ListFieldNumber = 7;
     private static readonly pb::FieldCodec<global::NFMsg.PropertyVector3> _repeated_propertyVector3List_codec
         = pb::FieldCodec.ForMessage(58, global::NFMsg.PropertyVector3.Parser);
     private readonly pbc::RepeatedField<global::NFMsg.PropertyVector3> propertyVector3List_ = new pbc::RepeatedField<global::NFMsg.PropertyVector3>();
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public pbc::RepeatedField<global::NFMsg.PropertyVector3> property_vector3_list {
+    public pbc::RepeatedField<global::NFMsg.PropertyVector3> PropertyVector3List {
       get { return propertyVector3List_; }
     }
 
@@ -5920,7 +5920,7 @@ namespace NFMsg {
       if (ReferenceEquals(other, this)) {
         return true;
       }
-      if (!object.Equals(player_id, other.player_id)) return false;
+      if (!object.Equals(PlayerId, other.PlayerId)) return false;
       if(!propertyIntList_.Equals(other.propertyIntList_)) return false;
       if(!propertyFloatList_.Equals(other.propertyFloatList_)) return false;
       if(!propertyStringList_.Equals(other.propertyStringList_)) return false;
@@ -5933,7 +5933,7 @@ namespace NFMsg {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override int GetHashCode() {
       int hash = 1;
-      if (playerId_ != null) hash ^= player_id.GetHashCode();
+      if (playerId_ != null) hash ^= PlayerId.GetHashCode();
       hash ^= propertyIntList_.GetHashCode();
       hash ^= propertyFloatList_.GetHashCode();
       hash ^= propertyStringList_.GetHashCode();
@@ -5955,7 +5955,7 @@ namespace NFMsg {
     public void WriteTo(pb::CodedOutputStream output) {
       if (playerId_ != null) {
         output.WriteRawTag(10);
-        output.WriteMessage(player_id);
+        output.WriteMessage(PlayerId);
       }
       propertyIntList_.WriteTo(output, _repeated_propertyIntList_codec);
       propertyFloatList_.WriteTo(output, _repeated_propertyFloatList_codec);
@@ -5972,7 +5972,7 @@ namespace NFMsg {
     public int CalculateSize() {
       int size = 0;
       if (playerId_ != null) {
-        size += 1 + pb::CodedOutputStream.ComputeMessageSize(player_id);
+        size += 1 + pb::CodedOutputStream.ComputeMessageSize(PlayerId);
       }
       size += propertyIntList_.CalculateSize(_repeated_propertyIntList_codec);
       size += propertyFloatList_.CalculateSize(_repeated_propertyFloatList_codec);
@@ -5993,9 +5993,9 @@ namespace NFMsg {
       }
       if (other.playerId_ != null) {
         if (playerId_ == null) {
-          playerId_ = new global::NFMsg.Ident();
+          PlayerId = new global::NFMsg.Ident();
         }
-        player_id.MergeFrom(other.player_id);
+        PlayerId.MergeFrom(other.PlayerId);
       }
       propertyIntList_.Add(other.propertyIntList_);
       propertyFloatList_.Add(other.propertyFloatList_);
@@ -6016,9 +6016,9 @@ namespace NFMsg {
             break;
           case 10: {
             if (playerId_ == null) {
-              playerId_ = new global::NFMsg.Ident();
+              PlayerId = new global::NFMsg.Ident();
             }
-            input.ReadMessage(playerId_);
+            input.ReadMessage(PlayerId);
             break;
           }
           case 18: {
@@ -6086,12 +6086,12 @@ namespace NFMsg {
     }
 
     /// <summary>Field number for the "multi_player_property" field.</summary>
-    public const int multi_player_propertyFieldNumber = 1;
+    public const int MultiPlayerPropertyFieldNumber = 1;
     private static readonly pb::FieldCodec<global::NFMsg.ObjectPropertyList> _repeated_multiPlayerProperty_codec
         = pb::FieldCodec.ForMessage(10, global::NFMsg.ObjectPropertyList.Parser);
     private readonly pbc::RepeatedField<global::NFMsg.ObjectPropertyList> multiPlayerProperty_ = new pbc::RepeatedField<global::NFMsg.ObjectPropertyList>();
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public pbc::RepeatedField<global::NFMsg.ObjectPropertyList> multi_player_property {
+    public pbc::RepeatedField<global::NFMsg.ObjectPropertyList> MultiPlayerProperty {
       get { return multiPlayerProperty_; }
     }
 
@@ -6208,10 +6208,10 @@ namespace NFMsg {
     }
 
     /// <summary>Field number for the "player_id" field.</summary>
-    public const int player_idFieldNumber = 1;
+    public const int PlayerIdFieldNumber = 1;
     private global::NFMsg.Ident playerId_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public global::NFMsg.Ident player_id {
+    public global::NFMsg.Ident PlayerId {
       get { return playerId_; }
       set {
         playerId_ = value;
@@ -6219,12 +6219,12 @@ namespace NFMsg {
     }
 
     /// <summary>Field number for the "record_list" field.</summary>
-    public const int record_listFieldNumber = 2;
+    public const int RecordListFieldNumber = 2;
     private static readonly pb::FieldCodec<global::NFMsg.ObjectRecordBase> _repeated_recordList_codec
         = pb::FieldCodec.ForMessage(18, global::NFMsg.ObjectRecordBase.Parser);
     private readonly pbc::RepeatedField<global::NFMsg.ObjectRecordBase> recordList_ = new pbc::RepeatedField<global::NFMsg.ObjectRecordBase>();
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public pbc::RepeatedField<global::NFMsg.ObjectRecordBase> record_list {
+    public pbc::RepeatedField<global::NFMsg.ObjectRecordBase> RecordList {
       get { return recordList_; }
     }
 
@@ -6241,7 +6241,7 @@ namespace NFMsg {
       if (ReferenceEquals(other, this)) {
         return true;
       }
-      if (!object.Equals(player_id, other.player_id)) return false;
+      if (!object.Equals(PlayerId, other.PlayerId)) return false;
       if(!recordList_.Equals(other.recordList_)) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
@@ -6249,7 +6249,7 @@ namespace NFMsg {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override int GetHashCode() {
       int hash = 1;
-      if (playerId_ != null) hash ^= player_id.GetHashCode();
+      if (playerId_ != null) hash ^= PlayerId.GetHashCode();
       hash ^= recordList_.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
@@ -6266,7 +6266,7 @@ namespace NFMsg {
     public void WriteTo(pb::CodedOutputStream output) {
       if (playerId_ != null) {
         output.WriteRawTag(10);
-        output.WriteMessage(player_id);
+        output.WriteMessage(PlayerId);
       }
       recordList_.WriteTo(output, _repeated_recordList_codec);
       if (_unknownFields != null) {
@@ -6278,7 +6278,7 @@ namespace NFMsg {
     public int CalculateSize() {
       int size = 0;
       if (playerId_ != null) {
-        size += 1 + pb::CodedOutputStream.ComputeMessageSize(player_id);
+        size += 1 + pb::CodedOutputStream.ComputeMessageSize(PlayerId);
       }
       size += recordList_.CalculateSize(_repeated_recordList_codec);
       if (_unknownFields != null) {
@@ -6294,9 +6294,9 @@ namespace NFMsg {
       }
       if (other.playerId_ != null) {
         if (playerId_ == null) {
-          playerId_ = new global::NFMsg.Ident();
+          PlayerId = new global::NFMsg.Ident();
         }
-        player_id.MergeFrom(other.player_id);
+        PlayerId.MergeFrom(other.PlayerId);
       }
       recordList_.Add(other.recordList_);
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
@@ -6312,9 +6312,9 @@ namespace NFMsg {
             break;
           case 10: {
             if (playerId_ == null) {
-              playerId_ = new global::NFMsg.Ident();
+              PlayerId = new global::NFMsg.Ident();
             }
-            input.ReadMessage(playerId_);
+            input.ReadMessage(PlayerId);
             break;
           }
           case 18: {
@@ -6362,12 +6362,12 @@ namespace NFMsg {
     }
 
     /// <summary>Field number for the "multi_player_record" field.</summary>
-    public const int multi_player_recordFieldNumber = 1;
+    public const int MultiPlayerRecordFieldNumber = 1;
     private static readonly pb::FieldCodec<global::NFMsg.ObjectRecordList> _repeated_multiPlayerRecord_codec
         = pb::FieldCodec.ForMessage(10, global::NFMsg.ObjectRecordList.Parser);
     private readonly pbc::RepeatedField<global::NFMsg.ObjectRecordList> multiPlayerRecord_ = new pbc::RepeatedField<global::NFMsg.ObjectRecordList>();
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public pbc::RepeatedField<global::NFMsg.ObjectRecordList> multi_player_record {
+    public pbc::RepeatedField<global::NFMsg.ObjectRecordList> MultiPlayerRecord {
       get { return multiPlayerRecord_; }
     }
 
@@ -6489,13 +6489,13 @@ namespace NFMsg {
     }
 
     /// <summary>Field number for the "player_id" field.</summary>
-    public const int player_idFieldNumber = 1;
+    public const int PlayerIdFieldNumber = 1;
     private global::NFMsg.Ident playerId_;
     /// <summary>
     ///only be used between proxy-server and game-server
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public global::NFMsg.Ident player_id {
+    public global::NFMsg.Ident PlayerId {
       get { return playerId_; }
       set {
         playerId_ = value;
@@ -6503,10 +6503,10 @@ namespace NFMsg {
     }
 
     /// <summary>Field number for the "msg_data" field.</summary>
-    public const int msg_dataFieldNumber = 2;
+    public const int MsgDataFieldNumber = 2;
     private pb::ByteString msgData_ = pb::ByteString.Empty;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public pb::ByteString msg_data {
+    public pb::ByteString MsgData {
       get { return msgData_; }
       set {
         msgData_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
@@ -6514,20 +6514,20 @@ namespace NFMsg {
     }
 
     /// <summary>Field number for the "player_Client_list" field.</summary>
-    public const int player_Client_listFieldNumber = 3;
+    public const int PlayerClientListFieldNumber = 3;
     private static readonly pb::FieldCodec<global::NFMsg.Ident> _repeated_playerClientList_codec
         = pb::FieldCodec.ForMessage(26, global::NFMsg.Ident.Parser);
     private readonly pbc::RepeatedField<global::NFMsg.Ident> playerClientList_ = new pbc::RepeatedField<global::NFMsg.Ident>();
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public pbc::RepeatedField<global::NFMsg.Ident> player_Client_list {
+    public pbc::RepeatedField<global::NFMsg.Ident> PlayerClientList {
       get { return playerClientList_; }
     }
 
     /// <summary>Field number for the "hash_ident" field.</summary>
-    public const int hash_identFieldNumber = 4;
+    public const int HashIdentFieldNumber = 4;
     private global::NFMsg.Ident hashIdent_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public global::NFMsg.Ident hash_ident {
+    public global::NFMsg.Ident HashIdent {
       get { return hashIdent_; }
       set {
         hashIdent_ = value;
@@ -6547,20 +6547,20 @@ namespace NFMsg {
       if (ReferenceEquals(other, this)) {
         return true;
       }
-      if (!object.Equals(player_id, other.player_id)) return false;
-      if (msg_data != other.msg_data) return false;
+      if (!object.Equals(PlayerId, other.PlayerId)) return false;
+      if (MsgData != other.MsgData) return false;
       if(!playerClientList_.Equals(other.playerClientList_)) return false;
-      if (!object.Equals(hash_ident, other.hash_ident)) return false;
+      if (!object.Equals(HashIdent, other.HashIdent)) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override int GetHashCode() {
       int hash = 1;
-      if (playerId_ != null) hash ^= player_id.GetHashCode();
-      if (msg_data.Length != 0) hash ^= msg_data.GetHashCode();
+      if (playerId_ != null) hash ^= PlayerId.GetHashCode();
+      if (MsgData.Length != 0) hash ^= MsgData.GetHashCode();
       hash ^= playerClientList_.GetHashCode();
-      if (hashIdent_ != null) hash ^= hash_ident.GetHashCode();
+      if (hashIdent_ != null) hash ^= HashIdent.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -6576,16 +6576,16 @@ namespace NFMsg {
     public void WriteTo(pb::CodedOutputStream output) {
       if (playerId_ != null) {
         output.WriteRawTag(10);
-        output.WriteMessage(player_id);
+        output.WriteMessage(PlayerId);
       }
-      if (msg_data.Length != 0) {
+      if (MsgData.Length != 0) {
         output.WriteRawTag(18);
-        output.WriteBytes(msg_data);
+        output.WriteBytes(MsgData);
       }
       playerClientList_.WriteTo(output, _repeated_playerClientList_codec);
       if (hashIdent_ != null) {
         output.WriteRawTag(34);
-        output.WriteMessage(hash_ident);
+        output.WriteMessage(HashIdent);
       }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
@@ -6596,14 +6596,14 @@ namespace NFMsg {
     public int CalculateSize() {
       int size = 0;
       if (playerId_ != null) {
-        size += 1 + pb::CodedOutputStream.ComputeMessageSize(player_id);
+        size += 1 + pb::CodedOutputStream.ComputeMessageSize(PlayerId);
       }
-      if (msg_data.Length != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeBytesSize(msg_data);
+      if (MsgData.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeBytesSize(MsgData);
       }
       size += playerClientList_.CalculateSize(_repeated_playerClientList_codec);
       if (hashIdent_ != null) {
-        size += 1 + pb::CodedOutputStream.ComputeMessageSize(hash_ident);
+        size += 1 + pb::CodedOutputStream.ComputeMessageSize(HashIdent);
       }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
@@ -6618,19 +6618,19 @@ namespace NFMsg {
       }
       if (other.playerId_ != null) {
         if (playerId_ == null) {
-          playerId_ = new global::NFMsg.Ident();
+          PlayerId = new global::NFMsg.Ident();
         }
-        player_id.MergeFrom(other.player_id);
+        PlayerId.MergeFrom(other.PlayerId);
       }
-      if (other.msg_data.Length != 0) {
-        msg_data = other.msg_data;
+      if (other.MsgData.Length != 0) {
+        MsgData = other.MsgData;
       }
       playerClientList_.Add(other.playerClientList_);
       if (other.hashIdent_ != null) {
         if (hashIdent_ == null) {
-          hashIdent_ = new global::NFMsg.Ident();
+          HashIdent = new global::NFMsg.Ident();
         }
-        hash_ident.MergeFrom(other.hash_ident);
+        HashIdent.MergeFrom(other.HashIdent);
       }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
@@ -6645,13 +6645,13 @@ namespace NFMsg {
             break;
           case 10: {
             if (playerId_ == null) {
-              playerId_ = new global::NFMsg.Ident();
+              PlayerId = new global::NFMsg.Ident();
             }
-            input.ReadMessage(playerId_);
+            input.ReadMessage(PlayerId);
             break;
           }
           case 18: {
-            msg_data = input.ReadBytes();
+            MsgData = input.ReadBytes();
             break;
           }
           case 26: {
@@ -6660,9 +6660,9 @@ namespace NFMsg {
           }
           case 34: {
             if (hashIdent_ == null) {
-              hashIdent_ = new global::NFMsg.Ident();
+              HashIdent = new global::NFMsg.Ident();
             }
-            input.ReadMessage(hashIdent_);
+            input.ReadMessage(HashIdent);
             break;
           }
         }
@@ -6706,10 +6706,10 @@ namespace NFMsg {
     }
 
     /// <summary>Field number for the "index" field.</summary>
-    public const int indexFieldNumber = 1;
+    public const int IndexFieldNumber = 1;
     private int index_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public int index {
+    public int Index {
       get { return index_; }
       set {
         index_ = value;
@@ -6729,14 +6729,14 @@ namespace NFMsg {
       if (ReferenceEquals(other, this)) {
         return true;
       }
-      if (index != other.index) return false;
+      if (Index != other.Index) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override int GetHashCode() {
       int hash = 1;
-      if (index != 0) hash ^= index.GetHashCode();
+      if (Index != 0) hash ^= Index.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -6750,9 +6750,9 @@ namespace NFMsg {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public void WriteTo(pb::CodedOutputStream output) {
-      if (index != 0) {
+      if (Index != 0) {
         output.WriteRawTag(8);
-        output.WriteInt32(index);
+        output.WriteInt32(Index);
       }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
@@ -6762,8 +6762,8 @@ namespace NFMsg {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public int CalculateSize() {
       int size = 0;
-      if (index != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeInt32Size(index);
+      if (Index != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(Index);
       }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
@@ -6776,8 +6776,8 @@ namespace NFMsg {
       if (other == null) {
         return;
       }
-      if (other.index != 0) {
-        index = other.index;
+      if (other.Index != 0) {
+        Index = other.Index;
       }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
@@ -6791,7 +6791,7 @@ namespace NFMsg {
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
           case 8: {
-            index = input.ReadInt32();
+            Index = input.ReadInt32();
             break;
           }
         }
@@ -6843,10 +6843,10 @@ namespace NFMsg {
     }
 
     /// <summary>Field number for the "control_id" field.</summary>
-    public const int control_idFieldNumber = 1;
+    public const int ControlIdFieldNumber = 1;
     private global::NFMsg.Ident controlId_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public global::NFMsg.Ident control_id {
+    public global::NFMsg.Ident ControlId {
       get { return controlId_; }
       set {
         controlId_ = value;
@@ -6854,10 +6854,10 @@ namespace NFMsg {
     }
 
     /// <summary>Field number for the "command_id" field.</summary>
-    public const int command_idFieldNumber = 2;
-    private global::NFMsg.ReqCommand.Types.EGameCommandType commandId_ = 0;
+    public const int CommandIdFieldNumber = 2;
+    private global::NFMsg.ReqCommand.Types.EGameCommandType commandId_ = global::NFMsg.ReqCommand.Types.EGameCommandType.EgctModiyProperty;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public global::NFMsg.ReqCommand.Types.EGameCommandType command_id {
+    public global::NFMsg.ReqCommand.Types.EGameCommandType CommandId {
       get { return commandId_; }
       set {
         commandId_ = value;
@@ -6865,10 +6865,10 @@ namespace NFMsg {
     }
 
     /// <summary>Field number for the "command_str_value" field.</summary>
-    public const int command_str_valueFieldNumber = 3;
+    public const int CommandStrValueFieldNumber = 3;
     private pb::ByteString commandStrValue_ = pb::ByteString.Empty;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public pb::ByteString command_str_value {
+    public pb::ByteString CommandStrValue {
       get { return commandStrValue_; }
       set {
         commandStrValue_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
@@ -6876,10 +6876,10 @@ namespace NFMsg {
     }
 
     /// <summary>Field number for the "command_value_int" field.</summary>
-    public const int command_value_intFieldNumber = 4;
+    public const int CommandValueIntFieldNumber = 4;
     private long commandValueInt_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public long command_value_int {
+    public long CommandValueInt {
       get { return commandValueInt_; }
       set {
         commandValueInt_ = value;
@@ -6887,10 +6887,10 @@ namespace NFMsg {
     }
 
     /// <summary>Field number for the "command_value_float" field.</summary>
-    public const int command_value_floatFieldNumber = 5;
+    public const int CommandValueFloatFieldNumber = 5;
     private double commandValueFloat_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public double command_value_float {
+    public double CommandValueFloat {
       get { return commandValueFloat_; }
       set {
         commandValueFloat_ = value;
@@ -6898,10 +6898,10 @@ namespace NFMsg {
     }
 
     /// <summary>Field number for the "command_value_str" field.</summary>
-    public const int command_value_strFieldNumber = 6;
+    public const int CommandValueStrFieldNumber = 6;
     private pb::ByteString commandValueStr_ = pb::ByteString.Empty;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public pb::ByteString command_value_str {
+    public pb::ByteString CommandValueStr {
       get { return commandValueStr_; }
       set {
         commandValueStr_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
@@ -6909,10 +6909,10 @@ namespace NFMsg {
     }
 
     /// <summary>Field number for the "command_value_object" field.</summary>
-    public const int command_value_objectFieldNumber = 7;
+    public const int CommandValueObjectFieldNumber = 7;
     private global::NFMsg.Ident commandValueObject_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public global::NFMsg.Ident command_value_object {
+    public global::NFMsg.Ident CommandValueObject {
       get { return commandValueObject_; }
       set {
         commandValueObject_ = value;
@@ -6920,10 +6920,10 @@ namespace NFMsg {
     }
 
     /// <summary>Field number for the "row" field.</summary>
-    public const int rowFieldNumber = 8;
+    public const int RowFieldNumber = 8;
     private int row_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public int row {
+    public int Row {
       get { return row_; }
       set {
         row_ = value;
@@ -6931,10 +6931,10 @@ namespace NFMsg {
     }
 
     /// <summary>Field number for the "col" field.</summary>
-    public const int colFieldNumber = 9;
+    public const int ColFieldNumber = 9;
     private int col_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public int col {
+    public int Col {
       get { return col_; }
       set {
         col_ = value;
@@ -6954,30 +6954,30 @@ namespace NFMsg {
       if (ReferenceEquals(other, this)) {
         return true;
       }
-      if (!object.Equals(control_id, other.control_id)) return false;
-      if (command_id != other.command_id) return false;
-      if (command_str_value != other.command_str_value) return false;
-      if (command_value_int != other.command_value_int) return false;
-      if (!pbc::ProtobufEqualityComparers.BitwiseDoubleEqualityComparer.Equals(command_value_float, other.command_value_float)) return false;
-      if (command_value_str != other.command_value_str) return false;
-      if (!object.Equals(command_value_object, other.command_value_object)) return false;
-      if (row != other.row) return false;
-      if (col != other.col) return false;
+      if (!object.Equals(ControlId, other.ControlId)) return false;
+      if (CommandId != other.CommandId) return false;
+      if (CommandStrValue != other.CommandStrValue) return false;
+      if (CommandValueInt != other.CommandValueInt) return false;
+      if (!pbc::ProtobufEqualityComparers.BitwiseDoubleEqualityComparer.Equals(CommandValueFloat, other.CommandValueFloat)) return false;
+      if (CommandValueStr != other.CommandValueStr) return false;
+      if (!object.Equals(CommandValueObject, other.CommandValueObject)) return false;
+      if (Row != other.Row) return false;
+      if (Col != other.Col) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override int GetHashCode() {
       int hash = 1;
-      if (controlId_ != null) hash ^= control_id.GetHashCode();
-      if (command_id != 0) hash ^= command_id.GetHashCode();
-      if (command_str_value.Length != 0) hash ^= command_str_value.GetHashCode();
-      if (command_value_int != 0L) hash ^= command_value_int.GetHashCode();
-      if (command_value_float != 0D) hash ^= pbc::ProtobufEqualityComparers.BitwiseDoubleEqualityComparer.GetHashCode(command_value_float);
-      if (command_value_str.Length != 0) hash ^= command_value_str.GetHashCode();
-      if (commandValueObject_ != null) hash ^= command_value_object.GetHashCode();
-      if (row != 0) hash ^= row.GetHashCode();
-      if (col != 0) hash ^= col.GetHashCode();
+      if (controlId_ != null) hash ^= ControlId.GetHashCode();
+      if (CommandId != global::NFMsg.ReqCommand.Types.EGameCommandType.EgctModiyProperty) hash ^= CommandId.GetHashCode();
+      if (CommandStrValue.Length != 0) hash ^= CommandStrValue.GetHashCode();
+      if (CommandValueInt != 0L) hash ^= CommandValueInt.GetHashCode();
+      if (CommandValueFloat != 0D) hash ^= pbc::ProtobufEqualityComparers.BitwiseDoubleEqualityComparer.GetHashCode(CommandValueFloat);
+      if (CommandValueStr.Length != 0) hash ^= CommandValueStr.GetHashCode();
+      if (commandValueObject_ != null) hash ^= CommandValueObject.GetHashCode();
+      if (Row != 0) hash ^= Row.GetHashCode();
+      if (Col != 0) hash ^= Col.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -6993,39 +6993,39 @@ namespace NFMsg {
     public void WriteTo(pb::CodedOutputStream output) {
       if (controlId_ != null) {
         output.WriteRawTag(10);
-        output.WriteMessage(control_id);
+        output.WriteMessage(ControlId);
       }
-      if (command_id != 0) {
+      if (CommandId != global::NFMsg.ReqCommand.Types.EGameCommandType.EgctModiyProperty) {
         output.WriteRawTag(16);
-        output.WriteEnum((int) command_id);
+        output.WriteEnum((int) CommandId);
       }
-      if (command_str_value.Length != 0) {
+      if (CommandStrValue.Length != 0) {
         output.WriteRawTag(26);
-        output.WriteBytes(command_str_value);
+        output.WriteBytes(CommandStrValue);
       }
-      if (command_value_int != 0L) {
+      if (CommandValueInt != 0L) {
         output.WriteRawTag(32);
-        output.WriteInt64(command_value_int);
+        output.WriteInt64(CommandValueInt);
       }
-      if (command_value_float != 0D) {
+      if (CommandValueFloat != 0D) {
         output.WriteRawTag(41);
-        output.WriteDouble(command_value_float);
+        output.WriteDouble(CommandValueFloat);
       }
-      if (command_value_str.Length != 0) {
+      if (CommandValueStr.Length != 0) {
         output.WriteRawTag(50);
-        output.WriteBytes(command_value_str);
+        output.WriteBytes(CommandValueStr);
       }
       if (commandValueObject_ != null) {
         output.WriteRawTag(58);
-        output.WriteMessage(command_value_object);
+        output.WriteMessage(CommandValueObject);
       }
-      if (row != 0) {
+      if (Row != 0) {
         output.WriteRawTag(64);
-        output.WriteInt32(row);
+        output.WriteInt32(Row);
       }
-      if (col != 0) {
+      if (Col != 0) {
         output.WriteRawTag(72);
-        output.WriteInt32(col);
+        output.WriteInt32(Col);
       }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
@@ -7036,31 +7036,31 @@ namespace NFMsg {
     public int CalculateSize() {
       int size = 0;
       if (controlId_ != null) {
-        size += 1 + pb::CodedOutputStream.ComputeMessageSize(control_id);
+        size += 1 + pb::CodedOutputStream.ComputeMessageSize(ControlId);
       }
-      if (command_id != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeEnumSize((int) command_id);
+      if (CommandId != global::NFMsg.ReqCommand.Types.EGameCommandType.EgctModiyProperty) {
+        size += 1 + pb::CodedOutputStream.ComputeEnumSize((int) CommandId);
       }
-      if (command_str_value.Length != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeBytesSize(command_str_value);
+      if (CommandStrValue.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeBytesSize(CommandStrValue);
       }
-      if (command_value_int != 0L) {
-        size += 1 + pb::CodedOutputStream.ComputeInt64Size(command_value_int);
+      if (CommandValueInt != 0L) {
+        size += 1 + pb::CodedOutputStream.ComputeInt64Size(CommandValueInt);
       }
-      if (command_value_float != 0D) {
+      if (CommandValueFloat != 0D) {
         size += 1 + 8;
       }
-      if (command_value_str.Length != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeBytesSize(command_value_str);
+      if (CommandValueStr.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeBytesSize(CommandValueStr);
       }
       if (commandValueObject_ != null) {
-        size += 1 + pb::CodedOutputStream.ComputeMessageSize(command_value_object);
+        size += 1 + pb::CodedOutputStream.ComputeMessageSize(CommandValueObject);
       }
-      if (row != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeInt32Size(row);
+      if (Row != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(Row);
       }
-      if (col != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeInt32Size(col);
+      if (Col != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(Col);
       }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
@@ -7075,36 +7075,36 @@ namespace NFMsg {
       }
       if (other.controlId_ != null) {
         if (controlId_ == null) {
-          controlId_ = new global::NFMsg.Ident();
+          ControlId = new global::NFMsg.Ident();
         }
-        control_id.MergeFrom(other.control_id);
+        ControlId.MergeFrom(other.ControlId);
       }
-      if (other.command_id != 0) {
-        command_id = other.command_id;
+      if (other.CommandId != global::NFMsg.ReqCommand.Types.EGameCommandType.EgctModiyProperty) {
+        CommandId = other.CommandId;
       }
-      if (other.command_str_value.Length != 0) {
-        command_str_value = other.command_str_value;
+      if (other.CommandStrValue.Length != 0) {
+        CommandStrValue = other.CommandStrValue;
       }
-      if (other.command_value_int != 0L) {
-        command_value_int = other.command_value_int;
+      if (other.CommandValueInt != 0L) {
+        CommandValueInt = other.CommandValueInt;
       }
-      if (other.command_value_float != 0D) {
-        command_value_float = other.command_value_float;
+      if (other.CommandValueFloat != 0D) {
+        CommandValueFloat = other.CommandValueFloat;
       }
-      if (other.command_value_str.Length != 0) {
-        command_value_str = other.command_value_str;
+      if (other.CommandValueStr.Length != 0) {
+        CommandValueStr = other.CommandValueStr;
       }
       if (other.commandValueObject_ != null) {
         if (commandValueObject_ == null) {
-          commandValueObject_ = new global::NFMsg.Ident();
+          CommandValueObject = new global::NFMsg.Ident();
         }
-        command_value_object.MergeFrom(other.command_value_object);
+        CommandValueObject.MergeFrom(other.CommandValueObject);
       }
-      if (other.row != 0) {
-        row = other.row;
+      if (other.Row != 0) {
+        Row = other.Row;
       }
-      if (other.col != 0) {
-        col = other.col;
+      if (other.Col != 0) {
+        Col = other.Col;
       }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
@@ -7119,44 +7119,44 @@ namespace NFMsg {
             break;
           case 10: {
             if (controlId_ == null) {
-              controlId_ = new global::NFMsg.Ident();
+              ControlId = new global::NFMsg.Ident();
             }
-            input.ReadMessage(controlId_);
+            input.ReadMessage(ControlId);
             break;
           }
           case 16: {
-            commandId_ = (global::NFMsg.ReqCommand.Types.EGameCommandType) input.ReadEnum();
+            CommandId = (global::NFMsg.ReqCommand.Types.EGameCommandType) input.ReadEnum();
             break;
           }
           case 26: {
-            command_str_value = input.ReadBytes();
+            CommandStrValue = input.ReadBytes();
             break;
           }
           case 32: {
-            command_value_int = input.ReadInt64();
+            CommandValueInt = input.ReadInt64();
             break;
           }
           case 41: {
-            command_value_float = input.ReadDouble();
+            CommandValueFloat = input.ReadDouble();
             break;
           }
           case 50: {
-            command_value_str = input.ReadBytes();
+            CommandValueStr = input.ReadBytes();
             break;
           }
           case 58: {
             if (commandValueObject_ == null) {
-              commandValueObject_ = new global::NFMsg.Ident();
+              CommandValueObject = new global::NFMsg.Ident();
             }
-            input.ReadMessage(commandValueObject_);
+            input.ReadMessage(CommandValueObject);
             break;
           }
           case 64: {
-            row = input.ReadInt32();
+            Row = input.ReadInt32();
             break;
           }
           case 72: {
-            col = input.ReadInt32();
+            Col = input.ReadInt32();
             break;
           }
         }
@@ -7171,18 +7171,18 @@ namespace NFMsg {
         /// <summary>
         ///[property_name,value]
         /// </summary>
-        [pbr::OriginalName("EGCT_MODIY_PROPERTY")] EGCT_MODIY_PROPERTY = 0,
+        [pbr::OriginalName("EGCT_MODIY_PROPERTY")] EgctModiyProperty = 0,
         /// <summary>
         ///[item_id,count]
         /// </summary>
-        [pbr::OriginalName("EGCT_MODIY_ITEM")] EGCT_MODIY_ITEM = 1,
+        [pbr::OriginalName("EGCT_MODIY_ITEM")] EgctModiyItem = 1,
         /// <summary>
         ///[object_index,count]
         /// </summary>
-        [pbr::OriginalName("EGCT_CREATE_OBJECT")] EGCT_CREATE_OBJECT = 2,
+        [pbr::OriginalName("EGCT_CREATE_OBJECT")] EgctCreateObject = 2,
         /// <summary>
         /// </summary>
-        [pbr::OriginalName("EGCT_ADD_ROLE_EXP")] EGCT_ADD_ROLE_EXP = 3,
+        [pbr::OriginalName("EGCT_ADD_ROLE_EXP")] EgctAddRoleExp = 3,
       }
 
     }

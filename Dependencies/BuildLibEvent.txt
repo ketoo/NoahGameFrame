@@ -1,5 +1,0 @@
-
-
-cd libevent-2.0.10-stable
-./configure
-make & make install

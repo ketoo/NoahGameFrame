@@ -272,7 +272,7 @@ namespace NFMsg {
             "YgZwcm90bzM="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
-          new pbr::GeneratedClrTypeInfo(new[] {typeof(global::NFMsg.EGameEventCode), typeof(global::NFMsg.ESynMsgID), typeof(global::NFMsg.EGameMsgID), typeof(global::NFMsg.ESkillType), typeof(global::NFMsg.EItemType), typeof(global::NFMsg.EGameEquipSubType), typeof(global::NFMsg.EGameGemSubType), typeof(global::NFMsg.EGameSupplySubType), typeof(global::NFMsg.EGameScrollSubType), typeof(global::NFMsg.EGameItemExpiredType), typeof(global::NFMsg.EDrawDropItemState), typeof(global::NFMsg.EGuildPowerType), typeof(global::NFMsg.ETaskState), typeof(global::NFMsg.ETaskType), typeof(global::NFMsg.ESceneType), typeof(global::NFMsg.EPVPType), typeof(global::NFMsg.EShopType), typeof(global::NFMsg.ERankType), typeof(global::NFMsg.ENPCType), typeof(global::NFMsg.ESubNPCType_TURRET), typeof(global::NFMsg.EMeleeType), typeof(global::NFMsg.EEffectObjType), typeof(global::NFMsg.EPropertyType), typeof(global::NFMsg.EGameElementType), typeof(global::NFMsg.EBattleType), }, null));
+          new pbr::GeneratedClrTypeInfo(new[] {typeof(global::NFMsg.EGameEventCode), typeof(global::NFMsg.ESynMsgID), typeof(global::NFMsg.EGameMsgID), typeof(global::NFMsg.ESkillType), typeof(global::NFMsg.EItemType), typeof(global::NFMsg.EGameEquipSubType), typeof(global::NFMsg.EGameGemSubType), typeof(global::NFMsg.EGameSupplySubType), typeof(global::NFMsg.EGameScrollSubType), typeof(global::NFMsg.EGameItemExpiredType), typeof(global::NFMsg.EDrawDropItemState), typeof(global::NFMsg.EGuildPowerType), typeof(global::NFMsg.ETaskState), typeof(global::NFMsg.ETaskType), typeof(global::NFMsg.ESceneType), typeof(global::NFMsg.EPVPType), typeof(global::NFMsg.EShopType), typeof(global::NFMsg.ERankType), typeof(global::NFMsg.ENPCType), typeof(global::NFMsg.ESubNPCType_TURRET), typeof(global::NFMsg.EMeleeType), typeof(global::NFMsg.EEffectObjType), typeof(global::NFMsg.EPropertyType), typeof(global::NFMsg.EGameElementType), typeof(global::NFMsg.EBattleType), }, null, null));
     }
     #endregion
 
@@ -284,668 +284,668 @@ namespace NFMsg {
   public enum EGameEventCode {
     /// <summary>
     /// </summary>
-    [pbr::OriginalName("EGEC_SUCCESS")] EGEC_SUCCESS = 0,
+    [pbr::OriginalName("EGEC_SUCCESS")] EgecSuccess = 0,
     /// <summary>
     /// </summary>
-    [pbr::OriginalName("EGEC_UNKOWN_ERROR")] EGEC_UNKOWN_ERROR = 1,
+    [pbr::OriginalName("EGEC_UNKOWN_ERROR")] EgecUnkownError = 1,
     /// <summary>
     /// </summary>
-    [pbr::OriginalName("EGEC_ACCOUNT_EXIST")] EGEC_ACCOUNT_EXIST = 2,
+    [pbr::OriginalName("EGEC_ACCOUNT_EXIST")] EgecAccountExist = 2,
     /// <summary>
     /// </summary>
-    [pbr::OriginalName("EGEC_ACCOUNTPWD_INVALID")] EGEC_ACCOUNTPWD_INVALID = 3,
+    [pbr::OriginalName("EGEC_ACCOUNTPWD_INVALID")] EgecAccountpwdInvalid = 3,
     /// <summary>
     /// </summary>
-    [pbr::OriginalName("EGEC_ACCOUNT_USING")] EGEC_ACCOUNT_USING = 4,
+    [pbr::OriginalName("EGEC_ACCOUNT_USING")] EgecAccountUsing = 4,
     /// <summary>
     /// </summary>
-    [pbr::OriginalName("EGEC_ACCOUNT_LOCKED")] EGEC_ACCOUNT_LOCKED = 5,
+    [pbr::OriginalName("EGEC_ACCOUNT_LOCKED")] EgecAccountLocked = 5,
     /// <summary>
     /// </summary>
-    [pbr::OriginalName("EGEC_ACCOUNT_SUCCESS")] EGEC_ACCOUNT_SUCCESS = 6,
+    [pbr::OriginalName("EGEC_ACCOUNT_SUCCESS")] EgecAccountSuccess = 6,
     /// <summary>
     /// </summary>
-    [pbr::OriginalName("EGEC_VERIFY_KEY_SUCCESS")] EGEC_VERIFY_KEY_SUCCESS = 7,
+    [pbr::OriginalName("EGEC_VERIFY_KEY_SUCCESS")] EgecVerifyKeySuccess = 7,
     /// <summary>
     /// </summary>
-    [pbr::OriginalName("EGEC_VERIFY_KEY_FAIL")] EGEC_VERIFY_KEY_FAIL = 8,
+    [pbr::OriginalName("EGEC_VERIFY_KEY_FAIL")] EgecVerifyKeyFail = 8,
     /// <summary>
     /// </summary>
-    [pbr::OriginalName("EGEC_SELECTSERVER_SUCCESS")] EGEC_SELECTSERVER_SUCCESS = 9,
+    [pbr::OriginalName("EGEC_SELECTSERVER_SUCCESS")] EgecSelectserverSuccess = 9,
     /// <summary>
     /// </summary>
-    [pbr::OriginalName("EGEC_SELECTSERVER_FAIL")] EGEC_SELECTSERVER_FAIL = 10,
+    [pbr::OriginalName("EGEC_SELECTSERVER_FAIL")] EgecSelectserverFail = 10,
     /// <summary>
     /// </summary>
-    [pbr::OriginalName("EGEC_CHARACTER_EXIST")] EGEC_CHARACTER_EXIST = 110,
+    [pbr::OriginalName("EGEC_CHARACTER_EXIST")] EgecCharacterExist = 110,
     /// <summary>
     /// </summary>
-    [pbr::OriginalName("EGEC_SVRZONEID_INVALID")] EGEC_SVRZONEID_INVALID = 111,
+    [pbr::OriginalName("EGEC_SVRZONEID_INVALID")] EgecSvrzoneidInvalid = 111,
     /// <summary>
     /// </summary>
-    [pbr::OriginalName("EGEC_CHARACTER_NUMOUT")] EGEC_CHARACTER_NUMOUT = 112,
+    [pbr::OriginalName("EGEC_CHARACTER_NUMOUT")] EgecCharacterNumout = 112,
     /// <summary>
     /// </summary>
-    [pbr::OriginalName("EGEC_CHARACTER_INVALID")] EGEC_CHARACTER_INVALID = 113,
+    [pbr::OriginalName("EGEC_CHARACTER_INVALID")] EgecCharacterInvalid = 113,
     /// <summary>
     /// </summary>
-    [pbr::OriginalName("EGEC_CHARACTER_NOTEXIST")] EGEC_CHARACTER_NOTEXIST = 114,
+    [pbr::OriginalName("EGEC_CHARACTER_NOTEXIST")] EgecCharacterNotexist = 114,
     /// <summary>
     /// </summary>
-    [pbr::OriginalName("EGEC_CHARACTER_USING")] EGEC_CHARACTER_USING = 115,
+    [pbr::OriginalName("EGEC_CHARACTER_USING")] EgecCharacterUsing = 115,
     /// <summary>
     /// </summary>
-    [pbr::OriginalName("EGEC_CHARACTER_LOCKED")] EGEC_CHARACTER_LOCKED = 116,
+    [pbr::OriginalName("EGEC_CHARACTER_LOCKED")] EgecCharacterLocked = 116,
     /// <summary>
     /// </summary>
-    [pbr::OriginalName("EGEC_ZONE_OVERLOAD")] EGEC_ZONE_OVERLOAD = 117,
+    [pbr::OriginalName("EGEC_ZONE_OVERLOAD")] EgecZoneOverload = 117,
     /// <summary>
     /// </summary>
-    [pbr::OriginalName("EGEC_NOT_ONLINE")] EGEC_NOT_ONLINE = 118,
+    [pbr::OriginalName("EGEC_NOT_ONLINE")] EgecNotOnline = 118,
     /// <summary>
     /// </summary>
-    [pbr::OriginalName("EGEC_ALREAY_IN_TEAM")] EGEC_ALREAY_IN_TEAM = 119,
+    [pbr::OriginalName("EGEC_ALREAY_IN_TEAM")] EgecAlreayInTeam = 119,
     /// <summary>
     /// </summary>
-    [pbr::OriginalName("EGEC_INVALID_TEAM_INVITE")] EGEC_INVALID_TEAM_INVITE = 120,
+    [pbr::OriginalName("EGEC_INVALID_TEAM_INVITE")] EgecInvalidTeamInvite = 120,
     /// <summary>
     /// </summary>
-    [pbr::OriginalName("EGEC_TEAM_FULL")] EGEC_TEAM_FULL = 121,
+    [pbr::OriginalName("EGEC_TEAM_FULL")] EgecTeamFull = 121,
     /// <summary>
     /// </summary>
-    [pbr::OriginalName("EGEC_MAIL_UPDATE_ERROR")] EGEC_MAIL_UPDATE_ERROR = 122,
+    [pbr::OriginalName("EGEC_MAIL_UPDATE_ERROR")] EgecMailUpdateError = 122,
     /// <summary>
     /// </summary>
-    [pbr::OriginalName("EGEC_MAIL_TONAME_INVALID")] EGEC_MAIL_TONAME_INVALID = 123,
+    [pbr::OriginalName("EGEC_MAIL_TONAME_INVALID")] EgecMailTonameInvalid = 123,
     /// <summary>
     /// </summary>
-    [pbr::OriginalName("EGEC_MAIL_DELETE_ERROR")] EGEC_MAIL_DELETE_ERROR = 124,
+    [pbr::OriginalName("EGEC_MAIL_DELETE_ERROR")] EgecMailDeleteError = 124,
     /// <summary>
     /// </summary>
-    [pbr::OriginalName("EGEC_MAIL_TOWNAME_EQUAL")] EGEC_MAIL_TOWNAME_EQUAL = 125,
+    [pbr::OriginalName("EGEC_MAIL_TOWNAME_EQUAL")] EgecMailTownameEqual = 125,
     /// <summary>
     /// </summary>
-    [pbr::OriginalName("EGEC_LACK_MONEY")] EGEC_LACK_MONEY = 126,
+    [pbr::OriginalName("EGEC_LACK_MONEY")] EgecLackMoney = 126,
     /// <summary>
     /// </summary>
-    [pbr::OriginalName("EGEC_FULL_PACKAGE")] EGEC_FULL_PACKAGE = 127,
+    [pbr::OriginalName("EGEC_FULL_PACKAGE")] EgecFullPackage = 127,
     /// <summary>
     /// </summary>
-    [pbr::OriginalName("EGEC_INVALID_ITEM")] EGEC_INVALID_ITEM = 128,
+    [pbr::OriginalName("EGEC_INVALID_ITEM")] EgecInvalidItem = 128,
     /// <summary>
     /// </summary>
-    [pbr::OriginalName("EGEC_INVALID_CONSIGNMENT")] EGEC_INVALID_CONSIGNMENT = 129,
+    [pbr::OriginalName("EGEC_INVALID_CONSIGNMENT")] EgecInvalidConsignment = 129,
     /// <summary>
     /// </summary>
-    [pbr::OriginalName("EGEC_NOT_ENOUGH_VIP")] EGEC_NOT_ENOUGH_VIP = 130,
+    [pbr::OriginalName("EGEC_NOT_ENOUGH_VIP")] EgecNotEnoughVip = 130,
     /// <summary>
     /// </summary>
-    [pbr::OriginalName("EGEC_NEED_LEVEL")] EGEC_NEED_LEVEL = 131,
+    [pbr::OriginalName("EGEC_NEED_LEVEL")] EgecNeedLevel = 131,
     /// <summary>
     /// </summary>
-    [pbr::OriginalName("EGEC_MAX_FRIEND_LIST")] EGEC_MAX_FRIEND_LIST = 132,
+    [pbr::OriginalName("EGEC_MAX_FRIEND_LIST")] EgecMaxFriendList = 132,
     /// <summary>
     /// </summary>
-    [pbr::OriginalName("EGEC_MAX_ENEMY_LIST")] EGEC_MAX_ENEMY_LIST = 133,
+    [pbr::OriginalName("EGEC_MAX_ENEMY_LIST")] EgecMaxEnemyList = 133,
     /// <summary>
     /// </summary>
-    [pbr::OriginalName("EGEC_MAX_GANGS_LSIT")] EGEC_MAX_GANGS_LSIT = 134,
+    [pbr::OriginalName("EGEC_MAX_GANGS_LSIT")] EgecMaxGangsLsit = 134,
     /// <summary>
     /// </summary>
-    [pbr::OriginalName("EGEC_LIMITS_TO_RIGHTS")] EGEC_LIMITS_TO_RIGHTS = 135,
+    [pbr::OriginalName("EGEC_LIMITS_TO_RIGHTS")] EgecLimitsToRights = 135,
     /// <summary>
     /// </summary>
-    [pbr::OriginalName("EGEC_INVALID_GANGS_NAME")] EGEC_INVALID_GANGS_NAME = 136,
+    [pbr::OriginalName("EGEC_INVALID_GANGS_NAME")] EgecInvalidGangsName = 136,
     /// <summary>
     /// </summary>
-    [pbr::OriginalName("EGEC_REPEAT_ENTER_GANGS")] EGEC_REPEAT_ENTER_GANGS = 137,
+    [pbr::OriginalName("EGEC_REPEAT_ENTER_GANGS")] EgecRepeatEnterGangs = 137,
     /// <summary>
     /// </summary>
-    [pbr::OriginalName("EGEC_INVALID_GANGSMEMBER")] EGEC_INVALID_GANGSMEMBER = 138,
+    [pbr::OriginalName("EGEC_INVALID_GANGSMEMBER")] EgecInvalidGangsmember = 138,
     /// <summary>
     /// </summary>
-    [pbr::OriginalName("EGEC_MASTER_LEAVE_GANGS")] EGEC_MASTER_LEAVE_GANGS = 139,
+    [pbr::OriginalName("EGEC_MASTER_LEAVE_GANGS")] EgecMasterLeaveGangs = 139,
     /// <summary>
     /// </summary>
-    [pbr::OriginalName("EGEC_GANGS_TITLE_OUTOF")] EGEC_GANGS_TITLE_OUTOF = 140,
+    [pbr::OriginalName("EGEC_GANGS_TITLE_OUTOF")] EgecGangsTitleOutof = 140,
     /// <summary>
     /// </summary>
-    [pbr::OriginalName("EGEC_ENTER_GATEWAY_FAILD")] EGEC_ENTER_GATEWAY_FAILD = 141,
+    [pbr::OriginalName("EGEC_ENTER_GATEWAY_FAILD")] EgecEnterGatewayFaild = 141,
     /// <summary>
     /// </summary>
-    [pbr::OriginalName("EGEC_NO_SERVER4ZONE")] EGEC_NO_SERVER4ZONE = 142,
+    [pbr::OriginalName("EGEC_NO_SERVER4ZONE")] EgecNoServer4Zone = 142,
     /// <summary>
     /// </summary>
-    [pbr::OriginalName("EGEC_INVALID_SKILL")] EGEC_INVALID_SKILL = 143,
+    [pbr::OriginalName("EGEC_INVALID_SKILL")] EgecInvalidSkill = 143,
     /// <summary>
     /// </summary>
-    [pbr::OriginalName("EGEC_CREATE_CLAN_SUCCESS")] EGEC_CREATE_CLAN_SUCCESS = 200,
+    [pbr::OriginalName("EGEC_CREATE_CLAN_SUCCESS")] EgecCreateClanSuccess = 200,
     /// <summary>
     /// </summary>
-    [pbr::OriginalName("EGEC_JOIN_CLAN_SUCCESS")] EGEC_JOIN_CLAN_SUCCESS = 201,
+    [pbr::OriginalName("EGEC_JOIN_CLAN_SUCCESS")] EgecJoinClanSuccess = 201,
     /// <summary>
     /// </summary>
-    [pbr::OriginalName("EGEC_LEAVE_CLAN_SUCCESS")] EGEC_LEAVE_CLAN_SUCCESS = 202,
+    [pbr::OriginalName("EGEC_LEAVE_CLAN_SUCCESS")] EgecLeaveClanSuccess = 202,
   }
 
   public enum ESynMsgID {
     /// <summary>
     /// </summary>
-    [pbr::OriginalName("ESMI_UNKNOW")] ESMI_UNKNOW = 0,
+    [pbr::OriginalName("ESMI_UNKNOW")] EsmiUnknow = 0,
   }
 
   public enum EGameMsgID {
     /// <summary>
     /// </summary>
-    [pbr::OriginalName("EGMI_UNKNOW")] EGMI_UNKNOW = 0,
+    [pbr::OriginalName("EGMI_UNKNOW")] EgmiUnknow = 0,
     /// <summary>
     /// for events
     /// </summary>
-    [pbr::OriginalName("EGMI_EVENT_RESULT")] EGMI_EVENT_RESULT = 1,
+    [pbr::OriginalName("EGMI_EVENT_RESULT")] EgmiEventResult = 1,
     /// <summary>
     /// for events
     /// </summary>
-    [pbr::OriginalName("EGMI_EVENT_TRANSPOND")] EGMI_EVENT_TRANSPOND = 2,
+    [pbr::OriginalName("EGMI_EVENT_TRANSPOND")] EgmiEventTranspond = 2,
     /// <summary>
     /// want to close some one
     /// </summary>
-    [pbr::OriginalName("EGMI_CLOSE_SOCKET")] EGMI_CLOSE_SOCKET = 3,
-    [pbr::OriginalName("EGMI_WTM_WORLD_REGISTERED")] EGMI_WTM_WORLD_REGISTERED = 10,
-    [pbr::OriginalName("EGMI_WTM_WORLD_UNREGISTERED")] EGMI_WTM_WORLD_UNREGISTERED = 11,
-    [pbr::OriginalName("EGMI_WTM_WORLD_REFRESH")] EGMI_WTM_WORLD_REFRESH = 12,
-    [pbr::OriginalName("EGMI_LTM_LOGIN_REGISTERED")] EGMI_LTM_LOGIN_REGISTERED = 20,
-    [pbr::OriginalName("EGMI_LTM_LOGIN_UNREGISTERED")] EGMI_LTM_LOGIN_UNREGISTERED = 21,
-    [pbr::OriginalName("EGMI_LTM_LOGIN_REFRESH")] EGMI_LTM_LOGIN_REFRESH = 22,
-    [pbr::OriginalName("EGMI_PTWG_PROXY_REGISTERED")] EGMI_PTWG_PROXY_REGISTERED = 30,
-    [pbr::OriginalName("EGMI_PTWG_PROXY_UNREGISTERED")] EGMI_PTWG_PROXY_UNREGISTERED = 31,
-    [pbr::OriginalName("EGMI_PTWG_PROXY_REFRESH")] EGMI_PTWG_PROXY_REFRESH = 32,
-    [pbr::OriginalName("EGMI_GTW_GAME_REGISTERED")] EGMI_GTW_GAME_REGISTERED = 40,
-    [pbr::OriginalName("EGMI_GTW_GAME_UNREGISTERED")] EGMI_GTW_GAME_UNREGISTERED = 41,
-    [pbr::OriginalName("EGMI_GTW_GAME_REFRESH")] EGMI_GTW_GAME_REFRESH = 42,
-    [pbr::OriginalName("EGMI_DTW_DB_REGISTERED")] EGMI_DTW_DB_REGISTERED = 60,
-    [pbr::OriginalName("EGMI_DTW_DB_UNREGISTERED")] EGMI_DTW_DB_UNREGISTERED = 61,
-    [pbr::OriginalName("EGMI_DTW_DB_REFRESH")] EGMI_DTW_DB_REFRESH = 62,
-    [pbr::OriginalName("EGMI_STS_NET_INFO")] EGMI_STS_NET_INFO = 70,
-    [pbr::OriginalName("EGEC_REQ_LAG_TEST")] EGEC_REQ_LAG_TEST = 80,
-    [pbr::OriginalName("EGEC_ACK_GATE_LAG_TEST")] EGEC_ACK_GATE_LAG_TEST = 81,
-    [pbr::OriginalName("EGEC_ACK_GAME_LAG_TEST")] EGEC_ACK_GAME_LAG_TEST = 82,
-    [pbr::OriginalName("EGMI_STS_SERVER_REPORT")] EGMI_STS_SERVER_REPORT = 90,
-    [pbr::OriginalName("EGMI_STS_HEART_BEAT")] EGMI_STS_HEART_BEAT = 100,
+    [pbr::OriginalName("EGMI_CLOSE_SOCKET")] EgmiCloseSocket = 3,
+    [pbr::OriginalName("EGMI_WTM_WORLD_REGISTERED")] EgmiWtmWorldRegistered = 10,
+    [pbr::OriginalName("EGMI_WTM_WORLD_UNREGISTERED")] EgmiWtmWorldUnregistered = 11,
+    [pbr::OriginalName("EGMI_WTM_WORLD_REFRESH")] EgmiWtmWorldRefresh = 12,
+    [pbr::OriginalName("EGMI_LTM_LOGIN_REGISTERED")] EgmiLtmLoginRegistered = 20,
+    [pbr::OriginalName("EGMI_LTM_LOGIN_UNREGISTERED")] EgmiLtmLoginUnregistered = 21,
+    [pbr::OriginalName("EGMI_LTM_LOGIN_REFRESH")] EgmiLtmLoginRefresh = 22,
+    [pbr::OriginalName("EGMI_PTWG_PROXY_REGISTERED")] EgmiPtwgProxyRegistered = 30,
+    [pbr::OriginalName("EGMI_PTWG_PROXY_UNREGISTERED")] EgmiPtwgProxyUnregistered = 31,
+    [pbr::OriginalName("EGMI_PTWG_PROXY_REFRESH")] EgmiPtwgProxyRefresh = 32,
+    [pbr::OriginalName("EGMI_GTW_GAME_REGISTERED")] EgmiGtwGameRegistered = 40,
+    [pbr::OriginalName("EGMI_GTW_GAME_UNREGISTERED")] EgmiGtwGameUnregistered = 41,
+    [pbr::OriginalName("EGMI_GTW_GAME_REFRESH")] EgmiGtwGameRefresh = 42,
+    [pbr::OriginalName("EGMI_DTW_DB_REGISTERED")] EgmiDtwDbRegistered = 60,
+    [pbr::OriginalName("EGMI_DTW_DB_UNREGISTERED")] EgmiDtwDbUnregistered = 61,
+    [pbr::OriginalName("EGMI_DTW_DB_REFRESH")] EgmiDtwDbRefresh = 62,
+    [pbr::OriginalName("EGMI_STS_NET_INFO")] EgmiStsNetInfo = 70,
+    [pbr::OriginalName("EGEC_REQ_LAG_TEST")] EgecReqLagTest = 80,
+    [pbr::OriginalName("EGEC_ACK_GATE_LAG_TEST")] EgecAckGateLagTest = 81,
+    [pbr::OriginalName("EGEC_ACK_GAME_LAG_TEST")] EgecAckGameLagTest = 82,
+    [pbr::OriginalName("EGMI_STS_SERVER_REPORT")] EgmiStsServerReport = 90,
+    [pbr::OriginalName("EGMI_STS_HEART_BEAT")] EgmiStsHeartBeat = 100,
     /// <summary>
     ///////////////////////////////////////////////////////////////////////////////////////
     /// </summary>
-    [pbr::OriginalName("EGMI_REQ_LOGIN")] EGMI_REQ_LOGIN = 101,
+    [pbr::OriginalName("EGMI_REQ_LOGIN")] EgmiReqLogin = 101,
     /// <summary>
     /// </summary>
-    [pbr::OriginalName("EGMI_ACK_LOGIN")] EGMI_ACK_LOGIN = 102,
+    [pbr::OriginalName("EGMI_ACK_LOGIN")] EgmiAckLogin = 102,
     /// <summary>
     /// </summary>
-    [pbr::OriginalName("EGMI_REQ_LOGOUT")] EGMI_REQ_LOGOUT = 103,
+    [pbr::OriginalName("EGMI_REQ_LOGOUT")] EgmiReqLogout = 103,
     /// <summary>
     /// </summary>
-    [pbr::OriginalName("EGMI_REQ_WORLD_LIST")] EGMI_REQ_WORLD_LIST = 110,
+    [pbr::OriginalName("EGMI_REQ_WORLD_LIST")] EgmiReqWorldList = 110,
     /// <summary>
     /// </summary>
-    [pbr::OriginalName("EGMI_ACK_WORLD_LIST")] EGMI_ACK_WORLD_LIST = 111,
+    [pbr::OriginalName("EGMI_ACK_WORLD_LIST")] EgmiAckWorldList = 111,
     /// <summary>
     /// </summary>
-    [pbr::OriginalName("EGMI_REQ_CONNECT_WORLD")] EGMI_REQ_CONNECT_WORLD = 112,
-    [pbr::OriginalName("EGMI_ACK_CONNECT_WORLD")] EGMI_ACK_CONNECT_WORLD = 113,
+    [pbr::OriginalName("EGMI_REQ_CONNECT_WORLD")] EgmiReqConnectWorld = 112,
+    [pbr::OriginalName("EGMI_ACK_CONNECT_WORLD")] EgmiAckConnectWorld = 113,
     /// <summary>
     /// </summary>
-    [pbr::OriginalName("EGMI_REQ_KICK_CLIENT_INWORLD")] EGMI_REQ_KICK_CLIENT_INWORLD = 114,
+    [pbr::OriginalName("EGMI_REQ_KICK_CLIENT_INWORLD")] EgmiReqKickClientInworld = 114,
     /// <summary>
     /// </summary>
-    [pbr::OriginalName("EGMI_REQ_CONNECT_KEY")] EGMI_REQ_CONNECT_KEY = 120,
+    [pbr::OriginalName("EGMI_REQ_CONNECT_KEY")] EgmiReqConnectKey = 120,
     /// <summary>
     /// </summary>
-    [pbr::OriginalName("EGMI_ACK_CONNECT_KEY")] EGMI_ACK_CONNECT_KEY = 122,
+    [pbr::OriginalName("EGMI_ACK_CONNECT_KEY")] EgmiAckConnectKey = 122,
     /// <summary>
     /// </summary>
-    [pbr::OriginalName("EGMI_REQ_SELECT_SERVER")] EGMI_REQ_SELECT_SERVER = 130,
+    [pbr::OriginalName("EGMI_REQ_SELECT_SERVER")] EgmiReqSelectServer = 130,
     /// <summary>
     /// </summary>
-    [pbr::OriginalName("EGMI_ACK_SELECT_SERVER")] EGMI_ACK_SELECT_SERVER = 131,
+    [pbr::OriginalName("EGMI_ACK_SELECT_SERVER")] EgmiAckSelectServer = 131,
     /// <summary>
     /// </summary>
-    [pbr::OriginalName("EGMI_REQ_ROLE_LIST")] EGMI_REQ_ROLE_LIST = 132,
+    [pbr::OriginalName("EGMI_REQ_ROLE_LIST")] EgmiReqRoleList = 132,
     /// <summary>
     /// </summary>
-    [pbr::OriginalName("EGMI_ACK_ROLE_LIST")] EGMI_ACK_ROLE_LIST = 133,
+    [pbr::OriginalName("EGMI_ACK_ROLE_LIST")] EgmiAckRoleList = 133,
     /// <summary>
     /// </summary>
-    [pbr::OriginalName("EGMI_REQ_CREATE_ROLE")] EGMI_REQ_CREATE_ROLE = 134,
+    [pbr::OriginalName("EGMI_REQ_CREATE_ROLE")] EgmiReqCreateRole = 134,
     /// <summary>
     /// </summary>
-    [pbr::OriginalName("EGMI_REQ_DELETE_ROLE")] EGMI_REQ_DELETE_ROLE = 135,
+    [pbr::OriginalName("EGMI_REQ_DELETE_ROLE")] EgmiReqDeleteRole = 135,
     /// <summary>
     /// </summary>
-    [pbr::OriginalName("EGMI_REQ_RECOVER_ROLE")] EGMI_REQ_RECOVER_ROLE = 136,
+    [pbr::OriginalName("EGMI_REQ_RECOVER_ROLE")] EgmiReqRecoverRole = 136,
     /// <summary>
     /// </summary>
-    [pbr::OriginalName("EGMI_REQ_LOAD_ROLE_DATA")] EGMI_REQ_LOAD_ROLE_DATA = 140,
+    [pbr::OriginalName("EGMI_REQ_LOAD_ROLE_DATA")] EgmiReqLoadRoleData = 140,
     /// <summary>
     /// </summary>
-    [pbr::OriginalName("EGMI_ACK_LOAD_ROLE_DATA")] EGMI_ACK_LOAD_ROLE_DATA = 141,
+    [pbr::OriginalName("EGMI_ACK_LOAD_ROLE_DATA")] EgmiAckLoadRoleData = 141,
     /// <summary>
     /// </summary>
-    [pbr::OriginalName("EGMI_REQ_SAVE_ROLE_DATA")] EGMI_REQ_SAVE_ROLE_DATA = 142,
+    [pbr::OriginalName("EGMI_REQ_SAVE_ROLE_DATA")] EgmiReqSaveRoleData = 142,
     /// <summary>
     /// </summary>
-    [pbr::OriginalName("EGMI_ACK_SAVE_ROLE_DATA")] EGMI_ACK_SAVE_ROLE_DATA = 143,
+    [pbr::OriginalName("EGMI_ACK_SAVE_ROLE_DATA")] EgmiAckSaveRoleData = 143,
     /// <summary>
     /// </summary>
-    [pbr::OriginalName("EGMI_REQ_ENTER_GAME")] EGMI_REQ_ENTER_GAME = 150,
+    [pbr::OriginalName("EGMI_REQ_ENTER_GAME")] EgmiReqEnterGame = 150,
     /// <summary>
     /// </summary>
-    [pbr::OriginalName("EGMI_ACK_ENTER_GAME")] EGMI_ACK_ENTER_GAME = 151,
+    [pbr::OriginalName("EGMI_ACK_ENTER_GAME")] EgmiAckEnterGame = 151,
     /// <summary>
     /// </summary>
-    [pbr::OriginalName("EGMI_REQ_LEAVE_GAME")] EGMI_REQ_LEAVE_GAME = 152,
+    [pbr::OriginalName("EGMI_REQ_LEAVE_GAME")] EgmiReqLeaveGame = 152,
     /// <summary>
     /// </summary>
-    [pbr::OriginalName("EGMI_ACK_LEAVE_GAME")] EGMI_ACK_LEAVE_GAME = 153,
+    [pbr::OriginalName("EGMI_ACK_LEAVE_GAME")] EgmiAckLeaveGame = 153,
     /// <summary>
     /// </summary>
-    [pbr::OriginalName("EGMI_REQ_SWAP_GAME")] EGMI_REQ_SWAP_GAME = 154,
+    [pbr::OriginalName("EGMI_REQ_SWAP_GAME")] EgmiReqSwapGame = 154,
     /// <summary>
     /// </summary>
-    [pbr::OriginalName("EGMI_REQ_SWAP_SCENE")] EGMI_REQ_SWAP_SCENE = 155,
+    [pbr::OriginalName("EGMI_REQ_SWAP_SCENE")] EgmiReqSwapScene = 155,
     /// <summary>
     /// </summary>
-    [pbr::OriginalName("EGMI_ACK_SWAP_SCENE")] EGMI_ACK_SWAP_SCENE = 156,
+    [pbr::OriginalName("EGMI_ACK_SWAP_SCENE")] EgmiAckSwapScene = 156,
     /// <summary>
     /// </summary>
-    [pbr::OriginalName("EGMI_REQ_SWAP_HOME_SCENE")] EGMI_REQ_SWAP_HOME_SCENE = 157,
+    [pbr::OriginalName("EGMI_REQ_SWAP_HOME_SCENE")] EgmiReqSwapHomeScene = 157,
     /// <summary>
     /// </summary>
-    [pbr::OriginalName("EGMI_ACK_SWAP_HOME_SCENE")] EGMI_ACK_SWAP_HOME_SCENE = 158,
+    [pbr::OriginalName("EGMI_ACK_SWAP_HOME_SCENE")] EgmiAckSwapHomeScene = 158,
     /// <summary>
     /// </summary>
-    [pbr::OriginalName("EGMI_REQ_ENTER_GAME_FINISH")] EGMI_REQ_ENTER_GAME_FINISH = 159,
+    [pbr::OriginalName("EGMI_REQ_ENTER_GAME_FINISH")] EgmiReqEnterGameFinish = 159,
     /// <summary>
     /// </summary>
-    [pbr::OriginalName("EGMI_ACK_ENTER_GAME_FINISH")] EGMI_ACK_ENTER_GAME_FINISH = 160,
+    [pbr::OriginalName("EGMI_ACK_ENTER_GAME_FINISH")] EgmiAckEnterGameFinish = 160,
     /// <summary>
     /// </summary>
-    [pbr::OriginalName("EGMI_ACK_OBJECT_ENTRY")] EGMI_ACK_OBJECT_ENTRY = 200,
+    [pbr::OriginalName("EGMI_ACK_OBJECT_ENTRY")] EgmiAckObjectEntry = 200,
     /// <summary>
     /// </summary>
-    [pbr::OriginalName("EGMI_ACK_OBJECT_LEAVE")] EGMI_ACK_OBJECT_LEAVE = 201,
+    [pbr::OriginalName("EGMI_ACK_OBJECT_LEAVE")] EgmiAckObjectLeave = 201,
     /// <summary>
     /// </summary>
-    [pbr::OriginalName("EGMI_ACK_OBJECT_PROPERTY_ENTRY")] EGMI_ACK_OBJECT_PROPERTY_ENTRY = 202,
+    [pbr::OriginalName("EGMI_ACK_OBJECT_PROPERTY_ENTRY")] EgmiAckObjectPropertyEntry = 202,
     /// <summary>
     /// </summary>
-    [pbr::OriginalName("EGMI_ACK_OBJECT_RECORD_ENTRY")] EGMI_ACK_OBJECT_RECORD_ENTRY = 203,
+    [pbr::OriginalName("EGMI_ACK_OBJECT_RECORD_ENTRY")] EgmiAckObjectRecordEntry = 203,
     /// <summary>
     /// </summary>
-    [pbr::OriginalName("EGMI_ACK_PROPERTY_INT")] EGMI_ACK_PROPERTY_INT = 210,
+    [pbr::OriginalName("EGMI_ACK_PROPERTY_INT")] EgmiAckPropertyInt = 210,
     /// <summary>
     /// </summary>
-    [pbr::OriginalName("EGMI_ACK_PROPERTY_FLOAT")] EGMI_ACK_PROPERTY_FLOAT = 211,
+    [pbr::OriginalName("EGMI_ACK_PROPERTY_FLOAT")] EgmiAckPropertyFloat = 211,
     /// <summary>
     /// </summary>
-    [pbr::OriginalName("EGMI_ACK_PROPERTY_STRING")] EGMI_ACK_PROPERTY_STRING = 212,
+    [pbr::OriginalName("EGMI_ACK_PROPERTY_STRING")] EgmiAckPropertyString = 212,
     /// <summary>
     ///EGMI_ACK_PROPERTY_DOUBLE					= 213;			//
     /// </summary>
-    [pbr::OriginalName("EGMI_ACK_PROPERTY_OBJECT")] EGMI_ACK_PROPERTY_OBJECT = 214,
-    [pbr::OriginalName("EGMI_ACK_PROPERTY_VECTOR2")] EGMI_ACK_PROPERTY_VECTOR2 = 215,
-    [pbr::OriginalName("EGMI_ACK_PROPERTY_VECTOR3")] EGMI_ACK_PROPERTY_VECTOR3 = 216,
-    [pbr::OriginalName("EGMI_ACK_PROPERTY_CLEAR")] EGMI_ACK_PROPERTY_CLEAR = 217,
-    [pbr::OriginalName("EGMI_ACK_ADD_ROW")] EGMI_ACK_ADD_ROW = 220,
-    [pbr::OriginalName("EGMI_ACK_REMOVE_ROW")] EGMI_ACK_REMOVE_ROW = 221,
-    [pbr::OriginalName("EGMI_ACK_SWAP_ROW")] EGMI_ACK_SWAP_ROW = 222,
-    [pbr::OriginalName("EGMI_ACK_RECORD_INT")] EGMI_ACK_RECORD_INT = 223,
-    [pbr::OriginalName("EGMI_ACK_RECORD_FLOAT")] EGMI_ACK_RECORD_FLOAT = 224,
+    [pbr::OriginalName("EGMI_ACK_PROPERTY_OBJECT")] EgmiAckPropertyObject = 214,
+    [pbr::OriginalName("EGMI_ACK_PROPERTY_VECTOR2")] EgmiAckPropertyVector2 = 215,
+    [pbr::OriginalName("EGMI_ACK_PROPERTY_VECTOR3")] EgmiAckPropertyVector3 = 216,
+    [pbr::OriginalName("EGMI_ACK_PROPERTY_CLEAR")] EgmiAckPropertyClear = 217,
+    [pbr::OriginalName("EGMI_ACK_ADD_ROW")] EgmiAckAddRow = 220,
+    [pbr::OriginalName("EGMI_ACK_REMOVE_ROW")] EgmiAckRemoveRow = 221,
+    [pbr::OriginalName("EGMI_ACK_SWAP_ROW")] EgmiAckSwapRow = 222,
+    [pbr::OriginalName("EGMI_ACK_RECORD_INT")] EgmiAckRecordInt = 223,
+    [pbr::OriginalName("EGMI_ACK_RECORD_FLOAT")] EgmiAckRecordFloat = 224,
     /// <summary>
     ///EGMI_ACK_RECORD_DOUBLE					= 225;
     /// </summary>
-    [pbr::OriginalName("EGMI_ACK_RECORD_STRING")] EGMI_ACK_RECORD_STRING = 226,
-    [pbr::OriginalName("EGMI_ACK_RECORD_OBJECT")] EGMI_ACK_RECORD_OBJECT = 227,
-    [pbr::OriginalName("EGMI_ACK_RECORD_VECTOR2")] EGMI_ACK_RECORD_VECTOR2 = 228,
-    [pbr::OriginalName("EGMI_ACK_RECORD_VECTOR3")] EGMI_ACK_RECORD_VECTOR3 = 229,
-    [pbr::OriginalName("EGMI_ACK_RECORD_CLEAR")] EGMI_ACK_RECORD_CLEAR = 250,
-    [pbr::OriginalName("EGMI_ACK_RECORD_SORT")] EGMI_ACK_RECORD_SORT = 251,
-    [pbr::OriginalName("EGMI_ACK_DATA_FINISHED")] EGMI_ACK_DATA_FINISHED = 260,
-    [pbr::OriginalName("EGMI_REQ_AI_ONWER")] EGMI_REQ_AI_ONWER = 300,
-    [pbr::OriginalName("EGMI_REQ_SEARCH_OPPNENT")] EGMI_REQ_SEARCH_OPPNENT = 1220,
-    [pbr::OriginalName("EGMI_ACK_SEARCH_OPPNENT")] EGMI_ACK_SEARCH_OPPNENT = 1221,
-    [pbr::OriginalName("EGMI_REQ_END_OPPNENT")] EGMI_REQ_END_OPPNENT = 1222,
-    [pbr::OriginalName("EGMI_ACK_END_OPPNENT")] EGMI_ACK_END_OPPNENT = 1223,
-    [pbr::OriginalName("EGMI_REQ_CANCEL_SEARCH")] EGMI_REQ_CANCEL_SEARCH = 1224,
-    [pbr::OriginalName("EGMI_ACK_CANCEL_SEARCH")] EGMI_ACK_CANCEL_SEARCH = 1225,
-    [pbr::OriginalName("EGMI_REQ_MOVE")] EGMI_REQ_MOVE = 1230,
-    [pbr::OriginalName("EGMI_ACK_MOVE")] EGMI_ACK_MOVE = 1231,
-    [pbr::OriginalName("EGMI_REQ_MOVE_IMMUNE")] EGMI_REQ_MOVE_IMMUNE = 1232,
-    [pbr::OriginalName("EGMI_ACK_MOVE_IMMUNE")] EGMI_ACK_MOVE_IMMUNE = 1233,
-    [pbr::OriginalName("EGMI_REQ_STATE_SYNC")] EGMI_REQ_STATE_SYNC = 1234,
-    [pbr::OriginalName("EGMI_ACK_STATE_SYNC")] EGMI_ACK_STATE_SYNC = 1235,
-    [pbr::OriginalName("EGMI_REQ_POS_SYNC")] EGMI_REQ_POS_SYNC = 1236,
-    [pbr::OriginalName("EGMI_ACK_POS_SYNC")] EGMI_ACK_POS_SYNC = 1237,
-    [pbr::OriginalName("EGMI_REQ_SKILL_OBJECTX")] EGMI_REQ_SKILL_OBJECTX = 1240,
-    [pbr::OriginalName("EGMI_ACK_SKILL_OBJECTX")] EGMI_ACK_SKILL_OBJECTX = 1241,
-    [pbr::OriginalName("EGMI_REQ_SKILL_POS")] EGMI_REQ_SKILL_POS = 1242,
-    [pbr::OriginalName("EGMI_ACK_SKILL_POS")] EGMI_ACK_SKILL_POS = 1243,
-    [pbr::OriginalName("EGMI_REQ_ITEM_OBJECT")] EGMI_REQ_ITEM_OBJECT = 1244,
-    [pbr::OriginalName("EGMI_ACK_ITEM_OBJECT")] EGMI_ACK_ITEM_OBJECT = 1245,
-    [pbr::OriginalName("EGMI_REQ_ITEM_POS")] EGMI_REQ_ITEM_POS = 1246,
-    [pbr::OriginalName("EGMI_ACK_ITEM_POS")] EGMI_ACK_ITEM_POS = 1247,
-    [pbr::OriginalName("EGMI_REQ_CHAT")] EGMI_REQ_CHAT = 1250,
-    [pbr::OriginalName("EGMI_ACK_CHAT")] EGMI_ACK_CHAT = 1251,
-    [pbr::OriginalName("EGMI_REQ_SALE_ITEM")] EGMI_REQ_SALE_ITEM = 1252,
-    [pbr::OriginalName("EGMI_REQ_SPLIT_ITEM")] EGMI_REQ_SPLIT_ITEM = 1253,
-    [pbr::OriginalName("EGMI_REQ_PRODUCE_ITEM")] EGMI_REQ_PRODUCE_ITEM = 1254,
-    [pbr::OriginalName("EGMI_REQ_PICK_ITEM")] EGMI_REQ_PICK_ITEM = 1255,
-    [pbr::OriginalName("EGMI_REQ_ACCEPT_TASK")] EGMI_REQ_ACCEPT_TASK = 1256,
-    [pbr::OriginalName("EGMI_REQ_COMPELETE_TASK")] EGMI_REQ_COMPELETE_TASK = 1257,
+    [pbr::OriginalName("EGMI_ACK_RECORD_STRING")] EgmiAckRecordString = 226,
+    [pbr::OriginalName("EGMI_ACK_RECORD_OBJECT")] EgmiAckRecordObject = 227,
+    [pbr::OriginalName("EGMI_ACK_RECORD_VECTOR2")] EgmiAckRecordVector2 = 228,
+    [pbr::OriginalName("EGMI_ACK_RECORD_VECTOR3")] EgmiAckRecordVector3 = 229,
+    [pbr::OriginalName("EGMI_ACK_RECORD_CLEAR")] EgmiAckRecordClear = 250,
+    [pbr::OriginalName("EGMI_ACK_RECORD_SORT")] EgmiAckRecordSort = 251,
+    [pbr::OriginalName("EGMI_ACK_DATA_FINISHED")] EgmiAckDataFinished = 260,
+    [pbr::OriginalName("EGMI_REQ_AI_ONWER")] EgmiReqAiOnwer = 300,
+    [pbr::OriginalName("EGMI_REQ_SEARCH_OPPNENT")] EgmiReqSearchOppnent = 1220,
+    [pbr::OriginalName("EGMI_ACK_SEARCH_OPPNENT")] EgmiAckSearchOppnent = 1221,
+    [pbr::OriginalName("EGMI_REQ_END_OPPNENT")] EgmiReqEndOppnent = 1222,
+    [pbr::OriginalName("EGMI_ACK_END_OPPNENT")] EgmiAckEndOppnent = 1223,
+    [pbr::OriginalName("EGMI_REQ_CANCEL_SEARCH")] EgmiReqCancelSearch = 1224,
+    [pbr::OriginalName("EGMI_ACK_CANCEL_SEARCH")] EgmiAckCancelSearch = 1225,
+    [pbr::OriginalName("EGMI_REQ_MOVE")] EgmiReqMove = 1230,
+    [pbr::OriginalName("EGMI_ACK_MOVE")] EgmiAckMove = 1231,
+    [pbr::OriginalName("EGMI_REQ_MOVE_IMMUNE")] EgmiReqMoveImmune = 1232,
+    [pbr::OriginalName("EGMI_ACK_MOVE_IMMUNE")] EgmiAckMoveImmune = 1233,
+    [pbr::OriginalName("EGMI_REQ_STATE_SYNC")] EgmiReqStateSync = 1234,
+    [pbr::OriginalName("EGMI_ACK_STATE_SYNC")] EgmiAckStateSync = 1235,
+    [pbr::OriginalName("EGMI_REQ_POS_SYNC")] EgmiReqPosSync = 1236,
+    [pbr::OriginalName("EGMI_ACK_POS_SYNC")] EgmiAckPosSync = 1237,
+    [pbr::OriginalName("EGMI_REQ_SKILL_OBJECTX")] EgmiReqSkillObjectx = 1240,
+    [pbr::OriginalName("EGMI_ACK_SKILL_OBJECTX")] EgmiAckSkillObjectx = 1241,
+    [pbr::OriginalName("EGMI_REQ_SKILL_POS")] EgmiReqSkillPos = 1242,
+    [pbr::OriginalName("EGMI_ACK_SKILL_POS")] EgmiAckSkillPos = 1243,
+    [pbr::OriginalName("EGMI_REQ_ITEM_OBJECT")] EgmiReqItemObject = 1244,
+    [pbr::OriginalName("EGMI_ACK_ITEM_OBJECT")] EgmiAckItemObject = 1245,
+    [pbr::OriginalName("EGMI_REQ_ITEM_POS")] EgmiReqItemPos = 1246,
+    [pbr::OriginalName("EGMI_ACK_ITEM_POS")] EgmiAckItemPos = 1247,
+    [pbr::OriginalName("EGMI_REQ_CHAT")] EgmiReqChat = 1250,
+    [pbr::OriginalName("EGMI_ACK_CHAT")] EgmiAckChat = 1251,
+    [pbr::OriginalName("EGMI_REQ_SALE_ITEM")] EgmiReqSaleItem = 1252,
+    [pbr::OriginalName("EGMI_REQ_SPLIT_ITEM")] EgmiReqSplitItem = 1253,
+    [pbr::OriginalName("EGMI_REQ_PRODUCE_ITEM")] EgmiReqProduceItem = 1254,
+    [pbr::OriginalName("EGMI_REQ_PICK_ITEM")] EgmiReqPickItem = 1255,
+    [pbr::OriginalName("EGMI_REQ_ACCEPT_TASK")] EgmiReqAcceptTask = 1256,
+    [pbr::OriginalName("EGMI_REQ_COMPELETE_TASK")] EgmiReqCompeleteTask = 1257,
     /// <summary>
     /// </summary>
-    [pbr::OriginalName("EGMI_ACK_ONLINE_NOTIFY")] EGMI_ACK_ONLINE_NOTIFY = 1290,
+    [pbr::OriginalName("EGMI_ACK_ONLINE_NOTIFY")] EgmiAckOnlineNotify = 1290,
     /// <summary>
     /// </summary>
-    [pbr::OriginalName("EGMI_ACK_OFFLINE_NOTIFY")] EGMI_ACK_OFFLINE_NOTIFY = 1291,
+    [pbr::OriginalName("EGMI_ACK_OFFLINE_NOTIFY")] EgmiAckOfflineNotify = 1291,
     /// <summary>
     /// </summary>
-    [pbr::OriginalName("EGMI_REQ_CREATE_CLAN")] EGMI_REQ_CREATE_CLAN = 1300,
+    [pbr::OriginalName("EGMI_REQ_CREATE_CLAN")] EgmiReqCreateClan = 1300,
     /// <summary>
     /// </summary>
-    [pbr::OriginalName("EGMI_ACK_CREATE_CLAN")] EGMI_ACK_CREATE_CLAN = 1301,
+    [pbr::OriginalName("EGMI_ACK_CREATE_CLAN")] EgmiAckCreateClan = 1301,
     /// <summary>
     /// </summary>
-    [pbr::OriginalName("EGMI_REQ_JOIN_CLAN")] EGMI_REQ_JOIN_CLAN = 1302,
+    [pbr::OriginalName("EGMI_REQ_JOIN_CLAN")] EgmiReqJoinClan = 1302,
     /// <summary>
     /// </summary>
-    [pbr::OriginalName("EGMI_ACK_JOIN_CLAN")] EGMI_ACK_JOIN_CLAN = 1303,
+    [pbr::OriginalName("EGMI_ACK_JOIN_CLAN")] EgmiAckJoinClan = 1303,
     /// <summary>
     /// </summary>
-    [pbr::OriginalName("EGMI_REQ_LEAVE_CLAN")] EGMI_REQ_LEAVE_CLAN = 1304,
+    [pbr::OriginalName("EGMI_REQ_LEAVE_CLAN")] EgmiReqLeaveClan = 1304,
     /// <summary>
     /// </summary>
-    [pbr::OriginalName("EGMI_ACK_LEAVE_CLAN")] EGMI_ACK_LEAVE_CLAN = 1305,
+    [pbr::OriginalName("EGMI_ACK_LEAVE_CLAN")] EgmiAckLeaveClan = 1305,
     /// <summary>
     /// </summary>
-    [pbr::OriginalName("EGMI_REQ_OPR_CLAN")] EGMI_REQ_OPR_CLAN = 1306,
+    [pbr::OriginalName("EGMI_REQ_OPR_CLAN")] EgmiReqOprClan = 1306,
     /// <summary>
     /// </summary>
-    [pbr::OriginalName("EGMI_ACK_OPR_CLAN")] EGMI_ACK_OPR_CLAN = 1307,
+    [pbr::OriginalName("EGMI_ACK_OPR_CLAN")] EgmiAckOprClan = 1307,
     /// <summary>
     /// </summary>
-    [pbr::OriginalName("EGMI_REQ_SEARCH_CLAN")] EGMI_REQ_SEARCH_CLAN = 1308,
+    [pbr::OriginalName("EGMI_REQ_SEARCH_CLAN")] EgmiReqSearchClan = 1308,
     /// <summary>
     /// </summary>
-    [pbr::OriginalName("EGMI_ACK_SEARCH_CLAN")] EGMI_ACK_SEARCH_CLAN = 1309,
+    [pbr::OriginalName("EGMI_ACK_SEARCH_CLAN")] EgmiAckSearchClan = 1309,
     /// <summary>
     /// </summary>
-    [pbr::OriginalName("EGMI_REQ_CANCEL_SEARCH_CLAN")] EGMI_REQ_CANCEL_SEARCH_CLAN = 1310,
+    [pbr::OriginalName("EGMI_REQ_CANCEL_SEARCH_CLAN")] EgmiReqCancelSearchClan = 1310,
     /// <summary>
     /// </summary>
-    [pbr::OriginalName("EGEC_REQ_CREATE_CHATGROUP")] EGEC_REQ_CREATE_CHATGROUP = 1400,
+    [pbr::OriginalName("EGEC_REQ_CREATE_CHATGROUP")] EgecReqCreateChatgroup = 1400,
     /// <summary>
     /// </summary>
-    [pbr::OriginalName("EGEC_ACK_CREATE_CHATGROUP")] EGEC_ACK_CREATE_CHATGROUP = 1401,
+    [pbr::OriginalName("EGEC_ACK_CREATE_CHATGROUP")] EgecAckCreateChatgroup = 1401,
     /// <summary>
     /// </summary>
-    [pbr::OriginalName("EGEC_REQ_JOIN_CHATGROUP")] EGEC_REQ_JOIN_CHATGROUP = 1402,
+    [pbr::OriginalName("EGEC_REQ_JOIN_CHATGROUP")] EgecReqJoinChatgroup = 1402,
     /// <summary>
     /// </summary>
-    [pbr::OriginalName("EGEC_ACK_JOIN_CHATGROUP")] EGEC_ACK_JOIN_CHATGROUP = 1403,
+    [pbr::OriginalName("EGEC_ACK_JOIN_CHATGROUP")] EgecAckJoinChatgroup = 1403,
     /// <summary>
     /// </summary>
-    [pbr::OriginalName("EGEC_REQ_LEAVE_CHATGROUP")] EGEC_REQ_LEAVE_CHATGROUP = 1404,
+    [pbr::OriginalName("EGEC_REQ_LEAVE_CHATGROUP")] EgecReqLeaveChatgroup = 1404,
     /// <summary>
     /// </summary>
-    [pbr::OriginalName("EGEC_ACK_LEAVE_CHATGROUP")] EGEC_ACK_LEAVE_CHATGROUP = 1405,
+    [pbr::OriginalName("EGEC_ACK_LEAVE_CHATGROUP")] EgecAckLeaveChatgroup = 1405,
     /// <summary>
     /// </summary>
-    [pbr::OriginalName("EGEC_REQ_SUBSCRIPTION_CHATGROUP")] EGEC_REQ_SUBSCRIPTION_CHATGROUP = 1406,
+    [pbr::OriginalName("EGEC_REQ_SUBSCRIPTION_CHATGROUP")] EgecReqSubscriptionChatgroup = 1406,
     /// <summary>
     /// </summary>
-    [pbr::OriginalName("EGEC_REQ_CANCELSUBSCRIPTION_CHATGROUP")] EGEC_REQ_CANCELSUBSCRIPTION_CHATGROUP = 1407,
+    [pbr::OriginalName("EGEC_REQ_CANCELSUBSCRIPTION_CHATGROUP")] EgecReqCancelsubscriptionChatgroup = 1407,
     /// <summary>
     /// </summary>
-    [pbr::OriginalName("EGEC_REQ_INVITE_CHATGROUP")] EGEC_REQ_INVITE_CHATGROUP = 1408,
+    [pbr::OriginalName("EGEC_REQ_INVITE_CHATGROUP")] EgecReqInviteChatgroup = 1408,
     /// <summary>
     /// </summary>
-    [pbr::OriginalName("EGEC_ACK_INVITE_CHATGROUP")] EGEC_ACK_INVITE_CHATGROUP = 1409,
+    [pbr::OriginalName("EGEC_ACK_INVITE_CHATGROUP")] EgecAckInviteChatgroup = 1409,
     /// <summary>
     /// </summary>
-    [pbr::OriginalName("EGEC_REQ_KICK_CHATGROUP")] EGEC_REQ_KICK_CHATGROUP = 1410,
+    [pbr::OriginalName("EGEC_REQ_KICK_CHATGROUP")] EgecReqKickChatgroup = 1410,
     /// <summary>
     /// </summary>
-    [pbr::OriginalName("EGEC_ACK_KICK_CHATGROUP")] EGEC_ACK_KICK_CHATGROUP = 1411,
+    [pbr::OriginalName("EGEC_ACK_KICK_CHATGROUP")] EgecAckKickChatgroup = 1411,
     /// <summary>
     /// </summary>
-    [pbr::OriginalName("EGEC_REQ_CHATGROUP_TO_TEAM")] EGEC_REQ_CHATGROUP_TO_TEAM = 1450,
+    [pbr::OriginalName("EGEC_REQ_CHATGROUP_TO_TEAM")] EgecReqChatgroupToTeam = 1450,
     /// <summary>
     /// </summary>
-    [pbr::OriginalName("EGEC_ACK_CHATGROUP_TO_TEAM")] EGEC_ACK_CHATGROUP_TO_TEAM = 1451,
+    [pbr::OriginalName("EGEC_ACK_CHATGROUP_TO_TEAM")] EgecAckChatgroupToTeam = 1451,
     /// <summary>
     /// </summary>
-    [pbr::OriginalName("EGEC_REQ_INTENSIFYLEVEL_TO_EQUIP")] EGEC_REQ_INTENSIFYLEVEL_TO_EQUIP = 1500,
+    [pbr::OriginalName("EGEC_REQ_INTENSIFYLEVEL_TO_EQUIP")] EgecReqIntensifylevelToEquip = 1500,
     /// <summary>
     /// </summary>
-    [pbr::OriginalName("EGEC_ACK_INTENSIFYLEVEL_TO_EQUIP")] EGEC_ACK_INTENSIFYLEVEL_TO_EQUIP = 1501,
+    [pbr::OriginalName("EGEC_ACK_INTENSIFYLEVEL_TO_EQUIP")] EgecAckIntensifylevelToEquip = 1501,
     /// <summary>
     /// </summary>
-    [pbr::OriginalName("EGEC_REQ_HOLE_TO_EQUIP")] EGEC_REQ_HOLE_TO_EQUIP = 1502,
+    [pbr::OriginalName("EGEC_REQ_HOLE_TO_EQUIP")] EgecReqHoleToEquip = 1502,
     /// <summary>
     /// </summary>
-    [pbr::OriginalName("EGEC_ACK_HOLE_TO_EQUIP")] EGEC_ACK_HOLE_TO_EQUIP = 1503,
+    [pbr::OriginalName("EGEC_ACK_HOLE_TO_EQUIP")] EgecAckHoleToEquip = 1503,
     /// <summary>
     /// </summary>
-    [pbr::OriginalName("EGEC_REQ_INLAYSTONE_TO_EQUIP")] EGEC_REQ_INLAYSTONE_TO_EQUIP = 1504,
+    [pbr::OriginalName("EGEC_REQ_INLAYSTONE_TO_EQUIP")] EgecReqInlaystoneToEquip = 1504,
     /// <summary>
     /// </summary>
-    [pbr::OriginalName("EGEC_ACK_INLAYSTONE_TO_EQUIP")] EGEC_ACK_INLAYSTONE_TO_EQUIP = 1505,
+    [pbr::OriginalName("EGEC_ACK_INLAYSTONE_TO_EQUIP")] EgecAckInlaystoneToEquip = 1505,
     /// <summary>
     /// </summary>
-    [pbr::OriginalName("EGEC_REQ_ELEMENTLEVEL_TO_EQUIP")] EGEC_REQ_ELEMENTLEVEL_TO_EQUIP = 1506,
+    [pbr::OriginalName("EGEC_REQ_ELEMENTLEVEL_TO_EQUIP")] EgecReqElementlevelToEquip = 1506,
     /// <summary>
     /// </summary>
-    [pbr::OriginalName("EGEC_ACK_ELEMENTLEVEL_TO_EQUIP")] EGEC_ACK_ELEMENTLEVEL_TO_EQUIP = 1507,
+    [pbr::OriginalName("EGEC_ACK_ELEMENTLEVEL_TO_EQUIP")] EgecAckElementlevelToEquip = 1507,
     /// <summary>
     /// </summary>
-    [pbr::OriginalName("EGEC_WEAR_EQUIP")] EGEC_WEAR_EQUIP = 1508,
+    [pbr::OriginalName("EGEC_WEAR_EQUIP")] EgecWearEquip = 1508,
     /// <summary>
     /// </summary>
-    [pbr::OriginalName("EGEC_TAKEOFF_EQUIP")] EGEC_TAKEOFF_EQUIP = 1509,
+    [pbr::OriginalName("EGEC_TAKEOFF_EQUIP")] EgecTakeoffEquip = 1509,
     /// <summary>
     /// </summary>
-    [pbr::OriginalName("EGEC_REQ_SET_FIGHT_HERO")] EGEC_REQ_SET_FIGHT_HERO = 1520,
+    [pbr::OriginalName("EGEC_REQ_SET_FIGHT_HERO")] EgecReqSetFightHero = 1520,
     /// <summary>
     /// </summary>
-    [pbr::OriginalName("EGEC_REQ_SWITCH_FIGHT_HERO")] EGEC_REQ_SWITCH_FIGHT_HERO = 1521,
+    [pbr::OriginalName("EGEC_REQ_SWITCH_FIGHT_HERO")] EgecReqSwitchFightHero = 1521,
     /// <summary>
     /// </summary>
-    [pbr::OriginalName("EGEC_REQ_RELIVE_HERO")] EGEC_REQ_RELIVE_HERO = 1522,
+    [pbr::OriginalName("EGEC_REQ_RELIVE_HERO")] EgecReqReliveHero = 1522,
     /// <summary>
     /// </summary>
-    [pbr::OriginalName("EGEC_REQ_SEND_MAIL")] EGEC_REQ_SEND_MAIL = 1700,
+    [pbr::OriginalName("EGEC_REQ_SEND_MAIL")] EgecReqSendMail = 1700,
     /// <summary>
     /// </summary>
-    [pbr::OriginalName("EGEC_REQ_DRAW_MAIL")] EGEC_REQ_DRAW_MAIL = 1701,
+    [pbr::OriginalName("EGEC_REQ_DRAW_MAIL")] EgecReqDrawMail = 1701,
     /// <summary>
     /// </summary>
-    [pbr::OriginalName("EGEC_REQ_DELETE_MAIL")] EGEC_REQ_DELETE_MAIL = 1702,
+    [pbr::OriginalName("EGEC_REQ_DELETE_MAIL")] EgecReqDeleteMail = 1702,
     /// <summary>
     ///clone
     /// </summary>
-    [pbr::OriginalName("EGMI_ACK_CLONE_OBJECT_ENTRY")] EGMI_ACK_CLONE_OBJECT_ENTRY = 1800,
+    [pbr::OriginalName("EGMI_ACK_CLONE_OBJECT_ENTRY")] EgmiAckCloneObjectEntry = 1800,
     /// <summary>
     /// </summary>
-    [pbr::OriginalName("EGMI_ACK_CLONE_OBJECT_LEAVE")] EGMI_ACK_CLONE_OBJECT_LEAVE = 1801,
+    [pbr::OriginalName("EGMI_ACK_CLONE_OBJECT_LEAVE")] EgmiAckCloneObjectLeave = 1801,
     /// <summary>
     /// </summary>
-    [pbr::OriginalName("EGMI_ACK_CLONE_OBJECT_PROPERTY_ENTRY")] EGMI_ACK_CLONE_OBJECT_PROPERTY_ENTRY = 1802,
+    [pbr::OriginalName("EGMI_ACK_CLONE_OBJECT_PROPERTY_ENTRY")] EgmiAckCloneObjectPropertyEntry = 1802,
     /// <summary>
     /// </summary>
-    [pbr::OriginalName("EGMI_ACK_CLONE_OBJECT_RECORD_ENTRY")] EGMI_ACK_CLONE_OBJECT_RECORD_ENTRY = 1803,
+    [pbr::OriginalName("EGMI_ACK_CLONE_OBJECT_RECORD_ENTRY")] EgmiAckCloneObjectRecordEntry = 1803,
     /// <summary>
     /// </summary>
-    [pbr::OriginalName("EGMI_ACK_CLONE_PROPERTY_INT")] EGMI_ACK_CLONE_PROPERTY_INT = 1810,
+    [pbr::OriginalName("EGMI_ACK_CLONE_PROPERTY_INT")] EgmiAckClonePropertyInt = 1810,
     /// <summary>
     /// </summary>
-    [pbr::OriginalName("EGMI_ACK_CLONE_PROPERTY_FLOAT")] EGMI_ACK_CLONE_PROPERTY_FLOAT = 1811,
+    [pbr::OriginalName("EGMI_ACK_CLONE_PROPERTY_FLOAT")] EgmiAckClonePropertyFloat = 1811,
     /// <summary>
     /// </summary>
-    [pbr::OriginalName("EGMI_ACK_CLONE_PROPERTY_STRING")] EGMI_ACK_CLONE_PROPERTY_STRING = 1812,
+    [pbr::OriginalName("EGMI_ACK_CLONE_PROPERTY_STRING")] EgmiAckClonePropertyString = 1812,
     /// <summary>
     ///EGMI_ACK_CLONE_PROPERTY_DOUBLE				= 1813;			//
     /// </summary>
-    [pbr::OriginalName("EGMI_ACK_CLONE_PROPERTY_OBJECT")] EGMI_ACK_CLONE_PROPERTY_OBJECT = 1814,
+    [pbr::OriginalName("EGMI_ACK_CLONE_PROPERTY_OBJECT")] EgmiAckClonePropertyObject = 1814,
     /// <summary>
     /// </summary>
-    [pbr::OriginalName("EGMI_REQSWICHSERVER")] EGMI_REQSWICHSERVER = 1840,
+    [pbr::OriginalName("EGMI_REQSWICHSERVER")] EgmiReqswichserver = 1840,
     /// <summary>
     /// </summary>
-    [pbr::OriginalName("EGMI_ACKSWICHSERVER")] EGMI_ACKSWICHSERVER = 1841,
+    [pbr::OriginalName("EGMI_ACKSWICHSERVER")] EgmiAckswichserver = 1841,
     /// <summary>
     /// </summary>
-    [pbr::OriginalName("EGMI_REQ_CREATE_TEAM")] EGMI_REQ_CREATE_TEAM = 1860,
+    [pbr::OriginalName("EGMI_REQ_CREATE_TEAM")] EgmiReqCreateTeam = 1860,
     /// <summary>
     /// </summary>
-    [pbr::OriginalName("EGMI_ACK_CREATE_TEAM")] EGMI_ACK_CREATE_TEAM = 1861,
+    [pbr::OriginalName("EGMI_ACK_CREATE_TEAM")] EgmiAckCreateTeam = 1861,
     /// <summary>
     /// </summary>
-    [pbr::OriginalName("EGMI_REQ_JOIN_TEAM")] EGMI_REQ_JOIN_TEAM = 1862,
+    [pbr::OriginalName("EGMI_REQ_JOIN_TEAM")] EgmiReqJoinTeam = 1862,
     /// <summary>
     /// </summary>
-    [pbr::OriginalName("EGMI_ACK_JOIN_TEAM")] EGMI_ACK_JOIN_TEAM = 1863,
+    [pbr::OriginalName("EGMI_ACK_JOIN_TEAM")] EgmiAckJoinTeam = 1863,
     /// <summary>
     /// </summary>
-    [pbr::OriginalName("EGMI_REQ_LEAVE_TEAM")] EGMI_REQ_LEAVE_TEAM = 1864,
+    [pbr::OriginalName("EGMI_REQ_LEAVE_TEAM")] EgmiReqLeaveTeam = 1864,
     /// <summary>
     /// </summary>
-    [pbr::OriginalName("EGMI_ACK_LEAVE_TEAM")] EGMI_ACK_LEAVE_TEAM = 1865,
+    [pbr::OriginalName("EGMI_ACK_LEAVE_TEAM")] EgmiAckLeaveTeam = 1865,
     /// <summary>
     /// </summary>
-    [pbr::OriginalName("EGMI_REQ_INVITE_TEAM")] EGMI_REQ_INVITE_TEAM = 1866,
+    [pbr::OriginalName("EGMI_REQ_INVITE_TEAM")] EgmiReqInviteTeam = 1866,
     /// <summary>
     /// </summary>
-    [pbr::OriginalName("EGMI_REQ_OPRMEMBER_TEAM")] EGMI_REQ_OPRMEMBER_TEAM = 1867,
+    [pbr::OriginalName("EGMI_REQ_OPRMEMBER_TEAM")] EgmiReqOprmemberTeam = 1867,
     /// <summary>
     /// </summary>
-    [pbr::OriginalName("EGMI_ACK_OPRMEMBER_TEAM")] EGMI_ACK_OPRMEMBER_TEAM = 1868,
+    [pbr::OriginalName("EGMI_ACK_OPRMEMBER_TEAM")] EgmiAckOprmemberTeam = 1868,
     /// <summary>
     /// </summary>
-    [pbr::OriginalName("EGMI_REQ_TEAM_ENTER_ECTYPE")] EGMI_REQ_TEAM_ENTER_ECTYPE = 1869,
+    [pbr::OriginalName("EGMI_REQ_TEAM_ENTER_ECTYPE")] EgmiReqTeamEnterEctype = 1869,
     /// <summary>
     /// </summary>
-    [pbr::OriginalName("EGMI_ACK_TEAM_ENTER_ECTYPE")] EGMI_ACK_TEAM_ENTER_ECTYPE = 1870,
+    [pbr::OriginalName("EGMI_ACK_TEAM_ENTER_ECTYPE")] EgmiAckTeamEnterEctype = 1870,
     /// <summary>
     //////////////////////MapModule/////////////////////////////////////
     /// </summary>
-    [pbr::OriginalName("EGMI_REQ_MAP_GRID_INFO")] EGMI_REQ_MAP_GRID_INFO = 1900,
+    [pbr::OriginalName("EGMI_REQ_MAP_GRID_INFO")] EgmiReqMapGridInfo = 1900,
     /// <summary>
     /// </summary>
-    [pbr::OriginalName("EGMI_ACK_MAP_GRID_INFO")] EGMI_ACK_MAP_GRID_INFO = 1901,
+    [pbr::OriginalName("EGMI_ACK_MAP_GRID_INFO")] EgmiAckMapGridInfo = 1901,
     /// <summary>
     /// </summary>
-    [pbr::OriginalName("EGMI_REQ_BIG_MAP_INFO")] EGMI_REQ_BIG_MAP_INFO = 1902,
+    [pbr::OriginalName("EGMI_REQ_BIG_MAP_INFO")] EgmiReqBigMapInfo = 1902,
     /// <summary>
     /// </summary>
-    [pbr::OriginalName("EGMI_ACK_BIG_MAP_INFO")] EGMI_ACK_BIG_MAP_INFO = 1903,
+    [pbr::OriginalName("EGMI_ACK_BIG_MAP_INFO")] EgmiAckBigMapInfo = 1903,
     /// <summary>
     /// </summary>
-    [pbr::OriginalName("EGMI_REQ_HOLD_MAP_GRID")] EGMI_REQ_HOLD_MAP_GRID = 1910,
+    [pbr::OriginalName("EGMI_REQ_HOLD_MAP_GRID")] EgmiReqHoldMapGrid = 1910,
     /// <summary>
     /// </summary>
-    [pbr::OriginalName("EGMI_ACK_HOLD_MAP_GRID")] EGMI_ACK_HOLD_MAP_GRID = 1911,
+    [pbr::OriginalName("EGMI_ACK_HOLD_MAP_GRID")] EgmiAckHoldMapGrid = 1911,
     /// <summary>
     /// </summary>
-    [pbr::OriginalName("EGMI_REQ_LEAVE_MSG_MAP_GRID")] EGMI_REQ_LEAVE_MSG_MAP_GRID = 1912,
+    [pbr::OriginalName("EGMI_REQ_LEAVE_MSG_MAP_GRID")] EgmiReqLeaveMsgMapGrid = 1912,
     /// <summary>
     /// </summary>
-    [pbr::OriginalName("EGMI_ACK_LEAVE_MSG_MAP_GRID")] EGMI_ACK_LEAVE_MSG_MAP_GRID = 1913,
+    [pbr::OriginalName("EGMI_ACK_LEAVE_MSG_MAP_GRID")] EgmiAckLeaveMsgMapGrid = 1913,
     /// <summary>
     /// </summary>
-    [pbr::OriginalName("EGMI_REQ_GET_MAP_GRID_AWARD")] EGMI_REQ_GET_MAP_GRID_AWARD = 1914,
+    [pbr::OriginalName("EGMI_REQ_GET_MAP_GRID_AWARD")] EgmiReqGetMapGridAward = 1914,
     /// <summary>
     /// </summary>
-    [pbr::OriginalName("EGMI_ACK_GET_MAP_GRID_AWARD")] EGMI_ACK_GET_MAP_GRID_AWARD = 1915,
+    [pbr::OriginalName("EGMI_ACK_GET_MAP_GRID_AWARD")] EgmiAckGetMapGridAward = 1915,
     /// <summary>
     /// </summary>
-    [pbr::OriginalName("EGMI_REQ_MAP_GRID_HUNTING")] EGMI_REQ_MAP_GRID_HUNTING = 1916,
+    [pbr::OriginalName("EGMI_REQ_MAP_GRID_HUNTING")] EgmiReqMapGridHunting = 1916,
     /// <summary>
     /// </summary>
-    [pbr::OriginalName("EGMI_ACK_MAP_GRID_HUNTING")] EGMI_ACK_MAP_GRID_HUNTING = 1917,
+    [pbr::OriginalName("EGMI_ACK_MAP_GRID_HUNTING")] EgmiAckMapGridHunting = 1917,
     /// <summary>
     /// </summary>
-    [pbr::OriginalName("EGMI_REQ_MAP_GRID_KING_WAR")] EGMI_REQ_MAP_GRID_KING_WAR = 1918,
+    [pbr::OriginalName("EGMI_REQ_MAP_GRID_KING_WAR")] EgmiReqMapGridKingWar = 1918,
     /// <summary>
     /// </summary>
-    [pbr::OriginalName("EGMI_ACK_MAP_GRID_KING_WAR")] EGMI_ACK_MAP_GRID_KING_WAR = 1919,
+    [pbr::OriginalName("EGMI_ACK_MAP_GRID_KING_WAR")] EgmiAckMapGridKingWar = 1919,
     /// <summary>
     ///GAME SERVER TO WORLD SERVER
     /// </summary>
-    [pbr::OriginalName("EGMI_REQ_ADD_BUILDING")] EGMI_REQ_ADD_BUILDING = 5000,
+    [pbr::OriginalName("EGMI_REQ_ADD_BUILDING")] EgmiReqAddBuilding = 5000,
     /// <summary>
     /// </summary>
-    [pbr::OriginalName("EGMI_REQ_ACK_BUILDING_LIST")] EGMI_REQ_ACK_BUILDING_LIST = 5001,
-    [pbr::OriginalName("EGMI_REQ_STORE_BUILDING_LIST")] EGMI_REQ_STORE_BUILDING_LIST = 5010,
-    [pbr::OriginalName("EGMI_REQ_ACK_FRIEND_LIST")] EGMI_REQ_ACK_FRIEND_LIST = 6000,
-    [pbr::OriginalName("EGMI_ACK_FRIEND_DELETE")] EGMI_ACK_FRIEND_DELETE = 6001,
-    [pbr::OriginalName("EGMI_ACK_FRIEND_ADD")] EGMI_ACK_FRIEND_ADD = 6002,
-    [pbr::OriginalName("EGMI_ACK_INVITE_ADD")] EGMI_ACK_INVITE_ADD = 6003,
-    [pbr::OriginalName("EGMI_REQ_ACK_SEND_INVITE")] EGMI_REQ_ACK_SEND_INVITE = 6010,
-    [pbr::OriginalName("EGMI_REQ_ACK_ACCEPT_INVITE")] EGMI_REQ_ACK_ACCEPT_INVITE = 6011,
-    [pbr::OriginalName("EGMI_REQ_ACK_REJECT_INVITE")] EGMI_REQ_ACK_REJECT_INVITE = 6012,
-    [pbr::OriginalName("EGMI_REQ_ACK_IGNORE_INVITE")] EGMI_REQ_ACK_IGNORE_INVITE = 6013,
-    [pbr::OriginalName("EGMI_REQ_ACK_BLOCK_PLAYER")] EGMI_REQ_ACK_BLOCK_PLAYER = 6014,
-    [pbr::OriginalName("EGMI_REQ_ACK_UNBLOCK_PLAYER")] EGMI_REQ_ACK_UNBLOCK_PLAYER = 6015,
-    [pbr::OriginalName("EGMI_ACK_TEAM_INVITE")] EGMI_ACK_TEAM_INVITE = 6100,
-    [pbr::OriginalName("EGMI_ACK_TEAM_LIST")] EGMI_ACK_TEAM_LIST = 6105,
-    [pbr::OriginalName("EGMI_ACK_TEAM_ADD")] EGMI_ACK_TEAM_ADD = 6106,
-    [pbr::OriginalName("EGMI_ACK_TEAM_LEAVE")] EGMI_ACK_TEAM_LEAVE = 6107,
-    [pbr::OriginalName("EGMI_REQ_ACK_SEND_TEAM_INVITE")] EGMI_REQ_ACK_SEND_TEAM_INVITE = 6120,
-    [pbr::OriginalName("EGMI_REQ_ACK_CANCEL_TEAM_INVITE")] EGMI_REQ_ACK_CANCEL_TEAM_INVITE = 6121,
-    [pbr::OriginalName("EGMI_REQ_ACK_ACCEPT_TEAM_INVITE")] EGMI_REQ_ACK_ACCEPT_TEAM_INVITE = 6122,
-    [pbr::OriginalName("EGMI_REQ_ACK_REJECT_TEAM_INVITE")] EGMI_REQ_ACK_REJECT_TEAM_INVITE = 6123,
-    [pbr::OriginalName("EGMI_REQ_ACK_SEND_TEAM_READY")] EGMI_REQ_ACK_SEND_TEAM_READY = 6130,
-    [pbr::OriginalName("EGMI_REQ_ACK_ACCEPT_TEAM_READY")] EGMI_REQ_ACK_ACCEPT_TEAM_READY = 6131,
-    [pbr::OriginalName("EGMI_REQ_ACK_REJECT_TEAM_READY")] EGMI_REQ_ACK_REJECT_TEAM_READY = 6132,
+    [pbr::OriginalName("EGMI_REQ_ACK_BUILDING_LIST")] EgmiReqAckBuildingList = 5001,
+    [pbr::OriginalName("EGMI_REQ_STORE_BUILDING_LIST")] EgmiReqStoreBuildingList = 5010,
+    [pbr::OriginalName("EGMI_REQ_ACK_FRIEND_LIST")] EgmiReqAckFriendList = 6000,
+    [pbr::OriginalName("EGMI_ACK_FRIEND_DELETE")] EgmiAckFriendDelete = 6001,
+    [pbr::OriginalName("EGMI_ACK_FRIEND_ADD")] EgmiAckFriendAdd = 6002,
+    [pbr::OriginalName("EGMI_ACK_INVITE_ADD")] EgmiAckInviteAdd = 6003,
+    [pbr::OriginalName("EGMI_REQ_ACK_SEND_INVITE")] EgmiReqAckSendInvite = 6010,
+    [pbr::OriginalName("EGMI_REQ_ACK_ACCEPT_INVITE")] EgmiReqAckAcceptInvite = 6011,
+    [pbr::OriginalName("EGMI_REQ_ACK_REJECT_INVITE")] EgmiReqAckRejectInvite = 6012,
+    [pbr::OriginalName("EGMI_REQ_ACK_IGNORE_INVITE")] EgmiReqAckIgnoreInvite = 6013,
+    [pbr::OriginalName("EGMI_REQ_ACK_BLOCK_PLAYER")] EgmiReqAckBlockPlayer = 6014,
+    [pbr::OriginalName("EGMI_REQ_ACK_UNBLOCK_PLAYER")] EgmiReqAckUnblockPlayer = 6015,
+    [pbr::OriginalName("EGMI_ACK_TEAM_INVITE")] EgmiAckTeamInvite = 6100,
+    [pbr::OriginalName("EGMI_ACK_TEAM_LIST")] EgmiAckTeamList = 6105,
+    [pbr::OriginalName("EGMI_ACK_TEAM_ADD")] EgmiAckTeamAdd = 6106,
+    [pbr::OriginalName("EGMI_ACK_TEAM_LEAVE")] EgmiAckTeamLeave = 6107,
+    [pbr::OriginalName("EGMI_REQ_ACK_SEND_TEAM_INVITE")] EgmiReqAckSendTeamInvite = 6120,
+    [pbr::OriginalName("EGMI_REQ_ACK_CANCEL_TEAM_INVITE")] EgmiReqAckCancelTeamInvite = 6121,
+    [pbr::OriginalName("EGMI_REQ_ACK_ACCEPT_TEAM_INVITE")] EgmiReqAckAcceptTeamInvite = 6122,
+    [pbr::OriginalName("EGMI_REQ_ACK_REJECT_TEAM_INVITE")] EgmiReqAckRejectTeamInvite = 6123,
+    [pbr::OriginalName("EGMI_REQ_ACK_SEND_TEAM_READY")] EgmiReqAckSendTeamReady = 6130,
+    [pbr::OriginalName("EGMI_REQ_ACK_ACCEPT_TEAM_READY")] EgmiReqAckAcceptTeamReady = 6131,
+    [pbr::OriginalName("EGMI_REQ_ACK_REJECT_TEAM_READY")] EgmiReqAckRejectTeamReady = 6132,
     /// <summary>
     //////////////////////GM MSG/////////////////////////////////////
     /// </summary>
-    [pbr::OriginalName("EGMI_REQ_CMD_PROPERTY_INT")] EGMI_REQ_CMD_PROPERTY_INT = 10000,
+    [pbr::OriginalName("EGMI_REQ_CMD_PROPERTY_INT")] EgmiReqCmdPropertyInt = 10000,
     /// <summary>
     /// </summary>
-    [pbr::OriginalName("EGMI_REQ_CMD_PROPERTY_STR")] EGMI_REQ_CMD_PROPERTY_STR = 10001,
+    [pbr::OriginalName("EGMI_REQ_CMD_PROPERTY_STR")] EgmiReqCmdPropertyStr = 10001,
     /// <summary>
     /// </summary>
-    [pbr::OriginalName("EGMI_REQ_CMD_PROPERTY_OBJECT")] EGMI_REQ_CMD_PROPERTY_OBJECT = 10002,
+    [pbr::OriginalName("EGMI_REQ_CMD_PROPERTY_OBJECT")] EgmiReqCmdPropertyObject = 10002,
     /// <summary>
     /// </summary>
-    [pbr::OriginalName("EGMI_REQ_CMD_PROPERTY_FLOAT")] EGMI_REQ_CMD_PROPERTY_FLOAT = 10003,
+    [pbr::OriginalName("EGMI_REQ_CMD_PROPERTY_FLOAT")] EgmiReqCmdPropertyFloat = 10003,
     /// <summary>
     /// </summary>
-    [pbr::OriginalName("EGMI_REQ_CMD_RECORD_INT")] EGMI_REQ_CMD_RECORD_INT = 10004,
+    [pbr::OriginalName("EGMI_REQ_CMD_RECORD_INT")] EgmiReqCmdRecordInt = 10004,
     /// <summary>
     ///ַ
     /// </summary>
-    [pbr::OriginalName("EGMI_REQ_CMD_RECORD_STR")] EGMI_REQ_CMD_RECORD_STR = 10005,
+    [pbr::OriginalName("EGMI_REQ_CMD_RECORD_STR")] EgmiReqCmdRecordStr = 10005,
     /// <summary>
     /// </summary>
-    [pbr::OriginalName("EGMI_REQ_CMD_RECORD_OBJECT")] EGMI_REQ_CMD_RECORD_OBJECT = 10006,
+    [pbr::OriginalName("EGMI_REQ_CMD_RECORD_OBJECT")] EgmiReqCmdRecordObject = 10006,
     /// <summary>
     /// </summary>
-    [pbr::OriginalName("EGMI_REQ_CMD_RECORD_FLOAT")] EGMI_REQ_CMD_RECORD_FLOAT = 10007,
+    [pbr::OriginalName("EGMI_REQ_CMD_RECORD_FLOAT")] EgmiReqCmdRecordFloat = 10007,
     /// <summary>
     /// </summary>
-    [pbr::OriginalName("EGMI_REQ_CMD_NORMAL")] EGMI_REQ_CMD_NORMAL = 10008,
-    [pbr::OriginalName("EGMI_REQ_QUERY_SERVER_STATUS")] EGMI_REQ_QUERY_SERVER_STATUS = 10200,
+    [pbr::OriginalName("EGMI_REQ_CMD_NORMAL")] EgmiReqCmdNormal = 10008,
+    [pbr::OriginalName("EGMI_REQ_QUERY_SERVER_STATUS")] EgmiReqQueryServerStatus = 10200,
     /// <summary>
     //////////////////////Base SLG MSG/////////////////////////////////////
     /// </summary>
-    [pbr::OriginalName("EGMI_REQ_BUY_FORM_SHOP")] EGMI_REQ_BUY_FORM_SHOP = 20000,
-    [pbr::OriginalName("EGMI_ACK_BUY_FORM_SHOP")] EGMI_ACK_BUY_FORM_SHOP = 20001,
-    [pbr::OriginalName("EGMI_REQ_MOVE_BUILD_OBJECT")] EGMI_REQ_MOVE_BUILD_OBJECT = 20002,
-    [pbr::OriginalName("EGMI_ACK_MOVE_BUILD_OBJECT")] EGMI_ACK_MOVE_BUILD_OBJECT = 20003,
-    [pbr::OriginalName("EGMI_REQ_UP_BUILD_LVL")] EGMI_REQ_UP_BUILD_LVL = 20101,
-    [pbr::OriginalName("EGMI_REQ_CREATE_ITEM")] EGMI_REQ_CREATE_ITEM = 20102,
-    [pbr::OriginalName("EGMI_REQ_BUILD_OPERATE")] EGMI_REQ_BUILD_OPERATE = 20103,
+    [pbr::OriginalName("EGMI_REQ_BUY_FORM_SHOP")] EgmiReqBuyFormShop = 20000,
+    [pbr::OriginalName("EGMI_ACK_BUY_FORM_SHOP")] EgmiAckBuyFormShop = 20001,
+    [pbr::OriginalName("EGMI_REQ_MOVE_BUILD_OBJECT")] EgmiReqMoveBuildObject = 20002,
+    [pbr::OriginalName("EGMI_ACK_MOVE_BUILD_OBJECT")] EgmiAckMoveBuildObject = 20003,
+    [pbr::OriginalName("EGMI_REQ_UP_BUILD_LVL")] EgmiReqUpBuildLvl = 20101,
+    [pbr::OriginalName("EGMI_REQ_CREATE_ITEM")] EgmiReqCreateItem = 20102,
+    [pbr::OriginalName("EGMI_REQ_BUILD_OPERATE")] EgmiReqBuildOperate = 20103,
   }
 
   /// <summary>
@@ -956,46 +956,46 @@ namespace NFMsg {
     /// <summary>
     ///this kind of skill just can damage one object
     /// </summary>
-    [pbr::OriginalName("EST_BRIEF_SINGLE")] EST_BRIEF_SINGLE = 0,
+    [pbr::OriginalName("EST_BRIEF_SINGLE")] EstBriefSingle = 0,
     /// <summary>
     ///this kind of skill can damage multiple objects
     /// </summary>
-    [pbr::OriginalName("EST_BRIEF_GROUP")] EST_BRIEF_GROUP = 1,
+    [pbr::OriginalName("EST_BRIEF_GROUP")] EstBriefGroup = 1,
     /// <summary>
     ///this kind of bullet just can damage one object
     /// </summary>
-    [pbr::OriginalName("EST_BULLET_SINGLE")] EST_BULLET_SINGLE = 2,
+    [pbr::OriginalName("EST_BULLET_SINGLE")] EstBulletSingle = 2,
     /// <summary>
     ///this kind of bullet can damage multiple objects via rebound
     /// </summary>
-    [pbr::OriginalName("EST_BULLET_REBOUND")] EST_BULLET_REBOUND = 3,
+    [pbr::OriginalName("EST_BULLET_REBOUND")] EstBulletRebound = 3,
     /// <summary>
     ///this kind of bullet can damage multiple objects who around the target when the bullet touched the target object
     /// </summary>
-    [pbr::OriginalName("EST_BULLET_TARGET_BOMB")] EST_BULLET_TARGET_BOMB = 4,
+    [pbr::OriginalName("EST_BULLET_TARGET_BOMB")] EstBulletTargetBomb = 4,
     /// <summary>
     ///this kind of bullet can damage multiple objects  who around the target when the bullet arrived the position
     /// </summary>
-    [pbr::OriginalName("EST_BULLET_POS_BOMB")] EST_BULLET_POS_BOMB = 5,
+    [pbr::OriginalName("EST_BULLET_POS_BOMB")] EstBulletPosBomb = 5,
   }
 
   public enum EItemType {
     /// <summary>
     ///the equipment which can add props
     /// </summary>
-    [pbr::OriginalName("EIT_EQUIP")] EIT_EQUIP = 0,
+    [pbr::OriginalName("EIT_EQUIP")] EitEquip = 0,
     /// <summary>
     ///the gem ca be embed to the equipment
     /// </summary>
-    [pbr::OriginalName("EIT_GEM")] EIT_GEM = 1,
+    [pbr::OriginalName("EIT_GEM")] EitGem = 1,
     /// <summary>
     ///expendable items for player, such as a medicine that cures
     /// </summary>
-    [pbr::OriginalName("EIT_SUPPLY")] EIT_SUPPLY = 2,
+    [pbr::OriginalName("EIT_SUPPLY")] EitSupply = 2,
     /// <summary>
     ///special items that can call a hero or others, special items can do what you want to do
     /// </summary>
-    [pbr::OriginalName("EIT_SCROLL")] EIT_SCROLL = 3,
+    [pbr::OriginalName("EIT_SCROLL")] EitScroll = 3,
   }
 
   /// <summary>
@@ -1004,22 +1004,22 @@ namespace NFMsg {
   public enum EGameEquipSubType {
     /// <summary>
     /// </summary>
-    [pbr::OriginalName("EQUIPTYPE_WEAPON")] EQUIPTYPE_WEAPON = 0,
+    [pbr::OriginalName("EQUIPTYPE_WEAPON")] EquiptypeWeapon = 0,
     /// <summary>
     /// </summary>
-    [pbr::OriginalName("EQUIPTYPE_HELMET")] EQUIPTYPE_HELMET = 1,
+    [pbr::OriginalName("EQUIPTYPE_HELMET")] EquiptypeHelmet = 1,
     /// <summary>
     /// </summary>
-    [pbr::OriginalName("EQUIPTYPE_ARMOR")] EQUIPTYPE_ARMOR = 2,
+    [pbr::OriginalName("EQUIPTYPE_ARMOR")] EquiptypeArmor = 2,
     /// <summary>
     /// </summary>
-    [pbr::OriginalName("EQUIPTYPE_HAND")] EQUIPTYPE_HAND = 3,
+    [pbr::OriginalName("EQUIPTYPE_HAND")] EquiptypeHand = 3,
     /// <summary>
     /// </summary>
-    [pbr::OriginalName("EQUIPTYPE_RING")] EQUIPTYPE_RING = 4,
+    [pbr::OriginalName("EQUIPTYPE_RING")] EquiptypeRing = 4,
     /// <summary>
     /// </summary>
-    [pbr::OriginalName("EQUIPTYPE_BOOT")] EQUIPTYPE_BOOT = 5,
+    [pbr::OriginalName("EQUIPTYPE_BOOT")] EquiptypeBoot = 5,
   }
 
   /// <summary>
@@ -1028,28 +1028,28 @@ namespace NFMsg {
   public enum EGameGemSubType {
     /// <summary>
     /// </summary>
-    [pbr::OriginalName("EGGSTYPE_GEM_ATK")] EGGSTYPE_GEM_ATK = 0,
+    [pbr::OriginalName("EGGSTYPE_GEM_ATK")] EggstypeGemAtk = 0,
     /// <summary>
     /// </summary>
-    [pbr::OriginalName("EGGSTYPE_GEM_DEF")] EGGSTYPE_GEM_DEF = 1,
+    [pbr::OriginalName("EGGSTYPE_GEM_DEF")] EggstypeGemDef = 1,
     /// <summary>
     /// </summary>
-    [pbr::OriginalName("EGGSTYPE_GEM_FIRE")] EGGSTYPE_GEM_FIRE = 3,
+    [pbr::OriginalName("EGGSTYPE_GEM_FIRE")] EggstypeGemFire = 3,
     /// <summary>
     /// </summary>
-    [pbr::OriginalName("EGGSTYPE_GEM_LIGHT")] EGGSTYPE_GEM_LIGHT = 4,
+    [pbr::OriginalName("EGGSTYPE_GEM_LIGHT")] EggstypeGemLight = 4,
     /// <summary>
     /// </summary>
-    [pbr::OriginalName("EGGSTYPE_GEM_WIND")] EGGSTYPE_GEM_WIND = 5,
+    [pbr::OriginalName("EGGSTYPE_GEM_WIND")] EggstypeGemWind = 5,
     /// <summary>
     /// </summary>
-    [pbr::OriginalName("EGGSTYPE_GEM_ICE")] EGGSTYPE_GEM_ICE = 6,
+    [pbr::OriginalName("EGGSTYPE_GEM_ICE")] EggstypeGemIce = 6,
     /// <summary>
     /// </summary>
-    [pbr::OriginalName("EGGSTYPE_GEM_POISON")] EGGSTYPE_GEM_POISON = 7,
+    [pbr::OriginalName("EGGSTYPE_GEM_POISON")] EggstypeGemPoison = 7,
     /// <summary>
     /// </summary>
-    [pbr::OriginalName("EGGSTYPE_GEM_DRAK")] EGGSTYPE_GEM_DRAK = 8,
+    [pbr::OriginalName("EGGSTYPE_GEM_DRAK")] EggstypeGemDrak = 8,
   }
 
   /// <summary>
@@ -1058,31 +1058,31 @@ namespace NFMsg {
   public enum EGameSupplySubType {
     /// <summary>
     /// </summary>
-    [pbr::OriginalName("EGIT_ITEM_WATER")] EGIT_ITEM_WATER = 0,
+    [pbr::OriginalName("EGIT_ITEM_WATER")] EgitItemWater = 0,
     /// <summary>
     /// </summary>
-    [pbr::OriginalName("EGIT_ITEM_DIAMOND")] EGIT_ITEM_DIAMOND = 1,
+    [pbr::OriginalName("EGIT_ITEM_DIAMOND")] EgitItemDiamond = 1,
     /// <summary>
     /// </summary>
-    [pbr::OriginalName("EGIT_ITEM_CURRENCY")] EGIT_ITEM_CURRENCY = 2,
+    [pbr::OriginalName("EGIT_ITEM_CURRENCY")] EgitItemCurrency = 2,
     /// <summary>
     /// </summary>
-    [pbr::OriginalName("EGIT_ITEM_EXP")] EGIT_ITEM_EXP = 3,
+    [pbr::OriginalName("EGIT_ITEM_EXP")] EgitItemExp = 3,
     /// <summary>
     /// </summary>
-    [pbr::OriginalName("EGIT_ITEM_HP")] EGIT_ITEM_HP = 4,
+    [pbr::OriginalName("EGIT_ITEM_HP")] EgitItemHp = 4,
     /// <summary>
     /// </summary>
-    [pbr::OriginalName("EGIT_ITEM_MP")] EGIT_ITEM_MP = 5,
+    [pbr::OriginalName("EGIT_ITEM_MP")] EgitItemMp = 5,
     /// <summary>
     /// </summary>
-    [pbr::OriginalName("EGIT_ITEM_SP")] EGIT_ITEM_SP = 6,
+    [pbr::OriginalName("EGIT_ITEM_SP")] EgitItemSp = 6,
     /// <summary>
     /// </summary>
-    [pbr::OriginalName("EGIT_ITEM_PACK")] EGIT_ITEM_PACK = 7,
+    [pbr::OriginalName("EGIT_ITEM_PACK")] EgitItemPack = 7,
     /// <summary>
     /// </summary>
-    [pbr::OriginalName("EGIT_ITEM_MEMORY_POS")] EGIT_ITEM_MEMORY_POS = 8,
+    [pbr::OriginalName("EGIT_ITEM_MEMORY_POS")] EgitItemMemoryPos = 8,
   }
 
   /// <summary>
@@ -1091,21 +1091,21 @@ namespace NFMsg {
   public enum EGameScrollSubType {
     /// <summary>
     /// </summary>
-    [pbr::OriginalName("EGTST_TOKEN_HERO_CARD")] EGTST_TOKEN_HERO_CARD = 0,
+    [pbr::OriginalName("EGTST_TOKEN_HERO_CARD")] EgtstTokenHeroCard = 0,
     /// <summary>
     /// </summary>
-    [pbr::OriginalName("EGTST_TOKEN_POSITION")] EGTST_TOKEN_POSITION = 1,
+    [pbr::OriginalName("EGTST_TOKEN_POSITION")] EgtstTokenPosition = 1,
     /// <summary>
     /// </summary>
-    [pbr::OriginalName("EGTST_TOKEN_BOUNTY")] EGTST_TOKEN_BOUNTY = 2,
+    [pbr::OriginalName("EGTST_TOKEN_BOUNTY")] EgtstTokenBounty = 2,
     /// <summary>
     ///a token that can join a activity
     /// </summary>
-    [pbr::OriginalName("EGTST_TOKEN_ACTIVITY")] EGTST_TOKEN_ACTIVITY = 3,
+    [pbr::OriginalName("EGTST_TOKEN_ACTIVITY")] EgtstTokenActivity = 3,
     /// <summary>
     ///a token that can call a building or power
     /// </summary>
-    [pbr::OriginalName("EGTST_TOKEN_BUILD")] EGTST_TOKEN_BUILD = 4,
+    [pbr::OriginalName("EGTST_TOKEN_BUILD")] EgtstTokenBuild = 4,
   }
 
   /// <summary>
@@ -1113,26 +1113,26 @@ namespace NFMsg {
   public enum EGameItemExpiredType {
     /// <summary>
     /// </summary>
-    [pbr::OriginalName("EGIET_NONE")] EGIET_NONE = 0,
+    [pbr::OriginalName("EGIET_NONE")] EgietNone = 0,
     /// <summary>
     /// </summary>
-    [pbr::OriginalName("EGIET_USE_TIMES")] EGIET_USE_TIMES = 1,
+    [pbr::OriginalName("EGIET_USE_TIMES")] EgietUseTimes = 1,
     /// <summary>
     /// </summary>
-    [pbr::OriginalName("EGIET_REAL_TIME")] EGIET_REAL_TIME = 2,
-    [pbr::OriginalName("EGIET_END_INDEX")] EGIET_END_INDEX = 3,
+    [pbr::OriginalName("EGIET_REAL_TIME")] EgietRealTime = 2,
+    [pbr::OriginalName("EGIET_END_INDEX")] EgietEndIndex = 3,
   }
 
   public enum EDrawDropItemState {
     /// <summary>
     /// </summary>
-    [pbr::OriginalName("E_DRAW_STATE_NONE")] E_DRAW_STATE_NONE = 0,
+    [pbr::OriginalName("E_DRAW_STATE_NONE")] EDrawStateNone = 0,
     /// <summary>
     /// </summary>
-    [pbr::OriginalName("E_DRAW_STATE_GAIN")] E_DRAW_STATE_GAIN = 1,
+    [pbr::OriginalName("E_DRAW_STATE_GAIN")] EDrawStateGain = 1,
     /// <summary>
     /// </summary>
-    [pbr::OriginalName("E_DRAW_STATE_RECV")] E_DRAW_STATE_RECV = 2,
+    [pbr::OriginalName("E_DRAW_STATE_RECV")] EDrawStateRecv = 2,
   }
 
   /// <summary>
@@ -1141,13 +1141,13 @@ namespace NFMsg {
   public enum EGuildPowerType {
     /// <summary>
     /// </summary>
-    [pbr::OriginalName("CLAN_POWER_TYPE_NORMAL")] CLAN_POWER_TYPE_NORMAL = 0,
+    [pbr::OriginalName("CLAN_POWER_TYPE_NORMAL")] ClanPowerTypeNormal = 0,
     /// <summary>
     /// </summary>
-    [pbr::OriginalName("CLAN_POWER_TYPE_VICE_PRESIDENT")] CLAN_POWER_TYPE_VICE_PRESIDENT = 1,
+    [pbr::OriginalName("CLAN_POWER_TYPE_VICE_PRESIDENT")] ClanPowerTypeVicePresident = 1,
     /// <summary>
     /// </summary>
-    [pbr::OriginalName("CLAN_POWER_TYPE_PRESIDENT")] CLAN_POWER_TYPE_PRESIDENT = 2,
+    [pbr::OriginalName("CLAN_POWER_TYPE_PRESIDENT")] ClanPowerTypePresident = 2,
   }
 
   /// <summary>
@@ -1155,16 +1155,16 @@ namespace NFMsg {
   public enum ETaskState {
     /// <summary>
     /// </summary>
-    [pbr::OriginalName("TASK_IN_PROCESS")] TASK_IN_PROCESS = 0,
+    [pbr::OriginalName("TASK_IN_PROCESS")] TaskInProcess = 0,
     /// <summary>
     /// </summary>
-    [pbr::OriginalName("TASK_DONE")] TASK_DONE = 1,
+    [pbr::OriginalName("TASK_DONE")] TaskDone = 1,
     /// <summary>
     /// </summary>
-    [pbr::OriginalName("TASK_DRAW_AWARD")] TASK_DRAW_AWARD = 2,
+    [pbr::OriginalName("TASK_DRAW_AWARD")] TaskDrawAward = 2,
     /// <summary>
     /// </summary>
-    [pbr::OriginalName("TASK_FINISH")] TASK_FINISH = 3,
+    [pbr::OriginalName("TASK_FINISH")] TaskFinish = 3,
   }
 
   /// <summary>
@@ -1172,101 +1172,101 @@ namespace NFMsg {
   public enum ETaskType {
     /// <summary>
     /// </summary>
-    [pbr::OriginalName("TASK_LEVEL_UPDATE_SOME_LEVEL")] TASK_LEVEL_UPDATE_SOME_LEVEL = 0,
+    [pbr::OriginalName("TASK_LEVEL_UPDATE_SOME_LEVEL")] TaskLevelUpdateSomeLevel = 0,
     /// <summary>
     /// </summary>
-    [pbr::OriginalName("TASK_PASS_ECTYPE")] TASK_PASS_ECTYPE = 1,
+    [pbr::OriginalName("TASK_PASS_ECTYPE")] TaskPassEctype = 1,
     /// <summary>
     /// </summary>
-    [pbr::OriginalName("TASK_PASS_ECTYPE_COUNT")] TASK_PASS_ECTYPE_COUNT = 2,
+    [pbr::OriginalName("TASK_PASS_ECTYPE_COUNT")] TaskPassEctypeCount = 2,
     /// <summary>
     /// </summary>
-    [pbr::OriginalName("TASK_PASS_SOME_TYPE_ECTYPE_COUNT")] TASK_PASS_SOME_TYPE_ECTYPE_COUNT = 3,
+    [pbr::OriginalName("TASK_PASS_SOME_TYPE_ECTYPE_COUNT")] TaskPassSomeTypeEctypeCount = 3,
     /// <summary>
     /// </summary>
-    [pbr::OriginalName("TASK_UPDATE_SKILL_COUNT")] TASK_UPDATE_SKILL_COUNT = 4,
+    [pbr::OriginalName("TASK_UPDATE_SKILL_COUNT")] TaskUpdateSkillCount = 4,
     /// <summary>
     /// </summary>
-    [pbr::OriginalName("TASK_CONSUME_MONEY")] TASK_CONSUME_MONEY = 5,
+    [pbr::OriginalName("TASK_CONSUME_MONEY")] TaskConsumeMoney = 5,
     /// <summary>
     /// </summary>
-    [pbr::OriginalName("TASK_CONSUME_DIAMOND")] TASK_CONSUME_DIAMOND = 6,
+    [pbr::OriginalName("TASK_CONSUME_DIAMOND")] TaskConsumeDiamond = 6,
     /// <summary>
     /// </summary>
-    [pbr::OriginalName("TASK_ARENA_COUNT")] TASK_ARENA_COUNT = 7,
+    [pbr::OriginalName("TASK_ARENA_COUNT")] TaskArenaCount = 7,
     /// <summary>
     /// </summary>
-    [pbr::OriginalName("TASK_KILL_MONSTER_COUNT")] TASK_KILL_MONSTER_COUNT = 8,
+    [pbr::OriginalName("TASK_KILL_MONSTER_COUNT")] TaskKillMonsterCount = 8,
     /// <summary>
     /// </summary>
-    [pbr::OriginalName("TASK_KILL_SOME_MONSTER_COUNT")] TASK_KILL_SOME_MONSTER_COUNT = 9,
+    [pbr::OriginalName("TASK_KILL_SOME_MONSTER_COUNT")] TaskKillSomeMonsterCount = 9,
   }
 
   public enum ESceneType {
     /// <summary>
     ///public town
     /// </summary>
-    [pbr::OriginalName("SCENE_NORMAL")] SCENE_NORMAL = 0,
+    [pbr::OriginalName("SCENE_NORMAL")] SceneNormal = 0,
     /// <summary>
     ///single boss underground city
     /// </summary>
-    [pbr::OriginalName("SCENE_SINGLE_CLONE")] SCENE_SINGLE_CLONE = 1,
+    [pbr::OriginalName("SCENE_SINGLE_CLONE")] SceneSingleClone = 1,
     /// <summary>
     ///world boss underground city
     /// </summary>
-    [pbr::OriginalName("SCENE_MULTI_CLONE")] SCENE_MULTI_CLONE = 2,
+    [pbr::OriginalName("SCENE_MULTI_CLONE")] SceneMultiClone = 2,
     /// <summary>
     ///private
     /// </summary>
-    [pbr::OriginalName("SCENE_HOME")] SCENE_HOME = 3,
+    [pbr::OriginalName("SCENE_HOME")] SceneHome = 3,
     /// <summary>
     ///private
     /// </summary>
-    [pbr::OriginalName("SCENE_CLAN")] SCENE_CLAN = 4,
+    [pbr::OriginalName("SCENE_CLAN")] SceneClan = 4,
   }
 
   /// <summary>
   /// </summary>
   public enum EPVPType {
-    [pbr::OriginalName("PVP_HOME")] PVP_HOME = 0,
-    [pbr::OriginalName("PVP_INDIVIDUAL")] PVP_INDIVIDUAL = 1,
-    [pbr::OriginalName("PVP_DOTA")] PVP_DOTA = 2,
-    [pbr::OriginalName("PVP_SURVIVAL")] PVP_SURVIVAL = 3,
-    [pbr::OriginalName("PVP_CLAN_WAR")] PVP_CLAN_WAR = 4,
-    [pbr::OriginalName("PVP_CLAN_DUNGEON")] PVP_CLAN_DUNGEON = 5,
+    [pbr::OriginalName("PVP_HOME")] PvpHome = 0,
+    [pbr::OriginalName("PVP_INDIVIDUAL")] PvpIndividual = 1,
+    [pbr::OriginalName("PVP_DOTA")] PvpDota = 2,
+    [pbr::OriginalName("PVP_SURVIVAL")] PvpSurvival = 3,
+    [pbr::OriginalName("PVP_CLAN_WAR")] PvpClanWar = 4,
+    [pbr::OriginalName("PVP_CLAN_DUNGEON")] PvpClanDungeon = 5,
   }
 
   public enum EShopType {
     /// <summary>
     /// </summary>
-    [pbr::OriginalName("EST_UNKNOW")] EST_UNKNOW = 0,
+    [pbr::OriginalName("EST_UNKNOW")] EstUnknow = 0,
     /// <summary>
     /// </summary>
-    [pbr::OriginalName("EST_BUILDING")] EST_BUILDING = 1,
+    [pbr::OriginalName("EST_BUILDING")] EstBuilding = 1,
     /// <summary>
     /// </summary>
-    [pbr::OriginalName("EST_GOLD")] EST_GOLD = 2,
+    [pbr::OriginalName("EST_GOLD")] EstGold = 2,
     /// <summary>
     /// </summary>
-    [pbr::OriginalName("EST_ITEM")] EST_ITEM = 3,
+    [pbr::OriginalName("EST_ITEM")] EstItem = 3,
     /// <summary>
     /// </summary>
-    [pbr::OriginalName("EST_EQUIP")] EST_EQUIP = 5,
+    [pbr::OriginalName("EST_EQUIP")] EstEquip = 5,
     /// <summary>
     /// </summary>
-    [pbr::OriginalName("EST_GEM")] EST_GEM = 6,
+    [pbr::OriginalName("EST_GEM")] EstGem = 6,
     /// <summary>
     /// </summary>
-    [pbr::OriginalName("EST_CARD")] EST_CARD = 7,
+    [pbr::OriginalName("EST_CARD")] EstCard = 7,
   }
 
   public enum ERankType {
-    [pbr::OriginalName("ERT_UNKNOW")] ERT_UNKNOW = 0,
-    [pbr::OriginalName("ERT_PLAYER_LEVEL")] ERT_PLAYER_LEVEL = 1,
-    [pbr::OriginalName("ERT_FIGHT_VALUE")] ERT_FIGHT_VALUE = 2,
-    [pbr::OriginalName("ERT_PLAYER_MONEY")] ERT_PLAYER_MONEY = 3,
-    [pbr::OriginalName("ERT_CLAN_LEVEL")] ERT_CLAN_LEVEL = 4,
-    [pbr::OriginalName("ERT_CLAN_KINGSOURCE")] ERT_CLAN_KINGSOURCE = 5,
+    [pbr::OriginalName("ERT_UNKNOW")] ErtUnknow = 0,
+    [pbr::OriginalName("ERT_PLAYER_LEVEL")] ErtPlayerLevel = 1,
+    [pbr::OriginalName("ERT_FIGHT_VALUE")] ErtFightValue = 2,
+    [pbr::OriginalName("ERT_PLAYER_MONEY")] ErtPlayerMoney = 3,
+    [pbr::OriginalName("ERT_CLAN_LEVEL")] ErtClanLevel = 4,
+    [pbr::OriginalName("ERT_CLAN_KINGSOURCE")] ErtClanKingsource = 5,
   }
 
   /// <summary>
@@ -1275,45 +1275,45 @@ namespace NFMsg {
   public enum ENPCType {
     /// <summary>
     /// </summary>
-    [pbr::OriginalName("ENPCTYPE_NORMAL")] ENPCTYPE_NORMAL = 0,
+    [pbr::OriginalName("ENPCTYPE_NORMAL")] Normal = 0,
     /// <summary>
     /// </summary>
-    [pbr::OriginalName("ENPCTYPE_HERO")] ENPCTYPE_HERO = 1,
+    [pbr::OriginalName("ENPCTYPE_HERO")] Hero = 1,
     /// <summary>
     /// </summary>
-    [pbr::OriginalName("ENPCTYPE_TURRET")] ENPCTYPE_TURRET = 2,
+    [pbr::OriginalName("ENPCTYPE_TURRET")] Turret = 2,
   }
 
   public enum ESubNPCType_TURRET {
-    [pbr::OriginalName("ENPCTYPE_SUB_STORAGE")] ENPCTYPE_SUB_STORAGE = 0,
-    [pbr::OriginalName("ENPCTYPE_SUB_WEAPONE")] ENPCTYPE_SUB_WEAPONE = 1,
-    [pbr::OriginalName("ENPCTYPE_SUB_GUARD")] ENPCTYPE_SUB_GUARD = 2,
-    [pbr::OriginalName("ENPCTYPE_SUB_BOMB")] ENPCTYPE_SUB_BOMB = 3,
-    [pbr::OriginalName("ENPCTYPE_SUB_TRAP")] ENPCTYPE_SUB_TRAP = 4,
+    [pbr::OriginalName("ENPCTYPE_SUB_STORAGE")] EnpctypeSubStorage = 0,
+    [pbr::OriginalName("ENPCTYPE_SUB_WEAPONE")] EnpctypeSubWeapone = 1,
+    [pbr::OriginalName("ENPCTYPE_SUB_GUARD")] EnpctypeSubGuard = 2,
+    [pbr::OriginalName("ENPCTYPE_SUB_BOMB")] EnpctypeSubBomb = 3,
+    [pbr::OriginalName("ENPCTYPE_SUB_TRAP")] EnpctypeSubTrap = 4,
   }
 
   public enum EMeleeType {
     /// <summary>
     /// </summary>
-    [pbr::OriginalName("ETYPE_MELEE")] ETYPE_MELEE = 0,
+    [pbr::OriginalName("ETYPE_MELEE")] EtypeMelee = 0,
     /// <summary>
     /// </summary>
-    [pbr::OriginalName("ETYPE_MELEE_DASH")] ETYPE_MELEE_DASH = 1,
+    [pbr::OriginalName("ETYPE_MELEE_DASH")] EtypeMeleeDash = 1,
     /// <summary>
     /// </summary>
-    [pbr::OriginalName("ETYPE_RANGER")] ETYPE_RANGER = 2,
+    [pbr::OriginalName("ETYPE_RANGER")] EtypeRanger = 2,
   }
 
   public enum EEffectObjType {
     /// <summary>
     /// </summary>
-    [pbr::OriginalName("ETARGETTYPE_ENEMY")] ETARGETTYPE_ENEMY = 0,
+    [pbr::OriginalName("ETARGETTYPE_ENEMY")] EtargettypeEnemy = 0,
     /// <summary>
     /// </summary>
-    [pbr::OriginalName("ETARGETTYPE_SELF")] ETARGETTYPE_SELF = 1,
+    [pbr::OriginalName("ETARGETTYPE_SELF")] EtargettypeSelf = 1,
     /// <summary>
     /// </summary>
-    [pbr::OriginalName("ETARGETTYPE_FRIEND")] ETARGETTYPE_FRIEND = 2,
+    [pbr::OriginalName("ETARGETTYPE_FRIEND")] EtargettypeFriend = 2,
   }
 
   /// <summary>
@@ -1322,16 +1322,16 @@ namespace NFMsg {
   public enum EPropertyType {
     /// <summary>
     /// </summary>
-    [pbr::OriginalName("EPT_UNKNOW")] EPT_UNKNOW = 0,
+    [pbr::OriginalName("EPT_UNKNOW")] EptUnknow = 0,
     /// <summary>
     /// </summary>
-    [pbr::OriginalName("EPT_STRENGTH")] EPT_STRENGTH = 1,
+    [pbr::OriginalName("EPT_STRENGTH")] EptStrength = 1,
     /// <summary>
     /// </summary>
-    [pbr::OriginalName("EPT_AGILITY")] EPT_AGILITY = 2,
+    [pbr::OriginalName("EPT_AGILITY")] EptAgility = 2,
     /// <summary>
     /// </summary>
-    [pbr::OriginalName("EPT_INTELLIGENCE")] EPT_INTELLIGENCE = 3,
+    [pbr::OriginalName("EPT_INTELLIGENCE")] EptIntelligence = 3,
   }
 
   /// <summary>
@@ -1339,32 +1339,32 @@ namespace NFMsg {
   public enum EGameElementType {
     /// <summary>
     /// </summary>
-    [pbr::OriginalName("EELEMENTTYPE_FIRE")] EELEMENTTYPE_FIRE = 0,
+    [pbr::OriginalName("EELEMENTTYPE_FIRE")] EelementtypeFire = 0,
     /// <summary>
     /// </summary>
-    [pbr::OriginalName("EELEMENTTYPE_LIGHT")] EELEMENTTYPE_LIGHT = 1,
+    [pbr::OriginalName("EELEMENTTYPE_LIGHT")] EelementtypeLight = 1,
     /// <summary>
     /// </summary>
-    [pbr::OriginalName("EELEMENTTYPE_WIND")] EELEMENTTYPE_WIND = 2,
+    [pbr::OriginalName("EELEMENTTYPE_WIND")] EelementtypeWind = 2,
     /// <summary>
     /// </summary>
-    [pbr::OriginalName("EELEMENTTYPE_ICE")] EELEMENTTYPE_ICE = 3,
+    [pbr::OriginalName("EELEMENTTYPE_ICE")] EelementtypeIce = 3,
     /// <summary>
     /// </summary>
-    [pbr::OriginalName("EELEMENTTYPE_POISON")] EELEMENTTYPE_POISON = 4,
+    [pbr::OriginalName("EELEMENTTYPE_POISON")] EelementtypePoison = 4,
     /// <summary>
     /// </summary>
-    [pbr::OriginalName("EELEMENTTYPE_DARK")] EELEMENTTYPE_DARK = 5,
+    [pbr::OriginalName("EELEMENTTYPE_DARK")] EelementtypeDark = 5,
   }
 
   public enum EBattleType {
-    [pbr::OriginalName("EBT_SINGLE_MODE")] EBT_SINGLE_MODE = 0,
-    [pbr::OriginalName("EBT_MULTI_MODE")] EBT_MULTI_MODE = 1,
-    [pbr::OriginalName("EBT_CLAN_MODE")] EBT_CLAN_MODE = 2,
-    [pbr::OriginalName("EBT_CLAN_BOSS_MODE")] EBT_CLAN_BOSS_MODE = 3,
-    [pbr::OriginalName("EBT_WORLD_BOSS_MODE")] EBT_WORLD_BOSS_MODE = 4,
-    [pbr::OriginalName("EBT_MOBA_MODE")] EBT_MOBA_MODE = 5,
-    [pbr::OriginalName("EBT_SURVIVAL_MODE")] EBT_SURVIVAL_MODE = 6,
+    [pbr::OriginalName("EBT_SINGLE_MODE")] EbtSingleMode = 0,
+    [pbr::OriginalName("EBT_MULTI_MODE")] EbtMultiMode = 1,
+    [pbr::OriginalName("EBT_CLAN_MODE")] EbtClanMode = 2,
+    [pbr::OriginalName("EBT_CLAN_BOSS_MODE")] EbtClanBossMode = 3,
+    [pbr::OriginalName("EBT_WORLD_BOSS_MODE")] EbtWorldBossMode = 4,
+    [pbr::OriginalName("EBT_MOBA_MODE")] EbtMobaMode = 5,
+    [pbr::OriginalName("EBT_SURVIVAL_MODE")] EbtSurvivalMode = 6,
   }
 
   #endregion

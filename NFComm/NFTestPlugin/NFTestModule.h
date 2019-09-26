@@ -26,7 +26,6 @@
 #ifndef NF_TEST_MODULE_H
 #define NF_TEST_MODULE_H
 
-#include "Dependencies/googletest-release-1.8.0/googletest/include/gtest/gtest.h"
 #include "NFComm/NFMessageDefine/NFMsgDefine.h"
 #include "NFComm/NFPluginModule/NFINetModule.h"
 #include "NFComm/NFPluginModule/NFILogModule.h"

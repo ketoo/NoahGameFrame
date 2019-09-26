@@ -13,6 +13,8 @@
 *.la
 *.a
 *.lib
+*.zip
+*.gz
 
 # Executables
 *.exe
@@ -62,6 +64,13 @@
 /NoahFrame.opensdf
 /*.opendb
 /NoahFrame.sdf
+
+/_Out/Debug
+/_Out/Release
+/_Out/NFDataCfg/client
+/_Out/NFDataCfg/Tool/NFFileProcess
+/_Out/NFDataCfg/Tool/NFFileProcess.exe
+
 /_Out/Comm/Debug/*.manifest
 /_Out/Comm/Debug/*.exp
 /_Out/Comm/Debug/*.ilk
@@ -76,12 +85,15 @@
 /_Out/Comm/Release/*.pdb
 /_Out/Comm/Release/*.dll
 
+NFComm/NFMessageDefine/protoc
+NFComm/NFMessageDefine/protoc.exe
+
 /_Out/Server/NFDataCfg/Ini/
 /_Out/Server/NFDataCfg/Struct/
 /_Out/Server/NFDataCfg/Proto/
-#/_Out/Server/Release/
+/_Out/Server/Release/
 
-#/_Out/Server/Debug/*
+/_Out/Server/Debug/*
 /Dependencies/curl
 /.vs/
 /NoahFrame.VC.db

@@ -59,27 +59,27 @@ namespace NFMsg {
             "dGxlGAEgASgMYgZwcm90bzM="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { global::NFMsg.NFMsgBaseReflection.Descriptor, },
-          new pbr::GeneratedClrTypeInfo(null, new pbr::GeneratedClrTypeInfo[] {
-            new pbr::GeneratedClrTypeInfo(typeof(global::NFMsg.ReqAIOnwer), global::NFMsg.ReqAIOnwer.Parser, new[]{ "ai_id" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::NFMsg.GridClanBaseInfo), global::NFMsg.GridClanBaseInfo.Parser, new[]{ "id", "level", "count", "resource", "icon" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::NFMsg.ReqBigMapGridInfo), global::NFMsg.ReqBigMapGridInfo.Parser, new[]{ "map_title_id" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::NFMsg.BigMapGridBaseInfo), global::NFMsg.BigMapGridBaseInfo.Parser, new[]{ "id", "guild_info", "kingwar_time", "kingwarrer", "hurting_time", "hurter" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::NFMsg.BigMapLeaveMsg), global::NFMsg.BigMapLeaveMsg.Parser, new[]{ "owner", "owner_name", "msg_data", "msg_time", "owner_level" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::NFMsg.BigMapWarHistory), global::NFMsg.BigMapWarHistory.Parser, new[]{ "red_info", "blue_info", "winner_id", "war_time" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::NFMsg.BigMapGridDetailInfo), global::NFMsg.BigMapGridDetailInfo.Parser, new[]{ "grid_base_info", "stay_guid_list", "leave_msg", "war_history" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::NFMsg.AckBigMapGridInfo), global::NFMsg.AckBigMapGridInfo.Parser, new[]{ "map_data" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::NFMsg.ReqBigMapInfo), global::NFMsg.ReqBigMapInfo.Parser, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::NFMsg.AckBigMapInfo), global::NFMsg.AckBigMapInfo.Parser, new[]{ "grid_base_info" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::NFMsg.ReqHoldMapGrid), global::NFMsg.ReqHoldMapGrid.Parser, new[]{ "map_title_id", "guild_id" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::NFMsg.AckHoldMapGrid), global::NFMsg.AckHoldMapGrid.Parser, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::NFMsg.ReqLeaveMapMsg), global::NFMsg.ReqLeaveMapMsg.Parser, new[]{ "map_title_id", "leave_msg" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::NFMsg.AckLeaveMapMsg), global::NFMsg.AckLeaveMapMsg.Parser, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::NFMsg.ReqGetMapAward), global::NFMsg.ReqGetMapAward.Parser, new[]{ "map_title_id" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::NFMsg.AckGetMapAward), global::NFMsg.AckGetMapAward.Parser, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::NFMsg.ReqMapHunting), global::NFMsg.ReqMapHunting.Parser, new[]{ "map_title_id" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::NFMsg.AckMapHunting), global::NFMsg.AckMapHunting.Parser, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::NFMsg.ReqMapKingWar), global::NFMsg.ReqMapKingWar.Parser, new[]{ "map_title" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::NFMsg.AckMapKingWar), global::NFMsg.AckMapKingWar.Parser, new[]{ "map_title" }, null, null, null)
+          new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
+            new pbr::GeneratedClrTypeInfo(typeof(global::NFMsg.ReqAIOnwer), global::NFMsg.ReqAIOnwer.Parser, new[]{ "AiId" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::NFMsg.GridClanBaseInfo), global::NFMsg.GridClanBaseInfo.Parser, new[]{ "Id", "Level", "Count", "Resource", "Icon" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::NFMsg.ReqBigMapGridInfo), global::NFMsg.ReqBigMapGridInfo.Parser, new[]{ "MapTitleId" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::NFMsg.BigMapGridBaseInfo), global::NFMsg.BigMapGridBaseInfo.Parser, new[]{ "Id", "GuildInfo", "KingwarTime", "Kingwarrer", "HurtingTime", "Hurter" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::NFMsg.BigMapLeaveMsg), global::NFMsg.BigMapLeaveMsg.Parser, new[]{ "Owner", "OwnerName", "MsgData", "MsgTime", "OwnerLevel" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::NFMsg.BigMapWarHistory), global::NFMsg.BigMapWarHistory.Parser, new[]{ "RedInfo", "BlueInfo", "WinnerId", "WarTime" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::NFMsg.BigMapGridDetailInfo), global::NFMsg.BigMapGridDetailInfo.Parser, new[]{ "GridBaseInfo", "StayGuidList", "LeaveMsg", "WarHistory" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::NFMsg.AckBigMapGridInfo), global::NFMsg.AckBigMapGridInfo.Parser, new[]{ "MapData" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::NFMsg.ReqBigMapInfo), global::NFMsg.ReqBigMapInfo.Parser, null, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::NFMsg.AckBigMapInfo), global::NFMsg.AckBigMapInfo.Parser, new[]{ "GridBaseInfo" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::NFMsg.ReqHoldMapGrid), global::NFMsg.ReqHoldMapGrid.Parser, new[]{ "MapTitleId", "GuildId" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::NFMsg.AckHoldMapGrid), global::NFMsg.AckHoldMapGrid.Parser, null, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::NFMsg.ReqLeaveMapMsg), global::NFMsg.ReqLeaveMapMsg.Parser, new[]{ "MapTitleId", "LeaveMsg" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::NFMsg.AckLeaveMapMsg), global::NFMsg.AckLeaveMapMsg.Parser, null, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::NFMsg.ReqGetMapAward), global::NFMsg.ReqGetMapAward.Parser, new[]{ "MapTitleId" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::NFMsg.AckGetMapAward), global::NFMsg.AckGetMapAward.Parser, null, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::NFMsg.ReqMapHunting), global::NFMsg.ReqMapHunting.Parser, new[]{ "MapTitleId" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::NFMsg.AckMapHunting), global::NFMsg.AckMapHunting.Parser, null, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::NFMsg.ReqMapKingWar), global::NFMsg.ReqMapKingWar.Parser, new[]{ "MapTitle" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::NFMsg.AckMapKingWar), global::NFMsg.AckMapKingWar.Parser, new[]{ "MapTitle" }, null, null, null, null)
           }));
     }
     #endregion
@@ -125,10 +125,10 @@ namespace NFMsg {
     }
 
     /// <summary>Field number for the "ai_id" field.</summary>
-    public const int ai_idFieldNumber = 1;
+    public const int AiIdFieldNumber = 1;
     private global::NFMsg.Ident aiId_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public global::NFMsg.Ident ai_id {
+    public global::NFMsg.Ident AiId {
       get { return aiId_; }
       set {
         aiId_ = value;
@@ -148,14 +148,14 @@ namespace NFMsg {
       if (ReferenceEquals(other, this)) {
         return true;
       }
-      if (!object.Equals(ai_id, other.ai_id)) return false;
+      if (!object.Equals(AiId, other.AiId)) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override int GetHashCode() {
       int hash = 1;
-      if (aiId_ != null) hash ^= ai_id.GetHashCode();
+      if (aiId_ != null) hash ^= AiId.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -171,7 +171,7 @@ namespace NFMsg {
     public void WriteTo(pb::CodedOutputStream output) {
       if (aiId_ != null) {
         output.WriteRawTag(10);
-        output.WriteMessage(ai_id);
+        output.WriteMessage(AiId);
       }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
@@ -182,7 +182,7 @@ namespace NFMsg {
     public int CalculateSize() {
       int size = 0;
       if (aiId_ != null) {
-        size += 1 + pb::CodedOutputStream.ComputeMessageSize(ai_id);
+        size += 1 + pb::CodedOutputStream.ComputeMessageSize(AiId);
       }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
@@ -197,9 +197,9 @@ namespace NFMsg {
       }
       if (other.aiId_ != null) {
         if (aiId_ == null) {
-          aiId_ = new global::NFMsg.Ident();
+          AiId = new global::NFMsg.Ident();
         }
-        ai_id.MergeFrom(other.ai_id);
+        AiId.MergeFrom(other.AiId);
       }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
@@ -214,9 +214,9 @@ namespace NFMsg {
             break;
           case 10: {
             if (aiId_ == null) {
-              aiId_ = new global::NFMsg.Ident();
+              AiId = new global::NFMsg.Ident();
             }
-            input.ReadMessage(aiId_);
+            input.ReadMessage(AiId);
             break;
           }
         }
@@ -267,13 +267,13 @@ namespace NFMsg {
     }
 
     /// <summary>Field number for the "id" field.</summary>
-    public const int idFieldNumber = 1;
+    public const int IdFieldNumber = 1;
     private global::NFMsg.Ident id_;
     /// <summary>
     ///ID
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public global::NFMsg.Ident id {
+    public global::NFMsg.Ident Id {
       get { return id_; }
       set {
         id_ = value;
@@ -281,13 +281,13 @@ namespace NFMsg {
     }
 
     /// <summary>Field number for the "level" field.</summary>
-    public const int levelFieldNumber = 2;
+    public const int LevelFieldNumber = 2;
     private int level_;
     /// <summary>
     ///Level
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public int level {
+    public int Level {
       get { return level_; }
       set {
         level_ = value;
@@ -295,13 +295,13 @@ namespace NFMsg {
     }
 
     /// <summary>Field number for the "count" field.</summary>
-    public const int countFieldNumber = 3;
+    public const int CountFieldNumber = 3;
     private int count_;
     /// <summary>
     ///人数
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public int count {
+    public int Count {
       get { return count_; }
       set {
         count_ = value;
@@ -309,13 +309,13 @@ namespace NFMsg {
     }
 
     /// <summary>Field number for the "resource" field.</summary>
-    public const int resourceFieldNumber = 4;
+    public const int ResourceFieldNumber = 4;
     private int resource_;
     /// <summary>
     ///资源
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public int resource {
+    public int Resource {
       get { return resource_; }
       set {
         resource_ = value;
@@ -323,13 +323,13 @@ namespace NFMsg {
     }
 
     /// <summary>Field number for the "icon" field.</summary>
-    public const int iconFieldNumber = 5;
+    public const int IconFieldNumber = 5;
     private pb::ByteString icon_ = pb::ByteString.Empty;
     /// <summary>
     ///Icon
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public pb::ByteString icon {
+    public pb::ByteString Icon {
       get { return icon_; }
       set {
         icon_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
@@ -349,22 +349,22 @@ namespace NFMsg {
       if (ReferenceEquals(other, this)) {
         return true;
       }
-      if (!object.Equals(id, other.id)) return false;
-      if (level != other.level) return false;
-      if (count != other.count) return false;
-      if (resource != other.resource) return false;
-      if (icon != other.icon) return false;
+      if (!object.Equals(Id, other.Id)) return false;
+      if (Level != other.Level) return false;
+      if (Count != other.Count) return false;
+      if (Resource != other.Resource) return false;
+      if (Icon != other.Icon) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override int GetHashCode() {
       int hash = 1;
-      if (id_ != null) hash ^= id.GetHashCode();
-      if (level != 0) hash ^= level.GetHashCode();
-      if (count != 0) hash ^= count.GetHashCode();
-      if (resource != 0) hash ^= resource.GetHashCode();
-      if (icon.Length != 0) hash ^= icon.GetHashCode();
+      if (id_ != null) hash ^= Id.GetHashCode();
+      if (Level != 0) hash ^= Level.GetHashCode();
+      if (Count != 0) hash ^= Count.GetHashCode();
+      if (Resource != 0) hash ^= Resource.GetHashCode();
+      if (Icon.Length != 0) hash ^= Icon.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -380,23 +380,23 @@ namespace NFMsg {
     public void WriteTo(pb::CodedOutputStream output) {
       if (id_ != null) {
         output.WriteRawTag(10);
-        output.WriteMessage(id);
+        output.WriteMessage(Id);
       }
-      if (level != 0) {
+      if (Level != 0) {
         output.WriteRawTag(16);
-        output.WriteInt32(level);
+        output.WriteInt32(Level);
       }
-      if (count != 0) {
+      if (Count != 0) {
         output.WriteRawTag(24);
-        output.WriteInt32(count);
+        output.WriteInt32(Count);
       }
-      if (resource != 0) {
+      if (Resource != 0) {
         output.WriteRawTag(32);
-        output.WriteInt32(resource);
+        output.WriteInt32(Resource);
       }
-      if (icon.Length != 0) {
+      if (Icon.Length != 0) {
         output.WriteRawTag(42);
-        output.WriteBytes(icon);
+        output.WriteBytes(Icon);
       }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
@@ -407,19 +407,19 @@ namespace NFMsg {
     public int CalculateSize() {
       int size = 0;
       if (id_ != null) {
-        size += 1 + pb::CodedOutputStream.ComputeMessageSize(id);
+        size += 1 + pb::CodedOutputStream.ComputeMessageSize(Id);
       }
-      if (level != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeInt32Size(level);
+      if (Level != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(Level);
       }
-      if (count != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeInt32Size(count);
+      if (Count != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(Count);
       }
-      if (resource != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeInt32Size(resource);
+      if (Resource != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(Resource);
       }
-      if (icon.Length != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeBytesSize(icon);
+      if (Icon.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeBytesSize(Icon);
       }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
@@ -434,21 +434,21 @@ namespace NFMsg {
       }
       if (other.id_ != null) {
         if (id_ == null) {
-          id_ = new global::NFMsg.Ident();
+          Id = new global::NFMsg.Ident();
         }
-        id.MergeFrom(other.id);
+        Id.MergeFrom(other.Id);
       }
-      if (other.level != 0) {
-        level = other.level;
+      if (other.Level != 0) {
+        Level = other.Level;
       }
-      if (other.count != 0) {
-        count = other.count;
+      if (other.Count != 0) {
+        Count = other.Count;
       }
-      if (other.resource != 0) {
-        resource = other.resource;
+      if (other.Resource != 0) {
+        Resource = other.Resource;
       }
-      if (other.icon.Length != 0) {
-        icon = other.icon;
+      if (other.Icon.Length != 0) {
+        Icon = other.Icon;
       }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
@@ -463,25 +463,25 @@ namespace NFMsg {
             break;
           case 10: {
             if (id_ == null) {
-              id_ = new global::NFMsg.Ident();
+              Id = new global::NFMsg.Ident();
             }
-            input.ReadMessage(id_);
+            input.ReadMessage(Id);
             break;
           }
           case 16: {
-            level = input.ReadInt32();
+            Level = input.ReadInt32();
             break;
           }
           case 24: {
-            count = input.ReadInt32();
+            Count = input.ReadInt32();
             break;
           }
           case 32: {
-            resource = input.ReadInt32();
+            Resource = input.ReadInt32();
             break;
           }
           case 42: {
-            icon = input.ReadBytes();
+            Icon = input.ReadBytes();
             break;
           }
         }
@@ -528,12 +528,12 @@ namespace NFMsg {
     }
 
     /// <summary>Field number for the "map_title_id" field.</summary>
-    public const int map_title_idFieldNumber = 1;
+    public const int MapTitleIdFieldNumber = 1;
     private static readonly pb::FieldCodec<pb::ByteString> _repeated_mapTitleId_codec
         = pb::FieldCodec.ForBytes(10);
     private readonly pbc::RepeatedField<pb::ByteString> mapTitleId_ = new pbc::RepeatedField<pb::ByteString>();
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public pbc::RepeatedField<pb::ByteString> map_title_id {
+    public pbc::RepeatedField<pb::ByteString> MapTitleId {
       get { return mapTitleId_; }
     }
 
@@ -654,13 +654,13 @@ namespace NFMsg {
     }
 
     /// <summary>Field number for the "id" field.</summary>
-    public const int idFieldNumber = 1;
+    public const int IdFieldNumber = 1;
     private pb::ByteString id_ = pb::ByteString.Empty;
     /// <summary>
     ///GridID
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public pb::ByteString id {
+    public pb::ByteString Id {
       get { return id_; }
       set {
         id_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
@@ -668,13 +668,13 @@ namespace NFMsg {
     }
 
     /// <summary>Field number for the "guild_info" field.</summary>
-    public const int guild_infoFieldNumber = 2;
+    public const int GuildInfoFieldNumber = 2;
     private global::NFMsg.GridClanBaseInfo guildInfo_;
     /// <summary>
     ///所属占领公会
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public global::NFMsg.GridClanBaseInfo guild_info {
+    public global::NFMsg.GridClanBaseInfo GuildInfo {
       get { return guildInfo_; }
       set {
         guildInfo_ = value;
@@ -682,13 +682,13 @@ namespace NFMsg {
     }
 
     /// <summary>Field number for the "kingwar_time" field.</summary>
-    public const int kingwar_timeFieldNumber = 10;
+    public const int KingwarTimeFieldNumber = 10;
     private int kingwarTime_;
     /// <summary>
     ///kingwar
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public int kingwar_time {
+    public int KingwarTime {
       get { return kingwarTime_; }
       set {
         kingwarTime_ = value;
@@ -696,13 +696,13 @@ namespace NFMsg {
     }
 
     /// <summary>Field number for the "kingwarrer" field.</summary>
-    public const int kingwarrerFieldNumber = 11;
+    public const int KingwarrerFieldNumber = 11;
     private global::NFMsg.Ident kingwarrer_;
     /// <summary>
     ///发动者
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public global::NFMsg.Ident kingwarrer {
+    public global::NFMsg.Ident Kingwarrer {
       get { return kingwarrer_; }
       set {
         kingwarrer_ = value;
@@ -710,13 +710,13 @@ namespace NFMsg {
     }
 
     /// <summary>Field number for the "hurting_time" field.</summary>
-    public const int hurting_timeFieldNumber = 20;
+    public const int HurtingTimeFieldNumber = 20;
     private int hurtingTime_;
     /// <summary>
     ///hurting
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public int hurting_time {
+    public int HurtingTime {
       get { return hurtingTime_; }
       set {
         hurtingTime_ = value;
@@ -724,13 +724,13 @@ namespace NFMsg {
     }
 
     /// <summary>Field number for the "hurter" field.</summary>
-    public const int hurterFieldNumber = 21;
+    public const int HurterFieldNumber = 21;
     private global::NFMsg.Ident hurter_;
     /// <summary>
     ///狩猎者
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public global::NFMsg.Ident hurter {
+    public global::NFMsg.Ident Hurter {
       get { return hurter_; }
       set {
         hurter_ = value;
@@ -750,24 +750,24 @@ namespace NFMsg {
       if (ReferenceEquals(other, this)) {
         return true;
       }
-      if (id != other.id) return false;
-      if (!object.Equals(guild_info, other.guild_info)) return false;
-      if (kingwar_time != other.kingwar_time) return false;
-      if (!object.Equals(kingwarrer, other.kingwarrer)) return false;
-      if (hurting_time != other.hurting_time) return false;
-      if (!object.Equals(hurter, other.hurter)) return false;
+      if (Id != other.Id) return false;
+      if (!object.Equals(GuildInfo, other.GuildInfo)) return false;
+      if (KingwarTime != other.KingwarTime) return false;
+      if (!object.Equals(Kingwarrer, other.Kingwarrer)) return false;
+      if (HurtingTime != other.HurtingTime) return false;
+      if (!object.Equals(Hurter, other.Hurter)) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override int GetHashCode() {
       int hash = 1;
-      if (id.Length != 0) hash ^= id.GetHashCode();
-      if (guildInfo_ != null) hash ^= guild_info.GetHashCode();
-      if (kingwar_time != 0) hash ^= kingwar_time.GetHashCode();
-      if (kingwarrer_ != null) hash ^= kingwarrer.GetHashCode();
-      if (hurting_time != 0) hash ^= hurting_time.GetHashCode();
-      if (hurter_ != null) hash ^= hurter.GetHashCode();
+      if (Id.Length != 0) hash ^= Id.GetHashCode();
+      if (guildInfo_ != null) hash ^= GuildInfo.GetHashCode();
+      if (KingwarTime != 0) hash ^= KingwarTime.GetHashCode();
+      if (kingwarrer_ != null) hash ^= Kingwarrer.GetHashCode();
+      if (HurtingTime != 0) hash ^= HurtingTime.GetHashCode();
+      if (hurter_ != null) hash ^= Hurter.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -781,29 +781,29 @@ namespace NFMsg {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public void WriteTo(pb::CodedOutputStream output) {
-      if (id.Length != 0) {
+      if (Id.Length != 0) {
         output.WriteRawTag(10);
-        output.WriteBytes(id);
+        output.WriteBytes(Id);
       }
       if (guildInfo_ != null) {
         output.WriteRawTag(18);
-        output.WriteMessage(guild_info);
+        output.WriteMessage(GuildInfo);
       }
-      if (kingwar_time != 0) {
+      if (KingwarTime != 0) {
         output.WriteRawTag(80);
-        output.WriteInt32(kingwar_time);
+        output.WriteInt32(KingwarTime);
       }
       if (kingwarrer_ != null) {
         output.WriteRawTag(90);
-        output.WriteMessage(kingwarrer);
+        output.WriteMessage(Kingwarrer);
       }
-      if (hurting_time != 0) {
+      if (HurtingTime != 0) {
         output.WriteRawTag(160, 1);
-        output.WriteInt32(hurting_time);
+        output.WriteInt32(HurtingTime);
       }
       if (hurter_ != null) {
         output.WriteRawTag(170, 1);
-        output.WriteMessage(hurter);
+        output.WriteMessage(Hurter);
       }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
@@ -813,23 +813,23 @@ namespace NFMsg {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public int CalculateSize() {
       int size = 0;
-      if (id.Length != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeBytesSize(id);
+      if (Id.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeBytesSize(Id);
       }
       if (guildInfo_ != null) {
-        size += 1 + pb::CodedOutputStream.ComputeMessageSize(guild_info);
+        size += 1 + pb::CodedOutputStream.ComputeMessageSize(GuildInfo);
       }
-      if (kingwar_time != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeInt32Size(kingwar_time);
+      if (KingwarTime != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(KingwarTime);
       }
       if (kingwarrer_ != null) {
-        size += 1 + pb::CodedOutputStream.ComputeMessageSize(kingwarrer);
+        size += 1 + pb::CodedOutputStream.ComputeMessageSize(Kingwarrer);
       }
-      if (hurting_time != 0) {
-        size += 2 + pb::CodedOutputStream.ComputeInt32Size(hurting_time);
+      if (HurtingTime != 0) {
+        size += 2 + pb::CodedOutputStream.ComputeInt32Size(HurtingTime);
       }
       if (hurter_ != null) {
-        size += 2 + pb::CodedOutputStream.ComputeMessageSize(hurter);
+        size += 2 + pb::CodedOutputStream.ComputeMessageSize(Hurter);
       }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
@@ -842,32 +842,32 @@ namespace NFMsg {
       if (other == null) {
         return;
       }
-      if (other.id.Length != 0) {
-        id = other.id;
+      if (other.Id.Length != 0) {
+        Id = other.Id;
       }
       if (other.guildInfo_ != null) {
         if (guildInfo_ == null) {
-          guildInfo_ = new global::NFMsg.GridClanBaseInfo();
+          GuildInfo = new global::NFMsg.GridClanBaseInfo();
         }
-        guild_info.MergeFrom(other.guild_info);
+        GuildInfo.MergeFrom(other.GuildInfo);
       }
-      if (other.kingwar_time != 0) {
-        kingwar_time = other.kingwar_time;
+      if (other.KingwarTime != 0) {
+        KingwarTime = other.KingwarTime;
       }
       if (other.kingwarrer_ != null) {
         if (kingwarrer_ == null) {
-          kingwarrer_ = new global::NFMsg.Ident();
+          Kingwarrer = new global::NFMsg.Ident();
         }
-        kingwarrer.MergeFrom(other.kingwarrer);
+        Kingwarrer.MergeFrom(other.Kingwarrer);
       }
-      if (other.hurting_time != 0) {
-        hurting_time = other.hurting_time;
+      if (other.HurtingTime != 0) {
+        HurtingTime = other.HurtingTime;
       }
       if (other.hurter_ != null) {
         if (hurter_ == null) {
-          hurter_ = new global::NFMsg.Ident();
+          Hurter = new global::NFMsg.Ident();
         }
-        hurter.MergeFrom(other.hurter);
+        Hurter.MergeFrom(other.Hurter);
       }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
@@ -881,36 +881,36 @@ namespace NFMsg {
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
           case 10: {
-            id = input.ReadBytes();
+            Id = input.ReadBytes();
             break;
           }
           case 18: {
             if (guildInfo_ == null) {
-              guildInfo_ = new global::NFMsg.GridClanBaseInfo();
+              GuildInfo = new global::NFMsg.GridClanBaseInfo();
             }
-            input.ReadMessage(guildInfo_);
+            input.ReadMessage(GuildInfo);
             break;
           }
           case 80: {
-            kingwar_time = input.ReadInt32();
+            KingwarTime = input.ReadInt32();
             break;
           }
           case 90: {
             if (kingwarrer_ == null) {
-              kingwarrer_ = new global::NFMsg.Ident();
+              Kingwarrer = new global::NFMsg.Ident();
             }
-            input.ReadMessage(kingwarrer_);
+            input.ReadMessage(Kingwarrer);
             break;
           }
           case 160: {
-            hurting_time = input.ReadInt32();
+            HurtingTime = input.ReadInt32();
             break;
           }
           case 170: {
             if (hurter_ == null) {
-              hurter_ = new global::NFMsg.Ident();
+              Hurter = new global::NFMsg.Ident();
             }
-            input.ReadMessage(hurter_);
+            input.ReadMessage(Hurter);
             break;
           }
         }
@@ -958,13 +958,13 @@ namespace NFMsg {
     }
 
     /// <summary>Field number for the "owner" field.</summary>
-    public const int ownerFieldNumber = 1;
+    public const int OwnerFieldNumber = 1;
     private global::NFMsg.Ident owner_;
     /// <summary>
     ///留言者
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public global::NFMsg.Ident owner {
+    public global::NFMsg.Ident Owner {
       get { return owner_; }
       set {
         owner_ = value;
@@ -972,13 +972,13 @@ namespace NFMsg {
     }
 
     /// <summary>Field number for the "owner_name" field.</summary>
-    public const int owner_nameFieldNumber = 2;
+    public const int OwnerNameFieldNumber = 2;
     private pb::ByteString ownerName_ = pb::ByteString.Empty;
     /// <summary>
     ///留言者
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public pb::ByteString owner_name {
+    public pb::ByteString OwnerName {
       get { return ownerName_; }
       set {
         ownerName_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
@@ -986,13 +986,13 @@ namespace NFMsg {
     }
 
     /// <summary>Field number for the "msg_data" field.</summary>
-    public const int msg_dataFieldNumber = 3;
+    public const int MsgDataFieldNumber = 3;
     private pb::ByteString msgData_ = pb::ByteString.Empty;
     /// <summary>
     ///留言内容
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public pb::ByteString msg_data {
+    public pb::ByteString MsgData {
       get { return msgData_; }
       set {
         msgData_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
@@ -1000,13 +1000,13 @@ namespace NFMsg {
     }
 
     /// <summary>Field number for the "msg_time" field.</summary>
-    public const int msg_timeFieldNumber = 4;
+    public const int MsgTimeFieldNumber = 4;
     private int msgTime_;
     /// <summary>
     ///留言时间
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public int msg_time {
+    public int MsgTime {
       get { return msgTime_; }
       set {
         msgTime_ = value;
@@ -1014,13 +1014,13 @@ namespace NFMsg {
     }
 
     /// <summary>Field number for the "owner_level" field.</summary>
-    public const int owner_levelFieldNumber = 5;
+    public const int OwnerLevelFieldNumber = 5;
     private int ownerLevel_;
     /// <summary>
     ///留言时level
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public int owner_level {
+    public int OwnerLevel {
       get { return ownerLevel_; }
       set {
         ownerLevel_ = value;
@@ -1040,22 +1040,22 @@ namespace NFMsg {
       if (ReferenceEquals(other, this)) {
         return true;
       }
-      if (!object.Equals(owner, other.owner)) return false;
-      if (owner_name != other.owner_name) return false;
-      if (msg_data != other.msg_data) return false;
-      if (msg_time != other.msg_time) return false;
-      if (owner_level != other.owner_level) return false;
+      if (!object.Equals(Owner, other.Owner)) return false;
+      if (OwnerName != other.OwnerName) return false;
+      if (MsgData != other.MsgData) return false;
+      if (MsgTime != other.MsgTime) return false;
+      if (OwnerLevel != other.OwnerLevel) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override int GetHashCode() {
       int hash = 1;
-      if (owner_ != null) hash ^= owner.GetHashCode();
-      if (owner_name.Length != 0) hash ^= owner_name.GetHashCode();
-      if (msg_data.Length != 0) hash ^= msg_data.GetHashCode();
-      if (msg_time != 0) hash ^= msg_time.GetHashCode();
-      if (owner_level != 0) hash ^= owner_level.GetHashCode();
+      if (owner_ != null) hash ^= Owner.GetHashCode();
+      if (OwnerName.Length != 0) hash ^= OwnerName.GetHashCode();
+      if (MsgData.Length != 0) hash ^= MsgData.GetHashCode();
+      if (MsgTime != 0) hash ^= MsgTime.GetHashCode();
+      if (OwnerLevel != 0) hash ^= OwnerLevel.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -1071,23 +1071,23 @@ namespace NFMsg {
     public void WriteTo(pb::CodedOutputStream output) {
       if (owner_ != null) {
         output.WriteRawTag(10);
-        output.WriteMessage(owner);
+        output.WriteMessage(Owner);
       }
-      if (owner_name.Length != 0) {
+      if (OwnerName.Length != 0) {
         output.WriteRawTag(18);
-        output.WriteBytes(owner_name);
+        output.WriteBytes(OwnerName);
       }
-      if (msg_data.Length != 0) {
+      if (MsgData.Length != 0) {
         output.WriteRawTag(26);
-        output.WriteBytes(msg_data);
+        output.WriteBytes(MsgData);
       }
-      if (msg_time != 0) {
+      if (MsgTime != 0) {
         output.WriteRawTag(32);
-        output.WriteInt32(msg_time);
+        output.WriteInt32(MsgTime);
       }
-      if (owner_level != 0) {
+      if (OwnerLevel != 0) {
         output.WriteRawTag(40);
-        output.WriteInt32(owner_level);
+        output.WriteInt32(OwnerLevel);
       }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
@@ -1098,19 +1098,19 @@ namespace NFMsg {
     public int CalculateSize() {
       int size = 0;
       if (owner_ != null) {
-        size += 1 + pb::CodedOutputStream.ComputeMessageSize(owner);
+        size += 1 + pb::CodedOutputStream.ComputeMessageSize(Owner);
       }
-      if (owner_name.Length != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeBytesSize(owner_name);
+      if (OwnerName.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeBytesSize(OwnerName);
       }
-      if (msg_data.Length != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeBytesSize(msg_data);
+      if (MsgData.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeBytesSize(MsgData);
       }
-      if (msg_time != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeInt32Size(msg_time);
+      if (MsgTime != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(MsgTime);
       }
-      if (owner_level != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeInt32Size(owner_level);
+      if (OwnerLevel != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(OwnerLevel);
       }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
@@ -1125,21 +1125,21 @@ namespace NFMsg {
       }
       if (other.owner_ != null) {
         if (owner_ == null) {
-          owner_ = new global::NFMsg.Ident();
+          Owner = new global::NFMsg.Ident();
         }
-        owner.MergeFrom(other.owner);
+        Owner.MergeFrom(other.Owner);
       }
-      if (other.owner_name.Length != 0) {
-        owner_name = other.owner_name;
+      if (other.OwnerName.Length != 0) {
+        OwnerName = other.OwnerName;
       }
-      if (other.msg_data.Length != 0) {
-        msg_data = other.msg_data;
+      if (other.MsgData.Length != 0) {
+        MsgData = other.MsgData;
       }
-      if (other.msg_time != 0) {
-        msg_time = other.msg_time;
+      if (other.MsgTime != 0) {
+        MsgTime = other.MsgTime;
       }
-      if (other.owner_level != 0) {
-        owner_level = other.owner_level;
+      if (other.OwnerLevel != 0) {
+        OwnerLevel = other.OwnerLevel;
       }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
@@ -1154,25 +1154,25 @@ namespace NFMsg {
             break;
           case 10: {
             if (owner_ == null) {
-              owner_ = new global::NFMsg.Ident();
+              Owner = new global::NFMsg.Ident();
             }
-            input.ReadMessage(owner_);
+            input.ReadMessage(Owner);
             break;
           }
           case 18: {
-            owner_name = input.ReadBytes();
+            OwnerName = input.ReadBytes();
             break;
           }
           case 26: {
-            msg_data = input.ReadBytes();
+            MsgData = input.ReadBytes();
             break;
           }
           case 32: {
-            msg_time = input.ReadInt32();
+            MsgTime = input.ReadInt32();
             break;
           }
           case 40: {
-            owner_level = input.ReadInt32();
+            OwnerLevel = input.ReadInt32();
             break;
           }
         }
@@ -1219,13 +1219,13 @@ namespace NFMsg {
     }
 
     /// <summary>Field number for the "red_info" field.</summary>
-    public const int red_infoFieldNumber = 1;
+    public const int RedInfoFieldNumber = 1;
     private global::NFMsg.GridClanBaseInfo redInfo_;
     /// <summary>
     ///红方	
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public global::NFMsg.GridClanBaseInfo red_info {
+    public global::NFMsg.GridClanBaseInfo RedInfo {
       get { return redInfo_; }
       set {
         redInfo_ = value;
@@ -1233,13 +1233,13 @@ namespace NFMsg {
     }
 
     /// <summary>Field number for the "blue_info" field.</summary>
-    public const int blue_infoFieldNumber = 2;
+    public const int BlueInfoFieldNumber = 2;
     private global::NFMsg.GridClanBaseInfo blueInfo_;
     /// <summary>
     ///蓝方	
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public global::NFMsg.GridClanBaseInfo blue_info {
+    public global::NFMsg.GridClanBaseInfo BlueInfo {
       get { return blueInfo_; }
       set {
         blueInfo_ = value;
@@ -1247,13 +1247,13 @@ namespace NFMsg {
     }
 
     /// <summary>Field number for the "winner_id" field.</summary>
-    public const int winner_idFieldNumber = 10;
+    public const int WinnerIdFieldNumber = 10;
     private global::NFMsg.Ident winnerId_;
     /// <summary>
     ///winner
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public global::NFMsg.Ident winner_id {
+    public global::NFMsg.Ident WinnerId {
       get { return winnerId_; }
       set {
         winnerId_ = value;
@@ -1261,13 +1261,13 @@ namespace NFMsg {
     }
 
     /// <summary>Field number for the "war_time" field.</summary>
-    public const int war_timeFieldNumber = 11;
+    public const int WarTimeFieldNumber = 11;
     private int warTime_;
     /// <summary>
     ///war时间
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public int war_time {
+    public int WarTime {
       get { return warTime_; }
       set {
         warTime_ = value;
@@ -1287,20 +1287,20 @@ namespace NFMsg {
       if (ReferenceEquals(other, this)) {
         return true;
       }
-      if (!object.Equals(red_info, other.red_info)) return false;
-      if (!object.Equals(blue_info, other.blue_info)) return false;
-      if (!object.Equals(winner_id, other.winner_id)) return false;
-      if (war_time != other.war_time) return false;
+      if (!object.Equals(RedInfo, other.RedInfo)) return false;
+      if (!object.Equals(BlueInfo, other.BlueInfo)) return false;
+      if (!object.Equals(WinnerId, other.WinnerId)) return false;
+      if (WarTime != other.WarTime) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override int GetHashCode() {
       int hash = 1;
-      if (redInfo_ != null) hash ^= red_info.GetHashCode();
-      if (blueInfo_ != null) hash ^= blue_info.GetHashCode();
-      if (winnerId_ != null) hash ^= winner_id.GetHashCode();
-      if (war_time != 0) hash ^= war_time.GetHashCode();
+      if (redInfo_ != null) hash ^= RedInfo.GetHashCode();
+      if (blueInfo_ != null) hash ^= BlueInfo.GetHashCode();
+      if (winnerId_ != null) hash ^= WinnerId.GetHashCode();
+      if (WarTime != 0) hash ^= WarTime.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -1316,19 +1316,19 @@ namespace NFMsg {
     public void WriteTo(pb::CodedOutputStream output) {
       if (redInfo_ != null) {
         output.WriteRawTag(10);
-        output.WriteMessage(red_info);
+        output.WriteMessage(RedInfo);
       }
       if (blueInfo_ != null) {
         output.WriteRawTag(18);
-        output.WriteMessage(blue_info);
+        output.WriteMessage(BlueInfo);
       }
       if (winnerId_ != null) {
         output.WriteRawTag(82);
-        output.WriteMessage(winner_id);
+        output.WriteMessage(WinnerId);
       }
-      if (war_time != 0) {
+      if (WarTime != 0) {
         output.WriteRawTag(88);
-        output.WriteInt32(war_time);
+        output.WriteInt32(WarTime);
       }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
@@ -1339,16 +1339,16 @@ namespace NFMsg {
     public int CalculateSize() {
       int size = 0;
       if (redInfo_ != null) {
-        size += 1 + pb::CodedOutputStream.ComputeMessageSize(red_info);
+        size += 1 + pb::CodedOutputStream.ComputeMessageSize(RedInfo);
       }
       if (blueInfo_ != null) {
-        size += 1 + pb::CodedOutputStream.ComputeMessageSize(blue_info);
+        size += 1 + pb::CodedOutputStream.ComputeMessageSize(BlueInfo);
       }
       if (winnerId_ != null) {
-        size += 1 + pb::CodedOutputStream.ComputeMessageSize(winner_id);
+        size += 1 + pb::CodedOutputStream.ComputeMessageSize(WinnerId);
       }
-      if (war_time != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeInt32Size(war_time);
+      if (WarTime != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(WarTime);
       }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
@@ -1363,24 +1363,24 @@ namespace NFMsg {
       }
       if (other.redInfo_ != null) {
         if (redInfo_ == null) {
-          redInfo_ = new global::NFMsg.GridClanBaseInfo();
+          RedInfo = new global::NFMsg.GridClanBaseInfo();
         }
-        red_info.MergeFrom(other.red_info);
+        RedInfo.MergeFrom(other.RedInfo);
       }
       if (other.blueInfo_ != null) {
         if (blueInfo_ == null) {
-          blueInfo_ = new global::NFMsg.GridClanBaseInfo();
+          BlueInfo = new global::NFMsg.GridClanBaseInfo();
         }
-        blue_info.MergeFrom(other.blue_info);
+        BlueInfo.MergeFrom(other.BlueInfo);
       }
       if (other.winnerId_ != null) {
         if (winnerId_ == null) {
-          winnerId_ = new global::NFMsg.Ident();
+          WinnerId = new global::NFMsg.Ident();
         }
-        winner_id.MergeFrom(other.winner_id);
+        WinnerId.MergeFrom(other.WinnerId);
       }
-      if (other.war_time != 0) {
-        war_time = other.war_time;
+      if (other.WarTime != 0) {
+        WarTime = other.WarTime;
       }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
@@ -1395,27 +1395,27 @@ namespace NFMsg {
             break;
           case 10: {
             if (redInfo_ == null) {
-              redInfo_ = new global::NFMsg.GridClanBaseInfo();
+              RedInfo = new global::NFMsg.GridClanBaseInfo();
             }
-            input.ReadMessage(redInfo_);
+            input.ReadMessage(RedInfo);
             break;
           }
           case 18: {
             if (blueInfo_ == null) {
-              blueInfo_ = new global::NFMsg.GridClanBaseInfo();
+              BlueInfo = new global::NFMsg.GridClanBaseInfo();
             }
-            input.ReadMessage(blueInfo_);
+            input.ReadMessage(BlueInfo);
             break;
           }
           case 82: {
             if (winnerId_ == null) {
-              winnerId_ = new global::NFMsg.Ident();
+              WinnerId = new global::NFMsg.Ident();
             }
-            input.ReadMessage(winnerId_);
+            input.ReadMessage(WinnerId);
             break;
           }
           case 88: {
-            war_time = input.ReadInt32();
+            WarTime = input.ReadInt32();
             break;
           }
         }
@@ -1462,10 +1462,10 @@ namespace NFMsg {
     }
 
     /// <summary>Field number for the "grid_base_info" field.</summary>
-    public const int grid_base_infoFieldNumber = 1;
+    public const int GridBaseInfoFieldNumber = 1;
     private global::NFMsg.BigMapGridBaseInfo gridBaseInfo_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public global::NFMsg.BigMapGridBaseInfo grid_base_info {
+    public global::NFMsg.BigMapGridBaseInfo GridBaseInfo {
       get { return gridBaseInfo_; }
       set {
         gridBaseInfo_ = value;
@@ -1473,19 +1473,19 @@ namespace NFMsg {
     }
 
     /// <summary>Field number for the "stay_guid_list" field.</summary>
-    public const int stay_guid_listFieldNumber = 2;
+    public const int StayGuidListFieldNumber = 2;
     private static readonly pb::FieldCodec<global::NFMsg.GridClanBaseInfo> _repeated_stayGuidList_codec
         = pb::FieldCodec.ForMessage(18, global::NFMsg.GridClanBaseInfo.Parser);
     private readonly pbc::RepeatedField<global::NFMsg.GridClanBaseInfo> stayGuidList_ = new pbc::RepeatedField<global::NFMsg.GridClanBaseInfo>();
     /// <summary>
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public pbc::RepeatedField<global::NFMsg.GridClanBaseInfo> stay_guid_list {
+    public pbc::RepeatedField<global::NFMsg.GridClanBaseInfo> StayGuidList {
       get { return stayGuidList_; }
     }
 
     /// <summary>Field number for the "leave_msg" field.</summary>
-    public const int leave_msgFieldNumber = 3;
+    public const int LeaveMsgFieldNumber = 3;
     private static readonly pb::FieldCodec<global::NFMsg.BigMapLeaveMsg> _repeated_leaveMsg_codec
         = pb::FieldCodec.ForMessage(26, global::NFMsg.BigMapLeaveMsg.Parser);
     private readonly pbc::RepeatedField<global::NFMsg.BigMapLeaveMsg> leaveMsg_ = new pbc::RepeatedField<global::NFMsg.BigMapLeaveMsg>();
@@ -1493,12 +1493,12 @@ namespace NFMsg {
     ///此地图留言(&lt;=10)
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public pbc::RepeatedField<global::NFMsg.BigMapLeaveMsg> leave_msg {
+    public pbc::RepeatedField<global::NFMsg.BigMapLeaveMsg> LeaveMsg {
       get { return leaveMsg_; }
     }
 
     /// <summary>Field number for the "war_history" field.</summary>
-    public const int war_historyFieldNumber = 4;
+    public const int WarHistoryFieldNumber = 4;
     private static readonly pb::FieldCodec<global::NFMsg.BigMapWarHistory> _repeated_warHistory_codec
         = pb::FieldCodec.ForMessage(34, global::NFMsg.BigMapWarHistory.Parser);
     private readonly pbc::RepeatedField<global::NFMsg.BigMapWarHistory> warHistory_ = new pbc::RepeatedField<global::NFMsg.BigMapWarHistory>();
@@ -1506,7 +1506,7 @@ namespace NFMsg {
     ///此地图历史战争信息(&lt;=10)
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public pbc::RepeatedField<global::NFMsg.BigMapWarHistory> war_history {
+    public pbc::RepeatedField<global::NFMsg.BigMapWarHistory> WarHistory {
       get { return warHistory_; }
     }
 
@@ -1523,7 +1523,7 @@ namespace NFMsg {
       if (ReferenceEquals(other, this)) {
         return true;
       }
-      if (!object.Equals(grid_base_info, other.grid_base_info)) return false;
+      if (!object.Equals(GridBaseInfo, other.GridBaseInfo)) return false;
       if(!stayGuidList_.Equals(other.stayGuidList_)) return false;
       if(!leaveMsg_.Equals(other.leaveMsg_)) return false;
       if(!warHistory_.Equals(other.warHistory_)) return false;
@@ -1533,7 +1533,7 @@ namespace NFMsg {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override int GetHashCode() {
       int hash = 1;
-      if (gridBaseInfo_ != null) hash ^= grid_base_info.GetHashCode();
+      if (gridBaseInfo_ != null) hash ^= GridBaseInfo.GetHashCode();
       hash ^= stayGuidList_.GetHashCode();
       hash ^= leaveMsg_.GetHashCode();
       hash ^= warHistory_.GetHashCode();
@@ -1552,7 +1552,7 @@ namespace NFMsg {
     public void WriteTo(pb::CodedOutputStream output) {
       if (gridBaseInfo_ != null) {
         output.WriteRawTag(10);
-        output.WriteMessage(grid_base_info);
+        output.WriteMessage(GridBaseInfo);
       }
       stayGuidList_.WriteTo(output, _repeated_stayGuidList_codec);
       leaveMsg_.WriteTo(output, _repeated_leaveMsg_codec);
@@ -1566,7 +1566,7 @@ namespace NFMsg {
     public int CalculateSize() {
       int size = 0;
       if (gridBaseInfo_ != null) {
-        size += 1 + pb::CodedOutputStream.ComputeMessageSize(grid_base_info);
+        size += 1 + pb::CodedOutputStream.ComputeMessageSize(GridBaseInfo);
       }
       size += stayGuidList_.CalculateSize(_repeated_stayGuidList_codec);
       size += leaveMsg_.CalculateSize(_repeated_leaveMsg_codec);
@@ -1584,9 +1584,9 @@ namespace NFMsg {
       }
       if (other.gridBaseInfo_ != null) {
         if (gridBaseInfo_ == null) {
-          gridBaseInfo_ = new global::NFMsg.BigMapGridBaseInfo();
+          GridBaseInfo = new global::NFMsg.BigMapGridBaseInfo();
         }
-        grid_base_info.MergeFrom(other.grid_base_info);
+        GridBaseInfo.MergeFrom(other.GridBaseInfo);
       }
       stayGuidList_.Add(other.stayGuidList_);
       leaveMsg_.Add(other.leaveMsg_);
@@ -1604,9 +1604,9 @@ namespace NFMsg {
             break;
           case 10: {
             if (gridBaseInfo_ == null) {
-              gridBaseInfo_ = new global::NFMsg.BigMapGridBaseInfo();
+              GridBaseInfo = new global::NFMsg.BigMapGridBaseInfo();
             }
-            input.ReadMessage(gridBaseInfo_);
+            input.ReadMessage(GridBaseInfo);
             break;
           }
           case 18: {
@@ -1665,12 +1665,12 @@ namespace NFMsg {
     }
 
     /// <summary>Field number for the "map_data" field.</summary>
-    public const int map_dataFieldNumber = 1;
+    public const int MapDataFieldNumber = 1;
     private static readonly pb::FieldCodec<global::NFMsg.BigMapGridDetailInfo> _repeated_mapData_codec
         = pb::FieldCodec.ForMessage(10, global::NFMsg.BigMapGridDetailInfo.Parser);
     private readonly pbc::RepeatedField<global::NFMsg.BigMapGridDetailInfo> mapData_ = new pbc::RepeatedField<global::NFMsg.BigMapGridDetailInfo>();
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public pbc::RepeatedField<global::NFMsg.BigMapGridDetailInfo> map_data {
+    public pbc::RepeatedField<global::NFMsg.BigMapGridDetailInfo> MapData {
       get { return mapData_; }
     }
 
@@ -1893,12 +1893,12 @@ namespace NFMsg {
     }
 
     /// <summary>Field number for the "grid_base_info" field.</summary>
-    public const int grid_base_infoFieldNumber = 1;
+    public const int GridBaseInfoFieldNumber = 1;
     private static readonly pb::FieldCodec<global::NFMsg.BigMapGridBaseInfo> _repeated_gridBaseInfo_codec
         = pb::FieldCodec.ForMessage(10, global::NFMsg.BigMapGridBaseInfo.Parser);
     private readonly pbc::RepeatedField<global::NFMsg.BigMapGridBaseInfo> gridBaseInfo_ = new pbc::RepeatedField<global::NFMsg.BigMapGridBaseInfo>();
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public pbc::RepeatedField<global::NFMsg.BigMapGridBaseInfo> grid_base_info {
+    public pbc::RepeatedField<global::NFMsg.BigMapGridBaseInfo> GridBaseInfo {
       get { return gridBaseInfo_; }
     }
 
@@ -2018,10 +2018,10 @@ namespace NFMsg {
     }
 
     /// <summary>Field number for the "map_title_id" field.</summary>
-    public const int map_title_idFieldNumber = 1;
+    public const int MapTitleIdFieldNumber = 1;
     private pb::ByteString mapTitleId_ = pb::ByteString.Empty;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public pb::ByteString map_title_id {
+    public pb::ByteString MapTitleId {
       get { return mapTitleId_; }
       set {
         mapTitleId_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
@@ -2029,10 +2029,10 @@ namespace NFMsg {
     }
 
     /// <summary>Field number for the "guild_id" field.</summary>
-    public const int guild_idFieldNumber = 2;
+    public const int GuildIdFieldNumber = 2;
     private global::NFMsg.Ident guildId_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public global::NFMsg.Ident guild_id {
+    public global::NFMsg.Ident GuildId {
       get { return guildId_; }
       set {
         guildId_ = value;
@@ -2052,16 +2052,16 @@ namespace NFMsg {
       if (ReferenceEquals(other, this)) {
         return true;
       }
-      if (map_title_id != other.map_title_id) return false;
-      if (!object.Equals(guild_id, other.guild_id)) return false;
+      if (MapTitleId != other.MapTitleId) return false;
+      if (!object.Equals(GuildId, other.GuildId)) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override int GetHashCode() {
       int hash = 1;
-      if (map_title_id.Length != 0) hash ^= map_title_id.GetHashCode();
-      if (guildId_ != null) hash ^= guild_id.GetHashCode();
+      if (MapTitleId.Length != 0) hash ^= MapTitleId.GetHashCode();
+      if (guildId_ != null) hash ^= GuildId.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -2075,13 +2075,13 @@ namespace NFMsg {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public void WriteTo(pb::CodedOutputStream output) {
-      if (map_title_id.Length != 0) {
+      if (MapTitleId.Length != 0) {
         output.WriteRawTag(10);
-        output.WriteBytes(map_title_id);
+        output.WriteBytes(MapTitleId);
       }
       if (guildId_ != null) {
         output.WriteRawTag(18);
-        output.WriteMessage(guild_id);
+        output.WriteMessage(GuildId);
       }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
@@ -2091,11 +2091,11 @@ namespace NFMsg {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public int CalculateSize() {
       int size = 0;
-      if (map_title_id.Length != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeBytesSize(map_title_id);
+      if (MapTitleId.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeBytesSize(MapTitleId);
       }
       if (guildId_ != null) {
-        size += 1 + pb::CodedOutputStream.ComputeMessageSize(guild_id);
+        size += 1 + pb::CodedOutputStream.ComputeMessageSize(GuildId);
       }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
@@ -2108,14 +2108,14 @@ namespace NFMsg {
       if (other == null) {
         return;
       }
-      if (other.map_title_id.Length != 0) {
-        map_title_id = other.map_title_id;
+      if (other.MapTitleId.Length != 0) {
+        MapTitleId = other.MapTitleId;
       }
       if (other.guildId_ != null) {
         if (guildId_ == null) {
-          guildId_ = new global::NFMsg.Ident();
+          GuildId = new global::NFMsg.Ident();
         }
-        guild_id.MergeFrom(other.guild_id);
+        GuildId.MergeFrom(other.GuildId);
       }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
@@ -2129,14 +2129,14 @@ namespace NFMsg {
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
           case 10: {
-            map_title_id = input.ReadBytes();
+            MapTitleId = input.ReadBytes();
             break;
           }
           case 18: {
             if (guildId_ == null) {
-              guildId_ = new global::NFMsg.Ident();
+              GuildId = new global::NFMsg.Ident();
             }
-            input.ReadMessage(guildId_);
+            input.ReadMessage(GuildId);
             break;
           }
         }
@@ -2288,10 +2288,10 @@ namespace NFMsg {
     }
 
     /// <summary>Field number for the "map_title_id" field.</summary>
-    public const int map_title_idFieldNumber = 1;
+    public const int MapTitleIdFieldNumber = 1;
     private pb::ByteString mapTitleId_ = pb::ByteString.Empty;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public pb::ByteString map_title_id {
+    public pb::ByteString MapTitleId {
       get { return mapTitleId_; }
       set {
         mapTitleId_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
@@ -2299,10 +2299,10 @@ namespace NFMsg {
     }
 
     /// <summary>Field number for the "leave_msg" field.</summary>
-    public const int leave_msgFieldNumber = 2;
+    public const int LeaveMsgFieldNumber = 2;
     private global::NFMsg.BigMapLeaveMsg leaveMsg_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public global::NFMsg.BigMapLeaveMsg leave_msg {
+    public global::NFMsg.BigMapLeaveMsg LeaveMsg {
       get { return leaveMsg_; }
       set {
         leaveMsg_ = value;
@@ -2322,16 +2322,16 @@ namespace NFMsg {
       if (ReferenceEquals(other, this)) {
         return true;
       }
-      if (map_title_id != other.map_title_id) return false;
-      if (!object.Equals(leave_msg, other.leave_msg)) return false;
+      if (MapTitleId != other.MapTitleId) return false;
+      if (!object.Equals(LeaveMsg, other.LeaveMsg)) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override int GetHashCode() {
       int hash = 1;
-      if (map_title_id.Length != 0) hash ^= map_title_id.GetHashCode();
-      if (leaveMsg_ != null) hash ^= leave_msg.GetHashCode();
+      if (MapTitleId.Length != 0) hash ^= MapTitleId.GetHashCode();
+      if (leaveMsg_ != null) hash ^= LeaveMsg.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -2345,13 +2345,13 @@ namespace NFMsg {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public void WriteTo(pb::CodedOutputStream output) {
-      if (map_title_id.Length != 0) {
+      if (MapTitleId.Length != 0) {
         output.WriteRawTag(10);
-        output.WriteBytes(map_title_id);
+        output.WriteBytes(MapTitleId);
       }
       if (leaveMsg_ != null) {
         output.WriteRawTag(18);
-        output.WriteMessage(leave_msg);
+        output.WriteMessage(LeaveMsg);
       }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
@@ -2361,11 +2361,11 @@ namespace NFMsg {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public int CalculateSize() {
       int size = 0;
-      if (map_title_id.Length != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeBytesSize(map_title_id);
+      if (MapTitleId.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeBytesSize(MapTitleId);
       }
       if (leaveMsg_ != null) {
-        size += 1 + pb::CodedOutputStream.ComputeMessageSize(leave_msg);
+        size += 1 + pb::CodedOutputStream.ComputeMessageSize(LeaveMsg);
       }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
@@ -2378,14 +2378,14 @@ namespace NFMsg {
       if (other == null) {
         return;
       }
-      if (other.map_title_id.Length != 0) {
-        map_title_id = other.map_title_id;
+      if (other.MapTitleId.Length != 0) {
+        MapTitleId = other.MapTitleId;
       }
       if (other.leaveMsg_ != null) {
         if (leaveMsg_ == null) {
-          leaveMsg_ = new global::NFMsg.BigMapLeaveMsg();
+          LeaveMsg = new global::NFMsg.BigMapLeaveMsg();
         }
-        leave_msg.MergeFrom(other.leave_msg);
+        LeaveMsg.MergeFrom(other.LeaveMsg);
       }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
@@ -2399,14 +2399,14 @@ namespace NFMsg {
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
           case 10: {
-            map_title_id = input.ReadBytes();
+            MapTitleId = input.ReadBytes();
             break;
           }
           case 18: {
             if (leaveMsg_ == null) {
-              leaveMsg_ = new global::NFMsg.BigMapLeaveMsg();
+              LeaveMsg = new global::NFMsg.BigMapLeaveMsg();
             }
-            input.ReadMessage(leaveMsg_);
+            input.ReadMessage(LeaveMsg);
             break;
           }
         }
@@ -2557,10 +2557,10 @@ namespace NFMsg {
     }
 
     /// <summary>Field number for the "map_title_id" field.</summary>
-    public const int map_title_idFieldNumber = 1;
+    public const int MapTitleIdFieldNumber = 1;
     private pb::ByteString mapTitleId_ = pb::ByteString.Empty;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public pb::ByteString map_title_id {
+    public pb::ByteString MapTitleId {
       get { return mapTitleId_; }
       set {
         mapTitleId_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
@@ -2580,14 +2580,14 @@ namespace NFMsg {
       if (ReferenceEquals(other, this)) {
         return true;
       }
-      if (map_title_id != other.map_title_id) return false;
+      if (MapTitleId != other.MapTitleId) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override int GetHashCode() {
       int hash = 1;
-      if (map_title_id.Length != 0) hash ^= map_title_id.GetHashCode();
+      if (MapTitleId.Length != 0) hash ^= MapTitleId.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -2601,9 +2601,9 @@ namespace NFMsg {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public void WriteTo(pb::CodedOutputStream output) {
-      if (map_title_id.Length != 0) {
+      if (MapTitleId.Length != 0) {
         output.WriteRawTag(10);
-        output.WriteBytes(map_title_id);
+        output.WriteBytes(MapTitleId);
       }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
@@ -2613,8 +2613,8 @@ namespace NFMsg {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public int CalculateSize() {
       int size = 0;
-      if (map_title_id.Length != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeBytesSize(map_title_id);
+      if (MapTitleId.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeBytesSize(MapTitleId);
       }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
@@ -2627,8 +2627,8 @@ namespace NFMsg {
       if (other == null) {
         return;
       }
-      if (other.map_title_id.Length != 0) {
-        map_title_id = other.map_title_id;
+      if (other.MapTitleId.Length != 0) {
+        MapTitleId = other.MapTitleId;
       }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
@@ -2642,7 +2642,7 @@ namespace NFMsg {
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
           case 10: {
-            map_title_id = input.ReadBytes();
+            MapTitleId = input.ReadBytes();
             break;
           }
         }
@@ -2793,10 +2793,10 @@ namespace NFMsg {
     }
 
     /// <summary>Field number for the "map_title_id" field.</summary>
-    public const int map_title_idFieldNumber = 1;
+    public const int MapTitleIdFieldNumber = 1;
     private pb::ByteString mapTitleId_ = pb::ByteString.Empty;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public pb::ByteString map_title_id {
+    public pb::ByteString MapTitleId {
       get { return mapTitleId_; }
       set {
         mapTitleId_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
@@ -2816,14 +2816,14 @@ namespace NFMsg {
       if (ReferenceEquals(other, this)) {
         return true;
       }
-      if (map_title_id != other.map_title_id) return false;
+      if (MapTitleId != other.MapTitleId) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override int GetHashCode() {
       int hash = 1;
-      if (map_title_id.Length != 0) hash ^= map_title_id.GetHashCode();
+      if (MapTitleId.Length != 0) hash ^= MapTitleId.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -2837,9 +2837,9 @@ namespace NFMsg {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public void WriteTo(pb::CodedOutputStream output) {
-      if (map_title_id.Length != 0) {
+      if (MapTitleId.Length != 0) {
         output.WriteRawTag(10);
-        output.WriteBytes(map_title_id);
+        output.WriteBytes(MapTitleId);
       }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
@@ -2849,8 +2849,8 @@ namespace NFMsg {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public int CalculateSize() {
       int size = 0;
-      if (map_title_id.Length != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeBytesSize(map_title_id);
+      if (MapTitleId.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeBytesSize(MapTitleId);
       }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
@@ -2863,8 +2863,8 @@ namespace NFMsg {
       if (other == null) {
         return;
       }
-      if (other.map_title_id.Length != 0) {
-        map_title_id = other.map_title_id;
+      if (other.MapTitleId.Length != 0) {
+        MapTitleId = other.MapTitleId;
       }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
@@ -2878,7 +2878,7 @@ namespace NFMsg {
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
           case 10: {
-            map_title_id = input.ReadBytes();
+            MapTitleId = input.ReadBytes();
             break;
           }
         }
@@ -3029,10 +3029,10 @@ namespace NFMsg {
     }
 
     /// <summary>Field number for the "map_title" field.</summary>
-    public const int map_titleFieldNumber = 1;
+    public const int MapTitleFieldNumber = 1;
     private pb::ByteString mapTitle_ = pb::ByteString.Empty;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public pb::ByteString map_title {
+    public pb::ByteString MapTitle {
       get { return mapTitle_; }
       set {
         mapTitle_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
@@ -3052,14 +3052,14 @@ namespace NFMsg {
       if (ReferenceEquals(other, this)) {
         return true;
       }
-      if (map_title != other.map_title) return false;
+      if (MapTitle != other.MapTitle) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override int GetHashCode() {
       int hash = 1;
-      if (map_title.Length != 0) hash ^= map_title.GetHashCode();
+      if (MapTitle.Length != 0) hash ^= MapTitle.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -3073,9 +3073,9 @@ namespace NFMsg {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public void WriteTo(pb::CodedOutputStream output) {
-      if (map_title.Length != 0) {
+      if (MapTitle.Length != 0) {
         output.WriteRawTag(10);
-        output.WriteBytes(map_title);
+        output.WriteBytes(MapTitle);
       }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
@@ -3085,8 +3085,8 @@ namespace NFMsg {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public int CalculateSize() {
       int size = 0;
-      if (map_title.Length != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeBytesSize(map_title);
+      if (MapTitle.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeBytesSize(MapTitle);
       }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
@@ -3099,8 +3099,8 @@ namespace NFMsg {
       if (other == null) {
         return;
       }
-      if (other.map_title.Length != 0) {
-        map_title = other.map_title;
+      if (other.MapTitle.Length != 0) {
+        MapTitle = other.MapTitle;
       }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
@@ -3114,7 +3114,7 @@ namespace NFMsg {
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
           case 10: {
-            map_title = input.ReadBytes();
+            MapTitle = input.ReadBytes();
             break;
           }
         }
@@ -3161,10 +3161,10 @@ namespace NFMsg {
     }
 
     /// <summary>Field number for the "map_title" field.</summary>
-    public const int map_titleFieldNumber = 1;
+    public const int MapTitleFieldNumber = 1;
     private pb::ByteString mapTitle_ = pb::ByteString.Empty;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public pb::ByteString map_title {
+    public pb::ByteString MapTitle {
       get { return mapTitle_; }
       set {
         mapTitle_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
@@ -3184,14 +3184,14 @@ namespace NFMsg {
       if (ReferenceEquals(other, this)) {
         return true;
       }
-      if (map_title != other.map_title) return false;
+      if (MapTitle != other.MapTitle) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override int GetHashCode() {
       int hash = 1;
-      if (map_title.Length != 0) hash ^= map_title.GetHashCode();
+      if (MapTitle.Length != 0) hash ^= MapTitle.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -3205,9 +3205,9 @@ namespace NFMsg {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public void WriteTo(pb::CodedOutputStream output) {
-      if (map_title.Length != 0) {
+      if (MapTitle.Length != 0) {
         output.WriteRawTag(10);
-        output.WriteBytes(map_title);
+        output.WriteBytes(MapTitle);
       }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
@@ -3217,8 +3217,8 @@ namespace NFMsg {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public int CalculateSize() {
       int size = 0;
-      if (map_title.Length != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeBytesSize(map_title);
+      if (MapTitle.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeBytesSize(MapTitle);
       }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
@@ -3231,8 +3231,8 @@ namespace NFMsg {
       if (other == null) {
         return;
       }
-      if (other.map_title.Length != 0) {
-        map_title = other.map_title;
+      if (other.MapTitle.Length != 0) {
+        MapTitle = other.MapTitle;
       }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
@@ -3246,7 +3246,7 @@ namespace NFMsg {
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
           case 10: {
-            map_title = input.ReadBytes();
+            MapTitle = input.ReadBytes();
             break;
           }
         }

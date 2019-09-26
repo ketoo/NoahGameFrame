@@ -44,16 +44,16 @@ namespace NFMsg {
             "BnByb3RvMw=="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { global::NFMsg.NFMsgBaseReflection.Descriptor, },
-          new pbr::GeneratedClrTypeInfo(null, new pbr::GeneratedClrTypeInfo[] {
-            new pbr::GeneratedClrTypeInfo(typeof(global::NFMsg.TeamMemberInfo), global::NFMsg.TeamMemberInfo.Parser, new[]{ "id", "name", "bp", "leader", "pending" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::NFMsg.ReqAckTeamMemberList), global::NFMsg.ReqAckTeamMemberList.Parser, new[]{ "team_id", "memberList" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::NFMsg.AckTeamMemberAdd), global::NFMsg.AckTeamMemberAdd.Parser, new[]{ "team_id", "member" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::NFMsg.AckTeamMemberLeave), global::NFMsg.AckTeamMemberLeave.Parser, new[]{ "team_id", "member" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::NFMsg.ReqInviteToTeam), global::NFMsg.ReqInviteToTeam.Parser, new[]{ "stranger" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::NFMsg.ReqCancelInviteToTeam), global::NFMsg.ReqCancelInviteToTeam.Parser, new[]{ "stranger" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::NFMsg.AckInviteToTeam), global::NFMsg.AckInviteToTeam.Parser, new[]{ "team_id", "inviter", "name", "stranger" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::NFMsg.ReqAckAcceptTeamInvite), global::NFMsg.ReqAckAcceptTeamInvite.Parser, new[]{ "team_id" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::NFMsg.ReqAckRejectTeamInvite), global::NFMsg.ReqAckRejectTeamInvite.Parser, new[]{ "team_id" }, null, null, null)
+          new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
+            new pbr::GeneratedClrTypeInfo(typeof(global::NFMsg.TeamMemberInfo), global::NFMsg.TeamMemberInfo.Parser, new[]{ "Id", "Name", "Bp", "Leader", "Pending" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::NFMsg.ReqAckTeamMemberList), global::NFMsg.ReqAckTeamMemberList.Parser, new[]{ "TeamId", "MemberList" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::NFMsg.AckTeamMemberAdd), global::NFMsg.AckTeamMemberAdd.Parser, new[]{ "TeamId", "Member" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::NFMsg.AckTeamMemberLeave), global::NFMsg.AckTeamMemberLeave.Parser, new[]{ "TeamId", "Member" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::NFMsg.ReqInviteToTeam), global::NFMsg.ReqInviteToTeam.Parser, new[]{ "Stranger" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::NFMsg.ReqCancelInviteToTeam), global::NFMsg.ReqCancelInviteToTeam.Parser, new[]{ "Stranger" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::NFMsg.AckInviteToTeam), global::NFMsg.AckInviteToTeam.Parser, new[]{ "TeamId", "Inviter", "Name", "Stranger" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::NFMsg.ReqAckAcceptTeamInvite), global::NFMsg.ReqAckAcceptTeamInvite.Parser, new[]{ "TeamId" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::NFMsg.ReqAckRejectTeamInvite), global::NFMsg.ReqAckRejectTeamInvite.Parser, new[]{ "TeamId" }, null, null, null, null)
           }));
     }
     #endregion
@@ -99,10 +99,10 @@ namespace NFMsg {
     }
 
     /// <summary>Field number for the "id" field.</summary>
-    public const int idFieldNumber = 1;
+    public const int IdFieldNumber = 1;
     private global::NFMsg.Ident id_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public global::NFMsg.Ident id {
+    public global::NFMsg.Ident Id {
       get { return id_; }
       set {
         id_ = value;
@@ -110,10 +110,10 @@ namespace NFMsg {
     }
 
     /// <summary>Field number for the "name" field.</summary>
-    public const int nameFieldNumber = 2;
+    public const int NameFieldNumber = 2;
     private pb::ByteString name_ = pb::ByteString.Empty;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public pb::ByteString name {
+    public pb::ByteString Name {
       get { return name_; }
       set {
         name_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
@@ -121,10 +121,10 @@ namespace NFMsg {
     }
 
     /// <summary>Field number for the "bp" field.</summary>
-    public const int bpFieldNumber = 3;
+    public const int BpFieldNumber = 3;
     private int bp_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public int bp {
+    public int Bp {
       get { return bp_; }
       set {
         bp_ = value;
@@ -132,10 +132,10 @@ namespace NFMsg {
     }
 
     /// <summary>Field number for the "leader" field.</summary>
-    public const int leaderFieldNumber = 4;
+    public const int LeaderFieldNumber = 4;
     private int leader_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public int leader {
+    public int Leader {
       get { return leader_; }
       set {
         leader_ = value;
@@ -143,10 +143,10 @@ namespace NFMsg {
     }
 
     /// <summary>Field number for the "pending" field.</summary>
-    public const int pendingFieldNumber = 5;
+    public const int PendingFieldNumber = 5;
     private int pending_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public int pending {
+    public int Pending {
       get { return pending_; }
       set {
         pending_ = value;
@@ -166,22 +166,22 @@ namespace NFMsg {
       if (ReferenceEquals(other, this)) {
         return true;
       }
-      if (!object.Equals(id, other.id)) return false;
-      if (name != other.name) return false;
-      if (bp != other.bp) return false;
-      if (leader != other.leader) return false;
-      if (pending != other.pending) return false;
+      if (!object.Equals(Id, other.Id)) return false;
+      if (Name != other.Name) return false;
+      if (Bp != other.Bp) return false;
+      if (Leader != other.Leader) return false;
+      if (Pending != other.Pending) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override int GetHashCode() {
       int hash = 1;
-      if (id_ != null) hash ^= id.GetHashCode();
-      if (name.Length != 0) hash ^= name.GetHashCode();
-      if (bp != 0) hash ^= bp.GetHashCode();
-      if (leader != 0) hash ^= leader.GetHashCode();
-      if (pending != 0) hash ^= pending.GetHashCode();
+      if (id_ != null) hash ^= Id.GetHashCode();
+      if (Name.Length != 0) hash ^= Name.GetHashCode();
+      if (Bp != 0) hash ^= Bp.GetHashCode();
+      if (Leader != 0) hash ^= Leader.GetHashCode();
+      if (Pending != 0) hash ^= Pending.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -197,23 +197,23 @@ namespace NFMsg {
     public void WriteTo(pb::CodedOutputStream output) {
       if (id_ != null) {
         output.WriteRawTag(10);
-        output.WriteMessage(id);
+        output.WriteMessage(Id);
       }
-      if (name.Length != 0) {
+      if (Name.Length != 0) {
         output.WriteRawTag(18);
-        output.WriteBytes(name);
+        output.WriteBytes(Name);
       }
-      if (bp != 0) {
+      if (Bp != 0) {
         output.WriteRawTag(24);
-        output.WriteInt32(bp);
+        output.WriteInt32(Bp);
       }
-      if (leader != 0) {
+      if (Leader != 0) {
         output.WriteRawTag(32);
-        output.WriteInt32(leader);
+        output.WriteInt32(Leader);
       }
-      if (pending != 0) {
+      if (Pending != 0) {
         output.WriteRawTag(40);
-        output.WriteInt32(pending);
+        output.WriteInt32(Pending);
       }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
@@ -224,19 +224,19 @@ namespace NFMsg {
     public int CalculateSize() {
       int size = 0;
       if (id_ != null) {
-        size += 1 + pb::CodedOutputStream.ComputeMessageSize(id);
+        size += 1 + pb::CodedOutputStream.ComputeMessageSize(Id);
       }
-      if (name.Length != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeBytesSize(name);
+      if (Name.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeBytesSize(Name);
       }
-      if (bp != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeInt32Size(bp);
+      if (Bp != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(Bp);
       }
-      if (leader != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeInt32Size(leader);
+      if (Leader != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(Leader);
       }
-      if (pending != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeInt32Size(pending);
+      if (Pending != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(Pending);
       }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
@@ -251,21 +251,21 @@ namespace NFMsg {
       }
       if (other.id_ != null) {
         if (id_ == null) {
-          id_ = new global::NFMsg.Ident();
+          Id = new global::NFMsg.Ident();
         }
-        id.MergeFrom(other.id);
+        Id.MergeFrom(other.Id);
       }
-      if (other.name.Length != 0) {
-        name = other.name;
+      if (other.Name.Length != 0) {
+        Name = other.Name;
       }
-      if (other.bp != 0) {
-        bp = other.bp;
+      if (other.Bp != 0) {
+        Bp = other.Bp;
       }
-      if (other.leader != 0) {
-        leader = other.leader;
+      if (other.Leader != 0) {
+        Leader = other.Leader;
       }
-      if (other.pending != 0) {
-        pending = other.pending;
+      if (other.Pending != 0) {
+        Pending = other.Pending;
       }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
@@ -280,25 +280,25 @@ namespace NFMsg {
             break;
           case 10: {
             if (id_ == null) {
-              id_ = new global::NFMsg.Ident();
+              Id = new global::NFMsg.Ident();
             }
-            input.ReadMessage(id_);
+            input.ReadMessage(Id);
             break;
           }
           case 18: {
-            name = input.ReadBytes();
+            Name = input.ReadBytes();
             break;
           }
           case 24: {
-            bp = input.ReadInt32();
+            Bp = input.ReadInt32();
             break;
           }
           case 32: {
-            leader = input.ReadInt32();
+            Leader = input.ReadInt32();
             break;
           }
           case 40: {
-            pending = input.ReadInt32();
+            Pending = input.ReadInt32();
             break;
           }
         }
@@ -343,10 +343,10 @@ namespace NFMsg {
     }
 
     /// <summary>Field number for the "team_id" field.</summary>
-    public const int team_idFieldNumber = 1;
+    public const int TeamIdFieldNumber = 1;
     private global::NFMsg.Ident teamId_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public global::NFMsg.Ident team_id {
+    public global::NFMsg.Ident TeamId {
       get { return teamId_; }
       set {
         teamId_ = value;
@@ -354,12 +354,12 @@ namespace NFMsg {
     }
 
     /// <summary>Field number for the "memberList" field.</summary>
-    public const int memberListFieldNumber = 2;
+    public const int MemberListFieldNumber = 2;
     private static readonly pb::FieldCodec<global::NFMsg.TeamMemberInfo> _repeated_memberList_codec
         = pb::FieldCodec.ForMessage(18, global::NFMsg.TeamMemberInfo.Parser);
     private readonly pbc::RepeatedField<global::NFMsg.TeamMemberInfo> memberList_ = new pbc::RepeatedField<global::NFMsg.TeamMemberInfo>();
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public pbc::RepeatedField<global::NFMsg.TeamMemberInfo> memberList {
+    public pbc::RepeatedField<global::NFMsg.TeamMemberInfo> MemberList {
       get { return memberList_; }
     }
 
@@ -376,7 +376,7 @@ namespace NFMsg {
       if (ReferenceEquals(other, this)) {
         return true;
       }
-      if (!object.Equals(team_id, other.team_id)) return false;
+      if (!object.Equals(TeamId, other.TeamId)) return false;
       if(!memberList_.Equals(other.memberList_)) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
@@ -384,7 +384,7 @@ namespace NFMsg {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override int GetHashCode() {
       int hash = 1;
-      if (teamId_ != null) hash ^= team_id.GetHashCode();
+      if (teamId_ != null) hash ^= TeamId.GetHashCode();
       hash ^= memberList_.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
@@ -401,7 +401,7 @@ namespace NFMsg {
     public void WriteTo(pb::CodedOutputStream output) {
       if (teamId_ != null) {
         output.WriteRawTag(10);
-        output.WriteMessage(team_id);
+        output.WriteMessage(TeamId);
       }
       memberList_.WriteTo(output, _repeated_memberList_codec);
       if (_unknownFields != null) {
@@ -413,7 +413,7 @@ namespace NFMsg {
     public int CalculateSize() {
       int size = 0;
       if (teamId_ != null) {
-        size += 1 + pb::CodedOutputStream.ComputeMessageSize(team_id);
+        size += 1 + pb::CodedOutputStream.ComputeMessageSize(TeamId);
       }
       size += memberList_.CalculateSize(_repeated_memberList_codec);
       if (_unknownFields != null) {
@@ -429,9 +429,9 @@ namespace NFMsg {
       }
       if (other.teamId_ != null) {
         if (teamId_ == null) {
-          teamId_ = new global::NFMsg.Ident();
+          TeamId = new global::NFMsg.Ident();
         }
-        team_id.MergeFrom(other.team_id);
+        TeamId.MergeFrom(other.TeamId);
       }
       memberList_.Add(other.memberList_);
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
@@ -447,9 +447,9 @@ namespace NFMsg {
             break;
           case 10: {
             if (teamId_ == null) {
-              teamId_ = new global::NFMsg.Ident();
+              TeamId = new global::NFMsg.Ident();
             }
-            input.ReadMessage(teamId_);
+            input.ReadMessage(TeamId);
             break;
           }
           case 18: {
@@ -498,10 +498,10 @@ namespace NFMsg {
     }
 
     /// <summary>Field number for the "team_id" field.</summary>
-    public const int team_idFieldNumber = 1;
+    public const int TeamIdFieldNumber = 1;
     private global::NFMsg.Ident teamId_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public global::NFMsg.Ident team_id {
+    public global::NFMsg.Ident TeamId {
       get { return teamId_; }
       set {
         teamId_ = value;
@@ -509,12 +509,12 @@ namespace NFMsg {
     }
 
     /// <summary>Field number for the "member" field.</summary>
-    public const int memberFieldNumber = 2;
+    public const int MemberFieldNumber = 2;
     private static readonly pb::FieldCodec<global::NFMsg.TeamMemberInfo> _repeated_member_codec
         = pb::FieldCodec.ForMessage(18, global::NFMsg.TeamMemberInfo.Parser);
     private readonly pbc::RepeatedField<global::NFMsg.TeamMemberInfo> member_ = new pbc::RepeatedField<global::NFMsg.TeamMemberInfo>();
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public pbc::RepeatedField<global::NFMsg.TeamMemberInfo> member {
+    public pbc::RepeatedField<global::NFMsg.TeamMemberInfo> Member {
       get { return member_; }
     }
 
@@ -531,7 +531,7 @@ namespace NFMsg {
       if (ReferenceEquals(other, this)) {
         return true;
       }
-      if (!object.Equals(team_id, other.team_id)) return false;
+      if (!object.Equals(TeamId, other.TeamId)) return false;
       if(!member_.Equals(other.member_)) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
@@ -539,7 +539,7 @@ namespace NFMsg {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override int GetHashCode() {
       int hash = 1;
-      if (teamId_ != null) hash ^= team_id.GetHashCode();
+      if (teamId_ != null) hash ^= TeamId.GetHashCode();
       hash ^= member_.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
@@ -556,7 +556,7 @@ namespace NFMsg {
     public void WriteTo(pb::CodedOutputStream output) {
       if (teamId_ != null) {
         output.WriteRawTag(10);
-        output.WriteMessage(team_id);
+        output.WriteMessage(TeamId);
       }
       member_.WriteTo(output, _repeated_member_codec);
       if (_unknownFields != null) {
@@ -568,7 +568,7 @@ namespace NFMsg {
     public int CalculateSize() {
       int size = 0;
       if (teamId_ != null) {
-        size += 1 + pb::CodedOutputStream.ComputeMessageSize(team_id);
+        size += 1 + pb::CodedOutputStream.ComputeMessageSize(TeamId);
       }
       size += member_.CalculateSize(_repeated_member_codec);
       if (_unknownFields != null) {
@@ -584,9 +584,9 @@ namespace NFMsg {
       }
       if (other.teamId_ != null) {
         if (teamId_ == null) {
-          teamId_ = new global::NFMsg.Ident();
+          TeamId = new global::NFMsg.Ident();
         }
-        team_id.MergeFrom(other.team_id);
+        TeamId.MergeFrom(other.TeamId);
       }
       member_.Add(other.member_);
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
@@ -602,9 +602,9 @@ namespace NFMsg {
             break;
           case 10: {
             if (teamId_ == null) {
-              teamId_ = new global::NFMsg.Ident();
+              TeamId = new global::NFMsg.Ident();
             }
-            input.ReadMessage(teamId_);
+            input.ReadMessage(TeamId);
             break;
           }
           case 18: {
@@ -653,10 +653,10 @@ namespace NFMsg {
     }
 
     /// <summary>Field number for the "team_id" field.</summary>
-    public const int team_idFieldNumber = 1;
+    public const int TeamIdFieldNumber = 1;
     private global::NFMsg.Ident teamId_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public global::NFMsg.Ident team_id {
+    public global::NFMsg.Ident TeamId {
       get { return teamId_; }
       set {
         teamId_ = value;
@@ -664,12 +664,12 @@ namespace NFMsg {
     }
 
     /// <summary>Field number for the "member" field.</summary>
-    public const int memberFieldNumber = 2;
+    public const int MemberFieldNumber = 2;
     private static readonly pb::FieldCodec<global::NFMsg.Ident> _repeated_member_codec
         = pb::FieldCodec.ForMessage(18, global::NFMsg.Ident.Parser);
     private readonly pbc::RepeatedField<global::NFMsg.Ident> member_ = new pbc::RepeatedField<global::NFMsg.Ident>();
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public pbc::RepeatedField<global::NFMsg.Ident> member {
+    public pbc::RepeatedField<global::NFMsg.Ident> Member {
       get { return member_; }
     }
 
@@ -686,7 +686,7 @@ namespace NFMsg {
       if (ReferenceEquals(other, this)) {
         return true;
       }
-      if (!object.Equals(team_id, other.team_id)) return false;
+      if (!object.Equals(TeamId, other.TeamId)) return false;
       if(!member_.Equals(other.member_)) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
@@ -694,7 +694,7 @@ namespace NFMsg {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override int GetHashCode() {
       int hash = 1;
-      if (teamId_ != null) hash ^= team_id.GetHashCode();
+      if (teamId_ != null) hash ^= TeamId.GetHashCode();
       hash ^= member_.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
@@ -711,7 +711,7 @@ namespace NFMsg {
     public void WriteTo(pb::CodedOutputStream output) {
       if (teamId_ != null) {
         output.WriteRawTag(10);
-        output.WriteMessage(team_id);
+        output.WriteMessage(TeamId);
       }
       member_.WriteTo(output, _repeated_member_codec);
       if (_unknownFields != null) {
@@ -723,7 +723,7 @@ namespace NFMsg {
     public int CalculateSize() {
       int size = 0;
       if (teamId_ != null) {
-        size += 1 + pb::CodedOutputStream.ComputeMessageSize(team_id);
+        size += 1 + pb::CodedOutputStream.ComputeMessageSize(TeamId);
       }
       size += member_.CalculateSize(_repeated_member_codec);
       if (_unknownFields != null) {
@@ -739,9 +739,9 @@ namespace NFMsg {
       }
       if (other.teamId_ != null) {
         if (teamId_ == null) {
-          teamId_ = new global::NFMsg.Ident();
+          TeamId = new global::NFMsg.Ident();
         }
-        team_id.MergeFrom(other.team_id);
+        TeamId.MergeFrom(other.TeamId);
       }
       member_.Add(other.member_);
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
@@ -757,9 +757,9 @@ namespace NFMsg {
             break;
           case 10: {
             if (teamId_ == null) {
-              teamId_ = new global::NFMsg.Ident();
+              TeamId = new global::NFMsg.Ident();
             }
-            input.ReadMessage(teamId_);
+            input.ReadMessage(TeamId);
             break;
           }
           case 18: {
@@ -807,10 +807,10 @@ namespace NFMsg {
     }
 
     /// <summary>Field number for the "stranger" field.</summary>
-    public const int strangerFieldNumber = 1;
+    public const int StrangerFieldNumber = 1;
     private global::NFMsg.Ident stranger_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public global::NFMsg.Ident stranger {
+    public global::NFMsg.Ident Stranger {
       get { return stranger_; }
       set {
         stranger_ = value;
@@ -830,14 +830,14 @@ namespace NFMsg {
       if (ReferenceEquals(other, this)) {
         return true;
       }
-      if (!object.Equals(stranger, other.stranger)) return false;
+      if (!object.Equals(Stranger, other.Stranger)) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override int GetHashCode() {
       int hash = 1;
-      if (stranger_ != null) hash ^= stranger.GetHashCode();
+      if (stranger_ != null) hash ^= Stranger.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -853,7 +853,7 @@ namespace NFMsg {
     public void WriteTo(pb::CodedOutputStream output) {
       if (stranger_ != null) {
         output.WriteRawTag(10);
-        output.WriteMessage(stranger);
+        output.WriteMessage(Stranger);
       }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
@@ -864,7 +864,7 @@ namespace NFMsg {
     public int CalculateSize() {
       int size = 0;
       if (stranger_ != null) {
-        size += 1 + pb::CodedOutputStream.ComputeMessageSize(stranger);
+        size += 1 + pb::CodedOutputStream.ComputeMessageSize(Stranger);
       }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
@@ -879,9 +879,9 @@ namespace NFMsg {
       }
       if (other.stranger_ != null) {
         if (stranger_ == null) {
-          stranger_ = new global::NFMsg.Ident();
+          Stranger = new global::NFMsg.Ident();
         }
-        stranger.MergeFrom(other.stranger);
+        Stranger.MergeFrom(other.Stranger);
       }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
@@ -896,9 +896,9 @@ namespace NFMsg {
             break;
           case 10: {
             if (stranger_ == null) {
-              stranger_ = new global::NFMsg.Ident();
+              Stranger = new global::NFMsg.Ident();
             }
-            input.ReadMessage(stranger_);
+            input.ReadMessage(Stranger);
             break;
           }
         }
@@ -942,10 +942,10 @@ namespace NFMsg {
     }
 
     /// <summary>Field number for the "stranger" field.</summary>
-    public const int strangerFieldNumber = 1;
+    public const int StrangerFieldNumber = 1;
     private global::NFMsg.Ident stranger_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public global::NFMsg.Ident stranger {
+    public global::NFMsg.Ident Stranger {
       get { return stranger_; }
       set {
         stranger_ = value;
@@ -965,14 +965,14 @@ namespace NFMsg {
       if (ReferenceEquals(other, this)) {
         return true;
       }
-      if (!object.Equals(stranger, other.stranger)) return false;
+      if (!object.Equals(Stranger, other.Stranger)) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override int GetHashCode() {
       int hash = 1;
-      if (stranger_ != null) hash ^= stranger.GetHashCode();
+      if (stranger_ != null) hash ^= Stranger.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -988,7 +988,7 @@ namespace NFMsg {
     public void WriteTo(pb::CodedOutputStream output) {
       if (stranger_ != null) {
         output.WriteRawTag(10);
-        output.WriteMessage(stranger);
+        output.WriteMessage(Stranger);
       }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
@@ -999,7 +999,7 @@ namespace NFMsg {
     public int CalculateSize() {
       int size = 0;
       if (stranger_ != null) {
-        size += 1 + pb::CodedOutputStream.ComputeMessageSize(stranger);
+        size += 1 + pb::CodedOutputStream.ComputeMessageSize(Stranger);
       }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
@@ -1014,9 +1014,9 @@ namespace NFMsg {
       }
       if (other.stranger_ != null) {
         if (stranger_ == null) {
-          stranger_ = new global::NFMsg.Ident();
+          Stranger = new global::NFMsg.Ident();
         }
-        stranger.MergeFrom(other.stranger);
+        Stranger.MergeFrom(other.Stranger);
       }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
@@ -1031,9 +1031,9 @@ namespace NFMsg {
             break;
           case 10: {
             if (stranger_ == null) {
-              stranger_ = new global::NFMsg.Ident();
+              Stranger = new global::NFMsg.Ident();
             }
-            input.ReadMessage(stranger_);
+            input.ReadMessage(Stranger);
             break;
           }
         }
@@ -1080,10 +1080,10 @@ namespace NFMsg {
     }
 
     /// <summary>Field number for the "team_id" field.</summary>
-    public const int team_idFieldNumber = 1;
+    public const int TeamIdFieldNumber = 1;
     private global::NFMsg.Ident teamId_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public global::NFMsg.Ident team_id {
+    public global::NFMsg.Ident TeamId {
       get { return teamId_; }
       set {
         teamId_ = value;
@@ -1091,10 +1091,10 @@ namespace NFMsg {
     }
 
     /// <summary>Field number for the "inviter" field.</summary>
-    public const int inviterFieldNumber = 2;
+    public const int InviterFieldNumber = 2;
     private global::NFMsg.Ident inviter_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public global::NFMsg.Ident inviter {
+    public global::NFMsg.Ident Inviter {
       get { return inviter_; }
       set {
         inviter_ = value;
@@ -1102,10 +1102,10 @@ namespace NFMsg {
     }
 
     /// <summary>Field number for the "name" field.</summary>
-    public const int nameFieldNumber = 3;
+    public const int NameFieldNumber = 3;
     private pb::ByteString name_ = pb::ByteString.Empty;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public pb::ByteString name {
+    public pb::ByteString Name {
       get { return name_; }
       set {
         name_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
@@ -1113,10 +1113,10 @@ namespace NFMsg {
     }
 
     /// <summary>Field number for the "stranger" field.</summary>
-    public const int strangerFieldNumber = 4;
+    public const int StrangerFieldNumber = 4;
     private global::NFMsg.Ident stranger_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public global::NFMsg.Ident stranger {
+    public global::NFMsg.Ident Stranger {
       get { return stranger_; }
       set {
         stranger_ = value;
@@ -1136,20 +1136,20 @@ namespace NFMsg {
       if (ReferenceEquals(other, this)) {
         return true;
       }
-      if (!object.Equals(team_id, other.team_id)) return false;
-      if (!object.Equals(inviter, other.inviter)) return false;
-      if (name != other.name) return false;
-      if (!object.Equals(stranger, other.stranger)) return false;
+      if (!object.Equals(TeamId, other.TeamId)) return false;
+      if (!object.Equals(Inviter, other.Inviter)) return false;
+      if (Name != other.Name) return false;
+      if (!object.Equals(Stranger, other.Stranger)) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override int GetHashCode() {
       int hash = 1;
-      if (teamId_ != null) hash ^= team_id.GetHashCode();
-      if (inviter_ != null) hash ^= inviter.GetHashCode();
-      if (name.Length != 0) hash ^= name.GetHashCode();
-      if (stranger_ != null) hash ^= stranger.GetHashCode();
+      if (teamId_ != null) hash ^= TeamId.GetHashCode();
+      if (inviter_ != null) hash ^= Inviter.GetHashCode();
+      if (Name.Length != 0) hash ^= Name.GetHashCode();
+      if (stranger_ != null) hash ^= Stranger.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -1165,19 +1165,19 @@ namespace NFMsg {
     public void WriteTo(pb::CodedOutputStream output) {
       if (teamId_ != null) {
         output.WriteRawTag(10);
-        output.WriteMessage(team_id);
+        output.WriteMessage(TeamId);
       }
       if (inviter_ != null) {
         output.WriteRawTag(18);
-        output.WriteMessage(inviter);
+        output.WriteMessage(Inviter);
       }
-      if (name.Length != 0) {
+      if (Name.Length != 0) {
         output.WriteRawTag(26);
-        output.WriteBytes(name);
+        output.WriteBytes(Name);
       }
       if (stranger_ != null) {
         output.WriteRawTag(34);
-        output.WriteMessage(stranger);
+        output.WriteMessage(Stranger);
       }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
@@ -1188,16 +1188,16 @@ namespace NFMsg {
     public int CalculateSize() {
       int size = 0;
       if (teamId_ != null) {
-        size += 1 + pb::CodedOutputStream.ComputeMessageSize(team_id);
+        size += 1 + pb::CodedOutputStream.ComputeMessageSize(TeamId);
       }
       if (inviter_ != null) {
-        size += 1 + pb::CodedOutputStream.ComputeMessageSize(inviter);
+        size += 1 + pb::CodedOutputStream.ComputeMessageSize(Inviter);
       }
-      if (name.Length != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeBytesSize(name);
+      if (Name.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeBytesSize(Name);
       }
       if (stranger_ != null) {
-        size += 1 + pb::CodedOutputStream.ComputeMessageSize(stranger);
+        size += 1 + pb::CodedOutputStream.ComputeMessageSize(Stranger);
       }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
@@ -1212,24 +1212,24 @@ namespace NFMsg {
       }
       if (other.teamId_ != null) {
         if (teamId_ == null) {
-          teamId_ = new global::NFMsg.Ident();
+          TeamId = new global::NFMsg.Ident();
         }
-        team_id.MergeFrom(other.team_id);
+        TeamId.MergeFrom(other.TeamId);
       }
       if (other.inviter_ != null) {
         if (inviter_ == null) {
-          inviter_ = new global::NFMsg.Ident();
+          Inviter = new global::NFMsg.Ident();
         }
-        inviter.MergeFrom(other.inviter);
+        Inviter.MergeFrom(other.Inviter);
       }
-      if (other.name.Length != 0) {
-        name = other.name;
+      if (other.Name.Length != 0) {
+        Name = other.Name;
       }
       if (other.stranger_ != null) {
         if (stranger_ == null) {
-          stranger_ = new global::NFMsg.Ident();
+          Stranger = new global::NFMsg.Ident();
         }
-        stranger.MergeFrom(other.stranger);
+        Stranger.MergeFrom(other.Stranger);
       }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
@@ -1244,27 +1244,27 @@ namespace NFMsg {
             break;
           case 10: {
             if (teamId_ == null) {
-              teamId_ = new global::NFMsg.Ident();
+              TeamId = new global::NFMsg.Ident();
             }
-            input.ReadMessage(teamId_);
+            input.ReadMessage(TeamId);
             break;
           }
           case 18: {
             if (inviter_ == null) {
-              inviter_ = new global::NFMsg.Ident();
+              Inviter = new global::NFMsg.Ident();
             }
-            input.ReadMessage(inviter_);
+            input.ReadMessage(Inviter);
             break;
           }
           case 26: {
-            name = input.ReadBytes();
+            Name = input.ReadBytes();
             break;
           }
           case 34: {
             if (stranger_ == null) {
-              stranger_ = new global::NFMsg.Ident();
+              Stranger = new global::NFMsg.Ident();
             }
-            input.ReadMessage(stranger_);
+            input.ReadMessage(Stranger);
             break;
           }
         }
@@ -1308,10 +1308,10 @@ namespace NFMsg {
     }
 
     /// <summary>Field number for the "team_id" field.</summary>
-    public const int team_idFieldNumber = 1;
+    public const int TeamIdFieldNumber = 1;
     private global::NFMsg.Ident teamId_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public global::NFMsg.Ident team_id {
+    public global::NFMsg.Ident TeamId {
       get { return teamId_; }
       set {
         teamId_ = value;
@@ -1331,14 +1331,14 @@ namespace NFMsg {
       if (ReferenceEquals(other, this)) {
         return true;
       }
-      if (!object.Equals(team_id, other.team_id)) return false;
+      if (!object.Equals(TeamId, other.TeamId)) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override int GetHashCode() {
       int hash = 1;
-      if (teamId_ != null) hash ^= team_id.GetHashCode();
+      if (teamId_ != null) hash ^= TeamId.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -1354,7 +1354,7 @@ namespace NFMsg {
     public void WriteTo(pb::CodedOutputStream output) {
       if (teamId_ != null) {
         output.WriteRawTag(10);
-        output.WriteMessage(team_id);
+        output.WriteMessage(TeamId);
       }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
@@ -1365,7 +1365,7 @@ namespace NFMsg {
     public int CalculateSize() {
       int size = 0;
       if (teamId_ != null) {
-        size += 1 + pb::CodedOutputStream.ComputeMessageSize(team_id);
+        size += 1 + pb::CodedOutputStream.ComputeMessageSize(TeamId);
       }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
@@ -1380,9 +1380,9 @@ namespace NFMsg {
       }
       if (other.teamId_ != null) {
         if (teamId_ == null) {
-          teamId_ = new global::NFMsg.Ident();
+          TeamId = new global::NFMsg.Ident();
         }
-        team_id.MergeFrom(other.team_id);
+        TeamId.MergeFrom(other.TeamId);
       }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
@@ -1397,9 +1397,9 @@ namespace NFMsg {
             break;
           case 10: {
             if (teamId_ == null) {
-              teamId_ = new global::NFMsg.Ident();
+              TeamId = new global::NFMsg.Ident();
             }
-            input.ReadMessage(teamId_);
+            input.ReadMessage(TeamId);
             break;
           }
         }
@@ -1443,10 +1443,10 @@ namespace NFMsg {
     }
 
     /// <summary>Field number for the "team_id" field.</summary>
-    public const int team_idFieldNumber = 1;
+    public const int TeamIdFieldNumber = 1;
     private global::NFMsg.Ident teamId_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public global::NFMsg.Ident team_id {
+    public global::NFMsg.Ident TeamId {
       get { return teamId_; }
       set {
         teamId_ = value;
@@ -1466,14 +1466,14 @@ namespace NFMsg {
       if (ReferenceEquals(other, this)) {
         return true;
       }
-      if (!object.Equals(team_id, other.team_id)) return false;
+      if (!object.Equals(TeamId, other.TeamId)) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override int GetHashCode() {
       int hash = 1;
-      if (teamId_ != null) hash ^= team_id.GetHashCode();
+      if (teamId_ != null) hash ^= TeamId.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -1489,7 +1489,7 @@ namespace NFMsg {
     public void WriteTo(pb::CodedOutputStream output) {
       if (teamId_ != null) {
         output.WriteRawTag(10);
-        output.WriteMessage(team_id);
+        output.WriteMessage(TeamId);
       }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
@@ -1500,7 +1500,7 @@ namespace NFMsg {
     public int CalculateSize() {
       int size = 0;
       if (teamId_ != null) {
-        size += 1 + pb::CodedOutputStream.ComputeMessageSize(team_id);
+        size += 1 + pb::CodedOutputStream.ComputeMessageSize(TeamId);
       }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
@@ -1515,9 +1515,9 @@ namespace NFMsg {
       }
       if (other.teamId_ != null) {
         if (teamId_ == null) {
-          teamId_ = new global::NFMsg.Ident();
+          TeamId = new global::NFMsg.Ident();
         }
-        team_id.MergeFrom(other.team_id);
+        TeamId.MergeFrom(other.TeamId);
       }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
@@ -1532,9 +1532,9 @@ namespace NFMsg {
             break;
           case 10: {
             if (teamId_ == null) {
-              teamId_ = new global::NFMsg.Ident();
+              TeamId = new global::NFMsg.Ident();
             }
-            input.ReadMessage(teamId_);
+            input.ReadMessage(TeamId);
             break;
           }
         }
