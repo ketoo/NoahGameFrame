@@ -52,10 +52,14 @@ svn checkout https://github.com/ketoo/NoahGameFrame
 
 - libevent 2.0.22
 - easylogging++ 9.80
-- mysql++ 3.2.2
 - google protobuf 3.6
-- redis-cpp-client 
-- Theron 6.00.01
+- hiredis
+- ajson
+- concurrentqueue
+- RapidXML
+- LuaIntf
+- navigation
+- lua
 
 ## IF YOU CAN NOT BUILD THE DEPENDENCIES THEN PLEASE RUN THE CMDS BELOW TO SET UP THE ENVIRONMENT:
 
