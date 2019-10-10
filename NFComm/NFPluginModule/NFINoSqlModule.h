@@ -37,7 +37,7 @@ typedef std::pair<std::string, double> string_score_pair;
 typedef std::vector<string_score_pair> string_score_vector;
 
 
-class _NFExport NFIRedisClient
+class NFIRedisClient
 {
 public:
 	virtual ~NFIRedisClient() {}

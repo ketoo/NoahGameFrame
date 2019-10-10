@@ -28,10 +28,6 @@
 
 #if NF_PLATFORM == NF_PLATFORM_WIN
 
-#ifndef LIBEVENT_SRC
-#pragma  comment(lib,"libevent.lib")
-#pragma  comment(lib,"libevent_core.lib")
-#endif
 #elif NF_PLATFORM == NF_PLATFORM_APPLE
 #include <arpa/inet.h>
 #endif

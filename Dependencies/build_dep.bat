@@ -1,4 +1,7 @@
 rmdir vcpkg
+rmdir libevent
+rmdir lua
+rmdir protobuf
 
 git clone https://github.com/Microsoft/vcpkg.git
 cd vcpkg

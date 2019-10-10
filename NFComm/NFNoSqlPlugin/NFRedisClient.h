@@ -52,10 +52,11 @@ typedef void(*CoroutineStartFunction)();
 static CoroutineYieldFunction YieldFunction = NULL;
 static CoroutineStartFunction StartFunction = NULL;
 
-class _NFExport NFRedisClient : public NFIRedisClient
+class NFRedisClient : public NFIRedisClient
 {
 public:
 	NFRedisClient();
+	virtual ~NFRedisClient() {}
 
 	virtual bool Connect(const std::string& ip, const int port, const std::string& auth = "");
 
