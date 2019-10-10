@@ -6,8 +6,15 @@ cd vcpkg
 
 .\bootstrap-vcpkg.bat
 
-vcpkg install libevent:x64-windows
-vcpkg install protobuf:x64-windows
-vcpkg install lua:x64-windows
+vcpkg list
+
+vcpkg install libevent:x64-windows-static
+vcpkg install protobuf:x64-windows-static
+vcpkg install lua:x64-windows-static
+vcpkg install gtest:x64-windows-static
+
+
+
+vcpkg integrate install
 
 cd..

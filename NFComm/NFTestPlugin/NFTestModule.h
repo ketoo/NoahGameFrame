@@ -26,20 +26,9 @@
 #ifndef NF_TEST_MODULE_H
 #define NF_TEST_MODULE_H
 
-#include "NFComm/NFMessageDefine/NFMsgDefine.h"
-#include "NFComm/NFPluginModule/NFINetModule.h"
 #include "NFComm/NFPluginModule/NFILogModule.h"
 #include "NFComm/NFPluginModule/NFIKernelModule.h"
 #include "NFComm/NFPluginModule/NFIClassModule.h"
-#include "NFComm/NFPluginModule/NFIItemModule.h"
-#include "NFComm/NFPluginModule/NFIClassModule.h"
-#include "NFComm/NFPluginModule/NFITaskModule.h"
-#include "NFComm/NFPluginModule/NFIHeroModule.h"
-#include "NFComm/NFPluginModule/NFIPackModule.h"
-#include "NFComm/NFPluginModule/NFIElementModule.h"
-#include "NFComm/NFPluginModule/NFIPropertyModule.h"
-#include "NFComm/NFPluginModule/NFICommonConfigModule.h"
-#include "NFComm/NFPluginModule/NFIGameServerNet_ServerModule.h"
 
 class NFITestModule
 	: public NFIModule

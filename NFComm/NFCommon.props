@@ -12,10 +12,10 @@
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <MinimalRebuild>false</MinimalRebuild>
       <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;_CRT_NONSTDC_NO_DEPRECATE;_SCL_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>$(SolutionDir);$(SolutionDir)Dependencies\</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir);$(SolutionDir)Dependencies\;$(SolutionDir)Dependencies\vcpkg\installed\x64-windows-static\include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
-      <AdditionalLibraryDirectories>$(SolutionDir)_Out\$(Configuration)\;$(SolutionDir)lib\$(Configuration)\;$(SolutionDir)Dependencies\lib\$(Configuration)\</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(SolutionDir)_Out\$(Configuration)\;$(SolutionDir)lib\$(Configuration)\;$(SolutionDir)Dependencies\lib\$(Configuration)\;$(SolutionDir)Dependencies\vcpkg\installed\x64-windows-static\lib</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup />
