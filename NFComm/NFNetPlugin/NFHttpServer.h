@@ -39,9 +39,6 @@
 #ifndef S_ISDIR
 #define S_ISDIR(x) (((x) & S_IFMT) == S_IFDIR)
 #endif
-#ifndef LIBEVENT_SRC
-#pragma comment( lib, "libevent.lib")
-#endif
 
 #else
 

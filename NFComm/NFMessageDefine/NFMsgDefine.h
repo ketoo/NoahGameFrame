@@ -1,9 +1,27 @@
-// -------------------------------------------------------------------------
-//    @FileName			:   NFMsgDefine.cphp
-//    @Author           :   LvSheng.Huang
-//    @Date             :   2013-10-02
-//    @Module           :   NFMsgDefine
-// -------------------------------------------------------------------------
+/*
+This file is part of:
+NoahFrame
+https://github.com/ketoo/NoahGameFrame
+
+Copyright 2009 - 2019 NoahFrame(NoahGameFrame)
+
+File creator: lvsheng.huang
+
+NoahFrame is open-source software and you can redistribute it and/or modify
+it under the terms of the License; besides, anyone who use this file/software must include this copyright announcement.
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+*/
 
 #ifndef NF_MSG_DEFINE_H
 #define NF_MSG_DEFINE_H
@@ -34,17 +52,5 @@ enum E_CHECK_TYPE
     ECT_PRIVATE     = 1, 
     ECT_PUBLIC      = 2, 
 };
-
-// bool RecordToString( NFIRecord* pRecord, NFMsg::ObjectRecordBase& recordBase, E_CHECK_TYPE nCheckType, const bool bCheck );
-// bool RecordToString( NFIRecordManager* pRecordManager, NFMsg::ObjectRecordList& recordList, E_CHECK_TYPE nCheckType, const bool bCheck );
-//
-// bool RecordFormString( NFIRecord* pRecord, const NFMsg::ObjectRecordBase& recordBase );
-// bool RecordFormString( NFIRecordManager* pRecordManager, const NFMsg::ObjectRecordList& recordList );
-//
-// bool PropertyToString( NFIPropertyManager* pProManager, NFMsg::ObjectPropertyList& propertyDB, E_CHECK_TYPE nCheckType, const bool bCheck );
-// bool PropertyListToString( NFList<NFIPropertyManager*>& pProManagerList,NFMsg::MultiObjectPropertyList& propertyDB, E_CHECK_TYPE nCheckType, const bool bCheck );
-//
-// bool PropertyFormString( NFIPropertyManager* pProManager, const NFMsg::ObjectPropertyList& propertyDB );
-
 #pragma pack(pop)
 #endif

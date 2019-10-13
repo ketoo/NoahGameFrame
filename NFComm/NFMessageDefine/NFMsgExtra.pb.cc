@@ -778,7 +778,7 @@ failure:
 
   // .NFMsg.Ident ai_id = 1;
   if (this->has_ai_id()) {
-    target = stream->EnsureSpace(target);
+    stream->EnsureSpace(&target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
       InternalWriteMessageToArray(
         1, _Internal::ai_id(this), target, stream);
@@ -1031,7 +1031,7 @@ failure:
 
   // .NFMsg.Ident id = 1;
   if (this->has_id()) {
-    target = stream->EnsureSpace(target);
+    stream->EnsureSpace(&target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
       InternalWriteMessageToArray(
         1, _Internal::id(this), target, stream);
@@ -1039,19 +1039,19 @@ failure:
 
   // int32 level = 2;
   if (this->level() != 0) {
-    target = stream->EnsureSpace(target);
+    stream->EnsureSpace(&target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt32ToArray(2, this->_internal_level(), target);
   }
 
   // int32 count = 3;
   if (this->count() != 0) {
-    target = stream->EnsureSpace(target);
+    stream->EnsureSpace(&target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt32ToArray(3, this->_internal_count(), target);
   }
 
   // int32 resource = 4;
   if (this->resource() != 0) {
-    target = stream->EnsureSpace(target);
+    stream->EnsureSpace(&target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt32ToArray(4, this->_internal_resource(), target);
   }
 
@@ -1597,7 +1597,7 @@ failure:
 
   // .NFMsg.GridClanBaseInfo guild_info = 2;
   if (this->has_guild_info()) {
-    target = stream->EnsureSpace(target);
+    stream->EnsureSpace(&target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
       InternalWriteMessageToArray(
         2, _Internal::guild_info(this), target, stream);
@@ -1605,13 +1605,13 @@ failure:
 
   // int32 kingwar_time = 10;
   if (this->kingwar_time() != 0) {
-    target = stream->EnsureSpace(target);
+    stream->EnsureSpace(&target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt32ToArray(10, this->_internal_kingwar_time(), target);
   }
 
   // .NFMsg.Ident kingwarrer = 11;
   if (this->has_kingwarrer()) {
-    target = stream->EnsureSpace(target);
+    stream->EnsureSpace(&target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
       InternalWriteMessageToArray(
         11, _Internal::kingwarrer(this), target, stream);
@@ -1619,13 +1619,13 @@ failure:
 
   // int32 hurting_time = 20;
   if (this->hurting_time() != 0) {
-    target = stream->EnsureSpace(target);
+    stream->EnsureSpace(&target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt32ToArray(20, this->_internal_hurting_time(), target);
   }
 
   // .NFMsg.Ident hurter = 21;
   if (this->has_hurter()) {
-    target = stream->EnsureSpace(target);
+    stream->EnsureSpace(&target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
       InternalWriteMessageToArray(
         21, _Internal::hurter(this), target, stream);
@@ -1942,7 +1942,7 @@ failure:
 
   // .NFMsg.Ident owner = 1;
   if (this->has_owner()) {
-    target = stream->EnsureSpace(target);
+    stream->EnsureSpace(&target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
       InternalWriteMessageToArray(
         1, _Internal::owner(this), target, stream);
@@ -1962,13 +1962,13 @@ failure:
 
   // int32 msg_time = 4;
   if (this->msg_time() != 0) {
-    target = stream->EnsureSpace(target);
+    stream->EnsureSpace(&target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt32ToArray(4, this->_internal_msg_time(), target);
   }
 
   // int32 owner_level = 5;
   if (this->owner_level() != 0) {
-    target = stream->EnsureSpace(target);
+    stream->EnsureSpace(&target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt32ToArray(5, this->_internal_owner_level(), target);
   }
 
@@ -2283,7 +2283,7 @@ failure:
 
   // .NFMsg.GridClanBaseInfo red_info = 1;
   if (this->has_red_info()) {
-    target = stream->EnsureSpace(target);
+    stream->EnsureSpace(&target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
       InternalWriteMessageToArray(
         1, _Internal::red_info(this), target, stream);
@@ -2291,7 +2291,7 @@ failure:
 
   // .NFMsg.GridClanBaseInfo blue_info = 2;
   if (this->has_blue_info()) {
-    target = stream->EnsureSpace(target);
+    stream->EnsureSpace(&target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
       InternalWriteMessageToArray(
         2, _Internal::blue_info(this), target, stream);
@@ -2299,7 +2299,7 @@ failure:
 
   // .NFMsg.Ident winner_id = 10;
   if (this->has_winner_id()) {
-    target = stream->EnsureSpace(target);
+    stream->EnsureSpace(&target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
       InternalWriteMessageToArray(
         10, _Internal::winner_id(this), target, stream);
@@ -2307,7 +2307,7 @@ failure:
 
   // int32 war_time = 11;
   if (this->war_time() != 0) {
-    target = stream->EnsureSpace(target);
+    stream->EnsureSpace(&target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt32ToArray(11, this->_internal_war_time(), target);
   }
 
@@ -2584,7 +2584,7 @@ failure:
 
   // .NFMsg.BigMapGridBaseInfo grid_base_info = 1;
   if (this->has_grid_base_info()) {
-    target = stream->EnsureSpace(target);
+    stream->EnsureSpace(&target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
       InternalWriteMessageToArray(
         1, _Internal::grid_base_info(this), target, stream);
@@ -2593,7 +2593,7 @@ failure:
   // repeated .NFMsg.GridClanBaseInfo stay_guid_list = 2;
   for (unsigned int i = 0,
       n = static_cast<unsigned int>(this->_internal_stay_guid_list_size()); i < n; i++) {
-    target = stream->EnsureSpace(target);
+    stream->EnsureSpace(&target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
       InternalWriteMessageToArray(2, this->_internal_stay_guid_list(i), target, stream);
   }
@@ -2601,7 +2601,7 @@ failure:
   // repeated .NFMsg.BigMapLeaveMsg leave_msg = 3;
   for (unsigned int i = 0,
       n = static_cast<unsigned int>(this->_internal_leave_msg_size()); i < n; i++) {
-    target = stream->EnsureSpace(target);
+    stream->EnsureSpace(&target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
       InternalWriteMessageToArray(3, this->_internal_leave_msg(i), target, stream);
   }
@@ -2609,7 +2609,7 @@ failure:
   // repeated .NFMsg.BigMapWarHistory war_history = 4;
   for (unsigned int i = 0,
       n = static_cast<unsigned int>(this->_internal_war_history_size()); i < n; i++) {
-    target = stream->EnsureSpace(target);
+    stream->EnsureSpace(&target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
       InternalWriteMessageToArray(4, this->_internal_war_history(i), target, stream);
   }
@@ -2829,7 +2829,7 @@ failure:
   // repeated .NFMsg.BigMapGridDetailInfo map_data = 1;
   for (unsigned int i = 0,
       n = static_cast<unsigned int>(this->_internal_map_data_size()); i < n; i++) {
-    target = stream->EnsureSpace(target);
+    stream->EnsureSpace(&target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
       InternalWriteMessageToArray(1, this->_internal_map_data(i), target, stream);
   }
@@ -3178,7 +3178,7 @@ failure:
   // repeated .NFMsg.BigMapGridBaseInfo grid_base_info = 1;
   for (unsigned int i = 0,
       n = static_cast<unsigned int>(this->_internal_grid_base_info_size()); i < n; i++) {
-    target = stream->EnsureSpace(target);
+    stream->EnsureSpace(&target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
       InternalWriteMessageToArray(1, this->_internal_grid_base_info(i), target, stream);
   }
@@ -3405,7 +3405,7 @@ failure:
 
   // .NFMsg.Ident guild_id = 2;
   if (this->has_guild_id()) {
-    target = stream->EnsureSpace(target);
+    stream->EnsureSpace(&target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
       InternalWriteMessageToArray(
         2, _Internal::guild_id(this), target, stream);
@@ -3800,7 +3800,7 @@ failure:
 
   // .NFMsg.BigMapLeaveMsg leave_msg = 2;
   if (this->has_leave_msg()) {
-    target = stream->EnsureSpace(target);
+    stream->EnsureSpace(&target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
       InternalWriteMessageToArray(
         2, _Internal::leave_msg(this), target, stream);

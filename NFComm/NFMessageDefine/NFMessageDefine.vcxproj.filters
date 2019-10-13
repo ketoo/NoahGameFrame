@@ -10,6 +10,7 @@
     <ClInclude Include="NFMsgExtra.pb.h" />
     <ClInclude Include="NFMsgFriend.pb.h" />
     <ClInclude Include="NFMsgTeam.pb.h" />
+    <ClInclude Include="NFMsgDefine.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="NFMsgShare.pb.cc" />
