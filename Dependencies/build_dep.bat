@@ -12,15 +12,16 @@ git clone https://github.com/Microsoft/vcpkg.git
 
 cd vcpkg
 
+#vcpkg remove easyloggingpp:x64-windows-static
 
 .\bootstrap-vcpkg.bat
 
 vcpkg list
 
-vcpkg install libevent:x64-windows-static
-vcpkg install protobuf:x64-windows-static
-vcpkg install lua:x64-windows-static
-vcpkg install gtest:x64-windows-static
+vcpkg install libevent:x64-windows
+vcpkg install protobuf:x64-windows
+vcpkg install lua:x64-windows
+vcpkg install gtest:x64-windows
 
 xcopy installed\x64-windows-static\tools\protobuf\protoc.exe ..\..\NFComm\NFMessageDefine\ /s /e /Y
 
