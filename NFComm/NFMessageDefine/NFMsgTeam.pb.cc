@@ -65,7 +65,7 @@ static void InitDefaultsscc_info_AckInviteToTeam_NFMsgTeam_2eproto() {
   ::NFMsg::AckInviteToTeam::InitAsDefaultInstance();
 }
 
-LIBPROTOC_EXPORT ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_AckInviteToTeam_NFMsgTeam_2eproto =
+::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_AckInviteToTeam_NFMsgTeam_2eproto =
     {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 1, 0, InitDefaultsscc_info_AckInviteToTeam_NFMsgTeam_2eproto}, {
       &scc_info_Ident_NFMsgBase_2eproto.base,}};
 
@@ -80,7 +80,7 @@ static void InitDefaultsscc_info_AckTeamMemberAdd_NFMsgTeam_2eproto() {
   ::NFMsg::AckTeamMemberAdd::InitAsDefaultInstance();
 }
 
-LIBPROTOC_EXPORT ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<2> scc_info_AckTeamMemberAdd_NFMsgTeam_2eproto =
+::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<2> scc_info_AckTeamMemberAdd_NFMsgTeam_2eproto =
     {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 2, 0, InitDefaultsscc_info_AckTeamMemberAdd_NFMsgTeam_2eproto}, {
       &scc_info_Ident_NFMsgBase_2eproto.base,
       &scc_info_TeamMemberInfo_NFMsgTeam_2eproto.base,}};
@@ -96,7 +96,7 @@ static void InitDefaultsscc_info_AckTeamMemberLeave_NFMsgTeam_2eproto() {
   ::NFMsg::AckTeamMemberLeave::InitAsDefaultInstance();
 }
 
-LIBPROTOC_EXPORT ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_AckTeamMemberLeave_NFMsgTeam_2eproto =
+::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_AckTeamMemberLeave_NFMsgTeam_2eproto =
     {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 1, 0, InitDefaultsscc_info_AckTeamMemberLeave_NFMsgTeam_2eproto}, {
       &scc_info_Ident_NFMsgBase_2eproto.base,}};
 
@@ -111,7 +111,7 @@ static void InitDefaultsscc_info_ReqAckAcceptTeamInvite_NFMsgTeam_2eproto() {
   ::NFMsg::ReqAckAcceptTeamInvite::InitAsDefaultInstance();
 }
 
-LIBPROTOC_EXPORT ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_ReqAckAcceptTeamInvite_NFMsgTeam_2eproto =
+::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_ReqAckAcceptTeamInvite_NFMsgTeam_2eproto =
     {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 1, 0, InitDefaultsscc_info_ReqAckAcceptTeamInvite_NFMsgTeam_2eproto}, {
       &scc_info_Ident_NFMsgBase_2eproto.base,}};
 
@@ -126,7 +126,7 @@ static void InitDefaultsscc_info_ReqAckRejectTeamInvite_NFMsgTeam_2eproto() {
   ::NFMsg::ReqAckRejectTeamInvite::InitAsDefaultInstance();
 }
 
-LIBPROTOC_EXPORT ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_ReqAckRejectTeamInvite_NFMsgTeam_2eproto =
+::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_ReqAckRejectTeamInvite_NFMsgTeam_2eproto =
     {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 1, 0, InitDefaultsscc_info_ReqAckRejectTeamInvite_NFMsgTeam_2eproto}, {
       &scc_info_Ident_NFMsgBase_2eproto.base,}};
 
@@ -141,7 +141,7 @@ static void InitDefaultsscc_info_ReqAckTeamMemberList_NFMsgTeam_2eproto() {
   ::NFMsg::ReqAckTeamMemberList::InitAsDefaultInstance();
 }
 
-LIBPROTOC_EXPORT ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<2> scc_info_ReqAckTeamMemberList_NFMsgTeam_2eproto =
+::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<2> scc_info_ReqAckTeamMemberList_NFMsgTeam_2eproto =
     {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 2, 0, InitDefaultsscc_info_ReqAckTeamMemberList_NFMsgTeam_2eproto}, {
       &scc_info_Ident_NFMsgBase_2eproto.base,
       &scc_info_TeamMemberInfo_NFMsgTeam_2eproto.base,}};
@@ -157,7 +157,7 @@ static void InitDefaultsscc_info_ReqCancelInviteToTeam_NFMsgTeam_2eproto() {
   ::NFMsg::ReqCancelInviteToTeam::InitAsDefaultInstance();
 }
 
-LIBPROTOC_EXPORT ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_ReqCancelInviteToTeam_NFMsgTeam_2eproto =
+::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_ReqCancelInviteToTeam_NFMsgTeam_2eproto =
     {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 1, 0, InitDefaultsscc_info_ReqCancelInviteToTeam_NFMsgTeam_2eproto}, {
       &scc_info_Ident_NFMsgBase_2eproto.base,}};
 
@@ -172,7 +172,7 @@ static void InitDefaultsscc_info_ReqInviteToTeam_NFMsgTeam_2eproto() {
   ::NFMsg::ReqInviteToTeam::InitAsDefaultInstance();
 }
 
-LIBPROTOC_EXPORT ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_ReqInviteToTeam_NFMsgTeam_2eproto =
+::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_ReqInviteToTeam_NFMsgTeam_2eproto =
     {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 1, 0, InitDefaultsscc_info_ReqInviteToTeam_NFMsgTeam_2eproto}, {
       &scc_info_Ident_NFMsgBase_2eproto.base,}};
 
@@ -187,7 +187,7 @@ static void InitDefaultsscc_info_TeamMemberInfo_NFMsgTeam_2eproto() {
   ::NFMsg::TeamMemberInfo::InitAsDefaultInstance();
 }
 
-LIBPROTOC_EXPORT ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_TeamMemberInfo_NFMsgTeam_2eproto =
+::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_TeamMemberInfo_NFMsgTeam_2eproto =
     {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 1, 0, InitDefaultsscc_info_TeamMemberInfo_NFMsgTeam_2eproto}, {
       &scc_info_Ident_NFMsgBase_2eproto.base,}};
 
