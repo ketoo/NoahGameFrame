@@ -23,7 +23,7 @@ vcpkg install protobuf:x64-windows
 vcpkg install lua:x64-windows
 vcpkg install gtest:x64-windows
 
-xcopy installed\x64-windows-static\tools\protobuf\protoc.exe ..\..\NFComm\NFMessageDefine\ /s /e /Y
+xcopy installed\x64-windows\tools\protobuf\protoc.exe ..\..\NFComm\NFMessageDefine\ /s /e /Y
 
 vcpkg integrate install
 

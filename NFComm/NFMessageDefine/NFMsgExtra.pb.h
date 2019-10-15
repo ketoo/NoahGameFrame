@@ -35,7 +35,7 @@
 #include "NFMsgBase.pb.h"
 // @@protoc_insertion_point(includes)
 #include <google/protobuf/port_def.inc>
-#define PROTOBUF_INTERNAL_EXPORT_NFMsgExtra_2eproto LIBPROTOC_EXPORT
+#define PROTOBUF_INTERNAL_EXPORT_NFMsgExtra_2eproto
 PROTOBUF_NAMESPACE_OPEN
 namespace internal {
 class AnyMetadata;
@@ -43,7 +43,7 @@ class AnyMetadata;
 PROTOBUF_NAMESPACE_CLOSE
 
 // Internal implementation detail -- do not use these members.
-struct LIBPROTOC_EXPORT TableStruct_NFMsgExtra_2eproto {
+struct TableStruct_NFMsgExtra_2eproto {
   static const ::PROTOBUF_NAMESPACE_ID::internal::ParseTableField entries[]
     PROTOBUF_SECTION_VARIABLE(protodesc_cold);
   static const ::PROTOBUF_NAMESPACE_ID::internal::AuxillaryParseTableField aux[]
@@ -54,96 +54,96 @@ struct LIBPROTOC_EXPORT TableStruct_NFMsgExtra_2eproto {
   static const ::PROTOBUF_NAMESPACE_ID::internal::SerializationTable serialization_table[];
   static const ::PROTOBUF_NAMESPACE_ID::uint32 offsets[];
 };
-extern LIBPROTOC_EXPORT const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable descriptor_table_NFMsgExtra_2eproto;
+extern const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable descriptor_table_NFMsgExtra_2eproto;
 namespace NFMsg {
 class AckBigMapGridInfo;
 class AckBigMapGridInfoDefaultTypeInternal;
-LIBPROTOC_EXPORT extern AckBigMapGridInfoDefaultTypeInternal _AckBigMapGridInfo_default_instance_;
+extern AckBigMapGridInfoDefaultTypeInternal _AckBigMapGridInfo_default_instance_;
 class AckBigMapInfo;
 class AckBigMapInfoDefaultTypeInternal;
-LIBPROTOC_EXPORT extern AckBigMapInfoDefaultTypeInternal _AckBigMapInfo_default_instance_;
+extern AckBigMapInfoDefaultTypeInternal _AckBigMapInfo_default_instance_;
 class AckGetMapAward;
 class AckGetMapAwardDefaultTypeInternal;
-LIBPROTOC_EXPORT extern AckGetMapAwardDefaultTypeInternal _AckGetMapAward_default_instance_;
+extern AckGetMapAwardDefaultTypeInternal _AckGetMapAward_default_instance_;
 class AckHoldMapGrid;
 class AckHoldMapGridDefaultTypeInternal;
-LIBPROTOC_EXPORT extern AckHoldMapGridDefaultTypeInternal _AckHoldMapGrid_default_instance_;
+extern AckHoldMapGridDefaultTypeInternal _AckHoldMapGrid_default_instance_;
 class AckLeaveMapMsg;
 class AckLeaveMapMsgDefaultTypeInternal;
-LIBPROTOC_EXPORT extern AckLeaveMapMsgDefaultTypeInternal _AckLeaveMapMsg_default_instance_;
+extern AckLeaveMapMsgDefaultTypeInternal _AckLeaveMapMsg_default_instance_;
 class AckMapHunting;
 class AckMapHuntingDefaultTypeInternal;
-LIBPROTOC_EXPORT extern AckMapHuntingDefaultTypeInternal _AckMapHunting_default_instance_;
+extern AckMapHuntingDefaultTypeInternal _AckMapHunting_default_instance_;
 class AckMapKingWar;
 class AckMapKingWarDefaultTypeInternal;
-LIBPROTOC_EXPORT extern AckMapKingWarDefaultTypeInternal _AckMapKingWar_default_instance_;
+extern AckMapKingWarDefaultTypeInternal _AckMapKingWar_default_instance_;
 class BigMapGridBaseInfo;
 class BigMapGridBaseInfoDefaultTypeInternal;
-LIBPROTOC_EXPORT extern BigMapGridBaseInfoDefaultTypeInternal _BigMapGridBaseInfo_default_instance_;
+extern BigMapGridBaseInfoDefaultTypeInternal _BigMapGridBaseInfo_default_instance_;
 class BigMapGridDetailInfo;
 class BigMapGridDetailInfoDefaultTypeInternal;
-LIBPROTOC_EXPORT extern BigMapGridDetailInfoDefaultTypeInternal _BigMapGridDetailInfo_default_instance_;
+extern BigMapGridDetailInfoDefaultTypeInternal _BigMapGridDetailInfo_default_instance_;
 class BigMapLeaveMsg;
 class BigMapLeaveMsgDefaultTypeInternal;
-LIBPROTOC_EXPORT extern BigMapLeaveMsgDefaultTypeInternal _BigMapLeaveMsg_default_instance_;
+extern BigMapLeaveMsgDefaultTypeInternal _BigMapLeaveMsg_default_instance_;
 class BigMapWarHistory;
 class BigMapWarHistoryDefaultTypeInternal;
-LIBPROTOC_EXPORT extern BigMapWarHistoryDefaultTypeInternal _BigMapWarHistory_default_instance_;
+extern BigMapWarHistoryDefaultTypeInternal _BigMapWarHistory_default_instance_;
 class GridClanBaseInfo;
 class GridClanBaseInfoDefaultTypeInternal;
-LIBPROTOC_EXPORT extern GridClanBaseInfoDefaultTypeInternal _GridClanBaseInfo_default_instance_;
+extern GridClanBaseInfoDefaultTypeInternal _GridClanBaseInfo_default_instance_;
 class ReqAIOnwer;
 class ReqAIOnwerDefaultTypeInternal;
-LIBPROTOC_EXPORT extern ReqAIOnwerDefaultTypeInternal _ReqAIOnwer_default_instance_;
+extern ReqAIOnwerDefaultTypeInternal _ReqAIOnwer_default_instance_;
 class ReqBigMapGridInfo;
 class ReqBigMapGridInfoDefaultTypeInternal;
-LIBPROTOC_EXPORT extern ReqBigMapGridInfoDefaultTypeInternal _ReqBigMapGridInfo_default_instance_;
+extern ReqBigMapGridInfoDefaultTypeInternal _ReqBigMapGridInfo_default_instance_;
 class ReqBigMapInfo;
 class ReqBigMapInfoDefaultTypeInternal;
-LIBPROTOC_EXPORT extern ReqBigMapInfoDefaultTypeInternal _ReqBigMapInfo_default_instance_;
+extern ReqBigMapInfoDefaultTypeInternal _ReqBigMapInfo_default_instance_;
 class ReqGetMapAward;
 class ReqGetMapAwardDefaultTypeInternal;
-LIBPROTOC_EXPORT extern ReqGetMapAwardDefaultTypeInternal _ReqGetMapAward_default_instance_;
+extern ReqGetMapAwardDefaultTypeInternal _ReqGetMapAward_default_instance_;
 class ReqHoldMapGrid;
 class ReqHoldMapGridDefaultTypeInternal;
-LIBPROTOC_EXPORT extern ReqHoldMapGridDefaultTypeInternal _ReqHoldMapGrid_default_instance_;
+extern ReqHoldMapGridDefaultTypeInternal _ReqHoldMapGrid_default_instance_;
 class ReqLeaveMapMsg;
 class ReqLeaveMapMsgDefaultTypeInternal;
-LIBPROTOC_EXPORT extern ReqLeaveMapMsgDefaultTypeInternal _ReqLeaveMapMsg_default_instance_;
+extern ReqLeaveMapMsgDefaultTypeInternal _ReqLeaveMapMsg_default_instance_;
 class ReqMapHunting;
 class ReqMapHuntingDefaultTypeInternal;
-LIBPROTOC_EXPORT extern ReqMapHuntingDefaultTypeInternal _ReqMapHunting_default_instance_;
+extern ReqMapHuntingDefaultTypeInternal _ReqMapHunting_default_instance_;
 class ReqMapKingWar;
 class ReqMapKingWarDefaultTypeInternal;
-LIBPROTOC_EXPORT extern ReqMapKingWarDefaultTypeInternal _ReqMapKingWar_default_instance_;
+extern ReqMapKingWarDefaultTypeInternal _ReqMapKingWar_default_instance_;
 }  // namespace NFMsg
 PROTOBUF_NAMESPACE_OPEN
-template<> LIBPROTOC_EXPORT ::NFMsg::AckBigMapGridInfo* Arena::CreateMaybeMessage<::NFMsg::AckBigMapGridInfo>(Arena*);
-template<> LIBPROTOC_EXPORT ::NFMsg::AckBigMapInfo* Arena::CreateMaybeMessage<::NFMsg::AckBigMapInfo>(Arena*);
-template<> LIBPROTOC_EXPORT ::NFMsg::AckGetMapAward* Arena::CreateMaybeMessage<::NFMsg::AckGetMapAward>(Arena*);
-template<> LIBPROTOC_EXPORT ::NFMsg::AckHoldMapGrid* Arena::CreateMaybeMessage<::NFMsg::AckHoldMapGrid>(Arena*);
-template<> LIBPROTOC_EXPORT ::NFMsg::AckLeaveMapMsg* Arena::CreateMaybeMessage<::NFMsg::AckLeaveMapMsg>(Arena*);
-template<> LIBPROTOC_EXPORT ::NFMsg::AckMapHunting* Arena::CreateMaybeMessage<::NFMsg::AckMapHunting>(Arena*);
-template<> LIBPROTOC_EXPORT ::NFMsg::AckMapKingWar* Arena::CreateMaybeMessage<::NFMsg::AckMapKingWar>(Arena*);
-template<> LIBPROTOC_EXPORT ::NFMsg::BigMapGridBaseInfo* Arena::CreateMaybeMessage<::NFMsg::BigMapGridBaseInfo>(Arena*);
-template<> LIBPROTOC_EXPORT ::NFMsg::BigMapGridDetailInfo* Arena::CreateMaybeMessage<::NFMsg::BigMapGridDetailInfo>(Arena*);
-template<> LIBPROTOC_EXPORT ::NFMsg::BigMapLeaveMsg* Arena::CreateMaybeMessage<::NFMsg::BigMapLeaveMsg>(Arena*);
-template<> LIBPROTOC_EXPORT ::NFMsg::BigMapWarHistory* Arena::CreateMaybeMessage<::NFMsg::BigMapWarHistory>(Arena*);
-template<> LIBPROTOC_EXPORT ::NFMsg::GridClanBaseInfo* Arena::CreateMaybeMessage<::NFMsg::GridClanBaseInfo>(Arena*);
-template<> LIBPROTOC_EXPORT ::NFMsg::ReqAIOnwer* Arena::CreateMaybeMessage<::NFMsg::ReqAIOnwer>(Arena*);
-template<> LIBPROTOC_EXPORT ::NFMsg::ReqBigMapGridInfo* Arena::CreateMaybeMessage<::NFMsg::ReqBigMapGridInfo>(Arena*);
-template<> LIBPROTOC_EXPORT ::NFMsg::ReqBigMapInfo* Arena::CreateMaybeMessage<::NFMsg::ReqBigMapInfo>(Arena*);
-template<> LIBPROTOC_EXPORT ::NFMsg::ReqGetMapAward* Arena::CreateMaybeMessage<::NFMsg::ReqGetMapAward>(Arena*);
-template<> LIBPROTOC_EXPORT ::NFMsg::ReqHoldMapGrid* Arena::CreateMaybeMessage<::NFMsg::ReqHoldMapGrid>(Arena*);
-template<> LIBPROTOC_EXPORT ::NFMsg::ReqLeaveMapMsg* Arena::CreateMaybeMessage<::NFMsg::ReqLeaveMapMsg>(Arena*);
-template<> LIBPROTOC_EXPORT ::NFMsg::ReqMapHunting* Arena::CreateMaybeMessage<::NFMsg::ReqMapHunting>(Arena*);
-template<> LIBPROTOC_EXPORT ::NFMsg::ReqMapKingWar* Arena::CreateMaybeMessage<::NFMsg::ReqMapKingWar>(Arena*);
+template<> ::NFMsg::AckBigMapGridInfo* Arena::CreateMaybeMessage<::NFMsg::AckBigMapGridInfo>(Arena*);
+template<> ::NFMsg::AckBigMapInfo* Arena::CreateMaybeMessage<::NFMsg::AckBigMapInfo>(Arena*);
+template<> ::NFMsg::AckGetMapAward* Arena::CreateMaybeMessage<::NFMsg::AckGetMapAward>(Arena*);
+template<> ::NFMsg::AckHoldMapGrid* Arena::CreateMaybeMessage<::NFMsg::AckHoldMapGrid>(Arena*);
+template<> ::NFMsg::AckLeaveMapMsg* Arena::CreateMaybeMessage<::NFMsg::AckLeaveMapMsg>(Arena*);
+template<> ::NFMsg::AckMapHunting* Arena::CreateMaybeMessage<::NFMsg::AckMapHunting>(Arena*);
+template<> ::NFMsg::AckMapKingWar* Arena::CreateMaybeMessage<::NFMsg::AckMapKingWar>(Arena*);
+template<> ::NFMsg::BigMapGridBaseInfo* Arena::CreateMaybeMessage<::NFMsg::BigMapGridBaseInfo>(Arena*);
+template<> ::NFMsg::BigMapGridDetailInfo* Arena::CreateMaybeMessage<::NFMsg::BigMapGridDetailInfo>(Arena*);
+template<> ::NFMsg::BigMapLeaveMsg* Arena::CreateMaybeMessage<::NFMsg::BigMapLeaveMsg>(Arena*);
+template<> ::NFMsg::BigMapWarHistory* Arena::CreateMaybeMessage<::NFMsg::BigMapWarHistory>(Arena*);
+template<> ::NFMsg::GridClanBaseInfo* Arena::CreateMaybeMessage<::NFMsg::GridClanBaseInfo>(Arena*);
+template<> ::NFMsg::ReqAIOnwer* Arena::CreateMaybeMessage<::NFMsg::ReqAIOnwer>(Arena*);
+template<> ::NFMsg::ReqBigMapGridInfo* Arena::CreateMaybeMessage<::NFMsg::ReqBigMapGridInfo>(Arena*);
+template<> ::NFMsg::ReqBigMapInfo* Arena::CreateMaybeMessage<::NFMsg::ReqBigMapInfo>(Arena*);
+template<> ::NFMsg::ReqGetMapAward* Arena::CreateMaybeMessage<::NFMsg::ReqGetMapAward>(Arena*);
+template<> ::NFMsg::ReqHoldMapGrid* Arena::CreateMaybeMessage<::NFMsg::ReqHoldMapGrid>(Arena*);
+template<> ::NFMsg::ReqLeaveMapMsg* Arena::CreateMaybeMessage<::NFMsg::ReqLeaveMapMsg>(Arena*);
+template<> ::NFMsg::ReqMapHunting* Arena::CreateMaybeMessage<::NFMsg::ReqMapHunting>(Arena*);
+template<> ::NFMsg::ReqMapKingWar* Arena::CreateMaybeMessage<::NFMsg::ReqMapKingWar>(Arena*);
 PROTOBUF_NAMESPACE_CLOSE
 namespace NFMsg {
 
 // ===================================================================
 
-class LIBPROTOC_EXPORT ReqAIOnwer :
+class ReqAIOnwer :
     public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:NFMsg.ReqAIOnwer) */ {
  public:
   ReqAIOnwer();
@@ -277,7 +277,7 @@ class LIBPROTOC_EXPORT ReqAIOnwer :
 };
 // -------------------------------------------------------------------
 
-class LIBPROTOC_EXPORT GridClanBaseInfo :
+class GridClanBaseInfo :
     public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:NFMsg.GridClanBaseInfo) */ {
  public:
   GridClanBaseInfo();
@@ -462,7 +462,7 @@ class LIBPROTOC_EXPORT GridClanBaseInfo :
 };
 // -------------------------------------------------------------------
 
-class LIBPROTOC_EXPORT ReqBigMapGridInfo :
+class ReqBigMapGridInfo :
     public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:NFMsg.ReqBigMapGridInfo) */ {
  public:
   ReqBigMapGridInfo();
@@ -605,7 +605,7 @@ class LIBPROTOC_EXPORT ReqBigMapGridInfo :
 };
 // -------------------------------------------------------------------
 
-class LIBPROTOC_EXPORT BigMapGridBaseInfo :
+class BigMapGridBaseInfo :
     public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:NFMsg.BigMapGridBaseInfo) */ {
  public:
   BigMapGridBaseInfo();
@@ -813,7 +813,7 @@ class LIBPROTOC_EXPORT BigMapGridBaseInfo :
 };
 // -------------------------------------------------------------------
 
-class LIBPROTOC_EXPORT BigMapLeaveMsg :
+class BigMapLeaveMsg :
     public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:NFMsg.BigMapLeaveMsg) */ {
  public:
   BigMapLeaveMsg();
@@ -1005,7 +1005,7 @@ class LIBPROTOC_EXPORT BigMapLeaveMsg :
 };
 // -------------------------------------------------------------------
 
-class LIBPROTOC_EXPORT BigMapWarHistory :
+class BigMapWarHistory :
     public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:NFMsg.BigMapWarHistory) */ {
  public:
   BigMapWarHistory();
@@ -1184,7 +1184,7 @@ class LIBPROTOC_EXPORT BigMapWarHistory :
 };
 // -------------------------------------------------------------------
 
-class LIBPROTOC_EXPORT BigMapGridDetailInfo :
+class BigMapGridDetailInfo :
     public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:NFMsg.BigMapGridDetailInfo) */ {
  public:
   BigMapGridDetailInfo();
@@ -1378,7 +1378,7 @@ class LIBPROTOC_EXPORT BigMapGridDetailInfo :
 };
 // -------------------------------------------------------------------
 
-class LIBPROTOC_EXPORT AckBigMapGridInfo :
+class AckBigMapGridInfo :
     public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:NFMsg.AckBigMapGridInfo) */ {
  public:
   AckBigMapGridInfo();
@@ -1515,7 +1515,7 @@ class LIBPROTOC_EXPORT AckBigMapGridInfo :
 };
 // -------------------------------------------------------------------
 
-class LIBPROTOC_EXPORT ReqBigMapInfo :
+class ReqBigMapInfo :
     public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:NFMsg.ReqBigMapInfo) */ {
  public:
   ReqBigMapInfo();
@@ -1630,7 +1630,7 @@ class LIBPROTOC_EXPORT ReqBigMapInfo :
 };
 // -------------------------------------------------------------------
 
-class LIBPROTOC_EXPORT AckBigMapInfo :
+class AckBigMapInfo :
     public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:NFMsg.AckBigMapInfo) */ {
  public:
   AckBigMapInfo();
@@ -1767,7 +1767,7 @@ class LIBPROTOC_EXPORT AckBigMapInfo :
 };
 // -------------------------------------------------------------------
 
-class LIBPROTOC_EXPORT ReqHoldMapGrid :
+class ReqHoldMapGrid :
     public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:NFMsg.ReqHoldMapGrid) */ {
  public:
   ReqHoldMapGrid();
@@ -1919,7 +1919,7 @@ class LIBPROTOC_EXPORT ReqHoldMapGrid :
 };
 // -------------------------------------------------------------------
 
-class LIBPROTOC_EXPORT AckHoldMapGrid :
+class AckHoldMapGrid :
     public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:NFMsg.AckHoldMapGrid) */ {
  public:
   AckHoldMapGrid();
@@ -2034,7 +2034,7 @@ class LIBPROTOC_EXPORT AckHoldMapGrid :
 };
 // -------------------------------------------------------------------
 
-class LIBPROTOC_EXPORT ReqLeaveMapMsg :
+class ReqLeaveMapMsg :
     public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:NFMsg.ReqLeaveMapMsg) */ {
  public:
   ReqLeaveMapMsg();
@@ -2186,7 +2186,7 @@ class LIBPROTOC_EXPORT ReqLeaveMapMsg :
 };
 // -------------------------------------------------------------------
 
-class LIBPROTOC_EXPORT AckLeaveMapMsg :
+class AckLeaveMapMsg :
     public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:NFMsg.AckLeaveMapMsg) */ {
  public:
   AckLeaveMapMsg();
@@ -2301,7 +2301,7 @@ class LIBPROTOC_EXPORT AckLeaveMapMsg :
 };
 // -------------------------------------------------------------------
 
-class LIBPROTOC_EXPORT ReqGetMapAward :
+class ReqGetMapAward :
     public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:NFMsg.ReqGetMapAward) */ {
  public:
   ReqGetMapAward();
@@ -2436,7 +2436,7 @@ class LIBPROTOC_EXPORT ReqGetMapAward :
 };
 // -------------------------------------------------------------------
 
-class LIBPROTOC_EXPORT AckGetMapAward :
+class AckGetMapAward :
     public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:NFMsg.AckGetMapAward) */ {
  public:
   AckGetMapAward();
@@ -2551,7 +2551,7 @@ class LIBPROTOC_EXPORT AckGetMapAward :
 };
 // -------------------------------------------------------------------
 
-class LIBPROTOC_EXPORT ReqMapHunting :
+class ReqMapHunting :
     public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:NFMsg.ReqMapHunting) */ {
  public:
   ReqMapHunting();
@@ -2686,7 +2686,7 @@ class LIBPROTOC_EXPORT ReqMapHunting :
 };
 // -------------------------------------------------------------------
 
-class LIBPROTOC_EXPORT AckMapHunting :
+class AckMapHunting :
     public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:NFMsg.AckMapHunting) */ {
  public:
   AckMapHunting();
@@ -2801,7 +2801,7 @@ class LIBPROTOC_EXPORT AckMapHunting :
 };
 // -------------------------------------------------------------------
 
-class LIBPROTOC_EXPORT ReqMapKingWar :
+class ReqMapKingWar :
     public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:NFMsg.ReqMapKingWar) */ {
  public:
   ReqMapKingWar();
@@ -2936,7 +2936,7 @@ class LIBPROTOC_EXPORT ReqMapKingWar :
 };
 // -------------------------------------------------------------------
 
-class LIBPROTOC_EXPORT AckMapKingWar :
+class AckMapKingWar :
     public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:NFMsg.AckMapKingWar) */ {
  public:
   AckMapKingWar();

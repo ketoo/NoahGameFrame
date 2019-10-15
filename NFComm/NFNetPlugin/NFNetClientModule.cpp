@@ -25,7 +25,6 @@
 
 #include "NFNetModule.h"
 #include "NFNetClientModule.h"
-#include "NFNet.h"
 
 NFNetClientModule::NFNetClientModule(NFIPluginManager* p)
 {

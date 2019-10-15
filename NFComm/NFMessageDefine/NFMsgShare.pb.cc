@@ -220,7 +220,7 @@ static void InitDefaultsscc_info_AckEndBattle_NFMsgShare_2eproto() {
   ::NFMsg::AckEndBattle::InitAsDefaultInstance();
 }
 
-LIBPROTOC_EXPORT ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<2> scc_info_AckEndBattle_NFMsgShare_2eproto =
+::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<2> scc_info_AckEndBattle_NFMsgShare_2eproto =
     {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 2, 0, InitDefaultsscc_info_AckEndBattle_NFMsgShare_2eproto}, {
       &scc_info_Ident_NFMsgBase_2eproto.base,
       &scc_info_ItemStruct_NFMsgShare_2eproto.base,}};
@@ -236,7 +236,7 @@ static void InitDefaultsscc_info_AckPlayerEntryList_NFMsgShare_2eproto() {
   ::NFMsg::AckPlayerEntryList::InitAsDefaultInstance();
 }
 
-LIBPROTOC_EXPORT ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_AckPlayerEntryList_NFMsgShare_2eproto =
+::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_AckPlayerEntryList_NFMsgShare_2eproto =
     {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 1, 0, InitDefaultsscc_info_AckPlayerEntryList_NFMsgShare_2eproto}, {
       &scc_info_PlayerEntryInfo_NFMsgShare_2eproto.base,}};
 
@@ -251,7 +251,7 @@ static void InitDefaultsscc_info_AckPlayerLeaveList_NFMsgShare_2eproto() {
   ::NFMsg::AckPlayerLeaveList::InitAsDefaultInstance();
 }
 
-LIBPROTOC_EXPORT ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_AckPlayerLeaveList_NFMsgShare_2eproto =
+::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_AckPlayerLeaveList_NFMsgShare_2eproto =
     {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 1, 0, InitDefaultsscc_info_AckPlayerLeaveList_NFMsgShare_2eproto}, {
       &scc_info_Ident_NFMsgBase_2eproto.base,}};
 
@@ -266,7 +266,7 @@ static void InitDefaultsscc_info_AckSceneBuildings_NFMsgShare_2eproto() {
   ::NFMsg::AckSceneBuildings::InitAsDefaultInstance();
 }
 
-LIBPROTOC_EXPORT ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_AckSceneBuildings_NFMsgShare_2eproto =
+::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_AckSceneBuildings_NFMsgShare_2eproto =
     {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 1, 0, InitDefaultsscc_info_AckSceneBuildings_NFMsgShare_2eproto}, {
       &scc_info_ReqAddSceneBuilding_NFMsgShare_2eproto.base,}};
 
@@ -281,7 +281,7 @@ static void InitDefaultsscc_info_AckSearchClan_NFMsgShare_2eproto() {
   ::NFMsg::AckSearchClan::InitAsDefaultInstance();
 }
 
-LIBPROTOC_EXPORT ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_AckSearchClan_NFMsgShare_2eproto =
+::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_AckSearchClan_NFMsgShare_2eproto =
     {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 1, 0, InitDefaultsscc_info_AckSearchClan_NFMsgShare_2eproto}, {
       &scc_info_AckSearchClan_SearchClanObject_NFMsgShare_2eproto.base,}};
 
@@ -296,7 +296,7 @@ static void InitDefaultsscc_info_AckSearchClan_SearchClanObject_NFMsgShare_2epro
   ::NFMsg::AckSearchClan_SearchClanObject::InitAsDefaultInstance();
 }
 
-LIBPROTOC_EXPORT ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_AckSearchClan_SearchClanObject_NFMsgShare_2eproto =
+::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_AckSearchClan_SearchClanObject_NFMsgShare_2eproto =
     {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 1, 0, InitDefaultsscc_info_AckSearchClan_SearchClanObject_NFMsgShare_2eproto}, {
       &scc_info_Ident_NFMsgBase_2eproto.base,}};
 
@@ -311,7 +311,7 @@ static void InitDefaultsscc_info_AckSearchOppnent_NFMsgShare_2eproto() {
   ::NFMsg::AckSearchOppnent::InitAsDefaultInstance();
 }
 
-LIBPROTOC_EXPORT ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<3> scc_info_AckSearchOppnent_NFMsgShare_2eproto =
+::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<3> scc_info_AckSearchOppnent_NFMsgShare_2eproto =
     {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 3, 0, InitDefaultsscc_info_AckSearchOppnent_NFMsgShare_2eproto}, {
       &scc_info_Ident_NFMsgBase_2eproto.base,
       &scc_info_PVPPlayerInfo_NFMsgShare_2eproto.base,
@@ -328,7 +328,7 @@ static void InitDefaultsscc_info_AckSwitchServer_NFMsgShare_2eproto() {
   ::NFMsg::AckSwitchServer::InitAsDefaultInstance();
 }
 
-LIBPROTOC_EXPORT ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_AckSwitchServer_NFMsgShare_2eproto =
+::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_AckSwitchServer_NFMsgShare_2eproto =
     {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 1, 0, InitDefaultsscc_info_AckSwitchServer_NFMsgShare_2eproto}, {
       &scc_info_Ident_NFMsgBase_2eproto.base,}};
 
@@ -343,7 +343,7 @@ static void InitDefaultsscc_info_CurrencyStruct_NFMsgShare_2eproto() {
   ::NFMsg::CurrencyStruct::InitAsDefaultInstance();
 }
 
-LIBPROTOC_EXPORT ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_CurrencyStruct_NFMsgShare_2eproto =
+::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_CurrencyStruct_NFMsgShare_2eproto =
     {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 0, 0, InitDefaultsscc_info_CurrencyStruct_NFMsgShare_2eproto}, {}};
 
 static void InitDefaultsscc_info_EffectData_NFMsgShare_2eproto() {
@@ -357,7 +357,7 @@ static void InitDefaultsscc_info_EffectData_NFMsgShare_2eproto() {
   ::NFMsg::EffectData::InitAsDefaultInstance();
 }
 
-LIBPROTOC_EXPORT ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_EffectData_NFMsgShare_2eproto =
+::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_EffectData_NFMsgShare_2eproto =
     {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 1, 0, InitDefaultsscc_info_EffectData_NFMsgShare_2eproto}, {
       &scc_info_Ident_NFMsgBase_2eproto.base,}};
 
@@ -372,7 +372,7 @@ static void InitDefaultsscc_info_ItemStruct_NFMsgShare_2eproto() {
   ::NFMsg::ItemStruct::InitAsDefaultInstance();
 }
 
-LIBPROTOC_EXPORT ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_ItemStruct_NFMsgShare_2eproto =
+::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_ItemStruct_NFMsgShare_2eproto =
     {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 0, 0, InitDefaultsscc_info_ItemStruct_NFMsgShare_2eproto}, {}};
 
 static void InitDefaultsscc_info_PVPPlayerInfo_NFMsgShare_2eproto() {
@@ -386,7 +386,7 @@ static void InitDefaultsscc_info_PVPPlayerInfo_NFMsgShare_2eproto() {
   ::NFMsg::PVPPlayerInfo::InitAsDefaultInstance();
 }
 
-LIBPROTOC_EXPORT ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_PVPPlayerInfo_NFMsgShare_2eproto =
+::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_PVPPlayerInfo_NFMsgShare_2eproto =
     {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 1, 0, InitDefaultsscc_info_PVPPlayerInfo_NFMsgShare_2eproto}, {
       &scc_info_Ident_NFMsgBase_2eproto.base,}};
 
@@ -401,7 +401,7 @@ static void InitDefaultsscc_info_PlayerEntryInfo_NFMsgShare_2eproto() {
   ::NFMsg::PlayerEntryInfo::InitAsDefaultInstance();
 }
 
-LIBPROTOC_EXPORT ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_PlayerEntryInfo_NFMsgShare_2eproto =
+::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_PlayerEntryInfo_NFMsgShare_2eproto =
     {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 1, 0, InitDefaultsscc_info_PlayerEntryInfo_NFMsgShare_2eproto}, {
       &scc_info_Ident_NFMsgBase_2eproto.base,}};
 
@@ -416,7 +416,7 @@ static void InitDefaultsscc_info_ReqAcceptTask_NFMsgShare_2eproto() {
   ::NFMsg::ReqAcceptTask::InitAsDefaultInstance();
 }
 
-LIBPROTOC_EXPORT ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_ReqAcceptTask_NFMsgShare_2eproto =
+::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_ReqAcceptTask_NFMsgShare_2eproto =
     {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 0, 0, InitDefaultsscc_info_ReqAcceptTask_NFMsgShare_2eproto}, {}};
 
 static void InitDefaultsscc_info_ReqAckCancelSearch_NFMsgShare_2eproto() {
@@ -430,7 +430,7 @@ static void InitDefaultsscc_info_ReqAckCancelSearch_NFMsgShare_2eproto() {
   ::NFMsg::ReqAckCancelSearch::InitAsDefaultInstance();
 }
 
-LIBPROTOC_EXPORT ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_ReqAckCancelSearch_NFMsgShare_2eproto =
+::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_ReqAckCancelSearch_NFMsgShare_2eproto =
     {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 1, 0, InitDefaultsscc_info_ReqAckCancelSearch_NFMsgShare_2eproto}, {
       &scc_info_Ident_NFMsgBase_2eproto.base,}};
 
@@ -445,7 +445,7 @@ static void InitDefaultsscc_info_ReqAckCreateClan_NFMsgShare_2eproto() {
   ::NFMsg::ReqAckCreateClan::InitAsDefaultInstance();
 }
 
-LIBPROTOC_EXPORT ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_ReqAckCreateClan_NFMsgShare_2eproto =
+::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_ReqAckCreateClan_NFMsgShare_2eproto =
     {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 1, 0, InitDefaultsscc_info_ReqAckCreateClan_NFMsgShare_2eproto}, {
       &scc_info_Ident_NFMsgBase_2eproto.base,}};
 
@@ -460,7 +460,7 @@ static void InitDefaultsscc_info_ReqAckEnterGameSuccess_NFMsgShare_2eproto() {
   ::NFMsg::ReqAckEnterGameSuccess::InitAsDefaultInstance();
 }
 
-LIBPROTOC_EXPORT ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_ReqAckEnterGameSuccess_NFMsgShare_2eproto =
+::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_ReqAckEnterGameSuccess_NFMsgShare_2eproto =
     {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 0, 0, InitDefaultsscc_info_ReqAckEnterGameSuccess_NFMsgShare_2eproto}, {}};
 
 static void InitDefaultsscc_info_ReqAckHomeScene_NFMsgShare_2eproto() {
@@ -474,7 +474,7 @@ static void InitDefaultsscc_info_ReqAckHomeScene_NFMsgShare_2eproto() {
   ::NFMsg::ReqAckHomeScene::InitAsDefaultInstance();
 }
 
-LIBPROTOC_EXPORT ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_ReqAckHomeScene_NFMsgShare_2eproto =
+::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_ReqAckHomeScene_NFMsgShare_2eproto =
     {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 0, 0, InitDefaultsscc_info_ReqAckHomeScene_NFMsgShare_2eproto}, {}};
 
 static void InitDefaultsscc_info_ReqAckJoinClan_NFMsgShare_2eproto() {
@@ -488,7 +488,7 @@ static void InitDefaultsscc_info_ReqAckJoinClan_NFMsgShare_2eproto() {
   ::NFMsg::ReqAckJoinClan::InitAsDefaultInstance();
 }
 
-LIBPROTOC_EXPORT ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_ReqAckJoinClan_NFMsgShare_2eproto =
+::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_ReqAckJoinClan_NFMsgShare_2eproto =
     {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 1, 0, InitDefaultsscc_info_ReqAckJoinClan_NFMsgShare_2eproto}, {
       &scc_info_Ident_NFMsgBase_2eproto.base,}};
 
@@ -503,7 +503,7 @@ static void InitDefaultsscc_info_ReqAckLeaveClan_NFMsgShare_2eproto() {
   ::NFMsg::ReqAckLeaveClan::InitAsDefaultInstance();
 }
 
-LIBPROTOC_EXPORT ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_ReqAckLeaveClan_NFMsgShare_2eproto =
+::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_ReqAckLeaveClan_NFMsgShare_2eproto =
     {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 1, 0, InitDefaultsscc_info_ReqAckLeaveClan_NFMsgShare_2eproto}, {
       &scc_info_Ident_NFMsgBase_2eproto.base,}};
 
@@ -518,7 +518,7 @@ static void InitDefaultsscc_info_ReqAckOprClanMember_NFMsgShare_2eproto() {
   ::NFMsg::ReqAckOprClanMember::InitAsDefaultInstance();
 }
 
-LIBPROTOC_EXPORT ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_ReqAckOprClanMember_NFMsgShare_2eproto =
+::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_ReqAckOprClanMember_NFMsgShare_2eproto =
     {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 1, 0, InitDefaultsscc_info_ReqAckOprClanMember_NFMsgShare_2eproto}, {
       &scc_info_Ident_NFMsgBase_2eproto.base,}};
 
@@ -533,7 +533,7 @@ static void InitDefaultsscc_info_ReqAckPlayerChat_NFMsgShare_2eproto() {
   ::NFMsg::ReqAckPlayerChat::InitAsDefaultInstance();
 }
 
-LIBPROTOC_EXPORT ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_ReqAckPlayerChat_NFMsgShare_2eproto =
+::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_ReqAckPlayerChat_NFMsgShare_2eproto =
     {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 1, 0, InitDefaultsscc_info_ReqAckPlayerChat_NFMsgShare_2eproto}, {
       &scc_info_Ident_NFMsgBase_2eproto.base,}};
 
@@ -548,7 +548,7 @@ static void InitDefaultsscc_info_ReqAckPlayerMove_NFMsgShare_2eproto() {
   ::NFMsg::ReqAckPlayerMove::InitAsDefaultInstance();
 }
 
-LIBPROTOC_EXPORT ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<2> scc_info_ReqAckPlayerMove_NFMsgShare_2eproto =
+::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<2> scc_info_ReqAckPlayerMove_NFMsgShare_2eproto =
     {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 2, 0, InitDefaultsscc_info_ReqAckPlayerMove_NFMsgShare_2eproto}, {
       &scc_info_Ident_NFMsgBase_2eproto.base,
       &scc_info_Vector3_NFMsgBase_2eproto.base,}};
@@ -564,7 +564,7 @@ static void InitDefaultsscc_info_ReqAckPlayerPosSync_NFMsgShare_2eproto() {
   ::NFMsg::ReqAckPlayerPosSync::InitAsDefaultInstance();
 }
 
-LIBPROTOC_EXPORT ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<2> scc_info_ReqAckPlayerPosSync_NFMsgShare_2eproto =
+::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<2> scc_info_ReqAckPlayerPosSync_NFMsgShare_2eproto =
     {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 2, 0, InitDefaultsscc_info_ReqAckPlayerPosSync_NFMsgShare_2eproto}, {
       &scc_info_Ident_NFMsgBase_2eproto.base,
       &scc_info_Vector3_NFMsgBase_2eproto.base,}};
@@ -580,7 +580,7 @@ static void InitDefaultsscc_info_ReqAckReliveHero_NFMsgShare_2eproto() {
   ::NFMsg::ReqAckReliveHero::InitAsDefaultInstance();
 }
 
-LIBPROTOC_EXPORT ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_ReqAckReliveHero_NFMsgShare_2eproto =
+::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_ReqAckReliveHero_NFMsgShare_2eproto =
     {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 1, 0, InitDefaultsscc_info_ReqAckReliveHero_NFMsgShare_2eproto}, {
       &scc_info_Ident_NFMsgBase_2eproto.base,}};
 
@@ -595,7 +595,7 @@ static void InitDefaultsscc_info_ReqAckSwapScene_NFMsgShare_2eproto() {
   ::NFMsg::ReqAckSwapScene::InitAsDefaultInstance();
 }
 
-LIBPROTOC_EXPORT ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_ReqAckSwapScene_NFMsgShare_2eproto =
+::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_ReqAckSwapScene_NFMsgShare_2eproto =
     {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 0, 0, InitDefaultsscc_info_ReqAckSwapScene_NFMsgShare_2eproto}, {}};
 
 static void InitDefaultsscc_info_ReqAckSynData_NFMsgShare_2eproto() {
@@ -609,7 +609,7 @@ static void InitDefaultsscc_info_ReqAckSynData_NFMsgShare_2eproto() {
   ::NFMsg::ReqAckSynData::InitAsDefaultInstance();
 }
 
-LIBPROTOC_EXPORT ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_ReqAckSynData_NFMsgShare_2eproto =
+::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_ReqAckSynData_NFMsgShare_2eproto =
     {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 1, 0, InitDefaultsscc_info_ReqAckSynData_NFMsgShare_2eproto}, {
       &scc_info_Ident_NFMsgBase_2eproto.base,}};
 
@@ -624,7 +624,7 @@ static void InitDefaultsscc_info_ReqAckUseItem_NFMsgShare_2eproto() {
   ::NFMsg::ReqAckUseItem::InitAsDefaultInstance();
 }
 
-LIBPROTOC_EXPORT ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<4> scc_info_ReqAckUseItem_NFMsgShare_2eproto =
+::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<4> scc_info_ReqAckUseItem_NFMsgShare_2eproto =
     {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 4, 0, InitDefaultsscc_info_ReqAckUseItem_NFMsgShare_2eproto}, {
       &scc_info_Ident_NFMsgBase_2eproto.base,
       &scc_info_EffectData_NFMsgShare_2eproto.base,
@@ -642,7 +642,7 @@ static void InitDefaultsscc_info_ReqAckUseSkill_NFMsgShare_2eproto() {
   ::NFMsg::ReqAckUseSkill::InitAsDefaultInstance();
 }
 
-LIBPROTOC_EXPORT ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<2> scc_info_ReqAckUseSkill_NFMsgShare_2eproto =
+::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<2> scc_info_ReqAckUseSkill_NFMsgShare_2eproto =
     {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 2, 0, InitDefaultsscc_info_ReqAckUseSkill_NFMsgShare_2eproto}, {
       &scc_info_Ident_NFMsgBase_2eproto.base,
       &scc_info_EffectData_NFMsgShare_2eproto.base,}};
@@ -658,7 +658,7 @@ static void InitDefaultsscc_info_ReqAddSceneBuilding_NFMsgShare_2eproto() {
   ::NFMsg::ReqAddSceneBuilding::InitAsDefaultInstance();
 }
 
-LIBPROTOC_EXPORT ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<2> scc_info_ReqAddSceneBuilding_NFMsgShare_2eproto =
+::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<2> scc_info_ReqAddSceneBuilding_NFMsgShare_2eproto =
     {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 2, 0, InitDefaultsscc_info_ReqAddSceneBuilding_NFMsgShare_2eproto}, {
       &scc_info_Vector3_NFMsgBase_2eproto.base,
       &scc_info_Ident_NFMsgBase_2eproto.base,}};
@@ -674,7 +674,7 @@ static void InitDefaultsscc_info_ReqBuyItemFromShop_NFMsgShare_2eproto() {
   ::NFMsg::ReqBuyItemFromShop::InitAsDefaultInstance();
 }
 
-LIBPROTOC_EXPORT ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_ReqBuyItemFromShop_NFMsgShare_2eproto =
+::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_ReqBuyItemFromShop_NFMsgShare_2eproto =
     {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 0, 0, InitDefaultsscc_info_ReqBuyItemFromShop_NFMsgShare_2eproto}, {}};
 
 static void InitDefaultsscc_info_ReqCompeleteTask_NFMsgShare_2eproto() {
@@ -688,7 +688,7 @@ static void InitDefaultsscc_info_ReqCompeleteTask_NFMsgShare_2eproto() {
   ::NFMsg::ReqCompeleteTask::InitAsDefaultInstance();
 }
 
-LIBPROTOC_EXPORT ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_ReqCompeleteTask_NFMsgShare_2eproto =
+::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_ReqCompeleteTask_NFMsgShare_2eproto =
     {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 0, 0, InitDefaultsscc_info_ReqCompeleteTask_NFMsgShare_2eproto}, {}};
 
 static void InitDefaultsscc_info_ReqEndBattle_NFMsgShare_2eproto() {
@@ -702,7 +702,7 @@ static void InitDefaultsscc_info_ReqEndBattle_NFMsgShare_2eproto() {
   ::NFMsg::ReqEndBattle::InitAsDefaultInstance();
 }
 
-LIBPROTOC_EXPORT ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_ReqEndBattle_NFMsgShare_2eproto =
+::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_ReqEndBattle_NFMsgShare_2eproto =
     {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 0, 0, InitDefaultsscc_info_ReqEndBattle_NFMsgShare_2eproto}, {}};
 
 static void InitDefaultsscc_info_ReqEnterClanEctype_NFMsgShare_2eproto() {
@@ -716,7 +716,7 @@ static void InitDefaultsscc_info_ReqEnterClanEctype_NFMsgShare_2eproto() {
   ::NFMsg::ReqEnterClanEctype::InitAsDefaultInstance();
 }
 
-LIBPROTOC_EXPORT ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_ReqEnterClanEctype_NFMsgShare_2eproto =
+::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_ReqEnterClanEctype_NFMsgShare_2eproto =
     {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 1, 0, InitDefaultsscc_info_ReqEnterClanEctype_NFMsgShare_2eproto}, {
       &scc_info_Ident_NFMsgBase_2eproto.base,}};
 
@@ -731,7 +731,7 @@ static void InitDefaultsscc_info_ReqEnterGameServer_NFMsgShare_2eproto() {
   ::NFMsg::ReqEnterGameServer::InitAsDefaultInstance();
 }
 
-LIBPROTOC_EXPORT ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_ReqEnterGameServer_NFMsgShare_2eproto =
+::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_ReqEnterGameServer_NFMsgShare_2eproto =
     {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 1, 0, InitDefaultsscc_info_ReqEnterGameServer_NFMsgShare_2eproto}, {
       &scc_info_Ident_NFMsgBase_2eproto.base,}};
 
@@ -746,7 +746,7 @@ static void InitDefaultsscc_info_ReqHeartBeat_NFMsgShare_2eproto() {
   ::NFMsg::ReqHeartBeat::InitAsDefaultInstance();
 }
 
-LIBPROTOC_EXPORT ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_ReqHeartBeat_NFMsgShare_2eproto =
+::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_ReqHeartBeat_NFMsgShare_2eproto =
     {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 0, 0, InitDefaultsscc_info_ReqHeartBeat_NFMsgShare_2eproto}, {}};
 
 static void InitDefaultsscc_info_ReqLeaveGameServer_NFMsgShare_2eproto() {
@@ -760,7 +760,7 @@ static void InitDefaultsscc_info_ReqLeaveGameServer_NFMsgShare_2eproto() {
   ::NFMsg::ReqLeaveGameServer::InitAsDefaultInstance();
 }
 
-LIBPROTOC_EXPORT ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_ReqLeaveGameServer_NFMsgShare_2eproto =
+::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_ReqLeaveGameServer_NFMsgShare_2eproto =
     {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 0, 0, InitDefaultsscc_info_ReqLeaveGameServer_NFMsgShare_2eproto}, {}};
 
 static void InitDefaultsscc_info_ReqPickDropItem_NFMsgShare_2eproto() {
@@ -774,7 +774,7 @@ static void InitDefaultsscc_info_ReqPickDropItem_NFMsgShare_2eproto() {
   ::NFMsg::ReqPickDropItem::InitAsDefaultInstance();
 }
 
-LIBPROTOC_EXPORT ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_ReqPickDropItem_NFMsgShare_2eproto =
+::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_ReqPickDropItem_NFMsgShare_2eproto =
     {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 1, 0, InitDefaultsscc_info_ReqPickDropItem_NFMsgShare_2eproto}, {
       &scc_info_Ident_NFMsgBase_2eproto.base,}};
 
@@ -789,7 +789,7 @@ static void InitDefaultsscc_info_ReqSceneBuildings_NFMsgShare_2eproto() {
   ::NFMsg::ReqSceneBuildings::InitAsDefaultInstance();
 }
 
-LIBPROTOC_EXPORT ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_ReqSceneBuildings_NFMsgShare_2eproto =
+::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_ReqSceneBuildings_NFMsgShare_2eproto =
     {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 1, 0, InitDefaultsscc_info_ReqSceneBuildings_NFMsgShare_2eproto}, {
       &scc_info_Vector3_NFMsgBase_2eproto.base,}};
 
@@ -804,7 +804,7 @@ static void InitDefaultsscc_info_ReqSearchClan_NFMsgShare_2eproto() {
   ::NFMsg::ReqSearchClan::InitAsDefaultInstance();
 }
 
-LIBPROTOC_EXPORT ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_ReqSearchClan_NFMsgShare_2eproto =
+::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_ReqSearchClan_NFMsgShare_2eproto =
     {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 0, 0, InitDefaultsscc_info_ReqSearchClan_NFMsgShare_2eproto}, {}};
 
 static void InitDefaultsscc_info_ReqSearchOppnent_NFMsgShare_2eproto() {
@@ -818,7 +818,7 @@ static void InitDefaultsscc_info_ReqSearchOppnent_NFMsgShare_2eproto() {
   ::NFMsg::ReqSearchOppnent::InitAsDefaultInstance();
 }
 
-LIBPROTOC_EXPORT ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_ReqSearchOppnent_NFMsgShare_2eproto =
+::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_ReqSearchOppnent_NFMsgShare_2eproto =
     {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 1, 0, InitDefaultsscc_info_ReqSearchOppnent_NFMsgShare_2eproto}, {
       &scc_info_Ident_NFMsgBase_2eproto.base,}};
 
@@ -833,7 +833,7 @@ static void InitDefaultsscc_info_ReqSendMail_NFMsgShare_2eproto() {
   ::NFMsg::ReqSendMail::InitAsDefaultInstance();
 }
 
-LIBPROTOC_EXPORT ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<3> scc_info_ReqSendMail_NFMsgShare_2eproto =
+::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<3> scc_info_ReqSendMail_NFMsgShare_2eproto =
     {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 3, 0, InitDefaultsscc_info_ReqSendMail_NFMsgShare_2eproto}, {
       &scc_info_Ident_NFMsgBase_2eproto.base,
       &scc_info_ItemStruct_NFMsgShare_2eproto.base,
@@ -850,7 +850,7 @@ static void InitDefaultsscc_info_ReqSetFightHero_NFMsgShare_2eproto() {
   ::NFMsg::ReqSetFightHero::InitAsDefaultInstance();
 }
 
-LIBPROTOC_EXPORT ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_ReqSetFightHero_NFMsgShare_2eproto =
+::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_ReqSetFightHero_NFMsgShare_2eproto =
     {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 1, 0, InitDefaultsscc_info_ReqSetFightHero_NFMsgShare_2eproto}, {
       &scc_info_Ident_NFMsgBase_2eproto.base,}};
 
@@ -865,7 +865,7 @@ static void InitDefaultsscc_info_ReqStoreSceneBuildings_NFMsgShare_2eproto() {
   ::NFMsg::ReqStoreSceneBuildings::InitAsDefaultInstance();
 }
 
-LIBPROTOC_EXPORT ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<2> scc_info_ReqStoreSceneBuildings_NFMsgShare_2eproto =
+::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<2> scc_info_ReqStoreSceneBuildings_NFMsgShare_2eproto =
     {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 2, 0, InitDefaultsscc_info_ReqStoreSceneBuildings_NFMsgShare_2eproto}, {
       &scc_info_Ident_NFMsgBase_2eproto.base,
       &scc_info_ReqAddSceneBuilding_NFMsgShare_2eproto.base,}};
@@ -881,7 +881,7 @@ static void InitDefaultsscc_info_ReqSwitchFightHero_NFMsgShare_2eproto() {
   ::NFMsg::ReqSwitchFightHero::InitAsDefaultInstance();
 }
 
-LIBPROTOC_EXPORT ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_ReqSwitchFightHero_NFMsgShare_2eproto =
+::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_ReqSwitchFightHero_NFMsgShare_2eproto =
     {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 1, 0, InitDefaultsscc_info_ReqSwitchFightHero_NFMsgShare_2eproto}, {
       &scc_info_Ident_NFMsgBase_2eproto.base,}};
 
@@ -896,7 +896,7 @@ static void InitDefaultsscc_info_ReqSwitchServer_NFMsgShare_2eproto() {
   ::NFMsg::ReqSwitchServer::InitAsDefaultInstance();
 }
 
-LIBPROTOC_EXPORT ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_ReqSwitchServer_NFMsgShare_2eproto =
+::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_ReqSwitchServer_NFMsgShare_2eproto =
     {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 1, 0, InitDefaultsscc_info_ReqSwitchServer_NFMsgShare_2eproto}, {
       &scc_info_Ident_NFMsgBase_2eproto.base,}};
 

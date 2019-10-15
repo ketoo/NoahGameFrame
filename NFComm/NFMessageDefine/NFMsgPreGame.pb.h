@@ -37,7 +37,7 @@
 #include "NFMsgBase.pb.h"
 // @@protoc_insertion_point(includes)
 #include <google/protobuf/port_def.inc>
-#define PROTOBUF_INTERNAL_EXPORT_NFMsgPreGame_2eproto LIBPROTOC_EXPORT
+#define PROTOBUF_INTERNAL_EXPORT_NFMsgPreGame_2eproto
 PROTOBUF_NAMESPACE_OPEN
 namespace internal {
 class AnyMetadata;
@@ -45,7 +45,7 @@ class AnyMetadata;
 PROTOBUF_NAMESPACE_CLOSE
 
 // Internal implementation detail -- do not use these members.
-struct LIBPROTOC_EXPORT TableStruct_NFMsgPreGame_2eproto {
+struct TableStruct_NFMsgPreGame_2eproto {
   static const ::PROTOBUF_NAMESPACE_ID::internal::ParseTableField entries[]
     PROTOBUF_SECTION_VARIABLE(protodesc_cold);
   static const ::PROTOBUF_NAMESPACE_ID::internal::AuxillaryParseTableField aux[]
@@ -56,98 +56,98 @@ struct LIBPROTOC_EXPORT TableStruct_NFMsgPreGame_2eproto {
   static const ::PROTOBUF_NAMESPACE_ID::internal::SerializationTable serialization_table[];
   static const ::PROTOBUF_NAMESPACE_ID::uint32 offsets[];
 };
-extern LIBPROTOC_EXPORT const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable descriptor_table_NFMsgPreGame_2eproto;
+extern const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable descriptor_table_NFMsgPreGame_2eproto;
 namespace NFMsg {
 class AckConnectWorldResult;
 class AckConnectWorldResultDefaultTypeInternal;
-LIBPROTOC_EXPORT extern AckConnectWorldResultDefaultTypeInternal _AckConnectWorldResult_default_instance_;
+extern AckConnectWorldResultDefaultTypeInternal _AckConnectWorldResult_default_instance_;
 class AckEventResult;
 class AckEventResultDefaultTypeInternal;
-LIBPROTOC_EXPORT extern AckEventResultDefaultTypeInternal _AckEventResult_default_instance_;
+extern AckEventResultDefaultTypeInternal _AckEventResult_default_instance_;
 class AckRoleLiteInfoList;
 class AckRoleLiteInfoListDefaultTypeInternal;
-LIBPROTOC_EXPORT extern AckRoleLiteInfoListDefaultTypeInternal _AckRoleLiteInfoList_default_instance_;
+extern AckRoleLiteInfoListDefaultTypeInternal _AckRoleLiteInfoList_default_instance_;
 class AckServerList;
 class AckServerListDefaultTypeInternal;
-LIBPROTOC_EXPORT extern AckServerListDefaultTypeInternal _AckServerList_default_instance_;
+extern AckServerListDefaultTypeInternal _AckServerList_default_instance_;
 class ReqAccountLogin;
 class ReqAccountLoginDefaultTypeInternal;
-LIBPROTOC_EXPORT extern ReqAccountLoginDefaultTypeInternal _ReqAccountLogin_default_instance_;
+extern ReqAccountLoginDefaultTypeInternal _ReqAccountLogin_default_instance_;
 class ReqAccountLogout;
 class ReqAccountLogoutDefaultTypeInternal;
-LIBPROTOC_EXPORT extern ReqAccountLogoutDefaultTypeInternal _ReqAccountLogout_default_instance_;
+extern ReqAccountLogoutDefaultTypeInternal _ReqAccountLogout_default_instance_;
 class ReqConnectWorld;
 class ReqConnectWorldDefaultTypeInternal;
-LIBPROTOC_EXPORT extern ReqConnectWorldDefaultTypeInternal _ReqConnectWorld_default_instance_;
+extern ReqConnectWorldDefaultTypeInternal _ReqConnectWorld_default_instance_;
 class ReqCreateRole;
 class ReqCreateRoleDefaultTypeInternal;
-LIBPROTOC_EXPORT extern ReqCreateRoleDefaultTypeInternal _ReqCreateRole_default_instance_;
+extern ReqCreateRoleDefaultTypeInternal _ReqCreateRole_default_instance_;
 class ReqDeleteRole;
 class ReqDeleteRoleDefaultTypeInternal;
-LIBPROTOC_EXPORT extern ReqDeleteRoleDefaultTypeInternal _ReqDeleteRole_default_instance_;
+extern ReqDeleteRoleDefaultTypeInternal _ReqDeleteRole_default_instance_;
 class ReqKickFromWorld;
 class ReqKickFromWorldDefaultTypeInternal;
-LIBPROTOC_EXPORT extern ReqKickFromWorldDefaultTypeInternal _ReqKickFromWorld_default_instance_;
+extern ReqKickFromWorldDefaultTypeInternal _ReqKickFromWorld_default_instance_;
 class ReqRecoverRole;
 class ReqRecoverRoleDefaultTypeInternal;
-LIBPROTOC_EXPORT extern ReqRecoverRoleDefaultTypeInternal _ReqRecoverRole_default_instance_;
+extern ReqRecoverRoleDefaultTypeInternal _ReqRecoverRole_default_instance_;
 class ReqRoleList;
 class ReqRoleListDefaultTypeInternal;
-LIBPROTOC_EXPORT extern ReqRoleListDefaultTypeInternal _ReqRoleList_default_instance_;
+extern ReqRoleListDefaultTypeInternal _ReqRoleList_default_instance_;
 class ReqSelectServer;
 class ReqSelectServerDefaultTypeInternal;
-LIBPROTOC_EXPORT extern ReqSelectServerDefaultTypeInternal _ReqSelectServer_default_instance_;
+extern ReqSelectServerDefaultTypeInternal _ReqSelectServer_default_instance_;
 class ReqServerList;
 class ReqServerListDefaultTypeInternal;
-LIBPROTOC_EXPORT extern ReqServerListDefaultTypeInternal _ReqServerList_default_instance_;
+extern ReqServerListDefaultTypeInternal _ReqServerList_default_instance_;
 class RoleDataPack;
 class RoleDataPackDefaultTypeInternal;
-LIBPROTOC_EXPORT extern RoleDataPackDefaultTypeInternal _RoleDataPack_default_instance_;
+extern RoleDataPackDefaultTypeInternal _RoleDataPack_default_instance_;
 class RoleLiteInfo;
 class RoleLiteInfoDefaultTypeInternal;
-LIBPROTOC_EXPORT extern RoleLiteInfoDefaultTypeInternal _RoleLiteInfo_default_instance_;
+extern RoleLiteInfoDefaultTypeInternal _RoleLiteInfo_default_instance_;
 class RoleOfflineNotify;
 class RoleOfflineNotifyDefaultTypeInternal;
-LIBPROTOC_EXPORT extern RoleOfflineNotifyDefaultTypeInternal _RoleOfflineNotify_default_instance_;
+extern RoleOfflineNotifyDefaultTypeInternal _RoleOfflineNotify_default_instance_;
 class RoleOnlineNotify;
 class RoleOnlineNotifyDefaultTypeInternal;
-LIBPROTOC_EXPORT extern RoleOnlineNotifyDefaultTypeInternal _RoleOnlineNotify_default_instance_;
+extern RoleOnlineNotifyDefaultTypeInternal _RoleOnlineNotify_default_instance_;
 class ServerHeartBeat;
 class ServerHeartBeatDefaultTypeInternal;
-LIBPROTOC_EXPORT extern ServerHeartBeatDefaultTypeInternal _ServerHeartBeat_default_instance_;
+extern ServerHeartBeatDefaultTypeInternal _ServerHeartBeat_default_instance_;
 class ServerInfo;
 class ServerInfoDefaultTypeInternal;
-LIBPROTOC_EXPORT extern ServerInfoDefaultTypeInternal _ServerInfo_default_instance_;
+extern ServerInfoDefaultTypeInternal _ServerInfo_default_instance_;
 class ServerInfoReport;
 class ServerInfoReportDefaultTypeInternal;
-LIBPROTOC_EXPORT extern ServerInfoReportDefaultTypeInternal _ServerInfoReport_default_instance_;
+extern ServerInfoReportDefaultTypeInternal _ServerInfoReport_default_instance_;
 class ServerInfoReportList;
 class ServerInfoReportListDefaultTypeInternal;
-LIBPROTOC_EXPORT extern ServerInfoReportListDefaultTypeInternal _ServerInfoReportList_default_instance_;
+extern ServerInfoReportListDefaultTypeInternal _ServerInfoReportList_default_instance_;
 }  // namespace NFMsg
 PROTOBUF_NAMESPACE_OPEN
-template<> LIBPROTOC_EXPORT ::NFMsg::AckConnectWorldResult* Arena::CreateMaybeMessage<::NFMsg::AckConnectWorldResult>(Arena*);
-template<> LIBPROTOC_EXPORT ::NFMsg::AckEventResult* Arena::CreateMaybeMessage<::NFMsg::AckEventResult>(Arena*);
-template<> LIBPROTOC_EXPORT ::NFMsg::AckRoleLiteInfoList* Arena::CreateMaybeMessage<::NFMsg::AckRoleLiteInfoList>(Arena*);
-template<> LIBPROTOC_EXPORT ::NFMsg::AckServerList* Arena::CreateMaybeMessage<::NFMsg::AckServerList>(Arena*);
-template<> LIBPROTOC_EXPORT ::NFMsg::ReqAccountLogin* Arena::CreateMaybeMessage<::NFMsg::ReqAccountLogin>(Arena*);
-template<> LIBPROTOC_EXPORT ::NFMsg::ReqAccountLogout* Arena::CreateMaybeMessage<::NFMsg::ReqAccountLogout>(Arena*);
-template<> LIBPROTOC_EXPORT ::NFMsg::ReqConnectWorld* Arena::CreateMaybeMessage<::NFMsg::ReqConnectWorld>(Arena*);
-template<> LIBPROTOC_EXPORT ::NFMsg::ReqCreateRole* Arena::CreateMaybeMessage<::NFMsg::ReqCreateRole>(Arena*);
-template<> LIBPROTOC_EXPORT ::NFMsg::ReqDeleteRole* Arena::CreateMaybeMessage<::NFMsg::ReqDeleteRole>(Arena*);
-template<> LIBPROTOC_EXPORT ::NFMsg::ReqKickFromWorld* Arena::CreateMaybeMessage<::NFMsg::ReqKickFromWorld>(Arena*);
-template<> LIBPROTOC_EXPORT ::NFMsg::ReqRecoverRole* Arena::CreateMaybeMessage<::NFMsg::ReqRecoverRole>(Arena*);
-template<> LIBPROTOC_EXPORT ::NFMsg::ReqRoleList* Arena::CreateMaybeMessage<::NFMsg::ReqRoleList>(Arena*);
-template<> LIBPROTOC_EXPORT ::NFMsg::ReqSelectServer* Arena::CreateMaybeMessage<::NFMsg::ReqSelectServer>(Arena*);
-template<> LIBPROTOC_EXPORT ::NFMsg::ReqServerList* Arena::CreateMaybeMessage<::NFMsg::ReqServerList>(Arena*);
-template<> LIBPROTOC_EXPORT ::NFMsg::RoleDataPack* Arena::CreateMaybeMessage<::NFMsg::RoleDataPack>(Arena*);
-template<> LIBPROTOC_EXPORT ::NFMsg::RoleLiteInfo* Arena::CreateMaybeMessage<::NFMsg::RoleLiteInfo>(Arena*);
-template<> LIBPROTOC_EXPORT ::NFMsg::RoleOfflineNotify* Arena::CreateMaybeMessage<::NFMsg::RoleOfflineNotify>(Arena*);
-template<> LIBPROTOC_EXPORT ::NFMsg::RoleOnlineNotify* Arena::CreateMaybeMessage<::NFMsg::RoleOnlineNotify>(Arena*);
-template<> LIBPROTOC_EXPORT ::NFMsg::ServerHeartBeat* Arena::CreateMaybeMessage<::NFMsg::ServerHeartBeat>(Arena*);
-template<> LIBPROTOC_EXPORT ::NFMsg::ServerInfo* Arena::CreateMaybeMessage<::NFMsg::ServerInfo>(Arena*);
-template<> LIBPROTOC_EXPORT ::NFMsg::ServerInfoReport* Arena::CreateMaybeMessage<::NFMsg::ServerInfoReport>(Arena*);
-template<> LIBPROTOC_EXPORT ::NFMsg::ServerInfoReportList* Arena::CreateMaybeMessage<::NFMsg::ServerInfoReportList>(Arena*);
+template<> ::NFMsg::AckConnectWorldResult* Arena::CreateMaybeMessage<::NFMsg::AckConnectWorldResult>(Arena*);
+template<> ::NFMsg::AckEventResult* Arena::CreateMaybeMessage<::NFMsg::AckEventResult>(Arena*);
+template<> ::NFMsg::AckRoleLiteInfoList* Arena::CreateMaybeMessage<::NFMsg::AckRoleLiteInfoList>(Arena*);
+template<> ::NFMsg::AckServerList* Arena::CreateMaybeMessage<::NFMsg::AckServerList>(Arena*);
+template<> ::NFMsg::ReqAccountLogin* Arena::CreateMaybeMessage<::NFMsg::ReqAccountLogin>(Arena*);
+template<> ::NFMsg::ReqAccountLogout* Arena::CreateMaybeMessage<::NFMsg::ReqAccountLogout>(Arena*);
+template<> ::NFMsg::ReqConnectWorld* Arena::CreateMaybeMessage<::NFMsg::ReqConnectWorld>(Arena*);
+template<> ::NFMsg::ReqCreateRole* Arena::CreateMaybeMessage<::NFMsg::ReqCreateRole>(Arena*);
+template<> ::NFMsg::ReqDeleteRole* Arena::CreateMaybeMessage<::NFMsg::ReqDeleteRole>(Arena*);
+template<> ::NFMsg::ReqKickFromWorld* Arena::CreateMaybeMessage<::NFMsg::ReqKickFromWorld>(Arena*);
+template<> ::NFMsg::ReqRecoverRole* Arena::CreateMaybeMessage<::NFMsg::ReqRecoverRole>(Arena*);
+template<> ::NFMsg::ReqRoleList* Arena::CreateMaybeMessage<::NFMsg::ReqRoleList>(Arena*);
+template<> ::NFMsg::ReqSelectServer* Arena::CreateMaybeMessage<::NFMsg::ReqSelectServer>(Arena*);
+template<> ::NFMsg::ReqServerList* Arena::CreateMaybeMessage<::NFMsg::ReqServerList>(Arena*);
+template<> ::NFMsg::RoleDataPack* Arena::CreateMaybeMessage<::NFMsg::RoleDataPack>(Arena*);
+template<> ::NFMsg::RoleLiteInfo* Arena::CreateMaybeMessage<::NFMsg::RoleLiteInfo>(Arena*);
+template<> ::NFMsg::RoleOfflineNotify* Arena::CreateMaybeMessage<::NFMsg::RoleOfflineNotify>(Arena*);
+template<> ::NFMsg::RoleOnlineNotify* Arena::CreateMaybeMessage<::NFMsg::RoleOnlineNotify>(Arena*);
+template<> ::NFMsg::ServerHeartBeat* Arena::CreateMaybeMessage<::NFMsg::ServerHeartBeat>(Arena*);
+template<> ::NFMsg::ServerInfo* Arena::CreateMaybeMessage<::NFMsg::ServerInfo>(Arena*);
+template<> ::NFMsg::ServerInfoReport* Arena::CreateMaybeMessage<::NFMsg::ServerInfoReport>(Arena*);
+template<> ::NFMsg::ServerInfoReportList* Arena::CreateMaybeMessage<::NFMsg::ServerInfoReportList>(Arena*);
 PROTOBUF_NAMESPACE_CLOSE
 namespace NFMsg {
 
@@ -160,12 +160,12 @@ enum EServerState : int {
   EServerState_INT_MIN_SENTINEL_DO_NOT_USE_ = std::numeric_limits<::PROTOBUF_NAMESPACE_ID::int32>::min(),
   EServerState_INT_MAX_SENTINEL_DO_NOT_USE_ = std::numeric_limits<::PROTOBUF_NAMESPACE_ID::int32>::max()
 };
-LIBPROTOC_EXPORT bool EServerState_IsValid(int value);
+bool EServerState_IsValid(int value);
 constexpr EServerState EServerState_MIN = EST_CRASH;
 constexpr EServerState EServerState_MAX = EST_MAINTEN;
 constexpr int EServerState_ARRAYSIZE = EServerState_MAX + 1;
 
-LIBPROTOC_EXPORT const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor* EServerState_descriptor();
+const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor* EServerState_descriptor();
 template<typename T>
 inline const std::string& EServerState_Name(T enum_t_value) {
   static_assert(::std::is_same<T, EServerState>::value ||
@@ -186,12 +186,12 @@ enum ELoginMode : int {
   ELoginMode_INT_MIN_SENTINEL_DO_NOT_USE_ = std::numeric_limits<::PROTOBUF_NAMESPACE_ID::int32>::min(),
   ELoginMode_INT_MAX_SENTINEL_DO_NOT_USE_ = std::numeric_limits<::PROTOBUF_NAMESPACE_ID::int32>::max()
 };
-LIBPROTOC_EXPORT bool ELoginMode_IsValid(int value);
+bool ELoginMode_IsValid(int value);
 constexpr ELoginMode ELoginMode_MIN = ELM_LOGIN;
 constexpr ELoginMode ELoginMode_MAX = ELM_AUTO_REGISTER_LOGIN;
 constexpr int ELoginMode_ARRAYSIZE = ELoginMode_MAX + 1;
 
-LIBPROTOC_EXPORT const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor* ELoginMode_descriptor();
+const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor* ELoginMode_descriptor();
 template<typename T>
 inline const std::string& ELoginMode_Name(T enum_t_value) {
   static_assert(::std::is_same<T, ELoginMode>::value ||
@@ -211,12 +211,12 @@ enum ReqServerListType : int {
   ReqServerListType_INT_MIN_SENTINEL_DO_NOT_USE_ = std::numeric_limits<::PROTOBUF_NAMESPACE_ID::int32>::min(),
   ReqServerListType_INT_MAX_SENTINEL_DO_NOT_USE_ = std::numeric_limits<::PROTOBUF_NAMESPACE_ID::int32>::max()
 };
-LIBPROTOC_EXPORT bool ReqServerListType_IsValid(int value);
+bool ReqServerListType_IsValid(int value);
 constexpr ReqServerListType ReqServerListType_MIN = RSLT_WORLD_SERVER;
 constexpr ReqServerListType ReqServerListType_MAX = RSLT_GAMES_ERVER;
 constexpr int ReqServerListType_ARRAYSIZE = ReqServerListType_MAX + 1;
 
-LIBPROTOC_EXPORT const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor* ReqServerListType_descriptor();
+const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor* ReqServerListType_descriptor();
 template<typename T>
 inline const std::string& ReqServerListType_Name(T enum_t_value) {
   static_assert(::std::is_same<T, ReqServerListType>::value ||
@@ -232,7 +232,7 @@ inline bool ReqServerListType_Parse(
 }
 // ===================================================================
 
-class LIBPROTOC_EXPORT ServerInfoReport :
+class ServerInfoReport :
     public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:NFMsg.ServerInfoReport) */ {
  public:
   ServerInfoReport();
@@ -451,7 +451,7 @@ class LIBPROTOC_EXPORT ServerInfoReport :
 };
 // -------------------------------------------------------------------
 
-class LIBPROTOC_EXPORT ServerInfoReportList :
+class ServerInfoReportList :
     public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:NFMsg.ServerInfoReportList) */ {
  public:
   ServerInfoReportList();
@@ -588,7 +588,7 @@ class LIBPROTOC_EXPORT ServerInfoReportList :
 };
 // -------------------------------------------------------------------
 
-class LIBPROTOC_EXPORT AckEventResult :
+class AckEventResult :
     public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:NFMsg.AckEventResult) */ {
  public:
   AckEventResult();
@@ -750,7 +750,7 @@ class LIBPROTOC_EXPORT AckEventResult :
 };
 // -------------------------------------------------------------------
 
-class LIBPROTOC_EXPORT ReqAccountLogin :
+class ReqAccountLogin :
     public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:NFMsg.ReqAccountLogin) */ {
  public:
   ReqAccountLogin();
@@ -1030,7 +1030,7 @@ class LIBPROTOC_EXPORT ReqAccountLogin :
 };
 // -------------------------------------------------------------------
 
-class LIBPROTOC_EXPORT ReqAccountLogout :
+class ReqAccountLogout :
     public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:NFMsg.ReqAccountLogout) */ {
  public:
   ReqAccountLogout();
@@ -1183,7 +1183,7 @@ class LIBPROTOC_EXPORT ReqAccountLogout :
 };
 // -------------------------------------------------------------------
 
-class LIBPROTOC_EXPORT ServerInfo :
+class ServerInfo :
     public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:NFMsg.ServerInfo) */ {
  public:
   ServerInfo();
@@ -1351,7 +1351,7 @@ class LIBPROTOC_EXPORT ServerInfo :
 };
 // -------------------------------------------------------------------
 
-class LIBPROTOC_EXPORT ReqServerList :
+class ReqServerList :
     public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:NFMsg.ReqServerList) */ {
  public:
   ReqServerList();
@@ -1479,7 +1479,7 @@ class LIBPROTOC_EXPORT ReqServerList :
 };
 // -------------------------------------------------------------------
 
-class LIBPROTOC_EXPORT AckServerList :
+class AckServerList :
     public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:NFMsg.AckServerList) */ {
  public:
   AckServerList();
@@ -1627,7 +1627,7 @@ class LIBPROTOC_EXPORT AckServerList :
 };
 // -------------------------------------------------------------------
 
-class LIBPROTOC_EXPORT ReqConnectWorld :
+class ReqConnectWorld :
     public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:NFMsg.ReqConnectWorld) */ {
  public:
   ReqConnectWorld();
@@ -1801,7 +1801,7 @@ class LIBPROTOC_EXPORT ReqConnectWorld :
 };
 // -------------------------------------------------------------------
 
-class LIBPROTOC_EXPORT AckConnectWorldResult :
+class AckConnectWorldResult :
     public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:NFMsg.AckConnectWorldResult) */ {
  public:
   AckConnectWorldResult();
@@ -2022,7 +2022,7 @@ class LIBPROTOC_EXPORT AckConnectWorldResult :
 };
 // -------------------------------------------------------------------
 
-class LIBPROTOC_EXPORT ReqSelectServer :
+class ReqSelectServer :
     public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:NFMsg.ReqSelectServer) */ {
  public:
   ReqSelectServer();
@@ -2150,7 +2150,7 @@ class LIBPROTOC_EXPORT ReqSelectServer :
 };
 // -------------------------------------------------------------------
 
-class LIBPROTOC_EXPORT ReqKickFromWorld :
+class ReqKickFromWorld :
     public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:NFMsg.ReqKickFromWorld) */ {
  public:
   ReqKickFromWorld();
@@ -2296,7 +2296,7 @@ class LIBPROTOC_EXPORT ReqKickFromWorld :
 };
 // -------------------------------------------------------------------
 
-class LIBPROTOC_EXPORT ReqRoleList :
+class ReqRoleList :
     public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:NFMsg.ReqRoleList) */ {
  public:
   ReqRoleList();
@@ -2442,7 +2442,7 @@ class LIBPROTOC_EXPORT ReqRoleList :
 };
 // -------------------------------------------------------------------
 
-class LIBPROTOC_EXPORT RoleLiteInfo :
+class RoleLiteInfo :
     public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:NFMsg.RoleLiteInfo) */ {
  public:
   RoleLiteInfo();
@@ -2711,7 +2711,7 @@ class LIBPROTOC_EXPORT RoleLiteInfo :
 };
 // -------------------------------------------------------------------
 
-class LIBPROTOC_EXPORT AckRoleLiteInfoList :
+class AckRoleLiteInfoList :
     public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:NFMsg.AckRoleLiteInfoList) */ {
  public:
   AckRoleLiteInfoList();
@@ -2866,7 +2866,7 @@ class LIBPROTOC_EXPORT AckRoleLiteInfoList :
 };
 // -------------------------------------------------------------------
 
-class LIBPROTOC_EXPORT ReqCreateRole :
+class ReqCreateRole :
     public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:NFMsg.ReqCreateRole) */ {
  public:
   ReqCreateRole();
@@ -3063,7 +3063,7 @@ class LIBPROTOC_EXPORT ReqCreateRole :
 };
 // -------------------------------------------------------------------
 
-class LIBPROTOC_EXPORT ReqDeleteRole :
+class ReqDeleteRole :
     public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:NFMsg.ReqDeleteRole) */ {
  public:
   ReqDeleteRole();
@@ -3227,7 +3227,7 @@ class LIBPROTOC_EXPORT ReqDeleteRole :
 };
 // -------------------------------------------------------------------
 
-class LIBPROTOC_EXPORT ReqRecoverRole :
+class ReqRecoverRole :
     public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:NFMsg.ReqRecoverRole) */ {
  public:
   ReqRecoverRole();
@@ -3391,7 +3391,7 @@ class LIBPROTOC_EXPORT ReqRecoverRole :
 };
 // -------------------------------------------------------------------
 
-class LIBPROTOC_EXPORT ServerHeartBeat :
+class ServerHeartBeat :
     public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:NFMsg.ServerHeartBeat) */ {
  public:
   ServerHeartBeat();
@@ -3519,7 +3519,7 @@ class LIBPROTOC_EXPORT ServerHeartBeat :
 };
 // -------------------------------------------------------------------
 
-class LIBPROTOC_EXPORT RoleOnlineNotify :
+class RoleOnlineNotify :
     public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:NFMsg.RoleOnlineNotify) */ {
  public:
   RoleOnlineNotify();
@@ -3841,7 +3841,7 @@ class LIBPROTOC_EXPORT RoleOnlineNotify :
 };
 // -------------------------------------------------------------------
 
-class LIBPROTOC_EXPORT RoleOfflineNotify :
+class RoleOfflineNotify :
     public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:NFMsg.RoleOfflineNotify) */ {
  public:
   RoleOfflineNotify();
@@ -4014,7 +4014,7 @@ class LIBPROTOC_EXPORT RoleOfflineNotify :
 };
 // -------------------------------------------------------------------
 
-class LIBPROTOC_EXPORT RoleDataPack :
+class RoleDataPack :
     public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:NFMsg.RoleDataPack) */ {
  public:
   RoleDataPack();

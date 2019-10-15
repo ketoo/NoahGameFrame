@@ -35,7 +35,7 @@
 #include "NFMsgBase.pb.h"
 // @@protoc_insertion_point(includes)
 #include <google/protobuf/port_def.inc>
-#define PROTOBUF_INTERNAL_EXPORT_NFMsgFriend_2eproto LIBPROTOC_EXPORT
+#define PROTOBUF_INTERNAL_EXPORT_NFMsgFriend_2eproto
 PROTOBUF_NAMESPACE_OPEN
 namespace internal {
 class AnyMetadata;
@@ -43,7 +43,7 @@ class AnyMetadata;
 PROTOBUF_NAMESPACE_CLOSE
 
 // Internal implementation detail -- do not use these members.
-struct LIBPROTOC_EXPORT TableStruct_NFMsgFriend_2eproto {
+struct TableStruct_NFMsgFriend_2eproto {
   static const ::PROTOBUF_NAMESPACE_ID::internal::ParseTableField entries[]
     PROTOBUF_SECTION_VARIABLE(protodesc_cold);
   static const ::PROTOBUF_NAMESPACE_ID::internal::AuxillaryParseTableField aux[]
@@ -54,52 +54,52 @@ struct LIBPROTOC_EXPORT TableStruct_NFMsgFriend_2eproto {
   static const ::PROTOBUF_NAMESPACE_ID::internal::SerializationTable serialization_table[];
   static const ::PROTOBUF_NAMESPACE_ID::uint32 offsets[];
 };
-extern LIBPROTOC_EXPORT const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable descriptor_table_NFMsgFriend_2eproto;
+extern const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable descriptor_table_NFMsgFriend_2eproto;
 namespace NFMsg {
 class FriendData;
 class FriendDataDefaultTypeInternal;
-LIBPROTOC_EXPORT extern FriendDataDefaultTypeInternal _FriendData_default_instance_;
+extern FriendDataDefaultTypeInternal _FriendData_default_instance_;
 class ReqAckAcceptInvite;
 class ReqAckAcceptInviteDefaultTypeInternal;
-LIBPROTOC_EXPORT extern ReqAckAcceptInviteDefaultTypeInternal _ReqAckAcceptInvite_default_instance_;
+extern ReqAckAcceptInviteDefaultTypeInternal _ReqAckAcceptInvite_default_instance_;
 class ReqAckBlockPlayer;
 class ReqAckBlockPlayerDefaultTypeInternal;
-LIBPROTOC_EXPORT extern ReqAckBlockPlayerDefaultTypeInternal _ReqAckBlockPlayer_default_instance_;
+extern ReqAckBlockPlayerDefaultTypeInternal _ReqAckBlockPlayer_default_instance_;
 class ReqAckDeleteFriend;
 class ReqAckDeleteFriendDefaultTypeInternal;
-LIBPROTOC_EXPORT extern ReqAckDeleteFriendDefaultTypeInternal _ReqAckDeleteFriend_default_instance_;
+extern ReqAckDeleteFriendDefaultTypeInternal _ReqAckDeleteFriend_default_instance_;
 class ReqAckFriendList;
 class ReqAckFriendListDefaultTypeInternal;
-LIBPROTOC_EXPORT extern ReqAckFriendListDefaultTypeInternal _ReqAckFriendList_default_instance_;
+extern ReqAckFriendListDefaultTypeInternal _ReqAckFriendList_default_instance_;
 class ReqAckIgnoreInvite;
 class ReqAckIgnoreInviteDefaultTypeInternal;
-LIBPROTOC_EXPORT extern ReqAckIgnoreInviteDefaultTypeInternal _ReqAckIgnoreInvite_default_instance_;
+extern ReqAckIgnoreInviteDefaultTypeInternal _ReqAckIgnoreInvite_default_instance_;
 class ReqAckRejectInvite;
 class ReqAckRejectInviteDefaultTypeInternal;
-LIBPROTOC_EXPORT extern ReqAckRejectInviteDefaultTypeInternal _ReqAckRejectInvite_default_instance_;
+extern ReqAckRejectInviteDefaultTypeInternal _ReqAckRejectInvite_default_instance_;
 class ReqAckSendInvite;
 class ReqAckSendInviteDefaultTypeInternal;
-LIBPROTOC_EXPORT extern ReqAckSendInviteDefaultTypeInternal _ReqAckSendInvite_default_instance_;
+extern ReqAckSendInviteDefaultTypeInternal _ReqAckSendInvite_default_instance_;
 class ReqAckUnBlockPlayer;
 class ReqAckUnBlockPlayerDefaultTypeInternal;
-LIBPROTOC_EXPORT extern ReqAckUnBlockPlayerDefaultTypeInternal _ReqAckUnBlockPlayer_default_instance_;
+extern ReqAckUnBlockPlayerDefaultTypeInternal _ReqAckUnBlockPlayer_default_instance_;
 }  // namespace NFMsg
 PROTOBUF_NAMESPACE_OPEN
-template<> LIBPROTOC_EXPORT ::NFMsg::FriendData* Arena::CreateMaybeMessage<::NFMsg::FriendData>(Arena*);
-template<> LIBPROTOC_EXPORT ::NFMsg::ReqAckAcceptInvite* Arena::CreateMaybeMessage<::NFMsg::ReqAckAcceptInvite>(Arena*);
-template<> LIBPROTOC_EXPORT ::NFMsg::ReqAckBlockPlayer* Arena::CreateMaybeMessage<::NFMsg::ReqAckBlockPlayer>(Arena*);
-template<> LIBPROTOC_EXPORT ::NFMsg::ReqAckDeleteFriend* Arena::CreateMaybeMessage<::NFMsg::ReqAckDeleteFriend>(Arena*);
-template<> LIBPROTOC_EXPORT ::NFMsg::ReqAckFriendList* Arena::CreateMaybeMessage<::NFMsg::ReqAckFriendList>(Arena*);
-template<> LIBPROTOC_EXPORT ::NFMsg::ReqAckIgnoreInvite* Arena::CreateMaybeMessage<::NFMsg::ReqAckIgnoreInvite>(Arena*);
-template<> LIBPROTOC_EXPORT ::NFMsg::ReqAckRejectInvite* Arena::CreateMaybeMessage<::NFMsg::ReqAckRejectInvite>(Arena*);
-template<> LIBPROTOC_EXPORT ::NFMsg::ReqAckSendInvite* Arena::CreateMaybeMessage<::NFMsg::ReqAckSendInvite>(Arena*);
-template<> LIBPROTOC_EXPORT ::NFMsg::ReqAckUnBlockPlayer* Arena::CreateMaybeMessage<::NFMsg::ReqAckUnBlockPlayer>(Arena*);
+template<> ::NFMsg::FriendData* Arena::CreateMaybeMessage<::NFMsg::FriendData>(Arena*);
+template<> ::NFMsg::ReqAckAcceptInvite* Arena::CreateMaybeMessage<::NFMsg::ReqAckAcceptInvite>(Arena*);
+template<> ::NFMsg::ReqAckBlockPlayer* Arena::CreateMaybeMessage<::NFMsg::ReqAckBlockPlayer>(Arena*);
+template<> ::NFMsg::ReqAckDeleteFriend* Arena::CreateMaybeMessage<::NFMsg::ReqAckDeleteFriend>(Arena*);
+template<> ::NFMsg::ReqAckFriendList* Arena::CreateMaybeMessage<::NFMsg::ReqAckFriendList>(Arena*);
+template<> ::NFMsg::ReqAckIgnoreInvite* Arena::CreateMaybeMessage<::NFMsg::ReqAckIgnoreInvite>(Arena*);
+template<> ::NFMsg::ReqAckRejectInvite* Arena::CreateMaybeMessage<::NFMsg::ReqAckRejectInvite>(Arena*);
+template<> ::NFMsg::ReqAckSendInvite* Arena::CreateMaybeMessage<::NFMsg::ReqAckSendInvite>(Arena*);
+template<> ::NFMsg::ReqAckUnBlockPlayer* Arena::CreateMaybeMessage<::NFMsg::ReqAckUnBlockPlayer>(Arena*);
 PROTOBUF_NAMESPACE_CLOSE
 namespace NFMsg {
 
 // ===================================================================
 
-class LIBPROTOC_EXPORT FriendData :
+class FriendData :
     public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:NFMsg.FriendData) */ {
  public:
   FriendData();
@@ -251,7 +251,7 @@ class LIBPROTOC_EXPORT FriendData :
 };
 // -------------------------------------------------------------------
 
-class LIBPROTOC_EXPORT ReqAckFriendList :
+class ReqAckFriendList :
     public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:NFMsg.ReqAckFriendList) */ {
  public:
   ReqAckFriendList();
@@ -408,7 +408,7 @@ class LIBPROTOC_EXPORT ReqAckFriendList :
 };
 // -------------------------------------------------------------------
 
-class LIBPROTOC_EXPORT ReqAckDeleteFriend :
+class ReqAckDeleteFriend :
     public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:NFMsg.ReqAckDeleteFriend) */ {
  public:
   ReqAckDeleteFriend();
@@ -542,7 +542,7 @@ class LIBPROTOC_EXPORT ReqAckDeleteFriend :
 };
 // -------------------------------------------------------------------
 
-class LIBPROTOC_EXPORT ReqAckSendInvite :
+class ReqAckSendInvite :
     public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:NFMsg.ReqAckSendInvite) */ {
  public:
   ReqAckSendInvite();
@@ -694,7 +694,7 @@ class LIBPROTOC_EXPORT ReqAckSendInvite :
 };
 // -------------------------------------------------------------------
 
-class LIBPROTOC_EXPORT ReqAckAcceptInvite :
+class ReqAckAcceptInvite :
     public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:NFMsg.ReqAckAcceptInvite) */ {
  public:
   ReqAckAcceptInvite();
@@ -828,7 +828,7 @@ class LIBPROTOC_EXPORT ReqAckAcceptInvite :
 };
 // -------------------------------------------------------------------
 
-class LIBPROTOC_EXPORT ReqAckRejectInvite :
+class ReqAckRejectInvite :
     public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:NFMsg.ReqAckRejectInvite) */ {
  public:
   ReqAckRejectInvite();
@@ -962,7 +962,7 @@ class LIBPROTOC_EXPORT ReqAckRejectInvite :
 };
 // -------------------------------------------------------------------
 
-class LIBPROTOC_EXPORT ReqAckIgnoreInvite :
+class ReqAckIgnoreInvite :
     public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:NFMsg.ReqAckIgnoreInvite) */ {
  public:
   ReqAckIgnoreInvite();
@@ -1096,7 +1096,7 @@ class LIBPROTOC_EXPORT ReqAckIgnoreInvite :
 };
 // -------------------------------------------------------------------
 
-class LIBPROTOC_EXPORT ReqAckBlockPlayer :
+class ReqAckBlockPlayer :
     public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:NFMsg.ReqAckBlockPlayer) */ {
  public:
   ReqAckBlockPlayer();
@@ -1230,7 +1230,7 @@ class LIBPROTOC_EXPORT ReqAckBlockPlayer :
 };
 // -------------------------------------------------------------------
 
-class LIBPROTOC_EXPORT ReqAckUnBlockPlayer :
+class ReqAckUnBlockPlayer :
     public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:NFMsg.ReqAckUnBlockPlayer) */ {
  public:
   ReqAckUnBlockPlayer();

@@ -113,7 +113,7 @@ static void InitDefaultsscc_info_AckBigMapGridInfo_NFMsgExtra_2eproto() {
   ::NFMsg::AckBigMapGridInfo::InitAsDefaultInstance();
 }
 
-LIBPROTOC_EXPORT ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_AckBigMapGridInfo_NFMsgExtra_2eproto =
+::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_AckBigMapGridInfo_NFMsgExtra_2eproto =
     {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 1, 0, InitDefaultsscc_info_AckBigMapGridInfo_NFMsgExtra_2eproto}, {
       &scc_info_BigMapGridDetailInfo_NFMsgExtra_2eproto.base,}};
 
@@ -128,7 +128,7 @@ static void InitDefaultsscc_info_AckBigMapInfo_NFMsgExtra_2eproto() {
   ::NFMsg::AckBigMapInfo::InitAsDefaultInstance();
 }
 
-LIBPROTOC_EXPORT ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_AckBigMapInfo_NFMsgExtra_2eproto =
+::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_AckBigMapInfo_NFMsgExtra_2eproto =
     {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 1, 0, InitDefaultsscc_info_AckBigMapInfo_NFMsgExtra_2eproto}, {
       &scc_info_BigMapGridBaseInfo_NFMsgExtra_2eproto.base,}};
 
@@ -143,7 +143,7 @@ static void InitDefaultsscc_info_AckGetMapAward_NFMsgExtra_2eproto() {
   ::NFMsg::AckGetMapAward::InitAsDefaultInstance();
 }
 
-LIBPROTOC_EXPORT ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_AckGetMapAward_NFMsgExtra_2eproto =
+::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_AckGetMapAward_NFMsgExtra_2eproto =
     {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 0, 0, InitDefaultsscc_info_AckGetMapAward_NFMsgExtra_2eproto}, {}};
 
 static void InitDefaultsscc_info_AckHoldMapGrid_NFMsgExtra_2eproto() {
@@ -157,7 +157,7 @@ static void InitDefaultsscc_info_AckHoldMapGrid_NFMsgExtra_2eproto() {
   ::NFMsg::AckHoldMapGrid::InitAsDefaultInstance();
 }
 
-LIBPROTOC_EXPORT ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_AckHoldMapGrid_NFMsgExtra_2eproto =
+::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_AckHoldMapGrid_NFMsgExtra_2eproto =
     {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 0, 0, InitDefaultsscc_info_AckHoldMapGrid_NFMsgExtra_2eproto}, {}};
 
 static void InitDefaultsscc_info_AckLeaveMapMsg_NFMsgExtra_2eproto() {
@@ -171,7 +171,7 @@ static void InitDefaultsscc_info_AckLeaveMapMsg_NFMsgExtra_2eproto() {
   ::NFMsg::AckLeaveMapMsg::InitAsDefaultInstance();
 }
 
-LIBPROTOC_EXPORT ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_AckLeaveMapMsg_NFMsgExtra_2eproto =
+::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_AckLeaveMapMsg_NFMsgExtra_2eproto =
     {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 0, 0, InitDefaultsscc_info_AckLeaveMapMsg_NFMsgExtra_2eproto}, {}};
 
 static void InitDefaultsscc_info_AckMapHunting_NFMsgExtra_2eproto() {
@@ -185,7 +185,7 @@ static void InitDefaultsscc_info_AckMapHunting_NFMsgExtra_2eproto() {
   ::NFMsg::AckMapHunting::InitAsDefaultInstance();
 }
 
-LIBPROTOC_EXPORT ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_AckMapHunting_NFMsgExtra_2eproto =
+::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_AckMapHunting_NFMsgExtra_2eproto =
     {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 0, 0, InitDefaultsscc_info_AckMapHunting_NFMsgExtra_2eproto}, {}};
 
 static void InitDefaultsscc_info_AckMapKingWar_NFMsgExtra_2eproto() {
@@ -199,7 +199,7 @@ static void InitDefaultsscc_info_AckMapKingWar_NFMsgExtra_2eproto() {
   ::NFMsg::AckMapKingWar::InitAsDefaultInstance();
 }
 
-LIBPROTOC_EXPORT ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_AckMapKingWar_NFMsgExtra_2eproto =
+::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_AckMapKingWar_NFMsgExtra_2eproto =
     {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 0, 0, InitDefaultsscc_info_AckMapKingWar_NFMsgExtra_2eproto}, {}};
 
 static void InitDefaultsscc_info_BigMapGridBaseInfo_NFMsgExtra_2eproto() {
@@ -213,7 +213,7 @@ static void InitDefaultsscc_info_BigMapGridBaseInfo_NFMsgExtra_2eproto() {
   ::NFMsg::BigMapGridBaseInfo::InitAsDefaultInstance();
 }
 
-LIBPROTOC_EXPORT ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<2> scc_info_BigMapGridBaseInfo_NFMsgExtra_2eproto =
+::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<2> scc_info_BigMapGridBaseInfo_NFMsgExtra_2eproto =
     {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 2, 0, InitDefaultsscc_info_BigMapGridBaseInfo_NFMsgExtra_2eproto}, {
       &scc_info_GridClanBaseInfo_NFMsgExtra_2eproto.base,
       &scc_info_Ident_NFMsgBase_2eproto.base,}};
@@ -229,7 +229,7 @@ static void InitDefaultsscc_info_BigMapGridDetailInfo_NFMsgExtra_2eproto() {
   ::NFMsg::BigMapGridDetailInfo::InitAsDefaultInstance();
 }
 
-LIBPROTOC_EXPORT ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<4> scc_info_BigMapGridDetailInfo_NFMsgExtra_2eproto =
+::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<4> scc_info_BigMapGridDetailInfo_NFMsgExtra_2eproto =
     {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 4, 0, InitDefaultsscc_info_BigMapGridDetailInfo_NFMsgExtra_2eproto}, {
       &scc_info_BigMapGridBaseInfo_NFMsgExtra_2eproto.base,
       &scc_info_GridClanBaseInfo_NFMsgExtra_2eproto.base,
@@ -247,7 +247,7 @@ static void InitDefaultsscc_info_BigMapLeaveMsg_NFMsgExtra_2eproto() {
   ::NFMsg::BigMapLeaveMsg::InitAsDefaultInstance();
 }
 
-LIBPROTOC_EXPORT ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_BigMapLeaveMsg_NFMsgExtra_2eproto =
+::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_BigMapLeaveMsg_NFMsgExtra_2eproto =
     {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 1, 0, InitDefaultsscc_info_BigMapLeaveMsg_NFMsgExtra_2eproto}, {
       &scc_info_Ident_NFMsgBase_2eproto.base,}};
 
@@ -262,7 +262,7 @@ static void InitDefaultsscc_info_BigMapWarHistory_NFMsgExtra_2eproto() {
   ::NFMsg::BigMapWarHistory::InitAsDefaultInstance();
 }
 
-LIBPROTOC_EXPORT ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<2> scc_info_BigMapWarHistory_NFMsgExtra_2eproto =
+::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<2> scc_info_BigMapWarHistory_NFMsgExtra_2eproto =
     {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 2, 0, InitDefaultsscc_info_BigMapWarHistory_NFMsgExtra_2eproto}, {
       &scc_info_GridClanBaseInfo_NFMsgExtra_2eproto.base,
       &scc_info_Ident_NFMsgBase_2eproto.base,}};
@@ -278,7 +278,7 @@ static void InitDefaultsscc_info_GridClanBaseInfo_NFMsgExtra_2eproto() {
   ::NFMsg::GridClanBaseInfo::InitAsDefaultInstance();
 }
 
-LIBPROTOC_EXPORT ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_GridClanBaseInfo_NFMsgExtra_2eproto =
+::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_GridClanBaseInfo_NFMsgExtra_2eproto =
     {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 1, 0, InitDefaultsscc_info_GridClanBaseInfo_NFMsgExtra_2eproto}, {
       &scc_info_Ident_NFMsgBase_2eproto.base,}};
 
@@ -293,7 +293,7 @@ static void InitDefaultsscc_info_ReqAIOnwer_NFMsgExtra_2eproto() {
   ::NFMsg::ReqAIOnwer::InitAsDefaultInstance();
 }
 
-LIBPROTOC_EXPORT ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_ReqAIOnwer_NFMsgExtra_2eproto =
+::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_ReqAIOnwer_NFMsgExtra_2eproto =
     {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 1, 0, InitDefaultsscc_info_ReqAIOnwer_NFMsgExtra_2eproto}, {
       &scc_info_Ident_NFMsgBase_2eproto.base,}};
 
@@ -308,7 +308,7 @@ static void InitDefaultsscc_info_ReqBigMapGridInfo_NFMsgExtra_2eproto() {
   ::NFMsg::ReqBigMapGridInfo::InitAsDefaultInstance();
 }
 
-LIBPROTOC_EXPORT ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_ReqBigMapGridInfo_NFMsgExtra_2eproto =
+::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_ReqBigMapGridInfo_NFMsgExtra_2eproto =
     {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 0, 0, InitDefaultsscc_info_ReqBigMapGridInfo_NFMsgExtra_2eproto}, {}};
 
 static void InitDefaultsscc_info_ReqBigMapInfo_NFMsgExtra_2eproto() {
@@ -322,7 +322,7 @@ static void InitDefaultsscc_info_ReqBigMapInfo_NFMsgExtra_2eproto() {
   ::NFMsg::ReqBigMapInfo::InitAsDefaultInstance();
 }
 
-LIBPROTOC_EXPORT ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_ReqBigMapInfo_NFMsgExtra_2eproto =
+::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_ReqBigMapInfo_NFMsgExtra_2eproto =
     {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 0, 0, InitDefaultsscc_info_ReqBigMapInfo_NFMsgExtra_2eproto}, {}};
 
 static void InitDefaultsscc_info_ReqGetMapAward_NFMsgExtra_2eproto() {
@@ -336,7 +336,7 @@ static void InitDefaultsscc_info_ReqGetMapAward_NFMsgExtra_2eproto() {
   ::NFMsg::ReqGetMapAward::InitAsDefaultInstance();
 }
 
-LIBPROTOC_EXPORT ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_ReqGetMapAward_NFMsgExtra_2eproto =
+::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_ReqGetMapAward_NFMsgExtra_2eproto =
     {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 0, 0, InitDefaultsscc_info_ReqGetMapAward_NFMsgExtra_2eproto}, {}};
 
 static void InitDefaultsscc_info_ReqHoldMapGrid_NFMsgExtra_2eproto() {
@@ -350,7 +350,7 @@ static void InitDefaultsscc_info_ReqHoldMapGrid_NFMsgExtra_2eproto() {
   ::NFMsg::ReqHoldMapGrid::InitAsDefaultInstance();
 }
 
-LIBPROTOC_EXPORT ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_ReqHoldMapGrid_NFMsgExtra_2eproto =
+::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_ReqHoldMapGrid_NFMsgExtra_2eproto =
     {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 1, 0, InitDefaultsscc_info_ReqHoldMapGrid_NFMsgExtra_2eproto}, {
       &scc_info_Ident_NFMsgBase_2eproto.base,}};
 
@@ -365,7 +365,7 @@ static void InitDefaultsscc_info_ReqLeaveMapMsg_NFMsgExtra_2eproto() {
   ::NFMsg::ReqLeaveMapMsg::InitAsDefaultInstance();
 }
 
-LIBPROTOC_EXPORT ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_ReqLeaveMapMsg_NFMsgExtra_2eproto =
+::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_ReqLeaveMapMsg_NFMsgExtra_2eproto =
     {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 1, 0, InitDefaultsscc_info_ReqLeaveMapMsg_NFMsgExtra_2eproto}, {
       &scc_info_BigMapLeaveMsg_NFMsgExtra_2eproto.base,}};
 
@@ -380,7 +380,7 @@ static void InitDefaultsscc_info_ReqMapHunting_NFMsgExtra_2eproto() {
   ::NFMsg::ReqMapHunting::InitAsDefaultInstance();
 }
 
-LIBPROTOC_EXPORT ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_ReqMapHunting_NFMsgExtra_2eproto =
+::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_ReqMapHunting_NFMsgExtra_2eproto =
     {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 0, 0, InitDefaultsscc_info_ReqMapHunting_NFMsgExtra_2eproto}, {}};
 
 static void InitDefaultsscc_info_ReqMapKingWar_NFMsgExtra_2eproto() {
@@ -394,7 +394,7 @@ static void InitDefaultsscc_info_ReqMapKingWar_NFMsgExtra_2eproto() {
   ::NFMsg::ReqMapKingWar::InitAsDefaultInstance();
 }
 
-LIBPROTOC_EXPORT ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_ReqMapKingWar_NFMsgExtra_2eproto =
+::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_ReqMapKingWar_NFMsgExtra_2eproto =
     {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 0, 0, InitDefaultsscc_info_ReqMapKingWar_NFMsgExtra_2eproto}, {}};
 
 static ::PROTOBUF_NAMESPACE_ID::Metadata file_level_metadata_NFMsgExtra_2eproto[20];

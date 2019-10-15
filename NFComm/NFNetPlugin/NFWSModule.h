@@ -27,12 +27,8 @@
 #define NF_WS_SERVER_MODULE_H
 
 #include <iostream>
-#include "NFNet.h"
-#include "NFComm/NFCore/NFMapEx.hpp"
-#include "NFComm/NFCore/NFPerformance.hpp"
-#include "NFComm/NFMessageDefine/NFDefine.pb.h"
+#include "NFNetModule.h"
 #include "NFComm/NFPluginModule/NFIWSModule.h"
-#include "NFComm/NFPluginModule/NFILogModule.h"
 
 class NFWSModule: public NFIWSModule
 {

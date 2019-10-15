@@ -37,7 +37,7 @@
 #include "NFMsgBase.pb.h"
 // @@protoc_insertion_point(includes)
 #include <google/protobuf/port_def.inc>
-#define PROTOBUF_INTERNAL_EXPORT_NFMsgShare_2eproto LIBPROTOC_EXPORT
+#define PROTOBUF_INTERNAL_EXPORT_NFMsgShare_2eproto
 PROTOBUF_NAMESPACE_OPEN
 namespace internal {
 class AnyMetadata;
@@ -45,7 +45,7 @@ class AnyMetadata;
 PROTOBUF_NAMESPACE_CLOSE
 
 // Internal implementation detail -- do not use these members.
-struct LIBPROTOC_EXPORT TableStruct_NFMsgShare_2eproto {
+struct TableStruct_NFMsgShare_2eproto {
   static const ::PROTOBUF_NAMESPACE_ID::internal::ParseTableField entries[]
     PROTOBUF_SECTION_VARIABLE(protodesc_cold);
   static const ::PROTOBUF_NAMESPACE_ID::internal::AuxillaryParseTableField aux[]
@@ -56,194 +56,194 @@ struct LIBPROTOC_EXPORT TableStruct_NFMsgShare_2eproto {
   static const ::PROTOBUF_NAMESPACE_ID::internal::SerializationTable serialization_table[];
   static const ::PROTOBUF_NAMESPACE_ID::uint32 offsets[];
 };
-extern LIBPROTOC_EXPORT const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable descriptor_table_NFMsgShare_2eproto;
+extern const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable descriptor_table_NFMsgShare_2eproto;
 namespace NFMsg {
 class AckEndBattle;
 class AckEndBattleDefaultTypeInternal;
-LIBPROTOC_EXPORT extern AckEndBattleDefaultTypeInternal _AckEndBattle_default_instance_;
+extern AckEndBattleDefaultTypeInternal _AckEndBattle_default_instance_;
 class AckPlayerEntryList;
 class AckPlayerEntryListDefaultTypeInternal;
-LIBPROTOC_EXPORT extern AckPlayerEntryListDefaultTypeInternal _AckPlayerEntryList_default_instance_;
+extern AckPlayerEntryListDefaultTypeInternal _AckPlayerEntryList_default_instance_;
 class AckPlayerLeaveList;
 class AckPlayerLeaveListDefaultTypeInternal;
-LIBPROTOC_EXPORT extern AckPlayerLeaveListDefaultTypeInternal _AckPlayerLeaveList_default_instance_;
+extern AckPlayerLeaveListDefaultTypeInternal _AckPlayerLeaveList_default_instance_;
 class AckSceneBuildings;
 class AckSceneBuildingsDefaultTypeInternal;
-LIBPROTOC_EXPORT extern AckSceneBuildingsDefaultTypeInternal _AckSceneBuildings_default_instance_;
+extern AckSceneBuildingsDefaultTypeInternal _AckSceneBuildings_default_instance_;
 class AckSearchClan;
 class AckSearchClanDefaultTypeInternal;
-LIBPROTOC_EXPORT extern AckSearchClanDefaultTypeInternal _AckSearchClan_default_instance_;
+extern AckSearchClanDefaultTypeInternal _AckSearchClan_default_instance_;
 class AckSearchClan_SearchClanObject;
 class AckSearchClan_SearchClanObjectDefaultTypeInternal;
-LIBPROTOC_EXPORT extern AckSearchClan_SearchClanObjectDefaultTypeInternal _AckSearchClan_SearchClanObject_default_instance_;
+extern AckSearchClan_SearchClanObjectDefaultTypeInternal _AckSearchClan_SearchClanObject_default_instance_;
 class AckSearchOppnent;
 class AckSearchOppnentDefaultTypeInternal;
-LIBPROTOC_EXPORT extern AckSearchOppnentDefaultTypeInternal _AckSearchOppnent_default_instance_;
+extern AckSearchOppnentDefaultTypeInternal _AckSearchOppnent_default_instance_;
 class AckSwitchServer;
 class AckSwitchServerDefaultTypeInternal;
-LIBPROTOC_EXPORT extern AckSwitchServerDefaultTypeInternal _AckSwitchServer_default_instance_;
+extern AckSwitchServerDefaultTypeInternal _AckSwitchServer_default_instance_;
 class CurrencyStruct;
 class CurrencyStructDefaultTypeInternal;
-LIBPROTOC_EXPORT extern CurrencyStructDefaultTypeInternal _CurrencyStruct_default_instance_;
+extern CurrencyStructDefaultTypeInternal _CurrencyStruct_default_instance_;
 class EffectData;
 class EffectDataDefaultTypeInternal;
-LIBPROTOC_EXPORT extern EffectDataDefaultTypeInternal _EffectData_default_instance_;
+extern EffectDataDefaultTypeInternal _EffectData_default_instance_;
 class ItemStruct;
 class ItemStructDefaultTypeInternal;
-LIBPROTOC_EXPORT extern ItemStructDefaultTypeInternal _ItemStruct_default_instance_;
+extern ItemStructDefaultTypeInternal _ItemStruct_default_instance_;
 class PVPPlayerInfo;
 class PVPPlayerInfoDefaultTypeInternal;
-LIBPROTOC_EXPORT extern PVPPlayerInfoDefaultTypeInternal _PVPPlayerInfo_default_instance_;
+extern PVPPlayerInfoDefaultTypeInternal _PVPPlayerInfo_default_instance_;
 class PlayerEntryInfo;
 class PlayerEntryInfoDefaultTypeInternal;
-LIBPROTOC_EXPORT extern PlayerEntryInfoDefaultTypeInternal _PlayerEntryInfo_default_instance_;
+extern PlayerEntryInfoDefaultTypeInternal _PlayerEntryInfo_default_instance_;
 class ReqAcceptTask;
 class ReqAcceptTaskDefaultTypeInternal;
-LIBPROTOC_EXPORT extern ReqAcceptTaskDefaultTypeInternal _ReqAcceptTask_default_instance_;
+extern ReqAcceptTaskDefaultTypeInternal _ReqAcceptTask_default_instance_;
 class ReqAckCancelSearch;
 class ReqAckCancelSearchDefaultTypeInternal;
-LIBPROTOC_EXPORT extern ReqAckCancelSearchDefaultTypeInternal _ReqAckCancelSearch_default_instance_;
+extern ReqAckCancelSearchDefaultTypeInternal _ReqAckCancelSearch_default_instance_;
 class ReqAckCreateClan;
 class ReqAckCreateClanDefaultTypeInternal;
-LIBPROTOC_EXPORT extern ReqAckCreateClanDefaultTypeInternal _ReqAckCreateClan_default_instance_;
+extern ReqAckCreateClanDefaultTypeInternal _ReqAckCreateClan_default_instance_;
 class ReqAckEnterGameSuccess;
 class ReqAckEnterGameSuccessDefaultTypeInternal;
-LIBPROTOC_EXPORT extern ReqAckEnterGameSuccessDefaultTypeInternal _ReqAckEnterGameSuccess_default_instance_;
+extern ReqAckEnterGameSuccessDefaultTypeInternal _ReqAckEnterGameSuccess_default_instance_;
 class ReqAckHomeScene;
 class ReqAckHomeSceneDefaultTypeInternal;
-LIBPROTOC_EXPORT extern ReqAckHomeSceneDefaultTypeInternal _ReqAckHomeScene_default_instance_;
+extern ReqAckHomeSceneDefaultTypeInternal _ReqAckHomeScene_default_instance_;
 class ReqAckJoinClan;
 class ReqAckJoinClanDefaultTypeInternal;
-LIBPROTOC_EXPORT extern ReqAckJoinClanDefaultTypeInternal _ReqAckJoinClan_default_instance_;
+extern ReqAckJoinClanDefaultTypeInternal _ReqAckJoinClan_default_instance_;
 class ReqAckLeaveClan;
 class ReqAckLeaveClanDefaultTypeInternal;
-LIBPROTOC_EXPORT extern ReqAckLeaveClanDefaultTypeInternal _ReqAckLeaveClan_default_instance_;
+extern ReqAckLeaveClanDefaultTypeInternal _ReqAckLeaveClan_default_instance_;
 class ReqAckOprClanMember;
 class ReqAckOprClanMemberDefaultTypeInternal;
-LIBPROTOC_EXPORT extern ReqAckOprClanMemberDefaultTypeInternal _ReqAckOprClanMember_default_instance_;
+extern ReqAckOprClanMemberDefaultTypeInternal _ReqAckOprClanMember_default_instance_;
 class ReqAckPlayerChat;
 class ReqAckPlayerChatDefaultTypeInternal;
-LIBPROTOC_EXPORT extern ReqAckPlayerChatDefaultTypeInternal _ReqAckPlayerChat_default_instance_;
+extern ReqAckPlayerChatDefaultTypeInternal _ReqAckPlayerChat_default_instance_;
 class ReqAckPlayerMove;
 class ReqAckPlayerMoveDefaultTypeInternal;
-LIBPROTOC_EXPORT extern ReqAckPlayerMoveDefaultTypeInternal _ReqAckPlayerMove_default_instance_;
+extern ReqAckPlayerMoveDefaultTypeInternal _ReqAckPlayerMove_default_instance_;
 class ReqAckPlayerPosSync;
 class ReqAckPlayerPosSyncDefaultTypeInternal;
-LIBPROTOC_EXPORT extern ReqAckPlayerPosSyncDefaultTypeInternal _ReqAckPlayerPosSync_default_instance_;
+extern ReqAckPlayerPosSyncDefaultTypeInternal _ReqAckPlayerPosSync_default_instance_;
 class ReqAckReliveHero;
 class ReqAckReliveHeroDefaultTypeInternal;
-LIBPROTOC_EXPORT extern ReqAckReliveHeroDefaultTypeInternal _ReqAckReliveHero_default_instance_;
+extern ReqAckReliveHeroDefaultTypeInternal _ReqAckReliveHero_default_instance_;
 class ReqAckSwapScene;
 class ReqAckSwapSceneDefaultTypeInternal;
-LIBPROTOC_EXPORT extern ReqAckSwapSceneDefaultTypeInternal _ReqAckSwapScene_default_instance_;
+extern ReqAckSwapSceneDefaultTypeInternal _ReqAckSwapScene_default_instance_;
 class ReqAckSynData;
 class ReqAckSynDataDefaultTypeInternal;
-LIBPROTOC_EXPORT extern ReqAckSynDataDefaultTypeInternal _ReqAckSynData_default_instance_;
+extern ReqAckSynDataDefaultTypeInternal _ReqAckSynData_default_instance_;
 class ReqAckUseItem;
 class ReqAckUseItemDefaultTypeInternal;
-LIBPROTOC_EXPORT extern ReqAckUseItemDefaultTypeInternal _ReqAckUseItem_default_instance_;
+extern ReqAckUseItemDefaultTypeInternal _ReqAckUseItem_default_instance_;
 class ReqAckUseSkill;
 class ReqAckUseSkillDefaultTypeInternal;
-LIBPROTOC_EXPORT extern ReqAckUseSkillDefaultTypeInternal _ReqAckUseSkill_default_instance_;
+extern ReqAckUseSkillDefaultTypeInternal _ReqAckUseSkill_default_instance_;
 class ReqAddSceneBuilding;
 class ReqAddSceneBuildingDefaultTypeInternal;
-LIBPROTOC_EXPORT extern ReqAddSceneBuildingDefaultTypeInternal _ReqAddSceneBuilding_default_instance_;
+extern ReqAddSceneBuildingDefaultTypeInternal _ReqAddSceneBuilding_default_instance_;
 class ReqBuyItemFromShop;
 class ReqBuyItemFromShopDefaultTypeInternal;
-LIBPROTOC_EXPORT extern ReqBuyItemFromShopDefaultTypeInternal _ReqBuyItemFromShop_default_instance_;
+extern ReqBuyItemFromShopDefaultTypeInternal _ReqBuyItemFromShop_default_instance_;
 class ReqCompeleteTask;
 class ReqCompeleteTaskDefaultTypeInternal;
-LIBPROTOC_EXPORT extern ReqCompeleteTaskDefaultTypeInternal _ReqCompeleteTask_default_instance_;
+extern ReqCompeleteTaskDefaultTypeInternal _ReqCompeleteTask_default_instance_;
 class ReqEndBattle;
 class ReqEndBattleDefaultTypeInternal;
-LIBPROTOC_EXPORT extern ReqEndBattleDefaultTypeInternal _ReqEndBattle_default_instance_;
+extern ReqEndBattleDefaultTypeInternal _ReqEndBattle_default_instance_;
 class ReqEnterClanEctype;
 class ReqEnterClanEctypeDefaultTypeInternal;
-LIBPROTOC_EXPORT extern ReqEnterClanEctypeDefaultTypeInternal _ReqEnterClanEctype_default_instance_;
+extern ReqEnterClanEctypeDefaultTypeInternal _ReqEnterClanEctype_default_instance_;
 class ReqEnterGameServer;
 class ReqEnterGameServerDefaultTypeInternal;
-LIBPROTOC_EXPORT extern ReqEnterGameServerDefaultTypeInternal _ReqEnterGameServer_default_instance_;
+extern ReqEnterGameServerDefaultTypeInternal _ReqEnterGameServer_default_instance_;
 class ReqHeartBeat;
 class ReqHeartBeatDefaultTypeInternal;
-LIBPROTOC_EXPORT extern ReqHeartBeatDefaultTypeInternal _ReqHeartBeat_default_instance_;
+extern ReqHeartBeatDefaultTypeInternal _ReqHeartBeat_default_instance_;
 class ReqLeaveGameServer;
 class ReqLeaveGameServerDefaultTypeInternal;
-LIBPROTOC_EXPORT extern ReqLeaveGameServerDefaultTypeInternal _ReqLeaveGameServer_default_instance_;
+extern ReqLeaveGameServerDefaultTypeInternal _ReqLeaveGameServer_default_instance_;
 class ReqPickDropItem;
 class ReqPickDropItemDefaultTypeInternal;
-LIBPROTOC_EXPORT extern ReqPickDropItemDefaultTypeInternal _ReqPickDropItem_default_instance_;
+extern ReqPickDropItemDefaultTypeInternal _ReqPickDropItem_default_instance_;
 class ReqSceneBuildings;
 class ReqSceneBuildingsDefaultTypeInternal;
-LIBPROTOC_EXPORT extern ReqSceneBuildingsDefaultTypeInternal _ReqSceneBuildings_default_instance_;
+extern ReqSceneBuildingsDefaultTypeInternal _ReqSceneBuildings_default_instance_;
 class ReqSearchClan;
 class ReqSearchClanDefaultTypeInternal;
-LIBPROTOC_EXPORT extern ReqSearchClanDefaultTypeInternal _ReqSearchClan_default_instance_;
+extern ReqSearchClanDefaultTypeInternal _ReqSearchClan_default_instance_;
 class ReqSearchOppnent;
 class ReqSearchOppnentDefaultTypeInternal;
-LIBPROTOC_EXPORT extern ReqSearchOppnentDefaultTypeInternal _ReqSearchOppnent_default_instance_;
+extern ReqSearchOppnentDefaultTypeInternal _ReqSearchOppnent_default_instance_;
 class ReqSendMail;
 class ReqSendMailDefaultTypeInternal;
-LIBPROTOC_EXPORT extern ReqSendMailDefaultTypeInternal _ReqSendMail_default_instance_;
+extern ReqSendMailDefaultTypeInternal _ReqSendMail_default_instance_;
 class ReqSetFightHero;
 class ReqSetFightHeroDefaultTypeInternal;
-LIBPROTOC_EXPORT extern ReqSetFightHeroDefaultTypeInternal _ReqSetFightHero_default_instance_;
+extern ReqSetFightHeroDefaultTypeInternal _ReqSetFightHero_default_instance_;
 class ReqStoreSceneBuildings;
 class ReqStoreSceneBuildingsDefaultTypeInternal;
-LIBPROTOC_EXPORT extern ReqStoreSceneBuildingsDefaultTypeInternal _ReqStoreSceneBuildings_default_instance_;
+extern ReqStoreSceneBuildingsDefaultTypeInternal _ReqStoreSceneBuildings_default_instance_;
 class ReqSwitchFightHero;
 class ReqSwitchFightHeroDefaultTypeInternal;
-LIBPROTOC_EXPORT extern ReqSwitchFightHeroDefaultTypeInternal _ReqSwitchFightHero_default_instance_;
+extern ReqSwitchFightHeroDefaultTypeInternal _ReqSwitchFightHero_default_instance_;
 class ReqSwitchServer;
 class ReqSwitchServerDefaultTypeInternal;
-LIBPROTOC_EXPORT extern ReqSwitchServerDefaultTypeInternal _ReqSwitchServer_default_instance_;
+extern ReqSwitchServerDefaultTypeInternal _ReqSwitchServer_default_instance_;
 }  // namespace NFMsg
 PROTOBUF_NAMESPACE_OPEN
-template<> LIBPROTOC_EXPORT ::NFMsg::AckEndBattle* Arena::CreateMaybeMessage<::NFMsg::AckEndBattle>(Arena*);
-template<> LIBPROTOC_EXPORT ::NFMsg::AckPlayerEntryList* Arena::CreateMaybeMessage<::NFMsg::AckPlayerEntryList>(Arena*);
-template<> LIBPROTOC_EXPORT ::NFMsg::AckPlayerLeaveList* Arena::CreateMaybeMessage<::NFMsg::AckPlayerLeaveList>(Arena*);
-template<> LIBPROTOC_EXPORT ::NFMsg::AckSceneBuildings* Arena::CreateMaybeMessage<::NFMsg::AckSceneBuildings>(Arena*);
-template<> LIBPROTOC_EXPORT ::NFMsg::AckSearchClan* Arena::CreateMaybeMessage<::NFMsg::AckSearchClan>(Arena*);
-template<> LIBPROTOC_EXPORT ::NFMsg::AckSearchClan_SearchClanObject* Arena::CreateMaybeMessage<::NFMsg::AckSearchClan_SearchClanObject>(Arena*);
-template<> LIBPROTOC_EXPORT ::NFMsg::AckSearchOppnent* Arena::CreateMaybeMessage<::NFMsg::AckSearchOppnent>(Arena*);
-template<> LIBPROTOC_EXPORT ::NFMsg::AckSwitchServer* Arena::CreateMaybeMessage<::NFMsg::AckSwitchServer>(Arena*);
-template<> LIBPROTOC_EXPORT ::NFMsg::CurrencyStruct* Arena::CreateMaybeMessage<::NFMsg::CurrencyStruct>(Arena*);
-template<> LIBPROTOC_EXPORT ::NFMsg::EffectData* Arena::CreateMaybeMessage<::NFMsg::EffectData>(Arena*);
-template<> LIBPROTOC_EXPORT ::NFMsg::ItemStruct* Arena::CreateMaybeMessage<::NFMsg::ItemStruct>(Arena*);
-template<> LIBPROTOC_EXPORT ::NFMsg::PVPPlayerInfo* Arena::CreateMaybeMessage<::NFMsg::PVPPlayerInfo>(Arena*);
-template<> LIBPROTOC_EXPORT ::NFMsg::PlayerEntryInfo* Arena::CreateMaybeMessage<::NFMsg::PlayerEntryInfo>(Arena*);
-template<> LIBPROTOC_EXPORT ::NFMsg::ReqAcceptTask* Arena::CreateMaybeMessage<::NFMsg::ReqAcceptTask>(Arena*);
-template<> LIBPROTOC_EXPORT ::NFMsg::ReqAckCancelSearch* Arena::CreateMaybeMessage<::NFMsg::ReqAckCancelSearch>(Arena*);
-template<> LIBPROTOC_EXPORT ::NFMsg::ReqAckCreateClan* Arena::CreateMaybeMessage<::NFMsg::ReqAckCreateClan>(Arena*);
-template<> LIBPROTOC_EXPORT ::NFMsg::ReqAckEnterGameSuccess* Arena::CreateMaybeMessage<::NFMsg::ReqAckEnterGameSuccess>(Arena*);
-template<> LIBPROTOC_EXPORT ::NFMsg::ReqAckHomeScene* Arena::CreateMaybeMessage<::NFMsg::ReqAckHomeScene>(Arena*);
-template<> LIBPROTOC_EXPORT ::NFMsg::ReqAckJoinClan* Arena::CreateMaybeMessage<::NFMsg::ReqAckJoinClan>(Arena*);
-template<> LIBPROTOC_EXPORT ::NFMsg::ReqAckLeaveClan* Arena::CreateMaybeMessage<::NFMsg::ReqAckLeaveClan>(Arena*);
-template<> LIBPROTOC_EXPORT ::NFMsg::ReqAckOprClanMember* Arena::CreateMaybeMessage<::NFMsg::ReqAckOprClanMember>(Arena*);
-template<> LIBPROTOC_EXPORT ::NFMsg::ReqAckPlayerChat* Arena::CreateMaybeMessage<::NFMsg::ReqAckPlayerChat>(Arena*);
-template<> LIBPROTOC_EXPORT ::NFMsg::ReqAckPlayerMove* Arena::CreateMaybeMessage<::NFMsg::ReqAckPlayerMove>(Arena*);
-template<> LIBPROTOC_EXPORT ::NFMsg::ReqAckPlayerPosSync* Arena::CreateMaybeMessage<::NFMsg::ReqAckPlayerPosSync>(Arena*);
-template<> LIBPROTOC_EXPORT ::NFMsg::ReqAckReliveHero* Arena::CreateMaybeMessage<::NFMsg::ReqAckReliveHero>(Arena*);
-template<> LIBPROTOC_EXPORT ::NFMsg::ReqAckSwapScene* Arena::CreateMaybeMessage<::NFMsg::ReqAckSwapScene>(Arena*);
-template<> LIBPROTOC_EXPORT ::NFMsg::ReqAckSynData* Arena::CreateMaybeMessage<::NFMsg::ReqAckSynData>(Arena*);
-template<> LIBPROTOC_EXPORT ::NFMsg::ReqAckUseItem* Arena::CreateMaybeMessage<::NFMsg::ReqAckUseItem>(Arena*);
-template<> LIBPROTOC_EXPORT ::NFMsg::ReqAckUseSkill* Arena::CreateMaybeMessage<::NFMsg::ReqAckUseSkill>(Arena*);
-template<> LIBPROTOC_EXPORT ::NFMsg::ReqAddSceneBuilding* Arena::CreateMaybeMessage<::NFMsg::ReqAddSceneBuilding>(Arena*);
-template<> LIBPROTOC_EXPORT ::NFMsg::ReqBuyItemFromShop* Arena::CreateMaybeMessage<::NFMsg::ReqBuyItemFromShop>(Arena*);
-template<> LIBPROTOC_EXPORT ::NFMsg::ReqCompeleteTask* Arena::CreateMaybeMessage<::NFMsg::ReqCompeleteTask>(Arena*);
-template<> LIBPROTOC_EXPORT ::NFMsg::ReqEndBattle* Arena::CreateMaybeMessage<::NFMsg::ReqEndBattle>(Arena*);
-template<> LIBPROTOC_EXPORT ::NFMsg::ReqEnterClanEctype* Arena::CreateMaybeMessage<::NFMsg::ReqEnterClanEctype>(Arena*);
-template<> LIBPROTOC_EXPORT ::NFMsg::ReqEnterGameServer* Arena::CreateMaybeMessage<::NFMsg::ReqEnterGameServer>(Arena*);
-template<> LIBPROTOC_EXPORT ::NFMsg::ReqHeartBeat* Arena::CreateMaybeMessage<::NFMsg::ReqHeartBeat>(Arena*);
-template<> LIBPROTOC_EXPORT ::NFMsg::ReqLeaveGameServer* Arena::CreateMaybeMessage<::NFMsg::ReqLeaveGameServer>(Arena*);
-template<> LIBPROTOC_EXPORT ::NFMsg::ReqPickDropItem* Arena::CreateMaybeMessage<::NFMsg::ReqPickDropItem>(Arena*);
-template<> LIBPROTOC_EXPORT ::NFMsg::ReqSceneBuildings* Arena::CreateMaybeMessage<::NFMsg::ReqSceneBuildings>(Arena*);
-template<> LIBPROTOC_EXPORT ::NFMsg::ReqSearchClan* Arena::CreateMaybeMessage<::NFMsg::ReqSearchClan>(Arena*);
-template<> LIBPROTOC_EXPORT ::NFMsg::ReqSearchOppnent* Arena::CreateMaybeMessage<::NFMsg::ReqSearchOppnent>(Arena*);
-template<> LIBPROTOC_EXPORT ::NFMsg::ReqSendMail* Arena::CreateMaybeMessage<::NFMsg::ReqSendMail>(Arena*);
-template<> LIBPROTOC_EXPORT ::NFMsg::ReqSetFightHero* Arena::CreateMaybeMessage<::NFMsg::ReqSetFightHero>(Arena*);
-template<> LIBPROTOC_EXPORT ::NFMsg::ReqStoreSceneBuildings* Arena::CreateMaybeMessage<::NFMsg::ReqStoreSceneBuildings>(Arena*);
-template<> LIBPROTOC_EXPORT ::NFMsg::ReqSwitchFightHero* Arena::CreateMaybeMessage<::NFMsg::ReqSwitchFightHero>(Arena*);
-template<> LIBPROTOC_EXPORT ::NFMsg::ReqSwitchServer* Arena::CreateMaybeMessage<::NFMsg::ReqSwitchServer>(Arena*);
+template<> ::NFMsg::AckEndBattle* Arena::CreateMaybeMessage<::NFMsg::AckEndBattle>(Arena*);
+template<> ::NFMsg::AckPlayerEntryList* Arena::CreateMaybeMessage<::NFMsg::AckPlayerEntryList>(Arena*);
+template<> ::NFMsg::AckPlayerLeaveList* Arena::CreateMaybeMessage<::NFMsg::AckPlayerLeaveList>(Arena*);
+template<> ::NFMsg::AckSceneBuildings* Arena::CreateMaybeMessage<::NFMsg::AckSceneBuildings>(Arena*);
+template<> ::NFMsg::AckSearchClan* Arena::CreateMaybeMessage<::NFMsg::AckSearchClan>(Arena*);
+template<> ::NFMsg::AckSearchClan_SearchClanObject* Arena::CreateMaybeMessage<::NFMsg::AckSearchClan_SearchClanObject>(Arena*);
+template<> ::NFMsg::AckSearchOppnent* Arena::CreateMaybeMessage<::NFMsg::AckSearchOppnent>(Arena*);
+template<> ::NFMsg::AckSwitchServer* Arena::CreateMaybeMessage<::NFMsg::AckSwitchServer>(Arena*);
+template<> ::NFMsg::CurrencyStruct* Arena::CreateMaybeMessage<::NFMsg::CurrencyStruct>(Arena*);
+template<> ::NFMsg::EffectData* Arena::CreateMaybeMessage<::NFMsg::EffectData>(Arena*);
+template<> ::NFMsg::ItemStruct* Arena::CreateMaybeMessage<::NFMsg::ItemStruct>(Arena*);
+template<> ::NFMsg::PVPPlayerInfo* Arena::CreateMaybeMessage<::NFMsg::PVPPlayerInfo>(Arena*);
+template<> ::NFMsg::PlayerEntryInfo* Arena::CreateMaybeMessage<::NFMsg::PlayerEntryInfo>(Arena*);
+template<> ::NFMsg::ReqAcceptTask* Arena::CreateMaybeMessage<::NFMsg::ReqAcceptTask>(Arena*);
+template<> ::NFMsg::ReqAckCancelSearch* Arena::CreateMaybeMessage<::NFMsg::ReqAckCancelSearch>(Arena*);
+template<> ::NFMsg::ReqAckCreateClan* Arena::CreateMaybeMessage<::NFMsg::ReqAckCreateClan>(Arena*);
+template<> ::NFMsg::ReqAckEnterGameSuccess* Arena::CreateMaybeMessage<::NFMsg::ReqAckEnterGameSuccess>(Arena*);
+template<> ::NFMsg::ReqAckHomeScene* Arena::CreateMaybeMessage<::NFMsg::ReqAckHomeScene>(Arena*);
+template<> ::NFMsg::ReqAckJoinClan* Arena::CreateMaybeMessage<::NFMsg::ReqAckJoinClan>(Arena*);
+template<> ::NFMsg::ReqAckLeaveClan* Arena::CreateMaybeMessage<::NFMsg::ReqAckLeaveClan>(Arena*);
+template<> ::NFMsg::ReqAckOprClanMember* Arena::CreateMaybeMessage<::NFMsg::ReqAckOprClanMember>(Arena*);
+template<> ::NFMsg::ReqAckPlayerChat* Arena::CreateMaybeMessage<::NFMsg::ReqAckPlayerChat>(Arena*);
+template<> ::NFMsg::ReqAckPlayerMove* Arena::CreateMaybeMessage<::NFMsg::ReqAckPlayerMove>(Arena*);
+template<> ::NFMsg::ReqAckPlayerPosSync* Arena::CreateMaybeMessage<::NFMsg::ReqAckPlayerPosSync>(Arena*);
+template<> ::NFMsg::ReqAckReliveHero* Arena::CreateMaybeMessage<::NFMsg::ReqAckReliveHero>(Arena*);
+template<> ::NFMsg::ReqAckSwapScene* Arena::CreateMaybeMessage<::NFMsg::ReqAckSwapScene>(Arena*);
+template<> ::NFMsg::ReqAckSynData* Arena::CreateMaybeMessage<::NFMsg::ReqAckSynData>(Arena*);
+template<> ::NFMsg::ReqAckUseItem* Arena::CreateMaybeMessage<::NFMsg::ReqAckUseItem>(Arena*);
+template<> ::NFMsg::ReqAckUseSkill* Arena::CreateMaybeMessage<::NFMsg::ReqAckUseSkill>(Arena*);
+template<> ::NFMsg::ReqAddSceneBuilding* Arena::CreateMaybeMessage<::NFMsg::ReqAddSceneBuilding>(Arena*);
+template<> ::NFMsg::ReqBuyItemFromShop* Arena::CreateMaybeMessage<::NFMsg::ReqBuyItemFromShop>(Arena*);
+template<> ::NFMsg::ReqCompeleteTask* Arena::CreateMaybeMessage<::NFMsg::ReqCompeleteTask>(Arena*);
+template<> ::NFMsg::ReqEndBattle* Arena::CreateMaybeMessage<::NFMsg::ReqEndBattle>(Arena*);
+template<> ::NFMsg::ReqEnterClanEctype* Arena::CreateMaybeMessage<::NFMsg::ReqEnterClanEctype>(Arena*);
+template<> ::NFMsg::ReqEnterGameServer* Arena::CreateMaybeMessage<::NFMsg::ReqEnterGameServer>(Arena*);
+template<> ::NFMsg::ReqHeartBeat* Arena::CreateMaybeMessage<::NFMsg::ReqHeartBeat>(Arena*);
+template<> ::NFMsg::ReqLeaveGameServer* Arena::CreateMaybeMessage<::NFMsg::ReqLeaveGameServer>(Arena*);
+template<> ::NFMsg::ReqPickDropItem* Arena::CreateMaybeMessage<::NFMsg::ReqPickDropItem>(Arena*);
+template<> ::NFMsg::ReqSceneBuildings* Arena::CreateMaybeMessage<::NFMsg::ReqSceneBuildings>(Arena*);
+template<> ::NFMsg::ReqSearchClan* Arena::CreateMaybeMessage<::NFMsg::ReqSearchClan>(Arena*);
+template<> ::NFMsg::ReqSearchOppnent* Arena::CreateMaybeMessage<::NFMsg::ReqSearchOppnent>(Arena*);
+template<> ::NFMsg::ReqSendMail* Arena::CreateMaybeMessage<::NFMsg::ReqSendMail>(Arena*);
+template<> ::NFMsg::ReqSetFightHero* Arena::CreateMaybeMessage<::NFMsg::ReqSetFightHero>(Arena*);
+template<> ::NFMsg::ReqStoreSceneBuildings* Arena::CreateMaybeMessage<::NFMsg::ReqStoreSceneBuildings>(Arena*);
+template<> ::NFMsg::ReqSwitchFightHero* Arena::CreateMaybeMessage<::NFMsg::ReqSwitchFightHero>(Arena*);
+template<> ::NFMsg::ReqSwitchServer* Arena::CreateMaybeMessage<::NFMsg::ReqSwitchServer>(Arena*);
 PROTOBUF_NAMESPACE_CLOSE
 namespace NFMsg {
 
@@ -256,12 +256,12 @@ enum ReqAckSynData_SynType : int {
   ReqAckSynData_SynType_ReqAckSynData_SynType_INT_MIN_SENTINEL_DO_NOT_USE_ = std::numeric_limits<::PROTOBUF_NAMESPACE_ID::int32>::min(),
   ReqAckSynData_SynType_ReqAckSynData_SynType_INT_MAX_SENTINEL_DO_NOT_USE_ = std::numeric_limits<::PROTOBUF_NAMESPACE_ID::int32>::max()
 };
-LIBPROTOC_EXPORT bool ReqAckSynData_SynType_IsValid(int value);
+bool ReqAckSynData_SynType_IsValid(int value);
 constexpr ReqAckSynData_SynType ReqAckSynData_SynType_SynType_MIN = ReqAckSynData_SynType_EST_UNKNOW;
 constexpr ReqAckSynData_SynType ReqAckSynData_SynType_SynType_MAX = ReqAckSynData_SynType_EST_FRIEND;
 constexpr int ReqAckSynData_SynType_SynType_ARRAYSIZE = ReqAckSynData_SynType_SynType_MAX + 1;
 
-LIBPROTOC_EXPORT const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor* ReqAckSynData_SynType_descriptor();
+const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor* ReqAckSynData_SynType_descriptor();
 template<typename T>
 inline const std::string& ReqAckSynData_SynType_Name(T enum_t_value) {
   static_assert(::std::is_same<T, ReqAckSynData_SynType>::value ||
@@ -285,12 +285,12 @@ enum ReqAckPlayerChat_EGameChatChannel : int {
   ReqAckPlayerChat_EGameChatChannel_ReqAckPlayerChat_EGameChatChannel_INT_MIN_SENTINEL_DO_NOT_USE_ = std::numeric_limits<::PROTOBUF_NAMESPACE_ID::int32>::min(),
   ReqAckPlayerChat_EGameChatChannel_ReqAckPlayerChat_EGameChatChannel_INT_MAX_SENTINEL_DO_NOT_USE_ = std::numeric_limits<::PROTOBUF_NAMESPACE_ID::int32>::max()
 };
-LIBPROTOC_EXPORT bool ReqAckPlayerChat_EGameChatChannel_IsValid(int value);
+bool ReqAckPlayerChat_EGameChatChannel_IsValid(int value);
 constexpr ReqAckPlayerChat_EGameChatChannel ReqAckPlayerChat_EGameChatChannel_EGameChatChannel_MIN = ReqAckPlayerChat_EGameChatChannel_EGCC_GLOBAL;
 constexpr ReqAckPlayerChat_EGameChatChannel ReqAckPlayerChat_EGameChatChannel_EGameChatChannel_MAX = ReqAckPlayerChat_EGameChatChannel_EGCC_ROOM;
 constexpr int ReqAckPlayerChat_EGameChatChannel_EGameChatChannel_ARRAYSIZE = ReqAckPlayerChat_EGameChatChannel_EGameChatChannel_MAX + 1;
 
-LIBPROTOC_EXPORT const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor* ReqAckPlayerChat_EGameChatChannel_descriptor();
+const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor* ReqAckPlayerChat_EGameChatChannel_descriptor();
 template<typename T>
 inline const std::string& ReqAckPlayerChat_EGameChatChannel_Name(T enum_t_value) {
   static_assert(::std::is_same<T, ReqAckPlayerChat_EGameChatChannel>::value ||
@@ -314,12 +314,12 @@ enum ReqAckPlayerChat_EGameChatType : int {
   ReqAckPlayerChat_EGameChatType_ReqAckPlayerChat_EGameChatType_INT_MIN_SENTINEL_DO_NOT_USE_ = std::numeric_limits<::PROTOBUF_NAMESPACE_ID::int32>::min(),
   ReqAckPlayerChat_EGameChatType_ReqAckPlayerChat_EGameChatType_INT_MAX_SENTINEL_DO_NOT_USE_ = std::numeric_limits<::PROTOBUF_NAMESPACE_ID::int32>::max()
 };
-LIBPROTOC_EXPORT bool ReqAckPlayerChat_EGameChatType_IsValid(int value);
+bool ReqAckPlayerChat_EGameChatType_IsValid(int value);
 constexpr ReqAckPlayerChat_EGameChatType ReqAckPlayerChat_EGameChatType_EGameChatType_MIN = ReqAckPlayerChat_EGameChatType_EGCT_TEXT;
 constexpr ReqAckPlayerChat_EGameChatType ReqAckPlayerChat_EGameChatType_EGameChatType_MAX = ReqAckPlayerChat_EGameChatType_EGCT_DONATE_ITEM;
 constexpr int ReqAckPlayerChat_EGameChatType_EGameChatType_ARRAYSIZE = ReqAckPlayerChat_EGameChatType_EGameChatType_MAX + 1;
 
-LIBPROTOC_EXPORT const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor* ReqAckPlayerChat_EGameChatType_descriptor();
+const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor* ReqAckPlayerChat_EGameChatType_descriptor();
 template<typename T>
 inline const std::string& ReqAckPlayerChat_EGameChatType_Name(T enum_t_value) {
   static_assert(::std::is_same<T, ReqAckPlayerChat_EGameChatType>::value ||
@@ -342,12 +342,12 @@ enum EffectData_EResultType : int {
   EffectData_EResultType_EffectData_EResultType_INT_MIN_SENTINEL_DO_NOT_USE_ = std::numeric_limits<::PROTOBUF_NAMESPACE_ID::int32>::min(),
   EffectData_EResultType_EffectData_EResultType_INT_MAX_SENTINEL_DO_NOT_USE_ = std::numeric_limits<::PROTOBUF_NAMESPACE_ID::int32>::max()
 };
-LIBPROTOC_EXPORT bool EffectData_EResultType_IsValid(int value);
+bool EffectData_EResultType_IsValid(int value);
 constexpr EffectData_EResultType EffectData_EResultType_EResultType_MIN = EffectData_EResultType_EET_FAIL;
 constexpr EffectData_EResultType EffectData_EResultType_EResultType_MAX = EffectData_EResultType_EET_CRIT;
 constexpr int EffectData_EResultType_EResultType_ARRAYSIZE = EffectData_EResultType_EResultType_MAX + 1;
 
-LIBPROTOC_EXPORT const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor* EffectData_EResultType_descriptor();
+const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor* EffectData_EResultType_descriptor();
 template<typename T>
 inline const std::string& EffectData_EResultType_Name(T enum_t_value) {
   static_assert(::std::is_same<T, EffectData_EResultType>::value ||
@@ -369,12 +369,12 @@ enum ReqAckSwapScene_EGameSwapType : int {
   ReqAckSwapScene_EGameSwapType_ReqAckSwapScene_EGameSwapType_INT_MIN_SENTINEL_DO_NOT_USE_ = std::numeric_limits<::PROTOBUF_NAMESPACE_ID::int32>::min(),
   ReqAckSwapScene_EGameSwapType_ReqAckSwapScene_EGameSwapType_INT_MAX_SENTINEL_DO_NOT_USE_ = std::numeric_limits<::PROTOBUF_NAMESPACE_ID::int32>::max()
 };
-LIBPROTOC_EXPORT bool ReqAckSwapScene_EGameSwapType_IsValid(int value);
+bool ReqAckSwapScene_EGameSwapType_IsValid(int value);
 constexpr ReqAckSwapScene_EGameSwapType ReqAckSwapScene_EGameSwapType_EGameSwapType_MIN = ReqAckSwapScene_EGameSwapType_EGST_NARMAL;
 constexpr ReqAckSwapScene_EGameSwapType ReqAckSwapScene_EGameSwapType_EGameSwapType_MAX = ReqAckSwapScene_EGameSwapType_EGST_MIRROR;
 constexpr int ReqAckSwapScene_EGameSwapType_EGameSwapType_ARRAYSIZE = ReqAckSwapScene_EGameSwapType_EGameSwapType_MAX + 1;
 
-LIBPROTOC_EXPORT const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor* ReqAckSwapScene_EGameSwapType_descriptor();
+const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor* ReqAckSwapScene_EGameSwapType_descriptor();
 template<typename T>
 inline const std::string& ReqAckSwapScene_EGameSwapType_Name(T enum_t_value) {
   static_assert(::std::is_same<T, ReqAckSwapScene_EGameSwapType>::value ||
@@ -395,12 +395,12 @@ enum ReqAckOprClanMember_EGClanMemberOprType : int {
   ReqAckOprClanMember_EGClanMemberOprType_ReqAckOprClanMember_EGClanMemberOprType_INT_MIN_SENTINEL_DO_NOT_USE_ = std::numeric_limits<::PROTOBUF_NAMESPACE_ID::int32>::min(),
   ReqAckOprClanMember_EGClanMemberOprType_ReqAckOprClanMember_EGClanMemberOprType_INT_MAX_SENTINEL_DO_NOT_USE_ = std::numeric_limits<::PROTOBUF_NAMESPACE_ID::int32>::max()
 };
-LIBPROTOC_EXPORT bool ReqAckOprClanMember_EGClanMemberOprType_IsValid(int value);
+bool ReqAckOprClanMember_EGClanMemberOprType_IsValid(int value);
 constexpr ReqAckOprClanMember_EGClanMemberOprType ReqAckOprClanMember_EGClanMemberOprType_EGClanMemberOprType_MIN = ReqAckOprClanMember_EGClanMemberOprType_EGAT_DOWN;
 constexpr ReqAckOprClanMember_EGClanMemberOprType ReqAckOprClanMember_EGClanMemberOprType_EGClanMemberOprType_MAX = ReqAckOprClanMember_EGClanMemberOprType_EGAT_KICK;
 constexpr int ReqAckOprClanMember_EGClanMemberOprType_EGClanMemberOprType_ARRAYSIZE = ReqAckOprClanMember_EGClanMemberOprType_EGClanMemberOprType_MAX + 1;
 
-LIBPROTOC_EXPORT const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor* ReqAckOprClanMember_EGClanMemberOprType_descriptor();
+const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor* ReqAckOprClanMember_EGClanMemberOprType_descriptor();
 template<typename T>
 inline const std::string& ReqAckOprClanMember_EGClanMemberOprType_Name(T enum_t_value) {
   static_assert(::std::is_same<T, ReqAckOprClanMember_EGClanMemberOprType>::value ||
@@ -416,7 +416,7 @@ inline bool ReqAckOprClanMember_EGClanMemberOprType_Parse(
 }
 // ===================================================================
 
-class LIBPROTOC_EXPORT ReqEnterGameServer :
+class ReqEnterGameServer :
     public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:NFMsg.ReqEnterGameServer) */ {
  public:
   ReqEnterGameServer();
@@ -597,7 +597,7 @@ class LIBPROTOC_EXPORT ReqEnterGameServer :
 };
 // -------------------------------------------------------------------
 
-class LIBPROTOC_EXPORT ReqAckEnterGameSuccess :
+class ReqAckEnterGameSuccess :
     public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:NFMsg.ReqAckEnterGameSuccess) */ {
  public:
   ReqAckEnterGameSuccess();
@@ -725,7 +725,7 @@ class LIBPROTOC_EXPORT ReqAckEnterGameSuccess :
 };
 // -------------------------------------------------------------------
 
-class LIBPROTOC_EXPORT ReqHeartBeat :
+class ReqHeartBeat :
     public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:NFMsg.ReqHeartBeat) */ {
  public:
   ReqHeartBeat();
@@ -853,7 +853,7 @@ class LIBPROTOC_EXPORT ReqHeartBeat :
 };
 // -------------------------------------------------------------------
 
-class LIBPROTOC_EXPORT ReqLeaveGameServer :
+class ReqLeaveGameServer :
     public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:NFMsg.ReqLeaveGameServer) */ {
  public:
   ReqLeaveGameServer();
@@ -981,7 +981,7 @@ class LIBPROTOC_EXPORT ReqLeaveGameServer :
 };
 // -------------------------------------------------------------------
 
-class LIBPROTOC_EXPORT PlayerEntryInfo :
+class PlayerEntryInfo :
     public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:NFMsg.PlayerEntryInfo) */ {
  public:
   PlayerEntryInfo();
@@ -1217,7 +1217,7 @@ class LIBPROTOC_EXPORT PlayerEntryInfo :
 };
 // -------------------------------------------------------------------
 
-class LIBPROTOC_EXPORT AckPlayerEntryList :
+class AckPlayerEntryList :
     public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:NFMsg.AckPlayerEntryList) */ {
  public:
   AckPlayerEntryList();
@@ -1354,7 +1354,7 @@ class LIBPROTOC_EXPORT AckPlayerEntryList :
 };
 // -------------------------------------------------------------------
 
-class LIBPROTOC_EXPORT AckPlayerLeaveList :
+class AckPlayerLeaveList :
     public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:NFMsg.AckPlayerLeaveList) */ {
  public:
   AckPlayerLeaveList();
@@ -1491,7 +1491,7 @@ class LIBPROTOC_EXPORT AckPlayerLeaveList :
 };
 // -------------------------------------------------------------------
 
-class LIBPROTOC_EXPORT ReqAckSynData :
+class ReqAckSynData :
     public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:NFMsg.ReqAckSynData) */ {
  public:
   ReqAckSynData();
@@ -1721,7 +1721,7 @@ class LIBPROTOC_EXPORT ReqAckSynData :
 };
 // -------------------------------------------------------------------
 
-class LIBPROTOC_EXPORT ReqAckPlayerMove :
+class ReqAckPlayerMove :
     public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:NFMsg.ReqAckPlayerMove) */ {
  public:
   ReqAckPlayerMove();
@@ -1959,7 +1959,7 @@ class LIBPROTOC_EXPORT ReqAckPlayerMove :
 };
 // -------------------------------------------------------------------
 
-class LIBPROTOC_EXPORT ReqAckPlayerChat :
+class ReqAckPlayerChat :
     public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:NFMsg.ReqAckPlayerChat) */ {
  public:
   ReqAckPlayerChat();
@@ -2280,7 +2280,7 @@ class LIBPROTOC_EXPORT ReqAckPlayerChat :
 };
 // -------------------------------------------------------------------
 
-class LIBPROTOC_EXPORT ReqAckPlayerPosSync :
+class ReqAckPlayerPosSync :
     public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:NFMsg.ReqAckPlayerPosSync) */ {
  public:
   ReqAckPlayerPosSync();
@@ -2492,7 +2492,7 @@ class LIBPROTOC_EXPORT ReqAckPlayerPosSync :
 };
 // -------------------------------------------------------------------
 
-class LIBPROTOC_EXPORT EffectData :
+class EffectData :
     public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:NFMsg.EffectData) */ {
  public:
   EffectData();
@@ -2684,7 +2684,7 @@ class LIBPROTOC_EXPORT EffectData :
 };
 // -------------------------------------------------------------------
 
-class LIBPROTOC_EXPORT ReqAckUseSkill :
+class ReqAckUseSkill :
     public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:NFMsg.ReqAckUseSkill) */ {
  public:
   ReqAckUseSkill();
@@ -2867,7 +2867,7 @@ class LIBPROTOC_EXPORT ReqAckUseSkill :
 };
 // -------------------------------------------------------------------
 
-class LIBPROTOC_EXPORT ReqAckUseItem :
+class ReqAckUseItem :
     public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:NFMsg.ReqAckUseItem) */ {
  public:
   ReqAckUseItem();
@@ -3089,7 +3089,7 @@ class LIBPROTOC_EXPORT ReqAckUseItem :
 };
 // -------------------------------------------------------------------
 
-class LIBPROTOC_EXPORT ReqAckSwapScene :
+class ReqAckSwapScene :
     public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:NFMsg.ReqAckSwapScene) */ {
  public:
   ReqAckSwapScene();
@@ -3324,7 +3324,7 @@ class LIBPROTOC_EXPORT ReqAckSwapScene :
 };
 // -------------------------------------------------------------------
 
-class LIBPROTOC_EXPORT ReqAckHomeScene :
+class ReqAckHomeScene :
     public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:NFMsg.ReqAckHomeScene) */ {
  public:
   ReqAckHomeScene();
@@ -3459,7 +3459,7 @@ class LIBPROTOC_EXPORT ReqAckHomeScene :
 };
 // -------------------------------------------------------------------
 
-class LIBPROTOC_EXPORT ItemStruct :
+class ItemStruct :
     public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:NFMsg.ItemStruct) */ {
  public:
   ItemStruct();
@@ -3605,7 +3605,7 @@ class LIBPROTOC_EXPORT ItemStruct :
 };
 // -------------------------------------------------------------------
 
-class LIBPROTOC_EXPORT CurrencyStruct :
+class CurrencyStruct :
     public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:NFMsg.CurrencyStruct) */ {
  public:
   CurrencyStruct();
@@ -3744,7 +3744,7 @@ class LIBPROTOC_EXPORT CurrencyStruct :
 };
 // -------------------------------------------------------------------
 
-class LIBPROTOC_EXPORT ReqAckReliveHero :
+class ReqAckReliveHero :
     public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:NFMsg.ReqAckReliveHero) */ {
  public:
   ReqAckReliveHero();
@@ -3889,7 +3889,7 @@ class LIBPROTOC_EXPORT ReqAckReliveHero :
 };
 // -------------------------------------------------------------------
 
-class LIBPROTOC_EXPORT ReqPickDropItem :
+class ReqPickDropItem :
     public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:NFMsg.ReqPickDropItem) */ {
  public:
   ReqPickDropItem();
@@ -4023,7 +4023,7 @@ class LIBPROTOC_EXPORT ReqPickDropItem :
 };
 // -------------------------------------------------------------------
 
-class LIBPROTOC_EXPORT ReqAcceptTask :
+class ReqAcceptTask :
     public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:NFMsg.ReqAcceptTask) */ {
  public:
   ReqAcceptTask();
@@ -4158,7 +4158,7 @@ class LIBPROTOC_EXPORT ReqAcceptTask :
 };
 // -------------------------------------------------------------------
 
-class LIBPROTOC_EXPORT ReqCompeleteTask :
+class ReqCompeleteTask :
     public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:NFMsg.ReqCompeleteTask) */ {
  public:
   ReqCompeleteTask();
@@ -4293,7 +4293,7 @@ class LIBPROTOC_EXPORT ReqCompeleteTask :
 };
 // -------------------------------------------------------------------
 
-class LIBPROTOC_EXPORT ReqAddSceneBuilding :
+class ReqAddSceneBuilding :
     public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:NFMsg.ReqAddSceneBuilding) */ {
  public:
   ReqAddSceneBuilding();
@@ -4530,7 +4530,7 @@ class LIBPROTOC_EXPORT ReqAddSceneBuilding :
 };
 // -------------------------------------------------------------------
 
-class LIBPROTOC_EXPORT ReqSceneBuildings :
+class ReqSceneBuildings :
     public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:NFMsg.ReqSceneBuildings) */ {
  public:
   ReqSceneBuildings();
@@ -4675,7 +4675,7 @@ class LIBPROTOC_EXPORT ReqSceneBuildings :
 };
 // -------------------------------------------------------------------
 
-class LIBPROTOC_EXPORT AckSceneBuildings :
+class AckSceneBuildings :
     public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:NFMsg.AckSceneBuildings) */ {
  public:
   AckSceneBuildings();
@@ -4812,7 +4812,7 @@ class LIBPROTOC_EXPORT AckSceneBuildings :
 };
 // -------------------------------------------------------------------
 
-class LIBPROTOC_EXPORT ReqStoreSceneBuildings :
+class ReqStoreSceneBuildings :
     public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:NFMsg.ReqStoreSceneBuildings) */ {
  public:
   ReqStoreSceneBuildings();
@@ -4977,7 +4977,7 @@ class LIBPROTOC_EXPORT ReqStoreSceneBuildings :
 };
 // -------------------------------------------------------------------
 
-class LIBPROTOC_EXPORT ReqAckCreateClan :
+class ReqAckCreateClan :
     public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:NFMsg.ReqAckCreateClan) */ {
  public:
   ReqAckCreateClan();
@@ -5193,7 +5193,7 @@ class LIBPROTOC_EXPORT ReqAckCreateClan :
 };
 // -------------------------------------------------------------------
 
-class LIBPROTOC_EXPORT ReqSearchClan :
+class ReqSearchClan :
     public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:NFMsg.ReqSearchClan) */ {
  public:
   ReqSearchClan();
@@ -5328,7 +5328,7 @@ class LIBPROTOC_EXPORT ReqSearchClan :
 };
 // -------------------------------------------------------------------
 
-class LIBPROTOC_EXPORT AckSearchClan_SearchClanObject :
+class AckSearchClan_SearchClanObject :
     public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:NFMsg.AckSearchClan.SearchClanObject) */ {
  public:
   AckSearchClan_SearchClanObject();
@@ -5542,7 +5542,7 @@ class LIBPROTOC_EXPORT AckSearchClan_SearchClanObject :
 };
 // -------------------------------------------------------------------
 
-class LIBPROTOC_EXPORT AckSearchClan :
+class AckSearchClan :
     public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:NFMsg.AckSearchClan) */ {
  public:
   AckSearchClan();
@@ -5681,7 +5681,7 @@ class LIBPROTOC_EXPORT AckSearchClan :
 };
 // -------------------------------------------------------------------
 
-class LIBPROTOC_EXPORT ReqAckJoinClan :
+class ReqAckJoinClan :
     public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:NFMsg.ReqAckJoinClan) */ {
  public:
   ReqAckJoinClan();
@@ -5861,7 +5861,7 @@ class LIBPROTOC_EXPORT ReqAckJoinClan :
 };
 // -------------------------------------------------------------------
 
-class LIBPROTOC_EXPORT ReqAckLeaveClan :
+class ReqAckLeaveClan :
     public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:NFMsg.ReqAckLeaveClan) */ {
  public:
   ReqAckLeaveClan();
@@ -6012,7 +6012,7 @@ class LIBPROTOC_EXPORT ReqAckLeaveClan :
 };
 // -------------------------------------------------------------------
 
-class LIBPROTOC_EXPORT ReqAckOprClanMember :
+class ReqAckOprClanMember :
     public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:NFMsg.ReqAckOprClanMember) */ {
  public:
   ReqAckOprClanMember();
@@ -6223,7 +6223,7 @@ class LIBPROTOC_EXPORT ReqAckOprClanMember :
 };
 // -------------------------------------------------------------------
 
-class LIBPROTOC_EXPORT ReqEnterClanEctype :
+class ReqEnterClanEctype :
     public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:NFMsg.ReqEnterClanEctype) */ {
  public:
   ReqEnterClanEctype();
@@ -6357,7 +6357,7 @@ class LIBPROTOC_EXPORT ReqEnterClanEctype :
 };
 // -------------------------------------------------------------------
 
-class LIBPROTOC_EXPORT ReqSetFightHero :
+class ReqSetFightHero :
     public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:NFMsg.ReqSetFightHero) */ {
  public:
   ReqSetFightHero();
@@ -6502,7 +6502,7 @@ class LIBPROTOC_EXPORT ReqSetFightHero :
 };
 // -------------------------------------------------------------------
 
-class LIBPROTOC_EXPORT ReqSwitchFightHero :
+class ReqSwitchFightHero :
     public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:NFMsg.ReqSwitchFightHero) */ {
  public:
   ReqSwitchFightHero();
@@ -6636,7 +6636,7 @@ class LIBPROTOC_EXPORT ReqSwitchFightHero :
 };
 // -------------------------------------------------------------------
 
-class LIBPROTOC_EXPORT ReqBuyItemFromShop :
+class ReqBuyItemFromShop :
     public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:NFMsg.ReqBuyItemFromShop) */ {
  public:
   ReqBuyItemFromShop();
@@ -6782,7 +6782,7 @@ class LIBPROTOC_EXPORT ReqBuyItemFromShop :
 };
 // -------------------------------------------------------------------
 
-class LIBPROTOC_EXPORT PVPPlayerInfo :
+class PVPPlayerInfo :
     public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:NFMsg.PVPPlayerInfo) */ {
  public:
   PVPPlayerInfo();
@@ -7145,7 +7145,7 @@ class LIBPROTOC_EXPORT PVPPlayerInfo :
 };
 // -------------------------------------------------------------------
 
-class LIBPROTOC_EXPORT ReqSearchOppnent :
+class ReqSearchOppnent :
     public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:NFMsg.ReqSearchOppnent) */ {
  public:
   ReqSearchOppnent();
@@ -7326,7 +7326,7 @@ class LIBPROTOC_EXPORT ReqSearchOppnent :
 };
 // -------------------------------------------------------------------
 
-class LIBPROTOC_EXPORT AckSearchOppnent :
+class AckSearchOppnent :
     public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:NFMsg.AckSearchOppnent) */ {
  public:
   AckSearchOppnent();
@@ -7539,7 +7539,7 @@ class LIBPROTOC_EXPORT AckSearchOppnent :
 };
 // -------------------------------------------------------------------
 
-class LIBPROTOC_EXPORT ReqAckCancelSearch :
+class ReqAckCancelSearch :
     public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:NFMsg.ReqAckCancelSearch) */ {
  public:
   ReqAckCancelSearch();
@@ -7673,7 +7673,7 @@ class LIBPROTOC_EXPORT ReqAckCancelSearch :
 };
 // -------------------------------------------------------------------
 
-class LIBPROTOC_EXPORT ReqEndBattle :
+class ReqEndBattle :
     public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:NFMsg.ReqEndBattle) */ {
  public:
   ReqEndBattle();
@@ -7801,7 +7801,7 @@ class LIBPROTOC_EXPORT ReqEndBattle :
 };
 // -------------------------------------------------------------------
 
-class LIBPROTOC_EXPORT AckEndBattle :
+class AckEndBattle :
     public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:NFMsg.AckEndBattle) */ {
  public:
   AckEndBattle();
@@ -8058,7 +8058,7 @@ class LIBPROTOC_EXPORT AckEndBattle :
 };
 // -------------------------------------------------------------------
 
-class LIBPROTOC_EXPORT ReqSendMail :
+class ReqSendMail :
     public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:NFMsg.ReqSendMail) */ {
  public:
   ReqSendMail();
@@ -8232,7 +8232,7 @@ class LIBPROTOC_EXPORT ReqSendMail :
 };
 // -------------------------------------------------------------------
 
-class LIBPROTOC_EXPORT ReqSwitchServer :
+class ReqSwitchServer :
     public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:NFMsg.ReqSwitchServer) */ {
  public:
   ReqSwitchServer();
@@ -8438,7 +8438,7 @@ class LIBPROTOC_EXPORT ReqSwitchServer :
 };
 // -------------------------------------------------------------------
 
-class LIBPROTOC_EXPORT AckSwitchServer :
+class AckSwitchServer :
     public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:NFMsg.AckSwitchServer) */ {
  public:
   AckSwitchServer();

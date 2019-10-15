@@ -27,7 +27,6 @@
 #define NF_NET_MODULE_H
 
 #include "NFNet.h"
-#undef min
 #include <iostream>
 #include <iosfwd>
 #include "NFComm/NFMessageDefine/NFMsgDefine.h"
@@ -52,7 +51,7 @@
 #include "NFComm/NFCore/NFException.h"
 #endif
 
-class NFNetModule: public NFINetModule
+class NFNetModule : public NFINetModule
 {
 public:
     NFNetModule(NFIPluginManager* p);

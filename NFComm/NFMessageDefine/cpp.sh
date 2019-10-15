@@ -1,8 +1,8 @@
 
-./protoc -I=./ --cpp_out=dllexport_decl=LIBPROTOC_EXPORT:./ ./NFDefine.proto
-./protoc -I=./ --cpp_out=dllexport_decl=LIBPROTOC_EXPORT:./ ./NFMsgBase.proto
-./protoc -I=./ --cpp_out=dllexport_decl=LIBPROTOC_EXPORT:./ ./NFMsgPreGame.proto
-./protoc -I=./ --cpp_out=dllexport_decl=LIBPROTOC_EXPORT:./ ./NFMsgShare.proto
-./protoc -I=./ --cpp_out=dllexport_decl=LIBPROTOC_EXPORT:./ ./NFMsgExtra.proto
-./protoc -I=./ --cpp_out=dllexport_decl=LIBPROTOC_EXPORT:./ ./NFMsgFriend.proto
-./protoc -I=./ --cpp_out=dllexport_decl=LIBPROTOC_EXPORT:./ ./NFMsgTeam.proto
+./protoc -I=./ --cpp_out=./ ./NFDefine.proto
+./protoc -I=./ --cpp_out=./ ./NFMsgBase.proto
+./protoc -I=./ --cpp_out=./ ./NFMsgPreGame.proto
+./protoc -I=./ --cpp_out=./ ./NFMsgShare.proto
+./protoc -I=./ --cpp_out=./ ./NFMsgExtra.proto
+./protoc -I=./ --cpp_out=./ ./NFMsgFriend.proto
+./protoc -I=./ --cpp_out=./ ./NFMsgTeam.proto

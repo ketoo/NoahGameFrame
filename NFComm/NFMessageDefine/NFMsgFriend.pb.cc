@@ -65,7 +65,7 @@ static void InitDefaultsscc_info_FriendData_NFMsgFriend_2eproto() {
   ::NFMsg::FriendData::InitAsDefaultInstance();
 }
 
-LIBPROTOC_EXPORT ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_FriendData_NFMsgFriend_2eproto =
+::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_FriendData_NFMsgFriend_2eproto =
     {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 1, 0, InitDefaultsscc_info_FriendData_NFMsgFriend_2eproto}, {
       &scc_info_Ident_NFMsgBase_2eproto.base,}};
 
@@ -80,7 +80,7 @@ static void InitDefaultsscc_info_ReqAckAcceptInvite_NFMsgFriend_2eproto() {
   ::NFMsg::ReqAckAcceptInvite::InitAsDefaultInstance();
 }
 
-LIBPROTOC_EXPORT ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_ReqAckAcceptInvite_NFMsgFriend_2eproto =
+::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_ReqAckAcceptInvite_NFMsgFriend_2eproto =
     {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 1, 0, InitDefaultsscc_info_ReqAckAcceptInvite_NFMsgFriend_2eproto}, {
       &scc_info_Ident_NFMsgBase_2eproto.base,}};
 
@@ -95,7 +95,7 @@ static void InitDefaultsscc_info_ReqAckBlockPlayer_NFMsgFriend_2eproto() {
   ::NFMsg::ReqAckBlockPlayer::InitAsDefaultInstance();
 }
 
-LIBPROTOC_EXPORT ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_ReqAckBlockPlayer_NFMsgFriend_2eproto =
+::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_ReqAckBlockPlayer_NFMsgFriend_2eproto =
     {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 1, 0, InitDefaultsscc_info_ReqAckBlockPlayer_NFMsgFriend_2eproto}, {
       &scc_info_Ident_NFMsgBase_2eproto.base,}};
 
@@ -110,7 +110,7 @@ static void InitDefaultsscc_info_ReqAckDeleteFriend_NFMsgFriend_2eproto() {
   ::NFMsg::ReqAckDeleteFriend::InitAsDefaultInstance();
 }
 
-LIBPROTOC_EXPORT ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_ReqAckDeleteFriend_NFMsgFriend_2eproto =
+::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_ReqAckDeleteFriend_NFMsgFriend_2eproto =
     {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 1, 0, InitDefaultsscc_info_ReqAckDeleteFriend_NFMsgFriend_2eproto}, {
       &scc_info_Ident_NFMsgBase_2eproto.base,}};
 
@@ -125,7 +125,7 @@ static void InitDefaultsscc_info_ReqAckFriendList_NFMsgFriend_2eproto() {
   ::NFMsg::ReqAckFriendList::InitAsDefaultInstance();
 }
 
-LIBPROTOC_EXPORT ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_ReqAckFriendList_NFMsgFriend_2eproto =
+::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_ReqAckFriendList_NFMsgFriend_2eproto =
     {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 1, 0, InitDefaultsscc_info_ReqAckFriendList_NFMsgFriend_2eproto}, {
       &scc_info_FriendData_NFMsgFriend_2eproto.base,}};
 
@@ -140,7 +140,7 @@ static void InitDefaultsscc_info_ReqAckIgnoreInvite_NFMsgFriend_2eproto() {
   ::NFMsg::ReqAckIgnoreInvite::InitAsDefaultInstance();
 }
 
-LIBPROTOC_EXPORT ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_ReqAckIgnoreInvite_NFMsgFriend_2eproto =
+::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_ReqAckIgnoreInvite_NFMsgFriend_2eproto =
     {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 1, 0, InitDefaultsscc_info_ReqAckIgnoreInvite_NFMsgFriend_2eproto}, {
       &scc_info_Ident_NFMsgBase_2eproto.base,}};
 
@@ -155,7 +155,7 @@ static void InitDefaultsscc_info_ReqAckRejectInvite_NFMsgFriend_2eproto() {
   ::NFMsg::ReqAckRejectInvite::InitAsDefaultInstance();
 }
 
-LIBPROTOC_EXPORT ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_ReqAckRejectInvite_NFMsgFriend_2eproto =
+::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_ReqAckRejectInvite_NFMsgFriend_2eproto =
     {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 1, 0, InitDefaultsscc_info_ReqAckRejectInvite_NFMsgFriend_2eproto}, {
       &scc_info_Ident_NFMsgBase_2eproto.base,}};
 
@@ -170,7 +170,7 @@ static void InitDefaultsscc_info_ReqAckSendInvite_NFMsgFriend_2eproto() {
   ::NFMsg::ReqAckSendInvite::InitAsDefaultInstance();
 }
 
-LIBPROTOC_EXPORT ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_ReqAckSendInvite_NFMsgFriend_2eproto =
+::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_ReqAckSendInvite_NFMsgFriend_2eproto =
     {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 1, 0, InitDefaultsscc_info_ReqAckSendInvite_NFMsgFriend_2eproto}, {
       &scc_info_Ident_NFMsgBase_2eproto.base,}};
 
@@ -185,7 +185,7 @@ static void InitDefaultsscc_info_ReqAckUnBlockPlayer_NFMsgFriend_2eproto() {
   ::NFMsg::ReqAckUnBlockPlayer::InitAsDefaultInstance();
 }
 
-LIBPROTOC_EXPORT ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_ReqAckUnBlockPlayer_NFMsgFriend_2eproto =
+::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_ReqAckUnBlockPlayer_NFMsgFriend_2eproto =
     {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 1, 0, InitDefaultsscc_info_ReqAckUnBlockPlayer_NFMsgFriend_2eproto}, {
       &scc_info_Ident_NFMsgBase_2eproto.base,}};
 

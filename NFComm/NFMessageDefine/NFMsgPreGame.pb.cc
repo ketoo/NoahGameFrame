@@ -127,7 +127,7 @@ static void InitDefaultsscc_info_AckConnectWorldResult_NFMsgPreGame_2eproto() {
   ::NFMsg::AckConnectWorldResult::InitAsDefaultInstance();
 }
 
-LIBPROTOC_EXPORT ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_AckConnectWorldResult_NFMsgPreGame_2eproto =
+::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_AckConnectWorldResult_NFMsgPreGame_2eproto =
     {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 1, 0, InitDefaultsscc_info_AckConnectWorldResult_NFMsgPreGame_2eproto}, {
       &scc_info_Ident_NFMsgBase_2eproto.base,}};
 
@@ -142,7 +142,7 @@ static void InitDefaultsscc_info_AckEventResult_NFMsgPreGame_2eproto() {
   ::NFMsg::AckEventResult::InitAsDefaultInstance();
 }
 
-LIBPROTOC_EXPORT ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_AckEventResult_NFMsgPreGame_2eproto =
+::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_AckEventResult_NFMsgPreGame_2eproto =
     {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 1, 0, InitDefaultsscc_info_AckEventResult_NFMsgPreGame_2eproto}, {
       &scc_info_Ident_NFMsgBase_2eproto.base,}};
 
@@ -157,7 +157,7 @@ static void InitDefaultsscc_info_AckRoleLiteInfoList_NFMsgPreGame_2eproto() {
   ::NFMsg::AckRoleLiteInfoList::InitAsDefaultInstance();
 }
 
-LIBPROTOC_EXPORT ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_AckRoleLiteInfoList_NFMsgPreGame_2eproto =
+::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_AckRoleLiteInfoList_NFMsgPreGame_2eproto =
     {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 1, 0, InitDefaultsscc_info_AckRoleLiteInfoList_NFMsgPreGame_2eproto}, {
       &scc_info_RoleLiteInfo_NFMsgPreGame_2eproto.base,}};
 
@@ -172,7 +172,7 @@ static void InitDefaultsscc_info_AckServerList_NFMsgPreGame_2eproto() {
   ::NFMsg::AckServerList::InitAsDefaultInstance();
 }
 
-LIBPROTOC_EXPORT ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_AckServerList_NFMsgPreGame_2eproto =
+::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_AckServerList_NFMsgPreGame_2eproto =
     {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 1, 0, InitDefaultsscc_info_AckServerList_NFMsgPreGame_2eproto}, {
       &scc_info_ServerInfo_NFMsgPreGame_2eproto.base,}};
 
@@ -187,7 +187,7 @@ static void InitDefaultsscc_info_ReqAccountLogin_NFMsgPreGame_2eproto() {
   ::NFMsg::ReqAccountLogin::InitAsDefaultInstance();
 }
 
-LIBPROTOC_EXPORT ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_ReqAccountLogin_NFMsgPreGame_2eproto =
+::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_ReqAccountLogin_NFMsgPreGame_2eproto =
     {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 0, 0, InitDefaultsscc_info_ReqAccountLogin_NFMsgPreGame_2eproto}, {}};
 
 static void InitDefaultsscc_info_ReqAccountLogout_NFMsgPreGame_2eproto() {
@@ -201,7 +201,7 @@ static void InitDefaultsscc_info_ReqAccountLogout_NFMsgPreGame_2eproto() {
   ::NFMsg::ReqAccountLogout::InitAsDefaultInstance();
 }
 
-LIBPROTOC_EXPORT ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_ReqAccountLogout_NFMsgPreGame_2eproto =
+::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_ReqAccountLogout_NFMsgPreGame_2eproto =
     {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 0, 0, InitDefaultsscc_info_ReqAccountLogout_NFMsgPreGame_2eproto}, {}};
 
 static void InitDefaultsscc_info_ReqConnectWorld_NFMsgPreGame_2eproto() {
@@ -215,7 +215,7 @@ static void InitDefaultsscc_info_ReqConnectWorld_NFMsgPreGame_2eproto() {
   ::NFMsg::ReqConnectWorld::InitAsDefaultInstance();
 }
 
-LIBPROTOC_EXPORT ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_ReqConnectWorld_NFMsgPreGame_2eproto =
+::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_ReqConnectWorld_NFMsgPreGame_2eproto =
     {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 1, 0, InitDefaultsscc_info_ReqConnectWorld_NFMsgPreGame_2eproto}, {
       &scc_info_Ident_NFMsgBase_2eproto.base,}};
 
@@ -230,7 +230,7 @@ static void InitDefaultsscc_info_ReqCreateRole_NFMsgPreGame_2eproto() {
   ::NFMsg::ReqCreateRole::InitAsDefaultInstance();
 }
 
-LIBPROTOC_EXPORT ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_ReqCreateRole_NFMsgPreGame_2eproto =
+::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_ReqCreateRole_NFMsgPreGame_2eproto =
     {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 0, 0, InitDefaultsscc_info_ReqCreateRole_NFMsgPreGame_2eproto}, {}};
 
 static void InitDefaultsscc_info_ReqDeleteRole_NFMsgPreGame_2eproto() {
@@ -244,7 +244,7 @@ static void InitDefaultsscc_info_ReqDeleteRole_NFMsgPreGame_2eproto() {
   ::NFMsg::ReqDeleteRole::InitAsDefaultInstance();
 }
 
-LIBPROTOC_EXPORT ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_ReqDeleteRole_NFMsgPreGame_2eproto =
+::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_ReqDeleteRole_NFMsgPreGame_2eproto =
     {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 0, 0, InitDefaultsscc_info_ReqDeleteRole_NFMsgPreGame_2eproto}, {}};
 
 static void InitDefaultsscc_info_ReqKickFromWorld_NFMsgPreGame_2eproto() {
@@ -258,7 +258,7 @@ static void InitDefaultsscc_info_ReqKickFromWorld_NFMsgPreGame_2eproto() {
   ::NFMsg::ReqKickFromWorld::InitAsDefaultInstance();
 }
 
-LIBPROTOC_EXPORT ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_ReqKickFromWorld_NFMsgPreGame_2eproto =
+::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_ReqKickFromWorld_NFMsgPreGame_2eproto =
     {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 0, 0, InitDefaultsscc_info_ReqKickFromWorld_NFMsgPreGame_2eproto}, {}};
 
 static void InitDefaultsscc_info_ReqRecoverRole_NFMsgPreGame_2eproto() {
@@ -272,7 +272,7 @@ static void InitDefaultsscc_info_ReqRecoverRole_NFMsgPreGame_2eproto() {
   ::NFMsg::ReqRecoverRole::InitAsDefaultInstance();
 }
 
-LIBPROTOC_EXPORT ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_ReqRecoverRole_NFMsgPreGame_2eproto =
+::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_ReqRecoverRole_NFMsgPreGame_2eproto =
     {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 0, 0, InitDefaultsscc_info_ReqRecoverRole_NFMsgPreGame_2eproto}, {}};
 
 static void InitDefaultsscc_info_ReqRoleList_NFMsgPreGame_2eproto() {
@@ -286,7 +286,7 @@ static void InitDefaultsscc_info_ReqRoleList_NFMsgPreGame_2eproto() {
   ::NFMsg::ReqRoleList::InitAsDefaultInstance();
 }
 
-LIBPROTOC_EXPORT ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_ReqRoleList_NFMsgPreGame_2eproto =
+::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_ReqRoleList_NFMsgPreGame_2eproto =
     {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 0, 0, InitDefaultsscc_info_ReqRoleList_NFMsgPreGame_2eproto}, {}};
 
 static void InitDefaultsscc_info_ReqSelectServer_NFMsgPreGame_2eproto() {
@@ -300,7 +300,7 @@ static void InitDefaultsscc_info_ReqSelectServer_NFMsgPreGame_2eproto() {
   ::NFMsg::ReqSelectServer::InitAsDefaultInstance();
 }
 
-LIBPROTOC_EXPORT ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_ReqSelectServer_NFMsgPreGame_2eproto =
+::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_ReqSelectServer_NFMsgPreGame_2eproto =
     {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 0, 0, InitDefaultsscc_info_ReqSelectServer_NFMsgPreGame_2eproto}, {}};
 
 static void InitDefaultsscc_info_ReqServerList_NFMsgPreGame_2eproto() {
@@ -314,7 +314,7 @@ static void InitDefaultsscc_info_ReqServerList_NFMsgPreGame_2eproto() {
   ::NFMsg::ReqServerList::InitAsDefaultInstance();
 }
 
-LIBPROTOC_EXPORT ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_ReqServerList_NFMsgPreGame_2eproto =
+::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_ReqServerList_NFMsgPreGame_2eproto =
     {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 0, 0, InitDefaultsscc_info_ReqServerList_NFMsgPreGame_2eproto}, {}};
 
 static void InitDefaultsscc_info_RoleDataPack_NFMsgPreGame_2eproto() {
@@ -328,7 +328,7 @@ static void InitDefaultsscc_info_RoleDataPack_NFMsgPreGame_2eproto() {
   ::NFMsg::RoleDataPack::InitAsDefaultInstance();
 }
 
-LIBPROTOC_EXPORT ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<3> scc_info_RoleDataPack_NFMsgPreGame_2eproto =
+::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<3> scc_info_RoleDataPack_NFMsgPreGame_2eproto =
     {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 3, 0, InitDefaultsscc_info_RoleDataPack_NFMsgPreGame_2eproto}, {
       &scc_info_Ident_NFMsgBase_2eproto.base,
       &scc_info_ObjectPropertyList_NFMsgBase_2eproto.base,
@@ -345,7 +345,7 @@ static void InitDefaultsscc_info_RoleLiteInfo_NFMsgPreGame_2eproto() {
   ::NFMsg::RoleLiteInfo::InitAsDefaultInstance();
 }
 
-LIBPROTOC_EXPORT ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_RoleLiteInfo_NFMsgPreGame_2eproto =
+::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_RoleLiteInfo_NFMsgPreGame_2eproto =
     {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 1, 0, InitDefaultsscc_info_RoleLiteInfo_NFMsgPreGame_2eproto}, {
       &scc_info_Ident_NFMsgBase_2eproto.base,}};
 
@@ -360,7 +360,7 @@ static void InitDefaultsscc_info_RoleOfflineNotify_NFMsgPreGame_2eproto() {
   ::NFMsg::RoleOfflineNotify::InitAsDefaultInstance();
 }
 
-LIBPROTOC_EXPORT ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_RoleOfflineNotify_NFMsgPreGame_2eproto =
+::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_RoleOfflineNotify_NFMsgPreGame_2eproto =
     {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 1, 0, InitDefaultsscc_info_RoleOfflineNotify_NFMsgPreGame_2eproto}, {
       &scc_info_Ident_NFMsgBase_2eproto.base,}};
 
@@ -375,7 +375,7 @@ static void InitDefaultsscc_info_RoleOnlineNotify_NFMsgPreGame_2eproto() {
   ::NFMsg::RoleOnlineNotify::InitAsDefaultInstance();
 }
 
-LIBPROTOC_EXPORT ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<7> scc_info_RoleOnlineNotify_NFMsgPreGame_2eproto =
+::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<7> scc_info_RoleOnlineNotify_NFMsgPreGame_2eproto =
     {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 7, 0, InitDefaultsscc_info_RoleOnlineNotify_NFMsgPreGame_2eproto}, {
       &scc_info_Ident_NFMsgBase_2eproto.base,
       &scc_info_PropertyInt_NFMsgBase_2eproto.base,
@@ -396,7 +396,7 @@ static void InitDefaultsscc_info_ServerHeartBeat_NFMsgPreGame_2eproto() {
   ::NFMsg::ServerHeartBeat::InitAsDefaultInstance();
 }
 
-LIBPROTOC_EXPORT ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_ServerHeartBeat_NFMsgPreGame_2eproto =
+::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_ServerHeartBeat_NFMsgPreGame_2eproto =
     {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 0, 0, InitDefaultsscc_info_ServerHeartBeat_NFMsgPreGame_2eproto}, {}};
 
 static void InitDefaultsscc_info_ServerInfo_NFMsgPreGame_2eproto() {
@@ -410,7 +410,7 @@ static void InitDefaultsscc_info_ServerInfo_NFMsgPreGame_2eproto() {
   ::NFMsg::ServerInfo::InitAsDefaultInstance();
 }
 
-LIBPROTOC_EXPORT ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_ServerInfo_NFMsgPreGame_2eproto =
+::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_ServerInfo_NFMsgPreGame_2eproto =
     {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 0, 0, InitDefaultsscc_info_ServerInfo_NFMsgPreGame_2eproto}, {}};
 
 static void InitDefaultsscc_info_ServerInfoReport_NFMsgPreGame_2eproto() {
@@ -424,7 +424,7 @@ static void InitDefaultsscc_info_ServerInfoReport_NFMsgPreGame_2eproto() {
   ::NFMsg::ServerInfoReport::InitAsDefaultInstance();
 }
 
-LIBPROTOC_EXPORT ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_ServerInfoReport_NFMsgPreGame_2eproto =
+::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_ServerInfoReport_NFMsgPreGame_2eproto =
     {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 0, 0, InitDefaultsscc_info_ServerInfoReport_NFMsgPreGame_2eproto}, {}};
 
 static void InitDefaultsscc_info_ServerInfoReportList_NFMsgPreGame_2eproto() {
@@ -438,7 +438,7 @@ static void InitDefaultsscc_info_ServerInfoReportList_NFMsgPreGame_2eproto() {
   ::NFMsg::ServerInfoReportList::InitAsDefaultInstance();
 }
 
-LIBPROTOC_EXPORT ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_ServerInfoReportList_NFMsgPreGame_2eproto =
+::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_ServerInfoReportList_NFMsgPreGame_2eproto =
     {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 1, 0, InitDefaultsscc_info_ServerInfoReportList_NFMsgPreGame_2eproto}, {
       &scc_info_ServerInfoReport_NFMsgPreGame_2eproto.base,}};
 

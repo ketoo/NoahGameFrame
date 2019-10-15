@@ -4,15 +4,15 @@
     <ClCompile Include="dllmain.cpp" />
     <ClCompile Include="NFLuaScriptPlugin.cpp" />
     <ClCompile Include="NFLuaHttpModule.cpp" />
-    <ClCompile Include="NFLuaPBModule.cpp" />
     <ClCompile Include="NFLuaScriptModule.cpp" />
     <ClCompile Include="NFLuaWebSocketModule.cpp" />
+    <ClCompile Include="NFLuaPBModule.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="NFLuaScriptPlugin.h" />
     <ClInclude Include="NFLuaHttpModule.h" />
-    <ClInclude Include="NFLuaPBModule.h" />
     <ClInclude Include="NFLuaScriptModule.h" />
     <ClInclude Include="NFLuaWebSocketModule.h" />
+    <ClInclude Include="NFLuaPBModule.h" />
   </ItemGroup>
 </Project>

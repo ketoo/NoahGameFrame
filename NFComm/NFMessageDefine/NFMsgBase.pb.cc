@@ -202,7 +202,7 @@ static void InitDefaultsscc_info_Ident_NFMsgBase_2eproto() {
   ::NFMsg::Ident::InitAsDefaultInstance();
 }
 
-LIBPROTOC_EXPORT ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_Ident_NFMsgBase_2eproto =
+::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_Ident_NFMsgBase_2eproto =
     {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 0, 0, InitDefaultsscc_info_Ident_NFMsgBase_2eproto}, {}};
 
 static void InitDefaultsscc_info_MsgBase_NFMsgBase_2eproto() {
@@ -216,7 +216,7 @@ static void InitDefaultsscc_info_MsgBase_NFMsgBase_2eproto() {
   ::NFMsg::MsgBase::InitAsDefaultInstance();
 }
 
-LIBPROTOC_EXPORT ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_MsgBase_NFMsgBase_2eproto =
+::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_MsgBase_NFMsgBase_2eproto =
     {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 1, 0, InitDefaultsscc_info_MsgBase_NFMsgBase_2eproto}, {
       &scc_info_Ident_NFMsgBase_2eproto.base,}};
 
@@ -231,7 +231,7 @@ static void InitDefaultsscc_info_MultiObjectPropertyList_NFMsgBase_2eproto() {
   ::NFMsg::MultiObjectPropertyList::InitAsDefaultInstance();
 }
 
-LIBPROTOC_EXPORT ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_MultiObjectPropertyList_NFMsgBase_2eproto =
+::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_MultiObjectPropertyList_NFMsgBase_2eproto =
     {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 1, 0, InitDefaultsscc_info_MultiObjectPropertyList_NFMsgBase_2eproto}, {
       &scc_info_ObjectPropertyList_NFMsgBase_2eproto.base,}};
 
@@ -246,7 +246,7 @@ static void InitDefaultsscc_info_MultiObjectRecordList_NFMsgBase_2eproto() {
   ::NFMsg::MultiObjectRecordList::InitAsDefaultInstance();
 }
 
-LIBPROTOC_EXPORT ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_MultiObjectRecordList_NFMsgBase_2eproto =
+::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_MultiObjectRecordList_NFMsgBase_2eproto =
     {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 1, 0, InitDefaultsscc_info_MultiObjectRecordList_NFMsgBase_2eproto}, {
       &scc_info_ObjectRecordList_NFMsgBase_2eproto.base,}};
 
@@ -261,7 +261,7 @@ static void InitDefaultsscc_info_ObjectPropertyFloat_NFMsgBase_2eproto() {
   ::NFMsg::ObjectPropertyFloat::InitAsDefaultInstance();
 }
 
-LIBPROTOC_EXPORT ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<2> scc_info_ObjectPropertyFloat_NFMsgBase_2eproto =
+::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<2> scc_info_ObjectPropertyFloat_NFMsgBase_2eproto =
     {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 2, 0, InitDefaultsscc_info_ObjectPropertyFloat_NFMsgBase_2eproto}, {
       &scc_info_Ident_NFMsgBase_2eproto.base,
       &scc_info_PropertyFloat_NFMsgBase_2eproto.base,}};
@@ -277,7 +277,7 @@ static void InitDefaultsscc_info_ObjectPropertyInt_NFMsgBase_2eproto() {
   ::NFMsg::ObjectPropertyInt::InitAsDefaultInstance();
 }
 
-LIBPROTOC_EXPORT ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<2> scc_info_ObjectPropertyInt_NFMsgBase_2eproto =
+::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<2> scc_info_ObjectPropertyInt_NFMsgBase_2eproto =
     {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 2, 0, InitDefaultsscc_info_ObjectPropertyInt_NFMsgBase_2eproto}, {
       &scc_info_Ident_NFMsgBase_2eproto.base,
       &scc_info_PropertyInt_NFMsgBase_2eproto.base,}};
@@ -293,7 +293,7 @@ static void InitDefaultsscc_info_ObjectPropertyList_NFMsgBase_2eproto() {
   ::NFMsg::ObjectPropertyList::InitAsDefaultInstance();
 }
 
-LIBPROTOC_EXPORT ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<7> scc_info_ObjectPropertyList_NFMsgBase_2eproto =
+::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<7> scc_info_ObjectPropertyList_NFMsgBase_2eproto =
     {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 7, 0, InitDefaultsscc_info_ObjectPropertyList_NFMsgBase_2eproto}, {
       &scc_info_Ident_NFMsgBase_2eproto.base,
       &scc_info_PropertyInt_NFMsgBase_2eproto.base,
@@ -314,7 +314,7 @@ static void InitDefaultsscc_info_ObjectPropertyObject_NFMsgBase_2eproto() {
   ::NFMsg::ObjectPropertyObject::InitAsDefaultInstance();
 }
 
-LIBPROTOC_EXPORT ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<2> scc_info_ObjectPropertyObject_NFMsgBase_2eproto =
+::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<2> scc_info_ObjectPropertyObject_NFMsgBase_2eproto =
     {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 2, 0, InitDefaultsscc_info_ObjectPropertyObject_NFMsgBase_2eproto}, {
       &scc_info_Ident_NFMsgBase_2eproto.base,
       &scc_info_PropertyObject_NFMsgBase_2eproto.base,}};
@@ -330,7 +330,7 @@ static void InitDefaultsscc_info_ObjectPropertyString_NFMsgBase_2eproto() {
   ::NFMsg::ObjectPropertyString::InitAsDefaultInstance();
 }
 
-LIBPROTOC_EXPORT ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<2> scc_info_ObjectPropertyString_NFMsgBase_2eproto =
+::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<2> scc_info_ObjectPropertyString_NFMsgBase_2eproto =
     {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 2, 0, InitDefaultsscc_info_ObjectPropertyString_NFMsgBase_2eproto}, {
       &scc_info_Ident_NFMsgBase_2eproto.base,
       &scc_info_PropertyString_NFMsgBase_2eproto.base,}};
@@ -346,7 +346,7 @@ static void InitDefaultsscc_info_ObjectPropertyVector2_NFMsgBase_2eproto() {
   ::NFMsg::ObjectPropertyVector2::InitAsDefaultInstance();
 }
 
-LIBPROTOC_EXPORT ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<2> scc_info_ObjectPropertyVector2_NFMsgBase_2eproto =
+::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<2> scc_info_ObjectPropertyVector2_NFMsgBase_2eproto =
     {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 2, 0, InitDefaultsscc_info_ObjectPropertyVector2_NFMsgBase_2eproto}, {
       &scc_info_Ident_NFMsgBase_2eproto.base,
       &scc_info_PropertyVector2_NFMsgBase_2eproto.base,}};
@@ -362,7 +362,7 @@ static void InitDefaultsscc_info_ObjectPropertyVector3_NFMsgBase_2eproto() {
   ::NFMsg::ObjectPropertyVector3::InitAsDefaultInstance();
 }
 
-LIBPROTOC_EXPORT ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<2> scc_info_ObjectPropertyVector3_NFMsgBase_2eproto =
+::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<2> scc_info_ObjectPropertyVector3_NFMsgBase_2eproto =
     {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 2, 0, InitDefaultsscc_info_ObjectPropertyVector3_NFMsgBase_2eproto}, {
       &scc_info_Ident_NFMsgBase_2eproto.base,
       &scc_info_PropertyVector3_NFMsgBase_2eproto.base,}};
@@ -378,7 +378,7 @@ static void InitDefaultsscc_info_ObjectRecordAddRow_NFMsgBase_2eproto() {
   ::NFMsg::ObjectRecordAddRow::InitAsDefaultInstance();
 }
 
-LIBPROTOC_EXPORT ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<2> scc_info_ObjectRecordAddRow_NFMsgBase_2eproto =
+::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<2> scc_info_ObjectRecordAddRow_NFMsgBase_2eproto =
     {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 2, 0, InitDefaultsscc_info_ObjectRecordAddRow_NFMsgBase_2eproto}, {
       &scc_info_Ident_NFMsgBase_2eproto.base,
       &scc_info_RecordAddRowStruct_NFMsgBase_2eproto.base,}};
@@ -394,7 +394,7 @@ static void InitDefaultsscc_info_ObjectRecordBase_NFMsgBase_2eproto() {
   ::NFMsg::ObjectRecordBase::InitAsDefaultInstance();
 }
 
-LIBPROTOC_EXPORT ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_ObjectRecordBase_NFMsgBase_2eproto =
+::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_ObjectRecordBase_NFMsgBase_2eproto =
     {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 1, 0, InitDefaultsscc_info_ObjectRecordBase_NFMsgBase_2eproto}, {
       &scc_info_RecordAddRowStruct_NFMsgBase_2eproto.base,}};
 
@@ -409,7 +409,7 @@ static void InitDefaultsscc_info_ObjectRecordFloat_NFMsgBase_2eproto() {
   ::NFMsg::ObjectRecordFloat::InitAsDefaultInstance();
 }
 
-LIBPROTOC_EXPORT ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<2> scc_info_ObjectRecordFloat_NFMsgBase_2eproto =
+::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<2> scc_info_ObjectRecordFloat_NFMsgBase_2eproto =
     {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 2, 0, InitDefaultsscc_info_ObjectRecordFloat_NFMsgBase_2eproto}, {
       &scc_info_Ident_NFMsgBase_2eproto.base,
       &scc_info_RecordFloat_NFMsgBase_2eproto.base,}};
@@ -425,7 +425,7 @@ static void InitDefaultsscc_info_ObjectRecordInt_NFMsgBase_2eproto() {
   ::NFMsg::ObjectRecordInt::InitAsDefaultInstance();
 }
 
-LIBPROTOC_EXPORT ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<2> scc_info_ObjectRecordInt_NFMsgBase_2eproto =
+::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<2> scc_info_ObjectRecordInt_NFMsgBase_2eproto =
     {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 2, 0, InitDefaultsscc_info_ObjectRecordInt_NFMsgBase_2eproto}, {
       &scc_info_Ident_NFMsgBase_2eproto.base,
       &scc_info_RecordInt_NFMsgBase_2eproto.base,}};
@@ -441,7 +441,7 @@ static void InitDefaultsscc_info_ObjectRecordList_NFMsgBase_2eproto() {
   ::NFMsg::ObjectRecordList::InitAsDefaultInstance();
 }
 
-LIBPROTOC_EXPORT ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<2> scc_info_ObjectRecordList_NFMsgBase_2eproto =
+::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<2> scc_info_ObjectRecordList_NFMsgBase_2eproto =
     {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 2, 0, InitDefaultsscc_info_ObjectRecordList_NFMsgBase_2eproto}, {
       &scc_info_Ident_NFMsgBase_2eproto.base,
       &scc_info_ObjectRecordBase_NFMsgBase_2eproto.base,}};
@@ -457,7 +457,7 @@ static void InitDefaultsscc_info_ObjectRecordObject_NFMsgBase_2eproto() {
   ::NFMsg::ObjectRecordObject::InitAsDefaultInstance();
 }
 
-LIBPROTOC_EXPORT ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<2> scc_info_ObjectRecordObject_NFMsgBase_2eproto =
+::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<2> scc_info_ObjectRecordObject_NFMsgBase_2eproto =
     {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 2, 0, InitDefaultsscc_info_ObjectRecordObject_NFMsgBase_2eproto}, {
       &scc_info_Ident_NFMsgBase_2eproto.base,
       &scc_info_RecordObject_NFMsgBase_2eproto.base,}};
@@ -473,7 +473,7 @@ static void InitDefaultsscc_info_ObjectRecordRemove_NFMsgBase_2eproto() {
   ::NFMsg::ObjectRecordRemove::InitAsDefaultInstance();
 }
 
-LIBPROTOC_EXPORT ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_ObjectRecordRemove_NFMsgBase_2eproto =
+::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_ObjectRecordRemove_NFMsgBase_2eproto =
     {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 1, 0, InitDefaultsscc_info_ObjectRecordRemove_NFMsgBase_2eproto}, {
       &scc_info_Ident_NFMsgBase_2eproto.base,}};
 
@@ -488,7 +488,7 @@ static void InitDefaultsscc_info_ObjectRecordString_NFMsgBase_2eproto() {
   ::NFMsg::ObjectRecordString::InitAsDefaultInstance();
 }
 
-LIBPROTOC_EXPORT ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<2> scc_info_ObjectRecordString_NFMsgBase_2eproto =
+::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<2> scc_info_ObjectRecordString_NFMsgBase_2eproto =
     {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 2, 0, InitDefaultsscc_info_ObjectRecordString_NFMsgBase_2eproto}, {
       &scc_info_Ident_NFMsgBase_2eproto.base,
       &scc_info_RecordString_NFMsgBase_2eproto.base,}};
@@ -504,7 +504,7 @@ static void InitDefaultsscc_info_ObjectRecordSwap_NFMsgBase_2eproto() {
   ::NFMsg::ObjectRecordSwap::InitAsDefaultInstance();
 }
 
-LIBPROTOC_EXPORT ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_ObjectRecordSwap_NFMsgBase_2eproto =
+::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_ObjectRecordSwap_NFMsgBase_2eproto =
     {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 1, 0, InitDefaultsscc_info_ObjectRecordSwap_NFMsgBase_2eproto}, {
       &scc_info_Ident_NFMsgBase_2eproto.base,}};
 
@@ -519,7 +519,7 @@ static void InitDefaultsscc_info_ObjectRecordVector2_NFMsgBase_2eproto() {
   ::NFMsg::ObjectRecordVector2::InitAsDefaultInstance();
 }
 
-LIBPROTOC_EXPORT ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<2> scc_info_ObjectRecordVector2_NFMsgBase_2eproto =
+::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<2> scc_info_ObjectRecordVector2_NFMsgBase_2eproto =
     {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 2, 0, InitDefaultsscc_info_ObjectRecordVector2_NFMsgBase_2eproto}, {
       &scc_info_Ident_NFMsgBase_2eproto.base,
       &scc_info_RecordVector2_NFMsgBase_2eproto.base,}};
@@ -535,7 +535,7 @@ static void InitDefaultsscc_info_ObjectRecordVector3_NFMsgBase_2eproto() {
   ::NFMsg::ObjectRecordVector3::InitAsDefaultInstance();
 }
 
-LIBPROTOC_EXPORT ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<2> scc_info_ObjectRecordVector3_NFMsgBase_2eproto =
+::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<2> scc_info_ObjectRecordVector3_NFMsgBase_2eproto =
     {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 2, 0, InitDefaultsscc_info_ObjectRecordVector3_NFMsgBase_2eproto}, {
       &scc_info_Ident_NFMsgBase_2eproto.base,
       &scc_info_RecordVector3_NFMsgBase_2eproto.base,}};
@@ -551,7 +551,7 @@ static void InitDefaultsscc_info_PropertyFloat_NFMsgBase_2eproto() {
   ::NFMsg::PropertyFloat::InitAsDefaultInstance();
 }
 
-LIBPROTOC_EXPORT ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_PropertyFloat_NFMsgBase_2eproto =
+::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_PropertyFloat_NFMsgBase_2eproto =
     {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 0, 0, InitDefaultsscc_info_PropertyFloat_NFMsgBase_2eproto}, {}};
 
 static void InitDefaultsscc_info_PropertyInt_NFMsgBase_2eproto() {
@@ -565,7 +565,7 @@ static void InitDefaultsscc_info_PropertyInt_NFMsgBase_2eproto() {
   ::NFMsg::PropertyInt::InitAsDefaultInstance();
 }
 
-LIBPROTOC_EXPORT ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_PropertyInt_NFMsgBase_2eproto =
+::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_PropertyInt_NFMsgBase_2eproto =
     {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 0, 0, InitDefaultsscc_info_PropertyInt_NFMsgBase_2eproto}, {}};
 
 static void InitDefaultsscc_info_PropertyObject_NFMsgBase_2eproto() {
@@ -579,7 +579,7 @@ static void InitDefaultsscc_info_PropertyObject_NFMsgBase_2eproto() {
   ::NFMsg::PropertyObject::InitAsDefaultInstance();
 }
 
-LIBPROTOC_EXPORT ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_PropertyObject_NFMsgBase_2eproto =
+::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_PropertyObject_NFMsgBase_2eproto =
     {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 1, 0, InitDefaultsscc_info_PropertyObject_NFMsgBase_2eproto}, {
       &scc_info_Ident_NFMsgBase_2eproto.base,}};
 
@@ -594,7 +594,7 @@ static void InitDefaultsscc_info_PropertyString_NFMsgBase_2eproto() {
   ::NFMsg::PropertyString::InitAsDefaultInstance();
 }
 
-LIBPROTOC_EXPORT ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_PropertyString_NFMsgBase_2eproto =
+::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_PropertyString_NFMsgBase_2eproto =
     {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 0, 0, InitDefaultsscc_info_PropertyString_NFMsgBase_2eproto}, {}};
 
 static void InitDefaultsscc_info_PropertyVector2_NFMsgBase_2eproto() {
@@ -608,7 +608,7 @@ static void InitDefaultsscc_info_PropertyVector2_NFMsgBase_2eproto() {
   ::NFMsg::PropertyVector2::InitAsDefaultInstance();
 }
 
-LIBPROTOC_EXPORT ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_PropertyVector2_NFMsgBase_2eproto =
+::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_PropertyVector2_NFMsgBase_2eproto =
     {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 1, 0, InitDefaultsscc_info_PropertyVector2_NFMsgBase_2eproto}, {
       &scc_info_Vector2_NFMsgBase_2eproto.base,}};
 
@@ -623,7 +623,7 @@ static void InitDefaultsscc_info_PropertyVector3_NFMsgBase_2eproto() {
   ::NFMsg::PropertyVector3::InitAsDefaultInstance();
 }
 
-LIBPROTOC_EXPORT ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_PropertyVector3_NFMsgBase_2eproto =
+::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_PropertyVector3_NFMsgBase_2eproto =
     {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 1, 0, InitDefaultsscc_info_PropertyVector3_NFMsgBase_2eproto}, {
       &scc_info_Vector3_NFMsgBase_2eproto.base,}};
 
@@ -638,7 +638,7 @@ static void InitDefaultsscc_info_RecordAddRowStruct_NFMsgBase_2eproto() {
   ::NFMsg::RecordAddRowStruct::InitAsDefaultInstance();
 }
 
-LIBPROTOC_EXPORT ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<6> scc_info_RecordAddRowStruct_NFMsgBase_2eproto =
+::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<6> scc_info_RecordAddRowStruct_NFMsgBase_2eproto =
     {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 6, 0, InitDefaultsscc_info_RecordAddRowStruct_NFMsgBase_2eproto}, {
       &scc_info_RecordInt_NFMsgBase_2eproto.base,
       &scc_info_RecordFloat_NFMsgBase_2eproto.base,
@@ -658,7 +658,7 @@ static void InitDefaultsscc_info_RecordFloat_NFMsgBase_2eproto() {
   ::NFMsg::RecordFloat::InitAsDefaultInstance();
 }
 
-LIBPROTOC_EXPORT ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_RecordFloat_NFMsgBase_2eproto =
+::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_RecordFloat_NFMsgBase_2eproto =
     {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 0, 0, InitDefaultsscc_info_RecordFloat_NFMsgBase_2eproto}, {}};
 
 static void InitDefaultsscc_info_RecordInt_NFMsgBase_2eproto() {
@@ -672,7 +672,7 @@ static void InitDefaultsscc_info_RecordInt_NFMsgBase_2eproto() {
   ::NFMsg::RecordInt::InitAsDefaultInstance();
 }
 
-LIBPROTOC_EXPORT ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_RecordInt_NFMsgBase_2eproto =
+::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_RecordInt_NFMsgBase_2eproto =
     {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 0, 0, InitDefaultsscc_info_RecordInt_NFMsgBase_2eproto}, {}};
 
 static void InitDefaultsscc_info_RecordObject_NFMsgBase_2eproto() {
@@ -686,7 +686,7 @@ static void InitDefaultsscc_info_RecordObject_NFMsgBase_2eproto() {
   ::NFMsg::RecordObject::InitAsDefaultInstance();
 }
 
-LIBPROTOC_EXPORT ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_RecordObject_NFMsgBase_2eproto =
+::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_RecordObject_NFMsgBase_2eproto =
     {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 1, 0, InitDefaultsscc_info_RecordObject_NFMsgBase_2eproto}, {
       &scc_info_Ident_NFMsgBase_2eproto.base,}};
 
@@ -701,7 +701,7 @@ static void InitDefaultsscc_info_RecordString_NFMsgBase_2eproto() {
   ::NFMsg::RecordString::InitAsDefaultInstance();
 }
 
-LIBPROTOC_EXPORT ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_RecordString_NFMsgBase_2eproto =
+::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_RecordString_NFMsgBase_2eproto =
     {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 0, 0, InitDefaultsscc_info_RecordString_NFMsgBase_2eproto}, {}};
 
 static void InitDefaultsscc_info_RecordVector2_NFMsgBase_2eproto() {
@@ -715,7 +715,7 @@ static void InitDefaultsscc_info_RecordVector2_NFMsgBase_2eproto() {
   ::NFMsg::RecordVector2::InitAsDefaultInstance();
 }
 
-LIBPROTOC_EXPORT ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_RecordVector2_NFMsgBase_2eproto =
+::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_RecordVector2_NFMsgBase_2eproto =
     {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 1, 0, InitDefaultsscc_info_RecordVector2_NFMsgBase_2eproto}, {
       &scc_info_Vector2_NFMsgBase_2eproto.base,}};
 
@@ -730,7 +730,7 @@ static void InitDefaultsscc_info_RecordVector3_NFMsgBase_2eproto() {
   ::NFMsg::RecordVector3::InitAsDefaultInstance();
 }
 
-LIBPROTOC_EXPORT ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_RecordVector3_NFMsgBase_2eproto =
+::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_RecordVector3_NFMsgBase_2eproto =
     {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 1, 0, InitDefaultsscc_info_RecordVector3_NFMsgBase_2eproto}, {
       &scc_info_Vector3_NFMsgBase_2eproto.base,}};
 
@@ -745,7 +745,7 @@ static void InitDefaultsscc_info_ReqAckLagTest_NFMsgBase_2eproto() {
   ::NFMsg::ReqAckLagTest::InitAsDefaultInstance();
 }
 
-LIBPROTOC_EXPORT ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_ReqAckLagTest_NFMsgBase_2eproto =
+::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_ReqAckLagTest_NFMsgBase_2eproto =
     {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 0, 0, InitDefaultsscc_info_ReqAckLagTest_NFMsgBase_2eproto}, {}};
 
 static void InitDefaultsscc_info_ReqCommand_NFMsgBase_2eproto() {
@@ -759,7 +759,7 @@ static void InitDefaultsscc_info_ReqCommand_NFMsgBase_2eproto() {
   ::NFMsg::ReqCommand::InitAsDefaultInstance();
 }
 
-LIBPROTOC_EXPORT ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_ReqCommand_NFMsgBase_2eproto =
+::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_ReqCommand_NFMsgBase_2eproto =
     {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 1, 0, InitDefaultsscc_info_ReqCommand_NFMsgBase_2eproto}, {
       &scc_info_Ident_NFMsgBase_2eproto.base,}};
 
@@ -774,7 +774,7 @@ static void InitDefaultsscc_info_Vector2_NFMsgBase_2eproto() {
   ::NFMsg::Vector2::InitAsDefaultInstance();
 }
 
-LIBPROTOC_EXPORT ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_Vector2_NFMsgBase_2eproto =
+::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_Vector2_NFMsgBase_2eproto =
     {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 0, 0, InitDefaultsscc_info_Vector2_NFMsgBase_2eproto}, {}};
 
 static void InitDefaultsscc_info_Vector3_NFMsgBase_2eproto() {
@@ -788,7 +788,7 @@ static void InitDefaultsscc_info_Vector3_NFMsgBase_2eproto() {
   ::NFMsg::Vector3::InitAsDefaultInstance();
 }
 
-LIBPROTOC_EXPORT ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_Vector3_NFMsgBase_2eproto =
+::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_Vector3_NFMsgBase_2eproto =
     {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 0, 0, InitDefaultsscc_info_Vector3_NFMsgBase_2eproto}, {}};
 
 static ::PROTOBUF_NAMESPACE_ID::Metadata file_level_metadata_NFMsgBase_2eproto[39];

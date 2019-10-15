@@ -35,7 +35,7 @@
 #include <google/protobuf/unknown_field_set.h>
 // @@protoc_insertion_point(includes)
 #include <google/protobuf/port_def.inc>
-#define PROTOBUF_INTERNAL_EXPORT_NFMsgBase_2eproto LIBPROTOC_EXPORT
+#define PROTOBUF_INTERNAL_EXPORT_NFMsgBase_2eproto
 PROTOBUF_NAMESPACE_OPEN
 namespace internal {
 class AnyMetadata;
@@ -43,7 +43,7 @@ class AnyMetadata;
 PROTOBUF_NAMESPACE_CLOSE
 
 // Internal implementation detail -- do not use these members.
-struct LIBPROTOC_EXPORT TableStruct_NFMsgBase_2eproto {
+struct TableStruct_NFMsgBase_2eproto {
   static const ::PROTOBUF_NAMESPACE_ID::internal::ParseTableField entries[]
     PROTOBUF_SECTION_VARIABLE(protodesc_cold);
   static const ::PROTOBUF_NAMESPACE_ID::internal::AuxillaryParseTableField aux[]
@@ -54,166 +54,166 @@ struct LIBPROTOC_EXPORT TableStruct_NFMsgBase_2eproto {
   static const ::PROTOBUF_NAMESPACE_ID::internal::SerializationTable serialization_table[];
   static const ::PROTOBUF_NAMESPACE_ID::uint32 offsets[];
 };
-extern LIBPROTOC_EXPORT const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable descriptor_table_NFMsgBase_2eproto;
+extern const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable descriptor_table_NFMsgBase_2eproto;
 namespace NFMsg {
 class Ident;
 class IdentDefaultTypeInternal;
-LIBPROTOC_EXPORT extern IdentDefaultTypeInternal _Ident_default_instance_;
+extern IdentDefaultTypeInternal _Ident_default_instance_;
 class MsgBase;
 class MsgBaseDefaultTypeInternal;
-LIBPROTOC_EXPORT extern MsgBaseDefaultTypeInternal _MsgBase_default_instance_;
+extern MsgBaseDefaultTypeInternal _MsgBase_default_instance_;
 class MultiObjectPropertyList;
 class MultiObjectPropertyListDefaultTypeInternal;
-LIBPROTOC_EXPORT extern MultiObjectPropertyListDefaultTypeInternal _MultiObjectPropertyList_default_instance_;
+extern MultiObjectPropertyListDefaultTypeInternal _MultiObjectPropertyList_default_instance_;
 class MultiObjectRecordList;
 class MultiObjectRecordListDefaultTypeInternal;
-LIBPROTOC_EXPORT extern MultiObjectRecordListDefaultTypeInternal _MultiObjectRecordList_default_instance_;
+extern MultiObjectRecordListDefaultTypeInternal _MultiObjectRecordList_default_instance_;
 class ObjectPropertyFloat;
 class ObjectPropertyFloatDefaultTypeInternal;
-LIBPROTOC_EXPORT extern ObjectPropertyFloatDefaultTypeInternal _ObjectPropertyFloat_default_instance_;
+extern ObjectPropertyFloatDefaultTypeInternal _ObjectPropertyFloat_default_instance_;
 class ObjectPropertyInt;
 class ObjectPropertyIntDefaultTypeInternal;
-LIBPROTOC_EXPORT extern ObjectPropertyIntDefaultTypeInternal _ObjectPropertyInt_default_instance_;
+extern ObjectPropertyIntDefaultTypeInternal _ObjectPropertyInt_default_instance_;
 class ObjectPropertyList;
 class ObjectPropertyListDefaultTypeInternal;
-LIBPROTOC_EXPORT extern ObjectPropertyListDefaultTypeInternal _ObjectPropertyList_default_instance_;
+extern ObjectPropertyListDefaultTypeInternal _ObjectPropertyList_default_instance_;
 class ObjectPropertyObject;
 class ObjectPropertyObjectDefaultTypeInternal;
-LIBPROTOC_EXPORT extern ObjectPropertyObjectDefaultTypeInternal _ObjectPropertyObject_default_instance_;
+extern ObjectPropertyObjectDefaultTypeInternal _ObjectPropertyObject_default_instance_;
 class ObjectPropertyString;
 class ObjectPropertyStringDefaultTypeInternal;
-LIBPROTOC_EXPORT extern ObjectPropertyStringDefaultTypeInternal _ObjectPropertyString_default_instance_;
+extern ObjectPropertyStringDefaultTypeInternal _ObjectPropertyString_default_instance_;
 class ObjectPropertyVector2;
 class ObjectPropertyVector2DefaultTypeInternal;
-LIBPROTOC_EXPORT extern ObjectPropertyVector2DefaultTypeInternal _ObjectPropertyVector2_default_instance_;
+extern ObjectPropertyVector2DefaultTypeInternal _ObjectPropertyVector2_default_instance_;
 class ObjectPropertyVector3;
 class ObjectPropertyVector3DefaultTypeInternal;
-LIBPROTOC_EXPORT extern ObjectPropertyVector3DefaultTypeInternal _ObjectPropertyVector3_default_instance_;
+extern ObjectPropertyVector3DefaultTypeInternal _ObjectPropertyVector3_default_instance_;
 class ObjectRecordAddRow;
 class ObjectRecordAddRowDefaultTypeInternal;
-LIBPROTOC_EXPORT extern ObjectRecordAddRowDefaultTypeInternal _ObjectRecordAddRow_default_instance_;
+extern ObjectRecordAddRowDefaultTypeInternal _ObjectRecordAddRow_default_instance_;
 class ObjectRecordBase;
 class ObjectRecordBaseDefaultTypeInternal;
-LIBPROTOC_EXPORT extern ObjectRecordBaseDefaultTypeInternal _ObjectRecordBase_default_instance_;
+extern ObjectRecordBaseDefaultTypeInternal _ObjectRecordBase_default_instance_;
 class ObjectRecordFloat;
 class ObjectRecordFloatDefaultTypeInternal;
-LIBPROTOC_EXPORT extern ObjectRecordFloatDefaultTypeInternal _ObjectRecordFloat_default_instance_;
+extern ObjectRecordFloatDefaultTypeInternal _ObjectRecordFloat_default_instance_;
 class ObjectRecordInt;
 class ObjectRecordIntDefaultTypeInternal;
-LIBPROTOC_EXPORT extern ObjectRecordIntDefaultTypeInternal _ObjectRecordInt_default_instance_;
+extern ObjectRecordIntDefaultTypeInternal _ObjectRecordInt_default_instance_;
 class ObjectRecordList;
 class ObjectRecordListDefaultTypeInternal;
-LIBPROTOC_EXPORT extern ObjectRecordListDefaultTypeInternal _ObjectRecordList_default_instance_;
+extern ObjectRecordListDefaultTypeInternal _ObjectRecordList_default_instance_;
 class ObjectRecordObject;
 class ObjectRecordObjectDefaultTypeInternal;
-LIBPROTOC_EXPORT extern ObjectRecordObjectDefaultTypeInternal _ObjectRecordObject_default_instance_;
+extern ObjectRecordObjectDefaultTypeInternal _ObjectRecordObject_default_instance_;
 class ObjectRecordRemove;
 class ObjectRecordRemoveDefaultTypeInternal;
-LIBPROTOC_EXPORT extern ObjectRecordRemoveDefaultTypeInternal _ObjectRecordRemove_default_instance_;
+extern ObjectRecordRemoveDefaultTypeInternal _ObjectRecordRemove_default_instance_;
 class ObjectRecordString;
 class ObjectRecordStringDefaultTypeInternal;
-LIBPROTOC_EXPORT extern ObjectRecordStringDefaultTypeInternal _ObjectRecordString_default_instance_;
+extern ObjectRecordStringDefaultTypeInternal _ObjectRecordString_default_instance_;
 class ObjectRecordSwap;
 class ObjectRecordSwapDefaultTypeInternal;
-LIBPROTOC_EXPORT extern ObjectRecordSwapDefaultTypeInternal _ObjectRecordSwap_default_instance_;
+extern ObjectRecordSwapDefaultTypeInternal _ObjectRecordSwap_default_instance_;
 class ObjectRecordVector2;
 class ObjectRecordVector2DefaultTypeInternal;
-LIBPROTOC_EXPORT extern ObjectRecordVector2DefaultTypeInternal _ObjectRecordVector2_default_instance_;
+extern ObjectRecordVector2DefaultTypeInternal _ObjectRecordVector2_default_instance_;
 class ObjectRecordVector3;
 class ObjectRecordVector3DefaultTypeInternal;
-LIBPROTOC_EXPORT extern ObjectRecordVector3DefaultTypeInternal _ObjectRecordVector3_default_instance_;
+extern ObjectRecordVector3DefaultTypeInternal _ObjectRecordVector3_default_instance_;
 class PropertyFloat;
 class PropertyFloatDefaultTypeInternal;
-LIBPROTOC_EXPORT extern PropertyFloatDefaultTypeInternal _PropertyFloat_default_instance_;
+extern PropertyFloatDefaultTypeInternal _PropertyFloat_default_instance_;
 class PropertyInt;
 class PropertyIntDefaultTypeInternal;
-LIBPROTOC_EXPORT extern PropertyIntDefaultTypeInternal _PropertyInt_default_instance_;
+extern PropertyIntDefaultTypeInternal _PropertyInt_default_instance_;
 class PropertyObject;
 class PropertyObjectDefaultTypeInternal;
-LIBPROTOC_EXPORT extern PropertyObjectDefaultTypeInternal _PropertyObject_default_instance_;
+extern PropertyObjectDefaultTypeInternal _PropertyObject_default_instance_;
 class PropertyString;
 class PropertyStringDefaultTypeInternal;
-LIBPROTOC_EXPORT extern PropertyStringDefaultTypeInternal _PropertyString_default_instance_;
+extern PropertyStringDefaultTypeInternal _PropertyString_default_instance_;
 class PropertyVector2;
 class PropertyVector2DefaultTypeInternal;
-LIBPROTOC_EXPORT extern PropertyVector2DefaultTypeInternal _PropertyVector2_default_instance_;
+extern PropertyVector2DefaultTypeInternal _PropertyVector2_default_instance_;
 class PropertyVector3;
 class PropertyVector3DefaultTypeInternal;
-LIBPROTOC_EXPORT extern PropertyVector3DefaultTypeInternal _PropertyVector3_default_instance_;
+extern PropertyVector3DefaultTypeInternal _PropertyVector3_default_instance_;
 class RecordAddRowStruct;
 class RecordAddRowStructDefaultTypeInternal;
-LIBPROTOC_EXPORT extern RecordAddRowStructDefaultTypeInternal _RecordAddRowStruct_default_instance_;
+extern RecordAddRowStructDefaultTypeInternal _RecordAddRowStruct_default_instance_;
 class RecordFloat;
 class RecordFloatDefaultTypeInternal;
-LIBPROTOC_EXPORT extern RecordFloatDefaultTypeInternal _RecordFloat_default_instance_;
+extern RecordFloatDefaultTypeInternal _RecordFloat_default_instance_;
 class RecordInt;
 class RecordIntDefaultTypeInternal;
-LIBPROTOC_EXPORT extern RecordIntDefaultTypeInternal _RecordInt_default_instance_;
+extern RecordIntDefaultTypeInternal _RecordInt_default_instance_;
 class RecordObject;
 class RecordObjectDefaultTypeInternal;
-LIBPROTOC_EXPORT extern RecordObjectDefaultTypeInternal _RecordObject_default_instance_;
+extern RecordObjectDefaultTypeInternal _RecordObject_default_instance_;
 class RecordString;
 class RecordStringDefaultTypeInternal;
-LIBPROTOC_EXPORT extern RecordStringDefaultTypeInternal _RecordString_default_instance_;
+extern RecordStringDefaultTypeInternal _RecordString_default_instance_;
 class RecordVector2;
 class RecordVector2DefaultTypeInternal;
-LIBPROTOC_EXPORT extern RecordVector2DefaultTypeInternal _RecordVector2_default_instance_;
+extern RecordVector2DefaultTypeInternal _RecordVector2_default_instance_;
 class RecordVector3;
 class RecordVector3DefaultTypeInternal;
-LIBPROTOC_EXPORT extern RecordVector3DefaultTypeInternal _RecordVector3_default_instance_;
+extern RecordVector3DefaultTypeInternal _RecordVector3_default_instance_;
 class ReqAckLagTest;
 class ReqAckLagTestDefaultTypeInternal;
-LIBPROTOC_EXPORT extern ReqAckLagTestDefaultTypeInternal _ReqAckLagTest_default_instance_;
+extern ReqAckLagTestDefaultTypeInternal _ReqAckLagTest_default_instance_;
 class ReqCommand;
 class ReqCommandDefaultTypeInternal;
-LIBPROTOC_EXPORT extern ReqCommandDefaultTypeInternal _ReqCommand_default_instance_;
+extern ReqCommandDefaultTypeInternal _ReqCommand_default_instance_;
 class Vector2;
 class Vector2DefaultTypeInternal;
-LIBPROTOC_EXPORT extern Vector2DefaultTypeInternal _Vector2_default_instance_;
+extern Vector2DefaultTypeInternal _Vector2_default_instance_;
 class Vector3;
 class Vector3DefaultTypeInternal;
-LIBPROTOC_EXPORT extern Vector3DefaultTypeInternal _Vector3_default_instance_;
+extern Vector3DefaultTypeInternal _Vector3_default_instance_;
 }  // namespace NFMsg
 PROTOBUF_NAMESPACE_OPEN
-template<> LIBPROTOC_EXPORT ::NFMsg::Ident* Arena::CreateMaybeMessage<::NFMsg::Ident>(Arena*);
-template<> LIBPROTOC_EXPORT ::NFMsg::MsgBase* Arena::CreateMaybeMessage<::NFMsg::MsgBase>(Arena*);
-template<> LIBPROTOC_EXPORT ::NFMsg::MultiObjectPropertyList* Arena::CreateMaybeMessage<::NFMsg::MultiObjectPropertyList>(Arena*);
-template<> LIBPROTOC_EXPORT ::NFMsg::MultiObjectRecordList* Arena::CreateMaybeMessage<::NFMsg::MultiObjectRecordList>(Arena*);
-template<> LIBPROTOC_EXPORT ::NFMsg::ObjectPropertyFloat* Arena::CreateMaybeMessage<::NFMsg::ObjectPropertyFloat>(Arena*);
-template<> LIBPROTOC_EXPORT ::NFMsg::ObjectPropertyInt* Arena::CreateMaybeMessage<::NFMsg::ObjectPropertyInt>(Arena*);
-template<> LIBPROTOC_EXPORT ::NFMsg::ObjectPropertyList* Arena::CreateMaybeMessage<::NFMsg::ObjectPropertyList>(Arena*);
-template<> LIBPROTOC_EXPORT ::NFMsg::ObjectPropertyObject* Arena::CreateMaybeMessage<::NFMsg::ObjectPropertyObject>(Arena*);
-template<> LIBPROTOC_EXPORT ::NFMsg::ObjectPropertyString* Arena::CreateMaybeMessage<::NFMsg::ObjectPropertyString>(Arena*);
-template<> LIBPROTOC_EXPORT ::NFMsg::ObjectPropertyVector2* Arena::CreateMaybeMessage<::NFMsg::ObjectPropertyVector2>(Arena*);
-template<> LIBPROTOC_EXPORT ::NFMsg::ObjectPropertyVector3* Arena::CreateMaybeMessage<::NFMsg::ObjectPropertyVector3>(Arena*);
-template<> LIBPROTOC_EXPORT ::NFMsg::ObjectRecordAddRow* Arena::CreateMaybeMessage<::NFMsg::ObjectRecordAddRow>(Arena*);
-template<> LIBPROTOC_EXPORT ::NFMsg::ObjectRecordBase* Arena::CreateMaybeMessage<::NFMsg::ObjectRecordBase>(Arena*);
-template<> LIBPROTOC_EXPORT ::NFMsg::ObjectRecordFloat* Arena::CreateMaybeMessage<::NFMsg::ObjectRecordFloat>(Arena*);
-template<> LIBPROTOC_EXPORT ::NFMsg::ObjectRecordInt* Arena::CreateMaybeMessage<::NFMsg::ObjectRecordInt>(Arena*);
-template<> LIBPROTOC_EXPORT ::NFMsg::ObjectRecordList* Arena::CreateMaybeMessage<::NFMsg::ObjectRecordList>(Arena*);
-template<> LIBPROTOC_EXPORT ::NFMsg::ObjectRecordObject* Arena::CreateMaybeMessage<::NFMsg::ObjectRecordObject>(Arena*);
-template<> LIBPROTOC_EXPORT ::NFMsg::ObjectRecordRemove* Arena::CreateMaybeMessage<::NFMsg::ObjectRecordRemove>(Arena*);
-template<> LIBPROTOC_EXPORT ::NFMsg::ObjectRecordString* Arena::CreateMaybeMessage<::NFMsg::ObjectRecordString>(Arena*);
-template<> LIBPROTOC_EXPORT ::NFMsg::ObjectRecordSwap* Arena::CreateMaybeMessage<::NFMsg::ObjectRecordSwap>(Arena*);
-template<> LIBPROTOC_EXPORT ::NFMsg::ObjectRecordVector2* Arena::CreateMaybeMessage<::NFMsg::ObjectRecordVector2>(Arena*);
-template<> LIBPROTOC_EXPORT ::NFMsg::ObjectRecordVector3* Arena::CreateMaybeMessage<::NFMsg::ObjectRecordVector3>(Arena*);
-template<> LIBPROTOC_EXPORT ::NFMsg::PropertyFloat* Arena::CreateMaybeMessage<::NFMsg::PropertyFloat>(Arena*);
-template<> LIBPROTOC_EXPORT ::NFMsg::PropertyInt* Arena::CreateMaybeMessage<::NFMsg::PropertyInt>(Arena*);
-template<> LIBPROTOC_EXPORT ::NFMsg::PropertyObject* Arena::CreateMaybeMessage<::NFMsg::PropertyObject>(Arena*);
-template<> LIBPROTOC_EXPORT ::NFMsg::PropertyString* Arena::CreateMaybeMessage<::NFMsg::PropertyString>(Arena*);
-template<> LIBPROTOC_EXPORT ::NFMsg::PropertyVector2* Arena::CreateMaybeMessage<::NFMsg::PropertyVector2>(Arena*);
-template<> LIBPROTOC_EXPORT ::NFMsg::PropertyVector3* Arena::CreateMaybeMessage<::NFMsg::PropertyVector3>(Arena*);
-template<> LIBPROTOC_EXPORT ::NFMsg::RecordAddRowStruct* Arena::CreateMaybeMessage<::NFMsg::RecordAddRowStruct>(Arena*);
-template<> LIBPROTOC_EXPORT ::NFMsg::RecordFloat* Arena::CreateMaybeMessage<::NFMsg::RecordFloat>(Arena*);
-template<> LIBPROTOC_EXPORT ::NFMsg::RecordInt* Arena::CreateMaybeMessage<::NFMsg::RecordInt>(Arena*);
-template<> LIBPROTOC_EXPORT ::NFMsg::RecordObject* Arena::CreateMaybeMessage<::NFMsg::RecordObject>(Arena*);
-template<> LIBPROTOC_EXPORT ::NFMsg::RecordString* Arena::CreateMaybeMessage<::NFMsg::RecordString>(Arena*);
-template<> LIBPROTOC_EXPORT ::NFMsg::RecordVector2* Arena::CreateMaybeMessage<::NFMsg::RecordVector2>(Arena*);
-template<> LIBPROTOC_EXPORT ::NFMsg::RecordVector3* Arena::CreateMaybeMessage<::NFMsg::RecordVector3>(Arena*);
-template<> LIBPROTOC_EXPORT ::NFMsg::ReqAckLagTest* Arena::CreateMaybeMessage<::NFMsg::ReqAckLagTest>(Arena*);
-template<> LIBPROTOC_EXPORT ::NFMsg::ReqCommand* Arena::CreateMaybeMessage<::NFMsg::ReqCommand>(Arena*);
-template<> LIBPROTOC_EXPORT ::NFMsg::Vector2* Arena::CreateMaybeMessage<::NFMsg::Vector2>(Arena*);
-template<> LIBPROTOC_EXPORT ::NFMsg::Vector3* Arena::CreateMaybeMessage<::NFMsg::Vector3>(Arena*);
+template<> ::NFMsg::Ident* Arena::CreateMaybeMessage<::NFMsg::Ident>(Arena*);
+template<> ::NFMsg::MsgBase* Arena::CreateMaybeMessage<::NFMsg::MsgBase>(Arena*);
+template<> ::NFMsg::MultiObjectPropertyList* Arena::CreateMaybeMessage<::NFMsg::MultiObjectPropertyList>(Arena*);
+template<> ::NFMsg::MultiObjectRecordList* Arena::CreateMaybeMessage<::NFMsg::MultiObjectRecordList>(Arena*);
+template<> ::NFMsg::ObjectPropertyFloat* Arena::CreateMaybeMessage<::NFMsg::ObjectPropertyFloat>(Arena*);
+template<> ::NFMsg::ObjectPropertyInt* Arena::CreateMaybeMessage<::NFMsg::ObjectPropertyInt>(Arena*);
+template<> ::NFMsg::ObjectPropertyList* Arena::CreateMaybeMessage<::NFMsg::ObjectPropertyList>(Arena*);
+template<> ::NFMsg::ObjectPropertyObject* Arena::CreateMaybeMessage<::NFMsg::ObjectPropertyObject>(Arena*);
+template<> ::NFMsg::ObjectPropertyString* Arena::CreateMaybeMessage<::NFMsg::ObjectPropertyString>(Arena*);
+template<> ::NFMsg::ObjectPropertyVector2* Arena::CreateMaybeMessage<::NFMsg::ObjectPropertyVector2>(Arena*);
+template<> ::NFMsg::ObjectPropertyVector3* Arena::CreateMaybeMessage<::NFMsg::ObjectPropertyVector3>(Arena*);
+template<> ::NFMsg::ObjectRecordAddRow* Arena::CreateMaybeMessage<::NFMsg::ObjectRecordAddRow>(Arena*);
+template<> ::NFMsg::ObjectRecordBase* Arena::CreateMaybeMessage<::NFMsg::ObjectRecordBase>(Arena*);
+template<> ::NFMsg::ObjectRecordFloat* Arena::CreateMaybeMessage<::NFMsg::ObjectRecordFloat>(Arena*);
+template<> ::NFMsg::ObjectRecordInt* Arena::CreateMaybeMessage<::NFMsg::ObjectRecordInt>(Arena*);
+template<> ::NFMsg::ObjectRecordList* Arena::CreateMaybeMessage<::NFMsg::ObjectRecordList>(Arena*);
+template<> ::NFMsg::ObjectRecordObject* Arena::CreateMaybeMessage<::NFMsg::ObjectRecordObject>(Arena*);
+template<> ::NFMsg::ObjectRecordRemove* Arena::CreateMaybeMessage<::NFMsg::ObjectRecordRemove>(Arena*);
+template<> ::NFMsg::ObjectRecordString* Arena::CreateMaybeMessage<::NFMsg::ObjectRecordString>(Arena*);
+template<> ::NFMsg::ObjectRecordSwap* Arena::CreateMaybeMessage<::NFMsg::ObjectRecordSwap>(Arena*);
+template<> ::NFMsg::ObjectRecordVector2* Arena::CreateMaybeMessage<::NFMsg::ObjectRecordVector2>(Arena*);
+template<> ::NFMsg::ObjectRecordVector3* Arena::CreateMaybeMessage<::NFMsg::ObjectRecordVector3>(Arena*);
+template<> ::NFMsg::PropertyFloat* Arena::CreateMaybeMessage<::NFMsg::PropertyFloat>(Arena*);
+template<> ::NFMsg::PropertyInt* Arena::CreateMaybeMessage<::NFMsg::PropertyInt>(Arena*);
+template<> ::NFMsg::PropertyObject* Arena::CreateMaybeMessage<::NFMsg::PropertyObject>(Arena*);
+template<> ::NFMsg::PropertyString* Arena::CreateMaybeMessage<::NFMsg::PropertyString>(Arena*);
+template<> ::NFMsg::PropertyVector2* Arena::CreateMaybeMessage<::NFMsg::PropertyVector2>(Arena*);
+template<> ::NFMsg::PropertyVector3* Arena::CreateMaybeMessage<::NFMsg::PropertyVector3>(Arena*);
+template<> ::NFMsg::RecordAddRowStruct* Arena::CreateMaybeMessage<::NFMsg::RecordAddRowStruct>(Arena*);
+template<> ::NFMsg::RecordFloat* Arena::CreateMaybeMessage<::NFMsg::RecordFloat>(Arena*);
+template<> ::NFMsg::RecordInt* Arena::CreateMaybeMessage<::NFMsg::RecordInt>(Arena*);
+template<> ::NFMsg::RecordObject* Arena::CreateMaybeMessage<::NFMsg::RecordObject>(Arena*);
+template<> ::NFMsg::RecordString* Arena::CreateMaybeMessage<::NFMsg::RecordString>(Arena*);
+template<> ::NFMsg::RecordVector2* Arena::CreateMaybeMessage<::NFMsg::RecordVector2>(Arena*);
+template<> ::NFMsg::RecordVector3* Arena::CreateMaybeMessage<::NFMsg::RecordVector3>(Arena*);
+template<> ::NFMsg::ReqAckLagTest* Arena::CreateMaybeMessage<::NFMsg::ReqAckLagTest>(Arena*);
+template<> ::NFMsg::ReqCommand* Arena::CreateMaybeMessage<::NFMsg::ReqCommand>(Arena*);
+template<> ::NFMsg::Vector2* Arena::CreateMaybeMessage<::NFMsg::Vector2>(Arena*);
+template<> ::NFMsg::Vector3* Arena::CreateMaybeMessage<::NFMsg::Vector3>(Arena*);
 PROTOBUF_NAMESPACE_CLOSE
 namespace NFMsg {
 
@@ -225,12 +225,12 @@ enum ReqCommand_EGameCommandType : int {
   ReqCommand_EGameCommandType_ReqCommand_EGameCommandType_INT_MIN_SENTINEL_DO_NOT_USE_ = std::numeric_limits<::PROTOBUF_NAMESPACE_ID::int32>::min(),
   ReqCommand_EGameCommandType_ReqCommand_EGameCommandType_INT_MAX_SENTINEL_DO_NOT_USE_ = std::numeric_limits<::PROTOBUF_NAMESPACE_ID::int32>::max()
 };
-LIBPROTOC_EXPORT bool ReqCommand_EGameCommandType_IsValid(int value);
+bool ReqCommand_EGameCommandType_IsValid(int value);
 constexpr ReqCommand_EGameCommandType ReqCommand_EGameCommandType_EGameCommandType_MIN = ReqCommand_EGameCommandType_EGCT_MODIY_PROPERTY;
 constexpr ReqCommand_EGameCommandType ReqCommand_EGameCommandType_EGameCommandType_MAX = ReqCommand_EGameCommandType_EGCT_ADD_ROLE_EXP;
 constexpr int ReqCommand_EGameCommandType_EGameCommandType_ARRAYSIZE = ReqCommand_EGameCommandType_EGameCommandType_MAX + 1;
 
-LIBPROTOC_EXPORT const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor* ReqCommand_EGameCommandType_descriptor();
+const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor* ReqCommand_EGameCommandType_descriptor();
 template<typename T>
 inline const std::string& ReqCommand_EGameCommandType_Name(T enum_t_value) {
   static_assert(::std::is_same<T, ReqCommand_EGameCommandType>::value ||
@@ -246,7 +246,7 @@ inline bool ReqCommand_EGameCommandType_Parse(
 }
 // ===================================================================
 
-class LIBPROTOC_EXPORT Ident :
+class Ident :
     public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:NFMsg.Ident) */ {
  public:
   Ident();
@@ -385,7 +385,7 @@ class LIBPROTOC_EXPORT Ident :
 };
 // -------------------------------------------------------------------
 
-class LIBPROTOC_EXPORT Vector2 :
+class Vector2 :
     public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:NFMsg.Vector2) */ {
  public:
   Vector2();
@@ -524,7 +524,7 @@ class LIBPROTOC_EXPORT Vector2 :
 };
 // -------------------------------------------------------------------
 
-class LIBPROTOC_EXPORT Vector3 :
+class Vector3 :
     public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:NFMsg.Vector3) */ {
  public:
   Vector3();
@@ -674,7 +674,7 @@ class LIBPROTOC_EXPORT Vector3 :
 };
 // -------------------------------------------------------------------
 
-class LIBPROTOC_EXPORT PropertyInt :
+class PropertyInt :
     public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:NFMsg.PropertyInt) */ {
  public:
   PropertyInt();
@@ -820,7 +820,7 @@ class LIBPROTOC_EXPORT PropertyInt :
 };
 // -------------------------------------------------------------------
 
-class LIBPROTOC_EXPORT PropertyFloat :
+class PropertyFloat :
     public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:NFMsg.PropertyFloat) */ {
  public:
   PropertyFloat();
@@ -966,7 +966,7 @@ class LIBPROTOC_EXPORT PropertyFloat :
 };
 // -------------------------------------------------------------------
 
-class LIBPROTOC_EXPORT PropertyString :
+class PropertyString :
     public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:NFMsg.PropertyString) */ {
  public:
   PropertyString();
@@ -1119,7 +1119,7 @@ class LIBPROTOC_EXPORT PropertyString :
 };
 // -------------------------------------------------------------------
 
-class LIBPROTOC_EXPORT PropertyObject :
+class PropertyObject :
     public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:NFMsg.PropertyObject) */ {
  public:
   PropertyObject();
@@ -1271,7 +1271,7 @@ class LIBPROTOC_EXPORT PropertyObject :
 };
 // -------------------------------------------------------------------
 
-class LIBPROTOC_EXPORT PropertyVector2 :
+class PropertyVector2 :
     public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:NFMsg.PropertyVector2) */ {
  public:
   PropertyVector2();
@@ -1423,7 +1423,7 @@ class LIBPROTOC_EXPORT PropertyVector2 :
 };
 // -------------------------------------------------------------------
 
-class LIBPROTOC_EXPORT PropertyVector3 :
+class PropertyVector3 :
     public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:NFMsg.PropertyVector3) */ {
  public:
   PropertyVector3();
@@ -1575,7 +1575,7 @@ class LIBPROTOC_EXPORT PropertyVector3 :
 };
 // -------------------------------------------------------------------
 
-class LIBPROTOC_EXPORT RecordInt :
+class RecordInt :
     public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:NFMsg.RecordInt) */ {
  public:
   RecordInt();
@@ -1725,7 +1725,7 @@ class LIBPROTOC_EXPORT RecordInt :
 };
 // -------------------------------------------------------------------
 
-class LIBPROTOC_EXPORT RecordFloat :
+class RecordFloat :
     public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:NFMsg.RecordFloat) */ {
  public:
   RecordFloat();
@@ -1875,7 +1875,7 @@ class LIBPROTOC_EXPORT RecordFloat :
 };
 // -------------------------------------------------------------------
 
-class LIBPROTOC_EXPORT RecordString :
+class RecordString :
     public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:NFMsg.RecordString) */ {
  public:
   RecordString();
@@ -2032,7 +2032,7 @@ class LIBPROTOC_EXPORT RecordString :
 };
 // -------------------------------------------------------------------
 
-class LIBPROTOC_EXPORT RecordObject :
+class RecordObject :
     public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:NFMsg.RecordObject) */ {
  public:
   RecordObject();
@@ -2188,7 +2188,7 @@ class LIBPROTOC_EXPORT RecordObject :
 };
 // -------------------------------------------------------------------
 
-class LIBPROTOC_EXPORT RecordVector2 :
+class RecordVector2 :
     public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:NFMsg.RecordVector2) */ {
  public:
   RecordVector2();
@@ -2344,7 +2344,7 @@ class LIBPROTOC_EXPORT RecordVector2 :
 };
 // -------------------------------------------------------------------
 
-class LIBPROTOC_EXPORT RecordVector3 :
+class RecordVector3 :
     public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:NFMsg.RecordVector3) */ {
  public:
   RecordVector3();
@@ -2500,7 +2500,7 @@ class LIBPROTOC_EXPORT RecordVector3 :
 };
 // -------------------------------------------------------------------
 
-class LIBPROTOC_EXPORT RecordAddRowStruct :
+class RecordAddRowStruct :
     public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:NFMsg.RecordAddRowStruct) */ {
  public:
   RecordAddRowStruct();
@@ -2748,7 +2748,7 @@ class LIBPROTOC_EXPORT RecordAddRowStruct :
 };
 // -------------------------------------------------------------------
 
-class LIBPROTOC_EXPORT ObjectRecordBase :
+class ObjectRecordBase :
     public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:NFMsg.ObjectRecordBase) */ {
  public:
   ObjectRecordBase();
@@ -2903,7 +2903,7 @@ class LIBPROTOC_EXPORT ObjectRecordBase :
 };
 // -------------------------------------------------------------------
 
-class LIBPROTOC_EXPORT ObjectPropertyInt :
+class ObjectPropertyInt :
     public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:NFMsg.ObjectPropertyInt) */ {
  public:
   ObjectPropertyInt();
@@ -3057,7 +3057,7 @@ class LIBPROTOC_EXPORT ObjectPropertyInt :
 };
 // -------------------------------------------------------------------
 
-class LIBPROTOC_EXPORT ObjectPropertyFloat :
+class ObjectPropertyFloat :
     public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:NFMsg.ObjectPropertyFloat) */ {
  public:
   ObjectPropertyFloat();
@@ -3211,7 +3211,7 @@ class LIBPROTOC_EXPORT ObjectPropertyFloat :
 };
 // -------------------------------------------------------------------
 
-class LIBPROTOC_EXPORT ObjectPropertyString :
+class ObjectPropertyString :
     public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:NFMsg.ObjectPropertyString) */ {
  public:
   ObjectPropertyString();
@@ -3365,7 +3365,7 @@ class LIBPROTOC_EXPORT ObjectPropertyString :
 };
 // -------------------------------------------------------------------
 
-class LIBPROTOC_EXPORT ObjectPropertyObject :
+class ObjectPropertyObject :
     public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:NFMsg.ObjectPropertyObject) */ {
  public:
   ObjectPropertyObject();
@@ -3519,7 +3519,7 @@ class LIBPROTOC_EXPORT ObjectPropertyObject :
 };
 // -------------------------------------------------------------------
 
-class LIBPROTOC_EXPORT ObjectPropertyVector2 :
+class ObjectPropertyVector2 :
     public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:NFMsg.ObjectPropertyVector2) */ {
  public:
   ObjectPropertyVector2();
@@ -3673,7 +3673,7 @@ class LIBPROTOC_EXPORT ObjectPropertyVector2 :
 };
 // -------------------------------------------------------------------
 
-class LIBPROTOC_EXPORT ObjectPropertyVector3 :
+class ObjectPropertyVector3 :
     public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:NFMsg.ObjectPropertyVector3) */ {
  public:
   ObjectPropertyVector3();
@@ -3827,7 +3827,7 @@ class LIBPROTOC_EXPORT ObjectPropertyVector3 :
 };
 // -------------------------------------------------------------------
 
-class LIBPROTOC_EXPORT ObjectRecordInt :
+class ObjectRecordInt :
     public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:NFMsg.ObjectRecordInt) */ {
  public:
   ObjectRecordInt();
@@ -3999,7 +3999,7 @@ class LIBPROTOC_EXPORT ObjectRecordInt :
 };
 // -------------------------------------------------------------------
 
-class LIBPROTOC_EXPORT ObjectRecordFloat :
+class ObjectRecordFloat :
     public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:NFMsg.ObjectRecordFloat) */ {
  public:
   ObjectRecordFloat();
@@ -4171,7 +4171,7 @@ class LIBPROTOC_EXPORT ObjectRecordFloat :
 };
 // -------------------------------------------------------------------
 
-class LIBPROTOC_EXPORT ObjectRecordString :
+class ObjectRecordString :
     public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:NFMsg.ObjectRecordString) */ {
  public:
   ObjectRecordString();
@@ -4343,7 +4343,7 @@ class LIBPROTOC_EXPORT ObjectRecordString :
 };
 // -------------------------------------------------------------------
 
-class LIBPROTOC_EXPORT ObjectRecordObject :
+class ObjectRecordObject :
     public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:NFMsg.ObjectRecordObject) */ {
  public:
   ObjectRecordObject();
@@ -4515,7 +4515,7 @@ class LIBPROTOC_EXPORT ObjectRecordObject :
 };
 // -------------------------------------------------------------------
 
-class LIBPROTOC_EXPORT ObjectRecordVector2 :
+class ObjectRecordVector2 :
     public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:NFMsg.ObjectRecordVector2) */ {
  public:
   ObjectRecordVector2();
@@ -4687,7 +4687,7 @@ class LIBPROTOC_EXPORT ObjectRecordVector2 :
 };
 // -------------------------------------------------------------------
 
-class LIBPROTOC_EXPORT ObjectRecordVector3 :
+class ObjectRecordVector3 :
     public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:NFMsg.ObjectRecordVector3) */ {
  public:
   ObjectRecordVector3();
@@ -4859,7 +4859,7 @@ class LIBPROTOC_EXPORT ObjectRecordVector3 :
 };
 // -------------------------------------------------------------------
 
-class LIBPROTOC_EXPORT ObjectRecordSwap :
+class ObjectRecordSwap :
     public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:NFMsg.ObjectRecordSwap) */ {
  public:
   ObjectRecordSwap();
@@ -5051,7 +5051,7 @@ class LIBPROTOC_EXPORT ObjectRecordSwap :
 };
 // -------------------------------------------------------------------
 
-class LIBPROTOC_EXPORT ObjectRecordAddRow :
+class ObjectRecordAddRow :
     public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:NFMsg.ObjectRecordAddRow) */ {
  public:
   ObjectRecordAddRow();
@@ -5223,7 +5223,7 @@ class LIBPROTOC_EXPORT ObjectRecordAddRow :
 };
 // -------------------------------------------------------------------
 
-class LIBPROTOC_EXPORT ObjectRecordRemove :
+class ObjectRecordRemove :
     public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:NFMsg.ObjectRecordRemove) */ {
  public:
   ObjectRecordRemove();
@@ -5400,7 +5400,7 @@ class LIBPROTOC_EXPORT ObjectRecordRemove :
 };
 // -------------------------------------------------------------------
 
-class LIBPROTOC_EXPORT ObjectPropertyList :
+class ObjectPropertyList :
     public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:NFMsg.ObjectPropertyList) */ {
  public:
   ObjectPropertyList();
@@ -5654,7 +5654,7 @@ class LIBPROTOC_EXPORT ObjectPropertyList :
 };
 // -------------------------------------------------------------------
 
-class LIBPROTOC_EXPORT MultiObjectPropertyList :
+class MultiObjectPropertyList :
     public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:NFMsg.MultiObjectPropertyList) */ {
  public:
   MultiObjectPropertyList();
@@ -5791,7 +5791,7 @@ class LIBPROTOC_EXPORT MultiObjectPropertyList :
 };
 // -------------------------------------------------------------------
 
-class LIBPROTOC_EXPORT ObjectRecordList :
+class ObjectRecordList :
     public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:NFMsg.ObjectRecordList) */ {
  public:
   ObjectRecordList();
@@ -5945,7 +5945,7 @@ class LIBPROTOC_EXPORT ObjectRecordList :
 };
 // -------------------------------------------------------------------
 
-class LIBPROTOC_EXPORT MultiObjectRecordList :
+class MultiObjectRecordList :
     public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:NFMsg.MultiObjectRecordList) */ {
  public:
   MultiObjectRecordList();
@@ -6082,7 +6082,7 @@ class LIBPROTOC_EXPORT MultiObjectRecordList :
 };
 // -------------------------------------------------------------------
 
-class LIBPROTOC_EXPORT MsgBase :
+class MsgBase :
     public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:NFMsg.MsgBase) */ {
  public:
   MsgBase();
@@ -6271,7 +6271,7 @@ class LIBPROTOC_EXPORT MsgBase :
 };
 // -------------------------------------------------------------------
 
-class LIBPROTOC_EXPORT ReqAckLagTest :
+class ReqAckLagTest :
     public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:NFMsg.ReqAckLagTest) */ {
  public:
   ReqAckLagTest();
@@ -6399,7 +6399,7 @@ class LIBPROTOC_EXPORT ReqAckLagTest :
 };
 // -------------------------------------------------------------------
 
-class LIBPROTOC_EXPORT ReqCommand :
+class ReqCommand :
     public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:NFMsg.ReqCommand) */ {
  public:
   ReqCommand();

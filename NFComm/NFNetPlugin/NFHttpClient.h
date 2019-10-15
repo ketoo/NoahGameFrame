@@ -34,14 +34,10 @@
 #if NF_PLATFORM == NF_PLATFORM_WIN
 #include <winsock2.h>
 #include <ws2tcpip.h>
-#include <windows.h>
 #include <io.h>
 #include <fcntl.h>
 #ifndef S_ISDIR
 #define S_ISDIR(x) (((x) & S_IFMT) == S_IFDIR)
-#endif
-#ifndef LIBEVENT_SRC
-#pragma comment( lib, "libevent.lib")
 #endif
 
 #else

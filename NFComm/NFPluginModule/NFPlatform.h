@@ -316,7 +316,15 @@ typedef int64_t NFSOCK;
 #define EPOCHFILETIME 11644473600000000ULL
 #else
 #include <WinSock2.h>
-#include <windows.h>
+#include <Windows.h>
+#define NOMINMAX
+#ifdef min
+#undef min
+#endif
+#ifdef max
+#undef max
+#endif
+
 #include <time.h>
 #include <process.h>
 #define EPOCHFILETIME 11644473600000000Ui64

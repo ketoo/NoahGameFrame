@@ -33,7 +33,6 @@
 #if NF_PLATFORM == NF_PLATFORM_WIN
 #include <winsock2.h>
 #include <ws2tcpip.h>
-#include <windows.h>
 #include <io.h>
 #include <fcntl.h>
 #ifndef S_ISDIR

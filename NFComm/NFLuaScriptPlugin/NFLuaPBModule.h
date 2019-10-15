@@ -26,7 +26,6 @@
 
 #ifndef NF_LUA_PB_MODULE_H
 #define NF_LUA_PB_MODULE_H
-
 #include <google/protobuf/descriptor.h>
 #include <google/protobuf/descriptor.pb.h>
 #include <google/protobuf/compiler/importer.h>

@@ -33,7 +33,7 @@
 #include <google/protobuf/generated_enum_reflection.h>
 // @@protoc_insertion_point(includes)
 #include <google/protobuf/port_def.inc>
-#define PROTOBUF_INTERNAL_EXPORT_NFDefine_2eproto LIBPROTOC_EXPORT
+#define PROTOBUF_INTERNAL_EXPORT_NFDefine_2eproto
 PROTOBUF_NAMESPACE_OPEN
 namespace internal {
 class AnyMetadata;
@@ -41,7 +41,7 @@ class AnyMetadata;
 PROTOBUF_NAMESPACE_CLOSE
 
 // Internal implementation detail -- do not use these members.
-struct LIBPROTOC_EXPORT TableStruct_NFDefine_2eproto {
+struct TableStruct_NFDefine_2eproto {
   static const ::PROTOBUF_NAMESPACE_ID::internal::ParseTableField entries[]
     PROTOBUF_SECTION_VARIABLE(protodesc_cold);
   static const ::PROTOBUF_NAMESPACE_ID::internal::AuxillaryParseTableField aux[]
@@ -52,7 +52,7 @@ struct LIBPROTOC_EXPORT TableStruct_NFDefine_2eproto {
   static const ::PROTOBUF_NAMESPACE_ID::internal::SerializationTable serialization_table[];
   static const ::PROTOBUF_NAMESPACE_ID::uint32 offsets[];
 };
-extern LIBPROTOC_EXPORT const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable descriptor_table_NFDefine_2eproto;
+extern const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable descriptor_table_NFDefine_2eproto;
 PROTOBUF_NAMESPACE_OPEN
 PROTOBUF_NAMESPACE_CLOSE
 namespace NFMsg {
@@ -109,12 +109,12 @@ enum EGameEventCode : int {
   EGameEventCode_INT_MIN_SENTINEL_DO_NOT_USE_ = std::numeric_limits<::PROTOBUF_NAMESPACE_ID::int32>::min(),
   EGameEventCode_INT_MAX_SENTINEL_DO_NOT_USE_ = std::numeric_limits<::PROTOBUF_NAMESPACE_ID::int32>::max()
 };
-LIBPROTOC_EXPORT bool EGameEventCode_IsValid(int value);
+bool EGameEventCode_IsValid(int value);
 constexpr EGameEventCode EGameEventCode_MIN = EGEC_SUCCESS;
 constexpr EGameEventCode EGameEventCode_MAX = EGEC_LEAVE_CLAN_SUCCESS;
 constexpr int EGameEventCode_ARRAYSIZE = EGameEventCode_MAX + 1;
 
-LIBPROTOC_EXPORT const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor* EGameEventCode_descriptor();
+const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor* EGameEventCode_descriptor();
 template<typename T>
 inline const std::string& EGameEventCode_Name(T enum_t_value) {
   static_assert(::std::is_same<T, EGameEventCode>::value ||
@@ -133,12 +133,12 @@ enum ESynMsgID : int {
   ESynMsgID_INT_MIN_SENTINEL_DO_NOT_USE_ = std::numeric_limits<::PROTOBUF_NAMESPACE_ID::int32>::min(),
   ESynMsgID_INT_MAX_SENTINEL_DO_NOT_USE_ = std::numeric_limits<::PROTOBUF_NAMESPACE_ID::int32>::max()
 };
-LIBPROTOC_EXPORT bool ESynMsgID_IsValid(int value);
+bool ESynMsgID_IsValid(int value);
 constexpr ESynMsgID ESynMsgID_MIN = ESMI_UNKNOW;
 constexpr ESynMsgID ESynMsgID_MAX = ESMI_UNKNOW;
 constexpr int ESynMsgID_ARRAYSIZE = ESynMsgID_MAX + 1;
 
-LIBPROTOC_EXPORT const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor* ESynMsgID_descriptor();
+const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor* ESynMsgID_descriptor();
 template<typename T>
 inline const std::string& ESynMsgID_Name(T enum_t_value) {
   static_assert(::std::is_same<T, ESynMsgID>::value ||
@@ -386,12 +386,12 @@ enum EGameMsgID : int {
   EGameMsgID_INT_MIN_SENTINEL_DO_NOT_USE_ = std::numeric_limits<::PROTOBUF_NAMESPACE_ID::int32>::min(),
   EGameMsgID_INT_MAX_SENTINEL_DO_NOT_USE_ = std::numeric_limits<::PROTOBUF_NAMESPACE_ID::int32>::max()
 };
-LIBPROTOC_EXPORT bool EGameMsgID_IsValid(int value);
+bool EGameMsgID_IsValid(int value);
 constexpr EGameMsgID EGameMsgID_MIN = EGMI_UNKNOW;
 constexpr EGameMsgID EGameMsgID_MAX = EGMI_REQ_BUILD_OPERATE;
 constexpr int EGameMsgID_ARRAYSIZE = EGameMsgID_MAX + 1;
 
-LIBPROTOC_EXPORT const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor* EGameMsgID_descriptor();
+const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor* EGameMsgID_descriptor();
 template<typename T>
 inline const std::string& EGameMsgID_Name(T enum_t_value) {
   static_assert(::std::is_same<T, EGameMsgID>::value ||
@@ -415,12 +415,12 @@ enum ESkillType : int {
   ESkillType_INT_MIN_SENTINEL_DO_NOT_USE_ = std::numeric_limits<::PROTOBUF_NAMESPACE_ID::int32>::min(),
   ESkillType_INT_MAX_SENTINEL_DO_NOT_USE_ = std::numeric_limits<::PROTOBUF_NAMESPACE_ID::int32>::max()
 };
-LIBPROTOC_EXPORT bool ESkillType_IsValid(int value);
+bool ESkillType_IsValid(int value);
 constexpr ESkillType ESkillType_MIN = EST_BRIEF_SINGLE;
 constexpr ESkillType ESkillType_MAX = EST_BULLET_POS_BOMB;
 constexpr int ESkillType_ARRAYSIZE = ESkillType_MAX + 1;
 
-LIBPROTOC_EXPORT const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor* ESkillType_descriptor();
+const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor* ESkillType_descriptor();
 template<typename T>
 inline const std::string& ESkillType_Name(T enum_t_value) {
   static_assert(::std::is_same<T, ESkillType>::value ||
@@ -442,12 +442,12 @@ enum EItemType : int {
   EItemType_INT_MIN_SENTINEL_DO_NOT_USE_ = std::numeric_limits<::PROTOBUF_NAMESPACE_ID::int32>::min(),
   EItemType_INT_MAX_SENTINEL_DO_NOT_USE_ = std::numeric_limits<::PROTOBUF_NAMESPACE_ID::int32>::max()
 };
-LIBPROTOC_EXPORT bool EItemType_IsValid(int value);
+bool EItemType_IsValid(int value);
 constexpr EItemType EItemType_MIN = EIT_EQUIP;
 constexpr EItemType EItemType_MAX = EIT_SCROLL;
 constexpr int EItemType_ARRAYSIZE = EItemType_MAX + 1;
 
-LIBPROTOC_EXPORT const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor* EItemType_descriptor();
+const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor* EItemType_descriptor();
 template<typename T>
 inline const std::string& EItemType_Name(T enum_t_value) {
   static_assert(::std::is_same<T, EItemType>::value ||
@@ -471,12 +471,12 @@ enum EGameEquipSubType : int {
   EGameEquipSubType_INT_MIN_SENTINEL_DO_NOT_USE_ = std::numeric_limits<::PROTOBUF_NAMESPACE_ID::int32>::min(),
   EGameEquipSubType_INT_MAX_SENTINEL_DO_NOT_USE_ = std::numeric_limits<::PROTOBUF_NAMESPACE_ID::int32>::max()
 };
-LIBPROTOC_EXPORT bool EGameEquipSubType_IsValid(int value);
+bool EGameEquipSubType_IsValid(int value);
 constexpr EGameEquipSubType EGameEquipSubType_MIN = EQUIPTYPE_WEAPON;
 constexpr EGameEquipSubType EGameEquipSubType_MAX = EQUIPTYPE_BOOT;
 constexpr int EGameEquipSubType_ARRAYSIZE = EGameEquipSubType_MAX + 1;
 
-LIBPROTOC_EXPORT const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor* EGameEquipSubType_descriptor();
+const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor* EGameEquipSubType_descriptor();
 template<typename T>
 inline const std::string& EGameEquipSubType_Name(T enum_t_value) {
   static_assert(::std::is_same<T, EGameEquipSubType>::value ||
@@ -502,12 +502,12 @@ enum EGameGemSubType : int {
   EGameGemSubType_INT_MIN_SENTINEL_DO_NOT_USE_ = std::numeric_limits<::PROTOBUF_NAMESPACE_ID::int32>::min(),
   EGameGemSubType_INT_MAX_SENTINEL_DO_NOT_USE_ = std::numeric_limits<::PROTOBUF_NAMESPACE_ID::int32>::max()
 };
-LIBPROTOC_EXPORT bool EGameGemSubType_IsValid(int value);
+bool EGameGemSubType_IsValid(int value);
 constexpr EGameGemSubType EGameGemSubType_MIN = EGGSTYPE_GEM_ATK;
 constexpr EGameGemSubType EGameGemSubType_MAX = EGGSTYPE_GEM_DRAK;
 constexpr int EGameGemSubType_ARRAYSIZE = EGameGemSubType_MAX + 1;
 
-LIBPROTOC_EXPORT const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor* EGameGemSubType_descriptor();
+const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor* EGameGemSubType_descriptor();
 template<typename T>
 inline const std::string& EGameGemSubType_Name(T enum_t_value) {
   static_assert(::std::is_same<T, EGameGemSubType>::value ||
@@ -534,12 +534,12 @@ enum EGameSupplySubType : int {
   EGameSupplySubType_INT_MIN_SENTINEL_DO_NOT_USE_ = std::numeric_limits<::PROTOBUF_NAMESPACE_ID::int32>::min(),
   EGameSupplySubType_INT_MAX_SENTINEL_DO_NOT_USE_ = std::numeric_limits<::PROTOBUF_NAMESPACE_ID::int32>::max()
 };
-LIBPROTOC_EXPORT bool EGameSupplySubType_IsValid(int value);
+bool EGameSupplySubType_IsValid(int value);
 constexpr EGameSupplySubType EGameSupplySubType_MIN = EGIT_ITEM_WATER;
 constexpr EGameSupplySubType EGameSupplySubType_MAX = EGIT_ITEM_MEMORY_POS;
 constexpr int EGameSupplySubType_ARRAYSIZE = EGameSupplySubType_MAX + 1;
 
-LIBPROTOC_EXPORT const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor* EGameSupplySubType_descriptor();
+const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor* EGameSupplySubType_descriptor();
 template<typename T>
 inline const std::string& EGameSupplySubType_Name(T enum_t_value) {
   static_assert(::std::is_same<T, EGameSupplySubType>::value ||
@@ -562,12 +562,12 @@ enum EGameScrollSubType : int {
   EGameScrollSubType_INT_MIN_SENTINEL_DO_NOT_USE_ = std::numeric_limits<::PROTOBUF_NAMESPACE_ID::int32>::min(),
   EGameScrollSubType_INT_MAX_SENTINEL_DO_NOT_USE_ = std::numeric_limits<::PROTOBUF_NAMESPACE_ID::int32>::max()
 };
-LIBPROTOC_EXPORT bool EGameScrollSubType_IsValid(int value);
+bool EGameScrollSubType_IsValid(int value);
 constexpr EGameScrollSubType EGameScrollSubType_MIN = EGTST_TOKEN_HERO_CARD;
 constexpr EGameScrollSubType EGameScrollSubType_MAX = EGTST_TOKEN_BUILD;
 constexpr int EGameScrollSubType_ARRAYSIZE = EGameScrollSubType_MAX + 1;
 
-LIBPROTOC_EXPORT const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor* EGameScrollSubType_descriptor();
+const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor* EGameScrollSubType_descriptor();
 template<typename T>
 inline const std::string& EGameScrollSubType_Name(T enum_t_value) {
   static_assert(::std::is_same<T, EGameScrollSubType>::value ||
@@ -589,12 +589,12 @@ enum EGameItemExpiredType : int {
   EGameItemExpiredType_INT_MIN_SENTINEL_DO_NOT_USE_ = std::numeric_limits<::PROTOBUF_NAMESPACE_ID::int32>::min(),
   EGameItemExpiredType_INT_MAX_SENTINEL_DO_NOT_USE_ = std::numeric_limits<::PROTOBUF_NAMESPACE_ID::int32>::max()
 };
-LIBPROTOC_EXPORT bool EGameItemExpiredType_IsValid(int value);
+bool EGameItemExpiredType_IsValid(int value);
 constexpr EGameItemExpiredType EGameItemExpiredType_MIN = EGIET_NONE;
 constexpr EGameItemExpiredType EGameItemExpiredType_MAX = EGIET_END_INDEX;
 constexpr int EGameItemExpiredType_ARRAYSIZE = EGameItemExpiredType_MAX + 1;
 
-LIBPROTOC_EXPORT const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor* EGameItemExpiredType_descriptor();
+const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor* EGameItemExpiredType_descriptor();
 template<typename T>
 inline const std::string& EGameItemExpiredType_Name(T enum_t_value) {
   static_assert(::std::is_same<T, EGameItemExpiredType>::value ||
@@ -615,12 +615,12 @@ enum EDrawDropItemState : int {
   EDrawDropItemState_INT_MIN_SENTINEL_DO_NOT_USE_ = std::numeric_limits<::PROTOBUF_NAMESPACE_ID::int32>::min(),
   EDrawDropItemState_INT_MAX_SENTINEL_DO_NOT_USE_ = std::numeric_limits<::PROTOBUF_NAMESPACE_ID::int32>::max()
 };
-LIBPROTOC_EXPORT bool EDrawDropItemState_IsValid(int value);
+bool EDrawDropItemState_IsValid(int value);
 constexpr EDrawDropItemState EDrawDropItemState_MIN = E_DRAW_STATE_NONE;
 constexpr EDrawDropItemState EDrawDropItemState_MAX = E_DRAW_STATE_RECV;
 constexpr int EDrawDropItemState_ARRAYSIZE = EDrawDropItemState_MAX + 1;
 
-LIBPROTOC_EXPORT const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor* EDrawDropItemState_descriptor();
+const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor* EDrawDropItemState_descriptor();
 template<typename T>
 inline const std::string& EDrawDropItemState_Name(T enum_t_value) {
   static_assert(::std::is_same<T, EDrawDropItemState>::value ||
@@ -641,12 +641,12 @@ enum EGuildPowerType : int {
   EGuildPowerType_INT_MIN_SENTINEL_DO_NOT_USE_ = std::numeric_limits<::PROTOBUF_NAMESPACE_ID::int32>::min(),
   EGuildPowerType_INT_MAX_SENTINEL_DO_NOT_USE_ = std::numeric_limits<::PROTOBUF_NAMESPACE_ID::int32>::max()
 };
-LIBPROTOC_EXPORT bool EGuildPowerType_IsValid(int value);
+bool EGuildPowerType_IsValid(int value);
 constexpr EGuildPowerType EGuildPowerType_MIN = CLAN_POWER_TYPE_NORMAL;
 constexpr EGuildPowerType EGuildPowerType_MAX = CLAN_POWER_TYPE_PRESIDENT;
 constexpr int EGuildPowerType_ARRAYSIZE = EGuildPowerType_MAX + 1;
 
-LIBPROTOC_EXPORT const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor* EGuildPowerType_descriptor();
+const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor* EGuildPowerType_descriptor();
 template<typename T>
 inline const std::string& EGuildPowerType_Name(T enum_t_value) {
   static_assert(::std::is_same<T, EGuildPowerType>::value ||
@@ -668,12 +668,12 @@ enum ETaskState : int {
   ETaskState_INT_MIN_SENTINEL_DO_NOT_USE_ = std::numeric_limits<::PROTOBUF_NAMESPACE_ID::int32>::min(),
   ETaskState_INT_MAX_SENTINEL_DO_NOT_USE_ = std::numeric_limits<::PROTOBUF_NAMESPACE_ID::int32>::max()
 };
-LIBPROTOC_EXPORT bool ETaskState_IsValid(int value);
+bool ETaskState_IsValid(int value);
 constexpr ETaskState ETaskState_MIN = TASK_IN_PROCESS;
 constexpr ETaskState ETaskState_MAX = TASK_FINISH;
 constexpr int ETaskState_ARRAYSIZE = ETaskState_MAX + 1;
 
-LIBPROTOC_EXPORT const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor* ETaskState_descriptor();
+const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor* ETaskState_descriptor();
 template<typename T>
 inline const std::string& ETaskState_Name(T enum_t_value) {
   static_assert(::std::is_same<T, ETaskState>::value ||
@@ -701,12 +701,12 @@ enum ETaskType : int {
   ETaskType_INT_MIN_SENTINEL_DO_NOT_USE_ = std::numeric_limits<::PROTOBUF_NAMESPACE_ID::int32>::min(),
   ETaskType_INT_MAX_SENTINEL_DO_NOT_USE_ = std::numeric_limits<::PROTOBUF_NAMESPACE_ID::int32>::max()
 };
-LIBPROTOC_EXPORT bool ETaskType_IsValid(int value);
+bool ETaskType_IsValid(int value);
 constexpr ETaskType ETaskType_MIN = TASK_LEVEL_UPDATE_SOME_LEVEL;
 constexpr ETaskType ETaskType_MAX = TASK_KILL_SOME_MONSTER_COUNT;
 constexpr int ETaskType_ARRAYSIZE = ETaskType_MAX + 1;
 
-LIBPROTOC_EXPORT const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor* ETaskType_descriptor();
+const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor* ETaskType_descriptor();
 template<typename T>
 inline const std::string& ETaskType_Name(T enum_t_value) {
   static_assert(::std::is_same<T, ETaskType>::value ||
@@ -729,12 +729,12 @@ enum ESceneType : int {
   ESceneType_INT_MIN_SENTINEL_DO_NOT_USE_ = std::numeric_limits<::PROTOBUF_NAMESPACE_ID::int32>::min(),
   ESceneType_INT_MAX_SENTINEL_DO_NOT_USE_ = std::numeric_limits<::PROTOBUF_NAMESPACE_ID::int32>::max()
 };
-LIBPROTOC_EXPORT bool ESceneType_IsValid(int value);
+bool ESceneType_IsValid(int value);
 constexpr ESceneType ESceneType_MIN = SCENE_NORMAL;
 constexpr ESceneType ESceneType_MAX = SCENE_CLAN;
 constexpr int ESceneType_ARRAYSIZE = ESceneType_MAX + 1;
 
-LIBPROTOC_EXPORT const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor* ESceneType_descriptor();
+const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor* ESceneType_descriptor();
 template<typename T>
 inline const std::string& ESceneType_Name(T enum_t_value) {
   static_assert(::std::is_same<T, ESceneType>::value ||
@@ -758,12 +758,12 @@ enum EPVPType : int {
   EPVPType_INT_MIN_SENTINEL_DO_NOT_USE_ = std::numeric_limits<::PROTOBUF_NAMESPACE_ID::int32>::min(),
   EPVPType_INT_MAX_SENTINEL_DO_NOT_USE_ = std::numeric_limits<::PROTOBUF_NAMESPACE_ID::int32>::max()
 };
-LIBPROTOC_EXPORT bool EPVPType_IsValid(int value);
+bool EPVPType_IsValid(int value);
 constexpr EPVPType EPVPType_MIN = PVP_HOME;
 constexpr EPVPType EPVPType_MAX = PVP_CLAN_DUNGEON;
 constexpr int EPVPType_ARRAYSIZE = EPVPType_MAX + 1;
 
-LIBPROTOC_EXPORT const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor* EPVPType_descriptor();
+const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor* EPVPType_descriptor();
 template<typename T>
 inline const std::string& EPVPType_Name(T enum_t_value) {
   static_assert(::std::is_same<T, EPVPType>::value ||
@@ -788,12 +788,12 @@ enum EShopType : int {
   EShopType_INT_MIN_SENTINEL_DO_NOT_USE_ = std::numeric_limits<::PROTOBUF_NAMESPACE_ID::int32>::min(),
   EShopType_INT_MAX_SENTINEL_DO_NOT_USE_ = std::numeric_limits<::PROTOBUF_NAMESPACE_ID::int32>::max()
 };
-LIBPROTOC_EXPORT bool EShopType_IsValid(int value);
+bool EShopType_IsValid(int value);
 constexpr EShopType EShopType_MIN = EST_UNKNOW;
 constexpr EShopType EShopType_MAX = EST_CARD;
 constexpr int EShopType_ARRAYSIZE = EShopType_MAX + 1;
 
-LIBPROTOC_EXPORT const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor* EShopType_descriptor();
+const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor* EShopType_descriptor();
 template<typename T>
 inline const std::string& EShopType_Name(T enum_t_value) {
   static_assert(::std::is_same<T, EShopType>::value ||
@@ -817,12 +817,12 @@ enum ERankType : int {
   ERankType_INT_MIN_SENTINEL_DO_NOT_USE_ = std::numeric_limits<::PROTOBUF_NAMESPACE_ID::int32>::min(),
   ERankType_INT_MAX_SENTINEL_DO_NOT_USE_ = std::numeric_limits<::PROTOBUF_NAMESPACE_ID::int32>::max()
 };
-LIBPROTOC_EXPORT bool ERankType_IsValid(int value);
+bool ERankType_IsValid(int value);
 constexpr ERankType ERankType_MIN = ERT_UNKNOW;
 constexpr ERankType ERankType_MAX = ERT_CLAN_KINGSOURCE;
 constexpr int ERankType_ARRAYSIZE = ERankType_MAX + 1;
 
-LIBPROTOC_EXPORT const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor* ERankType_descriptor();
+const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor* ERankType_descriptor();
 template<typename T>
 inline const std::string& ERankType_Name(T enum_t_value) {
   static_assert(::std::is_same<T, ERankType>::value ||
@@ -843,12 +843,12 @@ enum ENPCType : int {
   ENPCType_INT_MIN_SENTINEL_DO_NOT_USE_ = std::numeric_limits<::PROTOBUF_NAMESPACE_ID::int32>::min(),
   ENPCType_INT_MAX_SENTINEL_DO_NOT_USE_ = std::numeric_limits<::PROTOBUF_NAMESPACE_ID::int32>::max()
 };
-LIBPROTOC_EXPORT bool ENPCType_IsValid(int value);
+bool ENPCType_IsValid(int value);
 constexpr ENPCType ENPCType_MIN = ENPCTYPE_NORMAL;
 constexpr ENPCType ENPCType_MAX = ENPCTYPE_TURRET;
 constexpr int ENPCType_ARRAYSIZE = ENPCType_MAX + 1;
 
-LIBPROTOC_EXPORT const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor* ENPCType_descriptor();
+const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor* ENPCType_descriptor();
 template<typename T>
 inline const std::string& ENPCType_Name(T enum_t_value) {
   static_assert(::std::is_same<T, ENPCType>::value ||
@@ -871,12 +871,12 @@ enum ESubNPCType_TURRET : int {
   ESubNPCType_TURRET_INT_MIN_SENTINEL_DO_NOT_USE_ = std::numeric_limits<::PROTOBUF_NAMESPACE_ID::int32>::min(),
   ESubNPCType_TURRET_INT_MAX_SENTINEL_DO_NOT_USE_ = std::numeric_limits<::PROTOBUF_NAMESPACE_ID::int32>::max()
 };
-LIBPROTOC_EXPORT bool ESubNPCType_TURRET_IsValid(int value);
+bool ESubNPCType_TURRET_IsValid(int value);
 constexpr ESubNPCType_TURRET ESubNPCType_TURRET_MIN = ENPCTYPE_SUB_STORAGE;
 constexpr ESubNPCType_TURRET ESubNPCType_TURRET_MAX = ENPCTYPE_SUB_TRAP;
 constexpr int ESubNPCType_TURRET_ARRAYSIZE = ESubNPCType_TURRET_MAX + 1;
 
-LIBPROTOC_EXPORT const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor* ESubNPCType_TURRET_descriptor();
+const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor* ESubNPCType_TURRET_descriptor();
 template<typename T>
 inline const std::string& ESubNPCType_TURRET_Name(T enum_t_value) {
   static_assert(::std::is_same<T, ESubNPCType_TURRET>::value ||
@@ -897,12 +897,12 @@ enum EMeleeType : int {
   EMeleeType_INT_MIN_SENTINEL_DO_NOT_USE_ = std::numeric_limits<::PROTOBUF_NAMESPACE_ID::int32>::min(),
   EMeleeType_INT_MAX_SENTINEL_DO_NOT_USE_ = std::numeric_limits<::PROTOBUF_NAMESPACE_ID::int32>::max()
 };
-LIBPROTOC_EXPORT bool EMeleeType_IsValid(int value);
+bool EMeleeType_IsValid(int value);
 constexpr EMeleeType EMeleeType_MIN = ETYPE_MELEE;
 constexpr EMeleeType EMeleeType_MAX = ETYPE_RANGER;
 constexpr int EMeleeType_ARRAYSIZE = EMeleeType_MAX + 1;
 
-LIBPROTOC_EXPORT const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor* EMeleeType_descriptor();
+const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor* EMeleeType_descriptor();
 template<typename T>
 inline const std::string& EMeleeType_Name(T enum_t_value) {
   static_assert(::std::is_same<T, EMeleeType>::value ||
@@ -923,12 +923,12 @@ enum EEffectObjType : int {
   EEffectObjType_INT_MIN_SENTINEL_DO_NOT_USE_ = std::numeric_limits<::PROTOBUF_NAMESPACE_ID::int32>::min(),
   EEffectObjType_INT_MAX_SENTINEL_DO_NOT_USE_ = std::numeric_limits<::PROTOBUF_NAMESPACE_ID::int32>::max()
 };
-LIBPROTOC_EXPORT bool EEffectObjType_IsValid(int value);
+bool EEffectObjType_IsValid(int value);
 constexpr EEffectObjType EEffectObjType_MIN = ETARGETTYPE_ENEMY;
 constexpr EEffectObjType EEffectObjType_MAX = ETARGETTYPE_FRIEND;
 constexpr int EEffectObjType_ARRAYSIZE = EEffectObjType_MAX + 1;
 
-LIBPROTOC_EXPORT const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor* EEffectObjType_descriptor();
+const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor* EEffectObjType_descriptor();
 template<typename T>
 inline const std::string& EEffectObjType_Name(T enum_t_value) {
   static_assert(::std::is_same<T, EEffectObjType>::value ||
@@ -950,12 +950,12 @@ enum EPropertyType : int {
   EPropertyType_INT_MIN_SENTINEL_DO_NOT_USE_ = std::numeric_limits<::PROTOBUF_NAMESPACE_ID::int32>::min(),
   EPropertyType_INT_MAX_SENTINEL_DO_NOT_USE_ = std::numeric_limits<::PROTOBUF_NAMESPACE_ID::int32>::max()
 };
-LIBPROTOC_EXPORT bool EPropertyType_IsValid(int value);
+bool EPropertyType_IsValid(int value);
 constexpr EPropertyType EPropertyType_MIN = EPT_UNKNOW;
 constexpr EPropertyType EPropertyType_MAX = EPT_INTELLIGENCE;
 constexpr int EPropertyType_ARRAYSIZE = EPropertyType_MAX + 1;
 
-LIBPROTOC_EXPORT const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor* EPropertyType_descriptor();
+const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor* EPropertyType_descriptor();
 template<typename T>
 inline const std::string& EPropertyType_Name(T enum_t_value) {
   static_assert(::std::is_same<T, EPropertyType>::value ||
@@ -979,12 +979,12 @@ enum EGameElementType : int {
   EGameElementType_INT_MIN_SENTINEL_DO_NOT_USE_ = std::numeric_limits<::PROTOBUF_NAMESPACE_ID::int32>::min(),
   EGameElementType_INT_MAX_SENTINEL_DO_NOT_USE_ = std::numeric_limits<::PROTOBUF_NAMESPACE_ID::int32>::max()
 };
-LIBPROTOC_EXPORT bool EGameElementType_IsValid(int value);
+bool EGameElementType_IsValid(int value);
 constexpr EGameElementType EGameElementType_MIN = EELEMENTTYPE_FIRE;
 constexpr EGameElementType EGameElementType_MAX = EELEMENTTYPE_DARK;
 constexpr int EGameElementType_ARRAYSIZE = EGameElementType_MAX + 1;
 
-LIBPROTOC_EXPORT const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor* EGameElementType_descriptor();
+const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor* EGameElementType_descriptor();
 template<typename T>
 inline const std::string& EGameElementType_Name(T enum_t_value) {
   static_assert(::std::is_same<T, EGameElementType>::value ||
@@ -1009,12 +1009,12 @@ enum EBattleType : int {
   EBattleType_INT_MIN_SENTINEL_DO_NOT_USE_ = std::numeric_limits<::PROTOBUF_NAMESPACE_ID::int32>::min(),
   EBattleType_INT_MAX_SENTINEL_DO_NOT_USE_ = std::numeric_limits<::PROTOBUF_NAMESPACE_ID::int32>::max()
 };
-LIBPROTOC_EXPORT bool EBattleType_IsValid(int value);
+bool EBattleType_IsValid(int value);
 constexpr EBattleType EBattleType_MIN = EBT_SINGLE_MODE;
 constexpr EBattleType EBattleType_MAX = EBT_SURVIVAL_MODE;
 constexpr int EBattleType_ARRAYSIZE = EBattleType_MAX + 1;
 
-LIBPROTOC_EXPORT const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor* EBattleType_descriptor();
+const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor* EBattleType_descriptor();
 template<typename T>
 inline const std::string& EBattleType_Name(T enum_t_value) {
   static_assert(::std::is_same<T, EBattleType>::value ||

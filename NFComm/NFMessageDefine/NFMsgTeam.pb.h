@@ -35,7 +35,7 @@
 #include "NFMsgBase.pb.h"
 // @@protoc_insertion_point(includes)
 #include <google/protobuf/port_def.inc>
-#define PROTOBUF_INTERNAL_EXPORT_NFMsgTeam_2eproto LIBPROTOC_EXPORT
+#define PROTOBUF_INTERNAL_EXPORT_NFMsgTeam_2eproto
 PROTOBUF_NAMESPACE_OPEN
 namespace internal {
 class AnyMetadata;
@@ -43,7 +43,7 @@ class AnyMetadata;
 PROTOBUF_NAMESPACE_CLOSE
 
 // Internal implementation detail -- do not use these members.
-struct LIBPROTOC_EXPORT TableStruct_NFMsgTeam_2eproto {
+struct TableStruct_NFMsgTeam_2eproto {
   static const ::PROTOBUF_NAMESPACE_ID::internal::ParseTableField entries[]
     PROTOBUF_SECTION_VARIABLE(protodesc_cold);
   static const ::PROTOBUF_NAMESPACE_ID::internal::AuxillaryParseTableField aux[]
@@ -54,52 +54,52 @@ struct LIBPROTOC_EXPORT TableStruct_NFMsgTeam_2eproto {
   static const ::PROTOBUF_NAMESPACE_ID::internal::SerializationTable serialization_table[];
   static const ::PROTOBUF_NAMESPACE_ID::uint32 offsets[];
 };
-extern LIBPROTOC_EXPORT const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable descriptor_table_NFMsgTeam_2eproto;
+extern const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable descriptor_table_NFMsgTeam_2eproto;
 namespace NFMsg {
 class AckInviteToTeam;
 class AckInviteToTeamDefaultTypeInternal;
-LIBPROTOC_EXPORT extern AckInviteToTeamDefaultTypeInternal _AckInviteToTeam_default_instance_;
+extern AckInviteToTeamDefaultTypeInternal _AckInviteToTeam_default_instance_;
 class AckTeamMemberAdd;
 class AckTeamMemberAddDefaultTypeInternal;
-LIBPROTOC_EXPORT extern AckTeamMemberAddDefaultTypeInternal _AckTeamMemberAdd_default_instance_;
+extern AckTeamMemberAddDefaultTypeInternal _AckTeamMemberAdd_default_instance_;
 class AckTeamMemberLeave;
 class AckTeamMemberLeaveDefaultTypeInternal;
-LIBPROTOC_EXPORT extern AckTeamMemberLeaveDefaultTypeInternal _AckTeamMemberLeave_default_instance_;
+extern AckTeamMemberLeaveDefaultTypeInternal _AckTeamMemberLeave_default_instance_;
 class ReqAckAcceptTeamInvite;
 class ReqAckAcceptTeamInviteDefaultTypeInternal;
-LIBPROTOC_EXPORT extern ReqAckAcceptTeamInviteDefaultTypeInternal _ReqAckAcceptTeamInvite_default_instance_;
+extern ReqAckAcceptTeamInviteDefaultTypeInternal _ReqAckAcceptTeamInvite_default_instance_;
 class ReqAckRejectTeamInvite;
 class ReqAckRejectTeamInviteDefaultTypeInternal;
-LIBPROTOC_EXPORT extern ReqAckRejectTeamInviteDefaultTypeInternal _ReqAckRejectTeamInvite_default_instance_;
+extern ReqAckRejectTeamInviteDefaultTypeInternal _ReqAckRejectTeamInvite_default_instance_;
 class ReqAckTeamMemberList;
 class ReqAckTeamMemberListDefaultTypeInternal;
-LIBPROTOC_EXPORT extern ReqAckTeamMemberListDefaultTypeInternal _ReqAckTeamMemberList_default_instance_;
+extern ReqAckTeamMemberListDefaultTypeInternal _ReqAckTeamMemberList_default_instance_;
 class ReqCancelInviteToTeam;
 class ReqCancelInviteToTeamDefaultTypeInternal;
-LIBPROTOC_EXPORT extern ReqCancelInviteToTeamDefaultTypeInternal _ReqCancelInviteToTeam_default_instance_;
+extern ReqCancelInviteToTeamDefaultTypeInternal _ReqCancelInviteToTeam_default_instance_;
 class ReqInviteToTeam;
 class ReqInviteToTeamDefaultTypeInternal;
-LIBPROTOC_EXPORT extern ReqInviteToTeamDefaultTypeInternal _ReqInviteToTeam_default_instance_;
+extern ReqInviteToTeamDefaultTypeInternal _ReqInviteToTeam_default_instance_;
 class TeamMemberInfo;
 class TeamMemberInfoDefaultTypeInternal;
-LIBPROTOC_EXPORT extern TeamMemberInfoDefaultTypeInternal _TeamMemberInfo_default_instance_;
+extern TeamMemberInfoDefaultTypeInternal _TeamMemberInfo_default_instance_;
 }  // namespace NFMsg
 PROTOBUF_NAMESPACE_OPEN
-template<> LIBPROTOC_EXPORT ::NFMsg::AckInviteToTeam* Arena::CreateMaybeMessage<::NFMsg::AckInviteToTeam>(Arena*);
-template<> LIBPROTOC_EXPORT ::NFMsg::AckTeamMemberAdd* Arena::CreateMaybeMessage<::NFMsg::AckTeamMemberAdd>(Arena*);
-template<> LIBPROTOC_EXPORT ::NFMsg::AckTeamMemberLeave* Arena::CreateMaybeMessage<::NFMsg::AckTeamMemberLeave>(Arena*);
-template<> LIBPROTOC_EXPORT ::NFMsg::ReqAckAcceptTeamInvite* Arena::CreateMaybeMessage<::NFMsg::ReqAckAcceptTeamInvite>(Arena*);
-template<> LIBPROTOC_EXPORT ::NFMsg::ReqAckRejectTeamInvite* Arena::CreateMaybeMessage<::NFMsg::ReqAckRejectTeamInvite>(Arena*);
-template<> LIBPROTOC_EXPORT ::NFMsg::ReqAckTeamMemberList* Arena::CreateMaybeMessage<::NFMsg::ReqAckTeamMemberList>(Arena*);
-template<> LIBPROTOC_EXPORT ::NFMsg::ReqCancelInviteToTeam* Arena::CreateMaybeMessage<::NFMsg::ReqCancelInviteToTeam>(Arena*);
-template<> LIBPROTOC_EXPORT ::NFMsg::ReqInviteToTeam* Arena::CreateMaybeMessage<::NFMsg::ReqInviteToTeam>(Arena*);
-template<> LIBPROTOC_EXPORT ::NFMsg::TeamMemberInfo* Arena::CreateMaybeMessage<::NFMsg::TeamMemberInfo>(Arena*);
+template<> ::NFMsg::AckInviteToTeam* Arena::CreateMaybeMessage<::NFMsg::AckInviteToTeam>(Arena*);
+template<> ::NFMsg::AckTeamMemberAdd* Arena::CreateMaybeMessage<::NFMsg::AckTeamMemberAdd>(Arena*);
+template<> ::NFMsg::AckTeamMemberLeave* Arena::CreateMaybeMessage<::NFMsg::AckTeamMemberLeave>(Arena*);
+template<> ::NFMsg::ReqAckAcceptTeamInvite* Arena::CreateMaybeMessage<::NFMsg::ReqAckAcceptTeamInvite>(Arena*);
+template<> ::NFMsg::ReqAckRejectTeamInvite* Arena::CreateMaybeMessage<::NFMsg::ReqAckRejectTeamInvite>(Arena*);
+template<> ::NFMsg::ReqAckTeamMemberList* Arena::CreateMaybeMessage<::NFMsg::ReqAckTeamMemberList>(Arena*);
+template<> ::NFMsg::ReqCancelInviteToTeam* Arena::CreateMaybeMessage<::NFMsg::ReqCancelInviteToTeam>(Arena*);
+template<> ::NFMsg::ReqInviteToTeam* Arena::CreateMaybeMessage<::NFMsg::ReqInviteToTeam>(Arena*);
+template<> ::NFMsg::TeamMemberInfo* Arena::CreateMaybeMessage<::NFMsg::TeamMemberInfo>(Arena*);
 PROTOBUF_NAMESPACE_CLOSE
 namespace NFMsg {
 
 // ===================================================================
 
-class LIBPROTOC_EXPORT TeamMemberInfo :
+class TeamMemberInfo :
     public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:NFMsg.TeamMemberInfo) */ {
  public:
   TeamMemberInfo();
@@ -284,7 +284,7 @@ class LIBPROTOC_EXPORT TeamMemberInfo :
 };
 // -------------------------------------------------------------------
 
-class LIBPROTOC_EXPORT ReqAckTeamMemberList :
+class ReqAckTeamMemberList :
     public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:NFMsg.ReqAckTeamMemberList) */ {
  public:
   ReqAckTeamMemberList();
@@ -438,7 +438,7 @@ class LIBPROTOC_EXPORT ReqAckTeamMemberList :
 };
 // -------------------------------------------------------------------
 
-class LIBPROTOC_EXPORT AckTeamMemberAdd :
+class AckTeamMemberAdd :
     public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:NFMsg.AckTeamMemberAdd) */ {
  public:
   AckTeamMemberAdd();
@@ -592,7 +592,7 @@ class LIBPROTOC_EXPORT AckTeamMemberAdd :
 };
 // -------------------------------------------------------------------
 
-class LIBPROTOC_EXPORT AckTeamMemberLeave :
+class AckTeamMemberLeave :
     public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:NFMsg.AckTeamMemberLeave) */ {
  public:
   AckTeamMemberLeave();
@@ -746,7 +746,7 @@ class LIBPROTOC_EXPORT AckTeamMemberLeave :
 };
 // -------------------------------------------------------------------
 
-class LIBPROTOC_EXPORT ReqInviteToTeam :
+class ReqInviteToTeam :
     public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:NFMsg.ReqInviteToTeam) */ {
  public:
   ReqInviteToTeam();
@@ -880,7 +880,7 @@ class LIBPROTOC_EXPORT ReqInviteToTeam :
 };
 // -------------------------------------------------------------------
 
-class LIBPROTOC_EXPORT ReqCancelInviteToTeam :
+class ReqCancelInviteToTeam :
     public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:NFMsg.ReqCancelInviteToTeam) */ {
  public:
   ReqCancelInviteToTeam();
@@ -1014,7 +1014,7 @@ class LIBPROTOC_EXPORT ReqCancelInviteToTeam :
 };
 // -------------------------------------------------------------------
 
-class LIBPROTOC_EXPORT AckInviteToTeam :
+class AckInviteToTeam :
     public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:NFMsg.AckInviteToTeam) */ {
  public:
   AckInviteToTeam();
@@ -1200,7 +1200,7 @@ class LIBPROTOC_EXPORT AckInviteToTeam :
 };
 // -------------------------------------------------------------------
 
-class LIBPROTOC_EXPORT ReqAckAcceptTeamInvite :
+class ReqAckAcceptTeamInvite :
     public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:NFMsg.ReqAckAcceptTeamInvite) */ {
  public:
   ReqAckAcceptTeamInvite();
@@ -1334,7 +1334,7 @@ class LIBPROTOC_EXPORT ReqAckAcceptTeamInvite :
 };
 // -------------------------------------------------------------------
 
-class LIBPROTOC_EXPORT ReqAckRejectTeamInvite :
+class ReqAckRejectTeamInvite :
     public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:NFMsg.ReqAckRejectTeamInvite) */ {
  public:
   ReqAckRejectTeamInvite();
