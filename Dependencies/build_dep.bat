@@ -12,8 +12,6 @@ git clone https://github.com/Microsoft/vcpkg.git
 
 cd vcpkg
 
-#vcpkg remove easyloggingpp:x64-windows-static
-
 .\bootstrap-vcpkg.bat
 
 vcpkg list
