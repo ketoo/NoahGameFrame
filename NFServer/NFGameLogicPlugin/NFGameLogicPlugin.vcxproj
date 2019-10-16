@@ -59,7 +59,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN;_DEBUG;_WINDOWS;_USRDLL;THERON_CPP11;ELPP_NO_DEFAULT_LOG_FILE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>$(SolutionDir);$(SolutionDir)\Dependencies\;$(SolutionDir)\Dependencies\libevent\;$(SolutionDir)\Dependencies\libevent\WIN32-Code\;$(SolutionDir)\Dependencies\libevent\include\;$(SolutionDir)\Dependencies\libevent\compat\;$(SolutionDir)\Dependencies\protobuf\src\;$(SolutionDir)\Dependencies\libevent\WIN32-Code\nmake;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <BrowseInformation>false</BrowseInformation>
     </ClCompile>
     <Link>
@@ -84,13 +84,14 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>WIN;_WINDOWS;_USRDLL;THERON_CPP11;ELPP_NO_DEFAULT_LOG_FILE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>$(SolutionDir);$(SolutionDir)\Dependencies\;$(SolutionDir)\Dependencies\libevent\;$(SolutionDir)\Dependencies\libevent\WIN32-Code\;$(SolutionDir)\Dependencies\libevent\include\;$(SolutionDir)\Dependencies\libevent\compat\;$(SolutionDir)\Dependencies\protobuf\src\;$(SolutionDir)\Dependencies\mysql\;$(SolutionDir)\Dependencies\libevent\WIN32-Code\nmake;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
+      <AdditionalLibraryDirectories />
     </Link>
     <PostBuildEvent>
     </PostBuildEvent>
