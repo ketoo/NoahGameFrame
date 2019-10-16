@@ -31,7 +31,7 @@
 #pragma comment( lib, "ws2_32" )
 #pragma comment( lib, "NFCore_d.lib" )
 #pragma comment( lib, "NFMessageDefine_d.lib" )
-#pragma comment( lib, "libprotobuf_d.lib" )
+#pragma comment( lib, "libprotobufd.lib" )
 
 #elif NF_PLATFORM == NF_PLATFORM_LINUX || NF_PLATFORM == NF_PLATFORM_ANDROID
 #pragma comment( lib, "NFCore_d.a" )
