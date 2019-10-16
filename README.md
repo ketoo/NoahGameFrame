@@ -52,7 +52,7 @@ svn checkout https://github.com/ketoo/NoahGameFrame
 
 - libevent 2.0.22
 - easylogging++ 9.80
-- google protobuf 3.6
+- google protobuf 3.6 （windows & vcpkg 3.1）
 - hiredis
 - ajson
 - concurrentqueue
@@ -71,7 +71,7 @@ svn checkout https://github.com/ketoo/NoahGameFrame
 ## Supported Compilers
 
 * GCC >= 4.8 (**Tested in Ubuntu 15.04**)
-* MSVC >= VS2015 (**Tested in Win7/10**)
+* MSVC >= VS2015 update 3 (**Tested in Win7/10**)
 
 ## Build and Install
 ### MSVC >= 2015
