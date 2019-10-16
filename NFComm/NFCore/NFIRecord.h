@@ -108,7 +108,7 @@ public:
     virtual bool SwapRowInfo(const int nOriginRow, const int nTargetRow) = 0;
 
     virtual NFINT64 GetInt(const int nRow, const int nCol) const = 0;
-	inline int GetInt32(const int nRow, const int nCol) const { return (int)GetInt(nRow, nCol); };
+	virtual int GetInt32(const int nRow, const int nCol) const { return (int)GetInt(nRow, nCol); };
 	virtual double GetFloat(const int nRow, const int nCol) const = 0;
     virtual const std::string& GetString(const int nRow, const int nCol) const = 0;
     virtual const NFGUID& GetObject(const int nRow, const int nCol) const = 0;
