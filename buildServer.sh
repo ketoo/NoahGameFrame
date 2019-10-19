@@ -8,6 +8,9 @@
 rm -rf ./_Out/Debug
 rm -rf ./_Out/Release
 
+cd NFComm/NFMessageDefine
+cpp.sh
+
 cd BuildScript/linux/
 
 #find . -name "*.o" | xargs rm -rf
