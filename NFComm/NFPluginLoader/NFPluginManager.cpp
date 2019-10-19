@@ -65,7 +65,6 @@
 #include "NFComm/NFNavigationPlugin/NFNavigationPlugin.h"
 #include "NFComm/NFNetPlugin/NFNetPlugin.h"
 #include "NFComm/NFNoSqlPlugin/NFNoSqlPlugin.h"
-#include "NFComm/NFScalePlugin/NFScalePlugin.h"
 #include "NFComm/NFSecurityPlugin/NFSecurityPlugin.h"
 #include "NFComm/NFTestPlugin/NFTestPlugin.h"
 //DB
@@ -257,7 +256,6 @@ bool NFPluginManager::LoadStaticPlugin()
 	CREATE_PLUGIN(this, NFNavigationPlugin)
 	CREATE_PLUGIN(this, NFNetPlugin)
 	CREATE_PLUGIN(this, NFNoSqlPlugin)
-	CREATE_PLUGIN(this, NFScalePlugin)
 	CREATE_PLUGIN(this, NFSecurityPlugin)
 	CREATE_PLUGIN(this, NFTestPlugin)
 
