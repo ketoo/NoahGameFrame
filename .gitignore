@@ -53,9 +53,9 @@
 /Dependencies/lib
 /Dependencies/boost_1_53_0
 /Dependencies/curl-7.37.1
-#/Dependencies/libevent
-#/Dependencies/lua
-#/Dependencies/protobuf
+/Dependencies/libevent
+/Dependencies/lua
+/Dependencies/protobuf
 
 
 
