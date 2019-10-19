@@ -18,7 +18,6 @@ target_link_libraries(NFPluginLoader NFLuaScriptPlugin)
 target_link_libraries(NFPluginLoader NFNavigationPlugin)
 target_link_libraries(NFPluginLoader NFNetPlugin)
 target_link_libraries(NFPluginLoader NFNoSqlPlugin)
-target_link_libraries(NFPluginLoader NFScalePlugin)
 target_link_libraries(NFPluginLoader NFSecurityPlugin)
 target_link_libraries(NFPluginLoader NFTestPlugin)
 
