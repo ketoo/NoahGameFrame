@@ -10,6 +10,7 @@ rm -rf ./_Out/Release
 
 cd NFComm/NFMessageDefine
 cpp.sh
+cd ../../
 
 cd BuildScript/linux/
 
