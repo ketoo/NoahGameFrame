@@ -6,6 +6,33 @@ echo Building dependencies...
 #rm -rf ajson
 #rm -rf concurrentqueue
 
+	if grep -Eqi "CentOS" /etc/issue || grep -Eq "CentOS" /etc/*-release; then
+        DISTRO='CentOS'
+        PM='yum'
+    elif grep -Eqi "Red Hat Enterprise Linux Server" /etc/issue || grep -Eq "Red Hat Enterprise Linux Server" /etc/*-release; then
+        DISTRO='RHEL'
+        PM='yum'
+    elif grep -Eqi "Aliyun" /etc/issue || grep -Eq "Aliyun" /etc/*-release; then
+        DISTRO='Aliyun'
+        PM='yum'
+    elif grep -Eqi "Fedora" /etc/issue || grep -Eq "Fedora" /etc/*-release; then
+        DISTRO='Fedora'
+        PM='yum'
+    elif grep -Eqi "Debian" /etc/issue || grep -Eq "Debian" /etc/*-release; then
+        DISTRO='Debian'
+        PM='apt-get'
+    elif grep -Eqi "Ubuntu" /etc/issue || grep -Eq "Ubuntu" /etc/*-release; then
+        DISTRO='Ubuntu'
+        PM='apt-get'
+    elif grep -Eqi "Raspbian" /etc/issue || grep -Eq "Raspbian" /etc/*-release; then
+        DISTRO='Raspbian'
+        PM='apt-get'
+    else
+        DISTRO='unknow'
+    fi
+
+
+
 rm -rf lib
 
 sysOS=`uname -s`
@@ -13,42 +40,42 @@ sysOS=`uname -s`
 cmake --version
 if [ $? -ne 0 ]; then
     echo "[ERROR] Please install cmake first."
-    echo "[ubuntu] apt-get install cmake or [centos] yum install cmake or [mac] brew install cmake"
+    echo "[ubuntu] apt-get install cmake or [centos] yum -y install cmake or [mac] brew install cmake"
     exit 1
 fi
 
 unzip -v
 if [ $? -ne 0 ]; then
     echo "[ERROR] Please install unzip first."
-    echo "[ubuntu] sudo apt-get install unzip or [centos] yum install unzip or [mac] brew install unzip"
+    echo "[ubuntu] sudo apt-get install unzip or [centos] yum -y install unzip or [mac] brew install unzip"
     exit 1
 fi
 
 g++ --version
 if [ $? -ne 0 ]; then
     echo "[ERROR] Please install g++ first."
-    echo "[ubuntu] sudo apt-get install g++ or [centos] yum install g++ or [mac] brew install g++"
+    echo "[ubuntu] sudo apt-get install g++ or [centos] yum -y install gcc-c++ or [mac] brew install g++"
     exit 1
 fi
 
 automake --version
 if [ $? -ne 0 ]; then
     echo "[ERROR] Please install automake first."
-    echo "[ubuntu] sudo apt-get install automake or [centos] yum install automake or [mac] brew install automake"
+    echo "[ubuntu] sudo apt-get install automake or [centos] yum -y install automake or [mac] brew install automake"
     exit 1
 fi
 
 wget --version
 if [ $? -ne 0 ]; then
     echo "[ERROR] Please install wget first."
-    echo "[ubuntu] sudo apt-get install wget [centos] yum install wget or [mac] brew install wget"
+    echo "[ubuntu] sudo apt-get install wget [centos] yum -y install wget or [mac] brew install wget"
     exit 1
 fi
 
 openssl version
 if [ $? -ne 0 ]; then
     echo "[ERROR] Please install openssl first."
-    echo "[ubuntu] sudo apt-get install libssl-dev or [centos] yum install libssl-dev or [mac] brew install openssl"
+    echo "[ubuntu] sudo apt-get install libssl-dev or [centos] yum -y install libssl-dev or [mac] brew install openssl"
     exit 1
 fi
 
@@ -62,9 +89,15 @@ mkdir -p lib/Release/
 if [ $sysOS == "Darwin" ];then
     echo "what are you want to do???"
 elif [ $sysOS == "Linux" ];then
-    sudo apt-get install libtool
-	sudo apt-get install libreadline6-dev 
-	sudo apt-get install libncurses5-dev
+	if [ $DISTRO == "Debian" || $DISTRO == "Ubuntu" || $DISTRO == "Raspbian" ]; then
+		sudo apt-get install libtool
+		sudo apt-get install libreadline6-dev 
+		sudo apt-get install libncurses5-dev
+	else
+		sudo yum -y install libtool
+		sudo yum -y install libreadline6-dev 
+		sudo yum -y install libncurses5-dev
+	fi
 fi
 
 
