@@ -28,10 +28,10 @@
 
 #include <iostream>
 #include <unordered_map>
-#include "DetourNavMeshBuilder.h"
-#include "DetourNavMeshQuery.h"
-#include "DetourCommon.h"
-#include "DetourNavMesh.h"
+#include "navigation/DetourNavMeshBuilder.h"
+#include "navigation/DetourNavMeshQuery.h"
+#include "navigation/DetourCommon.h"
+#include "navigation/DetourNavMesh.h"
 #include "NFComm/NFCore/NFIObject.h"
 #include "NFComm/NFPluginModule/NFGUID.h"
 #include "NFComm/NFPluginModule/NFINavigationModule.h"
