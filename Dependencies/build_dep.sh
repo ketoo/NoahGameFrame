@@ -79,8 +79,9 @@ if [ $? -ne 0 ]; then
     exit 1
 fi
 
-
+cd ..
 git submodule update --init --recursive
+cd Dependencies
 
 rm -rf ./lib
 mkdir -p lib/Debug/
