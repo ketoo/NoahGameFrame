@@ -96,7 +96,7 @@ elif [ $sysOS == "Linux" ];then
 		sudo apt-get install libncurses5-dev
 	else
 		sudo yum -y install libtool
-		sudo yum -y install libreadline6-dev 
+		sudo yum -y install readline-devel
 		sudo yum -y install libncurses5-dev
 	fi
 fi
