@@ -39,6 +39,6 @@ chmod -R 755 build_dep.sh
 ./build_dep.sh
 cd ../
 
-buildServer.sh
+./buildServer.sh
 
 #pwd
