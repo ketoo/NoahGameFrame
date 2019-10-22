@@ -113,17 +113,22 @@ bool NFActorModule::ExecuteEvent()
 
 bool NFActorModule::ExecuteResultEvent()
 {
-	NFActorMessage actorMessage;
-	while (mxResultQueue.try_dequeue(actorMessage))
-	{
-		ACTOR_PROCESS_FUNCTOR_PTR functorPtr_end = mxEndFunctor.GetElement(actorMessage.msgID);
-		if (functorPtr_end)
-		{
-			functorPtr_end->operator()(actorMessage);
-		}
-	}
-	
-	return true;
+    NFActorMessage actorMessage;
+    while (mxResultQueue.try_dequeue(actorMessage))
+    {
+        NF_SHARE_PTR < NFMapEx<int, ACTOR_PROCESS_FUNCTOR>> endFunctor = mxGuidEndFunctor.GetElement(actorMessage.id);;
+
+        if (endFunctor == nullptr)
+            return false;
+        ACTOR_PROCESS_FUNCTOR_PTR functorPtr_end = endFunctor->GetElement(actorMessage.msgID);
+        if (functorPtr_end)
+        {
+            functorPtr_end->operator()(actorMessage);
+        }
+    }
+
+    return true;
+
 }
 
 bool NFActorModule::SendMsgToActor(const NFGUID nActorIndex, const int nEventID, const std::string& strArg)
@@ -173,7 +178,14 @@ bool NFActorModule::ReleaseActor(const NFGUID nActorIndex)
 	return mxActorMap.RemoveElement(nActorIndex);
 }
 
-bool NFActorModule::AddEndFunc(const int subMessageID, ACTOR_PROCESS_FUNCTOR_PTR functorPtr_end)
+bool NFActorModule::AddEndFunc(const NFGUID nActorIndex, const int subMessageID, ACTOR_PROCESS_FUNCTOR_PTR functorPtr_end)
 {
-	return mxEndFunctor.AddElement(subMessageID, functorPtr_end);
+    NF_SHARE_PTR < NFMapEx<int, ACTOR_PROCESS_FUNCTOR>> endFunctor=mxGuidEndFunctor.GetElement(nActorIndex);
+
+    if (endFunctor == nullptr) {
+        endFunctor = NF_SHARE_PTR<NFMapEx<int, ACTOR_PROCESS_FUNCTOR>>(NF_NEW NFMapEx<int, ACTOR_PROCESS_FUNCTOR>());
+    }
+    endFunctor->AddElement(subMessageID, functorPtr_end);
+    return mxGuidEndFunctor.AddElement(nActorIndex, endFunctor);
+     
 }

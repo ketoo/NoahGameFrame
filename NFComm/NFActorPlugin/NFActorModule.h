@@ -64,7 +64,7 @@ public:
 	virtual bool AddResult(const NFActorMessage& message);
 
 protected:
-	virtual bool AddEndFunc(const int subMessageID, ACTOR_PROCESS_FUNCTOR_PTR functorPtr_end);
+    virtual bool AddEndFunc(const NFGUID nActorIndex, const int subMessageID, ACTOR_PROCESS_FUNCTOR_PTR functorPtr_end);
 
     virtual bool AddComponent(const NFGUID nActorIndex, NF_SHARE_PTR<NFIComponent> pComponent);
 	virtual bool RemoveComponent(const NFGUID nActorIndex, const std::string& strComponentName);
@@ -72,7 +72,7 @@ protected:
 
 
 	virtual bool ExecuteEvent();
-	virtual bool ExecuteResultEvent();
+    virtual bool ExecuteResultEvent();
 
 
 private:
@@ -82,7 +82,8 @@ private:
 	NFMapEx<NFGUID, NFIActor> mxActorMap;
 
 	NFQueue<NFActorMessage> mxResultQueue;
-	NFMapEx<int, ACTOR_PROCESS_FUNCTOR> mxEndFunctor;
+
+    NFMapEx < NFGUID, NFMapEx<int, ACTOR_PROCESS_FUNCTOR>> mxGuidEndFunctor;
 
     //for schedule
     std::map<NFGUID, int> mActorMessageCount;

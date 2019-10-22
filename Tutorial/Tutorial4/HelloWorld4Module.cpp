@@ -237,12 +237,12 @@ bool NFHelloWorld4Module::AfterInit()
 		
 		for (int i = 0; i < 5; ++i)
 		{
-			m_pActorModule->AddEndFunc(i, this, &NFHelloWorld4Module::RequestAsyEnd);
+			m_pActorModule->AddEndFunc(actorID1,i, this, &NFHelloWorld4Module::RequestAsyEnd);
 		}
 		
 		for (int i = 5; i < 10; ++i)
 		{
-			m_pActorModule->AddEndFunc(i, [](NFActorMessage& actorMessage) -> void
+			m_pActorModule->AddEndFunc(actorID1,i, [](NFActorMessage& actorMessage) -> void
 			{
 				//std::cout << "example 2 AddEndFunc " << actorMessage.id.ToString() << " MSGID: " << actorMessage.msgID << std::endl;
 			});
