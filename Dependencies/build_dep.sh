@@ -2,7 +2,7 @@ echo Building dependencies...
 
 #rm -rf protobuf
 #rm -rf libevent
-#rm -rf lua
+rm -rf lua
 #rm -rf ajson
 #rm -rf concurrentqueue
 
