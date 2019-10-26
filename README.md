@@ -48,7 +48,7 @@ or
 svn checkout https://github.com/ketoo/NoahGameFrame
 
 ## MidWare
-The projects located midware repo are usefull to develop a business game.
+The projects in midware repo are usefull to develop a business game.
 
 ## Game Example
 Thie repo show people how to use NF and NF's MidWare as submodule.
