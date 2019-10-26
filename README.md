@@ -58,7 +58,7 @@ Thie repo show people how to use NF and NF's MidWare as submodule.
 
 - libevent 2.0.22
 - easylogging++ 9.80
-- google protobuf 3.6 （windows & vcpkg 3.1）
+- google protobuf
 - hiredis
 - ajson
 - concurrentqueue
