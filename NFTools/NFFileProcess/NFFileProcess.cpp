@@ -349,6 +349,7 @@ bool NFFileProcess::Save()
 {
 	SaveForCPP();
 	SaveForCS();
+	SaveForTS();
 	SaveForJAVA();
 
 
@@ -442,7 +443,7 @@ bool NFFileProcess::SaveForCPP()
 			const std::string& strRecordName = itRecord->first;
 			NFlassRecord* pClassRecord = itRecord->second;
 
-			std::cout << "save for cpp ---> " << strClassName  << "::" << strRecordName << std::endl;
+			std::cout << "save for cpppppp ---> " << strClassName  << "::" << strRecordName << std::endl;
 
 			strRecordInfo += "\t\tclass " + strRecordName + "\n\t\t{\n\t\tpublic:\n";
 			strRecordInfo += "\t\t\t//Class name\n\t";
@@ -611,6 +612,123 @@ bool NFFileProcess::SaveForCS()
 	std::string strFileEnd = "\n}";
 	fwrite(strFileEnd.c_str(), strFileEnd.length(), 1, csWriter);
 
+	fclose(csWriter);
+
+	return false;
+}
+bool NFFileProcess::SaveForTS()
+{
+	FILE* csWriter = fopen(strTSFile.c_str(), "w");
+
+	std::string strFileHead = "// -------------------------------------------------------------------------\n";
+	strFileHead = strFileHead
+		+ "//    @FileName         :    NFProtocolDefine.ts\n"
+		+ "//    @Author           :    NFrame Studio\n"
+		+ "//    @Module           :    NFProtocolDefine\n"
+		+ "// -------------------------------------------------------------------------\n\n";
+	fwrite(strFileHead.c_str(), strFileHead.length(), 1, csWriter);
+	/////////////////////////////////////////////////////
+
+
+	ClassData* pBaseObject = mxClassData["IObject"];
+	std::string allClassNames = "export const NFConfig={\n\t\t";
+	for (std::map<std::string, ClassData*>::iterator it = mxClassData.begin(); it != mxClassData.end(); ++it)
+	{
+		const std::string& strClassName = it->first;
+		ClassData* pClassDta = it->second;
+		// cpp
+		std::string strPropertyInfo;
+		if(it != mxClassData.begin()){
+			allClassNames+=',';
+		}
+		allClassNames+=strClassName;
+
+		strPropertyInfo += "\tclass " + strClassName + "\n\t{\n";
+		strPropertyInfo += "\t\t//Class name\n\t";
+		strPropertyInfo += "\tpublic static  ThisName = \"" + strClassName + "\";\n";
+		if (strClassName != "IObject")
+		{
+			//add base class properties
+			strPropertyInfo += "\t\t// IObject\n";
+
+			for (std::map<std::string, NFlassProperty*>::iterator itProperty = pBaseObject->xStructData.xPropertyList.begin();
+				itProperty != pBaseObject->xStructData.xPropertyList.end(); ++itProperty)
+			{
+				const std::string& strPropertyName = itProperty->first;
+				NFlassProperty* pClassProperty = itProperty->second;
+
+				strPropertyInfo += "\t\tpublic static " + strPropertyName + " = \"" + strPropertyName + "\";";
+				strPropertyInfo += "// " + pClassProperty->descList["Type"] + "\n";
+			}
+		}
+
+
+		strPropertyInfo += "\t\t// Property\n";
+		for (std::map<std::string, NFlassProperty*>::iterator itProperty = pClassDta->xStructData.xPropertyList.begin();
+			itProperty != pClassDta->xStructData.xPropertyList.end(); ++itProperty)
+		{
+			const std::string& strPropertyName = itProperty->first;
+			NFlassProperty* pClassProperty = itProperty->second;
+
+			strPropertyInfo += "\t\tpublic static " + strPropertyName + " = \"" + strPropertyName + "\";";
+			strPropertyInfo += "// " + pClassProperty->descList["Type"] + "\n";
+		}
+
+		fwrite(strPropertyInfo.c_str(), strPropertyInfo.length(), 1, csWriter);
+
+		//record
+		std::string strRecordInfo = "";
+		strRecordInfo += "\t\t// Record\n";
+
+		for (std::map<std::string, NFlassRecord*>::iterator itRecord = pClassDta->xStructData.xRecordList.begin();
+			itRecord != pClassDta->xStructData.xRecordList.end(); ++itRecord)
+		{
+			const std::string& strRecordName = itRecord->first;
+			NFlassRecord* pClassRecord = itRecord->second;
+
+			std::cout << "save for cs ---> " << strClassName << "::" << strRecordName << std::endl;
+
+			strRecordInfo += "\t\tpublic static " + strRecordName + " = \n\t\t{\n";
+			strRecordInfo += "\t\t\t//Class name\n\t";
+			strRecordInfo += "\t\t\"ThisName\":\"" + strRecordName + "\",\n";
+
+			//col
+			for (int i = 0; i < pClassRecord->colList.size(); ++i)
+			{
+				for (std::map<std::string, NFlassRecord::RecordColDesc*>::iterator itCol = pClassRecord->colList.begin();
+					itCol != pClassRecord->colList.end(); ++itCol)
+				{
+
+					const std::string& colTag = itCol->first;
+					NFlassRecord::RecordColDesc* pRecordColDesc = itCol->second;
+
+					if (pRecordColDesc->index == i)
+					{
+						if(i!= 0){
+							strRecordInfo+=",\n";
+						}
+						strRecordInfo += "\t\t\t\"" + colTag + "\":" + std::to_string(pRecordColDesc->index);
+					}
+				}
+			}
+			
+
+			strRecordInfo += "\n\t\t}\n";
+
+		}
+		fwrite(strRecordInfo.c_str(), strRecordInfo.length(), 1, csWriter);
+
+		std::string strHppEnumInfo = "";
+
+
+		std::string strClassEnd;
+		strClassEnd += "\n\t}\n";
+
+		fwrite(strClassEnd.c_str(), strClassEnd.length(), 1, csWriter);
+
+	}
+	allClassNames+="}\n";
+	fwrite(allClassNames.c_str(), allClassNames.length(), 1, csWriter);
 	fclose(csWriter);
 
 	return false;
