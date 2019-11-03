@@ -44,7 +44,7 @@
 #include <functional>
 #include <atomic>
 #include "NFComm/NFPluginModule/NFPlatform.h"
-#include "NFComm/NFLogPlugin/easylogging++.h"
+#include "easylogging++.h"
 
 #if NF_PLATFORM != NF_PLATFORM_WIN
 #include <unistd.h>

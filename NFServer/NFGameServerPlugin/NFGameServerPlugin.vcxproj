@@ -14,14 +14,14 @@
     <ProjectGuid>{EB9FDC0A-7CFD-4E42-8442-9A9D40511162}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>NFGameServerPlugin</RootNamespace>
-    <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
-    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <CharacterSet>MultiByte</CharacterSet>
-    <PlatformToolset>v140</PlatformToolset>
+    <PlatformToolset>v141</PlatformToolset>
     <PlatformToolset Condition="'$(VisualStudioVersion)' == '12.0'">v120</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
@@ -29,7 +29,7 @@
     <UseDebugLibraries>false</UseDebugLibraries>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>MultiByte</CharacterSet>
-    <PlatformToolset>v140</PlatformToolset>
+    <PlatformToolset>v141</PlatformToolset>
     <PlatformToolset Condition="'$(VisualStudioVersion)' == '12.0'">v120</PlatformToolset>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
@@ -46,7 +46,7 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
-    <TargetName>$(ProjectName)_d</TargetName>
+    <TargetName>$(ProjectName)</TargetName>
     <EmbedManifest>false</EmbedManifest>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -61,6 +61,7 @@
       <PreprocessorDefinitions>WIN;_DEBUG;_WINDOWS;_USRDLL;ELPP_NO_DEFAULT_LOG_FILE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <BrowseInformation>false</BrowseInformation>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -101,6 +102,8 @@
     </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="NFBuffModule.h" />
+    <ClInclude Include="NFCreateRoleModule.h" />
     <ClInclude Include="NFGameServerModule.h" />
     <ClInclude Include="NFLevelModule.h" />
     <ClInclude Include="NFMoveModule.h" />
@@ -108,8 +111,10 @@
     <ClInclude Include="NFPropertyConfigModule.h" />
     <ClInclude Include="NFPropertyModule.h" />
     <ClInclude Include="NFSceneProcessModule.h" />
+    <ClInclude Include="NFScenePropsModule.h" />
     <ClInclude Include="NFSwitchGameServerModule.h" />
     <ClInclude Include="NFGameServerPlugin.h" />
+    <ClInclude Include="NFSyncModule.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="dllmain.cpp">
@@ -120,6 +125,8 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
       </PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="NFBuffModule.cpp" />
+    <ClCompile Include="NFCreateRoleModule.cpp" />
     <ClCompile Include="NFGameServerModule.cpp" />
     <ClCompile Include="NFLevelModule.cpp" />
     <ClCompile Include="NFMoveModule.cpp" />
@@ -127,8 +134,10 @@
     <ClCompile Include="NFPropertyConfigModule.cpp" />
     <ClCompile Include="NFPropertyModule.cpp" />
     <ClCompile Include="NFSceneProcessModule.cpp" />
+    <ClCompile Include="NFScenePropsModule.cpp" />
     <ClCompile Include="NFSwitchGameServerModule.cpp" />
     <ClCompile Include="NFGameServerPlugin.cpp" />
+    <ClCompile Include="NFSyncModule.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

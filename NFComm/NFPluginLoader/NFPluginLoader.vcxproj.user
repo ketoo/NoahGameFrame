@@ -1,13 +1,13 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <LocalDebuggerCommandArguments>Server=WorldServer ID=7 PluginX.xml</LocalDebuggerCommandArguments>
+    <LocalDebuggerCommandArguments>Server=DBServer ID=6 Plugin.xml</LocalDebuggerCommandArguments>
     <DebuggerFlavor>WindowsLocalDebugger</DebuggerFlavor>
     <LocalDebuggerWorkingDirectory>$(SolutionDir)\_Out\$(Configuration)\</LocalDebuggerWorkingDirectory>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <LocalDebuggerCommandArguments>Server=LoginServer ID=4 PluginX.xml</LocalDebuggerCommandArguments>
-    <LocalDebuggerWorkingDirectory>..\..\_Out\Debug</LocalDebuggerWorkingDirectory>
+    <LocalDebuggerCommandArguments>Server=LoginServer ID=4 Plugin.xml</LocalDebuggerCommandArguments>
+    <LocalDebuggerWorkingDirectory>$(SolutionDir)\_Out\$(Configuration)\</LocalDebuggerWorkingDirectory>
     <DebuggerFlavor>WindowsLocalDebugger</DebuggerFlavor>
   </PropertyGroup>
 </Project>

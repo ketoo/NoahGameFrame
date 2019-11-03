@@ -49,5 +49,16 @@
 		<Plugin Name="NFLogPlugin" />	
 		<Plugin Name="NFSecurityPlugin" />
 	</WorldServer>
-
+	<DBServer>
+		<Plugin Name="NFNetPlugin" />
+		<Plugin Name="NFKernelPlugin" />
+		<Plugin Name="NFConfigPlugin" />
+		<Plugin Name="NFDBNet_ClientPlugin" />
+		<Plugin Name="NFDBNet_ServerPlugin" />
+		<Plugin Name="NFLogPlugin" />
+		<Plugin Name="NFDBLogicPlugin" />
+		<Plugin Name="NFActorPlugin" />
+		<Plugin Name="NFNoSqlPlugin" />
+		<Plugin Name="NFSecurityPlugin" />
+	</DBServer>
 </XML>

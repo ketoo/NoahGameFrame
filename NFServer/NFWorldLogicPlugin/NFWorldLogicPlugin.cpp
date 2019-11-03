@@ -24,7 +24,6 @@
 */
 
 #include "NFWorldLogicModule.h"
-#include "NFWorldPVPModule.h"
 #include "NFWorldPropsModule.h"
 #include "NFWorldLogicPlugin.h"
 
@@ -53,13 +52,11 @@ const std::string NFWorldLogicPlugin::GetPluginName()
 void NFWorldLogicPlugin::Install()
 {
 	REGISTER_MODULE(pPluginManager, NFIWorldLogicModule, NFWorldLogicModule)
-	REGISTER_MODULE(pPluginManager, NFIWorldPVPModule, NFWorldPVPModule)
 	REGISTER_MODULE(pPluginManager, NFIWorldPropsModule, NFWorldPropsModule)
 }
 
 void NFWorldLogicPlugin::Uninstall()
 {
 	UNREGISTER_MODULE(pPluginManager, NFIWorldPropsModule, NFWorldPropsModule)
-	UNREGISTER_MODULE(pPluginManager, NFIWorldPVPModule, NFWorldPVPModule)
 	UNREGISTER_MODULE(pPluginManager, NFIWorldLogicModule, NFWorldLogicModule)
 }

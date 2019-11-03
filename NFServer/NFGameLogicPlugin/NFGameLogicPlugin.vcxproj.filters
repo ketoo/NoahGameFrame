@@ -1,76 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="NFBuffModule">
-      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
-      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
-    </Filter>
-    <Filter Include="NFCreateRoleModule">
-      <UniqueIdentifier>{ca2648e6-36dd-4163-9791-b22482d4b8b6}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="NFPVP">
-      <UniqueIdentifier>{19e315a2-7662-47a2-a943-6abcee1ee64c}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="NFSyncModule">
-      <UniqueIdentifier>{ad5d009c-1b04-4908-bad2-4fbb3fb70803}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="NFScenePropsModule">
-      <UniqueIdentifier>{a86b3f73-a5da-4bba-9d52-9d4ef540a9b7}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="NFFriendAgent">
-      <UniqueIdentifier>{a50b2f7c-a0b6-478c-91b7-6e17255eb757}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="NFTeamAgent">
-      <UniqueIdentifier>{d6ab6f07-0d23-44f5-8043-43d5395af353}</UniqueIdentifier>
-    </Filter>
-  </ItemGroup>
-  <ItemGroup>
     <ClInclude Include="NFGameLogicPlugin.h" />
-    <ClInclude Include="NFBuffModule.h">
-      <Filter>NFBuffModule</Filter>
-    </ClInclude>
-    <ClInclude Include="NFCreateRoleModule.h">
-      <Filter>NFCreateRoleModule</Filter>
-    </ClInclude>
-    <ClInclude Include="NFGamePVPModule.h">
-      <Filter>NFPVP</Filter>
-    </ClInclude>
-    <ClInclude Include="NFSyncModule.h">
-      <Filter>NFSyncModule</Filter>
-    </ClInclude>
-    <ClInclude Include="NFScenePropsModule.h">
-      <Filter>NFScenePropsModule</Filter>
-    </ClInclude>
-    <ClInclude Include="NFFriendAgentModule.h">
-      <Filter>NFFriendAgent</Filter>
-    </ClInclude>
-    <ClInclude Include="NFTeamAgentModule.h">
-      <Filter>NFTeamAgent</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="dllmain.cpp" />
     <ClCompile Include="NFGameLogicPlugin.cpp" />
-    <ClCompile Include="NFBuffModule.cpp">
-      <Filter>NFBuffModule</Filter>
-    </ClCompile>
-    <ClCompile Include="NFCreateRoleModule.cpp">
-      <Filter>NFCreateRoleModule</Filter>
-    </ClCompile>
-    <ClCompile Include="NFGamePVPModule.cpp">
-      <Filter>NFPVP</Filter>
-    </ClCompile>
-    <ClCompile Include="NFSyncModule.cpp">
-      <Filter>NFSyncModule</Filter>
-    </ClCompile>
-    <ClCompile Include="NFScenePropsModule.cpp">
-      <Filter>NFScenePropsModule</Filter>
-    </ClCompile>
-    <ClCompile Include="NFFriendAgentModule.cpp">
-      <Filter>NFFriendAgent</Filter>
-    </ClCompile>
-    <ClCompile Include="NFTeamAgentModule.cpp">
-      <Filter>NFTeamAgent</Filter>
-    </ClCompile>
   </ItemGroup>
 </Project>

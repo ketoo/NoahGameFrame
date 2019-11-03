@@ -39,7 +39,7 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
-    <TargetName>$(ProjectName)_d</TargetName>
+    <TargetName>$(ProjectName)</TargetName>
     <OutDir>$(NFBIN_COMM)\$(Configuration)\</OutDir>
     <EmbedManifest>false</EmbedManifest>
   </PropertyGroup>
@@ -63,38 +63,38 @@
       <IgnoreSpecificDefaultLibraries>libcpmtd.lib;libcmtd.lib</IgnoreSpecificDefaultLibraries>
     </Link>
     <PostBuildEvent>
-      <Command>copy /y $(NFBIN_COMM)\$(Configuration)\$(ProjectName)_d.exe $(NFBIN_SERVER)\$(Configuration)\NFLoginServer\$(ProjectName)_d.exe
-copy /y $(NFBIN_COMM)\$(Configuration)\$(ProjectName)_d.pdb $(NFBIN_SERVER)\$(Configuration)\NFLoginServer\$(ProjectName)_d.pdb
-copy /y $(NFBIN_COMM)\$(Configuration)\$(ProjectName)_d.exe $(NFBIN_SERVER)\$(Configuration)\NFShareMemoryServer\$(ProjectName)_d.exe
-copy /y $(NFBIN_COMM)\$(Configuration)\$(ProjectName)_d.pdb $(NFBIN_SERVER)\$(Configuration)\NFShareMemoryServer\$(ProjectName)_d.pdb
-copy /y $(NFBIN_COMM)\$(Configuration)\$(ProjectName)_d.exe $(NFBIN_SERVER)\$(Configuration)\NFWorldServer\$(ProjectName)_d.exe
-copy /y $(NFBIN_COMM)\$(Configuration)\$(ProjectName)_d.pdb $(NFBIN_SERVER)\$(Configuration)\NFWorldServer\$(ProjectName)_d.pdb
-copy /y $(NFBIN_COMM)\$(Configuration)\$(ProjectName)_d.exe $(NFBIN_SERVER)\$(Configuration)\NFMasterServer\$(ProjectName)_d.exe
-copy /y $(NFBIN_COMM)\$(Configuration)\$(ProjectName)_d.pdb $(NFBIN_SERVER)\$(Configuration)\NFMasterServer\$(ProjectName)_d.pdb
-copy /y $(NFBIN_COMM)\$(Configuration)\$(ProjectName)_d.exe $(NFBIN_SERVER)\$(Configuration)\NFClientLittle\$(ProjectName)_d.exe
-copy /y $(NFBIN_COMM)\$(Configuration)\$(ProjectName)_d.pdb $(NFBIN_SERVER)\$(Configuration)\NFClientLittle\$(ProjectName)_d.pdb
-copy /y $(NFBIN_COMM)\$(Configuration)\$(ProjectName)_d.exe $(NFBIN_SERVER)\$(Configuration)\NFDataBaseServer\$(ProjectName)_d.exe
-copy /y $(NFBIN_COMM)\$(Configuration)\$(ProjectName)_d.pdb $(NFBIN_SERVER)\$(Configuration)\NFDataBaseServer\$(ProjectName)_d.pdb
-copy /y $(NFBIN_COMM)\$(Configuration)\$(ProjectName)_d.exe $(NFBIN_SERVER)\$(Configuration)\NFProxyServer1\$(ProjectName)_d.exe
-copy /y $(NFBIN_COMM)\$(Configuration)\$(ProjectName)_d.pdb $(NFBIN_SERVER)\$(Configuration)\NFProxyServer1\$(ProjectName)_d.pdb
-copy /y $(NFBIN_COMM)\$(Configuration)\$(ProjectName)_d.exe $(NFBIN_SERVER)\$(Configuration)\NFProxyServer2\$(ProjectName)_d.exe
-copy /y $(NFBIN_COMM)\$(Configuration)\$(ProjectName)_d.pdb $(NFBIN_SERVER)\$(Configuration)\NFProxyServer2\$(ProjectName)_d.pdb
-copy /y $(NFBIN_COMM)\$(Configuration)\$(ProjectName)_d.exe $(NFBIN_SERVER)\$(Configuration)\NFProxyServer3\$(ProjectName)_d.exe
-copy /y $(NFBIN_COMM)\$(Configuration)\$(ProjectName)_d.pdb $(NFBIN_SERVER)\$(Configuration)\NFProxyServer3\$(ProjectName)_d.pdb
-copy /y $(NFBIN_COMM)\$(Configuration)\$(ProjectName)_d.exe $(NFBIN_SERVER)\$(Configuration)\NFProxyServer4\$(ProjectName)_d.exe
-copy /y $(NFBIN_COMM)\$(Configuration)\$(ProjectName)_d.pdb $(NFBIN_SERVER)\$(Configuration)\NFProxyServer4\$(ProjectName)_d.pdb
-copy /y $(NFBIN_COMM)\$(Configuration)\$(ProjectName)_d.exe $(NFBIN_SERVER)\$(Configuration)\NFProxyServer5\$(ProjectName)_d.exe
-copy /y $(NFBIN_COMM)\$(Configuration)\$(ProjectName)_d.pdb $(NFBIN_SERVER)\$(Configuration)\NFProxyServer5\$(ProjectName)_d.pdb
-copy /y $(NFBIN_COMM)\$(Configuration)\$(ProjectName)_d.exe $(NFBIN_SERVER)\$(Configuration)\NFGameServer1\$(ProjectName)_d.exe
-copy /y $(NFBIN_COMM)\$(Configuration)\$(ProjectName)_d.pdb $(NFBIN_SERVER)\$(Configuration)\NFGameServer1\$(ProjectName)_d.pdb
-copy /y $(NFBIN_COMM)\$(Configuration)\$(ProjectName)_d.exe $(NFBIN_SERVER)\$(Configuration)\NFGameServer2\$(ProjectName)_d.exe
-copy /y $(NFBIN_COMM)\$(Configuration)\$(ProjectName)_d.pdb $(NFBIN_SERVER)\$(Configuration)\NFGameServer2\$(ProjectName)_d.pdb
-copy /y $(NFBIN_COMM)\$(Configuration)\$(ProjectName)_d.exe $(NFBIN_SERVER)\$(Configuration)\NFGameServer3\$(ProjectName)_d.exe
-copy /y $(NFBIN_COMM)\$(Configuration)\$(ProjectName)_d.pdb $(NFBIN_SERVER)\$(Configuration)\NFGameServer3\$(ProjectName)_d.pdb
-copy /y $(NFBIN_COMM)\$(Configuration)\$(ProjectName)_d.exe $(NFBIN_SERVER)\$(Configuration)\NFGameServer4\$(ProjectName)_d.exe
-copy /y $(NFBIN_COMM)\$(Configuration)\$(ProjectName)_d.pdb $(NFBIN_SERVER)\$(Configuration)\NFGameServer4\$(ProjectName)_d.pdb
-copy /y $(NFBIN_COMM)\$(Configuration)\$(ProjectName)_d.exe $(NFBIN_SERVER)\$(Configuration)\NFGameServer5\$(ProjectName)_d.exe
-copy /y $(NFBIN_COMM)\$(Configuration)\$(ProjectName)_d.pdb $(NFBIN_SERVER)\$(Configuration)\NFGameServer5\$(ProjectName)_d.pdb</Command>
+      <Command>copy /y $(NFBIN_COMM)\$(Configuration)\$(ProjectName).exe $(NFBIN_SERVER)\$(Configuration)\NFLoginServer\$(ProjectName).exe
+copy /y $(NFBIN_COMM)\$(Configuration)\$(ProjectName).pdb $(NFBIN_SERVER)\$(Configuration)\NFLoginServer\$(ProjectName).pdb
+copy /y $(NFBIN_COMM)\$(Configuration)\$(ProjectName).exe $(NFBIN_SERVER)\$(Configuration)\NFShareMemoryServer\$(ProjectName).exe
+copy /y $(NFBIN_COMM)\$(Configuration)\$(ProjectName).pdb $(NFBIN_SERVER)\$(Configuration)\NFShareMemoryServer\$(ProjectName).pdb
+copy /y $(NFBIN_COMM)\$(Configuration)\$(ProjectName).exe $(NFBIN_SERVER)\$(Configuration)\NFWorldServer\$(ProjectName).exe
+copy /y $(NFBIN_COMM)\$(Configuration)\$(ProjectName).pdb $(NFBIN_SERVER)\$(Configuration)\NFWorldServer\$(ProjectName).pdb
+copy /y $(NFBIN_COMM)\$(Configuration)\$(ProjectName).exe $(NFBIN_SERVER)\$(Configuration)\NFMasterServer\$(ProjectName).exe
+copy /y $(NFBIN_COMM)\$(Configuration)\$(ProjectName).pdb $(NFBIN_SERVER)\$(Configuration)\NFMasterServer\$(ProjectName).pdb
+copy /y $(NFBIN_COMM)\$(Configuration)\$(ProjectName).exe $(NFBIN_SERVER)\$(Configuration)\NFClientLittle\$(ProjectName).exe
+copy /y $(NFBIN_COMM)\$(Configuration)\$(ProjectName).pdb $(NFBIN_SERVER)\$(Configuration)\NFClientLittle\$(ProjectName).pdb
+copy /y $(NFBIN_COMM)\$(Configuration)\$(ProjectName).exe $(NFBIN_SERVER)\$(Configuration)\NFDataBaseServer\$(ProjectName).exe
+copy /y $(NFBIN_COMM)\$(Configuration)\$(ProjectName).pdb $(NFBIN_SERVER)\$(Configuration)\NFDataBaseServer\$(ProjectName).pdb
+copy /y $(NFBIN_COMM)\$(Configuration)\$(ProjectName).exe $(NFBIN_SERVER)\$(Configuration)\NFProxyServer1\$(ProjectName).exe
+copy /y $(NFBIN_COMM)\$(Configuration)\$(ProjectName).pdb $(NFBIN_SERVER)\$(Configuration)\NFProxyServer1\$(ProjectName).pdb
+copy /y $(NFBIN_COMM)\$(Configuration)\$(ProjectName).exe $(NFBIN_SERVER)\$(Configuration)\NFProxyServer2\$(ProjectName).exe
+copy /y $(NFBIN_COMM)\$(Configuration)\$(ProjectName).pdb $(NFBIN_SERVER)\$(Configuration)\NFProxyServer2\$(ProjectName).pdb
+copy /y $(NFBIN_COMM)\$(Configuration)\$(ProjectName).exe $(NFBIN_SERVER)\$(Configuration)\NFProxyServer3\$(ProjectName).exe
+copy /y $(NFBIN_COMM)\$(Configuration)\$(ProjectName).pdb $(NFBIN_SERVER)\$(Configuration)\NFProxyServer3\$(ProjectName).pdb
+copy /y $(NFBIN_COMM)\$(Configuration)\$(ProjectName).exe $(NFBIN_SERVER)\$(Configuration)\NFProxyServer4\$(ProjectName).exe
+copy /y $(NFBIN_COMM)\$(Configuration)\$(ProjectName).pdb $(NFBIN_SERVER)\$(Configuration)\NFProxyServer4\$(ProjectName).pdb
+copy /y $(NFBIN_COMM)\$(Configuration)\$(ProjectName).exe $(NFBIN_SERVER)\$(Configuration)\NFProxyServer5\$(ProjectName).exe
+copy /y $(NFBIN_COMM)\$(Configuration)\$(ProjectName).pdb $(NFBIN_SERVER)\$(Configuration)\NFProxyServer5\$(ProjectName).pdb
+copy /y $(NFBIN_COMM)\$(Configuration)\$(ProjectName).exe $(NFBIN_SERVER)\$(Configuration)\NFGameServer1\$(ProjectName).exe
+copy /y $(NFBIN_COMM)\$(Configuration)\$(ProjectName).pdb $(NFBIN_SERVER)\$(Configuration)\NFGameServer1\$(ProjectName).pdb
+copy /y $(NFBIN_COMM)\$(Configuration)\$(ProjectName).exe $(NFBIN_SERVER)\$(Configuration)\NFGameServer2\$(ProjectName).exe
+copy /y $(NFBIN_COMM)\$(Configuration)\$(ProjectName).pdb $(NFBIN_SERVER)\$(Configuration)\NFGameServer2\$(ProjectName).pdb
+copy /y $(NFBIN_COMM)\$(Configuration)\$(ProjectName).exe $(NFBIN_SERVER)\$(Configuration)\NFGameServer3\$(ProjectName).exe
+copy /y $(NFBIN_COMM)\$(Configuration)\$(ProjectName).pdb $(NFBIN_SERVER)\$(Configuration)\NFGameServer3\$(ProjectName).pdb
+copy /y $(NFBIN_COMM)\$(Configuration)\$(ProjectName).exe $(NFBIN_SERVER)\$(Configuration)\NFGameServer4\$(ProjectName).exe
+copy /y $(NFBIN_COMM)\$(Configuration)\$(ProjectName).pdb $(NFBIN_SERVER)\$(Configuration)\NFGameServer4\$(ProjectName).pdb
+copy /y $(NFBIN_COMM)\$(Configuration)\$(ProjectName).exe $(NFBIN_SERVER)\$(Configuration)\NFGameServer5\$(ProjectName).exe
+copy /y $(NFBIN_COMM)\$(Configuration)\$(ProjectName).pdb $(NFBIN_SERVER)\$(Configuration)\NFGameServer5\$(ProjectName).pdb</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">

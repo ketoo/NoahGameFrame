@@ -5,7 +5,7 @@
 
    Copyright 2009 - 2019 NoahFrame(NoahGameFrame)
 
-   File creator: lvsheng.huang
+   File creator: Stonexin
    
    NoahFrame is open-source software and you can redistribute it and/or modify
    it under the terms of the License; besides, anyone who use this file/software must include this copyright announcement.
@@ -28,18 +28,18 @@
 #ifdef NF_DEBUG_MODE
 
 #if NF_PLATFORM == NF_PLATFORM_WIN
-#pragma comment( lib, "NFCore.lib" )
+#pragma comment( lib, "libprotobufd.lib" )
+
 #elif NF_PLATFORM == NF_PLATFORM_LINUX || NF_PLATFORM == NF_PLATFORM_ANDROID
-#pragma comment( lib, "NFCore.a" )
 #elif NF_PLATFORM == NF_PLATFORM_APPLE || NF_PLATFORM == NF_PLATFORM_APPLE_IOS
 #endif
 
 #else
 
 #if NF_PLATFORM == NF_PLATFORM_WIN
-#pragma comment( lib, "NFCore.lib" )
+#pragma comment( lib, "libprotobuf.lib" )
+
 #elif NF_PLATFORM == NF_PLATFORM_LINUX || NF_PLATFORM == NF_PLATFORM_ANDROID
-#pragma comment( lib, "NFCore.a" )
 #elif NF_PLATFORM == NF_PLATFORM_APPLE || NF_PLATFORM == NF_PLATFORM_APPLE_IOS
 #endif
 

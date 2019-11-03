@@ -36,7 +36,6 @@
 #include "NFPluginManager.h"
 #include "NFComm/NFCore/NFException.h"
 #include "NFComm/NFPluginModule/NFPlatform.h"
-#include "NFComm/NFLogPlugin/easylogging++.h"
 
 #if NF_PLATFORM != NF_PLATFORM_WIN
 #include <unistd.h>

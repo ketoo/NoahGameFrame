@@ -3,9 +3,6 @@
   <ItemGroup>
     <ClInclude Include="NFWorldLogicPlugin.h" />
     <ClInclude Include="NFWorldLogicModule.h" />
-    <ClInclude Include="NFWorldPVPModule.h">
-      <Filter>NFPVP</Filter>
-    </ClInclude>
     <ClInclude Include="NFWorldPropsModule.h">
       <Filter>NFWorldPropsModule</Filter>
     </ClInclude>
@@ -14,17 +11,11 @@
     <ClCompile Include="dllmain.cpp" />
     <ClCompile Include="NFWorldLogicPlugin.cpp" />
     <ClCompile Include="NFWorldLogicModule.cpp" />
-    <ClCompile Include="NFWorldPVPModule.cpp">
-      <Filter>NFPVP</Filter>
-    </ClCompile>
     <ClCompile Include="NFWorldPropsModule.cpp">
       <Filter>NFWorldPropsModule</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <Filter Include="NFPVP">
-      <UniqueIdentifier>{96618156-8584-4f96-861d-5cdcf74b7ee2}</UniqueIdentifier>
-    </Filter>
     <Filter Include="NFWorldPropsModule">
       <UniqueIdentifier>{830a40ef-f71a-449f-8d6f-4497bd05f146}</UniqueIdentifier>
     </Filter>

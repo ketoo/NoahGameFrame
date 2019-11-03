@@ -26,6 +26,8 @@
 
 #include "NFException.h"
 
+INITIALIZE_EASYLOGGINGPP
+
 #if NF_PLATFORM != NF_PLATFORM_WIN
 static NFExceptFrame pExceptStack;
 NFExceptFrame& NFException::ExceptStack()

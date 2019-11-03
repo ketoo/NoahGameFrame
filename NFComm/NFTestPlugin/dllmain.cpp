@@ -29,7 +29,7 @@
 
 #if NF_PLATFORM == NF_PLATFORM_WIN
 #pragma comment( lib, "ws2_32" )
-//#pragma comment( lib, "gtest_d.lib" )
+//#pragma comment( lib, "gtest.lib" )
 
 #elif NF_PLATFORM == NF_PLATFORM_LINUX || NF_PLATFORM == NF_PLATFORM_ANDROID
 
