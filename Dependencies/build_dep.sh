@@ -2,7 +2,7 @@ echo Building dependencies...
 
 #rm -rf protobuf
 #rm -rf libevent
-#rm -rf lua
+rm -rf lua
 #rm -rf ajson
 #rm -rf concurrentqueue
 
@@ -90,14 +90,16 @@ mkdir -p lib/Release/
 if [ $sysOS == "Darwin" ];then
     echo "what are you want to do???"
 elif [ $sysOS == "Linux" ];then
-	if [ $DISTRO == "Debian" || $DISTRO == "Ubuntu" || $DISTRO == "Raspbian" ]; then
+	if [ $DISTRO == "Debian" ] || [ $DISTRO == "Ubuntu" ] || [ $DISTRO == "Raspbian" ]; then
 		sudo apt-get install libtool
+		sudo apt-get install libstdc++-static
 		sudo apt-get install libreadline6-dev 
 		sudo apt-get install libncurses5-dev
 	else
 		sudo yum -y install libtool
 		sudo yum -y install readline-devel
-		sudo yum -y install libncurses5-dev
+		sudo yum -y install ncurses-devel
+        sudo yum -y install libstdc++-static
 	fi
 fi
 
