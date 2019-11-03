@@ -77,7 +77,7 @@ Thie repo show people how to use NF and NF's MidWare as submodule.
 ## Supported Compilers
 
 * GCC >= 4.8 (**Tested in Ubuntu 15.04**)
-* MSVC >= VS2015 update 3 (**Tested in Win7/10**)
+* MSVC >= VS2017 (**Tested in Win7/10**)
 
 ## Build and Install
 ### MSVC >= 2015
