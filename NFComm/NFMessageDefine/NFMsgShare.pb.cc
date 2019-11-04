@@ -1945,7 +1945,7 @@ failure:
 
   // .NFMsg.Ident id = 1;
   if (this->has_id()) {
-    stream->EnsureSpace(&target);
+    target = stream->EnsureSpace(target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
       InternalWriteMessageToArray(
         1, _Internal::id(this), target, stream);
@@ -1959,7 +1959,7 @@ failure:
 
   // int32 game_id = 3;
   if (this->game_id() != 0) {
-    stream->EnsureSpace(&target);
+    target = stream->EnsureSpace(target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt32ToArray(3, this->_internal_game_id(), target);
   }
 
@@ -2188,7 +2188,7 @@ failure:
 
   // int32 arg = 1;
   if (this->arg() != 0) {
-    stream->EnsureSpace(&target);
+    target = stream->EnsureSpace(target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt32ToArray(1, this->_internal_arg(), target);
   }
 
@@ -2374,7 +2374,7 @@ failure:
 
   // int32 arg = 1;
   if (this->arg() != 0) {
-    stream->EnsureSpace(&target);
+    target = stream->EnsureSpace(target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt32ToArray(1, this->_internal_arg(), target);
   }
 
@@ -2560,7 +2560,7 @@ failure:
 
   // int32 arg = 1;
   if (this->arg() != 0) {
-    stream->EnsureSpace(&target);
+    target = stream->EnsureSpace(target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt32ToArray(1, this->_internal_arg(), target);
   }
 
@@ -2846,7 +2846,7 @@ failure:
 
   // .NFMsg.Ident object_guid = 1;
   if (this->has_object_guid()) {
-    stream->EnsureSpace(&target);
+    target = stream->EnsureSpace(target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
       InternalWriteMessageToArray(
         1, _Internal::object_guid(this), target, stream);
@@ -2854,31 +2854,31 @@ failure:
 
   // float x = 2;
   if (!(this->x() <= 0 && this->x() >= 0)) {
-    stream->EnsureSpace(&target);
+    target = stream->EnsureSpace(target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteFloatToArray(2, this->_internal_x(), target);
   }
 
   // float y = 3;
   if (!(this->y() <= 0 && this->y() >= 0)) {
-    stream->EnsureSpace(&target);
+    target = stream->EnsureSpace(target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteFloatToArray(3, this->_internal_y(), target);
   }
 
   // float z = 4;
   if (!(this->z() <= 0 && this->z() >= 0)) {
-    stream->EnsureSpace(&target);
+    target = stream->EnsureSpace(target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteFloatToArray(4, this->_internal_z(), target);
   }
 
   // int32 career_type = 5;
   if (this->career_type() != 0) {
-    stream->EnsureSpace(&target);
+    target = stream->EnsureSpace(target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt32ToArray(5, this->_internal_career_type(), target);
   }
 
   // int32 player_state = 6;
   if (this->player_state() != 0) {
-    stream->EnsureSpace(&target);
+    target = stream->EnsureSpace(target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt32ToArray(6, this->_internal_player_state(), target);
   }
 
@@ -2890,7 +2890,7 @@ failure:
 
   // int32 scene_id = 8;
   if (this->scene_id() != 0) {
-    stream->EnsureSpace(&target);
+    target = stream->EnsureSpace(target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt32ToArray(8, this->_internal_scene_id(), target);
   }
 
@@ -3174,7 +3174,7 @@ failure:
   // repeated .NFMsg.PlayerEntryInfo object_list = 1;
   for (unsigned int i = 0,
       n = static_cast<unsigned int>(this->_internal_object_list_size()); i < n; i++) {
-    stream->EnsureSpace(&target);
+    target = stream->EnsureSpace(target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
       InternalWriteMessageToArray(1, this->_internal_object_list(i), target, stream);
   }
@@ -3368,7 +3368,7 @@ failure:
   // repeated .NFMsg.Ident object_list = 1;
   for (unsigned int i = 0,
       n = static_cast<unsigned int>(this->_internal_object_list_size()); i < n; i++) {
-    stream->EnsureSpace(&target);
+    target = stream->EnsureSpace(target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
       InternalWriteMessageToArray(1, this->_internal_object_list(i), target, stream);
   }
@@ -3630,7 +3630,7 @@ failure:
 
   // .NFMsg.Ident syser = 1;
   if (this->has_syser()) {
-    stream->EnsureSpace(&target);
+    target = stream->EnsureSpace(target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
       InternalWriteMessageToArray(
         1, _Internal::syser(this), target, stream);
@@ -3639,7 +3639,7 @@ failure:
   // repeated .NFMsg.Ident object_list = 2;
   for (unsigned int i = 0,
       n = static_cast<unsigned int>(this->_internal_object_list_size()); i < n; i++) {
-    stream->EnsureSpace(&target);
+    target = stream->EnsureSpace(target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
       InternalWriteMessageToArray(2, this->_internal_object_list(i), target, stream);
   }
@@ -3652,14 +3652,14 @@ failure:
 
   // .NFMsg.ReqAckSynData.SynType syn_type = 4;
   if (this->syn_type() != 0) {
-    stream->EnsureSpace(&target);
+    target = stream->EnsureSpace(target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteEnumToArray(
       4, this->_internal_syn_type(), target);
   }
 
   // .NFMsg.ESynMsgID msg_id = 5;
   if (this->msg_id() != 0) {
-    stream->EnsureSpace(&target);
+    target = stream->EnsureSpace(target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteEnumToArray(
       5, this->_internal_msg_id(), target);
   }
@@ -3997,7 +3997,7 @@ failure:
 
   // .NFMsg.Ident mover = 1;
   if (this->has_mover()) {
-    stream->EnsureSpace(&target);
+    target = stream->EnsureSpace(target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
       InternalWriteMessageToArray(
         1, _Internal::mover(this), target, stream);
@@ -4005,32 +4005,32 @@ failure:
 
   // int32 moveType = 2;
   if (this->movetype() != 0) {
-    stream->EnsureSpace(&target);
+    target = stream->EnsureSpace(target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt32ToArray(2, this->_internal_movetype(), target);
   }
 
   // float speed = 3;
   if (!(this->speed() <= 0 && this->speed() >= 0)) {
-    stream->EnsureSpace(&target);
+    target = stream->EnsureSpace(target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteFloatToArray(3, this->_internal_speed(), target);
   }
 
   // int32 time = 4;
   if (this->time() != 0) {
-    stream->EnsureSpace(&target);
+    target = stream->EnsureSpace(target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt32ToArray(4, this->_internal_time(), target);
   }
 
   // int32 lastState = 5;
   if (this->laststate() != 0) {
-    stream->EnsureSpace(&target);
+    target = stream->EnsureSpace(target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt32ToArray(5, this->_internal_laststate(), target);
   }
 
   // repeated .NFMsg.Vector3 target_pos = 6;
   for (unsigned int i = 0,
       n = static_cast<unsigned int>(this->_internal_target_pos_size()); i < n; i++) {
-    stream->EnsureSpace(&target);
+    target = stream->EnsureSpace(target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
       InternalWriteMessageToArray(6, this->_internal_target_pos(i), target, stream);
   }
@@ -4038,7 +4038,7 @@ failure:
   // repeated .NFMsg.Vector3 source_pos = 7;
   for (unsigned int i = 0,
       n = static_cast<unsigned int>(this->_internal_source_pos_size()); i < n; i++) {
-    stream->EnsureSpace(&target);
+    target = stream->EnsureSpace(target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
       InternalWriteMessageToArray(7, this->_internal_source_pos(i), target, stream);
   }
@@ -4046,7 +4046,7 @@ failure:
   // repeated .NFMsg.Vector3 move_direction = 8;
   for (unsigned int i = 0,
       n = static_cast<unsigned int>(this->_internal_move_direction_size()); i < n; i++) {
-    stream->EnsureSpace(&target);
+    target = stream->EnsureSpace(target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
       InternalWriteMessageToArray(8, this->_internal_move_direction(i), target, stream);
   }
@@ -4434,7 +4434,7 @@ failure:
 
   // .NFMsg.Ident player_id = 1;
   if (this->has_player_id()) {
-    stream->EnsureSpace(&target);
+    target = stream->EnsureSpace(target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
       InternalWriteMessageToArray(
         1, _Internal::player_id(this), target, stream);
@@ -4460,14 +4460,14 @@ failure:
 
   // .NFMsg.ReqAckPlayerChat.EGameChatChannel chat_channel = 5;
   if (this->chat_channel() != 0) {
-    stream->EnsureSpace(&target);
+    target = stream->EnsureSpace(target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteEnumToArray(
       5, this->_internal_chat_channel(), target);
   }
 
   // .NFMsg.ReqAckPlayerChat.EGameChatType chat_type = 6;
   if (this->chat_type() != 0) {
-    stream->EnsureSpace(&target);
+    target = stream->EnsureSpace(target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteEnumToArray(
       6, this->_internal_chat_type(), target);
   }
@@ -4480,7 +4480,7 @@ failure:
 
   // .NFMsg.Ident target_id = 8;
   if (this->has_target_id()) {
-    stream->EnsureSpace(&target);
+    target = stream->EnsureSpace(target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
       InternalWriteMessageToArray(
         8, _Internal::target_id(this), target, stream);
@@ -4869,7 +4869,7 @@ failure:
 
   // .NFMsg.Ident mover = 1;
   if (this->has_mover()) {
-    stream->EnsureSpace(&target);
+    target = stream->EnsureSpace(target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
       InternalWriteMessageToArray(
         1, _Internal::mover(this), target, stream);
@@ -4877,19 +4877,19 @@ failure:
 
   // int32 time = 2;
   if (this->time() != 0) {
-    stream->EnsureSpace(&target);
+    target = stream->EnsureSpace(target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt32ToArray(2, this->_internal_time(), target);
   }
 
   // float InterpolationTime = 3;
   if (!(this->interpolationtime() <= 0 && this->interpolationtime() >= 0)) {
-    stream->EnsureSpace(&target);
+    target = stream->EnsureSpace(target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteFloatToArray(3, this->_internal_interpolationtime(), target);
   }
 
   // .NFMsg.Vector3 position = 4;
   if (this->has_position()) {
-    stream->EnsureSpace(&target);
+    target = stream->EnsureSpace(target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
       InternalWriteMessageToArray(
         4, _Internal::position(this), target, stream);
@@ -4897,7 +4897,7 @@ failure:
 
   // .NFMsg.Vector3 direction = 5;
   if (this->has_direction()) {
-    stream->EnsureSpace(&target);
+    target = stream->EnsureSpace(target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
       InternalWriteMessageToArray(
         5, _Internal::direction(this), target, stream);
@@ -4905,13 +4905,13 @@ failure:
 
   // int32 status = 6;
   if (this->status() != 0) {
-    stream->EnsureSpace(&target);
+    target = stream->EnsureSpace(target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt32ToArray(6, this->_internal_status(), target);
   }
 
   // int32 frame = 7;
   if (this->frame() != 0) {
-    stream->EnsureSpace(&target);
+    target = stream->EnsureSpace(target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt32ToArray(7, this->_internal_frame(), target);
   }
 
@@ -5206,7 +5206,7 @@ failure:
 
   // .NFMsg.Ident effect_ident = 1;
   if (this->has_effect_ident()) {
-    stream->EnsureSpace(&target);
+    target = stream->EnsureSpace(target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
       InternalWriteMessageToArray(
         1, _Internal::effect_ident(this), target, stream);
@@ -5214,13 +5214,13 @@ failure:
 
   // int32 effect_value = 2;
   if (this->effect_value() != 0) {
-    stream->EnsureSpace(&target);
+    target = stream->EnsureSpace(target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt32ToArray(2, this->_internal_effect_value(), target);
   }
 
   // .NFMsg.EffectData.EResultType effect_rlt = 3;
   if (this->effect_rlt() != 0) {
-    stream->EnsureSpace(&target);
+    target = stream->EnsureSpace(target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteEnumToArray(
       3, this->_internal_effect_rlt(), target);
   }
@@ -5489,7 +5489,7 @@ failure:
 
   // .NFMsg.Ident user = 1;
   if (this->has_user()) {
-    stream->EnsureSpace(&target);
+    target = stream->EnsureSpace(target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
       InternalWriteMessageToArray(
         1, _Internal::user(this), target, stream);
@@ -5503,14 +5503,14 @@ failure:
 
   // int32 use_index = 3;
   if (this->use_index() != 0) {
-    stream->EnsureSpace(&target);
+    target = stream->EnsureSpace(target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt32ToArray(3, this->_internal_use_index(), target);
   }
 
   // repeated .NFMsg.EffectData effect_data = 4;
   for (unsigned int i = 0,
       n = static_cast<unsigned int>(this->_internal_effect_data_size()); i < n; i++) {
-    stream->EnsureSpace(&target);
+    target = stream->EnsureSpace(target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
       InternalWriteMessageToArray(4, this->_internal_effect_data(i), target, stream);
   }
@@ -5882,7 +5882,7 @@ failure:
 
   // .NFMsg.Ident user = 1;
   if (this->has_user()) {
-    stream->EnsureSpace(&target);
+    target = stream->EnsureSpace(target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
       InternalWriteMessageToArray(
         1, _Internal::user(this), target, stream);
@@ -5890,7 +5890,7 @@ failure:
 
   // .NFMsg.Ident item_guid = 2;
   if (this->has_item_guid()) {
-    stream->EnsureSpace(&target);
+    target = stream->EnsureSpace(target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
       InternalWriteMessageToArray(
         2, _Internal::item_guid(this), target, stream);
@@ -5899,14 +5899,14 @@ failure:
   // repeated .NFMsg.EffectData effect_data = 3;
   for (unsigned int i = 0,
       n = static_cast<unsigned int>(this->_internal_effect_data_size()); i < n; i++) {
-    stream->EnsureSpace(&target);
+    target = stream->EnsureSpace(target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
       InternalWriteMessageToArray(3, this->_internal_effect_data(i), target, stream);
   }
 
   // .NFMsg.ItemStruct item = 4;
   if (this->has_item()) {
-    stream->EnsureSpace(&target);
+    target = stream->EnsureSpace(target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
       InternalWriteMessageToArray(
         4, _Internal::item(this), target, stream);
@@ -5914,7 +5914,7 @@ failure:
 
   // .NFMsg.Ident targetid = 5;
   if (this->has_targetid()) {
-    stream->EnsureSpace(&target);
+    target = stream->EnsureSpace(target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
       InternalWriteMessageToArray(
         5, _Internal::targetid(this), target, stream);
@@ -5922,7 +5922,7 @@ failure:
 
   // .NFMsg.Vector3 position = 6;
   if (this->has_position()) {
-    stream->EnsureSpace(&target);
+    target = stream->EnsureSpace(target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
       InternalWriteMessageToArray(
         6, _Internal::position(this), target, stream);
@@ -6220,38 +6220,38 @@ failure:
 
   // .NFMsg.ReqAckSwapScene.EGameSwapType transfer_type = 1;
   if (this->transfer_type() != 0) {
-    stream->EnsureSpace(&target);
+    target = stream->EnsureSpace(target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteEnumToArray(
       1, this->_internal_transfer_type(), target);
   }
 
   // int32 scene_id = 2;
   if (this->scene_id() != 0) {
-    stream->EnsureSpace(&target);
+    target = stream->EnsureSpace(target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt32ToArray(2, this->_internal_scene_id(), target);
   }
 
   // int32 line_id = 3;
   if (this->line_id() != 0) {
-    stream->EnsureSpace(&target);
+    target = stream->EnsureSpace(target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt32ToArray(3, this->_internal_line_id(), target);
   }
 
   // float x = 4;
   if (!(this->x() <= 0 && this->x() >= 0)) {
-    stream->EnsureSpace(&target);
+    target = stream->EnsureSpace(target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteFloatToArray(4, this->_internal_x(), target);
   }
 
   // float y = 5;
   if (!(this->y() <= 0 && this->y() >= 0)) {
-    stream->EnsureSpace(&target);
+    target = stream->EnsureSpace(target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteFloatToArray(5, this->_internal_y(), target);
   }
 
   // float z = 6;
   if (!(this->z() <= 0 && this->z() >= 0)) {
-    stream->EnsureSpace(&target);
+    target = stream->EnsureSpace(target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteFloatToArray(6, this->_internal_z(), target);
   }
 
@@ -6718,7 +6718,7 @@ failure:
 
   // int32 item_count = 2;
   if (this->item_count() != 0) {
-    stream->EnsureSpace(&target);
+    target = stream->EnsureSpace(target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt32ToArray(2, this->_internal_item_count(), target);
   }
 
@@ -6930,13 +6930,13 @@ failure:
 
   // int32 currency_type = 1;
   if (this->currency_type() != 0) {
-    stream->EnsureSpace(&target);
+    target = stream->EnsureSpace(target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt32ToArray(1, this->_internal_currency_type(), target);
   }
 
   // int32 currency_count = 2;
   if (this->currency_count() != 0) {
-    stream->EnsureSpace(&target);
+    target = stream->EnsureSpace(target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt32ToArray(2, this->_internal_currency_count(), target);
   }
 
@@ -7166,13 +7166,13 @@ failure:
 
   // int32 diamond = 1;
   if (this->diamond() != 0) {
-    stream->EnsureSpace(&target);
+    target = stream->EnsureSpace(target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt32ToArray(1, this->_internal_diamond(), target);
   }
 
   // .NFMsg.Ident hero_id = 2;
   if (this->has_hero_id()) {
-    stream->EnsureSpace(&target);
+    target = stream->EnsureSpace(target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
       InternalWriteMessageToArray(
         2, _Internal::hero_id(this), target, stream);
@@ -7393,7 +7393,7 @@ failure:
 
   // .NFMsg.Ident item_guid = 2;
   if (this->has_item_guid()) {
-    stream->EnsureSpace(&target);
+    target = stream->EnsureSpace(target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
       InternalWriteMessageToArray(
         2, _Internal::item_guid(this), target, stream);
@@ -8106,7 +8106,7 @@ failure:
 
   // .NFMsg.Vector3 pos = 1;
   if (this->has_pos()) {
-    stream->EnsureSpace(&target);
+    target = stream->EnsureSpace(target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
       InternalWriteMessageToArray(
         1, _Internal::pos(this), target, stream);
@@ -8114,7 +8114,7 @@ failure:
 
   // .NFMsg.Ident guid = 2;
   if (this->has_guid()) {
-    stream->EnsureSpace(&target);
+    target = stream->EnsureSpace(target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
       InternalWriteMessageToArray(
         2, _Internal::guid(this), target, stream);
@@ -8122,7 +8122,7 @@ failure:
 
   // .NFMsg.Ident master = 3;
   if (this->has_master()) {
-    stream->EnsureSpace(&target);
+    target = stream->EnsureSpace(target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
       InternalWriteMessageToArray(
         3, _Internal::master(this), target, stream);
@@ -8136,7 +8136,7 @@ failure:
 
   // int32 scene_id = 5;
   if (this->scene_id() != 0) {
-    stream->EnsureSpace(&target);
+    target = stream->EnsureSpace(target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt32ToArray(5, this->_internal_scene_id(), target);
   }
 
@@ -8148,13 +8148,13 @@ failure:
 
   // int32 is_home_scene = 7;
   if (this->is_home_scene() != 0) {
-    stream->EnsureSpace(&target);
+    target = stream->EnsureSpace(target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt32ToArray(7, this->_internal_is_home_scene(), target);
   }
 
   // int32 is_building = 8;
   if (this->is_building() != 0) {
-    stream->EnsureSpace(&target);
+    target = stream->EnsureSpace(target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt32ToArray(8, this->_internal_is_building(), target);
   }
 
@@ -8454,13 +8454,13 @@ failure:
 
   // int32 scene_id = 1;
   if (this->scene_id() != 0) {
-    stream->EnsureSpace(&target);
+    target = stream->EnsureSpace(target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt32ToArray(1, this->_internal_scene_id(), target);
   }
 
   // .NFMsg.Vector3 pos = 2;
   if (this->has_pos()) {
-    stream->EnsureSpace(&target);
+    target = stream->EnsureSpace(target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
       InternalWriteMessageToArray(
         2, _Internal::pos(this), target, stream);
@@ -8665,7 +8665,7 @@ failure:
   // repeated .NFMsg.ReqAddSceneBuilding buildings = 1;
   for (unsigned int i = 0,
       n = static_cast<unsigned int>(this->_internal_buildings_size()); i < n; i++) {
-    stream->EnsureSpace(&target);
+    target = stream->EnsureSpace(target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
       InternalWriteMessageToArray(1, this->_internal_buildings(i), target, stream);
   }
@@ -8897,7 +8897,7 @@ failure:
 
   // .NFMsg.Ident guid = 1;
   if (this->has_guid()) {
-    stream->EnsureSpace(&target);
+    target = stream->EnsureSpace(target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
       InternalWriteMessageToArray(
         1, _Internal::guid(this), target, stream);
@@ -8905,14 +8905,14 @@ failure:
 
   // int32 home_scene_id = 2;
   if (this->home_scene_id() != 0) {
-    stream->EnsureSpace(&target);
+    target = stream->EnsureSpace(target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt32ToArray(2, this->_internal_home_scene_id(), target);
   }
 
   // repeated .NFMsg.ReqAddSceneBuilding buildings = 3;
   for (unsigned int i = 0,
       n = static_cast<unsigned int>(this->_internal_buildings_size()); i < n; i++) {
-    stream->EnsureSpace(&target);
+    target = stream->EnsureSpace(target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
       InternalWriteMessageToArray(3, this->_internal_buildings(i), target, stream);
   }
@@ -9224,7 +9224,7 @@ failure:
 
   // .NFMsg.Ident clan_id = 1;
   if (this->has_clan_id()) {
-    stream->EnsureSpace(&target);
+    target = stream->EnsureSpace(target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
       InternalWriteMessageToArray(
         1, _Internal::clan_id(this), target, stream);
@@ -9244,7 +9244,7 @@ failure:
 
   // .NFMsg.Ident clan_player_id = 4;
   if (this->has_clan_player_id()) {
-    stream->EnsureSpace(&target);
+    target = stream->EnsureSpace(target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
       InternalWriteMessageToArray(
         4, _Internal::clan_player_id(this), target, stream);
@@ -9258,7 +9258,7 @@ failure:
 
   // int32 clan_player_bp = 6;
   if (this->clan_player_bp() != 0) {
-    stream->EnsureSpace(&target);
+    target = stream->EnsureSpace(target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt32ToArray(6, this->_internal_clan_player_bp(), target);
   }
 
@@ -9784,7 +9784,7 @@ failure:
 
   // .NFMsg.Ident clan_ID = 1;
   if (this->has_clan_id()) {
-    stream->EnsureSpace(&target);
+    target = stream->EnsureSpace(target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
       InternalWriteMessageToArray(
         1, _Internal::clan_id(this), target, stream);
@@ -9804,25 +9804,25 @@ failure:
 
   // int32 clan_member_count = 4;
   if (this->clan_member_count() != 0) {
-    stream->EnsureSpace(&target);
+    target = stream->EnsureSpace(target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt32ToArray(4, this->_internal_clan_member_count(), target);
   }
 
   // int32 clan_member_max_count = 5;
   if (this->clan_member_max_count() != 0) {
-    stream->EnsureSpace(&target);
+    target = stream->EnsureSpace(target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt32ToArray(5, this->_internal_clan_member_max_count(), target);
   }
 
   // int32 clan_honor = 6;
   if (this->clan_honor() != 0) {
-    stream->EnsureSpace(&target);
+    target = stream->EnsureSpace(target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt32ToArray(6, this->_internal_clan_honor(), target);
   }
 
   // int32 clan_rank = 7;
   if (this->clan_rank() != 0) {
-    stream->EnsureSpace(&target);
+    target = stream->EnsureSpace(target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt32ToArray(7, this->_internal_clan_rank(), target);
   }
 
@@ -10084,7 +10084,7 @@ failure:
   // repeated .NFMsg.AckSearchClan.SearchClanObject clan_list = 1;
   for (unsigned int i = 0,
       n = static_cast<unsigned int>(this->_internal_clan_list_size()); i < n; i++) {
-    stream->EnsureSpace(&target);
+    target = stream->EnsureSpace(target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
       InternalWriteMessageToArray(1, this->_internal_clan_list(i), target, stream);
   }
@@ -10346,7 +10346,7 @@ failure:
 
   // .NFMsg.Ident clan_id = 1;
   if (this->has_clan_id()) {
-    stream->EnsureSpace(&target);
+    target = stream->EnsureSpace(target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
       InternalWriteMessageToArray(
         1, _Internal::clan_id(this), target, stream);
@@ -10354,7 +10354,7 @@ failure:
 
   // .NFMsg.Ident clan_player_id = 4;
   if (this->has_clan_player_id()) {
-    stream->EnsureSpace(&target);
+    target = stream->EnsureSpace(target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
       InternalWriteMessageToArray(
         4, _Internal::clan_player_id(this), target, stream);
@@ -10368,7 +10368,7 @@ failure:
 
   // int32 clan_player_bp = 6;
   if (this->clan_player_bp() != 0) {
-    stream->EnsureSpace(&target);
+    target = stream->EnsureSpace(target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt32ToArray(6, this->_internal_clan_player_bp(), target);
   }
 
@@ -10643,7 +10643,7 @@ failure:
 
   // .NFMsg.Ident clan_id = 1;
   if (this->has_clan_id()) {
-    stream->EnsureSpace(&target);
+    target = stream->EnsureSpace(target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
       InternalWriteMessageToArray(
         1, _Internal::clan_id(this), target, stream);
@@ -10651,7 +10651,7 @@ failure:
 
   // .NFMsg.Ident clan_player_id = 2;
   if (this->has_clan_player_id()) {
-    stream->EnsureSpace(&target);
+    target = stream->EnsureSpace(target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
       InternalWriteMessageToArray(
         2, _Internal::clan_player_id(this), target, stream);
@@ -10944,7 +10944,7 @@ failure:
 
   // .NFMsg.Ident clan_id = 1;
   if (this->has_clan_id()) {
-    stream->EnsureSpace(&target);
+    target = stream->EnsureSpace(target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
       InternalWriteMessageToArray(
         1, _Internal::clan_id(this), target, stream);
@@ -10952,7 +10952,7 @@ failure:
 
   // .NFMsg.Ident player_id = 2;
   if (this->has_player_id()) {
-    stream->EnsureSpace(&target);
+    target = stream->EnsureSpace(target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
       InternalWriteMessageToArray(
         2, _Internal::player_id(this), target, stream);
@@ -10960,7 +10960,7 @@ failure:
 
   // .NFMsg.Ident member_id = 3;
   if (this->has_member_id()) {
-    stream->EnsureSpace(&target);
+    target = stream->EnsureSpace(target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
       InternalWriteMessageToArray(
         3, _Internal::member_id(this), target, stream);
@@ -10968,7 +10968,7 @@ failure:
 
   // .NFMsg.ReqAckOprClanMember.EGClanMemberOprType type = 4;
   if (this->type() != 0) {
-    stream->EnsureSpace(&target);
+    target = stream->EnsureSpace(target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteEnumToArray(
       4, this->_internal_type(), target);
   }
@@ -11209,7 +11209,7 @@ failure:
 
   // .NFMsg.Ident clan_id = 1;
   if (this->has_clan_id()) {
-    stream->EnsureSpace(&target);
+    target = stream->EnsureSpace(target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
       InternalWriteMessageToArray(
         1, _Internal::clan_id(this), target, stream);
@@ -11430,7 +11430,7 @@ failure:
 
   // .NFMsg.Ident Heroid = 1;
   if (this->has_heroid()) {
-    stream->EnsureSpace(&target);
+    target = stream->EnsureSpace(target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
       InternalWriteMessageToArray(
         1, _Internal::heroid(this), target, stream);
@@ -11438,7 +11438,7 @@ failure:
 
   // int32 Set = 2;
   if (this->set() != 0) {
-    stream->EnsureSpace(&target);
+    target = stream->EnsureSpace(target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt32ToArray(2, this->_internal_set(), target);
   }
 
@@ -11657,7 +11657,7 @@ failure:
 
   // .NFMsg.Ident Heroid = 1;
   if (this->has_heroid()) {
-    stream->EnsureSpace(&target);
+    target = stream->EnsureSpace(target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
       InternalWriteMessageToArray(
         1, _Internal::heroid(this), target, stream);
@@ -11866,7 +11866,7 @@ failure:
 
   // int32 count = 2;
   if (this->count() != 0) {
-    stream->EnsureSpace(&target);
+    target = stream->EnsureSpace(target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt32ToArray(2, this->_internal_count(), target);
   }
 
@@ -12312,7 +12312,7 @@ failure:
 
   // .NFMsg.Ident id = 1;
   if (this->has_id()) {
-    stream->EnsureSpace(&target);
+    target = stream->EnsureSpace(target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
       InternalWriteMessageToArray(
         1, _Internal::id(this), target, stream);
@@ -12320,20 +12320,20 @@ failure:
 
   // .NFMsg.EBattleType battle_mode = 2;
   if (this->battle_mode() != 0) {
-    stream->EnsureSpace(&target);
+    target = stream->EnsureSpace(target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteEnumToArray(
       2, this->_internal_battle_mode(), target);
   }
 
   // int32 level = 4;
   if (this->level() != 0) {
-    stream->EnsureSpace(&target);
+    target = stream->EnsureSpace(target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt32ToArray(4, this->_internal_level(), target);
   }
 
   // int32 battle_point = 5;
   if (this->battle_point() != 0) {
-    stream->EnsureSpace(&target);
+    target = stream->EnsureSpace(target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt32ToArray(5, this->_internal_battle_point(), target);
   }
 
@@ -12351,13 +12351,13 @@ failure:
 
   // int32 gold = 8;
   if (this->gold() != 0) {
-    stream->EnsureSpace(&target);
+    target = stream->EnsureSpace(target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt32ToArray(8, this->_internal_gold(), target);
   }
 
   // int32 diamond = 9;
   if (this->diamond() != 0) {
-    stream->EnsureSpace(&target);
+    target = stream->EnsureSpace(target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt32ToArray(9, this->_internal_diamond(), target);
   }
 
@@ -12381,25 +12381,25 @@ failure:
 
   // int32 hero_star1 = 25;
   if (this->hero_star1() != 0) {
-    stream->EnsureSpace(&target);
+    target = stream->EnsureSpace(target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt32ToArray(25, this->_internal_hero_star1(), target);
   }
 
   // int32 hero_star2 = 26;
   if (this->hero_star2() != 0) {
-    stream->EnsureSpace(&target);
+    target = stream->EnsureSpace(target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt32ToArray(26, this->_internal_hero_star2(), target);
   }
 
   // int32 hero_star3 = 27;
   if (this->hero_star3() != 0) {
-    stream->EnsureSpace(&target);
+    target = stream->EnsureSpace(target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt32ToArray(27, this->_internal_hero_star3(), target);
   }
 
   // .NFMsg.Ident hero_id1 = 28;
   if (this->has_hero_id1()) {
-    stream->EnsureSpace(&target);
+    target = stream->EnsureSpace(target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
       InternalWriteMessageToArray(
         28, _Internal::hero_id1(this), target, stream);
@@ -12407,7 +12407,7 @@ failure:
 
   // .NFMsg.Ident hero_id2 = 29;
   if (this->has_hero_id2()) {
-    stream->EnsureSpace(&target);
+    target = stream->EnsureSpace(target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
       InternalWriteMessageToArray(
         29, _Internal::hero_id2(this), target, stream);
@@ -12415,7 +12415,7 @@ failure:
 
   // .NFMsg.Ident hero_id3 = 30;
   if (this->has_hero_id3()) {
-    stream->EnsureSpace(&target);
+    target = stream->EnsureSpace(target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
       InternalWriteMessageToArray(
         30, _Internal::hero_id3(this), target, stream);
@@ -12834,25 +12834,25 @@ failure:
 
   // int32 self_scene = 1;
   if (this->self_scene() != 0) {
-    stream->EnsureSpace(&target);
+    target = stream->EnsureSpace(target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt32ToArray(1, this->_internal_self_scene(), target);
   }
 
   // int32 diamond = 2;
   if (this->diamond() != 0) {
-    stream->EnsureSpace(&target);
+    target = stream->EnsureSpace(target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt32ToArray(2, this->_internal_diamond(), target);
   }
 
   // int32 battle_point = 3;
   if (this->battle_point() != 0) {
-    stream->EnsureSpace(&target);
+    target = stream->EnsureSpace(target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt32ToArray(3, this->_internal_battle_point(), target);
   }
 
   // .NFMsg.EBattleType battle_mode = 4;
   if (this->battle_mode() != 0) {
-    stream->EnsureSpace(&target);
+    target = stream->EnsureSpace(target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteEnumToArray(
       4, this->_internal_battle_mode(), target);
   }
@@ -12860,7 +12860,7 @@ failure:
   // repeated .NFMsg.Ident friends = 10;
   for (unsigned int i = 0,
       n = static_cast<unsigned int>(this->_internal_friends_size()); i < n; i++) {
-    stream->EnsureSpace(&target);
+    target = stream->EnsureSpace(target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
       InternalWriteMessageToArray(10, this->_internal_friends(i), target, stream);
   }
@@ -13187,13 +13187,13 @@ failure:
 
   // int32 scene_id = 1;
   if (this->scene_id() != 0) {
-    stream->EnsureSpace(&target);
+    target = stream->EnsureSpace(target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt32ToArray(1, this->_internal_scene_id(), target);
   }
 
   // .NFMsg.Ident team_id = 2;
   if (this->has_team_id()) {
-    stream->EnsureSpace(&target);
+    target = stream->EnsureSpace(target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
       InternalWriteMessageToArray(
         2, _Internal::team_id(this), target, stream);
@@ -13201,21 +13201,21 @@ failure:
 
   // int32 gamble_diamond = 3;
   if (this->gamble_diamond() != 0) {
-    stream->EnsureSpace(&target);
+    target = stream->EnsureSpace(target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt32ToArray(3, this->_internal_gamble_diamond(), target);
   }
 
   // repeated .NFMsg.Ident team_members = 5;
   for (unsigned int i = 0,
       n = static_cast<unsigned int>(this->_internal_team_members_size()); i < n; i++) {
-    stream->EnsureSpace(&target);
+    target = stream->EnsureSpace(target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
       InternalWriteMessageToArray(5, this->_internal_team_members(i), target, stream);
   }
 
   // .NFMsg.PVPPlayerInfo opponent = 14;
   if (this->has_opponent()) {
-    stream->EnsureSpace(&target);
+    target = stream->EnsureSpace(target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
       InternalWriteMessageToArray(
         14, _Internal::opponent(this), target, stream);
@@ -13224,7 +13224,7 @@ failure:
   // repeated .NFMsg.ReqAddSceneBuilding buildings = 20;
   for (unsigned int i = 0,
       n = static_cast<unsigned int>(this->_internal_buildings_size()); i < n; i++) {
-    stream->EnsureSpace(&target);
+    target = stream->EnsureSpace(target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
       InternalWriteMessageToArray(20, this->_internal_buildings(i), target, stream);
   }
@@ -13484,7 +13484,7 @@ failure:
 
   // .NFMsg.Ident selfid = 1;
   if (this->has_selfid()) {
-    stream->EnsureSpace(&target);
+    target = stream->EnsureSpace(target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
       InternalWriteMessageToArray(
         1, _Internal::selfid(this), target, stream);
@@ -13672,7 +13672,7 @@ failure:
 
   // int32 auto_end = 1;
   if (this->auto_end() != 0) {
-    stream->EnsureSpace(&target);
+    target = stream->EnsureSpace(target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt32ToArray(1, this->_internal_auto_end(), target);
   }
 
@@ -13992,44 +13992,44 @@ failure:
 
   // int32 win = 1;
   if (this->win() != 0) {
-    stream->EnsureSpace(&target);
+    target = stream->EnsureSpace(target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt32ToArray(1, this->_internal_win(), target);
   }
 
   // int32 star = 2;
   if (this->star() != 0) {
-    stream->EnsureSpace(&target);
+    target = stream->EnsureSpace(target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt32ToArray(2, this->_internal_star(), target);
   }
 
   // int32 gold = 3;
   if (this->gold() != 0) {
-    stream->EnsureSpace(&target);
+    target = stream->EnsureSpace(target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt32ToArray(3, this->_internal_gold(), target);
   }
 
   // int32 cup = 4;
   if (this->cup() != 0) {
-    stream->EnsureSpace(&target);
+    target = stream->EnsureSpace(target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt32ToArray(4, this->_internal_cup(), target);
   }
 
   // int32 diamond = 5;
   if (this->diamond() != 0) {
-    stream->EnsureSpace(&target);
+    target = stream->EnsureSpace(target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt32ToArray(5, this->_internal_diamond(), target);
   }
 
   // .NFMsg.EBattleType battle_mode = 6;
   if (this->battle_mode() != 0) {
-    stream->EnsureSpace(&target);
+    target = stream->EnsureSpace(target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteEnumToArray(
       6, this->_internal_battle_mode(), target);
   }
 
   // .NFMsg.Ident team_id = 7;
   if (this->has_team_id()) {
-    stream->EnsureSpace(&target);
+    target = stream->EnsureSpace(target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
       InternalWriteMessageToArray(
         7, _Internal::team_id(this), target, stream);
@@ -14037,7 +14037,7 @@ failure:
 
   // .NFMsg.Ident match_id = 8;
   if (this->has_match_id()) {
-    stream->EnsureSpace(&target);
+    target = stream->EnsureSpace(target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
       InternalWriteMessageToArray(
         8, _Internal::match_id(this), target, stream);
@@ -14046,7 +14046,7 @@ failure:
   // repeated .NFMsg.Ident members = 9;
   for (unsigned int i = 0,
       n = static_cast<unsigned int>(this->_internal_members_size()); i < n; i++) {
-    stream->EnsureSpace(&target);
+    target = stream->EnsureSpace(target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
       InternalWriteMessageToArray(9, this->_internal_members(i), target, stream);
   }
@@ -14054,7 +14054,7 @@ failure:
   // repeated .NFMsg.ItemStruct item_list = 10;
   for (unsigned int i = 0,
       n = static_cast<unsigned int>(this->_internal_item_list_size()); i < n; i++) {
-    stream->EnsureSpace(&target);
+    target = stream->EnsureSpace(target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
       InternalWriteMessageToArray(10, this->_internal_item_list(i), target, stream);
   }
@@ -14385,7 +14385,7 @@ failure:
 
   // .NFMsg.Ident reciever = 1;
   if (this->has_reciever()) {
-    stream->EnsureSpace(&target);
+    target = stream->EnsureSpace(target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
       InternalWriteMessageToArray(
         1, _Internal::reciever(this), target, stream);
@@ -14394,7 +14394,7 @@ failure:
   // repeated .NFMsg.ItemStruct item_list = 2;
   for (unsigned int i = 0,
       n = static_cast<unsigned int>(this->_internal_item_list_size()); i < n; i++) {
-    stream->EnsureSpace(&target);
+    target = stream->EnsureSpace(target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
       InternalWriteMessageToArray(2, this->_internal_item_list(i), target, stream);
   }
@@ -14402,7 +14402,7 @@ failure:
   // repeated .NFMsg.CurrencyStruct currency_list = 3;
   for (unsigned int i = 0,
       n = static_cast<unsigned int>(this->_internal_currency_list_size()); i < n; i++) {
-    stream->EnsureSpace(&target);
+    target = stream->EnsureSpace(target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
       InternalWriteMessageToArray(3, this->_internal_currency_list(i), target, stream);
   }
@@ -14702,7 +14702,7 @@ failure:
 
   // .NFMsg.Ident selfid = 1;
   if (this->has_selfid()) {
-    stream->EnsureSpace(&target);
+    target = stream->EnsureSpace(target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
       InternalWriteMessageToArray(
         1, _Internal::selfid(this), target, stream);
@@ -14710,31 +14710,31 @@ failure:
 
   // int64 self_serverid = 2;
   if (this->self_serverid() != 0) {
-    stream->EnsureSpace(&target);
+    target = stream->EnsureSpace(target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt64ToArray(2, this->_internal_self_serverid(), target);
   }
 
   // int64 target_serverid = 3;
   if (this->target_serverid() != 0) {
-    stream->EnsureSpace(&target);
+    target = stream->EnsureSpace(target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt64ToArray(3, this->_internal_target_serverid(), target);
   }
 
   // int64 gate_serverid = 4;
   if (this->gate_serverid() != 0) {
-    stream->EnsureSpace(&target);
+    target = stream->EnsureSpace(target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt64ToArray(4, this->_internal_gate_serverid(), target);
   }
 
   // int64 SceneID = 5;
   if (this->sceneid() != 0) {
-    stream->EnsureSpace(&target);
+    target = stream->EnsureSpace(target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt64ToArray(5, this->_internal_sceneid(), target);
   }
 
   // .NFMsg.Ident client_id = 6;
   if (this->has_client_id()) {
-    stream->EnsureSpace(&target);
+    target = stream->EnsureSpace(target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
       InternalWriteMessageToArray(
         6, _Internal::client_id(this), target, stream);
@@ -14742,7 +14742,7 @@ failure:
 
   // int64 groupID = 7;
   if (this->groupid() != 0) {
-    stream->EnsureSpace(&target);
+    target = stream->EnsureSpace(target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt64ToArray(7, this->_internal_groupid(), target);
   }
 
@@ -15045,7 +15045,7 @@ failure:
 
   // .NFMsg.Ident selfid = 1;
   if (this->has_selfid()) {
-    stream->EnsureSpace(&target);
+    target = stream->EnsureSpace(target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
       InternalWriteMessageToArray(
         1, _Internal::selfid(this), target, stream);
@@ -15053,19 +15053,19 @@ failure:
 
   // int64 self_serverid = 2;
   if (this->self_serverid() != 0) {
-    stream->EnsureSpace(&target);
+    target = stream->EnsureSpace(target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt64ToArray(2, this->_internal_self_serverid(), target);
   }
 
   // int64 target_serverid = 3;
   if (this->target_serverid() != 0) {
-    stream->EnsureSpace(&target);
+    target = stream->EnsureSpace(target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt64ToArray(3, this->_internal_target_serverid(), target);
   }
 
   // int64 gate_serverid = 4;
   if (this->gate_serverid() != 0) {
-    stream->EnsureSpace(&target);
+    target = stream->EnsureSpace(target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt64ToArray(4, this->_internal_gate_serverid(), target);
   }
 

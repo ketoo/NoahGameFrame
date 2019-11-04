@@ -40,42 +40,42 @@ sysOS=`uname -s`
 cmake --version
 if [ $? -ne 0 ]; then
     echo "[ERROR] Please install cmake first."
-    echo "[ubuntu] apt-get install cmake or [centos] yum -y install cmake or [mac] brew install cmake"
+    echo "[ubuntu, debian] apt-get install cmake or [centos] yum -y install cmake or [mac] brew install cmake"
     exit 1
 fi
 
 unzip -v
 if [ $? -ne 0 ]; then
     echo "[ERROR] Please install unzip first."
-    echo "[ubuntu] sudo apt-get install unzip or [centos] yum -y install unzip or [mac] brew install unzip"
+    echo "[ubuntu, debian] sudo apt-get install unzip or [centos] yum -y install unzip or [mac] brew install unzip"
     exit 1
 fi
 
 g++ --version
 if [ $? -ne 0 ]; then
     echo "[ERROR] Please install g++ first."
-    echo "[ubuntu] sudo apt-get install g++ or [centos] yum -y install gcc-c++ or [mac] brew install g++"
+    echo "[ubuntu, debian] sudo apt-get install g++ or [centos] yum -y install gcc-c++ or [mac] brew install g++"
     exit 1
 fi
 
 automake --version
 if [ $? -ne 0 ]; then
     echo "[ERROR] Please install automake first."
-    echo "[ubuntu] sudo apt-get install automake or [centos] yum -y install automake or [mac] brew install automake"
+    echo "[ubuntu, debian] sudo apt-get install automake or [centos] yum -y install automake or [mac] brew install automake"
     exit 1
 fi
 
 wget --version
 if [ $? -ne 0 ]; then
     echo "[ERROR] Please install wget first."
-    echo "[ubuntu] sudo apt-get install wget [centos] yum -y install wget or [mac] brew install wget"
+    echo "[ubuntu, debian] sudo apt-get install wget [centos] yum -y install wget or [mac] brew install wget"
     exit 1
 fi
 
 openssl version
 if [ $? -ne 0 ]; then
     echo "[ERROR] Please install openssl first."
-    echo "[ubuntu] sudo apt-get install libssl-dev or [centos] yum -y install libssl-dev or [mac] brew install openssl"
+    echo "[ubuntu, debian] sudo apt-get install libssl-dev or [centos] yum -y install libssl-dev or [mac] brew install openssl"
     exit 1
 fi
 

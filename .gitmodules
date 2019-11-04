@@ -1,3 +1,9 @@
+[submodule "Dependencies/ajson"]
+	path = Dependencies/ajson
+	url = https://github.com/lordoffox/ajson.git
+[submodule "Dependencies/concurrentqueue"]
+	path = Dependencies/concurrentqueue
+	url = https://github.com/cameron314/concurrentqueue.git
 [submodule "Dependencies/protobuf"]
 	path = Dependencies/protobuf
 	url = https://github.com/protocolbuffers/protobuf.git
@@ -7,9 +13,3 @@
 [submodule "Dependencies/lua"]
 	path = Dependencies/lua
 	url = https://github.com/lua/lua.git
-[submodule "Dependencies/ajson"]
-	path = Dependencies/ajson
-	url = https://github.com/lordoffox/ajson.git
-[submodule "Dependencies/concurrentqueue"]
-	path = Dependencies/concurrentqueue
-	url = https://github.com/cameron314/concurrentqueue.git
