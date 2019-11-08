@@ -1,0 +1,65 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="dllmain.cpp" />
+    <ClCompile Include="NFUIModule.cpp" />
+    <ClCompile Include="NFUIPlugin.cpp" />
+    <ClCompile Include="UI\NFBluePrintView.cpp">
+      <Filter>UI</Filter>
+    </ClCompile>
+    <ClCompile Include="UI\NFConsoleView.cpp">
+      <Filter>UI</Filter>
+    </ClCompile>
+    <ClCompile Include="UI\NFGameView.cpp">
+      <Filter>UI</Filter>
+    </ClCompile>
+    <ClCompile Include="UI\NFHierachyView.cpp">
+      <Filter>UI</Filter>
+    </ClCompile>
+    <ClCompile Include="UI\NFProfileView.cpp">
+      <Filter>UI</Filter>
+    </ClCompile>
+    <ClCompile Include="UI\NFProjectView.cpp">
+      <Filter>UI</Filter>
+    </ClCompile>
+    <ClCompile Include="UI\NFSceneView.cpp">
+      <Filter>UI</Filter>
+    </ClCompile>
+    <ClCompile Include="UI\NFGodView.cpp">
+      <Filter>UI</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="NFUIModule.h" />
+    <ClInclude Include="NFUIPlugin.h" />
+    <ClInclude Include="UI\NFBluePrintView.h">
+      <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="UI\NFConsoleView.h">
+      <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="UI\NFGameView.h">
+      <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="UI\NFHierachyView.h">
+      <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="UI\NFProfileView.h">
+      <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="UI\NFProjectView.h">
+      <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="UI\NFSceneView.h">
+      <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="UI\NFGodView.h">
+      <Filter>UI</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="UI">
+      <UniqueIdentifier>{a6f620c1-b6eb-415c-b847-b4d8a1b45b92}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

@@ -493,7 +493,7 @@ failure:
 
   // .NFMsg.Ident id = 1;
   if (this->has_id()) {
-    target = stream->EnsureSpace(target);
+    stream->EnsureSpace(&target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
       InternalWriteMessageToArray(
         1, _Internal::id(this), target, stream);
@@ -507,19 +507,19 @@ failure:
 
   // int32 bp = 3;
   if (this->bp() != 0) {
-    target = stream->EnsureSpace(target);
+    stream->EnsureSpace(&target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt32ToArray(3, this->_internal_bp(), target);
   }
 
   // int32 leader = 4;
   if (this->leader() != 0) {
-    target = stream->EnsureSpace(target);
+    stream->EnsureSpace(&target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt32ToArray(4, this->_internal_leader(), target);
   }
 
   // int32 pending = 5;
   if (this->pending() != 0) {
-    target = stream->EnsureSpace(target);
+    stream->EnsureSpace(&target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt32ToArray(5, this->_internal_pending(), target);
   }
 
@@ -787,7 +787,7 @@ failure:
 
   // .NFMsg.Ident team_id = 1;
   if (this->has_team_id()) {
-    target = stream->EnsureSpace(target);
+    stream->EnsureSpace(&target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
       InternalWriteMessageToArray(
         1, _Internal::team_id(this), target, stream);
@@ -796,7 +796,7 @@ failure:
   // repeated .NFMsg.TeamMemberInfo memberList = 2;
   for (unsigned int i = 0,
       n = static_cast<unsigned int>(this->_internal_memberlist_size()); i < n; i++) {
-    target = stream->EnsureSpace(target);
+    stream->EnsureSpace(&target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
       InternalWriteMessageToArray(2, this->_internal_memberlist(i), target, stream);
   }
@@ -1028,7 +1028,7 @@ failure:
 
   // .NFMsg.Ident team_id = 1;
   if (this->has_team_id()) {
-    target = stream->EnsureSpace(target);
+    stream->EnsureSpace(&target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
       InternalWriteMessageToArray(
         1, _Internal::team_id(this), target, stream);
@@ -1037,7 +1037,7 @@ failure:
   // repeated .NFMsg.TeamMemberInfo member = 2;
   for (unsigned int i = 0,
       n = static_cast<unsigned int>(this->_internal_member_size()); i < n; i++) {
-    target = stream->EnsureSpace(target);
+    stream->EnsureSpace(&target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
       InternalWriteMessageToArray(2, this->_internal_member(i), target, stream);
   }
@@ -1272,7 +1272,7 @@ failure:
 
   // .NFMsg.Ident team_id = 1;
   if (this->has_team_id()) {
-    target = stream->EnsureSpace(target);
+    stream->EnsureSpace(&target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
       InternalWriteMessageToArray(
         1, _Internal::team_id(this), target, stream);
@@ -1281,7 +1281,7 @@ failure:
   // repeated .NFMsg.Ident member = 2;
   for (unsigned int i = 0,
       n = static_cast<unsigned int>(this->_internal_member_size()); i < n; i++) {
-    target = stream->EnsureSpace(target);
+    stream->EnsureSpace(&target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
       InternalWriteMessageToArray(2, this->_internal_member(i), target, stream);
   }
@@ -1499,7 +1499,7 @@ failure:
 
   // .NFMsg.Ident stranger = 1;
   if (this->has_stranger()) {
-    target = stream->EnsureSpace(target);
+    stream->EnsureSpace(&target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
       InternalWriteMessageToArray(
         1, _Internal::stranger(this), target, stream);
@@ -1709,7 +1709,7 @@ failure:
 
   // .NFMsg.Ident stranger = 1;
   if (this->has_stranger()) {
-    target = stream->EnsureSpace(target);
+    stream->EnsureSpace(&target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
       InternalWriteMessageToArray(
         1, _Internal::stranger(this), target, stream);
@@ -1995,7 +1995,7 @@ failure:
 
   // .NFMsg.Ident team_id = 1;
   if (this->has_team_id()) {
-    target = stream->EnsureSpace(target);
+    stream->EnsureSpace(&target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
       InternalWriteMessageToArray(
         1, _Internal::team_id(this), target, stream);
@@ -2003,7 +2003,7 @@ failure:
 
   // .NFMsg.Ident inviter = 2;
   if (this->has_inviter()) {
-    target = stream->EnsureSpace(target);
+    stream->EnsureSpace(&target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
       InternalWriteMessageToArray(
         2, _Internal::inviter(this), target, stream);
@@ -2017,7 +2017,7 @@ failure:
 
   // .NFMsg.Ident stranger = 4;
   if (this->has_stranger()) {
-    target = stream->EnsureSpace(target);
+    stream->EnsureSpace(&target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
       InternalWriteMessageToArray(
         4, _Internal::stranger(this), target, stream);
@@ -2262,7 +2262,7 @@ failure:
 
   // .NFMsg.Ident team_id = 1;
   if (this->has_team_id()) {
-    target = stream->EnsureSpace(target);
+    stream->EnsureSpace(&target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
       InternalWriteMessageToArray(
         1, _Internal::team_id(this), target, stream);
@@ -2472,7 +2472,7 @@ failure:
 
   // .NFMsg.Ident team_id = 1;
   if (this->has_team_id()) {
-    target = stream->EnsureSpace(target);
+    stream->EnsureSpace(&target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
       InternalWriteMessageToArray(
         1, _Internal::team_id(this), target, stream);

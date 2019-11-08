@@ -1484,13 +1484,13 @@ failure:
 
   // int64 svrid = 1;
   if (this->svrid() != 0) {
-    target = stream->EnsureSpace(target);
+    stream->EnsureSpace(&target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt64ToArray(1, this->_internal_svrid(), target);
   }
 
   // int64 index = 2;
   if (this->index() != 0) {
-    target = stream->EnsureSpace(target);
+    stream->EnsureSpace(&target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt64ToArray(2, this->_internal_index(), target);
   }
 
@@ -1700,13 +1700,13 @@ failure:
 
   // float x = 1;
   if (!(this->x() <= 0 && this->x() >= 0)) {
-    target = stream->EnsureSpace(target);
+    stream->EnsureSpace(&target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteFloatToArray(1, this->_internal_x(), target);
   }
 
   // float y = 2;
   if (!(this->y() <= 0 && this->y() >= 0)) {
-    target = stream->EnsureSpace(target);
+    stream->EnsureSpace(&target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteFloatToArray(2, this->_internal_y(), target);
   }
 
@@ -1919,19 +1919,19 @@ failure:
 
   // float x = 1;
   if (!(this->x() <= 0 && this->x() >= 0)) {
-    target = stream->EnsureSpace(target);
+    stream->EnsureSpace(&target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteFloatToArray(1, this->_internal_x(), target);
   }
 
   // float y = 2;
   if (!(this->y() <= 0 && this->y() >= 0)) {
-    target = stream->EnsureSpace(target);
+    stream->EnsureSpace(&target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteFloatToArray(2, this->_internal_y(), target);
   }
 
   // float z = 3;
   if (!(this->z() <= 0 && this->z() >= 0)) {
-    target = stream->EnsureSpace(target);
+    stream->EnsureSpace(&target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteFloatToArray(3, this->_internal_z(), target);
   }
 
@@ -2154,7 +2154,7 @@ failure:
 
   // int64 data = 2;
   if (this->data() != 0) {
-    target = stream->EnsureSpace(target);
+    stream->EnsureSpace(&target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt64ToArray(2, this->_internal_data(), target);
   }
 
@@ -2374,7 +2374,7 @@ failure:
 
   // float data = 2;
   if (!(this->data() <= 0 && this->data() >= 0)) {
-    target = stream->EnsureSpace(target);
+    stream->EnsureSpace(&target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteFloatToArray(2, this->_internal_data(), target);
   }
 
@@ -2833,7 +2833,7 @@ failure:
 
   // .NFMsg.Ident data = 2;
   if (this->has_data()) {
-    target = stream->EnsureSpace(target);
+    stream->EnsureSpace(&target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
       InternalWriteMessageToArray(
         2, _Internal::data(this), target, stream);
@@ -3070,7 +3070,7 @@ failure:
 
   // .NFMsg.Vector2 data = 2;
   if (this->has_data()) {
-    target = stream->EnsureSpace(target);
+    stream->EnsureSpace(&target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
       InternalWriteMessageToArray(
         2, _Internal::data(this), target, stream);
@@ -3307,7 +3307,7 @@ failure:
 
   // .NFMsg.Vector3 data = 2;
   if (this->has_data()) {
-    target = stream->EnsureSpace(target);
+    stream->EnsureSpace(&target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
       InternalWriteMessageToArray(
         2, _Internal::data(this), target, stream);
@@ -3528,19 +3528,19 @@ failure:
 
   // int32 row = 1;
   if (this->row() != 0) {
-    target = stream->EnsureSpace(target);
+    stream->EnsureSpace(&target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt32ToArray(1, this->_internal_row(), target);
   }
 
   // int32 col = 2;
   if (this->col() != 0) {
-    target = stream->EnsureSpace(target);
+    stream->EnsureSpace(&target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt32ToArray(2, this->_internal_col(), target);
   }
 
   // int64 data = 3;
   if (this->data() != 0) {
-    target = stream->EnsureSpace(target);
+    stream->EnsureSpace(&target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt64ToArray(3, this->_internal_data(), target);
   }
 
@@ -3768,19 +3768,19 @@ failure:
 
   // int32 row = 1;
   if (this->row() != 0) {
-    target = stream->EnsureSpace(target);
+    stream->EnsureSpace(&target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt32ToArray(1, this->_internal_row(), target);
   }
 
   // int32 col = 2;
   if (this->col() != 0) {
-    target = stream->EnsureSpace(target);
+    stream->EnsureSpace(&target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt32ToArray(2, this->_internal_col(), target);
   }
 
   // float data = 3;
   if (!(this->data() <= 0 && this->data() >= 0)) {
-    target = stream->EnsureSpace(target);
+    stream->EnsureSpace(&target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteFloatToArray(3, this->_internal_data(), target);
   }
 
@@ -4014,13 +4014,13 @@ failure:
 
   // int32 row = 1;
   if (this->row() != 0) {
-    target = stream->EnsureSpace(target);
+    stream->EnsureSpace(&target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt32ToArray(1, this->_internal_row(), target);
   }
 
   // int32 col = 2;
   if (this->col() != 0) {
-    target = stream->EnsureSpace(target);
+    stream->EnsureSpace(&target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt32ToArray(2, this->_internal_col(), target);
   }
 
@@ -4274,19 +4274,19 @@ failure:
 
   // int32 row = 1;
   if (this->row() != 0) {
-    target = stream->EnsureSpace(target);
+    stream->EnsureSpace(&target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt32ToArray(1, this->_internal_row(), target);
   }
 
   // int32 col = 2;
   if (this->col() != 0) {
-    target = stream->EnsureSpace(target);
+    stream->EnsureSpace(&target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt32ToArray(2, this->_internal_col(), target);
   }
 
   // .NFMsg.Ident data = 3;
   if (this->has_data()) {
-    target = stream->EnsureSpace(target);
+    stream->EnsureSpace(&target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
       InternalWriteMessageToArray(
         3, _Internal::data(this), target, stream);
@@ -4534,19 +4534,19 @@ failure:
 
   // int32 row = 1;
   if (this->row() != 0) {
-    target = stream->EnsureSpace(target);
+    stream->EnsureSpace(&target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt32ToArray(1, this->_internal_row(), target);
   }
 
   // int32 col = 2;
   if (this->col() != 0) {
-    target = stream->EnsureSpace(target);
+    stream->EnsureSpace(&target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt32ToArray(2, this->_internal_col(), target);
   }
 
   // .NFMsg.Vector2 data = 3;
   if (this->has_data()) {
-    target = stream->EnsureSpace(target);
+    stream->EnsureSpace(&target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
       InternalWriteMessageToArray(
         3, _Internal::data(this), target, stream);
@@ -4794,19 +4794,19 @@ failure:
 
   // int32 row = 1;
   if (this->row() != 0) {
-    target = stream->EnsureSpace(target);
+    stream->EnsureSpace(&target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt32ToArray(1, this->_internal_row(), target);
   }
 
   // int32 col = 2;
   if (this->col() != 0) {
-    target = stream->EnsureSpace(target);
+    stream->EnsureSpace(&target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt32ToArray(2, this->_internal_col(), target);
   }
 
   // .NFMsg.Vector3 data = 3;
   if (this->has_data()) {
-    target = stream->EnsureSpace(target);
+    stream->EnsureSpace(&target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
       InternalWriteMessageToArray(
         3, _Internal::data(this), target, stream);
@@ -5101,14 +5101,14 @@ failure:
 
   // int32 row = 1;
   if (this->row() != 0) {
-    target = stream->EnsureSpace(target);
+    stream->EnsureSpace(&target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt32ToArray(1, this->_internal_row(), target);
   }
 
   // repeated .NFMsg.RecordInt record_int_list = 2;
   for (unsigned int i = 0,
       n = static_cast<unsigned int>(this->_internal_record_int_list_size()); i < n; i++) {
-    target = stream->EnsureSpace(target);
+    stream->EnsureSpace(&target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
       InternalWriteMessageToArray(2, this->_internal_record_int_list(i), target, stream);
   }
@@ -5116,7 +5116,7 @@ failure:
   // repeated .NFMsg.RecordFloat record_float_list = 3;
   for (unsigned int i = 0,
       n = static_cast<unsigned int>(this->_internal_record_float_list_size()); i < n; i++) {
-    target = stream->EnsureSpace(target);
+    stream->EnsureSpace(&target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
       InternalWriteMessageToArray(3, this->_internal_record_float_list(i), target, stream);
   }
@@ -5124,7 +5124,7 @@ failure:
   // repeated .NFMsg.RecordString record_string_list = 4;
   for (unsigned int i = 0,
       n = static_cast<unsigned int>(this->_internal_record_string_list_size()); i < n; i++) {
-    target = stream->EnsureSpace(target);
+    stream->EnsureSpace(&target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
       InternalWriteMessageToArray(4, this->_internal_record_string_list(i), target, stream);
   }
@@ -5132,7 +5132,7 @@ failure:
   // repeated .NFMsg.RecordObject record_object_list = 5;
   for (unsigned int i = 0,
       n = static_cast<unsigned int>(this->_internal_record_object_list_size()); i < n; i++) {
-    target = stream->EnsureSpace(target);
+    stream->EnsureSpace(&target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
       InternalWriteMessageToArray(5, this->_internal_record_object_list(i), target, stream);
   }
@@ -5140,7 +5140,7 @@ failure:
   // repeated .NFMsg.RecordVector2 record_vector2_list = 6;
   for (unsigned int i = 0,
       n = static_cast<unsigned int>(this->_internal_record_vector2_list_size()); i < n; i++) {
-    target = stream->EnsureSpace(target);
+    stream->EnsureSpace(&target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
       InternalWriteMessageToArray(6, this->_internal_record_vector2_list(i), target, stream);
   }
@@ -5148,7 +5148,7 @@ failure:
   // repeated .NFMsg.RecordVector3 record_vector3_list = 7;
   for (unsigned int i = 0,
       n = static_cast<unsigned int>(this->_internal_record_vector3_list_size()); i < n; i++) {
-    target = stream->EnsureSpace(target);
+    stream->EnsureSpace(&target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
       InternalWriteMessageToArray(7, this->_internal_record_vector3_list(i), target, stream);
   }
@@ -5415,7 +5415,7 @@ failure:
   // repeated .NFMsg.RecordAddRowStruct row_struct = 2;
   for (unsigned int i = 0,
       n = static_cast<unsigned int>(this->_internal_row_struct_size()); i < n; i++) {
-    target = stream->EnsureSpace(target);
+    stream->EnsureSpace(&target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
       InternalWriteMessageToArray(2, this->_internal_row_struct(i), target, stream);
   }
@@ -5643,7 +5643,7 @@ failure:
 
   // .NFMsg.Ident player_id = 1;
   if (this->has_player_id()) {
-    target = stream->EnsureSpace(target);
+    stream->EnsureSpace(&target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
       InternalWriteMessageToArray(
         1, _Internal::player_id(this), target, stream);
@@ -5652,7 +5652,7 @@ failure:
   // repeated .NFMsg.PropertyInt property_list = 2;
   for (unsigned int i = 0,
       n = static_cast<unsigned int>(this->_internal_property_list_size()); i < n; i++) {
-    target = stream->EnsureSpace(target);
+    stream->EnsureSpace(&target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
       InternalWriteMessageToArray(2, this->_internal_property_list(i), target, stream);
   }
@@ -5878,7 +5878,7 @@ failure:
 
   // .NFMsg.Ident player_id = 1;
   if (this->has_player_id()) {
-    target = stream->EnsureSpace(target);
+    stream->EnsureSpace(&target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
       InternalWriteMessageToArray(
         1, _Internal::player_id(this), target, stream);
@@ -5887,7 +5887,7 @@ failure:
   // repeated .NFMsg.PropertyFloat property_list = 2;
   for (unsigned int i = 0,
       n = static_cast<unsigned int>(this->_internal_property_list_size()); i < n; i++) {
-    target = stream->EnsureSpace(target);
+    stream->EnsureSpace(&target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
       InternalWriteMessageToArray(2, this->_internal_property_list(i), target, stream);
   }
@@ -6113,7 +6113,7 @@ failure:
 
   // .NFMsg.Ident player_id = 1;
   if (this->has_player_id()) {
-    target = stream->EnsureSpace(target);
+    stream->EnsureSpace(&target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
       InternalWriteMessageToArray(
         1, _Internal::player_id(this), target, stream);
@@ -6122,7 +6122,7 @@ failure:
   // repeated .NFMsg.PropertyString property_list = 2;
   for (unsigned int i = 0,
       n = static_cast<unsigned int>(this->_internal_property_list_size()); i < n; i++) {
-    target = stream->EnsureSpace(target);
+    stream->EnsureSpace(&target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
       InternalWriteMessageToArray(2, this->_internal_property_list(i), target, stream);
   }
@@ -6348,7 +6348,7 @@ failure:
 
   // .NFMsg.Ident player_id = 1;
   if (this->has_player_id()) {
-    target = stream->EnsureSpace(target);
+    stream->EnsureSpace(&target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
       InternalWriteMessageToArray(
         1, _Internal::player_id(this), target, stream);
@@ -6357,7 +6357,7 @@ failure:
   // repeated .NFMsg.PropertyObject property_list = 2;
   for (unsigned int i = 0,
       n = static_cast<unsigned int>(this->_internal_property_list_size()); i < n; i++) {
-    target = stream->EnsureSpace(target);
+    stream->EnsureSpace(&target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
       InternalWriteMessageToArray(2, this->_internal_property_list(i), target, stream);
   }
@@ -6583,7 +6583,7 @@ failure:
 
   // .NFMsg.Ident player_id = 1;
   if (this->has_player_id()) {
-    target = stream->EnsureSpace(target);
+    stream->EnsureSpace(&target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
       InternalWriteMessageToArray(
         1, _Internal::player_id(this), target, stream);
@@ -6592,7 +6592,7 @@ failure:
   // repeated .NFMsg.PropertyVector2 property_list = 2;
   for (unsigned int i = 0,
       n = static_cast<unsigned int>(this->_internal_property_list_size()); i < n; i++) {
-    target = stream->EnsureSpace(target);
+    stream->EnsureSpace(&target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
       InternalWriteMessageToArray(2, this->_internal_property_list(i), target, stream);
   }
@@ -6818,7 +6818,7 @@ failure:
 
   // .NFMsg.Ident player_id = 1;
   if (this->has_player_id()) {
-    target = stream->EnsureSpace(target);
+    stream->EnsureSpace(&target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
       InternalWriteMessageToArray(
         1, _Internal::player_id(this), target, stream);
@@ -6827,7 +6827,7 @@ failure:
   // repeated .NFMsg.PropertyVector3 property_list = 2;
   for (unsigned int i = 0,
       n = static_cast<unsigned int>(this->_internal_property_list_size()); i < n; i++) {
-    target = stream->EnsureSpace(target);
+    stream->EnsureSpace(&target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
       InternalWriteMessageToArray(2, this->_internal_property_list(i), target, stream);
   }
@@ -7067,7 +7067,7 @@ failure:
 
   // .NFMsg.Ident player_id = 1;
   if (this->has_player_id()) {
-    target = stream->EnsureSpace(target);
+    stream->EnsureSpace(&target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
       InternalWriteMessageToArray(
         1, _Internal::player_id(this), target, stream);
@@ -7082,7 +7082,7 @@ failure:
   // repeated .NFMsg.RecordInt property_list = 3;
   for (unsigned int i = 0,
       n = static_cast<unsigned int>(this->_internal_property_list_size()); i < n; i++) {
-    target = stream->EnsureSpace(target);
+    stream->EnsureSpace(&target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
       InternalWriteMessageToArray(3, this->_internal_property_list(i), target, stream);
   }
@@ -7335,7 +7335,7 @@ failure:
 
   // .NFMsg.Ident player_id = 1;
   if (this->has_player_id()) {
-    target = stream->EnsureSpace(target);
+    stream->EnsureSpace(&target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
       InternalWriteMessageToArray(
         1, _Internal::player_id(this), target, stream);
@@ -7350,7 +7350,7 @@ failure:
   // repeated .NFMsg.RecordFloat property_list = 3;
   for (unsigned int i = 0,
       n = static_cast<unsigned int>(this->_internal_property_list_size()); i < n; i++) {
-    target = stream->EnsureSpace(target);
+    stream->EnsureSpace(&target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
       InternalWriteMessageToArray(3, this->_internal_property_list(i), target, stream);
   }
@@ -7603,7 +7603,7 @@ failure:
 
   // .NFMsg.Ident player_id = 1;
   if (this->has_player_id()) {
-    target = stream->EnsureSpace(target);
+    stream->EnsureSpace(&target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
       InternalWriteMessageToArray(
         1, _Internal::player_id(this), target, stream);
@@ -7618,7 +7618,7 @@ failure:
   // repeated .NFMsg.RecordString property_list = 3;
   for (unsigned int i = 0,
       n = static_cast<unsigned int>(this->_internal_property_list_size()); i < n; i++) {
-    target = stream->EnsureSpace(target);
+    stream->EnsureSpace(&target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
       InternalWriteMessageToArray(3, this->_internal_property_list(i), target, stream);
   }
@@ -7871,7 +7871,7 @@ failure:
 
   // .NFMsg.Ident player_id = 1;
   if (this->has_player_id()) {
-    target = stream->EnsureSpace(target);
+    stream->EnsureSpace(&target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
       InternalWriteMessageToArray(
         1, _Internal::player_id(this), target, stream);
@@ -7886,7 +7886,7 @@ failure:
   // repeated .NFMsg.RecordObject property_list = 3;
   for (unsigned int i = 0,
       n = static_cast<unsigned int>(this->_internal_property_list_size()); i < n; i++) {
-    target = stream->EnsureSpace(target);
+    stream->EnsureSpace(&target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
       InternalWriteMessageToArray(3, this->_internal_property_list(i), target, stream);
   }
@@ -8139,7 +8139,7 @@ failure:
 
   // .NFMsg.Ident player_id = 1;
   if (this->has_player_id()) {
-    target = stream->EnsureSpace(target);
+    stream->EnsureSpace(&target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
       InternalWriteMessageToArray(
         1, _Internal::player_id(this), target, stream);
@@ -8154,7 +8154,7 @@ failure:
   // repeated .NFMsg.RecordVector2 property_list = 3;
   for (unsigned int i = 0,
       n = static_cast<unsigned int>(this->_internal_property_list_size()); i < n; i++) {
-    target = stream->EnsureSpace(target);
+    stream->EnsureSpace(&target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
       InternalWriteMessageToArray(3, this->_internal_property_list(i), target, stream);
   }
@@ -8407,7 +8407,7 @@ failure:
 
   // .NFMsg.Ident player_id = 1;
   if (this->has_player_id()) {
-    target = stream->EnsureSpace(target);
+    stream->EnsureSpace(&target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
       InternalWriteMessageToArray(
         1, _Internal::player_id(this), target, stream);
@@ -8422,7 +8422,7 @@ failure:
   // repeated .NFMsg.RecordVector3 property_list = 3;
   for (unsigned int i = 0,
       n = static_cast<unsigned int>(this->_internal_property_list_size()); i < n; i++) {
-    target = stream->EnsureSpace(target);
+    stream->EnsureSpace(&target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
       InternalWriteMessageToArray(3, this->_internal_property_list(i), target, stream);
   }
@@ -8697,7 +8697,7 @@ failure:
 
   // .NFMsg.Ident player_id = 1;
   if (this->has_player_id()) {
-    target = stream->EnsureSpace(target);
+    stream->EnsureSpace(&target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
       InternalWriteMessageToArray(
         1, _Internal::player_id(this), target, stream);
@@ -8717,13 +8717,13 @@ failure:
 
   // int32 row_origin = 4;
   if (this->row_origin() != 0) {
-    target = stream->EnsureSpace(target);
+    stream->EnsureSpace(&target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt32ToArray(4, this->_internal_row_origin(), target);
   }
 
   // int32 row_target = 5;
   if (this->row_target() != 0) {
-    target = stream->EnsureSpace(target);
+    stream->EnsureSpace(&target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt32ToArray(5, this->_internal_row_target(), target);
   }
 
@@ -9001,7 +9001,7 @@ failure:
 
   // .NFMsg.Ident player_id = 1;
   if (this->has_player_id()) {
-    target = stream->EnsureSpace(target);
+    stream->EnsureSpace(&target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
       InternalWriteMessageToArray(
         1, _Internal::player_id(this), target, stream);
@@ -9016,7 +9016,7 @@ failure:
   // repeated .NFMsg.RecordAddRowStruct row_data = 3;
   for (unsigned int i = 0,
       n = static_cast<unsigned int>(this->_internal_row_data_size()); i < n; i++) {
-    target = stream->EnsureSpace(target);
+    stream->EnsureSpace(&target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
       InternalWriteMessageToArray(3, this->_internal_row_data(i), target, stream);
   }
@@ -9267,7 +9267,7 @@ failure:
 
   // .NFMsg.Ident player_id = 1;
   if (this->has_player_id()) {
-    target = stream->EnsureSpace(target);
+    stream->EnsureSpace(&target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
       InternalWriteMessageToArray(
         1, _Internal::player_id(this), target, stream);
@@ -9600,7 +9600,7 @@ failure:
 
   // .NFMsg.Ident player_id = 1;
   if (this->has_player_id()) {
-    target = stream->EnsureSpace(target);
+    stream->EnsureSpace(&target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
       InternalWriteMessageToArray(
         1, _Internal::player_id(this), target, stream);
@@ -9609,7 +9609,7 @@ failure:
   // repeated .NFMsg.PropertyInt property_int_list = 2;
   for (unsigned int i = 0,
       n = static_cast<unsigned int>(this->_internal_property_int_list_size()); i < n; i++) {
-    target = stream->EnsureSpace(target);
+    stream->EnsureSpace(&target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
       InternalWriteMessageToArray(2, this->_internal_property_int_list(i), target, stream);
   }
@@ -9617,7 +9617,7 @@ failure:
   // repeated .NFMsg.PropertyFloat property_float_list = 3;
   for (unsigned int i = 0,
       n = static_cast<unsigned int>(this->_internal_property_float_list_size()); i < n; i++) {
-    target = stream->EnsureSpace(target);
+    stream->EnsureSpace(&target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
       InternalWriteMessageToArray(3, this->_internal_property_float_list(i), target, stream);
   }
@@ -9625,7 +9625,7 @@ failure:
   // repeated .NFMsg.PropertyString property_string_list = 4;
   for (unsigned int i = 0,
       n = static_cast<unsigned int>(this->_internal_property_string_list_size()); i < n; i++) {
-    target = stream->EnsureSpace(target);
+    stream->EnsureSpace(&target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
       InternalWriteMessageToArray(4, this->_internal_property_string_list(i), target, stream);
   }
@@ -9633,7 +9633,7 @@ failure:
   // repeated .NFMsg.PropertyObject property_object_list = 5;
   for (unsigned int i = 0,
       n = static_cast<unsigned int>(this->_internal_property_object_list_size()); i < n; i++) {
-    target = stream->EnsureSpace(target);
+    stream->EnsureSpace(&target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
       InternalWriteMessageToArray(5, this->_internal_property_object_list(i), target, stream);
   }
@@ -9641,7 +9641,7 @@ failure:
   // repeated .NFMsg.PropertyVector2 property_vector2_list = 6;
   for (unsigned int i = 0,
       n = static_cast<unsigned int>(this->_internal_property_vector2_list_size()); i < n; i++) {
-    target = stream->EnsureSpace(target);
+    stream->EnsureSpace(&target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
       InternalWriteMessageToArray(6, this->_internal_property_vector2_list(i), target, stream);
   }
@@ -9649,7 +9649,7 @@ failure:
   // repeated .NFMsg.PropertyVector3 property_vector3_list = 7;
   for (unsigned int i = 0,
       n = static_cast<unsigned int>(this->_internal_property_vector3_list_size()); i < n; i++) {
-    target = stream->EnsureSpace(target);
+    stream->EnsureSpace(&target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
       InternalWriteMessageToArray(7, this->_internal_property_vector3_list(i), target, stream);
   }
@@ -9896,7 +9896,7 @@ failure:
   // repeated .NFMsg.ObjectPropertyList multi_player_property = 1;
   for (unsigned int i = 0,
       n = static_cast<unsigned int>(this->_internal_multi_player_property_size()); i < n; i++) {
-    target = stream->EnsureSpace(target);
+    stream->EnsureSpace(&target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
       InternalWriteMessageToArray(1, this->_internal_multi_player_property(i), target, stream);
   }
@@ -10111,7 +10111,7 @@ failure:
 
   // .NFMsg.Ident player_id = 1;
   if (this->has_player_id()) {
-    target = stream->EnsureSpace(target);
+    stream->EnsureSpace(&target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
       InternalWriteMessageToArray(
         1, _Internal::player_id(this), target, stream);
@@ -10120,7 +10120,7 @@ failure:
   // repeated .NFMsg.ObjectRecordBase record_list = 2;
   for (unsigned int i = 0,
       n = static_cast<unsigned int>(this->_internal_record_list_size()); i < n; i++) {
-    target = stream->EnsureSpace(target);
+    stream->EnsureSpace(&target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
       InternalWriteMessageToArray(2, this->_internal_record_list(i), target, stream);
   }
@@ -10322,7 +10322,7 @@ failure:
   // repeated .NFMsg.ObjectRecordList multi_player_record = 1;
   for (unsigned int i = 0,
       n = static_cast<unsigned int>(this->_internal_multi_player_record_size()); i < n; i++) {
-    target = stream->EnsureSpace(target);
+    stream->EnsureSpace(&target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
       InternalWriteMessageToArray(1, this->_internal_multi_player_record(i), target, stream);
   }
@@ -10577,7 +10577,7 @@ failure:
 
   // .NFMsg.Ident player_id = 1;
   if (this->has_player_id()) {
-    target = stream->EnsureSpace(target);
+    stream->EnsureSpace(&target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
       InternalWriteMessageToArray(
         1, _Internal::player_id(this), target, stream);
@@ -10592,14 +10592,14 @@ failure:
   // repeated .NFMsg.Ident player_Client_list = 3;
   for (unsigned int i = 0,
       n = static_cast<unsigned int>(this->_internal_player_client_list_size()); i < n; i++) {
-    target = stream->EnsureSpace(target);
+    stream->EnsureSpace(&target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
       InternalWriteMessageToArray(3, this->_internal_player_client_list(i), target, stream);
   }
 
   // .NFMsg.Ident hash_ident = 4;
   if (this->has_hash_ident()) {
-    target = stream->EnsureSpace(target);
+    stream->EnsureSpace(&target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
       InternalWriteMessageToArray(
         4, _Internal::hash_ident(this), target, stream);
@@ -10820,7 +10820,7 @@ failure:
 
   // int32 index = 1;
   if (this->index() != 0) {
-    target = stream->EnsureSpace(target);
+    stream->EnsureSpace(&target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt32ToArray(1, this->_internal_index(), target);
   }
 
@@ -11118,7 +11118,7 @@ failure:
 
   // .NFMsg.Ident control_id = 1;
   if (this->has_control_id()) {
-    target = stream->EnsureSpace(target);
+    stream->EnsureSpace(&target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
       InternalWriteMessageToArray(
         1, _Internal::control_id(this), target, stream);
@@ -11126,7 +11126,7 @@ failure:
 
   // .NFMsg.ReqCommand.EGameCommandType command_id = 2;
   if (this->command_id() != 0) {
-    target = stream->EnsureSpace(target);
+    stream->EnsureSpace(&target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteEnumToArray(
       2, this->_internal_command_id(), target);
   }
@@ -11139,13 +11139,13 @@ failure:
 
   // int64 command_value_int = 4;
   if (this->command_value_int() != 0) {
-    target = stream->EnsureSpace(target);
+    stream->EnsureSpace(&target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt64ToArray(4, this->_internal_command_value_int(), target);
   }
 
   // double command_value_float = 5;
   if (!(this->command_value_float() <= 0 && this->command_value_float() >= 0)) {
-    target = stream->EnsureSpace(target);
+    stream->EnsureSpace(&target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteDoubleToArray(5, this->_internal_command_value_float(), target);
   }
 
@@ -11157,7 +11157,7 @@ failure:
 
   // .NFMsg.Ident command_value_object = 7;
   if (this->has_command_value_object()) {
-    target = stream->EnsureSpace(target);
+    stream->EnsureSpace(&target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
       InternalWriteMessageToArray(
         7, _Internal::command_value_object(this), target, stream);
@@ -11165,13 +11165,13 @@ failure:
 
   // int32 row = 8;
   if (this->row() != 0) {
-    target = stream->EnsureSpace(target);
+    stream->EnsureSpace(&target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt32ToArray(8, this->_internal_row(), target);
   }
 
   // int32 col = 9;
   if (this->col() != 0) {
-    target = stream->EnsureSpace(target);
+    stream->EnsureSpace(&target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt32ToArray(9, this->_internal_col(), target);
   }
 
