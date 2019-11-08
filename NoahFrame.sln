@@ -1,16 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.902
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "NFComm", "NFComm", "{410C8A08-63DC-45B2-ADB9-08CD991861F0}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "NFServer", "NFServer", "{2EDDAD6B-1B81-4FE1-B2CA-1A166883EC11}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "NFPluginLoader", "NFComm\NFPluginLoader\NFPluginLoader.vcxproj", "{B65A0FB2-E49B-4FE9-93F7-EAE6B8E51944}"
-	ProjectSection(ProjectDependencies) = postProject
-		{B9833FE8-8C0B-40D6-BA01-3CDADEB21166} = {B9833FE8-8C0B-40D6-BA01-3CDADEB21166}
-	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "NFLoginLogicPlugin", "NFServer\NFLoginLogicPlugin\NFLoginLogicPlugin.vcxproj", "{DF5C4125-681C-42D3-8763-ECD78385888C}"
 	ProjectSection(ProjectDependencies) = postProject
@@ -198,6 +195,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "NFLoginNet_HttpServerPlugin
 		{3D9DB426-BA46-450B-BBAC-DABB6B6D69DE} = {3D9DB426-BA46-450B-BBAC-DABB6B6D69DE}
 	EndProjectSection
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "NFUIPlugin", "NFComm\NFUIPlugin\NFUIPlugin.vcxproj", "{651CEB7A-C45C-4D37-B46F-50F5FC3EAC8B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -350,6 +349,10 @@ Global
 		{5EBB5D6A-5C7B-4A18-8F60-4094173771BD}.Debug|x64.Build.0 = Debug|x64
 		{5EBB5D6A-5C7B-4A18-8F60-4094173771BD}.Release|x64.ActiveCfg = Release|x64
 		{5EBB5D6A-5C7B-4A18-8F60-4094173771BD}.Release|x64.Build.0 = Release|x64
+		{651CEB7A-C45C-4D37-B46F-50F5FC3EAC8B}.Debug|x64.ActiveCfg = Debug|x64
+		{651CEB7A-C45C-4D37-B46F-50F5FC3EAC8B}.Debug|x64.Build.0 = Debug|x64
+		{651CEB7A-C45C-4D37-B46F-50F5FC3EAC8B}.Release|x64.ActiveCfg = Release|x64
+		{651CEB7A-C45C-4D37-B46F-50F5FC3EAC8B}.Release|x64.Build.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -397,6 +400,7 @@ Global
 		{85A3C1E6-7E40-4725-83FD-10EDD9E2BAA1} = {A44988B7-63AD-4A21-8C91-4DC7BD6D964E}
 		{B7132059-C4A0-472A-9D58-BEB40B9528DB} = {A44988B7-63AD-4A21-8C91-4DC7BD6D964E}
 		{5EBB5D6A-5C7B-4A18-8F60-4094173771BD} = {9F68A20B-2B35-4C33-9C36-872C1CA2D5BE}
+		{651CEB7A-C45C-4D37-B46F-50F5FC3EAC8B} = {410C8A08-63DC-45B2-ADB9-08CD991861F0}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {0FB8E2D6-BCE5-48BD-93AE-A041C5B39F3D}
