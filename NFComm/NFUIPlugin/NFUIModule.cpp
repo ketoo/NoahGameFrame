@@ -111,6 +111,7 @@ bool NFUIModule::Execute()
 
 bool NFUIModule::BeforeShut()
 {
+	mViewList.clear();
 
 	return true;
 }
