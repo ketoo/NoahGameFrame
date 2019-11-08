@@ -177,11 +177,9 @@ NFPluginManager::NFPluginManager() : NFIPluginManager()
 
 	mstrConfigPath = "../";
 
-#ifdef NF_DEBUG_MODE
+
    mstrConfigName = "NFDataCfg/Debug/Plugin.xml";
-#else
-   mstrConfigName = "NFDataCfg/Release/Plugin.xml";
-#endif
+
 }
 
 NFPluginManager::~NFPluginManager()
