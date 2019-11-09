@@ -32,6 +32,8 @@ class NFSceneView : public NFIView
 {
 public:
 	NFSceneView(NFIPluginManager* p, NFViewType vt);
+
+	virtual bool Execute();
 };
 
 #endif

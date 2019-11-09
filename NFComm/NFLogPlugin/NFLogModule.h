@@ -95,6 +95,8 @@ protected:
     static bool CheckLogFileExist(const char* filename);
     static void rolloutHandler(const char* filename, std::size_t size);
 
+	std::string GetConfigPath(const std::string& fileName);
+
 private:
     static unsigned int idx;
     uint64_t mnLogCountTotal;

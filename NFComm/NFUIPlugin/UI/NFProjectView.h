@@ -31,6 +31,8 @@ class NFProjectView : public NFIView
 {
 public:
 	NFProjectView(NFIPluginManager* p, NFViewType vt);
+
+	virtual bool Execute();
 };
 
 #endif

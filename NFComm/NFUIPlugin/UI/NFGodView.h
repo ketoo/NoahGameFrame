@@ -31,6 +31,8 @@ class NFGodView : public NFIView
 {
 public:
 	NFGodView(NFIPluginManager* p, NFViewType vt);
+
+	virtual bool Execute();
 };
 
 #endif

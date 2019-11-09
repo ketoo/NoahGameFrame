@@ -54,7 +54,6 @@ inline int64_t NFGetTimeMS()
 typedef void (* CoroutineFunction)(void* arg);
 #else
 #include "NFComm/NFPluginModule/NFIModule.h"
-#include "NFComm/NFCore/NFSingleton.hpp"
 #endif
 
 #if NF_PLATFORM != NF_PLATFORM_WIN

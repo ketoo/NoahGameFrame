@@ -26,7 +26,6 @@
 #ifndef NF_NFMEMMANGER_H
 #define NF_NFMEMMANGER_H
 
-#include "NFSingleton.hpp"
 #include "NFComm/NFPluginModule/NFPlatform.h"
 
 #ifdef NF_USE_TCMALLOC
@@ -59,7 +58,7 @@
 
 #endif
 
-class NFMemManager: public NFSingleton<NFMemManager>
+class NFMemManager
 {
 public:
 	NFMemManager()

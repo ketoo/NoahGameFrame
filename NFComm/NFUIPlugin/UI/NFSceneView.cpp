@@ -29,3 +29,16 @@ NFSceneView::NFSceneView(NFIPluginManager* p, NFViewType vt) : NFIView(p, vt)
 {
 
 }
+
+bool NFSceneView::Execute()
+{
+	//1. get all scene from static config data
+	//2. let the user choose one scene
+	//3. get all objects of this level
+	//4. draw object by imgui
+	//5. show the props and records if the user picked an object
+	//6. use can modify the value of props to trigger the saving job
+
+
+	return false;
+}
