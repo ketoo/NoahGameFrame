@@ -1,3 +1,3 @@
 cd ../Debug/
 
-start NFPluginLoader_d PluginX.xml Server=DBServer ID=8
+start NFPluginLoader_d Plugin.xml Server=DBServer ID=8

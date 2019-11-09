@@ -15,6 +15,6 @@ cd ../Debug/
 
 chmod -R 777  NFPluginLoader_d
 
-./NFPluginLoader_d PluginX.xml Server=MasterServer ID=3
+./NFPluginLoader_d Plugin.xml Server=MasterServer ID=3
 
 ps -A|grep NF

@@ -1,3 +1,3 @@
 cd ../Debug/
 
-start NFPluginLoader_d PluginX.xml Server=GameServer ID=6
+start NFPluginLoader_d Plugin.xml Server=GameServer ID=6

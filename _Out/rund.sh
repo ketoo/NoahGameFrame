@@ -22,27 +22,27 @@ cd Debug
 
 chmod -R 777  NFPluginLoader_d
 
-./NFPluginLoader_d -d PluginX.xml Server=MasterServer ID=3
+./NFPluginLoader_d -d Plugin.xml Server=MasterServer ID=3
 
 sleep 1
 
-./NFPluginLoader_d -d PluginX.xml Server=WorldServer ID=7
+./NFPluginLoader_d -d Plugin.xml Server=WorldServer ID=7
 
 sleep 1
 
-./NFPluginLoader_d -d PluginX.xml Server=DBServer ID=8
+./NFPluginLoader_d -d Plugin.xml Server=DBServer ID=8
 
 sleep 1
 
-./NFPluginLoader_d -d PluginX.xml Server=LoginServer ID=4
+./NFPluginLoader_d -d Plugin.xml Server=LoginServer ID=4
 
 sleep 1
 
-./NFPluginLoader_d -d PluginX.xml Server=GameServer ID=6
+./NFPluginLoader_d -d Plugin.xml Server=GameServer ID=6
 
 sleep 1
 
-./NFPluginLoader_d -d PluginX.xml Server=ProxyServer ID=5
+./NFPluginLoader_d -d Plugin.xml Server=ProxyServer ID=5
 
 sleep 5
 

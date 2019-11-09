@@ -19,16 +19,16 @@ cd Release
 
 chmod -R 777  NFPluginLoader
 
-./NFPluginLoader -d PluginX.xml Server=MasterServer ID=3
+./NFPluginLoader -d Plugin.xml Server=MasterServer ID=3
 sleep 1
-./NFPluginLoader -d PluginX.xml Server=WorldServer ID=7
+./NFPluginLoader -d Plugin.xml Server=WorldServer ID=7
 sleep 1
-./NFPluginLoader -d PluginX.xml Server=DBServer ID=8
+./NFPluginLoader -d Plugin.xml Server=DBServer ID=8
 sleep 1
-./NFPluginLoader -d PluginX.xml Server=LoginServer ID=4
+./NFPluginLoader -d Plugin.xml Server=LoginServer ID=4
 sleep 1
-./NFPluginLoader -d PluginX.xml Server=GameServer ID=6
+./NFPluginLoader -d Plugin.xml Server=GameServer ID=6
 sleep 1
-./NFPluginLoader -d PluginX.xml Server=ProxyServer ID=5
+./NFPluginLoader -d Plugin.xml Server=ProxyServer ID=5
 sleep 5
 ps -A|grep NF
