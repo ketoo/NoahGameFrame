@@ -22,40 +22,17 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 */
+#ifndef NFI_BLUE_PRINT_MODULE_H
+#define NFI_BLUE_PRINT_MODULE_H
 
-#ifndef NF_BLUE_PRINT_MODULE_H
-#define NF_BLUE_PRINT_MODULE_H
+#include <iostream>
+#include "NFIModule.h"
 
-#include "NFComm/NFPluginModule/NFILogModule.h"
-#include "NFComm/NFPluginModule/NFIKernelModule.h"
-#include "NFComm/NFPluginModule/NFIClassModule.h"
-#include "NFComm/NFPluginModule/NFIBluePrintModule.h"
-
-class NFBluePrintModule
-    : public NFIBluePrintModule
+class NFIBluePrintModule
+    : public NFIModule
 {
 public:
-    NFBluePrintModule( NFIPluginManager* p )
-    {
-        pPluginManager = p;
-    }
 
-    virtual ~NFBluePrintModule() {};
-
-    virtual bool Awake();
-    virtual bool Init();
-    virtual bool AfterInit();
-    virtual bool CheckConfig();
-    virtual bool ReadyExecute();
-    virtual bool Execute();
-    virtual bool BeforeShut();
-    virtual bool Shut();
-    virtual bool Finalize();
-    virtual bool OnReloadPlugin();
-
-
-private:
 };
-
 
 #endif
