@@ -63,6 +63,7 @@
 #pragma comment( lib, "NFSecurityPlugin.lib" )
 #pragma comment( lib, "NFTestPlugin.lib" )
 #pragma comment( lib, "NFUIPlugin.lib" )
+#pragma comment( lib, "NFBluePrintPlugin.lib" )
 
 #pragma comment( lib, "NFDBLogicPlugin.lib" )
 #pragma comment( lib, "NFDBNet_ClientPlugin.lib" )
@@ -125,6 +126,7 @@
 #include "NFComm/NFSecurityPlugin/NFSecurityPlugin.h"
 #include "NFComm/NFTestPlugin/NFTestPlugin.h"
 #include "NFComm/NFUIPlugin/NFUIPlugin.h"
+#include "NFComm/NFBluePrintPlugin/NFBluePrintPlugin.h"
 
 //DB
 #include "NFServer/NFDBLogicPlugin/NFDBLogicPlugin.h"
@@ -304,7 +306,8 @@ bool NFPluginManager::LoadStaticPlugin()
 	CREATE_PLUGIN(this, NFSecurityPlugin)
 	CREATE_PLUGIN(this, NFTestPlugin)
 	CREATE_PLUGIN(this, NFUIPlugin)
-
+	CREATE_PLUGIN(this, NFBluePrintPlugin)
+		
 //DB
 	CREATE_PLUGIN(this, NFDBLogicPlugin)
 	CREATE_PLUGIN(this, NFDBNet_ClientPlugin)
