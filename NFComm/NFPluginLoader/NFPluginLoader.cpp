@@ -116,7 +116,7 @@ public:
 
 	virtual ~NFServer()
 	{
-		ReleaseNF();
+		Final();
 	}
 
 	NF_SHARE_PTR<NFIPluginManager> pPluginManager;
@@ -127,7 +127,7 @@ public:
 	std::string strTitleName;
 
 
-	void MainExecute()
+	void Execute()
 	{
 #if NF_PLATFORM == NF_PLATFORM_WIN
 		__try
@@ -158,7 +158,7 @@ public:
 	}
 
 
-	void SetupNF()
+	void Init()
 	{
 		pPluginManager = NF_SHARE_PTR<NFIPluginManager>(NF_NEW NFPluginManager());
 
@@ -174,7 +174,7 @@ public:
 		pPluginManager->ReadyExecute();
 	}
 
-	void ReleaseNF()
+	void Final()
 	{
 		pPluginManager->BeforeShut();
 		pPluginManager->Shut();
@@ -425,7 +425,7 @@ int main(int argc, char* argv[])
 
 	for (auto item : mServerList)
 	{
-		item->SetupNF();
+		item->Init();
 	}
 
 	////////////////
@@ -437,14 +437,14 @@ int main(int argc, char* argv[])
 		std::this_thread::sleep_for(std::chrono::milliseconds(1));
 		for (auto item : mServerList)
 		{
-			item->MainExecute();
+			item->Execute();
 		}
 	}
 	////////////////
 
 	for (auto item : mServerList)
 	{
-		item->ReleaseNF();
+		item->Final();
 	}
 
 	mServerList.clear();
