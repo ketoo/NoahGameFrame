@@ -35,13 +35,13 @@
 NF_EXPORT void DllStartPlugin(NFIPluginManager* pm)
 {
 
-    CREATE_PLUGIN(pm, NFTestPlugin)
+    CREATE_PLUGIN(pm, NFBluePrintPlugin)
 
 };
 
 NF_EXPORT void DllStopPlugin(NFIPluginManager* pm)
 {
-    DESTROY_PLUGIN(pm, NFTestPlugin)
+    DESTROY_PLUGIN(pm, NFBluePrintPlugin)
 };
 
 #endif
@@ -54,7 +54,7 @@ const int NFBluePrintPlugin::GetPluginVersion()
 
 const std::string NFBluePrintPlugin::GetPluginName()
 {
-	return GET_CLASS_NAME(NFTestPlugin);
+	return GET_CLASS_NAME(NFBluePrintPlugin);
 }
 
 void NFBluePrintPlugin::Install()

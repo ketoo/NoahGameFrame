@@ -286,7 +286,21 @@ private:
 #endif
 	}
 
+	void InitDaemon()
+	{
+	#if NF_PLATFORM != NF_PLATFORM_WIN
+		daemon(1, 0);
 
+		// ignore signals
+		signal(SIGINT,  SIG_IGN);
+		signal(SIGHUP,  SIG_IGN);
+		signal(SIGQUIT, SIG_IGN);
+		signal(SIGPIPE, SIG_IGN);
+		signal(SIGTTOU, SIG_IGN);
+		signal(SIGTTIN, SIG_IGN);
+		signal(SIGTERM, SIG_IGN);
+	#endif
+	}
 };
 
 void ThreadFunc()
@@ -318,22 +332,6 @@ void CreateBackThread()
     std::cout << "CreateBackThread, thread ID = " << gThread.get_id() << std::endl;
 }
 
-void InitDaemon()
-{
-#if NF_PLATFORM != NF_PLATFORM_WIN
-    daemon(1, 0);
-
-    // ignore signals
-    signal(SIGINT,  SIG_IGN);
-    signal(SIGHUP,  SIG_IGN);
-    signal(SIGQUIT, SIG_IGN);
-    signal(SIGPIPE, SIG_IGN);
-    signal(SIGTTOU, SIG_IGN);
-    signal(SIGTTIN, SIG_IGN);
-    signal(SIGTERM, SIG_IGN);
-#endif
-}
-
 void PrintfLogo()
 {
 #if NF_PLATFORM == NF_PLATFORM_WIN
@@ -344,7 +342,7 @@ void PrintfLogo()
     std::cout << "************************************************" << std::endl;
     std::cout << "**                                            **" << std::endl;
     std::cout << "**                 NoahFrame                  **" << std::endl;
-    std::cout << "**   Copyright (c) 2011-2018, LvSheng.Huang   **" << std::endl;
+    std::cout << "**   Copyright (c) 2011-2019, LvSheng.Huang   **" << std::endl;
     std::cout << "**             All rights reserved.           **" << std::endl;
     std::cout << "**                                            **" << std::endl;
     std::cout << "************************************************" << std::endl;

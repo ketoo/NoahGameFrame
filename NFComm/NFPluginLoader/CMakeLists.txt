@@ -20,6 +20,8 @@ target_link_libraries(NFPluginLoader NFNetPlugin)
 target_link_libraries(NFPluginLoader NFNoSqlPlugin)
 target_link_libraries(NFPluginLoader NFSecurityPlugin)
 target_link_libraries(NFPluginLoader NFTestPlugin)
+target_link_libraries(NFPluginLoader NFUIPlugin)
+target_link_libraries(NFPluginLoader NFBluePrintPlugin)
 
 target_link_libraries(NFPluginLoader NFDBLogicPlugin)
 target_link_libraries(NFPluginLoader NFDBNet_ClientPlugin)
