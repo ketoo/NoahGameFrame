@@ -62,6 +62,7 @@
 #pragma comment( lib, "NFNoSqlPlugin.lib" )
 #pragma comment( lib, "NFSecurityPlugin.lib" )
 #pragma comment( lib, "NFTestPlugin.lib" )
+#pragma comment( lib, "NFUIPlugin.lib" )
 
 #pragma comment( lib, "NFDBLogicPlugin.lib" )
 #pragma comment( lib, "NFDBNet_ClientPlugin.lib" )
@@ -123,6 +124,8 @@
 #include "NFComm/NFNoSqlPlugin/NFNoSqlPlugin.h"
 #include "NFComm/NFSecurityPlugin/NFSecurityPlugin.h"
 #include "NFComm/NFTestPlugin/NFTestPlugin.h"
+#include "NFComm/NFUIPlugin/NFUIPlugin.h"
+
 //DB
 #include "NFServer/NFDBLogicPlugin/NFDBLogicPlugin.h"
 #include "NFServer/NFDBNet_ClientPlugin/NFDBNet_ClientPlugin.h"
@@ -300,6 +303,7 @@ bool NFPluginManager::LoadStaticPlugin()
 	CREATE_PLUGIN(this, NFNoSqlPlugin)
 	CREATE_PLUGIN(this, NFSecurityPlugin)
 	CREATE_PLUGIN(this, NFTestPlugin)
+	CREATE_PLUGIN(this, NFUIPlugin)
 
 //DB
 	CREATE_PLUGIN(this, NFDBLogicPlugin)
