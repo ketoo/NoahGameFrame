@@ -29,3 +29,14 @@ NFGodView::NFGodView(NFIPluginManager* p, NFViewType vt) : NFIView(p, vt)
 {
 
 }
+
+bool NFGodView::Execute()
+{
+	//1. get all scene from NF
+	//2. let the user choose one scene with the group
+	//3. get all objects from that group
+	//4. draw object by imgui
+	//5. show the props and records if the user picked an object
+	//6. use can try to change the value of props to trigger the logic block unit to have a test
+	return true;
+}

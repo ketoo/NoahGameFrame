@@ -27,5 +27,5 @@
 
 NFConsoleView::NFConsoleView(NFIPluginManager* p, NFViewType vt) : NFIView(p, vt)
 {
-
+	m_pLogModule = pPluginManager->FindModule<NFILogModule>();
 }

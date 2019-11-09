@@ -26,11 +26,15 @@
 #define NF_CONSOLE_VIEW_H
 
 #include "NFComm/NFPluginModule/NFIUIModule.h"
+#include "NFComm/NFPluginModule/NFILogModule.h"
 
 class NFConsoleView : public NFIView
 {
 public:
 	NFConsoleView(NFIPluginManager* p, NFViewType vt);
+
+private:
+	NFILogModule* m_pLogModule;
 };
 
 #endif
