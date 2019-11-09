@@ -1634,7 +1634,7 @@ void NFKernelModule::ProcessMemFree()
 
 	nLastTime = pPluginManager->GetNowTime();
 
-	NFMemManager::GetSingletonPtr()->FreeMem();
+	//MemManager::GetSingletonPtr()->FreeMem();
 }
 
 bool NFKernelModule::DoEvent(const NFGUID& self, const std::string& strClassName, CLASS_OBJECT_EVENT eEvent, const NFDataList& valueList)

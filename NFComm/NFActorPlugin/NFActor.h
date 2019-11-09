@@ -30,7 +30,6 @@
 
 #include <map>
 #include <string>
-#include "NFComm/NFCore/NFSingleton.hpp"
 #include "NFComm/NFCore/NFQueue.hpp"
 #include "NFComm/NFPluginModule/NFGUID.h"
 #include "NFComm/NFPluginModule/NFPlatform.h"

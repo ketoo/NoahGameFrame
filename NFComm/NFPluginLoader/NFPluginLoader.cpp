@@ -53,24 +53,7 @@
 
 bool bExitApp = false;
 std::thread gThread;
-std::string strArgvList;
-std::string strPluginName;
-std::string strDataPath;
-std::string strAppName;
-std::string strAppID;
-std::string strTitleName;
 
-
-void MainExecute();
-
-void ReleaseNF()
-{
-	NFPluginManager::GetSingletonPtr()->BeforeShut();
-	NFPluginManager::GetSingletonPtr()->Shut();
-	NFPluginManager::GetSingletonPtr()->Finalize();
-
-	NFPluginManager::GetSingletonPtr()->ReleaseInstance();
-}
 
 #if NF_PLATFORM == NF_PLATFORM_WIN
 
@@ -85,9 +68,9 @@ bool ApplicationCtrlHandler(DWORD fdwctrltype)
 	case CTRL_LOGOFF_EVENT:
 	case CTRL_SHUTDOWN_EVENT:
 	{
-		bExitApp = true;
+		//bExitApp = true;
 	}
-		return true;
+	return true;
 	default:
 		return false;
 	}
@@ -95,45 +78,216 @@ bool ApplicationCtrlHandler(DWORD fdwctrltype)
 
 void CreateDumpFile(const std::string& strDumpFilePathName, EXCEPTION_POINTERS* pException)
 {
-    //Dump
-    HANDLE hDumpFile = CreateFile(strDumpFilePathName.c_str(), GENERIC_WRITE, 0, NULL, CREATE_ALWAYS, FILE_ATTRIBUTE_NORMAL, NULL);
+	//Dump
+	HANDLE hDumpFile = CreateFile(strDumpFilePathName.c_str(), GENERIC_WRITE, 0, NULL, CREATE_ALWAYS, FILE_ATTRIBUTE_NORMAL, NULL);
 
-    MINIDUMP_EXCEPTION_INFORMATION dumpInfo;
-    dumpInfo.ExceptionPointers = pException;
-    dumpInfo.ThreadId = GetCurrentThreadId();
-    dumpInfo.ClientPointers = TRUE;
+	MINIDUMP_EXCEPTION_INFORMATION dumpInfo;
+	dumpInfo.ExceptionPointers = pException;
+	dumpInfo.ThreadId = GetCurrentThreadId();
+	dumpInfo.ClientPointers = TRUE;
 
-    MiniDumpWriteDump(GetCurrentProcess(), GetCurrentProcessId(), hDumpFile, MiniDumpNormal, &dumpInfo, NULL, NULL);
+	MiniDumpWriteDump(GetCurrentProcess(), GetCurrentProcessId(), hDumpFile, MiniDumpNormal, &dumpInfo, NULL, NULL);
 
-    CloseHandle(hDumpFile);
+	CloseHandle(hDumpFile);
 }
 
 long ApplicationCrashHandler(EXCEPTION_POINTERS* pException)
 {
-    time_t t = time(0);
-    char szDmupName[MAX_PATH];
-    tm* ptm = localtime(&t);
+	time_t t = time(0);
+	char szDmupName[MAX_PATH];
+	tm* ptm = localtime(&t);
 
-    sprintf_s(szDmupName, "%04d_%02d_%02d_%02d_%02d_%02d.dmp",  ptm->tm_year + 1900, ptm->tm_mon + 1, ptm->tm_mday, ptm->tm_hour, ptm->tm_min, ptm->tm_sec);
-    CreateDumpFile(szDmupName, pException);
+	sprintf_s(szDmupName, "%04d_%02d_%02d_%02d_%02d_%02d.dmp", ptm->tm_year + 1900, ptm->tm_mon + 1, ptm->tm_mday, ptm->tm_hour, ptm->tm_min, ptm->tm_sec);
+	CreateDumpFile(szDmupName, pException);
 
-    FatalAppExit(-1,  szDmupName);
+	FatalAppExit(-1, szDmupName);
 
-    return EXCEPTION_EXECUTE_HANDLER;
+	return EXCEPTION_EXECUTE_HANDLER;
 }
 #endif
 
-void CloseXButton()
+class NFServer
 {
-#if NF_PLATFORM == NF_PLATFORM_WIN
-	HWND hWnd = GetConsoleWindow();
-	if (hWnd)
+public:
+	NFServer(const std::string& strArgv)
 	{
-		HMENU hMenu = GetSystemMenu(hWnd, FALSE);
-		EnableMenuItem(hMenu, SC_CLOSE, MF_DISABLED | MF_BYCOMMAND);
+		this->strArgvList = strArgv;
 	}
+
+	virtual ~NFServer()
+	{
+		ReleaseNF();
+	}
+
+	NF_SHARE_PTR<NFIPluginManager> pPluginManager;
+	std::string strArgvList;
+	std::string strPluginName;
+	std::string strAppName;
+	std::string strAppID;
+	std::string strTitleName;
+
+
+	void MainExecute()
+	{
+#if NF_PLATFORM == NF_PLATFORM_WIN
+		__try
+#else
+		try
 #endif
-}
+		{
+#ifdef NF_COROUTINE
+			//NFPluginManager::Instance()->ExecuteCoScheduler();
+#else
+			pPluginManager->Execute();
+#endif
+		}
+#if NF_PLATFORM == NF_PLATFORM_WIN
+		__except (ApplicationCrashHandler(GetExceptionInformation()))
+		{
+		}
+#else
+		catch (const std::exception& e)
+		{
+			NFException::StackTrace(11);
+		}
+		catch (...)
+		{
+			NFException::StackTrace(11);
+		}
+#endif
+	}
+
+
+	void SetupNF()
+	{
+		pPluginManager = NF_SHARE_PTR<NFIPluginManager>(NF_NEW NFPluginManager());
+
+		ProcessParameter();
+
+		pPluginManager->SetConfigPath("../");
+
+		pPluginManager->LoadPlugin();
+		pPluginManager->Awake();
+		pPluginManager->Init();
+		pPluginManager->AfterInit();
+		pPluginManager->CheckConfig();
+		pPluginManager->ReadyExecute();
+	}
+
+	void ReleaseNF()
+	{
+		pPluginManager->BeforeShut();
+		pPluginManager->Shut();
+		pPluginManager->Finalize();
+
+		pPluginManager = nullptr;
+	}
+
+private:
+
+	void ProcessParameter()
+	{
+#if NF_PLATFORM == NF_PLATFORM_WIN
+		SetConsoleCtrlHandler((PHANDLER_ROUTINE)ApplicationCtrlHandler, true);
+#else
+		//run it as a daemon process
+		if (strArgvList.find("-d") != string::npos)
+		{
+			InitDaemon();
+		}
+
+		signal(SIGPIPE, SIG_IGN);
+		signal(SIGCHLD, SIG_IGN);
+#endif
+
+		NFDataList argList;
+		argList.Split(this->strArgvList, " ");
+
+		for (int i = 0; i < argList.GetCount(); i++)
+		{
+			strPluginName = argList.String(i);
+			if (strPluginName.find(".xml") != string::npos)
+			{
+				break;
+			}
+
+			strPluginName = "";
+		}
+
+		pPluginManager->SetConfigName(strPluginName);
+
+		for (int i = 0; i < argList.GetCount(); i++)
+		{
+			strAppName = argList.String(i);
+			if (strAppName.find("Server=") != string::npos)
+			{
+				strAppName.erase(0, 7);
+				break;
+			}
+
+			strAppName = "";
+		}
+
+		pPluginManager->SetAppName(strAppName);
+
+		for (int i = 0; i < argList.GetCount(); i++)
+		{
+			strAppID = argList.String(i);
+			if (strAppID.find("ID=") != string::npos)
+			{
+				strAppID.erase(0, 3);
+				break;
+			}
+
+			strAppID = "";
+		}
+
+		int nAppID = 0;
+		if (NF_StrTo(strAppID, nAppID))
+		{
+			pPluginManager->SetAppID(nAppID);
+		}
+
+		std::string strDockerFlag = "0";
+		for (int i = 0; i < argList.GetCount(); i++)
+		{
+			strDockerFlag = argList.String(i);
+			if (strDockerFlag.find("Docker=") != string::npos)
+			{
+				strDockerFlag.erase(0, 7);
+				break;
+			}
+
+			strDockerFlag = "";
+		}
+
+		int nDockerFlag = 0;
+		if (NF_StrTo(strDockerFlag, nDockerFlag))
+		{
+			pPluginManager->SetRunningDocker(nDockerFlag);
+		}
+
+		strTitleName = strAppName + strAppID;// +" PID" + NFGetPID();
+		if (!strTitleName.empty())
+		{
+			strTitleName.replace(strTitleName.find("Server"), 6, "");
+			strTitleName = "NF" + strTitleName;
+		}
+		else
+		{
+			strTitleName = "NFIDE";
+		}
+
+#if NF_PLATFORM == NF_PLATFORM_WIN
+		SetConsoleTitle(strTitleName.c_str());
+#elif NF_PLATFORM == NF_PLATFORM_LINUX
+		prctl(PR_SET_NAME, strTitleName.c_str());
+		//setproctitle(strTitleName.c_str());
+#endif
+	}
+
+
+};
 
 void ThreadFunc()
 {
@@ -207,130 +361,6 @@ void PrintfLogo()
 }
 
 
-void ProcessParameter(int argc, char* argv[])
-{
-    for (int i = 0; i < argc; i++)
-	{
-		strArgvList += " ";
-		strArgvList += argv[i];
-	}
-
-#if NF_PLATFORM == NF_PLATFORM_WIN
-	SetConsoleCtrlHandler((PHANDLER_ROUTINE)ApplicationCtrlHandler, true);
-
-	if (strArgvList.find("-x") != string::npos)
-	{
-		CloseXButton();
-	}
-#else
-    //run it as a daemon process
-	if (strArgvList.find("-d") != string::npos)
-	{
-		InitDaemon();
-    }
-
-    signal(SIGPIPE, SIG_IGN);
-    signal(SIGCHLD, SIG_IGN);
-#endif
-
-    if (strArgvList.find("Path=") != string::npos)
-    {
-        for (int i = 0; i < argc; i++)
-        {
-            strDataPath = argv[i];
-            if (strDataPath.find("Path=") != string::npos)
-            {
-                strDataPath.erase(0, 5);
-                break;
-            }
-        }
-
-        NFPluginManager::GetSingletonPtr()->SetConfigPath(strDataPath);
-    }
-    else
-    {
-        NFPluginManager::GetSingletonPtr()->SetConfigPath("../");
-    }
-
-	if (strArgvList.find(".xml") != string::npos)
-	{
-		for (int i = 0; i < argc; i++)
-		{
-			strPluginName = argv[i];
-			if (strPluginName.find(".xml") != string::npos)
-			{
-				break;
-			}
-		}
-
-		NFPluginManager::GetSingletonPtr()->SetConfigName(strPluginName);
-	}
-
-    if (strArgvList.find("Server=") != string::npos)
-	{
-		for (int i = 0; i < argc; i++)
-		{
-			strAppName = argv[i];
-			if (strAppName.find("Server=") != string::npos)
-			{
-                strAppName.erase(0, 7);
-				break;
-			}
-		}
-
-		NFPluginManager::GetSingletonPtr()->SetAppName(strAppName);
-	}
-
-	if (strArgvList.find("ID=") != string::npos)
-	{
-		for (int i = 0; i < argc; i++)
-		{
-			strAppID = argv[i];
-			if (strAppID.find("ID=") != string::npos)
-			{
-                strAppID.erase(0, 3);
-				break;
-			}
-		}
-
-		int nAppID = 0;
-        if(NF_StrTo(strAppID, nAppID))
-        {
-            NFPluginManager::GetSingletonPtr()->SetAppID(nAppID);
-        }
-	}
-
-	if (strArgvList.find("Docker=") != string::npos)
-	{
-		std::string strDockerFlag = "0";
-		for (int i = 0; i < argc; i++)
-		{
-			strDockerFlag = argv[i];
-			if (strDockerFlag.find("Docker=") != string::npos)
-			{
-                strDockerFlag.erase(0, 7);
-				break;
-			}
-		}
-
-		int nDockerFlag = 0;
-        if(NF_StrTo(strDockerFlag, nDockerFlag))
-        {
-            NFPluginManager::GetSingletonPtr()->SetRunningDocker(nDockerFlag);
-        }
-	}
-	
-	strTitleName = strAppName + strAppID;// +" PID" + NFGetPID();
-	strTitleName.replace(strTitleName.find("Server"), 6, "");
-	strTitleName = "NF" + strTitleName;
-#if NF_PLATFORM == NF_PLATFORM_WIN
-	SetConsoleTitle(strTitleName.c_str());
-#elif NF_PLATFORM == NF_PLATFORM_LINUX
-	prctl(PR_SET_NAME, strTitleName.c_str());
-	//setproctitle(strTitleName.c_str());
-#endif
-}
-
 #if NF_PLATFORM != NF_PLATFORM_WIN
 void NFCrashHandler(int sig) {
 	// FOLLOWING LINE IS ABSOLUTELY NEEDED AT THE END IN ORDER TO ABORT APPLICATION
@@ -354,48 +384,12 @@ void NFCrashHandler(int sig) {
 }
 #endif
 
-void MainExecute()
-{
-
-	uint64_t nIndex = 0;
-    while (!bExitApp)
-    {
-		nIndex++;
-
-		std::this_thread::sleep_for(std::chrono::milliseconds(1));
-
-#if NF_PLATFORM == NF_PLATFORM_WIN
-        __try
-#else
-		try
-#endif
-		{
-#ifdef NF_COROUTINE
-			NFPluginManager::Instance()->ExecuteCoScheduler();
-#else
-			NFPluginManager::GetSingletonPtr()->Execute();
-#endif
-		}
-#if NF_PLATFORM == NF_PLATFORM_WIN
-        __except (ApplicationCrashHandler(GetExceptionInformation()))
-        {
-        }
-#else
-	catch(const std::exception& e)
-	{
-		NFException::StackTrace(11);
-	}
-	catch(...)
-	{
-		NFException::StackTrace(11);
-	}
-#endif
-    }
-}
 
 int main(int argc, char* argv[])
 {
 	std::cout << "__cplusplus:" << __cplusplus << std::endl;
+
+	std::vector<NF_SHARE_PTR<NFServer>> mServerList;
 
 #if NF_PLATFORM == NF_PLATFORM_WIN
     SetUnhandledExceptionFilter((LPTOP_LEVEL_EXCEPTION_FILTER)ApplicationCrashHandler);
@@ -404,33 +398,56 @@ int main(int argc, char* argv[])
 	//el::Helpers::setCrashHandler(CrashHandler);
 #endif
 
-    ProcessParameter(argc, argv);
-
-
 	PrintfLogo();
 	CreateBackThread();
 
-	NFPluginManager::GetSingletonPtr()->LoadPlugin();
-	NFPluginManager::GetSingletonPtr()->Awake();
-	NFPluginManager::GetSingletonPtr()->Init();
-	NFPluginManager::GetSingletonPtr()->AfterInit();
-	NFPluginManager::GetSingletonPtr()->CheckConfig();
-	NFPluginManager::GetSingletonPtr()->ReadyExecute();
-
-#if NF_PLATFORM == NF_PLATFORM_WIN
-	MainExecute();
-#else
-	while (1)
+	std::string strArgvList;
+	for (int i = 0; i < argc; i++)
 	{
-		//NF_CRASH_TRY
-		MainExecute();
-		//NF_CRASH_END_TRY
+		strArgvList += " ";
+		strArgvList += argv[i];
 	}
-#endif
 
-	
+	if (argc == 1)
+	{
+		//IDE
+		mServerList.push_back(NF_SHARE_PTR<NFServer>(NF_NEW NFServer(strArgvList + " Server=MasterServer ID=3 Plugin.xml")));
+		mServerList.push_back(NF_SHARE_PTR<NFServer>(NF_NEW NFServer(strArgvList + " Server=WorldServer ID=7 Plugin.xml")));
+		mServerList.push_back(NF_SHARE_PTR<NFServer>(NF_NEW NFServer(strArgvList + " Server=LoginServer ID=4 Plugin.xml")));
+		mServerList.push_back(NF_SHARE_PTR<NFServer>(NF_NEW NFServer(strArgvList + " Server=DBServer ID=8 Plugin.xml")));
+		mServerList.push_back(NF_SHARE_PTR<NFServer>(NF_NEW NFServer(strArgvList + " Server=ProxyServer ID=5 Plugin.xml")));
+		mServerList.push_back(NF_SHARE_PTR<NFServer>(NF_NEW NFServer(strArgvList + " Server=GameServer ID=6 Plugin.xml")));
+	}
+	else
+	{
+		mServerList.push_back(NF_SHARE_PTR<NFServer>(NF_NEW NFServer(strArgvList)));
+	}
 
-	ReleaseNF();
+	for (auto item : mServerList)
+	{
+		item->SetupNF();
+	}
+
+	////////////////
+	uint64_t nIndex = 0;
+	while (!bExitApp)
+	{
+		nIndex++;
+
+		std::this_thread::sleep_for(std::chrono::milliseconds(1));
+		for (auto item : mServerList)
+		{
+			item->MainExecute();
+		}
+	}
+	////////////////
+
+	for (auto item : mServerList)
+	{
+		item->ReleaseNF();
+	}
+
+	mServerList.clear();
 
     return 0;
 }

@@ -61,6 +61,27 @@ void NFLogModule::rolloutHandler(const char* filename, std::size_t size)
     }
 }
 
+std::string NFLogModule::GetConfigPath(const std::string & fileName)
+{
+	std::string strAppLogName;
+#if NF_PLATFORM == NF_PLATFORM_WIN
+#ifdef NF_DEBUG_MODE
+	strAppLogName = pPluginManager->GetConfigPath() + "NFDataCfg/Debug/logconfig/" + fileName + "_win.conf";
+#else
+	strAppLogName = pPluginManager->GetConfigPath() + "NFDataCfg/Release/logconfig/" + fileName + "_win.conf";
+#endif
+
+#else
+#ifdef NF_DEBUG_MODE
+	strAppLogName = pPluginManager->GetConfigPath() + "NFDataCfg/Debug/logconfig/" + fileName + ".conf";
+#else
+	strAppLogName = pPluginManager->GetConfigPath() + "NFDataCfg/Release/logconfig/" + fileName + ".conf";
+#endif
+#endif
+
+	return strAppLogName;
+}
+
 NFLogModule::NFLogModule(NFIPluginManager* p)
 {
     pPluginManager = p;
@@ -79,25 +100,17 @@ bool NFLogModule::Awake()
 		strLogConfigName = pPluginManager->GetAppName();
 	}
 
-	string strAppLogName = "";
-#if NF_PLATFORM == NF_PLATFORM_WIN
-#ifdef NF_DEBUG_MODE
-	strAppLogName = pPluginManager->GetConfigPath() + "NFDataCfg/Debug/logconfig/" + strLogConfigName + "_win.conf";
-#else
-	strAppLogName = pPluginManager->GetConfigPath() + "NFDataCfg/Release/logconfig/" + strLogConfigName + "_win.conf";
-#endif
-
-#else
-#ifdef NF_DEBUG_MODE
-	strAppLogName = pPluginManager->GetConfigPath() + "NFDataCfg/Debug/logconfig/" + strLogConfigName + ".conf";
-#else
-	strAppLogName = pPluginManager->GetConfigPath() + "NFDataCfg/Release/logconfig/" + strLogConfigName + ".conf";
-#endif
-#endif
+	string strAppLogName = GetConfigPath(strLogConfigName);
 
 	el::Configurations conf(strAppLogName);
 
 	el::Configuration* pConfiguration = conf.get(el::Level::Debug, el::ConfigurationType::Filename);
+	if (pConfiguration == nullptr)
+	{
+		conf = el::Configurations(GetConfigPath("Default"));
+		pConfiguration = conf.get(el::Level::Debug, el::ConfigurationType::Filename);
+	}
+
 	const std::string& strFileName = pConfiguration->value();
 	pConfiguration->setValue(pPluginManager->GetConfigPath() + strFileName);
 

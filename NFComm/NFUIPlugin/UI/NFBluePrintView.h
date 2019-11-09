@@ -31,6 +31,45 @@ class NFBluePrintView : public NFIView
 {
 public:
 	NFBluePrintView(NFIPluginManager* p, NFViewType vt);
+
+	//1 logic block must has at least 1 monitor, at least 1 judgement and at least 1 executer
+	//normally 1 judgement has 1 executer
+	enum LogicBlock
+	{
+		Monitor,
+		Judgement,
+		Executer
+	};
+
+	enum CommonInterfaces//access to NFrame for executer and judgement
+	{
+		//property
+		//record
+	};
+
+	enum MonitorType
+	{
+		NetworkEvent,
+		NetworkMsgEvent,
+		ObjectEvent,
+		PropertyEvent,
+		HeartBeatEvent,
+		SceneEvent,
+		ItemEvent,
+		SkillEvent,
+		BuffEvent,
+	};
+
+	enum JudgementType
+	{
+
+	};
+
+	enum ExecuterType
+	{
+
+	};
+
 };
 
 #endif

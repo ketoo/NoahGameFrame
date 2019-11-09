@@ -32,15 +32,13 @@
 #include <thread>
 #include "NFDynLib.h"
 #include "NFCoroutineManager.h"
-#include "NFComm/NFCore/NFSingleton.hpp"
 #include "NFComm/NFPluginModule/NFIModule.h"
 #include "NFComm/NFPluginModule/NFIPluginManager.h"
 
 void CoroutineExecute(void* arg);
 
 class NFPluginManager
-    : public NFIPluginManager,
-	public NFSingleton<NFPluginManager>
+    : public NFIPluginManager
 {
 public:
     NFPluginManager();
