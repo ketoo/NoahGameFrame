@@ -22,54 +22,71 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 */
-#ifndef NFI_BLUE_PRINT_MODULE_H
-#define NFI_BLUE_PRINT_MODULE_H
 
-#include <iostream>
-#include "NFIModule.h"
+//#include "Dependencies/googletest-release-1.8.0/googletest/include/gtest/gtest.h"
+#include "NFBluePrintLoaderModule.h"
 
-class NFIBluePrintModule
-    : public NFIModule
+bool NFBluePrintLoaderModule::Awake()
 {
-public:
 
-	//1 logic block must has at least 1 monitor, at least 1 judgement and at least 1 executer
-	//normally 1 judgement has 1 executer
-	enum LogicBlock
-	{
-		Monitor,
-		Judgement,
-		Executer
-	};
 
-	enum CommonInterfaces//access to NFrame for executer and judgement
-	{
-		//property
-		//record
-	};
+	return true;
+}
 
-	enum MonitorType
-	{
-		NetworkEvent,
-		NetworkMsgEvent,
-		ObjectEvent,
-		PropertyEvent,
-		HeartBeatEvent,
-		SceneEvent,
-		ItemEvent,
-		SkillEvent,
-		BuffEvent,
-	};
+bool NFBluePrintLoaderModule::Init()
+{
+	
 
-	enum JudgementType
-	{
+    return true;
+}
 
-	};
+bool NFBluePrintLoaderModule::AfterInit()
+{
 
-	enum ExecuterType
-	{
+	return true;
+}
 
-	};
-};
+bool NFBluePrintLoaderModule::CheckConfig()
+{
+	
+	return true;
+}
 
-#endif
+bool NFBluePrintLoaderModule::ReadyExecute()
+{
+	
+
+	return true;
+}
+
+bool NFBluePrintLoaderModule::Execute()
+{
+	
+    return true;
+}
+
+bool NFBluePrintLoaderModule::BeforeShut()
+{
+
+	return true;
+}
+
+bool NFBluePrintLoaderModule::Shut()
+{
+	
+
+	return true;
+}
+
+bool NFBluePrintLoaderModule::Finalize()
+{
+	
+
+	return true;
+}
+
+bool NFBluePrintLoaderModule::OnReloadPlugin()
+{
+	
+	return true;
+}

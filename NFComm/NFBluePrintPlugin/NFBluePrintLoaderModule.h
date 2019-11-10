@@ -22,54 +22,46 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 */
-#ifndef NFI_BLUE_PRINT_MODULE_H
-#define NFI_BLUE_PRINT_MODULE_H
 
-#include <iostream>
-#include "NFIModule.h"
+#ifndef NF_BLUE_PRINT_LOADER_MODULE_H
+#define NF_BLUE_PRINT_LOADER_MODULE_H
 
-class NFIBluePrintModule
-    : public NFIModule
+#include "NFComm/NFPluginModule/NFILogModule.h"
+#include "NFComm/NFPluginModule/NFIKernelModule.h"
+#include "NFComm/NFPluginModule/NFIClassModule.h"
+#include "NFComm/NFPluginModule/NFIBluePrintModule.h"
+
+class NFIBluePrintLoaderModule
+	: public NFIModule
 {
 public:
-
-	//1 logic block must has at least 1 monitor, at least 1 judgement and at least 1 executer
-	//normally 1 judgement has 1 executer
-	enum LogicBlock
-	{
-		Monitor,
-		Judgement,
-		Executer
-	};
-
-	enum CommonInterfaces//access to NFrame for executer and judgement
-	{
-		//property
-		//record
-	};
-
-	enum MonitorType
-	{
-		NetworkEvent,
-		NetworkMsgEvent,
-		ObjectEvent,
-		PropertyEvent,
-		HeartBeatEvent,
-		SceneEvent,
-		ItemEvent,
-		SkillEvent,
-		BuffEvent,
-	};
-
-	enum JudgementType
-	{
-
-	};
-
-	enum ExecuterType
-	{
-
-	};
 };
+
+class NFBluePrintLoaderModule
+    : public NFIBluePrintLoaderModule
+{
+public:
+    NFBluePrintLoaderModule( NFIPluginManager* p )
+    {
+        pPluginManager = p;
+    }
+
+    virtual ~NFBluePrintLoaderModule() {};
+
+    virtual bool Awake();
+    virtual bool Init();
+    virtual bool AfterInit();
+    virtual bool CheckConfig();
+    virtual bool ReadyExecute();
+    virtual bool Execute();
+    virtual bool BeforeShut();
+    virtual bool Shut();
+    virtual bool Finalize();
+    virtual bool OnReloadPlugin();
+
+
+private:
+};
+
 
 #endif

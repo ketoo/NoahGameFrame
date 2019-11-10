@@ -26,6 +26,9 @@
 
 
 #include "NFBluePrintModule.h"
+#include "NFBluePrintCppGeneratorModule.h"
+#include "NFBluePrintLoaderModule.h"
+#include "NFBluePrintLuaGeneratorModule.h"
 #include "NFBluePrintPlugin.h"
 
 //
@@ -59,11 +62,17 @@ const std::string NFBluePrintPlugin::GetPluginName()
 
 void NFBluePrintPlugin::Install()
 {
-    REGISTER_MODULE(pPluginManager, NFIBluePrintModule, NFBluePrintModule)
+	REGISTER_MODULE(pPluginManager, NFIBluePrintModule, NFBluePrintLuaGeneratorModule)
+	REGISTER_MODULE(pPluginManager, NFIBluePrintModule, NFBluePrintLoaderModule)
+	REGISTER_MODULE(pPluginManager, NFIBluePrintModule, NFBluePrintCppGeneratorModule)
+	REGISTER_MODULE(pPluginManager, NFIBluePrintModule, NFBluePrintModule)
 
 }
 
 void NFBluePrintPlugin::Uninstall()
 {
-    UNREGISTER_MODULE(pPluginManager, NFIBluePrintModule, NFBluePrintModule)
+	UNREGISTER_MODULE(pPluginManager, NFIBluePrintModule, NFBluePrintModule)
+	UNREGISTER_MODULE(pPluginManager, NFIBluePrintModule, NFBluePrintCppGeneratorModule)
+	UNREGISTER_MODULE(pPluginManager, NFIBluePrintModule, NFBluePrintLoaderModule)
+	UNREGISTER_MODULE(pPluginManager, NFIBluePrintModule, NFBluePrintLuaGeneratorModule)
 }

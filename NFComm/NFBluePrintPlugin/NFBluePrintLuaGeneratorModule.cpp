@@ -22,54 +22,71 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 */
-#ifndef NFI_BLUE_PRINT_MODULE_H
-#define NFI_BLUE_PRINT_MODULE_H
 
-#include <iostream>
-#include "NFIModule.h"
+//#include "Dependencies/googletest-release-1.8.0/googletest/include/gtest/gtest.h"
+#include "NFBluePrintLuaGeneratorModule.h"
 
-class NFIBluePrintModule
-    : public NFIModule
+bool NFBluePrintLuaGeneratorModule::Awake()
 {
-public:
 
-	//1 logic block must has at least 1 monitor, at least 1 judgement and at least 1 executer
-	//normally 1 judgement has 1 executer
-	enum LogicBlock
-	{
-		Monitor,
-		Judgement,
-		Executer
-	};
 
-	enum CommonInterfaces//access to NFrame for executer and judgement
-	{
-		//property
-		//record
-	};
+	return true;
+}
 
-	enum MonitorType
-	{
-		NetworkEvent,
-		NetworkMsgEvent,
-		ObjectEvent,
-		PropertyEvent,
-		HeartBeatEvent,
-		SceneEvent,
-		ItemEvent,
-		SkillEvent,
-		BuffEvent,
-	};
+bool NFBluePrintLuaGeneratorModule::Init()
+{
+	
 
-	enum JudgementType
-	{
+    return true;
+}
 
-	};
+bool NFBluePrintLuaGeneratorModule::AfterInit()
+{
 
-	enum ExecuterType
-	{
+	return true;
+}
 
-	};
-};
+bool NFBluePrintLuaGeneratorModule::CheckConfig()
+{
+	
+	return true;
+}
 
-#endif
+bool NFBluePrintLuaGeneratorModule::ReadyExecute()
+{
+	
+
+	return true;
+}
+
+bool NFBluePrintLuaGeneratorModule::Execute()
+{
+	
+    return true;
+}
+
+bool NFBluePrintLuaGeneratorModule::BeforeShut()
+{
+
+	return true;
+}
+
+bool NFBluePrintLuaGeneratorModule::Shut()
+{
+	
+
+	return true;
+}
+
+bool NFBluePrintLuaGeneratorModule::Finalize()
+{
+	
+
+	return true;
+}
+
+bool NFBluePrintLuaGeneratorModule::OnReloadPlugin()
+{
+	
+	return true;
+}

@@ -102,10 +102,16 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
       </PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="NFBluePrintCppGeneratorModule.cpp" />
+    <ClCompile Include="NFBluePrintLoaderModule.cpp" />
+    <ClCompile Include="NFBluePrintLuaGeneratorModule.cpp" />
     <ClCompile Include="NFBluePrintModule.cpp" />
     <ClCompile Include="NFBluePrintPlugin.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="NFBluePrintCppGeneratorModule.h" />
+    <ClInclude Include="NFBluePrintLoaderModule.h" />
+    <ClInclude Include="NFBluePrintLuaGeneratorModule.h" />
     <ClInclude Include="NFBluePrintModule.h" />
     <ClInclude Include="NFBluePrintPlugin.h" />
   </ItemGroup>
