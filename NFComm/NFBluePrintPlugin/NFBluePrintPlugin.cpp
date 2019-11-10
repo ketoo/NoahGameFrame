@@ -62,9 +62,9 @@ const std::string NFBluePrintPlugin::GetPluginName()
 
 void NFBluePrintPlugin::Install()
 {
-	REGISTER_MODULE(pPluginManager, NFIBluePrintModule, NFBluePrintLuaGeneratorModule)
-	REGISTER_MODULE(pPluginManager, NFIBluePrintModule, NFBluePrintLoaderModule)
-	REGISTER_MODULE(pPluginManager, NFIBluePrintModule, NFBluePrintCppGeneratorModule)
+	REGISTER_MODULE(pPluginManager, NFIBluePrintLuaGeneratorModule, NFBluePrintLuaGeneratorModule)
+	REGISTER_MODULE(pPluginManager, NFIBluePrintLoaderModule, NFBluePrintLoaderModule)
+	REGISTER_MODULE(pPluginManager, NFIBluePrintCppGeneratorModule, NFBluePrintCppGeneratorModule)
 	REGISTER_MODULE(pPluginManager, NFIBluePrintModule, NFBluePrintModule)
 
 }
@@ -72,7 +72,7 @@ void NFBluePrintPlugin::Install()
 void NFBluePrintPlugin::Uninstall()
 {
 	UNREGISTER_MODULE(pPluginManager, NFIBluePrintModule, NFBluePrintModule)
-	UNREGISTER_MODULE(pPluginManager, NFIBluePrintModule, NFBluePrintCppGeneratorModule)
-	UNREGISTER_MODULE(pPluginManager, NFIBluePrintModule, NFBluePrintLoaderModule)
-	UNREGISTER_MODULE(pPluginManager, NFIBluePrintModule, NFBluePrintLuaGeneratorModule)
+	UNREGISTER_MODULE(pPluginManager, NFIBluePrintCppGeneratorModule, NFBluePrintCppGeneratorModule)
+	UNREGISTER_MODULE(pPluginManager, NFIBluePrintLoaderModule, NFBluePrintLoaderModule)
+	UNREGISTER_MODULE(pPluginManager, NFIBluePrintLuaGeneratorModule, NFBluePrintLuaGeneratorModule)
 }
