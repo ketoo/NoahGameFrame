@@ -62,6 +62,9 @@ public:
     virtual bool Finalize();
     virtual bool OnReloadPlugin();
 
+protected:
+	int SetupGUI();
+
 private:
 
 	// Our state
