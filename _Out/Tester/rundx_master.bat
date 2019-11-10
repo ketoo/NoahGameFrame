@@ -1,4 +1,4 @@
 cd ../Debug/
 
-start NFPluginLoader_d PluginX.xml Server=MasterServer ID=3
+start NFPluginLoader_d Plugin.xml Server=MasterServer ID=3
 

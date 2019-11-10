@@ -14,4 +14,6 @@ add_subdirectory(NFNoSqlPlugin)
 add_subdirectory(NFTestPlugin)
 add_subdirectory(NFLuaScriptPlugin)
 add_subdirectory(NFUIPlugin)
+add_subdirectory(NFBluePrintPlugin)
+
 

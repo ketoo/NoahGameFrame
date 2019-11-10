@@ -23,27 +23,70 @@
    limitations under the License.
 */
 
-#include "NFComm/NFPluginModule/NFPlatform.h"
+//#include "Dependencies/googletest-release-1.8.0/googletest/include/gtest/gtest.h"
+#include "NFBluePrintCppGeneratorModule.h"
 
-#ifdef NF_DEBUG_MODE
+bool NFBluePrintCppGeneratorModule::Awake()
+{
 
-#if NF_PLATFORM == NF_PLATFORM_WIN
-#pragma comment( lib, "SDL2d.lib" )
-#elif NF_PLATFORM == NF_PLATFORM_LINUX || NF_PLATFORM == NF_PLATFORM_ANDROID
 
-#elif NF_PLATFORM == NF_PLATFORM_APPLE || NF_PLATFORM == NF_PLATFORM_APPLE_IOS
+	return true;
+}
 
-#endif
+bool NFBluePrintCppGeneratorModule::Init()
+{
+	
 
-#else
+    return true;
+}
 
-#if NF_PLATFORM == NF_PLATFORM_WIN
+bool NFBluePrintCppGeneratorModule::AfterInit()
+{
 
-#pragma comment( lib, "SDL2.lib" )
-#elif NF_PLATFORM == NF_PLATFORM_LINUX || NF_PLATFORM == NF_PLATFORM_ANDROID
+	return true;
+}
 
-#elif NF_PLATFORM == NF_PLATFORM_APPLE || NF_PLATFORM == NF_PLATFORM_APPLE_IOS
+bool NFBluePrintCppGeneratorModule::CheckConfig()
+{
+	
+	return true;
+}
 
-#endif
+bool NFBluePrintCppGeneratorModule::ReadyExecute()
+{
+	
 
-#endif
+	return true;
+}
+
+bool NFBluePrintCppGeneratorModule::Execute()
+{
+	
+    return true;
+}
+
+bool NFBluePrintCppGeneratorModule::BeforeShut()
+{
+
+	return true;
+}
+
+bool NFBluePrintCppGeneratorModule::Shut()
+{
+	
+
+	return true;
+}
+
+bool NFBluePrintCppGeneratorModule::Finalize()
+{
+	
+
+	return true;
+}
+
+bool NFBluePrintCppGeneratorModule::OnReloadPlugin()
+{
+	
+	return true;
+}

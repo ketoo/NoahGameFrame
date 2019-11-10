@@ -23,27 +23,70 @@
    limitations under the License.
 */
 
-#include "NFComm/NFPluginModule/NFPlatform.h"
+//#include "Dependencies/googletest-release-1.8.0/googletest/include/gtest/gtest.h"
+#include "NFBluePrintLuaGeneratorModule.h"
 
-#ifdef NF_DEBUG_MODE
+bool NFBluePrintLuaGeneratorModule::Awake()
+{
 
-#if NF_PLATFORM == NF_PLATFORM_WIN
-#pragma comment( lib, "SDL2d.lib" )
-#elif NF_PLATFORM == NF_PLATFORM_LINUX || NF_PLATFORM == NF_PLATFORM_ANDROID
 
-#elif NF_PLATFORM == NF_PLATFORM_APPLE || NF_PLATFORM == NF_PLATFORM_APPLE_IOS
+	return true;
+}
 
-#endif
+bool NFBluePrintLuaGeneratorModule::Init()
+{
+	
 
-#else
+    return true;
+}
 
-#if NF_PLATFORM == NF_PLATFORM_WIN
+bool NFBluePrintLuaGeneratorModule::AfterInit()
+{
 
-#pragma comment( lib, "SDL2.lib" )
-#elif NF_PLATFORM == NF_PLATFORM_LINUX || NF_PLATFORM == NF_PLATFORM_ANDROID
+	return true;
+}
 
-#elif NF_PLATFORM == NF_PLATFORM_APPLE || NF_PLATFORM == NF_PLATFORM_APPLE_IOS
+bool NFBluePrintLuaGeneratorModule::CheckConfig()
+{
+	
+	return true;
+}
 
-#endif
+bool NFBluePrintLuaGeneratorModule::ReadyExecute()
+{
+	
 
-#endif
+	return true;
+}
+
+bool NFBluePrintLuaGeneratorModule::Execute()
+{
+	
+    return true;
+}
+
+bool NFBluePrintLuaGeneratorModule::BeforeShut()
+{
+
+	return true;
+}
+
+bool NFBluePrintLuaGeneratorModule::Shut()
+{
+	
+
+	return true;
+}
+
+bool NFBluePrintLuaGeneratorModule::Finalize()
+{
+	
+
+	return true;
+}
+
+bool NFBluePrintLuaGeneratorModule::OnReloadPlugin()
+{
+	
+	return true;
+}

@@ -1,12 +1,12 @@
 /*
-			This file is part of:
-				NoahFrame
-			https://github.com/ketoo/NoahGameFrame
+            This file is part of: 
+                NoahFrame
+            https://github.com/ketoo/NoahGameFrame
 
    Copyright 2009 - 2019 NoahFrame(NoahGameFrame)
 
    File creator: lvsheng.huang
-
+   
    NoahFrame is open-source software and you can redistribute it and/or modify
    it under the terms of the License; besides, anyone who use this file/software must include this copyright announcement.
 
@@ -14,7 +14,7 @@
    you may not use this file except in compliance with the License.
    You may obtain a copy of the License at
 
-	   http://www.apache.org/licenses/LICENSE-2.0
+       http://www.apache.org/licenses/LICENSE-2.0
 
    Unless required by applicable law or agreed to in writing, software
    distributed under the License is distributed on an "AS IS" BASIS,
@@ -22,17 +22,27 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 */
-#ifndef NF_BLUE_PRINT_VIEW_H
-#define NF_BLUE_PRINT_VIEW_H
 
-#include "NFComm/NFPluginModule/NFIUIModule.h"
+#ifndef NF_BLUE_PRINT_PLUGIN_H
+#define NF_BLUE_PRINT_PLUGIN_H
 
-class NFBluePrintView : public NFIView
+///
+#include "NFComm/NFPluginModule/NFIPlugin.h"
+#include "NFComm/NFPluginModule/NFIPluginManager.h"
+
+class NFBluePrintPlugin : public NFIPlugin
 {
 public:
-	NFBluePrintView(NFIPluginManager* p, NFViewType vt);
+	NFBluePrintPlugin(NFIPluginManager* p)
+    {
+        pPluginManager = p;
+    }
+    virtual const int GetPluginVersion();
 
+    virtual const std::string GetPluginName();
 
+    virtual void Install();
+
+    virtual void Uninstall();
 };
-
 #endif

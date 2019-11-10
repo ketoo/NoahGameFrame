@@ -23,27 +23,45 @@
    limitations under the License.
 */
 
-#include "NFComm/NFPluginModule/NFPlatform.h"
+#ifndef NF_BLUE_PRINT_LOADER_MODULE_H
+#define NF_BLUE_PRINT_LOADER_MODULE_H
 
-#ifdef NF_DEBUG_MODE
+#include "NFComm/NFPluginModule/NFILogModule.h"
+#include "NFComm/NFPluginModule/NFIKernelModule.h"
+#include "NFComm/NFPluginModule/NFIClassModule.h"
+#include "NFComm/NFPluginModule/NFIBluePrintModule.h"
 
-#if NF_PLATFORM == NF_PLATFORM_WIN
-#pragma comment( lib, "SDL2d.lib" )
-#elif NF_PLATFORM == NF_PLATFORM_LINUX || NF_PLATFORM == NF_PLATFORM_ANDROID
+class NFIBluePrintLoaderModule
+	: public NFIModule
+{
+public:
+};
 
-#elif NF_PLATFORM == NF_PLATFORM_APPLE || NF_PLATFORM == NF_PLATFORM_APPLE_IOS
+class NFBluePrintLoaderModule
+    : public NFIBluePrintLoaderModule
+{
+public:
+    NFBluePrintLoaderModule( NFIPluginManager* p )
+    {
+        pPluginManager = p;
+    }
 
-#endif
+    virtual ~NFBluePrintLoaderModule() {};
 
-#else
+    virtual bool Awake();
+    virtual bool Init();
+    virtual bool AfterInit();
+    virtual bool CheckConfig();
+    virtual bool ReadyExecute();
+    virtual bool Execute();
+    virtual bool BeforeShut();
+    virtual bool Shut();
+    virtual bool Finalize();
+    virtual bool OnReloadPlugin();
 
-#if NF_PLATFORM == NF_PLATFORM_WIN
 
-#pragma comment( lib, "SDL2.lib" )
-#elif NF_PLATFORM == NF_PLATFORM_LINUX || NF_PLATFORM == NF_PLATFORM_ANDROID
+private:
+};
 
-#elif NF_PLATFORM == NF_PLATFORM_APPLE || NF_PLATFORM == NF_PLATFORM_APPLE_IOS
-
-#endif
 
 #endif

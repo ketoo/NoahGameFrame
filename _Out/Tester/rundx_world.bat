@@ -1,3 +1,3 @@
 cd ../Debug/
 
-start NFPluginLoader_d PluginX.xml Server=WorldServer ID=7
+start NFPluginLoader_d Plugin.xml Server=WorldServer ID=7

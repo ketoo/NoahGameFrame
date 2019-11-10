@@ -32,106 +32,14 @@
 #include "NFComm/NFPluginModule/NFIUIModule.h"
 
 #define IMGUI_IMPL_OPENGL_LOADER_GLAD
-#include "imgui.h"
-#include "imgui_impl_sdl.h"
-#include "imgui_impl_opengl3.h"
-
+#include "imgui/imgui.h"
+#include "imgui/imgui_impl_sdl.h"
+#include "imgui/imgui_impl_opengl3.h"
 #include "glad/glad.h"
+
 #include <stdio.h>
 #include <SDL.h>
 
-/*
-
-
-class NFSceneView : public NFIView
-{
-public:
-    NFSceneView(NFViewType vt)
-    :NFIView(vt)
-    {
-        
-    }
-};
-
-class NFHierachyView : public NFIView
-{
-public:
-    NFHierachyView(NFViewType vt)
-    :NFIView(vt)
-    {
-        
-    }
-};
-
-class NFConsoleView : public NFIView
-{
-public:
-    NFConsoleView(NFViewType vt)
-    :NFIView(vt)
-    {
-        
-    }
-};
-
-class NFProfileView : public NFIView
-{
-public:
-    NFProfileView(NFViewType vt)
-    :NFIView(vt)
-    {
-        
-    }
-};
-
-class NFInspectorView : public NFIView
-{
-public:
-    NFInspectorView(NFViewType vt)
-    :NFIView(vt)
-    {
-        
-    }
-
-private:
-    NFIView* mPropsView;
-    NFIView* mRecordsView;
-};
-
-class NFBluePrintView : public NFIView
-{
-public:
-    NFBluePrintView(NFViewType vt)
-    :NFIView(vt)
-    {
-        
-    }
-};
-
-class NFProjectView : public NFIView
-{
-public:
-    NFProjectView(NFViewType vt)
-    :NFIView(vt)
-    {
-        
-    }
-
-    private:
-        NFIView* mFolderView;
-        NFIView* mFilesView;
-};
-
-class NFGameView : public NFIView
-{
-public:
-    NFGameView(NFViewType vt)
-    :NFIView(vt)
-    {
-        
-    }
-};
-
-*/
 class NFUIModule
     : public NFIUIModule
 {
@@ -153,6 +61,11 @@ public:
     virtual bool Shut();
     virtual bool Finalize();
     virtual bool OnReloadPlugin();
+
+protected:
+	int SetupGUI();
+
+private:
 
 	// Our state
 	bool show_demo_window = true;

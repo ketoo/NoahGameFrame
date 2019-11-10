@@ -15,6 +15,6 @@ cd ../Debug/
 
 chmod -R 777  NFPluginLoader_d
 
-./NFPluginLoader_d PluginX.xml Server=DBServer ID=8
+./NFPluginLoader_d Plugin.xml Server=DBServer ID=8
 
 ps -A|grep NF

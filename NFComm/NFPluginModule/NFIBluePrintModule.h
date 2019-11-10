@@ -22,28 +22,54 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 */
+#ifndef NFI_BLUE_PRINT_MODULE_H
+#define NFI_BLUE_PRINT_MODULE_H
 
-#include "NFComm/NFPluginModule/NFPlatform.h"
+#include <iostream>
+#include "NFIModule.h"
 
-#ifdef NF_DEBUG_MODE
+class NFIBluePrintModule
+    : public NFIModule
+{
+public:
 
-#if NF_PLATFORM == NF_PLATFORM_WIN
-#pragma comment( lib, "SDL2d.lib" )
-#elif NF_PLATFORM == NF_PLATFORM_LINUX || NF_PLATFORM == NF_PLATFORM_ANDROID
+	//1 logic block must has at least 1 monitor, at least 1 judgement and at least 1 executer
+	//normally 1 judgement has 1 executer
+	enum LogicBlock
+	{
+		Monitor,
+		Judgement,
+		Executer
+	};
 
-#elif NF_PLATFORM == NF_PLATFORM_APPLE || NF_PLATFORM == NF_PLATFORM_APPLE_IOS
+	enum CommonInterfaces//access to NFrame for executer and judgement
+	{
+		//property
+		//record
+	};
 
-#endif
+	enum MonitorType
+	{
+		NetworkEvent,
+		NetworkMsgEvent,
+		ObjectEvent,
+		PropertyEvent,
+		HeartBeatEvent,
+		SceneEvent,
+		ItemEvent,
+		SkillEvent,
+		BuffEvent,
+	};
 
-#else
+	enum JudgementType
+	{
 
-#if NF_PLATFORM == NF_PLATFORM_WIN
+	};
 
-#pragma comment( lib, "SDL2.lib" )
-#elif NF_PLATFORM == NF_PLATFORM_LINUX || NF_PLATFORM == NF_PLATFORM_ANDROID
+	enum ExecuterType
+	{
 
-#elif NF_PLATFORM == NF_PLATFORM_APPLE || NF_PLATFORM == NF_PLATFORM_APPLE_IOS
-
-#endif
+	};
+};
 
 #endif

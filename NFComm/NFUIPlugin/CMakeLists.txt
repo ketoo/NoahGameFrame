@@ -1,13 +1,22 @@
 set(ProjectName "NFUIPlugin")
+
 file(GLOB NFUIPlugin_ROOT_Cpp
 	*.cpp)
 	
 file(GLOB NFUIPlugin_ROOT_Hpp 
 	*.h)
 
+file(GLOB NFUIVIEW_ROOT_Cpp
+	./UI/*.cpp)
+	
+file(GLOB NFUIVIEW_ROOT_Hpp 
+	./UI/*.h)
+
 add_library(NFUIPlugin STATIC
 	${NFUIPlugin_ROOT_Cpp}
-	${NFUIPlugin_ROOT_Hpp})
+	${NFUIPlugin_ROOT_Hpp}
+	${NFUIVIEW_ROOT_Cpp}
+	${NFUIVIEW_ROOT_Hpp})
 	
 set_target_properties( NFUIPlugin PROPERTIES OUTPUT_NAME_DEBUG "NFUIPlugin_d")
 set_target_properties( NFUIPlugin PROPERTIES PREFIX "")

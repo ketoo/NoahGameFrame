@@ -28,22 +28,23 @@
 #ifdef NF_DEBUG_MODE
 
 #if NF_PLATFORM == NF_PLATFORM_WIN
-#pragma comment( lib, "SDL2d.lib" )
+#pragma comment( lib, "ws2_32" )
+//#pragma comment( lib, "gtest.lib" )
+
 #elif NF_PLATFORM == NF_PLATFORM_LINUX || NF_PLATFORM == NF_PLATFORM_ANDROID
 
+//#pragma comment( lib, "gtest.a" )
 #elif NF_PLATFORM == NF_PLATFORM_APPLE || NF_PLATFORM == NF_PLATFORM_APPLE_IOS
-
 #endif
 
 #else
 
 #if NF_PLATFORM == NF_PLATFORM_WIN
+//#pragma comment( lib, "gtest.lib" )
 
-#pragma comment( lib, "SDL2.lib" )
 #elif NF_PLATFORM == NF_PLATFORM_LINUX || NF_PLATFORM == NF_PLATFORM_ANDROID
-
+//#pragma comment( lib, "gtest.a" )
 #elif NF_PLATFORM == NF_PLATFORM_APPLE || NF_PLATFORM == NF_PLATFORM_APPLE_IOS
-
 #endif
 
 #endif

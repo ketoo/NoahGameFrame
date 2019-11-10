@@ -34,12 +34,21 @@
 
 #if NF_PLATFORM == NF_PLATFORM_WIN
 #pragma comment( lib, "ws2_32.lib" )
+#pragma comment( lib, "version.lib" )
+//#pragma comment( lib, "SDL2maind.lib" )
+#pragma comment( lib, "msimg32.lib" )
+#pragma comment( lib, "winmm.lib" )
+#pragma comment( lib, "imm32.lib" )
+//#pragma comment( lib, "msvcrt.lib" )
+#pragma comment (lib, "Setupapi.lib")
 
 #ifndef NF_DYNAMIC_PLUGIN
 #ifdef NF_DEBUG_MODE
 #pragma comment( lib, "libprotobufd.lib" )
+#pragma comment( lib, "SDL2d.lib" )
 #else
 #pragma comment( lib, "libprotobuf.lib" )
+//#pragma comment( lib, "SDL2.lib" )
 #endif
 
 #pragma comment( lib, "NFCore.lib" )
@@ -63,6 +72,7 @@
 #pragma comment( lib, "NFSecurityPlugin.lib" )
 #pragma comment( lib, "NFTestPlugin.lib" )
 #pragma comment( lib, "NFUIPlugin.lib" )
+#pragma comment( lib, "NFBluePrintPlugin.lib" )
 
 #pragma comment( lib, "NFDBLogicPlugin.lib" )
 #pragma comment( lib, "NFDBNet_ClientPlugin.lib" )
@@ -125,6 +135,7 @@
 #include "NFComm/NFSecurityPlugin/NFSecurityPlugin.h"
 #include "NFComm/NFTestPlugin/NFTestPlugin.h"
 #include "NFComm/NFUIPlugin/NFUIPlugin.h"
+#include "NFComm/NFBluePrintPlugin/NFBluePrintPlugin.h"
 
 //DB
 #include "NFServer/NFDBLogicPlugin/NFDBLogicPlugin.h"
@@ -304,7 +315,8 @@ bool NFPluginManager::LoadStaticPlugin()
 	CREATE_PLUGIN(this, NFSecurityPlugin)
 	CREATE_PLUGIN(this, NFTestPlugin)
 	CREATE_PLUGIN(this, NFUIPlugin)
-
+	CREATE_PLUGIN(this, NFBluePrintPlugin)
+		
 //DB
 	CREATE_PLUGIN(this, NFDBLogicPlugin)
 	CREATE_PLUGIN(this, NFDBNet_ClientPlugin)

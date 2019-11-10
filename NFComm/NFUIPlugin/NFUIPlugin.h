@@ -37,12 +37,6 @@ public:
     {
         pPluginManager = p;
     }
-    
-    virtual ~NFUIPlugin()
-    {
-
-    }
-
     virtual const int GetPluginVersion();
 
     virtual const std::string GetPluginName();

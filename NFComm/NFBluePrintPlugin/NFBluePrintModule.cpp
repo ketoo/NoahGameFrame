@@ -23,27 +23,70 @@
    limitations under the License.
 */
 
-#include "NFComm/NFPluginModule/NFPlatform.h"
+//#include "Dependencies/googletest-release-1.8.0/googletest/include/gtest/gtest.h"
+#include "NFBluePrintModule.h"
 
-#ifdef NF_DEBUG_MODE
+bool NFBluePrintModule::Awake()
+{
 
-#if NF_PLATFORM == NF_PLATFORM_WIN
-#pragma comment( lib, "SDL2d.lib" )
-#elif NF_PLATFORM == NF_PLATFORM_LINUX || NF_PLATFORM == NF_PLATFORM_ANDROID
 
-#elif NF_PLATFORM == NF_PLATFORM_APPLE || NF_PLATFORM == NF_PLATFORM_APPLE_IOS
+	return true;
+}
 
-#endif
+bool NFBluePrintModule::Init()
+{
+	
 
-#else
+    return true;
+}
 
-#if NF_PLATFORM == NF_PLATFORM_WIN
+bool NFBluePrintModule::AfterInit()
+{
 
-#pragma comment( lib, "SDL2.lib" )
-#elif NF_PLATFORM == NF_PLATFORM_LINUX || NF_PLATFORM == NF_PLATFORM_ANDROID
+	return true;
+}
 
-#elif NF_PLATFORM == NF_PLATFORM_APPLE || NF_PLATFORM == NF_PLATFORM_APPLE_IOS
+bool NFBluePrintModule::CheckConfig()
+{
+	
+	return true;
+}
 
-#endif
+bool NFBluePrintModule::ReadyExecute()
+{
+	
 
-#endif
+	return true;
+}
+
+bool NFBluePrintModule::Execute()
+{
+	
+    return true;
+}
+
+bool NFBluePrintModule::BeforeShut()
+{
+
+	return true;
+}
+
+bool NFBluePrintModule::Shut()
+{
+	
+
+	return true;
+}
+
+bool NFBluePrintModule::Finalize()
+{
+	
+
+	return true;
+}
+
+bool NFBluePrintModule::OnReloadPlugin()
+{
+	
+	return true;
+}
