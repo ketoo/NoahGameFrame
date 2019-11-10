@@ -34,12 +34,21 @@
 
 #if NF_PLATFORM == NF_PLATFORM_WIN
 #pragma comment( lib, "ws2_32.lib" )
+#pragma comment( lib, "version.lib" )
+//#pragma comment( lib, "SDL2maind.lib" )
+#pragma comment( lib, "msimg32.lib" )
+#pragma comment( lib, "winmm.lib" )
+#pragma comment( lib, "imm32.lib" )
+//#pragma comment( lib, "msvcrt.lib" )
+#pragma comment (lib, "Setupapi.lib")
 
 #ifndef NF_DYNAMIC_PLUGIN
 #ifdef NF_DEBUG_MODE
 #pragma comment( lib, "libprotobufd.lib" )
+#pragma comment( lib, "SDL2d.lib" )
 #else
 #pragma comment( lib, "libprotobuf.lib" )
+//#pragma comment( lib, "SDL2.lib" )
 #endif
 
 #pragma comment( lib, "NFCore.lib" )
