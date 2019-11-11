@@ -81,13 +81,13 @@ if [ $sysOS == "Darwin" ];then
     cp -r -f ./vcpkg/installed/x64-osx/lib/* ./lib/Release/
     cp -r -f ./vcpkg/installed/x64-osx/debug/lib/* ./lib/Debug/
 
-    cp -r -f ./vcpkg/installed/x64-osx/tools/* ../NFComm/NFMessageDefine/
+    cp -r -f ./vcpkg/installed/x64-osx/tools/protobuf/* ../NFComm/NFMessageDefine/
 
 elif [ $sysOS == "Linux" ];then
     cp -r -f ./vcpkg/installed/x64-linux/lib/* ./lib/Release/
     cp -r -f ./vcpkg/installed/x64-linux/debug/lib/* ./lib/Debug/
 
-    cp -r -f ./vcpkg/installed/x64-linux/tools/* ../NFComm/NFMessageDefine/
+    cp -r -f ./vcpkg/installed/x64-linux/tools/protobuf/* ../NFComm/NFMessageDefine/
 fi
 
 cd ..

@@ -43,18 +43,32 @@ message("NFOutPutDir:${NFOutPutDir}")
 
 
 # message(STATUS "SolutionDir=" ${SolutionDir})
-include_directories(
-${SolutionDir} 
-${SolutionDir}/Dependencies/ 
-${SolutionDir}/Dependencies/protobuf/ 
-${SolutionDir}/Dependencies/protobuf/src/
-${SolutionDir}/Dependencies/libevent/
-${SolutionDir}/Dependencies/libevent/include/
-${SolutionDir}/Dependencies/libevent/compat/
-${SolutionDir}/Dependencies/lua/src/
-${SolutionDir}/Dependencies/asio/
-${SolutionDir}/Dependencies/websocketpp/
-)
+if (APPLE)
+	include_directories(
+		${SolutionDir} 
+		${SolutionDir}/Dependencies/ 
+		${SolutionDir}/Dependencies/vcpkg/installed/x64-osx/include/google/protobuf/ 
+		${SolutionDir}/Dependencies/vcpkg/installed/x64-osx/include/google/protobuf/src/
+		${SolutionDir}/Dependencies/vcpkg/installed/x64-osx/include/
+	)
+elseif(UNIX)
+	include_directories(
+		${SolutionDir} 
+		${SolutionDir}/Dependencies/ 
+		${SolutionDir}/Dependencies/vcpkg/installed/x64-linux/include/google/protobuf/ 
+		${SolutionDir}/Dependencies/vcpkg/installed/x64-linux/include/google/protobuf/src/
+		${SolutionDir}/Dependencies/vcpkg/installed/x64-linux/include/
+	)
+else()
+	include_directories(
+		${SolutionDir} 
+		${SolutionDir}/Dependencies/ 
+		${SolutionDir}/Dependencies/vcpkg/installed/x64-windows-static/include/google/protobuf/ 
+		${SolutionDir}/Dependencies/vcpkg/installed/x64-windows-static/include/google/protobuf/src/
+		${SolutionDir}/Dependencies/vcpkg/installed/x64-windows-static/include/
+	)
+endif()
+
 if (UNIX)
 	include_directories(${SolutionDir}/Dependencies/hiredis/hiredis_linux)
 else()
@@ -91,17 +105,11 @@ else()
 endif()
 
 
-
 link_directories(${DependenciesLibPath})
 
-if(${BUILD_TOOLS_ONLY} STREQUAL "ON")
-	message("Build Tools Only")
-	add_subdirectory(NFTools)
-else()
-	message("Build All")
-	add_subdirectory(NFTools)
-	add_subdirectory(Dependencies)
-	add_subdirectory(NFComm)
-	add_subdirectory(NFServer)
-endif()
 
+message("Build All")
+add_subdirectory(NFTools)
+add_subdirectory(Dependencies)
+add_subdirectory(NFComm)
+add_subdirectory(NFServer)
