@@ -48,6 +48,7 @@ if (APPLE)
 		${SolutionDir}
 		${SolutionDir}/Dependencies/
 		${SolutionDir}/NFComm/NFPluginModule/
+		${SolutionDir}/Dependencies/hiredis/hiredis_linux
 		${SolutionDir}/Dependencies/vcpkg/installed/x64-osx/include/
 		${SolutionDir}/Dependencies/vcpkg/installed/x64-osx/include/SDL2
 		${SolutionDir}/Dependencies/vcpkg/installed/x64-osx/include/google/protobuf/ 
@@ -58,6 +59,7 @@ elseif(UNIX)
 		${SolutionDir}
 		${SolutionDir}/Dependencies/
 		${SolutionDir}/NFComm/NFPluginModule/
+		${SolutionDir}/Dependencies/hiredis/hiredis_linux
 		${SolutionDir}/Dependencies/vcpkg/installed/x64-linux/include/
 		${SolutionDir}/Dependencies/vcpkg/installed/x64-linux/include/SDL2
 		${SolutionDir}/Dependencies/vcpkg/installed/x64-linux/include/google/protobuf/ 
@@ -68,17 +70,12 @@ else()
 		${SolutionDir}
 		${SolutionDir}/Dependencies/
 		${SolutionDir}/NFComm/NFPluginModule/
+		${SolutionDir}/Dependencies/hiredis/hiredis_win
 		${SolutionDir}/Dependencies/vcpkg/installed/x64-windows-static/include/
 		${SolutionDir}/Dependencies/vcpkg/installed/x64-windows-static/include/SDL2
 		${SolutionDir}/Dependencies/vcpkg/installed/x64-windows-static/include/google/protobuf/ 
 		${SolutionDir}/Dependencies/vcpkg/installed/x64-windows-static/include/google/protobuf/src/
 	)
-endif()
-
-if (UNIX)
-	include_directories(${SolutionDir}/Dependencies/hiredis/hiredis_linux)
-else()
-	include_directories(${SolutionDir}/Dependencies/hiredis/hiredis_win)
 endif()
 
 
