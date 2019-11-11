@@ -11,7 +11,7 @@ add_library(NFNoSqlPlugin STATIC
 		${NFNoSqlPlugin_ROOT_Cpp}
 		${NFNoSqlPlugin_Hpp})
 
-set_target_properties( NFNoSqlPlugin PROPERTIES OUTPUT_NAME_DEBUG "NFNoSqlPlugin_d")
+set_target_properties( NFNoSqlPlugin PROPERTIES OUTPUT_NAME_DEBUG "NFNoSqlPlugin")
 set_target_properties( NFNoSqlPlugin PROPERTIES PREFIX "")
 set_target_properties( NFNoSqlPlugin PROPERTIES
 		FOLDER "NFComm/NFNoSqlPlugin"

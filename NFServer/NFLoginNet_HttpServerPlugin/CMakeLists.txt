@@ -6,7 +6,7 @@ add_library(NFLoginNet_HttpServerPlugin STATIC
 	${NFLoginNet_HttpServerPlugin_ROOT_Cpp}
 	${NFLoginNet_HttpServerPlugin_ROOT_Hpp})
 	
-set_target_properties( NFLoginNet_HttpServerPlugin PROPERTIES OUTPUT_NAME_DEBUG "NFLoginNet_HttpServerPlugin_d")
+set_target_properties( NFLoginNet_HttpServerPlugin PROPERTIES OUTPUT_NAME_DEBUG "NFLoginNet_HttpServerPlugin")
 set_target_properties( NFLoginNet_HttpServerPlugin PROPERTIES PREFIX "")
 set_target_properties( NFLoginNet_HttpServerPlugin PROPERTIES 
 	FOLDER "NFServer/LoginServer"

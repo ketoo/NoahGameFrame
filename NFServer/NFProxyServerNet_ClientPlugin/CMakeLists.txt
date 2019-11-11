@@ -9,7 +9,7 @@ add_library(NFProxyServerNet_ClientPlugin STATIC
 	${NFProxyServerNet_ClientPlugin_ROOT_Cpp}
 	${NFProxyServerNet_ClientPlugin_ROOT_Hpp})
 	
-set_target_properties( NFProxyServerNet_ClientPlugin PROPERTIES OUTPUT_NAME_DEBUG "NFProxyServerNet_ClientPlugin_d")
+set_target_properties( NFProxyServerNet_ClientPlugin PROPERTIES OUTPUT_NAME_DEBUG "NFProxyServerNet_ClientPlugin")
 set_target_properties( NFProxyServerNet_ClientPlugin PROPERTIES PREFIX "")
 set_target_properties( NFProxyServerNet_ClientPlugin PROPERTIES 
 	FOLDER "NFServer/ProxyServer"

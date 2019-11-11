@@ -9,7 +9,7 @@ add_library(NFGameServerPlugin STATIC
 	${NFGameServerPlugin_ROOT_Cpp}
 	${NFGameServerPlugin_ROOT_Hpp})
 	
-set_target_properties( NFGameServerPlugin PROPERTIES OUTPUT_NAME_DEBUG "NFGameServerPlugin_d")
+set_target_properties( NFGameServerPlugin PROPERTIES OUTPUT_NAME_DEBUG "NFGameServerPlugin")
 set_target_properties( NFGameServerPlugin PROPERTIES PREFIX "")
 set_target_properties( NFGameServerPlugin PROPERTIES 
 	FOLDER "NFServer/GameServer"
