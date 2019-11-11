@@ -21,7 +21,7 @@ else()
 	target_link_libraries(NFLogPlugin -static-libstdc++)
 endif()
 
-set_target_properties( NFLogPlugin PROPERTIES OUTPUT_NAME_DEBUG "NFLogPlugin_d")
+set_target_properties( NFLogPlugin PROPERTIES OUTPUT_NAME_DEBUG "NFLogPlugin")
 set_target_properties( NFLogPlugin PROPERTIES PREFIX "")
 set_target_properties( NFLogPlugin PROPERTIES
 	FOLDER "NFSDK"

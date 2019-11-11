@@ -35,7 +35,7 @@ else()
 		)
 endif()
 link_NFSDK("NFNavigationPlugin")
-set_target_properties( NFNavigationPlugin PROPERTIES OUTPUT_NAME_DEBUG "NFNavigationPlugin_d")
+set_target_properties( NFNavigationPlugin PROPERTIES OUTPUT_NAME_DEBUG "NFNavigationPlugin")
 set_target_properties( NFNavigationPlugin PROPERTIES PREFIX "")
 set_target_properties( NFNavigationPlugin PROPERTIES
 	FOLDER "NFSDK"

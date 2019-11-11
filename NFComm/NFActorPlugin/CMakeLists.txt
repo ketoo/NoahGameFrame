@@ -37,7 +37,7 @@ else()
 		-DWIN32_LEAN_AND_MEAN
 		)
 endif()
-set_target_properties( NFActorPlugin PROPERTIES OUTPUT_NAME_DEBUG "NFActorPlugin_d")
+set_target_properties( NFActorPlugin PROPERTIES OUTPUT_NAME_DEBUG "NFActorPlugin")
 set_target_properties( NFActorPlugin PROPERTIES PREFIX "")
 set_target_properties( NFActorPlugin PROPERTIES
 	FOLDER "NFSDK"

@@ -9,7 +9,7 @@ add_library(NFLoginLogicPlugin STATIC
 	${NFLoginLogicPlugin_ROOT_Cpp}
 	${NFLoginLogicPlugin_ROOT_Hpp})
 	
-set_target_properties( NFLoginLogicPlugin PROPERTIES OUTPUT_NAME_DEBUG "NFLoginLogicPlugin_d")
+set_target_properties( NFLoginLogicPlugin PROPERTIES OUTPUT_NAME_DEBUG "NFLoginLogicPlugin")
 set_target_properties( NFLoginLogicPlugin PROPERTIES PREFIX "")
 set_target_properties( NFLoginLogicPlugin PROPERTIES 
 	FOLDER "NFServer/LoginServer"

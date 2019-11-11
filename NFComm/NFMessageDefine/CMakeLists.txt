@@ -41,7 +41,7 @@ else()
 		)
 
 endif()
-set_target_properties( NFMessageDefine PROPERTIES OUTPUT_NAME_DEBUG "NFMessageDefine_d")
+set_target_properties( NFMessageDefine PROPERTIES OUTPUT_NAME_DEBUG "NFMessageDefine")
 set_target_properties( NFMessageDefine PROPERTIES PREFIX "")
 set_target_properties( NFMessageDefine PROPERTIES
 	FOLDER "NFSDK"
