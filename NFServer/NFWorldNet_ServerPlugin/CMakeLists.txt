@@ -9,7 +9,7 @@ add_library(NFWorldNet_ServerPlugin STATIC
 	${NFWorldNet_ServerPlugin_ROOT_Cpp}
 	${NFWorldNet_ServerPlugin_ROOT_Hpp})
 	
-set_target_properties( NFWorldNet_ServerPlugin PROPERTIES OUTPUT_NAME_DEBUG "NFWorldNet_ServerPlugin_d")
+set_target_properties( NFWorldNet_ServerPlugin PROPERTIES OUTPUT_NAME_DEBUG "NFWorldNet_ServerPlugin")
 set_target_properties( NFWorldNet_ServerPlugin PROPERTIES PREFIX "")
 set_target_properties( NFWorldNet_ServerPlugin PROPERTIES 
 	FOLDER "NFServer/WorldServer"

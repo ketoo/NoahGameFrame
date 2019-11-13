@@ -1,3 +1,6 @@
+include_directories(
+	./)
+
 set(ProjectName "NFUIPlugin")
 
 file(GLOB NFUIPlugin_ROOT_Cpp
@@ -42,7 +45,7 @@ add_library(NFUIPlugin STATIC
 	${GLAD_ROOT_Cpp}
 	${GLAD_ROOT_Hpp})
 	
-set_target_properties( NFUIPlugin PROPERTIES OUTPUT_NAME_DEBUG "NFUIPlugin_d")
+set_target_properties( NFUIPlugin PROPERTIES OUTPUT_NAME_DEBUG "NFUIPlugin")
 set_target_properties( NFUIPlugin PROPERTIES PREFIX "")
 set_target_properties( NFUIPlugin PROPERTIES 
 	FOLDER "NFMidWare/NFUIPlugin"
@@ -51,6 +54,11 @@ set_target_properties( NFUIPlugin PROPERTIES
 	LIBRARY_OUTPUT_DIRECTORY ${NFOutPutDir} )
 link_NFSDK("NFUIPlugin")
 if(UNIX)
+	if (CMAKE_BUILD_TYPE MATCHES "Release")
+		target_link_libraries(NFUIPlugin libSDL2)
+	else()
+		target_link_libraries(NFUIPlugin libSDL2d)
+	endif()
 
 	target_link_libraries(NFUIPlugin -static-libstdc++)
 
@@ -60,9 +68,14 @@ if(UNIX)
 	)
 	
 else()
+	if (CMAKE_BUILD_TYPE MATCHES "Release")
+		target_link_libraries(NFUIPlugin libSDL2)
+	else()
+		target_link_libraries(NFUIPlugin libSDL2d)
+	endif()
 
 	target_link_libraries(NFUIPlugin -static-libstdc++)
-	
+
 	add_definitions(
 		-DWIN
 		-D_USRDLL

@@ -8,7 +8,7 @@ add_library(navigation STATIC
 		${navigation_ROOT_Hpp})
 
 add_definitions(-DNF_NONCLIENT_BUILD)
-set_target_properties( navigation PROPERTIES OUTPUT_NAME_DEBUG "navigation_d")
+set_target_properties( navigation PROPERTIES OUTPUT_NAME_DEBUG "navigation")
 
 if( WIN32 )
     set_target_properties( navigation PROPERTIES PREFIX "")

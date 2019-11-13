@@ -46,6 +46,7 @@ elif [ $sysOS == "Linux" ];then
 
 fi
 
+git submodule update --init --recursive
 
 rm -rf vcpkg
 
@@ -63,6 +64,7 @@ if [ $sysOS == "Darwin" ];then
     ./vcpkg install sdl2:x64-osx
     ./vcpkg install gtest:x64-osx
     ./vcpkg install imgui:x64-osx
+    ./vcpkg install hiredis:x64-osx
 
 elif [ $sysOS == "Linux" ];then
     ./vcpkg install libevent:x64-linux
@@ -71,6 +73,8 @@ elif [ $sysOS == "Linux" ];then
     ./vcpkg install sdl2:x64-linux
     ./vcpkg install gtest:x64-linux
     ./vcpkg install imgui:x64-linux
+    ./vcpkg install hiredis:x64-linux
+
 
 fi
 
@@ -91,3 +95,5 @@ elif [ $sysOS == "Linux" ];then
 fi
 
 cd ..
+
+./build_hiredis.sh

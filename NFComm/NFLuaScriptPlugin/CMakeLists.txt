@@ -27,7 +27,7 @@ else()
 
 endif()
 
-set_target_properties( NFLuaScriptPlugin PROPERTIES OUTPUT_NAME_DEBUG "NFLuaScriptPlugin_d")
+set_target_properties( NFLuaScriptPlugin PROPERTIES OUTPUT_NAME_DEBUG "NFLuaScriptPlugin")
 set_target_properties( NFLuaScriptPlugin PROPERTIES PREFIX "")
 set_target_properties( NFLuaScriptPlugin PROPERTIES
 	FOLDER "NFSDK"

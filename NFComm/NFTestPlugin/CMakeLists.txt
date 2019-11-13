@@ -9,7 +9,7 @@ add_library(NFTestPlugin STATIC
 	${NFTestPlugin_ROOT_Cpp}
 	${NFTestPlugin_ROOT_Hpp})
 	
-set_target_properties( NFTestPlugin PROPERTIES OUTPUT_NAME_DEBUG "NFTestPlugin_d")
+set_target_properties( NFTestPlugin PROPERTIES OUTPUT_NAME_DEBUG "NFTestPlugin")
 set_target_properties( NFTestPlugin PROPERTIES PREFIX "")
 set_target_properties( NFTestPlugin PROPERTIES 
 	FOLDER "NFMidWare/NFTestPlugin"

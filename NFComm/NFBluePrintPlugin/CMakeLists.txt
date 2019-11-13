@@ -9,7 +9,7 @@ add_library(NFBluePrintPlugin STATIC
 	${NFBluePrintPlugin_ROOT_Cpp}
 	${NFBluePrintPlugin_ROOT_Hpp})
 	
-set_target_properties( NFBluePrintPlugin PROPERTIES OUTPUT_NAME_DEBUG "NFBluePrintPlugin_d")
+set_target_properties( NFBluePrintPlugin PROPERTIES OUTPUT_NAME_DEBUG "NFBluePrintPlugin")
 set_target_properties( NFBluePrintPlugin PROPERTIES PREFIX "")
 set_target_properties( NFBluePrintPlugin PROPERTIES 
 	FOLDER "NFMidWare/NFBluePrintPlugin"
