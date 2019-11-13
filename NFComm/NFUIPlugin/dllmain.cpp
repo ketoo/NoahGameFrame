@@ -38,7 +38,7 @@
 #else
 
 #if NF_PLATFORM == NF_PLATFORM_WIN
-
+#pragma comment( lib, "opengl32.lib" )
 #pragma comment( lib, "SDL2.lib" )
 #elif NF_PLATFORM == NF_PLATFORM_LINUX || NF_PLATFORM == NF_PLATFORM_ANDROID
 

@@ -33,6 +33,7 @@
 #include "NFComm/NFPluginModule/NFPlatform.h"
 
 #if NF_PLATFORM == NF_PLATFORM_WIN
+#pragma comment( lib, "opengl32.lib" )
 #pragma comment( lib, "ws2_32.lib" )
 #pragma comment( lib, "version.lib" )
 //#pragma comment( lib, "SDL2maind.lib" )

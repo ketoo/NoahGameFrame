@@ -31,14 +31,23 @@
 #include "NFComm/NFPluginModule/NFIClassModule.h"
 #include "NFComm/NFPluginModule/NFIUIModule.h"
 
-#define IMGUI_IMPL_OPENGL_LOADER_GLAD
+#define IMGUI_IMPL_OPENGL_LOADER_GL3W
 #include "imgui/imgui.h"
 #include "imgui/imgui_impl_sdl.h"
 #include "imgui/imgui_impl_opengl3.h"
-#include "glad/glad.h"
-
 #include <stdio.h>
 #include <SDL.h>
+
+#if defined(IMGUI_IMPL_OPENGL_LOADER_GL3W)
+#include <GL/gl3w.h>    // Initialize with gl3wInit()
+#elif defined(IMGUI_IMPL_OPENGL_LOADER_GLEW)
+#include <GL/glew.h>    // Initialize with glewInit()
+#elif defined(IMGUI_IMPL_OPENGL_LOADER_GLAD)
+#include <glad/glad.h>  // Initialize with gladLoadGL()
+#else
+#include IMGUI_IMPL_OPENGL_LOADER_CUSTOM
+#endif
+
 
 class NFUIModule
     : public NFIUIModule
@@ -64,6 +73,7 @@ public:
 
 protected:
 	int SetupGUI();
+	void CloseGUI();
 
 private:
 
@@ -73,13 +83,11 @@ private:
 	ImVec4 clear_color = ImVec4(0.45f, 0.55f, 0.60f, 1.00f);
 	SDL_Window* window;
 	bool done = false;
+	bool running = false;
 	SDL_GLContext gl_context;
 
 private:
     std::list<NF_SHARE_PTR<NFIView>> mViewList;
 };
-
-
-
 
 #endif
