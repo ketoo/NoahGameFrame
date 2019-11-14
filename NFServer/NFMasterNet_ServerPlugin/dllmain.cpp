@@ -36,10 +36,7 @@
 #pragma comment( lib, "event_core.lib" )
 
 #elif NF_PLATFORM == NF_PLATFORM_LINUX || NF_PLATFORM == NF_PLATFORM_ANDROID
-////#pragma comment( lib, "RakNet_LibStatic_Debug_x64.a" )
-#pragma comment( lib, "NFNet.a" )
-#pragma comment( lib, "NFCore.a" )
-#pragma comment( lib, "NFMessageDefine.a" )
+
 #elif NF_PLATFORM == NF_PLATFORM_APPLE || NF_PLATFORM == NF_PLATFORM_APPLE_IOS
 #endif
 
@@ -54,9 +51,7 @@
 #pragma comment( lib, "event_core.lib" )
 
 #elif NF_PLATFORM == NF_PLATFORM_LINUX || NF_PLATFORM == NF_PLATFORM_ANDROID
-#pragma comment( lib, "NFNet.a" )
-#pragma comment( lib, "NFCore.a" )
-#pragma comment( lib, "NFMessageDefine.a" )
+
 #elif NF_PLATFORM == NF_PLATFORM_APPLE || NF_PLATFORM == NF_PLATFORM_APPLE_IOS
 #endif
 
