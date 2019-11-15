@@ -16,7 +16,7 @@ file(GLOB NFUIVIEW_ROOT_Hpp
 	./UI/*.h)
 
 file(GLOB GL_ROOT_Cpp
-	./GL/*.cpp)
+	./GL/*.c)
 	
 file(GLOB GL_ROOT_Hpp 
 	./GL/*.h)
