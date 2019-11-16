@@ -33,134 +33,236 @@ class NFIBluePrintModule
 {
 public:
 	NF_SMART_ENUM(MyEnum,
-		ONE=1,
+		ONE,
 		TWO,
 		THREE,
-		TEN=10,
+		TEN,
 		ELEVEN
 		)
-		/*
-	NF_SMART_ENUM(MonitorType,
+
+	NF_SMART_ENUM(NFMonitorType,
+		NONE,
 		NetworkEvent,
 		NetworkMsgEvent,
 		ObjectEvent,
 		PropertyEvent,
+		RecordEvent,
 		HeartBeatEvent,
 		SceneEvent,
 		ItemEvent,
 		SkillEvent,
 		BuffEvent
 	)
-*/
-	enum AccessorType
+
+	//PropertyEvent
+	NF_SMART_ENUM(NFMonitorPropertyEventType,
+		Update
+	)
+	
+	//RecordEvent
+	NF_SMART_ENUM(NFMonitorRecordEventType,
+		Add,
+		Remove,
+		Update
+	)
+
+	//2 args: string elementName, string propertyName
+	NF_SMART_ENUM(NFAccessorType,
+		NONE,
+		GetElementInt,
+		GetElementFloat,
+		GetElementString,
+		GetElementVector2,
+		GetElementVector3,
+		GetPropertyInt,
+		GetPropertyFloat,
+		GetPropertyString,
+		GetPropertyVector2,
+		GetPropertyVector3,
+		GetPropertyObject,
+		GetRecordInt,
+		GetRecordFloat,
+		GetRecordString,
+		GetRecordVector2,
+		GetRecordVector3,
+		GetRecordObject
+	)
+
+	//SetProperty 3 args: NFGUID objectID, string propertyName, int value
+	//SetRecord 5 args: NFGUID objectID, string recordName, int row, int col, int value
+	NF_SMART_ENUM(NFModifierType,
+		NONE,
+		SetPropertyInt,
+		SetPropertyFloat,
+		SetPropertyString,
+		SetPropertyVector2,
+		SetPropertyVector3,
+		SetPropertyObject,
+		SetRecordInt,
+		SetRecordFloat,
+		SetRecordString,
+		SetRecordVector2,
+		SetRecordVector3,
+		SetRecordObject
+	)
+
+	NF_SMART_ENUM(NFOperatorType,
+		NONE,
+		CreateObject,
+		DestroyObject,
+		MoveObject,
+		EnterScene,
+		LeaveScene,
+		EnterGroup,
+		LeaveGroup,
+		AddHeartBeat,
+		RemoveHeartBeat,
+		AttackObject,
+		UseSkill,
+		UseItem
+		)
+
+	NF_SMART_ENUM(NFJudgementType,
+		NONE,
+		Equal,
+		EnEqual,
+		MoreThen,
+		LessThan,
+		ExistElement,
+		ExistObject,
+	)
+
+	class BluePrintNodeBase
 	{
-		GetElementInt = 0,//2 args: string elementName, string propertyName
-		GetElementFloat = 1,//2 args: string elementName, string propertyName
-		GetElementString = 2,//2 args: string elementName, string propertyName
-		GetElementVector2 = 3,//2 args: string elementName, string propertyName
-		GetElementVector3 = 4,//2 args: string elementName, string propertyName
+	protected:
+		NFIPluginManager* pPluginManager;
 
-		GetPropertyInt = 10,//2 args: NFGUID objectID, string propertyName
-		GetPropertyFloat = 11,//2 args: NFGUID objectID, string propertyName
-		GetPropertyString = 12,//2 args: NFGUID objectID, string propertyName
-		GetPropertyVector2 = 13,//2 args: NFGUID objectID, string propertyName
-		GetPropertyVector3 = 14,//2 args: NFGUID objectID, string propertyName
-		GetPropertyObject = 15,//2 args: NFGUID objectID, string propertyName
-
-		GetRecordInt = 20,//4 args: NFGUID objectID, string recordName, int row, int col
-		GetRecordFloat = 21,//4 args: NFGUID objectID, string recordName, int row, int col
-		GetRecordString = 22,//4 args: NFGUID objectID, string recordName, int row, int col
-		GetRecordVector2 = 23,//4 args: NFGUID objectID, string recordName, int row, int col
-		GetRecordVector3 = 24,//4 args: NFGUID objectID, string recordName, int row, int col
-		GetRecordObject = 25//4 args: NFGUID objectID, string recordName, int row, int col
+	public:
+		NFGUID id;
+		std::string name;
+		std::string desc;
 	};
 
-	enum ModifierType
-	{
-		SetPropertyInt = 10,//3 args: NFGUID objectID, string propertyName, int value
-		SetPropertyFloat = 11,//3 args: NFGUID objectID, string propertyName, int value
-		SetPropertyString = 12,//3 args: NFGUID objectID, string propertyName, int value
-		SetPropertyVector2 = 13,//3 args: NFGUID objectID, string propertyName, int value
-		SetPropertyVector3 = 14,//3 args: NFGUID objectID, string propertyName, int value
-		SetPropertyObject = 15,//3 args: NFGUID objectID, string propertyName, int value
+	class NFExecuter : BluePrintNodeBase
+	{	
+	private:
+		NFExecuter(){}
+	public:
+		NFExecuter(NFIPluginManager* p)
+		{
+			this->pPluginManager = p;
+		}
 
-		SetRecordInt = 20,//5 args: NFGUID objectID, string recordName, int row, int col, int value
-		SetRecordFloat = 21,//5 args: NFGUID objectID, string recordName, int row, int col, int value
-		SetRecordString = 22,//5 args: NFGUID objectID, string recordName, int row, int col, int value
-		SetRecordVector2 = 23,//5 args: NFGUID objectID, string recordName, int row, int col, int value
-		SetRecordVector3 = 24,//5 args: NFGUID objectID, string recordName, int row, int col, int value
-		SetRecordObject = 25//5 args: NFGUID objectID, string recordName, int row, int col, int value
+		//modifier
+
+		NFModifierType modifierType = NFModifierType::NONE;
+		NFOperatorType operatorType = NFOperatorType::NONE;
+
+		//if this executer has next executer, then do next executer first
+		NF_SHARE_PTR<NFExecuter> nextExecuter;
+
+		std::map<NFJudgementType, NF_SHARE_PTR<NFExecuter>> judgements;
 	};
 
-	enum OperatorType
-	{
-		CreateObject = 0,
-		DestroyObject = 1,
-		MoveObject = 2,
+	class NFJudgement : BluePrintNodeBase
+	{	
+	private:
+		NFJudgement(){}
 
-		EnterScene = 10,
-		LeaveScene = 11,
-		EnterGroup = 12,
-		LeaveGroup = 13,
+		NF_SHARE_PTR<NFMonitor> monitor;
+	
+	public:
+		NFJudgement(NFIPluginManager* p, NF_SHARE_PTR<NFMonitor> monitor)
+		{
+			this->pPluginManager = p;
+			this->monitor = monitor;
+		}
 
-		AddHeartBeat = 20,
-		RemoveHeartBeat = 21,
+		std::string arg;
 
-		AttackObject = 30,
-		UseSkill = 31,
-		UseItem = 32
+		NFJudgementType judgementType = NFJudgementType::NONE;
+		//if this judgment has next judgment, then do next judgment first
+		NF_SHARE_PTR<NFJudgement> nextJudgement;
+		std::map<NFJudgementType, NF_SHARE_PTR<NFExecuter>> judgements;
 	};
 
-	enum JudgementType
-	{
-		Equal = 0,
-		EnEqual = 1,
+	class NFMonitor : BluePrintNodeBase
+	{	
+	private:
+		NFMonitor(){}
+	public:
+		NFMonitor(NFIPluginManager* p)
+		{
+			this->pPluginManager = p;
+		}
 
-		MoreThen = 10,
-		LessThan = 11,
+		NF_SHARE_PTR<NFJudgement> AddJudgment(NFJudgementType judgementType, const std::string& name, const std::string& desc, onst NFDataList& arg)
+		{
+			
 
-		ExistElement = 20,
-		ExistObject = 21,
+			return nullptr;;
+		}
+public:
+		NFDataList arg;
+		NFMonitorType operatorType = NFMonitorType::NONE;
+		std::list<NF_SHARE_PTR<NFJudgement>> judgements;
 	};
 
 	//1 logic block must has at least 1 monitor, at least 1 judgement and at least 1 executer
 	//normally 1 judgement has 1 executer or more with different conditions
-
 	//blueprint block
-	class LogicBlock
+	class NFLogicBlock : BluePrintNodeBase
 	{
-		/*
-		Monitor,
-		Judgement,
-		Executer
-		*/
+	private:
+		NFLogicBlock(){}
 
-	};
-
-	class Executer
-	{
 	public:
+		NFLogicBlock(NFIPluginManager* p)
+		{
+			this->pPluginManager = p;
+		}
 
-		//modifier
+		NF_SHARE_PTR<NFMonitor> AddMonitor(NFMonitorType operatorType, const std::string& name, const std::string& desc, const NFDataList& arg)
+		{
+			NF_SHARE_PTR<NFMonitor> monitor = nullptr;
+
+			//根据不同的monitor type，参数会不一样
+			//必须先选择了monitor type，才知道需要什么参数
+			switch(operatorType)
+			{
+				case NFMonitorType::NONE:
+				break;
+				case NFMonitorType::PropertyEvent:
+				{
+					//arg: property_name
+					if (arg.GetCount() == 1)
+					{
+						monitor = NF_SHARE_PTR<NFMonitor>(NF_NEW NFMonitor(this->pPluginManager));
+						monitor->id = this->pPluginManager->FindModule<NFIKernelModule>()->CreateGUID();
+						monitor->name = name;
+						monitor->desc = desc;
+						monitor->operatorType = operatorType;
+					}
+				}
+				break;
+
+			default:
+				break;
+			}
+
+			if (monitor)
+			{
+				monitors.push_back(monitor);
+			}
+
+			return monitor;
+		}
+
+public:
+		std::list<NF_SHARE_PTR<NFMonitor>> monitors;
 	};
 
-	class Judgement
-	{
-	public:
-
-		std::list<Executer> judgements;
-	};
-
-	class Monitor
-	{
-	public:
-
-		std::list<Judgement> judgements;
-	};
-
-	
-
-	
+	////////////////////
 };
 
 #endif
