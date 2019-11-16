@@ -60,6 +60,37 @@ if(UNIX)
 		target_link_libraries(NFUIPlugin libSDL2d.a)
 	endif()
 
+if (APPLE)
+	find_library(carbon_lib Carbon)
+	find_library(iokit_lib IOKit)
+	find_library(forcefeedback_lib ForceFeedback)
+	find_library(cocoa_lib Cocoa)
+	find_library(audiounit_lib AudioUnit)
+	find_library(corevideo_lib CoreVideo)
+	find_library(coreaudio_lib CoreAudio)
+	find_library(opengl_lib OpenGL)
+	find_library(audioToolbox_lib AudioToolbox)
+	find_library(iconv_lib Iconv)
+	find_library(corefoundation_lib CoreFoundation)
+
+	set(frameworks
+    ${carbon_lib}
+    ${iokit_lib}
+    ${forcefeedback_lib}
+    ${cocoa_lib}
+    ${audiounit_lib}
+    ${coreaudio_lib}
+    ${corevideo_lib}
+    ${opengl_lib}
+    ${audioToolbox_lib}
+    ${iconv_lib}
+    ${corefoundation_lib})
+
+
+	target_link_libraries(NFUIPlugin ${frameworks})
+
+endif()
+
 	target_link_libraries(NFUIPlugin -static-libstdc++)
 
 	add_definitions(

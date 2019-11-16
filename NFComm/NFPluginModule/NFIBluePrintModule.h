@@ -32,12 +32,15 @@ class NFIBluePrintModule
     : public NFIModule
 {
 public:
-	NF_SMART_ENUM(
-		MyEnum, ONE=1, TWO, THREE, TEN=10, ELEVEN
+	NF_SMART_ENUM(MyEnum,
+		ONE=1,
+		TWO,
+		THREE,
+		TEN=10,
+		ELEVEN
 		)
-		
-	enum MonitorType
-	{
+		/*
+	NF_SMART_ENUM(MonitorType,
 		NetworkEvent,
 		NetworkMsgEvent,
 		ObjectEvent,
@@ -46,9 +49,9 @@ public:
 		SceneEvent,
 		ItemEvent,
 		SkillEvent,
-		BuffEvent,
-	};
-
+		BuffEvent
+	)
+*/
 	enum AccessorType
 	{
 		GetElementInt = 0,//2 args: string elementName, string propertyName

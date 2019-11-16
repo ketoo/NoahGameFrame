@@ -80,7 +80,6 @@ if (UNIX)
 	#	target_link_libraries(NFPluginLoader libSDL2d.a)
 	#endif()
 
-	target_link_libraries(NFPluginLoader )
 	target_link_libraries(NFPluginLoader -static-libstdc++)
 
 else()
