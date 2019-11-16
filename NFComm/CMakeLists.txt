@@ -15,4 +15,4 @@ add_subdirectory(NFLuaScriptPlugin)
 if (APPLE)
     add_subdirectory(NFUIPlugin)
     add_subdirectory(NFBluePrintPlugin)
-endif
+endif()
