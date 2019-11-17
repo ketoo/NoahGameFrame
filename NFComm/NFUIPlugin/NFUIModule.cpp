@@ -82,9 +82,15 @@ bool NFUIModule::ReadyExecute()
 
 bool NFUIModule::Execute()
 {
-	ImGuiIO& io = ImGui::GetIO();
-	if(!done)
+	if (!done)
 	{
+		ImGuiIO& io = ImGui::GetIO();
+
+		// Poll and handle events (inputs, window resize, etc.)
+	   // You can read the io.WantCaptureMouse, io.WantCaptureKeyboard flags to tell if dear imgui wants to use your inputs.
+	   // - When io.WantCaptureMouse is true, do not dispatch mouse input data to your main application.
+	   // - When io.WantCaptureKeyboard is true, do not dispatch keyboard input data to your main application.
+	   // Generally you may always pass all inputs to dear imgui, and hide them from your application based on those two flags.
 		SDL_Event event;
 		while (SDL_PollEvent(&event))
 		{
@@ -137,13 +143,6 @@ bool NFUIModule::Execute()
 			ImGui::End();
 		}
 
-
-		for (NF_SHARE_PTR<NFIView> item : mViewList)
-		{
-			item->Execute();
-		}
-
-
 		// Rendering
 		ImGui::Render();
 		glViewport(0, 0, (int)io.DisplaySize.x, (int)io.DisplaySize.y);
@@ -154,7 +153,7 @@ bool NFUIModule::Execute()
 	}
 	else
 	{
-		//Shut();
+		CloseGUI();
 	}
 
 	return true;
@@ -162,13 +161,6 @@ bool NFUIModule::Execute()
 
 bool NFUIModule::BeforeShut()
 {
-	ImGui_ImplOpenGL3_Shutdown();
-	ImGui_ImplSDL2_Shutdown();
-	ImGui::DestroyContext();
-
-	SDL_GL_DeleteContext(gl_context);
-	SDL_DestroyWindow(window);
-	SDL_Quit();
 
 
 	return true;
@@ -196,9 +188,10 @@ bool NFUIModule::OnReloadPlugin()
 
 int NFUIModule::SetupGUI()
 {
+	running = true;
 	// Setup SDL
-	 // (Some versions of SDL before <2.0.10 appears to have performance/stalling issues on a minority of Windows systems,
-	 // depending on whether SDL_INIT_GAMECONTROLLER is enabled or disabled.. updating to latest version of SDL is recommended!)
+	// (Some versions of SDL before <2.0.10 appears to have performance/stalling issues on a minority of Windows systems,
+	// depending on whether SDL_INIT_GAMECONTROLLER is enabled or disabled.. updating to latest version of SDL is recommended!)
 	if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_TIMER | SDL_INIT_GAMECONTROLLER) != 0)
 	{
 		printf("Error: %s\n", SDL_GetError());
@@ -227,9 +220,7 @@ int NFUIModule::SetupGUI()
 	SDL_GL_SetAttribute(SDL_GL_DEPTH_SIZE, 24);
 	SDL_GL_SetAttribute(SDL_GL_STENCIL_SIZE, 8);
 	SDL_WindowFlags window_flags = (SDL_WindowFlags)(SDL_WINDOW_OPENGL | SDL_WINDOW_RESIZABLE | SDL_WINDOW_ALLOW_HIGHDPI);
-	//SDL_Window* window = SDL_CreateWindow("Dear ImGui SDL2+OpenGL3 example", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 1280, 720, window_flags);
 	window = SDL_CreateWindow("Dear ImGui SDL2+OpenGL3 example", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 1280, 720, window_flags);
-	//SDL_GLContext gl_context = SDL_GL_CreateContext(window);
 	gl_context = SDL_GL_CreateContext(window);
 	SDL_GL_MakeCurrent(window, gl_context);
 	SDL_GL_SetSwapInterval(1); // Enable vsync
@@ -265,6 +256,7 @@ int NFUIModule::SetupGUI()
 	ImGui_ImplSDL2_InitForOpenGL(window, gl_context);
 	ImGui_ImplOpenGL3_Init(glsl_version);
 
+
 	// Load Fonts
 	// - If no fonts are loaded, dear imgui will use the default font. You can also load multiple fonts and use ImGui::PushFont()/PopFont() to select them.
 	// - AddFontFromFileTTF() will return the ImFont* so you can store it if you need to select the font among multiple.
@@ -281,5 +273,21 @@ int NFUIModule::SetupGUI()
 	//IM_ASSERT(font != NULL);
 
 	return 0;
+}
+
+void NFUIModule::CloseGUI()
+{
+	if (running)
+	{
+		running = false;
+		// Cleanup
+		ImGui_ImplOpenGL3_Shutdown();
+		ImGui_ImplSDL2_Shutdown();
+		ImGui::DestroyContext();
+
+		SDL_GL_DeleteContext(gl_context);
+		SDL_DestroyWindow(window);
+		SDL_Quit();
+	}
 }
 

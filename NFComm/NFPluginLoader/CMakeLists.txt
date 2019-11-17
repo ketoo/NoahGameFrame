@@ -8,6 +8,7 @@ add_executable(NFPluginLoader ${NFPluginLoader_ROOT_Cpp} ${NFPluginLoader_ROOT_H
 
 
 target_link_libraries(NFPluginLoader NFCore)
+target_link_libraries(NFPluginLoader NFMessageDefine)
 target_link_libraries(NFPluginLoader NFActorPlugin)
 target_link_libraries(NFPluginLoader NFConfigPlugin)
 target_link_libraries(NFPluginLoader NFKernelPlugin)
@@ -70,40 +71,20 @@ target_link_libraries(NFPluginLoader NFWorldNet_ServerPlugin)
 #target_link_libraries(NFPluginLoader Tutorial7)
 
 
-if (APPLE)
+if (UNIX)
 	add_dependencies(NFPluginLoader NFCore)
 
-	if (CMAKE_BUILD_TYPE MATCHES "Release")
-		target_link_libraries(NFPluginLoader libSDL2)
-	else()
-		target_link_libraries(NFPluginLoader libSDL2d.a)
-	endif()
+	#if (CMAKE_BUILD_TYPE MATCHES "Release")
+	#	target_link_libraries(NFPluginLoader libSDL2.a)
+	#else()
+	#	target_link_libraries(NFPluginLoader libSDL2d.a)
+	#endif()
 
-	target_link_libraries(NFPluginLoader )
 	target_link_libraries(NFPluginLoader -static-libstdc++)
 
 else()
-	if (CMAKE_BUILD_TYPE MATCHES "Release")
-		target_link_libraries(NFPluginLoader libSDL2)
-	else()
-		target_link_libraries(NFPluginLoader libSDL2d.a)
-	endif()
 
-	target_link_libraries(NFPluginLoader )
-	
-	target_link_libraries(NFPluginLoader -static-libstdc++)
 endif()
-
-target_link_libraries(NFPluginLoader ${CMAKE_DL_LIBS})
-target_link_libraries(NFPluginLoader pthread)
-
-if( CMAKE_BUILD_TYPE STREQUAL "Debug" )
-	set(DependenciesLibPath ../Dependencies/lib ../_Out/Debug/ ../Dependencies/lib/Debug)
-else()
-	set(DependenciesLibPath ../Dependencies/lib ../_Out/Release/ ../Dependencies/lib/Release)
-endif()
-
-link_directories(${DependenciesLibPath})
 
 set_target_properties( NFPluginLoader PROPERTIES OUTPUT_NAME_DEBUG "NFPluginLoader")
 set_target_properties( NFPluginLoader PROPERTIES

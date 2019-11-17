@@ -34,9 +34,7 @@
 #pragma comment( lib, "libprotobufd.lib" )
 
 #elif NF_PLATFORM == NF_PLATFORM_LINUX || NF_PLATFORM == NF_PLATFORM_ANDROID
-#pragma comment( lib, "NFNet.a" )
-#pragma comment( lib, "NFCore.a" )
-#pragma comment( lib, "NFMessageDefine.a" )
+
 #elif NF_PLATFORM == NF_PLATFORM_APPLE || NF_PLATFORM == NF_PLATFORM_APPLE_IOS
 #endif
 
@@ -49,8 +47,7 @@
 #pragma comment( lib, "libprotobuf.lib" )
 
 #elif NF_PLATFORM == NF_PLATFORM_LINUX || NF_PLATFORM == NF_PLATFORM_ANDROID
-#pragma comment( lib, "NFCore.a" )
-#pragma comment( lib, "NFMessageDefine.a" )
+
 #elif NF_PLATFORM == NF_PLATFORM_APPLE || NF_PLATFORM == NF_PLATFORM_APPLE_IOS
 #endif
 

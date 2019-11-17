@@ -32,44 +32,237 @@ class NFIBluePrintModule
     : public NFIModule
 {
 public:
+	NF_SMART_ENUM(MyEnum,
+		ONE,
+		TWO,
+		THREE,
+		TEN,
+		ELEVEN
+		)
 
-	//1 logic block must has at least 1 monitor, at least 1 judgement and at least 1 executer
-	//normally 1 judgement has 1 executer
-	enum LogicBlock
-	{
-		Monitor,
-		Judgement,
-		Executer
-	};
-
-	enum CommonInterfaces//access to NFrame for executer and judgement
-	{
-		//property
-		//record
-	};
-
-	enum MonitorType
-	{
+	NF_SMART_ENUM(NFMonitorType,
+		NONE,
 		NetworkEvent,
 		NetworkMsgEvent,
 		ObjectEvent,
 		PropertyEvent,
+		RecordEvent,
 		HeartBeatEvent,
 		SceneEvent,
 		ItemEvent,
 		SkillEvent,
-		BuffEvent,
-	};
+		BuffEvent
+	)
 
-	enum JudgementType
+	//PropertyEvent
+	NF_SMART_ENUM(NFMonitorPropertyEventType,
+		Update
+	)
+	
+	//RecordEvent
+	NF_SMART_ENUM(NFMonitorRecordEventType,
+		Add,
+		Remove,
+		Update
+	)
+
+	//2 args: string elementName, string propertyName
+	NF_SMART_ENUM(NFAccessorType,
+		NONE,
+		GetElementInt,
+		GetElementFloat,
+		GetElementString,
+		GetElementVector2,
+		GetElementVector3,
+		GetPropertyInt,
+		GetPropertyFloat,
+		GetPropertyString,
+		GetPropertyVector2,
+		GetPropertyVector3,
+		GetPropertyObject,
+		GetRecordInt,
+		GetRecordFloat,
+		GetRecordString,
+		GetRecordVector2,
+		GetRecordVector3,
+		GetRecordObject
+	)
+
+	//SetProperty 3 args: NFGUID objectID, string propertyName, int value
+	//SetRecord 5 args: NFGUID objectID, string recordName, int row, int col, int value
+	NF_SMART_ENUM(NFModifierType,
+		NONE,
+		SetPropertyInt,
+		SetPropertyFloat,
+		SetPropertyString,
+		SetPropertyVector2,
+		SetPropertyVector3,
+		SetPropertyObject,
+		SetRecordInt,
+		SetRecordFloat,
+		SetRecordString,
+		SetRecordVector2,
+		SetRecordVector3,
+		SetRecordObject
+	)
+
+	NF_SMART_ENUM(NFOperatorType,
+		NONE,
+		CreateObject,
+		DestroyObject,
+		MoveObject,
+		EnterScene,
+		LeaveScene,
+		EnterGroup,
+		LeaveGroup,
+		AddHeartBeat,
+		RemoveHeartBeat,
+		AttackObject,
+		UseSkill,
+		UseItem
+		)
+
+	NF_SMART_ENUM(NFJudgementType,
+		NONE,
+		Equal,
+		EnEqual,
+		MoreThen,
+		LessThan,
+		ExistElement,
+		ExistObject,
+	)
+
+	class BluePrintNodeBase
 	{
+	protected:
+		NFIPluginManager* pPluginManager;
 
+	public:
+		NFGUID id;
+		std::string name;
+		std::string desc;
 	};
 
-	enum ExecuterType
+	class NFExecuter : BluePrintNodeBase
+	{	
+	private:
+		NFExecuter(){}
+	public:
+		NFExecuter(NFIPluginManager* p)
+		{
+			this->pPluginManager = p;
+		}
+
+		//modifier
+
+		NFModifierType modifierType = NFModifierType::NONE;
+		NFOperatorType operatorType = NFOperatorType::NONE;
+
+		//if this executer has next executer, then do next executer first
+		NF_SHARE_PTR<NFExecuter> nextExecuter;
+
+		std::map<NFJudgementType, NF_SHARE_PTR<NFExecuter>> judgements;
+	};
+
+	class NFJudgement : BluePrintNodeBase
+	{	
+	private:
+		NFJudgement(){}
+
+		NF_SHARE_PTR<NFMonitor> monitor;
+	
+	public:
+		NFJudgement(NFIPluginManager* p, NF_SHARE_PTR<NFMonitor> monitor)
+		{
+			this->pPluginManager = p;
+			this->monitor = monitor;
+		}
+
+		std::string arg;
+
+		NFJudgementType judgementType = NFJudgementType::NONE;
+		//if this judgment has next judgment, then do next judgment first
+		NF_SHARE_PTR<NFJudgement> nextJudgement;
+		std::map<NFJudgementType, NF_SHARE_PTR<NFExecuter>> judgements;
+	};
+
+	class NFMonitor : BluePrintNodeBase
+	{	
+	private:
+		NFMonitor(){}
+	public:
+		NFMonitor(NFIPluginManager* p)
+		{
+			this->pPluginManager = p;
+		}
+
+		NF_SHARE_PTR<NFJudgement> AddJudgment(NFJudgementType judgementType, const std::string& name, const std::string& desc, onst NFDataList& arg)
+		{
+			
+
+			return nullptr;;
+		}
+public:
+		NFDataList arg;
+		NFMonitorType operatorType = NFMonitorType::NONE;
+		std::list<NF_SHARE_PTR<NFJudgement>> judgements;
+	};
+
+	//1 logic block must has at least 1 monitor, at least 1 judgement and at least 1 executer
+	//normally 1 judgement has 1 executer or more with different conditions
+	//blueprint block
+	class NFLogicBlock : BluePrintNodeBase
 	{
+	private:
+		NFLogicBlock(){}
 
+	public:
+		NFLogicBlock(NFIPluginManager* p)
+		{
+			this->pPluginManager = p;
+		}
+
+		NF_SHARE_PTR<NFMonitor> AddMonitor(NFMonitorType operatorType, const std::string& name, const std::string& desc, const NFDataList& arg)
+		{
+			NF_SHARE_PTR<NFMonitor> monitor = nullptr;
+
+			//根据不同的monitor type，参数会不一样
+			//必须先选择了monitor type，才知道需要什么参数
+			switch(operatorType)
+			{
+				case NFMonitorType::NONE:
+				break;
+				case NFMonitorType::PropertyEvent:
+				{
+					//arg: property_name
+					if (arg.GetCount() == 1)
+					{
+						monitor = NF_SHARE_PTR<NFMonitor>(NF_NEW NFMonitor(this->pPluginManager));
+						monitor->id = this->pPluginManager->FindModule<NFIKernelModule>()->CreateGUID();
+						monitor->name = name;
+						monitor->desc = desc;
+						monitor->operatorType = operatorType;
+					}
+				}
+				break;
+
+			default:
+				break;
+			}
+
+			if (monitor)
+			{
+				monitors.push_back(monitor);
+			}
+
+			return monitor;
+		}
+
+public:
+		std::list<NF_SHARE_PTR<NFMonitor>> monitors;
 	};
+
+	////////////////////
 };
 
 #endif

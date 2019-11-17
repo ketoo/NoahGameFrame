@@ -65,6 +65,7 @@ if [ $sysOS == "Darwin" ];then
     ./vcpkg install gtest:x64-osx
     ./vcpkg install imgui:x64-osx
     ./vcpkg install hiredis:x64-osx
+    ./vcpkg install opengl:x64-osx
 
 elif [ $sysOS == "Linux" ];then
     ./vcpkg install libevent:x64-linux

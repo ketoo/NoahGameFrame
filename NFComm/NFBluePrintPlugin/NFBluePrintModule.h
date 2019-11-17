@@ -38,6 +38,19 @@ public:
     NFBluePrintModule( NFIPluginManager* p )
     {
         pPluginManager = p;
+
+        MyEnum foo = MyEnum::TWO;
+        std::cout << MyEnum::toString(foo);  // static method
+        std::cout << foo.toString();         // member method
+        std::cout << MyEnum::toString(MyEnum::TWO);
+        std::cout << MyEnum::toString(10);
+        MyEnum foo1 = MyEnum::fromString("TWO");
+
+        // C++11 iteration over all values
+        for( auto x : MyEnum::allValues() )
+        {
+            std::cout << x.toString() << std::endl;
+        }
     }
 
     virtual ~NFBluePrintModule() {};
@@ -53,8 +66,14 @@ public:
     virtual bool Finalize();
     virtual bool OnReloadPlugin();
 
+    NF_SHARE_PTR<NFLogicBlock> CreateLogicBlock()
+    {
+        return nullptr;
+    }
 
 private:
+
+    std::list<NFLogicBlock> mLogicBlocks;
 };
 
 
