@@ -24,8 +24,22 @@
 */
 
 #include "NFGameView.h"
+#include "NFUIModule.h"
 
 NFGameView::NFGameView(NFIPluginManager* p, NFViewType vt) : NFIView(p, vt)
 {
 
+}
+
+bool NFGameView::Execute()
+{
+	//1. the project root folder is NFDataCfg
+   if (show)
+   {
+	   ImGui::Begin(GET_CLASS_NAME(NFGameView), &show);
+
+
+      ImGui::End();
+   }
+	return false;
 }

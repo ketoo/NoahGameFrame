@@ -31,6 +31,7 @@ class NFHierachyView : public NFIView
 {
 public:
 	NFHierachyView(NFIPluginManager* p, NFViewType vt);
+	virtual bool Execute();
 };
 
 #endif

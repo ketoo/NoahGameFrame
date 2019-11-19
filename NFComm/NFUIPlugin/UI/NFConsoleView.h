@@ -32,6 +32,7 @@ class NFConsoleView : public NFIView
 {
 public:
 	NFConsoleView(NFIPluginManager* p, NFViewType vt);
+	virtual bool Execute();
 
 private:
 	NFILogModule* m_pLogModule;

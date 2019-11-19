@@ -24,6 +24,7 @@
 */
 
 #include "NFGodView.h"
+#include "NFUIModule.h"
 
 NFGodView::NFGodView(NFIPluginManager* p, NFViewType vt) : NFIView(p, vt)
 {
@@ -38,5 +39,14 @@ bool NFGodView::Execute()
 	//4. draw object by imgui
 	//5. show the props and records if the user picked an object
 	//6. use can try to change the value of props to trigger the logic block unit to have a test
+
+
+   if (show)
+   {
+	   ImGui::Begin(GET_CLASS_NAME(NFGodView), &show);
+
+
+      ImGui::End();
+   }
 	return true;
 }

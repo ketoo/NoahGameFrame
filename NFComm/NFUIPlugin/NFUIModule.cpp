@@ -142,6 +142,11 @@ bool NFUIModule::Execute()
 				show_another_window = false;
 			ImGui::End();
 		}
+		
+		for (auto view : mViewList)
+		{
+			view->Execute();
+		}
 
 		// Rendering
 		ImGui::Render();
