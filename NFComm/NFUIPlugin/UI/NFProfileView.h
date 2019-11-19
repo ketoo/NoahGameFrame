@@ -31,6 +31,8 @@ class NFProfileView : public NFIView
 {
 public:
 	NFProfileView(NFIPluginManager* p, NFViewType vt);
+   
+	virtual bool Execute();
 };
 
 #endif

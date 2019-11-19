@@ -24,8 +24,22 @@
 */
 
 #include "NFBluePrintView.h"
+#include "NFUIModule.h"
 
 NFBluePrintView::NFBluePrintView(NFIPluginManager* p, NFViewType vt) : NFIView(p, vt)
 {
 
+}
+
+bool NFBluePrintView::Execute()
+{
+	//1. the project root folder is NFDataCfg
+	if (show)
+   {
+	   ImGui::Begin(GET_CLASS_NAME(NFBluePrintView), &show);
+
+
+      ImGui::End();
+   }
+	return false;
 }

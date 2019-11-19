@@ -51,7 +51,7 @@ public:
 		this->viewType = vt;
 		pPluginManager = p;
 	}
-
+    bool show = true;
 	NFViewType viewType;
 };
 

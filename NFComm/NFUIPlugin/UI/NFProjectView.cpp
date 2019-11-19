@@ -24,6 +24,7 @@
 */
 
 #include "NFProjectView.h"
+#include "NFUIModule.h"
 
 NFProjectView::NFProjectView(NFIPluginManager* p, NFViewType vt) : NFIView(p, vt)
 {
@@ -33,7 +34,12 @@ NFProjectView::NFProjectView(NFIPluginManager* p, NFViewType vt) : NFIView(p, vt
 bool NFProjectView::Execute()
 {
 	//1. the project root folder is NFDataCfg
+   if (show)
+   {
+	   ImGui::Begin(GET_CLASS_NAME(NFProjectView), &show);
 
 
+      ImGui::End();
+   }
 	return false;
 }
