@@ -34,9 +34,9 @@ NFGameView::NFGameView(NFIPluginManager* p, NFViewType vt) : NFIView(p, vt)
 bool NFGameView::Execute()
 {
 	//1. the project root folder is NFDataCfg
-   if (show)
+   if (visible)
    {
-	   ImGui::Begin(GET_CLASS_NAME(NFGameView), &show);
+	   ImGui::Begin(GET_CLASS_NAME(NFGameView), &visible);
 
 
       ImGui::End();

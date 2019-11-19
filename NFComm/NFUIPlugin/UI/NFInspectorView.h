@@ -22,24 +22,17 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 */
+#ifndef NF_INSPECTOR_VIEW_H
+#define NF_INSPECTOR_VIEW_H
 
-#include "NFProfileView.h"
-#include "NFUIModule.h"
+#include "NFComm/NFPluginModule/NFIUIModule.h"
 
-NFProfileView::NFProfileView(NFIPluginManager* p, NFViewType vt) : NFIView(p, vt)
+class NFInspectorView : public NFIView
 {
+public:
+	NFInspectorView(NFIPluginManager* p, NFViewType vt);
+   
+	virtual bool Execute();
+};
 
-}
-
-bool NFProfileView::Execute()
-{
-	//1. the project root folder is NFDataCfg
-   if (visible)
-   {
-	   ImGui::Begin(GET_CLASS_NAME(NFProfileView), &visible);
-
-
-      ImGui::End();
-   }
-	return false;
-}
+#endif

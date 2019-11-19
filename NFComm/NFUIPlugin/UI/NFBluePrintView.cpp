@@ -34,9 +34,9 @@ NFBluePrintView::NFBluePrintView(NFIPluginManager* p, NFViewType vt) : NFIView(p
 bool NFBluePrintView::Execute()
 {
 	//1. the project root folder is NFDataCfg
-	if (show)
+	if (visible)
    {
-	   ImGui::Begin(GET_CLASS_NAME(NFBluePrintView), &show);
+	   ImGui::Begin(GET_CLASS_NAME(NFBluePrintView), &visible);
 
 
       ImGui::End();

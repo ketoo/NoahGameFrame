@@ -34,9 +34,9 @@ NFConsoleView::NFConsoleView(NFIPluginManager* p, NFViewType vt) : NFIView(p, vt
 bool NFConsoleView::Execute()
 {
 	//1. the project root folder is NFDataCfg
-	if (show)
+	if (visible)
    {
-	   ImGui::Begin(GET_CLASS_NAME(NFConsoleView), &show);
+	   ImGui::Begin(GET_CLASS_NAME(NFConsoleView), &visible);
 
 
       ImGui::End();

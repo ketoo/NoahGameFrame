@@ -35,6 +35,8 @@ class NFIView : public NFIModule
 public:
 	enum NFViewType
 	{
+		OperatorView,
+		ContainerView,
 		GodView,
 		SceneView,
 		HierachyView,
@@ -51,7 +53,9 @@ public:
 		this->viewType = vt;
 		pPluginManager = p;
 	}
-    bool show = true;
+
+
+    bool visible = true;
 	NFViewType viewType;
 };
 

@@ -41,9 +41,9 @@ bool NFGodView::Execute()
 	//6. use can try to change the value of props to trigger the logic block unit to have a test
 
 
-   if (show)
+   if (visible)
    {
-	   ImGui::Begin(GET_CLASS_NAME(NFGodView), &show);
+	   ImGui::Begin(GET_CLASS_NAME(NFGodView), &visible);
 
 
       ImGui::End();

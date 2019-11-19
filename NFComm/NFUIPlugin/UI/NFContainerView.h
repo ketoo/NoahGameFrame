@@ -23,23 +23,17 @@
    limitations under the License.
 */
 
-#include "NFProfileView.h"
-#include "NFUIModule.h"
+#ifndef NF_CONTAINER_VIEW_H
+#define NF_CONTAINER_VIEW_H
 
-NFProfileView::NFProfileView(NFIPluginManager* p, NFViewType vt) : NFIView(p, vt)
+#include "NFComm/NFPluginModule/NFIUIModule.h"
+
+class NFContainerView : public NFIView
 {
+public:
+	NFContainerView(NFIPluginManager* p, NFViewType vt);
 
-}
+	virtual bool Execute();
+};
 
-bool NFProfileView::Execute()
-{
-	//1. the project root folder is NFDataCfg
-   if (visible)
-   {
-	   ImGui::Begin(GET_CLASS_NAME(NFProfileView), &visible);
-
-
-      ImGui::End();
-   }
-	return false;
-}
+#endif

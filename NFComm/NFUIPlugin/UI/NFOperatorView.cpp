@@ -23,20 +23,21 @@
    limitations under the License.
 */
 
-#include "NFProfileView.h"
+#include "NFOperatorView.h"
 #include "NFUIModule.h"
 
-NFProfileView::NFProfileView(NFIPluginManager* p, NFViewType vt) : NFIView(p, vt)
+NFOperatorView::NFOperatorView(NFIPluginManager* p, NFViewType vt) : NFIView(p, vt)
 {
-
+	m_pLogModule = pPluginManager->FindModule<NFILogModule>();
 }
 
-bool NFProfileView::Execute()
+bool NFOperatorView::Execute()
 {
 	//1. the project root folder is NFDataCfg
-   if (visible)
+	if (visible)
    {
-	   ImGui::Begin(GET_CLASS_NAME(NFProfileView), &visible);
+      ImGuiTabBarFlags tab_bar_flags = ImGuiTabBarFlags_None;
+	   ImGui::Begin(GET_CLASS_NAME(NFOperatorView), &visible, tab_bar_flags);
 
 
       ImGui::End();
