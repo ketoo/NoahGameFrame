@@ -26,7 +26,7 @@
 #include "NFSceneView.h"
 #include "NFUIModule.h"
 
-NFSceneView::NFSceneView(NFIPluginManager* p, NFViewType vt) : NFIView(p, vt)
+NFSceneView::NFSceneView(NFIPluginManager* p, NFViewType vt) : NFIView(p, vt, GET_CLASS_NAME(NFSceneView))
 {
 
 }

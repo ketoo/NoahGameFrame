@@ -26,7 +26,7 @@
 #include "NFProjectView.h"
 #include "NFUIModule.h"
 
-NFProjectView::NFProjectView(NFIPluginManager* p, NFViewType vt) : NFIView(p, vt)
+NFProjectView::NFProjectView(NFIPluginManager* p, NFViewType vt) : NFIView(p, vt, GET_CLASS_NAME(NFProjectView))
 {
 
 }

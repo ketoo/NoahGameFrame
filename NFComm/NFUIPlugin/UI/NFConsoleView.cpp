@@ -26,7 +26,7 @@
 #include "NFConsoleView.h"
 #include "NFUIModule.h"
 
-NFConsoleView::NFConsoleView(NFIPluginManager* p, NFViewType vt) : NFIView(p, vt)
+NFConsoleView::NFConsoleView(NFIPluginManager* p, NFViewType vt) : NFIView(p, vt, GET_CLASS_NAME(NFConsoleView))
 {
 	m_pLogModule = pPluginManager->FindModule<NFILogModule>();
 }

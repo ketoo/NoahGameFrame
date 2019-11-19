@@ -26,7 +26,7 @@
 #include "NFInspectorView.h"
 #include "NFUIModule.h"
 
-NFInspectorView::NFInspectorView(NFIPluginManager* p, NFViewType vt) : NFIView(p, vt)
+NFInspectorView::NFInspectorView(NFIPluginManager* p, NFViewType vt) : NFIView(p, vt, GET_CLASS_NAME(NFInspectorView))
 {
 
 }

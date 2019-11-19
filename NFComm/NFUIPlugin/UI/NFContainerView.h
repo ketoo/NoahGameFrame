@@ -34,6 +34,17 @@ public:
 	NFContainerView(NFIPluginManager* p, NFViewType vt);
 
 	virtual bool Execute();
+
+
+private:
+   void FileMenu();
+   void EditMenu();
+   void PrefabMenu();
+   void ElementMenu();
+   void BluePrintMenu();
+   void ToolsMenu();
+   void WindowsMenu();
+   void HelpMenu();
 };
 
 #endif

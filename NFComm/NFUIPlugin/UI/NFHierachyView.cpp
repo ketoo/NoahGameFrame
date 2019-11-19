@@ -26,7 +26,7 @@
 #include "NFHierachyView.h"
 #include "NFUIModule.h"
 
-NFHierachyView::NFHierachyView(NFIPluginManager* p, NFViewType vt) : NFIView(p, vt)
+NFHierachyView::NFHierachyView(NFIPluginManager* p, NFViewType vt) : NFIView(p, vt, GET_CLASS_NAME(NFHierachyView))
 {
 
 }

@@ -48,15 +48,40 @@ public:
 		GameView,
 	};
 
-	NFIView(NFIPluginManager* p, NFViewType vt)
+	NFIView(NFIPluginManager* p, NFViewType vt, const std::string& name)
 	{
 		this->viewType = vt;
 		pPluginManager = p;
+		this->name = name;
+
+		OccupySubRender(this->viewType , this, &NFIView::SubRender);
 	}
 
+	template<typename BaseType>
+    void OccupySubRender ( const NFViewType occupyView, BaseType* pBase, void ( BaseType::*handler ) () )
+    {
+		mOccupyViewType = occupyView;
+        mOccupySubRender = std::bind(handler, pBase);
+    }
+
+    virtual bool Execute()
+    {
+		mOccupySubRender();
+
+        return true;
+    }
+
+	virtual void SubRender()
+	{
+
+	}
+
+	NFViewType mOccupyViewType;
+	std::function<void()> mOccupySubRender;
 
     bool visible = true;
 	NFViewType viewType;
+	std::string name;
 };
 
 class NFIUIModule
@@ -65,11 +90,9 @@ class NFIUIModule
 public:
     virtual ~NFIUIModule(){}
 
+	virtual NF_SHARE_PTR<NFIView> GetView(NFIView::NFViewType viewType) = 0;
 
-    
-
-
-
+	virtual const std::vector<NF_SHARE_PTR<NFIView>>& GetViews() = 0;
 };
 
 #endif

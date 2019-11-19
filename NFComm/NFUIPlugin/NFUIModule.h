@@ -71,6 +71,10 @@ public:
     virtual bool Finalize();
     virtual bool OnReloadPlugin();
 
+	virtual NF_SHARE_PTR<NFIView> GetView(NFIView::NFViewType viewType);
+
+	virtual const std::vector<NF_SHARE_PTR<NFIView>>& GetViews();
+
 protected:
 	int SetupGUI();
 	void CloseGUI();
@@ -87,7 +91,7 @@ private:
 	SDL_GLContext gl_context;
 
 private:
-    std::list<NF_SHARE_PTR<NFIView>> mViewList;
+    std::vector<NF_SHARE_PTR<NFIView>> mViewList;
 };
 
 #endif

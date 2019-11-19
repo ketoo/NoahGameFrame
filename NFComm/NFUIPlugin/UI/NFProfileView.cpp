@@ -26,7 +26,7 @@
 #include "NFProfileView.h"
 #include "NFUIModule.h"
 
-NFProfileView::NFProfileView(NFIPluginManager* p, NFViewType vt) : NFIView(p, vt)
+NFProfileView::NFProfileView(NFIPluginManager* p, NFViewType vt) : NFIView(p, vt, GET_CLASS_NAME(NFProfileView))
 {
 
 }

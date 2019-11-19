@@ -26,7 +26,7 @@
 #include "NFGodView.h"
 #include "NFUIModule.h"
 
-NFGodView::NFGodView(NFIPluginManager* p, NFViewType vt) : NFIView(p, vt)
+NFGodView::NFGodView(NFIPluginManager* p, NFViewType vt) : NFIView(p, vt, GET_CLASS_NAME(NFGodView))
 {
 
 }

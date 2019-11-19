@@ -27,10 +27,212 @@
 #include "NFContainerView.h"
 #include "NFUIModule.h"
 
-NFContainerView::NFContainerView(NFIPluginManager* p, NFViewType vt) : NFIView(p, vt)
+NFContainerView::NFContainerView(NFIPluginManager* p, NFViewType vt) : NFIView(p, vt, GET_CLASS_NAME(NFContainerView))
 {
 
 }
+
+void NFContainerView::FileMenu()
+{
+   if (ImGui::BeginMenu("File"))
+   {
+      // Disabling fullscreen would allow the window to be moved to the front of other windows,
+      // which we can't undo at the moment without finer window depth/z control.
+      //ImGui::MenuItem("Fullscreen", NULL, &opt_fullscreen_persistant);
+
+      if (ImGui::MenuItem("Open", ""))
+      {
+
+      }
+      if (ImGui::MenuItem("Save", ""))
+      {
+                  
+      }
+      if (ImGui::MenuItem("Close", ""))
+      {
+                  
+      }
+      //ImGui::Separator();
+      ImGui::EndMenu();
+   }
+}
+
+void NFContainerView::EditMenu()
+{
+   if (ImGui::BeginMenu("Edit"))
+   {
+      // Disabling fullscreen would allow the window to be moved to the front of other windows,
+      // which we can't undo at the moment without finer window depth/z control.
+      //ImGui::MenuItem("Fullscreen", NULL, &opt_fullscreen_persistant);
+
+      if (ImGui::MenuItem("Open", ""))
+      {
+
+      }
+      if (ImGui::MenuItem("Save", ""))
+      {
+                  
+      }
+      if (ImGui::MenuItem("Close", ""))
+      {
+                  
+      }
+      //ImGui::Separator();
+      ImGui::EndMenu();
+   }
+}
+
+void NFContainerView::PrefabMenu()
+{
+   if (ImGui::BeginMenu("Prefab"))
+   {
+      // Disabling fullscreen would allow the window to be moved to the front of other windows,
+      // which we can't undo at the moment without finer window depth/z control.
+      //ImGui::MenuItem("Fullscreen", NULL, &opt_fullscreen_persistant);
+
+      if (ImGui::MenuItem("Open", ""))
+      {
+
+      }
+      if (ImGui::MenuItem("Save", ""))
+      {
+                  
+      }
+      if (ImGui::MenuItem("Close", ""))
+      {
+                  
+      }
+      //ImGui::Separator();
+      ImGui::EndMenu();
+   }
+}
+
+void NFContainerView::ElementMenu()
+{
+   if (ImGui::BeginMenu("Element"))
+   {
+      // Disabling fullscreen would allow the window to be moved to the front of other windows,
+      // which we can't undo at the moment without finer window depth/z control.
+      //ImGui::MenuItem("Fullscreen", NULL, &opt_fullscreen_persistant);
+
+      if (ImGui::MenuItem("Open", ""))
+      {
+
+      }
+      if (ImGui::MenuItem("Save", ""))
+      {
+                  
+      }
+      if (ImGui::MenuItem("Close", ""))
+      {
+                  
+      }
+      //ImGui::Separator();
+      ImGui::EndMenu();
+   }
+}
+
+void NFContainerView::BluePrintMenu()
+{
+   if (ImGui::BeginMenu("BluePrint"))
+   {
+      // Disabling fullscreen would allow the window to be moved to the front of other windows,
+      // which we can't undo at the moment without finer window depth/z control.
+      //ImGui::MenuItem("Fullscreen", NULL, &opt_fullscreen_persistant);
+
+      if (ImGui::MenuItem("Open", ""))
+      {
+
+      }
+      if (ImGui::MenuItem("Save", ""))
+      {
+                  
+      }
+      if (ImGui::MenuItem("Close", ""))
+      {
+                  
+      }
+      //ImGui::Separator();
+      ImGui::EndMenu();
+   }
+}
+
+void NFContainerView::ToolsMenu()
+{
+   if (ImGui::BeginMenu("Tools"))
+   {
+      // Disabling fullscreen would allow the window to be moved to the front of other windows,
+      // which we can't undo at the moment without finer window depth/z control.
+      //ImGui::MenuItem("Fullscreen", NULL, &opt_fullscreen_persistant);
+
+      if (ImGui::MenuItem("Open", ""))
+      {
+
+      }
+      if (ImGui::MenuItem("Save", ""))
+      {
+                  
+      }
+      if (ImGui::MenuItem("Close", ""))
+      {
+                  
+      }
+      //ImGui::Separator();
+      ImGui::EndMenu();
+   }
+}
+
+void NFContainerView::WindowsMenu()
+{
+   if (ImGui::BeginMenu("Windows"))
+   {
+      NFIUIModule* pModule = pPluginManager->FindModule<NFIUIModule>();
+      if (pModule)
+      {
+         const std::vector<NF_SHARE_PTR<NFIView>>& viewList = pModule->GetViews();
+         for (auto item : viewList)
+         {
+            if (item->viewType != NFViewType::ContainerView
+            && item->viewType != NFViewType::OperatorView)
+            {
+               if (ImGui::MenuItem(item->name.c_str(), "", item->visible))
+               {
+                  item->visible = !item->visible;
+               }
+            }
+         }
+      }
+      
+      //ImGui::Separator();
+      ImGui::EndMenu();
+   }
+}
+
+void NFContainerView::HelpMenu()
+{
+   if (ImGui::BeginMenu("Help"))
+   {
+      // Disabling fullscreen would allow the window to be moved to the front of other windows,
+      // which we can't undo at the moment without finer window depth/z control.
+      //ImGui::MenuItem("Fullscreen", NULL, &opt_fullscreen_persistant);
+
+      if (ImGui::MenuItem("Open", ""))
+      {
+
+      }
+      if (ImGui::MenuItem("Save", ""))
+      {
+                  
+      }
+      if (ImGui::MenuItem("Close", ""))
+      {
+                  
+      }
+      //ImGui::Separator();
+      ImGui::EndMenu();
+   }
+}
+
 
 bool NFContainerView::Execute()
 {
@@ -79,6 +281,15 @@ bool NFContainerView::Execute()
 
       if (ImGui::BeginMenuBar())
       {
+         FileMenu();
+         EditMenu();
+         PrefabMenu();
+         ElementMenu();
+         BluePrintMenu();
+         ToolsMenu();
+         WindowsMenu();
+         HelpMenu();
+
          if (ImGui::BeginMenu("Docking"))
          {
                // Disabling fullscreen would allow the window to be moved to the front of other windows,
@@ -97,7 +308,6 @@ bool NFContainerView::Execute()
                */
                ImGui::EndMenu();
          }
-
          ImGui::EndMenuBar();
       }
     

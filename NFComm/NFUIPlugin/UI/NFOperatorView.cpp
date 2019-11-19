@@ -26,7 +26,7 @@
 #include "NFOperatorView.h"
 #include "NFUIModule.h"
 
-NFOperatorView::NFOperatorView(NFIPluginManager* p, NFViewType vt) : NFIView(p, vt)
+NFOperatorView::NFOperatorView(NFIPluginManager* p, NFViewType vt) : NFIView(p, vt, GET_CLASS_NAME(NFOperatorView))
 {
 	m_pLogModule = pPluginManager->FindModule<NFILogModule>();
 }
@@ -36,8 +36,8 @@ bool NFOperatorView::Execute()
 	//1. the project root folder is NFDataCfg
 	if (visible)
    {
-      ImGuiTabBarFlags tab_bar_flags = ImGuiTabBarFlags_None;
-	   ImGui::Begin(GET_CLASS_NAME(NFOperatorView), &visible, tab_bar_flags);
+      //ImGuiWindowFlags window_flags = ImGuiWindowFlags_NoTitleBar;
+	   ImGui::Begin(GET_CLASS_NAME(NFOperatorView), &visible);
 
 
       ImGui::End();

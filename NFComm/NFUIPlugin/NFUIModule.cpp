@@ -267,3 +267,21 @@ void NFUIModule::CloseGUI()
 	}
 }
 
+
+NF_SHARE_PTR<NFIView> NFUIModule::GetView(NFIView::NFViewType viewType)
+{
+	for (auto view : mViewList)
+	{
+		if (view->viewType == viewType)
+		{
+			return view;
+		}
+	}
+
+	return nullptr;
+}
+
+const std::vector<NF_SHARE_PTR<NFIView>>& NFUIModule::GetViews()
+{
+	return mViewList;
+}

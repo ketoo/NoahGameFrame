@@ -26,7 +26,7 @@
 #include "NFBluePrintView.h"
 #include "NFUIModule.h"
 
-NFBluePrintView::NFBluePrintView(NFIPluginManager* p, NFViewType vt) : NFIView(p, vt)
+NFBluePrintView::NFBluePrintView(NFIPluginManager* p, NFViewType vt) : NFIView(p, vt, GET_CLASS_NAME(NFBluePrintView))
 {
 
 }

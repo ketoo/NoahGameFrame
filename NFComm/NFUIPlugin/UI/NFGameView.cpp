@@ -26,7 +26,7 @@
 #include "NFGameView.h"
 #include "NFUIModule.h"
 
-NFGameView::NFGameView(NFIPluginManager* p, NFViewType vt) : NFIView(p, vt)
+NFGameView::NFGameView(NFIPluginManager* p, NFViewType vt) : NFIView(p, vt, GET_CLASS_NAME(NFGameView))
 {
 
 }
