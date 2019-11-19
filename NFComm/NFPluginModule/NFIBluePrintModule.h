@@ -165,7 +165,7 @@ public:
 
 		std::map<NFJudgementType, NF_SHARE_PTR<NFExecuter>> judgements;
 	};
-
+	class NFMonitor ;
 	class NFJudgement : public BluePrintNodeBase
 	{	
 	private:
@@ -198,7 +198,7 @@ public:
 			this->pPluginManager = p;
 		}
 
-		NF_SHARE_PTR<NFJudgement> AddJudgment(NFJudgementType judgementType, const std::string& name, const std::string& desc, onst NFDataList& arg)
+		NF_SHARE_PTR<NFJudgement> AddJudgment(NFJudgementType judgementType, const std::string& name, const std::string& desc, const NFDataList& arg)
 		{
 			
 
