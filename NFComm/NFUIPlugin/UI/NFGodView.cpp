@@ -55,5 +55,5 @@ bool NFGodView::Execute()
 
 void NFGodView::SubRender()
 {
-   ImGui::Text(this->name);
+   ImGui::Text(this->name.c_str());
 }

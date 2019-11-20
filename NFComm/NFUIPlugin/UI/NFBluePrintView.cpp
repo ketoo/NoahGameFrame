@@ -49,5 +49,5 @@ bool NFBluePrintView::Execute()
 
 void NFBluePrintView::SubRender()
 {
-   ImGui::Text(this->name);
+   ImGui::Text(this->name.c_str());
 }

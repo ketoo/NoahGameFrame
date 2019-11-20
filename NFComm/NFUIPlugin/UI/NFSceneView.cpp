@@ -56,5 +56,5 @@ bool NFSceneView::Execute()
 
 void NFSceneView::SubRender()
 {
-   ImGui::Text(this->name);
+   ImGui::Text(this->name.c_str());
 }
