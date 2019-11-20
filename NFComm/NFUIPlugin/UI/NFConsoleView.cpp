@@ -25,10 +25,15 @@
 
 #include "NFConsoleView.h"
 #include "NFUIModule.h"
+#include "NFComm/NFMessageDefine/NFProtocolDefine.hpp"
 
 NFConsoleView::NFConsoleView(NFIPluginManager* p, NFViewType vt) : NFIView(p, vt, GET_CLASS_NAME(NFConsoleView))
 {
 	m_pLogModule = pPluginManager->FindModule<NFILogModule>();
+   m_pElementModule = pPluginManager->FindModule<NFIElementModule>();
+   m_pClassModule = pPluginManager->FindModule<NFIClassModule>();
+
+   m_pLogModule->SetHooker(this, &NFConsoleView::Hooker);
 }
 
 bool NFConsoleView::Execute()
@@ -38,8 +43,26 @@ bool NFConsoleView::Execute()
    {
 	   ImGui::Begin(GET_CLASS_NAME(NFConsoleView), &visible);
 
+      ImGui::SetNextItemWidth(-1.0f);
+      if (ImGui::ListBoxHeader("##", 1, 6))
+      {
+         for (int n = 0; n < mLogData.size(); n++)
+         {
+            ImGui::Text("%s", mLogData[n].c_str());
+            ImGui::ListBoxFooter();
+         }
+            
+
+      //ImGui::PushItemWidth(-1);
+      //ImGui::PopItemWidth();
+
 
       ImGui::End();
    }
 	return false;
+}
+
+void NFConsoleView::Hooker(const std::string& str)
+{
+   mLogData.push_back(str);
 }

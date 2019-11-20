@@ -40,7 +40,6 @@ bool NFGodView::Execute()
 	//5. show the props and records if the user picked an object
 	//6. use can try to change the value of props to trigger the logic block unit to have a test
 
-
    if (visible)
    {
 	   ImGui::Begin(GET_CLASS_NAME(NFGodView), &visible);

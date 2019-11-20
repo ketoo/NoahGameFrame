@@ -36,8 +36,8 @@ bool NFOperatorView::Execute()
 	//1. the project root folder is NFDataCfg
 	if (visible)
    {
-      //ImGuiWindowFlags window_flags = ImGuiWindowFlags_NoTitleBar;
-	   ImGui::Begin(GET_CLASS_NAME(NFOperatorView), &visible);
+      ImGuiWindowFlags window_flags = ImGuiWindowFlags_NoTitleBar;
+	   ImGui::Begin(GET_CLASS_NAME(NFOperatorView), NULL, window_flags);
 
 
       ImGui::End();
