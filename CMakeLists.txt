@@ -110,9 +110,12 @@ endif()
 
 link_directories(${DependenciesLibPath})
 
-
-message("Build All")
-add_subdirectory(NFTools)
-add_subdirectory(Dependencies)
-add_subdirectory(NFComm)
-add_subdirectory(NFServer)
+if(${BUILD_TOOLS_ONLY} STREQUAL "ON")
+	message("Build Tools Only")
+	add_subdirectory(NFTools)
+else()
+	message("Build All")
+	add_subdirectory(Dependencies)
+	add_subdirectory(NFComm)
+	add_subdirectory(NFServer)
+endif()

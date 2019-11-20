@@ -27,6 +27,8 @@
 
 #include "NFComm/NFPluginModule/NFIUIModule.h"
 #include "NFComm/NFPluginModule/NFILogModule.h"
+#include "NFComm/NFPluginModule/NFIElementModule.h"
+#include "NFComm/NFPluginModule/NFIClassModule.h"
 
 class NFConsoleView : public NFIView
 {
@@ -35,7 +37,15 @@ public:
 	virtual bool Execute();
 
 private:
+   void Hooker(const std::string& str);
+
+   std::vector<std::string> mLogData;
+
+private:
+   NFIUIModule* m_pUIModule;
 	NFILogModule* m_pLogModule;
+   NFIElementModule* m_pElementModule;
+   NFIClassModule* m_pClassModule;
 };
 
 #endif

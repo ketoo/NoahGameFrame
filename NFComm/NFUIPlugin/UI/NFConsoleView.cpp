@@ -25,21 +25,46 @@
 
 #include "NFConsoleView.h"
 #include "NFUIModule.h"
+#include "NFComm/NFMessageDefine/NFProtocolDefine.hpp"
 
-NFConsoleView::NFConsoleView(NFIPluginManager* p, NFViewType vt) : NFIView(p, vt)
+NFConsoleView::NFConsoleView(NFIPluginManager* p, NFViewType vt) : NFIView(p, vt, GET_CLASS_NAME(NFConsoleView))
 {
 	m_pLogModule = pPluginManager->FindModule<NFILogModule>();
+   m_pElementModule = pPluginManager->FindModule<NFIElementModule>();
+   m_pClassModule = pPluginManager->FindModule<NFIClassModule>();
+   m_pUIModule = pPluginManager->FindModule<NFIUIModule>();
+
+   m_pLogModule->SetHooker(this, &NFConsoleView::Hooker);
 }
 
 bool NFConsoleView::Execute()
 {
 	//1. the project root folder is NFDataCfg
-	if (show)
-   {
-	   ImGui::Begin(GET_CLASS_NAME(NFConsoleView), &show);
 
+      ImGui::SetNextItemWidth(-1.0f);
+      if (ImGui::ListBoxHeader("##", -1, -1))
+      {
+         for (int n = 0; n < mLogData.size(); n++)
+         {
+            const std::string& item_name = mLogData[n];
+            if (ImGui::Selectable(item_name.c_str(), true))
+            {
+               // handle selection
+            }
 
-      ImGui::End();
-   }
+            //ImGui::Text("%s", mLogData[n].c_str());
+         }
+            
+         ImGui::ListBoxFooter();
+      //ImGui::PushItemWidth(-1);
+      //ImGui::PopItemWidth();
+
+      }
+
 	return false;
+}
+
+void NFConsoleView::Hooker(const std::string& str)
+{
+   mLogData.push_back(str);
 }

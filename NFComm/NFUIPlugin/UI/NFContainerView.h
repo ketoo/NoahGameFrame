@@ -23,38 +23,29 @@
    limitations under the License.
 */
 
-#include "NFSceneView.h"
-#include "NFUIModule.h"
+#ifndef NF_CONTAINER_VIEW_H
+#define NF_CONTAINER_VIEW_H
 
-NFSceneView::NFSceneView(NFIPluginManager* p, NFViewType vt) : NFIView(p, vt, GET_CLASS_NAME(NFSceneView))
+#include "NFComm/NFPluginModule/NFIUIModule.h"
+
+class NFContainerView : public NFIView
 {
+public:
+	NFContainerView(NFIPluginManager* p, NFViewType vt);
 
-}
+   virtual void ExecuteBegin();
+	virtual bool Execute();
+   virtual void ExecuteEnd();
 
-bool NFSceneView::Execute()
-{
+private:
+   void FileMenu();
+   void EditMenu();
+   void PrefabMenu();
+   void ElementMenu();
+   void BluePrintMenu();
+   void ToolsMenu();
+   void WindowsMenu();
+   void HelpMenu();
+};
 
-	//1. get all scene from static config data
-	//2. let the user choose one scene
-	//3. get all objects of this level
-	//4. draw object by imgui
-	//5. show the props and records if the user picked an object
-	//6. use can modify the value of props to trigger the saving job
-
-   if (ImGui::IsWindowFocused())
-   {
-      NF_SHARE_PTR<NFIView> pView = m_pUIModule->GetView(NFViewType::HierachyView);
-      if (pView)
-      {
-         pView->OccupySubRender(this);
-      }
-   }
-
-
-	return false;
-}
-
-void NFSceneView::SubRender()
-{
-   ImGui::Text(this->name.c_str());
-}
+#endif

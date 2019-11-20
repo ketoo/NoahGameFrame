@@ -71,15 +71,23 @@ public:
     virtual bool Finalize();
     virtual bool OnReloadPlugin();
 
+	virtual NF_SHARE_PTR<NFIView> GetView(NFViewType viewType);
+
+	virtual const std::vector<NF_SHARE_PTR<NFIView>>& GetViews();
+
+	virtual void ExecuteBegin(const std::string& name, bool* visible);
+	virtual void ExecuteEnd();
+    
 protected:
 	int SetupGUI();
 	void CloseGUI();
 
+
 private:
 
 	// Our state
-	bool show_demo_window = true;
-	bool show_another_window = false;
+	//bool show_demo_window = true;
+	//bool show_another_window = false;
 	ImVec4 clear_color = ImVec4(0.45f, 0.55f, 0.60f, 1.00f);
 	SDL_Window* window;
 	bool done = false;
@@ -87,7 +95,7 @@ private:
 	SDL_GLContext gl_context;
 
 private:
-    std::list<NF_SHARE_PTR<NFIView>> mViewList;
+    std::vector<NF_SHARE_PTR<NFIView>> mViewList;
 };
 
 #endif

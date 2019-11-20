@@ -26,7 +26,7 @@
 #include "NFProfileView.h"
 #include "NFUIModule.h"
 
-NFProfileView::NFProfileView(NFIPluginManager* p, NFViewType vt) : NFIView(p, vt)
+NFProfileView::NFProfileView(NFIPluginManager* p, NFViewType vt) : NFIView(p, vt, GET_CLASS_NAME(NFProfileView))
 {
 
 }
@@ -34,12 +34,6 @@ NFProfileView::NFProfileView(NFIPluginManager* p, NFViewType vt) : NFIView(p, vt
 bool NFProfileView::Execute()
 {
 	//1. the project root folder is NFDataCfg
-   if (show)
-   {
-	   ImGui::Begin(GET_CLASS_NAME(NFProfileView), &show);
 
-
-      ImGui::End();
-   }
 	return false;
 }

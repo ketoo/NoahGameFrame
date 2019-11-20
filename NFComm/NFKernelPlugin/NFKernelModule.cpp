@@ -338,8 +338,8 @@ bool NFKernelModule::DestroyObject(const NFGUID& self)
 			m_pSceneModule->LeaveSceneGroup(self);
 		}
 
-		DoEvent(self, strClassName, COE_BEFOREDESTROY, NFDataList());
-		DoEvent(self, strClassName, COE_DESTROY, NFDataList());
+		DoEvent(self, strClassName, COE_BEFOREDESTROY, NFDataList::Empty());
+		DoEvent(self, strClassName, COE_DESTROY, NFDataList::Empty());
 
 		RemoveElement(self);
 

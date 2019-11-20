@@ -26,9 +26,9 @@
 #include "NFGodView.h"
 #include "NFUIModule.h"
 
-NFGodView::NFGodView(NFIPluginManager* p, NFViewType vt) : NFIView(p, vt)
+NFGodView::NFGodView(NFIPluginManager* p, NFViewType vt) : NFIView(p, vt, GET_CLASS_NAME(NFGodView))
 {
-
+   m_pUIModule = pPluginManager->FindModule<NFIUIModule>();
 }
 
 bool NFGodView::Execute()
@@ -41,12 +41,19 @@ bool NFGodView::Execute()
 	//6. use can try to change the value of props to trigger the logic block unit to have a test
 
 
-   if (show)
+   if (ImGui::IsWindowFocused())
    {
-	   ImGui::Begin(GET_CLASS_NAME(NFGodView), &show);
-
-
-      ImGui::End();
+      NF_SHARE_PTR<NFIView> pView = m_pUIModule->GetView(NFViewType::HierachyView);
+      if (pView)
+      {
+         pView->OccupySubRender(this);
+      }
    }
+
 	return true;
+}
+
+void NFGodView::SubRender()
+{
+   ImGui::Text(this->name.c_str());
 }

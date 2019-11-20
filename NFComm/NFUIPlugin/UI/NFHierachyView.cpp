@@ -26,7 +26,7 @@
 #include "NFHierachyView.h"
 #include "NFUIModule.h"
 
-NFHierachyView::NFHierachyView(NFIPluginManager* p, NFViewType vt) : NFIView(p, vt)
+NFHierachyView::NFHierachyView(NFIPluginManager* p, NFViewType vt) : NFIView(p, vt, GET_CLASS_NAME(NFHierachyView))
 {
 
 }
@@ -35,12 +35,6 @@ NFHierachyView::NFHierachyView(NFIPluginManager* p, NFViewType vt) : NFIView(p, 
 bool NFHierachyView::Execute()
 {
 	//1. the project root folder is NFDataCfg
-   if (show)
-   {
-	   ImGui::Begin(GET_CLASS_NAME(NFHierachyView), &show);
 
-
-      ImGui::End();
-   }
 	return false;
 }

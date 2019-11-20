@@ -22,39 +22,17 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 */
+#ifndef NF_INSPECTOR_VIEW_H
+#define NF_INSPECTOR_VIEW_H
 
-#include "NFSceneView.h"
-#include "NFUIModule.h"
+#include "NFComm/NFPluginModule/NFIUIModule.h"
 
-NFSceneView::NFSceneView(NFIPluginManager* p, NFViewType vt) : NFIView(p, vt, GET_CLASS_NAME(NFSceneView))
+class NFInspectorView : public NFIView
 {
+public:
+	NFInspectorView(NFIPluginManager* p, NFViewType vt);
+   
+	virtual bool Execute();
+};
 
-}
-
-bool NFSceneView::Execute()
-{
-
-	//1. get all scene from static config data
-	//2. let the user choose one scene
-	//3. get all objects of this level
-	//4. draw object by imgui
-	//5. show the props and records if the user picked an object
-	//6. use can modify the value of props to trigger the saving job
-
-   if (ImGui::IsWindowFocused())
-   {
-      NF_SHARE_PTR<NFIView> pView = m_pUIModule->GetView(NFViewType::HierachyView);
-      if (pView)
-      {
-         pView->OccupySubRender(this);
-      }
-   }
-
-
-	return false;
-}
-
-void NFSceneView::SubRender()
-{
-   ImGui::Text(this->name.c_str());
-}
+#endif
