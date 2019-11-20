@@ -41,13 +41,15 @@ bool NFSceneView::Execute()
 	//5. show the props and records if the user picked an object
 	//6. use can modify the value of props to trigger the saving job
 
-   if (visible)
+   if (ImGui::IsWindowFocused())
    {
-	   ImGui::Begin(GET_CLASS_NAME(NFSceneView), &visible);
-
-
-      ImGui::End();
+      NF_SHARE_PTR<NFIView> pView = m_pUIModule->GetView(NFViewType::HierachyView);
+      if (pView)
+      {
+         pView->OccupySubRender(this);
+      }
    }
+
 
 	return false;
 }

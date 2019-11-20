@@ -32,6 +32,7 @@ NFConsoleView::NFConsoleView(NFIPluginManager* p, NFViewType vt) : NFIView(p, vt
 	m_pLogModule = pPluginManager->FindModule<NFILogModule>();
    m_pElementModule = pPluginManager->FindModule<NFIElementModule>();
    m_pClassModule = pPluginManager->FindModule<NFIClassModule>();
+   m_pUIModule = pPluginManager->FindModule<NFIUIModule>();
 
    m_pLogModule->SetHooker(this, &NFConsoleView::Hooker);
 }
@@ -39,9 +40,6 @@ NFConsoleView::NFConsoleView(NFIPluginManager* p, NFViewType vt) : NFIView(p, vt
 bool NFConsoleView::Execute()
 {
 	//1. the project root folder is NFDataCfg
-	if (visible)
-   {
-	   ImGui::Begin(GET_CLASS_NAME(NFConsoleView), &visible);
 
       ImGui::SetNextItemWidth(-1.0f);
       if (ImGui::ListBoxHeader("##", -1, -1))
@@ -63,8 +61,6 @@ bool NFConsoleView::Execute()
 
       }
 
-      ImGui::End();
-   }
 	return false;
 }
 

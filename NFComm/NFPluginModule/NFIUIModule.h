@@ -30,23 +30,41 @@
 #include <iostream>
 #include "NFIModule.h"
 
+enum NFViewType
+{
+	NONE,
+	OperatorView,
+	ContainerView,
+	GodView,
+	SceneView,
+	HierachyView,
+	ConsoleView,
+	ProfileView,
+	InspectorView,
+	BluePrintView,
+	ProjectView,
+	GameView,
+};
+
+class NFIView;
+class NFIUIModule
+    : public NFIModule
+{
+public:
+    virtual ~NFIUIModule(){}
+
+	virtual NF_SHARE_PTR<NFIView> GetView(NFViewType viewType) = 0;
+
+	virtual const std::vector<NF_SHARE_PTR<NFIView>>& GetViews() = 0;
+
+	virtual void ExecuteBegin(const std::string& name, bool* visible) = 0;
+	virtual void ExecuteEnd() = 0;
+
+};
+
 class NFIView : public NFIModule
 {
 public:
-	enum NFViewType
-	{
-		OperatorView,
-		ContainerView,
-		GodView,
-		SceneView,
-		HierachyView,
-		ConsoleView,
-		ProfileView,
-		InspectorView,
-		BluePrintView,
-		ProjectView,
-		GameView,
-	};
 
 	NFIView(NFIPluginManager* p, NFViewType vt, const std::string& name)
 	{
@@ -54,45 +72,45 @@ public:
 		pPluginManager = p;
 		this->name = name;
 
-		OccupySubRender(this->viewType , this, &NFIView::SubRender);
+		m_pUIModule = pPluginManager->FindModule<NFIUIModule>();
 	}
 
-	template<typename BaseType>
-    void OccupySubRender ( const NFViewType occupyView, BaseType* pBase, void ( BaseType::*handler ) () )
+    void OccupySubRender (NFIView* pOccupyView)
     {
-		mOccupyViewType = occupyView;
-        mOccupySubRender = std::bind(handler, pBase);
+		m_pOccupyView = pOccupyView;
     }
+
+	virtual void ExecuteBegin()
+    {
+		m_pUIModule->ExecuteBegin(name, &visible);
+	}
 
     virtual bool Execute()
     {
-		mOccupySubRender();
+
 
         return true;
     }
-
+	
 	virtual void SubRender()
 	{
-
+		if (m_pOccupyView)
+		{
+			m_pOccupyView->SubRender();
+		}
 	}
 
-	NFViewType mOccupyViewType;
-	std::function<void()> mOccupySubRender;
+	virtual void ExecuteEnd()
+    {
+		m_pUIModule->ExecuteEnd();
+	}
+
+	NFIUIModule* m_pUIModule;
+	NFIView* m_pOccupyView = nullptr;;
 
     bool visible = true;
 	NFViewType viewType;
 	std::string name;
-};
-
-class NFIUIModule
-    : public NFIModule
-{
-public:
-    virtual ~NFIUIModule(){}
-
-	virtual NF_SHARE_PTR<NFIView> GetView(NFIView::NFViewType viewType) = 0;
-
-	virtual const std::vector<NF_SHARE_PTR<NFIView>>& GetViews() = 0;
 };
 
 #endif

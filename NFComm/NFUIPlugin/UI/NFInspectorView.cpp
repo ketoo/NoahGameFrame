@@ -34,12 +34,6 @@ NFInspectorView::NFInspectorView(NFIPluginManager* p, NFViewType vt) : NFIView(p
 bool NFInspectorView::Execute()
 {
 	//1. the project root folder is NFDataCfg
-   if (visible)
-   {
-	   ImGui::Begin(GET_CLASS_NAME(NFInspectorView), &visible);
 
-
-      ImGui::End();
-   }
 	return false;
 }

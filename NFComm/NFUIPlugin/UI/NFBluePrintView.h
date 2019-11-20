@@ -33,7 +33,8 @@ public:
 	NFBluePrintView(NFIPluginManager* p, NFViewType vt);
 	virtual bool Execute();
 
-
+private:
+   NFIUIModule* m_pUIModule;
 };
 
 #endif

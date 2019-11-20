@@ -35,12 +35,6 @@ NFHierachyView::NFHierachyView(NFIPluginManager* p, NFViewType vt) : NFIView(p, 
 bool NFHierachyView::Execute()
 {
 	//1. the project root folder is NFDataCfg
-   if (visible)
-   {
-	   ImGui::Begin(GET_CLASS_NAME(NFHierachyView), &visible);
 
-
-      ImGui::End();
-   }
 	return false;
 }

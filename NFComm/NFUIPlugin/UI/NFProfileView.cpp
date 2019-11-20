@@ -34,12 +34,6 @@ NFProfileView::NFProfileView(NFIPluginManager* p, NFViewType vt) : NFIView(p, vt
 bool NFProfileView::Execute()
 {
 	//1. the project root folder is NFDataCfg
-   if (visible)
-   {
-	   ImGui::Begin(GET_CLASS_NAME(NFProfileView), &visible);
 
-
-      ImGui::End();
-   }
 	return false;
 }

@@ -28,18 +28,21 @@
 
 NFBluePrintView::NFBluePrintView(NFIPluginManager* p, NFViewType vt) : NFIView(p, vt, GET_CLASS_NAME(NFBluePrintView))
 {
-
+   m_pUIModule = pPluginManager->FindModule<NFIUIModule>();
 }
 
 bool NFBluePrintView::Execute()
 {
 	//1. the project root folder is NFDataCfg
-	if (visible)
+
+   if (ImGui::IsWindowFocused())
    {
-	   ImGui::Begin(GET_CLASS_NAME(NFBluePrintView), &visible);
-
-
-      ImGui::End();
+      NF_SHARE_PTR<NFIView> pView = m_pUIModule->GetView(NFViewType::HierachyView);
+      if (pView)
+      {
+         pView->OccupySubRender(this);
+      }
    }
+
 	return false;
 }

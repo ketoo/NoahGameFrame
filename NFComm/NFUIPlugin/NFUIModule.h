@@ -71,13 +71,17 @@ public:
     virtual bool Finalize();
     virtual bool OnReloadPlugin();
 
-	virtual NF_SHARE_PTR<NFIView> GetView(NFIView::NFViewType viewType);
+	virtual NF_SHARE_PTR<NFIView> GetView(NFViewType viewType);
 
 	virtual const std::vector<NF_SHARE_PTR<NFIView>>& GetViews();
 
+	virtual void ExecuteBegin(const std::string& name, bool* visible);
+	virtual void ExecuteEnd();
+    
 protected:
 	int SetupGUI();
 	void CloseGUI();
+
 
 private:
 

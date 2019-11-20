@@ -34,12 +34,12 @@ NFGameView::NFGameView(NFIPluginManager* p, NFViewType vt) : NFIView(p, vt, GET_
 bool NFGameView::Execute()
 {
 	//1. the project root folder is NFDataCfg
-   if (visible)
-   {
-	   ImGui::Begin(GET_CLASS_NAME(NFGameView), &visible);
+ 
+      if (ImGui::IsWindowFocused())
+      {
+         std::cout << "NFConsoleViewNFConsoleViewNFConsoleViewNFConsoleView---" << std::endl;
+      }
 
 
-      ImGui::End();
-   }
 	return false;
 }

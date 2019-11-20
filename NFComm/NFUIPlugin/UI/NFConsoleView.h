@@ -42,6 +42,7 @@ private:
    std::vector<std::string> mLogData;
 
 private:
+   NFIUIModule* m_pUIModule;
 	NFILogModule* m_pLogModule;
    NFIElementModule* m_pElementModule;
    NFIClassModule* m_pClassModule;

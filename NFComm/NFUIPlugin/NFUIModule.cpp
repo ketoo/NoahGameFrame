@@ -51,18 +51,18 @@ bool NFUIModule::Awake()
 
 bool NFUIModule::Init()
 {
-    mViewList.push_back(NF_SHARE_PTR<NFIView>(NF_NEW NFContainerView(pPluginManager, NFIView::NFViewType::ContainerView)));
-    mViewList.push_back(NF_SHARE_PTR<NFIView>(NF_NEW NFOperatorView(pPluginManager, NFIView::NFViewType::OperatorView)));
+    mViewList.push_back(NF_SHARE_PTR<NFIView>(NF_NEW NFContainerView(pPluginManager, NFViewType::ContainerView)));
+    mViewList.push_back(NF_SHARE_PTR<NFIView>(NF_NEW NFOperatorView(pPluginManager, NFViewType::OperatorView)));
 
-    mViewList.push_back(NF_SHARE_PTR<NFIView>(NF_NEW NFGodView(pPluginManager, NFIView::NFViewType::GodView)));
-    mViewList.push_back(NF_SHARE_PTR<NFIView>(NF_NEW NFSceneView(pPluginManager, NFIView::NFViewType::SceneView)));
-    mViewList.push_back(NF_SHARE_PTR<NFIView>(NF_NEW NFHierachyView(pPluginManager, NFIView::NFViewType::HierachyView)));
-    mViewList.push_back(NF_SHARE_PTR<NFIView>(NF_NEW NFConsoleView(pPluginManager, NFIView::NFViewType::ConsoleView)));
-    mViewList.push_back(NF_SHARE_PTR<NFIView>(NF_NEW NFProfileView(pPluginManager, NFIView::NFViewType::ProfileView)));
-    mViewList.push_back(NF_SHARE_PTR<NFIView>(NF_NEW NFInspectorView(pPluginManager, NFIView::NFViewType::InspectorView)));
-    mViewList.push_back(NF_SHARE_PTR<NFIView>(NF_NEW NFBluePrintView(pPluginManager, NFIView::NFViewType::BluePrintView)));
-    mViewList.push_back(NF_SHARE_PTR<NFIView>(NF_NEW NFProjectView(pPluginManager, NFIView::NFViewType::ProjectView)));
-    mViewList.push_back(NF_SHARE_PTR<NFIView>(NF_NEW NFGameView(pPluginManager, NFIView::NFViewType::GameView)));
+    mViewList.push_back(NF_SHARE_PTR<NFIView>(NF_NEW NFGodView(pPluginManager, NFViewType::GodView)));
+    mViewList.push_back(NF_SHARE_PTR<NFIView>(NF_NEW NFSceneView(pPluginManager, NFViewType::SceneView)));
+    mViewList.push_back(NF_SHARE_PTR<NFIView>(NF_NEW NFHierachyView(pPluginManager, NFViewType::HierachyView)));
+    mViewList.push_back(NF_SHARE_PTR<NFIView>(NF_NEW NFConsoleView(pPluginManager, NFViewType::ConsoleView)));
+    mViewList.push_back(NF_SHARE_PTR<NFIView>(NF_NEW NFProfileView(pPluginManager, NFViewType::ProfileView)));
+    mViewList.push_back(NF_SHARE_PTR<NFIView>(NF_NEW NFInspectorView(pPluginManager, NFViewType::InspectorView)));
+    mViewList.push_back(NF_SHARE_PTR<NFIView>(NF_NEW NFBluePrintView(pPluginManager, NFViewType::BluePrintView)));
+    mViewList.push_back(NF_SHARE_PTR<NFIView>(NF_NEW NFProjectView(pPluginManager, NFViewType::ProjectView)));
+    mViewList.push_back(NF_SHARE_PTR<NFIView>(NF_NEW NFGameView(pPluginManager, NFViewType::GameView)));
    
 	return true;
 }
@@ -115,7 +115,10 @@ bool NFUIModule::Execute()
 
 		for (auto view : mViewList)
 		{
+			view->ExecuteBegin();
 			view->Execute();
+			view->SubRender();
+			view->ExecuteEnd();
 		}
 
 		// Rendering
@@ -268,7 +271,7 @@ void NFUIModule::CloseGUI()
 }
 
 
-NF_SHARE_PTR<NFIView> NFUIModule::GetView(NFIView::NFViewType viewType)
+NF_SHARE_PTR<NFIView> NFUIModule::GetView(NFViewType viewType)
 {
 	for (auto view : mViewList)
 	{
@@ -284,4 +287,14 @@ NF_SHARE_PTR<NFIView> NFUIModule::GetView(NFIView::NFViewType viewType)
 const std::vector<NF_SHARE_PTR<NFIView>>& NFUIModule::GetViews()
 {
 	return mViewList;
+}	
+
+void NFUIModule::ExecuteBegin(const std::string& name, bool* visible)
+{
+	ImGui::Begin(name.c_str(), visible);
+}
+
+void NFUIModule::ExecuteEnd()
+{
+    ImGui::End();
 }

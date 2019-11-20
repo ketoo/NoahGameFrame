@@ -28,7 +28,7 @@
 
 NFGodView::NFGodView(NFIPluginManager* p, NFViewType vt) : NFIView(p, vt, GET_CLASS_NAME(NFGodView))
 {
-
+   m_pUIModule = pPluginManager->FindModule<NFIUIModule>();
 }
 
 bool NFGodView::Execute()
@@ -40,12 +40,15 @@ bool NFGodView::Execute()
 	//5. show the props and records if the user picked an object
 	//6. use can try to change the value of props to trigger the logic block unit to have a test
 
-   if (visible)
+
+   if (ImGui::IsWindowFocused())
    {
-	   ImGui::Begin(GET_CLASS_NAME(NFGodView), &visible);
-
-
-      ImGui::End();
+      NF_SHARE_PTR<NFIView> pView = m_pUIModule->GetView(NFViewType::HierachyView);
+      if (pView)
+      {
+         pView->OccupySubRender(this);
+      }
    }
+
 	return true;
 }
