@@ -49,13 +49,13 @@ bool NFConsoleView::Execute()
          for (int n = 0; n < mLogData.size(); n++)
          {
             ImGui::Text("%s", mLogData[n].c_str());
-            ImGui::ListBoxFooter();
          }
             
-
+         ImGui::ListBoxFooter();
       //ImGui::PushItemWidth(-1);
       //ImGui::PopItemWidth();
 
+      }
 
       ImGui::End();
    }
