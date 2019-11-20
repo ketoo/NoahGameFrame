@@ -44,11 +44,17 @@ bool NFConsoleView::Execute()
 	   ImGui::Begin(GET_CLASS_NAME(NFConsoleView), &visible);
 
       ImGui::SetNextItemWidth(-1.0f);
-      if (ImGui::ListBoxHeader("##", 1, 6))
+      if (ImGui::ListBoxHeader("##", -1, -1))
       {
          for (int n = 0; n < mLogData.size(); n++)
          {
-            ImGui::Text("%s", mLogData[n].c_str());
+            const std::string& item_name = mLogData[n];
+            if (ImGui::Selectable(item_name.c_str(), true))
+            {
+               // handle selection
+            }
+
+            //ImGui::Text("%s", mLogData[n].c_str());
          }
             
          ImGui::ListBoxFooter();
