@@ -34,7 +34,7 @@ public:
 
 	virtual bool Execute();
 
-
+   virtual void SubRender();
 
 private:
    NFIUIModule* m_pUIModule;

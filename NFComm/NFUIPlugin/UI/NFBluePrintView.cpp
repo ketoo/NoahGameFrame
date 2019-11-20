@@ -46,3 +46,8 @@ bool NFBluePrintView::Execute()
 
 	return false;
 }
+
+void NFBluePrintView::SubRender()
+{
+   ImGui::Text(this->name);
+}

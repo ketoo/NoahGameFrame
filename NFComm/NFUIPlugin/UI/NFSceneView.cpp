@@ -53,3 +53,8 @@ bool NFSceneView::Execute()
 
 	return false;
 }
+
+void NFSceneView::SubRender()
+{
+   ImGui::Text(this->name);
+}

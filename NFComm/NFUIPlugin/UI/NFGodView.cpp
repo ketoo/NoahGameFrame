@@ -52,3 +52,8 @@ bool NFGodView::Execute()
 
 	return true;
 }
+
+void NFGodView::SubRender()
+{
+   ImGui::Text(this->name);
+}
