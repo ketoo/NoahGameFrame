@@ -81,8 +81,8 @@ public:
 
 protected:
 	int SetupGUI();
+	void SetupColour();
 	void CloseGUI();
-
 
 private:
 
