@@ -37,9 +37,29 @@ public:
 	virtual bool Execute();
 
 private:
-   void Hooker(const std::string& str);
+   void Hooker(const NFILogModule::NF_LOG_LEVEL level, const std::string& str);
 
-   std::vector<std::string> mLogData;
+private: 
+   class LogData
+   {
+   public:
+      LogData(const NFILogModule::NF_LOG_LEVEL level, const std::string& str)
+      {
+         this->level = level;
+         this->data = str;
+      }
+
+      NFILogModule::NF_LOG_LEVEL level;
+      std::string data;
+   };
+
+   std::vector<LogData> mLogData;
+
+   bool logDebug = true;
+   bool logInfo = true;
+   bool logWaring = true;
+   bool logError = true;
+   bool logFatal = true;
 
 private:
    NFIUIModule* m_pUIModule;

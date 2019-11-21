@@ -174,7 +174,7 @@ bool NFLogModule::Log(const NF_LOG_LEVEL nll, const char* format, ...)
 
     if (mLogHooker)
     {
-        mLogHooker.get()->operator()(mstrLocalStream);
+        mLogHooker.get()->operator()(nll, mstrLocalStream);
     }
 
     switch (nll)

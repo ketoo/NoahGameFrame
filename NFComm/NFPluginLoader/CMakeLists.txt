@@ -19,8 +19,11 @@ target_link_libraries(NFPluginLoader NFNetPlugin)
 target_link_libraries(NFPluginLoader NFNoSqlPlugin)
 target_link_libraries(NFPluginLoader NFSecurityPlugin)
 target_link_libraries(NFPluginLoader NFTestPlugin)
+
+if (APPLE)
 target_link_libraries(NFPluginLoader NFUIPlugin)
 target_link_libraries(NFPluginLoader NFBluePrintPlugin)
+endif()
 
 target_link_libraries(NFPluginLoader NFDBLogicPlugin)
 target_link_libraries(NFPluginLoader NFDBNet_ClientPlugin)

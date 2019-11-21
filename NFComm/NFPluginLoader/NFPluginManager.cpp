@@ -135,8 +135,11 @@
 #include "NFComm/NFNoSqlPlugin/NFNoSqlPlugin.h"
 #include "NFComm/NFSecurityPlugin/NFSecurityPlugin.h"
 #include "NFComm/NFTestPlugin/NFTestPlugin.h"
+
+#if NF_PLATFORM != NF_PLATFORM_LINUX
 #include "NFComm/NFUIPlugin/NFUIPlugin.h"
 #include "NFComm/NFBluePrintPlugin/NFBluePrintPlugin.h"
+#endif
 
 //DB
 #include "NFServer/NFDBLogicPlugin/NFDBLogicPlugin.h"
@@ -315,8 +318,11 @@ bool NFPluginManager::LoadStaticPlugin()
 	CREATE_PLUGIN(this, NFNoSqlPlugin)
 	CREATE_PLUGIN(this, NFSecurityPlugin)
 	CREATE_PLUGIN(this, NFTestPlugin)
+
+#if NF_PLATFORM != NF_PLATFORM_LINUX
 	CREATE_PLUGIN(this, NFUIPlugin)
 	CREATE_PLUGIN(this, NFBluePrintPlugin)
+#endif
 		
 //DB
 	CREATE_PLUGIN(this, NFDBLogicPlugin)
