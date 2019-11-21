@@ -81,7 +81,7 @@ public:
 
 protected:
 	int SetupGUI();
-	void SetupColour();
+	void SetupColour(ImGuiIO& io);
 	void CloseGUI();
 
 private:

@@ -251,14 +251,14 @@ int NFUIModule::SetupGUI()
 	//ImFont* font = io.Fonts->AddFontFromFileTTF("c:\\Windows\\Fonts\\ArialUni.ttf", 18.0f, NULL, io.Fonts->GetGlyphRangesJapanese());
 	//IM_ASSERT(font != NULL);
 	
-	SetupColour();
+	SetupColour(io);
 
 	return 0;
 }
 
-void NFUIModule::SetupColour()
+void NFUIModule::SetupColour(ImGuiIO& io)
 {
-	imGuiIO.Fonts->AddFontFromFileTTF("../Fonts/Ruda-Bold.ttf", 15.0f);
+	io.Fonts->AddFontFromFileTTF("../NFDataCfg/Fonts/Ruda-Bold.ttf", 15.0f);
     ImGui::GetStyle().FrameRounding = 4.0f;
     ImGui::GetStyle().GrabRounding = 4.0f;
     
