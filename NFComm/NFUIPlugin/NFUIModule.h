@@ -77,7 +77,8 @@ public:
 
 	virtual void ExecuteBegin(const std::string& name, bool* visible);
 	virtual void ExecuteEnd();
-    
+ 
+
 protected:
 	int SetupGUI();
 	void CloseGUI();

@@ -235,6 +235,7 @@ public:
 	virtual bool RequestEnterScene(const NFGUID& self, const int nSceneID, const int nGroupID, const int nType, const NFVector3& pos, const NFDataList& argList) = 0;
 	virtual bool ReleaseGroupScene(const int nSceneID, const int nGroupID) = 0;
 	virtual bool LeaveSceneGroup(const NFGUID& self) = 0;
+	virtual const std::vector<int>& GetGroups(const int nSceneID) = 0;
 
 	virtual bool AddSeedData(const int nSceneID, const std::string& strSeedID, const std::string& strConfigID, const NFVector3& vPos, const int nHeight) = 0;
 	virtual bool AddRelivePosition(const int nSceneID, const int nIndex, const NFVector3& vPos) = 0;

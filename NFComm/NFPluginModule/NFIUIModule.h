@@ -94,14 +94,16 @@ public:
 	
 	virtual void SubRender()
 	{
-		if (m_pOccupyView)
-		{
-			m_pOccupyView->SubRender();
-		}
+
 	}
 
 	virtual void ExecuteEnd()
     {
+		if (m_pOccupyView)
+		{
+			m_pOccupyView->SubRender();
+		}
+
 		m_pUIModule->ExecuteEnd();
 	}
 
