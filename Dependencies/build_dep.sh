@@ -63,8 +63,6 @@ if [ $sysOS == "Darwin" ];then
     ./vcpkg install lua:x64-osx
     ./vcpkg install sdl2:x64-osx
     ./vcpkg install gtest:x64-osx
-    ./vcpkg install imgui:x64-osx
-    ./vcpkg install hiredis:x64-osx
     ./vcpkg install opengl:x64-osx
 
 elif [ $sysOS == "Linux" ];then
@@ -73,14 +71,15 @@ elif [ $sysOS == "Linux" ];then
     ./vcpkg install lua:x64-linux
     ./vcpkg install sdl2:x64-linux
     ./vcpkg install gtest:x64-linux
-    ./vcpkg install imgui:x64-linux
-    ./vcpkg install hiredis:x64-linux
 
 
 fi
 
 
 cd ..
+
+mkdir ./lib/Release
+mkdir ./lib/Debug
 
 if [ $sysOS == "Darwin" ];then
     cp -r -f ./vcpkg/installed/x64-osx/lib/* ./lib/Release/
