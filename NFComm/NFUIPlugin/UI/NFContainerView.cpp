@@ -84,7 +84,7 @@ void NFContainerView::EditMenu()
 
 void NFContainerView::PrefabMenu()
 {
-   if (ImGui::BeginMenu("Prefab"))
+   if (ImGui::BeginMenu("MetaClass"))
    {
       // Disabling fullscreen would allow the window to be moved to the front of other windows,
       // which we can't undo at the moment without finer window depth/z control.

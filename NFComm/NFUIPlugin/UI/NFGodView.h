@@ -41,10 +41,18 @@ public:
 
    virtual void SubRender();
 
-private:
-   int mnSceneID;
-   int mnGroupID;
+   NFGUID GetCurrentObjectID();
 
+private:
+   void RenderScene(const int sceneID);
+   void RenderScene(const int sceneID, const int groupID);
+
+private:
+   int mnSceneID = -1;
+   int mnGroupID = -1;
+
+   NFGUID mCurrentObjectID;
+   
 private:
    NFIUIModule* m_pUIModule;
    NFIClassModule* m_pClassModule;

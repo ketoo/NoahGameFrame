@@ -52,9 +52,6 @@ bool NFGodView::Execute()
       }
    }
 
-   mnSceneID = 0;
-   mnGroupID = 0;
-
 	NF_SHARE_PTR<NFIClass> xLogicClass = m_pClassModule->GetElement(NFrame::Scene::ThisName());
 	if (xLogicClass)
 	{
@@ -63,19 +60,21 @@ bool NFGodView::Execute()
       static int selected = -1;
       if (ImGui::Button("Select Scene"))
       {
-         ImGui::OpenPopup("my_select_popup");
+         ImGui::OpenPopup("my_select_scene");
       }
       ImGui::SameLine();
       ImGui::TextUnformatted(selected < 0 ? "<None>" : strIdList[selected].c_str());
 
-      if (ImGui::BeginPopup("my_select_popup"))
+      if (ImGui::BeginPopup("my_select_scene"))
       {
-         ImGui::Separator();
          for (int n = 0; n < strIdList.size(); n++)
          {
             if (ImGui::Selectable(strIdList[n].c_str(), selected == n))
             {
                 selected = n;
+                mnSceneID = lexical_cast<int>(strIdList[n]);
+                mnGroupID= -1;
+                mCurrentObjectID = NFGUID();
             }
          }
           
@@ -90,14 +89,14 @@ bool NFGodView::Execute()
       static int selected = -1;
 
       ImGui::SameLine();
-      if (ImGui::Button("Select Scene"))
+      if (ImGui::Button("Select Group"))
       {
-         ImGui::OpenPopup("my_select_popup");
+         ImGui::OpenPopup("my_select_group");
       }
       ImGui::SameLine();
-      ImGui::TextUnformatted(selected < 0 ? "<None>" : std::to_string(groups[selected]).c_str());
+      ImGui::TextUnformatted(selected < 0 ? "<None>" : std::to_string(mnGroupID).c_str());
 
-      if (ImGui::BeginPopup("my_select_popup"))
+      if (ImGui::BeginPopup("my_select_group"))
       {
          ImGui::Separator();
          for (int n = 0; n < groups.size(); n++)
@@ -105,14 +104,43 @@ bool NFGodView::Execute()
             if (ImGui::Selectable(std::to_string(groups[n]).c_str(), selected == n))
             {
                 selected = n;
+                mnGroupID = groups[n];
             }
          }
          
          ImGui::EndPopup();
       }
+
+      ImGui::SameLine();
+      if (ImGui::Button("  -  "))
+      {
+         //occupy inspectorview
+      }
+      
+      ImGui::SameLine();
+      if (ImGui::Button(" + "))
+      {
+         //occupy inspectorview
+      }
    }
 
 	return true;
+}
+
+void NFGodView::RenderScene(const int sceneID)
+{
+   if (mnGroupID >= 0)
+   {
+      RenderScene(sceneID, mnGroupID);
+   }
+   else
+   {
+      const std::vector<int>& groups = m_pSceneModule->GetGroups(sceneID);
+      for (int j = 0; j < groups.size(); j++)
+      {
+         RenderScene(sceneID, groups[j]);
+      }
+   }
 }
 
 void NFGodView::SubRender()
@@ -130,31 +158,8 @@ void NFGodView::SubRender()
             std::string sceneTreeNodeName = "Scene<" + strIdList[i] + ">";
             if (ImGui::TreeNode(sceneTreeNodeName.c_str()))
             {
-               const std::vector<int>& groups = m_pSceneModule->GetGroups(mnSceneID);
-               for (int j = 0; j < groups.size(); j++)
-               {
-                  std::string groupTreeNodeName = "Group<" + std::to_string(groups[j]) + ">";
-                  if (ImGui::TreeNode(groupTreeNodeName.c_str()))
-                  {
-                     //objects
-                     NFDataList list;
-                     m_pKernelModule->GetGroupObjectList(lexical_cast<int>(strIdList[i]), groups[j], list);
-                     for (int k = 0; k < list.GetCount(); ++k)
-                     {
-                        const NFGUID& guid = list.Object(k);
-                        const std::string& strClassName = m_pKernelModule->GetPropertyString(guid, NFrame::IObject::ClassName());
-                        std::string buttonName = strClassName + "<" + guid.ToString() + ">";
-                        if (ImGui::Button(buttonName.c_str()))
-                        {
-                           //occupy inspectorview
-                        }
-                     }
-
-                     ImGui::TreePop();
-                     ImGui::Separator();
-                  }
-               }
-
+               RenderScene(lexical_cast<int>(strIdList[i]));
+               
                ImGui::TreePop();
                ImGui::Separator();
             }
@@ -163,7 +168,44 @@ void NFGodView::SubRender()
    }
    else
    {
-      
+      RenderScene(mnSceneID);
    }
-   
+}
+
+void NFGodView::RenderScene(const int sceneID, const int groupID)
+{
+   std::string groupTreeNodeName = "Group<" + std::to_string(groupID) + ">";
+   if (ImGui::TreeNode(groupTreeNodeName.c_str()))
+   {
+      //objects
+      NFDataList list;
+      m_pKernelModule->GetGroupObjectList(sceneID, groupID, list);
+      for (int k = 0; k < list.GetCount(); ++k)
+      {
+         const NFGUID& guid = list.Object(k);
+         const std::string& strClassName = m_pKernelModule->GetPropertyString(guid, NFrame::IObject::ClassName());
+         std::string buttonName = strClassName + "<" + guid.ToString() + ">";
+         if (ImGui::Button(buttonName.c_str()))
+         {
+            mCurrentObjectID = guid;
+
+            //occupy inspectorview
+            NF_SHARE_PTR<NFIView> pHierachyView = m_pUIModule->GetView(NFViewType::HierachyView);
+            NF_SHARE_PTR<NFIView> pInspectorView = m_pUIModule->GetView(NFViewType::InspectorView);
+            if (pHierachyView && pInspectorView)
+            {
+               pInspectorView->OccupySubRender(pHierachyView.get());
+            }
+         }
+      }
+
+      ImGui::TreePop();
+      ImGui::Separator();
+   }
+}
+
+
+NFGUID NFGodView::GetCurrentObjectID()
+{
+   return mCurrentObjectID;
 }

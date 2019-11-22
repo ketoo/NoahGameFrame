@@ -23,8 +23,12 @@
    limitations under the License.
 */
 
-#include "NFHierachyView.h"
 #include "NFUIModule.h"
+#include "NFHierachyView.h"
+#include "NFGodView.h"
+#include "NFBluePrintView.h"
+#include "NFProjectView.h"
+#include "NFGameView.h"
 
 NFHierachyView::NFHierachyView(NFIPluginManager* p, NFViewType vt) : NFIView(p, vt, GET_CLASS_NAME(NFHierachyView))
 {
@@ -37,4 +41,58 @@ bool NFHierachyView::Execute()
 	//1. the project root folder is NFDataCfg
 
 	return false;
+}
+
+
+void NFHierachyView::SubRender()
+{
+   if (m_pOccupyView)
+   {
+      switch (m_pOccupyView->viewType)
+      {
+      case NFViewType::GodView:
+         GodViewSubRender();
+         break;
+      case NFViewType::BluePrintView:
+         BluePrintViewSubRender();
+         break;
+      case NFViewType::ProjectView:
+         ProjectViewSubRender();
+         break;
+      case NFViewType::GameView:
+         GameViewSubRender();
+         break;
+      
+      default:
+         break;
+      }
+   }
+}
+
+
+void NFHierachyView::GodViewSubRender()
+{
+   NFGUID objectID = ((NFGodView*)m_pOccupyView)->GetCurrentObjectID();
+   std::string name = "GodView" + objectID.ToString();
+   ImGui::Text(name.c_str());
+
+   ImGui::BeginGroup();
+
+
+   ImGui::EndPopup();
+}
+
+void NFHierachyView::GameViewSubRender()
+{
+   ImGui::Text("GameView");
+}
+
+void NFHierachyView::ProjectViewSubRender()
+{
+   ImGui::Text("ProjectView");
+}
+
+void NFHierachyView::BluePrintViewSubRender()
+{
+   ImGui::Text("BluePrintView");
 }
