@@ -117,7 +117,6 @@ bool NFUIModule::Execute()
 		{
 			view->ExecuteBegin();
 			view->Execute();
-			view->SubRender();
 			view->ExecuteEnd();
 		}
 

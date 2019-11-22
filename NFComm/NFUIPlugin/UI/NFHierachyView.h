@@ -32,6 +32,15 @@ class NFHierachyView : public NFIView
 public:
 	NFHierachyView(NFIPluginManager* p, NFViewType vt);
 	virtual bool Execute();
+
+   virtual void SubRender();
+
+private:
+   void GodViewSubRender();
+   void GameViewSubRender();
+   void ProjectViewSubRender();
+   void BluePrintViewSubRender();
+
 };
 
 #endif
