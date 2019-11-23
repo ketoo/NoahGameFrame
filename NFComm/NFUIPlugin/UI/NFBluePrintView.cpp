@@ -29,11 +29,47 @@
 NFBluePrintView::NFBluePrintView(NFIPluginManager* p, NFViewType vt) : NFIView(p, vt, GET_CLASS_NAME(NFBluePrintView))
 {
    m_pUIModule = pPluginManager->FindModule<NFIUIModule>();
+
 }
 
 bool NFBluePrintView::Execute()
 {
 	//1. the project root folder is NFDataCfg
+
+   imnodes::BeginNodeEditor();
+   /////////////////////////////
+
+
+   const int hardcoded_node_id = 1;
+   imnodes::SetNodeName(hardcoded_node_id, "empty node");
+
+   imnodes::BeginNode(hardcoded_node_id);
+   imnodes::BeginInputAttribute(hardcoded_node_id);
+   ImGui::Text("prop 1");
+   ImGui::Text("prop 2");
+   ImGui::Text("prop 3");
+   imnodes::EndAttribute();
+   imnodes::EndNode();
+
+
+   const int hardcoded_node_id1 = 2;
+   imnodes::SetNodeName(hardcoded_node_id1, "output node");
+   imnodes::BeginNode(hardcoded_node_id1);
+
+   const int output_attr_id = 2;
+   imnodes::BeginOutputAttribute(output_attr_id);
+   // in between Begin|EndAttribute calls, you can call ImGui
+   // UI functions
+   ImGui::Text("output pin");
+   imnodes::EndAttribute();
+
+   imnodes::EndNode();
+
+
+
+
+   /////////////////////////////
+   imnodes::EndNodeEditor();
 
    if (ImGui::IsWindowFocused())
    {
