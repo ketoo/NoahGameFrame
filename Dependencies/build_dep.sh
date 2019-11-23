@@ -78,9 +78,6 @@ fi
 
 cd ..
 
-mkdir ./lib/Release
-mkdir ./lib/Debug
-
 if [ $sysOS == "Darwin" ];then
     cp -r -f ./vcpkg/installed/x64-osx/lib/* ./lib/Release/
     cp -r -f ./vcpkg/installed/x64-osx/debug/lib/* ./lib/Debug/
@@ -93,7 +90,5 @@ elif [ $sysOS == "Linux" ];then
 
     cp -r -f ./vcpkg/installed/x64-linux/tools/protobuf/* ../NFComm/NFMessageDefine/
 fi
-
-cd ..
 
 ./build_hiredis.sh

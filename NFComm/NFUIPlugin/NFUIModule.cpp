@@ -36,8 +36,6 @@
 #include "UI/NFContainerView.h"
 #include "UI/NFOperatorView.h"
 
-
-
 bool NFUIModule::Awake()
 {
 	int rt = SetupGUI();
@@ -252,6 +250,13 @@ int NFUIModule::SetupGUI()
 	
 	SetupColour(io);
 
+	imnodes::Initialize();
+
+   	// set the titlebar color for all nodes
+	imnodes::Style& style = imnodes::GetStyle();
+	style.colors[imnodes::ColorStyle_TitleBar] = IM_COL32(232, 27, 86, 255);
+	style.colors[imnodes::ColorStyle_TitleBarSelected] = IM_COL32(241, 108, 146, 255);
+
 	return 0;
 }
 
@@ -317,6 +322,9 @@ void NFUIModule::CloseGUI()
 	if (running)
 	{
 		running = false;
+		
+		imnodes::Shutdown();
+
 		// Cleanup
 		ImGui_ImplOpenGL3_Shutdown();
 		ImGui_ImplSDL2_Shutdown();
