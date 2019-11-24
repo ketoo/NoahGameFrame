@@ -113,9 +113,16 @@ bool NFUIModule::Execute()
 
 		for (auto view : mViewList)
 		{
-			view->ExecuteBegin();
+			ExecuteBegin(view);
+
 			view->Execute();
-			view->ExecuteEnd();
+
+			if (view->m_pOccupyView)
+			{
+				//view->m_pOccupyView->SubRender();
+			}
+
+			ExecuteEnd(view);
 		}
 
 		// Rendering
@@ -250,7 +257,12 @@ int NFUIModule::SetupGUI()
 	
 	SetupColour(io);
 
-	//imnodes::Initialize();
+	imnodes::Initialize();
+
+   	// set the titlebar color for all nodes
+	imnodes::Style& style = imnodes::GetStyle();
+	style.colors[imnodes::ColorStyle_TitleBar] = IM_COL32(232, 27, 86, 255);
+	style.colors[imnodes::ColorStyle_TitleBarSelected] = IM_COL32(241, 108, 146, 255);
 
 	return 0;
 }
@@ -318,7 +330,7 @@ void NFUIModule::CloseGUI()
 	{
 		running = false;
 		
-		//imnodes::Shutdown();
+		imnodes::Shutdown();
 
 		// Cleanup
 		ImGui_ImplOpenGL3_Shutdown();
@@ -350,12 +362,26 @@ const std::vector<NF_SHARE_PTR<NFIView>>& NFUIModule::GetViews()
 	return mViewList;
 }	
 
-void NFUIModule::ExecuteBegin(const std::string& name, bool* visible)
+void NFUIModule::ExecuteBegin(NF_SHARE_PTR<NFIView> view)
 {
-	ImGui::Begin(name.c_str(), visible);
+	if (view->viewType == NFViewType::NONE)
+	{
+   		//imnodes::BeginNodeEditor();
+	}
+	else
+	{
+		ImGui::Begin(view->name.c_str(), &(view->visible));
+	}
 }
 
-void NFUIModule::ExecuteEnd()
+void NFUIModule::ExecuteEnd(NF_SHARE_PTR<NFIView> view)
 {
-    ImGui::End();
+	if (view->viewType == NFViewType::NONE)
+	{
+  		//imnodes::EndNodeEditor();
+	}
+	else
+	{
+    	ImGui::End();
+	}
 }

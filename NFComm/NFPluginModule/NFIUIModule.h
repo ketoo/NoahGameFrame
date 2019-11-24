@@ -56,10 +56,6 @@ public:
 	virtual NF_SHARE_PTR<NFIView> GetView(NFViewType viewType) = 0;
 
 	virtual const std::vector<NF_SHARE_PTR<NFIView>>& GetViews() = 0;
-
-	virtual void ExecuteBegin(const std::string& name, bool* visible) = 0;
-	virtual void ExecuteEnd() = 0;
-
 };
 
 class NFIView : public NFIModule
@@ -80,31 +76,14 @@ public:
 		m_pOccupyView = pOccupyView;
     }
 
-	virtual void ExecuteBegin()
-    {
-		m_pUIModule->ExecuteBegin(name, &visible);
-	}
-
     virtual bool Execute()
     {
-
-
         return true;
     }
 	
 	virtual void SubRender()
 	{
 
-	}
-
-	virtual void ExecuteEnd()
-    {
-		if (m_pOccupyView)
-		{
-			m_pOccupyView->SubRender();
-		}
-
-		m_pUIModule->ExecuteEnd();
 	}
 
 	NFIUIModule* m_pUIModule;

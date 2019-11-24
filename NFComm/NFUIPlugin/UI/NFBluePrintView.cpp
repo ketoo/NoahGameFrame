@@ -28,14 +28,61 @@
 
 NFBluePrintView::NFBluePrintView(NFIPluginManager* p, NFViewType vt) : NFIView(p, vt, GET_CLASS_NAME(NFBluePrintView))
 {
+   m_pNodeView = NF_NEW NFNodeView(p);
+
    m_pUIModule = pPluginManager->FindModule<NFIUIModule>();
 
 }
 
+NFBluePrintView::~NFBluePrintView()
+{
+   delete m_pNodeView;
+   m_pNodeView = nullptr;
+}
+
 bool NFBluePrintView::Execute()
 {
-   mNodeData.Render();
+	//1. add monitor
+   //2. add judgement
+   //3. add executor
+   //4. delete links
+   //4. delete nodes
 
+	//5. return canvas's center 
+
+   if (ImGui::Button("+ NFMonitor"))
+   {
+
+   }
+
+   ImGui::SameLine();
+   if (ImGui::Button("+ NFJudgement"))
+   {
+   }
+   
+   ImGui::SameLine();
+   if (ImGui::Button("+ NFExecutor"))
+   {
+   }
+   
+   ImGui::SameLine();
+   if (ImGui::Button("- links"))
+   {
+   }
+
+   ImGui::SameLine();
+   if (ImGui::Button("- nodes"))
+   {
+   }
+
+   ImGui::SameLine();
+   if (ImGui::Button("return center"))
+   {
+   }
+
+
+   //m_pNodeView->Execute();
+   
    if (ImGui::IsWindowFocused())
    {
       NF_SHARE_PTR<NFIView> pView = m_pUIModule->GetView(NFViewType::HierachyView);
