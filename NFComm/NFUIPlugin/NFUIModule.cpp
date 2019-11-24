@@ -250,12 +250,7 @@ int NFUIModule::SetupGUI()
 	
 	SetupColour(io);
 
-	imnodes::Initialize();
-
-   	// set the titlebar color for all nodes
-	imnodes::Style& style = imnodes::GetStyle();
-	style.colors[imnodes::ColorStyle_TitleBar] = IM_COL32(232, 27, 86, 255);
-	style.colors[imnodes::ColorStyle_TitleBarSelected] = IM_COL32(241, 108, 146, 255);
+	//imnodes::Initialize();
 
 	return 0;
 }
@@ -323,7 +318,7 @@ void NFUIModule::CloseGUI()
 	{
 		running = false;
 		
-		imnodes::Shutdown();
+		//imnodes::Shutdown();
 
 		// Cleanup
 		ImGui_ImplOpenGL3_Shutdown();

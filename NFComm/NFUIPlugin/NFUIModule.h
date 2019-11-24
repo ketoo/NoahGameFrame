@@ -38,6 +38,12 @@
 #include <stdio.h>
 #include <SDL.h>
 
+#include "NodeEditor/imgui_node_editor.h"
+#ifndef IMGUI_DEFINE_MATH_OPERATORS
+#define IMGUI_DEFINE_MATH_OPERATORS
+#endif
+#include "ImGui/imgui_internal.h"
+
 #if defined(IMGUI_IMPL_OPENGL_LOADER_GL3W)
 #include <GL/gl3w.h>    // Initialize with gl3wInit()
 #elif defined(IMGUI_IMPL_OPENGL_LOADER_GLEW)
@@ -48,7 +54,7 @@
 #include IMGUI_IMPL_OPENGL_LOADER_CUSTOM
 #endif
 
-#include "imgui/imnodes.h"
+//#include "imgui/imnodes.h"
 
 class NFUIModule
     : public NFIUIModule
