@@ -147,7 +147,7 @@ void NFNodeView::AddNodeAttrIn(const int nodeId, const int attrId, const std::st
    }
 }
 
-void NFNodeView::AddNodeAttOut(const int nodeId, const int attrId, const std::string& name)
+void NFNodeView::AddNodeAttrOut(const int nodeId, const int attrId, const std::string& name)
 {
    for (auto it : mNodes)
    {

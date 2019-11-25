@@ -32,7 +32,7 @@
 
 NFHierachyView::NFHierachyView(NFIPluginManager* p, NFViewType vt) : NFIView(p, vt, GET_CLASS_NAME(NFHierachyView))
 {
-
+   m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>();
 }
 
 
@@ -78,8 +78,24 @@ void NFHierachyView::GodViewSubRender()
 
    ImGui::BeginGroup();
 
+   NF_SHARE_PTR<NFIObject> pObject = m_pKernelModule->GetObject(objectID);
+   if (pObject)
+   {
+      NF_SHARE_PTR<NFIProperty> pProperty = pObject->GetPropertyManager()->First();
+      while(pProperty)
+      {
+         ImGui::Text(pProperty->GetKey().c_str());
+         ImGui::SameLine();
+         ImGui::Text(pProperty->GetString().c_str());
 
-   ImGui::EndPopup();
+         //static char str0[128] = "Hello, world!";
+         //ImGui::InputText("input text", str0, IM_ARRAYSIZE(str0));
+         
+         pProperty = pObject->GetPropertyManager()->Next();
+      }
+   }
+
+   ImGui::EndGroup();
 }
 
 void NFHierachyView::GameViewSubRender()

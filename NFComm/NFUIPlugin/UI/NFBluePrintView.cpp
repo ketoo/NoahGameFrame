@@ -32,6 +32,31 @@ NFBluePrintView::NFBluePrintView(NFIPluginManager* p, NFViewType vt) : NFIView(p
 
    m_pUIModule = pPluginManager->FindModule<NFIUIModule>();
 
+
+   static int index = 0;
+   int testID1 = ++index;
+   int testID2 = ++index;
+   int testID3 = ++index;
+   int testID4 = ++index;
+
+   m_pNodeView->AddNode(testID1, "testnode1");
+   m_pNodeView->AddNode(testID2, "testnode2");
+   m_pNodeView->AddNode(testID3, "testnode3");
+   m_pNodeView->AddNode(testID4, "testnode4");
+
+   for (int i = 0; i < 3; ++i)
+   {
+      m_pNodeView->AddNodeAttrOut(testID1, ++index, "Out1");
+      m_pNodeView->AddNodeAttrOut(testID2, ++index, "Out1");
+      m_pNodeView->AddNodeAttrOut(testID3, ++index, "Out1");
+
+
+      m_pNodeView->AddNodeAttrIn(testID1, ++index, "In1");
+      m_pNodeView->AddNodeAttrIn(testID2, ++index, "In12");
+      m_pNodeView->AddNodeAttrIn(testID3, ++index, "In13");
+
+   }
+
 }
 
 NFBluePrintView::~NFBluePrintView()
@@ -80,8 +105,7 @@ bool NFBluePrintView::Execute()
    {
    }
 
-
-   //m_pNodeView->Execute();
+   m_pNodeView->Execute();
    
    if (ImGui::IsWindowFocused())
    {

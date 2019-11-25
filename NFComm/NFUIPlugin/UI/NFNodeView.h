@@ -110,7 +110,7 @@ public:
 
    void AddNode(const int nodeId, const std::string& name);
    void AddNodeAttrIn(const int nodeId, const int attrId, const std::string& name);
-   void AddNodeAttOut(const int nodeId, const int attrId, const std::string& name);
+   void AddNodeAttrOut(const int nodeId, const int attrId, const std::string& name);
    void DeleteNode(const int nodeId);
 
 private:
