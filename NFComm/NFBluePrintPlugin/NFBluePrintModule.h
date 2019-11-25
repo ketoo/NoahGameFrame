@@ -68,7 +68,7 @@ public:
 
     virtual NF_SHARE_PTR<NFLogicBlock> CreateLogicBlock()
     {
-        auto p = NF_SHARE_PTR<NFLogicBlock>(NF_NEW NFLogicBlock());
+        auto p = NF_SHARE_PTR<NFLogicBlock>(NF_NEW NFLogicBlock(pPluginManager));
         mLogicBlocks.push_back(p);
         return p;
     }
