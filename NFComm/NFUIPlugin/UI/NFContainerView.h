@@ -33,9 +33,7 @@ class NFContainerView : public NFIView
 public:
 	NFContainerView(NFIPluginManager* p, NFViewType vt);
 
-   virtual void ExecuteBegin();
 	virtual bool Execute();
-   virtual void ExecuteEnd();
 
 private:
    void FileMenu();

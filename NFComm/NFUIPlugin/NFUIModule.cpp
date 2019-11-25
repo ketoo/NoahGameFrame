@@ -368,6 +368,9 @@ void NFUIModule::ExecuteBegin(NF_SHARE_PTR<NFIView> view)
 	{
    		//imnodes::BeginNodeEditor();
 	}
+	else if (view->viewType == NFViewType::ContainerView)
+	{
+	}
 	else
 	{
 		ImGui::Begin(view->name.c_str(), &(view->visible));
@@ -379,6 +382,9 @@ void NFUIModule::ExecuteEnd(NF_SHARE_PTR<NFIView> view)
 	if (view->viewType == NFViewType::NONE)
 	{
   		//imnodes::EndNodeEditor();
+	}
+	else if (view->viewType == NFViewType::ContainerView)
+	{
 	}
 	else
 	{

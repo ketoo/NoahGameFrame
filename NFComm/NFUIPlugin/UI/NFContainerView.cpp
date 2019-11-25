@@ -233,10 +233,6 @@ void NFContainerView::HelpMenu()
    }
 }
 
-void NFContainerView::ExecuteBegin()
-{
-}
-
 bool NFContainerView::Execute()
 {
 
@@ -319,8 +315,4 @@ bool NFContainerView::Execute()
    }
 
 	return false;
-}
-
-void NFContainerView::ExecuteEnd()
-{
 }
