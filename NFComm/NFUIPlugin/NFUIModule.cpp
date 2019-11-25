@@ -117,11 +117,6 @@ bool NFUIModule::Execute()
 
 			view->Execute();
 
-			if (view->m_pOccupyView)
-			{
-				//view->m_pOccupyView->SubRender();
-			}
-
 			ExecuteEnd(view);
 		}
 
@@ -388,6 +383,12 @@ void NFUIModule::ExecuteEnd(NF_SHARE_PTR<NFIView> view)
 	}
 	else
 	{
+
+		if (view->m_pOccupyView)
+		{
+			view->m_pOccupyView->SubRender();
+		}
+
     	ImGui::End();
 	}
 }
