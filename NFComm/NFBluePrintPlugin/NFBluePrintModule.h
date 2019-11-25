@@ -66,14 +66,20 @@ public:
     virtual bool Finalize();
     virtual bool OnReloadPlugin();
 
-    NF_SHARE_PTR<NFLogicBlock> CreateLogicBlock()
+    virtual NF_SHARE_PTR<NFLogicBlock> CreateLogicBlock()
     {
-        return nullptr;
+        auto p = NF_SHARE_PTR<NFLogicBlock>(NF_NEW NFLogicBlock());
+        mLogicBlocks.push_back(p);
+        return p;
     }
 
+    virtual const std::list<NF_SHARE_PTR<NFLogicBlock>>& GetLogicBlocks()
+    {
+        return mLogicBlocks;
+    }
 private:
 
-    std::list<NFLogicBlock> mLogicBlocks;
+    std::list<NF_SHARE_PTR<NFLogicBlock>> mLogicBlocks;
 };
 
 

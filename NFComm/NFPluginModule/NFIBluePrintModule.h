@@ -27,6 +27,7 @@
 
 #include <iostream>
 #include "NFIModule.h"
+#include "NFIKernelModule.h"
 
 class NFIBluePrintModule
     : public NFIModule
@@ -264,7 +265,11 @@ public:
 		std::list<NF_SHARE_PTR<NFMonitor>> monitors;
 	};
 
-	////////////////////
+	////////////////////////////////////////
+
+    virtual NF_SHARE_PTR<NFLogicBlock> CreateLogicBlock() = 0;
+    virtual const std::list<NF_SHARE_PTR<NFLogicBlock>>& GetLogicBlocks() = 0;
+	
 };
 
 #endif

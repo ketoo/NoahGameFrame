@@ -63,14 +63,15 @@ public:
 
    void AddAttribute(const int id, const std::string& name, const bool inputPin)
    {
-      mAttris.push_back(NFNodeAttri(id, name, inputPin));
+      auto ptr = NF_SHARE_PTR<NFNodeAttri>(NF_NEW NFNodeAttri(id, name, inputPin));
+      mAttris.push_back(ptr);
    }
 
    void DeleteAttribute(const int id)
    {
       for (auto it = mAttris.begin(); it != mAttris.end(); ++it)
       {
-         if (it->id == id)
+         if ((*it)->id == id)
          {
             mAttris.erase(it);
             return;
@@ -81,7 +82,7 @@ public:
    std::string name;
    int id;
 
-   std::list<NFNodeAttri> mAttris;
+   std::list<NF_SHARE_PTR<NFNodeAttri>> mAttris;
 };
 
 class NFNodeLink
@@ -108,11 +109,16 @@ public:
 
 	virtual bool Execute();
 
+   int GenerateId();
+
    void AddNode(const int nodeId, const std::string& name);
    void AddNodeAttrIn(const int nodeId, const int attrId, const std::string& name);
    void AddNodeAttrOut(const int nodeId, const int attrId, const std::string& name);
    void DeleteNode(const int nodeId);
 
+   int GetNodeByAttriId(const int attriId);
+   void ResetOffestZero();
+   
 private:
    void RenderNodes();
    void RenderLinks();
@@ -120,8 +126,8 @@ private:
 private:
    NFIUIModule* m_pUIModule;
 
-   std::list<NFNode> mNodes;
-   std::list<NFNodeLink> mLinks;
+   std::list<NF_SHARE_PTR<NFNode>> mNodes;
+   std::list<NF_SHARE_PTR<NFNodeLink>> mLinks;
 };
 
 #endif

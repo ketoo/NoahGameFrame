@@ -26,6 +26,7 @@
 #define NF_BLUE_PRINT_VIEW_H
 
 #include "NFComm/NFPluginModule/NFIUIModule.h"
+#include "NFComm/NFPluginModule/NFIBluePrintModule.h"
 #include "NFNodeView.h"
 
 class NFBluePrintView : public NFIView
@@ -40,6 +41,7 @@ public:
    
 private:
 	NFNodeView* m_pNodeView;
+   NFIBluePrintModule* m_pBluePrintModule;
    NFIUIModule* m_pUIModule;
 };
 

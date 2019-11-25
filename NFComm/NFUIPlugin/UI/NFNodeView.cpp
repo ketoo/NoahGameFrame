@@ -49,7 +49,7 @@ void NFNode::Execute()
 
    for (auto it : mAttris)
    {
-     it.Execute();
+     it->Execute();
    }
 
    imnodes::EndNode();
@@ -61,6 +61,13 @@ NFNodeView::NFNodeView(NFIPluginManager* p) : NFIView(p, NFViewType::NONE, GET_C
 {
    m_pUIModule = pPluginManager->FindModule<NFIUIModule>();
 
+}
+
+int NFNodeView::GenerateId()
+{
+   int i = NFGetTimeS();
+   i++;
+   return i;
 }
 
 bool NFNodeView::Execute()
@@ -105,9 +112,11 @@ bool NFNodeView::Execute()
    int start_attr, end_attr;
    if (imnodes::IsLinkCreated(&start_attr, &end_attr))
    {
-      mLinks.push_back(NFNodeLink(start_attr, end_attr));
+      if (GetNodeByAttriId(start_attr) != GetNodeByAttriId(end_attr))
+      {
+         mLinks.push_back(NF_SHARE_PTR<NFNodeLink>(NF_NEW NFNodeLink(start_attr, end_attr)));
+      }
    }
-  
 
 	return false;
 }
@@ -116,7 +125,7 @@ void NFNodeView::RenderNodes()
 {
    for (auto it : mNodes)
    {
-      it.Execute();
+      it->Execute();
    }
 }
 
@@ -126,22 +135,22 @@ void NFNodeView::RenderLinks()
    for (auto it : mLinks)
    {
       ++i;
-      imnodes::Link(i, it.start, it.end);
+      imnodes::Link(i, it->start, it->end);
    }
 }
 
 void NFNodeView::AddNode(const int nodeId, const std::string& name)
 {
-   mNodes.push_back(NFNode(nodeId, name));
+   mNodes.push_back(NF_SHARE_PTR<NFNode>(NF_NEW NFNode(nodeId, name)));
 }
 
 void NFNodeView::AddNodeAttrIn(const int nodeId, const int attrId, const std::string& name)
 {
    for (auto it : mNodes)
    {
-      if (it.id == nodeId)
+      if (it->id == nodeId)
       {
-         it.AddAttribute(attrId, name, true);
+         it->AddAttribute(attrId, name, true);
          return;
       }
    }
@@ -151,9 +160,9 @@ void NFNodeView::AddNodeAttrOut(const int nodeId, const int attrId, const std::s
 {
    for (auto it : mNodes)
    {
-      if (it.id == nodeId)
+      if (it->id == nodeId)
       {
-         it.AddAttribute(attrId, name, false);
+         it->AddAttribute(attrId, name, false);
          return;
       }
    }
@@ -163,10 +172,33 @@ void NFNodeView::DeleteNode(const int nodeId)
 {
    for (auto it = mNodes.begin(); it != mNodes.end(); ++it)
    {
-      if (it->id == nodeId)
+      if ((*it)->id == nodeId)
       {
          mNodes.erase(it);
          return;
       }
    }
+}   
+
+int NFNodeView::GetNodeByAttriId(const int attriId)
+{
+   for (auto it : mNodes)
+   {
+      NF_SHARE_PTR<NFNode> node = it;
+      for (auto attri : node->mAttris)
+      {
+         if (attri->id == attriId)
+         {
+            return node->id;
+         }
+      }
+   }
+
+   return -1;
+}
+
+void NFNodeView::ResetOffestZero()
+{
+   //imnodes::EditorContext& context = imnodes::editor_context_get();
+   //imnodes::editor_context_reset_panning(&context);
 }

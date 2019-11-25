@@ -31,32 +31,28 @@ NFBluePrintView::NFBluePrintView(NFIPluginManager* p, NFViewType vt) : NFIView(p
    m_pNodeView = NF_NEW NFNodeView(p);
 
    m_pUIModule = pPluginManager->FindModule<NFIUIModule>();
+   m_pBluePrintModule = pPluginManager->FindModule<NFIBluePrintModule>();
 
+   int testID1 = m_pNodeView->GenerateId();
+   int testID2 = m_pNodeView->GenerateId();
+   int testID3 = m_pNodeView->GenerateId();
+   int testID4 = m_pNodeView->GenerateId();
 
-   static int index = 0;
-   int testID1 = ++index;
-   int testID2 = ++index;
-   int testID3 = ++index;
-   int testID4 = ++index;
+   m_pNodeView->AddNode(testID1, "testnode1111111");
+   m_pNodeView->AddNode(testID2, "testnode2222222");
+   m_pNodeView->AddNode(testID3, "testnode333333");
+   m_pNodeView->AddNode(testID4, "testnode4444444");
 
-   m_pNodeView->AddNode(testID1, "testnode1");
-   m_pNodeView->AddNode(testID2, "testnode2");
-   m_pNodeView->AddNode(testID3, "testnode3");
-   m_pNodeView->AddNode(testID4, "testnode4");
-
-   for (int i = 0; i < 3; ++i)
+   for (int i = 0; i < 4; ++i)
    {
-      m_pNodeView->AddNodeAttrOut(testID1, ++index, "Out1");
-      m_pNodeView->AddNodeAttrOut(testID2, ++index, "Out1");
-      m_pNodeView->AddNodeAttrOut(testID3, ++index, "Out1");
+      m_pNodeView->AddNodeAttrOut(testID1, m_pNodeView->GenerateId(), "Out1");
+      m_pNodeView->AddNodeAttrOut(testID2, m_pNodeView->GenerateId(), "Out1");
+      m_pNodeView->AddNodeAttrOut(testID3, m_pNodeView->GenerateId(), "Out1");
 
-
-      m_pNodeView->AddNodeAttrIn(testID1, ++index, "In1");
-      m_pNodeView->AddNodeAttrIn(testID2, ++index, "In12");
-      m_pNodeView->AddNodeAttrIn(testID3, ++index, "In13");
-
+      m_pNodeView->AddNodeAttrIn(testID1, m_pNodeView->GenerateId(), "In1");
+      m_pNodeView->AddNodeAttrIn(testID2, m_pNodeView->GenerateId(), "In12");
+      m_pNodeView->AddNodeAttrIn(testID3, m_pNodeView->GenerateId(), "In13");
    }
-
 }
 
 NFBluePrintView::~NFBluePrintView()
@@ -74,7 +70,16 @@ bool NFBluePrintView::Execute()
    //4. delete nodes
 
 	//5. return canvas's center 
+   if (ImGui::Button("+ NFBluePrint Block"))
+   {
+      auto pLogicBlock = m_pBluePrintModule->CreateLogicBlock();
+      if (pLogicBlock)
+      {
+         
+      }
+   }
 
+   ImGui::SameLine();
    if (ImGui::Button("+ NFMonitor"))
    {
 
@@ -103,6 +108,7 @@ bool NFBluePrintView::Execute()
    ImGui::SameLine();
    if (ImGui::Button("return center"))
    {
+      m_pNodeView->ResetOffestZero();
    }
 
    m_pNodeView->Execute();
