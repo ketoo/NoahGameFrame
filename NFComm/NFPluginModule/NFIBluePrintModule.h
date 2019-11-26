@@ -164,7 +164,7 @@ public:
 		//if this executer has next executer, then do next executer first
 		NF_SHARE_PTR<NFExecuter> nextExecuter;
 
-		std::map<NFJudgementType, NF_SHARE_PTR<NFExecuter>> judgements;
+		std::map<NFJudgementType, NF_SHARE_PTR<NFExecuter>> executers;
 	};
 	class NFMonitor ;
 	class NFJudgement : public BluePrintNodeBase
@@ -186,7 +186,7 @@ public:
 		NFJudgementType judgementType = NFJudgementType::NONE;
 		//if this judgment has next judgment, then do next judgment first
 		NF_SHARE_PTR<NFJudgement> nextJudgement;
-		std::map<NFJudgementType, NF_SHARE_PTR<NFExecuter>> judgements;
+		std::map<NFJudgementType, NF_SHARE_PTR<NFExecuter>> executers;
 	};
 
 	class NFMonitor : public BluePrintNodeBase
@@ -220,12 +220,13 @@ public:
 		NFLogicBlock(){}
 
 	public:
-		NFLogicBlock(NFIPluginManager* p)
+		NFLogicBlock(NFIPluginManager* p, const std::string& name)
 		{
 			this->pPluginManager = p;
+			this->name = name;
 		}
 
-		NF_SHARE_PTR<NFMonitor> AddMonitor(NFMonitorType operatorType, const std::string& name, const std::string& desc, const NFDataList& arg)
+		NF_SHARE_PTR<NFMonitor> AddMonitor(NFMonitorType operatorType, const std::string& desc, const NFDataList& arg)
 		{
 			NF_SHARE_PTR<NFMonitor> monitor = nullptr;
 
@@ -242,7 +243,7 @@ public:
 					{
 						monitor = NF_SHARE_PTR<NFMonitor>(NF_NEW NFMonitor(this->pPluginManager));
 						monitor->id = this->pPluginManager->FindModule<NFIKernelModule>()->CreateGUID();
-						monitor->name = name;
+						//monitor->name = name;
 						monitor->desc = desc;
 						monitor->operatorType = operatorType;
 					}
@@ -267,7 +268,7 @@ public:
 
 	////////////////////////////////////////
 
-    virtual NF_SHARE_PTR<NFLogicBlock> CreateLogicBlock() = 0;
+    virtual NF_SHARE_PTR<NFLogicBlock> CreateLogicBlock(const std::string& name) = 0;
     virtual const std::list<NF_SHARE_PTR<NFLogicBlock>>& GetLogicBlocks() = 0;
     virtual NF_SHARE_PTR<NFLogicBlock>  GetLogicBlock(const NFGUID id) = 0;
     virtual NF_SHARE_PTR<NFLogicBlock>  GetLogicBlock(const std::string& name) = 0;

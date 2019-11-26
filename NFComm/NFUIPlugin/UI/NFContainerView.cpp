@@ -23,13 +23,13 @@
    limitations under the License.
 */
 
-
-#include "NFContainerView.h"
 #include "NFUIModule.h"
+#include "NFContainerView.h"
+#include "NFBluePrintView.h"
 
 NFContainerView::NFContainerView(NFIPluginManager* p, NFViewType vt) : NFIView(p, vt, GET_CLASS_NAME(NFContainerView))
 {
-
+   m_pUIModule = pPluginManager->FindModule<NFIUIModule>();
 }
 
 void NFContainerView::FileMenu()
@@ -136,15 +136,17 @@ void NFContainerView::BluePrintMenu()
 {
    if (ImGui::BeginMenu("BluePrint"))
    {
-      // Disabling fullscreen would allow the window to be moved to the front of other windows,
-      // which we can't undo at the moment without finer window depth/z control.
-      //ImGui::MenuItem("Fullscreen", NULL, &opt_fullscreen_persistant);
-
-      if (ImGui::MenuItem("Open", ""))
+      if (ImGui::MenuItem("New Logic Block", ""))
       {
-
+         /*
+         NF_SHARE_PTR<NFBluePrintView> pBluePrintView = (NF_SHARE_PTR<NFBluePrintView>)m_pUIModule->GetView(NFViewType::BluePrintView);
+         if (pBluePrintView)
+         {
+            pBluePrintView->TryToCreateBluePrintBlock();
+         }
+         */
       }
-      if (ImGui::MenuItem("Save", ""))
+      if (ImGui::MenuItem("New Monitor", ""))
       {
                   
       }

@@ -44,6 +44,9 @@ private:
    void ToolsMenu();
    void WindowsMenu();
    void HelpMenu();
+
+private:
+   NFIUIModule* m_pUIModule;
 };
 
 #endif

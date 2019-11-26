@@ -66,9 +66,9 @@ public:
     virtual bool Finalize();
     virtual bool OnReloadPlugin();
 
-    virtual NF_SHARE_PTR<NFLogicBlock> CreateLogicBlock()
+    virtual NF_SHARE_PTR<NFLogicBlock> CreateLogicBlock(const std::string& name)
     {
-        auto p = NF_SHARE_PTR<NFLogicBlock>(NF_NEW NFLogicBlock(pPluginManager));
+        auto p = NF_SHARE_PTR<NFLogicBlock>(NF_NEW NFLogicBlock(pPluginManager, name));
         mLogicBlocks.push_back(p);
         return p;
     }

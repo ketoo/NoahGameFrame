@@ -100,31 +100,13 @@ bool NFBluePrintView::Execute()
       }
    }
 
-   ImGui::SameLine();
-   if (selectedBlock.empty())
-   {
-      ImGui::TextUnformatted("<None>");
-   }
-   else
-   {
-      ImGui::TextUnformatted(selectedBlock.c_str());
-      SetCurrentLogicBlock(m_pBluePrintModule->GetLogicBlock(selectedBlock));
-   }
 
-   ImGui::SameLine();
-   if (ImGui::Button("+ Logic Block"))
-   {
-      auto pLogicBlock = m_pBluePrintModule->CreateLogicBlock();
-      if (pLogicBlock)
-      {
-         
-      }
-   }
-
-   ImGui::SameLine();
    if (ImGui::Button("+ NFMonitor"))
    {
-
+      if (mCurrentLogicBlock)
+      {
+         mCurrentLogicBlock->AddMonitor(NFIBluePrintModule::NFMonitorType::PropertyEvent, "", NFDataList::Empty());
+      }
    }
 
    ImGui::SameLine();
@@ -156,6 +138,30 @@ bool NFBluePrintView::Execute()
 
    m_pNodeView->Execute();
    
+   if (bCreatingLogicBlock)
+   {
+      if (!ImGui::BeginChild("Create Logic Block"))
+      {
+         static char str0[128] = "Hello, world!";
+         ImGui::InputText("input text", str0, IM_ARRAYSIZE(str0));
+
+         if (ImGui::Button("Cancel"))
+         {
+            bCreatingLogicBlock = false;
+         }
+         
+         ImGui::SameLine();
+
+         if (ImGui::Button("OK"))
+         {
+            m_pBluePrintModule->CreateLogicBlock(str0);
+            bCreatingLogicBlock = false;
+         }
+
+         ImGui::EndChild();
+      }
+   }
+
    if (ImGui::IsWindowFocused())
    {
       NF_SHARE_PTR<NFIView> pView = m_pUIModule->GetView(NFViewType::HierachyView);
@@ -165,12 +171,13 @@ bool NFBluePrintView::Execute()
       }
    }
 
-	return false;
-}
+   ImGuiIO& io = ImGui::GetIO();
+   if (io.WantCaptureMouse)
+   {
 
-void NFBluePrintView::SubRender()
-{
-   ImGui::Text(this->name.c_str());
+   }
+
+	return false;
 }
 
 void NFBluePrintView::SetCurrentLogicBlock(NF_SHARE_PTR<NFIBluePrintModule::NFLogicBlock> logicBlock)
@@ -180,4 +187,88 @@ void NFBluePrintView::SetCurrentLogicBlock(NF_SHARE_PTR<NFIBluePrintModule::NFLo
    mCurrentMonitor = nullptr;
    mCurrentExecuter = nullptr;
    mCurrentJudgement = nullptr;
+}
+
+void NFBluePrintView::SubRender()
+{
+   ImGui::Text(this->name.c_str());
+
+   const std::list<NF_SHARE_PTR<NFIBluePrintModule::NFLogicBlock>>& logicBlocks = m_pBluePrintModule->GetLogicBlocks();
+   for (auto it : logicBlocks)
+   {
+      std::string logicBlockNodeName = "LogicBlock<" + it->name + ">";
+      if (ImGui::TreeNode(logicBlockNodeName.c_str()))
+      {
+         for (auto monitor : it->monitors)
+         {
+            SubMonitorRender(monitor);
+         }
+
+         ImGui::TreePop();
+      }
+   }
+
+}
+
+void NFBluePrintView::SubMonitorRender(NF_SHARE_PTR<NFIBluePrintModule::NFMonitor> monitor)
+{
+   if (ImGui::TreeNode(monitor->name.c_str()))
+   {
+      for (auto judgement : monitor->judgements)
+      {
+         SubJudgementRender(judgement);
+         
+      }
+      /*
+
+      //occupy inspectorview
+      NF_SHARE_PTR<NFIView> pHierachyView = m_pUIModule->GetView(NFViewType::HierachyView);
+      NF_SHARE_PTR<NFIView> pInspectorView = m_pUIModule->GetView(NFViewType::InspectorView);
+      if (pHierachyView && pInspectorView)
+      {
+         pInspectorView->OccupySubRender(pHierachyView.get());
+      }
+      */
+         
+      ImGui::TreePop();
+   }
+}
+
+void NFBluePrintView::SubJudgementRender(NF_SHARE_PTR<NFIBluePrintModule::NFJudgement> judgement)
+{
+   if (ImGui::TreeNode(judgement->name.c_str()))
+   {
+      if (judgement->nextJudgement)
+      {
+         SubJudgementRender(judgement->nextJudgement);
+      }
+
+      for (auto executer : judgement->executers)
+      {
+         SubExecuterRender(executer.second);
+      }
+
+      ImGui::TreePop();
+   }
+}
+
+void NFBluePrintView::SubExecuterRender(NF_SHARE_PTR<NFIBluePrintModule::NFExecuter> executer)
+{
+   if (ImGui::TreeNode(executer->name.c_str()))
+   {
+      for (auto executer1 : executer->executers)
+      {
+         SubExecuterRender(executer1.second);
+      }
+
+      ImGui::TreePop();
+   }
+}
+
+void NFBluePrintView::TryToCreateBluePrintBlock()
+{
+   if (!bCreatingLogicBlock)
+   {
+      bCreatingLogicBlock = true;
+   }
 }
