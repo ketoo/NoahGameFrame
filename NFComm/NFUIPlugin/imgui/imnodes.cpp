@@ -1015,6 +1015,12 @@ void EditorContextFree(EditorContext* ctx)
 
 void EditorContextSet(EditorContext* ctx) { g.editor_ctx = ctx; }
 
+void EditorContextResetPanning(const ImVec2& pos)
+{
+    EditorContext& editor = editor_context_get();
+    editor.panning = pos;
+}
+
 void Initialize()
 {
     assert(initialized == false);

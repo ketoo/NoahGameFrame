@@ -56,6 +56,7 @@ struct EditorContext;
 EditorContext* EditorContextCreate();
 void EditorContextFree(EditorContext*);
 void EditorContextSet(EditorContext*);
+void EditorContextResetPanning(const ImVec2& pos);
 
 // Initialize the node editor system.
 void Initialize();

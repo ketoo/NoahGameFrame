@@ -269,6 +269,9 @@ public:
 
     virtual NF_SHARE_PTR<NFLogicBlock> CreateLogicBlock() = 0;
     virtual const std::list<NF_SHARE_PTR<NFLogicBlock>>& GetLogicBlocks() = 0;
+    virtual NF_SHARE_PTR<NFLogicBlock>  GetLogicBlock(const NFGUID id) = 0;
+    virtual NF_SHARE_PTR<NFLogicBlock>  GetLogicBlock(const std::string& name) = 0;
+
 	
 };
 

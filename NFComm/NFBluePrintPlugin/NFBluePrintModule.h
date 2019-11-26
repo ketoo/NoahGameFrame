@@ -77,6 +77,33 @@ public:
     {
         return mLogicBlocks;
     }
+
+    virtual NF_SHARE_PTR<NFLogicBlock>  GetLogicBlock(const NFGUID id)
+    {
+        for (auto it : mLogicBlocks)
+        {
+            if (it->id == id)
+            {
+                return it;
+            }
+        }
+
+        return nullptr;
+    }
+
+    virtual NF_SHARE_PTR<NFLogicBlock>  GetLogicBlock(const std::string& name)
+    {
+        for (auto it : mLogicBlocks)
+        {
+            if (it->name == name)
+            {
+                return it;
+            }
+        }
+
+        return nullptr;
+    }
+    
 private:
 
     std::list<NF_SHARE_PTR<NFLogicBlock>> mLogicBlocks;

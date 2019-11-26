@@ -32,27 +32,31 @@ NFBluePrintView::NFBluePrintView(NFIPluginManager* p, NFViewType vt) : NFIView(p
 
    m_pUIModule = pPluginManager->FindModule<NFIUIModule>();
    m_pBluePrintModule = pPluginManager->FindModule<NFIBluePrintModule>();
+   m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>();
 
-   int testID1 = m_pNodeView->GenerateId();
-   int testID2 = m_pNodeView->GenerateId();
-   int testID3 = m_pNodeView->GenerateId();
-   int testID4 = m_pNodeView->GenerateId();
+   NFGUID testID1 = m_pKernelModule->CreateGUID();
+   NFGUID testID2 = m_pKernelModule->CreateGUID();
+   NFGUID testID3 = m_pKernelModule->CreateGUID();
+   NFGUID testID4 = m_pKernelModule->CreateGUID();
 
-   m_pNodeView->AddNode(testID1, "testnode1111111");
-   m_pNodeView->AddNode(testID2, "testnode2222222");
-   m_pNodeView->AddNode(testID3, "testnode333333");
-   m_pNodeView->AddNode(testID4, "testnode4444444");
+   m_pNodeView->AddNode(testID1, "testnode1111111", NFVector2(0, 0));
+   m_pNodeView->AddNode(testID2, "testnode2222222", NFVector2(2, 0));
+   m_pNodeView->AddNode(testID3, "testnode333333", NFVector2(4, 0));
+   m_pNodeView->AddNode(testID4, "testnode4444444", NFVector2(6, 0));
 
-   for (int i = 0; i < 4; ++i)
-   {
-      m_pNodeView->AddNodeAttrOut(testID1, m_pNodeView->GenerateId(), "Out1");
-      m_pNodeView->AddNodeAttrOut(testID2, m_pNodeView->GenerateId(), "Out1");
-      m_pNodeView->AddNodeAttrOut(testID3, m_pNodeView->GenerateId(), "Out1");
+   m_pNodeView->AddNodeAttrOut(testID1, m_pKernelModule->CreateGUID(), "Out1");
+   m_pNodeView->AddNodeAttrOut(testID1, m_pKernelModule->CreateGUID(), "Out2");
+   m_pNodeView->AddNodeAttrOut(testID2, m_pKernelModule->CreateGUID(), "Out1");
+   m_pNodeView->AddNodeAttrOut(testID2, m_pKernelModule->CreateGUID(), "Out2");
+   m_pNodeView->AddNodeAttrOut(testID3, m_pKernelModule->CreateGUID(), "Out1");
+   m_pNodeView->AddNodeAttrOut(testID3, m_pKernelModule->CreateGUID(), "Out2");
 
-      m_pNodeView->AddNodeAttrIn(testID1, m_pNodeView->GenerateId(), "In1");
-      m_pNodeView->AddNodeAttrIn(testID2, m_pNodeView->GenerateId(), "In12");
-      m_pNodeView->AddNodeAttrIn(testID3, m_pNodeView->GenerateId(), "In13");
-   }
+   m_pNodeView->AddNodeAttrIn(testID1, m_pKernelModule->CreateGUID(), "In1");
+   m_pNodeView->AddNodeAttrIn(testID1, m_pKernelModule->CreateGUID(), "In2");
+   m_pNodeView->AddNodeAttrIn(testID2, m_pKernelModule->CreateGUID(), "In12");
+   m_pNodeView->AddNodeAttrIn(testID2, m_pKernelModule->CreateGUID(), "In123222");
+   m_pNodeView->AddNodeAttrIn(testID3, m_pKernelModule->CreateGUID(), "In13");
+   m_pNodeView->AddNodeAttrIn(testID3, m_pKernelModule->CreateGUID(), "In133333");
 }
 
 NFBluePrintView::~NFBluePrintView()
@@ -69,8 +73,46 @@ bool NFBluePrintView::Execute()
    //4. delete links
    //4. delete nodes
 
-	//5. return canvas's center 
-   if (ImGui::Button("+ NFBluePrint Block"))
+	//5. return canvas's center  
+   static std::string selectedBlock;
+   if (ImGui::Button("LogicBlocks"))
+   {
+      ImGui::OpenPopup("my_select_LogicBlocks");
+     
+      if (ImGui::BeginPopup("my_select_LogicBlocks"))
+      {
+         std::vector<std::string> strIdList;
+         auto& logicBlocks = m_pBluePrintModule->GetLogicBlocks();
+         for (auto it : logicBlocks)
+         {
+            strIdList.push_back(it->name);
+         }
+
+         for (int n = 0; n < strIdList.size(); n++)
+         {
+            if (ImGui::Selectable(strIdList[n].c_str()))
+            {
+                selectedBlock = strIdList[n];
+            }
+         }
+          
+         ImGui::EndPopup();
+      }
+   }
+
+   ImGui::SameLine();
+   if (selectedBlock.empty())
+   {
+      ImGui::TextUnformatted("<None>");
+   }
+   else
+   {
+      ImGui::TextUnformatted(selectedBlock.c_str());
+      SetCurrentLogicBlock(m_pBluePrintModule->GetLogicBlock(selectedBlock));
+   }
+
+   ImGui::SameLine();
+   if (ImGui::Button("+ Logic Block"))
    {
       auto pLogicBlock = m_pBluePrintModule->CreateLogicBlock();
       if (pLogicBlock)
@@ -96,20 +138,21 @@ bool NFBluePrintView::Execute()
    }
    
    ImGui::SameLine();
-   if (ImGui::Button("- links"))
-   {
-   }
-
-   ImGui::SameLine();
    if (ImGui::Button("- nodes"))
    {
    }
 
    ImGui::SameLine();
-   if (ImGui::Button("return center"))
+   if (ImGui::Button("- links"))
+   {
+   }
+
+   ImGui::SameLine();
+   if (ImGui::Button("return to center"))
    {
       m_pNodeView->ResetOffestZero();
    }
+
 
    m_pNodeView->Execute();
    
@@ -128,4 +171,13 @@ bool NFBluePrintView::Execute()
 void NFBluePrintView::SubRender()
 {
    ImGui::Text(this->name.c_str());
+}
+
+void NFBluePrintView::SetCurrentLogicBlock(NF_SHARE_PTR<NFIBluePrintModule::NFLogicBlock> logicBlock)
+{
+   mCurrentLogicBlock = logicBlock;
+
+   mCurrentMonitor = nullptr;
+   mCurrentExecuter = nullptr;
+   mCurrentJudgement = nullptr;
 }

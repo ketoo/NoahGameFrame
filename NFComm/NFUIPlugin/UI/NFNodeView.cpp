@@ -31,12 +31,12 @@ void NFNodeAttri::Execute()
    if (inputPin)
    {
       imnodes::BeginInputAttribute(id);
-      ImGui::Text("input pin");
+      ImGui::Text(name.c_str());
    }
    else
    {
       imnodes::BeginOutputAttribute(id);
-      ImGui::Text("output pin");
+      ImGui::Text(name.c_str());
    }
  
    imnodes::EndAttribute(); 
@@ -46,6 +46,12 @@ void NFNode::Execute()
 {
    imnodes::SetNodeName(id, name.c_str());
    imnodes::BeginNode(id);
+
+   if (first)
+   {
+      first = false;
+      imnodes::SetNodePos(id, ImVec2(initPos.X(), initPos.Y()));
+   }
 
    for (auto it : mAttris)
    {
@@ -109,16 +115,15 @@ bool NFNodeView::Execute()
    /////////////////////////////
    imnodes::EndNodeEditor();
    
-   int start_attr, end_attr;
-   if (imnodes::IsLinkCreated(&start_attr, &end_attr))
-   {
-      if (GetNodeByAttriId(start_attr) != GetNodeByAttriId(end_attr))
-      {
-         mLinks.push_back(NF_SHARE_PTR<NFNodeLink>(NF_NEW NFNodeLink(start_attr, end_attr)));
-      }
-   }
-
+   CheckNewLinkStatus();
+  
 	return false;
+}
+
+void NFNodeView::CleanNodes()
+{
+   mNodes.clear();
+   mLinks.clear();
 }
 
 void NFNodeView::RenderNodes()
@@ -135,44 +140,44 @@ void NFNodeView::RenderLinks()
    for (auto it : mLinks)
    {
       ++i;
-      imnodes::Link(i, it->start, it->end);
+      imnodes::Link(i, it->start_attr, it->end_attr);
    }
 }
 
-void NFNodeView::AddNode(const int nodeId, const std::string& name)
+void NFNodeView::AddNode(const NFGUID guid, const std::string& name, const NFVector2 vec)
 {
-   mNodes.push_back(NF_SHARE_PTR<NFNode>(NF_NEW NFNode(nodeId, name)));
+   mNodes.push_back(NF_SHARE_PTR<NFNode>(NF_NEW NFNode(GenerateId(), name, guid)));
 }
 
-void NFNodeView::AddNodeAttrIn(const int nodeId, const int attrId, const std::string& name)
+void NFNodeView::AddNodeAttrIn(const NFGUID guid, const NFGUID attrId, const std::string& name)
 {
    for (auto it : mNodes)
    {
-      if (it->id == nodeId)
+      if (it->guid == guid)
       {
-         it->AddAttribute(attrId, name, true);
+         it->AddAttribute(GenerateId(), name, true, attrId);
          return;
       }
    }
 }
 
-void NFNodeView::AddNodeAttrOut(const int nodeId, const int attrId, const std::string& name)
+void NFNodeView::AddNodeAttrOut(const NFGUID guid, const NFGUID attrId, const std::string& name)
 {
    for (auto it : mNodes)
    {
-      if (it->id == nodeId)
+      if (it->guid == guid)
       {
-         it->AddAttribute(attrId, name, false);
+         it->AddAttribute(GenerateId(), name, false, attrId);
          return;
       }
    }
 }
 
-void NFNodeView::DeleteNode(const int nodeId)
+void NFNodeView::DeleteNode(const NFGUID guid)
 {
    for (auto it = mNodes.begin(); it != mNodes.end(); ++it)
    {
-      if ((*it)->id == nodeId)
+      if ((*it)->guid == guid)
       {
          mNodes.erase(it);
          return;
@@ -180,7 +185,69 @@ void NFNodeView::DeleteNode(const int nodeId)
    }
 }   
 
-int NFNodeView::GetNodeByAttriId(const int attriId)
+NFGUID NFNodeView::GetNodeByAttriId(const NFGUID attriId)
+{
+   for (auto it : mNodes)
+   {
+      NF_SHARE_PTR<NFNode> node = it;
+      for (auto attri : node->mAttris)
+      {
+         if (attri->guid == attriId)
+         {
+            return node->guid;
+         }
+      }
+   }
+
+   return NFGUID();
+}
+
+void NFNodeView::ResetOffestZero()
+{
+   imnodes::EditorContextResetPanning(ImVec2(0.f, 0.f));
+}
+
+void NFNodeView::CheckNewLinkStatus()
+{
+   int start_attr, end_attr;
+   if (imnodes::IsLinkCreated(&start_attr, &end_attr))
+   {
+      NFGUID startID = GetAttriGUID(start_attr);
+      NFGUID endID = GetAttriGUID(end_attr);
+      if (GetNodeByAttriId(startID) != GetNodeByAttriId(endID))
+      {
+         mLinks.push_back(NF_SHARE_PTR<NFNodeLink>(NF_NEW NFNodeLink(startID, endID, start_attr, end_attr)));
+      }
+   }
+}
+
+const NFGUID NFNodeView::GetNodeGUID(const int nodeId)
+{
+   for (auto it : mNodes)
+   {
+      if (it->id == nodeId)
+      {
+         return it->guid;
+      }
+   }
+
+   return NFGUID();
+}
+
+const int NFNodeView::GetNodeID(const NFGUID guid)
+{
+   for (auto it : mNodes)
+   {
+      if (it->guid == guid)
+      {
+         return it->id;
+      }
+   }
+
+   return -1;
+}
+
+const NFGUID NFNodeView::GetAttriGUID(const int attriId)
 {
    for (auto it : mNodes)
    {
@@ -189,16 +256,27 @@ int NFNodeView::GetNodeByAttriId(const int attriId)
       {
          if (attri->id == attriId)
          {
+            return node->guid;
+         }
+      }
+   }
+
+   return NFGUID();
+}
+
+const int NFNodeView::GetAttriID(const NFGUID guid)
+{
+   for (auto it : mNodes)
+   {
+      NF_SHARE_PTR<NFNode> node = it;
+      for (auto attri : node->mAttris)
+      {
+         if (attri->guid == guid)
+         {
             return node->id;
          }
       }
    }
 
    return -1;
-}
-
-void NFNodeView::ResetOffestZero()
-{
-   //imnodes::EditorContext& context = imnodes::editor_context_get();
-   //imnodes::editor_context_reset_panning(&context);
 }
