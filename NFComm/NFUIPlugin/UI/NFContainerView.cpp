@@ -138,13 +138,12 @@ void NFContainerView::BluePrintMenu()
    {
       if (ImGui::MenuItem("New Logic Block", ""))
       {
-         /*
-         NF_SHARE_PTR<NFBluePrintView> pBluePrintView = (NF_SHARE_PTR<NFBluePrintView>)m_pUIModule->GetView(NFViewType::BluePrintView);
+         NF_SHARE_PTR<NFIView> p = m_pUIModule->GetView(NFViewType::BluePrintView);
+         NF_SHARE_PTR<NFBluePrintView> pBluePrintView = std::dynamic_pointer_cast<NFBluePrintView>(p);
          if (pBluePrintView)
          {
             pBluePrintView->TryToCreateBluePrintBlock();
          }
-         */
       }
       if (ImGui::MenuItem("New Monitor", ""))
       {

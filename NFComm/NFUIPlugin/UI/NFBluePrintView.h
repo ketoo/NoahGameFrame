@@ -48,6 +48,8 @@ private:
    void SubJudgementRender(NF_SHARE_PTR<NFIBluePrintModule::NFJudgement> judgement);
    void SubExecuterRender(NF_SHARE_PTR<NFIBluePrintModule::NFExecuter> executer);
 
+   void CreateLogicBlockWindow();
+   
 private:
    NF_SHARE_PTR<NFIBluePrintModule::NFLogicBlock> mCurrentLogicBlock;
    NF_SHARE_PTR<NFIBluePrintModule::NFMonitor> mCurrentMonitor;

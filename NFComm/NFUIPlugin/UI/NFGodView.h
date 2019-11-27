@@ -36,7 +36,8 @@ class NFGodView : public NFIView
 {
 public:
 	NFGodView(NFIPluginManager* p, NFViewType vt);
-
+   ~NFGodView();
+   
 	virtual bool Execute();
 
    virtual void SubRender();
@@ -53,6 +54,7 @@ private:
 
    NFGUID mCurrentObjectID;
    
+   NFIView* m_pNodeView;
 private:
    NFIUIModule* m_pUIModule;
    NFIClassModule* m_pClassModule;

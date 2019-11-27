@@ -132,6 +132,7 @@ class NFNodeView : public NFIView
 {
 public:
 	NFNodeView(NFIPluginManager* p);
+   ~NFNodeView();
 
 	virtual bool Execute();
 
@@ -163,6 +164,7 @@ private:
 
 private:
    NFIUIModule* m_pUIModule;
+   imnodes::EditorContext* m_pEditorContext;
 
    std::list<NF_SHARE_PTR<NFNode>> mNodes;
    std::list<NF_SHARE_PTR<NFNodeLink>> mLinks;

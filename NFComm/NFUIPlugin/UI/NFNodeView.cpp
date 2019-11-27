@@ -66,7 +66,13 @@ void NFNode::Execute()
 NFNodeView::NFNodeView(NFIPluginManager* p) : NFIView(p, NFViewType::NONE, GET_CLASS_NAME(NFNodeView))
 {
    m_pUIModule = pPluginManager->FindModule<NFIUIModule>();
+   m_pEditorContext = EditorContextCreate();
+}
 
+NFNodeView::~NFNodeView()
+{
+   EditorContextFree(m_pEditorContext);
+   m_pEditorContext = nullptr;
 }
 
 int NFNodeView::GenerateId()
@@ -79,6 +85,7 @@ int NFNodeView::GenerateId()
 bool NFNodeView::Execute()
 {
 	//1. the project root folder is NFDataCfg
+   EditorContextSet(m_pEditorContext);
 
    imnodes::BeginNodeEditor();
 

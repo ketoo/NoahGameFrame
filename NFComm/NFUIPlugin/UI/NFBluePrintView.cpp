@@ -74,51 +74,7 @@ bool NFBluePrintView::Execute()
    //4. delete nodes
 
 	//5. return canvas's center  
-   static std::string selectedBlock;
-   if (ImGui::Button("LogicBlocks"))
-   {
-      ImGui::OpenPopup("my_select_LogicBlocks");
-     
-      if (ImGui::BeginPopup("my_select_LogicBlocks"))
-      {
-         std::vector<std::string> strIdList;
-         auto& logicBlocks = m_pBluePrintModule->GetLogicBlocks();
-         for (auto it : logicBlocks)
-         {
-            strIdList.push_back(it->name);
-         }
 
-         for (int n = 0; n < strIdList.size(); n++)
-         {
-            if (ImGui::Selectable(strIdList[n].c_str()))
-            {
-                selectedBlock = strIdList[n];
-            }
-         }
-          
-         ImGui::EndPopup();
-      }
-   }
-
-
-   if (ImGui::Button("+ NFMonitor"))
-   {
-      if (mCurrentLogicBlock)
-      {
-         mCurrentLogicBlock->AddMonitor(NFIBluePrintModule::NFMonitorType::PropertyEvent, "", NFDataList::Empty());
-      }
-   }
-
-   ImGui::SameLine();
-   if (ImGui::Button("+ NFJudgement"))
-   {
-   }
-   
-   ImGui::SameLine();
-   if (ImGui::Button("+ NFExecutor"))
-   {
-   }
-   
    ImGui::SameLine();
    if (ImGui::Button("- nodes"))
    {
@@ -138,29 +94,7 @@ bool NFBluePrintView::Execute()
 
    m_pNodeView->Execute();
    
-   if (bCreatingLogicBlock)
-   {
-      if (!ImGui::BeginChild("Create Logic Block"))
-      {
-         static char str0[128] = "Hello, world!";
-         ImGui::InputText("input text", str0, IM_ARRAYSIZE(str0));
-
-         if (ImGui::Button("Cancel"))
-         {
-            bCreatingLogicBlock = false;
-         }
-         
-         ImGui::SameLine();
-
-         if (ImGui::Button("OK"))
-         {
-            m_pBluePrintModule->CreateLogicBlock(str0);
-            bCreatingLogicBlock = false;
-         }
-
-         ImGui::EndChild();
-      }
-   }
+   CreateLogicBlockWindow();
 
    if (ImGui::IsWindowFocused())
    {
@@ -272,3 +206,41 @@ void NFBluePrintView::TryToCreateBluePrintBlock()
       bCreatingLogicBlock = true;
    }
 }
+
+ void NFBluePrintView::CreateLogicBlockWindow()
+ {
+   if (bCreatingLogicBlock)
+   {
+      ImGui::OpenPopup("CreatingLogicBlock");
+      ImGui::SetNextWindowSize(ImVec2(230, 150));
+
+      if (ImGui::BeginPopupModal("CreatingLogicBlock"))
+      {
+         static char str0[128] = "Hello, world!";
+         ImGui::InputText("LogicBlock Name", str0, IM_ARRAYSIZE(str0));
+
+         ImGui::Separator();
+
+         ImGui::Text("All those beautiful files will be deleted.\nThis operation cannot be undone!\n\n");
+
+         ImGui::Separator();
+
+         if (ImGui::Button("Cancel", ImVec2(100, 30)))
+         {
+            bCreatingLogicBlock = false;
+            ImGui::CloseCurrentPopup();
+         }
+
+         ImGui::SameLine();
+
+         if (ImGui::Button("OK", ImVec2(100, 30)))
+         {
+            m_pBluePrintModule->CreateLogicBlock(str0);
+            bCreatingLogicBlock = false;
+            ImGui::CloseCurrentPopup();
+         }
+
+         ImGui::EndPopup();
+      }
+   }
+ }

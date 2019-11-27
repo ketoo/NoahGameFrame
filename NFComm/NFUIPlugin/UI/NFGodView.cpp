@@ -24,6 +24,7 @@
 */
 
 #include "NFGodView.h"
+#include "NFNodeView.h"
 #include "NFUIModule.h"
 
 NFGodView::NFGodView(NFIPluginManager* p, NFViewType vt) : NFIView(p, vt, GET_CLASS_NAME(NFGodView))
@@ -33,6 +34,15 @@ NFGodView::NFGodView(NFIPluginManager* p, NFViewType vt) : NFIView(p, vt, GET_CL
    m_pElementModule = pPluginManager->FindModule<NFIElementModule>();
    m_pSceneModule = pPluginManager->FindModule<NFISceneModule>();
    m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>();
+
+
+   m_pNodeView = NF_NEW NFNodeView(p);
+}
+
+NFGodView::~NFGodView()
+{
+   delete m_pNodeView;
+   m_pNodeView = nullptr;
 }
 
 bool NFGodView::Execute()
@@ -123,6 +133,8 @@ bool NFGodView::Execute()
          //occupy inspectorview
       }
    }
+
+   m_pNodeView->Execute();
 
 	return true;
 }
