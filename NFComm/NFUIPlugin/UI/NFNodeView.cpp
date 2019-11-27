@@ -66,12 +66,12 @@ void NFNode::Execute()
 NFNodeView::NFNodeView(NFIPluginManager* p) : NFIView(p, NFViewType::NONE, GET_CLASS_NAME(NFNodeView))
 {
    m_pUIModule = pPluginManager->FindModule<NFIUIModule>();
-   m_pEditorContext = EditorContextCreate();
+   m_pEditorContext = imnodes::EditorContextCreate();
 }
 
 NFNodeView::~NFNodeView()
 {
-   EditorContextFree(m_pEditorContext);
+   imnodes::EditorContextFree((imnodes::EditorContext*)m_pEditorContext);
    m_pEditorContext = nullptr;
 }
 
@@ -85,7 +85,7 @@ int NFNodeView::GenerateId()
 bool NFNodeView::Execute()
 {
 	//1. the project root folder is NFDataCfg
-   EditorContextSet(m_pEditorContext);
+   EditorContextSet((imnodes::EditorContext*)m_pEditorContext);
 
    imnodes::BeginNodeEditor();
 
@@ -137,7 +137,7 @@ void NFNodeView::RenderNodes()
 {
    for (auto it : mNodes)
    {
-      it->Execute();
+      it.second->Execute();
    }
 }
 
@@ -153,16 +153,19 @@ void NFNodeView::RenderLinks()
 
 void NFNodeView::AddNode(const NFGUID guid, const std::string& name, const NFVector2 vec)
 {
-   mNodes.push_back(NF_SHARE_PTR<NFNode>(NF_NEW NFNode(GenerateId(), name, guid)));
+   if (mNodes.find(guid) == mNodes.end())
+   {
+      mNodes.insert(std::pair<NFGUID, NF_SHARE_PTR<NFNode>>(guid, NF_SHARE_PTR<NFNode>(NF_NEW NFNode(GenerateId(), name, guid, vec))));
+   }
 }
 
 void NFNodeView::AddNodeAttrIn(const NFGUID guid, const NFGUID attrId, const std::string& name)
 {
    for (auto it : mNodes)
    {
-      if (it->guid == guid)
+      if (it.second->guid == guid)
       {
-         it->AddAttribute(GenerateId(), name, true, attrId);
+         it.second->AddAttribute(GenerateId(), name, true, attrId);
          return;
       }
    }
@@ -172,9 +175,9 @@ void NFNodeView::AddNodeAttrOut(const NFGUID guid, const NFGUID attrId, const st
 {
    for (auto it : mNodes)
    {
-      if (it->guid == guid)
+      if (it.second->guid == guid)
       {
-         it->AddAttribute(GenerateId(), name, false, attrId);
+         it.second->AddAttribute(GenerateId(), name, false, attrId);
          return;
       }
    }
@@ -182,13 +185,10 @@ void NFNodeView::AddNodeAttrOut(const NFGUID guid, const NFGUID attrId, const st
 
 void NFNodeView::DeleteNode(const NFGUID guid)
 {
-   for (auto it = mNodes.begin(); it != mNodes.end(); ++it)
+   auto it = mNodes.find(guid);
+   if (it != mNodes.end())
    {
-      if ((*it)->guid == guid)
-      {
-         mNodes.erase(it);
-         return;
-      }
+      mNodes.erase(it);
    }
 }   
 
@@ -196,7 +196,7 @@ NFGUID NFNodeView::GetNodeByAttriId(const NFGUID attriId)
 {
    for (auto it : mNodes)
    {
-      NF_SHARE_PTR<NFNode> node = it;
+      NF_SHARE_PTR<NFNode> node = it.second;
       for (auto attri : node->mAttris)
       {
          if (attri->guid == attriId)
@@ -209,9 +209,10 @@ NFGUID NFNodeView::GetNodeByAttriId(const NFGUID attriId)
    return NFGUID();
 }
 
-void NFNodeView::ResetOffestZero()
+void NFNodeView::ResetOffest(const NFVector2& pos)
 {
-   imnodes::EditorContextResetPanning(ImVec2(0.f, 0.f));
+   EditorContextSet((imnodes::EditorContext*)m_pEditorContext);
+   imnodes::EditorContextResetPanning(ImVec2(pos.X(), pos.Y()));
 }
 
 void NFNodeView::CheckNewLinkStatus()
@@ -232,9 +233,9 @@ const NFGUID NFNodeView::GetNodeGUID(const int nodeId)
 {
    for (auto it : mNodes)
    {
-      if (it->id == nodeId)
+      if (it.second->id == nodeId)
       {
-         return it->guid;
+         return it.second->guid;
       }
    }
 
@@ -245,9 +246,9 @@ const int NFNodeView::GetNodeID(const NFGUID guid)
 {
    for (auto it : mNodes)
    {
-      if (it->guid == guid)
+      if (it.second->guid == guid)
       {
-         return it->id;
+         return it.second->id;
       }
    }
 
@@ -258,7 +259,7 @@ const NFGUID NFNodeView::GetAttriGUID(const int attriId)
 {
    for (auto it : mNodes)
    {
-      NF_SHARE_PTR<NFNode> node = it;
+      NF_SHARE_PTR<NFNode> node = it.second;
       for (auto attri : node->mAttris)
       {
          if (attri->id == attriId)
@@ -275,7 +276,7 @@ const int NFNodeView::GetAttriID(const NFGUID guid)
 {
    for (auto it : mNodes)
    {
-      NF_SHARE_PTR<NFNode> node = it;
+      NF_SHARE_PTR<NFNode> node = it.second;
       for (auto attri : node->mAttris)
       {
          if (attri->guid == guid)

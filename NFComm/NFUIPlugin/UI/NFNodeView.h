@@ -55,7 +55,7 @@ private:
    NFNode(){}
 
 public:
-	NFNode(const int id, const std::string& name, const NFGUID guid, const NFVector2 vec = NFVector2())
+	NFNode(const int id, const std::string& name, const NFGUID guid, const NFVector2 vec)
    {
       this->id = id;
       this->name = name;
@@ -154,7 +154,7 @@ public:
    void DeleteNode(const NFGUID guid);
 
    NFGUID GetNodeByAttriId(const NFGUID attriId);
-   void ResetOffestZero();
+   void ResetOffest(const NFVector2& pos);
    
 private:
    void RenderNodes();
@@ -164,9 +164,9 @@ private:
 
 private:
    NFIUIModule* m_pUIModule;
-   imnodes::EditorContext* m_pEditorContext;
+   void* m_pEditorContext;
 
-   std::list<NF_SHARE_PTR<NFNode>> mNodes;
+   std::map<NFGUID, NF_SHARE_PTR<NFNode>> mNodes;
    std::list<NF_SHARE_PTR<NFNodeLink>> mLinks;
 };
 

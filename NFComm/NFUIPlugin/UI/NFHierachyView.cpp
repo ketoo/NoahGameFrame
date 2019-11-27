@@ -95,6 +95,8 @@ void NFHierachyView::GodViewSubRender()
       }
    }
 
+   
+
    ImGui::EndGroup();
 }
 

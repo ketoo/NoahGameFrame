@@ -40,12 +40,15 @@ NFBluePrintView::NFBluePrintView(NFIPluginManager* p, NFViewType vt) : NFIView(p
    NFGUID testID4 = m_pKernelModule->CreateGUID();
 
    m_pNodeView->AddNode(testID1, "testnode1111111", NFVector2(0, 0));
-   m_pNodeView->AddNode(testID2, "testnode2222222", NFVector2(2, 0));
-   m_pNodeView->AddNode(testID3, "testnode333333", NFVector2(4, 0));
-   m_pNodeView->AddNode(testID4, "testnode4444444", NFVector2(6, 0));
+   m_pNodeView->AddNode(testID2, "testnode2222222", NFVector2(100, 0));
+   //m_pNodeView->AddNode(testID3, "testnode333333", NFVector2(200, 0));
+   //m_pNodeView->AddNode(testID4, "testnode4444444", NFVector2(300, 0));
 
    m_pNodeView->AddNodeAttrOut(testID1, m_pKernelModule->CreateGUID(), "Out1");
    m_pNodeView->AddNodeAttrOut(testID1, m_pKernelModule->CreateGUID(), "Out2");
+   m_pNodeView->AddNodeAttrIn(testID2, m_pKernelModule->CreateGUID(), "In12");
+   m_pNodeView->AddNodeAttrIn(testID2, m_pKernelModule->CreateGUID(), "In123222");
+   /*
    m_pNodeView->AddNodeAttrOut(testID2, m_pKernelModule->CreateGUID(), "Out1");
    m_pNodeView->AddNodeAttrOut(testID2, m_pKernelModule->CreateGUID(), "Out2");
    m_pNodeView->AddNodeAttrOut(testID3, m_pKernelModule->CreateGUID(), "Out1");
@@ -57,6 +60,7 @@ NFBluePrintView::NFBluePrintView(NFIPluginManager* p, NFViewType vt) : NFIView(p
    m_pNodeView->AddNodeAttrIn(testID2, m_pKernelModule->CreateGUID(), "In123222");
    m_pNodeView->AddNodeAttrIn(testID3, m_pKernelModule->CreateGUID(), "In13");
    m_pNodeView->AddNodeAttrIn(testID3, m_pKernelModule->CreateGUID(), "In133333");
+   */
 }
 
 NFBluePrintView::~NFBluePrintView()
@@ -88,7 +92,7 @@ bool NFBluePrintView::Execute()
    ImGui::SameLine();
    if (ImGui::Button("return to center"))
    {
-      m_pNodeView->ResetOffestZero();
+      m_pNodeView->ResetOffest(NFVector2::Zero());
    }
 
 

@@ -132,9 +132,17 @@ bool NFGodView::Execute()
       {
          //occupy inspectorview
       }
+
+      
    }
 
-   m_pNodeView->Execute();
+   ImGui::SameLine();
+   if (ImGui::Button("return to center"))
+   {
+      m_pNodeView->ResetOffest(NFVector2::Zero());
+   }
+
+   RenderSceneObjectNode(mnSceneID, mnGroupID);
 
 	return true;
 }
@@ -199,7 +207,7 @@ void NFGodView::RenderScene(const int sceneID, const int groupID)
          std::string buttonName = strClassName + "<" + guid.ToString() + ">";
          if (ImGui::Button(buttonName.c_str()))
          {
-            mCurrentObjectID = guid;
+            SetCurrentObjectID(guid);
 
             //occupy inspectorview
             NF_SHARE_PTR<NFIView> pHierachyView = m_pUIModule->GetView(NFViewType::HierachyView);
@@ -220,4 +228,38 @@ void NFGodView::RenderScene(const int sceneID, const int groupID)
 NFGUID NFGodView::GetCurrentObjectID()
 {
    return mCurrentObjectID;
+}
+
+void NFGodView::SetCurrentObjectID(const NFGUID& id)
+{
+   mCurrentObjectID = id;
+   const std::string& strName = m_pKernelModule->GetPropertyString(mCurrentObjectID, NFrame::IObject::Name());
+   const NFVector3& pos = m_pKernelModule->GetPropertyVector3(mCurrentObjectID, NFrame::IObject::Position());
+
+   NFNodeView* pView = (NFNodeView*)m_pNodeView;
+   pView->ResetOffest(NFVector2(pos.X(), pos.Z()));
+}
+
+void NFGodView::RenderSceneObjectNode(const int sceneID, const int groupID)
+{
+   NFNodeView* pView = (NFNodeView*)m_pNodeView;
+   pView->CleanNodes();
+
+   if (sceneID > 0 && groupID > 0)
+   {
+      //objects
+      NFDataList list;
+      m_pKernelModule->GetGroupObjectList(sceneID, groupID, list);
+      for (int k = 0; k < list.GetCount(); ++k)
+      {
+         const NFGUID& guid = list.Object(k);
+         const std::string& strName = m_pKernelModule->GetPropertyString(guid, NFrame::IObject::Name());
+         const NFVector3& pos = m_pKernelModule->GetPropertyVector3(guid, NFrame::IObject::Position());
+         pView->AddNode(guid, strName, NFVector2(pos.X(), pos.Z()));
+         //pView->AddNode(guid, guid.ToString(), NFVector2());
+         pView->AddNodeAttrIn(guid, m_pKernelModule->CreateGUID(), strName);
+      }
+   }
+
+   m_pNodeView->Execute();
 }
