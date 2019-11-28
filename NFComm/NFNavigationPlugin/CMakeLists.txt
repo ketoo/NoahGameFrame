@@ -11,7 +11,7 @@ if(UNIX)
 	if (CMAKE_BUILD_TYPE MATCHES "Release")
 		target_link_libraries(NFNavigationPlugin navigation NFCore)
 	else()
-		target_link_libraries(NFNavigationPlugin navigation_d NFCore)
+		target_link_libraries(NFNavigationPlugin navigation NFCore)
 	endif()
 
 

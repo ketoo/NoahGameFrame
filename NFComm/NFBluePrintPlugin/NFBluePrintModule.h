@@ -38,6 +38,19 @@ public:
     NFBluePrintModule( NFIPluginManager* p )
     {
         pPluginManager = p;
+
+        MyEnum foo = MyEnum::TWO;
+        std::cout << MyEnum::toString(foo);  // static method
+        std::cout << foo.toString();         // member method
+        std::cout << MyEnum::toString(MyEnum::TWO);
+        std::cout << MyEnum::toString(10);
+        MyEnum foo1 = MyEnum::fromString("TWO");
+
+        // C++11 iteration over all values
+        for( auto x : MyEnum::allValues() )
+        {
+            std::cout << x.toString() << std::endl;
+        }
     }
 
     virtual ~NFBluePrintModule() {};
@@ -53,8 +66,47 @@ public:
     virtual bool Finalize();
     virtual bool OnReloadPlugin();
 
+    virtual NF_SHARE_PTR<NFLogicBlock> CreateLogicBlock(const std::string& name)
+    {
+        auto p = NF_SHARE_PTR<NFLogicBlock>(NF_NEW NFLogicBlock(pPluginManager, name));
+        mLogicBlocks.push_back(p);
+        return p;
+    }
 
+    virtual const std::list<NF_SHARE_PTR<NFLogicBlock>>& GetLogicBlocks()
+    {
+        return mLogicBlocks;
+    }
+
+    virtual NF_SHARE_PTR<NFLogicBlock>  GetLogicBlock(const NFGUID id)
+    {
+        for (auto it : mLogicBlocks)
+        {
+            if (it->id == id)
+            {
+                return it;
+            }
+        }
+
+        return nullptr;
+    }
+
+    virtual NF_SHARE_PTR<NFLogicBlock>  GetLogicBlock(const std::string& name)
+    {
+        for (auto it : mLogicBlocks)
+        {
+            if (it->name == name)
+            {
+                return it;
+            }
+        }
+
+        return nullptr;
+    }
+    
 private:
+
+    std::list<NF_SHARE_PTR<NFLogicBlock>> mLogicBlocks;
 };
 
 

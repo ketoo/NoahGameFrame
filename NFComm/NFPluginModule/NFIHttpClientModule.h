@@ -36,7 +36,7 @@ public:
     virtual ~NFIHttpClientModule() {};
 
     template<typename BaseType>
-    bool DoGet ( const std::string& strUri,BaseType* pBase,
+    bool DoGet ( const std::string& strUri, BaseType* pBase,
 						void ( BaseType::*handleRecieve ) (const NFGUID id, const int state_code, const std::string& strRespData ) )
     {
         HTTP_RESP_FUNCTOR_PTR pd ( new HTTP_RESP_FUNCTOR ( std::bind ( handleRecieve, pBase, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3) ) );

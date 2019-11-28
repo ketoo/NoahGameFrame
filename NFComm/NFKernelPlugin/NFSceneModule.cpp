@@ -280,6 +280,26 @@ bool NFSceneModule::LeaveSceneGroup(const NFGUID & self)
 	return false;
 }
 
+const std::vector<int>& NFSceneModule::GetGroups(const int nSceneID)
+{
+	static std::vector<int> vec;
+	vec.clear();
+
+	NF_SHARE_PTR<NFSceneInfo> pSceneInfo = GetElement(nSceneID);
+	if (pSceneInfo)
+	{
+		NF_SHARE_PTR<NFSceneGroupInfo> pGroupInfo =  pSceneInfo->First();
+		while (pGroupInfo)
+		{
+			vec.push_back(pGroupInfo->mnGroupID);
+
+			pGroupInfo =  pSceneInfo->Next();
+		}
+	}
+
+	return vec;
+}
+
 bool NFSceneModule::AddSeedData(const int nSceneID, const std::string & strSeedID, const std::string & strConfigID, const NFVector3 & vPos, const int nWeight)
 {
 	NF_SHARE_PTR<NFSceneInfo> pSceneInfo = GetElement(nSceneID);

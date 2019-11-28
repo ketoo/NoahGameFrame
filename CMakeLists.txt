@@ -12,7 +12,7 @@ endmacro(remove_file)
 
 macro(link_NFSDK projName)
 	add_dependencies(${projName} NFNetPlugin NFCore NFMessageDefine)
-	target_link_libraries(${projName} NFCore protobuf NFMessageDefine NFNetPlugin event event_core)
+	target_link_libraries(${projName} NFCore NFMessageDefine NFNetPlugin)
 endmacro(link_NFSDK)
 
 macro(add_post_cmd_win strProjectName destDir ext dbgSuffix)
@@ -110,9 +110,12 @@ endif()
 
 link_directories(${DependenciesLibPath})
 
-
-message("Build All")
-add_subdirectory(NFTools)
-add_subdirectory(Dependencies)
-add_subdirectory(NFComm)
-add_subdirectory(NFServer)
+if(${BUILD_TOOLS_ONLY} STREQUAL "ON")
+	message("Build Tools Only")
+	add_subdirectory(NFTools)
+else()
+	message("Build All")
+	add_subdirectory(Dependencies)
+	add_subdirectory(NFComm)
+	add_subdirectory(NFServer)
+endif()

@@ -26,11 +26,25 @@
 #define NF_HIERACHY_VIEW_H
 
 #include "NFComm/NFPluginModule/NFIUIModule.h"
+#include "NFComm/NFPluginModule/NFIKernelModule.h"
 
 class NFHierachyView : public NFIView
 {
 public:
 	NFHierachyView(NFIPluginManager* p, NFViewType vt);
+	virtual bool Execute();
+
+   virtual void SubRender();
+
+private:
+   void GodViewSubRender();
+   void GameViewSubRender();
+   void ProjectViewSubRender();
+   void BluePrintViewSubRender();
+
+private:
+   NFIKernelModule* m_pKernelModule;
+
 };
 
 #endif

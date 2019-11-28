@@ -30,42 +30,68 @@
 #include <iostream>
 #include "NFIModule.h"
 
-class NFIView : public NFIModule
+enum NFViewType
 {
-public:
-	enum NFViewType
-	{
-		GodView,
-		SceneView,
-		HierachyView,
-		ConsoleView,
-		ProfileView,
-		InspectorView,
-		BluePrintView,
-		ProjectView,
-		GameView,
-	};
-
-	NFIView(NFIPluginManager* p, NFViewType vt)
-	{
-		this->viewType = vt;
-		pPluginManager = p;
-	}
-
-	NFViewType viewType;
+	NONE,
+	OperatorView,
+	ContainerView,
+	GodView,
+	SceneView,
+	HierachyView,
+	ConsoleView,
+	ProfileView,
+	InspectorView,
+	BluePrintView,
+	ProjectView,
+	GameView,
 };
 
+class NFIView;
 class NFIUIModule
     : public NFIModule
 {
 public:
     virtual ~NFIUIModule(){}
 
+	virtual NF_SHARE_PTR<NFIView> GetView(NFViewType viewType) = 0;
 
-    
+	virtual const std::vector<NF_SHARE_PTR<NFIView>>& GetViews() = 0;
+};
 
+class NFIView : public NFIModule
+{
+public:
 
+	NFIView(NFIPluginManager* p, NFViewType vt, const std::string& name)
+	{
+		this->viewType = vt;
+		pPluginManager = p;
+		this->name = name;
 
+		m_pUIModule = pPluginManager->FindModule<NFIUIModule>();
+	}
+
+    void OccupySubRender (NFIView* pOccupyView)
+    {
+		m_pOccupyView = pOccupyView;
+    }
+
+    virtual bool Execute()
+    {
+        return true;
+    }
+	
+	virtual void SubRender()
+	{
+
+	}
+
+	NFIUIModule* m_pUIModule;
+	NFIView* m_pOccupyView = nullptr;;
+
+    bool visible = true;
+	NFViewType viewType;
+	std::string name;
 };
 
 #endif

@@ -12,7 +12,7 @@ add_library(NFBluePrintPlugin STATIC
 set_target_properties( NFBluePrintPlugin PROPERTIES OUTPUT_NAME_DEBUG "NFBluePrintPlugin")
 set_target_properties( NFBluePrintPlugin PROPERTIES PREFIX "")
 set_target_properties( NFBluePrintPlugin PROPERTIES 
-	FOLDER "NFMidWare/NFBluePrintPlugin"
+	FOLDER "NFComm/NFBluePrintPlugin"
 	ARCHIVE_OUTPUT_DIRECTORY ${NFOutPutDir}
 	RUNTIME_OUTPUT_DIRECTORY ${NFOutPutDir}
 	LIBRARY_OUTPUT_DIRECTORY ${NFOutPutDir} )

@@ -23,9 +23,94 @@
    limitations under the License.
 */
 
+#include "NFUIModule.h"
 #include "NFHierachyView.h"
+#include "NFGodView.h"
+#include "NFBluePrintView.h"
+#include "NFProjectView.h"
+#include "NFGameView.h"
 
-NFHierachyView::NFHierachyView(NFIPluginManager* p, NFViewType vt) : NFIView(p, vt)
+NFHierachyView::NFHierachyView(NFIPluginManager* p, NFViewType vt) : NFIView(p, vt, GET_CLASS_NAME(NFHierachyView))
 {
+   m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>();
+}
 
+
+bool NFHierachyView::Execute()
+{
+	//1. the project root folder is NFDataCfg
+
+	return false;
+}
+
+
+void NFHierachyView::SubRender()
+{
+   if (m_pOccupyView)
+   {
+      switch (m_pOccupyView->viewType)
+      {
+      case NFViewType::GodView:
+         GodViewSubRender();
+         break;
+      case NFViewType::BluePrintView:
+         BluePrintViewSubRender();
+         break;
+      case NFViewType::ProjectView:
+         ProjectViewSubRender();
+         break;
+      case NFViewType::GameView:
+         GameViewSubRender();
+         break;
+      
+      default:
+         break;
+      }
+   }
+}
+
+
+void NFHierachyView::GodViewSubRender()
+{
+   NFGUID objectID = ((NFGodView*)m_pOccupyView)->GetCurrentObjectID();
+   std::string name = "GodView" + objectID.ToString();
+   ImGui::Text(name.c_str());
+
+   ImGui::BeginGroup();
+
+   NF_SHARE_PTR<NFIObject> pObject = m_pKernelModule->GetObject(objectID);
+   if (pObject)
+   {
+      NF_SHARE_PTR<NFIProperty> pProperty = pObject->GetPropertyManager()->First();
+      while(pProperty)
+      {
+         ImGui::Text(pProperty->GetKey().c_str());
+         ImGui::SameLine();
+         ImGui::Text(pProperty->GetString().c_str());
+
+         //static char str0[128] = "Hello, world!";
+         //ImGui::InputText("input text", str0, IM_ARRAYSIZE(str0));
+         
+         pProperty = pObject->GetPropertyManager()->Next();
+      }
+   }
+
+   
+
+   ImGui::EndGroup();
+}
+
+void NFHierachyView::GameViewSubRender()
+{
+   ImGui::Text("GameView");
+}
+
+void NFHierachyView::ProjectViewSubRender()
+{
+   ImGui::Text("ProjectView");
+}
+
+void NFHierachyView::BluePrintViewSubRender()
+{
+   ImGui::Text("BluePrintView");
 }

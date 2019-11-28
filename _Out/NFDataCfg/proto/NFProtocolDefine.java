@@ -15,6 +15,7 @@ package nframe;
 		public static final String GroupID = "GroupID";// int
 		public static final String ID = "ID";// string
 		public static final String MoveTo = "MoveTo";// vector3
+		public static final String Name = "Name";// string
 		public static final String Position = "Position";// vector3
 		public static final String SceneID = "SceneID";// int
 		// Property
@@ -40,6 +41,7 @@ package nframe;
 		public static final String GroupID = "GroupID";// int
 		public static final String ID = "ID";// string
 		public static final String MoveTo = "MoveTo";// vector3
+		public static final String Name = "Name";// string
 		public static final String Position = "Position";// vector3
 		public static final String SceneID = "SceneID";// int
 		// Property
@@ -63,6 +65,7 @@ package nframe;
 		public static final String GroupID = "GroupID";// int
 		public static final String ID = "ID";// string
 		public static final String MoveTo = "MoveTo";// vector3
+		public static final String Name = "Name";// string
 		public static final String Position = "Position";// vector3
 		public static final String SceneID = "SceneID";// int
 		// Property
@@ -86,6 +89,7 @@ package nframe;
 		public static final String GroupID = "GroupID";// int
 		public static final String ID = "ID";// string
 		public static final String MoveTo = "MoveTo";// vector3
+		public static final String Name = "Name";// string
 		public static final String Position = "Position";// vector3
 		public static final String SceneID = "SceneID";// int
 		// Property
@@ -137,6 +141,7 @@ package nframe;
 		public static final String GroupID = "GroupID";// int
 		public static final String ID = "ID";// string
 		public static final String MoveTo = "MoveTo";// vector3
+		public static final String Name = "Name";// string
 		public static final String Position = "Position";// vector3
 		public static final String SceneID = "SceneID";// int
 		// Property
@@ -171,6 +176,7 @@ package nframe;
 		public static final String GroupID = "GroupID";// int
 		public static final String ID = "ID";// string
 		public static final String MoveTo = "MoveTo";// vector3
+		public static final String Name = "Name";// string
 		public static final String Position = "Position";// vector3
 		public static final String SceneID = "SceneID";// int
 		// Property
@@ -188,6 +194,7 @@ package nframe;
 		public static final String GroupID = "GroupID";// int
 		public static final String ID = "ID";// string
 		public static final String MoveTo = "MoveTo";// vector3
+		public static final String Name = "Name";// string
 		public static final String Position = "Position";// vector3
 		public static final String SceneID = "SceneID";// int
 		// Property
@@ -253,6 +260,7 @@ package nframe;
 		public static final String GroupID = "GroupID";// int
 		public static final String ID = "ID";// string
 		public static final String MoveTo = "MoveTo";// vector3
+		public static final String Name = "Name";// string
 		public static final String Position = "Position";// vector3
 		public static final String SceneID = "SceneID";// int
 		// Record
@@ -268,6 +276,7 @@ package nframe;
 		public static final String GroupID = "GroupID";// int
 		public static final String ID = "ID";// string
 		public static final String MoveTo = "MoveTo";// vector3
+		public static final String Name = "Name";// string
 		public static final String Position = "Position";// vector3
 		public static final String SceneID = "SceneID";// int
 		// Property
@@ -289,6 +298,7 @@ package nframe;
 		public static final String GroupID = "GroupID";// int
 		public static final String ID = "ID";// string
 		public static final String MoveTo = "MoveTo";// vector3
+		public static final String Name = "Name";// string
 		public static final String Position = "Position";// vector3
 		public static final String SceneID = "SceneID";// int
 		// Property
@@ -326,6 +336,7 @@ package nframe;
 		public static final String GroupID = "GroupID";// int
 		public static final String ID = "ID";// string
 		public static final String MoveTo = "MoveTo";// vector3
+		public static final String Name = "Name";// string
 		public static final String Position = "Position";// vector3
 		public static final String SceneID = "SceneID";// int
 		// Property
@@ -346,6 +357,7 @@ package nframe;
 		public static final String GroupID = "GroupID";// int
 		public static final String ID = "ID";// string
 		public static final String MoveTo = "MoveTo";// vector3
+		public static final String Name = "Name";// string
 		public static final String Position = "Position";// vector3
 		public static final String SceneID = "SceneID";// int
 		// Property
@@ -382,6 +394,7 @@ package nframe;
 		public static final String GroupID = "GroupID";// int
 		public static final String ID = "ID";// string
 		public static final String MoveTo = "MoveTo";// vector3
+		public static final String Name = "Name";// string
 		public static final String Position = "Position";// vector3
 		public static final String SceneID = "SceneID";// int
 		// Property
@@ -477,6 +490,7 @@ package nframe;
 		public static final String GroupID = "GroupID";// int
 		public static final String ID = "ID";// string
 		public static final String MoveTo = "MoveTo";// vector3
+		public static final String Name = "Name";// string
 		public static final String Position = "Position";// vector3
 		public static final String SceneID = "SceneID";// int
 		// Property
@@ -497,6 +511,7 @@ package nframe;
 		public static final String GroupID = "GroupID";// int
 		public static final String ID = "ID";// string
 		public static final String MoveTo = "MoveTo";// vector3
+		public static final String Name = "Name";// string
 		public static final String Position = "Position";// vector3
 		public static final String SceneID = "SceneID";// int
 		// Property
@@ -585,7 +600,6 @@ package nframe;
 		public static final String MOVE_SPEED = "MOVE_SPEED";// int
 		public static final String MP = "MP";// int
 		public static final String MPREGEN = "MPREGEN";// int
-		public static final String Name = "Name";// string
 		public static final String OnlineCount = "OnlineCount";// int
 		public static final String OnlineTime = "OnlineTime";// object
 		public static final String PHYSICAL_GATE = "PHYSICAL_GATE";// int
@@ -946,6 +960,7 @@ package nframe;
 		public static final String GroupID = "GroupID";// int
 		public static final String ID = "ID";// string
 		public static final String MoveTo = "MoveTo";// vector3
+		public static final String Name = "Name";// string
 		public static final String Position = "Position";// vector3
 		public static final String SceneID = "SceneID";// int
 		// Property
@@ -975,6 +990,7 @@ package nframe;
 		public static final String GroupID = "GroupID";// int
 		public static final String ID = "ID";// string
 		public static final String MoveTo = "MoveTo";// vector3
+		public static final String Name = "Name";// string
 		public static final String Position = "Position";// vector3
 		public static final String SceneID = "SceneID";// int
 		// Property
@@ -992,6 +1008,7 @@ package nframe;
 		public static final String GroupID = "GroupID";// int
 		public static final String ID = "ID";// string
 		public static final String MoveTo = "MoveTo";// vector3
+		public static final String Name = "Name";// string
 		public static final String Position = "Position";// vector3
 		public static final String SceneID = "SceneID";// int
 		// Property
@@ -1000,7 +1017,6 @@ package nframe;
 		public static final String CpuCount = "CpuCount";// int
 		public static final String IP = "IP";// string
 		public static final String MaxOnline = "MaxOnline";// int
-		public static final String Name = "Name";// string
 		public static final String Port = "Port";// int
 		public static final String ServerID = "ServerID";// int
 		public static final String Type = "Type";// int
@@ -1019,6 +1035,7 @@ package nframe;
 		public static final String GroupID = "GroupID";// int
 		public static final String ID = "ID";// string
 		public static final String MoveTo = "MoveTo";// vector3
+		public static final String Name = "Name";// string
 		public static final String Position = "Position";// vector3
 		public static final String SceneID = "SceneID";// int
 		// Property
@@ -1060,6 +1077,7 @@ package nframe;
 		public static final String GroupID = "GroupID";// int
 		public static final String ID = "ID";// string
 		public static final String MoveTo = "MoveTo";// vector3
+		public static final String Name = "Name";// string
 		public static final String Position = "Position";// vector3
 		public static final String SceneID = "SceneID";// int
 		// Property

@@ -1,10 +1,10 @@
 <?xml version='1.0' encoding='utf-8' ?>
 <XML>
-	<Object Id="DBServer_1" Area="1" Cell="0" CpuCount="1" IP="127.0.0.1" MaxOnline="5000" Name="DBServer" Port="18001" ServerID="8" Type="8" WSPort="0" WebPort="0" />
-	<Object Id="GameServer_1" Area="1" Cell="1" CpuCount="1" IP="127.0.0.1" MaxOnline="5000" Name="GameServer" Port="16001" ServerID="6" Type="6" WSPort="26001" WebPort="0" />
-	<Object Id="LoginServer_1" Area="1" Cell="0" CpuCount="1" IP="127.0.0.1" MaxOnline="5000" Name="LoginServer" Port="14001" ServerID="4" Type="4" WSPort="0" WebPort="4001" />
-	<Object Id="MasterServer_1" Area="1" Cell="0" CpuCount="1" IP="127.0.0.1" MaxOnline="5000" Name="MasterServer" Port="13001" ServerID="3" Type="3" WSPort="0" WebPort="3001" />
-	<Object Id="ProxyServer_1" Area="1" Cell="0" CpuCount="1" IP="127.0.0.1" MaxOnline="5000" Name="ProxyServer" Port="15001" ServerID="5" Type="5" WSPort="25001" WebPort="5001" />
-	<Object Id="TutorialServer_1" Area="1" Cell="0" CpuCount="1" IP="127.0.0.1" MaxOnline="5000" Name="TutorialServer" Port="14001" ServerID="0" Type="4" WSPort="0" WebPort="0" />
-	<Object Id="WorldServer_1" Area="1" Cell="0" CpuCount="1" IP="127.0.0.1" MaxOnline="5000" Name="WorldServer" Port="17001" ServerID="7" Type="7" WSPort="0" WebPort="0" />
+	<Object Id="DBServer_1" Area="1" Cell="0" CpuCount="1" IP="127.0.0.1" MaxOnline="5000" Port="18001" ServerID="8" Type="8" WSPort="0" WebPort="0" />
+	<Object Id="GameServer_1" Area="1" Cell="1" CpuCount="1" IP="127.0.0.1" MaxOnline="5000" Port="16001" ServerID="6" Type="6" WSPort="26001" WebPort="0" />
+	<Object Id="LoginServer_1" Area="1" Cell="0" CpuCount="1" IP="127.0.0.1" MaxOnline="5000" Port="14001" ServerID="4" Type="4" WSPort="0" WebPort="4001" />
+	<Object Id="MasterServer_1" Area="1" Cell="0" CpuCount="1" IP="127.0.0.1" MaxOnline="5000" Port="13001" ServerID="3" Type="3" WSPort="0" WebPort="3001" />
+	<Object Id="ProxyServer_1" Area="1" Cell="0" CpuCount="1" IP="127.0.0.1" MaxOnline="5000" Port="15001" ServerID="5" Type="5" WSPort="25001" WebPort="5001" />
+	<Object Id="TutorialServer_1" Area="1" Cell="0" CpuCount="1" IP="127.0.0.1" MaxOnline="5000" Port="14001" ServerID="0" Type="4" WSPort="0" WebPort="0" />
+	<Object Id="WorldServer_1" Area="1" Cell="0" CpuCount="1" IP="127.0.0.1" MaxOnline="5000" Port="17001" ServerID="7" Type="7" WSPort="0" WebPort="0" />
 </XML>
