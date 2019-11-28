@@ -37,6 +37,7 @@
 #include "NFComm/NFPluginModule/NFIProxyServerToGameModule.h"
 #include "NFComm/NFPluginModule/NFINetClientModule.h"
 #include "NFComm/NFPluginModule/NFISecurityModule.h"
+#include "NFComm/NFPluginModule/NFIWSModule.h"
 
 class NFProxyServerNet_ServerModule : public NFIProxyServerNet_ServerModule
 {
@@ -85,6 +86,7 @@ protected:
     NFIElementModule* m_pElementModule;
     NFIClassModule* m_pClassModule;
 	NFINetModule* m_pNetModule;
+    NFIWSModule* m_pWsModule;
 	NFISecurityModule* m_pSecurityModule;
 	NFIProxyServerToWorldModule* m_pProxyToWorldModule;
 };

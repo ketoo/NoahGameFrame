@@ -37,13 +37,14 @@ bool NFProxyServerNet_ServerModule::Init()
 	m_pElementModule = pPluginManager->FindModule<NFIElementModule>();
 	m_pProxyToWorldModule = pPluginManager->FindModule<NFIProxyServerToWorldModule>();
 	m_pSecurityModule = pPluginManager->FindModule<NFISecurityModule>();
-
+	m_pWsModule = pPluginManager->FindModule<NFIWSModule>();
     return true;
 }
 
 bool NFProxyServerNet_ServerModule::AfterInit()
 {
 	m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_REQ_CONNECT_KEY, this, &NFProxyServerNet_ServerModule::OnConnectKeyProcess);
+	m_pWsModule->AddReceiveCallBack(NFMsg::EGMI_REQ_CONNECT_KEY, this, &NFProxyServerNet_ServerModule::OnConnectKeyProcess);
 	m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_REQ_WORLD_LIST, this, &NFProxyServerNet_ServerModule::OnReqServerListProcess);
 	m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_REQ_SELECT_SERVER, this, &NFProxyServerNet_ServerModule::OnSelectServerProcess);
 	m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_REQ_ROLE_LIST, this, &NFProxyServerNet_ServerModule::OnReqRoleListProcess);
@@ -166,16 +167,20 @@ void NFProxyServerNet_ServerModule::OnConnectKeyProcess(const NFSOCK nSockIndex,
 {
     NFGUID nPlayerID;
     NFMsg::ReqAccountLogin xMsg;
+    std::cout<<"OnConnectKeyProcess 准备收取消息了长度---->"<<nLen<<endl;
+    for(auto i=0;i<nLen;i++){
+        std::cout<<int(msg[i])<<"|";
+    }
     if (!m_pNetModule->ReceivePB( nMsgID, msg, nLen, xMsg, nPlayerID))
     {
         return;
     }
-
 	bool bRet = m_pSecurityModule->VirifySecurityKey(xMsg.account(), xMsg.security_code());
+    std::cout<<"\nOnConnectKeyProcess 收取到消息了"<<xMsg.account()<<"  code:"<<xMsg.security_code()<<" ret:"<<bRet<<endl;
     //bool bRet = m_pProxyToWorldModule->VerifyConnectData(xMsg.account(), xMsg.security_code());
     if (bRet)
     {
-        NetObject* pNetObject = m_pNetModule->GetNet()->GetNetObject(nSockIndex);
+        NetObject* pNetObject = m_pWsModule->GetNet()->GetNetObject(nSockIndex);
         if (pNetObject)
         {
             //this net-object verify successful and set state as true
@@ -189,7 +194,7 @@ void NFProxyServerNet_ServerModule::OnConnectKeyProcess(const NFSOCK nSockIndex,
             xSendMsg.set_event_code(NFMsg::EGEC_VERIFY_KEY_SUCCESS);
             *xSendMsg.mutable_event_client() = NFINetModule::NFToPB(pNetObject->GetClientID());
 
-			m_pNetModule->SendMsgPB(NFMsg::EGameMsgID::EGMI_ACK_CONNECT_KEY, xSendMsg, nSockIndex);
+			m_pWsModule->SendMsgPB(NFMsg::EGameMsgID::EGMI_ACK_CONNECT_KEY, xSendMsg, nSockIndex);
         }
     }
     else
