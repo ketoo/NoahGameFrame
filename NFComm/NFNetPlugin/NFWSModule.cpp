@@ -199,10 +199,8 @@ bool NFWSModule::SendMsgPB(const uint16_t nMsgID, const google::protobuf::Messag
 
 		return false;
 	}
-
 	NFMsg::Ident* pPlayerID = xMsg.mutable_player_id();
 	*pPlayerID = NFINetModule::NFToPB(NFGUID());
-
 	std::string strMsg;
 	if (!xMsg.SerializeToString(&strMsg))
 	{
@@ -213,7 +211,6 @@ bool NFWSModule::SendMsgPB(const uint16_t nMsgID, const google::protobuf::Messag
 
 		return false;
 	}
-
 	SendMsgWithOutHead(nMsgID, strMsg.c_str(),strMsg.length(),nSockIndex);
 
 	return true;
@@ -221,11 +218,9 @@ bool NFWSModule::SendMsgPB(const uint16_t nMsgID, const google::protobuf::Messag
 bool NFWSModule::SendMsgWithOutHead(const int16_t nMsgID, const char* msg, const size_t nLen, const NFSOCK nSockIndex /*= 0*/)
 {
     std::string strOutData;
-    std::cout<<"准备发送数据。。。。"<<nLen;
     int nAllLen = EnCode(nMsgID, msg, nLen, strOutData);
     if (nAllLen == nLen + NFIMsgHead::NF_Head::NF_HEAD_LENGTH)
     {
-        std::cout<<"\n编码完成数据:"<<strOutData.size()<<endl;
         auto frame = EncodeFrame(strOutData.data(), strOutData.size(), false);
         return SendRawMsg(frame, nSockIndex);
     }
@@ -681,29 +676,19 @@ std::error_code NFWSModule::DecodeFrame(const NFSOCK nSockIndex,NetObject* pNetO
     return DecodeFrame(nSockIndex,pNetObject);
 }
 int NFWSModule::DeCode(const char* strData, const uint32_t unAllLen, NFMsgHead& xHead)
-{
-    
+{ 
     if (unAllLen < NFIMsgHead::NF_Head::NF_HEAD_LENGTH)
-    {
-        
+    { 
         return -1;
     }
-    for(auto i=0;i<unAllLen;i++){
-        std::cout<<int(strData[i])<<"|";
-    }
-    
     if (NFIMsgHead::NF_Head::NF_HEAD_LENGTH != xHead.DeCode(strData))
-    {
-        
+    {  
         return -2;
     }
-
     if (xHead.GetBodyLength() > (unAllLen - NFIMsgHead::NF_Head::NF_HEAD_LENGTH))
-    {
-        
+    {   
         return -3;
     }
-    
     return xHead.GetBodyLength();
 }
 std::string NFWSModule::EncodeFrame(const char * data, size_t size_, bool text)

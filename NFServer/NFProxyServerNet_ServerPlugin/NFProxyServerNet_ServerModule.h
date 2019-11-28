@@ -65,6 +65,7 @@ protected:
     void OnClientDisconnect(const NFSOCK nAddress);
     void OnClientConnected(const NFSOCK nAddress);
 
+    void OnConnectKeyProcessWS(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
     void OnConnectKeyProcess(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
     void OnReqServerListProcess(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
     void OnSelectServerProcess(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
