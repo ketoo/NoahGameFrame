@@ -49,6 +49,21 @@
     <ClCompile Include="GL\gl3w.c">
       <Filter>gl3w</Filter>
     </ClCompile>
+    <ClCompile Include="imgui\imnodes.cpp">
+      <Filter>imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="UI\NFContainerView.cpp">
+      <Filter>UI</Filter>
+    </ClCompile>
+    <ClCompile Include="UI\NFInspectorView.cpp">
+      <Filter>UI</Filter>
+    </ClCompile>
+    <ClCompile Include="UI\NFNodeView.cpp">
+      <Filter>UI</Filter>
+    </ClCompile>
+    <ClCompile Include="UI\NFOperatorView.cpp">
+      <Filter>UI</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="NFUIModule.h" />
@@ -106,6 +121,21 @@
     </ClInclude>
     <ClInclude Include="GL\glcorearb.h">
       <Filter>gl3w</Filter>
+    </ClInclude>
+    <ClInclude Include="imgui\imnodes.h">
+      <Filter>imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="UI\NFContainerView.h">
+      <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="UI\NFInspectorView.h">
+      <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="UI\NFNodeView.h">
+      <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="UI\NFOperatorView.h">
+      <Filter>UI</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
