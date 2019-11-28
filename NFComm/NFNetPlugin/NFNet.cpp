@@ -36,7 +36,6 @@
 
 #include "event2/event.h"
 #include "event2/bufferevent_struct.h"
-#include "NFComm/NFLogPlugin/easylogging++.h"
 
 /*
 if any one want to upgrade the networking library(libEvent), please change the size of evbuffer as below:

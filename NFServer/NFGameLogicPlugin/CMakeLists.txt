@@ -5,15 +5,10 @@ file(GLOB NFGameLogicPlugin_ROOT_Cpp
 file(GLOB NFGameLogicPlugin_ROOT_Hpp 
 	*.h)
 
-#Exclude this file
-file(GLOB RemoveItems_Cpp NFHomeModule.cpp NFMapModule.cpp NFTileMapModule.cpp NFTileModule.cpp NFSurvivalModule.cpp)
-list(REMOVE_ITEM NFGameLogicPlugin_ROOT_Cpp ${RemoveItems_Cpp})
-
 
 add_library(NFGameLogicPlugin STATIC
 	${NFGameLogicPlugin_ROOT_Cpp}
 	${NFGameLogicPlugin_ROOT_Hpp})
-	
 
 
 set_target_properties( NFGameLogicPlugin PROPERTIES OUTPUT_NAME_DEBUG "NFGameLogicPlugin_d")

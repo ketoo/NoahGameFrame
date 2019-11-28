@@ -26,15 +26,14 @@
 #define GLOG_NO_ABBREVIATED_SEVERITIES
 #include <stdarg.h>
 #include "NFLogModule.h"
-#include "easylogging++.h"
 #include "NFLogPlugin.h"
 #include "termcolor.hpp"
+#include "NFComm/NFCore/easylogging++.h"
 
 #if NF_PLATFORM != NF_PLATFORM_WIN
 #include <execinfo.h>
 #endif
 
-INITIALIZE_EASYLOGGINGPP
 
 unsigned int NFLogModule::idx = 0;
 

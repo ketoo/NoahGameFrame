@@ -103,7 +103,5 @@ else()
 	add_subdirectory(Dependencies)
 	add_subdirectory(NFComm)
 	add_subdirectory(NFServer)
-	add_subdirectory(NFMidWare)
-	add_subdirectory(Tutorial)
 endif()
 

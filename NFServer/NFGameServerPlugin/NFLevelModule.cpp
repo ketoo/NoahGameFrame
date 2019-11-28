@@ -28,7 +28,6 @@
 
 bool NFLevelModule::Init()
 {
-	mbExpForHero = true;
     return true;
 }
 
@@ -50,19 +49,12 @@ bool NFLevelModule::AfterInit()
     m_pLogModule = pPluginManager->FindModule<NFILogModule>();
     m_pPropertyConfigModule = pPluginManager->FindModule<NFIPropertyConfigModule>();
 	m_pElementModule = pPluginManager->FindModule<NFIElementModule>();
-	m_pHeroModule = pPluginManager->FindModule<NFIHeroModule>();
 	
     return true;
 }
 
 int NFLevelModule::AddExp(const NFGUID& self, const int64_t nExp)
 {
-	if (mbExpForHero)
-	{
-		m_pHeroModule->AddHeroExp(self, nExp);
-		return 0;
-	}
-
     int eJobType = m_pKernelModule->GetPropertyInt32(self, NFrame::Player::Job());
     int64_t nCurExp = m_pKernelModule->GetPropertyInt(self, NFrame::Player::EXP());
     int nLevel = m_pKernelModule->GetPropertyInt32(self, NFrame::Player::Level());

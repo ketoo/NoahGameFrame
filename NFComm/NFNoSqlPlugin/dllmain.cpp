@@ -28,7 +28,7 @@
 #if NF_PLATFORM == NF_PLATFORM_WIN
 #pragma comment( lib, "ws2_32" )
 #pragma comment( lib, "event.lib" )
-#pragma comment( lib, "hiredis_d.lib") 
+#pragma comment( lib, "hiredis.lib") 
 #else
 
 #endif

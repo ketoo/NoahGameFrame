@@ -46,7 +46,7 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
-    <TargetName>$(ProjectName)_d</TargetName>
+    <TargetName>$(ProjectName)</TargetName>
     <EmbedManifest>false</EmbedManifest>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -100,14 +100,7 @@
     </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="NFFriendAgentModule.h" />
-    <ClInclude Include="NFScenePropsModule.h" />
-    <ClInclude Include="NFBuffModule.h" />
-    <ClInclude Include="NFCreateRoleModule.h" />
-    <ClInclude Include="NFGamePVPModule.h" />
-    <ClInclude Include="NFSyncModule.h" />
     <ClInclude Include="NFGameLogicPlugin.h" />
-    <ClInclude Include="NFTeamAgentModule.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="dllmain.cpp">
@@ -118,14 +111,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
       </PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="NFBuffModule.cpp" />
-    <ClCompile Include="NFCreateRoleModule.cpp" />
-    <ClCompile Include="NFFriendAgentModule.cpp" />
-    <ClCompile Include="NFGamePVPModule.cpp" />
-    <ClCompile Include="NFSyncModule.cpp" />
     <ClCompile Include="NFGameLogicPlugin.cpp" />
-    <ClCompile Include="NFScenePropsModule.cpp" />
-    <ClCompile Include="NFTeamAgentModule.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

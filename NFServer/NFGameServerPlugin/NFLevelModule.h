@@ -34,7 +34,6 @@
 #include "NFComm/NFPluginModule/NFIPluginManager.h"
 #include "NFComm/NFMessageDefine/NFProtocolDefine.hpp"
 #include "NFComm/NFPluginModule/NFIElementModule.h"
-#include "NFComm/NFPluginModule/NFIHeroModule.h"
 
 class NFLevelModule
     : public NFILevelModule
@@ -53,12 +52,8 @@ public:
 
     virtual int AddExp(const NFGUID& self, const int64_t nExp);
 
-private:
-	bool mbExpForHero;
-
 
 private:
-	NFIHeroModule* m_pHeroModule;
 	NFIPropertyConfigModule* m_pPropertyConfigModule;
     NFIKernelModule* m_pKernelModule;
     NFILogModule* m_pLogModule;

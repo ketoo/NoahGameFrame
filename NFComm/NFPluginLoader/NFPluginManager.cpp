@@ -34,6 +34,62 @@
 
 #if NF_PLATFORM == NF_PLATFORM_WIN
 #pragma comment( lib, "ws2_32.lib" )
+
+#ifndef NF_DYNAMIC_PLUGIN
+#ifdef NF_DEBUG_MODE
+#pragma comment( lib, "libprotobufd.lib" )
+#else
+#pragma comment( lib, "libprotobuf.lib" )
+#endif
+
+#pragma comment( lib, "NFCore.lib" )
+#pragma comment( lib, "NFMessageDefine.lib" )
+#pragma comment( lib, "event.lib" )
+#pragma comment( lib, "event_core.lib" )
+#pragma comment( lib, "lua.lib" )
+#pragma comment( lib, "navigation.lib" )
+#pragma comment( lib, "hiredis.lib" )
+
+
+#pragma comment( lib, "NFCore.lib" )
+#pragma comment( lib, "NFActorPlugin.lib" )
+#pragma comment( lib, "NFConfigPlugin.lib" )
+#pragma comment( lib, "NFKernelPlugin.lib" )
+#pragma comment( lib, "NFLogPlugin.lib" )
+#pragma comment( lib, "NFLuaScriptPlugin.lib" )
+#pragma comment( lib, "NFNavigationPlugin.lib" )
+#pragma comment( lib, "NFNetPlugin.lib" )
+#pragma comment( lib, "NFNoSqlPlugin.lib" )
+#pragma comment( lib, "NFSecurityPlugin.lib" )
+#pragma comment( lib, "NFTestPlugin.lib" )
+
+#pragma comment( lib, "NFDBLogicPlugin.lib" )
+#pragma comment( lib, "NFDBNet_ClientPlugin.lib" )
+#pragma comment( lib, "NFDBNet_ServerPlugin.lib" )
+
+#pragma comment( lib, "NFGameServerPlugin.lib" )
+#pragma comment( lib, "NFGameServerNet_ClientPlugin.lib" )
+#pragma comment( lib, "NFGameServerNet_ServerPlugin.lib" )
+
+#pragma comment( lib, "NFLoginLogicPlugin.lib" )
+#pragma comment( lib, "NFLoginNet_ClientPlugin.lib" )
+#pragma comment( lib, "NFLoginNet_ServerPlugin.lib" )
+#pragma comment( lib, "NFLoginNet_HttpServerPlugin.lib" )
+
+#pragma comment( lib, "NFMasterServerPlugin.lib" )
+#pragma comment( lib, "NFMasterNet_ServerPlugin.lib" )
+#pragma comment( lib, "NFMasterNet_HttpServerPlugin.lib" )
+
+#pragma comment( lib, "NFProxyLogicPlugin.lib" )
+#pragma comment( lib, "NFProxyServerNet_ClientPlugin.lib" )
+#pragma comment( lib, "NFProxyServerNet_ServerPlugin.lib" )
+
+#pragma comment( lib, "NFWorldLogicPlugin.lib" )
+#pragma comment( lib, "NFWorldNet_ClientPlugin.lib" )
+#pragma comment( lib, "NFWorldNet_ServerPlugin.lib" )
+
+#endif
+
 #endif
 
 #ifdef NF_DEBUG_MODE
@@ -72,7 +128,6 @@
 #include "NFServer/NFDBNet_ClientPlugin/NFDBNet_ClientPlugin.h"
 #include "NFServer/NFDBNet_ServerPlugin/NFDBNet_ServerPlugin.h"
 //GAME
-#include "NFServer/NFGameLogicPlugin/NFGameLogicPlugin.h"
 #include "NFServer/NFGameServerNet_ClientPlugin/NFGameServerNet_ClientPlugin.h"
 #include "NFServer/NFGameServerNet_ServerPlugin/NFGameServerNet_ServerPlugin.h"
 #include "NFServer/NFGameServerPlugin/NFGameServerPlugin.h"
@@ -92,29 +147,7 @@
 #include "NFServer/NFWorldLogicPlugin/NFWorldLogicPlugin.h"
 #include "NFServer/NFWorldNet_ClientPlugin/NFWorldNet_ClientPlugin.h"
 #include "NFServer/NFWorldNet_ServerPlugin/NFWorldNet_ServerPlugin.h"
-//MIDWARE
-#include "NFMidWare/NFAIPlugin/NFAIPlugin.h"
-#include "NFMidWare/NFAOIPlugin/NFAOIPlugin.h"
-#include "NFMidWare/NFChatPlugin/NFChatPlugin.h"
-#include "NFMidWare/NFFriendPlugin/NFFriendPlugin.h"
-#include "NFMidWare/NFTeamPlugin/NFTeamPlugin.h"
-#include "NFMidWare/NFClanPlugin/NFClanPlugin.h"
-#include "NFMidWare/NFHeroPlugin/NFHeroPlugin.h"
-#include "NFMidWare/NFItemBagPlugin/NFItemBagPlugin.h"
-#include "NFMidWare/NFMailPlugin/NFMailPlugin.h"
-#include "NFMidWare/NFRankPlugin/NFRankPlugin.h"
-#include "NFMidWare/NFShopPlugin/NFShopPlugin.h"
-#include "NFMidWare/NFSkillPlugin/NFSkillPlugin.h"
-#include "NFMidWare/NFTaskPlugin/NFTaskPlugin.h"
-#include "NFMidWare/NFUserGiftPlugin/NFUserGiftPlugin.h"
-//TUTORIAL
-#include "Tutorial/Tutorial1/Tutorial1.h"
-#include "Tutorial/Tutorial2/Tutorial2.h"
-#include "Tutorial/Tutorial3/Tutorial3Plugin.h"
-#include "Tutorial/Tutorial4/Tutorial4Plugin.h"
-#include "Tutorial/Tutorial5/Tutorial5.h"
-#include "Tutorial/Tutorial6/Tutorial6.h"
-#include "Tutorial/Tutorial7/Tutorial7.h"
+
 
 #endif
 
@@ -144,11 +177,9 @@ NFPluginManager::NFPluginManager() : NFIPluginManager()
 
 	mstrConfigPath = "../";
 
-#ifdef NF_DEBUG_MODE
+
    mstrConfigName = "NFDataCfg/Debug/Plugin.xml";
-#else
-   mstrConfigName = "NFDataCfg/Release/Plugin.xml";
-#endif
+
 }
 
 NFPluginManager::~NFPluginManager()
@@ -169,10 +200,10 @@ bool NFPluginManager::LoadPlugin()
 	PluginNameMap::iterator it = mPluginNameMap.begin();
 	for (; it != mPluginNameMap.end(); ++it)
 	{
-#ifdef NF_DYNAMIC_PLUGIN
-		LoadPluginLibrary(it->first);
-#else
+#ifndef NF_DYNAMIC_PLUGIN
 		LoadStaticPlugin(it->first);
+#else
+		LoadPluginLibrary(it->first);
 #endif
 	}
 
@@ -265,7 +296,6 @@ bool NFPluginManager::LoadStaticPlugin()
 	CREATE_PLUGIN(this, NFDBNet_ServerPlugin)
 
 //GAME
-	CREATE_PLUGIN(this, NFGameLogicPlugin)
 	CREATE_PLUGIN(this, NFGameServerNet_ClientPlugin)
 	CREATE_PLUGIN(this, NFGameServerNet_ServerPlugin)
 	CREATE_PLUGIN(this, NFGameServerPlugin)
@@ -290,28 +320,7 @@ bool NFPluginManager::LoadStaticPlugin()
 	CREATE_PLUGIN(this, NFWorldNet_ClientPlugin)
 	CREATE_PLUGIN(this, NFWorldNet_ServerPlugin)
 
-//MIDWARE
-	CREATE_PLUGIN(this, NFChatPlugin)
-	CREATE_PLUGIN(this, NFFriendPlugin)
-	CREATE_PLUGIN(this, NFClanPlugin)
-	CREATE_PLUGIN(this, NFHeroPlugin)
-	CREATE_PLUGIN(this, NFItemBagPlugin)
-	CREATE_PLUGIN(this, NFMailPlugin)
-	CREATE_PLUGIN(this, NFRankPlugin)
-	CREATE_PLUGIN(this, NFShopPlugin)
-	CREATE_PLUGIN(this, NFSkillPlugin)
-	CREATE_PLUGIN(this, NFTaskPlugin)
-	CREATE_PLUGIN(this, NFUserGiftPlugin)
-	CREATE_PLUGIN(this, NFTeamPlugin)
 
-//TUTORIAL
-	CREATE_PLUGIN(this, Tutorial1)
-	CREATE_PLUGIN(this, Tutorial2)
-	CREATE_PLUGIN(this, Tutorial3Plugin)
-	CREATE_PLUGIN(this, Tutorial4Plugin)
-	CREATE_PLUGIN(this, Tutorial5)
-	CREATE_PLUGIN(this, Tutorial6)
-	CREATE_PLUGIN(this, Tutorial7)
 
 #endif
 

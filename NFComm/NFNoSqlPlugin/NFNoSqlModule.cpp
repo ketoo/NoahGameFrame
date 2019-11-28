@@ -150,6 +150,11 @@ NF_SHARE_PTR<NFIRedisClient> NFNoSqlModule::GetDriverBySuit(const std::string& s
 		return xDriver;
 	}
 
+	std::ostringstream os;
+	os << "GetDriverBySuit ===> NULL";
+	os << strHash;
+
+	m_pLogModule->LogError(os);
 	return nullptr;
 }
 

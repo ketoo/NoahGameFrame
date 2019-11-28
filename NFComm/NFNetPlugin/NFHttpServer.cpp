@@ -25,7 +25,6 @@
 
 #include <thread>
 #include "NFHttpServer.h"
-#include "NFComm/NFLogPlugin/easylogging++.h"
 
 bool NFHttpServer::Execute()
 {

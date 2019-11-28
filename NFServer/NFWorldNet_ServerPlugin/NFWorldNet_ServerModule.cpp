@@ -35,8 +35,6 @@ bool NFWorldNet_ServerModule::Init()
 	m_pElementModule = pPluginManager->FindModule<NFIElementModule>();
 	m_pClassModule = pPluginManager->FindModule<NFIClassModule>();
 	m_pNetClientModule = pPluginManager->FindModule<NFINetClientModule>();
-	m_pWorldPVPModule = pPluginManager->FindModule<NFIWorldPVPModule>();
-	m_pTeamModule = pPluginManager->FindModule<NFITeamModule>();
 	
     return true;
 }
@@ -857,8 +855,6 @@ void NFWorldNet_ServerModule::OnOnlineProcess(const NFSOCK nSockIndex, const int
 	}
 
 	playerData->OnLine(xMsg.game(), xMsg.proxy());
-	//m_pWorldPVPModule->OnLine(self);
-	m_pTeamModule->OnLine(selfId);
 }
 
 void NFWorldNet_ServerModule::OnOfflineProcess(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
@@ -873,8 +869,6 @@ void NFWorldNet_ServerModule::OnOfflineProcess(const NFSOCK nSockIndex, const in
 		playerData->OffLine();
 	}
 
-	m_pWorldPVPModule->OffLine(self);
-	m_pTeamModule->OnLine(self);
 }
 
 void NFWorldNet_ServerModule::OnTransmitServerReport(const NFSOCK nFd, const int msgId, const char *buffer,

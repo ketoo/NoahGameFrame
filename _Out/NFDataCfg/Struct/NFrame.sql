@@ -1,6 +1,4 @@
 CREATE TABLE IF NOT EXISTS Buff  ( `ID` varchar(128) NOT NULL, PRIMARY KEY (`ID`) ) ENGINE=InnoDB DEFAULT CHARSET=utf8; 
-CREATE TABLE IF NOT EXISTS Clan  ( `ID` varchar(128) NOT NULL, PRIMARY KEY (`ID`) ) ENGINE=InnoDB DEFAULT CHARSET=utf8; 
-CREATE TABLE IF NOT EXISTS ClanConfig  ( `ID` varchar(128) NOT NULL, PRIMARY KEY (`ID`) ) ENGINE=InnoDB DEFAULT CHARSET=utf8; 
 CREATE TABLE IF NOT EXISTS ConsumeData  ( `ID` varchar(128) NOT NULL, PRIMARY KEY (`ID`) ) ENGINE=InnoDB DEFAULT CHARSET=utf8; 
 CREATE TABLE IF NOT EXISTS DescData  ( `ID` varchar(128) NOT NULL, PRIMARY KEY (`ID`) ) ENGINE=InnoDB DEFAULT CHARSET=utf8; 
 CREATE TABLE IF NOT EXISTS EffectData  ( `ID` varchar(128) NOT NULL, PRIMARY KEY (`ID`) ) ENGINE=InnoDB DEFAULT CHARSET=utf8; 
@@ -17,12 +15,8 @@ CREATE TABLE IF NOT EXISTS Player  ( `ID` varchar(128) NOT NULL, PRIMARY KEY (`I
 CREATE TABLE IF NOT EXISTS Scene  ( `ID` varchar(128) NOT NULL, PRIMARY KEY (`ID`) ) ENGINE=InnoDB DEFAULT CHARSET=utf8; 
 CREATE TABLE IF NOT EXISTS Security  ( `ID` varchar(128) NOT NULL, PRIMARY KEY (`ID`) ) ENGINE=InnoDB DEFAULT CHARSET=utf8; 
 CREATE TABLE IF NOT EXISTS Server  ( `ID` varchar(128) NOT NULL, PRIMARY KEY (`ID`) ) ENGINE=InnoDB DEFAULT CHARSET=utf8; 
-CREATE TABLE IF NOT EXISTS Shop  ( `ID` varchar(128) NOT NULL, PRIMARY KEY (`ID`) ) ENGINE=InnoDB DEFAULT CHARSET=utf8; 
 CREATE TABLE IF NOT EXISTS Skill  ( `ID` varchar(128) NOT NULL, PRIMARY KEY (`ID`) ) ENGINE=InnoDB DEFAULT CHARSET=utf8; 
 CREATE TABLE IF NOT EXISTS SqlServer  ( `ID` varchar(128) NOT NULL, PRIMARY KEY (`ID`) ) ENGINE=InnoDB DEFAULT CHARSET=utf8; 
-CREATE TABLE IF NOT EXISTS Talent  ( `ID` varchar(128) NOT NULL, PRIMARY KEY (`ID`) ) ENGINE=InnoDB DEFAULT CHARSET=utf8; 
-CREATE TABLE IF NOT EXISTS Task  ( `ID` varchar(128) NOT NULL, PRIMARY KEY (`ID`) ) ENGINE=InnoDB DEFAULT CHARSET=utf8; 
-CREATE TABLE IF NOT EXISTS Team  ( `ID` varchar(128) NOT NULL, PRIMARY KEY (`ID`) ) ENGINE=InnoDB DEFAULT CHARSET=utf8; 
 
 ALTER TABLE `Buff` ADD `DownSaveType` bigint(11) DEFAULT '0' COMMENT '下线是否保存';
 ALTER TABLE `Buff` ADD `EffectClearOnDead` bigint(11) DEFAULT '0' COMMENT '死亡是否清除';
@@ -33,21 +27,6 @@ ALTER TABLE `Buff` ADD `EffectValueReferType` bigint(11) DEFAULT '0' COMMENT '�
 ALTER TABLE `Buff` ADD `EffectValueType` bigint(11) DEFAULT '0' COMMENT '影响值类型 百分比 绝对值--如果是控制属性开关，则只能是绝对值';
 ALTER TABLE `Buff` ADD `ReverseReferType` bigint(11) DEFAULT '0' COMMENT '是否还原，不还原的在计算的时候不能保存在runTimeInfo,只能累计在最终值内';
 ALTER TABLE `Buff` ADD `WashGroupID` bigint(11) DEFAULT '0' COMMENT '每次间隔时间0.5f倍数';
-ALTER TABLE `Clan` ADD `Clan_AD` text COLLATE utf8mb4_unicode_ci  DEFAULT '' COMMENT '工会公告';
-ALTER TABLE `Clan` ADD `Clan_CreateTime` bigint(11) DEFAULT '0' COMMENT '公会创建时间';
-ALTER TABLE `Clan` ADD `Clan_Desc` text COLLATE utf8mb4_unicode_ci  DEFAULT '' COMMENT '工会描述';
-ALTER TABLE `Clan` ADD `Clan_Gold` bigint(11) DEFAULT '0' COMMENT '工会财富';
-ALTER TABLE `Clan` ADD `Clan_Icon` text COLLATE utf8mb4_unicode_ci  DEFAULT '' COMMENT '公会头像';
-ALTER TABLE `Clan` ADD `Clan_Level` bigint(11) DEFAULT '0' COMMENT '工会等级';
-ALTER TABLE `Clan` ADD `Clan_Name` text COLLATE utf8mb4_unicode_ci  DEFAULT '' COMMENT '工会名';
-ALTER TABLE `Clan` ADD `Clan_PresidentID` varchar(64) COLLATE utf8mb4_unicode_ci DEFAULT '' COMMENT '会长ID';
-ALTER TABLE `Clan` ADD `Clan_PresidentName` text COLLATE utf8mb4_unicode_ci  DEFAULT '' COMMENT '会长名';
-ALTER TABLE `Clan` ADD `Clan_Rank` bigint(11) DEFAULT '0' COMMENT '公会排名';
-ALTER TABLE `Clan` ADD `Guild_EctypID` bigint(11) DEFAULT '0' COMMENT '工会副本ID';
-ALTER TABLE `Clan` ADD `Clan_AppyList` text COLLATE utf8mb4_unicode_ci  DEFAULT '' COMMENT '';
-ALTER TABLE `Clan` ADD `Clan_Building` text COLLATE utf8mb4_unicode_ci  DEFAULT '' COMMENT '';
-ALTER TABLE `Clan` ADD `Clan_MemberList` text COLLATE utf8mb4_unicode_ci  DEFAULT '' COMMENT '';
-ALTER TABLE `Clan` ADD `Clan_WarList` text COLLATE utf8mb4_unicode_ci  DEFAULT '' COMMENT '';
 ALTER TABLE `ConsumeData` ADD `Diamond` bigint(11) DEFAULT '0' COMMENT '钻石';
 ALTER TABLE `ConsumeData` ADD `EXP` bigint(11) DEFAULT '0' COMMENT '经验获得,如果是怪物，则是掉落经验';
 ALTER TABLE `ConsumeData` ADD `Gold` bigint(11) DEFAULT '0' COMMENT '玩家游戏金币';
@@ -141,15 +120,3 @@ ALTER TABLE `Player` ADD `HeroValue` text COLLATE utf8mb4_unicode_ci  DEFAULT ''
 ALTER TABLE `Player` ADD `PlayerHero` text COLLATE utf8mb4_unicode_ci  DEFAULT '' COMMENT '';
 ALTER TABLE `Player` ADD `TaskList` text COLLATE utf8mb4_unicode_ci  DEFAULT '' COMMENT '';
 ALTER TABLE `Player` ADD `WarList` text COLLATE utf8mb4_unicode_ci  DEFAULT '' COMMENT '';
-ALTER TABLE `Shop` ADD `Count` bigint(11) DEFAULT '0' COMMENT '';
-ALTER TABLE `Shop` ADD `Diamond` bigint(11) DEFAULT '0' COMMENT '';
-ALTER TABLE `Shop` ADD `Gold` bigint(11) DEFAULT '0' COMMENT '';
-ALTER TABLE `Shop` ADD `ItemID` text COLLATE utf8mb4_unicode_ci  DEFAULT '' COMMENT '';
-ALTER TABLE `Shop` ADD `Level` bigint(11) DEFAULT '0' COMMENT '';
-ALTER TABLE `Shop` ADD `Steel` bigint(11) DEFAULT '0' COMMENT '';
-ALTER TABLE `Shop` ADD `Stone` bigint(11) DEFAULT '0' COMMENT '';
-ALTER TABLE `Shop` ADD `Type` bigint(11) DEFAULT '0' COMMENT '';
-ALTER TABLE `Team` ADD `Captain` varchar(64) COLLATE utf8mb4_unicode_ci DEFAULT '' COMMENT '队长ID';
-ALTER TABLE `Team` ADD `PresidentName` text COLLATE utf8mb4_unicode_ci  DEFAULT '' COMMENT '会长名';
-ALTER TABLE `Team` ADD `ApplyList` text COLLATE utf8mb4_unicode_ci  DEFAULT '' COMMENT '';
-ALTER TABLE `Team` ADD `MemberList` text COLLATE utf8mb4_unicode_ci  DEFAULT '' COMMENT '';

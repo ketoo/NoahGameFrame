@@ -77,11 +77,7 @@ protected:
 	void OnLoadRoleDataProcess(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
 	void OnSaveRoleDataProcess(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
 
-private:
-	void InitAllHomeScene();
-	int RandomHomeScene();
 
-	std::vector<int> mxTileSceneIDList;
 protected:
 	NFIPlayerRedisModule* m_pPlayerRedisModule;
 	NFIAccountRedisModule* m_pAccountRedisModule;

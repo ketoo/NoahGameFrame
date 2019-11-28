@@ -16,7 +16,11 @@
 		<Plugin Name="NFConfigPlugin" />	
 		<Plugin Name="NFLoginNet_ServerPlugin" />
 		<Plugin Name="NFLoginNet_ClientPlugin" />
+		<Plugin Name="NFLoginLogicPlugin" />
+		<Plugin Name="NFLoginNet_HttpServerPlugin" />
 		<Plugin Name="NFLogPlugin" />	
+		<Plugin Name="NFDBLogicPlugin" />
+		<Plugin Name="NFNoSqlPlugin" />
 	</LoginServer>
 
 	<MasterServer>
@@ -46,8 +50,21 @@
 		<Plugin Name="NFConfigPlugin" />
 		<Plugin Name="NFWorldNet_ClientPlugin" />
 		<Plugin Name="NFWorldNet_ServerPlugin" />
+		<Plugin Name="NFDBLogicPlugin" />
 		<Plugin Name="NFLogPlugin" />	
 		<Plugin Name="NFSecurityPlugin" />
+		<Plugin Name="NFNoSqlPlugin" />
 	</WorldServer>
-
+	<DBServer>
+		<Plugin Name="NFNetPlugin" />
+		<Plugin Name="NFKernelPlugin" />
+		<Plugin Name="NFConfigPlugin" />
+		<Plugin Name="NFDBNet_ClientPlugin" />
+		<Plugin Name="NFDBNet_ServerPlugin" />
+		<Plugin Name="NFLogPlugin" />
+		<Plugin Name="NFDBLogicPlugin" />
+		<Plugin Name="NFActorPlugin" />
+		<Plugin Name="NFNoSqlPlugin" />
+		<Plugin Name="NFSecurityPlugin" />
+	</DBServer>
 </XML>

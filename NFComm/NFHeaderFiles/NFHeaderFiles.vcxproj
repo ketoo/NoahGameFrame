@@ -10,14 +10,14 @@
     <VCProjectVersion>15.0</VCProjectVersion>
     <ProjectGuid>{164E42F1-D331-4B83-8207-CB24EFFBC1C6}</ProjectGuid>
     <RootNamespace>NFHeaderFiles</RootNamespace>
-    <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
     <ProjectName>NFHeaderFiles</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>Utility</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
-    <PlatformToolset>v140</PlatformToolset>
+    <PlatformToolset>v141</PlatformToolset>
     <PlatformToolset Condition="'$(VisualStudioVersion)' == '12.0'">v120</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>MultiByte</CharacterSet>
@@ -48,7 +48,6 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="..\NFMessageDefine\NFMsgDefine.h" />
     <ClInclude Include="..\NFPluginModule\NFGUID.h" />
     <ClInclude Include="..\NFPluginModule\NFIAccountRedisModule.h" />
     <ClInclude Include="..\NFPluginModule\NFIActor.h" />

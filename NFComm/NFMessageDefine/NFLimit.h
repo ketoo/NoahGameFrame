@@ -28,7 +28,6 @@ limitations under the License.
 
 #pragma pack(push,1)
 
-
 #define NF_NAME_MAXLEN          32              
 #define NF_BROAD_MAXLEN         64             
 #define NF_PATH_MAXLEN          128            
@@ -44,7 +43,41 @@ limitations under the License.
 
 //#define NF_MAX_ONLINE         3000            
 
+
+#ifdef NF_DEBUG_MODE
+
+#if NF_PLATFORM == NF_PLATFORM_WIN
+#pragma comment( lib, "libprotobufd.lib" )
+
+#elif NF_PLATFORM == NF_PLATFORM_LINUX || NF_PLATFORM == NF_PLATFORM_ANDROID
+
+#elif NF_PLATFORM == NF_PLATFORM_APPLE || NF_PLATFORM == NF_PLATFORM_APPLE_IOS
+#endif
+
+#else
+
+#if NF_PLATFORM == NF_PLATFORM_WIN
+#pragma comment( lib, "libprotobuf.lib" )
+
+#elif NF_PLATFORM == NF_PLATFORM_LINUX || NF_PLATFORM == NF_PLATFORM_ANDROID
+
+#elif NF_PLATFORM == NF_PLATFORM_APPLE || NF_PLATFORM == NF_PLATFORM_APPLE_IOS
+#endif
+
+#endif
+
+class _NFExport DoNothing
+{
+public:
+	void DonOTHING()
+	{
+
+	}
+};
+
+
 #pragma pack(pop)
+
 
 
 #endif
