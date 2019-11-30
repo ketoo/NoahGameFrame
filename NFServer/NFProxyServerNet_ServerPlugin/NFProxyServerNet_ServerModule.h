@@ -37,6 +37,7 @@
 #include "NFComm/NFPluginModule/NFIProxyServerToGameModule.h"
 #include "NFComm/NFPluginModule/NFINetClientModule.h"
 #include "NFComm/NFPluginModule/NFISecurityModule.h"
+#include "NFComm/NFPluginModule/NFIWSModule.h"
 
 class NFProxyServerNet_ServerModule : public NFIProxyServerNet_ServerModule
 {
@@ -64,6 +65,7 @@ protected:
     void OnClientDisconnect(const NFSOCK nAddress);
     void OnClientConnected(const NFSOCK nAddress);
 
+    void OnConnectKeyProcessWS(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
     void OnConnectKeyProcess(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
     void OnReqServerListProcess(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
     void OnSelectServerProcess(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
@@ -85,6 +87,7 @@ protected:
     NFIElementModule* m_pElementModule;
     NFIClassModule* m_pClassModule;
 	NFINetModule* m_pNetModule;
+    NFIWSModule* m_pWsModule;
 	NFISecurityModule* m_pSecurityModule;
 	NFIProxyServerToWorldModule* m_pProxyToWorldModule;
 };

@@ -92,6 +92,8 @@ private:
 
 	bool SaveForCPP();
 	bool SaveForCS();
+	bool SaveForTS();
+
 	bool SaveForJAVA();
 	bool SaveForPB();
 	bool SaveForSQL();
@@ -123,6 +125,6 @@ private:
 	std::string strCPPFile = "../proto/NFProtocolDefine.cpp";
 	std::string strJavaFile = "../proto/NFProtocolDefine.java";
 	std::string strCSFile = "../proto/NFProtocolDefine.cs";
-
+	std::string strTSFile = "../proto/NFProtocolDefine.ts";		
 	std::map<std::string, ClassData*> mxClassData;
 };
