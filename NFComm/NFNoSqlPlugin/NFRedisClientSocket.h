@@ -106,6 +106,8 @@ protected:
 	static void conn_eventcb(struct bufferevent* bev, short events, void* user_data);
 	static void log_cb(int severity, const char* msg);
 
+	string GetIP(const std::string& url);
+
 private:
 	struct event_base* base;
 	struct bufferevent* bev;
