@@ -1,19 +1,7 @@
-RMDIR /Q/S vcpkg
 
-RMDIR /Q/S libevent
+git submodule update --init --recursive
 
-RMDIR /Q/S lua
-
-RMDIR /Q/S protobuf
-
-RMDIR /Q/S concurrentqueue
-
-RMDIR /Q/S ajson
-
-RMDIR /Q/S vcpkg/installedx64-windows/release
-
-git clone https://github.com/cameron314/concurrentqueue.git
-git clone https://github.com/lordoffox/ajson.git
+rm -rf vcpkg
 
 git clone https://github.com/Microsoft/vcpkg.git
 
