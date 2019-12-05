@@ -145,9 +145,6 @@ public:
    const NFGUID GetAttriGUID(const int attriId);
    const int GetAttriID(const NFGUID guid);
 
-
-   int GenerateId();
-
    void AddNode(const NFGUID guid, const std::string& name, const NFVector2 vec = NFVector2());
    void AddNodeAttrIn(const NFGUID guid, const NFGUID attrId, const std::string& name);
    void AddNodeAttrOut(const NFGUID guid, const NFGUID attrId, const std::string& name);

@@ -75,13 +75,6 @@ NFNodeView::~NFNodeView()
    m_pEditorContext = nullptr;
 }
 
-int NFNodeView::GenerateId()
-{
-   int i = NFGetTimeS();
-   i++;
-   return i;
-}
-
 bool NFNodeView::Execute()
 {
 	//1. the project root folder is NFDataCfg

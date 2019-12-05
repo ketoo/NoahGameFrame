@@ -28,6 +28,7 @@
 #include "NFComm/NFPluginModule/NFIUIModule.h"
 #include "NFComm/NFPluginModule/NFIBluePrintModule.h"
 #include "NFNodeView.h"
+#include "NFTreeView.h"
 
 class NFBluePrintView : public NFIView
 {
@@ -42,28 +43,32 @@ public:
    void TryToCreateBluePrintBlock();
 
 private:
-   void SetCurrentLogicBlock(NF_SHARE_PTR<NFIBluePrintModule::NFLogicBlock> logicBlock);
+	void SetCurrentLogicBlock(NF_SHARE_PTR<NFIBluePrintModule::NFLogicBlock> logicBlock);
+	void SetCurrentMonitor(NF_SHARE_PTR<NFIBluePrintModule::NFMonitor> monitor);
+	void SetCurrentJudgement(NF_SHARE_PTR<NFIBluePrintModule::NFJudgement> judgement);
+	void SetCurrentExecuter(NF_SHARE_PTR<NFIBluePrintModule::NFExecuter> executer);
 
-   void SubMonitorRender(NF_SHARE_PTR<NFIBluePrintModule::NFMonitor> monitor);
-   void SubJudgementRender(NF_SHARE_PTR<NFIBluePrintModule::NFJudgement> judgement);
-   void SubExecuterRender(NF_SHARE_PTR<NFIBluePrintModule::NFExecuter> executer);
+	void SubMonitorRender(NF_SHARE_PTR<NFIBluePrintModule::NFMonitor> monitor);
+	void SubJudgementRender(NF_SHARE_PTR<NFIBluePrintModule::NFJudgement> judgement);
+	void SubExecuterRender(NF_SHARE_PTR<NFIBluePrintModule::NFExecuter> executer);
 
-   void CreateLogicBlockWindow();
+	void CreateLogicBlockWindow();
    
 private:
-   NF_SHARE_PTR<NFIBluePrintModule::NFLogicBlock> mCurrentLogicBlock;
-   NF_SHARE_PTR<NFIBluePrintModule::NFMonitor> mCurrentMonitor;
-   NF_SHARE_PTR<NFIBluePrintModule::NFExecuter> mCurrentExecuter;
-   NF_SHARE_PTR<NFIBluePrintModule::NFJudgement> mCurrentJudgement;
+	NF_SHARE_PTR<NFIBluePrintModule::NFLogicBlock> mCurrentLogicBlock;
+	NF_SHARE_PTR<NFIBluePrintModule::NFMonitor> mCurrentMonitor;
+	NF_SHARE_PTR<NFIBluePrintModule::NFExecuter> mCurrentExecuter;
+	NF_SHARE_PTR<NFIBluePrintModule::NFJudgement> mCurrentJudgement;
 
 private:
-   bool bCreatingLogicBlock = false;
-
-private:
+	bool bCreatingLogicBlock = false;
+	NFTreeView* m_pTreeView;
 	NFNodeView* m_pNodeView;
-   NFIBluePrintModule* m_pBluePrintModule;
-   NFIUIModule* m_pUIModule;
-   NFIKernelModule* m_pKernelModule;
+
+private:
+	NFIBluePrintModule* m_pBluePrintModule;
+	NFIUIModule* m_pUIModule;
+	NFIKernelModule* m_pKernelModule;
 };
 
 #endif

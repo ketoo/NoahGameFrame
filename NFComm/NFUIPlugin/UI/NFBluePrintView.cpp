@@ -29,6 +29,9 @@
 NFBluePrintView::NFBluePrintView(NFIPluginManager* p, NFViewType vt) : NFIView(p, vt, GET_CLASS_NAME(NFBluePrintView))
 {
    m_pNodeView = NF_NEW NFNodeView(p);
+   m_pTreeView = NF_NEW NFTreeView(p);
+
+   m_pTreeView->SetName("BluePrint LogicBlocks");
 
    m_pUIModule = pPluginManager->FindModule<NFIUIModule>();
    m_pBluePrintModule = pPluginManager->FindModule<NFIBluePrintModule>();
@@ -39,15 +42,27 @@ NFBluePrintView::NFBluePrintView(NFIPluginManager* p, NFViewType vt) : NFIView(p
    NFGUID testID3 = m_pKernelModule->CreateGUID();
    NFGUID testID4 = m_pKernelModule->CreateGUID();
 
-   m_pNodeView->AddNode(testID1, "testnode1111111", NFVector2(0, 0));
-   m_pNodeView->AddNode(testID2, "testnode2222222", NFVector2(100, 0));
+
+   NFGUID tree111 = m_pKernelModule->CreateGUID();
+   NFGUID tree222 = m_pKernelModule->CreateGUID();
+   NFGUID tree333 = m_pKernelModule->CreateGUID();
+   NFGUID tree444 = m_pKernelModule->CreateGUID();
+
+
+   m_pTreeView->AddTreeNode(tree111, "tree111");
+   m_pTreeView->AddTreeNode(tree222, "tree222");
+   m_pTreeView->AddTreeNode(tree333, "tree333");
+   m_pTreeView->AddTreeNode(tree444, "tree444");
+
+   m_pNodeView->AddNode(testID1, "testnode1111111", NFVector2(300, 300));
+   m_pNodeView->AddNode(testID2, "testnode2222222", NFVector2(3, 0));
    //m_pNodeView->AddNode(testID3, "testnode333333", NFVector2(200, 0));
    //m_pNodeView->AddNode(testID4, "testnode4444444", NFVector2(300, 0));
 
-   m_pNodeView->AddNodeAttrOut(testID1, m_pKernelModule->CreateGUID(), "Out1");
-   m_pNodeView->AddNodeAttrOut(testID1, m_pKernelModule->CreateGUID(), "Out2");
-   m_pNodeView->AddNodeAttrIn(testID2, m_pKernelModule->CreateGUID(), "In12");
-   m_pNodeView->AddNodeAttrIn(testID2, m_pKernelModule->CreateGUID(), "In123222");
+   //m_pNodeView->AddNodeAttrOut(testID1, m_pKernelModule->CreateGUID(), "Out1");
+   //m_pNodeView->AddNodeAttrOut(testID1, m_pKernelModule->CreateGUID(), "Out2");
+  // m_pNodeView->AddNodeAttrIn(testID2, m_pKernelModule->CreateGUID(), "In12");
+   //m_pNodeView->AddNodeAttrIn(testID2, m_pKernelModule->CreateGUID(), "In123222");
    /*
    m_pNodeView->AddNodeAttrOut(testID2, m_pKernelModule->CreateGUID(), "Out1");
    m_pNodeView->AddNodeAttrOut(testID2, m_pKernelModule->CreateGUID(), "Out2");
@@ -67,6 +82,9 @@ NFBluePrintView::~NFBluePrintView()
 {
    delete m_pNodeView;
    m_pNodeView = nullptr;
+
+   delete m_pTreeView;
+   m_pTreeView = nullptr;
 }
 
 bool NFBluePrintView::Execute()
@@ -92,7 +110,8 @@ bool NFBluePrintView::Execute()
    ImGui::SameLine();
    if (ImGui::Button("return to center"))
    {
-      m_pNodeView->ResetOffest(NFVector2::Zero());
+	   m_pNodeView->ResetOffest(NFVector2(-5, -109));
+	   //m_pNodeView->ResetOffest(NFVector2::Zero());
    }
 
 
@@ -125,11 +144,36 @@ void NFBluePrintView::SetCurrentLogicBlock(NF_SHARE_PTR<NFIBluePrintModule::NFLo
    mCurrentMonitor = nullptr;
    mCurrentExecuter = nullptr;
    mCurrentJudgement = nullptr;
+   //occupy 
+}
+
+void NFBluePrintView::SetCurrentMonitor(NF_SHARE_PTR<NFIBluePrintModule::NFMonitor> monitor)
+{
+	mCurrentMonitor = monitor;
+	mCurrentExecuter = nullptr;
+	mCurrentJudgement = nullptr;
+	//occupy 
+}
+
+void NFBluePrintView::SetCurrentJudgement(NF_SHARE_PTR<NFIBluePrintModule::NFJudgement> judgement)
+{
+	mCurrentMonitor = nullptr;
+	mCurrentJudgement = judgement;
+	//occupy 
+}
+
+void NFBluePrintView::SetCurrentExecuter(NF_SHARE_PTR<NFIBluePrintModule::NFExecuter> executer)
+{
+	mCurrentExecuter = executer;
+
+	//occupy 
 }
 
 void NFBluePrintView::SubRender()
 {
    ImGui::Text(this->name.c_str());
+
+   m_pTreeView->Execute();
 
    const std::list<NF_SHARE_PTR<NFIBluePrintModule::NFLogicBlock>>& logicBlocks = m_pBluePrintModule->GetLogicBlocks();
    for (auto it : logicBlocks)
@@ -145,7 +189,97 @@ void NFBluePrintView::SubRender()
          ImGui::TreePop();
       }
    }
+   if (ImGui::TreeNode("Basic trees"))
+   {
+	   for (int i = 0; i < 5; i++)
+	   {
+		   // Use SetNextItemOpen() so set the default state of a node to be open.
+		   // We could also use TreeNodeEx() with the ImGuiTreeNodeFlags_DefaultOpen flag to achieve the same thing!
+		   if (i == 0)
+			   ImGui::SetNextItemOpen(true, ImGuiCond_Once);
 
+		   if (ImGui::TreeNode((void*)(intptr_t)i, "Child %d", i))
+		   {
+			   ImGui::Text("blah blah");
+			   ImGui::SameLine();
+			   if (ImGui::SmallButton("button")) {};
+			   ImGui::TreePop();
+		   }
+	   }
+	   ImGui::TreePop();
+   }
+
+   if (ImGui::TreeNode("Advanced, with Selectable nodes"))
+   {
+	   static int selection_mask = (1 << 2); // Dumb representation of what may be user-side selection state. You may carry selection state inside or outside your objects in whatever format you see fit.
+	   int node_clicked = -1;                // Temporary storage of what node we have clicked to process selection at the end of the loop. May be a pointer to your own node type, etc.
+	   for (int i = 0; i < 6; i++)
+	   {
+		   // Disable the default open on single-click behavior and pass in Selected flag according to our selection state.
+		   ImGuiTreeNodeFlags node_flags = 0;
+		   const bool is_selected = (selection_mask & (1 << i)) != 0;
+		   if (is_selected)
+			   node_flags |= ImGuiTreeNodeFlags_Selected;
+		   if (i < 3)
+		   {
+			   // Items 0..2 are Tree Node
+			   bool node_open = ImGui::TreeNodeEx((void*)(intptr_t)i, node_flags, "Selectable Node %d", i);
+			   if (ImGui::IsItemClicked())
+			   {
+				   node_clicked = i;
+			   }
+
+			   if (node_open)
+			   {
+				   ImGui::BulletText("Blah blah\nBlah Blah");
+				   ImGui::TreePop();
+			   }
+		   }
+		   else
+		   {
+			   // Items 3..5 are Tree Leaves
+			   // The only reason we use TreeNode at all is to allow selection of the leaf.
+			   // Otherwise we can use BulletText() or advance the cursor by GetTreeNodeToLabelSpacing() and call Text().
+			   node_flags |= ImGuiTreeNodeFlags_Leaf | ImGuiTreeNodeFlags_NoTreePushOnOpen; // ImGuiTreeNodeFlags_Bullet
+			   ImGui::TreeNodeEx((void*)(intptr_t)i, node_flags, "Selectable Leaf %d", i);
+			   if (ImGui::IsItemClicked())
+				   node_clicked = i;
+		   }
+	   }
+	   if (node_clicked != -1)
+	   {
+		   // Update selection state. Process outside of tree loop to avoid visual inconsistencies during the clicking-frame.
+		   if (ImGui::GetIO().KeyCtrl)
+			   selection_mask ^= (1 << node_clicked);          // CTRL+click to toggle
+		   else //if (!(selection_mask & (1 << node_clicked))) // Depending on selection behavior you want, this commented bit preserve selection when clicking on item that is part of the selection
+			   selection_mask = (1 << node_clicked);           // Click to single-select
+	   }
+
+	   ImGui::TreePop();
+   }
+
+	if (ImGui::TreeNode("Collapsing Headers"))
+	{
+		static bool closable_group = true;
+		ImGui::Checkbox("Show 2nd header", &closable_group);
+		if (ImGui::CollapsingHeader("Header", ImGuiTreeNodeFlags_None))
+		{
+			ImGui::Text("IsItemHovered: %d", ImGui::IsItemHovered());
+			for (int i = 0; i < 5; i++)
+				ImGui::Text("Some content %d", i);
+		}
+		if (ImGui::CollapsingHeader("Header with a close button", &closable_group))
+		{
+			ImGui::Text("IsItemHovered: %d", ImGui::IsItemHovered());
+			for (int i = 0; i < 5; i++)
+				ImGui::Text("More content %d", i);
+		}
+		/*
+		if (ImGui::CollapsingHeader("Header with a bullet", ImGuiTreeNodeFlags_Bullet))
+			ImGui::Text("IsItemHovered: %d", ImGui::IsItemHovered());
+		*/
+		ImGui::TreePop();
+	}
 }
 
 void NFBluePrintView::SubMonitorRender(NF_SHARE_PTR<NFIBluePrintModule::NFMonitor> monitor)
