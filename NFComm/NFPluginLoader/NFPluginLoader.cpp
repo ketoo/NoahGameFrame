@@ -164,6 +164,7 @@ public:
 
 		ProcessParameter();
 
+		pPluginManager->SetGetFileContentFunctor(GetFileContent);
 		pPluginManager->SetConfigPath("../");
 
 		pPluginManager->LoadPlugin();
@@ -206,8 +207,9 @@ private:
 		for (int i = 0; i < argList.GetCount(); i++)
 		{
 			strPluginName = argList.String(i);
-			if (strPluginName.find(".xml") != string::npos)
+			if (strPluginName.find("Plugin=") != string::npos)
 			{
+				strPluginName.erase(0, 7);
 				break;
 			}
 
@@ -246,6 +248,25 @@ private:
 		if (NF_StrTo(strAppID, nAppID))
 		{
 			pPluginManager->SetAppID(nAppID);
+		}
+
+		// NoSqlServer.xml:IP=\"127.0.0.1\"==IP=\"192.168.1.1\"
+		if (strArgvList.find(".xml:") != string::npos)
+		{
+			for (int i = 0; i < argList.GetCount(); i++)
+			{
+				std::string strPipeline = argList.String(i);
+				int posFile = strPipeline.find(".xml:");
+				int posContent = strPipeline.find("==");
+				if (posFile != string::npos && posContent != string::npos)
+				{
+					std::string fileName = strPipeline.substr(0, posFile + 4);
+					std::string content = strPipeline.substr(posFile + 5, posContent - (posFile + 5));
+					std::string replaceContent = strPipeline.substr(posContent + 2, strPipeline.length() - (posContent + 2));
+
+					pPluginManager->AddFileReplaceContent(fileName, content, replaceContent);
+				}
+			}
 		}
 
 		std::string strDockerFlag = "0";
@@ -301,6 +322,40 @@ private:
 		signal(SIGTERM, SIG_IGN);
 	#endif
 	}
+
+
+	static bool GetFileContent(NFIPluginManager* p, const std::string& strFilePath, std::string& strContent)
+	{
+		FILE* fp = fopen(strFilePath.c_str(), "rb");
+		if (!fp)
+		{
+			return false;
+		}
+
+		fseek(fp, 0, SEEK_END);
+		const long filelength = ftell(fp);
+		fseek(fp, 0, SEEK_SET);
+		strContent.resize(filelength);
+		fread((void*)strContent.data(), filelength, 1, fp);
+		fclose(fp);
+
+		std::string strFileName = strFilePath.substr(strFilePath.find_last_of("/\\") + 1);
+		std::vector<NFReplaceContent> contents = p->GetFileReplaceContents(strFileName);
+		if (!contents.empty())
+		{
+			for (auto it : contents)
+			{
+				std::size_t pos = strContent.find(it.content);
+				if (pos != string::npos)
+				{
+					strContent.replace(pos, it.content.length(), it.newValue.c_str());
+				}
+			}
+		}
+
+		return true;
+	}
+
 };
 
 void ThreadFunc()
@@ -409,12 +464,12 @@ int main(int argc, char* argv[])
 	if (argc == 1)
 	{
 		//IDE
-		mServerList.push_back(NF_SHARE_PTR<NFServer>(NF_NEW NFServer(strArgvList + " Server=MasterServer ID=3 Plugin.xml")));
-		mServerList.push_back(NF_SHARE_PTR<NFServer>(NF_NEW NFServer(strArgvList + " Server=WorldServer ID=7 Plugin.xml")));
-		mServerList.push_back(NF_SHARE_PTR<NFServer>(NF_NEW NFServer(strArgvList + " Server=LoginServer ID=4 Plugin.xml")));
-		mServerList.push_back(NF_SHARE_PTR<NFServer>(NF_NEW NFServer(strArgvList + " Server=DBServer ID=8 Plugin.xml")));
-		mServerList.push_back(NF_SHARE_PTR<NFServer>(NF_NEW NFServer(strArgvList + " Server=ProxyServer ID=5 Plugin.xml")));
-		mServerList.push_back(NF_SHARE_PTR<NFServer>(NF_NEW NFServer(strArgvList + " Server=GameServer ID=6 Plugin.xml")));
+		mServerList.push_back(NF_SHARE_PTR<NFServer>(NF_NEW NFServer(strArgvList + " Server=MasterServer ID=3 Plugin=Plugin.xml")));
+		mServerList.push_back(NF_SHARE_PTR<NFServer>(NF_NEW NFServer(strArgvList + " Server=WorldServer ID=7 Plugin=Plugin.xml")));
+		mServerList.push_back(NF_SHARE_PTR<NFServer>(NF_NEW NFServer(strArgvList + " Server=LoginServer ID=4 Plugin=Plugin.xml")));
+		mServerList.push_back(NF_SHARE_PTR<NFServer>(NF_NEW NFServer(strArgvList + " Server=DBServer ID=8 Plugin=Plugin.xml")));
+		mServerList.push_back(NF_SHARE_PTR<NFServer>(NF_NEW NFServer(strArgvList + " Server=ProxyServer ID=5 Plugin=Plugin.xml")));
+		mServerList.push_back(NF_SHARE_PTR<NFServer>(NF_NEW NFServer(strArgvList + " Server=GameServer ID=6 Plugin=Plugin.xml")));
 	}
 	else
 	{

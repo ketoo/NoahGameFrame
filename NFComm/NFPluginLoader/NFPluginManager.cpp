@@ -713,7 +713,7 @@ bool NFPluginManager::GetFileContent(const std::string &strFileName, std::string
 {
 	if (mGetFileContentFunctor)
 	{
-		return mGetFileContentFunctor(strFileName, strContent);
+		return mGetFileContentFunctor(this, strFileName, strContent);
 	}
 
 	FILE *fp = fopen(strFileName.c_str(), "rb");
@@ -1026,4 +1026,31 @@ void NFPluginManager::YieldCo(const int64_t nSecond)
 void NFPluginManager::YieldCo()
 {
    mxCoroutineManager.YieldCo();
+}
+
+void NFPluginManager::AddFileReplaceContent(const std::string& fileName, const std::string& content, const std::string& newValue)
+{
+	auto it = mReplaceContent.find(fileName);
+	if (it == mReplaceContent.end())
+	{
+		std::vector<NFReplaceContent> v;
+		v.push_back(NFReplaceContent(content, newValue));
+
+		mReplaceContent.insert(std::pair<std::string, std::vector<NFReplaceContent> >(fileName, v));
+	}
+	else
+	{
+		it->second.push_back(NFReplaceContent(content, newValue));
+	}
+}
+
+std::vector<NFReplaceContent> NFPluginManager::GetFileReplaceContents(const std::string& fileName)
+{
+	auto it = mReplaceContent.find(fileName);
+	if (it != mReplaceContent.end())
+	{
+		return it->second;
+	}
+
+	return std::vector<NFReplaceContent>();
 }
