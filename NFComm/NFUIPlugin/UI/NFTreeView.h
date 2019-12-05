@@ -92,14 +92,17 @@ public:
 	~NFTreeView();
 
 	void SetName(const std::string& name);
+	void SetSelectedNode(const NFGUID& nodeId);
 
 	void AddTreeNode(const NFGUID guid, const std::string& name);
+	NF_SHARE_PTR<NFTreeNode> GetTreNode(const NFGUID guid);
 	void DeleteTreNode(const NFGUID guid);
 
 	void AddSubTreeNode(const NFGUID guid, const NFGUID subId, const std::string& name);
 	void DelSubTreeNode(const NFGUID guid, const NFGUID subId);
 
 	void AddTreeLeafNode(const NFGUID guid, const NFGUID leafId, const std::string& name);
+	NF_SHARE_PTR<NFLeafNode> GetTreeLeafNode(const NFGUID leafId);
 	void DeleteTreeLeafNode(const NFGUID guid, const NFGUID leafId);
 
 	NFGUID GetTreeNodeByLeaf(const NFGUID leafId);
@@ -107,9 +110,15 @@ public:
 	virtual bool Execute();
 
 private:
+   //maybe tree node, maybe leaf node
+   NFGUID mSelectedNode;
+
 	std::string mstrName;
-   NFIUIModule* m_pUIModule;
    std::map<NFGUID, NF_SHARE_PTR<NFTreeNode>> mTrees;
+
+
+
+   NFIUIModule* m_pUIModule;
 };
 
 #endif

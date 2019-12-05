@@ -211,15 +211,15 @@ void NFBluePrintView::SubRender()
 
    if (ImGui::TreeNode("Advanced, with Selectable nodes"))
    {
-	   static int selection_mask = (1 << 2); // Dumb representation of what may be user-side selection state. You may carry selection state inside or outside your objects in whatever format you see fit.
-	   int node_clicked = -1;                // Temporary storage of what node we have clicked to process selection at the end of the loop. May be a pointer to your own node type, etc.
+	   static int node_clicked = -1;                // Temporary storage of what node we have clicked to process selection at the end of the loop. May be a pointer to your own node type, etc.
 	   for (int i = 0; i < 6; i++)
 	   {
 		   // Disable the default open on single-click behavior and pass in Selected flag according to our selection state.
 		   ImGuiTreeNodeFlags node_flags = 0;
-		   const bool is_selected = (selection_mask & (1 << i)) != 0;
+		   const bool is_selected = node_clicked == i;
 		   if (is_selected)
 			   node_flags |= ImGuiTreeNodeFlags_Selected;
+            
 		   if (i < 3)
 		   {
 			   // Items 0..2 are Tree Node
@@ -246,14 +246,8 @@ void NFBluePrintView::SubRender()
 				   node_clicked = i;
 		   }
 	   }
-	   if (node_clicked != -1)
-	   {
-		   // Update selection state. Process outside of tree loop to avoid visual inconsistencies during the clicking-frame.
-		   if (ImGui::GetIO().KeyCtrl)
-			   selection_mask ^= (1 << node_clicked);          // CTRL+click to toggle
-		   else //if (!(selection_mask & (1 << node_clicked))) // Depending on selection behavior you want, this commented bit preserve selection when clicking on item that is part of the selection
-			   selection_mask = (1 << node_clicked);           // Click to single-select
-	   }
+
+	   //ImGui::GetIO().KeyCtrl)
 
 	   ImGui::TreePop();
    }

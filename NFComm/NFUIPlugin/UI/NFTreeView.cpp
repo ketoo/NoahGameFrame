@@ -45,7 +45,7 @@ void NFTreeNode::Execute()
 	base_flags = 0;
 	if (selected)
 	{
-		base_flags = ImGuiTreeNodeFlags_Selected;
+		base_flags |= ImGuiTreeNodeFlags_Selected;
 	}
 
 	ImGui::Checkbox("", &selected);
@@ -99,12 +99,28 @@ void NFTreeView::SetName(const std::string& name)
 	mstrName = name;
 }
 
+void NFTreeView::SetSelectedNode(const NFGUID& nodeId)
+{
+	if (!mSelectedNode.IsNull())
+	{
+
+	}
+	
+	mSelectedNode = nodeId;
+
+}
+
 void NFTreeView::AddTreeNode(const NFGUID guid, const std::string& name)
 {
 	if (mTrees.find(guid) == mTrees.end())
 	{
 		mTrees.insert(std::pair<NFGUID, NF_SHARE_PTR<NFTreeNode>>(guid, NF_SHARE_PTR<NFTreeNode>(NF_NEW NFTreeNode(GenerateId(), name, guid))));
 	}
+}
+
+NF_SHARE_PTR<NFTreeNode> NFTreeView::GetTreNode(const NFGUID guid)
+{
+	return nullptr;
 }
 
 void NFTreeView::DeleteTreNode(const NFGUID guid)
@@ -126,6 +142,11 @@ void NFTreeView::DelSubTreeNode(const NFGUID guid, const NFGUID subId)
 
 void NFTreeView::AddTreeLeafNode(const NFGUID guid, const NFGUID leafId, const std::string& name)
 {
+}
+
+NF_SHARE_PTR<NFLeafNode> NFTreeView::GetTreeLeafNode(const NFGUID leafId)
+{
+	return nullptr;
 }
 
 void NFTreeView::DeleteTreeLeafNode(const NFGUID guid, const NFGUID leafId)
