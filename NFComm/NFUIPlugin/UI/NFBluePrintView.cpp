@@ -360,9 +360,15 @@ void NFBluePrintView::CreateMonitor()
 					ImGui::EndPopup();
 				}
 			}
+         else
+         {
+            bCreatingMonitor = false;
+         }
 		}
-
-		bCreatingMonitor = false;
+      else
+      {
+		   bCreatingMonitor = false;
+      }
 	}
 }
 
@@ -420,10 +426,16 @@ void NFBluePrintView::CreateJudgment()
 
 					ImGui::EndPopup();
 				}
-			}
+         }
+         else
+         {
+            bCreatingJudgment = false;
+         }
 		}
-
-		bCreatingJudgment = false;
+      else
+      {
+		   bCreatingJudgment = false;
+      }
 	}
 }
 
@@ -482,6 +494,14 @@ void NFBluePrintView::CreateExecuter()
 					ImGui::EndPopup();
 				}
 			}
+         else
+         {
+            bCreatingExecuter = false;
+         }
 		}
+      else
+      {
+         bCreatingExecuter = false;
+      }
 	}
 }

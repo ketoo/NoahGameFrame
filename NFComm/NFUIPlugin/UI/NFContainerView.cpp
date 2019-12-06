@@ -134,28 +134,32 @@ void NFContainerView::ElementMenu()
 
 void NFContainerView::BluePrintMenu()
 {
-   if (ImGui::BeginMenu("BluePrint"))
-   {
-      if (ImGui::MenuItem("New Logic Block", ""))
-      {
-         NF_SHARE_PTR<NFIView> p = m_pUIModule->GetView(NFViewType::BluePrintView);
-         NF_SHARE_PTR<NFBluePrintView> pBluePrintView = std::dynamic_pointer_cast<NFBluePrintView>(p);
-         if (pBluePrintView)
-         {
-            pBluePrintView->TryToCreateBluePrintBlock();
-         }
-      }
-      if (ImGui::MenuItem("New Monitor", ""))
-      {
-                  
-      }
-      if (ImGui::MenuItem("Close", ""))
-      {
-                  
-      }
-      //ImGui::Separator();
-      ImGui::EndMenu();
-   }
+	if (ImGui::BeginMenu("BluePrint"))
+	{
+		NF_SHARE_PTR<NFIView> p = m_pUIModule->GetView(NFViewType::BluePrintView);
+		NF_SHARE_PTR<NFBluePrintView> pBluePrintView = std::dynamic_pointer_cast<NFBluePrintView>(p);
+		if (pBluePrintView)
+		{
+			if (ImGui::MenuItem("New Logic Block", ""))
+			{
+				pBluePrintView->TryToCreateBluePrintBlock();
+			}
+			if (ImGui::MenuItem("New Monitor", ""))
+			{
+				pBluePrintView->TryToCreateMonitor();
+			}
+			if (ImGui::MenuItem("New Judgement", ""))
+			{
+				pBluePrintView->TryToCreateJudgement();
+			}
+			if (ImGui::MenuItem("New Executer", ""))
+			{
+				pBluePrintView->TryToCreateExecuter();
+			}
+			//ImGui::Separator();
+			ImGui::EndMenu();
+		}
+	}
 }
 
 void NFContainerView::ToolsMenu()

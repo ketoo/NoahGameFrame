@@ -118,7 +118,15 @@ NF_SHARE_PTR<NFLogicBlock> NFBluePrintModule::GetLogicBlock(const NFGUID& id)
 
 NF_SHARE_PTR<NFBluePrintNodeBase> NFBluePrintModule::GetBaseNode(const NFGUID& id)
 {
-	return NF_SHARE_PTR<NFBluePrintNodeBase>();
+	for (auto it : mLogicBlocks)
+	{
+		if (it->id == id)
+		{
+			return it;
+		}
+	}
+
+	return nullptr;
 }
 
 NF_SHARE_PTR<NFMonitor> NFBluePrintModule::AddMonitorForLogicBlock(const NFGUID& logicBlockId, const NFGUID& id, const std::string& name)

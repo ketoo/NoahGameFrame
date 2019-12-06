@@ -160,7 +160,7 @@ public:
 		this->name = name;
 		this->pPluginManager = p;
 
-		blueprintType = NFBlueprintType::MONITOR;
+		blueprintType = NFBlueprintType::EXECUTER;
 	}
 
 	//modifier
@@ -168,10 +168,9 @@ public:
 	NFModifierType modifierType = NFModifierType::NONE;
 	NFOperatorType operatorType = NFOperatorType::NONE;
 
-	//if this executer has next executer, then do next executer first
+	//a executer could has a executer or a judgement
 	NF_SHARE_PTR<NFExecuter> nextExecuter;
-
-	std::map<NFJudgementType, NF_SHARE_PTR<NFExecuter>> executers;
+	NF_SHARE_PTR<NFJudgement> nextJudgement
 };
 
 class NFJudgement : public NFBluePrintNodeBase
@@ -211,7 +210,7 @@ public:
 		this->name = name;
 		this->pPluginManager = p;
 
-		blueprintType = NFBlueprintType::EXECUTER;
+		blueprintType = NFBlueprintType::MONITOR;
 	}
 
 public:
