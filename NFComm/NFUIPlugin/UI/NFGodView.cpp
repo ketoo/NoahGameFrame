@@ -1,4 +1,4 @@
-/*
+﻿/*
 			This file is part of:
 				NoahFrame
 			https://github.com/ketoo/NoahGameFrame
@@ -37,64 +37,68 @@ NFGodView::NFGodView(NFIPluginManager* p, NFViewType vt) : NFIView(p, vt, GET_CL
 
 
    m_pNodeView = NF_NEW NFNodeView(p);
+   m_pTreeView = NF_NEW NFTreeView(p);
+
+   m_pTreeView->SetSelectedNodeFunctor(std::bind(&NFGodView::HandlerSelected, this, std::placeholders::_1));
+   m_pTreeView->SetName(GET_CLASS_NAME(NFGodView));
 }
 
 NFGodView::~NFGodView()
 {
+   delete m_pTreeView;
+   m_pTreeView = nullptr;
+
    delete m_pNodeView;
    m_pNodeView = nullptr;
 }
 
 bool NFGodView::Execute()
 {
-	//1. get all scene from NF
-	//2. let the user choose one scene with the group
-	//3. get all objects from that group
-	//4. draw object by imgui
-	//5. show the props and records if the user picked an object
-	//6. use can try to change the value of props to trigger the logic block unit to have a test
-   if (ImGui::IsWindowFocused())
-   {
-      NF_SHARE_PTR<NFIView> pView = m_pUIModule->GetView(NFViewType::HierachyView);
-      if (pView)
-      {
-         pView->OccupySubRender(this);
-      }
-   }
+	if (ImGui::IsWindowFocused())
+	{
+	   NF_SHARE_PTR<NFIView> pView = m_pUIModule->GetView(NFViewType::HierachyView);
+	   if (pView)
+	   {
+	      pView->OccupySubRender(this);
+	   }
+	}
 
 	NF_SHARE_PTR<NFIClass> xLogicClass = m_pClassModule->GetElement(NFrame::Scene::ThisName());
 	if (xLogicClass)
 	{
 		const std::vector<std::string>& strIdList = xLogicClass->GetIDList();
 
-      static int selected = -1;
-      if (ImGui::Button("Select Scene"))
-      {
-         ImGui::OpenPopup("my_select_scene");
-      }
-      ImGui::SameLine();
-      ImGui::TextUnformatted(selected < 0 ? "<None>" : strIdList[selected].c_str());
+		static int selected = -1;
+		if (ImGui::Button("Select Scene"))
+		{
+			ImGui::OpenPopup("my_select_scene");
+		}
 
-      if (ImGui::BeginPopup("my_select_scene"))
-      {
-         for (int n = 0; n < strIdList.size(); n++)
-         {
-            if (ImGui::Selectable(strIdList[n].c_str(), selected == n))
-            {
-                selected = n;
-                mnSceneID = lexical_cast<int>(strIdList[n]);
-                mnGroupID= -1;
-                mCurrentObjectID = NFGUID();
-            }
-         }
+		ImGui::SameLine();
+		ImGui::TextUnformatted(selected < 0 ? "<None>" : strIdList[selected].c_str());
+
+		if (ImGui::BeginPopup("my_select_scene"))
+		{
+			for (int n = 0; n < strIdList.size(); n++)
+			{
+				if (ImGui::Selectable(strIdList[n].c_str(), selected == n))
+				{
+					selected = n;
+					mSceneID = lexical_cast<int>(strIdList[n]);
+					mGroupID= -1;
+
+					//render
+					RenderScene(mSceneID, mGroupID);
+				}
+			}
           
-         ImGui::EndPopup();
-      }
+			ImGui::EndPopup();
+		}
 	}
 
-   if (mnSceneID > 0)
+   if (mSceneID > 0)
    {
-      const std::vector<int>& groups = m_pSceneModule->GetGroups(mnSceneID);
+      const std::vector<int>& groups = m_pSceneModule->GetGroups(mSceneID);
 
       static int selected = -1;
 
@@ -104,7 +108,7 @@ bool NFGodView::Execute()
          ImGui::OpenPopup("my_select_group");
       }
       ImGui::SameLine();
-      ImGui::TextUnformatted(selected < 0 ? "<None>" : std::to_string(mnGroupID).c_str());
+      ImGui::TextUnformatted(selected < 0 ? "<None>" : std::to_string(mGroupID).c_str());
 
       if (ImGui::BeginPopup("my_select_group"))
       {
@@ -114,7 +118,10 @@ bool NFGodView::Execute()
             if (ImGui::Selectable(std::to_string(groups[n]).c_str(), selected == n))
             {
                 selected = n;
-                mnGroupID = groups[n];
+				mGroupID = groups[n];
+
+				//render
+				RenderScene(mSceneID, mGroupID);
             }
          }
          
@@ -142,88 +149,102 @@ bool NFGodView::Execute()
       m_pNodeView->ResetOffest(NFVector2::Zero());
    }
 
-   RenderSceneObjectNode(mnSceneID, mnGroupID);
+   RenderSceneObjectNode(mSceneID, mGroupID);
 
 	return true;
 }
 
-void NFGodView::RenderScene(const int sceneID)
+void NFGodView::HandlerSelected(const NFGUID& id)
 {
-   if (mnGroupID >= 0)
-   {
-      RenderScene(sceneID, mnGroupID);
-   }
-   else
-   {
-      const std::vector<int>& groups = m_pSceneModule->GetGroups(sceneID);
-      for (int j = 0; j < groups.size(); j++)
-      {
-         RenderScene(sceneID, groups[j]);
-      }
-   }
-}
+	SetCurrentObjectID(id);
 
-void NFGodView::SubRender()
-{
-   ImGui::Text(this->name.c_str());
-   
-   if (mnSceneID <= 0)
-   {
-      NF_SHARE_PTR<NFIClass> xLogicClass = m_pClassModule->GetElement(NFrame::Scene::ThisName());
-      if (xLogicClass)
-      {
-         const std::vector<std::string>& strIdList = xLogicClass->GetIDList();
-         for (int i = 0; i < strIdList.size(); i++)
-         {
-            std::string sceneTreeNodeName = "Scene<" + strIdList[i] + ">";
-            if (ImGui::TreeNode(sceneTreeNodeName.c_str()))
-            {
-               RenderScene(lexical_cast<int>(strIdList[i]));
-               
-               ImGui::TreePop();
-               ImGui::Separator();
-            }
-         }
-      }
-   }
-   else
-   {
-      RenderScene(mnSceneID);
-   }
+	//occupy inspectorview
+	NF_SHARE_PTR<NFIView> pHierachyView = m_pUIModule->GetView(NFViewType::HierachyView);
+	NF_SHARE_PTR<NFIView> pInspectorView = m_pUIModule->GetView(NFViewType::InspectorView);
+	if (pHierachyView && pInspectorView)
+	{
+		pInspectorView->OccupySubRender(pHierachyView.get());
+	}
 }
 
 void NFGodView::RenderScene(const int sceneID, const int groupID)
 {
-   std::string groupTreeNodeName = "Group<" + std::to_string(groupID) + ">";
-   if (ImGui::TreeNode(groupTreeNodeName.c_str()))
-   {
-      //objects
-      NFDataList list;
-      m_pKernelModule->GetGroupObjectList(sceneID, groupID, list);
-      for (int k = 0; k < list.GetCount(); ++k)
-      {
-         const NFGUID& guid = list.Object(k);
-         const std::string& strClassName = m_pKernelModule->GetPropertyString(guid, NFrame::IObject::ClassName());
-         std::string buttonName = strClassName + "<" + guid.ToString() + ">";
-         if (ImGui::Button(buttonName.c_str()))
-         {
-            SetCurrentObjectID(guid);
+	m_pTreeView->Clear();
 
-            //occupy inspectorview
-            NF_SHARE_PTR<NFIView> pHierachyView = m_pUIModule->GetView(NFViewType::HierachyView);
-            NF_SHARE_PTR<NFIView> pInspectorView = m_pUIModule->GetView(NFViewType::InspectorView);
-            if (pHierachyView && pInspectorView)
-            {
-               pInspectorView->OccupySubRender(pHierachyView.get());
-            }
-         }
-      }
+	if (groupID < 0)
+	{
+		const std::vector<int>& groups = m_pSceneModule->GetGroups(sceneID);
+		for (int j = 0; j < groups.size(); j++)
+		{
+			int group = groups[j];
 
-      ImGui::TreePop();
-      ImGui::Separator();
-   }
+			NFGUID nodeId = NFGUID(sceneID, group);
+			m_pTreeView->AddTreeNode(nodeId, nodeId.ToString());
+
+			//objects
+			NFDataList list;
+			m_pKernelModule->GetGroupObjectList(sceneID, group, list);
+			for (int k = 0; k < list.GetCount(); ++k)
+			{
+				const NFGUID& guid = list.Object(k);
+				const std::string& strClassName = m_pKernelModule->GetPropertyString(guid, NFrame::IObject::ClassName());
+				std::string buttonName = strClassName + "<" + guid.ToString() + ">";
+
+				m_pTreeView->AddSubTreeNode(nodeId, guid, buttonName.c_str());
+			}
+		}
+	}
+	else
+	{
+		NFGUID nodeId = NFGUID(sceneID, groupID);
+		m_pTreeView->AddTreeNode(nodeId, nodeId.ToString());
+
+		//objects
+		NFDataList list;
+		m_pKernelModule->GetGroupObjectList(sceneID, groupID, list);
+		for (int k = 0; k < list.GetCount(); ++k)
+		{
+			const NFGUID& guid = list.Object(k);
+			const std::string& strClassName = m_pKernelModule->GetPropertyString(guid, NFrame::IObject::ClassName());
+			std::string buttonName = strClassName + "<" + guid.ToString() + ">";
+
+			m_pTreeView->AddSubTreeNode(nodeId, guid, buttonName.c_str());
+		}
+	}
 }
 
+void NFGodView::SubRender()
+{
+	m_pTreeView->Execute();
+	/*
+	   ImGui::Text(this->name.c_str());
+   
+	   if (mnSceneID <= 0)
+	   {
+		  NF_SHARE_PTR<NFIClass> xLogicClass = m_pClassModule->GetElement(NFrame::Scene::ThisName());
+		  if (xLogicClass)
+		  {
+			 const std::vector<std::string>& strIdList = xLogicClass->GetIDList();
+			 for (int i = 0; i < strIdList.size(); i++)
+			 {
+				std::string sceneTreeNodeName = "Scene<" + strIdList[i] + ">";
+				if (ImGui::TreeNode(sceneTreeNodeName.c_str()))
+				{
+				   RenderScene(lexical_cast<int>(strIdList[i]));
+               
+				   ImGui::TreePop();
+				   ImGui::Separator();
+				}
+			 }
+		  }
+	   }
+	   else
+	   {
+		  RenderScene(mnSceneID);
+	   }
+	*/
+
+}
 
 NFGUID NFGodView::GetCurrentObjectID()
 {

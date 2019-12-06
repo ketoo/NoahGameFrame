@@ -27,17 +27,20 @@
 
 #include "NFComm/NFPluginModule/NFIUIModule.h"
 
+class NFTreeView;
+
 class NFLeafNode
 {
 private:
 	NFLeafNode(){}
 
 public:
-	NFLeafNode(const int id, const std::string& name, const NFGUID guid)
+	NFLeafNode(NFTreeView* treeView, const int id, const std::string& name, const NFGUID guid)
    {
       this->id = id;
       this->name = name;
       this->guid = guid;
+	  this->mTreeView = treeView;
    }
 
    void Execute();
@@ -45,6 +48,7 @@ public:
    int id;
    std::string name;
    NFGUID guid;
+   NFTreeView* mTreeView;
 };
 
 class NFTreeNode
@@ -53,36 +57,35 @@ private:
 	NFTreeNode(){}
 
 public:
-	NFTreeNode(const int id, const std::string& name, const NFGUID guid);
+	NFTreeNode(NFTreeView* treeView, const int id, const std::string& name, const NFGUID guid);
 
 	void Execute();
 
+	bool AddTreeNode(const NFGUID guid, const std::string& name);
+	NF_SHARE_PTR<NFTreeNode> FindTreeNode(const NFGUID guid);
+	bool DeleteTreeNode(const NFGUID guid);
+
    void AddLeaf(const int id, const std::string& name, const NFGUID guid)
    {
-	  if (mLeaves.find(guid) == mLeaves.end())
+	  if (!mLeaves.ExistElement(guid))
 	  {
-		  mLeaves.insert(std::pair<NFGUID, NF_SHARE_PTR<NFLeafNode>>(guid, NF_SHARE_PTR<NFLeafNode>(NF_NEW NFLeafNode(id, name, guid))));
+		  mLeaves.AddElement(guid, NF_SHARE_PTR<NFLeafNode>(NF_NEW NFLeafNode(mTreeView, id, name, guid)));
 	  }
    }
 
    void DeleteLeaf(const NFGUID guid)
    {
-	   auto it = mLeaves.find(guid);
-	   if (it != mLeaves.end())
-	   {
-		   mLeaves.erase(it);
-	   }
+	   mLeaves.RemoveElement(guid);
    }
-
-   int base_flags = 0;
-   bool selected = false;
 
    std::string name;
    int id;
    NFGUID guid;
 
-   std::map<NFGUID, NF_SHARE_PTR<NFTreeNode>> mSubTrees;
-   std::map<NFGUID, NF_SHARE_PTR<NFLeafNode>> mLeaves;
+   NFMapEx<NFGUID, NFTreeNode> mSubTrees;
+   NFMapEx<NFGUID, NFLeafNode> mLeaves;
+
+   NFTreeView* mTreeView;
 };
 
 class NFTreeView : public NFIView
@@ -93,32 +96,32 @@ public:
 
 	void SetName(const std::string& name);
 	void SetSelectedNode(const NFGUID& nodeId);
+	void SetSelectedNodeFunctor(std::function<void(const NFGUID&)> functor);
+	const NFGUID GetSelectedNode();
 
 	void AddTreeNode(const NFGUID guid, const std::string& name);
-	NF_SHARE_PTR<NFTreeNode> GetTreNode(const NFGUID guid);
-	void DeleteTreNode(const NFGUID guid);
+	NF_SHARE_PTR<NFTreeNode> GetTreeNode(const NFGUID guid);
+	bool DeleteTreeNode(const NFGUID guid);
 
 	void AddSubTreeNode(const NFGUID guid, const NFGUID subId, const std::string& name);
-	void DelSubTreeNode(const NFGUID guid, const NFGUID subId);
-
 	void AddTreeLeafNode(const NFGUID guid, const NFGUID leafId, const std::string& name);
-	NF_SHARE_PTR<NFLeafNode> GetTreeLeafNode(const NFGUID leafId);
-	void DeleteTreeLeafNode(const NFGUID guid, const NFGUID leafId);
-
-	NFGUID GetTreeNodeByLeaf(const NFGUID leafId);
+	void DeleteTreeLeafNode(const NFGUID leafId);
 
 	virtual bool Execute();
 
+	virtual void Clear();
+
 private:
-   //maybe tree node, maybe leaf node
-   NFGUID mSelectedNode;
+	//maybe tree node, maybe leaf node
+	NFGUID mSelectedNode;
 
-	std::string mstrName;
-   std::map<NFGUID, NF_SHARE_PTR<NFTreeNode>> mTrees;
+	std::function<void(const NFGUID&)> mSelectedFuntor;
+
+	std::map<NFGUID, NF_SHARE_PTR<NFTreeNode>> mTrees;
 
 
 
-   NFIUIModule* m_pUIModule;
+	NFIUIModule* m_pUIModule;
 };
 
 #endif

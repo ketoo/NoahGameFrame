@@ -31,7 +31,8 @@ NFBluePrintView::NFBluePrintView(NFIPluginManager* p, NFViewType vt) : NFIView(p
    m_pNodeView = NF_NEW NFNodeView(p);
    m_pTreeView = NF_NEW NFTreeView(p);
 
-   m_pTreeView->SetName("BluePrint LogicBlocks");
+   m_pTreeView->SetSelectedNodeFunctor(std::bind(&NFBluePrintView::HandlerSelected, this, std::placeholders::_1));
+   m_pTreeView->SetName(GET_CLASS_NAME(NFBluePrintView));
 
    m_pUIModule = pPluginManager->FindModule<NFIUIModule>();
    m_pBluePrintModule = pPluginManager->FindModule<NFIBluePrintModule>();
@@ -49,10 +50,24 @@ NFBluePrintView::NFBluePrintView(NFIPluginManager* p, NFViewType vt) : NFIView(p
    NFGUID tree444 = m_pKernelModule->CreateGUID();
 
 
+   NFGUID sub1 = m_pKernelModule->CreateGUID();
+   NFGUID sub2 = m_pKernelModule->CreateGUID();
+   NFGUID sub3 = m_pKernelModule->CreateGUID();
+   NFGUID sub4 = m_pKernelModule->CreateGUID();
+   NFGUID sub5 = m_pKernelModule->CreateGUID();
+   NFGUID sub6 = m_pKernelModule->CreateGUID();
+
+
    m_pTreeView->AddTreeNode(tree111, "tree111");
    m_pTreeView->AddTreeNode(tree222, "tree222");
    m_pTreeView->AddTreeNode(tree333, "tree333");
    m_pTreeView->AddTreeNode(tree444, "tree444");
+   m_pTreeView->AddSubTreeNode(tree111, sub1, "sub1");
+   m_pTreeView->AddSubTreeNode(tree111, sub2, "sub2");
+   m_pTreeView->AddSubTreeNode(tree111, sub3, "sub3");
+   m_pTreeView->AddSubTreeNode(tree222, sub4, "sub4");
+   m_pTreeView->AddTreeLeafNode(tree222, sub5, "sub5");
+   m_pTreeView->AddTreeLeafNode(tree222, sub6, "sub6");
 
    m_pNodeView->AddNode(testID1, "testnode1111111", NFVector2(300, 300));
    m_pNodeView->AddNode(testID2, "testnode2222222", NFVector2(3, 0));
@@ -89,14 +104,6 @@ NFBluePrintView::~NFBluePrintView()
 
 bool NFBluePrintView::Execute()
 {
-	//1. add monitor
-   //2. add judgement
-   //3. add executor
-   //4. delete links
-   //4. delete nodes
-
-	//5. return canvas's center  
-
    ImGui::SameLine();
    if (ImGui::Button("- nodes"))
    {
@@ -110,14 +117,15 @@ bool NFBluePrintView::Execute()
    ImGui::SameLine();
    if (ImGui::Button("return to center"))
    {
-	   m_pNodeView->ResetOffest(NFVector2(-5, -109));
-	   //m_pNodeView->ResetOffest(NFVector2::Zero());
+		m_pNodeView->ResetOffest(NFVector2::Zero());
    }
-
 
    m_pNodeView->Execute();
    
    CreateLogicBlockWindow();
+   CreateMonitor();
+   CreateJudgment();
+   CreateExecuter();
 
    if (ImGui::IsWindowFocused())
    {
@@ -129,7 +137,7 @@ bool NFBluePrintView::Execute()
    }
 
    ImGuiIO& io = ImGui::GetIO();
-   if (io.WantCaptureMouse)
+   if (io.KeyCtrl)
    {
 
    }
@@ -137,198 +145,98 @@ bool NFBluePrintView::Execute()
 	return false;
 }
 
-void NFBluePrintView::SetCurrentLogicBlock(NF_SHARE_PTR<NFIBluePrintModule::NFLogicBlock> logicBlock)
+void AddExecuter(NFTreeView* pTreeView, const NFGUID& id, NF_SHARE_PTR<NFExecuter> executer)
 {
-   mCurrentLogicBlock = logicBlock;
-
-   mCurrentMonitor = nullptr;
-   mCurrentExecuter = nullptr;
-   mCurrentJudgement = nullptr;
-   //occupy 
+	pTreeView->AddSubTreeNode(id, executer->id, executer->name);
+	if (executer->nextExecuter)
+	{
+		AddExecuter(pTreeView, executer->id, executer->nextExecuter);
+	}
 }
 
-void NFBluePrintView::SetCurrentMonitor(NF_SHARE_PTR<NFIBluePrintModule::NFMonitor> monitor)
+void AddJudgement(NFTreeView* pTreeView, const NFGUID& id, NF_SHARE_PTR<NFJudgement> judgement)
 {
-	mCurrentMonitor = monitor;
-	mCurrentExecuter = nullptr;
-	mCurrentJudgement = nullptr;
-	//occupy 
+	pTreeView->AddSubTreeNode(id, judgement->id, judgement->name);
+	if (judgement->nextJudgement)
+	{
+		AddJudgement(pTreeView, judgement->id, judgement->nextJudgement);
+	}
+
+	for (auto executer : judgement->executers)
+	{
+		AddExecuter(pTreeView, judgement->id, executer.second);
+	}
 }
 
-void NFBluePrintView::SetCurrentJudgement(NF_SHARE_PTR<NFIBluePrintModule::NFJudgement> judgement)
+NFGUID NFBluePrintView::GetCurrentObjectID()
 {
-	mCurrentMonitor = nullptr;
-	mCurrentJudgement = judgement;
-	//occupy 
+	return mCurrentObjectID;
 }
 
-void NFBluePrintView::SetCurrentExecuter(NF_SHARE_PTR<NFIBluePrintModule::NFExecuter> executer)
+void NFBluePrintView::SetCurrentObjectID(const NFGUID& id)
 {
-	mCurrentExecuter = executer;
-
-	//occupy 
+	mCurrentObjectID = id;
 }
 
 void NFBluePrintView::SubRender()
 {
-   ImGui::Text(this->name.c_str());
+	//if this logic block has beend changed
+	//if ()
+	{
+		m_pTreeView->Clear();
+
+		const std::list<NF_SHARE_PTR<NFLogicBlock>>& logicBlocks = m_pBluePrintModule->GetLogicBlocks();
+		for (auto block : logicBlocks)
+		{
+			m_pTreeView->AddTreeNode(block->id, block->name);
+
+			for (auto monitor : block->monitors)
+			{
+				m_pTreeView->AddSubTreeNode(block->id, monitor->id, monitor->name);
+
+				for (auto judgement : monitor->judgements)
+				{
+					AddJudgement(m_pTreeView, monitor->id, judgement);
+				}
+			}
+
+		}
+	}
 
    m_pTreeView->Execute();
+}
 
-   const std::list<NF_SHARE_PTR<NFIBluePrintModule::NFLogicBlock>>& logicBlocks = m_pBluePrintModule->GetLogicBlocks();
-   for (auto it : logicBlocks)
-   {
-      std::string logicBlockNodeName = "LogicBlock<" + it->name + ">";
-      if (ImGui::TreeNode(logicBlockNodeName.c_str()))
-      {
-         for (auto monitor : it->monitors)
-         {
-            SubMonitorRender(monitor);
-         }
-
-         ImGui::TreePop();
-      }
-   }
-   if (ImGui::TreeNode("Basic trees"))
-   {
-	   for (int i = 0; i < 5; i++)
-	   {
-		   // Use SetNextItemOpen() so set the default state of a node to be open.
-		   // We could also use TreeNodeEx() with the ImGuiTreeNodeFlags_DefaultOpen flag to achieve the same thing!
-		   if (i == 0)
-			   ImGui::SetNextItemOpen(true, ImGuiCond_Once);
-
-		   if (ImGui::TreeNode((void*)(intptr_t)i, "Child %d", i))
-		   {
-			   ImGui::Text("blah blah");
-			   ImGui::SameLine();
-			   if (ImGui::SmallButton("button")) {};
-			   ImGui::TreePop();
-		   }
-	   }
-	   ImGui::TreePop();
-   }
-
-   if (ImGui::TreeNode("Advanced, with Selectable nodes"))
-   {
-	   static int node_clicked = -1;                // Temporary storage of what node we have clicked to process selection at the end of the loop. May be a pointer to your own node type, etc.
-	   for (int i = 0; i < 6; i++)
-	   {
-		   // Disable the default open on single-click behavior and pass in Selected flag according to our selection state.
-		   ImGuiTreeNodeFlags node_flags = 0;
-		   const bool is_selected = node_clicked == i;
-		   if (is_selected)
-			   node_flags |= ImGuiTreeNodeFlags_Selected;
-            
-		   if (i < 3)
-		   {
-			   // Items 0..2 are Tree Node
-			   bool node_open = ImGui::TreeNodeEx((void*)(intptr_t)i, node_flags, "Selectable Node %d", i);
-			   if (ImGui::IsItemClicked())
-			   {
-				   node_clicked = i;
-			   }
-
-			   if (node_open)
-			   {
-				   ImGui::BulletText("Blah blah\nBlah Blah");
-				   ImGui::TreePop();
-			   }
-		   }
-		   else
-		   {
-			   // Items 3..5 are Tree Leaves
-			   // The only reason we use TreeNode at all is to allow selection of the leaf.
-			   // Otherwise we can use BulletText() or advance the cursor by GetTreeNodeToLabelSpacing() and call Text().
-			   node_flags |= ImGuiTreeNodeFlags_Leaf | ImGuiTreeNodeFlags_NoTreePushOnOpen; // ImGuiTreeNodeFlags_Bullet
-			   ImGui::TreeNodeEx((void*)(intptr_t)i, node_flags, "Selectable Leaf %d", i);
-			   if (ImGui::IsItemClicked())
-				   node_clicked = i;
-		   }
-	   }
-
-	   //ImGui::GetIO().KeyCtrl)
-
-	   ImGui::TreePop();
-   }
-
-	if (ImGui::TreeNode("Collapsing Headers"))
+void NFBluePrintView::HandlerSelected(const NFGUID& id)
+{
+	auto blocks = m_pBluePrintModule->GetLogicBlocks();
+	for (auto it : blocks)
 	{
-		static bool closable_group = true;
-		ImGui::Checkbox("Show 2nd header", &closable_group);
-		if (ImGui::CollapsingHeader("Header", ImGuiTreeNodeFlags_None))
+		if (it->id == id)
 		{
-			ImGui::Text("IsItemHovered: %d", ImGui::IsItemHovered());
-			for (int i = 0; i < 5; i++)
-				ImGui::Text("Some content %d", i);
+			mCurrentLogicBlockID = id;
+			mCurrentObjectID = NFGUID();
+			return;
 		}
-		if (ImGui::CollapsingHeader("Header with a close button", &closable_group))
-		{
-			ImGui::Text("IsItemHovered: %d", ImGui::IsItemHovered());
-			for (int i = 0; i < 5; i++)
-				ImGui::Text("More content %d", i);
-		}
-		/*
-		if (ImGui::CollapsingHeader("Header with a bullet", ImGuiTreeNodeFlags_Bullet))
-			ImGui::Text("IsItemHovered: %d", ImGui::IsItemHovered());
-		*/
-		ImGui::TreePop();
 	}
-}
 
-void NFBluePrintView::SubMonitorRender(NF_SHARE_PTR<NFIBluePrintModule::NFMonitor> monitor)
-{
-   if (ImGui::TreeNode(monitor->name.c_str()))
-   {
-      for (auto judgement : monitor->judgements)
-      {
-         SubJudgementRender(judgement);
-         
-      }
-      /*
+	mCurrentLogicBlockID = NFGUID();
+	mCurrentObjectID = NFGUID();
+	auto node = m_pBluePrintModule->GetBaseNode(id);
+	if (node)
+	{
+		//not a logic block node, that means now the user click a monitor node(maybe a judgement node or a executer node)
+		mCurrentLogicBlockID = node->logicBlockId;
+		mCurrentObjectID = id;
+	}
 
-      //occupy inspectorview
-      NF_SHARE_PTR<NFIView> pHierachyView = m_pUIModule->GetView(NFViewType::HierachyView);
-      NF_SHARE_PTR<NFIView> pInspectorView = m_pUIModule->GetView(NFViewType::InspectorView);
-      if (pHierachyView && pInspectorView)
-      {
-         pInspectorView->OccupySubRender(pHierachyView.get());
-      }
-      */
-         
-      ImGui::TreePop();
-   }
-}
-
-void NFBluePrintView::SubJudgementRender(NF_SHARE_PTR<NFIBluePrintModule::NFJudgement> judgement)
-{
-   if (ImGui::TreeNode(judgement->name.c_str()))
-   {
-      if (judgement->nextJudgement)
-      {
-         SubJudgementRender(judgement->nextJudgement);
-      }
-
-      for (auto executer : judgement->executers)
-      {
-         SubExecuterRender(executer.second);
-      }
-
-      ImGui::TreePop();
-   }
-}
-
-void NFBluePrintView::SubExecuterRender(NF_SHARE_PTR<NFIBluePrintModule::NFExecuter> executer)
-{
-   if (ImGui::TreeNode(executer->name.c_str()))
-   {
-      for (auto executer1 : executer->executers)
-      {
-         SubExecuterRender(executer1.second);
-      }
-
-      ImGui::TreePop();
-   }
+	//referesh for sub window
+	//occupy inspectorview
+	NF_SHARE_PTR<NFIView> pHierachyView = m_pUIModule->GetView(NFViewType::HierachyView);
+	NF_SHARE_PTR<NFIView> pInspectorView = m_pUIModule->GetView(NFViewType::InspectorView);
+	if (pHierachyView && pInspectorView)
+	{
+		pInspectorView->OccupySubRender(pHierachyView.get());
+	}
 }
 
 void NFBluePrintView::TryToCreateBluePrintBlock()
@@ -339,40 +247,241 @@ void NFBluePrintView::TryToCreateBluePrintBlock()
    }
 }
 
- void NFBluePrintView::CreateLogicBlockWindow()
- {
-   if (bCreatingLogicBlock)
-   {
-      ImGui::OpenPopup("CreatingLogicBlock");
-      ImGui::SetNextWindowSize(ImVec2(230, 150));
+void NFBluePrintView::TryToCreateMonitor()
+{
+	if (!bCreatingMonitor)
+	{
+		bCreatingMonitor = true;
+	}
+}
 
-      if (ImGui::BeginPopupModal("CreatingLogicBlock"))
-      {
-         static char str0[128] = "Hello, world!";
-         ImGui::InputText("LogicBlock Name", str0, IM_ARRAYSIZE(str0));
+void NFBluePrintView::TryToCreateJudgement()
+{
+	if (!bCreatingJudgment)
+	{
+		bCreatingJudgment = true;
+	}
+}
 
-         ImGui::Separator();
+void NFBluePrintView::TryToCreateExecuter()
+{
+	if (!bCreatingExecuter)
+	{
+		bCreatingExecuter = true;
+	}
+}
 
-         ImGui::Text("All those beautiful files will be deleted.\nThis operation cannot be undone!\n\n");
+NFGUID NFBluePrintView::GetCurrentLogicBlockID()
+{
+	return mCurrentLogicBlockID;
+}
 
-         ImGui::Separator();
+void NFBluePrintView::SetCurrentLogicBlockID(const NFGUID& id)
+{
+	mCurrentLogicBlockID = id;
+}
 
-         if (ImGui::Button("Cancel", ImVec2(100, 30)))
-         {
-            bCreatingLogicBlock = false;
-            ImGui::CloseCurrentPopup();
-         }
+void NFBluePrintView::CreateLogicBlockWindow()
+{
+	if (bCreatingLogicBlock)
+	{
+		ImGui::OpenPopup("CreatingLogicBlock");
+		ImGui::SetNextWindowSize(ImVec2(230, 150));
 
-         ImGui::SameLine();
+		if (ImGui::BeginPopupModal("CreatingLogicBlock"))
+		{
+			static char str0[128] = "Hello, Blueprint!";
+			ImGui::InputText("LogicBlock Name", str0, IM_ARRAYSIZE(str0));
 
-         if (ImGui::Button("OK", ImVec2(100, 30)))
-         {
-            m_pBluePrintModule->CreateLogicBlock(str0);
-            bCreatingLogicBlock = false;
-            ImGui::CloseCurrentPopup();
-         }
+			ImGui::Separator();
 
-         ImGui::EndPopup();
-      }
-   }
- }
+			ImGui::Text("All those beautiful files will be deleted.\nThis operation cannot be undone!\n\n");
+
+			ImGui::Separator();
+
+			if (ImGui::Button("Cancel", ImVec2(100, 30)))
+			{
+			   bCreatingLogicBlock = false;
+			   ImGui::CloseCurrentPopup();
+			}
+
+			ImGui::SameLine();
+
+			if (ImGui::Button("OK", ImVec2(100, 30)))
+			{
+			   m_pBluePrintModule->CreateLogicBlock(m_pKernelModule->CreateGUID(), str0);
+			   bCreatingLogicBlock = false;
+			   ImGui::CloseCurrentPopup();
+			}
+
+			ImGui::EndPopup();
+		}
+	}
+}
+
+void NFBluePrintView::CreateMonitor()
+{
+	if (bCreatingMonitor)
+	{
+		auto currentLogicBlock = m_pBluePrintModule->GetBaseNode(mCurrentLogicBlockID);
+		if (currentLogicBlock)
+		{
+			if (currentLogicBlock->blueprintType == NFBlueprintType::LOGICBLOCK)
+			{
+				ImGui::OpenPopup("Creating Monitor");
+				ImGui::SetNextWindowSize(ImVec2(230, 150));
+
+				if (ImGui::BeginPopupModal("Creating Monitor"))
+				{
+					static char str0[128] = "Hello, monitor";
+					ImGui::InputText("Monitor Name", str0, IM_ARRAYSIZE(str0));
+
+					ImGui::Separator();
+
+					ImGui::Text("All those beautiful files will be deleted.\nThis operation cannot be undone!\n\n");
+
+					ImGui::Separator();
+
+					if (ImGui::Button("Cancel", ImVec2(100, 30)))
+					{
+						bCreatingMonitor = false;
+						ImGui::CloseCurrentPopup();
+					}
+
+					ImGui::SameLine();
+
+					if (ImGui::Button("OK", ImVec2(100, 30)))
+					{
+						m_pBluePrintModule->AddMonitorForLogicBlock(mCurrentLogicBlockID, m_pKernelModule->CreateGUID(), str0);
+						bCreatingMonitor = false;
+						ImGui::CloseCurrentPopup();
+					}
+
+					ImGui::EndPopup();
+				}
+			}
+		}
+
+		bCreatingMonitor = false;
+	}
+}
+
+void NFBluePrintView::CreateJudgment()
+{
+	if (bCreatingJudgment)
+	{
+		auto currentObject = m_pBluePrintModule->GetBaseNode(mCurrentObjectID);
+		if (currentObject)
+		{
+			if (currentObject->blueprintType == NFBlueprintType::MONITOR
+				|| currentObject->blueprintType == NFBlueprintType::JUDGEMENT
+				|| currentObject->blueprintType == NFBlueprintType::EXECUTER)
+			{
+				ImGui::OpenPopup("Creating Judgment");
+				ImGui::SetNextWindowSize(ImVec2(230, 150));
+
+				if (ImGui::BeginPopupModal("Creating Judgment"))
+				{
+					static char str0[128] = "Hello, Judgment!";
+					ImGui::InputText("Judgment Name", str0, IM_ARRAYSIZE(str0));
+
+					ImGui::Separator();
+
+					ImGui::Text("All those beautiful files will be deleted.\nThis operation cannot be undone!\n\n");
+
+					ImGui::Separator();
+
+					if (ImGui::Button("Cancel", ImVec2(100, 30)))
+					{
+						bCreatingJudgment = false;
+						ImGui::CloseCurrentPopup();
+					}
+
+					ImGui::SameLine();
+
+					if (ImGui::Button("OK", ImVec2(100, 30)))
+					{
+						if (currentObject->blueprintType == NFBlueprintType::MONITOR)
+						{
+							m_pBluePrintModule->AddJudgementForMonitor(mCurrentObjectID, m_pKernelModule->CreateGUID(), str0);
+						}
+						else if (currentObject->blueprintType == NFBlueprintType::JUDGEMENT)
+						{
+							m_pBluePrintModule->AddJudgementForJudgement(mCurrentObjectID, m_pKernelModule->CreateGUID(), str0);
+						}
+						else if (currentObject->blueprintType == NFBlueprintType::EXECUTER)
+						{
+							m_pBluePrintModule->AddJudgementForExecuter(mCurrentObjectID, m_pKernelModule->CreateGUID(), str0);
+						}
+
+						bCreatingJudgment = false;
+						ImGui::CloseCurrentPopup();
+					}
+
+					ImGui::EndPopup();
+				}
+			}
+		}
+
+		bCreatingJudgment = false;
+	}
+}
+
+void NFBluePrintView::CreateExecuter()
+{
+	if (bCreatingExecuter)
+	{
+		auto currentObject = m_pBluePrintModule->GetBaseNode(mCurrentObjectID);
+		if (currentObject)
+		{
+			if (currentObject->blueprintType == NFBlueprintType::MONITOR
+				|| currentObject->blueprintType == NFBlueprintType::JUDGEMENT
+				|| currentObject->blueprintType == NFBlueprintType::EXECUTER)
+			{
+				ImGui::OpenPopup("Creating Executer");
+				ImGui::SetNextWindowSize(ImVec2(230, 150));
+
+				if (ImGui::BeginPopupModal("Creating Executer"))
+				{
+					static char str0[128] = "Hello, Executer!";
+					ImGui::InputText("Executer Name", str0, IM_ARRAYSIZE(str0));
+
+					ImGui::Separator();
+
+					ImGui::Text("All those beautiful files will be deleted.\nThis operation cannot be undone!\n\n");
+
+					ImGui::Separator();
+
+					if (ImGui::Button("Cancel", ImVec2(100, 30)))
+					{
+						bCreatingExecuter = false;
+						ImGui::CloseCurrentPopup();
+					}
+
+					ImGui::SameLine();
+
+					if (ImGui::Button("OK", ImVec2(100, 30)))
+					{
+						if (currentObject->blueprintType == NFBlueprintType::MONITOR)
+						{
+							m_pBluePrintModule->AddExecuterForMonitor(mCurrentObjectID, m_pKernelModule->CreateGUID(), str0);
+						}
+						else if (currentObject->blueprintType == NFBlueprintType::JUDGEMENT)
+						{
+							m_pBluePrintModule->AddExecuterForJudgement(mCurrentObjectID, m_pKernelModule->CreateGUID(), str0);
+						}
+						else if (currentObject->blueprintType == NFBlueprintType::EXECUTER)
+						{
+							m_pBluePrintModule->AddExecuterForExecuter(mCurrentObjectID, m_pKernelModule->CreateGUID(), str0);
+						}
+
+						bCreatingExecuter = false;
+						ImGui::CloseCurrentPopup();
+					}
+
+					ImGui::EndPopup();
+				}
+			}
+		}
+	}
+}

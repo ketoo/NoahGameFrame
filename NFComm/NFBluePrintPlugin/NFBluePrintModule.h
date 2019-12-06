@@ -38,7 +38,7 @@ public:
     NFBluePrintModule( NFIPluginManager* p )
     {
         pPluginManager = p;
-
+		/*
         MyEnum foo = MyEnum::TWO;
         std::cout << MyEnum::toString(foo);  // static method
         std::cout << foo.toString();         // member method
@@ -51,6 +51,7 @@ public:
         {
             std::cout << x.toString() << std::endl;
         }
+		*/
     }
 
     virtual ~NFBluePrintModule() {};
@@ -66,44 +67,23 @@ public:
     virtual bool Finalize();
     virtual bool OnReloadPlugin();
 
-    virtual NF_SHARE_PTR<NFLogicBlock> CreateLogicBlock(const std::string& name)
-    {
-        auto p = NF_SHARE_PTR<NFLogicBlock>(NF_NEW NFLogicBlock(pPluginManager, name));
-        mLogicBlocks.push_back(p);
-        return p;
-    }
+	virtual NF_SHARE_PTR<NFLogicBlock> CreateLogicBlock(const NFGUID& logicBlockId, const std::string& name);
+	virtual const std::list<NF_SHARE_PTR<NFLogicBlock>>& GetLogicBlocks();
+	virtual NF_SHARE_PTR<NFLogicBlock> GetLogicBlock(const NFGUID& logicBlockId);
 
-    virtual const std::list<NF_SHARE_PTR<NFLogicBlock>>& GetLogicBlocks()
-    {
-        return mLogicBlocks;
-    }
+	virtual NF_SHARE_PTR<NFBluePrintNodeBase> GetBaseNode(const NFGUID& id);
 
-    virtual NF_SHARE_PTR<NFLogicBlock>  GetLogicBlock(const NFGUID id)
-    {
-        for (auto it : mLogicBlocks)
-        {
-            if (it->id == id)
-            {
-                return it;
-            }
-        }
+	virtual NF_SHARE_PTR<NFMonitor> AddMonitorForLogicBlock(const NFGUID& logicBlockId, const NFGUID& id, const std::string& name);
+	virtual NF_SHARE_PTR<NFJudgement> AddJudgementForMonitor(const NFGUID& monitorId, const NFGUID& id, const std::string& name);
+	virtual NF_SHARE_PTR<NFJudgement> AddJudgementForJudgement(const NFGUID& monitorId, const NFGUID& id, const std::string& name);
+	virtual NF_SHARE_PTR<NFJudgement> AddJudgementForExecuter(const NFGUID& monitorId, const NFGUID& id, const std::string& name);
+	virtual NF_SHARE_PTR<NFExecuter> AddExecuterForMonitor(const NFGUID& judgeMent, const NFGUID& id, const std::string& name);
+	virtual NF_SHARE_PTR<NFExecuter> AddExecuterForJudgement(const NFGUID& judgeMent, const NFGUID& id, const std::string& name);
+	virtual NF_SHARE_PTR<NFExecuter> AddExecuterForExecuter(const NFGUID& judgeMent, const NFGUID& id, const std::string& name);
 
-        return nullptr;
-    }
-
-    virtual NF_SHARE_PTR<NFLogicBlock>  GetLogicBlock(const std::string& name)
-    {
-        for (auto it : mLogicBlocks)
-        {
-            if (it->name == name)
-            {
-                return it;
-            }
-        }
-
-        return nullptr;
-    }
-    
+	virtual bool DeleteMonitor(const NFGUID& id);
+	virtual bool DeleteJudgement(const NFGUID& id);
+	virtual bool DeleteExecuter(const NFGUID& id);
 private:
 
     std::list<NF_SHARE_PTR<NFLogicBlock>> mLogicBlocks;

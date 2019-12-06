@@ -32,6 +32,7 @@
 #include "NFComm/NFPluginModule/NFIKernelModule.h"
 #include "NFComm/NFMessageDefine/NFMsgDefine.h"
 #include "NFNodeView.h"
+#include "NFTreeView.h"
 
 class NFGodView : public NFIView
 {
@@ -47,23 +48,24 @@ public:
    void SetCurrentObjectID(const NFGUID& id);
 
 private:
-   void RenderScene(const int sceneID);
-   void RenderScene(const int sceneID, const int groupID);
+	void RenderScene(const int sceneID, const int groupID);
+	void HandlerSelected(const NFGUID& id);
 
    void RenderSceneObjectNode(const int sceneID, const int groupID);
-private:
-   int mnSceneID = -1;
-   int mnGroupID = -1;
 
-   NFGUID mCurrentObjectID;
-   
-   NFNodeView* m_pNodeView;
 private:
-   NFIUIModule* m_pUIModule;
-   NFIClassModule* m_pClassModule;
-   NFIElementModule* m_pElementModule;
-   NFISceneModule* m_pSceneModule;
-   NFIKernelModule* m_pKernelModule;
+	int mGroupID = -1;
+	int mSceneID = -1;
+	NFGUID mCurrentObjectID;
+   
+	NFNodeView* m_pNodeView;
+	NFTreeView* m_pTreeView;
+private:
+	NFIUIModule* m_pUIModule;
+	NFIClassModule* m_pClassModule;
+	NFIElementModule* m_pElementModule;
+	NFISceneModule* m_pSceneModule;
+	NFIKernelModule* m_pKernelModule;
 };
 
 #endif

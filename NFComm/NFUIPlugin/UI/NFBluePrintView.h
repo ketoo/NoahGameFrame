@@ -41,27 +41,35 @@ public:
    virtual void SubRender();
 
    void TryToCreateBluePrintBlock();
+   void TryToCreateMonitor();
+   void TryToCreateJudgement();
+   void TryToCreateExecuter();
+
+   NFGUID GetCurrentLogicBlockID();
+   void SetCurrentLogicBlockID(const NFGUID& id);
+
+   NFGUID GetCurrentObjectID();
+   void SetCurrentObjectID(const NFGUID& id);
 
 private:
-	void SetCurrentLogicBlock(NF_SHARE_PTR<NFIBluePrintModule::NFLogicBlock> logicBlock);
-	void SetCurrentMonitor(NF_SHARE_PTR<NFIBluePrintModule::NFMonitor> monitor);
-	void SetCurrentJudgement(NF_SHARE_PTR<NFIBluePrintModule::NFJudgement> judgement);
-	void SetCurrentExecuter(NF_SHARE_PTR<NFIBluePrintModule::NFExecuter> executer);
-
-	void SubMonitorRender(NF_SHARE_PTR<NFIBluePrintModule::NFMonitor> monitor);
-	void SubJudgementRender(NF_SHARE_PTR<NFIBluePrintModule::NFJudgement> judgement);
-	void SubExecuterRender(NF_SHARE_PTR<NFIBluePrintModule::NFExecuter> executer);
+	void HandlerSelected(const NFGUID& id);
 
 	void CreateLogicBlockWindow();
+	void CreateMonitor();
+	void CreateJudgment();
+	void CreateExecuter();
    
 private:
-	NF_SHARE_PTR<NFIBluePrintModule::NFLogicBlock> mCurrentLogicBlock;
-	NF_SHARE_PTR<NFIBluePrintModule::NFMonitor> mCurrentMonitor;
-	NF_SHARE_PTR<NFIBluePrintModule::NFExecuter> mCurrentExecuter;
-	NF_SHARE_PTR<NFIBluePrintModule::NFJudgement> mCurrentJudgement;
+
+	NFGUID mCurrentLogicBlockID;
+	NFGUID mCurrentObjectID;
 
 private:
 	bool bCreatingLogicBlock = false;
+	bool bCreatingMonitor = false;
+	bool bCreatingJudgment = false;
+	bool bCreatingExecuter = false;
+
 	NFTreeView* m_pTreeView;
 	NFNodeView* m_pNodeView;
 

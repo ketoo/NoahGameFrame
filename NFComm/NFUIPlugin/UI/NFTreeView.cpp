@@ -29,23 +29,40 @@
 
 void NFLeafNode::Execute()
 {
+	bool selected = false;
+	if (mTreeView->GetSelectedNode() == guid)
+	{
+		selected = true;
+	}
+
+	ImGui::Checkbox("", &selected);
+	ImGui::SameLine();
+	ImGui::Bullet();
+	ImGui::SameLine();
+	if (ImGui::Selectable(name.c_str(), &selected))
+	{
+		mTreeView->SetSelectedNode(guid);
+	}
 }
 
-NFTreeNode::NFTreeNode(const int id, const std::string& name, const NFGUID guid)
+NFTreeNode::NFTreeNode(NFTreeView* treeView, const int id, const std::string& name, const NFGUID guid)
 {
-	base_flags = ImGuiTreeNodeFlags_OpenOnArrow | ImGuiTreeNodeFlags_OpenOnDoubleClick | ImGuiTreeNodeFlags_SpanAvailWidth | ImGuiTreeNodeFlags_Selected;
 	this->id = id;
 	this->name = name;
 	this->guid = guid;
+	this->mTreeView = treeView;
 }
 
 void NFTreeNode::Execute()
 {
-	// Items 0..2 are Tree Node
-	base_flags = 0;
-	if (selected)
+	//base_flags = ImGuiTreeNodeFlags_OpenOnArrow | ImGuiTreeNodeFlags_OpenOnDoubleClick | ImGuiTreeNodeFlags_SpanAvailWidth | ImGuiTreeNodeFlags_Selected;
+
+	bool selected = false;
+	int base_flags = 0;// ImGuiTreeNodeFlags_OpenOnArrow;
+	if (mTreeView->GetSelectedNode() == guid)
 	{
 		base_flags |= ImGuiTreeNodeFlags_Selected;
+		selected = true;
 	}
 
 	ImGui::Checkbox("", &selected);
@@ -53,36 +70,81 @@ void NFTreeNode::Execute()
 	bool node_open = ImGui::TreeNodeEx((void*)(intptr_t)id, base_flags, name.c_str());
 	if (ImGui::IsItemClicked())
 	{
-		selected = true;
-	}
-	else
-	{
-		selected = false;
+		mTreeView->SetSelectedNode(guid);
 	}
 
 	if (node_open)
 	{
-		/*
-		for (auto it : mSubTrees)
+		auto tree = mSubTrees.First();
+		while (tree)
 		{
-			it.second->Execute();
+			tree->Execute();
+			tree = mSubTrees.Next();
 		}
-		for (auto it : mLeaves)
+		auto leaf = mLeaves.First();
+		while (leaf)
 		{
-			it.second->Execute();
+			leaf->Execute();
+			leaf = mLeaves.Next();
 		}
-		*/
-
-		/*
-		static int test_flag1;
-		ImGui::CheckboxFlags("", (unsigned int*)&test_flag1, 0);
-		ImGui::SameLine();
-		ImGui::BulletText("Blah blah\nBlah Blah");
-		*/
 
 		ImGui::TreePop();
 	}
+}
 
+bool NFTreeNode::AddTreeNode(const NFGUID guid, const std::string& name)
+{
+	if (!mSubTrees.ExistElement(guid))
+	{
+		return mSubTrees.AddElement(guid, NF_SHARE_PTR<NFTreeNode>(NF_NEW NFTreeNode(this->mTreeView, this->mTreeView->GenerateId(), name, guid)));
+	}
+
+	return false;
+}
+
+NF_SHARE_PTR<NFTreeNode> NFTreeNode::FindTreeNode(const NFGUID guid)
+{
+	auto node = mSubTrees.GetElement(guid);
+	if (node)
+	{
+		return node;
+	}
+
+	node = mSubTrees.First();
+	while (node)
+	{
+		auto p = node->FindTreeNode(guid);
+		if (p)
+		{
+			return p;
+		}
+
+		node = mSubTrees.Next();
+	}
+
+	return nullptr;
+}
+
+bool NFTreeNode::DeleteTreeNode(const NFGUID guid)
+{
+	if (mSubTrees.ExistElement(guid))
+	{
+		return mSubTrees.RemoveElement(guid);
+	}
+
+	auto node = mSubTrees.First();
+	while (node)
+	{
+		bool b = node->DeleteTreeNode(guid);
+		if (b)
+		{
+			return b;
+		}
+
+		node = mSubTrees.Next();
+	}
+
+	return false;
 }
 
 NFTreeView::NFTreeView(NFIPluginManager* p) : NFIView(p, NFViewType::NONE, GET_CLASS_NAME(NFTreeView))
@@ -92,70 +154,102 @@ NFTreeView::NFTreeView(NFIPluginManager* p) : NFIView(p, NFViewType::NONE, GET_C
 
 NFTreeView::~NFTreeView()
 {
+	mTrees.clear();
 }
 
 void NFTreeView::SetName(const std::string& name)
 {
-	mstrName = name;
+	this->name = name;
 }
 
 void NFTreeView::SetSelectedNode(const NFGUID& nodeId)
 {
-	if (!mSelectedNode.IsNull())
-	{
-
-	}
-	
 	mSelectedNode = nodeId;
+	if (mSelectedFuntor)
+	{
+		mSelectedFuntor(mSelectedNode);
+	}
+}
 
+void NFTreeView::SetSelectedNodeFunctor(std::function<void(const NFGUID&)> functor)
+{
+	mSelectedFuntor = functor;
+}
+
+const NFGUID NFTreeView::GetSelectedNode()
+{
+	return mSelectedNode;
 }
 
 void NFTreeView::AddTreeNode(const NFGUID guid, const std::string& name)
 {
 	if (mTrees.find(guid) == mTrees.end())
 	{
-		mTrees.insert(std::pair<NFGUID, NF_SHARE_PTR<NFTreeNode>>(guid, NF_SHARE_PTR<NFTreeNode>(NF_NEW NFTreeNode(GenerateId(), name, guid))));
+		mTrees.insert(std::pair<NFGUID, NF_SHARE_PTR<NFTreeNode>>(guid, NF_SHARE_PTR<NFTreeNode>(NF_NEW NFTreeNode(this, GenerateId(), name, guid))));
 	}
 }
 
-NF_SHARE_PTR<NFTreeNode> NFTreeView::GetTreNode(const NFGUID guid)
+NF_SHARE_PTR<NFTreeNode> NFTreeView::GetTreeNode(const NFGUID guid)
 {
+	auto it = mTrees.find(guid);
+	if (it != mTrees.end())
+	{
+		return it->second;
+	}
+
+	for (auto tree : mTrees)
+	{
+		auto subNode = tree.second->FindTreeNode(guid);
+		if (subNode)
+		{
+			return subNode;
+		}
+	}
+
 	return nullptr;
 }
 
-void NFTreeView::DeleteTreNode(const NFGUID guid)
+bool NFTreeView::DeleteTreeNode(const NFGUID guid)
 {
 	auto it = mTrees.find(guid);
 	if (it != mTrees.end())
 	{
 		mTrees.erase(it);
+		return true;
 	}
+
+	for (auto tree : mTrees)
+	{
+		tree.second->DeleteTreeNode(guid);
+	}
+
+	return true;
 }
 
 void NFTreeView::AddSubTreeNode(const NFGUID guid, const NFGUID subId, const std::string& name)
 {
-}
-
-void NFTreeView::DelSubTreeNode(const NFGUID guid, const NFGUID subId)
-{
+	auto it = mTrees.find(guid);
+	if (it != mTrees.end())
+	{
+		it->second->AddTreeNode(subId, name);
+	}
 }
 
 void NFTreeView::AddTreeLeafNode(const NFGUID guid, const NFGUID leafId, const std::string& name)
 {
+	auto it = mTrees.find(guid);
+	if (it != mTrees.end())
+	{
+		it->second->AddLeaf(GenerateId(), name, leafId);
+	}
 }
 
-NF_SHARE_PTR<NFLeafNode> NFTreeView::GetTreeLeafNode(const NFGUID leafId)
+void NFTreeView::DeleteTreeLeafNode(const NFGUID leafId)
 {
-	return nullptr;
-}
-
-void NFTreeView::DeleteTreeLeafNode(const NFGUID guid, const NFGUID leafId)
-{
-}
-
-NFGUID NFTreeView::GetTreeNodeByLeaf(const NFGUID leafId)
-{
-	return NFGUID();
+	for (auto it : mTrees)
+	{
+		it.second->DeleteLeaf(leafId);
+	}
 }
 
 bool NFTreeView::Execute()
@@ -171,4 +265,10 @@ bool NFTreeView::Execute()
 	}
 
 	return false;
+}
+
+
+void NFTreeView::Clear()
+{
+	mTrees.clear();
 }
