@@ -71,7 +71,7 @@ public:
 	virtual const std::list<NF_SHARE_PTR<NFLogicBlock>>& GetLogicBlocks();
 	virtual NF_SHARE_PTR<NFLogicBlock> GetLogicBlock(const NFGUID& logicBlockId);
 
-	virtual NF_SHARE_PTR<NFBluePrintNodeBase> GetBaseNode(const NFGUID& id);
+	virtual NF_SHARE_PTR<NFBluePrintNodeBase> FindBaseNode(const NFGUID& id);
 
 	virtual NF_SHARE_PTR<NFMonitor> AddMonitorForLogicBlock(const NFGUID& logicBlockId, const NFGUID& id, const std::string& name);
 	virtual NF_SHARE_PTR<NFJudgement> AddJudgementForMonitor(const NFGUID& monitorId, const NFGUID& id, const std::string& name);

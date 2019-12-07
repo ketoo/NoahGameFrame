@@ -134,10 +134,13 @@ protected:
 	NFIPluginManager* pPluginManager;
 
 public:
+	virtual ~NFBluePrintNodeBase(){}
+
 	NFGUID logicBlockId;
 	NFGUID id;
 	std::string name;
 	std::string desc;
+	NF_SHARE_PTR<NFBluePrintNodeBase> parent;
 	NFBlueprintType blueprintType = NFBlueprintType::LOGICBLOCK;
 };
 
@@ -154,14 +157,18 @@ class NFExecuter : public NFBluePrintNodeBase
 private:
 	NFExecuter() {}
 public:
-	NFExecuter(NFIPluginManager* p, const NFGUID& id, const std::string& name)
+	NFExecuter(NFIPluginManager* p, const NFGUID& id, const std::string& name, NF_SHARE_PTR<NFBluePrintNodeBase> parent)
 	{
 		this->id = id;
 		this->name = name;
 		this->pPluginManager = p;
+		this->parent = parent;
 
 		blueprintType = NFBlueprintType::EXECUTER;
 	}
+	
+	NF_SHARE_PTR<NFBluePrintNodeBase> FindBaseNode(const NFGUID& id);
+
 
 	//modifier
 
@@ -170,7 +177,7 @@ public:
 
 	//a executer could has a executer or a judgement
 	NF_SHARE_PTR<NFExecuter> nextExecuter;
-	NF_SHARE_PTR<NFJudgement> nextJudgement
+	std::list<NF_SHARE_PTR<NFJudgement>> nextJudgement;
 };
 
 class NFJudgement : public NFBluePrintNodeBase
@@ -178,25 +185,25 @@ class NFJudgement : public NFBluePrintNodeBase
 private:
 	NFJudgement() {}
 
-	NF_SHARE_PTR<NFMonitor> monitor;
-
 public:
-	NFJudgement(NFIPluginManager* p, const NFGUID& id, const std::string& name, NF_SHARE_PTR<NFMonitor> monitor)
+	NFJudgement(NFIPluginManager* p, const NFGUID& id, const std::string& name, NF_SHARE_PTR<NFBluePrintNodeBase> parent)
 	{
 		this->name = name;
 		this->id = id;
 		this->pPluginManager = p;
-		this->monitor = monitor;
+		this->parent = parent;
 
 		blueprintType = NFBlueprintType::JUDGEMENT;
 	}
+
+	NF_SHARE_PTR<NFBluePrintNodeBase> FindBaseNode(const NFGUID& id);
 
 	std::string arg;
 
 	NFJudgementType judgementType = NFJudgementType::NONE;
 	//if this judgment has next judgment, then do next judgment first
-	NF_SHARE_PTR<NFJudgement> nextJudgement;
-	std::map<NFJudgementType, NF_SHARE_PTR<NFExecuter>> executers;
+	NF_SHARE_PTR<NFExecuter> nextExecuter;
+	std::list<NF_SHARE_PTR<NFJudgement>> judgements;
 };
 
 class NFMonitor : public NFBluePrintNodeBase
@@ -204,14 +211,17 @@ class NFMonitor : public NFBluePrintNodeBase
 private:
 	NFMonitor() {}
 public:
-	NFMonitor(NFIPluginManager* p, const NFGUID& id, const std::string& name)
+	NFMonitor(NFIPluginManager* p, const NFGUID& id, const std::string& name, NF_SHARE_PTR<NFBluePrintNodeBase> parent)
 	{
 		this->id = id;
 		this->name = name;
 		this->pPluginManager = p;
+		this->parent = parent;
 
 		blueprintType = NFBlueprintType::MONITOR;
 	}
+
+	NF_SHARE_PTR<NFBluePrintNodeBase> FindBaseNode(const NFGUID& id);
 
 public:
 	NFDataList arg;
@@ -237,6 +247,8 @@ public:
 		this->blueprintType = NFBlueprintType::LOGICBLOCK;
 	}
 
+	NF_SHARE_PTR<NFBluePrintNodeBase> FindBaseNode(const NFGUID& id);
+
 	std::list<NF_SHARE_PTR<NFMonitor>> monitors;
 };
 
@@ -251,7 +263,7 @@ public:
     virtual const std::list<NF_SHARE_PTR<NFLogicBlock>>& GetLogicBlocks() = 0;
 	virtual NF_SHARE_PTR<NFLogicBlock>  GetLogicBlock(const NFGUID& logicBlockId) = 0;
 
-	virtual NF_SHARE_PTR<NFBluePrintNodeBase>  GetBaseNode(const NFGUID& id) = 0;
+	virtual NF_SHARE_PTR<NFBluePrintNodeBase>  FindBaseNode(const NFGUID& id) = 0;
 
 	virtual NF_SHARE_PTR<NFMonitor> AddMonitorForLogicBlock(const NFGUID& logicBlockId, const NFGUID& id, const std::string& name) = 0;
 	virtual NF_SHARE_PTR<NFJudgement> AddJudgementForMonitor(const NFGUID& monitorId, const NFGUID& id, const std::string& name) = 0;

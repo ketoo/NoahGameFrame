@@ -154,17 +154,18 @@ void AddExecuter(NFTreeView* pTreeView, const NFGUID& id, NF_SHARE_PTR<NFExecute
 	}
 }
 
-void AddJudgement(NFTreeView* pTreeView, const NFGUID& id, NF_SHARE_PTR<NFJudgement> judgement)
+void AddJudgement(NFTreeView* pTreeView, const NFGUID& parentID, NF_SHARE_PTR<NFJudgement> judgement)
 {
-	pTreeView->AddSubTreeNode(id, judgement->id, judgement->name);
-	if (judgement->nextJudgement)
+	pTreeView->AddSubTreeNode(parentID, judgement->id, judgement->name);
+
+	for (auto it : judgement->judgements)
 	{
-		AddJudgement(pTreeView, judgement->id, judgement->nextJudgement);
+		AddJudgement(pTreeView, judgement->id, it);
 	}
 
-	for (auto executer : judgement->executers)
+	if (judgement->nextExecuter)
 	{
-		AddExecuter(pTreeView, judgement->id, executer.second);
+		AddExecuter(pTreeView, judgement->id, judgement->nextExecuter);
 	}
 }
 
@@ -221,7 +222,7 @@ void NFBluePrintView::HandlerSelected(const NFGUID& id)
 
 	mCurrentLogicBlockID = NFGUID();
 	mCurrentObjectID = NFGUID();
-	auto node = m_pBluePrintModule->GetBaseNode(id);
+	auto node = m_pBluePrintModule->FindBaseNode(id);
 	if (node)
 	{
 		//not a logic block node, that means now the user click a monitor node(maybe a judgement node or a executer node)
@@ -323,7 +324,7 @@ void NFBluePrintView::CreateMonitor()
 {
 	if (bCreatingMonitor)
 	{
-		auto currentLogicBlock = m_pBluePrintModule->GetBaseNode(mCurrentLogicBlockID);
+		auto currentLogicBlock = m_pBluePrintModule->FindBaseNode(mCurrentLogicBlockID);
 		if (currentLogicBlock)
 		{
 			if (currentLogicBlock->blueprintType == NFBlueprintType::LOGICBLOCK)
@@ -376,7 +377,7 @@ void NFBluePrintView::CreateJudgment()
 {
 	if (bCreatingJudgment)
 	{
-		auto currentObject = m_pBluePrintModule->GetBaseNode(mCurrentObjectID);
+		auto currentObject = m_pBluePrintModule->FindBaseNode(mCurrentObjectID);
 		if (currentObject)
 		{
 			if (currentObject->blueprintType == NFBlueprintType::MONITOR
@@ -443,7 +444,7 @@ void NFBluePrintView::CreateExecuter()
 {
 	if (bCreatingExecuter)
 	{
-		auto currentObject = m_pBluePrintModule->GetBaseNode(mCurrentObjectID);
+		auto currentObject = m_pBluePrintModule->FindBaseNode(mCurrentObjectID);
 		if (currentObject)
 		{
 			if (currentObject->blueprintType == NFBlueprintType::MONITOR

@@ -23,8 +23,85 @@
    limitations under the License.
 */
 
-//#include "Dependencies/googletest-release-1.8.0/googletest/include/gtest/gtest.h"
 #include "NFBluePrintModule.h"
+
+
+NF_SHARE_PTR<NFBluePrintNodeBase> NFExecuter::FindBaseNode(const NFGUID& id)
+{
+	if (nextExecuter && nextExecuter->id == id)
+	{
+		return nextExecuter;
+	}
+	for (auto it : nextJudgement)
+	{
+		if (it->id == id)
+		{
+			return it;
+		}
+		auto baseNode = it->FindBaseNode(id);
+		if (baseNode)
+		{
+			return baseNode;
+		}
+	}
+	return nullptr;
+}
+
+NF_SHARE_PTR<NFBluePrintNodeBase> NFJudgement::FindBaseNode(const NFGUID& id)
+{
+	for (auto it : judgements)
+	{
+		if (it->id == id)
+		{
+			return std::dynamic_pointer_cast<NFBluePrintNodeBase>(it);
+		}
+		auto baseNode = it->FindBaseNode(id);
+		if (baseNode)
+		{
+			return baseNode;
+		}
+	}
+	if (nextExecuter->id == id)
+	{
+		return nextExecuter;
+	}
+	
+	return nullptr;
+}
+
+NF_SHARE_PTR<NFBluePrintNodeBase> NFMonitor::FindBaseNode(const NFGUID& id)
+{
+	for (auto it : judgements)
+	{
+		if (it->id == id)
+		{
+			return it;
+		}
+		auto baseNode = it->FindBaseNode(id);
+		if (baseNode)
+		{
+			return baseNode;
+		}
+	}
+}
+
+NF_SHARE_PTR<NFBluePrintNodeBase> NFLogicBlock::FindBaseNode(const NFGUID& id)
+{
+	for (auto it : monitors)
+	{
+		if (it->id == id)
+		{
+			return it;
+		}
+		auto baseNode = it->FindBaseNode(id);
+		if (baseNode)
+		{
+			return baseNode;
+		}
+	}
+	return nullptr;
+}
+////////////////////
 
 bool NFBluePrintModule::Awake()
 {
@@ -116,13 +193,19 @@ NF_SHARE_PTR<NFLogicBlock> NFBluePrintModule::GetLogicBlock(const NFGUID& id)
 	return nullptr;
 }
 
-NF_SHARE_PTR<NFBluePrintNodeBase> NFBluePrintModule::GetBaseNode(const NFGUID& id)
+NF_SHARE_PTR<NFBluePrintNodeBase> NFBluePrintModule::FindBaseNode(const NFGUID& id)
 {
 	for (auto it : mLogicBlocks)
 	{
 		if (it->id == id)
 		{
 			return it;
+		}
+
+		auto baseNode = it->FindBaseNode(id);
+		if (baseNode)
+		{
+			return baseNode;
 		}
 	}
 
@@ -131,22 +214,66 @@ NF_SHARE_PTR<NFBluePrintNodeBase> NFBluePrintModule::GetBaseNode(const NFGUID& i
 
 NF_SHARE_PTR<NFMonitor> NFBluePrintModule::AddMonitorForLogicBlock(const NFGUID& logicBlockId, const NFGUID& id, const std::string& name)
 {
-	return NF_SHARE_PTR<NFMonitor>();
+	for (auto it : mLogicBlocks)
+	{
+		if (it->id == logicBlockId)
+		{
+			auto monitor = NF_SHARE_PTR<NFMonitor>(NF_NEW NFMonitor(this->pPluginManager, id, name, it));
+			it->monitors.push_front(monitor);
+
+			return monitor;
+		}
+	}
+
+	return nullptr;
 }
 
 NF_SHARE_PTR<NFJudgement> NFBluePrintModule::AddJudgementForMonitor(const NFGUID& monitorId, const NFGUID& id, const std::string& name)
 {
-	return NF_SHARE_PTR<NFJudgement>();
+	auto baseNode = FindBaseNode(monitorId);
+	if (baseNode && baseNode->blueprintType == NFBlueprintType::MONITOR)
+	{
+		NF_SHARE_PTR<NFMonitor> monitor = std::dynamic_pointer_cast<NFMonitor>(baseNode);
+
+		auto newNode = NF_SHARE_PTR<NFJudgement>(NF_NEW NFJudgement(this->pPluginManager, id, name, baseNode));
+		monitor->judgements.push_back(newNode);
+
+		return newNode;
+	}
+
+	return nullptr;
 }
 
 NF_SHARE_PTR<NFJudgement> NFBluePrintModule::AddJudgementForJudgement(const NFGUID& monitorId, const NFGUID& id, const std::string& name)
 {
-	return NF_SHARE_PTR<NFJudgement>();
+	auto baseNode = FindBaseNode(monitorId);
+	if (baseNode && baseNode->blueprintType == NFBlueprintType::JUDGEMENT)
+	{
+		NF_SHARE_PTR<NFJudgement> judgement = std::dynamic_pointer_cast<NFJudgement>(baseNode);
+		
+		auto newNode = NF_SHARE_PTR<NFJudgement>(NF_NEW NFJudgement(this->pPluginManager, id, name, baseNode));
+		judgement->judgements.push_back(newNode);
+
+		return newNode;
+	}
+
+	return nullptr;
 }
 
 NF_SHARE_PTR<NFJudgement> NFBluePrintModule::AddJudgementForExecuter(const NFGUID& monitorId, const NFGUID& id, const std::string& name)
 {
-	return NF_SHARE_PTR<NFJudgement>();
+	auto baseNode = FindBaseNode(monitorId);
+	if (baseNode && baseNode->blueprintType == NFBlueprintType::EXECUTER)
+	{
+		NF_SHARE_PTR<NFExecuter> executer = std::dynamic_pointer_cast<NFExecuter>(baseNode);
+		
+		auto newNode = NF_SHARE_PTR<NFJudgement>(NF_NEW NFJudgement(this->pPluginManager, id, name, baseNode));
+		executer->nextJudgement.push_back(newNode);
+
+		return newNode;
+	}
+
+	return nullptr;
 }
 
 NF_SHARE_PTR<NFExecuter> NFBluePrintModule::AddExecuterForMonitor(const NFGUID& judgeMent, const NFGUID& id, const std::string& name)
