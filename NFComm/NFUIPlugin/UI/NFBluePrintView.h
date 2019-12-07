@@ -53,6 +53,7 @@ public:
 
 private:
 	void HandlerSelected(const NFGUID& id);
+    void ModifyEvent(const NFGUID& id, const bool create);
 
 	void CreateLogicBlockWindow();
 	void CreateMonitor();

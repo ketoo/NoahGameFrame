@@ -258,6 +258,7 @@ class NFIBluePrintModule
 public:
 
 	////////////////////////////////////////
+	virtual void SetLogicBlockEventFunctor(std::function<void(const NFGUID&, const bool)> functor) = 0;
 
     virtual NF_SHARE_PTR<NFLogicBlock> CreateLogicBlock(const NFGUID& logicBlockId, const std::string& name) = 0;
     virtual const std::list<NF_SHARE_PTR<NFLogicBlock>>& GetLogicBlocks() = 0;
@@ -276,6 +277,8 @@ public:
 	virtual bool DeleteMonitor(const NFGUID& id) = 0;
 	virtual bool DeleteJudgement(const NFGUID& id) = 0;
 	virtual bool DeleteExecuter(const NFGUID& id) = 0;
+
+
 };
 
 #endif

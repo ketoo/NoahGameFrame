@@ -83,6 +83,7 @@ NF_SHARE_PTR<NFBluePrintNodeBase> NFMonitor::FindBaseNode(const NFGUID& id)
 			return baseNode;
 		}
 	}
+	return nullptr;
 }
 
 NF_SHARE_PTR<NFBluePrintNodeBase> NFLogicBlock::FindBaseNode(const NFGUID& id)
@@ -168,10 +169,18 @@ bool NFBluePrintModule::OnReloadPlugin()
 	return true;
 }
 
+void NFBluePrintModule::SetLogicBlockEventFunctor(std::function<void(const NFGUID&, const bool)> functor)
+{
+	mFunctor = functor;
+}
+
 NF_SHARE_PTR<NFLogicBlock> NFBluePrintModule::CreateLogicBlock(const NFGUID& logicBlockId, const std::string& name)
 {
 	auto p = NF_SHARE_PTR<NFLogicBlock>(NF_NEW NFLogicBlock(pPluginManager, logicBlockId, name));
 	mLogicBlocks.push_back(p);
+
+	ModifyEvent(logicBlockId, true);
+
 	return p;
 }
 
@@ -221,6 +230,8 @@ NF_SHARE_PTR<NFMonitor> NFBluePrintModule::AddMonitorForLogicBlock(const NFGUID&
 			auto monitor = NF_SHARE_PTR<NFMonitor>(NF_NEW NFMonitor(this->pPluginManager, id, name, it));
 			it->monitors.push_front(monitor);
 
+			ModifyEvent(id, true);
+
 			return monitor;
 		}
 	}
@@ -238,6 +249,8 @@ NF_SHARE_PTR<NFJudgement> NFBluePrintModule::AddJudgementForMonitor(const NFGUID
 		auto newNode = NF_SHARE_PTR<NFJudgement>(NF_NEW NFJudgement(this->pPluginManager, id, name, baseNode));
 		monitor->judgements.push_back(newNode);
 
+		ModifyEvent(id, true);
+
 		return newNode;
 	}
 
@@ -254,6 +267,8 @@ NF_SHARE_PTR<NFJudgement> NFBluePrintModule::AddJudgementForJudgement(const NFGU
 		auto newNode = NF_SHARE_PTR<NFJudgement>(NF_NEW NFJudgement(this->pPluginManager, id, name, baseNode));
 		judgement->judgements.push_back(newNode);
 
+		ModifyEvent(id, true);
+
 		return newNode;
 	}
 
@@ -269,6 +284,8 @@ NF_SHARE_PTR<NFJudgement> NFBluePrintModule::AddJudgementForExecuter(const NFGUI
 		
 		auto newNode = NF_SHARE_PTR<NFJudgement>(NF_NEW NFJudgement(this->pPluginManager, id, name, baseNode));
 		executer->nextJudgement.push_back(newNode);
+
+		ModifyEvent(id, true);
 
 		return newNode;
 	}
@@ -304,6 +321,14 @@ bool NFBluePrintModule::DeleteJudgement(const NFGUID& id)
 bool NFBluePrintModule::DeleteExecuter(const NFGUID& id)
 {
 	return false;
+}
+
+void NFBluePrintModule::ModifyEvent(const NFGUID& id, const bool create)
+{
+	if (mFunctor)
+	{
+		mFunctor(id, create);
+	}
 }
 
 /*

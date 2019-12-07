@@ -38,42 +38,45 @@ NFBluePrintView::NFBluePrintView(NFIPluginManager* p, NFViewType vt) : NFIView(p
    m_pBluePrintModule = pPluginManager->FindModule<NFIBluePrintModule>();
    m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>();
 
+   m_pBluePrintModule->SetLogicBlockEventFunctor(std::bind(&NFBluePrintView::ModifyEvent, this, std::placeholders::_1, std::placeholders::_2));
+
    NFGUID testID1 = m_pKernelModule->CreateGUID();
    NFGUID testID2 = m_pKernelModule->CreateGUID();
    NFGUID testID3 = m_pKernelModule->CreateGUID();
    NFGUID testID4 = m_pKernelModule->CreateGUID();
 
 
-   NFGUID tree111 = m_pKernelModule->CreateGUID();
-   NFGUID tree222 = m_pKernelModule->CreateGUID();
-   NFGUID tree333 = m_pKernelModule->CreateGUID();
-   NFGUID tree444 = m_pKernelModule->CreateGUID();
-
-
-   NFGUID sub1 = m_pKernelModule->CreateGUID();
-   NFGUID sub2 = m_pKernelModule->CreateGUID();
-   NFGUID sub3 = m_pKernelModule->CreateGUID();
-   NFGUID sub4 = m_pKernelModule->CreateGUID();
-   NFGUID sub5 = m_pKernelModule->CreateGUID();
-   NFGUID sub6 = m_pKernelModule->CreateGUID();
-
-
-   m_pTreeView->AddTreeNode(tree111, "tree111");
-   m_pTreeView->AddTreeNode(tree222, "tree222");
-   m_pTreeView->AddTreeNode(tree333, "tree333");
-   m_pTreeView->AddTreeNode(tree444, "tree444");
-   m_pTreeView->AddSubTreeNode(tree111, sub1, "sub1");
-   m_pTreeView->AddSubTreeNode(tree111, sub2, "sub2");
-   m_pTreeView->AddSubTreeNode(tree111, sub3, "sub3");
-   m_pTreeView->AddSubTreeNode(tree222, sub4, "sub4");
-   m_pTreeView->AddTreeLeafNode(tree222, sub5, "sub5");
-   m_pTreeView->AddTreeLeafNode(tree222, sub6, "sub6");
-
    m_pNodeView->AddNode(testID1, "testnode1111111", NFVector2(300, 300));
    m_pNodeView->AddNode(testID2, "testnode2222222", NFVector2(3, 0));
+
+/*
+   	static NFGUID tree111 = m_pKernelModule->CreateGUID();
+   	static NFGUID tree222 = m_pKernelModule->CreateGUID();
+   	static NFGUID tree333 = m_pKernelModule->CreateGUID();
+   	static NFGUID tree444 = m_pKernelModule->CreateGUID();
+
+
+   	static NFGUID sub1 = m_pKernelModule->CreateGUID();
+   	static NFGUID sub2 = m_pKernelModule->CreateGUID();
+   	static NFGUID sub3 = m_pKernelModule->CreateGUID();
+   	static NFGUID sub4 = m_pKernelModule->CreateGUID();
+   	static NFGUID sub5 = m_pKernelModule->CreateGUID();
+   	static NFGUID sub6 = m_pKernelModule->CreateGUID();
+
+
+   	m_pTreeView->AddTreeNode(tree111, "tree111");
+   	m_pTreeView->AddTreeNode(tree222, "tree222");
+   	m_pTreeView->AddTreeNode(tree333, "tree333");
+   	m_pTreeView->AddTreeNode(tree444, "tree444");
+   	m_pTreeView->AddSubTreeNode(tree111, sub1, "sub1");
+   	m_pTreeView->AddSubTreeNode(tree111, sub2, "sub2");
+   	m_pTreeView->AddSubTreeNode(tree111, sub3, "sub3");
+   	m_pTreeView->AddSubTreeNode(tree222, sub4, "sub4");
+   	m_pTreeView->AddTreeLeafNode(tree222, sub5, "sub5");
+   	m_pTreeView->AddTreeLeafNode(tree222, sub6, "sub6");
    //m_pNodeView->AddNode(testID3, "testnode333333", NFVector2(200, 0));
    //m_pNodeView->AddNode(testID4, "testnode4444444", NFVector2(300, 0));
-
+*/
    //m_pNodeView->AddNodeAttrOut(testID1, m_pKernelModule->CreateGUID(), "Out1");
    //m_pNodeView->AddNodeAttrOut(testID1, m_pKernelModule->CreateGUID(), "Out2");
   // m_pNodeView->AddNodeAttrIn(testID2, m_pKernelModule->CreateGUID(), "In12");
@@ -145,27 +148,27 @@ bool NFBluePrintView::Execute()
 	return false;
 }
 
-void AddExecuter(NFTreeView* pTreeView, const NFGUID& id, NF_SHARE_PTR<NFExecuter> executer)
+void AddExecuterNode(NFTreeView* pTreeView, const NFGUID& id, NF_SHARE_PTR<NFExecuter> executer)
 {
 	pTreeView->AddSubTreeNode(id, executer->id, executer->name);
 	if (executer->nextExecuter)
 	{
-		AddExecuter(pTreeView, executer->id, executer->nextExecuter);
+		AddExecuterNode(pTreeView, executer->id, executer->nextExecuter);
 	}
 }
 
-void AddJudgement(NFTreeView* pTreeView, const NFGUID& parentID, NF_SHARE_PTR<NFJudgement> judgement)
+void AddJudgementNode(NFTreeView* pTreeView, const NFGUID& parentID, NF_SHARE_PTR<NFJudgement> judgement)
 {
 	pTreeView->AddSubTreeNode(parentID, judgement->id, judgement->name);
 
 	for (auto it : judgement->judgements)
 	{
-		AddJudgement(pTreeView, judgement->id, it);
+		AddJudgementNode(pTreeView, judgement->id, it);
 	}
 
 	if (judgement->nextExecuter)
 	{
-		AddExecuter(pTreeView, judgement->id, judgement->nextExecuter);
+		AddExecuterNode(pTreeView, judgement->id, judgement->nextExecuter);
 	}
 }
 
@@ -181,29 +184,50 @@ void NFBluePrintView::SetCurrentObjectID(const NFGUID& id)
 
 void NFBluePrintView::SubRender()
 {
-	//if this logic block has beend changed
-	//if ()
-	{
-		m_pTreeView->Clear();
+	
+   if (ImGui::TreeNode("Advanced, with Selectable nodes"))
+   {
+	   static int node_clicked = -1;                // Temporary storage of what node we have clicked to process selection at the end of the loop. May be a pointer to your own node type, etc.
+	   for (int i = 0; i < 6; i++)
+	   {
+		   // Disable the default open on single-click behavior and pass in Selected flag according to our selection state.
+		   ImGuiTreeNodeFlags node_flags = 0;
+		   const bool is_selected = node_clicked == i;
+		   if (is_selected)
+			   node_flags |= ImGuiTreeNodeFlags_Selected;
+            
+		   if (i < 3)
+		   {
+			   // Items 0..2 are Tree Node
+			   bool node_open = ImGui::TreeNodeEx((void*)(intptr_t)i, node_flags, "Selectable Node %d", i);
+			   if (ImGui::IsItemClicked())
+			   {
+				   node_clicked = i;
+			   }
 
-		const std::list<NF_SHARE_PTR<NFLogicBlock>>& logicBlocks = m_pBluePrintModule->GetLogicBlocks();
-		for (auto block : logicBlocks)
-		{
-			m_pTreeView->AddTreeNode(block->id, block->name);
+			   if (node_open)
+			   {
+				   ImGui::BulletText("Blah blah\nBlah Blah");
+				   ImGui::TreePop();
+			   }
+		   }
+		   else
+		   {
+			   // Items 3..5 are Tree Leaves
+			   // The only reason we use TreeNode at all is to allow selection of the leaf.
+			   // Otherwise we can use BulletText() or advance the cursor by GetTreeNodeToLabelSpacing() and call Text().
+			   node_flags |= ImGuiTreeNodeFlags_Leaf | ImGuiTreeNodeFlags_NoTreePushOnOpen; // ImGuiTreeNodeFlags_Bullet
+			   ImGui::TreeNodeEx((void*)(intptr_t)i, node_flags, "Selectable Leaf %d", i);
+			   if (ImGui::IsItemClicked())
+				   node_clicked = i;
+		   }
+	   }
 
-			for (auto monitor : block->monitors)
-			{
-				m_pTreeView->AddSubTreeNode(block->id, monitor->id, monitor->name);
+	   //ImGui::GetIO().KeyCtrl)
 
-				for (auto judgement : monitor->judgements)
-				{
-					AddJudgement(m_pTreeView, monitor->id, judgement);
-				}
-			}
-
-		}
-	}
-
+	   ImGui::TreePop();
+   }
+   
    m_pTreeView->Execute();
 }
 
@@ -237,6 +261,28 @@ void NFBluePrintView::HandlerSelected(const NFGUID& id)
 	if (pHierachyView && pInspectorView)
 	{
 		pInspectorView->OccupySubRender(pHierachyView.get());
+	}
+}
+
+void NFBluePrintView::ModifyEvent(const NFGUID& id, const bool create)
+{
+	m_pTreeView->Clear();
+
+	const std::list<NF_SHARE_PTR<NFLogicBlock>>& logicBlocks = m_pBluePrintModule->GetLogicBlocks();
+	for (auto block : logicBlocks)
+	{
+		m_pTreeView->AddTreeNode(block->id, block->name);
+
+		for (auto monitor : block->monitors)
+		{
+			m_pTreeView->AddSubTreeNode(block->id, monitor->id, monitor->name);
+
+			for (auto judgement : monitor->judgements)
+			{
+				AddJudgementNode(m_pTreeView, monitor->id, judgement);
+			}
+		}
+
 	}
 }
 

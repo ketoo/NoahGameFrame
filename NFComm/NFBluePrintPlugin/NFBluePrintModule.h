@@ -67,6 +67,8 @@ public:
     virtual bool Finalize();
     virtual bool OnReloadPlugin();
 
+	virtual void SetLogicBlockEventFunctor(std::function<void(const NFGUID&, const bool)> functor);
+
 	virtual NF_SHARE_PTR<NFLogicBlock> CreateLogicBlock(const NFGUID& logicBlockId, const std::string& name);
 	virtual const std::list<NF_SHARE_PTR<NFLogicBlock>>& GetLogicBlocks();
 	virtual NF_SHARE_PTR<NFLogicBlock> GetLogicBlock(const NFGUID& logicBlockId);
@@ -84,8 +86,13 @@ public:
 	virtual bool DeleteMonitor(const NFGUID& id);
 	virtual bool DeleteJudgement(const NFGUID& id);
 	virtual bool DeleteExecuter(const NFGUID& id);
+
+protected:
+    void ModifyEvent(const NFGUID& id, const bool create);
+
 private:
 
+    std::function<void(const NFGUID&, const bool)> mFunctor;
     std::list<NF_SHARE_PTR<NFLogicBlock>> mLogicBlocks;
 };
 

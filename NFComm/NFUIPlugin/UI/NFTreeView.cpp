@@ -58,16 +58,16 @@ void NFTreeNode::Execute()
 	//base_flags = ImGuiTreeNodeFlags_OpenOnArrow | ImGuiTreeNodeFlags_OpenOnDoubleClick | ImGuiTreeNodeFlags_SpanAvailWidth | ImGuiTreeNodeFlags_Selected;
 
 	bool selected = false;
-	int base_flags = 0;// ImGuiTreeNodeFlags_OpenOnArrow;
+	ImGuiTreeNodeFlags node_flags = ImGuiTreeNodeFlags_DefaultOpen;// ImGuiTreeNodeFlags_OpenOnArrow;
 	if (mTreeView->GetSelectedNode() == guid)
 	{
-		base_flags |= ImGuiTreeNodeFlags_Selected;
+		node_flags |= ImGuiTreeNodeFlags_Selected;
 		selected = true;
 	}
 
 	ImGui::Checkbox("", &selected);
 	ImGui::SameLine();
-	bool node_open = ImGui::TreeNodeEx((void*)(intptr_t)id, base_flags, name.c_str());
+	bool node_open = ImGui::TreeNodeEx((void*)(intptr_t)id, node_flags, name.c_str());
 	if (ImGui::IsItemClicked())
 	{
 		mTreeView->SetSelectedNode(guid);
