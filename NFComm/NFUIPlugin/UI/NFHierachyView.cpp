@@ -146,8 +146,66 @@ void NFHierachyView::BluePrintViewSubRender()
          ImGui::Text(blueprintNode->blueprintType.toString().c_str());
 
 
-
          ImGui::BeginGroup();
+         if (blueprintNode->blueprintType == NFBlueprintType::MONITOR)
+         {
+            NF_SHARE_PTR<NFMonitor> pBluePrintView = std::dynamic_pointer_cast<NFMonitor>(blueprintNode);
+            ImGui::Text("MonitorType");
+            ImGui::SameLine();
+            if (ImGui::Button(pBluePrintView->operatorType.toString().c_str()))
+            {
+               ImGui::OpenPopup("my_select_group");
+            }
+ 
+            if (ImGui::BeginPopup("my_select_group"))
+            {
+               ImGui::Separator();
+               for( auto x : NFMonitorType::allValues() )
+               {
+                  if (ImGui::Selectable(x.toString().c_str(), false))
+                  {
+                     pBluePrintView->operatorType = x;
+                  }
+               }
+               
+               ImGui::EndPopup();
+            }
+
+            switch (pBluePrintView->operatorType)
+            {
+            case NFMonitorType::NetworkEvent:
+               break;
+            case NFMonitorType::NetworkMsgEvent:
+               break;
+            case NFMonitorType::ObjectEvent:
+               break;
+            case NFMonitorType::PropertyEvent:
+               break;
+            case NFMonitorType::RecordEvent:
+               break;
+            case NFMonitorType::HeartBeatEvent:
+               break;
+            case NFMonitorType::SceneEvent:
+               break;
+            case NFMonitorType::ItemEvent:
+               break;
+            case NFMonitorType::BuffEvent:
+               break;
+            
+            default:
+               break;
+            }
+            
+         }
+         else if (blueprintNode->blueprintType == NFBlueprintType::JUDGEMENT)
+         {
+
+         }
+         else if (blueprintNode->blueprintType == NFBlueprintType::EXECUTER)
+         {
+
+         }
+
          ImGui::EndGroup();
 
       }
