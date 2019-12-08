@@ -45,9 +45,6 @@ public:
    void TryToCreateJudgement();
    void TryToCreateExecuter();
 
-   NFGUID GetCurrentLogicBlockID();
-   void SetCurrentLogicBlockID(const NFGUID& id);
-
    NFGUID GetCurrentObjectID();
    void SetCurrentObjectID(const NFGUID& id);
 
@@ -62,7 +59,6 @@ private:
    
 private:
 
-	NFGUID mCurrentLogicBlockID;
 	NFGUID mCurrentObjectID;
 
 private:

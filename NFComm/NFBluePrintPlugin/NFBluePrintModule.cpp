@@ -28,11 +28,21 @@
 
 NF_SHARE_PTR<NFBluePrintNodeBase> NFExecuter::FindBaseNode(const NFGUID& id)
 {
-	if (nextExecuter && nextExecuter->id == id)
+	if (nextExecuter)
 	{
-		return nextExecuter;
+		if (nextExecuter->id == id)
+		{
+			return nextExecuter;
+		}
+
+		auto baseNode = nextExecuter->FindBaseNode(id);
+		if (baseNode)
+		{
+			return baseNode;
+		}
 	}
-	for (auto it : nextJudgement)
+
+	for (auto it : judgements)
 	{
 		if (it->id == id)
 		{
@@ -61,11 +71,20 @@ NF_SHARE_PTR<NFBluePrintNodeBase> NFJudgement::FindBaseNode(const NFGUID& id)
 			return baseNode;
 		}
 	}
-	if (nextExecuter && nextExecuter->id == id)
+	if (nextExecuter)
 	{
-		return nextExecuter;
+		if (nextExecuter->id == id)
+		{
+			return nextExecuter;
+		}
+		
+		auto baseNode = nextExecuter->FindBaseNode(id);
+		if (baseNode)
+		{
+			return baseNode;
+		}
 	}
-	
+
 	return nullptr;
 }
 
@@ -283,7 +302,7 @@ NF_SHARE_PTR<NFJudgement> NFBluePrintModule::AddJudgementForExecuter(const NFGUI
 		NF_SHARE_PTR<NFExecuter> executer = std::dynamic_pointer_cast<NFExecuter>(baseNode);
 		
 		auto newNode = NF_SHARE_PTR<NFJudgement>(NF_NEW NFJudgement(this->pPluginManager, id, name, baseNode));
-		executer->nextJudgement.push_back(newNode);
+		executer->judgements.push_back(newNode);
 
 		ModifyEvent(id, true);
 

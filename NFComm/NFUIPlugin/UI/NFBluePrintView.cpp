@@ -148,12 +148,19 @@ bool NFBluePrintView::Execute()
 	return false;
 }
 
+void AddJudgementNode(NFTreeView* pTreeView, const NFGUID& parentID, NF_SHARE_PTR<NFJudgement> judgement);
+
 void AddExecuterNode(NFTreeView* pTreeView, const NFGUID& id, NF_SHARE_PTR<NFExecuter> executer)
 {
 	pTreeView->AddSubTreeNode(id, executer->id, executer->name);
 	if (executer->nextExecuter)
 	{
 		AddExecuterNode(pTreeView, executer->id, executer->nextExecuter);
+	}
+	
+	for (auto it : executer->judgements)
+	{
+		AddJudgementNode(pTreeView, executer->id, it);
 	}
 }
 
@@ -233,25 +240,11 @@ void NFBluePrintView::SubRender()
 
 void NFBluePrintView::HandlerSelected(const NFGUID& id)
 {
-	auto blocks = m_pBluePrintModule->GetLogicBlocks();
-	for (auto it : blocks)
-	{
-		if (it->id == id)
-		{
-			mCurrentLogicBlockID = id;
-			mCurrentObjectID = NFGUID();
-			return;
-		}
-	}
-
-	mCurrentLogicBlockID = NFGUID();
 	mCurrentObjectID = NFGUID();
 	auto node = m_pBluePrintModule->FindBaseNode(id);
 	if (node)
 	{
-		//not a logic block node, that means now the user click a monitor node(maybe a judgement node or a executer node)
-		mCurrentLogicBlockID = node->logicBlockId;
-		mCurrentObjectID = id;
+		SetCurrentObjectID(id);
 	}
 
 	//referesh for sub window
@@ -318,16 +311,6 @@ void NFBluePrintView::TryToCreateExecuter()
 	}
 }
 
-NFGUID NFBluePrintView::GetCurrentLogicBlockID()
-{
-	return mCurrentLogicBlockID;
-}
-
-void NFBluePrintView::SetCurrentLogicBlockID(const NFGUID& id)
-{
-	mCurrentLogicBlockID = id;
-}
-
 void NFBluePrintView::CreateLogicBlockWindow()
 {
 	if (bCreatingLogicBlock)
@@ -370,7 +353,7 @@ void NFBluePrintView::CreateMonitor()
 {
 	if (bCreatingMonitor)
 	{
-		auto currentLogicBlock = m_pBluePrintModule->FindBaseNode(mCurrentLogicBlockID);
+		auto currentLogicBlock = m_pBluePrintModule->FindBaseNode(GetCurrentObjectID());
 		if (currentLogicBlock)
 		{
 			if (currentLogicBlock->blueprintType == NFBlueprintType::LOGICBLOCK)
@@ -399,7 +382,7 @@ void NFBluePrintView::CreateMonitor()
 
 					if (ImGui::Button("OK", ImVec2(100, 30)))
 					{
-						m_pBluePrintModule->AddMonitorForLogicBlock(mCurrentLogicBlockID, m_pKernelModule->CreateGUID(), str0);
+						m_pBluePrintModule->AddMonitorForLogicBlock(GetCurrentObjectID(), m_pKernelModule->CreateGUID(), str0);
 						bCreatingMonitor = false;
 						ImGui::CloseCurrentPopup();
 					}

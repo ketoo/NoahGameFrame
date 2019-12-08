@@ -177,7 +177,7 @@ public:
 
 	//a executer could has a executer or a judgement
 	NF_SHARE_PTR<NFExecuter> nextExecuter;
-	std::list<NF_SHARE_PTR<NFJudgement>> nextJudgement;
+	std::list<NF_SHARE_PTR<NFJudgement>> judgements;
 };
 
 class NFJudgement : public NFBluePrintNodeBase

@@ -27,6 +27,7 @@
 
 #include "NFComm/NFPluginModule/NFIUIModule.h"
 #include "NFComm/NFPluginModule/NFIKernelModule.h"
+#include "NFComm/NFPluginModule/NFIBluePrintModule.h"
 
 class NFHierachyView : public NFIView
 {
@@ -44,6 +45,7 @@ private:
 
 private:
    NFIKernelModule* m_pKernelModule;
+   NFIBluePrintModule* m_pBluePrintModule;
 
 };
 

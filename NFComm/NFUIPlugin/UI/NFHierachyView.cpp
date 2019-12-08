@@ -33,8 +33,8 @@
 NFHierachyView::NFHierachyView(NFIPluginManager* p, NFViewType vt) : NFIView(p, vt, GET_CLASS_NAME(NFHierachyView))
 {
    m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>();
+   m_pBluePrintModule = pPluginManager->FindModule<NFIBluePrintModule>();
 }
-
 
 bool NFHierachyView::Execute()
 {
@@ -112,5 +112,29 @@ void NFHierachyView::ProjectViewSubRender()
 
 void NFHierachyView::BluePrintViewSubRender()
 {
-   ImGui::Text("BluePrintView");
+   NF_SHARE_PTR<NFBluePrintView> pBluePrintView = std::dynamic_pointer_cast<NFBluePrintView>(m_pUIModule->GetView(NFViewType::BluePrintView));
+   NFGUID objectID = pBluePrintView->GetCurrentObjectID();
+   if (!objectID.IsNull())
+   {
+      auto node = m_pBluePrintModule->FindBaseNode(objectID);
+      if (node)
+      {
+         ImGui::BeginGroup();
+         std::string name = objectID.ToString();
+
+         ImGui::Text("ID");
+         ImGui::SameLine();
+         ImGui::Text(name.c_str());
+
+         ImGui::Text("Name");
+         ImGui::SameLine();
+         ImGui::Text(node->name.c_str());
+
+         ImGui::Text("Type");
+         ImGui::SameLine();
+         ImGui::Text(node->blueprintType.toString().c_str());
+
+         ImGui::EndGroup();
+      }
+   }
 }
