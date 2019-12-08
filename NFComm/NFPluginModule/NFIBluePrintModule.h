@@ -47,19 +47,30 @@ NF_SMART_ENUM(NFMonitorType,
 	SceneEvent,
 	ItemEvent,
 	SkillEvent,
-	BuffEvent
+	BuffEvent,
 )
 
-//PropertyEvent
-NF_SMART_ENUM(NFMonitorPropertyEventType,
-	Update
+//ObjectEvent
+NF_SMART_ENUM(NFMonitorObjectEventType,
+	COE_CREATE_NODATA,
+	COE_CREATE_BEFORE_ATTACHDATA,
+	COE_CREATE_LOADDATA,
+	COE_CREATE_AFTER_ATTACHDATA,
+	COE_CREATE_BEFORE_EFFECT,
+	COE_CREATE_EFFECTDATA,
+	COE_CREATE_AFTER_EFFECT,
+	COE_CREATE_HASDATA,
+	COE_CREATE_FINISH,
+	COE_CREATE_CLIENT_FINISH,
+	COE_BEFOREDESTROY,
+	COE_DESTROY,
 )
 
 //RecordEvent
 NF_SMART_ENUM(NFMonitorRecordEventType,
 	Add,
 	Remove,
-	Update
+	Update,
 )
 
 //2 args: string elementName, string propertyName
@@ -81,7 +92,7 @@ NF_SMART_ENUM(NFAccessorType,
 	GetRecordString,
 	GetRecordVector2,
 	GetRecordVector3,
-	GetRecordObject
+	GetRecordObject,
 )
 
 //SetProperty 3 args: NFGUID objectID, string propertyName, int value
@@ -226,6 +237,7 @@ public:
 public:
 	NFDataList arg;
 	NFMonitorType operatorType = NFMonitorType::NONE;
+	int subType = 0;
 	std::list<NF_SHARE_PTR<NFJudgement>> judgements;
 };
 

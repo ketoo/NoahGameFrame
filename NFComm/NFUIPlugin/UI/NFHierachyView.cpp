@@ -174,22 +174,112 @@ void NFHierachyView::BluePrintViewSubRender()
             switch (pBluePrintView->operatorType)
             {
             case NFMonitorType::NetworkEvent:
+               //sub type
                break;
             case NFMonitorType::NetworkMsgEvent:
+               //sub type
                break;
             case NFMonitorType::ObjectEvent:
+               {  
+                  //sub type
+
+                  ImGui::Text("ObjectEventSubType");
+                  ImGui::SameLine();
+                  NFMonitorObjectEventType subType(pBluePrintView->subType);
+                  if (ImGui::Button(subType.toString().c_str()))
+                  {
+                     ImGui::OpenPopup("my_select_sub_type_group");
+                  }
+
+                  if (ImGui::BeginPopup("my_select_sub_type_group"))
+                  {
+                     ImGui::Separator();
+                     for( auto x : NFMonitorObjectEventType::allValues() )
+                     {
+                        if (ImGui::Selectable(x.toString().c_str(), false))
+                        {
+                           pBluePrintView->subType = x;
+                        }
+                     }
+                     
+                     ImGui::EndPopup();
+                  }
+
+
+                  //arg: class name
+
+
+               }
                break;
             case NFMonitorType::PropertyEvent:
+               //1 arg
                break;
             case NFMonitorType::RecordEvent:
+               {
+                  //sub type
+
+                  ImGui::Text("RecordEventSubType");
+                  ImGui::SameLine();
+                  NFMonitorRecordEventType subType(pBluePrintView->subType);
+                  if (ImGui::Button(subType.toString().c_str()))
+                  {
+                     ImGui::OpenPopup("my_select_sub_type_group");
+                  }
+
+                  if (ImGui::BeginPopup("my_select_sub_type_group"))
+                  {
+                     ImGui::Separator();
+                     for( auto x : NFMonitorRecordEventType::allValues() )
+                     {
+                        if (ImGui::Selectable(x.toString().c_str(), false))
+                        {
+                           pBluePrintView->subType = x;
+                        }
+                     }
+                     
+                     ImGui::EndPopup();
+                  }
+
+                  //arg: recordName
+                  ImGui::Text("RecordName");
+                  ImGui::SameLine();
+                  std::string recordName = pBluePrintView->arg.String(0);
+                  if (recordName.empty())
+                  {
+                     recordName = "input your record name";
+                  }
+                  if (ImGui::Button(recordName.c_str()))
+                  {
+                     ImGui::OpenPopup("my_select_arg_group");
+                  }
+
+                  if (ImGui::BeginPopup("my_select_arg_group"))
+                  {
+                     ImGui::Separator();
+                     for( auto x : NFMonitorRecordEventType::allValues() )
+                     {
+                        if (ImGui::Selectable(x.toString().c_str(), false))
+                        {
+                           pBluePrintView->subType = x;
+                        }
+                     }
+                     
+                     ImGui::EndPopup();
+                  }
+               }
                break;
+               
             case NFMonitorType::HeartBeatEvent:
+               //sub type
                break;
             case NFMonitorType::SceneEvent:
+               //sub type
                break;
             case NFMonitorType::ItemEvent:
+               //sub type
                break;
             case NFMonitorType::BuffEvent:
+               //sub type
                break;
             
             default:
