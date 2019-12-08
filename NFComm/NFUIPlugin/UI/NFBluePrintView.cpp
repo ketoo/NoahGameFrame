@@ -493,8 +493,7 @@ void NFBluePrintView::CreateExecuter()
 		auto currentObject = m_pBluePrintModule->FindBaseNode(mCurrentObjectID);
 		if (currentObject)
 		{
-			if (currentObject->blueprintType == NFBlueprintType::MONITOR
-				|| currentObject->blueprintType == NFBlueprintType::JUDGEMENT
+			if (currentObject->blueprintType == NFBlueprintType::JUDGEMENT
 				|| currentObject->blueprintType == NFBlueprintType::EXECUTER)
 			{
 				ImGui::OpenPopup("Creating Executer");
@@ -521,11 +520,7 @@ void NFBluePrintView::CreateExecuter()
 
 					if (ImGui::Button("OK", ImVec2(100, 30)))
 					{
-						if (currentObject->blueprintType == NFBlueprintType::MONITOR)
-						{
-							m_pBluePrintModule->AddExecuterForMonitor(mCurrentObjectID, m_pKernelModule->CreateGUID(), str0);
-						}
-						else if (currentObject->blueprintType == NFBlueprintType::JUDGEMENT)
+						if (currentObject->blueprintType == NFBlueprintType::JUDGEMENT)
 						{
 							m_pBluePrintModule->AddExecuterForJudgement(mCurrentObjectID, m_pKernelModule->CreateGUID(), str0);
 						}

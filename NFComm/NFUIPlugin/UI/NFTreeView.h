@@ -100,7 +100,7 @@ public:
 	const NFGUID GetSelectedNode();
 
 	void AddTreeNode(const NFGUID guid, const std::string& name);
-	NF_SHARE_PTR<NFTreeNode> GetTreeNode(const NFGUID guid);
+	NF_SHARE_PTR<NFTreeNode> FindTreeNode(const NFGUID guid);
 	bool DeleteTreeNode(const NFGUID guid);
 
 	void AddSubTreeNode(const NFGUID guid, const NFGUID subId, const std::string& name);

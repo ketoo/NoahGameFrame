@@ -189,7 +189,7 @@ void NFTreeView::AddTreeNode(const NFGUID guid, const std::string& name)
 	}
 }
 
-NF_SHARE_PTR<NFTreeNode> NFTreeView::GetTreeNode(const NFGUID guid)
+NF_SHARE_PTR<NFTreeNode> NFTreeView::FindTreeNode(const NFGUID guid)
 {
 	auto it = mTrees.find(guid);
 	if (it != mTrees.end())
@@ -228,19 +228,19 @@ bool NFTreeView::DeleteTreeNode(const NFGUID guid)
 
 void NFTreeView::AddSubTreeNode(const NFGUID guid, const NFGUID subId, const std::string& name)
 {
-	auto it = mTrees.find(guid);
-	if (it != mTrees.end())
+	auto node = FindTreeNode(guid);
+	if (node)
 	{
-		it->second->AddTreeNode(subId, name);
+		node->AddTreeNode(subId, name);
 	}
 }
 
 void NFTreeView::AddTreeLeafNode(const NFGUID guid, const NFGUID leafId, const std::string& name)
 {
-	auto it = mTrees.find(guid);
-	if (it != mTrees.end())
+	auto node = FindTreeNode(guid);
+	if (node)
 	{
-		it->second->AddLeaf(GenerateId(), name, leafId);
+		node->AddLeaf(GenerateId(), name, leafId);
 	}
 }
 

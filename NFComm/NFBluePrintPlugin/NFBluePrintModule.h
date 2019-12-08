@@ -77,11 +77,10 @@ public:
 
 	virtual NF_SHARE_PTR<NFMonitor> AddMonitorForLogicBlock(const NFGUID& logicBlockId, const NFGUID& id, const std::string& name);
 	virtual NF_SHARE_PTR<NFJudgement> AddJudgementForMonitor(const NFGUID& monitorId, const NFGUID& id, const std::string& name);
-	virtual NF_SHARE_PTR<NFJudgement> AddJudgementForJudgement(const NFGUID& monitorId, const NFGUID& id, const std::string& name);
-	virtual NF_SHARE_PTR<NFJudgement> AddJudgementForExecuter(const NFGUID& monitorId, const NFGUID& id, const std::string& name);
-	virtual NF_SHARE_PTR<NFExecuter> AddExecuterForMonitor(const NFGUID& judgeMent, const NFGUID& id, const std::string& name);
-	virtual NF_SHARE_PTR<NFExecuter> AddExecuterForJudgement(const NFGUID& judgeMent, const NFGUID& id, const std::string& name);
-	virtual NF_SHARE_PTR<NFExecuter> AddExecuterForExecuter(const NFGUID& judgeMent, const NFGUID& id, const std::string& name);
+	virtual NF_SHARE_PTR<NFJudgement> AddJudgementForJudgement(const NFGUID& judgementId, const NFGUID& id, const std::string& name);
+	virtual NF_SHARE_PTR<NFJudgement> AddJudgementForExecuter(const NFGUID& executerId, const NFGUID& id, const std::string& name);
+	virtual NF_SHARE_PTR<NFExecuter> AddExecuterForJudgement(const NFGUID& judgementId, const NFGUID& id, const std::string& name);
+	virtual NF_SHARE_PTR<NFExecuter> AddExecuterForExecuter(const NFGUID& executerId, const NFGUID& id, const std::string& name);
 
 	virtual bool DeleteMonitor(const NFGUID& id);
 	virtual bool DeleteJudgement(const NFGUID& id);
