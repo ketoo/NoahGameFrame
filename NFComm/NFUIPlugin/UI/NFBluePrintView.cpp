@@ -44,10 +44,14 @@ NFBluePrintView::NFBluePrintView(NFIPluginManager* p, NFViewType vt) : NFIView(p
    NFGUID testID2 = m_pKernelModule->CreateGUID();
    NFGUID testID3 = m_pKernelModule->CreateGUID();
    NFGUID testID4 = m_pKernelModule->CreateGUID();
+   NFGUID testID5 = m_pKernelModule->CreateGUID();
 
 
-   m_pNodeView->AddNode(testID1, "testnode1111111", NFVector2(300, 300));
-   m_pNodeView->AddNode(testID2, "testnode2222222", NFVector2(3, 0));
+   m_pNodeView->AddNode(testID1, "testnode1111111", NFVector2(0, 100));
+   m_pNodeView->AddNode(testID2, "testnode2222222", NFVector2(0, 200));
+   m_pNodeView->AddNode(testID3, "testnode23333", NFVector2(200, 0));
+   m_pNodeView->AddNode(testID4, "testnode4444", NFVector2(300, 0));
+   m_pNodeView->AddNode(testID5, "testnode555", NFVector2(300, 300));
 
 /*
    	static NFGUID tree111 = m_pKernelModule->CreateGUID();
@@ -187,6 +191,16 @@ NFGUID NFBluePrintView::GetCurrentObjectID()
 void NFBluePrintView::SetCurrentObjectID(const NFGUID& id)
 {
 	mCurrentObjectID = id;
+}
+
+NFTreeView* NFBluePrintView::GetTreeView()
+{
+	return m_pTreeView;
+}
+
+NFNodeView* NFBluePrintView::GetNodeView()
+{
+	m_pNodeView;
 }
 
 void NFBluePrintView::SubRender()

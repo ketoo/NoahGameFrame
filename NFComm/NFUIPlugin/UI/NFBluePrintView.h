@@ -38,16 +38,19 @@ public:
 
 	virtual bool Execute();
 
-   virtual void SubRender();
+   	virtual void SubRender();
 
-   void TryToCreateBluePrintBlock();
-   void TryToCreateMonitor();
-   void TryToCreateJudgement();
-   void TryToCreateExecuter();
+	void TryToCreateBluePrintBlock();
+	void TryToCreateMonitor();
+	void TryToCreateJudgement();
+	void TryToCreateExecuter();
 
-   NFGUID GetCurrentObjectID();
-   void SetCurrentObjectID(const NFGUID& id);
+	NFGUID GetCurrentObjectID();
+	void SetCurrentObjectID(const NFGUID& id);
 
+	NFTreeView* GetTreeView();
+	NFNodeView* GetNodeView();
+	
 private:
 	void HandlerSelected(const NFGUID& id);
     void ModifyEvent(const NFGUID& id, const bool create);

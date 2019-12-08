@@ -50,7 +50,7 @@ void NFNode::Execute()
    if (first)
    {
       first = false;
-      imnodes::SetNodePos(id, ImVec2(initPos.X(), initPos.Y()));
+      imnodes::SetNodePos(id, ImVec2(initPos.X(), -initPos.Y()));
    }
 
    for (auto it : mAttris)
@@ -152,25 +152,25 @@ void NFNodeView::AddNode(const NFGUID guid, const std::string& name, const NFVec
    }
 }
 
-void NFNodeView::AddNodeAttrIn(const NFGUID guid, const NFGUID attrId, const std::string& name)
+void NFNodeView::AddNodeAttrIn(const NFGUID guid, const NFGUID attrId, const std::string& name, const std::string& value)
 {
    for (auto it : mNodes)
    {
       if (it.second->guid == guid)
       {
-         it.second->AddAttribute(GenerateId(), name, true, attrId);
+         it.second->AddAttribute(GenerateId(), name, true, attrId, value);
          return;
       }
    }
 }
 
-void NFNodeView::AddNodeAttrOut(const NFGUID guid, const NFGUID attrId, const std::string& name)
+void NFNodeView::AddNodeAttrOut(const NFGUID guid, const NFGUID attrId, const std::string& name, const std::string& value)
 {
    for (auto it : mNodes)
    {
       if (it.second->guid == guid)
       {
-         it.second->AddAttribute(GenerateId(), name, false, attrId);
+         it.second->AddAttribute(GenerateId(), name, false, attrId, value);
          return;
       }
    }

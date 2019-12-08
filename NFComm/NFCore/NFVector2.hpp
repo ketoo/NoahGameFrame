@@ -76,11 +76,7 @@ public:
 		this->x = v.x;
 		this->y = v.y;
 	}
-	NFVector2(const char* v, const int len)
-	{
-		FromString(std::string(v, len));
-	}
-
+	
 	NFVector2(const std::string& v)
 	{
 		FromString(v);

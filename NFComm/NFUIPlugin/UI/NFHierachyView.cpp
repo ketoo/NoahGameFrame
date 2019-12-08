@@ -116,25 +116,40 @@ void NFHierachyView::BluePrintViewSubRender()
    NFGUID objectID = pBluePrintView->GetCurrentObjectID();
    if (!objectID.IsNull())
    {
-      auto node = m_pBluePrintModule->FindBaseNode(objectID);
-      if (node)
+      auto treeNode = pBluePrintView->GetTreeView()->FindTreeNode(objectID);
+      auto blueprintNode = m_pBluePrintModule->FindBaseNode(objectID);
+      if (treeNode && blueprintNode)
       {
          ImGui::BeginGroup();
-         std::string name = objectID.ToString();
+         
+         bool selected = pBluePrintView->GetTreeView()->GetSelectedNode() == objectID;
+	      ImGui::Checkbox("", &selected);
+         ImGui::SameLine();
 
+         char blueprintName[128] = {0};
+         strcpy(blueprintName, blueprintNode->name .c_str());
+			if (ImGui::InputText("", blueprintName, IM_ARRAYSIZE(blueprintName)))
+         {
+            blueprintNode->name = blueprintName;
+         }
+
+         ImGui::EndGroup();
+         
          ImGui::Text("ID");
          ImGui::SameLine();
-         ImGui::Text(name.c_str());
+         ImGui::Text(objectID.ToString().c_str());
 
-         ImGui::Text("Name");
-         ImGui::SameLine();
-         ImGui::Text(node->name.c_str());
+    
 
          ImGui::Text("Type");
          ImGui::SameLine();
-         ImGui::Text(node->blueprintType.toString().c_str());
+         ImGui::Text(blueprintNode->blueprintType.toString().c_str());
 
+
+
+         ImGui::BeginGroup();
          ImGui::EndGroup();
+
       }
    }
 }

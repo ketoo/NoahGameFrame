@@ -276,9 +276,10 @@ void NFGodView::RenderSceneObjectNode(const int sceneID, const int groupID)
          const NFGUID& guid = list.Object(k);
          const std::string& strName = m_pKernelModule->GetPropertyString(guid, NFrame::IObject::Name());
          const NFVector3& pos = m_pKernelModule->GetPropertyVector3(guid, NFrame::IObject::Position());
-         pView->AddNode(guid, strName, NFVector2(pos.X(), pos.Z()));
+         pView->AddNode(guid, guid.ToString(), NFVector2(pos.X(), pos.Z()));
          //pView->AddNode(guid, guid.ToString(), NFVector2());
-         pView->AddNodeAttrIn(guid, m_pKernelModule->CreateGUID(), strName);
+         pView->AddNodeAttrIn(guid, m_pKernelModule->CreateGUID(), NFrame::IObject::Name(), strName);
+         pView->AddNodeAttrIn(guid, m_pKernelModule->CreateGUID(), NFrame::IObject::Position(), pos.ToString());
       }
    }
 

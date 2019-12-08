@@ -33,12 +33,13 @@ private:
    NFNodeAttri(){}
 
 public:
-   NFNodeAttri(const int id, const std::string& name, const bool inputPin, const NFGUID guid)
+   NFNodeAttri(const int id, const std::string& name, const bool inputPin, const NFGUID guid, const std::string& value)
    {
       this->id = id;
       this->name = name;
       this->inputPin = inputPin;
       this->guid = guid;
+      this->value = value;
    }
 
    void Execute();
@@ -46,6 +47,7 @@ public:
    int id;
    bool inputPin;
    std::string name;
+   std::string value;
    NFGUID guid;
 };
 
@@ -65,9 +67,9 @@ public:
 
 	void Execute();
 
-   void AddAttribute(const int id, const std::string& name, const bool inputPin, const NFGUID guid)
+   void AddAttribute(const int id, const std::string& name, const bool inputPin, const NFGUID guid, const std::string& value)
    {
-      auto ptr = NF_SHARE_PTR<NFNodeAttri>(NF_NEW NFNodeAttri(id, name, inputPin, guid));
+      auto ptr = NF_SHARE_PTR<NFNodeAttri>(NF_NEW NFNodeAttri(id, name, inputPin, guid, value));
       mAttris.push_back(ptr);
    }
 
@@ -146,8 +148,8 @@ public:
    const int GetAttriID(const NFGUID guid);
 
    void AddNode(const NFGUID guid, const std::string& name, const NFVector2 vec = NFVector2());
-   void AddNodeAttrIn(const NFGUID guid, const NFGUID attrId, const std::string& name);
-   void AddNodeAttrOut(const NFGUID guid, const NFGUID attrId, const std::string& name);
+   void AddNodeAttrIn(const NFGUID guid, const NFGUID attrId, const std::string& name, const std::string& value);
+   void AddNodeAttrOut(const NFGUID guid, const NFGUID attrId, const std::string& name, const std::string& value);
    void DeleteNode(const NFGUID guid);
 
    NFGUID GetNodeByAttriId(const NFGUID attriId);
