@@ -325,6 +325,22 @@ void NFBluePrintView::TryToCreateExecuter()
 	}
 }
 
+void NFBluePrintView::TryToCreateAccessor()
+{
+	if (!bCreatingAccessor)
+	{
+		bCreatingAccessor = true;
+	}
+}
+
+void NFBluePrintView::TryToCreateModifier()
+{
+	if (!bCreatingModifier)
+	{
+		bCreatingModifier = true;
+	}
+}
+
 void NFBluePrintView::CreateLogicBlockWindow()
 {
 	if (bCreatingLogicBlock)
@@ -541,6 +557,115 @@ void NFBluePrintView::CreateExecuter()
       else
       {
          bCreatingExecuter = false;
+      }
+	}
+}
+
+void NFBluePrintView::CreateAccessor()
+{
+	if (bCreatingAccessor)
+	{
+		auto currentObject = m_pBluePrintModule->FindBaseNode(mCurrentObjectID);
+		if (currentObject)
+		{
+			if (currentObject->blueprintType == NFBlueprintType::JUDGEMENT
+				|| currentObject->blueprintType == NFBlueprintType::EXECUTER)
+			{
+				ImGui::OpenPopup("Creating Accessor");
+				ImGui::SetNextWindowSize(ImVec2(230, 150));
+
+				if (ImGui::BeginPopupModal("Creating Accessor"))
+				{
+					static char str0[128] = "Hello, Accessor!";
+					ImGui::InputText("Accessor Name", str0, IM_ARRAYSIZE(str0));
+
+					ImGui::Separator();
+
+					ImGui::Text("All those beautiful files will be deleted.\nThis operation cannot be undone!\n\n");
+
+					ImGui::Separator();
+
+					if (ImGui::Button("Cancel", ImVec2(100, 30)))
+					{
+						bCreatingAccessor = false;
+						ImGui::CloseCurrentPopup();
+					}
+
+					ImGui::SameLine();
+
+					if (ImGui::Button("OK", ImVec2(100, 30)))
+					{
+					
+
+						bCreatingAccessor = false;
+						ImGui::CloseCurrentPopup();
+					}
+
+					ImGui::EndPopup();
+				}
+			}
+         else
+         {
+            bCreatingAccessor = false;
+         }
+		}
+      else
+      {
+         bCreatingAccessor = false;
+      }
+	}
+}
+
+void NFBluePrintView::CreateModifier()
+{
+	if (bCreatingModifier)
+	{
+		auto currentObject = m_pBluePrintModule->FindBaseNode(mCurrentObjectID);
+		if (currentObject)
+		{
+			if (currentObject->blueprintType == NFBlueprintType::EXECUTER)
+			{
+				ImGui::OpenPopup("Creating Modifier");
+				ImGui::SetNextWindowSize(ImVec2(230, 150));
+
+				if (ImGui::BeginPopupModal("Creating Modifier"))
+				{
+					static char str0[128] = "Hello, Modifier!";
+					ImGui::InputText("Modifier Name", str0, IM_ARRAYSIZE(str0));
+
+					ImGui::Separator();
+
+					ImGui::Text("All those beautiful files will be deleted.\nThis operation cannot be undone!\n\n");
+
+					ImGui::Separator();
+
+					if (ImGui::Button("Cancel", ImVec2(100, 30)))
+					{
+						bCreatingModifier = false;
+						ImGui::CloseCurrentPopup();
+					}
+
+					ImGui::SameLine();
+
+					if (ImGui::Button("OK", ImVec2(100, 30)))
+					{
+						
+
+						bCreatingModifier = false;
+						ImGui::CloseCurrentPopup();
+					}
+
+					ImGui::EndPopup();
+				}
+			}
+         else
+         {
+            bCreatingModifier = false;
+         }
+		}
+      else
+      {
+         bCreatingModifier = false;
       }
 	}
 }

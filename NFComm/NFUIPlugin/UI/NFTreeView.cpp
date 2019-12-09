@@ -58,7 +58,7 @@ void NFTreeNode::Execute()
 	//base_flags = ImGuiTreeNodeFlags_OpenOnArrow | ImGuiTreeNodeFlags_OpenOnDoubleClick | ImGuiTreeNodeFlags_SpanAvailWidth | ImGuiTreeNodeFlags_Selected;
 
 	bool selected = false;
-	ImGuiTreeNodeFlags node_flags = ImGuiTreeNodeFlags_DefaultOpen;// ImGuiTreeNodeFlags_OpenOnArrow;
+	ImGuiTreeNodeFlags node_flags = ImGuiTreeNodeFlags_DefaultOpen | ImGuiTreeNodeFlags_OpenOnArrow | ImGuiTreeNodeFlags_OpenOnDoubleClick;// ImGuiTreeNodeFlags_OpenOnArrow;
 	if (mTreeView->GetSelectedNode() == guid)
 	{
 		node_flags |= ImGuiTreeNodeFlags_Selected;

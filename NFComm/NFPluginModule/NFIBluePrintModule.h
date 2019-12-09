@@ -59,20 +59,26 @@ NF_SMART_ENUM(NFMonitorPropertyEventArgType,
 	PropertyName,
 )
 
+NF_SMART_ENUM(NFMonitorRecordEventArgType,
+	ClassName,
+	RecordName,
+	OperateType,
+)
+
 //ObjectEvent
 NF_SMART_ENUM(NFMonitorObjectEventType,
-	COE_CREATE_NODATA,
-	COE_CREATE_BEFORE_ATTACHDATA,
-	COE_CREATE_LOADDATA,
-	COE_CREATE_AFTER_ATTACHDATA,
-	COE_CREATE_BEFORE_EFFECT,
-	COE_CREATE_EFFECTDATA,
-	COE_CREATE_AFTER_EFFECT,
-	COE_CREATE_HASDATA,
-	COE_CREATE_FINISH,
-	COE_CREATE_CLIENT_FINISH,
-	COE_BEFOREDESTROY,
-	COE_DESTROY,
+	CREATE_NODATA,
+	CREATE_BEFORE_ATTACHDATA,
+	CREATE_LOADDATA,
+	CREATE_AFTER_ATTACHDATA,
+	CREATE_BEFORE_EFFECT,
+	CREATE_EFFECTDATA,
+	CREATE_AFTER_EFFECT,
+	CREATE_HASDATA,
+	CREATE_FINISH,
+	CREATE_CLIENT_FINISH,
+	BEFOREDESTROY,
+	DESTROY,
 )
 
 //RecordEvent
@@ -119,7 +125,9 @@ NF_SMART_ENUM(NFModifierType,
 	SetRecordString,
 	SetRecordVector2,
 	SetRecordVector3,
-	SetRecordObject
+	SetRecordObject,
+	AddRecordRow,
+	ReemRecordRow,
 )
 
 NF_SMART_ENUM(NFOperatorType,
@@ -156,6 +164,7 @@ protected:
 public:
 	virtual ~NFBluePrintNodeBase(){}
 
+	bool enable = true;
 	NFGUID logicBlockId;
 	NFGUID id;
 	std::string name;
