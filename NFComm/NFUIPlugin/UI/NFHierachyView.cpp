@@ -1,4 +1,4 @@
-/*
+﻿/*
 			This file is part of:
 				NoahFrame
 			https://github.com/ketoo/NoahGameFrame
@@ -32,8 +32,10 @@
 
 NFHierachyView::NFHierachyView(NFIPluginManager* p, NFViewType vt) : NFIView(p, vt, GET_CLASS_NAME(NFHierachyView))
 {
-   m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>();
-   m_pBluePrintModule = pPluginManager->FindModule<NFIBluePrintModule>();
+	m_pClassModule = pPluginManager->FindModule<NFIClassModule>();
+	m_pElementModule = pPluginManager->FindModule<NFIElementModule>();
+	m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>();
+	m_pBluePrintModule = pPluginManager->FindModule<NFIBluePrintModule>();
 }
 
 bool NFHierachyView::Execute()
@@ -116,9 +118,8 @@ void NFHierachyView::BluePrintViewSubRender()
    NFGUID objectID = pBluePrintView->GetCurrentObjectID();
    if (!objectID.IsNull())
    {
-      auto treeNode = pBluePrintView->GetTreeView()->FindTreeNode(objectID);
       auto blueprintNode = m_pBluePrintModule->FindBaseNode(objectID);
-      if (treeNode && blueprintNode)
+      if (blueprintNode)
       {
          ImGui::BeginGroup();
          
@@ -139,165 +140,349 @@ void NFHierachyView::BluePrintViewSubRender()
          ImGui::SameLine();
          ImGui::Text(objectID.ToString().c_str());
 
-    
-
          ImGui::Text("Type");
          ImGui::SameLine();
          ImGui::Text(blueprintNode->blueprintType.toString().c_str());
 
-
          ImGui::BeginGroup();
+
          if (blueprintNode->blueprintType == NFBlueprintType::MONITOR)
          {
-            NF_SHARE_PTR<NFMonitor> pBluePrintView = std::dynamic_pointer_cast<NFMonitor>(blueprintNode);
-            ImGui::Text("MonitorType");
-            ImGui::SameLine();
-            if (ImGui::Button(pBluePrintView->operatorType.toString().c_str()))
-            {
-               ImGui::OpenPopup("my_select_group");
-            }
- 
-            if (ImGui::BeginPopup("my_select_group"))
-            {
-               ImGui::Separator();
-               for( auto x : NFMonitorType::allValues() )
-               {
-                  if (ImGui::Selectable(x.toString().c_str(), false))
-                  {
-                     pBluePrintView->operatorType = x;
-                  }
-               }
-               
-               ImGui::EndPopup();
-            }
-
-            switch (pBluePrintView->operatorType)
-            {
-            case NFMonitorType::NetworkEvent:
-               //sub type
-               break;
-            case NFMonitorType::NetworkMsgEvent:
-               //sub type
-               break;
-            case NFMonitorType::ObjectEvent:
-               {  
-                  //sub type
-
-                  ImGui::Text("ObjectEventSubType");
-                  ImGui::SameLine();
-                  NFMonitorObjectEventType subType(pBluePrintView->subType);
-                  if (ImGui::Button(subType.toString().c_str()))
-                  {
-                     ImGui::OpenPopup("my_select_sub_type_group");
-                  }
-
-                  if (ImGui::BeginPopup("my_select_sub_type_group"))
-                  {
-                     ImGui::Separator();
-                     for( auto x : NFMonitorObjectEventType::allValues() )
-                     {
-                        if (ImGui::Selectable(x.toString().c_str(), false))
-                        {
-                           pBluePrintView->subType = x;
-                        }
-                     }
-                     
-                     ImGui::EndPopup();
-                  }
-
-
-                  //arg: class name
-
-
-               }
-               break;
-            case NFMonitorType::PropertyEvent:
-               //1 arg
-               break;
-            case NFMonitorType::RecordEvent:
-               {
-                  //sub type
-
-                  ImGui::Text("RecordEventSubType");
-                  ImGui::SameLine();
-                  NFMonitorRecordEventType subType(pBluePrintView->subType);
-                  if (ImGui::Button(subType.toString().c_str()))
-                  {
-                     ImGui::OpenPopup("my_select_sub_type_group");
-                  }
-
-                  if (ImGui::BeginPopup("my_select_sub_type_group"))
-                  {
-                     ImGui::Separator();
-                     for( auto x : NFMonitorRecordEventType::allValues() )
-                     {
-                        if (ImGui::Selectable(x.toString().c_str(), false))
-                        {
-                           pBluePrintView->subType = x;
-                        }
-                     }
-                     
-                     ImGui::EndPopup();
-                  }
-
-                  //arg: recordName
-                  ImGui::Text("RecordName");
-                  ImGui::SameLine();
-                  std::string recordName = pBluePrintView->arg.String(0);
-                  if (recordName.empty())
-                  {
-                     recordName = "input your record name";
-                  }
-                  if (ImGui::Button(recordName.c_str()))
-                  {
-                     ImGui::OpenPopup("my_select_arg_group");
-                  }
-
-                  if (ImGui::BeginPopup("my_select_arg_group"))
-                  {
-                     ImGui::Separator();
-                     for( auto x : NFMonitorRecordEventType::allValues() )
-                     {
-                        if (ImGui::Selectable(x.toString().c_str(), false))
-                        {
-                           pBluePrintView->subType = x;
-                        }
-                     }
-                     
-                     ImGui::EndPopup();
-                  }
-               }
-               break;
-               
-            case NFMonitorType::HeartBeatEvent:
-               //sub type
-               break;
-            case NFMonitorType::SceneEvent:
-               //sub type
-               break;
-            case NFMonitorType::ItemEvent:
-               //sub type
-               break;
-            case NFMonitorType::BuffEvent:
-               //sub type
-               break;
-            
-            default:
-               break;
-            }
-            
+			BluePrintViewSubRenderForMonitor();
          }
          else if (blueprintNode->blueprintType == NFBlueprintType::JUDGEMENT)
          {
-
+			 BluePrintViewSubRenderForJudgement();
          }
          else if (blueprintNode->blueprintType == NFBlueprintType::EXECUTER)
          {
-
+			 BluePrintViewSubRenderForExecuter();
          }
 
          ImGui::EndGroup();
-
       }
    }
+}
+
+void NFHierachyView::BluePrintViewSubRenderForMonitor()
+{
+	NF_SHARE_PTR<NFBluePrintView> pBluePrintView = std::dynamic_pointer_cast<NFBluePrintView>(m_pUIModule->GetView(NFViewType::BluePrintView));
+	NFGUID objectID = pBluePrintView->GetCurrentObjectID();
+	if (!objectID.IsNull())
+	{
+		auto blueprintNode = m_pBluePrintModule->FindBaseNode(objectID);
+		if (blueprintNode)
+		{
+			NF_SHARE_PTR<NFMonitor> pBluePrintView = std::dynamic_pointer_cast<NFMonitor>(blueprintNode);
+			ImGui::Text("MonitorType");
+			ImGui::SameLine();
+			if (ImGui::Button(pBluePrintView->operatorType.toString().c_str()))
+			{
+				ImGui::OpenPopup("my_select_group");
+			}
+
+			if (ImGui::BeginPopup("my_select_group"))
+			{
+				ImGui::Separator();
+				for (auto x : NFMonitorType::allValues())
+				{
+					if (ImGui::Selectable(x.toString().c_str(), false))
+					{
+						pBluePrintView->operatorType = x;
+						InitBluePrintMonitorArgs(pBluePrintView);
+					}
+				}
+
+				ImGui::EndPopup();
+			}
+
+			switch (pBluePrintView->operatorType)
+			{
+			case NFMonitorType::NetworkEvent:
+				//sub type
+				break;
+			case NFMonitorType::NetworkMsgEvent:
+				//sub type
+				break;
+			case NFMonitorType::ObjectEvent:
+			{
+				//sub type
+				ImGui::Text("ObjectEventSubType");
+				ImGui::SameLine();
+				NFMonitorObjectEventType subType(pBluePrintView->subType);
+				if (ImGui::Button(subType.toString().c_str()))
+				{
+					ImGui::OpenPopup("my_select_sub_type_group");
+				}
+
+				if (ImGui::BeginPopup("my_select_sub_type_group"))
+				{
+					ImGui::Separator();
+					for (auto x : NFMonitorObjectEventType::allValues())
+					{
+						if (ImGui::Selectable(x.toString().c_str(), false))
+						{
+							pBluePrintView->subType = x;
+						}
+					}
+
+					ImGui::EndPopup();
+				}
+
+
+				//arg: class name
+				ImGui::Text("ClassName");
+				ImGui::SameLine();
+				
+				std::string className = pBluePrintView->arg.String(NFMonitorObjectEventArgType::ClassName);
+				if (className.empty())
+				{
+					className = "your class name";
+				}
+
+				if (ImGui::Button(className.c_str()))
+				{
+					ImGui::OpenPopup("my_select_class_name_group");
+				}
+
+				if (ImGui::BeginPopup("my_select_class_name_group"))
+				{
+					ImGui::Separator();
+
+					auto classObject = m_pClassModule->First();
+					while (classObject)
+					{
+						if (ImGui::Selectable(classObject->GetClassName().c_str(), false))
+						{
+							//init for arg
+							//pBluePrintView->arg.
+							pBluePrintView->arg.SetString(NFMonitorObjectEventArgType::ClassName, classObject->GetClassName());
+						}
+
+						classObject = m_pClassModule->Next();
+					}
+
+					ImGui::EndPopup();
+				}
+			}
+			break;
+			case NFMonitorType::PropertyEvent:
+			{
+				//arg: class name
+				ImGui::Text("ClassName");
+				ImGui::SameLine();
+
+				std::string className = pBluePrintView->arg.String(NFMonitorObjectEventArgType::ClassName);
+				if (className.empty())
+				{
+					className = "your class name";
+				}
+
+				if (ImGui::Button(className.c_str()))
+				{
+					ImGui::OpenPopup("my_select_class_name_group");
+				}
+
+				if (ImGui::BeginPopup("my_select_class_name_group"))
+				{
+					ImGui::Separator();
+
+					auto classObject = m_pClassModule->First();
+					while (classObject)
+					{
+						if (ImGui::Selectable(classObject->GetClassName().c_str(), false))
+						{
+							pBluePrintView->arg.SetString(NFMonitorObjectEventArgType::ClassName, classObject->GetClassName());
+						}
+
+						classObject = m_pClassModule->Next();
+					}
+
+					ImGui::EndPopup();
+				}
+
+				std::string propertyName = pBluePrintView->arg.String(NFMonitorPropertyEventArgType::PropertyName);
+				if (propertyName.empty())
+				{
+					propertyName = "your property name";
+				}
+				ImGui::Text("PropertyName");
+				ImGui::SameLine();
+				if (ImGui::Button(propertyName.c_str()))
+				{
+					ImGui::OpenPopup("my_select_property_name_group");
+				}
+
+				if (ImGui::BeginPopup("my_select_property_name_group"))
+				{
+					ImGui::Separator();
+
+					const std::string& className = pBluePrintView->arg.String(NFMonitorPropertyEventArgType::ClassName);
+					auto classObject = m_pClassModule->GetElement(className);
+					if (classObject)
+					{
+						auto propertyObject = classObject->GetPropertyManager()->First();
+						while (propertyObject)
+						{
+							if (ImGui::Selectable(propertyObject->GetKey().c_str(), false))
+							{
+								pBluePrintView->arg.SetString(NFMonitorPropertyEventArgType::PropertyName, propertyObject->GetKey());
+							}
+
+							propertyObject = classObject->GetPropertyManager()->Next();
+						}
+					}
+
+					ImGui::EndPopup();
+				}
+			}
+			break;
+			case NFMonitorType::RecordEvent:
+			{
+				//sub type
+
+				ImGui::Text("RecordEventSubType");
+				ImGui::SameLine();
+				NFMonitorRecordEventType subType(pBluePrintView->subType);
+				if (ImGui::Button(subType.toString().c_str()))
+				{
+					ImGui::OpenPopup("my_select_sub_type_group");
+				}
+
+				if (ImGui::BeginPopup("my_select_sub_type_group"))
+				{
+					ImGui::Separator();
+					for (auto x : NFMonitorRecordEventType::allValues())
+					{
+						if (ImGui::Selectable(x.toString().c_str(), false))
+						{
+							pBluePrintView->subType = x;
+						}
+					}
+
+					ImGui::EndPopup();
+				}
+
+				//arg: recordName
+				ImGui::Text("RecordName");
+				ImGui::SameLine();
+				std::string recordName = pBluePrintView->arg.String(0);
+				if (recordName.empty())
+				{
+					recordName = "input your record name";
+				}
+				if (ImGui::Button(recordName.c_str()))
+				{
+					ImGui::OpenPopup("my_select_arg_group");
+				}
+
+				if (ImGui::BeginPopup("my_select_arg_group"))
+				{
+					ImGui::Separator();
+
+
+					ImGui::EndPopup();
+				}
+			}
+			break;
+
+			case NFMonitorType::HeartBeatEvent:
+				//sub type
+				break;
+			case NFMonitorType::SceneEvent:
+				//sub type
+				break;
+			case NFMonitorType::ItemEvent:
+				//sub type
+				break;
+			case NFMonitorType::BuffEvent:
+				//sub type
+				break;
+
+			default:
+				break;
+			}
+		}
+	}
+}
+
+void NFHierachyView::BluePrintViewSubRenderForJudgement()
+{
+	NF_SHARE_PTR<NFBluePrintView> pBluePrintView = std::dynamic_pointer_cast<NFBluePrintView>(m_pUIModule->GetView(NFViewType::BluePrintView));
+	NFGUID objectID = pBluePrintView->GetCurrentObjectID();
+	if (!objectID.IsNull())
+	{
+		auto blueprintNode = m_pBluePrintModule->FindBaseNode(objectID);
+		if (blueprintNode)
+		{
+		}
+	}
+}
+
+void NFHierachyView::BluePrintViewSubRenderForExecuter()
+{
+	NF_SHARE_PTR<NFBluePrintView> pBluePrintView = std::dynamic_pointer_cast<NFBluePrintView>(m_pUIModule->GetView(NFViewType::BluePrintView));
+	NFGUID objectID = pBluePrintView->GetCurrentObjectID();
+	if (!objectID.IsNull())
+	{
+		auto blueprintNode = m_pBluePrintModule->FindBaseNode(objectID);
+		if (blueprintNode)
+		{
+		}
+	}
+}
+
+void NFHierachyView::InitBluePrintMonitorArgs(NF_SHARE_PTR<NFMonitor> monitor)
+{
+	monitor->arg.Clear();
+
+	switch (monitor->operatorType)
+	{
+	case NFMonitorType::NetworkEvent:
+		break;
+	case NFMonitorType::NetworkMsgEvent:
+		break;
+	case NFMonitorType::ObjectEvent:
+	{
+		for (auto it : NFMonitorObjectEventArgType::allValues())
+		{
+			monitor->arg.AddString("");
+		}
+	}
+	break;
+	case NFMonitorType::PropertyEvent:
+	{
+		for (auto it : NFMonitorPropertyEventArgType::allValues())
+		{
+			monitor->arg.AddString("");
+		}
+	}
+	break;
+	case NFMonitorType::RecordEvent:
+	{
+	}
+	break;
+
+	case NFMonitorType::HeartBeatEvent:
+		break;
+	case NFMonitorType::SceneEvent:
+		break;
+	case NFMonitorType::ItemEvent:
+		break;
+	case NFMonitorType::BuffEvent:
+		break;
+
+	default:
+		break;
+	}
+}
+
+void NFHierachyView::InitBluePrintJudgementArgs(NF_SHARE_PTR<NFJudgement> judgement)
+{
+
+}
+
+void NFHierachyView::InitBluePrintExecuterArgs(NF_SHARE_PTR<NFExecuter> executer)
+{
+
 }

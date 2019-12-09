@@ -29,6 +29,7 @@
 
 #include <functional>
 #include <list>
+#include <vector>
 #include "NFPlatform.h"
 
 class NFIPlugin;

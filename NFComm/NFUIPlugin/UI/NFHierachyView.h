@@ -28,6 +28,8 @@
 #include "NFComm/NFPluginModule/NFIUIModule.h"
 #include "NFComm/NFPluginModule/NFIKernelModule.h"
 #include "NFComm/NFPluginModule/NFIBluePrintModule.h"
+#include "NFComm/NFPluginModule/NFIClassModule.h"
+#include "NFComm/NFPluginModule/NFIElementModule.h"
 
 class NFHierachyView : public NFIView
 {
@@ -43,9 +45,19 @@ private:
    void ProjectViewSubRender();
    void BluePrintViewSubRender();
 
+   void BluePrintViewSubRenderForMonitor();
+   void BluePrintViewSubRenderForJudgement();
+   void BluePrintViewSubRenderForExecuter();
+
+   void InitBluePrintMonitorArgs(NF_SHARE_PTR<NFMonitor> monitor);
+   void InitBluePrintJudgementArgs(NF_SHARE_PTR<NFJudgement> judgement);
+   void InitBluePrintExecuterArgs(NF_SHARE_PTR<NFExecuter> executer);
+
 private:
-   NFIKernelModule* m_pKernelModule;
-   NFIBluePrintModule* m_pBluePrintModule;
+	NFIClassModule* m_pClassModule;
+	NFIElementModule* m_pElementModule;
+	NFIKernelModule* m_pKernelModule;
+	NFIBluePrintModule* m_pBluePrintModule;
 
 };
 

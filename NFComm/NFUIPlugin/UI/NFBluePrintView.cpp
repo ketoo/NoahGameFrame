@@ -200,7 +200,7 @@ NFTreeView* NFBluePrintView::GetTreeView()
 
 NFNodeView* NFBluePrintView::GetNodeView()
 {
-	m_pNodeView;
+	return m_pNodeView;
 }
 
 void NFBluePrintView::SubRender()

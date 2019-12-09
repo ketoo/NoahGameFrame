@@ -50,6 +50,15 @@ NF_SMART_ENUM(NFMonitorType,
 	BuffEvent,
 )
 
+NF_SMART_ENUM(NFMonitorObjectEventArgType,
+	ClassName,
+	)
+
+NF_SMART_ENUM(NFMonitorPropertyEventArgType,
+	ClassName,
+	PropertyName,
+)
+
 //ObjectEvent
 NF_SMART_ENUM(NFMonitorObjectEventType,
 	COE_CREATE_NODATA,
