@@ -144,11 +144,13 @@ void NFHierachyView::BluePrintViewSubRender()
          ImGui::SameLine();
          ImGui::Text(blueprintNode->blueprintType.toString().c_str());
 
-			ImGui::Separator();
-
          ImGui::BeginGroup();
 
-         if (blueprintNode->blueprintType == NFBlueprintType::MONITOR)
+         if (blueprintNode->blueprintType == NFBlueprintType::LOGICBLOCK)
+         {
+            BluePrintViewSubRenderForLogicBlock();
+         }
+         else if (blueprintNode->blueprintType == NFBlueprintType::MONITOR)
          {
 			   BluePrintViewSubRenderForMonitor();
          }
@@ -163,6 +165,16 @@ void NFHierachyView::BluePrintViewSubRender()
 
          ImGui::EndGroup();
       }
+   }
+}
+
+void NFHierachyView::BluePrintViewSubRenderForLogicBlock()
+{
+	ImGui::Separator();
+   if (ImGui::Button("+ Monitor"))
+   {
+      NF_SHARE_PTR<NFBluePrintView> blueprintView = std::dynamic_pointer_cast<NFBluePrintView>(m_pUIModule->GetView(NFViewType::BluePrintView));
+      blueprintView->TryToCreateMonitor();
    }
 }
 
@@ -511,25 +523,58 @@ void NFHierachyView::BluePrintViewSubRenderForJudgementHead(NF_SHARE_PTR<NFJudge
 
 void NFHierachyView::BluePrintViewSubRenderForJudgementBody(NF_SHARE_PTR<NFJudgement> judgement)
 {
+	ImGui::Text("Judgement Type");
+   /*
+	ImGui::SameLine();
+	if (ImGui::Button(judgement->judgementType.toString().c_str()))
+	{
+		ImGui::OpenPopup("my_select_group");
+	}
 
+	if (ImGui::BeginPopup("my_select_group"))
+	{
+		ImGui::Separator();
+		for (auto x : NFComparatorType::allValues())
+		{
+			if (ImGui::Selectable(x.toString().c_str(), false))
+			{
+				judgement->judgementType = x;
+			}
+		}
+
+		ImGui::EndPopup();
+	}
+   */
+   ///////////////////////////////////
+   ImGui::BeginGroup();
+   for (int i = 0; i < judgement->comparators.size(); ++i)
+   {
+      auto comparator = judgement->comparators[i];
+
+      
+		ImGui::Text("comparator");
+
+   }
+
+   ImGui::EndGroup();
+    ///////////////////////////////////
 }
 
 void NFHierachyView::BluePrintViewSubRenderForJudgementBot(NF_SHARE_PTR<NFJudgement> judgement)
 {
 	ImGui::Separator();
+   if (ImGui::Button("+ Comparator"))
+   {
+      NF_SHARE_PTR<NFBluePrintView> blueprintView = std::dynamic_pointer_cast<NFBluePrintView>(m_pUIModule->GetView(NFViewType::BluePrintView));
+      blueprintView->TryToCreateComparator();
+   }
+/*
    if (ImGui::Button("+ Accessor"))
    {
       NF_SHARE_PTR<NFBluePrintView> blueprintView = std::dynamic_pointer_cast<NFBluePrintView>(m_pUIModule->GetView(NFViewType::BluePrintView));
-      blueprintView->TryToCreateMonitor();
+      blueprintView->TryToCreateAccessor();
    }
-
-   ImGui::SameLine();
-
-   if (ImGui::Button("+ Modifier"))
-   {
-      NF_SHARE_PTR<NFBluePrintView> blueprintView = std::dynamic_pointer_cast<NFBluePrintView>(m_pUIModule->GetView(NFViewType::BluePrintView));
-      blueprintView->TryToCreateJudgement();
-   }
+*/
 }
 
 

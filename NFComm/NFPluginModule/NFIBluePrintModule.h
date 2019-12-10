@@ -146,7 +146,17 @@ NF_SMART_ENUM(NFOperatorType,
 	UseItem
 )
 
-NF_SMART_ENUM(NFJudgementType,
+NF_SMART_ENUM(NFJudgementCondition,
+	NONE,
+	Equal,
+	EnEqual,
+	MoreThen,
+	LessThan,
+	ExistElement,
+	ExistObject,
+	)
+
+NF_SMART_ENUM(NFComparatorType,
 	NONE,
 	Equal,
 	EnEqual,
@@ -163,6 +173,8 @@ protected:
 
 public:
 	virtual ~NFBluePrintNodeBase(){}
+
+	virtual NF_SHARE_PTR<NFBluePrintNodeBase> FindBaseNode(const NFGUID& id) = 0;
 
 	bool enable = true;
 	NFGUID logicBlockId;
@@ -196,7 +208,7 @@ public:
 		blueprintType = NFBlueprintType::EXECUTER;
 	}
 	
-	NF_SHARE_PTR<NFBluePrintNodeBase> FindBaseNode(const NFGUID& id);
+	virtual NF_SHARE_PTR<NFBluePrintNodeBase> FindBaseNode(const NFGUID& id);
 
 
 	//modifier
@@ -207,6 +219,23 @@ public:
 	//a executer could has a executer or a judgement
 	NF_SHARE_PTR<NFExecuter> nextExecuter;
 	std::list<NF_SHARE_PTR<NFJudgement>> judgements;
+};
+
+class NFComparator
+{
+public:
+
+	//NFComparator is to campare the left variable and right variable
+	class NFComparatorVariable
+	{
+		//VariableType variableType; //maybe the designer input the value, maybe come from accessor
+		//NFAccessor
+	};
+
+	bool And = true;//false is or
+	NFComparatorType compareType; // a > 0  ==> leftVariable > rightVariable
+	NFComparatorVariable leftVariable;
+	NFComparatorVariable rightVariable;
 };
 
 class NFJudgement : public NFBluePrintNodeBase
@@ -225,15 +254,16 @@ public:
 		blueprintType = NFBlueprintType::JUDGEMENT;
 	}
 
-	NF_SHARE_PTR<NFBluePrintNodeBase> FindBaseNode(const NFGUID& id);
+	virtual NF_SHARE_PTR<NFBluePrintNodeBase> FindBaseNode(const NFGUID& id);
 
 	std::string arg;
 
-	NFJudgementType judgementType = NFJudgementType::NONE;
-	//if this judgment has next judgment, then do next judgment first
-	NF_SHARE_PTR<NFExecuter> nextExecuter;
-	std::list<NF_SHARE_PTR<NFJudgement>> judgements;
-};
+	//true node and false node, maybe a executer, maybe a judgement
+	NF_SHARE_PTR<NFBluePrintNodeBase> trueBlueprintNode;
+	NF_SHARE_PTR<NFBluePrintNodeBase> falseBlueprintNode;
+
+	std::vector<NF_SHARE_PTR<NFComparator>> comparators;
+ };
 
 class NFMonitor : public NFBluePrintNodeBase
 {
@@ -250,7 +280,7 @@ public:
 		blueprintType = NFBlueprintType::MONITOR;
 	}
 
-	NF_SHARE_PTR<NFBluePrintNodeBase> FindBaseNode(const NFGUID& id);
+	virtual NF_SHARE_PTR<NFBluePrintNodeBase> FindBaseNode(const NFGUID& id);
 
 public:
 	NFDataList arg;
@@ -277,7 +307,7 @@ public:
 		this->blueprintType = NFBlueprintType::LOGICBLOCK;
 	}
 
-	NF_SHARE_PTR<NFBluePrintNodeBase> FindBaseNode(const NFGUID& id);
+	virtual NF_SHARE_PTR<NFBluePrintNodeBase> FindBaseNode(const NFGUID& id);
 
 	std::list<NF_SHARE_PTR<NFMonitor>> monitors;
 };
@@ -298,9 +328,11 @@ public:
 
 	virtual NF_SHARE_PTR<NFMonitor> AddMonitorForLogicBlock(const NFGUID& logicBlockId, const NFGUID& id, const std::string& name) = 0;
 	virtual NF_SHARE_PTR<NFJudgement> AddJudgementForMonitor(const NFGUID& monitorId, const NFGUID& id, const std::string& name) = 0;
-	virtual NF_SHARE_PTR<NFJudgement> AddJudgementForJudgement(const NFGUID& judgementId, const NFGUID& id, const std::string& name) = 0;
+	virtual NF_SHARE_PTR<NFJudgement> AddTrueJudgementForJudgement(const NFGUID& judgementId, const NFGUID& id, const std::string& name) = 0;
+	virtual NF_SHARE_PTR<NFJudgement> AddFalseJudgementForJudgement(const NFGUID& judgementId, const NFGUID& id, const std::string& name) = 0;
 	virtual NF_SHARE_PTR<NFJudgement> AddJudgementForExecuter(const NFGUID& executerId, const NFGUID& id, const std::string& name) = 0;
-	virtual NF_SHARE_PTR<NFExecuter> AddExecuterForJudgement(const NFGUID& judgementId, const NFGUID& id, const std::string& name) = 0;
+	virtual NF_SHARE_PTR<NFExecuter> AddTrueExecuterForJudgement(const NFGUID& judgementId, const NFGUID& id, const std::string& name) = 0;
+	virtual NF_SHARE_PTR<NFExecuter> AddFalseExecuterForJudgement(const NFGUID& judgementId, const NFGUID& id, const std::string& name) = 0;
 	virtual NF_SHARE_PTR<NFExecuter> AddExecuterForExecuter(const NFGUID& executerId, const NFGUID& id, const std::string& name) = 0;
 
 	virtual bool DeleteMonitor(const NFGUID& id) = 0;

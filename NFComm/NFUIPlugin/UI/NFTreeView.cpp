@@ -254,7 +254,8 @@ void NFTreeView::DeleteTreeLeafNode(const NFGUID leafId)
 
 bool NFTreeView::Execute()
 {
-	if (ImGui::TreeNode(name.c_str()))
+	ImGuiTreeNodeFlags node_flags = ImGuiTreeNodeFlags_DefaultOpen;
+	if (ImGui::TreeNodeEx(name.c_str(), node_flags))
 	{
 		for (auto it : mTrees)
 		{

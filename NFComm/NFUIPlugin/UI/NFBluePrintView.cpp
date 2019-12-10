@@ -134,6 +134,8 @@ bool NFBluePrintView::Execute()
    CreateJudgment();
    CreateExecuter();
 
+   CreateComparator();
+
    if (ImGui::IsWindowFocused())
    {
       NF_SHARE_PTR<NFIView> pView = m_pUIModule->GetView(NFViewType::HierachyView);
@@ -172,14 +174,28 @@ void AddJudgementNode(NFTreeView* pTreeView, const NFGUID& parentID, NF_SHARE_PT
 {
 	pTreeView->AddSubTreeNode(parentID, judgement->id, judgement->name);
 
-	for (auto it : judgement->judgements)
+	if (judgement->trueBlueprintNode)
 	{
-		AddJudgementNode(pTreeView, judgement->id, it);
+		if (judgement->trueBlueprintNode->blueprintType == NFBlueprintType::JUDGEMENT)
+		{
+			AddJudgementNode(pTreeView, judgement->id, std::dynamic_pointer_cast<NFJudgement>(judgement->trueBlueprintNode));
+		}
+		else if (judgement->trueBlueprintNode->blueprintType == NFBlueprintType::EXECUTER)
+		{
+			AddExecuterNode(pTreeView, judgement->id, std::dynamic_pointer_cast<NFExecuter>(judgement->trueBlueprintNode));
+		}
 	}
 
-	if (judgement->nextExecuter)
+	if (judgement->falseBlueprintNode)
 	{
-		AddExecuterNode(pTreeView, judgement->id, judgement->nextExecuter);
+		if (judgement->falseBlueprintNode->blueprintType == NFBlueprintType::JUDGEMENT)
+		{
+			AddJudgementNode(pTreeView, judgement->id, std::dynamic_pointer_cast<NFJudgement>(judgement->falseBlueprintNode));
+		}
+		else if (judgement->falseBlueprintNode->blueprintType == NFBlueprintType::EXECUTER)
+		{
+			AddExecuterNode(pTreeView, judgement->id, std::dynamic_pointer_cast<NFExecuter>(judgement->falseBlueprintNode));
+		}
 	}
 }
 
@@ -205,50 +221,7 @@ NFNodeView* NFBluePrintView::GetNodeView()
 
 void NFBluePrintView::SubRender()
 {
-	
-   if (ImGui::TreeNode("Advanced, with Selectable nodes"))
-   {
-	   static int node_clicked = -1;                // Temporary storage of what node we have clicked to process selection at the end of the loop. May be a pointer to your own node type, etc.
-	   for (int i = 0; i < 6; i++)
-	   {
-		   // Disable the default open on single-click behavior and pass in Selected flag according to our selection state.
-		   ImGuiTreeNodeFlags node_flags = 0;
-		   const bool is_selected = node_clicked == i;
-		   if (is_selected)
-			   node_flags |= ImGuiTreeNodeFlags_Selected;
-            
-		   if (i < 3)
-		   {
-			   // Items 0..2 are Tree Node
-			   bool node_open = ImGui::TreeNodeEx((void*)(intptr_t)i, node_flags, "Selectable Node %d", i);
-			   if (ImGui::IsItemClicked())
-			   {
-				   node_clicked = i;
-			   }
-
-			   if (node_open)
-			   {
-				   ImGui::BulletText("Blah blah\nBlah Blah");
-				   ImGui::TreePop();
-			   }
-		   }
-		   else
-		   {
-			   // Items 3..5 are Tree Leaves
-			   // The only reason we use TreeNode at all is to allow selection of the leaf.
-			   // Otherwise we can use BulletText() or advance the cursor by GetTreeNodeToLabelSpacing() and call Text().
-			   node_flags |= ImGuiTreeNodeFlags_Leaf | ImGuiTreeNodeFlags_NoTreePushOnOpen; // ImGuiTreeNodeFlags_Bullet
-			   ImGui::TreeNodeEx((void*)(intptr_t)i, node_flags, "Selectable Leaf %d", i);
-			   if (ImGui::IsItemClicked())
-				   node_clicked = i;
-		   }
-	   }
-
-	   //ImGui::GetIO().KeyCtrl)
-
-	   ImGui::TreePop();
-   }
-   
+	//ImGui::GetIO().KeyCtrl)
    m_pTreeView->Execute();
 }
 
@@ -325,19 +298,11 @@ void NFBluePrintView::TryToCreateExecuter()
 	}
 }
 
-void NFBluePrintView::TryToCreateAccessor()
+void NFBluePrintView::TryToCreateComparator()
 {
-	if (!bCreatingAccessor)
+	if (!bCreatingComparator)
 	{
-		bCreatingAccessor = true;
-	}
-}
-
-void NFBluePrintView::TryToCreateModifier()
-{
-	if (!bCreatingModifier)
-	{
-		bCreatingModifier = true;
+		bCreatingComparator = true;
 	}
 }
 
@@ -473,7 +438,7 @@ void NFBluePrintView::CreateJudgment()
 						}
 						else if (currentObject->blueprintType == NFBlueprintType::JUDGEMENT)
 						{
-							m_pBluePrintModule->AddJudgementForJudgement(mCurrentObjectID, m_pKernelModule->CreateGUID(), str0);
+							//m_pBluePrintModule->AddJudgementForJudgement(mCurrentObjectID, m_pKernelModule->CreateGUID(), str0);
 						}
 						else if (currentObject->blueprintType == NFBlueprintType::EXECUTER)
 						{
@@ -535,7 +500,7 @@ void NFBluePrintView::CreateExecuter()
 					{
 						if (currentObject->blueprintType == NFBlueprintType::JUDGEMENT)
 						{
-							m_pBluePrintModule->AddExecuterForJudgement(mCurrentObjectID, m_pKernelModule->CreateGUID(), str0);
+							//m_pBluePrintModule->AddExecuterForJudgement(mCurrentObjectID, m_pKernelModule->CreateGUID(), str0);
 						}
 						else if (currentObject->blueprintType == NFBlueprintType::EXECUTER)
 						{
@@ -561,23 +526,22 @@ void NFBluePrintView::CreateExecuter()
 	}
 }
 
-void NFBluePrintView::CreateAccessor()
+void NFBluePrintView::CreateComparator()
 {
-	if (bCreatingAccessor)
+	if (bCreatingComparator)
 	{
 		auto currentObject = m_pBluePrintModule->FindBaseNode(mCurrentObjectID);
 		if (currentObject)
 		{
-			if (currentObject->blueprintType == NFBlueprintType::JUDGEMENT
-				|| currentObject->blueprintType == NFBlueprintType::EXECUTER)
+			if (currentObject->blueprintType == NFBlueprintType::JUDGEMENT)
 			{
-				ImGui::OpenPopup("Creating Accessor");
+				ImGui::OpenPopup("Creating Comparator");
 				ImGui::SetNextWindowSize(ImVec2(230, 150));
 
-				if (ImGui::BeginPopupModal("Creating Accessor"))
+				if (ImGui::BeginPopupModal("Creating Comparator"))
 				{
-					static char str0[128] = "Hello, Accessor!";
-					ImGui::InputText("Accessor Name", str0, IM_ARRAYSIZE(str0));
+					static char str0[128] = "Hello, Comparator!";
+					ImGui::InputText("Comparator Name", str0, IM_ARRAYSIZE(str0));
 
 					ImGui::Separator();
 
@@ -587,7 +551,7 @@ void NFBluePrintView::CreateAccessor()
 
 					if (ImGui::Button("Cancel", ImVec2(100, 30)))
 					{
-						bCreatingAccessor = false;
+						bCreatingComparator = false;
 						ImGui::CloseCurrentPopup();
 					}
 
@@ -595,9 +559,12 @@ void NFBluePrintView::CreateAccessor()
 
 					if (ImGui::Button("OK", ImVec2(100, 30)))
 					{
-					
+						auto judgement = std::dynamic_pointer_cast<NFJudgement>(currentObject);
 
-						bCreatingAccessor = false;
+						auto compator = NF_SHARE_PTR<NFComparator>(NF_NEW NFComparator());
+						judgement->comparators.push_back(compator);
+
+						bCreatingComparator = false;
 						ImGui::CloseCurrentPopup();
 					}
 
@@ -606,66 +573,12 @@ void NFBluePrintView::CreateAccessor()
 			}
          else
          {
-            bCreatingAccessor = false;
+            bCreatingComparator = false;
          }
 		}
       else
       {
-         bCreatingAccessor = false;
-      }
-	}
-}
-
-void NFBluePrintView::CreateModifier()
-{
-	if (bCreatingModifier)
-	{
-		auto currentObject = m_pBluePrintModule->FindBaseNode(mCurrentObjectID);
-		if (currentObject)
-		{
-			if (currentObject->blueprintType == NFBlueprintType::EXECUTER)
-			{
-				ImGui::OpenPopup("Creating Modifier");
-				ImGui::SetNextWindowSize(ImVec2(230, 150));
-
-				if (ImGui::BeginPopupModal("Creating Modifier"))
-				{
-					static char str0[128] = "Hello, Modifier!";
-					ImGui::InputText("Modifier Name", str0, IM_ARRAYSIZE(str0));
-
-					ImGui::Separator();
-
-					ImGui::Text("All those beautiful files will be deleted.\nThis operation cannot be undone!\n\n");
-
-					ImGui::Separator();
-
-					if (ImGui::Button("Cancel", ImVec2(100, 30)))
-					{
-						bCreatingModifier = false;
-						ImGui::CloseCurrentPopup();
-					}
-
-					ImGui::SameLine();
-
-					if (ImGui::Button("OK", ImVec2(100, 30)))
-					{
-						
-
-						bCreatingModifier = false;
-						ImGui::CloseCurrentPopup();
-					}
-
-					ImGui::EndPopup();
-				}
-			}
-         else
-         {
-            bCreatingModifier = false;
-         }
-		}
-      else
-      {
-         bCreatingModifier = false;
+         bCreatingComparator = false;
       }
 	}
 }

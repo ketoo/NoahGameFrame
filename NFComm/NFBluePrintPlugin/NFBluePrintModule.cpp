@@ -59,6 +59,7 @@ NF_SHARE_PTR<NFBluePrintNodeBase> NFExecuter::FindBaseNode(const NFGUID& id)
 
 NF_SHARE_PTR<NFBluePrintNodeBase> NFJudgement::FindBaseNode(const NFGUID& id)
 {
+	/*
 	for (auto it : judgements)
 	{
 		if (it->id == id)
@@ -71,14 +72,29 @@ NF_SHARE_PTR<NFBluePrintNodeBase> NFJudgement::FindBaseNode(const NFGUID& id)
 			return baseNode;
 		}
 	}
-	if (nextExecuter)
+*/
+	if (trueBlueprintNode)
 	{
-		if (nextExecuter->id == id)
+		if (trueBlueprintNode->id == id)
 		{
-			return nextExecuter;
+			return trueBlueprintNode;
 		}
 		
-		auto baseNode = nextExecuter->FindBaseNode(id);
+		auto baseNode = trueBlueprintNode->FindBaseNode(id);
+		if (baseNode)
+		{
+			return baseNode;
+		}
+	}
+
+	if (falseBlueprintNode)
+	{
+		if (falseBlueprintNode->id == id)
+		{
+			return falseBlueprintNode;
+		}
+		
+		auto baseNode = falseBlueprintNode->FindBaseNode(id);
 		if (baseNode)
 		{
 			return baseNode;
@@ -276,7 +292,7 @@ NF_SHARE_PTR<NFJudgement> NFBluePrintModule::AddJudgementForMonitor(const NFGUID
 	return nullptr;
 }
 
-NF_SHARE_PTR<NFJudgement> NFBluePrintModule::AddJudgementForJudgement(const NFGUID& judgementId, const NFGUID& id, const std::string& name)
+NF_SHARE_PTR<NFJudgement> NFBluePrintModule::AddTrueJudgementForJudgement(const NFGUID& judgementId, const NFGUID& id, const std::string& name)
 {
 	auto baseNode = FindBaseNode(judgementId);
 	if (baseNode && baseNode->blueprintType == NFBlueprintType::JUDGEMENT)
@@ -284,7 +300,25 @@ NF_SHARE_PTR<NFJudgement> NFBluePrintModule::AddJudgementForJudgement(const NFGU
 		NF_SHARE_PTR<NFJudgement> judgement = std::dynamic_pointer_cast<NFJudgement>(baseNode);
 		
 		auto newNode = NF_SHARE_PTR<NFJudgement>(NF_NEW NFJudgement(this->pPluginManager, id, name, baseNode));
-		judgement->judgements.push_back(newNode);
+		judgement->trueBlueprintNode = newNode;
+
+		ModifyEvent(id, true);
+
+		return newNode;
+	}
+
+	return nullptr;
+}
+
+NF_SHARE_PTR<NFJudgement> NFBluePrintModule::AddFalseJudgementForJudgement(const NFGUID& judgementId, const NFGUID& id, const std::string& name)
+{
+	auto baseNode = FindBaseNode(judgementId);
+	if (baseNode && baseNode->blueprintType == NFBlueprintType::JUDGEMENT)
+	{
+		NF_SHARE_PTR<NFJudgement> judgement = std::dynamic_pointer_cast<NFJudgement>(baseNode);
+		
+		auto newNode = NF_SHARE_PTR<NFJudgement>(NF_NEW NFJudgement(this->pPluginManager, id, name, baseNode));
+		judgement->falseBlueprintNode = newNode;
 
 		ModifyEvent(id, true);
 
@@ -313,7 +347,7 @@ NF_SHARE_PTR<NFJudgement> NFBluePrintModule::AddJudgementForExecuter(const NFGUI
 }
 
 
-NF_SHARE_PTR<NFExecuter> NFBluePrintModule::AddExecuterForJudgement(const NFGUID& judgementId, const NFGUID& id, const std::string& name)
+NF_SHARE_PTR<NFExecuter> NFBluePrintModule::AddTrueExecuterForJudgement(const NFGUID& judgementId, const NFGUID& id, const std::string& name)
 {	
 	auto baseNode = FindBaseNode(judgementId);
 	if (baseNode && baseNode->blueprintType == NFBlueprintType::JUDGEMENT)
@@ -321,7 +355,25 @@ NF_SHARE_PTR<NFExecuter> NFBluePrintModule::AddExecuterForJudgement(const NFGUID
 		NF_SHARE_PTR<NFJudgement> judgement = std::dynamic_pointer_cast<NFJudgement>(baseNode);
 		
 		auto newNode = NF_SHARE_PTR<NFExecuter>(NF_NEW NFExecuter(this->pPluginManager, id, name, baseNode));
-		judgement->nextExecuter = newNode;
+		judgement->trueBlueprintNode = newNode;
+
+		ModifyEvent(id, true);
+
+		return newNode;
+	}
+
+	return nullptr;
+}
+
+NF_SHARE_PTR<NFExecuter> NFBluePrintModule::AddFalseExecuterForJudgement(const NFGUID& judgementId, const NFGUID& id, const std::string& name)
+{	
+	auto baseNode = FindBaseNode(judgementId);
+	if (baseNode && baseNode->blueprintType == NFBlueprintType::JUDGEMENT)
+	{
+		NF_SHARE_PTR<NFJudgement> judgement = std::dynamic_pointer_cast<NFJudgement>(baseNode);
+		
+		auto newNode = NF_SHARE_PTR<NFExecuter>(NF_NEW NFExecuter(this->pPluginManager, id, name, baseNode));
+		judgement->falseBlueprintNode = newNode;
 
 		ModifyEvent(id, true);
 

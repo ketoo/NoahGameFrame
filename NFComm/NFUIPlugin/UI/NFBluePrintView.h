@@ -45,8 +45,7 @@ public:
 	void TryToCreateJudgement();
 	void TryToCreateExecuter();
 
-	void TryToCreateAccessor();
-	void TryToCreateModifier();
+	void TryToCreateComparator();
 
 	NFGUID GetCurrentObjectID();
 	void SetCurrentObjectID(const NFGUID& id);
@@ -63,8 +62,7 @@ private:
 	void CreateJudgment();
 	void CreateExecuter();
 
-	void CreateAccessor();
-	void CreateModifier();
+	void CreateComparator();
    
 private:
 
@@ -76,8 +74,7 @@ private:
 	bool bCreatingJudgment = false;
 	bool bCreatingExecuter = false;
 
-	bool bCreatingAccessor = false;
-	bool bCreatingModifier = false;
+	bool bCreatingComparator = false;
 
 	NFTreeView* m_pTreeView;
 	NFNodeView* m_pNodeView;

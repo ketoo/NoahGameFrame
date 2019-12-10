@@ -45,6 +45,7 @@ private:
    void ProjectViewSubRender();
    void BluePrintViewSubRender();
 
+   void BluePrintViewSubRenderForLogicBlock();
    void BluePrintViewSubRenderForMonitor();
    void BluePrintViewSubRenderForJudgement();
    void BluePrintViewSubRenderForExecuter();
