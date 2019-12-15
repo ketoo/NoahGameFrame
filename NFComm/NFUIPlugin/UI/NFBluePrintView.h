@@ -26,11 +26,63 @@
 #define NF_BLUE_PRINT_VIEW_H
 
 #include "NFComm/NFPluginModule/NFIUIModule.h"
+#include "NFComm/NFPluginModule/NFIBluePrintModule.h"
+#include "NFNodeView.h"
+#include "NFTreeView.h"
 
 class NFBluePrintView : public NFIView
 {
 public:
 	NFBluePrintView(NFIPluginManager* p, NFViewType vt);
+	virtual ~NFBluePrintView();
+
+	virtual bool Execute();
+
+   	virtual void SubRender();
+
+	void TryToCreateBluePrintBlock();
+	void TryToCreateMonitor();
+	void TryToCreateJudgement();
+	void TryToCreateExecuter();
+
+	void TryToCreateComparator();
+
+	NFGUID GetCurrentObjectID();
+	void SetCurrentObjectID(const NFGUID& id);
+
+	NFTreeView* GetTreeView();
+	NFNodeView* GetNodeView();
+	
+private:
+	void HandlerSelected(const NFGUID& id);
+    void ModifyEvent(const NFGUID& id, const bool create);
+
+	void CreateLogicBlockWindow();
+	void CreateMonitor();
+	void CreateJudgment();
+	void CreateExecuter();
+
+	void CreateComparator();
+   
+private:
+
+	NFGUID mCurrentObjectID;
+
+private:
+	bool bCreatingLogicBlock = false;
+	bool bCreatingMonitor = false;
+	bool bCreatingJudgment = false;
+	bool bCreatingExecuter = false;
+
+	bool bCreatingComparator = false;
+
+	NFTreeView* m_pTreeView;
+	NFNodeView* m_pNodeView;
+
+private:
+	NFIBluePrintModule* m_pBluePrintModule;
+	NFIUIModule* m_pUIModule;
+	NFIKernelModule* m_pKernelModule;
 };
 
 #endif

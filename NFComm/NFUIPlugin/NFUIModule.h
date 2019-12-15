@@ -31,98 +31,25 @@
 #include "NFComm/NFPluginModule/NFIClassModule.h"
 #include "NFComm/NFPluginModule/NFIUIModule.h"
 
-/*
+#define IMGUI_IMPL_OPENGL_LOADER_GL3W
+#include "imgui/imgui.h"
+#include "imgui/imgui_impl_sdl.h"
+#include "imgui/imgui_impl_opengl3.h"
+#include <stdio.h>
+#include <SDL.h>
 
+#if defined(IMGUI_IMPL_OPENGL_LOADER_GL3W)
+#include <GL/gl3w.h>    // Initialize with gl3wInit()
+#elif defined(IMGUI_IMPL_OPENGL_LOADER_GLEW)
+#include <GL/glew.h>    // Initialize with glewInit()
+#elif defined(IMGUI_IMPL_OPENGL_LOADER_GLAD)
+#include <glad/glad.h>  // Initialize with gladLoadGL()
+#else
+#include IMGUI_IMPL_OPENGL_LOADER_CUSTOM
+#endif
 
-class NFSceneView : public NFIView
-{
-public:
-    NFSceneView(NFViewType vt)
-    :NFIView(vt)
-    {
-        
-    }
-};
+#include "imgui/imnodes.h"
 
-class NFHierachyView : public NFIView
-{
-public:
-    NFHierachyView(NFViewType vt)
-    :NFIView(vt)
-    {
-        
-    }
-};
-
-class NFConsoleView : public NFIView
-{
-public:
-    NFConsoleView(NFViewType vt)
-    :NFIView(vt)
-    {
-        
-    }
-};
-
-class NFProfileView : public NFIView
-{
-public:
-    NFProfileView(NFViewType vt)
-    :NFIView(vt)
-    {
-        
-    }
-};
-
-class NFInspectorView : public NFIView
-{
-public:
-    NFInspectorView(NFViewType vt)
-    :NFIView(vt)
-    {
-        
-    }
-
-private:
-    NFIView* mPropsView;
-    NFIView* mRecordsView;
-};
-
-class NFBluePrintView : public NFIView
-{
-public:
-    NFBluePrintView(NFViewType vt)
-    :NFIView(vt)
-    {
-        
-    }
-};
-
-class NFProjectView : public NFIView
-{
-public:
-    NFProjectView(NFViewType vt)
-    :NFIView(vt)
-    {
-        
-    }
-
-    private:
-        NFIView* mFolderView;
-        NFIView* mFilesView;
-};
-
-class NFGameView : public NFIView
-{
-public:
-    NFGameView(NFViewType vt)
-    :NFIView(vt)
-    {
-        
-    }
-};
-
-*/
 class NFUIModule
     : public NFIUIModule
 {
@@ -145,10 +72,33 @@ public:
     virtual bool Finalize();
     virtual bool OnReloadPlugin();
 
+	virtual NF_SHARE_PTR<NFIView> GetView(NFViewType viewType);
+
+	virtual const std::vector<NF_SHARE_PTR<NFIView>>& GetViews();
+
+
+ 
+
+protected:
+	int SetupGUI();
+	void SetupColour(ImGuiIO& io);
+	void CloseGUI();
+
+	void ExecuteBegin(NF_SHARE_PTR<NFIView> view);
+	void ExecuteEnd(NF_SHARE_PTR<NFIView> view);
+private:
+
+	// Our state
+	//bool show_demo_window = true;
+	//bool show_another_window = false;
+	ImVec4 clear_color = ImVec4(0.45f, 0.55f, 0.60f, 1.00f);
+	SDL_Window* window;
+	bool done = false;
+	bool running = false;
+	SDL_GLContext gl_context;
 
 private:
-    std::list<NF_SHARE_PTR<NFIView>> mViewList;
+    std::vector<NF_SHARE_PTR<NFIView>> mViewList;
 };
-
 
 #endif

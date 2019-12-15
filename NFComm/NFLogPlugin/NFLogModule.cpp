@@ -61,6 +61,27 @@ void NFLogModule::rolloutHandler(const char* filename, std::size_t size)
     }
 }
 
+std::string NFLogModule::GetConfigPath(const std::string & fileName)
+{
+	std::string strAppLogName;
+#if NF_PLATFORM == NF_PLATFORM_WIN
+#ifdef NF_DEBUG_MODE
+	strAppLogName = pPluginManager->GetConfigPath() + "NFDataCfg/Debug/logconfig/" + fileName + "_win.conf";
+#else
+	strAppLogName = pPluginManager->GetConfigPath() + "NFDataCfg/Release/logconfig/" + fileName + "_win.conf";
+#endif
+
+#else
+#ifdef NF_DEBUG_MODE
+	strAppLogName = pPluginManager->GetConfigPath() + "NFDataCfg/Debug/logconfig/" + fileName + ".conf";
+#else
+	strAppLogName = pPluginManager->GetConfigPath() + "NFDataCfg/Release/logconfig/" + fileName + ".conf";
+#endif
+#endif
+
+	return strAppLogName;
+}
+
 NFLogModule::NFLogModule(NFIPluginManager* p)
 {
     pPluginManager = p;
@@ -79,25 +100,17 @@ bool NFLogModule::Awake()
 		strLogConfigName = pPluginManager->GetAppName();
 	}
 
-	string strAppLogName = "";
-#if NF_PLATFORM == NF_PLATFORM_WIN
-#ifdef NF_DEBUG_MODE
-	strAppLogName = pPluginManager->GetConfigPath() + "NFDataCfg/Debug/logconfig/" + strLogConfigName + "_win.conf";
-#else
-	strAppLogName = pPluginManager->GetConfigPath() + "NFDataCfg/Release/logconfig/" + strLogConfigName + "_win.conf";
-#endif
-
-#else
-#ifdef NF_DEBUG_MODE
-	strAppLogName = pPluginManager->GetConfigPath() + "NFDataCfg/Debug/logconfig/" + strLogConfigName + ".conf";
-#else
-	strAppLogName = pPluginManager->GetConfigPath() + "NFDataCfg/Release/logconfig/" + strLogConfigName + ".conf";
-#endif
-#endif
+	string strAppLogName = GetConfigPath(strLogConfigName);
 
 	el::Configurations conf(strAppLogName);
 
 	el::Configuration* pConfiguration = conf.get(el::Level::Debug, el::ConfigurationType::Filename);
+	if (pConfiguration == nullptr)
+	{
+		conf = el::Configurations(GetConfigPath("Default"));
+		pConfiguration = conf.get(el::Level::Debug, el::ConfigurationType::Filename);
+	}
+
 	const std::string& strFileName = pConfiguration->value();
 	pConfiguration->setValue(pPluginManager->GetConfigPath() + strFileName);
 
@@ -151,43 +164,56 @@ bool NFLogModule::Log(const NF_LOG_LEVEL nll, const char* format, ...)
     vsnprintf(szBuffer, sizeof(szBuffer) - 1, format, args);
     va_end(args);
 
+    mstrLocalStream.clear();
+
+    mstrLocalStream.append(std::to_string(mnLogCountTotal));
+    mstrLocalStream.append(" | ");
+    mstrLocalStream.append(std::to_string(pPluginManager->GetAppID()));
+    mstrLocalStream.append(" | ");
+    mstrLocalStream.append(szBuffer);
+
+    if (mLogHooker)
+    {
+        mLogHooker.get()->operator()(nll, mstrLocalStream);
+    }
+
     switch (nll)
     {
         case NFILogModule::NLL_DEBUG_NORMAL:
 			{
 				std::cout << termcolor::green;
-				LOG(DEBUG) << mnLogCountTotal << " | " << pPluginManager->GetAppID()<< " | " << szBuffer;
+				LOG(DEBUG) << mstrLocalStream;
 			}
 			break;
         case NFILogModule::NLL_INFO_NORMAL:
 			{
 				std::cout << termcolor::green;
-				LOG(INFO) << mnLogCountTotal << " | " << pPluginManager->GetAppID() << " | " << szBuffer;
+				LOG(INFO) << mstrLocalStream;
 			}	
 			break;
         case NFILogModule::NLL_WARING_NORMAL:
 			{
 				std::cout << termcolor::yellow;
-				LOG(WARNING) << mnLogCountTotal << " | " << pPluginManager->GetAppID() << " | " << szBuffer;
+				LOG(WARNING) << mstrLocalStream;
 			}
 			break;
         case NFILogModule::NLL_ERROR_NORMAL:
 			{
 				std::cout << termcolor::red;
-				LOG(ERROR) << mnLogCountTotal << " | " << pPluginManager->GetAppID() << " | " << szBuffer;
+				LOG(ERROR) << mstrLocalStream;
 				//LogStack();
 			}
 			break;
         case NFILogModule::NLL_FATAL_NORMAL:
 			{
 				std::cout << termcolor::red;
-				LOG(FATAL) << mnLogCountTotal << " | " << pPluginManager->GetAppID() << " | " << szBuffer;
+				LOG(FATAL) << mstrLocalStream;
 			}
 			break;
         default:
 			{
 				std::cout << termcolor::green;
-				LOG(INFO) << mnLogCountTotal << " | " << pPluginManager->GetAppID() << " | " << szBuffer;
+				LOG(INFO) << mstrLocalStream;
 			}
 			break;
     }
@@ -302,7 +328,7 @@ void NFLogModule::LogStack()
 	{
 		//printf("%s\n", stacktrace[i]);
         
-		LOG(FATAL) << stacktrace[i];
+        Log(NLL_FATAL_NORMAL, "%s", stacktrace[i]);
 	}
 
 	free(stacktrace);
@@ -718,8 +744,9 @@ void NFLogModule::StackTrace(/*const NF_LOG_LEVEL nll = NFILogModule::NLL_FATAL_
     for (int i = 0; i < stack_num; ++i)
     {
     	//printf("%s\n", stacktrace[i]);
-    	LOG(FATAL) << stacktrace[i];
+        Log(NLL_FATAL_NORMAL, "%s", stacktrace[i]);
     }
+    
 
     free(stacktrace);
 #else
@@ -732,7 +759,8 @@ void NFLogModule::StackTrace(/*const NF_LOG_LEVEL nll = NFILogModule::NLL_FATAL_
 	SymInitialize(process, NULL, TRUE);
 	WORD frames = CaptureStackBackTrace(0, MAX_STACK_FRAMES, pStack, NULL);
  
-	LOG(FATAL) << "stack traceback: " << std::endl;
+    Log(NLL_FATAL_NORMAL, "stack traceback: ");
+	//LOG(FATAL) << "stack traceback: " << std::endl;
 	for (WORD i = 0; i < frames; ++i) {
 		DWORD64 address = (DWORD64)(pStack[i]);
  
@@ -748,12 +776,21 @@ void NFLogModule::StackTrace(/*const NF_LOG_LEVEL nll = NFILogModule::NLL_FATAL_
 		line.SizeOfStruct = sizeof(IMAGEHLP_LINE64);
  
 		if (SymFromAddr(process, address, &displacementSym, pSymbol)
-		 && SymGetLineFromAddr64(process, address, &displacementLine, &line)) {
-			LOG(FATAL) << "\t" << pSymbol->Name << " at " << line.FileName << ":" << line.LineNumber << "(0x" << std::hex << pSymbol->Address << std::dec << ")" << std::endl;
+		 && SymGetLineFromAddr64(process, address, &displacementLine, &line))
+        {
+            Log(NLL_FATAL_NORMAL, "\t %s at %s : %d (0x%16d)", pSymbol->Name, line.FileName, line.LineNumber, pSymbol->Address);
+			//LOG(FATAL) << "\t" << pSymbol->Name << " at " << line.FileName << ":" << line.LineNumber << "(0x" << std::hex << pSymbol->Address << std::dec << ")" << std::endl;
 		}
-		else {
-			LOG(FATAL) << "\terror: " << GetLastError() << std::endl;
+		else
+        {
+            Log(NLL_FATAL_NORMAL, "\terror %d", GetLastError());
+			//LOG(FATAL) << "\terror: " << GetLastError() << std::endl;
 		}
 	}
 #endif
+}
+
+void NFLogModule::SetHooker(LOG_HOOKER_FUNCTOR_PTR hooker)
+{
+    mLogHooker = hooker;
 }

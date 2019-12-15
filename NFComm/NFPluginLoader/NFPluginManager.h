@@ -32,15 +32,13 @@
 #include <thread>
 #include "NFDynLib.h"
 #include "NFCoroutineManager.h"
-#include "NFComm/NFCore/NFSingleton.hpp"
 #include "NFComm/NFPluginModule/NFIModule.h"
 #include "NFComm/NFPluginModule/NFIPluginManager.h"
 
 void CoroutineExecute(void* arg);
 
 class NFPluginManager
-    : public NFIPluginManager,
-	public NFSingleton<NFPluginManager>
+    : public NFIPluginManager
 {
 public:
     NFPluginManager();
@@ -135,6 +133,8 @@ public:
 
     virtual void YieldCo() override;
     
+	virtual void AddFileReplaceContent(const std::string& fileName, const std::string& content, const std::string& newValue);
+	virtual std::vector<NFReplaceContent> GetFileReplaceContents(const std::string& fileName);
 
 protected:
     bool LoadPluginConfig();
@@ -171,6 +171,7 @@ private:
     typedef void(* DLL_STOP_PLUGIN_FUNC)(NFIPluginManager* pm);
 
     std::vector<std::string> mStaticPlugin;
+	std::map<std::string, std::vector<NFReplaceContent>> mReplaceContent;
 
     PluginNameMap mPluginNameMap;
     PluginLibMap mPluginLibMap;

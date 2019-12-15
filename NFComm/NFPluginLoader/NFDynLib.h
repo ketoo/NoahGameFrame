@@ -65,7 +65,7 @@ public:
         mbMain = false;
         mstrName = strName;
 #ifdef NF_DEBUG_MODE
-        //mstrName.append("_d");
+        //mstrName.append("");
 #endif
 
 #if NF_PLATFORM == NF_PLATFORM_WIN

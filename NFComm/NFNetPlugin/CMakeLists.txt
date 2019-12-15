@@ -8,8 +8,9 @@ file(GLOB NFNet_ROOT_Hpp *.h)
 #list(REMOVE_ITEM NFNet_ROOT_Cpp ${RemoveItems_Cpp})
 
 add_library(NFNetPlugin STATIC ${NFNet_ROOT_Cpp} ${NFNet_ROOT_Hpp})
+
 add_definitions(-DNF_NONCLIENT_BUILD)
-set_target_properties( NFNetPlugin PROPERTIES OUTPUT_NAME_DEBUG "NFNetPlugin_d")
+set_target_properties( NFNetPlugin PROPERTIES OUTPUT_NAME_DEBUG "NFNetPlugin")
 set_target_properties( NFNetPlugin PROPERTIES PREFIX "")
 set_target_properties( NFNetPlugin PROPERTIES
 	FOLDER "NFSDK"
@@ -19,36 +20,13 @@ set_target_properties( NFNetPlugin PROPERTIES
 
 	add_dependencies(NFNetPlugin NFCore)
 	
-if (APPLE)
-	if (CMAKE_BUILD_TYPE MATCHES "Release")
-	else()
-	endif()
+if(UNIX)
 
 		target_link_libraries(NFNetPlugin NFCore)
 		target_link_libraries(NFNetPlugin libevent.a)
 		target_link_libraries(NFNetPlugin libevent_core.a)
 		target_link_libraries(NFNetPlugin libevent_extra.a)
 		#target_link_libraries(NFNetPlugin libevent_openssl.a)
-		target_link_libraries(NFNetPlugin libprotobuf.a)
-		#target_link_libraries(NFNetPlugin libssl.a)
-		#target_link_libraries(NFNetPlugin libcrypto.a)
-		target_link_libraries(NFNetPlugin NFMessageDefine)
-
-		target_link_libraries(NFNetPlugin -static-libstdc++)
-	add_definitions(
-		-D_THREAD_SAFE
-	)
-elseif(UNIX)
-	if (CMAKE_BUILD_TYPE MATCHES "Release")
-	else()
-	endif()
-
-		target_link_libraries(NFNetPlugin NFCore)
-		target_link_libraries(NFNetPlugin libevent.a)
-		target_link_libraries(NFNetPlugin libevent_core.a)
-		target_link_libraries(NFNetPlugin libevent_extra.a)
-		#target_link_libraries(NFNetPlugin libevent_openssl.a)
-		target_link_libraries(NFNetPlugin libprotobuf.a)
 		#target_link_libraries(NFNetPlugin libssl.a)
 		#target_link_libraries(NFNetPlugin libcrypto.a)
 		target_link_libraries(NFNetPlugin NFMessageDefine)
@@ -57,6 +35,7 @@ elseif(UNIX)
 		-D_THREAD_SAFE
 	)
 else()
-	target_link_libraries(NFNetPlugin  libprotobuf libevent_core)
-	add_definitions("-D_LIB -DWIN32 -DWIN")
+
+
+
 endif()

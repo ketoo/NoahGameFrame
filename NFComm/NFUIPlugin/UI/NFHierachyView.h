@@ -26,11 +26,48 @@
 #define NF_HIERACHY_VIEW_H
 
 #include "NFComm/NFPluginModule/NFIUIModule.h"
+#include "NFComm/NFPluginModule/NFIKernelModule.h"
+#include "NFComm/NFPluginModule/NFIBluePrintModule.h"
+#include "NFComm/NFPluginModule/NFIClassModule.h"
+#include "NFComm/NFPluginModule/NFIElementModule.h"
 
 class NFHierachyView : public NFIView
 {
 public:
 	NFHierachyView(NFIPluginManager* p, NFViewType vt);
+	virtual bool Execute();
+
+   virtual void SubRender();
+
+private:
+   void GodViewSubRender();
+   void GameViewSubRender();
+   void ProjectViewSubRender();
+   void BluePrintViewSubRender();
+
+   void BluePrintViewSubRenderForLogicBlock();
+   void BluePrintViewSubRenderForMonitor();
+   void BluePrintViewSubRenderForJudgement();
+   void BluePrintViewSubRenderForExecuter();
+
+   void BluePrintViewSubRenderForMonitorHead(NF_SHARE_PTR<NFMonitor> monitor);
+   void BluePrintViewSubRenderForMonitorBody(NF_SHARE_PTR<NFMonitor> monitor);
+   void BluePrintViewSubRenderForMonitorBot(NF_SHARE_PTR<NFMonitor> monitor);
+
+   void BluePrintViewSubRenderForJudgementHead(NF_SHARE_PTR<NFJudgement> judgement);
+   void BluePrintViewSubRenderForJudgementBody(NF_SHARE_PTR<NFJudgement> judgement);
+   void BluePrintViewSubRenderForJudgementBot(NF_SHARE_PTR<NFJudgement> judgement);
+
+   void InitBluePrintMonitorArgs(NF_SHARE_PTR<NFMonitor> monitor);
+   void InitBluePrintJudgementArgs(NF_SHARE_PTR<NFJudgement> judgement);
+   void InitBluePrintExecuterArgs(NF_SHARE_PTR<NFExecuter> executer);
+
+private:
+	NFIClassModule* m_pClassModule;
+	NFIElementModule* m_pElementModule;
+	NFIKernelModule* m_pKernelModule;
+	NFIBluePrintModule* m_pBluePrintModule;
+
 };
 
 #endif

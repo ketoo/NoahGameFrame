@@ -5,8 +5,11 @@
 #unzip sudo apt-get install unzip
 
 #compile dep libraries
-rm -rf ./_Out/Debug
-rm -rf ./_Out/Release
+rm -rf ./_Out/Debug/NFPluginLoader
+rm -rf ./_Out/Debug/*.a
+
+rm -rf ./_Out/Release/NFPluginLoader
+rm -rf ./_Out/Release/*.a
 
 cd NFComm/NFMessageDefine
 ./cpp.sh
@@ -32,7 +35,7 @@ cd BuildScript/linux/
 chmod -R 755 ./BuildNF.CMake.Debug.sh
 chmod -R 755 ./BuildNF.CMake.Release.sh
 time ./BuildNF.CMake.Debug.sh
-time ./BuildNF.CMake.Release.sh
+#time ./BuildNF.CMake.Release.sh
 cd ../../
 
 cd _Out/

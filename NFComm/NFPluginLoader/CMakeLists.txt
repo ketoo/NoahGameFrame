@@ -7,9 +7,8 @@ add_executable(NFPluginLoader ${NFPluginLoader_ROOT_Cpp} ${NFPluginLoader_ROOT_H
 #link_NFSDK("NFPluginLoader")
 
 
-
-target_link_libraries(NFPluginLoader libprotobuf.a)
 target_link_libraries(NFPluginLoader NFCore)
+target_link_libraries(NFPluginLoader NFMessageDefine)
 target_link_libraries(NFPluginLoader NFActorPlugin)
 target_link_libraries(NFPluginLoader NFConfigPlugin)
 target_link_libraries(NFPluginLoader NFKernelPlugin)
@@ -20,6 +19,11 @@ target_link_libraries(NFPluginLoader NFNetPlugin)
 target_link_libraries(NFPluginLoader NFNoSqlPlugin)
 target_link_libraries(NFPluginLoader NFSecurityPlugin)
 target_link_libraries(NFPluginLoader NFTestPlugin)
+
+if (APPLE)
+target_link_libraries(NFPluginLoader NFUIPlugin)
+target_link_libraries(NFPluginLoader NFBluePrintPlugin)
+endif()
 
 target_link_libraries(NFPluginLoader NFDBLogicPlugin)
 target_link_libraries(NFPluginLoader NFDBNet_ClientPlugin)
@@ -70,27 +74,24 @@ target_link_libraries(NFPluginLoader NFWorldNet_ServerPlugin)
 #target_link_libraries(NFPluginLoader Tutorial7)
 
 
-if(UNIX)
+if (UNIX)
 	add_dependencies(NFPluginLoader NFCore)
-	if (CMAKE_BUILD_TYPE MATCHES "Release")
-	else()
-	endif()
 
-	target_link_libraries(NFPluginLoader )
+	#if (CMAKE_BUILD_TYPE MATCHES "Release")
+	#	target_link_libraries(NFPluginLoader libSDL2.a)
+	#else()
+	#	target_link_libraries(NFPluginLoader libSDL2d.a)
+	#endif()
+
 	target_link_libraries(NFPluginLoader -static-libstdc++)
 
 else()
-	target_link_libraries(NFPluginLoader )
-	
-	target_link_libraries(NFPluginLoader -static-libstdc++)
+
 endif()
 
-target_link_libraries(NFPluginLoader ${CMAKE_DL_LIBS})
-target_link_libraries(NFPluginLoader pthread)
-
-set_target_properties( NFPluginLoader PROPERTIES OUTPUT_NAME_DEBUG "NFPluginLoader_d")
+set_target_properties( NFPluginLoader PROPERTIES OUTPUT_NAME_DEBUG "NFPluginLoader")
 set_target_properties( NFPluginLoader PROPERTIES
-	FOLDER "NFSDK"
+	FOLDER "NFComm"
 	ARCHIVE_OUTPUT_DIRECTORY ${NFOutPutDir}
 	RUNTIME_OUTPUT_DIRECTORY ${NFOutPutDir}
 	LIBRARY_OUTPUT_DIRECTORY ${NFOutPutDir} )

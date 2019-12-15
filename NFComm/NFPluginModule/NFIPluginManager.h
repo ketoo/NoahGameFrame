@@ -29,12 +29,14 @@
 
 #include <functional>
 #include <list>
+#include <vector>
 #include "NFPlatform.h"
 
 class NFIPlugin;
 class NFIModule;
+class NFIPluginManager;
 
-typedef std::function<bool (const std::string& strFileName, std::string& strContent)> GET_FILECONTENT_FUNCTOR;
+typedef std::function<bool (NFIPluginManager* p, const std::string& strFileName, std::string& strContent)> GET_FILECONTENT_FUNCTOR;
 typedef void (* CoroutineFunction)(void* arg);
 typedef void(*AsyncFunction)(const std::string& strData, std::string& strContent);
 
@@ -58,10 +60,20 @@ public:
     };
 };
 
+class NFReplaceContent
+{
+public:
+	NFReplaceContent(const std::string content, const std::string newValue)
+	{
+		this->content = content;
+		this->newValue = newValue;
+	}
+	std::string content;
+	std::string newValue;
+};
+
 #define FIND_MODULE(classBaseName, className)  \
 	assert((TIsDerived<classBaseName, NFIModule>::Result));
-
-
 
 class NFIPluginManager
 {
@@ -212,6 +224,9 @@ public:
 	virtual void YieldCo(const int64_t nSecond) = 0;
 	virtual void YieldCo() = 0;
 	//virtual void Async(AsyncFunction fun) = 0;
+
+	virtual void AddFileReplaceContent(const std::string& fileName, const std::string& content, const std::string& newValue) = 0;
+	virtual std::vector<NFReplaceContent> GetFileReplaceContents(const std::string& fileName) = 0;
 };
 
 #endif

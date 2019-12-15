@@ -28,7 +28,7 @@
 #ifdef NF_DEBUG_MODE
 
 #if NF_PLATFORM == NF_PLATFORM_WIN
-
+#pragma comment( lib, "SDL2d.lib" )
 #elif NF_PLATFORM == NF_PLATFORM_LINUX || NF_PLATFORM == NF_PLATFORM_ANDROID
 
 #elif NF_PLATFORM == NF_PLATFORM_APPLE || NF_PLATFORM == NF_PLATFORM_APPLE_IOS
@@ -38,7 +38,8 @@
 #else
 
 #if NF_PLATFORM == NF_PLATFORM_WIN
-
+#pragma comment( lib, "opengl32.lib" )
+#pragma comment( lib, "SDL2.lib" )
 #elif NF_PLATFORM == NF_PLATFORM_LINUX || NF_PLATFORM == NF_PLATFORM_ANDROID
 
 #elif NF_PLATFORM == NF_PLATFORM_APPLE || NF_PLATFORM == NF_PLATFORM_APPLE_IOS

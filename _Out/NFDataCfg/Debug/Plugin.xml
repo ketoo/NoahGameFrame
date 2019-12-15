@@ -8,6 +8,8 @@
 		<Plugin Name="NFGameServerNet_ClientPlugin" />
 		<Plugin Name="NFLogPlugin" />	
 		<Plugin Name="NFLuaScriptPlugin" />
+		<Plugin Name="NFUIPlugin" />
+		<Plugin Name="NFBluePrintPlugin" />
 	</GameServer>
 
 	<LoginServer>

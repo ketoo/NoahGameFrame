@@ -4,12 +4,3 @@
 [submodule "Dependencies/concurrentqueue"]
 	path = Dependencies/concurrentqueue
 	url = https://github.com/cameron314/concurrentqueue.git
-[submodule "Dependencies/protobuf"]
-	path = Dependencies/protobuf
-	url = https://github.com/protocolbuffers/protobuf.git
-[submodule "Dependencies/libevent"]
-	path = Dependencies/libevent
-	url = https://github.com/libevent/libevent.git
-[submodule "Dependencies/lua"]
-	path = Dependencies/lua
-	url = https://github.com/lua/lua.git

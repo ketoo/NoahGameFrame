@@ -11,7 +11,7 @@ if(UNIX)
 	if (CMAKE_BUILD_TYPE MATCHES "Release")
 		target_link_libraries(NFNavigationPlugin navigation NFCore)
 	else()
-		target_link_libraries(NFNavigationPlugin navigation_d NFCore)
+		target_link_libraries(NFNavigationPlugin navigation NFCore)
 	endif()
 
 
@@ -35,7 +35,7 @@ else()
 		)
 endif()
 link_NFSDK("NFNavigationPlugin")
-set_target_properties( NFNavigationPlugin PROPERTIES OUTPUT_NAME_DEBUG "NFNavigationPlugin_d")
+set_target_properties( NFNavigationPlugin PROPERTIES OUTPUT_NAME_DEBUG "NFNavigationPlugin")
 set_target_properties( NFNavigationPlugin PROPERTIES PREFIX "")
 set_target_properties( NFNavigationPlugin PROPERTIES
 	FOLDER "NFSDK"

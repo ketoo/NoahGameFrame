@@ -9,7 +9,7 @@ add_library(NFMasterServerPlugin STATIC
 	${NFMasterServerPlugin_ROOT_Cpp}
 	${NFMasterServerPlugin_ROOT_Hpp})
 	
-set_target_properties( NFMasterServerPlugin PROPERTIES OUTPUT_NAME_DEBUG "NFMasterServerPlugin_d")
+set_target_properties( NFMasterServerPlugin PROPERTIES OUTPUT_NAME_DEBUG "NFMasterServerPlugin")
 set_target_properties( NFMasterServerPlugin PROPERTIES PREFIX "")
 set_target_properties( NFMasterServerPlugin PROPERTIES 
 	FOLDER "NFServer/MasterServer"

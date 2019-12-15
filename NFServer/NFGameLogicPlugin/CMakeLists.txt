@@ -11,7 +11,7 @@ add_library(NFGameLogicPlugin STATIC
 	${NFGameLogicPlugin_ROOT_Hpp})
 
 
-set_target_properties( NFGameLogicPlugin PROPERTIES OUTPUT_NAME_DEBUG "NFGameLogicPlugin_d")
+set_target_properties( NFGameLogicPlugin PROPERTIES OUTPUT_NAME_DEBUG "NFGameLogicPlugin")
 set_target_properties( NFGameLogicPlugin PROPERTIES PREFIX "")
 set_target_properties( NFGameLogicPlugin PROPERTIES 
 	FOLDER "NFServer/GameServer"

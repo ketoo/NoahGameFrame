@@ -6,7 +6,7 @@ add_library(NFMasterNet_HttpServerPlugin STATIC
 	${NFMasterNet_HttpServerPlugin_ROOT_Cpp}
 	${NFMasterNet_HttpServerPlugin_ROOT_Hpp})
 	
-set_target_properties( NFMasterNet_HttpServerPlugin PROPERTIES OUTPUT_NAME_DEBUG "NFMasterNet_HttpServerPlugin_d")
+set_target_properties( NFMasterNet_HttpServerPlugin PROPERTIES OUTPUT_NAME_DEBUG "NFMasterNet_HttpServerPlugin")
 set_target_properties( NFMasterNet_HttpServerPlugin PROPERTIES PREFIX "")
 set_target_properties( NFMasterNet_HttpServerPlugin PROPERTIES 
 	FOLDER "NFServer/MasterServer"

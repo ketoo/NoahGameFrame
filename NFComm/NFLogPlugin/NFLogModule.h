@@ -87,6 +87,7 @@ public:
     virtual bool LogDebugFunctionDump(const NFGUID ident, const int nMsg, const std::string& strArg, const char* func = "", const int line = 0);
     virtual bool ChangeLogLevel(const std::string& strLevel);
     
+    virtual void SetHooker(LOG_HOOKER_FUNCTOR_PTR hooker);
     virtual void StackTrace();
 
 protected:
@@ -95,7 +96,11 @@ protected:
     static bool CheckLogFileExist(const char* filename);
     static void rolloutHandler(const char* filename, std::size_t size);
 
+	std::string GetConfigPath(const std::string& fileName);
+
 private:
+    std::string mstrLocalStream;
+    LOG_HOOKER_FUNCTOR_PTR mLogHooker;
     static unsigned int idx;
     uint64_t mnLogCountTotal;
 	std::list<NFPerformance> mxPerformanceList;

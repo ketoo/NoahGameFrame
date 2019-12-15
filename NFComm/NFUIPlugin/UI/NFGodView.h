@@ -26,11 +26,46 @@
 #define NF_GOD_VIEW_H
 
 #include "NFComm/NFPluginModule/NFIUIModule.h"
+#include "NFComm/NFPluginModule/NFIClassModule.h"
+#include "NFComm/NFPluginModule/NFIElementModule.h"
+#include "NFComm/NFPluginModule/NFISceneModule.h"
+#include "NFComm/NFPluginModule/NFIKernelModule.h"
+#include "NFComm/NFMessageDefine/NFMsgDefine.h"
+#include "NFNodeView.h"
+#include "NFTreeView.h"
 
 class NFGodView : public NFIView
 {
 public:
 	NFGodView(NFIPluginManager* p, NFViewType vt);
+   ~NFGodView();
+   
+	virtual bool Execute();
+
+   virtual void SubRender();
+
+   NFGUID GetCurrentObjectID();
+   void SetCurrentObjectID(const NFGUID& id);
+
+private:
+	void RenderScene(const int sceneID, const int groupID);
+	void HandlerSelected(const NFGUID& id);
+
+   void RenderSceneObjectNode(const int sceneID, const int groupID);
+
+private:
+	int mGroupID = -1;
+	int mSceneID = -1;
+	NFGUID mCurrentObjectID;
+   
+	NFNodeView* m_pNodeView;
+	NFTreeView* m_pTreeView;
+private:
+	NFIUIModule* m_pUIModule;
+	NFIClassModule* m_pClassModule;
+	NFIElementModule* m_pElementModule;
+	NFISceneModule* m_pSceneModule;
+	NFIKernelModule* m_pKernelModule;
 };
 
 #endif

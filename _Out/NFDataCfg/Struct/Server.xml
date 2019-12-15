@@ -6,7 +6,6 @@
 		<Property Id="CpuCount" Cache="0" Desc="CPU个数（机器）" Force="0" Private="0" Public="0" Ref="0" Save="0" Type="int" Upload="0" />
 		<Property Id="IP" Cache="0" Desc="IP地址" Force="0" Private="0" Public="0" Ref="0" Save="0" Type="string" Upload="0" />
 		<Property Id="MaxOnline" Cache="0" Desc="作为服务器时：服务器最大连接" Force="0" Private="0" Public="0" Ref="0" Save="0" Type="int" Upload="0" />
-		<Property Id="Name" Cache="0" Desc="服务器名字" Force="0" Private="0" Public="0" Ref="0" Save="0" Type="string" Upload="0" />
 		<Property Id="Port" Cache="0" Desc="作为服务器时：相对客户端的port" Force="0" Private="0" Public="0" Ref="0" Save="0" Type="int" Upload="0" />
 		<Property Id="ServerID" Cache="0" Desc="服务器ID" Force="0" Private="0" Public="0" Ref="0" Save="0" Type="int" Upload="0" />
 		<Property Id="Type" Cache="0" Desc="服务器类型" Force="0" Private="0" Public="0" Ref="0" Save="0" Type="int" Upload="0" />

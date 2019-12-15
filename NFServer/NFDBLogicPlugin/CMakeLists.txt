@@ -9,7 +9,7 @@ add_library(NFDBLogicPlugin STATIC
 	${NFDataAgent_NosqlPlugin_ROOT_Cpp}
 	${NFDataAgent_NosqlPlugin_ROOT_Hpp})
 	
-set_target_properties( NFDBLogicPlugin PROPERTIES OUTPUT_NAME_DEBUG "NFDBLogicPlugin_d")
+set_target_properties( NFDBLogicPlugin PROPERTIES OUTPUT_NAME_DEBUG "NFDBLogicPlugin")
 set_target_properties( NFDBLogicPlugin PROPERTIES PREFIX "")
 set_target_properties( NFDBLogicPlugin PROPERTIES 
 	FOLDER "NFServer/GameServer"

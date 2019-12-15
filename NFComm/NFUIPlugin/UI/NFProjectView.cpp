@@ -24,8 +24,16 @@
 */
 
 #include "NFProjectView.h"
+#include "NFUIModule.h"
 
-NFProjectView::NFProjectView(NFIPluginManager* p, NFViewType vt) : NFIView(p, vt)
+NFProjectView::NFProjectView(NFIPluginManager* p, NFViewType vt) : NFIView(p, vt, GET_CLASS_NAME(NFProjectView))
 {
 
+}
+
+bool NFProjectView::Execute()
+{
+	//1. the project root folder is NFDataCfg
+ 
+	return false;
 }

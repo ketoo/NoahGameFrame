@@ -338,8 +338,8 @@ bool NFKernelModule::DestroyObject(const NFGUID& self)
 			m_pSceneModule->LeaveSceneGroup(self);
 		}
 
-		DoEvent(self, strClassName, COE_BEFOREDESTROY, NFDataList());
-		DoEvent(self, strClassName, COE_DESTROY, NFDataList());
+		DoEvent(self, strClassName, COE_BEFOREDESTROY, NFDataList::Empty());
+		DoEvent(self, strClassName, COE_DESTROY, NFDataList::Empty());
 
 		RemoveElement(self);
 
@@ -1634,7 +1634,7 @@ void NFKernelModule::ProcessMemFree()
 
 	nLastTime = pPluginManager->GetNowTime();
 
-	NFMemManager::GetSingletonPtr()->FreeMem();
+	//MemManager::GetSingletonPtr()->FreeMem();
 }
 
 bool NFKernelModule::DoEvent(const NFGUID& self, const std::string& strClassName, CLASS_OBJECT_EVENT eEvent, const NFDataList& valueList)

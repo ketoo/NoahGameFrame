@@ -11,3 +11,8 @@ add_subdirectory(NFNavigationPlugin)
 add_subdirectory(NFNoSqlPlugin)
 add_subdirectory(NFTestPlugin)
 add_subdirectory(NFLuaScriptPlugin)
+
+if (APPLE)
+    add_subdirectory(NFUIPlugin)
+    add_subdirectory(NFBluePrintPlugin)
+endif()
