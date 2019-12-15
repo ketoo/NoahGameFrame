@@ -88,7 +88,7 @@ void NFHierachyView::GodViewSubRender()
       {
          ImGui::Text(pProperty->GetKey().c_str());
          ImGui::SameLine();
-         ImGui::Text(pProperty->GetString().c_str());
+         ImGui::Text(pProperty->ToString().c_str());
 
          //static char str0[128] = "Hello, world!";
          //ImGui::InputText("input text", str0, IM_ARRAYSIZE(str0));
