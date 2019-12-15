@@ -89,8 +89,7 @@ public:
 	virtual bool AddEventCallBack(const NET_EVENT_FUNCTOR_PTR& cb) = 0;
 
 	virtual bool Execute() = 0;
-
-
+    virtual bool SendMsgPB(const uint16_t nMsgID, const google::protobuf::Message& xData, const NFSOCK nSockIndex)=0;
 	virtual bool SendMsg(const std::string& msg, const NFSOCK nSockIndex, const bool text = true) = 0;
 	virtual bool SendMsgToAllClient(const std::string& msg, const bool text = true) = 0;
 

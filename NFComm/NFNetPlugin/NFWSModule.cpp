@@ -187,7 +187,61 @@ bool NFWSModule::Execute()
 
     return m_pNet->Execute();
 }
+bool NFWSModule::SendMsgPB(const uint16_t nMsgID, const google::protobuf::Message& xData, const NFSOCK nSockIndex)
+{
+	NFMsg::MsgBase xMsg;
+	if (!xData.SerializeToString(xMsg.mutable_msg_data()))
+	{
+		std::ostringstream stream;
+		stream << " SendMsgPB Message to  " << nSockIndex;
+		stream << " Failed For Serialize of MsgData, MessageID " << nMsgID;
+		m_pLogModule->LogError(stream, __FUNCTION__, __LINE__);
 
+		return false;
+	}
+	NFMsg::Ident* pPlayerID = xMsg.mutable_player_id();
+	*pPlayerID = NFINetModule::NFToPB(NFGUID());
+	std::string strMsg;
+	if (!xMsg.SerializeToString(&strMsg))
+	{
+		std::ostringstream stream;
+		stream << " SendMsgPB Message to  " << nSockIndex;
+		stream << " Failed For Serialize of MsgBase, MessageID " << nMsgID;
+		m_pLogModule->LogError(stream, __FUNCTION__, __LINE__);
+
+		return false;
+	}
+	SendMsgWithOutHead(nMsgID, strMsg.c_str(),strMsg.length(),nSockIndex);
+
+	return true;
+}
+bool NFWSModule::SendMsgWithOutHead(const int16_t nMsgID, const char* msg, const size_t nLen, const NFSOCK nSockIndex /*= 0*/)
+{
+    std::string strOutData;
+    int nAllLen = EnCode(nMsgID, msg, nLen, strOutData);
+    if (nAllLen == nLen + NFIMsgHead::NF_Head::NF_HEAD_LENGTH)
+    {
+        auto frame = EncodeFrame(strOutData.data(), strOutData.size(), false);
+        return SendRawMsg(frame, nSockIndex);
+    }
+
+    return false;
+}
+int NFWSModule::EnCode(const uint16_t unMsgID, const char* strData, const uint32_t unDataLen, std::string& strOutData)
+{
+    NFMsgHead xHead;
+    xHead.SetMsgID(unMsgID);
+    xHead.SetBodyLength(unDataLen);
+
+    char szHead[NFIMsgHead::NF_Head::NF_HEAD_LENGTH] = { 0 };
+    xHead.EnCode(szHead);
+
+    strOutData.clear();
+    strOutData.append(szHead, NFIMsgHead::NF_Head::NF_HEAD_LENGTH);
+    strOutData.append(strData, unDataLen);
+
+    return xHead.GetBodyLength() + NFIMsgHead::NF_Head::NF_HEAD_LENGTH;
+}
 bool NFWSModule::SendMsg(const std::string& msg, const NFSOCK nSockIndex, const bool text)
 {
     auto frame = EncodeFrame(msg.data(), msg.size(), text);
@@ -608,7 +662,12 @@ std::error_code NFWSModule::DecodeFrame(const NFSOCK nSockIndex,NetObject* pNetO
     // callback(data+need,reallen)
 
     int nMsgiD = static_cast<int>(fh.op);
-    OnReceiveNetPack(nSockIndex, nMsgiD, data + need, reallen);
+    const char* pbData = data+need;
+    NFMsgHead xHead;
+    int nMsgBodyLength = DeCode(pbData, reallen, xHead);
+    if (nMsgBodyLength > 0 && xHead.GetMsgID() > 0){
+        OnReceiveNetPack(nSockIndex, xHead.GetMsgID(), pbData+NFIMsgHead::NF_Head::NF_HEAD_LENGTH, nMsgBodyLength);
+    }
 
     //remove control frame
     size_t offset = need + reallen;
@@ -616,7 +675,22 @@ std::error_code NFWSModule::DecodeFrame(const NFSOCK nSockIndex,NetObject* pNetO
 
     return DecodeFrame(nSockIndex,pNetObject);
 }
-
+int NFWSModule::DeCode(const char* strData, const uint32_t unAllLen, NFMsgHead& xHead)
+{ 
+    if (unAllLen < NFIMsgHead::NF_Head::NF_HEAD_LENGTH)
+    { 
+        return -1;
+    }
+    if (NFIMsgHead::NF_Head::NF_HEAD_LENGTH != xHead.DeCode(strData))
+    {  
+        return -2;
+    }
+    if (xHead.GetBodyLength() > (unAllLen - NFIMsgHead::NF_Head::NF_HEAD_LENGTH))
+    {   
+        return -3;
+    }
+    return xHead.GetBodyLength();
+}
 std::string NFWSModule::EncodeFrame(const char * data, size_t size_, bool text)
 {
     //may write a buffer with headreserved space

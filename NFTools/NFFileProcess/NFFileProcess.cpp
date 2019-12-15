@@ -148,7 +148,7 @@ bool NFFileProcess::LoadIniData(MiniExcelReader::Sheet & sheet, ClassData * pCla
 		MiniExcelReader::Cell* pIDCell = sheet.getCell(r, dim.firstCol);
 		if (pIDCell && !pIDCell->value.empty())
 		{
-			NFClassElement::ElementData* pIniObject = new NFClassElement::ElementData();
+			NFlassElement::ElementData* pIniObject = new NFlassElement::ElementData();
 			pClassData->xIniData.xElementList[pIDCell->value] = pIniObject;
 
 			for (std::map<std::string, int>::iterator itProperty = PropertyIndex.begin(); itProperty != PropertyIndex.end(); ++itProperty)
@@ -205,7 +205,7 @@ bool NFFileProcess::LoadDataAndProcessProperty(MiniExcelReader::Sheet & sheet, C
 		int nCol = itProperty->second;
 
 		////////////
-		NFClassProperty* pClassProperty = new NFClassProperty();
+		NFlassProperty* pClassProperty = new NFlassProperty();
 		pClassData->xStructData.xPropertyList[strPropertyName] = pClassProperty;
 
 		////////////
@@ -308,7 +308,7 @@ bool NFFileProcess::LoadDataAndProcessRecord(MiniExcelReader::Sheet & sheet, Cla
 			
 			////////////
 
-			NFClassRecord* pClassRecord = new NFClassRecord();
+			NFlassRecord* pClassRecord = new NFlassRecord();
 			pClassData->xStructData.xRecordList[strRecordName] = pClassRecord;
 			////////////
 
@@ -328,7 +328,7 @@ bool NFFileProcess::LoadDataAndProcessRecord(MiniExcelReader::Sheet & sheet, Cla
 				MiniExcelReader::Cell* pCellColType = sheet.getCell(r + 1, c);
 				MiniExcelReader::Cell* pCellColDesc = sheet.getCell(r + 2, c);
 
-				NFClassRecord::RecordColDesc* pRecordColDesc = new NFClassRecord::RecordColDesc();
+				NFlassRecord::RecordColDesc* pRecordColDesc = new NFlassRecord::RecordColDesc();
 				pRecordColDesc->index = c - 1;
 				pRecordColDesc->type = pCellColType->value;
 				if (pCellColDesc)
@@ -349,6 +349,7 @@ bool NFFileProcess::Save()
 {
 	SaveForCPP();
 	SaveForCS();
+	SaveForTS();
 	SaveForJAVA();
 
 
@@ -404,11 +405,11 @@ bool NFFileProcess::SaveForCPP()
 			//add base class properties
 			strPropertyInfo += "\t\t// IObject\n";
 			
-			for (std::map<std::string, NFClassProperty*>::iterator itProperty = pBaseObject->xStructData.xPropertyList.begin();
+			for (std::map<std::string, NFlassProperty*>::iterator itProperty = pBaseObject->xStructData.xPropertyList.begin();
 					itProperty != pBaseObject->xStructData.xPropertyList.end(); ++itProperty)
 			{
 				const std::string& strPropertyName = itProperty->first;
-				NFClassProperty* pClassProperty = itProperty->second;
+				NFlassProperty* pClassProperty = itProperty->second;
 
 				strPropertyInfo += "\t\tstatic const std::string& " + strPropertyName + "(){ static std::string x = \"" + strPropertyName + "\"; return x; };";
 				strPropertyInfo += "// " + pClassProperty->descList["Type"] + "\n";
@@ -418,11 +419,11 @@ bool NFFileProcess::SaveForCPP()
 		}
 
 		strPropertyInfo += "\t\t// Property\n";
-		for (std::map<std::string, NFClassProperty*>::iterator itProperty = pClassDta->xStructData.xPropertyList.begin();
+		for (std::map<std::string, NFlassProperty*>::iterator itProperty = pClassDta->xStructData.xPropertyList.begin();
 			itProperty != pClassDta->xStructData.xPropertyList.end(); ++itProperty)
 		{
 			const std::string& strPropertyName = itProperty->first;
-			NFClassProperty* pClassProperty = itProperty->second;
+			NFlassProperty* pClassProperty = itProperty->second;
 
 			strPropertyInfo += "\t\tstatic const std::string& " + strPropertyName + "(){ static std::string x = \"" + strPropertyName + "\"; return x; };";
 			strPropertyInfo += "// " + pClassProperty->descList["Type"] + "\n";
@@ -436,13 +437,13 @@ bool NFFileProcess::SaveForCPP()
 		std::string strRecordInfo = "";
 		strRecordInfo += "\t\t// Record\n";
 
-		for (std::map<std::string, NFClassRecord*>::iterator itRecord = pClassDta->xStructData.xRecordList.begin();
+		for (std::map<std::string, NFlassRecord*>::iterator itRecord = pClassDta->xStructData.xRecordList.begin();
 			itRecord != pClassDta->xStructData.xRecordList.end(); ++itRecord)
 		{
 			const std::string& strRecordName = itRecord->first;
-			NFClassRecord* pClassRecord = itRecord->second;
+			NFlassRecord* pClassRecord = itRecord->second;
 
-			std::cout << "save for cpp ---> " << strClassName  << "::" << strRecordName << std::endl;
+			std::cout << "save for cpppppp ---> " << strClassName  << "::" << strRecordName << std::endl;
 
 			strRecordInfo += "\t\tclass " + strRecordName + "\n\t\t{\n\t\tpublic:\n";
 			strRecordInfo += "\t\t\t//Class name\n\t";
@@ -453,11 +454,11 @@ bool NFFileProcess::SaveForCPP()
 			//col
 			for (int i = 0; i < pClassRecord->colList.size(); ++i)
 			{
-				for (std::map<std::string, NFClassRecord::RecordColDesc*>::iterator itCol = pClassRecord->colList.begin();
+				for (std::map<std::string, NFlassRecord::RecordColDesc*>::iterator itCol = pClassRecord->colList.begin();
 					itCol != pClassRecord->colList.end(); ++itCol)
 				{
 					const std::string& colTag = itCol->first;
-					NFClassRecord::RecordColDesc* pRecordColDesc = itCol->second;
+					NFlassRecord::RecordColDesc* pRecordColDesc = itCol->second;
 
 					if (pRecordColDesc->index == i)
 					{
@@ -535,11 +536,11 @@ bool NFFileProcess::SaveForCS()
 			//add base class properties
 			strPropertyInfo += "\t\t// IObject\n";
 
-			for (std::map<std::string, NFClassProperty*>::iterator itProperty = pBaseObject->xStructData.xPropertyList.begin();
+			for (std::map<std::string, NFlassProperty*>::iterator itProperty = pBaseObject->xStructData.xPropertyList.begin();
 				itProperty != pBaseObject->xStructData.xPropertyList.end(); ++itProperty)
 			{
 				const std::string& strPropertyName = itProperty->first;
-				NFClassProperty* pClassProperty = itProperty->second;
+				NFlassProperty* pClassProperty = itProperty->second;
 
 				strPropertyInfo += "\t\tpublic static readonly String " + strPropertyName + " = \"" + strPropertyName + "\";";
 				strPropertyInfo += "// " + pClassProperty->descList["Type"] + "\n";
@@ -548,11 +549,11 @@ bool NFFileProcess::SaveForCS()
 
 
 		strPropertyInfo += "\t\t// Property\n";
-		for (std::map<std::string, NFClassProperty*>::iterator itProperty = pClassDta->xStructData.xPropertyList.begin();
+		for (std::map<std::string, NFlassProperty*>::iterator itProperty = pClassDta->xStructData.xPropertyList.begin();
 			itProperty != pClassDta->xStructData.xPropertyList.end(); ++itProperty)
 		{
 			const std::string& strPropertyName = itProperty->first;
-			NFClassProperty* pClassProperty = itProperty->second;
+			NFlassProperty* pClassProperty = itProperty->second;
 
 			strPropertyInfo += "\t\tpublic static readonly String " + strPropertyName + " = \"" + strPropertyName + "\";";
 			strPropertyInfo += "// " + pClassProperty->descList["Type"] + "\n";
@@ -564,11 +565,11 @@ bool NFFileProcess::SaveForCS()
 		std::string strRecordInfo = "";
 		strRecordInfo += "\t\t// Record\n";
 
-		for (std::map<std::string, NFClassRecord*>::iterator itRecord = pClassDta->xStructData.xRecordList.begin();
+		for (std::map<std::string, NFlassRecord*>::iterator itRecord = pClassDta->xStructData.xRecordList.begin();
 			itRecord != pClassDta->xStructData.xRecordList.end(); ++itRecord)
 		{
 			const std::string& strRecordName = itRecord->first;
-			NFClassRecord* pClassRecord = itRecord->second;
+			NFlassRecord* pClassRecord = itRecord->second;
 
 			std::cout << "save for cs ---> " << strClassName << "::" << strRecordName << std::endl;
 
@@ -579,11 +580,11 @@ bool NFFileProcess::SaveForCS()
 			//col
 			for (int i = 0; i < pClassRecord->colList.size(); ++i)
 			{
-				for (std::map<std::string, NFClassRecord::RecordColDesc*>::iterator itCol = pClassRecord->colList.begin();
+				for (std::map<std::string, NFlassRecord::RecordColDesc*>::iterator itCol = pClassRecord->colList.begin();
 					itCol != pClassRecord->colList.end(); ++itCol)
 				{
 					const std::string& colTag = itCol->first;
-					NFClassRecord::RecordColDesc* pRecordColDesc = itCol->second;
+					NFlassRecord::RecordColDesc* pRecordColDesc = itCol->second;
 
 					if (pRecordColDesc->index == i)
 					{
@@ -611,6 +612,123 @@ bool NFFileProcess::SaveForCS()
 	std::string strFileEnd = "\n}";
 	fwrite(strFileEnd.c_str(), strFileEnd.length(), 1, csWriter);
 
+	fclose(csWriter);
+
+	return false;
+}
+bool NFFileProcess::SaveForTS()
+{
+	FILE* csWriter = fopen(strTSFile.c_str(), "w");
+
+	std::string strFileHead = "// -------------------------------------------------------------------------\n";
+	strFileHead = strFileHead
+		+ "//    @FileName         :    NFProtocolDefine.ts\n"
+		+ "//    @Author           :    NFrame Studio\n"
+		+ "//    @Module           :    NFProtocolDefine\n"
+		+ "// -------------------------------------------------------------------------\n\n";
+	fwrite(strFileHead.c_str(), strFileHead.length(), 1, csWriter);
+	/////////////////////////////////////////////////////
+
+
+	ClassData* pBaseObject = mxClassData["IObject"];
+	std::string allClassNames = "export const NFConfig={\n\t\t";
+	for (std::map<std::string, ClassData*>::iterator it = mxClassData.begin(); it != mxClassData.end(); ++it)
+	{
+		const std::string& strClassName = it->first;
+		ClassData* pClassDta = it->second;
+		// cpp
+		std::string strPropertyInfo;
+		if(it != mxClassData.begin()){
+			allClassNames+=',';
+		}
+		allClassNames+=strClassName;
+
+		strPropertyInfo += "\tclass " + strClassName + "\n\t{\n";
+		strPropertyInfo += "\t\t//Class name\n\t";
+		strPropertyInfo += "\tpublic static  ThisName = \"" + strClassName + "\";\n";
+		if (strClassName != "IObject")
+		{
+			//add base class properties
+			strPropertyInfo += "\t\t// IObject\n";
+
+			for (std::map<std::string, NFlassProperty*>::iterator itProperty = pBaseObject->xStructData.xPropertyList.begin();
+				itProperty != pBaseObject->xStructData.xPropertyList.end(); ++itProperty)
+			{
+				const std::string& strPropertyName = itProperty->first;
+				NFlassProperty* pClassProperty = itProperty->second;
+
+				strPropertyInfo += "\t\tpublic static " + strPropertyName + " = \"" + strPropertyName + "\";";
+				strPropertyInfo += "// " + pClassProperty->descList["Type"] + "\n";
+			}
+		}
+
+
+		strPropertyInfo += "\t\t// Property\n";
+		for (std::map<std::string, NFlassProperty*>::iterator itProperty = pClassDta->xStructData.xPropertyList.begin();
+			itProperty != pClassDta->xStructData.xPropertyList.end(); ++itProperty)
+		{
+			const std::string& strPropertyName = itProperty->first;
+			NFlassProperty* pClassProperty = itProperty->second;
+
+			strPropertyInfo += "\t\tpublic static " + strPropertyName + " = \"" + strPropertyName + "\";";
+			strPropertyInfo += "// " + pClassProperty->descList["Type"] + "\n";
+		}
+
+		fwrite(strPropertyInfo.c_str(), strPropertyInfo.length(), 1, csWriter);
+
+		//record
+		std::string strRecordInfo = "";
+		strRecordInfo += "\t\t// Record\n";
+
+		for (std::map<std::string, NFlassRecord*>::iterator itRecord = pClassDta->xStructData.xRecordList.begin();
+			itRecord != pClassDta->xStructData.xRecordList.end(); ++itRecord)
+		{
+			const std::string& strRecordName = itRecord->first;
+			NFlassRecord* pClassRecord = itRecord->second;
+
+			std::cout << "save for cs ---> " << strClassName << "::" << strRecordName << std::endl;
+
+			strRecordInfo += "\t\tpublic static " + strRecordName + " = \n\t\t{\n";
+			strRecordInfo += "\t\t\t//Class name\n\t";
+			strRecordInfo += "\t\t\"ThisName\":\"" + strRecordName + "\",\n";
+
+			//col
+			for (int i = 0; i < pClassRecord->colList.size(); ++i)
+			{
+				for (std::map<std::string, NFlassRecord::RecordColDesc*>::iterator itCol = pClassRecord->colList.begin();
+					itCol != pClassRecord->colList.end(); ++itCol)
+				{
+
+					const std::string& colTag = itCol->first;
+					NFlassRecord::RecordColDesc* pRecordColDesc = itCol->second;
+
+					if (pRecordColDesc->index == i)
+					{
+						if(i!= 0){
+							strRecordInfo+=",\n";
+						}
+						strRecordInfo += "\t\t\t\"" + colTag + "\":" + std::to_string(pRecordColDesc->index);
+					}
+				}
+			}
+			
+
+			strRecordInfo += "\n\t\t}\n";
+
+		}
+		fwrite(strRecordInfo.c_str(), strRecordInfo.length(), 1, csWriter);
+
+		std::string strHppEnumInfo = "";
+
+
+		std::string strClassEnd;
+		strClassEnd += "\n\t}\n";
+
+		fwrite(strClassEnd.c_str(), strClassEnd.length(), 1, csWriter);
+
+	}
+	allClassNames+="}\n";
+	fwrite(allClassNames.c_str(), allClassNames.length(), 1, csWriter);
 	fclose(csWriter);
 
 	return false;
@@ -649,11 +767,11 @@ bool NFFileProcess::SaveForJAVA()
 			//add base class properties
 			strPropertyInfo += "\t\t// IObject\n";
 
-			for (std::map<std::string, NFClassProperty*>::iterator itProperty = pBaseObject->xStructData.xPropertyList.begin();
+			for (std::map<std::string, NFlassProperty*>::iterator itProperty = pBaseObject->xStructData.xPropertyList.begin();
 				itProperty != pBaseObject->xStructData.xPropertyList.end(); ++itProperty)
 			{
 				const std::string& strPropertyName = itProperty->first;
-				NFClassProperty* pClassProperty = itProperty->second;
+				NFlassProperty* pClassProperty = itProperty->second;
 
 				strPropertyInfo += "\t\tpublic static final String " + strPropertyName + " = \"" + strPropertyName + "\";";
 				strPropertyInfo += "// " + pClassProperty->descList["Type"] + "\n";
@@ -661,11 +779,11 @@ bool NFFileProcess::SaveForJAVA()
 		}
 
 		strPropertyInfo += "\t\t// Property\n";
-		for (std::map<std::string, NFClassProperty*>::iterator itProperty = pClassDta->xStructData.xPropertyList.begin();
+		for (std::map<std::string, NFlassProperty*>::iterator itProperty = pClassDta->xStructData.xPropertyList.begin();
 			itProperty != pClassDta->xStructData.xPropertyList.end(); ++itProperty)
 		{
 			const std::string& strPropertyName = itProperty->first;
-			NFClassProperty* pClassProperty = itProperty->second;
+			NFlassProperty* pClassProperty = itProperty->second;
 
 			strPropertyInfo += "\t\tpublic static final String " + strPropertyName + " = \"" + strPropertyName + "\";";
 			strPropertyInfo += "// " + pClassProperty->descList["Type"] + "\n";
@@ -677,11 +795,11 @@ bool NFFileProcess::SaveForJAVA()
 		std::string strRecordInfo = "";
 		strRecordInfo += "\t\t// Record\n";
 
-		for (std::map<std::string, NFClassRecord*>::iterator itRecord = pClassDta->xStructData.xRecordList.begin();
+		for (std::map<std::string, NFlassRecord*>::iterator itRecord = pClassDta->xStructData.xRecordList.begin();
 			itRecord != pClassDta->xStructData.xRecordList.end(); ++itRecord)
 		{
 			const std::string& strRecordName = itRecord->first;
-			NFClassRecord* pClassRecord = itRecord->second;
+			NFlassRecord* pClassRecord = itRecord->second;
 
 			std::cout << "save for java ---> " << strClassName << "::" << strRecordName << std::endl;
 
@@ -692,11 +810,11 @@ bool NFFileProcess::SaveForJAVA()
 			//col
 			for (int i = 0; i < pClassRecord->colList.size(); ++i)
 			{
-				for (std::map<std::string, NFClassRecord::RecordColDesc*>::iterator itCol = pClassRecord->colList.begin();
+				for (std::map<std::string, NFlassRecord::RecordColDesc*>::iterator itCol = pClassRecord->colList.begin();
 					itCol != pClassRecord->colList.end(); ++itCol)
 				{
 					const std::string& colTag = itCol->first;
-					NFClassRecord::RecordColDesc* pRecordColDesc = itCol->second;
+					NFlassRecord::RecordColDesc* pRecordColDesc = itCol->second;
 
 					if (pRecordColDesc->index == i)
 					{
@@ -763,11 +881,11 @@ bool NFFileProcess::SaveForSQL()
 		const std::string& strClassName = it->first;
 		ClassData* pClassDta = it->second;
 
-		for (std::map<std::string, NFClassProperty*>::iterator itProperty = pClassDta->xStructData.xPropertyList.begin();
+		for (std::map<std::string, NFlassProperty*>::iterator itProperty = pClassDta->xStructData.xPropertyList.begin();
 			itProperty != pClassDta->xStructData.xPropertyList.end(); ++itProperty)
 		{
 			const std::string& strPropertyName = itProperty->first;
-			NFClassProperty* xPropertyData = itProperty->second;
+			NFlassProperty* xPropertyData = itProperty->second;
 
 			std::string strType;
 			std::string strSave;
@@ -832,11 +950,11 @@ bool NFFileProcess::SaveForSQL()
 		}
 
 		// 2.2) record
-		for (std::map<std::string, NFClassRecord*>::iterator itRecord = pClassDta->xStructData.xRecordList.begin();
+		for (std::map<std::string, NFlassRecord*>::iterator itRecord = pClassDta->xStructData.xRecordList.begin();
 			itRecord != pClassDta->xStructData.xRecordList.end(); ++itRecord)
 		{
 			const std::string& strRecordName = itRecord->first;
-			NFClassRecord* xRecordData = itRecord->second;
+			NFlassRecord* xRecordData = itRecord->second;
 
 			std::string strType;
 			std::string strSave;
@@ -900,11 +1018,11 @@ bool NFFileProcess::SaveForStruct()
 		std::string strFilePrpertyBegin = "\t<Propertys>\n";
 		fwrite(strFilePrpertyBegin.c_str(), strFilePrpertyBegin.length(), 1, structWriter);
 
-		for (std::map<std::string, NFClassProperty*>::iterator itProperty = pClassDta->xStructData.xPropertyList.begin();
+		for (std::map<std::string, NFlassProperty*>::iterator itProperty = pClassDta->xStructData.xPropertyList.begin();
 			itProperty != pClassDta->xStructData.xPropertyList.end(); ++itProperty)
 		{
 			const std::string& strPropertyName = itProperty->first;
-			NFClassProperty* xPropertyData = itProperty->second;
+			NFlassProperty* xPropertyData = itProperty->second;
 
 			std::string strElementData = "\t\t<Property Id=\"" + strPropertyName + "\" ";
 			for (std::map<std::string, std::string>::iterator itDesc = xPropertyData->descList.begin();
@@ -925,11 +1043,11 @@ bool NFFileProcess::SaveForStruct()
 		std::string strFileRecordBegin = "\t<Records>\n";
 		fwrite(strFileRecordBegin.c_str(), strFileRecordBegin.length(), 1, structWriter);
 
-		for (std::map<std::string, NFClassRecord*>::iterator itRecord = pClassDta->xStructData.xRecordList.begin();
+		for (std::map<std::string, NFlassRecord*>::iterator itRecord = pClassDta->xStructData.xRecordList.begin();
 			itRecord != pClassDta->xStructData.xRecordList.end(); ++itRecord)
 		{
 			const std::string& strRecordName = itRecord->first;
-			NFClassRecord* xRecordData = itRecord->second;
+			NFlassRecord* xRecordData = itRecord->second;
 
 			//for desc
 			std::string strElementData = "\t\t<Record Id=\"" + strRecordName + "\" ";
@@ -945,11 +1063,11 @@ bool NFFileProcess::SaveForStruct()
 			//for col list
 			for (int i = 0; i < xRecordData->colList.size(); ++i)
 			{
-				for (std::map<std::string, NFClassRecord::RecordColDesc*>::iterator itDesc = xRecordData->colList.begin();
+				for (std::map<std::string, NFlassRecord::RecordColDesc*>::iterator itDesc = xRecordData->colList.begin();
 					itDesc != xRecordData->colList.end(); ++itDesc)
 				{
 					const std::string& strKey = itDesc->first;
-					const NFClassRecord::RecordColDesc* pRecordColDesc = itDesc->second;
+					const NFlassRecord::RecordColDesc* pRecordColDesc = itDesc->second;
 
 					if (pRecordColDesc->index == i)
 					{
@@ -999,12 +1117,12 @@ bool NFFileProcess::SaveForIni()
 		std::string strFileHead = "<?xml version='1.0' encoding='utf-8' ?>\n<XML>\n";
 		fwrite(strFileHead.c_str(), strFileHead.length(), 1, iniWriter);
 
-		for (std::map<std::string, NFClassElement::ElementData*>::iterator itElement = pClassDta->xIniData.xElementList.begin();
+		for (std::map<std::string, NFlassElement::ElementData*>::iterator itElement = pClassDta->xIniData.xElementList.begin();
 			itElement != pClassDta->xIniData.xElementList.end(); ++itElement)
 		{
 
 			const std::string& strElementName = itElement->first;
-			NFClassElement::ElementData* pIniData = itElement->second;
+			NFlassElement::ElementData* pIniData = itElement->second;
 
 			std::string strElementData = "\t<Object Id=\"" + strElementName + "\" ";
 			for (std::map<std::string, std::string>::iterator itProperty = pIniData->xPropertyList.begin();
