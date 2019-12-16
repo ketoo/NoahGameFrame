@@ -64,6 +64,9 @@
     <ClCompile Include="UI\NFOperatorView.cpp">
       <Filter>UI</Filter>
     </ClCompile>
+    <ClCompile Include="UI\NFTreeView.cpp">
+      <Filter>UI</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="NFUIModule.h" />
@@ -135,6 +138,9 @@
       <Filter>UI</Filter>
     </ClInclude>
     <ClInclude Include="UI\NFOperatorView.h">
+      <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="UI\NFTreeView.h">
       <Filter>UI</Filter>
     </ClInclude>
   </ItemGroup>
