@@ -62,6 +62,11 @@ private:
    void InitBluePrintJudgementArgs(NF_SHARE_PTR<NFJudgement> judgement);
    void InitBluePrintExecuterArgs(NF_SHARE_PTR<NFExecuter> executer);
 
+   void RenderForModifyProperty();
+   
+private:
+   std::string modifyPropertyName;
+
 private:
 	NFIClassModule* m_pClassModule;
 	NFIElementModule* m_pElementModule;
