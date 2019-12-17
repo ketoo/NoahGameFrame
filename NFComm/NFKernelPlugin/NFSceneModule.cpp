@@ -254,21 +254,30 @@ bool NFSceneModule::LeaveSceneGroup(const NFGUID & self)
 			m_pLogModule->LogNormal(NFILogModule::NLL_ERROR_NORMAL, self, "no this group", nOldGroupID);
 			return false;
 		}
+		
 		/////////
 
-		const NFVector3& lastPos = m_pKernelModule->GetPropertyVector3(self, NFrame::IObject::Position());
-		BeforeLeaveSceneGroup(self, nOldSceneID, nOldGroupID, 0, NFDataList());
-
-		const NFGUID lastCell = m_pCellModule->ComputeCellID(lastPos);
-		OnMoveCellEvent(self, nOldSceneID, nOldGroupID, lastCell, NFGUID());
-
-		pOldSceneInfo->RemoveObjectFromGroup(nOldGroupID, self, true);
-
-		//if (nTargetSceneID != nOldSceneID)
+		const std::string& strClassName = GetPropertyString(self, NFrame::IObject::ClassName());
+		if (strClassName == NFrame::Player::ThisName())
 		{
-			pObject->SetPropertyInt(NFrame::Scene::GroupID(), 0);
-			/////////
-			AfterLeaveSceneGroup(self, nOldSceneID, nOldGroupID, 0, NFDataList());
+			const NFVector3& lastPos = m_pKernelModule->GetPropertyVector3(self, NFrame::IObject::Position());
+			BeforeLeaveSceneGroup(self, nOldSceneID, nOldGroupID, 0, NFDataList());
+
+			const NFGUID lastCell = m_pCellModule->ComputeCellID(lastPos);
+			OnMoveCellEvent(self, nOldSceneID, nOldGroupID, lastCell, NFGUID());
+
+			pOldSceneInfo->RemoveObjectFromGroup(nOldGroupID, self, true);
+
+			//if (nTargetSceneID != nOldSceneID)
+			{
+				pObject->SetPropertyInt(NFrame::Scene::GroupID(), 0);
+				/////////
+				AfterLeaveSceneGroup(self, nOldSceneID, nOldGroupID, 0, NFDataList());
+			}
+		}
+		else
+		{
+			pOldSceneInfo->RemoveObjectFromGroup(nOldGroupID, self, false);
 		}
 
 		return true;
