@@ -86,15 +86,14 @@ void NFHierachyView::GodViewSubRender()
 		NF_SHARE_PTR<NFIProperty> pProperty = pObject->GetPropertyManager()->First();
 		while(pProperty)
 		{
-			ImGui::Text(pProperty->GetKey().c_str());
-         	ImGui::SameLine();
-         	ImGui::Text(pProperty->ToString().c_str());
-         	ImGui::SameLine();
-			if (ImGui::Button("Modify"))
+			if (ImGui::Button(pProperty->GetKey().c_str()))
 			{
 				modifyPropertyName = pProperty->GetKey();
-				
+				strcpy(modifyPropertyValue, pProperty->ToString().c_str());
 			}
+         	ImGui::SameLine();
+         	ImGui::Text(pProperty->ToString().c_str());
+
          	//static char str0[128] = "Hello, world!";
          	//ImGui::InputText("input text", str0, IM_ARRAYSIZE(str0));
          
@@ -692,8 +691,7 @@ void NFHierachyView::RenderForModifyProperty()
 			if (ImGui::BeginPopupModal("Modify Property Value"))
 			{
 				ImGui::Text(modifyPropertyName.c_str());		
-				static char str0[128] = "";
-				ImGui::InputText("New Value", str0, IM_ARRAYSIZE(str0));		
+				ImGui::InputText("New Value", modifyPropertyValue, IM_ARRAYSIZE(modifyPropertyValue));		
 				ImGui::Separator();		
 				ImGui::Text("If you modified the value then the framework will trigger the property event!\n\n");		
 				ImGui::Separator();		
@@ -711,32 +709,44 @@ void NFHierachyView::RenderForModifyProperty()
 					{
 						case NFDATA_TYPE::TDATA_INT:
 						{
-							pProperty->SetInt(lexical_cast<int>(str0));
+							pProperty->SetInt(lexical_cast<int>(modifyPropertyValue));
 						}
 						break;
 						case NFDATA_TYPE::TDATA_FLOAT:
 						{
-							pProperty->SetFloat(lexical_cast<float>(str0));
+							pProperty->SetFloat(lexical_cast<float>(modifyPropertyValue));
 						}
 						break;
 						case NFDATA_TYPE::TDATA_STRING:
 						{
-							pProperty->SetString(str0);
+							pProperty->SetString(modifyPropertyValue);
 						}
 						break;
 						case NFDATA_TYPE::TDATA_OBJECT:
 						{
-
+							NFGUID id;
+							if (id.FromString(modifyPropertyValue))
+							{
+								pProperty->SetObject(id);
+							}
 						}
 						break;
 						case NFDATA_TYPE::TDATA_VECTOR2:
 						{
-
+							NFVector2 vec;
+							if (vec.FromString(modifyPropertyValue))
+							{
+								pProperty->SetVector2(vec);
+							}
 						}
 						break;
 						case NFDATA_TYPE::TDATA_VECTOR3:
 						{
-
+							NFVector3 vec;
+							if (vec.FromString(modifyPropertyValue))
+							{
+								pProperty->SetVector3(vec);
+							}
 						}
 						break;
 

@@ -63,9 +63,10 @@ private:
    void InitBluePrintExecuterArgs(NF_SHARE_PTR<NFExecuter> executer);
 
    void RenderForModifyProperty();
-   
+
 private:
    std::string modifyPropertyName;
+   char modifyPropertyValue[128] = "";
 
 private:
 	NFIClassModule* m_pClassModule;

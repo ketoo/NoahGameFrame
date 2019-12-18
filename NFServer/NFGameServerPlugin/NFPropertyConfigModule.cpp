@@ -67,6 +67,17 @@ NFINT64 NFPropertyConfigModule::CalculateBaseValue(const int nJob, const int nLe
     return 0;
 }
 
+const std::string& GetInitPropertyID(const int nJob,  const int nLevel)
+{
+	NF_SHARE_PTR <NFMapEx<int, std::string> > xPropertyMap = mhtCoefficienData.GetElement(nJob);
+	if (xPropertyMap)
+	{
+		return xPropertyMap->GetElement(nLevel);
+	}
+
+    return NULL_STR;
+}
+
 void NFPropertyConfigModule::Load()
 {
     NF_SHARE_PTR<NFIClass> xLogicClass = m_pClassModule->GetElement(NFrame::InitProperty::ThisName());
@@ -80,9 +91,9 @@ void NFPropertyConfigModule::Load()
             NF_SHARE_PTR<NFIPropertyManager> pPropertyManager = m_pElementModule->GetPropertyManager(strId);
             if (pPropertyManager)
             {
-                int nJob = m_pElementModule->GetPropertyInt32(strId, NFrame::InitProperty::Job());
-                int nLevel = m_pElementModule->GetPropertyInt32(strId, NFrame::InitProperty::Level());
-                std::string strEffectData = m_pElementModule->GetPropertyString(strId, NFrame::InitProperty::EffectData());
+                const int nJob = m_pElementModule->GetPropertyInt32(strId, NFrame::InitProperty::Job());
+                const int nLevel = m_pElementModule->GetPropertyInt32(strId, NFrame::InitProperty::Level());
+                const std::string& strID = m_pElementModule->GetPropertyString(strId, NFrame::InitProperty::ID());
 
 				NF_SHARE_PTR <NFMapEx<int, std::string> > xPropertyMap = mhtCoefficienData.GetElement(nJob);
 				if (!xPropertyMap)
@@ -94,7 +105,7 @@ void NFPropertyConfigModule::Load()
 				NF_SHARE_PTR<std::string> xRefPropertyIDName = xPropertyMap->GetElement(nLevel);
 				if (!xRefPropertyIDName)
 				{
-					xRefPropertyIDName = NF_SHARE_PTR<std::string>(NF_NEW std::string(strEffectData));
+					xRefPropertyIDName = NF_SHARE_PTR<std::string>(NF_NEW std::string(strID));
 				}
 
 				xPropertyMap->AddElement(nLevel, xRefPropertyIDName);

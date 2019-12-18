@@ -35,8 +35,10 @@ class NFIPropertyConfigModule
 {
 public:
 
-    virtual NFINT64 CalculateBaseValue(const int nJob,  const int nLevel, const std::string& strProperty) = 0;
     virtual bool LegalLevel(const int nJob, const int nLevel) = 0;
+    virtual const std::string& GetInitPropertyID(const int nJob,  const int nLevel) = 0;
+    virtual NFINT64 CalculateBaseValue(const int nJob,  const int nLevel, const std::string& strProperty) = 0;
+
 };
 
 

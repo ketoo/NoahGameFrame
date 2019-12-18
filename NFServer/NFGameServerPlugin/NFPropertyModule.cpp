@@ -126,7 +126,7 @@ bool NFPropertyModule::CalculatePropertyValue(const NFGUID& self, const std::str
 int NFPropertyModule::OnObjectLevelEvent(const NFGUID& self, const std::string& strPropertyName, const NFData& oldVar, const NFData& newVar)
 {
 	//if you dont play hero mode, please active the code below
-    //RefreshBaseProperty(self);
+    RefreshBaseProperty(self);
 
     FullHPMP(self);
     FullSP(self);
@@ -212,6 +212,9 @@ int NFPropertyModule::RefreshBaseProperty(const NFGUID& self)
     int eJobType = m_pKernelModule->GetPropertyInt32(self, NFrame::Player::Job());
     int nLevel = m_pKernelModule->GetPropertyInt32(self, NFrame::Player::Level());
 
+    const std::string& strInitPropertyID = m_pPropertyConfigModule->GetInitPropertyID(eJobType, nLevel);
+    //const std::string& strInitPropertyID = m_pElementModule ->get(eJobType, nLevel);
+
     for (int i = 0; i < pRecord->GetCols(); ++i)
     {
         const std::string& strColTag = pRecord->GetColTag(i);
@@ -219,7 +222,7 @@ int NFPropertyModule::RefreshBaseProperty(const NFGUID& self)
         SetPropertyValue(self, strColTag, NFPropertyGroup::NPG_JOBLEVEL, nValue);
     }
 
-    return 1;
+    return 0;
 }
 
 bool NFPropertyModule::FullHPMP(const NFGUID& self)
