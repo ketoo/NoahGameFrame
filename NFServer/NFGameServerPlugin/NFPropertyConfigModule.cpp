@@ -54,13 +54,13 @@ bool NFPropertyConfigModule::AfterInit()
 
 NFINT64 NFPropertyConfigModule::CalculateBaseValue(const int nJob, const int nLevel, const std::string& strProperty)
 {
-	auto xPropertyMap = mhtCoefficienData.find(nJob);
-	if (xPropertyMap != mhtCoefficienData.end())
+	auto it = mhtCoefficienData.find(nJob);
+	if (it != mhtCoefficienData.end())
 	{
-		auto xRefPropertyIDName = xPropertyMap.second.find(nLevel);
-		if (xRefPropertyIDName != xPropertyMap.second.end())
+		auto refPropertyIDName = it->second.find(nLevel);
+		if (refPropertyIDName != it->second.end())
 		{
-			return m_pElementModule->GetPropertyInt(xRefPropertyIDName.second, strProperty);
+			return m_pElementModule->GetPropertyInt(refPropertyIDName->second, strProperty);
 		}
     }
 
@@ -69,13 +69,13 @@ NFINT64 NFPropertyConfigModule::CalculateBaseValue(const int nJob, const int nLe
 
 const std::string& NFPropertyConfigModule::GetInitPropertyID(const int nJob,  const int nLevel)
 {
-	auto xPropertyMap = mhtCoefficienData.find(nJob);
-	if (xPropertyMap != mhtCoefficienData.end())
+	auto it = mhtCoefficienData.find(nJob);
+	if (it != mhtCoefficienData.end())
 	{
-		auto element = xPropertyMap.second.find(nLevel);
-        if (element != xPropertyMap.second.end())
-        {
-            element.get();
+		auto refPropertyIDName = it->second.find(nLevel);
+		if (refPropertyIDName != it->second.end())
+		{
+			return refPropertyIDName->second;
         }
 	}
 
@@ -99,20 +99,20 @@ void NFPropertyConfigModule::Load()
                 const int nLevel = m_pElementModule->GetPropertyInt32(strId, NFrame::InitProperty::Level());
                 const std::string& strID = m_pElementModule->GetPropertyString(strId, NFrame::InitProperty::ID());
 
-				NF_SHARE_PTR <NFMapEx<int, std::string> > xPropertyMap = mhtCoefficienData.GetElement(nJob);
-				if (!xPropertyMap)
+				auto xPropertyMap = mhtCoefficienData.find(nJob);
+				if (xPropertyMap == mhtCoefficienData.end())
 				{
-					xPropertyMap = NF_SHARE_PTR<NFMapEx<int, std::string>>(NF_NEW NFMapEx<int, std::string>());
-					mhtCoefficienData.AddElement(nJob, xPropertyMap);
+					std::map<int, std::string> propertyMap;
+					mhtCoefficienData.insert(std::make_pair(nJob, propertyMap));
 				}
+				
+				xPropertyMap = mhtCoefficienData.find(nJob);
 
-				NF_SHARE_PTR<std::string> xRefPropertyIDName = xPropertyMap->GetElement(nLevel);
-				if (!xRefPropertyIDName)
+				auto xRefPropertyIDName = xPropertyMap->second.find(nLevel);
+				if (xRefPropertyIDName == xPropertyMap->second.end())
 				{
-					xRefPropertyIDName = NF_SHARE_PTR<std::string>(NF_NEW std::string(strID));
+					xPropertyMap->second.insert(std::make_pair(nLevel, strID));
 				}
-
-				xPropertyMap->AddElement(nLevel, xRefPropertyIDName);
             }
         }
     }
@@ -120,11 +120,11 @@ void NFPropertyConfigModule::Load()
 
 bool NFPropertyConfigModule::LegalLevel(const int nJob, const int nLevel)
 {
-	NF_SHARE_PTR <NFMapEx<int, std::string> > xPropertyMap = mhtCoefficienData.GetElement(nJob);
-	if (xPropertyMap)
+	auto it = mhtCoefficienData.find(nJob);
+	if (it != mhtCoefficienData.end())
 	{
-		NF_SHARE_PTR<std::string> xRefPropertyIDName = xPropertyMap->GetElement(nLevel);
-		if (xRefPropertyIDName)
+		auto refPropertyIDName = it->second.find(nLevel);
+		if (refPropertyIDName != it->second.end())
 		{
 			return true;
 		}
