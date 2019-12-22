@@ -62,9 +62,8 @@ protected:
 
 private:
 
-	//diffent job, diffrent PropertyID[Level->ID]
-	//diffent job, diffrent PropertyID[Level->EffectData]
-	NFMapEx<int, NFMapEx<int, std::string> > mhtCoefficienData;
+	//diffent job, [Level->ConfigID]
+	std::map<int, std::map<int, std::string>> mhtCoefficienData;
 
     NFIClassModule* m_pClassModule;
     NFIElementModule* m_pElementModule;
