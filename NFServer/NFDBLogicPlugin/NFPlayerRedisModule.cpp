@@ -419,7 +419,7 @@ bool NFPlayerRedisModule::CreateRole(const std::string & strAccount, const std::
 				xProperty = xPropertyManager->GetElement(NFrame::Player::Level());
 				if (xProperty)
 				{
-					xProperty->SetInt(1);
+					xProperty->SetInt(0);
 				}
 
 				xProperty = xPropertyManager->GetElement(NFrame::Player::Name());

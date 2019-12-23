@@ -93,6 +93,40 @@ public:
 	{
 		nType = eType;
 	}
+	
+	NFData(int value)
+	{
+		this->SetInt(value);
+	}
+	NFData(int64_t value)
+	{
+		this->SetInt(value);
+	}
+
+	NFData(float value)
+	{
+		this->SetFloat(value);
+	}
+
+	NFData(double value)
+	{
+		this->SetFloat(value);
+	}
+
+	NFData(NFGUID value)
+	{
+		this->SetObject(value);
+	}
+
+	NFData(NFVector2 value)
+	{
+		this->SetVector2(value);
+	}
+
+	NFData(NFVector3 value)
+	{
+		this->SetVector3(value);
+	}
 
 	NFData(const NFData& value)
 	{

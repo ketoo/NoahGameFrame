@@ -50,10 +50,8 @@
   <ItemGroup>
     <ClInclude Include="..\NFPluginModule\NFGUID.h" />
     <ClInclude Include="..\NFPluginModule\NFIAccountRedisModule.h" />
-    <ClInclude Include="..\NFPluginModule\NFIActor.h" />
     <ClInclude Include="..\NFPluginModule\NFIActorModule.h" />
     <ClInclude Include="..\NFPluginModule\NFIAIModule.h" />
-    <ClInclude Include="..\NFPluginModule\NFIAOIModule.h" />
     <ClInclude Include="..\NFPluginModule\NFIBigMapRedisModule.h" />
     <ClInclude Include="..\NFPluginModule\NFIBuffConfigModule.h" />
     <ClInclude Include="..\NFPluginModule\NFIBuffModule.h" />
@@ -63,18 +61,12 @@
     <ClInclude Include="..\NFPluginModule\NFICommonConfigModule.h" />
     <ClInclude Include="..\NFPluginModule\NFICommonRedisModule.h" />
     <ClInclude Include="..\NFPluginModule\NFIComponent.h" />
-    <ClInclude Include="..\NFPluginModule\NFICoroutineModule.h" />
-    <ClInclude Include="..\NFPluginModule\NFICreateRoleModule.h" />
     <ClInclude Include="..\NFPluginModule\NFIElementModule.h" />
     <ClInclude Include="..\NFPluginModule\NFIEquipModule.h" />
     <ClInclude Include="..\NFPluginModule\NFIEquipPropertyModule.h" />
     <ClInclude Include="..\NFPluginModule\NFIEventModule.h" />
     <ClInclude Include="..\NFPluginModule\NFIFriendModule.h" />
-    <ClInclude Include="..\NFPluginModule\NFIGameServerConfigModule.h" />
-    <ClInclude Include="..\NFPluginModule\NFIGameServerModule.h" />
-    <ClInclude Include="..\NFPluginModule\NFIGameServerNet_ClientModule.h" />
     <ClInclude Include="..\NFPluginModule\NFIGameServerNet_ServerModule.h" />
-    <ClInclude Include="..\NFPluginModule\NFIGameServerScriptModule.h" />
     <ClInclude Include="..\NFPluginModule\NFIGameServerToWorldModule.h" />
     <ClInclude Include="..\NFPluginModule\NFIGuildModule.h" />
     <ClInclude Include="..\NFPluginModule\NFIGuildRedisModule.h" />
@@ -94,7 +86,6 @@
     <ClInclude Include="..\NFPluginModule\NFIMailModule.h" />
     <ClInclude Include="..\NFPluginModule\NFIMailRedisModule.h" />
     <ClInclude Include="..\NFPluginModule\NFIMapModule.h" />
-    <ClInclude Include="..\NFPluginModule\NFIMasterModule.h" />
     <ClInclude Include="..\NFPluginModule\NFIMasterNet_HttpServerModule.h" />
     <ClInclude Include="..\NFPluginModule\NFIMasterNet_ServerModule.h" />
     <ClInclude Include="..\NFPluginModule\NFIModule.h" />

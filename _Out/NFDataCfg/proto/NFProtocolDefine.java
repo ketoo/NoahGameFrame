@@ -280,11 +280,9 @@ package nframe;
 		public static final String Position = "Position";// vector3
 		public static final String SceneID = "SceneID";// int
 		// Property
-		public static final String EffectData = "EffectData";// string
+		public static final String HeroConfigID = "HeroConfigID";// string
 		public static final String Job = "Job";// int
 		public static final String Level = "Level";// int
-		public static final String ModelPtah = "ModelPtah";// string
-		public static final String SkillIDRef = "SkillIDRef";// string
 		// Record
 
 	}

@@ -29,7 +29,6 @@ target_link_libraries(NFPluginLoader NFDBLogicPlugin)
 target_link_libraries(NFPluginLoader NFDBNet_ClientPlugin)
 target_link_libraries(NFPluginLoader NFDBNet_ServerPlugin)
 
-target_link_libraries(NFPluginLoader NFGameLogicPlugin)
 target_link_libraries(NFPluginLoader NFGameServerPlugin)
 target_link_libraries(NFPluginLoader NFGameServerNet_ClientPlugin)
 target_link_libraries(NFPluginLoader NFGameServerNet_ServerPlugin)

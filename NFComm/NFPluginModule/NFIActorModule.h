@@ -27,12 +27,49 @@
 #define NFI_ACTOR_MODULE_H
 
 #include "NFIModule.h"
-#include "NFIActor.h"
 #include "NFIComponent.h"
 
 ///////////////////////////////////////////////////
 
 class NFIComponent;
+
+class NFIComponent;
+class NFIActorModule;
+class NFActorMessage;
+
+typedef std::function<void(NFActorMessage&)> ACTOR_PROCESS_FUNCTOR;
+typedef NF_SHARE_PTR<ACTOR_PROCESS_FUNCTOR> ACTOR_PROCESS_FUNCTOR_PTR;
+
+class NFActorMessage
+{
+public:
+	NFActorMessage()
+	{
+		msgID = 0;
+	}
+
+	int msgID;
+    NFGUID id;
+	std::string data;
+protected:
+private:
+};
+
+class NFIActor
+{
+public:
+	virtual ~NFIActor() {}
+	virtual const NFGUID ID() = 0;
+    virtual bool Execute() = 0;
+    
+	virtual bool AddComponent(NF_SHARE_PTR<NFIComponent> pComponent) = 0;
+	virtual bool RemoveComponent(const std::string& strComponentName) = 0;
+	virtual NF_SHARE_PTR<NFIComponent> FindComponent(const std::string& strComponentName) = 0;
+	
+	virtual bool AddMessageHandler(const int nSubMsgID, ACTOR_PROCESS_FUNCTOR_PTR xBeginFunctor) = 0;
+
+	virtual bool SendMsg(const NFActorMessage& message) = 0;
+};
 
 class NFIActorModule : public NFIModule
 {

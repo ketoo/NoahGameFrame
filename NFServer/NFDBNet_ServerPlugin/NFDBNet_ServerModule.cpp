@@ -199,7 +199,7 @@ void NFDBNet_ServerModule::OnCreateRoleGameProcess(const NFSOCK nSockIndex, cons
 		pData->set_sex(xMsg.sex());
 		pData->set_race(xMsg.race());
 		pData->set_noob_name(xMsg.noob_name());
-		pData->set_role_level(1);
+		pData->set_role_level(0);
 		pData->set_delete_time(0);
 		pData->set_reg_time(0);
 		pData->set_last_offline_time(0);

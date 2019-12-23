@@ -32,7 +32,7 @@ bool NFPropertyModule::Init()
     m_pElementModule = pPluginManager->FindModule<NFIElementModule>();
     m_pClassModule = pPluginManager->FindModule<NFIClassModule>();
     m_pPropertyConfigModule = pPluginManager->FindModule<NFIPropertyConfigModule>();
-    m_pLevelModule = pPluginManager->FindModule<NFILevelModule>();
+    m_pLogModule = pPluginManager->FindModule<NFILogModule>();
 
     return true;
 }
@@ -85,48 +85,19 @@ int NFPropertyModule::SetPropertyValue(const NFGUID& self, const std::string& st
     return 0;
 }
 
-
-bool NFPropertyModule::CalculatePropertyValue(const NFGUID& self, const std::string& strPropertyName, const NFPropertyGroup eGroupType, const int64_t nValue, const bool bPositive)
-{
-	if (NFPropertyGroup::NPG_ALL == eGroupType)
-	{
-		int64_t nPropertyValue = m_pKernelModule->GetPropertyInt(self, strPropertyName);
-		nPropertyValue = nPropertyValue + nValue;
-		if (bPositive)
-		{
-			nPropertyValue = (nPropertyValue >= 0) ? nPropertyValue : 0;
-		}
-
-		m_pKernelModule->SetPropertyInt(self, strPropertyName, nPropertyValue);
-	}
-	else
-    {
-        NF_SHARE_PTR<NFIObject> pObject = m_pKernelModule->GetObject(self);
-        if (pObject)
-        {
-            NF_SHARE_PTR<NFIRecord> pRecord = m_pKernelModule->FindRecord(self, NFrame::Player::CommValue::ThisName());
-            if (pRecord)
-            {
-                pRecord->SetUsed(eGroupType, true);
-				int64_t nPropertyValue = pRecord->GetInt(eGroupType, strPropertyName);
-				nPropertyValue = nPropertyValue + nValue;
-				if (bPositive)
-				{
-					nPropertyValue = (nPropertyValue >= 0) ? nPropertyValue : 0;
-				}
-
-                return pRecord->SetInt(eGroupType, strPropertyName, nPropertyValue);
-            }
-        }
-    }
-
-    return false;
-}
-
 int NFPropertyModule::OnObjectLevelEvent(const NFGUID& self, const std::string& strPropertyName, const NFData& oldVar, const NFData& newVar)
 {
-	//if you dont play hero mode, please active the code below
-    RefreshBaseProperty(self);
+    const int job = m_pKernelModule->GetPropertyInt32(self, NFrame::Player::Job());
+    const int level = m_pKernelModule->GetPropertyInt32(self, NFrame::Player::Level());
+    const std::string& initPropertyID = m_pPropertyConfigModule->GetInitPropertyID(job, level);
+    const std::string& configID = m_pElementModule->GetPropertyString(initPropertyID, NFrame::InitProperty::HeroConfigID());
+
+    if (configID.empty() || !m_pElementModule->ExistElement(configID))
+    {
+        m_pLogModule->LogError(self, configID + " configID not exist!!!", __FUNCTION__, __LINE__);
+        return 1;
+    }
+    m_pKernelModule->SetPropertyString(self, NFrame::Player::ConfigID(), configID);
 
     FullHPMP(self);
     FullSP(self);
@@ -134,9 +105,13 @@ int NFPropertyModule::OnObjectLevelEvent(const NFGUID& self, const std::string& 
     return 0;
 }
 
+ int NFPropertyModule::OnObjectConfigIDEvent(const NFGUID& self, const std::string& strPropertyName, const NFData& oldVar, const NFData& newVar)
+ {
+    RefreshBaseProperty(self);
+ }
+
 int NFPropertyModule::OnRecordEvent(const NFGUID& self, const RECORD_EVENT_DATA& xEventData, const NFData& oldVar, const NFData& newVar)
 {
-    
     const std::string& strRecordName = xEventData.strRecordName;
     const int nOpType = xEventData.nOpType;
     const int nRow = xEventData.nRow;
@@ -173,56 +148,141 @@ int NFPropertyModule::OnObjectClassEvent(const NFGUID& self, const std::string& 
 				}
 			}
 
-			m_pKernelModule->AddPropertyCallBack(self, NFrame::Player::Level(), this, &NFPropertyModule::OnObjectLevelEvent);
-			m_pKernelModule->AddRecordCallBack(self, NFrame::Player::CommValue::ThisName(), this, &NFPropertyModule::OnRecordEvent);
 		}
-		else if (CLASS_OBJECT_EVENT::COE_CREATE_AFTER_ATTACHDATA == eClassEvent)
+		else if (CLASS_OBJECT_EVENT::COE_CREATE_BEFORE_ATTACHDATA == eClassEvent)
+        {
+           //cant attach the level event here as we will reset the property configID and Level by sequence
+           //as a result, the level event will be triggered first, then configID event triggered late, or the triggerr sequence in reverse
+           //that means if we added attach the level event here, we cant get the correct result
+        }
+		else if (CLASS_OBJECT_EVENT::COE_CREATE_LOADDATA == eClassEvent)
         {
            
 
         }
-        else if (CLASS_OBJECT_EVENT::COE_CREATE_EFFECTDATA == eClassEvent)
+		else if (CLASS_OBJECT_EVENT::COE_CREATE_AFTER_ATTACHDATA == eClassEvent)
         {
-            int nOnlineCount = m_pKernelModule->GetPropertyInt32(self, NFrame::Player::OnlineCount());
-            if (nOnlineCount <= 0 && m_pKernelModule->GetPropertyInt32(self, NFrame::Player::SceneID()) > 0)
+            //RefreshBaseProperty(self);
+            //RefreshAllProperty(self);
+
+			m_pKernelModule->AddPropertyCallBack(self, NFrame::Player::Level(), this, &NFPropertyModule::OnObjectLevelEvent);
+			m_pKernelModule->AddPropertyCallBack(self, NFrame::Player::ConfigID(), this, &NFPropertyModule::OnObjectConfigIDEvent);
+			m_pKernelModule->AddRecordCallBack(self, NFrame::Player::CommValue::ThisName(), this, &NFPropertyModule::OnRecordEvent);
+
+            int onlineCount = m_pKernelModule->GetPropertyInt32(self, NFrame::Player::OnlineCount());
+            m_pKernelModule->SetPropertyInt(self, NFrame::Player::OnlineCount(), (onlineCount + 1));
+
+            if (onlineCount <= 0 && m_pKernelModule->GetPropertyInt32(self, NFrame::Player::SceneID()) > 0)
             {
+                //first time online
                 m_pKernelModule->SetPropertyInt(self, NFrame::Player::Level(), 1);
             }
+            else
+            {
+                int level = m_pKernelModule->GetPropertyInt32(self, NFrame::Player::Level());
+                OnObjectLevelEvent(self, NFrame::Player::Level(), level, level);
+            }
+            
+        }
+        else if (CLASS_OBJECT_EVENT::COE_CREATE_EFFECTDATA == eClassEvent)
+        {
+            //the hero plugin could modify data in this event
+        }
+        else if (CLASS_OBJECT_EVENT::COE_CREATE_HASDATA == eClassEvent)
+        {
         }
         else if (CLASS_OBJECT_EVENT::COE_CREATE_FINISH == eClassEvent)
         {
-            int nOnlineCount = m_pKernelModule->GetPropertyInt32(self, NFrame::Player::OnlineCount());
-            m_pKernelModule->SetPropertyInt(self, NFrame::Player::OnlineCount(), (nOnlineCount + 1));
-
         }
     }
 
     return 0;
 }
 
-int NFPropertyModule::RefreshBaseProperty(const NFGUID& self)
+void NFPropertyModule::RefreshBaseProperty(const NFGUID& self)
 {
+    const std::string& configID = m_pKernelModule->GetPropertyString(self, NFrame::Player::ConfigID());
+    const std::string& effectData = m_pElementModule->GetPropertyString(configID, NFrame::NPC::EffectData());
+    if (effectData.empty() || !m_pElementModule->ExistElement(effectData))
+    {
+        m_pLogModule->LogError(self, effectData + " effectData not exist!!!", __FUNCTION__, __LINE__);
+        return;
+    }
+
     NF_SHARE_PTR<NFIRecord> pRecord = m_pKernelModule->FindRecord(self, NFrame::Player::CommValue::ThisName());
     if (!pRecord)
     {
-        return 1;
+        return;
     }
-
-    
-    int eJobType = m_pKernelModule->GetPropertyInt32(self, NFrame::Player::Job());
-    int nLevel = m_pKernelModule->GetPropertyInt32(self, NFrame::Player::Level());
-
-    const std::string& strInitPropertyID = m_pPropertyConfigModule->GetInitPropertyID(eJobType, nLevel);
-    //const std::string& strInitPropertyID = m_pElementModule ->get(eJobType, nLevel);
 
     for (int i = 0; i < pRecord->GetCols(); ++i)
     {
         const std::string& strColTag = pRecord->GetColTag(i);
-        int nValue = (int)m_pPropertyConfigModule->CalculateBaseValue(eJobType, nLevel, strColTag);
+        NFINT64 nValue = m_pElementModule->GetPropertyInt(effectData, strColTag);
+
         SetPropertyValue(self, strColTag, NFPropertyGroup::NPG_JOBLEVEL, nValue);
     }
+}
 
-    return 0;
+void NFPropertyModule::RefreshAllProperty(const NFGUID& self)
+{
+    const std::string& configID = m_pKernelModule->GetPropertyString(self, NFrame::Player::ConfigID());
+    const std::string& effectData = m_pElementModule->GetPropertyString(configID, NFrame::NPC::EffectData());
+    if (effectData.empty() || !m_pElementModule->ExistElement(effectData))
+    {
+        m_pLogModule->LogError(self, effectData + " effectData not exist!!!", __FUNCTION__, __LINE__);
+        return;
+    }
+
+    NF_SHARE_PTR<NFIRecord> pRecord = m_pKernelModule->FindRecord(self, NFrame::Player::CommValue::ThisName());
+    for (int col = 0; col < pRecord->GetCols(); col++)
+    {
+        int64_t nAllValue = 0;
+
+        for (int i = 0; i < (int)(NFPropertyGroup::NPG_ALL); i++)
+        {
+            if (i < pRecord->GetRows())
+            {
+                int64_t nValue = pRecord->GetInt(i, col);
+                nAllValue += nValue;
+            }
+        }
+
+        m_pKernelModule->SetPropertyInt(self, pRecord->GetColTag(col), nAllValue);
+    }
+}
+
+bool NFPropertyModule::AddExp(const NFGUID& self, const int64_t nExp)
+{
+    int eJobType = m_pKernelModule->GetPropertyInt32(self, NFrame::Player::Job());
+    int64_t nCurExp = m_pKernelModule->GetPropertyInt(self, NFrame::Player::EXP());
+    int nLevel = m_pKernelModule->GetPropertyInt32(self, NFrame::Player::Level());
+    int64_t nMaxExp = (int)m_pPropertyConfigModule->CalculateBaseValue(eJobType, nLevel, NFrame::Player::MAXEXP());
+
+    nCurExp += nExp;
+
+    int64_t nRemainExp = nCurExp - nMaxExp;
+    while (nRemainExp >= 0)
+    {
+        
+        nLevel++;
+        
+        m_pKernelModule->SetPropertyInt(self, NFrame::Player::Level(), nLevel);
+
+        nCurExp = nRemainExp;
+
+        nMaxExp = (int)m_pPropertyConfigModule->CalculateBaseValue(eJobType, nLevel, NFrame::Player::MAXEXP());
+        if (nMaxExp <= 0)
+        {
+            break;
+        }
+
+        nRemainExp -= nMaxExp;
+    }
+
+    m_pKernelModule->SetPropertyInt(self, NFrame::Player::EXP(), nCurExp);
+
+    return true;
 }
 
 bool NFPropertyModule::FullHPMP(const NFGUID& self)

@@ -51,7 +51,6 @@ bool NFNPCRefreshModule::AfterInit()
     m_pSceneProcessModule = pPluginManager->FindModule<NFISceneProcessModule>();
     m_pElementModule = pPluginManager->FindModule<NFIElementModule>();
 	m_pLogModule = pPluginManager->FindModule<NFILogModule>();
-	m_pLevelModule = pPluginManager->FindModule<NFILevelModule>();
 	m_pPropertyModule = pPluginManager->FindModule<NFIPropertyModule>();
 
 	m_pKernelModule->AddClassCallBack(NFrame::NPC::ThisName(), this, &NFNPCRefreshModule::OnObjectClassEvent);
@@ -222,7 +221,7 @@ int NFNPCRefreshModule::OnObjectBeKilled( const NFGUID& self, const NFGUID& kill
 			const int64_t nGold = m_pKernelModule->GetPropertyInt( self, NFrame::NPC::Gold() );
 			const int64_t nDiamond = m_pKernelModule->GetPropertyInt( self, NFrame::NPC::Diamond() );
 
-			m_pLevelModule->AddExp(killer, nExp);
+			m_pPropertyModule->AddExp(killer, nExp);
 			m_pPropertyModule->AddGold(killer, nGold);
 			m_pPropertyModule->AddDiamond(killer, nDiamond);
 

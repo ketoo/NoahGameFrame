@@ -286,11 +286,9 @@ namespace NFrame
 		static const std::string& Position(){ static std::string x = "Position"; return x; };// vector3
 		static const std::string& SceneID(){ static std::string x = "SceneID"; return x; };// int
 		// Property
-		static const std::string& EffectData(){ static std::string x = "EffectData"; return x; };// string
+		static const std::string& HeroConfigID(){ static std::string x = "HeroConfigID"; return x; };// string
 		static const std::string& Job(){ static std::string x = "Job"; return x; };// int
 		static const std::string& Level(){ static std::string x = "Level"; return x; };// int
-		static const std::string& ModelPtah(){ static std::string x = "ModelPtah"; return x; };// string
-		static const std::string& SkillIDRef(){ static std::string x = "SkillIDRef"; return x; };// string
 		// Record
 
 	};

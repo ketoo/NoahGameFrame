@@ -286,11 +286,9 @@ namespace NFrame
 		public static readonly String Position = "Position";// vector3
 		public static readonly String SceneID = "SceneID";// int
 		// Property
-		public static readonly String EffectData = "EffectData";// string
+		public static readonly String HeroConfigID = "HeroConfigID";// string
 		public static readonly String Job = "Job";// int
 		public static readonly String Level = "Level";// int
-		public static readonly String ModelPtah = "ModelPtah";// string
-		public static readonly String SkillIDRef = "SkillIDRef";// string
 		// Record
 
 	}

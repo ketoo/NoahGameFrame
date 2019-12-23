@@ -26,8 +26,12 @@
 #define NF_MASTER_MODULE_H
 
 #include "NFComm/NFPluginModule/NFIKernelModule.h"
-#include "NFComm/NFPluginModule/NFIMasterModule.h"
 #include "NFComm/NFPluginModule/NFIMasterNet_ServerModule.h"
+
+class NFIMasterModule
+    : public NFIModule
+{
+};
 
 class NFMasterModule
     : public NFIMasterModule

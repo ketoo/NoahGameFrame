@@ -38,8 +38,14 @@
 #include "NFComm/NFPluginModule/NFISceneModule.h"
 #include "NFComm/NFPluginModule/NFIGameServerToWorldModule.h"
 #include "NFComm/NFPluginModule/NFIGameServerNet_ServerModule.h"
-#include "NFComm/NFPluginModule/NFIAutoBroadcastModule.h"
 ////////////////////////////////////////////////////////////////////////////
+
+class NFIAutoBroadcastModule
+    : public NFIModule
+{
+public:
+
+};
 
 class NFAutoBroadcastModule
     : public NFIAutoBroadcastModule

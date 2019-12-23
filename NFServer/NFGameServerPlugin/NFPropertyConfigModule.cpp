@@ -97,7 +97,6 @@ void NFPropertyConfigModule::Load()
             {
                 const int nJob = m_pElementModule->GetPropertyInt32(strId, NFrame::InitProperty::Job());
                 const int nLevel = m_pElementModule->GetPropertyInt32(strId, NFrame::InitProperty::Level());
-                const std::string& strID = m_pElementModule->GetPropertyString(strId, NFrame::InitProperty::ID());
 
 				auto xPropertyMap = mhtCoefficienData.find(nJob);
 				if (xPropertyMap == mhtCoefficienData.end())
@@ -111,7 +110,7 @@ void NFPropertyConfigModule::Load()
 				auto xRefPropertyIDName = xPropertyMap->second.find(nLevel);
 				if (xRefPropertyIDName == xPropertyMap->second.end())
 				{
-					xPropertyMap->second.insert(std::make_pair(nLevel, strID));
+					xPropertyMap->second.insert(std::make_pair(nLevel, strId));
 				}
             }
         }
