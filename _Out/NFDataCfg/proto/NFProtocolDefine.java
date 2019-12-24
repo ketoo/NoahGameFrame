@@ -10,45 +10,13 @@ package nframe;
 		//Class name
 		public static final String ThisName = "DescData";
 		// IObject
-		public static final String ATK_DARK = "ATK_DARK";// int
-		public static final String ATK_FIRE = "ATK_FIRE";// int
-		public static final String ATK_ICE = "ATK_ICE";// int
-		public static final String ATK_LIGHT = "ATK_LIGHT";// int
-		public static final String ATK_POISON = "ATK_POISON";// int
-		public static final String ATK_SPEED = "ATK_SPEED";// int
-		public static final String ATK_VALUE = "ATK_VALUE";// int
-		public static final String ATK_WIND = "ATK_WIND";// int
-		public static final String BUFF_GATE = "BUFF_GATE";// int
-		public static final String CRITICAL = "CRITICAL";// int
 		public static final String ClassName = "ClassName";// string
 		public static final String ConfigID = "ConfigID";// string
-		public static final String DEF_DARK = "DEF_DARK";// int
-		public static final String DEF_FIRE = "DEF_FIRE";// int
-		public static final String DEF_ICE = "DEF_ICE";// int
-		public static final String DEF_LIGHT = "DEF_LIGHT";// int
-		public static final String DEF_POISON = "DEF_POISON";// int
-		public static final String DEF_VALUE = "DEF_VALUE";// int
-		public static final String DEF_WIND = "DEF_WIND";// int
-		public static final String DIZZY_GATE = "DIZZY_GATE";// int
 		public static final String GroupID = "GroupID";// int
-		public static final String HPREGEN = "HPREGEN";// int
 		public static final String ID = "ID";// string
-		public static final String LUCK = "LUCK";// int
-		public static final String MAGIC_GATE = "MAGIC_GATE";// int
-		public static final String MAXHP = "MAXHP";// int
-		public static final String MAXMP = "MAXMP";// int
-		public static final String MAXSP = "MAXSP";// int
-		public static final String MOVE_GATE = "MOVE_GATE";// int
-		public static final String MOVE_SPEED = "MOVE_SPEED";// int
-		public static final String MPREGEN = "MPREGEN";// int
 		public static final String MoveTo = "MoveTo";// vector3
 		public static final String Name = "Name";// string
-		public static final String PHYSICAL_GATE = "PHYSICAL_GATE";// int
 		public static final String Position = "Position";// vector3
-		public static final String REFLECTDAMAGE = "REFLECTDAMAGE";// int
-		public static final String SKILL_GATE = "SKILL_GATE";// int
-		public static final String SPREGEN = "SPREGEN";// int
-		public static final String SUCKBLOOD = "SUCKBLOOD";// int
 		public static final String SceneID = "SceneID";// int
 		// Property
 		public static final String Atlas = "Atlas";// string
@@ -66,45 +34,13 @@ package nframe;
 		//Class name
 		public static final String ThisName = "EffectData";
 		// IObject
-		public static final String ATK_DARK = "ATK_DARK";// int
-		public static final String ATK_FIRE = "ATK_FIRE";// int
-		public static final String ATK_ICE = "ATK_ICE";// int
-		public static final String ATK_LIGHT = "ATK_LIGHT";// int
-		public static final String ATK_POISON = "ATK_POISON";// int
-		public static final String ATK_SPEED = "ATK_SPEED";// int
-		public static final String ATK_VALUE = "ATK_VALUE";// int
-		public static final String ATK_WIND = "ATK_WIND";// int
-		public static final String BUFF_GATE = "BUFF_GATE";// int
-		public static final String CRITICAL = "CRITICAL";// int
 		public static final String ClassName = "ClassName";// string
 		public static final String ConfigID = "ConfigID";// string
-		public static final String DEF_DARK = "DEF_DARK";// int
-		public static final String DEF_FIRE = "DEF_FIRE";// int
-		public static final String DEF_ICE = "DEF_ICE";// int
-		public static final String DEF_LIGHT = "DEF_LIGHT";// int
-		public static final String DEF_POISON = "DEF_POISON";// int
-		public static final String DEF_VALUE = "DEF_VALUE";// int
-		public static final String DEF_WIND = "DEF_WIND";// int
-		public static final String DIZZY_GATE = "DIZZY_GATE";// int
 		public static final String GroupID = "GroupID";// int
-		public static final String HPREGEN = "HPREGEN";// int
 		public static final String ID = "ID";// string
-		public static final String LUCK = "LUCK";// int
-		public static final String MAGIC_GATE = "MAGIC_GATE";// int
-		public static final String MAXHP = "MAXHP";// int
-		public static final String MAXMP = "MAXMP";// int
-		public static final String MAXSP = "MAXSP";// int
-		public static final String MOVE_GATE = "MOVE_GATE";// int
-		public static final String MOVE_SPEED = "MOVE_SPEED";// int
-		public static final String MPREGEN = "MPREGEN";// int
 		public static final String MoveTo = "MoveTo";// vector3
 		public static final String Name = "Name";// string
-		public static final String PHYSICAL_GATE = "PHYSICAL_GATE";// int
 		public static final String Position = "Position";// vector3
-		public static final String REFLECTDAMAGE = "REFLECTDAMAGE";// int
-		public static final String SKILL_GATE = "SKILL_GATE";// int
-		public static final String SPREGEN = "SPREGEN";// int
-		public static final String SUCKBLOOD = "SUCKBLOOD";// int
 		public static final String SceneID = "SceneID";// int
 		// Property
 		public static final String ATK_DARK = "ATK_DARK";// int
@@ -143,6 +79,44 @@ package nframe;
 		public static final String SPREGEN = "SPREGEN";// int
 		public static final String SUCKBLOOD = "SUCKBLOOD";// int
 		// Record
+		public class CommValue
+		{
+			//Class name
+			public static final String ThisName = "CommValue";
+			public static final int SUCKBLOOD = 0;//int
+			public static final int REFLECTDAMAGE = 1;//int
+			public static final int CRITICAL = 2;//int
+			public static final int MAXHP = 3;//int
+			public static final int MAXMP = 4;//int
+			public static final int MAXSP = 5;//int
+			public static final int HPREGEN = 6;//int
+			public static final int SPREGEN = 7;//int
+			public static final int MPREGEN = 8;//int
+			public static final int ATK_VALUE = 9;//int
+			public static final int DEF_VALUE = 10;//int
+			public static final int MOVE_SPEED = 11;//int
+			public static final int ATK_SPEED = 12;//int
+			public static final int ATK_FIRE = 13;//int
+			public static final int ATK_LIGHT = 14;//int
+			public static final int ATK_DARK = 15;//int
+			public static final int ATK_WIND = 16;//int
+			public static final int ATK_ICE = 17;//int
+			public static final int ATK_POISON = 18;//int
+			public static final int DEF_FIRE = 19;//int
+			public static final int DEF_LIGHT = 20;//int
+			public static final int DEF_DARK = 21;//int
+			public static final int DEF_WIND = 22;//int
+			public static final int DEF_ICE = 23;//int
+			public static final int DEF_POISON = 24;//int
+			public static final int DIZZY_GATE = 25;//int
+			public static final int MOVE_GATE = 26;//int
+			public static final int SKILL_GATE = 27;//int
+			public static final int PHYSICAL_GATE = 28;//int
+			public static final int MAGIC_GATE = 29;//int
+			public static final int BUFF_GATE = 30;//int
+			public static final int LUCK = 31;//int
+
+		}
 
 	}
 	public class GM
@@ -150,45 +124,13 @@ package nframe;
 		//Class name
 		public static final String ThisName = "GM";
 		// IObject
-		public static final String ATK_DARK = "ATK_DARK";// int
-		public static final String ATK_FIRE = "ATK_FIRE";// int
-		public static final String ATK_ICE = "ATK_ICE";// int
-		public static final String ATK_LIGHT = "ATK_LIGHT";// int
-		public static final String ATK_POISON = "ATK_POISON";// int
-		public static final String ATK_SPEED = "ATK_SPEED";// int
-		public static final String ATK_VALUE = "ATK_VALUE";// int
-		public static final String ATK_WIND = "ATK_WIND";// int
-		public static final String BUFF_GATE = "BUFF_GATE";// int
-		public static final String CRITICAL = "CRITICAL";// int
 		public static final String ClassName = "ClassName";// string
 		public static final String ConfigID = "ConfigID";// string
-		public static final String DEF_DARK = "DEF_DARK";// int
-		public static final String DEF_FIRE = "DEF_FIRE";// int
-		public static final String DEF_ICE = "DEF_ICE";// int
-		public static final String DEF_LIGHT = "DEF_LIGHT";// int
-		public static final String DEF_POISON = "DEF_POISON";// int
-		public static final String DEF_VALUE = "DEF_VALUE";// int
-		public static final String DEF_WIND = "DEF_WIND";// int
-		public static final String DIZZY_GATE = "DIZZY_GATE";// int
 		public static final String GroupID = "GroupID";// int
-		public static final String HPREGEN = "HPREGEN";// int
 		public static final String ID = "ID";// string
-		public static final String LUCK = "LUCK";// int
-		public static final String MAGIC_GATE = "MAGIC_GATE";// int
-		public static final String MAXHP = "MAXHP";// int
-		public static final String MAXMP = "MAXMP";// int
-		public static final String MAXSP = "MAXSP";// int
-		public static final String MOVE_GATE = "MOVE_GATE";// int
-		public static final String MOVE_SPEED = "MOVE_SPEED";// int
-		public static final String MPREGEN = "MPREGEN";// int
 		public static final String MoveTo = "MoveTo";// vector3
 		public static final String Name = "Name";// string
-		public static final String PHYSICAL_GATE = "PHYSICAL_GATE";// int
 		public static final String Position = "Position";// vector3
-		public static final String REFLECTDAMAGE = "REFLECTDAMAGE";// int
-		public static final String SKILL_GATE = "SKILL_GATE";// int
-		public static final String SPREGEN = "SPREGEN";// int
-		public static final String SUCKBLOOD = "SUCKBLOOD";// int
 		public static final String SceneID = "SceneID";// int
 		// Property
 		public static final String Level = "Level";// int
@@ -200,45 +142,13 @@ package nframe;
 		//Class name
 		public static final String ThisName = "Group";
 		// IObject
-		public static final String ATK_DARK = "ATK_DARK";// int
-		public static final String ATK_FIRE = "ATK_FIRE";// int
-		public static final String ATK_ICE = "ATK_ICE";// int
-		public static final String ATK_LIGHT = "ATK_LIGHT";// int
-		public static final String ATK_POISON = "ATK_POISON";// int
-		public static final String ATK_SPEED = "ATK_SPEED";// int
-		public static final String ATK_VALUE = "ATK_VALUE";// int
-		public static final String ATK_WIND = "ATK_WIND";// int
-		public static final String BUFF_GATE = "BUFF_GATE";// int
-		public static final String CRITICAL = "CRITICAL";// int
 		public static final String ClassName = "ClassName";// string
 		public static final String ConfigID = "ConfigID";// string
-		public static final String DEF_DARK = "DEF_DARK";// int
-		public static final String DEF_FIRE = "DEF_FIRE";// int
-		public static final String DEF_ICE = "DEF_ICE";// int
-		public static final String DEF_LIGHT = "DEF_LIGHT";// int
-		public static final String DEF_POISON = "DEF_POISON";// int
-		public static final String DEF_VALUE = "DEF_VALUE";// int
-		public static final String DEF_WIND = "DEF_WIND";// int
-		public static final String DIZZY_GATE = "DIZZY_GATE";// int
 		public static final String GroupID = "GroupID";// int
-		public static final String HPREGEN = "HPREGEN";// int
 		public static final String ID = "ID";// string
-		public static final String LUCK = "LUCK";// int
-		public static final String MAGIC_GATE = "MAGIC_GATE";// int
-		public static final String MAXHP = "MAXHP";// int
-		public static final String MAXMP = "MAXMP";// int
-		public static final String MAXSP = "MAXSP";// int
-		public static final String MOVE_GATE = "MOVE_GATE";// int
-		public static final String MOVE_SPEED = "MOVE_SPEED";// int
-		public static final String MPREGEN = "MPREGEN";// int
 		public static final String MoveTo = "MoveTo";// vector3
 		public static final String Name = "Name";// string
-		public static final String PHYSICAL_GATE = "PHYSICAL_GATE";// int
 		public static final String Position = "Position";// vector3
-		public static final String REFLECTDAMAGE = "REFLECTDAMAGE";// int
-		public static final String SKILL_GATE = "SKILL_GATE";// int
-		public static final String SPREGEN = "SPREGEN";// int
-		public static final String SUCKBLOOD = "SUCKBLOOD";// int
 		public static final String SceneID = "SceneID";// int
 		// Property
 		public static final String MatchGambleDiamond = "MatchGambleDiamond";// int
@@ -298,85 +208,15 @@ package nframe;
 		//Class name
 		public static final String ThisName = "IObject";
 		// Property
-		public static final String ATK_DARK = "ATK_DARK";// int
-		public static final String ATK_FIRE = "ATK_FIRE";// int
-		public static final String ATK_ICE = "ATK_ICE";// int
-		public static final String ATK_LIGHT = "ATK_LIGHT";// int
-		public static final String ATK_POISON = "ATK_POISON";// int
-		public static final String ATK_SPEED = "ATK_SPEED";// int
-		public static final String ATK_VALUE = "ATK_VALUE";// int
-		public static final String ATK_WIND = "ATK_WIND";// int
-		public static final String BUFF_GATE = "BUFF_GATE";// int
-		public static final String CRITICAL = "CRITICAL";// int
 		public static final String ClassName = "ClassName";// string
 		public static final String ConfigID = "ConfigID";// string
-		public static final String DEF_DARK = "DEF_DARK";// int
-		public static final String DEF_FIRE = "DEF_FIRE";// int
-		public static final String DEF_ICE = "DEF_ICE";// int
-		public static final String DEF_LIGHT = "DEF_LIGHT";// int
-		public static final String DEF_POISON = "DEF_POISON";// int
-		public static final String DEF_VALUE = "DEF_VALUE";// int
-		public static final String DEF_WIND = "DEF_WIND";// int
-		public static final String DIZZY_GATE = "DIZZY_GATE";// int
 		public static final String GroupID = "GroupID";// int
-		public static final String HPREGEN = "HPREGEN";// int
 		public static final String ID = "ID";// string
-		public static final String LUCK = "LUCK";// int
-		public static final String MAGIC_GATE = "MAGIC_GATE";// int
-		public static final String MAXHP = "MAXHP";// int
-		public static final String MAXMP = "MAXMP";// int
-		public static final String MAXSP = "MAXSP";// int
-		public static final String MOVE_GATE = "MOVE_GATE";// int
-		public static final String MOVE_SPEED = "MOVE_SPEED";// int
-		public static final String MPREGEN = "MPREGEN";// int
 		public static final String MoveTo = "MoveTo";// vector3
 		public static final String Name = "Name";// string
-		public static final String PHYSICAL_GATE = "PHYSICAL_GATE";// int
 		public static final String Position = "Position";// vector3
-		public static final String REFLECTDAMAGE = "REFLECTDAMAGE";// int
-		public static final String SKILL_GATE = "SKILL_GATE";// int
-		public static final String SPREGEN = "SPREGEN";// int
-		public static final String SUCKBLOOD = "SUCKBLOOD";// int
 		public static final String SceneID = "SceneID";// int
 		// Record
-		public class CommValue
-		{
-			//Class name
-			public static final String ThisName = "CommValue";
-			public static final int SUCKBLOOD = 0;//int
-			public static final int REFLECTDAMAGE = 1;//int
-			public static final int CRITICAL = 2;//int
-			public static final int MAXHP = 3;//int
-			public static final int MAXMP = 4;//int
-			public static final int MAXSP = 5;//int
-			public static final int HPREGEN = 6;//int
-			public static final int SPREGEN = 7;//int
-			public static final int MPREGEN = 8;//int
-			public static final int ATK_VALUE = 9;//int
-			public static final int DEF_VALUE = 10;//int
-			public static final int MOVE_SPEED = 11;//int
-			public static final int ATK_SPEED = 12;//int
-			public static final int ATK_FIRE = 13;//int
-			public static final int ATK_LIGHT = 14;//int
-			public static final int ATK_DARK = 15;//int
-			public static final int ATK_WIND = 16;//int
-			public static final int ATK_ICE = 17;//int
-			public static final int ATK_POISON = 18;//int
-			public static final int DEF_FIRE = 19;//int
-			public static final int DEF_LIGHT = 20;//int
-			public static final int DEF_DARK = 21;//int
-			public static final int DEF_WIND = 22;//int
-			public static final int DEF_ICE = 23;//int
-			public static final int DEF_POISON = 24;//int
-			public static final int DIZZY_GATE = 25;//int
-			public static final int MOVE_GATE = 26;//int
-			public static final int SKILL_GATE = 27;//int
-			public static final int PHYSICAL_GATE = 28;//int
-			public static final int MAGIC_GATE = 29;//int
-			public static final int BUFF_GATE = 30;//int
-			public static final int LUCK = 31;//int
-
-		}
 
 	}
 	public class InitProperty
@@ -384,45 +224,13 @@ package nframe;
 		//Class name
 		public static final String ThisName = "InitProperty";
 		// IObject
-		public static final String ATK_DARK = "ATK_DARK";// int
-		public static final String ATK_FIRE = "ATK_FIRE";// int
-		public static final String ATK_ICE = "ATK_ICE";// int
-		public static final String ATK_LIGHT = "ATK_LIGHT";// int
-		public static final String ATK_POISON = "ATK_POISON";// int
-		public static final String ATK_SPEED = "ATK_SPEED";// int
-		public static final String ATK_VALUE = "ATK_VALUE";// int
-		public static final String ATK_WIND = "ATK_WIND";// int
-		public static final String BUFF_GATE = "BUFF_GATE";// int
-		public static final String CRITICAL = "CRITICAL";// int
 		public static final String ClassName = "ClassName";// string
 		public static final String ConfigID = "ConfigID";// string
-		public static final String DEF_DARK = "DEF_DARK";// int
-		public static final String DEF_FIRE = "DEF_FIRE";// int
-		public static final String DEF_ICE = "DEF_ICE";// int
-		public static final String DEF_LIGHT = "DEF_LIGHT";// int
-		public static final String DEF_POISON = "DEF_POISON";// int
-		public static final String DEF_VALUE = "DEF_VALUE";// int
-		public static final String DEF_WIND = "DEF_WIND";// int
-		public static final String DIZZY_GATE = "DIZZY_GATE";// int
 		public static final String GroupID = "GroupID";// int
-		public static final String HPREGEN = "HPREGEN";// int
 		public static final String ID = "ID";// string
-		public static final String LUCK = "LUCK";// int
-		public static final String MAGIC_GATE = "MAGIC_GATE";// int
-		public static final String MAXHP = "MAXHP";// int
-		public static final String MAXMP = "MAXMP";// int
-		public static final String MAXSP = "MAXSP";// int
-		public static final String MOVE_GATE = "MOVE_GATE";// int
-		public static final String MOVE_SPEED = "MOVE_SPEED";// int
-		public static final String MPREGEN = "MPREGEN";// int
 		public static final String MoveTo = "MoveTo";// vector3
 		public static final String Name = "Name";// string
-		public static final String PHYSICAL_GATE = "PHYSICAL_GATE";// int
 		public static final String Position = "Position";// vector3
-		public static final String REFLECTDAMAGE = "REFLECTDAMAGE";// int
-		public static final String SKILL_GATE = "SKILL_GATE";// int
-		public static final String SPREGEN = "SPREGEN";// int
-		public static final String SUCKBLOOD = "SUCKBLOOD";// int
 		public static final String SceneID = "SceneID";// int
 		// Property
 		public static final String HeroConfigID = "HeroConfigID";// string
@@ -436,45 +244,13 @@ package nframe;
 		//Class name
 		public static final String ThisName = "Language";
 		// IObject
-		public static final String ATK_DARK = "ATK_DARK";// int
-		public static final String ATK_FIRE = "ATK_FIRE";// int
-		public static final String ATK_ICE = "ATK_ICE";// int
-		public static final String ATK_LIGHT = "ATK_LIGHT";// int
-		public static final String ATK_POISON = "ATK_POISON";// int
-		public static final String ATK_SPEED = "ATK_SPEED";// int
-		public static final String ATK_VALUE = "ATK_VALUE";// int
-		public static final String ATK_WIND = "ATK_WIND";// int
-		public static final String BUFF_GATE = "BUFF_GATE";// int
-		public static final String CRITICAL = "CRITICAL";// int
 		public static final String ClassName = "ClassName";// string
 		public static final String ConfigID = "ConfigID";// string
-		public static final String DEF_DARK = "DEF_DARK";// int
-		public static final String DEF_FIRE = "DEF_FIRE";// int
-		public static final String DEF_ICE = "DEF_ICE";// int
-		public static final String DEF_LIGHT = "DEF_LIGHT";// int
-		public static final String DEF_POISON = "DEF_POISON";// int
-		public static final String DEF_VALUE = "DEF_VALUE";// int
-		public static final String DEF_WIND = "DEF_WIND";// int
-		public static final String DIZZY_GATE = "DIZZY_GATE";// int
 		public static final String GroupID = "GroupID";// int
-		public static final String HPREGEN = "HPREGEN";// int
 		public static final String ID = "ID";// string
-		public static final String LUCK = "LUCK";// int
-		public static final String MAGIC_GATE = "MAGIC_GATE";// int
-		public static final String MAXHP = "MAXHP";// int
-		public static final String MAXMP = "MAXMP";// int
-		public static final String MAXSP = "MAXSP";// int
-		public static final String MOVE_GATE = "MOVE_GATE";// int
-		public static final String MOVE_SPEED = "MOVE_SPEED";// int
-		public static final String MPREGEN = "MPREGEN";// int
 		public static final String MoveTo = "MoveTo";// vector3
 		public static final String Name = "Name";// string
-		public static final String PHYSICAL_GATE = "PHYSICAL_GATE";// int
 		public static final String Position = "Position";// vector3
-		public static final String REFLECTDAMAGE = "REFLECTDAMAGE";// int
-		public static final String SKILL_GATE = "SKILL_GATE";// int
-		public static final String SPREGEN = "SPREGEN";// int
-		public static final String SUCKBLOOD = "SUCKBLOOD";// int
 		public static final String SceneID = "SceneID";// int
 		// Property
 		public static final String Chinese = "Chinese";// string
@@ -489,45 +265,13 @@ package nframe;
 		//Class name
 		public static final String ThisName = "NPC";
 		// IObject
-		public static final String ATK_DARK = "ATK_DARK";// int
-		public static final String ATK_FIRE = "ATK_FIRE";// int
-		public static final String ATK_ICE = "ATK_ICE";// int
-		public static final String ATK_LIGHT = "ATK_LIGHT";// int
-		public static final String ATK_POISON = "ATK_POISON";// int
-		public static final String ATK_SPEED = "ATK_SPEED";// int
-		public static final String ATK_VALUE = "ATK_VALUE";// int
-		public static final String ATK_WIND = "ATK_WIND";// int
-		public static final String BUFF_GATE = "BUFF_GATE";// int
-		public static final String CRITICAL = "CRITICAL";// int
 		public static final String ClassName = "ClassName";// string
 		public static final String ConfigID = "ConfigID";// string
-		public static final String DEF_DARK = "DEF_DARK";// int
-		public static final String DEF_FIRE = "DEF_FIRE";// int
-		public static final String DEF_ICE = "DEF_ICE";// int
-		public static final String DEF_LIGHT = "DEF_LIGHT";// int
-		public static final String DEF_POISON = "DEF_POISON";// int
-		public static final String DEF_VALUE = "DEF_VALUE";// int
-		public static final String DEF_WIND = "DEF_WIND";// int
-		public static final String DIZZY_GATE = "DIZZY_GATE";// int
 		public static final String GroupID = "GroupID";// int
-		public static final String HPREGEN = "HPREGEN";// int
 		public static final String ID = "ID";// string
-		public static final String LUCK = "LUCK";// int
-		public static final String MAGIC_GATE = "MAGIC_GATE";// int
-		public static final String MAXHP = "MAXHP";// int
-		public static final String MAXMP = "MAXMP";// int
-		public static final String MAXSP = "MAXSP";// int
-		public static final String MOVE_GATE = "MOVE_GATE";// int
-		public static final String MOVE_SPEED = "MOVE_SPEED";// int
-		public static final String MPREGEN = "MPREGEN";// int
 		public static final String MoveTo = "MoveTo";// vector3
 		public static final String Name = "Name";// string
-		public static final String PHYSICAL_GATE = "PHYSICAL_GATE";// int
 		public static final String Position = "Position";// vector3
-		public static final String REFLECTDAMAGE = "REFLECTDAMAGE";// int
-		public static final String SKILL_GATE = "SKILL_GATE";// int
-		public static final String SPREGEN = "SPREGEN";// int
-		public static final String SUCKBLOOD = "SUCKBLOOD";// int
 		public static final String SceneID = "SceneID";// int
 		// Property
 		public static final String AIOwnerID = "AIOwnerID";// object
@@ -577,45 +321,13 @@ package nframe;
 		//Class name
 		public static final String ThisName = "NoSqlServer";
 		// IObject
-		public static final String ATK_DARK = "ATK_DARK";// int
-		public static final String ATK_FIRE = "ATK_FIRE";// int
-		public static final String ATK_ICE = "ATK_ICE";// int
-		public static final String ATK_LIGHT = "ATK_LIGHT";// int
-		public static final String ATK_POISON = "ATK_POISON";// int
-		public static final String ATK_SPEED = "ATK_SPEED";// int
-		public static final String ATK_VALUE = "ATK_VALUE";// int
-		public static final String ATK_WIND = "ATK_WIND";// int
-		public static final String BUFF_GATE = "BUFF_GATE";// int
-		public static final String CRITICAL = "CRITICAL";// int
 		public static final String ClassName = "ClassName";// string
 		public static final String ConfigID = "ConfigID";// string
-		public static final String DEF_DARK = "DEF_DARK";// int
-		public static final String DEF_FIRE = "DEF_FIRE";// int
-		public static final String DEF_ICE = "DEF_ICE";// int
-		public static final String DEF_LIGHT = "DEF_LIGHT";// int
-		public static final String DEF_POISON = "DEF_POISON";// int
-		public static final String DEF_VALUE = "DEF_VALUE";// int
-		public static final String DEF_WIND = "DEF_WIND";// int
-		public static final String DIZZY_GATE = "DIZZY_GATE";// int
 		public static final String GroupID = "GroupID";// int
-		public static final String HPREGEN = "HPREGEN";// int
 		public static final String ID = "ID";// string
-		public static final String LUCK = "LUCK";// int
-		public static final String MAGIC_GATE = "MAGIC_GATE";// int
-		public static final String MAXHP = "MAXHP";// int
-		public static final String MAXMP = "MAXMP";// int
-		public static final String MAXSP = "MAXSP";// int
-		public static final String MOVE_GATE = "MOVE_GATE";// int
-		public static final String MOVE_SPEED = "MOVE_SPEED";// int
-		public static final String MPREGEN = "MPREGEN";// int
 		public static final String MoveTo = "MoveTo";// vector3
 		public static final String Name = "Name";// string
-		public static final String PHYSICAL_GATE = "PHYSICAL_GATE";// int
 		public static final String Position = "Position";// vector3
-		public static final String REFLECTDAMAGE = "REFLECTDAMAGE";// int
-		public static final String SKILL_GATE = "SKILL_GATE";// int
-		public static final String SPREGEN = "SPREGEN";// int
-		public static final String SUCKBLOOD = "SUCKBLOOD";// int
 		public static final String SceneID = "SceneID";// int
 		// Property
 		public static final String Auth = "Auth";// string
@@ -630,45 +342,13 @@ package nframe;
 		//Class name
 		public static final String ThisName = "Player";
 		// IObject
-		public static final String ATK_DARK = "ATK_DARK";// int
-		public static final String ATK_FIRE = "ATK_FIRE";// int
-		public static final String ATK_ICE = "ATK_ICE";// int
-		public static final String ATK_LIGHT = "ATK_LIGHT";// int
-		public static final String ATK_POISON = "ATK_POISON";// int
-		public static final String ATK_SPEED = "ATK_SPEED";// int
-		public static final String ATK_VALUE = "ATK_VALUE";// int
-		public static final String ATK_WIND = "ATK_WIND";// int
-		public static final String BUFF_GATE = "BUFF_GATE";// int
-		public static final String CRITICAL = "CRITICAL";// int
 		public static final String ClassName = "ClassName";// string
 		public static final String ConfigID = "ConfigID";// string
-		public static final String DEF_DARK = "DEF_DARK";// int
-		public static final String DEF_FIRE = "DEF_FIRE";// int
-		public static final String DEF_ICE = "DEF_ICE";// int
-		public static final String DEF_LIGHT = "DEF_LIGHT";// int
-		public static final String DEF_POISON = "DEF_POISON";// int
-		public static final String DEF_VALUE = "DEF_VALUE";// int
-		public static final String DEF_WIND = "DEF_WIND";// int
-		public static final String DIZZY_GATE = "DIZZY_GATE";// int
 		public static final String GroupID = "GroupID";// int
-		public static final String HPREGEN = "HPREGEN";// int
 		public static final String ID = "ID";// string
-		public static final String LUCK = "LUCK";// int
-		public static final String MAGIC_GATE = "MAGIC_GATE";// int
-		public static final String MAXHP = "MAXHP";// int
-		public static final String MAXMP = "MAXMP";// int
-		public static final String MAXSP = "MAXSP";// int
-		public static final String MOVE_GATE = "MOVE_GATE";// int
-		public static final String MOVE_SPEED = "MOVE_SPEED";// int
-		public static final String MPREGEN = "MPREGEN";// int
 		public static final String MoveTo = "MoveTo";// vector3
 		public static final String Name = "Name";// string
-		public static final String PHYSICAL_GATE = "PHYSICAL_GATE";// int
 		public static final String Position = "Position";// vector3
-		public static final String REFLECTDAMAGE = "REFLECTDAMAGE";// int
-		public static final String SKILL_GATE = "SKILL_GATE";// int
-		public static final String SPREGEN = "SPREGEN";// int
-		public static final String SUCKBLOOD = "SUCKBLOOD";// int
 		public static final String SceneID = "SceneID";// int
 		// Property
 		public static final String Account = "Account";// string
@@ -713,45 +393,13 @@ package nframe;
 		//Class name
 		public static final String ThisName = "Scene";
 		// IObject
-		public static final String ATK_DARK = "ATK_DARK";// int
-		public static final String ATK_FIRE = "ATK_FIRE";// int
-		public static final String ATK_ICE = "ATK_ICE";// int
-		public static final String ATK_LIGHT = "ATK_LIGHT";// int
-		public static final String ATK_POISON = "ATK_POISON";// int
-		public static final String ATK_SPEED = "ATK_SPEED";// int
-		public static final String ATK_VALUE = "ATK_VALUE";// int
-		public static final String ATK_WIND = "ATK_WIND";// int
-		public static final String BUFF_GATE = "BUFF_GATE";// int
-		public static final String CRITICAL = "CRITICAL";// int
 		public static final String ClassName = "ClassName";// string
 		public static final String ConfigID = "ConfigID";// string
-		public static final String DEF_DARK = "DEF_DARK";// int
-		public static final String DEF_FIRE = "DEF_FIRE";// int
-		public static final String DEF_ICE = "DEF_ICE";// int
-		public static final String DEF_LIGHT = "DEF_LIGHT";// int
-		public static final String DEF_POISON = "DEF_POISON";// int
-		public static final String DEF_VALUE = "DEF_VALUE";// int
-		public static final String DEF_WIND = "DEF_WIND";// int
-		public static final String DIZZY_GATE = "DIZZY_GATE";// int
 		public static final String GroupID = "GroupID";// int
-		public static final String HPREGEN = "HPREGEN";// int
 		public static final String ID = "ID";// string
-		public static final String LUCK = "LUCK";// int
-		public static final String MAGIC_GATE = "MAGIC_GATE";// int
-		public static final String MAXHP = "MAXHP";// int
-		public static final String MAXMP = "MAXMP";// int
-		public static final String MAXSP = "MAXSP";// int
-		public static final String MOVE_GATE = "MOVE_GATE";// int
-		public static final String MOVE_SPEED = "MOVE_SPEED";// int
-		public static final String MPREGEN = "MPREGEN";// int
 		public static final String MoveTo = "MoveTo";// vector3
 		public static final String Name = "Name";// string
-		public static final String PHYSICAL_GATE = "PHYSICAL_GATE";// int
 		public static final String Position = "Position";// vector3
-		public static final String REFLECTDAMAGE = "REFLECTDAMAGE";// int
-		public static final String SKILL_GATE = "SKILL_GATE";// int
-		public static final String SPREGEN = "SPREGEN";// int
-		public static final String SUCKBLOOD = "SUCKBLOOD";// int
 		public static final String SceneID = "SceneID";// int
 		// Property
 		public static final String ActorID = "ActorID";// int
@@ -775,45 +423,13 @@ package nframe;
 		//Class name
 		public static final String ThisName = "Security";
 		// IObject
-		public static final String ATK_DARK = "ATK_DARK";// int
-		public static final String ATK_FIRE = "ATK_FIRE";// int
-		public static final String ATK_ICE = "ATK_ICE";// int
-		public static final String ATK_LIGHT = "ATK_LIGHT";// int
-		public static final String ATK_POISON = "ATK_POISON";// int
-		public static final String ATK_SPEED = "ATK_SPEED";// int
-		public static final String ATK_VALUE = "ATK_VALUE";// int
-		public static final String ATK_WIND = "ATK_WIND";// int
-		public static final String BUFF_GATE = "BUFF_GATE";// int
-		public static final String CRITICAL = "CRITICAL";// int
 		public static final String ClassName = "ClassName";// string
 		public static final String ConfigID = "ConfigID";// string
-		public static final String DEF_DARK = "DEF_DARK";// int
-		public static final String DEF_FIRE = "DEF_FIRE";// int
-		public static final String DEF_ICE = "DEF_ICE";// int
-		public static final String DEF_LIGHT = "DEF_LIGHT";// int
-		public static final String DEF_POISON = "DEF_POISON";// int
-		public static final String DEF_VALUE = "DEF_VALUE";// int
-		public static final String DEF_WIND = "DEF_WIND";// int
-		public static final String DIZZY_GATE = "DIZZY_GATE";// int
 		public static final String GroupID = "GroupID";// int
-		public static final String HPREGEN = "HPREGEN";// int
 		public static final String ID = "ID";// string
-		public static final String LUCK = "LUCK";// int
-		public static final String MAGIC_GATE = "MAGIC_GATE";// int
-		public static final String MAXHP = "MAXHP";// int
-		public static final String MAXMP = "MAXMP";// int
-		public static final String MAXSP = "MAXSP";// int
-		public static final String MOVE_GATE = "MOVE_GATE";// int
-		public static final String MOVE_SPEED = "MOVE_SPEED";// int
-		public static final String MPREGEN = "MPREGEN";// int
 		public static final String MoveTo = "MoveTo";// vector3
 		public static final String Name = "Name";// string
-		public static final String PHYSICAL_GATE = "PHYSICAL_GATE";// int
 		public static final String Position = "Position";// vector3
-		public static final String REFLECTDAMAGE = "REFLECTDAMAGE";// int
-		public static final String SKILL_GATE = "SKILL_GATE";// int
-		public static final String SPREGEN = "SPREGEN";// int
-		public static final String SUCKBLOOD = "SUCKBLOOD";// int
 		public static final String SceneID = "SceneID";// int
 		// Property
 		public static final String SecurityData = "SecurityData";// string
@@ -825,45 +441,13 @@ package nframe;
 		//Class name
 		public static final String ThisName = "Server";
 		// IObject
-		public static final String ATK_DARK = "ATK_DARK";// int
-		public static final String ATK_FIRE = "ATK_FIRE";// int
-		public static final String ATK_ICE = "ATK_ICE";// int
-		public static final String ATK_LIGHT = "ATK_LIGHT";// int
-		public static final String ATK_POISON = "ATK_POISON";// int
-		public static final String ATK_SPEED = "ATK_SPEED";// int
-		public static final String ATK_VALUE = "ATK_VALUE";// int
-		public static final String ATK_WIND = "ATK_WIND";// int
-		public static final String BUFF_GATE = "BUFF_GATE";// int
-		public static final String CRITICAL = "CRITICAL";// int
 		public static final String ClassName = "ClassName";// string
 		public static final String ConfigID = "ConfigID";// string
-		public static final String DEF_DARK = "DEF_DARK";// int
-		public static final String DEF_FIRE = "DEF_FIRE";// int
-		public static final String DEF_ICE = "DEF_ICE";// int
-		public static final String DEF_LIGHT = "DEF_LIGHT";// int
-		public static final String DEF_POISON = "DEF_POISON";// int
-		public static final String DEF_VALUE = "DEF_VALUE";// int
-		public static final String DEF_WIND = "DEF_WIND";// int
-		public static final String DIZZY_GATE = "DIZZY_GATE";// int
 		public static final String GroupID = "GroupID";// int
-		public static final String HPREGEN = "HPREGEN";// int
 		public static final String ID = "ID";// string
-		public static final String LUCK = "LUCK";// int
-		public static final String MAGIC_GATE = "MAGIC_GATE";// int
-		public static final String MAXHP = "MAXHP";// int
-		public static final String MAXMP = "MAXMP";// int
-		public static final String MAXSP = "MAXSP";// int
-		public static final String MOVE_GATE = "MOVE_GATE";// int
-		public static final String MOVE_SPEED = "MOVE_SPEED";// int
-		public static final String MPREGEN = "MPREGEN";// int
 		public static final String MoveTo = "MoveTo";// vector3
 		public static final String Name = "Name";// string
-		public static final String PHYSICAL_GATE = "PHYSICAL_GATE";// int
 		public static final String Position = "Position";// vector3
-		public static final String REFLECTDAMAGE = "REFLECTDAMAGE";// int
-		public static final String SKILL_GATE = "SKILL_GATE";// int
-		public static final String SPREGEN = "SPREGEN";// int
-		public static final String SUCKBLOOD = "SUCKBLOOD";// int
 		public static final String SceneID = "SceneID";// int
 		// Property
 		public static final String Area = "Area";// int
@@ -884,45 +468,13 @@ package nframe;
 		//Class name
 		public static final String ThisName = "Skill";
 		// IObject
-		public static final String ATK_DARK = "ATK_DARK";// int
-		public static final String ATK_FIRE = "ATK_FIRE";// int
-		public static final String ATK_ICE = "ATK_ICE";// int
-		public static final String ATK_LIGHT = "ATK_LIGHT";// int
-		public static final String ATK_POISON = "ATK_POISON";// int
-		public static final String ATK_SPEED = "ATK_SPEED";// int
-		public static final String ATK_VALUE = "ATK_VALUE";// int
-		public static final String ATK_WIND = "ATK_WIND";// int
-		public static final String BUFF_GATE = "BUFF_GATE";// int
-		public static final String CRITICAL = "CRITICAL";// int
 		public static final String ClassName = "ClassName";// string
 		public static final String ConfigID = "ConfigID";// string
-		public static final String DEF_DARK = "DEF_DARK";// int
-		public static final String DEF_FIRE = "DEF_FIRE";// int
-		public static final String DEF_ICE = "DEF_ICE";// int
-		public static final String DEF_LIGHT = "DEF_LIGHT";// int
-		public static final String DEF_POISON = "DEF_POISON";// int
-		public static final String DEF_VALUE = "DEF_VALUE";// int
-		public static final String DEF_WIND = "DEF_WIND";// int
-		public static final String DIZZY_GATE = "DIZZY_GATE";// int
 		public static final String GroupID = "GroupID";// int
-		public static final String HPREGEN = "HPREGEN";// int
 		public static final String ID = "ID";// string
-		public static final String LUCK = "LUCK";// int
-		public static final String MAGIC_GATE = "MAGIC_GATE";// int
-		public static final String MAXHP = "MAXHP";// int
-		public static final String MAXMP = "MAXMP";// int
-		public static final String MAXSP = "MAXSP";// int
-		public static final String MOVE_GATE = "MOVE_GATE";// int
-		public static final String MOVE_SPEED = "MOVE_SPEED";// int
-		public static final String MPREGEN = "MPREGEN";// int
 		public static final String MoveTo = "MoveTo";// vector3
 		public static final String Name = "Name";// string
-		public static final String PHYSICAL_GATE = "PHYSICAL_GATE";// int
 		public static final String Position = "Position";// vector3
-		public static final String REFLECTDAMAGE = "REFLECTDAMAGE";// int
-		public static final String SKILL_GATE = "SKILL_GATE";// int
-		public static final String SPREGEN = "SPREGEN";// int
-		public static final String SUCKBLOOD = "SUCKBLOOD";// int
 		public static final String SceneID = "SceneID";// int
 		// Property
 		public static final String AnimaState = "AnimaState";// string
@@ -958,45 +510,13 @@ package nframe;
 		//Class name
 		public static final String ThisName = "SqlServer";
 		// IObject
-		public static final String ATK_DARK = "ATK_DARK";// int
-		public static final String ATK_FIRE = "ATK_FIRE";// int
-		public static final String ATK_ICE = "ATK_ICE";// int
-		public static final String ATK_LIGHT = "ATK_LIGHT";// int
-		public static final String ATK_POISON = "ATK_POISON";// int
-		public static final String ATK_SPEED = "ATK_SPEED";// int
-		public static final String ATK_VALUE = "ATK_VALUE";// int
-		public static final String ATK_WIND = "ATK_WIND";// int
-		public static final String BUFF_GATE = "BUFF_GATE";// int
-		public static final String CRITICAL = "CRITICAL";// int
 		public static final String ClassName = "ClassName";// string
 		public static final String ConfigID = "ConfigID";// string
-		public static final String DEF_DARK = "DEF_DARK";// int
-		public static final String DEF_FIRE = "DEF_FIRE";// int
-		public static final String DEF_ICE = "DEF_ICE";// int
-		public static final String DEF_LIGHT = "DEF_LIGHT";// int
-		public static final String DEF_POISON = "DEF_POISON";// int
-		public static final String DEF_VALUE = "DEF_VALUE";// int
-		public static final String DEF_WIND = "DEF_WIND";// int
-		public static final String DIZZY_GATE = "DIZZY_GATE";// int
 		public static final String GroupID = "GroupID";// int
-		public static final String HPREGEN = "HPREGEN";// int
 		public static final String ID = "ID";// string
-		public static final String LUCK = "LUCK";// int
-		public static final String MAGIC_GATE = "MAGIC_GATE";// int
-		public static final String MAXHP = "MAXHP";// int
-		public static final String MAXMP = "MAXMP";// int
-		public static final String MAXSP = "MAXSP";// int
-		public static final String MOVE_GATE = "MOVE_GATE";// int
-		public static final String MOVE_SPEED = "MOVE_SPEED";// int
-		public static final String MPREGEN = "MPREGEN";// int
 		public static final String MoveTo = "MoveTo";// vector3
 		public static final String Name = "Name";// string
-		public static final String PHYSICAL_GATE = "PHYSICAL_GATE";// int
 		public static final String Position = "Position";// vector3
-		public static final String REFLECTDAMAGE = "REFLECTDAMAGE";// int
-		public static final String SKILL_GATE = "SKILL_GATE";// int
-		public static final String SPREGEN = "SPREGEN";// int
-		public static final String SUCKBLOOD = "SUCKBLOOD";// int
 		public static final String SceneID = "SceneID";// int
 		// Property
 		public static final String IP = "IP";// string

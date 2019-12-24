@@ -63,6 +63,27 @@ bool NFFileProcess::LoadDataFromExcel()
 		}
 	}
 
+	auto dataList = mxClassData;
+
+	for (auto classData : mxClassData)
+	{
+		for (auto className : classData.second->includes)
+		{
+			ClassData* nowClassData = classData.second;
+			ClassData* includeClassData = dataList[className];
+
+			for (auto property : includeClassData->xStructData.xPropertyList)
+			{
+				nowClassData->xStructData.xPropertyList.insert(std::make_pair(property.first, property.second));
+			}
+
+			for (auto record : includeClassData->xStructData.xRecordList)
+			{
+				nowClassData->xStructData.xRecordList.insert(std::make_pair(record.first, record.second));
+			}
+		}
+	}
+
 	return true;
 }
 
@@ -351,6 +372,19 @@ bool NFFileProcess::LoadDataAndProcessRecord(MiniExcelReader::Sheet & sheet, Cla
 
 bool NFFileProcess::LoadDataAndProcessIncludes(MiniExcelReader::Sheet & sheet, ClassData * pClassData)
 {
+	const MiniExcelReader::Range& dim = sheet.getDimension();
+	std::string strSheetName = sheet.getName();
+	transform(strSheetName.begin(), strSheetName.end(), strSheetName.begin(), ::tolower);
+
+	for (int r = dim.firstRow + 1; r <= dim.lastRow; r++)
+	{
+		MiniExcelReader::Cell* cell = sheet.getCell(r, dim.firstCol);
+		if (cell)
+		{
+			std::string valueCell = cell->value;
+			pClassData->includes.push_back(valueCell);
+		}
+	}
 	return true;
 }
 

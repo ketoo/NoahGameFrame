@@ -1,81 +1,15 @@
 <?xml version='1.0' encoding='utf-8' ?>
 <XML>
 	<Propertys>
-		<Property Id="ATK_DARK" Cache="0" Desc="" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="int" Upload="0" />
-		<Property Id="ATK_FIRE" Cache="0" Desc="火" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="int" Upload="0" />
-		<Property Id="ATK_ICE" Cache="0" Desc="冰" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="int" Upload="0" />
-		<Property Id="ATK_LIGHT" Cache="0" Desc="雷电" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="int" Upload="0" />
-		<Property Id="ATK_POISON" Cache="0" Desc="毒" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="int" Upload="0" />
-		<Property Id="ATK_SPEED" Cache="0" Desc="攻击速度默认100" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="int" Upload="0" />
-		<Property Id="ATK_VALUE" Cache="0" Desc="物理攻击力" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="int" Upload="0" />
-		<Property Id="ATK_WIND" Cache="0" Desc="" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="int" Upload="0" />
-		<Property Id="BUFF_GATE" Cache="0" Desc="BUFF免疫开关" Force="0" Private="1" Public="1" Ref="0" Save="0" Type="int" Upload="0" />
-		<Property Id="CRITICAL" Cache="0" Desc="暴击" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="int" Upload="0" />
 		<Property Id="ClassName" Cache="0" Desc="" Force="0" Private="1" Public="1" Ref="0" Save="0" Type="string" Upload="0" />
 		<Property Id="ConfigID" Cache="0" Desc="" Force="0" Private="1" Public="1" Ref="0" Save="0" Type="string" Upload="0" />
-		<Property Id="DEF_DARK" Cache="0" Desc="抗" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="int" Upload="0" />
-		<Property Id="DEF_FIRE" Cache="0" Desc="火抗" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="int" Upload="0" />
-		<Property Id="DEF_ICE" Cache="0" Desc="冰抗" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="int" Upload="0" />
-		<Property Id="DEF_LIGHT" Cache="0" Desc="雷电抗" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="int" Upload="0" />
-		<Property Id="DEF_POISON" Cache="0" Desc="毒抗" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="int" Upload="0" />
-		<Property Id="DEF_VALUE" Cache="0" Desc="物理防御力" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="int" Upload="0" />
-		<Property Id="DEF_WIND" Cache="0" Desc="抗" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="int" Upload="0" />
-		<Property Id="DIZZY_GATE" Cache="0" Desc="眩晕开关" Force="0" Private="1" Public="1" Ref="0" Save="0" Type="int" Upload="0" />
 		<Property Id="GroupID" Cache="0" Desc="" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="int" Upload="0" />
-		<Property Id="HPREGEN" Cache="0" Desc="生命值回复" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="int" Upload="0" />
 		<Property Id="ID" Cache="0" Desc="" Force="0" Private="1" Public="1" Ref="0" Save="0" Type="string" Upload="0" />
-		<Property Id="LUCK" Cache="0" Desc="" Force="0" Private="1" Public="1" Ref="0" Save="0" Type="int" Upload="0" />
-		<Property Id="MAGIC_GATE" Cache="0" Desc="魔法免疫开关" Force="0" Private="1" Public="1" Ref="0" Save="0" Type="int" Upload="0" />
-		<Property Id="MAXHP" Cache="0" Desc="生命值" Force="0" Private="1" Public="1" Ref="0" Save="0" Type="int" Upload="0" />
-		<Property Id="MAXMP" Cache="0" Desc="法力值" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="int" Upload="0" />
-		<Property Id="MAXSP" Cache="0" Desc="体力" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="int" Upload="0" />
-		<Property Id="MOVE_GATE" Cache="0" Desc="移动开关" Force="0" Private="1" Public="1" Ref="0" Save="0" Type="int" Upload="0" />
-		<Property Id="MOVE_SPEED" Cache="0" Desc="移动速度,默认单位是100=1米" Force="0" Private="1" Public="1" Ref="0" Save="0" Type="int" Upload="0" />
-		<Property Id="MPREGEN" Cache="0" Desc="MP回复" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="int" Upload="0" />
 		<Property Id="MoveTo" Cache="0" Force="0" Private="0" Public="0" Ref="0" Save="0" Type="vector3" Upload="0" />
 		<Property Id="Name" Cache="1" Desc="" Force="0" Private="1" Public="1" Ref="0" Save="0" Type="string" Upload="0" />
-		<Property Id="PHYSICAL_GATE" Cache="0" Desc="物理免疫开关" Force="0" Private="1" Public="1" Ref="0" Save="0" Type="int" Upload="0" />
 		<Property Id="Position" Cache="0" Force="0" Private="1" Public="1" Ref="0" Save="0" Type="vector3" Upload="0" />
-		<Property Id="REFLECTDAMAGE" Cache="0" Desc="反伤" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="int" Upload="0" />
-		<Property Id="SKILL_GATE" Cache="0" Desc="技能开关" Force="0" Private="1" Public="1" Ref="0" Save="0" Type="int" Upload="0" />
-		<Property Id="SPREGEN" Cache="0" Desc="体力回复" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="int" Upload="0" />
-		<Property Id="SUCKBLOOD" Cache="0" Desc="吸血" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="int" Upload="0" />
 		<Property Id="SceneID" Cache="0" Desc="" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="int" Upload="0" />
 	</Propertys>
 	<Records>
-		<Record Id="CommValue" Cache="0"	 Col="32"	 Force="0"	 Private="1"	 Public="1"	 Ref="0"	 Row="15"	 Save="0"	 Upload="0"	 >
-			<Col Type ="int"	Tag="SUCKBLOOD"/><!--- Desc-->
-			<Col Type ="int"	Tag="REFLECTDAMAGE"/><!--- 0job_level,1equipment,2static_BUFF,3runtime_BUFF,4Hero-->
-			<Col Type ="int"	Tag="CRITICAL"/>
-			<Col Type ="int"	Tag="MAXHP"/>
-			<Col Type ="int"	Tag="MAXMP"/>
-			<Col Type ="int"	Tag="MAXSP"/>
-			<Col Type ="int"	Tag="HPREGEN"/>
-			<Col Type ="int"	Tag="SPREGEN"/>
-			<Col Type ="int"	Tag="MPREGEN"/>
-			<Col Type ="int"	Tag="ATK_VALUE"/>
-			<Col Type ="int"	Tag="DEF_VALUE"/>
-			<Col Type ="int"	Tag="MOVE_SPEED"/>
-			<Col Type ="int"	Tag="ATK_SPEED"/>
-			<Col Type ="int"	Tag="ATK_FIRE"/>
-			<Col Type ="int"	Tag="ATK_LIGHT"/>
-			<Col Type ="int"	Tag="ATK_DARK"/>
-			<Col Type ="int"	Tag="ATK_WIND"/>
-			<Col Type ="int"	Tag="ATK_ICE"/>
-			<Col Type ="int"	Tag="ATK_POISON"/>
-			<Col Type ="int"	Tag="DEF_FIRE"/>
-			<Col Type ="int"	Tag="DEF_LIGHT"/>
-			<Col Type ="int"	Tag="DEF_DARK"/>
-			<Col Type ="int"	Tag="DEF_WIND"/>
-			<Col Type ="int"	Tag="DEF_ICE"/>
-			<Col Type ="int"	Tag="DEF_POISON"/>
-			<Col Type ="int"	Tag="DIZZY_GATE"/>
-			<Col Type ="int"	Tag="MOVE_GATE"/>
-			<Col Type ="int"	Tag="SKILL_GATE"/>
-			<Col Type ="int"	Tag="PHYSICAL_GATE"/>
-			<Col Type ="int"	Tag="MAGIC_GATE"/>
-			<Col Type ="int"	Tag="BUFF_GATE"/>
-			<Col Type ="int"	Tag="LUCK"/>
-		</Record>
 	</Records>
 </XML>

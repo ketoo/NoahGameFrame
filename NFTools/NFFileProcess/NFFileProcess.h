@@ -70,7 +70,7 @@ public:
 	NFClassStruct xStructData;
 	NFClassElement xIniData;
 
-	std::list<ClassData*> includes;
+	std::list<std::string> includes;
 };
 
 class NFFileProcess
