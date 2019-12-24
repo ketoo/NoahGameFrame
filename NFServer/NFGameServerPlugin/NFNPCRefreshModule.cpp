@@ -244,10 +244,10 @@ int NFNPCRefreshModule::OnObjectBeKilled( const NFGUID& self, const NFGUID& kill
 			{
 				const std::string& strItem = xItemList.String(i);
 
-				xRowData->SetObject(NFrame::Player::DropItemList::GUID, m_pKernelModule->CreateGUID());
-				xRowData->SetString(NFrame::Player::DropItemList::ConfigID, strItem);
-				xRowData->SetInt(NFrame::Player::DropItemList::ItemCount, 1);
-				xRowData->SetVector3(NFrame::Player::DropItemList::Postion, vPos);
+				//xRowData->SetObject(NFrame::Player::DropItemList::GUID, m_pKernelModule->CreateGUID());
+				//xRowData->SetString(NFrame::Player::DropItemList::ConfigID, strItem);
+				//xRowData->SetInt(NFrame::Player::DropItemList::ItemCount, 1);
+				//xRowData->SetVector3(NFrame::Player::DropItemList::Postion, vPos);
 
 				xDropItemList->AddRow(-1, *xRowData);
 

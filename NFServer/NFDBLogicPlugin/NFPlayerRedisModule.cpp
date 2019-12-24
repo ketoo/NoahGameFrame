@@ -86,60 +86,35 @@ bool NFPlayerRedisModule::LoadPlayerData(const NFGUID & self, NFMsg::PVPPlayerIn
 	std::vector<std::string> values;
 
 	fields.push_back(NFrame::Player::Level());//0
-	fields.push_back(NFrame::Player::Cup());//1
-	fields.push_back(NFrame::Player::Name());//2
-	fields.push_back(NFrame::Player::Head());//3
+	fields.push_back(NFrame::Player::Name());//1
+	fields.push_back(NFrame::Player::Head());//2
 
-	fields.push_back(NFrame::Player::HeroCnfID1());//4
-	fields.push_back(NFrame::Player::HeroCnfID2());//5
-	fields.push_back(NFrame::Player::HeroCnfID3());//6
-
-	fields.push_back(NFrame::Player::HeroStar1());//7
-	fields.push_back(NFrame::Player::HeroStar2());//8
-	fields.push_back(NFrame::Player::HeroStar3());//9
-
-	fields.push_back(NFrame::Player::HeroID1());//10
-	fields.push_back(NFrame::Player::HeroID2());//11
-	fields.push_back(NFrame::Player::HeroID3());//12
 
 	if (GetPropertyList(self, fields, values) 
 		&& fields.size() == values.size())
 	{
 
 		const int level = lexical_cast<int>(values.at(0));
-		const int battle_point = lexical_cast<int>(values.at(1));
-		const std::string name = values.at(2);
-		const std::string head = values.at(3);
-
-		const std::string hero_cnf1 = values.at(4);
-		const std::string hero_cnf2 = values.at(5);
-		const std::string hero_cnf3 = values.at(6);
-
-		const int hero_star1 = lexical_cast<int>(values.at(7));
-		const int hero_star2 = lexical_cast<int>(values.at(8));
-		const int hero_star3 = lexical_cast<int>(values.at(9));
-
-		const NFGUID hero_id1 = values.at(10);
-		const NFGUID hero_id2 = values.at(11);
-		const NFGUID hero_id3 = values.at(12);
+		const std::string name = values.at(1);
+		const std::string head = values.at(2);
 		
 		roleData.mutable_id()->CopyFrom(NFINetModule::NFToPB(self));
 		roleData.set_level(level);
-		roleData.set_battle_point(battle_point);
+		roleData.set_battle_point(0);
 		roleData.set_name(name);
 		roleData.set_head(head);
 
-		roleData.set_hero_star1(hero_star1);
-		roleData.set_hero_star2(hero_star2);
-		roleData.set_hero_star3(hero_star3);
+		roleData.set_hero_star1(0);
+		roleData.set_hero_star2(0);
+		roleData.set_hero_star3(0);
 
-		roleData.set_hero_cnf1(hero_cnf1);
-		roleData.set_hero_cnf2(hero_cnf2);
-		roleData.set_hero_cnf3(hero_cnf3);
+		roleData.set_hero_cnf1("");
+		roleData.set_hero_cnf2("");
+		roleData.set_hero_cnf3("");
 
-		*(roleData.mutable_hero_id1()) = NFINetModule::NFToPB(hero_id1);
-		*(roleData.mutable_hero_id2()) = NFINetModule::NFToPB(hero_id2);
-		*(roleData.mutable_hero_id3()) = NFINetModule::NFToPB(hero_id3);
+		*(roleData.mutable_hero_id1()) = NFINetModule::NFToPB(NFGUID());
+		*(roleData.mutable_hero_id2()) = NFINetModule::NFToPB(NFGUID());
+		*(roleData.mutable_hero_id3()) = NFINetModule::NFToPB(NFGUID());
 
 		return true;
 	}
@@ -426,12 +401,6 @@ bool NFPlayerRedisModule::CreateRole(const std::string & strAccount, const std::
 				if (xProperty)
 				{
 					xProperty->SetString(strRoleName);
-				}
-
-				xProperty = xPropertyManager->GetElement(NFrame::Player::HomeSceneID());
-				if (xProperty)
-				{
-					xProperty->SetInt(nHomeSceneID);
 				}
 
 				m_pCommonRedisModule->SavePropertyInfo(id, xPropertyManager);

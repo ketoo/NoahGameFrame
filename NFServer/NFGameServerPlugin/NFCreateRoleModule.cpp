@@ -229,7 +229,7 @@ void NFCreateRoleModule::OnDBLoadRoleDataProcess(const NFSOCK nSockIndex, const 
 		}
 
 		//get data first then create player
-		const int nHomeSceneID = pObject->GetPropertyInt(NFrame::Player::HomeSceneID());
+		const int nHomeSceneID = 1;
 		const NFVector3& pos = m_pSceneModule->GetRelivePosition(nHomeSceneID, 0);
 		m_pSceneProcessModule->RequestEnterScene(pObject->Self(), nHomeSceneID, -1, 0, pos, NFDataList());
 	}

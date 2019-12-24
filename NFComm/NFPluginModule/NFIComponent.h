@@ -28,8 +28,9 @@
 
 #include "NFPlatform.h"
 #include "NFGUID.h"
-#include "NFIActor.h"
 
+class NFIActor;
+class NFActorMessage;
 class NFIComponent
 {
 private:
@@ -54,6 +55,7 @@ public:
 	{
 		return mSelf;
 	}
+
 	virtual bool Awake()
 	{
 		return true;

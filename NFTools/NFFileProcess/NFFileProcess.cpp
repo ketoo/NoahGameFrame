@@ -376,7 +376,7 @@ bool NFFileProcess::LoadDataAndProcessIncludes(MiniExcelReader::Sheet & sheet, C
 	std::string strSheetName = sheet.getName();
 	transform(strSheetName.begin(), strSheetName.end(), strSheetName.begin(), ::tolower);
 
-	for (int r = dim.firstRow + 1; r <= dim.lastRow; r++)
+	for (int r = dim.firstRow; r <= dim.lastRow; r++)
 	{
 		MiniExcelReader::Cell* cell = sheet.getCell(r, dim.firstCol);
 		if (cell)

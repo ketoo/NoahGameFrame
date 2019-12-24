@@ -1,9 +1,27 @@
 <?xml version='1.0' encoding='utf-8' ?>
 <XML>
 	<Propertys>
+		<Property Id="ATK_DARK" Cache="0" Desc="LPID_ATK_DARK" Force="0" Private="1" Public="1" Ref="0" Save="0" Type="int" Upload="0" />
+		<Property Id="ATK_FIRE" Cache="0" Desc="LPID_ATK_FIRE" Force="0" Private="1" Public="1" Ref="0" Save="0" Type="int" Upload="0" />
+		<Property Id="ATK_ICE" Cache="0" Desc="LPID_ATK_ICE" Force="0" Private="1" Public="1" Ref="0" Save="0" Type="int" Upload="0" />
+		<Property Id="ATK_LIGHT" Cache="0" Desc="LPID_ATK_LIGHT" Force="0" Private="1" Public="1" Ref="0" Save="0" Type="int" Upload="0" />
+		<Property Id="ATK_POISON" Cache="0" Desc="LPID_ATK_POISON" Force="0" Private="1" Public="1" Ref="0" Save="0" Type="int" Upload="0" />
+		<Property Id="ATK_SPEED" Cache="0" Desc="LPID_ATK_SPEED" Force="0" Private="1" Public="1" Ref="0" Save="0" Type="int" Upload="0" />
+		<Property Id="ATK_VALUE" Cache="0" Desc="LPID_ATK_VALUE" Force="0" Private="1" Public="1" Ref="0" Save="0" Type="int" Upload="0" />
+		<Property Id="ATK_WIND" Cache="0" Desc="LPID_ATK_WIND" Force="0" Private="1" Public="1" Ref="0" Save="0" Type="int" Upload="0" />
 		<Property Id="Account" Cache="1" Desc="玩家的帐号" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="string" Upload="0" />
+		<Property Id="BUFF_GATE" Cache="0" Desc="LPID_BUFF_GATE" Force="0" Private="1" Public="1" Ref="0" Save="0" Type="int" Upload="0" />
+		<Property Id="CRITICAL" Cache="0" Desc="LPID_CRITICAL" Force="0" Private="1" Public="1" Ref="0" Save="0" Type="int" Upload="0" />
 		<Property Id="Camp" Cache="1" Desc="阵营" Force="0" Private="1" Public="1" Ref="0" Save="0" Type="object" Upload="0" />
 		<Property Id="ConnectKey" Cache="1" Desc="玩家连接服务器的KEY" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="string" Upload="0" />
+		<Property Id="DEF_DARK" Cache="0" Desc="LPID_DEF_DARK" Force="0" Private="1" Public="1" Ref="0" Save="0" Type="int" Upload="0" />
+		<Property Id="DEF_FIRE" Cache="0" Desc="LPID_DEF_FIRE" Force="0" Private="1" Public="1" Ref="0" Save="0" Type="int" Upload="0" />
+		<Property Id="DEF_ICE" Cache="0" Desc="LPID_DEF_ICE" Force="0" Private="1" Public="1" Ref="0" Save="0" Type="int" Upload="0" />
+		<Property Id="DEF_LIGHT" Cache="0" Desc="LPID_DEF_LIGHT" Force="0" Private="1" Public="1" Ref="0" Save="0" Type="int" Upload="0" />
+		<Property Id="DEF_POISON" Cache="0" Desc="LPID_DEF_POISON" Force="0" Private="1" Public="1" Ref="0" Save="0" Type="int" Upload="0" />
+		<Property Id="DEF_VALUE" Cache="0" Desc="LPID_DEF_VALUE" Force="0" Private="1" Public="1" Ref="0" Save="0" Type="int" Upload="0" />
+		<Property Id="DEF_WIND" Cache="0" Desc="LPID_DEF_WIND" Force="0" Private="1" Public="1" Ref="0" Save="0" Type="int" Upload="0" />
+		<Property Id="DIZZY_GATE" Cache="0" Desc="眩晕开关" Force="0" Private="1" Public="1" Ref="0" Save="0" Type="int" Upload="0" />
 		<Property Id="Diamond" Cache="1" Desc="钻石" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="int" Upload="0" />
 		<Property Id="EXP" Cache="1" Desc="经验获得,如果是怪物，则是掉落经验" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="int" Upload="0" />
 		<Property Id="GMLevel" Cache="1" Desc="GM等级" Force="0" Private="1" Public="1" Ref="0" Save="0" Type="int" Upload="0" />
@@ -11,16 +29,30 @@
 		<Property Id="GateID" Cache="0" Desc="登陆的网关ID" Force="0" Private="0" Public="0" Ref="0" Save="0" Type="int" Upload="0" />
 		<Property Id="Gold" Cache="1" Desc="玩家游戏金币" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="int" Upload="0" />
 		<Property Id="HP" Cache="0" Desc="生命值" Force="0" Private="1" Public="1" Ref="0" Save="0" Type="int" Upload="0" />
+		<Property Id="HPREGEN" Cache="0" Desc="LPID_HPREGEN" Force="0" Private="1" Public="1" Ref="0" Save="0" Type="int" Upload="0" />
 		<Property Id="Head" Cache="1" Desc="headicon--guild" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="string" Upload="0" />
 		<Property Id="Job" Cache="1" Desc="职业" Force="0" Private="1" Public="1" Ref="0" Save="0" Type="int" Upload="0" />
+		<Property Id="LUCK" Cache="0" Desc="" Force="0" Private="1" Public="1" Ref="0" Save="0" Type="int" Upload="0" />
 		<Property Id="LastOfflineTime" Cache="1" Desc="上次下线时间" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="object" Upload="0" />
 		<Property Id="Level" Cache="1" Desc="等级" Force="0" Private="1" Public="1" Ref="0" Save="0" Type="int" Upload="0" />
+		<Property Id="MAGIC_GATE" Cache="0" Desc="LPID_MAGIC_GATE" Force="0" Private="1" Public="1" Ref="0" Save="0" Type="int" Upload="0" />
 		<Property Id="MAXEXP" Cache="1" Desc="升级需要的经验" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="int" Upload="0" />
+		<Property Id="MAXHP" Cache="0" Desc="LPID_MAXHP" Force="0" Private="1" Public="1" Ref="0" Save="0" Type="int" Upload="0" />
+		<Property Id="MAXMP" Cache="0" Desc="LPID_MAXMP" Force="0" Private="1" Public="1" Ref="0" Save="0" Type="int" Upload="0" />
+		<Property Id="MAXSP" Cache="0" Desc="LPID_MAXSP" Force="0" Private="1" Public="1" Ref="0" Save="0" Type="int" Upload="0" />
+		<Property Id="MOVE_GATE" Cache="0" Desc="LPID_MOVE_GATE" Force="0" Private="1" Public="1" Ref="0" Save="0" Type="int" Upload="0" />
+		<Property Id="MOVE_SPEED" Cache="0" Desc="LPID_MOVE_SPEED" Force="0" Private="1" Public="1" Ref="0" Save="0" Type="int" Upload="0" />
 		<Property Id="MP" Cache="0" Desc="法力值" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="int" Upload="0" />
+		<Property Id="MPREGEN" Cache="0" Desc="LPID_MPREGEN" Force="0" Private="1" Public="1" Ref="0" Save="0" Type="int" Upload="0" />
 		<Property Id="OnlineCount" Cache="1" Desc="上线次数" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="int" Upload="0" />
 		<Property Id="OnlineTime" Cache="1" Desc="本次上线时间" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="object" Upload="0" />
+		<Property Id="PHYSICAL_GATE" Cache="0" Desc="LPID_PHYSICAL_GATE" Force="0" Private="1" Public="1" Ref="0" Save="0" Type="int" Upload="0" />
+		<Property Id="REFLECTDAMAGE" Cache="0" Desc="LPID_REFLECTDAMAGE" Force="0" Private="1" Public="1" Ref="0" Save="0" Type="int" Upload="0" />
 		<Property Id="Race" Cache="1" Desc="种族" Force="0" Private="1" Public="1" Ref="0" Save="0" Type="int" Upload="0" />
+		<Property Id="SKILL_GATE" Cache="0" Desc="LPID_SKILL_GATE" Force="0" Private="1" Public="1" Ref="0" Save="0" Type="int" Upload="0" />
 		<Property Id="SP" Cache="0" Desc="体力" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="int" Upload="0" />
+		<Property Id="SPREGEN" Cache="0" Desc="LPID_SPREGEN" Force="0" Private="1" Public="1" Ref="0" Save="0" Type="int" Upload="0" />
+		<Property Id="SUCKBLOOD" Cache="0" Desc="LPID_SUCKBLOOD" Force="0" Private="1" Public="1" Ref="0" Save="0" Type="int" Upload="0" />
 		<Property Id="Sex" Cache="1" Desc="性别" Force="0" Private="1" Public="1" Ref="0" Save="0" Type="int" Upload="0" />
 		<Property Id="SkillNormal" Cache="1" Desc="Skill1" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="string" Upload="0" />
 		<Property Id="SkillSpecial1" Cache="1" Desc="Skill1" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="string" Upload="0" />
@@ -29,6 +61,40 @@
 		<Property Id="TotalTime" Cache="1" Desc="在线时间" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="int" Upload="0" />
 	</Propertys>
 	<Records>
+		<Record Id="CommValue" Cache="0"	 Col="32"	 Force="0"	 Private="1"	 Public="1"	 Ref="0"	 Row="15"	 Save="0"	 Upload="0"	 >
+			<Col Type ="int"	Tag="SUCKBLOOD"/><!--- Desc-->
+			<Col Type ="int"	Tag="REFLECTDAMAGE"/>
+			<Col Type ="int"	Tag="CRITICAL"/>
+			<Col Type ="int"	Tag="MAXHP"/>
+			<Col Type ="int"	Tag="MAXMP"/>
+			<Col Type ="int"	Tag="MAXSP"/>
+			<Col Type ="int"	Tag="HPREGEN"/>
+			<Col Type ="int"	Tag="SPREGEN"/>
+			<Col Type ="int"	Tag="MPREGEN"/>
+			<Col Type ="int"	Tag="ATK_VALUE"/>
+			<Col Type ="int"	Tag="DEF_VALUE"/>
+			<Col Type ="int"	Tag="MOVE_SPEED"/>
+			<Col Type ="int"	Tag="ATK_SPEED"/>
+			<Col Type ="int"	Tag="ATK_FIRE"/>
+			<Col Type ="int"	Tag="ATK_LIGHT"/>
+			<Col Type ="int"	Tag="ATK_DARK"/>
+			<Col Type ="int"	Tag="ATK_WIND"/>
+			<Col Type ="int"	Tag="ATK_ICE"/>
+			<Col Type ="int"	Tag="ATK_POISON"/>
+			<Col Type ="int"	Tag="DEF_FIRE"/>
+			<Col Type ="int"	Tag="DEF_LIGHT"/>
+			<Col Type ="int"	Tag="DEF_DARK"/>
+			<Col Type ="int"	Tag="DEF_WIND"/>
+			<Col Type ="int"	Tag="DEF_ICE"/>
+			<Col Type ="int"	Tag="DEF_POISON"/>
+			<Col Type ="int"	Tag="DIZZY_GATE"/>
+			<Col Type ="int"	Tag="MOVE_GATE"/>
+			<Col Type ="int"	Tag="SKILL_GATE"/>
+			<Col Type ="int"	Tag="PHYSICAL_GATE"/>
+			<Col Type ="int"	Tag="MAGIC_GATE"/>
+			<Col Type ="int"	Tag="BUFF_GATE"/>
+			<Col Type ="int"	Tag="LUCK"/>
+		</Record>
 		<Record Id="Cooldown" Cache="1"	 Col="2"	 Force="0"	 Private="1"	 Public="0"	 Ref="0"	 Row="8"	 Save="0"	 Upload="0"	 >
 			<Col Type ="string"	Tag="SkillID"/><!--- Desc-->
 			<Col Type ="int"	Tag="Time"/><!--- Desc-->

@@ -102,11 +102,8 @@
     </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="NFBuffModule.h" />
     <ClInclude Include="NFCreateRoleModule.h" />
     <ClInclude Include="NFGameServerModule.h" />
-    <ClInclude Include="NFLevelModule.h" />
-    <ClInclude Include="NFMoveModule.h" />
     <ClInclude Include="NFNPCRefreshModule.h" />
     <ClInclude Include="NFPropertyConfigModule.h" />
     <ClInclude Include="NFPropertyModule.h" />
@@ -125,11 +122,8 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
       </PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="NFBuffModule.cpp" />
     <ClCompile Include="NFCreateRoleModule.cpp" />
     <ClCompile Include="NFGameServerModule.cpp" />
-    <ClCompile Include="NFLevelModule.cpp" />
-    <ClCompile Include="NFMoveModule.cpp" />
     <ClCompile Include="NFNPCRefreshModule.cpp" />
     <ClCompile Include="NFPropertyConfigModule.cpp" />
     <ClCompile Include="NFPropertyModule.cpp" />
