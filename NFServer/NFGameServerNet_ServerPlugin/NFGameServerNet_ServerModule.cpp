@@ -77,12 +77,6 @@ bool NFGameServerNet_ServerModule::AfterInit()
 	//EGMI_ACK_RECORD_CLEAR = 228,
 	//EGMI_ACK_RECORD_SORT = 229,
 
-	m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_REQ_CREATE_CLAN, this, &NFGameServerNet_ServerModule::OnClanTransWorld);
-	m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_REQ_JOIN_CLAN, this, &NFGameServerNet_ServerModule::OnClanTransWorld);
-	m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_REQ_LEAVE_CLAN, this, &NFGameServerNet_ServerModule::OnClanTransWorld);
-	m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_REQ_OPR_CLAN, this, &NFGameServerNet_ServerModule::OnClanTransWorld);
-	m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_REQ_SEARCH_CLAN, this, &NFGameServerNet_ServerModule::OnClanTransWorld);
-
 	m_pNetModule->AddReceiveCallBack(NFMsg::EGEC_REQ_CREATE_CHATGROUP, this, &NFGameServerNet_ServerModule::OnTransWorld);
 	m_pNetModule->AddReceiveCallBack(NFMsg::EGEC_REQ_JOIN_CHATGROUP, this, &NFGameServerNet_ServerModule::OnTransWorld);
 	m_pNetModule->AddReceiveCallBack(NFMsg::EGEC_REQ_LEAVE_CHATGROUP, this, &NFGameServerNet_ServerModule::OnTransWorld);
@@ -286,34 +280,7 @@ void NFGameServerNet_ServerModule::OnClientLeaveGameProcess(const NFSOCK nSockIn
 		return;
 	}
 
-	if (m_pKernelModule->GetObject(nPlayerID))
-	{
-		//if the player now in the match, we wouldn't destroy him
-		//or if the player now fighting in the clan scene with other clan, we wouldn't destroy him too
-		const int sceneID = m_pKernelModule->GetPropertyInt(nPlayerID, NFrame::Player::SceneID());
-		const int groupID = m_pKernelModule->GetPropertyInt(nPlayerID, NFrame::Player::GroupID());
-		const NFGUID matchID = m_pSceneModule->GetPropertyObject(sceneID, groupID, NFrame::Group::MatchID());
-		if (matchID.IsNull())
-		{
-			m_pKernelModule->DestroyObject(nPlayerID);
-		}
-		else
-		{
-			//add schedule
-			//single mode or multi-player mode
-			//if (m_pKernelModule->GetPropertyInt(nPlayerID, NFrame::Group::MatchPlayers()) <= 1)
-			{
-				m_pKernelModule->DestroyObject(nPlayerID);
-			}
-			/*
-			else
-			{
-				m_pKernelModule->SetPropertyObject(nPlayerID, NFrame::Player::GateID(), NFGUID());
-				m_pScheduleModule->AddSchedule(nPlayerID, "DestroyPlayerOnTime", this, &NFGameServerNet_ServerModule::DestroyPlayerByTime, 100.0f, -1);
-			}
-			*/
-		}
-	}
+	m_pKernelModule->DestroyObject(nPlayerID);
 
 	RemovePlayerGateInfo(nPlayerID);
 }
@@ -337,19 +304,15 @@ void NFGameServerNet_ServerModule::OnClientSwapSceneProcess(const NFSOCK nSockIn
 	CLIENT_MSG_PROCESS(nMsgID, msg, nLen, NFMsg::ReqAckSwapScene)
 
 	const NFMsg::ESceneType sceneType = (NFMsg::ESceneType)m_pElementModule->GetPropertyInt(std::to_string(xMsg.scene_id()), NFrame::Scene::Type());
-	const int homeSceneID = m_pKernelModule->GetPropertyInt(nPlayerID, NFrame::Player::HomeSceneID());
 	const int nowSceneID = m_pKernelModule->GetPropertyInt(nPlayerID, NFrame::Player::SceneID());
 	const int nowGroupID = m_pKernelModule->GetPropertyInt(nPlayerID, NFrame::Player::GroupID());
-	const NFGUID matchID = m_pSceneModule->GetPropertyObject(nowSceneID, nowGroupID, NFrame::Group::MatchID());
 	const NFMsg::ESceneType nowSceneType = (NFMsg::ESceneType)m_pElementModule->GetPropertyInt(std::to_string(nowSceneID), NFrame::Scene::Type());
 
-	if (!matchID.IsNull()
-		&& sceneType == NFMsg::ESceneType::SCENE_HOME
-		&& xMsg.scene_id() == homeSceneID)
+	if (sceneType == NFMsg::ESceneType::SCENE_HOME)
 	{
 		//fighting now, want to end the fight
-		const NFVector3& pos = m_pSceneModule->GetRelivePosition(homeSceneID, 0);
-		m_pSceneProcessModule->RequestEnterScene(pObject->Self(), homeSceneID, -1, 0, pos, NFDataList());
+		const NFVector3& pos = m_pSceneModule->GetRelivePosition(xMsg.scene_id(), 0);
+		m_pSceneProcessModule->RequestEnterScene(pObject->Self(), xMsg.scene_id(), -1, 0, pos, NFDataList());
 
 		return;
 	}
@@ -1032,22 +995,6 @@ void NFGameServerNet_ServerModule::OnClientRecordVector3Process(const NFSOCK nSo
 	}
 }
 
-int NFGameServerNet_ServerModule::DestroyPlayerByTime(const NFGUID & self, const std::string & name, const float fIntervalTime, const int nCount)
-{
-	const int nSceneID = m_pKernelModule->GetPropertyInt(self, NFrame::Player::SceneID());
-	const int nGroupID = m_pKernelModule->GetPropertyInt(self, NFrame::Player::GroupID());
-	const NFGUID gateID = m_pKernelModule->GetPropertyObject(self, NFrame::Player::GateID());
-
-	const NFGUID& matchID = m_pSceneModule->GetPropertyObject(nSceneID, nGroupID, NFrame::Group::MatchID());
-
-	if (matchID.IsNull() && gateID.IsNull())
-	{
-		m_pKernelModule->DestroyObject(self);
-	}
-
-	return 0;
-}
-
 void NFGameServerNet_ServerModule::OnProxyServerRegisteredProcess(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
 {
 	NFGUID nPlayerID;
@@ -1317,51 +1264,3 @@ void NFGameServerNet_ServerModule::OnTransWorld(const NFSOCK nSockIndex, const i
 
 	m_pNetClientModule->SendBySuitWithOutHead(NF_SERVER_TYPES::NF_ST_WORLD, nHasKey, nMsgID, std::string(msg, nLen));
 }
-
-void NFGameServerNet_ServerModule::OnClanTransWorld(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
-{
-	switch (nMsgID)
-	{
-		case NFMsg::EGMI_REQ_CREATE_CLAN:
-		case NFMsg::EGMI_REQ_JOIN_CLAN:
-		{
-			std::string strMsg;
-			NFGUID nPlayer;
-			if (NFINetModule::ReceivePB(nMsgID, msg, nLen, strMsg, nPlayer) && !nPlayer.IsNull())
-			{
-				NFGUID xClanID = m_pKernelModule->GetPropertyObject(nPlayer, NFrame::Player::Clan_ID());
-				if (xClanID.IsNull())
-				{
-					int nHashKey = nPlayer.nHead64;
-					m_pNetClientModule->SendBySuitWithOutHead(NF_SERVER_TYPES::NF_ST_WORLD, nHashKey, nMsgID, std::string(msg, nLen));
-				}
-			}
-		}
-			break;
-		case NFMsg::EGMI_REQ_LEAVE_CLAN:
-		case NFMsg::EGMI_REQ_OPR_CLAN:
-		{
-
-		}
-			break;
-		case NFMsg::EGMI_REQ_SEARCH_CLAN:
-		{
-
-		}
-			break;
-		default:
-			break;
-	}
-
-	CLIENT_MSG_PROCESS(nMsgID, msg, nLen, NFMsg::ObjectRecordVector2)
-
-	std::string strMsg;
-	NFGUID nPlayer;
-	int nHasKey = 0;
-	if (NFINetModule::ReceivePB(nMsgID, msg, nLen, strMsg, nPlayer))
-	{
-		nHasKey = nPlayer.nData64;
-		m_pNetClientModule->SendBySuitWithOutHead(NF_SERVER_TYPES::NF_ST_WORLD, nHasKey, nMsgID, std::string(msg, nLen));
-	}
-}
-

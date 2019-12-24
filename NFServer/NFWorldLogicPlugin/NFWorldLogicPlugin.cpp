@@ -24,7 +24,6 @@
 */
 
 #include "NFWorldLogicModule.h"
-#include "NFWorldPropsModule.h"
 #include "NFWorldLogicPlugin.h"
 
 NF_EXPORT void DllStartPlugin(NFIPluginManager* pm)
@@ -52,11 +51,9 @@ const std::string NFWorldLogicPlugin::GetPluginName()
 void NFWorldLogicPlugin::Install()
 {
 	REGISTER_MODULE(pPluginManager, NFIWorldLogicModule, NFWorldLogicModule)
-	REGISTER_MODULE(pPluginManager, NFIWorldPropsModule, NFWorldPropsModule)
 }
 
 void NFWorldLogicPlugin::Uninstall()
 {
-	UNREGISTER_MODULE(pPluginManager, NFIWorldPropsModule, NFWorldPropsModule)
 	UNREGISTER_MODULE(pPluginManager, NFIWorldLogicModule, NFWorldLogicModule)
 }

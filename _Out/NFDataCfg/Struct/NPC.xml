@@ -14,7 +14,6 @@
 		<Property Id="CRITICAL" Cache="0" Desc="LPID_CRITICAL" Force="0" Private="1" Public="1" Ref="0" Save="0" Type="int" Upload="0" />
 		<Property Id="Camp" Cache="0" Desc="阵营" Force="0" Private="1" Public="1" Ref="0" Save="1" Type="object" Upload="0" />
 		<Property Id="Climb" Cache="0" Desc="Move类型" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="int" Upload="0" />
-		<Property Id="ConsumeData" Cache="0" Desc="消费数据属性包索引" Force="0" Private="1" Public="0" Ref="1" Save="0" Type="string" Upload="0" />
 		<Property Id="CrisisDis" Cache="0" Desc="警戒范围" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="float" Upload="0" />
 		<Property Id="DEF_DARK" Cache="0" Desc="LPID_DEF_DARK" Force="0" Private="1" Public="1" Ref="0" Save="0" Type="int" Upload="0" />
 		<Property Id="DEF_FIRE" Cache="0" Desc="LPID_DEF_FIRE" Force="0" Private="1" Public="1" Ref="0" Save="0" Type="int" Upload="0" />
@@ -30,12 +29,10 @@
 		<Property Id="DropProbability" Cache="0" Desc="掉落概率%" Force="0" Private="1" Public="0" Ref="1" Save="0" Type="int" Upload="0" />
 		<Property Id="EXP" Cache="0" Desc="经验获得,如果是怪物，则是掉落经验" Force="0" Private="1" Public="1" Ref="0" Save="1" Type="int" Upload="0" />
 		<Property Id="EffectData" Cache="0" Desc="绝对值属性包索引" Force="0" Private="1" Public="0" Ref="1" Save="0" Type="string" Upload="0" />
-		<Property Id="FearOfFire" Cache="0" Desc="Are monsters afraid of fire" Force="0" Private="1" Public="1" Ref="0" Save="0" Type="int" Upload="0" />
 		<Property Id="Gold" Cache="0" Desc="玩家游戏金币" Force="0" Private="1" Public="1" Ref="0" Save="1" Type="int" Upload="0" />
 		<Property Id="HP" Cache="0" Desc="生命值" Force="0" Private="1" Public="1" Ref="0" Save="1" Type="int" Upload="0" />
 		<Property Id="HPREGEN" Cache="0" Desc="LPID_HPREGEN" Force="0" Private="1" Public="1" Ref="0" Save="0" Type="int" Upload="0" />
 		<Property Id="Height" Cache="0" Desc="模型高度" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="float" Upload="0" />
-		<Property Id="HeroStar" Cache="0" Desc="英雄star" Force="0" Private="1" Public="1" Ref="0" Save="0" Type="int" Upload="0" />
 		<Property Id="Icon" Cache="0" Desc="图标" Force="0" Private="1" Public="1" Ref="0" Save="0" Type="string" Upload="0" />
 		<Property Id="LUCK" Cache="0" Desc="" Force="0" Private="1" Public="1" Ref="0" Save="0" Type="int" Upload="0" />
 		<Property Id="LastAttacker" Cache="0" Desc="最后攻击者" Force="0" Private="1" Public="1" Ref="0" Save="0" Type="object" Upload="0" />

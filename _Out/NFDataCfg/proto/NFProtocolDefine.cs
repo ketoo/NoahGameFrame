@@ -157,56 +157,7 @@ namespace NFrame
 		public static readonly String Position = "Position";// vector3
 		public static readonly String SceneID = "SceneID";// int
 		// Property
-		public static readonly String MatchGambleDiamond = "MatchGambleDiamond";// int
-		public static readonly String MatchID = "MatchID";// object
-		public static readonly String MatchOpponentCup = "MatchOpponentCup";// int
-		public static readonly String MatchOpponentD = "MatchOpponentD";// int
-		public static readonly String MatchOpponentDiamond = "MatchOpponentDiamond";// int
-		public static readonly String MatchOpponentGold = "MatchOpponentGold";// int
-		public static readonly String MatchOpponentHead = "MatchOpponentHead";// string
-		public static readonly String MatchOpponentHeroCnf1 = "MatchOpponentHeroCnf1";// string
-		public static readonly String MatchOpponentHeroCnf2 = "MatchOpponentHeroCnf2";// string
-		public static readonly String MatchOpponentHeroCnf3 = "MatchOpponentHeroCnf3";// string
-		public static readonly String MatchOpponentHeroHP1 = "MatchOpponentHeroHP1";// int
-		public static readonly String MatchOpponentHeroHP2 = "MatchOpponentHeroHP2";// int
-		public static readonly String MatchOpponentHeroHP3 = "MatchOpponentHeroHP3";// int
-		public static readonly String MatchOpponentHeroID1 = "MatchOpponentHeroID1";// object
-		public static readonly String MatchOpponentHeroID2 = "MatchOpponentHeroID2";// object
-		public static readonly String MatchOpponentHeroID3 = "MatchOpponentHeroID3";// object
-		public static readonly String MatchOpponentHeroStar1 = "MatchOpponentHeroStar1";// int
-		public static readonly String MatchOpponentHeroStar2 = "MatchOpponentHeroStar2";// int
-		public static readonly String MatchOpponentHeroStar3 = "MatchOpponentHeroStar3";// int
-		public static readonly String MatchOpponentID = "MatchOpponentID";// object
-		public static readonly String MatchOpponentK = "MatchOpponentK";// int
-		public static readonly String MatchOpponentLevel = "MatchOpponentLevel";// int
-		public static readonly String MatchOpponentName = "MatchOpponentName";// string
-		public static readonly String MatchStar = "MatchStar";// int
-		public static readonly String MatchTeamID = "MatchTeamID";// object
 		// Record
-		public class MatchMember
-		{
-			//Class name
-			public static readonly String ThisName = "MatchMember";
-			public const int GUID = 0;//object
-			public const int Name = 1;//string
-			public const int K = 2;//int
-			public const int D = 3;//int
-			public const int A = 4;//int
-			public const int Diamond = 5;//int
-			public const int Cup = 6;//int
-			public const int MVP = 7;//int
-			public const int Streak = 8;//int
-			public const int HeroCnf1 = 9;//string
-			public const int HeroCnf2 = 10;//string
-			public const int HeroCnf3 = 11;//string
-			public const int HeroStar1 = 12;//int
-			public const int HeroStar2 = 13;//int
-			public const int HeroStar3 = 14;//int
-			public const int HP1 = 15;//int
-			public const int HP2 = 16;//int
-			public const int HP3 = 17;//int
-
-		}
 
 	}
 	public class IObject
@@ -293,7 +244,6 @@ namespace NFrame
 		public static readonly String CRITICAL = "CRITICAL";// int
 		public static readonly String Camp = "Camp";// object
 		public static readonly String Climb = "Climb";// int
-		public static readonly String ConsumeData = "ConsumeData";// string
 		public static readonly String CrisisDis = "CrisisDis";// float
 		public static readonly String DEF_DARK = "DEF_DARK";// int
 		public static readonly String DEF_FIRE = "DEF_FIRE";// int
@@ -309,12 +259,10 @@ namespace NFrame
 		public static readonly String DropProbability = "DropProbability";// int
 		public static readonly String EXP = "EXP";// int
 		public static readonly String EffectData = "EffectData";// string
-		public static readonly String FearOfFire = "FearOfFire";// int
 		public static readonly String Gold = "Gold";// int
 		public static readonly String HP = "HP";// int
 		public static readonly String HPREGEN = "HPREGEN";// int
 		public static readonly String Height = "Height";// float
-		public static readonly String HeroStar = "HeroStar";// int
 		public static readonly String Icon = "Icon";// string
 		public static readonly String LUCK = "LUCK";// int
 		public static readonly String LastAttacker = "LastAttacker";// object
