@@ -108,6 +108,8 @@ int NFPropertyModule::OnObjectLevelEvent(const NFGUID& self, const std::string& 
  int NFPropertyModule::OnObjectConfigIDEvent(const NFGUID& self, const std::string& strPropertyName, const NFData& oldVar, const NFData& newVar)
  {
     RefreshBaseProperty(self);
+
+	return 0;
  }
 
 int NFPropertyModule::OnRecordEvent(const NFGUID& self, const RECORD_EVENT_DATA& xEventData, const NFData& oldVar, const NFData& newVar)

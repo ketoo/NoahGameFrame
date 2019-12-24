@@ -10,9 +10,6 @@
     <Filter Include="NFNPCRefreshModule">
       <UniqueIdentifier>{c918611e-a4d0-445a-98cd-c048b4f6d003}</UniqueIdentifier>
     </Filter>
-    <Filter Include="NFScenePropsModule">
-      <UniqueIdentifier>{fda04cbc-35ea-4907-9845-2d2b928354a2}</UniqueIdentifier>
-    </Filter>
     <Filter Include="NFRoleModule">
       <UniqueIdentifier>{1431a766-328f-4a0b-b09b-fb7314439da7}</UniqueIdentifier>
     </Filter>
@@ -35,9 +32,6 @@
     </ClInclude>
     <ClInclude Include="NFNPCRefreshModule.h">
       <Filter>NFNPCRefreshModule</Filter>
-    </ClInclude>
-    <ClInclude Include="NFScenePropsModule.h">
-      <Filter>NFScenePropsModule</Filter>
     </ClInclude>
     <ClInclude Include="NFCreateRoleModule.h">
       <Filter>NFRoleModule</Filter>
@@ -62,9 +56,6 @@
     </ClCompile>
     <ClCompile Include="NFNPCRefreshModule.cpp">
       <Filter>NFNPCRefreshModule</Filter>
-    </ClCompile>
-    <ClCompile Include="NFScenePropsModule.cpp">
-      <Filter>NFScenePropsModule</Filter>
     </ClCompile>
     <ClCompile Include="NFCreateRoleModule.cpp">
       <Filter>NFRoleModule</Filter>

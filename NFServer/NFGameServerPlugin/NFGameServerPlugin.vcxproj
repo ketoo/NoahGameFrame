@@ -108,7 +108,6 @@
     <ClInclude Include="NFPropertyConfigModule.h" />
     <ClInclude Include="NFPropertyModule.h" />
     <ClInclude Include="NFSceneProcessModule.h" />
-    <ClInclude Include="NFScenePropsModule.h" />
     <ClInclude Include="NFSwitchGameServerModule.h" />
     <ClInclude Include="NFGameServerPlugin.h" />
     <ClInclude Include="NFSyncModule.h" />
@@ -128,7 +127,6 @@
     <ClCompile Include="NFPropertyConfigModule.cpp" />
     <ClCompile Include="NFPropertyModule.cpp" />
     <ClCompile Include="NFSceneProcessModule.cpp" />
-    <ClCompile Include="NFScenePropsModule.cpp" />
     <ClCompile Include="NFSwitchGameServerModule.cpp" />
     <ClCompile Include="NFGameServerPlugin.cpp" />
     <ClCompile Include="NFSyncModule.cpp" />
