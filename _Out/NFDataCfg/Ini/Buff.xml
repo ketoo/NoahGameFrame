@@ -1,5 +1,0 @@
-<?xml version='1.0' encoding='utf-8' ?>
-<XML>
-	<Object Id="Buff_1" DownSaveType="1" EffectClearOnDead="1" EffectTimeInterval="1" EffectTimeValue="1" EffectType="1" EffectValueReferType="1" EffectValueType="1" ReverseReferType="1" WashGroupID="1" />
-	<Object Id="Buff_2" DownSaveType="1" EffectClearOnDead="1" EffectTimeInterval="1" EffectTimeValue="1" EffectType="1" EffectValueReferType="1" EffectValueType="1" ReverseReferType="1" WashGroupID="1" />
-</XML>

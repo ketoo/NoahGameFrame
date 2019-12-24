@@ -3,12 +3,13 @@
 #include "Dependencies/common/lexical_cast.hpp"
 #include "MiniExcelReader.h"
 #include <map>
+#include <list>
 
 
-class NFlassProperty
+class NFClassProperty
 {
 public:
-	NFlassProperty()
+	NFClassProperty()
 	{
 	}
 
@@ -17,10 +18,10 @@ public:
 	std::string type;
 };
 
-class NFlassRecord
+class NFClassRecord
 {
 public:
-	NFlassRecord()
+	NFClassRecord()
 	{
 	}
 
@@ -36,21 +37,21 @@ public:
 	std::map<std::string, RecordColDesc*> colList;//tag, desc
 };
 
-class NFlassStruct
+class NFClassStruct
 {
 public:
-	NFlassStruct()
+	NFClassStruct()
 	{
 	}
 	std::string strClassName;
-	std::map<std::string, NFlassProperty*> xPropertyList;//key, desc
-	std::map<std::string, NFlassRecord*> xRecordList;//name, desc
+	std::map<std::string, NFClassProperty*> xPropertyList;//key, desc
+	std::map<std::string, NFClassRecord*> xRecordList;//name, desc
 };
 
-class NFlassElement
+class NFClassElement
 {
 public:
-	NFlassElement()
+	NFClassElement()
 	{
 	}
 
@@ -66,8 +67,10 @@ public:
 class ClassData
 {
 public:
-	NFlassStruct xStructData;
-	NFlassElement xIniData;
+	NFClassStruct xStructData;
+	NFClassElement xIniData;
+
+	std::list<ClassData*> includes;
 };
 
 class NFFileProcess
@@ -89,6 +92,7 @@ private:
 	bool LoadDataAndProcessProperty(MiniExcelReader::Sheet& sheet, ClassData* pClassData);
 	bool LoadDataAndProcessComponent(MiniExcelReader::Sheet& sheet, ClassData* pClassData);
 	bool LoadDataAndProcessRecord(MiniExcelReader::Sheet& sheet, ClassData* pClassData);
+	bool LoadDataAndProcessIncludes(MiniExcelReader::Sheet& sheet, ClassData* pClassData);
 
 	bool SaveForCPP();
 	bool SaveForCS();
