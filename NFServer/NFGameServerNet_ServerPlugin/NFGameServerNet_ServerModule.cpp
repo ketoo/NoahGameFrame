@@ -48,46 +48,41 @@ bool NFGameServerNet_ServerModule::Init()
 bool NFGameServerNet_ServerModule::AfterInit()
 {
 
-	m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_PTWG_PROXY_REFRESH, this, &NFGameServerNet_ServerModule::OnRefreshProxyServerInfoProcess);
-	m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_PTWG_PROXY_REGISTERED, this, &NFGameServerNet_ServerModule::OnProxyServerRegisteredProcess);
-	m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_PTWG_PROXY_UNREGISTERED, this, &NFGameServerNet_ServerModule::OnProxyServerUnRegisteredProcess);
-	m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_REQ_ENTER_GAME, this, &NFGameServerNet_ServerModule::OnClientEnterGameProcess);
-	m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_REQ_LEAVE_GAME, this, &NFGameServerNet_ServerModule::OnClientLeaveGameProcess);
+	m_pNetModule->AddReceiveCallBack(NFMsg::PTWG_PROXY_REFRESH, this, &NFGameServerNet_ServerModule::OnRefreshProxyServerInfoProcess);
+	m_pNetModule->AddReceiveCallBack(NFMsg::PTWG_PROXY_REGISTERED, this, &NFGameServerNet_ServerModule::OnProxyServerRegisteredProcess);
+	m_pNetModule->AddReceiveCallBack(NFMsg::PTWG_PROXY_UNREGISTERED, this, &NFGameServerNet_ServerModule::OnProxyServerUnRegisteredProcess);
+	m_pNetModule->AddReceiveCallBack(NFMsg::REQ_ENTER_GAME, this, &NFGameServerNet_ServerModule::OnClientEnterGameProcess);
+	m_pNetModule->AddReceiveCallBack(NFMsg::REQ_LEAVE_GAME, this, &NFGameServerNet_ServerModule::OnClientLeaveGameProcess);
 
-	m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_REQ_SWAP_SCENE, this, &NFGameServerNet_ServerModule::OnClientSwapSceneProcess);
-	m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_REQ_ENTER_GAME_FINISH, this, &NFGameServerNet_ServerModule::OnClientEnterGameFinishProcess);
+	m_pNetModule->AddReceiveCallBack(NFMsg::REQ_SWAP_SCENE, this, &NFGameServerNet_ServerModule::OnClientSwapSceneProcess);
+	m_pNetModule->AddReceiveCallBack(NFMsg::REQ_ENTER_GAME_FINISH, this, &NFGameServerNet_ServerModule::OnClientEnterGameFinishProcess);
 	
-	m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_ACK_PROPERTY_INT, this, &NFGameServerNet_ServerModule::OnClientPropertyIntProcess);
-	m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_ACK_PROPERTY_FLOAT, this, &NFGameServerNet_ServerModule::OnClientPropertyFloatProcess);
-	m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_ACK_PROPERTY_STRING, this, &NFGameServerNet_ServerModule::OnClientPropertyStringProcess);
-	m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_ACK_PROPERTY_OBJECT, this, &NFGameServerNet_ServerModule::OnClientPropertyObjectProcess);
-	m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_ACK_PROPERTY_VECTOR2, this, &NFGameServerNet_ServerModule::OnClientPropertyVector2Process);
-	m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_ACK_PROPERTY_VECTOR3, this, &NFGameServerNet_ServerModule::OnClientPropertyVector3Process);
+	m_pNetModule->AddReceiveCallBack(NFMsg::ACK_PROPERTY_INT, this, &NFGameServerNet_ServerModule::OnClientPropertyIntProcess);
+	m_pNetModule->AddReceiveCallBack(NFMsg::ACK_PROPERTY_FLOAT, this, &NFGameServerNet_ServerModule::OnClientPropertyFloatProcess);
+	m_pNetModule->AddReceiveCallBack(NFMsg::ACK_PROPERTY_STRING, this, &NFGameServerNet_ServerModule::OnClientPropertyStringProcess);
+	m_pNetModule->AddReceiveCallBack(NFMsg::ACK_PROPERTY_OBJECT, this, &NFGameServerNet_ServerModule::OnClientPropertyObjectProcess);
+	m_pNetModule->AddReceiveCallBack(NFMsg::ACK_PROPERTY_VECTOR2, this, &NFGameServerNet_ServerModule::OnClientPropertyVector2Process);
+	m_pNetModule->AddReceiveCallBack(NFMsg::ACK_PROPERTY_VECTOR3, this, &NFGameServerNet_ServerModule::OnClientPropertyVector3Process);
 	
-	m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_ACK_ADD_ROW, this, &NFGameServerNet_ServerModule::OnClientAddRowProcess);
-	m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_ACK_REMOVE_ROW, this, &NFGameServerNet_ServerModule::OnClientRemoveRowProcess);
-	m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_ACK_SWAP_ROW, this, &NFGameServerNet_ServerModule::OnClientSwapRowProcess);
-	m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_ACK_RECORD_INT, this, &NFGameServerNet_ServerModule::OnClientRecordIntProcess);
-	m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_ACK_RECORD_FLOAT, this, &NFGameServerNet_ServerModule::OnClientRecordFloatProcess);
-	m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_ACK_RECORD_STRING, this, &NFGameServerNet_ServerModule::OnClientRecordStringProcess);
-	m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_ACK_RECORD_OBJECT, this, &NFGameServerNet_ServerModule::OnClientRecordObjectProcess);
-	m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_ACK_RECORD_VECTOR2, this, &NFGameServerNet_ServerModule::OnClientRecordVector2Process);
-	m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_ACK_RECORD_VECTOR3, this, &NFGameServerNet_ServerModule::OnClientRecordVector3Process);
+	m_pNetModule->AddReceiveCallBack(NFMsg::ACK_ADD_ROW, this, &NFGameServerNet_ServerModule::OnClientAddRowProcess);
+	m_pNetModule->AddReceiveCallBack(NFMsg::ACK_REMOVE_ROW, this, &NFGameServerNet_ServerModule::OnClientRemoveRowProcess);
+	m_pNetModule->AddReceiveCallBack(NFMsg::ACK_SWAP_ROW, this, &NFGameServerNet_ServerModule::OnClientSwapRowProcess);
+	m_pNetModule->AddReceiveCallBack(NFMsg::ACK_RECORD_INT, this, &NFGameServerNet_ServerModule::OnClientRecordIntProcess);
+	m_pNetModule->AddReceiveCallBack(NFMsg::ACK_RECORD_FLOAT, this, &NFGameServerNet_ServerModule::OnClientRecordFloatProcess);
+	m_pNetModule->AddReceiveCallBack(NFMsg::ACK_RECORD_STRING, this, &NFGameServerNet_ServerModule::OnClientRecordStringProcess);
+	m_pNetModule->AddReceiveCallBack(NFMsg::ACK_RECORD_OBJECT, this, &NFGameServerNet_ServerModule::OnClientRecordObjectProcess);
+	m_pNetModule->AddReceiveCallBack(NFMsg::ACK_RECORD_VECTOR2, this, &NFGameServerNet_ServerModule::OnClientRecordVector2Process);
+	m_pNetModule->AddReceiveCallBack(NFMsg::ACK_RECORD_VECTOR3, this, &NFGameServerNet_ServerModule::OnClientRecordVector3Process);
 
 	//EGMI_ACK_RECORD_CLEAR = 228,
 	//EGMI_ACK_RECORD_SORT = 229,
 
-	m_pNetModule->AddReceiveCallBack(NFMsg::EGEC_REQ_CREATE_CHATGROUP, this, &NFGameServerNet_ServerModule::OnTransWorld);
-	m_pNetModule->AddReceiveCallBack(NFMsg::EGEC_REQ_JOIN_CHATGROUP, this, &NFGameServerNet_ServerModule::OnTransWorld);
-	m_pNetModule->AddReceiveCallBack(NFMsg::EGEC_REQ_LEAVE_CHATGROUP, this, &NFGameServerNet_ServerModule::OnTransWorld);
-	m_pNetModule->AddReceiveCallBack(NFMsg::EGEC_REQ_SUBSCRIPTION_CHATGROUP, this, &NFGameServerNet_ServerModule::OnTransWorld);
+	m_pNetModule->AddReceiveCallBack(NFMsg::REQ_MOVE, this, &NFGameServerNet_ServerModule::OnClientReqMoveProcess);
+	m_pNetModule->AddReceiveCallBack(NFMsg::REQ_MOVE_IMMUNE, this, &NFGameServerNet_ServerModule::OnClientReqMoveImmuneProcess);
+	m_pNetModule->AddReceiveCallBack(NFMsg::REQ_STATE_SYNC, this, &NFGameServerNet_ServerModule::OnClientReqStateSyncProcess);
+	m_pNetModule->AddReceiveCallBack(NFMsg::REQ_POS_SYNC, this, &NFGameServerNet_ServerModule::OnClientReqPosSyncProcess);
 
-	m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_REQ_MOVE, this, &NFGameServerNet_ServerModule::OnClientReqMoveProcess);
-	m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_REQ_MOVE_IMMUNE, this, &NFGameServerNet_ServerModule::OnClientReqMoveImmuneProcess);
-	m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_REQ_STATE_SYNC, this, &NFGameServerNet_ServerModule::OnClientReqStateSyncProcess);
-	m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_REQ_POS_SYNC, this, &NFGameServerNet_ServerModule::OnClientReqPosSyncProcess);
-
-	m_pNetModule->AddReceiveCallBack(NFMsg::EGEC_REQ_LAG_TEST, this, &NFGameServerNet_ServerModule::OnLagTestProcess);
+	m_pNetModule->AddReceiveCallBack(NFMsg::REQ_LAG_TEST, this, &NFGameServerNet_ServerModule::OnLagTestProcess);
 
 	m_pNetModule->AddEventCallBack(this, &NFGameServerNet_ServerModule::OnSocketPSEvent);
 
@@ -290,13 +285,13 @@ void NFGameServerNet_ServerModule::OnClientEnterGameFinishProcess(const NFSOCK n
 	CLIENT_MSG_PROCESS( nMsgID, msg, nLen, NFMsg::ReqAckEnterGameSuccess);
 	m_pKernelModule->DoEvent(nPlayerID, NFrame::Player::ThisName(), CLASS_OBJECT_EVENT::COE_CREATE_CLIENT_FINISH, NFDataList());
 	
-	m_pNetModule->SendMsgPB(NFMsg::EGMI_ACK_ENTER_GAME_FINISH, xMsg, nSockIndex, nPlayerID);
+	m_pNetModule->SendMsgPB(NFMsg::ACK_ENTER_GAME_FINISH, xMsg, nSockIndex, nPlayerID);
 }
 
 void NFGameServerNet_ServerModule::OnLagTestProcess(const NFSOCK nSockIndex, const int nMsgID, const char * msg, const uint32_t nLen)
 {
 	CLIENT_MSG_PROCESS(nMsgID, msg, nLen, NFMsg::ReqAckLagTest);
-	this->SendMsgPBToGate(NFMsg::EGEC_ACK_GAME_LAG_TEST, xMsg, nPlayerID);
+	this->SendMsgPBToGate(NFMsg::ACK_GAME_LAG_TEST, xMsg, nPlayerID);
 }
 
 void NFGameServerNet_ServerModule::OnClientSwapSceneProcess(const NFSOCK nSockIndex, const int nMsgID, const char *msg, const uint32_t nLen)
@@ -308,7 +303,7 @@ void NFGameServerNet_ServerModule::OnClientSwapSceneProcess(const NFSOCK nSockIn
 	const int nowGroupID = m_pKernelModule->GetPropertyInt(nPlayerID, NFrame::Player::GroupID());
 	const NFMsg::ESceneType nowSceneType = (NFMsg::ESceneType)m_pElementModule->GetPropertyInt(std::to_string(nowSceneID), NFrame::Scene::Type());
 
-	if (sceneType == NFMsg::ESceneType::SCENE_HOME)
+	if (sceneType == NFMsg::ESceneType::HOME_SCENE)
 	{
 		//fighting now, want to end the fight
 		const NFVector3& pos = m_pSceneModule->GetRelivePosition(xMsg.scene_id(), 0);
@@ -317,7 +312,7 @@ void NFGameServerNet_ServerModule::OnClientSwapSceneProcess(const NFSOCK nSockIn
 		return;
 	}
 		
-	if (sceneType == NFMsg::ESceneType::SCENE_NORMAL)
+	if (sceneType == NFMsg::ESceneType::NORMAL_SCENE)
 	{
 		const NFVector3& pos = m_pSceneModule->GetRelivePosition(xMsg.scene_id(), 0);
 		m_pSceneProcessModule->RequestEnterScene(pObject->Self(), xMsg.scene_id(), 1, 0, pos, NFDataList());
@@ -353,7 +348,7 @@ void NFGameServerNet_ServerModule::OnClientReqMoveProcess(const NFSOCK nSockInde
 		const int nSceneID = m_pKernelModule->GetPropertyInt32(xMover, NFrame::Player::SceneID());
 		const int nGroupID = m_pKernelModule->GetPropertyInt32(xMover, NFrame::Player::GroupID());
 
-		this->SendGroupMsgPBToGate(NFMsg::EGMI_ACK_MOVE, xMsg, nSceneID, nGroupID);
+		this->SendGroupMsgPBToGate(NFMsg::ACK_MOVE, xMsg, nSceneID, nGroupID);
 	}
 	else
 	{
@@ -372,7 +367,7 @@ void NFGameServerNet_ServerModule::OnClientReqMoveProcess(const NFSOCK nSockInde
 			const int nSceneID = m_pKernelModule->GetPropertyInt32(xMover, NFrame::Player::SceneID());
 			const int nGroupID = m_pKernelModule->GetPropertyInt32(xMover, NFrame::Player::GroupID());
 
-			this->SendGroupMsgPBToGate(NFMsg::EGMI_ACK_MOVE, xMsg, nSceneID, nGroupID);
+			this->SendGroupMsgPBToGate(NFMsg::ACK_MOVE, xMsg, nSceneID, nGroupID);
 		}
 	}
 
@@ -404,7 +399,7 @@ void NFGameServerNet_ServerModule::OnClientReqMoveImmuneProcess(const NFSOCK nSo
 		}
 
 
-		this->SendGroupMsgPBToGate(NFMsg::EGMI_ACK_MOVE_IMMUNE, xMsg, nSceneID, nGroupID);
+		this->SendGroupMsgPBToGate(NFMsg::ACK_MOVE_IMMUNE, xMsg, nSceneID, nGroupID);
 	}
 }
 
@@ -441,7 +436,7 @@ void NFGameServerNet_ServerModule::OnClientReqStateSyncProcess(const NFSOCK nSoc
 		m_pKernelModule->SetPropertyVector3(xMover, NFrame::IObject::Position(), v);
 	}
 
-	this->SendGroupMsgPBToGate(NFMsg::EGMI_ACK_STATE_SYNC, xMsg, nSceneID, nGroupID);
+	this->SendGroupMsgPBToGate(NFMsg::ACK_STATE_SYNC, xMsg, nSceneID, nGroupID);
 }
 
 void NFGameServerNet_ServerModule::OnClientReqPosSyncProcess(const NFSOCK nSockIndex, const int nMsgID, const char * msg, const uint32_t nLen)
@@ -471,7 +466,7 @@ void NFGameServerNet_ServerModule::OnClientReqPosSyncProcess(const NFSOCK nSockI
 
 	m_pKernelModule->SetPropertyVector3(xMover, NFrame::IObject::Position(), v);
 
-	this->SendGroupMsgPBToGate(NFMsg::EGMI_ACK_POS_SYNC, xMsg, nSceneID, nGroupID);
+	this->SendGroupMsgPBToGate(NFMsg::ACK_POS_SYNC, xMsg, nSceneID, nGroupID);
 }
 
 void NFGameServerNet_ServerModule::OnClientPropertyIntProcess(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)

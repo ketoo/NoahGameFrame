@@ -73,8 +73,8 @@ void NFLoginLogicModule::OnLoginProcess(const NFSOCK nSockIndex, const int nMsgI
 					strLog << "Check password failed, Account = " << xMsg.account() << " Password = " << xMsg.password();
 					m_pLogModule->LogNormal(NFILogModule::NLL_ERROR_NORMAL, NFGUID(0, nSockIndex), strLog, __FUNCTION__, __LINE__);
 
-					xAckMsg.set_event_code(NFMsg::EGEC_ACCOUNTPWD_INVALID);
-					m_pNetModule->SendMsgPB(NFMsg::EGameMsgID::EGMI_ACK_LOGIN, xAckMsg, nSockIndex);
+					xAckMsg.set_event_code(NFMsg::ACCOUNTPWD_INVALID);
+					m_pNetModule->SendMsgPB(NFMsg::EGameMsgID::ACK_LOGIN, xAckMsg, nSockIndex);
 					return;
 				}
 				break;
@@ -86,8 +86,8 @@ void NFLoginLogicModule::OnLoginProcess(const NFSOCK nSockIndex, const int nMsgI
 					strLog << "Create account failed, Account = " << xMsg.account() << " Password = " << xMsg.password();
 					m_pLogModule->LogNormal(NFILogModule::NLL_ERROR_NORMAL, NFGUID(0, nSockIndex), strLog, __FUNCTION__, __LINE__);
 
-					xAckMsg.set_event_code(NFMsg::EGEC_ACCOUNT_EXIST);
-					m_pNetModule->SendMsgPB(NFMsg::EGameMsgID::EGMI_ACK_LOGIN, xAckMsg, nSockIndex);
+					xAckMsg.set_event_code(NFMsg::ACCOUNT_EXIST);
+					m_pNetModule->SendMsgPB(NFMsg::EGameMsgID::ACK_LOGIN, xAckMsg, nSockIndex);
 					return;
 				}
 				break;
@@ -99,8 +99,8 @@ void NFLoginLogicModule::OnLoginProcess(const NFSOCK nSockIndex, const int nMsgI
 			pNetObject->SetConnectKeyState(1);
 			pNetObject->SetAccount(xMsg.account());
 
-			xAckMsg.set_event_code(NFMsg::EGEC_ACCOUNT_SUCCESS);
-			m_pNetModule->SendMsgPB(NFMsg::EGameMsgID::EGMI_ACK_LOGIN, xAckMsg, nSockIndex);
+			xAckMsg.set_event_code(NFMsg::ACCOUNT_SUCCESS);
+			m_pNetModule->SendMsgPB(NFMsg::EGameMsgID::ACK_LOGIN, xAckMsg, nSockIndex);
 
 			m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFGUID(0, nSockIndex), "Login successed :", xMsg.account().c_str());
 		}
@@ -109,8 +109,8 @@ void NFLoginLogicModule::OnLoginProcess(const NFSOCK nSockIndex, const int nMsgI
 
 bool NFLoginLogicModule::ReadyExecute()
 {
-	m_pNetModule->RemoveReceiveCallBack(NFMsg::EGMI_REQ_LOGIN);
-	m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_REQ_LOGIN, this, &NFLoginLogicModule::OnLoginProcess);
+	m_pNetModule->RemoveReceiveCallBack(NFMsg::REQ_LOGIN);
+	m_pNetModule->AddReceiveCallBack(NFMsg::REQ_LOGIN, this, &NFLoginLogicModule::OnLoginProcess);
 
     return true;
 }

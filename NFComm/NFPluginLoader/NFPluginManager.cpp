@@ -96,7 +96,6 @@
 #pragma comment( lib, "NFProxyServerNet_ClientPlugin.lib" )
 #pragma comment( lib, "NFProxyServerNet_ServerPlugin.lib" )
 
-#pragma comment( lib, "NFWorldLogicPlugin.lib" )
 #pragma comment( lib, "NFWorldNet_ClientPlugin.lib" )
 #pragma comment( lib, "NFWorldNet_ServerPlugin.lib" )
 
@@ -162,7 +161,6 @@
 #include "NFServer/NFProxyServerNet_ClientPlugin/NFProxyServerNet_ClientPlugin.h"
 #include "NFServer/NFProxyServerNet_ServerPlugin/NFProxyServerNet_ServerPlugin.h"
 //WORLD
-#include "NFServer/NFWorldLogicPlugin/NFWorldLogicPlugin.h"
 #include "NFServer/NFWorldNet_ClientPlugin/NFWorldNet_ClientPlugin.h"
 #include "NFServer/NFWorldNet_ServerPlugin/NFWorldNet_ServerPlugin.h"
 
@@ -350,7 +348,6 @@ bool NFPluginManager::LoadStaticPlugin()
 	CREATE_PLUGIN(this, NFProxyServerNet_ServerPlugin)
 
 //WORLD
-	CREATE_PLUGIN(this, NFWorldLogicPlugin)
 	CREATE_PLUGIN(this, NFWorldNet_ClientPlugin)
 	CREATE_PLUGIN(this, NFWorldNet_ServerPlugin)
 

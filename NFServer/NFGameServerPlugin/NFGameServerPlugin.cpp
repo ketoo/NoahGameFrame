@@ -30,11 +30,9 @@
 #include "NFPropertyModule.h"
 #include "NFPropertyConfigModule.h"
 #include "NFNPCRefreshModule.h"
-#include "NFSwitchGameServerModule.h"
 #include "NFSyncModule.h"
 #include "NFCreateRoleModule.h"
 
-class NFSwitchGameServerModule;
 
 #ifdef NF_DYNAMIC_PLUGIN
 
@@ -66,7 +64,6 @@ void NFGameServerPlugin::Install()
 
     REGISTER_MODULE(pPluginManager, NFIGameServerModule, NFGameServerModule)
     REGISTER_MODULE(pPluginManager, NFISceneProcessModule, NFSceneProcessModule)
-    REGISTER_MODULE(pPluginManager, NFISwitchGameServerModule, NFSwitchGameServerModule);
     REGISTER_MODULE(pPluginManager, NFIPropertyModule, NFPropertyModule)
     REGISTER_MODULE(pPluginManager, NFIPropertyConfigModule, NFPropertyConfigModule)
 	REGISTER_MODULE(pPluginManager, NFINPCRefreshModule, NFNPCRefreshModule)
@@ -81,7 +78,6 @@ void NFGameServerPlugin::Uninstall()
 	UNREGISTER_MODULE(pPluginManager, NFINPCRefreshModule, NFNPCRefreshModule)
 	UNREGISTER_MODULE(pPluginManager, NFIPropertyConfigModule, NFPropertyConfigModule)
     UNREGISTER_MODULE(pPluginManager, NFIPropertyModule, NFPropertyModule)
-    UNREGISTER_MODULE(pPluginManager, NFISwitchGameServerModule, NFSwitchGameServerModule);
     UNREGISTER_MODULE(pPluginManager, NFISceneProcessModule, NFSceneProcessModule)
     UNREGISTER_MODULE(pPluginManager, NFIGameServerModule, NFGameServerModule)
 }

@@ -46,7 +46,6 @@ target_link_libraries(NFPluginLoader NFProxyLogicPlugin)
 target_link_libraries(NFPluginLoader NFProxyServerNet_ClientPlugin)
 target_link_libraries(NFPluginLoader NFProxyServerNet_ServerPlugin)
 
-target_link_libraries(NFPluginLoader NFWorldLogicPlugin)
 target_link_libraries(NFPluginLoader NFWorldNet_ClientPlugin)
 target_link_libraries(NFPluginLoader NFWorldNet_ServerPlugin)
 

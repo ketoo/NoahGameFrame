@@ -78,9 +78,6 @@ protected:
     void OnTransmitServerReport(const NFSOCK nFd, const int msgId, const char *buffer, const uint32_t nLen);
     void ServerReport(int reportServerId, NFMsg::EServerState serverStatus);
 
-
-    void OnReqSwitchServer(const NFSOCK nSockIndex, const int nMsgID, const char *msg, const uint32_t nLen);
-    void OnAckSwitchServer(const NFSOCK nSockIndex, const int nMsgID, const char *msg, const uint32_t nLen);
 protected:
 
     void OnGameServerRegisteredProcess(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);

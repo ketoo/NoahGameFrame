@@ -631,7 +631,7 @@ namespace NFMsg {
 
     /// <summary>Field number for the "event_code" field.</summary>
     public const int EventCodeFieldNumber = 1;
-    private global::NFMsg.EGameEventCode eventCode_ = global::NFMsg.EGameEventCode.EgecSuccess;
+    private global::NFMsg.EGameEventCode eventCode_ = global::NFMsg.EGameEventCode.Success;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public global::NFMsg.EGameEventCode EventCode {
       get { return eventCode_; }
@@ -690,7 +690,7 @@ namespace NFMsg {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override int GetHashCode() {
       int hash = 1;
-      if (EventCode != global::NFMsg.EGameEventCode.EgecSuccess) hash ^= EventCode.GetHashCode();
+      if (EventCode != global::NFMsg.EGameEventCode.Success) hash ^= EventCode.GetHashCode();
       if (eventObject_ != null) hash ^= EventObject.GetHashCode();
       if (eventClient_ != null) hash ^= EventClient.GetHashCode();
       if (_unknownFields != null) {
@@ -706,7 +706,7 @@ namespace NFMsg {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public void WriteTo(pb::CodedOutputStream output) {
-      if (EventCode != global::NFMsg.EGameEventCode.EgecSuccess) {
+      if (EventCode != global::NFMsg.EGameEventCode.Success) {
         output.WriteRawTag(8);
         output.WriteEnum((int) EventCode);
       }
@@ -726,7 +726,7 @@ namespace NFMsg {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public int CalculateSize() {
       int size = 0;
-      if (EventCode != global::NFMsg.EGameEventCode.EgecSuccess) {
+      if (EventCode != global::NFMsg.EGameEventCode.Success) {
         size += 1 + pb::CodedOutputStream.ComputeEnumSize((int) EventCode);
       }
       if (eventObject_ != null) {
@@ -746,7 +746,7 @@ namespace NFMsg {
       if (other == null) {
         return;
       }
-      if (other.EventCode != global::NFMsg.EGameEventCode.EgecSuccess) {
+      if (other.EventCode != global::NFMsg.EGameEventCode.Success) {
         EventCode = other.EventCode;
       }
       if (other.eventObject_ != null) {

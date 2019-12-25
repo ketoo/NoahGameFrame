@@ -45,6 +45,7 @@
 #[cC][mM]ake[lL]ists.txt
 
 /_Out/Comm/*
+/_Out/redis*
 /_Out/Debug/
 /_Out/Release/
 /_Out/NFDataCfg/Tool/

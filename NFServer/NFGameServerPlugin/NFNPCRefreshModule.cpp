@@ -25,6 +25,7 @@
 
 
 #include <NFComm/NFPluginModule/NFIPropertyModule.h>
+#include "NFComm/NFMessageDefine/NFMsgDefine.h"
 #include "NFNPCRefreshModule.h"
 
 bool NFNPCRefreshModule::Init()
@@ -95,7 +96,7 @@ int NFNPCRefreshModule::OnObjectClassEvent( const NFGUID& self, const std::strin
 				}
 			}
 
-			if (nNPCType == NFMsg::ENPCType::ENPCTYPE_HERO)
+			if (nNPCType == NFMsg::ENPCType::HERO_NPC)
 			{
 				//star & level
 			}
@@ -142,7 +143,7 @@ int NFNPCRefreshModule::OnNPCDeadDestroyHeart( const NFGUID& self, const std::st
 
 	NFVector3 fSeedPos = m_pKernelModule->GetPropertyVector3( self, NFrame::NPC::Position());
 
-	if (nNPCType == NFMsg::ENPCType::ENPCTYPE_NORMAL)
+	if (nNPCType == NFMsg::ENPCType::NORMAL_NPC)
 	{
 		m_pKernelModule->DestroySelf(self);
 
@@ -154,7 +155,7 @@ int NFNPCRefreshModule::OnNPCDeadDestroyHeart( const NFGUID& self, const std::st
 
 		m_pKernelModule->CreateObject(NFGUID(), nSceneID, nGroupID, strClassName, strConfigID, arg);
 	}
-	else if (nNPCType == NFMsg::ENPCType::ENPCTYPE_TURRET)
+	else if (nNPCType == NFMsg::ENPCType::TURRET_NPC)
 	{
 		//change it as a different status to show others players that this building has been destroyed
 		//m_pKernelModule->DestroySelf(self);
@@ -171,7 +172,7 @@ int NFNPCRefreshModule::OnNPCDeadDestroyHeart( const NFGUID& self, const std::st
 		*/
 
 	}
-	else if (nNPCType == NFMsg::ENPCType::ENPCTYPE_HERO)
+	else if (nNPCType == NFMsg::ENPCType::HERO_NPC)
 	{
 		m_pKernelModule->DestroySelf(self);
 	}
@@ -193,7 +194,7 @@ int NFNPCRefreshModule::OnBuildingDeadDestroyHeart(const NFGUID & self, const st
 
 	NFVector3 fSeedPos = m_pKernelModule->GetPropertyVector3(self, NFrame::NPC::Position());
 
-	if (nNPCType == NFMsg::ENPCType::ENPCTYPE_TURRET)
+	if (nNPCType == NFMsg::ENPCType::TURRET_NPC)
 	{
 		m_pKernelModule->DestroySelf(self);
 

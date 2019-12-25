@@ -157,7 +157,7 @@ void NFProxyServerNet_WSModule::OnClientDisconnect(const NFSOCK nAddress)
                     return;
                 }
 
-				m_pNetClientModule->SendByServerIDWithOutHead(nGameID, NFMsg::EGameMsgID::EGMI_REQ_LEAVE_GAME, strMsg);
+				m_pNetClientModule->SendByServerIDWithOutHead(nGameID, NFMsg::EGameMsgID::REQ_LEAVE_GAME, strMsg);
                  */
   
             }

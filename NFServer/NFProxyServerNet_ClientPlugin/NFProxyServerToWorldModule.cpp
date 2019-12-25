@@ -154,7 +154,7 @@ void NFProxyServerToWorldModule::Register(NFINet* pNet)
                 if (pServerData)
                 {
                     int nTargetID = pServerData->nGameID;
-					GetClusterModule()->SendToServerByPB(nTargetID, NFMsg::EGameMsgID::EGMI_PTWG_PROXY_REGISTERED, xMsg);
+					GetClusterModule()->SendToServerByPB(nTargetID, NFMsg::EGameMsgID::PTWG_PROXY_REGISTERED, xMsg);
 
                     m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFGUID(0, pData->server_id()), pData->server_name(), "Register");
                 }
@@ -200,7 +200,7 @@ void NFProxyServerToWorldModule::ServerReport()
 				reqMsg.set_server_type(nServerType);
 
 
-				m_pNetClientModule->SendToAllServerByPB(NF_SERVER_TYPES::NF_ST_WORLD, NFMsg::EGMI_STS_SERVER_REPORT, reqMsg);
+				m_pNetClientModule->SendToAllServerByPB(NF_SERVER_TYPES::NF_ST_WORLD, NFMsg::STS_SERVER_REPORT, reqMsg);
 		
 			}
 		}
@@ -209,8 +209,8 @@ void NFProxyServerToWorldModule::ServerReport()
 
 bool NFProxyServerToWorldModule::AfterInit()
 {
-	m_pNetClientModule->AddReceiveCallBack(NF_SERVER_TYPES::NF_ST_WORLD, NFMsg::EGMI_ACK_CONNECT_WORLD, this, &NFProxyServerToWorldModule::OnSelectServerResultProcess);
-	m_pNetClientModule->AddReceiveCallBack(NF_SERVER_TYPES::NF_ST_WORLD, NFMsg::EGMI_STS_NET_INFO, this, &NFProxyServerToWorldModule::OnServerInfoProcess);
+	m_pNetClientModule->AddReceiveCallBack(NF_SERVER_TYPES::NF_ST_WORLD, NFMsg::ACK_CONNECT_WORLD, this, &NFProxyServerToWorldModule::OnSelectServerResultProcess);
+	m_pNetClientModule->AddReceiveCallBack(NF_SERVER_TYPES::NF_ST_WORLD, NFMsg::STS_NET_INFO, this, &NFProxyServerToWorldModule::OnServerInfoProcess);
 	m_pNetClientModule->AddReceiveCallBack(NF_SERVER_TYPES::NF_ST_WORLD, this, &NFProxyServerToWorldModule::OnOtherMessage);
 
 	m_pNetClientModule->AddEventCallBack(NF_SERVER_TYPES::NF_ST_WORLD, this, &NFProxyServerToWorldModule::OnSocketWSEvent);

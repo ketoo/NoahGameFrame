@@ -47,8 +47,8 @@ bool NFLoginToMasterModule::Shut()
 
 bool NFLoginToMasterModule::AfterInit()
 {
-	m_pNetClientModule->AddReceiveCallBack(NF_SERVER_TYPES::NF_ST_MASTER, NFMsg::EGMI_ACK_CONNECT_WORLD, this, &NFLoginToMasterModule::OnSelectServerResultProcess);
-	m_pNetClientModule->AddReceiveCallBack(NF_SERVER_TYPES::NF_ST_MASTER, NFMsg::EGMI_STS_NET_INFO, this, &NFLoginToMasterModule::OnWorldInfoProcess);
+	m_pNetClientModule->AddReceiveCallBack(NF_SERVER_TYPES::NF_ST_MASTER, NFMsg::ACK_CONNECT_WORLD, this, &NFLoginToMasterModule::OnSelectServerResultProcess);
+	m_pNetClientModule->AddReceiveCallBack(NF_SERVER_TYPES::NF_ST_MASTER, NFMsg::STS_NET_INFO, this, &NFLoginToMasterModule::OnWorldInfoProcess);
 	
 	m_pNetClientModule->AddEventCallBack(NF_SERVER_TYPES::NF_ST_MASTER, this, &NFLoginToMasterModule::OnSocketMSEvent);
 
@@ -138,7 +138,7 @@ void NFLoginToMasterModule::Register(NFINet* pNet)
                 if (pServerData)
                 {
                     int nTargetID = pServerData->nGameID;
-					m_pNetClientModule->SendToServerByPB(nTargetID, NFMsg::EGameMsgID::EGMI_LTM_LOGIN_REGISTERED, xMsg);
+					m_pNetClientModule->SendToServerByPB(nTargetID, NFMsg::EGameMsgID::LTM_LOGIN_REGISTERED, xMsg);
 
                     m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFGUID(0, pData->server_id()), pData->server_name(), "Register");
                 }
@@ -182,7 +182,7 @@ void NFLoginToMasterModule::ServerReport()
 				reqMsg.set_server_state(NFMsg::EST_NARMAL);
 				reqMsg.set_server_type(nServerType);
 
-				m_pNetClientModule->SendToAllServerByPB(NF_SERVER_TYPES::NF_ST_MASTER, NFMsg::EGMI_STS_SERVER_REPORT, reqMsg);
+				m_pNetClientModule->SendToAllServerByPB(NF_SERVER_TYPES::NF_ST_MASTER, NFMsg::STS_SERVER_REPORT, reqMsg);
 			}
 		}
 	}

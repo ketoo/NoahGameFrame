@@ -50,11 +50,11 @@ bool NFWorldToMasterModule::Shut()
 
 bool NFWorldToMasterModule::AfterInit()
 {
-	m_pNetClientModule->AddReceiveCallBack(NF_SERVER_TYPES::NF_ST_MASTER, NFMsg::EGMI_REQ_CONNECT_WORLD, this, &NFWorldToMasterModule::OnSelectServerProcess);
-	m_pNetClientModule->AddReceiveCallBack(NF_SERVER_TYPES::NF_ST_MASTER, NFMsg::EGMI_REQ_KICK_CLIENT_INWORLD, this, &NFWorldToMasterModule::OnKickClientProcess);
+	m_pNetClientModule->AddReceiveCallBack(NF_SERVER_TYPES::NF_ST_MASTER, NFMsg::REQ_CONNECT_WORLD, this, &NFWorldToMasterModule::OnSelectServerProcess);
+	m_pNetClientModule->AddReceiveCallBack(NF_SERVER_TYPES::NF_ST_MASTER, NFMsg::REQ_KICK_CLIENT_INWORLD, this, &NFWorldToMasterModule::OnKickClientProcess);
 	m_pNetClientModule->AddReceiveCallBack(NF_SERVER_TYPES::NF_ST_MASTER, this, &NFWorldToMasterModule::InvalidMessage);
 
-	m_pNetClientModule->AddReceiveCallBack(NF_SERVER_TYPES::NF_ST_MASTER, NFMsg::EGMI_STS_NET_INFO, this, &NFWorldToMasterModule::OnServerInfoProcess);
+	m_pNetClientModule->AddReceiveCallBack(NF_SERVER_TYPES::NF_ST_MASTER, NFMsg::STS_NET_INFO, this, &NFWorldToMasterModule::OnServerInfoProcess);
 
 	m_pNetClientModule->AddEventCallBack(NF_SERVER_TYPES::NF_ST_MASTER, this, &NFWorldToMasterModule::OnSocketMSEvent);
 	m_pNetClientModule->ExpandBufferSize();
@@ -136,7 +136,7 @@ void NFWorldToMasterModule::Register(NFINet* pNet)
 				if (pServerData)
 				{
 					int nTargetID = pServerData->nGameID;
-					m_pNetClientModule->SendToServerByPB(nTargetID, NFMsg::EGameMsgID::EGMI_WTM_WORLD_REGISTERED, xMsg);
+					m_pNetClientModule->SendToServerByPB(nTargetID, NFMsg::EGameMsgID::WTM_WORLD_REGISTERED, xMsg);
 
 					m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFGUID(0, pData->server_id()), pData->server_name(), "Register");
 				}
@@ -180,7 +180,7 @@ void NFWorldToMasterModule::ServerReport()
 				reqMsg.set_server_state(NFMsg::EST_NARMAL);
 				reqMsg.set_server_type(nServerType);
 
-				m_pNetClientModule->SendToAllServerByPB(NF_SERVER_TYPES::NF_ST_MASTER, NFMsg::EGMI_STS_SERVER_REPORT, reqMsg);
+				m_pNetClientModule->SendToAllServerByPB(NF_SERVER_TYPES::NF_ST_MASTER, NFMsg::STS_SERVER_REPORT, reqMsg);
 			}
 		}
 	}
@@ -216,9 +216,9 @@ void NFWorldToMasterModule::OnSelectServerProcess(const NFSOCK nSockIndex, const
 		xData.set_world_port(xServerData->pData->server_port());
 		xData.set_world_key(strSecurityKey);
 
-		m_pNetModule->SendMsgPB(NFMsg::EGMI_ACK_CONNECT_WORLD, xData, xServerData->nFD);
+		m_pNetModule->SendMsgPB(NFMsg::ACK_CONNECT_WORLD, xData, xServerData->nFD);
 
-		m_pNetClientModule->SendSuitByPB(NF_SERVER_TYPES::NF_ST_MASTER, xMsg.account(), NFMsg::EGMI_ACK_CONNECT_WORLD, xData);
+		m_pNetClientModule->SendSuitByPB(NF_SERVER_TYPES::NF_ST_MASTER, xMsg.account(), NFMsg::ACK_CONNECT_WORLD, xData);
 	}
 
 }

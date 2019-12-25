@@ -87,7 +87,7 @@ int NFSceneAutoBroadcastModule::OnPropertyEvent(const NFGUID & self, const std::
 		{
 			NFGUID identOld = players.Object(i);
 
-			m_pGameServerNet_ServerModule->SendMsgPBToGate(NFMsg::EGMI_ACK_PROPERTY_INT, xPropertyInt, identOld);
+			m_pGameServerNet_ServerModule->SendMsgPBToGate(NFMsg::ACK_PROPERTY_INT, xPropertyInt, identOld);
 		}
 	}
 	break;
@@ -106,7 +106,7 @@ int NFSceneAutoBroadcastModule::OnPropertyEvent(const NFGUID & self, const std::
 		{
 			NFGUID identOld = players.Object(i);
 
-			m_pGameServerNet_ServerModule->SendMsgPBToGate(NFMsg::EGMI_ACK_PROPERTY_FLOAT, xPropertyFloat, identOld);
+			m_pGameServerNet_ServerModule->SendMsgPBToGate(NFMsg::ACK_PROPERTY_FLOAT, xPropertyFloat, identOld);
 		}
 	}
 	break;
@@ -125,7 +125,7 @@ int NFSceneAutoBroadcastModule::OnPropertyEvent(const NFGUID & self, const std::
 		{
 			NFGUID identOld = players.Object(i);
 
-			m_pGameServerNet_ServerModule->SendMsgPBToGate(NFMsg::EGMI_ACK_PROPERTY_STRING, xPropertyString, identOld);
+			m_pGameServerNet_ServerModule->SendMsgPBToGate(NFMsg::ACK_PROPERTY_STRING, xPropertyString, identOld);
 		}
 	}
 	break;
@@ -144,7 +144,7 @@ int NFSceneAutoBroadcastModule::OnPropertyEvent(const NFGUID & self, const std::
 		{
 			NFGUID identOld = players.Object(i);
 
-			m_pGameServerNet_ServerModule->SendMsgPBToGate(NFMsg::EGMI_ACK_PROPERTY_OBJECT, xPropertyObject, identOld);
+			m_pGameServerNet_ServerModule->SendMsgPBToGate(NFMsg::ACK_PROPERTY_OBJECT, xPropertyObject, identOld);
 		}
 	}
 	break;
@@ -162,7 +162,7 @@ int NFSceneAutoBroadcastModule::OnPropertyEvent(const NFGUID & self, const std::
 		{
 			NFGUID identOld = players.Object(i);
 
-			m_pGameServerNet_ServerModule->SendMsgPBToGate(NFMsg::EGMI_ACK_PROPERTY_VECTOR2, xPropertyVector2, identOld);
+			m_pGameServerNet_ServerModule->SendMsgPBToGate(NFMsg::ACK_PROPERTY_VECTOR2, xPropertyVector2, identOld);
 		}
 	}
 	break;
@@ -180,7 +180,7 @@ int NFSceneAutoBroadcastModule::OnPropertyEvent(const NFGUID & self, const std::
 		{
 			NFGUID identOld = players.Object(i);
 
-			m_pGameServerNet_ServerModule->SendMsgPBToGate(NFMsg::EGMI_ACK_PROPERTY_VECTOR3, xPropertyVector3, identOld);
+			m_pGameServerNet_ServerModule->SendMsgPBToGate(NFMsg::ACK_PROPERTY_VECTOR3, xPropertyVector3, identOld);
 		}
 	}
 	break;
@@ -288,7 +288,7 @@ int NFSceneAutoBroadcastModule::OnRecordEvent(const NFGUID & self, const RECORD_
 				{
 					NFGUID identOther = players.Object(i);
 
-					m_pGameServerNet_ServerModule->SendMsgPBToGate(NFMsg::EGMI_ACK_ADD_ROW, xAddRecordRow, identOther);
+					m_pGameServerNet_ServerModule->SendMsgPBToGate(NFMsg::ACK_ADD_ROW, xAddRecordRow, identOther);
 				}
 			}
 		}
@@ -308,7 +308,7 @@ int NFSceneAutoBroadcastModule::OnRecordEvent(const NFGUID & self, const RECORD_
 		{
 			NFGUID identOther = players.Object(i);
 
-			m_pGameServerNet_ServerModule->SendMsgPBToGate(NFMsg::EGMI_ACK_REMOVE_ROW, xReoveRecordRow, identOther);
+			m_pGameServerNet_ServerModule->SendMsgPBToGate(NFMsg::ACK_REMOVE_ROW, xReoveRecordRow, identOther);
 		}
 	}
 	break;
@@ -327,7 +327,7 @@ int NFSceneAutoBroadcastModule::OnRecordEvent(const NFGUID & self, const RECORD_
 		{
 			NFGUID identOther = players.Object(i);
 
-			m_pGameServerNet_ServerModule->SendMsgPBToGate(NFMsg::EGMI_ACK_SWAP_ROW, xSwapRecord, identOther);
+			m_pGameServerNet_ServerModule->SendMsgPBToGate(NFMsg::ACK_SWAP_ROW, xSwapRecord, identOther);
 		}
 	}
 	break;
@@ -351,7 +351,7 @@ int NFSceneAutoBroadcastModule::OnRecordEvent(const NFGUID & self, const RECORD_
 			{
 				NFGUID identOther = players.Object(i);
 
-				m_pGameServerNet_ServerModule->SendMsgPBToGate(NFMsg::EGMI_ACK_RECORD_INT, xRecordChanged, identOther);
+				m_pGameServerNet_ServerModule->SendMsgPBToGate(NFMsg::ACK_RECORD_INT, xRecordChanged, identOther);
 			}
 		}
 		break;
@@ -371,7 +371,7 @@ int NFSceneAutoBroadcastModule::OnRecordEvent(const NFGUID & self, const RECORD_
 			{
 				NFGUID identOther = players.Object(i);
 
-				m_pGameServerNet_ServerModule->SendMsgPBToGate(NFMsg::EGMI_ACK_RECORD_FLOAT, xRecordChanged, identOther);
+				m_pGameServerNet_ServerModule->SendMsgPBToGate(NFMsg::ACK_RECORD_FLOAT, xRecordChanged, identOther);
 			}
 		}
 		break;
@@ -390,7 +390,7 @@ int NFSceneAutoBroadcastModule::OnRecordEvent(const NFGUID & self, const RECORD_
 			{
 				NFGUID identOther = players.Object(i);
 
-				m_pGameServerNet_ServerModule->SendMsgPBToGate(NFMsg::EGMI_ACK_RECORD_STRING, xRecordChanged, identOther);
+				m_pGameServerNet_ServerModule->SendMsgPBToGate(NFMsg::ACK_RECORD_STRING, xRecordChanged, identOther);
 			}
 		}
 		break;
@@ -409,7 +409,7 @@ int NFSceneAutoBroadcastModule::OnRecordEvent(const NFGUID & self, const RECORD_
 			{
 				NFGUID identOther = players.Object(i);
 
-				m_pGameServerNet_ServerModule->SendMsgPBToGate(NFMsg::EGMI_ACK_RECORD_OBJECT, xRecordChanged, identOther);
+				m_pGameServerNet_ServerModule->SendMsgPBToGate(NFMsg::ACK_RECORD_OBJECT, xRecordChanged, identOther);
 			}
 		}
 		break;
@@ -428,7 +428,7 @@ int NFSceneAutoBroadcastModule::OnRecordEvent(const NFGUID & self, const RECORD_
 			{
 				NFGUID identOther = players.Object(i);
 
-				m_pGameServerNet_ServerModule->SendMsgPBToGate(NFMsg::EGMI_ACK_RECORD_VECTOR2, xRecordChanged, identOther);
+				m_pGameServerNet_ServerModule->SendMsgPBToGate(NFMsg::ACK_RECORD_VECTOR2, xRecordChanged, identOther);
 			}
 		}
 		break;
@@ -447,7 +447,7 @@ int NFSceneAutoBroadcastModule::OnRecordEvent(const NFGUID & self, const RECORD_
 			{
 				NFGUID identOther = players.Object(i);
 
-				m_pGameServerNet_ServerModule->SendMsgPBToGate(NFMsg::EGMI_ACK_RECORD_VECTOR3, xRecordChanged, identOther);
+				m_pGameServerNet_ServerModule->SendMsgPBToGate(NFMsg::ACK_RECORD_VECTOR3, xRecordChanged, identOther);
 			}
 		}
 		break;
@@ -469,7 +469,7 @@ int NFSceneAutoBroadcastModule::OnRecordEvent(const NFGUID & self, const RECORD_
 		//             for ( int i = 0; i < valueBroadCaseList.GetCount(); i++ )
 		//             {
 		//                 NFGUID identOther = valueBroadCaseList.Object( i );
-		//                 SendMsgPB(NFMsg::EGMI_ACK_RECORD_CLEAR, xRecordChanged, 0);
+		//                 SendMsgPB(NFMsg::ACK_RECORD_CLEAR, xRecordChanged, 0);
 		//             }
 	}
 	break;
@@ -590,7 +590,7 @@ int NFSceneAutoBroadcastModule::OnPropertyEnter(const NFDataList & argVar, const
 		for (int i = 0; i < argVar.GetCount(); i++)
 		{
 			NFGUID identOther = argVar.Object(i);
-			m_pGameServerNet_ServerModule->SendMsgPBToGate(NFMsg::EGMI_ACK_OBJECT_PROPERTY_ENTRY, xPublicMsg, identOther);
+			m_pGameServerNet_ServerModule->SendMsgPBToGate(NFMsg::ACK_OBJECT_PROPERTY_ENTRY, xPublicMsg, identOther);
 		}
 	}
 
@@ -742,7 +742,7 @@ int NFSceneAutoBroadcastModule::OnRecordEnter(const NFDataList & argVar, const i
 			NFGUID identOther = argVar.Object(i);
 			if (xPublicMsg.multi_player_record_size() > 0)
 			{
-				m_pGameServerNet_ServerModule->SendMsgPBToGate(NFMsg::EGMI_ACK_OBJECT_RECORD_ENTRY, xPublicMsg, identOther);
+				m_pGameServerNet_ServerModule->SendMsgPBToGate(NFMsg::ACK_OBJECT_RECORD_ENTRY, xPublicMsg, identOther);
 			}
 		}
 	}
@@ -761,7 +761,7 @@ int NFSceneAutoBroadcastModule::ClearProperty(const NFGUID & self, const int nSc
 		*(pPublicData->mutable_player_id()) = NFINetModule::NFToPB(NFGUID(0, 0));
 
 
-		m_pGameServerNet_ServerModule->SendMsgPBToGate(NFMsg::EGMI_ACK_PROPERTY_CLEAR, xPublicMsg, self);
+		m_pGameServerNet_ServerModule->SendMsgPBToGate(NFMsg::ACK_PROPERTY_CLEAR, xPublicMsg, self);
 	}
 
 	return 0;
@@ -797,7 +797,7 @@ int NFSceneAutoBroadcastModule::ClearRecord(const NFGUID & self, const int nScen
 
 		if (xPublicMsg.multi_player_record_size() > 0)
 		{
-			m_pGameServerNet_ServerModule->SendMsgPBToGate(NFMsg::EGMI_ACK_RECORD_CLEAR, xPublicMsg, self);
+			m_pGameServerNet_ServerModule->SendMsgPBToGate(NFMsg::ACK_RECORD_CLEAR, xPublicMsg, self);
 		}
 	}
 

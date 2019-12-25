@@ -215,7 +215,7 @@ void NFMasterNet_ServerModule::OnSelectWorldProcess(const NFSOCK nSockIndex, con
 		return;
 	}
 
-	m_pNetModule->SendMsgPB(NFMsg::EGameMsgID::EGMI_REQ_CONNECT_WORLD, xMsg, pServerData->nFD);
+	m_pNetModule->SendMsgPB(NFMsg::EGameMsgID::REQ_CONNECT_WORLD, xMsg, pServerData->nFD);
 }
 
 bool NFMasterNet_ServerModule::Execute()
@@ -241,21 +241,21 @@ void NFMasterNet_ServerModule::OnSelectServerResultProcess(const NFSOCK nSockInd
 	}
 
 	
-	m_pNetModule->SendMsgPB(NFMsg::EGameMsgID::EGMI_ACK_CONNECT_WORLD, xMsg, pServerData->nFD);
+	m_pNetModule->SendMsgPB(NFMsg::EGameMsgID::ACK_CONNECT_WORLD, xMsg, pServerData->nFD);
 }
 
 bool NFMasterNet_ServerModule::AfterInit()
 {
-	m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_STS_HEART_BEAT, this, &NFMasterNet_ServerModule::OnHeartBeat);
-	m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_WTM_WORLD_REGISTERED, this, &NFMasterNet_ServerModule::OnWorldRegisteredProcess);
-	m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_WTM_WORLD_UNREGISTERED, this, &NFMasterNet_ServerModule::OnWorldUnRegisteredProcess);
-	m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_WTM_WORLD_REFRESH, this, &NFMasterNet_ServerModule::OnRefreshWorldInfoProcess);
-	m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_LTM_LOGIN_REGISTERED, this, &NFMasterNet_ServerModule::OnLoginRegisteredProcess);
-	m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_LTM_LOGIN_UNREGISTERED, this, &NFMasterNet_ServerModule::OnLoginUnRegisteredProcess);
-	m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_LTM_LOGIN_REFRESH, this, &NFMasterNet_ServerModule::OnRefreshLoginInfoProcess);
-	m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_REQ_CONNECT_WORLD, this, &NFMasterNet_ServerModule::OnSelectWorldProcess);
-	m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_ACK_CONNECT_WORLD, this, &NFMasterNet_ServerModule::OnSelectServerResultProcess);
-	m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_STS_SERVER_REPORT, this, &NFMasterNet_ServerModule::OnServerReport);
+	m_pNetModule->AddReceiveCallBack(NFMsg::STS_HEART_BEAT, this, &NFMasterNet_ServerModule::OnHeartBeat);
+	m_pNetModule->AddReceiveCallBack(NFMsg::WTM_WORLD_REGISTERED, this, &NFMasterNet_ServerModule::OnWorldRegisteredProcess);
+	m_pNetModule->AddReceiveCallBack(NFMsg::WTM_WORLD_UNREGISTERED, this, &NFMasterNet_ServerModule::OnWorldUnRegisteredProcess);
+	m_pNetModule->AddReceiveCallBack(NFMsg::WTM_WORLD_REFRESH, this, &NFMasterNet_ServerModule::OnRefreshWorldInfoProcess);
+	m_pNetModule->AddReceiveCallBack(NFMsg::LTM_LOGIN_REGISTERED, this, &NFMasterNet_ServerModule::OnLoginRegisteredProcess);
+	m_pNetModule->AddReceiveCallBack(NFMsg::LTM_LOGIN_UNREGISTERED, this, &NFMasterNet_ServerModule::OnLoginUnRegisteredProcess);
+	m_pNetModule->AddReceiveCallBack(NFMsg::LTM_LOGIN_REFRESH, this, &NFMasterNet_ServerModule::OnRefreshLoginInfoProcess);
+	m_pNetModule->AddReceiveCallBack(NFMsg::REQ_CONNECT_WORLD, this, &NFMasterNet_ServerModule::OnSelectWorldProcess);
+	m_pNetModule->AddReceiveCallBack(NFMsg::ACK_CONNECT_WORLD, this, &NFMasterNet_ServerModule::OnSelectServerResultProcess);
+	m_pNetModule->AddReceiveCallBack(NFMsg::STS_SERVER_REPORT, this, &NFMasterNet_ServerModule::OnServerReport);
 
 	m_pNetModule->AddReceiveCallBack(this, &NFMasterNet_ServerModule::InvalidMessage);
 
@@ -394,7 +394,7 @@ void NFMasterNet_ServerModule::SynWorldToLoginAndWorld()
 	pServerData = mLoginMap.First();
 	while (pServerData)
 	{
-		m_pNetModule->SendMsgPB(NFMsg::EGameMsgID::EGMI_STS_NET_INFO, xData, pServerData->nFD);
+		m_pNetModule->SendMsgPB(NFMsg::EGameMsgID::STS_NET_INFO, xData, pServerData->nFD);
 
 		pServerData = mLoginMap.Next();
 	}
@@ -418,7 +418,7 @@ void NFMasterNet_ServerModule::SynWorldToLoginAndWorld()
 			}
 		}
 
-		m_pNetModule->SendMsgPB(NFMsg::EGameMsgID::EGMI_STS_NET_INFO, xWorldData, pServerData->nFD);
+		m_pNetModule->SendMsgPB(NFMsg::EGameMsgID::STS_NET_INFO, xWorldData, pServerData->nFD);
 
 		pServerData = mWorldMap.Next();
 	}
