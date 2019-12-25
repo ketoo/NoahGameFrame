@@ -112,5 +112,19 @@
             //for mac lldb
             "MIMode": "lldb"
         },
+        {
+            "name": "FileProcess",
+            "type": "cppdbg",
+            "request": "launch",
+            //"request": "attach",
+            "program": "${workspaceFolder}/_Out/NFDataCfg/Tool/NFFileProcess",
+            "args": [],
+            "stopAtEntry": false,
+            "cwd": "${workspaceFolder}/_Out/NFDataCfg/Tool/",
+            "environment": [],
+            "externalConsole": true,
+            //for mac lldb
+            "MIMode": "lldb"
+        },
     ]
 }
