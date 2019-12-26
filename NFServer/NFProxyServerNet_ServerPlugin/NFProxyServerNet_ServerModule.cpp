@@ -523,10 +523,19 @@ void NFProxyServerNet_ServerModule::OnReqRoleListProcess(const NFSOCK nSockIndex
     }
 
     NF_SHARE_PTR<ConnectData> pServerData = m_pNetClientModule->GetServerNetInfo(xData.game_id());
+    if (!pServerData)
+    {
+        pServerData = m_pNetClientModule->GetServerNetInfo(NF_SERVER_TYPES::NF_ST_GAME);
+        if (pServerData)
+        {
+            pNetObject->SetGameID(pServerData->nGameID);
+        }
+    }
+
     if (pServerData && ConnectDataState::NORMAL == pServerData->eState)
     {
         if (pNetObject->GetConnectKeyState() > 0
-            && pNetObject->GetGameID() == xData.game_id()
+            && pNetObject->GetGameID() == pServerData->nGameID
             && pNetObject->GetAccount() == xData.account())
         {
             NFMsg::MsgBase xMsg;
@@ -546,6 +555,10 @@ void NFProxyServerNet_ServerModule::OnReqRoleListProcess(const NFSOCK nSockIndex
 
 			m_pNetClientModule->SendByServerIDWithOutHead(pNetObject->GetGameID(), NFMsg::EGameMsgID::REQ_ROLE_LIST, strMsg);
         }
+    }
+    else
+    {
+        m_pLogModule->LogError(pNetObject->GetClientID(), "account cant get a game server:" + xData.account(), __FILE__, __LINE__);
     }
 }
 
@@ -571,11 +584,10 @@ void NFProxyServerNet_ServerModule::OnReqCreateRoleProcess(const NFSOCK nSockInd
         return;
     }
 
-    NF_SHARE_PTR<ConnectData> pServerData = m_pNetClientModule->GetServerNetInfo(xData.game_id());
+    NF_SHARE_PTR<ConnectData> pServerData = m_pNetClientModule->GetServerNetInfo(pNetObject->GetGameID());
     if (pServerData && ConnectDataState::NORMAL == pServerData->eState)
     {
         if (pNetObject->GetConnectKeyState() > 0
-            && pNetObject->GetGameID() == xData.game_id()
             && pNetObject->GetAccount() == xData.account())
         {
             NFMsg::MsgBase xMsg;
@@ -669,11 +681,10 @@ void NFProxyServerNet_ServerModule::OnReqEnterGameServer(const NFSOCK nSockIndex
         return;
     }
 
-    NF_SHARE_PTR<ConnectData> pServerData = m_pNetClientModule->GetServerNetInfo(xData.game_id());
+    NF_SHARE_PTR<ConnectData> pServerData = m_pNetClientModule->GetServerNetInfo(pNetObject->GetGameID());
     if (pServerData && ConnectDataState::NORMAL == pServerData->eState)
     {
         if (pNetObject->GetConnectKeyState() > 0
-            && pNetObject->GetGameID() == xData.game_id()
             && pNetObject->GetAccount() == xData.account()
             && !xData.name().empty()
             && !xData.account().empty())

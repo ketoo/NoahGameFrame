@@ -102,19 +102,10 @@ message ReqAckUseSkill
 	repeated EffectData 	effect_data = 4;
 }
 
-message ReqAckUseItem
-{
-	Ident 	user = 1;
-	Ident item_guid	= 2;
-	repeated EffectData 	effect_data = 3;
-	ItemStruct 	item = 4;
-	Ident 			targetId = 5;
-	Vector3 		position = 6;
-}
-
 /////////////////////////////////////////
 message ReqAckSwapScene
 {
+	int32 		transfer_type = 1;
 	int32		scene_id = 2;
 	int32		line_id = 3;
 	float 		x = 4;

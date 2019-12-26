@@ -38,6 +38,7 @@ bool NFPlayerRedisModule::Init()
 	m_pCommonRedisModule = pPluginManager->FindModule<NFICommonRedisModule>();
 	m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>();
 	m_pLogModule = pPluginManager->FindModule<NFILogModule>();
+	m_pAccountRedisModule = pPluginManager->FindModule<NFIAccountRedisModule>();
 	
 	return true;
 }
@@ -76,48 +77,6 @@ bool NFPlayerRedisModule::LoadPlayerData(const NFGUID & self, NFMsg::RoleDataPac
 
 	
 	m_pLogModule->LogNormal(NFILogModule::NF_LOG_LEVEL::NLL_ERROR_NORMAL, self, "loaded data false", NFGetTimeMS());
-
-	return false;
-}
-
-bool NFPlayerRedisModule::LoadPlayerData(const NFGUID & self, NFMsg::PVPPlayerInfo & roleData)
-{
-	std::vector<std::string> fields;
-	std::vector<std::string> values;
-
-	fields.push_back(NFrame::Player::Level());//0
-	fields.push_back(NFrame::Player::Name());//1
-	fields.push_back(NFrame::Player::Head());//2
-
-
-	if (GetPropertyList(self, fields, values) 
-		&& fields.size() == values.size())
-	{
-
-		const int level = lexical_cast<int>(values.at(0));
-		const std::string name = values.at(1);
-		const std::string head = values.at(2);
-		
-		roleData.mutable_id()->CopyFrom(NFINetModule::NFToPB(self));
-		roleData.set_level(level);
-		roleData.set_battle_point(0);
-		roleData.set_name(name);
-		roleData.set_head(head);
-
-		roleData.set_hero_star1(0);
-		roleData.set_hero_star2(0);
-		roleData.set_hero_star3(0);
-
-		roleData.set_hero_cnf1("");
-		roleData.set_hero_cnf2("");
-		roleData.set_hero_cnf3("");
-
-		*(roleData.mutable_hero_id1()) = NFINetModule::NFToPB(NFGUID());
-		*(roleData.mutable_hero_id2()) = NFINetModule::NFToPB(NFGUID());
-		*(roleData.mutable_hero_id3()) = NFINetModule::NFToPB(NFGUID());
-
-		return true;
-	}
 
 	return false;
 }
@@ -362,6 +321,11 @@ bool NFPlayerRedisModule::CreateRole(const std::string & strAccount, const std::
 	NF_SHARE_PTR<NFIRedisClient> xNoSqlDriver = m_pNoSqlModule->GetDriverBySuit(strAccount);
 	if (xNoSqlDriver)
 	{
+		if (!xNoSqlDriver->EXISTS(strAccountKey))
+		{
+			m_pAccountRedisModule->AddAccount(strAccount, strAccount);
+		}
+
 		if (xNoSqlDriver->EXISTS(strAccountKey) && !xNoSqlDriver->EXISTS(strRoleName))
 		{
 			std::vector<std::string> vecFields;

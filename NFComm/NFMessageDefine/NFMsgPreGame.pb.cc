@@ -594,7 +594,6 @@ const ::PROTOBUF_NAMESPACE_ID::uint32 TableStruct_NFMsgPreGame_2eproto::offsets[
   PROTOBUF_FIELD_OFFSET(::NFMsg::ReqCreateRole, sex_),
   PROTOBUF_FIELD_OFFSET(::NFMsg::ReqCreateRole, race_),
   PROTOBUF_FIELD_OFFSET(::NFMsg::ReqCreateRole, noob_name_),
-  PROTOBUF_FIELD_OFFSET(::NFMsg::ReqCreateRole, game_id_),
   ~0u,  // no _has_bits_
   PROTOBUF_FIELD_OFFSET(::NFMsg::ReqDeleteRole, _internal_metadata_),
   ~0u,  // no _extensions_
@@ -669,12 +668,12 @@ static const ::PROTOBUF_NAMESPACE_ID::internal::MigrationSchema schemas[] PROTOB
   { 113, -1, sizeof(::NFMsg::RoleLiteInfo)},
   { 130, -1, sizeof(::NFMsg::AckRoleLiteInfoList)},
   { 137, -1, sizeof(::NFMsg::ReqCreateRole)},
-  { 148, -1, sizeof(::NFMsg::ReqDeleteRole)},
-  { 156, -1, sizeof(::NFMsg::ReqRecoverRole)},
-  { 164, -1, sizeof(::NFMsg::ServerHeartBeat)},
-  { 170, -1, sizeof(::NFMsg::RoleOnlineNotify)},
-  { 187, -1, sizeof(::NFMsg::RoleOfflineNotify)},
-  { 196, -1, sizeof(::NFMsg::RoleDataPack)},
+  { 147, -1, sizeof(::NFMsg::ReqDeleteRole)},
+  { 155, -1, sizeof(::NFMsg::ReqRecoverRole)},
+  { 163, -1, sizeof(::NFMsg::ServerHeartBeat)},
+  { 169, -1, sizeof(::NFMsg::RoleOnlineNotify)},
+  { 186, -1, sizeof(::NFMsg::RoleOfflineNotify)},
+  { 195, -1, sizeof(::NFMsg::RoleDataPack)},
 };
 
 static ::PROTOBUF_NAMESPACE_ID::Message const * const file_default_instances[] = {
@@ -747,37 +746,37 @@ const char descriptor_table_protodef_NFMsgPreGame_2eproto[] PROTOBUF_SECTION_VAR
   "\n\021last_offline_time\030\n \001(\005\022\027\n\017last_offlin"
   "e_ip\030\013 \001(\005\022\023\n\013view_record\030\014 \001(\014\"N\n\023AckRo"
   "leLiteInfoList\022&\n\tchar_data\030\001 \003(\0132\023.NFMs"
-  "g.RoleLiteInfo\022\017\n\007account\030\002 \001(\014\"o\n\rReqCr"
+  "g.RoleLiteInfo\022\017\n\007account\030\002 \001(\014\"^\n\rReqCr"
   "eateRole\022\017\n\007account\030\001 \001(\014\022\016\n\006career\030\002 \001("
   "\005\022\013\n\003sex\030\003 \001(\005\022\014\n\004race\030\004 \001(\005\022\021\n\tnoob_nam"
-  "e\030\005 \001(\014\022\017\n\007game_id\030\006 \001(\005\"\?\n\rReqDeleteRol"
-  "e\022\017\n\007account\030\001 \001(\014\022\014\n\004name\030\002 \001(\014\022\017\n\007game"
-  "_id\030\003 \001(\005\"@\n\016ReqRecoverRole\022\017\n\007account\030\001"
-  " \001(\014\022\014\n\004name\030\002 \001(\014\022\017\n\007game_id\030\003 \001(\005\" \n\017S"
-  "erverHeartBeat\022\r\n\005count\030\001 \001(\005\"\273\003\n\020RoleOn"
-  "lineNotify\022\032\n\004self\030\001 \001(\0132\014.NFMsg.Ident\022\032"
-  "\n\004clan\030\002 \001(\0132\014.NFMsg.Ident\022\014\n\004game\030\003 \001(\005"
-  "\022\r\n\005proxy\030\004 \001(\005\022\014\n\004name\030\005 \001(\014\022\n\n\002bp\030\006 \001("
-  "\005\022-\n\021property_int_list\030\024 \003(\0132\022.NFMsg.Pro"
-  "pertyInt\0221\n\023property_float_list\030\025 \003(\0132\024."
-  "NFMsg.PropertyFloat\0223\n\024property_string_l"
-  "ist\030\026 \003(\0132\025.NFMsg.PropertyString\0223\n\024prop"
-  "erty_object_list\030\027 \003(\0132\025.NFMsg.PropertyO"
-  "bject\0225\n\025property_vector2_list\030\030 \003(\0132\026.N"
-  "FMsg.PropertyVector2\0225\n\025property_vector3"
-  "_list\030\031 \003(\0132\026.NFMsg.PropertyVector3\"h\n\021R"
-  "oleOfflineNotify\022\032\n\004self\030\001 \001(\0132\014.NFMsg.I"
-  "dent\022\032\n\004clan\030\002 \001(\0132\014.NFMsg.Ident\022\014\n\004game"
-  "\030\003 \001(\005\022\r\n\005proxy\030\004 \001(\005\"~\n\014RoleDataPack\022\030\n"
-  "\002id\030\001 \001(\0132\014.NFMsg.Ident\022+\n\010property\030\002 \001("
-  "\0132\031.NFMsg.ObjectPropertyList\022\'\n\006record\030\003"
-  " \001(\0132\027.NFMsg.ObjectRecordList*Z\n\014EServer"
-  "State\022\r\n\tEST_CRASH\020\000\022\016\n\nEST_NARMAL\020\001\022\014\n\010"
-  "EST_BUSY\020\002\022\014\n\010EST_FIRE\020\003\022\017\n\013EST_MAINTEN\020"
-  "\004*J\n\nELoginMode\022\r\n\tELM_LOGIN\020\000\022\020\n\014ELM_RE"
-  "GISTER\020\001\022\033\n\027ELM_AUTO_REGISTER_LOGIN\020\002*@\n"
-  "\021ReqServerListType\022\025\n\021RSLT_WORLD_SERVER\020"
-  "\000\022\024\n\020RSLT_GAMES_ERVER\020\001b\006proto3"
+  "e\030\005 \001(\014\"\?\n\rReqDeleteRole\022\017\n\007account\030\001 \001("
+  "\014\022\014\n\004name\030\002 \001(\014\022\017\n\007game_id\030\003 \001(\005\"@\n\016ReqR"
+  "ecoverRole\022\017\n\007account\030\001 \001(\014\022\014\n\004name\030\002 \001("
+  "\014\022\017\n\007game_id\030\003 \001(\005\" \n\017ServerHeartBeat\022\r\n"
+  "\005count\030\001 \001(\005\"\273\003\n\020RoleOnlineNotify\022\032\n\004sel"
+  "f\030\001 \001(\0132\014.NFMsg.Ident\022\032\n\004clan\030\002 \001(\0132\014.NF"
+  "Msg.Ident\022\014\n\004game\030\003 \001(\005\022\r\n\005proxy\030\004 \001(\005\022\014"
+  "\n\004name\030\005 \001(\014\022\n\n\002bp\030\006 \001(\005\022-\n\021property_int"
+  "_list\030\024 \003(\0132\022.NFMsg.PropertyInt\0221\n\023prope"
+  "rty_float_list\030\025 \003(\0132\024.NFMsg.PropertyFlo"
+  "at\0223\n\024property_string_list\030\026 \003(\0132\025.NFMsg"
+  ".PropertyString\0223\n\024property_object_list\030"
+  "\027 \003(\0132\025.NFMsg.PropertyObject\0225\n\025property"
+  "_vector2_list\030\030 \003(\0132\026.NFMsg.PropertyVect"
+  "or2\0225\n\025property_vector3_list\030\031 \003(\0132\026.NFM"
+  "sg.PropertyVector3\"h\n\021RoleOfflineNotify\022"
+  "\032\n\004self\030\001 \001(\0132\014.NFMsg.Ident\022\032\n\004clan\030\002 \001("
+  "\0132\014.NFMsg.Ident\022\014\n\004game\030\003 \001(\005\022\r\n\005proxy\030\004"
+  " \001(\005\"~\n\014RoleDataPack\022\030\n\002id\030\001 \001(\0132\014.NFMsg"
+  ".Ident\022+\n\010property\030\002 \001(\0132\031.NFMsg.ObjectP"
+  "ropertyList\022\'\n\006record\030\003 \001(\0132\027.NFMsg.Obje"
+  "ctRecordList*Z\n\014EServerState\022\r\n\tEST_CRAS"
+  "H\020\000\022\016\n\nEST_NARMAL\020\001\022\014\n\010EST_BUSY\020\002\022\014\n\010EST"
+  "_FIRE\020\003\022\017\n\013EST_MAINTEN\020\004*J\n\nELoginMode\022\r"
+  "\n\tELM_LOGIN\020\000\022\020\n\014ELM_REGISTER\020\001\022\033\n\027ELM_A"
+  "UTO_REGISTER_LOGIN\020\002*@\n\021ReqServerListTyp"
+  "e\022\025\n\021RSLT_WORLD_SERVER\020\000\022\024\n\020RSLT_GAMES_E"
+  "RVER\020\001b\006proto3"
   ;
 static const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable*const descriptor_table_NFMsgPreGame_2eproto_deps[2] = {
   &::descriptor_table_NFDefine_2eproto,
@@ -810,7 +809,7 @@ static ::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase*const descriptor_table_NFM
 static ::PROTOBUF_NAMESPACE_ID::internal::once_flag descriptor_table_NFMsgPreGame_2eproto_once;
 static bool descriptor_table_NFMsgPreGame_2eproto_initialized = false;
 const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable descriptor_table_NFMsgPreGame_2eproto = {
-  &descriptor_table_NFMsgPreGame_2eproto_initialized, descriptor_table_protodef_NFMsgPreGame_2eproto, "NFMsgPreGame.proto", 2991,
+  &descriptor_table_NFMsgPreGame_2eproto_initialized, descriptor_table_protodef_NFMsgPreGame_2eproto, "NFMsgPreGame.proto", 2974,
   &descriptor_table_NFMsgPreGame_2eproto_once, descriptor_table_NFMsgPreGame_2eproto_sccs, descriptor_table_NFMsgPreGame_2eproto_deps, 22, 2,
   schemas, file_default_instances, TableStruct_NFMsgPreGame_2eproto::offsets,
   file_level_metadata_NFMsgPreGame_2eproto, 22, file_level_enum_descriptors_NFMsgPreGame_2eproto, file_level_service_descriptors_NFMsgPreGame_2eproto,
@@ -5204,8 +5203,8 @@ ReqCreateRole::ReqCreateRole(const ReqCreateRole& from)
     noob_name_.AssignWithDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), from.noob_name_);
   }
   ::memcpy(&career_, &from.career_,
-    static_cast<size_t>(reinterpret_cast<char*>(&game_id_) -
-    reinterpret_cast<char*>(&career_)) + sizeof(game_id_));
+    static_cast<size_t>(reinterpret_cast<char*>(&race_) -
+    reinterpret_cast<char*>(&career_)) + sizeof(race_));
   // @@protoc_insertion_point(copy_constructor:NFMsg.ReqCreateRole)
 }
 
@@ -5214,8 +5213,8 @@ void ReqCreateRole::SharedCtor() {
   account_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
   noob_name_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
   ::memset(&career_, 0, static_cast<size_t>(
-      reinterpret_cast<char*>(&game_id_) -
-      reinterpret_cast<char*>(&career_)) + sizeof(game_id_));
+      reinterpret_cast<char*>(&race_) -
+      reinterpret_cast<char*>(&career_)) + sizeof(race_));
 }
 
 ReqCreateRole::~ReqCreateRole() {
@@ -5246,8 +5245,8 @@ void ReqCreateRole::Clear() {
   account_.ClearToEmptyNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
   noob_name_.ClearToEmptyNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
   ::memset(&career_, 0, static_cast<size_t>(
-      reinterpret_cast<char*>(&game_id_) -
-      reinterpret_cast<char*>(&career_)) + sizeof(game_id_));
+      reinterpret_cast<char*>(&race_) -
+      reinterpret_cast<char*>(&career_)) + sizeof(race_));
   _internal_metadata_.Clear();
 }
 
@@ -5292,13 +5291,6 @@ const char* ReqCreateRole::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_
         if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 42)) {
           auto str = _internal_mutable_noob_name();
           ptr = ::PROTOBUF_NAMESPACE_ID::internal::InlineGreedyStringParser(str, ptr, ctx);
-          CHK_(ptr);
-        } else goto handle_unusual;
-        continue;
-      // int32 game_id = 6;
-      case 6:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 48)) {
-          game_id_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint(&ptr);
           CHK_(ptr);
         } else goto handle_unusual;
         continue;
@@ -5358,12 +5350,6 @@ failure:
         5, this->_internal_noob_name(), target);
   }
 
-  // int32 game_id = 6;
-  if (this->game_id() != 0) {
-    target = stream->EnsureSpace(target);
-    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt32ToArray(6, this->_internal_game_id(), target);
-  }
-
   if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::InternalSerializeUnknownFieldsToArray(
         _internal_metadata_.unknown_fields(), target, stream);
@@ -5415,13 +5401,6 @@ size_t ReqCreateRole::ByteSizeLong() const {
         this->_internal_race());
   }
 
-  // int32 game_id = 6;
-  if (this->game_id() != 0) {
-    total_size += 1 +
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::Int32Size(
-        this->_internal_game_id());
-  }
-
   if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
     return ::PROTOBUF_NAMESPACE_ID::internal::ComputeUnknownFieldsSize(
         _internal_metadata_, total_size, &_cached_size_);
@@ -5470,9 +5449,6 @@ void ReqCreateRole::MergeFrom(const ReqCreateRole& from) {
   if (from.race() != 0) {
     _internal_set_race(from._internal_race());
   }
-  if (from.game_id() != 0) {
-    _internal_set_game_id(from._internal_game_id());
-  }
 }
 
 void ReqCreateRole::CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
@@ -5503,7 +5479,6 @@ void ReqCreateRole::InternalSwap(ReqCreateRole* other) {
   swap(career_, other->career_);
   swap(sex_, other->sex_);
   swap(race_, other->race_);
-  swap(game_id_, other->game_id_);
 }
 
 ::PROTOBUF_NAMESPACE_ID::Metadata ReqCreateRole::GetMetadata() const {

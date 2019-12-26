@@ -2977,7 +2977,6 @@ class ReqCreateRole :
     kCareerFieldNumber = 2,
     kSexFieldNumber = 3,
     kRaceFieldNumber = 4,
-    kGameIdFieldNumber = 6,
   };
   // bytes account = 1;
   void clear_account();
@@ -3038,15 +3037,6 @@ class ReqCreateRole :
   void _internal_set_race(::PROTOBUF_NAMESPACE_ID::int32 value);
   public:
 
-  // int32 game_id = 6;
-  void clear_game_id();
-  ::PROTOBUF_NAMESPACE_ID::int32 game_id() const;
-  void set_game_id(::PROTOBUF_NAMESPACE_ID::int32 value);
-  private:
-  ::PROTOBUF_NAMESPACE_ID::int32 _internal_game_id() const;
-  void _internal_set_game_id(::PROTOBUF_NAMESPACE_ID::int32 value);
-  public:
-
   // @@protoc_insertion_point(class_scope:NFMsg.ReqCreateRole)
  private:
   class _Internal;
@@ -3057,7 +3047,6 @@ class ReqCreateRole :
   ::PROTOBUF_NAMESPACE_ID::int32 career_;
   ::PROTOBUF_NAMESPACE_ID::int32 sex_;
   ::PROTOBUF_NAMESPACE_ID::int32 race_;
-  ::PROTOBUF_NAMESPACE_ID::int32 game_id_;
   mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   friend struct ::TableStruct_NFMsgPreGame_2eproto;
 };
@@ -6696,26 +6685,6 @@ inline void ReqCreateRole::set_allocated_noob_name(std::string* noob_name) {
   }
   noob_name_.SetAllocatedNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), noob_name);
   // @@protoc_insertion_point(field_set_allocated:NFMsg.ReqCreateRole.noob_name)
-}
-
-// int32 game_id = 6;
-inline void ReqCreateRole::clear_game_id() {
-  game_id_ = 0;
-}
-inline ::PROTOBUF_NAMESPACE_ID::int32 ReqCreateRole::_internal_game_id() const {
-  return game_id_;
-}
-inline ::PROTOBUF_NAMESPACE_ID::int32 ReqCreateRole::game_id() const {
-  // @@protoc_insertion_point(field_get:NFMsg.ReqCreateRole.game_id)
-  return _internal_game_id();
-}
-inline void ReqCreateRole::_internal_set_game_id(::PROTOBUF_NAMESPACE_ID::int32 value) {
-  
-  game_id_ = value;
-}
-inline void ReqCreateRole::set_game_id(::PROTOBUF_NAMESPACE_ID::int32 value) {
-  _internal_set_game_id(value);
-  // @@protoc_insertion_point(field_set:NFMsg.ReqCreateRole.game_id)
 }
 
 // -------------------------------------------------------------------

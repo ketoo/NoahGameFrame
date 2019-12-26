@@ -27,6 +27,7 @@
 #define NFI_COMMONCONFIG_MODULE_H
 
 #include <iostream>
+#include "NFIModule.h"
 
 
 class NFICommonConfigModule

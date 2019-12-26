@@ -105,7 +105,7 @@ int NFAutoBroadcastModule::OnSceneEvent(const NFGUID & self, const int nSceneID,
 
 	NFMsg::ReqAckSwapScene xAckSwapScene;
 	xAckSwapScene.set_scene_id(nSceneID);
-	xAckSwapScene.set_transfer_type(NFMsg::ReqAckSwapScene::EGameSwapType::ReqAckSwapScene_EGameSwapType_EGST_NARMAL);
+	xAckSwapScene.set_transfer_type(nType);
 	xAckSwapScene.set_line_id(0);
 	xAckSwapScene.set_x(vRelivePos.X());
 	xAckSwapScene.set_y(vRelivePos.Y());
