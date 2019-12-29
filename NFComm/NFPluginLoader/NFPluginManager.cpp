@@ -167,11 +167,6 @@
 
 #endif
 
-void CoroutineExecute(void* arg)
-{
-	//NFPluginManager::Instance()->Execute();
-}
-
 NFPluginManager::NFPluginManager() : NFIPluginManager()
 {
 	mnAppID = 0;
@@ -254,8 +249,6 @@ inline bool NFPluginManager::Init()
 		SetCurrentPlugin(itInstance->second);
 		itInstance->second->Init();
 	}
-
-   mxCoroutineManager.Init(CoroutineExecute);
 
 	return true;
 }
@@ -1008,21 +1001,6 @@ bool NFPluginManager::UnLoadStaticPlugin(const std::string & strPluginDLLName)
 	//     DESTROY_PLUGIN(this, NFEventProcessPlugin)
 	//     DESTROY_PLUGIN(this, NFKernelPlugin)
 	return false;
-}
-
-void NFPluginManager::ExecuteCoScheduler()
-{
-    mxCoroutineManager.ScheduleJob();
-}
-
-void NFPluginManager::YieldCo(const int64_t nSecond)
-{
-	mxCoroutineManager.YieldCo(nSecond);
-}
-
-void NFPluginManager::YieldCo()
-{
-   mxCoroutineManager.YieldCo();
 }
 
 void NFPluginManager::AddFileReplaceContent(const std::string& fileName, const std::string& content, const std::string& newValue)
