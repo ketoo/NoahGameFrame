@@ -41,6 +41,8 @@ public:
     NFPluginManager();
     virtual ~NFPluginManager();
 
+    virtual bool LoadPluginConfig() override;
+
     virtual bool LoadPlugin() override;
 
     virtual bool Awake() override;
@@ -128,7 +130,6 @@ public:
 	virtual std::vector<NFReplaceContent> GetFileReplaceContents(const std::string& fileName);
 
 protected:
-    bool LoadPluginConfig();
 
     bool LoadStaticPlugin();
     bool CheckStaticPlugin();

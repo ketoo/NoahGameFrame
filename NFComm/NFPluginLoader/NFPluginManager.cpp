@@ -49,7 +49,7 @@
 #pragma comment( lib, "SDL2d.lib" )
 #else
 #pragma comment( lib, "libprotobuf.lib" )
-//#pragma comment( lib, "SDL2.lib" )
+#pragma comment( lib, "SDL2.lib" )
 #endif
 
 #pragma comment( lib, "NFCore.lib" )
@@ -201,8 +201,6 @@ NFPluginManager::~NFPluginManager()
 bool NFPluginManager::LoadPlugin()
 {
 	std::cout << "----LoadPlugin----" << std::endl;
-
-	LoadPluginConfig();
 
 #ifndef NF_DYNAMIC_PLUGIN
 	LoadStaticPlugin();

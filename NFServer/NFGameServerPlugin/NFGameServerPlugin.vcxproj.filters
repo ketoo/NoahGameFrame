@@ -20,7 +20,6 @@
   <ItemGroup>
     <ClInclude Include="NFGameServerPlugin.h" />
     <ClInclude Include="NFGameServerModule.h" />
-    <ClInclude Include="NFSwitchGameServerModule.h" />
     <ClInclude Include="NFSceneProcessModule.h">
       <Filter>NFSceneModule</Filter>
     </ClInclude>
@@ -44,7 +43,6 @@
     <ClCompile Include="dllmain.cpp" />
     <ClCompile Include="NFGameServerPlugin.cpp" />
     <ClCompile Include="NFGameServerModule.cpp" />
-    <ClCompile Include="NFSwitchGameServerModule.cpp" />
     <ClCompile Include="NFSceneProcessModule.cpp">
       <Filter>NFSceneModule</Filter>
     </ClCompile>

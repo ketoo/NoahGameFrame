@@ -10,6 +10,7 @@
 		<Plugin Name="NFLuaScriptPlugin" />
 		<Plugin Name="NFUIPlugin" />
 		<Plugin Name="NFBluePrintPlugin" />
+		<Plugin Name="NFActorPlugin" />
 	</GameServer>
 
 	<LoginServer>
@@ -23,6 +24,7 @@
 		<Plugin Name="NFLogPlugin" />	
 		<Plugin Name="NFDBLogicPlugin" />
 		<Plugin Name="NFNoSqlPlugin" />
+		<Plugin Name="NFActorPlugin" />
 	</LoginServer>
 
 	<MasterServer>
@@ -33,6 +35,7 @@
 		<Plugin Name="NFMasterNet_ServerPlugin" />
 		<Plugin Name="NFMasterNet_HttpServerPlugin" />
 		<Plugin Name="NFLogPlugin" />	
+		<Plugin Name="NFActorPlugin" />
 	</MasterServer>
 
 	<ProxyServer>
@@ -43,7 +46,8 @@
 		<Plugin Name="NFProxyServerNet_ClientPlugin" />
 		<Plugin Name="NFProxyServerNet_ServerPlugin" />
 		<Plugin Name="NFLogPlugin" />
-		<Plugin Name="NFSecurityPlugin" />		
+		<Plugin Name="NFSecurityPlugin" />
+		<Plugin Name="NFActorPlugin" />		
 	</ProxyServer>
 
 	<WorldServer>
@@ -55,6 +59,7 @@
 		<Plugin Name="NFDBLogicPlugin" />
 		<Plugin Name="NFLogPlugin" />	
 		<Plugin Name="NFSecurityPlugin" />
+		<Plugin Name="NFActorPlugin" />
 		<Plugin Name="NFNoSqlPlugin" />
 	</WorldServer>
 	<DBServer>

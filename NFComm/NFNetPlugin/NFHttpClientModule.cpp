@@ -90,7 +90,7 @@ int NFHttpClientModule::Post(const std::string & strUri, const std::map<std::str
 	NF_SHARE_PTR<RespData> xRespData = mxRespDataMap.GetElement(id);
 	while (!xRespData->resp)
 	{
-		pPluginManager->YieldCo();
+        NFSLEEP(1);
 	}
 
 	strResData = xRespData->strRespData;
@@ -115,7 +115,7 @@ int NFHttpClientModule::Get(const std::string & strUri, const std::map<std::stri
 	NF_SHARE_PTR<RespData> xRespData = mxRespDataMap.GetElement(id);
 	while (!xRespData->resp)
 	{
-		pPluginManager->YieldCo();
+        NFSLEEP(1);
 	}
 
 	strResData = xRespData->strRespData;

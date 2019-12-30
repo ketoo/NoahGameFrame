@@ -37,8 +37,6 @@ class NFIModule;
 class NFIPluginManager;
 
 typedef std::function<bool (NFIPluginManager* p, const std::string& strFileName, std::string& strContent)> GET_FILECONTENT_FUNCTOR;
-typedef void (* CoroutineFunction)(void* arg);
-typedef void(*AsyncFunction)(const std::string& strData, std::string& strContent);
 
 template<typename DerivedType, typename BaseType>
 class TIsDerived
@@ -84,6 +82,11 @@ public:
     }
 
 	/////////////////////
+
+	virtual bool LoadPluginConfig()
+	{
+		return true;
+	}
 
 	virtual bool LoadPlugin()
 	{

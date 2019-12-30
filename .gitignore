@@ -50,6 +50,7 @@
 /_Out/Release/
 /_Out/NFDataCfg/Tool/
 
+/Dependencies/vcpkg
 /Dependencies/gperftools-2.5
 /Dependencies/lib
 /Dependencies/boost_1_53_0
