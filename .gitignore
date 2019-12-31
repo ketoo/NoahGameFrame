@@ -73,6 +73,9 @@
 /_Out/NFDataCfg/Tool/NFFileProcess
 /_Out/NFDataCfg/Tool/NFFileProcess.exe
 
+/_Out/Debug/*.ini
+/_Out/Release/*.ini
+
 /_Out/Comm/Debug/*.manifest
 /_Out/Comm/Debug/*.exp
 /_Out/Comm/Debug/*.ilk

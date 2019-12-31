@@ -864,7 +864,7 @@ void NFWorldNet_ServerModule::OnTransmitServerReport(const NFSOCK nFd, const int
 
 }
 
-bool NFWorldNet_ServerModule::SendMsgToGame(const NFGUID nPlayer, const NFMsg::EGameMsgID eMsgID, google::protobuf::Message& xData)
+bool NFWorldNet_ServerModule::SendMsgToGame(const NFGUID nPlayer, const const int msgID, google::protobuf::Message& xData)
 {
 	NF_SHARE_PTR<PlayerData> playerData = mPlayersData.GetElement(nPlayer);
 	if (playerData)
@@ -873,7 +873,7 @@ bool NFWorldNet_ServerModule::SendMsgToGame(const NFGUID nPlayer, const NFMsg::E
 		if (pData)
 		{
 			const NFSOCK nFD = pData->nFD;
-			m_pNetModule->SendMsgPB(eMsgID, xData, nFD, nPlayer);
+			m_pNetModule->SendMsgPB(msgID, xData, nFD, nPlayer);
 
 			return true;
 		}
@@ -882,12 +882,12 @@ bool NFWorldNet_ServerModule::SendMsgToGame(const NFGUID nPlayer, const NFMsg::E
 	return false;
 }
 
-bool NFWorldNet_ServerModule::SendMsgToGame(const NFDataList& argObjectVar, const NFMsg::EGameMsgID eMsgID, google::protobuf::Message& xData)
+bool NFWorldNet_ServerModule::SendMsgToGame(const NFDataList& argObjectVar, const int msgID, google::protobuf::Message& xData)
 {
     for (int i = 0; i < argObjectVar.GetCount(); i++)
     {
         const NFGUID& nPlayer = argObjectVar.Object(i);
-		SendMsgToGame(nPlayer, eMsgID, xData);
+		SendMsgToGame(nPlayer, msgID, xData);
     }
 
     return true;

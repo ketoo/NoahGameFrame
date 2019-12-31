@@ -29,7 +29,7 @@ xcopy vcpkg\installed\x64-windows-static\debug\bin ..\_Out\Debug\  /s /e /Y
 
 
 
-xcopy vcpkg\installed\x64-windows-static\tools\protoc.exe ..\NFComm\NFMessageDefine\ /s /e /Y
+xcopy vcpkg\installed\x64-windows-static\tools\protobuf\protoc.exe ..\NFComm\NFMessageDefine\ /s /e /Y
 
 
 

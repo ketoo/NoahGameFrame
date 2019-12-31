@@ -192,14 +192,3 @@ enum ENPCType
     HERO_NPC 	= 1;              //
     TURRET_NPC 	= 2;              //
 };
-
-enum EBattleType
-{
-	SINGLE_MODE 		= 0;
-	MULTI_MODE 			= 1;
-	CLAN_MODE 			= 2;
-	CLAN_BOSS_MODE 		= 3;
-	WORLD_BOSS_MODE 	= 4;
-	MOBA_MODE 			= 5;
-	SURVIVAL_MODE 		= 6;
-};

@@ -305,36 +305,6 @@ inline bool ENPCType_Parse(
   return ::PROTOBUF_NAMESPACE_ID::internal::ParseNamedEnum<ENPCType>(
     ENPCType_descriptor(), name, value);
 }
-enum EBattleType : int {
-  SINGLE_MODE = 0,
-  MULTI_MODE = 1,
-  CLAN_MODE = 2,
-  CLAN_BOSS_MODE = 3,
-  WORLD_BOSS_MODE = 4,
-  MOBA_MODE = 5,
-  SURVIVAL_MODE = 6,
-  EBattleType_INT_MIN_SENTINEL_DO_NOT_USE_ = std::numeric_limits<::PROTOBUF_NAMESPACE_ID::int32>::min(),
-  EBattleType_INT_MAX_SENTINEL_DO_NOT_USE_ = std::numeric_limits<::PROTOBUF_NAMESPACE_ID::int32>::max()
-};
-bool EBattleType_IsValid(int value);
-constexpr EBattleType EBattleType_MIN = SINGLE_MODE;
-constexpr EBattleType EBattleType_MAX = SURVIVAL_MODE;
-constexpr int EBattleType_ARRAYSIZE = EBattleType_MAX + 1;
-
-const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor* EBattleType_descriptor();
-template<typename T>
-inline const std::string& EBattleType_Name(T enum_t_value) {
-  static_assert(::std::is_same<T, EBattleType>::value ||
-    ::std::is_integral<T>::value,
-    "Incorrect type passed to function EBattleType_Name.");
-  return ::PROTOBUF_NAMESPACE_ID::internal::NameOfEnum(
-    EBattleType_descriptor(), enum_t_value);
-}
-inline bool EBattleType_Parse(
-    const std::string& name, EBattleType* value) {
-  return ::PROTOBUF_NAMESPACE_ID::internal::ParseNamedEnum<EBattleType>(
-    EBattleType_descriptor(), name, value);
-}
 // ===================================================================
 
 
@@ -381,11 +351,6 @@ template <> struct is_proto_enum< ::NFMsg::ENPCType> : ::std::true_type {};
 template <>
 inline const EnumDescriptor* GetEnumDescriptor< ::NFMsg::ENPCType>() {
   return ::NFMsg::ENPCType_descriptor();
-}
-template <> struct is_proto_enum< ::NFMsg::EBattleType> : ::std::true_type {};
-template <>
-inline const EnumDescriptor* GetEnumDescriptor< ::NFMsg::EBattleType>() {
-  return ::NFMsg::EBattleType_descriptor();
 }
 
 PROTOBUF_NAMESPACE_CLOSE

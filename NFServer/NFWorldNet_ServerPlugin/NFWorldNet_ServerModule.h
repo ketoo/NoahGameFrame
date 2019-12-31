@@ -55,8 +55,8 @@ public:
     virtual bool AfterInit();
 	virtual void OnServerInfoProcess(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
 
-    virtual bool SendMsgToGame(const NFGUID nPlayer, const NFMsg::EGameMsgID eMsgID, google::protobuf::Message& xData);
-    virtual bool SendMsgToGame(const NFDataList& argObjectVar, const NFMsg::EGameMsgID eMsgID, google::protobuf::Message& xData);
+    virtual bool SendMsgToGame(const NFGUID nPlayer, const int msgID, google::protobuf::Message& xData);
+    virtual bool SendMsgToGame(const NFDataList& argObjectVar, const int msgID, google::protobuf::Message& xData);
 
     virtual NF_SHARE_PTR<ServerData> GetSuitProxyForEnter();
 

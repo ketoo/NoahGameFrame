@@ -17,7 +17,7 @@
 namespace NFMsg {
 }  // namespace NFMsg
 static constexpr ::PROTOBUF_NAMESPACE_ID::Metadata* file_level_metadata_NFDefine_2eproto = nullptr;
-static const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor* file_level_enum_descriptors_NFDefine_2eproto[6];
+static const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor* file_level_enum_descriptors_NFDefine_2eproto[5];
 static constexpr ::PROTOBUF_NAMESPACE_ID::ServiceDescriptor const** file_level_service_descriptors_NFDefine_2eproto = nullptr;
 const ::PROTOBUF_NAMESPACE_ID::uint32 TableStruct_NFDefine_2eproto::offsets[1] = {};
 static constexpr ::PROTOBUF_NAMESPACE_ID::internal::MigrationSchema* schemas = nullptr;
@@ -100,10 +100,7 @@ const char descriptor_table_protodef_NFDefine_2eproto[] PROTOBUF_SECTION_VARIABL
   "LONE_SCENE\020\001\022\025\n\021MULTI_CLONE_SCENE\020\002\022\016\n\nH"
   "OME_SCENE\020\003\022\016\n\nCLAN_SCENE\020\004*8\n\010ENPCType\022"
   "\016\n\nNORMAL_NPC\020\000\022\014\n\010HERO_NPC\020\001\022\016\n\nTURRET_"
-  "NPC\020\002*\210\001\n\013EBattleType\022\017\n\013SINGLE_MODE\020\000\022\016"
-  "\n\nMULTI_MODE\020\001\022\r\n\tCLAN_MODE\020\002\022\022\n\016CLAN_BO"
-  "SS_MODE\020\003\022\023\n\017WORLD_BOSS_MODE\020\004\022\r\n\tMOBA_M"
-  "ODE\020\005\022\021\n\rSURVIVAL_MODE\020\006b\006proto3"
+  "NPC\020\002b\006proto3"
   ;
 static const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable*const descriptor_table_NFDefine_2eproto_deps[1] = {
 };
@@ -112,7 +109,7 @@ static ::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase*const descriptor_table_NFD
 static ::PROTOBUF_NAMESPACE_ID::internal::once_flag descriptor_table_NFDefine_2eproto_once;
 static bool descriptor_table_NFDefine_2eproto_initialized = false;
 const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable descriptor_table_NFDefine_2eproto = {
-  &descriptor_table_NFDefine_2eproto_initialized, descriptor_table_protodef_NFDefine_2eproto, "NFDefine.proto", 3192,
+  &descriptor_table_NFDefine_2eproto_initialized, descriptor_table_protodef_NFDefine_2eproto, "NFDefine.proto", 3053,
   &descriptor_table_NFDefine_2eproto_once, descriptor_table_NFDefine_2eproto_sccs, descriptor_table_NFDefine_2eproto_deps, 0, 0,
   schemas, file_default_instances, TableStruct_NFDefine_2eproto::offsets,
   file_level_metadata_NFDefine_2eproto, 0, file_level_enum_descriptors_NFDefine_2eproto, file_level_service_descriptors_NFDefine_2eproto,
@@ -308,25 +305,6 @@ bool ENPCType_IsValid(int value) {
     case 0:
     case 1:
     case 2:
-      return true;
-    default:
-      return false;
-  }
-}
-
-const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor* EBattleType_descriptor() {
-  ::PROTOBUF_NAMESPACE_ID::internal::AssignDescriptors(&descriptor_table_NFDefine_2eproto);
-  return file_level_enum_descriptors_NFDefine_2eproto[5];
-}
-bool EBattleType_IsValid(int value) {
-  switch (value) {
-    case 0:
-    case 1:
-    case 2:
-    case 3:
-    case 4:
-    case 5:
-    case 6:
       return true;
     default:
       return false;

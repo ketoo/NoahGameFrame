@@ -196,6 +196,7 @@ void NFProxyServerNet_ServerModule::OnConnectKeyProcessWS(const NFSOCK nSockInde
 		m_pWsModule->GetNet()->CloseNetObject(nSockIndex);
     }
 }
+
 void NFProxyServerNet_ServerModule::OnConnectKeyProcess(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
 {
     NFGUID nPlayerID;
@@ -204,6 +205,7 @@ void NFProxyServerNet_ServerModule::OnConnectKeyProcess(const NFSOCK nSockIndex,
     {
         return;
     }
+
 	bool bRet = m_pSecurityModule->VirifySecurityKey(xMsg.account(), xMsg.security_code());
     //bool bRet = m_pProxyToWorldModule->VerifyConnectData(xMsg.account(), xMsg.security_code());
     if (bRet)
