@@ -36,8 +36,6 @@ public:
         pPluginManager = p;
     }
 
-    virtual ~Tutorial1() = default;
-
     virtual const int GetPluginVersion();
 
     virtual const std::string GetPluginName();

@@ -12,7 +12,7 @@ add_library(NFProxyLogicPlugin STATIC
 set_target_properties( NFProxyLogicPlugin PROPERTIES OUTPUT_NAME_DEBUG "NFProxyLogicPlugin")
 set_target_properties( NFProxyLogicPlugin PROPERTIES PREFIX "")
 set_target_properties( NFProxyLogicPlugin PROPERTIES 
-	FOLDER "NFServer/ProxyServer"
+	FOLDER "NFServer"
 	ARCHIVE_OUTPUT_DIRECTORY ${NFOutPutDir}
 	RUNTIME_OUTPUT_DIRECTORY ${NFOutPutDir}
 	LIBRARY_OUTPUT_DIRECTORY ${NFOutPutDir} )

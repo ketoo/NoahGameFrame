@@ -2,9 +2,9 @@ set(ProjectName "NFPluginLoader")
 file(GLOB NFPluginLoader_ROOT_Cpp *.cpp)
 file(GLOB NFPluginLoader_ROOT_Hpp *.h)
 
-add_executable(NFPluginLoader ${NFPluginLoader_ROOT_Cpp} ${NFPluginLoader_ROOT_Hpp})
-
-#link_NFSDK("NFPluginLoader")
+add_library(NFPluginLoader STATIC
+		${NFPluginLoader_ROOT_Cpp}
+		${NFPluginLoader_ROOT_Hpp})
 
 
 target_link_libraries(NFPluginLoader NFCore)
@@ -96,4 +96,3 @@ set_target_properties( NFPluginLoader PROPERTIES
 
 
 add_definitions(-D_X64 -D_CONSOLE)
-#add_definitions(-D_X64 -D_CONSOLE -DNF_DYNAMIC_PLUGIN)

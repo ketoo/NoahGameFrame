@@ -8,7 +8,7 @@ add_library(Tutorial7 STATIC
 	${Tutorial7_ROOT_Cpp}
 	${Tutorial7_ROOT_Hpp})
 	
-set_target_properties( Tutorial7 PROPERTIES OUTPUT_NAME_DEBUG "Tutorial7_d")
+set_target_properties( Tutorial7 PROPERTIES OUTPUT_NAME_DEBUG "Tutorial7")
 set_target_properties( Tutorial7 PROPERTIES PREFIX "")
 set_target_properties( Tutorial7 PROPERTIES 
 	FOLDER "Tutorial/Tutorial7"

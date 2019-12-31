@@ -8,7 +8,7 @@ add_library(Tutorial4Plugin STATIC
 	${Tutorial4_ROOT_Cpp}
 	${Tutorial4_ROOT_Hpp})
 	
-set_target_properties( Tutorial4Plugin PROPERTIES OUTPUT_NAME_DEBUG "Tutorial4Plugin_d")
+set_target_properties( Tutorial4Plugin PROPERTIES OUTPUT_NAME_DEBUG "Tutorial4Plugin")
 set_target_properties( Tutorial4Plugin PROPERTIES PREFIX "")
 set_target_properties( Tutorial4Plugin PROPERTIES 
 	FOLDER "Tutorial/Tutorial4"

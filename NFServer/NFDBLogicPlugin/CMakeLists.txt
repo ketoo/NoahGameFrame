@@ -12,7 +12,7 @@ add_library(NFDBLogicPlugin STATIC
 set_target_properties( NFDBLogicPlugin PROPERTIES OUTPUT_NAME_DEBUG "NFDBLogicPlugin")
 set_target_properties( NFDBLogicPlugin PROPERTIES PREFIX "")
 set_target_properties( NFDBLogicPlugin PROPERTIES 
-	FOLDER "NFServer/GameServer"
+	FOLDER "NFServer/NFDBLogicPlugin"
 	ARCHIVE_OUTPUT_DIRECTORY ${NFOutPutDir}
 	RUNTIME_OUTPUT_DIRECTORY ${NFOutPutDir}
 	LIBRARY_OUTPUT_DIRECTORY ${NFOutPutDir} )

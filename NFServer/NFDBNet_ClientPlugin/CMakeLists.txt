@@ -12,7 +12,7 @@ add_library(NFDBNet_ClientPlugin STATIC
 set_target_properties( NFDBNet_ClientPlugin PROPERTIES OUTPUT_NAME_DEBUG "NFDBNet_ClientPlugin")
 set_target_properties( NFDBNet_ClientPlugin PROPERTIES PREFIX "")
 set_target_properties( NFDBNet_ClientPlugin PROPERTIES 
-	FOLDER "NFServer/WorldServer"
+	FOLDER "NFServer"
 	ARCHIVE_OUTPUT_DIRECTORY ${NFOutPutDir}
 	RUNTIME_OUTPUT_DIRECTORY ${NFOutPutDir}
 	LIBRARY_OUTPUT_DIRECTORY ${NFOutPutDir} )

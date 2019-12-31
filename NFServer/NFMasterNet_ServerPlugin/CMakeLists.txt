@@ -12,7 +12,7 @@ add_library(NFMasterNet_ServerPlugin STATIC
 set_target_properties( NFMasterNet_ServerPlugin PROPERTIES OUTPUT_NAME_DEBUG "NFMasterNet_ServerPlugin")
 set_target_properties( NFMasterNet_ServerPlugin PROPERTIES PREFIX "")
 set_target_properties( NFMasterNet_ServerPlugin PROPERTIES 
-	FOLDER "NFServer/MasterServer"
+	FOLDER "NFServer"
 	ARCHIVE_OUTPUT_DIRECTORY ${NFOutPutDir}
 	RUNTIME_OUTPUT_DIRECTORY ${NFOutPutDir}
 	LIBRARY_OUTPUT_DIRECTORY ${NFOutPutDir} )

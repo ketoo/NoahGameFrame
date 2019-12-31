@@ -1,37 +1,37 @@
 set(ProjectName "NFServer")
-file(GLOB NFServer_ROOT_Cpp
-	*.cpp)
-	
-file(GLOB NFServer_ROOT_Hpp 
-	*.h)
+file(GLOB NFServer_ROOT_Cpp *.cpp)
+file(GLOB NFServer_ROOT_Hpp *.h)
 
-add_library(NFServer STATIC
-	${NFServer_ROOT_Cpp}
-	${NFServer_ROOT_Hpp})
-	
+add_executable(NFServer ${NFServer_ROOT_Cpp} ${NFServer_ROOT_Hpp})
+
+#link_NFSDK("NFServer")
+
+
+target_link_libraries(NFServer NFPluginLoader)
+
+
+if (UNIX)
+	add_dependencies(NFServer NFCore)
+
+	#if (CMAKE_BUILD_TYPE MATCHES "Release")
+	#	target_link_libraries(NFServer libSDL2.a)
+	#else()
+	#	target_link_libraries(NFServer libSDL2d.a)
+	#endif()
+
+	target_link_libraries(NFServer -static-libstdc++)
+
+else()
+
+endif()
+
 set_target_properties( NFServer PROPERTIES OUTPUT_NAME_DEBUG "NFServer")
-set_target_properties( NFServer PROPERTIES PREFIX "")
-set_target_properties( NFServer PROPERTIES 
-	FOLDER "NFComm/NFServer"
+set_target_properties( NFServer PROPERTIES
+	FOLDER "NFComm"
 	ARCHIVE_OUTPUT_DIRECTORY ${NFOutPutDir}
 	RUNTIME_OUTPUT_DIRECTORY ${NFOutPutDir}
 	LIBRARY_OUTPUT_DIRECTORY ${NFOutPutDir} )
-link_NFSDK("NFServer")
 
-if(UNIX)
 
-	target_link_libraries(NFServer -static-libstdc++)
-	add_definitions(
-		-D_USRDLL
-		-DELPP_NO_DEFAULT_LOG_FILE
-	)
-	
-else()
-
-	target_link_libraries(NFServer -static-libstdc++)
-	add_definitions(
-		-DWIN
-		-D_USRDLL
-		-DELPP_NO_DEFAULT_LOG_FILE
-	)
-endif()
+add_definitions(-D_X64 -D_CONSOLE)
+#add_definitions(-D_X64 -D_CONSOLE -DNF_DYNAMIC_PLUGIN)

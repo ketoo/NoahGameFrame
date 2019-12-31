@@ -12,7 +12,7 @@ add_library(NFLoginNet_ClientPlugin STATIC
 set_target_properties( NFLoginNet_ClientPlugin PROPERTIES OUTPUT_NAME_DEBUG "NFLoginNet_ClientPlugin")
 set_target_properties( NFLoginNet_ClientPlugin PROPERTIES PREFIX "")
 set_target_properties( NFLoginNet_ClientPlugin PROPERTIES 
-	FOLDER "NFServer/LoginServer"
+	FOLDER "NFServer"
 	ARCHIVE_OUTPUT_DIRECTORY ${NFOutPutDir}
 	RUNTIME_OUTPUT_DIRECTORY ${NFOutPutDir}
 	LIBRARY_OUTPUT_DIRECTORY ${NFOutPutDir} )

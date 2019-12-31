@@ -1,3 +1,4 @@
+add_subdirectory(NFServer)
 add_subdirectory(NFPluginLoader)
 add_subdirectory(NFActorPlugin)
 add_subdirectory(NFConfigPlugin)
