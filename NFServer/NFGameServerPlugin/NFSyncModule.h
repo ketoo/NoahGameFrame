@@ -27,18 +27,23 @@
 #ifndef NF_SYNC_MODULE_H
 #define NF_SYNC_MODULE_H
 
-#include "NFComm/NFPluginModule/NFITileMapModule.h"
 #include "NFComm/NFPluginModule/NFIPluginManager.h"
 #include "NFComm/NFPluginModule/NFIScheduleModule.h"
 #include "NFComm/NFPluginModule/NFIClassModule.h"
 #include "NFComm/NFPluginModule/NFIElementModule.h"
 #include "NFComm/NFPluginModule/NFIKernelModule.h"
-#include "NFComm/NFPluginModule/NFIClanRedisModule.h"
 #include "NFComm/NFPluginModule/NFIGameServerNet_ServerModule.h"
 #include "NFComm/NFPluginModule/NFISceneModule.h"
 #include "NFComm/NFPluginModule/NFIClassModule.h"
-#include "NFComm/NFPluginModule/NFISyncModule.h"
 #include "NFComm/NFPluginModule/NFILogModule.h"
+
+class NFISyncModule
+    : public NFIModule
+{
+
+public:
+
+};
 
 class NFSyncModule
     : public NFISyncModule
@@ -62,9 +67,7 @@ protected:
 	int OnNPCPositionEvent(const NFGUID& self, const std::string& strPropertyName, const NFData& oldVar, const NFData& newVar);
 
 	int OnPlayerClassEvent(const NFGUID& self, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFDataList& var);
-	int OnPlayePositionPEvent(const NFGUID& self, const std::string& strPropertyName, const NFData& oldVar, const NFData& newVar);
-
-	void OnReqPosSyncProcess(const NFSOCK nSockIndex, const int nMsgID, const char *msg, const uint32_t nLen);
+	int OnPlayePositionEvent(const NFGUID& self, const std::string& strPropertyName, const NFData& oldVar, const NFData& newVar);
 
 private:
 	//sceneID -> <PlayerID, Position>

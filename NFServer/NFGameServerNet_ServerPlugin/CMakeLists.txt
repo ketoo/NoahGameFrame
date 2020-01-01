@@ -12,7 +12,7 @@ add_library(NFGameServerNet_ServerPlugin STATIC
 set_target_properties( NFGameServerNet_ServerPlugin PROPERTIES OUTPUT_NAME_DEBUG "NFGameServerNet_ServerPlugin")
 set_target_properties( NFGameServerNet_ServerPlugin PROPERTIES PREFIX "")
 set_target_properties( NFGameServerNet_ServerPlugin PROPERTIES 
-	FOLDER "NFServer/GameServer"
+	FOLDER "NFServer/NFGameServerNet_ServerPlugin"
 	ARCHIVE_OUTPUT_DIRECTORY ${NFOutPutDir}
 	RUNTIME_OUTPUT_DIRECTORY ${NFOutPutDir}
 	LIBRARY_OUTPUT_DIRECTORY ${NFOutPutDir} )
@@ -21,7 +21,6 @@ link_NFSDK("NFGameServerNet_ServerPlugin")
 if(UNIX)
 	target_link_libraries(NFGameServerNet_ServerPlugin -static-libstdc++)
 	add_definitions(
-		-D_USRDLL
 		-DELPP_NO_DEFAULT_LOG_FILE
 	)
 	
@@ -29,7 +28,6 @@ else()
 	target_link_libraries(NFGameServerNet_ServerPlugin -static-libstdc++)
 	add_definitions(
 		-DWIN
-		-D_USRDLL
 		-DELPP_NO_DEFAULT_LOG_FILE
 	)
 endif()

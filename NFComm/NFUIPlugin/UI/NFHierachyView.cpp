@@ -83,23 +83,28 @@ void NFHierachyView::GodViewSubRender()
    NF_SHARE_PTR<NFIObject> pObject = m_pKernelModule->GetObject(objectID);
    if (pObject)
    {
-      NF_SHARE_PTR<NFIProperty> pProperty = pObject->GetPropertyManager()->First();
-      while(pProperty)
-      {
-         ImGui::Text(pProperty->GetKey().c_str());
-         ImGui::SameLine();
-         ImGui::Text(pProperty->ToString().c_str());
+		NF_SHARE_PTR<NFIProperty> pProperty = pObject->GetPropertyManager()->First();
+		while(pProperty)
+		{
+			if (ImGui::Button(pProperty->GetKey().c_str()))
+			{
+				modifyPropertyName = pProperty->GetKey();
+				strcpy(modifyPropertyValue, pProperty->ToString().c_str());
+			}
+         	ImGui::SameLine();
+         	ImGui::Text(pProperty->ToString().c_str());
 
-         //static char str0[128] = "Hello, world!";
-         //ImGui::InputText("input text", str0, IM_ARRAYSIZE(str0));
+         	//static char str0[128] = "Hello, world!";
+         	//ImGui::InputText("input text", str0, IM_ARRAYSIZE(str0));
          
-         pProperty = pObject->GetPropertyManager()->Next();
-      }
+         	pProperty = pObject->GetPropertyManager()->Next();
+      	}
    }
 
-   
 
    ImGui::EndGroup();
+
+   RenderForModifyProperty();
 }
 
 void NFHierachyView::GameViewSubRender()
@@ -171,11 +176,11 @@ void NFHierachyView::BluePrintViewSubRender()
 void NFHierachyView::BluePrintViewSubRenderForLogicBlock()
 {
 	ImGui::Separator();
-   if (ImGui::Button("+ Monitor"))
-   {
-      NF_SHARE_PTR<NFBluePrintView> blueprintView = std::dynamic_pointer_cast<NFBluePrintView>(m_pUIModule->GetView(NFViewType::BluePrintView));
-      blueprintView->TryToCreateMonitor();
-   }
+   	if (ImGui::Button("+ Monitor"))
+   	{
+      	NF_SHARE_PTR<NFBluePrintView> blueprintView = std::dynamic_pointer_cast<NFBluePrintView>(m_pUIModule->GetView(NFViewType::BluePrintView));
+      	blueprintView->TryToCreateMonitor();
+   	}
 }
 
 void NFHierachyView::BluePrintViewSubRenderForMonitor()
@@ -444,7 +449,7 @@ void NFHierachyView::BluePrintViewSubRenderForMonitorBody(NF_SHARE_PTR<NFMonitor
 				if (ImGui::Selectable(classObject->GetClassName().c_str(), false))
 				{
 					//init for arg
-				   InitBluePrintMonitorArgs(monitor);
+				   	InitBluePrintMonitorArgs(monitor);
 					monitor->arg.SetString(NFMonitorRecordEventArgType::ClassName, classObject->GetClassName());
 				}
 
@@ -669,4 +674,89 @@ void NFHierachyView::InitBluePrintJudgementArgs(NF_SHARE_PTR<NFJudgement> judgem
 void NFHierachyView::InitBluePrintExecuterArgs(NF_SHARE_PTR<NFExecuter> executer)
 {
 
+}
+
+void NFHierachyView::RenderForModifyProperty()
+{
+	if (modifyPropertyName.length() > 0)
+	{
+   		NFGUID objectID = ((NFGodView*)m_pOccupyView)->GetCurrentObjectID();
+		NF_SHARE_PTR<NFIObject> pObject = m_pKernelModule->GetObject(objectID);
+		if (pObject)
+		{
+			NF_SHARE_PTR<NFIProperty> pProperty = pObject->GetPropertyManager()->GetElement(modifyPropertyName);
+
+			ImGui::OpenPopup("Modify Property Value");
+			ImGui::SetNextWindowSize(ImVec2(230, 150));		
+			if (ImGui::BeginPopupModal("Modify Property Value"))
+			{
+				ImGui::Text(modifyPropertyName.c_str());		
+				ImGui::InputText("New Value", modifyPropertyValue, IM_ARRAYSIZE(modifyPropertyValue));		
+				ImGui::Separator();		
+				ImGui::Text("If you modified the value then the framework will trigger the property event!\n\n");		
+				ImGui::Separator();		
+				if (ImGui::Button("Cancel", ImVec2(100, 30)))
+				{
+					modifyPropertyName = "";
+					ImGui::CloseCurrentPopup();
+				}		
+				ImGui::SameLine();		
+				if (ImGui::Button("OK", ImVec2(100, 30)))
+				{
+					modifyPropertyName = "";
+
+					switch (pProperty->GetType())
+					{
+						case NFDATA_TYPE::TDATA_INT:
+						{
+							pProperty->SetInt(lexical_cast<int>(modifyPropertyValue));
+						}
+						break;
+						case NFDATA_TYPE::TDATA_FLOAT:
+						{
+							pProperty->SetFloat(lexical_cast<float>(modifyPropertyValue));
+						}
+						break;
+						case NFDATA_TYPE::TDATA_STRING:
+						{
+							pProperty->SetString(modifyPropertyValue);
+						}
+						break;
+						case NFDATA_TYPE::TDATA_OBJECT:
+						{
+							NFGUID id;
+							if (id.FromString(modifyPropertyValue))
+							{
+								pProperty->SetObject(id);
+							}
+						}
+						break;
+						case NFDATA_TYPE::TDATA_VECTOR2:
+						{
+							NFVector2 vec;
+							if (vec.FromString(modifyPropertyValue))
+							{
+								pProperty->SetVector2(vec);
+							}
+						}
+						break;
+						case NFDATA_TYPE::TDATA_VECTOR3:
+						{
+							NFVector3 vec;
+							if (vec.FromString(modifyPropertyValue))
+							{
+								pProperty->SetVector3(vec);
+							}
+						}
+						break;
+
+						default:
+						break;
+					}
+					ImGui::CloseCurrentPopup();
+				}		
+				ImGui::EndPopup();
+			}
+		}
+	}
 }

@@ -54,7 +54,7 @@ bool NFProxyLogicModule::AfterInit()
 	m_pNetClientModule = pPluginManager->FindModule<NFINetClientModule>();
 
 
-	m_pNetModule->AddReceiveCallBack(NFMsg::EGEC_REQ_LAG_TEST, this, &NFProxyLogicModule::OnLagTestProcess);
+	m_pNetModule->AddReceiveCallBack(NFMsg::REQ_LAG_TEST, this, &NFProxyLogicModule::OnLagTestProcess);
 
     return true;
 }
@@ -62,7 +62,7 @@ bool NFProxyLogicModule::AfterInit()
 void NFProxyLogicModule::OnLagTestProcess(const NFSOCK nSockIndex, const int nMsgID, const char * msg, const uint32_t nLen)
 {
 	std::string msgDatag(msg, nLen);
-	m_pNetModule->SendMsgWithOutHead(NFMsg::EGameMsgID::EGEC_ACK_GATE_LAG_TEST, msgDatag, nSockIndex);
+	m_pNetModule->SendMsgWithOutHead(NFMsg::EGameMsgID::ACK_GATE_LAG_TEST, msgDatag, nSockIndex);
 
 	//TODO improve performance
 	NetObject* pNetObject = m_pNetModule->GetNet()->GetNetObject(nSockIndex);

@@ -51,16 +51,19 @@ public:
     virtual bool Execute();
     virtual bool AfterInit();
 
-    virtual NFINT64 CalculateBaseValue(const int nJob, const int nLevel, const std::string& strProperty);
     virtual bool LegalLevel(const int nJob, const int nLevel);
+
+    virtual const std::string& GetInitPropertyID(const int nJob,  const int nLevel);
+
+    virtual NFINT64 CalculateBaseValue(const int nJob, const int nLevel, const std::string& strProperty);
 
 protected:
     void Load();
 
 private:
-    //
-	//diffent job, diffrent PropertyID[Level->EffectData]
-	NFMapEx<int, NFMapEx<int, std::string> > mhtCoefficienData;
+
+	//diffent job, [Level->ConfigID]
+	std::map<int, std::map<int, std::string>> mhtCoefficienData;
 
     NFIClassModule* m_pClassModule;
     NFIElementModule* m_pElementModule;

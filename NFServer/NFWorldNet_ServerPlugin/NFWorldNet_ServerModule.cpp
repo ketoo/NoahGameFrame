@@ -41,24 +41,21 @@ bool NFWorldNet_ServerModule::Init()
 
 bool NFWorldNet_ServerModule::AfterInit()
 {
-	m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_PTWG_PROXY_REGISTERED, this, &NFWorldNet_ServerModule::OnProxyServerRegisteredProcess);
-	m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_PTWG_PROXY_UNREGISTERED, this, &NFWorldNet_ServerModule::OnProxyServerUnRegisteredProcess);
-	m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_PTWG_PROXY_REFRESH, this, &NFWorldNet_ServerModule::OnRefreshProxyServerInfoProcess);
+	m_pNetModule->AddReceiveCallBack(NFMsg::PTWG_PROXY_REGISTERED, this, &NFWorldNet_ServerModule::OnProxyServerRegisteredProcess);
+	m_pNetModule->AddReceiveCallBack(NFMsg::PTWG_PROXY_UNREGISTERED, this, &NFWorldNet_ServerModule::OnProxyServerUnRegisteredProcess);
+	m_pNetModule->AddReceiveCallBack(NFMsg::PTWG_PROXY_REFRESH, this, &NFWorldNet_ServerModule::OnRefreshProxyServerInfoProcess);
 
-	m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_GTW_GAME_REGISTERED, this, &NFWorldNet_ServerModule::OnGameServerRegisteredProcess);
-	m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_GTW_GAME_UNREGISTERED, this, &NFWorldNet_ServerModule::OnGameServerUnRegisteredProcess);
-	m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_GTW_GAME_REFRESH, this, &NFWorldNet_ServerModule::OnRefreshGameServerInfoProcess);
+	m_pNetModule->AddReceiveCallBack(NFMsg::GTW_GAME_REGISTERED, this, &NFWorldNet_ServerModule::OnGameServerRegisteredProcess);
+	m_pNetModule->AddReceiveCallBack(NFMsg::GTW_GAME_UNREGISTERED, this, &NFWorldNet_ServerModule::OnGameServerUnRegisteredProcess);
+	m_pNetModule->AddReceiveCallBack(NFMsg::GTW_GAME_REFRESH, this, &NFWorldNet_ServerModule::OnRefreshGameServerInfoProcess);
 	
-	m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_DTW_DB_REGISTERED, this, &NFWorldNet_ServerModule::OnDBServerRegisteredProcess);
-	m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_DTW_DB_UNREGISTERED, this, &NFWorldNet_ServerModule::OnDBServerUnRegisteredProcess);
-	m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_DTW_DB_REFRESH, this, &NFWorldNet_ServerModule::OnRefreshDBServerInfoProcess);
+	m_pNetModule->AddReceiveCallBack(NFMsg::DTW_DB_REGISTERED, this, &NFWorldNet_ServerModule::OnDBServerRegisteredProcess);
+	m_pNetModule->AddReceiveCallBack(NFMsg::DTW_DB_UNREGISTERED, this, &NFWorldNet_ServerModule::OnDBServerUnRegisteredProcess);
+	m_pNetModule->AddReceiveCallBack(NFMsg::DTW_DB_REFRESH, this, &NFWorldNet_ServerModule::OnRefreshDBServerInfoProcess);
 
-	m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_ACK_ONLINE_NOTIFY, this, &NFWorldNet_ServerModule::OnOnlineProcess);
-	m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_ACK_OFFLINE_NOTIFY, this, &NFWorldNet_ServerModule::OnOfflineProcess);
-	m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_STS_SERVER_REPORT, this, &NFWorldNet_ServerModule::OnTransmitServerReport);
-
-    if (!m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_REQSWICHSERVER, this, &NFWorldNet_ServerModule::OnReqSwitchServer)) { return false; }
-    if (!m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_ACKSWICHSERVER, this, &NFWorldNet_ServerModule::OnAckSwitchServer)) { return false; }
+	m_pNetModule->AddReceiveCallBack(NFMsg::ACK_ONLINE_NOTIFY, this, &NFWorldNet_ServerModule::OnOnlineProcess);
+	m_pNetModule->AddReceiveCallBack(NFMsg::ACK_OFFLINE_NOTIFY, this, &NFWorldNet_ServerModule::OnOfflineProcess);
+	m_pNetModule->AddReceiveCallBack(NFMsg::STS_SERVER_REPORT, this, &NFWorldNet_ServerModule::OnTransmitServerReport);
 
     m_pNetModule->AddEventCallBack(this, &NFWorldNet_ServerModule::OnSocketEvent);
 	m_pNetModule->ExpandBufferSize();
@@ -534,25 +531,6 @@ void NFWorldNet_ServerModule::OnSocketEvent(const NFSOCK nSockIndex, const NF_NE
     }
 }
 
-void NFWorldNet_ServerModule::OnReqSwitchServer(const NFSOCK nSockIndex, const int nMsgID, const char *msg, const uint32_t nLen)
-{
-    CLIENT_MSG_PROCESS_NO_OBJECT(nMsgID, msg, nLen, NFMsg::ReqSwitchServer);
-    nPlayerID = NFINetModule::PBToNF(xMsg.selfid());
-
-    //const NFGUID nClientID = NFINetModule::PBToNF(xMsg.client_id());
-    //const int nGateID = (int)xMsg.gate_serverid();
-    //const int nSceneID = (int)xMsg.sceneid();
-    SendMsgToGame(nPlayerID, NFMsg::EGMI_REQSWICHSERVER, xMsg);
-}
-
-void NFWorldNet_ServerModule::OnAckSwitchServer(const NFSOCK nSockIndex, const int nMsgID, const char *msg, const uint32_t nLen)
-{
-    CLIENT_MSG_PROCESS_NO_OBJECT(nMsgID, msg, nLen, NFMsg::AckSwitchServer);
-    nPlayerID = NFINetModule::PBToNF(xMsg.selfid());
-
-	SendMsgToGame(nPlayerID, NFMsg::EGMI_ACKSWICHSERVER, xMsg);
-}
-
 void NFWorldNet_ServerModule::SynGameToProxy()
 {
     NFMsg::ServerInfoReportList xData;
@@ -579,7 +557,7 @@ void NFWorldNet_ServerModule::SynGameToProxy(const NFSOCK nFD)
         pServerData = mGameMap.Next();
     }
 
-	m_pNetModule->SendMsgPB(NFMsg::EGameMsgID::EGMI_STS_NET_INFO, xData, nFD);
+	m_pNetModule->SendMsgPB(NFMsg::EGameMsgID::STS_NET_INFO, xData, nFD);
 }
 
 void NFWorldNet_ServerModule::SynWorldToProxy()
@@ -608,7 +586,7 @@ void NFWorldNet_ServerModule::SynWorldToProxy(const NFSOCK nFD)
 		pServerData = mWorldMap.Next();
 	}
 
-	m_pNetModule->SendMsgPB(NFMsg::EGameMsgID::EGMI_STS_NET_INFO, xData, nFD);
+	m_pNetModule->SendMsgPB(NFMsg::EGameMsgID::STS_NET_INFO, xData, nFD);
 }
 
 void NFWorldNet_ServerModule::SynWorldToGame()
@@ -641,7 +619,7 @@ void NFWorldNet_ServerModule::SynWorldToGame(const NFSOCK nFD)
 		pServerData = mWorldMap.Next();
 	}
 
-	m_pNetModule->SendMsgPB(NFMsg::EGameMsgID::EGMI_STS_NET_INFO, xData, nFD);
+	m_pNetModule->SendMsgPB(NFMsg::EGameMsgID::STS_NET_INFO, xData, nFD);
 }
 
 
@@ -676,7 +654,7 @@ void NFWorldNet_ServerModule::SynWorldToDB(const NFSOCK nFD)
 		pServerData = mWorldMap.Next();
 	}
 
-	m_pNetModule->SendMsgPB(NFMsg::EGameMsgID::EGMI_STS_NET_INFO, xData, nFD);
+	m_pNetModule->SendMsgPB(NFMsg::EGameMsgID::STS_NET_INFO, xData, nFD);
 }
 
 void NFWorldNet_ServerModule::SynDBToGame()
@@ -709,7 +687,7 @@ void NFWorldNet_ServerModule::SynDBToGame(const NFSOCK nFD)
 		pServerData = mDBMap.Next();
 	}
 	
-	m_pNetModule->SendMsgPB(NFMsg::EGameMsgID::EGMI_STS_NET_INFO, xData, nFD);
+	m_pNetModule->SendMsgPB(NFMsg::EGameMsgID::STS_NET_INFO, xData, nFD);
 }
 
 void NFWorldNet_ServerModule::OnClientDisconnect(const NFSOCK nAddress)
@@ -882,11 +860,11 @@ void NFWorldNet_ServerModule::OnTransmitServerReport(const NFSOCK nFd, const int
 	}
 
 
-	m_pNetClientModule->SendToAllServerByPB(NF_SERVER_TYPES::NF_ST_MASTER, NFMsg::EGMI_STS_SERVER_REPORT, msg);
+	m_pNetClientModule->SendToAllServerByPB(NF_SERVER_TYPES::NF_ST_MASTER, NFMsg::STS_SERVER_REPORT, msg);
 
 }
 
-bool NFWorldNet_ServerModule::SendMsgToGame(const NFGUID nPlayer, const NFMsg::EGameMsgID eMsgID, google::protobuf::Message& xData)
+bool NFWorldNet_ServerModule::SendMsgToGame(const NFGUID nPlayer, const const int msgID, google::protobuf::Message& xData)
 {
 	NF_SHARE_PTR<PlayerData> playerData = mPlayersData.GetElement(nPlayer);
 	if (playerData)
@@ -895,7 +873,7 @@ bool NFWorldNet_ServerModule::SendMsgToGame(const NFGUID nPlayer, const NFMsg::E
 		if (pData)
 		{
 			const NFSOCK nFD = pData->nFD;
-			m_pNetModule->SendMsgPB(eMsgID, xData, nFD, nPlayer);
+			m_pNetModule->SendMsgPB(msgID, xData, nFD, nPlayer);
 
 			return true;
 		}
@@ -904,12 +882,12 @@ bool NFWorldNet_ServerModule::SendMsgToGame(const NFGUID nPlayer, const NFMsg::E
 	return false;
 }
 
-bool NFWorldNet_ServerModule::SendMsgToGame(const NFDataList& argObjectVar, const NFMsg::EGameMsgID eMsgID, google::protobuf::Message& xData)
+bool NFWorldNet_ServerModule::SendMsgToGame(const NFDataList& argObjectVar, const int msgID, google::protobuf::Message& xData)
 {
     for (int i = 0; i < argObjectVar.GetCount(); i++)
     {
         const NFGUID& nPlayer = argObjectVar.Object(i);
-		SendMsgToGame(nPlayer, eMsgID, xData);
+		SendMsgToGame(nPlayer, msgID, xData);
     }
 
     return true;
@@ -999,7 +977,7 @@ void NFWorldNet_ServerModule::ServerReport(int reportServerId, NFMsg::EServerSta
 				reqMsg.set_server_type(nServerType);
 
 
-				m_pNetClientModule->SendToAllServerByPB(NF_SERVER_TYPES::NF_ST_MASTER, NFMsg::EGMI_STS_SERVER_REPORT, reqMsg);
+				m_pNetClientModule->SendToAllServerByPB(NF_SERVER_TYPES::NF_ST_MASTER, NFMsg::STS_SERVER_REPORT, reqMsg);
 			}
 		}
 	}

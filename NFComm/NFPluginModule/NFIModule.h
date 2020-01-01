@@ -99,16 +99,6 @@ public:
         return pPluginManager;
     }
 
-	virtual void YieldCo(const int64_t fSecond)
-	{
-		pPluginManager->YieldCo(fSecond);
-	}
-
-	virtual void YieldCo()
-	{
-        pPluginManager->YieldCo();
-    }
-
     std::string strName;
 
 protected:

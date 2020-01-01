@@ -78,11 +78,11 @@ bool NFDBNet_ServerModule::AfterInit()
         }
     }
 
-	m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_REQ_ROLE_LIST, this, &NFDBNet_ServerModule::OnRequireRoleListProcess);
-	m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_REQ_CREATE_ROLE, this, &NFDBNet_ServerModule::OnCreateRoleGameProcess);
-	m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_REQ_DELETE_ROLE, this, &NFDBNet_ServerModule::OnDeleteRoleGameProcess);
-	m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_REQ_LOAD_ROLE_DATA, this, &NFDBNet_ServerModule::OnLoadRoleDataProcess);
-	m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_REQ_SAVE_ROLE_DATA, this, &NFDBNet_ServerModule::OnSaveRoleDataProcess);
+	m_pNetModule->AddReceiveCallBack(NFMsg::REQ_ROLE_LIST, this, &NFDBNet_ServerModule::OnRequireRoleListProcess);
+	m_pNetModule->AddReceiveCallBack(NFMsg::REQ_CREATE_ROLE, this, &NFDBNet_ServerModule::OnCreateRoleGameProcess);
+	m_pNetModule->AddReceiveCallBack(NFMsg::REQ_DELETE_ROLE, this, &NFDBNet_ServerModule::OnDeleteRoleGameProcess);
+	m_pNetModule->AddReceiveCallBack(NFMsg::REQ_LOAD_ROLE_DATA, this, &NFDBNet_ServerModule::OnLoadRoleDataProcess);
+	m_pNetModule->AddReceiveCallBack(NFMsg::REQ_SAVE_ROLE_DATA, this, &NFDBNet_ServerModule::OnSaveRoleDataProcess);
 
     return true;
 }
@@ -147,7 +147,7 @@ void NFDBNet_ServerModule::OnRequireRoleListProcess(const NFSOCK nSockIndex, con
 	{
 		NFMsg::AckRoleLiteInfoList xAckRoleLiteInfoList;
 		xAckRoleLiteInfoList.set_account(xMsg.account());
-		m_pNetModule->SendMsgPB(NFMsg::EGMI_ACK_ROLE_LIST, xAckRoleLiteInfoList, nSockIndex, nClientID);
+		m_pNetModule->SendMsgPB(NFMsg::ACK_ROLE_LIST, xAckRoleLiteInfoList, nSockIndex, nClientID);
 		return;
 	}
 
@@ -168,7 +168,7 @@ void NFDBNet_ServerModule::OnRequireRoleListProcess(const NFSOCK nSockIndex, con
 	pData->set_last_offline_ip(0);
 	pData->set_view_record("");
 
-	m_pNetModule->SendMsgPB(NFMsg::EGMI_ACK_ROLE_LIST, xAckRoleLiteInfoList, nSockIndex, nClientID);
+	m_pNetModule->SendMsgPB(NFMsg::ACK_ROLE_LIST, xAckRoleLiteInfoList, nSockIndex, nClientID);
 }
 
 void NFDBNet_ServerModule::OnCreateRoleGameProcess(const NFSOCK nSockIndex, const int nMsgID, const char * msg, const uint32_t nLen)
@@ -199,14 +199,14 @@ void NFDBNet_ServerModule::OnCreateRoleGameProcess(const NFSOCK nSockIndex, cons
 		pData->set_sex(xMsg.sex());
 		pData->set_race(xMsg.race());
 		pData->set_noob_name(xMsg.noob_name());
-		pData->set_role_level(1);
+		pData->set_role_level(0);
 		pData->set_delete_time(0);
 		pData->set_reg_time(0);
 		pData->set_last_offline_time(0);
 		pData->set_last_offline_ip(0);
 		pData->set_view_record("");
 
-		m_pNetModule->SendMsgPB(NFMsg::EGMI_ACK_ROLE_LIST, xAckRoleLiteInfoList, nSockIndex, nClientID);
+		m_pNetModule->SendMsgPB(NFMsg::ACK_ROLE_LIST, xAckRoleLiteInfoList, nSockIndex, nClientID);
 	}
 }
 
@@ -222,7 +222,7 @@ void NFDBNet_ServerModule::OnDeleteRoleGameProcess(const NFSOCK nSockIndex, cons
 	NFMsg::AckRoleLiteInfoList xAckRoleLiteInfoList;
 	xAckRoleLiteInfoList.set_account(xMsg.account());
 
-	m_pNetModule->SendMsgPB(NFMsg::EGMI_ACK_ROLE_LIST, xAckRoleLiteInfoList, nSockIndex, nClientID);
+	m_pNetModule->SendMsgPB(NFMsg::ACK_ROLE_LIST, xAckRoleLiteInfoList, nSockIndex, nClientID);
 }
 
 void NFDBNet_ServerModule::OnLoadRoleDataProcess(const NFSOCK nSockIndex, const int nMsgID, const char * msg, const uint32_t nLen)
@@ -242,7 +242,7 @@ void NFDBNet_ServerModule::OnLoadRoleDataProcess(const NFSOCK nSockIndex, const 
 	NFPlayerRedisModule* pPlayerRedisModule = (NFPlayerRedisModule*)m_pPlayerRedisModule;
 	pPlayerRedisModule->LoadPlayerData(nRoleID, xRoleDataxMsg);
 
-	m_pNetModule->SendMsgPB(NFMsg::EGMI_ACK_LOAD_ROLE_DATA, xRoleDataxMsg, nSockIndex);
+	m_pNetModule->SendMsgPB(NFMsg::ACK_LOAD_ROLE_DATA, xRoleDataxMsg, nSockIndex);
 }
 
 void NFDBNet_ServerModule::OnSaveRoleDataProcess(const NFSOCK nSockIndex, const int nMsgID, const char * msg, const uint32_t nLen)
@@ -259,6 +259,6 @@ void NFDBNet_ServerModule::OnSaveRoleDataProcess(const NFSOCK nSockIndex, const 
 	NFPlayerRedisModule* pPlayerRedisModule = (NFPlayerRedisModule*)m_pPlayerRedisModule;
 	pPlayerRedisModule->SavePlayerData(nRoleID, xMsg);
 
-	//m_pNetModule->SendMsgPB(NFMsg::EGMI_ACK_LOAD_ROLE_DATA, xMsg, nSockIndex);
+	//m_pNetModule->SendMsgPB(NFMsg::ACK_LOAD_ROLE_DATA, xMsg, nSockIndex);
 }
 

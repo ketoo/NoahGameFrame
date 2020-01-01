@@ -1,9 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="NFLevelModule">
-      <UniqueIdentifier>{aa533cce-b50a-4d4d-8afa-bb17e50e601b}</UniqueIdentifier>
-    </Filter>
     <Filter Include="NFSceneModule">
       <UniqueIdentifier>{d60b14e4-c04c-46c0-ab8e-f0d3b6bdddbf}</UniqueIdentifier>
     </Filter>
@@ -13,26 +10,16 @@
     <Filter Include="NFNPCRefreshModule">
       <UniqueIdentifier>{c918611e-a4d0-445a-98cd-c048b4f6d003}</UniqueIdentifier>
     </Filter>
-    <Filter Include="NFScenePropsModule">
-      <UniqueIdentifier>{fda04cbc-35ea-4907-9845-2d2b928354a2}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="NFBuffModule">
-      <UniqueIdentifier>{a410efa6-b9b7-4ea7-9047-6318f221b39d}</UniqueIdentifier>
-    </Filter>
     <Filter Include="NFRoleModule">
       <UniqueIdentifier>{1431a766-328f-4a0b-b09b-fb7314439da7}</UniqueIdentifier>
     </Filter>
     <Filter Include="NFSyncModule">
       <UniqueIdentifier>{e50b7301-9914-4009-8fbb-686e76d838a6}</UniqueIdentifier>
     </Filter>
-    <Filter Include="NFMoveModule">
-      <UniqueIdentifier>{f077e806-3c1e-44ce-b8b1-0ff30ffa748b}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="NFGameServerPlugin.h" />
     <ClInclude Include="NFGameServerModule.h" />
-    <ClInclude Include="NFSwitchGameServerModule.h" />
     <ClInclude Include="NFSceneProcessModule.h">
       <Filter>NFSceneModule</Filter>
     </ClInclude>
@@ -45,30 +32,17 @@
     <ClInclude Include="NFNPCRefreshModule.h">
       <Filter>NFNPCRefreshModule</Filter>
     </ClInclude>
-    <ClInclude Include="NFLevelModule.h">
-      <Filter>NFLevelModule</Filter>
-    </ClInclude>
-    <ClInclude Include="NFScenePropsModule.h">
-      <Filter>NFScenePropsModule</Filter>
-    </ClInclude>
-    <ClInclude Include="NFBuffModule.h">
-      <Filter>NFBuffModule</Filter>
-    </ClInclude>
     <ClInclude Include="NFCreateRoleModule.h">
       <Filter>NFRoleModule</Filter>
     </ClInclude>
     <ClInclude Include="NFSyncModule.h">
       <Filter>NFSyncModule</Filter>
     </ClInclude>
-    <ClInclude Include="NFMoveModule.h">
-      <Filter>NFMoveModule</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="dllmain.cpp" />
     <ClCompile Include="NFGameServerPlugin.cpp" />
     <ClCompile Include="NFGameServerModule.cpp" />
-    <ClCompile Include="NFSwitchGameServerModule.cpp" />
     <ClCompile Include="NFSceneProcessModule.cpp">
       <Filter>NFSceneModule</Filter>
     </ClCompile>
@@ -81,23 +55,11 @@
     <ClCompile Include="NFNPCRefreshModule.cpp">
       <Filter>NFNPCRefreshModule</Filter>
     </ClCompile>
-    <ClCompile Include="NFLevelModule.cpp">
-      <Filter>NFLevelModule</Filter>
-    </ClCompile>
-    <ClCompile Include="NFScenePropsModule.cpp">
-      <Filter>NFScenePropsModule</Filter>
-    </ClCompile>
-    <ClCompile Include="NFBuffModule.cpp">
-      <Filter>NFBuffModule</Filter>
-    </ClCompile>
     <ClCompile Include="NFCreateRoleModule.cpp">
       <Filter>NFRoleModule</Filter>
     </ClCompile>
     <ClCompile Include="NFSyncModule.cpp">
       <Filter>NFSyncModule</Filter>
-    </ClCompile>
-    <ClCompile Include="NFMoveModule.cpp">
-      <Filter>NFMoveModule</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

@@ -12,7 +12,7 @@ add_library(NFLoginNet_ServerPlugin STATIC
 set_target_properties( NFLoginNet_ServerPlugin PROPERTIES OUTPUT_NAME_DEBUG "NFLoginNet_ServerPlugin")
 set_target_properties( NFLoginNet_ServerPlugin PROPERTIES PREFIX "")
 set_target_properties( NFLoginNet_ServerPlugin PROPERTIES 
-	FOLDER "NFServer/LoginServer"
+	FOLDER "NFServer/NFLoginNet_ServerPlugin"
 	ARCHIVE_OUTPUT_DIRECTORY ${NFOutPutDir}
 	RUNTIME_OUTPUT_DIRECTORY ${NFOutPutDir}
 	LIBRARY_OUTPUT_DIRECTORY ${NFOutPutDir} )
@@ -21,7 +21,6 @@ link_NFSDK("NFLoginNet_ServerPlugin")
 if(UNIX)
 	target_link_libraries(NFLoginNet_ServerPlugin -static-libstdc++)
 	add_definitions(
-		-D_USRDLL
 		-DELPP_NO_DEFAULT_LOG_FILE
 	)
 
@@ -29,7 +28,6 @@ else()
 	target_link_libraries(NFLoginNet_ServerPlugin -static-libstdc++)
 	add_definitions(
 		-DWIN
-		-D_USRDLL
 		-DELPP_NO_DEFAULT_LOG_FILE
 	)
 

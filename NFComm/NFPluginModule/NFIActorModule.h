@@ -27,12 +27,10 @@
 #define NFI_ACTOR_MODULE_H
 
 #include "NFIModule.h"
-#include "NFIActor.h"
 #include "NFIComponent.h"
 
 ///////////////////////////////////////////////////
 
-class NFIComponent;
 
 class NFIActorModule : public NFIModule
 {

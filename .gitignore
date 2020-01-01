@@ -45,10 +45,12 @@
 #[cC][mM]ake[lL]ists.txt
 
 /_Out/Comm/*
+/_Out/redis*
 /_Out/Debug/
 /_Out/Release/
 /_Out/NFDataCfg/Tool/
 
+/Dependencies/vcpkg
 /Dependencies/gperftools-2.5
 /Dependencies/lib
 /Dependencies/boost_1_53_0
@@ -70,6 +72,9 @@
 /_Out/NFDataCfg/client
 /_Out/NFDataCfg/Tool/NFFileProcess
 /_Out/NFDataCfg/Tool/NFFileProcess.exe
+
+/_Out/Debug/*.ini
+/_Out/Release/*.ini
 
 /_Out/Comm/Debug/*.manifest
 /_Out/Comm/Debug/*.exp

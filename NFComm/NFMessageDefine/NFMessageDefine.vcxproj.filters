@@ -4,22 +4,16 @@
     <ClCompile Include="dllmain.cpp" />
     <ClCompile Include="NFDefine.pb.cc" />
     <ClCompile Include="NFMsgBase.pb.cc" />
-    <ClCompile Include="NFMsgExtra.pb.cc" />
-    <ClCompile Include="NFMsgFriend.pb.cc" />
     <ClCompile Include="NFMsgPreGame.pb.cc" />
     <ClCompile Include="NFMsgShare.pb.cc" />
-    <ClCompile Include="NFMsgTeam.pb.cc" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="NFDefine.pb.h" />
     <ClInclude Include="NFLimit.h" />
     <ClInclude Include="NFMsgBase.pb.h" />
     <ClInclude Include="NFMsgDefine.h" />
-    <ClInclude Include="NFMsgExtra.pb.h" />
-    <ClInclude Include="NFMsgFriend.pb.h" />
     <ClInclude Include="NFMsgPreGame.pb.h" />
     <ClInclude Include="NFMsgShare.pb.h" />
-    <ClInclude Include="NFMsgTeam.pb.h" />
     <ClInclude Include="NFProtocolDefine.hpp" />
   </ItemGroup>
 </Project>

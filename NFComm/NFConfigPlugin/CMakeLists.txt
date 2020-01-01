@@ -9,7 +9,7 @@ add_library(NFConfigPlugin STATIC ${NFConfigPlugin_ROOT_Cpp} ${NFConfigPlugin_RO
 set_target_properties( NFConfigPlugin PROPERTIES OUTPUT_NAME_DEBUG "NFConfigPlugin")
 set_target_properties( NFConfigPlugin PROPERTIES PREFIX "")
 set_target_properties( NFConfigPlugin PROPERTIES 
-	FOLDER "NFSDK"
+	FOLDER "NFComm/NFConfigPlugin"
 	ARCHIVE_OUTPUT_DIRECTORY ${NFOutPutDir}
 	RUNTIME_OUTPUT_DIRECTORY ${NFOutPutDir}
 	LIBRARY_OUTPUT_DIRECTORY ${NFOutPutDir} )

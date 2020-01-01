@@ -1,17 +1,12 @@
 <?xml version='1.0' encoding='utf-8' ?>
 <XML>
 	<Class Id="IObject"	Path="NFDataCfg/Struct/IObject.xml"	InstancePath="NFDataCfg/Ini/IObject.xml"	>
-		<Class Id="Buff"	Path="NFDataCfg/Struct/Buff.xml"	InstancePath="NFDataCfg/Ini/Buff.xml"	/>
-		<Class Id="ConsumeData"	Path="NFDataCfg/Struct/ConsumeData.xml"	InstancePath="NFDataCfg/Ini/ConsumeData.xml"	/>
 		<Class Id="DescData"	Path="NFDataCfg/Struct/DescData.xml"	InstancePath="NFDataCfg/Ini/DescData.xml"	/>
 		<Class Id="EffectData"	Path="NFDataCfg/Struct/EffectData.xml"	InstancePath="NFDataCfg/Ini/EffectData.xml"	/>
-		<Class Id="Equip"	Path="NFDataCfg/Struct/Equip.xml"	InstancePath="NFDataCfg/Ini/Equip.xml"	/>
 		<Class Id="GM"	Path="NFDataCfg/Struct/GM.xml"	InstancePath="NFDataCfg/Ini/GM.xml"	/>
 		<Class Id="Group"	Path="NFDataCfg/Struct/Group.xml"	InstancePath="NFDataCfg/Ini/Group.xml"	/>
 		<Class Id="InitProperty"	Path="NFDataCfg/Struct/InitProperty.xml"	InstancePath="NFDataCfg/Ini/InitProperty.xml"	/>
-		<Class Id="Item"	Path="NFDataCfg/Struct/Item.xml"	InstancePath="NFDataCfg/Ini/Item.xml"	/>
 		<Class Id="Language"	Path="NFDataCfg/Struct/Language.xml"	InstancePath="NFDataCfg/Ini/Language.xml"	/>
-		<Class Id="Map"	Path="NFDataCfg/Struct/Map.xml"	InstancePath="NFDataCfg/Ini/Map.xml"	/>
 		<Class Id="NPC"	Path="NFDataCfg/Struct/NPC.xml"	InstancePath="NFDataCfg/Ini/NPC.xml"	/>
 		<Class Id="NoSqlServer"	Path="NFDataCfg/Struct/NoSqlServer.xml"	InstancePath="NFDataCfg/Ini/NoSqlServer.xml"	/>
 		<Class Id="Player"	Path="NFDataCfg/Struct/Player.xml"	InstancePath="NFDataCfg/Ini/Player.xml"	/>

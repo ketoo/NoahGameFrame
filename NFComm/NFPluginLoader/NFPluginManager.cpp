@@ -49,7 +49,7 @@
 #pragma comment( lib, "SDL2d.lib" )
 #else
 #pragma comment( lib, "libprotobuf.lib" )
-//#pragma comment( lib, "SDL2.lib" )
+#pragma comment( lib, "SDL2.lib" )
 #endif
 
 #pragma comment( lib, "NFCore.lib" )
@@ -96,7 +96,6 @@
 #pragma comment( lib, "NFProxyServerNet_ClientPlugin.lib" )
 #pragma comment( lib, "NFProxyServerNet_ServerPlugin.lib" )
 
-#pragma comment( lib, "NFWorldLogicPlugin.lib" )
 #pragma comment( lib, "NFWorldNet_ClientPlugin.lib" )
 #pragma comment( lib, "NFWorldNet_ServerPlugin.lib" )
 
@@ -162,17 +161,11 @@
 #include "NFServer/NFProxyServerNet_ClientPlugin/NFProxyServerNet_ClientPlugin.h"
 #include "NFServer/NFProxyServerNet_ServerPlugin/NFProxyServerNet_ServerPlugin.h"
 //WORLD
-#include "NFServer/NFWorldLogicPlugin/NFWorldLogicPlugin.h"
 #include "NFServer/NFWorldNet_ClientPlugin/NFWorldNet_ClientPlugin.h"
 #include "NFServer/NFWorldNet_ServerPlugin/NFWorldNet_ServerPlugin.h"
 
 
 #endif
-
-void CoroutineExecute(void* arg)
-{
-	//NFPluginManager::Instance()->Execute();
-}
 
 NFPluginManager::NFPluginManager() : NFIPluginManager()
 {
@@ -208,8 +201,6 @@ NFPluginManager::~NFPluginManager()
 bool NFPluginManager::LoadPlugin()
 {
 	std::cout << "----LoadPlugin----" << std::endl;
-
-	LoadPluginConfig();
 
 #ifndef NF_DYNAMIC_PLUGIN
 	LoadStaticPlugin();
@@ -256,8 +247,6 @@ inline bool NFPluginManager::Init()
 		SetCurrentPlugin(itInstance->second);
 		itInstance->second->Init();
 	}
-
-   mxCoroutineManager.Init(CoroutineExecute);
 
 	return true;
 }
@@ -350,7 +339,6 @@ bool NFPluginManager::LoadStaticPlugin()
 	CREATE_PLUGIN(this, NFProxyServerNet_ServerPlugin)
 
 //WORLD
-	CREATE_PLUGIN(this, NFWorldLogicPlugin)
 	CREATE_PLUGIN(this, NFWorldNet_ClientPlugin)
 	CREATE_PLUGIN(this, NFWorldNet_ServerPlugin)
 
@@ -768,17 +756,6 @@ NFIModule* NFPluginManager::FindModule(const std::string& strModuleName)
 	{
 		strSubModuleName = strSubModuleName.substr(position + 1, strSubModuleName.length());
 	}
-#else
-	for (int i = 0; i < strSubModuleName.length(); i++)
-	{
-		std::string s = strSubModuleName.substr(0, i + 1);
-		int n = atof(s.c_str());
-		if (strSubModuleName.length() == i + 1 + n)
-		{
-			strSubModuleName = strSubModuleName.substr(i + 1, strSubModuleName.length());
-			break;
-		}
-	}
 #endif
 
 	ModuleInstanceMap::iterator it = mModuleInstanceMap.find(strSubModuleName);
@@ -1011,21 +988,6 @@ bool NFPluginManager::UnLoadStaticPlugin(const std::string & strPluginDLLName)
 	//     DESTROY_PLUGIN(this, NFEventProcessPlugin)
 	//     DESTROY_PLUGIN(this, NFKernelPlugin)
 	return false;
-}
-
-void NFPluginManager::ExecuteCoScheduler()
-{
-    mxCoroutineManager.ScheduleJob();
-}
-
-void NFPluginManager::YieldCo(const int64_t nSecond)
-{
-	mxCoroutineManager.YieldCo(nSecond);
-}
-
-void NFPluginManager::YieldCo()
-{
-   mxCoroutineManager.YieldCo();
 }
 
 void NFPluginManager::AddFileReplaceContent(const std::string& fileName, const std::string& content, const std::string& newValue)

@@ -159,7 +159,6 @@ message ReqCreateRole
     int32 		sex = 3;
     int32 		race = 4;
     bytes 		noob_name = 5;
-    int32 		game_id = 6;
 }
 
 message ReqDeleteRole

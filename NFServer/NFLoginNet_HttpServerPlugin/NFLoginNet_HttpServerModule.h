@@ -36,7 +36,11 @@
 #include "NFComm/NFPluginModule/NFIHttpServerModule.h"
 #include "NFComm/NFPluginModule/NFILoginToMasterModule.h"
 #include "NFComm/NFPluginModule/NFILoginNet_ServerModule.h"
-#include "NFComm/NFPluginModule/NFILoginNet_HttpServerModule.h"
+
+class NFILoginNet_HttpServerModule : public NFIModule
+{
+
+};
 
 class NFLoginNet_HttpServerModule
 	: public NFILoginNet_HttpServerModule

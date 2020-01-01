@@ -28,7 +28,7 @@ endif()
 set_target_properties( NFMessageDefine PROPERTIES OUTPUT_NAME_DEBUG "NFMessageDefine")
 set_target_properties( NFMessageDefine PROPERTIES PREFIX "")
 set_target_properties( NFMessageDefine PROPERTIES
-	FOLDER "NFSDK"
+	FOLDER "NFComm/NFMessageDefine"
 	ARCHIVE_OUTPUT_DIRECTORY ${NFOutPutDir}
 	RUNTIME_OUTPUT_DIRECTORY ${NFOutPutDir}
 	LIBRARY_OUTPUT_DIRECTORY ${NFOutPutDir} )

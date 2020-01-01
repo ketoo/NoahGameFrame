@@ -34,14 +34,9 @@
 
 #if NF_PLATFORM == NF_PLATFORM_WIN
 
-#ifdef NF_DYNAMIC_PLUGIN
 #pragma comment( lib, "NFCore.lib" )
 #pragma comment( lib, "navigation.lib" )
-#else
-#endif
 
-//
-//#pragma comment( lib, "libglog.lib" )
 #elif NF_PLATFORM == NF_PLATFORM_LINUX || NF_PLATFORM == NF_PLATFORM_ANDROID
 #elif NF_PLATFORM == NF_PLATFORM_APPLE || NF_PLATFORM == NF_PLATFORM_APPLE_IOS
 #endif
@@ -49,11 +44,9 @@
 #else
 
 #if NF_PLATFORM == NF_PLATFORM_WIN
-#ifdef NF_DYNAMIC_PLUGIN
 #pragma comment( lib, "NFCore.lib" )
 #pragma comment( lib, "navigation.lib" )
-#else
-#endif
+
 
 #elif NF_PLATFORM == NF_PLATFORM_LINUX || NF_PLATFORM == NF_PLATFORM_ANDROID
 #elif NF_PLATFORM == NF_PLATFORM_APPLE || NF_PLATFORM == NF_PLATFORM_APPLE_IOS

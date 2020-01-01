@@ -28,18 +28,20 @@
 #define NF_NPC_REFRESH_MODULE_H
 
 #include "NFComm/NFPluginModule/NFIKernelModule.h"
-#include "NFComm/NFPluginModule/NFINPCRefreshModule.h"
 #include "NFComm/NFPluginModule/NFISceneProcessModule.h"
 #include "NFComm/NFPluginModule/NFIElementModule.h"
-#include "NFComm/NFPluginModule/NFIPackModule.h"
 #include "NFComm/NFPluginModule/NFIPluginManager.h"
 #include "NFComm/NFPluginModule/NFILogModule.h"
-#include "NFComm/NFPluginModule/NFILevelModule.h"
 #include "NFComm/NFPluginModule/NFICommonConfigModule.h"
 #include "NFComm/NFPluginModule/NFIEventModule.h"
 #include "NFComm/NFPluginModule/NFIScheduleModule.h"
 #include "NFComm/NFPluginModule/NFIEventModule.h"
 #include "NFComm/NFPluginModule/NFIPropertyModule.h"
+
+class NFINPCRefreshModule : public NFIModule
+{
+
+};
 
 class NFNPCRefreshModule
     : public NFINPCRefreshModule
@@ -74,7 +76,6 @@ private:
     NFIKernelModule* m_pKernelModule;
     NFISceneProcessModule* m_pSceneProcessModule;
 	NFILogModule* m_pLogModule;
-	NFILevelModule* m_pLevelModule;
 	NFIPropertyModule* m_pPropertyModule;
 };
 

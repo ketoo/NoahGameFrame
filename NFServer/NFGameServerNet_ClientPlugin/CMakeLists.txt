@@ -12,7 +12,7 @@ add_library(NFGameServerNet_ClientPlugin STATIC
 set_target_properties( NFGameServerNet_ClientPlugin PROPERTIES OUTPUT_NAME_DEBUG "NFGameServerNet_ClientPlugin")
 set_target_properties( NFGameServerNet_ClientPlugin PROPERTIES PREFIX "")
 set_target_properties( NFGameServerNet_ClientPlugin PROPERTIES 
-	FOLDER "NFServer/GameServer"
+	FOLDER "NFServer/NFGameServerNet_ClientPlugin"
 	ARCHIVE_OUTPUT_DIRECTORY ${NFOutPutDir}
 	RUNTIME_OUTPUT_DIRECTORY ${NFOutPutDir}
 	LIBRARY_OUTPUT_DIRECTORY ${NFOutPutDir} )

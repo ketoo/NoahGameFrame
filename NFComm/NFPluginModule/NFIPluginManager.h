@@ -37,8 +37,6 @@ class NFIModule;
 class NFIPluginManager;
 
 typedef std::function<bool (NFIPluginManager* p, const std::string& strFileName, std::string& strContent)> GET_FILECONTENT_FUNCTOR;
-typedef void (* CoroutineFunction)(void* arg);
-typedef void(*AsyncFunction)(const std::string& strData, std::string& strContent);
 
 template<typename DerivedType, typename BaseType>
 class TIsDerived
@@ -84,6 +82,11 @@ public:
     }
 
 	/////////////////////
+
+	virtual bool LoadPluginConfig()
+	{
+		return true;
+	}
 
 	virtual bool LoadPlugin()
 	{
@@ -219,11 +222,6 @@ public:
 
 	virtual void SetGetFileContentFunctor(GET_FILECONTENT_FUNCTOR fun) = 0;
 	virtual bool GetFileContent(const std::string &strFileName, std::string &strContent) = 0;
-
-	virtual void ExecuteCoScheduler() = 0;
-	virtual void YieldCo(const int64_t nSecond) = 0;
-	virtual void YieldCo() = 0;
-	//virtual void Async(AsyncFunction fun) = 0;
 
 	virtual void AddFileReplaceContent(const std::string& fileName, const std::string& content, const std::string& newValue) = 0;
 	virtual std::vector<NFReplaceContent> GetFileReplaceContents(const std::string& fileName) = 0;

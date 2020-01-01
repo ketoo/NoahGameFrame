@@ -24,255 +24,80 @@ namespace NFMsg {
     static NFDefineReflection() {
       byte[] descriptorData = global::System.Convert.FromBase64String(
           string.Concat(
-            "Cg5ORkRlZmluZS5wcm90bxIFTkZNc2cqlQoKDkVHYW1lRXZlbnRDb2RlEhAK",
-            "DEVHRUNfU1VDQ0VTUxAAEhUKEUVHRUNfVU5LT1dOX0VSUk9SEAESFgoSRUdF",
-            "Q19BQ0NPVU5UX0VYSVNUEAISGwoXRUdFQ19BQ0NPVU5UUFdEX0lOVkFMSUQQ",
-            "AxIWChJFR0VDX0FDQ09VTlRfVVNJTkcQBBIXChNFR0VDX0FDQ09VTlRfTE9D",
-            "S0VEEAUSGAoURUdFQ19BQ0NPVU5UX1NVQ0NFU1MQBhIbChdFR0VDX1ZFUklG",
-            "WV9LRVlfU1VDQ0VTUxAHEhgKFEVHRUNfVkVSSUZZX0tFWV9GQUlMEAgSHQoZ",
-            "RUdFQ19TRUxFQ1RTRVJWRVJfU1VDQ0VTUxAJEhoKFkVHRUNfU0VMRUNUU0VS",
-            "VkVSX0ZBSUwQChIYChRFR0VDX0NIQVJBQ1RFUl9FWElTVBBuEhoKFkVHRUNf",
-            "U1ZSWk9ORUlEX0lOVkFMSUQQbxIZChVFR0VDX0NIQVJBQ1RFUl9OVU1PVVQQ",
-            "cBIaChZFR0VDX0NIQVJBQ1RFUl9JTlZBTElEEHESGwoXRUdFQ19DSEFSQUNU",
-            "RVJfTk9URVhJU1QQchIYChRFR0VDX0NIQVJBQ1RFUl9VU0lORxBzEhkKFUVH",
-            "RUNfQ0hBUkFDVEVSX0xPQ0tFRBB0EhYKEkVHRUNfWk9ORV9PVkVSTE9BRBB1",
-            "EhMKD0VHRUNfTk9UX09OTElORRB2EhcKE0VHRUNfQUxSRUFZX0lOX1RFQU0Q",
-            "dxIcChhFR0VDX0lOVkFMSURfVEVBTV9JTlZJVEUQeBISCg5FR0VDX1RFQU1f",
-            "RlVMTBB5EhoKFkVHRUNfTUFJTF9VUERBVEVfRVJST1IQehIcChhFR0VDX01B",
-            "SUxfVE9OQU1FX0lOVkFMSUQQexIaChZFR0VDX01BSUxfREVMRVRFX0VSUk9S",
-            "EHwSGwoXRUdFQ19NQUlMX1RPV05BTUVfRVFVQUwQfRITCg9FR0VDX0xBQ0tf",
-            "TU9ORVkQfhIVChFFR0VDX0ZVTExfUEFDS0FHRRB/EhYKEUVHRUNfSU5WQUxJ",
-            "RF9JVEVNEIABEh0KGEVHRUNfSU5WQUxJRF9DT05TSUdOTUVOVBCBARIYChNF",
-            "R0VDX05PVF9FTk9VR0hfVklQEIIBEhQKD0VHRUNfTkVFRF9MRVZFTBCDARIZ",
-            "ChRFR0VDX01BWF9GUklFTkRfTElTVBCEARIYChNFR0VDX01BWF9FTkVNWV9M",
-            "SVNUEIUBEhgKE0VHRUNfTUFYX0dBTkdTX0xTSVQQhgESGgoVRUdFQ19MSU1J",
-            "VFNfVE9fUklHSFRTEIcBEhwKF0VHRUNfSU5WQUxJRF9HQU5HU19OQU1FEIgB",
-            "EhwKF0VHRUNfUkVQRUFUX0VOVEVSX0dBTkdTEIkBEh0KGEVHRUNfSU5WQUxJ",
-            "RF9HQU5HU01FTUJFUhCKARIcChdFR0VDX01BU1RFUl9MRUFWRV9HQU5HUxCL",
-            "ARIbChZFR0VDX0dBTkdTX1RJVExFX09VVE9GEIwBEh0KGEVHRUNfRU5URVJf",
-            "R0FURVdBWV9GQUlMRBCNARIYChNFR0VDX05PX1NFUlZFUjRaT05FEI4BEhcK",
-            "EkVHRUNfSU5WQUxJRF9TS0lMTBCPARIdChhFR0VDX0NSRUFURV9DTEFOX1NV",
-            "Q0NFU1MQyAESGwoWRUdFQ19KT0lOX0NMQU5fU1VDQ0VTUxDJARIcChdFR0VD",
-            "X0xFQVZFX0NMQU5fU1VDQ0VTUxDKASocCglFU3luTXNnSUQSDwoLRVNNSV9V",
-            "TktOT1cQACrcNAoKRUdhbWVNc2dJRBIPCgtFR01JX1VOS05PVxAAEhUKEUVH",
-            "TUlfRVZFTlRfUkVTVUxUEAESGAoURUdNSV9FVkVOVF9UUkFOU1BPTkQQAhIV",
-            "ChFFR01JX0NMT1NFX1NPQ0tFVBADEh0KGUVHTUlfV1RNX1dPUkxEX1JFR0lT",
-            "VEVSRUQQChIfChtFR01JX1dUTV9XT1JMRF9VTlJFR0lTVEVSRUQQCxIaChZF",
-            "R01JX1dUTV9XT1JMRF9SRUZSRVNIEAwSHQoZRUdNSV9MVE1fTE9HSU5fUkVH",
-            "SVNURVJFRBAUEh8KG0VHTUlfTFRNX0xPR0lOX1VOUkVHSVNURVJFRBAVEhoK",
-            "FkVHTUlfTFRNX0xPR0lOX1JFRlJFU0gQFhIeChpFR01JX1BUV0dfUFJPWFlf",
-            "UkVHSVNURVJFRBAeEiAKHEVHTUlfUFRXR19QUk9YWV9VTlJFR0lTVEVSRUQQ",
-            "HxIbChdFR01JX1BUV0dfUFJPWFlfUkVGUkVTSBAgEhwKGEVHTUlfR1RXX0dB",
-            "TUVfUkVHSVNURVJFRBAoEh4KGkVHTUlfR1RXX0dBTUVfVU5SRUdJU1RFUkVE",
-            "ECkSGQoVRUdNSV9HVFdfR0FNRV9SRUZSRVNIECoSGgoWRUdNSV9EVFdfREJf",
-            "UkVHSVNURVJFRBA8EhwKGEVHTUlfRFRXX0RCX1VOUkVHSVNURVJFRBA9EhcK",
-            "E0VHTUlfRFRXX0RCX1JFRlJFU0gQPhIVChFFR01JX1NUU19ORVRfSU5GTxBG",
-            "EhUKEUVHRUNfUkVRX0xBR19URVNUEFASGgoWRUdFQ19BQ0tfR0FURV9MQUdf",
-            "VEVTVBBREhoKFkVHRUNfQUNLX0dBTUVfTEFHX1RFU1QQUhIaChZFR01JX1NU",
-            "U19TRVJWRVJfUkVQT1JUEFoSFwoTRUdNSV9TVFNfSEVBUlRfQkVBVBBkEhIK",
-            "DkVHTUlfUkVRX0xPR0lOEGUSEgoORUdNSV9BQ0tfTE9HSU4QZhITCg9FR01J",
-            "X1JFUV9MT0dPVVQQZxIXChNFR01JX1JFUV9XT1JMRF9MSVNUEG4SFwoTRUdN",
-            "SV9BQ0tfV09STERfTElTVBBvEhoKFkVHTUlfUkVRX0NPTk5FQ1RfV09STEQQ",
-            "cBIaChZFR01JX0FDS19DT05ORUNUX1dPUkxEEHESIAocRUdNSV9SRVFfS0lD",
-            "S19DTElFTlRfSU5XT1JMRBByEhgKFEVHTUlfUkVRX0NPTk5FQ1RfS0VZEHgS",
-            "GAoURUdNSV9BQ0tfQ09OTkVDVF9LRVkQehIbChZFR01JX1JFUV9TRUxFQ1Rf",
-            "U0VSVkVSEIIBEhsKFkVHTUlfQUNLX1NFTEVDVF9TRVJWRVIQgwESFwoSRUdN",
-            "SV9SRVFfUk9MRV9MSVNUEIQBEhcKEkVHTUlfQUNLX1JPTEVfTElTVBCFARIZ",
-            "ChRFR01JX1JFUV9DUkVBVEVfUk9MRRCGARIZChRFR01JX1JFUV9ERUxFVEVf",
-            "Uk9MRRCHARIaChVFR01JX1JFUV9SRUNPVkVSX1JPTEUQiAESHAoXRUdNSV9S",
-            "RVFfTE9BRF9ST0xFX0RBVEEQjAESHAoXRUdNSV9BQ0tfTE9BRF9ST0xFX0RB",
-            "VEEQjQESHAoXRUdNSV9SRVFfU0FWRV9ST0xFX0RBVEEQjgESHAoXRUdNSV9B",
-            "Q0tfU0FWRV9ST0xFX0RBVEEQjwESGAoTRUdNSV9SRVFfRU5URVJfR0FNRRCW",
-            "ARIYChNFR01JX0FDS19FTlRFUl9HQU1FEJcBEhgKE0VHTUlfUkVRX0xFQVZF",
-            "X0dBTUUQmAESGAoTRUdNSV9BQ0tfTEVBVkVfR0FNRRCZARIXChJFR01JX1JF",
-            "UV9TV0FQX0dBTUUQmgESGAoTRUdNSV9SRVFfU1dBUF9TQ0VORRCbARIYChNF",
-            "R01JX0FDS19TV0FQX1NDRU5FEJwBEh0KGEVHTUlfUkVRX1NXQVBfSE9NRV9T",
-            "Q0VORRCdARIdChhFR01JX0FDS19TV0FQX0hPTUVfU0NFTkUQngESHwoaRUdN",
-            "SV9SRVFfRU5URVJfR0FNRV9GSU5JU0gQnwESHwoaRUdNSV9BQ0tfRU5URVJf",
-            "R0FNRV9GSU5JU0gQoAESGgoVRUdNSV9BQ0tfT0JKRUNUX0VOVFJZEMgBEhoK",
-            "FUVHTUlfQUNLX09CSkVDVF9MRUFWRRDJARIjCh5FR01JX0FDS19PQkpFQ1Rf",
-            "UFJPUEVSVFlfRU5UUlkQygESIQocRUdNSV9BQ0tfT0JKRUNUX1JFQ09SRF9F",
-            "TlRSWRDLARIaChVFR01JX0FDS19QUk9QRVJUWV9JTlQQ0gESHAoXRUdNSV9B",
-            "Q0tfUFJPUEVSVFlfRkxPQVQQ0wESHQoYRUdNSV9BQ0tfUFJPUEVSVFlfU1RS",
-            "SU5HENQBEh0KGEVHTUlfQUNLX1BST1BFUlRZX09CSkVDVBDWARIeChlFR01J",
-            "X0FDS19QUk9QRVJUWV9WRUNUT1IyENcBEh4KGUVHTUlfQUNLX1BST1BFUlRZ",
-            "X1ZFQ1RPUjMQ2AESHAoXRUdNSV9BQ0tfUFJPUEVSVFlfQ0xFQVIQ2QESFQoQ",
-            "RUdNSV9BQ0tfQUREX1JPVxDcARIYChNFR01JX0FDS19SRU1PVkVfUk9XEN0B",
-            "EhYKEUVHTUlfQUNLX1NXQVBfUk9XEN4BEhgKE0VHTUlfQUNLX1JFQ09SRF9J",
-            "TlQQ3wESGgoVRUdNSV9BQ0tfUkVDT1JEX0ZMT0FUEOABEhsKFkVHTUlfQUNL",
-            "X1JFQ09SRF9TVFJJTkcQ4gESGwoWRUdNSV9BQ0tfUkVDT1JEX09CSkVDVBDj",
-            "ARIcChdFR01JX0FDS19SRUNPUkRfVkVDVE9SMhDkARIcChdFR01JX0FDS19S",
-            "RUNPUkRfVkVDVE9SMxDlARIaChVFR01JX0FDS19SRUNPUkRfQ0xFQVIQ+gES",
-            "GQoURUdNSV9BQ0tfUkVDT1JEX1NPUlQQ+wESGwoWRUdNSV9BQ0tfREFUQV9G",
-            "SU5JU0hFRBCEAhIWChFFR01JX1JFUV9BSV9PTldFUhCsAhIcChdFR01JX1JF",
-            "UV9TRUFSQ0hfT1BQTkVOVBDECRIcChdFR01JX0FDS19TRUFSQ0hfT1BQTkVO",
-            "VBDFCRIZChRFR01JX1JFUV9FTkRfT1BQTkVOVBDGCRIZChRFR01JX0FDS19F",
-            "TkRfT1BQTkVOVBDHCRIbChZFR01JX1JFUV9DQU5DRUxfU0VBUkNIEMgJEhsK",
-            "FkVHTUlfQUNLX0NBTkNFTF9TRUFSQ0gQyQkSEgoNRUdNSV9SRVFfTU9WRRDO",
-            "CRISCg1FR01JX0FDS19NT1ZFEM8JEhkKFEVHTUlfUkVRX01PVkVfSU1NVU5F",
-            "ENAJEhkKFEVHTUlfQUNLX01PVkVfSU1NVU5FENEJEhgKE0VHTUlfUkVRX1NU",
-            "QVRFX1NZTkMQ0gkSGAoTRUdNSV9BQ0tfU1RBVEVfU1lOQxDTCRIWChFFR01J",
-            "X1JFUV9QT1NfU1lOQxDUCRIWChFFR01JX0FDS19QT1NfU1lOQxDVCRIbChZF",
-            "R01JX1JFUV9TS0lMTF9PQkpFQ1RYENgJEhsKFkVHTUlfQUNLX1NLSUxMX09C",
-            "SkVDVFgQ2QkSFwoSRUdNSV9SRVFfU0tJTExfUE9TENoJEhcKEkVHTUlfQUNL",
-            "X1NLSUxMX1BPUxDbCRIZChRFR01JX1JFUV9JVEVNX09CSkVDVBDcCRIZChRF",
-            "R01JX0FDS19JVEVNX09CSkVDVBDdCRIWChFFR01JX1JFUV9JVEVNX1BPUxDe",
-            "CRIWChFFR01JX0FDS19JVEVNX1BPUxDfCRISCg1FR01JX1JFUV9DSEFUEOIJ",
-            "EhIKDUVHTUlfQUNLX0NIQVQQ4wkSFwoSRUdNSV9SRVFfU0FMRV9JVEVNEOQJ",
-            "EhgKE0VHTUlfUkVRX1NQTElUX0lURU0Q5QkSGgoVRUdNSV9SRVFfUFJPRFVD",
-            "RV9JVEVNEOYJEhcKEkVHTUlfUkVRX1BJQ0tfSVRFTRDnCRIZChRFR01JX1JF",
-            "UV9BQ0NFUFRfVEFTSxDoCRIcChdFR01JX1JFUV9DT01QRUxFVEVfVEFTSxDp",
-            "CRIbChZFR01JX0FDS19PTkxJTkVfTk9USUZZEIoKEhwKF0VHTUlfQUNLX09G",
-            "RkxJTkVfTk9USUZZEIsKEhkKFEVHTUlfUkVRX0NSRUFURV9DTEFOEJQKEhkK",
-            "FEVHTUlfQUNLX0NSRUFURV9DTEFOEJUKEhcKEkVHTUlfUkVRX0pPSU5fQ0xB",
-            "ThCWChIXChJFR01JX0FDS19KT0lOX0NMQU4QlwoSGAoTRUdNSV9SRVFfTEVB",
-            "VkVfQ0xBThCYChIYChNFR01JX0FDS19MRUFWRV9DTEFOEJkKEhYKEUVHTUlf",
-            "UkVRX09QUl9DTEFOEJoKEhYKEUVHTUlfQUNLX09QUl9DTEFOEJsKEhkKFEVH",
-            "TUlfUkVRX1NFQVJDSF9DTEFOEJwKEhkKFEVHTUlfQUNLX1NFQVJDSF9DTEFO",
-            "EJ0KEiAKG0VHTUlfUkVRX0NBTkNFTF9TRUFSQ0hfQ0xBThCeChIeChlFR0VD",
-            "X1JFUV9DUkVBVEVfQ0hBVEdST1VQEPgKEh4KGUVHRUNfQUNLX0NSRUFURV9D",
-            "SEFUR1JPVVAQ+QoSHAoXRUdFQ19SRVFfSk9JTl9DSEFUR1JPVVAQ+goSHAoX",
-            "RUdFQ19BQ0tfSk9JTl9DSEFUR1JPVVAQ+woSHQoYRUdFQ19SRVFfTEVBVkVf",
-            "Q0hBVEdST1VQEPwKEh0KGEVHRUNfQUNLX0xFQVZFX0NIQVRHUk9VUBD9ChIk",
-            "Ch9FR0VDX1JFUV9TVUJTQ1JJUFRJT05fQ0hBVEdST1VQEP4KEioKJUVHRUNf",
-            "UkVRX0NBTkNFTFNVQlNDUklQVElPTl9DSEFUR1JPVVAQ/woSHgoZRUdFQ19S",
-            "RVFfSU5WSVRFX0NIQVRHUk9VUBCACxIeChlFR0VDX0FDS19JTlZJVEVfQ0hB",
-            "VEdST1VQEIELEhwKF0VHRUNfUkVRX0tJQ0tfQ0hBVEdST1VQEIILEhwKF0VH",
-            "RUNfQUNLX0tJQ0tfQ0hBVEdST1VQEIMLEh8KGkVHRUNfUkVRX0NIQVRHUk9V",
-            "UF9UT19URUFNEKoLEh8KGkVHRUNfQUNLX0NIQVRHUk9VUF9UT19URUFNEKsL",
-            "EiUKIEVHRUNfUkVRX0lOVEVOU0lGWUxFVkVMX1RPX0VRVUlQENwLEiUKIEVH",
-            "RUNfQUNLX0lOVEVOU0lGWUxFVkVMX1RPX0VRVUlQEN0LEhsKFkVHRUNfUkVR",
-            "X0hPTEVfVE9fRVFVSVAQ3gsSGwoWRUdFQ19BQ0tfSE9MRV9UT19FUVVJUBDf",
-            "CxIhChxFR0VDX1JFUV9JTkxBWVNUT05FX1RPX0VRVUlQEOALEiEKHEVHRUNf",
-            "QUNLX0lOTEFZU1RPTkVfVE9fRVFVSVAQ4QsSIwoeRUdFQ19SRVFfRUxFTUVO",
-            "VExFVkVMX1RPX0VRVUlQEOILEiMKHkVHRUNfQUNLX0VMRU1FTlRMRVZFTF9U",
-            "T19FUVVJUBDjCxIUCg9FR0VDX1dFQVJfRVFVSVAQ5AsSFwoSRUdFQ19UQUtF",
-            "T0ZGX0VRVUlQEOULEhwKF0VHRUNfUkVRX1NFVF9GSUdIVF9IRVJPEPALEh8K",
-            "GkVHRUNfUkVRX1NXSVRDSF9GSUdIVF9IRVJPEPELEhkKFEVHRUNfUkVRX1JF",
-            "TElWRV9IRVJPEPILEhcKEkVHRUNfUkVRX1NFTkRfTUFJTBCkDRIXChJFR0VD",
-            "X1JFUV9EUkFXX01BSUwQpQ0SGQoURUdFQ19SRVFfREVMRVRFX01BSUwQpg0S",
-            "IAobRUdNSV9BQ0tfQ0xPTkVfT0JKRUNUX0VOVFJZEIgOEiAKG0VHTUlfQUNL",
-            "X0NMT05FX09CSkVDVF9MRUFWRRCJDhIpCiRFR01JX0FDS19DTE9ORV9PQkpF",
-            "Q1RfUFJPUEVSVFlfRU5UUlkQig4SJwoiRUdNSV9BQ0tfQ0xPTkVfT0JKRUNU",
-            "X1JFQ09SRF9FTlRSWRCLDhIgChtFR01JX0FDS19DTE9ORV9QUk9QRVJUWV9J",
-            "TlQQkg4SIgodRUdNSV9BQ0tfQ0xPTkVfUFJPUEVSVFlfRkxPQVQQkw4SIwoe",
-            "RUdNSV9BQ0tfQ0xPTkVfUFJPUEVSVFlfU1RSSU5HEJQOEiMKHkVHTUlfQUNL",
-            "X0NMT05FX1BST1BFUlRZX09CSkVDVBCWDhIYChNFR01JX1JFUVNXSUNIU0VS",
-            "VkVSELAOEhgKE0VHTUlfQUNLU1dJQ0hTRVJWRVIQsQ4SGQoURUdNSV9SRVFf",
-            "Q1JFQVRFX1RFQU0QxA4SGQoURUdNSV9BQ0tfQ1JFQVRFX1RFQU0QxQ4SFwoS",
-            "RUdNSV9SRVFfSk9JTl9URUFNEMYOEhcKEkVHTUlfQUNLX0pPSU5fVEVBTRDH",
-            "DhIYChNFR01JX1JFUV9MRUFWRV9URUFNEMgOEhgKE0VHTUlfQUNLX0xFQVZF",
-            "X1RFQU0QyQ4SGQoURUdNSV9SRVFfSU5WSVRFX1RFQU0Qyg4SHAoXRUdNSV9S",
-            "RVFfT1BSTUVNQkVSX1RFQU0Qyw4SHAoXRUdNSV9BQ0tfT1BSTUVNQkVSX1RF",
-            "QU0QzA4SHwoaRUdNSV9SRVFfVEVBTV9FTlRFUl9FQ1RZUEUQzQ4SHwoaRUdN",
-            "SV9BQ0tfVEVBTV9FTlRFUl9FQ1RZUEUQzg4SGwoWRUdNSV9SRVFfTUFQX0dS",
-            "SURfSU5GTxDsDhIbChZFR01JX0FDS19NQVBfR1JJRF9JTkZPEO0OEhoKFUVH",
-            "TUlfUkVRX0JJR19NQVBfSU5GTxDuDhIaChVFR01JX0FDS19CSUdfTUFQX0lO",
-            "Rk8Q7w4SGwoWRUdNSV9SRVFfSE9MRF9NQVBfR1JJRBD2DhIbChZFR01JX0FD",
-            "S19IT0xEX01BUF9HUklEEPcOEiAKG0VHTUlfUkVRX0xFQVZFX01TR19NQVBf",
-            "R1JJRBD4DhIgChtFR01JX0FDS19MRUFWRV9NU0dfTUFQX0dSSUQQ+Q4SIAob",
-            "RUdNSV9SRVFfR0VUX01BUF9HUklEX0FXQVJEEPoOEiAKG0VHTUlfQUNLX0dF",
-            "VF9NQVBfR1JJRF9BV0FSRBD7DhIeChlFR01JX1JFUV9NQVBfR1JJRF9IVU5U",
-            "SU5HEPwOEh4KGUVHTUlfQUNLX01BUF9HUklEX0hVTlRJTkcQ/Q4SHwoaRUdN",
-            "SV9SRVFfTUFQX0dSSURfS0lOR19XQVIQ/g4SHwoaRUdNSV9BQ0tfTUFQX0dS",
-            "SURfS0lOR19XQVIQ/w4SGgoVRUdNSV9SRVFfQUREX0JVSUxESU5HEIgnEh8K",
-            "GkVHTUlfUkVRX0FDS19CVUlMRElOR19MSVNUEIknEiEKHEVHTUlfUkVRX1NU",
-            "T1JFX0JVSUxESU5HX0xJU1QQkicSHQoYRUdNSV9SRVFfQUNLX0ZSSUVORF9M",
-            "SVNUEPAuEhsKFkVHTUlfQUNLX0ZSSUVORF9ERUxFVEUQ8S4SGAoTRUdNSV9B",
-            "Q0tfRlJJRU5EX0FERBDyLhIYChNFR01JX0FDS19JTlZJVEVfQUREEPMuEh0K",
-            "GEVHTUlfUkVRX0FDS19TRU5EX0lOVklURRD6LhIfChpFR01JX1JFUV9BQ0tf",
-            "QUNDRVBUX0lOVklURRD7LhIfChpFR01JX1JFUV9BQ0tfUkVKRUNUX0lOVklU",
-            "RRD8LhIfChpFR01JX1JFUV9BQ0tfSUdOT1JFX0lOVklURRD9LhIeChlFR01J",
-            "X1JFUV9BQ0tfQkxPQ0tfUExBWUVSEP4uEiAKG0VHTUlfUkVRX0FDS19VTkJM",
-            "T0NLX1BMQVlFUhD/LhIZChRFR01JX0FDS19URUFNX0lOVklURRDULxIXChJF",
-            "R01JX0FDS19URUFNX0xJU1QQ2S8SFgoRRUdNSV9BQ0tfVEVBTV9BREQQ2i8S",
-            "GAoTRUdNSV9BQ0tfVEVBTV9MRUFWRRDbLxIiCh1FR01JX1JFUV9BQ0tfU0VO",
-            "RF9URUFNX0lOVklURRDoLxIkCh9FR01JX1JFUV9BQ0tfQ0FOQ0VMX1RFQU1f",
-            "SU5WSVRFEOkvEiQKH0VHTUlfUkVRX0FDS19BQ0NFUFRfVEVBTV9JTlZJVEUQ",
-            "6i8SJAofRUdNSV9SRVFfQUNLX1JFSkVDVF9URUFNX0lOVklURRDrLxIhChxF",
-            "R01JX1JFUV9BQ0tfU0VORF9URUFNX1JFQURZEPIvEiMKHkVHTUlfUkVRX0FD",
-            "S19BQ0NFUFRfVEVBTV9SRUFEWRDzLxIjCh5FR01JX1JFUV9BQ0tfUkVKRUNU",
-            "X1RFQU1fUkVBRFkQ9C8SHgoZRUdNSV9SRVFfQ01EX1BST1BFUlRZX0lOVBCQ",
-            "ThIeChlFR01JX1JFUV9DTURfUFJPUEVSVFlfU1RSEJFOEiEKHEVHTUlfUkVR",
-            "X0NNRF9QUk9QRVJUWV9PQkpFQ1QQkk4SIAobRUdNSV9SRVFfQ01EX1BST1BF",
-            "UlRZX0ZMT0FUEJNOEhwKF0VHTUlfUkVRX0NNRF9SRUNPUkRfSU5UEJROEhwK",
-            "F0VHTUlfUkVRX0NNRF9SRUNPUkRfU1RSEJVOEh8KGkVHTUlfUkVRX0NNRF9S",
-            "RUNPUkRfT0JKRUNUEJZOEh4KGUVHTUlfUkVRX0NNRF9SRUNPUkRfRkxPQVQQ",
-            "l04SGAoTRUdNSV9SRVFfQ01EX05PUk1BTBCYThIhChxFR01JX1JFUV9RVUVS",
-            "WV9TRVJWRVJfU1RBVFVTENhPEhwKFkVHTUlfUkVRX0JVWV9GT1JNX1NIT1AQ",
-            "oJwBEhwKFkVHTUlfQUNLX0JVWV9GT1JNX1NIT1AQoZwBEiAKGkVHTUlfUkVR",
-            "X01PVkVfQlVJTERfT0JKRUNUEKKcARIgChpFR01JX0FDS19NT1ZFX0JVSUxE",
-            "X09CSkVDVBCjnAESGwoVRUdNSV9SRVFfVVBfQlVJTERfTFZMEIWdARIaChRF",
-            "R01JX1JFUV9DUkVBVEVfSVRFTRCGnQESHAoWRUdNSV9SRVFfQlVJTERfT1BF",
-            "UkFURRCHnQEqmwEKCkVTa2lsbFR5cGUSFAoQRVNUX0JSSUVGX1NJTkdMRRAA",
-            "EhMKD0VTVF9CUklFRl9HUk9VUBABEhUKEUVTVF9CVUxMRVRfU0lOR0xFEAIS",
-            "FgoSRVNUX0JVTExFVF9SRUJPVU5EEAMSGgoWRVNUX0JVTExFVF9UQVJHRVRf",
-            "Qk9NQhAEEhcKE0VTVF9CVUxMRVRfUE9TX0JPTUIQBSpHCglFSXRlbVR5cGUS",
-            "DQoJRUlUX0VRVUlQEAASCwoHRUlUX0dFTRABEg4KCkVJVF9TVVBQTFkQAhIO",
-            "CgpFSVRfU0NST0xMEAMqkAEKEUVHYW1lRXF1aXBTdWJUeXBlEhQKEEVRVUlQ",
-            "VFlQRV9XRUFQT04QABIUChBFUVVJUFRZUEVfSEVMTUVUEAESEwoPRVFVSVBU",
-            "WVBFX0FSTU9SEAISEgoORVFVSVBUWVBFX0hBTkQQAxISCg5FUVVJUFRZUEVf",
-            "UklORxAEEhIKDkVRVUlQVFlQRV9CT09UEAUqyQEKD0VHYW1lR2VtU3ViVHlw",
-            "ZRIUChBFR0dTVFlQRV9HRU1fQVRLEAASFAoQRUdHU1RZUEVfR0VNX0RFRhAB",
-            "EhUKEUVHR1NUWVBFX0dFTV9GSVJFEAMSFgoSRUdHU1RZUEVfR0VNX0xJR0hU",
-            "EAQSFQoRRUdHU1RZUEVfR0VNX1dJTkQQBRIUChBFR0dTVFlQRV9HRU1fSUNF",
-            "EAYSFwoTRUdHU1RZUEVfR0VNX1BPSVNPThAHEhUKEUVHR1NUWVBFX0dFTV9E",
-            "UkFLEAgqzwEKEkVHYW1lU3VwcGx5U3ViVHlwZRITCg9FR0lUX0lURU1fV0FU",
-            "RVIQABIVChFFR0lUX0lURU1fRElBTU9ORBABEhYKEkVHSVRfSVRFTV9DVVJS",
-            "RU5DWRACEhEKDUVHSVRfSVRFTV9FWFAQAxIQCgxFR0lUX0lURU1fSFAQBBIQ",
-            "CgxFR0lUX0lURU1fTVAQBRIQCgxFR0lUX0lURU1fU1AQBhISCg5FR0lUX0lU",
-            "RU1fUEFDSxAHEhgKFEVHSVRfSVRFTV9NRU1PUllfUE9TEAgqkgEKEkVHYW1l",
-            "U2Nyb2xsU3ViVHlwZRIZChVFR1RTVF9UT0tFTl9IRVJPX0NBUkQQABIYChRF",
-            "R1RTVF9UT0tFTl9QT1NJVElPThABEhYKEkVHVFNUX1RPS0VOX0JPVU5UWRAC",
-            "EhgKFEVHVFNUX1RPS0VOX0FDVElWSVRZEAMSFQoRRUdUU1RfVE9LRU5fQlVJ",
-            "TEQQBCplChRFR2FtZUl0ZW1FeHBpcmVkVHlwZRIOCgpFR0lFVF9OT05FEAAS",
-            "EwoPRUdJRVRfVVNFX1RJTUVTEAESEwoPRUdJRVRfUkVBTF9USU1FEAISEwoP",
-            "RUdJRVRfRU5EX0lOREVYEAMqWQoSRURyYXdEcm9wSXRlbVN0YXRlEhUKEUVf",
-            "RFJBV19TVEFURV9OT05FEAASFQoRRV9EUkFXX1NUQVRFX0dBSU4QARIVChFF",
-            "X0RSQVdfU1RBVEVfUkVDVhACKnAKD0VHdWlsZFBvd2VyVHlwZRIaChZDTEFO",
-            "X1BPV0VSX1RZUEVfTk9STUFMEAASIgoeQ0xBTl9QT1dFUl9UWVBFX1ZJQ0Vf",
-            "UFJFU0lERU5UEAESHQoZQ0xBTl9QT1dFUl9UWVBFX1BSRVNJREVOVBACKlYK",
-            "CkVUYXNrU3RhdGUSEwoPVEFTS19JTl9QUk9DRVNTEAASDQoJVEFTS19ET05F",
-            "EAESEwoPVEFTS19EUkFXX0FXQVJEEAISDwoLVEFTS19GSU5JU0gQAyqpAgoJ",
-            "RVRhc2tUeXBlEiAKHFRBU0tfTEVWRUxfVVBEQVRFX1NPTUVfTEVWRUwQABIU",
-            "ChBUQVNLX1BBU1NfRUNUWVBFEAESGgoWVEFTS19QQVNTX0VDVFlQRV9DT1VO",
-            "VBACEiQKIFRBU0tfUEFTU19TT01FX1RZUEVfRUNUWVBFX0NPVU5UEAMSGwoX",
-            "VEFTS19VUERBVEVfU0tJTExfQ09VTlQQBBIWChJUQVNLX0NPTlNVTUVfTU9O",
-            "RVkQBRIYChRUQVNLX0NPTlNVTUVfRElBTU9ORBAGEhQKEFRBU0tfQVJFTkFf",
-            "Q09VTlQQBxIbChdUQVNLX0tJTExfTU9OU1RFUl9DT1VOVBAIEiAKHFRBU0tf",
-            "S0lMTF9TT01FX01PTlNURVJfQ09VTlQQCSptCgpFU2NlbmVUeXBlEhAKDFND",
-            "RU5FX05PUk1BTBAAEhYKElNDRU5FX1NJTkdMRV9DTE9ORRABEhUKEVNDRU5F",
-            "X01VTFRJX0NMT05FEAISDgoKU0NFTkVfSE9NRRADEg4KClNDRU5FX0NMQU4Q",
-            "BCp0CghFUFZQVHlwZRIMCghQVlBfSE9NRRAAEhIKDlBWUF9JTkRJVklEVUFM",
-            "EAESDAoIUFZQX0RPVEEQAhIQCgxQVlBfU1VSVklWQUwQAxIQCgxQVlBfQ0xB",
-            "Tl9XQVIQBBIUChBQVlBfQ0xBTl9EVU5HRU9OEAUqcwoJRVNob3BUeXBlEg4K",
-            "CkVTVF9VTktOT1cQABIQCgxFU1RfQlVJTERJTkcQARIMCghFU1RfR09MRBAC",
-            "EgwKCEVTVF9JVEVNEAMSDQoJRVNUX0VRVUlQEAUSCwoHRVNUX0dFTRAGEgwK",
-            "CEVTVF9DQVJEEAcqiQEKCUVSYW5rVHlwZRIOCgpFUlRfVU5LTk9XEAASFAoQ",
-            "RVJUX1BMQVlFUl9MRVZFTBABEhMKD0VSVF9GSUdIVF9WQUxVRRACEhQKEEVS",
-            "VF9QTEFZRVJfTU9ORVkQAxISCg5FUlRfQ0xBTl9MRVZFTBAEEhcKE0VSVF9D",
-            "TEFOX0tJTkdTT1VSQ0UQBSpHCghFTlBDVHlwZRITCg9FTlBDVFlQRV9OT1JN",
-            "QUwQABIRCg1FTlBDVFlQRV9IRVJPEAESEwoPRU5QQ1RZUEVfVFVSUkVUEAIq",
-            "jgEKEkVTdWJOUENUeXBlX1RVUlJFVBIYChRFTlBDVFlQRV9TVUJfU1RPUkFH",
-            "RRAAEhgKFEVOUENUWVBFX1NVQl9XRUFQT05FEAESFgoSRU5QQ1RZUEVfU1VC",
-            "X0dVQVJEEAISFQoRRU5QQ1RZUEVfU1VCX0JPTUIQAxIVChFFTlBDVFlQRV9T",
-            "VUJfVFJBUBAEKkUKCkVNZWxlZVR5cGUSDwoLRVRZUEVfTUVMRUUQABIUChBF",
-            "VFlQRV9NRUxFRV9EQVNIEAESEAoMRVRZUEVfUkFOR0VSEAIqVQoORUVmZmVj",
-            "dE9ialR5cGUSFQoRRVRBUkdFVFRZUEVfRU5FTVkQABIUChBFVEFSR0VUVFlQ",
-            "RV9TRUxGEAESFgoSRVRBUkdFVFRZUEVfRlJJRU5EEAIqWAoNRVByb3BlcnR5",
-            "VHlwZRIOCgpFUFRfVU5LTk9XEAASEAoMRVBUX1NUUkVOR1RIEAESDwoLRVBU",
-            "X0FHSUxJVFkQAhIUChBFUFRfSU5URUxMSUdFTkNFEAMqngEKEEVHYW1lRWxl",
-            "bWVudFR5cGUSFQoRRUVMRU1FTlRUWVBFX0ZJUkUQABIWChJFRUxFTUVOVFRZ",
-            "UEVfTElHSFQQARIVChFFRUxFTUVOVFRZUEVfV0lORBACEhQKEEVFTEVNRU5U",
-            "VFlQRV9JQ0UQAxIXChNFRUxFTUVOVFRZUEVfUE9JU09OEAQSFQoRRUVMRU1F",
-            "TlRUWVBFX0RBUksQBSqkAQoLRUJhdHRsZVR5cGUSEwoPRUJUX1NJTkdMRV9N",
-            "T0RFEAASEgoORUJUX01VTFRJX01PREUQARIRCg1FQlRfQ0xBTl9NT0RFEAIS",
-            "FgoSRUJUX0NMQU5fQk9TU19NT0RFEAMSFwoTRUJUX1dPUkxEX0JPU1NfTU9E",
-            "RRAEEhEKDUVCVF9NT0JBX01PREUQBRIVChFFQlRfU1VSVklWQUxfTU9ERRAG",
-            "YgZwcm90bzM="));
+            "Cg5ORkRlZmluZS5wcm90bxIFTkZNc2cqswMKDkVHYW1lRXZlbnRDb2RlEgsK",
+            "B1NVQ0NFU1MQABIQCgxVTktPV05fRVJST1IQARIRCg1BQ0NPVU5UX0VYSVNU",
+            "EAISFgoSQUNDT1VOVFBXRF9JTlZBTElEEAMSEQoNQUNDT1VOVF9VU0lORxAE",
+            "EhIKDkFDQ09VTlRfTE9DS0VEEAUSEwoPQUNDT1VOVF9TVUNDRVNTEAYSFgoS",
+            "VkVSSUZZX0tFWV9TVUNDRVNTEAcSEwoPVkVSSUZZX0tFWV9GQUlMEAgSGAoU",
+            "U0VMRUNUU0VSVkVSX1NVQ0NFU1MQCRIVChFTRUxFQ1RTRVJWRVJfRkFJTBAK",
+            "EhMKD0NIQVJBQ1RFUl9FWElTVBBuEhUKEVNWUlpPTkVJRF9JTlZBTElEEG8S",
+            "FAoQQ0hBUkFDVEVSX05VTU9VVBBwEhUKEUNIQVJBQ1RFUl9JTlZBTElEEHES",
+            "FgoSQ0hBUkFDVEVSX05PVEVYSVNUEHISEwoPQ0hBUkFDVEVSX1VTSU5HEHMS",
+            "FAoQQ0hBUkFDVEVSX0xPQ0tFRBB0EhEKDVpPTkVfT1ZFUkxPQUQQdRIOCgpO",
+            "T1RfT05MSU5FEHYqwhEKCkVHYW1lTXNnSUQSCgoGVU5LTk9XEAASEAoMRVZF",
+            "TlRfUkVTVUxUEAESEwoPRVZFTlRfVFJBTlNQT05EEAISEAoMQ0xPU0VfU09D",
+            "S0VUEAMSGAoUV1RNX1dPUkxEX1JFR0lTVEVSRUQQChIaChZXVE1fV09STERf",
+            "VU5SRUdJU1RFUkVEEAsSFQoRV1RNX1dPUkxEX1JFRlJFU0gQDBIYChRMVE1f",
+            "TE9HSU5fUkVHSVNURVJFRBAUEhoKFkxUTV9MT0dJTl9VTlJFR0lTVEVSRUQQ",
+            "FRIVChFMVE1fTE9HSU5fUkVGUkVTSBAWEhkKFVBUV0dfUFJPWFlfUkVHSVNU",
+            "RVJFRBAeEhsKF1BUV0dfUFJPWFlfVU5SRUdJU1RFUkVEEB8SFgoSUFRXR19Q",
+            "Uk9YWV9SRUZSRVNIECASFwoTR1RXX0dBTUVfUkVHSVNURVJFRBAoEhkKFUdU",
+            "V19HQU1FX1VOUkVHSVNURVJFRBApEhQKEEdUV19HQU1FX1JFRlJFU0gQKhIV",
+            "ChFEVFdfREJfUkVHSVNURVJFRBA8EhcKE0RUV19EQl9VTlJFR0lTVEVSRUQQ",
+            "PRISCg5EVFdfREJfUkVGUkVTSBA+EhAKDFNUU19ORVRfSU5GTxBGEhAKDFJF",
+            "UV9MQUdfVEVTVBBQEhUKEUFDS19HQVRFX0xBR19URVNUEFESFQoRQUNLX0dB",
+            "TUVfTEFHX1RFU1QQUhIVChFTVFNfU0VSVkVSX1JFUE9SVBBaEhIKDlNUU19I",
+            "RUFSVF9CRUFUEGQSDQoJUkVRX0xPR0lOEGUSDQoJQUNLX0xPR0lOEGYSDgoK",
+            "UkVRX0xPR09VVBBnEhIKDlJFUV9XT1JMRF9MSVNUEG4SEgoOQUNLX1dPUkxE",
+            "X0xJU1QQbxIVChFSRVFfQ09OTkVDVF9XT1JMRBBwEhUKEUFDS19DT05ORUNU",
+            "X1dPUkxEEHESGwoXUkVRX0tJQ0tfQ0xJRU5UX0lOV09STEQQchITCg9SRVFf",
+            "Q09OTkVDVF9LRVkQeBITCg9BQ0tfQ09OTkVDVF9LRVkQehIWChFSRVFfU0VM",
+            "RUNUX1NFUlZFUhCCARIWChFBQ0tfU0VMRUNUX1NFUlZFUhCDARISCg1SRVFf",
+            "Uk9MRV9MSVNUEIQBEhIKDUFDS19ST0xFX0xJU1QQhQESFAoPUkVRX0NSRUFU",
+            "RV9ST0xFEIYBEhQKD1JFUV9ERUxFVEVfUk9MRRCHARIVChBSRVFfUkVDT1ZF",
+            "Ul9ST0xFEIgBEhcKElJFUV9MT0FEX1JPTEVfREFUQRCMARIXChJBQ0tfTE9B",
+            "RF9ST0xFX0RBVEEQjQESFwoSUkVRX1NBVkVfUk9MRV9EQVRBEI4BEhcKEkFD",
+            "S19TQVZFX1JPTEVfREFUQRCPARITCg5SRVFfRU5URVJfR0FNRRCWARITCg5B",
+            "Q0tfRU5URVJfR0FNRRCXARITCg5SRVFfTEVBVkVfR0FNRRCYARITCg5BQ0tf",
+            "TEVBVkVfR0FNRRCZARISCg1SRVFfU1dBUF9HQU1FEJoBEhMKDlJFUV9TV0FQ",
+            "X1NDRU5FEJsBEhMKDkFDS19TV0FQX1NDRU5FEJwBEhgKE1JFUV9TV0FQX0hP",
+            "TUVfU0NFTkUQnQESGAoTQUNLX1NXQVBfSE9NRV9TQ0VORRCeARIaChVSRVFf",
+            "RU5URVJfR0FNRV9GSU5JU0gQnwESGgoVQUNLX0VOVEVSX0dBTUVfRklOSVNI",
+            "EKABEhUKEEFDS19PQkpFQ1RfRU5UUlkQyAESFQoQQUNLX09CSkVDVF9MRUFW",
+            "RRDJARIeChlBQ0tfT0JKRUNUX1BST1BFUlRZX0VOVFJZEMoBEhwKF0FDS19P",
+            "QkpFQ1RfUkVDT1JEX0VOVFJZEMsBEhUKEEFDS19QUk9QRVJUWV9JTlQQ0gES",
+            "FwoSQUNLX1BST1BFUlRZX0ZMT0FUENMBEhgKE0FDS19QUk9QRVJUWV9TVFJJ",
+            "TkcQ1AESGAoTQUNLX1BST1BFUlRZX09CSkVDVBDWARIZChRBQ0tfUFJPUEVS",
+            "VFlfVkVDVE9SMhDXARIZChRBQ0tfUFJPUEVSVFlfVkVDVE9SMxDYARIXChJB",
+            "Q0tfUFJPUEVSVFlfQ0xFQVIQ2QESEAoLQUNLX0FERF9ST1cQ3AESEwoOQUNL",
+            "X1JFTU9WRV9ST1cQ3QESEQoMQUNLX1NXQVBfUk9XEN4BEhMKDkFDS19SRUNP",
+            "UkRfSU5UEN8BEhUKEEFDS19SRUNPUkRfRkxPQVQQ4AESFgoRQUNLX1JFQ09S",
+            "RF9TVFJJTkcQ4gESFgoRQUNLX1JFQ09SRF9PQkpFQ1QQ4wESFwoSQUNLX1JF",
+            "Q09SRF9WRUNUT1IyEOQBEhcKEkFDS19SRUNPUkRfVkVDVE9SMxDlARIVChBB",
+            "Q0tfUkVDT1JEX0NMRUFSEPoBEhQKD0FDS19SRUNPUkRfU09SVBD7ARIWChFB",
+            "Q0tfREFUQV9GSU5JU0hFRBCEAhIRCgxSRVFfQUlfT05XRVIQjgISDQoIUkVR",
+            "X01PVkUQrAISDQoIQUNLX01PVkUQrQISFAoPUkVRX01PVkVfSU1NVU5FEK4C",
+            "EhQKD0FDS19NT1ZFX0lNTVVORRCvAhITCg5SRVFfU1RBVEVfU1lOQxCwAhIT",
+            "Cg5BQ0tfU1RBVEVfU1lOQxCxAhIRCgxSRVFfUE9TX1NZTkMQsgISEQoMQUNL",
+            "X1BPU19TWU5DELMCEhYKEVJFUV9TS0lMTF9PQkpFQ1RYEJADEhYKEUFDS19T",
+            "S0lMTF9PQkpFQ1RYEJEDEhIKDVJFUV9TS0lMTF9QT1MQkgMSEgoNQUNLX1NL",
+            "SUxMX1BPUxCTAxIUCg9SRVFfSVRFTV9PQkpFQ1QQ9AMSFAoPQUNLX0lURU1f",
+            "T0JKRUNUEPUDEhEKDFJFUV9JVEVNX1BPUxD2AxIRCgxBQ0tfSVRFTV9QT1MQ",
+            "9wMSFgoRQUNLX09OTElORV9OT1RJRlkQ2AQSFwoSQUNLX09GRkxJTkVfTk9U",
+            "SUZZENkEKqcBCgpFU2tpbGxUeXBlEhYKEkJSSUVGX1NJTkdMRV9TS0lMTBAA",
+            "EhUKEUJSSUVGX0dST1VQX1NLSUxMEAESFwoTQlVMTEVUX1NJTkdMRV9TS0lM",
+            "TBACEhgKFEJVTExFVF9SRUJPVU5EX1NLSUxMEAMSHAoYQlVMTEVUX1RBUkdF",
+            "VF9CT01CX1NLSUxMEAQSGQoVQlVMTEVUX1BPU19CT01CX1NLSUxMEAUqbQoK",
+            "RVNjZW5lVHlwZRIQCgxOT1JNQUxfU0NFTkUQABIWChJTSU5HTEVfQ0xPTkVf",
+            "U0NFTkUQARIVChFNVUxUSV9DTE9ORV9TQ0VORRACEg4KCkhPTUVfU0NFTkUQ",
+            "AxIOCgpDTEFOX1NDRU5FEAQqOAoIRU5QQ1R5cGUSDgoKTk9STUFMX05QQxAA",
+            "EgwKCEhFUk9fTlBDEAESDgoKVFVSUkVUX05QQxACKogBCgtFQmF0dGxlVHlw",
+            "ZRIPCgtTSU5HTEVfTU9ERRAAEg4KCk1VTFRJX01PREUQARINCglDTEFOX01P",
+            "REUQAhISCg5DTEFOX0JPU1NfTU9ERRADEhMKD1dPUkxEX0JPU1NfTU9ERRAE",
+            "Eg0KCU1PQkFfTU9ERRAFEhEKDVNVUlZJVkFMX01PREUQBmIGcHJvdG8z"));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
-          new pbr::GeneratedClrTypeInfo(new[] {typeof(global::NFMsg.EGameEventCode), typeof(global::NFMsg.ESynMsgID), typeof(global::NFMsg.EGameMsgID), typeof(global::NFMsg.ESkillType), typeof(global::NFMsg.EItemType), typeof(global::NFMsg.EGameEquipSubType), typeof(global::NFMsg.EGameGemSubType), typeof(global::NFMsg.EGameSupplySubType), typeof(global::NFMsg.EGameScrollSubType), typeof(global::NFMsg.EGameItemExpiredType), typeof(global::NFMsg.EDrawDropItemState), typeof(global::NFMsg.EGuildPowerType), typeof(global::NFMsg.ETaskState), typeof(global::NFMsg.ETaskType), typeof(global::NFMsg.ESceneType), typeof(global::NFMsg.EPVPType), typeof(global::NFMsg.EShopType), typeof(global::NFMsg.ERankType), typeof(global::NFMsg.ENPCType), typeof(global::NFMsg.ESubNPCType_TURRET), typeof(global::NFMsg.EMeleeType), typeof(global::NFMsg.EEffectObjType), typeof(global::NFMsg.EPropertyType), typeof(global::NFMsg.EGameElementType), typeof(global::NFMsg.EBattleType), }, null, null));
+          new pbr::GeneratedClrTypeInfo(new[] {typeof(global::NFMsg.EGameEventCode), typeof(global::NFMsg.EGameMsgID), typeof(global::NFMsg.ESkillType), typeof(global::NFMsg.ESceneType), typeof(global::NFMsg.ENPCType), typeof(global::NFMsg.EBattleType), }, null, null));
     }
     #endregion
 
@@ -284,668 +109,260 @@ namespace NFMsg {
   public enum EGameEventCode {
     /// <summary>
     /// </summary>
-    [pbr::OriginalName("EGEC_SUCCESS")] EgecSuccess = 0,
+    [pbr::OriginalName("SUCCESS")] Success = 0,
     /// <summary>
     /// </summary>
-    [pbr::OriginalName("EGEC_UNKOWN_ERROR")] EgecUnkownError = 1,
+    [pbr::OriginalName("UNKOWN_ERROR")] UnkownError = 1,
     /// <summary>
     /// </summary>
-    [pbr::OriginalName("EGEC_ACCOUNT_EXIST")] EgecAccountExist = 2,
+    [pbr::OriginalName("ACCOUNT_EXIST")] AccountExist = 2,
     /// <summary>
     /// </summary>
-    [pbr::OriginalName("EGEC_ACCOUNTPWD_INVALID")] EgecAccountpwdInvalid = 3,
+    [pbr::OriginalName("ACCOUNTPWD_INVALID")] AccountpwdInvalid = 3,
     /// <summary>
     /// </summary>
-    [pbr::OriginalName("EGEC_ACCOUNT_USING")] EgecAccountUsing = 4,
+    [pbr::OriginalName("ACCOUNT_USING")] AccountUsing = 4,
     /// <summary>
     /// </summary>
-    [pbr::OriginalName("EGEC_ACCOUNT_LOCKED")] EgecAccountLocked = 5,
+    [pbr::OriginalName("ACCOUNT_LOCKED")] AccountLocked = 5,
     /// <summary>
     /// </summary>
-    [pbr::OriginalName("EGEC_ACCOUNT_SUCCESS")] EgecAccountSuccess = 6,
+    [pbr::OriginalName("ACCOUNT_SUCCESS")] AccountSuccess = 6,
     /// <summary>
     /// </summary>
-    [pbr::OriginalName("EGEC_VERIFY_KEY_SUCCESS")] EgecVerifyKeySuccess = 7,
+    [pbr::OriginalName("VERIFY_KEY_SUCCESS")] VerifyKeySuccess = 7,
     /// <summary>
     /// </summary>
-    [pbr::OriginalName("EGEC_VERIFY_KEY_FAIL")] EgecVerifyKeyFail = 8,
+    [pbr::OriginalName("VERIFY_KEY_FAIL")] VerifyKeyFail = 8,
     /// <summary>
     /// </summary>
-    [pbr::OriginalName("EGEC_SELECTSERVER_SUCCESS")] EgecSelectserverSuccess = 9,
+    [pbr::OriginalName("SELECTSERVER_SUCCESS")] SelectserverSuccess = 9,
     /// <summary>
     /// </summary>
-    [pbr::OriginalName("EGEC_SELECTSERVER_FAIL")] EgecSelectserverFail = 10,
+    [pbr::OriginalName("SELECTSERVER_FAIL")] SelectserverFail = 10,
     /// <summary>
     /// </summary>
-    [pbr::OriginalName("EGEC_CHARACTER_EXIST")] EgecCharacterExist = 110,
+    [pbr::OriginalName("CHARACTER_EXIST")] CharacterExist = 110,
     /// <summary>
     /// </summary>
-    [pbr::OriginalName("EGEC_SVRZONEID_INVALID")] EgecSvrzoneidInvalid = 111,
+    [pbr::OriginalName("SVRZONEID_INVALID")] SvrzoneidInvalid = 111,
     /// <summary>
     /// </summary>
-    [pbr::OriginalName("EGEC_CHARACTER_NUMOUT")] EgecCharacterNumout = 112,
+    [pbr::OriginalName("CHARACTER_NUMOUT")] CharacterNumout = 112,
     /// <summary>
     /// </summary>
-    [pbr::OriginalName("EGEC_CHARACTER_INVALID")] EgecCharacterInvalid = 113,
+    [pbr::OriginalName("CHARACTER_INVALID")] CharacterInvalid = 113,
     /// <summary>
     /// </summary>
-    [pbr::OriginalName("EGEC_CHARACTER_NOTEXIST")] EgecCharacterNotexist = 114,
+    [pbr::OriginalName("CHARACTER_NOTEXIST")] CharacterNotexist = 114,
     /// <summary>
     /// </summary>
-    [pbr::OriginalName("EGEC_CHARACTER_USING")] EgecCharacterUsing = 115,
+    [pbr::OriginalName("CHARACTER_USING")] CharacterUsing = 115,
     /// <summary>
     /// </summary>
-    [pbr::OriginalName("EGEC_CHARACTER_LOCKED")] EgecCharacterLocked = 116,
+    [pbr::OriginalName("CHARACTER_LOCKED")] CharacterLocked = 116,
     /// <summary>
     /// </summary>
-    [pbr::OriginalName("EGEC_ZONE_OVERLOAD")] EgecZoneOverload = 117,
+    [pbr::OriginalName("ZONE_OVERLOAD")] ZoneOverload = 117,
     /// <summary>
     /// </summary>
-    [pbr::OriginalName("EGEC_NOT_ONLINE")] EgecNotOnline = 118,
-    /// <summary>
-    /// </summary>
-    [pbr::OriginalName("EGEC_ALREAY_IN_TEAM")] EgecAlreayInTeam = 119,
-    /// <summary>
-    /// </summary>
-    [pbr::OriginalName("EGEC_INVALID_TEAM_INVITE")] EgecInvalidTeamInvite = 120,
-    /// <summary>
-    /// </summary>
-    [pbr::OriginalName("EGEC_TEAM_FULL")] EgecTeamFull = 121,
-    /// <summary>
-    /// </summary>
-    [pbr::OriginalName("EGEC_MAIL_UPDATE_ERROR")] EgecMailUpdateError = 122,
-    /// <summary>
-    /// </summary>
-    [pbr::OriginalName("EGEC_MAIL_TONAME_INVALID")] EgecMailTonameInvalid = 123,
-    /// <summary>
-    /// </summary>
-    [pbr::OriginalName("EGEC_MAIL_DELETE_ERROR")] EgecMailDeleteError = 124,
-    /// <summary>
-    /// </summary>
-    [pbr::OriginalName("EGEC_MAIL_TOWNAME_EQUAL")] EgecMailTownameEqual = 125,
-    /// <summary>
-    /// </summary>
-    [pbr::OriginalName("EGEC_LACK_MONEY")] EgecLackMoney = 126,
-    /// <summary>
-    /// </summary>
-    [pbr::OriginalName("EGEC_FULL_PACKAGE")] EgecFullPackage = 127,
-    /// <summary>
-    /// </summary>
-    [pbr::OriginalName("EGEC_INVALID_ITEM")] EgecInvalidItem = 128,
-    /// <summary>
-    /// </summary>
-    [pbr::OriginalName("EGEC_INVALID_CONSIGNMENT")] EgecInvalidConsignment = 129,
-    /// <summary>
-    /// </summary>
-    [pbr::OriginalName("EGEC_NOT_ENOUGH_VIP")] EgecNotEnoughVip = 130,
-    /// <summary>
-    /// </summary>
-    [pbr::OriginalName("EGEC_NEED_LEVEL")] EgecNeedLevel = 131,
-    /// <summary>
-    /// </summary>
-    [pbr::OriginalName("EGEC_MAX_FRIEND_LIST")] EgecMaxFriendList = 132,
-    /// <summary>
-    /// </summary>
-    [pbr::OriginalName("EGEC_MAX_ENEMY_LIST")] EgecMaxEnemyList = 133,
-    /// <summary>
-    /// </summary>
-    [pbr::OriginalName("EGEC_MAX_GANGS_LSIT")] EgecMaxGangsLsit = 134,
-    /// <summary>
-    /// </summary>
-    [pbr::OriginalName("EGEC_LIMITS_TO_RIGHTS")] EgecLimitsToRights = 135,
-    /// <summary>
-    /// </summary>
-    [pbr::OriginalName("EGEC_INVALID_GANGS_NAME")] EgecInvalidGangsName = 136,
-    /// <summary>
-    /// </summary>
-    [pbr::OriginalName("EGEC_REPEAT_ENTER_GANGS")] EgecRepeatEnterGangs = 137,
-    /// <summary>
-    /// </summary>
-    [pbr::OriginalName("EGEC_INVALID_GANGSMEMBER")] EgecInvalidGangsmember = 138,
-    /// <summary>
-    /// </summary>
-    [pbr::OriginalName("EGEC_MASTER_LEAVE_GANGS")] EgecMasterLeaveGangs = 139,
-    /// <summary>
-    /// </summary>
-    [pbr::OriginalName("EGEC_GANGS_TITLE_OUTOF")] EgecGangsTitleOutof = 140,
-    /// <summary>
-    /// </summary>
-    [pbr::OriginalName("EGEC_ENTER_GATEWAY_FAILD")] EgecEnterGatewayFaild = 141,
-    /// <summary>
-    /// </summary>
-    [pbr::OriginalName("EGEC_NO_SERVER4ZONE")] EgecNoServer4Zone = 142,
-    /// <summary>
-    /// </summary>
-    [pbr::OriginalName("EGEC_INVALID_SKILL")] EgecInvalidSkill = 143,
-    /// <summary>
-    /// </summary>
-    [pbr::OriginalName("EGEC_CREATE_CLAN_SUCCESS")] EgecCreateClanSuccess = 200,
-    /// <summary>
-    /// </summary>
-    [pbr::OriginalName("EGEC_JOIN_CLAN_SUCCESS")] EgecJoinClanSuccess = 201,
-    /// <summary>
-    /// </summary>
-    [pbr::OriginalName("EGEC_LEAVE_CLAN_SUCCESS")] EgecLeaveClanSuccess = 202,
-  }
-
-  public enum ESynMsgID {
-    /// <summary>
-    /// </summary>
-    [pbr::OriginalName("ESMI_UNKNOW")] EsmiUnknow = 0,
+    [pbr::OriginalName("NOT_ONLINE")] NotOnline = 118,
   }
 
   public enum EGameMsgID {
     /// <summary>
     /// </summary>
-    [pbr::OriginalName("EGMI_UNKNOW")] EgmiUnknow = 0,
+    [pbr::OriginalName("UNKNOW")] Unknow = 0,
     /// <summary>
     /// for events
     /// </summary>
-    [pbr::OriginalName("EGMI_EVENT_RESULT")] EgmiEventResult = 1,
+    [pbr::OriginalName("EVENT_RESULT")] EventResult = 1,
     /// <summary>
     /// for events
     /// </summary>
-    [pbr::OriginalName("EGMI_EVENT_TRANSPOND")] EgmiEventTranspond = 2,
+    [pbr::OriginalName("EVENT_TRANSPOND")] EventTranspond = 2,
     /// <summary>
     /// want to close some one
     /// </summary>
-    [pbr::OriginalName("EGMI_CLOSE_SOCKET")] EgmiCloseSocket = 3,
-    [pbr::OriginalName("EGMI_WTM_WORLD_REGISTERED")] EgmiWtmWorldRegistered = 10,
-    [pbr::OriginalName("EGMI_WTM_WORLD_UNREGISTERED")] EgmiWtmWorldUnregistered = 11,
-    [pbr::OriginalName("EGMI_WTM_WORLD_REFRESH")] EgmiWtmWorldRefresh = 12,
-    [pbr::OriginalName("EGMI_LTM_LOGIN_REGISTERED")] EgmiLtmLoginRegistered = 20,
-    [pbr::OriginalName("EGMI_LTM_LOGIN_UNREGISTERED")] EgmiLtmLoginUnregistered = 21,
-    [pbr::OriginalName("EGMI_LTM_LOGIN_REFRESH")] EgmiLtmLoginRefresh = 22,
-    [pbr::OriginalName("EGMI_PTWG_PROXY_REGISTERED")] EgmiPtwgProxyRegistered = 30,
-    [pbr::OriginalName("EGMI_PTWG_PROXY_UNREGISTERED")] EgmiPtwgProxyUnregistered = 31,
-    [pbr::OriginalName("EGMI_PTWG_PROXY_REFRESH")] EgmiPtwgProxyRefresh = 32,
-    [pbr::OriginalName("EGMI_GTW_GAME_REGISTERED")] EgmiGtwGameRegistered = 40,
-    [pbr::OriginalName("EGMI_GTW_GAME_UNREGISTERED")] EgmiGtwGameUnregistered = 41,
-    [pbr::OriginalName("EGMI_GTW_GAME_REFRESH")] EgmiGtwGameRefresh = 42,
-    [pbr::OriginalName("EGMI_DTW_DB_REGISTERED")] EgmiDtwDbRegistered = 60,
-    [pbr::OriginalName("EGMI_DTW_DB_UNREGISTERED")] EgmiDtwDbUnregistered = 61,
-    [pbr::OriginalName("EGMI_DTW_DB_REFRESH")] EgmiDtwDbRefresh = 62,
-    [pbr::OriginalName("EGMI_STS_NET_INFO")] EgmiStsNetInfo = 70,
-    [pbr::OriginalName("EGEC_REQ_LAG_TEST")] EgecReqLagTest = 80,
-    [pbr::OriginalName("EGEC_ACK_GATE_LAG_TEST")] EgecAckGateLagTest = 81,
-    [pbr::OriginalName("EGEC_ACK_GAME_LAG_TEST")] EgecAckGameLagTest = 82,
-    [pbr::OriginalName("EGMI_STS_SERVER_REPORT")] EgmiStsServerReport = 90,
-    [pbr::OriginalName("EGMI_STS_HEART_BEAT")] EgmiStsHeartBeat = 100,
+    [pbr::OriginalName("CLOSE_SOCKET")] CloseSocket = 3,
+    [pbr::OriginalName("WTM_WORLD_REGISTERED")] WtmWorldRegistered = 10,
+    [pbr::OriginalName("WTM_WORLD_UNREGISTERED")] WtmWorldUnregistered = 11,
+    [pbr::OriginalName("WTM_WORLD_REFRESH")] WtmWorldRefresh = 12,
+    [pbr::OriginalName("LTM_LOGIN_REGISTERED")] LtmLoginRegistered = 20,
+    [pbr::OriginalName("LTM_LOGIN_UNREGISTERED")] LtmLoginUnregistered = 21,
+    [pbr::OriginalName("LTM_LOGIN_REFRESH")] LtmLoginRefresh = 22,
+    [pbr::OriginalName("PTWG_PROXY_REGISTERED")] PtwgProxyRegistered = 30,
+    [pbr::OriginalName("PTWG_PROXY_UNREGISTERED")] PtwgProxyUnregistered = 31,
+    [pbr::OriginalName("PTWG_PROXY_REFRESH")] PtwgProxyRefresh = 32,
+    [pbr::OriginalName("GTW_GAME_REGISTERED")] GtwGameRegistered = 40,
+    [pbr::OriginalName("GTW_GAME_UNREGISTERED")] GtwGameUnregistered = 41,
+    [pbr::OriginalName("GTW_GAME_REFRESH")] GtwGameRefresh = 42,
+    [pbr::OriginalName("DTW_DB_REGISTERED")] DtwDbRegistered = 60,
+    [pbr::OriginalName("DTW_DB_UNREGISTERED")] DtwDbUnregistered = 61,
+    [pbr::OriginalName("DTW_DB_REFRESH")] DtwDbRefresh = 62,
+    [pbr::OriginalName("STS_NET_INFO")] StsNetInfo = 70,
+    [pbr::OriginalName("REQ_LAG_TEST")] ReqLagTest = 80,
+    [pbr::OriginalName("ACK_GATE_LAG_TEST")] AckGateLagTest = 81,
+    [pbr::OriginalName("ACK_GAME_LAG_TEST")] AckGameLagTest = 82,
+    [pbr::OriginalName("STS_SERVER_REPORT")] StsServerReport = 90,
+    [pbr::OriginalName("STS_HEART_BEAT")] StsHeartBeat = 100,
     /// <summary>
     ///////////////////////////////////////////////////////////////////////////////////////
     /// </summary>
-    [pbr::OriginalName("EGMI_REQ_LOGIN")] EgmiReqLogin = 101,
+    [pbr::OriginalName("REQ_LOGIN")] ReqLogin = 101,
     /// <summary>
     /// </summary>
-    [pbr::OriginalName("EGMI_ACK_LOGIN")] EgmiAckLogin = 102,
+    [pbr::OriginalName("ACK_LOGIN")] AckLogin = 102,
     /// <summary>
     /// </summary>
-    [pbr::OriginalName("EGMI_REQ_LOGOUT")] EgmiReqLogout = 103,
+    [pbr::OriginalName("REQ_LOGOUT")] ReqLogout = 103,
     /// <summary>
     /// </summary>
-    [pbr::OriginalName("EGMI_REQ_WORLD_LIST")] EgmiReqWorldList = 110,
+    [pbr::OriginalName("REQ_WORLD_LIST")] ReqWorldList = 110,
     /// <summary>
     /// </summary>
-    [pbr::OriginalName("EGMI_ACK_WORLD_LIST")] EgmiAckWorldList = 111,
+    [pbr::OriginalName("ACK_WORLD_LIST")] AckWorldList = 111,
     /// <summary>
     /// </summary>
-    [pbr::OriginalName("EGMI_REQ_CONNECT_WORLD")] EgmiReqConnectWorld = 112,
-    [pbr::OriginalName("EGMI_ACK_CONNECT_WORLD")] EgmiAckConnectWorld = 113,
+    [pbr::OriginalName("REQ_CONNECT_WORLD")] ReqConnectWorld = 112,
+    [pbr::OriginalName("ACK_CONNECT_WORLD")] AckConnectWorld = 113,
     /// <summary>
     /// </summary>
-    [pbr::OriginalName("EGMI_REQ_KICK_CLIENT_INWORLD")] EgmiReqKickClientInworld = 114,
+    [pbr::OriginalName("REQ_KICK_CLIENT_INWORLD")] ReqKickClientInworld = 114,
     /// <summary>
     /// </summary>
-    [pbr::OriginalName("EGMI_REQ_CONNECT_KEY")] EgmiReqConnectKey = 120,
+    [pbr::OriginalName("REQ_CONNECT_KEY")] ReqConnectKey = 120,
     /// <summary>
     /// </summary>
-    [pbr::OriginalName("EGMI_ACK_CONNECT_KEY")] EgmiAckConnectKey = 122,
+    [pbr::OriginalName("ACK_CONNECT_KEY")] AckConnectKey = 122,
     /// <summary>
     /// </summary>
-    [pbr::OriginalName("EGMI_REQ_SELECT_SERVER")] EgmiReqSelectServer = 130,
+    [pbr::OriginalName("REQ_SELECT_SERVER")] ReqSelectServer = 130,
     /// <summary>
     /// </summary>
-    [pbr::OriginalName("EGMI_ACK_SELECT_SERVER")] EgmiAckSelectServer = 131,
+    [pbr::OriginalName("ACK_SELECT_SERVER")] AckSelectServer = 131,
     /// <summary>
     /// </summary>
-    [pbr::OriginalName("EGMI_REQ_ROLE_LIST")] EgmiReqRoleList = 132,
+    [pbr::OriginalName("REQ_ROLE_LIST")] ReqRoleList = 132,
     /// <summary>
     /// </summary>
-    [pbr::OriginalName("EGMI_ACK_ROLE_LIST")] EgmiAckRoleList = 133,
+    [pbr::OriginalName("ACK_ROLE_LIST")] AckRoleList = 133,
     /// <summary>
     /// </summary>
-    [pbr::OriginalName("EGMI_REQ_CREATE_ROLE")] EgmiReqCreateRole = 134,
+    [pbr::OriginalName("REQ_CREATE_ROLE")] ReqCreateRole = 134,
     /// <summary>
     /// </summary>
-    [pbr::OriginalName("EGMI_REQ_DELETE_ROLE")] EgmiReqDeleteRole = 135,
+    [pbr::OriginalName("REQ_DELETE_ROLE")] ReqDeleteRole = 135,
     /// <summary>
     /// </summary>
-    [pbr::OriginalName("EGMI_REQ_RECOVER_ROLE")] EgmiReqRecoverRole = 136,
+    [pbr::OriginalName("REQ_RECOVER_ROLE")] ReqRecoverRole = 136,
     /// <summary>
     /// </summary>
-    [pbr::OriginalName("EGMI_REQ_LOAD_ROLE_DATA")] EgmiReqLoadRoleData = 140,
+    [pbr::OriginalName("REQ_LOAD_ROLE_DATA")] ReqLoadRoleData = 140,
     /// <summary>
     /// </summary>
-    [pbr::OriginalName("EGMI_ACK_LOAD_ROLE_DATA")] EgmiAckLoadRoleData = 141,
+    [pbr::OriginalName("ACK_LOAD_ROLE_DATA")] AckLoadRoleData = 141,
     /// <summary>
     /// </summary>
-    [pbr::OriginalName("EGMI_REQ_SAVE_ROLE_DATA")] EgmiReqSaveRoleData = 142,
+    [pbr::OriginalName("REQ_SAVE_ROLE_DATA")] ReqSaveRoleData = 142,
     /// <summary>
     /// </summary>
-    [pbr::OriginalName("EGMI_ACK_SAVE_ROLE_DATA")] EgmiAckSaveRoleData = 143,
+    [pbr::OriginalName("ACK_SAVE_ROLE_DATA")] AckSaveRoleData = 143,
     /// <summary>
     /// </summary>
-    [pbr::OriginalName("EGMI_REQ_ENTER_GAME")] EgmiReqEnterGame = 150,
+    [pbr::OriginalName("REQ_ENTER_GAME")] ReqEnterGame = 150,
     /// <summary>
     /// </summary>
-    [pbr::OriginalName("EGMI_ACK_ENTER_GAME")] EgmiAckEnterGame = 151,
+    [pbr::OriginalName("ACK_ENTER_GAME")] AckEnterGame = 151,
     /// <summary>
     /// </summary>
-    [pbr::OriginalName("EGMI_REQ_LEAVE_GAME")] EgmiReqLeaveGame = 152,
+    [pbr::OriginalName("REQ_LEAVE_GAME")] ReqLeaveGame = 152,
     /// <summary>
     /// </summary>
-    [pbr::OriginalName("EGMI_ACK_LEAVE_GAME")] EgmiAckLeaveGame = 153,
+    [pbr::OriginalName("ACK_LEAVE_GAME")] AckLeaveGame = 153,
     /// <summary>
     /// </summary>
-    [pbr::OriginalName("EGMI_REQ_SWAP_GAME")] EgmiReqSwapGame = 154,
+    [pbr::OriginalName("REQ_SWAP_GAME")] ReqSwapGame = 154,
     /// <summary>
     /// </summary>
-    [pbr::OriginalName("EGMI_REQ_SWAP_SCENE")] EgmiReqSwapScene = 155,
+    [pbr::OriginalName("REQ_SWAP_SCENE")] ReqSwapScene = 155,
     /// <summary>
     /// </summary>
-    [pbr::OriginalName("EGMI_ACK_SWAP_SCENE")] EgmiAckSwapScene = 156,
+    [pbr::OriginalName("ACK_SWAP_SCENE")] AckSwapScene = 156,
     /// <summary>
     /// </summary>
-    [pbr::OriginalName("EGMI_REQ_SWAP_HOME_SCENE")] EgmiReqSwapHomeScene = 157,
+    [pbr::OriginalName("REQ_SWAP_HOME_SCENE")] ReqSwapHomeScene = 157,
     /// <summary>
     /// </summary>
-    [pbr::OriginalName("EGMI_ACK_SWAP_HOME_SCENE")] EgmiAckSwapHomeScene = 158,
+    [pbr::OriginalName("ACK_SWAP_HOME_SCENE")] AckSwapHomeScene = 158,
     /// <summary>
     /// </summary>
-    [pbr::OriginalName("EGMI_REQ_ENTER_GAME_FINISH")] EgmiReqEnterGameFinish = 159,
+    [pbr::OriginalName("REQ_ENTER_GAME_FINISH")] ReqEnterGameFinish = 159,
     /// <summary>
     /// </summary>
-    [pbr::OriginalName("EGMI_ACK_ENTER_GAME_FINISH")] EgmiAckEnterGameFinish = 160,
+    [pbr::OriginalName("ACK_ENTER_GAME_FINISH")] AckEnterGameFinish = 160,
     /// <summary>
     /// </summary>
-    [pbr::OriginalName("EGMI_ACK_OBJECT_ENTRY")] EgmiAckObjectEntry = 200,
+    [pbr::OriginalName("ACK_OBJECT_ENTRY")] AckObjectEntry = 200,
     /// <summary>
     /// </summary>
-    [pbr::OriginalName("EGMI_ACK_OBJECT_LEAVE")] EgmiAckObjectLeave = 201,
+    [pbr::OriginalName("ACK_OBJECT_LEAVE")] AckObjectLeave = 201,
     /// <summary>
     /// </summary>
-    [pbr::OriginalName("EGMI_ACK_OBJECT_PROPERTY_ENTRY")] EgmiAckObjectPropertyEntry = 202,
+    [pbr::OriginalName("ACK_OBJECT_PROPERTY_ENTRY")] AckObjectPropertyEntry = 202,
     /// <summary>
     /// </summary>
-    [pbr::OriginalName("EGMI_ACK_OBJECT_RECORD_ENTRY")] EgmiAckObjectRecordEntry = 203,
+    [pbr::OriginalName("ACK_OBJECT_RECORD_ENTRY")] AckObjectRecordEntry = 203,
     /// <summary>
     /// </summary>
-    [pbr::OriginalName("EGMI_ACK_PROPERTY_INT")] EgmiAckPropertyInt = 210,
+    [pbr::OriginalName("ACK_PROPERTY_INT")] AckPropertyInt = 210,
     /// <summary>
     /// </summary>
-    [pbr::OriginalName("EGMI_ACK_PROPERTY_FLOAT")] EgmiAckPropertyFloat = 211,
+    [pbr::OriginalName("ACK_PROPERTY_FLOAT")] AckPropertyFloat = 211,
     /// <summary>
     /// </summary>
-    [pbr::OriginalName("EGMI_ACK_PROPERTY_STRING")] EgmiAckPropertyString = 212,
+    [pbr::OriginalName("ACK_PROPERTY_STRING")] AckPropertyString = 212,
     /// <summary>
     ///EGMI_ACK_PROPERTY_DOUBLE					= 213;			//
     /// </summary>
-    [pbr::OriginalName("EGMI_ACK_PROPERTY_OBJECT")] EgmiAckPropertyObject = 214,
-    [pbr::OriginalName("EGMI_ACK_PROPERTY_VECTOR2")] EgmiAckPropertyVector2 = 215,
-    [pbr::OriginalName("EGMI_ACK_PROPERTY_VECTOR3")] EgmiAckPropertyVector3 = 216,
-    [pbr::OriginalName("EGMI_ACK_PROPERTY_CLEAR")] EgmiAckPropertyClear = 217,
-    [pbr::OriginalName("EGMI_ACK_ADD_ROW")] EgmiAckAddRow = 220,
-    [pbr::OriginalName("EGMI_ACK_REMOVE_ROW")] EgmiAckRemoveRow = 221,
-    [pbr::OriginalName("EGMI_ACK_SWAP_ROW")] EgmiAckSwapRow = 222,
-    [pbr::OriginalName("EGMI_ACK_RECORD_INT")] EgmiAckRecordInt = 223,
-    [pbr::OriginalName("EGMI_ACK_RECORD_FLOAT")] EgmiAckRecordFloat = 224,
+    [pbr::OriginalName("ACK_PROPERTY_OBJECT")] AckPropertyObject = 214,
+    [pbr::OriginalName("ACK_PROPERTY_VECTOR2")] AckPropertyVector2 = 215,
+    [pbr::OriginalName("ACK_PROPERTY_VECTOR3")] AckPropertyVector3 = 216,
+    [pbr::OriginalName("ACK_PROPERTY_CLEAR")] AckPropertyClear = 217,
+    [pbr::OriginalName("ACK_ADD_ROW")] AckAddRow = 220,
+    [pbr::OriginalName("ACK_REMOVE_ROW")] AckRemoveRow = 221,
+    [pbr::OriginalName("ACK_SWAP_ROW")] AckSwapRow = 222,
+    [pbr::OriginalName("ACK_RECORD_INT")] AckRecordInt = 223,
+    [pbr::OriginalName("ACK_RECORD_FLOAT")] AckRecordFloat = 224,
     /// <summary>
     ///EGMI_ACK_RECORD_DOUBLE					= 225;
     /// </summary>
-    [pbr::OriginalName("EGMI_ACK_RECORD_STRING")] EgmiAckRecordString = 226,
-    [pbr::OriginalName("EGMI_ACK_RECORD_OBJECT")] EgmiAckRecordObject = 227,
-    [pbr::OriginalName("EGMI_ACK_RECORD_VECTOR2")] EgmiAckRecordVector2 = 228,
-    [pbr::OriginalName("EGMI_ACK_RECORD_VECTOR3")] EgmiAckRecordVector3 = 229,
-    [pbr::OriginalName("EGMI_ACK_RECORD_CLEAR")] EgmiAckRecordClear = 250,
-    [pbr::OriginalName("EGMI_ACK_RECORD_SORT")] EgmiAckRecordSort = 251,
-    [pbr::OriginalName("EGMI_ACK_DATA_FINISHED")] EgmiAckDataFinished = 260,
-    [pbr::OriginalName("EGMI_REQ_AI_ONWER")] EgmiReqAiOnwer = 300,
-    [pbr::OriginalName("EGMI_REQ_SEARCH_OPPNENT")] EgmiReqSearchOppnent = 1220,
-    [pbr::OriginalName("EGMI_ACK_SEARCH_OPPNENT")] EgmiAckSearchOppnent = 1221,
-    [pbr::OriginalName("EGMI_REQ_END_OPPNENT")] EgmiReqEndOppnent = 1222,
-    [pbr::OriginalName("EGMI_ACK_END_OPPNENT")] EgmiAckEndOppnent = 1223,
-    [pbr::OriginalName("EGMI_REQ_CANCEL_SEARCH")] EgmiReqCancelSearch = 1224,
-    [pbr::OriginalName("EGMI_ACK_CANCEL_SEARCH")] EgmiAckCancelSearch = 1225,
-    [pbr::OriginalName("EGMI_REQ_MOVE")] EgmiReqMove = 1230,
-    [pbr::OriginalName("EGMI_ACK_MOVE")] EgmiAckMove = 1231,
-    [pbr::OriginalName("EGMI_REQ_MOVE_IMMUNE")] EgmiReqMoveImmune = 1232,
-    [pbr::OriginalName("EGMI_ACK_MOVE_IMMUNE")] EgmiAckMoveImmune = 1233,
-    [pbr::OriginalName("EGMI_REQ_STATE_SYNC")] EgmiReqStateSync = 1234,
-    [pbr::OriginalName("EGMI_ACK_STATE_SYNC")] EgmiAckStateSync = 1235,
-    [pbr::OriginalName("EGMI_REQ_POS_SYNC")] EgmiReqPosSync = 1236,
-    [pbr::OriginalName("EGMI_ACK_POS_SYNC")] EgmiAckPosSync = 1237,
-    [pbr::OriginalName("EGMI_REQ_SKILL_OBJECTX")] EgmiReqSkillObjectx = 1240,
-    [pbr::OriginalName("EGMI_ACK_SKILL_OBJECTX")] EgmiAckSkillObjectx = 1241,
-    [pbr::OriginalName("EGMI_REQ_SKILL_POS")] EgmiReqSkillPos = 1242,
-    [pbr::OriginalName("EGMI_ACK_SKILL_POS")] EgmiAckSkillPos = 1243,
-    [pbr::OriginalName("EGMI_REQ_ITEM_OBJECT")] EgmiReqItemObject = 1244,
-    [pbr::OriginalName("EGMI_ACK_ITEM_OBJECT")] EgmiAckItemObject = 1245,
-    [pbr::OriginalName("EGMI_REQ_ITEM_POS")] EgmiReqItemPos = 1246,
-    [pbr::OriginalName("EGMI_ACK_ITEM_POS")] EgmiAckItemPos = 1247,
-    [pbr::OriginalName("EGMI_REQ_CHAT")] EgmiReqChat = 1250,
-    [pbr::OriginalName("EGMI_ACK_CHAT")] EgmiAckChat = 1251,
-    [pbr::OriginalName("EGMI_REQ_SALE_ITEM")] EgmiReqSaleItem = 1252,
-    [pbr::OriginalName("EGMI_REQ_SPLIT_ITEM")] EgmiReqSplitItem = 1253,
-    [pbr::OriginalName("EGMI_REQ_PRODUCE_ITEM")] EgmiReqProduceItem = 1254,
-    [pbr::OriginalName("EGMI_REQ_PICK_ITEM")] EgmiReqPickItem = 1255,
-    [pbr::OriginalName("EGMI_REQ_ACCEPT_TASK")] EgmiReqAcceptTask = 1256,
-    [pbr::OriginalName("EGMI_REQ_COMPELETE_TASK")] EgmiReqCompeleteTask = 1257,
-    /// <summary>
-    /// </summary>
-    [pbr::OriginalName("EGMI_ACK_ONLINE_NOTIFY")] EgmiAckOnlineNotify = 1290,
-    /// <summary>
-    /// </summary>
-    [pbr::OriginalName("EGMI_ACK_OFFLINE_NOTIFY")] EgmiAckOfflineNotify = 1291,
-    /// <summary>
-    /// </summary>
-    [pbr::OriginalName("EGMI_REQ_CREATE_CLAN")] EgmiReqCreateClan = 1300,
-    /// <summary>
-    /// </summary>
-    [pbr::OriginalName("EGMI_ACK_CREATE_CLAN")] EgmiAckCreateClan = 1301,
-    /// <summary>
-    /// </summary>
-    [pbr::OriginalName("EGMI_REQ_JOIN_CLAN")] EgmiReqJoinClan = 1302,
-    /// <summary>
-    /// </summary>
-    [pbr::OriginalName("EGMI_ACK_JOIN_CLAN")] EgmiAckJoinClan = 1303,
-    /// <summary>
-    /// </summary>
-    [pbr::OriginalName("EGMI_REQ_LEAVE_CLAN")] EgmiReqLeaveClan = 1304,
-    /// <summary>
-    /// </summary>
-    [pbr::OriginalName("EGMI_ACK_LEAVE_CLAN")] EgmiAckLeaveClan = 1305,
-    /// <summary>
-    /// </summary>
-    [pbr::OriginalName("EGMI_REQ_OPR_CLAN")] EgmiReqOprClan = 1306,
-    /// <summary>
-    /// </summary>
-    [pbr::OriginalName("EGMI_ACK_OPR_CLAN")] EgmiAckOprClan = 1307,
-    /// <summary>
-    /// </summary>
-    [pbr::OriginalName("EGMI_REQ_SEARCH_CLAN")] EgmiReqSearchClan = 1308,
-    /// <summary>
-    /// </summary>
-    [pbr::OriginalName("EGMI_ACK_SEARCH_CLAN")] EgmiAckSearchClan = 1309,
-    /// <summary>
-    /// </summary>
-    [pbr::OriginalName("EGMI_REQ_CANCEL_SEARCH_CLAN")] EgmiReqCancelSearchClan = 1310,
-    /// <summary>
-    /// </summary>
-    [pbr::OriginalName("EGEC_REQ_CREATE_CHATGROUP")] EgecReqCreateChatgroup = 1400,
-    /// <summary>
-    /// </summary>
-    [pbr::OriginalName("EGEC_ACK_CREATE_CHATGROUP")] EgecAckCreateChatgroup = 1401,
-    /// <summary>
-    /// </summary>
-    [pbr::OriginalName("EGEC_REQ_JOIN_CHATGROUP")] EgecReqJoinChatgroup = 1402,
-    /// <summary>
-    /// </summary>
-    [pbr::OriginalName("EGEC_ACK_JOIN_CHATGROUP")] EgecAckJoinChatgroup = 1403,
-    /// <summary>
-    /// </summary>
-    [pbr::OriginalName("EGEC_REQ_LEAVE_CHATGROUP")] EgecReqLeaveChatgroup = 1404,
-    /// <summary>
-    /// </summary>
-    [pbr::OriginalName("EGEC_ACK_LEAVE_CHATGROUP")] EgecAckLeaveChatgroup = 1405,
-    /// <summary>
-    /// </summary>
-    [pbr::OriginalName("EGEC_REQ_SUBSCRIPTION_CHATGROUP")] EgecReqSubscriptionChatgroup = 1406,
-    /// <summary>
-    /// </summary>
-    [pbr::OriginalName("EGEC_REQ_CANCELSUBSCRIPTION_CHATGROUP")] EgecReqCancelsubscriptionChatgroup = 1407,
-    /// <summary>
-    /// </summary>
-    [pbr::OriginalName("EGEC_REQ_INVITE_CHATGROUP")] EgecReqInviteChatgroup = 1408,
-    /// <summary>
-    /// </summary>
-    [pbr::OriginalName("EGEC_ACK_INVITE_CHATGROUP")] EgecAckInviteChatgroup = 1409,
-    /// <summary>
-    /// </summary>
-    [pbr::OriginalName("EGEC_REQ_KICK_CHATGROUP")] EgecReqKickChatgroup = 1410,
-    /// <summary>
-    /// </summary>
-    [pbr::OriginalName("EGEC_ACK_KICK_CHATGROUP")] EgecAckKickChatgroup = 1411,
-    /// <summary>
-    /// </summary>
-    [pbr::OriginalName("EGEC_REQ_CHATGROUP_TO_TEAM")] EgecReqChatgroupToTeam = 1450,
-    /// <summary>
-    /// </summary>
-    [pbr::OriginalName("EGEC_ACK_CHATGROUP_TO_TEAM")] EgecAckChatgroupToTeam = 1451,
-    /// <summary>
-    /// </summary>
-    [pbr::OriginalName("EGEC_REQ_INTENSIFYLEVEL_TO_EQUIP")] EgecReqIntensifylevelToEquip = 1500,
-    /// <summary>
-    /// </summary>
-    [pbr::OriginalName("EGEC_ACK_INTENSIFYLEVEL_TO_EQUIP")] EgecAckIntensifylevelToEquip = 1501,
-    /// <summary>
-    /// </summary>
-    [pbr::OriginalName("EGEC_REQ_HOLE_TO_EQUIP")] EgecReqHoleToEquip = 1502,
-    /// <summary>
-    /// </summary>
-    [pbr::OriginalName("EGEC_ACK_HOLE_TO_EQUIP")] EgecAckHoleToEquip = 1503,
-    /// <summary>
-    /// </summary>
-    [pbr::OriginalName("EGEC_REQ_INLAYSTONE_TO_EQUIP")] EgecReqInlaystoneToEquip = 1504,
-    /// <summary>
-    /// </summary>
-    [pbr::OriginalName("EGEC_ACK_INLAYSTONE_TO_EQUIP")] EgecAckInlaystoneToEquip = 1505,
-    /// <summary>
-    /// </summary>
-    [pbr::OriginalName("EGEC_REQ_ELEMENTLEVEL_TO_EQUIP")] EgecReqElementlevelToEquip = 1506,
-    /// <summary>
-    /// </summary>
-    [pbr::OriginalName("EGEC_ACK_ELEMENTLEVEL_TO_EQUIP")] EgecAckElementlevelToEquip = 1507,
-    /// <summary>
-    /// </summary>
-    [pbr::OriginalName("EGEC_WEAR_EQUIP")] EgecWearEquip = 1508,
-    /// <summary>
-    /// </summary>
-    [pbr::OriginalName("EGEC_TAKEOFF_EQUIP")] EgecTakeoffEquip = 1509,
-    /// <summary>
-    /// </summary>
-    [pbr::OriginalName("EGEC_REQ_SET_FIGHT_HERO")] EgecReqSetFightHero = 1520,
-    /// <summary>
-    /// </summary>
-    [pbr::OriginalName("EGEC_REQ_SWITCH_FIGHT_HERO")] EgecReqSwitchFightHero = 1521,
-    /// <summary>
-    /// </summary>
-    [pbr::OriginalName("EGEC_REQ_RELIVE_HERO")] EgecReqReliveHero = 1522,
-    /// <summary>
-    /// </summary>
-    [pbr::OriginalName("EGEC_REQ_SEND_MAIL")] EgecReqSendMail = 1700,
-    /// <summary>
-    /// </summary>
-    [pbr::OriginalName("EGEC_REQ_DRAW_MAIL")] EgecReqDrawMail = 1701,
-    /// <summary>
-    /// </summary>
-    [pbr::OriginalName("EGEC_REQ_DELETE_MAIL")] EgecReqDeleteMail = 1702,
-    /// <summary>
-    ///clone
-    /// </summary>
-    [pbr::OriginalName("EGMI_ACK_CLONE_OBJECT_ENTRY")] EgmiAckCloneObjectEntry = 1800,
-    /// <summary>
-    /// </summary>
-    [pbr::OriginalName("EGMI_ACK_CLONE_OBJECT_LEAVE")] EgmiAckCloneObjectLeave = 1801,
-    /// <summary>
-    /// </summary>
-    [pbr::OriginalName("EGMI_ACK_CLONE_OBJECT_PROPERTY_ENTRY")] EgmiAckCloneObjectPropertyEntry = 1802,
-    /// <summary>
-    /// </summary>
-    [pbr::OriginalName("EGMI_ACK_CLONE_OBJECT_RECORD_ENTRY")] EgmiAckCloneObjectRecordEntry = 1803,
-    /// <summary>
-    /// </summary>
-    [pbr::OriginalName("EGMI_ACK_CLONE_PROPERTY_INT")] EgmiAckClonePropertyInt = 1810,
-    /// <summary>
-    /// </summary>
-    [pbr::OriginalName("EGMI_ACK_CLONE_PROPERTY_FLOAT")] EgmiAckClonePropertyFloat = 1811,
-    /// <summary>
-    /// </summary>
-    [pbr::OriginalName("EGMI_ACK_CLONE_PROPERTY_STRING")] EgmiAckClonePropertyString = 1812,
-    /// <summary>
-    ///EGMI_ACK_CLONE_PROPERTY_DOUBLE				= 1813;			//
-    /// </summary>
-    [pbr::OriginalName("EGMI_ACK_CLONE_PROPERTY_OBJECT")] EgmiAckClonePropertyObject = 1814,
-    /// <summary>
-    /// </summary>
-    [pbr::OriginalName("EGMI_REQSWICHSERVER")] EgmiReqswichserver = 1840,
-    /// <summary>
-    /// </summary>
-    [pbr::OriginalName("EGMI_ACKSWICHSERVER")] EgmiAckswichserver = 1841,
-    /// <summary>
-    /// </summary>
-    [pbr::OriginalName("EGMI_REQ_CREATE_TEAM")] EgmiReqCreateTeam = 1860,
-    /// <summary>
-    /// </summary>
-    [pbr::OriginalName("EGMI_ACK_CREATE_TEAM")] EgmiAckCreateTeam = 1861,
-    /// <summary>
-    /// </summary>
-    [pbr::OriginalName("EGMI_REQ_JOIN_TEAM")] EgmiReqJoinTeam = 1862,
-    /// <summary>
-    /// </summary>
-    [pbr::OriginalName("EGMI_ACK_JOIN_TEAM")] EgmiAckJoinTeam = 1863,
-    /// <summary>
-    /// </summary>
-    [pbr::OriginalName("EGMI_REQ_LEAVE_TEAM")] EgmiReqLeaveTeam = 1864,
-    /// <summary>
-    /// </summary>
-    [pbr::OriginalName("EGMI_ACK_LEAVE_TEAM")] EgmiAckLeaveTeam = 1865,
-    /// <summary>
-    /// </summary>
-    [pbr::OriginalName("EGMI_REQ_INVITE_TEAM")] EgmiReqInviteTeam = 1866,
-    /// <summary>
-    /// </summary>
-    [pbr::OriginalName("EGMI_REQ_OPRMEMBER_TEAM")] EgmiReqOprmemberTeam = 1867,
-    /// <summary>
-    /// </summary>
-    [pbr::OriginalName("EGMI_ACK_OPRMEMBER_TEAM")] EgmiAckOprmemberTeam = 1868,
-    /// <summary>
-    /// </summary>
-    [pbr::OriginalName("EGMI_REQ_TEAM_ENTER_ECTYPE")] EgmiReqTeamEnterEctype = 1869,
-    /// <summary>
-    /// </summary>
-    [pbr::OriginalName("EGMI_ACK_TEAM_ENTER_ECTYPE")] EgmiAckTeamEnterEctype = 1870,
-    /// <summary>
-    //////////////////////MapModule/////////////////////////////////////
-    /// </summary>
-    [pbr::OriginalName("EGMI_REQ_MAP_GRID_INFO")] EgmiReqMapGridInfo = 1900,
-    /// <summary>
-    /// </summary>
-    [pbr::OriginalName("EGMI_ACK_MAP_GRID_INFO")] EgmiAckMapGridInfo = 1901,
-    /// <summary>
-    /// </summary>
-    [pbr::OriginalName("EGMI_REQ_BIG_MAP_INFO")] EgmiReqBigMapInfo = 1902,
-    /// <summary>
-    /// </summary>
-    [pbr::OriginalName("EGMI_ACK_BIG_MAP_INFO")] EgmiAckBigMapInfo = 1903,
-    /// <summary>
-    /// </summary>
-    [pbr::OriginalName("EGMI_REQ_HOLD_MAP_GRID")] EgmiReqHoldMapGrid = 1910,
-    /// <summary>
-    /// </summary>
-    [pbr::OriginalName("EGMI_ACK_HOLD_MAP_GRID")] EgmiAckHoldMapGrid = 1911,
-    /// <summary>
-    /// </summary>
-    [pbr::OriginalName("EGMI_REQ_LEAVE_MSG_MAP_GRID")] EgmiReqLeaveMsgMapGrid = 1912,
-    /// <summary>
-    /// </summary>
-    [pbr::OriginalName("EGMI_ACK_LEAVE_MSG_MAP_GRID")] EgmiAckLeaveMsgMapGrid = 1913,
-    /// <summary>
-    /// </summary>
-    [pbr::OriginalName("EGMI_REQ_GET_MAP_GRID_AWARD")] EgmiReqGetMapGridAward = 1914,
-    /// <summary>
-    /// </summary>
-    [pbr::OriginalName("EGMI_ACK_GET_MAP_GRID_AWARD")] EgmiAckGetMapGridAward = 1915,
-    /// <summary>
-    /// </summary>
-    [pbr::OriginalName("EGMI_REQ_MAP_GRID_HUNTING")] EgmiReqMapGridHunting = 1916,
-    /// <summary>
-    /// </summary>
-    [pbr::OriginalName("EGMI_ACK_MAP_GRID_HUNTING")] EgmiAckMapGridHunting = 1917,
-    /// <summary>
-    /// </summary>
-    [pbr::OriginalName("EGMI_REQ_MAP_GRID_KING_WAR")] EgmiReqMapGridKingWar = 1918,
-    /// <summary>
-    /// </summary>
-    [pbr::OriginalName("EGMI_ACK_MAP_GRID_KING_WAR")] EgmiAckMapGridKingWar = 1919,
-    /// <summary>
-    ///GAME SERVER TO WORLD SERVER
-    /// </summary>
-    [pbr::OriginalName("EGMI_REQ_ADD_BUILDING")] EgmiReqAddBuilding = 5000,
-    /// <summary>
-    /// </summary>
-    [pbr::OriginalName("EGMI_REQ_ACK_BUILDING_LIST")] EgmiReqAckBuildingList = 5001,
-    [pbr::OriginalName("EGMI_REQ_STORE_BUILDING_LIST")] EgmiReqStoreBuildingList = 5010,
-    [pbr::OriginalName("EGMI_REQ_ACK_FRIEND_LIST")] EgmiReqAckFriendList = 6000,
-    [pbr::OriginalName("EGMI_ACK_FRIEND_DELETE")] EgmiAckFriendDelete = 6001,
-    [pbr::OriginalName("EGMI_ACK_FRIEND_ADD")] EgmiAckFriendAdd = 6002,
-    [pbr::OriginalName("EGMI_ACK_INVITE_ADD")] EgmiAckInviteAdd = 6003,
-    [pbr::OriginalName("EGMI_REQ_ACK_SEND_INVITE")] EgmiReqAckSendInvite = 6010,
-    [pbr::OriginalName("EGMI_REQ_ACK_ACCEPT_INVITE")] EgmiReqAckAcceptInvite = 6011,
-    [pbr::OriginalName("EGMI_REQ_ACK_REJECT_INVITE")] EgmiReqAckRejectInvite = 6012,
-    [pbr::OriginalName("EGMI_REQ_ACK_IGNORE_INVITE")] EgmiReqAckIgnoreInvite = 6013,
-    [pbr::OriginalName("EGMI_REQ_ACK_BLOCK_PLAYER")] EgmiReqAckBlockPlayer = 6014,
-    [pbr::OriginalName("EGMI_REQ_ACK_UNBLOCK_PLAYER")] EgmiReqAckUnblockPlayer = 6015,
-    [pbr::OriginalName("EGMI_ACK_TEAM_INVITE")] EgmiAckTeamInvite = 6100,
-    [pbr::OriginalName("EGMI_ACK_TEAM_LIST")] EgmiAckTeamList = 6105,
-    [pbr::OriginalName("EGMI_ACK_TEAM_ADD")] EgmiAckTeamAdd = 6106,
-    [pbr::OriginalName("EGMI_ACK_TEAM_LEAVE")] EgmiAckTeamLeave = 6107,
-    [pbr::OriginalName("EGMI_REQ_ACK_SEND_TEAM_INVITE")] EgmiReqAckSendTeamInvite = 6120,
-    [pbr::OriginalName("EGMI_REQ_ACK_CANCEL_TEAM_INVITE")] EgmiReqAckCancelTeamInvite = 6121,
-    [pbr::OriginalName("EGMI_REQ_ACK_ACCEPT_TEAM_INVITE")] EgmiReqAckAcceptTeamInvite = 6122,
-    [pbr::OriginalName("EGMI_REQ_ACK_REJECT_TEAM_INVITE")] EgmiReqAckRejectTeamInvite = 6123,
-    [pbr::OriginalName("EGMI_REQ_ACK_SEND_TEAM_READY")] EgmiReqAckSendTeamReady = 6130,
-    [pbr::OriginalName("EGMI_REQ_ACK_ACCEPT_TEAM_READY")] EgmiReqAckAcceptTeamReady = 6131,
-    [pbr::OriginalName("EGMI_REQ_ACK_REJECT_TEAM_READY")] EgmiReqAckRejectTeamReady = 6132,
-    /// <summary>
-    //////////////////////GM MSG/////////////////////////////////////
-    /// </summary>
-    [pbr::OriginalName("EGMI_REQ_CMD_PROPERTY_INT")] EgmiReqCmdPropertyInt = 10000,
-    /// <summary>
-    /// </summary>
-    [pbr::OriginalName("EGMI_REQ_CMD_PROPERTY_STR")] EgmiReqCmdPropertyStr = 10001,
-    /// <summary>
-    /// </summary>
-    [pbr::OriginalName("EGMI_REQ_CMD_PROPERTY_OBJECT")] EgmiReqCmdPropertyObject = 10002,
-    /// <summary>
-    /// </summary>
-    [pbr::OriginalName("EGMI_REQ_CMD_PROPERTY_FLOAT")] EgmiReqCmdPropertyFloat = 10003,
-    /// <summary>
-    /// </summary>
-    [pbr::OriginalName("EGMI_REQ_CMD_RECORD_INT")] EgmiReqCmdRecordInt = 10004,
-    /// <summary>
-    ///ַ
-    /// </summary>
-    [pbr::OriginalName("EGMI_REQ_CMD_RECORD_STR")] EgmiReqCmdRecordStr = 10005,
-    /// <summary>
-    /// </summary>
-    [pbr::OriginalName("EGMI_REQ_CMD_RECORD_OBJECT")] EgmiReqCmdRecordObject = 10006,
-    /// <summary>
-    /// </summary>
-    [pbr::OriginalName("EGMI_REQ_CMD_RECORD_FLOAT")] EgmiReqCmdRecordFloat = 10007,
-    /// <summary>
-    /// </summary>
-    [pbr::OriginalName("EGMI_REQ_CMD_NORMAL")] EgmiReqCmdNormal = 10008,
-    [pbr::OriginalName("EGMI_REQ_QUERY_SERVER_STATUS")] EgmiReqQueryServerStatus = 10200,
-    /// <summary>
-    //////////////////////Base SLG MSG/////////////////////////////////////
-    /// </summary>
-    [pbr::OriginalName("EGMI_REQ_BUY_FORM_SHOP")] EgmiReqBuyFormShop = 20000,
-    [pbr::OriginalName("EGMI_ACK_BUY_FORM_SHOP")] EgmiAckBuyFormShop = 20001,
-    [pbr::OriginalName("EGMI_REQ_MOVE_BUILD_OBJECT")] EgmiReqMoveBuildObject = 20002,
-    [pbr::OriginalName("EGMI_ACK_MOVE_BUILD_OBJECT")] EgmiAckMoveBuildObject = 20003,
-    [pbr::OriginalName("EGMI_REQ_UP_BUILD_LVL")] EgmiReqUpBuildLvl = 20101,
-    [pbr::OriginalName("EGMI_REQ_CREATE_ITEM")] EgmiReqCreateItem = 20102,
-    [pbr::OriginalName("EGMI_REQ_BUILD_OPERATE")] EgmiReqBuildOperate = 20103,
+    [pbr::OriginalName("ACK_RECORD_STRING")] AckRecordString = 226,
+    [pbr::OriginalName("ACK_RECORD_OBJECT")] AckRecordObject = 227,
+    [pbr::OriginalName("ACK_RECORD_VECTOR2")] AckRecordVector2 = 228,
+    [pbr::OriginalName("ACK_RECORD_VECTOR3")] AckRecordVector3 = 229,
+    [pbr::OriginalName("ACK_RECORD_CLEAR")] AckRecordClear = 250,
+    [pbr::OriginalName("ACK_RECORD_SORT")] AckRecordSort = 251,
+    [pbr::OriginalName("ACK_DATA_FINISHED")] AckDataFinished = 260,
+    [pbr::OriginalName("REQ_AI_ONWER")] ReqAiOnwer = 270,
+    [pbr::OriginalName("REQ_MOVE")] ReqMove = 300,
+    [pbr::OriginalName("ACK_MOVE")] AckMove = 301,
+    [pbr::OriginalName("REQ_MOVE_IMMUNE")] ReqMoveImmune = 302,
+    [pbr::OriginalName("ACK_MOVE_IMMUNE")] AckMoveImmune = 303,
+    [pbr::OriginalName("REQ_STATE_SYNC")] ReqStateSync = 304,
+    [pbr::OriginalName("ACK_STATE_SYNC")] AckStateSync = 305,
+    [pbr::OriginalName("REQ_POS_SYNC")] ReqPosSync = 306,
+    [pbr::OriginalName("ACK_POS_SYNC")] AckPosSync = 307,
+    [pbr::OriginalName("REQ_SKILL_OBJECTX")] ReqSkillObjectx = 400,
+    [pbr::OriginalName("ACK_SKILL_OBJECTX")] AckSkillObjectx = 401,
+    [pbr::OriginalName("REQ_SKILL_POS")] ReqSkillPos = 402,
+    [pbr::OriginalName("ACK_SKILL_POS")] AckSkillPos = 403,
+    [pbr::OriginalName("REQ_ITEM_OBJECT")] ReqItemObject = 500,
+    [pbr::OriginalName("ACK_ITEM_OBJECT")] AckItemObject = 501,
+    [pbr::OriginalName("REQ_ITEM_POS")] ReqItemPos = 502,
+    [pbr::OriginalName("ACK_ITEM_POS")] AckItemPos = 503,
+    [pbr::OriginalName("ACK_ONLINE_NOTIFY")] AckOnlineNotify = 600,
+    [pbr::OriginalName("ACK_OFFLINE_NOTIFY")] AckOfflineNotify = 601,
   }
 
   /// <summary>
@@ -956,415 +373,72 @@ namespace NFMsg {
     /// <summary>
     ///this kind of skill just can damage one object
     /// </summary>
-    [pbr::OriginalName("EST_BRIEF_SINGLE")] EstBriefSingle = 0,
+    [pbr::OriginalName("BRIEF_SINGLE_SKILL")] BriefSingleSkill = 0,
     /// <summary>
     ///this kind of skill can damage multiple objects
     /// </summary>
-    [pbr::OriginalName("EST_BRIEF_GROUP")] EstBriefGroup = 1,
+    [pbr::OriginalName("BRIEF_GROUP_SKILL")] BriefGroupSkill = 1,
     /// <summary>
     ///this kind of bullet just can damage one object
     /// </summary>
-    [pbr::OriginalName("EST_BULLET_SINGLE")] EstBulletSingle = 2,
+    [pbr::OriginalName("BULLET_SINGLE_SKILL")] BulletSingleSkill = 2,
     /// <summary>
     ///this kind of bullet can damage multiple objects via rebound
     /// </summary>
-    [pbr::OriginalName("EST_BULLET_REBOUND")] EstBulletRebound = 3,
+    [pbr::OriginalName("BULLET_REBOUND_SKILL")] BulletReboundSkill = 3,
     /// <summary>
     ///this kind of bullet can damage multiple objects who around the target when the bullet touched the target object
     /// </summary>
-    [pbr::OriginalName("EST_BULLET_TARGET_BOMB")] EstBulletTargetBomb = 4,
+    [pbr::OriginalName("BULLET_TARGET_BOMB_SKILL")] BulletTargetBombSkill = 4,
     /// <summary>
     ///this kind of bullet can damage multiple objects  who around the target when the bullet arrived the position
     /// </summary>
-    [pbr::OriginalName("EST_BULLET_POS_BOMB")] EstBulletPosBomb = 5,
-  }
-
-  public enum EItemType {
-    /// <summary>
-    ///the equipment which can add props
-    /// </summary>
-    [pbr::OriginalName("EIT_EQUIP")] EitEquip = 0,
-    /// <summary>
-    ///the gem ca be embed to the equipment
-    /// </summary>
-    [pbr::OriginalName("EIT_GEM")] EitGem = 1,
-    /// <summary>
-    ///expendable items for player, such as a medicine that cures
-    /// </summary>
-    [pbr::OriginalName("EIT_SUPPLY")] EitSupply = 2,
-    /// <summary>
-    ///special items that can call a hero or others, special items can do what you want to do
-    /// </summary>
-    [pbr::OriginalName("EIT_SCROLL")] EitScroll = 3,
-  }
-
-  /// <summary>
-  ///the sub items type of EIT_EQUIP
-  /// </summary>
-  public enum EGameEquipSubType {
-    /// <summary>
-    /// </summary>
-    [pbr::OriginalName("EQUIPTYPE_WEAPON")] EquiptypeWeapon = 0,
-    /// <summary>
-    /// </summary>
-    [pbr::OriginalName("EQUIPTYPE_HELMET")] EquiptypeHelmet = 1,
-    /// <summary>
-    /// </summary>
-    [pbr::OriginalName("EQUIPTYPE_ARMOR")] EquiptypeArmor = 2,
-    /// <summary>
-    /// </summary>
-    [pbr::OriginalName("EQUIPTYPE_HAND")] EquiptypeHand = 3,
-    /// <summary>
-    /// </summary>
-    [pbr::OriginalName("EQUIPTYPE_RING")] EquiptypeRing = 4,
-    /// <summary>
-    /// </summary>
-    [pbr::OriginalName("EQUIPTYPE_BOOT")] EquiptypeBoot = 5,
-  }
-
-  /// <summary>
-  ///the sub items type of EIT_GEM
-  /// </summary>
-  public enum EGameGemSubType {
-    /// <summary>
-    /// </summary>
-    [pbr::OriginalName("EGGSTYPE_GEM_ATK")] EggstypeGemAtk = 0,
-    /// <summary>
-    /// </summary>
-    [pbr::OriginalName("EGGSTYPE_GEM_DEF")] EggstypeGemDef = 1,
-    /// <summary>
-    /// </summary>
-    [pbr::OriginalName("EGGSTYPE_GEM_FIRE")] EggstypeGemFire = 3,
-    /// <summary>
-    /// </summary>
-    [pbr::OriginalName("EGGSTYPE_GEM_LIGHT")] EggstypeGemLight = 4,
-    /// <summary>
-    /// </summary>
-    [pbr::OriginalName("EGGSTYPE_GEM_WIND")] EggstypeGemWind = 5,
-    /// <summary>
-    /// </summary>
-    [pbr::OriginalName("EGGSTYPE_GEM_ICE")] EggstypeGemIce = 6,
-    /// <summary>
-    /// </summary>
-    [pbr::OriginalName("EGGSTYPE_GEM_POISON")] EggstypeGemPoison = 7,
-    /// <summary>
-    /// </summary>
-    [pbr::OriginalName("EGGSTYPE_GEM_DRAK")] EggstypeGemDrak = 8,
-  }
-
-  /// <summary>
-  ///the sub items type of EIT_ITEM
-  /// </summary>
-  public enum EGameSupplySubType {
-    /// <summary>
-    /// </summary>
-    [pbr::OriginalName("EGIT_ITEM_WATER")] EgitItemWater = 0,
-    /// <summary>
-    /// </summary>
-    [pbr::OriginalName("EGIT_ITEM_DIAMOND")] EgitItemDiamond = 1,
-    /// <summary>
-    /// </summary>
-    [pbr::OriginalName("EGIT_ITEM_CURRENCY")] EgitItemCurrency = 2,
-    /// <summary>
-    /// </summary>
-    [pbr::OriginalName("EGIT_ITEM_EXP")] EgitItemExp = 3,
-    /// <summary>
-    /// </summary>
-    [pbr::OriginalName("EGIT_ITEM_HP")] EgitItemHp = 4,
-    /// <summary>
-    /// </summary>
-    [pbr::OriginalName("EGIT_ITEM_MP")] EgitItemMp = 5,
-    /// <summary>
-    /// </summary>
-    [pbr::OriginalName("EGIT_ITEM_SP")] EgitItemSp = 6,
-    /// <summary>
-    /// </summary>
-    [pbr::OriginalName("EGIT_ITEM_PACK")] EgitItemPack = 7,
-    /// <summary>
-    /// </summary>
-    [pbr::OriginalName("EGIT_ITEM_MEMORY_POS")] EgitItemMemoryPos = 8,
-  }
-
-  /// <summary>
-  ///the sub items type of EIT_TOKEN
-  /// </summary>
-  public enum EGameScrollSubType {
-    /// <summary>
-    /// </summary>
-    [pbr::OriginalName("EGTST_TOKEN_HERO_CARD")] EgtstTokenHeroCard = 0,
-    /// <summary>
-    /// </summary>
-    [pbr::OriginalName("EGTST_TOKEN_POSITION")] EgtstTokenPosition = 1,
-    /// <summary>
-    /// </summary>
-    [pbr::OriginalName("EGTST_TOKEN_BOUNTY")] EgtstTokenBounty = 2,
-    /// <summary>
-    ///a token that can join a activity
-    /// </summary>
-    [pbr::OriginalName("EGTST_TOKEN_ACTIVITY")] EgtstTokenActivity = 3,
-    /// <summary>
-    ///a token that can call a building or power
-    /// </summary>
-    [pbr::OriginalName("EGTST_TOKEN_BUILD")] EgtstTokenBuild = 4,
-  }
-
-  /// <summary>
-  /// </summary>
-  public enum EGameItemExpiredType {
-    /// <summary>
-    /// </summary>
-    [pbr::OriginalName("EGIET_NONE")] EgietNone = 0,
-    /// <summary>
-    /// </summary>
-    [pbr::OriginalName("EGIET_USE_TIMES")] EgietUseTimes = 1,
-    /// <summary>
-    /// </summary>
-    [pbr::OriginalName("EGIET_REAL_TIME")] EgietRealTime = 2,
-    [pbr::OriginalName("EGIET_END_INDEX")] EgietEndIndex = 3,
-  }
-
-  public enum EDrawDropItemState {
-    /// <summary>
-    /// </summary>
-    [pbr::OriginalName("E_DRAW_STATE_NONE")] EDrawStateNone = 0,
-    /// <summary>
-    /// </summary>
-    [pbr::OriginalName("E_DRAW_STATE_GAIN")] EDrawStateGain = 1,
-    /// <summary>
-    /// </summary>
-    [pbr::OriginalName("E_DRAW_STATE_RECV")] EDrawStateRecv = 2,
-  }
-
-  /// <summary>
-  ////////////////////////////////////////////////////////////////////////////////////////////////////
-  /// </summary>
-  public enum EGuildPowerType {
-    /// <summary>
-    /// </summary>
-    [pbr::OriginalName("CLAN_POWER_TYPE_NORMAL")] ClanPowerTypeNormal = 0,
-    /// <summary>
-    /// </summary>
-    [pbr::OriginalName("CLAN_POWER_TYPE_VICE_PRESIDENT")] ClanPowerTypeVicePresident = 1,
-    /// <summary>
-    /// </summary>
-    [pbr::OriginalName("CLAN_POWER_TYPE_PRESIDENT")] ClanPowerTypePresident = 2,
-  }
-
-  /// <summary>
-  /// </summary>
-  public enum ETaskState {
-    /// <summary>
-    /// </summary>
-    [pbr::OriginalName("TASK_IN_PROCESS")] TaskInProcess = 0,
-    /// <summary>
-    /// </summary>
-    [pbr::OriginalName("TASK_DONE")] TaskDone = 1,
-    /// <summary>
-    /// </summary>
-    [pbr::OriginalName("TASK_DRAW_AWARD")] TaskDrawAward = 2,
-    /// <summary>
-    /// </summary>
-    [pbr::OriginalName("TASK_FINISH")] TaskFinish = 3,
-  }
-
-  /// <summary>
-  /// </summary>
-  public enum ETaskType {
-    /// <summary>
-    /// </summary>
-    [pbr::OriginalName("TASK_LEVEL_UPDATE_SOME_LEVEL")] TaskLevelUpdateSomeLevel = 0,
-    /// <summary>
-    /// </summary>
-    [pbr::OriginalName("TASK_PASS_ECTYPE")] TaskPassEctype = 1,
-    /// <summary>
-    /// </summary>
-    [pbr::OriginalName("TASK_PASS_ECTYPE_COUNT")] TaskPassEctypeCount = 2,
-    /// <summary>
-    /// </summary>
-    [pbr::OriginalName("TASK_PASS_SOME_TYPE_ECTYPE_COUNT")] TaskPassSomeTypeEctypeCount = 3,
-    /// <summary>
-    /// </summary>
-    [pbr::OriginalName("TASK_UPDATE_SKILL_COUNT")] TaskUpdateSkillCount = 4,
-    /// <summary>
-    /// </summary>
-    [pbr::OriginalName("TASK_CONSUME_MONEY")] TaskConsumeMoney = 5,
-    /// <summary>
-    /// </summary>
-    [pbr::OriginalName("TASK_CONSUME_DIAMOND")] TaskConsumeDiamond = 6,
-    /// <summary>
-    /// </summary>
-    [pbr::OriginalName("TASK_ARENA_COUNT")] TaskArenaCount = 7,
-    /// <summary>
-    /// </summary>
-    [pbr::OriginalName("TASK_KILL_MONSTER_COUNT")] TaskKillMonsterCount = 8,
-    /// <summary>
-    /// </summary>
-    [pbr::OriginalName("TASK_KILL_SOME_MONSTER_COUNT")] TaskKillSomeMonsterCount = 9,
+    [pbr::OriginalName("BULLET_POS_BOMB_SKILL")] BulletPosBombSkill = 5,
   }
 
   public enum ESceneType {
     /// <summary>
     ///public town
     /// </summary>
-    [pbr::OriginalName("SCENE_NORMAL")] SceneNormal = 0,
+    [pbr::OriginalName("NORMAL_SCENE")] NormalScene = 0,
     /// <summary>
     ///single boss underground city
     /// </summary>
-    [pbr::OriginalName("SCENE_SINGLE_CLONE")] SceneSingleClone = 1,
+    [pbr::OriginalName("SINGLE_CLONE_SCENE")] SingleCloneScene = 1,
     /// <summary>
     ///world boss underground city
     /// </summary>
-    [pbr::OriginalName("SCENE_MULTI_CLONE")] SceneMultiClone = 2,
+    [pbr::OriginalName("MULTI_CLONE_SCENE")] MultiCloneScene = 2,
     /// <summary>
     ///private
     /// </summary>
-    [pbr::OriginalName("SCENE_HOME")] SceneHome = 3,
+    [pbr::OriginalName("HOME_SCENE")] HomeScene = 3,
     /// <summary>
     ///private
     /// </summary>
-    [pbr::OriginalName("SCENE_CLAN")] SceneClan = 4,
+    [pbr::OriginalName("CLAN_SCENE")] ClanScene = 4,
   }
 
-  /// <summary>
-  /// </summary>
-  public enum EPVPType {
-    [pbr::OriginalName("PVP_HOME")] PvpHome = 0,
-    [pbr::OriginalName("PVP_INDIVIDUAL")] PvpIndividual = 1,
-    [pbr::OriginalName("PVP_DOTA")] PvpDota = 2,
-    [pbr::OriginalName("PVP_SURVIVAL")] PvpSurvival = 3,
-    [pbr::OriginalName("PVP_CLAN_WAR")] PvpClanWar = 4,
-    [pbr::OriginalName("PVP_CLAN_DUNGEON")] PvpClanDungeon = 5,
-  }
-
-  public enum EShopType {
-    /// <summary>
-    /// </summary>
-    [pbr::OriginalName("EST_UNKNOW")] EstUnknow = 0,
-    /// <summary>
-    /// </summary>
-    [pbr::OriginalName("EST_BUILDING")] EstBuilding = 1,
-    /// <summary>
-    /// </summary>
-    [pbr::OriginalName("EST_GOLD")] EstGold = 2,
-    /// <summary>
-    /// </summary>
-    [pbr::OriginalName("EST_ITEM")] EstItem = 3,
-    /// <summary>
-    /// </summary>
-    [pbr::OriginalName("EST_EQUIP")] EstEquip = 5,
-    /// <summary>
-    /// </summary>
-    [pbr::OriginalName("EST_GEM")] EstGem = 6,
-    /// <summary>
-    /// </summary>
-    [pbr::OriginalName("EST_CARD")] EstCard = 7,
-  }
-
-  public enum ERankType {
-    [pbr::OriginalName("ERT_UNKNOW")] ErtUnknow = 0,
-    [pbr::OriginalName("ERT_PLAYER_LEVEL")] ErtPlayerLevel = 1,
-    [pbr::OriginalName("ERT_FIGHT_VALUE")] ErtFightValue = 2,
-    [pbr::OriginalName("ERT_PLAYER_MONEY")] ErtPlayerMoney = 3,
-    [pbr::OriginalName("ERT_CLAN_LEVEL")] ErtClanLevel = 4,
-    [pbr::OriginalName("ERT_CLAN_KINGSOURCE")] ErtClanKingsource = 5,
-  }
-
-  /// <summary>
-  ///NPCTypenpc
-  /// </summary>
   public enum ENPCType {
     /// <summary>
     /// </summary>
-    [pbr::OriginalName("ENPCTYPE_NORMAL")] Normal = 0,
+    [pbr::OriginalName("NORMAL_NPC")] NormalNpc = 0,
     /// <summary>
     /// </summary>
-    [pbr::OriginalName("ENPCTYPE_HERO")] Hero = 1,
+    [pbr::OriginalName("HERO_NPC")] HeroNpc = 1,
     /// <summary>
     /// </summary>
-    [pbr::OriginalName("ENPCTYPE_TURRET")] Turret = 2,
-  }
-
-  public enum ESubNPCType_TURRET {
-    [pbr::OriginalName("ENPCTYPE_SUB_STORAGE")] EnpctypeSubStorage = 0,
-    [pbr::OriginalName("ENPCTYPE_SUB_WEAPONE")] EnpctypeSubWeapone = 1,
-    [pbr::OriginalName("ENPCTYPE_SUB_GUARD")] EnpctypeSubGuard = 2,
-    [pbr::OriginalName("ENPCTYPE_SUB_BOMB")] EnpctypeSubBomb = 3,
-    [pbr::OriginalName("ENPCTYPE_SUB_TRAP")] EnpctypeSubTrap = 4,
-  }
-
-  public enum EMeleeType {
-    /// <summary>
-    /// </summary>
-    [pbr::OriginalName("ETYPE_MELEE")] EtypeMelee = 0,
-    /// <summary>
-    /// </summary>
-    [pbr::OriginalName("ETYPE_MELEE_DASH")] EtypeMeleeDash = 1,
-    /// <summary>
-    /// </summary>
-    [pbr::OriginalName("ETYPE_RANGER")] EtypeRanger = 2,
-  }
-
-  public enum EEffectObjType {
-    /// <summary>
-    /// </summary>
-    [pbr::OriginalName("ETARGETTYPE_ENEMY")] EtargettypeEnemy = 0,
-    /// <summary>
-    /// </summary>
-    [pbr::OriginalName("ETARGETTYPE_SELF")] EtargettypeSelf = 1,
-    /// <summary>
-    /// </summary>
-    [pbr::OriginalName("ETARGETTYPE_FRIEND")] EtargettypeFriend = 2,
-  }
-
-  /// <summary>
-  ///PropertyType
-  /// </summary>
-  public enum EPropertyType {
-    /// <summary>
-    /// </summary>
-    [pbr::OriginalName("EPT_UNKNOW")] EptUnknow = 0,
-    /// <summary>
-    /// </summary>
-    [pbr::OriginalName("EPT_STRENGTH")] EptStrength = 1,
-    /// <summary>
-    /// </summary>
-    [pbr::OriginalName("EPT_AGILITY")] EptAgility = 2,
-    /// <summary>
-    /// </summary>
-    [pbr::OriginalName("EPT_INTELLIGENCE")] EptIntelligence = 3,
-  }
-
-  /// <summary>
-  /// </summary>
-  public enum EGameElementType {
-    /// <summary>
-    /// </summary>
-    [pbr::OriginalName("EELEMENTTYPE_FIRE")] EelementtypeFire = 0,
-    /// <summary>
-    /// </summary>
-    [pbr::OriginalName("EELEMENTTYPE_LIGHT")] EelementtypeLight = 1,
-    /// <summary>
-    /// </summary>
-    [pbr::OriginalName("EELEMENTTYPE_WIND")] EelementtypeWind = 2,
-    /// <summary>
-    /// </summary>
-    [pbr::OriginalName("EELEMENTTYPE_ICE")] EelementtypeIce = 3,
-    /// <summary>
-    /// </summary>
-    [pbr::OriginalName("EELEMENTTYPE_POISON")] EelementtypePoison = 4,
-    /// <summary>
-    /// </summary>
-    [pbr::OriginalName("EELEMENTTYPE_DARK")] EelementtypeDark = 5,
+    [pbr::OriginalName("TURRET_NPC")] TurretNpc = 2,
   }
 
   public enum EBattleType {
-    [pbr::OriginalName("EBT_SINGLE_MODE")] EbtSingleMode = 0,
-    [pbr::OriginalName("EBT_MULTI_MODE")] EbtMultiMode = 1,
-    [pbr::OriginalName("EBT_CLAN_MODE")] EbtClanMode = 2,
-    [pbr::OriginalName("EBT_CLAN_BOSS_MODE")] EbtClanBossMode = 3,
-    [pbr::OriginalName("EBT_WORLD_BOSS_MODE")] EbtWorldBossMode = 4,
-    [pbr::OriginalName("EBT_MOBA_MODE")] EbtMobaMode = 5,
-    [pbr::OriginalName("EBT_SURVIVAL_MODE")] EbtSurvivalMode = 6,
+    [pbr::OriginalName("SINGLE_MODE")] SingleMode = 0,
+    [pbr::OriginalName("MULTI_MODE")] MultiMode = 1,
+    [pbr::OriginalName("CLAN_MODE")] ClanMode = 2,
+    [pbr::OriginalName("CLAN_BOSS_MODE")] ClanBossMode = 3,
+    [pbr::OriginalName("WORLD_BOSS_MODE")] WorldBossMode = 4,
+    [pbr::OriginalName("MOBA_MODE")] MobaMode = 5,
+    [pbr::OriginalName("SURVIVAL_MODE")] SurvivalMode = 6,
   }
 
   #endregion

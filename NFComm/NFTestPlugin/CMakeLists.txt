@@ -25,7 +25,6 @@ if(UNIX)
 	target_link_libraries(NFTestPlugin -static-libstdc++)
 
 	add_definitions(
-		-D_USRDLL
 		-DELPP_NO_DEFAULT_LOG_FILE
 	)
 	
@@ -35,7 +34,6 @@ else()
 	
 	add_definitions(
 		-DWIN
-		-D_USRDLL
 		-DELPP_NO_DEFAULT_LOG_FILE
 	)
 endif()

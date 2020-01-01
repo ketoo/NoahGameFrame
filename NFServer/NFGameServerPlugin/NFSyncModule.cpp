@@ -61,18 +61,9 @@ bool NFSyncModule::AfterInit()
 	m_pKernelModule->AddClassCallBack(NFrame::Player::ThisName(), this, &NFSyncModule::OnPlayerClassEvent);
 
 
-	if (!m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_REQ_SEARCH_OPPNENT, this, &NFSyncModule::OnReqPosSyncProcess)) { return false; }
-
     return true;
 }
 
-void NFSyncModule::OnReqPosSyncProcess(const NFSOCK nSockIndex, const int nMsgID, const char *msg, const uint32_t nLen)
-{
-	CLIENT_MSG_PROCESS(nMsgID, msg, nLen, NFMsg::ReqAckPlayerPosSync);
-
-
-
-}
 
 int NFSyncModule::SyncHeart(const std::string & strHeartName, const float fTime, const int nCount)
 {
@@ -100,13 +91,13 @@ int NFSyncModule::OnPlayerClassEvent(const NFGUID & self, const std::string & st
 {
 	if (CLASS_OBJECT_EVENT::COE_CREATE_FINISH == eClassEvent)
 	{
-		m_pKernelModule->AddPropertyCallBack(self, NFrame::Player::Position(), this, &NFSyncModule::OnPlayePositionPEvent);
+		m_pKernelModule->AddPropertyCallBack(self, NFrame::Player::Position(), this, &NFSyncModule::OnPlayePositionEvent);
 	}
 
 	return 0;
 }
 
-int NFSyncModule::OnPlayePositionPEvent(const NFGUID & self, const std::string & strPropertyName, const NFData & oldVar, const NFData & newVar)
+int NFSyncModule::OnPlayePositionEvent(const NFGUID & self, const std::string & strPropertyName, const NFData & oldVar, const NFData & newVar)
 {
 	return 0;
 }

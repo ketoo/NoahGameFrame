@@ -9,7 +9,7 @@ add_library(NFMasterNet_HttpServerPlugin STATIC
 set_target_properties( NFMasterNet_HttpServerPlugin PROPERTIES OUTPUT_NAME_DEBUG "NFMasterNet_HttpServerPlugin")
 set_target_properties( NFMasterNet_HttpServerPlugin PROPERTIES PREFIX "")
 set_target_properties( NFMasterNet_HttpServerPlugin PROPERTIES 
-	FOLDER "NFServer/MasterServer"
+	FOLDER "NFServer/NFMasterNet_HttpServerPlugin"
 	ARCHIVE_OUTPUT_DIRECTORY ${NFOutPutDir}
 	RUNTIME_OUTPUT_DIRECTORY ${NFOutPutDir}
 	LIBRARY_OUTPUT_DIRECTORY ${NFOutPutDir} )
@@ -18,7 +18,6 @@ link_NFSDK("NFMasterNet_HttpServerPlugin")
 if(UNIX)
 	target_link_libraries(NFMasterNet_HttpServerPlugin -static-libstdc++)
 	add_definitions(
-		-D_USRDLL
 		-DELPP_NO_DEFAULT_LOG_FILE
 	)
 	
@@ -26,7 +25,6 @@ else()
 	target_link_libraries(NFMasterNet_HttpServerPlugin -static-libstdc++)
 	add_definitions(
 		-DWIN
-		-D_USRDLL
 		-DELPP_NO_DEFAULT_LOG_FILE
 	)
 	

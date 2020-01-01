@@ -51,11 +51,11 @@ bool NFLoginNet_ServerModule::BeforeShut()
 
 bool NFLoginNet_ServerModule::AfterInit()
 {
-	m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_STS_HEART_BEAT, this, &NFLoginNet_ServerModule::OnHeartBeat);
-	m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_REQ_LOGIN, this, &NFLoginNet_ServerModule::OnLoginProcess);
-	m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_REQ_LOGOUT, this, &NFLoginNet_ServerModule::OnLogOut);
-	m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_REQ_CONNECT_WORLD, this, &NFLoginNet_ServerModule::OnSelectWorldProcess);
-	m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_REQ_WORLD_LIST, this, &NFLoginNet_ServerModule::OnViewWorldProcess);
+	m_pNetModule->AddReceiveCallBack(NFMsg::STS_HEART_BEAT, this, &NFLoginNet_ServerModule::OnHeartBeat);
+	m_pNetModule->AddReceiveCallBack(NFMsg::REQ_LOGIN, this, &NFLoginNet_ServerModule::OnLoginProcess);
+	m_pNetModule->AddReceiveCallBack(NFMsg::REQ_LOGOUT, this, &NFLoginNet_ServerModule::OnLogOut);
+	m_pNetModule->AddReceiveCallBack(NFMsg::REQ_CONNECT_WORLD, this, &NFLoginNet_ServerModule::OnSelectWorldProcess);
+	m_pNetModule->AddReceiveCallBack(NFMsg::REQ_WORLD_LIST, this, &NFLoginNet_ServerModule::OnViewWorldProcess);
 	m_pNetModule->AddReceiveCallBack(this, &NFLoginNet_ServerModule::InvalidMessage);
 
 	m_pNetModule->AddEventCallBack(this, &NFLoginNet_ServerModule::OnSocketClientEvent);
@@ -107,7 +107,7 @@ int NFLoginNet_ServerModule::OnSelectWorldResultsProcess(const int nWorldID, con
 		xMsg.set_world_port(nWorldPort);
 		xMsg.set_world_key(strWorldKey);
 
-		m_pNetModule->SendMsgPB(NFMsg::EGameMsgID::EGMI_ACK_CONNECT_WORLD, xMsg, *xFD);
+		m_pNetModule->SendMsgPB(NFMsg::EGameMsgID::ACK_CONNECT_WORLD, xMsg, *xFD);
 	}
 
 	return 0;
@@ -161,9 +161,9 @@ void NFLoginNet_ServerModule::OnLoginProcess(const NFSOCK nSockIndex, const int 
 				m_pLogModule->LogNormal(NFILogModule::NLL_ERROR_NORMAL, NFGUID(0, nSockIndex), strLog, __FUNCTION__, __LINE__);
 
 				NFMsg::AckEventResult xMsg;
-				xMsg.set_event_code(NFMsg::EGEC_ACCOUNTPWD_INVALID);
+				xMsg.set_event_code(NFMsg::ACCOUNTPWD_INVALID);
 
-				m_pNetModule->SendMsgPB(NFMsg::EGameMsgID::EGMI_ACK_LOGIN, xMsg, nSockIndex);
+				m_pNetModule->SendMsgPB(NFMsg::EGameMsgID::ACK_LOGIN, xMsg, nSockIndex);
 				return;
 			}
 
@@ -171,9 +171,9 @@ void NFLoginNet_ServerModule::OnLoginProcess(const NFSOCK nSockIndex, const int 
 			pNetObject->SetAccount(xMsg.account());
 
 			NFMsg::AckEventResult xData;
-			xData.set_event_code(NFMsg::EGEC_ACCOUNT_SUCCESS);
+			xData.set_event_code(NFMsg::ACCOUNT_SUCCESS);
 
-			m_pNetModule->SendMsgPB(NFMsg::EGameMsgID::EGMI_ACK_LOGIN, xData, nSockIndex);
+			m_pNetModule->SendMsgPB(NFMsg::EGameMsgID::ACK_LOGIN, xData, nSockIndex);
 
 			m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFGUID(0, nSockIndex), "Login successed :", xMsg.account().c_str());
 		}
@@ -207,7 +207,7 @@ void NFLoginNet_ServerModule::OnSelectWorldProcess(const NFSOCK nSockIndex, cons
 	xData.mutable_sender()->CopyFrom(NFINetModule::NFToPB(pNetObject->GetClientID()));
 	xData.set_account(pNetObject->GetAccount());
 
-	m_pNetClientModule->SendSuitByPB(NF_SERVER_TYPES::NF_ST_MASTER, pNetObject->GetAccount(), NFMsg::EGameMsgID::EGMI_REQ_CONNECT_WORLD, xData);
+	m_pNetClientModule->SendSuitByPB(NF_SERVER_TYPES::NF_ST_MASTER, pNetObject->GetAccount(), NFMsg::EGameMsgID::REQ_CONNECT_WORLD, xData);
 }
 
 void NFLoginNet_ServerModule::OnSocketClientEvent(const NFSOCK nSockIndex, const NF_NET_EVENT eEvent, NFINet* pNet)
@@ -254,7 +254,7 @@ void NFLoginNet_ServerModule::SynWorldToClient(const NFSOCK nFD)
 	}
 
 
-	m_pNetModule->SendMsgPB(NFMsg::EGameMsgID::EGMI_ACK_WORLD_LIST, xData, nFD);
+	m_pNetModule->SendMsgPB(NFMsg::EGameMsgID::ACK_WORLD_LIST, xData, nFD);
 }
 
 void NFLoginNet_ServerModule::OnViewWorldProcess(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)

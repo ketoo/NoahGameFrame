@@ -28,17 +28,11 @@
 #include "NFGameServerModule.h"
 #include "NFSceneProcessModule.h"
 #include "NFPropertyModule.h"
-#include "NFLevelModule.h"
 #include "NFPropertyConfigModule.h"
 #include "NFNPCRefreshModule.h"
-#include "NFSwitchGameServerModule.h"
-#include "NFMoveModule.h"
 #include "NFSyncModule.h"
 #include "NFCreateRoleModule.h"
-#include "NFBuffModule.h"
-#include "NFScenePropsModule.h"
 
-class NFSwitchGameServerModule;
 
 #ifdef NF_DYNAMIC_PLUGIN
 
@@ -70,30 +64,20 @@ void NFGameServerPlugin::Install()
 
     REGISTER_MODULE(pPluginManager, NFIGameServerModule, NFGameServerModule)
     REGISTER_MODULE(pPluginManager, NFISceneProcessModule, NFSceneProcessModule)
-    REGISTER_MODULE(pPluginManager, NFISwitchGameServerModule, NFSwitchGameServerModule);
     REGISTER_MODULE(pPluginManager, NFIPropertyModule, NFPropertyModule)
-    REGISTER_MODULE(pPluginManager, NFILevelModule, NFLevelModule)
     REGISTER_MODULE(pPluginManager, NFIPropertyConfigModule, NFPropertyConfigModule)
 	REGISTER_MODULE(pPluginManager, NFINPCRefreshModule, NFNPCRefreshModule)
-	REGISTER_MODULE(pPluginManager, NFIMoveModule, NFMoveModule)
 	REGISTER_MODULE(pPluginManager, NFISyncModule, NFSyncModule)
 	REGISTER_MODULE(pPluginManager, NFICreateRoleModule, NFCreateRoleModule)
-	REGISTER_MODULE(pPluginManager, NFIBuffModule, NFBuffModule)
-	REGISTER_MODULE(pPluginManager, NFIScenePropsModule, NFScenePropsModule)
 }
 
 void NFGameServerPlugin::Uninstall()
 {
-	UNREGISTER_MODULE(pPluginManager, NFIScenePropsModule, NFScenePropsModule)
-	UNREGISTER_MODULE(pPluginManager, NFIBuffModule, NFBuffModule)
 	UNREGISTER_MODULE(pPluginManager, NFICreateRoleModule, NFCreateRoleModule)
 	UNREGISTER_MODULE(pPluginManager, NFISyncModule, NFSyncModule)
-	UNREGISTER_MODULE(pPluginManager, NFIMoveModule, NFMoveModule)
 	UNREGISTER_MODULE(pPluginManager, NFINPCRefreshModule, NFNPCRefreshModule)
 	UNREGISTER_MODULE(pPluginManager, NFIPropertyConfigModule, NFPropertyConfigModule)
-    UNREGISTER_MODULE(pPluginManager, NFILevelModule, NFLevelModule)
     UNREGISTER_MODULE(pPluginManager, NFIPropertyModule, NFPropertyModule)
-    UNREGISTER_MODULE(pPluginManager, NFISwitchGameServerModule, NFSwitchGameServerModule);
     UNREGISTER_MODULE(pPluginManager, NFISceneProcessModule, NFSceneProcessModule)
     UNREGISTER_MODULE(pPluginManager, NFIGameServerModule, NFGameServerModule)
 }

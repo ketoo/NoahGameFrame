@@ -36,6 +36,7 @@
 #include "NFComm/NFPluginModule/NFILogModule.h"
 #include "NFComm/NFPluginModule/NFIElementModule.h"
 #include "NFComm/NFPluginModule/NFIPlayerRedisModule.h"
+#include "NFComm/NFPluginModule/NFIAccountRedisModule.h"
 #include "NFComm/NFPluginModule/NFINoSqlModule.h"
 #include "NFComm/NFPluginModule/NFICommonRedisModule.h"
 #include "NFComm/NFPluginModule/NFINetModule.h"
@@ -57,7 +58,6 @@ public:
 	virtual bool GetRoleInfo(const std::string& strAccount, std::string& strRoleName, NFGUID& id);
 
 	virtual bool LoadPlayerData(const NFGUID& self, NFMsg::RoleDataPack& roleData);
-	virtual bool LoadPlayerData(const NFGUID& self, NFMsg::PVPPlayerInfo& roleData);
 	virtual bool SavePlayerData(const NFGUID& self, const NFMsg::RoleDataPack& roleData);
 
 	virtual bool SavePlayerTile(const int nSceneID, const NFGUID& self, const std::string& strTileData);
@@ -83,6 +83,7 @@ private:
 
 private:
 	NFIClassModule* m_pLogicClassModule;
+	NFIAccountRedisModule* m_pAccountRedisModule;
 	NFINoSqlModule* m_pNoSqlModule;
 	NFICommonRedisModule* m_pCommonRedisModule;
 	NFIKernelModule* m_pKernelModule;

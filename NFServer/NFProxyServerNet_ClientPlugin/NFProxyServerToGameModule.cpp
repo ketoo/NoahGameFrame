@@ -53,7 +53,7 @@ bool NFProxyServerToGameModule::Execute()
 
 bool NFProxyServerToGameModule::AfterInit()
 {
-	m_pNetClientModule->AddReceiveCallBack(NF_SERVER_TYPES::NF_ST_GAME, NFMsg::EGMI_ACK_ENTER_GAME, this, &NFProxyServerToGameModule::OnAckEnterGame);
+	m_pNetClientModule->AddReceiveCallBack(NF_SERVER_TYPES::NF_ST_GAME, NFMsg::ACK_ENTER_GAME, this, &NFProxyServerToGameModule::OnAckEnterGame);
 	m_pNetClientModule->AddReceiveCallBack(NF_SERVER_TYPES::NF_ST_GAME, this, &NFProxyServerToGameModule::Transpond);
 
 	m_pNetClientModule->AddEventCallBack(NF_SERVER_TYPES::NF_ST_GAME, this, &NFProxyServerToGameModule::OnSocketGSEvent);
@@ -116,7 +116,7 @@ void NFProxyServerToGameModule::Register(NFINet* pNet)
                 if (pServerData)
                 {
                     int nTargetID = pServerData->nGameID;
-                    m_pNetClientModule->SendToServerByPB(nTargetID, NFMsg::EGameMsgID::EGMI_PTWG_PROXY_REGISTERED, xMsg);
+                    m_pNetClientModule->SendToServerByPB(nTargetID, NFMsg::EGameMsgID::PTWG_PROXY_REGISTERED, xMsg);
 
                     m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFGUID(0, pData->server_id()), pData->server_name(), "Register");
                 }

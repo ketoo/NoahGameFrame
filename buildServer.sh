@@ -5,10 +5,10 @@
 #unzip sudo apt-get install unzip
 
 #compile dep libraries
-rm -rf ./_Out/Debug/NFPluginLoader
+rm -rf ./_Out/Debug/NFServer
 rm -rf ./_Out/Debug/*.a
 
-rm -rf ./_Out/Release/NFPluginLoader
+rm -rf ./_Out/Release/NFServer
 rm -rf ./_Out/Release/*.a
 
 cd NFComm/NFMessageDefine

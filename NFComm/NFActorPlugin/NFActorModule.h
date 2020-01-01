@@ -32,7 +32,6 @@
 #include <queue>
 #include "NFActor.h"
 #include "NFComm/NFPluginModule/NFIComponent.h"
-#include "NFComm/NFPluginModule/NFIActor.h"
 #include "NFComm/NFPluginModule/NFIActorModule.h"
 #include "NFComm/NFPluginModule/NFIKernelModule.h"
 #include "NFComm/NFPluginModule/NFIThreadPoolModule.h"

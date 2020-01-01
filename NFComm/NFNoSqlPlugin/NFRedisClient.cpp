@@ -75,7 +75,8 @@ bool NFRedisClient::KeepLive()
 
 bool NFRedisClient::ReConnect()
 {
-	return m_pRedisClientSocket->ReConnect(mstrIP, mnPort);
+    this->mbAuthed = false;
+    return m_pRedisClientSocket->ReConnect(mstrIP, mnPort);
 }
 
 bool NFRedisClient::IsConnect()

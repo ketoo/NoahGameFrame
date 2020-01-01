@@ -28,8 +28,13 @@
 
 #include "NFComm/NFCore/NFMap.hpp"
 #include "NFComm/NFPluginModule/NFIKernelModule.h"
-#include "NFComm/NFPluginModule/NFIGameServerModule.h"
 #include "NFComm/NFPluginModule/NFIClassModule.h"
+
+class NFIGameServerModule
+    : public NFIModule
+{
+
+};
 
 class NFGameServerModule
     : public NFIGameServerModule

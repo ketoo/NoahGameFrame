@@ -12,10 +12,10 @@
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <MinimalRebuild>false</MinimalRebuild>
       <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;_CRT_NONSTDC_NO_DEPRECATE;_SCL_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>$(SolutionDir);$(SolutionDir)Dependencies\ajson;$(SolutionDir)Dependencies\hiredis\hiredis_win;$(SolutionDir)Dependencies\;$(SolutionDir)Dependencies\vcpkg\installed\x64-windows-static\include;$(SolutionDir)Dependencies\vcpkg\installed\x64-windows-static\include\SDL2</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir);$(SolutionDir)\NoahFrame;$(SolutionDir)\NFComm;$(SolutionDir)\NoahFrame\NFComm;$(SolutionDir)\NFComm\NFPluginModule;$(SolutionDir)\NoahFrame\NFComm\NFPluginModule;$(SolutionDir)\NFComm\NFMessageDefine;$(SolutionDir)\NoahFrame\NFComm\NFMessageDefine;$(SolutionDir)Dependencies\ajson;$(SolutionDir)NoahFrame\Dependencies\ajson;$(SolutionDir)NoahFrame\Dependencies\hiredis\hiredis_win;$(SolutionDir)Dependencies\hiredis\hiredis_win;$(SolutionDir)Dependencies\;$(SolutionDir)NoahFrame\Dependencies\;$(SolutionDir)Dependencies\vcpkg\installed\x64-windows-static\include;$(SolutionDir)NoahFrame\Dependencies\vcpkg\installed\x64-windows-static\include;$(SolutionDir)Dependencies\vcpkg\installed\x64-windows-static\include\SDL2;$(SolutionDir)NoahFrame\Dependencies\vcpkg\installed\x64-windows-static\include\SDL2</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
-      <AdditionalLibraryDirectories>$(SolutionDir)_Out\$(Configuration)\;$(SolutionDir)lib\$(Configuration)\;$(SolutionDir)Dependencies\lib\$(Configuration)\</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(SolutionDir)_Out\$(Configuration)\;$(SolutionDir)NoahFrame\_Out\$(Configuration)\;$(SolutionDir)lib\$(Configuration)\;$(SolutionDir)NoahFrame\lib\$(Configuration)\;$(SolutionDir)Dependencies\lib\$(Configuration)\;$(SolutionDir)NoahFrame\Dependencies\lib\$(Configuration)\</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup />
