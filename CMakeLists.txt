@@ -3,25 +3,11 @@ set_property(GLOBAL PROPERTY USE_FOLDERS On)
 option(BUILD_TOOLS_ONLY "help string describing option")
 
 cmake_minimum_required(VERSION 2.8)
-macro(remove_file arg_list file_remove)
-	file(GLOB RemoveItems_Cpp ${file_remove})
-	if (RemoveItems_Cpp)
-		list(REMOVE_ITEM ${arg_list} ${RemoveItems_Cpp})
-	endif()
-endmacro(remove_file)
 
 macro(link_NFSDK projName)
 	add_dependencies(${projName} NFNetPlugin NFCore NFMessageDefine)
 	target_link_libraries(${projName} NFCore NFMessageDefine NFNetPlugin)
 endmacro(link_NFSDK)
-
-macro(add_post_cmd_win strProjectName destDir ext dbgSuffix)
-
-endmacro()
-
-macro(add_post_cmd_linux strProjectName destDir ext dbgSuffix dllPrefix)
-
-endmacro()
 
 project(NoahFrame)
 
@@ -118,5 +104,4 @@ else()
 	add_subdirectory(Dependencies)
 	add_subdirectory(NFComm)
 	add_subdirectory(NFServer)
-	add_subdirectory(Tutorial)
 endif()

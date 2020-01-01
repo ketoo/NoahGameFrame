@@ -16,10 +16,6 @@ if(UNIX)
 
 
 	target_link_libraries(NFNavigationPlugin -static-libstdc++)
-
-	add_definitions(
-			-D_USRDLL
-		)
 else()
 	add_library(NFNavigationPlugin STATIC
 		${NFNavigationPlugin_ROOT_Cpp}
@@ -30,7 +26,6 @@ else()
 	target_link_libraries(NFNavigationPlugin navigation NFCore)
 	target_link_libraries(NFNavigationPlugin -static-libstdc++)
 	add_definitions(
-			-D_USRDLL
 			-DWIN32_LEAN_AND_MEAN
 		)
 endif()
@@ -38,7 +33,7 @@ link_NFSDK("NFNavigationPlugin")
 set_target_properties( NFNavigationPlugin PROPERTIES OUTPUT_NAME_DEBUG "NFNavigationPlugin")
 set_target_properties( NFNavigationPlugin PROPERTIES PREFIX "")
 set_target_properties( NFNavigationPlugin PROPERTIES
-	FOLDER "NFSDK"
+	FOLDER "NFComm/NFNavigationPlugin"
 	ARCHIVE_OUTPUT_DIRECTORY ${NFOutPutDir}
 	RUNTIME_OUTPUT_DIRECTORY ${NFOutPutDir}
 	LIBRARY_OUTPUT_DIRECTORY ${NFOutPutDir} )

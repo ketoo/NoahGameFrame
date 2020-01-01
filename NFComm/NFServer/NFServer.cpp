@@ -25,10 +25,12 @@
 
 #include "../NFPluginLoader/NFPluginServer.h"
 
-#pragma comment( lib, "NFPluginLoader.lib" )
 
 ////////////EXTERNAL PLUGIN LISTED BELOW////////////////////////////////////////////
-//TUTORIAL
+
+#if NF_PLATFORM == NF_PLATFORM_WIN
+#pragma comment( lib, "NFPluginLoader.lib" )
+
 #include "Tutorial/Tutorial1/Tutorial1.h"
 #include "Tutorial/Tutorial2/Tutorial2.h"
 #include "Tutorial/Tutorial3/Tutorial3Plugin.h"
@@ -44,10 +46,11 @@
 #pragma comment( lib, "Tutorial5.lib" )
 #pragma comment( lib, "Tutorial6.lib" )
 #pragma comment( lib, "Tutorial7.lib" )
-
+#endif
 
 void MidWareLoader(NFIPluginManager* pPluginManager)
 {
+	/*
 	//TUTORIAL
 	CREATE_PLUGIN(pPluginManager, Tutorial1)
 	CREATE_PLUGIN(pPluginManager, Tutorial2)
@@ -56,6 +59,7 @@ void MidWareLoader(NFIPluginManager* pPluginManager)
 	CREATE_PLUGIN(pPluginManager, Tutorial5)
 	CREATE_PLUGIN(pPluginManager, Tutorial6)
 	CREATE_PLUGIN(pPluginManager, Tutorial7)
+	*/
 }
 ////////////////////////////////////////////////////////
 

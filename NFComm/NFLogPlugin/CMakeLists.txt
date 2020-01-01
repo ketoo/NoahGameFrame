@@ -24,7 +24,7 @@ endif()
 set_target_properties( NFLogPlugin PROPERTIES OUTPUT_NAME_DEBUG "NFLogPlugin")
 set_target_properties( NFLogPlugin PROPERTIES PREFIX "")
 set_target_properties( NFLogPlugin PROPERTIES
-	FOLDER "NFSDK"
+	FOLDER "NFComm/NFLogPlugin"
 	ARCHIVE_OUTPUT_DIRECTORY ${NFOutPutDir}
 	RUNTIME_OUTPUT_DIRECTORY ${NFOutPutDir}
 	LIBRARY_OUTPUT_DIRECTORY ${NFOutPutDir} )

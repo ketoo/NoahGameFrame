@@ -27,7 +27,7 @@ endif()
 
 set_target_properties( NFServer PROPERTIES OUTPUT_NAME_DEBUG "NFServer")
 set_target_properties( NFServer PROPERTIES
-	FOLDER "NFComm"
+	FOLDER "NFComm/NFServer"
 	ARCHIVE_OUTPUT_DIRECTORY ${NFOutPutDir}
 	RUNTIME_OUTPUT_DIRECTORY ${NFOutPutDir}
 	LIBRARY_OUTPUT_DIRECTORY ${NFOutPutDir} )

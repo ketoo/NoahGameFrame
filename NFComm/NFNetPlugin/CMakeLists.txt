@@ -13,7 +13,7 @@ add_definitions(-DNF_NONCLIENT_BUILD)
 set_target_properties( NFNetPlugin PROPERTIES OUTPUT_NAME_DEBUG "NFNetPlugin")
 set_target_properties( NFNetPlugin PROPERTIES PREFIX "")
 set_target_properties( NFNetPlugin PROPERTIES
-	FOLDER "NFSDK"
+	FOLDER "NFComm/NFNetPlugin"
 	ARCHIVE_OUTPUT_DIRECTORY ${NFOutPutDir}
 	RUNTIME_OUTPUT_DIRECTORY ${NFOutPutDir}
 	LIBRARY_OUTPUT_DIRECTORY ${NFOutPutDir})

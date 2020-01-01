@@ -20,7 +20,7 @@ endif()
 set_target_properties( NFLuaScriptPlugin PROPERTIES OUTPUT_NAME_DEBUG "NFLuaScriptPlugin")
 set_target_properties( NFLuaScriptPlugin PROPERTIES PREFIX "")
 set_target_properties( NFLuaScriptPlugin PROPERTIES
-	FOLDER "NFSDK"
+	FOLDER "NFComm/NFLuaScriptPlugin"
 	ARCHIVE_OUTPUT_DIRECTORY ${NFOutPutDir}
 	RUNTIME_OUTPUT_DIRECTORY ${NFOutPutDir}
 	LIBRARY_OUTPUT_DIRECTORY ${NFOutPutDir} )

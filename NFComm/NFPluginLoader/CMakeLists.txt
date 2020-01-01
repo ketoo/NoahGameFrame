@@ -50,19 +50,6 @@ target_link_libraries(NFPluginLoader NFWorldNet_ClientPlugin)
 target_link_libraries(NFPluginLoader NFWorldNet_ServerPlugin)
 
 
-#target_link_libraries(NFPluginLoader NFChatPlugin)
-#target_link_libraries(NFPluginLoader NFFriendPlugin)
-#target_link_libraries(NFPluginLoader NFGuildPlugin)
-#target_link_libraries(NFPluginLoader NFHeroPlugin)
-#target_link_libraries(NFPluginLoader NFItemBagPlugin)
-#target_link_libraries(NFPluginLoader NFMailPlugin)
-#target_link_libraries(NFPluginLoader NFRankPlugin)
-#target_link_libraries(NFPluginLoader NFShopPlugin)
-#target_link_libraries(NFPluginLoader NFSkillPlugin)
-#target_link_libraries(NFPluginLoader NFTaskPlugin)
-#target_link_libraries(NFPluginLoader NFUserGiftPlugin)
-#target_link_libraries(NFPluginLoader NFTeamPlugin)
-
 #target_link_libraries(NFPluginLoader Tutorial1)
 #target_link_libraries(NFPluginLoader Tutorial2)
 #target_link_libraries(NFPluginLoader Tutorial3Plugin)
@@ -89,7 +76,7 @@ endif()
 
 set_target_properties( NFPluginLoader PROPERTIES OUTPUT_NAME_DEBUG "NFPluginLoader")
 set_target_properties( NFPluginLoader PROPERTIES
-	FOLDER "NFComm"
+	FOLDER "NFComm/NFPluginLoader"
 	ARCHIVE_OUTPUT_DIRECTORY ${NFOutPutDir}
 	RUNTIME_OUTPUT_DIRECTORY ${NFOutPutDir}
 	LIBRARY_OUTPUT_DIRECTORY ${NFOutPutDir} )

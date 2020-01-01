@@ -11,13 +11,6 @@ add_library(NFActorPlugin STATIC
 if(UNIX)
 
 	target_link_libraries(NFActorPlugin -static-libstdc++)
-
-	add_definitions(
-		-D_USRDLL
-		-D_LIB
-		-DNFDATABASEPLUGIN_EXPORTS
-		-DWIN32_LEAN_AND_MEAN
-		)
 else()
 
 endif()
@@ -25,7 +18,7 @@ endif()
 set_target_properties( NFActorPlugin PROPERTIES OUTPUT_NAME_DEBUG "NFActorPlugin")
 set_target_properties( NFActorPlugin PROPERTIES PREFIX "")
 set_target_properties( NFActorPlugin PROPERTIES
-	FOLDER "NFSDK"
+	FOLDER "NFComm/NFActorPlugin"
 	ARCHIVE_OUTPUT_DIRECTORY ${NFOutPutDir}
 	RUNTIME_OUTPUT_DIRECTORY ${NFOutPutDir}
 	LIBRARY_OUTPUT_DIRECTORY ${NFOutPutDir} )
