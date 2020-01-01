@@ -50,7 +50,7 @@
 
 void MidWareLoader(NFIPluginManager* pPluginManager)
 {
-	/*
+#if NF_PLATFORM == NF_PLATFORM_WIN
 	//TUTORIAL
 	CREATE_PLUGIN(pPluginManager, Tutorial1)
 	CREATE_PLUGIN(pPluginManager, Tutorial2)
@@ -59,7 +59,7 @@ void MidWareLoader(NFIPluginManager* pPluginManager)
 	CREATE_PLUGIN(pPluginManager, Tutorial5)
 	CREATE_PLUGIN(pPluginManager, Tutorial6)
 	CREATE_PLUGIN(pPluginManager, Tutorial7)
-	*/
+#endif
 }
 ////////////////////////////////////////////////////////
 
