@@ -143,15 +143,6 @@ bool NFGodView::Execute()
       {
          //occupy inspectorview
       }
-
-	  ImGui::SameLine();
-	  std::string panning = "Panning(" + std::to_string((int)m_pNodeView->GetOffest().X()) + "," + std::to_string((int)m_pNodeView->GetOffest().Y()) + ")";
-	  ImGui::Button(panning.c_str());
-
-	  ImGui::SameLine();
-
-	  std::string origin = "origin(" + std::to_string((int)m_pNodeView->GetGridOringin().X()) + "," + std::to_string((int)m_pNodeView->GetGridOringin().Y()) + ")";
-	  ImGui::Button(origin.c_str());
    }
 
    ImGui::SameLine();

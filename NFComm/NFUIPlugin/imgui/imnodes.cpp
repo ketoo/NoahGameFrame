@@ -181,7 +181,7 @@ struct NodeData
           rect(ImVec2(0.0f, 0.0f), ImVec2(0.0f, 0.0f)), color_style(),
           attribute_rects(),
           draggable(true),
-          layout_style(), attribute_rects()
+          layout_style()
     {
     }
 };
@@ -827,7 +827,10 @@ void node_interaction_update(EditorContext& editor)
                 {
                     const int idx = editor.selected_nodes[i];
                     NodeData& node = editor.nodes.pool[idx];
-                    node.origin += ImGui::GetIO().MouseDelta;
+                    if (node.draggable)
+                    {
+                        node.origin += ImGui::GetIO().MouseDelta;
+                    }
                 }
             }
 
@@ -985,18 +988,6 @@ void draw_node(EditorContext& editor, int node_idx)
         if (ImGui::IsMouseClicked(0))
         {
             node_interaction_begin(editor, node_idx);
-        }
-    }
-
-    // Check to see whether the node moved during the frame. The node's position
-    // is updated after the node has been drawn (because the user has already
-    // rendered the UI!).
-    if (ImGui::IsItemActive() && ImGui::IsMouseDragging(0))
-    {
-        if (node.draggable)
-        {
-            g.node_moved.index = node_idx;
-            g.node_moved.position = node.origin + ImGui::GetIO().MouseDelta;
         }
     }
 
