@@ -49,6 +49,7 @@ private:
    void BluePrintViewSubRenderForMonitor();
    void BluePrintViewSubRenderForJudgement();
    void BluePrintViewSubRenderForExecuter();
+   void BluePrintViewSubRenderForVariable();
 
    void BluePrintViewSubRenderForMonitorHead(NF_SHARE_PTR<NFMonitor> monitor);
    void BluePrintViewSubRenderForMonitorBody(NF_SHARE_PTR<NFMonitor> monitor);

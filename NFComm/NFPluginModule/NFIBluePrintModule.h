@@ -34,8 +34,11 @@ NF_SMART_ENUM(NFBlueprintType,
 	MONITOR,
 	JUDGEMENT,
 	EXECUTER,
+	VARIABLE,
+	DEBUGER,
 )
 
+///////////FOR MONITOR BEGIN///////////////////////////
 NF_SMART_ENUM(NFMonitorType,
 	NONE,
 	NetworkEvent,
@@ -50,22 +53,17 @@ NF_SMART_ENUM(NFMonitorType,
 	BuffEvent,
 )
 
+
+	//NetworkEvent INPUT
+	//NetworkMsgEvent INPUT
+
+//------------------------
+//ObjectEvent INPUT 1
 NF_SMART_ENUM(NFMonitorObjectEventArgType,
 	ClassName,
 	)
 
-NF_SMART_ENUM(NFMonitorPropertyEventArgType,
-	ClassName,
-	PropertyName,
-)
-
-NF_SMART_ENUM(NFMonitorRecordEventArgType,
-	ClassName,
-	RecordName,
-	OperateType,
-)
-
-//ObjectEvent
+//ObjectEvent INPUT 2
 NF_SMART_ENUM(NFMonitorObjectEventType,
 	CREATE_NODATA,
 	CREATE_BEFORE_ATTACHDATA,
@@ -79,14 +77,62 @@ NF_SMART_ENUM(NFMonitorObjectEventType,
 	CREATE_CLIENT_FINISH,
 	BEFOREDESTROY,
 	DESTROY,
+	)
+
+
+//------------------------
+
+//PropertyEvent INPUT
+NF_SMART_ENUM(NFMonitorPropertyEventArgType,
+	ClassName,
+	PropertyName,
 )
 
-//RecordEvent
+//------------------------
+
+//RecordEvent INPUT 1
+NF_SMART_ENUM(NFMonitorRecordEventArgType,
+	ClassName,
+	RecordName,
+	OperateType,
+)
+//RecordEvent INPUT 2
 NF_SMART_ENUM(NFMonitorRecordEventType,
 	Add,
 	Remove,
 	Update,
-)
+	)
+
+//------------------------
+NF_SMART_ENUM(NFVariableType,
+	Int,
+	Float,
+	String,
+	Vector2,
+	Vector3,
+	Object,
+	)
+
+NF_SMART_ENUM(NFVariableComeFrom,
+	Input,
+	ElementSystem,
+	PropertySystem,
+	RecordSystem,
+	VariableSystem,
+	)
+
+
+//------------------------
+///////////FOR ACCESSOR BEGIN///////////////////////////
+//THREE WAY TO GET A VALUE
+//ONE IS TO GET A VALUE COME FROM ELEMENT SYSTEM
+//TWO IS TO GET A VALUE COME FROM PROPERTY SYSTEM OR RECORD SYSTEM OF A PLAYER OR SCENE
+//THREE IS TO GET A VALUE COME FROM VARIABLE SYSTEM
+
+
+//INPUT FOR ONE:
+//ELEMENT ID --> COME FROM INPUT CONTRLLER OR ANOTHER PLACE (MAYBE A VARIABLE, MAYBE A ELEMENT OR A PROPERTY)
+//ELEMENT PROPERTY NAME
 
 //2 args: string elementName, string propertyName
 NF_SMART_ENUM(NFAccessorType,
@@ -110,6 +156,7 @@ NF_SMART_ENUM(NFAccessorType,
 	GetRecordObject,
 )
 
+///////////FOR MODIFIER BEGIN///////////////////////////
 //SetProperty 3 args: NFGUID objectID, string propertyName, int value
 //SetRecord 5 args: NFGUID objectID, string recordName, int row, int col, int value
 NF_SMART_ENUM(NFModifierType,
@@ -130,6 +177,7 @@ NF_SMART_ENUM(NFModifierType,
 	ReemRecordRow,
 )
 
+///////////FOR OPERATOR BEGIN///////////////////////////
 NF_SMART_ENUM(NFOperatorType,
 	NONE,
 	CreateObject,
@@ -146,6 +194,7 @@ NF_SMART_ENUM(NFOperatorType,
 	UseItem
 )
 
+///////////FOR JUDGEMENT BEGIN///////////////////////////
 NF_SMART_ENUM(NFJudgementCondition,
 	NONE,
 	Equal,
@@ -165,6 +214,9 @@ NF_SMART_ENUM(NFComparatorType,
 	ExistElement,
 	ExistObject,
 	)
+
+
+///////////////////////////////////////////////////////////////////////////////////
 
 class NFBluePrintNodeBase
 {
@@ -189,7 +241,26 @@ class NFLogicBlock;
 class NFMonitor;
 class NFJudgement;
 class NFExecuter;
+class NFVariable;
 
+class NFVariable : public NFBluePrintNodeBase
+{
+public:
+	NFVariable(NFIPluginManager* p, const NFGUID& id, const std::string& name, NF_SHARE_PTR<NFBluePrintNodeBase> parent)
+	{
+		this->id = id;
+		this->name = name;
+		this->pPluginManager = p;
+		this->parent = parent;
+
+		blueprintType = NFBlueprintType::VARIABLE;
+	}
+
+	virtual NF_SHARE_PTR<NFBluePrintNodeBase> FindBaseNode(const NFGUID& id);
+
+	NFVariableType variableType;
+	NFVariableComeFrom comeFrom;
+};
 
 //developer could define different executer by needs
 //the executer defined by developer could be listed when the developer picking one executer or designing a executer
@@ -310,6 +381,7 @@ public:
 	virtual NF_SHARE_PTR<NFBluePrintNodeBase> FindBaseNode(const NFGUID& id);
 
 	std::list<NF_SHARE_PTR<NFMonitor>> monitors;
+	std::list<NF_SHARE_PTR<NFVariable>> variables;
 };
 
 class NFIBluePrintModule
@@ -327,6 +399,7 @@ public:
 	virtual NF_SHARE_PTR<NFBluePrintNodeBase>  FindBaseNode(const NFGUID& id) = 0;
 
 	virtual NF_SHARE_PTR<NFMonitor> AddMonitorForLogicBlock(const NFGUID& logicBlockId, const NFGUID& id, const std::string& name) = 0;
+	virtual NF_SHARE_PTR<NFVariable> AddVariableForLogicBlock(const NFGUID& logicBlockId, const NFGUID& id, const std::string& name) = 0;
 	virtual NF_SHARE_PTR<NFJudgement> AddJudgementForMonitor(const NFGUID& monitorId, const NFGUID& id, const std::string& name) = 0;
 	virtual NF_SHARE_PTR<NFJudgement> AddTrueJudgementForJudgement(const NFGUID& judgementId, const NFGUID& id, const std::string& name) = 0;
 	virtual NF_SHARE_PTR<NFJudgement> AddFalseJudgementForJudgement(const NFGUID& judgementId, const NFGUID& id, const std::string& name) = 0;

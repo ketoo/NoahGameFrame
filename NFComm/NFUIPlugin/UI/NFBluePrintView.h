@@ -44,6 +44,7 @@ public:
 	void TryToCreateMonitor();
 	void TryToCreateJudgement();
 	void TryToCreateExecuter();
+	void TryToCreateVariable();
 
 	void TryToCreateComparator();
 
@@ -61,6 +62,7 @@ private:
 	void CreateMonitor();
 	void CreateJudgment();
 	void CreateExecuter();
+	void CreateVariable();
 
 	void CreateComparator();
    
@@ -73,6 +75,7 @@ private:
 	bool bCreatingMonitor = false;
 	bool bCreatingJudgment = false;
 	bool bCreatingExecuter = false;
+	bool bCreatingVariable = false;
 
 	bool bCreatingComparator = false;
 

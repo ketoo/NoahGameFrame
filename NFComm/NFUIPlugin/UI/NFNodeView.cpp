@@ -44,13 +44,27 @@ void NFNodeAttri::Execute()
 
 void NFNode::Execute()
 {
+ /*
+
+(0,0)---------------> X
+  |
+  |
+  |
+  |
+  |
+  v
+
+  Y
+
+  */
+
    imnodes::SetNodeName(id, name.c_str());
    imnodes::BeginNode(id);
 
    if (first)
    {
       first = false;
-      imnodes::SetNodePos(id, ImVec2(initPos.X(), -initPos.Y()));
+      imnodes::SetNodeOriginPos(id, ImVec2(initPos.X(), initPos.Y()));
    }
 
    for (auto it : mAttris)
@@ -202,10 +216,62 @@ NFGUID NFNodeView::GetNodeByAttriId(const NFGUID attriId)
    return NFGUID();
 }
 
+void NFNodeView::SetNodeDragable(const NFGUID guid, const bool dragable)
+{
+    if (mNodes.find(guid) != mNodes.end())
+    {
+        int id = GetNodeID(guid);
+        if (id >= 0)
+        {
+            EditorContextSet((imnodes::EditorContext*)m_pEditorContext);
+            imnodes::SetNodeDragable(id, dragable);
+        }
+    }
+}
+
+void NFNodeView::SetNodePosition(const NFGUID guid, const NFVector2 vec)
+{
+    if (mNodes.find(guid) != mNodes.end())
+    {
+        int id = GetNodeID(guid);
+        if (id >= 0)
+        {
+            EditorContextSet((imnodes::EditorContext*)m_pEditorContext);
+            imnodes::SetNodeOriginPos(id, ImVec2(vec.X(), vec.Y()));
+        }
+    }
+}
+
 void NFNodeView::ResetOffest(const NFVector2& pos)
 {
    EditorContextSet((imnodes::EditorContext*)m_pEditorContext);
    imnodes::EditorContextResetPanning(ImVec2(pos.X(), pos.Y()));
+}
+
+NFVector2 NFNodeView::GetOffest()
+{
+    EditorContextSet((imnodes::EditorContext*)m_pEditorContext);
+    imnodes::EditorContext* pContext = (imnodes::EditorContext*)m_pEditorContext;
+    ImVec2 vec = imnodes::GetEditorContextPanning();
+    return NFVector2(vec.x, vec.y);
+}
+
+NFVector2 NFNodeView::GetGridOringin()
+{
+    EditorContextSet((imnodes::EditorContext*)m_pEditorContext);
+    imnodes::EditorContext* pContext = (imnodes::EditorContext*)m_pEditorContext;
+    ImVec2 vec = imnodes::GetEditorContextPanning();
+    return NFVector2(vec.x, vec.y);
+}
+
+void NFNodeView::MoveToNode(const NFGUID guid)
+{
+    int id = GetNodeID(guid);
+    if (id >= 0)
+    {
+        EditorContextSet((imnodes::EditorContext*)m_pEditorContext);
+        imnodes::EditorContextMoveToNode(id);
+    }
 }
 
 void NFNodeView::CheckNewLinkStatus()
