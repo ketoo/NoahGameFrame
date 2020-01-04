@@ -13,6 +13,13 @@
 #define IMGUI_DEFINE_MATH_OPERATORS
 #include "imgui_internal.h"
 
+// Check minimum ImGui version
+#define MINIMUM_COMPATIBLE_IMGUI_VERSION 16401
+#if IMGUI_VERSION_NUM < MINIMUM_COMPATIBLE_IMGUI_VERSION
+#error                                                                         \
+    "Minimum ImGui version requirement not met -- please use a newer version!"
+#endif
+
 #include <assert.h>
 #include <new>
 #include <stdint.h>
@@ -34,22 +41,6 @@ inline ImVec2 operator*(const ImVec2& lhs, const float rhs)
 {
     return ImVec2(lhs.x * rhs, lhs.y * rhs);
 }
-
-// Grid appearance
-static const float GRID_SIZE = 32.f;
-
-// Node appearance
-// TODO: Add these into the style struct
-static const float NODE_CORNER_ROUNDNESS = 4.0f;
-static const ImVec2 NODE_CONTENT_PADDING = ImVec2(8.f, 8.f);
-static const ImVec2 NODE_DUMMY_SPACING = ImVec2(80.f, 20.f);
-
-static const float LINK_THICKNESS = 3.f;
-static const float LINK_SEGMENTS_PER_LENGTH = 0.1f;
-static const float LINK_HOVER_DISTANCE = 7.0f;
-
-static const float NODE_PIN_RADIUS = 4.f;
-static const float NODE_PIN_HOVER_RADIUS = 10.f;
 
 static const size_t NODE_NAME_STR_LEN = 32u;
 
@@ -136,6 +127,27 @@ struct ObjectPool
         in_use[index] = true;
         return pool[index];
     }
+
+    // Predicate must define operator()(const T& lhs, const T& operator) ->
+    // bool.
+    template<typename Predicate>
+    inline bool contains(const T& v, Predicate predicate) const
+    {
+        for (int i = 0; i < pool.size(); ++i)
+        {
+            if (!in_use[i])
+            {
+                continue;
+            }
+
+            if (predicate(v, pool[i]))
+            {
+                return true;
+            }
+        }
+
+        return false;
+    }
 };
 
 struct NodeData
@@ -153,6 +165,12 @@ struct NodeData
             titlebar, titlebar_hovered, titlebar_selected;
     } color_style;
 
+    struct
+    {
+        float corner_rounding;
+        ImVec2 padding;
+    } layout_style;
+
     ImVector<ImRect> attribute_rects;
 
     NodeData()
@@ -162,7 +180,8 @@ struct NodeData
           origin(100.0f, 100.0f), title_text_size(0.f, 0.f),
           rect(ImVec2(0.0f, 0.0f), ImVec2(0.0f, 0.0f)), color_style(),
           attribute_rects(),
-          draggable(true)
+          draggable(true),
+          layout_style(), attribute_rects()
     {
     }
 };
@@ -240,12 +259,40 @@ struct BoxSelector
     BoxSelector() : state(BoxSelectorState_None), box_rect() {}
 };
 
+enum NodeInteractionState
+{
+    NodeInteractionState_MouseDown,
+    NodeInteractionState_None
+};
+
+struct NodeInteraction
+{
+    NodeInteractionState state;
+    int node_idx;
+
+    NodeInteraction()
+        : state(NodeInteractionState_None), node_idx(INVALID_INDEX)
+    {
+    }
+};
+
 struct ColorStyleElement
 {
     ImU32 color;
     ColorStyle item;
 
-    ColorStyleElement(ImU32 c, ColorStyle s) : color(c), item(s) {}
+    ColorStyleElement(const ImU32 c, const ColorStyle s) : color(c), item(s) {}
+};
+
+struct StyleElement
+{
+    StyleVar item;
+    float value;
+
+    StyleElement(const float value, const StyleVar variable)
+        : item(variable), value(value)
+    {
+    }
 };
 
 // [SECTION] global struct
@@ -254,11 +301,13 @@ struct
 {
     EditorContext* default_editor_ctx;
     EditorContext* editor_ctx;
-    ImVec2 grid_origin;
+    ImVec2 canvas_origin_screen_space;
+    ImRect canvas_rect_screen_space;
     ScopeFlags current_scope;
 
     Style style;
-    ImVector<ColorStyleElement> color_style_stack;
+    ImVector<ColorStyleElement> color_modifier_stack;
+    ImVector<StyleElement> style_modifier_stack;
 
     LinkData link_created; // per-frame data, so can be stored in g
 
@@ -277,12 +326,6 @@ struct
         int index;
         int attribute;
     } node_active;
-
-    struct
-    {
-        int index;
-        ImVec2 position;
-    } node_moved;
 
     int node_hovered;
     int link_hovered;
@@ -337,9 +380,6 @@ inline float get_closest_point_on_cubic_bezier(
         const float dt = (tend - tstart) / num_segments;
         for (int s = 0; s < num_segments; ++s)
         {
-            // TODO: this shouldn't evaluate the distance to the mid point, but
-            // rather the distance to the line segment! This might explain the
-            // occasional inaccuracies in selecting links.
             const float tmid = tstart + dt * (float(s) + 0.5f);
             const ImVec2 bt = eval_bezier(tmid, bezier);
             const ImVec2 dv = bt - pos;
@@ -372,16 +412,31 @@ inline float get_distance_to_cubic_bezier(
 
     const float t =
         get_closest_point_on_cubic_bezier(iterations, segments, pos, bezier);
-    ImVec2 point_on_curve = eval_bezier(t, bezier);
+    const ImVec2 point_on_curve = eval_bezier(t, bezier);
 
     const ImVec2 to_curve = point_on_curve - pos;
     return ImSqrt(ImLengthSqr(to_curve));
 }
 
+inline ImRect get_containing_rect_for_bezier_curve(const BezierCurve& bezier)
+{
+    const ImVec2 min = ImVec2(
+        ImMin(bezier.p0.x, bezier.p3.x), ImMin(bezier.p0.y, bezier.p3.y));
+    const ImVec2 max = ImVec2(
+        ImMax(bezier.p0.x, bezier.p3.x), ImMax(bezier.p0.y, bezier.p3.y));
+
+    ImRect rect(min, max);
+    rect.Add(bezier.p1);
+    rect.Add(bezier.p2);
+
+    return rect;
+}
+
 inline LinkBezierData get_link_renderable(
     ImVec2 start,
     ImVec2 end,
-    AttributeType start_type)
+    const AttributeType start_type,
+    const float line_segments_per_length)
 {
     assert(
         (start_type == AttributeType_Input) ||
@@ -400,33 +455,28 @@ inline LinkBezierData get_link_renderable(
     link_data.bezier.p2 = end - offset;
     link_data.bezier.p3 = end;
     link_data.num_segments =
-        ImMax(int(link_length * LINK_SEGMENTS_PER_LENGTH), 1);
+        ImMax(int(link_length * line_segments_per_length), 1);
     return link_data;
 }
 
 inline bool is_mouse_hovering_near_link(const BezierCurve& bezier)
 {
-    bool near = false;
     const ImVec2 mouse_pos = ImGui::GetIO().MousePos;
 
-    // First, do an AABB test to see whether it the distance
-    // to the line is worth checking in greater detail
-    float xmin = ImMin(bezier.p0.x, bezier.p3.x);
-    float xmax = ImMax(bezier.p0.x, bezier.p3.x);
-    float ymin = ImMin(bezier.p0.y, bezier.p3.y);
-    float ymax = ImMax(bezier.p0.y, bezier.p3.y);
+    // First, do a simple bounding box test against the box containing the link
+    // to see whether calculating the distance to the link is worth doing.
+    const ImRect link_rect = get_containing_rect_for_bezier_curve(bezier);
 
-    if ((mouse_pos.x > xmin && mouse_pos.x < xmax) &&
-        (mouse_pos.y > ymin && mouse_pos.y < ymax))
+    if (link_rect.Contains(mouse_pos))
     {
         const float distance = get_distance_to_cubic_bezier(mouse_pos, bezier);
-        if (distance < LINK_HOVER_DISTANCE)
+        if (distance < g.style.link_hover_distance)
         {
-            near = true;
+            return true;
         }
     }
 
-    return near;
+    return false;
 }
 
 inline float eval_implicit_line_eq(
@@ -462,16 +512,21 @@ inline bool rectangle_overlaps_line_segment(
             sign(eval_implicit_line_eq(p1, p2, ImVec2(rect.Min.x, rect.Max.y))),
             sign(eval_implicit_line_eq(p1, p2, rect.Max))};
 
-        int previous_sign = corner_signs[3];
-        for (int i = 0; i < 4; ++i)
+        for (int i = 0, iprev = 3; i < 4; ++i, iprev = (iprev + 1) % 4)
         {
             const int s = corner_signs[i];
+            const int s_prev = corner_signs[iprev];
+
             if (s == 0)
             {
                 break;
             }
 
-            if (s != previous_sign)
+            // If the sign changes at any point, then the point is on another
+            // side of the line than the previous point, and we know that there
+            // is a possible intersection.
+
+            if (s != s_prev)
             {
                 line_intersects_square = true;
                 break;
@@ -513,7 +568,6 @@ inline bool rectangle_overlaps_bezier(
     const ImRect& rectangle,
     const LinkBezierData& link_data)
 {
-    bool found_overlap = false;
     ImVec2 current = eval_bezier(0.f, link_data.bezier);
     const float dt = 1.0f / link_data.num_segments;
     for (int s = 0; s < link_data.num_segments; ++s)
@@ -533,23 +587,27 @@ inline bool rectangle_overlaps_link(
     const ImRect& rectangle,
     const ImVec2& start,
     const ImVec2& end,
-    AttributeType start_type)
+    const AttributeType start_type)
 {
     // First level: simple rejection test via rectangle overlap:
 
     ImRect lrect = ImRect(start, end);
     if (lrect.Min.x > lrect.Max.x)
+    {
         ImSwap(lrect.Min.x, lrect.Max.x);
+    }
 
     if (lrect.Min.y > lrect.Max.y)
+    {
         ImSwap(lrect.Min.y, lrect.Max.y);
+    }
 
     if (rectangle.Overlaps(lrect))
     {
-        // First, check if both endpoints of the curve are trivially contained
+        // First, check if either one or both endpoinds are trivially contained
         // in the rectangle
 
-        if (rectangle.Contains(start) && rectangle.Contains(end))
+        if (rectangle.Contains(start) || rectangle.Contains(end))
         {
             return true;
         }
@@ -557,8 +615,8 @@ inline bool rectangle_overlaps_link(
         // Second level of refinement: do a more expensive test against the
         // link
 
-        const LinkBezierData link_data =
-            get_link_renderable(start, end, start_type);
+        const LinkBezierData link_data = get_link_renderable(
+            start, end, start_type, g.style.link_line_segments_per_length);
         return rectangle_overlaps_bezier(rectangle, link_data);
     }
 
@@ -583,6 +641,7 @@ struct EditorContext
 
     LinkData link_dragged;
     BoxSelector box_selector;
+    NodeInteraction node_interaction;
 
     EditorContext()
         : nodes(), pins(), links(), panning(0.f, 0.f), grid_draw_list(nullptr),
@@ -598,7 +657,7 @@ namespace
 ImVec2 get_screen_space_pin_coordinates(
     const ImRect& node_rect,
     const ImRect& attr_rect,
-    AttributeType type)
+    const AttributeType type)
 {
     assert(type == AttributeType_Input || type == AttributeType_Output);
     const float x =
@@ -606,7 +665,9 @@ ImVec2 get_screen_space_pin_coordinates(
     return ImVec2(x, 0.5f * (attr_rect.Min.y + attr_rect.Max.y));
 }
 
-ImVec2 get_screen_space_pin_coordinates(const EditorContext& editor, int pin_id)
+ImVec2 get_screen_space_pin_coordinates(
+    const EditorContext& editor,
+    const int pin_id)
 {
     const int pin_idx = editor.pins.id_map.GetInt(pin_id);
     assert(pin_idx != INVALID_INDEX);
@@ -632,7 +693,7 @@ bool box_selector_active(const BoxSelector& box_selector)
     return box_selector.state != BoxSelectorState_None;
 }
 
-void box_selector_on_complete(
+void box_selector_process(
     const BoxSelector& box_selector,
     EditorContext& editor)
 {
@@ -650,6 +711,9 @@ void box_selector_on_complete(
         ImSwap(box_rect.Min.y, box_rect.Max.y);
     }
 
+    // Clearing selected nodes list
+    editor.selected_nodes.clear();
+
     // Test for overlap against node rectangles
 
     for (int i = 0; i < editor.nodes.pool.size(); i++)
@@ -663,6 +727,9 @@ void box_selector_on_complete(
             }
         }
     }
+
+    // Clearing selected links list
+    editor.selected_links.clear();
 
     // Test for overlap against links
 
@@ -714,13 +781,64 @@ void box_selector_update(
                 box_selector.box_rect.Max,
                 box_selector_outline);
 
+            box_selector_process(box_selector, editor_ctx);
+
             if (ImGui::IsMouseReleased(0))
             {
                 box_selector.state = BoxSelectorState_None;
-                box_selector_on_complete(box_selector, editor_ctx);
             }
         }
         break;
+        default:
+            assert(!"Unreachable code!");
+            break;
+    }
+}
+
+void node_interaction_begin(EditorContext& editor, const int node_idx)
+{
+    NodeInteraction& node_interaction = editor.node_interaction;
+    node_interaction.state = NodeInteractionState_MouseDown;
+    node_interaction.node_idx = node_idx;
+    // If the node is not already contained in the selection, then we want only
+    // the interaction node to be selected, effective immediately.
+    //
+    // Otherwise, we want to allow for the possibility of multiple nodes to be
+    // moved at once.
+    if (!editor.selected_nodes.contains(node_idx))
+    {
+        editor.selected_nodes.clear();
+        editor.selected_nodes.push_back(node_idx);
+    }
+}
+
+void node_interaction_update(EditorContext& editor)
+{
+    NodeInteraction& node_interaction = editor.node_interaction;
+    switch (node_interaction.state)
+    {
+        case NodeInteractionState_MouseDown:
+        {
+            assert(node_interaction.node_idx != INVALID_INDEX);
+            if (ImGui::IsMouseDragging(0) &&
+                editor.link_dragged.start_attr == INVALID_INDEX)
+            {
+                for (int i = 0; i < editor.selected_nodes.size(); ++i)
+                {
+                    const int idx = editor.selected_nodes[i];
+                    NodeData& node = editor.nodes.pool[idx];
+                    node.origin += ImGui::GetIO().MouseDelta;
+                }
+            }
+
+            if (ImGui::IsMouseReleased(0))
+            {
+                node_interaction.state = NodeInteractionState_None;
+            }
+        }
+        break;
+        case NodeInteractionState_None:
+            break;
         default:
             assert(!"Unreachable code!");
             break;
@@ -732,7 +850,7 @@ void box_selector_update(
 inline ImVec2 screen_space_to_grid_space(const ImVec2& v)
 {
     const EditorContext& editor = editor_context_get();
-    return v - g.grid_origin - editor.panning;
+    return v - g.canvas_origin_screen_space - editor.panning;
 }
 
 inline ImVec2 grid_space_to_editor_space(const ImVec2& v)
@@ -744,12 +862,12 @@ inline ImVec2 grid_space_to_editor_space(const ImVec2& v)
 inline ImVec2 grid_space_to_screen_space(const ImVec2& v)
 {
     const EditorContext& editor = editor_context_get();
-    return v + g.grid_origin + editor.panning;
+    return v + g.canvas_origin_screen_space + editor.panning;
 }
 
 inline ImVec2 editor_space_to_screen_space(const ImVec2& v)
 {
-    return g.grid_origin + v;
+    return g.canvas_origin_screen_space + v;
 }
 
 inline ImRect get_item_rect()
@@ -759,66 +877,66 @@ inline ImRect get_item_rect()
 
 inline ImVec2 get_node_title_origin(const NodeData& node)
 {
-    return node.origin + NODE_CONTENT_PADDING;
+    return node.origin + node.layout_style.padding;
 }
 
 inline ImVec2 get_node_content_origin(const NodeData& node)
 {
     ImVec2 title_rect_height =
-        ImVec2(0.f, node.title_text_size.y + 2.f * NODE_CONTENT_PADDING.y);
-    return node.origin + NODE_CONTENT_PADDING + title_rect_height;
+        ImVec2(0.f, node.title_text_size.y + 2.f * node.layout_style.padding.y);
+    return node.origin + node.layout_style.padding + title_rect_height;
 }
 
 // The node width is either the content width, or title bar width, whichever
 // is larger.
-inline ImRect get_screen_space_title_bar_rect(
-    const ImVec2& node_origin,
-    const ImVec2& text_size,
-    const ImRect& node_rect)
+inline ImRect get_screen_space_title_bar_rect(const NodeData& node)
 {
-    const ImVec2 ss_origin = grid_space_to_screen_space(node_origin);
+    const ImVec2 ss_origin = grid_space_to_screen_space(node.origin);
     const ImVec2& min = ss_origin;
     // NOTE: the content rect is already offset from the node grid origin by 1 x
-    // NODE_CONTENT_PADDING due to setting the cursor taking node padding into
+    // node.padding due to setting the cursor taking node padding into
     // account.
     const ImVec2 max = ImVec2(
-        node_rect.Max.x,
-        ss_origin.y + text_size.y + 2.f * NODE_CONTENT_PADDING.y);
+        node.rect.Max.x,
+        ss_origin.y + node.title_text_size.y +
+            2.f * node.layout_style.padding.y);
     return ImRect(min, max);
 }
 
 // This currently computes the node rect width by taking either the
 // content width, or title bar width, whichever is larger.
 inline ImRect get_screen_space_node_rect(
-    const ImRect& item_rect,
-    const ImVec2& text_size)
+    const NodeData& node,
+    const ImRect& node_body_rect)
 {
+    const ImVec2 text_size = node.title_text_size;
     const float max_width =
-        ImMax(item_rect.Min.x + text_size.x, item_rect.Max.x);
+        ImMax(node_body_rect.Min.x + text_size.x, node_body_rect.Max.x);
     // apply the node padding on the top and bottom of the text
-    const float text_height = text_size.y + 2.f * NODE_CONTENT_PADDING.y;
+    const float text_height = text_size.y + 2.f * node.layout_style.padding.y;
 
-    ImRect rect = item_rect;
+    ImRect rect = node_body_rect;
     rect.Max.x = max_width;
-    rect.Expand(NODE_CONTENT_PADDING);
+    rect.Expand(node.layout_style.padding);
     rect.Min.y = rect.Min.y - text_height;
     return rect;
 }
 
-void draw_grid(const EditorContext& editor)
+void draw_grid(EditorContext& editor, const ImVec2& canvas_size)
 {
     const ImVec2 offset = editor.panning;
-    const ImVec2 canvas_size = ImGui::GetWindowSize();
-    for (float x = fmodf(offset.x, GRID_SIZE); x < canvas_size.x;
-         x += GRID_SIZE)
+
+    for (float x = fmodf(offset.x, g.style.grid_spacing); x < canvas_size.x;
+         x += g.style.grid_spacing)
     {
         editor.grid_draw_list->AddLine(
             editor_space_to_screen_space(ImVec2(x, 0.0f)),
             editor_space_to_screen_space(ImVec2(x, canvas_size.y)),
             g.style.colors[ColorStyle_GridLine]);
     }
-    for (float y = fmodf(offset.y, GRID_SIZE); y < canvas_size.y;
-         y += GRID_SIZE)
+
+    for (float y = fmodf(offset.y, g.style.grid_spacing); y < canvas_size.y;
+         y += g.style.grid_spacing)
     {
         editor.grid_draw_list->AddLine(
             editor_space_to_screen_space(ImVec2(0.0f, y)),
@@ -833,21 +951,21 @@ void draw_pin(const EditorContext& editor, const int pin_idx)
     const NodeData& node = editor.nodes.pool[pin.node_idx];
     const ImVec2 pin_pos = get_screen_space_pin_coordinates(
         node.rect, node.attribute_rects[pin.attribute_idx], pin.type);
-    if (is_mouse_hovering_near_point(pin_pos, NODE_PIN_HOVER_RADIUS))
+    if (is_mouse_hovering_near_point(pin_pos, g.style.pin_hover_radius))
     {
         g.pin_hovered = pin_idx;
         editor.grid_draw_list->AddCircleFilled(
-            pin_pos, NODE_PIN_RADIUS, pin.color_style.hovered);
+            pin_pos, g.style.pin_radius, pin.color_style.hovered);
     }
     else
     {
         editor.grid_draw_list->AddCircleFilled(
-            pin_pos, NODE_PIN_RADIUS, pin.color_style.background);
+            pin_pos, g.style.pin_radius, pin.color_style.background);
     }
-    if ((g.style.flags & Flags_PinOutline) != 0)
+    if ((g.style.flags & StyleFlags_PinOutline) != 0)
     {
         editor.grid_draw_list->AddCircle(
-            pin_pos, NODE_PIN_RADIUS, pin.color_style.outline);
+            pin_pos, g.style.pin_radius, pin.color_style.outline);
     }
 }
 
@@ -866,7 +984,7 @@ void draw_node(EditorContext& editor, int node_idx)
         g.node_hovered = node_idx;
         if (ImGui::IsMouseClicked(0))
         {
-            editor.selected_nodes.push_back(g.node_hovered);
+            node_interaction_begin(editor, node_idx);
         }
     }
 
@@ -902,17 +1020,16 @@ void draw_node(EditorContext& editor, int node_idx)
             node.rect.Min,
             node.rect.Max,
             node_background,
-            NODE_CORNER_ROUNDNESS);
+            node.layout_style.corner_rounding);
 
         // title bar:
         {
-            ImRect title_rect = get_screen_space_title_bar_rect(
-                node.origin, node.title_text_size, node.rect);
+            ImRect title_rect = get_screen_space_title_bar_rect(node);
             editor.grid_draw_list->AddRectFilled(
                 title_rect.Min,
                 title_rect.Max,
                 titlebar_background,
-                NODE_CORNER_ROUNDNESS,
+                node.layout_style.corner_rounding,
                 ImDrawCornerFlags_Top);
             ImGui::SetCursorPos(
                 grid_space_to_editor_space(get_node_title_origin(node)));
@@ -920,13 +1037,13 @@ void draw_node(EditorContext& editor, int node_idx)
             ImGui::TextUnformatted(node.name);
             ImGui::PopItemWidth();
         }
-        if ((g.style.flags & Flags_NodeOutline) != 0)
+        if ((g.style.flags & StyleFlags_NodeOutline) != 0)
         {
             editor.grid_draw_list->AddRect(
                 node.rect.Min,
                 node.rect.Max,
                 node.color_style.outline,
-                NODE_CORNER_ROUNDNESS);
+                node.layout_style.corner_rounding);
         }
     }
 
@@ -941,8 +1058,8 @@ void draw_link(EditorContext& editor, int link_idx)
     const ImVec2 end = get_screen_space_pin_coordinates(editor, link.end_attr);
     const PinData& pin_start = editor.pins.find_or_create_new(link.start_attr);
 
-    const LinkBezierData link_data =
-        get_link_renderable(start, end, pin_start.type);
+    const LinkBezierData link_data = get_link_renderable(
+        start, end, pin_start.type, g.style.link_line_segments_per_length);
 
     const bool is_hovered = is_mouse_hovering_near_link(link_data.bezier);
     if (is_hovered)
@@ -954,17 +1071,15 @@ void draw_link(EditorContext& editor, int link_idx)
         }
     }
 
-    ColorStyle style = ColorStyle_Link;
+    ImU32 link_color = link.color_style.base;
     if (editor.selected_links.contains(link_idx))
     {
-        style = ColorStyle_LinkSelected;
+        link_color = link.color_style.selected;
     }
     else if (is_hovered)
     {
-        style = ColorStyle_LinkHovered;
+        link_color = link.color_style.hovered;
     }
-
-    const ImU32 link_color = g.style.colors[style];
 
     editor.grid_draw_list->AddBezierCurve(
         link_data.bezier.p0,
@@ -972,7 +1087,7 @@ void draw_link(EditorContext& editor, int link_idx)
         link_data.bezier.p2,
         link_data.bezier.p3,
         link_color,
-        LINK_THICKNESS,
+        g.style.link_thickness,
         link_data.num_segments);
 }
 
@@ -1044,7 +1159,8 @@ void Initialize()
 
     g.default_editor_ctx = NULL;
     g.editor_ctx = NULL;
-    g.grid_origin = ImVec2(0.0f, 0.0f);
+    g.canvas_origin_screen_space = ImVec2(0.0f, 0.0f);
+    g.canvas_rect_screen_space = ImRect(ImVec2(0.f, 0.f), ImVec2(0.f, 0.f));
     g.current_scope = Scope_None;
 
     g.default_editor_ctx = EditorContextCreate();
@@ -1092,7 +1208,6 @@ void StyleColorsDark()
 
     g.style.colors[ColorStyle_GridBackground] = IM_COL32(40, 40, 50, 200);
     g.style.colors[ColorStyle_GridLine] = IM_COL32(200, 200, 200, 40);
-    g.style.flags = Flags(Flags_NodeOutline);
 }
 
 void StyleColorsClassic()
@@ -1116,34 +1231,33 @@ void StyleColorsClassic()
     g.style.colors[ColorStyle_BoxSelectorOutline] = IM_COL32(82, 82, 161, 255);
     g.style.colors[ColorStyle_GridBackground] = IM_COL32(40, 40, 50, 200);
     g.style.colors[ColorStyle_GridLine] = IM_COL32(200, 200, 200, 40);
-    g.style.flags = Flags(Flags_NodeOutline);
 }
 
 void StyleColorsLight()
 {
     g.style.colors[ColorStyle_NodeBackground] = IM_COL32(240, 240, 240, 255);
     g.style.colors[ColorStyle_NodeBackgroundHovered] =
-        IM_COL32(200, 200, 200, 255);
+        IM_COL32(240, 240, 240, 255);
     g.style.colors[ColorStyle_NodeBackgroundSelected] =
-        IM_COL32(200, 200, 200, 255);
+        IM_COL32(240, 240, 240, 255);
     g.style.colors[ColorStyle_NodeOutline] = IM_COL32(100, 100, 100, 255);
-    g.style.colors[ColorStyle_TitleBar] = IM_COL32(244, 244, 244, 255);
+    g.style.colors[ColorStyle_TitleBar] = IM_COL32(248, 248, 248, 255);
     g.style.colors[ColorStyle_TitleBarHovered] = IM_COL32(209, 209, 209, 255);
     g.style.colors[ColorStyle_TitleBarSelected] = IM_COL32(209, 209, 209, 255);
     // original imgui values: 66, 150, 250
-    g.style.colors[ColorStyle_Link] = IM_COL32(90, 170, 250, 255);
+    g.style.colors[ColorStyle_Link] = IM_COL32(66, 150, 250, 100);
     // original imgui values: 117, 138, 204
-    g.style.colors[ColorStyle_LinkHovered] = IM_COL32(130, 150, 210, 255);
-    g.style.colors[ColorStyle_LinkSelected] = IM_COL32(130, 150, 210, 255);
+    g.style.colors[ColorStyle_LinkHovered] = IM_COL32(66, 150, 250, 242);
+    g.style.colors[ColorStyle_LinkSelected] = IM_COL32(66, 150, 250, 242);
     // original imgui values: 66, 150, 250
-    g.style.colors[ColorStyle_Pin] = IM_COL32(66, 150, 250, 180);
+    g.style.colors[ColorStyle_Pin] = IM_COL32(66, 150, 250, 160);
     g.style.colors[ColorStyle_PinHovered] = IM_COL32(66, 150, 250, 255);
     g.style.colors[ColorStyle_PinOutline] = IM_COL32(66, 150, 250, 255);
     g.style.colors[ColorStyle_BoxSelector] = IM_COL32(90, 170, 250, 30);
     g.style.colors[ColorStyle_BoxSelectorOutline] = IM_COL32(90, 170, 250, 150);
-    g.style.colors[ColorStyle_GridBackground] = IM_COL32(255, 255, 255, 200);
-    g.style.colors[ColorStyle_GridLine] = IM_COL32(180, 180, 180, 40);
-    g.style.flags = Flags(Flags_None);
+    g.style.colors[ColorStyle_GridBackground] = IM_COL32(225, 225, 225, 255);
+    g.style.colors[ColorStyle_GridLine] = IM_COL32(180, 180, 180, 100);
+    g.style.flags = StyleFlags(StyleFlags_None);
 }
 
 void BeginNodeEditor()
@@ -1158,8 +1272,6 @@ void BeginNodeEditor()
     g.link_created = LinkData();
     g.node_active.index = INVALID_INDEX;
     g.node_active.attribute = INVALID_INDEX;
-    g.node_moved.index = INVALID_INDEX;
-    g.node_moved.position = ImVec2(0.0f, 0.0f);
     g.node_hovered = INVALID_INDEX;
     g.link_hovered = INVALID_INDEX;
     g.pin_hovered = INVALID_INDEX;
@@ -1184,7 +1296,7 @@ void BeginNodeEditor()
             ImVec2(0.f, 0.f),
             true,
             ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoMove);
-        g.grid_origin = ImGui::GetCursorScreenPos();
+        g.canvas_origin_screen_space = ImGui::GetCursorScreenPos();
         // prepare for layering the node content on top of the nodes
         // NOTE: the draw list has to be captured here, because we want all the
         // content to clip the scrolling_region child window.
@@ -1192,10 +1304,16 @@ void BeginNodeEditor()
         editor.grid_draw_list->ChannelsSplit(Channel_Count);
         editor.grid_draw_list->ChannelsSetCurrent(Channel_Background);
 
-        // TODO: showing the grid should be a setting
-        if (/*show_grid*/ true)
         {
-            draw_grid(editor);
+            const ImVec2 canvas_size = ImGui::GetWindowSize();
+            g.canvas_rect_screen_space = ImRect(
+                editor_space_to_screen_space(ImVec2(0.f, 0.f)),
+                editor_space_to_screen_space(canvas_size));
+
+            if (g.style.flags & StyleFlags_GridLines)
+            {
+                draw_grid(editor, canvas_size);
+            }
         }
     }
 
@@ -1280,15 +1398,18 @@ void EndNodeEditor()
                 node.rect, node.attribute_rects[pin.attribute_idx], pin.type);
             const ImVec2 end_pos = imgui_io.MousePos;
 
-            const LinkBezierData link_data =
-                get_link_renderable(start_pos, end_pos, pin.type);
+            const LinkBezierData link_data = get_link_renderable(
+                start_pos,
+                end_pos,
+                pin.type,
+                g.style.link_line_segments_per_length);
             editor.grid_draw_list->AddBezierCurve(
                 link_data.bezier.p0,
                 link_data.bezier.p1,
                 link_data.bezier.p2,
                 link_data.bezier.p3,
                 g.style.colors[ColorStyle_Link],
-                LINK_THICKNESS,
+                g.style.link_thickness,
                 link_data.num_segments);
         }
 
@@ -1296,18 +1417,56 @@ void EndNodeEditor()
 
         if (ImGui::IsMouseReleased(0))
         {
-            // The link was created if the mouse is released near a pin
+            // TODO: this should also be a state machine
+
+            // The link was created if the mouse is released near a pin.
             // Check that the pin isn't the same on that the link was started
             // on!
+            const int pin_id_hovered = editor.pins.pool[g.pin_hovered].id;
             if (g.pin_hovered != INVALID_INDEX &&
-                editor.pins.pool[g.pin_hovered].id !=
-                    editor.link_dragged.start_attr)
+                pin_id_hovered != editor.link_dragged.start_attr)
             {
-                editor.link_dragged.end_attr =
-                    editor.pins.pool[g.pin_hovered].id;
+                struct LinkPredicate
+                {
+                    bool operator()(const LinkData& lhs, const LinkData& rhs)
+                        const
+                    {
+                        // Do a unique compare by sorting the attribute ids.
+                        // This catches duplicate links, whether they are in the
+                        // same direction or not.
 
-                g.link_created.start_attr = editor.link_dragged.start_attr;
-                g.link_created.end_attr = editor.link_dragged.end_attr;
+                        int lhs_start = lhs.start_attr;
+                        int lhs_end = lhs.end_attr;
+                        int rhs_start = rhs.start_attr;
+                        int rhs_end = rhs.end_attr;
+
+                        if (lhs_start > lhs_end)
+                        {
+                            ImSwap(lhs_start, lhs_end);
+                        }
+
+                        if (rhs_start > rhs_end)
+                        {
+                            ImSwap(rhs_start, rhs_end);
+                        }
+
+                        return lhs_start == rhs_start && lhs_end == rhs_end;
+                    }
+                };
+
+                LinkData test_link;
+                test_link.start_attr = editor.link_dragged.start_attr;
+                test_link.end_attr = pin_id_hovered;
+                // Test for duplicate link!
+                if (!editor.links.contains(test_link, LinkPredicate()))
+                {
+
+                    editor.link_dragged.end_attr =
+                        editor.pins.pool[g.pin_hovered].id;
+
+                    g.link_created.start_attr = editor.link_dragged.start_attr;
+                    g.link_created.end_attr = editor.link_dragged.end_attr;
+                }
             }
             // else the link is dropped
             else
@@ -1319,21 +1478,17 @@ void EndNodeEditor()
         }
     }
 
-    if (g.node_moved.index != INVALID_INDEX &&
-        editor.link_dragged.start_attr == INVALID_INDEX)
-    {
-        // Don't move the node if we're dragging a link
-        editor.nodes.pool[g.node_moved.index].origin = g.node_moved.position;
-    }
-
     {
         const bool any_ui_element_hovered = (g.node_hovered != INVALID_INDEX) ||
                                             (g.link_hovered != INVALID_INDEX) ||
                                             (g.pin_hovered != INVALID_INDEX) ||
                                             ImGui::IsAnyItemHovered();
+        const bool is_mouse_clicked_in_canvas =
+            is_mouse_clicked &&
+            g.canvas_rect_screen_space.Contains(ImGui::GetMousePos());
 
         // start the box selector
-        if (!any_ui_element_hovered && is_mouse_clicked)
+        if (!any_ui_element_hovered && is_mouse_clicked_in_canvas)
         {
             box_selector_begin(editor.box_selector);
         }
@@ -1344,6 +1499,8 @@ void EndNodeEditor()
             box_selector_update(editor.box_selector, editor, imgui_io);
         }
     }
+
+    node_interaction_update(editor);
 
     // set channel 0 before merging, or else UI rendering is broken
     editor.grid_draw_list->ChannelsSetCurrent(0);
@@ -1393,6 +1550,9 @@ void BeginNode(int node_id)
         g.style.colors[ColorStyle_TitleBarHovered];
     node.color_style.titlebar_selected =
         g.style.colors[ColorStyle_TitleBarSelected];
+    node.layout_style.corner_rounding = g.style.node_corner_rounding;
+    node.layout_style.padding =
+        ImVec2(g.style.node_padding_horizontal, g.style.node_padding_vertical);
 
     {
         const int idx = editor.nodes.id_map.GetInt(node_id, INVALID_INDEX);
@@ -1421,8 +1581,7 @@ void EndNode()
     ImGui::PopID();
     {
         NodeData& node = editor.nodes.pool[g.node_current.index];
-        node.rect =
-            get_screen_space_node_rect(get_item_rect(), node.title_text_size);
+        node.rect = get_screen_space_node_rect(node, get_item_rect());
     }
     g.node_current.index = INVALID_INDEX;
 }
@@ -1468,17 +1627,60 @@ void PushColorStyle(ColorStyle item, unsigned int color)
 {
     // Remember to call Initialize() before using any other functions!
     assert(initialized);
-    g.color_style_stack.push_back(
+    g.color_modifier_stack.push_back(
         ColorStyleElement(g.style.colors[item], item));
     g.style.colors[item] = color;
 }
 
 void PopColorStyle()
 {
-    assert(g.color_style_stack.size() > 0);
-    const ColorStyleElement elem = g.color_style_stack.back();
+    assert(g.color_modifier_stack.size() > 0);
+    const ColorStyleElement elem = g.color_modifier_stack.back();
     g.style.colors[elem.item] = elem.color;
-    g.color_style_stack.pop_back();
+    g.color_modifier_stack.pop_back();
+}
+
+float& lookup_style_var(const StyleVar item)
+{
+    // TODO: once the switch gets too big and unwieldy to work with, we could do
+    // a byte-offset lookup into the Style struct, using the StyleVar as an
+    // index. This is how ImGui does it.
+    float* style_var = 0;
+    switch (item)
+    {
+        case StyleVar_GridSpacing:
+            style_var = &g.style.grid_spacing;
+            break;
+        case StyleVar_NodeCornerRounding:
+            style_var = &g.style.node_corner_rounding;
+            break;
+        case StyleVar_NodePaddingHorizontal:
+            style_var = &g.style.node_padding_horizontal;
+            break;
+        case StyleVar_NodePaddingVertical:
+            style_var = &g.style.node_padding_vertical;
+            break;
+        default:
+            assert(!"Invalid StyleVar value!");
+    }
+
+    return *style_var;
+}
+
+void PushStyleVar(const StyleVar item, const float value)
+{
+    float& style_var = lookup_style_var(item);
+    g.style_modifier_stack.push_back(StyleElement(style_var, item));
+    style_var = value;
+}
+
+void PopStyleVar()
+{
+    assert(g.style_modifier_stack.size() > 0);
+    const StyleElement style_elem = g.style_modifier_stack.back();
+    g.style_modifier_stack.pop_back();
+    float& style_var = lookup_style_var(style_elem.item);
+    style_var = style_elem.value;
 }
 
 void SetNodePos(int node_id, const ImVec2& screen_space_pos)
@@ -1527,7 +1729,8 @@ bool IsNodeHovered(int* const node_id)
     const bool is_hovered = g.node_hovered != INVALID_INDEX;
     if (is_hovered)
     {
-        *node_id = g.node_hovered;
+        const EditorContext& editor = editor_context_get();
+        *node_id = editor.nodes.pool[g.node_hovered].id;
         return true;
     }
     return false;
@@ -1680,14 +1883,14 @@ void editor_line_handler(EditorContext& editor, const char* line)
 }
 } // namespace
 
-const char* SaveCurrentEditorStateToMemory(size_t* data_size)
+const char* SaveCurrentEditorStateToIniString(size_t* const data_size)
 {
-    return SaveEditorStateToMemory(&editor_context_get());
+    return SaveEditorStateToIniString(&editor_context_get(), data_size);
 }
 
-const char* SaveEditorStateToMemory(
-    const EditorContext* editor_ptr,
-    size_t* data_size)
+const char* SaveEditorStateToIniString(
+    const EditorContext* const editor_ptr,
+    size_t* const data_size)
 {
     assert(editor_ptr != NULL);
     const EditorContext& editor = *editor_ptr;
@@ -1720,15 +1923,17 @@ const char* SaveEditorStateToMemory(
     return g.text_buffer.c_str();
 }
 
-void LoadCurrentEditorStateFromMemory(const char* data, size_t data_size)
+void LoadCurrentEditorStateFromIniString(
+    const char* const data,
+    const size_t data_size)
 {
-    LoadEditorStateFromMemory(&editor_context_get(), data, data_size);
+    LoadEditorStateFromIniString(&editor_context_get(), data, data_size);
 }
 
-void LoadEditorStateFromMemory(
-    EditorContext* editor_ptr,
-    const char* data,
-    size_t data_size)
+void LoadEditorStateFromIniString(
+    EditorContext* const editor_ptr,
+    const char* const data,
+    const size_t data_size)
 {
     if (data_size == 0u)
     {
@@ -1785,15 +1990,17 @@ void LoadEditorStateFromMemory(
     ImGui::MemFree(buf);
 }
 
-void SaveCurrentEditorStateToDisk(const char* file_name)
+void SaveCurrentEditorStateToIniFile(const char* const file_name)
 {
-    SaveEditorStateToDisk(&editor_context_get(), file_name);
+    SaveEditorStateToIniFile(&editor_context_get(), file_name);
 }
 
-void SaveEditorStateToDisk(const EditorContext* editor, const char* file_name)
+void SaveEditorStateToIniFile(
+    const EditorContext* const editor,
+    const char* const file_name)
 {
     size_t data_size = 0u;
-    const char* data = SaveEditorStateToMemory(editor, &data_size);
+    const char* data = SaveEditorStateToIniString(editor, &data_size);
     FILE* file = ImFileOpen(file_name, "wt");
     if (!file)
     {
@@ -1804,12 +2011,14 @@ void SaveEditorStateToDisk(const EditorContext* editor, const char* file_name)
     fclose(file);
 }
 
-void LoadCurrentEditorStateFromDisk(const char* file_name)
+void LoadCurrentEditorStateFromIniFile(const char* const file_name)
 {
-    LoadEditorStateFromDisk(&editor_context_get(), file_name);
+    LoadEditorStateFromIniFile(&editor_context_get(), file_name);
 }
 
-void LoadEditorStateFromDisk(EditorContext* editor, const char* file_name)
+void LoadEditorStateFromIniFile(
+    EditorContext* const editor,
+    const char* const file_name)
 {
     size_t data_size = 0u;
     char* file_data = (char*)ImFileLoadToMemory(file_name, "rb", &data_size);
@@ -1819,7 +2028,7 @@ void LoadEditorStateFromDisk(EditorContext* editor, const char* file_name)
         return;
     }
 
-    LoadEditorStateFromMemory(editor, file_data, data_size);
+    LoadEditorStateFromIniString(editor, file_data, data_size);
     ImGui::MemFree(file_data);
 }
 } // namespace imnodes
