@@ -363,6 +363,7 @@ bool NFPluginManager::CheckStaticPlugin()
 			if (tempPluginName == strPluginName)
 			{
 				bFind = true;
+				break;
 			}
 		}
 

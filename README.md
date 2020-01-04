@@ -102,8 +102,11 @@ Thie repo show people how to use NF and NF's MidWare as submodule.
 ### JAVA Project
 WebSite:  https://github.com/NFGameTeam/NFrame-java
 
-### C# Project
-WebSite:  https://github.com/ketoo/NFrame
+### Unity Demo
+WebSite:  https://github.com/ketoo/NFUnitySDK
+
+### Client(cocos2d & unity)
+WebSite:  https://github.com/ketoo/NFClient
 
 
 ## License
