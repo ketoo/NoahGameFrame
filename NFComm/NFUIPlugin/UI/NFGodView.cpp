@@ -300,7 +300,7 @@ void NFGodView::RenderSceneObjectNode(const int sceneID, const int groupID)
 		 std::string barTile = className + "(" + std::to_string((int)pos.X()) + "," + std::to_string((int)pos.Z()) + ")";
          
 		 pView->AddNode(guid, barTile, ToNodeSpacePos(NFVector2(pos.X(), pos.Z())));
-		 pView->SetNodeDragable(guid, false);
+		 pView->SetNodeDraggable(guid, false);
          //pView->AddNodeAttrIn(guid, m_pKernelModule->CreateGUID(), NFrame::IObject::Name(), strName);
          //pView->AddNodeAttrIn(guid, m_pKernelModule->CreateGUID(), NFrame::IObject::Position(), pos.ToString());
       }

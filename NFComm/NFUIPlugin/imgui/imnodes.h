@@ -57,8 +57,6 @@ EditorContext* EditorContextCreate();
 void EditorContextFree(EditorContext*);
 void EditorContextSet(EditorContext*);
 void EditorContextResetPanning(const ImVec2& pos);
-ImVec2 GetEditorContextPanning();
-ImVec2 GetEditorContextGridOringin();
 void EditorContextMoveToNode(const int node_id);
 
 // Initialize the node editor system.
@@ -111,8 +109,7 @@ void SetNodeOriginPos(int node_id, const ImVec2& origin_pos);
 // Set the node name corresponding to the node id. The node name is displayed in
 // the node's title bar.
 void SetNodeName(int node_id, const char* name);
-void SetNodeDragable(int node_id, const bool dragable);
-void SetNodeIconPath(int node_id, const char* icon_path);
+void SetNodeDraggable(int node_id, const bool dragable);
 
 // The following functions return true if a UI element is being hovered over by
 // the mouse cursor. Assigns the id of the UI element being hovered over to the

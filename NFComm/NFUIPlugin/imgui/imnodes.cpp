@@ -52,7 +52,6 @@ static const float NODE_PIN_RADIUS = 4.f;
 static const float NODE_PIN_HOVER_RADIUS = 10.f;
 
 static const size_t NODE_NAME_STR_LEN = 32u;
-static const size_t NODE_PATH_STR_LEN = 64u;
 
 static const int INVALID_INDEX = -1;
 
@@ -146,8 +145,7 @@ struct NodeData
     ImVec2 origin;
     ImVec2 title_text_size;
     ImRect rect;
-    char icon_path[NODE_PATH_STR_LEN];
-    bool dragable;
+    bool draggable;
 
     struct
     {
@@ -161,12 +159,10 @@ struct NodeData
         : id(0u),
           name(
               "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0"),
-          icon_path(
-              "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0"),
           origin(100.0f, 100.0f), title_text_size(0.f, 0.f),
           rect(ImVec2(0.0f, 0.0f), ImVec2(0.0f, 0.0f)), color_style(),
           attribute_rects(),
-          dragable(true)
+          draggable(true)
     {
     }
 };
@@ -879,7 +875,7 @@ void draw_node(EditorContext& editor, int node_idx)
     // rendered the UI!).
     if (ImGui::IsItemActive() && ImGui::IsMouseDragging(0))
     {
-        if (node.dragable)
+        if (node.draggable)
         {
             g.node_moved.index = node_idx;
             g.node_moved.position = node.origin + ImGui::GetIO().MouseDelta;
@@ -1030,22 +1026,15 @@ void EditorContextResetPanning(const ImVec2& pos)
     editor.panning = pos;
 }
 
-ImVec2 GetEditorContextPanning()
-{
-    EditorContext& editor = editor_context_get();
-    return editor.panning;
-}
-
-ImVec2 GetEditorContextGridOringin()
-{
-    return g.grid_origin;
-}
-
 void EditorContextMoveToNode(const int node_id)
 {
     EditorContext& editor = editor_context_get();
     NodeData& node = editor.nodes.find_or_create_new(node_id);
-    editor.panning = g.grid_origin - node.origin;
+
+    const ImVec2 canvas_size = ImGui::GetWindowSize();
+
+    editor.panning.x = canvas_size.y / 2 - node.origin.x;
+    editor.panning.y = canvas_size.x / 2 - node.origin.y;
 }
 
 void Initialize()
@@ -1522,21 +1511,12 @@ void SetNodeName(int node_id, const char* name)
     node.title_text_size = ImGui::CalcTextSize(node.name);
 }
 
-void SetNodeDragable(int node_id, const bool dragable)
+void SetNodeDraggable(int node_id, const bool draggable)
 {
     assert(initialized);
     EditorContext& editor = editor_context_get();
     NodeData& node = editor.nodes.find_or_create_new(node_id);
-    node.dragable = dragable;
-}
-
-void SetNodeIconPath(int node_id, const char* icon_path)
-{
-    assert(initialized);
-    EditorContext& editor = editor_context_get();
-    NodeData& node = editor.nodes.find_or_create_new(node_id);
-    memset(node.icon_path, 0, NODE_PATH_STR_LEN);
-    memcpy(node.icon_path, icon_path, strlen(icon_path));
+    node.draggable = draggable;
 }
 
 bool IsNodeHovered(int* const node_id)

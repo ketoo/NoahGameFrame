@@ -216,7 +216,7 @@ NFGUID NFNodeView::GetNodeByAttriId(const NFGUID attriId)
    return NFGUID();
 }
 
-void NFNodeView::SetNodeDragable(const NFGUID guid, const bool dragable)
+void NFNodeView::SetNodeDraggable(const NFGUID guid, const bool dragable)
 {
     if (mNodes.find(guid) != mNodes.end())
     {
@@ -224,7 +224,7 @@ void NFNodeView::SetNodeDragable(const NFGUID guid, const bool dragable)
         if (id >= 0)
         {
             EditorContextSet((imnodes::EditorContext*)m_pEditorContext);
-            imnodes::SetNodeDragable(id, dragable);
+            imnodes::SetNodeDraggable(id, dragable);
         }
     }
 }
@@ -246,22 +246,6 @@ void NFNodeView::ResetOffest(const NFVector2& pos)
 {
    EditorContextSet((imnodes::EditorContext*)m_pEditorContext);
    imnodes::EditorContextResetPanning(ImVec2(pos.X(), pos.Y()));
-}
-
-NFVector2 NFNodeView::GetOffest()
-{
-    EditorContextSet((imnodes::EditorContext*)m_pEditorContext);
-    imnodes::EditorContext* pContext = (imnodes::EditorContext*)m_pEditorContext;
-    ImVec2 vec = imnodes::GetEditorContextPanning();
-    return NFVector2(vec.x, vec.y);
-}
-
-NFVector2 NFNodeView::GetGridOringin()
-{
-    EditorContextSet((imnodes::EditorContext*)m_pEditorContext);
-    imnodes::EditorContext* pContext = (imnodes::EditorContext*)m_pEditorContext;
-    ImVec2 vec = imnodes::GetEditorContextPanning();
-    return NFVector2(vec.x, vec.y);
 }
 
 void NFNodeView::MoveToNode(const NFGUID guid)
