@@ -42,7 +42,6 @@
 #if NF_PLATFORM == NF_PLATFORM_WIN
 #pragma comment( lib, "NFCore.lib" )
 #pragma comment( lib, "NFMessageDefine.lib" )
-#pragma comment( lib, "libprotobuf.lib" )
 #elif NF_PLATFORM == NF_PLATFORM_LINUX || NF_PLATFORM == NF_PLATFORM_ANDROID
 #pragma comment( lib, "NFCore.a" )
 #elif NF_PLATFORM == NF_PLATFORM_APPLE || NF_PLATFORM == NF_PLATFORM_APPLE_IOS
