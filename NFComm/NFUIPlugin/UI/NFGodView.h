@@ -48,10 +48,13 @@ public:
    void SetCurrentObjectID(const NFGUID& id);
 
 private:
+    NFVector2 ToNodeSpacePos(const NFVector2& v);
+
 	void RenderScene(const int sceneID, const int groupID);
 	void HandlerSelected(const NFGUID& id);
 
-   void RenderSceneObjectNode(const int sceneID, const int groupID);
+    void RenderSceneObjectNode(const int sceneID, const int groupID);
+    void UpdateSceneObjectNodePosition(const int sceneID, const int groupID);
 
 private:
 	int mGroupID = -1;

@@ -156,6 +156,10 @@ void NFContainerView::BluePrintMenu()
 			{
 				pBluePrintView->TryToCreateExecuter();
 			}
+            if (ImGui::MenuItem("New Variable", ""))
+            {
+                pBluePrintView->TryToCreateVariable();
+            }
 			//ImGui::Separator();
 			ImGui::EndMenu();
 		}

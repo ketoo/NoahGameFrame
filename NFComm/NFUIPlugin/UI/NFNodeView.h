@@ -153,8 +153,17 @@ public:
    void DeleteNode(const NFGUID guid);
 
    NFGUID GetNodeByAttriId(const NFGUID attriId);
+
+
+   void SetNodeDragable(const NFGUID guid, const bool dragable);
+   void SetNodePosition(const NFGUID guid, const NFVector2 vec = NFVector2());
+
    void ResetOffest(const NFVector2& pos);
-   
+   NFVector2 GetOffest();
+   NFVector2 GetGridOringin();
+   void MoveToNode(const NFGUID guid);
+
+
 private:
    void RenderNodes();
    void RenderLinks();

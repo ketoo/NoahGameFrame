@@ -167,6 +167,10 @@ void NFHierachyView::BluePrintViewSubRender()
          {
 			   BluePrintViewSubRenderForExecuter();
          }
+		 else if (blueprintNode->blueprintType == NFBlueprintType::VARIABLE)
+		 {
+			 BluePrintViewSubRenderForVariable();
+		 }
 
          ImGui::EndGroup();
       }
@@ -194,10 +198,10 @@ void NFHierachyView::BluePrintViewSubRenderForMonitor()
 		{
 			NF_SHARE_PTR<NFMonitor> monitor = std::dynamic_pointer_cast<NFMonitor>(blueprintNode);
 
-         BluePrintViewSubRenderForMonitorHead(monitor);
-         BluePrintViewSubRenderForMonitorBody(monitor);
-         BluePrintViewSubRenderForMonitorBot(monitor);
-      }
+			BluePrintViewSubRenderForMonitorHead(monitor);
+			BluePrintViewSubRenderForMonitorBody(monitor);
+			BluePrintViewSubRenderForMonitorBot(monitor);
+		}
 	}
 }
 
@@ -212,14 +216,27 @@ void NFHierachyView::BluePrintViewSubRenderForJudgement()
 		{
 			NF_SHARE_PTR<NFJudgement> judgement = std::dynamic_pointer_cast<NFJudgement>(blueprintNode);
 
-         BluePrintViewSubRenderForJudgementHead(judgement);
-         BluePrintViewSubRenderForJudgementBody(judgement);
-         BluePrintViewSubRenderForJudgementBot(judgement);
+			BluePrintViewSubRenderForJudgementHead(judgement);
+			BluePrintViewSubRenderForJudgementBody(judgement);
+			BluePrintViewSubRenderForJudgementBot(judgement);
 		}
 	}
 }
 
 void NFHierachyView::BluePrintViewSubRenderForExecuter()
+{
+	NF_SHARE_PTR<NFBluePrintView> pBluePrintView = std::dynamic_pointer_cast<NFBluePrintView>(m_pUIModule->GetView(NFViewType::BluePrintView));
+	NFGUID objectID = pBluePrintView->GetCurrentObjectID();
+	if (!objectID.IsNull())
+	{
+		auto blueprintNode = m_pBluePrintModule->FindBaseNode(objectID);
+		if (blueprintNode)
+		{
+		}
+	}
+}
+
+void NFHierachyView::BluePrintViewSubRenderForVariable()
 {
 	NF_SHARE_PTR<NFBluePrintView> pBluePrintView = std::dynamic_pointer_cast<NFBluePrintView>(m_pUIModule->GetView(NFViewType::BluePrintView));
 	NFGUID objectID = pBluePrintView->GetCurrentObjectID();

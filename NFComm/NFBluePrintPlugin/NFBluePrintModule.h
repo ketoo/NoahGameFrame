@@ -75,7 +75,8 @@ public:
 
 	virtual NF_SHARE_PTR<NFBluePrintNodeBase> FindBaseNode(const NFGUID& id);
 
-	virtual NF_SHARE_PTR<NFMonitor> AddMonitorForLogicBlock(const NFGUID& logicBlockId, const NFGUID& id, const std::string& name);
+    virtual NF_SHARE_PTR<NFMonitor> AddMonitorForLogicBlock(const NFGUID& logicBlockId, const NFGUID& id, const std::string& name);
+    virtual NF_SHARE_PTR<NFVariable> AddVariableForLogicBlock(const NFGUID& logicBlockId, const NFGUID& id, const std::string& name);
 	virtual NF_SHARE_PTR<NFJudgement> AddJudgementForMonitor(const NFGUID& monitorId, const NFGUID& id, const std::string& name);
 	virtual NF_SHARE_PTR<NFJudgement> AddTrueJudgementForJudgement(const NFGUID& judgementId, const NFGUID& id, const std::string& name);
 	virtual NF_SHARE_PTR<NFJudgement> AddFalseJudgementForJudgement(const NFGUID& judgementId, const NFGUID& id, const std::string& name);

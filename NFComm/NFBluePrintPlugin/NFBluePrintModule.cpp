@@ -25,6 +25,10 @@
 
 #include "NFBluePrintModule.h"
 
+NF_SHARE_PTR<NFBluePrintNodeBase> NFVariable::FindBaseNode(const NFGUID& id)
+{
+	return this->parent;
+}
 
 NF_SHARE_PTR<NFBluePrintNodeBase> NFExecuter::FindBaseNode(const NFGUID& id)
 {
@@ -129,12 +133,28 @@ NF_SHARE_PTR<NFBluePrintNodeBase> NFLogicBlock::FindBaseNode(const NFGUID& id)
 		{
 			return it;
 		}
+
 		auto baseNode = it->FindBaseNode(id);
 		if (baseNode)
 		{
 			return baseNode;
 		}
 	}
+
+	for (auto it : variables)
+	{
+		if (it->id == id)
+		{
+			return it;
+		}
+
+		auto baseNode = it->FindBaseNode(id);
+		if (baseNode)
+		{
+			return baseNode;
+		}
+	}
+
 	return nullptr;
 }
 ////////////////////
@@ -268,6 +288,24 @@ NF_SHARE_PTR<NFMonitor> NFBluePrintModule::AddMonitorForLogicBlock(const NFGUID&
 			ModifyEvent(id, true);
 
 			return monitor;
+		}
+	}
+
+	return nullptr;
+}
+
+NF_SHARE_PTR<NFVariable> NFBluePrintModule::AddVariableForLogicBlock(const NFGUID& logicBlockId, const NFGUID& id, const std::string& name)
+{
+	for (auto it : mLogicBlocks)
+	{
+		if (it->id == logicBlockId)
+		{
+			auto variable = NF_SHARE_PTR<NFVariable>(NF_NEW NFVariable(this->pPluginManager, id, name, it));
+			it->variables.push_front(variable);
+
+			ModifyEvent(id, true);
+
+			return variable;
 		}
 	}
 
