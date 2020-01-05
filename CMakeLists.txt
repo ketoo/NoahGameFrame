@@ -1,6 +1,7 @@
 set_property(GLOBAL PROPERTY USE_FOLDERS On)
 
 option(BUILD_TOOLS_ONLY "help string describing option")
+option(BUILD_MID_WARE_SDK "help string describing option")
 
 cmake_minimum_required(VERSION 2.8)
 
@@ -99,8 +100,13 @@ link_directories(${DependenciesLibPath})
 if(${BUILD_TOOLS_ONLY} STREQUAL "ON")
 	message("Build Tools Only")
 	add_subdirectory(NFTools)
+elseif(${BUILD_MID_WARE_SDK} STREQUAL "ON")
+	message("Build SDK & MIDWARE")
+	add_subdirectory(Dependencies)
+	add_subdirectory(NFComm)
+	add_subdirectory(NFServer)
 else()
-	message("Build All")
+	message("Build SDK")
 	add_subdirectory(Dependencies)
 	add_subdirectory(NFComm)
 	add_subdirectory(NFServer)

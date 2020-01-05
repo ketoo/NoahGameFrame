@@ -46,13 +46,14 @@ elif [ $sysOS == "Linux" ];then
 
 fi
 
+mkdir lib
 mkdir ./lib/Release/
 mkdir ./lib/Debug/
 
 git submodule update --init --recursive
 ./build_hiredis.sh
 
-./bootstrap-vcpkg.sh
+./build_vcpkg.sh
 
 if [ $sysOS == "Darwin" ];then
     cp -r -f ./vcpkg/installed/x64-osx/lib/* ./lib/Release/
