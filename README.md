@@ -92,7 +92,7 @@ Thie repo show people how to use NF and NF's MidWare as submodule.
 ### CMake ---- please use administrator(or sudo) to do these:
 1. Git pull all source
 2. Install cmake[>= 3.1] please choose options for installing: **Add CMake to the system PATH for all users and restart your computer**
-3. Install VS2015 or gcc[>= 4.8]
+3. Install VS2019 or gcc[>= 4.8]
 4. Run Dependencies/build_dep.sh
 5. Run **install4cmake.bat** or **install4cmake.sh** to build NF
 6. Run the binary file by **_Out/rund.bat** or **_Out/rund.sh**
