@@ -97,7 +97,7 @@ Thie repo show people how to use NF and NF's MidWare as submodule.
 5. Run **install4cmake.bat** or **install4cmake.sh** to build NF (or run /Depenndencies/build._dep.sh then run buildServer.sh)
 6. Run the binary file by **_Out/rund.bat** or **_Out/rund.sh**
 
-
+### IF YOU LIVING IN A COUNTRY CANNOT ACCESS GITHUB FASTLY PLZ BUILD NF WITH VPN
 
 ### JAVA Project
 WebSite:  https://github.com/NFGameTeam/NFrame-java
