@@ -80,7 +80,7 @@ Thie repo show people how to use NF and NF's MidWare as submodule.
 * MSVC >= VS2017 (**Tested in Win7/10**)
 
 ## Build and Install
-### MSVC >= 2015
+### MSVC >= 2019
 
 1. Git pull all source
 2. Open the solution: **NoahFrame.sln**, build FileProcessTool project
