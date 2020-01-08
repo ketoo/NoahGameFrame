@@ -34,6 +34,7 @@ if (APPLE)
 	include_directories(
 		${SolutionDir}
 		${SolutionDir}/Dependencies/
+		${SolutionDir}/Dependencies/NFMessageDefine/
 		${SolutionDir}/NFComm/NFPluginModule/
 		${SolutionDir}/Dependencies/hiredis/hiredis_linux
 		${SolutionDir}/Dependencies/vcpkg/installed/x64-osx/include/
@@ -45,6 +46,7 @@ elseif(UNIX)
 	include_directories(
 		${SolutionDir}
 		${SolutionDir}/Dependencies/
+		${SolutionDir}/Dependencies/NFMessageDefine/
 		${SolutionDir}/NFComm/NFPluginModule/
 		${SolutionDir}/Dependencies/hiredis/hiredis_linux
 		${SolutionDir}/Dependencies/vcpkg/installed/x64-linux/include/
@@ -56,6 +58,7 @@ else()
 	include_directories(
 		${SolutionDir}
 		${SolutionDir}/Dependencies/
+		${SolutionDir}/Dependencies/NFMessageDefine/
 		${SolutionDir}/NFComm/NFPluginModule/
 		${SolutionDir}/Dependencies/hiredis/hiredis_win
 		${SolutionDir}/Dependencies/vcpkg/installed/x64-windows-static/include/
@@ -106,7 +109,6 @@ elseif(${BUILD_MID_WARE_SDK} STREQUAL "ON")
 	add_subdirectory(NFComm)
 	add_subdirectory(NFServer)
 	add_subdirectory(../NFMidWare NFMidWare)
-	add_subdirectory(../NFComm/NFMessageDefineEx NFComm/NFMessageDefineEx)
 else()
 	message("Build SDK")
 	add_subdirectory(Dependencies)

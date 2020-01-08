@@ -60,16 +60,7 @@ target_link_libraries(NFPluginLoader NFWorldNet_ServerPlugin)
 
 
 if (UNIX)
-	add_dependencies(NFPluginLoader NFCore)
-
-	#if (CMAKE_BUILD_TYPE MATCHES "Release")
-	#	target_link_libraries(NFPluginLoader libSDL2.a)
-	#else()
-	#	target_link_libraries(NFPluginLoader libSDL2d.a)
-	#endif()
-
 	target_link_libraries(NFPluginLoader -static-libstdc++)
-
 else()
 
 endif()
@@ -80,6 +71,3 @@ set_target_properties( NFPluginLoader PROPERTIES
 	ARCHIVE_OUTPUT_DIRECTORY ${NFOutPutDir}
 	RUNTIME_OUTPUT_DIRECTORY ${NFOutPutDir}
 	LIBRARY_OUTPUT_DIRECTORY ${NFOutPutDir} )
-
-
-add_definitions(-D_X64 -D_CONSOLE)
