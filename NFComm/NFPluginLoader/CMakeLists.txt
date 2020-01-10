@@ -66,6 +66,7 @@ else()
 endif()
 
 set_target_properties( NFPluginLoader PROPERTIES OUTPUT_NAME_DEBUG "NFPluginLoader")
+set_target_properties( NFPluginLoader PROPERTIES PREFIX "")
 set_target_properties( NFPluginLoader PROPERTIES
 	FOLDER "NFComm/NFPluginLoader"
 	ARCHIVE_OUTPUT_DIRECTORY ${NFOutPutDir}

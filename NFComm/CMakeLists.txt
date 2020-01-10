@@ -15,11 +15,3 @@ if (APPLE)
     add_subdirectory(NFUIPlugin)
     add_subdirectory(NFBluePrintPlugin)
 endif()
-
-
-if(${BUILD_MID_WARE_SDK} STREQUAL "ON")
-	add_subdirectory(../../NFComm/NFMessageDefineEx NFMessageDefineEx)
-	add_subdirectory(../../NFComm/NFServer NFServer)
-else()
-    add_subdirectory(NFServer)
-endif()
