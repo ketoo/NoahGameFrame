@@ -96,7 +96,7 @@ bool NFTreeNode::AddTreeNode(const NFGUID guid, const std::string& name)
 {
 	if (!mSubTrees.ExistElement(guid))
 	{
-		return mSubTrees.AddElement(guid, NF_SHARE_PTR<NFTreeNode>(NF_NEW NFTreeNode(this->mTreeView, this->mTreeView->GenerateId(), name, guid)));
+		return mSubTrees.AddElement(guid, NF_SHARE_PTR<NFTreeNode>(NF_NEW NFTreeNode(this->mTreeView, this->mTreeView->GenerateNodeId(), name, guid)));
 	}
 
 	return false;
@@ -185,7 +185,7 @@ void NFTreeView::AddTreeNode(const NFGUID guid, const std::string& name)
 {
 	if (mTrees.find(guid) == mTrees.end())
 	{
-		mTrees.insert(std::pair<NFGUID, NF_SHARE_PTR<NFTreeNode>>(guid, NF_SHARE_PTR<NFTreeNode>(NF_NEW NFTreeNode(this, GenerateId(), name, guid))));
+		mTrees.insert(std::pair<NFGUID, NF_SHARE_PTR<NFTreeNode>>(guid, NF_SHARE_PTR<NFTreeNode>(NF_NEW NFTreeNode(this, GenerateNodeId(), name, guid))));
 	}
 }
 
@@ -240,7 +240,7 @@ void NFTreeView::AddTreeLeafNode(const NFGUID guid, const NFGUID leafId, const s
 	auto node = FindTreeNode(guid);
 	if (node)
 	{
-		node->AddLeaf(GenerateId(), name, leafId);
+		node->AddLeaf(GeneratePinId(), name, leafId);
 	}
 }
 

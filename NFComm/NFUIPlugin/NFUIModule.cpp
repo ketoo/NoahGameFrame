@@ -368,7 +368,11 @@ void NFUIModule::ExecuteBegin(NF_SHARE_PTR<NFIView> view)
 	}
 	else
 	{
-		ImGui::Begin(view->name.c_str(), &(view->visible));
+		ImGuiWindowFlags window_flags = 0;
+		window_flags |= ImGuiWindowFlags_NoCollapse;
+		window_flags |= ImGuiWindowFlags_NoTitleBar;
+
+		ImGui::Begin(view->name.c_str(), &(view->visible), window_flags);
 	}
 }
 

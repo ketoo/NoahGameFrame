@@ -25,10 +25,14 @@
 #ifndef NF_BLUE_PRINT_VIEW_H
 #define NF_BLUE_PRINT_VIEW_H
 
-#include "NFComm/NFPluginModule/NFIUIModule.h"
-#include "NFComm/NFPluginModule/NFIBluePrintModule.h"
 #include "NFNodeView.h"
 #include "NFTreeView.h"
+#include "NFComm/NFMessageDefine/NFProtocolDefine.hpp"
+#include "NFComm/NFPluginModule/NFIUIModule.h"
+#include "NFComm/NFPluginModule/NFIBluePrintModule.h"
+#include "NFComm/NFPluginModule/NFIKernelModule.h"
+#include "NFComm/NFPluginModule/NFIElementModule.h"
+#include "NFComm/NFPluginModule/NFIClassModule.h"
 
 class NFBluePrintView : public NFIView
 {
@@ -41,22 +45,40 @@ public:
    	virtual void SubRender();
 
 	void TryToCreateBluePrintBlock();
-	void TryToCreateMonitor();
+	void TryToCreateMonitor(NFMonitorType type);
 	void TryToCreateJudgement();
 	void TryToCreateExecuter();
-	void TryToCreateVariable();
+	void TryToCreateVariable(NFVariableType type);
 
 	void TryToCreateComparator();
 
 	NFGUID GetCurrentObjectID();
 	void SetCurrentObjectID(const NFGUID& id);
 
+	void SetCurrentLogicBlockID(const NFGUID& id);
+
 	NFTreeView* GetTreeView();
 	NFNodeView* GetNodeView();
 	
 private:
 	void HandlerSelected(const NFGUID& id);
-    void ModifyEvent(const NFGUID& id, const bool create);
+	void NodeModifyEvent(const NFGUID& id, const bool create);
+	void LinkModifyEvent(const NFGUID& startNode, const const NFGUID& endNode, const NFGUID& startPin, const const NFGUID& endPin, const bool create);
+
+	bool TryNewLinkEvent(const NFGUID& startNode, const const NFGUID& endNode, const NFGUID& startPin, const const NFGUID& endPin);
+	bool TryNewLinkEventForVariableToMonitor(NF_SHARE_PTR<NFBluePrintNodeBase> startNode, NF_SHARE_PTR<NFBluePrintNodeBase> endNode, const NFGUID& startPin, const const NFGUID& endPin);
+
+
+	void NodeAttriRender(NFNodeAttri* nodeAttri);
+
+	void NodeAttriRenderForVariable(NFNodeAttri* nodeAttri);
+	void NodeAttriRenderForInputVariable(NFNodeAttri* nodeAttri);
+	void NodeAttriRenderForElementVariable(NFNodeAttri* nodeAttri);
+	void NodeAttriRenderForPropertyVariable(NFNodeAttri* nodeAttri);
+	void NodeAttriRenderForRecordVariable(NFNodeAttri* nodeAttri);
+
+	void NodeAttriRenderForMonitor(NFNodeAttri* nodeAttri);
+
 
 	void CreateLogicBlockWindow();
 	void CreateMonitor();
@@ -66,15 +88,26 @@ private:
 
 	void CreateComparator();
    
+
+private:
+	void AddMonitorNode(NF_SHARE_PTR<NFIMonitor> monitor);
+	void AddVariableNode(NF_SHARE_PTR<NFIVariable> variable);
+
 private:
 
 	NFGUID mCurrentObjectID;
+	NFGUID mCurrentLogicBlickID;
 
 private:
 	bool bCreatingLogicBlock = false;
+
+	NFMonitorType monitorType;
 	bool bCreatingMonitor = false;
+
 	bool bCreatingJudgment = false;
 	bool bCreatingExecuter = false;
+
+	NFVariableType valueType;
 	bool bCreatingVariable = false;
 
 	bool bCreatingComparator = false;
@@ -86,6 +119,8 @@ private:
 	NFIBluePrintModule* m_pBluePrintModule;
 	NFIUIModule* m_pUIModule;
 	NFIKernelModule* m_pKernelModule;
+	NFIClassModule* m_pClassModule;
+	NFIElementModule* m_pElementModule;
 };
 
 #endif

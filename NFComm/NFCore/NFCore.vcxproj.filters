@@ -104,6 +104,9 @@
     <ClInclude Include="NFQueue.hpp">
       <Filter>Unit</Filter>
     </ClInclude>
+    <ClInclude Include="NFSmartEnum.hpp">
+      <Filter>Unit</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="NFException.cpp">

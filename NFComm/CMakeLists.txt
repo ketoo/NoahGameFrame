@@ -1,3 +1,4 @@
+add_subdirectory(NFServer)
 add_subdirectory(NFPluginLoader)
 add_subdirectory(NFActorPlugin)
 add_subdirectory(NFConfigPlugin)
@@ -11,15 +12,8 @@ add_subdirectory(NFNavigationPlugin)
 add_subdirectory(NFNoSqlPlugin)
 add_subdirectory(NFTestPlugin)
 add_subdirectory(NFLuaScriptPlugin)
+
 if (APPLE)
     add_subdirectory(NFUIPlugin)
     add_subdirectory(NFBluePrintPlugin)
-endif()
-
-
-if(${BUILD_MID_WARE_SDK} STREQUAL "ON")
-	add_subdirectory(../../NFComm/NFMessageDefineEx NFMessageDefineEx)
-	add_subdirectory(../../NFComm/NFServer NFServer)
-else()
-    add_subdirectory(NFServer)
 endif()

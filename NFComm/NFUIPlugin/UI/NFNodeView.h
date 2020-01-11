@@ -26,6 +26,9 @@
 #define NF_NODE_VIEW_H
 
 #include "NFComm/NFPluginModule/NFIUIModule.h"
+#include "NFComm/NFPluginModule/NFIBluePrintModule.h"
+
+class NFNodeView;
 
 class NFNodeAttri
 {
@@ -33,13 +36,13 @@ private:
    NFNodeAttri(){}
 
 public:
-   NFNodeAttri(const int id, const std::string& name, const bool inputPin, const NFGUID guid, const std::string& value)
+   NFNodeAttri(const int id, const std::string& name, const bool inputPin, const NFGUID guid, const std::string& desc)
    {
       this->id = id;
       this->name = name;
       this->inputPin = inputPin;
       this->guid = guid;
-      this->value = value;
+      this->desc = desc;
    }
 
    void Execute();
@@ -47,8 +50,11 @@ public:
    int id;
    bool inputPin;
    std::string name;
-   std::string value;
+   std::string desc;
    NFGUID guid;
+   NFGUID nodeId;
+   NFNodeView* nodeView;
+   NF_SHARE_PTR<NFDataLink> link;
 };
 
 class NFNode
@@ -67,9 +73,11 @@ public:
 
 	void Execute();
 
-   void AddAttribute(const int id, const std::string& name, const bool inputPin, const NFGUID guid, const std::string& value)
+   void AddAttribute(const int id, const std::string& name, const bool inputPin, const NFGUID guid, const std::string& desc)
    {
-      auto ptr = NF_SHARE_PTR<NFNodeAttri>(NF_NEW NFNodeAttri(id, name, inputPin, guid, value));
+      auto ptr = NF_SHARE_PTR<NFNodeAttri>(NF_NEW NFNodeAttri(id, name, inputPin, guid, desc));
+      ptr->nodeView = this->nodeView;
+      ptr->nodeId = this->guid;
       mAttris.push_back(ptr);
    }
 
@@ -101,33 +109,12 @@ public:
    int id;
    NFGUID guid;
    NFVector2 initPos;
+   NFNodeView* nodeView;
 
    std::list<NF_SHARE_PTR<NFNodeAttri>> mAttris;
 
 private:
    bool first = true;
-};
-
-class NFNodeLink
-{
-private:
-   NFNodeLink(){}
-
-public:
-   NFNodeLink(NFGUID startID, NFGUID endID, int start_attr, int end_attr)
-   {
-      this->start = startID;
-      this->end = endID;
-
-      this->start_attr = start_attr;
-      this->end_attr = end_attr;
-   }
-
-   int start_attr;
-   int end_attr;
-
-   NFGUID start;
-   NFGUID end;
 };
 
 class NFNodeView : public NFIView
@@ -140,6 +127,10 @@ public:
 
    void CleanNodes();
 
+   void SetUpNewLinkCallBack(std::function<bool(const NFGUID&, const NFGUID&, const NFGUID&, const NFGUID&)> functor);
+   void SetUpNodeAttriRenderCallBack(std::function<void(NFNodeAttri*)> functor);
+   void RenderAttriPin(NFNodeAttri* nodeAttri);
+
    //////////////////////////////////////
    const NFGUID GetNodeGUID(const int nodeId);
    const int GetNodeID(const NFGUID guid);
@@ -148,13 +139,15 @@ public:
    const int GetAttriID(const NFGUID guid);
 
    void AddNode(const NFGUID guid, const std::string& name, const NFVector2 vec = NFVector2());
-   void AddNodeAttrIn(const NFGUID guid, const NFGUID attrId, const std::string& name, const std::string& value);
-   void AddNodeAttrOut(const NFGUID guid, const NFGUID attrId, const std::string& name, const std::string& value);
+   void AddNodeAttrIn(const NFGUID guid, const NFGUID attrId, const std::string& name, const std::string& desc);
+   void AddNodeAttrOut(const NFGUID guid, const NFGUID attrId, const std::string& name, const std::string& desc);
    void DeleteNode(const NFGUID guid);
 
+   void AddLink(const NFGUID& startNode, const const NFGUID& endNode, const NFGUID& startPin, const const NFGUID& endPin);
+   NF_SHARE_PTR<NFDataLink> GetLink(const NFGUID& startNode, const const NFGUID& endNode, const NFGUID& startPin, const const NFGUID& endPin);
+   void DeleteLink(const NFGUID& startNode, const const NFGUID& endNode, const NFGUID& startPin, const const NFGUID& endPin);
+
    NFGUID GetNodeByAttriId(const NFGUID attriId);
-
-
    void SetNodeDraggable(const NFGUID guid, const bool dragable);
    void SetNodePosition(const NFGUID guid, const NFVector2 vec = NFVector2());
 
@@ -169,11 +162,16 @@ private:
    void CheckNewLinkStatus();
 
 private:
-   NFIUIModule* m_pUIModule;
-   void* m_pEditorContext;
 
-   std::map<NFGUID, NF_SHARE_PTR<NFNode>> mNodes;
-   std::list<NF_SHARE_PTR<NFNodeLink>> mLinks;
+    std::function<bool(const NFGUID&, const NFGUID&, const NFGUID&, const NFGUID&)> mTryNewLinkFunctor;
+    std::function<void(NFNodeAttri*)> mNodeAttriRenderFunctor;
+
+    NFIUIModule* m_pUIModule;
+
+    void* m_pEditorContext;
+
+    std::map<NFGUID, NF_SHARE_PTR<NFNode>> mNodes;
+    std::list<NF_SHARE_PTR<NFDataLink>> mLinks;
 };
 
 #endif

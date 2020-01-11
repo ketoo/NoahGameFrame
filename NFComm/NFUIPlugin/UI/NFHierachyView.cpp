@@ -179,12 +179,7 @@ void NFHierachyView::BluePrintViewSubRender()
 
 void NFHierachyView::BluePrintViewSubRenderForLogicBlock()
 {
-	ImGui::Separator();
-   	if (ImGui::Button("+ Monitor"))
-   	{
-      	NF_SHARE_PTR<NFBluePrintView> blueprintView = std::dynamic_pointer_cast<NFBluePrintView>(m_pUIModule->GetView(NFViewType::BluePrintView));
-      	blueprintView->TryToCreateMonitor();
-   	}
+
 }
 
 void NFHierachyView::BluePrintViewSubRenderForMonitor()
@@ -196,7 +191,7 @@ void NFHierachyView::BluePrintViewSubRenderForMonitor()
 		auto blueprintNode = m_pBluePrintModule->FindBaseNode(objectID);
 		if (blueprintNode)
 		{
-			NF_SHARE_PTR<NFMonitor> monitor = std::dynamic_pointer_cast<NFMonitor>(blueprintNode);
+			NF_SHARE_PTR<NFIMonitor> monitor = std::dynamic_pointer_cast<NFIMonitor>(blueprintNode);
 
 			BluePrintViewSubRenderForMonitorHead(monitor);
 			BluePrintViewSubRenderForMonitorBody(monitor);
@@ -249,13 +244,14 @@ void NFHierachyView::BluePrintViewSubRenderForVariable()
 	}
 }
 
-void NFHierachyView::BluePrintViewSubRenderForMonitorHead(NF_SHARE_PTR<NFMonitor> monitor)
+void NFHierachyView::BluePrintViewSubRenderForMonitorHead(NF_SHARE_PTR<NFIMonitor> monitor)
 {
 
 }
 
-void NFHierachyView::BluePrintViewSubRenderForMonitorBody(NF_SHARE_PTR<NFMonitor> monitor)
+void NFHierachyView::BluePrintViewSubRenderForMonitorBody(NF_SHARE_PTR<NFIMonitor> monitor)
 {
+	/*
 	ImGui::Text("MonitorType");
 	ImGui::SameLine();
 	if (ImGui::Button(monitor->operatorType.toString().c_str()))
@@ -526,9 +522,11 @@ void NFHierachyView::BluePrintViewSubRenderForMonitorBody(NF_SHARE_PTR<NFMonitor
 	default:
 		break;
 	}
+
+	*/
 }
 
-void NFHierachyView::BluePrintViewSubRenderForMonitorBot(NF_SHARE_PTR<NFMonitor> monitor)
+void NFHierachyView::BluePrintViewSubRenderForMonitorBot(NF_SHARE_PTR<NFIMonitor> monitor)
 {
 	ImGui::Separator();
    if (ImGui::Button("+ Judgement"))
@@ -600,19 +598,22 @@ void NFHierachyView::BluePrintViewSubRenderForJudgementBot(NF_SHARE_PTR<NFJudgem
 }
 
 
-void NFHierachyView::InitBluePrintMonitorArgs(NF_SHARE_PTR<NFMonitor> monitor)
+void NFHierachyView::InitBluePrintMonitorArgs(NF_SHARE_PTR<NFIMonitor> monitor)
 {
+	/*
 	monitor->arg.Clear();
 
-	switch (monitor->operatorType)
+	switch (monitor->GetMonitorType())
 	{
+	case NFMonitorType::GameEvent:
+		break;
 	case NFMonitorType::NetworkEvent:
 		break;
 	case NFMonitorType::NetworkMsgEvent:
 		break;
 	case NFMonitorType::ObjectEvent:
 	{
-      if (monitor->arg.GetCount() <= 0)
+      if (monitor->GetMonitorInputArgCount() <= 0)
       {
          for (auto it : NFMonitorObjectEventArgType::allValues())
          {
@@ -681,6 +682,8 @@ void NFHierachyView::InitBluePrintMonitorArgs(NF_SHARE_PTR<NFMonitor> monitor)
 	default:
 		break;
 	}
+	*/
+
 }
 
 void NFHierachyView::InitBluePrintJudgementArgs(NF_SHARE_PTR<NFJudgement> judgement)

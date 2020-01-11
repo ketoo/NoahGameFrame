@@ -119,6 +119,7 @@
     <ClInclude Include="NFPlane.hpp" />
     <ClInclude Include="NFRay.hpp" />
     <ClInclude Include="NFSingleton.hpp" />
+    <ClInclude Include="NFSmartEnum.hpp" />
     <ClInclude Include="NFSpaceNode.hpp" />
     <ClInclude Include="NFSphere.hpp" />
     <ClInclude Include="NFRecord.h" />

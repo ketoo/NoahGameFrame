@@ -95,6 +95,8 @@
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="BluePrintNode\NFMonitor.cpp" />
+    <ClCompile Include="BluePrintNode\NFVariable.cpp" />
     <ClCompile Include="dllmain.cpp">
       <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</CompileAsManaged>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -110,6 +112,8 @@
     <ClCompile Include="NFBluePrintPlugin.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="BluePrintNode\NFMonitor.h" />
+    <ClInclude Include="BluePrintNode\NFVariable.h" />
     <ClInclude Include="NFBluePrintCppGeneratorModule.h" />
     <ClInclude Include="NFBluePrintLoaderModule.h" />
     <ClInclude Include="NFBluePrintLuaGeneratorModule.h" />

@@ -67,7 +67,8 @@ public:
     virtual bool Finalize();
     virtual bool OnReloadPlugin();
 
-	virtual void SetLogicBlockEventFunctor(std::function<void(const NFGUID&, const bool)> functor);
+    virtual void SetNodeModifyEventFunctor(std::function<void(const NFGUID&, const bool)> functor);
+    virtual void SetLinkModifyEventFunctor(std::function<void(const NFGUID &, const const NFGUID &, const NFGUID &, const const NFGUID &, const bool)> functor);
 
 	virtual NF_SHARE_PTR<NFLogicBlock> CreateLogicBlock(const NFGUID& logicBlockId, const std::string& name);
 	virtual const std::list<NF_SHARE_PTR<NFLogicBlock>>& GetLogicBlocks();
@@ -75,8 +76,8 @@ public:
 
 	virtual NF_SHARE_PTR<NFBluePrintNodeBase> FindBaseNode(const NFGUID& id);
 
-    virtual NF_SHARE_PTR<NFMonitor> AddMonitorForLogicBlock(const NFGUID& logicBlockId, const NFGUID& id, const std::string& name);
-    virtual NF_SHARE_PTR<NFVariable> AddVariableForLogicBlock(const NFGUID& logicBlockId, const NFGUID& id, const std::string& name);
+    virtual NF_SHARE_PTR<NFIMonitor> AddMonitorForLogicBlock(const NFGUID& logicBlockId, const NFMonitorType type, const NFGUID& id, const std::string& name);
+    virtual NF_SHARE_PTR<NFIVariable> AddVariableForLogicBlock(const NFGUID& logicBlockId, const NFVariableType type, const NFGUID& id, const std::string& name);
 	virtual NF_SHARE_PTR<NFJudgement> AddJudgementForMonitor(const NFGUID& monitorId, const NFGUID& id, const std::string& name);
 	virtual NF_SHARE_PTR<NFJudgement> AddTrueJudgementForJudgement(const NFGUID& judgementId, const NFGUID& id, const std::string& name);
 	virtual NF_SHARE_PTR<NFJudgement> AddFalseJudgementForJudgement(const NFGUID& judgementId, const NFGUID& id, const std::string& name);
@@ -85,16 +86,23 @@ public:
 	virtual NF_SHARE_PTR<NFExecuter> AddFalseExecuterForJudgement(const NFGUID& judgementId, const NFGUID& id, const std::string& name);
 	virtual NF_SHARE_PTR<NFExecuter> AddExecuterForExecuter(const NFGUID& executerId, const NFGUID& id, const std::string& name);
 
+    virtual void AddLink(const NFGUID& logicBlockId, const NFGUID& startNode, const const NFGUID& endNode, const NFGUID& startPin, const const NFGUID& endPin);
+    virtual NF_SHARE_PTR<NFDataLink> GetLink(const NFGUID& logicBlockId, const NFGUID& startNode, const const NFGUID& endNode, const NFGUID& startPin, const const NFGUID& endPin);
+    virtual void DeleteLink(const NFGUID& logicBlockId, const NFGUID& startNode, const const NFGUID& endNode, const NFGUID& startPin, const const NFGUID& endPin);
+    virtual std::list<NF_SHARE_PTR<NFDataLink>> GetLinks(const NFGUID& logicBlockId);
+
 	virtual bool DeleteMonitor(const NFGUID& id);
 	virtual bool DeleteJudgement(const NFGUID& id);
 	virtual bool DeleteExecuter(const NFGUID& id);
 
 protected:
-    void ModifyEvent(const NFGUID& id, const bool create);
+    void NodeModifyEvent(const NFGUID& id, const bool create);
+    void LinkModifyEvent(const NFGUID& startNode, const const NFGUID& endNode, const NFGUID& startPin, const const NFGUID& endPin, const bool create);
 
 private:
 
-    std::function<void(const NFGUID&, const bool)> mFunctor;
+    std::function<void(const NFGUID&, const bool)> mNodeModifyFunctor;
+    std::function<void(const NFGUID &, const const NFGUID &, const NFGUID &, const const NFGUID &, const bool)> mLinkModifyFunctor;
     std::list<NF_SHARE_PTR<NFLogicBlock>> mLogicBlocks;
 };
 

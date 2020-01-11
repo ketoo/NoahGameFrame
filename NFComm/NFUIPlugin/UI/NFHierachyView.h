@@ -51,15 +51,15 @@ private:
    void BluePrintViewSubRenderForExecuter();
    void BluePrintViewSubRenderForVariable();
 
-   void BluePrintViewSubRenderForMonitorHead(NF_SHARE_PTR<NFMonitor> monitor);
-   void BluePrintViewSubRenderForMonitorBody(NF_SHARE_PTR<NFMonitor> monitor);
-   void BluePrintViewSubRenderForMonitorBot(NF_SHARE_PTR<NFMonitor> monitor);
+   void BluePrintViewSubRenderForMonitorHead(NF_SHARE_PTR<NFIMonitor> monitor);
+   void BluePrintViewSubRenderForMonitorBody(NF_SHARE_PTR<NFIMonitor> monitor);
+   void BluePrintViewSubRenderForMonitorBot(NF_SHARE_PTR<NFIMonitor> monitor);
 
    void BluePrintViewSubRenderForJudgementHead(NF_SHARE_PTR<NFJudgement> judgement);
    void BluePrintViewSubRenderForJudgementBody(NF_SHARE_PTR<NFJudgement> judgement);
    void BluePrintViewSubRenderForJudgementBot(NF_SHARE_PTR<NFJudgement> judgement);
 
-   void InitBluePrintMonitorArgs(NF_SHARE_PTR<NFMonitor> monitor);
+   void InitBluePrintMonitorArgs(NF_SHARE_PTR<NFIMonitor> monitor);
    void InitBluePrintJudgementArgs(NF_SHARE_PTR<NFJudgement> judgement);
    void InitBluePrintExecuterArgs(NF_SHARE_PTR<NFExecuter> executer);
 

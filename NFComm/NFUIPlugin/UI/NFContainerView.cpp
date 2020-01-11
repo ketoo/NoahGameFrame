@@ -144,9 +144,17 @@ void NFContainerView::BluePrintMenu()
 			{
 				pBluePrintView->TryToCreateBluePrintBlock();
 			}
-			if (ImGui::MenuItem("New Monitor", ""))
+			if (ImGui::BeginMenu("New Monitor"))
 			{
-				pBluePrintView->TryToCreateMonitor();
+                for (auto x : NFMonitorType::allValues())
+                {
+                    if (ImGui::MenuItem(x.toString().c_str(), ""))
+                    {
+                        pBluePrintView->TryToCreateMonitor(x);
+                    }
+                }
+
+                ImGui::EndMenu();
 			}
 			if (ImGui::MenuItem("New Judgement", ""))
 			{
@@ -156,13 +164,23 @@ void NFContainerView::BluePrintMenu()
 			{
 				pBluePrintView->TryToCreateExecuter();
 			}
-            if (ImGui::MenuItem("New Variable", ""))
+
+            if (ImGui::BeginMenu("New Variable"))
             {
-                pBluePrintView->TryToCreateVariable();
+                for (auto x : NFVariableType::allValues())
+                {
+                    if (ImGui::MenuItem(x.toString().c_str(), ""))
+                    {
+                        pBluePrintView->TryToCreateVariable(x);
+                    }
+                }
+
+                ImGui::EndMenu();
             }
 			//ImGui::Separator();
-			ImGui::EndMenu();
 		}
+
+        ImGui::EndMenu();
 	}
 }
 
@@ -271,7 +289,7 @@ bool NFContainerView::Execute()
       // any change of dockspace/settings would lead to windows being stuck in limbo and never being visible.
       ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2(0.0f, 0.0f));
 
-	   ImGui::Begin(GET_CLASS_NAME(NFContainerView), &visible, window_flags);
+	  ImGui::Begin(GET_CLASS_NAME(NFContainerView), &visible, window_flags);
       ImGui::PopStyleVar();
       ImGui::PopStyleVar(2);
 

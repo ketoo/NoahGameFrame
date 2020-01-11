@@ -154,5 +154,8 @@
     <Filter Include="gl3w">
       <UniqueIdentifier>{5b61687d-fb49-475f-a634-48799cc05e5d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="BluePrintUI">
+      <UniqueIdentifier>{43229a05-7955-4ce1-a12c-7c0460a748d8}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
 </Project>
