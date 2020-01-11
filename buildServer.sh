@@ -11,25 +11,27 @@ rm -rf ./_Out/Debug/*.a
 rm -rf ./_Out/Release/NFServer
 rm -rf ./_Out/Release/*.a
 
-cd NFComm/NFMessageDefine
-./cpp.sh
-cd ../../
+if [ $1 == "BUILD_MID_WARE" ];then
+   echo "we dont need to compile message and tools again"
+else
+    cd NFComm/NFMessageDefine
+    ./cpp.sh
+    cd ../../
 
-cd BuildScript/linux/
+    cd BuildScript/linux/
+    chmod -R 755 ./BuildNF.CMake.Tools.sh
+    ./BuildNF.CMake.Tools.sh
+    cd ../../
 
-#find . -name "*.o" | xargs rm -rf
+    cd _Out/NFDataCfg/Tool/
+    chmod 755 ./NFFileProcess
+    chmod 755 ./copy_files.sh
+    ./copy_files.sh
+    cd ..
+    cd ..
+    cd ..
+fi
 
-chmod -R 755 ./BuildNF.CMake.Tools.sh
-./BuildNF.CMake.Tools.sh
-cd ../../
-
-cd _Out/NFDataCfg/Tool/
-chmod 755 ./NFFileProcess
-chmod 755 ./copy_files.sh
-./copy_files.sh
-cd ..
-cd ..
-cd ..
 
 cd BuildScript/linux/
 chmod -R 755 ./BuildNF.CMake.Debug.sh
