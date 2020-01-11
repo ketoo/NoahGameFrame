@@ -91,13 +91,10 @@ namespace NFMsg {
             "RVNjZW5lVHlwZRIQCgxOT1JNQUxfU0NFTkUQABIWChJTSU5HTEVfQ0xPTkVf",
             "U0NFTkUQARIVChFNVUxUSV9DTE9ORV9TQ0VORRACEg4KCkhPTUVfU0NFTkUQ",
             "AxIOCgpDTEFOX1NDRU5FEAQqOAoIRU5QQ1R5cGUSDgoKTk9STUFMX05QQxAA",
-            "EgwKCEhFUk9fTlBDEAESDgoKVFVSUkVUX05QQxACKogBCgtFQmF0dGxlVHlw",
-            "ZRIPCgtTSU5HTEVfTU9ERRAAEg4KCk1VTFRJX01PREUQARINCglDTEFOX01P",
-            "REUQAhISCg5DTEFOX0JPU1NfTU9ERRADEhMKD1dPUkxEX0JPU1NfTU9ERRAE",
-            "Eg0KCU1PQkFfTU9ERRAFEhEKDVNVUlZJVkFMX01PREUQBmIGcHJvdG8z"));
+            "EgwKCEhFUk9fTlBDEAESDgoKVFVSUkVUX05QQxACYgZwcm90bzM="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
-          new pbr::GeneratedClrTypeInfo(new[] {typeof(global::NFMsg.EGameEventCode), typeof(global::NFMsg.EGameMsgID), typeof(global::NFMsg.ESkillType), typeof(global::NFMsg.ESceneType), typeof(global::NFMsg.ENPCType), typeof(global::NFMsg.EBattleType), }, null, null));
+          new pbr::GeneratedClrTypeInfo(new[] {typeof(global::NFMsg.EGameEventCode), typeof(global::NFMsg.EGameMsgID), typeof(global::NFMsg.ESkillType), typeof(global::NFMsg.ESceneType), typeof(global::NFMsg.ENPCType), }, null, null));
     }
     #endregion
 
@@ -429,16 +426,6 @@ namespace NFMsg {
     /// <summary>
     /// </summary>
     [pbr::OriginalName("TURRET_NPC")] TurretNpc = 2,
-  }
-
-  public enum EBattleType {
-    [pbr::OriginalName("SINGLE_MODE")] SingleMode = 0,
-    [pbr::OriginalName("MULTI_MODE")] MultiMode = 1,
-    [pbr::OriginalName("CLAN_MODE")] ClanMode = 2,
-    [pbr::OriginalName("CLAN_BOSS_MODE")] ClanBossMode = 3,
-    [pbr::OriginalName("WORLD_BOSS_MODE")] WorldBossMode = 4,
-    [pbr::OriginalName("MOBA_MODE")] MobaMode = 5,
-    [pbr::OriginalName("SURVIVAL_MODE")] SurvivalMode = 6,
   }
 
   #endregion

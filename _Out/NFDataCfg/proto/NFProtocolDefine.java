@@ -466,14 +466,6 @@ package nframe;
 			public static final int LUCK = 31;//int
 
 		}
-		public class Cooldown
-		{
-			//Class name
-			public static final String ThisName = "Cooldown";
-			public static final int SkillID = 0;//string
-			public static final int Time = 1;//int
-
-		}
 
 	}
 	public class Scene

@@ -11,9 +11,10 @@ rm -rf ./_Out/Debug/*.a
 rm -rf ./_Out/Release/NFServer
 rm -rf ./_Out/Release/*.a
 
-if [ $1 == "BUILD_MID_WARE" ];then
+if [ "$1" == "BUILD_MID_WARE" ]; then
    echo "we dont need to compile message and tools again"
 else
+   echo "we only build NF SDK here"
     cd NFComm/NFMessageDefine
     ./cpp.sh
     cd ../../

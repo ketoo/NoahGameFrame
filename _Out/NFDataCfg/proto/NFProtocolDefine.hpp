@@ -474,15 +474,6 @@ namespace NFrame
 			static const int LUCK = 31;//int
 
 		};
-		class Cooldown
-		{
-		public:
-			//Class name
-			static const std::string& ThisName(){ static std::string x = "Cooldown"; return x; };
-			static const int SkillID = 0;//string
-			static const int Time = 1;//int
-
-		};
 
 	};
 	class Scene

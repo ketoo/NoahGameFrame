@@ -472,14 +472,6 @@ namespace NFrame
 			public const int LUCK = 31;//int
 
 		}
-		public class Cooldown
-		{
-			//Class name
-			public static readonly String ThisName = "Cooldown";
-			public const int SkillID = 0;//string
-			public const int Time = 1;//int
-
-		}
 
 	}
 	public class Scene

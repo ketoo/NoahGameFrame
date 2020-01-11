@@ -95,9 +95,5 @@
 			<Col Type ="int"	Tag="BUFF_GATE"/>
 			<Col Type ="int"	Tag="LUCK"/>
 		</Record>
-		<Record Id="Cooldown" Cache="1"	 Col="2"	 Force="0"	 Private="1"	 Public="0"	 Ref="0"	 Row="8"	 Save="0"	 Upload="0"	 >
-			<Col Type ="string"	Tag="SkillID"/><!--- Desc-->
-			<Col Type ="int"	Tag="Time"/><!--- Desc-->
-		</Record>
 	</Records>
 </XML>

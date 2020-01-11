@@ -510,7 +510,7 @@ void NFBluePrintView::NodeAttriRenderForElementVariable(NFNodeAttri* nodeAttri)
 			auto idList = currentClassObject->GetIDList();
 			if (ImGui::BeginCombo("currentElementID", elementIDArg->varData.c_str()))
 			{
-				for each (auto id in idList)
+				for (auto id : idList)
 				{
 					if (ImGui::Selectable(id.c_str()))
 					{

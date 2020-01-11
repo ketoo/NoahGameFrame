@@ -1,7 +1,7 @@
 set_property(GLOBAL PROPERTY USE_FOLDERS On)
 
-option(BUILD_TOOLS_ONLY "help string describing option")
-option(BUILD_MID_WARE_SDK "help string describing option")
+option(BUILD_TOOLS_ONLY "help string describing option" OFF)
+option(BUILD_MID_WARE_SDK "help string describing option" OFF)
 
 cmake_minimum_required(VERSION 2.8)
 
