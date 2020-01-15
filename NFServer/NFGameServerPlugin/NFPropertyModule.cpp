@@ -259,7 +259,8 @@ bool NFPropertyModule::AddExp(const NFGUID& self, const int64_t nExp)
     int eJobType = m_pKernelModule->GetPropertyInt32(self, NFrame::Player::Job());
     int64_t nCurExp = m_pKernelModule->GetPropertyInt(self, NFrame::Player::EXP());
     int nLevel = m_pKernelModule->GetPropertyInt32(self, NFrame::Player::Level());
-    int64_t nMaxExp = (int)m_pPropertyConfigModule->CalculateBaseValue(eJobType, nLevel, NFrame::Player::MAXEXP());
+    const std::string& heroConfigID = m_pElementModule->GetPropertyString(m_pPropertyConfigModule->GetInitPropertyID(eJobType, nLevel), NFrame::InitProperty::HeroConfigID());
+    int64_t nMaxExp = m_pElementModule->GetPropertyInt(heroConfigID, NFrame::Player::MAXHP());
 
     nCurExp += nExp;
 
@@ -273,7 +274,8 @@ bool NFPropertyModule::AddExp(const NFGUID& self, const int64_t nExp)
 
         nCurExp = nRemainExp;
 
-        nMaxExp = (int)m_pPropertyConfigModule->CalculateBaseValue(eJobType, nLevel, NFrame::Player::MAXEXP());
+        const std::string& nextHeroConfigID = m_pElementModule->GetPropertyString(m_pPropertyConfigModule->GetInitPropertyID(eJobType, nLevel), NFrame::InitProperty::HeroConfigID());
+        nMaxExp = m_pElementModule->GetPropertyInt(heroConfigID, NFrame::Player::MAXHP());
         if (nMaxExp <= 0)
         {
             break;
