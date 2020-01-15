@@ -1256,7 +1256,8 @@ std::vector<std::string> NFFileProcess::GetFileListInFolder(std::string folderPa
 			if ((strcmp(FileInfo.name, ".") != 0) && (strcmp(FileInfo.name, "..") != 0))
 			{
 				std::string newPath = folderPath + "\\" + FileInfo.name;
-				//dfsFolder(newPath, depth);
+				std::vector<std::string> childResult = GetFileListInFolder(newPath, depth);
+				result.insert(result.end(), childResult.begin(), childResult.end());
 			}
 		}
 		else
@@ -1280,9 +1281,11 @@ std::vector<std::string> NFFileProcess::GetFileListInFolder(std::string folderPa
 	{
 		if (ent->d_type & DT_DIR)
 		{
-			if (strcmp(ent->d_name, ".") == 0 || strcmp(ent->d_name, "..") == 0)
+			if (strcmp(ent->d_name, ".") != 0 || strcmp(ent->d_name, "..") != 0)
 			{
-				continue;
+				std::string newPath = folderPath + "\\" + ent->d_name;
+				std::vector<std::string> childResult = GetFileListInFolder(newPath, depth);
+				result.insert(result.end(), childResult.begin(), childResult.end());
 			}
 		}
 		else
