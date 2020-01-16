@@ -5,30 +5,6 @@
 // -------------------------------------------------------------------------
 
 package nframe;
-	public class DescData
-	{
-		//Class name
-		public static final String ThisName = "DescData";
-		// IObject
-		public static final String ClassName = "ClassName";// string
-		public static final String ConfigID = "ConfigID";// string
-		public static final String GroupID = "GroupID";// int
-		public static final String ID = "ID";// string
-		public static final String MoveTo = "MoveTo";// vector3
-		public static final String Name = "Name";// string
-		public static final String Position = "Position";// vector3
-		public static final String SceneID = "SceneID";// int
-		// Property
-		public static final String Atlas = "Atlas";// string
-		public static final String DescText = "DescText";// string
-		public static final String Icon = "Icon";// string
-		public static final String PerformanceEffect = "PerformanceEffect";// string
-		public static final String PerformanceSound = "PerformanceSound";// string
-		public static final String PrefabPath = "PrefabPath";// string
-		public static final String ShowName = "ShowName";// string
-		// Record
-
-	}
 	public class EffectData
 	{
 		//Class name
@@ -582,31 +558,6 @@ package nframe;
 		public static final String ShowName = "ShowName";// string
 		public static final String SkillType = "SkillType";// int
 		public static final String SpriteFile = "SpriteFile";// string
-		// Record
-
-	}
-	public class SqlServer
-	{
-		//Class name
-		public static final String ThisName = "SqlServer";
-		// IObject
-		public static final String ClassName = "ClassName";// string
-		public static final String ConfigID = "ConfigID";// string
-		public static final String GroupID = "GroupID";// int
-		public static final String ID = "ID";// string
-		public static final String MoveTo = "MoveTo";// vector3
-		public static final String Name = "Name";// string
-		public static final String Position = "Position";// vector3
-		public static final String SceneID = "SceneID";// int
-		// Property
-		public static final String IP = "IP";// string
-		public static final String Port = "Port";// int
-		public static final String ServerID = "ServerID";// int
-		public static final String SqlIP = "SqlIP";// string
-		public static final String SqlName = "SqlName";// string
-		public static final String SqlPort = "SqlPort";// int
-		public static final String SqlPwd = "SqlPwd";// string
-		public static final String SqlUser = "SqlUser";// string
 		// Record
 
 	}

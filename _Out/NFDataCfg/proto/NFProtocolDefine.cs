@@ -11,30 +11,6 @@ using System.Text;
 using System.Threading;
 namespace NFrame
 {
-	public class DescData
-	{
-		//Class name
-		public static readonly String ThisName = "DescData";
-		// IObject
-		public static readonly String ClassName = "ClassName";// string
-		public static readonly String ConfigID = "ConfigID";// string
-		public static readonly String GroupID = "GroupID";// int
-		public static readonly String ID = "ID";// string
-		public static readonly String MoveTo = "MoveTo";// vector3
-		public static readonly String Name = "Name";// string
-		public static readonly String Position = "Position";// vector3
-		public static readonly String SceneID = "SceneID";// int
-		// Property
-		public static readonly String Atlas = "Atlas";// string
-		public static readonly String DescText = "DescText";// string
-		public static readonly String Icon = "Icon";// string
-		public static readonly String PerformanceEffect = "PerformanceEffect";// string
-		public static readonly String PerformanceSound = "PerformanceSound";// string
-		public static readonly String PrefabPath = "PrefabPath";// string
-		public static readonly String ShowName = "ShowName";// string
-		// Record
-
-	}
 	public class EffectData
 	{
 		//Class name
@@ -588,31 +564,6 @@ namespace NFrame
 		public static readonly String ShowName = "ShowName";// string
 		public static readonly String SkillType = "SkillType";// int
 		public static readonly String SpriteFile = "SpriteFile";// string
-		// Record
-
-	}
-	public class SqlServer
-	{
-		//Class name
-		public static readonly String ThisName = "SqlServer";
-		// IObject
-		public static readonly String ClassName = "ClassName";// string
-		public static readonly String ConfigID = "ConfigID";// string
-		public static readonly String GroupID = "GroupID";// int
-		public static readonly String ID = "ID";// string
-		public static readonly String MoveTo = "MoveTo";// vector3
-		public static readonly String Name = "Name";// string
-		public static readonly String Position = "Position";// vector3
-		public static readonly String SceneID = "SceneID";// int
-		// Property
-		public static readonly String IP = "IP";// string
-		public static readonly String Port = "Port";// int
-		public static readonly String ServerID = "ServerID";// int
-		public static readonly String SqlIP = "SqlIP";// string
-		public static readonly String SqlName = "SqlName";// string
-		public static readonly String SqlPort = "SqlPort";// int
-		public static readonly String SqlPwd = "SqlPwd";// string
-		public static readonly String SqlUser = "SqlUser";// string
 		// Record
 
 	}

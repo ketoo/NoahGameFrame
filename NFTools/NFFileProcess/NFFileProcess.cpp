@@ -26,7 +26,7 @@ NFFileProcess::~NFFileProcess()
 
 bool NFFileProcess::LoadDataFromExcel()
 {
-	LoadDataFromExcel("../Excel/IObject.xlsx", "IObject");
+	LoadDataFromExcel("../Excel/Comm/IObject.xlsx", "IObject");
 
 
 	auto fileList = GetFileListInFolder(strExcelIniPath, 0);

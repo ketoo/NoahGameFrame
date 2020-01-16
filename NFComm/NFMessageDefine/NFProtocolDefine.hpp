@@ -10,30 +10,6 @@
 #include <string>
 namespace NFrame
 {
-	class DescData
-	{
-	public:
-		//Class name
-		static const std::string& ThisName(){ static std::string x = "DescData"; return x; };		// IObject
-		static const std::string& ClassName(){ static std::string x = "ClassName"; return x; };// string
-		static const std::string& ConfigID(){ static std::string x = "ConfigID"; return x; };// string
-		static const std::string& GroupID(){ static std::string x = "GroupID"; return x; };// int
-		static const std::string& ID(){ static std::string x = "ID"; return x; };// string
-		static const std::string& MoveTo(){ static std::string x = "MoveTo"; return x; };// vector3
-		static const std::string& Name(){ static std::string x = "Name"; return x; };// string
-		static const std::string& Position(){ static std::string x = "Position"; return x; };// vector3
-		static const std::string& SceneID(){ static std::string x = "SceneID"; return x; };// int
-		// Property
-		static const std::string& Atlas(){ static std::string x = "Atlas"; return x; };// string
-		static const std::string& DescText(){ static std::string x = "DescText"; return x; };// string
-		static const std::string& Icon(){ static std::string x = "Icon"; return x; };// string
-		static const std::string& PerformanceEffect(){ static std::string x = "PerformanceEffect"; return x; };// string
-		static const std::string& PerformanceSound(){ static std::string x = "PerformanceSound"; return x; };// string
-		static const std::string& PrefabPath(){ static std::string x = "PrefabPath"; return x; };// string
-		static const std::string& ShowName(){ static std::string x = "ShowName"; return x; };// string
-		// Record
-
-	};
 	class EffectData
 	{
 	public:
@@ -474,15 +450,6 @@ namespace NFrame
 			static const int LUCK = 31;//int
 
 		};
-		class Cooldown
-		{
-		public:
-			//Class name
-			static const std::string& ThisName(){ static std::string x = "Cooldown"; return x; };
-			static const int SkillID = 0;//string
-			static const int Time = 1;//int
-
-		};
 
 	};
 	class Scene
@@ -599,31 +566,6 @@ namespace NFrame
 		static const std::string& ShowName(){ static std::string x = "ShowName"; return x; };// string
 		static const std::string& SkillType(){ static std::string x = "SkillType"; return x; };// int
 		static const std::string& SpriteFile(){ static std::string x = "SpriteFile"; return x; };// string
-		// Record
-
-	};
-	class SqlServer
-	{
-	public:
-		//Class name
-		static const std::string& ThisName(){ static std::string x = "SqlServer"; return x; };		// IObject
-		static const std::string& ClassName(){ static std::string x = "ClassName"; return x; };// string
-		static const std::string& ConfigID(){ static std::string x = "ConfigID"; return x; };// string
-		static const std::string& GroupID(){ static std::string x = "GroupID"; return x; };// int
-		static const std::string& ID(){ static std::string x = "ID"; return x; };// string
-		static const std::string& MoveTo(){ static std::string x = "MoveTo"; return x; };// vector3
-		static const std::string& Name(){ static std::string x = "Name"; return x; };// string
-		static const std::string& Position(){ static std::string x = "Position"; return x; };// vector3
-		static const std::string& SceneID(){ static std::string x = "SceneID"; return x; };// int
-		// Property
-		static const std::string& IP(){ static std::string x = "IP"; return x; };// string
-		static const std::string& Port(){ static std::string x = "Port"; return x; };// int
-		static const std::string& ServerID(){ static std::string x = "ServerID"; return x; };// int
-		static const std::string& SqlIP(){ static std::string x = "SqlIP"; return x; };// string
-		static const std::string& SqlName(){ static std::string x = "SqlName"; return x; };// string
-		static const std::string& SqlPort(){ static std::string x = "SqlPort"; return x; };// int
-		static const std::string& SqlPwd(){ static std::string x = "SqlPwd"; return x; };// string
-		static const std::string& SqlUser(){ static std::string x = "SqlUser"; return x; };// string
 		// Record
 
 	};
