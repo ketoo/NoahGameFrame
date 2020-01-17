@@ -26,10 +26,11 @@ NFFileProcess::~NFFileProcess()
 
 bool NFFileProcess::LoadDataFromExcel()
 {
-	LoadDataFromExcel("../Excel/Comm/IObject.xlsx", "IObject");
+	LoadDataFromExcel("../Excel/Comm/", "../Excel/Comm/IObject.xlsx", "IObject");
 
+	auto fileList = GetFileListInFolder(strExcelIniPath, 1);
 
-	auto fileList = GetFileListInFolder(strExcelIniPath, 0);
+	///////////////////////////////////
 
 	for (auto fileName : fileList)
 	{
@@ -41,30 +42,52 @@ bool NFFileProcess::LoadDataFromExcel()
 			continue;
 		}
 
-
-		auto strExt = fileName.substr(fileName.find_last_of('.') + 1, fileName.length() - fileName.find_last_of('.') - 1);
-		if (strExt != "xlsx")
+		auto strExt = GetFileNameExtByPath(fileName);
+		if (strExt != ".xlsx")
 		{
 			continue;
 		}
 
-
-		auto strFileName = fileName.substr(fileName.find_last_of('/') + 1, fileName.find_last_of('.') - fileName.find_last_of('/') - 1);
+		auto strFileName = GetFileNameByPath(fileName);
 		if (strFileName == "IObject")
 		{
 			continue;
 		}
 
-
-		if (!LoadDataFromExcel(fileName.c_str(), strFileName.c_str()))
+		if (!LoadDataFromExcel(strExcelIniPath, fileName, strFileName))
 		{
 			std::cout << "Create " + fileName + " failed!" << std::endl;
-			return false;
+			continue;
 		}
 	}
 
+	//auto sideFolderList = GetFolderListInFolder(strExcelIniPath);
+	
 	auto dataList = mxClassData;
 
+	//process part
+	for (auto classData : mxClassData)
+	{
+		for (auto className : classData.second->parts)
+		{
+			ClassData* nowClassData = classData.second;
+			ClassData* partialClass = dataList[className];
+			if (partialClass)
+			{
+				partialClass->beIncluded = true;
+
+				for (auto property : partialClass->xStructData.xPropertyList)
+				{
+					for (auto element : partialClass->xIniData.xElementList)
+					{
+						nowClassData->xIniData.xElementList[element.first] = element.second;
+					}
+				}
+			}
+		}
+	}
+
+	//process include
 	for (auto classData : mxClassData)
 	{
 		for (auto className : classData.second->includes)
@@ -72,14 +95,19 @@ bool NFFileProcess::LoadDataFromExcel()
 			ClassData* nowClassData = classData.second;
 			ClassData* includeClassData = dataList[className];
 
-			for (auto property : includeClassData->xStructData.xPropertyList)
+			if (includeClassData)
 			{
-				nowClassData->xStructData.xPropertyList.insert(std::make_pair(property.first, property.second));
-			}
+				includeClassData->beIncluded = true;
 
-			for (auto record : includeClassData->xStructData.xRecordList)
-			{
-				nowClassData->xStructData.xRecordList.insert(std::make_pair(record.first, record.second));
+				for (auto property : includeClassData->xStructData.xPropertyList)
+				{
+					nowClassData->xStructData.xPropertyList.insert(std::make_pair(property.first, property.second));
+				}
+
+				for (auto record : includeClassData->xStructData.xRecordList)
+				{
+					nowClassData->xStructData.xRecordList.insert(std::make_pair(record.first, record.second));
+				}
 			}
 		}
 	}
@@ -87,7 +115,7 @@ bool NFFileProcess::LoadDataFromExcel()
 	return true;
 }
 
-bool NFFileProcess::LoadDataFromExcel(const std::string & strFile, const std::string & strFileName)
+bool NFFileProcess::LoadDataFromExcel(const std::string& folder, const std::string & strFile, const std::string & strFileName)
 {
 	if (mxClassData.find(strFileName) != mxClassData.end())
 	{
@@ -100,7 +128,8 @@ bool NFFileProcess::LoadDataFromExcel(const std::string & strFile, const std::st
 	ClassData* pClassData = new ClassData();
 	mxClassData[strFileName] = pClassData;
 	pClassData->xStructData.strClassName = strFileName;
-
+	pClassData->filePath = strFile;
+	StringReplace(pClassData->filePath, GetFileNameExtByPath(strFile), "");
 	///////////////////////////////////////
 	//load
 
@@ -114,12 +143,26 @@ bool NFFileProcess::LoadDataFromExcel(const std::string & strFile, const std::st
 	std::vector<MiniExcelReader::Sheet>& sheets = xExcel->sheets();
 	for (MiniExcelReader::Sheet& sh : sheets)
 	{
-		LoadDataFromExcel(sh, pClassData);
+		LoadDataFromExcel(folder, sh, pClassData);
 	}
+
+	//load parts
+
+	auto fileList = GetFileListInFolder(pClassData->filePath, 0);
+	for (auto filePath : fileList)
+	{
+		StringReplace(filePath, "\\", "/");
+		StringReplace(filePath, "//", "/");
+
+		std::string fileName = GetFileNameByPath(filePath);
+		pClassData->parts.push_back(fileName);
+	}
+
+
 	return true;
 }
 
-bool NFFileProcess::LoadDataFromExcel(MiniExcelReader::Sheet & sheet, ClassData * pClassData)
+bool NFFileProcess::LoadDataFromExcel(const std::string& folder, MiniExcelReader::Sheet & sheet, ClassData * pClassData)
 {
 	const MiniExcelReader::Range& dim = sheet.getDimension();
 
@@ -141,7 +184,7 @@ bool NFFileProcess::LoadDataFromExcel(MiniExcelReader::Sheet & sheet, ClassData 
 	}
 	else if (strSheetName.find("include") != std::string::npos)
 	{
-		LoadDataAndProcessIncludes(sheet, pClassData);
+		LoadDataAndProcessIncludes(folder, sheet, pClassData);
 	}
 	else
 	{
@@ -149,7 +192,7 @@ bool NFFileProcess::LoadDataFromExcel(MiniExcelReader::Sheet & sheet, ClassData 
 		assert(0);
 	}
 
-	return false;
+	return true;
 }
 
 bool NFFileProcess::LoadIniData(MiniExcelReader::Sheet & sheet, ClassData * pClassData)
@@ -370,7 +413,7 @@ bool NFFileProcess::LoadDataAndProcessRecord(MiniExcelReader::Sheet & sheet, Cla
 	return true;
 }
 
-bool NFFileProcess::LoadDataAndProcessIncludes(MiniExcelReader::Sheet & sheet, ClassData * pClassData)
+bool NFFileProcess::LoadDataAndProcessIncludes(const std::string& folder, MiniExcelReader::Sheet & sheet, ClassData * pClassData)
 {
 	const MiniExcelReader::Range& dim = sheet.getDimension();
 	std::string strSheetName = sheet.getName();
@@ -385,6 +428,8 @@ bool NFFileProcess::LoadDataAndProcessIncludes(MiniExcelReader::Sheet & sheet, C
 			pClassData->includes.push_back(valueCell);
 		}
 	}
+
+
 	return true;
 }
 
@@ -1046,100 +1091,128 @@ bool NFFileProcess::SaveForSQL()
 bool NFFileProcess::SaveForStruct()
 {
 	ClassData* pBaseObject = mxClassData["IObject"];
+
 	for (std::map<std::string, ClassData*>::iterator it = mxClassData.begin(); it != mxClassData.end(); ++it)
 	{
 		const std::string& strClassName = it->first;
 		ClassData* pClassDta = it->second;
 
 		std::cout << "save for struct ---> " << strClassName << std::endl;
+		std::string path = pClassDta->filePath;
+		StringReplace(path, strExcelIniPath, "");
 
-		std::string strFileName = strXMLStructPath + strClassName + ".xml";
+		std::string strFileName = strXMLStructPath + path + ".xml";
+
 		FILE* structWriter = fopen(strFileName.c_str(), "w");
-
-		std::string strFileHead = "<?xml version='1.0' encoding='utf-8' ?>\n<XML>\n";
-		fwrite(strFileHead.c_str(), strFileHead.length(), 1, structWriter);
-		/////////////////////////
-		std::string strFilePrpertyBegin = "\t<Propertys>\n";
-		fwrite(strFilePrpertyBegin.c_str(), strFilePrpertyBegin.length(), 1, structWriter);
-
-		for (std::map<std::string, NFClassProperty*>::iterator itProperty = pClassDta->xStructData.xPropertyList.begin();
-			itProperty != pClassDta->xStructData.xPropertyList.end(); ++itProperty)
+		if (structWriter)
 		{
-			const std::string& strPropertyName = itProperty->first;
-			NFClassProperty* xPropertyData = itProperty->second;
+			std::string strFileHead = "<?xml version='1.0' encoding='utf-8' ?>\n<XML>\n";
+			fwrite(strFileHead.c_str(), strFileHead.length(), 1, structWriter);
+			/////////////////////////
+			std::string strFilePropertyBegin = "\t<Propertys>\n";
+			fwrite(strFilePropertyBegin.c_str(), strFilePropertyBegin.length(), 1, structWriter);
 
-			std::string strElementData = "\t\t<Property Id=\"" + strPropertyName + "\" ";
-			for (std::map<std::string, std::string>::iterator itDesc = xPropertyData->descList.begin();
-				itDesc != xPropertyData->descList.end(); ++itDesc)
+			for (std::map<std::string, NFClassProperty*>::iterator itProperty = pClassDta->xStructData.xPropertyList.begin();
+				itProperty != pClassDta->xStructData.xPropertyList.end(); ++itProperty)
 			{
-				const std::string& strKey = itDesc->first;
-				const std::string& strValue = itDesc->second;
-				strElementData += strKey + "=\"" + strValue + "\" ";
-			}
-			strElementData += "/>\n";
-			fwrite(strElementData.c_str(), strElementData.length(), 1, structWriter);
-		}
+				const std::string& strPropertyName = itProperty->first;
+				NFClassProperty* xPropertyData = itProperty->second;
 
-		std::string strFilePropertyEnd = "\t</Propertys>\n";
-		fwrite(strFilePropertyEnd.c_str(), strFilePropertyEnd.length(), 1, structWriter);
-		//////////////////////////////
-
-		std::string strFileRecordBegin = "\t<Records>\n";
-		fwrite(strFileRecordBegin.c_str(), strFileRecordBegin.length(), 1, structWriter);
-
-		for (std::map<std::string, NFClassRecord*>::iterator itRecord = pClassDta->xStructData.xRecordList.begin();
-			itRecord != pClassDta->xStructData.xRecordList.end(); ++itRecord)
-		{
-			const std::string& strRecordName = itRecord->first;
-			NFClassRecord* xRecordData = itRecord->second;
-
-			//for desc
-			std::string strElementData = "\t\t<Record Id=\"" + strRecordName + "\" ";
-			for (std::map<std::string, std::string>::iterator itDesc = xRecordData->descList.begin();
-				itDesc != xRecordData->descList.end(); ++itDesc)
-			{
-				const std::string& strKey = itDesc->first;
-				const std::string& strValue = itDesc->second;
-				strElementData += strKey + "=\"" + strValue + "\"\t ";
-			}
-			strElementData += ">\n";
-
-			//for col list
-			for (int i = 0; i < xRecordData->colList.size(); ++i)
-			{
-				for (std::map<std::string, NFClassRecord::RecordColDesc*>::iterator itDesc = xRecordData->colList.begin();
-					itDesc != xRecordData->colList.end(); ++itDesc)
+				std::string strElementData = "\t\t<Property Id=\"" + strPropertyName + "\" ";
+				for (std::map<std::string, std::string>::iterator itDesc = xPropertyData->descList.begin();
+					itDesc != xPropertyData->descList.end(); ++itDesc)
 				{
 					const std::string& strKey = itDesc->first;
-					const NFClassRecord::RecordColDesc* pRecordColDesc = itDesc->second;
+					const std::string& strValue = itDesc->second;
+					strElementData += strKey + "=\"" + strValue + "\" ";
+				}
+				strElementData += "/>\n";
+				fwrite(strElementData.c_str(), strElementData.length(), 1, structWriter);
+			}
 
-					if (pRecordColDesc->index == i)
+			std::string strFilePropertyEnd = "\t</Propertys>\n";
+			fwrite(strFilePropertyEnd.c_str(), strFilePropertyEnd.length(), 1, structWriter);
+			//////////////////////////////
+
+			std::string strFileRecordBegin = "\t<Records>\n";
+			fwrite(strFileRecordBegin.c_str(), strFileRecordBegin.length(), 1, structWriter);
+
+			for (std::map<std::string, NFClassRecord*>::iterator itRecord = pClassDta->xStructData.xRecordList.begin();
+				itRecord != pClassDta->xStructData.xRecordList.end(); ++itRecord)
+			{
+				const std::string& strRecordName = itRecord->first;
+				NFClassRecord* xRecordData = itRecord->second;
+
+				//for desc
+				std::string strElementData = "\t\t<Record Id=\"" + strRecordName + "\" ";
+				for (std::map<std::string, std::string>::iterator itDesc = xRecordData->descList.begin();
+					itDesc != xRecordData->descList.end(); ++itDesc)
+				{
+					const std::string& strKey = itDesc->first;
+					const std::string& strValue = itDesc->second;
+					strElementData += strKey + "=\"" + strValue + "\"\t ";
+				}
+				strElementData += ">\n";
+
+				//for col list
+				for (int i = 0; i < xRecordData->colList.size(); ++i)
+				{
+					for (std::map<std::string, NFClassRecord::RecordColDesc*>::iterator itDesc = xRecordData->colList.begin();
+						itDesc != xRecordData->colList.end(); ++itDesc)
 					{
-						strElementData += "\t\t\t<Col Type =\"" + pRecordColDesc->type + "\"\tTag=\"" + strKey + "\"/>";
-						if (!pRecordColDesc->desc.empty())
+						const std::string& strKey = itDesc->first;
+						const NFClassRecord::RecordColDesc* pRecordColDesc = itDesc->second;
+
+						if (pRecordColDesc->index == i)
 						{
-							strElementData += "<!--- " + pRecordColDesc->desc + "-->\n";
-						}
-						else
-						{
-							strElementData += "\n";
+							strElementData += "\t\t\t<Col Type =\"" + pRecordColDesc->type + "\"\tTag=\"" + strKey + "\"/>";
+							if (!pRecordColDesc->desc.empty())
+							{
+								strElementData += "<!--- " + pRecordColDesc->desc + "-->\n";
+							}
+							else
+							{
+								strElementData += "\n";
+							}
 						}
 					}
+
 				}
 
+				strElementData += "\t\t</Record>\n";
+				fwrite(strElementData.c_str(), strElementData.length(), 1, structWriter);
 			}
-			
-			strElementData += "\t\t</Record>\n";
-			fwrite(strElementData.c_str(), strElementData.length(), 1, structWriter);
+
+			std::string strFileRecordEnd = "\t</Records>\n";
+			fwrite(strFileRecordEnd.c_str(), strFileRecordEnd.length(), 1, structWriter);
+
+			/////////////////////////////////
+
+			std::string strFileIncludeBegin = "\t</Includes>\n";
+			fwrite(strFileIncludeBegin.c_str(), strFileIncludeBegin.length(), 1, structWriter);
+
+
+			std::string strFileIncludeBody;
+			for (auto item : pClassDta->includes)
+			{
+				strFileIncludeBody += item;
+				strFileIncludeBody += "\n";
+			}
+
+			fwrite(strFileIncludeBody.c_str(), strFileIncludeBody.length(), 1, structWriter);
+
+			std::string strFileIncludeEnd = "\t</Includes>\n";
+			fwrite(strFileIncludeEnd.c_str(), strFileIncludeEnd.length(), 1, structWriter);
+
+
+			/////////////////////////////////
+			std::string strFileEnd = "</XML>";
+			fwrite(strFileEnd.c_str(), strFileEnd.length(), 1, structWriter);
 		}
-
-		std::string strFilePrpertyEnd = "\t</Records>\n";
-		fwrite(strFilePrpertyEnd.c_str(), strFilePrpertyEnd.length(), 1, structWriter);
-
-		/////////////////////////////////
-		std::string strFileEnd = "</XML>";
-		fwrite(strFileEnd.c_str(), strFileEnd.length(), 1, structWriter);
-
+		else
+		{
+			std::cout << "save for struct error!!!!!---> " << strFileName << std::endl;
+		}
 	}
 
 	return false;
@@ -1147,6 +1220,7 @@ bool NFFileProcess::SaveForStruct()
 
 bool NFFileProcess::SaveForIni()
 {
+
 	ClassData* pBaseObject = mxClassData["IObject"];
 	for (std::map<std::string, ClassData*>::iterator it = mxClassData.begin(); it != mxClassData.end(); ++it)
 	{
@@ -1157,32 +1231,37 @@ bool NFFileProcess::SaveForIni()
 
 		std::string strFileName = strXMLIniPath + strClassName + ".xml";
 		FILE* iniWriter = fopen(strFileName.c_str(), "w");
-
-		std::string strFileHead = "<?xml version='1.0' encoding='utf-8' ?>\n<XML>\n";
-		fwrite(strFileHead.c_str(), strFileHead.length(), 1, iniWriter);
-
-		for (std::map<std::string, NFClassElement::ElementData*>::iterator itElement = pClassDta->xIniData.xElementList.begin();
-			itElement != pClassDta->xIniData.xElementList.end(); ++itElement)
+		if (iniWriter)
 		{
+			std::string strFileHead = "<?xml version='1.0' encoding='utf-8' ?>\n<XML>\n";
+			fwrite(strFileHead.c_str(), strFileHead.length(), 1, iniWriter);
 
-			const std::string& strElementName = itElement->first;
-			NFClassElement::ElementData* pIniData = itElement->second;
-
-			std::string strElementData = "\t<Object Id=\"" + strElementName + "\" ";
-			for (std::map<std::string, std::string>::iterator itProperty = pIniData->xPropertyList.begin();
-				itProperty != pIniData->xPropertyList.end(); ++itProperty)
+			for (std::map<std::string, NFClassElement::ElementData*>::iterator itElement = pClassDta->xIniData.xElementList.begin();
+				itElement != pClassDta->xIniData.xElementList.end(); ++itElement)
 			{
-				const std::string& strKey = itProperty->first;
-				const std::string& strValue = itProperty->second;
-				strElementData += strKey + "=\"" + strValue + "\" ";
+
+				const std::string& strElementName = itElement->first;
+				NFClassElement::ElementData* pIniData = itElement->second;
+
+				std::string strElementData = "\t<Object Id=\"" + strElementName + "\" ";
+				for (std::map<std::string, std::string>::iterator itProperty = pIniData->xPropertyList.begin();
+					itProperty != pIniData->xPropertyList.end(); ++itProperty)
+				{
+					const std::string& strKey = itProperty->first;
+					const std::string& strValue = itProperty->second;
+					strElementData += strKey + "=\"" + strValue + "\" ";
+				}
+				strElementData += "/>\n";
+				fwrite(strElementData.c_str(), strElementData.length(), 1, iniWriter);
 			}
-			strElementData += "/>\n";
-			fwrite(strElementData.c_str(), strElementData.length(), 1, iniWriter);
+
+			std::string strFileEnd = "</XML>";
+			fwrite(strFileEnd.c_str(), strFileEnd.length(), 1, iniWriter);
 		}
-
-		std::string strFileEnd = "</XML>";
-		fwrite(strFileEnd.c_str(), strFileEnd.length(), 1, iniWriter);
-
+		else
+		{
+			std::cout << "save for ini error!!!!!---> " << strFileName << std::endl;
+		}
 	}
 
 	return false;
@@ -1201,8 +1280,16 @@ bool NFFileProcess::SaveForLogicClass()
 
 	std::string strElementData;
 	strElementData += "\t<Class Id=\"" + pBaseObject->xStructData.strClassName + "\"\t";
-	strElementData += "Path=\"NFDataCfg/Struct/" + pBaseObject->xStructData.strClassName + ".xml\"\t";
-	strElementData += "InstancePath=\"NFDataCfg/Ini/" + pBaseObject->xStructData.strClassName + ".xml\"\t>\n";
+
+	std::string path = pBaseObject->filePath;
+	StringReplace(path, strExcelIniPath, "");
+
+	strElementData += "Path=\"NFDataCfg/Struct/" + path + ".xml\"\t";
+	strElementData += "InstancePath=\"NFDataCfg/Ini/" + path + ".xml\"\t>\n";
+
+
+	//strElementData += "Path=\"NFDataCfg/Struct/" + pBaseObject->xStructData.strClassName + ".xml\"\t";
+	//strElementData += "InstancePath=\"NFDataCfg/Ini/" + pBaseObject->xStructData.strClassName + ".xml\"\t>\n";
 
 	for (std::map<std::string, ClassData*>::iterator it = mxClassData.begin(); it != mxClassData.end(); ++it)
 	{
@@ -1214,8 +1301,15 @@ bool NFFileProcess::SaveForLogicClass()
 		}
 
 		strElementData += "\t\t<Class Id=\"" + pClassDta->xStructData.strClassName + "\"\t";
-		strElementData += "Path=\"NFDataCfg/Struct/" + pClassDta->xStructData.strClassName + ".xml\"\t";
-		strElementData += "InstancePath=\"NFDataCfg/Ini/" + pClassDta->xStructData.strClassName + ".xml\"\t/>\n";
+
+		std::string path = pClassDta->filePath;
+		StringReplace(path, strExcelIniPath, "");
+
+		strElementData += "Path=\"NFDataCfg/Struct/" + path + ".xml\"\t";
+		strElementData += "InstancePath=\"NFDataCfg/Ini/" + path + ".xml\"\t>\n";
+
+		//strElementData += "Path=\"NFDataCfg/Struct/" + pClassDta->xStructData.strClassName + ".xml\"\t";
+		//strElementData += "InstancePath=\"NFDataCfg/Ini/" + pClassDta->xStructData.strClassName + ".xml\"\t/>\n";
 
 	}
 
@@ -1234,19 +1328,31 @@ void NFFileProcess::SetUTF8(const bool b)
 	bConvertIntoUTF8 = b;
 }
 
+std::string NFFileProcess::GetFileNameByPath(const std::string& filePath)
+{
+	std::string fileName = filePath.substr(filePath.find_last_of('/') + 1, filePath.find_last_of('.') - filePath.find_last_of('/') - 1);
+	return fileName;
+}
+
+std::string NFFileProcess::GetFileNameExtByPath(const std::string& filePath)
+{
+	std::string ext = filePath.substr(filePath.find_last_of('.'), filePath.length() - filePath.find_last_of('.'));
+	return ext;
+}
+
 std::vector<std::string> NFFileProcess::GetFileListInFolder(std::string folderPath, int depth)
 {
+	depth--;
+
 	std::vector<std::string> result;
 #if NF_PLATFORM == NF_PLATFORM_WIN
 	_finddata_t FileInfo;
 	std::string strfind = folderPath + "\\*";
 	long long Handle = _findfirst(strfind.c_str(), &FileInfo);
-
-
 	if (Handle == -1L)
 	{
-		std::cerr << "can not match the folder path" << std::endl;
-		exit(-1);
+		//std::cerr << "can not match the folder path:" << folderPath << std::endl;
+		return result;
 	}
 	do {
 
@@ -1256,8 +1362,11 @@ std::vector<std::string> NFFileProcess::GetFileListInFolder(std::string folderPa
 			if ((strcmp(FileInfo.name, ".") != 0) && (strcmp(FileInfo.name, "..") != 0))
 			{
 				std::string newPath = folderPath + "\\" + FileInfo.name;
-				std::vector<std::string> childResult = GetFileListInFolder(newPath, depth);
-				result.insert(result.end(), childResult.begin(), childResult.end());
+				if (depth >= 0)
+				{
+					std::vector<std::string> childResult = GetFileListInFolder(newPath, depth);
+					result.insert(result.end(), childResult.begin(), childResult.end());
+				}
 			}
 		}
 		else
@@ -1284,14 +1393,69 @@ std::vector<std::string> NFFileProcess::GetFileListInFolder(std::string folderPa
 			if ((strcmp(ent->d_name, ".") != 0) && (strcmp(ent->d_name, "..") != 0))
 			{
 				sprintf(absolutepath, "%s/%s", folderPath.c_str(), ent->d_name);
-				std::vector<std::string> childResult = GetFileListInFolder(absolutepath, depth);
-				result.insert(result.end(), childResult.begin(), childResult.end());
+				if (depth >= 0)
+				{
+					std::vector<std::string> childResult = GetFileListInFolder(absolutepath, depth);
+					result.insert(result.end(), childResult.begin(), childResult.end());
+				}
 			}
 		}
 		else
 		{
 			sprintf(absolutepath, "%s/%s", folderPath.c_str(), ent->d_name);
 			result.push_back(absolutepath);
+		}
+	}
+
+	sort(result.begin(), result.end());
+#endif
+	return result;
+}
+
+std::vector<std::string> NFFileProcess::GetFolderListInFolder(std::string folderPath)
+{
+	std::vector<std::string> result;
+#if NF_PLATFORM == NF_PLATFORM_WIN
+	_finddata_t FileInfo;
+	std::string strfind = folderPath + "\\*";
+	long long Handle = _findfirst(strfind.c_str(), &FileInfo);
+	if (Handle == -1L)
+	{
+		std::cerr << "can not match the folder path" << std::endl;
+		return result;
+	}
+	do {
+
+		if (FileInfo.attrib & _A_SUBDIR)
+		{
+			if ((strcmp(FileInfo.name, ".") != 0) && (strcmp(FileInfo.name, "..") != 0))
+			{
+				std::string newPath = folderPath + "\\" + FileInfo.name;
+				result.push_back(FileInfo.name);
+			}
+		}
+		
+	} while (_findnext(Handle, &FileInfo) == 0);
+
+
+	_findclose(Handle);
+#else
+	DIR* pDir;
+	struct dirent* ent;
+	char childpath[512];
+	char absolutepath[512];
+	pDir = opendir(folderPath.c_str());
+	memset(childpath, 0, sizeof(childpath));
+	while ((ent = readdir(pDir)) != NULL)
+	{
+		if (ent->d_type & DT_DIR)
+		{
+			if ((strcmp(ent->d_name, ".") != 0) && (strcmp(ent->d_name, "..") != 0))
+			{
+				sprintf(absolutepath, "%s/%s", folderPath.c_str(), ent->d_name);
+
+				result.push_back(ent->d_name);
+			}
 		}
 	}
 

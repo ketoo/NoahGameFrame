@@ -69,8 +69,10 @@ class ClassData
 public:
 	NFClassStruct xStructData;
 	NFClassElement xIniData;
-
+	bool beIncluded = false;
+	std::string filePath;
 	std::list<std::string> includes;
+	std::list<std::string> parts;
 };
 
 class NFFileProcess
@@ -85,14 +87,14 @@ public:
 	void SetUTF8(const bool b);
 
 private:
-	bool LoadDataFromExcel(const std::string& strFile, const std::string& strFileName);
-	bool LoadDataFromExcel(MiniExcelReader::Sheet& sheet, ClassData* pClassData);
+	bool LoadDataFromExcel(const std::string& folder, const std::string& strFile, const std::string& strFileName);
+	bool LoadDataFromExcel(const std::string& folder, MiniExcelReader::Sheet& sheet, ClassData* pClassData);
 
 	bool LoadIniData(MiniExcelReader::Sheet& sheet, ClassData* pClassData);
 	bool LoadDataAndProcessProperty(MiniExcelReader::Sheet& sheet, ClassData* pClassData);
 	bool LoadDataAndProcessComponent(MiniExcelReader::Sheet& sheet, ClassData* pClassData);
 	bool LoadDataAndProcessRecord(MiniExcelReader::Sheet& sheet, ClassData* pClassData);
-	bool LoadDataAndProcessIncludes(MiniExcelReader::Sheet& sheet, ClassData* pClassData);
+	bool LoadDataAndProcessIncludes(const std::string& folder, MiniExcelReader::Sheet& sheet, ClassData* pClassData);
 
 	bool SaveForCPP();
 	bool SaveForCS();
@@ -108,7 +110,12 @@ private:
 	bool SaveForLogicClass();
 
 
+	std::string GetFileNameByPath(const std::string& filePath);
+	std::string GetFileNameExtByPath(const std::string& filePath);
+
 	std::vector<std::string> GetFileListInFolder(std::string folderPath, int depth);
+	std::vector<std::string> GetFolderListInFolder(std::string folderPath);
+
 	void StringReplace(std::string &strBig, const std::string &strsrc, const std::string &strdst);
 
 private:
