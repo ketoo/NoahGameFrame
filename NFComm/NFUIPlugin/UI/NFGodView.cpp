@@ -292,8 +292,6 @@ void NFGodView::RenderSceneObjectNode(const int sceneID, const int groupID)
          
 		 pView->AddNode(guid, barTile, ToNodeSpacePos(NFVector2(pos.X(), pos.Z())));
 		 pView->SetNodeDraggable(guid, false);
-         //pView->AddNodeAttrIn(guid, m_pKernelModule->CreateGUID(), NFrame::IObject::Name(), strName);
-         //pView->AddNodeAttrIn(guid, m_pKernelModule->CreateGUID(), NFrame::IObject::Position(), pos.ToString());
       }
    }
 }

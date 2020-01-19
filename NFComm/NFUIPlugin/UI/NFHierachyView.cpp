@@ -123,7 +123,7 @@ void NFHierachyView::BluePrintViewSubRender()
    NFGUID objectID = pBluePrintView->GetCurrentObjectID();
    if (!objectID.IsNull())
    {
-      auto blueprintNode = m_pBluePrintModule->FindBaseNode(objectID);
+      auto blueprintNode = m_pBluePrintModule->FindNode(objectID);
       if (blueprintNode)
       {
          ImGui::BeginGroup();
@@ -159,9 +159,9 @@ void NFHierachyView::BluePrintViewSubRender()
          {
 			   BluePrintViewSubRenderForMonitor();
          }
-         else if (blueprintNode->blueprintType == NFBlueprintType::JUDGEMENT)
+         else if (blueprintNode->blueprintType == NFBlueprintType::BRANCH)
          {
-			   BluePrintViewSubRenderForJudgement();
+			   BluePrintViewSubRenderForBranch();
          }
          else if (blueprintNode->blueprintType == NFBlueprintType::EXECUTER)
          {
@@ -171,7 +171,18 @@ void NFHierachyView::BluePrintViewSubRender()
 		 {
 			 BluePrintViewSubRenderForVariable();
 		 }
-
+		 else if (blueprintNode->blueprintType == NFBlueprintType::MODIFIER)
+		 {
+			 BluePrintViewSubRenderForVariable();
+		 }
+		 else if (blueprintNode->blueprintType == NFBlueprintType::ARITHMETIC)
+		 {
+			 BluePrintViewSubRenderForVariable();
+		 }
+		 else if (blueprintNode->blueprintType == NFBlueprintType::LOGGER)
+		 {
+			 BluePrintViewSubRenderForVariable();
+		 }
          ImGui::EndGroup();
       }
    }
@@ -179,7 +190,13 @@ void NFHierachyView::BluePrintViewSubRender()
 
 void NFHierachyView::BluePrintViewSubRenderForLogicBlock()
 {
-
+	NF_SHARE_PTR<NFBluePrintView> pBluePrintView = std::dynamic_pointer_cast<NFBluePrintView>(m_pUIModule->GetView(NFViewType::BluePrintView));
+	NFGUID objectID = pBluePrintView->GetCurrentObjectID();
+	if (!objectID.IsNull())
+	{
+		auto logicBlock = m_pBluePrintModule->GetLogicBlock(objectID);
+		//logicBlock->enable
+	}
 }
 
 void NFHierachyView::BluePrintViewSubRenderForMonitor()
@@ -188,7 +205,7 @@ void NFHierachyView::BluePrintViewSubRenderForMonitor()
 	NFGUID objectID = pBluePrintView->GetCurrentObjectID();
 	if (!objectID.IsNull())
 	{
-		auto blueprintNode = m_pBluePrintModule->FindBaseNode(objectID);
+		auto blueprintNode = m_pBluePrintModule->FindNode(objectID);
 		if (blueprintNode)
 		{
 			NF_SHARE_PTR<NFIMonitor> monitor = std::dynamic_pointer_cast<NFIMonitor>(blueprintNode);
@@ -200,20 +217,20 @@ void NFHierachyView::BluePrintViewSubRenderForMonitor()
 	}
 }
 
-void NFHierachyView::BluePrintViewSubRenderForJudgement()
+void NFHierachyView::BluePrintViewSubRenderForBranch()
 {
 	NF_SHARE_PTR<NFBluePrintView> pBluePrintView = std::dynamic_pointer_cast<NFBluePrintView>(m_pUIModule->GetView(NFViewType::BluePrintView));
 	NFGUID objectID = pBluePrintView->GetCurrentObjectID();
 	if (!objectID.IsNull())
 	{
-		auto blueprintNode = m_pBluePrintModule->FindBaseNode(objectID);
+		auto blueprintNode = m_pBluePrintModule->FindNode(objectID);
 		if (blueprintNode)
 		{
-			NF_SHARE_PTR<NFJudgement> judgement = std::dynamic_pointer_cast<NFJudgement>(blueprintNode);
+			NF_SHARE_PTR<NFIBranch> branch = std::dynamic_pointer_cast<NFIBranch>(blueprintNode);
 
-			BluePrintViewSubRenderForJudgementHead(judgement);
-			BluePrintViewSubRenderForJudgementBody(judgement);
-			BluePrintViewSubRenderForJudgementBot(judgement);
+			BluePrintViewSubRenderForBranchHead(branch);
+			BluePrintViewSubRenderForBranchBody(branch);
+			BluePrintViewSubRenderForBranchBot(branch);
 		}
 	}
 }
@@ -224,7 +241,7 @@ void NFHierachyView::BluePrintViewSubRenderForExecuter()
 	NFGUID objectID = pBluePrintView->GetCurrentObjectID();
 	if (!objectID.IsNull())
 	{
-		auto blueprintNode = m_pBluePrintModule->FindBaseNode(objectID);
+		auto blueprintNode = m_pBluePrintModule->FindNode(objectID);
 		if (blueprintNode)
 		{
 		}
@@ -237,11 +254,26 @@ void NFHierachyView::BluePrintViewSubRenderForVariable()
 	NFGUID objectID = pBluePrintView->GetCurrentObjectID();
 	if (!objectID.IsNull())
 	{
-		auto blueprintNode = m_pBluePrintModule->FindBaseNode(objectID);
+		auto blueprintNode = m_pBluePrintModule->FindNode(objectID);
 		if (blueprintNode)
 		{
 		}
 	}
+}
+
+void NFHierachyView::BluePrintViewSubRenderForModifier()
+{
+
+}
+
+void NFHierachyView::BluePrintViewSubRenderForLogger()
+{
+
+}
+
+void NFHierachyView::BluePrintViewSubRenderForArithmetic()
+{
+
 }
 
 void NFHierachyView::BluePrintViewSubRenderForMonitorHead(NF_SHARE_PTR<NFIMonitor> monitor)
@@ -528,170 +560,36 @@ void NFHierachyView::BluePrintViewSubRenderForMonitorBody(NF_SHARE_PTR<NFIMonito
 
 void NFHierachyView::BluePrintViewSubRenderForMonitorBot(NF_SHARE_PTR<NFIMonitor> monitor)
 {
-	ImGui::Separator();
-   if (ImGui::Button("+ Judgement"))
-   {
-      NF_SHARE_PTR<NFBluePrintView> blueprintView = std::dynamic_pointer_cast<NFBluePrintView>(m_pUIModule->GetView(NFViewType::BluePrintView));
-      blueprintView->TryToCreateJudgement();
-   }
+
 }
 
-void NFHierachyView::BluePrintViewSubRenderForJudgementHead(NF_SHARE_PTR<NFJudgement> judgement)
+void NFHierachyView::BluePrintViewSubRenderForBranchHead(NF_SHARE_PTR<NFIBranch> judgement)
 {
 
 }
 
-void NFHierachyView::BluePrintViewSubRenderForJudgementBody(NF_SHARE_PTR<NFJudgement> judgement)
+void NFHierachyView::BluePrintViewSubRenderForBranchBody(NF_SHARE_PTR<NFIBranch> judgement)
 {
 	ImGui::Text("Judgement Type");
-   /*
-	ImGui::SameLine();
-	if (ImGui::Button(judgement->judgementType.toString().c_str()))
-	{
-		ImGui::OpenPopup("my_select_group");
-	}
-
-	if (ImGui::BeginPopup("my_select_group"))
-	{
-		ImGui::Separator();
-		for (auto x : NFComparatorType::allValues())
-		{
-			if (ImGui::Selectable(x.toString().c_str(), false))
-			{
-				judgement->judgementType = x;
-			}
-		}
-
-		ImGui::EndPopup();
-	}
-   */
-   ///////////////////////////////////
-   ImGui::BeginGroup();
-   for (int i = 0; i < judgement->comparators.size(); ++i)
-   {
-      auto comparator = judgement->comparators[i];
-
-      
-		ImGui::Text("comparator");
-
-   }
-
-   ImGui::EndGroup();
-    ///////////////////////////////////
 }
 
-void NFHierachyView::BluePrintViewSubRenderForJudgementBot(NF_SHARE_PTR<NFJudgement> judgement)
+void NFHierachyView::BluePrintViewSubRenderForBranchBot(NF_SHARE_PTR<NFIBranch> judgement)
 {
-	ImGui::Separator();
-   if (ImGui::Button("+ Comparator"))
-   {
-      NF_SHARE_PTR<NFBluePrintView> blueprintView = std::dynamic_pointer_cast<NFBluePrintView>(m_pUIModule->GetView(NFViewType::BluePrintView));
-      blueprintView->TryToCreateComparator();
-   }
-/*
-   if (ImGui::Button("+ Accessor"))
-   {
-      NF_SHARE_PTR<NFBluePrintView> blueprintView = std::dynamic_pointer_cast<NFBluePrintView>(m_pUIModule->GetView(NFViewType::BluePrintView));
-      blueprintView->TryToCreateAccessor();
-   }
-*/
+
 }
 
 
 void NFHierachyView::InitBluePrintMonitorArgs(NF_SHARE_PTR<NFIMonitor> monitor)
 {
-	/*
-	monitor->arg.Clear();
-
-	switch (monitor->GetMonitorType())
-	{
-	case NFMonitorType::GameEvent:
-		break;
-	case NFMonitorType::NetworkEvent:
-		break;
-	case NFMonitorType::NetworkMsgEvent:
-		break;
-	case NFMonitorType::ObjectEvent:
-	{
-      if (monitor->GetMonitorInputArgCount() <= 0)
-      {
-         for (auto it : NFMonitorObjectEventArgType::allValues())
-         {
-            monitor->arg.AddString("");
-         }
-      }
-      else
-      {
-         int i = 0;
-         for (auto it : NFMonitorObjectEventArgType::allValues())
-         {
-            monitor->arg.SetString(i++, "");
-         }
-      }
-      
-	}
-	break;
-	case NFMonitorType::PropertyEvent:
-	{
-      if (monitor->arg.GetCount() <= 0)
-      {
-         for (auto it : NFMonitorPropertyEventArgType::allValues())
-         {
-            monitor->arg.AddString("");
-         }
-      }
-      else
-      {
-         int i = 0;
-         for (auto it : NFMonitorPropertyEventArgType::allValues())
-         {
-            monitor->arg.SetString(i++, "");
-         }
-      }
-	}
-	break;
-	case NFMonitorType::RecordEvent:
-	{
-      if (monitor->arg.GetCount() <= 0)
-      {
-         for (auto it : NFMonitorPropertyEventArgType::allValues())
-         {
-            monitor->arg.AddString("");
-         }
-      }
-      else
-      {
-         int i = 0;
-         for (auto it : NFMonitorPropertyEventArgType::allValues())
-         {
-            monitor->arg.SetString(i++, "");
-         }
-      }
-	}
-	break;
-
-	case NFMonitorType::HeartBeatEvent:
-		break;
-	case NFMonitorType::SceneEvent:
-		break;
-	case NFMonitorType::ItemEvent:
-		break;
-	case NFMonitorType::BuffEvent:
-		break;
-
-	default:
-		break;
-	}
-	*/
 
 }
 
-void NFHierachyView::InitBluePrintJudgementArgs(NF_SHARE_PTR<NFJudgement> judgement)
+void NFHierachyView::InitBluePrintJudgementArgs(NF_SHARE_PTR<NFIBranch> judgement)
 {
 
 }
 
-void NFHierachyView::InitBluePrintExecuterArgs(NF_SHARE_PTR<NFExecuter> executer)
+void NFHierachyView::InitBluePrintExecuterArgs(NF_SHARE_PTR<NFIExecuter> executer)
 {
 
 }

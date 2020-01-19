@@ -95,8 +95,7 @@
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="BluePrintNode\NFMonitor.cpp" />
-    <ClCompile Include="BluePrintNode\NFVariable.cpp" />
+    <ClCompile Include="BluePrintVM\NFBPVirtualMachine.cpp" />
     <ClCompile Include="dllmain.cpp">
       <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</CompileAsManaged>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -106,19 +105,24 @@
       </PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="NFBluePrintCppGeneratorModule.cpp" />
-    <ClCompile Include="NFBluePrintLoaderModule.cpp" />
     <ClCompile Include="NFBluePrintLuaGeneratorModule.cpp" />
     <ClCompile Include="NFBluePrintModule.cpp" />
     <ClCompile Include="NFBluePrintPlugin.cpp" />
+    <ClCompile Include="NFBPVirtualMachineModule.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="BluePrintNode\NFArithmetic.h" />
+    <ClInclude Include="BluePrintNode\NFBranch.h" />
+    <ClInclude Include="BluePrintNode\NFExecuter.h" />
+    <ClInclude Include="BluePrintNode\NFModifier.h" />
     <ClInclude Include="BluePrintNode\NFMonitor.h" />
     <ClInclude Include="BluePrintNode\NFVariable.h" />
+    <ClInclude Include="BluePrintVM\NFBPVirtualMachine.h" />
     <ClInclude Include="NFBluePrintCppGeneratorModule.h" />
-    <ClInclude Include="NFBluePrintLoaderModule.h" />
     <ClInclude Include="NFBluePrintLuaGeneratorModule.h" />
     <ClInclude Include="NFBluePrintModule.h" />
     <ClInclude Include="NFBluePrintPlugin.h" />
+    <ClInclude Include="NFBPVirtualMachineModule.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

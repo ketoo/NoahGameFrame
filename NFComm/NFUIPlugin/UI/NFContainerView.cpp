@@ -156,14 +156,58 @@ void NFContainerView::BluePrintMenu()
 
                 ImGui::EndMenu();
 			}
-			if (ImGui::MenuItem("New Judgement", ""))
+
+			if (ImGui::BeginMenu("New Branch", ""))
 			{
-				pBluePrintView->TryToCreateJudgement();
+                for (auto x : NFBranchType::allValues())
+                {
+                    if (ImGui::MenuItem(x.toString().c_str(), ""))
+                    {
+                        pBluePrintView->TryToCreateBranch(x);
+                    }
+                }
+
+                ImGui::EndMenu();
 			}
-			if (ImGui::MenuItem("New Executer", ""))
-			{
-				pBluePrintView->TryToCreateExecuter();
-			}
+
+            if (ImGui::BeginMenu("New Executer"))
+            {
+                for (auto x : NFExecuterType::allValues())
+                {
+                    if (ImGui::MenuItem(x.toString().c_str(), ""))
+                    {
+                        pBluePrintView->TryToCreateExecuter(x);
+                    }
+                }
+
+                ImGui::EndMenu();
+            }
+
+            if (ImGui::BeginMenu("New Arithmetic"))
+            {
+                for (auto x : NFArithmeticType::allValues())
+                {
+                    if (ImGui::MenuItem(x.toString().c_str(), ""))
+                    {
+                        pBluePrintView->TryToCreateArithmetic(x);
+                    }
+                }
+
+                ImGui::EndMenu();
+            }
+
+            if (ImGui::BeginMenu("New Modifier"))
+            {
+                for (auto x : NFModifierType::allValues())
+                {
+                    if (ImGui::MenuItem(x.toString().c_str(), ""))
+                    {
+                        pBluePrintView->TryToCreateModifier(x);
+                    }
+                }
+
+                ImGui::EndMenu();
+            }
 
             if (ImGui::BeginMenu("New Variable"))
             {

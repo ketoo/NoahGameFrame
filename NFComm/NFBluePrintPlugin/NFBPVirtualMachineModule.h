@@ -23,30 +23,33 @@
    limitations under the License.
 */
 
-#ifndef NF_BLUE_PRINT_LOADER_MODULE_H
-#define NF_BLUE_PRINT_LOADER_MODULE_H
+#ifndef NF_BLUE_PRINT_VIRTUAL_MACHINE_MODULE_H
+#define NF_BLUE_PRINT_VIRTUAL_MACHINE_MODULE_H
 
 #include "NFComm/NFPluginModule/NFILogModule.h"
 #include "NFComm/NFPluginModule/NFIKernelModule.h"
 #include "NFComm/NFPluginModule/NFIClassModule.h"
 #include "NFComm/NFPluginModule/NFIBluePrintModule.h"
 
-class NFIBluePrintLoaderModule
+#include "BluePrintVM/NFBPVirtualMachine.h"
+
+class NFIBPVirtualMachineModule
 	: public NFIModule
 {
 public:
+
 };
 
-class NFBluePrintLoaderModule
-    : public NFIBluePrintLoaderModule
+class NFBPVirtualMachineModule
+    : public NFIBPVirtualMachineModule
 {
 public:
-    NFBluePrintLoaderModule( NFIPluginManager* p )
+    NFBPVirtualMachineModule( NFIPluginManager* p )
     {
         pPluginManager = p;
     }
 
-    virtual ~NFBluePrintLoaderModule() {};
+    virtual ~NFBPVirtualMachineModule() {};
 
     virtual bool Awake();
     virtual bool Init();
@@ -60,7 +63,14 @@ public:
     virtual bool OnReloadPlugin();
 
 
+    void RunLogicBlock(const NFGUID& logicBlockID);
+    void StopLogicBlock(const NFGUID& logicBlockID);
+
 private:
+    NFMapEx<NFGUID, NFBPVirtualMachine> mVirtualMachine;
+
+private:
+    NFIBluePrintModule* m_pBluePrintModule;
 };
 
 

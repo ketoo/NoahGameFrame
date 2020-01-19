@@ -24,20 +24,61 @@
 */
 
 #include "NFComm/NFPluginModule/NFIBluePrintModule.h"
+#include "NFComm/NFPluginModule/NFIElementModule.h"
+#include "NFComm/NFPluginModule/NFIClassModule.h"
+#include "NFComm/NFPluginModule/NFIKernelModule.h"
 
-/*
-	GameEvent,
-	NetworkEvent,
-	NetworkMsgEvent,
-	ObjectEvent,
-	PropertyEvent,
-	RecordEvent,
-	HeartBeatEvent,
-	SceneEvent,
-	ItemEvent,
-	SkillEvent,
-	BuffEvent,
-*/
+
+class NFInputVariable : public NFIVariable
+{
+private:
+	NFInputVariable() {}
+public:
+	NFInputVariable(NFIPluginManager* p, const NFGUID& blockID, const NFGUID& id, const std::string& name)
+	{
+		this->id = id;
+		this->name = name;
+		this->pPluginManager = p;
+		this->logicBlockId = blockID;
+
+		variableType = NFVariableType::Input;
+
+		Init();
+	}
+
+
+	virtual void InitInputArgs()
+	{
+		{
+			NF_SHARE_PTR<NFIOData> var = NF_SHARE_PTR<NFIOData>(NF_NEW NFIOData());
+			var->id = this->pPluginManager->FindModule<NFIKernelModule>()->CreateGUID();
+			var->name = "DataType";
+			var->valueType = NFValueType::String;
+
+			inputArgs.push_back(var);
+		}
+	}
+
+	virtual void InitOutputArgs()
+	{
+		{
+			NF_SHARE_PTR<NFIOData> var = NF_SHARE_PTR<NFIOData>(NF_NEW NFIOData());
+			var->id = this->pPluginManager->FindModule<NFIKernelModule>()->CreateGUID();
+			var->name = "";
+			var->valueType = NFValueType::UNKNOW;
+
+			outputArgs.push_back(var);
+		}
+	}
+
+	virtual void UpdateOutputData()
+	{
+		NF_SHARE_PTR<NFIOData> inputData = GetInputArg(0);
+		NF_SHARE_PTR<NFIOData> outputData = GetOutputArg(0);
+		outputData->valueType = inputData->valueType;
+		outputData->varData = inputData->varData;
+	}
+};
 
 //for Element Data <class anme && element id && property name>
 class NFElementVariable : public NFIVariable
@@ -45,52 +86,129 @@ class NFElementVariable : public NFIVariable
 private:
 	NFElementVariable() {}
 public:
-	NFElementVariable(NFIPluginManager* p, const NFGUID& blockID, const NFGUID& id, const std::string& name, NF_SHARE_PTR<NFBluePrintNodeBase> parent)
+	NFElementVariable(NFIPluginManager* p, const NFGUID& blockID, const NFGUID& id, const std::string& name)
 	{
 		this->id = id;
 		this->name = name;
 		this->pPluginManager = p;
-		this->parent = parent;
 		this->logicBlockId = blockID;
 
 		variableType = NFVariableType::ElementSystem;
-		blueprintType = NFBlueprintType::VARIABLE;
 
-		InitInputArgs();
+		Init();
+
 	}
 
 
 	virtual void InitInputArgs()
 	{
 		{
-			NF_SHARE_PTR<NFInputData> var = NF_SHARE_PTR<NFInputData>(NF_NEW NFInputData());
+			NF_SHARE_PTR<NFIOData> var = NF_SHARE_PTR<NFIOData>(NF_NEW NFIOData());
 			var->id = this->pPluginManager->FindModule<NFIKernelModule>()->CreateGUID();
-			var->index = NFElementVariableInputArg::ClassName;
 			var->name = NFElementVariableInputArg::toString(NFElementVariableInputArg::ClassName);
 			var->valueType = NFValueType::String;
 
 			inputArgs.push_back(var);
 		}
 		{
-			NF_SHARE_PTR<NFInputData> var = NF_SHARE_PTR<NFInputData>(NF_NEW NFInputData());
+			NF_SHARE_PTR<NFIOData> var = NF_SHARE_PTR<NFIOData>(NF_NEW NFIOData());
 			var->id = this->pPluginManager->FindModule<NFIKernelModule>()->CreateGUID();
-			var->index = NFElementVariableInputArg::ElementConfigID;
-			var->name = NFElementVariableInputArg::toString(NFElementVariableInputArg::ElementConfigID);
+			var->name = NFElementVariableInputArg::toString(NFElementVariableInputArg::ConfigID);
 			var->valueType = NFValueType::String;
 
 			inputArgs.push_back(var);
 		}
 		{
-			NF_SHARE_PTR<NFInputData> var = NF_SHARE_PTR<NFInputData>(NF_NEW NFInputData());
+			NF_SHARE_PTR<NFIOData> var = NF_SHARE_PTR<NFIOData>(NF_NEW NFIOData());
 			var->id = this->pPluginManager->FindModule<NFIKernelModule>()->CreateGUID();
-			var->index = NFElementVariableInputArg::ElementPropertyName;
-			var->name = NFElementVariableInputArg::toString(NFElementVariableInputArg::ElementPropertyName);
+			var->name = NFElementVariableInputArg::toString(NFElementVariableInputArg::PropertyName);
 			var->valueType = NFValueType::String;
 
 			inputArgs.push_back(var);
 		}
 	}
 
+	virtual void InitOutputArgs()
+	{
+		{
+			NF_SHARE_PTR<NFIOData> var = NF_SHARE_PTR<NFIOData>(NF_NEW NFIOData());
+			var->id = this->pPluginManager->FindModule<NFIKernelModule>()->CreateGUID();
+			var->name = "";
+			var->valueType = NFValueType::UNKNOW;
+
+			outputArgs.push_back(var);
+		}
+	}
+
+	virtual void UpdateOutputData()
+	{
+		NF_SHARE_PTR<NFIOData> className = GetInputArg(NFElementVariableInputArg::toString(NFElementVariableInputArg::ClassName));
+		NF_SHARE_PTR<NFIOData> configID = GetInputArg(NFElementVariableInputArg::toString(NFElementVariableInputArg::ConfigID));
+		NF_SHARE_PTR<NFIOData> propertyName = GetInputArg(NFElementVariableInputArg::toString(NFElementVariableInputArg::PropertyName));
+
+		NF_SHARE_PTR<NFIOData> outputData = GetOutputArg(0);
+		outputData->varData = "";
+
+		if (className->varData.empty() || configID->varData.empty() || propertyName->varData.empty())
+		{
+			return;
+		}
+
+		auto elementModule = this->pPluginManager->FindModule<NFIElementModule>();
+		auto classModule = this->pPluginManager->FindModule<NFIClassModule>();
+		if (elementModule->ExistElement(configID->varData))
+		{
+			auto classObject = classModule->GetElement(className->varData);
+			if (classObject)
+			{
+				auto classProperty = classObject->GetPropertyManager()->GetElement(propertyName->varData);
+				if (classProperty)
+				{
+					switch (classProperty->GetType())
+					{
+					case NFDATA_TYPE::TDATA_INT:
+					{
+						outputData->valueType = NFValueType::Int;
+						INT64 value = elementModule->GetPropertyInt(configID->varData, propertyName->varData);
+						outputData->varData = std::to_string(value);
+					}
+						break;
+					case NFDATA_TYPE::TDATA_FLOAT:
+					{
+						outputData->valueType = NFValueType::Float;
+						double value = elementModule->GetPropertyFloat(configID->varData, propertyName->varData);
+						outputData->varData = std::to_string(value);
+					}
+						break;
+					case NFDATA_TYPE::TDATA_STRING:
+					{
+						outputData->valueType = NFValueType::String;
+						std::string value = elementModule->GetPropertyString(configID->varData, propertyName->varData);
+						outputData->varData = value;
+					}
+						break;
+					case NFDATA_TYPE::TDATA_VECTOR2:
+					{
+						outputData->valueType = NFValueType::Vector2;
+						NFVector2 value = elementModule->GetPropertyVector2(configID->varData, propertyName->varData);
+						outputData->varData = value.ToString();
+					}
+						break;
+					case NFDATA_TYPE::TDATA_VECTOR3:
+					{
+						outputData->valueType = NFValueType::Vector3;
+						NFVector3 value = elementModule->GetPropertyVector3(configID->varData, propertyName->varData);
+						outputData->varData = value.ToString();
+					}
+						break;
+					default:
+						break;
+					}
+					
+				}
+			}
+		}
+	}
 
 public:
 	
@@ -100,52 +218,127 @@ public:
 class NFPropertyVariable : public NFIVariable
 {
 public:
-	NFPropertyVariable(NFIPluginManager* p, const NFGUID& blockID, const NFGUID& id, const std::string& name, NF_SHARE_PTR<NFBluePrintNodeBase> parent)
+	NFPropertyVariable(NFIPluginManager* p, const NFGUID& blockID, const NFGUID& id, const std::string& name)
 	{
 		this->id = id;
 		this->name = name;
 		this->pPluginManager = p;
-		this->parent = parent;
 		this->logicBlockId = blockID;
 
 		variableType = NFVariableType::PropertySystem;
-		blueprintType = NFBlueprintType::VARIABLE;
 
-		InitInputArgs();
+		Init();
+
 	}
 
 
 	virtual void InitInputArgs()
 	{
 		{
-			NF_SHARE_PTR<NFInputData> var = NF_SHARE_PTR<NFInputData>(NF_NEW NFInputData());
+			NF_SHARE_PTR<NFIOData> var = NF_SHARE_PTR<NFIOData>(NF_NEW NFIOData());
 			var->id = this->pPluginManager->FindModule<NFIKernelModule>()->CreateGUID();
-			var->index = NFPropertyVariableInputArg::OnwerID;
 			var->name = NFPropertyVariableInputArg::toString(NFPropertyVariableInputArg::OnwerID);
 			var->valueType = NFValueType::Object;
 
 			inputArgs.push_back(var);
 		} 
 		{
-			NF_SHARE_PTR<NFInputData> var = NF_SHARE_PTR<NFInputData>(NF_NEW NFInputData());
+			NF_SHARE_PTR<NFIOData> var = NF_SHARE_PTR<NFIOData>(NF_NEW NFIOData());
 			var->id = this->pPluginManager->FindModule<NFIKernelModule>()->CreateGUID();
-			var->index = NFPropertyVariableInputArg::ClassName;
 			var->name = NFPropertyVariableInputArg::toString(NFPropertyVariableInputArg::ClassName);
 			var->valueType = NFValueType::String;
 
 			inputArgs.push_back(var);
 		}
 		{
-			NF_SHARE_PTR<NFInputData> var = NF_SHARE_PTR<NFInputData>(NF_NEW NFInputData());
+			NF_SHARE_PTR<NFIOData> var = NF_SHARE_PTR<NFIOData>(NF_NEW NFIOData());
 			var->id = this->pPluginManager->FindModule<NFIKernelModule>()->CreateGUID();
-			var->index = NFPropertyVariableInputArg::PropertyName;
 			var->name = NFPropertyVariableInputArg::toString(NFPropertyVariableInputArg::PropertyName);
 			var->valueType = NFValueType::String;
 
 			inputArgs.push_back(var);
 		}
 	}
+	virtual void InitOutputArgs()
+	{
+		{
+			NF_SHARE_PTR<NFIOData> var = NF_SHARE_PTR<NFIOData>(NF_NEW NFIOData());
+			var->id = this->pPluginManager->FindModule<NFIKernelModule>()->CreateGUID();
+			var->name = "";
+			var->valueType = NFValueType::UNKNOW;
 
+			outputArgs.push_back(var);
+		}
+	}
+	virtual void UpdateOutputData()
+	{
+
+		NF_SHARE_PTR<NFIOData> className = GetInputArg(NFPropertyVariableInputArg::toString(NFPropertyVariableInputArg::ClassName));
+		NF_SHARE_PTR<NFIOData> propertyName = GetInputArg(NFPropertyVariableInputArg::toString(NFPropertyVariableInputArg::PropertyName));
+
+		NF_SHARE_PTR<NFIOData> outputData = GetOutputArg(0);
+		outputData->varData = "";
+
+		if (className->varData.empty() || propertyName->varData.empty())
+		{
+			return;
+		}
+
+		auto elementModule = this->pPluginManager->FindModule<NFIElementModule>();
+		auto classModule = this->pPluginManager->FindModule<NFIClassModule>();
+		{
+			auto classObject = classModule->GetElement(className->varData);
+			if (classObject)
+			{
+				auto classProperty = classObject->GetPropertyManager()->GetElement(propertyName->varData);
+				if (classProperty)
+				{
+					switch (classProperty->GetType())
+					{
+					case NFDATA_TYPE::TDATA_INT:
+					{
+						outputData->valueType = NFValueType::Int;
+						outputData->varData = NFValueType::toString(NFValueType::Int);
+					}
+					break;
+					case NFDATA_TYPE::TDATA_FLOAT:
+					{
+						outputData->valueType = NFValueType::Float;
+						outputData->varData = NFValueType::toString(NFValueType::Float);
+					}
+					break;
+					case NFDATA_TYPE::TDATA_OBJECT:
+					{
+						outputData->valueType = NFValueType::Object;
+						outputData->varData = NFValueType::toString(NFValueType::Object);
+					}
+					break;
+					case NFDATA_TYPE::TDATA_STRING:
+					{
+						outputData->valueType = NFValueType::String;
+						outputData->varData = NFValueType::toString(NFValueType::String);
+					}
+					break;
+					case NFDATA_TYPE::TDATA_VECTOR2:
+					{
+						outputData->valueType = NFValueType::Vector2;
+						outputData->varData = NFValueType::toString(NFValueType::Vector2);
+					}
+					break;
+					case NFDATA_TYPE::TDATA_VECTOR3:
+					{
+						outputData->valueType = NFValueType::Vector3;
+						outputData->varData = NFValueType::toString(NFValueType::Vector3);
+					}
+					break;
+					default:
+						break;
+					}
+
+				}
+			}
+		}
+	}
 
 public:
 
@@ -155,34 +348,39 @@ public:
 class NFRecordVariable : public NFIVariable
 {
 public:
-	NFRecordVariable(NFIPluginManager* p, const NFGUID& blockID, const NFGUID& id, const std::string& name, NF_SHARE_PTR<NFBluePrintNodeBase> parent)
+	NFRecordVariable(NFIPluginManager* p, const NFGUID& blockID, const NFGUID& id, const std::string& name)
 	{
 		this->id = id;
 		this->name = name;
 		this->pPluginManager = p;
-		this->parent = parent;
 		this->logicBlockId = blockID;
 
-		//operatorType = NFMonitorType::GameEvent;
-		blueprintType = NFBlueprintType::VARIABLE;
+		variableType = NFVariableType::RecordSystem;
 
-		InitInputArgs();
+		Init();
 	}
 
 
 	virtual void InitInputArgs()
 	{
 		{
-			NF_SHARE_PTR<NFInputData> var = NF_SHARE_PTR<NFInputData>(NF_NEW NFInputData());
+			NF_SHARE_PTR<NFIOData> var = NF_SHARE_PTR<NFIOData>(NF_NEW NFIOData());
 			var->id = this->pPluginManager->FindModule<NFIKernelModule>()->CreateGUID();
-			var->index = NFRecordVariableInputArg::OnwerID;
 			var->name = NFPropertyVariableInputArg::toString(NFPropertyVariableInputArg::OnwerID);
 			var->valueType = NFValueType::Object;
 
 			inputArgs.push_back(var);
 		}
 		{
-			NF_SHARE_PTR<NFInputData> var = NF_SHARE_PTR<NFInputData>(NF_NEW NFInputData());
+			NF_SHARE_PTR<NFIOData> var = NF_SHARE_PTR<NFIOData>(NF_NEW NFIOData());
+			var->id = this->pPluginManager->FindModule<NFIKernelModule>()->CreateGUID();
+			var->name = NFRecordVariableInputArg::ClassName;
+			var->valueType = NFValueType::String;
+
+			inputArgs.push_back(var);
+		}
+		{
+			NF_SHARE_PTR<NFIOData> var = NF_SHARE_PTR<NFIOData>(NF_NEW NFIOData());
 			var->id = this->pPluginManager->FindModule<NFIKernelModule>()->CreateGUID();
 			var->name = NFRecordVariableInputArg::RecordName;
 			var->valueType = NFValueType::String;
@@ -190,7 +388,7 @@ public:
 			inputArgs.push_back(var);
 		}
 		{
-			NF_SHARE_PTR<NFInputData> var = NF_SHARE_PTR<NFInputData>(NF_NEW NFInputData());
+			NF_SHARE_PTR<NFIOData> var = NF_SHARE_PTR<NFIOData>(NF_NEW NFIOData());
 			var->id = this->pPluginManager->FindModule<NFIKernelModule>()->CreateGUID();
 			var->name = NFRecordVariableInputArg::RecordRow;
 			var->valueType = NFValueType::Int;
@@ -198,7 +396,7 @@ public:
 			inputArgs.push_back(var);
 		}
 		{
-			NF_SHARE_PTR<NFInputData> var = NF_SHARE_PTR<NFInputData>(NF_NEW NFInputData());
+			NF_SHARE_PTR<NFIOData> var = NF_SHARE_PTR<NFIOData>(NF_NEW NFIOData());
 			var->id = this->pPluginManager->FindModule<NFIKernelModule>()->CreateGUID();
 			var->name = NFRecordVariableInputArg::RecordCol;
 			var->valueType = NFValueType::Int;
@@ -207,6 +405,21 @@ public:
 		}
 	}
 
+	virtual void InitOutputArgs()
+	{
+		{
+			NF_SHARE_PTR<NFIOData> var = NF_SHARE_PTR<NFIOData>(NF_NEW NFIOData());
+			var->id = this->pPluginManager->FindModule<NFIKernelModule>()->CreateGUID();
+			var->name = "";
+			var->valueType = NFValueType::UNKNOW;
+
+			outputArgs.push_back(var);
+		}
+	}
+	virtual void UpdateOutputData()
+	{
+
+	}
 
 public:
 

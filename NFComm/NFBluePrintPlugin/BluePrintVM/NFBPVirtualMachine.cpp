@@ -24,69 +24,39 @@
 */
 
 //#include "Dependencies/googletest-release-1.8.0/googletest/include/gtest/gtest.h"
-#include "NFBluePrintLoaderModule.h"
+#include "NFBPVirtualMachine.h"
 
-bool NFBluePrintLoaderModule::Awake()
+void NFBPVirtualMachine::StartMonitor(NF_SHARE_PTR<NFIMonitor> monitor)
 {
+    switch (monitor->monitorType)
+    {
+    case NFMonitorType::GameEvent:
+    {
 
-
-	return true;
-}
-
-bool NFBluePrintLoaderModule::Init()
-{
-	
-
-    return true;
-}
-
-bool NFBluePrintLoaderModule::AfterInit()
-{
-
-	return true;
-}
-
-bool NFBluePrintLoaderModule::CheckConfig()
-{
-	
-	return true;
-}
-
-bool NFBluePrintLoaderModule::ReadyExecute()
-{
-	
-
-	return true;
-}
-
-bool NFBluePrintLoaderModule::Execute()
-{
-	
-    return true;
-}
-
-bool NFBluePrintLoaderModule::BeforeShut()
-{
-
-	return true;
-}
-
-bool NFBluePrintLoaderModule::Shut()
-{
-	
-
-	return true;
-}
-
-bool NFBluePrintLoaderModule::Finalize()
-{
-	
-
-	return true;
-}
-
-bool NFBluePrintLoaderModule::OnReloadPlugin()
-{
-	
-	return true;
+    }
+        break;
+    case NFMonitorType::NetworkEvent:
+        break;
+    case NFMonitorType::NetworkMsgEvent:
+        break;
+    case NFMonitorType::ObjectEvent:
+        break;
+    case NFMonitorType::PropertyEvent:
+        break;
+    case NFMonitorType::RecordEvent:
+        break;
+    case NFMonitorType::HeartBeatEvent:
+        break;
+    case NFMonitorType::SceneEvent:
+        break;
+    case NFMonitorType::ItemEvent:
+        break;
+    case NFMonitorType::SkillEvent:
+        break;
+    case NFMonitorType::BuffEvent:
+        break;
+    default:
+        break;
+    }
+    
 }

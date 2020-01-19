@@ -27,12 +27,11 @@
 
 #include "NFBluePrintModule.h"
 #include "NFBluePrintCppGeneratorModule.h"
-#include "NFBluePrintLoaderModule.h"
+#include "NFBPVirtualMachineModule.h"
 #include "NFBluePrintLuaGeneratorModule.h"
+#include "NFBPVirtualMachineModule.h"
 #include "NFBluePrintPlugin.h"
 
-//
-//
 #ifdef NF_DYNAMIC_PLUGIN
 
 NF_EXPORT void DllStartPlugin(NFIPluginManager* pm)
@@ -63,7 +62,7 @@ const std::string NFBluePrintPlugin::GetPluginName()
 void NFBluePrintPlugin::Install()
 {
 	REGISTER_MODULE(pPluginManager, NFIBluePrintLuaGeneratorModule, NFBluePrintLuaGeneratorModule)
-	REGISTER_MODULE(pPluginManager, NFIBluePrintLoaderModule, NFBluePrintLoaderModule)
+	REGISTER_MODULE(pPluginManager, NFIBPVirtualMachineModule, NFBPVirtualMachineModule)
 	REGISTER_MODULE(pPluginManager, NFIBluePrintCppGeneratorModule, NFBluePrintCppGeneratorModule)
 	REGISTER_MODULE(pPluginManager, NFIBluePrintModule, NFBluePrintModule)
 
@@ -73,6 +72,6 @@ void NFBluePrintPlugin::Uninstall()
 {
 	UNREGISTER_MODULE(pPluginManager, NFIBluePrintModule, NFBluePrintModule)
 	UNREGISTER_MODULE(pPluginManager, NFIBluePrintCppGeneratorModule, NFBluePrintCppGeneratorModule)
-	UNREGISTER_MODULE(pPluginManager, NFIBluePrintLoaderModule, NFBluePrintLoaderModule)
+	UNREGISTER_MODULE(pPluginManager, NFIBPVirtualMachineModule, NFBPVirtualMachineModule)
 	UNREGISTER_MODULE(pPluginManager, NFIBluePrintLuaGeneratorModule, NFBluePrintLuaGeneratorModule)
 }

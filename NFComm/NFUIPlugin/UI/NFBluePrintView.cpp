@@ -33,7 +33,8 @@ NFBluePrintView::NFBluePrintView(NFIPluginManager* p, NFViewType vt) : NFIView(p
 
    m_pNodeView->ResetOffest(NFVector2::Zero());
    m_pNodeView->SetUpNewLinkCallBack(std::bind(&NFBluePrintView::TryNewLinkEvent, this, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3, std::placeholders::_4));
-   m_pNodeView->SetUpNodeAttriRenderCallBack(std::bind(&NFBluePrintView::NodeAttriRender, this, std::placeholders::_1));
+   m_pNodeView->SetUpDeleteLinkCallBack(std::bind(&NFBluePrintView::TryDeleteLinkEvent, this, std::placeholders::_1));
+   m_pNodeView->SetPinRenderCallBack(std::bind(&NFBluePrintView::PinRender, this, std::placeholders::_1));
 
    m_pTreeView->SetSelectedNodeFunctor(std::bind(&NFBluePrintView::HandlerSelected, this, std::placeholders::_1));
    m_pTreeView->SetName(GET_CLASS_NAME(NFBluePrintView));
@@ -45,7 +46,7 @@ NFBluePrintView::NFBluePrintView(NFIPluginManager* p, NFViewType vt) : NFIView(p
    m_pElementModule = pPluginManager->FindModule<NFIElementModule>();
 
    m_pBluePrintModule->SetNodeModifyEventFunctor(std::bind(&NFBluePrintView::NodeModifyEvent, this, std::placeholders::_1, std::placeholders::_2));
-   m_pBluePrintModule->SetLinkModifyEventFunctor(std::bind(&NFBluePrintView::LinkModifyEvent, this, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3, std::placeholders::_4, std::placeholders::_5));
+   m_pBluePrintModule->SetLinkModifyEventFunctor(std::bind(&NFBluePrintView::LinkModifyEvent, this, std::placeholders::_1, std::placeholders::_2));
 }
 
 NFBluePrintView::~NFBluePrintView()
@@ -77,13 +78,13 @@ bool NFBluePrintView::Execute()
 
    m_pNodeView->Execute();
    
-   CreateLogicBlockWindow();
+   CreateLogicBlock();
    CreateMonitor();
-   CreateJudgment();
+   CreateBranch();
    CreateExecuter();
+   CreateModifier();
    CreateVariable();
-
-   CreateComparator();
+   CreateArithmetic();
 
    if (ImGui::IsWindowFocused())
    {
@@ -94,58 +95,7 @@ bool NFBluePrintView::Execute()
       }
    }
 
-   ImGuiIO& io = ImGui::GetIO();
-   if (io.KeyCtrl)
-   {
-
-   }
-
 	return false;
-}
-
-void AddJudgementNode(NFTreeView* pTreeView, const NFGUID& parentID, NF_SHARE_PTR<NFJudgement> judgement);
-
-void AddExecuterNode(NFTreeView* pTreeView, const NFGUID& id, NF_SHARE_PTR<NFExecuter> executer)
-{
-	pTreeView->AddSubTreeNode(id, executer->id, executer->name);
-	if (executer->nextExecuter)
-	{
-		AddExecuterNode(pTreeView, executer->id, executer->nextExecuter);
-	}
-	
-	for (auto it : executer->judgements)
-	{
-		AddJudgementNode(pTreeView, executer->id, it);
-	}
-}
-
-void AddJudgementNode(NFTreeView* pTreeView, const NFGUID& parentID, NF_SHARE_PTR<NFJudgement> judgement)
-{
-	pTreeView->AddSubTreeNode(parentID, judgement->id, judgement->name);
-
-	if (judgement->trueBlueprintNode)
-	{
-		if (judgement->trueBlueprintNode->blueprintType == NFBlueprintType::JUDGEMENT)
-		{
-			AddJudgementNode(pTreeView, judgement->id, std::dynamic_pointer_cast<NFJudgement>(judgement->trueBlueprintNode));
-		}
-		else if (judgement->trueBlueprintNode->blueprintType == NFBlueprintType::EXECUTER)
-		{
-			AddExecuterNode(pTreeView, judgement->id, std::dynamic_pointer_cast<NFExecuter>(judgement->trueBlueprintNode));
-		}
-	}
-
-	if (judgement->falseBlueprintNode)
-	{
-		if (judgement->falseBlueprintNode->blueprintType == NFBlueprintType::JUDGEMENT)
-		{
-			AddJudgementNode(pTreeView, judgement->id, std::dynamic_pointer_cast<NFJudgement>(judgement->falseBlueprintNode));
-		}
-		else if (judgement->falseBlueprintNode->blueprintType == NFBlueprintType::EXECUTER)
-		{
-			AddExecuterNode(pTreeView, judgement->id, std::dynamic_pointer_cast<NFExecuter>(judgement->falseBlueprintNode));
-		}
-	}
 }
 
 NFGUID NFBluePrintView::GetCurrentObjectID()
@@ -172,23 +122,30 @@ void NFBluePrintView::SetCurrentLogicBlockID(const NFGUID& id)
 		for (auto monitor : logicBlock->monitors)
 		{
 			m_pNodeView->AddNode(monitor->id, monitor->name);
-
-			for (int i = 0; i  < monitor->GetMonitorJudgementCount(); ++i)
-			{
-				auto judgement = monitor->GetJudgement(i);
-
-				m_pNodeView->AddNode(judgement->id, judgement->name);
-			}
 		}
 
 		for (auto variable : logicBlock->variables)
 		{
 			m_pNodeView->AddNode(variable->id, variable->name);
 		}
+
+		for (auto branch : logicBlock->branches)
+		{
+			m_pNodeView->AddNode(branch->id, branch->name);
+		}
+
+		for (auto executer : logicBlock->executers)
+		{
+			m_pNodeView->AddNode(executer->id, executer->name);
+		}
+		for (auto modifier : logicBlock->modifiers)
+		{
+			m_pNodeView->AddNode(modifier->id, modifier->name);
+		}
 	}
+
 	//add all nodes
 	//add all links
-
 }
 
 NFTreeView* NFBluePrintView::GetTreeView()
@@ -210,7 +167,7 @@ void NFBluePrintView::SubRender()
 void NFBluePrintView::HandlerSelected(const NFGUID& id)
 {
 	mCurrentObjectID = NFGUID();
-	auto node = m_pBluePrintModule->FindBaseNode(id);
+	auto node = m_pBluePrintModule->FindNode(id);
 	if (node)
 	{
 		SetCurrentObjectID(id);
@@ -230,32 +187,28 @@ void NFBluePrintView::NodeModifyEvent(const NFGUID& id, const bool create)
 {
 	if (create)
 	{
-		auto node = m_pBluePrintModule->FindBaseNode(id);
-		if (node->parent)
+		auto node = m_pBluePrintModule->FindNode(id);
+		if (node->blueprintType == NFBlueprintType::LOGICBLOCK)
 		{
-			m_pTreeView->AddSubTreeNode(node->parent->id, node->id, node->name);
-
-			switch (node->blueprintType)
-			{
-			case NFBlueprintType::MONITOR:
-			{
-				auto monitor = std::dynamic_pointer_cast<NFIMonitor>(node);
-				AddMonitorNode(monitor);
-			}
-				break;
-			case NFBlueprintType::VARIABLE:
-			{
-				auto variable = std::dynamic_pointer_cast<NFIVariable>(node);
-				AddVariableNode(variable);
-			}
-			break;
-			default:
-				break;
-			}
+			m_pTreeView->AddTreeNode(node->id, node->name);
 		}
 		else
 		{
-			m_pTreeView->AddTreeNode(node->id, node->name);
+			m_pTreeView->AddSubTreeNode(node->logicBlockId, node->id, node->name);
+
+			m_pNodeView->AddNode(node->id, node->name, NFVector2(0, 0));
+
+			for (int i = 0; i < node->GetInputArgCount(); ++i)
+			{
+				auto variableArg = node->GetInputArg(i);
+				m_pNodeView->AddPinIn(node->id, variableArg->id, variableArg->name);
+			}
+
+			for (int i = 0; i < node->GetOutputArgCount(); ++i)
+			{
+				auto variableArg = node->GetOutputArg(i);
+				m_pNodeView->AddPinOut(node->id, variableArg->id, variableArg->name);
+			}
 		}
 	}
 	else
@@ -263,134 +216,122 @@ void NFBluePrintView::NodeModifyEvent(const NFGUID& id, const bool create)
 		m_pTreeView->DeleteTreeNode(id);
 		m_pNodeView->DeleteNode(id);
 	}
-	/*
-	//m_pTreeView->Clear();
-	//m_pNodeView->CleanNodes();
-
-	const std::list<NF_SHARE_PTR<NFLogicBlock>>& logicBlocks = m_pBluePrintModule->GetLogicBlocks();
-	for (auto block : logicBlocks)
-	{
-		m_pTreeView->AddTreeNode(block->id, block->name);
-
-		for (auto monitor : block->monitors)
-		{
-			m_pTreeView->AddSubTreeNode(block->id, monitor->id, monitor->name);
-			m_pNodeView->AddNode(monitor->id, monitor->name);
-
-			for (auto judgement : monitor->judgements)
-			{
-				AddJudgementNode(m_pTreeView, monitor->id, judgement);
-			}
-		}
-
-		for (auto variable : block->variables)
-		{
-			m_pTreeView->AddSubTreeNode(block->id, variable->id, variable->name);
-			m_pNodeView->AddNode(variable->id, variable->name);
-		}
-	}
-	*/
-
 }
 
-void NFBluePrintView::LinkModifyEvent(const NFGUID& startNode, const const NFGUID& endNode, const NFGUID& startPin, const const NFGUID& endPin, const bool create)
+void NFBluePrintView::LinkModifyEvent(const NFGUID& id, const bool create)
 {
-	if (create)
+
+	auto linkData = m_pBluePrintModule->GetLink(id);
+	if (linkData)
 	{
-		m_pNodeView->AddLink(startNode, endNode, startPin, endPin);
-	}
-	else
-	{
-		m_pNodeView->DeleteLink(startNode, endNode, startPin, endPin);
+		if (create)
+		{
+			m_pNodeView->AddLink(id, linkData->startNode, linkData->endNode, linkData->startAttr, linkData->endAttr);
+		}
+		else
+		{
+			m_pNodeView->DeleteLink(linkData->startNode, linkData->endNode, linkData->startAttr, linkData->endAttr);
+		}
 	}
 }
 
-bool NFBluePrintView::TryNewLinkEvent(const NFGUID& startNode, const const NFGUID& endNode, const NFGUID& startPin, const const NFGUID& endPin)
+bool NFBluePrintView::TryNewLinkEvent(const NFGUID& startNode, const NFGUID& endNode, const NFGUID& startPin, const NFGUID& endPin)
 {
-	bool ret = false;
+	auto startNodeObject = m_pBluePrintModule->FindNode(startNode);
+	auto endNodeObject = m_pBluePrintModule->FindNode(endNode);
 
-	auto start = m_pBluePrintModule->FindBaseNode(startNode);
-	auto end = m_pBluePrintModule->FindBaseNode(endNode);
-	if (start && end)
+	if (startNodeObject && endNodeObject)
 	{
-		if (start->blueprintType == NFBlueprintType::VARIABLE)
+		for (int i = 0; i < startNodeObject->GetOutputArgCount(); ++i)
 		{
-			switch (end->blueprintType)
+			auto outputArg = startNodeObject->GetOutputArg(i);
+			if (outputArg->id == startPin)
 			{
-			case NFBlueprintType::MONITOR:
-			{
-				ret = TryNewLinkEventForVariableToMonitor(start, end, startPin, endPin);
-				
-			}
-				break;
-			case NFBlueprintType::VARIABLE:
-				break;
-			default:
-				break;
-			}
-		}
-
-
-		if (ret)
-		{
-		}
-	}
-
-	///log error
-
-	return ret;
-
-
-}
-
-bool NFBluePrintView::TryNewLinkEventForVariableToMonitor(NF_SHARE_PTR<NFBluePrintNodeBase> startNode, NF_SHARE_PTR<NFBluePrintNodeBase> endNode, const NFGUID& startPin, const const NFGUID& endPin)
-{
-	if (startNode->logicBlockId != endNode->logicBlockId)
-	{
-		return false;
-	}
-
-	auto variable = std::dynamic_pointer_cast<NFIVariable>(startNode);
-	auto monitor = std::dynamic_pointer_cast<NFIMonitor>(endNode);
-	switch (monitor->GetMonitorType())
-	{
-	case NFMonitorType::GameEvent:
-	{
-		for (int i = 0; i < monitor->GetInputArgCount(); ++i)
-		{
-			auto inputData = monitor->GetInputArg(i);
-			if (inputData->id == endPin)
-			{
-				if (inputData->valueType == variable->valueType)
+				for (int i = 0; i < endNodeObject->GetInputArgCount(); ++i)
 				{
-					m_pBluePrintModule->AddLink(startNode->logicBlockId, startNode->id, endNode->id, startPin, endPin);
-					return true;
+					auto inputArg = endNodeObject->GetInputArg(i);
+					if (inputArg->id == endPin)
+					{
+						if (inputArg->valueType == outputArg->valueType)
+						{
+							//if linked
+							if (!inputArg->linkID.IsNull())
+							{
+								//show a error message
+								return false;
+							}
+
+							if (outputArg->valueType == NFValueType::Node
+								&& !outputArg->linkID.IsNull())
+							{
+								//show a error message
+								return false;
+							}
+
+							if (inputArg->valueType == NFValueType::UNKNOW
+								|| outputArg->valueType == NFValueType::UNKNOW)
+							{
+								//show a error message
+								return false;
+							}
+
+							if (endNodeObject->blueprintType == NFBlueprintType::BRANCH)
+							{
+								auto comparetorArg = endNodeObject->GetInputArg(NFBranchInputArg::Comparator);
+								if (inputArg->id == comparetorArg->id)
+								{
+									//show a error message
+									return false;
+								}
+							}
+
+							m_pBluePrintModule->AddLink(startNodeObject->logicBlockId, m_pKernelModule->CreateGUID(), startNodeObject->id, endNodeObject->id, startPin, endPin);
+							return true;
+						}
+					}
 				}
 			}
 		}
-		
 	}
-		break;
 
-	default:
-		break;
-	}
 	return false;
 }
 
-void NFBluePrintView::NodeAttriRender(NFNodeAttri* nodeAttri)
+bool NFBluePrintView::TryDeleteLinkEvent(const NFGUID& id)
 {
-	NFGUID nodeID = m_pNodeView->GetNodeByAttriId(nodeAttri->nodeId);
-	auto node = m_pBluePrintModule->FindBaseNode(nodeAttri->nodeId);
+	if (m_pBluePrintModule->DeleteLink(id))
+	{
+		m_pNodeView->DeleteLink(id);
+	}
+
+	return true;
+}
+
+void NFBluePrintView::PinRender(NFNodePin* pin)
+{
+	NFGUID nodeID = m_pNodeView->GetNodeByAttriId(pin->nodeId);
+	auto node = m_pBluePrintModule->FindNode(pin->nodeId);
 	if (node)
 	{
 		switch (node->blueprintType)
 		{
 		case NFBlueprintType::VARIABLE:
-			NodeAttriRenderForVariable(nodeAttri);
+			PinRenderForVariable(pin);
 			break;
 		case NFBlueprintType::MONITOR:
-			NodeAttriRenderForMonitor(nodeAttri);
+			PinRenderForMonitor(pin);
+			break;
+		case NFBlueprintType::BRANCH:
+			PinRenderForBranch(pin);
+			break;
+		case NFBlueprintType::MODIFIER:
+			PinRenderForModifier(pin);
+			break;
+		case NFBlueprintType::LOGGER:
+			PinRenderForLogger(pin);
+			break;
+		case NFBlueprintType::EXECUTER:
+			PinRenderForExecuter(pin);
 			break;
 		default:
 			break;
@@ -398,100 +339,113 @@ void NFBluePrintView::NodeAttriRender(NFNodeAttri* nodeAttri)
 	}
 }
 
-void NFBluePrintView::NodeAttriRenderForVariable(NFNodeAttri* nodeAttri)
+void NFBluePrintView::PinRenderForVariable(NFNodePin* pin)
 {
-	auto variable = std::dynamic_pointer_cast<NFIVariable>(m_pBluePrintModule->FindBaseNode(nodeAttri->nodeId));
+	auto variable = std::dynamic_pointer_cast<NFIVariable>(m_pBluePrintModule->FindNode(pin->nodeId));
 	if (variable)
 	{
-		if (nodeAttri->desc == GET_CLASS_NAME(NFVariableType))
+		switch (variable->variableType)
 		{
-			ImGui::Button(variable->name.c_str());
-			/*
-			if (ImGui::BeginCombo("NFVariableType", variable->variableType.toString().c_str()))
-			{
-				for (auto x : NFVariableType::allValues())
-				{
-					if (ImGui::Selectable(x.toString().c_str(), false))
-					{
-						variable->variableType = x;
-					}
-				}
-				ImGui::EndCombo();
-			}
-			*/
+		case NFVariableType::Input:
+		{
+			PinRenderForInputVariable(pin);
+		}
+		break;
+		case NFVariableType::ElementSystem:
+		{
+			PinRenderForElementVariable(pin);
+		}
+		break;
+		case NFVariableType::PropertySystem:
+		{
+			PinRenderForPropertyVariable(pin);
+		}
+		break;
+		case NFVariableType::RecordSystem:
+		{
+			PinRenderForRecordVariable(pin);
 
 		}
-		else if (nodeAttri->desc == GET_CLASS_NAME(NFValueType))
-		{
-			switch (variable->variableType)
-			{
-			case NFVariableType::Input:
-			{
-				NodeAttriRenderForInputVariable(nodeAttri);
-			}
+		break;
+		default:
 			break;
-			case NFVariableType::ElementSystem:
-			{
-				NodeAttriRenderForElementVariable(nodeAttri);
-			}
-			break;
-			case NFVariableType::PropertySystem:
-			{
-				NodeAttriRenderForPropertyVariable(nodeAttri);
-			}
-			break;
-			case NFVariableType::RecordSystem:
-			{
-				NodeAttriRenderForRecordVariable(nodeAttri);
-
-			}
-			break;
-			default:
-				break;
-			}
 		}
 	}
 
 }
 
-void NFBluePrintView::NodeAttriRenderForInputVariable(NFNodeAttri* nodeAttri)
+void NFBluePrintView::PinRenderForInputVariable(NFNodePin* pin)
 {
-	auto variable = std::dynamic_pointer_cast<NFIVariable>(m_pBluePrintModule->FindBaseNode(nodeAttri->nodeId));
-
-	if (ImGui::BeginCombo("valueType", variable->valueType.toString().c_str()))
-	{
-		for (auto x : NFValueType::allValues())
-		{
-			if (ImGui::Selectable(x.toString().c_str(), false))
-			{
-				variable->valueType = x;
-			}
-		}
-		ImGui::EndCombo();
-	}
-
-	ImGui::PushItemWidth(160);
+	int itemWidth = 100;
+	auto variable = std::dynamic_pointer_cast<NFIVariable>(m_pBluePrintModule->FindNode(pin->nodeId));
 
 	static char str0[128] = "";
-	ImGui::InputText("", str0, IM_ARRAYSIZE(str0));
+
+	if (pin->inputPin)
+	{
+		ImGui::PushItemWidth(itemWidth);
+
+		auto inputArg = variable->GetInputArg(0);
+		if (ImGui::BeginCombo(pin->name.c_str(), NFValueType::toString(inputArg->valueType).c_str()))
+		{
+			for (auto x : NFValueType::allValues())
+			{
+				if (ImGui::Selectable(x.toString().c_str(), false))
+				{
+					inputArg->valueType = x;
+					inputArg->varData = "";
+					memset(str0, 0, sizeof(str0));
+					variable->UpdateOutputData();
+				}
+			}
+			ImGui::EndCombo();
+		}
+
+		if (ImGui::InputText("", str0, IM_ARRAYSIZE(str0)))
+		{
+			inputArg->varData = str0;
+
+			variable->UpdateOutputData();
+		}
+
+		ImGui::PopItemWidth();
+	}
+	else
+	{
+		auto outputData = variable->GetOutputArg(0);
+		ImGui::Indent(itemWidth);
+		ImGui::TextColored(ImVec4(1.0f, 0.4f, 0.4f, 1.0f), outputData->varData.c_str());
+	}
 }
 
-void NFBluePrintView::NodeAttriRenderForElementVariable(NFNodeAttri* nodeAttri)
+void NFBluePrintView::PinRenderForElementVariable(NFNodePin* pin)
 {
-	auto variable = std::dynamic_pointer_cast<NFIVariable>(m_pBluePrintModule->FindBaseNode(nodeAttri->nodeId));
+	int itemWidth = 100;
+
+	auto variable = std::dynamic_pointer_cast<NFIVariable>(m_pBluePrintModule->FindNode(pin->nodeId));
+
+	auto classNameArg = variable->GetInputArg(NFElementVariableInputArg::toString(NFElementVariableInputArg::ClassName));
+	auto elementIDArg = variable->GetInputArg(NFElementVariableInputArg::toString(NFElementVariableInputArg::ConfigID));
+	auto propertyNameArg = variable->GetInputArg(NFElementVariableInputArg::toString(NFElementVariableInputArg::PropertyName));
 
 	//class anme && element id && property name
-	if (nodeAttri->name == NFElementVariableInputArg::toString(NFElementVariableInputArg::ClassName))
+	if (pin->name == NFElementVariableInputArg::toString(NFElementVariableInputArg::ClassName))
 	{
-		auto classNameArg = variable->GetInputArg(nodeAttri->name);
-		if (ImGui::BeginCombo("currentClassName", classNameArg->varData.c_str()))
+		ImGui::PushItemWidth(itemWidth);
+
+		if (ImGui::BeginCombo(pin->name.c_str(), classNameArg->varData.c_str()))
 		{
 			auto classObject = m_pClassModule->First();
 			while (classObject)
 			{
-				if (ImGui::Selectable(classObject->GetClassName().c_str()))
+				if (classObject->GetIDList().size() > 0)
 				{
-					classNameArg->varData = classObject->GetClassName();
+					if (ImGui::Selectable(classObject->GetClassName().c_str()))
+					{
+						classNameArg->varData = classObject->GetClassName();
+						elementIDArg->varData = "";
+						propertyNameArg->varData = "";
+					}
 				}
 
 				classObject = m_pClassModule->Next();
@@ -499,34 +453,39 @@ void NFBluePrintView::NodeAttriRenderForElementVariable(NFNodeAttri* nodeAttri)
 
 			ImGui::EndCombo();
 		}
+
+		ImGui::PopItemWidth();
 	}
-	else if (nodeAttri->name == NFElementVariableInputArg::toString(NFElementVariableInputArg::ElementConfigID))
+	else if (pin->name == NFElementVariableInputArg::toString(NFElementVariableInputArg::ConfigID))
 	{
-		auto classNameArg = variable->GetInputArg(NFElementVariableInputArg::toString(NFElementVariableInputArg::ClassName));
-		auto elementIDArg = variable->GetInputArg(NFElementVariableInputArg::toString(NFElementVariableInputArg::ElementConfigID));
 		auto currentClassObject = m_pClassModule->GetElement(classNameArg->varData);
 		if (currentClassObject)
 		{
+			ImGui::PushItemWidth(itemWidth);
+
 			auto idList = currentClassObject->GetIDList();
-			if (ImGui::BeginCombo("currentElementID", elementIDArg->varData.c_str()))
+			if (ImGui::BeginCombo(pin->name.c_str(), elementIDArg->varData.c_str()))
 			{
 				for (auto id : idList)
 				{
 					if (ImGui::Selectable(id.c_str()))
 					{
 						elementIDArg->varData = id;
+						variable->UpdateOutputData();
 					}
 				}
 
 				ImGui::EndCombo();
 			}
+
+			ImGui::PopItemWidth();
 		}
 	}
-	else if (nodeAttri->name == NFElementVariableInputArg::toString(NFElementVariableInputArg::ElementPropertyName))
+	else if (pin->name == NFElementVariableInputArg::toString(NFElementVariableInputArg::PropertyName))
 	{
 		//for all properties
 		NFDATA_TYPE dataType = NFDATA_TYPE::TDATA_UNKNOWN;
-		switch (variable->valueType)
+		switch (propertyNameArg->valueType)
 		{
 		case NFValueType::Int:
 			dataType = NFDATA_TYPE::TDATA_INT;
@@ -550,13 +509,12 @@ void NFBluePrintView::NodeAttriRenderForElementVariable(NFNodeAttri* nodeAttri)
 			break;
 		}
 
-		auto classNameArg = variable->GetInputArg(NFElementVariableInputArg::toString(NFElementVariableInputArg::ClassName));
-		auto elementIDArg = variable->GetInputArg(NFElementVariableInputArg::toString(NFElementVariableInputArg::ElementConfigID));
-		auto propertyNameArg = variable->GetInputArg(NFElementVariableInputArg::toString(NFElementVariableInputArg::ElementPropertyName));
 		auto currentClassObject = m_pClassModule->GetElement(classNameArg->varData);
 		if (currentClassObject && !elementIDArg->varData.empty())
 		{
-			if (ImGui::BeginCombo("currentPropertyID", propertyNameArg->varData.c_str()))
+			ImGui::PushItemWidth(itemWidth);
+
+			if (ImGui::BeginCombo(pin->name.c_str(), propertyNameArg->varData.c_str()))
 			{
 				auto property = currentClassObject->GetPropertyManager()->First();
 				while (property)
@@ -566,6 +524,7 @@ void NFBluePrintView::NodeAttriRenderForElementVariable(NFNodeAttri* nodeAttri)
 						if (ImGui::Selectable(property->GetKey().c_str()))
 						{
 							propertyNameArg->varData = property->GetKey();
+							variable->UpdateOutputData();
 						}
 					}
 
@@ -574,108 +533,130 @@ void NFBluePrintView::NodeAttriRenderForElementVariable(NFNodeAttri* nodeAttri)
 
 				ImGui::EndCombo();
 			}
+
+			ImGui::PopItemWidth();
+		}
+	}
+	else
+	{
+		//output
+		if (!pin->inputPin)
+		{
+			auto outputData = variable->GetOutputArg(0);
+			ImGui::Indent(itemWidth);
+			ImGui::TextColored(ImVec4(1.0f, 0.4f, 0.4f, 1.0f), outputData->varData.c_str());
 		}
 	}
 }
 
-void NFBluePrintView::NodeAttriRenderForPropertyVariable(NFNodeAttri* nodeAttri)
+void NFBluePrintView::PinRenderForPropertyVariable(NFNodePin* pin)
 {
-	auto variable = std::dynamic_pointer_cast<NFIVariable>(m_pBluePrintModule->FindBaseNode(nodeAttri->nodeId));
+	int itemWidth = 100;
 
-	static std::string currentSelfID = "Self"; //or other propert belong this player<variable>
-	//class anme && element id && property name
-	static std::string currentClassName = "";
-	static std::string currentPropertyName = "";
+	auto variable = std::dynamic_pointer_cast<NFIVariable>(m_pBluePrintModule->FindNode(pin->nodeId));
 
-	if (ImGui::BeginCombo("valueType", variable->valueType.toString().c_str()))
+	auto onwerID = variable->GetInputArg(NFPropertyVariableInputArg::toString(NFPropertyVariableInputArg::OnwerID));
+	auto classNameArg = variable->GetInputArg(NFPropertyVariableInputArg::toString(NFPropertyVariableInputArg::ClassName));
+	auto propertyNameArg = variable->GetInputArg(NFPropertyVariableInputArg::toString(NFPropertyVariableInputArg::PropertyName));
+	
+	/*
+	ImGui::PushItemWidth(itemWidth);
+
+	if (ImGui::BeginCombo("ValueType", variable->valueType.toString().c_str()))
 	{
 		for (auto x : NFValueType::allValues())
 		{
 			if (ImGui::Selectable(x.toString().c_str(), false))
 			{
 				variable->valueType = x;
-				currentClassName = "";
 			}
 		}
 		ImGui::EndCombo();
 	}
+	ImGui::PopItemWidth();
+	*/
 
-	if (ImGui::BeginCombo("currentClassName", currentClassName.c_str()))
+	if (pin->name == NFPropertyVariableInputArg::toString(NFPropertyVariableInputArg::OnwerID))
 	{
-		auto classObject = m_pClassModule->First();
-		while (classObject)
-		{
-			bool is_selected = currentClassName == classObject->GetClassName();
-			if (ImGui::Selectable(classObject->GetClassName().c_str(), is_selected))
-			{
-				currentClassName = classObject->GetClassName();
-				currentPropertyName = "";
-			}
-
-			classObject = m_pClassModule->Next();
-		}
-
-		ImGui::EndCombo();
+		ImGui::Button("None");
 	}
-
-	//for all element object id
-	auto currentClassObject = m_pClassModule->GetElement(currentClassName);
-	if (currentClassObject)
+	else if (pin->name == NFPropertyVariableInputArg::toString(NFPropertyVariableInputArg::ClassName))
 	{
-		//for all properties
-		NFDATA_TYPE dataType = NFDATA_TYPE::TDATA_UNKNOWN;
-		switch (variable->valueType)
-		{
-		case NFValueType::Int:
-			dataType = NFDATA_TYPE::TDATA_INT;
-			break;
-		case NFValueType::Float:
-			dataType = NFDATA_TYPE::TDATA_FLOAT;
-			break;
-		case NFValueType::String:
-			dataType = NFDATA_TYPE::TDATA_STRING;
-			break;
-		case NFValueType::Object:
-			dataType = NFDATA_TYPE::TDATA_OBJECT;
-			break;
-		case NFValueType::Vector2:
-			dataType = NFDATA_TYPE::TDATA_VECTOR2;
-			break;
-		case NFValueType::Vector3:
-			dataType = NFDATA_TYPE::TDATA_VECTOR3;
-			break;
-		default:
-			break;
-		}
+		ImGui::PushItemWidth(itemWidth);
 
-		if (ImGui::BeginCombo("currentPropertyID", currentPropertyName.c_str()))
+		if (ImGui::BeginCombo(pin->name.c_str(), classNameArg->varData.c_str()))
 		{
-			auto property = currentClassObject->GetPropertyManager()->First();
-			while (property)
+			auto classObject = m_pClassModule->First();
+			while (classObject)
 			{
-				if (property->GetType() == dataType)
+				if (ImGui::Selectable(classObject->GetClassName().c_str()))
 				{
-					if (ImGui::Selectable(property->GetKey().c_str()))
-					{
-						currentPropertyName = property->GetKey();
-					}
+					classNameArg->varData = classObject->GetClassName();
+					propertyNameArg->varData = "";
+					variable->UpdateOutputData();
 				}
 
-				property = currentClassObject->GetPropertyManager()->Next();
+				classObject = m_pClassModule->Next();
 			}
 
 			ImGui::EndCombo();
 		}
+
+		ImGui::PopItemWidth();
 	}
+	else if (pin->name == NFPropertyVariableInputArg::toString(NFPropertyVariableInputArg::PropertyName))
+	{
+		auto currentClassObject = m_pClassModule->GetElement(classNameArg->varData);
+		if (currentClassObject)
+		{
+			ImGui::PushItemWidth(itemWidth);
+			if (ImGui::BeginCombo(pin->name.c_str(), propertyNameArg->varData.c_str()))
+			{
+				auto property = currentClassObject->GetPropertyManager()->First();
+				while (property)
+				{
+					if (ImGui::Selectable(property->GetKey().c_str()))
+					{
+						propertyNameArg->varData = property->GetKey();
+						variable->UpdateOutputData();
+					}
+
+					property = currentClassObject->GetPropertyManager()->Next();
+				}
+
+				ImGui::EndCombo();
+			}
+			ImGui::PopItemWidth();
+		}
+	}
+	else
+	{
+		if (!pin->inputPin)
+		{
+			auto outputData = variable->GetOutputArg(0);
+			ImGui::Indent(itemWidth);
+			ImGui::TextColored(ImVec4(1.0f, 0.4f, 0.4f, 1.0f), outputData->varData.c_str());
+		}
+	}
+
 }
 
-void NFBluePrintView::NodeAttriRenderForRecordVariable(NFNodeAttri* nodeAttri)
+void NFBluePrintView::PinRenderForRecordVariable(NFNodePin* pin)
 {
-	auto variable = std::dynamic_pointer_cast<NFIVariable>(m_pBluePrintModule->FindBaseNode(nodeAttri->nodeId));
+	int itemWidth = 100;
 
-	//self id && record name && row && col
-	ImGui::SameLine();
-	if (ImGui::BeginCombo("valueType", variable->valueType.toString().c_str()))
+	auto variable = std::dynamic_pointer_cast<NFIVariable>(m_pBluePrintModule->FindNode(pin->nodeId));
+
+	auto onwerID = variable->GetInputArg(NFRecordVariableInputArg::toString(NFRecordVariableInputArg::OnwerID));
+	auto classNameArg = variable->GetInputArg(NFRecordVariableInputArg::toString(NFRecordVariableInputArg::ClassName));
+	auto recordNameArg = variable->GetInputArg(NFRecordVariableInputArg::toString(NFRecordVariableInputArg::RecordName));
+	auto recordRowArg = variable->GetInputArg(NFRecordVariableInputArg::toString(NFRecordVariableInputArg::RecordRow));
+	auto recordColArg = variable->GetInputArg(NFRecordVariableInputArg::toString(NFRecordVariableInputArg::RecordCol));
+
+	/*
+	ImGui::PushItemWidth(itemWidth);
+
+	if (ImGui::BeginCombo("ValueType", variable->valueType.toString().c_str()))
 	{
 		for (auto x : NFValueType::allValues())
 		{
@@ -686,11 +667,437 @@ void NFBluePrintView::NodeAttriRenderForRecordVariable(NFNodeAttri* nodeAttri)
 		}
 		ImGui::EndCombo();
 	}
+	ImGui::PopItemWidth();
+	*/
+
+	if (pin->name == NFRecordVariableInputArg::toString(NFRecordVariableInputArg::OnwerID))
+	{
+		ImGui::Button(onwerID->varData.c_str());
+	}
+	else if (pin->name == NFRecordVariableInputArg::toString(NFRecordVariableInputArg::ClassName))
+	{
+		ImGui::PushItemWidth(itemWidth);
+
+		if (ImGui::BeginCombo(pin->name.c_str(), classNameArg->varData.c_str()))
+		{
+			auto classObject = m_pClassModule->First();
+			while (classObject)
+			{
+				if (ImGui::Selectable(classObject->GetClassName().c_str()))
+				{
+					classNameArg->varData = classObject->GetClassName();
+					recordNameArg->varData = "";
+				}
+
+				classObject = m_pClassModule->Next();
+			}
+
+			ImGui::EndCombo();
+		}
+
+		ImGui::PopItemWidth();
+	}
+	else if (pin->name == NFRecordVariableInputArg::toString(NFRecordVariableInputArg::RecordName))
+	{
+		auto currentClassObject = m_pClassModule->GetElement(classNameArg->varData);
+		if (currentClassObject)
+		{
+			//for all properties
+			NFDATA_TYPE dataType = NFDATA_TYPE::TDATA_UNKNOWN;
+			switch (recordNameArg->valueType)
+			{
+			case NFValueType::Int:
+				dataType = NFDATA_TYPE::TDATA_INT;
+				break;
+			case NFValueType::Float:
+				dataType = NFDATA_TYPE::TDATA_FLOAT;
+				break;
+			case NFValueType::String:
+				dataType = NFDATA_TYPE::TDATA_STRING;
+				break;
+			case NFValueType::Object:
+				dataType = NFDATA_TYPE::TDATA_OBJECT;
+				break;
+			case NFValueType::Vector2:
+				dataType = NFDATA_TYPE::TDATA_VECTOR2;
+				break;
+			case NFValueType::Vector3:
+				dataType = NFDATA_TYPE::TDATA_VECTOR3;
+				break;
+			default:
+				break;
+			}
+
+			ImGui::PushItemWidth(itemWidth);
+			if (ImGui::BeginCombo(pin->name.c_str(), recordNameArg->varData.c_str()))
+			{
+				auto property = currentClassObject->GetPropertyManager()->First();
+				while (property)
+				{
+					if (property->GetType() == dataType)
+					{
+						if (ImGui::Selectable(property->GetKey().c_str()))
+						{
+							recordNameArg->varData = property->GetKey();
+						}
+					}
+
+					property = currentClassObject->GetPropertyManager()->Next();
+				}
+
+				ImGui::EndCombo();
+			}
+			ImGui::PopItemWidth();
+		}
+	}
+
 }
 
-void NFBluePrintView::NodeAttriRenderForMonitor(NFNodeAttri* nodeAttri)
+void NFBluePrintView::PinRenderForMonitor(NFNodePin* pin)
 {
+	auto monitor = std::dynamic_pointer_cast<NFIMonitor>(m_pBluePrintModule->FindNode(pin->nodeId));
+	if (monitor)
+	{
+		switch (monitor->monitorType)
+		{
+		case NFMonitorType::GameEvent:
+		{
+			PinRenderForGameEventMonitor(pin);
+		}
+		break;
+		case NFMonitorType::NetworkEvent:
+		{
+			PinRenderForNetworkEventMonitor(pin);
+		}
+		break;
+		case NFMonitorType::NetworkMsgEvent:
+		{
+			PinRenderForNetworkMsgMonitor(pin);
+		}
+		break;
+		case NFMonitorType::ObjectEvent:
+		{
+			PinRenderForObjectEventMonitor(pin);
+		}
+		break;
+		case NFMonitorType::PropertyEvent:
+		{
+			PinRenderForPropertyEventMonitor(pin);
+		}
+		break;
+		case NFMonitorType::RecordEvent:
+		{
+			PinRenderForRecordEventMonitor(pin);
+		}
+		break;
+		case NFMonitorType::HeartBeatEvent:
+		{
+			PinRenderForHeartBeatEventMonitor(pin);
+		}
+		break;
+		case NFMonitorType::SceneEvent:
+		{
+			PinRenderForSceneEventMonitor(pin);
+		}
+		break;
+		case NFMonitorType::ItemEvent:
+		{
+			PinRenderForItemEventMonitor(pin);
+		}
+		break;
+		case NFMonitorType::SkillEvent:
+		{
+			PinRenderForSkillEventMonitor(pin);
+		}
+		break;
+		case NFMonitorType::BuffEvent:
+		{
+			PinRenderForBuffEventMonitor(pin);
+		}
+		break;
+		default:
+			break;
+		}
+	}
+}
 
+void NFBluePrintView::PinRenderForGameEventMonitor(NFNodePin* pin)
+{
+	int itemWidth = 100;
+	auto monitor = std::dynamic_pointer_cast<NFIMonitor>(m_pBluePrintModule->FindNode(pin->nodeId));
+
+	static char str0[128] = "";
+
+	if (pin->inputPin)
+	{
+		ImGui::PushItemWidth(itemWidth);
+
+		if (pin->name == NFGameEventMonitorInputArg::toString(NFGameEventMonitorInputArg::EventID))
+		{
+			ImGui::PushItemWidth(itemWidth);
+			auto inputArg = monitor->GetInputArg(0);
+
+			if (ImGui::InputText("", str0, IM_ARRAYSIZE(str0)))
+			{
+				inputArg->varData = str0;
+
+				monitor->UpdateOutputData();
+			}
+
+			ImGui::PopItemWidth();
+		}
+		ImGui::PopItemWidth();
+	}
+	else
+	{
+		auto outputData = monitor->GetOutputArg(0);
+		ImGui::Indent(itemWidth);
+		ImGui::TextColored(ImVec4(1.0f, 0.4f, 0.4f, 1.0f), outputData->varData.c_str());
+	}
+}
+
+void NFBluePrintView::PinRenderForNetworkEventMonitor(NFNodePin* pin)
+{
+	int itemWidth = 100;
+	auto monitor = std::dynamic_pointer_cast<NFIMonitor>(m_pBluePrintModule->FindNode(pin->nodeId));
+
+	static char str0[128] = "";
+
+	if (pin->inputPin)
+	{
+		ImGui::PushItemWidth(itemWidth);
+
+		if (pin->name == NFNetworkEventMonitorInputArg::toString(NFNetworkEventMonitorInputArg::NetEventID))
+		{
+			ImGui::PushItemWidth(itemWidth);
+			auto inputArg = monitor->GetInputArg(0);
+
+			if (ImGui::InputText("", str0, IM_ARRAYSIZE(str0)))
+			{
+				inputArg->varData = str0;
+
+				monitor->UpdateOutputData();
+			}
+
+			ImGui::PopItemWidth();
+		}
+		ImGui::PopItemWidth();
+	}
+}
+
+void NFBluePrintView::PinRenderForNetworkMsgMonitor(NFNodePin* pin)
+{
+	int itemWidth = 100;
+	auto monitor = std::dynamic_pointer_cast<NFIMonitor>(m_pBluePrintModule->FindNode(pin->nodeId));
+
+	static char str0[128] = "";
+
+	if (pin->inputPin)
+	{
+		ImGui::PushItemWidth(itemWidth);
+
+		if (pin->name == NFNetworkMsgMonitorInputArg::toString(NFNetworkMsgMonitorInputArg::NetMsgID))
+		{
+			auto inputArg = monitor->GetInputArg(0);
+
+			if (ImGui::InputText("", str0, IM_ARRAYSIZE(str0)))
+			{
+				inputArg->varData = str0;
+
+				monitor->UpdateOutputData();
+			}
+
+		}
+
+		ImGui::PopItemWidth();
+	}
+	else
+	{
+		
+	}
+}
+
+void NFBluePrintView::PinRenderForObjectEventMonitor(NFNodePin* pin)
+{
+	int itemWidth = 100;
+	auto monitor = std::dynamic_pointer_cast<NFIMonitor>(m_pBluePrintModule->FindNode(pin->nodeId));
+
+	if (pin->inputPin)
+	{
+		if (pin->name == NFMonitorObjectEventInputArg::toString(NFMonitorObjectEventInputArg::ClassName))
+		{
+
+			ImGui::PushItemWidth(itemWidth);
+			auto inputArg = monitor->GetInputArg(NFMonitorObjectEventInputArg::ClassName);
+
+			if (ImGui::BeginCombo(pin->name.c_str(), inputArg->varData.c_str()))
+			{
+				auto classObject = m_pClassModule->First();
+				while (classObject)
+				{
+					if (classObject->GetIDList().size() > 0)
+					{
+						if (ImGui::Selectable(classObject->GetClassName().c_str()))
+						{
+							inputArg->varData = classObject->GetClassName();
+						}
+					}
+
+					classObject = m_pClassModule->Next();
+				}
+
+				ImGui::EndCombo();
+			}
+
+			ImGui::PopItemWidth();
+		}
+		else if (pin->name == NFMonitorObjectEventInputArg::toString(NFMonitorObjectEventInputArg::ClassEvent))
+		{
+			//object event: no_data, loading_data.....
+		}
+	}
+}
+
+void NFBluePrintView::PinRenderForPropertyEventMonitor(NFNodePin* pin)
+{
+	int itemWidth = 100;
+	auto monitor = std::dynamic_pointer_cast<NFIMonitor>(m_pBluePrintModule->FindNode(pin->nodeId));
+
+	static char str0[128] = "";
+
+	if (pin->inputPin)
+	{
+
+		auto classNameArg = monitor->GetInputArg(NFMonitorPropertyEventInputArg::ClassName);
+		auto propertyNameArg = monitor->GetInputArg(NFMonitorPropertyEventInputArg::PropertyName);
+
+		if (pin->name == NFMonitorPropertyEventInputArg::toString(NFMonitorPropertyEventInputArg::ClassName))
+		{
+
+			ImGui::PushItemWidth(itemWidth);
+
+			if (ImGui::BeginCombo(pin->name.c_str(), classNameArg->varData.c_str()))
+			{
+				auto classObject = m_pClassModule->First();
+				while (classObject)
+				{
+					if (ImGui::Selectable(classObject->GetClassName().c_str()))
+					{
+						classNameArg->varData = classObject->GetClassName();
+					}
+
+					classObject = m_pClassModule->Next();
+				}
+
+				ImGui::EndCombo();
+			}
+
+			ImGui::PopItemWidth();
+		}
+		else if(pin->name == NFMonitorPropertyEventInputArg::toString(NFMonitorPropertyEventInputArg::PropertyName))
+		{
+			if (!classNameArg->varData.empty())
+			{
+				auto currentClassObject = m_pClassModule->GetElement(classNameArg->varData);
+				{
+
+					ImGui::PushItemWidth(itemWidth);
+
+					if (ImGui::BeginCombo(pin->name.c_str(), propertyNameArg->varData.c_str()))
+					{
+						auto property = currentClassObject->GetPropertyManager()->First();
+						while (property)
+						{
+							{
+								if (ImGui::Selectable(property->GetKey().c_str()))
+								{
+									propertyNameArg->varData = property->GetKey();
+									monitor->UpdateOutputData();
+								}
+							}
+
+							property = currentClassObject->GetPropertyManager()->Next();
+						}
+
+						ImGui::EndCombo();
+					}
+
+					ImGui::PopItemWidth();
+				}
+			}
+		}
+	}
+	else
+	{
+		auto outputData = monitor->GetOutputArg(0);
+		ImGui::Indent(itemWidth);
+		ImGui::TextColored(ImVec4(1.0f, 0.4f, 0.4f, 1.0f), outputData->varData.c_str());
+	}
+}
+
+void NFBluePrintView::PinRenderForRecordEventMonitor(NFNodePin* pin)
+{
+}
+
+void NFBluePrintView::PinRenderForHeartBeatEventMonitor(NFNodePin* pin)
+{
+}
+
+void NFBluePrintView::PinRenderForSceneEventMonitor(NFNodePin* pin)
+{
+}
+
+void NFBluePrintView::PinRenderForItemEventMonitor(NFNodePin* pin)
+{
+}
+
+void NFBluePrintView::PinRenderForSkillEventMonitor(NFNodePin* pin)
+{
+}
+
+void NFBluePrintView::PinRenderForBuffEventMonitor(NFNodePin* pin)
+{
+}
+
+void NFBluePrintView::PinRenderForBranch(NFNodePin* pin)
+{
+	int itemWidth = 100;
+
+	ImGui::PushItemWidth(itemWidth);
+	auto branch = std::dynamic_pointer_cast<NFIBranch>(m_pBluePrintModule->FindNode(pin->nodeId));
+	if (branch)
+	{
+		if (pin->name == NFBranchInputArg::toString(NFBranchInputArg::Comparator))
+		{
+			auto comparatorArg = branch->GetInputArg(NFBranchInputArg::Comparator);
+
+			if (ImGui::BeginCombo("", (comparatorArg->varData.c_str())))
+			{
+				for (auto x : NFComparatorType::allValues())
+				{
+					if (ImGui::Selectable(x.toString().c_str(), false))
+					{
+						comparatorArg->varData = x.toString();
+					}
+				}
+				ImGui::EndCombo();
+			}
+		}
+	}
+
+	ImGui::PopItemWidth();
+}
+
+void NFBluePrintView::PinRenderForModifier(NFNodePin* pin)
+{
+}
+
+void NFBluePrintView::PinRenderForLogger(NFNodePin* pin)
+{
+}
+
+void NFBluePrintView::PinRenderForExecuter(NFNodePin* pin)
+{
 }
 
 void NFBluePrintView::TryToCreateBluePrintBlock()
@@ -699,6 +1106,15 @@ void NFBluePrintView::TryToCreateBluePrintBlock()
    {
       bCreatingLogicBlock = true;
    }
+}
+
+void NFBluePrintView::TryToCreateArithmetic(NFArithmeticType type)
+{
+	if (!bCreatingArithmetic)
+	{
+		bCreatingArithmetic = true;
+		arithmeticType = type;
+	}
 }
 
 void NFBluePrintView::TryToCreateMonitor(NFMonitorType type)
@@ -710,19 +1126,30 @@ void NFBluePrintView::TryToCreateMonitor(NFMonitorType type)
 	}
 }
 
-void NFBluePrintView::TryToCreateJudgement()
+void NFBluePrintView::TryToCreateBranch(NFBranchType type)
 {
-	if (!bCreatingJudgment)
+	if (!bCreatingBranch)
 	{
-		bCreatingJudgment = true;
+		bCreatingBranch = true;
+		branchType = type;
 	}
 }
 
-void NFBluePrintView::TryToCreateExecuter()
+void NFBluePrintView::TryToCreateExecuter(NFExecuterType type)
 {
 	if (!bCreatingExecuter)
 	{
 		bCreatingExecuter = true;
+		executerType = type;
+	}
+}
+
+void NFBluePrintView::TryToCreateModifier(NFModifierType type)
+{
+	if (!bCreatingModifier)
+	{
+		bCreatingModifier = true;
+		modifierType = type;
 	}
 }
 
@@ -735,15 +1162,7 @@ void NFBluePrintView::TryToCreateVariable(NFVariableType type)
 	}
 }
 
-void NFBluePrintView::TryToCreateComparator()
-{
-	if (!bCreatingComparator)
-	{
-		bCreatingComparator = true;
-	}
-}
-
-void NFBluePrintView::CreateLogicBlockWindow()
+void NFBluePrintView::CreateLogicBlock()
 {
 	if (bCreatingLogicBlock)
 	{
@@ -788,7 +1207,7 @@ void NFBluePrintView::CreateMonitor()
 {
 	if (bCreatingMonitor)
 	{
-		auto currentLogicBlock = m_pBluePrintModule->FindBaseNode(GetCurrentObjectID());
+		auto currentLogicBlock = m_pBluePrintModule->FindNode(GetCurrentObjectID());
 		if (currentLogicBlock)
 		{
 			if (currentLogicBlock->blueprintType == NFBlueprintType::LOGICBLOCK)
@@ -801,7 +1220,11 @@ void NFBluePrintView::CreateMonitor()
 				bool open = true;
 				if (ImGui::BeginPopupModal("Creating Monitor", &open, window_flags))
 				{
-					static char str0[128] = "Hello, monitor";
+					static char str0[128] = "";
+					memset(str0, 0, IM_ARRAYSIZE(str0));
+					std::string valueTypeData = NFMonitorType::toString(monitorType);
+					memcpy(str0, valueTypeData.c_str(), valueTypeData.length());
+
 					ImGui::InputText("Monitor Name", str0, IM_ARRAYSIZE(str0));
 
 					ImGui::Separator();
@@ -820,143 +1243,8 @@ void NFBluePrintView::CreateMonitor()
 
 					if (ImGui::Button("OK", ImVec2(100, 30)))
 					{
-						m_pBluePrintModule->AddMonitorForLogicBlock(GetCurrentObjectID(), monitorType, m_pKernelModule->CreateGUID(), str0);
+						m_pBluePrintModule->AddMonitor(GetCurrentObjectID(), monitorType, m_pKernelModule->CreateGUID(), str0);
 						bCreatingMonitor = false;
-						ImGui::CloseCurrentPopup();
-					}
-
-					ImGui::EndPopup();
-				}
-			}
-         else
-         {
-            bCreatingMonitor = false;
-         }
-		}
-      else
-      {
-		   bCreatingMonitor = false;
-      }
-	}
-}
-
-void NFBluePrintView::CreateJudgment()
-{
-	if (bCreatingJudgment)
-	{
-		auto currentObject = m_pBluePrintModule->FindBaseNode(mCurrentObjectID);
-		if (currentObject)
-		{
-			if (currentObject->blueprintType == NFBlueprintType::MONITOR
-				|| currentObject->blueprintType == NFBlueprintType::JUDGEMENT
-				|| currentObject->blueprintType == NFBlueprintType::EXECUTER)
-			{
-				ImGui::OpenPopup("Creating Judgment");
-				ImGui::SetNextWindowSize(ImVec2(230, 150));
-
-				ImGuiWindowFlags window_flags = 0;
-				window_flags |= ImGuiWindowFlags_NoResize;
-				bool open = true;
-				if (ImGui::BeginPopupModal("Creating Judgment"), &open, window_flags)
-				{
-					static char str0[128] = "Hello, Judgment!";
-					ImGui::InputText("Judgment Name", str0, IM_ARRAYSIZE(str0));
-
-					ImGui::Separator();
-
-					ImGui::Text("All those beautiful files will be deleted.\nThis operation cannot be undone!\n\n");
-
-					ImGui::Separator();
-
-					if (ImGui::Button("Cancel", ImVec2(100, 30)))
-					{
-						bCreatingJudgment = false;
-						ImGui::CloseCurrentPopup();
-					}
-
-					ImGui::SameLine();
-
-					if (ImGui::Button("OK", ImVec2(100, 30)))
-					{
-						if (currentObject->blueprintType == NFBlueprintType::MONITOR)
-						{
-							m_pBluePrintModule->AddJudgementForMonitor(mCurrentObjectID, m_pKernelModule->CreateGUID(), str0);
-						}
-						else if (currentObject->blueprintType == NFBlueprintType::JUDGEMENT)
-						{
-							//m_pBluePrintModule->AddJudgementForJudgement(mCurrentObjectID, m_pKernelModule->CreateGUID(), str0);
-						}
-						else if (currentObject->blueprintType == NFBlueprintType::EXECUTER)
-						{
-							m_pBluePrintModule->AddJudgementForExecuter(mCurrentObjectID, m_pKernelModule->CreateGUID(), str0);
-						}
-
-						bCreatingJudgment = false;
-						ImGui::CloseCurrentPopup();
-					}
-
-					ImGui::EndPopup();
-				}
-         }
-         else
-         {
-            bCreatingJudgment = false;
-         }
-		}
-      else
-      {
-		   bCreatingJudgment = false;
-      }
-	}
-}
-
-void NFBluePrintView::CreateExecuter()
-{
-	if (bCreatingExecuter)
-	{
-		auto currentObject = m_pBluePrintModule->FindBaseNode(mCurrentObjectID);
-		if (currentObject)
-		{
-			if (currentObject->blueprintType == NFBlueprintType::JUDGEMENT
-				|| currentObject->blueprintType == NFBlueprintType::EXECUTER)
-			{
-				ImGui::OpenPopup("Creating Executer");
-				ImGui::SetNextWindowSize(ImVec2(230, 150));
-
-				ImGuiWindowFlags window_flags = 0;
-				window_flags |= ImGuiWindowFlags_NoResize;
-				bool open = true;
-				if (ImGui::BeginPopupModal("Creating Executer"), &open, window_flags)
-				{
-					static char str0[128] = "Hello, Executer!";
-					ImGui::InputText("Executer Name", str0, IM_ARRAYSIZE(str0));
-
-					ImGui::Separator();
-
-					ImGui::Text("All those beautiful files will be deleted.\nThis operation cannot be undone!\n\n");
-
-					ImGui::Separator();
-
-					if (ImGui::Button("Cancel", ImVec2(100, 30)))
-					{
-						bCreatingExecuter = false;
-						ImGui::CloseCurrentPopup();
-					}
-
-					ImGui::SameLine();
-
-					if (ImGui::Button("OK", ImVec2(100, 30)))
-					{
-						if (currentObject->blueprintType == NFBlueprintType::JUDGEMENT)
-						{
-							//m_pBluePrintModule->AddExecuterForJudgement(mCurrentObjectID, m_pKernelModule->CreateGUID(), str0);
-						}
-						else if (currentObject->blueprintType == NFBlueprintType::EXECUTER)
-						{
-							m_pBluePrintModule->AddExecuterForExecuter(mCurrentObjectID, m_pKernelModule->CreateGUID(), str0);
-						}
-
-						bCreatingExecuter = false;
 						ImGui::CloseCurrentPopup();
 					}
 
@@ -965,8 +1253,117 @@ void NFBluePrintView::CreateExecuter()
 			}
 			else
 			{
-				bCreatingExecuter = false;
+				bCreatingMonitor = false;
 			}
+		}
+		else
+		{
+		   bCreatingMonitor = false;
+		}
+	}
+}
+
+void NFBluePrintView::CreateBranch()
+{
+	if (bCreatingBranch)
+	{
+		auto currentObject = m_pBluePrintModule->FindNode(mCurrentObjectID);
+		if (currentObject)
+		{
+			ImGui::OpenPopup("Creating Branch");
+			ImGui::SetNextWindowSize(ImVec2(230, 150));
+
+			ImGuiWindowFlags window_flags = 0;
+			window_flags |= ImGuiWindowFlags_NoResize;
+			bool open = true;
+			if (ImGui::BeginPopupModal("Creating Branch"), &open, window_flags)
+			{
+				static char str0[128] = "";
+				memset(str0, 0, IM_ARRAYSIZE(str0));
+				std::string valueTypeData = NFBranchType::toString(branchType);
+				memcpy(str0, valueTypeData.c_str(), valueTypeData.length());
+
+				ImGui::InputText("Branch Name", str0, IM_ARRAYSIZE(str0));
+
+				ImGui::Separator();
+
+				ImGui::Text("All those beautiful files will be deleted.\nThis operation cannot be undone!\n\n");
+
+				ImGui::Separator();
+
+				if (ImGui::Button("Cancel", ImVec2(100, 30)))
+				{
+					bCreatingBranch = false;
+					ImGui::CloseCurrentPopup();
+				}
+
+				ImGui::SameLine();
+
+				if (ImGui::Button("OK", ImVec2(100, 30)))
+				{
+					m_pBluePrintModule->AddBranch(currentObject->logicBlockId, branchType, m_pKernelModule->CreateGUID(), str0);
+
+					bCreatingBranch = false;
+					ImGui::CloseCurrentPopup();
+				}
+
+				ImGui::EndPopup();
+			}
+        }
+        else
+        {
+            bCreatingBranch = false;
+        }
+	}
+}
+
+void NFBluePrintView::CreateExecuter()
+{
+	if (bCreatingExecuter)
+	{
+		auto currentObject = m_pBluePrintModule->FindNode(mCurrentObjectID);
+		if (currentObject)
+		{
+			ImGui::OpenPopup("Creating Executer");
+			ImGui::SetNextWindowSize(ImVec2(230, 150));
+
+			ImGuiWindowFlags window_flags = 0;
+			window_flags |= ImGuiWindowFlags_NoResize;
+			bool open = true;
+			if (ImGui::BeginPopupModal("Creating Executer"), &open, window_flags)
+			{
+				static char str0[128] = "Hello, Executer!";
+				memset(str0, 0, IM_ARRAYSIZE(str0));
+				std::string valueTypeData = NFExecuterType::toString(executerType);
+				memcpy(str0, valueTypeData.c_str(), valueTypeData.length());
+
+				ImGui::InputText("Executer Name", str0, IM_ARRAYSIZE(str0));
+
+				ImGui::Separator();
+
+				ImGui::Text("All those beautiful files will be deleted.\nThis operation cannot be undone!\n\n");
+
+				ImGui::Separator();
+
+				if (ImGui::Button("Cancel", ImVec2(100, 30)))
+				{
+					bCreatingExecuter = false;
+					ImGui::CloseCurrentPopup();
+				}
+
+				ImGui::SameLine();
+
+				if (ImGui::Button("OK", ImVec2(100, 30)))
+				{
+					m_pBluePrintModule->AddExecuter(currentObject->logicBlockId, executerType, m_pKernelModule->CreateGUID(), str0);
+
+					bCreatingExecuter = false;
+					ImGui::CloseCurrentPopup();
+				}
+
+				ImGui::EndPopup();
+			}
+		
 		}
 		else
 		{
@@ -975,11 +1372,66 @@ void NFBluePrintView::CreateExecuter()
 	}
 }
 
+void NFBluePrintView::CreateModifier()
+{
+	if (bCreatingModifier)
+	{
+		auto currentObject = m_pBluePrintModule->FindNode(mCurrentObjectID);
+		if (currentObject)
+		{
+			ImGui::OpenPopup("Creating Modifier");
+			ImGui::SetNextWindowSize(ImVec2(230, 150));
+
+			ImGuiWindowFlags window_flags = 0;
+			window_flags |= ImGuiWindowFlags_NoResize;
+			bool open = true;
+			if (ImGui::BeginPopupModal("Creating Modifier"), &open, window_flags)
+			{
+				static char str0[128] = "0";
+				memset(str0, 0, IM_ARRAYSIZE(str0));
+				std::string valueTypeData = NFModifierType::toString(modifierType);
+				memcpy(str0, valueTypeData.c_str(), valueTypeData.length());
+
+				ImGui::InputText("Modifier Name", str0, IM_ARRAYSIZE(str0));
+
+				ImGui::Separator();
+
+				ImGui::Text("All those beautiful files will be deleted.\nThis operation cannot be undone!\n\n");
+
+				ImGui::Separator();
+
+				if (ImGui::Button("Cancel", ImVec2(100, 30)))
+				{
+					bCreatingModifier = false;
+					ImGui::CloseCurrentPopup();
+				}
+
+				ImGui::SameLine();
+
+				if (ImGui::Button("OK", ImVec2(100, 30)))
+				{
+
+					m_pBluePrintModule->AddModifier(currentObject->logicBlockId, modifierType, m_pKernelModule->CreateGUID(), str0);
+
+					bCreatingModifier = false;
+					ImGui::CloseCurrentPopup();
+				}
+
+				ImGui::EndPopup();
+			}
+		}
+		else
+		{
+			bCreatingModifier = false;
+		}
+	}
+}
+
 void NFBluePrintView::CreateVariable()
 {
 	if (bCreatingVariable)
 	{
-		auto currentObject = m_pBluePrintModule->FindBaseNode(mCurrentObjectID);
+		auto currentObject = m_pBluePrintModule->FindNode(mCurrentObjectID);
 		if (currentObject)
 		{
 			ImGui::OpenPopup("Creating Variable");
@@ -1014,7 +1466,7 @@ void NFBluePrintView::CreateVariable()
 				if (ImGui::Button("OK", ImVec2(100, 30)))
 				{
 					
-					m_pBluePrintModule->AddVariableForLogicBlock(currentObject->logicBlockId, valueType, m_pKernelModule->CreateGUID(), str0);
+					m_pBluePrintModule->AddVariable(currentObject->logicBlockId, valueType, m_pKernelModule->CreateGUID(), str0);
 
 					bCreatingVariable = false;
 					ImGui::CloseCurrentPopup();
@@ -1030,97 +1482,58 @@ void NFBluePrintView::CreateVariable()
 	}
 }
 
-void NFBluePrintView::CreateComparator()
+void NFBluePrintView::CreateArithmetic()
 {
-	if (bCreatingComparator)
+
+	if (bCreatingArithmetic)
 	{
-		auto currentObject = m_pBluePrintModule->FindBaseNode(mCurrentObjectID);
+		auto currentObject = m_pBluePrintModule->FindNode(mCurrentObjectID);
 		if (currentObject)
 		{
-			if (currentObject->blueprintType == NFBlueprintType::JUDGEMENT)
+			ImGui::OpenPopup("Creating Arithmetic");
+			ImGui::SetNextWindowSize(ImVec2(230, 150));
+
+			ImGuiWindowFlags window_flags = 0;
+			window_flags |= ImGuiWindowFlags_NoResize;
+			bool open = true;
+			if (ImGui::BeginPopupModal("Creating Arithmetic"), &open, window_flags)
 			{
-				ImGui::OpenPopup("Creating Comparator");
-				ImGui::SetNextWindowSize(ImVec2(230, 150));
+				static char str0[128] = "0";
+				memset(str0, 0, IM_ARRAYSIZE(str0));
+				std::string valueTypeData = NFVariableType::toString(valueType);
+				memcpy(str0, valueTypeData.c_str(), valueTypeData.length());
 
-				ImGuiWindowFlags window_flags = 0;
-				window_flags |= ImGuiWindowFlags_NoResize;
-				bool open = true;
-				if (ImGui::BeginPopupModal("Creating Comparator"), &open, window_flags)
+				ImGui::InputText("Arithmetic Name", str0, IM_ARRAYSIZE(str0));
+
+				ImGui::Separator();
+
+				ImGui::Text("All those beautiful files will be deleted.\nThis operation cannot be undone!\n\n");
+
+				ImGui::Separator();
+
+				if (ImGui::Button("Cancel", ImVec2(100, 30)))
 				{
-					static char str0[128] = "Hello, Comparator!";
-					ImGui::InputText("Comparator Name", str0, IM_ARRAYSIZE(str0));
-
-					ImGui::Separator();
-
-					ImGui::Text("All those beautiful files will be deleted.\nThis operation cannot be undone!\n\n");
-
-					ImGui::Separator();
-
-					if (ImGui::Button("Cancel", ImVec2(100, 30)))
-					{
-						bCreatingComparator = false;
-						ImGui::CloseCurrentPopup();
-					}
-
-					ImGui::SameLine();
-
-					if (ImGui::Button("OK", ImVec2(100, 30)))
-					{
-						auto judgement = std::dynamic_pointer_cast<NFJudgement>(currentObject);
-
-						auto compator = NF_SHARE_PTR<NFComparator>(NF_NEW NFComparator());
-						judgement->comparators.push_back(compator);
-
-						bCreatingComparator = false;
-						ImGui::CloseCurrentPopup();
-					}
-
-					ImGui::EndPopup();
+					bCreatingArithmetic = false;
+					ImGui::CloseCurrentPopup();
 				}
+
+				ImGui::SameLine();
+
+				if (ImGui::Button("OK", ImVec2(100, 30)))
+				{
+
+					m_pBluePrintModule->AddArithmetic(currentObject->logicBlockId, arithmeticType, m_pKernelModule->CreateGUID(), str0);
+
+					bCreatingArithmetic = false;
+					ImGui::CloseCurrentPopup();
+				}
+
+				ImGui::EndPopup();
 			}
-         else
-         {
-            bCreatingComparator = false;
-         }
 		}
-      else
-      {
-         bCreatingComparator = false;
-      }
-	}
-}
-
-void NFBluePrintView::AddMonitorNode(NF_SHARE_PTR<NFIMonitor> monitor)
-{
-	m_pNodeView->AddNode(monitor->id, monitor->name, NFVector2(0, 0));
-
-	switch (monitor->GetMonitorType())
-	{
-	case NFMonitorType::GameEvent:
-	{
-		//auto gameEventMonitor = std::dynamic_pointer_cast<NFGameEventMonitor>(monitor);
-		for (int i = 0; i < monitor->GetInputArgCount(); ++i)
+		else
 		{
-			auto intputArg = monitor->GetInputArg(i);
-			m_pNodeView->AddNodeAttrIn(monitor->id, intputArg->id, intputArg->name, "");
+			bCreatingArithmetic = false;
 		}
 	}
-	break;
-	default:
-		break;
-	}
-}
-
-void NFBluePrintView::AddVariableNode(NF_SHARE_PTR<NFIVariable> variable)
-{
-	m_pNodeView->AddNode(variable->id, variable->name, NFVector2(0, 0));
-
-	//m_pNodeView->AddNodeAttrIn(variable->id, m_pKernelModule->CreateGUID(), GET_CLASS_NAME(NFVariableType), GET_CLASS_NAME(NFVariableType));
-	for (int i = 0; i < variable->GetInputArgCount(); ++i)
-	{
-		auto variableArg = variable->GetInputArg(i);
-		m_pNodeView->AddNodeAttrIn(variable->id, variableArg->id, variableArg->name, GET_CLASS_NAME(NFValueType));
-	}
-
-	m_pNodeView->AddNodeAttrOut(variable->id, m_pKernelModule->CreateGUID(), "True", "");
 }

@@ -34,13 +34,38 @@
 NF_SMART_ENUM(NFBlueprintType,
 	LOGICBLOCK,
 	MONITOR,
-	JUDGEMENT,
+	BRANCH,
 	EXECUTER,
 	VARIABLE,
-	DEBUGER,
+	MODIFIER,
+	ARITHMETIC,
+	LOGGER,
 )
 
-///////////FOR MONITOR BEGIN///////////////////////////
+//--------FOR VARIABLE----------------
+NF_SMART_ENUM(NFElementVariableInputArg,
+	ClassName,
+	ConfigID,
+	PropertyName,
+	)
+
+	NF_SMART_ENUM(NFPropertyVariableInputArg,
+		OnwerID,
+		ClassName,
+		PropertyName,
+		)
+
+	NF_SMART_ENUM(NFRecordVariableInputArg,
+		OnwerID,
+		ClassName,
+		RecordName,
+		RecordRow,
+		RecordCol,
+		)
+
+//------------------------
+//-------FOR MONITOR-----------------
+
 NF_SMART_ENUM(NFMonitorType,
 	GameEvent,
 	NetworkEvent,
@@ -53,65 +78,77 @@ NF_SMART_ENUM(NFMonitorType,
 	ItemEvent,
 	SkillEvent,
 	BuffEvent,
-)
+	)
+	//------------------------------
+	NF_SMART_ENUM(NFGameEventMonitorInputArg,
+		EventID,
+		)
 
+	NF_SMART_ENUM(NFGameEventMonitorOutputArg,
+		NextNode,
+		)
+	//------------------------------
+	NF_SMART_ENUM(NFNetworkEventMonitorInputArg,
+		NetEventID,
+		)
 
-	//NetworkEvent INPUT
-	//NetworkMsgEvent INPUT
+	NF_SMART_ENUM(NFNetworkEventMonitorOutputArg,
+		NextNode,
+		)
+	//------------------------------
+	NF_SMART_ENUM(NFNetworkMsgMonitorInputArg,
+		NetMsgID,
+		)
+
+	NF_SMART_ENUM(NFNetworkkMsgMonitorOutputArg,
+		NextNode,
+		ObjectID,
+		MsgData,
+		)
+
+	//------------------------------
+	NF_SMART_ENUM(NFMonitorObjectEventInputArg,
+		ClassName,
+		ClassEvent,
+		)
+
+	NF_SMART_ENUM(NFMonitorObjectEventOutputArg,
+		NextNode,
+		ObjectID,
+		ClassName,
+		ConfigID,
+		SceneID,
+		GroupID,
+		Position,
+		)
+
+	//------------------------------
+	NF_SMART_ENUM(NFMonitorPropertyEventInputArg,
+		ClassName,
+		PropertyName,
+		)
+
+	NF_SMART_ENUM(NFMonitorPropertyEventOutputArg,
+		NextNode,
+		Self,
+		PropertyName,
+		PropertyValue,
+		)
+
+	//------------------------------
+	NF_SMART_ENUM(NFMonitorRecordEventInputArg,
+		ClassName,
+		RecordName,
+		OperateType,
+		)
+
+	//------------------------------
 
 //------------------------
-//GameEvent INPUT 1
-NF_SMART_ENUM(NFMonitorGameEventArgType,
-	EventID,
-	)
-//ObjectEvent INPUT 1
-NF_SMART_ENUM(NFMonitorObjectEventArgType,
-	ClassName,
-	)
-
-//ObjectEvent INPUT 2
-NF_SMART_ENUM(NFMonitorObjectEventType,
-	CREATE_NODATA,
-	CREATE_BEFORE_ATTACHDATA,
-	CREATE_LOADDATA,
-	CREATE_AFTER_ATTACHDATA,
-	CREATE_BEFORE_EFFECT,
-	CREATE_EFFECTDATA,
-	CREATE_AFTER_EFFECT,
-	CREATE_HASDATA,
-	CREATE_FINISH,
-	CREATE_CLIENT_FINISH,
-	BEFOREDESTROY,
-	DESTROY,
-	)
-
-
-//------------------------
-
-//PropertyEvent INPUT
-NF_SMART_ENUM(NFMonitorPropertyEventArgType,
-	ClassName,
-	PropertyName,
-)
-
-//------------------------
-
-//RecordEvent INPUT 1
-NF_SMART_ENUM(NFMonitorRecordEventArgType,
-	ClassName,
-	RecordName,
-	OperateType,
-)
-//RecordEvent INPUT 2
-NF_SMART_ENUM(NFMonitorRecordEventType,
-	Add,
-	Remove,
-	Update,
-	)
-
-//------------------------
-
+//----------FOR VARIABLE--------------
 NF_SMART_ENUM(NFValueType,
+	UNKNOW,
+	Node,
 	Int,
 	Float,
 	String,
@@ -127,114 +164,169 @@ NF_SMART_ENUM(NFVariableType,
 	RecordSystem,
 	)
 
-
-//------------------------
-///////////FOR ACCESSOR BEGIN///////////////////////////
-//THREE WAY TO GET A VALUE
-//ONE IS TO GET A VALUE COME FROM ELEMENT SYSTEM
-//TWO IS TO GET A VALUE COME FROM PROPERTY SYSTEM OR RECORD SYSTEM OF A PLAYER OR SCENE
-//THREE IS TO GET A VALUE COME FROM VARIABLE SYSTEM
-
-
-//INPUT FOR ONE:
-//ELEMENT ID --> COME FROM INPUT CONTRLLER OR ANOTHER PLACE (MAYBE A VARIABLE, MAYBE A ELEMENT OR A PROPERTY)
-//ELEMENT PROPERTY NAME
-
-//2 args: string elementName, string propertyName
-NF_SMART_ENUM(NFAccessorType,
-	GetElementInt,
-	GetElementFloat,
-	GetElementString,
-	GetElementVector2,
-	GetElementVector3,
-	GetPropertyInt,
-	GetPropertyFloat,
-	GetPropertyString,
-	GetPropertyVector2,
-	GetPropertyVector3,
-	GetPropertyObject,
-	GetRecordInt,
-	GetRecordFloat,
-	GetRecordString,
-	GetRecordVector2,
-	GetRecordVector3,
-	GetRecordObject,
-)
-
 ///////////FOR MODIFIER BEGIN///////////////////////////
 //SetProperty 3 args: NFGUID objectID, string propertyName, int value
 //SetRecord 5 args: NFGUID objectID, string recordName, int row, int col, int value
 NF_SMART_ENUM(NFModifierType,
-	SetPropertyInt,
-	SetPropertyFloat,
-	SetPropertyString,
-	SetPropertyVector2,
-	SetPropertyVector3,
-	SetPropertyObject,
-	SetRecordInt,
-	SetRecordFloat,
-	SetRecordString,
-	SetRecordVector2,
-	SetRecordVector3,
-	SetRecordObject,
+	SetProperty,
+	SetRecord,
 	AddRecordRow,
-	ReemRecordRow,
+	RemRecordRow,
 )
 
-///////////FOR OPERATOR BEGIN///////////////////////////
-NF_SMART_ENUM(NFOperatorType,
+NF_SMART_ENUM(NFPropertyModifierInputArg,
+	LastNode,
+	OnwerID,
+	PropertyName,
+	PropertyValue
+	)
+
+NF_SMART_ENUM(NFPropertyModifierOutputArg,
+		NextNode,
+		)
+
+NF_SMART_ENUM(NFRecordModifierInputArg,
+	LastNode,
+	OnwerID,
+	RecordName,
+	RecordRow,
+	RecordCol,
+	RecordValue
+	)
+NF_SMART_ENUM(NFRecordModifierOutputArg,
+	NextNode,
+	)
+
+
+///////////FOR EXECUTER BEGIN///////////////////////////
+NF_SMART_ENUM(NFExecuterType,
 	CreateObject,
 	DestroyObject,
 	MoveObject,
 	EnterScene,
-	LeaveScene,
-	EnterGroup,
-	LeaveGroup,
 	AddHeartBeat,
-	RemoveHeartBeat,
 	AttackObject,
 	UseSkill,
 	UseItem
 )
 
-///////////FOR JUDGEMENT BEGIN///////////////////////////
-NF_SMART_ENUM(NFJudgementCondition,
-	Equal,
-	EnEqual,
-	MoreThen,
-	LessThan,
-	ExistElement,
-	ExistObject,
+NF_SMART_ENUM(NFExecuterCreateObjectInputArg,
+	LastNode,
+	SceneID,
+	GroupID,
+	ConfigID,
+	Position,
+)
+NF_SMART_ENUM(NFExecuterCreateObjectOutputputArg,
+	NextNode,
+	ObjectID,
 	)
+
+NF_SMART_ENUM(NFExecuterDestroyObjectInputArg,
+	LastNode,
+	ObjectID,
+	)
+
+NF_SMART_ENUM(NFExecuterDestroyObjectOutputputArg,
+	NextNode,
+	)
+
+NF_SMART_ENUM(NFExecuterMoveObjectInputArg,
+	LastNode,
+	ObjectID,
+	Position,
+	MoveType,
+	)
+
+NF_SMART_ENUM(NFExecuterMoveObjectOutputArg,
+	NextNode,
+	)
+
+NF_SMART_ENUM(NFExecuterEnterSceneInputArg,
+	LastNode,
+	ObjectID,
+	SceneID,
+	GroupID,
+	Position,
+	)
+
+NF_SMART_ENUM(NFExecuterEnterSceneOutputArg,
+	NextNode,
+	)
+
+NF_SMART_ENUM(NFExecuterAddHeartBeatInputArg,
+	LastNode,
+	ObjectID,
+	BeatName,
+	BeatTime,
+	BeatCount,
+	)
+
+NF_SMART_ENUM(NFExecuterAddHeartBeatOutputArg,
+	NextNode,
+	)
+
+///////////FOR BRANCH BEGIN///////////////////////////
+NF_SMART_ENUM(NFBranchType,
+	IntBranch,
+	StringBranch,
+	FloatBranch,
+	ObjectBranch,
+	Vector2Branch,
+	Vector3Branch,
+)
 
 NF_SMART_ENUM(NFComparatorType,
 	Equal,
 	EnEqual,
 	MoreThen,
 	LessThan,
-	ExistElement,
-	ExistObject,
 	)
 
+NF_SMART_ENUM(NFBranchInputArg,
+	LastNode,
+	LeftInput,
+	Comparator,
+	RightInput
+)
 
+NF_SMART_ENUM(NFBranchOutputArg,
+	TrueOut,
+	FalseOut,
+)
+
+///////////FOR ARITHMETIC BEGIN///////////////////////////
+
+NF_SMART_ENUM(NFArithmeticType,
+	Add,
+	Sub,
+	Multiply,
+	Division,
+	)
+
+NF_SMART_ENUM(NFArithmeticInputArg,
+	LeftInput,
+	ALU,
+	RightInput
+)
 ///////////////////////////////////////////////////////////////////////////////////
 class NFLogicBlock;
 class NFIMonitor;
-class NFJudgement;
-class NFExecuter;
+class NFIBranch;
+class NFIExecuter;
 class NFIVariable;
-class NFInputData;
+class NFIOData;
 class NFDataLink;
 
-class NFInputData
+class NFIOData
 {
 public:
 	NFGUID id;
-	std::string name;
-	int index;
+	std::string name;//arg name
 	NFValueType valueType;
 	std::string varData;
-	NF_SHARE_PTR<NFDataLink> dataLink;
+	//DATA COME FROM  0: extern, 1: internal, 3 user input, 4 selfID
+	NFGUID linkID;
 };
 
 class NFBluePrintNodeBase
@@ -242,18 +334,73 @@ class NFBluePrintNodeBase
 protected:
 	NFIPluginManager* pPluginManager;
 
+private:
+
 public:
+
+	virtual void InitInputArgs() = 0;
+	virtual void InitOutputArgs() = 0;
+
+	/*
+	IMPORTANT:
+	IF A NODE'S PIN LINKED WITH OTHER NODE'S PIN, WHICH MEANS THE DATA OF THIS PIN COME FROM OTHER NODE, 
+	AS THE RESULT, WE NEED TO LOOP THE FUNCTION UpdateOutputData TO GET THE RIGHT VALUE OF THIS DATA.
+	*/
+	virtual void UpdateOutputData() = 0;
+
+public:
+	NFBluePrintNodeBase()
+	{
+	}
+
 	virtual ~NFBluePrintNodeBase(){}
 
-	virtual NF_SHARE_PTR<NFBluePrintNodeBase> FindBaseNode(const NFGUID& id) = 0;
+	void Init()
+	{
+		InitInputArgs();
+		InitOutputArgs();
+	}
 
 	const int GetInputArgCount()
 	{
 		return inputArgs.size();
 	}
 
+	const int GetOutputArgCount()
+	{
+		return outputArgs.size();
+	}
+
+	NF_SHARE_PTR<NFIOData> GetInputArg(const NFGUID& id)
+	{
+		for (int i = 0; i < inputArgs.size(); ++i)
+		{
+			auto input = inputArgs[i];
+			if (input->id == id)
+			{
+				return input;
+			}
+		}
+
+		return nullptr;
+	}
+
+	NF_SHARE_PTR<NFIOData> GetOutputArg(const NFGUID& id)
+	{
+		for (int i = 0; i < outputArgs.size(); ++i)
+		{
+			auto output = outputArgs[i];
+			if (output->id == id)
+			{
+				return output;
+			}
+		}
+
+		return nullptr;
+	}
+
 	//start from 0
-	NF_SHARE_PTR<NFInputData> GetInputArg(const int index)
+	NF_SHARE_PTR<NFIOData> GetInputArg(const int index)
 	{
 		if (inputArgs.size() > index)
 		{
@@ -263,7 +410,7 @@ public:
 		return nullptr;
 	}
 
-	NF_SHARE_PTR<NFInputData> GetInputArg(const std::string name)
+	NF_SHARE_PTR<NFIOData> GetInputArg(const std::string name)
 	{
 		for (int i = 0; i < inputArgs.size(); ++i)
 		{
@@ -277,15 +424,39 @@ public:
 		return nullptr;
 	}
 
-	bool enable = true;
+	NF_SHARE_PTR<NFIOData> GetOutputArg(const int index)
+	{
+		if (outputArgs.size() > index)
+		{
+			return outputArgs[index];
+		}
+
+		return nullptr;
+	}
+
+	NF_SHARE_PTR<NFIOData> GetOutputArg(const std::string name)
+	{
+		for (int i = 0; i < outputArgs.size(); ++i)
+		{
+			auto input = outputArgs[i];
+			if (input->name == name)
+			{
+				return input;
+			}
+		}
+
+		return nullptr;
+	}
+
+	bool enable = true;//only for logic block
+	bool running = false;//only for logic block
 	NFGUID logicBlockId;
 	NFGUID id;
 	std::string name;
-	std::string desc;
-	NF_SHARE_PTR<NFBluePrintNodeBase> parent;
 	NFBlueprintType blueprintType = NFBlueprintType::LOGICBLOCK;
 
-	std::vector<NF_SHARE_PTR<NFInputData>> inputArgs;
+	std::vector<NF_SHARE_PTR<NFIOData>> inputArgs;
+	std::vector<NF_SHARE_PTR<NFIOData>> outputArgs;
 };
 
 class NFDataLink
@@ -294,8 +465,9 @@ private:
 	NFDataLink() {}
 
 public:
-	NFDataLink(NFGUID startNodeID, NFGUID endNodeID, NFGUID startAttr, NFGUID endAttr, const int index = -1)
+	NFDataLink(NFGUID selfID, NFGUID startNodeID, NFGUID endNodeID, NFGUID startAttr, NFGUID endAttr, const int index = -1)
 	{
+		this->selfID = selfID;
 		this->index = index;
 
 		this->startNode = startNodeID;
@@ -306,192 +478,81 @@ public:
 	}
 
 	int index;
+	NFGUID selfID;
 	NFGUID startAttr;
 	NFGUID endAttr;
 	NFGUID startNode;
 	NFGUID endNode;
 };
 
+class NFIArithmetic : public NFBluePrintNodeBase
+{
+public:
+	NFIArithmetic()
+	{
+		blueprintType = NFBlueprintType::ARITHMETIC;
+	}
 
-NF_SMART_ENUM(NFElementVariableInputArg,
-	ClassName,
-	ElementConfigID,
-	ElementPropertyName,
-	)
+	NFArithmeticType arithmeticType;
+};
 
-NF_SMART_ENUM(NFPropertyVariableInputArg,
-	OnwerID,
-	ClassName,
-	PropertyName,
-	)
+class NFIBranch : public NFBluePrintNodeBase
+{
+public:
+	NFIBranch()
+	{
+		blueprintType = NFBlueprintType::BRANCH;
+	}
 
-NF_SMART_ENUM(NFRecordVariableInputArg,
-	OnwerID,
-	RecordName,
-	RecordRow,
-	RecordCol,
-	)
-
+	NFBranchType branchType;
+	NFComparatorType comparatorType;
+};
 
 class NFIVariable : public NFBluePrintNodeBase
 {
-protected:
-	NFIVariable() {}
 public:
-	NFIVariable(NFIPluginManager* p, const NFGUID& blockID, const NFGUID& id, const std::string& name, NF_SHARE_PTR<NFBluePrintNodeBase> parent)
+	NFIVariable()
 	{
-		this->id = id;
-		this->name = name;
-		this->pPluginManager = p;
-		this->parent = parent;
-		this->logicBlockId = blockID;
-
 		blueprintType = NFBlueprintType::VARIABLE;
 	}
 
-	virtual NF_SHARE_PTR<NFBluePrintNodeBase> FindBaseNode(const NFGUID& id);
-
-public:
-	NFValueType valueType = NFValueType::String;
-	NFVariableType variableType = NFVariableType::Input;
-
-
-	NF_SHARE_PTR<NFDataLink> output;
+	NFVariableType variableType;
 };
-
-//developer could define different executer by needs
-//the executer defined by developer could be listed when the developer picking one executer or designing a executer
-class NFExecuter : public NFBluePrintNodeBase
-{
-private:
-	NFExecuter() {}
-public:
-	NFExecuter(NFIPluginManager* p, const NFGUID& id, const std::string& name, NF_SHARE_PTR<NFBluePrintNodeBase> parent)
-	{
-		this->id = id;
-		this->name = name;
-		this->pPluginManager = p;
-		this->parent = parent;
-
-		blueprintType = NFBlueprintType::EXECUTER;
-	}
-	
-	virtual NF_SHARE_PTR<NFBluePrintNodeBase> FindBaseNode(const NFGUID& id);
-
-
-	//modifier
-
-	NFModifierType modifierType = NFModifierType::SetPropertyString;
-	NFOperatorType operatorType = NFOperatorType::CreateObject;
-
-	//a executer could has a executer or a judgement
-	NF_SHARE_PTR<NFExecuter> nextExecuter;
-	std::list<NF_SHARE_PTR<NFJudgement>> judgements;
-};
-
-class NFComparator
-{
-public:
-
-	//NFComparator is to campare the left variable and right variable
-	class NFComparatorVariable
-	{
-		//VariableType valueType; //maybe the designer input the value, maybe come from accessor
-		//NFAccessor
-	};
-
-	bool And = true;//false is or
-	NFComparatorType compareType; // a > 0  ==> leftVariable > rightVariable
-	NFComparatorVariable leftVariable;
-	NFComparatorVariable rightVariable;
-};
-
-class NFJudgement : public NFBluePrintNodeBase
-{
-private:
-	NFJudgement() {}
-
-public:
-	NFJudgement(NFIPluginManager* p, const NFGUID& id, const std::string& name, NF_SHARE_PTR<NFBluePrintNodeBase> parent)
-	{
-		this->name = name;
-		this->id = id;
-		this->pPluginManager = p;
-		this->parent = parent;
-
-		blueprintType = NFBlueprintType::JUDGEMENT;
-	}
-
-	virtual NF_SHARE_PTR<NFBluePrintNodeBase> FindBaseNode(const NFGUID& id);
-
-	std::string arg;
-
-	//true node and false node, maybe a executer, maybe a judgement
-	NF_SHARE_PTR<NFBluePrintNodeBase> trueBlueprintNode;
-	NF_SHARE_PTR<NFBluePrintNodeBase> falseBlueprintNode;
-
-	std::vector<NF_SHARE_PTR<NFComparator>> comparators;
- };
 
 class NFIMonitor : public NFBluePrintNodeBase
 {
 public:
-	virtual NF_SHARE_PTR<NFBluePrintNodeBase> FindBaseNode(const NFGUID& id)
+	NFIMonitor()
 	{
-		for (auto it : judgements)
-		{
-			if (it->id == id)
-			{
-				return it;
-			}
-			auto baseNode = it->FindBaseNode(id);
-			if (baseNode)
-			{
-				return baseNode;
-			}
-		}
-		return nullptr;
+		blueprintType = NFBlueprintType::MONITOR;
 	}
 
-	virtual void InitInputArgs() = 0;
-
-	NFMonitorType GetMonitorType()
-	{
-		return operatorType;
-	}
-
-	const int GetMonitorJudgementCount()
-	{
-		return judgements.size();
-	}
-
-	//start from 0
-	NF_SHARE_PTR<NFJudgement> GetJudgement(const int index)
-	{
-		if (judgements.size() > index)
-		{
-			return judgements[index];
-		}
-
-		return nullptr;
-	}
-
-	void AddJudgement(NF_SHARE_PTR<NFJudgement> judgement)
-	{
-		judgements.push_back(judgement);
-	}
-
-protected:
-	NFMonitorType operatorType = NFMonitorType::GameEvent;
-
-	std::vector<NF_SHARE_PTR<NFJudgement>> judgements;
+	NFMonitorType monitorType;
 
 public:
 };
 
-//1 logic block must has at least 1 monitor, at least 1 judgement and at least 1 executer
-//normally 1 judgement has 1 executer or more with different conditions
-//blueprint block
+class NFIModifier : public NFBluePrintNodeBase
+{
+public:
+	NFIModifier()
+	{
+		blueprintType = NFBlueprintType::MODIFIER;
+	}
+
+	NFModifierType modifierType;
+};
+
+class NFIExecuter : public NFBluePrintNodeBase
+{
+public:
+	NFIExecuter()
+	{
+		blueprintType = NFBlueprintType::EXECUTER;
+	}
+	NFExecuterType executerType;
+};
+
 class NFLogicBlock : public NFBluePrintNodeBase
 {
 private:
@@ -507,11 +568,29 @@ public:
 		this->blueprintType = NFBlueprintType::LOGICBLOCK;
 	}
 
-	virtual NF_SHARE_PTR<NFBluePrintNodeBase> FindBaseNode(const NFGUID& id);
+	virtual NF_SHARE_PTR<NFBluePrintNodeBase> FindNode(const NFGUID& id);
+	virtual void InitInputArgs()
+	{
 
+	}
+	virtual void InitOutputArgs()
+	{
+
+	}
+	virtual void UpdateOutputData()
+	{
+
+	}
+
+	std::list<NF_SHARE_PTR<NFIExecuter>> executers;
+	std::list<NF_SHARE_PTR<NFIBranch>> branches;
 	std::list<NF_SHARE_PTR<NFIMonitor>> monitors;
 	std::list<NF_SHARE_PTR<NFIVariable>> variables;
+	std::list<NF_SHARE_PTR<NFIModifier>> modifiers;
+	std::list<NF_SHARE_PTR<NFIArithmetic>> arithmetics;
+
 	std::list<NF_SHARE_PTR<NFDataLink>> dataLinks;
+
 };
 
 class NFIBluePrintModule
@@ -521,27 +600,28 @@ public:
 
 	////////////////////////////////////////
 	virtual void SetNodeModifyEventFunctor(std::function<void(const NFGUID&, const bool)> functor) = 0;
-	virtual void SetLinkModifyEventFunctor(std::function<void(const NFGUID&, const const NFGUID&, const NFGUID&, const const NFGUID&, const bool)> functor) = 0;
+	virtual void SetLinkModifyEventFunctor(std::function<void(const NFGUID&, const bool)> functor) = 0;
 
     virtual NF_SHARE_PTR<NFLogicBlock> CreateLogicBlock(const NFGUID& logicBlockId, const std::string& name) = 0;
     virtual const std::list<NF_SHARE_PTR<NFLogicBlock>>& GetLogicBlocks() = 0;
 	virtual NF_SHARE_PTR<NFLogicBlock>  GetLogicBlock(const NFGUID& logicBlockId) = 0;
 
-	virtual NF_SHARE_PTR<NFBluePrintNodeBase>  FindBaseNode(const NFGUID& id) = 0;
+	virtual NF_SHARE_PTR<NFBluePrintNodeBase>  FindNode(const NFGUID& id) = 0;
 
-	virtual NF_SHARE_PTR<NFIMonitor> AddMonitorForLogicBlock(const NFGUID& logicBlockId, const NFMonitorType type, const NFGUID& id, const std::string& name) = 0;
-	virtual NF_SHARE_PTR<NFIVariable> AddVariableForLogicBlock(const NFGUID& logicBlockId, const NFVariableType type, const NFGUID& id, const std::string& name) = 0;
-	virtual NF_SHARE_PTR<NFJudgement> AddJudgementForMonitor(const NFGUID& monitorId, const NFGUID& id, const std::string& name) = 0;
-	virtual NF_SHARE_PTR<NFJudgement> AddTrueJudgementForJudgement(const NFGUID& judgementId, const NFGUID& id, const std::string& name) = 0;
-	virtual NF_SHARE_PTR<NFJudgement> AddFalseJudgementForJudgement(const NFGUID& judgementId, const NFGUID& id, const std::string& name) = 0;
-	virtual NF_SHARE_PTR<NFJudgement> AddJudgementForExecuter(const NFGUID& executerId, const NFGUID& id, const std::string& name) = 0;
-	virtual NF_SHARE_PTR<NFExecuter> AddTrueExecuterForJudgement(const NFGUID& judgementId, const NFGUID& id, const std::string& name) = 0;
-	virtual NF_SHARE_PTR<NFExecuter> AddFalseExecuterForJudgement(const NFGUID& judgementId, const NFGUID& id, const std::string& name) = 0;
-	virtual NF_SHARE_PTR<NFExecuter> AddExecuterForExecuter(const NFGUID& executerId, const NFGUID& id, const std::string& name) = 0;
+	virtual NF_SHARE_PTR<NFIBranch> AddBranch(const NFGUID& logicBlockId, const NFBranchType type, const NFGUID& id, const std::string& name) = 0;
+	virtual NF_SHARE_PTR<NFIMonitor> AddMonitor(const NFGUID& logicBlockId, const NFMonitorType type, const NFGUID& id, const std::string& name) = 0;
+	virtual NF_SHARE_PTR<NFIVariable> AddVariable(const NFGUID& logicBlockId, const NFVariableType type, const NFGUID& id, const std::string& name) = 0;
+	virtual NF_SHARE_PTR<NFIExecuter> AddExecuter(const NFGUID& logicBlockId, const NFExecuterType TYPE, const NFGUID& id, const std::string& name) = 0;
+	virtual NF_SHARE_PTR<NFIModifier> AddModifier(const NFGUID& logicBlockId, const NFModifierType type, const NFGUID& id, const std::string& name) = 0;
+	virtual NF_SHARE_PTR<NFIArithmetic> AddArithmetic(const NFGUID& logicBlockId, const NFArithmeticType type, const NFGUID& id, const std::string& name) = 0;
 
-	virtual void AddLink(const NFGUID& logicBlockId, const NFGUID& startNode, const const NFGUID& endNode, const NFGUID& startPin, const const NFGUID& endPin) = 0;
-	virtual NF_SHARE_PTR<NFDataLink> GetLink(const NFGUID& logicBlockId, const NFGUID& startNode, const const NFGUID& endNode, const NFGUID& startPin, const const NFGUID& endPin) = 0;
-	virtual void DeleteLink(const NFGUID& logicBlockId, const NFGUID& startNode, const const NFGUID& endNode, const NFGUID& startPin, const const NFGUID& endPin) = 0;
+	virtual void AddLink(const NFGUID& logicBlockId, const NFGUID& id, const NFGUID& startNode, const NFGUID& endNode, const NFGUID& startPin, const NFGUID& endPin) = 0;
+	virtual NF_SHARE_PTR<NFDataLink> GetLink(const NFGUID& logicBlockId, const NFGUID& startNode, const NFGUID& endNode, const NFGUID& startPin, const NFGUID& endPin) = 0;
+	virtual NF_SHARE_PTR<NFDataLink> GetLink(const NFGUID& logicBlockId, const NFGUID& id) = 0;
+	virtual NF_SHARE_PTR<NFDataLink> GetLink(const NFGUID& id) = 0;
+	virtual bool DeleteLink(const NFGUID& logicBlockId, const NFGUID& startNode, const NFGUID& endNode, const NFGUID& startPin, const NFGUID& endPin) = 0;
+	virtual bool DeleteLink(const NFGUID& logicBlockId, const NFGUID& id) = 0;
+	virtual bool DeleteLink(const NFGUID& id) = 0;
 	virtual std::list<NF_SHARE_PTR<NFDataLink>> GetLinks(const NFGUID& logicBlockId) = 0;
 
 	virtual bool DeleteMonitor(const NFGUID& id) = 0;

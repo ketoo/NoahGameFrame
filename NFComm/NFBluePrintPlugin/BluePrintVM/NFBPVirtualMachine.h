@@ -1,12 +1,12 @@
 /*
-            This file is part of:
+            This file is part of: 
                 NoahFrame
             https://github.com/ketoo/NoahGameFrame
 
    Copyright 2009 - 2019 NoahFrame(NoahGameFrame)
 
    File creator: lvsheng.huang
-
+   
    NoahFrame is open-source software and you can redistribute it and/or modify
    it under the terms of the License; besides, anyone who use this file/software must include this copyright announcement.
 
@@ -23,3 +23,40 @@
    limitations under the License.
 */
 
+#ifndef NF_BLUE_PRINT_VIRTUAL_MACHINE_H
+#define NF_BLUE_PRINT_VIRTUAL_MACHINE_H
+
+#include "NFComm/NFPluginModule/NFILogModule.h"
+#include "NFComm/NFPluginModule/NFIKernelModule.h"
+#include "NFComm/NFPluginModule/NFIClassModule.h"
+#include "NFComm/NFPluginModule/NFIBluePrintModule.h"
+
+
+class NFBPVirtualMachine
+{
+public:
+    NFBPVirtualMachine(NFIPluginManager* p, NF_SHARE_PTR<NFLogicBlock> logicBlock)
+    {
+        m_pBluePrintModule = p->FindModule<NFIBluePrintModule>();
+
+        mLogicBlock = logicBlock;
+
+        mLogicBlock->running = true;
+    }
+
+    virtual ~NFBPVirtualMachine() 
+    {
+        mLogicBlock->running = false;
+    };
+
+private:
+    //first of all, find all monitors
+    void StartMonitor(NF_SHARE_PTR<NFIMonitor> monitor);
+
+private:
+    NFIBluePrintModule* m_pBluePrintModule;
+    NF_SHARE_PTR<NFLogicBlock> mLogicBlock;
+};
+
+
+#endif

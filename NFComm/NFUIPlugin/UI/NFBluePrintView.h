@@ -45,12 +45,13 @@ public:
    	virtual void SubRender();
 
 	void TryToCreateBluePrintBlock();
-	void TryToCreateMonitor(NFMonitorType type);
-	void TryToCreateJudgement();
-	void TryToCreateExecuter();
-	void TryToCreateVariable(NFVariableType type);
 
-	void TryToCreateComparator();
+	void TryToCreateBranch(NFBranchType type);
+	void TryToCreateArithmetic(NFArithmeticType type);
+	void TryToCreateMonitor(NFMonitorType type);
+	void TryToCreateExecuter(NFExecuterType type);
+	void TryToCreateModifier(NFModifierType type);
+	void TryToCreateVariable(NFVariableType type);
 
 	NFGUID GetCurrentObjectID();
 	void SetCurrentObjectID(const NFGUID& id);
@@ -63,35 +64,49 @@ public:
 private:
 	void HandlerSelected(const NFGUID& id);
 	void NodeModifyEvent(const NFGUID& id, const bool create);
-	void LinkModifyEvent(const NFGUID& startNode, const const NFGUID& endNode, const NFGUID& startPin, const const NFGUID& endPin, const bool create);
+	void LinkModifyEvent(const NFGUID& id, const bool create);
 
-	bool TryNewLinkEvent(const NFGUID& startNode, const const NFGUID& endNode, const NFGUID& startPin, const const NFGUID& endPin);
-	bool TryNewLinkEventForVariableToMonitor(NF_SHARE_PTR<NFBluePrintNodeBase> startNode, NF_SHARE_PTR<NFBluePrintNodeBase> endNode, const NFGUID& startPin, const const NFGUID& endPin);
+	bool TryNewLinkEvent(const NFGUID& startNode, const NFGUID& endNode, const NFGUID& startPin, const NFGUID& endPin);
+	bool TryDeleteLinkEvent(const NFGUID& id);
 
+	void PinRender(NFNodePin* pin);
 
-	void NodeAttriRender(NFNodeAttri* nodeAttri);
+	void PinRenderForVariable(NFNodePin* pin);
+	void PinRenderForInputVariable(NFNodePin* pin);
+	void PinRenderForElementVariable(NFNodePin* pin);
+	void PinRenderForPropertyVariable(NFNodePin* pin);
+	void PinRenderForRecordVariable(NFNodePin* pin);
 
-	void NodeAttriRenderForVariable(NFNodeAttri* nodeAttri);
-	void NodeAttriRenderForInputVariable(NFNodeAttri* nodeAttri);
-	void NodeAttriRenderForElementVariable(NFNodeAttri* nodeAttri);
-	void NodeAttriRenderForPropertyVariable(NFNodeAttri* nodeAttri);
-	void NodeAttriRenderForRecordVariable(NFNodeAttri* nodeAttri);
+	void PinRenderForMonitor(NFNodePin* pin);
+	void PinRenderForGameEventMonitor(NFNodePin* pin);
+	void PinRenderForNetworkEventMonitor(NFNodePin* pin);
+	void PinRenderForNetworkMsgMonitor(NFNodePin* pin);
+	void PinRenderForObjectEventMonitor(NFNodePin* pin);
+	void PinRenderForPropertyEventMonitor(NFNodePin* pin);
+	void PinRenderForRecordEventMonitor(NFNodePin* pin);
+	void PinRenderForHeartBeatEventMonitor(NFNodePin* pin);
+	void PinRenderForSceneEventMonitor(NFNodePin* pin);
+	void PinRenderForItemEventMonitor(NFNodePin* pin);
+	void PinRenderForSkillEventMonitor(NFNodePin* pin);
+	void PinRenderForBuffEventMonitor(NFNodePin* pin);
 
-	void NodeAttriRenderForMonitor(NFNodeAttri* nodeAttri);
+	void PinRenderForBranch(NFNodePin* pin);
 
+	void PinRenderForModifier(NFNodePin* pin);
 
-	void CreateLogicBlockWindow();
+	void PinRenderForLogger(NFNodePin* pin);
+	void PinRenderForExecuter(NFNodePin* pin);
+
+	void CreateLogicBlock();
 	void CreateMonitor();
-	void CreateJudgment();
+	void CreateBranch();
 	void CreateExecuter();
+	void CreateModifier();
 	void CreateVariable();
+	void CreateArithmetic();
 
-	void CreateComparator();
-   
 
 private:
-	void AddMonitorNode(NF_SHARE_PTR<NFIMonitor> monitor);
-	void AddVariableNode(NF_SHARE_PTR<NFIVariable> variable);
 
 private:
 
@@ -101,16 +116,23 @@ private:
 private:
 	bool bCreatingLogicBlock = false;
 
+	NFArithmeticType arithmeticType;
+	bool bCreatingArithmetic = false;
+
 	NFMonitorType monitorType;
 	bool bCreatingMonitor = false;
 
-	bool bCreatingJudgment = false;
+	NFBranchType branchType;
+	bool bCreatingBranch = false;
+
+	NFExecuterType executerType;
 	bool bCreatingExecuter = false;
+
+	NFModifierType modifierType;
+	bool bCreatingModifier = false;
 
 	NFVariableType valueType;
 	bool bCreatingVariable = false;
-
-	bool bCreatingComparator = false;
 
 	NFTreeView* m_pTreeView;
 	NFNodeView* m_pNodeView;

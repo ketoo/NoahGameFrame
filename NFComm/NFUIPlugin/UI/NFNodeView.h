@@ -30,19 +30,18 @@
 
 class NFNodeView;
 
-class NFNodeAttri
+class NFNodePin
 {
 private:
-   NFNodeAttri(){}
+   NFNodePin(){}
 
 public:
-   NFNodeAttri(const int id, const std::string& name, const bool inputPin, const NFGUID guid, const std::string& desc)
+   NFNodePin(const int id, const std::string& name, const bool inputPin, const NFGUID guid)
    {
       this->id = id;
       this->name = name;
       this->inputPin = inputPin;
       this->guid = guid;
-      this->desc = desc;
    }
 
    void Execute();
@@ -50,7 +49,6 @@ public:
    int id;
    bool inputPin;
    std::string name;
-   std::string desc;
    NFGUID guid;
    NFGUID nodeId;
    NFNodeView* nodeView;
@@ -73,15 +71,15 @@ public:
 
 	void Execute();
 
-   void AddAttribute(const int id, const std::string& name, const bool inputPin, const NFGUID guid, const std::string& desc)
+   void AddPin(const int id, const std::string& name, const bool inputPin, const NFGUID guid)
    {
-      auto ptr = NF_SHARE_PTR<NFNodeAttri>(NF_NEW NFNodeAttri(id, name, inputPin, guid, desc));
+      auto ptr = NF_SHARE_PTR<NFNodePin>(NF_NEW NFNodePin(id, name, inputPin, guid));
       ptr->nodeView = this->nodeView;
       ptr->nodeId = this->guid;
       mAttris.push_back(ptr);
    }
 
-   void DeleteAttribute(const int id)
+   void RemovePin(const int id)
    {
       for (auto it = mAttris.begin(); it != mAttris.end(); ++it)
       {
@@ -93,7 +91,7 @@ public:
       }
    }
 
-   void DeleteAttribute(const NFGUID guid)
+   void RemovePin(const NFGUID guid)
    {
       for (auto it = mAttris.begin(); it != mAttris.end(); ++it)
       {
@@ -111,7 +109,7 @@ public:
    NFVector2 initPos;
    NFNodeView* nodeView;
 
-   std::list<NF_SHARE_PTR<NFNodeAttri>> mAttris;
+   std::list<NF_SHARE_PTR<NFNodePin>> mAttris;
 
 private:
    bool first = true;
@@ -128,8 +126,9 @@ public:
    void CleanNodes();
 
    void SetUpNewLinkCallBack(std::function<bool(const NFGUID&, const NFGUID&, const NFGUID&, const NFGUID&)> functor);
-   void SetUpNodeAttriRenderCallBack(std::function<void(NFNodeAttri*)> functor);
-   void RenderAttriPin(NFNodeAttri* nodeAttri);
+   void SetUpDeleteLinkCallBack(std::function<bool(const NFGUID&)> functor);
+   void SetPinRenderCallBack(std::function<void(NFNodePin*)> functor);
+   void RenderForPin(NFNodePin* nodeAttri);
 
    //////////////////////////////////////
    const NFGUID GetNodeGUID(const int nodeId);
@@ -139,13 +138,15 @@ public:
    const int GetAttriID(const NFGUID guid);
 
    void AddNode(const NFGUID guid, const std::string& name, const NFVector2 vec = NFVector2());
-   void AddNodeAttrIn(const NFGUID guid, const NFGUID attrId, const std::string& name, const std::string& desc);
-   void AddNodeAttrOut(const NFGUID guid, const NFGUID attrId, const std::string& name, const std::string& desc);
+   void AddPinIn(const NFGUID guid, const NFGUID attrId, const std::string& name);
+   void AddPinOut(const NFGUID guid, const NFGUID attrId, const std::string& name);
    void DeleteNode(const NFGUID guid);
 
-   void AddLink(const NFGUID& startNode, const const NFGUID& endNode, const NFGUID& startPin, const const NFGUID& endPin);
-   NF_SHARE_PTR<NFDataLink> GetLink(const NFGUID& startNode, const const NFGUID& endNode, const NFGUID& startPin, const const NFGUID& endPin);
-   void DeleteLink(const NFGUID& startNode, const const NFGUID& endNode, const NFGUID& startPin, const const NFGUID& endPin);
+   void AddLink(const NFGUID& selfID, const NFGUID& startNode, const NFGUID& endNode, const NFGUID& startPin, const NFGUID& endPin);
+   NF_SHARE_PTR<NFDataLink> GetLink(const NFGUID& startNode, const NFGUID& endNode, const NFGUID& startPin, const NFGUID& endPin);
+   NF_SHARE_PTR<NFDataLink> GetLink(const NFGUID& id);
+   void DeleteLink(const NFGUID& startNode, const NFGUID& endNode, const NFGUID& startPin, const NFGUID& endPin);
+   void DeleteLink(const NFGUID& id);
 
    NFGUID GetNodeByAttriId(const NFGUID attriId);
    void SetNodeDraggable(const NFGUID guid, const bool dragable);
@@ -160,11 +161,13 @@ private:
    void RenderLinks();
    
    void CheckNewLinkStatus();
+   void CheckDeleteLinkStatus();
 
 private:
 
     std::function<bool(const NFGUID&, const NFGUID&, const NFGUID&, const NFGUID&)> mTryNewLinkFunctor;
-    std::function<void(NFNodeAttri*)> mNodeAttriRenderFunctor;
+    std::function<bool(const NFGUID&)> mTryDeleteLinkFunctor;
+    std::function<void(NFNodePin*)> mPinRenderFunctor;
 
     NFIUIModule* m_pUIModule;
 
