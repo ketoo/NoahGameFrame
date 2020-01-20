@@ -1683,7 +1683,7 @@ void SetNodePos(int node_id, const ImVec2& screen_space_pos)
     node.origin = screen_space_to_grid_space(screen_space_pos);
 }
 
-void SetNodeOriginPos(int node_id, const ImVec2& origin_pos)
+void SetNodeGridSpacePos(int node_id, const ImVec2& origin_pos)
 {
     // Remember to call Initialize() before using any other functions!
     assert(initialized);

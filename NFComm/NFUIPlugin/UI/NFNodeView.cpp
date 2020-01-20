@@ -136,7 +136,7 @@ void SET_NODE_POSITION(const int id, const ImVec2 pos)
 #ifdef NODE_EXT
     ed::SetNodePosition(id, pos);
 #else
-    imnodes::SetNodeOriginPos(id, pos);
+    imnodes::SetNodeGridSpacePos(id, pos);
 #endif
 }
 

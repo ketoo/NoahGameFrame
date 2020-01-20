@@ -128,7 +128,8 @@ void Link(int id, int start_attr, int end_attr);
 // Set's the node's position corresponding to the node id. You can even set the
 // position before the node has been created with BeginNode().
 void SetNodePos(int node_id, const ImVec2& pos);
-void SetNodeOriginPos(int node_id, const ImVec2& origin_pos);
+void SetNodeGridSpacePos(int node_id, const ImVec2& origin_pos);
+
 // Set the node name corresponding to the node id. The node name is displayed in
 // the node's title bar.
 void SetNodeName(int node_id, const char* name);
