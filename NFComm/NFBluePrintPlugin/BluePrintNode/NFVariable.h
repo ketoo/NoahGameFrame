@@ -169,7 +169,7 @@ public:
 					case NFDATA_TYPE::TDATA_INT:
 					{
 						outputData->valueType = NFValueType::Int;
-						INT64 value = elementModule->GetPropertyInt(configID->varData, propertyName->varData);
+						int64_t value = elementModule->GetPropertyInt(configID->varData, propertyName->varData);
 						outputData->varData = std::to_string(value);
 					}
 						break;
