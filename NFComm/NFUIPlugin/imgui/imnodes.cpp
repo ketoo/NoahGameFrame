@@ -1139,8 +1139,8 @@ void EditorContextMoveToNode(const int node_id)
 
     const ImVec2 canvas_size = ImGui::GetWindowSize();
 
-    editor.panning.x = canvas_size.y / 2 - node.origin.x;
-    editor.panning.y = canvas_size.x / 2 - node.origin.y;
+    editor.panning.x = -node.origin.x;
+    editor.panning.y = -node.origin.y;
 }
 
 void Initialize()
