@@ -70,7 +70,9 @@ public:
 	NFClassStruct xStructData;
 	NFClassElement xIniData;
 	bool beIncluded = false;
+	bool bePartialed = false;
 	std::string filePath;
+	std::string fileFolder;
 	std::list<std::string> includes;
 	std::list<std::string> parts;
 };
@@ -87,14 +89,16 @@ public:
 	void SetUTF8(const bool b);
 
 private:
-	bool LoadDataFromExcel(const std::string& folder, const std::string& strFile, const std::string& strFileName);
-	bool LoadDataFromExcel(const std::string& folder, MiniExcelReader::Sheet& sheet, ClassData* pClassData);
+	bool LoadDataFromExcel(const std::string& strFile, const std::string& strFileName);
+	bool LoadIncludeExcel(ClassData* pClassData, const std::string& strFile, const std::string& strFileName);
+
+	bool LoadDataFromExcel(MiniExcelReader::Sheet& sheet, ClassData* pClassData);
 
 	bool LoadIniData(MiniExcelReader::Sheet& sheet, ClassData* pClassData);
 	bool LoadDataAndProcessProperty(MiniExcelReader::Sheet& sheet, ClassData* pClassData);
 	bool LoadDataAndProcessComponent(MiniExcelReader::Sheet& sheet, ClassData* pClassData);
 	bool LoadDataAndProcessRecord(MiniExcelReader::Sheet& sheet, ClassData* pClassData);
-	bool LoadDataAndProcessIncludes(const std::string& folder, MiniExcelReader::Sheet& sheet, ClassData* pClassData);
+	bool LoadDataAndProcessIncludes(MiniExcelReader::Sheet& sheet, ClassData* pClassData);
 
 	bool SaveForCPP();
 	bool SaveForCS();
