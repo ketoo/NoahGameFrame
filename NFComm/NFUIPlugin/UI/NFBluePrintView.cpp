@@ -213,8 +213,9 @@ void NFBluePrintView::NodeModifyEvent(const NFGUID& id, const bool create)
 		else
 		{
 			m_pTreeView->AddSubTreeNode(node->logicBlockId, node->id, node->name);
+			NFPinColor color = GetBackGroundColor(node);
 
-			m_pNodeView->AddNode(node->id, node->name, NFVector2(0, 0));
+			m_pNodeView->AddNode(node->id, node->name, color, NFVector2(0, 0));
 
 			for (int i = 0; i < node->GetInputArgCount(); ++i)
 			{
@@ -645,7 +646,7 @@ void NFBluePrintView::PinRenderForPropertyVariable(NFNodePin* pin)
 
 	auto variable = std::dynamic_pointer_cast<NFIVariable>(m_pBluePrintModule->FindNode(pin->nodeId));
 
-	auto onwerID = variable->GetInputArg(NFPropertyVariableInputArg::toString(NFPropertyVariableInputArg::OnwerID));
+	auto onwerID = variable->GetInputArg(NFPropertyVariableInputArg::toString(NFPropertyVariableInputArg::ObjectID));
 	auto classNameArg = variable->GetInputArg(NFPropertyVariableInputArg::toString(NFPropertyVariableInputArg::ClassName));
 	auto propertyNameArg = variable->GetInputArg(NFPropertyVariableInputArg::toString(NFPropertyVariableInputArg::PropertyName));
 	
@@ -666,7 +667,7 @@ void NFBluePrintView::PinRenderForPropertyVariable(NFNodePin* pin)
 	ImGui::PopItemWidth();
 	*/
 
-	if (pin->name == NFPropertyVariableInputArg::toString(NFPropertyVariableInputArg::OnwerID))
+	if (pin->name == NFPropertyVariableInputArg::toString(NFPropertyVariableInputArg::ObjectID))
 	{
 		ImGui::Button("None");
 	}
@@ -750,7 +751,7 @@ void NFBluePrintView::PinRenderForRecordVariable(NFNodePin* pin)
 
 	auto variable = std::dynamic_pointer_cast<NFIVariable>(m_pBluePrintModule->FindNode(pin->nodeId));
 
-	auto onwerID = variable->GetInputArg(NFRecordVariableInputArg::toString(NFRecordVariableInputArg::OnwerID));
+	auto onwerID = variable->GetInputArg(NFRecordVariableInputArg::toString(NFRecordVariableInputArg::ObjectID));
 	auto classNameArg = variable->GetInputArg(NFRecordVariableInputArg::toString(NFRecordVariableInputArg::ClassName));
 	auto recordNameArg = variable->GetInputArg(NFRecordVariableInputArg::toString(NFRecordVariableInputArg::RecordName));
 	auto recordRowArg = variable->GetInputArg(NFRecordVariableInputArg::toString(NFRecordVariableInputArg::RecordRow));
@@ -773,7 +774,7 @@ void NFBluePrintView::PinRenderForRecordVariable(NFNodePin* pin)
 	ImGui::PopItemWidth();
 	*/
 
-	if (pin->name == NFRecordVariableInputArg::toString(NFRecordVariableInputArg::OnwerID))
+	if (pin->name == NFRecordVariableInputArg::toString(NFRecordVariableInputArg::ObjectID))
 	{
 		ImGui::Button(onwerID->varData.c_str());
 	}
@@ -1624,4 +1625,65 @@ void NFBluePrintView::CreateArithmetic()
 			bCreatingArithmetic = false;
 		}
 	}
+}
+
+NFPinColor NFBluePrintView::GetBackGroundColor(NF_SHARE_PTR<NFBluePrintNodeBase> node)
+{
+	/*
+		LOGICBLOCK,
+	MONITOR,
+	BRANCH,
+	EXECUTER,
+	VARIABLE,
+	MODIFIER,
+	ARITHMETIC,
+	LOGGER,
+
+	    BLACK = -16777216,
+    WHITE = - 1,
+    RED = -16776961,
+    LIME = -16711936,
+    BLUE = -65536,
+    YELLOW = -16711681,
+    CYAN = -256,
+    MAGENTA = -65281,
+    SILVER = -4144960,
+    GRAY = -8355712,
+    MAROON = -16777088,
+    OLIVE = -16744320,
+    GREEN = -16744448,
+    PURPLE = -8388480,
+    TEAL = -8355840,
+    NAVY = -8388608,
+	*/
+	NFPinColor color = NFPinColor::BLACK;
+	switch (node->blueprintType)
+	{
+	case NFBlueprintType::MONITOR:
+		color = NFPinColor::MAROON;
+		break;
+	case NFBlueprintType::EXECUTER:
+		color = NFPinColor::GREEN;
+		break;
+	case NFBlueprintType::VARIABLE:
+		color = NFPinColor::SILVER;
+		break;
+	case NFBlueprintType::MODIFIER:
+		color = NFPinColor::BLUE;
+		break;
+	case NFBlueprintType::ARITHMETIC:
+		color = NFPinColor::OLIVE;
+		break;
+	case NFBlueprintType::LOGGER:
+		color = NFPinColor::GRAY;
+		break;
+	case NFBlueprintType::BRANCH:
+		color = NFPinColor::TEAL;
+		break;
+	
+	default:
+		break;
+	}
+
+	return color;
 }

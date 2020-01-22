@@ -50,13 +50,27 @@ NF_SMART_ENUM(NFElementVariableInputArg,
 	)
 
 	NF_SMART_ENUM(NFPropertyVariableInputArg,
-		OnwerID,
+		ObjectID,
 		ClassName,
 		PropertyName,
 		)
 
+	NF_SMART_ENUM(NFPropertyListVariableInputArg,
+		ObjectID,
+		ClassName,
+		)
+
+	NF_SMART_ENUM(NFPropertyListVariableOutputArg,
+		ObjectID,
+		ClassName,
+		ConfigID,
+		SceneID,
+		GroupID,
+		Position,
+		)
+
 	NF_SMART_ENUM(NFRecordVariableInputArg,
-		OnwerID,
+		ObjectID,
 		ClassName,
 		RecordName,
 		RecordRow,
@@ -184,6 +198,7 @@ NF_SMART_ENUM(NFVariableType,
 	Input,
 	ElementSystem,
 	PropertySystem,
+	PropertyList,
 	RecordSystem,
 	)
 
@@ -235,9 +250,9 @@ NF_SMART_ENUM(NFExecuterType,
 
 NF_SMART_ENUM(NFExecuterCreateObjectInputArg,
 	LastNode,
+	ConfigID,
 	SceneID,
 	GroupID,
-	ConfigID,
 	Position,
 )
 NF_SMART_ENUM(NFExecuterCreateObjectOutputputArg,

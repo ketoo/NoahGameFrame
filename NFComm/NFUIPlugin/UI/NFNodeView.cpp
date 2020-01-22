@@ -194,7 +194,7 @@ void NFNodePin::Execute()
 {
    if (inputPin)
    {
-       PUSH_COLOR(imnodes::ColorStyle::ColorStyle_Pin, color);
+        PUSH_COLOR(imnodes::ColorStyle::ColorStyle_Pin, color);
 
         BEGIN_INPUT_PIN(id);
 
@@ -225,7 +225,14 @@ void NFNode::Execute()
 {
    //ImGui::PushItemWidth(200);
    
+    PUSH_COLOR(imnodes::ColorStyle::ColorStyle_TitleBar, color);
+    PUSH_COLOR(imnodes::ColorStyle::ColorStyle_TitleBarHovered, color + 10000);
+    PUSH_COLOR(imnodes::ColorStyle::ColorStyle_TitleBarSelected, color + 10000);
+
     BEGIN_NODE(id, name);
+
+    POP_COLOR();
+    POP_COLOR();
 
    if (first)
    {
@@ -317,7 +324,7 @@ void NFNodeView::RenderNodes()
 {
    for (auto it : mNodes)
    {
-      it.second->Execute();
+        it.second->Execute();
    }
 }
 
@@ -336,11 +343,11 @@ void NFNodeView::RenderLinks()
    }
 }
 
-void NFNodeView::AddNode(const NFGUID guid, const std::string& name, const NFVector2 vec)
+void NFNodeView::AddNode(const NFGUID guid, const std::string& name, NFPinColor color, const NFVector2 vec)
 {
    if (mNodes.find(guid) == mNodes.end())
    {
-       auto node = NF_SHARE_PTR<NFNode>(NF_NEW NFNode(GenerateNodeId(), name, guid, vec));
+       auto node = NF_SHARE_PTR<NFNode>(NF_NEW NFNode(GenerateNodeId(), name, guid, vec, color));
        node->nodeView = this;
        mNodes.insert(std::pair<NFGUID, NF_SHARE_PTR<NFNode>>(guid, node));
    }

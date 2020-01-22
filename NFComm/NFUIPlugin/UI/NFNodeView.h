@@ -145,9 +145,10 @@ private:
    NFNode(){}
 
 public:
-	NFNode(const int id, const std::string& name, const NFGUID guid, const NFVector2 vec)
+	NFNode(const int id, const std::string& name, const NFGUID guid, const NFVector2 vec, const NFPinColor color)
    {
       this->id = id;
+      this->color = color;
       this->name = name;
       this->guid = guid;
       this->initPos = vec;
@@ -202,6 +203,7 @@ public:
 
    std::string name;
    int id;
+   int color;
    NFGUID guid;
    NFVector2 initPos;
    NFNodeView* nodeView;
@@ -234,7 +236,7 @@ public:
    const NFGUID GetAttriGUID(const int attriId);
    const int GetAttriID(const NFGUID guid);
 
-   void AddNode(const NFGUID guid, const std::string& name, const NFVector2 vec = NFVector2());
+   void AddNode(const NFGUID guid, const std::string& name, NFPinColor color = NFPinColor::BLUE, const NFVector2 vec = NFVector2());
    void AddPinIn(const NFGUID guid, const NFGUID attrId, const std::string& name, NFPinColor color = NFPinColor::BLUE);
    void AddPinOut(const NFGUID guid, const NFGUID attrId, const std::string& name, NFPinColor color = NFPinColor::WHITE);
    void ModifyPinColor(const NFGUID attrId, NFPinColor color);

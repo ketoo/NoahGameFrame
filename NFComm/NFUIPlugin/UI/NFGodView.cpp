@@ -290,7 +290,7 @@ void NFGodView::RenderSceneObjectNode(const int sceneID, const int groupID)
          const NFVector3& pos = m_pKernelModule->GetPropertyVector3(guid, NFrame::IObject::Position());
 		 std::string barTile = className + "(" + std::to_string((int)pos.X()) + "," + std::to_string((int)pos.Z()) + ")";
          
-		 pView->AddNode(guid, barTile, ToNodeSpacePos(NFVector2(pos.X(), pos.Z())));
+		 pView->AddNode(guid, barTile, NFPinColor::WHITE, ToNodeSpacePos(NFVector2(pos.X(), pos.Z())));
 		 pView->SetNodeDraggable(guid, false);
       }
    }

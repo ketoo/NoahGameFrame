@@ -271,6 +271,9 @@ NF_SHARE_PTR<NFIVariable> NFBluePrintModule::AddVariable(const NFGUID& logicBloc
 		case NFVariableType::PropertySystem:
 			variable = NF_SHARE_PTR<NFIVariable>(NF_NEW NFPropertyVariable(this->pPluginManager, logicBlockId, id, name));
 			break;
+		case NFVariableType::PropertyList:
+			variable = NF_SHARE_PTR<NFIVariable>(NF_NEW NFPropertyListVariable(this->pPluginManager, logicBlockId, id, name));
+			break;
 		case NFVariableType::RecordSystem:
 			variable = NF_SHARE_PTR<NFIVariable>(NF_NEW NFRecordVariable(this->pPluginManager, logicBlockId, id, name));
 			break;
