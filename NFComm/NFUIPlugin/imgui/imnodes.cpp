@@ -157,7 +157,6 @@ struct NodeData
     ImVec2 origin;
     ImVec2 title_text_size;
     ImRect rect;
-    bool draggable;
 
     struct
     {
@@ -172,6 +171,7 @@ struct NodeData
     } layout_style;
 
     ImVector<ImRect> attribute_rects;
+    bool draggable;
 
     NodeData()
         : id(0u),
@@ -179,9 +179,7 @@ struct NodeData
               "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0"),
           origin(100.0f, 100.0f), title_text_size(0.f, 0.f),
           rect(ImVec2(0.0f, 0.0f), ImVec2(0.0f, 0.0f)), color_style(),
-          attribute_rects(),
-          draggable(true),
-          layout_style()
+          layout_style(), attribute_rects(), draggable(true)
     {
     }
 };
@@ -1674,7 +1672,7 @@ void PopStyleVar()
     style_var = style_elem.value;
 }
 
-void SetNodePos(int node_id, const ImVec2& screen_space_pos)
+void SetNodeScreenSpacePos(int node_id, const ImVec2& screen_space_pos)
 {
     // Remember to call Initialize() before using any other functions!
     assert(initialized);
@@ -1683,13 +1681,13 @@ void SetNodePos(int node_id, const ImVec2& screen_space_pos)
     node.origin = screen_space_to_grid_space(screen_space_pos);
 }
 
-void SetNodeGridSpacePos(int node_id, const ImVec2& origin_pos)
+void SetNodeGridSpacePos(int node_id, const ImVec2& grid_pos)
 {
     // Remember to call Initialize() before using any other functions!
     assert(initialized);
     EditorContext& editor = editor_context_get();
     NodeData& node = editor.nodes.find_or_create_new(node_id);
-    node.origin = origin_pos;
+    node.origin = grid_pos;
 }
 
 void SetNodeName(int node_id, const char* name)
