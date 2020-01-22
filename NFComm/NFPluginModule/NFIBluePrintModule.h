@@ -40,6 +40,7 @@ NF_SMART_ENUM(NFBlueprintType,
 	MODIFIER,
 	ARITHMETIC,
 	LOGGER,
+	CUSTOM,
 )
 
 //--------FOR VARIABLE----------------
