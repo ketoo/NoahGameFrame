@@ -64,6 +64,7 @@ public:
 			var->id = this->pPluginManager->FindModule<NFIKernelModule>()->CreateGUID();
 			var->name = NFPropertyModifierInputArg::toString(NFPropertyModifierInputArg::OnwerID);
 			var->valueType = NFValueType::Object;
+			var->fromType = NFIODataComFromType::EXTERNAL;
 
 			inputArgs.push_back(var);
 		}
@@ -72,6 +73,7 @@ public:
 			var->id = this->pPluginManager->FindModule<NFIKernelModule>()->CreateGUID();
 			var->name = NFPropertyModifierInputArg::toString(NFPropertyModifierInputArg::PropertyName);
 			var->valueType = NFValueType::String;
+			var->fromType = NFIODataComFromType::INTERNAL;
 
 			inputArgs.push_back(var);
 		}
@@ -80,6 +82,7 @@ public:
 			var->id = this->pPluginManager->FindModule<NFIKernelModule>()->CreateGUID();
 			var->name = NFPropertyModifierInputArg::toString(NFPropertyModifierInputArg::PropertyValue);
 			var->valueType = NFValueType::String;
+			var->fromType = NFIODataComFromType::EXTERNAL;
 
 			inputArgs.push_back(var);
 		}
@@ -143,6 +146,7 @@ public:
 			var->id = this->pPluginManager->FindModule<NFIKernelModule>()->CreateGUID();
 			var->name = NFPropertyModifierInputArg::toString(NFPropertyModifierInputArg::OnwerID);
 			var->valueType = NFValueType::Object;
+			var->fromType = NFIODataComFromType::EXTERNAL;
 
 			inputArgs.push_back(var);
 		}
@@ -151,6 +155,7 @@ public:
 			var->id = this->pPluginManager->FindModule<NFIKernelModule>()->CreateGUID();
 			var->name = NFPropertyModifierInputArg::toString(NFPropertyModifierInputArg::PropertyName);
 			var->valueType = NFValueType::String;
+			var->fromType = NFIODataComFromType::INTERNAL;
 
 			inputArgs.push_back(var);
 		}
@@ -159,6 +164,7 @@ public:
 			var->id = this->pPluginManager->FindModule<NFIKernelModule>()->CreateGUID();
 			var->name = NFPropertyModifierInputArg::toString(NFPropertyModifierInputArg::PropertyValue);
 			var->valueType = NFValueType::String;
+			var->fromType = NFIODataComFromType::EXTERNAL;
 
 			inputArgs.push_back(var);
 		}

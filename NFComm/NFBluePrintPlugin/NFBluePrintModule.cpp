@@ -228,6 +228,12 @@ NF_SHARE_PTR<NFIMonitor> NFBluePrintModule::AddMonitor(const NFGUID& logicBlockI
 			case NFMonitorType::PropertyEvent:
 				monitor = NF_SHARE_PTR<NFIMonitor>(NF_NEW NFPropertyEventMonitor(this->pPluginManager, logicBlockId, id, name));
 				break;
+			case NFMonitorType::RecordEvent:
+				monitor = NF_SHARE_PTR<NFIMonitor>(NF_NEW NFRecordEventMonitor(this->pPluginManager, logicBlockId, id, name));
+				break;
+			case NFMonitorType::SceneEvent:
+				monitor = NF_SHARE_PTR<NFIMonitor>(NF_NEW NFSceneEventMonitor(this->pPluginManager, logicBlockId, id, name));
+				break;
 			default:
 				break;
 			}
@@ -468,8 +474,8 @@ void NFBluePrintModule::AddLink(const NFGUID& logicBlockId, const NFGUID& id, co
 			{
 				auto link = NF_SHARE_PTR<NFDataLink>(NF_NEW NFDataLink(id, startNode, endNode, startPin, endPin));
 				block->dataLinks.push_back(link);
-				starNodePin->linkID = link->selfID;
-				endNodePin->linkID = link->selfID;
+				starNodePin->SetLinkID(link->selfID);
+				endNodePin->SetLinkID(link->selfID);
 
 				LinkModifyEvent(id, true);
 			}
@@ -592,8 +598,8 @@ bool NFBluePrintModule::DeleteLink(const NFGUID& id)
 
 				auto outputData = startNode->GetOutputArg(link->startAttr);
 				auto inputData = endNode->GetInputArg(link->endAttr);
-				outputData->linkID = NFGUID();
-				inputData->linkID = NFGUID();
+				outputData->SetLinkID(NFGUID());
+				inputData->SetLinkID(NFGUID());
 
 				block->dataLinks.erase(it);
 				return true;

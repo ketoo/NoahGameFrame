@@ -60,6 +60,7 @@ public:
 			var->id = this->pPluginManager->FindModule<NFIKernelModule>()->CreateGUID();
 			var->name = NFBranchInputArg::toString(NFBranchInputArg::LeftInput);
 			var->valueType = NFValueType::Int;
+			var->fromType = NFIODataComFromType::EXTERNAL;
 
 			inputArgs.push_back(var);
 		}
@@ -68,6 +69,7 @@ public:
 			var->id = this->pPluginManager->FindModule<NFIKernelModule>()->CreateGUID();
 			var->name = NFBranchInputArg::toString(NFBranchInputArg::Comparator);
 			var->valueType = NFValueType::String;
+			var->fromType = NFIODataComFromType::INTERNAL;
 
 			inputArgs.push_back(var);
 		}
@@ -76,6 +78,7 @@ public:
 			var->id = this->pPluginManager->FindModule<NFIKernelModule>()->CreateGUID();
 			var->name = NFBranchInputArg::toString(NFBranchInputArg::RightInput);
 			var->valueType = NFValueType::Int;
+			var->fromType = NFIODataComFromType::EXTERNAL;
 
 			inputArgs.push_back(var);
 		}
@@ -143,6 +146,7 @@ public:
 			var->id = this->pPluginManager->FindModule<NFIKernelModule>()->CreateGUID();
 			var->name = NFBranchInputArg::toString(NFBranchInputArg::LeftInput);
 			var->valueType = NFValueType::String;
+			var->fromType = NFIODataComFromType::EXTERNAL;
 
 			inputArgs.push_back(var);
 		}
@@ -151,6 +155,7 @@ public:
 			var->id = this->pPluginManager->FindModule<NFIKernelModule>()->CreateGUID();
 			var->name = NFBranchInputArg::toString(NFBranchInputArg::Comparator);
 			var->valueType = NFValueType::String;
+			var->fromType = NFIODataComFromType::INTERNAL;
 
 			inputArgs.push_back(var);
 		}
@@ -159,6 +164,7 @@ public:
 			var->id = this->pPluginManager->FindModule<NFIKernelModule>()->CreateGUID();
 			var->name = NFBranchInputArg::toString(NFBranchInputArg::RightInput);
 			var->valueType = NFValueType::String;
+			var->fromType = NFIODataComFromType::EXTERNAL;
 
 			inputArgs.push_back(var);
 		}
@@ -226,6 +232,7 @@ public:
 			var->id = this->pPluginManager->FindModule<NFIKernelModule>()->CreateGUID();
 			var->name = NFBranchInputArg::toString(NFBranchInputArg::LeftInput);
 			var->valueType = NFValueType::Float;
+			var->fromType = NFIODataComFromType::EXTERNAL;
 
 			inputArgs.push_back(var);
 		}
@@ -234,6 +241,7 @@ public:
 			var->id = this->pPluginManager->FindModule<NFIKernelModule>()->CreateGUID();
 			var->name = NFBranchInputArg::toString(NFBranchInputArg::Comparator);
 			var->valueType = NFValueType::String;
+			var->fromType = NFIODataComFromType::INTERNAL;
 
 			inputArgs.push_back(var);
 		}
@@ -242,6 +250,7 @@ public:
 			var->id = this->pPluginManager->FindModule<NFIKernelModule>()->CreateGUID();
 			var->name = NFBranchInputArg::toString(NFBranchInputArg::RightInput);
 			var->valueType = NFValueType::Float;
+			var->fromType = NFIODataComFromType::EXTERNAL;
 
 			inputArgs.push_back(var);
 		}
@@ -309,6 +318,7 @@ public:
 			var->id = this->pPluginManager->FindModule<NFIKernelModule>()->CreateGUID();
 			var->name = NFBranchInputArg::toString(NFBranchInputArg::LeftInput);
 			var->valueType = NFValueType::Object;
+			var->fromType = NFIODataComFromType::EXTERNAL;
 
 			inputArgs.push_back(var);
 		}
@@ -317,6 +327,7 @@ public:
 			var->id = this->pPluginManager->FindModule<NFIKernelModule>()->CreateGUID();
 			var->name = NFBranchInputArg::toString(NFBranchInputArg::Comparator);
 			var->valueType = NFValueType::String;
+			var->fromType = NFIODataComFromType::INTERNAL;
 
 			inputArgs.push_back(var);
 		}
@@ -325,6 +336,7 @@ public:
 			var->id = this->pPluginManager->FindModule<NFIKernelModule>()->CreateGUID();
 			var->name = NFBranchInputArg::toString(NFBranchInputArg::RightInput);
 			var->valueType = NFValueType::Object;
+			var->fromType = NFIODataComFromType::EXTERNAL;
 
 			inputArgs.push_back(var);
 		}
@@ -393,6 +405,7 @@ public:
 			var->id = this->pPluginManager->FindModule<NFIKernelModule>()->CreateGUID();
 			var->name = NFBranchInputArg::toString(NFBranchInputArg::LeftInput);
 			var->valueType = NFValueType::Vector2;
+			var->fromType = NFIODataComFromType::EXTERNAL;
 
 			inputArgs.push_back(var);
 		}
@@ -401,6 +414,7 @@ public:
 			var->id = this->pPluginManager->FindModule<NFIKernelModule>()->CreateGUID();
 			var->name = NFBranchInputArg::toString(NFBranchInputArg::Comparator);
 			var->valueType = NFValueType::String;
+			var->fromType = NFIODataComFromType::INTERNAL;
 
 			inputArgs.push_back(var);
 		}
@@ -409,6 +423,7 @@ public:
 			var->id = this->pPluginManager->FindModule<NFIKernelModule>()->CreateGUID();
 			var->name = NFBranchInputArg::toString(NFBranchInputArg::RightInput);
 			var->valueType = NFValueType::Vector2;
+			var->fromType = NFIODataComFromType::EXTERNAL;
 
 			inputArgs.push_back(var);
 		}
@@ -476,6 +491,7 @@ public:
 			var->id = this->pPluginManager->FindModule<NFIKernelModule>()->CreateGUID();
 			var->name = NFBranchInputArg::toString(NFBranchInputArg::LeftInput);
 			var->valueType = NFValueType::Vector3;
+			var->fromType = NFIODataComFromType::EXTERNAL;
 
 			inputArgs.push_back(var);
 		}
@@ -484,6 +500,7 @@ public:
 			var->id = this->pPluginManager->FindModule<NFIKernelModule>()->CreateGUID();
 			var->name = NFBranchInputArg::toString(NFBranchInputArg::Comparator);
 			var->valueType = NFValueType::String;
+			var->fromType = NFIODataComFromType::INTERNAL;
 
 			inputArgs.push_back(var);
 		}
@@ -492,6 +509,7 @@ public:
 			var->id = this->pPluginManager->FindModule<NFIKernelModule>()->CreateGUID();
 			var->name = NFBranchInputArg::toString(NFBranchInputArg::RightInput);
 			var->valueType = NFValueType::Vector3;
+			var->fromType = NFIODataComFromType::EXTERNAL;
 
 			inputArgs.push_back(var);
 		}

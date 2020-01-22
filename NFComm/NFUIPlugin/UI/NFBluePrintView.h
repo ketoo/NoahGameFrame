@@ -84,7 +84,6 @@ private:
 	void PinRenderForObjectEventMonitor(NFNodePin* pin);
 	void PinRenderForPropertyEventMonitor(NFNodePin* pin);
 	void PinRenderForRecordEventMonitor(NFNodePin* pin);
-	void PinRenderForHeartBeatEventMonitor(NFNodePin* pin);
 	void PinRenderForSceneEventMonitor(NFNodePin* pin);
 	void PinRenderForItemEventMonitor(NFNodePin* pin);
 	void PinRenderForSkillEventMonitor(NFNodePin* pin);

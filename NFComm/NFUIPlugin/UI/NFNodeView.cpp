@@ -26,15 +26,6 @@
 #include "NFNodeView.h"
 #include "NFUIModule.h"
 
-//#define NODE_EXT
-
-#ifdef NODE_EXT
-#include "imgui/NodeEditor/Include/imgui_node_editor.h"
-namespace ed = ax::NodeEditor;
-#else
-#include "imgui/imnodes.h"
-#endif
-
 void BEGIN_EDITOR(const std::string& name)
 {
 #ifdef NODE_EXT
@@ -181,13 +172,33 @@ void SET_CURRENT_CONTEXT(void* p)
     EditorContextSet((imnodes::EditorContext*)p);
 #endif
 }
+
+void PUSH_COLOR(int style, int color)
+{
+#ifdef NODE_EXT
+#else
+    imnodes::PushColorStyle((imnodes::ColorStyle)style, color);
+#endif
+}
+
+void POP_COLOR()
+{
+#ifdef NODE_EXT
+#else
+    imnodes::PopColorStyle();
+#endif
+}
 //////////////////////////
 
 void NFNodePin::Execute()
 {
    if (inputPin)
    {
+       PUSH_COLOR(imnodes::ColorStyle::ColorStyle_Pin, color);
+
         BEGIN_INPUT_PIN(id);
+
+        POP_COLOR();
 
         ImGui::Text(this->name.c_str());
         this->nodeView->RenderForPin(this);
@@ -196,7 +207,11 @@ void NFNodePin::Execute()
    }
    else
    {
+       PUSH_COLOR(imnodes::ColorStyle::ColorStyle_Pin, color);
+
         BEGIN_OUT_PIN(id);
+
+        POP_COLOR();
 
         std::string str = "          ==>" + this->name;
         ImGui::Text(str.c_str());
@@ -313,7 +328,11 @@ void NFNodeView::RenderLinks()
       int start = GetAttriID(it->startAttr);
       int end = GetAttriID(it->endAttr);
 
+      PUSH_COLOR(imnodes::ColorStyle::ColorStyle_Link, it->color);
+
       NODE_LINK(it->index, start, end);
+
+      POP_COLOR();
    }
 }
 
@@ -327,28 +346,42 @@ void NFNodeView::AddNode(const NFGUID guid, const std::string& name, const NFVec
    }
 }
 
-void NFNodeView::AddPinIn(const NFGUID guid, const NFGUID attrId, const std::string& name)
+void NFNodeView::AddPinIn(const NFGUID guid, const NFGUID attrId, const std::string& name, NFPinColor color)
 {
    for (auto it : mNodes)
    {
       if (it.second->guid == guid)
       {
-         it.second->AddPin(GeneratePinId(), name, true, attrId);
+         it.second->AddPin(GeneratePinId(), name, true, attrId, color);
          return;
       }
    }
 }
 
-void NFNodeView::AddPinOut(const NFGUID guid, const NFGUID attrId, const std::string& name)
+void NFNodeView::AddPinOut(const NFGUID guid, const NFGUID attrId, const std::string& name, NFPinColor color)
 {
    for (auto it : mNodes)
    {
       if (it.second->guid == guid)
       {
-         it.second->AddPin(GeneratePinId(), name, false, attrId);
+         it.second->AddPin(GeneratePinId(), name, false, attrId, color);
          return;
       }
    }
+}
+
+void NFNodeView::ModifyPinColor(const NFGUID attrId, NFPinColor color)
+{
+    NFGUID nodeID = GetNodeByAttriId(attrId);
+    auto it = mNodes.find(nodeID);
+    if (it != mNodes.end())
+    {
+        auto pin = it->second->GetPin(attrId);
+        if (pin)
+        {
+            pin->color = color;
+        }
+    }
 }
 
 void NFNodeView::DeleteNode(const NFGUID guid)
@@ -360,14 +393,14 @@ void NFNodeView::DeleteNode(const NFGUID guid)
    }
 }
 
-void NFNodeView::AddLink(const NFGUID& selfID, const NFGUID& startNode, const NFGUID& endNode, const NFGUID& startPin, const NFGUID& endPin)
+void NFNodeView::AddLink(const NFGUID& selfID, const NFGUID& startNode, const NFGUID& endNode, const NFGUID& startPin, const NFGUID& endPin, const int color)
 {
     if (GetLink(startNode, endNode, startPin, endPin))
     {
         return;
     }
 
-    auto link = NF_SHARE_PTR<NFDataLink>(NF_NEW NFDataLink(selfID, startNode, endNode, startPin, endPin, GenerateLinkId()));
+    auto link = NF_SHARE_PTR<NFDataLink>(NF_NEW NFDataLink(selfID, startNode, endNode, startPin, endPin, GenerateLinkId(), color));
     mLinks.push_back(link);
 }
 

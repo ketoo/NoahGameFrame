@@ -45,8 +45,6 @@ void NFBPVirtualMachine::StartMonitor(NF_SHARE_PTR<NFIMonitor> monitor)
         break;
     case NFMonitorType::RecordEvent:
         break;
-    case NFMonitorType::HeartBeatEvent:
-        break;
     case NFMonitorType::SceneEvent:
         break;
     case NFMonitorType::ItemEvent:

@@ -73,7 +73,6 @@ NF_SMART_ENUM(NFMonitorType,
 	ObjectEvent,
 	PropertyEvent,
 	RecordEvent,
-	HeartBeatEvent,
 	SceneEvent,
 	ItemEvent,
 	SkillEvent,
@@ -86,6 +85,7 @@ NF_SMART_ENUM(NFMonitorType,
 
 	NF_SMART_ENUM(NFGameEventMonitorOutputArg,
 		NextNode,
+		ObjectID,
 		)
 	//------------------------------
 	NF_SMART_ENUM(NFNetworkEventMonitorInputArg,
@@ -94,6 +94,7 @@ NF_SMART_ENUM(NFMonitorType,
 
 	NF_SMART_ENUM(NFNetworkEventMonitorOutputArg,
 		NextNode,
+		ObjectID,
 		)
 	//------------------------------
 	NF_SMART_ENUM(NFNetworkMsgMonitorInputArg,
@@ -130,7 +131,7 @@ NF_SMART_ENUM(NFMonitorType,
 
 	NF_SMART_ENUM(NFMonitorPropertyEventOutputArg,
 		NextNode,
-		Self,
+		ObjectID,
 		PropertyName,
 		PropertyValue,
 		)
@@ -142,8 +143,30 @@ NF_SMART_ENUM(NFMonitorType,
 		OperateType,
 		)
 
-	//------------------------------
+	NF_SMART_ENUM(NFMonitorRecordEventOutArg,
+		NextNode,
+		ClassName,
+		RecordName,
+		Row,
+		Col,
+		)
 
+	//------------------------------
+	NF_SMART_ENUM(NFMonitorSceneEventInputArg,
+		ClassName,
+		SceneID,
+		OperateType,
+		)
+
+	NF_SMART_ENUM(NFMonitorSceneEventOutArg,
+		NextNode,
+		ClassName,
+		SceneID,
+		GroupID,
+		ObjectID,
+		)
+
+	//------------------------------
 //------------------------
 //----------FOR VARIABLE--------------
 NF_SMART_ENUM(NFValueType,
@@ -318,6 +341,12 @@ class NFIVariable;
 class NFIOData;
 class NFDataLink;
 
+
+NF_SMART_ENUM(NFIODataComFromType,
+	INTERNAL,
+	EXTERNAL
+)
+
 class NFIOData
 {
 public:
@@ -325,7 +354,19 @@ public:
 	std::string name;//arg name
 	NFValueType valueType;
 	std::string varData;
-	//DATA COME FROM  0: extern, 1: internal, 3 user input, 4 selfID
+	NFIODataComFromType fromType = NFIODataComFromType::EXTERNAL;
+
+	NFGUID GetLinkID()
+	{
+		return linkID;
+	}
+
+	void SetLinkID(NFGUID id)
+	{
+		linkID = id;
+	}
+
+private:
 	NFGUID linkID;
 };
 
@@ -465,10 +506,11 @@ private:
 	NFDataLink() {}
 
 public:
-	NFDataLink(NFGUID selfID, NFGUID startNodeID, NFGUID endNodeID, NFGUID startAttr, NFGUID endAttr, const int index = -1)
+	NFDataLink(NFGUID selfID, NFGUID startNodeID, NFGUID endNodeID, NFGUID startAttr, NFGUID endAttr, const int index = -1, const int color = -1)
 	{
 		this->selfID = selfID;
 		this->index = index;
+		this->color = color;
 
 		this->startNode = startNodeID;
 		this->endNode = endNodeID;
@@ -478,6 +520,7 @@ public:
 	}
 
 	int index;
+	int color;
 	NFGUID selfID;
 	NFGUID startAttr;
 	NFGUID endAttr;

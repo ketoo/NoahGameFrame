@@ -59,6 +59,7 @@ public:
 			var->id = this->pPluginManager->FindModule<NFIKernelModule>()->CreateGUID();
 			var->name = NFExecuterCreateObjectInputArg::toString(NFExecuterCreateObjectInputArg::SceneID);
 			var->valueType = NFValueType::Int;
+			var->fromType = NFIODataComFromType::EXTERNAL;
 
 			inputArgs.push_back(var);
 		}
@@ -67,6 +68,7 @@ public:
 			var->id = this->pPluginManager->FindModule<NFIKernelModule>()->CreateGUID();
 			var->name = NFExecuterCreateObjectInputArg::toString(NFExecuterCreateObjectInputArg::GroupID);
 			var->valueType = NFValueType::Int;
+			var->fromType = NFIODataComFromType::EXTERNAL;
 
 			inputArgs.push_back(var);
 		}
@@ -75,6 +77,7 @@ public:
 			var->id = this->pPluginManager->FindModule<NFIKernelModule>()->CreateGUID();
 			var->name = NFExecuterCreateObjectInputArg::toString(NFExecuterCreateObjectInputArg::ConfigID);
 			var->valueType = NFValueType::String;
+			var->fromType = NFIODataComFromType::EXTERNAL;
 
 			inputArgs.push_back(var);
 		}
@@ -83,6 +86,7 @@ public:
 			var->id = this->pPluginManager->FindModule<NFIKernelModule>()->CreateGUID();
 			var->name = NFExecuterCreateObjectInputArg::toString(NFExecuterCreateObjectInputArg::Position);
 			var->valueType = NFValueType::Vector3;
+			var->fromType = NFIODataComFromType::EXTERNAL;
 
 			inputArgs.push_back(var);
 		}
@@ -149,6 +153,7 @@ public:
 			var->id = this->pPluginManager->FindModule<NFIKernelModule>()->CreateGUID();
 			var->name = NFExecuterDestroyObjectInputArg::toString(NFExecuterDestroyObjectInputArg::ObjectID);
 			var->valueType = NFValueType::Object;
+			var->fromType = NFIODataComFromType::EXTERNAL;
 
 			inputArgs.push_back(var);
 		}
@@ -207,6 +212,7 @@ public:
 			var->id = this->pPluginManager->FindModule<NFIKernelModule>()->CreateGUID();
 			var->name = NFExecuterMoveObjectInputArg::toString(NFExecuterMoveObjectInputArg::ObjectID);
 			var->valueType = NFValueType::Object;
+			var->fromType = NFIODataComFromType::EXTERNAL;
 
 			inputArgs.push_back(var);
 		}
@@ -215,6 +221,7 @@ public:
 			var->id = this->pPluginManager->FindModule<NFIKernelModule>()->CreateGUID();
 			var->name = NFExecuterMoveObjectInputArg::toString(NFExecuterMoveObjectInputArg::Position);
 			var->valueType = NFValueType::Vector3;
+			var->fromType = NFIODataComFromType::EXTERNAL;
 
 			inputArgs.push_back(var);
 		}
@@ -223,6 +230,7 @@ public:
 			var->id = this->pPluginManager->FindModule<NFIKernelModule>()->CreateGUID();
 			var->name = NFExecuterMoveObjectInputArg::toString(NFExecuterMoveObjectInputArg::MoveType);
 			var->valueType = NFValueType::Int;
+			var->fromType = NFIODataComFromType::EXTERNAL;
 
 			inputArgs.push_back(var);
 		}
@@ -280,6 +288,7 @@ public:
 			var->id = this->pPluginManager->FindModule<NFIKernelModule>()->CreateGUID();
 			var->name = NFExecuterEnterSceneInputArg::toString(NFExecuterEnterSceneInputArg::ObjectID);
 			var->valueType = NFValueType::Object;
+			var->fromType = NFIODataComFromType::EXTERNAL;
 
 			inputArgs.push_back(var);
 		}
@@ -289,6 +298,7 @@ public:
 			var->id = this->pPluginManager->FindModule<NFIKernelModule>()->CreateGUID();
 			var->name = NFExecuterEnterSceneInputArg::toString(NFExecuterEnterSceneInputArg::SceneID);
 			var->valueType = NFValueType::Int;
+			var->fromType = NFIODataComFromType::EXTERNAL;
 
 			inputArgs.push_back(var);
 		}
@@ -298,6 +308,7 @@ public:
 			var->id = this->pPluginManager->FindModule<NFIKernelModule>()->CreateGUID();
 			var->name = NFExecuterEnterSceneInputArg::toString(NFExecuterEnterSceneInputArg::GroupID);
 			var->valueType = NFValueType::Int;
+			var->fromType = NFIODataComFromType::EXTERNAL;
 
 			inputArgs.push_back(var);
 		}
@@ -306,6 +317,7 @@ public:
 			var->id = this->pPluginManager->FindModule<NFIKernelModule>()->CreateGUID();
 			var->name = NFExecuterEnterSceneInputArg::toString(NFExecuterEnterSceneInputArg::Position);
 			var->valueType = NFValueType::Vector3;
+			var->fromType = NFIODataComFromType::EXTERNAL;
 
 			inputArgs.push_back(var);
 		}
@@ -346,8 +358,6 @@ public:
 		Init();
 	}
 
-
-
 	virtual void InitInputArgs()
 	{
 		{
@@ -363,6 +373,7 @@ public:
 			var->id = this->pPluginManager->FindModule<NFIKernelModule>()->CreateGUID();
 			var->name = NFExecuterAddHeartBeatInputArg::toString(NFExecuterAddHeartBeatInputArg::ObjectID);
 			var->valueType = NFValueType::Object;
+			var->fromType = NFIODataComFromType::EXTERNAL;
 
 			inputArgs.push_back(var);
 		}
@@ -372,6 +383,7 @@ public:
 			var->id = this->pPluginManager->FindModule<NFIKernelModule>()->CreateGUID();
 			var->name = NFExecuterAddHeartBeatInputArg::toString(NFExecuterAddHeartBeatInputArg::BeatName);
 			var->valueType = NFValueType::String;
+			var->fromType = NFIODataComFromType::INTERNAL;
 
 			inputArgs.push_back(var);
 		}
@@ -381,6 +393,7 @@ public:
 			var->id = this->pPluginManager->FindModule<NFIKernelModule>()->CreateGUID();
 			var->name = NFExecuterAddHeartBeatInputArg::toString(NFExecuterAddHeartBeatInputArg::BeatTime);
 			var->valueType = NFValueType::Int;
+			var->fromType = NFIODataComFromType::INTERNAL;
 
 			inputArgs.push_back(var);
 		}
@@ -389,6 +402,7 @@ public:
 			var->id = this->pPluginManager->FindModule<NFIKernelModule>()->CreateGUID();
 			var->name = NFExecuterAddHeartBeatInputArg::toString(NFExecuterAddHeartBeatInputArg::BeatCount);
 			var->valueType = NFValueType::Int;
+			var->fromType = NFIODataComFromType::INTERNAL;
 
 			inputArgs.push_back(var);
 		}

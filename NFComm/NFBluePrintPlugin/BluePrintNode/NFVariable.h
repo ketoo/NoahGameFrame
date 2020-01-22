@@ -54,6 +54,7 @@ public:
 			var->id = this->pPluginManager->FindModule<NFIKernelModule>()->CreateGUID();
 			var->name = "DataType";
 			var->valueType = NFValueType::String;
+			var->fromType = NFIODataComFromType::INTERNAL;
 
 			inputArgs.push_back(var);
 		}
@@ -107,6 +108,7 @@ public:
 			var->id = this->pPluginManager->FindModule<NFIKernelModule>()->CreateGUID();
 			var->name = NFElementVariableInputArg::toString(NFElementVariableInputArg::ClassName);
 			var->valueType = NFValueType::String;
+			var->fromType = NFIODataComFromType::INTERNAL;
 
 			inputArgs.push_back(var);
 		}
@@ -115,6 +117,7 @@ public:
 			var->id = this->pPluginManager->FindModule<NFIKernelModule>()->CreateGUID();
 			var->name = NFElementVariableInputArg::toString(NFElementVariableInputArg::ConfigID);
 			var->valueType = NFValueType::String;
+			var->fromType = NFIODataComFromType::INTERNAL;
 
 			inputArgs.push_back(var);
 		}
@@ -123,6 +126,7 @@ public:
 			var->id = this->pPluginManager->FindModule<NFIKernelModule>()->CreateGUID();
 			var->name = NFElementVariableInputArg::toString(NFElementVariableInputArg::PropertyName);
 			var->valueType = NFValueType::String;
+			var->fromType = NFIODataComFromType::INTERNAL;
 
 			inputArgs.push_back(var);
 		}
@@ -239,6 +243,7 @@ public:
 			var->id = this->pPluginManager->FindModule<NFIKernelModule>()->CreateGUID();
 			var->name = NFPropertyVariableInputArg::toString(NFPropertyVariableInputArg::OnwerID);
 			var->valueType = NFValueType::Object;
+			var->fromType = NFIODataComFromType::EXTERNAL;
 
 			inputArgs.push_back(var);
 		} 
@@ -247,6 +252,7 @@ public:
 			var->id = this->pPluginManager->FindModule<NFIKernelModule>()->CreateGUID();
 			var->name = NFPropertyVariableInputArg::toString(NFPropertyVariableInputArg::ClassName);
 			var->valueType = NFValueType::String;
+			var->fromType = NFIODataComFromType::INTERNAL;
 
 			inputArgs.push_back(var);
 		}
@@ -255,6 +261,7 @@ public:
 			var->id = this->pPluginManager->FindModule<NFIKernelModule>()->CreateGUID();
 			var->name = NFPropertyVariableInputArg::toString(NFPropertyVariableInputArg::PropertyName);
 			var->valueType = NFValueType::String;
+			var->fromType = NFIODataComFromType::INTERNAL;
 
 			inputArgs.push_back(var);
 		}
@@ -368,6 +375,7 @@ public:
 			var->id = this->pPluginManager->FindModule<NFIKernelModule>()->CreateGUID();
 			var->name = NFPropertyVariableInputArg::toString(NFPropertyVariableInputArg::OnwerID);
 			var->valueType = NFValueType::Object;
+			var->fromType = NFIODataComFromType::EXTERNAL;
 
 			inputArgs.push_back(var);
 		}
@@ -376,6 +384,7 @@ public:
 			var->id = this->pPluginManager->FindModule<NFIKernelModule>()->CreateGUID();
 			var->name = NFRecordVariableInputArg::ClassName;
 			var->valueType = NFValueType::String;
+			var->fromType = NFIODataComFromType::INTERNAL;
 
 			inputArgs.push_back(var);
 		}
@@ -384,6 +393,7 @@ public:
 			var->id = this->pPluginManager->FindModule<NFIKernelModule>()->CreateGUID();
 			var->name = NFRecordVariableInputArg::RecordName;
 			var->valueType = NFValueType::String;
+			var->fromType = NFIODataComFromType::INTERNAL;
 
 			inputArgs.push_back(var);
 		}
@@ -392,6 +402,7 @@ public:
 			var->id = this->pPluginManager->FindModule<NFIKernelModule>()->CreateGUID();
 			var->name = NFRecordVariableInputArg::RecordRow;
 			var->valueType = NFValueType::Int;
+			var->fromType = NFIODataComFromType::INTERNAL;
 
 			inputArgs.push_back(var);
 		}
@@ -400,6 +411,7 @@ public:
 			var->id = this->pPluginManager->FindModule<NFIKernelModule>()->CreateGUID();
 			var->name = NFRecordVariableInputArg::RecordCol;
 			var->valueType = NFValueType::Int;
+			var->fromType = NFIODataComFromType::INTERNAL;
 
 			inputArgs.push_back(var);
 		}

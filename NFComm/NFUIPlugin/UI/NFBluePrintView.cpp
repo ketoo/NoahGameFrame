@@ -28,6 +28,24 @@
 
 NFBluePrintView::NFBluePrintView(NFIPluginManager* p, NFViewType vt) : NFIView(p, vt, GET_CLASS_NAME(NFBluePrintView))
 {
+	int BLACK = IM_COL32(0, 0, 0, 255);
+	int WHITE = IM_COL32(255, 255, 255, 255);
+	int RED = IM_COL32(255, 0, 0, 255);
+	int LIME = IM_COL32(0, 255, 0, 255);
+	int BLUE = IM_COL32(0, 0, 255, 255);
+	int YELLOW = IM_COL32(255, 255, 0, 255);
+	int CYAN = IM_COL32(0, 255, 255, 255);
+	int MAGENTA = IM_COL32(255, 0, 255, 255);
+	int SILVER = IM_COL32(192, 192, 192, 255);
+	int GRAY = IM_COL32(128, 128, 128, 255);
+	int MAROON = IM_COL32(128, 0, 0, 255);
+	int OLIVE = IM_COL32(128, 128, 0, 255);
+	int GREEN = IM_COL32(0, 128, 0, 255);
+	int PURPLE = IM_COL32(128, 0, 128, 255);
+	int TEAL = IM_COL32(0, 128, 128, 255);
+	int NAVY = IM_COL32(0, 0, 128, 255);
+
+
    m_pNodeView = NF_NEW NFNodeView(p);
    m_pTreeView = NF_NEW NFTreeView(p);
 
@@ -201,13 +219,41 @@ void NFBluePrintView::NodeModifyEvent(const NFGUID& id, const bool create)
 			for (int i = 0; i < node->GetInputArgCount(); ++i)
 			{
 				auto variableArg = node->GetInputArg(i);
-				m_pNodeView->AddPinIn(node->id, variableArg->id, variableArg->name);
+				NFPinColor pinColor = NFPinColor::BLUE;
+				if (variableArg->valueType == NFValueType::Node)
+				{
+					pinColor = NFPinColor::YELLOW;
+				}
+				else
+				{
+					if (variableArg->fromType == NFIODataComFromType::INTERNAL)
+					{
+						pinColor = NFPinColor::GRAY;
+					}
+					else
+					{
+						pinColor = NFPinColor::RED;
+					}
+				}
+
+				m_pNodeView->AddPinIn(node->id, variableArg->id, variableArg->name, pinColor);
 			}
 
 			for (int i = 0; i < node->GetOutputArgCount(); ++i)
 			{
 				auto variableArg = node->GetOutputArg(i);
-				m_pNodeView->AddPinOut(node->id, variableArg->id, variableArg->name);
+				NFPinColor pinColor = NFPinColor::WHITE;
+
+				if (variableArg->valueType == NFValueType::Node)
+				{
+					pinColor = NFPinColor::YELLOW;
+				}
+				else
+				{
+					pinColor = NFPinColor::WHITE;
+				}
+
+				m_pNodeView->AddPinOut(node->id, variableArg->id, variableArg->name, pinColor);
 			}
 		}
 	}
@@ -220,13 +266,42 @@ void NFBluePrintView::NodeModifyEvent(const NFGUID& id, const bool create)
 
 void NFBluePrintView::LinkModifyEvent(const NFGUID& id, const bool create)
 {
-
+	//
 	auto linkData = m_pBluePrintModule->GetLink(id);
 	if (linkData)
 	{
 		if (create)
 		{
-			m_pNodeView->AddLink(id, linkData->startNode, linkData->endNode, linkData->startAttr, linkData->endAttr);
+			NFPinColor color = NFPinColor::WHITE;
+			auto endNpde =m_pBluePrintModule->FindNode(linkData->endNode);
+			if (endNpde)
+			{
+				for (int i = 0; i < endNpde->GetInputArgCount(); ++i)
+				{
+					auto inputAgr = endNpde->GetInputArg(i);
+					if (inputAgr->id == linkData->endAttr)
+					{
+						if (inputAgr->valueType == NFValueType::Node)
+						{
+							color = NFPinColor::YELLOW;
+						}
+						else if (inputAgr->valueType == NFValueType::UNKNOW)
+						{
+							color = NFPinColor::BLACK;
+						}
+						else
+						{
+							m_pNodeView->ModifyPinColor(inputAgr->id, NFPinColor::BLUE);
+							color = NFPinColor::BLUE;
+						}
+
+						break;
+					}
+				}
+				
+			}
+
+			m_pNodeView->AddLink(id, linkData->startNode, linkData->endNode, linkData->startAttr, linkData->endAttr, color);
 		}
 		else
 		{
@@ -252,41 +327,44 @@ bool NFBluePrintView::TryNewLinkEvent(const NFGUID& startNode, const NFGUID& end
 					auto inputArg = endNodeObject->GetInputArg(i);
 					if (inputArg->id == endPin)
 					{
-						if (inputArg->valueType == outputArg->valueType)
+						if (inputArg->fromType == NFIODataComFromType::EXTERNAL)
 						{
-							//if linked
-							if (!inputArg->linkID.IsNull())
+							if (inputArg->valueType == outputArg->valueType)
 							{
-								//show a error message
-								return false;
-							}
-
-							if (outputArg->valueType == NFValueType::Node
-								&& !outputArg->linkID.IsNull())
-							{
-								//show a error message
-								return false;
-							}
-
-							if (inputArg->valueType == NFValueType::UNKNOW
-								|| outputArg->valueType == NFValueType::UNKNOW)
-							{
-								//show a error message
-								return false;
-							}
-
-							if (endNodeObject->blueprintType == NFBlueprintType::BRANCH)
-							{
-								auto comparetorArg = endNodeObject->GetInputArg(NFBranchInputArg::Comparator);
-								if (inputArg->id == comparetorArg->id)
+								//if linked
+								if (!inputArg->GetLinkID().IsNull())
 								{
 									//show a error message
 									return false;
 								}
-							}
 
-							m_pBluePrintModule->AddLink(startNodeObject->logicBlockId, m_pKernelModule->CreateGUID(), startNodeObject->id, endNodeObject->id, startPin, endPin);
-							return true;
+								if (outputArg->valueType == NFValueType::Node
+									&& !outputArg->GetLinkID().IsNull())
+								{
+									//show a error message
+									return false;
+								}
+
+								if (inputArg->valueType == NFValueType::UNKNOW
+									|| outputArg->valueType == NFValueType::UNKNOW)
+								{
+									//show a error message
+									return false;
+								}
+
+								if (endNodeObject->blueprintType == NFBlueprintType::BRANCH)
+								{
+									auto comparetorArg = endNodeObject->GetInputArg(NFBranchInputArg::Comparator);
+									if (inputArg->id == comparetorArg->id)
+									{
+										//show a error message
+										return false;
+									}
+								}
+
+								m_pBluePrintModule->AddLink(startNodeObject->logicBlockId, m_pKernelModule->CreateGUID(), startNodeObject->id, endNodeObject->id, startPin, endPin);
+								return true;
+							}
 						}
 					}
 				}
@@ -390,8 +468,20 @@ void NFBluePrintView::PinRenderForInputVariable(NFNodePin* pin)
 		{
 			for (auto x : NFValueType::allValues())
 			{
+				if (x == NFValueType::Node
+					|| x == NFValueType::UNKNOW)
+				{
+					continue;
+				}
+
 				if (ImGui::Selectable(x.toString().c_str(), false))
 				{
+					auto outputArg = variable->GetOutputArg(0);
+					if (!outputArg->GetLinkID().IsNull())
+					{
+						break;
+					}
+
 					inputArg->valueType = x;
 					inputArg->varData = "";
 					memset(str0, 0, sizeof(str0));
@@ -591,8 +681,15 @@ void NFBluePrintView::PinRenderForPropertyVariable(NFNodePin* pin)
 			{
 				if (ImGui::Selectable(classObject->GetClassName().c_str()))
 				{
+					auto outputArg = variable->GetOutputArg(0);
+					if (!outputArg->GetLinkID().IsNull())
+					{
+						break;
+					}
+
 					classNameArg->varData = classObject->GetClassName();
 					propertyNameArg->varData = "";
+					propertyNameArg->valueType = NFValueType::UNKNOW;
 					variable->UpdateOutputData();
 				}
 
@@ -617,6 +714,12 @@ void NFBluePrintView::PinRenderForPropertyVariable(NFNodePin* pin)
 				{
 					if (ImGui::Selectable(property->GetKey().c_str()))
 					{
+						auto outputArg = variable->GetOutputArg(0);
+						if (!outputArg->GetLinkID().IsNull())
+						{
+							break;
+						}
+
 						propertyNameArg->varData = property->GetKey();
 						variable->UpdateOutputData();
 					}
@@ -790,11 +893,6 @@ void NFBluePrintView::PinRenderForMonitor(NFNodePin* pin)
 			PinRenderForRecordEventMonitor(pin);
 		}
 		break;
-		case NFMonitorType::HeartBeatEvent:
-		{
-			PinRenderForHeartBeatEventMonitor(pin);
-		}
-		break;
 		case NFMonitorType::SceneEvent:
 		{
 			PinRenderForSceneEventMonitor(pin);
@@ -850,9 +948,6 @@ void NFBluePrintView::PinRenderForGameEventMonitor(NFNodePin* pin)
 	}
 	else
 	{
-		auto outputData = monitor->GetOutputArg(0);
-		ImGui::Indent(itemWidth);
-		ImGui::TextColored(ImVec4(1.0f, 0.4f, 0.4f, 1.0f), outputData->varData.c_str());
 	}
 }
 
@@ -1029,17 +1124,10 @@ void NFBluePrintView::PinRenderForPropertyEventMonitor(NFNodePin* pin)
 	}
 	else
 	{
-		auto outputData = monitor->GetOutputArg(0);
-		ImGui::Indent(itemWidth);
-		ImGui::TextColored(ImVec4(1.0f, 0.4f, 0.4f, 1.0f), outputData->varData.c_str());
 	}
 }
 
 void NFBluePrintView::PinRenderForRecordEventMonitor(NFNodePin* pin)
-{
-}
-
-void NFBluePrintView::PinRenderForHeartBeatEventMonitor(NFNodePin* pin)
 {
 }
 

@@ -65,6 +65,7 @@ public:
 
     void RunLogicBlock(const NFGUID& logicBlockID);
     void StopLogicBlock(const NFGUID& logicBlockID);
+    bool CheckLogicBlockRefCircle(const NFGUID& logicBlockID);
 
 private:
     NFMapEx<NFGUID, NFBPVirtualMachine> mVirtualMachine;

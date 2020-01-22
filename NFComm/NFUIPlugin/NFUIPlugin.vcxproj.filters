@@ -64,18 +64,6 @@
     <ClCompile Include="UI\NFTreeView.cpp">
       <Filter>UI</Filter>
     </ClCompile>
-    <ClCompile Include="imgui\NodeEditor\Source\crude_json.cpp">
-      <Filter>imgui\NodeEditor</Filter>
-    </ClCompile>
-    <ClCompile Include="imgui\NodeEditor\Source\imgui_canvas.cpp">
-      <Filter>imgui\NodeEditor</Filter>
-    </ClCompile>
-    <ClCompile Include="imgui\NodeEditor\Source\imgui_node_editor.cpp">
-      <Filter>imgui\NodeEditor</Filter>
-    </ClCompile>
-    <ClCompile Include="imgui\NodeEditor\Source\imgui_node_editor_api.cpp">
-      <Filter>imgui\NodeEditor</Filter>
-    </ClCompile>
     <ClCompile Include="imgui\imnodes.cpp">
       <Filter>imgui</Filter>
     </ClCompile>
@@ -152,24 +140,6 @@
     <ClInclude Include="UI\NFTreeView.h">
       <Filter>UI</Filter>
     </ClInclude>
-    <ClInclude Include="imgui\NodeEditor\Include\imgui_node_editor.h">
-      <Filter>imgui\NodeEditor</Filter>
-    </ClInclude>
-    <ClInclude Include="imgui\NodeEditor\Source\crude_json.h">
-      <Filter>imgui\NodeEditor</Filter>
-    </ClInclude>
-    <ClInclude Include="imgui\NodeEditor\Source\imgui_bezier_math.h">
-      <Filter>imgui\NodeEditor</Filter>
-    </ClInclude>
-    <ClInclude Include="imgui\NodeEditor\Source\imgui_canvas.h">
-      <Filter>imgui\NodeEditor</Filter>
-    </ClInclude>
-    <ClInclude Include="imgui\NodeEditor\Source\imgui_extra_math.h">
-      <Filter>imgui\NodeEditor</Filter>
-    </ClInclude>
-    <ClInclude Include="imgui\NodeEditor\Source\imgui_node_editor_internal.h">
-      <Filter>imgui\NodeEditor</Filter>
-    </ClInclude>
     <ClInclude Include="imgui\imnodes.h">
       <Filter>imgui</Filter>
     </ClInclude>
@@ -184,24 +154,5 @@
     <Filter Include="gl3w">
       <UniqueIdentifier>{5b61687d-fb49-475f-a634-48799cc05e5d}</UniqueIdentifier>
     </Filter>
-    <Filter Include="imgui\NodeEditor">
-      <UniqueIdentifier>{a0947253-73c5-475c-bcda-d39660091ebc}</UniqueIdentifier>
-    </Filter>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="imgui\NodeEditor\Source\imgui_bezier_math.inl">
-      <Filter>imgui\NodeEditor</Filter>
-    </None>
-    <None Include="imgui\NodeEditor\Source\imgui_extra_math.inl">
-      <Filter>imgui\NodeEditor</Filter>
-    </None>
-    <None Include="imgui\NodeEditor\Source\imgui_node_editor_internal.inl">
-      <Filter>imgui\NodeEditor</Filter>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
-    <Natvis Include="imgui\NodeEditor\Support\imgui_node_editor.natvis">
-      <Filter>imgui\NodeEditor</Filter>
-    </Natvis>
   </ItemGroup>
 </Project>

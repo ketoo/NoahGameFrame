@@ -104,3 +104,8 @@ void NFBPVirtualMachineModule::StopLogicBlock(const NFGUID& logicBlockID)
     mVirtualMachine.RemoveElement(logicBlockID);
     //destroy that VM
 }
+
+bool NFBPVirtualMachineModule::CheckLogicBlockRefCircle(const NFGUID& logicBlockID)
+{
+    return false;
+}

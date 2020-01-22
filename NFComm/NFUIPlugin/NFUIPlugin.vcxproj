@@ -106,12 +106,6 @@
     <ClInclude Include="imgui\imstb_rectpack.h" />
     <ClInclude Include="imgui\imstb_textedit.h" />
     <ClInclude Include="imgui\imstb_truetype.h" />
-    <ClInclude Include="imgui\NodeEditor\Include\imgui_node_editor.h" />
-    <ClInclude Include="imgui\NodeEditor\Source\crude_json.h" />
-    <ClInclude Include="imgui\NodeEditor\Source\imgui_bezier_math.h" />
-    <ClInclude Include="imgui\NodeEditor\Source\imgui_canvas.h" />
-    <ClInclude Include="imgui\NodeEditor\Source\imgui_extra_math.h" />
-    <ClInclude Include="imgui\NodeEditor\Source\imgui_node_editor_internal.h" />
     <ClInclude Include="NFUIModule.h" />
     <ClInclude Include="NFUIPlugin.h" />
     <ClInclude Include="UI\NFBluePrintView.h" />
@@ -145,10 +139,6 @@
     <ClCompile Include="imgui\imgui_impl_sdl.cpp" />
     <ClCompile Include="imgui\imgui_widgets.cpp" />
     <ClCompile Include="imgui\imnodes.cpp" />
-    <ClCompile Include="imgui\NodeEditor\Source\crude_json.cpp" />
-    <ClCompile Include="imgui\NodeEditor\Source\imgui_canvas.cpp" />
-    <ClCompile Include="imgui\NodeEditor\Source\imgui_node_editor.cpp" />
-    <ClCompile Include="imgui\NodeEditor\Source\imgui_node_editor_api.cpp" />
     <ClCompile Include="NFUIModule.cpp" />
     <ClCompile Include="NFUIPlugin.cpp" />
     <ClCompile Include="UI\NFBluePrintView.cpp" />
@@ -164,14 +154,6 @@
     <ClCompile Include="UI\NFProjectView.cpp" />
     <ClCompile Include="UI\NFSceneView.cpp" />
     <ClCompile Include="UI\NFTreeView.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="imgui\NodeEditor\Source\imgui_bezier_math.inl" />
-    <None Include="imgui\NodeEditor\Source\imgui_extra_math.inl" />
-    <None Include="imgui\NodeEditor\Source\imgui_node_editor_internal.inl" />
-  </ItemGroup>
-  <ItemGroup>
-    <Natvis Include="imgui\NodeEditor\Support\imgui_node_editor.natvis" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
