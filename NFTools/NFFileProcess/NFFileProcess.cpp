@@ -1,12 +1,12 @@
 #include "NFFileProcess.h"
 #include "Utf8ToGbk.h"
 #include <iostream>
-#include <direct.h>
 
 #if NF_PLATFORM == NF_PLATFORM_WIN
 #include <io.h>
 #include <windows.h>
 #include <conio.h>
+#include <direct.h>
 #else
 #include <iconv.h>
 #include <unistd.h>
@@ -1382,7 +1382,11 @@ bool NFFileProcess::SaveForStruct()
 			StringReplace(folder, strExcelIniPath, "");
 			std::string fileFolder = strXMLStructPath + folder;
 
+#if NF_PLATFORM == NF_PLATFORM_WIN
 			mkdir(fileFolder.c_str());
+#else
+			mkdir(fileFolder.c_str(), 0);
+#endif
 
 			structWriter = fopen(strFileName.c_str(), "w+");
 		}
@@ -1534,7 +1538,11 @@ bool NFFileProcess::SaveForIni()
 			StringReplace(folder, strExcelIniPath, "");
 			std::string fileFolder = strXMLIniPath + folder;
 
+#if NF_PLATFORM == NF_PLATFORM_WIN
 			mkdir(fileFolder.c_str());
+#else
+			mkdir(fileFolder.c_str(), 0);
+#endif
 
 			iniWriter = fopen(strFileName.c_str(), "w+");
 		}
