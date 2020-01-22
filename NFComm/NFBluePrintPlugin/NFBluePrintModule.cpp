@@ -1,4 +1,4 @@
-/*
+﻿/*
             This file is part of: 
                 NoahFrame
             https://github.com/ketoo/NoahGameFrame
@@ -24,120 +24,21 @@
 */
 
 #include "NFBluePrintModule.h"
+#include "BluePrintNode/NFMonitor.h"
+#include "BluePrintNode/NFVariable.h"
+#include "BluePrintNode/NFBranch.h"
+#include "BluePrintNode/NFExecuter.h"
+#include "BluePrintNode/NFModifier.h"
+#include "BluePrintNode/NFArithmetic.h"
 
-NF_SHARE_PTR<NFBluePrintNodeBase> NFVariable::FindBaseNode(const NFGUID& id)
-{
-	return this->parent;
-}
 
-NF_SHARE_PTR<NFBluePrintNodeBase> NFExecuter::FindBaseNode(const NFGUID& id)
-{
-	if (nextExecuter)
-	{
-		if (nextExecuter->id == id)
-		{
-			return nextExecuter;
-		}
-
-		auto baseNode = nextExecuter->FindBaseNode(id);
-		if (baseNode)
-		{
-			return baseNode;
-		}
-	}
-
-	for (auto it : judgements)
-	{
-		if (it->id == id)
-		{
-			return it;
-		}
-		auto baseNode = it->FindBaseNode(id);
-		if (baseNode)
-		{
-			return baseNode;
-		}
-	}
-	return nullptr;
-}
-
-NF_SHARE_PTR<NFBluePrintNodeBase> NFJudgement::FindBaseNode(const NFGUID& id)
-{
-	/*
-	for (auto it : judgements)
-	{
-		if (it->id == id)
-		{
-			return std::dynamic_pointer_cast<NFBluePrintNodeBase>(it);
-		}
-		auto baseNode = it->FindBaseNode(id);
-		if (baseNode)
-		{
-			return baseNode;
-		}
-	}
-*/
-	if (trueBlueprintNode)
-	{
-		if (trueBlueprintNode->id == id)
-		{
-			return trueBlueprintNode;
-		}
-		
-		auto baseNode = trueBlueprintNode->FindBaseNode(id);
-		if (baseNode)
-		{
-			return baseNode;
-		}
-	}
-
-	if (falseBlueprintNode)
-	{
-		if (falseBlueprintNode->id == id)
-		{
-			return falseBlueprintNode;
-		}
-		
-		auto baseNode = falseBlueprintNode->FindBaseNode(id);
-		if (baseNode)
-		{
-			return baseNode;
-		}
-	}
-
-	return nullptr;
-}
-
-NF_SHARE_PTR<NFBluePrintNodeBase> NFMonitor::FindBaseNode(const NFGUID& id)
-{
-	for (auto it : judgements)
-	{
-		if (it->id == id)
-		{
-			return it;
-		}
-		auto baseNode = it->FindBaseNode(id);
-		if (baseNode)
-		{
-			return baseNode;
-		}
-	}
-	return nullptr;
-}
-
-NF_SHARE_PTR<NFBluePrintNodeBase> NFLogicBlock::FindBaseNode(const NFGUID& id)
+NF_SHARE_PTR<NFBluePrintNodeBase> NFLogicBlock::FindNode(const NFGUID& id)
 {
 	for (auto it : monitors)
 	{
 		if (it->id == id)
 		{
 			return it;
-		}
-
-		auto baseNode = it->FindBaseNode(id);
-		if (baseNode)
-		{
-			return baseNode;
 		}
 	}
 
@@ -147,14 +48,35 @@ NF_SHARE_PTR<NFBluePrintNodeBase> NFLogicBlock::FindBaseNode(const NFGUID& id)
 		{
 			return it;
 		}
-
-		auto baseNode = it->FindBaseNode(id);
-		if (baseNode)
+	}
+	for (auto it : executers)
+	{
+		if (it->id == id)
 		{
-			return baseNode;
+			return it;
 		}
 	}
-
+	for (auto it : branches)
+	{
+		if (it->id == id)
+		{
+			return it;
+		}
+	}
+	for (auto it : modifiers)
+	{
+		if (it->id == id)
+		{
+			return it;
+		}
+	}
+	for (auto it : arithmetics)
+	{
+		if (it->id == id)
+		{
+			return it;
+		}
+	}
 	return nullptr;
 }
 ////////////////////
@@ -224,9 +146,14 @@ bool NFBluePrintModule::OnReloadPlugin()
 	return true;
 }
 
-void NFBluePrintModule::SetLogicBlockEventFunctor(std::function<void(const NFGUID&, const bool)> functor)
+void NFBluePrintModule::SetNodeModifyEventFunctor(std::function<void(const NFGUID&, const bool)> functor)
 {
-	mFunctor = functor;
+	mNodeModifyFunctor = functor;
+}
+
+void NFBluePrintModule::SetLinkModifyEventFunctor(std::function<void(const NFGUID&, const bool)> functor)
+{
+	mLinkModifyFunctor = functor;
 }
 
 NF_SHARE_PTR<NFLogicBlock> NFBluePrintModule::CreateLogicBlock(const NFGUID& logicBlockId, const std::string& name)
@@ -234,7 +161,7 @@ NF_SHARE_PTR<NFLogicBlock> NFBluePrintModule::CreateLogicBlock(const NFGUID& log
 	auto p = NF_SHARE_PTR<NFLogicBlock>(NF_NEW NFLogicBlock(pPluginManager, logicBlockId, name));
 	mLogicBlocks.push_back(p);
 
-	ModifyEvent(logicBlockId, true);
+	NodeModifyEvent(logicBlockId, true);
 
 	return p;
 }
@@ -257,7 +184,7 @@ NF_SHARE_PTR<NFLogicBlock> NFBluePrintModule::GetLogicBlock(const NFGUID& id)
 	return nullptr;
 }
 
-NF_SHARE_PTR<NFBluePrintNodeBase> NFBluePrintModule::FindBaseNode(const NFGUID& id)
+NF_SHARE_PTR<NFBluePrintNodeBase> NFBluePrintModule::FindNode(const NFGUID& id)
 {
 	for (auto it : mLogicBlocks)
 	{
@@ -266,7 +193,7 @@ NF_SHARE_PTR<NFBluePrintNodeBase> NFBluePrintModule::FindBaseNode(const NFGUID& 
 			return it;
 		}
 
-		auto baseNode = it->FindBaseNode(id);
+		auto baseNode = it->FindNode(id);
 		if (baseNode)
 		{
 			return baseNode;
@@ -276,34 +203,89 @@ NF_SHARE_PTR<NFBluePrintNodeBase> NFBluePrintModule::FindBaseNode(const NFGUID& 
 	return nullptr;
 }
 
-NF_SHARE_PTR<NFMonitor> NFBluePrintModule::AddMonitorForLogicBlock(const NFGUID& logicBlockId, const NFGUID& id, const std::string& name)
+NF_SHARE_PTR<NFIMonitor> NFBluePrintModule::AddMonitor(const NFGUID& logicBlockId, const NFMonitorType type, const NFGUID& id, const std::string& name)
 {
 	for (auto it : mLogicBlocks)
 	{
 		if (it->id == logicBlockId)
 		{
-			auto monitor = NF_SHARE_PTR<NFMonitor>(NF_NEW NFMonitor(this->pPluginManager, id, name, it));
-			it->monitors.push_front(monitor);
+			NF_SHARE_PTR<NFIMonitor> monitor;
 
-			ModifyEvent(id, true);
+			switch (type)
+			{
+			case NFMonitorType::GameEvent:
+				monitor = NF_SHARE_PTR<NFIMonitor>(NF_NEW NFGameEventMonitor(this->pPluginManager, logicBlockId, id, name));
+				break;
+			case NFMonitorType::NetworkEvent:
+				monitor = NF_SHARE_PTR<NFIMonitor>(NF_NEW NFNetworkEventMonitor(this->pPluginManager, logicBlockId, id, name));
+				break;
+			case NFMonitorType::NetworkMsgEvent:
+				monitor = NF_SHARE_PTR<NFIMonitor>(NF_NEW NFNetworkMsgEventMonitor(this->pPluginManager, logicBlockId, id, name));
+				break;
+			case NFMonitorType::ObjectEvent:
+				monitor = NF_SHARE_PTR<NFIMonitor>(NF_NEW NFObjectEventMonitor(this->pPluginManager, logicBlockId, id, name));
+				break;
+			case NFMonitorType::PropertyEvent:
+				monitor = NF_SHARE_PTR<NFIMonitor>(NF_NEW NFPropertyEventMonitor(this->pPluginManager, logicBlockId, id, name));
+				break;
+			case NFMonitorType::RecordEvent:
+				monitor = NF_SHARE_PTR<NFIMonitor>(NF_NEW NFRecordEventMonitor(this->pPluginManager, logicBlockId, id, name));
+				break;
+			case NFMonitorType::SceneEvent:
+				monitor = NF_SHARE_PTR<NFIMonitor>(NF_NEW NFSceneEventMonitor(this->pPluginManager, logicBlockId, id, name));
+				break;
+			default:
+				break;
+			}
+			
+			if (monitor)
+			{
+				it->monitors.push_back(monitor);
 
-			return monitor;
+				NodeModifyEvent(id, true);
+
+				return monitor;
+			}
 		}
 	}
 
 	return nullptr;
 }
 
-NF_SHARE_PTR<NFVariable> NFBluePrintModule::AddVariableForLogicBlock(const NFGUID& logicBlockId, const NFGUID& id, const std::string& name)
+NF_SHARE_PTR<NFIVariable> NFBluePrintModule::AddVariable(const NFGUID& logicBlockId, const NFVariableType type, const NFGUID& id, const std::string& name)
 {
-	for (auto it : mLogicBlocks)
+	auto baseNode = FindNode(logicBlockId);
+	if (baseNode && baseNode->blueprintType == NFBlueprintType::LOGICBLOCK)
 	{
-		if (it->id == logicBlockId)
-		{
-			auto variable = NF_SHARE_PTR<NFVariable>(NF_NEW NFVariable(this->pPluginManager, id, name, it));
-			it->variables.push_front(variable);
+		NF_SHARE_PTR<NFLogicBlock> logicBlock = std::dynamic_pointer_cast<NFLogicBlock>(baseNode);
 
-			ModifyEvent(id, true);
+		NF_SHARE_PTR<NFIVariable> variable;
+		switch (type)
+		{
+		case NFVariableType::Input:
+			variable = NF_SHARE_PTR<NFIVariable>(NF_NEW NFInputVariable(this->pPluginManager, logicBlockId, id, name));
+			break;
+		case NFVariableType::ElementSystem:
+			variable = NF_SHARE_PTR<NFIVariable>(NF_NEW NFElementVariable(this->pPluginManager, logicBlockId, id, name));
+			break;
+		case NFVariableType::PropertySystem:
+			variable = NF_SHARE_PTR<NFIVariable>(NF_NEW NFPropertyVariable(this->pPluginManager, logicBlockId, id, name));
+			break;
+		case NFVariableType::PropertyList:
+			variable = NF_SHARE_PTR<NFIVariable>(NF_NEW NFPropertyListVariable(this->pPluginManager, logicBlockId, id, name));
+			break;
+		case NFVariableType::RecordSystem:
+			variable = NF_SHARE_PTR<NFIVariable>(NF_NEW NFRecordVariable(this->pPluginManager, logicBlockId, id, name));
+			break;
+		default:
+			break;
+		}
+
+		if (variable)
+		{
+			logicBlock->variables.push_front(variable);
+
+			NodeModifyEvent(id, true);
 
 			return variable;
 		}
@@ -312,131 +294,334 @@ NF_SHARE_PTR<NFVariable> NFBluePrintModule::AddVariableForLogicBlock(const NFGUI
 	return nullptr;
 }
 
-NF_SHARE_PTR<NFJudgement> NFBluePrintModule::AddJudgementForMonitor(const NFGUID& monitorId, const NFGUID& id, const std::string& name)
+NF_SHARE_PTR<NFIBranch> NFBluePrintModule::AddBranch(const NFGUID& logicBlockId, NFBranchType type, const NFGUID& id, const std::string& name)
 {
-	auto baseNode = FindBaseNode(monitorId);
-	if (baseNode && baseNode->blueprintType == NFBlueprintType::MONITOR)
+	auto baseNode = FindNode(logicBlockId);
+	if (baseNode && baseNode->blueprintType == NFBlueprintType::LOGICBLOCK)
 	{
-		NF_SHARE_PTR<NFMonitor> monitor = std::dynamic_pointer_cast<NFMonitor>(baseNode);
+		NF_SHARE_PTR<NFLogicBlock> logicBlock = std::dynamic_pointer_cast<NFLogicBlock>(baseNode);
+		NF_SHARE_PTR<NFIBranch> branch;
+		switch (type)
+		{
+		case NFBranchType::IntBranch:
+			branch = NF_SHARE_PTR<NFIBranch>(NF_NEW NFIntBranch(this->pPluginManager, logicBlockId, id, name));
+			break;
+		case NFBranchType::StringBranch:
+			branch = NF_SHARE_PTR<NFIBranch>(NF_NEW NFStringBranch(this->pPluginManager, logicBlockId, id, name));
+			break;
+		case NFBranchType::FloatBranch:
+			branch = NF_SHARE_PTR<NFIBranch>(NF_NEW NFFloatgBranch(this->pPluginManager, logicBlockId, id, name));
+			break;
+		case NFBranchType::ObjectBranch:
+			branch = NF_SHARE_PTR<NFIBranch>(NF_NEW NFObjectBranch(this->pPluginManager, logicBlockId, id, name));
+			break;
+		case NFBranchType::Vector2Branch:
+			branch = NF_SHARE_PTR<NFIBranch>(NF_NEW NFVector2Branch(this->pPluginManager, logicBlockId, id, name));
+			break;
+		case NFBranchType::Vector3Branch:
+			branch = NF_SHARE_PTR<NFIBranch>(NF_NEW NFVector3Branch(this->pPluginManager, logicBlockId, id, name));
+			break;
+		default:
+			break;
+		}
 
-		auto newNode = NF_SHARE_PTR<NFJudgement>(NF_NEW NFJudgement(this->pPluginManager, id, name, baseNode));
-		monitor->judgements.push_back(newNode);
+		logicBlock->branches.push_back(branch);
 
-		ModifyEvent(id, true);
+		NodeModifyEvent(id, true);
 
-		return newNode;
+		return branch;
 	}
 
 	return nullptr;
 }
 
-NF_SHARE_PTR<NFJudgement> NFBluePrintModule::AddTrueJudgementForJudgement(const NFGUID& judgementId, const NFGUID& id, const std::string& name)
-{
-	auto baseNode = FindBaseNode(judgementId);
-	if (baseNode && baseNode->blueprintType == NFBlueprintType::JUDGEMENT)
-	{
-		NF_SHARE_PTR<NFJudgement> judgement = std::dynamic_pointer_cast<NFJudgement>(baseNode);
-		
-		auto newNode = NF_SHARE_PTR<NFJudgement>(NF_NEW NFJudgement(this->pPluginManager, id, name, baseNode));
-		judgement->trueBlueprintNode = newNode;
-
-		ModifyEvent(id, true);
-
-		return newNode;
-	}
-
-	return nullptr;
-}
-
-NF_SHARE_PTR<NFJudgement> NFBluePrintModule::AddFalseJudgementForJudgement(const NFGUID& judgementId, const NFGUID& id, const std::string& name)
-{
-	auto baseNode = FindBaseNode(judgementId);
-	if (baseNode && baseNode->blueprintType == NFBlueprintType::JUDGEMENT)
-	{
-		NF_SHARE_PTR<NFJudgement> judgement = std::dynamic_pointer_cast<NFJudgement>(baseNode);
-		
-		auto newNode = NF_SHARE_PTR<NFJudgement>(NF_NEW NFJudgement(this->pPluginManager, id, name, baseNode));
-		judgement->falseBlueprintNode = newNode;
-
-		ModifyEvent(id, true);
-
-		return newNode;
-	}
-
-	return nullptr;
-}
-
-NF_SHARE_PTR<NFJudgement> NFBluePrintModule::AddJudgementForExecuter(const NFGUID& executerId, const NFGUID& id, const std::string& name)
-{
-	auto baseNode = FindBaseNode(executerId);
-	if (baseNode && baseNode->blueprintType == NFBlueprintType::EXECUTER)
-	{
-		NF_SHARE_PTR<NFExecuter> executer = std::dynamic_pointer_cast<NFExecuter>(baseNode);
-		
-		auto newNode = NF_SHARE_PTR<NFJudgement>(NF_NEW NFJudgement(this->pPluginManager, id, name, baseNode));
-		executer->judgements.push_back(newNode);
-
-		ModifyEvent(id, true);
-
-		return newNode;
-	}
-
-	return nullptr;
-}
-
-
-NF_SHARE_PTR<NFExecuter> NFBluePrintModule::AddTrueExecuterForJudgement(const NFGUID& judgementId, const NFGUID& id, const std::string& name)
+NF_SHARE_PTR<NFIExecuter> NFBluePrintModule::AddExecuter(const NFGUID& logicBlockId, const NFExecuterType type, const NFGUID& id, const std::string& name)
 {	
-	auto baseNode = FindBaseNode(judgementId);
-	if (baseNode && baseNode->blueprintType == NFBlueprintType::JUDGEMENT)
+	auto baseNode = FindNode(logicBlockId);
+	if (baseNode && baseNode->blueprintType == NFBlueprintType::LOGICBLOCK)
 	{
-		NF_SHARE_PTR<NFJudgement> judgement = std::dynamic_pointer_cast<NFJudgement>(baseNode);
-		
-		auto newNode = NF_SHARE_PTR<NFExecuter>(NF_NEW NFExecuter(this->pPluginManager, id, name, baseNode));
-		judgement->trueBlueprintNode = newNode;
+		NF_SHARE_PTR<NFLogicBlock> logicBlock = std::dynamic_pointer_cast<NFLogicBlock>(baseNode);
+		NF_SHARE_PTR<NFIExecuter> executer;
+		switch (type)
+		{
+		case NFExecuterType::CreateObject:
+			executer = NF_SHARE_PTR<NFIExecuter>(NF_NEW NFCreateObjectExecuter(this->pPluginManager, logicBlockId, id, name));
+			break;
+		case NFExecuterType::DestroyObject:
+			executer = NF_SHARE_PTR<NFIExecuter>(NF_NEW NFDestroyObjectExecuter(this->pPluginManager, logicBlockId, id, name));
+			break;
+		case NFExecuterType::MoveObject:
+			executer = NF_SHARE_PTR<NFIExecuter>(NF_NEW NFMoveObjectExecuter(this->pPluginManager, logicBlockId, id, name));
+			break;
+		case NFExecuterType::EnterScene:
+			executer = NF_SHARE_PTR<NFIExecuter>(NF_NEW NFEnterSceneExecuter(this->pPluginManager, logicBlockId, id, name));
+			break;
+		case NFExecuterType::AddHeartBeat:
+			executer = NF_SHARE_PTR<NFIExecuter>(NF_NEW NFAddHeartBeatExecuter(this->pPluginManager, logicBlockId, id, name));
+			break;
+		case NFExecuterType::AttackObject:
+			executer = NF_SHARE_PTR<NFIExecuter>(NF_NEW NFAttackObjectExecuter(this->pPluginManager, logicBlockId, id, name));
+			break;
+		case NFExecuterType::UseSkill:
+			executer = NF_SHARE_PTR<NFIExecuter>(NF_NEW NFUseSkillExecuter(this->pPluginManager, logicBlockId, id, name));
+			break;
+		case NFExecuterType::UseItem:
+			executer = NF_SHARE_PTR<NFIExecuter>(NF_NEW NFUseItemExecuter(this->pPluginManager, logicBlockId, id, name));
+			break;
+		default:
+			break;
+		}
 
-		ModifyEvent(id, true);
+		if (executer)
+		{
+			logicBlock->executers.push_back(executer);
 
-		return newNode;
+			NodeModifyEvent(id, true);
+
+			return executer;
+		}
 	}
 
 	return nullptr;
 }
 
-NF_SHARE_PTR<NFExecuter> NFBluePrintModule::AddFalseExecuterForJudgement(const NFGUID& judgementId, const NFGUID& id, const std::string& name)
-{	
-	auto baseNode = FindBaseNode(judgementId);
-	if (baseNode && baseNode->blueprintType == NFBlueprintType::JUDGEMENT)
+NF_SHARE_PTR<NFIModifier> NFBluePrintModule::AddModifier(const NFGUID& logicBlockId, const NFModifierType type, const NFGUID& id, const std::string& name)
+{
+	auto baseNode = FindNode(logicBlockId);
+	if (baseNode && baseNode->blueprintType == NFBlueprintType::LOGICBLOCK)
 	{
-		NF_SHARE_PTR<NFJudgement> judgement = std::dynamic_pointer_cast<NFJudgement>(baseNode);
-		
-		auto newNode = NF_SHARE_PTR<NFExecuter>(NF_NEW NFExecuter(this->pPluginManager, id, name, baseNode));
-		judgement->falseBlueprintNode = newNode;
+		NF_SHARE_PTR<NFLogicBlock> logicBlock = std::dynamic_pointer_cast<NFLogicBlock>(baseNode);
 
-		ModifyEvent(id, true);
+		NF_SHARE_PTR<NFIModifier> modifier;
+		switch (type)
+		{
+		case NFModifierType::SetProperty:
+			modifier = NF_SHARE_PTR<NFIModifier>(NF_NEW NFPropertyModifier(this->pPluginManager, logicBlockId, id, name));
+			break;
+		case NFModifierType::SetRecord:
+			modifier = NF_SHARE_PTR<NFIModifier>(NF_NEW NFRecordModifier(this->pPluginManager, logicBlockId, id, name));
+			break;
+		case NFModifierType::AddRecordRow:
+			//modifier = NF_SHARE_PTR<NFIModifier>(NF_NEW NFPropertyVariable(this->pPluginManager, logicBlockId, id, name, it));
+			break;
+		case NFModifierType::RemRecordRow:
+			//modifier = NF_SHARE_PTR<NFIModifier>(NF_NEW NFRecordVariable(this->pPluginManager, logicBlockId, id, name, it));
+			break;
+		default:
+			break;
+		}
 
-		return newNode;
+		if (modifier)
+		{
+			logicBlock->modifiers.push_back(modifier);
+			NodeModifyEvent(id, true);
+
+			return modifier;
+
+		}
 	}
 
 	return nullptr;
 }
 
-NF_SHARE_PTR<NFExecuter> NFBluePrintModule::AddExecuterForExecuter(const NFGUID& executerId, const NFGUID& id, const std::string& name)
-{	
-	auto baseNode = FindBaseNode(executerId);
-	if (baseNode && baseNode->blueprintType == NFBlueprintType::EXECUTER)
+NF_SHARE_PTR<NFIArithmetic> NFBluePrintModule::AddArithmetic(const NFGUID& logicBlockId, const NFArithmeticType type, const NFGUID& id, const std::string& name)
+{
+	auto baseNode = FindNode(logicBlockId);
+	if (baseNode && baseNode->blueprintType == NFBlueprintType::LOGICBLOCK)
 	{
-		NF_SHARE_PTR<NFExecuter> judgement = std::dynamic_pointer_cast<NFExecuter>(baseNode);
-		
-		auto newNode = NF_SHARE_PTR<NFExecuter>(NF_NEW NFExecuter(this->pPluginManager, id, name, baseNode));
-		judgement->nextExecuter = newNode;
+		NF_SHARE_PTR<NFLogicBlock> logicBlock = std::dynamic_pointer_cast<NFLogicBlock>(baseNode);
 
-		ModifyEvent(id, true);
+		NF_SHARE_PTR<NFIArithmetic> arithmetic;
+		switch (type)
+		{
+		case NFArithmeticType::Add:
+			arithmetic = NF_SHARE_PTR<NFIArithmetic>(NF_NEW NFArithmetic(this->pPluginManager, logicBlockId, id, name));
+			break;
+		case NFArithmeticType::Sub:
+			arithmetic = NF_SHARE_PTR<NFIArithmetic>(NF_NEW NFArithmetic(this->pPluginManager, logicBlockId, id, name));
+			break;
+		default:
+			break;
+		}
 
-		return newNode;
+		if (arithmetic)
+		{
+			logicBlock->arithmetics.push_back(arithmetic);
+			NodeModifyEvent(id, true);
+
+			return arithmetic;
+
+		}
 	}
 
 	return nullptr;
+}
+
+void NFBluePrintModule::AddLink(const NFGUID& logicBlockId, const NFGUID& id, const NFGUID& startNode, const NFGUID& endNode, const NFGUID& startPin, const NFGUID& endPin)
+{
+	auto block = GetLogicBlock(logicBlockId);
+	if (block)
+	{
+		if (GetLink(logicBlockId, startNode, endNode, startPin, endPin))
+		{
+			return;
+		}
+
+		auto start = FindNode(startNode);
+		auto end = FindNode(endNode);
+		if (start && end)
+		{
+			auto starNodePin = start->GetOutputArg(startPin);
+			auto endNodePin = end->GetInputArg(endPin);
+			if (starNodePin && endNodePin)
+			{
+				auto link = NF_SHARE_PTR<NFDataLink>(NF_NEW NFDataLink(id, startNode, endNode, startPin, endPin));
+				block->dataLinks.push_back(link);
+				starNodePin->SetLinkID(link->selfID);
+				endNodePin->SetLinkID(link->selfID);
+
+				LinkModifyEvent(id, true);
+			}
+		}
+	}
+}
+
+NF_SHARE_PTR<NFDataLink> NFBluePrintModule::GetLink(const NFGUID& logicBlockId, const NFGUID& startNode, const NFGUID& endNode, const NFGUID& startPin, const NFGUID& endPin)
+{
+	auto block = GetLogicBlock(logicBlockId);
+	if (block)
+	{
+		for (auto it = block->dataLinks.begin(); it != block->dataLinks.end(); ++it)
+		{
+			if ((*it)->startNode == startNode
+				&& (*it)->endNode == endNode
+				&& (*it)->startAttr == startPin
+				&& (*it)->endAttr == endPin)
+			{
+				return *it;
+			}
+		}
+	}
+
+	return nullptr;
+}
+
+NF_SHARE_PTR<NFDataLink> NFBluePrintModule::GetLink(const NFGUID& logicBlockId, const NFGUID& id)
+{
+	auto block = GetLogicBlock(logicBlockId);
+	if (block)
+	{
+		for (auto it = block->dataLinks.begin(); it != block->dataLinks.end(); ++it)
+		{
+			if ((*it)->selfID == id)
+			{
+				return *it;
+			}
+		}
+	}
+
+	return nullptr;
+}
+
+NF_SHARE_PTR<NFDataLink> NFBluePrintModule::GetLink(const NFGUID& id)
+{
+	for (auto it : mLogicBlocks)
+	{
+		auto logicBlock = it;
+		for (auto link : logicBlock->dataLinks)
+		{
+			if (link->selfID == id)
+			{
+				return link;
+			}
+		}
+	}
+
+	return nullptr;
+}
+
+bool NFBluePrintModule::DeleteLink(const NFGUID& logicBlockId, const NFGUID& startNode, const NFGUID& endNode, const NFGUID& startPin, const NFGUID& endPin)
+{
+	auto block = GetLogicBlock(logicBlockId);
+	if (block)
+	{
+		for (auto it = block->dataLinks.begin(); it != block->dataLinks.end(); ++it)
+		{
+			if ((*it)->startNode == startNode
+				&& (*it)->endNode == endNode
+				&& (*it)->startAttr == startPin
+				&& (*it)->endAttr == endPin)
+			{
+
+				LinkModifyEvent((*it)->selfID, false);
+
+				block->dataLinks.erase(it);
+				return true;
+			}
+		}
+	}
+
+	return false;
+}
+
+bool NFBluePrintModule::DeleteLink(const NFGUID& logicBlockId, const NFGUID& id)
+{
+	auto block = GetLogicBlock(logicBlockId);
+	if (block)
+	{
+		for (auto it = block->dataLinks.begin(); it != block->dataLinks.end(); ++it)
+		{
+			if ((*it)->selfID == id)
+			{
+				LinkModifyEvent((*it)->selfID, false);
+
+				block->dataLinks.erase(it);
+				return true;
+			}
+		}
+	}
+
+	return false;
+}
+
+
+bool NFBluePrintModule::DeleteLink(const NFGUID& id)
+{
+	for (auto block : mLogicBlocks)
+	{
+		for (auto it = block->dataLinks.begin(); it != block->dataLinks.end(); ++it)
+		{
+			auto link = (*it);
+			if (link->selfID == id)
+			{
+				LinkModifyEvent(link->selfID, false);
+
+				auto startNode = FindNode(link->startNode);
+				auto endNode = FindNode(link->endNode);
+
+				auto outputData = startNode->GetOutputArg(link->startAttr);
+				auto inputData = endNode->GetInputArg(link->endAttr);
+				outputData->SetLinkID(NFGUID());
+				inputData->SetLinkID(NFGUID());
+
+				block->dataLinks.erase(it);
+				return true;
+			}
+		}
+	}
+
+	return false;
+}
+
+std::list<NF_SHARE_PTR<NFDataLink>> NFBluePrintModule::GetLinks(const NFGUID& logicBlockId)
+{
+	auto block = GetLogicBlock(logicBlockId);
+	if (block)
+	{
+		return block->dataLinks;
+	}
+
+	return std::list<NF_SHARE_PTR<NFDataLink>>();
 }
 
 bool NFBluePrintModule::DeleteMonitor(const NFGUID& id)
@@ -454,45 +639,18 @@ bool NFBluePrintModule::DeleteExecuter(const NFGUID& id)
 	return false;
 }
 
-void NFBluePrintModule::ModifyEvent(const NFGUID& id, const bool create)
+void NFBluePrintModule::NodeModifyEvent(const NFGUID& id, const bool create)
 {
-	if (mFunctor)
+	if (mNodeModifyFunctor)
 	{
-		mFunctor(id, create);
+		mNodeModifyFunctor(id, create);
 	}
 }
 
-/*
-NF_SHARE_PTR<NFMonitor> AddMonitor(NFMonitorType operatorType, const NFGUID& id, const std::string& name, const NFDataList& arg)
+void NFBluePrintModule::LinkModifyEvent(const NFGUID& id, const bool create)
 {
-	NF_SHARE_PTR<NFMonitor> monitor = nullptr;
-
-	//different parameters if you have different monitor type
-	//you will know what is the monitor type if you picked the operatorType
-	switch (operatorType)
+	if (mLinkModifyFunctor)
 	{
-	case NFMonitorType::NONE:
-		break;
-	case NFMonitorType::PropertyEvent:
-	{
-		//arg: property_name
-		if (arg.GetCount() == 1)
-		{
-			monitor = NF_SHARE_PTR<NFMonitor>(NF_NEW NFMonitor(this->pPluginManager, id, name));
-			monitor->operatorType = operatorType;
-		}
+		mLinkModifyFunctor(id, create);
 	}
-	break;
-
-	default:
-		break;
-	}
-
-	if (monitor)
-	{
-		monitors.push_back(monitor);
-	}
-
-	return monitor;
 }
-*/

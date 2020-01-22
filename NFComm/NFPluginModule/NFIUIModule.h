@@ -68,8 +68,6 @@ public:
 		pPluginManager = p;
 		this->name = name;
 
-		index = 100000000 * viewType;
-
 		m_pUIModule = pPluginManager->FindModule<NFIUIModule>();
 	}
 
@@ -88,11 +86,24 @@ public:
 
 	}
 
-	int GenerateId()
+	int GenerateNodeId()
 	{
+		static int index = 0;
 		return index++;
 	}
 
+	int GeneratePinId()
+	{
+		static int index = 0;
+		return index++;
+	}
+
+	int GenerateLinkId()
+	{
+		static int index = 0;
+		return index++;
+
+	}
 	NFIUIModule* m_pUIModule;
 	NFIView* m_pOccupyView = nullptr;;
 
@@ -101,7 +112,6 @@ public:
 	std::string name;
 
 protected:
-	int index = 0;
 };
 
 #endif

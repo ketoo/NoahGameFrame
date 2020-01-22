@@ -52,21 +52,6 @@ bool NFPropertyConfigModule::AfterInit()
     return true;
 }
 
-NFINT64 NFPropertyConfigModule::CalculateBaseValue(const int nJob, const int nLevel, const std::string& strProperty)
-{
-	auto it = mhtCoefficienData.find(nJob);
-	if (it != mhtCoefficienData.end())
-	{
-		auto refPropertyIDName = it->second.find(nLevel);
-		if (refPropertyIDName != it->second.end())
-		{
-			return m_pElementModule->GetPropertyInt(refPropertyIDName->second, strProperty);
-		}
-    }
-
-    return 0;
-}
-
 const std::string& NFPropertyConfigModule::GetInitPropertyID(const int nJob,  const int nLevel)
 {
 	auto it = mhtCoefficienData.find(nJob);

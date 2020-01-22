@@ -23,44 +23,39 @@
    limitations under the License.
 */
 
-#ifndef NF_BLUE_PRINT_LOADER_MODULE_H
-#define NF_BLUE_PRINT_LOADER_MODULE_H
+#ifndef NF_BLUE_PRINT_VIRTUAL_MACHINE_H
+#define NF_BLUE_PRINT_VIRTUAL_MACHINE_H
 
 #include "NFComm/NFPluginModule/NFILogModule.h"
 #include "NFComm/NFPluginModule/NFIKernelModule.h"
 #include "NFComm/NFPluginModule/NFIClassModule.h"
 #include "NFComm/NFPluginModule/NFIBluePrintModule.h"
 
-class NFIBluePrintLoaderModule
-	: public NFIModule
-{
-public:
-};
 
-class NFBluePrintLoaderModule
-    : public NFIBluePrintLoaderModule
+class NFBPVirtualMachine
 {
 public:
-    NFBluePrintLoaderModule( NFIPluginManager* p )
+    NFBPVirtualMachine(NFIPluginManager* p, NF_SHARE_PTR<NFLogicBlock> logicBlock)
     {
-        pPluginManager = p;
+        m_pBluePrintModule = p->FindModule<NFIBluePrintModule>();
+
+        mLogicBlock = logicBlock;
+
+        mLogicBlock->running = true;
     }
 
-    virtual ~NFBluePrintLoaderModule() {};
-
-    virtual bool Awake();
-    virtual bool Init();
-    virtual bool AfterInit();
-    virtual bool CheckConfig();
-    virtual bool ReadyExecute();
-    virtual bool Execute();
-    virtual bool BeforeShut();
-    virtual bool Shut();
-    virtual bool Finalize();
-    virtual bool OnReloadPlugin();
-
+    virtual ~NFBPVirtualMachine() 
+    {
+        mLogicBlock->running = false;
+    };
 
 private:
+    //first of all, find all monitors
+    void StartMonitor(NF_SHARE_PTR<NFIMonitor> monitor);
+
+private:
+    NFIBluePrintModule* m_pBluePrintModule;
+    NF_SHARE_PTR<NFLogicBlock> mLogicBlock;
 };
 
 

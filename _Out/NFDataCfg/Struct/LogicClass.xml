@@ -1,7 +1,6 @@
 <?xml version='1.0' encoding='utf-8' ?>
 <XML>
 	<Class Id="IObject"	Path="NFDataCfg/Struct/IObject.xml"	InstancePath="NFDataCfg/Ini/IObject.xml"	>
-		<Class Id="DescData"	Path="NFDataCfg/Struct/DescData.xml"	InstancePath="NFDataCfg/Ini/DescData.xml"	/>
 		<Class Id="EffectData"	Path="NFDataCfg/Struct/EffectData.xml"	InstancePath="NFDataCfg/Ini/EffectData.xml"	/>
 		<Class Id="GM"	Path="NFDataCfg/Struct/GM.xml"	InstancePath="NFDataCfg/Ini/GM.xml"	/>
 		<Class Id="Group"	Path="NFDataCfg/Struct/Group.xml"	InstancePath="NFDataCfg/Ini/Group.xml"	/>
@@ -14,6 +13,5 @@
 		<Class Id="Security"	Path="NFDataCfg/Struct/Security.xml"	InstancePath="NFDataCfg/Ini/Security.xml"	/>
 		<Class Id="Server"	Path="NFDataCfg/Struct/Server.xml"	InstancePath="NFDataCfg/Ini/Server.xml"	/>
 		<Class Id="Skill"	Path="NFDataCfg/Struct/Skill.xml"	InstancePath="NFDataCfg/Ini/Skill.xml"	/>
-		<Class Id="SqlServer"	Path="NFDataCfg/Struct/SqlServer.xml"	InstancePath="NFDataCfg/Ini/SqlServer.xml"	/>
 	</Class>
 </XML>

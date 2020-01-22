@@ -84,11 +84,15 @@ bool NFConsoleView::Execute()
  
             if (render)
             {
+                ImGui::PushStyleColor(ImGuiCol_Text, ImVec4(1.0f, 1.0f, 1.0f, 0.5f));
+
                if (ImGui::Selectable(item_name.data.c_str(), selected == i))
                {
                   selected = i;
                   // handle selection
                }
+
+               ImGui::PopStyleColor();
             }
          }
          else if (item_name.level == NFILogModule::NLL_INFO_NORMAL && logInfo)
@@ -105,11 +109,13 @@ bool NFConsoleView::Execute()
  
             if (render)
             {
+                ImGui::PushStyleColor(ImGuiCol_Text, ImVec4(1.0f, 1.0f, 1.0f, 1.0f));
                if (ImGui::Selectable(item_name.data.c_str(), selected == i))
                {
                   selected = i;
                   // handle selection
                }
+               ImGui::PopStyleColor();
             }
          }
          else if (item_name.level == NFILogModule::NLL_WARING_NORMAL && logWaring)
@@ -126,11 +132,13 @@ bool NFConsoleView::Execute()
  
             if (render)
             {
+                ImGui::PushStyleColor(ImGuiCol_Text, ImVec4(1.0f, 1.0f, 0.0f, 1.0f));
                if (ImGui::Selectable(item_name.data.c_str(), selected == i))
                {
                   selected = i;
                   // handle selection
                }
+               ImGui::PopStyleColor();
             }
          }
          else if (item_name.level == NFILogModule::NLL_ERROR_NORMAL && logError)
@@ -147,11 +155,13 @@ bool NFConsoleView::Execute()
  
             if (render)
             {
+                ImGui::PushStyleColor(ImGuiCol_Text, ImVec4(1.0f, 0.0f, 0.0f, 1.0f));
                if (ImGui::Selectable(item_name.data.c_str(), selected == i))
                {
                   selected = i;
                   // handle selection
                }
+               ImGui::PopStyleColor();
             }
          }
          else if (item_name.level == NFILogModule::NLL_FATAL_NORMAL && logFatal)
@@ -168,11 +178,14 @@ bool NFConsoleView::Execute()
  
             if (render)
             {
+                ImGui::PushStyleColor(ImGuiCol_Text, ImVec4(1.0f, 0.0f, 0.0f, 1.0f));
+                //ImGui::PushStyleColor(ImGuiCol_WindowBg, ImVec4(1.0f, 0.0f, 0.0f, 1.0f));
                if (ImGui::Selectable(item_name.data.c_str(), selected == i))
                {
                   selected = i;
                   // handle selection
                }
+               ImGui::PopStyleColor();
             }
          }
          //ImGui::Text("%s", mLogData[n].c_str());

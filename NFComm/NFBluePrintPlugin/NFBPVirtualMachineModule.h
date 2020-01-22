@@ -23,48 +23,33 @@
    limitations under the License.
 */
 
-#ifndef NF_UI_MODULE_H
-#define NF_UI_MODULE_H
+#ifndef NF_BLUE_PRINT_VIRTUAL_MACHINE_MODULE_H
+#define NF_BLUE_PRINT_VIRTUAL_MACHINE_MODULE_H
 
 #include "NFComm/NFPluginModule/NFILogModule.h"
 #include "NFComm/NFPluginModule/NFIKernelModule.h"
 #include "NFComm/NFPluginModule/NFIClassModule.h"
-#include "NFComm/NFPluginModule/NFIUIModule.h"
+#include "NFComm/NFPluginModule/NFIBluePrintModule.h"
 
-#define IMGUI_IMPL_OPENGL_LOADER_GL3W
-#include "imgui/imgui.h"
-#include "imgui/imgui_impl_sdl.h"
-#include "imgui/imgui_impl_opengl3.h"
-#include <stdio.h>
-#include <SDL.h>
+#include "BluePrintVM/NFBPVirtualMachine.h"
 
-#if defined(IMGUI_IMPL_OPENGL_LOADER_GL3W)
-#include <GL/gl3w.h>    // Initialize with gl3wInit()
-#elif defined(IMGUI_IMPL_OPENGL_LOADER_GLEW)
-#include <GL/glew.h>    // Initialize with glewInit()
-#elif defined(IMGUI_IMPL_OPENGL_LOADER_GLAD)
-#include <glad/glad.h>  // Initialize with gladLoadGL()
-#else
-#include IMGUI_IMPL_OPENGL_LOADER_CUSTOM
-#endif
-
-#ifdef NODE_EXT
-#include "imgui/NodeEditor/Include/imgui_node_editor.h"
-namespace ed = ax::NodeEditor;
-#else
-#include "imgui/imnodes.h"
-#endif
-
-class NFUIModule
-    : public NFIUIModule
+class NFIBPVirtualMachineModule
+	: public NFIModule
 {
 public:
-    NFUIModule( NFIPluginManager* p )
+
+};
+
+class NFBPVirtualMachineModule
+    : public NFIBPVirtualMachineModule
+{
+public:
+    NFBPVirtualMachineModule( NFIPluginManager* p )
     {
         pPluginManager = p;
     }
 
-    virtual ~NFUIModule() {};
+    virtual ~NFBPVirtualMachineModule() {};
 
     virtual bool Awake();
     virtual bool Init();
@@ -77,33 +62,17 @@ public:
     virtual bool Finalize();
     virtual bool OnReloadPlugin();
 
-	virtual NF_SHARE_PTR<NFIView> GetView(NFViewType viewType);
 
-	virtual const std::vector<NF_SHARE_PTR<NFIView>>& GetViews();
-
-
- 
-
-protected:
-	int SetupGUI();
-	void SetupColour(ImGuiIO& io);
-	void CloseGUI();
-
-	void ExecuteBegin(NF_SHARE_PTR<NFIView> view);
-	void ExecuteEnd(NF_SHARE_PTR<NFIView> view);
-private:
-
-	// Our state
-	//bool show_demo_window = true;
-	//bool show_another_window = false;
-	ImVec4 clear_color = ImVec4(0.45f, 0.55f, 0.60f, 1.00f);
-	SDL_Window* window;
-	bool done = false;
-	bool running = false;
-	SDL_GLContext gl_context;
+    void RunLogicBlock(const NFGUID& logicBlockID);
+    void StopLogicBlock(const NFGUID& logicBlockID);
+    bool CheckLogicBlockRefCircle(const NFGUID& logicBlockID);
 
 private:
-    std::vector<NF_SHARE_PTR<NFIView>> mViewList;
+    NFMapEx<NFGUID, NFBPVirtualMachine> mVirtualMachine;
+
+private:
+    NFIBluePrintModule* m_pBluePrintModule;
 };
+
 
 #endif

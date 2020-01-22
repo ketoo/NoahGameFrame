@@ -55,8 +55,6 @@ public:
 
     virtual const std::string& GetInitPropertyID(const int nJob,  const int nLevel);
 
-    virtual NFINT64 CalculateBaseValue(const int nJob, const int nLevel, const std::string& strProperty);
-
 protected:
     void Load();
 

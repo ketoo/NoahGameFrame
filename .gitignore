@@ -44,6 +44,11 @@
 # CMake
 #[cC][mM]ake[lL]ists.txt
 
+
+/BuildScript/linux/Build.Linux.Debug
+/BuildScript/linux/Build.Linux.Release
+/BuildScript/linux/Build.Tools
+
 /_Out/Comm/*
 /_Out/redis*
 /_Out/Debug/

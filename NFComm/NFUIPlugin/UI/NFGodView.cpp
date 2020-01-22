@@ -143,15 +143,6 @@ bool NFGodView::Execute()
       {
          //occupy inspectorview
       }
-
-	  ImGui::SameLine();
-	  std::string panning = "Panning(" + std::to_string((int)m_pNodeView->GetOffest().X()) + "," + std::to_string((int)m_pNodeView->GetOffest().Y()) + ")";
-	  ImGui::Button(panning.c_str());
-
-	  ImGui::SameLine();
-
-	  std::string origin = "origin(" + std::to_string((int)m_pNodeView->GetGridOringin().X()) + "," + std::to_string((int)m_pNodeView->GetGridOringin().Y()) + ")";
-	  ImGui::Button(origin.c_str());
    }
 
    ImGui::SameLine();
@@ -299,10 +290,8 @@ void NFGodView::RenderSceneObjectNode(const int sceneID, const int groupID)
          const NFVector3& pos = m_pKernelModule->GetPropertyVector3(guid, NFrame::IObject::Position());
 		 std::string barTile = className + "(" + std::to_string((int)pos.X()) + "," + std::to_string((int)pos.Z()) + ")";
          
-		 pView->AddNode(guid, barTile, ToNodeSpacePos(NFVector2(pos.X(), pos.Z())));
-		 pView->SetNodeDragable(guid, false);
-         //pView->AddNodeAttrIn(guid, m_pKernelModule->CreateGUID(), NFrame::IObject::Name(), strName);
-         //pView->AddNodeAttrIn(guid, m_pKernelModule->CreateGUID(), NFrame::IObject::Position(), pos.ToString());
+		 pView->AddNode(guid, barTile, NFPinColor::WHITE, ToNodeSpacePos(NFVector2(pos.X(), pos.Z())));
+		 pView->SetNodeDraggable(guid, false);
       }
    }
 }

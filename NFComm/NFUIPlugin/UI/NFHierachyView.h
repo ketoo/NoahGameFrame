@@ -47,21 +47,24 @@ private:
 
    void BluePrintViewSubRenderForLogicBlock();
    void BluePrintViewSubRenderForMonitor();
-   void BluePrintViewSubRenderForJudgement();
+   void BluePrintViewSubRenderForBranch();
    void BluePrintViewSubRenderForExecuter();
    void BluePrintViewSubRenderForVariable();
+   void BluePrintViewSubRenderForModifier();
+   void BluePrintViewSubRenderForLogger();
+   void BluePrintViewSubRenderForArithmetic();
 
-   void BluePrintViewSubRenderForMonitorHead(NF_SHARE_PTR<NFMonitor> monitor);
-   void BluePrintViewSubRenderForMonitorBody(NF_SHARE_PTR<NFMonitor> monitor);
-   void BluePrintViewSubRenderForMonitorBot(NF_SHARE_PTR<NFMonitor> monitor);
+   void BluePrintViewSubRenderForMonitorHead(NF_SHARE_PTR<NFIMonitor> monitor);
+   void BluePrintViewSubRenderForMonitorBody(NF_SHARE_PTR<NFIMonitor> monitor);
+   void BluePrintViewSubRenderForMonitorBot(NF_SHARE_PTR<NFIMonitor> monitor);
 
-   void BluePrintViewSubRenderForJudgementHead(NF_SHARE_PTR<NFJudgement> judgement);
-   void BluePrintViewSubRenderForJudgementBody(NF_SHARE_PTR<NFJudgement> judgement);
-   void BluePrintViewSubRenderForJudgementBot(NF_SHARE_PTR<NFJudgement> judgement);
+   void BluePrintViewSubRenderForBranchHead(NF_SHARE_PTR<NFIBranch> branch);
+   void BluePrintViewSubRenderForBranchBody(NF_SHARE_PTR<NFIBranch> branch);
+   void BluePrintViewSubRenderForBranchBot(NF_SHARE_PTR<NFIBranch> branch);
 
-   void InitBluePrintMonitorArgs(NF_SHARE_PTR<NFMonitor> monitor);
-   void InitBluePrintJudgementArgs(NF_SHARE_PTR<NFJudgement> judgement);
-   void InitBluePrintExecuterArgs(NF_SHARE_PTR<NFExecuter> executer);
+   void InitBluePrintMonitorArgs(NF_SHARE_PTR<NFIMonitor> monitor);
+   void InitBluePrintJudgementArgs(NF_SHARE_PTR<NFIBranch> branch);
+   void InitBluePrintExecuterArgs(NF_SHARE_PTR<NFIExecuter> executer);
 
    void RenderForModifyProperty();
 
@@ -73,8 +76,7 @@ private:
 	NFIClassModule* m_pClassModule;
 	NFIElementModule* m_pElementModule;
 	NFIKernelModule* m_pKernelModule;
-	NFIBluePrintModule* m_pBluePrintModule;
-
+    NFIBluePrintModule* m_pBluePrintModule;
 };
 
 #endif

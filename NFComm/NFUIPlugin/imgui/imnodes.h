@@ -28,18 +28,39 @@ enum ColorStyle
     ColorStyle_Count
 };
 
-// Flags for controlling how the nodes are rendered.
-enum Flags
+enum StyleVar
 {
-    Flags_None = 0,
-    Flags_NodeOutline = 1 << 0,
-    Flags_PinOutline = 1 << 1
+    StyleVar_GridSpacing = 0,
+    StyleVar_NodeCornerRounding,
+    StyleVar_NodePaddingHorizontal,
+    StyleVar_NodePaddingVertical
+};
+
+enum StyleFlags
+{
+    StyleFlags_None = 0,
+    StyleFlags_NodeOutline = 1 << 0,
+    StyleFlags_PinOutline = 1 << 1,
+    StyleFlags_GridLines = 1 << 2
 };
 
 struct Style
 {
-    // by default, set to Flags_NodeOutline | Flags_PinOutline
-    Flags flags;
+    float grid_spacing = 32.f;
+
+    float node_corner_rounding = 4.0f;
+    float node_padding_horizontal = 8.0f;
+    float node_padding_vertical = 8.0f;
+
+    float link_thickness = 3.0f;
+    float link_line_segments_per_length = 0.1f;
+    float link_hover_distance = 7.0f;
+
+    float pin_radius = 4.0f;
+    float pin_hover_radius = 10.0f;
+
+    StyleFlags flags =
+        StyleFlags(StyleFlags_NodeOutline | StyleFlags_GridLines);
     // Set these mid-frame using Push/PopColorStyle. You can index this color
     // array with with a ColorStyle enum value.
     unsigned int colors[ColorStyle_Count];
@@ -57,8 +78,6 @@ EditorContext* EditorContextCreate();
 void EditorContextFree(EditorContext*);
 void EditorContextSet(EditorContext*);
 void EditorContextResetPanning(const ImVec2& pos);
-ImVec2 GetEditorContextPanning();
-ImVec2 GetEditorContextGridOringin();
 void EditorContextMoveToNode(const int node_id);
 
 // Initialize the node editor system.
@@ -82,6 +101,8 @@ void EndNodeEditor();
 // Use PushColorStyle and PopColorStyle to modify Style::colors mid-frame.
 void PushColorStyle(ColorStyle item, unsigned int color);
 void PopColorStyle();
+void PushStyleVar(StyleVar style_item, float value);
+void PopStyleVar();
 
 void BeginNode(int id);
 void EndNode();
@@ -104,15 +125,18 @@ void EndAttribute();
 // end_attr doesn't make a difference for rendering the link.
 void Link(int id, int start_attr, int end_attr);
 
-// Set's the node's position corresponding to the node id. You can even set the
+// Set's the node's position corresponding to the node id, either using screen
+// space coordinates, or node editor grid coordinates. You can even set the
 // position before the node has been created with BeginNode().
-void SetNodePos(int node_id, const ImVec2& pos);
-void SetNodeOriginPos(int node_id, const ImVec2& origin_pos);
+
+void SetNodeScreenSpacePos(int node_id, const ImVec2& screen_space_pos);
+void SetNodeGridSpacePos(int node_id, const ImVec2& grid_pos);
+
 // Set the node name corresponding to the node id. The node name is displayed in
 // the node's title bar.
 void SetNodeName(int node_id, const char* name);
-void SetNodeDragable(int node_id, const bool dragable);
-void SetNodeIconPath(int node_id, const char* icon_path);
+// Enable or disable the ability to click and drag a specific node.
+void SetNodeDraggable(int node_id, const bool dragable);
 
 // The following functions return true if a UI element is being hovered over by
 // the mouse cursor. Assigns the id of the UI element being hovered over to the
@@ -151,21 +175,22 @@ bool IsLinkCreated(int* started_at_attr, int* ended_at_attr);
 // or directly to a file. The editor context is serialized in the INI file
 // format.
 
-const char* SaveCurrentEditorStateToMemory(size_t* data_size = NULL);
-const char* SaveEditorStateToMemory(
+const char* SaveCurrentEditorStateToIniString(size_t* data_size = NULL);
+const char* SaveEditorStateToIniString(
     const EditorContext* editor,
     size_t* data_size = NULL);
 
-void LoadCurrentEditorStateFromMemory(const char* data, size_t data_size);
-void LoadEditorStateFromMemory(
+void LoadCurrentEditorStateFromIniString(const char* data, size_t data_size);
+void LoadEditorStateFromIniString(
     EditorContext* editor,
     const char* data,
     size_t data_size);
 
-void SaveCurrentEditorStateToDisk(const char* file_name);
-void SaveEditorStateToDisk(const EditorContext* editor, const char* file_name);
+void SaveCurrentEditorStateToIniFile(const char* file_name);
+void SaveEditorStateToIniFile(
+    const EditorContext* editor,
+    const char* file_name);
 
-void LoadCurrentEditorStateFromDisk(const char* file_name);
-void LoadEditorStateFromDisk(EditorContext* editor, const char* file_name);
-
+void LoadCurrentEditorStateFromIniFile(const char* file_name);
+void LoadEditorStateFromIniFile(EditorContext* editor, const char* file_name);
 } // namespace imnodes

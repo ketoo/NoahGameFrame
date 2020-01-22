@@ -46,37 +46,14 @@ elif [ $sysOS == "Linux" ];then
 
 fi
 
+mkdir lib
+mkdir ./lib/Release/
+mkdir ./lib/Debug/
+
 git submodule update --init --recursive
+./build_hiredis.sh
 
-rm -rf vcpkg
-
-git clone https://github.com/Microsoft/vcpkg.git
-
-cd vcpkg
-
-./bootstrap-vcpkg.sh
-
-if [ $sysOS == "Darwin" ];then
-
-    ./vcpkg install libevent:x64-osx
-    ./vcpkg install protobuf:x64-osx
-    ./vcpkg install lua:x64-osx
-    ./vcpkg install sdl2:x64-osx
-    ./vcpkg install gtest:x64-osx
-    ./vcpkg install opengl:x64-osx
-
-elif [ $sysOS == "Linux" ];then
-    ./vcpkg install libevent:x64-linux
-    ./vcpkg install protobuf:x64-linux
-    ./vcpkg install lua:x64-linux
-    ./vcpkg install sdl2:x64-linux
-    ./vcpkg install gtest:x64-linux
-
-
-fi
-
-
-cd ..
+./build_vcpkg.sh
 
 if [ $sysOS == "Darwin" ];then
     cp -r -f ./vcpkg/installed/x64-osx/lib/* ./lib/Release/
@@ -90,5 +67,3 @@ elif [ $sysOS == "Linux" ];then
 
     cp -r -f ./vcpkg/installed/x64-linux/tools/protobuf/* ../NFComm/NFMessageDefine/
 fi
-
-./build_hiredis.sh

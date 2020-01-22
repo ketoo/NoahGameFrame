@@ -62,10 +62,10 @@ private:
    bool logFatal = true;
 
 private:
-   NFIUIModule* m_pUIModule;
+    NFIUIModule* m_pUIModule;
 	NFILogModule* m_pLogModule;
-   NFIElementModule* m_pElementModule;
-   NFIClassModule* m_pClassModule;
+    NFIElementModule* m_pElementModule;
+    NFIClassModule* m_pClassModule;
 };
 
 #endif

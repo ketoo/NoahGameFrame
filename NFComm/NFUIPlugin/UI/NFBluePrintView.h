@@ -25,10 +25,14 @@
 #ifndef NF_BLUE_PRINT_VIEW_H
 #define NF_BLUE_PRINT_VIEW_H
 
-#include "NFComm/NFPluginModule/NFIUIModule.h"
-#include "NFComm/NFPluginModule/NFIBluePrintModule.h"
 #include "NFNodeView.h"
 #include "NFTreeView.h"
+#include "NFComm/NFMessageDefine/NFProtocolDefine.hpp"
+#include "NFComm/NFPluginModule/NFIUIModule.h"
+#include "NFComm/NFPluginModule/NFIBluePrintModule.h"
+#include "NFComm/NFPluginModule/NFIKernelModule.h"
+#include "NFComm/NFPluginModule/NFIElementModule.h"
+#include "NFComm/NFPluginModule/NFIClassModule.h"
 
 class NFBluePrintView : public NFIView
 {
@@ -41,43 +45,96 @@ public:
    	virtual void SubRender();
 
 	void TryToCreateBluePrintBlock();
-	void TryToCreateMonitor();
-	void TryToCreateJudgement();
-	void TryToCreateExecuter();
-	void TryToCreateVariable();
 
-	void TryToCreateComparator();
+	void TryToCreateBranch(NFBranchType type);
+	void TryToCreateArithmetic(NFArithmeticType type);
+	void TryToCreateMonitor(NFMonitorType type);
+	void TryToCreateExecuter(NFExecuterType type);
+	void TryToCreateModifier(NFModifierType type);
+	void TryToCreateVariable(NFVariableType type);
 
 	NFGUID GetCurrentObjectID();
 	void SetCurrentObjectID(const NFGUID& id);
+
+	void SetCurrentLogicBlockID(const NFGUID& id);
 
 	NFTreeView* GetTreeView();
 	NFNodeView* GetNodeView();
 	
 private:
 	void HandlerSelected(const NFGUID& id);
-    void ModifyEvent(const NFGUID& id, const bool create);
+	void NodeModifyEvent(const NFGUID& id, const bool create);
+	void LinkModifyEvent(const NFGUID& id, const bool create);
 
-	void CreateLogicBlockWindow();
+	bool TryNewLinkEvent(const NFGUID& startNode, const NFGUID& endNode, const NFGUID& startPin, const NFGUID& endPin);
+	bool TryDeleteLinkEvent(const NFGUID& id);
+
+	void PinRender(NFNodePin* pin);
+
+	void PinRenderForVariable(NFNodePin* pin);
+	void PinRenderForInputVariable(NFNodePin* pin);
+	void PinRenderForElementVariable(NFNodePin* pin);
+	void PinRenderForPropertyVariable(NFNodePin* pin);
+	void PinRenderForRecordVariable(NFNodePin* pin);
+
+	void PinRenderForMonitor(NFNodePin* pin);
+	void PinRenderForGameEventMonitor(NFNodePin* pin);
+	void PinRenderForNetworkEventMonitor(NFNodePin* pin);
+	void PinRenderForNetworkMsgMonitor(NFNodePin* pin);
+	void PinRenderForObjectEventMonitor(NFNodePin* pin);
+	void PinRenderForPropertyEventMonitor(NFNodePin* pin);
+	void PinRenderForRecordEventMonitor(NFNodePin* pin);
+	void PinRenderForSceneEventMonitor(NFNodePin* pin);
+	void PinRenderForItemEventMonitor(NFNodePin* pin);
+	void PinRenderForSkillEventMonitor(NFNodePin* pin);
+	void PinRenderForBuffEventMonitor(NFNodePin* pin);
+
+	void PinRenderForBranch(NFNodePin* pin);
+
+	void PinRenderForModifier(NFNodePin* pin);
+
+	void PinRenderForLogger(NFNodePin* pin);
+	void PinRenderForExecuter(NFNodePin* pin);
+
+	void CreateLogicBlock();
 	void CreateMonitor();
-	void CreateJudgment();
+	void CreateBranch();
 	void CreateExecuter();
+	void CreateModifier();
 	void CreateVariable();
+	void CreateArithmetic();
 
-	void CreateComparator();
-   
+
+private:
+	NFPinColor GetBackGroundColor(NF_SHARE_PTR<NFBluePrintNodeBase> node);
+	//NFPinColor GetPinColor(NF_SHARE_PTR<NFBluePrintNodeBase> node);
+	//NFPinColor GetLinkColor(NF_SHARE_PTR<NFBluePrintNodeBase> node);
+
 private:
 
 	NFGUID mCurrentObjectID;
+	NFGUID mCurrentLogicBlickID;
 
 private:
 	bool bCreatingLogicBlock = false;
-	bool bCreatingMonitor = false;
-	bool bCreatingJudgment = false;
-	bool bCreatingExecuter = false;
-	bool bCreatingVariable = false;
 
-	bool bCreatingComparator = false;
+	NFArithmeticType arithmeticType;
+	bool bCreatingArithmetic = false;
+
+	NFMonitorType monitorType;
+	bool bCreatingMonitor = false;
+
+	NFBranchType branchType;
+	bool bCreatingBranch = false;
+
+	NFExecuterType executerType;
+	bool bCreatingExecuter = false;
+
+	NFModifierType modifierType;
+	bool bCreatingModifier = false;
+
+	NFVariableType valueType;
+	bool bCreatingVariable = false;
 
 	NFTreeView* m_pTreeView;
 	NFNodeView* m_pNodeView;
@@ -86,6 +143,8 @@ private:
 	NFIBluePrintModule* m_pBluePrintModule;
 	NFIUIModule* m_pUIModule;
 	NFIKernelModule* m_pKernelModule;
+	NFIClassModule* m_pClassModule;
+	NFIElementModule* m_pElementModule;
 };
 
 #endif
