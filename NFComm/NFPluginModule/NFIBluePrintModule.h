@@ -121,7 +121,7 @@ NF_SMART_ENUM(NFMonitorType,
 		ObjectID,
 		MsgData,
 		)
-
+	//message data will includes a hashmap, developers could add more args to get the data by key
 	//------------------------------
 	NF_SMART_ENUM(NFMonitorObjectEventInputArg,
 		ClassName,

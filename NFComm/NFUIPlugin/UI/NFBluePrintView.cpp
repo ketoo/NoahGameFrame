@@ -1015,7 +1015,7 @@ void NFBluePrintView::PinRenderForObjectEventMonitor(NFNodePin* pin)
 			ImGui::PushItemWidth(itemWidth);
 			auto inputArg = monitor->GetInputArg(NFMonitorObjectEventInputArg::ClassName);
 
-			if (ImGui::BeginCombo(pin->name.c_str(), inputArg->varData.c_str()))
+			if (ImGui::BeginCombo("", inputArg->varData.c_str()))
 			{
 				auto classObject = m_pClassModule->First();
 				while (classObject)
@@ -1061,7 +1061,7 @@ void NFBluePrintView::PinRenderForPropertyEventMonitor(NFNodePin* pin)
 
 			ImGui::PushItemWidth(itemWidth);
 
-			if (ImGui::BeginCombo(pin->name.c_str(), classNameArg->varData.c_str()))
+			if (ImGui::BeginCombo("", classNameArg->varData.c_str()))
 			{
 				auto classObject = m_pClassModule->First();
 				while (classObject)
@@ -1088,7 +1088,7 @@ void NFBluePrintView::PinRenderForPropertyEventMonitor(NFNodePin* pin)
 
 					ImGui::PushItemWidth(itemWidth);
 
-					if (ImGui::BeginCombo(pin->name.c_str(), propertyNameArg->varData.c_str()))
+					if (ImGui::BeginCombo("", propertyNameArg->varData.c_str()))
 					{
 						auto property = currentClassObject->GetPropertyManager()->First();
 						while (property)
