@@ -233,6 +233,7 @@ void NFNode::Execute()
 
     POP_COLOR();
     POP_COLOR();
+    POP_COLOR();
 
    if (first)
    {
@@ -343,7 +344,7 @@ void NFNodeView::RenderLinks()
    }
 }
 
-void NFNodeView::AddNode(const NFGUID guid, const std::string& name, NFPinColor color, const NFVector2 vec)
+void NFNodeView::AddNode(const NFGUID guid, const std::string& name, NFColor color, const NFVector2 vec)
 {
    if (mNodes.find(guid) == mNodes.end())
    {
@@ -353,7 +354,7 @@ void NFNodeView::AddNode(const NFGUID guid, const std::string& name, NFPinColor 
    }
 }
 
-void NFNodeView::AddPinIn(const NFGUID guid, const NFGUID attrId, const std::string& name, NFPinColor color)
+void NFNodeView::AddPinIn(const NFGUID guid, const NFGUID attrId, const std::string& name, NFColor color)
 {
    for (auto it : mNodes)
    {
@@ -365,7 +366,7 @@ void NFNodeView::AddPinIn(const NFGUID guid, const NFGUID attrId, const std::str
    }
 }
 
-void NFNodeView::AddPinOut(const NFGUID guid, const NFGUID attrId, const std::string& name, NFPinColor color)
+void NFNodeView::AddPinOut(const NFGUID guid, const NFGUID attrId, const std::string& name, NFColor color)
 {
    for (auto it : mNodes)
    {
@@ -377,7 +378,7 @@ void NFNodeView::AddPinOut(const NFGUID guid, const NFGUID attrId, const std::st
    }
 }
 
-void NFNodeView::ModifyPinColor(const NFGUID attrId, NFPinColor color)
+void NFNodeView::ModifyPinColor(const NFGUID attrId, NFColor color)
 {
     NFGUID nodeID = GetNodeByAttriId(attrId);
     auto it = mNodes.find(nodeID);

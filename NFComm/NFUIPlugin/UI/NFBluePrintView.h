@@ -106,9 +106,9 @@ private:
 
 
 private:
-	NFPinColor GetBackGroundColor(NF_SHARE_PTR<NFBluePrintNodeBase> node);
-	//NFPinColor GetPinColor(NF_SHARE_PTR<NFBluePrintNodeBase> node);
-	//NFPinColor GetLinkColor(NF_SHARE_PTR<NFBluePrintNodeBase> node);
+	NFColor GetBackGroundColor(NF_SHARE_PTR<NFBluePrintNodeBase> node);
+	//NFColor GetPinColor(NF_SHARE_PTR<NFBluePrintNodeBase> node);
+	//NFColor GetLinkColor(NF_SHARE_PTR<NFBluePrintNodeBase> node);
 
 private:
 

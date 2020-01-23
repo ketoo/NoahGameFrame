@@ -28,22 +28,15 @@
 
 NFBluePrintView::NFBluePrintView(NFIPluginManager* p, NFViewType vt) : NFIView(p, vt, GET_CLASS_NAME(NFBluePrintView))
 {
-	int BLACK = IM_COL32(0, 0, 0, 255);
-	int WHITE = IM_COL32(255, 255, 255, 255);
-	int RED = IM_COL32(255, 0, 0, 255);
-	int LIME = IM_COL32(0, 255, 0, 255);
-	int BLUE = IM_COL32(0, 0, 255, 255);
-	int YELLOW = IM_COL32(255, 255, 0, 255);
-	int CYAN = IM_COL32(0, 255, 255, 255);
-	int MAGENTA = IM_COL32(255, 0, 255, 255);
-	int SILVER = IM_COL32(192, 192, 192, 255);
-	int GRAY = IM_COL32(128, 128, 128, 255);
-	int MAROON = IM_COL32(128, 0, 0, 255);
-	int OLIVE = IM_COL32(128, 128, 0, 255);
-	int GREEN = IM_COL32(0, 128, 0, 255);
-	int PURPLE = IM_COL32(128, 0, 128, 255);
-	int TEAL = IM_COL32(0, 128, 128, 255);
-	int NAVY = IM_COL32(0, 0, 128, 255);
+	int DEFAULT = IM_COL32(20, 20, 20, 255);
+   int EXECUTER = IM_COL32(220, 220, 93, 255);
+   int VARIABLE = IM_COL32(175, 175, 175, 255);
+   int MODIFIER = IM_COL32(110, 210, 90, 255);
+   int BRANCH = IM_COL32(140, 210, 190, 255);
+   int MONITOR = IM_COL32(140, 210, 190, 255);
+   int LOGGER = IM_COL32(240, 190, 100, 255);
+   int ARITHMETIC = IM_COL32(78, 80, 84, 255);
+   int CUSTOM = IM_COL32(104, 176, 224, 255);
 
 
    m_pNodeView = NF_NEW NFNodeView(p);
@@ -213,27 +206,23 @@ void NFBluePrintView::NodeModifyEvent(const NFGUID& id, const bool create)
 		else
 		{
 			m_pTreeView->AddSubTreeNode(node->logicBlockId, node->id, node->name);
-			NFPinColor color = GetBackGroundColor(node);
+			NFColor color = GetBackGroundColor(node);
 
 			m_pNodeView->AddNode(node->id, node->name, color, NFVector2(0, 0));
 
 			for (int i = 0; i < node->GetInputArgCount(); ++i)
 			{
 				auto variableArg = node->GetInputArg(i);
-				NFPinColor pinColor = NFPinColor::BLUE;
+				NFColor pinColor = NFColor::DEFAULT;
 				if (variableArg->valueType == NFValueType::Node)
 				{
-					pinColor = NFPinColor::YELLOW;
+					pinColor = NFColor::WORKFLOW;
 				}
 				else
 				{
 					if (variableArg->fromType == NFIODataComFromType::INTERNAL)
 					{
-						pinColor = NFPinColor::GRAY;
-					}
-					else
-					{
-						pinColor = NFPinColor::RED;
+						pinColor = NFColor::LINK;
 					}
 				}
 
@@ -243,15 +232,15 @@ void NFBluePrintView::NodeModifyEvent(const NFGUID& id, const bool create)
 			for (int i = 0; i < node->GetOutputArgCount(); ++i)
 			{
 				auto variableArg = node->GetOutputArg(i);
-				NFPinColor pinColor = NFPinColor::WHITE;
+				NFColor pinColor = NFColor::DEFAULT;
 
 				if (variableArg->valueType == NFValueType::Node)
 				{
-					pinColor = NFPinColor::YELLOW;
+					pinColor = NFColor::WORKFLOW;
 				}
 				else
 				{
-					pinColor = NFPinColor::WHITE;
+					pinColor = NFColor::LINK;
 				}
 
 				m_pNodeView->AddPinOut(node->id, variableArg->id, variableArg->name, pinColor);
@@ -273,7 +262,7 @@ void NFBluePrintView::LinkModifyEvent(const NFGUID& id, const bool create)
 	{
 		if (create)
 		{
-			NFPinColor color = NFPinColor::WHITE;
+			NFColor color = NFColor::DEFAULT;
 			auto endNpde =m_pBluePrintModule->FindNode(linkData->endNode);
 			if (endNpde)
 			{
@@ -284,16 +273,16 @@ void NFBluePrintView::LinkModifyEvent(const NFGUID& id, const bool create)
 					{
 						if (inputAgr->valueType == NFValueType::Node)
 						{
-							color = NFPinColor::YELLOW;
+							color = NFColor::WORKFLOW;
 						}
 						else if (inputAgr->valueType == NFValueType::UNKNOW)
 						{
-							color = NFPinColor::BLACK;
+							color = NFColor::DEFAULT;
 						}
 						else
 						{
-							m_pNodeView->ModifyPinColor(inputAgr->id, NFPinColor::BLUE);
-							color = NFPinColor::BLUE;
+							m_pNodeView->ModifyPinColor(inputAgr->id, NFColor::PININ);
+							color = NFColor::PININ;
 						}
 
 						break;
@@ -1627,58 +1616,31 @@ void NFBluePrintView::CreateArithmetic()
 	}
 }
 
-NFPinColor NFBluePrintView::GetBackGroundColor(NF_SHARE_PTR<NFBluePrintNodeBase> node)
+NFColor NFBluePrintView::GetBackGroundColor(NF_SHARE_PTR<NFBluePrintNodeBase> node)
 {
-	/*
-		LOGICBLOCK,
-	MONITOR,
-	BRANCH,
-	EXECUTER,
-	VARIABLE,
-	MODIFIER,
-	ARITHMETIC,
-	LOGGER,
-
-	    BLACK = -16777216,
-    WHITE = - 1,
-    RED = -16776961,
-    LIME = -16711936,
-    BLUE = -65536,
-    YELLOW = -16711681,
-    CYAN = -256,
-    MAGENTA = -65281,
-    SILVER = -4144960,
-    GRAY = -8355712,
-    MAROON = -16777088,
-    OLIVE = -16744320,
-    GREEN = -16744448,
-    PURPLE = -8388480,
-    TEAL = -8355840,
-    NAVY = -8388608,
-	*/
-	NFPinColor color = NFPinColor::BLACK;
+	NFColor color = NFColor::DEFAULT;
 	switch (node->blueprintType)
 	{
 	case NFBlueprintType::MONITOR:
-		color = NFPinColor::MAROON;
+		color = NFColor::MONITOR;
 		break;
 	case NFBlueprintType::EXECUTER:
-		color = NFPinColor::GREEN;
+		color = NFColor::EXECUTER;
 		break;
 	case NFBlueprintType::VARIABLE:
-		color = NFPinColor::SILVER;
+		color = NFColor::VARIABLE;
 		break;
 	case NFBlueprintType::MODIFIER:
-		color = NFPinColor::BLUE;
+		color = NFColor::MODIFIER;
 		break;
 	case NFBlueprintType::ARITHMETIC:
-		color = NFPinColor::OLIVE;
+		color = NFColor::ARITHMETIC;
 		break;
 	case NFBlueprintType::LOGGER:
-		color = NFPinColor::GRAY;
+		color = NFColor::LOGGER;
 		break;
 	case NFBlueprintType::BRANCH:
-		color = NFPinColor::TEAL;
+		color = NFColor::BRANCH;
 		break;
 	
 	default:

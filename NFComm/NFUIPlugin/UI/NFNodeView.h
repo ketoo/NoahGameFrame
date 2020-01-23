@@ -37,60 +37,25 @@ namespace ed = ax::NodeEditor;
 #endif
 
 /*https://www.rapidtables.com/web/color/RGB_Color.html
-
-    int BLACK = IM_COL32(0, 0, 0, 255);
-    int WHITE = IM_COL32(255, 255, 255, 255);
-    int RED = IM_COL32(255, 0, 0, 255);
-    int LIME = IM_COL32(0, 255, 0, 255);
-    int BLUE = IM_COL32(0, 0, 255, 255);
-    int YELLOW = IM_COL32(255, 255, 0, 255);
-    int CYAN = IM_COL32(0, 255, 255, 255);
-    int MAGENTA = IM_COL32(255, 0, 255, 255);
-    int SILVER = IM_COL32(192, 192, 192, 255);
-    int GRAY = IM_COL32(128, 128, 128, 255);
-    int MAROON = IM_COL32(128, 0, 0, 255);
-    int OLIVE = IM_COL32(128, 128, 0, 255);
-    int GREEN = IM_COL32(0, 128, 0, 255);
-    int PURPLE = IM_COL32(128, 0, 128, 255);
-    int TEAL = IM_COL32(0, 128, 128, 255);
-    int NAVY = IM_COL32(0, 0, 128, 255);
-
--16777216
--1
--16776961
--16711936
--65536
--16711681
--256
--65281
--4144960
--8355712
--16777088
--16744320
--16744448
--8388480
--8355840
--8388608
-
 */
-enum NFPinColor
+
+enum NFColor
 {
-    BLACK = -16777216,
-    WHITE = - 1,
-    RED = -16776961,
-    LIME = -16711936,
-    BLUE = -65536,
-    YELLOW = -16711681,
-    CYAN = -256,
-    MAGENTA = -65281,
-    SILVER = -4144960,
-    GRAY = -8355712,
-    MAROON = -16777088,
-    OLIVE = -16744320,
-    GREEN = -16744448,
-    PURPLE = -8388480,
-    TEAL = -8355840,
-    NAVY = -8388608,
+   DEFAULT = -1,//IM_COL32(20, 20, 20, 255);
+   WORKFLOW = -10625828,//IM_COL32(220, 220, 93, 255);
+   LINK = -5263441,//IM_COL32(175, 175, 175, 255);
+   PININ = -65536,//IM_COL32(175, 175, 175, 255);
+   PININ_GOOD = -16744448,//IM_COL32(175, 175, 175, 255);
+   PINOUT = -1,//IM_COL32(175, 175, 175, 255);
+
+   EXECUTER = -10625828,//IM_COL32(220, 220, 93, 255);
+   VARIABLE = -5263441,//IM_COL32(175, 175, 175, 255);
+   MODIFIER = -10825106,//IM_COL32(110, 210, 90, 255);
+   BRANCH = -4271476,//IM_COL32(140, 210, 190, 255);
+   MONITOR = -16777088,//IM_COL32(140, 210, 190, 255);
+   LOGGER = -10174736,//IM_COL32(240, 190, 100, 255);
+   ARITHMETIC = -11251634,//IM_COL32(78, 80, 84, 255);
+   CUSTOM = -2051992,//IM_COL32(104, 176, 224, 255);
 };
 
 enum NFPinShape
@@ -119,7 +84,7 @@ private:
    NFNodePin(){}
 
 public:
-   NFNodePin(const int id, const std::string& name, const bool inputPin, const NFGUID guid, const NFPinColor color)
+   NFNodePin(const int id, const std::string& name, const bool inputPin, const NFGUID guid, const NFColor color)
    {
        this->color = color;
         this->id = id;
@@ -145,7 +110,7 @@ private:
    NFNode(){}
 
 public:
-	NFNode(const int id, const std::string& name, const NFGUID guid, const NFVector2 vec, const NFPinColor color)
+	NFNode(const int id, const std::string& name, const NFGUID guid, const NFVector2 vec, const NFColor color)
    {
       this->id = id;
       this->color = color;
@@ -156,7 +121,7 @@ public:
 
 	void Execute();
 
-   void AddPin(const int id, const std::string& name, const bool inputPin, const NFGUID guid, NFPinColor color)
+   void AddPin(const int id, const std::string& name, const bool inputPin, const NFGUID guid, NFColor color)
    {
       auto ptr = NF_SHARE_PTR<NFNodePin>(NF_NEW NFNodePin(id, name, inputPin, guid, color));
       ptr->nodeView = this->nodeView;
@@ -236,10 +201,10 @@ public:
    const NFGUID GetAttriGUID(const int attriId);
    const int GetAttriID(const NFGUID guid);
 
-   void AddNode(const NFGUID guid, const std::string& name, NFPinColor color = NFPinColor::BLUE, const NFVector2 vec = NFVector2());
-   void AddPinIn(const NFGUID guid, const NFGUID attrId, const std::string& name, NFPinColor color = NFPinColor::BLUE);
-   void AddPinOut(const NFGUID guid, const NFGUID attrId, const std::string& name, NFPinColor color = NFPinColor::WHITE);
-   void ModifyPinColor(const NFGUID attrId, NFPinColor color);
+   void AddNode(const NFGUID guid, const std::string& name, NFColor color = NFColor::DEFAULT, const NFVector2 vec = NFVector2());
+   void AddPinIn(const NFGUID guid, const NFGUID attrId, const std::string& name, NFColor color = NFColor::PININ);
+   void AddPinOut(const NFGUID guid, const NFGUID attrId, const std::string& name, NFColor color = NFColor::PINOUT);
+   void ModifyPinColor(const NFGUID attrId, NFColor color);
    void DeleteNode(const NFGUID guid);
 
    void AddLink(const NFGUID& selfID, const NFGUID& startNode, const NFGUID& endNode, const NFGUID& startPin, const NFGUID& endPin, const int color);
