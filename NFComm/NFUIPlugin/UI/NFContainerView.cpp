@@ -221,6 +221,33 @@ void NFContainerView::BluePrintMenu()
 
                 ImGui::EndMenu();
             }
+
+            if (ImGui::BeginMenu("Custom Variable"))
+            {
+                for (auto x : NFVariableType::allValues())
+                {
+                    if (ImGui::MenuItem(x.toString().c_str(), ""))
+                    {
+                        pBluePrintView->TryToCreateVariable(x);
+                    }
+                }
+
+
+                if (ImGui::BeginMenu("New Custom Variable"))
+                {
+                    for (auto x : NFVariableType::allValues())
+                    {
+                        if (ImGui::MenuItem(x.toString().c_str(), ""))
+                        {
+                            pBluePrintView->TryToCreateVariable(x);
+                        }
+                    }
+
+                    ImGui::EndMenu();
+                }
+
+                ImGui::EndMenu();
+            }
 			//ImGui::Separator();
 		}
 

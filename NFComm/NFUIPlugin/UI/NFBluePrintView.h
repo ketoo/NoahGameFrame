@@ -66,10 +66,17 @@ private:
 	void NodeModifyEvent(const NFGUID& id, const bool create);
 	void LinkModifyEvent(const NFGUID& id, const bool create);
 
+	void AddNode(NF_SHARE_PTR<NFBluePrintNodeBase> node);
+
 	bool TryNewLinkEvent(const NFGUID& startNode, const NFGUID& endNode, const NFGUID& startPin, const NFGUID& endPin);
 	bool TryDeleteLinkEvent(const NFGUID& id);
 
 	void PinRender(NFNodePin* pin);
+
+	void NodeRenderBeforePinIn(NFNode* node);
+	void NodeRenderAfterPinIn(NFNode* node);
+	void NodeRenderBeforePinOut(NFNode* node);
+	void NodeRenderAfterPinOut(NFNode* node);
 
 	void PinRenderForVariable(NFNodePin* pin);
 	void PinRenderForInputVariable(NFNodePin* pin);
@@ -113,7 +120,7 @@ private:
 private:
 
 	NFGUID mCurrentObjectID;
-	NFGUID mCurrentLogicBlickID;
+	NFGUID mCurrentLogicBlockID;
 
 private:
 	bool bCreatingLogicBlock = false;

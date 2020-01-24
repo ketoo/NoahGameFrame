@@ -62,7 +62,7 @@ public:
 		{
 			NF_SHARE_PTR<NFIOData> var = NF_SHARE_PTR<NFIOData>(NF_NEW NFIOData());
 			var->id = this->pPluginManager->FindModule<NFIKernelModule>()->CreateGUID();
-			var->name = NFPropertyModifierInputArg::toString(NFPropertyModifierInputArg::OnwerID);
+			var->name = NFPropertyModifierInputArg::toString(NFPropertyModifierInputArg::ObjectID);
 			var->valueType = NFValueType::Object;
 			var->fromType = NFIODataComFromType::EXTERNAL;
 
@@ -144,7 +144,7 @@ public:
 		{
 			NF_SHARE_PTR<NFIOData> var = NF_SHARE_PTR<NFIOData>(NF_NEW NFIOData());
 			var->id = this->pPluginManager->FindModule<NFIKernelModule>()->CreateGUID();
-			var->name = NFPropertyModifierInputArg::toString(NFPropertyModifierInputArg::OnwerID);
+			var->name = NFPropertyModifierInputArg::toString(NFPropertyModifierInputArg::ObjectID);
 			var->valueType = NFValueType::Object;
 			var->fromType = NFIODataComFromType::EXTERNAL;
 

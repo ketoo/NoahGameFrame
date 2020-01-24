@@ -104,7 +104,7 @@ NF_SMART_ENUM(NFMonitorType,
 		)
 	//------------------------------
 	NF_SMART_ENUM(NFNetworkEventMonitorInputArg,
-		NetEventID,
+		EventID,
 		)
 
 	NF_SMART_ENUM(NFNetworkEventMonitorOutputArg,
@@ -119,7 +119,7 @@ NF_SMART_ENUM(NFMonitorType,
 	NF_SMART_ENUM(NFNetworkkMsgMonitorOutputArg,
 		NextNode,
 		ObjectID,
-		MsgData,
+		Dictionary,
 		)
 	//message data will includes a hashmap, developers could add more args to get the data by key
 	//------------------------------
@@ -193,6 +193,8 @@ NF_SMART_ENUM(NFValueType,
 	Vector2,
 	Vector3,
 	Object,
+	Array,
+	Dictionary,
 	)
 
 NF_SMART_ENUM(NFVariableType,
@@ -201,6 +203,8 @@ NF_SMART_ENUM(NFVariableType,
 	PropertySystem,
 	PropertyList,
 	RecordSystem,
+	Array,
+	Dictionary,
 	)
 
 ///////////FOR MODIFIER BEGIN///////////////////////////
@@ -215,7 +219,7 @@ NF_SMART_ENUM(NFModifierType,
 
 NF_SMART_ENUM(NFPropertyModifierInputArg,
 	LastNode,
-	OnwerID,
+	ObjectID,
 	PropertyName,
 	PropertyValue
 	)
@@ -226,7 +230,7 @@ NF_SMART_ENUM(NFPropertyModifierOutputArg,
 
 NF_SMART_ENUM(NFRecordModifierInputArg,
 	LastNode,
-	OnwerID,
+	ObjectID,
 	RecordName,
 	RecordRow,
 	RecordCol,
@@ -359,6 +363,7 @@ class NFDataLink;
 
 
 NF_SMART_ENUM(NFIODataComFromType,
+	BOTH,
 	INTERNAL,
 	EXTERNAL
 )

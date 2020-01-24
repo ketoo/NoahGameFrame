@@ -226,8 +226,8 @@ void NFNode::Execute()
    //ImGui::PushItemWidth(200);
    
     PUSH_COLOR(imnodes::ColorStyle::ColorStyle_TitleBar, color);
-    PUSH_COLOR(imnodes::ColorStyle::ColorStyle_TitleBarHovered, color + 10000);
-    PUSH_COLOR(imnodes::ColorStyle::ColorStyle_TitleBarSelected, color + 10000);
+    PUSH_COLOR(imnodes::ColorStyle::ColorStyle_TitleBarHovered, color + 1000);
+    PUSH_COLOR(imnodes::ColorStyle::ColorStyle_TitleBarSelected, color + 1000);
 
     BEGIN_NODE(id, name);
 
@@ -241,10 +241,34 @@ void NFNode::Execute()
       SET_NODE_POSITION(id, ImVec2(initPos.X(), initPos.Y()));
    }
 
+   this->nodeView->NodeRenderBeforePinIn(this);
+
    for (auto it : mAttris)
    {
-        it->Execute();
+       if (it->inputPin)
+       {
+           it->Execute();
+       }
    }
+
+   this->nodeView->NodeRenderAfterPinIn(this);
+
+   if (mAttris.size() > 0)
+   {
+       ImGui::Button("", ImVec2(120, 1));
+   }
+
+   this->nodeView->NodeRenderBeforePinOut(this);
+
+   for (auto it : mAttris)
+   {
+       if (!it->inputPin)
+       {
+           it->Execute();
+       }
+   }
+
+   this->nodeView->NodeRenderAfterPinOut(this);
 
    END_NODE();
 }
@@ -313,11 +337,63 @@ void NFNodeView::SetPinRenderCallBack(std::function<void(NFNodePin*)> functor)
     mPinRenderFunctor = functor;
 }
 
+void NFNodeView::SetNodeRenderBeforePinInCallBack(std::function<void(NFNode*)> functor)
+{
+    mNodeRenderBeforePinInFunctor = functor;
+}
+
+void NFNodeView::SetNodeRenderAfterPinInCallBack(std::function<void(NFNode*)> functor)
+{
+    mNodeRenderAfterPinInFunctor = functor;
+}
+
+void NFNodeView::SetNodeRenderBeforePinOutCallBack(std::function<void(NFNode*)> functor)
+{
+    mNodeRenderBeforePinOutFunctor = functor;
+}
+
+void NFNodeView::SetNodeRenderAfterPinOutCallBack(std::function<void(NFNode*)> functor)
+{
+    mNodeRenderAfterPinOutFunctor = functor;
+}
+
 void NFNodeView::RenderForPin(NFNodePin* nodeAttri)
 {
     if (mPinRenderFunctor)
     {
         mPinRenderFunctor(nodeAttri);
+    }
+}
+
+void NFNodeView::NodeRenderBeforePinIn(NFNode* node)
+{
+    if (mNodeRenderBeforePinInFunctor)
+    {
+        mNodeRenderBeforePinInFunctor(node);
+    }
+}
+
+void NFNodeView::NodeRenderAfterPinIn(NFNode* node)
+{
+    if (mNodeRenderAfterPinInFunctor)
+    {
+        mNodeRenderAfterPinInFunctor(node);
+    }
+}
+
+void NFNodeView::NodeRenderBeforePinOut(NFNode* node)
+{
+    if (mNodeRenderBeforePinOutFunctor)
+    {
+        mNodeRenderBeforePinOutFunctor(node);
+    }
+}
+
+void NFNodeView::NodeRenderAfterPinOut(NFNode* node)
+{
+    if (mNodeRenderAfterPinOutFunctor)
+    {
+        mNodeRenderAfterPinOutFunctor(node);
     }
 }
 

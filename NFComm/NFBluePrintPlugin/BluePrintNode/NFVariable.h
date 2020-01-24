@@ -472,7 +472,7 @@ public:
 public:
 
 };
-	//for Record Data <self id && record name && row && col>
+//for Record Data <self id && record name && row && col>
 class NFRecordVariable : public NFIVariable
 {
 public:
@@ -548,6 +548,76 @@ public:
 
 			outputArgs.push_back(var);
 		}
+	}
+	virtual void UpdateOutputData()
+	{
+
+	}
+
+public:
+
+};
+
+
+class NFArrayVariable : public NFIVariable
+{
+public:
+	NFArrayVariable(NFIPluginManager* p, const NFGUID& blockID, const NFGUID& id, const std::string& name)
+	{
+		this->id = id;
+		this->name = name;
+		this->pPluginManager = p;
+		this->logicBlockId = blockID;
+
+		variableType = NFVariableType::Array;
+
+		Init();
+	}
+
+
+	virtual void InitInputArgs()
+	{
+	
+	}
+
+	virtual void InitOutputArgs()
+	{
+	
+	}
+	virtual void UpdateOutputData()
+	{
+
+	}
+
+public:
+
+};
+
+
+class NFDictionaryVariable : public NFIVariable
+{
+public:
+	NFDictionaryVariable(NFIPluginManager* p, const NFGUID& blockID, const NFGUID& id, const std::string& name)
+	{
+		this->id = id;
+		this->name = name;
+		this->pPluginManager = p;
+		this->logicBlockId = blockID;
+
+		variableType = NFVariableType::Dictionary;
+
+		Init();
+	}
+
+
+	virtual void InitInputArgs()
+	{
+
+	}
+
+	virtual void InitOutputArgs()
+	{
+
 	}
 	virtual void UpdateOutputData()
 	{

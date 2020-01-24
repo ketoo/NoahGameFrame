@@ -41,7 +41,7 @@ namespace ed = ax::NodeEditor;
 
 enum NFColor
 {
-   DEFAULT = -1,//IM_COL32(20, 20, 20, 255);
+   DEFAULT = -15461356,//IM_COL32(20, 20, 20, 255);
    WORKFLOW = -10625828,//IM_COL32(220, 220, 93, 255);
    LINK = -5263441,//IM_COL32(175, 175, 175, 255);
    PININ = -65536,//IM_COL32(175, 175, 175, 255);
@@ -191,8 +191,20 @@ public:
 
    void SetUpNewLinkCallBack(std::function<bool(const NFGUID&, const NFGUID&, const NFGUID&, const NFGUID&)> functor);
    void SetUpDeleteLinkCallBack(std::function<bool(const NFGUID&)> functor);
+
    void SetPinRenderCallBack(std::function<void(NFNodePin*)> functor);
+
+   void SetNodeRenderBeforePinInCallBack(std::function<void(NFNode*)> functor);
+   void SetNodeRenderAfterPinInCallBack(std::function<void(NFNode*)> functor);
+   void SetNodeRenderBeforePinOutCallBack(std::function<void(NFNode*)> functor);
+   void SetNodeRenderAfterPinOutCallBack(std::function<void(NFNode*)> functor);
+
    void RenderForPin(NFNodePin* nodeAttri);
+
+   void NodeRenderBeforePinIn(NFNode* node);
+   void NodeRenderAfterPinIn(NFNode* node);
+   void NodeRenderBeforePinOut(NFNode* node);
+   void NodeRenderAfterPinOut(NFNode* node);
 
    //////////////////////////////////////
    const NFGUID GetNodeGUID(const int nodeId);
@@ -233,6 +245,11 @@ private:
     std::function<bool(const NFGUID&, const NFGUID&, const NFGUID&, const NFGUID&)> mTryNewLinkFunctor;
     std::function<bool(const NFGUID&)> mTryDeleteLinkFunctor;
     std::function<void(NFNodePin*)> mPinRenderFunctor;
+
+    std::function<void(NFNode*)> mNodeRenderBeforePinInFunctor;
+    std::function<void(NFNode*)> mNodeRenderAfterPinInFunctor;
+    std::function<void(NFNode*)> mNodeRenderBeforePinOutFunctor;
+    std::function<void(NFNode*)> mNodeRenderAfterPinOutFunctor;
 
     NFIUIModule* m_pUIModule;
 
