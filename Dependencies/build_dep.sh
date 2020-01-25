@@ -51,8 +51,10 @@ mkdir ./lib/Release/
 mkdir ./lib/Debug/
 
 git submodule update --init --recursive
-./build_hiredis.sh
 
+chmod 777 *.sh
+
+./build_hiredis.sh
 ./build_vcpkg.sh
 
 if [ $sysOS == "Darwin" ];then
