@@ -63,7 +63,7 @@ public:
 			var->id = this->pPluginManager->FindModule<NFIKernelModule>()->CreateGUID();
 			var->name = NFGameEventMonitorInputArg::toString(NFGameEventMonitorInputArg::EventID);
 			var->valueType = NFValueType::Int;
-			var->fromType = NFIODataComFromType::INTERNAL;
+			var->fromType = NFIODataComFromType::BOTH;
 
 			inputArgs.push_back(var);
 		}
@@ -123,9 +123,9 @@ public:
 		{
 			NF_SHARE_PTR<NFIOData> var = NF_SHARE_PTR<NFIOData>(NF_NEW NFIOData());
 			var->id = this->pPluginManager->FindModule<NFIKernelModule>()->CreateGUID();
-			var->name = NFNetworkEventMonitorInputArg::toString(NFNetworkEventMonitorInputArg::NetEventID);
+			var->name = NFNetworkEventMonitorInputArg::toString(NFNetworkEventMonitorInputArg::EventID);
 			var->valueType = NFValueType::Int;
-			var->fromType = NFIODataComFromType::INTERNAL;
+			var->fromType = NFIODataComFromType::BOTH;
 
 			inputArgs.push_back(var);
 		}
@@ -214,8 +214,8 @@ public:
 		{
 			NF_SHARE_PTR<NFIOData> var = NF_SHARE_PTR<NFIOData>(NF_NEW NFIOData());
 			var->id = this->pPluginManager->FindModule<NFIKernelModule>()->CreateGUID();
-			var->name = NFNetworkkMsgMonitorOutputArg::toString(NFNetworkkMsgMonitorOutputArg::MsgData);
-			var->valueType = NFValueType::String;
+			var->name = NFNetworkkMsgMonitorOutputArg::toString(NFNetworkkMsgMonitorOutputArg::Dictionary);
+			var->valueType = NFValueType::Dictionary;
 
 			outputArgs.push_back(var);
 		}

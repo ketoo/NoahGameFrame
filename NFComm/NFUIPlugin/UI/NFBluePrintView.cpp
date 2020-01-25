@@ -28,22 +28,15 @@
 
 NFBluePrintView::NFBluePrintView(NFIPluginManager* p, NFViewType vt) : NFIView(p, vt, GET_CLASS_NAME(NFBluePrintView))
 {
-	int BLACK = IM_COL32(0, 0, 0, 255);
-	int WHITE = IM_COL32(255, 255, 255, 255);
-	int RED = IM_COL32(255, 0, 0, 255);
-	int LIME = IM_COL32(0, 255, 0, 255);
-	int BLUE = IM_COL32(0, 0, 255, 255);
-	int YELLOW = IM_COL32(255, 255, 0, 255);
-	int CYAN = IM_COL32(0, 255, 255, 255);
-	int MAGENTA = IM_COL32(255, 0, 255, 255);
-	int SILVER = IM_COL32(192, 192, 192, 255);
-	int GRAY = IM_COL32(128, 128, 128, 255);
-	int MAROON = IM_COL32(128, 0, 0, 255);
-	int OLIVE = IM_COL32(128, 128, 0, 255);
-	int GREEN = IM_COL32(0, 128, 0, 255);
-	int PURPLE = IM_COL32(128, 0, 128, 255);
-	int TEAL = IM_COL32(0, 128, 128, 255);
-	int NAVY = IM_COL32(0, 0, 128, 255);
+	int DEFAULT = IM_COL32(20, 20, 20, 255);
+   int EXECUTER = IM_COL32(220, 220, 93, 255);
+   int VARIABLE = IM_COL32(175, 175, 175, 255);
+   int MODIFIER = IM_COL32(110, 210, 90, 255);
+   int BRANCH = IM_COL32(140, 210, 190, 255);
+   int MONITOR = IM_COL32(140, 210, 190, 255);
+   int LOGGER = IM_COL32(240, 190, 100, 255);
+   int ARITHMETIC = IM_COL32(78, 80, 84, 255);
+   int CUSTOM = IM_COL32(104, 176, 224, 255);
 
 
    m_pNodeView = NF_NEW NFNodeView(p);
@@ -52,7 +45,16 @@ NFBluePrintView::NFBluePrintView(NFIPluginManager* p, NFViewType vt) : NFIView(p
    m_pNodeView->ResetOffest(NFVector2::Zero());
    m_pNodeView->SetUpNewLinkCallBack(std::bind(&NFBluePrintView::TryNewLinkEvent, this, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3, std::placeholders::_4));
    m_pNodeView->SetUpDeleteLinkCallBack(std::bind(&NFBluePrintView::TryDeleteLinkEvent, this, std::placeholders::_1));
+   
    m_pNodeView->SetPinRenderCallBack(std::bind(&NFBluePrintView::PinRender, this, std::placeholders::_1));
+
+   m_pNodeView->SetNodeRenderBeforePinInCallBack(std::bind(&NFBluePrintView::NodeRenderBeforePinIn, this, std::placeholders::_1));
+   m_pNodeView->SetNodeRenderAfterPinInCallBack(std::bind(&NFBluePrintView::NodeRenderAfterPinIn, this, std::placeholders::_1));
+   m_pNodeView->SetNodeRenderBeforePinOutCallBack(std::bind(&NFBluePrintView::NodeRenderBeforePinOut, this, std::placeholders::_1));
+   m_pNodeView->SetNodeRenderAfterPinOutCallBack(std::bind(&NFBluePrintView::NodeRenderAfterPinOut, this, std::placeholders::_1));
+
+
+
 
    m_pTreeView->SetSelectedNodeFunctor(std::bind(&NFBluePrintView::HandlerSelected, this, std::placeholders::_1));
    m_pTreeView->SetName(GET_CLASS_NAME(NFBluePrintView));
@@ -130,35 +132,40 @@ void NFBluePrintView::SetCurrentObjectID(const NFGUID& id)
 
 void NFBluePrintView::SetCurrentLogicBlockID(const NFGUID& id)
 {
-	mCurrentLogicBlickID = id;
+	if (id == mCurrentLogicBlockID)
+	{
+		return;
+	}
+
+	mCurrentLogicBlockID = id;
 
 	m_pNodeView->CleanNodes();
 
-	auto logicBlock = m_pBluePrintModule->GetLogicBlock(mCurrentLogicBlickID);
+	auto logicBlock = m_pBluePrintModule->GetLogicBlock(mCurrentLogicBlockID);
 	if (logicBlock)
 	{
-		for (auto monitor : logicBlock->monitors)
+		for (auto node : logicBlock->monitors)
 		{
-			m_pNodeView->AddNode(monitor->id, monitor->name);
+			AddNode(node);
 		}
 
-		for (auto variable : logicBlock->variables)
+		for (auto node : logicBlock->variables)
 		{
-			m_pNodeView->AddNode(variable->id, variable->name);
+			AddNode(node);
 		}
 
-		for (auto branch : logicBlock->branches)
+		for (auto node : logicBlock->branches)
 		{
-			m_pNodeView->AddNode(branch->id, branch->name);
+			AddNode(node);
 		}
 
-		for (auto executer : logicBlock->executers)
+		for (auto node : logicBlock->executers)
 		{
-			m_pNodeView->AddNode(executer->id, executer->name);
+			AddNode(node);
 		}
-		for (auto modifier : logicBlock->modifiers)
+		for (auto node : logicBlock->modifiers)
 		{
-			m_pNodeView->AddNode(modifier->id, modifier->name);
+			AddNode(node);
 		}
 	}
 
@@ -188,7 +195,14 @@ void NFBluePrintView::HandlerSelected(const NFGUID& id)
 	auto node = m_pBluePrintModule->FindNode(id);
 	if (node)
 	{
-		SetCurrentObjectID(id);
+		if (node->blueprintType == NFBlueprintType::LOGICBLOCK)
+		{
+			SetCurrentLogicBlockID(id);
+		}
+		else
+		{
+			SetCurrentObjectID(id);
+		}
 	}
 
 	//referesh for sub window
@@ -213,49 +227,8 @@ void NFBluePrintView::NodeModifyEvent(const NFGUID& id, const bool create)
 		else
 		{
 			m_pTreeView->AddSubTreeNode(node->logicBlockId, node->id, node->name);
-			NFPinColor color = GetBackGroundColor(node);
 
-			m_pNodeView->AddNode(node->id, node->name, color, NFVector2(0, 0));
-
-			for (int i = 0; i < node->GetInputArgCount(); ++i)
-			{
-				auto variableArg = node->GetInputArg(i);
-				NFPinColor pinColor = NFPinColor::BLUE;
-				if (variableArg->valueType == NFValueType::Node)
-				{
-					pinColor = NFPinColor::YELLOW;
-				}
-				else
-				{
-					if (variableArg->fromType == NFIODataComFromType::INTERNAL)
-					{
-						pinColor = NFPinColor::GRAY;
-					}
-					else
-					{
-						pinColor = NFPinColor::RED;
-					}
-				}
-
-				m_pNodeView->AddPinIn(node->id, variableArg->id, variableArg->name, pinColor);
-			}
-
-			for (int i = 0; i < node->GetOutputArgCount(); ++i)
-			{
-				auto variableArg = node->GetOutputArg(i);
-				NFPinColor pinColor = NFPinColor::WHITE;
-
-				if (variableArg->valueType == NFValueType::Node)
-				{
-					pinColor = NFPinColor::YELLOW;
-				}
-				else
-				{
-					pinColor = NFPinColor::WHITE;
-				}
-
-				m_pNodeView->AddPinOut(node->id, variableArg->id, variableArg->name, pinColor);
-			}
+			AddNode(node);
 		}
 	}
 	else
@@ -273,7 +246,7 @@ void NFBluePrintView::LinkModifyEvent(const NFGUID& id, const bool create)
 	{
 		if (create)
 		{
-			NFPinColor color = NFPinColor::WHITE;
+			NFColor color = NFColor::DEFAULT;
 			auto endNpde =m_pBluePrintModule->FindNode(linkData->endNode);
 			if (endNpde)
 			{
@@ -284,16 +257,16 @@ void NFBluePrintView::LinkModifyEvent(const NFGUID& id, const bool create)
 					{
 						if (inputAgr->valueType == NFValueType::Node)
 						{
-							color = NFPinColor::YELLOW;
+							color = NFColor::WORKFLOW;
 						}
 						else if (inputAgr->valueType == NFValueType::UNKNOW)
 						{
-							color = NFPinColor::BLACK;
+							color = NFColor::DEFAULT;
 						}
 						else
 						{
-							m_pNodeView->ModifyPinColor(inputAgr->id, NFPinColor::BLUE);
-							color = NFPinColor::BLUE;
+							m_pNodeView->ModifyPinColor(inputAgr->id, NFColor::PININ);
+							color = NFColor::PININ;
 						}
 
 						break;
@@ -307,6 +280,52 @@ void NFBluePrintView::LinkModifyEvent(const NFGUID& id, const bool create)
 		else
 		{
 			m_pNodeView->DeleteLink(linkData->startNode, linkData->endNode, linkData->startAttr, linkData->endAttr);
+		}
+	}
+}
+
+void NFBluePrintView::AddNode(NF_SHARE_PTR<NFBluePrintNodeBase> node)
+{
+	if (node->blueprintType != NFBlueprintType::LOGICBLOCK)
+	{
+		NFColor color = GetBackGroundColor(node);
+
+		m_pNodeView->AddNode(node->id, node->name, color, NFVector2(0, 0));
+
+		for (int i = 0; i < node->GetInputArgCount(); ++i)
+		{
+			auto variableArg = node->GetInputArg(i);
+			NFColor pinColor = NFColor::DEFAULT;
+			if (variableArg->valueType == NFValueType::Node)
+			{
+				pinColor = NFColor::WORKFLOW;
+			}
+			else
+			{
+				if (variableArg->fromType == NFIODataComFromType::INTERNAL)
+				{
+					pinColor = NFColor::LINK;
+				}
+			}
+
+			m_pNodeView->AddPinIn(node->id, variableArg->id, variableArg->name, pinColor);
+		}
+
+		for (int i = 0; i < node->GetOutputArgCount(); ++i)
+		{
+			auto variableArg = node->GetOutputArg(i);
+			NFColor pinColor = NFColor::DEFAULT;
+
+			if (variableArg->valueType == NFValueType::Node)
+			{
+				pinColor = NFColor::WORKFLOW;
+			}
+			else
+			{
+				pinColor = NFColor::LINK;
+			}
+
+			m_pNodeView->AddPinOut(node->id, variableArg->id, variableArg->name, pinColor);
 		}
 	}
 }
@@ -328,7 +347,7 @@ bool NFBluePrintView::TryNewLinkEvent(const NFGUID& startNode, const NFGUID& end
 					auto inputArg = endNodeObject->GetInputArg(i);
 					if (inputArg->id == endPin)
 					{
-						if (inputArg->fromType == NFIODataComFromType::EXTERNAL)
+						if (inputArg->fromType != NFIODataComFromType::INTERNAL)
 						{
 							if (inputArg->valueType == outputArg->valueType)
 							{
@@ -418,6 +437,72 @@ void NFBluePrintView::PinRender(NFNodePin* pin)
 	}
 }
 
+void NFBluePrintView::NodeRenderBeforePinIn(NFNode* node)
+{
+
+}
+
+void NFBluePrintView::NodeRenderAfterPinIn(NFNode* node)
+{
+	auto blueprintNode = m_pBluePrintModule->FindNode(node->guid);
+	switch (blueprintNode->blueprintType)
+	{
+	case NFBlueprintType::VARIABLE:
+	{
+		auto variableNode = std::dynamic_pointer_cast<NFIVariable>(blueprintNode);
+		switch (variableNode->variableType)
+		{
+		case NFVariableType::Dictionary:
+		{
+			if (ImGui::Button("+"))
+			{
+
+			}
+		}
+		break;
+		default:
+			break;
+		}
+	}
+	break;
+	default:
+		break;
+	}
+}
+
+void NFBluePrintView::NodeRenderBeforePinOut(NFNode* node)
+{
+
+}
+
+void NFBluePrintView::NodeRenderAfterPinOut(NFNode* node)
+{
+	auto blueprintNode = m_pBluePrintModule->FindNode(node->guid);
+	switch (blueprintNode->blueprintType)
+	{
+	case NFBlueprintType::VARIABLE:
+	{
+		auto variableNode = std::dynamic_pointer_cast<NFIVariable>(blueprintNode);
+		switch (variableNode->variableType)
+		{
+		case NFVariableType::Dictionary:
+		{
+			if (ImGui::Button("+"))
+			{
+
+			}
+		}
+		break;
+		default:
+			break;
+		}
+	}
+	break;
+	default:
+		break;
+	}
+}
+
 void NFBluePrintView::PinRenderForVariable(NFNodePin* pin)
 {
 	auto variable = std::dynamic_pointer_cast<NFIVariable>(m_pBluePrintModule->FindNode(pin->nodeId));
@@ -465,12 +550,16 @@ void NFBluePrintView::PinRenderForInputVariable(NFNodePin* pin)
 		ImGui::PushItemWidth(itemWidth);
 
 		auto inputArg = variable->GetInputArg(0);
-		if (ImGui::BeginCombo(pin->name.c_str(), NFValueType::toString(inputArg->valueType).c_str()))
+
+		ImGui::SameLine();
+		if (ImGui::BeginCombo(" ", inputArg->valueType.toString().c_str()))
 		{
 			for (auto x : NFValueType::allValues())
 			{
 				if (x == NFValueType::Node
-					|| x == NFValueType::UNKNOW)
+					|| x == NFValueType::UNKNOW
+					|| x == NFValueType::Array
+					|| x == NFValueType::Dictionary)
 				{
 					continue;
 				}
@@ -922,7 +1011,7 @@ void NFBluePrintView::PinRenderForMonitor(NFNodePin* pin)
 
 void NFBluePrintView::PinRenderForGameEventMonitor(NFNodePin* pin)
 {
-	int itemWidth = 100;
+	int itemWidth = 50;
 	auto monitor = std::dynamic_pointer_cast<NFIMonitor>(m_pBluePrintModule->FindNode(pin->nodeId));
 
 	static char str0[128] = "";
@@ -933,17 +1022,15 @@ void NFBluePrintView::PinRenderForGameEventMonitor(NFNodePin* pin)
 
 		if (pin->name == NFGameEventMonitorInputArg::toString(NFGameEventMonitorInputArg::EventID))
 		{
-			ImGui::PushItemWidth(itemWidth);
 			auto inputArg = monitor->GetInputArg(0);
 
+			ImGui::SameLine();
 			if (ImGui::InputText("", str0, IM_ARRAYSIZE(str0)))
 			{
 				inputArg->varData = str0;
 
 				monitor->UpdateOutputData();
 			}
-
-			ImGui::PopItemWidth();
 		}
 		ImGui::PopItemWidth();
 	}
@@ -954,7 +1041,7 @@ void NFBluePrintView::PinRenderForGameEventMonitor(NFNodePin* pin)
 
 void NFBluePrintView::PinRenderForNetworkEventMonitor(NFNodePin* pin)
 {
-	int itemWidth = 100;
+	int itemWidth = 50;
 	auto monitor = std::dynamic_pointer_cast<NFIMonitor>(m_pBluePrintModule->FindNode(pin->nodeId));
 
 	static char str0[128] = "";
@@ -963,11 +1050,11 @@ void NFBluePrintView::PinRenderForNetworkEventMonitor(NFNodePin* pin)
 	{
 		ImGui::PushItemWidth(itemWidth);
 
-		if (pin->name == NFNetworkEventMonitorInputArg::toString(NFNetworkEventMonitorInputArg::NetEventID))
+		if (pin->name == NFNetworkEventMonitorInputArg::toString(NFNetworkEventMonitorInputArg::EventID))
 		{
-			ImGui::PushItemWidth(itemWidth);
 			auto inputArg = monitor->GetInputArg(0);
 
+			ImGui::SameLine();
 			if (ImGui::InputText("", str0, IM_ARRAYSIZE(str0)))
 			{
 				inputArg->varData = str0;
@@ -975,7 +1062,6 @@ void NFBluePrintView::PinRenderForNetworkEventMonitor(NFNodePin* pin)
 				monitor->UpdateOutputData();
 			}
 
-			ImGui::PopItemWidth();
 		}
 		ImGui::PopItemWidth();
 	}
@@ -983,7 +1069,7 @@ void NFBluePrintView::PinRenderForNetworkEventMonitor(NFNodePin* pin)
 
 void NFBluePrintView::PinRenderForNetworkMsgMonitor(NFNodePin* pin)
 {
-	int itemWidth = 100;
+	int itemWidth = 50;
 	auto monitor = std::dynamic_pointer_cast<NFIMonitor>(m_pBluePrintModule->FindNode(pin->nodeId));
 
 	static char str0[128] = "";
@@ -996,6 +1082,7 @@ void NFBluePrintView::PinRenderForNetworkMsgMonitor(NFNodePin* pin)
 		{
 			auto inputArg = monitor->GetInputArg(0);
 
+			ImGui::SameLine();
 			if (ImGui::InputText("", str0, IM_ARRAYSIZE(str0)))
 			{
 				inputArg->varData = str0;
@@ -1015,7 +1102,7 @@ void NFBluePrintView::PinRenderForNetworkMsgMonitor(NFNodePin* pin)
 
 void NFBluePrintView::PinRenderForObjectEventMonitor(NFNodePin* pin)
 {
-	int itemWidth = 100;
+	int itemWidth = 80;
 	auto monitor = std::dynamic_pointer_cast<NFIMonitor>(m_pBluePrintModule->FindNode(pin->nodeId));
 
 	if (pin->inputPin)
@@ -1026,7 +1113,8 @@ void NFBluePrintView::PinRenderForObjectEventMonitor(NFNodePin* pin)
 			ImGui::PushItemWidth(itemWidth);
 			auto inputArg = monitor->GetInputArg(NFMonitorObjectEventInputArg::ClassName);
 
-			if (ImGui::BeginCombo(pin->name.c_str(), inputArg->varData.c_str()))
+			ImGui::SameLine();
+			if (ImGui::BeginCombo("", inputArg->varData.c_str()))
 			{
 				auto classObject = m_pClassModule->First();
 				while (classObject)
@@ -1056,7 +1144,7 @@ void NFBluePrintView::PinRenderForObjectEventMonitor(NFNodePin* pin)
 
 void NFBluePrintView::PinRenderForPropertyEventMonitor(NFNodePin* pin)
 {
-	int itemWidth = 100;
+	int itemWidth = 80;
 	auto monitor = std::dynamic_pointer_cast<NFIMonitor>(m_pBluePrintModule->FindNode(pin->nodeId));
 
 	static char str0[128] = "";
@@ -1072,7 +1160,8 @@ void NFBluePrintView::PinRenderForPropertyEventMonitor(NFNodePin* pin)
 
 			ImGui::PushItemWidth(itemWidth);
 
-			if (ImGui::BeginCombo(pin->name.c_str(), classNameArg->varData.c_str()))
+			ImGui::SameLine();
+			if (ImGui::BeginCombo("", classNameArg->varData.c_str()))
 			{
 				auto classObject = m_pClassModule->First();
 				while (classObject)
@@ -1099,7 +1188,8 @@ void NFBluePrintView::PinRenderForPropertyEventMonitor(NFNodePin* pin)
 
 					ImGui::PushItemWidth(itemWidth);
 
-					if (ImGui::BeginCombo(pin->name.c_str(), propertyNameArg->varData.c_str()))
+					ImGui::SameLine();
+					if (ImGui::BeginCombo("", propertyNameArg->varData.c_str()))
 					{
 						auto property = currentClassObject->GetPropertyManager()->First();
 						while (property)
@@ -1150,7 +1240,7 @@ void NFBluePrintView::PinRenderForBuffEventMonitor(NFNodePin* pin)
 
 void NFBluePrintView::PinRenderForBranch(NFNodePin* pin)
 {
-	int itemWidth = 100;
+	int itemWidth = 80;
 
 	ImGui::PushItemWidth(itemWidth);
 	auto branch = std::dynamic_pointer_cast<NFIBranch>(m_pBluePrintModule->FindNode(pin->nodeId));
@@ -1160,6 +1250,7 @@ void NFBluePrintView::PinRenderForBranch(NFNodePin* pin)
 		{
 			auto comparatorArg = branch->GetInputArg(NFBranchInputArg::Comparator);
 
+			ImGui::SameLine();
 			if (ImGui::BeginCombo("", (comparatorArg->varData.c_str())))
 			{
 				for (auto x : NFComparatorType::allValues())
@@ -1296,7 +1387,7 @@ void NFBluePrintView::CreateMonitor()
 {
 	if (bCreatingMonitor)
 	{
-		auto currentLogicBlock = m_pBluePrintModule->FindNode(GetCurrentObjectID());
+		auto currentLogicBlock = m_pBluePrintModule->FindNode(mCurrentLogicBlockID);
 		if (currentLogicBlock)
 		{
 			if (currentLogicBlock->blueprintType == NFBlueprintType::LOGICBLOCK)
@@ -1332,7 +1423,7 @@ void NFBluePrintView::CreateMonitor()
 
 					if (ImGui::Button("OK", ImVec2(100, 30)))
 					{
-						m_pBluePrintModule->AddMonitor(GetCurrentObjectID(), monitorType, m_pKernelModule->CreateGUID(), str0);
+						m_pBluePrintModule->AddMonitor(mCurrentLogicBlockID, monitorType, m_pKernelModule->CreateGUID(), str0);
 						bCreatingMonitor = false;
 						ImGui::CloseCurrentPopup();
 					}
@@ -1356,7 +1447,7 @@ void NFBluePrintView::CreateBranch()
 {
 	if (bCreatingBranch)
 	{
-		auto currentObject = m_pBluePrintModule->FindNode(mCurrentObjectID);
+		auto currentObject = m_pBluePrintModule->FindNode(mCurrentLogicBlockID);
 		if (currentObject)
 		{
 			ImGui::OpenPopup("Creating Branch");
@@ -1390,7 +1481,7 @@ void NFBluePrintView::CreateBranch()
 
 				if (ImGui::Button("OK", ImVec2(100, 30)))
 				{
-					m_pBluePrintModule->AddBranch(currentObject->logicBlockId, branchType, m_pKernelModule->CreateGUID(), str0);
+					m_pBluePrintModule->AddBranch(mCurrentLogicBlockID, branchType, m_pKernelModule->CreateGUID(), str0);
 
 					bCreatingBranch = false;
 					ImGui::CloseCurrentPopup();
@@ -1410,7 +1501,7 @@ void NFBluePrintView::CreateExecuter()
 {
 	if (bCreatingExecuter)
 	{
-		auto currentObject = m_pBluePrintModule->FindNode(mCurrentObjectID);
+		auto currentObject = m_pBluePrintModule->FindNode(mCurrentLogicBlockID);
 		if (currentObject)
 		{
 			ImGui::OpenPopup("Creating Executer");
@@ -1444,7 +1535,7 @@ void NFBluePrintView::CreateExecuter()
 
 				if (ImGui::Button("OK", ImVec2(100, 30)))
 				{
-					m_pBluePrintModule->AddExecuter(currentObject->logicBlockId, executerType, m_pKernelModule->CreateGUID(), str0);
+					m_pBluePrintModule->AddExecuter(mCurrentLogicBlockID, executerType, m_pKernelModule->CreateGUID(), str0);
 
 					bCreatingExecuter = false;
 					ImGui::CloseCurrentPopup();
@@ -1465,7 +1556,7 @@ void NFBluePrintView::CreateModifier()
 {
 	if (bCreatingModifier)
 	{
-		auto currentObject = m_pBluePrintModule->FindNode(mCurrentObjectID);
+		auto currentObject = m_pBluePrintModule->FindNode(mCurrentLogicBlockID);
 		if (currentObject)
 		{
 			ImGui::OpenPopup("Creating Modifier");
@@ -1500,7 +1591,7 @@ void NFBluePrintView::CreateModifier()
 				if (ImGui::Button("OK", ImVec2(100, 30)))
 				{
 
-					m_pBluePrintModule->AddModifier(currentObject->logicBlockId, modifierType, m_pKernelModule->CreateGUID(), str0);
+					m_pBluePrintModule->AddModifier(mCurrentLogicBlockID, modifierType, m_pKernelModule->CreateGUID(), str0);
 
 					bCreatingModifier = false;
 					ImGui::CloseCurrentPopup();
@@ -1520,7 +1611,7 @@ void NFBluePrintView::CreateVariable()
 {
 	if (bCreatingVariable)
 	{
-		auto currentObject = m_pBluePrintModule->FindNode(mCurrentObjectID);
+		auto currentObject = m_pBluePrintModule->FindNode(mCurrentLogicBlockID);
 		if (currentObject)
 		{
 			ImGui::OpenPopup("Creating Variable");
@@ -1555,7 +1646,7 @@ void NFBluePrintView::CreateVariable()
 				if (ImGui::Button("OK", ImVec2(100, 30)))
 				{
 					
-					m_pBluePrintModule->AddVariable(currentObject->logicBlockId, valueType, m_pKernelModule->CreateGUID(), str0);
+					m_pBluePrintModule->AddVariable(mCurrentLogicBlockID, valueType, m_pKernelModule->CreateGUID(), str0);
 
 					bCreatingVariable = false;
 					ImGui::CloseCurrentPopup();
@@ -1576,7 +1667,7 @@ void NFBluePrintView::CreateArithmetic()
 
 	if (bCreatingArithmetic)
 	{
-		auto currentObject = m_pBluePrintModule->FindNode(mCurrentObjectID);
+		auto currentObject = m_pBluePrintModule->FindNode(mCurrentLogicBlockID);
 		if (currentObject)
 		{
 			ImGui::OpenPopup("Creating Arithmetic");
@@ -1611,7 +1702,7 @@ void NFBluePrintView::CreateArithmetic()
 				if (ImGui::Button("OK", ImVec2(100, 30)))
 				{
 
-					m_pBluePrintModule->AddArithmetic(currentObject->logicBlockId, arithmeticType, m_pKernelModule->CreateGUID(), str0);
+					m_pBluePrintModule->AddArithmetic(mCurrentLogicBlockID, arithmeticType, m_pKernelModule->CreateGUID(), str0);
 
 					bCreatingArithmetic = false;
 					ImGui::CloseCurrentPopup();
@@ -1627,58 +1718,31 @@ void NFBluePrintView::CreateArithmetic()
 	}
 }
 
-NFPinColor NFBluePrintView::GetBackGroundColor(NF_SHARE_PTR<NFBluePrintNodeBase> node)
+NFColor NFBluePrintView::GetBackGroundColor(NF_SHARE_PTR<NFBluePrintNodeBase> node)
 {
-	/*
-		LOGICBLOCK,
-	MONITOR,
-	BRANCH,
-	EXECUTER,
-	VARIABLE,
-	MODIFIER,
-	ARITHMETIC,
-	LOGGER,
-
-	    BLACK = -16777216,
-    WHITE = - 1,
-    RED = -16776961,
-    LIME = -16711936,
-    BLUE = -65536,
-    YELLOW = -16711681,
-    CYAN = -256,
-    MAGENTA = -65281,
-    SILVER = -4144960,
-    GRAY = -8355712,
-    MAROON = -16777088,
-    OLIVE = -16744320,
-    GREEN = -16744448,
-    PURPLE = -8388480,
-    TEAL = -8355840,
-    NAVY = -8388608,
-	*/
-	NFPinColor color = NFPinColor::BLACK;
+	NFColor color = NFColor::DEFAULT;
 	switch (node->blueprintType)
 	{
 	case NFBlueprintType::MONITOR:
-		color = NFPinColor::MAROON;
+		color = NFColor::MONITOR;
 		break;
 	case NFBlueprintType::EXECUTER:
-		color = NFPinColor::GREEN;
+		color = NFColor::EXECUTER;
 		break;
 	case NFBlueprintType::VARIABLE:
-		color = NFPinColor::SILVER;
+		color = NFColor::VARIABLE;
 		break;
 	case NFBlueprintType::MODIFIER:
-		color = NFPinColor::BLUE;
+		color = NFColor::MODIFIER;
 		break;
 	case NFBlueprintType::ARITHMETIC:
-		color = NFPinColor::OLIVE;
+		color = NFColor::ARITHMETIC;
 		break;
 	case NFBlueprintType::LOGGER:
-		color = NFPinColor::GRAY;
+		color = NFColor::LOGGER;
 		break;
 	case NFBlueprintType::BRANCH:
-		color = NFPinColor::TEAL;
+		color = NFColor::BRANCH;
 		break;
 	
 	default:

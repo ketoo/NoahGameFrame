@@ -1,3 +1,5 @@
+mkdir Build.Linux.Release
+
 cd Build.Linux.Release
 
 if [ "$1" == 'BUILD_MID_WARE' ] ; then
