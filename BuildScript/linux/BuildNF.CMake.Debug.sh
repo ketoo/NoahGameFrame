@@ -1,3 +1,5 @@
+mkdir Build.Linux.Debug
+
 cd Build.Linux.Debug
 
 if [ "$1" == 'BUILD_MID_WARE' ] ; then
