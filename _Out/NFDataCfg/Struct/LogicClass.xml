@@ -1,16 +1,16 @@
 <?xml version='1.0' encoding='utf-8' ?>
 <XML>
-	<Class Id="IObject"	Path="NFDataCfg/Struct/IObject.xml"	InstancePath="NFDataCfg/Ini/IObject.xml"	>
-		<Class Id="EffectData"	Path="NFDataCfg/Struct/EffectData.xml"	InstancePath="NFDataCfg/Ini/EffectData.xml"	/>
-		<Class Id="GM"	Path="NFDataCfg/Struct/GM.xml"	InstancePath="NFDataCfg/Ini/GM.xml"	/>
+	<Class Id="IObject"	Path="NFDataCfg/Struct/Comm/IObject.xml"	InstancePath="NFDataCfg/Ini/Comm/IObject.xml"	>
+		<Class Id="EffectData"	Path="NFDataCfg/Struct/Comm/EffectData.xml"	InstancePath="NFDataCfg/Ini/Comm/EffectData.xml"	/>
+		<Class Id="GM"	Path="NFDataCfg/Struct/Side/GM.xml"	InstancePath="NFDataCfg/Ini/Side/GM.xml"	/>
 		<Class Id="Group"	Path="NFDataCfg/Struct/Group.xml"	InstancePath="NFDataCfg/Ini/Group.xml"	/>
 		<Class Id="InitProperty"	Path="NFDataCfg/Struct/InitProperty.xml"	InstancePath="NFDataCfg/Ini/InitProperty.xml"	/>
-		<Class Id="Language"	Path="NFDataCfg/Struct/Language.xml"	InstancePath="NFDataCfg/Ini/Language.xml"	/>
+		<Class Id="Language"	Path="NFDataCfg/Struct/Side/Language.xml"	InstancePath="NFDataCfg/Ini/Side/Language.xml"	/>
 		<Class Id="NPC"	Path="NFDataCfg/Struct/NPC.xml"	InstancePath="NFDataCfg/Ini/NPC.xml"	/>
-		<Class Id="NoSqlServer"	Path="NFDataCfg/Struct/NoSqlServer.xml"	InstancePath="NFDataCfg/Ini/NoSqlServer.xml"	/>
+		<Class Id="NoSqlServer"	Path="NFDataCfg/Struct/Side/NoSqlServer.xml"	InstancePath="NFDataCfg/Ini/Side/NoSqlServer.xml"	/>
 		<Class Id="Player"	Path="NFDataCfg/Struct/Player.xml"	InstancePath="NFDataCfg/Ini/Player.xml"	/>
 		<Class Id="Scene"	Path="NFDataCfg/Struct/Scene.xml"	InstancePath="NFDataCfg/Ini/Scene.xml"	/>
-		<Class Id="Security"	Path="NFDataCfg/Struct/Security.xml"	InstancePath="NFDataCfg/Ini/Security.xml"	/>
+		<Class Id="Security"	Path="NFDataCfg/Struct/Side/Security.xml"	InstancePath="NFDataCfg/Ini/Side/Security.xml"	/>
 		<Class Id="Server"	Path="NFDataCfg/Struct/Server.xml"	InstancePath="NFDataCfg/Ini/Server.xml"	/>
 		<Class Id="Skill"	Path="NFDataCfg/Struct/Skill.xml"	InstancePath="NFDataCfg/Ini/Skill.xml"	/>
 	</Class>

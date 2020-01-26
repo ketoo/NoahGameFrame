@@ -122,6 +122,15 @@ void SET_NODE_DRAGABLE(const int id, const bool draggnable)
 #endif
 }
 
+void SET_NODE_SCREEN_POSITION(const int id, const ImVec2 pos)
+{
+#ifdef NODE_EXT
+    ed::SetNodePosition(id, pos);
+#else
+    imnodes::SetNodeScreenSpacePos(id, pos);
+#endif
+}
+
 void SET_NODE_POSITION(const int id, const ImVec2 pos)
 {
 #ifdef NODE_EXT
@@ -237,8 +246,16 @@ void NFNode::Execute()
 
    if (first)
    {
-      first = false;
-      SET_NODE_POSITION(id, ImVec2(initPos.X(), initPos.Y()));
+        first = false;
+        if (initPos.IsZero())
+        {
+            SET_NODE_SCREEN_POSITION(id, ImVec2(400, 300));
+        }
+        else
+        {
+            SET_NODE_POSITION(id, ImVec2(initPos.X(), initPos.Y()));
+        }
+        
    }
 
    this->nodeView->NodeRenderBeforePinIn(this);

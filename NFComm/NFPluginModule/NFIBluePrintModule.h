@@ -56,6 +56,12 @@ NF_SMART_ENUM(NFElementVariableInputArg,
 		PropertyName,
 		)
 
+	NF_SMART_ENUM(NFPropertyVariableOutputArg,
+		ClassName,
+		PropertyName,
+		PropertyValue,
+		)
+
 	NF_SMART_ENUM(NFPropertyListVariableInputArg,
 		ObjectID,
 		ClassName,

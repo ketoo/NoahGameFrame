@@ -758,7 +758,6 @@ void NFBluePrintView::PinRenderForPropertyVariable(NFNodePin* pin)
 
 	if (pin->name == NFPropertyVariableInputArg::toString(NFPropertyVariableInputArg::ObjectID))
 	{
-		ImGui::Button("None");
 	}
 	else if (pin->name == NFPropertyVariableInputArg::toString(NFPropertyVariableInputArg::ClassName))
 	{
@@ -827,8 +826,8 @@ void NFBluePrintView::PinRenderForPropertyVariable(NFNodePin* pin)
 		if (!pin->inputPin)
 		{
 			auto outputData = variable->GetOutputArg(0);
-			ImGui::Indent(itemWidth);
-			ImGui::TextColored(ImVec4(1.0f, 0.4f, 0.4f, 1.0f), outputData->varData.c_str());
+			//ImGui::Indent(itemWidth);
+			//ImGui::TextColored(ImVec4(1.0f, 0.4f, 0.4f, 1.0f), outputData->varData.c_str());
 		}
 	}
 

@@ -271,12 +271,29 @@ public:
 		{
 			NF_SHARE_PTR<NFIOData> var = NF_SHARE_PTR<NFIOData>(NF_NEW NFIOData());
 			var->id = this->pPluginManager->FindModule<NFIKernelModule>()->CreateGUID();
-			var->name = "";
+			var->name = NFPropertyVariableInputArg::toString(NFPropertyVariableOutputArg::ClassName);
+			var->valueType = NFValueType::String;
+
+			outputArgs.push_back(var);
+		}
+		{
+			NF_SHARE_PTR<NFIOData> var = NF_SHARE_PTR<NFIOData>(NF_NEW NFIOData());
+			var->id = this->pPluginManager->FindModule<NFIKernelModule>()->CreateGUID();
+			var->name = NFPropertyVariableInputArg::toString(NFPropertyVariableOutputArg::PropertyName);
+			var->valueType = NFValueType::String;
+
+			outputArgs.push_back(var);
+		}
+		{
+			NF_SHARE_PTR<NFIOData> var = NF_SHARE_PTR<NFIOData>(NF_NEW NFIOData());
+			var->id = this->pPluginManager->FindModule<NFIKernelModule>()->CreateGUID();
+			var->name = NFPropertyVariableInputArg::toString(NFPropertyVariableOutputArg::PropertyValue);
 			var->valueType = NFValueType::UNKNOW;
 
 			outputArgs.push_back(var);
 		}
 	}
+	
 	virtual void UpdateOutputData()
 	{
 
