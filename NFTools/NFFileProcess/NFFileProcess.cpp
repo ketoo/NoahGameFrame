@@ -1710,29 +1710,33 @@ std::vector<std::string> NFFileProcess::GetFileListInFolder(std::string folderPa
 	char childpath[512];
 	char absolutepath[512];
 	pDir = opendir(folderPath.c_str());
-	memset(childpath, 0, sizeof(childpath));
-	while ((ent = readdir(pDir)) != NULL)
+	if (pDir)
 	{
-		if (ent->d_type & DT_DIR)
+		memset(childpath, 0, sizeof(childpath));
+		while ((ent = readdir(pDir)) != NULL)
 		{
-			if ((strcmp(ent->d_name, ".") != 0) && (strcmp(ent->d_name, "..") != 0))
+			if (ent->d_type & DT_DIR)
 			{
-				sprintf(absolutepath, "%s/%s", folderPath.c_str(), ent->d_name);
-				if (depth >= 0)
+				if ((strcmp(ent->d_name, ".") != 0) && (strcmp(ent->d_name, "..") != 0))
 				{
-					std::vector<std::string> childResult = GetFileListInFolder(absolutepath, depth);
-					result.insert(result.end(), childResult.begin(), childResult.end());
+					sprintf(absolutepath, "%s/%s", folderPath.c_str(), ent->d_name);
+					if (depth >= 0)
+					{
+						std::vector<std::string> childResult = GetFileListInFolder(absolutepath, depth);
+						result.insert(result.end(), childResult.begin(), childResult.end());
+					}
 				}
 			}
+			else
+			{
+				sprintf(absolutepath, "%s/%s", folderPath.c_str(), ent->d_name);
+				result.push_back(absolutepath);
+			}
 		}
-		else
-		{
-			sprintf(absolutepath, "%s/%s", folderPath.c_str(), ent->d_name);
-			result.push_back(absolutepath);
-		}
-	}
 
-	sort(result.begin(), result.end());
+		sort(result.begin(), result.end());
+	}
+	
 #endif
 	return result;
 }
