@@ -13,6 +13,7 @@
 #include <cstdio>
 #include <dirent.h>
 #include <sys/stat.h>
+#include <sys/types.h>
 #endif
 
 
@@ -1385,7 +1386,7 @@ bool NFFileProcess::SaveForStruct()
 #if NF_PLATFORM == NF_PLATFORM_WIN
 			mkdir(fileFolder.c_str());
 #else
-			mkdir(fileFolder.c_str(), 0);
+			mkdir(fileFolder.c_str(), 0777);
 #endif
 
 			structWriter = fopen(strFileName.c_str(), "w+");
@@ -1541,7 +1542,7 @@ bool NFFileProcess::SaveForIni()
 #if NF_PLATFORM == NF_PLATFORM_WIN
 			mkdir(fileFolder.c_str());
 #else
-			mkdir(fileFolder.c_str(), 0);
+			mkdir(fileFolder.c_str(), 0777);
 #endif
 
 			iniWriter = fopen(strFileName.c_str(), "w+");
