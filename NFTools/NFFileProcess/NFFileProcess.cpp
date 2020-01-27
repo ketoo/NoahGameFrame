@@ -169,13 +169,18 @@ bool NFFileProcess::LoadDataFromExcel(const std::string & strFile, const std::st
 		StringReplace(filePath, "//", "/");
 
 		std::string fileName = GetFileNameByPath(filePath);
-		if (fileName == "include")
+		if (!fileName.empty())
 		{
-			LoadIncludeExcel(pClassData, filePath, fileName);
-		}
-		else
-		{
-			pClassData->parts.push_back(fileName);
+			transform(fileName.begin(), fileName.end(), fileName.begin(), ::tolower);
+
+			if (fileName == "include")
+			{
+				LoadIncludeExcel(pClassData, filePath, fileName);
+			}
+			else
+			{
+				pClassData->parts.push_back(fileName);
+			}
 		}
 	}
 

@@ -1,7 +1,0 @@
-<XML>	
-	<Player>
-		<Init Gold="10000" />
-		<Init Diamond="1000" />
-		<Init Cup="500" />
-	</Player>
-</XML>

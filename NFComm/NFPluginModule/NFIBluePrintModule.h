@@ -3,7 +3,7 @@
                 NoahFrame
             https://github.com/ketoo/NoahGameFrame
 
-   Copyright 2009 - 2019 NoahFrame(NoahGameFrame)
+   Copyright 2009 - 2020 NoahFrame(NoahGameFrame)
 
    File creator: lvsheng.huang
    
@@ -54,6 +54,12 @@ NF_SMART_ENUM(NFElementVariableInputArg,
 		ObjectID,
 		ClassName,
 		PropertyName,
+		)
+
+	NF_SMART_ENUM(NFPropertyVariableOutputArg,
+		ClassName,
+		PropertyName,
+		PropertyValue,
 		)
 
 	NF_SMART_ENUM(NFPropertyListVariableInputArg,

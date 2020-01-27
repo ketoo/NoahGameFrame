@@ -1,7 +1,0 @@
-<XML>	
-	<SurvivalMode>
-		<Init Time="20" />
-		<Init People="10" />
-		<Init MtahcPoolSize="100" />
-	</SurvivalMode>
-</XML>
