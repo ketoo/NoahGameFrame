@@ -209,7 +209,17 @@ void NFNodePin::Execute()
 
         POP_COLOR();
 
-        ImGui::Text(this->name.c_str());
+        if (this->name.length() > 0)
+        {
+            ImGui::PushItemWidth(60);
+            ImGui::Text(this->name.c_str());
+            ImGui::PopItemWidth();
+        }
+        else
+        {
+            ImGui::Text(this->name.c_str());
+        }
+
         this->nodeView->RenderForPin(this);
 
         END_INPUT_PIN();

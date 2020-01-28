@@ -104,8 +104,6 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
       </PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="NFBluePrintCppGeneratorModule.cpp" />
-    <ClCompile Include="NFBluePrintLuaGeneratorModule.cpp" />
     <ClCompile Include="NFBluePrintModule.cpp" />
     <ClCompile Include="NFBluePrintPlugin.cpp" />
     <ClCompile Include="NFBPVirtualMachineModule.cpp" />
@@ -118,8 +116,6 @@
     <ClInclude Include="BluePrintNode\NFMonitor.h" />
     <ClInclude Include="BluePrintNode\NFVariable.h" />
     <ClInclude Include="BluePrintVM\NFBPVirtualMachine.h" />
-    <ClInclude Include="NFBluePrintCppGeneratorModule.h" />
-    <ClInclude Include="NFBluePrintLuaGeneratorModule.h" />
     <ClInclude Include="NFBluePrintModule.h" />
     <ClInclude Include="NFBluePrintPlugin.h" />
     <ClInclude Include="NFBPVirtualMachineModule.h" />

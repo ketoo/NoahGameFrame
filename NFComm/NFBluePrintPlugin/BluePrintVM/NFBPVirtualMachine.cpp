@@ -26,13 +26,43 @@
 //#include "Dependencies/googletest-release-1.8.0/googletest/include/gtest/gtest.h"
 #include "NFBPVirtualMachine.h"
 
+void NFBPVirtualMachine::StartToProcessMonitor()
+{
+    for (auto item : mLogicBlock->monitors)
+    {
+        StartMonitor(item);
+    }
+}
+
+int NFBPVirtualMachine::GameEventIDCallBack(const int eventID, const NFDataList& dataList)
+{
+    return 0;
+}
+
 void NFBPVirtualMachine::StartMonitor(NF_SHARE_PTR<NFIMonitor> monitor)
 {
     switch (monitor->monitorType)
     {
     case NFMonitorType::GameEvent:
     {
+        auto inputEventID = monitor->GetInputArg(NFGameEventMonitorInputArg::toString(NFGameEventMonitorInputArg::EventID));
+        if (inputEventID->varData.empty())
+        {
+            m_pLogModule->LogError(monitor->name + " The monitor's Input EventID is empty.");
+            return;
+        }
 
+        try
+        {
+            int eventID = std::stoi(inputEventID->varData);
+            m_pEventModule->AddEventCallBack(eventID, this, &NFBPVirtualMachine::GameEventIDCallBack);
+        }
+        catch (const std::exception&)
+        {
+            m_pLogModule->LogError(monitor->name + " The monitor's Input EventID must as a integer: " + inputEventID->varData);
+            return;
+        }
+       
     }
         break;
     case NFMonitorType::NetworkEvent:

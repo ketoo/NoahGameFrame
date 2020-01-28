@@ -411,7 +411,7 @@ NF_SHARE_PTR<NFIModifier> NFBluePrintModule::AddModifier(const NFGUID& logicBloc
 			//modifier = NF_SHARE_PTR<NFIModifier>(NF_NEW NFPropertyVariable(this->pPluginManager, logicBlockId, id, name, it));
 			break;
 		case NFModifierType::RemRecordRow:
-			//modifier = NF_SHARE_PTR<NFIModifier>(NF_NEW NFRecordVariable(this->pPluginManager, logicBlockId, id, name, it));
+			modifier = NF_SHARE_PTR<NFIModifier>(NF_NEW NFRecordRemover(this->pPluginManager, logicBlockId, id, name));
 			break;
 		default:
 			break;

@@ -28,7 +28,9 @@
 
 #include "NFComm/NFPluginModule/NFILogModule.h"
 #include "NFComm/NFPluginModule/NFIKernelModule.h"
+#include "NFComm/NFPluginModule/NFIElementModule.h"
 #include "NFComm/NFPluginModule/NFIClassModule.h"
+#include "NFComm/NFPluginModule/NFIEventModule.h"
 #include "NFComm/NFPluginModule/NFIBluePrintModule.h"
 
 
@@ -38,10 +40,17 @@ public:
     NFBPVirtualMachine(NFIPluginManager* p, NF_SHARE_PTR<NFLogicBlock> logicBlock)
     {
         m_pBluePrintModule = p->FindModule<NFIBluePrintModule>();
-
+        m_pElementModule = p->FindModule<NFIElementModule>();
+        m_pClassModule = p->FindModule<NFIClassModule>();
+        m_pEventModule = p->FindModule<NFIEventModule>();
+        m_pLogModule = p->FindModule<NFILogModule>();
+        
         mLogicBlock = logicBlock;
 
         mLogicBlock->running = true;
+
+
+        StartToProcessMonitor();
     }
 
     virtual ~NFBPVirtualMachine() 
@@ -50,11 +59,21 @@ public:
     };
 
 private:
+    void StartToProcessMonitor();
+    int GameEventIDCallBack(const int eventID, const NFDataList& dataList);
+
+private:
     //first of all, find all monitors
     void StartMonitor(NF_SHARE_PTR<NFIMonitor> monitor);
 
 private:
     NFIBluePrintModule* m_pBluePrintModule;
+    NFIElementModule* m_pElementModule;
+    NFIClassModule* m_pClassModule;
+    NFIEventModule* m_pEventModule;
+    NFILogModule* m_pLogModule;
+
+
     NF_SHARE_PTR<NFLogicBlock> mLogicBlock;
 };
 

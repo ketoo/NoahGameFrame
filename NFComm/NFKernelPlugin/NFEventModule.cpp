@@ -55,7 +55,7 @@ bool NFEventModule::Execute()
 	//remove
 	if (mModuleRemoveListEx.Count() > 0)
 	{
-		NFEventDefine nEventID = NFEventDefine::NFED_UNKNOW;;
+		int nEventID = 0;
 		bool bRet = mModuleRemoveListEx.First(nEventID);
 		while (bRet)
 		{
@@ -82,7 +82,7 @@ bool NFEventModule::Execute()
 
 }
 
-bool NFEventModule::DoEvent(const NFEventDefine nEventID, const NFDataList & valueList)
+bool NFEventModule::DoEvent(const int nEventID, const NFDataList & valueList)
 {
 	bool bRet = false;
 
@@ -105,17 +105,17 @@ bool NFEventModule::DoEvent(const NFEventDefine nEventID, const NFDataList & val
 	return bRet;
 }
 
-bool NFEventModule::ExistEventCallBack(const NFEventDefine nEventID)
+bool NFEventModule::ExistEventCallBack(const int nEventID)
 {
 	return mModuleEventInfoMapEx.ExistElement(nEventID);
 }
 
-bool NFEventModule::RemoveEventCallBack(const NFEventDefine nEventID)
+bool NFEventModule::RemoveEventCallBack(const int nEventID)
 {
 	return mModuleEventInfoMapEx.RemoveElement(nEventID);
 }
 
-bool NFEventModule::DoEvent(const NFGUID self, const NFEventDefine nEventID, const NFDataList & valueList)
+bool NFEventModule::DoEvent(const NFGUID self, const int nEventID, const NFDataList & valueList)
 {
 	bool bRet = false;
 
@@ -124,7 +124,7 @@ bool NFEventModule::DoEvent(const NFGUID self, const NFEventDefine nEventID, con
 		return bRet;
 	}
 
-	NF_SHARE_PTR<NFMapEx<NFEventDefine, NFList<OBJECT_EVENT_FUNCTOR_PTR>>> xEventMapPtr = mObjectEventInfoMapEx.GetElement(self);
+	NF_SHARE_PTR<NFMapEx<int, NFList<OBJECT_EVENT_FUNCTOR_PTR>>> xEventMapPtr = mObjectEventInfoMapEx.GetElement(self);
 	if (!xEventMapPtr)
 	{
 		return bRet;
@@ -149,9 +149,9 @@ bool NFEventModule::DoEvent(const NFGUID self, const NFEventDefine nEventID, con
 	return bRet;
 }
 
-bool NFEventModule::ExistEventCallBack(const NFGUID self, const NFEventDefine nEventID)
+bool NFEventModule::ExistEventCallBack(const NFGUID self, const int nEventID)
 {
-	NF_SHARE_PTR<NFMapEx<NFEventDefine, NFList<OBJECT_EVENT_FUNCTOR_PTR>>> xEventMapPtr = mObjectEventInfoMapEx.GetElement(self);
+	NF_SHARE_PTR<NFMapEx<int, NFList<OBJECT_EVENT_FUNCTOR_PTR>>> xEventMapPtr = mObjectEventInfoMapEx.GetElement(self);
 	if (!xEventMapPtr)
 	{
 		return false;
@@ -160,9 +160,9 @@ bool NFEventModule::ExistEventCallBack(const NFGUID self, const NFEventDefine nE
 	return xEventMapPtr->ExistElement(nEventID);
 }
 
-bool NFEventModule::RemoveEventCallBack(const NFGUID self, const NFEventDefine nEventID)
+bool NFEventModule::RemoveEventCallBack(const NFGUID self, const int nEventID)
 {
-	NF_SHARE_PTR<NFMapEx<NFEventDefine, NFList<OBJECT_EVENT_FUNCTOR_PTR>>> xEventMapPtr = mObjectEventInfoMapEx.GetElement(self);
+	NF_SHARE_PTR<NFMapEx<int, NFList<OBJECT_EVENT_FUNCTOR_PTR>>> xEventMapPtr = mObjectEventInfoMapEx.GetElement(self);
 	if (!xEventMapPtr)
 	{
 		return false;
@@ -176,7 +176,7 @@ bool NFEventModule::RemoveEventCallBack(const NFGUID self)
 	return mObjectEventInfoMapEx.RemoveElement(self);
 }
 
-bool NFEventModule::AddEventCallBack(const NFEventDefine nEventID, const MODULE_EVENT_FUNCTOR_PTR cb)
+bool NFEventModule::AddEventCallBack(const int nEventID, const MODULE_EVENT_FUNCTOR_PTR cb)
 {
 	NF_SHARE_PTR<NFList<MODULE_EVENT_FUNCTOR_PTR>> xEventListPtr = mModuleEventInfoMapEx.GetElement(nEventID);
 	if (!xEventListPtr)
@@ -190,17 +190,17 @@ bool NFEventModule::AddEventCallBack(const NFEventDefine nEventID, const MODULE_
 	return false;
 }
 
-bool NFEventModule::AddEventCallBack(const NFGUID self, const NFEventDefine nEventID, const OBJECT_EVENT_FUNCTOR_PTR cb)
+bool NFEventModule::AddEventCallBack(const NFGUID self, const int nEventID, const OBJECT_EVENT_FUNCTOR_PTR cb)
 {
 	if (!m_pKernelodule->ExistObject(self))
 	{
 		return false;
 	}
 	
-	NF_SHARE_PTR<NFMapEx<NFEventDefine, NFList<OBJECT_EVENT_FUNCTOR_PTR>>> xEventMapPtr = mObjectEventInfoMapEx.GetElement(self);
+	NF_SHARE_PTR<NFMapEx<int, NFList<OBJECT_EVENT_FUNCTOR_PTR>>> xEventMapPtr = mObjectEventInfoMapEx.GetElement(self);
 	if (!xEventMapPtr)
 	{
-		xEventMapPtr = NF_SHARE_PTR<NFMapEx<NFEventDefine, NFList<OBJECT_EVENT_FUNCTOR_PTR>>>(NF_NEW NFMapEx<NFEventDefine, NFList<OBJECT_EVENT_FUNCTOR_PTR>>());
+		xEventMapPtr = NF_SHARE_PTR<NFMapEx<int, NFList<OBJECT_EVENT_FUNCTOR_PTR>>>(NF_NEW NFMapEx<int, NFList<OBJECT_EVENT_FUNCTOR_PTR>>());
 		mObjectEventInfoMapEx.AddElement(self, xEventMapPtr);
 	}
 

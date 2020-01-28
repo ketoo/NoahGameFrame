@@ -30,6 +30,8 @@
 #include <list>
 #include "NFIModule.h"
 #include "NFIKernelModule.h"
+#include "NFIClassModule.h"
+#include "NFIElementModule.h"
 
 NF_SMART_ENUM(NFBlueprintType,
 	LOGICBLOCK,
@@ -226,6 +228,7 @@ NF_SMART_ENUM(NFModifierType,
 NF_SMART_ENUM(NFPropertyModifierInputArg,
 	LastNode,
 	ObjectID,
+	ClassName,
 	PropertyName,
 	PropertyValue
 	)
@@ -243,6 +246,17 @@ NF_SMART_ENUM(NFRecordModifierInputArg,
 	RecordValue
 	)
 NF_SMART_ENUM(NFRecordModifierOutputArg,
+	NextNode,
+	)
+
+NF_SMART_ENUM(NFRecordRemoverrInputArg,
+	LastNode,
+	ObjectID,
+	RecordName,
+	RecordRow,
+)
+
+NF_SMART_ENUM(NFRecordRemoverOutputArg,
 	NextNode,
 	)
 

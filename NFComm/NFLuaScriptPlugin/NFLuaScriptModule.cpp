@@ -152,7 +152,7 @@ bool NFLuaScriptModule::EnterScene(const int nSceneID, const int nGroupID)
 
 bool NFLuaScriptModule::DoEvent(const NFGUID & self, const int nEventID, const NFDataList & arg)
 {
-	m_pEventModule->DoEvent(self, (NFEventDefine)nEventID, arg);
+	m_pEventModule->DoEvent(self, (int)nEventID, arg);
 
 	return true;
 }
@@ -364,7 +364,7 @@ int NFLuaScriptModule::OnLuaRecordCB(const NFGUID& self, const RECORD_EVENT_DATA
     return CallLuaFuncFromMap(mxLuaRecordCallBackFuncMap, xEventData.strRecordName, self, xEventData.strRecordName, xEventData.nOpType, xEventData.nRow, xEventData.nCol, oldVar, newVar);
 }
 
-bool NFLuaScriptModule::AddEventCallBack(const NFGUID& self, const NFEventDefine nEventID, const LuaIntf::LuaRef& luatbl, const LuaIntf::LuaRef& luaFunc)
+bool NFLuaScriptModule::AddEventCallBack(const NFGUID& self, const int nEventID, const LuaIntf::LuaRef& luatbl, const LuaIntf::LuaRef& luaFunc)
 {
 	std::string luaFuncName = FindFuncName(luatbl, luaFunc);
 	if (!luaFuncName.empty())
@@ -380,7 +380,7 @@ bool NFLuaScriptModule::AddEventCallBack(const NFGUID& self, const NFEventDefine
 	return false;
 }
 
-int NFLuaScriptModule::OnLuaEventCB(const NFGUID& self, const NFEventDefine nEventID, const NFDataList& argVar)
+int NFLuaScriptModule::OnLuaEventCB(const NFGUID& self, const int nEventID, const NFDataList& argVar)
 {
     return CallLuaFuncFromMap(mxLuaEventCallBackFuncMap, (int)nEventID, self, nEventID, (NFDataList&)argVar);
 }

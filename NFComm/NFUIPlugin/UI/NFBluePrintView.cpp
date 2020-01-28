@@ -26,6 +26,21 @@
 #include "NFBluePrintView.h"
 #include "NFUIModule.h"
 
+typedef std::function<bool(const NFGUID&, const NFGUID&, const NFGUID&, const NFGUID&)> LINK_EVENT_FUNCTOR;
+
+template < typename T >
+class SmartBind
+{
+public:
+	SmartBind()
+	{
+		name = typeid(T).name();
+	}
+
+	T t;
+	std::string name;
+};
+
 NFBluePrintView::NFBluePrintView(NFIPluginManager* p, NFViewType vt) : NFIView(p, vt, GET_CLASS_NAME(NFBluePrintView))
 {
 	int DEFAULT = IM_COL32(20, 20, 20, 255);
@@ -42,7 +57,18 @@ NFBluePrintView::NFBluePrintView(NFIPluginManager* p, NFViewType vt) : NFIView(p
    m_pNodeView = NF_NEW NFNodeView(p);
    m_pTreeView = NF_NEW NFTreeView(p);
 
+
+  
    m_pNodeView->ResetOffest(NFVector2::Zero());
+
+   SmartBind<LINK_EVENT_FUNCTOR> linkBind;
+   auto bindTest1 = std::bind(&NFBluePrintView::TryNewLinkEvent, this, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3, std::placeholders::_4);
+   auto bindTest2 = std::bind(&NFBluePrintView::TryNewLinkEvent, this, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3, std::placeholders::_4);
+
+   linkBind.t = bindTest1;
+   //hash value
+   std::cout << linkBind.name << std::endl;
+
    m_pNodeView->SetUpNewLinkCallBack(std::bind(&NFBluePrintView::TryNewLinkEvent, this, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3, std::placeholders::_4));
    m_pNodeView->SetUpDeleteLinkCallBack(std::bind(&NFBluePrintView::TryDeleteLinkEvent, this, std::placeholders::_1));
    
@@ -302,9 +328,14 @@ void NFBluePrintView::AddNode(NF_SHARE_PTR<NFBluePrintNodeBase> node)
 			}
 			else
 			{
-				if (variableArg->fromType == NFIODataComFromType::INTERNAL)
+				if (variableArg->fromType == NFIODataComFromType::BOTH
+					|| variableArg->fromType == NFIODataComFromType::EXTERNAL)
 				{
-					pinColor = NFColor::LINK;
+					pinColor = NFColor::PININ;
+				}
+				else if (variableArg->fromType == NFIODataComFromType::INTERNAL)
+				{
+					pinColor = NFColor::DEFAULT;
 				}
 			}
 
@@ -322,7 +353,7 @@ void NFBluePrintView::AddNode(NF_SHARE_PTR<NFBluePrintNodeBase> node)
 			}
 			else
 			{
-				pinColor = NFColor::LINK;
+				pinColor = NFColor::PINOUT;
 			}
 
 			m_pNodeView->AddPinOut(node->id, variableArg->id, variableArg->name, pinColor);
@@ -540,7 +571,7 @@ void NFBluePrintView::PinRenderForVariable(NFNodePin* pin)
 
 void NFBluePrintView::PinRenderForInputVariable(NFNodePin* pin)
 {
-	int itemWidth = 100;
+	int itemWidth = 70;
 	auto variable = std::dynamic_pointer_cast<NFIVariable>(m_pBluePrintModule->FindNode(pin->nodeId));
 
 	static char str0[128] = "";
@@ -581,6 +612,7 @@ void NFBluePrintView::PinRenderForInputVariable(NFNodePin* pin)
 			ImGui::EndCombo();
 		}
 
+		ImGui::SameLine();
 		if (ImGui::InputText("", str0, IM_ARRAYSIZE(str0)))
 		{
 			inputArg->varData = str0;
@@ -592,15 +624,15 @@ void NFBluePrintView::PinRenderForInputVariable(NFNodePin* pin)
 	}
 	else
 	{
+		ImGui::SameLine();
 		auto outputData = variable->GetOutputArg(0);
-		ImGui::Indent(itemWidth);
 		ImGui::TextColored(ImVec4(1.0f, 0.4f, 0.4f, 1.0f), outputData->varData.c_str());
 	}
 }
 
 void NFBluePrintView::PinRenderForElementVariable(NFNodePin* pin)
 {
-	int itemWidth = 100;
+	int itemWidth = 80;
 
 	auto variable = std::dynamic_pointer_cast<NFIVariable>(m_pBluePrintModule->FindNode(pin->nodeId));
 
@@ -608,12 +640,12 @@ void NFBluePrintView::PinRenderForElementVariable(NFNodePin* pin)
 	auto elementIDArg = variable->GetInputArg(NFElementVariableInputArg::toString(NFElementVariableInputArg::ConfigID));
 	auto propertyNameArg = variable->GetInputArg(NFElementVariableInputArg::toString(NFElementVariableInputArg::PropertyName));
 
+	ImGui::PushItemWidth(itemWidth);
 	//class anme && element id && property name
 	if (pin->name == NFElementVariableInputArg::toString(NFElementVariableInputArg::ClassName))
 	{
-		ImGui::PushItemWidth(itemWidth);
-
-		if (ImGui::BeginCombo(pin->name.c_str(), classNameArg->varData.c_str()))
+		ImGui::SameLine();
+		if (ImGui::BeginCombo("", classNameArg->varData.c_str()))
 		{
 			auto classObject = m_pClassModule->First();
 			while (classObject)
@@ -633,18 +665,17 @@ void NFBluePrintView::PinRenderForElementVariable(NFNodePin* pin)
 
 			ImGui::EndCombo();
 		}
-
-		ImGui::PopItemWidth();
 	}
 	else if (pin->name == NFElementVariableInputArg::toString(NFElementVariableInputArg::ConfigID))
 	{
 		auto currentClassObject = m_pClassModule->GetElement(classNameArg->varData);
 		if (currentClassObject)
 		{
-			ImGui::PushItemWidth(itemWidth);
 
 			auto idList = currentClassObject->GetIDList();
-			if (ImGui::BeginCombo(pin->name.c_str(), elementIDArg->varData.c_str()))
+
+			ImGui::SameLine();
+			if (ImGui::BeginCombo("", elementIDArg->varData.c_str()))
 			{
 				for (auto id : idList)
 				{
@@ -658,158 +689,48 @@ void NFBluePrintView::PinRenderForElementVariable(NFNodePin* pin)
 				ImGui::EndCombo();
 			}
 
-			ImGui::PopItemWidth();
 		}
 	}
 	else if (pin->name == NFElementVariableInputArg::toString(NFElementVariableInputArg::PropertyName))
 	{
-		//for all properties
-		NFDATA_TYPE dataType = NFDATA_TYPE::TDATA_UNKNOWN;
-		switch (propertyNameArg->valueType)
-		{
-		case NFValueType::Int:
-			dataType = NFDATA_TYPE::TDATA_INT;
-			break;
-		case NFValueType::Float:
-			dataType = NFDATA_TYPE::TDATA_FLOAT;
-			break;
-		case NFValueType::String:
-			dataType = NFDATA_TYPE::TDATA_STRING;
-			break;
-		case NFValueType::Object:
-			dataType = NFDATA_TYPE::TDATA_OBJECT;
-			break;
-		case NFValueType::Vector2:
-			dataType = NFDATA_TYPE::TDATA_VECTOR2;
-			break;
-		case NFValueType::Vector3:
-			dataType = NFDATA_TYPE::TDATA_VECTOR3;
-			break;
-		default:
-			break;
-		}
-
 		auto currentClassObject = m_pClassModule->GetElement(classNameArg->varData);
 		if (currentClassObject && !elementIDArg->varData.empty())
 		{
-			ImGui::PushItemWidth(itemWidth);
 
-			if (ImGui::BeginCombo(pin->name.c_str(), propertyNameArg->varData.c_str()))
-			{
-				auto property = currentClassObject->GetPropertyManager()->First();
-				while (property)
-				{
-					if (property->GetType() == dataType)
-					{
-						if (ImGui::Selectable(property->GetKey().c_str()))
-						{
-							propertyNameArg->varData = property->GetKey();
-							variable->UpdateOutputData();
-						}
-					}
-
-					property = currentClassObject->GetPropertyManager()->Next();
-				}
-
-				ImGui::EndCombo();
-			}
-
-			ImGui::PopItemWidth();
-		}
-	}
-	else
-	{
-		//output
-		if (!pin->inputPin)
-		{
-			auto outputData = variable->GetOutputArg(0);
-			ImGui::Indent(itemWidth);
-			ImGui::TextColored(ImVec4(1.0f, 0.4f, 0.4f, 1.0f), outputData->varData.c_str());
-		}
-	}
-}
-
-void NFBluePrintView::PinRenderForPropertyVariable(NFNodePin* pin)
-{
-	int itemWidth = 100;
-
-	auto variable = std::dynamic_pointer_cast<NFIVariable>(m_pBluePrintModule->FindNode(pin->nodeId));
-
-	auto onwerID = variable->GetInputArg(NFPropertyVariableInputArg::toString(NFPropertyVariableInputArg::ObjectID));
-	auto classNameArg = variable->GetInputArg(NFPropertyVariableInputArg::toString(NFPropertyVariableInputArg::ClassName));
-	auto propertyNameArg = variable->GetInputArg(NFPropertyVariableInputArg::toString(NFPropertyVariableInputArg::PropertyName));
-	
-	/*
-	ImGui::PushItemWidth(itemWidth);
-
-	if (ImGui::BeginCombo("ValueType", variable->valueType.toString().c_str()))
-	{
-		for (auto x : NFValueType::allValues())
-		{
-			if (ImGui::Selectable(x.toString().c_str(), false))
-			{
-				variable->valueType = x;
-			}
-		}
-		ImGui::EndCombo();
-	}
-	ImGui::PopItemWidth();
-	*/
-
-	if (pin->name == NFPropertyVariableInputArg::toString(NFPropertyVariableInputArg::ObjectID))
-	{
-	}
-	else if (pin->name == NFPropertyVariableInputArg::toString(NFPropertyVariableInputArg::ClassName))
-	{
-		ImGui::PushItemWidth(itemWidth);
-
-		if (ImGui::BeginCombo(pin->name.c_str(), classNameArg->varData.c_str()))
-		{
-			auto classObject = m_pClassModule->First();
-			while (classObject)
-			{
-				if (ImGui::Selectable(classObject->GetClassName().c_str()))
-				{
-					auto outputArg = variable->GetOutputArg(0);
-					if (!outputArg->GetLinkID().IsNull())
-					{
-						break;
-					}
-
-					classNameArg->varData = classObject->GetClassName();
-					propertyNameArg->varData = "";
-					propertyNameArg->valueType = NFValueType::UNKNOW;
-					variable->UpdateOutputData();
-				}
-
-				classObject = m_pClassModule->Next();
-			}
-
-			ImGui::EndCombo();
-		}
-
-		ImGui::PopItemWidth();
-	}
-	else if (pin->name == NFPropertyVariableInputArg::toString(NFPropertyVariableInputArg::PropertyName))
-	{
-		auto currentClassObject = m_pClassModule->GetElement(classNameArg->varData);
-		if (currentClassObject)
-		{
-			ImGui::PushItemWidth(itemWidth);
-			if (ImGui::BeginCombo(pin->name.c_str(), propertyNameArg->varData.c_str()))
+			ImGui::SameLine();
+			if (ImGui::BeginCombo("", propertyNameArg->varData.c_str()))
 			{
 				auto property = currentClassObject->GetPropertyManager()->First();
 				while (property)
 				{
 					if (ImGui::Selectable(property->GetKey().c_str()))
 					{
-						auto outputArg = variable->GetOutputArg(0);
-						if (!outputArg->GetLinkID().IsNull())
+						propertyNameArg->varData = property->GetKey();
+
+						switch (property->GetType())
 						{
+						case NFDATA_TYPE::TDATA_INT:
+							propertyNameArg->valueType = NFValueType::Int;
+							break;
+						case NFDATA_TYPE::TDATA_FLOAT:
+							propertyNameArg->valueType = NFValueType::Float;
+							break;
+						case NFDATA_TYPE::TDATA_STRING:
+							propertyNameArg->valueType = NFValueType::String;
+							break;
+						case NFDATA_TYPE::TDATA_OBJECT:
+							propertyNameArg->valueType = NFValueType::Object;
+							break;
+						case NFDATA_TYPE::TDATA_VECTOR2:
+							propertyNameArg->valueType = NFValueType::Vector2;
+							break;
+						case NFDATA_TYPE::TDATA_VECTOR3:
+							propertyNameArg->valueType = NFValueType::Vector3;
+							break;
+						default:
 							break;
 						}
 
-						propertyNameArg->varData = property->GetKey();
 						variable->UpdateOutputData();
 					}
 
@@ -818,24 +739,108 @@ void NFBluePrintView::PinRenderForPropertyVariable(NFNodePin* pin)
 
 				ImGui::EndCombo();
 			}
-			ImGui::PopItemWidth();
+
 		}
 	}
 	else
 	{
+		//output
 		if (!pin->inputPin)
 		{
+			ImGui::SameLine();
 			auto outputData = variable->GetOutputArg(0);
-			//ImGui::Indent(itemWidth);
-			//ImGui::TextColored(ImVec4(1.0f, 0.4f, 0.4f, 1.0f), outputData->varData.c_str());
+			ImGui::TextColored(ImVec4(1.0f, 0.4f, 0.4f, 1.0f), outputData->varData.c_str());
 		}
 	}
 
+	ImGui::PopItemWidth();
+}
+
+void NFBluePrintView::PinRenderForPropertyVariable(NFNodePin* pin)
+{
+	int itemWidth = 80;
+
+	auto variable = std::dynamic_pointer_cast<NFIVariable>(m_pBluePrintModule->FindNode(pin->nodeId));
+
+	auto onwerID = variable->GetInputArg(NFPropertyVariableInputArg::toString(NFPropertyVariableInputArg::ObjectID));
+	auto classNameArg = variable->GetInputArg(NFPropertyVariableInputArg::toString(NFPropertyVariableInputArg::ClassName));
+	auto propertyNameArg = variable->GetInputArg(NFPropertyVariableInputArg::toString(NFPropertyVariableInputArg::PropertyName));
+
+	ImGui::PushItemWidth(itemWidth);
+	if (pin->inputPin)
+	{
+		if (pin->name == NFPropertyVariableInputArg::toString(NFPropertyVariableInputArg::ObjectID))
+		{
+		}
+		else if (pin->name == NFPropertyVariableInputArg::toString(NFPropertyVariableInputArg::ClassName))
+		{
+			ImGui::SameLine();
+			if (ImGui::BeginCombo("", classNameArg->varData.c_str()))
+			{
+				auto classObject = m_pClassModule->First();
+				while (classObject)
+				{
+					if (ImGui::Selectable(classObject->GetClassName().c_str()))
+					{
+						auto outputArg = variable->GetOutputArg(0);
+						if (!outputArg->GetLinkID().IsNull())
+						{
+							break;
+						}
+
+						classNameArg->varData = classObject->GetClassName();
+						propertyNameArg->varData = "";
+						propertyNameArg->valueType = NFValueType::UNKNOW;
+						variable->UpdateOutputData();
+					}
+
+					classObject = m_pClassModule->Next();
+				}
+
+				ImGui::EndCombo();
+			}
+		}
+		else if (pin->name == NFPropertyVariableInputArg::toString(NFPropertyVariableInputArg::PropertyName))
+		{
+			auto currentClassObject = m_pClassModule->GetElement(classNameArg->varData);
+			if (currentClassObject)
+			{
+				ImGui::SameLine();
+				if (ImGui::BeginCombo("", propertyNameArg->varData.c_str()))
+				{
+					auto property = currentClassObject->GetPropertyManager()->First();
+					while (property)
+					{
+						if (ImGui::Selectable(property->GetKey().c_str()))
+						{
+							auto outputArg = variable->GetOutputArg(0);
+							if (!outputArg->GetLinkID().IsNull())
+							{
+								break;
+							}
+
+							propertyNameArg->varData = property->GetKey();
+							variable->UpdateOutputData();
+						}
+
+						property = currentClassObject->GetPropertyManager()->Next();
+					}
+
+					ImGui::EndCombo();
+				}
+			}
+		}
+	}
+	else
+	{
+	}
+
+	ImGui::PopItemWidth();
 }
 
 void NFBluePrintView::PinRenderForRecordVariable(NFNodePin* pin)
 {
-	int itemWidth = 100;
+	int itemWidth = 80;
 
 	auto variable = std::dynamic_pointer_cast<NFIVariable>(m_pBluePrintModule->FindNode(pin->nodeId));
 
@@ -868,9 +873,9 @@ void NFBluePrintView::PinRenderForRecordVariable(NFNodePin* pin)
 	}
 	else if (pin->name == NFRecordVariableInputArg::toString(NFRecordVariableInputArg::ClassName))
 	{
-		ImGui::PushItemWidth(itemWidth);
+		ImGui::SameLine();
 
-		if (ImGui::BeginCombo(pin->name.c_str(), classNameArg->varData.c_str()))
+		if (ImGui::BeginCombo("", classNameArg->varData.c_str()))
 		{
 			auto classObject = m_pClassModule->First();
 			while (classObject)
@@ -920,8 +925,8 @@ void NFBluePrintView::PinRenderForRecordVariable(NFNodePin* pin)
 				break;
 			}
 
-			ImGui::PushItemWidth(itemWidth);
-			if (ImGui::BeginCombo(pin->name.c_str(), recordNameArg->varData.c_str()))
+			ImGui::SameLine();
+			if (ImGui::BeginCombo("", recordNameArg->varData.c_str()))
 			{
 				auto property = currentClassObject->GetPropertyManager()->First();
 				while (property)
