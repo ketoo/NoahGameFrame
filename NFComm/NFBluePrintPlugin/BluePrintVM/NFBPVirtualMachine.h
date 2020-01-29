@@ -34,11 +34,13 @@
 #include "NFComm/NFPluginModule/NFIBluePrintModule.h"
 
 
-class NFBPVirtualMachine
+class NFBPVirtualMachine : public NFIModule
 {
 public:
     NFBPVirtualMachine(NFIPluginManager* p, NF_SHARE_PTR<NFLogicBlock> logicBlock)
     {
+        pPluginManager = p;
+        
         m_pBluePrintModule = p->FindModule<NFIBluePrintModule>();
         m_pElementModule = p->FindModule<NFIElementModule>();
         m_pClassModule = p->FindModule<NFIClassModule>();
@@ -48,15 +50,63 @@ public:
         mLogicBlock = logicBlock;
 
         mLogicBlock->running = true;
-
-
-        StartToProcessMonitor();
     }
 
     virtual ~NFBPVirtualMachine() 
     {
         mLogicBlock->running = false;
     };
+
+    virtual bool Awake()
+    {
+        return true;
+    }
+
+    virtual bool Init()
+    {
+
+        return true;
+    }
+
+    virtual bool AfterInit()
+    {
+        return true;
+    }
+
+    virtual bool CheckConfig()
+    {
+        return true;
+    }
+
+    virtual bool ReadyExecute()
+    {
+        return true;
+    }
+
+    virtual bool Execute()
+    {
+        return true;
+    }
+
+    virtual bool BeforeShut()
+    {
+        return true;
+    }
+
+    virtual bool Shut()
+    {
+        return true;
+    }
+
+    virtual bool Finalize()
+    {
+        return true;
+    }
+
+	virtual bool OnReloadPlugin()
+	{
+		return true;
+	}
 
 private:
     void StartToProcessMonitor();
