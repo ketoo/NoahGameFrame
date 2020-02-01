@@ -26,19 +26,7 @@
 #include "NFComm/NFPluginModule/NFIElementModule.h"
 #include "NFComm/NFPluginModule/NFIClassModule.h"
 #include "NFComm/NFPluginModule/NFIBluePrintModule.h"
-/*
-	GameEvent,
-	NetworkEvent,
-	NetworkMsgEvent,
-	ObjectEvent,
-	PropertyEvent,
-	RecordEvent,
-	HeartBeatEvent,
-	SceneEvent,
-	ItemEvent,
-	SkillEvent,
-	BuffEvent,
-*/
+
 class NFGameEventMonitor : public NFIMonitor
 {
 public:
@@ -87,17 +75,22 @@ public:
 
 			outputArgs.push_back(var);
 		}
+		{
+			NF_SHARE_PTR<NFIOData> var = NF_SHARE_PTR<NFIOData>(NF_NEW NFIOData());
+			var->id = this->pPluginManager->FindModule<NFIKernelModule>()->CreateGUID();
+			var->name = NFGameEventMonitorOutputArg::toString(NFGameEventMonitorOutputArg::Dictionary);
+			var->valueType = NFValueType::Dictionary;
+
+			outputArgs.push_back(var);
+		}
 	}
 
-	virtual void UpdateOutputData()
-	{
-		NF_SHARE_PTR<NFIOData> inputData = GetInputArg(0);
-		NF_SHARE_PTR<NFIOData> outputData = GetOutputArg(0);
-		outputData->varData = inputData->varData;
-	}
+	// Inherited via NFIMonitor
+	virtual void PrepareInputData() override;
+	virtual void UpdateOutputData() override;
 
-public:
-	
+	// Inherited via NFIMonitor
+	virtual NF_SHARE_PTR<NFBluePrintNodeBase> FindNextNode() override;
 };
 
 class NFNetworkEventMonitor : public NFIMonitor
@@ -144,21 +137,30 @@ public:
 		{
 			NF_SHARE_PTR<NFIOData> var = NF_SHARE_PTR<NFIOData>(NF_NEW NFIOData());
 			var->id = this->pPluginManager->FindModule<NFIKernelModule>()->CreateGUID();
-			var->name = NFGameEventMonitorOutputArg::toString(NFNetworkEventMonitorOutputArg::ObjectID);
+			var->name = NFNetworkEventMonitorOutputArg::toString(NFNetworkEventMonitorOutputArg::ObjectID);
 			var->valueType = NFValueType::Object;
+
+			outputArgs.push_back(var);
+		}
+		{
+			NF_SHARE_PTR<NFIOData> var = NF_SHARE_PTR<NFIOData>(NF_NEW NFIOData());
+			var->id = this->pPluginManager->FindModule<NFIKernelModule>()->CreateGUID();
+			var->name = NFNetworkEventMonitorOutputArg::toString(NFNetworkEventMonitorOutputArg::Dictionary);
+			var->valueType = NFValueType::Dictionary;
 
 			outputArgs.push_back(var);
 		}
 	}
 
-	virtual void UpdateOutputData()
-	{
-		NF_SHARE_PTR<NFIOData> inputData = GetInputArg(0);
-		NF_SHARE_PTR<NFIOData> outputData = GetOutputArg(0);
-		outputData->varData = inputData->varData;
-	}
 
-public:
+	// Inherited via NFIMonitor
+	virtual void PrepareInputData() override;
+
+	virtual void UpdateOutputData() override;
+
+
+	// Inherited via NFIMonitor
+	virtual NF_SHARE_PTR<NFBluePrintNodeBase> FindNextNode() override;
 
 };
 
@@ -219,15 +221,22 @@ public:
 
 			outputArgs.push_back(var);
 		}
+		{
+			NF_SHARE_PTR<NFIOData> var = NF_SHARE_PTR<NFIOData>(NF_NEW NFIOData());
+			var->id = this->pPluginManager->FindModule<NFIKernelModule>()->CreateGUID();
+			var->name = NFNetworkkMsgMonitorOutputArg::toString(NFNetworkkMsgMonitorOutputArg::Dictionary);
+			var->valueType = NFValueType::Dictionary;
+
+			outputArgs.push_back(var);
+		}
 	}
 
+	// Inherited via NFIMonitor
+	virtual void PrepareInputData() override;
+	virtual void UpdateOutputData() override;
 
-	virtual void UpdateOutputData()
-	{
-	}
-
-public:
-
+	// Inherited via NFIMonitor
+	virtual NF_SHARE_PTR<NFBluePrintNodeBase> FindNextNode() override;
 };
 
 class NFObjectEventMonitor : public NFIMonitor
@@ -332,11 +341,15 @@ public:
 		}
 	}
 
-	virtual void UpdateOutputData()
-	{
-	}
 
-public:
+	// Inherited via NFIMonitor
+	virtual void PrepareInputData() override;
+
+	virtual void UpdateOutputData() override;
+
+
+	// Inherited via NFIMonitor
+	virtual NF_SHARE_PTR<NFBluePrintNodeBase> FindNextNode() override;
 
 };
 
@@ -416,81 +429,15 @@ public:
 		}
 	}
 
-	virtual void UpdateOutputData()
-	{
-		NF_SHARE_PTR<NFIOData> className = GetInputArg(NFMonitorPropertyEventInputArg::toString(NFMonitorPropertyEventInputArg::ClassName));
-		NF_SHARE_PTR<NFIOData> propertyName = GetInputArg(NFMonitorPropertyEventInputArg::toString(NFMonitorPropertyEventInputArg::PropertyName));
 
-		NF_SHARE_PTR<NFIOData> outputSelf = GetOutputArg(NFMonitorPropertyEventOutputArg::toString(NFMonitorPropertyEventOutputArg::ObjectID));
-		NF_SHARE_PTR<NFIOData> outputPropertyName = GetOutputArg(NFMonitorPropertyEventOutputArg::toString(NFMonitorPropertyEventOutputArg::PropertyName));
-		NF_SHARE_PTR<NFIOData> outputPropertyValue = GetOutputArg(NFMonitorPropertyEventOutputArg::toString(NFMonitorPropertyEventOutputArg::PropertyValue));
+	// Inherited via NFIMonitor
+	virtual void PrepareInputData() override;
 
-		outputSelf->varData = "";
-		outputPropertyName->varData = propertyName->varData;
-		outputPropertyValue->varData = "";
+	virtual void UpdateOutputData() override;
 
-		if (className->varData.empty() || propertyName->varData.empty())
-		{
-			return;
-		}
 
-		auto elementModule = this->pPluginManager->FindModule<NFIElementModule>();
-		auto classModule = this->pPluginManager->FindModule<NFIClassModule>();
-		{
-			auto classObject = classModule->GetElement(className->varData);
-			if (classObject)
-			{
-				auto classProperty = classObject->GetPropertyManager()->GetElement(propertyName->varData);
-				if (classProperty)
-				{
-					switch (classProperty->GetType())
-					{
-					case NFDATA_TYPE::TDATA_INT:
-					{
-						outputPropertyValue->valueType = NFValueType::Int;
-						outputPropertyValue->varData = NFValueType::toString(NFValueType::Int);
-					}
-					break;
-					case NFDATA_TYPE::TDATA_FLOAT:
-					{
-						outputPropertyValue->valueType = NFValueType::Float;
-						outputPropertyValue->varData = NFValueType::toString(NFValueType::Float);
-					}
-					break;
-					case NFDATA_TYPE::TDATA_OBJECT:
-					{
-						outputPropertyValue->valueType = NFValueType::Object;
-						outputPropertyValue->varData = NFValueType::toString(NFValueType::Object);
-					}
-					break;
-					case NFDATA_TYPE::TDATA_STRING:
-					{
-						outputPropertyValue->valueType = NFValueType::String;
-						outputPropertyValue->varData = NFValueType::toString(NFValueType::String);
-					}
-					break;
-					case NFDATA_TYPE::TDATA_VECTOR2:
-					{
-						outputPropertyValue->valueType = NFValueType::Vector2;
-						outputPropertyValue->varData = NFValueType::toString(NFValueType::Vector2);
-					}
-					break;
-					case NFDATA_TYPE::TDATA_VECTOR3:
-					{
-						outputPropertyValue->valueType = NFValueType::Vector3;
-						outputPropertyValue->varData = NFValueType::toString(NFValueType::Vector3);
-					}
-					break;
-					default:
-						break;
-					}
-
-				}
-			}
-		}
-	}
-
-public:
+	// Inherited via NFIMonitor
+	virtual NF_SHARE_PTR<NFBluePrintNodeBase> FindNextNode() override;
 
 };
 
@@ -590,12 +537,15 @@ public:
 		}
 	}
 
-	virtual void UpdateOutputData()
-	{
-		
-	}
 
-public:
+	// Inherited via NFIMonitor
+	virtual void PrepareInputData() override;
+
+	virtual void UpdateOutputData() override;
+
+
+	// Inherited via NFIMonitor
+	virtual NF_SHARE_PTR<NFBluePrintNodeBase> FindNextNode() override;
 
 };
 
@@ -695,12 +645,15 @@ public:
 		}
 	}
 
-	virtual void UpdateOutputData()
-	{
 
-	}
+	// Inherited via NFIMonitor
+	virtual void PrepareInputData() override;
 
-public:
+	virtual void UpdateOutputData() override;
+
+
+	// Inherited via NFIMonitor
+	virtual NF_SHARE_PTR<NFBluePrintNodeBase> FindNextNode() override;
 
 };
 

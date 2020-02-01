@@ -68,8 +68,8 @@ public:
 
 protected:
 
-	virtual bool AddEventCallBack(const int nEventID, const MODULE_EVENT_FUNCTOR_PTR cb);
-	virtual bool AddEventCallBack(const NFGUID self, const int nEventID, const OBJECT_EVENT_FUNCTOR_PTR cb);
+	virtual bool AddEventCallBack(const int nEventID, const MODULE_EVENT_FUNCTOR cb);
+	virtual bool AddEventCallBack(const NFGUID self, const int nEventID, const OBJECT_EVENT_FUNCTOR cb);
 
 private:
 
@@ -78,11 +78,11 @@ private:
 private:
 	// for module
 	NFList<int> mModuleRemoveListEx;
-	NFMapEx<int, NFList<MODULE_EVENT_FUNCTOR_PTR>> mModuleEventInfoMapEx;
+	NFMapEx<int, NFList<MODULE_EVENT_FUNCTOR>> mModuleEventInfoMapEx;
 
 	//for object
 	NFList<NFGUID> mObjectRemoveListEx;
-	NFMapEx<NFGUID, NFMapEx<int, NFList<OBJECT_EVENT_FUNCTOR_PTR>>> mObjectEventInfoMapEx;
+	NFMapEx<NFGUID, NFMapEx<int, NFList<OBJECT_EVENT_FUNCTOR>>> mObjectEventInfoMapEx;
 };
 
 #endif

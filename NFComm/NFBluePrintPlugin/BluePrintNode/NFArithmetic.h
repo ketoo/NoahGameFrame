@@ -83,23 +83,9 @@ public:
 		}
 	}
 
-	virtual void UpdateOutputData()
-	{
-		if (this->arithmeticType == NFArithmeticType::Add)
-		{
+	virtual void UpdateOutputData() override;
+	virtual void PrepareInputData() override;
 
-		}
-		else if (this->arithmeticType == NFArithmeticType::Sub)
-		{
-
-		}
-		else if (this->arithmeticType == NFArithmeticType::Multiply)
-		{
-
-		}
-		else if (this->arithmeticType == NFArithmeticType::Division)
-		{
-
-		}
-	}
+	// Inherited via NFIArithmetic
+	virtual NF_SHARE_PTR<NFBluePrintNodeBase> FindNextNode() override;
 };

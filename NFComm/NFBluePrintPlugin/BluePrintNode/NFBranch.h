@@ -104,10 +104,14 @@ public:
 		}
 	}
 
-	virtual void UpdateOutputData()
-	{
+	// Inherited via NFIBranch
+	virtual void PrepareInputData() override;
 
-	}
+	// Inherited via NFIBranch
+	virtual void UpdateOutputData() override;
+
+	// Inherited via NFIBranch
+	virtual NF_SHARE_PTR<NFBluePrintNodeBase> FindNextNode() override;
 };
 
 
@@ -190,10 +194,12 @@ public:
 		}
 	}
 
-	virtual void UpdateOutputData()
-	{
+	// Inherited via NFIBranch
+	virtual void PrepareInputData() override;
+	virtual void UpdateOutputData() override;
 
-	}
+	// Inherited via NFIBranch
+	virtual NF_SHARE_PTR<NFBluePrintNodeBase> FindNextNode() override;
 };
 
 
@@ -276,10 +282,12 @@ public:
 		}
 	}
 
-	virtual void UpdateOutputData()
-	{
+	// Inherited via NFIBranch
+	virtual void PrepareInputData() override;
+	virtual void UpdateOutputData() override;
 
-	}
+	// Inherited via NFIBranch
+	virtual NF_SHARE_PTR<NFBluePrintNodeBase> FindNextNode() override;
 };
 
 
@@ -362,10 +370,12 @@ public:
 		}
 	}
 
-	virtual void UpdateOutputData()
-	{
+	// Inherited via NFIBranch
+	virtual void PrepareInputData() override;
+	virtual void UpdateOutputData() override;
 
-	}
+	// Inherited via NFIBranch
+	virtual NF_SHARE_PTR<NFBluePrintNodeBase> FindNextNode() override;
 };
 
 
@@ -449,12 +459,17 @@ public:
 		}
 	}
 
-	virtual void UpdateOutputData()
-	{
 
-	}
+	// Inherited via NFIBranch
+	virtual void PrepareInputData() override;
+
+	virtual void UpdateOutputData() override;
+
+
+	// Inherited via NFIBranch
+	virtual NF_SHARE_PTR<NFBluePrintNodeBase> FindNextNode() override;
+
 };
-
 
 class NFVector3Branch : public NFIBranch
 {
@@ -535,8 +550,14 @@ public:
 		}
 	}
 
-	virtual void UpdateOutputData()
-	{
 
-	}
+	// Inherited via NFIBranch
+	virtual void PrepareInputData() override;
+
+	virtual void UpdateOutputData() override;
+
+
+	// Inherited via NFIBranch
+	virtual NF_SHARE_PTR<NFBluePrintNodeBase> FindNextNode() override;
+
 };

@@ -43,12 +43,6 @@ public:
 		Init();
 	}
 
-	virtual NF_SHARE_PTR<NFBluePrintNodeBase> FindNode(const NFGUID& id)
-	{
-		
-		return nullptr;
-	}
-
 	virtual void InitInputArgs()
 	{
 		{
@@ -146,8 +140,13 @@ public:
 			break;
 		}
 	}
-};
 
+	// Inherited via NFIModifier
+	virtual void PrepareInputData() override;
+
+	// Inherited via NFIModifier
+	virtual NF_SHARE_PTR<NFBluePrintNodeBase> FindNextNode() override;
+};
 
 class NFRecordModifier : public NFIModifier
 {
@@ -165,12 +164,6 @@ public:
 		modifierType = NFModifierType::SetRecord;
 
 		Init();
-	}
-
-	virtual NF_SHARE_PTR<NFBluePrintNodeBase> FindNode(const NFGUID& id)
-	{
-
-		return nullptr;
 	}
 
 	virtual void InitInputArgs()
@@ -242,10 +235,12 @@ public:
 		}
 	}
 
-	virtual void UpdateOutputData()
-	{
+	// Inherited via NFIModifier
+	virtual void PrepareInputData() override;
+	virtual void UpdateOutputData() override;
 
-	}
+	// Inherited via NFIModifier
+	virtual NF_SHARE_PTR<NFBluePrintNodeBase> FindNextNode() override;
 };
 
 
@@ -324,10 +319,9 @@ public:
 		}
 	}
 
-	virtual void UpdateOutputData()
-	{
-
-	}
+	// Inherited via NFIModifier
+	virtual void PrepareInputData() override;
+	virtual void UpdateOutputData() override;
 };
 
 class NFRecordRemover : public NFIModifier
@@ -346,12 +340,6 @@ public:
 		modifierType = NFModifierType::SetRecord;
 
 		Init();
-	}
-
-	virtual NF_SHARE_PTR<NFBluePrintNodeBase> FindNode(const NFGUID& id)
-	{
-
-		return nullptr;
 	}
 
 	virtual void InitInputArgs()
@@ -405,8 +393,10 @@ public:
 		}
 	}
 
-	virtual void UpdateOutputData()
-	{
+	// Inherited via NFIModifier
+	virtual void PrepareInputData() override;
+	virtual void UpdateOutputData() override;
 
-	}
+	// Inherited via NFIModifier
+	virtual NF_SHARE_PTR<NFBluePrintNodeBase> FindNextNode() override;
 };

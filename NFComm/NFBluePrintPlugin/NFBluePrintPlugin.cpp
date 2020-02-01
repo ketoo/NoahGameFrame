@@ -28,6 +28,7 @@
 #include "NFBluePrintModule.h"
 #include "NFBPVirtualMachineModule.h"
 #include "NFBPVirtualMachineModule.h"
+#include "NFBPVMEventModule.h"
 #include "NFBluePrintPlugin.h"
 
 #ifdef NF_DYNAMIC_PLUGIN
@@ -60,12 +61,14 @@ const std::string NFBluePrintPlugin::GetPluginName()
 void NFBluePrintPlugin::Install()
 {
 	REGISTER_MODULE(pPluginManager, NFIBPVirtualMachineModule, NFBPVirtualMachineModule)
-	REGISTER_MODULE(pPluginManager, NFIBluePrintModule, NFBluePrintModule)
+    REGISTER_MODULE(pPluginManager, NFIBluePrintModule, NFBluePrintModule)
+    REGISTER_MODULE(pPluginManager, NFIBPVMEventModule, NFBPVMEventModule)
 
 }
 
 void NFBluePrintPlugin::Uninstall()
 {
-	UNREGISTER_MODULE(pPluginManager, NFIBluePrintModule, NFBluePrintModule)
+    UNREGISTER_MODULE(pPluginManager, NFIBPVMEventModule, NFBPVMEventModule)
+    UNREGISTER_MODULE(pPluginManager, NFIBluePrintModule, NFBluePrintModule)
 	UNREGISTER_MODULE(pPluginManager, NFIBPVirtualMachineModule, NFBPVirtualMachineModule)
 }

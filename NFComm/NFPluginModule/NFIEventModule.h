@@ -38,9 +38,6 @@ protected:
 	typedef std::function<int(const NFGUID&, const int, const NFDataList&)> OBJECT_EVENT_FUNCTOR;
 	typedef std::function<int(const int, const NFDataList&)> MODULE_EVENT_FUNCTOR;
 
-	typedef NF_SHARE_PTR<OBJECT_EVENT_FUNCTOR> OBJECT_EVENT_FUNCTOR_PTR;//EVENT
-	typedef NF_SHARE_PTR<MODULE_EVENT_FUNCTOR> MODULE_EVENT_FUNCTOR_PTR;//EVENT
-
 public:
 	// only be used in module
     virtual bool DoEvent(const int nEventID, const NFDataList& valueList) = 0;
@@ -53,8 +50,7 @@ public:
 	bool AddEventCallBack(const int nEventID, BaseType* pBase, int (BaseType::*handler)(const int, const NFDataList&))
 	{
 		MODULE_EVENT_FUNCTOR functor = std::bind(handler, pBase, std::placeholders::_1, std::placeholders::_2);
-		MODULE_EVENT_FUNCTOR_PTR functorPtr(new MODULE_EVENT_FUNCTOR(functor));
-		return AddEventCallBack(nEventID, functorPtr);
+		return AddEventCallBack(nEventID, functor);
 	}
     ///////////////////////////////////////////////////////////////////////////////////////////////
 	// can be used for object
@@ -69,14 +65,13 @@ public:
 	bool AddEventCallBack(const NFGUID& self, const int nEventID, BaseType* pBase, int (BaseType::*handler)(const NFGUID&, const int, const NFDataList&))
 	{
 		OBJECT_EVENT_FUNCTOR functor = std::bind(handler, pBase, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3);
-		OBJECT_EVENT_FUNCTOR_PTR functorPtr(new OBJECT_EVENT_FUNCTOR(functor));
-		return AddEventCallBack(self, nEventID, functorPtr);
+		return AddEventCallBack(self, nEventID, functor);
 	}
 
 protected:
 
-	virtual bool AddEventCallBack(const int nEventID, const MODULE_EVENT_FUNCTOR_PTR cb) = 0;
-	virtual bool AddEventCallBack(const NFGUID self, const int nEventID, const OBJECT_EVENT_FUNCTOR_PTR cb) = 0;
+	virtual bool AddEventCallBack(const int nEventID, const MODULE_EVENT_FUNCTOR cb) = 0;
+	virtual bool AddEventCallBack(const NFGUID self, const int nEventID, const OBJECT_EVENT_FUNCTOR cb) = 0;
 
 };
 
