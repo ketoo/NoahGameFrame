@@ -41,11 +41,11 @@ public:
 		branchType = NFBranchType::IntBranch;
 		comparatorType = NFComparatorType::Equal;
 
-		Init();
+		//Init();
 
 	}
 
-	virtual void InitInputArgs()
+	virtual void InitInputArgs() override
 	{
 		{
 			NF_SHARE_PTR<NFIOData> var = NF_SHARE_PTR<NFIOData>(NF_NEW NFIOData());
@@ -84,7 +84,7 @@ public:
 		}
 	}
 
-	virtual void InitOutputArgs()
+	virtual void InitOutputArgs() override
 	{
 		{
 			NF_SHARE_PTR<NFIOData> var = NF_SHARE_PTR<NFIOData>(NF_NEW NFIOData());

@@ -5,9 +5,20 @@ file(GLOB NFBluePrintPlugin_ROOT_Cpp
 file(GLOB NFBluePrintPlugin_ROOT_Hpp 
 	*.h)
 
+file(GLOB NF_BLUEPRINT_NODE_Cpp ./BluePrintNode/*.cpp)
+file(GLOB NF_BLUEPRINT_NODE_Hpp ./BluePrintNode/*.h)
+
+
+file(GLOB NF_BLUEPRINT_VM_Cpp ./BluePrintVM/*.cpp)
+file(GLOB NF_BLUEPRINT_VM_Hpp ./BluePrintVM/*.h)
+
 add_library(NFBluePrintPlugin STATIC
 	${NFBluePrintPlugin_ROOT_Cpp}
-	${NFBluePrintPlugin_ROOT_Hpp})
+	${NFBluePrintPlugin_ROOT_Hpp}
+	${NF_BLUEPRINT_NODE_Cpp}
+	${NF_BLUEPRINT_NODE_Hpp}
+	${NF_BLUEPRINT_VM_Cpp}
+	${NF_BLUEPRINT_VM_Hpp})
 	
 set_target_properties( NFBluePrintPlugin PROPERTIES OUTPUT_NAME_DEBUG "NFBluePrintPlugin")
 set_target_properties( NFBluePrintPlugin PROPERTIES PREFIX "")

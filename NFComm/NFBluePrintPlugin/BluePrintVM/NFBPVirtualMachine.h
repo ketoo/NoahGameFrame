@@ -66,7 +66,7 @@ public:
 
     virtual bool Init()
     {
-		StartToProcessMonitor();
+		//StartToProcessMonitor();
 
         return true;
     }
