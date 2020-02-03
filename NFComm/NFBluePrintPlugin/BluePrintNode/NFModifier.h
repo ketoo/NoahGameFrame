@@ -74,7 +74,7 @@ public:
 		{
 			NF_SHARE_PTR<NFIOData> var = NF_SHARE_PTR<NFIOData>(NF_NEW NFIOData());
 			var->id = this->pPluginManager->FindModule<NFIKernelModule>()->CreateGUID();
-			var->name = NFPropertyModifierInputArg::toString(NFPropertyModifierInputArg::PropertyName);
+			var->name = NFPropertyModifierInputArg::toString(NFPropertyModifierInputArg::PropName);
 			var->valueType = NFValueType::String;
 			var->fromType = NFIODataComFromType::INTERNAL;
 
@@ -83,7 +83,7 @@ public:
 		{
 			NF_SHARE_PTR<NFIOData> var = NF_SHARE_PTR<NFIOData>(NF_NEW NFIOData());
 			var->id = this->pPluginManager->FindModule<NFIKernelModule>()->CreateGUID();
-			var->name = NFPropertyModifierInputArg::toString(NFPropertyModifierInputArg::PropertyValue);
+			var->name = NFPropertyModifierInputArg::toString(NFPropertyModifierInputArg::PropValue);
 			var->valueType = NFValueType::UNKNOW;
 			var->fromType = NFIODataComFromType::EXTERNAL;
 
@@ -106,8 +106,8 @@ public:
 	virtual void UpdateOutputData()
 	{
 		NF_SHARE_PTR<NFIOData> inputClassName = GetOutputArg(NFPropertyModifierInputArg::ClassName);
-		NF_SHARE_PTR<NFIOData> inputPropName = GetOutputArg(NFPropertyModifierInputArg::PropertyName);
-		NF_SHARE_PTR<NFIOData> inputPropValue = GetOutputArg(NFPropertyModifierInputArg::PropertyValue);
+		NF_SHARE_PTR<NFIOData> inputPropName = GetOutputArg(NFPropertyModifierInputArg::PropName);
+		NF_SHARE_PTR<NFIOData> inputPropValue = GetOutputArg(NFPropertyModifierInputArg::PropValue);
 
 		std::string className = inputClassName->varData;
 		std::string propName = inputPropName->varData;

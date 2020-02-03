@@ -63,7 +63,7 @@ void NFElementVariable::UpdateOutputData()
 {
 	NF_SHARE_PTR<NFIOData> className = GetInputArg(NFElementVariableInputArg::toString(NFElementVariableInputArg::ClassName));
 	NF_SHARE_PTR<NFIOData> configID = GetInputArg(NFElementVariableInputArg::toString(NFElementVariableInputArg::ConfigID));
-	NF_SHARE_PTR<NFIOData> propertyName = GetInputArg(NFElementVariableInputArg::toString(NFElementVariableInputArg::PropertyName));
+	NF_SHARE_PTR<NFIOData> propertyName = GetInputArg(NFElementVariableInputArg::toString(NFElementVariableInputArg::PropName));
 
 	NF_SHARE_PTR<NFIOData> outputData = GetOutputArg(0);
 	outputData->varData = "";
@@ -141,7 +141,7 @@ void NFPropertyVariable::PrepareInputData()
 void NFPropertyVariable::UpdateOutputData()
 {
 	NF_SHARE_PTR<NFIOData> className = GetInputArg(NFPropertyVariableInputArg::toString(NFPropertyVariableInputArg::ClassName));
-	NF_SHARE_PTR<NFIOData> propertyName = GetInputArg(NFPropertyVariableInputArg::toString(NFPropertyVariableInputArg::PropertyName));
+	NF_SHARE_PTR<NFIOData> propertyName = GetInputArg(NFPropertyVariableInputArg::toString(NFPropertyVariableInputArg::PropName));
 
 	NF_SHARE_PTR<NFIOData> outputData = GetOutputArg(0);
 	outputData->varData = "";

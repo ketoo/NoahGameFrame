@@ -123,7 +123,7 @@ public:
 		{
 			NF_SHARE_PTR<NFIOData> var = NF_SHARE_PTR<NFIOData>(NF_NEW NFIOData());
 			var->id = this->pPluginManager->FindModule<NFIKernelModule>()->CreateGUID();
-			var->name = NFElementVariableInputArg::toString(NFElementVariableInputArg::PropertyName);
+			var->name = NFElementVariableInputArg::toString(NFElementVariableInputArg::PropName);
 			var->valueType = NFValueType::String;
 			var->fromType = NFIODataComFromType::INTERNAL;
 
@@ -192,7 +192,7 @@ public:
 		{
 			NF_SHARE_PTR<NFIOData> var = NF_SHARE_PTR<NFIOData>(NF_NEW NFIOData());
 			var->id = this->pPluginManager->FindModule<NFIKernelModule>()->CreateGUID();
-			var->name = NFPropertyVariableInputArg::toString(NFPropertyVariableInputArg::PropertyName);
+			var->name = NFPropertyVariableInputArg::toString(NFPropertyVariableInputArg::PropName);
 			var->valueType = NFValueType::String;
 			var->fromType = NFIODataComFromType::INTERNAL;
 
@@ -212,7 +212,7 @@ public:
 		{
 			NF_SHARE_PTR<NFIOData> var = NF_SHARE_PTR<NFIOData>(NF_NEW NFIOData());
 			var->id = this->pPluginManager->FindModule<NFIKernelModule>()->CreateGUID();
-			var->name = NFPropertyVariableOutputArg::toString(NFPropertyVariableOutputArg::PropertyName);
+			var->name = NFPropertyVariableOutputArg::toString(NFPropertyVariableOutputArg::PropName);
 			var->valueType = NFValueType::String;
 
 			outputArgs.push_back(var);
@@ -220,7 +220,7 @@ public:
 		{
 			NF_SHARE_PTR<NFIOData> var = NF_SHARE_PTR<NFIOData>(NF_NEW NFIOData());
 			var->id = this->pPluginManager->FindModule<NFIKernelModule>()->CreateGUID();
-			var->name = NFPropertyVariableOutputArg::toString(NFPropertyVariableOutputArg::PropertyValue);
+			var->name = NFPropertyVariableOutputArg::toString(NFPropertyVariableOutputArg::PropValue);
 			var->valueType = NFValueType::UNKNOW;
 
 			outputArgs.push_back(var);

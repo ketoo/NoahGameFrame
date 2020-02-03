@@ -49,19 +49,19 @@ NF_SMART_ENUM(NFBlueprintType,
 NF_SMART_ENUM(NFElementVariableInputArg,
 	ClassName,
 	ConfigID,
-	PropertyName,
+	PropName,
 	)
 
 	NF_SMART_ENUM(NFPropertyVariableInputArg,
 		ObjectID,
 		ClassName,
-		PropertyName,
+		PropName,
 		)
 
 	NF_SMART_ENUM(NFPropertyVariableOutputArg,
 		ClassName,
-		PropertyName,
-		PropertyValue,
+		PropName,
+		PropValue,
 		)
 
 	NF_SMART_ENUM(NFPropertyListVariableInputArg,
@@ -151,14 +151,14 @@ NF_SMART_ENUM(NFMonitorType,
 	//------------------------------
 	NF_SMART_ENUM(NFMonitorPropertyEventInputArg,
 		ClassName,
-		PropertyName,
+		PropName,
 		)
 
 	NF_SMART_ENUM(NFMonitorPropertyEventOutputArg,
 		NextNode,
 		ObjectID,
-		PropertyName,
-		PropertyValue,
+		PropName,
+		PropValue,
 		)
 
 	//------------------------------
@@ -231,8 +231,8 @@ NF_SMART_ENUM(NFPropertyModifierInputArg,
 	LastNode,
 	ObjectID,
 	ClassName,
-	PropertyName,
-	PropertyValue
+	PropName,
+	PropValue
 	)
 
 NF_SMART_ENUM(NFPropertyModifierOutputArg,

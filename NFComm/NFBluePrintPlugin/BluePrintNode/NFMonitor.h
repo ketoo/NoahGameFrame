@@ -385,7 +385,7 @@ public:
 		{
 			NF_SHARE_PTR<NFIOData> var = NF_SHARE_PTR<NFIOData>(NF_NEW NFIOData());
 			var->id = this->pPluginManager->FindModule<NFIKernelModule>()->CreateGUID();
-			var->name = NFMonitorPropertyEventInputArg::toString(NFMonitorPropertyEventInputArg::PropertyName);
+			var->name = NFMonitorPropertyEventInputArg::toString(NFMonitorPropertyEventInputArg::PropName);
 			var->valueType = NFValueType::String;
 			var->fromType = NFIODataComFromType::INTERNAL;
 
@@ -414,7 +414,7 @@ public:
 		{
 			NF_SHARE_PTR<NFIOData> var = NF_SHARE_PTR<NFIOData>(NF_NEW NFIOData());
 			var->id = this->pPluginManager->FindModule<NFIKernelModule>()->CreateGUID();
-			var->name = NFMonitorPropertyEventOutputArg::toString(NFMonitorPropertyEventOutputArg::PropertyName);
+			var->name = NFMonitorPropertyEventOutputArg::toString(NFMonitorPropertyEventOutputArg::PropName);
 			var->valueType = NFValueType::String;
 
 			outputArgs.push_back(var);
@@ -422,7 +422,7 @@ public:
 		{
 			NF_SHARE_PTR<NFIOData> var = NF_SHARE_PTR<NFIOData>(NF_NEW NFIOData());
 			var->id = this->pPluginManager->FindModule<NFIKernelModule>()->CreateGUID();
-			var->name = NFMonitorPropertyEventOutputArg::toString(NFMonitorPropertyEventOutputArg::PropertyValue);
+			var->name = NFMonitorPropertyEventOutputArg::toString(NFMonitorPropertyEventOutputArg::PropValue);
 			var->valueType = NFValueType::UNKNOW;//depend the property's type
 
 			outputArgs.push_back(var);

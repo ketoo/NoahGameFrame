@@ -26,6 +26,17 @@
 #include "NFBluePrintView.h"
 #include "NFUIModule.h"
 
+char* variableIntImage = "..//NFDataCfg//Fonts//Icon//Variable//int.png";
+char* variableFloatImage = "..//NFDataCfg//Fonts//Icon//Variable//float.png";
+char* variableBoolImage = "..//NFDataCfg//Fonts//Icon//Variable//bool.png";
+char* variableStringImage = "..//NFDataCfg//Fonts//Icon//Variable//string.png";
+char* variableObjectImage = "..//NFDataCfg//Fonts//Icon//Variable//object.png";
+char* variableVector2Image = "..//NFDataCfg//Fonts//Icon//Variable//vector2.png";
+char* variableVector3Image = "..//NFDataCfg//Fonts//Icon//Variable//vector3.png";
+char* variableArrayImage = "..//NFDataCfg//Fonts//Icon//Variable//list.png";
+char* variableDictionaryImage = "..//NFDataCfg//Fonts//Icon//Variable//dictionary.png";
+char* variableDefaultImage = "..//NFDataCfg//Fonts//Icon//Variable//unknow.png";
+
 typedef std::function<bool(const NFGUID&, const NFGUID&, const NFGUID&, const NFGUID&)> LINK_EVENT_FUNCTOR;
 
 template < typename T >
@@ -339,7 +350,39 @@ void NFBluePrintView::AddNode(NF_SHARE_PTR<NFBluePrintNodeBase> node)
 				}
 			}
 
-			m_pNodeView->AddPinIn(node->id, variableArg->id, variableArg->name, pinColor);
+			std::string imageName = variableDefaultImage;
+			switch (variableArg->valueType)
+			{
+			case NFValueType::Int:
+				imageName = variableIntImage;
+				break;
+			case NFValueType::Float:
+				imageName = variableFloatImage;
+				break;
+			case NFValueType::String:
+				imageName = variableStringImage;
+				break;
+			case NFValueType::Vector2:
+				imageName = variableVector2Image;
+				break;
+			case NFValueType::Vector3:
+				imageName = variableVector3Image;
+				break;
+			case NFValueType::Object:
+				imageName = variableObjectImage;
+				break;
+			case NFValueType::Array:
+				imageName = variableArrayImage;
+				break;
+			case NFValueType::Dictionary:
+				imageName = variableDictionaryImage;
+				break;
+			default:
+				break;
+			}
+			
+
+			m_pNodeView->AddPinIn(node->id, variableArg->id, variableArg->name, imageName, pinColor);
 		}
 
 		for (int i = 0; i < node->GetOutputArgCount(); ++i)
@@ -356,7 +399,7 @@ void NFBluePrintView::AddNode(NF_SHARE_PTR<NFBluePrintNodeBase> node)
 				pinColor = NFColor::PINOUT;
 			}
 
-			m_pNodeView->AddPinOut(node->id, variableArg->id, variableArg->name, pinColor);
+			m_pNodeView->AddPinOut(node->id, variableArg->id, variableArg->name, "", pinColor);
 		}
 	}
 }
@@ -638,7 +681,7 @@ void NFBluePrintView::PinRenderForElementVariable(NFNodePin* pin)
 
 	auto classNameArg = variable->GetInputArg(NFElementVariableInputArg::toString(NFElementVariableInputArg::ClassName));
 	auto elementIDArg = variable->GetInputArg(NFElementVariableInputArg::toString(NFElementVariableInputArg::ConfigID));
-	auto propertyNameArg = variable->GetInputArg(NFElementVariableInputArg::toString(NFElementVariableInputArg::PropertyName));
+	auto propertyNameArg = variable->GetInputArg(NFElementVariableInputArg::toString(NFElementVariableInputArg::PropName));
 
 	ImGui::PushItemWidth(itemWidth);
 	//class anme && element id && property name
@@ -691,7 +734,7 @@ void NFBluePrintView::PinRenderForElementVariable(NFNodePin* pin)
 
 		}
 	}
-	else if (pin->name == NFElementVariableInputArg::toString(NFElementVariableInputArg::PropertyName))
+	else if (pin->name == NFElementVariableInputArg::toString(NFElementVariableInputArg::PropName))
 	{
 		auto currentClassObject = m_pClassModule->GetElement(classNameArg->varData);
 		if (currentClassObject && !elementIDArg->varData.empty())
@@ -764,7 +807,7 @@ void NFBluePrintView::PinRenderForPropertyVariable(NFNodePin* pin)
 
 	auto onwerID = variable->GetInputArg(NFPropertyVariableInputArg::toString(NFPropertyVariableInputArg::ObjectID));
 	auto classNameArg = variable->GetInputArg(NFPropertyVariableInputArg::toString(NFPropertyVariableInputArg::ClassName));
-	auto propertyNameArg = variable->GetInputArg(NFPropertyVariableInputArg::toString(NFPropertyVariableInputArg::PropertyName));
+	auto propertyNameArg = variable->GetInputArg(NFPropertyVariableInputArg::toString(NFPropertyVariableInputArg::PropName));
 
 	ImGui::PushItemWidth(itemWidth);
 	if (pin->inputPin)
@@ -800,7 +843,7 @@ void NFBluePrintView::PinRenderForPropertyVariable(NFNodePin* pin)
 				ImGui::EndCombo();
 			}
 		}
-		else if (pin->name == NFPropertyVariableInputArg::toString(NFPropertyVariableInputArg::PropertyName))
+		else if (pin->name == NFPropertyVariableInputArg::toString(NFPropertyVariableInputArg::PropName))
 		{
 			auto currentClassObject = m_pClassModule->GetElement(classNameArg->varData);
 			if (currentClassObject)
@@ -1157,7 +1200,7 @@ void NFBluePrintView::PinRenderForPropertyEventMonitor(NFNodePin* pin)
 	{
 
 		auto classNameArg = monitor->GetInputArg(NFMonitorPropertyEventInputArg::ClassName);
-		auto propertyNameArg = monitor->GetInputArg(NFMonitorPropertyEventInputArg::PropertyName);
+		auto propertyNameArg = monitor->GetInputArg(NFMonitorPropertyEventInputArg::PropName);
 
 		if (pin->name == NFMonitorPropertyEventInputArg::toString(NFMonitorPropertyEventInputArg::ClassName))
 		{
@@ -1183,7 +1226,7 @@ void NFBluePrintView::PinRenderForPropertyEventMonitor(NFNodePin* pin)
 
 			ImGui::PopItemWidth();
 		}
-		else if(pin->name == NFMonitorPropertyEventInputArg::toString(NFMonitorPropertyEventInputArg::PropertyName))
+		else if(pin->name == NFMonitorPropertyEventInputArg::toString(NFMonitorPropertyEventInputArg::PropName))
 		{
 			if (!classNameArg->varData.empty())
 			{

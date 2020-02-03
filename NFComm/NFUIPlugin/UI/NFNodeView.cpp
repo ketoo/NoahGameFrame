@@ -25,6 +25,8 @@
 
 #include "NFNodeView.h"
 #include "NFUIModule.h"
+#define STB_IMAGE_IMPLEMENTATION
+#include "imgui/stb_image.h"
 
 void BEGIN_EDITOR(const std::string& name)
 {
@@ -199,6 +201,46 @@ void POP_COLOR()
 }
 //////////////////////////
 
+
+bool LoadTextureFromFile(const char* filename, GLuint* out_texture, int* out_width, int* out_height)
+{
+    // Load from file
+    int image_width = 0;
+    int image_height = 0;
+    unsigned char* image_data = stbi_load(filename, &image_width, &image_height, NULL, 4);
+    if (image_data == NULL)
+        return false;
+
+    // Create a OpenGL texture identifier
+    GLuint image_texture;
+    glGenTextures(1, &image_texture);
+    glBindTexture(GL_TEXTURE_2D, image_texture);
+
+    // Setup filtering parameters for display
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+
+    // Upload pixels into texture
+    glPixelStorei(GL_UNPACK_ROW_LENGTH, 0);
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, image_width, image_height, 0, GL_RGBA, GL_UNSIGNED_BYTE, image_data);
+    stbi_image_free(image_data);
+
+    *out_texture = image_texture;
+    *out_width = image_width;
+    *out_height = image_height;
+
+    return true;
+}
+
+void ShowImage(const char* filename, int width, int height)
+{
+    int my_image_width = 0;
+    int my_image_height = 0;
+    GLuint my_image_texture = 0;
+    bool ret = LoadTextureFromFile(filename, &my_image_texture, &my_image_width, &my_image_height);
+    ImGui::Image((void*)(intptr_t)my_image_texture, ImVec2(width, height));
+}
+
 void NFNodePin::Execute()
 {
    if (inputPin)
@@ -211,6 +253,8 @@ void NFNodePin::Execute()
 
         if (this->name.length() > 0)
         {
+            ShowImage(this->image.c_str(), 20, 20);
+            ImGui::SameLine();
             ImGui::PushItemWidth(60);
             ImGui::Text(this->name.c_str());
             ImGui::PopItemWidth();
@@ -234,6 +278,10 @@ void NFNodePin::Execute()
 
         std::string str = "          ==>" + this->name;
         ImGui::Text(str.c_str());
+        ImGui::SameLine();
+        ShowImage(this->image.c_str(), 20, 20);
+        ImGui::SameLine();
+
         this->nodeView->RenderForPin(this);
 
         END_OUT_PIN();
@@ -457,25 +505,25 @@ void NFNodeView::AddNode(const NFGUID guid, const std::string& name, NFColor col
    }
 }
 
-void NFNodeView::AddPinIn(const NFGUID guid, const NFGUID attrId, const std::string& name, NFColor color)
+void NFNodeView::AddPinIn(const NFGUID guid, const NFGUID attrId, const std::string& name, const std::string& image, NFColor color)
 {
    for (auto it : mNodes)
    {
       if (it.second->guid == guid)
       {
-         it.second->AddPin(GeneratePinId(), name, true, attrId, color);
+         it.second->AddPin(GeneratePinId(), name, image, true, attrId, color);
          return;
       }
    }
 }
 
-void NFNodeView::AddPinOut(const NFGUID guid, const NFGUID attrId, const std::string& name, NFColor color)
+void NFNodeView::AddPinOut(const NFGUID guid, const NFGUID attrId, const std::string& name, const std::string& image, NFColor color)
 {
    for (auto it : mNodes)
    {
       if (it.second->guid == guid)
       {
-         it.second->AddPin(GeneratePinId(), name, false, attrId, color);
+         it.second->AddPin(GeneratePinId(), name, image, false, attrId, color);
          return;
       }
    }

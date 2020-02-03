@@ -84,11 +84,12 @@ private:
    NFNodePin(){}
 
 public:
-   NFNodePin(const int id, const std::string& name, const bool inputPin, const NFGUID guid, const NFColor color)
+   NFNodePin(const int id, const std::string& name, const std::string& image, const bool inputPin, const NFGUID guid, const NFColor color)
    {
        this->color = color;
         this->id = id;
         this->name = name;
+        this->image = image;
         this->inputPin = inputPin;
         this->guid = guid;
    }
@@ -99,6 +100,7 @@ public:
    int color;
    bool inputPin;
    std::string name;
+   std::string image;
    NFGUID guid;
    NFGUID nodeId;
    NFNodeView* nodeView;
@@ -121,9 +123,9 @@ public:
 
 	void Execute();
 
-   void AddPin(const int id, const std::string& name, const bool inputPin, const NFGUID guid, NFColor color)
+   void AddPin(const int id, const std::string& name, const std::string& image, const bool inputPin, const NFGUID guid, NFColor color)
    {
-      auto ptr = NF_SHARE_PTR<NFNodePin>(NF_NEW NFNodePin(id, name, inputPin, guid, color));
+      auto ptr = NF_SHARE_PTR<NFNodePin>(NF_NEW NFNodePin(id, name, image, inputPin, guid, color));
       ptr->nodeView = this->nodeView;
       ptr->nodeId = this->guid;
       mAttris.push_back(ptr);
@@ -214,8 +216,8 @@ public:
    const int GetAttriID(const NFGUID guid);
 
    void AddNode(const NFGUID guid, const std::string& name, NFColor color = NFColor::DEFAULT, const NFVector2 vec = NFVector2());
-   void AddPinIn(const NFGUID guid, const NFGUID attrId, const std::string& name, NFColor color = NFColor::PININ);
-   void AddPinOut(const NFGUID guid, const NFGUID attrId, const std::string& name, NFColor color = NFColor::PINOUT);
+   void AddPinIn(const NFGUID guid, const NFGUID attrId, const std::string& name, const std::string& image, NFColor color = NFColor::PININ);
+   void AddPinOut(const NFGUID guid, const NFGUID attrId, const std::string& name, const std::string& image, NFColor color = NFColor::PINOUT);
    void ModifyPinColor(const NFGUID attrId, NFColor color);
    void DeleteNode(const NFGUID guid);
 
