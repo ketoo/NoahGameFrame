@@ -76,6 +76,8 @@ enum NFPinShape
     OCTAGON,
 };
 
+void ShowImage(const char* filename, int width, int height);
+
 class NFNodeView;
 
 class NFNodePin
