@@ -26,6 +26,8 @@
 #include "NFBluePrintView.h"
 #include "NFUIModule.h"
 
+//#if NF_PLATFORM == NF_PLATFORM_WIN
+
 char* variableIntImage = "..//NFDataCfg//Fonts//Icon//Variable//int.png";
 char* variableFloatImage = "..//NFDataCfg//Fonts//Icon//Variable//float.png";
 char* variableBoolImage = "..//NFDataCfg//Fonts//Icon//Variable//bool.png";
@@ -36,6 +38,7 @@ char* variableVector3Image = "..//NFDataCfg//Fonts//Icon//Variable//vector3.png"
 char* variableArrayImage = "..//NFDataCfg//Fonts//Icon//Variable//list.png";
 char* variableDictionaryImage = "..//NFDataCfg//Fonts//Icon//Variable//dictionary.png";
 char* variableDefaultImage = "..//NFDataCfg//Fonts//Icon//Variable//unknow.png";
+
 
 typedef std::function<bool(const NFGUID&, const NFGUID&, const NFGUID&, const NFGUID&)> LINK_EVENT_FUNCTOR;
 
@@ -350,36 +353,7 @@ void NFBluePrintView::AddNode(NF_SHARE_PTR<NFBluePrintNodeBase> node)
 				}
 			}
 
-			std::string imageName = variableDefaultImage;
-			switch (variableArg->valueType)
-			{
-			case NFValueType::Int:
-				imageName = variableIntImage;
-				break;
-			case NFValueType::Float:
-				imageName = variableFloatImage;
-				break;
-			case NFValueType::String:
-				imageName = variableStringImage;
-				break;
-			case NFValueType::Vector2:
-				imageName = variableVector2Image;
-				break;
-			case NFValueType::Vector3:
-				imageName = variableVector3Image;
-				break;
-			case NFValueType::Object:
-				imageName = variableObjectImage;
-				break;
-			case NFValueType::Array:
-				imageName = variableArrayImage;
-				break;
-			case NFValueType::Dictionary:
-				imageName = variableDictionaryImage;
-				break;
-			default:
-				break;
-			}
+			std::string imageName = GetPinIcon(variableArg->valueType);
 			
 
 			m_pNodeView->AddPinIn(node->id, variableArg->id, variableArg->name, imageName, pinColor);
@@ -399,7 +373,9 @@ void NFBluePrintView::AddNode(NF_SHARE_PTR<NFBluePrintNodeBase> node)
 				pinColor = NFColor::PINOUT;
 			}
 
-			m_pNodeView->AddPinOut(node->id, variableArg->id, variableArg->name, "", pinColor);
+			std::string imageName = GetPinIcon(variableArg->valueType);
+
+			m_pNodeView->AddPinOut(node->id, variableArg->id, variableArg->name, imageName, pinColor);
 		}
 	}
 }
@@ -1797,4 +1773,76 @@ NFColor NFBluePrintView::GetBackGroundColor(NF_SHARE_PTR<NFBluePrintNodeBase> no
 	}
 
 	return color;
+}
+
+std::string NFBluePrintView::GetPinIcon(NFValueType type)
+{
+	std::string imageName = variableDefaultImage;
+	switch (type)
+	{
+	case NFValueType::Int:
+		imageName = variableIntImage;
+		break;
+	case NFValueType::Float:
+		imageName = variableFloatImage;
+		break;
+	case NFValueType::String:
+		imageName = variableStringImage;
+		break;
+	case NFValueType::Vector2:
+		imageName = variableVector2Image;
+		break;
+	case NFValueType::Vector3:
+		imageName = variableVector3Image;
+		break;
+	case NFValueType::Object:
+		imageName = variableObjectImage;
+		break;
+	case NFValueType::Array:
+		imageName = variableArrayImage;
+		break;
+	case NFValueType::Dictionary:
+		imageName = variableDictionaryImage;
+		break;
+	default:
+		break;
+	}
+
+	return imageName;
+}
+
+std::string NFBluePrintView::GetNodeIcon(NFValueType type)
+{
+		std::string imageName = variableDefaultImage;
+	switch (type)
+	{
+	case NFValueType::Int:
+		imageName = variableIntImage;
+		break;
+	case NFValueType::Float:
+		imageName = variableFloatImage;
+		break;
+	case NFValueType::String:
+		imageName = variableStringImage;
+		break;
+	case NFValueType::Vector2:
+		imageName = variableVector2Image;
+		break;
+	case NFValueType::Vector3:
+		imageName = variableVector3Image;
+		break;
+	case NFValueType::Object:
+		imageName = variableObjectImage;
+		break;
+	case NFValueType::Array:
+		imageName = variableArrayImage;
+		break;
+	case NFValueType::Dictionary:
+		imageName = variableDictionaryImage;
+		break;
+	default:
+		break;
+	}
+
+	return imageName;
 }

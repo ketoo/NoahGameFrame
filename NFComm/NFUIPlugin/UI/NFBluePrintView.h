@@ -114,6 +114,8 @@ private:
 
 private:
 	NFColor GetBackGroundColor(NF_SHARE_PTR<NFBluePrintNodeBase> node);
+	std::string GetPinIcon(NFValueType type);
+	std::string GetNodeIcon(NFValueType type);
 	//NFColor GetPinColor(NF_SHARE_PTR<NFBluePrintNodeBase> node);
 	//NFColor GetLinkColor(NF_SHARE_PTR<NFBluePrintNodeBase> node);
 
