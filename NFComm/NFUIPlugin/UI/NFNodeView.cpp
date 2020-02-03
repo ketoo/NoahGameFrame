@@ -278,8 +278,13 @@ void NFNodePin::Execute()
 
         std::string str = "          ==>" + this->name;
         //ImGui::Text(str.c_str());
-        ImGui::SameLine();
+        //ImGui::SameLine();
+        //ImGui::SetAlignment(ImGui_Alignment_Right);
+   
+        ImGui::PushItemWidth(60);
         ImGui::Text(this->name.c_str());
+        ImGui::PopItemWidth();
+        
         ImGui::SameLine();
         ShowImage(this->image.c_str(), 20, 20);
         ImGui::SameLine();
