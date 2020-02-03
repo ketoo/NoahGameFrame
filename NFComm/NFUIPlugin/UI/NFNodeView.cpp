@@ -277,7 +277,9 @@ void NFNodePin::Execute()
         POP_COLOR();
 
         std::string str = "          ==>" + this->name;
-        ImGui::Text(str.c_str());
+        //ImGui::Text(str.c_str());
+        ImGui::SameLine();
+        ImGui::Text(this->name.c_str());
         ImGui::SameLine();
         ShowImage(this->image.c_str(), 20, 20);
         ImGui::SameLine();

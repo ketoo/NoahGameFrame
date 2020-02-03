@@ -119,7 +119,6 @@ NF_SMART_ENUM(NFMonitorType,
 	NF_SMART_ENUM(NFNetworkEventMonitorOutputArg,
 		NextNode,
 		ObjectID,
-		Dictionary,
 		)
 	//------------------------------
 	NF_SMART_ENUM(NFNetworkMsgMonitorInputArg,
