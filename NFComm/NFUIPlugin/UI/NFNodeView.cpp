@@ -243,7 +243,7 @@ void ShowImage(const char* filename, int width, int height)
 
 void NFNodePin::Execute()
 {
-   if (inputPin)
+   if (this->inputPin)
    {
         PUSH_COLOR(imnodes::ColorStyle::ColorStyle_Pin, color);
 

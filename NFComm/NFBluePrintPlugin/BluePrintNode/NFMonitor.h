@@ -142,14 +142,6 @@ public:
 
 			outputArgs.push_back(var);
 		}
-		{
-			NF_SHARE_PTR<NFIOData> var = NF_SHARE_PTR<NFIOData>(NF_NEW NFIOData());
-			var->id = this->pPluginManager->FindModule<NFIKernelModule>()->CreateGUID();
-			var->name = NFNetworkEventMonitorOutputArg::toString(NFNetworkEventMonitorOutputArg::Dictionary);
-			var->valueType = NFValueType::Dictionary;
-
-			outputArgs.push_back(var);
-		}
 	}
 
 

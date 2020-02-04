@@ -92,6 +92,9 @@ bool NFFileProcess::LoadDataFromExcel()
 				{
 					nowClassData->xIniData.xElementList[element.first] = element.second;
 				}
+
+				//partial class doesnt need to generate Ini xml file
+				partialClass->xIniData.xElementList.clear();
 			}
 		}
 	}
