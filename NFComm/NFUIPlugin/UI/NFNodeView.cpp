@@ -47,12 +47,15 @@ void END_EDITOR()
 }
 
 
-void BEGIN_INPUT_PIN(int id)
+void BEGIN_INPUT_PIN(int id, NFPinShape shape)
 {
 #ifdef NODE_EXT
     ed::BeginPin(id, ed::PinKind::Input);
 #else
-    imnodes::BeginInputAttribute(id);
+    if (shape == NFPinShape::PinShape_Circle) imnodes::BeginInputAttribute(id, imnodes::PinShape::PinShape_Circle);
+    if (shape == NFPinShape::PinShape_Quad) imnodes::BeginInputAttribute(id, imnodes::PinShape::PinShape_Quad);
+    if (shape == NFPinShape::PinShape_Triangle) imnodes::BeginInputAttribute(id, imnodes::PinShape::PinShape_Triangle);
+    
 #endif
 }
 
@@ -65,12 +68,14 @@ void END_INPUT_PIN()
 #endif
 }
 
-void BEGIN_OUT_PIN(int id)
+void BEGIN_OUT_PIN(int id, NFPinShape shape)
 {
 #ifdef NODE_EXT
     ed::BeginPin(id, ed::PinKind::Output);
 #else
-    imnodes::BeginOutputAttribute(id);
+    if (shape == NFPinShape::PinShape_Circle) imnodes::BeginOutputAttribute(id, imnodes::PinShape::PinShape_Circle);
+    if (shape == NFPinShape::PinShape_Quad) imnodes::BeginOutputAttribute(id, imnodes::PinShape::PinShape_Quad);
+    if (shape == NFPinShape::PinShape_Triangle) imnodes::BeginOutputAttribute(id, imnodes::PinShape::PinShape_Triangle);
 #endif
 }
 
@@ -247,7 +252,7 @@ void NFNodePin::Execute()
    {
         PUSH_COLOR(imnodes::ColorStyle::ColorStyle_Pin, color);
 
-        BEGIN_INPUT_PIN(id);
+        BEGIN_INPUT_PIN(id, shape);
 
         POP_COLOR();
 
@@ -272,7 +277,7 @@ void NFNodePin::Execute()
    {
        PUSH_COLOR(imnodes::ColorStyle::ColorStyle_Pin, color);
 
-        BEGIN_OUT_PIN(id);
+        BEGIN_OUT_PIN(id, shape);
 
         POP_COLOR();
 
@@ -280,12 +285,14 @@ void NFNodePin::Execute()
         //ImGui::Text(str.c_str());
         //ImGui::SameLine();
         //ImGui::SetAlignment(ImGui_Alignment_Right);
-   
+
+        ImGui::Indent(100);
         ImGui::PushItemWidth(60);
         ImGui::Text(this->name.c_str());
         ImGui::PopItemWidth();
-        
+
         ImGui::SameLine();
+        ImGui::Indent(70);
         ShowImage(this->image.c_str(), 20, 20);
         ImGui::SameLine();
 
@@ -512,25 +519,25 @@ void NFNodeView::AddNode(const NFGUID guid, const std::string& name, NFColor col
    }
 }
 
-void NFNodeView::AddPinIn(const NFGUID guid, const NFGUID attrId, const std::string& name, const std::string& image, NFColor color)
+void NFNodeView::AddPinIn(const NFGUID guid, const NFGUID attrId, const std::string& name, const std::string& image, NFColor color, NFPinShape shape)
 {
    for (auto it : mNodes)
    {
       if (it.second->guid == guid)
       {
-         it.second->AddPin(GeneratePinId(), name, image, true, attrId, color);
+         it.second->AddPin(GeneratePinId(), name, image, true, attrId, color, shape);
          return;
       }
    }
 }
 
-void NFNodeView::AddPinOut(const NFGUID guid, const NFGUID attrId, const std::string& name, const std::string& image, NFColor color)
+void NFNodeView::AddPinOut(const NFGUID guid, const NFGUID attrId, const std::string& name, const std::string& image, NFColor color, NFPinShape shape)
 {
    for (auto it : mNodes)
    {
       if (it.second->guid == guid)
       {
-         it.second->AddPin(GeneratePinId(), name, image, false, attrId, color);
+         it.second->AddPin(GeneratePinId(), name, image, false, attrId, color, shape);
          return;
       }
    }

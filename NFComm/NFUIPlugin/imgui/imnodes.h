@@ -44,6 +44,13 @@ enum StyleFlags
     StyleFlags_GridLines = 1 << 2
 };
 
+enum PinShape
+{
+    PinShape_Circle = 0,
+    PinShape_Triangle = 1 << 0,
+    PinShape_Quad = 1 << 1,
+};
+
 struct Style
 {
     float grid_spacing = 32.f;
@@ -58,6 +65,7 @@ struct Style
 
     float pin_radius = 4.0f;
     float pin_hover_radius = 10.0f;
+    float pin_offest = 10.0f;
 
     StyleFlags flags =
         StyleFlags(StyleFlags_NodeOutline | StyleFlags_GridLines);
@@ -115,9 +123,12 @@ void EndNode();
 // for output attributes.
 //
 // The attribute ids must be unique.
-void BeginInputAttribute(int id);
-void BeginOutputAttribute(int id);
+void BeginInputAttribute(int id, PinShape shape = PinShape::PinShape_Circle);
+void BeginOutputAttribute(int id, PinShape shape = PinShape::PinShape_Circle);
 void EndAttribute();
+
+// To get the link status for attributes.
+bool IsAttributeLinked(int id);
 
 // Render a link between attributes.
 // The attributes ids used here must match the ids used in

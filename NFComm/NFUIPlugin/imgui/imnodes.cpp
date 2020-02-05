@@ -190,6 +190,7 @@ struct PinData
     int node_idx;
     int attribute_idx;
     AttributeType type;
+    PinShape shape;
 
     struct
     {
@@ -659,7 +660,7 @@ ImVec2 get_screen_space_pin_coordinates(
 {
     assert(type == AttributeType_Input || type == AttributeType_Output);
     const float x =
-        type == AttributeType_Input ? node_rect.Min.x : node_rect.Max.x;
+        type == AttributeType_Input ? (node_rect.Min.x - g.style.pin_offest): (node_rect.Max.x + g.style.pin_offest);
     return ImVec2(x, 0.5f * (attr_rect.Min.y + attr_rect.Max.y));
 }
 
@@ -946,6 +947,84 @@ void draw_grid(EditorContext& editor, const ImVec2& canvas_size)
     }
 }
 
+void draw_pin_shape(const EditorContext& editor, const ImVec2 pin_pos, const PinData& pin, int num_segments)
+{
+    switch (pin.shape)
+    {
+    case PinShape::PinShape_Circle:
+    {
+        if (IsAttributeLinked(pin.id))
+        {
+            editor.grid_draw_list->AddCircleFilled(
+                pin_pos, g.style.pin_radius, num_segments);
+        }
+        else
+        {
+            editor.grid_draw_list->AddCircle(
+                pin_pos, g.style.pin_radius, num_segments);
+        }
+    }
+    break;
+    case PinShape::PinShape_Quad:
+    {
+        if (IsAttributeLinked(pin.id))
+        {
+            editor.grid_draw_list->AddQuadFilled(
+                pin_pos + ImVec2(-g.style.pin_radius, -g.style.pin_radius),
+                pin_pos + ImVec2(-g.style.pin_radius, g.style.pin_radius),
+                pin_pos + ImVec2(g.style.pin_radius, g.style.pin_radius),
+                pin_pos + ImVec2(g.style.pin_radius, -g.style.pin_radius),
+                num_segments);
+        }
+        else
+        {
+            editor.grid_draw_list->AddQuad(
+                pin_pos + ImVec2(-g.style.pin_radius, -g.style.pin_radius),
+                pin_pos + ImVec2(-g.style.pin_radius, g.style.pin_radius),
+                pin_pos + ImVec2(g.style.pin_radius, g.style.pin_radius),
+                pin_pos + ImVec2(g.style.pin_radius, -g.style.pin_radius),
+                num_segments);
+        }
+
+    }
+    break;
+    case PinShape::PinShape_Triangle:
+    {
+        if (IsAttributeLinked(pin.id))
+        {
+            editor.grid_draw_list->AddTriangleFilled(
+                pin_pos + ImVec2(-g.style.pin_radius, -g.style.pin_radius),
+                pin_pos + ImVec2(-g.style.pin_radius, g.style.pin_radius),
+                pin_pos + ImVec2(g.style.pin_radius, 0),
+                num_segments);
+        }
+        else
+        {
+            editor.grid_draw_list->AddTriangle(
+                pin_pos + ImVec2(-g.style.pin_radius, -g.style.pin_radius),
+                pin_pos + ImVec2(-g.style.pin_radius, g.style.pin_radius),
+                pin_pos + ImVec2(g.style.pin_radius, 0),
+                num_segments);
+        }
+    }
+    break;
+    default:
+    {
+        if (IsAttributeLinked(pin.id))
+        {
+            editor.grid_draw_list->AddCircleFilled(
+                pin_pos, g.style.pin_radius, num_segments);
+        }
+        else
+        {
+            editor.grid_draw_list->AddCircle(
+                pin_pos, g.style.pin_radius, num_segments);
+        }
+    }
+    break;
+    }
+}
+
 void draw_pin(const EditorContext& editor, const int pin_idx)
 {
     const PinData& pin = editor.pins.pool[pin_idx];
@@ -955,14 +1034,13 @@ void draw_pin(const EditorContext& editor, const int pin_idx)
     if (is_mouse_hovering_near_point(pin_pos, g.style.pin_hover_radius))
     {
         g.pin_hovered = pin_idx;
-        editor.grid_draw_list->AddCircleFilled(
-            pin_pos, g.style.pin_radius, pin.color_style.hovered);
+        draw_pin_shape(editor, pin_pos, pin, pin.color_style.hovered);
     }
     else
     {
-        editor.grid_draw_list->AddCircleFilled(
-            pin_pos, g.style.pin_radius, pin.color_style.background);
+        draw_pin_shape(editor, pin_pos, pin, pin.color_style.background);
     }
+
     if ((g.style.flags & StyleFlags_PinOutline) != 0)
     {
         editor.grid_draw_list->AddCircle(
@@ -1080,7 +1158,7 @@ void draw_link(EditorContext& editor, int link_idx)
         link_data.num_segments);
 }
 
-void begin_attribute(int id, AttributeType type)
+void begin_attribute(int id, AttributeType type, PinShape shape)
 {
     // Make sure to call BeginNode() before calling
     // BeginAttribute()
@@ -1101,6 +1179,7 @@ void begin_attribute(int id, AttributeType type)
     pin.node_idx = g.node_current.index;
     pin.attribute_idx = g.node_current.attribute.index;
     pin.type = type;
+    pin.shape = shape;
     pin.color_style.background = g.style.colors[ColorStyle_Pin];
     pin.color_style.hovered = g.style.colors[ColorStyle_PinHovered];
     pin.color_style.outline = g.style.colors[ColorStyle_PinOutline];
@@ -1498,7 +1577,7 @@ void EndNodeEditor()
 
     // apply panning if the mouse was dragged
     if (ImGui::IsWindowHovered() && !ImGui::IsAnyItemActive() &&
-        ImGui::IsMouseDragging(2, 0))
+        (ImGui::IsMouseDragging(2, 0) || ImGui::IsMouseDragging(1, 0)))
     {
         editor.panning = editor.panning + imgui_io.MouseDelta;
     }
@@ -1575,9 +1654,9 @@ void EndNode()
     g.node_current.index = INVALID_INDEX;
 }
 
-void BeginInputAttribute(int id) { begin_attribute(id, AttributeType_Input); }
+void BeginInputAttribute(int id, PinShape shape) { begin_attribute(id, AttributeType_Input, shape); }
 
-void BeginOutputAttribute(int id) { begin_attribute(id, AttributeType_Output); }
+void BeginOutputAttribute(int id, PinShape shape) { begin_attribute(id, AttributeType_Output, shape); }
 
 void EndAttribute()
 {
@@ -1596,6 +1675,24 @@ void EndAttribute()
     NodeData& node_current =
         editor_context_get().nodes.pool[g.node_current.index];
     node_current.attribute_rects.push_back(get_item_rect());
+}
+
+bool IsAttributeLinked(int id)
+{
+    EditorContext& editor = editor_context_get();
+    for (int i = 0; i < editor.links.pool.size(); ++i)
+    {
+        if (editor.links.in_use[i])
+        {
+            LinkData& link = editor.links.pool[i];
+            if (link.start_attr == id || link.end_attr == id)
+            {
+                return true;
+            }
+        }
+    }
+
+    return false;
 }
 
 void Link(int id, const int start_attr, const int end_attr)

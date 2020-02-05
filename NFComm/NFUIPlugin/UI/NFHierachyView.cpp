@@ -179,7 +179,7 @@ void NFHierachyView::BluePrintViewSubRender()
 		 {
 			 BluePrintViewSubRenderForVariable();
 		 }
-		 else if (blueprintNode->blueprintType == NFBlueprintType::LOGGER)
+		 else if (blueprintNode->blueprintType == NFBlueprintType::DEBUGER)
 		 {
 			 BluePrintViewSubRenderForVariable();
 		 }

@@ -35,6 +35,7 @@ void NFCreateObjectExecuter::UpdateOutputData()
 
 NF_SHARE_PTR<NFBluePrintNodeBase> NFCreateObjectExecuter::FindNextNode()
 {
+    auto outputNode = GetOutputArg(NFExecuterCreateObjectOutputputArg::NextNode);
 	return NF_SHARE_PTR<NFBluePrintNodeBase>();
 }
 

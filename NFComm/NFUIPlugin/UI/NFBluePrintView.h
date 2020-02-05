@@ -99,6 +99,10 @@ private:
 	void PinRenderForBranch(NFNodePin* pin);
 
 	void PinRenderForModifier(NFNodePin* pin);
+	void PinRenderForPropertyModifier(NFNodePin* pin);
+	void PinRenderForRecordModifier(NFNodePin* pin);
+	void PinRenderForRecordAddModifier(NFNodePin* pin);
+	void PinRenderForRecordRemModifier(NFNodePin* pin);
 
 	void PinRenderForLogger(NFNodePin* pin);
 	void PinRenderForExecuter(NFNodePin* pin);
@@ -113,10 +117,11 @@ private:
 
 
 private:
-	NFColor GetBackGroundColor(NF_SHARE_PTR<NFBluePrintNodeBase> node);
+	NFColor GetBackGroundColor(NFBlueprintType type);
 	std::string GetPinIcon(NFValueType type);
-	std::string GetNodeIcon(NFValueType type);
-	//NFColor GetPinColor(NF_SHARE_PTR<NFBluePrintNodeBase> node);
+	NFPinShape GetPinShape(NFValueType type);
+	std::string GetNodeIcon(NFBlueprintType type);
+	NFColor GetPinColor(NFValueType type);
 	//NFColor GetLinkColor(NF_SHARE_PTR<NFBluePrintNodeBase> node);
 
 private:

@@ -41,7 +41,7 @@ public:
 		branchType = NFBranchType::IntBranch;
 		comparatorType = NFComparatorType::Equal;
 
-		//Init();
+		Init();
 
 	}
 
@@ -68,7 +68,7 @@ public:
 			NF_SHARE_PTR<NFIOData> var = NF_SHARE_PTR<NFIOData>(NF_NEW NFIOData());
 			var->id = this->pPluginManager->FindModule<NFIKernelModule>()->CreateGUID();
 			var->name = NFBranchInputArg::toString(NFBranchInputArg::Comparator);
-			var->valueType = NFValueType::String;
+			var->valueType = NFValueType::UNKNOW;
 			var->fromType = NFIODataComFromType::INTERNAL;
 
 			inputArgs.push_back(var);
@@ -149,7 +149,7 @@ public:
 			NF_SHARE_PTR<NFIOData> var = NF_SHARE_PTR<NFIOData>(NF_NEW NFIOData());
 			var->id = this->pPluginManager->FindModule<NFIKernelModule>()->CreateGUID();
 			var->name = NFBranchInputArg::toString(NFBranchInputArg::LeftInput);
-			var->valueType = NFValueType::String;
+			var->valueType = NFValueType::UNKNOW;
 			var->fromType = NFIODataComFromType::EXTERNAL;
 
 			inputArgs.push_back(var);
@@ -246,7 +246,7 @@ public:
 			NF_SHARE_PTR<NFIOData> var = NF_SHARE_PTR<NFIOData>(NF_NEW NFIOData());
 			var->id = this->pPluginManager->FindModule<NFIKernelModule>()->CreateGUID();
 			var->name = NFBranchInputArg::toString(NFBranchInputArg::Comparator);
-			var->valueType = NFValueType::String;
+			var->valueType = NFValueType::UNKNOW;
 			var->fromType = NFIODataComFromType::INTERNAL;
 
 			inputArgs.push_back(var);
@@ -334,7 +334,7 @@ public:
 			NF_SHARE_PTR<NFIOData> var = NF_SHARE_PTR<NFIOData>(NF_NEW NFIOData());
 			var->id = this->pPluginManager->FindModule<NFIKernelModule>()->CreateGUID();
 			var->name = NFBranchInputArg::toString(NFBranchInputArg::Comparator);
-			var->valueType = NFValueType::String;
+			var->valueType = NFValueType::UNKNOW;
 			var->fromType = NFIODataComFromType::INTERNAL;
 
 			inputArgs.push_back(var);
@@ -423,7 +423,7 @@ public:
 			NF_SHARE_PTR<NFIOData> var = NF_SHARE_PTR<NFIOData>(NF_NEW NFIOData());
 			var->id = this->pPluginManager->FindModule<NFIKernelModule>()->CreateGUID();
 			var->name = NFBranchInputArg::toString(NFBranchInputArg::Comparator);
-			var->valueType = NFValueType::String;
+			var->valueType = NFValueType::UNKNOW;
 			var->fromType = NFIODataComFromType::INTERNAL;
 
 			inputArgs.push_back(var);
@@ -514,7 +514,7 @@ public:
 			NF_SHARE_PTR<NFIOData> var = NF_SHARE_PTR<NFIOData>(NF_NEW NFIOData());
 			var->id = this->pPluginManager->FindModule<NFIKernelModule>()->CreateGUID();
 			var->name = NFBranchInputArg::toString(NFBranchInputArg::Comparator);
-			var->valueType = NFValueType::String;
+			var->valueType = NFValueType::UNKNOW;
 			var->fromType = NFIODataComFromType::INTERNAL;
 
 			inputArgs.push_back(var);

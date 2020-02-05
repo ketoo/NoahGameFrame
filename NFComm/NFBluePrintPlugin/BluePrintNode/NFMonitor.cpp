@@ -98,11 +98,11 @@ void NFPropertyEventMonitor::UpdateOutputData()
 	NF_SHARE_PTR<NFIOData> outputPropertyName = GetOutputArg(NFMonitorPropertyEventOutputArg::toString(NFMonitorPropertyEventOutputArg::PropName));
 	NF_SHARE_PTR<NFIOData> outputPropertyValue = GetOutputArg(NFMonitorPropertyEventOutputArg::toString(NFMonitorPropertyEventOutputArg::PropValue));
 
-	outputSelf->varData = "";
+	outputSelf->varData.SetObject(NFGUID());
 	outputPropertyName->varData = propertyName->varData;
-	outputPropertyValue->varData = "";
+	outputPropertyValue->varData.SetString("");
 
-	if (className->varData.empty() || propertyName->varData.empty())
+	if (className->varData.GetString().empty() || propertyName->varData.GetString().empty())
 	{
 		return;
 	}
@@ -110,10 +110,10 @@ void NFPropertyEventMonitor::UpdateOutputData()
 	auto elementModule = this->pPluginManager->FindModule<NFIElementModule>();
 	auto classModule = this->pPluginManager->FindModule<NFIClassModule>();
 	{
-		auto classObject = classModule->GetElement(className->varData);
+		auto classObject = classModule->GetElement(className->varData.GetString());
 		if (classObject)
 		{
-			auto classProperty = classObject->GetPropertyManager()->GetElement(propertyName->varData);
+			auto classProperty = classObject->GetPropertyManager()->GetElement(propertyName->varData.GetString());
 			if (classProperty)
 			{
 				switch (classProperty->GetType())
@@ -121,37 +121,43 @@ void NFPropertyEventMonitor::UpdateOutputData()
 				case NFDATA_TYPE::TDATA_INT:
 				{
 					outputPropertyValue->valueType = NFValueType::Int;
-					outputPropertyValue->varData = NFValueType::toString(NFValueType::Int);
+					outputPropertyValue->varData.Reset();
+					outputPropertyValue->varData.SetInt(0);
 				}
 				break;
 				case NFDATA_TYPE::TDATA_FLOAT:
 				{
 					outputPropertyValue->valueType = NFValueType::Float;
-					outputPropertyValue->varData = NFValueType::toString(NFValueType::Float);
+					outputPropertyValue->varData.Reset();
+					outputPropertyValue->varData.SetFloat(0);
 				}
 				break;
 				case NFDATA_TYPE::TDATA_OBJECT:
 				{
 					outputPropertyValue->valueType = NFValueType::Object;
-					outputPropertyValue->varData = NFValueType::toString(NFValueType::Object);
+					outputPropertyValue->varData.Reset();
+					outputPropertyValue->varData.SetObject(NFGUID(0,0));
 				}
 				break;
 				case NFDATA_TYPE::TDATA_STRING:
 				{
 					outputPropertyValue->valueType = NFValueType::String;
-					outputPropertyValue->varData = NFValueType::toString(NFValueType::String);
+					outputPropertyValue->varData.Reset();
+					outputPropertyValue->varData.SetString("");
 				}
 				break;
 				case NFDATA_TYPE::TDATA_VECTOR2:
 				{
 					outputPropertyValue->valueType = NFValueType::Vector2;
-					outputPropertyValue->varData = NFValueType::toString(NFValueType::Vector2);
+					outputPropertyValue->varData.Reset();
+					outputPropertyValue->varData.SetVector2(NFVector2());
 				}
 				break;
 				case NFDATA_TYPE::TDATA_VECTOR3:
 				{
 					outputPropertyValue->valueType = NFValueType::Vector3;
-					outputPropertyValue->varData = NFValueType::toString(NFValueType::Vector3);
+					outputPropertyValue->varData.Reset();
+					outputPropertyValue->varData.SetVector3(NFVector3());
 				}
 				break;
 				default:

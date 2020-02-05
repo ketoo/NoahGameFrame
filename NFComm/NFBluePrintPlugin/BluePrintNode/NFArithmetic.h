@@ -73,14 +73,7 @@ public:
 
 	virtual void InitOutputArgs()
 	{
-		{
-			NF_SHARE_PTR<NFIOData> var = NF_SHARE_PTR<NFIOData>(NF_NEW NFIOData());
-			var->id = this->pPluginManager->FindModule<NFIKernelModule>()->CreateGUID();
-			var->name = NFBranchOutputArg::toString(NFBranchOutputArg::FalseOut);
-			var->valueType = NFValueType::Int;
-
-			outputArgs.push_back(var);
-		}
+		
 	}
 
 	virtual void UpdateOutputData() override;

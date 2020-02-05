@@ -105,12 +105,12 @@ public:
 
 	virtual void UpdateOutputData()
 	{
-		NF_SHARE_PTR<NFIOData> inputClassName = GetOutputArg(NFPropertyModifierInputArg::ClassName);
-		NF_SHARE_PTR<NFIOData> inputPropName = GetOutputArg(NFPropertyModifierInputArg::PropName);
-		NF_SHARE_PTR<NFIOData> inputPropValue = GetOutputArg(NFPropertyModifierInputArg::PropValue);
+		NF_SHARE_PTR<NFIOData> inputClassName = GetInputArg(NFPropertyModifierInputArg::ClassName);
+		NF_SHARE_PTR<NFIOData> inputPropName = GetInputArg(NFPropertyModifierInputArg::PropName);
+		NF_SHARE_PTR<NFIOData> inputPropValue = GetInputArg(NFPropertyModifierInputArg::PropValue);
 
-		std::string className = inputClassName->varData;
-		std::string propName = inputPropName->varData;
+		std::string className = inputClassName->varData.GetString();
+		std::string propName = inputPropName->varData.GetString();
 
 		NFIClassModule* classModule = this->pPluginManager->FindModule<NFIClassModule>();
 		auto classObject = classModule->GetElement(className);

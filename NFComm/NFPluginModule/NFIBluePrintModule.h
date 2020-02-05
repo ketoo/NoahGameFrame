@@ -41,7 +41,7 @@ NF_SMART_ENUM(NFBlueprintType,
 	VARIABLE,
 	MODIFIER,
 	ARITHMETIC,
-	LOGGER,
+	DEBUGER,
 	CUSTOM,
 )
 
@@ -51,6 +51,13 @@ NF_SMART_ENUM(NFElementVariableInputArg,
 	ConfigID,
 	PropName,
 	)
+
+	NF_SMART_ENUM(NFElementVariableOutputArg,
+		ClassName,
+		ConfigID,
+		PropName,
+		PropValue,
+		)
 
 	NF_SMART_ENUM(NFPropertyVariableInputArg,
 		ObjectID,
@@ -395,7 +402,8 @@ public:
 	NFGUID id;
 	std::string name;//arg name
 	NFValueType valueType;
-	std::string varData;
+	NFData varData;
+	//std::string varData;
 	NFIODataComFromType fromType = NFIODataComFromType::EXTERNAL;
 
 	NFGUID GetLinkID()

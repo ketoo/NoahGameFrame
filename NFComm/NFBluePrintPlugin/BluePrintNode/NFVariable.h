@@ -136,7 +136,31 @@ public:
 		{
 			NF_SHARE_PTR<NFIOData> var = NF_SHARE_PTR<NFIOData>(NF_NEW NFIOData());
 			var->id = this->pPluginManager->FindModule<NFIKernelModule>()->CreateGUID();
-			var->name = "";
+			var->name = NFElementVariableInputArg::toString(NFElementVariableOutputArg::ClassName);
+			var->valueType = NFValueType::String;
+
+			outputArgs.push_back(var);
+		}
+		{
+			NF_SHARE_PTR<NFIOData> var = NF_SHARE_PTR<NFIOData>(NF_NEW NFIOData());
+			var->id = this->pPluginManager->FindModule<NFIKernelModule>()->CreateGUID();
+			var->name = NFElementVariableInputArg::toString(NFElementVariableOutputArg::ConfigID);
+			var->valueType = NFValueType::String;
+
+			outputArgs.push_back(var);
+		}
+		{
+			NF_SHARE_PTR<NFIOData> var = NF_SHARE_PTR<NFIOData>(NF_NEW NFIOData());
+			var->id = this->pPluginManager->FindModule<NFIKernelModule>()->CreateGUID();
+			var->name = NFElementVariableInputArg::toString(NFElementVariableOutputArg::PropName);
+			var->valueType = NFValueType::String;
+
+			outputArgs.push_back(var);
+		}
+		{
+			NF_SHARE_PTR<NFIOData> var = NF_SHARE_PTR<NFIOData>(NF_NEW NFIOData());
+			var->id = this->pPluginManager->FindModule<NFIKernelModule>()->CreateGUID();
+			var->name = NFElementVariableInputArg::toString(NFElementVariableOutputArg::PropValue);
 			var->valueType = NFValueType::UNKNOW;
 
 			outputArgs.push_back(var);
