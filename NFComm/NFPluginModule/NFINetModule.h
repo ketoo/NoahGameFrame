@@ -65,14 +65,14 @@ enum NF_SERVER_TYPES
     msg xMsg;                                           \
     if (!NFINetModule::ReceivePB(nMsgID, msgData, nLen, xMsg, nPlayerID))             \
     {                                                   \
-        m_pLogModule->LogNormal(NFILogModule::NLL_ERROR_NORMAL, NFGUID(), "", "Parse msg error", __FUNCTION__, __LINE__); \
+        m_pLogModule->LogError(NFGUID(), "Parse msg error " + std::to_string(nMsgID), __FUNCTION__, __LINE__); \
         return;                                         \
     }                                                   \
     \
     NF_SHARE_PTR<NFIObject> pObject = m_pKernelModule->GetObject(nPlayerID); \
     if ( NULL == pObject.get() )                        \
     {                                                   \
-        m_pLogModule->LogNormal(NFILogModule::NLL_ERROR_NORMAL, nPlayerID, "FromClient Object do not Exist", "", __FUNCTION__, __LINE__); \
+        m_pLogModule->LogError(nPlayerID, "FromClient Object do not Exist " + std::to_string(nMsgID), __FUNCTION__, __LINE__); \
         return;                                         \
     }
 
@@ -81,7 +81,7 @@ enum NF_SERVER_TYPES
     msg xMsg;                                           \
     if (!NFINetModule::ReceivePB(nMsgID, msgData, nLen, xMsg, nPlayerID))             \
     {                                                   \
-        m_pLogModule->LogNormal(NFILogModule::NLL_ERROR_NORMAL, NFGUID(), "", "Parse msg error", __FUNCTION__, __LINE__); \
+        m_pLogModule->LogError(nPlayerID, "Parse msg error " + std::to_string(nMsgID), __FUNCTION__, __LINE__); \
         return;                                         \
     }
 

@@ -387,7 +387,7 @@ NFINet* NFNetModule::GetNet()
 
 void NFNetModule::OnReceiveNetPack(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
 {
-	m_pLogModule->LogInfo("OnReceiveNetPack " + std::to_string(nMsgID), __FUNCTION__, __LINE__);
+	m_pLogModule->LogInfo(pPluginManager->GetAppName() + std::to_string(pPluginManager->GetAppID()) + " OnReceiveNetPack " + std::to_string(nMsgID), __FUNCTION__, __LINE__);
 
 	NFPerformance performance;
 

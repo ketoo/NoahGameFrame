@@ -76,7 +76,7 @@ bool NFPlayerRedisModule::LoadPlayerData(const NFGUID & self, NFMsg::RoleDataPac
 	}
 
 	
-	m_pLogModule->LogNormal(NFILogModule::NF_LOG_LEVEL::NLL_ERROR_NORMAL, self, "loaded data false", NFGetTimeMS());
+	m_pLogModule->LogError(self, "loaded data false", __FUNCTION__, __LINE__);
 
 	return false;
 }

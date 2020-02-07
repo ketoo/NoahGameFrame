@@ -446,7 +446,7 @@ bool NFLogModule::ChangeLogLevel(const std::string& strLevel)
     }
 
     el::Loggers::reconfigureAllLoggers(*pConfigurations);
-    LogNormal(NFILogModule::NLL_INFO_NORMAL, NFGUID(), "[Log] Change log level", strLevel, __FUNCTION__, __LINE__);
+    LogInfo("[Log] Change log level as " + strLevel, __FUNCTION__, __LINE__);
     return true;
 }
 
