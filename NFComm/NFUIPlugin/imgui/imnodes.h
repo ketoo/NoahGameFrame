@@ -65,7 +65,7 @@ struct Style
 
     float pin_radius = 4.0f;
     float pin_hover_radius = 10.0f;
-    float pin_offest = 10.0f;
+    float pin_offset = 0.0f;
 
     StyleFlags flags =
         StyleFlags(StyleFlags_NodeOutline | StyleFlags_GridLines);
@@ -126,9 +126,6 @@ void EndNode();
 void BeginInputAttribute(int id, PinShape shape = PinShape::PinShape_Circle);
 void BeginOutputAttribute(int id, PinShape shape = PinShape::PinShape_Circle);
 void EndAttribute();
-
-// To get the link status for attributes.
-bool IsAttributeLinked(int id);
 
 // Render a link between attributes.
 // The attributes ids used here must match the ids used in

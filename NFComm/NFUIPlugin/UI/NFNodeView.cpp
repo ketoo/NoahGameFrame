@@ -372,6 +372,8 @@ NFNodeView::NFNodeView(NFIPluginManager* p) : NFIView(p, NFViewType::NONE, GET_C
     m_pEditorContext = ed::CreateEditor();
 #else
     m_pEditorContext = imnodes::EditorContextCreate();
+    imnodes::Style& nodeStyle = imnodes::GetStyle();
+    nodeStyle.pin_offset = 10.0f;
 #endif
 }
 

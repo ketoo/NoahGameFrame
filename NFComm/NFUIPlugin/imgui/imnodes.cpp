@@ -660,7 +660,7 @@ ImVec2 get_screen_space_pin_coordinates(
 {
     assert(type == AttributeType_Input || type == AttributeType_Output);
     const float x =
-        type == AttributeType_Input ? (node_rect.Min.x - g.style.pin_offest): (node_rect.Max.x + g.style.pin_offest);
+        type == AttributeType_Input ? (node_rect.Min.x - g.style.pin_offset) : (node_rect.Max.x + g.style.pin_offset);
     return ImVec2(x, 0.5f * (attr_rect.Min.y + attr_rect.Max.y));
 }
 
@@ -947,7 +947,25 @@ void draw_grid(EditorContext& editor, const ImVec2& canvas_size)
     }
 }
 
-void draw_pin_shape(const EditorContext& editor, const ImVec2 pin_pos, const PinData& pin, int num_segments)
+bool IsAttributeLinked(int id)
+{
+    EditorContext& editor = editor_context_get();
+    for (int i = 0; i < editor.links.pool.size(); ++i)
+    {
+        if (editor.links.in_use[i])
+        {
+            LinkData& link = editor.links.pool[i];
+            if (link.start_attr == id || link.end_attr == id)
+            {
+                return true;
+            }
+        }
+    }
+
+    return false;
+}
+
+void draw_pin_shape(const EditorContext& editor, const ImVec2 pin_pos, const PinData& pin, ImU32 pin_color)
 {
     switch (pin.shape)
     {
@@ -956,12 +974,12 @@ void draw_pin_shape(const EditorContext& editor, const ImVec2 pin_pos, const Pin
         if (IsAttributeLinked(pin.id))
         {
             editor.grid_draw_list->AddCircleFilled(
-                pin_pos, g.style.pin_radius, num_segments);
+                pin_pos, g.style.pin_radius, pin_color);
         }
         else
         {
             editor.grid_draw_list->AddCircle(
-                pin_pos, g.style.pin_radius, num_segments);
+                pin_pos, g.style.pin_radius, pin_color);
         }
     }
     break;
@@ -974,7 +992,7 @@ void draw_pin_shape(const EditorContext& editor, const ImVec2 pin_pos, const Pin
                 pin_pos + ImVec2(-g.style.pin_radius, g.style.pin_radius),
                 pin_pos + ImVec2(g.style.pin_radius, g.style.pin_radius),
                 pin_pos + ImVec2(g.style.pin_radius, -g.style.pin_radius),
-                num_segments);
+                pin_color);
         }
         else
         {
@@ -983,7 +1001,7 @@ void draw_pin_shape(const EditorContext& editor, const ImVec2 pin_pos, const Pin
                 pin_pos + ImVec2(-g.style.pin_radius, g.style.pin_radius),
                 pin_pos + ImVec2(g.style.pin_radius, g.style.pin_radius),
                 pin_pos + ImVec2(g.style.pin_radius, -g.style.pin_radius),
-                num_segments);
+                pin_color);
         }
 
     }
@@ -996,7 +1014,7 @@ void draw_pin_shape(const EditorContext& editor, const ImVec2 pin_pos, const Pin
                 pin_pos + ImVec2(-g.style.pin_radius, -g.style.pin_radius),
                 pin_pos + ImVec2(-g.style.pin_radius, g.style.pin_radius),
                 pin_pos + ImVec2(g.style.pin_radius, 0),
-                num_segments);
+                pin_color);
         }
         else
         {
@@ -1004,7 +1022,7 @@ void draw_pin_shape(const EditorContext& editor, const ImVec2 pin_pos, const Pin
                 pin_pos + ImVec2(-g.style.pin_radius, -g.style.pin_radius),
                 pin_pos + ImVec2(-g.style.pin_radius, g.style.pin_radius),
                 pin_pos + ImVec2(g.style.pin_radius, 0),
-                num_segments);
+                pin_color);
         }
     }
     break;
@@ -1013,12 +1031,12 @@ void draw_pin_shape(const EditorContext& editor, const ImVec2 pin_pos, const Pin
         if (IsAttributeLinked(pin.id))
         {
             editor.grid_draw_list->AddCircleFilled(
-                pin_pos, g.style.pin_radius, num_segments);
+                pin_pos, g.style.pin_radius, pin_color);
         }
         else
         {
             editor.grid_draw_list->AddCircle(
-                pin_pos, g.style.pin_radius, num_segments);
+                pin_pos, g.style.pin_radius, pin_color);
         }
     }
     break;
@@ -1675,24 +1693,6 @@ void EndAttribute()
     NodeData& node_current =
         editor_context_get().nodes.pool[g.node_current.index];
     node_current.attribute_rects.push_back(get_item_rect());
-}
-
-bool IsAttributeLinked(int id)
-{
-    EditorContext& editor = editor_context_get();
-    for (int i = 0; i < editor.links.pool.size(); ++i)
-    {
-        if (editor.links.in_use[i])
-        {
-            LinkData& link = editor.links.pool[i];
-            if (link.start_attr == id || link.end_attr == id)
-            {
-                return true;
-            }
-        }
-    }
-
-    return false;
 }
 
 void Link(int id, const int start_attr, const int end_attr)
