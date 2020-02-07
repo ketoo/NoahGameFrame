@@ -49,7 +49,7 @@
 /BuildScript/linux/Build.Linux.Release
 /BuildScript/linux/Build.Tools
 
-/build/*
+
 /_Out/Comm/*
 /_Out/redis*
 /_Out/Debug/
@@ -65,6 +65,10 @@
 /Dependencies/lua
 /Dependencies/protobuf
 
+/cmake-build-debug/*
+/cmake-build-release/*
+/build/*
+/.idea/*
 
 
 /Temp
