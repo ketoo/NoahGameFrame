@@ -200,7 +200,7 @@ void NFProxyServerToWorldModule::ServerReport()
 				reqMsg.set_server_type(nServerType);
 
 
-				m_pNetClientModule->SendToAllServerByPB(NF_SERVER_TYPES::NF_ST_WORLD, NFMsg::STS_SERVER_REPORT, reqMsg);
+				m_pNetClientModule->SendToAllServerByPB(NF_SERVER_TYPES::NF_ST_WORLD, NFMsg::STS_SERVER_REPORT, reqMsg, NFGUID());
 		
 			}
 		}

@@ -136,7 +136,7 @@ void NFGameServerToWorldModule::ServerReport()
 				reqMsg.set_server_state(NFMsg::EST_NARMAL);
 				reqMsg.set_server_type(nServerType);
 
-				m_pNetClientModule->SendToAllServerByPB(NF_SERVER_TYPES::NF_ST_WORLD, NFMsg::STS_SERVER_REPORT, reqMsg);
+				m_pNetClientModule->SendToAllServerByPB(NF_SERVER_TYPES::NF_ST_WORLD, NFMsg::STS_SERVER_REPORT, reqMsg, NFGUID());
 			}
 		}
 	}
@@ -293,7 +293,7 @@ void NFGameServerToWorldModule::SendOnline(const NFGUID& self)
 	xMsg.set_name(playerName);
 	xMsg.set_bp(0);
 
-	m_pNetClientModule->SendToAllServerByPB(NF_SERVER_TYPES::NF_ST_WORLD, NFMsg::ACK_ONLINE_NOTIFY, xMsg);
+	m_pNetClientModule->SendToAllServerByPB(NF_SERVER_TYPES::NF_ST_WORLD, NFMsg::ACK_ONLINE_NOTIFY, xMsg, self);
 }
 
 void NFGameServerToWorldModule::SendOffline(const NFGUID& self)
@@ -307,7 +307,7 @@ void NFGameServerToWorldModule::SendOffline(const NFGUID& self)
 	xMsg.set_game(pPluginManager->GetAppID());
 	xMsg.set_proxy(0);
 
-	m_pNetClientModule->SendToAllServerByPB(NF_SERVER_TYPES::NF_ST_WORLD, NFMsg::ACK_OFFLINE_NOTIFY, xMsg);
+	m_pNetClientModule->SendToAllServerByPB(NF_SERVER_TYPES::NF_ST_WORLD, NFMsg::ACK_OFFLINE_NOTIFY, xMsg, self);
 
 }
 

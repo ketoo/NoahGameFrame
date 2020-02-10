@@ -849,8 +849,7 @@ void NFWorldNet_ServerModule::OnOfflineProcess(const NFSOCK nSockIndex, const in
 
 }
 
-void NFWorldNet_ServerModule::OnTransmitServerReport(const NFSOCK nFd, const int msgId, const char *buffer,
-                                                      const uint32_t nLen)
+void NFWorldNet_ServerModule::OnTransmitServerReport(const NFSOCK nFd, const int msgId, const char *buffer, const uint32_t nLen)
 {
     NFGUID xGUID;
 	NFMsg::ServerInfoReport msg;
@@ -860,8 +859,26 @@ void NFWorldNet_ServerModule::OnTransmitServerReport(const NFSOCK nFd, const int
 	}
 
 
-	m_pNetClientModule->SendToAllServerByPB(NF_SERVER_TYPES::NF_ST_MASTER, NFMsg::STS_SERVER_REPORT, msg);
+	m_pNetClientModule->SendToAllServerByPB(NF_SERVER_TYPES::NF_ST_MASTER, NFMsg::STS_SERVER_REPORT, msg, NFGUID());
 
+}
+
+bool NFWorldNet_ServerModule::SendMsgToGame(const NFGUID nPlayer, const int msgID, const std::string& xData)
+{
+    NF_SHARE_PTR<PlayerData> playerData = mPlayersData.GetElement(nPlayer);
+    if (playerData)
+    {
+        NF_SHARE_PTR<ServerData> pData = mGameMap.GetElement(playerData->gameID);
+        if (pData)
+        {
+            const NFSOCK nFD = pData->nFD;
+            m_pNetModule->SendMsg(msgID, xData, nFD, nPlayer);
+
+            return true;
+        }
+    }
+
+    return false;
 }
 
 bool NFWorldNet_ServerModule::SendMsgToGame(const NFGUID nPlayer, const int msgID, google::protobuf::Message& xData)
@@ -977,7 +994,7 @@ void NFWorldNet_ServerModule::ServerReport(int reportServerId, NFMsg::EServerSta
 				reqMsg.set_server_type(nServerType);
 
 
-				m_pNetClientModule->SendToAllServerByPB(NF_SERVER_TYPES::NF_ST_MASTER, NFMsg::STS_SERVER_REPORT, reqMsg);
+				m_pNetClientModule->SendToAllServerByPB(NF_SERVER_TYPES::NF_ST_MASTER, NFMsg::STS_SERVER_REPORT, reqMsg, NFGUID());
 			}
 		}
 	}

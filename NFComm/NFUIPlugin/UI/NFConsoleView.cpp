@@ -77,7 +77,7 @@ bool NFConsoleView::Execute()
             bool render = true;
             if (!searchLog.empty())
             {
-               if (item_name.data.find_first_of(searchLog) < 0)
+               if (item_name.data.find_first_of(searchLog)  == std::string::npos)
                {
                   render = false;
                } 
@@ -103,7 +103,7 @@ bool NFConsoleView::Execute()
             bool render = true;
             if (!searchLog.empty())
             {
-               if (item_name.data.find_first_of(searchLog) < 0)
+               if (item_name.data.find_first_of(searchLog) == std::string::npos)
                {
                   render = false;
                } 
@@ -127,7 +127,7 @@ bool NFConsoleView::Execute()
             bool render = true;
             if (!searchLog.empty())
             {
-               if (item_name.data.find_first_of(searchLog) < 0)
+               if (item_name.data.find_first_of(searchLog)  == std::string::npos)
                {
                   render = false;
                } 
@@ -151,7 +151,7 @@ bool NFConsoleView::Execute()
             bool render = true;
             if (!searchLog.empty())
             {
-               if (item_name.data.find_first_of(searchLog) < 0)
+               if (item_name.data.find_first_of(searchLog)  == std::string::npos)
                {
                   render = false;
                } 
@@ -176,7 +176,7 @@ bool NFConsoleView::Execute()
             bool render = true;
             if (!searchLog.empty())
             {
-               if (item_name.data.find_first_of(searchLog) < 0)
+               if (item_name.data.find_first_of(searchLog)  == std::string::npos)
                {
                   render = false;
                } 

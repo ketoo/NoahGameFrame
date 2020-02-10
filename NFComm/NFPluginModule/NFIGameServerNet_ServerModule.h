@@ -72,7 +72,8 @@ public:
 
 public:
 
-	virtual void SendMsgPBToGate(const uint16_t nMsgID, google::protobuf::Message& xMsg, const NFGUID& self) = 0;
+    //virtual void SendMsgPBToGate(const uint16_t nMsgID, const std::string& xMsg, const NFGUID& self) = 0;
+    virtual void SendMsgPBToGate(const uint16_t nMsgID, google::protobuf::Message& xMsg, const NFGUID& self) = 0;
 	virtual void SendGroupMsgPBToGate(const uint16_t nMsgID, google::protobuf::Message& xMsg, const int nSceneID, const int nGroupID) = 0;
 	virtual void SendGroupMsgPBToGate(const uint16_t nMsgID, google::protobuf::Message& xMsg, const int nSceneID, const int nGroupID, const NFGUID exceptID) = 0;
 

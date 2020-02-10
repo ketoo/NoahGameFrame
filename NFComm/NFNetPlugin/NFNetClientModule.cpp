@@ -409,7 +409,7 @@ void NFNetClientModule::SendToServerByPB(const int nServerID, const uint16_t nMs
 	}
 }
 
-void NFNetClientModule::SendToAllServerByPB(const uint16_t nMsgID, const google::protobuf::Message& xData)
+void NFNetClientModule::SendToAllServerByPB(const uint16_t nMsgID, const google::protobuf::Message& xData, const NFGUID id)
 {
     NF_SHARE_PTR<ConnectData> pServer = mxServerMap.First();
     while (pServer)
@@ -417,7 +417,7 @@ void NFNetClientModule::SendToAllServerByPB(const uint16_t nMsgID, const google:
         NF_SHARE_PTR<NFINetModule> pNetModule = pServer->mxNetModule;
         if (pNetModule)
         {
-			if (!pNetModule->SendMsgPB(nMsgID, xData, 0))
+			if (!pNetModule->SendMsgPB(nMsgID, xData, 0, id))
 			{
 				std::ostringstream stream;
 				stream << " SendMsgPB failed " << pServer->nGameID;
@@ -430,8 +430,7 @@ void NFNetClientModule::SendToAllServerByPB(const uint16_t nMsgID, const google:
     }
 }
 
-void NFNetClientModule::SendToAllServerByPB(const NF_SERVER_TYPES eType, const uint16_t nMsgID,
-                                             const google::protobuf::Message& xData)
+void NFNetClientModule::SendToAllServerByPB(const NF_SERVER_TYPES eType, const uint16_t nMsgID, const google::protobuf::Message& xData, const NFGUID id)
 {
     NF_SHARE_PTR<ConnectData> pServer = mxServerMap.First();
     while (pServer)
@@ -439,7 +438,7 @@ void NFNetClientModule::SendToAllServerByPB(const NF_SERVER_TYPES eType, const u
         NF_SHARE_PTR<NFINetModule> pNetModule = pServer->mxNetModule;
         if (pNetModule && eType == pServer->eServerType && pServer->eState == ConnectDataState::NORMAL)
         {
-            if (!pNetModule->SendMsgPB(nMsgID, xData, 0))
+            if (!pNetModule->SendMsgPB(nMsgID, xData, 0, id))
 			{
 				std::ostringstream stream;
 				stream << " SendMsgPB failed " << pServer->nGameID;
