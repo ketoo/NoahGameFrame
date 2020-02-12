@@ -21,6 +21,7 @@
 #endif
 
 #include <assert.h>
+#include <math.h>
 #include <new>
 #include <stdint.h>
 #include <string.h> // strlen, strncmp
@@ -58,10 +59,9 @@ enum ScopeFlags
 
 enum Channels
 {
-    Channel_Background = 0,
-    Channel_Foreground,
-    Channel_Ui,
-    Channel_Count
+    Channels_NodeBackground = 0,
+    Channels_ImGui,
+    Channels_Count
 };
 
 enum AttributeType
@@ -171,6 +171,7 @@ struct NodeData
     } layout_style;
 
     ImVector<ImRect> attribute_rects;
+    ImVector<int> pin_indices;
     bool draggable;
 
     NodeData()
@@ -179,7 +180,7 @@ struct NodeData
               "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0"),
           origin(100.0f, 100.0f), title_text_size(0.f, 0.f),
           rect(ImVec2(0.0f, 0.0f), ImVec2(0.0f, 0.0f)), color_style(),
-          layout_style(), attribute_rects(), draggable(true)
+          layout_style(), attribute_rects(), pin_indices(), draggable(true)
     {
     }
 };
@@ -194,7 +195,7 @@ struct PinData
 
     struct
     {
-        ImU32 background, hovered, outline;
+        ImU32 background, hovered;
     } color_style;
 
     PinData()
@@ -322,6 +323,12 @@ struct
 
     struct
     {
+        int id;
+        int index;
+    } pin_current;
+
+    struct
+    {
         int index;
         int attribute;
     } node_active;
@@ -330,6 +337,8 @@ struct
     int link_hovered;
     int pin_hovered;
     bool link_dropped;
+
+    ImDrawList* canvas_draw_list;
 
     ImGuiTextBuffer text_buffer;
 } g;
@@ -633,7 +642,6 @@ struct EditorContext
 
     // ui related fields
     ImVec2 panning;
-    ImDrawList* grid_draw_list;
 
     ImVector<int> selected_nodes;
     ImVector<int> selected_links;
@@ -643,8 +651,8 @@ struct EditorContext
     NodeInteraction node_interaction;
 
     EditorContext()
-        : nodes(), pins(), links(), panning(0.f, 0.f), grid_draw_list(nullptr),
-          link_dragged(), box_selector()
+        : nodes(), pins(), links(), panning(0.f, 0.f), link_dragged(),
+          box_selector()
     {
     }
 };
@@ -659,8 +667,9 @@ ImVec2 get_screen_space_pin_coordinates(
     const AttributeType type)
 {
     assert(type == AttributeType_Input || type == AttributeType_Output);
-    const float x =
-        type == AttributeType_Input ? (node_rect.Min.x - g.style.pin_offset) : (node_rect.Max.x + g.style.pin_offset);
+    const float x = type == AttributeType_Input
+                        ? (node_rect.Min.x - g.style.pin_offset)
+                        : (node_rect.Max.x + g.style.pin_offset);
     return ImVec2(x, 0.5f * (attr_rect.Min.y + attr_rect.Max.y));
 }
 
@@ -668,7 +677,7 @@ ImVec2 get_screen_space_pin_coordinates(
     const EditorContext& editor,
     const int pin_id)
 {
-    const int pin_idx = editor.pins.id_map.GetInt(pin_id);
+    const int pin_idx = editor.pins.id_map.GetInt(pin_id, INVALID_INDEX);
     assert(pin_idx != INVALID_INDEX);
     const PinData& pin = editor.pins.pool[pin_idx];
     const NodeData& node = editor.nodes.pool[pin.node_idx];
@@ -763,34 +772,34 @@ void box_selector_update(
         g.style.colors[ColorStyle_BoxSelectorOutline];
     switch (box_selector.state)
     {
-        case BoxSelectorState_Started:
-            box_selector.box_rect.Min = io.MousePos;
-            box_selector.state = BoxSelectorState_Dragging;
-            // fallthrough to next case to get the rest of the state &
-            // render
-        case BoxSelectorState_Dragging:
+    case BoxSelectorState_Started:
+        box_selector.box_rect.Min = io.MousePos;
+        box_selector.state = BoxSelectorState_Dragging;
+        // fallthrough to next case to get the rest of the state &
+        // render
+    case BoxSelectorState_Dragging:
+    {
+        box_selector.box_rect.Max = io.MousePos;
+        g.canvas_draw_list->AddRectFilled(
+            box_selector.box_rect.Min,
+            box_selector.box_rect.Max,
+            box_selector_color);
+        g.canvas_draw_list->AddRect(
+            box_selector.box_rect.Min,
+            box_selector.box_rect.Max,
+            box_selector_outline);
+
+        box_selector_process(box_selector, editor_ctx);
+
+        if (ImGui::IsMouseReleased(0))
         {
-            box_selector.box_rect.Max = io.MousePos;
-            editor_ctx.grid_draw_list->AddRectFilled(
-                box_selector.box_rect.Min,
-                box_selector.box_rect.Max,
-                box_selector_color);
-            editor_ctx.grid_draw_list->AddRect(
-                box_selector.box_rect.Min,
-                box_selector.box_rect.Max,
-                box_selector_outline);
-
-            box_selector_process(box_selector, editor_ctx);
-
-            if (ImGui::IsMouseReleased(0))
-            {
-                box_selector.state = BoxSelectorState_None;
-            }
+            box_selector.state = BoxSelectorState_None;
         }
+    }
+    break;
+    default:
+        assert(!"Unreachable code!");
         break;
-        default:
-            assert(!"Unreachable code!");
-            break;
     }
 }
 
@@ -816,34 +825,34 @@ void node_interaction_update(EditorContext& editor)
     NodeInteraction& node_interaction = editor.node_interaction;
     switch (node_interaction.state)
     {
-        case NodeInteractionState_MouseDown:
+    case NodeInteractionState_MouseDown:
+    {
+        assert(node_interaction.node_idx != INVALID_INDEX);
+        if (ImGui::IsMouseDragging(0) &&
+            editor.link_dragged.start_attr == INVALID_INDEX)
         {
-            assert(node_interaction.node_idx != INVALID_INDEX);
-            if (ImGui::IsMouseDragging(0) &&
-                editor.link_dragged.start_attr == INVALID_INDEX)
+            for (int i = 0; i < editor.selected_nodes.size(); ++i)
             {
-                for (int i = 0; i < editor.selected_nodes.size(); ++i)
+                const int idx = editor.selected_nodes[i];
+                NodeData& node = editor.nodes.pool[idx];
+                if (node.draggable)
                 {
-                    const int idx = editor.selected_nodes[i];
-                    NodeData& node = editor.nodes.pool[idx];
-                    if (node.draggable)
-                    {
-                        node.origin += ImGui::GetIO().MouseDelta;
-                    }
+                    node.origin += ImGui::GetIO().MouseDelta;
                 }
             }
-
-            if (ImGui::IsMouseReleased(0))
-            {
-                node_interaction.state = NodeInteractionState_None;
-            }
         }
+
+        if (ImGui::IsMouseReleased(0))
+        {
+            node_interaction.state = NodeInteractionState_None;
+        }
+    }
+    break;
+    case NodeInteractionState_None:
         break;
-        case NodeInteractionState_None:
-            break;
-        default:
-            assert(!"Unreachable code!");
-            break;
+    default:
+        assert(!"Unreachable code!");
+        break;
     }
 }
 
@@ -931,7 +940,7 @@ void draw_grid(EditorContext& editor, const ImVec2& canvas_size)
     for (float x = fmodf(offset.x, g.style.grid_spacing); x < canvas_size.x;
          x += g.style.grid_spacing)
     {
-        editor.grid_draw_list->AddLine(
+        g.canvas_draw_list->AddLine(
             editor_space_to_screen_space(ImVec2(x, 0.0f)),
             editor_space_to_screen_space(ImVec2(x, canvas_size.y)),
             g.style.colors[ColorStyle_GridLine]);
@@ -940,106 +949,141 @@ void draw_grid(EditorContext& editor, const ImVec2& canvas_size)
     for (float y = fmodf(offset.y, g.style.grid_spacing); y < canvas_size.y;
          y += g.style.grid_spacing)
     {
-        editor.grid_draw_list->AddLine(
+        g.canvas_draw_list->AddLine(
             editor_space_to_screen_space(ImVec2(0.0f, y)),
             editor_space_to_screen_space(ImVec2(canvas_size.x, y)),
             g.style.colors[ColorStyle_GridLine]);
     }
 }
 
-bool IsAttributeLinked(int id)
+struct QuadOffsets
 {
-    EditorContext& editor = editor_context_get();
-    for (int i = 0; i < editor.links.pool.size(); ++i)
-    {
-        if (editor.links.in_use[i])
-        {
-            LinkData& link = editor.links.pool[i];
-            if (link.start_attr == id || link.end_attr == id)
-            {
-                return true;
-            }
-        }
-    }
+    ImVec2 top_left, bottom_left, bottom_right, top_right;
+};
 
-    return false;
+QuadOffsets calculate_quad_offsets(const float side_length)
+{
+    const float half_side = 0.5f * side_length;
+
+    QuadOffsets offset;
+
+    offset.top_left = ImVec2(-half_side, half_side);
+    offset.bottom_left = ImVec2(-half_side, -half_side);
+    offset.bottom_right = ImVec2(half_side, -half_side);
+    offset.top_right = ImVec2(half_side, half_side);
+
+    return offset;
 }
 
-void draw_pin_shape(const EditorContext& editor, const ImVec2 pin_pos, const PinData& pin, ImU32 pin_color)
+struct TriangleOffsets
 {
+    ImVec2 top_left, bottom_left, right;
+};
+
+TriangleOffsets calculate_triangle_offsets(const float side_length)
+{
+    // Calculates the Vec2 offsets from an equilateral triangle's midpoint to
+    // its vertices. Here is how the left_offset and right_offset are
+    // calculated.
+    //
+    // For an equilateral triangle of side length s, the
+    // triangle's height, h, is h = s * sqrt(3) / 2.
+    //
+    // The length from the base to the midpoint is (1 / 3) * h. The length from
+    // the midpoint to the triangle vertex is (2 / 3) * h.
+    const float sqrt_3 = sqrtf(3.0f);
+    const float left_offset = -0.1666666666667f * sqrt_3 * side_length;
+    const float right_offset = 0.333333333333f * sqrt_3 * side_length;
+    const float vertical_offset = 0.5f * side_length;
+
+    TriangleOffsets offset;
+    offset.top_left = ImVec2(left_offset, vertical_offset);
+    offset.bottom_left = ImVec2(left_offset, -vertical_offset);
+    offset.right = ImVec2(right_offset, 0.f);
+
+    return offset;
+}
+
+void draw_pin_shape(
+    const ImVec2& pin_pos,
+    const PinData& pin,
+    const ImU32 pin_color)
+{
+    static const int circle_num_segments = 8;
+
     switch (pin.shape)
     {
-    case PinShape::PinShape_Circle:
+    case PinShape_Circle:
     {
-        if (IsAttributeLinked(pin.id))
-        {
-            editor.grid_draw_list->AddCircleFilled(
-                pin_pos, g.style.pin_radius, pin_color);
-        }
-        else
-        {
-            editor.grid_draw_list->AddCircle(
-                pin_pos, g.style.pin_radius, pin_color);
-        }
+        g.canvas_draw_list->AddCircle(
+            pin_pos,
+            g.style.pin_circle_radius,
+            pin_color,
+            circle_num_segments,
+            g.style.pin_line_thickness);
     }
     break;
-    case PinShape::PinShape_Quad:
+    case PinShape_CircleFilled:
     {
-        if (IsAttributeLinked(pin.id))
-        {
-            editor.grid_draw_list->AddQuadFilled(
-                pin_pos + ImVec2(-g.style.pin_radius, -g.style.pin_radius),
-                pin_pos + ImVec2(-g.style.pin_radius, g.style.pin_radius),
-                pin_pos + ImVec2(g.style.pin_radius, g.style.pin_radius),
-                pin_pos + ImVec2(g.style.pin_radius, -g.style.pin_radius),
-                pin_color);
-        }
-        else
-        {
-            editor.grid_draw_list->AddQuad(
-                pin_pos + ImVec2(-g.style.pin_radius, -g.style.pin_radius),
-                pin_pos + ImVec2(-g.style.pin_radius, g.style.pin_radius),
-                pin_pos + ImVec2(g.style.pin_radius, g.style.pin_radius),
-                pin_pos + ImVec2(g.style.pin_radius, -g.style.pin_radius),
-                pin_color);
-        }
-
+        g.canvas_draw_list->AddCircleFilled(
+            pin_pos, g.style.pin_circle_radius, pin_color, circle_num_segments);
     }
     break;
-    case PinShape::PinShape_Triangle:
+    case PinShape_Quad:
     {
-        if (IsAttributeLinked(pin.id))
-        {
-            editor.grid_draw_list->AddTriangleFilled(
-                pin_pos + ImVec2(-g.style.pin_radius, -g.style.pin_radius),
-                pin_pos + ImVec2(-g.style.pin_radius, g.style.pin_radius),
-                pin_pos + ImVec2(g.style.pin_radius, 0),
-                pin_color);
-        }
-        else
-        {
-            editor.grid_draw_list->AddTriangle(
-                pin_pos + ImVec2(-g.style.pin_radius, -g.style.pin_radius),
-                pin_pos + ImVec2(-g.style.pin_radius, g.style.pin_radius),
-                pin_pos + ImVec2(g.style.pin_radius, 0),
-                pin_color);
-        }
+        const QuadOffsets offset =
+            calculate_quad_offsets(g.style.pin_quad_side_length);
+        g.canvas_draw_list->AddQuad(
+            pin_pos + offset.top_left,
+            pin_pos + offset.bottom_left,
+            pin_pos + offset.bottom_right,
+            pin_pos + offset.top_right,
+            pin_color,
+            g.style.pin_line_thickness);
+    }
+    break;
+    case PinShape_QuadFilled:
+    {
+        const QuadOffsets offset =
+            calculate_quad_offsets(g.style.pin_quad_side_length);
+        g.canvas_draw_list->AddQuadFilled(
+            pin_pos + offset.top_left,
+            pin_pos + offset.bottom_left,
+            pin_pos + offset.bottom_right,
+            pin_pos + offset.top_right,
+            pin_color);
+    }
+    break;
+    case PinShape_Triangle:
+    {
+        const TriangleOffsets offset =
+            calculate_triangle_offsets(g.style.pin_triangle_side_length);
+        g.canvas_draw_list->AddTriangle(
+            pin_pos + offset.top_left,
+            pin_pos + offset.bottom_left,
+            pin_pos + offset.right,
+            pin_color,
+            // NOTE: for some weird reason, the line drawn by AddTriangle is
+            // much thinner than the lines drawn by AddCircle or AddQuad.
+            // Multiplying the line thickness by two seemed to solve the
+            // problem at a few different thickness values.
+            2.f * g.style.pin_line_thickness);
+    }
+    break;
+    case PinShape_TriangleFilled:
+    {
+        const TriangleOffsets offset =
+            calculate_triangle_offsets(g.style.pin_triangle_side_length);
+        g.canvas_draw_list->AddTriangleFilled(
+            pin_pos + offset.top_left,
+            pin_pos + offset.bottom_left,
+            pin_pos + offset.right,
+            pin_color);
     }
     break;
     default:
-    {
-        if (IsAttributeLinked(pin.id))
-        {
-            editor.grid_draw_list->AddCircleFilled(
-                pin_pos, g.style.pin_radius, pin_color);
-        }
-        else
-        {
-            editor.grid_draw_list->AddCircle(
-                pin_pos, g.style.pin_radius, pin_color);
-        }
-    }
-    break;
+        assert(!"Invalid PinShape value!");
+        break;
     }
 }
 
@@ -1052,26 +1096,17 @@ void draw_pin(const EditorContext& editor, const int pin_idx)
     if (is_mouse_hovering_near_point(pin_pos, g.style.pin_hover_radius))
     {
         g.pin_hovered = pin_idx;
-        draw_pin_shape(editor, pin_pos, pin, pin.color_style.hovered);
+        draw_pin_shape(pin_pos, pin, pin.color_style.hovered);
     }
     else
     {
-        draw_pin_shape(editor, pin_pos, pin, pin.color_style.background);
-    }
-
-    if ((g.style.flags & StyleFlags_PinOutline) != 0)
-    {
-        editor.grid_draw_list->AddCircle(
-            pin_pos, g.style.pin_radius, pin.color_style.outline);
+        draw_pin_shape(pin_pos, pin, pin.color_style.background);
     }
 }
 
 void draw_node(EditorContext& editor, int node_idx)
 {
     const NodeData& node = editor.nodes.pool[node_idx];
-    ImGui::PushID(node.id);
-
-    editor.grid_draw_list->ChannelsSetCurrent(Channel_Foreground);
 
     ImGui::SetCursorPos(node.origin + editor.panning);
     ImGui::InvisibleButton(node.name, node.rect.GetSize());
@@ -1101,7 +1136,7 @@ void draw_node(EditorContext& editor, int node_idx)
 
     {
         // node base
-        editor.grid_draw_list->AddRectFilled(
+        g.canvas_draw_list->AddRectFilled(
             node.rect.Min,
             node.rect.Max,
             node_background,
@@ -1110,7 +1145,7 @@ void draw_node(EditorContext& editor, int node_idx)
         // title bar:
         {
             ImRect title_rect = get_screen_space_title_bar_rect(node);
-            editor.grid_draw_list->AddRectFilled(
+            g.canvas_draw_list->AddRectFilled(
                 title_rect.Min,
                 title_rect.Max,
                 titlebar_background,
@@ -1124,7 +1159,7 @@ void draw_node(EditorContext& editor, int node_idx)
         }
         if ((g.style.flags & StyleFlags_NodeOutline) != 0)
         {
-            editor.grid_draw_list->AddRect(
+            g.canvas_draw_list->AddRect(
                 node.rect.Min,
                 node.rect.Max,
                 node.color_style.outline,
@@ -1132,7 +1167,10 @@ void draw_node(EditorContext& editor, int node_idx)
         }
     }
 
-    ImGui::PopID();
+    for (int i = 0; i < node.pin_indices.size(); ++i)
+    {
+        draw_pin(editor, node.pin_indices[i]);
+    }
 }
 
 void draw_link(EditorContext& editor, int link_idx)
@@ -1166,7 +1204,7 @@ void draw_link(EditorContext& editor, int link_idx)
         link_color = link.color_style.hovered;
     }
 
-    editor.grid_draw_list->AddBezierCurve(
+    g.canvas_draw_list->AddBezierCurve(
         link_data.bezier.p0,
         link_data.bezier.p1,
         link_data.bezier.p2,
@@ -1200,7 +1238,9 @@ void begin_attribute(int id, AttributeType type, PinShape shape)
     pin.shape = shape;
     pin.color_style.background = g.style.colors[ColorStyle_Pin];
     pin.color_style.hovered = g.style.colors[ColorStyle_PinHovered];
-    pin.color_style.outline = g.style.colors[ColorStyle_PinOutline];
+
+    g.pin_current.id = id;
+    g.pin_current.index = editor.pins.id_map.GetInt(id, INVALID_INDEX);
 }
 } // namespace
 
@@ -1287,7 +1327,6 @@ void StyleColorsDark()
     // pin colors match ImGui's button colors
     g.style.colors[ColorStyle_Pin] = IM_COL32(53, 150, 250, 180);
     g.style.colors[ColorStyle_PinHovered] = IM_COL32(53, 150, 250, 255);
-    g.style.colors[ColorStyle_PinOutline] = IM_COL32(200, 200, 200, 255);
 
     g.style.colors[ColorStyle_BoxSelector] = IM_COL32(61, 133, 224, 30);
     g.style.colors[ColorStyle_BoxSelectorOutline] = IM_COL32(61, 133, 224, 150);
@@ -1312,7 +1351,6 @@ void StyleColorsClassic()
     g.style.colors[ColorStyle_LinkSelected] = IM_COL32(105, 99, 204, 153);
     g.style.colors[ColorStyle_Pin] = IM_COL32(89, 102, 156, 170);
     g.style.colors[ColorStyle_PinHovered] = IM_COL32(102, 122, 179, 200);
-    g.style.colors[ColorStyle_PinOutline] = IM_COL32(200, 200, 200, 255);
     g.style.colors[ColorStyle_BoxSelector] = IM_COL32(82, 82, 161, 100);
     g.style.colors[ColorStyle_BoxSelectorOutline] = IM_COL32(82, 82, 161, 255);
     g.style.colors[ColorStyle_GridBackground] = IM_COL32(40, 40, 50, 200);
@@ -1338,7 +1376,6 @@ void StyleColorsLight()
     // original imgui values: 66, 150, 250
     g.style.colors[ColorStyle_Pin] = IM_COL32(66, 150, 250, 160);
     g.style.colors[ColorStyle_PinHovered] = IM_COL32(66, 150, 250, 255);
-    g.style.colors[ColorStyle_PinOutline] = IM_COL32(66, 150, 250, 255);
     g.style.colors[ColorStyle_BoxSelector] = IM_COL32(90, 170, 250, 30);
     g.style.colors[ColorStyle_BoxSelectorOutline] = IM_COL32(90, 170, 250, 150);
     g.style.colors[ColorStyle_GridBackground] = IM_COL32(225, 225, 225, 255);
@@ -1369,8 +1406,6 @@ void BeginNodeEditor()
     editor.pins.update();
     editor.links.update();
 
-    assert(editor.grid_draw_list == nullptr);
-
     ImGui::BeginGroup();
     {
         ImGui::PushStyleVar(ImGuiStyleVar_FramePadding, ImVec2(1.f, 1.f));
@@ -1383,12 +1418,11 @@ void BeginNodeEditor()
             true,
             ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoMove);
         g.canvas_origin_screen_space = ImGui::GetCursorScreenPos();
-        // prepare for layering the node content on top of the nodes
-        // NOTE: the draw list has to be captured here, because we want all the
-        // content to clip the scrolling_region child window.
-        editor.grid_draw_list = ImGui::GetWindowDrawList();
-        editor.grid_draw_list->ChannelsSplit(Channel_Count);
-        editor.grid_draw_list->ChannelsSetCurrent(Channel_Background);
+
+        // NOTE: we have to fetch the canvas draw list *after* we call
+        // BeginChild(), otherwise the ImGui UI elements are going to be
+        // rendered into the parent window draw list.
+        g.canvas_draw_list = ImGui::GetWindowDrawList();
 
         {
             const ImVec2 canvas_size = ImGui::GetWindowSize();
@@ -1402,8 +1436,6 @@ void BeginNodeEditor()
             }
         }
     }
-
-    editor.grid_draw_list->ChannelsSetCurrent(Channel_Ui);
 }
 
 void EndNodeEditor()
@@ -1416,24 +1448,6 @@ void EndNodeEditor()
     const bool is_mouse_clicked = ImGui::IsMouseClicked(0);
     const ImGuiIO& imgui_io = ImGui::GetIO();
 
-    for (int i = 0; i < editor.nodes.pool.size(); i++)
-    {
-        // TODO: perhaps consider putting this inside a BeginChild()  block
-        // to see if that would solve the overlapping node problem
-        if (editor.nodes.in_use[i])
-        {
-            draw_node(editor, i);
-        }
-    }
-
-    for (int i = 0; i < editor.pins.pool.size(); i++)
-    {
-        if (editor.pins.in_use[i])
-        {
-            draw_pin(editor, i);
-        }
-    }
-
     // check to see if the mouse was near any node
     if (g.node_hovered == INVALID_INDEX)
     {
@@ -1442,8 +1456,6 @@ void EndNodeEditor()
             editor.selected_nodes.clear();
         }
     }
-
-    editor.grid_draw_list->ChannelsSetCurrent(Channel_Background);
 
     for (int i = 0; i < editor.links.pool.size(); ++i)
     {
@@ -1489,7 +1501,7 @@ void EndNodeEditor()
                 end_pos,
                 pin.type,
                 g.style.link_line_segments_per_length);
-            editor.grid_draw_list->AddBezierCurve(
+            g.canvas_draw_list->AddBezierCurve(
                 link_data.bezier.p0,
                 link_data.bezier.p1,
                 link_data.bezier.p2,
@@ -1581,17 +1593,11 @@ void EndNodeEditor()
 
         if (box_selector_active(editor.box_selector))
         {
-            editor.grid_draw_list->ChannelsSetCurrent(Channel_Foreground);
             box_selector_update(editor.box_selector, editor, imgui_io);
         }
     }
 
     node_interaction_update(editor);
-
-    // set channel 0 before merging, or else UI rendering is broken
-    editor.grid_draw_list->ChannelsSetCurrent(0);
-    editor.grid_draw_list->ChannelsMerge();
-    editor.grid_draw_list = nullptr;
 
     // apply panning if the mouse was dragged
     if (ImGui::IsWindowHovered() && !ImGui::IsAnyItemActive() &&
@@ -1611,10 +1617,11 @@ void EndNodeEditor()
     {
         NodeData& node = editor.nodes.pool[idx];
         node.attribute_rects.clear();
+        node.pin_indices.clear();
     }
 }
 
-void BeginNode(int node_id)
+void BeginNode(const int node_id)
 {
     // Remember to call BeginNodeEditor before calling BeginNode
     assert(g.current_scope == Scope_Editor);
@@ -1652,6 +1659,9 @@ void BeginNode(int node_id)
     ImGui::SetCursorPos(
         grid_space_to_editor_space(get_node_content_origin(node)));
 
+    g.canvas_draw_list->ChannelsSplit(Channels_Count);
+    g.canvas_draw_list->ChannelsSetCurrent(Channels_ImGui);
+
     ImGui::PushID(node_id);
     ImGui::BeginGroup();
 }
@@ -1663,18 +1673,30 @@ void EndNode()
 
     EditorContext& editor = editor_context_get();
 
+    // The node's rectangle depends on the ImGui UI group size.
     ImGui::EndGroup();
     ImGui::PopID();
     {
         NodeData& node = editor.nodes.pool[g.node_current.index];
         node.rect = get_screen_space_node_rect(node, get_item_rect());
     }
+
+    g.canvas_draw_list->ChannelsSetCurrent(Channels_NodeBackground);
+    draw_node(editor, g.node_current.index);
+    g.canvas_draw_list->ChannelsMerge();
+
     g.node_current.index = INVALID_INDEX;
 }
 
-void BeginInputAttribute(int id, PinShape shape) { begin_attribute(id, AttributeType_Input, shape); }
+void BeginInputAttribute(const int id, const PinShape shape)
+{
+    begin_attribute(id, AttributeType_Input, shape);
+}
 
-void BeginOutputAttribute(int id, PinShape shape) { begin_attribute(id, AttributeType_Output, shape); }
+void BeginOutputAttribute(const int id, const PinShape shape)
+{
+    begin_attribute(id, AttributeType_Output, shape);
+}
 
 void EndAttribute()
 {
@@ -1693,6 +1715,7 @@ void EndAttribute()
     NodeData& node_current =
         editor_context_get().nodes.pool[g.node_current.index];
     node_current.attribute_rects.push_back(get_item_rect());
+    node_current.pin_indices.push_back(g.pin_current.index);
 }
 
 void Link(int id, const int start_attr, const int end_attr)
@@ -1734,20 +1757,20 @@ float& lookup_style_var(const StyleVar item)
     float* style_var = 0;
     switch (item)
     {
-        case StyleVar_GridSpacing:
-            style_var = &g.style.grid_spacing;
-            break;
-        case StyleVar_NodeCornerRounding:
-            style_var = &g.style.node_corner_rounding;
-            break;
-        case StyleVar_NodePaddingHorizontal:
-            style_var = &g.style.node_padding_horizontal;
-            break;
-        case StyleVar_NodePaddingVertical:
-            style_var = &g.style.node_padding_vertical;
-            break;
-        default:
-            assert(!"Invalid StyleVar value!");
+    case StyleVar_GridSpacing:
+        style_var = &g.style.grid_spacing;
+        break;
+    case StyleVar_NodeCornerRounding:
+        style_var = &g.style.node_corner_rounding;
+        break;
+    case StyleVar_NodePaddingHorizontal:
+        style_var = &g.style.node_padding_horizontal;
+        break;
+    case StyleVar_NodePaddingVertical:
+        style_var = &g.style.node_padding_vertical;
+        break;
+    default:
+        assert(!"Invalid StyleVar value!");
     }
 
     return *style_var;
@@ -1952,14 +1975,13 @@ void node_line_handler(EditorContext& editor, const char* line)
     {
         NodeData& node = editor.nodes.find_or_create_new(i);
         node.id = i;
-        // the next case won't work unless this assumption is true
-        assert(
-            editor.nodes.id_map.GetInt(i, INVALID_INDEX) ==
-            editor.nodes.pool.size() - 1);
+        g.node_current.index =
+            editor.nodes.id_map.GetInt(node.id, INVALID_INDEX);
     }
     else if (sscanf(line, "origin=%f,%f", &x, &y) == 2)
     {
-        editor.nodes.pool.back().origin = ImVec2(x, y);
+        assert(g.node_current.index != INVALID_INDEX);
+        editor.nodes.pool[g.node_current.index].origin = ImVec2(x, y);
     }
 }
 
@@ -2073,6 +2095,9 @@ void LoadEditorStateFromIniString(
             line_handler(editor, line);
         }
     }
+    // NOTE: node_line_handler uses this to keep track of the current node it is
+    // parsing
+    g.node_current.index = INVALID_INDEX;
     ImGui::MemFree(buf);
 }
 

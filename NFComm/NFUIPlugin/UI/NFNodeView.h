@@ -60,8 +60,11 @@ enum NFColor
 enum NFPinShape
 {
     PinShape_Circle = 0,
-    PinShape_Triangle = 1 << 0,
-    PinShape_Quad = 1 << 1,
+    PinShape_CircleFilled,
+    PinShape_Triangle,
+    PinShape_TriangleFilled,
+    PinShape_Quad,
+    PinShape_QuadFilled
 };
 
 void ShowImage(const char* filename, int width, int height);
@@ -85,7 +88,8 @@ public:
         this->shape = shape;
    }
 
-   void Execute();
+    void Execute();
+    void UpdateShape();
 
    int id;
    int color;
@@ -95,6 +99,7 @@ public:
    NFPinShape shape;
    NFGUID guid;
    NFGUID nodeId;
+   NFGUID linkId;
    NFNodeView* nodeView;
 };
 
@@ -160,6 +165,18 @@ public:
        return nullptr;
    }
 
+    NF_SHARE_PTR<NFNodePin> GetPin(const int id)
+    {
+        for (auto it = mAttris.begin(); it != mAttris.end(); ++it)
+        {
+            if ((*it)->id == id)
+            {
+                return *it;
+            }
+        }
+
+        return nullptr;
+    }
    std::string name;
    int id;
    int color;
@@ -212,6 +229,7 @@ public:
    void AddPinOut(const NFGUID guid, const NFGUID attrId, const std::string& name, const std::string& image, NFColor color = NFColor::PINOUT, NFPinShape shape = NFPinShape::PinShape_Circle);
    void ModifyPinColor(const NFGUID attrId, NFColor color);
    void DeleteNode(const NFGUID guid);
+   NF_SHARE_PTR<NFNode> FindNode(const NFGUID guid);
 
    void AddLink(const NFGUID& selfID, const NFGUID& startNode, const NFGUID& endNode, const NFGUID& startPin, const NFGUID& endPin, const int color);
    NF_SHARE_PTR<NFDataLink> GetLink(const NFGUID& startNode, const NFGUID& endNode, const NFGUID& startPin, const NFGUID& endPin);
@@ -223,7 +241,7 @@ public:
    void SetNodeDraggable(const NFGUID guid, const bool dragable);
    void SetNodePosition(const NFGUID guid, const NFVector2 vec = NFVector2());
 
-   void ResetOffest(const NFVector2& pos);
+   void ResetOffset(const NFVector2& pos);
    void MoveToNode(const NFGUID guid);
 
 

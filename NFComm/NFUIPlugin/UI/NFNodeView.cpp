@@ -52,9 +52,7 @@ void BEGIN_INPUT_PIN(int id, NFPinShape shape)
 #ifdef NODE_EXT
     ed::BeginPin(id, ed::PinKind::Input);
 #else
-    if (shape == NFPinShape::PinShape_Circle) imnodes::BeginInputAttribute(id, imnodes::PinShape::PinShape_Circle);
-    if (shape == NFPinShape::PinShape_Quad) imnodes::BeginInputAttribute(id, imnodes::PinShape::PinShape_Quad);
-    if (shape == NFPinShape::PinShape_Triangle) imnodes::BeginInputAttribute(id, imnodes::PinShape::PinShape_Triangle);
+    imnodes::BeginInputAttribute(id, (imnodes::PinShape)shape);
     
 #endif
 }
@@ -73,9 +71,7 @@ void BEGIN_OUT_PIN(int id, NFPinShape shape)
 #ifdef NODE_EXT
     ed::BeginPin(id, ed::PinKind::Output);
 #else
-    if (shape == NFPinShape::PinShape_Circle) imnodes::BeginOutputAttribute(id, imnodes::PinShape::PinShape_Circle);
-    if (shape == NFPinShape::PinShape_Quad) imnodes::BeginOutputAttribute(id, imnodes::PinShape::PinShape_Quad);
-    if (shape == NFPinShape::PinShape_Triangle) imnodes::BeginOutputAttribute(id, imnodes::PinShape::PinShape_Triangle);
+    imnodes::BeginOutputAttribute(id, (imnodes::PinShape)shape);
 #endif
 }
 
@@ -302,6 +298,44 @@ void NFNodePin::Execute()
    }
 }
 
+void NFNodePin::UpdateShape()
+{
+    if (linkId.IsNull())
+    {
+        switch (shape)
+        {
+            case NFPinShape::PinShape_CircleFilled:
+                shape = NFPinShape::PinShape_Circle;
+                break;
+            case NFPinShape::PinShape_TriangleFilled:
+                shape = NFPinShape::PinShape_Triangle;
+                break;
+            case NFPinShape::PinShape_QuadFilled:
+                shape = NFPinShape::PinShape_Quad;
+                break;
+            default:
+                break;
+        }
+    }
+    else
+    {
+        switch (shape)
+        {
+            case NFPinShape::PinShape_Circle:
+                shape = NFPinShape::PinShape_CircleFilled;
+                break;
+            case NFPinShape::PinShape_Triangle:
+                shape = NFPinShape::PinShape_TriangleFilled;
+                break;
+            case NFPinShape::PinShape_Quad:
+                shape = NFPinShape::PinShape_QuadFilled;
+                break;
+            default:
+                break;
+        }
+    }
+}
+
 void NFNode::Execute()
 {
    //ImGui::PushItemWidth(200);
@@ -344,7 +378,7 @@ void NFNode::Execute()
 
    if (mAttris.size() > 0)
    {
-       ImGui::Button("", ImVec2(120, 1));
+       ImGui::Button("", ImVec2(220, 1));
    }
 
    this->nodeView->NodeRenderBeforePinOut(this);
@@ -575,8 +609,24 @@ void NFNodeView::AddLink(const NFGUID& selfID, const NFGUID& startNode, const NF
         return;
     }
 
-    auto link = NF_SHARE_PTR<NFDataLink>(NF_NEW NFDataLink(selfID, startNode, endNode, startPin, endPin, GenerateLinkId(), color));
-    mLinks.push_back(link);
+    auto startNodeObject = this->FindNode(startNode);
+    auto endNodeObject = this->FindNode(endNode);
+    if (startNodeObject && endNodeObject)
+    {
+        auto startPinObject = startNodeObject->GetPin(startPin);
+        auto endPinObject = endNodeObject->GetPin(endPin);
+        if (startPinObject && endPinObject)
+        {
+            startPinObject->linkId = selfID;
+            endPinObject->linkId = selfID;
+
+            startPinObject->UpdateShape();
+            endPinObject->UpdateShape();
+
+            auto link = NF_SHARE_PTR<NFDataLink>(NF_NEW NFDataLink(selfID, startNode, endNode, startPin, endPin, GenerateLinkId(), color));
+            mLinks.push_back(link);
+        }
+    }
 }
 
 NF_SHARE_PTR<NFDataLink> NFNodeView::GetLink(const NFGUID& startNode, const NFGUID& endNode, const NFGUID& startPin, const NFGUID& endPin)
@@ -618,7 +668,23 @@ void NFNodeView::DeleteLink(const NFGUID& startNode, const NFGUID& endNode, cons
             && (*it)->endAttr == endPin)
         {
             mLinks.erase(it);
-            return;
+            break;
+        }
+    }
+
+    auto startNodeObject = this->FindNode(startNode);
+    auto endNodeObject = this->FindNode(endNode);
+    if (startNodeObject && endNodeObject)
+    {
+        auto startPinObject = startNodeObject->GetPin(startPin);
+        auto endPinObject = endNodeObject->GetPin(endPin);
+        if (startPinObject && endPinObject)
+        {
+            startPinObject->linkId = NFGUID();
+            endPinObject->linkId = NFGUID();
+
+            startPinObject->UpdateShape();
+            endPinObject->UpdateShape();
         }
     }
 }
@@ -627,10 +693,29 @@ void NFNodeView::DeleteLink(const NFGUID& id)
 {
     for (auto it = mLinks.begin(); it != mLinks.end(); ++it)
     {
-        if ((*it)->selfID == id)
+        auto linkObject = (*it);
+        if (linkObject->selfID == id)
         {
             mLinks.erase(it);
-            return;
+
+
+            auto startNodeObject = this->FindNode(linkObject->startNode);
+            auto endNodeObject = this->FindNode(linkObject->endNode);
+            if (startNodeObject && endNodeObject)
+            {
+                auto startPinObject = startNodeObject->GetPin(linkObject->startAttr);
+                auto endPinObject = startNodeObject->GetPin(linkObject->endAttr);
+                if (startPinObject && endPinObject)
+                {
+                    startPinObject->linkId = NFGUID();
+                    endPinObject->linkId = NFGUID();
+
+                    startPinObject->UpdateShape();
+                    endPinObject->UpdateShape();
+                }
+            }
+
+            break;
         }
     }
 }
@@ -678,7 +763,7 @@ void NFNodeView::SetNodePosition(const NFGUID guid, const NFVector2 vec)
     }
 }
 
-void NFNodeView::ResetOffest(const NFVector2& pos)
+void NFNodeView::ResetOffset(const NFVector2& pos)
 {
     SET_CURRENT_CONTEXT(m_pEditorContext);
    //imnodes::EditorContextResetPanning(ImVec2(pos.X(), pos.Y()));
@@ -801,4 +886,15 @@ const int NFNodeView::GetAttriID(const NFGUID guid)
    }
 
    return -1;
+}
+
+NF_SHARE_PTR<NFNode> NFNodeView::FindNode(const NFGUID guid)
+{
+    auto it = mNodes.find(guid);
+    if (it != mNodes.end())
+    {
+        return it->second;
+    }
+
+    return nullptr;
 }

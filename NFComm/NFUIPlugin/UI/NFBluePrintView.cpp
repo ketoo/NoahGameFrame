@@ -88,8 +88,7 @@ NFBluePrintView::NFBluePrintView(NFIPluginManager* p, NFViewType vt) : NFIView(p
    m_pTreeView = NF_NEW NFTreeView(p);
 
 
-  
-   m_pNodeView->ResetOffest(NFVector2::Zero());
+    m_pNodeView->ResetOffset(NFVector2::Zero());
 
    SmartBind<LINK_EVENT_FUNCTOR> linkBind;
    auto bindTest1 = std::bind(&NFBluePrintView::TryNewLinkEvent, this, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3, std::placeholders::_4);
@@ -149,7 +148,7 @@ bool NFBluePrintView::Execute()
 	ImGui::SameLine();
 	if (ImGui::Button("return to center"))
 	{
-		m_pNodeView->ResetOffest(NFVector2::Zero());
+        m_pNodeView->ResetOffset(NFVector2::Zero());
 	}
 
    m_pNodeView->Execute();

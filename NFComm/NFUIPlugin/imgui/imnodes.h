@@ -20,7 +20,6 @@ enum ColorStyle
     ColorStyle_LinkSelected,
     ColorStyle_Pin,
     ColorStyle_PinHovered,
-    ColorStyle_PinOutline,
     ColorStyle_BoxSelector,
     ColorStyle_BoxSelectorOutline,
     ColorStyle_GridBackground,
@@ -40,15 +39,17 @@ enum StyleFlags
 {
     StyleFlags_None = 0,
     StyleFlags_NodeOutline = 1 << 0,
-    StyleFlags_PinOutline = 1 << 1,
     StyleFlags_GridLines = 1 << 2
 };
 
 enum PinShape
 {
     PinShape_Circle = 0,
-    PinShape_Triangle = 1 << 0,
-    PinShape_Quad = 1 << 1,
+    PinShape_CircleFilled,
+    PinShape_Triangle,
+    PinShape_TriangleFilled,
+    PinShape_Quad,
+    PinShape_QuadFilled
 };
 
 struct Style
@@ -63,8 +64,26 @@ struct Style
     float link_line_segments_per_length = 0.1f;
     float link_hover_distance = 7.0f;
 
-    float pin_radius = 4.0f;
+    // The following variables control the look and behavior of the pins. The
+    // default size of each pin shape is balanced to occupy approximately the
+    // same surface area on the screen.
+
+    // The circle radius used when the pin shape is either PinShape_Circle or
+    // PinShape_CircleFilled.
+    float pin_circle_radius = 4.0f;
+    // The quad side length used when the shape is either PinShape_Quad or
+    // PinShape_QuadFilled.
+    float pin_quad_side_length = 7.0f;
+    // The equilateral triangle side length used when the pin shape is either
+    // PinShape_Triangle or PinShape_TriangleFilled.
+    float pin_triangle_side_length = 9.5f;
+    // The thickness of the line used when the pin shape is not filled.
+    float pin_line_thickness = 1.0f;
+    // The radius from the pin's center position inside of which it is detected
+    // as being hovered over.
     float pin_hover_radius = 10.0f;
+    // Offsets the pins' positions from the edge of the node to the outside of
+    // the node.
     float pin_offset = 0.0f;
 
     StyleFlags flags =
@@ -123,8 +142,8 @@ void EndNode();
 // for output attributes.
 //
 // The attribute ids must be unique.
-void BeginInputAttribute(int id, PinShape shape = PinShape::PinShape_Circle);
-void BeginOutputAttribute(int id, PinShape shape = PinShape::PinShape_Circle);
+void BeginInputAttribute(int id, PinShape shape = PinShape_CircleFilled);
+void BeginOutputAttribute(int id, PinShape shape = PinShape_CircleFilled);
 void EndAttribute();
 
 // Render a link between attributes.
