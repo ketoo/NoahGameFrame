@@ -150,7 +150,7 @@ public:
 
     void Print()
     {
-        std::cout << "-----------size:" << Size() << " capacity:" << Capacity() << " m_front:" << m_front << " m_rear:" << m_rear << std::endl;
+        //std::cout << "-----------size:" << Size() << " capacity:" << Capacity() << " m_front:" << m_front << " m_rear:" << m_rear << std::endl;
     }
 
 private:
