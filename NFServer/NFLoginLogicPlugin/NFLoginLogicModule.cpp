@@ -47,6 +47,7 @@ void NFLoginLogicModule::OnLoginProcess(const NFSOCK nSockIndex, const int nMsgI
 	NFMsg::ReqAccountLogin xMsg;
 	if (!m_pNetModule->ReceivePB(nMsgID, msg, nLen, xMsg, nPlayerID))
 	{
+	    m_pLogModule->LogError("Failed to ReceivePB for message id:" + std::to_string(nMsgID));
 		return;
 	}
 
