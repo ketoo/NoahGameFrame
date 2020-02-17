@@ -30,6 +30,8 @@
 #include <list>
 #include "NFIModule.h"
 #include "NFIKernelModule.h"
+#include "NFIClassModule.h"
+#include "NFIElementModule.h"
 
 NF_SMART_ENUM(NFBlueprintType,
 	LOGICBLOCK,
@@ -39,7 +41,7 @@ NF_SMART_ENUM(NFBlueprintType,
 	VARIABLE,
 	MODIFIER,
 	ARITHMETIC,
-	LOGGER,
+	DEBUGER,
 	CUSTOM,
 )
 
@@ -47,19 +49,26 @@ NF_SMART_ENUM(NFBlueprintType,
 NF_SMART_ENUM(NFElementVariableInputArg,
 	ClassName,
 	ConfigID,
-	PropertyName,
+	PropName,
 	)
+
+	NF_SMART_ENUM(NFElementVariableOutputArg,
+		ClassName,
+		ConfigID,
+		PropName,
+		PropValue,
+		)
 
 	NF_SMART_ENUM(NFPropertyVariableInputArg,
 		ObjectID,
 		ClassName,
-		PropertyName,
+		PropName,
 		)
 
 	NF_SMART_ENUM(NFPropertyVariableOutputArg,
 		ClassName,
-		PropertyName,
-		PropertyValue,
+		PropName,
+		PropValue,
 		)
 
 	NF_SMART_ENUM(NFPropertyListVariableInputArg,
@@ -107,6 +116,7 @@ NF_SMART_ENUM(NFMonitorType,
 	NF_SMART_ENUM(NFGameEventMonitorOutputArg,
 		NextNode,
 		ObjectID,
+		Dictionary,
 		)
 	//------------------------------
 	NF_SMART_ENUM(NFNetworkEventMonitorInputArg,
@@ -147,14 +157,14 @@ NF_SMART_ENUM(NFMonitorType,
 	//------------------------------
 	NF_SMART_ENUM(NFMonitorPropertyEventInputArg,
 		ClassName,
-		PropertyName,
+		PropName,
 		)
 
 	NF_SMART_ENUM(NFMonitorPropertyEventOutputArg,
 		NextNode,
 		ObjectID,
-		PropertyName,
-		PropertyValue,
+		PropName,
+		PropValue,
 		)
 
 	//------------------------------
@@ -226,8 +236,9 @@ NF_SMART_ENUM(NFModifierType,
 NF_SMART_ENUM(NFPropertyModifierInputArg,
 	LastNode,
 	ObjectID,
-	PropertyName,
-	PropertyValue
+	ClassName,
+	PropName,
+	PropValue
 	)
 
 NF_SMART_ENUM(NFPropertyModifierOutputArg,
@@ -243,6 +254,17 @@ NF_SMART_ENUM(NFRecordModifierInputArg,
 	RecordValue
 	)
 NF_SMART_ENUM(NFRecordModifierOutputArg,
+	NextNode,
+	)
+
+NF_SMART_ENUM(NFRecordRemoverrInputArg,
+	LastNode,
+	ObjectID,
+	RecordName,
+	RecordRow,
+)
+
+NF_SMART_ENUM(NFRecordRemoverOutputArg,
 	NextNode,
 	)
 
@@ -380,7 +402,8 @@ public:
 	NFGUID id;
 	std::string name;//arg name
 	NFValueType valueType;
-	std::string varData;
+	NFData varData;
+	//std::string varData;
 	NFIODataComFromType fromType = NFIODataComFromType::EXTERNAL;
 
 	NFGUID GetLinkID()
@@ -403,18 +426,6 @@ protected:
 	NFIPluginManager* pPluginManager;
 
 private:
-
-public:
-
-	virtual void InitInputArgs() = 0;
-	virtual void InitOutputArgs() = 0;
-
-	/*
-	IMPORTANT:
-	IF A NODE'S PIN LINKED WITH OTHER NODE'S PIN, WHICH MEANS THE DATA OF THIS PIN COME FROM OTHER NODE, 
-	AS THE RESULT, WE NEED TO LOOP THE FUNCTION UpdateOutputData TO GET THE RIGHT VALUE OF THIS DATA.
-	*/
-	virtual void UpdateOutputData() = 0;
 
 public:
 	NFBluePrintNodeBase()
@@ -515,6 +526,25 @@ public:
 
 		return nullptr;
 	}
+
+	virtual NF_SHARE_PTR<NFBluePrintNodeBase> FindNextNode() = 0;
+
+	virtual void InitInputArgs() = 0;
+	virtual void InitOutputArgs() = 0;
+
+	void Execute()
+	{
+		PrepareInputData();
+		UpdateOutputData();
+		auto nextNode = FindNextNode();
+		if (nextNode)
+		{
+			nextNode->Execute();
+		}
+	}
+
+	virtual void PrepareInputData() = 0;
+	virtual void UpdateOutputData() = 0;
 
 	bool enable = true;//only for logic block
 	bool running = false;//only for logic block
@@ -639,17 +669,30 @@ public:
 	}
 
 	virtual NF_SHARE_PTR<NFBluePrintNodeBase> FindNode(const NFGUID& id);
+
 	virtual void InitInputArgs()
 	{
 
 	}
+
 	virtual void InitOutputArgs()
 	{
 
 	}
+
+	virtual void PrepareInputData()
+	{
+
+	}
+
 	virtual void UpdateOutputData()
 	{
 
+	}
+
+	virtual NF_SHARE_PTR<NFBluePrintNodeBase> FindNextNode() override
+	{
+		return nullptr;
 	}
 
 	std::list<NF_SHARE_PTR<NFIExecuter>> executers;

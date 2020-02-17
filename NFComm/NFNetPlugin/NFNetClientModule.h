@@ -82,9 +82,9 @@ public:
 	virtual void SendToServerByPB(const int nServerID, const uint16_t nMsgID, const google::protobuf::Message& xData);
 	virtual void SendToServerByPB(const int nServerID, const uint16_t nMsgID, const google::protobuf::Message& xData, const NFGUID id);
 
-    virtual void SendToAllServerByPB(const uint16_t nMsgID, const google::protobuf::Message& xData);
+    virtual void SendToAllServerByPB(const uint16_t nMsgID, const google::protobuf::Message& xData, const NFGUID id);
 
-    virtual void SendToAllServerByPB(const NF_SERVER_TYPES eType, const uint16_t nMsgID, const google::protobuf::Message& xData);
+    virtual void SendToAllServerByPB(const NF_SERVER_TYPES eType, const uint16_t nMsgID, const google::protobuf::Message& xData, const NFGUID id);
 
     ////////////////////////////////////////////////////////////////////////////////
 

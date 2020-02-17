@@ -73,33 +73,12 @@ public:
 
 	virtual void InitOutputArgs()
 	{
-		{
-			NF_SHARE_PTR<NFIOData> var = NF_SHARE_PTR<NFIOData>(NF_NEW NFIOData());
-			var->id = this->pPluginManager->FindModule<NFIKernelModule>()->CreateGUID();
-			var->name = NFBranchOutputArg::toString(NFBranchOutputArg::FalseOut);
-			var->valueType = NFValueType::Int;
-
-			outputArgs.push_back(var);
-		}
+		
 	}
 
-	virtual void UpdateOutputData()
-	{
-		if (this->arithmeticType == NFArithmeticType::Add)
-		{
+	virtual void UpdateOutputData() override;
+	virtual void PrepareInputData() override;
 
-		}
-		else if (this->arithmeticType == NFArithmeticType::Sub)
-		{
-
-		}
-		else if (this->arithmeticType == NFArithmeticType::Multiply)
-		{
-
-		}
-		else if (this->arithmeticType == NFArithmeticType::Division)
-		{
-
-		}
-	}
+	// Inherited via NFIArithmetic
+	virtual NF_SHARE_PTR<NFBluePrintNodeBase> FindNextNode() override;
 };

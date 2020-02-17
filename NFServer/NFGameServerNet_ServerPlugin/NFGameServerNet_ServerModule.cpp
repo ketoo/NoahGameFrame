@@ -112,7 +112,7 @@ bool NFGameServerNet_ServerModule::AfterInit()
 				{
 					std::ostringstream strLog;
 					strLog << "Cannot init server net, Port = " << nPort;
-					m_pLogModule->LogNormal(NFILogModule::NLL_ERROR_NORMAL, NULL_OBJECT, strLog, __FUNCTION__, __LINE__);
+					m_pLogModule->LogError(NULL_OBJECT, strLog, __FUNCTION__, __LINE__);
 					NFASSERT(nRet, "Cannot init server net", __FILE__, __FUNCTION__);
 					exit(0);
 				}
@@ -138,22 +138,22 @@ void NFGameServerNet_ServerModule::OnSocketPSEvent(const NFSOCK nSockIndex, cons
 {
 	if (eEvent & NF_NET_EVENT_EOF)
 	{
-		m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFGUID(0, nSockIndex), "NF_NET_EVENT_EOF", "Connection closed", __FUNCTION__, __LINE__);
+		m_pLogModule->LogInfo(NFGUID(0, nSockIndex), "NF_NET_EVENT_EOF Connection closed", __FUNCTION__, __LINE__);
 		OnClientDisconnect(nSockIndex);
 	}
 	else if (eEvent & NF_NET_EVENT_ERROR)
 	{
-		m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFGUID(0, nSockIndex), "NF_NET_EVENT_ERROR", "Got an error on the connection", __FUNCTION__, __LINE__);
+		m_pLogModule->LogInfo(NFGUID(0, nSockIndex), "NF_NET_EVENT_ERROR Got an error on the connection", __FUNCTION__, __LINE__);
 		OnClientDisconnect(nSockIndex);
 	}
 	else if (eEvent & NF_NET_EVENT_TIMEOUT)
 	{
-		m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFGUID(0, nSockIndex), "NF_NET_EVENT_TIMEOUT", "read timeout", __FUNCTION__, __LINE__);
+		m_pLogModule->LogInfo(NFGUID(0, nSockIndex), "NF_NET_EVENT_TIMEOUT read timeout", __FUNCTION__, __LINE__);
 		OnClientDisconnect(nSockIndex);
 	}
 	else  if (eEvent & NF_NET_EVENT_CONNECTED)
 	{
-		m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFGUID(0, nSockIndex), "NF_NET_EVENT_CONNECTED", "connected success", __FUNCTION__, __LINE__);
+		m_pLogModule->LogInfo(NFGUID(0, nSockIndex), "NF_NET_EVENT_CONNECTED connected success", __FUNCTION__, __LINE__);
 		OnClientConnected(nSockIndex);
 	}
 }
@@ -415,7 +415,7 @@ void NFGameServerNet_ServerModule::OnClientReqStateSyncProcess(const NFSOCK nSoc
 		//const NFGUID xMasterID = m_pKernelModule->GetPropertyObject(xMover, NFrame::NPC::MasterID());
 		//if (xMasterID != nPlayerID)
 		//{
-		//	m_pLogModule->LogNormal(NFILogModule::NLL_ERROR_NORMAL, xMover, "Message come from player ", nPlayerID.ToString());
+		//	m_pLogModule->LogError(xMover, "Message come from player ", nPlayerID.ToString());
 		//	return;
 		//}
 		return;
@@ -450,7 +450,7 @@ void NFGameServerNet_ServerModule::OnClientReqPosSyncProcess(const NFSOCK nSockI
 		const NFGUID xMasterID = m_pKernelModule->GetPropertyObject(xMover, NFrame::NPC::MasterID());
 		if (xMasterID != nPlayerID)
 		{
-			m_pLogModule->LogNormal(NFILogModule::NLL_ERROR_NORMAL, xMover, "Message come from player ", nPlayerID.ToString());
+			m_pLogModule->LogError(xMover, "Message come from player " + nPlayerID.ToString());
 			return;
 		}
 		return;
@@ -486,17 +486,17 @@ void NFGameServerNet_ServerModule::OnClientPropertyIntProcess(const NFSOCK nSock
 			//GM
 			if (pProperty->GetUpload() || nGMLevel > 0)
 			{
-				m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, nPlayerID, "Upload From Client int set " + xPropertyInt.property_name(), xPropertyInt.data(), __FUNCTION__, __LINE__);
+				m_pLogModule->LogInfo(nPlayerID, "Upload From Client int set " + xPropertyInt.property_name() + std::to_string(xPropertyInt.data()), __FUNCTION__, __LINE__);
 				pProperty->SetInt(xPropertyInt.data());
 			}
 			else
 			{
-				m_pLogModule->LogNormal(NFILogModule::NLL_ERROR_NORMAL, nPlayerID, "Upload From Client int set Upload error", xPropertyInt.property_name(), __FUNCTION__, __LINE__);
+				m_pLogModule->LogError(nPlayerID, "Upload From Client int set Upload error " + xPropertyInt.property_name(), __FUNCTION__, __LINE__);
 			}
 		}
 		else
 		{
-			m_pLogModule->LogNormal(NFILogModule::NLL_ERROR_NORMAL, nPlayerID, "Upload From Client int set Property error", xPropertyInt.property_name(), __FUNCTION__, __LINE__);
+			m_pLogModule->LogError(nPlayerID, "Upload From Client int set Property error " + xPropertyInt.property_name(), __FUNCTION__, __LINE__);
 		}
 	}
 }
@@ -517,17 +517,17 @@ void NFGameServerNet_ServerModule::OnClientPropertyFloatProcess(const NFSOCK nSo
 			//judge upload then set value
 			if (pProperty->GetUpload() || nGMLevel > 0)
 			{
-				m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, nPlayerID, "Upload From Client float set " + xPropertyFloat.property_name(), xPropertyFloat.data(), __FUNCTION__, __LINE__);
+				m_pLogModule->LogInfo(nPlayerID, "Upload From Client float set " + xPropertyFloat.property_name() + std::to_string(xPropertyFloat.data()), __FUNCTION__, __LINE__);
 				pProperty->SetFloat(xPropertyFloat.data());
 			}
 			else
 			{
-				m_pLogModule->LogNormal(NFILogModule::NLL_ERROR_NORMAL, nPlayerID, "Upload From Client float set Upload error", xPropertyFloat.property_name(), __FUNCTION__, __LINE__);
+				m_pLogModule->LogError(nPlayerID, "Upload From Client float set Upload error " + xPropertyFloat.property_name(), __FUNCTION__, __LINE__);
 			}
 		}
 		else
 		{
-			m_pLogModule->LogNormal(NFILogModule::NLL_ERROR_NORMAL, nPlayerID, "Upload From Client float set Property error", xPropertyFloat.property_name(), __FUNCTION__, __LINE__);
+			m_pLogModule->LogError(nPlayerID, "Upload From Client float set Property error " + xPropertyFloat.property_name(), __FUNCTION__, __LINE__);
 		}
 	}
 }
@@ -548,17 +548,17 @@ void NFGameServerNet_ServerModule::OnClientPropertyStringProcess(const NFSOCK nS
 			//judge upload then set value
 			if (pProperty->GetUpload() || nGMLevel > 0)
 			{
-				m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, nPlayerID, "Upload From Client string set " + xPropertyString.property_name(), xPropertyString.data(), __FUNCTION__, __LINE__);
+				m_pLogModule->LogInfo(nPlayerID, "Upload From Client string set " + xPropertyString.property_name() + " " + xPropertyString.data(), __FUNCTION__, __LINE__);
 				pProperty->SetString(xPropertyString.data());
 			}
 			else
 			{
-				m_pLogModule->LogNormal(NFILogModule::NLL_ERROR_NORMAL, nPlayerID, "Upload From Client string set Upload error", xPropertyString.property_name(), __FUNCTION__, __LINE__);
+				m_pLogModule->LogError(nPlayerID, "Upload From Client string set Upload error " + xPropertyString.property_name(), __FUNCTION__, __LINE__);
 			}
 		}
 		else
 		{
-			m_pLogModule->LogNormal(NFILogModule::NLL_ERROR_NORMAL, nPlayerID, "Upload From Client string set Property error", xPropertyString.property_name(), __FUNCTION__, __LINE__);
+			m_pLogModule->LogError(nPlayerID, "Upload From Client string set Property error" + xPropertyString.property_name(), __FUNCTION__, __LINE__);
 		}
 	}
 }
@@ -580,17 +580,17 @@ void NFGameServerNet_ServerModule::OnClientPropertyObjectProcess(const NFSOCK nS
 			if (pProperty->GetUpload() || nGMLevel > 0)
 			{
 				NFGUID xID = NFINetModule::PBToNF(xPropertyObject.data());
-				m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, nPlayerID, "Upload From Client object set " + xPropertyObject.property_name(), xID.ToString(), __FUNCTION__, __LINE__);
+				m_pLogModule->LogInfo(nPlayerID, "Upload From Client object set " + xPropertyObject.property_name() + " " + xID.ToString(), __FUNCTION__, __LINE__);
 				pProperty->SetObject(xID);
 			}
 			else
 			{
-				m_pLogModule->LogNormal(NFILogModule::NLL_ERROR_NORMAL, nPlayerID, "Upload From Client object set Upload error", xPropertyObject.property_name(), __FUNCTION__, __LINE__);
+				m_pLogModule->LogError(nPlayerID, "Upload From Client object set Upload error " + xPropertyObject.property_name(), __FUNCTION__, __LINE__);
 			}
 		}
 		else
 		{
-			m_pLogModule->LogNormal(NFILogModule::NLL_ERROR_NORMAL, nPlayerID, "Upload From Client object set Property error", xPropertyObject.property_name(), __FUNCTION__, __LINE__);
+			m_pLogModule->LogError(nPlayerID, "Upload From Client object set Property error " + xPropertyObject.property_name(), __FUNCTION__, __LINE__);
 		}
 	}
 }
@@ -613,17 +613,17 @@ void NFGameServerNet_ServerModule::OnClientPropertyVector2Process(const NFSOCK n
 			if (pProperty->GetUpload() || nGMLevel > 0)
 			{
 				NFVector2 vVec2 = NFINetModule::PBToNF(xProperty.data());
-				m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, nPlayerID, "Upload From Client object set " + xProperty.property_name(), vVec2.ToString(), __FUNCTION__, __LINE__);
+				m_pLogModule->LogInfo(nPlayerID, "Upload From Client object set " + xProperty.property_name() + " " + vVec2.ToString(), __FUNCTION__, __LINE__);
 				pProperty->SetVector2(vVec2);
 			}
 			else
 			{
-				m_pLogModule->LogNormal(NFILogModule::NLL_ERROR_NORMAL, nPlayerID, "Upload From Client object set Upload error", xProperty.property_name(), __FUNCTION__, __LINE__);
+				m_pLogModule->LogError(nPlayerID, "Upload From Client object set Upload error " + xProperty.property_name(), __FUNCTION__, __LINE__);
 			}
 		}
 		else
 		{
-			m_pLogModule->LogNormal(NFILogModule::NLL_ERROR_NORMAL, nPlayerID, "Upload From Client object set Property error", xProperty.property_name(), __FUNCTION__, __LINE__);
+			m_pLogModule->LogError(nPlayerID, "Upload From Client object set Property error " + xProperty.property_name(), __FUNCTION__, __LINE__);
 		}
 	}
 }
@@ -645,17 +645,17 @@ void NFGameServerNet_ServerModule::OnClientPropertyVector3Process(const NFSOCK n
 			if (pProperty->GetUpload() || nGMLevel > 0)
 			{
 				NFVector3 vVec3 = NFINetModule::PBToNF(xProperty.data());
-				m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, nPlayerID, "Upload From Client object set " + xProperty.property_name(), vVec3.ToString(), __FUNCTION__, __LINE__);
+				m_pLogModule->LogInfo(nPlayerID, "Upload From Client object set " + xProperty.property_name() + " " + vVec3.ToString(), __FUNCTION__, __LINE__);
 				pProperty->SetVector3(vVec3);
 			}
 			else
 			{
-				m_pLogModule->LogNormal(NFILogModule::NLL_ERROR_NORMAL, nPlayerID, "Upload From Client object set Upload error", xProperty.property_name(), __FUNCTION__, __LINE__);
+				m_pLogModule->LogError(nPlayerID, "Upload From Client object set Upload error " + xProperty.property_name(), __FUNCTION__, __LINE__);
 			}
 		}
 		else
 		{
-			m_pLogModule->LogNormal(NFILogModule::NLL_ERROR_NORMAL, nPlayerID, "Upload From Client object set Property error", xProperty.property_name(), __FUNCTION__, __LINE__);
+			m_pLogModule->LogError(nPlayerID, "Upload From Client object set Property error " + xProperty.property_name(), __FUNCTION__, __LINE__);
 		}
 	}
 }
@@ -671,7 +671,7 @@ void NFGameServerNet_ServerModule::OnClientAddRowProcess(const NFSOCK nSockIndex
 	NF_SHARE_PTR<NFIRecord> pRecord = pObject->GetRecordManager()->GetElement(xMsg.record_name());
 	if (!pRecord)
 	{
-		m_pLogModule->LogNormal(NFILogModule::NLL_ERROR_NORMAL, nPlayerID, "Upload From Client add row record error", xMsg.record_name(), __FUNCTION__, __LINE__);
+		m_pLogModule->LogError(nPlayerID, "Upload From Client add row record error " + xMsg.record_name(), __FUNCTION__, __LINE__);
 		return;
 	}
 	if (pRecord->GetUpload() || nGMLevel > 0)
@@ -720,23 +720,18 @@ void NFGameServerNet_ServerModule::OnClientAddRowProcess(const NFSOCK nSockIndex
 				}
 				else
 				{
-					m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, nPlayerID,
-											"Upload From Client add row record error", xMsg.record_name(), __FUNCTION__,
-											__LINE__);
+					m_pLogModule->LogInfo(nPlayerID, "Upload From Client add row record error " + xMsg.record_name(), __FUNCTION__, __LINE__);
 					return;
 				}
 			}
 
 			if (pRecord->AddRow(row, xDataList) >= 0)
 			{
-				m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, nPlayerID, "Upload From Client add row record",
-										xMsg.record_name(), __FUNCTION__, __LINE__);
+				m_pLogModule->LogInfo(nPlayerID, "Upload From Client add row record " + xMsg.record_name(), __FUNCTION__, __LINE__);
 			}
 			else
 			{
-				m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, nPlayerID,
-										"Upload From Client add row record error", xMsg.record_name(), __FUNCTION__,
-										__LINE__);
+				m_pLogModule->LogInfo(nPlayerID, "Upload From Client add row record error " + xMsg.record_name(), __FUNCTION__, __LINE__);
 			}
 		}
 	}
@@ -752,7 +747,7 @@ void NFGameServerNet_ServerModule::OnClientRemoveRowProcess(const NFSOCK nSockIn
 	NF_SHARE_PTR<NFIRecord> pRecord = pObject->GetRecordManager()->GetElement(xMsg.record_name());
 	if (!pRecord)
 	{
-		m_pLogModule->LogNormal(NFILogModule::NLL_ERROR_NORMAL, nPlayerID, "Upload From Client remove row record error", xMsg.record_name(), __FUNCTION__, __LINE__);
+		m_pLogModule->LogError(nPlayerID, "Upload From Client remove row record error " + xMsg.record_name(), __FUNCTION__, __LINE__);
 		return;
 	}
 
@@ -762,15 +757,11 @@ void NFGameServerNet_ServerModule::OnClientRemoveRowProcess(const NFSOCK nSockIn
         {
 			if (pRecord->Remove(xMsg.remove_row().Get(i)))
             {
-				m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, nPlayerID,
-										"Upload From Client remove row record", xMsg.record_name(), __FUNCTION__,
-										__LINE__);
+				m_pLogModule->LogInfo(nPlayerID, "Upload From Client remove row record " + xMsg.record_name(), __FUNCTION__, __LINE__);
 			}
 			else
             {
-				m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, nPlayerID,
-										"Upload From Client remove row record error", xMsg.record_name(), __FUNCTION__,
-										__LINE__);
+				m_pLogModule->LogInfo(nPlayerID, "Upload From Client remove row record error " + xMsg.record_name(), __FUNCTION__, __LINE__);
 			}
 		}
 	}
@@ -788,7 +779,7 @@ void NFGameServerNet_ServerModule::OnClientSwapRowProcess(const NFSOCK nSockInde
 	NF_SHARE_PTR<NFIRecord> pRecord = pObject->GetRecordManager()->GetElement(xMsg.origin_record_name());
 	if (!pRecord)
 	{
-		m_pLogModule->LogNormal(NFILogModule::NLL_ERROR_NORMAL, nPlayerID, "Upload From Client swap row record error", xMsg.origin_record_name(), __FUNCTION__, __LINE__);
+		m_pLogModule->LogError(nPlayerID, "Upload From Client swap row record error " + xMsg.origin_record_name(), __FUNCTION__, __LINE__);
 		return;
 	}
 	if (!pRecord->GetUpload() || nGMLevel > 0)
@@ -796,21 +787,11 @@ void NFGameServerNet_ServerModule::OnClientSwapRowProcess(const NFSOCK nSockInde
 
 		if (pRecord->SwapRowInfo(xMsg.row_origin(), xMsg.row_target()))
 		{
-			m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL,
-									nPlayerID,
-									"Upload From Client swap row record",
-									xMsg.origin_record_name(),
-									__FUNCTION__,
-									__LINE__);
+			m_pLogModule->LogInfo(nPlayerID, "Upload From Client swap row record " + xMsg.origin_record_name(), __FUNCTION__, __LINE__);
 		}
 		else
 		{
-			m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL,
-									nPlayerID,
-									"Upload From Client swap row record error",
-									xMsg.origin_record_name(),
-									__FUNCTION__,
-									__LINE__);
+			m_pLogModule->LogInfo(nPlayerID, "Upload From Client swap row record error " + xMsg.origin_record_name(), __FUNCTION__, __LINE__);
 		}
 	}
 }
@@ -822,7 +803,7 @@ void NFGameServerNet_ServerModule::OnClientRecordIntProcess(const NFSOCK nSockIn
 	NF_SHARE_PTR<NFIRecord> pRecord = pObject->GetRecordManager()->GetElement(xMsg.record_name());
 	if (!pRecord)
 	{
-		m_pLogModule->LogNormal(NFILogModule::NLL_ERROR_NORMAL, nPlayerID, "Upload From Client int set record error", xMsg.record_name(), __FUNCTION__, __LINE__);
+		m_pLogModule->LogError(nPlayerID, "Upload From Client int set record error " + xMsg.record_name(), __FUNCTION__, __LINE__);
 		return;
 	}
 
@@ -837,12 +818,7 @@ void NFGameServerNet_ServerModule::OnClientRecordIntProcess(const NFSOCK nSockIn
 		{
 			const NFMsg::RecordInt &xRecordInt = xMsg.property_list().Get(i);
 			pRecord->SetInt(xRecordInt.row(), xRecordInt.col(), xRecordInt.data());
-			m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL,
-									nPlayerID,
-									"Upload From Client int set record",
-									xMsg.record_name(),
-									__FUNCTION__,
-									__LINE__);
+			m_pLogModule->LogInfo(nPlayerID, "Upload From Client int set record " + xMsg.record_name(), __FUNCTION__, __LINE__);
 		}
 	}
 
@@ -859,7 +835,7 @@ void NFGameServerNet_ServerModule::OnClientRecordFloatProcess(const NFSOCK nSock
 	NF_SHARE_PTR<NFIRecord> pRecord = pObject->GetRecordManager()->GetElement(xMsg.record_name());
 	if (!pRecord)
 	{
-		m_pLogModule->LogNormal(NFILogModule::NLL_ERROR_NORMAL, nPlayerID, "Upload From Client float set record error", xMsg.record_name(), __FUNCTION__, __LINE__);
+		m_pLogModule->LogError(nPlayerID, "Upload From Client float set record error " + xMsg.record_name(), __FUNCTION__, __LINE__);
 		return;
 	}
 
@@ -870,12 +846,7 @@ void NFGameServerNet_ServerModule::OnClientRecordFloatProcess(const NFSOCK nSock
 		{
 			const NFMsg::RecordFloat &xRecordFloat = xMsg.property_list().Get(i);
 			pRecord->SetFloat(xRecordFloat.row(), xRecordFloat.col(), xRecordFloat.data());
-			m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL,
-									nPlayerID,
-									"Upload From Client float set record",
-									xMsg.record_name(),
-									__FUNCTION__,
-									__LINE__);
+			m_pLogModule->LogInfo(nPlayerID, "Upload From Client float set record " + xMsg.record_name(), __FUNCTION__, __LINE__);
 		}
 	}
 	
@@ -891,7 +862,7 @@ void NFGameServerNet_ServerModule::OnClientRecordStringProcess(const NFSOCK nSoc
 	NF_SHARE_PTR<NFIRecord> pRecord = pObject->GetRecordManager()->GetElement(xMsg.record_name());
 	if (!pRecord)
 	{
-		m_pLogModule->LogNormal(NFILogModule::NLL_ERROR_NORMAL, nPlayerID, "Upload From Client String set record error", xMsg.record_name(), __FUNCTION__, __LINE__);
+		m_pLogModule->LogError(nPlayerID, "Upload From Client String set record error " + xMsg.record_name(), __FUNCTION__, __LINE__);
 		return;
 	}
 
@@ -902,12 +873,7 @@ void NFGameServerNet_ServerModule::OnClientRecordStringProcess(const NFSOCK nSoc
 		{
 			const NFMsg::RecordString &xRecordString = xMsg.property_list().Get(i);
 			pRecord->SetString(xRecordString.row(), xRecordString.col(), xRecordString.data());
-			m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL,
-									nPlayerID,
-									"Upload From Client String set record",
-									xMsg.record_name(),
-									__FUNCTION__,
-									__LINE__);
+			m_pLogModule->LogInfo(nPlayerID, "Upload From Client String set record " + xMsg.record_name(), __FUNCTION__, __LINE__);
 		}
 	}
 	
@@ -924,7 +890,7 @@ void NFGameServerNet_ServerModule::OnClientRecordObjectProcess(const NFSOCK nSoc
 	NF_SHARE_PTR<NFIRecord> pRecord = pObject->GetRecordManager()->GetElement(xMsg.record_name());
 	if (!pRecord)
 	{
-		m_pLogModule->LogNormal(NFILogModule::NLL_ERROR_NORMAL, nPlayerID, "Upload From Client Object set record error", xMsg.record_name(), __FUNCTION__, __LINE__);
+		m_pLogModule->LogError(nPlayerID, "Upload From Client Object set record error " + xMsg.record_name(), __FUNCTION__, __LINE__);
 		return;
 	}
 
@@ -935,7 +901,7 @@ void NFGameServerNet_ServerModule::OnClientRecordObjectProcess(const NFSOCK nSoc
 		{
 			const NFMsg::RecordObject &xRecordObject = xMsg.property_list().Get(i);
 			pRecord->SetObject(xRecordObject.row(), xRecordObject.col(), NFINetModule::PBToNF(xRecordObject.data()));
-			m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, nPlayerID, "Upload From Client Object set record", xMsg.record_name(), __FUNCTION__, __LINE__);
+			m_pLogModule->LogInfo(nPlayerID, "Upload From Client Object set record " + xMsg.record_name(), __FUNCTION__, __LINE__);
 		}
 	}
 }
@@ -950,7 +916,7 @@ void NFGameServerNet_ServerModule::OnClientRecordVector2Process(const NFSOCK nSo
 	NF_SHARE_PTR<NFIRecord> pRecord = pObject->GetRecordManager()->GetElement(xMsg.record_name());
 	if (!pRecord)
 	{
-		m_pLogModule->LogNormal(NFILogModule::NLL_ERROR_NORMAL, nPlayerID, "Upload From Client vector2 set record error", xMsg.record_name(), __FUNCTION__, __LINE__);
+		m_pLogModule->LogError(nPlayerID, "Upload From Client vector2 set record error " + xMsg.record_name(), __FUNCTION__, __LINE__);
 		return;
 	}
 	if (pRecord->GetUpload() || nGMLevel > 0)
@@ -959,7 +925,7 @@ void NFGameServerNet_ServerModule::OnClientRecordVector2Process(const NFSOCK nSo
 		{
 			const NFMsg::RecordVector2 &xRecordVector2 = xMsg.property_list().Get(i);
 			pRecord->SetVector2(xRecordVector2.row(), xRecordVector2.col(), NFINetModule::PBToNF(xRecordVector2.data()));
-			m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, nPlayerID, "Upload From Client vector2 set record", xMsg.record_name(), __FUNCTION__, __LINE__);
+			m_pLogModule->LogInfo(nPlayerID, "Upload From Client vector2 set record " + xMsg.record_name(), __FUNCTION__, __LINE__);
 		}
 	}
 }
@@ -971,7 +937,7 @@ void NFGameServerNet_ServerModule::OnClientRecordVector3Process(const NFSOCK nSo
 	NF_SHARE_PTR<NFIRecord> pRecord = pObject->GetRecordManager()->GetElement(xMsg.record_name());
 	if (!pRecord)
 	{
-		m_pLogModule->LogNormal(NFILogModule::NLL_ERROR_NORMAL, nPlayerID, "Upload From Client vector3 set record error", xMsg.record_name(), __FUNCTION__, __LINE__);
+		m_pLogModule->LogError(nPlayerID, "Upload From Client vector3 set record error " + xMsg.record_name(), __FUNCTION__, __LINE__);
 		return;
 	}
 
@@ -985,7 +951,7 @@ void NFGameServerNet_ServerModule::OnClientRecordVector3Process(const NFSOCK nSo
 		{
 			const NFMsg::RecordVector3 &xRecordVector3 = xMsg.property_list().Get(i);
 			pRecord->SetVector3(xRecordVector3.row(), xRecordVector3.col(), NFINetModule::PBToNF(xRecordVector3.data()));
-			m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, nPlayerID, "Upload From Client vector3 set record", xMsg.record_name(), __FUNCTION__, __LINE__);
+			m_pLogModule->LogInfo(nPlayerID, "Upload From Client vector3 set record " + xMsg.record_name(), __FUNCTION__, __LINE__);
 		}
 	}
 }
@@ -1012,7 +978,7 @@ void NFGameServerNet_ServerModule::OnProxyServerRegisteredProcess(const NFSOCK n
 		pServerData->xServerData.nFD = nSockIndex;
 		*(pServerData->xServerData.pData) = xData;
 
-		m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFGUID(0, xData.server_id()), xData.server_name(), "Proxy Registered");
+		m_pLogModule->LogInfo(NFGUID(0, xData.server_id()), xData.server_name(), "Proxy Registered");
 	}
 
 	return;
@@ -1033,7 +999,7 @@ void NFGameServerNet_ServerModule::OnProxyServerUnRegisteredProcess(const NFSOCK
 		mProxyMap.RemoveElement(xData.server_id());
 
 
-		m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFGUID(0, xData.server_id()), xData.server_name(), "Proxy UnRegistered");
+		m_pLogModule->LogInfo(NFGUID(0, xData.server_id()), xData.server_name(), "Proxy UnRegistered");
 	}
 
 	return;
@@ -1061,7 +1027,7 @@ void NFGameServerNet_ServerModule::OnRefreshProxyServerInfoProcess(const NFSOCK 
 		pServerData->xServerData.nFD = nSockIndex;
 		*(pServerData->xServerData.pData) = xData;
 
-		m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFGUID(0, xData.server_id()), xData.server_name(), "Proxy Registered");
+		m_pLogModule->LogInfo(NFGUID(0, xData.server_id()), xData.server_name(), "Proxy Registered");
 	}
 
 	return;
@@ -1170,7 +1136,7 @@ bool NFGameServerNet_ServerModule::AddPlayerGateInfo(const NFGUID& nRoleID, cons
     if (nullptr != pBaseData)
     {
         
-        m_pLogModule->LogNormal(NFILogModule::NLL_ERROR_NORMAL, nClientID, "player is exist, cannot enter game", "", __FUNCTION__, __LINE__);
+        m_pLogModule->LogError(nClientID, "player is exist, cannot enter game", __FUNCTION__, __LINE__);
         return false;
     }
 

@@ -35,7 +35,7 @@ bool NFHelloWorld3Module::Init()
 	return true;
 }
 
-int NFHelloWorld3Module::OnEvent(const NFGUID& self, const NFEventDefine event, const NFDataList& arg)
+int NFHelloWorld3Module::OnEvent(const NFGUID& self, const int event, const NFDataList& arg)
 {
 	
 	std::cout << "OnEvent EventID: " << event << " self: " << self.nData64 << " argList: " << arg.Int(0) << " " << " " << arg.String(1) << std::endl;
@@ -65,7 +65,7 @@ int NFHelloWorld3Module::OnClassCallBackEvent(const NFGUID& self, const std::str
 
 	if (event == COE_CREATE_HASDATA)
 	{
-		m_pEventModule->AddEventCallBack(self, NFEventDefine(1), this, &NFHelloWorld3Module::OnEvent);
+		m_pEventModule->AddEventCallBack(self, 1, this, &NFHelloWorld3Module::OnEvent);
 
 		m_pScheduleModule->AddSchedule(self, "OnHeartBeat", this, &NFHelloWorld3Module::OnHeartBeat, 5.0f, 10 );
 
@@ -123,7 +123,7 @@ bool NFHelloWorld3Module::AfterInit()
 	pObject->SetPropertyInt("World", 1111);
 
 
-	m_pEventModule->DoEvent(pObject->Self(), NFEventDefine(1), NFDataList() << int(100) << "200");
+	m_pEventModule->DoEvent(pObject->Self(), 1, NFDataList() << int(100) << "200");
 
 	return true;
 }

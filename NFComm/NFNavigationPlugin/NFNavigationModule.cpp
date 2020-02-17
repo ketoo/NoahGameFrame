@@ -52,7 +52,7 @@ bool NFNavigationModule::Init()
 			//loadNavigation(sceneId, navigationResPath);
 			//std::ostringstream strLog;
 			//strLog << "strId: (" << strId.c_str() << ") is destroyed!\n";
-			//m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NULL_OBJECT, strLog, __FUNCTION__, __LINE__);
+			//m_pLogModule->LogInfo(NULL_OBJECT, strLog, __FUNCTION__, __LINE__);
 			/*m_pElementModule->
 			int nSceneID = lexical_cast<int>(strIdList[i]);*/
 		}
@@ -96,7 +96,7 @@ bool NFNavigationModule::RemoveNavigation(NFINT64 scendId)
 
 		std::ostringstream strLog;
 		strLog << "Navigation::removeNavigation: (" << scendId << ") is destroyed!\n";
-		m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NULL_OBJECT, strLog, __FUNCTION__, __LINE__);
+		m_pLogModule->LogInfo(strLog, __FUNCTION__, __LINE__);
 		return true;
 	}
 

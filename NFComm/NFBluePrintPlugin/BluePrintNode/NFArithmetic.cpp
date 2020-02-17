@@ -1,12 +1,12 @@
 /*
-            This file is part of: 
+            This file is part of:
                 NoahFrame
             https://github.com/ketoo/NoahGameFrame
 
    Copyright 2009 - 2020 NoahFrame(NoahGameFrame)
 
    File creator: lvsheng.huang
-   
+
    NoahFrame is open-source software and you can redistribute it and/or modify
    it under the terms of the License; besides, anyone who use this file/software must include this copyright announcement.
 
@@ -23,45 +23,33 @@
    limitations under the License.
 */
 
-#ifndef NF_BLUE_PRINT_CPP_MODULE_H
-#define NF_BLUE_PRINT_CPP_MODULE_H
+#include "NFArithmetic.h"
 
-#include "NFComm/NFPluginModule/NFILogModule.h"
-#include "NFComm/NFPluginModule/NFIKernelModule.h"
-#include "NFComm/NFPluginModule/NFIClassModule.h"
-#include "NFComm/NFPluginModule/NFIBluePrintModule.h"
-
-class NFIBluePrintCppGeneratorModule
-	: public NFIModule
+void NFArithmetic::PrepareInputData()
 {
-public:
-};
+}
 
-class NFBluePrintCppGeneratorModule
-    : public NFIBluePrintCppGeneratorModule
+NF_SHARE_PTR<NFBluePrintNodeBase> NFArithmetic::FindNextNode()
 {
-public:
-    NFBluePrintCppGeneratorModule( NFIPluginManager* p )
+	return NF_SHARE_PTR<NFBluePrintNodeBase>();
+}
+
+void NFArithmetic::UpdateOutputData()
+{
+    if (this->arithmeticType == NFArithmeticType::Add)
     {
-        pPluginManager = p;
+
     }
+    else if (this->arithmeticType == NFArithmeticType::Sub)
+    {
 
-    virtual ~NFBluePrintCppGeneratorModule() {};
+    }
+    else if (this->arithmeticType == NFArithmeticType::Multiply)
+    {
 
-    virtual bool Awake();
-    virtual bool Init();
-    virtual bool AfterInit();
-    virtual bool CheckConfig();
-    virtual bool ReadyExecute();
-    virtual bool Execute();
-    virtual bool BeforeShut();
-    virtual bool Shut();
-    virtual bool Finalize();
-    virtual bool OnReloadPlugin();
+    }
+    else if (this->arithmeticType == NFArithmeticType::Division)
+    {
 
-
-private:
-};
-
-
-#endif
+    }
+}

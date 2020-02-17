@@ -93,7 +93,7 @@ void NFGameServerToWorldModule::Register(NFINet* pNet)
 					int nTargetID = pServerData->nGameID;
 					m_pNetClientModule->SendToServerByPB(nTargetID, NFMsg::EGameMsgID::GTW_GAME_REGISTERED, xMsg);
 
-					m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFGUID(0, pData->server_id()), pData->server_name(), "Register");
+					m_pLogModule->LogInfo(NFGUID(0, pData->server_id()), pData->server_name(), "Register");
 				}
 			}
 		}
@@ -136,7 +136,7 @@ void NFGameServerToWorldModule::ServerReport()
 				reqMsg.set_server_state(NFMsg::EST_NARMAL);
 				reqMsg.set_server_type(nServerType);
 
-				m_pNetClientModule->SendToAllServerByPB(NF_SERVER_TYPES::NF_ST_WORLD, NFMsg::STS_SERVER_REPORT, reqMsg);
+				m_pNetClientModule->SendToAllServerByPB(NF_SERVER_TYPES::NF_ST_WORLD, NFMsg::STS_SERVER_REPORT, reqMsg, NFGUID());
 			}
 		}
 	}
@@ -170,7 +170,7 @@ bool NFGameServerToWorldModule::AfterInit()
 		{
 			std::ostringstream strLog;
 			strLog << "Cannot find current server, AppID = " << nCurAppID;
-			m_pLogModule->LogNormal(NFILogModule::NLL_ERROR_NORMAL, NULL_OBJECT, strLog, __FUNCTION__, __LINE__);
+			m_pLogModule->LogError(NULL_OBJECT, strLog, __FUNCTION__, __LINE__);
 			NFASSERT(-1, "Cannot find current server", __FILE__, __FUNCTION__);
 			exit(0);
 		}
@@ -255,7 +255,7 @@ void NFGameServerToWorldModule::OnSocketWSEvent(const NFSOCK nSockIndex, const N
 	}
 	else  if (eEvent & NF_NET_EVENT_CONNECTED)
 	{
-		m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFGUID(0, nSockIndex), "NF_NET_EVENT_CONNECTED", "connected success", __FUNCTION__, __LINE__);
+		m_pLogModule->LogInfo(NFGUID(0, nSockIndex), "NF_NET_EVENT_CONNECTED connected success", __FUNCTION__, __LINE__);
 		Register(pNet);
 
 	}
@@ -293,7 +293,7 @@ void NFGameServerToWorldModule::SendOnline(const NFGUID& self)
 	xMsg.set_name(playerName);
 	xMsg.set_bp(0);
 
-	m_pNetClientModule->SendToAllServerByPB(NF_SERVER_TYPES::NF_ST_WORLD, NFMsg::ACK_ONLINE_NOTIFY, xMsg);
+	m_pNetClientModule->SendToAllServerByPB(NF_SERVER_TYPES::NF_ST_WORLD, NFMsg::ACK_ONLINE_NOTIFY, xMsg, self);
 }
 
 void NFGameServerToWorldModule::SendOffline(const NFGUID& self)
@@ -307,7 +307,7 @@ void NFGameServerToWorldModule::SendOffline(const NFGUID& self)
 	xMsg.set_game(pPluginManager->GetAppID());
 	xMsg.set_proxy(0);
 
-	m_pNetClientModule->SendToAllServerByPB(NF_SERVER_TYPES::NF_ST_WORLD, NFMsg::ACK_OFFLINE_NOTIFY, xMsg);
+	m_pNetClientModule->SendToAllServerByPB(NF_SERVER_TYPES::NF_ST_WORLD, NFMsg::ACK_OFFLINE_NOTIFY, xMsg, self);
 
 }
 

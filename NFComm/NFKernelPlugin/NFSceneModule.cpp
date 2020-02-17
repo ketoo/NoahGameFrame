@@ -174,7 +174,7 @@ bool NFSceneModule::RequestEnterScene(const NFGUID & self, const int nSceneID, c
 	if (nNowSceneID == nSceneID
 		&& nNowGroupID == nGroupID)
 	{
-		m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, self, "in same scene and group but it not a clone scene", nSceneID);
+		m_pLogModule->LogInfo(self, "in same scene and group but it not a clone scene " + std::to_string(nSceneID));
 
 		return false;
 	}
@@ -195,13 +195,13 @@ bool NFSceneModule::RequestEnterScene(const NFGUID & self, const int nSceneID, c
 	int nEnterConditionCode = EnterSceneCondition(self, nSceneID, nGroupID, nType, argList);
 	if (nEnterConditionCode != 0)
 	{
-		m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, self, "before enter condition code:", nEnterConditionCode);
+		m_pLogModule->LogInfo(self, "before enter condition code: " + std::to_string(nEnterConditionCode), __FUNCTION__, __LINE__);
 		return false;
 	}
 
 	if (!SwitchScene(self, nSceneID, nGroupID, nType, pos, 0.0f, argList))
 	{
-		m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, self, "SwitchScene failed", nSceneID);
+		m_pLogModule->LogInfo(self, "SwitchScene failed " + std::to_string(nSceneID));
 
 		return false;
 	}
@@ -238,20 +238,20 @@ bool NFSceneModule::LeaveSceneGroup(const NFGUID & self)
 		int nOldGroupID = pObject->GetPropertyInt32(NFrame::Scene::GroupID());
 		if (nOldGroupID <= 0)
 		{
-			m_pLogModule->LogNormal(NFILogModule::NLL_ERROR_NORMAL, self, "no this group == 0", nOldSceneID);
+			m_pLogModule->LogError(self, "no this group == 0 " + std::to_string(nOldSceneID), __FUNCTION__, __LINE__);
 			return false;
 		}
 
 		NF_SHARE_PTR<NFSceneInfo> pOldSceneInfo = this->GetElement(nOldSceneID);
 		if (!pOldSceneInfo)
 		{
-			m_pLogModule->LogNormal(NFILogModule::NLL_ERROR_NORMAL, self, "no this container", nOldSceneID);
+			m_pLogModule->LogError(self, "no this container " + std::to_string(nOldSceneID), __FUNCTION__, __LINE__);
 			return false;
 		}
 
 		if (!pOldSceneInfo->GetElement(nOldGroupID))
 		{
-			m_pLogModule->LogNormal(NFILogModule::NLL_ERROR_NORMAL, self, "no this group", nOldGroupID);
+			m_pLogModule->LogError(self, "no this group " + std::to_string(nOldGroupID), __FUNCTION__, __LINE__);
 			return false;
 		}
 		/////////
@@ -918,7 +918,7 @@ const std::string & NFSceneModule::GetRecordString(const int scene, const int gr
 		return xRecord->GetString(nRow, nCol);
 	}
 
-	return "";
+	return NULL_STR;
 }
 
 const NFGUID & NFSceneModule::GetRecordObject(const int scene, const int group, const std::string & strRecordName, const int nRow, const int nCol)
@@ -984,7 +984,7 @@ const std::string & NFSceneModule::GetRecordString(const int scene, const int gr
 		return xRecord->GetString(nRow, strColTag);
 	}
 
-	return "";
+	return NULL_STR;
 }
 
 const NFGUID & NFSceneModule::GetRecordObject(const int scene, const int group, const std::string & strRecordName, const int nRow, const std::string & strColTag)
@@ -1084,19 +1084,19 @@ bool NFSceneModule::SwitchScene(const NFGUID& self, const int nTargetSceneID, co
 		NF_SHARE_PTR<NFSceneInfo> pNewSceneInfo = this->GetElement(nTargetSceneID);
 		if (!pOldSceneInfo)
 		{
-			m_pLogModule->LogNormal(NFILogModule::NLL_ERROR_NORMAL, self, "no this container", nOldSceneID);
+			m_pLogModule->LogError(self, "no this container " + std::to_string(nOldSceneID), __FUNCTION__, __LINE__);
 			return false;
 		}
 
 		if (!pNewSceneInfo)
 		{
-			m_pLogModule->LogNormal(NFILogModule::NLL_ERROR_NORMAL, self, "no this container", nTargetSceneID);
+			m_pLogModule->LogError(self, "no this container " + std::to_string(nTargetSceneID), __FUNCTION__, __LINE__);
 			return false;
 		}
 
 		if (!pNewSceneInfo->GetElement(nTargetGroupID))
 		{
-			m_pLogModule->LogNormal(NFILogModule::NLL_ERROR_NORMAL, self, "no this group", nTargetGroupID);
+			m_pLogModule->LogError(self, "no this group " + std::to_string(nTargetGroupID), __FUNCTION__, __LINE__);
 			return false;
 		}
 		/////////

@@ -28,16 +28,25 @@
 
 #include "NFComm/NFPluginModule/NFILogModule.h"
 #include "NFComm/NFPluginModule/NFIKernelModule.h"
+#include "NFComm/NFPluginModule/NFIElementModule.h"
 #include "NFComm/NFPluginModule/NFIClassModule.h"
+#include "NFComm/NFPluginModule/NFIEventModule.h"
 #include "NFComm/NFPluginModule/NFIBluePrintModule.h"
+#include "NFComm/NFPluginModule/NFIBPVMEventModule.h"
 
 
-class NFBPVirtualMachine
+class NFBPVirtualMachine : public NFIModule
 {
 public:
     NFBPVirtualMachine(NFIPluginManager* p, NF_SHARE_PTR<NFLogicBlock> logicBlock)
     {
+        pPluginManager = p;
+        
         m_pBluePrintModule = p->FindModule<NFIBluePrintModule>();
+        m_pElementModule = p->FindModule<NFIElementModule>();
+        m_pClassModule = p->FindModule<NFIClassModule>();
+        m_pLogModule = p->FindModule<NFILogModule>();
+        m_pBPVMEventModule = p->FindModule<NFIBPVMEventModule>();
 
         mLogicBlock = logicBlock;
 
@@ -49,12 +58,79 @@ public:
         mLogicBlock->running = false;
     };
 
+    virtual bool Awake()
+    {
+		mLogicBlock->running = true;
+        return true;
+    }
+
+    virtual bool Init()
+    {
+		//StartToProcessMonitor();
+
+        return true;
+    }
+
+    virtual bool AfterInit()
+    {
+		//PrepareInputData();
+        return true;
+    }
+
+    virtual bool CheckConfig()
+    {
+        return true;
+    }
+
+    virtual bool ReadyExecute()
+    {
+        return true;
+    }
+
+    virtual bool Execute()
+    {
+        return true;
+    }
+
+    virtual bool BeforeShut()
+    {
+		m_pBPVMEventModule->UnRegisterAllCallBack(mLogicBlock->id);
+        return true;
+    }
+
+    virtual bool Shut()
+    {
+		mLogicBlock->running = false;
+        return true;
+    }
+
+    virtual bool Finalize()
+    {
+        return true;
+    }
+
+	virtual bool OnReloadPlugin()
+	{
+		return true;
+	}
+
 private:
-    //first of all, find all monitors
+	void StartToProcessMonitor();
+
+	int GameEventIDCallBack(const NFGUID& objectID, const  NFGUID& monitorID, const int eventID, const const NFMapEx<std::string, NFData>& data);
+	int NetEventIDCallBack(const NFGUID& objectID, const  NFGUID& monitorID, const int eventID, const const NFMapEx<std::string, NFData>& data);
+	int NetMsgCallBack(const NFGUID& objectID, const  NFGUID& monitorID, const int eventID, const const NFMapEx<std::string, NFData>& data);
+
+private:
     void StartMonitor(NF_SHARE_PTR<NFIMonitor> monitor);
 
 private:
     NFIBluePrintModule* m_pBluePrintModule;
+    NFIElementModule* m_pElementModule;
+    NFIClassModule* m_pClassModule;
+    NFILogModule* m_pLogModule;
+    NFIBPVMEventModule* m_pBPVMEventModule;
+
     NF_SHARE_PTR<NFLogicBlock> mLogicBlock;
 };
 

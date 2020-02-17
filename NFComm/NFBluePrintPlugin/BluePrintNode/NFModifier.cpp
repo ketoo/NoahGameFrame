@@ -1,12 +1,12 @@
 /*
-            This file is part of: 
+            This file is part of:
                 NoahFrame
             https://github.com/ketoo/NoahGameFrame
 
    Copyright 2009 - 2020 NoahFrame(NoahGameFrame)
 
    File creator: lvsheng.huang
-   
+
    NoahFrame is open-source software and you can redistribute it and/or modify
    it under the terms of the License; besides, anyone who use this file/software must include this copyright announcement.
 
@@ -23,70 +23,47 @@
    limitations under the License.
 */
 
-//#include "Dependencies/googletest-release-1.8.0/googletest/include/gtest/gtest.h"
-#include "NFBluePrintLuaGeneratorModule.h"
+#include "NFModifier.h"
 
-bool NFBluePrintLuaGeneratorModule::Awake()
+void NFPropertyModifier::PrepareInputData()
 {
-
-
-	return true;
 }
 
-bool NFBluePrintLuaGeneratorModule::Init()
+NF_SHARE_PTR<NFBluePrintNodeBase> NFPropertyModifier::FindNextNode()
 {
-	
-
-    return true;
+	return NF_SHARE_PTR<NFBluePrintNodeBase>();
 }
 
-bool NFBluePrintLuaGeneratorModule::AfterInit()
+void NFRecordModifier::PrepareInputData()
 {
-
-	return true;
 }
 
-bool NFBluePrintLuaGeneratorModule::CheckConfig()
+void NFRecordModifier::UpdateOutputData()
 {
-	
-	return true;
 }
 
-bool NFBluePrintLuaGeneratorModule::ReadyExecute()
+NF_SHARE_PTR<NFBluePrintNodeBase> NFRecordModifier::FindNextNode()
 {
-	
-
-	return true;
+	return NF_SHARE_PTR<NFBluePrintNodeBase>();
 }
 
-bool NFBluePrintLuaGeneratorModule::Execute()
+void NFRecordAdder::PrepareInputData()
 {
-	
-    return true;
 }
 
-bool NFBluePrintLuaGeneratorModule::BeforeShut()
+void NFRecordAdder::UpdateOutputData()
 {
-
-	return true;
 }
 
-bool NFBluePrintLuaGeneratorModule::Shut()
+void NFRecordRemover::PrepareInputData()
 {
-	
-
-	return true;
 }
 
-bool NFBluePrintLuaGeneratorModule::Finalize()
+void NFRecordRemover::UpdateOutputData()
 {
-	
-
-	return true;
 }
 
-bool NFBluePrintLuaGeneratorModule::OnReloadPlugin()
+NF_SHARE_PTR<NFBluePrintNodeBase> NFRecordRemover::FindNextNode()
 {
-	
-	return true;
+	return NF_SHARE_PTR<NFBluePrintNodeBase>();
 }

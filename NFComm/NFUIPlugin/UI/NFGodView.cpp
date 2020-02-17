@@ -39,7 +39,7 @@ NFGodView::NFGodView(NFIPluginManager* p, NFViewType vt) : NFIView(p, vt, GET_CL
    m_pNodeView = NF_NEW NFNodeView(p);
    m_pTreeView = NF_NEW NFTreeView(p);
 
-   m_pNodeView->ResetOffest(NFVector2::Zero());
+    m_pNodeView->ResetOffset(NFVector2::Zero());
 
    m_pTreeView->SetSelectedNodeFunctor(std::bind(&NFGodView::HandlerSelected, this, std::placeholders::_1));
    m_pTreeView->SetName(GET_CLASS_NAME(NFGodView));
@@ -148,7 +148,7 @@ bool NFGodView::Execute()
    ImGui::SameLine();
    if (ImGui::Button("return to center"))
    {
-      m_pNodeView->ResetOffest(NFVector2::Zero());
+       m_pNodeView->ResetOffset(NFVector2::Zero());
    }
 
 	m_pNodeView->Execute();

@@ -167,7 +167,7 @@ int NFSceneProcessModule::AfterLeaveSceneGroupEvent(const NFGUID & self, const i
 		{
 			m_pKernelModule->ReleaseGroupScene(nSceneID, nGroupID);
 
-			m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, self, "DestroyCloneSceneGroup", nGroupID);
+			m_pLogModule->LogInfo(self, "DestroyCloneSceneGroup " + std::to_string(nGroupID), __FUNCTION__ , __LINE__);
 		}
 	}
 	else if (eSceneType == NFMsg::ESceneType::HOME_SCENE)
@@ -177,7 +177,7 @@ int NFSceneProcessModule::AfterLeaveSceneGroupEvent(const NFGUID & self, const i
 		{
 			m_pKernelModule->ReleaseGroupScene(nSceneID, nGroupID);
 
-			m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, self, "DestroyCloneSceneGroup", nGroupID);
+			m_pLogModule->LogInfo(self, "DestroyCloneSceneGroup " + std::to_string(nGroupID), __FUNCTION__ , __LINE__);
 		}
 	}
 	return 0;
@@ -197,7 +197,7 @@ int NFSceneProcessModule::OnObjectClassEvent(const NFGUID& self, const std::stri
             {
                 m_pKernelModule->ReleaseGroupScene(nSceneID, nGroupID);
 
-                m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, self, "DestroyCloneSceneGroup", nGroupID);
+                m_pLogModule->LogInfo(self, "DestroyCloneSceneGroup " + std::to_string(nGroupID), __FUNCTION__ , __LINE__);
             }
 			else if (eSceneType == NFMsg::ESceneType::MULTI_CLONE_SCENE)
 			{
@@ -206,7 +206,7 @@ int NFSceneProcessModule::OnObjectClassEvent(const NFGUID& self, const std::stri
 				{
 					m_pKernelModule->ReleaseGroupScene(nSceneID, nGroupID);
 
-					m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, self, "DestroyCloneSceneGroup", nGroupID);
+					m_pLogModule->LogInfo(self, "DestroyCloneSceneGroup " + std::to_string(nGroupID), __FUNCTION__ , __LINE__);
 				}
 			}
         }

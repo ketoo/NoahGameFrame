@@ -131,19 +131,19 @@ NF_SHARE_PTR<NFIObject> NFKernelModule::CreateObject(const NFGUID& self, const i
 	NF_SHARE_PTR<NFSceneInfo> pContainerInfo = m_pSceneModule->GetElement(nSceneID);
 	if (!pContainerInfo)
 	{
-		m_pLogModule->LogNormal(NFILogModule::NLL_ERROR_NORMAL, NFGUID(0, nSceneID), "There is no scene", nSceneID, __FUNCTION__, __LINE__);
+		m_pLogModule->LogError(NFGUID(0, nSceneID), "There is no scene " + std::to_string(nSceneID), __FUNCTION__, __LINE__);
 		return pObject;
 	}
 
 	if (!pContainerInfo->GetElement(nGroupID))
 	{
-		m_pLogModule->LogNormal(NFILogModule::NLL_ERROR_NORMAL, NFGUID(0, nSceneID), "There is no group", nGroupID, __FUNCTION__, __LINE__);
+		m_pLogModule->LogError("There is no group " + std::to_string(nGroupID), __FUNCTION__, __LINE__);
 		return pObject;
 	}
 
 	//  if (!m_pElementModule->ExistElement(strConfigIndex))
 	//  {
-	//      m_pLogModule->LogNormal(NFILogModule::NLL_ERROR_NORMAL, NFGUID(0, nSceneID), "There is no group", nGroupID, __FUNCTION__, __LINE__);
+	//      m_pLogModule->LogError(NFGUID(0, nSceneID), "There is no group", nGroupID, __FUNCTION__, __LINE__);
 	//      return pObject;
 	//  }
 
@@ -350,7 +350,7 @@ bool NFKernelModule::DestroyObject(const NFGUID& self)
 
 	}
 
-	m_pLogModule->LogNormal(NFILogModule::NLL_ERROR_NORMAL, self, "There is no scene", nSceneID, __FUNCTION__, __LINE__);
+	m_pLogModule->LogError(self, "There is no scene " + std::to_string(nSceneID), __FUNCTION__, __LINE__);
 
 	return false;
 }
@@ -570,7 +570,7 @@ bool NFKernelModule::SetRecordInt(const NFGUID& self, const std::string& strReco
 	{
 		if (!pObject->SetRecordInt(strRecordName, nRow, nCol, nValue))
 		{
-			m_pLogModule->LogNormal(NFILogModule::NLL_ERROR_NORMAL, self, strRecordName, "error for row or col", __FUNCTION__, __LINE__);
+			m_pLogModule->LogError(self, strRecordName + " error for row or col", __FUNCTION__, __LINE__);
 		}
 		else
 		{
@@ -590,7 +590,7 @@ bool NFKernelModule::SetRecordInt(const NFGUID& self, const std::string& strReco
 	{
 		if (!pObject->SetRecordInt(strRecordName, nRow, strColTag, value))
 		{
-			m_pLogModule->LogNormal(NFILogModule::NLL_ERROR_NORMAL, self, strRecordName, "error for row or col", __FUNCTION__, __LINE__);
+			m_pLogModule->LogError(self, strRecordName + " error for row or col", __FUNCTION__, __LINE__);
 		}
 		else
 		{
@@ -610,7 +610,7 @@ bool NFKernelModule::SetRecordFloat(const NFGUID& self, const std::string& strRe
 	{
 		if (!pObject->SetRecordFloat(strRecordName, nRow, nCol, dwValue))
 		{
-			m_pLogModule->LogNormal(NFILogModule::NLL_ERROR_NORMAL, self, strRecordName, "error SetRecordFloat for row  or col", __FUNCTION__, __LINE__);
+			m_pLogModule->LogError(self, strRecordName + " error SetRecordFloat for row  or col", __FUNCTION__, __LINE__);
 		}
 		else
 		{
@@ -630,7 +630,7 @@ bool NFKernelModule::SetRecordFloat(const NFGUID& self, const std::string& strRe
 	{
 		if (!pObject->SetRecordFloat(strRecordName, nRow, strColTag, value))
 		{
-			m_pLogModule->LogNormal(NFILogModule::NLL_ERROR_NORMAL, self, strRecordName, "error SetRecordFloat for row  or col", __FUNCTION__, __LINE__);
+			m_pLogModule->LogError(self, strRecordName + " error SetRecordFloat for row  or col", __FUNCTION__, __LINE__);
 		}
 		else
 		{
@@ -650,7 +650,7 @@ bool NFKernelModule::SetRecordString(const NFGUID& self, const std::string& strR
 	{
 		if (!pObject->SetRecordString(strRecordName, nRow, nCol, strValue))
 		{
-			m_pLogModule->LogNormal(NFILogModule::NLL_ERROR_NORMAL, self, strRecordName, "error SetRecordString for row  or col", __FUNCTION__, __LINE__);
+			m_pLogModule->LogError(self, strRecordName + " error SetRecordString for row  or col", __FUNCTION__, __LINE__);
 		}
 		else
 		{
@@ -670,7 +670,7 @@ bool NFKernelModule::SetRecordString(const NFGUID& self, const std::string& strR
 	{
 		if (!pObject->SetRecordString(strRecordName, nRow, strColTag, value))
 		{
-			m_pLogModule->LogNormal(NFILogModule::NLL_ERROR_NORMAL, self, strRecordName, "error SetRecordObject for row  or col", __FUNCTION__, __LINE__);
+			m_pLogModule->LogError(self, strRecordName + " error SetRecordObject for row  or col", __FUNCTION__, __LINE__);
 		}
 		else
 		{
@@ -690,7 +690,7 @@ bool NFKernelModule::SetRecordObject(const NFGUID& self, const std::string& strR
 	{
 		if (!pObject->SetRecordObject(strRecordName, nRow, nCol, objectValue))
 		{
-			m_pLogModule->LogNormal(NFILogModule::NLL_ERROR_NORMAL, self, strRecordName, "error SetRecordObject for row  or col", __FUNCTION__, __LINE__);
+			m_pLogModule->LogError(self, strRecordName + " error SetRecordObject for row  or col", __FUNCTION__, __LINE__);
 		}
 		else
 		{
@@ -710,7 +710,7 @@ bool NFKernelModule::SetRecordObject(const NFGUID& self, const std::string& strR
 	{
 		if (!pObject->SetRecordObject(strRecordName, nRow, strColTag, value))
 		{
-			m_pLogModule->LogNormal(NFILogModule::NLL_ERROR_NORMAL, self, strRecordName, "error SetRecordObject for row  or col", __FUNCTION__, __LINE__);
+			m_pLogModule->LogError(self, strRecordName + " error SetRecordObject for row  or col", __FUNCTION__, __LINE__);
 		}
 		else
 		{
@@ -730,7 +730,7 @@ bool NFKernelModule::SetRecordVector2(const NFGUID& self, const std::string& str
 	{
 		if (!pObject->SetRecordVector2(strRecordName, nRow, nCol, value))
 		{
-			m_pLogModule->LogNormal(NFILogModule::NLL_ERROR_NORMAL, self, strRecordName, "error SetRecordVector2 for row  or col", __FUNCTION__, __LINE__);
+			m_pLogModule->LogError(self, strRecordName + " error SetRecordVector2 for row  or col", __FUNCTION__, __LINE__);
 		}
 		else
 		{
@@ -750,7 +750,7 @@ bool NFKernelModule::SetRecordVector2(const NFGUID& self, const std::string& str
 	{
 		if (!pObject->SetRecordVector2(strRecordName, nRow, strColTag, value))
 		{
-			m_pLogModule->LogNormal(NFILogModule::NLL_ERROR_NORMAL, self, strRecordName, "error SetRecordVector2 for row  or col", __FUNCTION__, __LINE__);
+			m_pLogModule->LogError(self, strRecordName + " error SetRecordVector2 for row  or col", __FUNCTION__, __LINE__);
 		}
 		else
 		{
@@ -770,7 +770,7 @@ bool NFKernelModule::SetRecordVector3(const NFGUID& self, const std::string& str
 	{
 		if (!pObject->SetRecordVector3(strRecordName, nRow, nCol, value))
 		{
-			m_pLogModule->LogNormal(NFILogModule::NLL_ERROR_NORMAL, self, strRecordName, "error SetRecordVector3 for row  or col", __FUNCTION__, __LINE__);
+			m_pLogModule->LogError(self, strRecordName + " error SetRecordVector3 for row  or col", __FUNCTION__, __LINE__);
 		}
 		else
 		{
@@ -790,7 +790,7 @@ bool NFKernelModule::SetRecordVector3(const NFGUID& self, const std::string& str
 	{
 		if (!pObject->SetRecordVector3(strRecordName, nRow, strColTag, value))
 		{
-			m_pLogModule->LogNormal(NFILogModule::NLL_ERROR_NORMAL, self, strRecordName, "error SetRecordVector3 for row  or col", __FUNCTION__, __LINE__);
+			m_pLogModule->LogError(self, strRecordName  + " error SetRecordVector3 for row  or col", __FUNCTION__, __LINE__);
 		}
 		else
 		{
@@ -1004,7 +1004,7 @@ bool NFKernelModule::CreateScene(const int nSceneID)
 		{
 			pSceneInfo->AddElement(0, pGroupInfo);
 
-			m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFGUID(), "Create scene success, groupId:0, scene id:", nSceneID, __FUNCTION__, __LINE__);
+			m_pLogModule->LogInfo("Create scene success, groupId:0, scene id:" + std::to_string(nSceneID), __FUNCTION__, __LINE__);
 
 			return true;
 		}
@@ -1266,7 +1266,7 @@ bool NFKernelModule::LogInfo(const NFGUID ident)
 		int nSceneID = GetPropertyInt32(ident, NFrame::IObject::SceneID());
 		int nGroupID = GetPropertyInt32(ident, NFrame::IObject::GroupID());
 
-		m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, ident, "//----------child object list-------- SceneID = ", nSceneID);
+		m_pLogModule->LogInfo(ident, "//----------child object list-------- SceneID = " + std::to_string(nSceneID));
 
 		NFDataList valObjectList;
 		GetGroupObjectList(nSceneID, nGroupID, valObjectList);

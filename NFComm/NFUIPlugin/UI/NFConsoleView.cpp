@@ -56,14 +56,15 @@ bool NFConsoleView::Execute()
    }
 
    ImGui::SameLine();
-   static std::string searchLog;
-   static char str0[64] = "";
-   if (ImGui::InputText("", str0, IM_ARRAYSIZE(str0)))
-   {
-      searchLog = str0;
-   }
+   
+   static char str0[128] = "";
+   ImGui::InputText("Search", str0, IM_ARRAYSIZE(str0));
+   std::string searchLog = str0;
+
+   static std::string selectedData;
 
    ImGui::SetNextItemWidth(-1.0f);
+
    if (ImGui::ListBoxHeader("##", -1, -1))
    {
       static int selected = 0;
@@ -76,7 +77,7 @@ bool NFConsoleView::Execute()
             bool render = true;
             if (!searchLog.empty())
             {
-               if (item_name.data.find_first_of(searchLog) < 0)
+               if (item_name.data.find_first_of(searchLog)  == std::string::npos)
                {
                   render = false;
                } 
@@ -89,6 +90,7 @@ bool NFConsoleView::Execute()
                if (ImGui::Selectable(item_name.data.c_str(), selected == i))
                {
                   selected = i;
+                  selectedData = item_name.data;
                   // handle selection
                }
 
@@ -101,7 +103,7 @@ bool NFConsoleView::Execute()
             bool render = true;
             if (!searchLog.empty())
             {
-               if (item_name.data.find_first_of(searchLog) < 0)
+               if (item_name.data.find_first_of(searchLog) == std::string::npos)
                {
                   render = false;
                } 
@@ -113,6 +115,7 @@ bool NFConsoleView::Execute()
                if (ImGui::Selectable(item_name.data.c_str(), selected == i))
                {
                   selected = i;
+                  selectedData = item_name.data;
                   // handle selection
                }
                ImGui::PopStyleColor();
@@ -124,7 +127,7 @@ bool NFConsoleView::Execute()
             bool render = true;
             if (!searchLog.empty())
             {
-               if (item_name.data.find_first_of(searchLog) < 0)
+               if (item_name.data.find_first_of(searchLog)  == std::string::npos)
                {
                   render = false;
                } 
@@ -136,6 +139,7 @@ bool NFConsoleView::Execute()
                if (ImGui::Selectable(item_name.data.c_str(), selected == i))
                {
                   selected = i;
+                  selectedData = item_name.data;
                   // handle selection
                }
                ImGui::PopStyleColor();
@@ -147,7 +151,7 @@ bool NFConsoleView::Execute()
             bool render = true;
             if (!searchLog.empty())
             {
-               if (item_name.data.find_first_of(searchLog) < 0)
+               if (item_name.data.find_first_of(searchLog)  == std::string::npos)
                {
                   render = false;
                } 
@@ -159,6 +163,8 @@ bool NFConsoleView::Execute()
                if (ImGui::Selectable(item_name.data.c_str(), selected == i))
                {
                   selected = i;
+
+                  selectedData = item_name.data;
                   // handle selection
                }
                ImGui::PopStyleColor();
@@ -170,7 +176,7 @@ bool NFConsoleView::Execute()
             bool render = true;
             if (!searchLog.empty())
             {
-               if (item_name.data.find_first_of(searchLog) < 0)
+               if (item_name.data.find_first_of(searchLog)  == std::string::npos)
                {
                   render = false;
                } 
@@ -183,6 +189,7 @@ bool NFConsoleView::Execute()
                if (ImGui::Selectable(item_name.data.c_str(), selected == i))
                {
                   selected = i;
+                  selectedData = item_name.data;
                   // handle selection
                }
                ImGui::PopStyleColor();
@@ -192,10 +199,14 @@ bool NFConsoleView::Execute()
       }
          
       ImGui::ListBoxFooter();
+
    //ImGui::PushItemWidth(-1);
    //ImGui::PopItemWidth();
 
    }
+
+   ImGui::SetNextItemWidth(-1.0f);
+   ImGui::TextWrapped(selectedData.c_str());
 
 	return false;
 }

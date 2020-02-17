@@ -55,7 +55,7 @@ public:
     virtual bool Shut();
 
 protected:
-    int OnEvent(const NFGUID& self, const NFEventDefine event, const NFDataList& arg);
+    int OnEvent(const NFGUID& self, const int event, const NFDataList& arg);
     int OnClassCallBackEvent(const NFGUID& self, const std::string& strClassName, const CLASS_OBJECT_EVENT event, const NFDataList& arg);
     int OnPropertyCallBackEvent( const NFGUID& self, const std::string& strProperty, const NFData& oldVarList, const NFData& newVarList);
     int OnPropertyStrCallBackEvent( const NFGUID& self, const std::string& strProperty, const NFData& oldVarList, const NFData& newVarList);

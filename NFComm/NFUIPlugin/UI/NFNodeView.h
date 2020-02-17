@@ -25,6 +25,7 @@
 #ifndef NF_NODE_VIEW_H
 #define NF_NODE_VIEW_H
 
+#include "NFComm/NFPluginModule/NFIModule.h"
 #include "NFComm/NFPluginModule/NFIUIModule.h"
 #include "NFComm/NFPluginModule/NFIBluePrintModule.h"
 
@@ -41,40 +42,32 @@ namespace ed = ax::NodeEditor;
 
 enum NFColor
 {
-   DEFAULT = -15461356,//IM_COL32(20, 20, 20, 255);
-   WORKFLOW = -10625828,//IM_COL32(220, 220, 93, 255);
-   LINK = -5263441,//IM_COL32(175, 175, 175, 255);
-   PININ = -65536,//IM_COL32(175, 175, 175, 255);
-   PININ_GOOD = -16744448,//IM_COL32(175, 175, 175, 255);
-   PINOUT = -1,//IM_COL32(175, 175, 175, 255);
+	DEFAULT = -1788294,
+	WORKFLOW = -10625828,
+	PININ = -1788294,
+	PINOUT = -5263441,
 
-   EXECUTER = -10625828,//IM_COL32(220, 220, 93, 255);
-   VARIABLE = -5263441,//IM_COL32(175, 175, 175, 255);
-   MODIFIER = -10825106,//IM_COL32(110, 210, 90, 255);
-   BRANCH = -4271476,//IM_COL32(140, 210, 190, 255);
-   MONITOR = -16777088,//IM_COL32(140, 210, 190, 255);
-   LOGGER = -10174736,//IM_COL32(240, 190, 100, 255);
-   ARITHMETIC = -11251634,//IM_COL32(78, 80, 84, 255);
-   CUSTOM = -2051992,//IM_COL32(104, 176, 224, 255);
+	EXECUTER = -11944749,
+	VARIABLE = -3240504,
+	MODIFIER = -11814298,
+	BRANCH = -13475794,
+	MONITOR = -4271476,
+	DEBUGER = -10770958,
+	ARITHMETIC = -11251634,
+	CUSTOM = -2051992
 };
 
 enum NFPinShape
 {
-    CIRCLE,
-    TRIANGLE,
-    SQUARE,
-    PENTAGON,
-    STAR,
-    SEMICIRCLE,
-    HEX,
-    CROSS,
-    RING,
-    ARROW,
-    QUATREFOIL,
-    RHOMBUS,
-    HEART,
-    OCTAGON,
+    PinShape_Circle = 0,
+    PinShape_CircleFilled,
+    PinShape_Triangle,
+    PinShape_TriangleFilled,
+    PinShape_Quad,
+    PinShape_QuadFilled
 };
+
+void ShowImage(const char* filename, int width, int height);
 
 class NFNodeView;
 
@@ -84,23 +77,34 @@ private:
    NFNodePin(){}
 
 public:
-   NFNodePin(const int id, const std::string& name, const bool inputPin, const NFGUID guid, const NFColor color)
+   NFNodePin(const int id, const std::string& name, const std::string& image, const bool inputPin, const NFGUID guid, const NFColor color, const NFPinShape shape = NFPinShape::PinShape_Circle)
    {
        this->color = color;
         this->id = id;
         this->name = name;
+        this->image = image;
         this->inputPin = inputPin;
         this->guid = guid;
+        this->shape = shape;
+	   	iconTextureId = nullptr;
+	   	imageSize = NFVector2(20.0f, 20.0f);
    }
 
-   void Execute();
+    void Execute();
+    void UpdateShape();
 
    int id;
    int color;
    bool inputPin;
    std::string name;
+   std::string image;
+   NFVector2 imageSize;
+   void* iconTextureId;
+
+   NFPinShape shape;
    NFGUID guid;
    NFGUID nodeId;
+   NFGUID linkId;
    NFNodeView* nodeView;
 };
 
@@ -117,13 +121,15 @@ public:
       this->name = name;
       this->guid = guid;
       this->initPos = vec;
+      this->iconTextureId = nullptr;
+      this->iconSize = NFVector2(20.0f, 20.0f);
    }
 
 	void Execute();
 
-   void AddPin(const int id, const std::string& name, const bool inputPin, const NFGUID guid, NFColor color)
+   void AddPin(const int id, const std::string& name, const std::string& image, const bool inputPin, const NFGUID guid, NFColor color, NFPinShape shape = NFPinShape::PinShape_Circle)
    {
-      auto ptr = NF_SHARE_PTR<NFNodePin>(NF_NEW NFNodePin(id, name, inputPin, guid, color));
+      auto ptr = NF_SHARE_PTR<NFNodePin>(NF_NEW NFNodePin(id, name, image, inputPin, guid, color, shape));
       ptr->nodeView = this->nodeView;
       ptr->nodeId = this->guid;
       mAttris.push_back(ptr);
@@ -166,12 +172,29 @@ public:
        return nullptr;
    }
 
+    NF_SHARE_PTR<NFNodePin> GetPin(const int id)
+    {
+        for (auto it = mAttris.begin(); it != mAttris.end(); ++it)
+        {
+            if ((*it)->id == id)
+            {
+                return *it;
+            }
+        }
+
+        return nullptr;
+    }
+
    std::string name;
    int id;
    int color;
    NFGUID guid;
    NFVector2 initPos;
    NFNodeView* nodeView;
+
+   NFVector2 iconSize;
+   std::string iconPath;
+   void* iconTextureId;
 
    std::list<NF_SHARE_PTR<NFNodePin>> mAttris;
 
@@ -213,11 +236,12 @@ public:
    const NFGUID GetAttriGUID(const int attriId);
    const int GetAttriID(const NFGUID guid);
 
-   void AddNode(const NFGUID guid, const std::string& name, NFColor color = NFColor::DEFAULT, const NFVector2 vec = NFVector2());
-   void AddPinIn(const NFGUID guid, const NFGUID attrId, const std::string& name, NFColor color = NFColor::PININ);
-   void AddPinOut(const NFGUID guid, const NFGUID attrId, const std::string& name, NFColor color = NFColor::PINOUT);
+	NF_SHARE_PTR<NFNode> AddNode(const NFGUID guid, const std::string& name, NFColor color = NFColor::DEFAULT, const NFVector2 vec = NFVector2());
+   void AddPinIn(const NFGUID guid, const NFGUID attrId, const std::string& name, const std::string& image, NFColor color = NFColor::PININ, NFPinShape shape = NFPinShape::PinShape_Circle);
+   void AddPinOut(const NFGUID guid, const NFGUID attrId, const std::string& name, const std::string& image, NFColor color = NFColor::PINOUT, NFPinShape shape = NFPinShape::PinShape_Circle);
    void ModifyPinColor(const NFGUID attrId, NFColor color);
    void DeleteNode(const NFGUID guid);
+   NF_SHARE_PTR<NFNode> FindNode(const NFGUID guid);
 
    void AddLink(const NFGUID& selfID, const NFGUID& startNode, const NFGUID& endNode, const NFGUID& startPin, const NFGUID& endPin, const int color);
    NF_SHARE_PTR<NFDataLink> GetLink(const NFGUID& startNode, const NFGUID& endNode, const NFGUID& startPin, const NFGUID& endPin);
@@ -229,7 +253,7 @@ public:
    void SetNodeDraggable(const NFGUID guid, const bool dragable);
    void SetNodePosition(const NFGUID guid, const NFVector2 vec = NFVector2());
 
-   void ResetOffest(const NFVector2& pos);
+   void ResetOffset(const NFVector2& pos);
    void MoveToNode(const NFGUID guid);
 
 

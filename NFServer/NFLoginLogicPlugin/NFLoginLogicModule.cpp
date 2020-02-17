@@ -47,6 +47,7 @@ void NFLoginLogicModule::OnLoginProcess(const NFSOCK nSockIndex, const int nMsgI
 	NFMsg::ReqAccountLogin xMsg;
 	if (!m_pNetModule->ReceivePB(nMsgID, msg, nLen, xMsg, nPlayerID))
 	{
+	    m_pLogModule->LogError("Failed to ReceivePB for message id:" + std::to_string(nMsgID));
 		return;
 	}
 
@@ -71,7 +72,7 @@ void NFLoginLogicModule::OnLoginProcess(const NFSOCK nSockIndex, const int nMsgI
 				{
 					std::ostringstream strLog;
 					strLog << "Check password failed, Account = " << xMsg.account() << " Password = " << xMsg.password();
-					m_pLogModule->LogNormal(NFILogModule::NLL_ERROR_NORMAL, NFGUID(0, nSockIndex), strLog, __FUNCTION__, __LINE__);
+					m_pLogModule->LogError(NFGUID(0, nSockIndex), strLog, __FUNCTION__, __LINE__);
 
 					xAckMsg.set_event_code(NFMsg::ACCOUNTPWD_INVALID);
 					m_pNetModule->SendMsgPB(NFMsg::EGameMsgID::ACK_LOGIN, xAckMsg, nSockIndex);
@@ -84,7 +85,7 @@ void NFLoginLogicModule::OnLoginProcess(const NFSOCK nSockIndex, const int nMsgI
 				{
 					std::ostringstream strLog;
 					strLog << "Create account failed, Account = " << xMsg.account() << " Password = " << xMsg.password();
-					m_pLogModule->LogNormal(NFILogModule::NLL_ERROR_NORMAL, NFGUID(0, nSockIndex), strLog, __FUNCTION__, __LINE__);
+					m_pLogModule->LogError(NFGUID(0, nSockIndex), strLog, __FUNCTION__, __LINE__);
 
 					xAckMsg.set_event_code(NFMsg::ACCOUNT_EXIST);
 					m_pNetModule->SendMsgPB(NFMsg::EGameMsgID::ACK_LOGIN, xAckMsg, nSockIndex);
@@ -102,7 +103,7 @@ void NFLoginLogicModule::OnLoginProcess(const NFSOCK nSockIndex, const int nMsgI
 			xAckMsg.set_event_code(NFMsg::ACCOUNT_SUCCESS);
 			m_pNetModule->SendMsgPB(NFMsg::EGameMsgID::ACK_LOGIN, xAckMsg, nSockIndex);
 
-			m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFGUID(0, nSockIndex), "Login successed :", xMsg.account().c_str());
+			m_pLogModule->LogInfo(NFGUID(0, nSockIndex), "Login successed :", xMsg.account().c_str());
 		}
 	}
 }

@@ -83,7 +83,7 @@ bool NFWorldNet_ServerModule::AfterInit()
                 {
                     std::ostringstream strLog;
                     strLog << "Cannot init server net, Port = " << nPort;
-                    m_pLogModule->LogNormal(NFILogModule::NLL_ERROR_NORMAL, NULL_OBJECT, strLog, __FUNCTION__, __LINE__);
+                    m_pLogModule->LogError(NULL_OBJECT, strLog, __FUNCTION__, __LINE__);
                     NFASSERT(nRet, "Cannot init server net", __FILE__, __FUNCTION__);
                     exit(0);
                 }
@@ -112,7 +112,7 @@ void NFWorldNet_ServerModule::OnServerInfoProcess(const NFSOCK nSockIndex, const
 		{
 			std::ostringstream strLog;
 			strLog << "Cannot find current server, AppID = " << nCurAppID;
-			m_pLogModule->LogNormal(NFILogModule::NLL_ERROR_NORMAL, NULL_OBJECT, strLog, __FUNCTION__, __LINE__);
+			m_pLogModule->LogError(NULL_OBJECT, strLog, __FUNCTION__, __LINE__);
 
 			return;
 		}
@@ -143,7 +143,7 @@ void NFWorldNet_ServerModule::OnServerInfoProcess(const NFSOCK nSockIndex, const
 				pServerData->nFD = nSockIndex;
 				*(pServerData->pData) = xData;
 
-				m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFGUID(0, xData.server_id()), xData.server_name(), "GameServerRegistered");
+				m_pLogModule->LogInfo(NFGUID(0, xData.server_id()), xData.server_name(), "GameServerRegistered");
 			}
 		}
 	}
@@ -200,7 +200,7 @@ void NFWorldNet_ServerModule::OnGameServerRegisteredProcess(const NFSOCK nSockIn
 		{
 			std::ostringstream strLog;
 			strLog << "Cannot find current server, AppID = " << nCurAppID;
-			m_pLogModule->LogNormal(NFILogModule::NLL_ERROR_NORMAL, NULL_OBJECT, strLog, __FUNCTION__, __LINE__);
+			m_pLogModule->LogError(NULL_OBJECT, strLog, __FUNCTION__, __LINE__);
 
 			return;
 		}
@@ -231,11 +231,11 @@ void NFWorldNet_ServerModule::OnGameServerRegisteredProcess(const NFSOCK nSockIn
 				pServerData->nFD = nSockIndex;
 				*(pServerData->pData) = xData;
 
-				m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFGUID(0, xData.server_id()), xData.server_name(), "GameServerRegistered");
+				m_pLogModule->LogInfo(NFGUID(0, xData.server_id()), xData.server_name(), "GameServerRegistered");
 			}
 			else
 			{
-				m_pLogModule->LogNormal(NFILogModule::NLL_ERROR_NORMAL, NFGUID(0, xData.server_id()), xData.server_name(), "GameServerRegistered");
+				m_pLogModule->LogError(NFGUID(0, xData.server_id()), xData.server_name(), "GameServerRegistered");
 			}
 		}
 	}
@@ -257,7 +257,7 @@ void NFWorldNet_ServerModule::OnGameServerUnRegisteredProcess(const NFSOCK nSock
         const NFMsg::ServerInfoReport& xData = xMsg.server_list(i);
         mGameMap.RemoveElement(xData.server_id());
 
-        m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFGUID(0, xData.server_id()), xData.server_name(), "GameServerRegistered");
+        m_pLogModule->LogInfo(NFGUID(0, xData.server_id()), xData.server_name(), "GameServerRegistered");
     }
 }
 
@@ -284,7 +284,7 @@ void NFWorldNet_ServerModule::OnRefreshGameServerInfoProcess(const NFSOCK nSockI
         pServerData->nFD = nSockIndex;
         *(pServerData->pData) = xData;
 
-        m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFGUID(0, xData.server_id()), xData.server_name(), "GameServerRegistered");
+        m_pLogModule->LogInfo(NFGUID(0, xData.server_id()), xData.server_name(), "GameServerRegistered");
     }
 
     SynGameToProxy();
@@ -308,7 +308,7 @@ void NFWorldNet_ServerModule::OnProxyServerRegisteredProcess(const NFSOCK nSockI
 		{
 			std::ostringstream strLog;
 			strLog << "Cannot find current server, AppID = " << nCurAppID;
-			m_pLogModule->LogNormal(NFILogModule::NLL_ERROR_NORMAL, NULL_OBJECT, strLog, __FUNCTION__, __LINE__);
+			m_pLogModule->LogError(NULL_OBJECT, strLog, __FUNCTION__, __LINE__);
 
 			return;
 		}
@@ -338,13 +338,13 @@ void NFWorldNet_ServerModule::OnProxyServerRegisteredProcess(const NFSOCK nSockI
 				pServerData->nFD = nSockIndex;
 				*(pServerData->pData) = xData;
 
-				m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFGUID(0, xData.server_id()), xData.server_name(), "Proxy Registered");
+				m_pLogModule->LogInfo(NFGUID(0, xData.server_id()), xData.server_name(), "Proxy Registered");
 
 				SynGameToProxy(nSockIndex);
 			}
 			else
 			{
-				m_pLogModule->LogNormal(NFILogModule::NLL_ERROR_NORMAL, NFGUID(0, xData.server_id()), xData.server_name(), "Proxy Registered");
+				m_pLogModule->LogError(NFGUID(0, xData.server_id()), xData.server_name(), "Proxy Registered");
 			}
 		}
 	}
@@ -365,7 +365,7 @@ void NFWorldNet_ServerModule::OnProxyServerUnRegisteredProcess(const NFSOCK nSoc
 
         mGameMap.RemoveElement(xData.server_id());
 
-        m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFGUID(0, xData.server_id()), xData.server_name(), "Proxy UnRegistered");
+        m_pLogModule->LogInfo(NFGUID(0, xData.server_id()), xData.server_name(), "Proxy UnRegistered");
     }
 }
 
@@ -392,7 +392,7 @@ void NFWorldNet_ServerModule::OnRefreshProxyServerInfoProcess(const NFSOCK nSock
         pServerData->nFD = nSockIndex;
         *(pServerData->pData) = xData;
 
-        m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFGUID(0, xData.server_id()), xData.server_name(), "Proxy Registered");
+        m_pLogModule->LogInfo(NFGUID(0, xData.server_id()), xData.server_name(), "Proxy Registered");
 
         SynGameToProxy(nSockIndex);
     }
@@ -416,7 +416,7 @@ void NFWorldNet_ServerModule::OnDBServerRegisteredProcess(const NFSOCK nSockInde
 		{
 			std::ostringstream strLog;
 			strLog << "Cannot find current server, AppID = " << nCurAppID;
-			m_pLogModule->LogNormal(NFILogModule::NLL_ERROR_NORMAL, NULL_OBJECT, strLog, __FUNCTION__, __LINE__);
+			m_pLogModule->LogError(NULL_OBJECT, strLog, __FUNCTION__, __LINE__);
 
 			return;
 		}
@@ -447,11 +447,11 @@ void NFWorldNet_ServerModule::OnDBServerRegisteredProcess(const NFSOCK nSockInde
 				pServerData->nFD = nSockIndex;
 				*(pServerData->pData) = xData;
 
-				m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFGUID(0, xData.server_id()), xData.server_name(), "DBServerRegistered");
+				m_pLogModule->LogInfo(NFGUID(0, xData.server_id()), xData.server_name(), "DBServerRegistered");
 			}
 			else
 			{
-				m_pLogModule->LogNormal(NFILogModule::NLL_ERROR_NORMAL, NFGUID(0, xData.server_id()), xData.server_name(), "DBServerRegistered");
+				m_pLogModule->LogError(NFGUID(0, xData.server_id()), xData.server_name(), "DBServerRegistered");
 			}
 		}
 
@@ -474,7 +474,7 @@ void NFWorldNet_ServerModule::OnDBServerUnRegisteredProcess(const NFSOCK nSockIn
 
 		mDBMap.RemoveElement(xData.server_id());
 
-		m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFGUID(0, xData.server_id()), xData.server_name(), "Proxy UnRegistered");
+		m_pLogModule->LogInfo(NFGUID(0, xData.server_id()), xData.server_name(), "Proxy UnRegistered");
 	}
 }
 
@@ -501,7 +501,7 @@ void NFWorldNet_ServerModule::OnRefreshDBServerInfoProcess(const NFSOCK nSockInd
 		pServerData->nFD = nSockIndex;
 		*(pServerData->pData) = xData;
 
-		m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFGUID(0, xData.server_id()), xData.server_name(), "Proxy Registered");
+		m_pLogModule->LogInfo(NFGUID(0, xData.server_id()), xData.server_name(), "Proxy Registered");
 
 		SynDBToGame(nSockIndex);
 	}
@@ -511,22 +511,22 @@ void NFWorldNet_ServerModule::OnSocketEvent(const NFSOCK nSockIndex, const NF_NE
 {
     if (eEvent & NF_NET_EVENT_EOF)
     {
-        m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFGUID(0, nSockIndex), "NF_NET_EVENT_EOF", "Connection closed", __FUNCTION__, __LINE__);
+        m_pLogModule->LogInfo(NFGUID(0, nSockIndex), "NF_NET_EVENT_EOF Connection closed", __FUNCTION__, __LINE__);
         OnClientDisconnect(nSockIndex);
     }
     else if (eEvent & NF_NET_EVENT_ERROR)
     {
-        m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFGUID(0, nSockIndex), "NF_NET_EVENT_ERROR", "Got an error on the connection", __FUNCTION__, __LINE__);
+        m_pLogModule->LogInfo(NFGUID(0, nSockIndex), "NF_NET_EVENT_ERROR Got an error on the connection", __FUNCTION__, __LINE__);
         OnClientDisconnect(nSockIndex);
     }
     else if (eEvent & NF_NET_EVENT_TIMEOUT)
     {
-        m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFGUID(0, nSockIndex), "NF_NET_EVENT_TIMEOUT", "read timeout", __FUNCTION__, __LINE__);
+        m_pLogModule->LogInfo(NFGUID(0, nSockIndex), "NF_NET_EVENT_TIMEOUT read timeout", __FUNCTION__, __LINE__);
         OnClientDisconnect(nSockIndex);
     }
     else  if (eEvent & NF_NET_EVENT_CONNECTED)
     {
-        m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFGUID(0, nSockIndex), "NF_NET_EVENT_CONNECTED", "connected success", __FUNCTION__, __LINE__);
+        m_pLogModule->LogInfo(NFGUID(0, nSockIndex), "NF_NET_EVENT_CONNECTED connected success", __FUNCTION__, __LINE__);
         OnClientConnected(nSockIndex);
     }
 }
@@ -761,7 +761,7 @@ void NFWorldNet_ServerModule::LogGameServer()
 {
     mnLastCheckTime = GetPluginManager()->GetNowTime();
 
-    m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFGUID(), "--------------------Begin Log GameServer Info", "");
+    m_pLogModule->LogInfo(NFGUID(), "--------------------Begin Log GameServer Info", "");
 
     NF_SHARE_PTR<ServerData> pGameData = mGameMap.First();
     while (pGameData)
@@ -769,14 +769,14 @@ void NFWorldNet_ServerModule::LogGameServer()
         std::ostringstream stream;
         stream << "Type: " << pGameData->pData->server_type() << " ID: " << pGameData->pData->server_id() << " State: " <<  NFMsg::EServerState_Name(pGameData->pData->server_state()) << " IP: " << pGameData->pData->server_ip() << " FD: " << pGameData->nFD;
 
-        m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFGUID(), stream);
+        m_pLogModule->LogInfo(NFGUID(), stream);
 
         pGameData = mGameMap.Next();
     }
 
-    m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFGUID(), "--------------------End Log GameServer Info", "");
+    m_pLogModule->LogInfo(NFGUID(), "--------------------End Log GameServer Info", "");
 
-    m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFGUID(), "--------------------Begin Log ProxyServer Info", "");
+    m_pLogModule->LogInfo(NFGUID(), "--------------------Begin Log ProxyServer Info", "");
 
     pGameData = mProxyMap.First();
     while (pGameData)
@@ -784,15 +784,15 @@ void NFWorldNet_ServerModule::LogGameServer()
         std::ostringstream stream;
         stream << "Type: " << pGameData->pData->server_type() << " ID: " << pGameData->pData->server_id() << " State: " <<  NFMsg::EServerState_Name(pGameData->pData->server_state()) << " IP: " << pGameData->pData->server_ip() << " FD: " << pGameData->nFD;
 
-        m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFGUID(), stream);
+        m_pLogModule->LogInfo(NFGUID(), stream);
 
         pGameData = mProxyMap.Next();
     }
 
-    m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFGUID(), "--------------------End Log ProxyServer Info", "");
+    m_pLogModule->LogInfo(NFGUID(), "--------------------End Log ProxyServer Info", "");
 
 
-	m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFGUID(), "--------------------Begin Log DBServer Info", "");
+	m_pLogModule->LogInfo(NFGUID(), "--------------------Begin Log DBServer Info", "");
 
 	pGameData = mDBMap.First();
 	while (pGameData)
@@ -800,12 +800,12 @@ void NFWorldNet_ServerModule::LogGameServer()
 		std::ostringstream stream;
 		stream << "Type: " << pGameData->pData->server_type() << " ID: " << pGameData->pData->server_id() << " State: " << NFMsg::EServerState_Name(pGameData->pData->server_state()) << " IP: " << pGameData->pData->server_ip() << " FD: " << pGameData->nFD;
 
-		m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFGUID(), stream);
+		m_pLogModule->LogInfo(NFGUID(), stream);
 
 		pGameData = mDBMap.Next();
 	}
 
-	m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFGUID(), "--------------------End Log DBServer Info", "");
+	m_pLogModule->LogInfo(NFGUID(), "--------------------End Log DBServer Info", "");
 }
 
 
@@ -849,8 +849,7 @@ void NFWorldNet_ServerModule::OnOfflineProcess(const NFSOCK nSockIndex, const in
 
 }
 
-void NFWorldNet_ServerModule::OnTransmitServerReport(const NFSOCK nFd, const int msgId, const char *buffer,
-                                                      const uint32_t nLen)
+void NFWorldNet_ServerModule::OnTransmitServerReport(const NFSOCK nFd, const int msgId, const char *buffer, const uint32_t nLen)
 {
     NFGUID xGUID;
 	NFMsg::ServerInfoReport msg;
@@ -860,8 +859,26 @@ void NFWorldNet_ServerModule::OnTransmitServerReport(const NFSOCK nFd, const int
 	}
 
 
-	m_pNetClientModule->SendToAllServerByPB(NF_SERVER_TYPES::NF_ST_MASTER, NFMsg::STS_SERVER_REPORT, msg);
+	m_pNetClientModule->SendToAllServerByPB(NF_SERVER_TYPES::NF_ST_MASTER, NFMsg::STS_SERVER_REPORT, msg, NFGUID());
 
+}
+
+bool NFWorldNet_ServerModule::SendMsgToGame(const NFGUID nPlayer, const int msgID, const std::string& xData)
+{
+    NF_SHARE_PTR<PlayerData> playerData = mPlayersData.GetElement(nPlayer);
+    if (playerData)
+    {
+        NF_SHARE_PTR<ServerData> pData = mGameMap.GetElement(playerData->gameID);
+        if (pData)
+        {
+            const NFSOCK nFD = pData->nFD;
+            m_pNetModule->SendMsg(msgID, xData, nFD, nPlayer);
+
+            return true;
+        }
+    }
+
+    return false;
 }
 
 bool NFWorldNet_ServerModule::SendMsgToGame(const NFGUID nPlayer, const int msgID, google::protobuf::Message& xData)
@@ -977,7 +994,7 @@ void NFWorldNet_ServerModule::ServerReport(int reportServerId, NFMsg::EServerSta
 				reqMsg.set_server_type(nServerType);
 
 
-				m_pNetClientModule->SendToAllServerByPB(NF_SERVER_TYPES::NF_ST_MASTER, NFMsg::STS_SERVER_REPORT, reqMsg);
+				m_pNetClientModule->SendToAllServerByPB(NF_SERVER_TYPES::NF_ST_MASTER, NFMsg::STS_SERVER_REPORT, reqMsg, NFGUID());
 			}
 		}
 	}

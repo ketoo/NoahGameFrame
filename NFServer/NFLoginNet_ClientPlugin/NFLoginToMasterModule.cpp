@@ -140,7 +140,7 @@ void NFLoginToMasterModule::Register(NFINet* pNet)
                     int nTargetID = pServerData->nGameID;
 					m_pNetClientModule->SendToServerByPB(nTargetID, NFMsg::EGameMsgID::LTM_LOGIN_REGISTERED, xMsg);
 
-                    m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFGUID(0, pData->server_id()), pData->server_name(), "Register");
+                    m_pLogModule->LogInfo(NFGUID(0, pData->server_id()), pData->server_name(), "Register");
                 }
             }
         }
@@ -182,7 +182,7 @@ void NFLoginToMasterModule::ServerReport()
 				reqMsg.set_server_state(NFMsg::EST_NARMAL);
 				reqMsg.set_server_type(nServerType);
 
-				m_pNetClientModule->SendToAllServerByPB(NF_SERVER_TYPES::NF_ST_MASTER, NFMsg::STS_SERVER_REPORT, reqMsg);
+				m_pNetClientModule->SendToAllServerByPB(NF_SERVER_TYPES::NF_ST_MASTER, NFMsg::STS_SERVER_REPORT, reqMsg, NFGUID());
 			}
 		}
 	}
@@ -204,19 +204,19 @@ void NFLoginToMasterModule::OnSocketMSEvent(const NFSOCK nSockIndex, const NF_NE
 {
     if (eEvent & NF_NET_EVENT_EOF)
     {
-        m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFGUID(0, nSockIndex), "NF_NET_EVENT_EOF", "Connection closed", __FUNCTION__, __LINE__);
+        m_pLogModule->LogInfo(NFGUID(0, nSockIndex), "NF_NET_EVENT_EOF Connection closed", __FUNCTION__, __LINE__);
     }
     else if (eEvent & NF_NET_EVENT_ERROR)
     {
-        m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFGUID(0, nSockIndex), "NF_NET_EVENT_ERROR", "Got an error on the connection", __FUNCTION__, __LINE__);
+        m_pLogModule->LogInfo(NFGUID(0, nSockIndex), "NF_NET_EVENT_ERROR Got an error on the connection", __FUNCTION__, __LINE__);
     }
     else if (eEvent & NF_NET_EVENT_TIMEOUT)
     {
-        m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFGUID(0, nSockIndex), "NF_NET_EVENT_TIMEOUT", "read timeout", __FUNCTION__, __LINE__);
+        m_pLogModule->LogInfo(NFGUID(0, nSockIndex), "NF_NET_EVENT_TIMEOUT read timeout", __FUNCTION__, __LINE__);
     }
     else  if (eEvent & NF_NET_EVENT_CONNECTED)
     {
-        m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFGUID(0, nSockIndex), "NF_NET_EVENT_CONNECTED", "connected success", __FUNCTION__, __LINE__);
+        m_pLogModule->LogInfo(NFGUID(0, nSockIndex), "NF_NET_EVENT_CONNECTED connected success", __FUNCTION__, __LINE__);
         Register(pNet);
     }
 }
@@ -245,7 +245,7 @@ void NFLoginToMasterModule::OnWorldInfoProcess(const NFSOCK nSockIndex, const in
 
     }
 
-    m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFGUID(0, xMsg.server_list_size()), "", "WorldInfo");
+    m_pLogModule->LogInfo(NFGUID(0, xMsg.server_list_size()), "", "WorldInfo");
 }
 
 NFINetClientModule* NFLoginToMasterModule::GetClusterModule()

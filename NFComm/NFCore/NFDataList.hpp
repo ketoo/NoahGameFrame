@@ -91,45 +91,54 @@ public:
 
 	NFData(NFDATA_TYPE eType)
 	{
+		bind = true;
 		nType = eType;
 	}
 	
 	NFData(int value)
 	{
+		bind = true;
 		this->SetInt(value);
 	}
 	NFData(int64_t value)
 	{
+		bind = true;
 		this->SetInt(value);
 	}
 
 	NFData(float value)
 	{
+		bind = true;
 		this->SetFloat(value);
 	}
 
 	NFData(double value)
 	{
+		bind = true;
 		this->SetFloat(value);
 	}
 
 	NFData(NFGUID value)
 	{
+		bind = true;
 		this->SetObject(value);
 	}
 
 	NFData(NFVector2 value)
 	{
+		bind = true;
 		this->SetVector2(value);
 	}
 
 	NFData(NFVector3 value)
 	{
+		bind = true;
 		this->SetVector3(value);
 	}
 
 	NFData(const NFData& value)
 	{
+		bind = value.bind;
 		nType = value.nType;
 		variantData = value.variantData;
 	}
@@ -548,6 +557,7 @@ public:
 private:
 
 	NFDATA_TYPE nType;
+	bool bind = false;
 
 public:
 	//std::variant

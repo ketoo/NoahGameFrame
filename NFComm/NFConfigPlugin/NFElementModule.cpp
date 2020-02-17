@@ -292,9 +292,15 @@ bool NFElementModule::Load(rapidxml::xml_node<>* attrNode, NF_SHARE_PTR<NFIClass
         }
     }
 
-    NFData xData;
-    xData.SetString(pLogicClass->GetClassName());
-    pElementPropertyManager->SetProperty("ClassName", xData);
+    NFData xDataClassName;
+    xDataClassName.SetString(pLogicClass->GetClassName());
+    pElementPropertyManager->SetProperty("ClassName", xDataClassName);
+
+
+    NFData xDataID;
+    xDataID.SetString(strConfigID);
+    pElementPropertyManager->SetProperty("ID", xDataID);
+    pElementPropertyManager->SetProperty("ConfigID", xDataID);
 
     return true;
 }

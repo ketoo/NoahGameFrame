@@ -52,24 +52,24 @@ public:
 	virtual bool Shut();
 	virtual bool Execute();
 
-	virtual bool DoEvent(const NFEventDefine nEventID, const NFDataList& valueList);
+	virtual bool DoEvent(const int nEventID, const NFDataList& valueList);
 
-	virtual bool ExistEventCallBack(const NFEventDefine nEventID);
+	virtual bool ExistEventCallBack(const int nEventID);
 
-	virtual bool RemoveEventCallBack(const NFEventDefine nEventID);
+	virtual bool RemoveEventCallBack(const int nEventID);
 
 	//////////////////////////////////////////////////////////
-	virtual bool DoEvent(const NFGUID self, const NFEventDefine nEventID, const NFDataList& valueList);
+	virtual bool DoEvent(const NFGUID self, const int nEventID, const NFDataList& valueList);
 
-	virtual bool ExistEventCallBack(const NFGUID self, const NFEventDefine nEventID);
+	virtual bool ExistEventCallBack(const NFGUID self, const int nEventID);
 
-	virtual bool RemoveEventCallBack(const NFGUID self, const NFEventDefine nEventID);
+	virtual bool RemoveEventCallBack(const NFGUID self, const int nEventID);
 	virtual bool RemoveEventCallBack(const NFGUID self);
 
 protected:
 
-	virtual bool AddEventCallBack(const NFEventDefine nEventID, const MODULE_EVENT_FUNCTOR_PTR cb);
-	virtual bool AddEventCallBack(const NFGUID self, const NFEventDefine nEventID, const OBJECT_EVENT_FUNCTOR_PTR cb);
+	virtual bool AddEventCallBack(const int nEventID, const MODULE_EVENT_FUNCTOR cb);
+	virtual bool AddEventCallBack(const NFGUID self, const int nEventID, const OBJECT_EVENT_FUNCTOR cb);
 
 private:
 
@@ -77,12 +77,12 @@ private:
 
 private:
 	// for module
-	NFList<NFEventDefine> mModuleRemoveListEx;
-	NFMapEx<NFEventDefine, NFList<MODULE_EVENT_FUNCTOR_PTR>> mModuleEventInfoMapEx;
+	NFList<int> mModuleRemoveListEx;
+	NFMapEx<int, NFList<MODULE_EVENT_FUNCTOR>> mModuleEventInfoMapEx;
 
 	//for object
 	NFList<NFGUID> mObjectRemoveListEx;
-	NFMapEx<NFGUID, NFMapEx<NFEventDefine, NFList<OBJECT_EVENT_FUNCTOR_PTR>>> mObjectEventInfoMapEx;
+	NFMapEx<NFGUID, NFMapEx<int, NFList<OBJECT_EVENT_FUNCTOR>>> mObjectEventInfoMapEx;
 };
 
 #endif

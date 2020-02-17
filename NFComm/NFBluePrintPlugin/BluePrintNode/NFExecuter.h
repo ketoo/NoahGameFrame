@@ -42,8 +42,6 @@ public:
 		Init();
 	}
 
-
-
 	virtual void InitInputArgs()
 	{
 		{
@@ -112,12 +110,17 @@ public:
 		}
 	}
 
-	virtual void UpdateOutputData()
-	{
 
-	}
+	// Inherited via NFIExecuter
+	virtual void PrepareInputData() override;
+
+	virtual void UpdateOutputData() override;
+
+
+	// Inherited via NFIExecuter
+	virtual NF_SHARE_PTR<NFBluePrintNodeBase> FindNextNode() override;
+
 };
-
 
 class NFDestroyObjectExecuter : public NFIExecuter
 {
@@ -172,10 +175,17 @@ public:
 		}
 	}
 
-	virtual void UpdateOutputData()
-	{
 
-	}
+	// Inherited via NFIExecuter
+
+	virtual void PrepareInputData() override;
+
+	virtual void UpdateOutputData() override;
+
+
+	// Inherited via NFIExecuter
+	virtual NF_SHARE_PTR<NFBluePrintNodeBase> FindNextNode() override;
+
 };
 
 class NFMoveObjectExecuter : public NFIExecuter
@@ -194,8 +204,6 @@ public:
 
 		Init();
 	}
-
-
 
 	virtual void InitInputArgs()
 	{
@@ -248,10 +256,17 @@ public:
 		}
 	}
 
-	virtual void UpdateOutputData()
-	{
 
-	}
+	// Inherited via NFIExecuter
+
+	virtual void PrepareInputData() override;
+
+	virtual void UpdateOutputData() override;
+
+
+	// Inherited via NFIExecuter
+	virtual NF_SHARE_PTR<NFBluePrintNodeBase> FindNextNode() override;
+
 };
 
 class NFEnterSceneExecuter : public NFIExecuter
@@ -270,8 +285,6 @@ public:
 
 		Init();
 	}
-
-
 
 	virtual void InitInputArgs()
 	{
@@ -335,10 +348,17 @@ public:
 		}
 	}
 
-	virtual void UpdateOutputData()
-	{
 
-	}
+	// Inherited via NFIExecuter
+
+	virtual void PrepareInputData() override;
+
+	virtual void UpdateOutputData() override;
+
+
+	// Inherited via NFIExecuter
+	virtual NF_SHARE_PTR<NFBluePrintNodeBase> FindNextNode() override;
+
 };
 
 class NFAddHeartBeatExecuter : public NFIExecuter
@@ -420,10 +440,17 @@ public:
 		}
 	}
 
-	virtual void UpdateOutputData()
-	{
 
-	}
+	// Inherited via NFIExecuter
+
+	virtual void PrepareInputData() override;
+
+	virtual void UpdateOutputData() override;
+
+
+	// Inherited via NFIExecuter
+	virtual NF_SHARE_PTR<NFBluePrintNodeBase> FindNextNode() override;
+
 };
 
 class NFAttackObjectExecuter : public NFIExecuter
@@ -460,10 +487,17 @@ public:
 		}
 	}
 
-	virtual void UpdateOutputData()
-	{
 
-	}
+	// Inherited via NFIExecuter
+
+	virtual void PrepareInputData() override;
+
+	virtual void UpdateOutputData() override;
+
+
+	// Inherited via NFIExecuter
+	virtual NF_SHARE_PTR<NFBluePrintNodeBase> FindNextNode() override;
+
 };
 
 
@@ -501,10 +535,12 @@ public:
 		}
 	}
 
-	virtual void UpdateOutputData()
-	{
+	// Inherited via NFIExecuter
+	virtual void PrepareInputData() override;
+	virtual void UpdateOutputData() override;
 
-	}
+	// Inherited via NFIExecuter
+	virtual NF_SHARE_PTR<NFBluePrintNodeBase> FindNextNode() override;
 };
 
 
@@ -542,8 +578,10 @@ public:
 		}
 	}
 
-	virtual void UpdateOutputData()
-	{
+	// Inherited via NFIExecuter
+	virtual void PrepareInputData() override;
+	virtual void UpdateOutputData() override;
 
-	}
+	// Inherited via NFIExecuter
+	virtual NF_SHARE_PTR<NFBluePrintNodeBase> FindNextNode() override;
 };

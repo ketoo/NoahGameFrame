@@ -45,7 +45,7 @@ public:
 
 	}
 
-	virtual void InitInputArgs()
+	virtual void InitInputArgs() override
 	{
 		{
 			NF_SHARE_PTR<NFIOData> var = NF_SHARE_PTR<NFIOData>(NF_NEW NFIOData());
@@ -68,7 +68,7 @@ public:
 			NF_SHARE_PTR<NFIOData> var = NF_SHARE_PTR<NFIOData>(NF_NEW NFIOData());
 			var->id = this->pPluginManager->FindModule<NFIKernelModule>()->CreateGUID();
 			var->name = NFBranchInputArg::toString(NFBranchInputArg::Comparator);
-			var->valueType = NFValueType::String;
+			var->valueType = NFValueType::UNKNOW;
 			var->fromType = NFIODataComFromType::INTERNAL;
 
 			inputArgs.push_back(var);
@@ -84,7 +84,7 @@ public:
 		}
 	}
 
-	virtual void InitOutputArgs()
+	virtual void InitOutputArgs() override
 	{
 		{
 			NF_SHARE_PTR<NFIOData> var = NF_SHARE_PTR<NFIOData>(NF_NEW NFIOData());
@@ -104,10 +104,14 @@ public:
 		}
 	}
 
-	virtual void UpdateOutputData()
-	{
+	// Inherited via NFIBranch
+	virtual void PrepareInputData() override;
 
-	}
+	// Inherited via NFIBranch
+	virtual void UpdateOutputData() override;
+
+	// Inherited via NFIBranch
+	virtual NF_SHARE_PTR<NFBluePrintNodeBase> FindNextNode() override;
 };
 
 
@@ -145,7 +149,7 @@ public:
 			NF_SHARE_PTR<NFIOData> var = NF_SHARE_PTR<NFIOData>(NF_NEW NFIOData());
 			var->id = this->pPluginManager->FindModule<NFIKernelModule>()->CreateGUID();
 			var->name = NFBranchInputArg::toString(NFBranchInputArg::LeftInput);
-			var->valueType = NFValueType::String;
+			var->valueType = NFValueType::UNKNOW;
 			var->fromType = NFIODataComFromType::EXTERNAL;
 
 			inputArgs.push_back(var);
@@ -190,10 +194,12 @@ public:
 		}
 	}
 
-	virtual void UpdateOutputData()
-	{
+	// Inherited via NFIBranch
+	virtual void PrepareInputData() override;
+	virtual void UpdateOutputData() override;
 
-	}
+	// Inherited via NFIBranch
+	virtual NF_SHARE_PTR<NFBluePrintNodeBase> FindNextNode() override;
 };
 
 
@@ -240,7 +246,7 @@ public:
 			NF_SHARE_PTR<NFIOData> var = NF_SHARE_PTR<NFIOData>(NF_NEW NFIOData());
 			var->id = this->pPluginManager->FindModule<NFIKernelModule>()->CreateGUID();
 			var->name = NFBranchInputArg::toString(NFBranchInputArg::Comparator);
-			var->valueType = NFValueType::String;
+			var->valueType = NFValueType::UNKNOW;
 			var->fromType = NFIODataComFromType::INTERNAL;
 
 			inputArgs.push_back(var);
@@ -276,10 +282,12 @@ public:
 		}
 	}
 
-	virtual void UpdateOutputData()
-	{
+	// Inherited via NFIBranch
+	virtual void PrepareInputData() override;
+	virtual void UpdateOutputData() override;
 
-	}
+	// Inherited via NFIBranch
+	virtual NF_SHARE_PTR<NFBluePrintNodeBase> FindNextNode() override;
 };
 
 
@@ -326,7 +334,7 @@ public:
 			NF_SHARE_PTR<NFIOData> var = NF_SHARE_PTR<NFIOData>(NF_NEW NFIOData());
 			var->id = this->pPluginManager->FindModule<NFIKernelModule>()->CreateGUID();
 			var->name = NFBranchInputArg::toString(NFBranchInputArg::Comparator);
-			var->valueType = NFValueType::String;
+			var->valueType = NFValueType::UNKNOW;
 			var->fromType = NFIODataComFromType::INTERNAL;
 
 			inputArgs.push_back(var);
@@ -362,10 +370,12 @@ public:
 		}
 	}
 
-	virtual void UpdateOutputData()
-	{
+	// Inherited via NFIBranch
+	virtual void PrepareInputData() override;
+	virtual void UpdateOutputData() override;
 
-	}
+	// Inherited via NFIBranch
+	virtual NF_SHARE_PTR<NFBluePrintNodeBase> FindNextNode() override;
 };
 
 
@@ -413,7 +423,7 @@ public:
 			NF_SHARE_PTR<NFIOData> var = NF_SHARE_PTR<NFIOData>(NF_NEW NFIOData());
 			var->id = this->pPluginManager->FindModule<NFIKernelModule>()->CreateGUID();
 			var->name = NFBranchInputArg::toString(NFBranchInputArg::Comparator);
-			var->valueType = NFValueType::String;
+			var->valueType = NFValueType::UNKNOW;
 			var->fromType = NFIODataComFromType::INTERNAL;
 
 			inputArgs.push_back(var);
@@ -449,12 +459,17 @@ public:
 		}
 	}
 
-	virtual void UpdateOutputData()
-	{
 
-	}
+	// Inherited via NFIBranch
+	virtual void PrepareInputData() override;
+
+	virtual void UpdateOutputData() override;
+
+
+	// Inherited via NFIBranch
+	virtual NF_SHARE_PTR<NFBluePrintNodeBase> FindNextNode() override;
+
 };
-
 
 class NFVector3Branch : public NFIBranch
 {
@@ -499,7 +514,7 @@ public:
 			NF_SHARE_PTR<NFIOData> var = NF_SHARE_PTR<NFIOData>(NF_NEW NFIOData());
 			var->id = this->pPluginManager->FindModule<NFIKernelModule>()->CreateGUID();
 			var->name = NFBranchInputArg::toString(NFBranchInputArg::Comparator);
-			var->valueType = NFValueType::String;
+			var->valueType = NFValueType::UNKNOW;
 			var->fromType = NFIODataComFromType::INTERNAL;
 
 			inputArgs.push_back(var);
@@ -535,8 +550,14 @@ public:
 		}
 	}
 
-	virtual void UpdateOutputData()
-	{
 
-	}
+	// Inherited via NFIBranch
+	virtual void PrepareInputData() override;
+
+	virtual void UpdateOutputData() override;
+
+
+	// Inherited via NFIBranch
+	virtual NF_SHARE_PTR<NFBluePrintNodeBase> FindNextNode() override;
+
 };

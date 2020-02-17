@@ -25,6 +25,8 @@
 
 #include "NFNodeView.h"
 #include "NFUIModule.h"
+#define STB_IMAGE_IMPLEMENTATION
+#include "imgui/stb_image.h"
 
 void BEGIN_EDITOR(const std::string& name)
 {
@@ -45,12 +47,13 @@ void END_EDITOR()
 }
 
 
-void BEGIN_INPUT_PIN(int id)
+void BEGIN_INPUT_PIN(int id, NFPinShape shape)
 {
 #ifdef NODE_EXT
     ed::BeginPin(id, ed::PinKind::Input);
 #else
-    imnodes::BeginInputAttribute(id);
+    imnodes::BeginInputAttribute(id, (imnodes::PinShape)shape);
+    
 #endif
 }
 
@@ -63,12 +66,12 @@ void END_INPUT_PIN()
 #endif
 }
 
-void BEGIN_OUT_PIN(int id)
+void BEGIN_OUT_PIN(int id, NFPinShape shape)
 {
 #ifdef NODE_EXT
     ed::BeginPin(id, ed::PinKind::Output);
 #else
-    imnodes::BeginOutputAttribute(id);
+    imnodes::BeginOutputAttribute(id, (imnodes::PinShape)shape);
 #endif
 }
 
@@ -88,13 +91,14 @@ void SET_PIN_ICON(const int id, const std::string& iconPath)
 #endif
 }
 
-void BEGIN_NODE(const int id, const std::string& name)
+void BEGIN_NODE(const int id, const std::string& name, ImTextureID user_texture_id, const NFVector2& iconSize)
 {
 #ifdef NODE_EXT
     ed::BeginNode(id);
 #else
     imnodes::BeginNode(id);
-    imnodes::SetNodeName(id, name.c_str());
+	imnodes::SetNodeName(id, name.c_str());
+	imnodes::SetNodeICon(id, user_texture_id, ImVec2(iconSize.X(), iconSize.Y()));
 #endif
 }
 void END_NODE()
@@ -114,11 +118,11 @@ void NODE_LINK(const int linkId, const int startPinId, const int endPinId)
 #endif
 }
 
-void SET_NODE_DRAGABLE(const int id, const bool draggnable)
+void SET_NODE_DRAGGABLE(const int id, const bool draggable)
 {
 #ifdef NODE_EXT
 #else
-    imnodes::SetNodeDraggable(id, draggnable);
+    imnodes::SetNodeDraggable(id, draggable);
 #endif
 }
 
@@ -199,17 +203,82 @@ void POP_COLOR()
 }
 //////////////////////////
 
+
+bool LoadTextureFromFile(const char* filename, GLuint* out_texture, int* out_width, int* out_height)
+{
+    // Load from file
+    int image_width = 0;
+    int image_height = 0;
+    unsigned char* image_data = stbi_load(filename, &image_width, &image_height, NULL, 4);
+    if (image_data == NULL)
+        return false;
+
+    // Create a OpenGL texture identifier
+    GLuint image_texture;
+    glGenTextures(1, &image_texture);
+    glBindTexture(GL_TEXTURE_2D, image_texture);
+
+    // Setup filtering parameters for display
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+
+    // Upload pixels into texture
+    glPixelStorei(GL_UNPACK_ROW_LENGTH, 0);
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, image_width, image_height, 0, GL_RGBA, GL_UNSIGNED_BYTE, image_data);
+    stbi_image_free(image_data);
+
+    *out_texture = image_texture;
+    *out_width = image_width;
+    *out_height = image_height;
+
+    return true;
+}
+
+void ShowImage(const char* filename, int width, int height)
+{
+    int my_image_width = 0;
+    int my_image_height = 0;
+    GLuint my_image_texture = 0;
+    bool ret = LoadTextureFromFile(filename, &my_image_texture, &my_image_width, &my_image_height);
+    ImGui::Image((void*)(intptr_t)my_image_texture, ImVec2(width, height));
+}
+
 void NFNodePin::Execute()
 {
-   if (inputPin)
+	if (this->iconTextureId == nullptr
+	&& !this->image.empty())
+	{
+		int my_image_width = 0;
+		int my_image_height = 0;
+		GLuint my_image_texture = 0;
+		bool ret = LoadTextureFromFile(this->image.c_str(), &my_image_texture, &my_image_width, &my_image_height);
+
+		this->iconTextureId = (void*)(intptr_t)my_image_texture;
+	}
+
+   if (this->inputPin)
    {
         PUSH_COLOR(imnodes::ColorStyle::ColorStyle_Pin, color);
 
-        BEGIN_INPUT_PIN(id);
+        BEGIN_INPUT_PIN(id, shape);
 
         POP_COLOR();
 
-        ImGui::Text(this->name.c_str());
+        if (this->name.length() > 0)
+        {
+            //ShowImage(this->image.c_str(), 20, 20);
+			ImGui::Image(this->iconTextureId, ImVec2(this->imageSize.X(), this->imageSize.Y()));
+
+            ImGui::SameLine();
+            ImGui::PushItemWidth(60);
+            ImGui::Text(this->name.c_str());
+            ImGui::PopItemWidth();
+        }
+        else
+        {
+            ImGui::Text(this->name.c_str());
+        }
+
         this->nodeView->RenderForPin(this);
 
         END_INPUT_PIN();
@@ -218,27 +287,88 @@ void NFNodePin::Execute()
    {
        PUSH_COLOR(imnodes::ColorStyle::ColorStyle_Pin, color);
 
-        BEGIN_OUT_PIN(id);
+        BEGIN_OUT_PIN(id, shape);
 
         POP_COLOR();
 
         std::string str = "          ==>" + this->name;
-        ImGui::Text(str.c_str());
+        //ImGui::Text(str.c_str());
+        //ImGui::SameLine();
+        //ImGui::SetAlignment(ImGui_Alignment_Right);
+
+        ImGui::Indent(100);
+        ImGui::PushItemWidth(60);
+        ImGui::Text(this->name.c_str());
+        ImGui::PopItemWidth();
+
+        ImGui::SameLine();
+        ImGui::Indent(70);
+        ShowImage(this->image.c_str(), 20, 20);
+        ImGui::SameLine();
+
         this->nodeView->RenderForPin(this);
 
         END_OUT_PIN();
    }
 }
 
+void NFNodePin::UpdateShape()
+{
+    if (linkId.IsNull())
+    {
+        switch (shape)
+        {
+            case NFPinShape::PinShape_CircleFilled:
+                shape = NFPinShape::PinShape_Circle;
+                break;
+            case NFPinShape::PinShape_TriangleFilled:
+                shape = NFPinShape::PinShape_Triangle;
+                break;
+            case NFPinShape::PinShape_QuadFilled:
+                shape = NFPinShape::PinShape_Quad;
+                break;
+            default:
+                break;
+        }
+    }
+    else
+    {
+        switch (shape)
+        {
+            case NFPinShape::PinShape_Circle:
+                shape = NFPinShape::PinShape_CircleFilled;
+                break;
+            case NFPinShape::PinShape_Triangle:
+                shape = NFPinShape::PinShape_TriangleFilled;
+                break;
+            case NFPinShape::PinShape_Quad:
+                shape = NFPinShape::PinShape_QuadFilled;
+                break;
+            default:
+                break;
+        }
+    }
+}
+
 void NFNode::Execute()
 {
    //ImGui::PushItemWidth(200);
-   
+	if (this->iconTextureId == nullptr
+		&& !this->iconPath.empty())
+	{
+		int my_image_width = 0;
+		int my_image_height = 0;
+		GLuint my_image_texture = 0;
+		bool ret = LoadTextureFromFile(this->iconPath.c_str(), &my_image_texture, &my_image_width, &my_image_height);
+
+		this->iconTextureId = (void*)(intptr_t)my_image_texture;
+	}
+
     PUSH_COLOR(imnodes::ColorStyle::ColorStyle_TitleBar, color);
     PUSH_COLOR(imnodes::ColorStyle::ColorStyle_TitleBarHovered, color + 1000);
     PUSH_COLOR(imnodes::ColorStyle::ColorStyle_TitleBarSelected, color + 1000);
 
-    BEGIN_NODE(id, name);
+    BEGIN_NODE(id, name, this->iconTextureId, this->iconSize);
 
     POP_COLOR();
     POP_COLOR();
@@ -272,7 +402,7 @@ void NFNode::Execute()
 
    if (mAttris.size() > 0)
    {
-       ImGui::Button("", ImVec2(120, 1));
+       ImGui::Button("", ImVec2(220, 1));
    }
 
    this->nodeView->NodeRenderBeforePinOut(this);
@@ -300,6 +430,8 @@ NFNodeView::NFNodeView(NFIPluginManager* p) : NFIView(p, NFViewType::NONE, GET_C
     m_pEditorContext = ed::CreateEditor();
 #else
     m_pEditorContext = imnodes::EditorContextCreate();
+    imnodes::Style& nodeStyle = imnodes::GetStyle();
+    nodeStyle.pin_offset = 10.0f;
 #endif
 }
 
@@ -437,35 +569,39 @@ void NFNodeView::RenderLinks()
    }
 }
 
-void NFNodeView::AddNode(const NFGUID guid, const std::string& name, NFColor color, const NFVector2 vec)
+NF_SHARE_PTR<NFNode> NFNodeView::AddNode(const NFGUID guid, const std::string& name, NFColor color, const NFVector2 vec)
 {
    if (mNodes.find(guid) == mNodes.end())
    {
        auto node = NF_SHARE_PTR<NFNode>(NF_NEW NFNode(GenerateNodeId(), name, guid, vec, color));
        node->nodeView = this;
        mNodes.insert(std::pair<NFGUID, NF_SHARE_PTR<NFNode>>(guid, node));
+
+       return node;
    }
+
+   return nullptr;
 }
 
-void NFNodeView::AddPinIn(const NFGUID guid, const NFGUID attrId, const std::string& name, NFColor color)
+void NFNodeView::AddPinIn(const NFGUID guid, const NFGUID attrId, const std::string& name, const std::string& image, NFColor color, NFPinShape shape)
 {
    for (auto it : mNodes)
    {
       if (it.second->guid == guid)
       {
-         it.second->AddPin(GeneratePinId(), name, true, attrId, color);
+         it.second->AddPin(GeneratePinId(), name, image, true, attrId, color, shape);
          return;
       }
    }
 }
 
-void NFNodeView::AddPinOut(const NFGUID guid, const NFGUID attrId, const std::string& name, NFColor color)
+void NFNodeView::AddPinOut(const NFGUID guid, const NFGUID attrId, const std::string& name, const std::string& image, NFColor color, NFPinShape shape)
 {
    for (auto it : mNodes)
    {
       if (it.second->guid == guid)
       {
-         it.second->AddPin(GeneratePinId(), name, false, attrId, color);
+         it.second->AddPin(GeneratePinId(), name, image, false, attrId, color, shape);
          return;
       }
    }
@@ -501,8 +637,24 @@ void NFNodeView::AddLink(const NFGUID& selfID, const NFGUID& startNode, const NF
         return;
     }
 
-    auto link = NF_SHARE_PTR<NFDataLink>(NF_NEW NFDataLink(selfID, startNode, endNode, startPin, endPin, GenerateLinkId(), color));
-    mLinks.push_back(link);
+    auto startNodeObject = this->FindNode(startNode);
+    auto endNodeObject = this->FindNode(endNode);
+    if (startNodeObject && endNodeObject)
+    {
+        auto startPinObject = startNodeObject->GetPin(startPin);
+        auto endPinObject = endNodeObject->GetPin(endPin);
+        if (startPinObject && endPinObject)
+        {
+            startPinObject->linkId = selfID;
+            endPinObject->linkId = selfID;
+
+            startPinObject->UpdateShape();
+            endPinObject->UpdateShape();
+
+            auto link = NF_SHARE_PTR<NFDataLink>(NF_NEW NFDataLink(selfID, startNode, endNode, startPin, endPin, GenerateLinkId(), color));
+            mLinks.push_back(link);
+        }
+    }
 }
 
 NF_SHARE_PTR<NFDataLink> NFNodeView::GetLink(const NFGUID& startNode, const NFGUID& endNode, const NFGUID& startPin, const NFGUID& endPin)
@@ -544,7 +696,23 @@ void NFNodeView::DeleteLink(const NFGUID& startNode, const NFGUID& endNode, cons
             && (*it)->endAttr == endPin)
         {
             mLinks.erase(it);
-            return;
+            break;
+        }
+    }
+
+    auto startNodeObject = this->FindNode(startNode);
+    auto endNodeObject = this->FindNode(endNode);
+    if (startNodeObject && endNodeObject)
+    {
+        auto startPinObject = startNodeObject->GetPin(startPin);
+        auto endPinObject = endNodeObject->GetPin(endPin);
+        if (startPinObject && endPinObject)
+        {
+            startPinObject->linkId = NFGUID();
+            endPinObject->linkId = NFGUID();
+
+            startPinObject->UpdateShape();
+            endPinObject->UpdateShape();
         }
     }
 }
@@ -553,10 +721,29 @@ void NFNodeView::DeleteLink(const NFGUID& id)
 {
     for (auto it = mLinks.begin(); it != mLinks.end(); ++it)
     {
-        if ((*it)->selfID == id)
+        auto linkObject = (*it);
+        if (linkObject->selfID == id)
         {
             mLinks.erase(it);
-            return;
+
+
+            auto startNodeObject = this->FindNode(linkObject->startNode);
+            auto endNodeObject = this->FindNode(linkObject->endNode);
+            if (startNodeObject && endNodeObject)
+            {
+                auto startPinObject = startNodeObject->GetPin(linkObject->startAttr);
+                auto endPinObject = startNodeObject->GetPin(linkObject->endAttr);
+                if (startPinObject && endPinObject)
+                {
+                    startPinObject->linkId = NFGUID();
+                    endPinObject->linkId = NFGUID();
+
+                    startPinObject->UpdateShape();
+                    endPinObject->UpdateShape();
+                }
+            }
+
+            break;
         }
     }
 }
@@ -586,7 +773,7 @@ void NFNodeView::SetNodeDraggable(const NFGUID guid, const bool dragable)
         if (id >= 0)
         {
             SET_CURRENT_CONTEXT(m_pEditorContext);
-            SET_NODE_DRAGABLE(id, dragable);
+			SET_NODE_DRAGGABLE(id, dragable);
         }
     }
 }
@@ -604,7 +791,7 @@ void NFNodeView::SetNodePosition(const NFGUID guid, const NFVector2 vec)
     }
 }
 
-void NFNodeView::ResetOffest(const NFVector2& pos)
+void NFNodeView::ResetOffset(const NFVector2& pos)
 {
     SET_CURRENT_CONTEXT(m_pEditorContext);
    //imnodes::EditorContextResetPanning(ImVec2(pos.X(), pos.Y()));
@@ -727,4 +914,15 @@ const int NFNodeView::GetAttriID(const NFGUID guid)
    }
 
    return -1;
+}
+
+NF_SHARE_PTR<NFNode> NFNodeView::FindNode(const NFGUID guid)
+{
+    auto it = mNodes.find(guid);
+    if (it != mNodes.end())
+    {
+        return it->second;
+    }
+
+    return nullptr;
 }
