@@ -86,6 +86,8 @@ public:
         this->inputPin = inputPin;
         this->guid = guid;
         this->shape = shape;
+	   	iconTextureId = nullptr;
+	   	imageSize = NFVector2(20.0f, 20.0f);
    }
 
     void Execute();
@@ -96,6 +98,9 @@ public:
    bool inputPin;
    std::string name;
    std::string image;
+   NFVector2 imageSize;
+   void* iconTextureId;
+
    NFPinShape shape;
    NFGUID guid;
    NFGUID nodeId;
@@ -116,6 +121,8 @@ public:
       this->name = name;
       this->guid = guid;
       this->initPos = vec;
+      this->iconTextureId = nullptr;
+      this->iconSize = NFVector2(20.0f, 20.0f);
    }
 
 	void Execute();
@@ -177,12 +184,17 @@ public:
 
         return nullptr;
     }
+
    std::string name;
    int id;
    int color;
    NFGUID guid;
    NFVector2 initPos;
    NFNodeView* nodeView;
+
+   NFVector2 iconSize;
+   std::string iconPath;
+   void* iconTextureId;
 
    std::list<NF_SHARE_PTR<NFNodePin>> mAttris;
 
@@ -224,7 +236,7 @@ public:
    const NFGUID GetAttriGUID(const int attriId);
    const int GetAttriID(const NFGUID guid);
 
-   void AddNode(const NFGUID guid, const std::string& name, NFColor color = NFColor::DEFAULT, const NFVector2 vec = NFVector2());
+	NF_SHARE_PTR<NFNode> AddNode(const NFGUID guid, const std::string& name, NFColor color = NFColor::DEFAULT, const NFVector2 vec = NFVector2());
    void AddPinIn(const NFGUID guid, const NFGUID attrId, const std::string& name, const std::string& image, NFColor color = NFColor::PININ, NFPinShape shape = NFPinShape::PinShape_Circle);
    void AddPinOut(const NFGUID guid, const NFGUID attrId, const std::string& name, const std::string& image, NFColor color = NFColor::PINOUT, NFPinShape shape = NFPinShape::PinShape_Circle);
    void ModifyPinColor(const NFGUID attrId, NFColor color);

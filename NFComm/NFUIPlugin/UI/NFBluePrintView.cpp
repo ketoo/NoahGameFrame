@@ -334,7 +334,8 @@ void NFBluePrintView::AddNode(NF_SHARE_PTR<NFBluePrintNodeBase> node)
 	{
 		NFColor color = GetBackGroundColor(node->blueprintType);
 
-		m_pNodeView->AddNode(node->id, node->name, color, NFVector2(0, 0));
+		auto nodeUI = m_pNodeView->AddNode(node->id, node->name, color, NFVector2(0, 0));
+		nodeUI->iconPath = variableObjectImage;
 
 		for (int i = 0; i < node->GetInputArgCount(); ++i)
 		{

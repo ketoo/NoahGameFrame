@@ -91,13 +91,14 @@ void SET_PIN_ICON(const int id, const std::string& iconPath)
 #endif
 }
 
-void BEGIN_NODE(const int id, const std::string& name)
+void BEGIN_NODE(const int id, const std::string& name, ImTextureID user_texture_id, const NFVector2& iconSize)
 {
 #ifdef NODE_EXT
     ed::BeginNode(id);
 #else
     imnodes::BeginNode(id);
-    imnodes::SetNodeName(id, name.c_str());
+	imnodes::SetNodeName(id, name.c_str());
+	imnodes::SetNodeICon(id, user_texture_id, ImVec2(iconSize.X(), iconSize.Y()));
 #endif
 }
 void END_NODE()
@@ -117,11 +118,11 @@ void NODE_LINK(const int linkId, const int startPinId, const int endPinId)
 #endif
 }
 
-void SET_NODE_DRAGABLE(const int id, const bool draggnable)
+void SET_NODE_DRAGGABLE(const int id, const bool draggable)
 {
 #ifdef NODE_EXT
 #else
-    imnodes::SetNodeDraggable(id, draggnable);
+    imnodes::SetNodeDraggable(id, draggable);
 #endif
 }
 
@@ -244,6 +245,17 @@ void ShowImage(const char* filename, int width, int height)
 
 void NFNodePin::Execute()
 {
+	if (this->iconTextureId == nullptr
+	&& !this->image.empty())
+	{
+		int my_image_width = 0;
+		int my_image_height = 0;
+		GLuint my_image_texture = 0;
+		bool ret = LoadTextureFromFile(this->image.c_str(), &my_image_texture, &my_image_width, &my_image_height);
+
+		this->iconTextureId = (void*)(intptr_t)my_image_texture;
+	}
+
    if (this->inputPin)
    {
         PUSH_COLOR(imnodes::ColorStyle::ColorStyle_Pin, color);
@@ -254,7 +266,9 @@ void NFNodePin::Execute()
 
         if (this->name.length() > 0)
         {
-            ShowImage(this->image.c_str(), 20, 20);
+            //ShowImage(this->image.c_str(), 20, 20);
+			ImGui::Image(this->iconTextureId, ImVec2(this->imageSize.X(), this->imageSize.Y()));
+
             ImGui::SameLine();
             ImGui::PushItemWidth(60);
             ImGui::Text(this->name.c_str());
@@ -339,12 +353,22 @@ void NFNodePin::UpdateShape()
 void NFNode::Execute()
 {
    //ImGui::PushItemWidth(200);
-   
+	if (this->iconTextureId == nullptr
+		&& !this->iconPath.empty())
+	{
+		int my_image_width = 0;
+		int my_image_height = 0;
+		GLuint my_image_texture = 0;
+		bool ret = LoadTextureFromFile(this->iconPath.c_str(), &my_image_texture, &my_image_width, &my_image_height);
+
+		this->iconTextureId = (void*)(intptr_t)my_image_texture;
+	}
+
     PUSH_COLOR(imnodes::ColorStyle::ColorStyle_TitleBar, color);
     PUSH_COLOR(imnodes::ColorStyle::ColorStyle_TitleBarHovered, color + 1000);
     PUSH_COLOR(imnodes::ColorStyle::ColorStyle_TitleBarSelected, color + 1000);
 
-    BEGIN_NODE(id, name);
+    BEGIN_NODE(id, name, this->iconTextureId, this->iconSize);
 
     POP_COLOR();
     POP_COLOR();
@@ -545,14 +569,18 @@ void NFNodeView::RenderLinks()
    }
 }
 
-void NFNodeView::AddNode(const NFGUID guid, const std::string& name, NFColor color, const NFVector2 vec)
+NF_SHARE_PTR<NFNode> NFNodeView::AddNode(const NFGUID guid, const std::string& name, NFColor color, const NFVector2 vec)
 {
    if (mNodes.find(guid) == mNodes.end())
    {
        auto node = NF_SHARE_PTR<NFNode>(NF_NEW NFNode(GenerateNodeId(), name, guid, vec, color));
        node->nodeView = this;
        mNodes.insert(std::pair<NFGUID, NF_SHARE_PTR<NFNode>>(guid, node));
+
+       return node;
    }
+
+   return nullptr;
 }
 
 void NFNodeView::AddPinIn(const NFGUID guid, const NFGUID attrId, const std::string& name, const std::string& image, NFColor color, NFPinShape shape)
@@ -745,7 +773,7 @@ void NFNodeView::SetNodeDraggable(const NFGUID guid, const bool dragable)
         if (id >= 0)
         {
             SET_CURRENT_CONTEXT(m_pEditorContext);
-            SET_NODE_DRAGABLE(id, dragable);
+			SET_NODE_DRAGGABLE(id, dragable);
         }
     }
 }

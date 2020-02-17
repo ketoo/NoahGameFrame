@@ -156,7 +156,9 @@ struct NodeData
     char name[NODE_NAME_STR_LEN];
     ImVec2 origin;
     ImVec2 title_text_size;
-    ImRect rect;
+	ImRect rect;
+	ImTextureID icon_texture_id;
+	ImVec2 icon_size;
 
     struct
     {
@@ -176,11 +178,12 @@ struct NodeData
 
     NodeData()
         : id(0u),
-          name(
+		  name(
               "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0"),
-          origin(100.0f, 100.0f), title_text_size(0.f, 0.f),
-          rect(ImVec2(0.0f, 0.0f), ImVec2(0.0f, 0.0f)), color_style(),
-          layout_style(), attribute_rects(), pin_indices(), draggable(true)
+		  origin(100.0f, 100.0f), title_text_size(0.f, 0.f),
+		  rect(ImVec2(0.0f, 0.0f), ImVec2(0.0f, 0.0f)), color_style(),
+		  layout_style(), attribute_rects(), pin_indices(), draggable(true),
+		  icon_texture_id(nullptr), icon_size(0.0f, 0.0f)
     {
     }
 };
@@ -1151,8 +1154,18 @@ void draw_node(EditorContext& editor, int node_idx)
                 titlebar_background,
                 node.layout_style.corner_rounding,
                 ImDrawCornerFlags_Top);
-            ImGui::SetCursorPos(
-                grid_space_to_editor_space(get_node_title_origin(node)));
+
+            if (node.icon_texture_id)
+			{
+				ImGui::SetCursorPos(grid_space_to_editor_space(get_node_title_origin(node)));
+				ImGui::Image(node.icon_texture_id, node.icon_size);
+                ImGui::SetCursorPos(grid_space_to_editor_space(get_node_title_origin(node)) + ImVec2(node.icon_size.x, 0.0f));
+			}
+            else
+            {
+                ImGui::SetCursorPos(grid_space_to_editor_space(get_node_title_origin(node)));
+            }
+
             ImGui::PushItemWidth(title_rect.Max.x - title_rect.Min.x);
             ImGui::TextUnformatted(node.name);
             ImGui::PopItemWidth();
@@ -1828,6 +1841,15 @@ void SetNodeDraggable(int node_id, const bool draggable)
     EditorContext& editor = editor_context_get();
     NodeData& node = editor.nodes.find_or_create_new(node_id);
     node.draggable = draggable;
+}
+
+void SetNodeICon(int node_id, void* user_texture_id, const ImVec2& icon_size)
+{
+	assert(initialized);
+	EditorContext& editor = editor_context_get();
+	NodeData& node = editor.nodes.find_or_create_new(node_id);
+	node.icon_texture_id = user_texture_id;
+	node.icon_size = icon_size;
 }
 
 bool IsNodeHovered(int* const node_id)
