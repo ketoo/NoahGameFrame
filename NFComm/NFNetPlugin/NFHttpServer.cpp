@@ -171,17 +171,7 @@ void NFHttpServer::listener_cb(struct evhttp_request* req, void* arg)
 	}
 
 	pRequest->url = uri;
-	const char* hostname = evhttp_request_get_host(req);
-	if (hostname != NULL)
-	{
-		//evhttp_find_vhost(http, &http, hostname);
-		pRequest->remoteHost = hostname;
-	}
-	else
-	{
-		LOG(ERROR) << "hostname ==NULL" << " " << __FUNCTION__ << " " << __LINE__;
-	}
-
+	pRequest->remoteHost = req->remote_host;
 	pRequest->type = (NFHttpType)evhttp_request_get_command(req);
 
 	//get decodeUri
