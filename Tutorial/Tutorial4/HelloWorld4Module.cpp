@@ -233,8 +233,8 @@ bool NFHelloWorld4Module::AfterInit()
 		std::cout << "Test for actor mode" << std::endl;
 		int timeStart = NFGetTimeMS();
 
-		NFGUID actorID1 = m_pActorModule->RequireActor();
-		m_pActorModule->AddComponent<NFHttpComponent>(actorID1);
+		auto actorID1 = m_pActorModule->RequireActor();
+		m_pActorModule->AddComponent<NFHttpComponent>(actorID1->ID());
 		
 		for (int i = 0; i < 5; ++i)
 		{
@@ -251,7 +251,7 @@ bool NFHelloWorld4Module::AfterInit()
 
 		for (int i = 0; i < messageCount; ++i)
 		{
-			m_pActorModule->SendMsgToActor(actorID1, i, "test");
+			m_pActorModule->SendMsgToActor(actorID1->ID(), i, "test");
 			//m_pActorModule->SendMsgToActor(actorID1, i, std::to_string(i*i));
 		}
 
