@@ -25,11 +25,11 @@
 
 #include "NFVariable.h"
 
-void NFInputVariable::PrepareInputData()
+void NFInputVariable::PrepareInputData(const NFGUID& runTimeOnwer, const bool iteration)
 {
 }
 
-void NFInputVariable::UpdateOutputData()
+void NFInputVariable::UpdateOutputData(const NFGUID& runTimeOnwer, const bool iteration)
 {
 	NF_SHARE_PTR<NFIOData> inputData = GetInputArg(0);
 	NF_SHARE_PTR<NFIOData> outputData = GetOutputArg(0);
@@ -37,29 +37,29 @@ void NFInputVariable::UpdateOutputData()
 	outputData->varData = inputData->varData;
 }
 
-NF_SHARE_PTR<NFBluePrintNodeBase> NFInputVariable::FindNextNode()
+NF_SHARE_PTR<NFIOData> NFInputVariable::FindOutputNodeIOData()
 {
-	return NF_SHARE_PTR<NFBluePrintNodeBase>();
+	return NF_SHARE_PTR<NFIOData>();
 }
 
-void NFRecordVariable::PrepareInputData()
-{
-}
-
-void NFRecordVariable::UpdateOutputData()
+void NFRecordVariable::PrepareInputData(const NFGUID& runTimeOnwer, const bool iteration)
 {
 }
 
-NF_SHARE_PTR<NFBluePrintNodeBase> NFRecordVariable::FindNextNode()
-{
-	return NF_SHARE_PTR<NFBluePrintNodeBase>();
-}
-
-void NFElementVariable::PrepareInputData()
+void NFRecordVariable::UpdateOutputData(const NFGUID& runTimeOnwer, const bool iteration)
 {
 }
 
-void NFElementVariable::UpdateOutputData()
+NF_SHARE_PTR<NFIOData> NFRecordVariable::FindOutputNodeIOData()
+{
+	return NF_SHARE_PTR<NFIOData>();
+}
+
+void NFElementVariable::PrepareInputData(const NFGUID& runTimeOnwer, const bool iteration)
+{
+}
+
+void NFElementVariable::UpdateOutputData(const NFGUID& runTimeOnwer, const bool iteration)
 {
 	NF_SHARE_PTR<NFIOData> className = GetInputArg(NFElementVariableInputArg::toString(NFElementVariableInputArg::ClassName));
 	NF_SHARE_PTR<NFIOData> configID = GetInputArg(NFElementVariableInputArg::toString(NFElementVariableInputArg::ConfigID));
@@ -131,16 +131,16 @@ void NFElementVariable::UpdateOutputData()
 	}
 }
 
-NF_SHARE_PTR<NFBluePrintNodeBase> NFElementVariable::FindNextNode()
+NF_SHARE_PTR<NFIOData> NFElementVariable::FindOutputNodeIOData()
 {
-	return NF_SHARE_PTR<NFBluePrintNodeBase>();
+	return NF_SHARE_PTR<NFIOData>();
 }
 
-void NFPropertyVariable::PrepareInputData()
+void NFPropertyVariable::PrepareInputData(const NFGUID& runTimeOnwer, const bool iteration)
 {
 }
 
-void NFPropertyVariable::UpdateOutputData()
+void NFPropertyVariable::UpdateOutputData(const NFGUID& runTimeOnwer, const bool iteration)
 {
 	NF_SHARE_PTR<NFIOData> className = GetInputArg(NFPropertyVariableInputArg::toString(NFPropertyVariableInputArg::ClassName));
 	NF_SHARE_PTR<NFIOData> propertyName = GetInputArg(NFPropertyVariableInputArg::toString(NFPropertyVariableInputArg::PropName));
@@ -215,16 +215,16 @@ void NFPropertyVariable::UpdateOutputData()
 	}
 }
 
-NF_SHARE_PTR<NFBluePrintNodeBase> NFPropertyVariable::FindNextNode()
+NF_SHARE_PTR<NFIOData> NFPropertyVariable::FindOutputNodeIOData()
 {
-	return NF_SHARE_PTR<NFBluePrintNodeBase>();
+	return NF_SHARE_PTR<NFIOData>();
 }
 
-void NFPropertyListVariable::PrepareInputData()
+void NFPropertyListVariable::PrepareInputData(const NFGUID& runTimeOnwer, const bool iteration)
 {
 }
 
-void NFPropertyListVariable::UpdateOutputData()
+void NFPropertyListVariable::UpdateOutputData(const NFGUID& runTimeOnwer, const bool iteration)
 {
 
 	NF_SHARE_PTR<NFIOData> className = GetInputArg(NFPropertyListVariableInputArg::toString(NFPropertyListVariableInputArg::ClassName));
@@ -250,33 +250,33 @@ void NFPropertyListVariable::UpdateOutputData()
 	}
 }
 
-NF_SHARE_PTR<NFBluePrintNodeBase> NFPropertyListVariable::FindNextNode()
+NF_SHARE_PTR<NFIOData> NFPropertyListVariable::FindOutputNodeIOData()
 {
-	return NF_SHARE_PTR<NFBluePrintNodeBase>();
+	return NF_SHARE_PTR<NFIOData>();
 }
 
-void NFArrayVariable::PrepareInputData()
-{
-}
-
-void NFArrayVariable::UpdateOutputData()
+void NFArrayVariable::PrepareInputData(const NFGUID& runTimeOnwer, const bool iteration)
 {
 }
 
-NF_SHARE_PTR<NFBluePrintNodeBase> NFArrayVariable::FindNextNode()
-{
-	return NF_SHARE_PTR<NFBluePrintNodeBase>();
-}
-
-void NFDictionaryVariable::PrepareInputData()
+void NFArrayVariable::UpdateOutputData(const NFGUID& runTimeOnwer, const bool iteration)
 {
 }
 
-void NFDictionaryVariable::UpdateOutputData()
+NF_SHARE_PTR<NFIOData> NFArrayVariable::FindOutputNodeIOData()
+{
+	return NF_SHARE_PTR<NFIOData>();
+}
+
+void NFDictionaryVariable::PrepareInputData(const NFGUID& runTimeOnwer, const bool iteration)
 {
 }
 
-NF_SHARE_PTR<NFBluePrintNodeBase> NFDictionaryVariable::FindNextNode()
+void NFDictionaryVariable::UpdateOutputData(const NFGUID& runTimeOnwer, const bool iteration)
 {
-	return NF_SHARE_PTR<NFBluePrintNodeBase>();
+}
+
+NF_SHARE_PTR<NFIOData> NFDictionaryVariable::FindOutputNodeIOData()
+{
+	return NF_SHARE_PTR<NFIOData>();
 }

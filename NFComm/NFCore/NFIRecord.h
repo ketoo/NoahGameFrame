@@ -60,10 +60,10 @@ struct RECORD_EVENT_DATA
 typedef std::function<int(const NFGUID&, const RECORD_EVENT_DATA&, const NFData&, const NFData&)> RECORD_EVENT_FUNCTOR;
 typedef NF_SHARE_PTR<RECORD_EVENT_FUNCTOR> RECORD_EVENT_FUNCTOR_PTR;
 
-class _NFExport NFIRecord :public NFMemoryCounter<NFIRecord>
+class _NFExport NFIRecord :public NFMemoryCounter
 {
 public:
-    NFIRecord() : NFMemoryCounter(GET_CLASS_NAME(NFIRecord))
+    NFIRecord() : NFMemoryCounter(GET_CLASS_NAME(NFIRecord), 1)
 	{
 	}
 

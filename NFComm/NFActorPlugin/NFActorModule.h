@@ -54,7 +54,7 @@ public:
 
     virtual bool Execute();
 
-	virtual NFGUID RequireActor();
+	virtual NF_SHARE_PTR<NFIActor> RequireActor();
 	virtual NF_SHARE_PTR<NFIActor> GetActor(const NFGUID nActorIndex);
 	virtual bool ReleaseActor(const NFGUID nActorIndex);
 
@@ -64,11 +64,6 @@ public:
 
 protected:
 	virtual bool AddEndFunc(const int subMessageID, ACTOR_PROCESS_FUNCTOR_PTR functorPtr_end);
-
-    virtual bool AddComponent(const NFGUID nActorIndex, NF_SHARE_PTR<NFIComponent> pComponent);
-	virtual bool RemoveComponent(const NFGUID nActorIndex, const std::string& strComponentName);
-	virtual NF_SHARE_PTR<NFIComponent> FindComponent(const NFGUID nActorIndex, const std::string& strComponentName);
-
 
 	virtual bool ExecuteEvent();
 	virtual bool ExecuteResultEvent();

@@ -316,7 +316,7 @@ NF_SHARE_PTR<NFIBranch> NFBluePrintModule::AddBranch(const NFGUID& logicBlockId,
 			branch = NF_SHARE_PTR<NFIBranch>(NF_NEW NFStringBranch(this->pPluginManager, logicBlockId, id, name));
 			break;
 		case NFBranchType::FloatBranch:
-			branch = NF_SHARE_PTR<NFIBranch>(NF_NEW NFFloatgBranch(this->pPluginManager, logicBlockId, id, name));
+			branch = NF_SHARE_PTR<NFIBranch>(NF_NEW NFFloatBranch(this->pPluginManager, logicBlockId, id, name));
 			break;
 		case NFBranchType::ObjectBranch:
 			branch = NF_SHARE_PTR<NFIBranch>(NF_NEW NFObjectBranch(this->pPluginManager, logicBlockId, id, name));

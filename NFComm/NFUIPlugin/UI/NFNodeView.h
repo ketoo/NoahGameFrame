@@ -29,13 +29,7 @@
 #include "NFComm/NFPluginModule/NFIUIModule.h"
 #include "NFComm/NFPluginModule/NFIBluePrintModule.h"
 
-//#define NODE_EXT
-#ifdef NODE_EXT
-#include "imgui/NodeEditor/Include/imgui_node_editor.h"
-namespace ed = ax::NodeEditor;
-#else
 #include "imgui/imnodes.h"
-#endif
 
 /*https://www.rapidtables.com/web/color/RGB_Color.html
 */

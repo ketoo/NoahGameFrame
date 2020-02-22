@@ -43,8 +43,6 @@ inline ImVec2 operator*(const ImVec2& lhs, const float rhs)
     return ImVec2(lhs.x * rhs, lhs.y * rhs);
 }
 
-static const size_t NODE_NAME_STR_LEN = 32u;
-
 static const int INVALID_INDEX = -1;
 
 bool initialized = false;
@@ -153,12 +151,9 @@ struct ObjectPool
 struct NodeData
 {
     int id;
-    char name[NODE_NAME_STR_LEN];
-    ImVec2 origin;
-    ImVec2 title_text_size;
-	ImRect rect;
-	ImTextureID icon_texture_id;
-	ImVec2 icon_size;
+    ImVec2 origin; // The node origin is in editor space
+    ImRect title_bar_content_rect;
+    ImRect rect;
 
     struct
     {
@@ -177,13 +172,9 @@ struct NodeData
     bool draggable;
 
     NodeData()
-        : id(0u),
-		  name(
-              "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0"),
-		  origin(100.0f, 100.0f), title_text_size(0.f, 0.f),
-		  rect(ImVec2(0.0f, 0.0f), ImVec2(0.0f, 0.0f)), color_style(),
-		  layout_style(), attribute_rects(), pin_indices(), draggable(true),
-		  icon_texture_id(nullptr), icon_size(0.0f, 0.0f)
+        : id(0), origin(100.0f, 100.0f), title_bar_content_rect(),
+          rect(ImVec2(0.0f, 0.0f), ImVec2(0.0f, 0.0f)), color_style(),
+          layout_style(), attribute_rects(), pin_indices(), draggable(true)
     {
     }
 };
@@ -889,51 +880,19 @@ inline ImRect get_item_rect()
     return ImRect(ImGui::GetItemRectMin(), ImGui::GetItemRectMax());
 }
 
-inline ImVec2 get_node_title_origin(const NodeData& node)
+inline ImVec2 get_node_title_bar_origin(const NodeData& node)
 {
     return node.origin + node.layout_style.padding;
 }
 
 inline ImVec2 get_node_content_origin(const NodeData& node)
 {
-    ImVec2 title_rect_height =
-        ImVec2(0.f, node.title_text_size.y + 2.f * node.layout_style.padding.y);
-    return node.origin + node.layout_style.padding + title_rect_height;
-}
 
-// The node width is either the content width, or title bar width, whichever
-// is larger.
-inline ImRect get_screen_space_title_bar_rect(const NodeData& node)
-{
-    const ImVec2 ss_origin = grid_space_to_screen_space(node.origin);
-    const ImVec2& min = ss_origin;
-    // NOTE: the content rect is already offset from the node grid origin by 1 x
-    // node.padding due to setting the cursor taking node padding into
-    // account.
-    const ImVec2 max = ImVec2(
-        node.rect.Max.x,
-        ss_origin.y + node.title_text_size.y +
-            2.f * node.layout_style.padding.y);
-    return ImRect(min, max);
-}
-
-// This currently computes the node rect width by taking either the
-// content width, or title bar width, whichever is larger.
-inline ImRect get_screen_space_node_rect(
-    const NodeData& node,
-    const ImRect& node_body_rect)
-{
-    const ImVec2 text_size = node.title_text_size;
-    const float max_width =
-        ImMax(node_body_rect.Min.x + text_size.x, node_body_rect.Max.x);
-    // apply the node padding on the top and bottom of the text
-    const float text_height = text_size.y + 2.f * node.layout_style.padding.y;
-
-    ImRect rect = node_body_rect;
-    rect.Max.x = max_width;
-    rect.Expand(node.layout_style.padding);
-    rect.Min.y = rect.Min.y - text_height;
-    return rect;
+    const ImVec2 title_bar_height = ImVec2(
+        0.f,
+        node.title_bar_content_rect.GetHeight() +
+            2.0f * node.layout_style.padding.y);
+    return node.origin + title_bar_height + node.layout_style.padding;
 }
 
 void draw_grid(EditorContext& editor, const ImVec2& canvas_size)
@@ -1112,7 +1071,11 @@ void draw_node(EditorContext& editor, int node_idx)
     const NodeData& node = editor.nodes.pool[node_idx];
 
     ImGui::SetCursorPos(node.origin + editor.panning);
-    ImGui::InvisibleButton(node.name, node.rect.GetSize());
+    // InvisibleButton's str_id can be left empty if we push our own
+    // id on the stack.
+    ImGui::PushID(node.id);
+    ImGui::InvisibleButton("", node.rect.GetSize());
+    ImGui::PopID();
 
     if (ImGui::IsItemHovered())
     {
@@ -1146,30 +1109,24 @@ void draw_node(EditorContext& editor, int node_idx)
             node.layout_style.corner_rounding);
 
         // title bar:
+        if (node.title_bar_content_rect.GetHeight() > 0.f)
         {
-            ImRect title_rect = get_screen_space_title_bar_rect(node);
+            ImRect expanded_title_rect = node.title_bar_content_rect;
+            expanded_title_rect.Expand(node.layout_style.padding);
+
+            ImRect title_bar_rect = ImRect(
+                expanded_title_rect.Min,
+                expanded_title_rect.Min + ImVec2(node.rect.GetWidth(), 0.f) +
+                    ImVec2(0.f, expanded_title_rect.GetHeight()));
+
             g.canvas_draw_list->AddRectFilled(
-                title_rect.Min,
-                title_rect.Max,
+                title_bar_rect.Min,
+                title_bar_rect.Max,
                 titlebar_background,
                 node.layout_style.corner_rounding,
                 ImDrawCornerFlags_Top);
-
-            if (node.icon_texture_id)
-			{
-				ImGui::SetCursorPos(grid_space_to_editor_space(get_node_title_origin(node)));
-				ImGui::Image(node.icon_texture_id, node.icon_size);
-                ImGui::SetCursorPos(grid_space_to_editor_space(get_node_title_origin(node)) + ImVec2(node.icon_size.x, 0.0f));
-			}
-            else
-            {
-                ImGui::SetCursorPos(grid_space_to_editor_space(get_node_title_origin(node)));
-            }
-
-            ImGui::PushItemWidth(title_rect.Max.x - title_rect.Min.x);
-            ImGui::TextUnformatted(node.name);
-            ImGui::PopItemWidth();
         }
+
         if ((g.style.flags & StyleFlags_NodeOutline) != 0)
         {
             g.canvas_draw_list->AddRect(
@@ -1670,12 +1627,11 @@ void BeginNode(const int node_id)
     // (in this case, the child object started in BeginNodeEditor). Use
     // ImGui::SetCursorScreenPos to set the screen space coordinates directly.
     ImGui::SetCursorPos(
-        grid_space_to_editor_space(get_node_content_origin(node)));
+        grid_space_to_editor_space(get_node_title_bar_origin(node)));
 
     g.canvas_draw_list->ChannelsSplit(Channels_Count);
     g.canvas_draw_list->ChannelsSetCurrent(Channels_ImGui);
 
-    ImGui::PushID(node_id);
     ImGui::BeginGroup();
 }
 
@@ -1688,10 +1644,10 @@ void EndNode()
 
     // The node's rectangle depends on the ImGui UI group size.
     ImGui::EndGroup();
-    ImGui::PopID();
     {
         NodeData& node = editor.nodes.pool[g.node_current.index];
-        node.rect = get_screen_space_node_rect(node, get_item_rect());
+        node.rect = get_item_rect();
+        node.rect.Expand(node.layout_style.padding);
     }
 
     g.canvas_draw_list->ChannelsSetCurrent(Channels_NodeBackground);
@@ -1699,6 +1655,24 @@ void EndNode()
     g.canvas_draw_list->ChannelsMerge();
 
     g.node_current.index = INVALID_INDEX;
+}
+
+void BeginNodeTitleBar()
+{
+    assert(g.current_scope == Scope_Node);
+    ImGui::BeginGroup();
+}
+
+void EndNodeTitleBar()
+{
+    ImGui::EndGroup();
+
+    EditorContext& editor = editor_context_get();
+    NodeData& node = editor.nodes.pool[g.node_current.index];
+    node.title_bar_content_rect = get_item_rect();
+
+    ImGui::SetCursorPos(
+        grid_space_to_editor_space(get_node_content_origin(node)));
 }
 
 void BeginInputAttribute(const int id, const PinShape shape)
@@ -1823,33 +1797,12 @@ void SetNodeGridSpacePos(int node_id, const ImVec2& grid_pos)
     node.origin = grid_pos;
 }
 
-void SetNodeName(int node_id, const char* name)
-{
-    // Remember to call Initialize() before using any other functions!
-    assert(initialized);
-    EditorContext& editor = editor_context_get();
-    NodeData& node = editor.nodes.find_or_create_new(node_id);
-    assert(strlen(name) < NODE_NAME_STR_LEN);
-    memset(node.name, 0, NODE_NAME_STR_LEN);
-    memcpy(node.name, name, strlen(name));
-    node.title_text_size = ImGui::CalcTextSize(node.name);
-}
-
 void SetNodeDraggable(int node_id, const bool draggable)
 {
     assert(initialized);
     EditorContext& editor = editor_context_get();
     NodeData& node = editor.nodes.find_or_create_new(node_id);
     node.draggable = draggable;
-}
-
-void SetNodeICon(int node_id, void* user_texture_id, const ImVec2& icon_size)
-{
-	assert(initialized);
-	EditorContext& editor = editor_context_get();
-	NodeData& node = editor.nodes.find_or_create_new(node_id);
-	node.icon_texture_id = user_texture_id;
-	node.icon_size = icon_size;
 }
 
 bool IsNodeHovered(int* const node_id)

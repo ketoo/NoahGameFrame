@@ -30,176 +30,98 @@
 
 void BEGIN_EDITOR(const std::string& name)
 {
-#ifdef NODE_EXT
-    ed::Begin(name.c_str());
-#else
     imnodes::BeginNodeEditor();
-#endif
 }
 
 void END_EDITOR()
 {
-#ifdef NODE_EXT
-    ed::End();
-#else
     imnodes::EndNodeEditor();
-#endif
 }
-
 
 void BEGIN_INPUT_PIN(int id, NFPinShape shape)
 {
-#ifdef NODE_EXT
-    ed::BeginPin(id, ed::PinKind::Input);
-#else
     imnodes::BeginInputAttribute(id, (imnodes::PinShape)shape);
-    
-#endif
 }
 
 void END_INPUT_PIN()
 {
-#ifdef NODE_EXT
-    ed::EndPin();
-#else
     imnodes::EndAttribute();
-#endif
 }
 
 void BEGIN_OUT_PIN(int id, NFPinShape shape)
 {
-#ifdef NODE_EXT
-    ed::BeginPin(id, ed::PinKind::Output);
-#else
     imnodes::BeginOutputAttribute(id, (imnodes::PinShape)shape);
-#endif
 }
 
 void END_OUT_PIN()
 {
-#ifdef NODE_EXT
-    ed::EndPin();
-#else
     imnodes::EndAttribute();
-#endif
-}
-
-void SET_PIN_ICON(const int id, const std::string& iconPath)
-{
-#ifdef NODE_EXT
-#else
-#endif
 }
 
 void BEGIN_NODE(const int id, const std::string& name, ImTextureID user_texture_id, const NFVector2& iconSize)
 {
-#ifdef NODE_EXT
-    ed::BeginNode(id);
-#else
     imnodes::BeginNode(id);
-	imnodes::SetNodeName(id, name.c_str());
-	imnodes::SetNodeICon(id, user_texture_id, ImVec2(iconSize.X(), iconSize.Y()));
-#endif
+
+    imnodes::BeginNodeTitleBar();
+    ImGui::Image((void*)(intptr_t)user_texture_id, ImVec2(iconSize.X(), iconSize.Y()));
+    ImGui::SameLine();
+    ImGui::TextUnformatted(name.c_str());
+    imnodes::EndNodeTitleBar();
 }
+
 void END_NODE()
 {
-#ifdef NODE_EXT
-    ed::EndNode();
-#else
     imnodes::EndNode();
-#endif
 }
 
 void NODE_LINK(const int linkId, const int startPinId, const int endPinId)
 {
-#ifdef NODE_EXT
-#else
     imnodes::Link(linkId, startPinId, endPinId);
-#endif
 }
 
 void SET_NODE_DRAGGABLE(const int id, const bool draggable)
 {
-#ifdef NODE_EXT
-#else
     imnodes::SetNodeDraggable(id, draggable);
-#endif
 }
 
 void SET_NODE_SCREEN_POSITION(const int id, const ImVec2 pos)
 {
-#ifdef NODE_EXT
-    ed::SetNodePosition(id, pos);
-#else
     imnodes::SetNodeScreenSpacePos(id, pos);
-#endif
 }
 
 void SET_NODE_POSITION(const int id, const ImVec2 pos)
 {
-#ifdef NODE_EXT
-    ed::SetNodePosition(id, pos);
-#else
     imnodes::SetNodeGridSpacePos(id, pos);
-#endif
-}
-
-void SET_NODE_ICON(const int id, const std::string& iconPath)
-{
-#ifdef NODE_EXT
-#else
-#endif
 }
 
 void FOCUS_ON_NODE(int id)
 {
-#ifdef NODE_EXT
-    ed::CenterNodeOnScreen(id);
-#else
     imnodes::EditorContextMoveToNode(id);
-#endif
 }
 
 bool IS_LINK_CREATED(int* const started_at, int* const ended_at)
 {
-#ifdef NODE_EXT
-    return false;
-#else
     return imnodes::IsLinkCreated(started_at, ended_at);
-#endif
 }
 
 void IS_LINK_HOVERED(int* const link)
 {
-#ifdef NODE_EXT
-#else
     imnodes::IsLinkHovered(link);
-#endif
 }
 
 void SET_CURRENT_CONTEXT(void* p)
 {
-#ifdef NODE_EXT
-    ed::SetCurrentEditor((ed::EditorContext*)p);
-#else
     EditorContextSet((imnodes::EditorContext*)p);
-#endif
 }
 
 void PUSH_COLOR(int style, int color)
 {
-#ifdef NODE_EXT
-#else
     imnodes::PushColorStyle((imnodes::ColorStyle)style, color);
-#endif
 }
 
 void POP_COLOR()
 {
-#ifdef NODE_EXT
-#else
     imnodes::PopColorStyle();
-#endif
 }
 //////////////////////////
 
@@ -291,7 +213,6 @@ void NFNodePin::Execute()
 
         POP_COLOR();
 
-        std::string str = "          ==>" + this->name;
         //ImGui::Text(str.c_str());
         //ImGui::SameLine();
         //ImGui::SetAlignment(ImGui_Alignment_Right);
@@ -402,7 +323,7 @@ void NFNode::Execute()
 
    if (mAttris.size() > 0)
    {
-       ImGui::Button("", ImVec2(220, 1));
+       ImGui::Button("", ImVec2(180, 1));
    }
 
    this->nodeView->NodeRenderBeforePinOut(this);
@@ -426,22 +347,14 @@ NFNodeView::NFNodeView(NFIPluginManager* p) : NFIView(p, NFViewType::NONE, GET_C
 {
     m_pUIModule = pPluginManager->FindModule<NFIUIModule>();
 
-#ifdef NODE_EXT
-    m_pEditorContext = ed::CreateEditor();
-#else
     m_pEditorContext = imnodes::EditorContextCreate();
     imnodes::Style& nodeStyle = imnodes::GetStyle();
     nodeStyle.pin_offset = 10.0f;
-#endif
 }
 
 NFNodeView::~NFNodeView()
 {
-#ifdef NODE_EXT
-    ed::DestroyEditor((ed::EditorContext*)m_pEditorContext);
-#else
    imnodes::EditorContextFree((imnodes::EditorContext*)m_pEditorContext);
-#endif
 
    m_pEditorContext = nullptr;
 }

@@ -56,10 +56,12 @@ public:
 
     virtual NFGUID Self();
 
+    virtual void ToMemoryCounterString(std::string& info);
     /////////////////////////////////////////////////////////////////
 
 	virtual CLASS_OBJECT_EVENT GetState();
-	virtual bool SetState(const CLASS_OBJECT_EVENT eState);
+	virtual void SetState(const CLASS_OBJECT_EVENT eState);
+    virtual bool ObjectReady();
 
     virtual bool FindProperty(const std::string& strPropertyName);
 

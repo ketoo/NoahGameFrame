@@ -105,22 +105,29 @@ NFRecord::~NFRecord()
 
 std::string NFRecord::ToString()
 {
-	std::stringstream ss;
-	ss << this->GetName() << std::endl;
+    std::stringstream ss;
+    ss << this->GetName() << std::endl;
 
-	for (int i = 0; i < this->GetRows(); ++i)
-	{
-		if (IsUsed(i))
-		{
-			NFDataList rowDataList;
-			if (this->QueryRow(i, rowDataList))
-			{
-				ss << "ROW:" << i << "==>" << rowDataList.ToString() << std::endl;
-			}
-		}
-	}
+    for (int i = 0; i < this->GetRows(); ++i)
+    {
+        if (IsUsed(i))
+        {
+            NFDataList rowDataList;
+            if (this->QueryRow(i, rowDataList))
+            {
+                ss << "ROW:" << i << "==>" << rowDataList.ToString() << std::endl;
+            }
+        }
+    }
 
-	return ss.str();
+    return ss.str();
+}
+void NFRecord::ToMemoryCounterString(std::string& data)
+{
+    data.append(this->mSelf.ToString());
+    data.append(":");
+    data.append(this->GetName());
+    data.append(" ");
 }
 
 int NFRecord::GetCols() const

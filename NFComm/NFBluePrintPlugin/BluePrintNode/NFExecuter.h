@@ -112,13 +112,13 @@ public:
 
 
 	// Inherited via NFIExecuter
-	virtual void PrepareInputData() override;
+	virtual void PrepareInputData(const NFGUID& runTimeOnwer, const bool iteration) override;
 
-	virtual void UpdateOutputData() override;
+	virtual void UpdateOutputData(const NFGUID& runTimeOnwer, const bool iteration) override;
 
 
 	// Inherited via NFIExecuter
-	virtual NF_SHARE_PTR<NFBluePrintNodeBase> FindNextNode() override;
+	virtual NF_SHARE_PTR<NFIOData> FindOutputNodeIOData() override;
 
 };
 
@@ -178,13 +178,76 @@ public:
 
 	// Inherited via NFIExecuter
 
-	virtual void PrepareInputData() override;
+	virtual void PrepareInputData(const NFGUID& runTimeOnwer, const bool iteration) override;
 
-	virtual void UpdateOutputData() override;
+	virtual void UpdateOutputData(const NFGUID& runTimeOnwer, const bool iteration) override;
 
 
 	// Inherited via NFIExecuter
-	virtual NF_SHARE_PTR<NFBluePrintNodeBase> FindNextNode() override;
+	virtual NF_SHARE_PTR<NFIOData> FindOutputNodeIOData() override;
+
+};
+
+class NFGameEventExecuter : public NFIExecuter
+{
+private:
+	NFGameEventExecuter() {}
+public:
+	NFGameEventExecuter(NFIPluginManager* p, const NFGUID& blockID, const NFGUID& id, const std::string& name)
+	{
+		this->id = id;
+		this->name = name;
+		this->logicBlockId = blockID;
+		this->pPluginManager = p;
+
+		executerType = NFExecuterType::GameEvent;
+
+		Init();
+	}
+
+	virtual void InitInputArgs()
+	{
+		{
+			NF_SHARE_PTR<NFIOData> var = NF_SHARE_PTR<NFIOData>(NF_NEW NFIOData());
+			var->id = this->pPluginManager->FindModule<NFIKernelModule>()->CreateGUID();
+			var->name = NFExecuterGameEventInputArg::toString(NFExecuterGameEventInputArg::LastNode);
+			var->valueType = NFValueType::Node;
+
+			inputArgs.push_back(var);
+		}
+		{
+			NF_SHARE_PTR<NFIOData> var = NF_SHARE_PTR<NFIOData>(NF_NEW NFIOData());
+			var->id = this->pPluginManager->FindModule<NFIKernelModule>()->CreateGUID();
+			var->name = NFExecuterGameEventInputArg::toString(NFExecuterGameEventInputArg::ObjectID);
+			var->valueType = NFValueType::Object;
+			var->fromType = NFIODataComFromType::EXTERNAL;
+
+			inputArgs.push_back(var);
+		}
+	}
+
+	virtual void InitOutputArgs()
+	{
+		{
+			NF_SHARE_PTR<NFIOData> var = NF_SHARE_PTR<NFIOData>(NF_NEW NFIOData());
+			var->id = this->pPluginManager->FindModule<NFIKernelModule>()->CreateGUID();
+			var->name = NFExecuterGameEventOutputArg::toString(NFExecuterGameEventOutputArg::NextNode);
+			var->valueType = NFValueType::Node;
+
+			outputArgs.push_back(var);
+		}
+	}
+
+
+	// Inherited via NFIExecuter
+
+	virtual void PrepareInputData(const NFGUID& runTimeOnwer, const bool iteration) override;
+
+	virtual void UpdateOutputData(const NFGUID& runTimeOnwer, const bool iteration) override;
+
+
+	// Inherited via NFIExecuter
+	virtual NF_SHARE_PTR<NFIOData> FindOutputNodeIOData() override;
 
 };
 
@@ -259,13 +322,13 @@ public:
 
 	// Inherited via NFIExecuter
 
-	virtual void PrepareInputData() override;
+	virtual void PrepareInputData(const NFGUID& runTimeOnwer, const bool iteration) override;
 
-	virtual void UpdateOutputData() override;
+	virtual void UpdateOutputData(const NFGUID& runTimeOnwer, const bool iteration) override;
 
 
 	// Inherited via NFIExecuter
-	virtual NF_SHARE_PTR<NFBluePrintNodeBase> FindNextNode() override;
+	virtual NF_SHARE_PTR<NFIOData> FindOutputNodeIOData() override;
 
 };
 
@@ -351,13 +414,95 @@ public:
 
 	// Inherited via NFIExecuter
 
-	virtual void PrepareInputData() override;
+	virtual void PrepareInputData(const NFGUID& runTimeOnwer, const bool iteration) override;
 
-	virtual void UpdateOutputData() override;
+	virtual void UpdateOutputData(const NFGUID& runTimeOnwer, const bool iteration) override;
 
 
 	// Inherited via NFIExecuter
-	virtual NF_SHARE_PTR<NFBluePrintNodeBase> FindNextNode() override;
+	virtual NF_SHARE_PTR<NFIOData> FindOutputNodeIOData() override;
+
+};
+
+
+class NFSleepExecuter : public NFIExecuter
+{
+private:
+	NFSleepExecuter() {}
+public:
+	NFSleepExecuter(NFIPluginManager* p, const NFGUID& blockID, const NFGUID& id, const std::string& name)
+	{
+		this->id = id;
+		this->name = name;
+		this->logicBlockId = blockID;
+		this->pPluginManager = p;
+
+		executerType = NFExecuterType::Sleep;
+
+		Init();
+	}
+
+	virtual void InitInputArgs()
+	{
+		{
+			NF_SHARE_PTR<NFIOData> var = NF_SHARE_PTR<NFIOData>(NF_NEW NFIOData());
+			var->id = this->pPluginManager->FindModule<NFIKernelModule>()->CreateGUID();
+			var->name = NFExecuterSleepInputArg::toString(NFExecuterSleepInputArg::LastNode);
+			var->valueType = NFValueType::Node;
+
+			inputArgs.push_back(var);
+		}
+		{
+			NF_SHARE_PTR<NFIOData> var = NF_SHARE_PTR<NFIOData>(NF_NEW NFIOData());
+			var->id = this->pPluginManager->FindModule<NFIKernelModule>()->CreateGUID();
+			var->name = NFExecuterSleepInputArg::toString(NFExecuterSleepInputArg::ObjectID);
+			var->valueType = NFValueType::Object;
+			var->fromType = NFIODataComFromType::EXTERNAL;
+
+			inputArgs.push_back(var);
+		}
+
+		{
+			NF_SHARE_PTR<NFIOData> var = NF_SHARE_PTR<NFIOData>(NF_NEW NFIOData());
+			var->id = this->pPluginManager->FindModule<NFIKernelModule>()->CreateGUID();
+			var->name = NFExecuterSleepInputArg::toString(NFExecuterSleepInputArg::SleepTime);
+			var->valueType = NFValueType::Float;
+			var->fromType = NFIODataComFromType::BOTH;
+
+			inputArgs.push_back(var);
+		}
+	}
+
+	virtual void InitOutputArgs()
+	{
+		{
+			NF_SHARE_PTR<NFIOData> var = NF_SHARE_PTR<NFIOData>(NF_NEW NFIOData());
+			var->id = this->pPluginManager->FindModule<NFIKernelModule>()->CreateGUID();
+			var->name = NFExecuterSleepOutputArg::toString(NFExecuterSleepOutputArg::NextNode);
+			var->valueType = NFValueType::Node;
+
+			outputArgs.push_back(var);
+		}
+		{
+			NF_SHARE_PTR<NFIOData> var = NF_SHARE_PTR<NFIOData>(NF_NEW NFIOData());
+			var->id = this->pPluginManager->FindModule<NFIKernelModule>()->CreateGUID();
+			var->name = NFExecuterSleepOutputArg::toString(NFExecuterSleepOutputArg::ObjectID);
+			var->valueType = NFValueType::Object;
+
+			outputArgs.push_back(var);
+		}
+	}
+
+
+	// Inherited via NFIExecuter
+
+	virtual void PrepareInputData(const NFGUID& runTimeOnwer, const bool iteration) override;
+
+	virtual void UpdateOutputData(const NFGUID& runTimeOnwer, const bool iteration) override;
+
+
+	// Inherited via NFIExecuter
+	virtual NF_SHARE_PTR<NFIOData> FindOutputNodeIOData() override;
 
 };
 
@@ -443,13 +588,13 @@ public:
 
 	// Inherited via NFIExecuter
 
-	virtual void PrepareInputData() override;
+	virtual void PrepareInputData(const NFGUID& runTimeOnwer, const bool iteration) override;
 
-	virtual void UpdateOutputData() override;
+	virtual void UpdateOutputData(const NFGUID& runTimeOnwer, const bool iteration) override;
 
 
 	// Inherited via NFIExecuter
-	virtual NF_SHARE_PTR<NFBluePrintNodeBase> FindNextNode() override;
+	virtual NF_SHARE_PTR<NFIOData> FindOutputNodeIOData() override;
 
 };
 
@@ -490,13 +635,13 @@ public:
 
 	// Inherited via NFIExecuter
 
-	virtual void PrepareInputData() override;
+	virtual void PrepareInputData(const NFGUID& runTimeOnwer, const bool iteration) override;
 
-	virtual void UpdateOutputData() override;
+	virtual void UpdateOutputData(const NFGUID& runTimeOnwer, const bool iteration) override;
 
 
 	// Inherited via NFIExecuter
-	virtual NF_SHARE_PTR<NFBluePrintNodeBase> FindNextNode() override;
+	virtual NF_SHARE_PTR<NFIOData> FindOutputNodeIOData() override;
 
 };
 
@@ -536,11 +681,11 @@ public:
 	}
 
 	// Inherited via NFIExecuter
-	virtual void PrepareInputData() override;
-	virtual void UpdateOutputData() override;
+	virtual void PrepareInputData(const NFGUID& runTimeOnwer, const bool iteration) override;
+	virtual void UpdateOutputData(const NFGUID& runTimeOnwer, const bool iteration) override;
 
 	// Inherited via NFIExecuter
-	virtual NF_SHARE_PTR<NFBluePrintNodeBase> FindNextNode() override;
+	virtual NF_SHARE_PTR<NFIOData> FindOutputNodeIOData() override;
 };
 
 
@@ -579,9 +724,9 @@ public:
 	}
 
 	// Inherited via NFIExecuter
-	virtual void PrepareInputData() override;
-	virtual void UpdateOutputData() override;
+	virtual void PrepareInputData(const NFGUID& runTimeOnwer, const bool iteration) override;
+	virtual void UpdateOutputData(const NFGUID& runTimeOnwer, const bool iteration) override;
 
 	// Inherited via NFIExecuter
-	virtual NF_SHARE_PTR<NFBluePrintNodeBase> FindNextNode() override;
+	virtual NF_SHARE_PTR<NFIOData> FindOutputNodeIOData() override;
 };

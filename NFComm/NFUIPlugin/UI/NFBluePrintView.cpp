@@ -512,7 +512,7 @@ void NFBluePrintView::PinRender(NFNodePin* pin)
 				auto endNode = m_pBluePrintModule->FindNode(link->endNode);
 				if (endNode)
 				{
-					endNode->UpdateOutputData();
+					endNode->UpdateOutputData(NFGUID(), true);
 				}
 			}
 		}
@@ -657,7 +657,7 @@ void NFBluePrintView::PinRenderForInputVariable(NFNodePin* pin)
 					inputArg->valueType = x;
 					inputArg->varData.SetString("");
 					memset(str0, 0, sizeof(str0));
-					variable->UpdateOutputData();
+					variable->UpdateOutputData(NFGUID(), true);
 				}
 			}
 			ImGui::EndCombo();
@@ -668,7 +668,7 @@ void NFBluePrintView::PinRenderForInputVariable(NFNodePin* pin)
 		{
 			inputArg->varData.SetString(str0);
 
-			variable->UpdateOutputData();
+			variable->UpdateOutputData(NFGUID(), true);
 		}
 
 		ImGui::PopItemWidth();
@@ -733,7 +733,7 @@ void NFBluePrintView::PinRenderForElementVariable(NFNodePin* pin)
 					if (ImGui::Selectable(id.c_str()))
 					{
 						elementIDArg->varData.SetString(id);
-						variable->UpdateOutputData();
+						variable->UpdateOutputData(NFGUID(), true);
 					}
 				}
 
@@ -782,7 +782,7 @@ void NFBluePrintView::PinRenderForElementVariable(NFNodePin* pin)
 							break;
 						}
 
-						variable->UpdateOutputData();
+						variable->UpdateOutputData(NFGUID(), true);
 					}
 
 					property = currentClassObject->GetPropertyManager()->Next();
@@ -842,7 +842,7 @@ void NFBluePrintView::PinRenderForPropertyVariable(NFNodePin* pin)
 						classNameArg->varData.SetString(classObject->GetClassName());
 						propertyNameArg->varData.SetString("");
 						propertyNameArg->valueType = NFValueType::UNKNOW;
-						variable->UpdateOutputData();
+						variable->UpdateOutputData(NFGUID(), true);
 					}
 
 					classObject = m_pClassModule->Next();
@@ -871,7 +871,7 @@ void NFBluePrintView::PinRenderForPropertyVariable(NFNodePin* pin)
 							}
 
 							propertyNameArg->varData.SetString(property->GetKey());
-							variable->UpdateOutputData();
+							variable->UpdateOutputData(NFGUID(), true);
 						}
 
 						property = currentClassObject->GetPropertyManager()->Next();
@@ -1077,14 +1077,14 @@ void NFBluePrintView::PinRenderForGameEventMonitor(NFNodePin* pin)
 
 		if (pin->name == NFGameEventMonitorInputArg::toString(NFGameEventMonitorInputArg::EventID))
 		{
-			auto inputArg = monitor->GetInputArg(0);
+			auto inputArg = monitor->GetInputArg(NFGameEventMonitorInputArg::EventID);
 
 			ImGui::SameLine();
 			if (ImGui::InputText("", str0, IM_ARRAYSIZE(str0)))
 			{
-				inputArg->varData.SetString(str0);
+				inputArg->varData.SetInt(lexical_cast<int>(str0));
 
-				monitor->UpdateOutputData();
+				monitor->UpdateOutputData(NFGUID(), true);
 			}
 		}
 		ImGui::PopItemWidth();
@@ -1107,14 +1107,14 @@ void NFBluePrintView::PinRenderForNetworkEventMonitor(NFNodePin* pin)
 
 		if (pin->name == NFNetworkEventMonitorInputArg::toString(NFNetworkEventMonitorInputArg::EventID))
 		{
-			auto inputArg = monitor->GetInputArg(0);
+			auto inputArg = monitor->GetInputArg(NFNetworkEventMonitorInputArg::EventID);
 
 			ImGui::SameLine();
 			if (ImGui::InputText("", str0, IM_ARRAYSIZE(str0)))
 			{
-				inputArg->varData.SetString(str0);
+				inputArg->varData.SetInt(lexical_cast<int>(str0));
 
-				monitor->UpdateOutputData();
+				monitor->UpdateOutputData(NFGUID(), true);
 			}
 
 		}
@@ -1135,14 +1135,14 @@ void NFBluePrintView::PinRenderForNetworkMsgMonitor(NFNodePin* pin)
 
 		if (pin->name == NFNetworkMsgMonitorInputArg::toString(NFNetworkMsgMonitorInputArg::NetMsgID))
 		{
-			auto inputArg = monitor->GetInputArg(0);
+			auto inputArg = monitor->GetInputArg(NFNetworkMsgMonitorInputArg::NetMsgID);
 
 			ImGui::SameLine();
 			if (ImGui::InputText("", str0, IM_ARRAYSIZE(str0)))
 			{
-				inputArg->varData.SetString(str0);
+				inputArg->varData.SetInt(lexical_cast<int>(str0));
 
-				monitor->UpdateOutputData();
+				monitor->UpdateOutputData(NFGUID(), true);
 			}
 
 		}
@@ -1164,7 +1164,6 @@ void NFBluePrintView::PinRenderForObjectEventMonitor(NFNodePin* pin)
 	{
 		if (pin->name == NFMonitorObjectEventInputArg::toString(NFMonitorObjectEventInputArg::ClassName))
 		{
-
 			ImGui::PushItemWidth(itemWidth);
 			auto inputArg = monitor->GetInputArg(NFMonitorObjectEventInputArg::ClassName);
 
@@ -1192,7 +1191,31 @@ void NFBluePrintView::PinRenderForObjectEventMonitor(NFNodePin* pin)
 		}
 		else if (pin->name == NFMonitorObjectEventInputArg::toString(NFMonitorObjectEventInputArg::ClassEvent))
 		{
-			//object event: no_data, loading_data.....
+			//object event: no_data, loading_data.....			
+			ImGui::PushItemWidth(itemWidth);
+			auto inputArg = monitor->GetInputArg(NFMonitorObjectEventInputArg::ClassEvent);
+
+			ImGui::SameLine();
+			if (ImGui::BeginCombo("", inputArg->varData.GetString().c_str()))
+			{
+				auto classObject = m_pClassModule->First();
+				while (classObject)
+				{
+					if (classObject->GetIDList().size() > 0)
+					{
+						if (ImGui::Selectable(classObject->GetClassName().c_str()))
+						{
+							//inputArg->varData.SetInt();
+						}
+					}
+
+					classObject = m_pClassModule->Next();
+				}
+
+				ImGui::EndCombo();
+			}
+
+			ImGui::PopItemWidth();
 		}
 	}
 }
@@ -1252,7 +1275,7 @@ void NFBluePrintView::PinRenderForPropertyEventMonitor(NFNodePin* pin)
 								if (ImGui::Selectable(property->GetKey().c_str()))
 								{
 									propertyNameArg->varData.SetString(property->GetKey());
-									monitor->UpdateOutputData();
+									monitor->UpdateOutputData(NFGUID(), true);
 								}
 							}
 

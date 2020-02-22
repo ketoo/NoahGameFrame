@@ -42,7 +42,6 @@ public:
 		comparatorType = NFComparatorType::Equal;
 
 		Init();
-
 	}
 
 	virtual void InitInputArgs() override
@@ -105,13 +104,10 @@ public:
 	}
 
 	// Inherited via NFIBranch
-	virtual void PrepareInputData() override;
+	virtual void PrepareInputData(const NFGUID& runTimeOnwer, const bool iteration) override;
 
 	// Inherited via NFIBranch
-	virtual void UpdateOutputData() override;
-
-	// Inherited via NFIBranch
-	virtual NF_SHARE_PTR<NFBluePrintNodeBase> FindNextNode() override;
+	virtual void UpdateOutputData(const NFGUID& runTimeOnwer, const bool iteration) override;
 };
 
 
@@ -195,21 +191,18 @@ public:
 	}
 
 	// Inherited via NFIBranch
-	virtual void PrepareInputData() override;
-	virtual void UpdateOutputData() override;
-
-	// Inherited via NFIBranch
-	virtual NF_SHARE_PTR<NFBluePrintNodeBase> FindNextNode() override;
+	virtual void PrepareInputData(const NFGUID& runTimeOnwer, const bool iteration) override;
+	virtual void UpdateOutputData(const NFGUID& runTimeOnwer, const bool iteration) override;
 };
 
 
-class NFFloatgBranch : public NFIBranch
+class NFFloatBranch : public NFIBranch
 {
 private:
-	NFFloatgBranch() {}
+	NFFloatBranch() {}
 
 public:
-	NFFloatgBranch(NFIPluginManager* p, const NFGUID& blockID, const NFGUID& id, const std::string& name)
+	NFFloatBranch(NFIPluginManager* p, const NFGUID& blockID, const NFGUID& id, const std::string& name)
 	{
 		this->name = name;
 		this->id = id;
@@ -283,11 +276,8 @@ public:
 	}
 
 	// Inherited via NFIBranch
-	virtual void PrepareInputData() override;
-	virtual void UpdateOutputData() override;
-
-	// Inherited via NFIBranch
-	virtual NF_SHARE_PTR<NFBluePrintNodeBase> FindNextNode() override;
+	virtual void PrepareInputData(const NFGUID& runTimeOnwer, const bool iteration) override;
+	virtual void UpdateOutputData(const NFGUID& runTimeOnwer, const bool iteration) override;
 };
 
 
@@ -371,11 +361,8 @@ public:
 	}
 
 	// Inherited via NFIBranch
-	virtual void PrepareInputData() override;
-	virtual void UpdateOutputData() override;
-
-	// Inherited via NFIBranch
-	virtual NF_SHARE_PTR<NFBluePrintNodeBase> FindNextNode() override;
+	virtual void PrepareInputData(const NFGUID& runTimeOnwer, const bool iteration) override;
+	virtual void UpdateOutputData(const NFGUID& runTimeOnwer, const bool iteration) override;
 };
 
 
@@ -459,16 +446,10 @@ public:
 		}
 	}
 
-
 	// Inherited via NFIBranch
-	virtual void PrepareInputData() override;
+	virtual void PrepareInputData(const NFGUID& runTimeOnwer, const bool iteration) override;
 
-	virtual void UpdateOutputData() override;
-
-
-	// Inherited via NFIBranch
-	virtual NF_SHARE_PTR<NFBluePrintNodeBase> FindNextNode() override;
-
+	virtual void UpdateOutputData(const NFGUID& runTimeOnwer, const bool iteration) override;
 };
 
 class NFVector3Branch : public NFIBranch
@@ -552,12 +533,7 @@ public:
 
 
 	// Inherited via NFIBranch
-	virtual void PrepareInputData() override;
+	virtual void PrepareInputData(const NFGUID& runTimeOnwer, const bool iteration) override;
 
-	virtual void UpdateOutputData() override;
-
-
-	// Inherited via NFIBranch
-	virtual NF_SHARE_PTR<NFBluePrintNodeBase> FindNextNode() override;
-
+	virtual void UpdateOutputData(const NFGUID& runTimeOnwer, const bool iteration) override;
 };

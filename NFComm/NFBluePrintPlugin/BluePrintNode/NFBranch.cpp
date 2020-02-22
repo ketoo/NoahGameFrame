@@ -25,80 +25,50 @@
 
 #include "NFBranch.h"
 
-void NFIntBranch::PrepareInputData()
+void NFIntBranch::PrepareInputData(const NFGUID& runTimeOnwer, const bool iteration)
 {
 }
 
-void NFIntBranch::UpdateOutputData()
+void NFIntBranch::UpdateOutputData(const NFGUID& runTimeOnwer, const bool iteration)
 {
 }
 
-NF_SHARE_PTR<NFBluePrintNodeBase> NFIntBranch::FindNextNode()
-{
-	return NF_SHARE_PTR<NFBluePrintNodeBase>();
-}
-
-void NFStringBranch::PrepareInputData()
+void NFStringBranch::PrepareInputData(const NFGUID& runTimeOnwer, const bool iteration)
 {
 }
 
-void NFStringBranch::UpdateOutputData()
+void NFStringBranch::UpdateOutputData(const NFGUID& runTimeOnwer, const bool iteration)
 {
 }
 
-NF_SHARE_PTR<NFBluePrintNodeBase> NFStringBranch::FindNextNode()
-{
-	return NF_SHARE_PTR<NFBluePrintNodeBase>();
-}
-
-void NFFloatgBranch::PrepareInputData()
+void NFFloatBranch::PrepareInputData(const NFGUID& runTimeOnwer, const bool iteration)
 {
 }
 
-void NFFloatgBranch::UpdateOutputData()
+void NFFloatBranch::UpdateOutputData(const NFGUID& runTimeOnwer, const bool iteration)
 {
 }
 
-NF_SHARE_PTR<NFBluePrintNodeBase> NFFloatgBranch::FindNextNode()
-{
-	return NF_SHARE_PTR<NFBluePrintNodeBase>();
-}
-
-void NFObjectBranch::PrepareInputData()
+void NFObjectBranch::PrepareInputData(const NFGUID& runTimeOnwer, const bool iteration)
 {
 }
 
-void NFObjectBranch::UpdateOutputData()
+void NFObjectBranch::UpdateOutputData(const NFGUID& runTimeOnwer, const bool iteration)
 {
 }
 
-NF_SHARE_PTR<NFBluePrintNodeBase> NFObjectBranch::FindNextNode()
-{
-	return NF_SHARE_PTR<NFBluePrintNodeBase>();
-}
-
-void NFVector2Branch::PrepareInputData()
+void NFVector2Branch::PrepareInputData(const NFGUID& runTimeOnwer, const bool iteration)
 {
 }
 
-void NFVector2Branch::UpdateOutputData()
+void NFVector2Branch::UpdateOutputData(const NFGUID& runTimeOnwer, const bool iteration)
 {
 }
 
-NF_SHARE_PTR<NFBluePrintNodeBase> NFVector2Branch::FindNextNode()
-{
-	return NF_SHARE_PTR<NFBluePrintNodeBase>();
-}
-
-void NFVector3Branch::PrepareInputData()
+void NFVector3Branch::PrepareInputData(const NFGUID& runTimeOnwer, const bool iteration)
 {
 }
 
-void NFVector3Branch::UpdateOutputData()
+void NFVector3Branch::UpdateOutputData(const NFGUID& runTimeOnwer, const bool iteration)
 {
-}
-
-NF_SHARE_PTR<NFBluePrintNodeBase> NFVector3Branch::FindNextNode()
-{
-	return NF_SHARE_PTR<NFBluePrintNodeBase>();
 }

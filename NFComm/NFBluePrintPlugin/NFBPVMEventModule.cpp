@@ -23,92 +23,87 @@
    limitations under the License.
 */
 
-//#include "Dependencies/googletest-release-1.8.0/googletest/include/gtest/gtest.h"
 #include "NFBPVirtualMachineModule.h"
 #include "NFBPVMEventModule.h"
+#include "NFComm/NFMessageDefine/NFProtocolDefine.hpp"
 
-bool NFBPVirtualMachineModule::Awake()
-{
-
-
-	return true;
-}
-
-bool NFBPVirtualMachineModule::Init()
+bool NFBPVMEventModule::Awake()
 {
     m_pBluePrintModule = pPluginManager->FindModule<NFIBluePrintModule>();
+    m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>();
 
+	return true;
+}
+
+bool NFBPVMEventModule::Init()
+{
     return true;
 }
 
-bool NFBPVirtualMachineModule::AfterInit()
+bool NFBPVMEventModule::AfterInit()
 {
+    m_pKernelModule->RegisterCommonClassEvent(this, &NFBPVMEventModule::OnClassCommonEvent);
+    m_pKernelModule->RegisterCommonPropertyEvent(this, &NFBPVMEventModule::OnPropertyCommonEvent);
+    m_pKernelModule->RegisterCommonRecordEvent(this, &NFBPVMEventModule::OnRecordCommonEvent);
 
 	return true;
 }
 
-bool NFBPVirtualMachineModule::CheckConfig()
+bool NFBPVMEventModule::CheckConfig()
 {
-	
 	return true;
 }
 
-bool NFBPVirtualMachineModule::ReadyExecute()
+bool NFBPVMEventModule::ReadyExecute()
 {
-	
-
 	return true;
 }
 
-bool NFBPVirtualMachineModule::Execute()
+bool NFBPVMEventModule::Execute()
 {
-	
     return true;
 }
 
-bool NFBPVirtualMachineModule::BeforeShut()
+bool NFBPVMEventModule::BeforeShut()
 {
-
 	return true;
 }
 
-bool NFBPVirtualMachineModule::Shut()
+bool NFBPVMEventModule::Shut()
 {
-	
-
 	return true;
 }
 
-bool NFBPVirtualMachineModule::Finalize()
+bool NFBPVMEventModule::Finalize()
 {
-	
-
 	return true;
 }
 
-bool NFBPVirtualMachineModule::OnReloadPlugin()
+bool NFBPVMEventModule::OnReloadPlugin()
 {
-	
 	return true;
 }
 
-void NFBPVirtualMachineModule::RunLogicBlock(const NFGUID& logicBlockID)
+int NFBPVMEventModule::OnClassCommonEvent(const NFGUID& self, const std::string& strClassNames, const CLASS_OBJECT_EVENT eClassEvent, const NFDataList& var)
 {
-    auto block = m_pBluePrintModule->GetLogicBlock(logicBlockID);
-    auto vm = NF_SHARE_PTR<NFBPVirtualMachine>(NF_NEW NFBPVirtualMachine(pPluginManager, block));
-    mVirtualMachine.AddElement(logicBlockID, vm);
+    for (auto it = mBluePrintBlockAction.First(); it; it = mBluePrintBlockAction.Next())
+    {
+        for (auto handler = it->mGameObjectEvent.First(); handler; handler = it->mGameObjectEvent.Next())
+        {
+        }
+    }
+
+    return 0;
 }
 
-void NFBPVirtualMachineModule::StopLogicBlock(const NFGUID& logicBlockID)
+int NFBPVMEventModule::OnPropertyCommonEvent(const NFGUID& self, const std::string& strPropertyName, const NFData& oldVar, const NFData& newVar)
 {
-    auto block = m_pBluePrintModule->GetLogicBlock(logicBlockID);
-    mVirtualMachine.RemoveElement(logicBlockID);
-    //destroy that VM
+    return 0;
 }
 
-bool NFBPVirtualMachineModule::CheckLogicBlockRefCircle(const NFGUID& logicBlockID)
+int NFBPVMEventModule::OnRecordCommonEvent(const NFGUID& self, const RECORD_EVENT_DATA& xEventData, const NFData& oldVar, const NFData& newVar)
 {
-    return false;
+    return 0;
 }
 
 bool NFBPVMEventModule::RegisterGameEventCallBack(const NFGUID blockID, const int eventID, const NFGUID monitorID, const BLUEPRINT_EVENT_FUNCTOR& functor)
@@ -185,6 +180,12 @@ bool NFBPVMEventModule::RegisterNetMsgEventCallBack(const NFGUID blockID, const 
         xEventListPtr->AddElement(monitorID, NF_SHARE_PTR<BLUEPRINT_EVENT_FUNCTOR>(NF_NEW BLUEPRINT_EVENT_FUNCTOR(functor)));
         return true;
     }
+
+    return false;
+}
+
+bool NFBPVMEventModule::RegisterGameObjectEventCallBack(const NFGUID blockID, const std::string& className, const NFGUID monitorID, const BLUEPRINT_EVENT_FUNCTOR& functor)
+{
 
     return false;
 }

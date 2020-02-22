@@ -134,6 +134,12 @@ void PopStyleVar();
 void BeginNode(int id);
 void EndNode();
 
+// Place your node title bar content (such as the node title, using ImGui::Text)
+// between the following function calls. These functions have to be called
+// before adding any attributes, or the layout of the node will be incorrect.
+void BeginNodeTitleBar();
+void EndNodeTitleBar();
+
 // Attributes are ImGui UI elements embedded within the node. Attributes have
 // circular pins rendered next to them. Links are created between pins.
 //
@@ -158,14 +164,8 @@ void Link(int id, int start_attr, int end_attr);
 
 void SetNodeScreenSpacePos(int node_id, const ImVec2& screen_space_pos);
 void SetNodeGridSpacePos(int node_id, const ImVec2& grid_pos);
-
-// Set the node name corresponding to the node id. The node name is displayed in
-// the node's title bar.
-void SetNodeName(int node_id, const char* name);
 // Enable or disable the ability to click and drag a specific node.
-void SetNodeDraggable(int node_id, const bool dragable);
-// Set the node icon
-void SetNodeICon(int node_id, void* user_texture_id, const ImVec2& icon_size);
+void SetNodeDraggable(int node_id, const bool draggable);
 
 // The following functions return true if a UI element is being hovered over by
 // the mouse cursor. Assigns the id of the UI element being hovered over to the

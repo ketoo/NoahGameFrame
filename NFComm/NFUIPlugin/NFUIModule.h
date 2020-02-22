@@ -48,12 +48,7 @@
 #include IMGUI_IMPL_OPENGL_LOADER_CUSTOM
 #endif
 
-#ifdef NODE_EXT
-#include "imgui/NodeEditor/Include/imgui_node_editor.h"
-namespace ed = ax::NodeEditor;
-#else
 #include "imgui/imnodes.h"
-#endif
 
 class NFUIModule
     : public NFIUIModule

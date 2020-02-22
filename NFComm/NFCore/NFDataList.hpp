@@ -564,7 +564,7 @@ public:
 	mapbox::util::variant<NFINT64, double, std::string, NFGUID, NFVector2, NFVector3> variantData;
 };
 
-class NFDataList :public NFMemoryCounter<NFDataList>
+class NFDataList :public NFMemoryCounter
 {
 public:
     NFDataList() : NFMemoryCounter(GET_CLASS_NAME(NFDataList))
@@ -600,6 +600,11 @@ public:
 		}
 
 		return os.str();
+	}
+
+	virtual void ToMemoryCounterString(std::string& data)
+	{
+		
 	}
 
 	virtual std::string ToString(const int index) const

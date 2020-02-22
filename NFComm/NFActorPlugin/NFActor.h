@@ -51,10 +51,13 @@ public:
 	virtual bool RemoveComponent(const std::string& strComponentName);
 	virtual NF_SHARE_PTR<NFIComponent> FindComponent(const std::string& strComponentName);
 
-	virtual bool AddMessageHandler(const int nSubMsgID, ACTOR_PROCESS_FUNCTOR_PTR xBeginFunctor);
 
     virtual bool SendMsg(const NFActorMessage& message);
+    virtual bool SendMsg(const int nEventID, const std::string& strArg);
 
+    virtual bool AddMessageHandler(const int nSubMsgID, ACTOR_PROCESS_FUNCTOR_PTR xBeginFunctor);
+
+    virtual void ToMemoryCounterString(std::string& info);
 protected:
 	NFGUID id;
 

@@ -31,18 +31,58 @@
 #include "Dependencies/RapidXML/rapidxml.hpp"
 #include "Dependencies/RapidXML/rapidxml_print.hpp"
 
+NFClassModule::NFClassModule()
+{
+    m_pBackupClassModule = nullptr;
+    msConfigFileName = "NFDataCfg/Struct/LogicClass.xml";
+}
+
+NFClassModule::NFClassModule(NFIPluginManager* p)
+{
+    m_pBackupClassModule = nullptr;
+    pPluginManager = p;
+    msConfigFileName = "NFDataCfg/Struct/LogicClass.xml";
+
+    std::cout << "Using [" << pPluginManager->GetConfigPath() + msConfigFileName << "]" << std::endl;
+
+    if (!this->mbBackup)
+    {
+        m_pBackupClassModule = new NFClassModule();
+        m_pBackupClassModule->pPluginManager = pPluginManager;
+        m_pBackupClassModule->mbBackup = true;
+    }
+}
+
+NFClassModule::~NFClassModule()
+{
+    ClearAll();
+
+    if (!this->mbBackup)
+    {
+        delete m_pBackupClassModule;
+        m_pBackupClassModule = nullptr;
+    }
+}
+
 bool NFClassModule::Awake()
 {
-	m_pElementModule = pPluginManager->FindModule<NFIElementModule>();
+    m_pElementModule = pPluginManager->FindModule<NFIElementModule>();
+    if (this->mbBackup)
+    {
+        m_pElementModule = m_pElementModule->GetBackupElementModule();
+    }
+
+    if (m_pBackupClassModule) m_pBackupClassModule->Awake();
 
     Load();
-	
+
 	return true;
 	
 }
 
 bool NFClassModule::Init()
 {
+    if (m_pBackupClassModule) m_pBackupClassModule->Init();
     return true;
 }
 
@@ -50,21 +90,8 @@ bool NFClassModule::Shut()
 {
     ClearAll();
 
+    if (m_pBackupClassModule) m_pBackupClassModule->Shut();
     return true;
-}
-
-NFClassModule::NFClassModule(NFIPluginManager* p)
-{
-    pPluginManager = p;
-
-    msConfigFileName = "NFDataCfg/Struct/LogicClass.xml";
-   
-    std::cout << "Using [" << pPluginManager->GetConfigPath() + msConfigFileName << "]" << std::endl;
-}
-
-NFClassModule::~NFClassModule()
-{
-    ClearAll();
 }
 
 NFDATA_TYPE NFClassModule::ComputerType(const char* pstrTypeName, NFData& var)
@@ -432,11 +459,15 @@ bool NFClassModule::Load()
     {
         Load(attrNode, NULL);
     }
+
+    if (m_pBackupClassModule) m_pBackupClassModule->Load();
+
     return true;
 }
 
 bool NFClassModule::Save()
 {
+    if (m_pBackupClassModule) m_pBackupClassModule->Save();
     return true;
 }
 
@@ -464,7 +495,13 @@ NF_SHARE_PTR<NFIRecordManager> NFClassModule::GetClassRecordManager(const std::s
 
 bool NFClassModule::Clear()
 {
+    if (m_pBackupClassModule) m_pBackupClassModule->Clear();
     return true;
+}
+
+NFIClassModule* NFClassModule::GetBackupClassModule()
+{
+	return m_pBackupClassModule;
 }
 
 bool NFClassModule::AddClassCallBack(const std::string& strClassName, const CLASS_EVENT_FUNCTOR_PTR& cb)

@@ -69,7 +69,7 @@ bool NFThreadPoolModule::Execute()
     return true;
 }
 
-void NFThreadPoolModule::DoAsyncTask(const NFGUID taskID, const std::string & data, TASK_PROCESS_FUNCTOR_PTR asyncFunctor, TASK_PROCESS_FUNCTOR_PTR functor_end)
+void NFThreadPoolModule::DoAsyncTask(const NFGUID taskID, const std::string & data, TASK_PROCESS_FUNCTOR_PTR asyncFunctor, TASK_PROCESS_FUNCTOR_PTR functor_end, const int rd)
 {
 	NFThreadTask task;
 	task.nTaskID = taskID;
@@ -77,7 +77,12 @@ void NFThreadPoolModule::DoAsyncTask(const NFGUID taskID, const std::string & da
 	task.xThreadFunc = asyncFunctor;
 	task.xEndFunc = functor_end;
 	
-	int index = taskID.nHead64 % mThreadPool.size();
+	int index = 0;
+	if (rd == 0)
+	{
+		index = taskID.nData64 % mThreadPool.size();
+	}
+	
 	NF_SHARE_PTR<NFThreadCell> threadobject = mThreadPool[index];
 	threadobject->AddTask(task);
 }

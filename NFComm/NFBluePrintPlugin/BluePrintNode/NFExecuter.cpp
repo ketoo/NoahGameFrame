@@ -25,107 +25,136 @@
 
 #include "NFExecuter.h"
 
-void NFCreateObjectExecuter::PrepareInputData()
+void NFCreateObjectExecuter::PrepareInputData(const NFGUID& runTimeOnwer, const bool iteration)
 {
 }
 
-void NFCreateObjectExecuter::UpdateOutputData()
+void NFCreateObjectExecuter::UpdateOutputData(const NFGUID& runTimeOnwer, const bool iteration)
+{
+    if (!iteration)
+    {
+        //create object
+    }
+}
+
+NF_SHARE_PTR<NFIOData> NFCreateObjectExecuter::FindOutputNodeIOData()
+{
+    return GetOutputArg(NFExecuterCreateObjectOutputputArg::NextNode);
+}
+
+void NFDestroyObjectExecuter::PrepareInputData(const NFGUID& runTimeOnwer, const bool iteration)
 {
 }
 
-NF_SHARE_PTR<NFBluePrintNodeBase> NFCreateObjectExecuter::FindNextNode()
-{
-    auto outputNode = GetOutputArg(NFExecuterCreateObjectOutputputArg::NextNode);
-	return NF_SHARE_PTR<NFBluePrintNodeBase>();
-}
-
-void NFDestroyObjectExecuter::PrepareInputData()
+void NFDestroyObjectExecuter::UpdateOutputData(const NFGUID& runTimeOnwer, const bool iteration)
 {
 }
 
-void NFDestroyObjectExecuter::UpdateOutputData()
+NF_SHARE_PTR<NFIOData> NFDestroyObjectExecuter::FindOutputNodeIOData()
+{
+	return NF_SHARE_PTR<NFIOData>();
+}
+
+void NFGameEventExecuter::PrepareInputData(const NFGUID& runTimeOnwer, const bool iteration)
 {
 }
 
-NF_SHARE_PTR<NFBluePrintNodeBase> NFDestroyObjectExecuter::FindNextNode()
-{
-	return NF_SHARE_PTR<NFBluePrintNodeBase>();
-}
-
-void NFMoveObjectExecuter::PrepareInputData()
+void NFGameEventExecuter::UpdateOutputData(const NFGUID& runTimeOnwer, const bool iteration)
 {
 }
 
-void NFMoveObjectExecuter::UpdateOutputData()
+NF_SHARE_PTR<NFIOData> NFGameEventExecuter::FindOutputNodeIOData()
+{
+    return NF_SHARE_PTR<NFIOData>();
+}
+
+void NFMoveObjectExecuter::PrepareInputData(const NFGUID& runTimeOnwer, const bool iteration)
 {
 }
 
-NF_SHARE_PTR<NFBluePrintNodeBase> NFMoveObjectExecuter::FindNextNode()
-{
-	return NF_SHARE_PTR<NFBluePrintNodeBase>();
-}
-
-void NFEnterSceneExecuter::PrepareInputData()
+void NFMoveObjectExecuter::UpdateOutputData(const NFGUID& runTimeOnwer, const bool iteration)
 {
 }
 
-void NFEnterSceneExecuter::UpdateOutputData()
+NF_SHARE_PTR<NFIOData> NFMoveObjectExecuter::FindOutputNodeIOData()
+{
+	return NF_SHARE_PTR<NFIOData>();
+}
+
+void NFEnterSceneExecuter::PrepareInputData(const NFGUID& runTimeOnwer, const bool iteration)
 {
 }
 
-NF_SHARE_PTR<NFBluePrintNodeBase> NFEnterSceneExecuter::FindNextNode()
-{
-	return NF_SHARE_PTR<NFBluePrintNodeBase>();
-}
-
-void NFAddHeartBeatExecuter::PrepareInputData()
+void NFEnterSceneExecuter::UpdateOutputData(const NFGUID& runTimeOnwer, const bool iteration)
 {
 }
 
-void NFAddHeartBeatExecuter::UpdateOutputData()
+NF_SHARE_PTR<NFIOData> NFEnterSceneExecuter::FindOutputNodeIOData()
+{
+	return NF_SHARE_PTR<NFIOData>();
+}
+
+void NFAddHeartBeatExecuter::PrepareInputData(const NFGUID& runTimeOnwer, const bool iteration)
 {
 }
 
-NF_SHARE_PTR<NFBluePrintNodeBase> NFAddHeartBeatExecuter::FindNextNode()
-{
-	return NF_SHARE_PTR<NFBluePrintNodeBase>();
-}
-
-void NFAttackObjectExecuter::PrepareInputData()
+void NFAddHeartBeatExecuter::UpdateOutputData(const NFGUID& runTimeOnwer, const bool iteration)
 {
 }
 
-void NFAttackObjectExecuter::UpdateOutputData()
+NF_SHARE_PTR<NFIOData> NFAddHeartBeatExecuter::FindOutputNodeIOData()
+{
+	return NF_SHARE_PTR<NFIOData>();
+}
+
+void NFAttackObjectExecuter::PrepareInputData(const NFGUID& runTimeOnwer, const bool iteration)
 {
 }
 
-NF_SHARE_PTR<NFBluePrintNodeBase> NFAttackObjectExecuter::FindNextNode()
-{
-	return NF_SHARE_PTR<NFBluePrintNodeBase>();
-}
-
-void NFUseSkillExecuter::PrepareInputData()
+void NFAttackObjectExecuter::UpdateOutputData(const NFGUID& runTimeOnwer, const bool iteration)
 {
 }
 
-void NFUseSkillExecuter::UpdateOutputData()
+NF_SHARE_PTR<NFIOData> NFAttackObjectExecuter::FindOutputNodeIOData()
+{
+	return NF_SHARE_PTR<NFIOData>();
+}
+
+void NFUseSkillExecuter::PrepareInputData(const NFGUID& runTimeOnwer, const bool iteration)
 {
 }
 
-NF_SHARE_PTR<NFBluePrintNodeBase> NFUseSkillExecuter::FindNextNode()
-{
-	return NF_SHARE_PTR<NFBluePrintNodeBase>();
-}
-
-void NFUseItemExecuter::PrepareInputData()
+void NFUseSkillExecuter::UpdateOutputData(const NFGUID& runTimeOnwer, const bool iteration)
 {
 }
 
-void NFUseItemExecuter::UpdateOutputData()
+NF_SHARE_PTR<NFIOData> NFUseSkillExecuter::FindOutputNodeIOData()
+{
+	return NF_SHARE_PTR<NFIOData>();
+}
+
+void NFUseItemExecuter::PrepareInputData(const NFGUID& runTimeOnwer, const bool iteration)
 {
 }
 
-NF_SHARE_PTR<NFBluePrintNodeBase> NFUseItemExecuter::FindNextNode()
+void NFUseItemExecuter::UpdateOutputData(const NFGUID& runTimeOnwer, const bool iteration)
 {
-	return NF_SHARE_PTR<NFBluePrintNodeBase>();
+}
+
+NF_SHARE_PTR<NFIOData> NFUseItemExecuter::FindOutputNodeIOData()
+{
+	return NF_SHARE_PTR<NFIOData>();
+}
+
+void NFSleepExecuter::PrepareInputData(const NFGUID& runTimeOnwer, const bool iteration)
+{
+}
+
+void NFSleepExecuter::UpdateOutputData(const NFGUID& runTimeOnwer, const bool iteration)
+{
+}
+
+NF_SHARE_PTR<NFIOData> NFSleepExecuter::FindOutputNodeIOData()
+{
+    return NF_SHARE_PTR<NFIOData>();
 }

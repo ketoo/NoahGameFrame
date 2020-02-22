@@ -106,3 +106,21 @@ bool NFActor::SendMsg(const NFActorMessage& message)
 {
 	return mMessageQueue.Push(message);
 }
+
+bool NFActor::SendMsg(const int nEventID, const std::string& strArg)
+{
+	NFActorMessage xMessage;
+
+	xMessage.id = this->id;
+	xMessage.data = strArg;
+	xMessage.msgID = nEventID;
+
+	return SendMsg(xMessage);
+}
+
+void NFActor::ToMemoryCounterString(std::string& info)
+{
+	info.append(id.ToString());
+	info.append(":NFActor:");
+	info.append(std::to_string(mMessageQueue.size_approx()));
+}

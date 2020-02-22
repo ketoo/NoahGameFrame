@@ -27,6 +27,8 @@
 #define NF_CONTAINER_VIEW_H
 
 #include "NFComm/NFPluginModule/NFIUIModule.h"
+#include "NFComm/NFPluginModule/NFIElementModule.h"
+#include "NFComm/NFPluginModule/NFIClassModule.h"
 
 class NFContainerView : public NFIView
 {
@@ -46,7 +48,9 @@ private:
    void HelpMenu();
 
 private:
-   NFIUIModule* m_pUIModule;
+    NFIUIModule* m_pUIModule;
+    NFIElementModule* m_pElementModule;
+    NFIClassModule* m_pClassModule;
 };
 
 #endif

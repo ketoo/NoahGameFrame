@@ -122,6 +122,7 @@ public:
     virtual bool ExistScene(const int nSceneID) = 0;
 
 	virtual bool ExistObject(const NFGUID& ident) = 0;
+    virtual bool ObjectReady(const NFGUID& ident) = 0;
 	virtual bool ExistObject(const NFGUID& ident, const int nSceneID, const int nGroupID) = 0;
 
     virtual NF_SHARE_PTR<NFIObject> GetObject(const NFGUID& ident) = 0;
@@ -204,6 +205,7 @@ public:
 	
 	virtual int GetObjectByProperty(const int nSceneID, const int nGroupID, const std::string& strPropertyName, const NFDataList& valueArg, NFDataList& list) = 0;
 
+    //0-10 ==>0,1,2,3,4,5,6,7,8,9
 	virtual int Random(int nStart, int nEnd) = 0;
 	virtual float Random() = 0;
     virtual bool LogInfo(const NFGUID ident) = 0;

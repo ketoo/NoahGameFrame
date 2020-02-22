@@ -31,28 +31,82 @@
 #include <map>
 #include "NFComm/NFPluginModule/NFPlatform.h"
 
-template <class T>
 class NFMemoryCounter
 {
 private:
 	NFMemoryCounter() {}
+
+    std::string mstrClassName;
+
+    struct Data
+    {
+        Data(NFMemoryCounter* p, int d)
+            :deep(d)
+        {
+            data.insert(std::map<NFMemoryCounter*, int>::value_type(p, d));
+        }
+
+        std::map<NFMemoryCounter*, int> data;
+        int deep = 0;
+    };
+
+    static std::map<std::string, Data>* mxCounter;
+
 public:
-	NFMemoryCounter(const std::string& strClassName)
+
+	NFMemoryCounter(const std::string& strClassName, const int deep = 0)
 	{
 		mstrClassName = strClassName;
-		mxCounter[mstrClassName]++;
+
+        if (!mxCounter)
+        {
+            mxCounter = NF_NEW std::map<std::string, Data>();
+        }
+		
+        auto it = mxCounter->find(mstrClassName);
+        if (it == mxCounter->end())
+        {
+            mxCounter->insert(std::map<std::string, Data>::value_type(mstrClassName, Data(this, deep)));
+        }
+        else
+        {
+            it->second.data.insert(std::map<NFMemoryCounter*, int>::value_type(this, deep));
+        }
 	}
 
 	virtual ~NFMemoryCounter()
 	{
-		mxCounter[mstrClassName]--;
+        auto it = mxCounter->find(mstrClassName);
+        if (it != mxCounter->end())
+        {
+            auto it2 = it->second.data.find(this);
+            if (it2 != it->second.data.end())
+            {
+                it->second.data.erase(it2);
+            }
+        }
 	}
 
-	std::string mstrClassName;
-	static std::map<std::string, int> mxCounter;
-};
+    virtual void ToMemoryCounterString(std::string& info) = 0;
 
-template <class T>
-std::map<std::string, int> NFMemoryCounter<T>::mxCounter;
+    static void PrintMemoryInfo(std::string& info, const int deep = 0)
+    {
+        for (auto it = mxCounter->begin(); it != mxCounter->end(); ++it)
+        {
+            info.append(it->first);
+            info.append("=>");
+            info.append(std::to_string(it->second.data.size()));
+            info.append("\n");
+
+            if (deep && it->second.deep)
+            {
+                for each (auto data in it->second.data)
+                {
+                    data.first->ToMemoryCounterString(info);
+                }
+            }
+        }
+    }
+};
 
 #endif

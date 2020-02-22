@@ -73,11 +73,11 @@ public:
 	}
 
 	// Inherited via NFIVariable
-	virtual void PrepareInputData() override;
-	virtual void UpdateOutputData() override;
+	virtual void PrepareInputData(const NFGUID& runTimeOnwer, const bool iteration) override;
+	virtual void UpdateOutputData(const NFGUID& runTimeOnwer, const bool iteration) override;
 
 	// Inherited via NFIVariable
-	virtual NF_SHARE_PTR<NFBluePrintNodeBase> FindNextNode() override;
+	virtual NF_SHARE_PTR<NFIOData> FindOutputNodeIOData() override;
 };
 
 //for Element Data <class anme && element id && property name>
@@ -168,11 +168,11 @@ public:
 	}
 
 	// Inherited via NFIVariable
-	virtual void PrepareInputData() override;
-	virtual void UpdateOutputData() override;
+	virtual void PrepareInputData(const NFGUID& runTimeOnwer, const bool iteration) override;
+	virtual void UpdateOutputData(const NFGUID& runTimeOnwer, const bool iteration) override;
 
 	// Inherited via NFIVariable
-	virtual NF_SHARE_PTR<NFBluePrintNodeBase> FindNextNode() override;
+	virtual NF_SHARE_PTR<NFIOData> FindOutputNodeIOData() override;
 };
 
 //for Property Data <self id && property name>
@@ -253,13 +253,13 @@ public:
 
 
 	// Inherited via NFIVariable
-	virtual void PrepareInputData() override;
+	virtual void PrepareInputData(const NFGUID& runTimeOnwer, const bool iteration) override;
 
-	virtual void UpdateOutputData() override;
+	virtual void UpdateOutputData(const NFGUID& runTimeOnwer, const bool iteration) override;
 
 
 	// Inherited via NFIVariable
-	virtual NF_SHARE_PTR<NFBluePrintNodeBase> FindNextNode() override;
+	virtual NF_SHARE_PTR<NFIOData> FindOutputNodeIOData() override;
 
 };
 
@@ -356,13 +356,13 @@ public:
 
 
 	// Inherited via NFIVariable
-	virtual void PrepareInputData() override;
+	virtual void PrepareInputData(const NFGUID& runTimeOnwer, const bool iteration) override;
 
-	virtual void UpdateOutputData() override;
+	virtual void UpdateOutputData(const NFGUID& runTimeOnwer, const bool iteration) override;
 
 
 	// Inherited via NFIVariable
-	virtual NF_SHARE_PTR<NFBluePrintNodeBase> FindNextNode() override;
+	virtual NF_SHARE_PTR<NFIOData> FindOutputNodeIOData() override;
 
 };
 //for Record Data <self id && record name && row && col>
@@ -444,15 +444,15 @@ public:
 	}
 
 	// Inherited via NFIVariable
-	virtual void PrepareInputData() override;
+	virtual void PrepareInputData(const NFGUID& runTimeOnwer, const bool iteration) override;
 
 
 	// Inherited via NFIVariable
-	virtual void UpdateOutputData() override;
+	virtual void UpdateOutputData(const NFGUID& runTimeOnwer, const bool iteration) override;
 
 
 	// Inherited via NFIVariable
-	virtual NF_SHARE_PTR<NFBluePrintNodeBase> FindNextNode() override;
+	virtual NF_SHARE_PTR<NFIOData> FindOutputNodeIOData() override;
 
 };
 
@@ -484,13 +484,13 @@ public:
 
 
 	// Inherited via NFIVariable
-	virtual void PrepareInputData() override;
+	virtual void PrepareInputData(const NFGUID& runTimeOnwer, const bool iteration) override;
 
-	virtual void UpdateOutputData() override;
+	virtual void UpdateOutputData(const NFGUID& runTimeOnwer, const bool iteration) override;
 
 
 	// Inherited via NFIVariable
-	virtual NF_SHARE_PTR<NFBluePrintNodeBase> FindNextNode() override;
+	virtual NF_SHARE_PTR<NFIOData> FindOutputNodeIOData() override;
 
 };
 
@@ -522,12 +522,12 @@ public:
 
 
 	// Inherited via NFIVariable
-	virtual void PrepareInputData() override;
+	virtual void PrepareInputData(const NFGUID& runTimeOnwer, const bool iteration) override;
 
-	virtual void UpdateOutputData() override;
+	virtual void UpdateOutputData(const NFGUID& runTimeOnwer, const bool iteration) override;
 
 
 	// Inherited via NFIVariable
-	virtual NF_SHARE_PTR<NFBluePrintNodeBase> FindNextNode() override;
+	virtual NF_SHARE_PTR<NFIOData> FindOutputNodeIOData() override;
 
 };

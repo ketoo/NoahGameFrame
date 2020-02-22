@@ -88,6 +88,7 @@ public:
     virtual bool Changed() const;
 
     virtual std::string ToString();
+    virtual void ToMemoryCounterString(std::string& data);
     virtual bool FromString(const std::string& strData);
     virtual bool DeSerialization();
 

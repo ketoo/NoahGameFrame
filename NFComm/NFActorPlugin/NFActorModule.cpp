@@ -72,12 +72,12 @@ bool NFActorModule::Execute()
 }
 
 
-NFGUID NFActorModule::RequireActor()
+NF_SHARE_PTR<NFIActor> NFActorModule::RequireActor()
 {
 	NF_SHARE_PTR<NFIActor> pActor = NF_SHARE_PTR<NFIActor>(NF_NEW NFActor(m_pKernelModule->CreateGUID(), this));
 	mxActorMap.AddElement(pActor->ID(), pActor);
 
-	return pActor->ID();
+	return pActor;
 }
 
 NF_SHARE_PTR<NFIActor> NFActorModule::GetActor(const NFGUID nActorIndex)
@@ -143,29 +143,6 @@ bool NFActorModule::SendMsgToActor(const NFGUID nActorIndex, const int nEventID,
     }
 
     return false;
-}
-
-bool NFActorModule::AddComponent(const NFGUID nActorIndex, NF_SHARE_PTR<NFIComponent> pComponent)
-{
-    NF_SHARE_PTR<NFIActor> pActor = GetActor(nActorIndex);
-    if (nullptr != pActor)
-    {
-        pActor->AddComponent(pComponent);
-
-        return true;
-    }
-
-    return false;
-}
-
-bool NFActorModule::RemoveComponent(const NFGUID nActorIndex, const std::string& strComponentName)
-{
-	return false;
-}
-
-NF_SHARE_PTR<NFIComponent> NFActorModule::FindComponent(const NFGUID nActorIndex, const std::string& strComponentName)
-{
-	return nullptr;
 }
 
 bool NFActorModule::ReleaseActor(const NFGUID nActorIndex)

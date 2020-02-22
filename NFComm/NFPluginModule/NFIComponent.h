@@ -1,4 +1,4 @@
-/*
+﻿/*
             This file is part of: 
                 NoahFrame
             https://github.com/ketoo/NoahGameFrame
@@ -29,6 +29,7 @@
 #include "NFPlatform.h"
 #include "NFGUID.h"
 #include "NFIModule.h"
+#include "NFComm/NFCore/NFMemoryCounter.hpp"
 
 class NFActorMessage;
 class NFIComponent;
@@ -51,31 +52,100 @@ protected:
 private:
 };
 
-class NFIActor
+class NFIActor : NFMemoryCounter
 {
 public:
+	NFIActor()
+		: NFMemoryCounter(GET_CLASS_NAME(NFIActor), 1)
+	{
+
+	}
+
 	virtual ~NFIActor() {}
 	virtual const NFGUID ID() = 0;
     virtual bool Execute() = 0;
-    
+
+	template <typename T>
+	NF_SHARE_PTR<T> AddComponent()
+	{
+		NF_SHARE_PTR<NFIComponent> component = FindComponent(typeid(T).name());
+		if (component)
+		{
+			return NULL;
+		}
+
+		{
+			if (!TIsDerived<T, NFIComponent>::Result)
+			{
+				return NULL;
+			}
+
+			NF_SHARE_PTR<T> pComponent = NF_SHARE_PTR<T>(NF_NEW T());
+
+			assert(NULL != pComponent);
+
+			AddComponent(pComponent);
+
+			return pComponent;
+		}
+
+		return nullptr;
+	}
+
+
+
+	template <typename T>
+	NF_SHARE_PTR<T> FindComponent()
+	{
+		NF_SHARE_PTR<NFIComponent> component = FindComponent(typeid(T).name());
+		if (component)
+		{
+			NF_SHARE_PTR<T> pT = std::dynamic_pointer_cast<T>(component);
+
+			assert(NULL != pT);
+
+			return pT;
+		}
+
+		return nullptr;
+	}
+	
+	template <typename T>
+	bool RemoveComponent()
+	{
+		NF_SHARE_PTR<NFIComponent> component = FindComponent(typeid(T).name());
+		if (component)
+		{
+			RemoveComponent(component->mstrName);
+			return true;
+		}
+
+		return false;
+	}
+
+	virtual bool SendMsg(const NFActorMessage& message) = 0;
+	virtual bool SendMsg(const int nEventID, const std::string& strArg) = 0;
+
+	virtual bool AddMessageHandler(const int nSubMsgID, ACTOR_PROCESS_FUNCTOR_PTR xBeginFunctor) = 0;
+
+protected:
 	virtual bool AddComponent(NF_SHARE_PTR<NFIComponent> pComponent) = 0;
 	virtual bool RemoveComponent(const std::string& strComponentName) = 0;
 	virtual NF_SHARE_PTR<NFIComponent> FindComponent(const std::string& strComponentName) = 0;
-	
-	virtual bool AddMessageHandler(const int nSubMsgID, ACTOR_PROCESS_FUNCTOR_PTR xBeginFunctor) = 0;
 
-	virtual bool SendMsg(const NFActorMessage& message) = 0;
 };
 
-class NFIComponent
+class NFIComponent : NFMemoryCounter
 {
 private:
     NFIComponent()
+		: NFMemoryCounter(GET_CLASS_NAME(NFIComponent), 1)
     {
     }
 
 public:
     NFIComponent(const std::string& strName)
+		: NFMemoryCounter(GET_CLASS_NAME(NFIComponent), 1)
     {
         mbEnable = true;
         mstrName = strName;
@@ -87,6 +157,7 @@ public:
 	{
 		mSelf = self;
 	}
+
 	virtual NF_SHARE_PTR<NFIActor> GetActor()
 	{
 		return mSelf;
@@ -155,6 +226,12 @@ public:
         return mstrName;
     };
 
+	virtual void ToMemoryCounterString(std::string& info)
+	{
+		info.append(mSelf->ID().ToString());
+		info.append(":");
+		info.append(mstrName);
+	}
 
 	template<typename BaseType>
 	bool AddMsgHandler(const int nSubMessage, BaseType* pBase, int (BaseType::*handler)(NFActorMessage&))

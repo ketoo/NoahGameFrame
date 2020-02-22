@@ -30,6 +30,9 @@
 NFContainerView::NFContainerView(NFIPluginManager* p, NFViewType vt) : NFIView(p, vt, GET_CLASS_NAME(NFContainerView))
 {
    m_pUIModule = pPluginManager->FindModule<NFIUIModule>();
+
+   m_pElementModule = pPluginManager->FindModule<NFIElementModule>();
+   m_pClassModule = pPluginManager->FindModule<NFIClassModule>();
 }
 
 void NFContainerView::FileMenu()
@@ -111,22 +114,26 @@ void NFContainerView::ElementMenu()
 {
    if (ImGui::BeginMenu("Element"))
    {
-      // Disabling fullscreen would allow the window to be moved to the front of other windows,
-      // which we can't undo at the moment without finer window depth/z control.
-      //ImGui::MenuItem("Fullscreen", NULL, &opt_fullscreen_persistant);
+       auto classObject = m_pClassModule->First();
+       while (classObject)
+       {
+           if (ImGui::BeginMenu(classObject->GetClassName().c_str()))
+           {
+               auto objects = classObject->GetIDList();
+               
+               for (int i = 0; i < objects.size(); ++i)
+               {
+                   if (ImGui::MenuItem(objects[i].c_str(), ""))
+                   {
+                   }
+               }
 
-      if (ImGui::MenuItem("Open", ""))
-      {
+               ImGui::EndMenu();
+           }
 
-      }
-      if (ImGui::MenuItem("Save", ""))
-      {
-                  
-      }
-      if (ImGui::MenuItem("Close", ""))
-      {
-                  
-      }
+           classObject = m_pClassModule->Next();
+       }
+
       //ImGui::Separator();
       ImGui::EndMenu();
    }

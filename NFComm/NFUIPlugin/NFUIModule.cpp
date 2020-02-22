@@ -252,17 +252,12 @@ int NFUIModule::SetupGUI()
 	
 	SetupColour(io);
 
-#ifdef NODE_EXT
-#else
 	imnodes::Initialize();
 
 	// set the titlebar color for all nodes
 	imnodes::Style& style = imnodes::GetStyle();
 	style.colors[imnodes::ColorStyle_TitleBar] = IM_COL32(232, 27, 86, 255);
 	style.colors[imnodes::ColorStyle_TitleBarSelected] = IM_COL32(241, 108, 146, 255);
-
-#endif
-	
 
 	return 0;
 }
