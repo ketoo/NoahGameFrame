@@ -25,6 +25,6 @@
 
 #include <map>
 #include <string>
-#include "NFMemoryCounter.hpp"
+#include "NFMemoryCounter.h"
 
 std::map<std::string, NFMemoryCounter::Data>* NFMemoryCounter::mxCounter = nullptr;

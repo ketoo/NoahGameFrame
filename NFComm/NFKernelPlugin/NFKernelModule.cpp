@@ -31,7 +31,7 @@
 #include "NFComm/NFCore/NFPerformance.hpp"
 #include "NFComm/NFCore/NFPropertyManager.h"
 #include "NFComm/NFCore/NFRecordManager.h"
-#include "NFComm/NFCore/NFMemoryCounter.hpp"
+#include "NFComm/NFCore/NFMemoryCounter.h"
 #include "NFComm/NFPluginModule/NFGUID.h"
 #include "NFComm/NFMessageDefine/NFProtocolDefine.hpp"
 

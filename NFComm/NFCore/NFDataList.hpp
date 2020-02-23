@@ -46,7 +46,7 @@
 #include <iostream>
 #include <fstream>
 #include <memory>
-#include "NFMemoryCounter.hpp"
+#include "NFMemoryCounter.h"
 #include "NFComm/NFPluginModule/NFGUID.h"
 #include "NFComm/NFPluginModule/NFPlatform.h"
 #include "NFComm/NFCore/NFVector2.hpp"

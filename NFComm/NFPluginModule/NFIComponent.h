@@ -29,7 +29,7 @@
 #include "NFPlatform.h"
 #include "NFGUID.h"
 #include "NFIModule.h"
-#include "NFComm/NFCore/NFMemoryCounter.hpp"
+#include "NFComm/NFCore/NFMemoryCounter.h"
 
 class NFActorMessage;
 class NFIComponent;
@@ -113,14 +113,7 @@ public:
 	template <typename T>
 	bool RemoveComponent()
 	{
-		NF_SHARE_PTR<NFIComponent> component = FindComponent(typeid(T).name());
-		if (component)
-		{
-			RemoveComponent(component->mstrName);
-			return true;
-		}
-
-		return false;
+		return RemoveComponent(typeid(T).name());
 	}
 
 	virtual bool SendMsg(const NFActorMessage& message) = 0;
@@ -240,18 +233,6 @@ public:
 		ACTOR_PROCESS_FUNCTOR_PTR functorPtr(new ACTOR_PROCESS_FUNCTOR(functor));
 		
 		return mSelf->AddMessageHandler(nSubMessage, functorPtr);
-	}
-
-	template <typename T>
-	NF_SHARE_PTR<T> FindComponent(const std::string& strName)
-	{
-		if (!TIsDerived<T, NFIComponent>::Result)
-		{
-			//BaseTypeComponent must inherit from NFIComponent;
-			return NF_SHARE_PTR<T>();
-		}
-
-		return mSelf->FindComponent(strName);
 	}
 
 private:
