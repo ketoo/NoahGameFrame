@@ -98,7 +98,7 @@ bool NFActorModule::ExecuteEvent()
 		NF_SHARE_PTR<NFIActor> pActor = GetActor(id);
 		if (pActor)
 		{
-			m_pThreadPoolModule->DoAsyncTask("",
+			m_pThreadPoolModule->DoAsyncTask(NFGUID(), "",
 				[pActor](NFThreadTask& threadTask) -> void
 			{
 				pActor->Execute();

@@ -109,13 +109,18 @@ bool NFActor::SendMsg(const NFActorMessage& message)
 
 bool NFActor::SendMsg(const int nEventID, const std::string& strArg)
 {
-	NFActorMessage xMessage;
+	static NFActorMessage xMessage;
 
 	xMessage.id = this->id;
 	xMessage.data = strArg;
 	xMessage.msgID = nEventID;
 
 	return SendMsg(xMessage);
+}
+
+bool NFActor::BackMsgToMainThread(const NFActorMessage& message)
+{
+	return m_pActorModule->AddResult(message);
 }
 
 void NFActor::ToMemoryCounterString(std::string& info)

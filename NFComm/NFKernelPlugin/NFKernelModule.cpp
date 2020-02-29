@@ -170,7 +170,7 @@ NF_SHARE_PTR<NFIObject> NFKernelModule::CreateObject(const NFGUID& self, const i
 	bool backup = false;
 	if (backup)
 	{
-		m_pThreadPoolModule->DoAsyncTask("",
+		m_pThreadPoolModule->DoAsyncTask(NFGUID(), "",
 			[=](NFThreadTask& task) -> void
 			{
 				//backup thread for async task
@@ -241,7 +241,7 @@ NF_SHARE_PTR<NFIObject> NFKernelModule::CreateObject(const NFGUID& self, const i
 					DoEvent(ident, strClassName, pObject->GetState(), arg);
 				}
 
-				m_pThreadPoolModule->DoAsyncTask("",
+				m_pThreadPoolModule->DoAsyncTask(NFGUID(), "",
 					[=](NFThreadTask& task) -> void
 					{
 						//backup thread
@@ -324,7 +324,7 @@ NF_SHARE_PTR<NFIObject> NFKernelModule::CreateObject(const NFGUID& self, const i
 
 						}
 
-						m_pThreadPoolModule->DoAsyncTask("",
+						m_pThreadPoolModule->DoAsyncTask(NFGUID(), "",
 							[=](NFThreadTask& task) -> void
 							{
 								//back up thread

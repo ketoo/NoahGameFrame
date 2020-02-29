@@ -54,6 +54,7 @@ public:
 
     virtual bool SendMsg(const NFActorMessage& message);
     virtual bool SendMsg(const int nEventID, const std::string& strArg);
+    virtual bool BackMsgToMainThread(const NFActorMessage& message);
 
     virtual bool AddMessageHandler(const int nSubMsgID, ACTOR_PROCESS_FUNCTOR_PTR xBeginFunctor);
 

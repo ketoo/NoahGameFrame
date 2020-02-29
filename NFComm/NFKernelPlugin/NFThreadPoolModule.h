@@ -95,7 +95,7 @@ public:
 
     virtual bool Execute();
 
-	virtual void DoAsyncTask(const NFGUID taskID, const std::string& data, TASK_PROCESS_FUNCTOR_PTR asyncFunctor, TASK_PROCESS_FUNCTOR_PTR functor_end, const int rd = 0);
+	virtual void DoAsyncTask(const NFGUID taskID, const std::string& data, TASK_PROCESS_FUNCTOR_PTR asyncFunctor, TASK_PROCESS_FUNCTOR_PTR functor_end);
 
 	virtual void TaskResult(const NFThreadTask& task);
 
