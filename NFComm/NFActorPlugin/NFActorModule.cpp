@@ -138,9 +138,8 @@ bool NFActorModule::SendMsgToActor(const NFGUID actorIndex, const int eventID, c
 		xMessage.msgID = eventID;
 		xMessage.arg = arg;
 
-		mActorMessageCount[pActor->ID()] = 1;
 
-		return pActor->SendMsg(xMessage);
+		return this->SendMsgToActor(actorIndex, xMessage);
     }
 
     return false;
@@ -154,4 +153,18 @@ bool NFActorModule::ReleaseActor(const NFGUID nActorIndex)
 bool NFActorModule::AddEndFunc(const int subMessageID, ACTOR_PROCESS_FUNCTOR_PTR functorPtr_end)
 {
 	return mxEndFunctor.AddElement(subMessageID, functorPtr_end);
+}
+
+bool NFActorModule::SendMsgToActor(const NFGUID actorIndex, const NFActorMessage &message)
+{
+	NF_SHARE_PTR<NFIActor> pActor = GetActor(actorIndex);
+	if (nullptr != pActor)
+	{
+		mActorMessageCount[pActor->ID()] = 1;
+		pActor->SendMsg(message);
+
+		return true;
+	}
+
+	return false;
 }

@@ -58,6 +58,7 @@ public:
 	virtual NF_SHARE_PTR<NFIActor> GetActor(const NFGUID nActorIndex);
 	virtual bool ReleaseActor(const NFGUID nActorIndex);
 
+	virtual bool SendMsgToActor(const NFGUID actorIndex, const NFActorMessage& message);
     virtual bool SendMsgToActor(const NFGUID actorIndex, const int eventID, const std::string& data, const std::string& arg = "");
 
 	virtual bool AddResult(const NFActorMessage& message);
@@ -67,7 +68,6 @@ protected:
 
 	virtual bool ExecuteEvent();
 	virtual bool ExecuteResultEvent();
-
 
 private:
     NFIKernelModule* m_pKernelModule;
