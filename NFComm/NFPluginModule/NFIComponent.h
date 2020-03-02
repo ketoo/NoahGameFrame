@@ -48,6 +48,7 @@ public:
 	int msgID;
     NFGUID id;
 	std::string data;
+	std::string arg;
 protected:
 private:
 };
@@ -117,7 +118,7 @@ public:
 	}
 
 	virtual bool SendMsg(const NFActorMessage& message) = 0;
-	virtual bool SendMsg(const int nEventID, const std::string& strArg) = 0;
+	virtual bool SendMsg(const int eventID, const std::string& data, const std::string& arg = "") = 0;
 	virtual bool BackMsgToMainThread(const NFActorMessage& message) = 0;
 
 	virtual bool AddMessageHandler(const int nSubMsgID, ACTOR_PROCESS_FUNCTOR_PTR xBeginFunctor) = 0;

@@ -107,13 +107,14 @@ bool NFActor::SendMsg(const NFActorMessage& message)
 	return mMessageQueue.Push(message);
 }
 
-bool NFActor::SendMsg(const int nEventID, const std::string& strArg)
+bool NFActor::SendMsg(const int eventID, const std::string& data, const std::string& arg)
 {
 	static NFActorMessage xMessage;
 
 	xMessage.id = this->id;
-	xMessage.data = strArg;
-	xMessage.msgID = nEventID;
+	xMessage.msgID = eventID;
+	xMessage.data = data;
+	xMessage.arg = arg;
 
 	return SendMsg(xMessage);
 }

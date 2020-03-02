@@ -50,6 +50,8 @@ bool NFSyncModule::Shut()
 
 bool NFSyncModule::Execute()
 {
+
+
     return true;
 }
 
@@ -64,10 +66,41 @@ bool NFSyncModule::AfterInit()
     return true;
 }
 
+bool NFSyncModule::RequireMove(const NFGUID self, const NFVector3& pos, const int type)
+{
+	RequireStop(self);
+	auto it = mPlayerPosition.find(self);
+	if (it == mPlayerPosition.end())
+	{
+		mPlayerPosition.insert(std::map<NFGUID, NFVector3>::value_type(self, pos));
+	}
+
+	return true;
+}
+
+bool NFSyncModule::RequireStop(const NFGUID self)
+{
+	auto it = mPlayerPosition.find(self);
+	if (it != mPlayerPosition.end())
+	{
+		mPlayerPosition.erase(it);
+	}
+
+	return true;
+}
+
 
 int NFSyncModule::SyncHeart(const std::string & strHeartName, const float fTime, const int nCount)
 {
-	//std::cout << strHeartName << " " << fTime << " " << nCount << std::endl;
+	//0.1s
+	for (auto item : mPlayerPosition)
+	{
+		const NFVector3& pos = m_pKernelModule->GetPropertyVector3(item.first, NFrame::NPC::Position());
+		const float speed = m_pKernelModule->GetPropertyFloat(item.first, NFrame::NPC::MOVE_SPEED());
+		const NFVector3 newPos = (item.second - pos).Normalized() * fTime;
+
+		m_pKernelModule->SetPropertyVector3(item.first, NFrame::NPC::Position(), newPos);
+	}
 
 	return 0;
 }

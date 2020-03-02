@@ -419,7 +419,7 @@ bool NFCommonRedisModule::ConvertVectorToPropertyManager(std::vector<std::string
 				continue;
 			}
 
-			std::cout << strKey << ":" << strValue << std::endl;
+			//std::cout << strKey << ":" << strValue << std::endl;
 
 			NF_SHARE_PTR<NFIProperty> pProperty = pPropertyManager->GetElement(strKey);
 			if (!pProperty->GetCache() && !pProperty->GetSave())
@@ -486,7 +486,7 @@ bool NFCommonRedisModule::ConvertPropertyManagerToVector(NF_SHARE_PTR<NFIPropert
 		const std::string& strPropertyName = pProperty->GetKey();
 		const std::string& strPropertyValue = pProperty->ToString();
 
-		std::cout << strPropertyName << ":" << strPropertyValue << std::endl;
+		//std::cout << strPropertyName << ":" << strPropertyValue << std::endl;
 
 		vKeyList.push_back(strPropertyName);
 		vValueList.push_back(strPropertyValue);

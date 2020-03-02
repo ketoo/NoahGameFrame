@@ -77,7 +77,7 @@ public:
 	virtual NF_SHARE_PTR<NFIActor> GetActor(const NFGUID nActorIndex) = 0;
 	virtual bool ReleaseActor(const NFGUID nActorIndex) = 0;
 
-    virtual bool SendMsgToActor(const NFGUID nActorIndex, const int messageID, const std::string& strArg) = 0;
+    virtual bool SendMsgToActor(const NFGUID actorIndex, const int eventID, const std::string& data, const std::string& arg = "") = 0;
 
 	//only be called by actor's processor
     virtual bool AddResult(const NFActorMessage& message) = 0;

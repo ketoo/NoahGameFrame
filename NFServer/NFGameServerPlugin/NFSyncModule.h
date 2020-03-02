@@ -36,14 +36,7 @@
 #include "NFComm/NFPluginModule/NFISceneModule.h"
 #include "NFComm/NFPluginModule/NFIClassModule.h"
 #include "NFComm/NFPluginModule/NFILogModule.h"
-
-class NFISyncModule
-    : public NFIModule
-{
-
-public:
-
-};
+#include "NFComm/NFPluginModule/NFISyncModule.h"
 
 class NFSyncModule
     : public NFISyncModule
@@ -60,6 +53,9 @@ public:
     virtual bool Execute();
     virtual bool AfterInit();
 
+    virtual bool RequireMove(const NFGUID self, const NFVector3& pos, const int type) override;
+    virtual bool RequireStop(const NFGUID self) override;
+
 protected:
 	int SyncHeart(const std::string& strHeartName, const float fTime, const int nCount);
 
@@ -70,8 +66,9 @@ protected:
 	int OnPlayePositionEvent(const NFGUID& self, const std::string& strPropertyName, const NFData& oldVar, const NFData& newVar);
 
 private:
-	//sceneID -> <PlayerID, Position>
-	NFMapEx<int, NFMap<NFGUID, NFVector3>> mxPlayerPosition;
+    //<PlayerID, Position>
+    //speed?
+    std::map<NFGUID, NFVector3> mPlayerPosition;
 
 private:
 	NFIScheduleModule* m_pScheduleModule;

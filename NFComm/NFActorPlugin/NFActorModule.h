@@ -58,7 +58,7 @@ public:
 	virtual NF_SHARE_PTR<NFIActor> GetActor(const NFGUID nActorIndex);
 	virtual bool ReleaseActor(const NFGUID nActorIndex);
 
-    virtual bool SendMsgToActor(const NFGUID nActorIndex, const int messageID, const std::string& strArg);
+    virtual bool SendMsgToActor(const NFGUID actorIndex, const int eventID, const std::string& data, const std::string& arg = "");
 
 	virtual bool AddResult(const NFActorMessage& message);
 

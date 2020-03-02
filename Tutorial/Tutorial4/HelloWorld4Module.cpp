@@ -186,7 +186,7 @@ bool NFHelloWorld4Module::AfterInit()
 		//example 4
 		for (int i = 0; i < messageCount; ++i)
 		{
-			m_pThreadPoolModule->DoAsyncTask("sas",
+			m_pThreadPoolModule->DoAsyncTask(NFGUID(), "sas",
 				[&](NFThreadTask& task) -> void
 			{
 				//std::cout << "example 4 thread id: " << std::this_thread::get_id() << " task id:" << task.nTaskID.ToString() << " task data:" << task.data << std::endl;
@@ -208,7 +208,7 @@ bool NFHelloWorld4Module::AfterInit()
 		//example 4
 		for (int i = 0; i < messageCount; ++i)
 		{
-			m_pThreadPoolModule->DoAsyncTask("sas",
+			m_pThreadPoolModule->DoAsyncTask(NFGUID(), "sas",
 				[&](NFThreadTask& task) -> void
 			{
 				//std::cout << "example 4 thread id: " << std::this_thread::get_id() << " task id:" << taskID.ToString() << " task data:" << strData << std::endl;

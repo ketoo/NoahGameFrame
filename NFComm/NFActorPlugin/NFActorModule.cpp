@@ -126,16 +126,17 @@ bool NFActorModule::ExecuteResultEvent()
 	return true;
 }
 
-bool NFActorModule::SendMsgToActor(const NFGUID nActorIndex, const int nEventID, const std::string& strArg)
+bool NFActorModule::SendMsgToActor(const NFGUID actorIndex, const int eventID, const std::string& data, const std::string& arg)
 {
-    NF_SHARE_PTR<NFIActor> pActor = GetActor(nActorIndex);
+    NF_SHARE_PTR<NFIActor> pActor = GetActor(actorIndex);
     if (nullptr != pActor)
     {
         NFActorMessage xMessage;
 
-		xMessage.id	= nActorIndex;
-        xMessage.data = strArg;
-        xMessage.msgID = nEventID;
+		xMessage.id	= actorIndex;
+        xMessage.data = data;
+		xMessage.msgID = eventID;
+		xMessage.arg = arg;
 
 		mActorMessageCount[pActor->ID()] = 1;
 
