@@ -63,8 +63,12 @@ void BEGIN_NODE(const int id, const std::string& name, ImTextureID user_texture_
     imnodes::BeginNode(id);
 
     imnodes::BeginNodeTitleBar();
-    ImGui::Image((void*)(intptr_t)user_texture_id, ImVec2(iconSize.X(), iconSize.Y()));
-    ImGui::SameLine();
+    if (user_texture_id != NULL)
+    {
+        ImGui::Image((void*)(intptr_t)user_texture_id, ImVec2(iconSize.X(), iconSize.Y()));
+        ImGui::SameLine();
+    }
+
     ImGui::TextUnformatted(name.c_str());
     imnodes::EndNodeTitleBar();
 }
