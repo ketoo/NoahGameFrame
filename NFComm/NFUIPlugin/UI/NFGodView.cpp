@@ -29,20 +29,21 @@
 
 NFGodView::NFGodView(NFIPluginManager* p, NFViewType vt) : NFIView(p, vt, GET_CLASS_NAME(NFGodView))
 {
-   m_pUIModule = pPluginManager->FindModule<NFIUIModule>();
-   m_pClassModule = pPluginManager->FindModule<NFIClassModule>();
-   m_pElementModule = pPluginManager->FindModule<NFIElementModule>();
-   m_pSceneModule = pPluginManager->FindModule<NFISceneModule>();
-   m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>();
+	m_pUIModule = pPluginManager->FindModule<NFIUIModule>();
+	m_pClassModule = pPluginManager->FindModule<NFIClassModule>();
+	m_pElementModule = pPluginManager->FindModule<NFIElementModule>();
+	m_pSceneModule = pPluginManager->FindModule<NFISceneModule>();
+	m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>();
 
 
-   m_pNodeView = NF_NEW NFNodeView(p);
-   m_pTreeView = NF_NEW NFTreeView(p);
+	m_pNodeView = NF_NEW NFNodeView(p);
+	m_pTreeView = NF_NEW NFTreeView(p);
 
     m_pNodeView->ResetOffset(NFVector2::Zero());
+	m_pNodeView->SetHoverNodeCallBack(std::bind(&NFGodView::HandlerNodeHovered, this, std::placeholders::_1));
 
-   m_pTreeView->SetSelectedNodeFunctor(std::bind(&NFGodView::HandlerSelected, this, std::placeholders::_1));
-   m_pTreeView->SetName(GET_CLASS_NAME(NFGodView));
+	m_pTreeView->SetSelectedNodeFunctor(std::bind(&NFGodView::HandlerSelected, this, std::placeholders::_1, std::placeholders::_2));
+	m_pTreeView->SetName(GET_CLASS_NAME(NFGodView));
 }
 
 NFGodView::~NFGodView()
@@ -158,9 +159,15 @@ bool NFGodView::Execute()
 	return true;
 }
 
-void NFGodView::HandlerSelected(const NFGUID& id)
+void NFGodView::HandlerSelected(const NFGUID& id, const bool doubleClick)
 {
 	SetCurrentObjectID(id);
+
+	if (doubleClick)
+	{
+		NFNodeView* pView = (NFNodeView*)m_pNodeView;
+		pView->MoveToNode(mCurrentObjectID);
+	}
 
 	//occupy inspectorview
 	NF_SHARE_PTR<NFIView> pHierachyView = m_pUIModule->GetView(NFViewType::HierachyView);
@@ -169,6 +176,32 @@ void NFGodView::HandlerSelected(const NFGUID& id)
 	{
 		pInspectorView->OccupySubRender(pHierachyView.get());
 	}
+}
+
+bool NFGodView::HandlerNodeHovered(const NFGUID& id)
+{
+	const std::string& className = m_pKernelModule->GetPropertyString(id, NFrame::IObject::ClassName());
+	const std::string& name = m_pKernelModule->GetPropertyString(id, NFrame::IObject::Name());
+	const NFVector3& pos = m_pKernelModule->GetPropertyVector3(id, NFrame::IObject::Position());
+
+	std::string propertyTitle = className;
+	if (name.length() > 0)
+	{
+		propertyTitle  = className +"[" + name + "]";
+	}
+
+	std::string propertyPos =  + "Position:" + std::to_string((int)pos.X()) + "," + std::to_string((int)pos.Y()) + "," + std::to_string((int)pos.Z());
+
+	//pop up windows
+
+	ImGui::BeginTooltip();
+	ImGui::Text(propertyTitle.c_str());
+	ImGui::Text(id.ToString().c_str());
+	ImGui::Separator();
+	ImGui::Text(propertyPos.c_str());
+	ImGui::EndTooltip();
+
+	return true;
 }
 
 NFVector2 NFGodView::ToNodeSpacePos(const NFVector2& v)
@@ -264,12 +297,6 @@ NFGUID NFGodView::GetCurrentObjectID()
 void NFGodView::SetCurrentObjectID(const NFGUID& id)
 {
    mCurrentObjectID = id;
-   const std::string& strName = m_pKernelModule->GetPropertyString(mCurrentObjectID, NFrame::IObject::Name());
-   const NFVector3& pos = m_pKernelModule->GetPropertyVector3(mCurrentObjectID, NFrame::IObject::Position());
-
-   NFNodeView* pView = (NFNodeView*)m_pNodeView;
-
-   pView->MoveToNode(mCurrentObjectID);
 }
 
 void NFGodView::RenderSceneObjectNode(const int sceneID, const int groupID)
@@ -288,9 +315,11 @@ void NFGodView::RenderSceneObjectNode(const int sceneID, const int groupID)
 		 const std::string& className = m_pKernelModule->GetPropertyString(guid, NFrame::IObject::ClassName());
 		 const std::string& name = m_pKernelModule->GetPropertyString(guid, NFrame::IObject::Name());
          const NFVector3& pos = m_pKernelModule->GetPropertyVector3(guid, NFrame::IObject::Position());
-		 std::string barTile = className + "(" + std::to_string((int)pos.X()) + "," + std::to_string((int)pos.Z()) + ")";
+		 std::string nodeName = className.substr(0, 1) + "(" + std::to_string((int)pos.X()) + "," + std::to_string((int)pos.Z()) + ")";
          
-		 pView->AddNode(guid, barTile, NFColor::DEFAULT, ToNodeSpacePos(NFVector2(pos.X(), pos.Z())));
+		 auto node = pView->AddNode(guid, nodeName, NFColor::DEFAULT, ToNodeSpacePos(NFVector2(pos.X(), -pos.Z())));
+		 node->title = false;
+
 		 pView->SetNodeDraggable(guid, false);
       }
    }
@@ -308,12 +337,19 @@ void NFGodView::UpdateSceneObjectNodePosition(const int sceneID, const int group
 		for (int k = 0; k < list.GetCount(); ++k)
 		{
 			const NFGUID& guid = list.Object(k);
-			const std::string& className = m_pKernelModule->GetPropertyString(guid, NFrame::IObject::ClassName());
-			const std::string& name = m_pKernelModule->GetPropertyString(guid, NFrame::IObject::Name());
-			const NFVector3& pos = m_pKernelModule->GetPropertyVector3(guid, NFrame::IObject::Position());
-			std::string barTile = className + "(" + std::to_string((int)pos.X()) + "," + std::to_string((int)pos.Z()) + ")";
+			if (m_pKernelModule->ExistObject(guid))
+			{
+				const std::string& className = m_pKernelModule->GetPropertyString(guid, NFrame::IObject::ClassName());
+				const std::string& name = m_pKernelModule->GetPropertyString(guid, NFrame::IObject::Name());
+				const NFVector3& pos = m_pKernelModule->GetPropertyVector3(guid, NFrame::IObject::Position());
+				std::string barTile = className + "(" + std::to_string((int)pos.X()) + "," + std::to_string((int)pos.Z()) + ")";
 
-			pView->SetNodePosition(guid, ToNodeSpacePos(NFVector2(pos.X(), pos.Z())));
+				pView->SetNodePosition(guid, ToNodeSpacePos(NFVector2(pos.X(), pos.Z())));
+			}
+			else
+			{
+				//log
+			}
 		}
 	}
 }

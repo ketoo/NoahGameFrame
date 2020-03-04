@@ -546,9 +546,10 @@ bool NFKernelModule::DestroyObject(const NFGUID& self)
 		return DestroySelf(self);
 	}
 
-	const int nSceneID = GetPropertyInt32(self, NFrame::IObject::SceneID());
+	const int sceneID = GetPropertyInt32(self, NFrame::IObject::SceneID());
+	const int groupID = GetPropertyInt32(self, NFrame::IObject::GroupID());
 
-	NF_SHARE_PTR<NFSceneInfo> pContainerInfo = m_pSceneModule->GetElement(nSceneID);
+	NF_SHARE_PTR<NFSceneInfo> pContainerInfo = m_pSceneModule->GetElement(sceneID);
 	if (pContainerInfo)
 	{
 		const std::string& strClassName = GetPropertyString(self, NFrame::IObject::ClassName());
@@ -560,8 +561,13 @@ bool NFKernelModule::DestroyObject(const NFGUID& self)
 		DoEvent(self, strClassName, COE_BEFOREDESTROY, NFDataList::Empty());
 		DoEvent(self, strClassName, COE_DESTROY, NFDataList::Empty());
 
-		RemoveElement(self);
+		if (strClassName != NFrame::Player::ThisName())
+		{
+			pContainerInfo->RemoveObjectFromGroup(groupID, self, false);
+		}
 
+		RemoveElement(self);
+		
 		m_pEventModule->RemoveEventCallBack(self);
 		m_pScheduleModule->RemoveSchedule(self);
 
@@ -569,7 +575,7 @@ bool NFKernelModule::DestroyObject(const NFGUID& self)
 
 	}
 
-	m_pLogModule->LogError(self, "There is no scene " + std::to_string(nSceneID), __FUNCTION__, __LINE__);
+	m_pLogModule->LogError(self, "There is no scene " + std::to_string(sceneID), __FUNCTION__, __LINE__);
 
 	return false;
 }

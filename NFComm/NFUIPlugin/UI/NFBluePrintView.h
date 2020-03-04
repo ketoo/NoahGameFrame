@@ -62,7 +62,7 @@ public:
 	NFNodeView* GetNodeView();
 	
 private:
-	void HandlerSelected(const NFGUID& id);
+	void HandlerSelected(const NFGUID& id, const bool doubleClick);
 	void NodeModifyEvent(const NFGUID& id, const bool create);
 	void LinkModifyEvent(const NFGUID& id, const bool create);
 

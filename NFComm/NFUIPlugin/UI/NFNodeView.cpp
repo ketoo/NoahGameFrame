@@ -58,19 +58,22 @@ void END_OUT_PIN()
     imnodes::EndAttribute();
 }
 
-void BEGIN_NODE(const int id, const std::string& name, ImTextureID user_texture_id, const NFVector2& iconSize)
+void BEGIN_NODE(const int id, const bool title, const std::string& name, ImTextureID user_texture_id, const NFVector2& iconSize)
 {
     imnodes::BeginNode(id);
 
-    imnodes::BeginNodeTitleBar();
-    if (user_texture_id != NULL)
+    if (title)
     {
-        ImGui::Image((void*)(intptr_t)user_texture_id, ImVec2(iconSize.X(), iconSize.Y()));
-        ImGui::SameLine();
-    }
+        imnodes::BeginNodeTitleBar();
+        if (user_texture_id != NULL)
+        {
+            ImGui::Image((void*)(intptr_t)user_texture_id, ImVec2(iconSize.X(), iconSize.Y()));
+            ImGui::SameLine();
+        }
 
-    ImGui::TextUnformatted(name.c_str());
-    imnodes::EndNodeTitleBar();
+        ImGui::TextUnformatted(name.c_str());
+        imnodes::EndNodeTitleBar();
+    }
 }
 
 void END_NODE()
@@ -111,6 +114,11 @@ bool IS_LINK_CREATED(int* const started_at, int* const ended_at)
 void IS_LINK_HOVERED(int* const link)
 {
     imnodes::IsLinkHovered(link);
+}
+
+void IS_NODE_HOVERED(int* const link)
+{
+    imnodes::IsNodeHovered(link);
 }
 
 void SET_CURRENT_CONTEXT(void* p)
@@ -211,7 +219,7 @@ void NFNodePin::Execute()
    }
    else
    {
-       PUSH_COLOR(imnodes::ColorStyle::ColorStyle_Pin, color);
+        PUSH_COLOR(imnodes::ColorStyle::ColorStyle_Pin, color);
 
         BEGIN_OUT_PIN(id, shape);
 
@@ -289,11 +297,19 @@ void NFNode::Execute()
 		this->iconTextureId = (void*)(intptr_t)my_image_texture;
 	}
 
-    PUSH_COLOR(imnodes::ColorStyle::ColorStyle_TitleBar, color);
+    if (title)
+    {
+        PUSH_COLOR(imnodes::ColorStyle::ColorStyle_TitleBar, color);
+    }
+    else
+    {
+        PUSH_COLOR(imnodes::ColorStyle::ColorStyle_NodeBackground, color);
+    }
+
     PUSH_COLOR(imnodes::ColorStyle::ColorStyle_TitleBarHovered, color + 1000);
     PUSH_COLOR(imnodes::ColorStyle::ColorStyle_TitleBarSelected, color + 1000);
 
-    BEGIN_NODE(id, name, this->iconTextureId, this->iconSize);
+    BEGIN_NODE(id, title, name, this->iconTextureId, this->iconSize);
 
     POP_COLOR();
     POP_COLOR();
@@ -378,6 +394,7 @@ bool NFNodeView::Execute()
 
     CheckNewLinkStatus();
     CheckDeleteLinkStatus();
+    CheckHoverNodeStatus();
 
 	return false;
 }
@@ -396,6 +413,11 @@ void NFNodeView::SetUpNewLinkCallBack(std::function<bool(const NFGUID&, const NF
 void NFNodeView::SetUpDeleteLinkCallBack(std::function<bool(const NFGUID&)> functor)
 {
     mTryDeleteLinkFunctor = functor;
+}
+
+void NFNodeView::SetHoverNodeCallBack(std::function<bool(const NFGUID&)> functor)
+{
+    mHoverNodeFunctor = functor;
 }
 
 void NFNodeView::SetPinRenderCallBack(std::function<void(NFNodePin*)> functor)
@@ -761,13 +783,35 @@ void NFNodeView::CheckDeleteLinkStatus()
                 if (link->index == selectedLink)
                 {
                     //try to delete this link
-                    if (mTryNewLinkFunctor)
+                    if (mTryDeleteLinkFunctor)
                     {
                         mTryDeleteLinkFunctor(link->selfID);
                     }
 
                     return;
                 }
+            }
+        }
+    }
+}
+
+void NFNodeView::CheckHoverNodeStatus()
+{
+    int selectNode = -1;
+    IS_NODE_HOVERED(&selectNode);
+    if (selectNode >= 0)
+    {
+        for (auto it = mNodes.begin(); it != mNodes.end(); ++it)
+        {
+            auto node = it->second;
+            if (node->id == selectNode)
+            {
+                if (mHoverNodeFunctor)
+                {
+                    mHoverNodeFunctor(node->guid);
+                }
+
+                return;
             }
         }
     }

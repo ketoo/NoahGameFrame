@@ -95,8 +95,8 @@ public:
 	~NFTreeView();
 
 	void SetName(const std::string& name);
-	void SetSelectedNode(const NFGUID& nodeId);
-	void SetSelectedNodeFunctor(std::function<void(const NFGUID&)> functor);
+	void SetSelectedNode(const NFGUID& nodeId, bool doubleClick);
+	void SetSelectedNodeFunctor(std::function<void(const NFGUID&, const bool)> functor);
 	const NFGUID GetSelectedNode();
 
 	void AddTreeNode(const NFGUID guid, const std::string& name);
@@ -115,7 +115,7 @@ private:
 	//maybe tree node, maybe leaf node
 	NFGUID mSelectedNode;
 
-	std::function<void(const NFGUID&)> mSelectedFuntor;
+	std::function<void(const NFGUID&, const bool)> mSelectedFuntor;
 
 	std::map<NFGUID, NF_SHARE_PTR<NFTreeNode>> mTrees;
 

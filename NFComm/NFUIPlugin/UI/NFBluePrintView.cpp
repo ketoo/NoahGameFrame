@@ -111,7 +111,7 @@ NFBluePrintView::NFBluePrintView(NFIPluginManager* p, NFViewType vt) : NFIView(p
 
 
 
-   m_pTreeView->SetSelectedNodeFunctor(std::bind(&NFBluePrintView::HandlerSelected, this, std::placeholders::_1));
+   m_pTreeView->SetSelectedNodeFunctor(std::bind(&NFBluePrintView::HandlerSelected, this, std::placeholders::_1, std::placeholders::_2));
    m_pTreeView->SetName(GET_CLASS_NAME(NFBluePrintView));
 
    m_pUIModule = pPluginManager->FindModule<NFIUIModule>();
@@ -244,7 +244,7 @@ void NFBluePrintView::SubRender()
    m_pTreeView->Execute();
 }
 
-void NFBluePrintView::HandlerSelected(const NFGUID& id)
+void NFBluePrintView::HandlerSelected(const NFGUID& id, const bool doubleClick)
 {
 	mCurrentObjectID = NFGUID();
 	auto node = m_pBluePrintModule->FindNode(id);

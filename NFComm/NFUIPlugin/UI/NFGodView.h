@@ -51,7 +51,8 @@ private:
     NFVector2 ToNodeSpacePos(const NFVector2& v);
 
 	void RenderScene(const int sceneID, const int groupID);
-	void HandlerSelected(const NFGUID& id);
+	void HandlerSelected(const NFGUID& id, const bool doubleClick);
+    bool HandlerNodeHovered(const NFGUID& id);
 
     void RenderSceneObjectNode(const int sceneID, const int groupID);
     void UpdateSceneObjectNodePosition(const int sceneID, const int groupID);

@@ -33,7 +33,36 @@ NFSceneView::NFSceneView(NFIPluginManager* p, NFViewType vt) : NFIView(p, vt, GE
 
 bool NFSceneView::Execute()
 {
+    /*
+    // My Game has a different viewport than the editor's one:
+    const int W = 1080 / 2;
+    const int H = 1920 / 2;
+    // We set the same viewport size (plus margin) to the next window (if first use)
+    ImGui::SetNextWindowSize(ImVec2(W + 10, H + 10),
+        ImGuiSetCond_FirstUseEver);
+    ImGui::Begin("Game rendering");
+    {
+        // Get the current cursor position (where your window is)
+        ImVec2 pos = ImGui::GetCursorScreenPos();
 
+        // A boolean to allow me to stop the game rendering
+        if (runApp) {
+            glViewport(0, 0, W, H);
+            // Render the scene into an FBO
+            game->render(time);
+            // Restore previous viewport
+            glViewport(0, 0, w, h);
+        }
+        // Get the texture associated to the FBO
+        auto tex = game->getRendered();
+
+        // Ask ImGui to draw it as an image:
+        // Under OpenGL the ImGUI image type is GLuint
+        // So make sure to use "(void *)tex" but not "&tex"
+        ImGui::GetWindowDrawList()->AddImage((void*)tex, ImVec2(ImGui::GetItemRectMin().x + pos.x, ImGui::GetItemRectMin().y + pos.y), ImVec2(pos.x + h / 2, pos.y + w / 2), ImVec2(0, 1), ImVec2(1, 0));
+    }
+    ImGui::End();
+    */
 	//1. get all scene from static config data
 	//2. let the user choose one scene
 	//3. get all objects of this level

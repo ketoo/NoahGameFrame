@@ -32,16 +32,20 @@ void NFLeafNode::Execute()
 	bool selected = false;
 	if (mTreeView->GetSelectedNode() == guid)
 	{
-		selected = true;
+		//selected = true;
 	}
 
 	ImGui::Checkbox("", &selected);
 	ImGui::SameLine();
 	ImGui::Bullet();
 	ImGui::SameLine();
-	if (ImGui::Selectable(name.c_str(), &selected))
+
+	if (ImGui::Selectable(name.c_str(), &selected, ImGuiSelectableFlags_AllowDoubleClick))
 	{
-		mTreeView->SetSelectedNode(guid);
+		if (ImGui::IsMouseDoubleClicked(0))
+		{
+			mTreeView->SetSelectedNode(guid, true);
+		}
 	}
 }
 
@@ -68,9 +72,16 @@ void NFTreeNode::Execute()
 	ImGui::Checkbox("", &selected);
 	ImGui::SameLine();
 	bool node_open = ImGui::TreeNodeEx((void*)(intptr_t)id, node_flags, name.c_str());
-	if (ImGui::IsItemClicked())
+	if (ImGui::IsMouseDoubleClicked(0) && ImGui::IsItemHovered(ImGuiHoveredFlags_None))
 	{
-		mTreeView->SetSelectedNode(guid);
+		mTreeView->SetSelectedNode(guid, true);
+	}
+	else
+	{
+		if (ImGui::IsItemClicked())
+		{
+			mTreeView->SetSelectedNode(guid, false);
+		}
 	}
 
 	if (node_open)
@@ -162,16 +173,16 @@ void NFTreeView::SetName(const std::string& name)
 	this->name = name;
 }
 
-void NFTreeView::SetSelectedNode(const NFGUID& nodeId)
+void NFTreeView::SetSelectedNode(const NFGUID& nodeId, bool doubleClick)
 {
 	mSelectedNode = nodeId;
 	if (mSelectedFuntor)
 	{
-		mSelectedFuntor(mSelectedNode);
+		mSelectedFuntor(mSelectedNode, doubleClick);
 	}
 }
 
-void NFTreeView::SetSelectedNodeFunctor(std::function<void(const NFGUID&)> functor)
+void NFTreeView::SetSelectedNodeFunctor(std::function<void(const NFGUID&, const bool)> functor)
 {
 	mSelectedFuntor = functor;
 }
