@@ -53,7 +53,8 @@ bool NFNPCRefreshModule::AfterInit()
     m_pElementModule = pPluginManager->FindModule<NFIElementModule>();
 	m_pLogModule = pPluginManager->FindModule<NFILogModule>();
 	m_pPropertyModule = pPluginManager->FindModule<NFIPropertyModule>();
-
+	m_pSceneModule = pPluginManager->FindModule<NFISceneModule>();
+	
 	m_pKernelModule->AddClassCallBack(NFrame::NPC::ThisName(), this, &NFNPCRefreshModule::OnObjectClassEvent);
 
     return true;
@@ -141,14 +142,14 @@ int NFNPCRefreshModule::OnNPCDeadDestroyHeart( const NFGUID& self, const std::st
     int nSceneID = m_pKernelModule->GetPropertyInt32( self, NFrame::NPC::SceneID());
 	int nGroupID = m_pKernelModule->GetPropertyInt32(self, NFrame::NPC::GroupID());
 
-	NFVector3 fSeedPos = m_pKernelModule->GetPropertyVector3( self, NFrame::NPC::Position());
+	const NFVector3& seedPos = m_pSceneModule->GetSeedPos(nSceneID, strSeedID);
 
 	if (nNPCType == NFMsg::ENPCType::NORMAL_NPC)
 	{
 		m_pKernelModule->DestroySelf(self);
 
 		NFDataList arg;
-		arg << NFrame::NPC::Position() << fSeedPos;
+		arg << NFrame::NPC::Position() << seedPos;
 		arg << NFrame::NPC::SeedID() << strSeedID;
 		arg << NFrame::NPC::MasterID() << xMasterID;
 		arg << NFrame::NPC::AIOwnerID() << xAIOwnerID;

@@ -319,6 +319,36 @@ bool NFSceneModule::AddSeedData(const int nSceneID, const std::string & strSeedI
 	return false;
 }
 
+const NFVector3& NFSceneModule::GetSeedPos(const int nSceneID, const std::string& strSeedID)
+{
+	NF_SHARE_PTR<NFSceneInfo> pSceneInfo = GetElement(nSceneID);
+	if (pSceneInfo)
+	{
+		auto seedDnata = pSceneInfo->GetSeedObjectInfo(strSeedID);
+		if (seedDnata)
+		{
+			return seedDnata->vSeedPos;
+		}
+	}
+
+	return NFVector3::Zero();
+}
+
+const int NFSceneModule::GetSeedPWeight(const int nSceneID, const std::string& strSeedID)
+{
+	NF_SHARE_PTR<NFSceneInfo> pSceneInfo = GetElement(nSceneID);
+	if (pSceneInfo)
+	{
+		auto seedDnata = pSceneInfo->GetSeedObjectInfo(strSeedID);
+		if (seedDnata)
+		{
+			return seedDnata->nWeight;
+		}
+	}
+
+	return 0;
+}
+
 bool NFSceneModule::AddRelivePosition(const int nSceneID, const int nIndex, const NFVector3 & vPos)
 {
 	NF_SHARE_PTR<NFSceneInfo> pSceneInfo = GetElement(nSceneID);

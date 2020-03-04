@@ -37,6 +37,7 @@
 #include "NFComm/NFPluginModule/NFIScheduleModule.h"
 #include "NFComm/NFPluginModule/NFIEventModule.h"
 #include "NFComm/NFPluginModule/NFIPropertyModule.h"
+#include "NFComm/NFPluginModule/NFISceneModule.h"
 
 class NFINPCRefreshModule : public NFIModule
 {
@@ -77,6 +78,7 @@ private:
     NFISceneProcessModule* m_pSceneProcessModule;
 	NFILogModule* m_pLogModule;
 	NFIPropertyModule* m_pPropertyModule;
+    NFISceneModule* m_pSceneModule;
 };
 
 

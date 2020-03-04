@@ -238,6 +238,9 @@ public:
 	virtual const std::vector<int>& GetGroups(const int nSceneID) = 0;
 
 	virtual bool AddSeedData(const int nSceneID, const std::string& strSeedID, const std::string& strConfigID, const NFVector3& vPos, const int nHeight) = 0;
+	virtual const NFVector3& GetSeedPos(const int nSceneID, const std::string& strSeedID) = 0;
+	virtual const int GetSeedPWeight(const int nSceneID, const std::string& strSeedID) = 0;
+
 	virtual bool AddRelivePosition(const int nSceneID, const int nIndex, const NFVector3& vPos) = 0;
 	virtual const NFVector3& GetRelivePosition(const int nSceneID, const int nIndex, const bool bRoll = true) = 0;
 	virtual bool AddTagPosition(const int nSceneID, const int nIndex, const NFVector3& vPos) = 0;

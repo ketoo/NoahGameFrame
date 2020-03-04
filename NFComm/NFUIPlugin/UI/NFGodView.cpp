@@ -35,6 +35,7 @@ NFGodView::NFGodView(NFIPluginManager* p, NFViewType vt) : NFIView(p, vt, GET_CL
 	m_pSceneModule = pPluginManager->FindModule<NFISceneModule>();
 	m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>();
 
+	m_pKernelModule->RegisterCommonClassEvent(this, &NFGodView::OnClassCommonEvent);
 
 	m_pNodeView = NF_NEW NFNodeView(p);
 	m_pTreeView = NF_NEW NFTreeView(p);
@@ -156,6 +157,7 @@ bool NFGodView::Execute()
 
 	UpdateSceneObjectNodePosition(mSceneID, mGroupID);
 
+
 	return true;
 }
 
@@ -206,7 +208,9 @@ bool NFGodView::HandlerNodeHovered(const NFGUID& id)
 
 NFVector2 NFGodView::ToNodeSpacePos(const NFVector2& v)
 {
-	return NFVector2(v.X() * 10, v.Y() * 10);
+	int size = imnodes::GetStyle().grid_spacing / 2;
+	int offset = imnodes::GetStyle().grid_spacing / 4;
+	return NFVector2(v.X() * size - offset, v.Y() * -size - offset);
 	//return NFVector2(v.X(), v.Y());
 }
 
@@ -352,4 +356,57 @@ void NFGodView::UpdateSceneObjectNodePosition(const int sceneID, const int group
 			}
 		}
 	}
+}
+
+int NFGodView::OnClassCommonEvent(const NFGUID& self, const std::string& strClassNames, const CLASS_OBJECT_EVENT eClassEvent, const NFDataList& var)
+{
+	if (eClassEvent == CLASS_OBJECT_EVENT::COE_DESTROY)
+	{
+		const int scene = m_pKernelModule->GetPropertyInt(self, NFrame::IObject::SceneID());
+		const int group = m_pKernelModule->GetPropertyInt(self, NFrame::IObject::GroupID());
+
+		if (scene == mSceneID)
+		{
+			if (group == mGroupID)
+			{
+				m_pTreeView->DeleteTreeNode(self);
+
+				NFNodeView* pView = (NFNodeView*)m_pNodeView;
+				pView->DeleteNode(self);
+			}
+			else
+			{
+				m_pTreeView->DeleteTreeNode(self);
+			}
+		}
+	}
+	else if (eClassEvent == CLASS_OBJECT_EVENT::COE_CREATE_FINISH)
+	{
+		int scene = m_pKernelModule->GetPropertyInt(self, NFrame::IObject::SceneID());
+		int group = m_pKernelModule->GetPropertyInt(self, NFrame::IObject::GroupID());
+
+		if (scene == mSceneID && group == mGroupID)
+		{
+			const std::string& className = m_pKernelModule->GetPropertyString(self, NFrame::IObject::ClassName());
+
+			//tree
+			std::string buttonName = className + "<" + self.ToString() + ">";
+
+			m_pTreeView->AddSubTreeNode(NFGUID(mSceneID, mGroupID), self, buttonName.c_str());
+
+			//node
+
+			const std::string& name = m_pKernelModule->GetPropertyString(self, NFrame::IObject::Name());
+			const NFVector3& pos = m_pKernelModule->GetPropertyVector3(self, NFrame::IObject::Position());
+			std::string nodeName = className.substr(0, 1) + "(" + std::to_string((int)pos.X()) + "," + std::to_string((int)pos.Z()) + ")";
+
+			NFNodeView* pView = (NFNodeView*)m_pNodeView;
+			auto node = pView->AddNode(self, nodeName, NFColor::DEFAULT, ToNodeSpacePos(NFVector2(pos.X(), pos.Z())));
+			node->title = false;
+
+			pView->SetNodeDraggable(self, false);
+		}
+	}
+
+	return 0;
 }

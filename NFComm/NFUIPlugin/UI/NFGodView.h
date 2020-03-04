@@ -57,6 +57,8 @@ private:
     void RenderSceneObjectNode(const int sceneID, const int groupID);
     void UpdateSceneObjectNodePosition(const int sceneID, const int groupID);
 
+    int OnClassCommonEvent(const NFGUID& self, const std::string& strClassNames, const CLASS_OBJECT_EVENT eClassEvent, const NFDataList& var);
+
 private:
 	int mGroupID = -1;
 	int mSceneID = -1;
