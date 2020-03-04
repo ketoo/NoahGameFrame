@@ -153,6 +153,13 @@ bool NFGodView::Execute()
        m_pNodeView->ResetOffset(NFVector2::Zero());
    }
 
+	//draw map data as the background
+   //1. let the walkable area empty
+   //2. draw the unwalkable area with unfill rectangle (should be a cross in the center of the rectangle)
+   //3. draw the item area with unfill circle (should be a cross in the center of the rectangle)
+   //4. draw the stair with a sign
+   //5 how to tell the user about the height of the map
+
 	m_pNodeView->Execute();
 
 	UpdateSceneObjectNodePosition(mSceneID, mGroupID);
