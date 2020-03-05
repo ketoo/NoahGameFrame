@@ -24,6 +24,7 @@ namespace NFrame
 		public static readonly String Name = "Name";// string
 		public static readonly String Position = "Position";// vector3
 		public static readonly String SceneID = "SceneID";// int
+		public static readonly String State = "State";// int
 		// Property
 		public static readonly String ATK_DARK = "ATK_DARK";// int
 		public static readonly String ATK_FIRE = "ATK_FIRE";// int
@@ -111,6 +112,7 @@ namespace NFrame
 		public static readonly String Name = "Name";// string
 		public static readonly String Position = "Position";// vector3
 		public static readonly String SceneID = "SceneID";// int
+		public static readonly String State = "State";// int
 		// Property
 		public static readonly String Level = "Level";// int
 		// Record
@@ -129,6 +131,7 @@ namespace NFrame
 		public static readonly String Name = "Name";// string
 		public static readonly String Position = "Position";// vector3
 		public static readonly String SceneID = "SceneID";// int
+		public static readonly String State = "State";// int
 		// Property
 		// Record
 
@@ -146,6 +149,7 @@ namespace NFrame
 		public static readonly String Name = "Name";// string
 		public static readonly String Position = "Position";// vector3
 		public static readonly String SceneID = "SceneID";// int
+		public static readonly String State = "State";// int
 		// Record
 
 	}
@@ -162,6 +166,7 @@ namespace NFrame
 		public static readonly String Name = "Name";// string
 		public static readonly String Position = "Position";// vector3
 		public static readonly String SceneID = "SceneID";// int
+		public static readonly String State = "State";// int
 		// Property
 		public static readonly String HeroConfigID = "HeroConfigID";// string
 		public static readonly String Job = "Job";// int
@@ -182,6 +187,7 @@ namespace NFrame
 		public static readonly String Name = "Name";// string
 		public static readonly String Position = "Position";// vector3
 		public static readonly String SceneID = "SceneID";// int
+		public static readonly String State = "State";// int
 		// Property
 		public static readonly String Chinese = "Chinese";// string
 		public static readonly String English = "English";// string
@@ -203,6 +209,7 @@ namespace NFrame
 		public static readonly String Name = "Name";// string
 		public static readonly String Position = "Position";// vector3
 		public static readonly String SceneID = "SceneID";// int
+		public static readonly String State = "State";// int
 		// Property
 		public static readonly String AIOwnerID = "AIOwnerID";// object
 		public static readonly String Camp = "Camp";// object
@@ -327,6 +334,7 @@ namespace NFrame
 		public static readonly String Name = "Name";// string
 		public static readonly String Position = "Position";// vector3
 		public static readonly String SceneID = "SceneID";// int
+		public static readonly String State = "State";// int
 		// Property
 		public static readonly String Auth = "Auth";// string
 		public static readonly String IP = "IP";// string
@@ -348,6 +356,7 @@ namespace NFrame
 		public static readonly String Name = "Name";// string
 		public static readonly String Position = "Position";// vector3
 		public static readonly String SceneID = "SceneID";// int
+		public static readonly String State = "State";// int
 		// Property
 		public static readonly String Account = "Account";// string
 		public static readonly String Camp = "Camp";// object
@@ -462,6 +471,7 @@ namespace NFrame
 		public static readonly String Name = "Name";// string
 		public static readonly String Position = "Position";// vector3
 		public static readonly String SceneID = "SceneID";// int
+		public static readonly String State = "State";// int
 		// Property
 		public static readonly String ActorID = "ActorID";// int
 		public static readonly String FilePath = "FilePath";// string
@@ -492,6 +502,7 @@ namespace NFrame
 		public static readonly String Name = "Name";// string
 		public static readonly String Position = "Position";// vector3
 		public static readonly String SceneID = "SceneID";// int
+		public static readonly String State = "State";// int
 		// Property
 		public static readonly String SecurityData = "SecurityData";// string
 		// Record
@@ -510,6 +521,7 @@ namespace NFrame
 		public static readonly String Name = "Name";// string
 		public static readonly String Position = "Position";// vector3
 		public static readonly String SceneID = "SceneID";// int
+		public static readonly String State = "State";// int
 		// Property
 		public static readonly String Area = "Area";// int
 		public static readonly String Cell = "Cell";// int
@@ -537,6 +549,7 @@ namespace NFrame
 		public static readonly String Name = "Name";// string
 		public static readonly String Position = "Position";// vector3
 		public static readonly String SceneID = "SceneID";// int
+		public static readonly String State = "State";// int
 		// Property
 		public static readonly String AnimaState = "AnimaState";// string
 		public static readonly String AtkDis = "AtkDis";// float

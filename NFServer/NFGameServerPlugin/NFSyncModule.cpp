@@ -57,7 +57,6 @@ bool NFSyncModule::Execute()
 
 bool NFSyncModule::AfterInit()
 {
-	m_pScheduleModule->AddSchedule("NFSyncModule", this, &NFSyncModule::SyncHeart, 0.1f, -1);
 
 	m_pKernelModule->AddClassCallBack(NFrame::NPC::ThisName(), this, &NFSyncModule::OnNPCClassEvent);
 	m_pKernelModule->AddClassCallBack(NFrame::Player::ThisName(), this, &NFSyncModule::OnPlayerClassEvent);
@@ -93,14 +92,7 @@ bool NFSyncModule::RequireStop(const NFGUID self)
 int NFSyncModule::SyncHeart(const std::string & strHeartName, const float fTime, const int nCount)
 {
 	//0.1s
-	for (auto item : mPlayerPosition)
-	{
-		const NFVector3& pos = m_pKernelModule->GetPropertyVector3(item.first, NFrame::NPC::Position());
-		const float speed = m_pKernelModule->GetPropertyFloat(item.first, NFrame::NPC::MOVE_SPEED());
-		const NFVector3 newPos = (item.second - pos).Normalized() * fTime;
 
-		m_pKernelModule->SetPropertyVector3(item.first, NFrame::NPC::Position(), newPos);
-	}
 
 	return 0;
 }
@@ -109,7 +101,6 @@ int NFSyncModule::OnNPCClassEvent(const NFGUID & self, const std::string & strCl
 {
 	if (CLASS_OBJECT_EVENT::COE_CREATE_FINISH == eClassEvent)
 	{
-		m_pKernelModule->AddPropertyCallBack(self, NFrame::NPC::Position(), this, &NFSyncModule::OnNPCPositionEvent);
 	}
 
 	return 0;
@@ -124,7 +115,6 @@ int NFSyncModule::OnPlayerClassEvent(const NFGUID & self, const std::string & st
 {
 	if (CLASS_OBJECT_EVENT::COE_CREATE_FINISH == eClassEvent)
 	{
-		m_pKernelModule->AddPropertyCallBack(self, NFrame::Player::Position(), this, &NFSyncModule::OnPlayePositionEvent);
 	}
 
 	return 0;

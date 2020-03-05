@@ -23,6 +23,7 @@ namespace NFrame
 		static const std::string& Name(){ static std::string x = "Name"; return x; };// string
 		static const std::string& Position(){ static std::string x = "Position"; return x; };// vector3
 		static const std::string& SceneID(){ static std::string x = "SceneID"; return x; };// int
+		static const std::string& State(){ static std::string x = "State"; return x; };// int
 		// Property
 		static const std::string& ATK_DARK(){ static std::string x = "ATK_DARK"; return x; };// int
 		static const std::string& ATK_FIRE(){ static std::string x = "ATK_FIRE"; return x; };// int
@@ -111,6 +112,7 @@ namespace NFrame
 		static const std::string& Name(){ static std::string x = "Name"; return x; };// string
 		static const std::string& Position(){ static std::string x = "Position"; return x; };// vector3
 		static const std::string& SceneID(){ static std::string x = "SceneID"; return x; };// int
+		static const std::string& State(){ static std::string x = "State"; return x; };// int
 		// Property
 		static const std::string& Level(){ static std::string x = "Level"; return x; };// int
 		// Record
@@ -129,6 +131,7 @@ namespace NFrame
 		static const std::string& Name(){ static std::string x = "Name"; return x; };// string
 		static const std::string& Position(){ static std::string x = "Position"; return x; };// vector3
 		static const std::string& SceneID(){ static std::string x = "SceneID"; return x; };// int
+		static const std::string& State(){ static std::string x = "State"; return x; };// int
 		// Property
 		// Record
 
@@ -146,6 +149,7 @@ namespace NFrame
 		static const std::string& Name(){ static std::string x = "Name"; return x; };// string
 		static const std::string& Position(){ static std::string x = "Position"; return x; };// vector3
 		static const std::string& SceneID(){ static std::string x = "SceneID"; return x; };// int
+		static const std::string& State(){ static std::string x = "State"; return x; };// int
 		// Record
 
 	};
@@ -162,6 +166,7 @@ namespace NFrame
 		static const std::string& Name(){ static std::string x = "Name"; return x; };// string
 		static const std::string& Position(){ static std::string x = "Position"; return x; };// vector3
 		static const std::string& SceneID(){ static std::string x = "SceneID"; return x; };// int
+		static const std::string& State(){ static std::string x = "State"; return x; };// int
 		// Property
 		static const std::string& HeroConfigID(){ static std::string x = "HeroConfigID"; return x; };// string
 		static const std::string& Job(){ static std::string x = "Job"; return x; };// int
@@ -182,6 +187,7 @@ namespace NFrame
 		static const std::string& Name(){ static std::string x = "Name"; return x; };// string
 		static const std::string& Position(){ static std::string x = "Position"; return x; };// vector3
 		static const std::string& SceneID(){ static std::string x = "SceneID"; return x; };// int
+		static const std::string& State(){ static std::string x = "State"; return x; };// int
 		// Property
 		static const std::string& Chinese(){ static std::string x = "Chinese"; return x; };// string
 		static const std::string& English(){ static std::string x = "English"; return x; };// string
@@ -203,6 +209,7 @@ namespace NFrame
 		static const std::string& Name(){ static std::string x = "Name"; return x; };// string
 		static const std::string& Position(){ static std::string x = "Position"; return x; };// vector3
 		static const std::string& SceneID(){ static std::string x = "SceneID"; return x; };// int
+		static const std::string& State(){ static std::string x = "State"; return x; };// int
 		// Property
 		static const std::string& AIOwnerID(){ static std::string x = "AIOwnerID"; return x; };// object
 		static const std::string& Camp(){ static std::string x = "Camp"; return x; };// object
@@ -328,6 +335,7 @@ namespace NFrame
 		static const std::string& Name(){ static std::string x = "Name"; return x; };// string
 		static const std::string& Position(){ static std::string x = "Position"; return x; };// vector3
 		static const std::string& SceneID(){ static std::string x = "SceneID"; return x; };// int
+		static const std::string& State(){ static std::string x = "State"; return x; };// int
 		// Property
 		static const std::string& Auth(){ static std::string x = "Auth"; return x; };// string
 		static const std::string& IP(){ static std::string x = "IP"; return x; };// string
@@ -349,6 +357,7 @@ namespace NFrame
 		static const std::string& Name(){ static std::string x = "Name"; return x; };// string
 		static const std::string& Position(){ static std::string x = "Position"; return x; };// vector3
 		static const std::string& SceneID(){ static std::string x = "SceneID"; return x; };// int
+		static const std::string& State(){ static std::string x = "State"; return x; };// int
 		// Property
 		static const std::string& Account(){ static std::string x = "Account"; return x; };// string
 		static const std::string& Camp(){ static std::string x = "Camp"; return x; };// object
@@ -464,6 +473,7 @@ namespace NFrame
 		static const std::string& Name(){ static std::string x = "Name"; return x; };// string
 		static const std::string& Position(){ static std::string x = "Position"; return x; };// vector3
 		static const std::string& SceneID(){ static std::string x = "SceneID"; return x; };// int
+		static const std::string& State(){ static std::string x = "State"; return x; };// int
 		// Property
 		static const std::string& ActorID(){ static std::string x = "ActorID"; return x; };// int
 		static const std::string& FilePath(){ static std::string x = "FilePath"; return x; };// string
@@ -494,6 +504,7 @@ namespace NFrame
 		static const std::string& Name(){ static std::string x = "Name"; return x; };// string
 		static const std::string& Position(){ static std::string x = "Position"; return x; };// vector3
 		static const std::string& SceneID(){ static std::string x = "SceneID"; return x; };// int
+		static const std::string& State(){ static std::string x = "State"; return x; };// int
 		// Property
 		static const std::string& SecurityData(){ static std::string x = "SecurityData"; return x; };// string
 		// Record
@@ -512,6 +523,7 @@ namespace NFrame
 		static const std::string& Name(){ static std::string x = "Name"; return x; };// string
 		static const std::string& Position(){ static std::string x = "Position"; return x; };// vector3
 		static const std::string& SceneID(){ static std::string x = "SceneID"; return x; };// int
+		static const std::string& State(){ static std::string x = "State"; return x; };// int
 		// Property
 		static const std::string& Area(){ static std::string x = "Area"; return x; };// int
 		static const std::string& Cell(){ static std::string x = "Cell"; return x; };// int
@@ -539,6 +551,7 @@ namespace NFrame
 		static const std::string& Name(){ static std::string x = "Name"; return x; };// string
 		static const std::string& Position(){ static std::string x = "Position"; return x; };// vector3
 		static const std::string& SceneID(){ static std::string x = "SceneID"; return x; };// int
+		static const std::string& State(){ static std::string x = "State"; return x; };// int
 		// Property
 		static const std::string& AnimaState(){ static std::string x = "AnimaState"; return x; };// string
 		static const std::string& AtkDis(){ static std::string x = "AtkDis"; return x; };// float

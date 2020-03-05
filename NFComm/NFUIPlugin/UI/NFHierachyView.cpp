@@ -83,19 +83,39 @@ void NFHierachyView::GodViewSubRender()
    NF_SHARE_PTR<NFIObject> pObject = m_pKernelModule->GetObject(objectID);
    if (pObject)
    {
+	   auto element = m_pClassModule->GetElement(NFrame::IObject::ThisName());
+	   NF_SHARE_PTR<NFIProperty> property = element->GetPropertyManager()->First();
+	   while (property)
+	   {
+		   if (ImGui::Button(property->GetKey().c_str()))
+		   {
+			   modifyPropertyName = property->GetKey();
+			   strcpy(modifyPropertyValue, property->ToString().c_str());
+		   }
+
+			ImGui::SameLine();
+
+			auto p = pObject->GetPropertyManager()->GetElement(property->GetKey());
+			ImGui::Text(p->ToString().c_str());
+
+			property = element->GetPropertyManager()->Next();
+	   }
+
+		ImGui::Separator();
+
 		NF_SHARE_PTR<NFIProperty> pProperty = pObject->GetPropertyManager()->First();
 		while(pProperty)
 		{
-			if (ImGui::Button(pProperty->GetKey().c_str()))
+			if (!element->GetPropertyManager()->GetElement(pProperty->GetKey()))
 			{
-				modifyPropertyName = pProperty->GetKey();
-				strcpy(modifyPropertyValue, pProperty->ToString().c_str());
+				if (ImGui::Button(pProperty->GetKey().c_str()))
+				{
+					modifyPropertyName = pProperty->GetKey();
+					strcpy(modifyPropertyValue, pProperty->ToString().c_str());
+				}
+				ImGui::SameLine();
+				ImGui::Text(pProperty->ToString().c_str());
 			}
-         	ImGui::SameLine();
-         	ImGui::Text(pProperty->ToString().c_str());
-
-         	//static char str0[128] = "Hello, world!";
-         	//ImGui::InputText("input text", str0, IM_ARRAYSIZE(str0));
          
          	pProperty = pObject->GetPropertyManager()->Next();
       	}
