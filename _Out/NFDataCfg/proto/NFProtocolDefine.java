@@ -228,6 +228,7 @@ package nframe;
 		public static final String NPCSubType = "NPCSubType";// int
 		public static final String NPCType = "NPCType";// int
 		public static final String Prefab = "Prefab";// string
+		public static final String Refresh = "Refresh";// int
 		public static final String SP = "SP";// int
 		public static final String SeedID = "SeedID";// string
 		public static final String ShowCard = "ShowCard";// string

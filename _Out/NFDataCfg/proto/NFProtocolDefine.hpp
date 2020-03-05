@@ -234,6 +234,7 @@ namespace NFrame
 		static const std::string& NPCSubType(){ static std::string x = "NPCSubType"; return x; };// int
 		static const std::string& NPCType(){ static std::string x = "NPCType"; return x; };// int
 		static const std::string& Prefab(){ static std::string x = "Prefab"; return x; };// string
+		static const std::string& Refresh(){ static std::string x = "Refresh"; return x; };// int
 		static const std::string& SP(){ static std::string x = "SP"; return x; };// int
 		static const std::string& SeedID(){ static std::string x = "SeedID"; return x; };// string
 		static const std::string& ShowCard(){ static std::string x = "ShowCard"; return x; };// string

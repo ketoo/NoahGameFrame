@@ -234,6 +234,7 @@ namespace NFrame
 		public static readonly String NPCSubType = "NPCSubType";// int
 		public static readonly String NPCType = "NPCType";// int
 		public static readonly String Prefab = "Prefab";// string
+		public static readonly String Refresh = "Refresh";// int
 		public static readonly String SP = "SP";// int
 		public static readonly String SeedID = "SeedID";// string
 		public static readonly String ShowCard = "ShowCard";// string

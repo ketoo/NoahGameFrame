@@ -82,14 +82,22 @@ void NFHierachyView::GodViewSubRender()
 	   const int group = m_pKernelModule->GetPropertyInt(objectID, NFrame::IObject::GroupID());
 	   const std::string& className = m_pKernelModule->GetPropertyString(objectID, NFrame::IObject::ClassName());
 	   const std::string& configID = m_pKernelModule->GetPropertyString(objectID, NFrame::IObject::ConfigID());
+	   const NFVector3& position = m_pKernelModule->GetPropertyVector3(objectID, NFrame::IObject::Position());
 
-	   m_pKernelModule->CreateObject(NFGUID(), scene, group, className, configID, NFDataList::Empty());
+	   NFDataList dataList;
+	   dataList << NFrame::IObject::Position();
+	   dataList << position;
+
+	   m_pKernelModule->CreateObject(NFGUID(), scene, group, className, configID, dataList);
    }
+
    ImGui::SameLine();
    if (ImGui::Button("Destroy"))
    {
 	   m_pKernelModule->DestroyObject(objectID);
    }
+
+   ImGui::Separator();
 
    ImGui::BeginGroup();
 
