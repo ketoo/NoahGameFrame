@@ -229,7 +229,6 @@ NF_SHARE_PTR<NFIObject> NFKernelModule::CreateObject(const NFGUID& self, const i
 				{
 					NFVector3 vRelivePos = m_pSceneModule->GetRelivePosition(nSceneID, 0);
 
-					pObject->SetPropertyObject(NFrame::IObject::ID(), ident);
 					pObject->SetPropertyString(NFrame::IObject::ConfigID(), strConfigIndex);
 					pObject->SetPropertyString(NFrame::IObject::ClassName(), strClassName);
 					pObject->SetPropertyInt(NFrame::IObject::SceneID(), nSceneID);

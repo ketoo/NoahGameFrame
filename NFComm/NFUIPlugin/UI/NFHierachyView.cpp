@@ -71,12 +71,25 @@ void NFHierachyView::SubRender()
    }
 }
 
-
 void NFHierachyView::GodViewSubRender()
 {
    NFGUID objectID = ((NFGodView*)m_pOccupyView)->GetCurrentObjectID();
-   std::string name = "GodView" + objectID.ToString();
+   std::string name = "GUID: " + objectID.ToString();
    ImGui::Text(name.c_str());
+   if (ImGui::Button("Create"))
+   {
+	   const int scene = m_pKernelModule->GetPropertyInt(objectID, NFrame::IObject::SceneID());
+	   const int group = m_pKernelModule->GetPropertyInt(objectID, NFrame::IObject::GroupID());
+	   const std::string& className = m_pKernelModule->GetPropertyString(objectID, NFrame::IObject::ClassName());
+	   const std::string& configID = m_pKernelModule->GetPropertyString(objectID, NFrame::IObject::ConfigID());
+
+	   m_pKernelModule->CreateObject(NFGUID(), scene, group, className, configID, NFDataList::Empty());
+   }
+   ImGui::SameLine();
+   if (ImGui::Button("Destroy"))
+   {
+	   m_pKernelModule->DestroyObject(objectID);
+   }
 
    ImGui::BeginGroup();
 
@@ -87,11 +100,7 @@ void NFHierachyView::GodViewSubRender()
 	   NF_SHARE_PTR<NFIProperty> property = element->GetPropertyManager()->First();
 	   while (property)
 	   {
-		   if (ImGui::Button(property->GetKey().c_str()))
-		   {
-			   modifyPropertyName = property->GetKey();
-			   strcpy(modifyPropertyValue, property->ToString().c_str());
-		   }
+			ImGui::Button(property->GetKey().c_str());
 
 			ImGui::SameLine();
 
@@ -101,6 +110,7 @@ void NFHierachyView::GodViewSubRender()
 			property = element->GetPropertyManager()->Next();
 	   }
 
+		ImGui::Separator();
 		ImGui::Separator();
 
 		NF_SHARE_PTR<NFIProperty> pProperty = pObject->GetPropertyManager()->First();
