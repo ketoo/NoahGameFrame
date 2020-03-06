@@ -13,7 +13,7 @@
   <PropertyGroup Label="Globals">
     <ProjectGuid>{651CEB7A-C45C-4D37-B46F-50F5FC3EAC8B}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
-    <RootNamespace>NFUIPlugin</RootNamespace>
+    <RootNamespace>NFRenderPlugin</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -59,7 +59,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN;_DEBUG;_WINDOWS;ELPP_NO_DEFAULT_LOG_FILE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>.\;.\imgui;.\imgui\NodeEditor\Include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.\;.\gl3w;.\imgui;.\imnodes;.\scene;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <BrowseInformation>false</BrowseInformation>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
     </ClCompile>
@@ -82,7 +82,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>WIN;_WINDOWS;ELPP_NO_DEFAULT_LOG_FILE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>.\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.\;.\gl3w;.\imgui;.\imnodes;.\scene;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
     </ClCompile>
     <Link>
@@ -95,20 +95,28 @@
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="GL\gl3w.h" />
-    <ClInclude Include="GL\glcorearb.h" />
+    <ClInclude Include="gl3w\GL\gl3w.h" />
+    <ClInclude Include="gl3w\GL\glcorearb.h" />
     <ClInclude Include="imgui\imconfig.h" />
     <ClInclude Include="imgui\imgui.h" />
     <ClInclude Include="imgui\imgui_impl_opengl3.h" />
     <ClInclude Include="imgui\imgui_impl_sdl.h" />
     <ClInclude Include="imgui\imgui_internal.h" />
-    <ClInclude Include="imgui\imnodes.h" />
     <ClInclude Include="imgui\imstb_rectpack.h" />
     <ClInclude Include="imgui\imstb_textedit.h" />
     <ClInclude Include="imgui\imstb_truetype.h" />
-    <ClInclude Include="NF3DRenderModule.h" />
+    <ClInclude Include="imnodes\imnodes.h" />
+    <ClInclude Include="NFRenderModule.h" />
     <ClInclude Include="NFUIModule.h" />
-    <ClInclude Include="NFUIPlugin.h" />
+    <ClInclude Include="NFRenderPlugin.h" />
+    <ClInclude Include="Scene\NFCameraComponent.h" />
+    <ClInclude Include="Scene\NFImageLoader.h" />
+    <ClInclude Include="Scene\NFLightComponent.h" />
+    <ClInclude Include="Scene\NFMeshComponent.h" />
+    <ClInclude Include="Scene\NFMeshLoader.h" />
+    <ClInclude Include="Scene\NFScene.h" />
+    <ClInclude Include="Scene\NFSceneLoader.h" />
+    <ClInclude Include="Scene\NFSceneNode.h" />
     <ClInclude Include="UI\NFBluePrintView.h" />
     <ClInclude Include="UI\NFConsoleView.h" />
     <ClInclude Include="UI\NFContainerView.h" />
@@ -132,17 +140,25 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
       </PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="GL\gl3w.c" />
+    <ClCompile Include="gl3w\GL\gl3w.c" />
     <ClCompile Include="imgui\imgui.cpp" />
     <ClCompile Include="imgui\imgui_demo.cpp" />
     <ClCompile Include="imgui\imgui_draw.cpp" />
     <ClCompile Include="imgui\imgui_impl_opengl3.cpp" />
     <ClCompile Include="imgui\imgui_impl_sdl.cpp" />
     <ClCompile Include="imgui\imgui_widgets.cpp" />
-    <ClCompile Include="imgui\imnodes.cpp" />
-    <ClCompile Include="NF3DRenderModule.cpp" />
+    <ClCompile Include="imnodes\imnodes.cpp" />
+    <ClCompile Include="NFRenderModule.cpp" />
     <ClCompile Include="NFUIModule.cpp" />
-    <ClCompile Include="NFUIPlugin.cpp" />
+    <ClCompile Include="NFRenderPlugin.cpp" />
+    <ClCompile Include="Scene\NFCameraComponent.cpp" />
+    <ClCompile Include="Scene\NFImageLoader.cpp" />
+    <ClCompile Include="Scene\NFLightComponent.cpp" />
+    <ClCompile Include="Scene\NFMeshComponent.cpp" />
+    <ClCompile Include="Scene\NFMeshLoader.cpp" />
+    <ClCompile Include="Scene\NFScene.cpp" />
+    <ClCompile Include="Scene\NFSceneLoader.cpp" />
+    <ClCompile Include="Scene\NFSceneNode.cpp" />
     <ClCompile Include="UI\NFBluePrintView.cpp" />
     <ClCompile Include="UI\NFConsoleView.cpp" />
     <ClCompile Include="UI\NFContainerView.cpp" />

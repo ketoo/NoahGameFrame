@@ -1,0 +1,220 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="dllmain.cpp" />
+    <ClCompile Include="NFUIModule.cpp" />
+    <ClCompile Include="UI\NFBluePrintView.cpp">
+      <Filter>UI</Filter>
+    </ClCompile>
+    <ClCompile Include="UI\NFConsoleView.cpp">
+      <Filter>UI</Filter>
+    </ClCompile>
+    <ClCompile Include="UI\NFContainerView.cpp">
+      <Filter>UI</Filter>
+    </ClCompile>
+    <ClCompile Include="UI\NFGameView.cpp">
+      <Filter>UI</Filter>
+    </ClCompile>
+    <ClCompile Include="UI\NFGodView.cpp">
+      <Filter>UI</Filter>
+    </ClCompile>
+    <ClCompile Include="UI\NFHierachyView.cpp">
+      <Filter>UI</Filter>
+    </ClCompile>
+    <ClCompile Include="UI\NFInspectorView.cpp">
+      <Filter>UI</Filter>
+    </ClCompile>
+    <ClCompile Include="UI\NFNodeView.cpp">
+      <Filter>UI</Filter>
+    </ClCompile>
+    <ClCompile Include="UI\NFOperatorView.cpp">
+      <Filter>UI</Filter>
+    </ClCompile>
+    <ClCompile Include="UI\NFProfileView.cpp">
+      <Filter>UI</Filter>
+    </ClCompile>
+    <ClCompile Include="UI\NFProjectView.cpp">
+      <Filter>UI</Filter>
+    </ClCompile>
+    <ClCompile Include="UI\NFSceneView.cpp">
+      <Filter>UI</Filter>
+    </ClCompile>
+    <ClCompile Include="UI\NFTreeView.cpp">
+      <Filter>UI</Filter>
+    </ClCompile>
+    <ClCompile Include="NFRenderPlugin.cpp" />
+    <ClCompile Include="Scene\NFScene.cpp">
+      <Filter>Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="gl3w\GL\gl3w.c">
+      <Filter>gl3w\GL</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene\NFSceneNode.cpp">
+      <Filter>Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene\NFMeshLoader.cpp">
+      <Filter>Scene\Help</Filter>
+    </ClCompile>
+    <ClCompile Include="imnodes\imnodes.cpp">
+      <Filter>imnodes</Filter>
+    </ClCompile>
+    <ClCompile Include="imgui\imgui.cpp">
+      <Filter>imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="imgui\imgui_demo.cpp">
+      <Filter>imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="imgui\imgui_draw.cpp">
+      <Filter>imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="imgui\imgui_impl_opengl3.cpp">
+      <Filter>imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="imgui\imgui_impl_sdl.cpp">
+      <Filter>imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="imgui\imgui_widgets.cpp">
+      <Filter>imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene\NFSceneLoader.cpp">
+      <Filter>Scene\Help</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene\NFImageLoader.cpp">
+      <Filter>Scene\Help</Filter>
+    </ClCompile>
+    <ClCompile Include="NFRenderModule.cpp" />
+    <ClCompile Include="Scene\NFLightComponent.cpp">
+      <Filter>Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene\NFCameraComponent.cpp">
+      <Filter>Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene\NFMeshComponent.cpp">
+      <Filter>Scene</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="NFUIModule.h" />
+    <ClInclude Include="UI\NFBluePrintView.h">
+      <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="UI\NFConsoleView.h">
+      <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="UI\NFContainerView.h">
+      <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="UI\NFGameView.h">
+      <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="UI\NFGodView.h">
+      <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="UI\NFHierachyView.h">
+      <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="UI\NFInspectorView.h">
+      <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="UI\NFNodeView.h">
+      <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="UI\NFOperatorView.h">
+      <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="UI\NFProfileView.h">
+      <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="UI\NFProjectView.h">
+      <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="UI\NFSceneView.h">
+      <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="UI\NFTreeView.h">
+      <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="NFRenderPlugin.h" />
+    <ClInclude Include="Scene\NFScene.h">
+      <Filter>Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="gl3w\GL\gl3w.h">
+      <Filter>gl3w\GL</Filter>
+    </ClInclude>
+    <ClInclude Include="gl3w\GL\glcorearb.h">
+      <Filter>gl3w\GL</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene\NFSceneNode.h">
+      <Filter>Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene\NFMeshLoader.h">
+      <Filter>Scene\Help</Filter>
+    </ClInclude>
+    <ClInclude Include="imnodes\imnodes.h">
+      <Filter>imnodes</Filter>
+    </ClInclude>
+    <ClInclude Include="imgui\imconfig.h">
+      <Filter>imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="imgui\imgui.h">
+      <Filter>imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="imgui\imgui_impl_opengl3.h">
+      <Filter>imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="imgui\imgui_impl_sdl.h">
+      <Filter>imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="imgui\imgui_internal.h">
+      <Filter>imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="imgui\imstb_rectpack.h">
+      <Filter>imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="imgui\imstb_textedit.h">
+      <Filter>imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="imgui\imstb_truetype.h">
+      <Filter>imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene\NFSceneLoader.h">
+      <Filter>Scene\Help</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene\NFImageLoader.h">
+      <Filter>Scene\Help</Filter>
+    </ClInclude>
+    <ClInclude Include="NFRenderModule.h" />
+    <ClInclude Include="Scene\NFLightComponent.h">
+      <Filter>Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene\NFMeshComponent.h">
+      <Filter>Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene\NFCameraComponent.h">
+      <Filter>Scene</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="gl3w">
+      <UniqueIdentifier>{2081d0a9-fa0c-4685-aa97-f5f1b948de09}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="UI">
+      <UniqueIdentifier>{896dd0c8-7dbf-4c48-bad4-4d200dfb564c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scene">
+      <UniqueIdentifier>{15553b37-4920-42c4-a729-01e792fd992e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="gl3w\GL">
+      <UniqueIdentifier>{b217e337-bdea-46a9-b05b-02606bcc5786}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scene\Help">
+      <UniqueIdentifier>{1ebd746f-5077-497d-b644-45c43f0b7d72}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="imgui">
+      <UniqueIdentifier>{78a72feb-9ee7-4b3a-ae31-4b7e42f74fb7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="imnodes">
+      <UniqueIdentifier>{4d2ca3d6-ff31-4b9a-8329-01c10225009f}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

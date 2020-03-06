@@ -1,12 +1,12 @@
 /*
-            This file is part of: 
+            This file is part of:
                 NoahFrame
             https://github.com/ketoo/NoahGameFrame
 
    Copyright 2009 - 2020 NoahFrame(NoahGameFrame)
 
    File creator: lvsheng.huang
-   
+
    NoahFrame is open-source software and you can redistribute it and/or modify
    it under the terms of the License; besides, anyone who use this file/software must include this copyright announcement.
 
@@ -23,26 +23,42 @@
    limitations under the License.
 */
 
-#ifndef NF_UI_PLUGIN_H
-#define NF_UI_PLUGIN_H
+#ifndef NF_LIGHT
+#define NF_LIGHT
 
-///
-#include "NFComm/NFPluginModule/NFIPlugin.h"
-#include "NFComm/NFPluginModule/NFIPluginManager.h"
 
-class NFUIPlugin : public NFIPlugin
+#include "NFSceneNode.h"
+#include "NFComm/NFCore/NFVector2.hpp"
+#include "NFComm/NFCore/NFVector3.hpp"
+
+class NFLightComponent
+    : public NFSceneNode
 {
 public:
-	NFUIPlugin(NFIPluginManager* p)
+    enum NFLightType
     {
-        pPluginManager = p;
-    }
-    virtual const int GetPluginVersion();
+        AMBIANT = 0,
+        POINT_LIGHT = 1,
+        DIRECTIONNAL = 2,
+        SPOT_LIGHT = 3,
+        SILOUHETTE = 4
+    };
 
-    virtual const std::string GetPluginName();
+    NFLightComponent();
+    ~NFLightComponent();
 
-    virtual void Install();
+    void SetType(const NFLightType type);
+    void SetColor(const NFVector3& color, const int alpha);
+    void SetAlpha(float alpha);
 
-    virtual void Uninstall();
+    NFLightType GetType();
+    const NFVector3& GetColor();
+    int GetAlpha();
+
+private:
+    NFLightType type;
+    NFVector3 color;
+    int alpha;//[0-255]
 };
-#endif
+
+#endif // !NF_LIGHT

@@ -48,7 +48,6 @@
 #include IMGUI_IMPL_OPENGL_LOADER_CUSTOM
 #endif
 
-#include "imgui/imnodes.h"
 
 class NFUIModule
     : public NFIUIModule

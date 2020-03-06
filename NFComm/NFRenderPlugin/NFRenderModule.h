@@ -23,48 +23,30 @@
    limitations under the License.
 */
 
-#ifndef NF_3DRENDER_MODULE_H
-#define NF_3DRENDER_MODULE_H
+#ifndef NF_RENDER_MODULE_H
+#define NF_RENDER_MODULE_H
 
 #include "NFComm/NFPluginModule/NFILogModule.h"
 #include "NFComm/NFPluginModule/NFIKernelModule.h"
 #include "NFComm/NFPluginModule/NFIClassModule.h"
 
-#define IMGUI_IMPL_OPENGL_LOADER_GL3W
-#include "imgui/imgui.h"
-#include "imgui/imgui_impl_sdl.h"
-#include "imgui/imgui_impl_opengl3.h"
-#include <stdio.h>
-#include <SDL.h>
 
-#if defined(IMGUI_IMPL_OPENGL_LOADER_GL3W)
-#include <GL/gl3w.h>    // Initialize with gl3wInit()
-#elif defined(IMGUI_IMPL_OPENGL_LOADER_GLEW)
-#include <GL/glew.h>    // Initialize with glewInit()
-#elif defined(IMGUI_IMPL_OPENGL_LOADER_GLAD)
-#include <glad/glad.h>  // Initialize with gladLoadGL()
-#else
-#include IMGUI_IMPL_OPENGL_LOADER_CUSTOM
-#endif
-
-#include "imgui/imnodes.h"
-
-class NFI3DRenderModule : public NFIModule
+class NFIRenderModule : public NFIModule
 {
 public:
 
 };
 
-class NF3DRenderModule
-    : public NFI3DRenderModule
+class NFRenderModule
+    : public NFIRenderModule
 {
 public:
-    NF3DRenderModule( NFIPluginManager* p )
+    NFRenderModule( NFIPluginManager* p )
     {
         pPluginManager = p;
     }
 
-    virtual ~NF3DRenderModule() {};
+    virtual ~NFRenderModule() {};
 
     virtual bool Awake();
     virtual bool Init();
@@ -78,7 +60,7 @@ public:
     virtual bool OnReloadPlugin();
  
 protected:
-    int Setup3DRenderer();
+    int SetupRenderer();
 };
 
 #endif

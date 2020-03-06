@@ -67,7 +67,6 @@
     <ClCompile Include="imgui\imnodes.cpp">
       <Filter>imgui</Filter>
     </ClCompile>
-    <ClCompile Include="NF3DRenderModule.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="NFUIModule.h" />
@@ -144,7 +143,6 @@
     <ClInclude Include="imgui\imnodes.h">
       <Filter>imgui</Filter>
     </ClInclude>
-    <ClInclude Include="NF3DRenderModule.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="UI">

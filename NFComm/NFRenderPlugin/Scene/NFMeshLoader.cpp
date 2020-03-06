@@ -1,12 +1,12 @@
 /*
-            This file is part of: 
+            This file is part of:
                 NoahFrame
             https://github.com/ketoo/NoahGameFrame
 
    Copyright 2009 - 2020 NoahFrame(NoahGameFrame)
 
    File creator: lvsheng.huang
-   
+
    NoahFrame is open-source software and you can redistribute it and/or modify
    it under the terms of the License; besides, anyone who use this file/software must include this copyright announcement.
 
@@ -23,47 +23,15 @@
    limitations under the License.
 */
 
+#include <string>
+#include <vector>
+#include "NFMeshLoader.h"
 
-
-#include "NFUIModule.h"
-#include "NFUIPlugin.h"
-
-//
-//
-#ifdef NF_DYNAMIC_PLUGIN
-
-NF_EXPORT void DllStartPlugin(NFIPluginManager* pm)
+NF_SHARE_PTR<NFSceneNode> NFMeshLoader::LoadMesh(const std::string& path)
 {
-
-    CREATE_PLUGIN(pm, NFUIPlugin)
-
-};
-
-NF_EXPORT void DllStopPlugin(NFIPluginManager* pm)
-{
-    DESTROY_PLUGIN(pm, NFUIPlugin)
-};
-
-#endif
-//////////////////////////////////////////////////////////////////////////
-
-const int NFUIPlugin::GetPluginVersion()
-{
-    return 0;
+    return NF_SHARE_PTR<NFSceneNode>();
 }
 
-const std::string NFUIPlugin::GetPluginName()
+void NFMeshLoader::SaveMesh(const NF_SHARE_PTR<NFSceneNode> mesh, const std::string& path)
 {
-	return GET_CLASS_NAME(NFUIPlugin);
-}
-
-void NFUIPlugin::Install()
-{
-    REGISTER_MODULE(pPluginManager, NFIUIModule, NFUIModule)
-
-}
-
-void NFUIPlugin::Uninstall()
-{
-    UNREGISTER_MODULE(pPluginManager, NFIUIModule, NFUIModule)
 }

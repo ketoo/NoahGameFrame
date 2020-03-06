@@ -65,7 +65,7 @@ protected:
 
     NFQueue<NFActorMessage> mMessageQueue;
 
-	NFMapEx<std::string, NFIComponent> mxComponent;
+	NFMapEx<std::string, NFIComponent> mComponent;
 
 	NFMapEx<int, ACTOR_PROCESS_FUNCTOR> mxProcessFunctor;
 };

@@ -34,7 +34,6 @@
 class NFLine;
 class NFBox;
 class NFPlane;
-class NFVector3;
 
 class NFVector2
 {

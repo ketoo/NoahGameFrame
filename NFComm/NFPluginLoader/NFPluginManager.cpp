@@ -72,7 +72,7 @@
 #pragma comment( lib, "NFNoSqlPlugin.lib" )
 #pragma comment( lib, "NFSecurityPlugin.lib" )
 #pragma comment( lib, "NFTestPlugin.lib" )
-#pragma comment( lib, "NFUIPlugin.lib" )
+#pragma comment( lib, "NFRenderPlugin.lib" )
 #pragma comment( lib, "NFBluePrintPlugin.lib" )
 
 #pragma comment( lib, "NFDBLogicPlugin.lib" )
@@ -136,7 +136,7 @@
 #include "NFComm/NFTestPlugin/NFTestPlugin.h"
 
 #if NF_PLATFORM != NF_PLATFORM_LINUX
-#include "NFComm/NFUIPlugin/NFUIPlugin.h"
+#include "NFComm/NFRenderPlugin/NFRenderPlugin.h"
 #include "NFComm/NFBluePrintPlugin/NFBluePrintPlugin.h"
 #endif
 
@@ -309,7 +309,7 @@ bool NFPluginManager::LoadStaticPlugin()
 	CREATE_PLUGIN(this, NFTestPlugin)
 
 #if NF_PLATFORM != NF_PLATFORM_LINUX
-	CREATE_PLUGIN(this, NFUIPlugin)
+	CREATE_PLUGIN(this, NFRenderPlugin)
 	CREATE_PLUGIN(this, NFBluePrintPlugin)
 #endif
 		

@@ -1,12 +1,12 @@
-﻿/*
-            This file is part of: 
+/*
+            This file is part of:
                 NoahFrame
             https://github.com/ketoo/NoahGameFrame
 
    Copyright 2009 - 2020 NoahFrame(NoahGameFrame)
 
    File creator: lvsheng.huang
-   
+
    NoahFrame is open-source software and you can redistribute it and/or modify
    it under the terms of the License; besides, anyone who use this file/software must include this copyright announcement.
 
@@ -23,75 +23,17 @@
    limitations under the License.
 */
 
-#include "NF3DRenderModule.h"
+#ifndef NF_SCENE
+#define NF_SCENE
 
-bool NF3DRenderModule::Awake()
+#include "NFSceneNode.h"
+
+class NFScene
+    : public NFIModule
 {
 
-	return true;
-}
+private:
+    NFSceneNode rootNode;
+};
 
-bool NF3DRenderModule::Init()
-{
-    Setup3DRenderer();
-   
-	return true;
-}
-
-bool NF3DRenderModule::AfterInit()
-{
-
-
-	return true;
-}
-
-bool NF3DRenderModule::CheckConfig()
-{
-
-	return true;
-}
-
-bool NF3DRenderModule::ReadyExecute()
-{
-
-
-	return true;
-}
-
-bool NF3DRenderModule::Execute()
-{
-	return true;
-}
-
-bool NF3DRenderModule::BeforeShut()
-{
-
-
-	return true;
-}
-
-bool NF3DRenderModule::Shut()
-{
-
-	return true;
-}
-
-bool NF3DRenderModule::Finalize()
-{
-
-
-	return true;
-}
-
-bool NF3DRenderModule::OnReloadPlugin()
-{
-
-	return true;
-}
-
-int NF3DRenderModule::Setup3DRenderer()
-{
-
-
-    return 0;
-}
+#endif // !NF_SCENE

@@ -26,7 +26,7 @@
 #include "NFNodeView.h"
 #include "NFUIModule.h"
 #define STB_IMAGE_IMPLEMENTATION
-#include "imgui/stb_image.h"
+#include "imnodes/stb_image.h"
 
 void BEGIN_EDITOR(const std::string& name)
 {

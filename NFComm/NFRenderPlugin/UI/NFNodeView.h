@@ -29,7 +29,7 @@
 #include "NFComm/NFPluginModule/NFIUIModule.h"
 #include "NFComm/NFPluginModule/NFIBluePrintModule.h"
 
-#include "imgui/imnodes.h"
+#include "imnodes/imnodes.h"
 
 /*https://www.rapidtables.com/web/color/RGB_Color.html
 */

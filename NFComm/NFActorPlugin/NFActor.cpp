@@ -70,10 +70,10 @@ bool NFActor::Execute()
 bool NFActor::AddComponent(NF_SHARE_PTR<NFIComponent> pComponent)
 {
 	//if you want to add more components for the actor, please don't clear the component
-	//mxComponent.ClearAll();
-	if (!mxComponent.ExistElement(pComponent->GetComponentName()))
+	//mComponent.ClearAll();
+	if (!mComponent.ExistElement(pComponent->GetComponentName()))
 	{
-		mxComponent.AddElement(pComponent->GetComponentName(), pComponent);
+		mComponent.AddElement(pComponent->GetComponentName(), pComponent);
 		pComponent->SetActor(NF_SHARE_PTR<NFIActor>(this));
 
 		pComponent->Awake();
@@ -94,7 +94,7 @@ bool NFActor::RemoveComponent(const std::string& strComponentName)
 
 NF_SHARE_PTR<NFIComponent> NFActor::FindComponent(const std::string & strComponentName)
 {
-	return mxComponent.GetElement(strComponentName);
+	return mComponent.GetElement(strComponentName);
 }
 
 bool NFActor::AddMessageHandler(const int nSubMsgID, ACTOR_PROCESS_FUNCTOR_PTR xBeginFunctor)
