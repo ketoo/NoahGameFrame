@@ -26,6 +26,7 @@
 #ifndef NF_RENDER_MODULE_H
 #define NF_RENDER_MODULE_H
 
+#include "Scene/NFScene.h"
 #include "NFComm/NFPluginModule/NFILogModule.h"
 #include "NFComm/NFPluginModule/NFIKernelModule.h"
 #include "NFComm/NFPluginModule/NFIClassModule.h"
@@ -61,6 +62,8 @@ public:
  
 protected:
     int SetupRenderer();
+
+    NF_SHARE_PTR<NFScene> mCurrentScene;
 };
 
 #endif

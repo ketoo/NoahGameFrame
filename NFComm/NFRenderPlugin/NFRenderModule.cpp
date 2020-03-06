@@ -60,6 +60,11 @@ bool NFRenderModule::ReadyExecute()
 
 bool NFRenderModule::Execute()
 {
+    if (mCurrentScene)
+    {
+        mCurrentScene->Execute();
+    }
+
 	return true;
 }
 
