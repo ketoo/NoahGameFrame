@@ -92,6 +92,9 @@
     <ClCompile Include="Scene\NFMeshComponent.cpp">
       <Filter>Scene</Filter>
     </ClCompile>
+    <ClCompile Include="Scene\NFMaterialComponent.cpp">
+      <Filter>Scene</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="NFUIModule.h" />
@@ -191,6 +194,9 @@
       <Filter>Scene</Filter>
     </ClInclude>
     <ClInclude Include="Scene\NFCameraComponent.h">
+      <Filter>Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene\NFMaterialComponent.h">
       <Filter>Scene</Filter>
     </ClInclude>
   </ItemGroup>

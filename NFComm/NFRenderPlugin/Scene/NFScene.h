@@ -31,9 +31,18 @@
 class NFScene
     : public NFIModule
 {
+    NFGUID AddNode(const std::string& name, const NFVector3& pos);
+    NFGUID AddNode(NF_SHARE_PTR<NFSceneNode> parent, const std::string& name, const NFVector3& pos);
+
+    NF_SHARE_PTR<NFSceneNode> FindNode(const NFGUID id);
+    void RemoveNode(const NFGUID id);
+
+
 
 private:
     NFSceneNode rootNode;
+
+    NFMapEx<NFGUID, NFSceneNode> mNodes;
 };
 
 #endif // !NF_SCENE

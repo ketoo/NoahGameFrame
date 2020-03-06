@@ -1,3 +1,4 @@
+#include "NFScene.h"
 /*
             This file is part of:
                 NoahFrame
@@ -22,3 +23,23 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 */
+
+NFGUID NFScene::AddNode(const std::string& name, const NFVector3& pos)
+{
+    return NFGUID();
+}
+
+NFGUID NFScene::AddNode(NF_SHARE_PTR<NFSceneNode> parent, const std::string& name, const NFVector3& pos)
+{
+    return NFGUID();
+}
+
+NF_SHARE_PTR<NFSceneNode> NFScene::FindNode(const NFGUID id)
+{
+    return NF_SHARE_PTR<NFSceneNode>();
+}
+
+void NFScene::RemoveNode(const NFGUID id)
+{
+
+}
