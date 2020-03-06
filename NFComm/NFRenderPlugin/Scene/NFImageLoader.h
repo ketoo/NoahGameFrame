@@ -31,13 +31,18 @@
 #include <string>
 #include <vector>
 
-#include "NFMesh.h"
+#include <SDL.h>
+#include <GL/gl3w.h>
+
 #include "NFComm/NFCore/NFVector3.hpp"
 #include "NFComm/NFPluginModule/NFPlatform.h"
 
 class NFImageLoader
 {
 public:
+
+protected:
+    bool LoadTextureFromFile(const char* filename, GLuint* out_texture, int* out_width, int* out_height);
 };
 
 #endif // !NF_IMAGE_LOADER

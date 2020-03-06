@@ -23,8 +23,8 @@
    limitations under the License.
 */
 
-#ifndef NF_LIGHT
-#define NF_LIGHT
+#ifndef NF_LIGHT_COMPONENT_H
+#define NF_LIGHT_COMPONENT_H
 
 
 #include "NFSceneNode.h"

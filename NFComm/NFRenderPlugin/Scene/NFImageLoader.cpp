@@ -23,10 +23,13 @@
    limitations under the License.
 */
 
-#include "NFMeshLoader.h"
 
-/*
-bool LoadTextureFromFile(const char* filename, GLuint* out_texture, int* out_width, int* out_height)
+#define STB_IMAGE_IMPLEMENTATION
+#include "imnodes/stb_image.h"
+#include "NFMeshLoader.h"
+#include "NFImageLoader.h"
+
+bool NFImageLoader::LoadTextureFromFile(const char* filename, GLuint* out_texture, int* out_width, int* out_height)
 {
     // Load from file
     int image_width = 0;
@@ -55,4 +58,3 @@ bool LoadTextureFromFile(const char* filename, GLuint* out_texture, int* out_wid
 
     return true;
 }
-*/

@@ -23,28 +23,4 @@
    limitations under the License.
 */
 
-#ifndef NF_MESH_LOADER
-#define NF_MESH_LOADER
-
-#include <string>
-#include <vector>
-
-#include "glm/glm.hpp"
-#include "glm/fwd.hpp"
 #include "NFMeshComponent.h"
-#include "NFComm/NFCore/NFVector3.hpp"
-#include "NFComm/NFPluginModule/NFPlatform.h"
-
-
-class NFMeshLoader
-{
-public:
-    NF_SHARE_PTR<NFSceneNode> LoadMesh(const std::string& path);
-    void SaveMesh(const NF_SHARE_PTR<NFSceneNode> mesh, const std::string& path);
-
-    bool LoadOBJ(const char* path, std::vector<glm::vec3>& out_vertices, std::vector<glm::vec2>& out_uvs, std::vector<glm::vec3>& out_normals);
-    bool LoadAssImp(const char* path, std::vector<unsigned short>& indices, std::vector<glm::vec3>& vertices, std::vector<glm::vec2>& uvs, std::vector<glm::vec3>& normals);
-
-};
-
-#endif // !NF_MESH_LOADER

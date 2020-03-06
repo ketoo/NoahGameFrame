@@ -23,8 +23,8 @@
    limitations under the License.
 */
 
-#ifndef NF_CAMERA
-#define NF_CAMERA
+#ifndef NF_CAMERA_COMPONENT_H
+#define NF_CAMERA_COMPONENT_H
 
 #include "NFSceneNode.h"
 #include "NFComm/NFCore/NFVector2.hpp"

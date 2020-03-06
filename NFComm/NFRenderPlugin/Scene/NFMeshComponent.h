@@ -23,8 +23,8 @@
    limitations under the License.
 */
 
-#ifndef NF_MESH
-#define NF_MESH
+#ifndef NF_MESH_COMPONENT_H
+#define NF_MESH_COMPONENT_H
 
 #include "NFSceneNode.h"
 #include "GL/gl3w.h"
