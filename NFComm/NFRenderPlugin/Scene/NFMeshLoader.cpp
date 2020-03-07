@@ -50,5 +50,5 @@ NF_SHARE_PTR<NFMesh> NFMeshLoader::LoadMesh(const std::string& path)
         exit(1);
     }
 
-    return NF_SHARE_PTR<NFMesh>();
+    return mesh;
 }
