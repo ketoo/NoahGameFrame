@@ -42,6 +42,10 @@ NFGodView::NFGodView(NFIPluginManager* p, NFViewType vt) : NFIView(p, vt, GET_CL
 	m_pTreeView = NF_NEW NFTreeView(p);
 
     m_pNodeView->ResetOffset(NFVector2::Zero());
+
+	imnodes::Style& style = imnodes::GetStyle();
+	style.grid_spacing /= 2;
+
 	m_pNodeView->SetHoverNodeCallBack(std::bind(&NFGodView::HandlerNodeHovered, this, std::placeholders::_1));
 	m_pNodeView->SetBeginRenderCallBack(std::bind(&NFGodView::HandlerForBeginRender, this));
 
@@ -193,10 +197,22 @@ void NFGodView::HandlerForBeginRender()
 {
 	if (mSceneID > 0 && mGroupID > 0)
 	{
-		//draw
 		auto data = m_pNavigationDataModule->GetMapData(mSceneID, 0);
 		if (data)
 		{
+			//draw background
+
+			int cellSize = imnodes::GetStyle().grid_spacing;
+			ImVec2 v1 = imnodes::ToEditorSpace(ImVec2(0, 0));
+			ImVec2 v2(v1.x + cellSize * data->tileConfig.mapSize * data->tileConfig.cellSizeX, v1.y + cellSize * -data->tileConfig.mapSize * data->tileConfig.cellSizeZ - cellSize);
+
+			ImColor color(0, 255, 255, 100);
+			ImGui::GetWindowDrawList()->AddRect(v1, v2, color);
+
+			//draw walkable
+			int sizeX = data->tileConfig.cellSizeX;
+			int sizeZ = data->tileConfig.cellSizeZ;
+
 			for (int i = 0; i < data->tileConfig.mapSize; ++i)
 			{
 				for (int j = 0; j < data->tileConfig.mapSize; ++j)
@@ -206,25 +222,30 @@ void NFGodView::HandlerForBeginRender()
 					{
 						if (voxel->layer > 1)
 						{
-							int color = NFColor::DEFAULT;
+							ImColor color(255, 255, 255, 100);
 							//int size = imnodes::GetStyle().grid_spacing / 2;
 
 							if (voxel->layer == 3)
 							{
-								color = NFColor::WORKFLOW;
+								color = ImColor(255, 255, 255, 150);
 							}
 							else if (voxel->layer == 4)
 							{
-								color = NFColor::PININ;
+								color = ImColor(255, 255, 255, 200);
 							}
 
-							if ( i < 5 && j < 5)
+							else if (voxel->layer == 4)
+							{
+								color = ImColor(255, 255, 255, 250);
+							}
 							{
 								m_pNodeView->SetCurrentContext();
 
-								int cellSize = imnodes::GetStyle().grid_spacing;
-								ImVec2 v(i * cellSize, j * -cellSize);
-								imnodes::AddRectFilled(v, ImVec2(imnodes::GetStyle().grid_spacing, imnodes::GetStyle().grid_spacing), color);
+								ImVec2 v1 = imnodes::ToEditorSpace(ImVec2(i * cellSize * sizeX, j * -cellSize * sizeZ));
+								ImVec2 v2(v1.x + cellSize * sizeX, v1.y - cellSize* sizeZ);
+
+								ImGui::GetWindowDrawList()->AddRectFilled(v1, v2, color);
+								//imnodes::AddRectFilled(v1, v2, color);
 							}
 						}
 					}

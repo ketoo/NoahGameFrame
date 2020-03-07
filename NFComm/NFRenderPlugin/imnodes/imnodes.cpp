@@ -1268,8 +1268,6 @@ void AddRectFilled(const ImVec2& p_min, const ImVec2& p_max, ImU32 col, float ro
             rounding);
     }
 
-    g.canvas_draw_list->ChannelsSplit(Channels_Count);
-    g.canvas_draw_list->ChannelsSetCurrent(Channels_ImGui);
 }
 
 void Initialize()
