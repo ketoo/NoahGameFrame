@@ -80,10 +80,11 @@ class NFElementModule
     : public NFIElementModule,
       NFMapEx<std::string, ElementConfigInfo>
 {
+private:
+    NFElementModule();
 public:
     NFElementModule(NFIPluginManager* p);
     virtual ~NFElementModule();
-
 	
 	virtual bool Awake();
     virtual bool Init();
@@ -96,6 +97,8 @@ public:
     virtual bool Load();
     virtual bool Save();
     virtual bool Clear();
+
+     NFIElementModule* GetBackupElementModule() override;
 
     virtual bool LoadSceneInfo(const std::string& strFileName, const std::string& strClassName);
 
@@ -125,7 +128,10 @@ protected:
 
 protected:
     NFIClassModule* m_pClassModule;
+    NFElementModule* m_pBackupElementModule;
+
     bool mbLoaded;
+    bool mbBackup = false;
 };
 
 #endif

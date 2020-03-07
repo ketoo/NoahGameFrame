@@ -41,7 +41,8 @@ public:
 
     virtual ~NFRecord();
 
-	virtual std::string ToString();
+    virtual std::string ToString();
+	virtual void ToMemoryCounterString(std::string& data);
 
     virtual bool IsUsed(const int nRow) const;
 

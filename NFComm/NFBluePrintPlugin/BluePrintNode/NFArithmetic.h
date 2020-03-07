@@ -76,9 +76,9 @@ public:
 		
 	}
 
-	virtual void UpdateOutputData() override;
-	virtual void PrepareInputData() override;
+	virtual void UpdateOutputData(const NFGUID& runTimeOnwer, const bool iteration) override;
+	virtual void PrepareInputData(const NFGUID& runTimeOnwer, const bool iteration) override;
 
 	// Inherited via NFIArithmetic
-	virtual NF_SHARE_PTR<NFBluePrintNodeBase> FindNextNode() override;
+	virtual NF_SHARE_PTR<NFIOData> FindOutputNodeIOData() override;
 };

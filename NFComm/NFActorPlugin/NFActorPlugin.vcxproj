@@ -21,6 +21,9 @@
     <ClInclude Include="NFActorModule.h" />
     <ClInclude Include="NFActorPlugin.h" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="cpp.hint" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{DBF28939-C743-4C54-A0A5-EB719EEC1F1F}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>

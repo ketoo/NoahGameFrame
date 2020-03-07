@@ -55,7 +55,7 @@ public:
 
 	int64_t TimeScope()
 	{
-		return checkTime - time;
+		return NFGetTimeMS() - time;
 	}
 };
 

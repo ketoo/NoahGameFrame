@@ -43,6 +43,7 @@
 #include "NFComm/NFPluginModule/NFIScheduleModule.h"
 #include "NFComm/NFPluginModule/NFIEventModule.h"
 #include "NFComm/NFPluginModule/NFICellModule.h"
+#include "NFComm/NFPluginModule/NFIThreadPoolModule.h"
 
 
 class NFKernelModule
@@ -66,6 +67,7 @@ public:
     virtual bool ExistScene(const int nSceneID);
 
 	virtual bool ExistObject(const NFGUID& ident);
+    virtual bool ObjectReady(const NFGUID& ident);
 	virtual bool ExistObject(const NFGUID& ident, const int nSceneID, const int nGroupID);
 
     virtual NF_SHARE_PTR<NFIObject> GetObject(const NFGUID& ident);
@@ -148,8 +150,8 @@ public:
 	
 	virtual int GetObjectByProperty(const int nSceneID, const int nGroupID, const std::string& strPropertyName, const NFDataList& valueArgArg, NFDataList& list);
 
-	virtual int Random(int nStart, int nEnd);											//return [nStart, nEnd)
-	virtual float Random();											//return [0f, 1f)
+	virtual int Random(int nStart, int nEnd);//return [nStart, nEnd)
+	virtual float Random();//return [0f, 1f)
 
     //////////////////////////////////////////////////////////////////////////
     virtual bool LogStack();
@@ -209,7 +211,12 @@ private:
     NFIElementModule* m_pElementModule;
 	NFIScheduleModule* m_pScheduleModule;
 	NFIEventModule* m_pEventModule;
-	NFICellModule* m_pCellModule;
+    NFICellModule* m_pCellModule;
+    NFIThreadPoolModule* m_pThreadPoolModule;
+
+    //for async task
+    NFIClassModule* m_pBackupClassModule;
+    NFIElementModule* m_pBackupElementModule;
 };
 
 #endif

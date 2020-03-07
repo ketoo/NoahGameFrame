@@ -30,37 +30,62 @@
 #include "NFElementModule.h"
 #include "NFClassModule.h"
 
-////
+NFElementModule::NFElementModule()
+{
+    m_pBackupElementModule = nullptr;
+    mbLoaded = false;
+}
 
 NFElementModule::NFElementModule(NFIPluginManager* p)
 {
+    m_pBackupElementModule = nullptr;
     pPluginManager = p;
     mbLoaded = false;
+
+    if (!this->mbBackup)
+    {
+        m_pBackupElementModule = new NFElementModule();
+        m_pBackupElementModule->mbBackup = true;
+        m_pBackupElementModule->pPluginManager = pPluginManager;
+    }
 }
 
 NFElementModule::~NFElementModule()
 {
-
+    if (!this->mbBackup)
+    {
+        delete m_pBackupElementModule;
+        m_pBackupElementModule = nullptr;
+    }
 }
 
 bool NFElementModule::Awake()
 {
 	m_pClassModule = pPluginManager->FindModule<NFIClassModule>();
-	
+    if (this->mbBackup)
+    {
+        m_pClassModule = m_pClassModule->GetBackupClassModule();
+    }
+
+    if (m_pBackupElementModule) m_pBackupElementModule->Awake();
+
 	Load();
-	
+
+
 	return true;
-	
 }
 
 bool NFElementModule::Init()
 {
+    if (m_pBackupElementModule)  m_pBackupElementModule->Init();
     return true;
 }
 
 bool NFElementModule::Shut()
 {
     Clear();
+
+    if (m_pBackupElementModule) m_pBackupElementModule->Shut();
     return true;
 }
 
@@ -98,6 +123,8 @@ bool NFElementModule::Load()
         mbLoaded = true;
         pLogicClass = m_pClassModule->Next();
     }
+
+    if (m_pBackupElementModule) m_pBackupElementModule->Load();
 
     return true;
 }
@@ -604,4 +631,9 @@ bool NFElementModule::Clear()
 
     mbLoaded = false;
     return true;
+}
+
+NFIElementModule* NFElementModule::GetBackupElementModule()
+{
+	return m_pBackupElementModule;
 }

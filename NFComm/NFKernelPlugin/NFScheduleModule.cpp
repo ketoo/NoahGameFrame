@@ -166,7 +166,7 @@ bool NFScheduleModule::Execute()
 		os << "---------------object schedule  performance problem ";
 		os << performanceObject.TimeScope();
 		os << "---------- ";
-		m_pLogModule->LogWarning(NFGUID(), os, __FUNCTION__, __LINE__);
+		//m_pLogModule->LogWarning(NFGUID(), os, __FUNCTION__, __LINE__);
 	}
 
 	////////////////////////////////////////////
@@ -238,7 +238,7 @@ bool NFScheduleModule::Execute()
 		os << "---------------module schedule performance problem ";
 		os << performanceModule.TimeScope();
 		os << "---------- ";
-		m_pLogModule->LogWarning(NFGUID(), os, __FUNCTION__, __LINE__);
+		//m_pLogModule->LogWarning(NFGUID(), os, __FUNCTION__, __LINE__);
 	}
 
 	return true;

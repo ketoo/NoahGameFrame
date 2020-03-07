@@ -54,25 +54,20 @@ public:
 
     virtual bool Execute();
 
-	virtual NFGUID RequireActor();
+	virtual NF_SHARE_PTR<NFIActor> RequireActor();
 	virtual NF_SHARE_PTR<NFIActor> GetActor(const NFGUID nActorIndex);
 	virtual bool ReleaseActor(const NFGUID nActorIndex);
 
-    virtual bool SendMsgToActor(const NFGUID nActorIndex, const int messageID, const std::string& strArg);
+	virtual bool SendMsgToActor(const NFGUID actorIndex, const NFActorMessage& message);
+    virtual bool SendMsgToActor(const NFGUID actorIndex, const int eventID, const std::string& data, const std::string& arg = "");
 
 	virtual bool AddResult(const NFActorMessage& message);
 
 protected:
 	virtual bool AddEndFunc(const int subMessageID, ACTOR_PROCESS_FUNCTOR_PTR functorPtr_end);
 
-    virtual bool AddComponent(const NFGUID nActorIndex, NF_SHARE_PTR<NFIComponent> pComponent);
-	virtual bool RemoveComponent(const NFGUID nActorIndex, const std::string& strComponentName);
-	virtual NF_SHARE_PTR<NFIComponent> FindComponent(const NFGUID nActorIndex, const std::string& strComponentName);
-
-
 	virtual bool ExecuteEvent();
 	virtual bool ExecuteResultEvent();
-
 
 private:
     NFIKernelModule* m_pKernelModule;

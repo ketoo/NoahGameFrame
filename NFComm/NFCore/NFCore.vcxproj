@@ -118,7 +118,6 @@
     <ClInclude Include="NFPerformance.hpp" />
     <ClInclude Include="NFPlane.hpp" />
     <ClInclude Include="NFRay.hpp" />
-    <ClInclude Include="NFSingleton.hpp" />
     <ClInclude Include="NFSmartEnum.hpp" />
     <ClInclude Include="NFSpaceNode.hpp" />
     <ClInclude Include="NFSphere.hpp" />
@@ -129,12 +128,14 @@
     <ClInclude Include="NFIRecord.h" />
     <ClInclude Include="NFIRecordManager.h" />
     <ClInclude Include="NFList.hpp" />
+    <ClInclude Include="NFStringRingBuffer.hpp" />
     <ClInclude Include="NFVector2.hpp" />
     <ClInclude Include="NFVector3.hpp" />
     <ClInclude Include="NFException.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="NFException.cpp" />
+    <ClCompile Include="NFMemoryCounter.cpp" />
     <ClCompile Include="NFObject.cpp" />
     <ClCompile Include="NFProperty.cpp" />
     <ClCompile Include="NFPropertyManager.cpp" />

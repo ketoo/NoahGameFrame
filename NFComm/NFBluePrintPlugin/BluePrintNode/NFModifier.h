@@ -103,7 +103,7 @@ public:
 		}
 	}
 
-	virtual void UpdateOutputData()
+	virtual void UpdateOutputData(const NFGUID& runTimeOnwer, const bool iteration)
 	{
 		NF_SHARE_PTR<NFIOData> inputClassName = GetInputArg(NFPropertyModifierInputArg::ClassName);
 		NF_SHARE_PTR<NFIOData> inputPropName = GetInputArg(NFPropertyModifierInputArg::PropName);
@@ -142,10 +142,10 @@ public:
 	}
 
 	// Inherited via NFIModifier
-	virtual void PrepareInputData() override;
+	virtual void PrepareInputData(const NFGUID& runTimeOnwer, const bool iteration) override;
 
 	// Inherited via NFIModifier
-	virtual NF_SHARE_PTR<NFBluePrintNodeBase> FindNextNode() override;
+	virtual NF_SHARE_PTR<NFIOData> FindOutputNodeIOData() override;
 };
 
 class NFRecordModifier : public NFIModifier
@@ -236,11 +236,11 @@ public:
 	}
 
 	// Inherited via NFIModifier
-	virtual void PrepareInputData() override;
-	virtual void UpdateOutputData() override;
+	virtual void PrepareInputData(const NFGUID& runTimeOnwer, const bool iteration) override;
+	virtual void UpdateOutputData(const NFGUID& runTimeOnwer, const bool iteration) override;
 
 	// Inherited via NFIModifier
-	virtual NF_SHARE_PTR<NFBluePrintNodeBase> FindNextNode() override;
+	virtual NF_SHARE_PTR<NFIOData> FindOutputNodeIOData() override;
 };
 
 
@@ -320,8 +320,8 @@ public:
 	}
 
 	// Inherited via NFIModifier
-	virtual void PrepareInputData() override;
-	virtual void UpdateOutputData() override;
+	virtual void PrepareInputData(const NFGUID& runTimeOnwer, const bool iteration) override;
+	virtual void UpdateOutputData(const NFGUID& runTimeOnwer, const bool iteration) override;
 };
 
 class NFRecordRemover : public NFIModifier
@@ -394,9 +394,9 @@ public:
 	}
 
 	// Inherited via NFIModifier
-	virtual void PrepareInputData() override;
-	virtual void UpdateOutputData() override;
+	virtual void PrepareInputData(const NFGUID& runTimeOnwer, const bool iteration) override;
+	virtual void UpdateOutputData(const NFGUID& runTimeOnwer, const bool iteration) override;
 
 	// Inherited via NFIModifier
-	virtual NF_SHARE_PTR<NFBluePrintNodeBase> FindNextNode() override;
+	virtual NF_SHARE_PTR<NFIOData> FindOutputNodeIOData() override;
 };

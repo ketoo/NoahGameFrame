@@ -153,6 +153,8 @@ private:
 class NFClassModule
     : public NFIClassModule
 {
+private:
+    NFClassModule();
 public:
     NFClassModule(NFIPluginManager* p);
     virtual ~NFClassModule();
@@ -165,6 +167,8 @@ public:
     virtual bool Load();
     virtual bool Save();
     virtual bool Clear();
+
+    virtual NFIClassModule* GetBackupClassModule() override;
 
     virtual bool AddClassCallBack(const std::string& strClassName, const CLASS_EVENT_FUNCTOR_PTR& cb);
     virtual bool DoEvent(const NFGUID& objectID, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFDataList& valueList);
@@ -187,8 +191,10 @@ protected:
 
 protected:
     NFIElementModule* m_pElementModule;
+    NFClassModule* m_pBackupClassModule;
 
     std::string msConfigFileName;
+    bool mbBackup = false;
 };
 
 #endif

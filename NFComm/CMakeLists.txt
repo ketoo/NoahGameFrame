@@ -14,6 +14,6 @@ add_subdirectory(NFTestPlugin)
 add_subdirectory(NFLuaScriptPlugin)
 
 if (APPLE)
-    add_subdirectory(NFUIPlugin)
+    add_subdirectory(NFRenderPlugin)
     add_subdirectory(NFBluePrintPlugin)
 endif()

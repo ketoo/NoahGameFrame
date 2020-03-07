@@ -135,7 +135,7 @@ public:
 	bool RemoveObjectFromGroup(const int nGroupID, const NFGUID& ident, bool bPlayer)
 	{
 		NF_SHARE_PTR<NFSceneGroupInfo> pInfo = GetElement(nGroupID);
-		if (pInfo.get())
+		if (pInfo)
 		{
 			if (bPlayer)
 			{
@@ -187,6 +187,11 @@ public:
 		}
 
 		return true;
+	}
+
+	NF_SHARE_PTR<SceneSeedResource> GetSeedObjectInfo(const std::string& strSeedID)
+	{
+		return mtSceneResourceConfig.GetElement(strSeedID);
 	}
 
 	bool RemoveSeedObject(const std::string& strSeedID)
@@ -273,6 +278,9 @@ public:
 	virtual const std::vector<int>& GetGroups(const int nSceneID);
 
 	virtual bool AddSeedData(const int nSceneID, const std::string& strSeedID, const std::string& strConfigID, const NFVector3& vPos, const int nWeight);
+	virtual const NFVector3& GetSeedPos(const int nSceneID, const std::string& strSeedID);
+	virtual const int GetSeedPWeight(const int nSceneID, const std::string& strSeedID);
+
 	virtual bool AddRelivePosition(const int nSceneID, const int nIndex, const NFVector3& vPos);
 	virtual const NFVector3& GetRelivePosition(const int nSceneID, const int nIndex, const bool bRoll = true);
 

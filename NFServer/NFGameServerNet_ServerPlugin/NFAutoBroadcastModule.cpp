@@ -137,8 +137,8 @@ int NFAutoBroadcastModule::OnPropertyEnter(const NFDataList& argVar, const NFGUI
 		*(pPrivateData->mutable_player_id()) = NFINetModule::NFToPB(self);
 
 		NF_SHARE_PTR<NFIPropertyManager> pPropertyManager = pObject->GetPropertyManager();
-		std::cout << "auto " << pPropertyManager->Self().ToString() << std::endl;
-		std::cout << pPropertyManager->ToString() << std::endl;
+		//std::cout << "OnPropertyEnter auto " << pPropertyManager->Self().ToString() << std::endl;
+		//std::cout << pPropertyManager->ToString() << std::endl;
 
 		NF_SHARE_PTR<NFIProperty> pPropertyInfo = pPropertyManager->First();
 		while (pPropertyInfo)

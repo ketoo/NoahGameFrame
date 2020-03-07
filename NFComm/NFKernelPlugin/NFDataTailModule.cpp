@@ -109,7 +109,7 @@ int NFDataTailModule::OnClassObjectEvent(const NFGUID& self, const std::string& 
         break;
     }
 
-    m_pLogModule->LogDebug(self, stream.str());
+    //m_pLogModule->LogDebug(self, stream.str());
     return 0;
 }
 
@@ -184,7 +184,7 @@ int NFDataTailModule::OnObjectPropertyEvent(const NFGUID& self, const std::strin
     stream << "==>";
     stream << newVar.ToString();
 
-    m_pLogModule->LogDebug(self, stream.str());
+    //m_pLogModule->LogDebug(self, stream.str());
 
     PrintStackTrace();
 
@@ -216,7 +216,7 @@ int NFDataTailModule::OnObjectRecordEvent(const NFGUID& self, const RECORD_EVENT
                     stream << " [" << j << "] " << xDataList.ToString(j);
                 }
 
-                m_pLogModule->LogDebug(self, stream.str());
+                //m_pLogModule->LogDebug(self, stream.str());
 
                 PrintStackTrace();
             }
@@ -226,7 +226,7 @@ int NFDataTailModule::OnObjectRecordEvent(const NFGUID& self, const RECORD_EVENT
         {
             stream << xRecord->GetName();
             stream << " Del Row[" << xEventData.nRow << "]";
-            m_pLogModule->LogDebug(self, stream.str());
+            //m_pLogModule->LogDebug(self, stream.str());
 
             PrintStackTrace();
         }
@@ -235,7 +235,7 @@ int NFDataTailModule::OnObjectRecordEvent(const NFGUID& self, const RECORD_EVENT
         {
             stream << xRecord->GetName();
             stream << " Swap Row[" << xEventData.nRow << "] Row[" << xEventData.nCol << "]";
-            m_pLogModule->LogDebug(self, stream.str());
+            //m_pLogModule->LogDebug(self, stream.str());
         }
         break;
         case RECORD_EVENT_DATA::Create:
@@ -246,7 +246,7 @@ int NFDataTailModule::OnObjectRecordEvent(const NFGUID& self, const RECORD_EVENT
             stream << " UpData Row[" << xEventData.nRow << "] Col[" << xEventData.nCol << "]";
             stream << oldVar.ToString();
             stream << "==>" << newVar.ToString();
-            m_pLogModule->LogDebug(self, stream.str());
+            //m_pLogModule->LogDebug(self, stream.str());
 
             PrintStackTrace();
         }

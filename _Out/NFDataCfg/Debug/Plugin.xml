@@ -8,9 +8,11 @@
 		<Plugin Name="NFGameServerNet_ClientPlugin" />
 		<Plugin Name="NFLogPlugin" />	
 		<Plugin Name="NFLuaScriptPlugin" />
-		<Plugin Name="NFUIPlugin" />
+		<Plugin Name="NFRenderPlugin" />
 		<Plugin Name="NFBluePrintPlugin" />
 		<Plugin Name="NFActorPlugin" />
+		<Plugin Name="NFNavigationPlugin" />
+
 	</GameServer>
 
 	<LoginServer>
@@ -61,6 +63,13 @@
 		<Plugin Name="NFSecurityPlugin" />
 		<Plugin Name="NFActorPlugin" />
 		<Plugin Name="NFNoSqlPlugin" />
+        
+        <Plugin Name="NFWorldLogicPlugin" />
+        <Plugin Name="NFClanPlugin" />
+        <Plugin Name="NFFriendPlugin" />
+        <Plugin Name="NFMailPlugin" />
+        <Plugin Name="NFRankPlugin" />
+        <Plugin Name="NFTeamPlugin" />
 	</WorldServer>
 	<DBServer>
 		<Plugin Name="NFNetPlugin" />

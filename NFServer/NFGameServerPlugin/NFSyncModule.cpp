@@ -50,12 +50,13 @@ bool NFSyncModule::Shut()
 
 bool NFSyncModule::Execute()
 {
+
+
     return true;
 }
 
 bool NFSyncModule::AfterInit()
 {
-	m_pScheduleModule->AddSchedule("NFSyncModule", this, &NFSyncModule::SyncHeart, 0.1f, -1);
 
 	m_pKernelModule->AddClassCallBack(NFrame::NPC::ThisName(), this, &NFSyncModule::OnNPCClassEvent);
 	m_pKernelModule->AddClassCallBack(NFrame::Player::ThisName(), this, &NFSyncModule::OnPlayerClassEvent);
@@ -64,10 +65,34 @@ bool NFSyncModule::AfterInit()
     return true;
 }
 
+bool NFSyncModule::RequireMove(const NFGUID self, const NFVector3& pos, const int type)
+{
+	RequireStop(self);
+	auto it = mPlayerPosition.find(self);
+	if (it == mPlayerPosition.end())
+	{
+		mPlayerPosition.insert(std::map<NFGUID, NFVector3>::value_type(self, pos));
+	}
+
+	return true;
+}
+
+bool NFSyncModule::RequireStop(const NFGUID self)
+{
+	auto it = mPlayerPosition.find(self);
+	if (it != mPlayerPosition.end())
+	{
+		mPlayerPosition.erase(it);
+	}
+
+	return true;
+}
+
 
 int NFSyncModule::SyncHeart(const std::string & strHeartName, const float fTime, const int nCount)
 {
-	//std::cout << strHeartName << " " << fTime << " " << nCount << std::endl;
+	//0.1s
+
 
 	return 0;
 }
@@ -76,7 +101,6 @@ int NFSyncModule::OnNPCClassEvent(const NFGUID & self, const std::string & strCl
 {
 	if (CLASS_OBJECT_EVENT::COE_CREATE_FINISH == eClassEvent)
 	{
-		m_pKernelModule->AddPropertyCallBack(self, NFrame::NPC::Position(), this, &NFSyncModule::OnNPCPositionEvent);
 	}
 
 	return 0;
@@ -91,7 +115,6 @@ int NFSyncModule::OnPlayerClassEvent(const NFGUID & self, const std::string & st
 {
 	if (CLASS_OBJECT_EVENT::COE_CREATE_FINISH == eClassEvent)
 	{
-		m_pKernelModule->AddPropertyCallBack(self, NFrame::Player::Position(), this, &NFSyncModule::OnPlayePositionEvent);
 	}
 
 	return 0;

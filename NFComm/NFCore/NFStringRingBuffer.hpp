@@ -56,7 +56,7 @@ public:
         return m_front == m_rear;
     }
 
-    unsigned int Size()
+    unsigned int Size() const
     {
         if (m_rear > m_front)
         {
@@ -70,7 +70,7 @@ public:
         return (m_rear + Capacity() - m_front);
     }
 
-    unsigned int Capacity()
+    unsigned int Capacity() const
     {
         return m_capacity;
     }
@@ -87,16 +87,29 @@ public:
             resize();
         }
 
-        if (Size() + m_front + size >= Capacity())
+        if (m_rear >= m_front)
         {
-            int offset = Capacity() - m_front;
-            memcpy(m_data + Size() + m_front, src, offset);
-            memcpy(m_data, src, (size_t)(size - offset));
-
+            if (m_rear + size >= Capacity())
+            {
+                int offset = Capacity() - m_rear;
+                memcpy(m_data + m_rear, src, offset);
+                memcpy(m_data, src + offset, (size_t)(size - offset));
+            }
+            else
+            {
+                memcpy(m_data + m_rear, src, size);
+            }
         }
         else
         {
-            memcpy(m_data + Size() + m_front, src, size);
+            if (m_rear + size < m_front)
+            {
+                memcpy(m_data + m_rear, src, size);
+            }
+            else
+            {
+                //impassible!!!!
+            }
         }
 
         m_rear = (m_rear + size) % Capacity();
@@ -104,7 +117,7 @@ public:
         return true;
     }
 
-    bool Pop(char* dst, int size)
+    bool Pop(char* dst, int size, bool readOnly = false)
     {
         if (size <= 0 || Size() < size)
         {
@@ -118,18 +131,35 @@ public:
         else
         {
             int tempOffset = Capacity() - m_front;
+
             memcpy(dst, m_data + m_front, tempOffset);
-            memcpy(dst + tempOffset, m_data, size - tempOffset);
+            memcpy(dst + tempOffset, m_data, (size_t)(size - tempOffset));
+        }
+
+        if (!readOnly)
+        {
+            m_front = (m_front + size) % Capacity();
+        }
+
+        return true;
+    }
+
+    bool Erase(int size)
+    {
+        if (size <= 0 || Size() < size)
+        {
+            return false;
         }
 
         m_front = (m_front + size) % Capacity();
+
         return true;
     }
 
     //dangerous dark magic: zero copy pop
     //you can use this function when you sure that the memory is stick.
     //if you are failed in calling this function, plz use Pop function do it again.
-    bool ZeroCopyPop(char* dst, int size)
+    bool ZeroCopyPop(char** dst, int size, bool readOnly = false)
     {
         if (size <= 0 || Size() < size)
         {
@@ -139,12 +169,19 @@ public:
         if (m_front > m_rear)
         {
             //dont have a stick memory
+            //we apply a new stick memory for this copy
+
+
             return false;
         }
 
-        dst = m_data + m_front;
+        *dst = m_data + m_front;
 
-        m_front = (m_front + size) % Capacity();
+        if (!readOnly)
+        {
+            m_front = (m_front + size) % Capacity();
+        }
+
         return true;
     }
 
@@ -153,13 +190,35 @@ public:
         //std::cout << "-----------size:" << Size() << " capacity:" << Capacity() << " m_front:" << m_front << " m_rear:" << m_rear << std::endl;
     }
 
+    void Sort()
+    {
+        //only when rear < front and only one element in buffer
+    }
+
+    void Clear()
+    {
+        m_front = 0;
+        m_rear = 0;
+    }
 private:
     void resize()
     {
         //T* tmp = new T[m_capacity * 2];
         char* tmp = new char[m_capacity * 2];
         //memset(tmp, 0, sizeof(char) * m_capacity * 2);
-        memcpy(tmp, m_data, m_capacity);
+        if (m_rear < m_front)
+        {
+            int oldSize = Size();
+            int offset = m_capacity - m_front;
+            memcpy(tmp, m_data + m_front, offset);
+            memcpy(tmp + offset, m_data, m_rear);
+            m_front = 0;
+            m_rear = oldSize;
+        }
+        else
+        {
+            memcpy(tmp, m_data, m_capacity);
+        }
 
         delete[] m_data;
 

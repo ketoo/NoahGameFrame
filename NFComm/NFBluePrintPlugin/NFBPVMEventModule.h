@@ -45,7 +45,16 @@ public:
 
     virtual ~NFBPVMEventModule() {};
 
-	virtual bool UnRegisterAllCallBack(const NFGUID blockID);
+    bool Awake() override;
+    bool Init() override;
+    bool AfterInit() override;
+    bool CheckConfig() override;
+    bool ReadyExecute() override;
+    bool Execute() override;
+    bool BeforeShut() override;
+    bool Shut() override;
+    bool Finalize() override;
+    bool OnReloadPlugin() override;
 
 private:
 	struct BluePrintBlockAction
@@ -53,22 +62,41 @@ private:
 		//event -> <monitorID, handler>
 		NFMapEx<int, NFMapEx<NFGUID, BLUEPRINT_EVENT_FUNCTOR>> mGameEvent;
 		NFMapEx<int, NFMapEx<NFGUID, BLUEPRINT_EVENT_FUNCTOR>> mNetEvent;
-		NFMapEx<int, NFMapEx<NFGUID, BLUEPRINT_EVENT_FUNCTOR>> mNetMsgEvent;
+        NFMapEx<int, NFMapEx<NFGUID, BLUEPRINT_EVENT_FUNCTOR>> mNetMsgEvent;
+
+        //className
+        NFMapEx<std::string, NFMapEx<NFGUID, BLUEPRINT_EVENT_FUNCTOR>> mGameObjectEvent;
+        //NFMapEx<std::string, NFMapEx<NFGUID, BLUEPRINT_EVENT_FUNCTOR>> mObjectPropEvent;
+        //NFMapEx<std::string, NFMapEx<NFGUID, BLUEPRINT_EVENT_FUNCTOR>> mObjectRecordEvent;
+        //NFMapEx<std::string, NFMapEx<NFGUID, BLUEPRINT_EVENT_FUNCTOR>> mObjectSceneEvent;
 	};
 
 private:
+
+    virtual bool UnRegisterAllCallBack(const NFGUID blockID) override;
+
 	// Inherited via NFIBPVMEventModule
 	virtual bool RegisterGameEventCallBack(const NFGUID blockID, const int eventID, const NFGUID monitorID, const BLUEPRINT_EVENT_FUNCTOR& functor) override;
 
 	virtual bool RegisterNetEventCallBack(const NFGUID blockID, const int eventID, const NFGUID monitorID, const BLUEPRINT_EVENT_FUNCTOR& functor) override;
 
-	virtual bool RegisterNetMsgEventCallBack(const NFGUID blockID, const int eventID, const NFGUID monitorID, const BLUEPRINT_EVENT_FUNCTOR& functor) override;
+    virtual bool RegisterNetMsgEventCallBack(const NFGUID blockID, const int eventID, const NFGUID monitorID, const BLUEPRINT_EVENT_FUNCTOR& functor) override;
 
+    virtual bool RegisterGameObjectEventCallBack(const NFGUID blockID, const std::string& className, const NFGUID monitorID, const BLUEPRINT_EVENT_FUNCTOR& functor) override;
+
+private:
+
+    int OnClassCommonEvent(const NFGUID& self, const std::string& strClassNames, const CLASS_OBJECT_EVENT eClassEvent, const NFDataList& var);
+    int OnPropertyCommonEvent(const NFGUID& self, const std::string& strPropertyName, const NFData& oldVar, const NFData& newVar);
+    int OnRecordCommonEvent(const NFGUID& self, const RECORD_EVENT_DATA& xEventData, const NFData& oldVar, const NFData& newVar);
 
 private:
 	NFMapEx<NFGUID, BluePrintBlockAction> mBluePrintBlockAction;
-	NFIBluePrintModule* m_pBluePrintModule;
 
+
+private:
+    NFIBluePrintModule* m_pBluePrintModule;
+    NFIKernelModule* m_pKernelModule;
 
 };
 

@@ -50,15 +50,15 @@ enum CLASS_OBJECT_EVENT
 	COE_DESTROY,
 };
 
-class _NFExport NFIObject :public NFMemoryCounter<NFIObject>
+class _NFExport NFIObject :public NFMemoryCounter
 {
 private:
-	NFIObject() : NFMemoryCounter(GET_CLASS_NAME(NFIObject))
+	NFIObject() : NFMemoryCounter(GET_CLASS_NAME(NFIObject), 1)
 	{
 	}
 
 public:
-    NFIObject(NFGUID self) : NFMemoryCounter(GET_CLASS_NAME(NFIObject))
+    NFIObject(NFGUID self) : NFMemoryCounter(GET_CLASS_NAME(NFIObject), 1)
     {
     }
 
@@ -88,7 +88,8 @@ public:
 
     /////////////////////////////////////////////////////////////////
 	virtual CLASS_OBJECT_EVENT GetState() = 0;
-	virtual bool SetState(const CLASS_OBJECT_EVENT eState) = 0;
+	virtual void SetState(const CLASS_OBJECT_EVENT eState) = 0;
+    virtual bool ObjectReady() = 0;
 
     virtual bool FindProperty(const std::string& strPropertyName) = 0;
 

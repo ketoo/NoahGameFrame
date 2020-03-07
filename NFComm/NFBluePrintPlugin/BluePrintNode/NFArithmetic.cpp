@@ -25,16 +25,16 @@
 
 #include "NFArithmetic.h"
 
-void NFArithmetic::PrepareInputData()
+void NFArithmetic::PrepareInputData(const NFGUID& runTimeOnwer, const bool iteration)
 {
 }
 
-NF_SHARE_PTR<NFBluePrintNodeBase> NFArithmetic::FindNextNode()
+NF_SHARE_PTR<NFIOData> NFArithmetic::FindOutputNodeIOData()
 {
-	return NF_SHARE_PTR<NFBluePrintNodeBase>();
+	return NF_SHARE_PTR<NFIOData>();
 }
 
-void NFArithmetic::UpdateOutputData()
+void NFArithmetic::UpdateOutputData(const NFGUID& runTimeOnwer, const bool iteration)
 {
     if (this->arithmeticType == NFArithmeticType::Add)
     {

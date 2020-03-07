@@ -46,7 +46,7 @@
 #include <iostream>
 #include <fstream>
 #include <memory>
-#include "NFMemoryCounter.hpp"
+#include "NFMemoryCounter.h"
 #include "NFComm/NFPluginModule/NFGUID.h"
 #include "NFComm/NFPluginModule/NFPlatform.h"
 #include "NFComm/NFCore/NFVector2.hpp"
@@ -564,7 +564,7 @@ public:
 	mapbox::util::variant<NFINT64, double, std::string, NFGUID, NFVector2, NFVector3> variantData;
 };
 
-class NFDataList :public NFMemoryCounter<NFDataList>
+class NFDataList :public NFMemoryCounter
 {
 public:
     NFDataList() : NFMemoryCounter(GET_CLASS_NAME(NFDataList))
@@ -600,6 +600,11 @@ public:
 		}
 
 		return os.str();
+	}
+
+	virtual void ToMemoryCounterString(std::string& data)
+	{
+		
 	}
 
 	virtual std::string ToString(const int index) const

@@ -591,6 +591,13 @@ std::string NFProperty::ToString()
 	return strData;
 }
 
+void NFProperty::ToMemoryCounterString(std::string& data)
+{
+	data.append(this->mSelf.ToString());
+	data.append(":");
+	data.append(this->msPropertyName);
+}
+
 bool NFProperty::FromString(const std::string& strData)
 {
 	try

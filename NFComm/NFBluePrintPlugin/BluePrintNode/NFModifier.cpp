@@ -25,45 +25,45 @@
 
 #include "NFModifier.h"
 
-void NFPropertyModifier::PrepareInputData()
+void NFPropertyModifier::PrepareInputData(const NFGUID& runTimeOnwer, const bool iteration)
 {
 }
 
-NF_SHARE_PTR<NFBluePrintNodeBase> NFPropertyModifier::FindNextNode()
+NF_SHARE_PTR<NFIOData> NFPropertyModifier::FindOutputNodeIOData()
 {
-	return NF_SHARE_PTR<NFBluePrintNodeBase>();
+	return NF_SHARE_PTR<NFIOData>();
 }
 
-void NFRecordModifier::PrepareInputData()
-{
-}
-
-void NFRecordModifier::UpdateOutputData()
+void NFRecordModifier::PrepareInputData(const NFGUID& runTimeOnwer, const bool iteration)
 {
 }
 
-NF_SHARE_PTR<NFBluePrintNodeBase> NFRecordModifier::FindNextNode()
-{
-	return NF_SHARE_PTR<NFBluePrintNodeBase>();
-}
-
-void NFRecordAdder::PrepareInputData()
+void NFRecordModifier::UpdateOutputData(const NFGUID& runTimeOnwer, const bool iteration)
 {
 }
 
-void NFRecordAdder::UpdateOutputData()
+NF_SHARE_PTR<NFIOData> NFRecordModifier::FindOutputNodeIOData()
+{
+	return NF_SHARE_PTR<NFIOData>();
+}
+
+void NFRecordAdder::PrepareInputData(const NFGUID& runTimeOnwer, const bool iteration)
 {
 }
 
-void NFRecordRemover::PrepareInputData()
+void NFRecordAdder::UpdateOutputData(const NFGUID& runTimeOnwer, const bool iteration)
 {
 }
 
-void NFRecordRemover::UpdateOutputData()
+void NFRecordRemover::PrepareInputData(const NFGUID& runTimeOnwer, const bool iteration)
 {
 }
 
-NF_SHARE_PTR<NFBluePrintNodeBase> NFRecordRemover::FindNextNode()
+void NFRecordRemover::UpdateOutputData(const NFGUID& runTimeOnwer, const bool iteration)
 {
-	return NF_SHARE_PTR<NFBluePrintNodeBase>();
+}
+
+NF_SHARE_PTR<NFIOData> NFRecordRemover::FindOutputNodeIOData()
+{
+	return NF_SHARE_PTR<NFIOData>();
 }

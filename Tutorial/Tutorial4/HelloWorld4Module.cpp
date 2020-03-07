@@ -186,7 +186,7 @@ bool NFHelloWorld4Module::AfterInit()
 		//example 4
 		for (int i = 0; i < messageCount; ++i)
 		{
-			m_pThreadPoolModule->DoAsyncTask("sas",
+			m_pThreadPoolModule->DoAsyncTask(NFGUID(), "sas",
 				[&](NFThreadTask& task) -> void
 			{
 				//std::cout << "example 4 thread id: " << std::this_thread::get_id() << " task id:" << task.nTaskID.ToString() << " task data:" << task.data << std::endl;
@@ -208,7 +208,7 @@ bool NFHelloWorld4Module::AfterInit()
 		//example 4
 		for (int i = 0; i < messageCount; ++i)
 		{
-			m_pThreadPoolModule->DoAsyncTask("sas",
+			m_pThreadPoolModule->DoAsyncTask(NFGUID(), "sas",
 				[&](NFThreadTask& task) -> void
 			{
 				//std::cout << "example 4 thread id: " << std::this_thread::get_id() << " task id:" << taskID.ToString() << " task data:" << strData << std::endl;
@@ -233,8 +233,8 @@ bool NFHelloWorld4Module::AfterInit()
 		std::cout << "Test for actor mode" << std::endl;
 		int timeStart = NFGetTimeMS();
 
-		NFGUID actorID1 = m_pActorModule->RequireActor();
-		m_pActorModule->AddComponent<NFHttpComponent>(actorID1);
+		auto actorID1 = m_pActorModule->RequireActor();
+		m_pActorModule->AddComponent<NFHttpComponent>(actorID1->ID());
 		
 		for (int i = 0; i < 5; ++i)
 		{
@@ -251,7 +251,7 @@ bool NFHelloWorld4Module::AfterInit()
 
 		for (int i = 0; i < messageCount; ++i)
 		{
-			m_pActorModule->SendMsgToActor(actorID1, i, "test");
+			m_pActorModule->SendMsgToActor(actorID1->ID(), i, "test");
 			//m_pActorModule->SendMsgToActor(actorID1, i, std::to_string(i*i));
 		}
 

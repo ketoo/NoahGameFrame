@@ -31,6 +31,7 @@
 #include "NFComm/NFCore/NFPerformance.hpp"
 #include "NFComm/NFCore/NFPropertyManager.h"
 #include "NFComm/NFCore/NFRecordManager.h"
+#include "NFComm/NFCore/NFMemoryCounter.h"
 #include "NFComm/NFPluginModule/NFGUID.h"
 #include "NFComm/NFMessageDefine/NFProtocolDefine.hpp"
 
@@ -80,7 +81,11 @@ bool NFKernelModule::Init()
 	m_pScheduleModule = pPluginManager->FindModule<NFIScheduleModule>();
 	m_pEventModule = pPluginManager->FindModule<NFIEventModule>();
 	m_pCellModule = pPluginManager->FindModule<NFICellModule>();
+	m_pThreadPoolModule = pPluginManager->FindModule<NFIThreadPoolModule>();
 	
+	m_pBackupClassModule = m_pClassModule->GetBackupClassModule();
+	m_pBackupElementModule = m_pElementModule->GetBackupElementModule();
+
 	return true;
 }
 
@@ -159,160 +164,373 @@ NF_SHARE_PTR<NFIObject> NFKernelModule::CreateObject(const NFGUID& self, const i
 		return pObject;
 	}
 
-	NF_SHARE_PTR<NFIPropertyManager> pStaticClassPropertyManager = m_pClassModule->GetClassPropertyManager(strClassName);
-	NF_SHARE_PTR<NFIRecordManager> pStaticClassRecordManager = m_pClassModule->GetClassRecordManager(strClassName);
-	if (pStaticClassPropertyManager && pStaticClassRecordManager)
+	pObject = NF_SHARE_PTR<NFIObject>(NF_NEW NFObject(ident, pPluginManager));
+	AddElement(ident, pObject);
+
+	bool backup = false;
+	if (backup)
 	{
-
-		pObject = NF_SHARE_PTR<NFIObject>(NF_NEW NFObject(ident, pPluginManager));
-
-		AddElement(ident, pObject);
-		pContainerInfo->AddObjectToGroup(nGroupID, ident, strClassName == NFrame::Player::ThisName() ? true : false);
-
-		NF_SHARE_PTR<NFIPropertyManager> pPropertyManager = pObject->GetPropertyManager();
-		NF_SHARE_PTR<NFIRecordManager> pRecordManager = pObject->GetRecordManager();
-
-
-		NF_SHARE_PTR<NFIProperty> pStaticConfigPropertyInfo = pStaticClassPropertyManager->First();
-		while (pStaticConfigPropertyInfo)
-		{
-			NF_SHARE_PTR<NFIProperty> xProperty = pPropertyManager->AddProperty(ident, pStaticConfigPropertyInfo->GetKey(), pStaticConfigPropertyInfo->GetType());
-
-			xProperty->SetPublic(pStaticConfigPropertyInfo->GetPublic());
-			xProperty->SetPrivate(pStaticConfigPropertyInfo->GetPrivate());
-			xProperty->SetSave(pStaticConfigPropertyInfo->GetSave());
-			xProperty->SetCache(pStaticConfigPropertyInfo->GetCache());
-			xProperty->SetRef(pStaticConfigPropertyInfo->GetRef());
-			xProperty->SetUpload(pStaticConfigPropertyInfo->GetUpload());
-
-
-			pObject->AddPropertyCallBack(pStaticConfigPropertyInfo->GetKey(), this, &NFKernelModule::OnPropertyCommonEvent);
-
-			pStaticConfigPropertyInfo = pStaticClassPropertyManager->Next();
-		}
-
-		NF_SHARE_PTR<NFIRecord> pConfigRecordInfo = pStaticClassRecordManager->First();
-		while (pConfigRecordInfo)
-		{
-			NF_SHARE_PTR<NFIRecord> xRecord = pRecordManager->AddRecord(ident,
-				pConfigRecordInfo->GetName(),
-				pConfigRecordInfo->GetInitData(),
-				pConfigRecordInfo->GetTag(),
-				pConfigRecordInfo->GetRows());
-
-			xRecord->SetPublic(pConfigRecordInfo->GetPublic());
-			xRecord->SetPrivate(pConfigRecordInfo->GetPrivate());
-			xRecord->SetSave(pConfigRecordInfo->GetSave());
-			xRecord->SetCache(pConfigRecordInfo->GetCache());
-			xRecord->SetUpload(pConfigRecordInfo->GetUpload());
-
-			pObject->AddRecordCallBack(pConfigRecordInfo->GetName(), this, &NFKernelModule::OnRecordCommonEvent);
-
-			pConfigRecordInfo = pStaticClassRecordManager->Next();
-		}
-
-		NFVector3 vRelivePos = m_pSceneModule->GetRelivePosition(nSceneID, 0);
-
-		pObject->SetPropertyObject(NFrame::IObject::ID(), self);
-		pObject->SetPropertyString(NFrame::IObject::ConfigID(), strConfigIndex);
-		pObject->SetPropertyString(NFrame::IObject::ClassName(), strClassName);
-		pObject->SetPropertyInt(NFrame::IObject::SceneID(), nSceneID);
-		pObject->SetPropertyInt(NFrame::IObject::GroupID(), nGroupID);
-		pObject->SetPropertyVector3(NFrame::IObject::Position(), vRelivePos);
-
-		//no data
-		DoEvent(ident, strClassName, pObject->GetState(), arg);
-
-		//////////////////////////////////////////////////////////////////////////
-
-		NF_SHARE_PTR<NFIPropertyManager> pConfigPropertyManager = m_pElementModule->GetPropertyManager(strConfigIndex);
-		NF_SHARE_PTR<NFIRecordManager> pConfigRecordManager = m_pElementModule->GetRecordManager(strConfigIndex);
-
-		if (pConfigPropertyManager && pConfigRecordManager)
-		{
-			NF_SHARE_PTR<NFIProperty> pConfigPropertyInfo = pConfigPropertyManager->First();
-			while (nullptr != pConfigPropertyInfo)
+		m_pThreadPoolModule->DoAsyncTask(NFGUID(), "",
+			[=](NFThreadTask& task) -> void
 			{
-				if (pConfigPropertyInfo->Changed())
+				//backup thread for async task
 				{
-					pPropertyManager->SetProperty(pConfigPropertyInfo->GetKey(), pConfigPropertyInfo->GetValue());
+					NF_SHARE_PTR<NFIPropertyManager> pStaticClassPropertyManager = m_pClassModule->GetBackupClassModule()->GetClassPropertyManager(strClassName);
+					NF_SHARE_PTR<NFIRecordManager> pStaticClassRecordManager = m_pClassModule->GetBackupClassModule()->GetClassRecordManager(strClassName);
+					if (pStaticClassPropertyManager && pStaticClassRecordManager)
+					{
+						NF_SHARE_PTR<NFIPropertyManager> pPropertyManager = pObject->GetPropertyManager();
+						NF_SHARE_PTR<NFIRecordManager> pRecordManager = pObject->GetRecordManager();
+
+						NF_SHARE_PTR<NFIProperty> pStaticConfigPropertyInfo = pStaticClassPropertyManager->First();
+						while (pStaticConfigPropertyInfo)
+						{
+							NF_SHARE_PTR<NFIProperty> xProperty = pPropertyManager->AddProperty(ident, pStaticConfigPropertyInfo->GetKey(), pStaticConfigPropertyInfo->GetType());
+
+							xProperty->SetPublic(pStaticConfigPropertyInfo->GetPublic());
+							xProperty->SetPrivate(pStaticConfigPropertyInfo->GetPrivate());
+							xProperty->SetSave(pStaticConfigPropertyInfo->GetSave());
+							xProperty->SetCache(pStaticConfigPropertyInfo->GetCache());
+							xProperty->SetRef(pStaticConfigPropertyInfo->GetRef());
+							xProperty->SetUpload(pStaticConfigPropertyInfo->GetUpload());
+
+							//???
+							pObject->AddPropertyCallBack(pStaticConfigPropertyInfo->GetKey(), this, &NFKernelModule::OnPropertyCommonEvent);
+
+							pStaticConfigPropertyInfo = pStaticClassPropertyManager->Next();
+						}
+
+						NF_SHARE_PTR<NFIRecord> pConfigRecordInfo = pStaticClassRecordManager->First();
+						while (pConfigRecordInfo)
+						{
+							NF_SHARE_PTR<NFIRecord> xRecord = pRecordManager->AddRecord(ident,
+								pConfigRecordInfo->GetName(),
+								pConfigRecordInfo->GetInitData(),
+								pConfigRecordInfo->GetTag(),
+								pConfigRecordInfo->GetRows());
+
+							xRecord->SetPublic(pConfigRecordInfo->GetPublic());
+							xRecord->SetPrivate(pConfigRecordInfo->GetPrivate());
+							xRecord->SetSave(pConfigRecordInfo->GetSave());
+							xRecord->SetCache(pConfigRecordInfo->GetCache());
+							xRecord->SetUpload(pConfigRecordInfo->GetUpload());
+
+							//???
+							pObject->AddRecordCallBack(pConfigRecordInfo->GetName(), this, &NFKernelModule::OnRecordCommonEvent);
+
+							pConfigRecordInfo = pStaticClassRecordManager->Next();
+						}
+					}
+				}
+			},
+			[=](NFThreadTask& task) -> void
+			{
+				//no data--main thread
+				{
+					NFVector3 vRelivePos = m_pSceneModule->GetRelivePosition(nSceneID, 0);
+
+					pObject->SetPropertyString(NFrame::IObject::ConfigID(), strConfigIndex);
+					pObject->SetPropertyString(NFrame::IObject::ClassName(), strClassName);
+					pObject->SetPropertyInt(NFrame::IObject::SceneID(), nSceneID);
+					pObject->SetPropertyInt(NFrame::IObject::GroupID(), nGroupID);
+					pObject->SetPropertyVector3(NFrame::IObject::Position(), vRelivePos);
+
+					pContainerInfo->AddObjectToGroup(nGroupID, ident, strClassName == NFrame::Player::ThisName() ? true : false);
+
+					DoEvent(ident, strClassName, pObject->GetState(), arg);
 				}
 
-				pConfigPropertyInfo = pConfigPropertyManager->Next();
+				m_pThreadPoolModule->DoAsyncTask(NFGUID(), "",
+					[=](NFThreadTask& task) -> void
+					{
+						//backup thread
+						{
+							NF_SHARE_PTR<NFIPropertyManager> pPropertyManager = pObject->GetPropertyManager();
+							NF_SHARE_PTR<NFIPropertyManager> pConfigPropertyManager = m_pElementModule->GetBackupElementModule()->GetPropertyManager(strConfigIndex);
+							NF_SHARE_PTR<NFIRecordManager> pConfigRecordManager = m_pElementModule->GetBackupElementModule()->GetRecordManager(strConfigIndex);
+
+							if (pConfigPropertyManager && pConfigRecordManager)
+							{
+								NF_SHARE_PTR<NFIProperty> pConfigPropertyInfo = pConfigPropertyManager->First();
+								while (nullptr != pConfigPropertyInfo)
+								{
+									if (pConfigPropertyInfo->Changed())
+									{
+										pPropertyManager->SetProperty(pConfigPropertyInfo->GetKey(), pConfigPropertyInfo->GetValue());
+									}
+
+									pConfigPropertyInfo = pConfigPropertyManager->Next();
+								}
+							}
+						}
+					},
+					[=](NFThreadTask& task) -> void
+					{
+
+						//main thread
+						{
+							NF_SHARE_PTR<NFIPropertyManager> pPropertyManager = pObject->GetPropertyManager();
+							for (int i = 0; i < arg.GetCount() - 1; i += 2)
+							{
+								const std::string& strPropertyName = arg.String(i);
+								if (NFrame::IObject::ConfigID() != strPropertyName
+									&& NFrame::IObject::ClassName() != strPropertyName
+									&& NFrame::IObject::SceneID() != strPropertyName
+									&& NFrame::IObject::ID() != strPropertyName
+									&& NFrame::IObject::GroupID() != strPropertyName)
+								{
+									NF_SHARE_PTR<NFIProperty> pArgProperty = pPropertyManager->GetElement(strPropertyName);
+									if (pArgProperty)
+									{
+										switch (pArgProperty->GetType())
+										{
+										case TDATA_INT:
+											pObject->SetPropertyInt(strPropertyName, arg.Int(i + 1));
+											break;
+										case TDATA_FLOAT:
+											pObject->SetPropertyFloat(strPropertyName, arg.Float(i + 1));
+											break;
+										case TDATA_STRING:
+											pObject->SetPropertyString(strPropertyName, arg.String(i + 1));
+											break;
+										case TDATA_OBJECT:
+											pObject->SetPropertyObject(strPropertyName, arg.Object(i + 1));
+											break;
+										case TDATA_VECTOR2:
+											pObject->SetPropertyVector2(strPropertyName, arg.Vector2(i + 1));
+											break;
+										case TDATA_VECTOR3:
+											pObject->SetPropertyVector3(strPropertyName, arg.Vector3(i + 1));
+											break;
+										default:
+											break;
+										}
+									}
+								}
+							}
+
+							std::ostringstream stream;
+							stream << " create object: " << ident.ToString();
+							stream << " config_name: " << strConfigIndex;
+							stream << " scene_id: " << nSceneID;
+							stream << " group_id: " << nGroupID;
+							stream << " position: " << pObject->GetPropertyVector3(NFrame::IObject::Position()).ToString();
+
+							m_pLogModule->LogInfo(stream);
+
+							pObject->SetState(COE_CREATE_BEFORE_ATTACHDATA);
+							DoEvent(ident, strClassName, pObject->GetState(), arg);
+
+						}
+
+						m_pThreadPoolModule->DoAsyncTask(NFGUID(), "",
+							[=](NFThreadTask& task) -> void
+							{
+								//back up thread
+								{
+									pObject->SetState(COE_CREATE_LOADDATA);
+									DoEvent(ident, strClassName, pObject->GetState(), arg);
+								}
+							},
+							[=](NFThreadTask& task) -> void
+							{
+								//below are main thread
+								{
+									pObject->SetState(COE_CREATE_AFTER_ATTACHDATA);
+									DoEvent(ident, strClassName, pObject->GetState(), arg);
+
+									pObject->SetState(COE_CREATE_BEFORE_EFFECT);
+									DoEvent(ident, strClassName, pObject->GetState(), arg);
+
+									pObject->SetState(COE_CREATE_EFFECTDATA);
+									DoEvent(ident, strClassName, pObject->GetState(), arg);
+
+									pObject->SetState(COE_CREATE_AFTER_EFFECT);
+									DoEvent(ident, strClassName, pObject->GetState(), arg);
+
+									pObject->SetState(COE_CREATE_HASDATA);
+									DoEvent(ident, strClassName, pObject->GetState(), arg);
+
+									pObject->SetState(COE_CREATE_FINISH);
+									DoEvent(ident, strClassName, pObject->GetState(), arg);
+								}
+							});
+
+					});
+			});
+
+	}
+	else
+	{
+		//backup thread for async task
+		{
+			NF_SHARE_PTR<NFIPropertyManager> pStaticClassPropertyManager = m_pClassModule->GetClassPropertyManager(strClassName);
+			NF_SHARE_PTR<NFIRecordManager> pStaticClassRecordManager = m_pClassModule->GetClassRecordManager(strClassName);
+			if (pStaticClassPropertyManager && pStaticClassRecordManager)
+			{
+				NF_SHARE_PTR<NFIPropertyManager> pPropertyManager = pObject->GetPropertyManager();
+				NF_SHARE_PTR<NFIRecordManager> pRecordManager = pObject->GetRecordManager();
+
+				NF_SHARE_PTR<NFIProperty> pStaticConfigPropertyInfo = pStaticClassPropertyManager->First();
+				while (pStaticConfigPropertyInfo)
+				{
+					NF_SHARE_PTR<NFIProperty> xProperty = pPropertyManager->AddProperty(ident, pStaticConfigPropertyInfo->GetKey(), pStaticConfigPropertyInfo->GetType());
+
+					xProperty->SetPublic(pStaticConfigPropertyInfo->GetPublic());
+					xProperty->SetPrivate(pStaticConfigPropertyInfo->GetPrivate());
+					xProperty->SetSave(pStaticConfigPropertyInfo->GetSave());
+					xProperty->SetCache(pStaticConfigPropertyInfo->GetCache());
+					xProperty->SetRef(pStaticConfigPropertyInfo->GetRef());
+					xProperty->SetUpload(pStaticConfigPropertyInfo->GetUpload());
+
+
+					pObject->AddPropertyCallBack(pStaticConfigPropertyInfo->GetKey(), this, &NFKernelModule::OnPropertyCommonEvent);
+
+					pStaticConfigPropertyInfo = pStaticClassPropertyManager->Next();
+				}
+
+				NF_SHARE_PTR<NFIRecord> pConfigRecordInfo = pStaticClassRecordManager->First();
+				while (pConfigRecordInfo)
+				{
+					NF_SHARE_PTR<NFIRecord> xRecord = pRecordManager->AddRecord(ident,
+						pConfigRecordInfo->GetName(),
+						pConfigRecordInfo->GetInitData(),
+						pConfigRecordInfo->GetTag(),
+						pConfigRecordInfo->GetRows());
+
+					xRecord->SetPublic(pConfigRecordInfo->GetPublic());
+					xRecord->SetPrivate(pConfigRecordInfo->GetPrivate());
+					xRecord->SetSave(pConfigRecordInfo->GetSave());
+					xRecord->SetCache(pConfigRecordInfo->GetCache());
+					xRecord->SetUpload(pConfigRecordInfo->GetUpload());
+
+					pObject->AddRecordCallBack(pConfigRecordInfo->GetName(), this, &NFKernelModule::OnRecordCommonEvent);
+
+					pConfigRecordInfo = pStaticClassRecordManager->Next();
+				}
 			}
 		}
 
-		for (int i = 0; i < arg.GetCount() - 1; i += 2)
+		//no data--main thread
 		{
-			const std::string& strPropertyName = arg.String(i);
-			if (NFrame::IObject::ConfigID() != strPropertyName
-				&& NFrame::IObject::ClassName() != strPropertyName
-				&& NFrame::IObject::SceneID() != strPropertyName
-				&& NFrame::IObject::ID() != strPropertyName
-				&& NFrame::IObject::GroupID() != strPropertyName)
+			NFVector3 vRelivePos = m_pSceneModule->GetRelivePosition(nSceneID, 0);
+
+			pObject->SetPropertyObject(NFrame::IObject::ID(), ident);
+			pObject->SetPropertyString(NFrame::IObject::ConfigID(), strConfigIndex);
+			pObject->SetPropertyString(NFrame::IObject::ClassName(), strClassName);
+			pObject->SetPropertyInt(NFrame::IObject::SceneID(), nSceneID);
+			pObject->SetPropertyInt(NFrame::IObject::GroupID(), nGroupID);
+			pObject->SetPropertyVector3(NFrame::IObject::Position(), vRelivePos);
+
+			pContainerInfo->AddObjectToGroup(nGroupID, ident, strClassName == NFrame::Player::ThisName() ? true : false);
+
+			DoEvent(ident, strClassName, pObject->GetState(), arg);
+		}
+
+		//////////////////////////////////////////////////////////////////////////
+		//backup thread
+		{
+			NF_SHARE_PTR<NFIPropertyManager> pPropertyManager = pObject->GetPropertyManager();
+			NF_SHARE_PTR<NFIPropertyManager> pConfigPropertyManager = m_pElementModule->GetPropertyManager(strConfigIndex);
+			NF_SHARE_PTR<NFIRecordManager> pConfigRecordManager = m_pElementModule->GetRecordManager(strConfigIndex);
+
+			if (pConfigPropertyManager && pConfigRecordManager)
 			{
-				NF_SHARE_PTR<NFIProperty> pArgProperty = pStaticClassPropertyManager->GetElement(strPropertyName);
-				if (pArgProperty)
+				NF_SHARE_PTR<NFIProperty> pConfigPropertyInfo = pConfigPropertyManager->First();
+				while (nullptr != pConfigPropertyInfo)
 				{
-					switch (pArgProperty->GetType())
+					if (pConfigPropertyInfo->Changed())
 					{
-					case TDATA_INT:
-						pObject->SetPropertyInt(strPropertyName, arg.Int(i + 1));
-						break;
-					case TDATA_FLOAT:
-						pObject->SetPropertyFloat(strPropertyName, arg.Float(i + 1));
-						break;
-					case TDATA_STRING:
-						pObject->SetPropertyString(strPropertyName, arg.String(i + 1));
-						break;
-					case TDATA_OBJECT:
-						pObject->SetPropertyObject(strPropertyName, arg.Object(i + 1));
-						break;
-					case TDATA_VECTOR2:
-						pObject->SetPropertyVector2(strPropertyName, arg.Vector2(i + 1));
-						break;
-					case TDATA_VECTOR3:
-						pObject->SetPropertyVector3(strPropertyName, arg.Vector3(i + 1));
-						break;
-					default:
-						break;
+						pPropertyManager->SetProperty(pConfigPropertyInfo->GetKey(), pConfigPropertyInfo->GetValue());
+					}
+
+					pConfigPropertyInfo = pConfigPropertyManager->Next();
+				}
+			}
+		}
+
+		//main thread
+		{
+			NF_SHARE_PTR<NFIPropertyManager> pPropertyManager = pObject->GetPropertyManager();
+			for (int i = 0; i < arg.GetCount() - 1; i += 2)
+			{
+				const std::string& strPropertyName = arg.String(i);
+				if (NFrame::IObject::ConfigID() != strPropertyName
+					&& NFrame::IObject::ClassName() != strPropertyName
+					&& NFrame::IObject::SceneID() != strPropertyName
+					&& NFrame::IObject::ID() != strPropertyName
+					&& NFrame::IObject::GroupID() != strPropertyName)
+				{
+					NF_SHARE_PTR<NFIProperty> pArgProperty = pPropertyManager->GetElement(strPropertyName);
+					if (pArgProperty)
+					{
+						switch (pArgProperty->GetType())
+						{
+						case TDATA_INT:
+							pObject->SetPropertyInt(strPropertyName, arg.Int(i + 1));
+							break;
+						case TDATA_FLOAT:
+							pObject->SetPropertyFloat(strPropertyName, arg.Float(i + 1));
+							break;
+						case TDATA_STRING:
+							pObject->SetPropertyString(strPropertyName, arg.String(i + 1));
+							break;
+						case TDATA_OBJECT:
+							pObject->SetPropertyObject(strPropertyName, arg.Object(i + 1));
+							break;
+						case TDATA_VECTOR2:
+							pObject->SetPropertyVector2(strPropertyName, arg.Vector2(i + 1));
+							break;
+						case TDATA_VECTOR3:
+							pObject->SetPropertyVector3(strPropertyName, arg.Vector3(i + 1));
+							break;
+						default:
+							break;
+						}
 					}
 				}
 			}
+
+			std::ostringstream stream;
+			stream << " create object: " << ident.ToString();
+			stream << " config_name: " << strConfigIndex;
+			stream << " scene_id: " << nSceneID;
+			stream << " group_id: " << nGroupID;
+			stream << " position: " << pObject->GetPropertyVector3(NFrame::IObject::Position()).ToString();
+
+			//m_pLogModule->LogInfo(stream);
+
+			pObject->SetState(COE_CREATE_BEFORE_ATTACHDATA);
+			DoEvent(ident, strClassName, pObject->GetState(), arg);
+
 		}
 
-		std::ostringstream stream;
-		stream << " create object: " << ident.ToString();
-		stream << " config_name: " << strConfigIndex;
-		stream << " scene_id: " << nSceneID;
-		stream << " group_id: " << nGroupID;
-		stream << " position: " << pObject->GetPropertyVector3(NFrame::IObject::Position()).ToString();
+		//back up thread
+		{
+			pObject->SetState(COE_CREATE_LOADDATA);
+			DoEvent(ident, strClassName, pObject->GetState(), arg);
+		}
 
-		m_pLogModule->LogInfo(stream);
+		//below are main thread
+		{
+			pObject->SetState(COE_CREATE_AFTER_ATTACHDATA);
+			DoEvent(ident, strClassName, pObject->GetState(), arg);
 
-		pObject->SetState(COE_CREATE_BEFORE_ATTACHDATA);
-		DoEvent(ident, strClassName, pObject->GetState(), arg);
+			pObject->SetState(COE_CREATE_BEFORE_EFFECT);
+			DoEvent(ident, strClassName, pObject->GetState(), arg);
 
-		pObject->SetState(COE_CREATE_LOADDATA);
-		DoEvent(ident, strClassName, pObject->GetState(), arg);
+			pObject->SetState(COE_CREATE_EFFECTDATA);
+			DoEvent(ident, strClassName, pObject->GetState(), arg);
 
-		pObject->SetState(COE_CREATE_AFTER_ATTACHDATA);
-		DoEvent(ident, strClassName, pObject->GetState(), arg);
+			pObject->SetState(COE_CREATE_AFTER_EFFECT);
+			DoEvent(ident, strClassName, pObject->GetState(), arg);
 
-		pObject->SetState(COE_CREATE_BEFORE_EFFECT);
-		DoEvent(ident, strClassName, pObject->GetState(), arg);
+			pObject->SetState(COE_CREATE_HASDATA);
+			DoEvent(ident, strClassName, pObject->GetState(), arg);
 
-		pObject->SetState(COE_CREATE_EFFECTDATA);
-		DoEvent(ident, strClassName, pObject->GetState(), arg);
-
-		pObject->SetState(COE_CREATE_AFTER_EFFECT);
-		DoEvent(ident, strClassName, pObject->GetState(), arg);
-
-		pObject->SetState(COE_CREATE_HASDATA);
-		DoEvent(ident, strClassName, pObject->GetState(), arg);
-
-		pObject->SetState(COE_CREATE_FINISH);
-		DoEvent(ident, strClassName, pObject->GetState(), arg);
+			pObject->SetState(COE_CREATE_FINISH);
+			DoEvent(ident, strClassName, pObject->GetState(), arg);
+		}
 	}
 
 	return pObject;
@@ -327,9 +545,10 @@ bool NFKernelModule::DestroyObject(const NFGUID& self)
 		return DestroySelf(self);
 	}
 
-	const int nSceneID = GetPropertyInt32(self, NFrame::IObject::SceneID());
+	const int sceneID = GetPropertyInt32(self, NFrame::IObject::SceneID());
+	const int groupID = GetPropertyInt32(self, NFrame::IObject::GroupID());
 
-	NF_SHARE_PTR<NFSceneInfo> pContainerInfo = m_pSceneModule->GetElement(nSceneID);
+	NF_SHARE_PTR<NFSceneInfo> pContainerInfo = m_pSceneModule->GetElement(sceneID);
 	if (pContainerInfo)
 	{
 		const std::string& strClassName = GetPropertyString(self, NFrame::IObject::ClassName());
@@ -341,8 +560,13 @@ bool NFKernelModule::DestroyObject(const NFGUID& self)
 		DoEvent(self, strClassName, COE_BEFOREDESTROY, NFDataList::Empty());
 		DoEvent(self, strClassName, COE_DESTROY, NFDataList::Empty());
 
-		RemoveElement(self);
+		if (strClassName != NFrame::Player::ThisName())
+		{
+			pContainerInfo->RemoveObjectFromGroup(groupID, self, false);
+		}
 
+		RemoveElement(self);
+		
 		m_pEventModule->RemoveEventCallBack(self);
 		m_pScheduleModule->RemoveSchedule(self);
 
@@ -350,7 +574,7 @@ bool NFKernelModule::DestroyObject(const NFGUID& self)
 
 	}
 
-	m_pLogModule->LogError(self, "There is no scene " + std::to_string(nSceneID), __FUNCTION__, __LINE__);
+	m_pLogModule->LogError(self, "There is no scene " + std::to_string(sceneID), __FUNCTION__, __LINE__);
 
 	return false;
 }
@@ -1002,6 +1226,7 @@ bool NFKernelModule::CreateScene(const int nSceneID)
 		NF_SHARE_PTR<NFSceneGroupInfo> pGroupInfo = NF_SHARE_PTR<NFSceneGroupInfo>(NF_NEW NFSceneGroupInfo(nSceneID, 0, pPropertyManager, pRecordManager));
 		if (NULL != pGroupInfo)
 		{
+			RequestGroupScene(nSceneID);
 			pSceneInfo->AddElement(0, pGroupInfo);
 
 			m_pLogModule->LogInfo("Create scene success, groupId:0, scene id:" + std::to_string(nSceneID), __FUNCTION__, __LINE__);
@@ -1323,7 +1548,7 @@ int NFKernelModule::OnPropertyCommonEvent(const NFGUID& self, const std::string&
 		os << performance.TimeScope();
 		os << "---------- ";
 		os << strPropertyName;
-		m_pLogModule->LogWarning(self, os, __FUNCTION__, __LINE__);
+		//m_pLogModule->LogWarning(self, os, __FUNCTION__, __LINE__);
 	}
 
 
@@ -1402,6 +1627,17 @@ bool NFKernelModule::ExistObject(const NFGUID & ident)
 	return ExistElement(ident);
 }
 
+bool NFKernelModule::ObjectReady(const NFGUID& ident)
+{
+	auto gameObject = GetElement(ident);
+	if (gameObject)
+	{
+		return gameObject->ObjectReady();
+	}
+
+	return false;
+}
+
 bool NFKernelModule::ExistObject(const NFGUID & ident, const int nSceneID, const int nGroupID)
 {
 	NF_SHARE_PTR<NFSceneInfo> pSceneInfo = m_pSceneModule->GetElement(nSceneID);
@@ -1459,7 +1695,7 @@ int NFKernelModule::OnRecordCommonEvent(const NFGUID& self, const RECORD_EVENT_D
 		os << "---------- ";
 		os << xEventData.strRecordName;
 		os << " event type " << xEventData.nOpType;
-		m_pLogModule->LogWarning(self, os, __FUNCTION__, __LINE__);
+		//m_pLogModule->LogWarning(self, os, __FUNCTION__, __LINE__);
 	}
 
 	return 0;
@@ -1485,7 +1721,7 @@ int NFKernelModule::OnClassCommonEvent(const NFGUID& self, const std::string& st
 		os << "---------- ";
 		os << strClassName;
 		os << " event type " << eClassEvent;
-		m_pLogModule->LogWarning(self, os, __FUNCTION__, __LINE__);
+		//m_pLogModule->LogWarning(self, os, __FUNCTION__, __LINE__);
 	}
 
 	return 0;
@@ -1634,7 +1870,12 @@ void NFKernelModule::ProcessMemFree()
 
 	nLastTime = pPluginManager->GetNowTime();
 
+	std::string info;
+	NFMemoryCounter::PrintMemoryInfo(info);
+
+	m_pLogModule->LogInfo(info, __FUNCTION__, __LINE__);
 	//MemManager::GetSingletonPtr()->FreeMem();
+	//MallocExtension::instance()->ReleaseFreeMemory();
 }
 
 bool NFKernelModule::DoEvent(const NFGUID& self, const std::string& strClassName, CLASS_OBJECT_EVENT eEvent, const NFDataList& valueList)

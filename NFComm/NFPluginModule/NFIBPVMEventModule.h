@@ -39,7 +39,7 @@ class NFIBPVMEventModule
     : public NFIModule
 {
 public:
-
+    ////////////////////////////////
     template<typename BaseType>
     bool RegisterGameEventCallBack(const NFGUID blockID, const int nEventID, const NFGUID monitorID, BaseType* pBase, int (BaseType::* handler)(const NFGUID&, const NFGUID&, const int, const NFMapEx<std::string, NFData>&))
     {
@@ -48,7 +48,9 @@ public:
     }
 
     virtual bool RegisterGameEventCallBack(const NFGUID blockID, const int eventID, const NFGUID monitorID, const BLUEPRINT_EVENT_FUNCTOR& functor) = 0;
-
+    
+    ////////////////////////////////
+    
     template<typename BaseType>
     bool RegisterNetEventCallBack(const NFGUID blockID, const int nEventID, const NFGUID monitorID, BaseType* pBase, int (BaseType::* handler)(const NFGUID&, const NFGUID&, const int, const NFMapEx<std::string, NFData>&))
     {
@@ -57,7 +59,9 @@ public:
     }
 
     virtual bool RegisterNetEventCallBack(const NFGUID blockID, const int eventID, const NFGUID monitorID, const BLUEPRINT_EVENT_FUNCTOR& functor) = 0;
-
+    
+    ////////////////////////////////
+   
     template<typename BaseType>
     bool RegisterNetMsgEventCallBack(const NFGUID blockID, const int nEventID, const NFGUID monitorID, BaseType* pBase, int (BaseType::* handler)(const NFGUID&, const NFGUID&, const int, const NFMapEx<std::string, NFData>&))
     {
@@ -66,6 +70,52 @@ public:
     }
 
     virtual bool RegisterNetMsgEventCallBack(const NFGUID blockID, const int eventID, const NFGUID monitorID, const BLUEPRINT_EVENT_FUNCTOR& functor) = 0;
+   
+    ////////////////////////////////
+
+    template<typename BaseType>
+    bool RegisterGameObjectEventCallBack(const NFGUID blockID, const std::string& className, const NFGUID monitorID, BaseType* pBase, int (BaseType::* handler)(const NFGUID&, const NFGUID&, const int, const NFMapEx<std::string, NFData>&))
+    {
+        BLUEPRINT_EVENT_FUNCTOR functor = std::bind(handler, pBase, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3, std::placeholders::_4);
+        return RegisterGameObjectEventCallBack(blockID, className, monitorID, functor);
+    }
+
+    virtual bool RegisterGameObjectEventCallBack(const NFGUID blockID, const std::string& className, const NFGUID monitorID, const BLUEPRINT_EVENT_FUNCTOR& functor) = 0;
+
+    /*
+    ////////////////////////////////
+    template<typename BaseType>
+    bool RegisterGameObjectPropCallBack(const NFGUID blockID, const std::string& className, const NFGUID monitorID, BaseType* pBase, int (BaseType::* handler)(const NFGUID&, const NFGUID&, const int, const NFMapEx<std::string, NFData>&))
+    {
+        BLUEPRINT_EVENT_FUNCTOR functor = std::bind(handler, pBase, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3, std::placeholders::_4);
+        return RegisterGameObjectPropCallBack(blockID, className, monitorID, functor);
+    }
+
+    virtual bool RegisterGameObjectPropCallBack(const NFGUID blockID, const std::string& className, const NFGUID monitorID, const BLUEPRINT_EVENT_FUNCTOR& functor) = 0;
+
+    ////////////////////////////////
+
+    template<typename BaseType>
+    bool RegisterGameObjectRecordCallBack(const NFGUID blockID, const int nEventID, const NFGUID monitorID, BaseType* pBase, int (BaseType::* handler)(const NFGUID&, const NFGUID&, const int, const NFMapEx<std::string, NFData>&))
+    {
+        BLUEPRINT_EVENT_FUNCTOR functor = std::bind(handler, pBase, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3, std::placeholders::_4);
+        return RegisterGameObjectRecordCallBack(blockID, nEventID, monitorID, functor);
+    }
+
+    virtual bool RegisterGameObjectRecordCallBack(const NFGUID blockID, const int eventID, const NFGUID monitorID, const BLUEPRINT_EVENT_FUNCTOR& functor) = 0;
+
+    ////////////////////////////////
+    template<typename BaseType>
+    bool RegisterObjectSceneCallBack(const NFGUID blockID, const int nEventID, const NFGUID monitorID, BaseType* pBase, int (BaseType::* handler)(const NFGUID&, const NFGUID&, const int, const NFMapEx<std::string, NFData>&))
+    {
+        BLUEPRINT_EVENT_FUNCTOR functor = std::bind(handler, pBase, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3, std::placeholders::_4);
+        return RegisterObjectSceneCallBack(blockID, nEventID, monitorID, functor);
+    }
+
+    virtual bool RegisterObjectSceneCallBack(const NFGUID blockID, const int eventID, const NFGUID monitorID, const BLUEPRINT_EVENT_FUNCTOR& functor) = 0;
+    */
+
+    ////////////////////////////////
 
 	virtual bool UnRegisterAllCallBack(const NFGUID blockID) = 0;
 

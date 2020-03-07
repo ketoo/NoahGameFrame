@@ -92,10 +92,22 @@ CLASS_OBJECT_EVENT NFObject::GetState()
 	return mObjectEventState;
 }
 
-bool NFObject::SetState(const CLASS_OBJECT_EVENT eState)
+void NFObject::SetState(const CLASS_OBJECT_EVENT eState)
 {
 	mObjectEventState = eState;
-	return true;
+}
+
+bool NFObject::ObjectReady()
+{
+    CLASS_OBJECT_EVENT state = GetState();
+    if (state == COE_CREATE_HASDATA
+        || state == COE_CREATE_FINISH
+        || state == COE_CREATE_CLIENT_FINISH)
+    {
+        return true;
+    }
+
+    return false;
 }
 
 bool NFObject::FindProperty(const std::string& strPropertyName)
@@ -549,4 +561,11 @@ void NFObject::SetPropertyManager(NF_SHARE_PTR<NFIPropertyManager> xPropertyMana
 NFGUID NFObject::Self()
 {
     return mSelf;
+}
+
+void NFObject::ToMemoryCounterString(std::string& info)
+{
+    info.append(mSelf.ToString());
+    info.append(":");
+    info.append(m_pPropertyManager->GetPropertyString("ClassName"));
 }

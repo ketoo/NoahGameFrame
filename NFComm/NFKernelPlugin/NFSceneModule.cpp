@@ -46,7 +46,9 @@ bool NFSceneModule::Init()
 
 bool NFSceneModule::AfterInit()
 {
-	//init all scene
+	//init all scene, scene module cant create scene at Init() function as scene module depends NFIClassModule
+	//and class module will load data at Init() function.
+	//as a result, developer cant create game object at function AfterInit().
 	NF_SHARE_PTR<NFIClass> xLogicClass = m_pClassModule->GetElement(NFrame::Scene::ThisName());
 	if (xLogicClass)
 	{
@@ -152,6 +154,9 @@ int NFSceneModule::RequestGroupScene(const int nSceneID)
 
 				pSceneInfo->AddElement(nNewGroupID, pGroupInfo);
 
+				int sceneType = m_pElementModule->GetPropertyInt(std::to_string(nSceneID), NFrame::Scene::Type());
+				SceneGroupCreatedEvent(NFGUID(), nSceneID, nNewGroupID, sceneType, NFDataList::Empty());
+
 				m_pCellModule->CreateGroupCell(nSceneID, nNewGroupID);
 				return nNewGroupID;
 			}
@@ -220,6 +225,9 @@ bool NFSceneModule::ReleaseGroupScene(const int nSceneID, const int nGroupID)
 
 			m_pCellModule->DestroyGroupCell(nSceneID, nGroupID);
 
+			int sceneType = m_pElementModule->GetPropertyInt(std::to_string(nSceneID), NFrame::Scene::Type());
+			SceneGroupDestroyedEvent(NFGUID(), nSceneID, nGroupID, sceneType, NFDataList::Empty());
+
 			pSceneInfo->RemoveElement(nGroupID);
 
 			return true;
@@ -257,7 +265,7 @@ bool NFSceneModule::LeaveSceneGroup(const NFGUID & self)
 		/////////
 
 		const NFVector3& lastPos = m_pKernelModule->GetPropertyVector3(self, NFrame::IObject::Position());
-		BeforeLeaveSceneGroup(self, nOldSceneID, nOldGroupID, 0, NFDataList());
+		BeforeLeaveSceneGroup(self, nOldSceneID, nOldGroupID, 0, NFDataList::Empty());
 
 		const NFGUID lastCell = m_pCellModule->ComputeCellID(lastPos);
 		OnMoveCellEvent(self, nOldSceneID, nOldGroupID, lastCell, NFGUID());
@@ -268,7 +276,7 @@ bool NFSceneModule::LeaveSceneGroup(const NFGUID & self)
 		{
 			pObject->SetPropertyInt(NFrame::Scene::GroupID(), 0);
 			/////////
-			AfterLeaveSceneGroup(self, nOldSceneID, nOldGroupID, 0, NFDataList());
+			AfterLeaveSceneGroup(self, nOldSceneID, nOldGroupID, 0, NFDataList::Empty());
 		}
 
 		return true;
@@ -309,6 +317,36 @@ bool NFSceneModule::AddSeedData(const int nSceneID, const std::string & strSeedI
 	}
 
 	return false;
+}
+
+const NFVector3& NFSceneModule::GetSeedPos(const int nSceneID, const std::string& strSeedID)
+{
+	NF_SHARE_PTR<NFSceneInfo> pSceneInfo = GetElement(nSceneID);
+	if (pSceneInfo)
+	{
+		auto seedDnata = pSceneInfo->GetSeedObjectInfo(strSeedID);
+		if (seedDnata)
+		{
+			return seedDnata->vSeedPos;
+		}
+	}
+
+	return NFVector3::Zero();
+}
+
+const int NFSceneModule::GetSeedPWeight(const int nSceneID, const std::string& strSeedID)
+{
+	NF_SHARE_PTR<NFSceneInfo> pSceneInfo = GetElement(nSceneID);
+	if (pSceneInfo)
+	{
+		auto seedDnata = pSceneInfo->GetSeedObjectInfo(strSeedID);
+		if (seedDnata)
+		{
+			return seedDnata->nWeight;
+		}
+	}
+
+	return 0;
 }
 
 bool NFSceneModule::AddRelivePosition(const int nSceneID, const int nIndex, const NFVector3 & vPos)
@@ -448,7 +486,7 @@ bool NFSceneModule::AddSceneGroupDestroyedCallBack(const SCENE_EVENT_FUNCTOR_PTR
 
 bool NFSceneModule::CreateSceneNPC(const int nSceneID, const int nGroupID)
 {
-	return CreateSceneNPC(nSceneID, nGroupID, NFDataList());
+	return CreateSceneNPC(nSceneID, nGroupID, NFDataList::Empty());
 }
 
 bool NFSceneModule::CreateSceneNPC(const int nSceneID, const int nGroupID, const NFDataList& argList)

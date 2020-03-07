@@ -18,6 +18,7 @@ package nframe;
 		public static final String Name = "Name";// string
 		public static final String Position = "Position";// vector3
 		public static final String SceneID = "SceneID";// int
+		public static final String State = "State";// int
 		// Property
 		public static final String ATK_DARK = "ATK_DARK";// int
 		public static final String ATK_FIRE = "ATK_FIRE";// int
@@ -105,6 +106,7 @@ package nframe;
 		public static final String Name = "Name";// string
 		public static final String Position = "Position";// vector3
 		public static final String SceneID = "SceneID";// int
+		public static final String State = "State";// int
 		// Property
 		public static final String Level = "Level";// int
 		// Record
@@ -123,6 +125,7 @@ package nframe;
 		public static final String Name = "Name";// string
 		public static final String Position = "Position";// vector3
 		public static final String SceneID = "SceneID";// int
+		public static final String State = "State";// int
 		// Property
 		// Record
 
@@ -140,6 +143,7 @@ package nframe;
 		public static final String Name = "Name";// string
 		public static final String Position = "Position";// vector3
 		public static final String SceneID = "SceneID";// int
+		public static final String State = "State";// int
 		// Record
 
 	}
@@ -156,6 +160,7 @@ package nframe;
 		public static final String Name = "Name";// string
 		public static final String Position = "Position";// vector3
 		public static final String SceneID = "SceneID";// int
+		public static final String State = "State";// int
 		// Property
 		public static final String HeroConfigID = "HeroConfigID";// string
 		public static final String Job = "Job";// int
@@ -176,6 +181,7 @@ package nframe;
 		public static final String Name = "Name";// string
 		public static final String Position = "Position";// vector3
 		public static final String SceneID = "SceneID";// int
+		public static final String State = "State";// int
 		// Property
 		public static final String Chinese = "Chinese";// string
 		public static final String English = "English";// string
@@ -197,6 +203,7 @@ package nframe;
 		public static final String Name = "Name";// string
 		public static final String Position = "Position";// vector3
 		public static final String SceneID = "SceneID";// int
+		public static final String State = "State";// int
 		// Property
 		public static final String AIOwnerID = "AIOwnerID";// object
 		public static final String Camp = "Camp";// object
@@ -221,6 +228,7 @@ package nframe;
 		public static final String NPCSubType = "NPCSubType";// int
 		public static final String NPCType = "NPCType";// int
 		public static final String Prefab = "Prefab";// string
+		public static final String Refresh = "Refresh";// int
 		public static final String SP = "SP";// int
 		public static final String SeedID = "SeedID";// string
 		public static final String ShowCard = "ShowCard";// string
@@ -250,6 +258,7 @@ package nframe;
 		public static final String Name = "Name";// string
 		public static final String Position = "Position";// vector3
 		public static final String SceneID = "SceneID";// int
+		public static final String State = "State";// int
 		// Property
 		public static final String Auth = "Auth";// string
 		public static final String IP = "IP";// string
@@ -271,6 +280,7 @@ package nframe;
 		public static final String Name = "Name";// string
 		public static final String Position = "Position";// vector3
 		public static final String SceneID = "SceneID";// int
+		public static final String State = "State";// int
 		// Property
 		public static final String Account = "Account";// string
 		public static final String Camp = "Camp";// object
@@ -314,6 +324,7 @@ package nframe;
 		public static final String Name = "Name";// string
 		public static final String Position = "Position";// vector3
 		public static final String SceneID = "SceneID";// int
+		public static final String State = "State";// int
 		// Property
 		public static final String ActorID = "ActorID";// int
 		public static final String FilePath = "FilePath";// string
@@ -344,6 +355,7 @@ package nframe;
 		public static final String Name = "Name";// string
 		public static final String Position = "Position";// vector3
 		public static final String SceneID = "SceneID";// int
+		public static final String State = "State";// int
 		// Property
 		public static final String SecurityData = "SecurityData";// string
 		// Record
@@ -362,6 +374,7 @@ package nframe;
 		public static final String Name = "Name";// string
 		public static final String Position = "Position";// vector3
 		public static final String SceneID = "SceneID";// int
+		public static final String State = "State";// int
 		// Property
 		public static final String Area = "Area";// int
 		public static final String Cell = "Cell";// int
@@ -389,6 +402,7 @@ package nframe;
 		public static final String Name = "Name";// string
 		public static final String Position = "Position";// vector3
 		public static final String SceneID = "SceneID";// int
+		public static final String State = "State";// int
 		// Property
 		public static final String AnimaState = "AnimaState";// string
 		public static final String AtkDis = "AtkDis";// float

@@ -39,7 +39,7 @@ int NFBPVirtualMachine::GameEventIDCallBack(const NFGUID& objectID, const  NFGUI
     auto node = m_pBluePrintModule->FindNode(monitorID);
     if (node->blueprintType == NFBlueprintType::MONITOR)
     {
-        node->Execute();
+        node->Execute(objectID);
     }
 
     return 0;
@@ -50,7 +50,7 @@ int NFBPVirtualMachine::NetEventIDCallBack(const NFGUID& objectID, const NFGUID&
 	auto node = m_pBluePrintModule->FindNode(monitorID);
 	if (node->blueprintType == NFBlueprintType::MONITOR)
 	{
-		node->Execute();
+		node->Execute(objectID);
 	}
 
 	return 0;
@@ -61,10 +61,31 @@ int NFBPVirtualMachine::NetMsgCallBack(const NFGUID& objectID, const NFGUID& mon
 	auto node = m_pBluePrintModule->FindNode(monitorID);
 	if (node->blueprintType == NFBlueprintType::MONITOR)
 	{
-		node->Execute();
+		node->Execute(objectID);
 	}
 
 	return 0;
+}
+
+int NFBPVirtualMachine::GameObjectCallBack(const NFGUID& objectID, const NFGUID& monitorID, const int eventID, const const NFMapEx<std::string, NFData>& data)
+{
+
+    return 0;
+}
+
+int NFBPVirtualMachine::ObjectPropCallBack(const NFGUID& objectID, const NFGUID& monitorID, const int eventID, const const NFMapEx<std::string, NFData>& data)
+{
+    return 0;
+}
+
+int NFBPVirtualMachine::ObjectRecordCallBack(const NFGUID& objectID, const NFGUID& monitorID, const int eventID, const const NFMapEx<std::string, NFData>& data)
+{
+    return 0;
+}
+
+int NFBPVirtualMachine::ObjectSceneEventCallBack(const NFGUID& objectID, const NFGUID& monitorID, const int eventID, const const NFMapEx<std::string, NFData>& data)
+{
+    return 0;
 }
 
 void NFBPVirtualMachine::StartMonitor(NF_SHARE_PTR<NFIMonitor> monitor)
