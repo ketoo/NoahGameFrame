@@ -26,6 +26,7 @@
 #define NF_GOD_VIEW_H
 
 #include "NFComm/NFPluginModule/NFIUIModule.h"
+#include "NFComm/NFPluginModule/NFINavigationDataModule.h"
 #include "NFComm/NFPluginModule/NFIClassModule.h"
 #include "NFComm/NFPluginModule/NFIElementModule.h"
 #include "NFComm/NFPluginModule/NFISceneModule.h"
@@ -52,6 +53,8 @@ private:
 
 	void RenderScene(const int sceneID, const int groupID);
 	void HandlerSelected(const NFGUID& id, const bool doubleClick);
+    void HandlerForBeginRender();
+
     bool HandlerNodeHovered(const NFGUID& id);
 
     void RenderSceneObjectNode(const int sceneID, const int groupID);
@@ -71,7 +74,8 @@ private:
 	NFIClassModule* m_pClassModule;
 	NFIElementModule* m_pElementModule;
 	NFISceneModule* m_pSceneModule;
-	NFIKernelModule* m_pKernelModule;
+    NFIKernelModule* m_pKernelModule;
+    NFINavigationDataModule* m_pNavigationDataModule;
 };
 
 #endif

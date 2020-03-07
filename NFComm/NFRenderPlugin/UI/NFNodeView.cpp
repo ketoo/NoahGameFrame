@@ -386,6 +386,10 @@ bool NFNodeView::Execute()
 
     BEGIN_EDITOR("My Editor");
 
+    if (mBeginRenderFunctor)
+    {
+        mBeginRenderFunctor();
+    }
 
     RenderNodes();
     RenderLinks();
@@ -418,6 +422,11 @@ void NFNodeView::SetUpDeleteLinkCallBack(std::function<bool(const NFGUID&)> func
 void NFNodeView::SetHoverNodeCallBack(std::function<bool(const NFGUID&)> functor)
 {
     mHoverNodeFunctor = functor;
+}
+
+void NFNodeView::SetBeginRenderCallBack(std::function<void()> functor)
+{
+    mBeginRenderFunctor = functor;
 }
 
 void NFNodeView::SetPinRenderCallBack(std::function<void(NFNodePin*)> functor)

@@ -3,10 +3,12 @@
   <ItemGroup>
     <ClInclude Include="NFNavigationPlugin.h" />
     <ClInclude Include="NFNavigationModule.h" />
+    <ClInclude Include="NFNavigationDataModule.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="dllmain.cpp" />
     <ClCompile Include="NFNavigationPlugin.cpp" />
     <ClCompile Include="NFNavigationModule.cpp" />
+    <ClCompile Include="NFNavigationDataModule.cpp" />
   </ItemGroup>
 </Project>

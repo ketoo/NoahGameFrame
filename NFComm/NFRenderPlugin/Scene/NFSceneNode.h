@@ -23,8 +23,8 @@
    limitations under the License.
 */
 
-#ifndef NF_SCENE_NODE
-#define NF_SCENE_NODE
+#ifndef NF_SCENE_NODE_H
+#define NF_SCENE_NODE_H
 
 #include <list>
 #include <vector>

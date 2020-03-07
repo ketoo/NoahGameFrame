@@ -76,12 +76,6 @@
     <ClCompile Include="imgui\imgui_widgets.cpp">
       <Filter>imgui</Filter>
     </ClCompile>
-    <ClCompile Include="Scene\NFSceneLoader.cpp">
-      <Filter>Scene\Help</Filter>
-    </ClCompile>
-    <ClCompile Include="Scene\NFImageLoader.cpp">
-      <Filter>Scene\Help</Filter>
-    </ClCompile>
     <ClCompile Include="NFRenderModule.cpp" />
     <ClCompile Include="Scene\NFLightComponent.cpp">
       <Filter>Scene</Filter>
@@ -179,12 +173,6 @@
     </ClInclude>
     <ClInclude Include="imgui\imstb_truetype.h">
       <Filter>imgui</Filter>
-    </ClInclude>
-    <ClInclude Include="Scene\NFSceneLoader.h">
-      <Filter>Scene\Help</Filter>
-    </ClInclude>
-    <ClInclude Include="Scene\NFImageLoader.h">
-      <Filter>Scene\Help</Filter>
     </ClInclude>
     <ClInclude Include="NFRenderModule.h" />
     <ClInclude Include="Scene\NFLightComponent.h">

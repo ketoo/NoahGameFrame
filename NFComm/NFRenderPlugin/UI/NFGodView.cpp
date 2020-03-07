@@ -34,7 +34,8 @@ NFGodView::NFGodView(NFIPluginManager* p, NFViewType vt) : NFIView(p, vt, GET_CL
 	m_pElementModule = pPluginManager->FindModule<NFIElementModule>();
 	m_pSceneModule = pPluginManager->FindModule<NFISceneModule>();
 	m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>();
-
+	m_pNavigationDataModule = pPluginManager->FindModule<NFINavigationDataModule>();
+	
 	m_pKernelModule->RegisterCommonClassEvent(this, &NFGodView::OnClassCommonEvent);
 
 	m_pNodeView = NF_NEW NFNodeView(p);
@@ -42,6 +43,7 @@ NFGodView::NFGodView(NFIPluginManager* p, NFViewType vt) : NFIView(p, vt, GET_CL
 
     m_pNodeView->ResetOffset(NFVector2::Zero());
 	m_pNodeView->SetHoverNodeCallBack(std::bind(&NFGodView::HandlerNodeHovered, this, std::placeholders::_1));
+	m_pNodeView->SetBeginRenderCallBack(std::bind(&NFGodView::HandlerForBeginRender, this));
 
 	m_pTreeView->SetSelectedNodeFunctor(std::bind(&NFGodView::HandlerSelected, this, std::placeholders::_1, std::placeholders::_2));
 	m_pTreeView->SetName(GET_CLASS_NAME(NFGodView));
@@ -184,6 +186,46 @@ void NFGodView::HandlerSelected(const NFGUID& id, const bool doubleClick)
 	if (pHierachyView && pInspectorView)
 	{
 		pInspectorView->OccupySubRender(pHierachyView.get());
+	}
+}
+
+void NFGodView::HandlerForBeginRender()
+{
+	ImDrawList* draw_list = ImGui::GetWindowDrawList();
+	
+	if (mSceneID > 0 && mGroupID > 0)
+	{
+		//draw
+		auto data = m_pNavigationDataModule->GetMapData(mSceneID, 0);
+		if (data)
+		{
+			for (int i = 0; i < data->tileConfig.mapSize; ++i)
+			{
+				for (int j = 0; j < data->tileConfig.mapSize; ++j)
+				{
+					auto voxel = data->data.GetElement(NFGUID(i, j));
+					if (voxel && voxel->movable <= 0)
+					{
+						if (voxel->layer > 1)
+						{
+							int color = NFColor::DEFAULT;
+							//int size = imnodes::GetStyle().grid_spacing / 2;
+
+							if (voxel->layer == 3)
+							{
+								color = NFColor::WORKFLOW;
+							}
+							else if (voxel->layer == 4)
+							{
+								color = NFColor::PININ;
+							}
+
+							draw_list->AddRectFilled(ImVec2(imnodes::GetStyle().grid_spacing * i, imnodes::GetStyle().grid_spacing * j), ImVec2(imnodes::GetStyle().grid_spacing, imnodes::GetStyle().grid_spacing), color);
+						}
+					}
+				}
+			}
+		}
 	}
 }
 

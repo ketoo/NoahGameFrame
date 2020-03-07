@@ -211,6 +211,7 @@ public:
    void SetUpDeleteLinkCallBack(std::function<bool(const NFGUID&)> functor);
 
    void SetHoverNodeCallBack(std::function<bool(const NFGUID&)> functor);
+   void SetBeginRenderCallBack(std::function<void()> functor);
 
    void SetPinRenderCallBack(std::function<void(NFNodePin*)> functor);
 
@@ -268,6 +269,7 @@ private:
     std::function<bool(const NFGUID&, const NFGUID&, const NFGUID&, const NFGUID&)> mTryNewLinkFunctor;
     std::function<bool(const NFGUID&)> mTryDeleteLinkFunctor;
     std::function<bool(const NFGUID&)> mHoverNodeFunctor;
+    std::function<void()> mBeginRenderFunctor;
     std::function<void(NFNodePin*)> mPinRenderFunctor;
 
     std::function<void(NFNode*)> mNodeRenderBeforePinInFunctor;

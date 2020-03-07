@@ -11,6 +11,7 @@
 		<Plugin Name="NFRenderPlugin" />
 		<Plugin Name="NFBluePrintPlugin" />
 		<Plugin Name="NFActorPlugin" />
+		<Plugin Name="NFNavigationPlugin" />
 
 	</GameServer>
 
