@@ -1248,6 +1248,30 @@ void EditorContextMoveToNode(const int node_id)
     editor.panning.y = -node.origin.y;
 }
 
+ImVec2 ToEditorSpace(const ImVec2& v)
+{
+    return grid_space_to_editor_space(v);
+}
+
+void AddRectFilled(const ImVec2& p_min, const ImVec2& p_max, ImU32 col, float rounding, ImDrawCornerFlags rounding_corners)
+{
+    EditorContext& editor = editor_context_get(); 
+    ImGui::SetCursorPos(p_min + editor.panning);
+
+    ImU32 node_background = col;
+    {
+        // node base
+        g.canvas_draw_list->AddRectFilled(
+            p_min,
+            p_max,
+            node_background,
+            rounding);
+    }
+
+    g.canvas_draw_list->ChannelsSplit(Channels_Count);
+    g.canvas_draw_list->ChannelsSetCurrent(Channels_ImGui);
+}
+
 void Initialize()
 {
     assert(initialized == false);

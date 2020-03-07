@@ -1,7 +1,7 @@
 #pragma once
 
 #include <stddef.h>
-
+#include "imgui/imgui.h"
 struct ImVec2;
 
 namespace imnodes
@@ -106,6 +106,8 @@ void EditorContextFree(EditorContext*);
 void EditorContextSet(EditorContext*);
 void EditorContextResetPanning(const ImVec2& pos);
 void EditorContextMoveToNode(const int node_id);
+ImVec2 ToEditorSpace(const ImVec2& v);
+void AddRectFilled(const ImVec2& p_min, const ImVec2& p_max, ImU32 col, float rounding = 0.0f, ImDrawCornerFlags rounding_corners = ImDrawCornerFlags_All);
 
 // Initialize the node editor system.
 void Initialize();

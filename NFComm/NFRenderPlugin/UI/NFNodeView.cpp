@@ -742,7 +742,7 @@ void NFNodeView::SetNodePosition(const NFGUID guid, const NFVector2 vec)
 void NFNodeView::ResetOffset(const NFVector2& pos)
 {
     SET_CURRENT_CONTEXT(m_pEditorContext);
-   //imnodes::EditorContextResetPanning(ImVec2(pos.X(), pos.Y()));
+   imnodes::EditorContextResetPanning(ImVec2(pos.X(), pos.Y()));
 }
 
 void NFNodeView::MoveToNode(const NFGUID guid)
@@ -756,8 +756,15 @@ void NFNodeView::MoveToNode(const NFGUID guid)
     }
 }
 
+void NFNodeView::SetCurrentContext()
+{
+    SET_CURRENT_CONTEXT(m_pEditorContext);
+}
+
 void NFNodeView::CheckNewLinkStatus()
 {
+    SET_CURRENT_CONTEXT(m_pEditorContext);
+
    int start_attr, end_attr;
    if (IS_LINK_CREATED(&start_attr, &end_attr))
    {
@@ -780,6 +787,8 @@ void NFNodeView::CheckNewLinkStatus()
 
 void NFNodeView::CheckDeleteLinkStatus()
 {
+    SET_CURRENT_CONTEXT(m_pEditorContext);
+
     int selectedLink = -1;
     IS_LINK_HOVERED(&selectedLink);
     if (selectedLink >= 0)

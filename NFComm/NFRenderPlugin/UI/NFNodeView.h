@@ -29,6 +29,7 @@
 #include "NFComm/NFPluginModule/NFIUIModule.h"
 #include "NFComm/NFPluginModule/NFIBluePrintModule.h"
 
+#include "imgui/imgui.h"
 #include "imnodes/imnodes.h"
 
 /*https://www.rapidtables.com/web/color/RGB_Color.html
@@ -255,6 +256,7 @@ public:
    void ResetOffset(const NFVector2& pos);
    void MoveToNode(const NFGUID guid);
 
+   void SetCurrentContext();
 
 private:
    void RenderNodes();

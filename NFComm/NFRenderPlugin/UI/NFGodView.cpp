@@ -191,8 +191,6 @@ void NFGodView::HandlerSelected(const NFGUID& id, const bool doubleClick)
 
 void NFGodView::HandlerForBeginRender()
 {
-	ImDrawList* draw_list = ImGui::GetWindowDrawList();
-	
 	if (mSceneID > 0 && mGroupID > 0)
 	{
 		//draw
@@ -220,7 +218,14 @@ void NFGodView::HandlerForBeginRender()
 								color = NFColor::PININ;
 							}
 
-							draw_list->AddRectFilled(ImVec2(imnodes::GetStyle().grid_spacing * i, imnodes::GetStyle().grid_spacing * j), ImVec2(imnodes::GetStyle().grid_spacing, imnodes::GetStyle().grid_spacing), color);
+							if ( i < 5 && j < 5)
+							{
+								m_pNodeView->SetCurrentContext();
+
+								int cellSize = imnodes::GetStyle().grid_spacing;
+								ImVec2 v(i * cellSize, j * -cellSize);
+								imnodes::AddRectFilled(v, ImVec2(imnodes::GetStyle().grid_spacing, imnodes::GetStyle().grid_spacing), color);
+							}
 						}
 					}
 				}
