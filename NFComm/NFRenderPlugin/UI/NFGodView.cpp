@@ -166,6 +166,8 @@ bool NFGodView::Execute()
    //4. draw the stair with a sign
    //5 how to tell the user about the height of the map
 
+	RenderSceneObjectNode(mSceneID, mGroupID);
+
 	m_pNodeView->Execute();
 
 	UpdateSceneObjectNodePosition(mSceneID, mGroupID);
@@ -201,13 +203,17 @@ void NFGodView::HandlerForBeginRender()
 		if (data)
 		{
 			//draw background
+			m_pNodeView->SetCurrentContext();
 
 			int cellSize = imnodes::GetStyle().grid_spacing;
-			ImVec2 v1 = imnodes::ToEditorSpace(ImVec2(0, 0));
+			ImVec2 v1 = ImVec2(0, 0);
 			ImVec2 v2(v1.x + cellSize * data->tileConfig.mapSize * data->tileConfig.cellSizeX, v1.y + cellSize * -data->tileConfig.mapSize * data->tileConfig.cellSizeZ - cellSize);
 
-			ImColor color(0, 255, 255, 100);
-			ImGui::GetWindowDrawList()->AddRect(v1, v2, color);
+			ImColor color(255, 0, 0, 255);
+			DrawRect(v1, v2, color);
+			DrawText(v1, color, "(0,0)");
+
+			//imnodes::AddRect(ImVec2(0, 0), v3, color);
 
 			//draw walkable
 			int sizeX = data->tileConfig.cellSizeX;
@@ -233,7 +239,6 @@ void NFGodView::HandlerForBeginRender()
 							{
 								color = ImColor(255, 255, 255, 200);
 							}
-
 							else if (voxel->layer == 4)
 							{
 								color = ImColor(255, 255, 255, 250);
@@ -241,14 +246,21 @@ void NFGodView::HandlerForBeginRender()
 							{
 								m_pNodeView->SetCurrentContext();
 
-								ImVec2 v1 = imnodes::ToEditorSpace(ImVec2(i * cellSize * sizeX, j * -cellSize * sizeZ));
-								ImVec2 v2(v1.x + cellSize * sizeX, v1.y - cellSize* sizeZ);
+								ImVec2 v1 = ImVec2(i * cellSize * sizeX, j * -cellSize * sizeZ);
+								ImVec2 v2(v1.x + cellSize * sizeX, v1.y - cellSize * sizeZ);
 
-								ImGui::GetWindowDrawList()->AddRectFilled(v1, v2, color);
-								//imnodes::AddRectFilled(v1, v2, color);
+								DrawRectFilled(v1, v2, color);
 							}
 						}
 					}
+				}
+
+
+				if (i % 5 == 0)
+				{
+					ImVec2 v1 = ImVec2(i * cellSize * sizeX, 0);
+					std::string text = "(" + std::to_string(i * data->tileConfig.cellSizeX) + ",0)";
+					DrawText(v1, color, text.c_str());
 				}
 			}
 		}
@@ -284,9 +296,9 @@ bool NFGodView::HandlerNodeHovered(const NFGUID& id)
 NFVector2 NFGodView::ToNodeSpacePos(const NFVector2& v)
 {
 	int size = imnodes::GetStyle().grid_spacing / 2;
-	int offset = imnodes::GetStyle().grid_spacing / 4;
-	return NFVector2(v.X() * size - offset, v.Y() * -size - offset);
-	//return NFVector2(v.X(), v.Y());
+	//int offset = imnodes::GetStyle().grid_spacing / 4;
+	//return NFVector2(v.X() * size - offset, v.Y() * -size - offset);
+	return NFVector2(v.X() * size, v.Y() * -size);
 }
 
 void NFGodView::RenderScene(const int sceneID, const int groupID)
@@ -383,6 +395,8 @@ void NFGodView::RenderSceneObjectNode(const int sceneID, const int groupID)
    NFNodeView* pView = (NFNodeView*)m_pNodeView;
    pView->CleanNodes();
 
+   int cellSize = imnodes::GetStyle().grid_spacing;
+
    if (sceneID > 0 && groupID > 0)
    {
       //objects
@@ -395,8 +409,16 @@ void NFGodView::RenderSceneObjectNode(const int sceneID, const int groupID)
 		 const std::string& name = m_pKernelModule->GetPropertyString(guid, NFrame::IObject::Name());
          const NFVector3& pos = m_pKernelModule->GetPropertyVector3(guid, NFrame::IObject::Position());
 		 std::string nodeName = className.substr(0, 1) + "(" + std::to_string((int)pos.X()) + "," + std::to_string((int)pos.Z()) + ")";
-         
-		 auto node = pView->AddNode(guid, nodeName, NFColor::DEFAULT, ToNodeSpacePos(NFVector2(pos.X(), -pos.Z())));
+
+		 NFVector2 vec1 = ToNodeSpacePos(NFVector2(pos.X(), pos.Z()));
+		 ImVec2 v1(vec1.X(), vec1.Y());
+		 ImVec2 v2(v1.x + cellSize, v1.y + cellSize);
+
+		 m_pNodeView->SetCurrentContext();
+
+		 DrawRectFilled(v1, v2, ImColor(0, 255, 0, 255));
+
+		 auto node = pView->AddNode(guid, nodeName, NFColor::DEFAULT, vec1);
 		 node->title = false;
 
 		 pView->SetNodeDraggable(guid, false);
@@ -484,4 +506,43 @@ int NFGodView::OnClassCommonEvent(const NFGUID& self, const std::string& strClas
 	}
 
 	return 0;
+}
+
+void NFGodView::DrawRect(const ImVec2& p_min, const ImVec2& p_max, ImU32 col)
+{
+	m_pNodeView->SetCurrentContext();
+
+	int cellSize = imnodes::GetStyle().grid_spacing;
+	ImVec2 panning = imnodes::GeContextPanning();
+
+	ImVec2 v1 = ImVec2(p_min.x + panning.x, p_min.y + panning.y);
+	ImVec2 v2 = ImVec2(p_max.x + panning.x, p_max.y + panning.y);
+
+	ImGui::GetWindowDrawList()->AddRect(v1, v2, col);
+}
+
+void NFGodView::DrawRectFilled(const ImVec2& p_min, const ImVec2& p_max, ImU32 col)
+{
+
+	m_pNodeView->SetCurrentContext();
+
+	int cellSize = imnodes::GetStyle().grid_spacing;
+	ImVec2 panning = imnodes::GeContextPanning();
+
+	ImVec2 v1 = ImVec2(p_min.x + panning.x, p_min.y + panning.y);
+	ImVec2 v2 = ImVec2(p_max.x + panning.x, p_max.y + panning.y);
+
+	ImGui::GetWindowDrawList()->AddRectFilled(v1, v2, col);
+}
+
+void NFGodView::DrawText(const ImVec2& pos, ImU32 col, const char* text_begin)
+{
+	m_pNodeView->SetCurrentContext();
+
+	int cellSize = imnodes::GetStyle().grid_spacing;
+	ImVec2 panning = imnodes::GeContextPanning();
+
+	ImVec2 v1 = ImVec2(pos.x + panning.x, pos.y + panning.y);
+
+	ImGui::GetWindowDrawList()->AddText(v1, col, text_begin);
 }

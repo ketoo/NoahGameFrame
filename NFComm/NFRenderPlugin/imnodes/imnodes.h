@@ -1,7 +1,7 @@
 #pragma once
 
 #include <stddef.h>
-#include "imgui/imgui.h"
+
 struct ImVec2;
 
 namespace imnodes
@@ -54,15 +54,15 @@ enum PinShape
 
 struct Style
 {
-    float grid_spacing = 32.f;
+    float grid_spacing;
 
-    float node_corner_rounding = 4.0f;
-    float node_padding_horizontal = 8.0f;
-    float node_padding_vertical = 8.0f;
+    float node_corner_rounding;
+    float node_padding_horizontal;
+    float node_padding_vertical;
 
-    float link_thickness = 3.0f;
-    float link_line_segments_per_length = 0.1f;
-    float link_hover_distance = 7.0f;
+    float link_thickness;
+    float link_line_segments_per_length;
+    float link_hover_distance;
 
     // The following variables control the look and behavior of the pins. The
     // default size of each pin shape is balanced to occupy approximately the
@@ -70,27 +70,29 @@ struct Style
 
     // The circle radius used when the pin shape is either PinShape_Circle or
     // PinShape_CircleFilled.
-    float pin_circle_radius = 4.0f;
+    float pin_circle_radius;
     // The quad side length used when the shape is either PinShape_Quad or
     // PinShape_QuadFilled.
-    float pin_quad_side_length = 7.0f;
+    float pin_quad_side_length;
     // The equilateral triangle side length used when the pin shape is either
     // PinShape_Triangle or PinShape_TriangleFilled.
-    float pin_triangle_side_length = 9.5f;
+    float pin_triangle_side_length;
     // The thickness of the line used when the pin shape is not filled.
-    float pin_line_thickness = 1.0f;
+    float pin_line_thickness;
     // The radius from the pin's center position inside of which it is detected
     // as being hovered over.
-    float pin_hover_radius = 10.0f;
+    float pin_hover_radius;
     // Offsets the pins' positions from the edge of the node to the outside of
     // the node.
-    float pin_offset = 0.0f;
+    float pin_offset;
 
-    StyleFlags flags =
-        StyleFlags(StyleFlags_NodeOutline | StyleFlags_GridLines);
+    // By default, StyleFlags_NodeOutline and StyleFlags_Gridlines are enabled.
+    StyleFlags flags;
     // Set these mid-frame using Push/PopColorStyle. You can index this color
     // array with with a ColorStyle enum value.
     unsigned int colors[ColorStyle_Count];
+
+    Style();
 };
 
 // An editor context corresponds to a set of nodes in a single workspace
@@ -106,8 +108,6 @@ void EditorContextFree(EditorContext*);
 void EditorContextSet(EditorContext*);
 void EditorContextResetPanning(const ImVec2& pos);
 void EditorContextMoveToNode(const int node_id);
-ImVec2 ToEditorSpace(const ImVec2& v);
-void AddRectFilled(const ImVec2& p_min, const ImVec2& p_max, ImU32 col, float rounding = 0.0f, ImDrawCornerFlags rounding_corners = ImDrawCornerFlags_All);
 
 // Initialize the node editor system.
 void Initialize();
@@ -116,6 +116,7 @@ void Shutdown();
 // Returns the global style struct. See the struct declaration for default
 // values.
 Style& GetStyle();
+ImVec2 GeContextPanning();
 // Style presets matching the dear imgui styles of the same name.
 void StyleColorsDark(); // on by default
 void StyleColorsClassic();

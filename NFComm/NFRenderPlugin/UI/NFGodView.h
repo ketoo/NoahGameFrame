@@ -63,6 +63,11 @@ private:
     int OnClassCommonEvent(const NFGUID& self, const std::string& strClassNames, const CLASS_OBJECT_EVENT eClassEvent, const NFDataList& var);
 
 private:
+    void DrawRect(const ImVec2& p_min, const ImVec2& p_max, ImU32 col);
+    void DrawRectFilled(const ImVec2& p_min, const ImVec2& p_max, ImU32 col);
+    void DrawText(const ImVec2& pos, ImU32 col, const char* text_begin);
+
+private:
 	int mGroupID = -1;
 	int mSceneID = -1;
 	NFGUID mCurrentObjectID;
