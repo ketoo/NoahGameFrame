@@ -166,7 +166,7 @@ void NFHierachyView::BluePrintViewSubRender()
       {
          ImGui::BeginGroup();
          
-         bool selected = pBluePrintView->GetTreeView()->GetSelectedNode() == objectID;
+         bool selected = pBluePrintView->GetTreeView().GetSelectedNode() == objectID;
 	      ImGui::Checkbox("", &selected);
          ImGui::SameLine();
 

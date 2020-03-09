@@ -43,17 +43,8 @@
       <Filter>UI</Filter>
     </ClCompile>
     <ClCompile Include="NFRenderPlugin.cpp" />
-    <ClCompile Include="Scene\NFScene.cpp">
-      <Filter>Scene</Filter>
-    </ClCompile>
     <ClCompile Include="gl3w\GL\gl3w.c">
       <Filter>gl3w\GL</Filter>
-    </ClCompile>
-    <ClCompile Include="Scene\NFSceneNode.cpp">
-      <Filter>Scene</Filter>
-    </ClCompile>
-    <ClCompile Include="Scene\NFMeshLoader.cpp">
-      <Filter>Scene\Help</Filter>
     </ClCompile>
     <ClCompile Include="imnodes\imnodes.cpp">
       <Filter>imnodes</Filter>
@@ -77,17 +68,11 @@
       <Filter>imgui</Filter>
     </ClCompile>
     <ClCompile Include="NFRenderModule.cpp" />
-    <ClCompile Include="Scene\NFLightComponent.cpp">
-      <Filter>Scene</Filter>
+    <ClCompile Include="UI\NFNodeSystem.cpp">
+      <Filter>UI</Filter>
     </ClCompile>
-    <ClCompile Include="Scene\NFCameraComponent.cpp">
-      <Filter>Scene</Filter>
-    </ClCompile>
-    <ClCompile Include="Scene\NFMeshComponent.cpp">
-      <Filter>Scene</Filter>
-    </ClCompile>
-    <ClCompile Include="Scene\NFMaterialComponent.cpp">
-      <Filter>Scene</Filter>
+    <ClCompile Include="UI\NFSceneSystem.cpp">
+      <Filter>UI</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -132,20 +117,11 @@
       <Filter>UI</Filter>
     </ClInclude>
     <ClInclude Include="NFRenderPlugin.h" />
-    <ClInclude Include="Scene\NFScene.h">
-      <Filter>Scene</Filter>
-    </ClInclude>
     <ClInclude Include="gl3w\GL\gl3w.h">
       <Filter>gl3w\GL</Filter>
     </ClInclude>
     <ClInclude Include="gl3w\GL\glcorearb.h">
       <Filter>gl3w\GL</Filter>
-    </ClInclude>
-    <ClInclude Include="Scene\NFSceneNode.h">
-      <Filter>Scene</Filter>
-    </ClInclude>
-    <ClInclude Include="Scene\NFMeshLoader.h">
-      <Filter>Scene\Help</Filter>
     </ClInclude>
     <ClInclude Include="imnodes\imnodes.h">
       <Filter>imnodes</Filter>
@@ -175,17 +151,11 @@
       <Filter>imgui</Filter>
     </ClInclude>
     <ClInclude Include="NFRenderModule.h" />
-    <ClInclude Include="Scene\NFLightComponent.h">
-      <Filter>Scene</Filter>
+    <ClInclude Include="UI\NFNodeSystem.h">
+      <Filter>UI</Filter>
     </ClInclude>
-    <ClInclude Include="Scene\NFMeshComponent.h">
-      <Filter>Scene</Filter>
-    </ClInclude>
-    <ClInclude Include="Scene\NFCameraComponent.h">
-      <Filter>Scene</Filter>
-    </ClInclude>
-    <ClInclude Include="Scene\NFMaterialComponent.h">
-      <Filter>Scene</Filter>
+    <ClInclude Include="UI\NFSceneSystem.h">
+      <Filter>UI</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -195,14 +165,8 @@
     <Filter Include="UI">
       <UniqueIdentifier>{896dd0c8-7dbf-4c48-bad4-4d200dfb564c}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Scene">
-      <UniqueIdentifier>{15553b37-4920-42c4-a729-01e792fd992e}</UniqueIdentifier>
-    </Filter>
     <Filter Include="gl3w\GL">
       <UniqueIdentifier>{b217e337-bdea-46a9-b05b-02606bcc5786}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Scene\Help">
-      <UniqueIdentifier>{1ebd746f-5077-497d-b644-45c43f0b7d72}</UniqueIdentifier>
     </Filter>
     <Filter Include="imgui">
       <UniqueIdentifier>{78a72feb-9ee7-4b3a-ae31-4b7e42f74fb7}</UniqueIdentifier>

@@ -58,8 +58,7 @@ public:
 
 	void SetCurrentLogicBlockID(const NFGUID& id);
 
-	NFTreeView* GetTreeView();
-	NFNodeView* GetNodeView();
+	const NFTreeView& GetTreeView();
 	
 private:
 	void HandlerSelected(const NFGUID& id, const bool doubleClick);
@@ -150,8 +149,8 @@ private:
 	NFVariableType valueType;
 	bool bCreatingVariable = false;
 
-	NFTreeView* m_pTreeView;
-	NFNodeView* m_pNodeView;
+	NFTreeView mTreeView;
+	NFNodeView mNodeView;
 
 private:
 	NFIBluePrintModule* m_pBluePrintModule;

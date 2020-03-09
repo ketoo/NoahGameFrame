@@ -25,13 +25,21 @@
 #ifndef NF_GAME_VIEW_H
 #define NF_GAME_VIEW_H
 
+
+#include "NFComm/NFPluginModule/NFIKernelModule.h"
 #include "NFComm/NFPluginModule/NFIUIModule.h"
+#include "NFNodeSystem.h"
 
 class NFGameView : public NFIView
 {
 public:
 	NFGameView(NFIPluginManager* p, NFViewType vt);
 	virtual bool Execute();
+
+
+private:
+    NFIKernelModule* m_pKernelModule;
+    NodeSystem::NFNodeSystem mNodeSystem;
 };
 
 #endif

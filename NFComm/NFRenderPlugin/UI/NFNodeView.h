@@ -115,7 +115,7 @@ public:
       this->color = color;
       this->name = name;
       this->guid = guid;
-      this->initPos = vec;
+      this->pos = vec;
       this->iconTextureId = nullptr;
       this->iconSize = NFVector2(20.0f, 20.0f);
    }
@@ -185,7 +185,7 @@ public:
    int color;
    bool title = true;
    NFGUID guid;
-   NFVector2 initPos;
+   NFVector2 pos;
    NFNodeView* nodeView;
 
    NFVector2 iconSize;
@@ -198,10 +198,10 @@ private:
    bool first = true;
 };
 
-class NFNodeView : public NFIView
+class NFNodeView
 {
 public:
-	NFNodeView(NFIPluginManager* p);
+	NFNodeView();
    ~NFNodeView();
 
 	virtual bool Execute();

@@ -1,8 +1,7 @@
-#include "NFScene.h"
-/*
-            This file is part of:
-                NoahFrame
-            https://github.com/ketoo/NoahGameFrame
+﻿/*
+			This file is part of:
+				NoahFrame
+			https://github.com/ketoo/NoahGameFrame
 
    Copyright 2009 - 2020 NoahFrame(NoahGameFrame)
 
@@ -15,7 +14,7 @@
    you may not use this file except in compliance with the License.
    You may obtain a copy of the License at
 
-       http://www.apache.org/licenses/LICENSE-2.0
+	   http://www.apache.org/licenses/LICENSE-2.0
 
    Unless required by applicable law or agreed to in writing, software
    distributed under the License is distributed on an "AS IS" BASIS,
@@ -23,23 +22,23 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 */
+#ifndef NF_SCENE_SYSTEM_H
+#define NF_SCENE_SYSTEM_H
 
-NFGUID NFScene::AddNode(const std::string& name, const NFVector3& pos)
+#include "NFComm/NFPluginModule/NFIModule.h"
+#include "NFNodeSystem.h"
+
+class NFSceneSystem
 {
-    return NFGUID();
-}
+public:
+    NFSceneSystem();
+   ~NFSceneSystem();
 
-NFGUID NFScene::AddNode(NF_SHARE_PTR<NFSceneNode> parent, const std::string& name, const NFVector3& pos)
-{
-    return NFGUID();
-}
+    void Execute();
 
-NF_SHARE_PTR<NFSceneNode> NFScene::FindNode(const NFGUID id)
-{
-    return NF_SHARE_PTR<NFSceneNode>();
-}
+    NFVector2 ToSceneGridPos(const NFVector3& pos);
+private:
+    NodeSystem::NFNodeSystem mNodeSystem;
+};
 
-void NFScene::RemoveNode(const NFGUID id)
-{
-
-}
+#endif

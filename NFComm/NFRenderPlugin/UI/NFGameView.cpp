@@ -29,46 +29,25 @@
 
 NFGameView::NFGameView(NFIPluginManager* p, NFViewType vt) : NFIView(p, vt, GET_CLASS_NAME(NFGameView))
 {
+    m_pKernelModule = p->FindModule<NFIKernelModule>();
 
+    mNodeSystem.AddNode(m_pKernelModule->CreateGUID(), "test0");
+    mNodeSystem.AddNode(m_pKernelModule->CreateGUID(), "test1", NFVector2(0, -100));
+    mNodeSystem.AddNode(m_pKernelModule->CreateGUID(), "test1", NFVector2(50, 100));
 }
 
 bool NFGameView::Execute()
 {
 	//1. the project root folder is NFDataCfg
-    ImVec2 offset;
-
-   if (ImGui::IsWindowFocused())
-   {
-
-   }
-
-   if (ImGui::IsMouseDragging(0))
-   {
-       offset.x += ImGui::GetIO().MouseDelta.x;
-       offset.y += ImGui::GetIO().MouseDelta.y;
-   }
-
-   int cellSize = 16;
-   ImVec2 v1(0, 0);
-   ImVec2 v2(v1.x + cellSize * 32, v1.y + cellSize * -32 - cellSize);
-
-   ImColor color(255, 0, 0, 255);
-
-    for (float x = fmodf(offset.x, cellSize); x < ImGui::GetWindowSize().x; x += cellSize)
+    if (ImGui::Button("return to center"))
     {
-        ImGui::GetWindowDrawList()->AddLine(ImVec2(x + offset.x, 0.0f), ImVec2(x, ImGui::GetWindowSize().y), ImColor(255, 0, 0, 255));
+        mNodeSystem.ResetToCenter();
+
     }
 
-    for (float y = fmodf(offset.y, cellSize); y < ImGui::GetWindowSize().y; y += cellSize)
-    {
-        ImGui::GetWindowDrawList()->AddLine(ImVec2(y + offset.y, 0.0f), ImVec2(y + offset.y, ImGui::GetWindowSize().y), ImColor(255, 0, 0, 255));
-    }
+ 
 
-   
-   //ImGui::GetWindowDrawList()->AddRect(ImVec2(0, 0), ImVec2(-ImGui::GetWindowSize().x, -ImGui::GetWindowSize().y), ImColor(255, 255, 0, 250));
-   //ImGui::GetWindowDrawList()->AddRect(v1, v2, color);
-   ImGui::GetWindowDrawList()->AddText(v1, color, "(0,0)");
-
+    mNodeSystem.Execute();
 
 	return false;
 }

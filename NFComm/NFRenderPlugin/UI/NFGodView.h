@@ -32,7 +32,7 @@
 #include "NFComm/NFPluginModule/NFISceneModule.h"
 #include "NFComm/NFPluginModule/NFIKernelModule.h"
 #include "NFComm/NFMessageDefine/NFMsgDefine.h"
-#include "NFNodeView.h"
+#include "NFNodeSystem.h"
 #include "NFTreeView.h"
 
 class NFGodView : public NFIView
@@ -49,11 +49,9 @@ public:
    void SetCurrentObjectID(const NFGUID& id);
 
 private:
-    NFVector2 ToNodeSpacePos(const NFVector2& v);
-
 	void RenderScene(const int sceneID, const int groupID);
 	void HandlerSelected(const NFGUID& id, const bool doubleClick);
-    void HandlerForBeginRender();
+    void DrawMapData();
 
     bool HandlerNodeHovered(const NFGUID& id);
 
@@ -62,18 +60,14 @@ private:
 
     int OnClassCommonEvent(const NFGUID& self, const std::string& strClassNames, const CLASS_OBJECT_EVENT eClassEvent, const NFDataList& var);
 
-private:
-    void DrawRect(const ImVec2& p_min, const ImVec2& p_max, ImU32 col);
-    void DrawRectFilled(const ImVec2& p_min, const ImVec2& p_max, ImU32 col);
-    void DrawText(const ImVec2& pos, ImU32 col, const char* text_begin);
-
+    NFVector2 ToMapGridPos(const NFVector3& pos);
 private:
 	int mGroupID = -1;
 	int mSceneID = -1;
 	NFGUID mCurrentObjectID;
    
-	NFNodeView* m_pNodeView;
-	NFTreeView* m_pTreeView;
+	NodeSystem::NFNodeSystem mNodeSystem;
+	NFTreeView mTreeView;
 private:
 	NFIUIModule* m_pUIModule;
 	NFIClassModule* m_pClassModule;
