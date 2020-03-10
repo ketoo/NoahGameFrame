@@ -18,6 +18,7 @@ namespace NFrame
 		static const std::string& CampID(){ static std::string x = "CampID"; return x; };// object
 		static const std::string& ClassName(){ static std::string x = "ClassName"; return x; };// string
 		static const std::string& ConfigID(){ static std::string x = "ConfigID"; return x; };// string
+		static const std::string& Disable(){ static std::string x = "Disable"; return x; };// int
 		static const std::string& GroupID(){ static std::string x = "GroupID"; return x; };// int
 		static const std::string& ID(){ static std::string x = "ID"; return x; };// string
 		static const std::string& MasterID(){ static std::string x = "MasterID"; return x; };// object
@@ -47,6 +48,7 @@ namespace NFrame
 		static const std::string& CampID(){ static std::string x = "CampID"; return x; };// object
 		static const std::string& ClassName(){ static std::string x = "ClassName"; return x; };// string
 		static const std::string& ConfigID(){ static std::string x = "ConfigID"; return x; };// string
+		static const std::string& Disable(){ static std::string x = "Disable"; return x; };// int
 		static const std::string& GroupID(){ static std::string x = "GroupID"; return x; };// int
 		static const std::string& ID(){ static std::string x = "ID"; return x; };// string
 		static const std::string& MasterID(){ static std::string x = "MasterID"; return x; };// object
@@ -69,6 +71,7 @@ namespace NFrame
 		static const std::string& CampID(){ static std::string x = "CampID"; return x; };// object
 		static const std::string& ClassName(){ static std::string x = "ClassName"; return x; };// string
 		static const std::string& ConfigID(){ static std::string x = "ConfigID"; return x; };// string
+		static const std::string& Disable(){ static std::string x = "Disable"; return x; };// int
 		static const std::string& GroupID(){ static std::string x = "GroupID"; return x; };// int
 		static const std::string& ID(){ static std::string x = "ID"; return x; };// string
 		static const std::string& MasterID(){ static std::string x = "MasterID"; return x; };// object
@@ -151,6 +154,7 @@ namespace NFrame
 		static const std::string& CampID(){ static std::string x = "CampID"; return x; };// object
 		static const std::string& ClassName(){ static std::string x = "ClassName"; return x; };// string
 		static const std::string& ConfigID(){ static std::string x = "ConfigID"; return x; };// string
+		static const std::string& Disable(){ static std::string x = "Disable"; return x; };// int
 		static const std::string& GroupID(){ static std::string x = "GroupID"; return x; };// int
 		static const std::string& ID(){ static std::string x = "ID"; return x; };// string
 		static const std::string& MasterID(){ static std::string x = "MasterID"; return x; };// object
@@ -178,6 +182,7 @@ namespace NFrame
 		static const std::string& CampID(){ static std::string x = "CampID"; return x; };// object
 		static const std::string& ClassName(){ static std::string x = "ClassName"; return x; };// string
 		static const std::string& ConfigID(){ static std::string x = "ConfigID"; return x; };// string
+		static const std::string& Disable(){ static std::string x = "Disable"; return x; };// int
 		static const std::string& GroupID(){ static std::string x = "GroupID"; return x; };// int
 		static const std::string& ID(){ static std::string x = "ID"; return x; };// string
 		static const std::string& MasterID(){ static std::string x = "MasterID"; return x; };// object
@@ -205,6 +210,7 @@ namespace NFrame
 		static const std::string& CampID(){ static std::string x = "CampID"; return x; };// object
 		static const std::string& ClassName(){ static std::string x = "ClassName"; return x; };// string
 		static const std::string& ConfigID(){ static std::string x = "ConfigID"; return x; };// string
+		static const std::string& Disable(){ static std::string x = "Disable"; return x; };// int
 		static const std::string& GroupID(){ static std::string x = "GroupID"; return x; };// int
 		static const std::string& ID(){ static std::string x = "ID"; return x; };// string
 		static const std::string& MasterID(){ static std::string x = "MasterID"; return x; };// object
@@ -234,6 +240,7 @@ namespace NFrame
 		static const std::string& CampID(){ static std::string x = "CampID"; return x; };// object
 		static const std::string& ClassName(){ static std::string x = "ClassName"; return x; };// string
 		static const std::string& ConfigID(){ static std::string x = "ConfigID"; return x; };// string
+		static const std::string& Disable(){ static std::string x = "Disable"; return x; };// int
 		static const std::string& GroupID(){ static std::string x = "GroupID"; return x; };// int
 		static const std::string& ID(){ static std::string x = "ID"; return x; };// string
 		static const std::string& MasterID(){ static std::string x = "MasterID"; return x; };// object
@@ -325,6 +332,7 @@ namespace NFrame
 		static const std::string& CampID(){ static std::string x = "CampID"; return x; };// object
 		static const std::string& ClassName(){ static std::string x = "ClassName"; return x; };// string
 		static const std::string& ConfigID(){ static std::string x = "ConfigID"; return x; };// string
+		static const std::string& Disable(){ static std::string x = "Disable"; return x; };// int
 		static const std::string& GroupID(){ static std::string x = "GroupID"; return x; };// int
 		static const std::string& ID(){ static std::string x = "ID"; return x; };// string
 		static const std::string& MasterID(){ static std::string x = "MasterID"; return x; };// object
@@ -363,6 +371,7 @@ namespace NFrame
 		static const std::string& CampID(){ static std::string x = "CampID"; return x; };// object
 		static const std::string& ClassName(){ static std::string x = "ClassName"; return x; };// string
 		static const std::string& ConfigID(){ static std::string x = "ConfigID"; return x; };// string
+		static const std::string& Disable(){ static std::string x = "Disable"; return x; };// int
 		static const std::string& GroupID(){ static std::string x = "GroupID"; return x; };// int
 		static const std::string& ID(){ static std::string x = "ID"; return x; };// string
 		static const std::string& MasterID(){ static std::string x = "MasterID"; return x; };// object
@@ -384,6 +393,7 @@ namespace NFrame
 		static const std::string& CampID(){ static std::string x = "CampID"; return x; };// object
 		static const std::string& ClassName(){ static std::string x = "ClassName"; return x; };// string
 		static const std::string& ConfigID(){ static std::string x = "ConfigID"; return x; };// string
+		static const std::string& Disable(){ static std::string x = "Disable"; return x; };// int
 		static const std::string& GroupID(){ static std::string x = "GroupID"; return x; };// int
 		static const std::string& ID(){ static std::string x = "ID"; return x; };// string
 		static const std::string& MasterID(){ static std::string x = "MasterID"; return x; };// object
@@ -443,6 +453,7 @@ namespace NFrame
 		static const std::string& CampID(){ static std::string x = "CampID"; return x; };// object
 		static const std::string& ClassName(){ static std::string x = "ClassName"; return x; };// string
 		static const std::string& ConfigID(){ static std::string x = "ConfigID"; return x; };// string
+		static const std::string& Disable(){ static std::string x = "Disable"; return x; };// int
 		static const std::string& GroupID(){ static std::string x = "GroupID"; return x; };// int
 		static const std::string& ID(){ static std::string x = "ID"; return x; };// string
 		static const std::string& MasterID(){ static std::string x = "MasterID"; return x; };// object
@@ -501,6 +512,7 @@ namespace NFrame
 		static const std::string& CampID(){ static std::string x = "CampID"; return x; };// object
 		static const std::string& ClassName(){ static std::string x = "ClassName"; return x; };// string
 		static const std::string& ConfigID(){ static std::string x = "ConfigID"; return x; };// string
+		static const std::string& Disable(){ static std::string x = "Disable"; return x; };// int
 		static const std::string& GroupID(){ static std::string x = "GroupID"; return x; };// int
 		static const std::string& ID(){ static std::string x = "ID"; return x; };// string
 		static const std::string& MasterID(){ static std::string x = "MasterID"; return x; };// object
@@ -520,6 +532,7 @@ namespace NFrame
 		static const std::string& CampID(){ static std::string x = "CampID"; return x; };// object
 		static const std::string& ClassName(){ static std::string x = "ClassName"; return x; };// string
 		static const std::string& ConfigID(){ static std::string x = "ConfigID"; return x; };// string
+		static const std::string& Disable(){ static std::string x = "Disable"; return x; };// int
 		static const std::string& GroupID(){ static std::string x = "GroupID"; return x; };// int
 		static const std::string& ID(){ static std::string x = "ID"; return x; };// string
 		static const std::string& MasterID(){ static std::string x = "MasterID"; return x; };// object
@@ -579,6 +592,7 @@ namespace NFrame
 		static const std::string& CampID(){ static std::string x = "CampID"; return x; };// object
 		static const std::string& ClassName(){ static std::string x = "ClassName"; return x; };// string
 		static const std::string& ConfigID(){ static std::string x = "ConfigID"; return x; };// string
+		static const std::string& Disable(){ static std::string x = "Disable"; return x; };// int
 		static const std::string& GroupID(){ static std::string x = "GroupID"; return x; };// int
 		static const std::string& ID(){ static std::string x = "ID"; return x; };// string
 		static const std::string& MasterID(){ static std::string x = "MasterID"; return x; };// object
@@ -602,6 +616,7 @@ namespace NFrame
 		static const std::string& CampID(){ static std::string x = "CampID"; return x; };// object
 		static const std::string& ClassName(){ static std::string x = "ClassName"; return x; };// string
 		static const std::string& ConfigID(){ static std::string x = "ConfigID"; return x; };// string
+		static const std::string& Disable(){ static std::string x = "Disable"; return x; };// int
 		static const std::string& GroupID(){ static std::string x = "GroupID"; return x; };// int
 		static const std::string& ID(){ static std::string x = "ID"; return x; };// string
 		static const std::string& MasterID(){ static std::string x = "MasterID"; return x; };// object
@@ -642,6 +657,7 @@ namespace NFrame
 		static const std::string& CampID(){ static std::string x = "CampID"; return x; };// object
 		static const std::string& ClassName(){ static std::string x = "ClassName"; return x; };// string
 		static const std::string& ConfigID(){ static std::string x = "ConfigID"; return x; };// string
+		static const std::string& Disable(){ static std::string x = "Disable"; return x; };// int
 		static const std::string& GroupID(){ static std::string x = "GroupID"; return x; };// int
 		static const std::string& ID(){ static std::string x = "ID"; return x; };// string
 		static const std::string& MasterID(){ static std::string x = "MasterID"; return x; };// object
@@ -666,6 +682,7 @@ namespace NFrame
 		static const std::string& CampID(){ static std::string x = "CampID"; return x; };// object
 		static const std::string& ClassName(){ static std::string x = "ClassName"; return x; };// string
 		static const std::string& ConfigID(){ static std::string x = "ConfigID"; return x; };// string
+		static const std::string& Disable(){ static std::string x = "Disable"; return x; };// int
 		static const std::string& GroupID(){ static std::string x = "GroupID"; return x; };// int
 		static const std::string& ID(){ static std::string x = "ID"; return x; };// string
 		static const std::string& MasterID(){ static std::string x = "MasterID"; return x; };// object
@@ -802,6 +819,7 @@ namespace NFrame
 		static const std::string& CampID(){ static std::string x = "CampID"; return x; };// object
 		static const std::string& ClassName(){ static std::string x = "ClassName"; return x; };// string
 		static const std::string& ConfigID(){ static std::string x = "ConfigID"; return x; };// string
+		static const std::string& Disable(){ static std::string x = "Disable"; return x; };// int
 		static const std::string& GroupID(){ static std::string x = "GroupID"; return x; };// int
 		static const std::string& ID(){ static std::string x = "ID"; return x; };// string
 		static const std::string& MasterID(){ static std::string x = "MasterID"; return x; };// object
@@ -826,6 +844,7 @@ namespace NFrame
 		static const std::string& CampID(){ static std::string x = "CampID"; return x; };// object
 		static const std::string& ClassName(){ static std::string x = "ClassName"; return x; };// string
 		static const std::string& ConfigID(){ static std::string x = "ConfigID"; return x; };// string
+		static const std::string& Disable(){ static std::string x = "Disable"; return x; };// int
 		static const std::string& GroupID(){ static std::string x = "GroupID"; return x; };// int
 		static const std::string& ID(){ static std::string x = "ID"; return x; };// string
 		static const std::string& MasterID(){ static std::string x = "MasterID"; return x; };// object
@@ -1252,6 +1271,7 @@ namespace NFrame
 		static const std::string& CampID(){ static std::string x = "CampID"; return x; };// object
 		static const std::string& ClassName(){ static std::string x = "ClassName"; return x; };// string
 		static const std::string& ConfigID(){ static std::string x = "ConfigID"; return x; };// string
+		static const std::string& Disable(){ static std::string x = "Disable"; return x; };// int
 		static const std::string& GroupID(){ static std::string x = "GroupID"; return x; };// int
 		static const std::string& ID(){ static std::string x = "ID"; return x; };// string
 		static const std::string& MasterID(){ static std::string x = "MasterID"; return x; };// object
@@ -1303,6 +1323,7 @@ namespace NFrame
 		static const std::string& CampID(){ static std::string x = "CampID"; return x; };// object
 		static const std::string& ClassName(){ static std::string x = "ClassName"; return x; };// string
 		static const std::string& ConfigID(){ static std::string x = "ConfigID"; return x; };// string
+		static const std::string& Disable(){ static std::string x = "Disable"; return x; };// int
 		static const std::string& GroupID(){ static std::string x = "GroupID"; return x; };// int
 		static const std::string& ID(){ static std::string x = "ID"; return x; };// string
 		static const std::string& MasterID(){ static std::string x = "MasterID"; return x; };// object
@@ -1385,6 +1406,7 @@ namespace NFrame
 		static const std::string& CampID(){ static std::string x = "CampID"; return x; };// object
 		static const std::string& ClassName(){ static std::string x = "ClassName"; return x; };// string
 		static const std::string& ConfigID(){ static std::string x = "ConfigID"; return x; };// string
+		static const std::string& Disable(){ static std::string x = "Disable"; return x; };// int
 		static const std::string& GroupID(){ static std::string x = "GroupID"; return x; };// int
 		static const std::string& ID(){ static std::string x = "ID"; return x; };// string
 		static const std::string& MasterID(){ static std::string x = "MasterID"; return x; };// object
@@ -1429,6 +1451,7 @@ namespace NFrame
 		static const std::string& CampID(){ static std::string x = "CampID"; return x; };// object
 		static const std::string& ClassName(){ static std::string x = "ClassName"; return x; };// string
 		static const std::string& ConfigID(){ static std::string x = "ConfigID"; return x; };// string
+		static const std::string& Disable(){ static std::string x = "Disable"; return x; };// int
 		static const std::string& GroupID(){ static std::string x = "GroupID"; return x; };// int
 		static const std::string& ID(){ static std::string x = "ID"; return x; };// string
 		static const std::string& MasterID(){ static std::string x = "MasterID"; return x; };// object
@@ -1466,6 +1489,7 @@ namespace NFrame
 		static const std::string& CampID(){ static std::string x = "CampID"; return x; };// object
 		static const std::string& ClassName(){ static std::string x = "ClassName"; return x; };// string
 		static const std::string& ConfigID(){ static std::string x = "ConfigID"; return x; };// string
+		static const std::string& Disable(){ static std::string x = "Disable"; return x; };// int
 		static const std::string& GroupID(){ static std::string x = "GroupID"; return x; };// int
 		static const std::string& ID(){ static std::string x = "ID"; return x; };// string
 		static const std::string& MasterID(){ static std::string x = "MasterID"; return x; };// object
@@ -1527,6 +1551,7 @@ namespace NFrame
 		static const std::string& CampID(){ static std::string x = "CampID"; return x; };// object
 		static const std::string& ClassName(){ static std::string x = "ClassName"; return x; };// string
 		static const std::string& ConfigID(){ static std::string x = "ConfigID"; return x; };// string
+		static const std::string& Disable(){ static std::string x = "Disable"; return x; };// int
 		static const std::string& GroupID(){ static std::string x = "GroupID"; return x; };// int
 		static const std::string& ID(){ static std::string x = "ID"; return x; };// string
 		static const std::string& MasterID(){ static std::string x = "MasterID"; return x; };// object
@@ -1622,6 +1647,7 @@ namespace NFrame
 		static const std::string& CampID(){ static std::string x = "CampID"; return x; };// object
 		static const std::string& ClassName(){ static std::string x = "ClassName"; return x; };// string
 		static const std::string& ConfigID(){ static std::string x = "ConfigID"; return x; };// string
+		static const std::string& Disable(){ static std::string x = "Disable"; return x; };// int
 		static const std::string& GroupID(){ static std::string x = "GroupID"; return x; };// int
 		static const std::string& ID(){ static std::string x = "ID"; return x; };// string
 		static const std::string& MasterID(){ static std::string x = "MasterID"; return x; };// object
@@ -1668,6 +1694,7 @@ namespace NFrame
 		static const std::string& CampID(){ static std::string x = "CampID"; return x; };// object
 		static const std::string& ClassName(){ static std::string x = "ClassName"; return x; };// string
 		static const std::string& ConfigID(){ static std::string x = "ConfigID"; return x; };// string
+		static const std::string& Disable(){ static std::string x = "Disable"; return x; };// int
 		static const std::string& GroupID(){ static std::string x = "GroupID"; return x; };// int
 		static const std::string& ID(){ static std::string x = "ID"; return x; };// string
 		static const std::string& MasterID(){ static std::string x = "MasterID"; return x; };// object
@@ -1689,6 +1716,7 @@ namespace NFrame
 		static const std::string& CampID(){ static std::string x = "CampID"; return x; };// object
 		static const std::string& ClassName(){ static std::string x = "ClassName"; return x; };// string
 		static const std::string& ConfigID(){ static std::string x = "ConfigID"; return x; };// string
+		static const std::string& Disable(){ static std::string x = "Disable"; return x; };// int
 		static const std::string& GroupID(){ static std::string x = "GroupID"; return x; };// int
 		static const std::string& ID(){ static std::string x = "ID"; return x; };// string
 		static const std::string& MasterID(){ static std::string x = "MasterID"; return x; };// object
@@ -1722,6 +1750,7 @@ namespace NFrame
 		static const std::string& CampID(){ static std::string x = "CampID"; return x; };// object
 		static const std::string& ClassName(){ static std::string x = "ClassName"; return x; };// string
 		static const std::string& ConfigID(){ static std::string x = "ConfigID"; return x; };// string
+		static const std::string& Disable(){ static std::string x = "Disable"; return x; };// int
 		static const std::string& GroupID(){ static std::string x = "GroupID"; return x; };// int
 		static const std::string& ID(){ static std::string x = "ID"; return x; };// string
 		static const std::string& MasterID(){ static std::string x = "MasterID"; return x; };// object
@@ -1755,6 +1784,7 @@ namespace NFrame
 		static const std::string& CampID(){ static std::string x = "CampID"; return x; };// object
 		static const std::string& ClassName(){ static std::string x = "ClassName"; return x; };// string
 		static const std::string& ConfigID(){ static std::string x = "ConfigID"; return x; };// string
+		static const std::string& Disable(){ static std::string x = "Disable"; return x; };// int
 		static const std::string& GroupID(){ static std::string x = "GroupID"; return x; };// int
 		static const std::string& ID(){ static std::string x = "ID"; return x; };// string
 		static const std::string& MasterID(){ static std::string x = "MasterID"; return x; };// object
@@ -1776,6 +1806,7 @@ namespace NFrame
 		static const std::string& CampID(){ static std::string x = "CampID"; return x; };// object
 		static const std::string& ClassName(){ static std::string x = "ClassName"; return x; };// string
 		static const std::string& ConfigID(){ static std::string x = "ConfigID"; return x; };// string
+		static const std::string& Disable(){ static std::string x = "Disable"; return x; };// int
 		static const std::string& GroupID(){ static std::string x = "GroupID"; return x; };// int
 		static const std::string& ID(){ static std::string x = "ID"; return x; };// string
 		static const std::string& MasterID(){ static std::string x = "MasterID"; return x; };// object
@@ -1806,6 +1837,7 @@ namespace NFrame
 		static const std::string& CampID(){ static std::string x = "CampID"; return x; };// object
 		static const std::string& ClassName(){ static std::string x = "ClassName"; return x; };// string
 		static const std::string& ConfigID(){ static std::string x = "ConfigID"; return x; };// string
+		static const std::string& Disable(){ static std::string x = "Disable"; return x; };// int
 		static const std::string& GroupID(){ static std::string x = "GroupID"; return x; };// int
 		static const std::string& ID(){ static std::string x = "ID"; return x; };// string
 		static const std::string& MasterID(){ static std::string x = "MasterID"; return x; };// object
@@ -1834,6 +1866,7 @@ namespace NFrame
 		static const std::string& CampID(){ static std::string x = "CampID"; return x; };// object
 		static const std::string& ClassName(){ static std::string x = "ClassName"; return x; };// string
 		static const std::string& ConfigID(){ static std::string x = "ConfigID"; return x; };// string
+		static const std::string& Disable(){ static std::string x = "Disable"; return x; };// int
 		static const std::string& GroupID(){ static std::string x = "GroupID"; return x; };// int
 		static const std::string& ID(){ static std::string x = "ID"; return x; };// string
 		static const std::string& MasterID(){ static std::string x = "MasterID"; return x; };// object
@@ -1879,6 +1912,7 @@ namespace NFrame
 		static const std::string& CampID(){ static std::string x = "CampID"; return x; };// object
 		static const std::string& ClassName(){ static std::string x = "ClassName"; return x; };// string
 		static const std::string& ConfigID(){ static std::string x = "ConfigID"; return x; };// string
+		static const std::string& Disable(){ static std::string x = "Disable"; return x; };// int
 		static const std::string& GroupID(){ static std::string x = "GroupID"; return x; };// int
 		static const std::string& ID(){ static std::string x = "ID"; return x; };// string
 		static const std::string& MasterID(){ static std::string x = "MasterID"; return x; };// object
@@ -1905,6 +1939,7 @@ namespace NFrame
 		static const std::string& CampID(){ static std::string x = "CampID"; return x; };// object
 		static const std::string& ClassName(){ static std::string x = "ClassName"; return x; };// string
 		static const std::string& ConfigID(){ static std::string x = "ConfigID"; return x; };// string
+		static const std::string& Disable(){ static std::string x = "Disable"; return x; };// int
 		static const std::string& GroupID(){ static std::string x = "GroupID"; return x; };// int
 		static const std::string& ID(){ static std::string x = "ID"; return x; };// string
 		static const std::string& MasterID(){ static std::string x = "MasterID"; return x; };// object
@@ -1934,6 +1969,7 @@ namespace NFrame
 		static const std::string& CampID(){ static std::string x = "CampID"; return x; };// object
 		static const std::string& ClassName(){ static std::string x = "ClassName"; return x; };// string
 		static const std::string& ConfigID(){ static std::string x = "ConfigID"; return x; };// string
+		static const std::string& Disable(){ static std::string x = "Disable"; return x; };// int
 		static const std::string& GroupID(){ static std::string x = "GroupID"; return x; };// int
 		static const std::string& ID(){ static std::string x = "ID"; return x; };// string
 		static const std::string& MasterID(){ static std::string x = "MasterID"; return x; };// object

@@ -108,8 +108,23 @@ void NFHierachyView::GodViewSubRender()
 	   NF_SHARE_PTR<NFIProperty> property = element->GetPropertyManager()->First();
 	   while (property)
 	   {
-			ImGui::Button(property->GetKey().c_str());
+		   if (property->GetKey() == NFrame::IObject::ClassName()
+			   || property->GetKey() == NFrame::IObject::ConfigID()
+			   || property->GetKey() == NFrame::IObject::ID()
+			   || property->GetKey() == NFrame::IObject::GroupID()
+			   || property->GetKey() == NFrame::IObject::SceneID())
+		   {
+			   ImGui::Button(property->GetKey().c_str());
 
+		   }
+		   else
+		   {
+			   if (ImGui::Button(property->GetKey().c_str()))
+			   {
+				   modifyPropertyName = property->GetKey();
+				   strcpy(modifyPropertyValue, property->ToString().c_str());
+			   }
+		   }
 			ImGui::SameLine();
 
 			auto p = pObject->GetPropertyManager()->GetElement(property->GetKey());
