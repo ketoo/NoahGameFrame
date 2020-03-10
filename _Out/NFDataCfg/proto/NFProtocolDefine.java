@@ -10,10 +10,12 @@ package nframe;
 		//Class name
 		public static final String ThisName = "EffectData";
 		// IObject
+		public static final String CampID = "CampID";// object
 		public static final String ClassName = "ClassName";// string
 		public static final String ConfigID = "ConfigID";// string
 		public static final String GroupID = "GroupID";// int
 		public static final String ID = "ID";// string
+		public static final String MasterID = "MasterID";// object
 		public static final String MoveTo = "MoveTo";// vector3
 		public static final String Name = "Name";// string
 		public static final String Position = "Position";// vector3
@@ -98,10 +100,12 @@ package nframe;
 		//Class name
 		public static final String ThisName = "GM";
 		// IObject
+		public static final String CampID = "CampID";// object
 		public static final String ClassName = "ClassName";// string
 		public static final String ConfigID = "ConfigID";// string
 		public static final String GroupID = "GroupID";// int
 		public static final String ID = "ID";// string
+		public static final String MasterID = "MasterID";// object
 		public static final String MoveTo = "MoveTo";// vector3
 		public static final String Name = "Name";// string
 		public static final String Position = "Position";// vector3
@@ -117,10 +121,12 @@ package nframe;
 		//Class name
 		public static final String ThisName = "Group";
 		// IObject
+		public static final String CampID = "CampID";// object
 		public static final String ClassName = "ClassName";// string
 		public static final String ConfigID = "ConfigID";// string
 		public static final String GroupID = "GroupID";// int
 		public static final String ID = "ID";// string
+		public static final String MasterID = "MasterID";// object
 		public static final String MoveTo = "MoveTo";// vector3
 		public static final String Name = "Name";// string
 		public static final String Position = "Position";// vector3
@@ -135,10 +141,12 @@ package nframe;
 		//Class name
 		public static final String ThisName = "IObject";
 		// Property
+		public static final String CampID = "CampID";// object
 		public static final String ClassName = "ClassName";// string
 		public static final String ConfigID = "ConfigID";// string
 		public static final String GroupID = "GroupID";// int
 		public static final String ID = "ID";// string
+		public static final String MasterID = "MasterID";// object
 		public static final String MoveTo = "MoveTo";// vector3
 		public static final String Name = "Name";// string
 		public static final String Position = "Position";// vector3
@@ -152,10 +160,12 @@ package nframe;
 		//Class name
 		public static final String ThisName = "InitProperty";
 		// IObject
+		public static final String CampID = "CampID";// object
 		public static final String ClassName = "ClassName";// string
 		public static final String ConfigID = "ConfigID";// string
 		public static final String GroupID = "GroupID";// int
 		public static final String ID = "ID";// string
+		public static final String MasterID = "MasterID";// object
 		public static final String MoveTo = "MoveTo";// vector3
 		public static final String Name = "Name";// string
 		public static final String Position = "Position";// vector3
@@ -173,10 +183,12 @@ package nframe;
 		//Class name
 		public static final String ThisName = "Language";
 		// IObject
+		public static final String CampID = "CampID";// object
 		public static final String ClassName = "ClassName";// string
 		public static final String ConfigID = "ConfigID";// string
 		public static final String GroupID = "GroupID";// int
 		public static final String ID = "ID";// string
+		public static final String MasterID = "MasterID";// object
 		public static final String MoveTo = "MoveTo";// vector3
 		public static final String Name = "Name";// string
 		public static final String Position = "Position";// vector3
@@ -195,22 +207,20 @@ package nframe;
 		//Class name
 		public static final String ThisName = "NPC";
 		// IObject
+		public static final String CampID = "CampID";// object
 		public static final String ClassName = "ClassName";// string
 		public static final String ConfigID = "ConfigID";// string
 		public static final String GroupID = "GroupID";// int
 		public static final String ID = "ID";// string
+		public static final String MasterID = "MasterID";// object
 		public static final String MoveTo = "MoveTo";// vector3
 		public static final String Name = "Name";// string
 		public static final String Position = "Position";// vector3
 		public static final String SceneID = "SceneID";// int
 		public static final String State = "State";// int
 		// Property
-		public static final String AIOwnerID = "AIOwnerID";// object
-		public static final String Camp = "Camp";// object
 		public static final String Climb = "Climb";// int
-		public static final String CrisisDis = "CrisisDis";// float
 		public static final String DescID = "DescID";// string
-		public static final String Diamond = "Diamond";// int
 		public static final String DropPackList = "DropPackList";// string
 		public static final String DropProbability = "DropProbability";// int
 		public static final String EXP = "EXP";// int
@@ -222,8 +232,6 @@ package nframe;
 		public static final String LastAttacker = "LastAttacker";// object
 		public static final String Level = "Level";// int
 		public static final String MP = "MP";// int
-		public static final String MasterID = "MasterID";// object
-		public static final String MasterName = "MasterName";// string
 		public static final String MeleeType = "MeleeType";// int
 		public static final String NPCSubType = "NPCSubType";// int
 		public static final String NPCType = "NPCType";// int
@@ -238,10 +246,6 @@ package nframe;
 		public static final String SkillSpecial2 = "SkillSpecial2";// string
 		public static final String SkillTHUMP = "SkillTHUMP";// string
 		public static final String SpriteFile = "SpriteFile";// string
-		public static final String TargetX = "TargetX";// float
-		public static final String TargetY = "TargetY";// float
-		public static final String VIPEXP = "VIPEXP";// int
-		public static final String Width = "Width";// float
 		// Record
 
 	}
@@ -250,10 +254,12 @@ package nframe;
 		//Class name
 		public static final String ThisName = "NoSqlServer";
 		// IObject
+		public static final String CampID = "CampID";// object
 		public static final String ClassName = "ClassName";// string
 		public static final String ConfigID = "ConfigID";// string
 		public static final String GroupID = "GroupID";// int
 		public static final String ID = "ID";// string
+		public static final String MasterID = "MasterID";// object
 		public static final String MoveTo = "MoveTo";// vector3
 		public static final String Name = "Name";// string
 		public static final String Position = "Position";// vector3
@@ -272,10 +278,12 @@ package nframe;
 		//Class name
 		public static final String ThisName = "Player";
 		// IObject
+		public static final String CampID = "CampID";// object
 		public static final String ClassName = "ClassName";// string
 		public static final String ConfigID = "ConfigID";// string
 		public static final String GroupID = "GroupID";// int
 		public static final String ID = "ID";// string
+		public static final String MasterID = "MasterID";// object
 		public static final String MoveTo = "MoveTo";// vector3
 		public static final String Name = "Name";// string
 		public static final String Position = "Position";// vector3
@@ -283,7 +291,6 @@ package nframe;
 		public static final String State = "State";// int
 		// Property
 		public static final String Account = "Account";// string
-		public static final String Camp = "Camp";// object
 		public static final String ConnectKey = "ConnectKey";// string
 		public static final String Diamond = "Diamond";// int
 		public static final String EXP = "EXP";// int
@@ -316,10 +323,12 @@ package nframe;
 		//Class name
 		public static final String ThisName = "Scene";
 		// IObject
+		public static final String CampID = "CampID";// object
 		public static final String ClassName = "ClassName";// string
 		public static final String ConfigID = "ConfigID";// string
 		public static final String GroupID = "GroupID";// int
 		public static final String ID = "ID";// string
+		public static final String MasterID = "MasterID";// object
 		public static final String MoveTo = "MoveTo";// vector3
 		public static final String Name = "Name";// string
 		public static final String Position = "Position";// vector3
@@ -347,10 +356,12 @@ package nframe;
 		//Class name
 		public static final String ThisName = "Security";
 		// IObject
+		public static final String CampID = "CampID";// object
 		public static final String ClassName = "ClassName";// string
 		public static final String ConfigID = "ConfigID";// string
 		public static final String GroupID = "GroupID";// int
 		public static final String ID = "ID";// string
+		public static final String MasterID = "MasterID";// object
 		public static final String MoveTo = "MoveTo";// vector3
 		public static final String Name = "Name";// string
 		public static final String Position = "Position";// vector3
@@ -366,10 +377,12 @@ package nframe;
 		//Class name
 		public static final String ThisName = "Server";
 		// IObject
+		public static final String CampID = "CampID";// object
 		public static final String ClassName = "ClassName";// string
 		public static final String ConfigID = "ConfigID";// string
 		public static final String GroupID = "GroupID";// int
 		public static final String ID = "ID";// string
+		public static final String MasterID = "MasterID";// object
 		public static final String MoveTo = "MoveTo";// vector3
 		public static final String Name = "Name";// string
 		public static final String Position = "Position";// vector3
@@ -394,10 +407,12 @@ package nframe;
 		//Class name
 		public static final String ThisName = "Skill";
 		// IObject
+		public static final String CampID = "CampID";// object
 		public static final String ClassName = "ClassName";// string
 		public static final String ConfigID = "ConfigID";// string
 		public static final String GroupID = "GroupID";// int
 		public static final String ID = "ID";// string
+		public static final String MasterID = "MasterID";// object
 		public static final String MoveTo = "MoveTo";// vector3
 		public static final String Name = "Name";// string
 		public static final String Position = "Position";// vector3

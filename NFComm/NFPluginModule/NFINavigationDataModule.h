@@ -61,7 +61,7 @@ public:
     int x = 0;
     int z = 0;
 };
-AJSON(NFVoxel, layer, name, item, movable, breakable)
+AJSON(NFVoxel, layer, name, item, movable, breakable, stair)
 
 class GroupNavigationData
 {

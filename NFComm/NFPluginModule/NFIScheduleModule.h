@@ -82,8 +82,6 @@ public:
 	virtual ~NFIScheduleModule() {}
 
 	///for module
-	virtual bool AddSchedule(const std::string& strScheduleName, const MODULE_SCHEDULE_FUNCTOR_PTR& cb, const float fTime, const int nCount) = 0;
-	virtual bool AddSchedule(const std::string& strScheduleName, const MODULE_SCHEDULE_FUNCTOR_PTR& cb, const int nCount, const NFDateTime& date) = 0;
 	virtual bool RemoveSchedule(const std::string& strScheduleName) = 0;
 	virtual bool ExistSchedule(const std::string& strScheduleName) = 0;
 
@@ -96,8 +94,6 @@ public:
 	}
 	
 	///for object
-	virtual bool AddSchedule(const NFGUID self, const std::string& strScheduleName, const OBJECT_SCHEDULE_FUNCTOR_PTR& cb, const float fTime, const int nCount) = 0;
-	virtual bool AddSchedule(const NFGUID self, const std::string& strScheduleName, const OBJECT_SCHEDULE_FUNCTOR_PTR& cb, const int nCount, const NFDateTime& date) = 0;
 	virtual bool RemoveSchedule(const NFGUID self) = 0;
 	virtual bool RemoveSchedule(const NFGUID self, const std::string& strScheduleName) = 0;
 	virtual bool ExistSchedule(const NFGUID self, const std::string& strScheduleName) = 0;
@@ -110,6 +106,13 @@ public:
 		OBJECT_SCHEDULE_FUNCTOR_PTR functorPtr(NF_NEW OBJECT_SCHEDULE_FUNCTOR(functor));
 		return AddSchedule(self, strScheduleName, functorPtr, fIntervalTime, nCount);
 	}
+
+protected:
+	virtual bool AddSchedule(const std::string& strScheduleName, const MODULE_SCHEDULE_FUNCTOR_PTR& cb, const float fTime, const int nCount) = 0;
+	virtual bool AddSchedule(const std::string& strScheduleName, const MODULE_SCHEDULE_FUNCTOR_PTR& cb, const int nCount, const NFDateTime& date) = 0;
+
+	virtual bool AddSchedule(const NFGUID self, const std::string& strScheduleName, const OBJECT_SCHEDULE_FUNCTOR_PTR& cb, const float fTime, const int nCount) = 0;
+	virtual bool AddSchedule(const NFGUID self, const std::string& strScheduleName, const OBJECT_SCHEDULE_FUNCTOR_PTR& cb, const int nCount, const NFDateTime& date) = 0;
 };
 
 #endif

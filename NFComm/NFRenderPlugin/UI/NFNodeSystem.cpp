@@ -34,6 +34,7 @@ namespace NodeSystem
     {
         ImVec2 disPlayPos(pos.X() + offset.X(), pos.Y() + offset.Y());
         ImGui::GetWindowDrawList()->AddRectFilled(disPlayPos, ImVec2(disPlayPos.x + this->size, disPlayPos.y + this->size), color);
+        ImGui::GetWindowDrawList()->AddText(disPlayPos, color, name.c_str());
         if (selected)
         {
             ImGui::GetWindowDrawList()->AddRect(disPlayPos, ImVec2(disPlayPos.x + this->size, disPlayPos.y + this->size), ImColor(255, 255, 0, 255));

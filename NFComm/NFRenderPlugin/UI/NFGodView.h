@@ -52,6 +52,7 @@ private:
 	void RenderScene(const int sceneID, const int groupID);
 	void HandlerSelected(const NFGUID& id, const bool doubleClick);
     void DrawMapData();
+    void DrawToolBar();
 
     bool HandlerNodeHovered(const NFGUID& id);
 
@@ -61,6 +62,12 @@ private:
     int OnClassCommonEvent(const NFGUID& self, const std::string& strClassNames, const CLASS_OBJECT_EVENT eClassEvent, const NFDataList& var);
 
     NFVector2 ToMapGridPos(const NFVector3& pos);
+
+private:
+    std::vector<int> mLayerColor;
+    int mStairColor;
+    int mTextColor;
+    int mImmovable;
 private:
 	int mGroupID = -1;
 	int mSceneID = -1;

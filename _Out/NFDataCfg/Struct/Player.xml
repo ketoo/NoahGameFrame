@@ -2,7 +2,6 @@
 <XML>
 	<Propertys>
 		<Property Id="Account" Cache="1" Desc="玩家的帐号" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="string" Upload="0" />
-		<Property Id="Camp" Cache="1" Desc="阵营" Force="0" Private="1" Public="1" Ref="0" Save="0" Type="object" Upload="0" />
 		<Property Id="ConnectKey" Cache="1" Desc="玩家连接服务器的KEY" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="string" Upload="0" />
 		<Property Id="Diamond" Cache="1" Desc="钻石" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="int" Upload="0" />
 		<Property Id="EXP" Cache="1" Desc="经验获得,如果是怪物，则是掉落经验" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="int" Upload="0" />

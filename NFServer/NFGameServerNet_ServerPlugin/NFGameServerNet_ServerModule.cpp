@@ -350,27 +350,6 @@ void NFGameServerNet_ServerModule::OnClientReqMoveProcess(const NFSOCK nSockInde
 
 		this->SendGroupMsgPBToGate(NFMsg::ACK_MOVE, xMsg, nSceneID, nGroupID);
 	}
-	else
-	{
-		const NFGUID xAIOwnerID = m_pKernelModule->GetPropertyObject(xMover, NFrame::NPC::AIOwnerID());
-		if (xAIOwnerID == nPlayerID)
-		{
-
-			NFMsg::Vector3 vPos = xMsg.target_pos(0);
-
-			NFVector3 v;
-			v.SetX(vPos.x());
-			v.SetY(vPos.y());
-			v.SetZ(vPos.z());
-
-			//m_pKernelModule->SetPropertyVector3(xMover, NFrame::IObject::Position(), v);
-			const int nSceneID = m_pKernelModule->GetPropertyInt32(xMover, NFrame::Player::SceneID());
-			const int nGroupID = m_pKernelModule->GetPropertyInt32(xMover, NFrame::Player::GroupID());
-
-			this->SendGroupMsgPBToGate(NFMsg::ACK_MOVE, xMsg, nSceneID, nGroupID);
-		}
-	}
-
 }
 
 void NFGameServerNet_ServerModule::OnClientReqMoveImmuneProcess(const NFSOCK nSockIndex, const int nMsgID,
@@ -379,9 +358,7 @@ void NFGameServerNet_ServerModule::OnClientReqMoveImmuneProcess(const NFSOCK nSo
 	CLIENT_MSG_PROCESS(nMsgID, msg, nLen, NFMsg::ReqAckPlayerMove)
 
 	const NFGUID& self = NFINetModule::PBToNF(xMsg.mover());
-	const NFGUID& xOwnerID = m_pKernelModule->GetPropertyObject(self, NFrame::NPC::AIOwnerID());
-	if (self == nPlayerID
-		|| xOwnerID == nPlayerID)
+	if (self == nPlayerID)
 	{
 		const int nSceneID = m_pKernelModule->GetPropertyInt32(self, NFrame::Player::SceneID());
 		const int nGroupID = m_pKernelModule->GetPropertyInt32(self, NFrame::Player::GroupID());
@@ -403,8 +380,7 @@ void NFGameServerNet_ServerModule::OnClientReqMoveImmuneProcess(const NFSOCK nSo
 	}
 }
 
-void NFGameServerNet_ServerModule::OnClientReqStateSyncProcess(const NFSOCK nSockIndex, const int nMsgID,
-                                                                const char *msg, const uint32_t nLen)
+void NFGameServerNet_ServerModule::OnClientReqStateSyncProcess(const NFSOCK nSockIndex, const int nMsgID, const char *msg, const uint32_t nLen)
 {
 	CLIENT_MSG_PROCESS(nMsgID, msg, nLen, NFMsg::ReqAckPlayerMove)
 	//only the player can send the message to the back-end

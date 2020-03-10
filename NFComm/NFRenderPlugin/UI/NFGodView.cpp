@@ -43,6 +43,26 @@ NFGodView::NFGodView(NFIPluginManager* p, NFViewType vt) : NFIView(p, vt, GET_CL
 
 	mTreeView.SetSelectedNodeFunctor(std::bind(&NFGodView::HandlerSelected, this, std::placeholders::_1, std::placeholders::_2));
 	mTreeView.SetName(GET_CLASS_NAME(NFGodView));
+
+	for (int i = 0; i <= 10; ++i)
+	{
+		mLayerColor.push_back(ImColor(255, 255, 255, 100));
+	}
+	//mLayerColor[0] = 0;
+	//mLayerColor[1] = 0;
+	mLayerColor[2] = ImColor(255, 255, 255, 100);
+	mLayerColor[3] = ImColor(255, 255, 255, 170);
+	mLayerColor[4] = ImColor(241, 170, 0, 100);
+	mLayerColor[5] = ImColor(241, 170, 0, 200);
+	mLayerColor[6] = ImColor(228, 110, 0, 200);
+	mLayerColor[7] = ImColor(241, 170, 170, 200);
+	mLayerColor[8] = ImColor(228, 110, 110, 200);
+	mLayerColor[9] = ImColor(219, 78, 78, 200);
+	mLayerColor[10] = ImColor(255, 78, 0, 255);
+
+	mStairColor = ImColor(0, 255, 255, 255);
+	mTextColor = ImColor(255, 255, 255, 100);
+	mImmovable = ImColor(255, 0, 0, 255);
 }
 
 NFGodView::~NFGodView()
@@ -157,6 +177,7 @@ bool NFGodView::Execute()
 
 	UpdateSceneObjectNodePosition(mSceneID, mGroupID);
 
+	DrawToolBar();
 
 	return true;
 }
@@ -203,43 +224,7 @@ void NFGodView::DrawMapData()
 					{
 						if (voxel->layer > 1)
 						{
-							ImColor color(255, 0, 0, 0);
-							if (voxel->layer == 2)
-							{
-								color = ImColor(255, 255, 255, 100);
-							}
-							else if (voxel->layer == 3)
-							{
-								color = ImColor(255, 255, 255, 255);
-							}
-							else if (voxel->layer == 4)
-							{
-								color = ImColor(255, 255, 255, 200);
-							}
-							else if (voxel->layer == 7)
-							{
-								color = ImColor(241, 170, 0, 200);
-							}
-							else if (voxel->layer == 8)
-							{
-								color = ImColor(228, 110, 0, 200);
-							}
-							else if (voxel->layer == 9)
-							{
-								color = ImColor(219, 78, 0, 200);
-							}
-							else if (voxel->layer == 7)
-							{
-								color = ImColor(241, 170, 170, 200);
-							}
-							else if (voxel->layer == 8)
-							{
-								color = ImColor(228, 110, 110, 200);
-							}
-							else if (voxel->layer == 9)
-							{
-								color = ImColor(219, 78, 78, 200);
-							}
+							int color = mLayerColor[voxel->layer];
 							{
 								NFVector2 v1(i * nodeSize * data->tileConfig.cellSizeX, j * -nodeSize * data->tileConfig.cellSizeZ);
 								NFVector2 v2(v1.X() + nodeSize * data->tileConfig.cellSizeX, v1.Y() - nodeSize * data->tileConfig.cellSizeX);
@@ -248,11 +233,11 @@ void NFGodView::DrawMapData()
 								mNodeSystem.DrawRectFilled(v1, v2, color);
 								if (voxel->movable <= 0)
 								{
-									mNodeSystem.DrawCircle((v1 + v2) / 2, mNodeSystem.GetNodeSize() / 2, ImColor(255, 0, 0, 255));
+									mNodeSystem.DrawCircle((v1 + v2) / 2, mNodeSystem.GetNodeSize() * 0.75, mImmovable);
 								}
 								if (voxel->stair > 0)
 								{
-									mNodeSystem.DrawRect(v1, v2, ImColor(0, 0, 255, 255));
+									mNodeSystem.DrawRect(v1, v2, mStairColor);
 								}
 								if (!voxel->occupyObject.IsNull())
 								{
@@ -272,7 +257,7 @@ void NFGodView::DrawMapData()
 				{
 					NFVector2 v1(i * nodeSize * data->tileConfig.cellSizeX, 0);
 					std::string text = std::to_string(i * data->tileConfig.cellSizeX);
-					mNodeSystem.DrawText(v1, ImColor(255, 255, 255, 100), text.c_str());
+					mNodeSystem.DrawText(v1, mTextColor, text.c_str());
 				}
 			}
 			for (int j = 0; j < data->tileConfig.mapSize; j++)
@@ -281,7 +266,7 @@ void NFGodView::DrawMapData()
 				{
 					NFVector2 v1(-nodeSize *2, j * nodeSize * -data->tileConfig.cellSizeX);
 					std::string text = std::to_string(j * data->tileConfig.cellSizeX);
-					mNodeSystem.DrawText(v1, ImColor(255, 255, 255, 100), text.c_str());
+					mNodeSystem.DrawText(v1, mTextColor, text.c_str());
 				}
 			}
 
@@ -289,11 +274,41 @@ void NFGodView::DrawMapData()
 			NFVector2 v1(0, 0);
 			NFVector2 v2(nodeSize * data->tileConfig.mapSize * data->tileConfig.cellSizeX, nodeSize * -data->tileConfig.mapSize * data->tileConfig.cellSizeZ);
 
-			ImColor color(255, 0, 0, 255);
-			mNodeSystem.DrawRect(v1, v2, color);
-			mNodeSystem.DrawText(v1, color, "(0,0)");
+			mNodeSystem.DrawRect(v1, v2, mImmovable);
 		}
 	}
+}
+
+void NFGodView::DrawToolBar()
+{
+	auto wPos = ImGui::GetWindowPos();
+	auto wSize = ImGui::GetWindowSize();
+
+	ImVec2 start(12, wPos.y + 50);
+	ImVec2 end(start.x + 15, start.y + 15);
+	ImGui::GetWindowDrawList()->AddRect(start, end, mStairColor);
+
+	start = ImVec2(35, wPos.y + 50);
+	ImGui::GetWindowDrawList()->AddText(start, mStairColor, "Stair");
+
+	start = ImVec2(20, wPos.y + 80);
+	ImGui::GetWindowDrawList()->AddCircle(start, 10, mImmovable);
+
+	start = ImVec2(35, wPos.y + 70);
+	ImGui::GetWindowDrawList()->AddText(start, mImmovable, "Immovable");
+
+	ImGui::NewLine();
+	ImGui::NewLine();
+
+	for (int i = 2; i < mLayerColor.size(); ++i)
+	{
+		std::string name = "L " + std::to_string(i);
+		ImGui::PushStyleColor(ImGuiCol_Button, mLayerColor[i]);
+		ImGui::Button(name.c_str());
+		ImGui::PopStyleColor();
+	}
+
+
 }
 
 bool NFGodView::HandlerNodeHovered(const NFGUID& id)
