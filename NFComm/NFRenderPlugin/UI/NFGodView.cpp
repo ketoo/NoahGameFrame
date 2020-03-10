@@ -222,29 +222,30 @@ void NFGodView::DrawMapData()
 					auto voxel = data->data.GetElement(NFGUID(i, j));
 					if (voxel)
 					{
+						NFVector2 v1(i * nodeSize * data->tileConfig.cellSizeX, j * -nodeSize * data->tileConfig.cellSizeZ);
+						NFVector2 v2(v1.X() + nodeSize * data->tileConfig.cellSizeX, v1.Y() - nodeSize * data->tileConfig.cellSizeX);
+
 						if (voxel->layer > 1)
 						{
 							int color = mLayerColor[voxel->layer];
+							mNodeSystem.DrawRectFilled(v1, v2, color);
+						}
+						{
+							
+							//DrawRectFilled(v1, v2, color);
+							if (voxel->movable <= 0)
 							{
-								NFVector2 v1(i * nodeSize * data->tileConfig.cellSizeX, j * -nodeSize * data->tileConfig.cellSizeZ);
-								NFVector2 v2(v1.X() + nodeSize * data->tileConfig.cellSizeX, v1.Y() - nodeSize * data->tileConfig.cellSizeX);
-
-								//DrawRectFilled(v1, v2, color);
-								mNodeSystem.DrawRectFilled(v1, v2, color);
-								if (voxel->movable <= 0)
-								{
-									mNodeSystem.DrawCircle((v1 + v2) / 2, mNodeSystem.GetNodeSize() * 0.75, mImmovable);
-								}
-								if (voxel->stair > 0)
-								{
-									mNodeSystem.DrawRect(v1, v2, mStairColor);
-								}
-								if (!voxel->occupyObject.IsNull())
-								{
-								}
-								if (!voxel->item.empty())
-								{
-								}
+								mNodeSystem.DrawCircle((v1 + v2) / 2, mNodeSystem.GetNodeSize() * 0.75, mImmovable);
+							}
+							if (voxel->stair > 0)
+							{
+								mNodeSystem.DrawRect(v1, v2, mStairColor);
+							}
+							if (!voxel->occupyObject.IsNull())
+							{
+							}
+							if (!voxel->item.empty())
+							{
 							}
 						}
 					}
