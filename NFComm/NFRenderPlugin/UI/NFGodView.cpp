@@ -434,10 +434,11 @@ void NFGodView::UpdateSceneObjectNodePosition(const int sceneID, const int group
 				const std::string& className = m_pKernelModule->GetPropertyString(guid, NFrame::IObject::ClassName());
 				const std::string& name = m_pKernelModule->GetPropertyString(guid, NFrame::IObject::Name());
 				const NFVector3& pos = m_pKernelModule->GetPropertyVector3(guid, NFrame::IObject::Position());
-				std::string barTile = className + "(" + std::to_string((int)pos.X()) + "," + std::to_string((int)pos.Z()) + ")";
+				std::string barTile = className.substr(0, 1) + "(" + std::to_string((int)pos.X()) + "," + std::to_string((int)pos.Z()) + ")";
 
 				auto node = mNodeSystem.FindNode(guid);
 				node->pos = ToMapGridPos(pos);
+				node->name = barTile;
 			}
 		}
 	}
