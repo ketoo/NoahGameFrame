@@ -183,8 +183,8 @@ enum ESceneType
 	SINGLE_CLONE_SCENE 		= 1;//single boss underground city
 	MULTI_CLONE_SCENE 		= 2;//world boss underground city
 	PVP_MODE_SCENE 			= 10;
-	MVM_MODE_SCENE, 		= 11;
-	SURVIVAL_MODE_SCENE, 	= 12;
+	MVM_MODE_SCENE	 		= 11;
+	SURVIVAL_MODE_SCENE 	= 12;
 }
 
 enum ENPCType

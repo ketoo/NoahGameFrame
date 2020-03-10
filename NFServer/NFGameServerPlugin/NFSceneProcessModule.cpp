@@ -98,22 +98,6 @@ bool NFSceneProcessModule::RequestEnterScene(const NFGUID & self, const int nSce
 			return m_pSceneModule->RequestEnterScene(self, nSceneID, nNewGroupID, nType, pos, argList);
 		}
 	}
-	else if (eSceneType == NFMsg::ESceneType::MULTI_CLONE_SCENE)
-	{
-		if (nGroupID > 0)
-		{
-			return m_pSceneModule->RequestEnterScene(self, nSceneID, nGroupID, nType, pos, argList);
-		}
-		else
-		{
-			int nNewGroupID = m_pKernelModule->RequestGroupScene(nSceneID);
-			if (nNewGroupID > 0)
-			{
-				return m_pSceneModule->RequestEnterScene(self, nSceneID, nNewGroupID, nType, pos, argList);
-			}
-		}
-		
-	}
 	else if (eSceneType == NFMsg::ESceneType::NORMAL_SCENE)
 	{
 		const int nMaxGroup = m_pElementModule->GetPropertyInt32(std::to_string(nSceneID), NFrame::Scene::MaxGroup());
@@ -125,7 +109,7 @@ bool NFSceneProcessModule::RequestEnterScene(const NFGUID & self, const int nSce
 
 		return false;
 	}
-	else if (eSceneType == NFMsg::ESceneType::HOME_SCENE)
+	else
 	{
 		if (nGroupID > 0)
 		{
@@ -170,16 +154,7 @@ int NFSceneProcessModule::AfterLeaveSceneGroupEvent(const NFGUID & self, const i
 			m_pLogModule->LogInfo(self, "DestroyCloneSceneGroup " + std::to_string(nGroupID), __FUNCTION__ , __LINE__);
 		}
 	}
-	else if (eSceneType == NFMsg::ESceneType::HOME_SCENE)
-	{
-		NFDataList varObjectList;
-		if (m_pKernelModule->GetGroupObjectList(nSceneID, nGroupID, varObjectList, true) && varObjectList.GetCount() <= 0)
-		{
-			m_pKernelModule->ReleaseGroupScene(nSceneID, nGroupID);
 
-			m_pLogModule->LogInfo(self, "DestroyCloneSceneGroup " + std::to_string(nGroupID), __FUNCTION__ , __LINE__);
-		}
-	}
 	return 0;
 }
 

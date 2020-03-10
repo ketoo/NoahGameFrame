@@ -303,38 +303,12 @@ void NFGameServerNet_ServerModule::OnClientSwapSceneProcess(const NFSOCK nSockIn
 	const int nowGroupID = m_pKernelModule->GetPropertyInt(nPlayerID, NFrame::Player::GroupID());
 	const NFMsg::ESceneType nowSceneType = (NFMsg::ESceneType)m_pElementModule->GetPropertyInt(std::to_string(nowSceneID), NFrame::Scene::Type());
 
-	if (sceneType == NFMsg::ESceneType::HOME_SCENE)
-	{
-		//fighting now, want to end the fight
-		const NFVector3& pos = m_pSceneModule->GetRelivePosition(xMsg.scene_id(), 0);
-		m_pSceneProcessModule->RequestEnterScene(pObject->Self(), xMsg.scene_id(), -1, 0, pos, NFDataList());
-
-		return;
-	}
 		
 	if (sceneType == NFMsg::ESceneType::NORMAL_SCENE)
 	{
 		const NFVector3& pos = m_pSceneModule->GetRelivePosition(xMsg.scene_id(), 0);
 		m_pSceneProcessModule->RequestEnterScene(pObject->Self(), xMsg.scene_id(), 1, 0, pos, NFDataList());
 	}
-	
-	/*
-	if (nowSceneType == NFMsg::ESceneType::SCENE_HOME)
-	{
-		//fighting now, want to end the fight
-		const NFVector3& pos = m_pSceneModule->GetRelivePosition(homeSceneID, 0);
-		m_pSceneProcessModule->RequestEnterScene(pObject->Self(), homeSceneID, -1, pos, NFDataList());
-	}
-	else
-	{
-		if (sceneType == NFMsg::ESceneType::SCENE_HOME)
-		{
-			//
-			const NFVector3& pos = m_pSceneModule->GetRelivePosition(xMsg.scene_id(), 0);
-			m_pSceneProcessModule->RequestEnterScene(pObject->Self(), xMsg.scene_id(), -1, pos, NFDataList());
-		}
-	}
-	*/
 }
 
 void NFGameServerNet_ServerModule::OnClientReqMoveProcess(const NFSOCK nSockIndex, const int nMsgID, const char *msg,  const uint32_t nLen)
