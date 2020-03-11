@@ -73,13 +73,10 @@ private:
     NFIKernelModule* m_pKernelModule;
     NFIThreadPoolModule* m_pThreadPoolModule;
 
-	NFMapEx<NFGUID, NFIActor> mxActorMap;
+	std::map<NFGUID, NF_SHARE_PTR<NFIActor>> mxActorMap;
 
 	NFQueue<NFActorMessage> mxResultQueue;
 	NFMapEx<int, ACTOR_PROCESS_FUNCTOR> mxEndFunctor;
-
-    //for schedule
-    std::map<NFGUID, int> mActorMessageCount;
 };
 
 #endif
