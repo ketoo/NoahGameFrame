@@ -89,6 +89,8 @@ namespace NodeSystem
         void DrawCircle(const NFVector2& center, const float radius, const int col);
         void DrawCircleFilled(const NFVector2& center, const float radius, int const col);
 
+        void DrawArrow(const NFVector2& start, const NFVector2& end, int col);
+
     private:
         bool init = false;
 

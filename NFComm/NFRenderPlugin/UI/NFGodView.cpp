@@ -237,9 +237,15 @@ void NFGodView::DrawMapData()
 							{
 								mNodeSystem.DrawCircle((v1 + v2) / 2, mNodeSystem.GetNodeSize() * 0.75, mImmovable);
 							}
-							if (voxel->stair > 0)
+							if (voxel->stair_h > 0)
 							{
 								mNodeSystem.DrawRect(v1, v2, mStairColor);
+								mNodeSystem.DrawArrow(NFVector2(v1.X(), ((v1 + v2) / 2).Y()), NFVector2(v2.X(), ((v1 + v2) / 2).Y()), mStairColor);
+							}
+							if (voxel->stair_v > 0)
+							{
+								mNodeSystem.DrawRect(v1, v2, mStairColor);
+								mNodeSystem.DrawArrow(NFVector2(((v1 + v2) / 2).X(), v1.Y()), NFVector2(((v1 + v2) / 2).X(), v2.Y()), mStairColor);
 							}
 							if (!voxel->occupyObject.IsNull())
 							{

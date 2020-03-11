@@ -55,13 +55,14 @@ public:
     string item;
     int movable = 0;
     int breakable = 0;
-    int stair = 0;
+    int stair_h = 0;
+    int stair_v = 0;
     //expand
     NFGUID occupyObject;
     int x = 0;
     int z = 0;
 };
-AJSON(NFVoxel, layer, name, item, movable, breakable, stair)
+AJSON(NFVoxel, layer, name, item, movable, breakable, stair_h, stair_v)
 
 class GroupNavigationData
 {

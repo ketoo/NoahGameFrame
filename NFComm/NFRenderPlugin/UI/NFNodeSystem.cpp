@@ -216,5 +216,14 @@ namespace NodeSystem
     {
         ImVec2 disPlayPos(center.X() + offset.X(), center.Y() + offset.Y());
         ImGui::GetWindowDrawList()->AddCircleFilled(disPlayPos, radius, col);
+
+    }
+
+    void NFNodeSystem::DrawArrow(const NFVector2& start, const NFVector2& end, int col)
+    {
+        ImVec2 disPlayPos(start.X() + offset.X(), start.Y() + offset.Y() - 2);
+
+        //ImGui::GetWindowDrawList()->AddRectFilled(disPlayPos, ImVec2(disPlayPos.x + end.X(), disPlayPos.x + end.Y() + 2), col);
+        //ImGui::GetWindowDrawList()->AddCircle(ImVec2(disPlayPos.x + end.X() * 0.75, disPlayPos.x + end.Y() * 0.75), nodeSize / 4, col);
     }
 }
