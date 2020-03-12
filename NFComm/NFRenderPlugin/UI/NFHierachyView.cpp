@@ -35,6 +35,9 @@ NFHierachyView::NFHierachyView(NFIPluginManager* p, NFViewType vt) : NFIView(p, 
 	m_pClassModule = pPluginManager->FindModule<NFIClassModule>();
 	m_pElementModule = pPluginManager->FindModule<NFIElementModule>();
 	m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>();
+	m_pEventModule = pPluginManager->FindModule<NFIEventModule>();
+	m_pBPVirtualMachineModule = pPluginManager->FindModule<NFIBPVirtualMachineModule>();
+	
 	m_pBluePrintModule = pPluginManager->FindModule<NFIBluePrintModule>();
 }
 
@@ -74,6 +77,7 @@ void NFHierachyView::SubRender()
 void NFHierachyView::GodViewSubRender()
 {
    NFGUID objectID = ((NFGodView*)m_pOccupyView)->GetCurrentObjectID();
+   NF_SHARE_PTR<NFIObject> pObject = m_pKernelModule->GetObject(objectID);
    std::string name = "GUID: " + objectID.ToString();
    ImGui::Text(name.c_str());
    if (ImGui::Button("Create"))
@@ -97,11 +101,24 @@ void NFHierachyView::GodViewSubRender()
 	   m_pKernelModule->DestroyObject(objectID);
    }
 
+   if (pObject == nullptr)
+   {
+	   ImGui::SameLine();
+	   if (ImGui::Button("Disable AI"))
+	   {
+		   NFDataList data;
+		   m_pKernelModule->GetGroupObjectList(objectID.nHead64, objectID.nData64, data);
+		   for (int i = 0; i < data.GetCount(); ++i)
+		   {
+			   m_pKernelModule->SetPropertyInt(data.Object(i), NFrame::NPC::Disable(), 1);
+		   }
+	   }
+   }
+
    ImGui::Separator();
 
    ImGui::BeginGroup();
 
-   NF_SHARE_PTR<NFIObject> pObject = m_pKernelModule->GetObject(objectID);
    if (pObject)
    {
 	   auto element = m_pClassModule->GetElement(NFrame::IObject::ThisName());
@@ -174,16 +191,29 @@ void NFHierachyView::BluePrintViewSubRender()
 {
    NF_SHARE_PTR<NFBluePrintView> pBluePrintView = std::dynamic_pointer_cast<NFBluePrintView>(m_pUIModule->GetView(NFViewType::BluePrintView));
    NFGUID objectID = pBluePrintView->GetCurrentObjectID();
+   NFGUID blockID = pBluePrintView->GetCurrentLogicBlockID();
+
+	if(objectID.IsNull() && !blockID.IsNull()) 
+	{
+		objectID = blockID;
+	}
+
+
    if (!objectID.IsNull())
    {
+	   bool selected = pBluePrintView->GetTreeView().GetSelectedNode() == objectID;
+	   if (!selected)
+	   {
+		   objectID = blockID;
+	   }
+
       auto blueprintNode = m_pBluePrintModule->FindNode(objectID);
       if (blueprintNode)
       {
          ImGui::BeginGroup();
          
-         bool selected = pBluePrintView->GetTreeView().GetSelectedNode() == objectID;
 	      ImGui::Checkbox("", &selected);
-         ImGui::SameLine();
+          ImGui::SameLine();
 
          char blueprintName[128] = {0};
          strcpy(blueprintName, blueprintNode->name .c_str());
@@ -244,11 +274,27 @@ void NFHierachyView::BluePrintViewSubRender()
 void NFHierachyView::BluePrintViewSubRenderForLogicBlock()
 {
 	NF_SHARE_PTR<NFBluePrintView> pBluePrintView = std::dynamic_pointer_cast<NFBluePrintView>(m_pUIModule->GetView(NFViewType::BluePrintView));
-	NFGUID objectID = pBluePrintView->GetCurrentObjectID();
+	NFGUID objectID = pBluePrintView->GetCurrentLogicBlockID();
 	if (!objectID.IsNull())
 	{
 		auto logicBlock = m_pBluePrintModule->GetLogicBlock(objectID);
-		//logicBlock->enable
+		if (logicBlock)
+		{
+			if (logicBlock->running)
+			{
+				if (ImGui::Button("Stop"))
+				{
+					m_pBPVirtualMachineModule->StopLogicBlock(objectID);
+				}
+			}
+			else
+			{
+				if (ImGui::Button("Start"))
+				{
+					m_pBPVirtualMachineModule->RunLogicBlock(objectID);
+				}
+			}
+		}
 	}
 }
 
@@ -263,8 +309,11 @@ void NFHierachyView::BluePrintViewSubRenderForMonitor()
 		{
 			NF_SHARE_PTR<NFIMonitor> monitor = std::dynamic_pointer_cast<NFIMonitor>(blueprintNode);
 
+			ImGui::Separator();
 			BluePrintViewSubRenderForMonitorHead(monitor);
+			ImGui::Separator();
 			BluePrintViewSubRenderForMonitorBody(monitor);
+			ImGui::Separator();
 			BluePrintViewSubRenderForMonitorBot(monitor);
 		}
 	}
@@ -281,8 +330,11 @@ void NFHierachyView::BluePrintViewSubRenderForBranch()
 		{
 			NF_SHARE_PTR<NFIBranch> branch = std::dynamic_pointer_cast<NFIBranch>(blueprintNode);
 
+			ImGui::Separator();
 			BluePrintViewSubRenderForBranchHead(branch);
+			ImGui::Separator();
 			BluePrintViewSubRenderForBranchBody(branch);
+			ImGui::Separator();
 			BluePrintViewSubRenderForBranchBot(branch);
 		}
 	}
@@ -331,6 +383,20 @@ void NFHierachyView::BluePrintViewSubRenderForArithmetic()
 
 void NFHierachyView::BluePrintViewSubRenderForMonitorHead(NF_SHARE_PTR<NFIMonitor> monitor)
 {
+	static int objectID = 0;
+	static int eventID = 0;
+
+	if (ImGui::Button("DoEvent"))
+	{
+		m_pEventModule->DoEvent(NFGUID(pPluginManager->GetAppID(),objectID), eventID, NFDataList::Empty());
+	}
+
+	ImGui::SameLine();
+	ImGui::InputInt("", &eventID);
+
+	ImGui::Text("NFGUID");
+	ImGui::SameLine();
+	ImGui::InputInt("", &objectID);
 
 }
 

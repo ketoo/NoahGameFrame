@@ -30,6 +30,7 @@
 #include "BluePrintNode/NFExecuter.h"
 #include "BluePrintNode/NFModifier.h"
 #include "BluePrintNode/NFArithmetic.h"
+#include "BluePrintNode/NFDebugger.h"
 
 
 NF_SHARE_PTR<NFBluePrintNodeBase> NFLogicBlock::FindNode(const NFGUID& id)
@@ -71,6 +72,13 @@ NF_SHARE_PTR<NFBluePrintNodeBase> NFLogicBlock::FindNode(const NFGUID& id)
 		}
 	}
 	for (auto it : arithmetics)
+	{
+		if (it->id == id)
+		{
+			return it;
+		}
+	}
+	for (auto it : debuggers)
 	{
 		if (it->id == id)
 		{
@@ -457,6 +465,27 @@ NF_SHARE_PTR<NFIArithmetic> NFBluePrintModule::AddArithmetic(const NFGUID& logic
 
 			return arithmetic;
 
+		}
+	}
+
+	return nullptr;
+}
+
+NF_SHARE_PTR<NFIDebugger> NFBluePrintModule::AddDebugger(const NFGUID& logicBlockId, const NFGUID& id, const std::string& name)
+{
+	auto baseNode = FindNode(logicBlockId);
+	if (baseNode && baseNode->blueprintType == NFBlueprintType::LOGICBLOCK)
+	{
+		NF_SHARE_PTR<NFLogicBlock> logicBlock = std::dynamic_pointer_cast<NFLogicBlock>(baseNode);
+		NF_SHARE_PTR<NFIDebugger> debuger = NF_SHARE_PTR<NFIDebugger>(NF_NEW NFDebugger(this->pPluginManager, logicBlockId, id, name));
+		
+		if (debuger)
+		{
+			logicBlock->debuggers.push_back(debuger);
+
+			NodeModifyEvent(id, true);
+
+			return debuger;
 		}
 	}
 

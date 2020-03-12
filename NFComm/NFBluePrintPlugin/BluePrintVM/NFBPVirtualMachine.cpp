@@ -37,7 +37,7 @@ void NFBPVirtualMachine::StartToProcessMonitor()
 int NFBPVirtualMachine::GameEventIDCallBack(const NFGUID& objectID, const  NFGUID& monitorID, const int eventID, const const NFMapEx<std::string, NFData>& data)
 {
     auto node = m_pBluePrintModule->FindNode(monitorID);
-    if (node->blueprintType == NFBlueprintType::MONITOR)
+    if (node && node->blueprintType == NFBlueprintType::MONITOR)
     {
         node->Execute(objectID);
     }
@@ -94,6 +94,8 @@ void NFBPVirtualMachine::StartMonitor(NF_SHARE_PTR<NFIMonitor> monitor)
     {
     case NFMonitorType::GameEvent:
     {
+        monitor->PrepareInputData(NFGUID(), false);
+
         auto inputEventID = monitor->GetInputArg(NFGameEventMonitorInputArg::toString(NFGameEventMonitorInputArg::EventID));
         if (inputEventID->varData.GetInt() <= 0)
         {

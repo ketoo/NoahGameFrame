@@ -94,14 +94,35 @@ bool NFBPVirtualMachineModule::OnReloadPlugin()
 void NFBPVirtualMachineModule::RunLogicBlock(const NFGUID& logicBlockID)
 {
     auto block = m_pBluePrintModule->GetLogicBlock(logicBlockID);
-    auto vm = NF_SHARE_PTR<NFBPVirtualMachine>(NF_NEW NFBPVirtualMachine(pPluginManager, block));
-    mVirtualMachine.AddElement(logicBlockID, vm);
+    if (block)
+    {
+        auto vm = NF_SHARE_PTR<NFBPVirtualMachine>(NF_NEW NFBPVirtualMachine(pPluginManager, block));
+        if (vm)
+        {
+            mVirtualMachine.AddElement(logicBlockID, vm);
+
+            vm->Awake();
+            vm->Init();
+            vm->AfterInit();
+            vm->ReadyExecute();
+        }
+    }
 }
 
 void NFBPVirtualMachineModule::StopLogicBlock(const NFGUID& logicBlockID)
 {
     auto block = m_pBluePrintModule->GetLogicBlock(logicBlockID);
-    mVirtualMachine.RemoveElement(logicBlockID);
+    if (block)
+    {
+    }
+    auto vm = mVirtualMachine.GetElement(logicBlockID);
+    if (vm)
+    {
+        vm->BeforeShut();
+        vm->Shut();
+
+        mVirtualMachine.RemoveElement(logicBlockID);
+    }
     //destroy that VM
 }
 

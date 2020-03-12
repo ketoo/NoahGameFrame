@@ -116,6 +116,18 @@ bool NFEventModule::RemoveEventCallBack(const int nEventID)
 
 bool NFEventModule::DoEvent(const NFGUID self, const int nEventID, const NFDataList & valueList)
 {
+	{
+		//for common event call back
+		OBJECT_EVENT_FUNCTOR pFunPtr;
+		bool bFunRet = mCommonEventInfoMapEx.First(pFunPtr);
+		while (bFunRet)
+		{
+			pFunPtr.operator()(self, nEventID, valueList);
+
+			bFunRet = mCommonEventInfoMapEx.Next(pFunPtr);
+		}
+	}
+
 	bool bRet = false;
 
 	if (!m_pKernelodule->ExistObject(self))
@@ -211,5 +223,11 @@ bool NFEventModule::AddEventCallBack(const NFGUID self, const int nEventID, cons
 
 	xEventListPtr->Add(cb);
 
+	return true;
+}
+
+bool NFEventModule::AddCommonEventCallBack(const OBJECT_EVENT_FUNCTOR cb)
+{
+	mCommonEventInfoMapEx.Add(cb);
 	return true;
 }

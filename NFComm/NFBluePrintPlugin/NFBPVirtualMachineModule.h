@@ -30,15 +30,9 @@
 #include "NFComm/NFPluginModule/NFIKernelModule.h"
 #include "NFComm/NFPluginModule/NFIClassModule.h"
 #include "NFComm/NFPluginModule/NFIBluePrintModule.h"
+#include "NFComm/NFPluginModule/NFIBPVirtualMachineModule.h"
 
 #include "BluePrintVM/NFBPVirtualMachine.h"
-
-class NFIBPVirtualMachineModule
-	: public NFIModule
-{
-public:
-
-};
 
 class NFBPVirtualMachineModule
     : public NFIBPVirtualMachineModule
@@ -63,9 +57,9 @@ public:
     virtual bool OnReloadPlugin();
 
 
-    void RunLogicBlock(const NFGUID& logicBlockID);
-    void StopLogicBlock(const NFGUID& logicBlockID);
-    bool CheckLogicBlockRefCircle(const NFGUID& logicBlockID);
+    virtual void RunLogicBlock(const NFGUID& logicBlockID);
+    virtual void StopLogicBlock(const NFGUID& logicBlockID);
+    virtual bool CheckLogicBlockRefCircle(const NFGUID& logicBlockID);
 
 private:
     NFMapEx<NFGUID, NFBPVirtualMachine> mVirtualMachine;

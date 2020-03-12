@@ -245,6 +245,7 @@ inline bool NFPluginManager::Init()
 	for (; itInstance != mPluginInstanceMap.end(); itInstance++)
 	{
 		SetCurrentPlugin(itInstance->second);
+		std::cout << itInstance->first << std::endl;
 		itInstance->second->Init();
 	}
 

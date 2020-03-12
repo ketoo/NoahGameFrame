@@ -229,6 +229,17 @@ void NFContainerView::BluePrintMenu()
                 ImGui::EndMenu();
             }
 
+            if (ImGui::BeginMenu("New Debugger"))
+            {
+                if (ImGui::MenuItem("Debugger", ""))
+                {
+                    pBluePrintView->TryToCreateDebuger();
+                }
+
+                ImGui::EndMenu();
+
+            }
+            
             if (ImGui::BeginMenu("Custom Variable"))
             {
                 for (auto x : NFVariableType::allValues())

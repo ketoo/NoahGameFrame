@@ -150,6 +150,7 @@ bool NFBluePrintView::Execute()
    CreateExecuter();
    CreateModifier();
    CreateVariable();
+   CreateDebuger();
    CreateArithmetic();
 
    if (ImGui::IsWindowFocused())
@@ -174,6 +175,11 @@ void NFBluePrintView::SetCurrentObjectID(const NFGUID& id)
 	mCurrentObjectID = id;
 
 	mNodeView.MoveToNode(mCurrentObjectID);
+}
+
+NFGUID NFBluePrintView::GetCurrentLogicBlockID()
+{
+	return mCurrentLogicBlockID;
 }
 
 void NFBluePrintView::SetCurrentLogicBlockID(const NFGUID& id)
@@ -321,7 +327,7 @@ void NFBluePrintView::AddNode(NF_SHARE_PTR<NFBluePrintNodeBase> node)
 		NFColor color = GetBackGroundColor(node->blueprintType);
 
 		auto nodeUI = mNodeView.AddNode(node->id, node->name, color, NFVector2(0, 0));
-		nodeUI->iconPath = variableObjectImage;
+		nodeUI->iconPath = GetNodeIcon(node->blueprintType);
 
 		for (int i = 0; i < node->GetInputArgCount(); ++i)
 		{
@@ -1450,6 +1456,14 @@ void NFBluePrintView::TryToCreateVariable(NFVariableType type)
 	}
 }
 
+void NFBluePrintView::TryToCreateDebuger()
+{
+	if (!bCreatingDebuger)
+	{
+		bCreatingDebuger = true;
+	}
+}
+
 void NFBluePrintView::CreateLogicBlock()
 {
 	if (bCreatingLogicBlock)
@@ -1826,6 +1840,16 @@ void NFBluePrintView::CreateArithmetic()
 	}
 }
 
+void NFBluePrintView::CreateDebuger()
+{
+	if (bCreatingDebuger)
+	{
+		m_pBluePrintModule->AddDebugger(mCurrentLogicBlockID, m_pKernelModule->CreateGUID(), "Debugger");
+
+		bCreatingDebuger = false;
+	}
+}
+
 NFColor NFBluePrintView::GetBackGroundColor(NFBlueprintType type)
 {
 	NFColor color = NFColor::DEFAULT;
@@ -1947,6 +1971,7 @@ std::string NFBluePrintView::GetNodeIcon(NFBlueprintType type)
 			imageName = nodeCustomImage;
 			break;
 	default:
+		imageName = nodeUnknowImage;
 		break;
 	}
 

@@ -52,10 +52,12 @@ public:
 	void TryToCreateExecuter(NFExecuterType type);
 	void TryToCreateModifier(NFModifierType type);
 	void TryToCreateVariable(NFVariableType type);
+	void TryToCreateDebuger();
 
 	NFGUID GetCurrentObjectID();
 	void SetCurrentObjectID(const NFGUID& id);
 
+	NFGUID GetCurrentLogicBlockID();
 	void SetCurrentLogicBlockID(const NFGUID& id);
 
 	const NFTreeView& GetTreeView();
@@ -113,6 +115,7 @@ private:
 	void CreateModifier();
 	void CreateVariable();
 	void CreateArithmetic();
+	void CreateDebuger();
 
 
 private:
@@ -148,6 +151,8 @@ private:
 
 	NFVariableType valueType;
 	bool bCreatingVariable = false;
+
+	bool bCreatingDebuger = false;
 
 	NFTreeView mTreeView;
 	NFNodeView mNodeView;
