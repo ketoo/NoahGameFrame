@@ -1,6 +1,9 @@
 include_directories(
 	./)
 
+include_directories(
+	./gl3w)
+
 set(ProjectName "NFUIPlugin")
 
 file(GLOB NFUIPlugin_ROOT_Cpp
