@@ -45,8 +45,6 @@ cd ../../
 
 cd _Out/
 chmod 777 *.sh
-cd  Tester/
-chmod 777 *.sh
-cd ../../
+cd ../
 
 #pwd

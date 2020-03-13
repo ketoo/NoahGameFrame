@@ -309,7 +309,7 @@ bool NFPluginManager::LoadStaticPlugin()
 	CREATE_PLUGIN(this, NFSecurityPlugin)
 	CREATE_PLUGIN(this, NFTestPlugin)
 
-#if NF_PLATFORM != NF_PLATFORM_LINUX
+#if NF_PLATFORM == NF_PLATFORM_APPLE || NF_PLATFORM == NF_PLATFORM_WIN
 	CREATE_PLUGIN(this, NFRenderPlugin)
 	CREATE_PLUGIN(this, NFBluePrintPlugin)
 #endif
