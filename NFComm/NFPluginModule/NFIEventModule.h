@@ -68,10 +68,20 @@ public:
 		return AddEventCallBack(self, nEventID, functor);
 	}
 
+    //can be used for common event
+    template<typename BaseType>
+    bool AddCommonEventCallBack(BaseType* pBase, int (BaseType::* handler)(const NFGUID&, const int, const NFDataList&))
+    {
+        OBJECT_EVENT_FUNCTOR functor = std::bind(handler, pBase, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3);
+        return AddCommonEventCallBack( functor);
+    }
+
+
 protected:
 
 	virtual bool AddEventCallBack(const int nEventID, const MODULE_EVENT_FUNCTOR cb) = 0;
-	virtual bool AddEventCallBack(const NFGUID self, const int nEventID, const OBJECT_EVENT_FUNCTOR cb) = 0;
+    virtual bool AddEventCallBack(const NFGUID self, const int nEventID, const OBJECT_EVENT_FUNCTOR cb) = 0;
+    virtual bool AddCommonEventCallBack(const OBJECT_EVENT_FUNCTOR cb) = 0;
 
 };
 

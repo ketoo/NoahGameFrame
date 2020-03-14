@@ -52,14 +52,15 @@ public:
 	void TryToCreateExecuter(NFExecuterType type);
 	void TryToCreateModifier(NFModifierType type);
 	void TryToCreateVariable(NFVariableType type);
+	void TryToCreateDebuger();
 
 	NFGUID GetCurrentObjectID();
 	void SetCurrentObjectID(const NFGUID& id);
 
+	NFGUID GetCurrentLogicBlockID();
 	void SetCurrentLogicBlockID(const NFGUID& id);
 
-	NFTreeView* GetTreeView();
-	NFNodeView* GetNodeView();
+	const NFTreeView& GetTreeView();
 	
 private:
 	void HandlerSelected(const NFGUID& id, const bool doubleClick);
@@ -114,6 +115,7 @@ private:
 	void CreateModifier();
 	void CreateVariable();
 	void CreateArithmetic();
+	void CreateDebuger();
 
 
 private:
@@ -150,8 +152,10 @@ private:
 	NFVariableType valueType;
 	bool bCreatingVariable = false;
 
-	NFTreeView* m_pTreeView;
-	NFNodeView* m_pNodeView;
+	bool bCreatingDebuger = false;
+
+	NFTreeView mTreeView;
+	NFNodeView mNodeView;
 
 private:
 	NFIBluePrintModule* m_pBluePrintModule;

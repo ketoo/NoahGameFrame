@@ -109,13 +109,6 @@
     <ClInclude Include="NFRenderModule.h" />
     <ClInclude Include="NFUIModule.h" />
     <ClInclude Include="NFRenderPlugin.h" />
-    <ClInclude Include="Scene\NFCameraComponent.h" />
-    <ClInclude Include="Scene\NFLightComponent.h" />
-    <ClInclude Include="Scene\NFMaterialComponent.h" />
-    <ClInclude Include="Scene\NFMeshComponent.h" />
-    <ClInclude Include="Scene\NFMeshLoader.h" />
-    <ClInclude Include="Scene\NFScene.h" />
-    <ClInclude Include="Scene\NFSceneNode.h" />
     <ClInclude Include="UI\NFBluePrintView.h" />
     <ClInclude Include="UI\NFConsoleView.h" />
     <ClInclude Include="UI\NFContainerView.h" />
@@ -123,10 +116,12 @@
     <ClInclude Include="UI\NFGodView.h" />
     <ClInclude Include="UI\NFHierachyView.h" />
     <ClInclude Include="UI\NFInspectorView.h" />
+    <ClInclude Include="UI\NFNodeSystem.h" />
     <ClInclude Include="UI\NFNodeView.h" />
     <ClInclude Include="UI\NFOperatorView.h" />
     <ClInclude Include="UI\NFProfileView.h" />
     <ClInclude Include="UI\NFProjectView.h" />
+    <ClInclude Include="UI\NFSceneSystem.h" />
     <ClInclude Include="UI\NFSceneView.h" />
     <ClInclude Include="UI\NFTreeView.h" />
   </ItemGroup>
@@ -150,13 +145,6 @@
     <ClCompile Include="NFRenderModule.cpp" />
     <ClCompile Include="NFUIModule.cpp" />
     <ClCompile Include="NFRenderPlugin.cpp" />
-    <ClCompile Include="Scene\NFCameraComponent.cpp" />
-    <ClCompile Include="Scene\NFLightComponent.cpp" />
-    <ClCompile Include="Scene\NFMaterialComponent.cpp" />
-    <ClCompile Include="Scene\NFMeshComponent.cpp" />
-    <ClCompile Include="Scene\NFMeshLoader.cpp" />
-    <ClCompile Include="Scene\NFScene.cpp" />
-    <ClCompile Include="Scene\NFSceneNode.cpp" />
     <ClCompile Include="UI\NFBluePrintView.cpp" />
     <ClCompile Include="UI\NFConsoleView.cpp" />
     <ClCompile Include="UI\NFContainerView.cpp" />
@@ -164,10 +152,12 @@
     <ClCompile Include="UI\NFGodView.cpp" />
     <ClCompile Include="UI\NFHierachyView.cpp" />
     <ClCompile Include="UI\NFInspectorView.cpp" />
+    <ClCompile Include="UI\NFNodeSystem.cpp" />
     <ClCompile Include="UI\NFNodeView.cpp" />
     <ClCompile Include="UI\NFOperatorView.cpp" />
     <ClCompile Include="UI\NFProfileView.cpp" />
     <ClCompile Include="UI\NFProjectView.cpp" />
+    <ClCompile Include="UI\NFSceneSystem.cpp" />
     <ClCompile Include="UI\NFSceneView.cpp" />
     <ClCompile Include="UI\NFTreeView.cpp" />
   </ItemGroup>

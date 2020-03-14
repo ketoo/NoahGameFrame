@@ -30,6 +30,8 @@
 #include "NFComm/NFPluginModule/NFIBluePrintModule.h"
 #include "NFComm/NFPluginModule/NFIClassModule.h"
 #include "NFComm/NFPluginModule/NFIElementModule.h"
+#include "NFComm/NFPluginModule/NFIEventModule.h"
+#include "NFComm/NFPluginModule/NFIBPVirtualMachineModule.h"
 
 class NFHierachyView : public NFIView
 {
@@ -76,7 +78,9 @@ private:
 	NFIClassModule* m_pClassModule;
 	NFIElementModule* m_pElementModule;
 	NFIKernelModule* m_pKernelModule;
+    NFIEventModule* m_pEventModule;
     NFIBluePrintModule* m_pBluePrintModule;
+    NFIBPVirtualMachineModule* m_pBPVirtualMachineModule;
 };
 
 #endif

@@ -245,6 +245,7 @@ inline bool NFPluginManager::Init()
 	for (; itInstance != mPluginInstanceMap.end(); itInstance++)
 	{
 		SetCurrentPlugin(itInstance->second);
+		std::cout << itInstance->first << std::endl;
 		itInstance->second->Init();
 	}
 
@@ -308,7 +309,7 @@ bool NFPluginManager::LoadStaticPlugin()
 	CREATE_PLUGIN(this, NFSecurityPlugin)
 	CREATE_PLUGIN(this, NFTestPlugin)
 
-#if NF_PLATFORM != NF_PLATFORM_LINUX
+#if NF_PLATFORM == NF_PLATFORM_APPLE || NF_PLATFORM == NF_PLATFORM_WIN
 	CREATE_PLUGIN(this, NFRenderPlugin)
 	CREATE_PLUGIN(this, NFBluePrintPlugin)
 #endif

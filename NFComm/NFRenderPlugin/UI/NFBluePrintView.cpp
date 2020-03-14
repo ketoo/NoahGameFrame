@@ -84,11 +84,7 @@ NFBluePrintView::NFBluePrintView(NFIPluginManager* p, NFViewType vt) : NFIView(p
 	int CUSTOM = IM_COL32(104, 176, 224, 255);
 
 
-   m_pNodeView = NF_NEW NFNodeView(p);
-   m_pTreeView = NF_NEW NFTreeView(p);
-
-
-    m_pNodeView->ResetOffset(NFVector2::Zero());
+    mNodeView.ResetOffset(NFVector2::Zero());
 
    SmartBind<LINK_EVENT_FUNCTOR> linkBind;
    auto bindTest1 = std::bind(&NFBluePrintView::TryNewLinkEvent, this, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3, std::placeholders::_4);
@@ -98,21 +94,21 @@ NFBluePrintView::NFBluePrintView(NFIPluginManager* p, NFViewType vt) : NFIView(p
    //hash value
    std::cout << linkBind.name << std::endl;
 
-   m_pNodeView->SetUpNewLinkCallBack(std::bind(&NFBluePrintView::TryNewLinkEvent, this, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3, std::placeholders::_4));
-   m_pNodeView->SetUpDeleteLinkCallBack(std::bind(&NFBluePrintView::TryDeleteLinkEvent, this, std::placeholders::_1));
+   mNodeView.SetUpNewLinkCallBack(std::bind(&NFBluePrintView::TryNewLinkEvent, this, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3, std::placeholders::_4));
+   mNodeView.SetUpDeleteLinkCallBack(std::bind(&NFBluePrintView::TryDeleteLinkEvent, this, std::placeholders::_1));
    
-   m_pNodeView->SetPinRenderCallBack(std::bind(&NFBluePrintView::PinRender, this, std::placeholders::_1));
+   mNodeView.SetPinRenderCallBack(std::bind(&NFBluePrintView::PinRender, this, std::placeholders::_1));
 
-   m_pNodeView->SetNodeRenderBeforePinInCallBack(std::bind(&NFBluePrintView::NodeRenderBeforePinIn, this, std::placeholders::_1));
-   m_pNodeView->SetNodeRenderAfterPinInCallBack(std::bind(&NFBluePrintView::NodeRenderAfterPinIn, this, std::placeholders::_1));
-   m_pNodeView->SetNodeRenderBeforePinOutCallBack(std::bind(&NFBluePrintView::NodeRenderBeforePinOut, this, std::placeholders::_1));
-   m_pNodeView->SetNodeRenderAfterPinOutCallBack(std::bind(&NFBluePrintView::NodeRenderAfterPinOut, this, std::placeholders::_1));
-
-
+   mNodeView.SetNodeRenderBeforePinInCallBack(std::bind(&NFBluePrintView::NodeRenderBeforePinIn, this, std::placeholders::_1));
+   mNodeView.SetNodeRenderAfterPinInCallBack(std::bind(&NFBluePrintView::NodeRenderAfterPinIn, this, std::placeholders::_1));
+   mNodeView.SetNodeRenderBeforePinOutCallBack(std::bind(&NFBluePrintView::NodeRenderBeforePinOut, this, std::placeholders::_1));
+   mNodeView.SetNodeRenderAfterPinOutCallBack(std::bind(&NFBluePrintView::NodeRenderAfterPinOut, this, std::placeholders::_1));
 
 
-   m_pTreeView->SetSelectedNodeFunctor(std::bind(&NFBluePrintView::HandlerSelected, this, std::placeholders::_1, std::placeholders::_2));
-   m_pTreeView->SetName(GET_CLASS_NAME(NFBluePrintView));
+
+
+   mTreeView.SetSelectedNodeFunctor(std::bind(&NFBluePrintView::HandlerSelected, this, std::placeholders::_1, std::placeholders::_2));
+   mTreeView.SetName(GET_CLASS_NAME(NFBluePrintView));
 
    m_pUIModule = pPluginManager->FindModule<NFIUIModule>();
    m_pBluePrintModule = pPluginManager->FindModule<NFIBluePrintModule>();
@@ -126,11 +122,6 @@ NFBluePrintView::NFBluePrintView(NFIPluginManager* p, NFViewType vt) : NFIView(p
 
 NFBluePrintView::~NFBluePrintView()
 {
-   delete m_pNodeView;
-   m_pNodeView = nullptr;
-
-   delete m_pTreeView;
-   m_pTreeView = nullptr;
 }
 
 bool NFBluePrintView::Execute()
@@ -148,10 +139,10 @@ bool NFBluePrintView::Execute()
 	ImGui::SameLine();
 	if (ImGui::Button("return to center"))
 	{
-        m_pNodeView->ResetOffset(NFVector2::Zero());
+        mNodeView.ResetOffset(NFVector2::Zero());
 	}
 
-   m_pNodeView->Execute();
+   mNodeView.Execute();
    
    CreateLogicBlock();
    CreateMonitor();
@@ -159,6 +150,7 @@ bool NFBluePrintView::Execute()
    CreateExecuter();
    CreateModifier();
    CreateVariable();
+   CreateDebuger();
    CreateArithmetic();
 
    if (ImGui::IsWindowFocused())
@@ -182,7 +174,12 @@ void NFBluePrintView::SetCurrentObjectID(const NFGUID& id)
 {
 	mCurrentObjectID = id;
 
-	m_pNodeView->MoveToNode(mCurrentObjectID);
+	mNodeView.MoveToNode(mCurrentObjectID);
+}
+
+NFGUID NFBluePrintView::GetCurrentLogicBlockID()
+{
+	return mCurrentLogicBlockID;
 }
 
 void NFBluePrintView::SetCurrentLogicBlockID(const NFGUID& id)
@@ -194,7 +191,7 @@ void NFBluePrintView::SetCurrentLogicBlockID(const NFGUID& id)
 
 	mCurrentLogicBlockID = id;
 
-	m_pNodeView->CleanNodes();
+	mNodeView.CleanNodes();
 
 	auto logicBlock = m_pBluePrintModule->GetLogicBlock(mCurrentLogicBlockID);
 	if (logicBlock)
@@ -228,20 +225,15 @@ void NFBluePrintView::SetCurrentLogicBlockID(const NFGUID& id)
 	//add all links
 }
 
-NFTreeView* NFBluePrintView::GetTreeView()
+const NFTreeView& NFBluePrintView::GetTreeView()
 {
-	return m_pTreeView;
-}
-
-NFNodeView* NFBluePrintView::GetNodeView()
-{
-	return m_pNodeView;
+	return mTreeView;
 }
 
 void NFBluePrintView::SubRender()
 {
 	//ImGui::GetIO().KeyCtrl)
-   m_pTreeView->Execute();
+   mTreeView.Execute();
 }
 
 void NFBluePrintView::HandlerSelected(const NFGUID& id, const bool doubleClick)
@@ -277,19 +269,19 @@ void NFBluePrintView::NodeModifyEvent(const NFGUID& id, const bool create)
 		auto node = m_pBluePrintModule->FindNode(id);
 		if (node->blueprintType == NFBlueprintType::LOGICBLOCK)
 		{
-			m_pTreeView->AddTreeNode(node->id, node->name);
+			mTreeView.AddTreeNode(node->id, node->name);
 		}
 		else
 		{
-			m_pTreeView->AddSubTreeNode(node->logicBlockId, node->id, node->name);
+			mTreeView.AddSubTreeNode(node->logicBlockId, node->id, node->name);
 
 			AddNode(node);
 		}
 	}
 	else
 	{
-		m_pTreeView->DeleteTreeNode(id);
-		m_pNodeView->DeleteNode(id);
+		mTreeView.DeleteTreeNode(id);
+		mNodeView.DeleteNode(id);
 	}
 }
 
@@ -311,7 +303,7 @@ void NFBluePrintView::LinkModifyEvent(const NFGUID& id, const bool create)
 					if (inputAgr->id == linkData->endAttr)
 					{
 						color = GetPinColor(inputAgr->valueType);
-						m_pNodeView->ModifyPinColor(inputAgr->id, color);
+						mNodeView.ModifyPinColor(inputAgr->id, color);
 
 						break;
 					}
@@ -319,11 +311,11 @@ void NFBluePrintView::LinkModifyEvent(const NFGUID& id, const bool create)
 				
 			}
 
-			m_pNodeView->AddLink(id, linkData->startNode, linkData->endNode, linkData->startAttr, linkData->endAttr, color);
+			mNodeView.AddLink(id, linkData->startNode, linkData->endNode, linkData->startAttr, linkData->endAttr, color);
 		}
 		else
 		{
-			m_pNodeView->DeleteLink(linkData->startNode, linkData->endNode, linkData->startAttr, linkData->endAttr);
+			mNodeView.DeleteLink(linkData->startNode, linkData->endNode, linkData->startAttr, linkData->endAttr);
 		}
 	}
 }
@@ -334,8 +326,8 @@ void NFBluePrintView::AddNode(NF_SHARE_PTR<NFBluePrintNodeBase> node)
 	{
 		NFColor color = GetBackGroundColor(node->blueprintType);
 
-		auto nodeUI = m_pNodeView->AddNode(node->id, node->name, color, NFVector2(0, 0));
-		nodeUI->iconPath = variableObjectImage;
+		auto nodeUI = mNodeView.AddNode(node->id, node->name, color, NFVector2(0, 0));
+		nodeUI->iconPath = GetNodeIcon(node->blueprintType);
 
 		for (int i = 0; i < node->GetInputArgCount(); ++i)
 		{
@@ -361,7 +353,7 @@ void NFBluePrintView::AddNode(NF_SHARE_PTR<NFBluePrintNodeBase> node)
 			std::string imageName = GetPinIcon(variableArg->valueType);
 			NFPinShape shape = GetPinShape(variableArg->valueType);
 			
-			m_pNodeView->AddPinIn(node->id, variableArg->id, variableArg->name, imageName, pinColor, shape);
+			mNodeView.AddPinIn(node->id, variableArg->id, variableArg->name, imageName, pinColor, shape);
 		}
 
 		for (int i = 0; i < node->GetOutputArgCount(); ++i)
@@ -381,7 +373,7 @@ void NFBluePrintView::AddNode(NF_SHARE_PTR<NFBluePrintNodeBase> node)
 			std::string imageName = GetPinIcon(variableArg->valueType);
 			NFPinShape shape = GetPinShape(variableArg->valueType);
 
-			m_pNodeView->AddPinOut(node->id, variableArg->id, variableArg->name, imageName, pinColor, shape);
+			mNodeView.AddPinOut(node->id, variableArg->id, variableArg->name, imageName, pinColor, shape);
 		}
 	}
 }
@@ -455,7 +447,7 @@ bool NFBluePrintView::TryDeleteLinkEvent(const NFGUID& id)
 {
 	if (m_pBluePrintModule->DeleteLink(id))
 	{
-		m_pNodeView->DeleteLink(id);
+		mNodeView.DeleteLink(id);
 	}
 
 	return true;
@@ -463,7 +455,7 @@ bool NFBluePrintView::TryDeleteLinkEvent(const NFGUID& id)
 
 void NFBluePrintView::PinRender(NFNodePin* pin)
 {
-	NFGUID nodeID = m_pNodeView->GetNodeByAttriId(pin->nodeId);
+	NFGUID nodeID = mNodeView.GetNodeByAttriId(pin->nodeId);
 	auto node = m_pBluePrintModule->FindNode(pin->nodeId);
 	if (node)
 	{
@@ -1464,6 +1456,14 @@ void NFBluePrintView::TryToCreateVariable(NFVariableType type)
 	}
 }
 
+void NFBluePrintView::TryToCreateDebuger()
+{
+	if (!bCreatingDebuger)
+	{
+		bCreatingDebuger = true;
+	}
+}
+
 void NFBluePrintView::CreateLogicBlock()
 {
 	if (bCreatingLogicBlock)
@@ -1840,6 +1840,16 @@ void NFBluePrintView::CreateArithmetic()
 	}
 }
 
+void NFBluePrintView::CreateDebuger()
+{
+	if (bCreatingDebuger)
+	{
+		m_pBluePrintModule->AddDebugger(mCurrentLogicBlockID, m_pKernelModule->CreateGUID(), "Debugger");
+
+		bCreatingDebuger = false;
+	}
+}
+
 NFColor NFBluePrintView::GetBackGroundColor(NFBlueprintType type)
 {
 	NFColor color = NFColor::DEFAULT;
@@ -1961,6 +1971,7 @@ std::string NFBluePrintView::GetNodeIcon(NFBlueprintType type)
 			imageName = nodeCustomImage;
 			break;
 	default:
+		imageName = nodeUnknowImage;
 		break;
 	}
 

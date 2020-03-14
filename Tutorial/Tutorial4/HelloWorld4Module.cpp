@@ -45,12 +45,11 @@ void NFHelloWorld4Module::RequestAsyEnd(NFActorMessage& actorMessage)
 bool NFHelloWorld4Module::AfterInit()
 {
 	std::cout << "Hello, world4, AfterInit, Main thread: " << std::this_thread::get_id() << std::endl;
-	return true;
 
 	///////////////////////////
 	std::cout << "start Benchmarks " << std::endl;
 	//100M
-	int messageCount = 100000000;
+	int messageCount = 1000000;
 	{
 		std::cout << "Test for ConcurrentQueue" << std::endl;
 		moodycamel::ConcurrentQueue<int> q;

@@ -88,16 +88,16 @@ public:
    NFTreeView* mTreeView;
 };
 
-class NFTreeView : public NFIView
+class NFTreeView
 {
 public:
-	NFTreeView(NFIPluginManager* p);
+	NFTreeView();
 	~NFTreeView();
 
 	void SetName(const std::string& name);
 	void SetSelectedNode(const NFGUID& nodeId, bool doubleClick);
 	void SetSelectedNodeFunctor(std::function<void(const NFGUID&, const bool)> functor);
-	const NFGUID GetSelectedNode();
+	const NFGUID GetSelectedNode() const;
 
 	void AddTreeNode(const NFGUID guid, const std::string& name);
 	NF_SHARE_PTR<NFTreeNode> FindTreeNode(const NFGUID guid);
@@ -114,14 +114,11 @@ public:
 private:
 	//maybe tree node, maybe leaf node
 	NFGUID mSelectedNode;
+	std::string name;
 
 	std::function<void(const NFGUID&, const bool)> mSelectedFuntor;
 
 	std::map<NFGUID, NF_SHARE_PTR<NFTreeNode>> mTrees;
-
-
-
-	NFIUIModule* m_pUIModule;
 };
 
 #endif

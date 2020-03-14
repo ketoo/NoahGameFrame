@@ -86,19 +86,19 @@ public:
 
 	}
 
-	int GenerateNodeId()
+	int static GenerateNodeId()
 	{
 		static int index = 0;
 		return index++;
 	}
 
-	int GeneratePinId()
+	int static GeneratePinId()
 	{
 		static int index = 0;
 		return index++;
 	}
 
-	int GenerateLinkId()
+	int static GenerateLinkId()
 	{
 		static int index = 0;
 		return index++;

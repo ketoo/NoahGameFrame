@@ -31,7 +31,8 @@ bool NFBPVMEventModule::Awake()
 {
     m_pBluePrintModule = pPluginManager->FindModule<NFIBluePrintModule>();
     m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>();
-
+    m_pEventModule = pPluginManager->FindModule<NFIEventModule>();
+    
 	return true;
 }
 
@@ -45,6 +46,8 @@ bool NFBPVMEventModule::AfterInit()
     m_pKernelModule->RegisterCommonClassEvent(this, &NFBPVMEventModule::OnClassCommonEvent);
     m_pKernelModule->RegisterCommonPropertyEvent(this, &NFBPVMEventModule::OnPropertyCommonEvent);
     m_pKernelModule->RegisterCommonRecordEvent(this, &NFBPVMEventModule::OnRecordCommonEvent);
+
+    m_pEventModule->AddCommonEventCallBack(this, &NFBPVMEventModule::OnEventCommonEvent);
 
 	return true;
 }
@@ -82,6 +85,31 @@ bool NFBPVMEventModule::Finalize()
 bool NFBPVMEventModule::OnReloadPlugin()
 {
 	return true;
+}
+
+int NFBPVMEventModule::OnEventCommonEvent(const NFGUID& self, const int eventID, const NFDataList& var)
+{
+    auto item = mBluePrintBlockAction.First();
+    while (item)
+    {
+        auto eventData = item->mGameEvent.GetElement(eventID);
+        if (eventData)
+        {
+            NFGUID monitorID;
+            auto monitorData =  eventData->First(monitorID);
+            while (monitorData && !monitorID.IsNull())
+            {
+
+                monitorID.SetHead(0);
+                monitorID.SetData(0);
+                monitorData = eventData->Next(monitorID);
+            }
+        }
+
+        item = mBluePrintBlockAction.Next();
+    }
+
+    return 0;
 }
 
 int NFBPVMEventModule::OnClassCommonEvent(const NFGUID& self, const std::string& strClassNames, const CLASS_OBJECT_EVENT eClassEvent, const NFDataList& var)

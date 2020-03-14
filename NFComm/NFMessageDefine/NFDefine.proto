@@ -182,8 +182,9 @@ enum ESceneType
 	NORMAL_SCENE 			= 0;//public town
 	SINGLE_CLONE_SCENE 		= 1;//single boss underground city
 	MULTI_CLONE_SCENE 		= 2;//world boss underground city
-	HOME_SCENE 				= 3;//private
-	CLAN_SCENE 				= 4;//private
+	PVP_MODE_SCENE 			= 10;
+	MVM_MODE_SCENE	 		= 11;
+	SURVIVAL_MODE_SCENE 	= 12;
 }
 
 enum ENPCType

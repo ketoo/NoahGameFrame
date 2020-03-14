@@ -49,6 +49,7 @@ class NFIVariable;
 class NFIExecuter;
 class NFIModifier;
 class NFIArithmetic;
+class NFIDebugger;
 
 class NFDataLink;
 
@@ -73,6 +74,7 @@ public:
 	virtual NF_SHARE_PTR<NFIExecuter> AddExecuter(const NFGUID& logicBlockId, const NFExecuterType TYPE, const NFGUID& id, const std::string& name) = 0;
 	virtual NF_SHARE_PTR<NFIModifier> AddModifier(const NFGUID& logicBlockId, const NFModifierType type, const NFGUID& id, const std::string& name) = 0;
 	virtual NF_SHARE_PTR<NFIArithmetic> AddArithmetic(const NFGUID& logicBlockId, const NFArithmeticType type, const NFGUID& id, const std::string& name) = 0;
+	virtual NF_SHARE_PTR<NFIDebugger> AddDebugger(const NFGUID& logicBlockId, const NFGUID& id, const std::string& name) = 0;
 
 	virtual void AddLink(const NFGUID& logicBlockId, const NFGUID& id, const NFGUID& startNode, const NFGUID& endNode, const NFGUID& startPin, const NFGUID& endPin) = 0;
 	virtual NF_SHARE_PTR<NFDataLink> GetLink(const NFGUID& logicBlockId, const NFGUID& startNode, const NFGUID& endNode, const NFGUID& startPin, const NFGUID& endPin) = 0;
@@ -281,6 +283,15 @@ NF_SMART_ENUM(NFVariableType,
 	Dictionary,
 	)
 
+//----------FOR DEBUGER--------------
+
+NF_SMART_ENUM(NFDebugerInputArg,
+	LastNode,
+)
+
+NF_SMART_ENUM(NFDebugerOutputArg,
+	NextNode,
+)
 ///////////FOR MODIFIER BEGIN///////////////////////////
 //SetProperty 3 args: NFGUID objectID, string propertyName, int value
 //SetRecord 5 args: NFGUID objectID, string recordName, int row, int col, int value
@@ -830,6 +841,16 @@ public:
 	NFExecuterType executerType;
 };
 
+class NFIDebugger : public NFBluePrintNodeBase
+{
+public:
+	NFIDebugger()
+	{
+		blueprintType = NFBlueprintType::DEBUGER;
+	}
+	//NFExecuterType executerType;
+};
+
 class NFLogicBlock : public NFBluePrintNodeBase
 {
 private:
@@ -878,6 +899,7 @@ public:
 	std::list<NF_SHARE_PTR<NFIVariable>> variables;
 	std::list<NF_SHARE_PTR<NFIModifier>> modifiers;
 	std::list<NF_SHARE_PTR<NFIArithmetic>> arithmetics;
+	std::list<NF_SHARE_PTR<NFIDebugger>> debuggers;
 
 	std::list<NF_SHARE_PTR<NFDataLink>> dataLinks;
 

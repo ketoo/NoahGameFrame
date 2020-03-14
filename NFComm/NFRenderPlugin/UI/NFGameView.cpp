@@ -26,18 +26,28 @@
 #include "NFGameView.h"
 #include "NFUIModule.h"
 
+
 NFGameView::NFGameView(NFIPluginManager* p, NFViewType vt) : NFIView(p, vt, GET_CLASS_NAME(NFGameView))
 {
+    m_pKernelModule = p->FindModule<NFIKernelModule>();
 
+    mNodeSystem.AddNode(m_pKernelModule->CreateGUID(), "test0");
+    mNodeSystem.AddNode(m_pKernelModule->CreateGUID(), "test1", NFVector2(0, -100));
+    mNodeSystem.AddNode(m_pKernelModule->CreateGUID(), "test1", NFVector2(50, 100));
 }
 
 bool NFGameView::Execute()
 {
 	//1. the project root folder is NFDataCfg
+    if (ImGui::Button("return to center"))
+    {
+        mNodeSystem.ResetToCenter();
+
+    }
+
  
-   if (ImGui::IsWindowFocused())
-   {
-   }
+
+    mNodeSystem.Execute();
 
 	return false;
 }

@@ -68,6 +68,7 @@ public:
     virtual NF_SHARE_PTR<NFIExecuter> AddExecuter(const NFGUID& logicBlockId, const NFExecuterType type, const NFGUID& id, const std::string& name);
     virtual NF_SHARE_PTR<NFIModifier> AddModifier(const NFGUID& logicBlockId, const NFModifierType type, const NFGUID& id, const std::string& name);
     virtual NF_SHARE_PTR<NFIArithmetic> AddArithmetic(const NFGUID& logicBlockId, const NFArithmeticType type, const NFGUID& id, const std::string& name);
+    virtual NF_SHARE_PTR<NFIDebugger> AddDebugger(const NFGUID& logicBlockId, const NFGUID& id, const std::string& name);
 
     virtual void AddLink(const NFGUID& logicBlockId, const NFGUID& id, const NFGUID& startNode, const NFGUID& endNode, const NFGUID& startPin, const NFGUID& endPin);
     virtual NF_SHARE_PTR<NFDataLink> GetLink(const NFGUID& logicBlockId, const NFGUID& startNode, const NFGUID& endNode, const NFGUID& startPin, const NFGUID& endPin);

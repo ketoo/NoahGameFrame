@@ -90,7 +90,7 @@ bool NFUIModule::Execute()
 	if (!done)
 	{
 		ImGuiIO& io = ImGui::GetIO();
-
+		ImVec4 clear_color(0.45f, 0.55f, 0.60f, 1.00f);
 		// Poll and handle events (inputs, window resize, etc.)
 	   // You can read the io.WantCaptureMouse, io.WantCaptureKeyboard flags to tell if dear imgui wants to use your inputs.
 	   // - When io.WantCaptureMouse is true, do not dispatch mouse input data to your main application.

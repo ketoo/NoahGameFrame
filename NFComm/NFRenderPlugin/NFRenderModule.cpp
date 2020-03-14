@@ -29,29 +29,17 @@ bool NFRenderModule::Awake()
 {
     SetupRenderer();
 
-    if (mCurrentScene)
-    {
-        mCurrentScene->ReadyExecute();
-    }
 	return true;
 }
 
 bool NFRenderModule::Init()
 {
-    if (mCurrentScene)
-    {
-        mCurrentScene->ReadyExecute();
-    }
    
 	return true;
 }
 
 bool NFRenderModule::AfterInit()
 {
-    if (mCurrentScene)
-    {
-        mCurrentScene->ReadyExecute();
-    }
 
 
 	return true;
@@ -65,21 +53,12 @@ bool NFRenderModule::CheckConfig()
 
 bool NFRenderModule::ReadyExecute()
 {
-    if (mCurrentScene)
-    {
-        mCurrentScene->ReadyExecute();
-    }
 
 	return true;
 }
 
 bool NFRenderModule::Execute()
 {
-    if (mCurrentScene)
-    {
-        mCurrentScene->Execute();
-    }
-
 	return true;
 }
 
@@ -111,7 +90,7 @@ bool NFRenderModule::OnReloadPlugin()
 
 int NFRenderModule::SetupRenderer()
 {
-    mCurrentScene = NF_SHARE_PTR<NFScene>(new NFScene());
+    //mCurrentScene = NF_SHARE_PTR<NFScene>(new NFScene());
 
 
     return 0;

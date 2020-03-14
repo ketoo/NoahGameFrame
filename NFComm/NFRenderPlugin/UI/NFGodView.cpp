@@ -38,24 +38,35 @@ NFGodView::NFGodView(NFIPluginManager* p, NFViewType vt) : NFIView(p, vt, GET_CL
 	
 	m_pKernelModule->RegisterCommonClassEvent(this, &NFGodView::OnClassCommonEvent);
 
-	m_pNodeView = NF_NEW NFNodeView(p);
-	m_pTreeView = NF_NEW NFTreeView(p);
+	//m_pNodeView->SetHoverNodeCallBack(std::bind(&NFGodView::HandlerNodeHovered, this, std::placeholders::_1));
+	mNodeSystem.SetBeginRenderCallBack(std::bind(&NFGodView::DrawMapData, this));
 
-    m_pNodeView->ResetOffset(NFVector2::Zero());
-	m_pNodeView->SetHoverNodeCallBack(std::bind(&NFGodView::HandlerNodeHovered, this, std::placeholders::_1));
-	m_pNodeView->SetBeginRenderCallBack(std::bind(&NFGodView::HandlerForBeginRender, this));
+	mTreeView.SetSelectedNodeFunctor(std::bind(&NFGodView::HandlerSelected, this, std::placeholders::_1, std::placeholders::_2));
+	mTreeView.SetName(GET_CLASS_NAME(NFGodView));
 
-	m_pTreeView->SetSelectedNodeFunctor(std::bind(&NFGodView::HandlerSelected, this, std::placeholders::_1, std::placeholders::_2));
-	m_pTreeView->SetName(GET_CLASS_NAME(NFGodView));
+	for (int i = 0; i <= 10; ++i)
+	{
+		mLayerColor.push_back(ImColor(255, 255, 255, 100));
+	}
+	//mLayerColor[0] = 0;
+	//mLayerColor[1] = 0;
+	mLayerColor[2] = ImColor(255, 255, 255, 100);
+	mLayerColor[3] = ImColor(255, 255, 255, 170);
+	mLayerColor[4] = ImColor(241, 170, 0, 100);
+	mLayerColor[5] = ImColor(241, 170, 0, 200);
+	mLayerColor[6] = ImColor(228, 110, 0, 200);
+	mLayerColor[7] = ImColor(241, 170, 170, 200);
+	mLayerColor[8] = ImColor(228, 110, 110, 200);
+	mLayerColor[9] = ImColor(219, 78, 78, 200);
+	mLayerColor[10] = ImColor(255, 78, 0, 255);
+
+	mStairColor = ImColor(0, 255, 255, 255);
+	mTextColor = ImColor(255, 255, 255, 100);
+	mImmovable = ImColor(255, 0, 0, 255);
 }
 
 NFGodView::~NFGodView()
 {
-   delete m_pTreeView;
-   m_pTreeView = nullptr;
-
-   delete m_pNodeView;
-   m_pNodeView = nullptr;
 }
 
 bool NFGodView::Execute()
@@ -152,7 +163,7 @@ bool NFGodView::Execute()
    ImGui::SameLine();
    if (ImGui::Button("return to center"))
    {
-       m_pNodeView->ResetOffset(NFVector2::Zero());
+	   mNodeSystem.ResetToCenter();
    }
 
 	//draw map data as the background
@@ -162,10 +173,11 @@ bool NFGodView::Execute()
    //4. draw the stair with a sign
    //5 how to tell the user about the height of the map
 
-	m_pNodeView->Execute();
+	mNodeSystem.Execute();
 
 	UpdateSceneObjectNodePosition(mSceneID, mGroupID);
 
+	DrawToolBar();
 
 	return true;
 }
@@ -176,8 +188,11 @@ void NFGodView::HandlerSelected(const NFGUID& id, const bool doubleClick)
 
 	if (doubleClick)
 	{
-		NFNodeView* pView = (NFNodeView*)m_pNodeView;
-		pView->MoveToNode(mCurrentObjectID);
+		mNodeSystem.MoveToNode(mCurrentObjectID);
+	}
+	else
+	{
+		mNodeSystem.SelectNode(mCurrentObjectID);
 	}
 
 	//occupy inspectorview
@@ -189,44 +204,118 @@ void NFGodView::HandlerSelected(const NFGUID& id, const bool doubleClick)
 	}
 }
 
-void NFGodView::HandlerForBeginRender()
+void NFGodView::DrawMapData()
 {
-	ImDrawList* draw_list = ImGui::GetWindowDrawList();
-	
 	if (mSceneID > 0 && mGroupID > 0)
 	{
-		//draw
 		auto data = m_pNavigationDataModule->GetMapData(mSceneID, 0);
 		if (data)
 		{
-			for (int i = 0; i < data->tileConfig.mapSize; ++i)
+			int nodeSize = mNodeSystem.GetNodeSize();
+
+			//draw walkable
+
+			for (int i = 0; i < data->tileConfig.mapSize; i++)
 			{
-				for (int j = 0; j < data->tileConfig.mapSize; ++j)
+				for (int j = 0; j < data->tileConfig.mapSize; j++)
 				{
 					auto voxel = data->data.GetElement(NFGUID(i, j));
-					if (voxel && voxel->movable <= 0)
+					if (voxel)
 					{
+						NFVector2 v1(i * nodeSize * data->tileConfig.cellSizeX, j * -nodeSize * data->tileConfig.cellSizeZ);
+						NFVector2 v2(v1.X() + nodeSize * data->tileConfig.cellSizeX, v1.Y() - nodeSize * data->tileConfig.cellSizeX);
+
 						if (voxel->layer > 1)
 						{
-							int color = NFColor::DEFAULT;
-							//int size = imnodes::GetStyle().grid_spacing / 2;
-
-							if (voxel->layer == 3)
+							int color = mLayerColor[voxel->layer];
+							mNodeSystem.DrawRectFilled(v1, v2, color);
+						}
+						{
+							
+							//DrawRectFilled(v1, v2, color);
+							if (voxel->movable <= 0)
 							{
-								color = NFColor::WORKFLOW;
+								mNodeSystem.DrawCircle((v1 + v2) / 2, mNodeSystem.GetNodeSize() * 0.75, mImmovable);
 							}
-							else if (voxel->layer == 4)
+							if (voxel->stair_h > 0)
 							{
-								color = NFColor::PININ;
+								mNodeSystem.DrawRect(v1, v2, mStairColor);
+								mNodeSystem.DrawText(NFVector2(v1.X(), v2.Y()), mStairColor, " ||||");
 							}
-
-							draw_list->AddRectFilled(ImVec2(imnodes::GetStyle().grid_spacing * i, imnodes::GetStyle().grid_spacing * j), ImVec2(imnodes::GetStyle().grid_spacing, imnodes::GetStyle().grid_spacing), color);
+							if (voxel->stair_v > 0)
+							{
+								mNodeSystem.DrawRect(v1, v2, mStairColor);
+								mNodeSystem.DrawText(NFVector2(v1.X(), v2.Y()), mStairColor, " ==");
+							}
+							if (!voxel->occupyObject.IsNull())
+							{
+							}
+							if (!voxel->item.empty())
+							{
+							}
 						}
 					}
 				}
 			}
+
+			for (int i = 0; i < data->tileConfig.mapSize; i++)
+			{
+				if (i % 5 == 0)
+				{
+					NFVector2 v1(i * nodeSize * data->tileConfig.cellSizeX, 0);
+					std::string text = std::to_string(i * data->tileConfig.cellSizeX);
+					mNodeSystem.DrawText(v1, mTextColor, text.c_str());
+				}
+			}
+			for (int j = 0; j < data->tileConfig.mapSize; j++)
+			{
+				if (j % 5 == 0)
+				{
+					NFVector2 v1(-nodeSize *2, j * nodeSize * -data->tileConfig.cellSizeX);
+					std::string text = std::to_string(j * data->tileConfig.cellSizeX);
+					mNodeSystem.DrawText(v1, mTextColor, text.c_str());
+				}
+			}
+
+			//draw background
+			NFVector2 v1(0, 0);
+			NFVector2 v2(nodeSize * data->tileConfig.mapSize * data->tileConfig.cellSizeX, nodeSize * -data->tileConfig.mapSize * data->tileConfig.cellSizeZ);
+
+			mNodeSystem.DrawRect(v1, v2, mImmovable);
 		}
 	}
+}
+
+void NFGodView::DrawToolBar()
+{
+	auto wPos = ImGui::GetWindowPos();
+	auto wSize = ImGui::GetWindowSize();
+
+	ImVec2 start(12, wPos.y + 50);
+	ImVec2 end(start.x + 15, start.y + 15);
+	ImGui::GetWindowDrawList()->AddRect(start, end, mStairColor);
+
+	start = ImVec2(35, wPos.y + 50);
+	ImGui::GetWindowDrawList()->AddText(start, mStairColor, "Stair");
+
+	start = ImVec2(20, wPos.y + 80);
+	ImGui::GetWindowDrawList()->AddCircle(start, 10, mImmovable);
+
+	start = ImVec2(35, wPos.y + 70);
+	ImGui::GetWindowDrawList()->AddText(start, mImmovable, "Immovable");
+
+	ImGui::NewLine();
+	ImGui::NewLine();
+
+	for (int i = 2; i < mLayerColor.size(); ++i)
+	{
+		std::string name = "L " + std::to_string(i);
+		ImGui::PushStyleColor(ImGuiCol_Button, mLayerColor[i]);
+		ImGui::Button(name.c_str());
+		ImGui::PopStyleColor();
+	}
+
+
 }
 
 bool NFGodView::HandlerNodeHovered(const NFGUID& id)
@@ -255,17 +344,9 @@ bool NFGodView::HandlerNodeHovered(const NFGUID& id)
 	return true;
 }
 
-NFVector2 NFGodView::ToNodeSpacePos(const NFVector2& v)
-{
-	int size = imnodes::GetStyle().grid_spacing / 2;
-	int offset = imnodes::GetStyle().grid_spacing / 4;
-	return NFVector2(v.X() * size - offset, v.Y() * -size - offset);
-	//return NFVector2(v.X(), v.Y());
-}
-
 void NFGodView::RenderScene(const int sceneID, const int groupID)
 {
-	m_pTreeView->Clear();
+	mTreeView.Clear();
 
 	if (groupID < 0)
 	{
@@ -275,7 +356,7 @@ void NFGodView::RenderScene(const int sceneID, const int groupID)
 			int group = groups[j];
 
 			NFGUID nodeId = NFGUID(sceneID, group);
-			m_pTreeView->AddTreeNode(nodeId, nodeId.ToString());
+			mTreeView.AddTreeNode(nodeId, nodeId.ToString());
 
 			//objects
 			NFDataList list;
@@ -286,14 +367,14 @@ void NFGodView::RenderScene(const int sceneID, const int groupID)
 				const std::string& strClassName = m_pKernelModule->GetPropertyString(guid, NFrame::IObject::ClassName());
 				std::string buttonName = strClassName + "<" + guid.ToString() + ">";
 
-				m_pTreeView->AddSubTreeNode(nodeId, guid, buttonName.c_str());
+				mTreeView.AddSubTreeNode(nodeId, guid, buttonName.c_str());
 			}
 		}
 	}
 	else
 	{
 		NFGUID nodeId = NFGUID(sceneID, groupID);
-		m_pTreeView->AddTreeNode(nodeId, nodeId.ToString());
+		mTreeView.AddTreeNode(nodeId, nodeId.ToString());
 
 		//objects
 		NFDataList list;
@@ -304,42 +385,14 @@ void NFGodView::RenderScene(const int sceneID, const int groupID)
 			const std::string& strClassName = m_pKernelModule->GetPropertyString(guid, NFrame::IObject::ClassName());
 			std::string buttonName = strClassName + "<" + guid.ToString() + ">";
 
-			m_pTreeView->AddSubTreeNode(nodeId, guid, buttonName.c_str());
+			mTreeView.AddSubTreeNode(nodeId, guid, buttonName.c_str());
 		}
 	}
 }
 
 void NFGodView::SubRender()
 {
-	m_pTreeView->Execute();
-	/*
-	   ImGui::Text(this->name.c_str());
-   
-	   if (mnSceneID <= 0)
-	   {
-		  NF_SHARE_PTR<NFIClass> xLogicClass = m_pClassModule->GetElement(NFrame::Scene::ThisName());
-		  if (xLogicClass)
-		  {
-			 const std::vector<std::string>& strIdList = xLogicClass->GetIDList();
-			 for (int i = 0; i < strIdList.size(); i++)
-			 {
-				std::string sceneTreeNodeName = "Scene<" + strIdList[i] + ">";
-				if (ImGui::TreeNode(sceneTreeNodeName.c_str()))
-				{
-				   RenderScene(lexical_cast<int>(strIdList[i]));
-               
-				   ImGui::TreePop();
-				   ImGui::Separator();
-				}
-			 }
-		  }
-	   }
-	   else
-	   {
-		  RenderScene(mnSceneID);
-	   }
-	*/
-
+	mTreeView.Execute();
 }
 
 NFGUID NFGodView::GetCurrentObjectID()
@@ -354,9 +407,7 @@ void NFGodView::SetCurrentObjectID(const NFGUID& id)
 
 void NFGodView::RenderSceneObjectNode(const int sceneID, const int groupID)
 {
-   NFNodeView* pView = (NFNodeView*)m_pNodeView;
-   pView->CleanNodes();
-
+   mNodeSystem.CleanNodes();
    if (sceneID > 0 && groupID > 0)
    {
       //objects
@@ -369,19 +420,14 @@ void NFGodView::RenderSceneObjectNode(const int sceneID, const int groupID)
 		 const std::string& name = m_pKernelModule->GetPropertyString(guid, NFrame::IObject::Name());
          const NFVector3& pos = m_pKernelModule->GetPropertyVector3(guid, NFrame::IObject::Position());
 		 std::string nodeName = className.substr(0, 1) + "(" + std::to_string((int)pos.X()) + "," + std::to_string((int)pos.Z()) + ")";
-         
-		 auto node = pView->AddNode(guid, nodeName, NFColor::DEFAULT, ToNodeSpacePos(NFVector2(pos.X(), -pos.Z())));
-		 node->title = false;
 
-		 pView->SetNodeDraggable(guid, false);
+		 auto node = mNodeSystem.AddNode(guid, nodeName, ToMapGridPos(pos));
       }
    }
 }
 
 void NFGodView::UpdateSceneObjectNodePosition(const int sceneID, const int groupID)
 {
-	NFNodeView* pView = (NFNodeView*)m_pNodeView;
-
 	if (sceneID > 0 && groupID > 0)
 	{
 		//objects
@@ -395,13 +441,11 @@ void NFGodView::UpdateSceneObjectNodePosition(const int sceneID, const int group
 				const std::string& className = m_pKernelModule->GetPropertyString(guid, NFrame::IObject::ClassName());
 				const std::string& name = m_pKernelModule->GetPropertyString(guid, NFrame::IObject::Name());
 				const NFVector3& pos = m_pKernelModule->GetPropertyVector3(guid, NFrame::IObject::Position());
-				std::string barTile = className + "(" + std::to_string((int)pos.X()) + "," + std::to_string((int)pos.Z()) + ")";
+				std::string barTile = className.substr(0, 1) + "(" + std::to_string((int)pos.X()) + "," + std::to_string((int)pos.Z()) + ")";
 
-				pView->SetNodePosition(guid, ToNodeSpacePos(NFVector2(pos.X(), pos.Z())));
-			}
-			else
-			{
-				//log
+				auto node = mNodeSystem.FindNode(guid);
+				node->pos = ToMapGridPos(pos);
+				node->name = barTile;
 			}
 		}
 	}
@@ -418,14 +462,13 @@ int NFGodView::OnClassCommonEvent(const NFGUID& self, const std::string& strClas
 		{
 			if (group == mGroupID)
 			{
-				m_pTreeView->DeleteTreeNode(self);
+				mTreeView.DeleteTreeNode(self);
 
-				NFNodeView* pView = (NFNodeView*)m_pNodeView;
-				pView->DeleteNode(self);
+				mNodeSystem.DeleteNode(self);
 			}
 			else
 			{
-				m_pTreeView->DeleteTreeNode(self);
+				mTreeView.DeleteTreeNode(self);
 			}
 		}
 	}
@@ -441,7 +484,7 @@ int NFGodView::OnClassCommonEvent(const NFGUID& self, const std::string& strClas
 			//tree
 			std::string buttonName = className + "<" + self.ToString() + ">";
 
-			m_pTreeView->AddSubTreeNode(NFGUID(mSceneID, mGroupID), self, buttonName.c_str());
+			mTreeView.AddSubTreeNode(NFGUID(mSceneID, mGroupID), self, buttonName.c_str());
 
 			//node
 
@@ -449,13 +492,17 @@ int NFGodView::OnClassCommonEvent(const NFGUID& self, const std::string& strClas
 			const NFVector3& pos = m_pKernelModule->GetPropertyVector3(self, NFrame::IObject::Position());
 			std::string nodeName = className.substr(0, 1) + "(" + std::to_string((int)pos.X()) + "," + std::to_string((int)pos.Z()) + ")";
 
-			NFNodeView* pView = (NFNodeView*)m_pNodeView;
-			auto node = pView->AddNode(self, nodeName, NFColor::DEFAULT, ToNodeSpacePos(NFVector2(pos.X(), pos.Z())));
-			node->title = false;
-
-			pView->SetNodeDraggable(self, false);
+			NFVector2 nodePos = ToMapGridPos(pos);
+			auto node = mNodeSystem.AddNode(self, nodeName, nodePos);
 		}
 	}
 
 	return 0;
+}
+
+NFVector2 NFGodView::ToMapGridPos(const NFVector3& pos)
+{
+	NFVector2 displayOffset(mNodeSystem.GetNodeSize() / 2, mNodeSystem.GetNodeSize() / 2);
+
+	return NFVector2(pos.X() * mNodeSystem.GetNodeSize() - displayOffset.X(), pos.Z() * -mNodeSystem.GetNodeSize() - displayOffset.Y());
 }

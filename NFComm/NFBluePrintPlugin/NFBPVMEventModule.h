@@ -85,6 +85,7 @@ private:
     virtual bool RegisterGameObjectEventCallBack(const NFGUID blockID, const std::string& className, const NFGUID monitorID, const BLUEPRINT_EVENT_FUNCTOR& functor) override;
 
 private:
+    int OnEventCommonEvent(const NFGUID& self, const int eventID, const NFDataList& var);
 
     int OnClassCommonEvent(const NFGUID& self, const std::string& strClassNames, const CLASS_OBJECT_EVENT eClassEvent, const NFDataList& var);
     int OnPropertyCommonEvent(const NFGUID& self, const std::string& strPropertyName, const NFData& oldVar, const NFData& newVar);
@@ -97,6 +98,7 @@ private:
 private:
     NFIBluePrintModule* m_pBluePrintModule;
     NFIKernelModule* m_pKernelModule;
+    NFIEventModule* m_pEventModule;
 
 };
 

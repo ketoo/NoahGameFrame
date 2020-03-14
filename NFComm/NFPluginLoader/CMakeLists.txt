@@ -21,7 +21,7 @@ target_link_libraries(NFPluginLoader NFSecurityPlugin)
 target_link_libraries(NFPluginLoader NFTestPlugin)
 
 if (APPLE)
-target_link_libraries(NFPluginLoader NFUIPlugin)
+target_link_libraries(NFPluginLoader NFRenderPlugin)
 target_link_libraries(NFPluginLoader NFBluePrintPlugin)
 endif()
 

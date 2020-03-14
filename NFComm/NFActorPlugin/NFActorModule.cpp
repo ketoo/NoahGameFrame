@@ -53,7 +53,7 @@ bool NFActorModule::AfterInit()
 
 bool NFActorModule::BeforeShut()
 {
-	mxActorMap.ClearAll();
+	mxActorMap.clear();
     return true;
 }
 
@@ -75,14 +75,20 @@ bool NFActorModule::Execute()
 NF_SHARE_PTR<NFIActor> NFActorModule::RequireActor()
 {
 	NF_SHARE_PTR<NFIActor> pActor = NF_SHARE_PTR<NFIActor>(NF_NEW NFActor(m_pKernelModule->CreateGUID(), this));
-	mxActorMap.AddElement(pActor->ID(), pActor);
+	mxActorMap.insert(std::map<NFGUID, NF_SHARE_PTR<NFIActor>>::value_type(pActor->ID(), pActor));
 
 	return pActor;
 }
 
 NF_SHARE_PTR<NFIActor> NFActorModule::GetActor(const NFGUID nActorIndex)
 {
-	return mxActorMap.GetElement(nActorIndex);
+	auto it = mxActorMap.find(nActorIndex);
+	if (it != mxActorMap.end())
+	{
+		return it->second;
+	}
+
+	return nullptr;
 }
 
 bool NFActorModule::AddResult(const NFActorMessage & message)
@@ -92,13 +98,12 @@ bool NFActorModule::AddResult(const NFActorMessage & message)
 
 bool NFActorModule::ExecuteEvent()
 {
-	for (auto it : mActorMessageCount)
+	for (auto it : mxActorMap)
 	{
-		const NFGUID id = it.first;
-		NF_SHARE_PTR<NFIActor> pActor = GetActor(id);
+		NF_SHARE_PTR<NFIActor> pActor = it.second;
 		if (pActor)
 		{
-			m_pThreadPoolModule->DoAsyncTask(id, "",
+			m_pThreadPoolModule->DoAsyncTask(pActor->ID(), "",
 				[pActor](NFThreadTask& threadTask) -> void
 			{
 				pActor->Execute();
@@ -106,8 +111,6 @@ bool NFActorModule::ExecuteEvent()
 		}
 	}
 	
-	mActorMessageCount.clear();
-
 	return true;
 }
 
@@ -147,7 +150,15 @@ bool NFActorModule::SendMsgToActor(const NFGUID actorIndex, const int eventID, c
 
 bool NFActorModule::ReleaseActor(const NFGUID nActorIndex)
 {
-	return mxActorMap.RemoveElement(nActorIndex);
+	auto it = mxActorMap.find(nActorIndex);
+	if (it != mxActorMap.end())
+	{
+		mxActorMap.erase(it);
+	
+		return true;
+	}
+	
+	return false;
 }
 
 bool NFActorModule::AddEndFunc(const int subMessageID, ACTOR_PROCESS_FUNCTOR_PTR functorPtr_end)
@@ -157,13 +168,10 @@ bool NFActorModule::AddEndFunc(const int subMessageID, ACTOR_PROCESS_FUNCTOR_PTR
 
 bool NFActorModule::SendMsgToActor(const NFGUID actorIndex, const NFActorMessage &message)
 {
-	NF_SHARE_PTR<NFIActor> pActor = GetActor(actorIndex);
-	if (nullptr != pActor)
+	auto it = mxActorMap.find(actorIndex);
+	if (it != mxActorMap.end())
 	{
-		mActorMessageCount[pActor->ID()] = 1;
-		pActor->SendMsg(message);
-
-		return true;
+		return it->second->SendMsg(message);
 	}
 
 	return false;

@@ -36,10 +36,10 @@
 #include "imgui/imgui_impl_sdl.h"
 #include "imgui/imgui_impl_opengl3.h"
 #include <stdio.h>
-#include <SDL.h>
+#include <SDL2/SDL.h>
 
 #if defined(IMGUI_IMPL_OPENGL_LOADER_GL3W)
-#include <GL/gl3w.h>    // Initialize with gl3wInit()
+#include <gl3w/GL/gl3w.h>    // Initialize with gl3wInit()
 #elif defined(IMGUI_IMPL_OPENGL_LOADER_GLEW)
 #include <GL/glew.h>    // Initialize with glewInit()
 #elif defined(IMGUI_IMPL_OPENGL_LOADER_GLAD)
@@ -90,7 +90,6 @@ private:
 	// Our state
 	//bool show_demo_window = true;
 	//bool show_another_window = false;
-	ImVec4 clear_color = ImVec4(0.45f, 0.55f, 0.60f, 1.00f);
 	SDL_Window* window;
 	bool done = false;
 	bool running = false;

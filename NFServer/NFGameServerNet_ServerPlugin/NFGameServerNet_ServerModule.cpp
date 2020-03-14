@@ -303,38 +303,12 @@ void NFGameServerNet_ServerModule::OnClientSwapSceneProcess(const NFSOCK nSockIn
 	const int nowGroupID = m_pKernelModule->GetPropertyInt(nPlayerID, NFrame::Player::GroupID());
 	const NFMsg::ESceneType nowSceneType = (NFMsg::ESceneType)m_pElementModule->GetPropertyInt(std::to_string(nowSceneID), NFrame::Scene::Type());
 
-	if (sceneType == NFMsg::ESceneType::HOME_SCENE)
-	{
-		//fighting now, want to end the fight
-		const NFVector3& pos = m_pSceneModule->GetRelivePosition(xMsg.scene_id(), 0);
-		m_pSceneProcessModule->RequestEnterScene(pObject->Self(), xMsg.scene_id(), -1, 0, pos, NFDataList());
-
-		return;
-	}
 		
 	if (sceneType == NFMsg::ESceneType::NORMAL_SCENE)
 	{
 		const NFVector3& pos = m_pSceneModule->GetRelivePosition(xMsg.scene_id(), 0);
 		m_pSceneProcessModule->RequestEnterScene(pObject->Self(), xMsg.scene_id(), 1, 0, pos, NFDataList());
 	}
-	
-	/*
-	if (nowSceneType == NFMsg::ESceneType::SCENE_HOME)
-	{
-		//fighting now, want to end the fight
-		const NFVector3& pos = m_pSceneModule->GetRelivePosition(homeSceneID, 0);
-		m_pSceneProcessModule->RequestEnterScene(pObject->Self(), homeSceneID, -1, pos, NFDataList());
-	}
-	else
-	{
-		if (sceneType == NFMsg::ESceneType::SCENE_HOME)
-		{
-			//
-			const NFVector3& pos = m_pSceneModule->GetRelivePosition(xMsg.scene_id(), 0);
-			m_pSceneProcessModule->RequestEnterScene(pObject->Self(), xMsg.scene_id(), -1, pos, NFDataList());
-		}
-	}
-	*/
 }
 
 void NFGameServerNet_ServerModule::OnClientReqMoveProcess(const NFSOCK nSockIndex, const int nMsgID, const char *msg,  const uint32_t nLen)
@@ -350,27 +324,6 @@ void NFGameServerNet_ServerModule::OnClientReqMoveProcess(const NFSOCK nSockInde
 
 		this->SendGroupMsgPBToGate(NFMsg::ACK_MOVE, xMsg, nSceneID, nGroupID);
 	}
-	else
-	{
-		const NFGUID xAIOwnerID = m_pKernelModule->GetPropertyObject(xMover, NFrame::NPC::AIOwnerID());
-		if (xAIOwnerID == nPlayerID)
-		{
-
-			NFMsg::Vector3 vPos = xMsg.target_pos(0);
-
-			NFVector3 v;
-			v.SetX(vPos.x());
-			v.SetY(vPos.y());
-			v.SetZ(vPos.z());
-
-			//m_pKernelModule->SetPropertyVector3(xMover, NFrame::IObject::Position(), v);
-			const int nSceneID = m_pKernelModule->GetPropertyInt32(xMover, NFrame::Player::SceneID());
-			const int nGroupID = m_pKernelModule->GetPropertyInt32(xMover, NFrame::Player::GroupID());
-
-			this->SendGroupMsgPBToGate(NFMsg::ACK_MOVE, xMsg, nSceneID, nGroupID);
-		}
-	}
-
 }
 
 void NFGameServerNet_ServerModule::OnClientReqMoveImmuneProcess(const NFSOCK nSockIndex, const int nMsgID,
@@ -379,9 +332,7 @@ void NFGameServerNet_ServerModule::OnClientReqMoveImmuneProcess(const NFSOCK nSo
 	CLIENT_MSG_PROCESS(nMsgID, msg, nLen, NFMsg::ReqAckPlayerMove)
 
 	const NFGUID& self = NFINetModule::PBToNF(xMsg.mover());
-	const NFGUID& xOwnerID = m_pKernelModule->GetPropertyObject(self, NFrame::NPC::AIOwnerID());
-	if (self == nPlayerID
-		|| xOwnerID == nPlayerID)
+	if (self == nPlayerID)
 	{
 		const int nSceneID = m_pKernelModule->GetPropertyInt32(self, NFrame::Player::SceneID());
 		const int nGroupID = m_pKernelModule->GetPropertyInt32(self, NFrame::Player::GroupID());
@@ -403,8 +354,7 @@ void NFGameServerNet_ServerModule::OnClientReqMoveImmuneProcess(const NFSOCK nSo
 	}
 }
 
-void NFGameServerNet_ServerModule::OnClientReqStateSyncProcess(const NFSOCK nSockIndex, const int nMsgID,
-                                                                const char *msg, const uint32_t nLen)
+void NFGameServerNet_ServerModule::OnClientReqStateSyncProcess(const NFSOCK nSockIndex, const int nMsgID, const char *msg, const uint32_t nLen)
 {
 	CLIENT_MSG_PROCESS(nMsgID, msg, nLen, NFMsg::ReqAckPlayerMove)
 	//only the player can send the message to the back-end

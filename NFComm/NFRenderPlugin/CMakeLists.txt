@@ -1,7 +1,14 @@
 include_directories(
 	./)
 
-set(ProjectName "NFUIPlugin")
+include_directories(
+	./gl3w)
+
+include_directories(
+		./imgui)
+
+
+set(ProjectName "NFRenderPlugin")
 
 file(GLOB NFUIPlugin_ROOT_Cpp
 	*.cpp)
@@ -16,10 +23,17 @@ file(GLOB NFUIVIEW_ROOT_Hpp
 	./UI/*.h)
 
 file(GLOB GL_ROOT_Cpp
-	./GL/*.c)
+	./gl3w/GL/*.c)
 	
 file(GLOB GL_ROOT_Hpp 
-	./GL/*.h)
+	./gl3w/GL/*.h)
+
+file(GLOB IMNODES_ROOT_Cpp
+		./imnodes/*.cpp)
+
+file(GLOB IMNODES_ROOT_Hpp
+		./imnodes/*.h)
+
 
 file(GLOB IMGUI_ROOT_Cpp
 	./imgui/*.cpp)
@@ -33,7 +47,7 @@ file(GLOB GLAD_ROOT_Cpp
 file(GLOB GLAD_ROOT_Hpp 
 	./glad/*.h)
 
-add_library(NFUIPlugin STATIC
+add_library(NFRenderPlugin STATIC
 	${NFUIPlugin_ROOT_Cpp}
 	${NFUIPlugin_ROOT_Hpp}
 	${NFUIVIEW_ROOT_Cpp}
@@ -41,23 +55,25 @@ add_library(NFUIPlugin STATIC
 	${GL_ROOT_Cpp}
 	${GL_ROOT_Hpp}
 	${IMGUI_ROOT_Cpp}
-	${IMGUI_ROOT_Hpp})
+	${IMGUI_ROOT_Hpp}
+	${IMNODES_ROOT_Cpp}
+	${IMNODES_ROOT_Hpp})
 	
-set_target_properties( NFUIPlugin PROPERTIES OUTPUT_NAME_DEBUG "NFUIPlugin")
-set_target_properties( NFUIPlugin PROPERTIES PREFIX "")
-set_target_properties( NFUIPlugin PROPERTIES 
-	FOLDER "NFComm/NFUIPlugin"
+set_target_properties( NFRenderPlugin PROPERTIES OUTPUT_NAME_DEBUG "NFRenderPlugin")
+set_target_properties( NFRenderPlugin PROPERTIES PREFIX "")
+set_target_properties( NFRenderPlugin PROPERTIES
+	FOLDER "NFComm/NFRenderPlugin"
 	ARCHIVE_OUTPUT_DIRECTORY ${NFOutPutDir}
 	RUNTIME_OUTPUT_DIRECTORY ${NFOutPutDir}
 	LIBRARY_OUTPUT_DIRECTORY ${NFOutPutDir} )
 	
-link_NFSDK("NFUIPlugin")
+link_NFSDK("NFRenderPlugin")
 
 if(UNIX)
 	if (CMAKE_BUILD_TYPE MATCHES "Release")
-		target_link_libraries(NFUIPlugin libSDL2.a)
+		target_link_libraries(NFRenderPlugin libSDL2.a)
 	else()
-		target_link_libraries(NFUIPlugin libSDL2d.a)
+		target_link_libraries(NFRenderPlugin libSDL2d.a)
 	endif()
 
 if (APPLE)
@@ -87,11 +103,11 @@ if (APPLE)
     ${corefoundation_lib})
 
 
-	target_link_libraries(NFUIPlugin ${frameworks})
+	target_link_libraries(NFRenderPlugin ${frameworks})
 
 endif()
 
-	target_link_libraries(NFUIPlugin -static-libstdc++)
+	target_link_libraries(NFRenderPlugin -static-libstdc++)
 
 	add_definitions(
 		-DELPP_NO_DEFAULT_LOG_FILE

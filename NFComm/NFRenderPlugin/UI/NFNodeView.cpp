@@ -318,13 +318,13 @@ void NFNode::Execute()
    if (first)
    {
         first = false;
-        if (initPos.IsZero())
+        if (pos.IsZero())
         {
             SET_NODE_SCREEN_POSITION(id, ImVec2(400, 300));
         }
         else
         {
-            SET_NODE_POSITION(id, ImVec2(initPos.X(), initPos.Y()));
+            SET_NODE_POSITION(id, ImVec2(pos.X(), pos.Y()));
         }
         
    }
@@ -363,10 +363,8 @@ void NFNode::Execute()
 
 /////////////////
 
-NFNodeView::NFNodeView(NFIPluginManager* p) : NFIView(p, NFViewType::NONE, GET_CLASS_NAME(NFNodeView))
+NFNodeView::NFNodeView()
 {
-    m_pUIModule = pPluginManager->FindModule<NFIUIModule>();
-
     m_pEditorContext = imnodes::EditorContextCreate();
     imnodes::Style& nodeStyle = imnodes::GetStyle();
     nodeStyle.pin_offset = 10.0f;
@@ -521,7 +519,7 @@ NF_SHARE_PTR<NFNode> NFNodeView::AddNode(const NFGUID guid, const std::string& n
 {
    if (mNodes.find(guid) == mNodes.end())
    {
-       auto node = NF_SHARE_PTR<NFNode>(NF_NEW NFNode(GenerateNodeId(), name, guid, vec, color));
+       auto node = NF_SHARE_PTR<NFNode>(NF_NEW NFNode(NFIView::GenerateNodeId(), name, guid, vec, color));
        node->nodeView = this;
        mNodes.insert(std::pair<NFGUID, NF_SHARE_PTR<NFNode>>(guid, node));
 
@@ -537,7 +535,7 @@ void NFNodeView::AddPinIn(const NFGUID guid, const NFGUID attrId, const std::str
    {
       if (it.second->guid == guid)
       {
-         it.second->AddPin(GeneratePinId(), name, image, true, attrId, color, shape);
+         it.second->AddPin(NFIView::GeneratePinId(), name, image, true, attrId, color, shape);
          return;
       }
    }
@@ -549,7 +547,7 @@ void NFNodeView::AddPinOut(const NFGUID guid, const NFGUID attrId, const std::st
    {
       if (it.second->guid == guid)
       {
-         it.second->AddPin(GeneratePinId(), name, image, false, attrId, color, shape);
+         it.second->AddPin(NFIView::GeneratePinId(), name, image, false, attrId, color, shape);
          return;
       }
    }
@@ -599,7 +597,7 @@ void NFNodeView::AddLink(const NFGUID& selfID, const NFGUID& startNode, const NF
             startPinObject->UpdateShape();
             endPinObject->UpdateShape();
 
-            auto link = NF_SHARE_PTR<NFDataLink>(NF_NEW NFDataLink(selfID, startNode, endNode, startPin, endPin, GenerateLinkId(), color));
+            auto link = NF_SHARE_PTR<NFDataLink>(NF_NEW NFDataLink(selfID, startNode, endNode, startPin, endPin, NFIView::GenerateLinkId(), color));
             mLinks.push_back(link);
         }
     }
@@ -742,7 +740,7 @@ void NFNodeView::SetNodePosition(const NFGUID guid, const NFVector2 vec)
 void NFNodeView::ResetOffset(const NFVector2& pos)
 {
     SET_CURRENT_CONTEXT(m_pEditorContext);
-   //imnodes::EditorContextResetPanning(ImVec2(pos.X(), pos.Y()));
+   imnodes::EditorContextResetPanning(ImVec2(pos.X(), pos.Y()));
 }
 
 void NFNodeView::MoveToNode(const NFGUID guid)
@@ -756,8 +754,15 @@ void NFNodeView::MoveToNode(const NFGUID guid)
     }
 }
 
+void NFNodeView::SetCurrentContext()
+{
+    SET_CURRENT_CONTEXT(m_pEditorContext);
+}
+
 void NFNodeView::CheckNewLinkStatus()
 {
+    SET_CURRENT_CONTEXT(m_pEditorContext);
+
    int start_attr, end_attr;
    if (IS_LINK_CREATED(&start_attr, &end_attr))
    {
@@ -780,6 +785,8 @@ void NFNodeView::CheckNewLinkStatus()
 
 void NFNodeView::CheckDeleteLinkStatus()
 {
+    SET_CURRENT_CONTEXT(m_pEditorContext);
+
     int selectedLink = -1;
     IS_LINK_HOVERED(&selectedLink);
     if (selectedLink >= 0)

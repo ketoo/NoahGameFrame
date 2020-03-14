@@ -23,17 +23,25 @@
    limitations under the License.
 */
 
-#ifndef NF_MESH_COMPONENT_H
-#define NF_MESH_COMPONENT_H
+#include "NFDebugger.h"
 
-#include "NFSceneNode.h"
-#include "GL/gl3w.h"
-#include "GL/glcorearb.h"
-
-class NFMeshComponent 
-    : public NFIComponent
+void NFDebugger::PrepareInputData(const NFGUID& runTimeOnwer, const bool iteration)
 {
+}
 
-};
+void NFDebugger::UpdateOutputData(const NFGUID& runTimeOnwer, const bool iteration)
+{
+    if (!runTimeOnwer.IsNull())
+    {
+        std::ostringstream os;
 
-#endif // !NF_MESH
+        os << "debuger++++++";
+
+        m_pLogModule->LogDebug(os);
+    }
+}
+
+NF_SHARE_PTR<NFIOData> NFDebugger::FindOutputNodeIOData()
+{
+    return GetOutputArg(NFDebugerOutputArg::NextNode);
+}

@@ -107,7 +107,7 @@ bool NFTreeNode::AddTreeNode(const NFGUID guid, const std::string& name)
 {
 	if (!mSubTrees.ExistElement(guid))
 	{
-		return mSubTrees.AddElement(guid, NF_SHARE_PTR<NFTreeNode>(NF_NEW NFTreeNode(this->mTreeView, this->mTreeView->GenerateNodeId(), name, guid)));
+		return mSubTrees.AddElement(guid, NF_SHARE_PTR<NFTreeNode>(NF_NEW NFTreeNode(this->mTreeView, NFIView::GenerateNodeId(), name, guid)));
 	}
 
 	return false;
@@ -158,9 +158,8 @@ bool NFTreeNode::DeleteTreeNode(const NFGUID guid)
 	return false;
 }
 
-NFTreeView::NFTreeView(NFIPluginManager* p) : NFIView(p, NFViewType::NONE, GET_CLASS_NAME(NFTreeView))
+NFTreeView::NFTreeView()
 {
-	m_pUIModule = pPluginManager->FindModule<NFIUIModule>();
 }
 
 NFTreeView::~NFTreeView()
@@ -187,7 +186,7 @@ void NFTreeView::SetSelectedNodeFunctor(std::function<void(const NFGUID&, const 
 	mSelectedFuntor = functor;
 }
 
-const NFGUID NFTreeView::GetSelectedNode()
+const NFGUID NFTreeView::GetSelectedNode() const
 {
 	return mSelectedNode;
 }
@@ -196,7 +195,7 @@ void NFTreeView::AddTreeNode(const NFGUID guid, const std::string& name)
 {
 	if (mTrees.find(guid) == mTrees.end())
 	{
-		mTrees.insert(std::pair<NFGUID, NF_SHARE_PTR<NFTreeNode>>(guid, NF_SHARE_PTR<NFTreeNode>(NF_NEW NFTreeNode(this, GenerateNodeId(), name, guid))));
+		mTrees.insert(std::pair<NFGUID, NF_SHARE_PTR<NFTreeNode>>(guid, NF_SHARE_PTR<NFTreeNode>(NF_NEW NFTreeNode(this, NFIView::GenerateNodeId(), name, guid))));
 	}
 }
 
@@ -251,7 +250,7 @@ void NFTreeView::AddTreeLeafNode(const NFGUID guid, const NFGUID leafId, const s
 	auto node = FindTreeNode(guid);
 	if (node)
 	{
-		node->AddLeaf(GeneratePinId(), name, leafId);
+		node->AddLeaf(NFIView::GeneratePinId(), name, leafId);
 	}
 }
 

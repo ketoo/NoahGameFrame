@@ -55,7 +55,6 @@ public:
 
     virtual ~NFBPVirtualMachine() 
     {
-        mLogicBlock->running = false;
     };
 
     virtual bool Awake()
@@ -66,7 +65,7 @@ public:
 
     virtual bool Init()
     {
-		//StartToProcessMonitor();
+		StartToProcessMonitor();
 
         return true;
     }

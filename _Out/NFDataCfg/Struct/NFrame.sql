@@ -12,20 +12,13 @@ CREATE TABLE IF NOT EXISTS Server  ( `ID` varchar(128) NOT NULL, PRIMARY KEY (`I
 CREATE TABLE IF NOT EXISTS Skill  ( `ID` varchar(128) NOT NULL, PRIMARY KEY (`ID`) ) ENGINE=InnoDB DEFAULT CHARSET=utf8; 
 
 ALTER TABLE `IObject` ADD `Name` text COLLATE utf8mb4_unicode_ci  DEFAULT '' COMMENT '';
-ALTER TABLE `NPC` ADD `AIOwnerID` varchar(64) COLLATE utf8mb4_unicode_ci DEFAULT '' COMMENT 'AI';
-ALTER TABLE `NPC` ADD `Camp` varchar(64) COLLATE utf8mb4_unicode_ci DEFAULT '' COMMENT '阵营';
-ALTER TABLE `NPC` ADD `Diamond` bigint(11) DEFAULT '0' COMMENT '钻石';
 ALTER TABLE `NPC` ADD `EXP` bigint(11) DEFAULT '0' COMMENT '经验获得,如果是怪物，则是掉落经验';
 ALTER TABLE `NPC` ADD `Gold` bigint(11) DEFAULT '0' COMMENT '玩家游戏金币';
 ALTER TABLE `NPC` ADD `HP` bigint(11) DEFAULT '0' COMMENT '生命值';
 ALTER TABLE `NPC` ADD `Level` bigint(11) DEFAULT '0' COMMENT '';
 ALTER TABLE `NPC` ADD `MP` bigint(11) DEFAULT '0' COMMENT '法力值';
-ALTER TABLE `NPC` ADD `MasterID` varchar(64) COLLATE utf8mb4_unicode_ci DEFAULT '' COMMENT '召唤者，主人';
-ALTER TABLE `NPC` ADD `MasterName` text COLLATE utf8mb4_unicode_ci  DEFAULT '' COMMENT '召唤者，主人';
 ALTER TABLE `NPC` ADD `SP` bigint(11) DEFAULT '0' COMMENT '体力';
-ALTER TABLE `NPC` ADD `VIPEXP` bigint(11) DEFAULT '0' COMMENT 'VIP经验';
 ALTER TABLE `Player` ADD `Account` text COLLATE utf8mb4_unicode_ci  DEFAULT '' COMMENT '玩家的帐号';
-ALTER TABLE `Player` ADD `Camp` varchar(64) COLLATE utf8mb4_unicode_ci DEFAULT '' COMMENT '阵营';
 ALTER TABLE `Player` ADD `ConnectKey` text COLLATE utf8mb4_unicode_ci  DEFAULT '' COMMENT '玩家连接服务器的KEY';
 ALTER TABLE `Player` ADD `Diamond` bigint(11) DEFAULT '0' COMMENT '钻石';
 ALTER TABLE `Player` ADD `EXP` bigint(11) DEFAULT '0' COMMENT '经验获得,如果是怪物，则是掉落经验';
