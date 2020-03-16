@@ -56,8 +56,8 @@ Thie repo show people how to use NF and NF's MidWare as submodule.
 
 ## Dependencies
 
-- libevent 2.0.22
-- easylogging++ 9.80
+- libevent
+- easylogging++
 - google protobuf
 - hiredis
 - ajson
@@ -76,28 +76,25 @@ Thie repo show people how to use NF and NF's MidWare as submodule.
 
 ## Supported Compilers
 
-* GCC >= 4.8 (**Tested in Ubuntu 15.04**)
-* MSVC >= VS2017 (**Tested in Win7/10**)
+* GCC >= 7 (**Tested in Ubuntu 16.04**)
+* MSVC >= VS2017 (**Tested in Win10**)
 
 ## Build and Install
-### MSVC >= 2015
+### FOR WINDOWS, MSVC >= 2019
 
 1. Git pull all source
 2. Open the solution: **NoahFrame.sln**, build FileProcessTool project
 3. Run **GenerateConfigXML.bat** to generate configuration files
 4. Run the script file named **build_dep.bat** where located /Dependencies
-5. Build the solution(if u build failed, please build again(**not rebuild**))
+5. Build the solution(if u build failed, please build again(**not rebuild all**))
 6. Run the binary file by **_Out/rund.bat**
 
-### CMake ---- please use administrator(or sudo) to do these:
+### FOR LUNUX(UBUNTU, CENTOS) ---- please use administrator(or sudo) to do these:
 1. Git pull all source
-2. Install cmake[>= 3.1] please choose options for installing: **Add CMake to the system PATH for all users and restart your computer**
-3. Install VS2015 or gcc[>= 4.8]
-4. Run Dependencies/build_dep.sh
-5. Run **install4cmake.bat** or **install4cmake.sh** to build NF
-6. Run the binary file by **_Out/rund.bat** or **_Out/rund.sh**
+2. Run **install4cmake.sh** to build NF (or run /Depenndencies/build_dep.sh then run buildServer.sh)
+3. Run the binary file by **_Out/rund.sh**
 
-
+### IF YOU LIVING IN A COUNTRY CANNOT ACCESS GITHUB FASTLY PLZ BUILD NF WITH VPN
 
 ### JAVA Project
 WebSite:  https://github.com/NFGameTeam/NFrame-java
