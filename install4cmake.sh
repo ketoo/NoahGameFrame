@@ -2,14 +2,14 @@
 cmake --version
 if [ $? -ne 0 ]; then
     echo "[ERROR] Please install cmake first."
-    echo "[ubuntu] apt-get install cmake or [centos] yum install cmake or [mac] brew install cmake"
+    echo "[ubuntu] apt-get -y install cmake or [centos] yum -y install cmake or [mac] brew install cmake"
     exit 1
 fi
 
 unzip -v
 if [ $? -ne 0 ]; then
     echo "[ERROR] Please install unzip first."
-    echo "[ubuntu] sudo apt-get install unzip or [centos] yum install unzip or [mac] brew install unzip"
+    echo "[ubuntu] sudo apt-get -y install unzip or [centos] yum -y install unzip or [mac] brew install unzip"
     exit 1
 fi
 
@@ -20,15 +20,22 @@ if [ $? -ne 0 ]; then
     exit 1
 fi
 
-automake --version
+g++-7 --version
 if [ $? -ne 0 ]; then
-    echo "[ERROR] Please install automake first."
-    echo "[ubuntu] sudo apt-get install automake or [centos] yum install automake or [mac] brew install automake"
+    echo "[ERROR] Please install g++-7 first."
+    echo "[ubuntu] sudo apt-get -y install g++-7 or [centos] yum -y install g++-7 or [mac] brew install gcc@7"
     exit 1
 fi
 
-#g++  sudo apt-get install g++
-#unzip sudo apt-get install unzip
+automake --version
+if [ $? -ne 0 ]; then
+    echo "[ERROR] Please install automake first."
+    echo "[ubuntu] sudo apt-get -y install automake or [centos] yum -y install automake or [mac] brew install automake"
+    exit 1
+fi
+
+#g++  sudo apt-get -y install g++
+#unzip sudo apt-get -y install unzip
 
 #compile dep libraries
 rm -rf ./_Out/Debug

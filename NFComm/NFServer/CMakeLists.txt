@@ -20,7 +20,7 @@ if (UNIX)
 	#	target_link_libraries(NFServer libSDL2d.a)
 	#endif()
 
-	target_link_libraries(NFServer -static-libstdc++)
+	target_link_libraries(NFServer -static-libstdc++ -pthread)
 
 else()
 
