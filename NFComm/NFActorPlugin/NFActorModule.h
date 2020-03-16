@@ -71,7 +71,7 @@ protected:
 	virtual bool ExecuteResultEvent();
 
 private:
-    bool test = true;
+    bool test = false;
 
     NFIKernelModule* m_pKernelModule;
     NFIThreadPoolModule* m_pThreadPoolModule;
