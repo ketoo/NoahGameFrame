@@ -39,6 +39,12 @@ if [ $sysOS == "Darwin" ];then
 	fi
 elif [ $sysOS == "Linux" ];then
     if [ $DISTRO == "Ubuntu" ]; then
+		g++ --version
+		if [ $? -ne 0 ]; then
+			echo "[ERROR] Please install g++ first."
+			echo "[Ubuntu] sudo apt-get -y install g++"
+			exit 1
+		fi
 		g++-7 --version
 		if [ $? -ne 0 ]; then
 			echo "[ERROR] Please install g++-7 first."
@@ -48,8 +54,10 @@ elif [ $sysOS == "Linux" ];then
 	elif [ $DISTRO == "CentOS" ]; then
 	    g++ --version
 		if [ $? -ne 0 ]; then
-			echo "[ERROR] Please install g++-7 first."
-			echo "[Ubuntu] sudo apt-get -y install g++-7"
+			echo "[ERROR] Install g++ first, minimum version is 7.0.0"
+            echo "[CentOS Step 1] yum install centos-release-scl -y"
+            echo "[CentOS Step 2] yum install devtoolset-7 -y"
+            echo "[CentOS Step 3] scl enable devtoolset-7 bash"
 			exit 1
 		fi
 		currentver="$(gcc -dumpfullversion -dumpversion)"
