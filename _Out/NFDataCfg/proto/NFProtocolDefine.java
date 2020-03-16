@@ -14,6 +14,7 @@ package nframe;
 		public static final String ClassName = "ClassName";// string
 		public static final String ConfigID = "ConfigID";// string
 		public static final String Disable = "Disable";// int
+		public static final String GMMoveTo = "GMMoveTo";// vector3
 		public static final String GroupID = "GroupID";// int
 		public static final String ID = "ID";// string
 		public static final String MasterID = "MasterID";// object
@@ -105,6 +106,7 @@ package nframe;
 		public static final String ClassName = "ClassName";// string
 		public static final String ConfigID = "ConfigID";// string
 		public static final String Disable = "Disable";// int
+		public static final String GMMoveTo = "GMMoveTo";// vector3
 		public static final String GroupID = "GroupID";// int
 		public static final String ID = "ID";// string
 		public static final String MasterID = "MasterID";// object
@@ -127,6 +129,7 @@ package nframe;
 		public static final String ClassName = "ClassName";// string
 		public static final String ConfigID = "ConfigID";// string
 		public static final String Disable = "Disable";// int
+		public static final String GMMoveTo = "GMMoveTo";// vector3
 		public static final String GroupID = "GroupID";// int
 		public static final String ID = "ID";// string
 		public static final String MasterID = "MasterID";// object
@@ -148,6 +151,7 @@ package nframe;
 		public static final String ClassName = "ClassName";// string
 		public static final String ConfigID = "ConfigID";// string
 		public static final String Disable = "Disable";// int
+		public static final String GMMoveTo = "GMMoveTo";// vector3
 		public static final String GroupID = "GroupID";// int
 		public static final String ID = "ID";// string
 		public static final String MasterID = "MasterID";// object
@@ -168,6 +172,7 @@ package nframe;
 		public static final String ClassName = "ClassName";// string
 		public static final String ConfigID = "ConfigID";// string
 		public static final String Disable = "Disable";// int
+		public static final String GMMoveTo = "GMMoveTo";// vector3
 		public static final String GroupID = "GroupID";// int
 		public static final String ID = "ID";// string
 		public static final String MasterID = "MasterID";// object
@@ -192,6 +197,7 @@ package nframe;
 		public static final String ClassName = "ClassName";// string
 		public static final String ConfigID = "ConfigID";// string
 		public static final String Disable = "Disable";// int
+		public static final String GMMoveTo = "GMMoveTo";// vector3
 		public static final String GroupID = "GroupID";// int
 		public static final String ID = "ID";// string
 		public static final String MasterID = "MasterID";// object
@@ -217,6 +223,7 @@ package nframe;
 		public static final String ClassName = "ClassName";// string
 		public static final String ConfigID = "ConfigID";// string
 		public static final String Disable = "Disable";// int
+		public static final String GMMoveTo = "GMMoveTo";// vector3
 		public static final String GroupID = "GroupID";// int
 		public static final String ID = "ID";// string
 		public static final String MasterID = "MasterID";// object
@@ -265,6 +272,7 @@ package nframe;
 		public static final String ClassName = "ClassName";// string
 		public static final String ConfigID = "ConfigID";// string
 		public static final String Disable = "Disable";// int
+		public static final String GMMoveTo = "GMMoveTo";// vector3
 		public static final String GroupID = "GroupID";// int
 		public static final String ID = "ID";// string
 		public static final String MasterID = "MasterID";// object
@@ -290,6 +298,7 @@ package nframe;
 		public static final String ClassName = "ClassName";// string
 		public static final String ConfigID = "ConfigID";// string
 		public static final String Disable = "Disable";// int
+		public static final String GMMoveTo = "GMMoveTo";// vector3
 		public static final String GroupID = "GroupID";// int
 		public static final String ID = "ID";// string
 		public static final String MasterID = "MasterID";// object
@@ -336,6 +345,7 @@ package nframe;
 		public static final String ClassName = "ClassName";// string
 		public static final String ConfigID = "ConfigID";// string
 		public static final String Disable = "Disable";// int
+		public static final String GMMoveTo = "GMMoveTo";// vector3
 		public static final String GroupID = "GroupID";// int
 		public static final String ID = "ID";// string
 		public static final String MasterID = "MasterID";// object
@@ -370,6 +380,7 @@ package nframe;
 		public static final String ClassName = "ClassName";// string
 		public static final String ConfigID = "ConfigID";// string
 		public static final String Disable = "Disable";// int
+		public static final String GMMoveTo = "GMMoveTo";// vector3
 		public static final String GroupID = "GroupID";// int
 		public static final String ID = "ID";// string
 		public static final String MasterID = "MasterID";// object
@@ -392,6 +403,7 @@ package nframe;
 		public static final String ClassName = "ClassName";// string
 		public static final String ConfigID = "ConfigID";// string
 		public static final String Disable = "Disable";// int
+		public static final String GMMoveTo = "GMMoveTo";// vector3
 		public static final String GroupID = "GroupID";// int
 		public static final String ID = "ID";// string
 		public static final String MasterID = "MasterID";// object
@@ -423,6 +435,7 @@ package nframe;
 		public static final String ClassName = "ClassName";// string
 		public static final String ConfigID = "ConfigID";// string
 		public static final String Disable = "Disable";// int
+		public static final String GMMoveTo = "GMMoveTo";// vector3
 		public static final String GroupID = "GroupID";// int
 		public static final String ID = "ID";// string
 		public static final String MasterID = "MasterID";// object

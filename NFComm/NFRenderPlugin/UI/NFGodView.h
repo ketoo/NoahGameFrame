@@ -53,6 +53,7 @@ private:
 	void HandlerSelected(const NFGUID& id, const bool doubleClick);
     void DrawMapData();
     void DrawToolBar();
+    void OnMapClicked(const NFVector3& pos);
 
     bool HandlerNodeHovered(const NFGUID& id);
 
@@ -68,6 +69,8 @@ private:
     int mStairColor;
     int mTextColor;
     int mImmovable;
+    NFVector2 mClickedPos;
+
 private:
 	int mGroupID = -1;
 	int mSceneID = -1;

@@ -81,6 +81,7 @@ namespace NodeSystem
         void SetBackGroundColor(const int color);
         void SetNodeSize(const int size);
         int GetNodeSize();
+        NFVector2 GetOffset();
 
         void DrawRect(const NFVector2& p_min, const NFVector2& p_max, int col);
         void DrawRectFilled(const NFVector2& p_min, const NFVector2& p_max, int col);

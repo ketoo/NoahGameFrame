@@ -179,6 +179,41 @@ bool NFGodView::Execute()
 
 	DrawToolBar();
 
+	if (mSceneID > 0 && mGroupID)
+	{
+		if (ImGui::IsWindowHovered() && !ImGui::IsAnyItemActive() && ImGui::IsMouseClicked(0))
+		{
+			if (!mCurrentObjectID.IsNull())
+			{
+				ImVec2 wPos = ImGui::GetWindowPos();
+				ImVec2 wSize = ImGui::GetWindowSize();
+				NFVector2 offset = mNodeSystem.GetOffset();
+				ImGuiIO& io = ImGui::GetIO();
+
+				NFVector2 displayOffset(mNodeSystem.GetNodeSize() / 2, mNodeSystem.GetNodeSize() / 2);
+				NFVector2 vec(io.MousePos.x - wPos.x - offset.X() - displayOffset.X(), io.MousePos.y - offset.Y() - displayOffset.Y());
+
+				mClickedPos = NFVector2(vec.X() / mNodeSystem.GetNodeSize(), vec.Y() / mNodeSystem.GetNodeSize());
+
+				m_pKernelModule->SetPropertyVector3(mCurrentObjectID, NFrame::IObject::GMMoveTo(), NFVector3(mClickedPos.X(), 0, -mClickedPos.Y()));
+			}
+		}
+	}
+
+	auto posNode = mNodeSystem.FindNode(NFGUID());
+	if (!posNode)
+	{
+		NFVector2 pos = ToMapGridPos(NFVector3(mClickedPos.X(), 0, -mClickedPos.Y()));
+		mNodeSystem.AddNode(NFGUID(), "Pos", pos, mStairColor);
+	}
+	else
+	{
+		posNode->pos = ToMapGridPos(NFVector3(mClickedPos.X(), 0, mClickedPos.Y()));
+		std::string nodeName = "Pos(" + std::to_string((int)posNode->pos.X()) + "," + std::to_string((int)posNode->pos.Y()) + ")";
+		posNode->name = nodeName;
+
+	}
+
 	return true;
 }
 
@@ -318,6 +353,11 @@ void NFGodView::DrawToolBar()
 
 }
 
+void NFGodView::OnMapClicked(const NFVector3& pos)
+{
+
+}
+
 bool NFGodView::HandlerNodeHovered(const NFGUID& id)
 {
 	const std::string& className = m_pKernelModule->GetPropertyString(id, NFrame::IObject::ClassName());
@@ -402,7 +442,9 @@ NFGUID NFGodView::GetCurrentObjectID()
 
 void NFGodView::SetCurrentObjectID(const NFGUID& id)
 {
-   mCurrentObjectID = id;
+	mCurrentObjectID = id;
+	const NFVector3& pos = m_pKernelModule->GetPropertyVector3(id, NFrame::IObject::GMMoveTo());
+	mClickedPos = NFVector2(pos.X(), pos.Z());
 }
 
 void NFGodView::RenderSceneObjectNode(const int sceneID, const int groupID)
@@ -446,6 +488,12 @@ void NFGodView::UpdateSceneObjectNodePosition(const int sceneID, const int group
 				auto node = mNodeSystem.FindNode(guid);
 				node->pos = ToMapGridPos(pos);
 				node->name = barTile;
+
+				if (guid == mCurrentObjectID)
+				{
+					const NFVector3& pos = m_pKernelModule->GetPropertyVector3(guid, NFrame::IObject::GMMoveTo());
+					mClickedPos = NFVector2(pos.X(), pos.Z());
+				}
 			}
 		}
 	}
