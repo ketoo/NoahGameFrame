@@ -28,16 +28,18 @@ fi
 sysOS=`uname -s`
 
 if [ $sysOS == "Darwin" ];then
-    brew install gcc6
+    brew install gcc@7
 elif [ $sysOS == "Linux" ];then
     if [ $DISTRO == "Debian" ] || [ $DISTRO == "Ubuntu" ] || [ $DISTRO == "Raspbian" ]; then
-        sudo apt-get install gcc6
+        sudo apt-get install g++-7
         sudo apt-get install libtool
         sudo apt-get install libstdc++-static
         sudo apt-get install libreadline6-dev 
         sudo apt-get install libncurses5-dev
     else
-        sudo yum -y install gcc6
+        sudo yum -y install centos-release-scl
+		sudo yum -y install devtoolset-7
+		sudo scl enable devtoolset-7 bash 
         sudo yum -y install libtool
         sudo yum -y install readline-devel
         sudo yum -y install ncurses-devel

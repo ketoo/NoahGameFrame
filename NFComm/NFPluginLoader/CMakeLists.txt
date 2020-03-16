@@ -68,7 +68,7 @@ if (UNIX)
 	#	target_link_libraries(NFPluginLoader libSDL2d.a)
 	#endif()
 
-	target_link_libraries(NFPluginLoader -static-libstdc++)
+	target_link_libraries(NFPluginLoader -static-libstdc++ -pthread ${CMAKE_DL_LIBS})
 
 else()
 
