@@ -103,11 +103,18 @@ bool NFActorModule::ExecuteEvent()
 		NF_SHARE_PTR<NFIActor> pActor = it.second;
 		if (pActor)
 		{
-			m_pThreadPoolModule->DoAsyncTask(pActor->ID(), "",
-				[pActor](NFThreadTask& threadTask) -> void
+			if (test)
 			{
 				pActor->Execute();
-			});
+			}
+			else
+			{
+				m_pThreadPoolModule->DoAsyncTask(pActor->ID(), "",
+					[pActor](NFThreadTask& threadTask) -> void
+					{
+						pActor->Execute();
+					});
+			}
 		}
 	}
 	
@@ -129,14 +136,16 @@ bool NFActorModule::ExecuteResultEvent()
 	return true;
 }
 
-bool NFActorModule::SendMsgToActor(const NFGUID actorIndex, const int eventID, const std::string& data, const std::string& arg)
+bool NFActorModule::SendMsgToActor(const NFGUID actorIndex, const NFGUID who, const int eventID, const std::string& data, const std::string& arg)
 {
+	static uint64_t index = 0;
     NF_SHARE_PTR<NFIActor> pActor = GetActor(actorIndex);
     if (nullptr != pActor)
     {
         NFActorMessage xMessage;
 
-		xMessage.id	= actorIndex;
+		xMessage.id = who;
+		xMessage.index	= index++;
         xMessage.data = data;
 		xMessage.msgID = eventID;
 		xMessage.arg = arg;
@@ -171,6 +180,7 @@ bool NFActorModule::SendMsgToActor(const NFGUID actorIndex, const NFActorMessage
 	auto it = mxActorMap.find(actorIndex);
 	if (it != mxActorMap.end())
 	{
+		std::cout << "send message " << message.msgID << " to " << actorIndex.ToString() << " and msg index is " << message.index << std::endl;
 		return it->second->SendMsg(message);
 	}
 

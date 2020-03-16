@@ -20,6 +20,7 @@ namespace NFrame
 		public static readonly String ClassName = "ClassName";// string
 		public static readonly String ConfigID = "ConfigID";// string
 		public static readonly String Disable = "Disable";// int
+		public static readonly String GMMoveTo = "GMMoveTo";// vector3
 		public static readonly String GroupID = "GroupID";// int
 		public static readonly String ID = "ID";// string
 		public static readonly String MasterID = "MasterID";// object
@@ -111,6 +112,7 @@ namespace NFrame
 		public static readonly String ClassName = "ClassName";// string
 		public static readonly String ConfigID = "ConfigID";// string
 		public static readonly String Disable = "Disable";// int
+		public static readonly String GMMoveTo = "GMMoveTo";// vector3
 		public static readonly String GroupID = "GroupID";// int
 		public static readonly String ID = "ID";// string
 		public static readonly String MasterID = "MasterID";// object
@@ -133,6 +135,7 @@ namespace NFrame
 		public static readonly String ClassName = "ClassName";// string
 		public static readonly String ConfigID = "ConfigID";// string
 		public static readonly String Disable = "Disable";// int
+		public static readonly String GMMoveTo = "GMMoveTo";// vector3
 		public static readonly String GroupID = "GroupID";// int
 		public static readonly String ID = "ID";// string
 		public static readonly String MasterID = "MasterID";// object
@@ -154,6 +157,7 @@ namespace NFrame
 		public static readonly String ClassName = "ClassName";// string
 		public static readonly String ConfigID = "ConfigID";// string
 		public static readonly String Disable = "Disable";// int
+		public static readonly String GMMoveTo = "GMMoveTo";// vector3
 		public static readonly String GroupID = "GroupID";// int
 		public static readonly String ID = "ID";// string
 		public static readonly String MasterID = "MasterID";// object
@@ -174,6 +178,7 @@ namespace NFrame
 		public static readonly String ClassName = "ClassName";// string
 		public static readonly String ConfigID = "ConfigID";// string
 		public static readonly String Disable = "Disable";// int
+		public static readonly String GMMoveTo = "GMMoveTo";// vector3
 		public static readonly String GroupID = "GroupID";// int
 		public static readonly String ID = "ID";// string
 		public static readonly String MasterID = "MasterID";// object
@@ -198,6 +203,7 @@ namespace NFrame
 		public static readonly String ClassName = "ClassName";// string
 		public static readonly String ConfigID = "ConfigID";// string
 		public static readonly String Disable = "Disable";// int
+		public static readonly String GMMoveTo = "GMMoveTo";// vector3
 		public static readonly String GroupID = "GroupID";// int
 		public static readonly String ID = "ID";// string
 		public static readonly String MasterID = "MasterID";// object
@@ -223,6 +229,7 @@ namespace NFrame
 		public static readonly String ClassName = "ClassName";// string
 		public static readonly String ConfigID = "ConfigID";// string
 		public static readonly String Disable = "Disable";// int
+		public static readonly String GMMoveTo = "GMMoveTo";// vector3
 		public static readonly String GroupID = "GroupID";// int
 		public static readonly String ID = "ID";// string
 		public static readonly String MasterID = "MasterID";// object
@@ -342,6 +349,7 @@ namespace NFrame
 		public static readonly String ClassName = "ClassName";// string
 		public static readonly String ConfigID = "ConfigID";// string
 		public static readonly String Disable = "Disable";// int
+		public static readonly String GMMoveTo = "GMMoveTo";// vector3
 		public static readonly String GroupID = "GroupID";// int
 		public static readonly String ID = "ID";// string
 		public static readonly String MasterID = "MasterID";// object
@@ -367,6 +375,7 @@ namespace NFrame
 		public static readonly String ClassName = "ClassName";// string
 		public static readonly String ConfigID = "ConfigID";// string
 		public static readonly String Disable = "Disable";// int
+		public static readonly String GMMoveTo = "GMMoveTo";// vector3
 		public static readonly String GroupID = "GroupID";// int
 		public static readonly String ID = "ID";// string
 		public static readonly String MasterID = "MasterID";// object
@@ -484,6 +493,7 @@ namespace NFrame
 		public static readonly String ClassName = "ClassName";// string
 		public static readonly String ConfigID = "ConfigID";// string
 		public static readonly String Disable = "Disable";// int
+		public static readonly String GMMoveTo = "GMMoveTo";// vector3
 		public static readonly String GroupID = "GroupID";// int
 		public static readonly String ID = "ID";// string
 		public static readonly String MasterID = "MasterID";// object
@@ -518,6 +528,7 @@ namespace NFrame
 		public static readonly String ClassName = "ClassName";// string
 		public static readonly String ConfigID = "ConfigID";// string
 		public static readonly String Disable = "Disable";// int
+		public static readonly String GMMoveTo = "GMMoveTo";// vector3
 		public static readonly String GroupID = "GroupID";// int
 		public static readonly String ID = "ID";// string
 		public static readonly String MasterID = "MasterID";// object
@@ -540,6 +551,7 @@ namespace NFrame
 		public static readonly String ClassName = "ClassName";// string
 		public static readonly String ConfigID = "ConfigID";// string
 		public static readonly String Disable = "Disable";// int
+		public static readonly String GMMoveTo = "GMMoveTo";// vector3
 		public static readonly String GroupID = "GroupID";// int
 		public static readonly String ID = "ID";// string
 		public static readonly String MasterID = "MasterID";// object
@@ -571,6 +583,7 @@ namespace NFrame
 		public static readonly String ClassName = "ClassName";// string
 		public static readonly String ConfigID = "ConfigID";// string
 		public static readonly String Disable = "Disable";// int
+		public static readonly String GMMoveTo = "GMMoveTo";// vector3
 		public static readonly String GroupID = "GroupID";// int
 		public static readonly String ID = "ID";// string
 		public static readonly String MasterID = "MasterID";// object

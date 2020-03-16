@@ -250,7 +250,7 @@ bool NFHelloWorld4Module::AfterInit()
 
 		for (int i = 0; i < messageCount; ++i)
 		{
-			m_pActorModule->SendMsgToActor(actorID1->ID(), i, "test");
+			m_pActorModule->SendMsgToActor(actorID1->ID(), NFGUID(), i, "test");
 			//m_pActorModule->SendMsgToActor(actorID1, i, std::to_string(i*i));
 		}
 

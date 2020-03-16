@@ -188,6 +188,11 @@ namespace NodeSystem
         return this->nodeSize;
     }
 
+    NFVector2 NFNodeSystem::GetOffset()
+    {
+        return offset;
+    }
+
 	void NFNodeSystem::DrawRect(const NFVector2& p_min, const NFVector2& p_max, int col)
 	{
         ImVec2 disPlayPos(p_min.X() + offset.X(), p_min.Y() + offset.Y());

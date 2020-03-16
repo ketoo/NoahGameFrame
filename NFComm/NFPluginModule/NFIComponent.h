@@ -43,9 +43,11 @@ public:
 	NFActorMessage()
 	{
 		msgID = 0;
+		index = 0;
 	}
 
 	int msgID;
+	uint64_t index;
     NFGUID id;
 	std::string data;
 	std::string arg;

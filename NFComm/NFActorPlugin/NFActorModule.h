@@ -58,18 +58,21 @@ public:
 	virtual NF_SHARE_PTR<NFIActor> GetActor(const NFGUID nActorIndex);
 	virtual bool ReleaseActor(const NFGUID nActorIndex);
 
-	virtual bool SendMsgToActor(const NFGUID actorIndex, const NFActorMessage& message);
-    virtual bool SendMsgToActor(const NFGUID actorIndex, const int eventID, const std::string& data, const std::string& arg = "");
+    virtual bool SendMsgToActor(const NFGUID actorIndex, const NFGUID who, const int eventID, const std::string& data, const std::string& arg = "");
 
 	virtual bool AddResult(const NFActorMessage& message);
 
 protected:
+    virtual bool SendMsgToActor(const NFGUID actorIndex, const NFActorMessage& message);
+
 	virtual bool AddEndFunc(const int subMessageID, ACTOR_PROCESS_FUNCTOR_PTR functorPtr_end);
 
 	virtual bool ExecuteEvent();
 	virtual bool ExecuteResultEvent();
 
 private:
+    bool test = true;
+
     NFIKernelModule* m_pKernelModule;
     NFIThreadPoolModule* m_pThreadPoolModule;
 
