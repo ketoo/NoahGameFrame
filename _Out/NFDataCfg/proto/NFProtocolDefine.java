@@ -183,6 +183,7 @@ package nframe;
 		public static final String State = "State";// int
 		// Property
 		public static final String HeroConfigID = "HeroConfigID";// string
+		public static final String HeroConfigIDEx = "HeroConfigIDEx";// string
 		public static final String Job = "Job";// int
 		public static final String Level = "Level";// int
 		// Record
