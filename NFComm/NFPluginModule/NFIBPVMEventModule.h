@@ -33,6 +33,7 @@
 #include "NFIClassModule.h"
 #include "NFIElementModule.h"
 
+//block id, monitor id, event id, map data
 typedef std::function<int(const NFGUID&, const NFGUID&, const int, const NFMapEx<std::string, NFData>&)> BLUEPRINT_EVENT_FUNCTOR;
 
 class NFIBPVMEventModule

@@ -89,6 +89,8 @@ bool NFBPVMEventModule::OnReloadPlugin()
 
 int NFBPVMEventModule::OnEventCommonEvent(const NFGUID& self, const int eventID, const NFDataList& var)
 {
+    NFMapEx<std::string, NFData> emptyMap;
+
     auto item = mBluePrintBlockAction.First();
     while (item)
     {
@@ -99,6 +101,8 @@ int NFBPVMEventModule::OnEventCommonEvent(const NFGUID& self, const int eventID,
             auto monitorData =  eventData->First(monitorID);
             while (monitorData && !monitorID.IsNull())
             {
+                //const NFGUID& objectID, const  NFGUID& monitorID, const int eventI
+                monitorData->operator()(self, monitorID, eventID, emptyMap);
 
                 monitorID.SetHead(0);
                 monitorID.SetData(0);

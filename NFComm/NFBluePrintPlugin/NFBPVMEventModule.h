@@ -92,6 +92,7 @@ private:
     int OnRecordCommonEvent(const NFGUID& self, const RECORD_EVENT_DATA& xEventData, const NFData& oldVar, const NFData& newVar);
 
 private:
+    //block id ->
 	NFMapEx<NFGUID, BluePrintBlockAction> mBluePrintBlockAction;
 
 

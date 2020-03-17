@@ -33,15 +33,34 @@ void NFDebugger::UpdateOutputData(const NFGUID& runTimeOnwer, const bool iterati
 {
     if (!runTimeOnwer.IsNull())
     {
+        auto lvl = GetInputArg(NFDebuggerInputArg::LogLevel);
+        auto data = GetInputArg(NFDebuggerInputArg::LogData);
+
         std::ostringstream os;
 
-        os << "debuger++++++";
+        os << data->varData.GetString();
 
-        m_pLogModule->LogDebug(os);
+        switch (lvl->varData.GetInt())
+        {
+            case NFILogModule::NF_LOG_LEVEL::NLL_DEBUG_NORMAL:
+                m_pLogModule->LogDebug(runTimeOnwer, os);
+                break;
+            case NFILogModule::NF_LOG_LEVEL::NLL_INFO_NORMAL:
+                m_pLogModule->LogInfo(runTimeOnwer, os);
+                break;
+            case NFILogModule::NF_LOG_LEVEL::NLL_WARING_NORMAL:
+                m_pLogModule->LogWarning(runTimeOnwer, os);
+                break;
+            case NFILogModule::NF_LOG_LEVEL::NLL_ERROR_NORMAL:
+                m_pLogModule->LogError(runTimeOnwer, os);
+                break;
+        default:
+            break;
+        }
     }
 }
 
 NF_SHARE_PTR<NFIOData> NFDebugger::FindOutputNodeIOData()
 {
-    return GetOutputArg(NFDebugerOutputArg::NextNode);
+    return GetOutputArg(NFDebuggerOutputArg::NextNode);
 }

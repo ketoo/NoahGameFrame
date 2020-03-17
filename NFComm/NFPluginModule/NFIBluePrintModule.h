@@ -285,11 +285,20 @@ NF_SMART_ENUM(NFVariableType,
 
 //----------FOR DEBUGER--------------
 
-NF_SMART_ENUM(NFDebugerInputArg,
+NF_SMART_ENUM(NFDebuggerLevel,
+	Debug_Level,
+	Info_Level,
+	Waring_Level,
+	Error_Level,
+	)
+
+NF_SMART_ENUM(NFDebuggerInputArg,
 	LastNode,
+	LogLevel,
+	LogData,
 )
 
-NF_SMART_ENUM(NFDebugerOutputArg,
+NF_SMART_ENUM(NFDebuggerOutputArg,
 	NextNode,
 )
 ///////////FOR MODIFIER BEGIN///////////////////////////

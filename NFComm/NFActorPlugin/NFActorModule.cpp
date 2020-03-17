@@ -180,7 +180,7 @@ bool NFActorModule::SendMsgToActor(const NFGUID actorIndex, const NFActorMessage
 	auto it = mxActorMap.find(actorIndex);
 	if (it != mxActorMap.end())
 	{
-		std::cout << "send message " << message.msgID << " to " << actorIndex.ToString() << " and msg index is " << message.index << std::endl;
+		//std::cout << "send message " << message.msgID << " to " << actorIndex.ToString() << " and msg index is " << message.index << std::endl;
 		return it->second->SendMsg(message);
 	}
 
