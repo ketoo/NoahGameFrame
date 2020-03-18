@@ -48,7 +48,9 @@ public:
 class NFIThreadPoolModule : public NFIModule
 {
 public:
-template<typename BaseType>
+	virtual void SetCpu(const int cpuCount) = 0;
+
+	template<typename BaseType>
 	void DoAsyncTask(const NFGUID taskID, const std::string& data, BaseType* pBase, void (BaseType::*handler_begin)(NFThreadTask&&))
 	{
         TASK_PROCESS_FUNCTOR functor_begin = std::bind(handler_begin, pBase, std::placeholders::_1);

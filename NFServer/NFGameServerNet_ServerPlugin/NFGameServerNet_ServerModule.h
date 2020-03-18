@@ -40,6 +40,7 @@
 #include "NFComm/NFPluginModule/NFIGameServerNet_ServerModule.h"
 #include "NFComm/NFPluginModule/NFIGameServerNet_ServerModule.h"
 #include "NFComm/NFPluginModule/NFIScheduleModule.h"
+#include "NFComm/NFPluginModule/NFIThreadPoolModule.h"
 ////////////////////////////////////////////////////////////////////////////
 
 
@@ -139,5 +140,6 @@ private:
 	NFISceneModule* m_pSceneModule;
 	NFINetClientModule* m_pNetClientModule;
 	NFIScheduleModule* m_pScheduleModule;
+    NFIThreadPoolModule* m_pThreadPoolModule;
 };
 #endif
