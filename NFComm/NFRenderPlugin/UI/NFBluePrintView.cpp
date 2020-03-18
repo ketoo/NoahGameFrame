@@ -474,7 +474,7 @@ void NFBluePrintView::PinRender(NFNodePin* pin)
 			PinRenderForModifier(pin);
 			break;
 		case NFBlueprintType::DEBUGER:
-			PinRenderForLogger(pin);
+			PinRenderForDebugger(pin);
 			break;
 		case NFBlueprintType::EXECUTER:
 			PinRenderForExecuter(pin);
@@ -1386,8 +1386,47 @@ void NFBluePrintView::PinRenderForRecordRemModifier(NFNodePin* pin)
 {
 }
 
-void NFBluePrintView::PinRenderForLogger(NFNodePin* pin)
+void NFBluePrintView::PinRenderForDebugger(NFNodePin* pin)
 {
+	int itemWidth = 80;
+
+	ImGui::PushItemWidth(itemWidth);
+	auto debugger = std::dynamic_pointer_cast<NFIDebugger>(m_pBluePrintModule->FindNode(pin->nodeId));
+	if (debugger)
+	{
+		if (pin->name == NFDebuggerInputArg::toString(NFDebuggerInputArg::LogLevel))
+		{
+			auto logLevel = debugger->GetInputArg(NFDebuggerInputArg::LogLevel);
+
+			NFDebuggerLevel lvl = logLevel->varData.GetInt();
+
+			ImGui::SameLine();
+			if (ImGui::BeginCombo("", lvl.toString().c_str()))
+			{
+				for (auto x : NFDebuggerLevel::allValues())
+				{
+					if (ImGui::Selectable(x.toString().c_str(), false))
+					{
+						logLevel->varData.SetInt(x);
+					}
+				}
+				ImGui::EndCombo();
+			}
+		}
+		else if (pin->name == NFDebuggerInputArg::toString(NFDebuggerInputArg::LogData))
+		{
+			ImGui::SameLine();
+
+			static char str0[128] = "";
+			if (ImGui::InputText("", str0, IM_ARRAYSIZE(str0)))
+			{
+				auto logData = debugger->GetInputArg(NFDebuggerInputArg::LogData);
+				logData->varData.SetString(str0);
+			}
+		}
+	}
+
+	ImGui::PopItemWidth();
 }
 
 void NFBluePrintView::PinRenderForExecuter(NFNodePin* pin)

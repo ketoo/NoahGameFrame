@@ -57,7 +57,7 @@ bool NFActor::Execute()
 
 		if (xBeginFunctor != nullptr)
 		{
-			std::cout << ID().ToString() << " received message " << messageObject.msgID << " and msg index is " << messageObject.index << " totaly msg count: " << mMessageQueue.size_approx() << std::endl;
+			//std::cout << ID().ToString() << " received message " << messageObject.msgID << " and msg index is " << messageObject.index << " totaly msg count: " << mMessageQueue.size_approx() << std::endl;
 
 			xBeginFunctor->operator()(messageObject);
 

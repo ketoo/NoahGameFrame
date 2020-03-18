@@ -35,6 +35,7 @@ bool NFWorldNet_ServerModule::Init()
 	m_pElementModule = pPluginManager->FindModule<NFIElementModule>();
 	m_pClassModule = pPluginManager->FindModule<NFIClassModule>();
 	m_pNetClientModule = pPluginManager->FindModule<NFINetClientModule>();
+	m_pThreadPoolModule = pPluginManager->FindModule<NFIThreadPoolModule>();
 	
     return true;
 }
@@ -77,6 +78,10 @@ bool NFWorldNet_ServerModule::AfterInit()
                 const int nCpus = m_pElementModule->GetPropertyInt32(strId, NFrame::Server::CpuCount());
                 //const std::string& strName = m_pElementModule->GetPropertyString(strId, NFrame::Server::ID());
                 //const std::string& strIP = m_pElementModule->GetPropertyString(strId, NFrame::Server::IP());
+				if (nCpus > 0)
+				{
+					m_pThreadPoolModule->SetCpu(nCpus);
+				}
 
                 int nRet = m_pNetModule->Initialization(nMaxConnect, nPort, nCpus);
                 if (nRet < 0)

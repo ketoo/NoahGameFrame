@@ -35,6 +35,7 @@ bool NFLoginNet_ServerModule::Init()
 	m_pElementModule = pPluginManager->FindModule<NFIElementModule>();
 	m_pNetClientModule = pPluginManager->FindModule<NFINetClientModule>();
 	m_pLoginToMasterModule = pPluginManager->FindModule<NFILoginToMasterModule>();
+	m_pThreadPoolModule = pPluginManager->FindModule<NFIThreadPoolModule>();
 
 	return true;
 }
@@ -76,6 +77,10 @@ bool NFLoginNet_ServerModule::AfterInit()
 				const int nPort = m_pElementModule->GetPropertyInt32(strId, NFrame::Server::Port());
 				const int nMaxConnect = m_pElementModule->GetPropertyInt32(strId, NFrame::Server::MaxOnline());
 				const int nCpus = m_pElementModule->GetPropertyInt32(strId, NFrame::Server::CpuCount());
+				if (nCpus > 0)
+				{
+					m_pThreadPoolModule->SetCpu(nCpus);
+				}
 
 				int nRet = m_pNetModule->Initialization(nMaxConnect, nPort, nCpus);
 				if (nRet < 0)

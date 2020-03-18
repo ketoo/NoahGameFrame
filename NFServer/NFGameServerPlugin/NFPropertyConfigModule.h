@@ -55,13 +55,23 @@ public:
 
     virtual const std::string& GetInitPropertyID(const int nJob,  const int nLevel);
 
+    virtual void ClearInitPropertyData();
+
+    virtual void AddInitPropertyID(const int nJob, const int nLevel, const std::string& data);
+
+    virtual void SetEx(const bool b);
+
 protected:
     void Load();
 
-private:
+    std::map<NFGUID, std::string>& GetData();
 
-	//diffent job, [Level->ConfigID]
-	std::map<int, std::map<int, std::string>> mhtCoefficienData;
+private:
+    bool mbExtra = false;
+
+	//[job,Level]->ConfigID
+    std::map<NFGUID, std::string> mhtCoefficienData;
+    std::map<NFGUID, std::string> mhtCoefficienDataEx;
 
     NFIClassModule* m_pClassModule;
     NFIElementModule* m_pElementModule;

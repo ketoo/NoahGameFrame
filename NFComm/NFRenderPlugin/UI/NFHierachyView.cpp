@@ -385,10 +385,10 @@ void NFHierachyView::BluePrintViewSubRenderForMonitorHead(NF_SHARE_PTR<NFIMonito
 {
 	static int objectID = 0;
 	static int eventID = 0;
-
+	 
 	if (ImGui::Button("DoEvent"))
 	{
-		m_pEventModule->DoEvent(NFGUID(pPluginManager->GetAppID(),objectID), eventID, NFDataList::Empty());
+		m_pEventModule->DoEvent(monitor->id, eventID, NFDataList::Empty());
 	}
 
 	ImGui::SameLine();

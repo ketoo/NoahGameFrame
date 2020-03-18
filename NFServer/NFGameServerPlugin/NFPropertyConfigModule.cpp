@@ -54,17 +54,36 @@ bool NFPropertyConfigModule::AfterInit()
 
 const std::string& NFPropertyConfigModule::GetInitPropertyID(const int nJob,  const int nLevel)
 {
-	auto it = mhtCoefficienData.find(nJob);
-	if (it != mhtCoefficienData.end())
+    std::map<NFGUID, std::string>& propertyData = GetData();
+	auto it = propertyData.find(NFGUID(nJob, nLevel));
+	if (it != propertyData.end())
 	{
-		auto refPropertyIDName = it->second.find(nLevel);
-		if (refPropertyIDName != it->second.end())
-		{
-			return refPropertyIDName->second;
-        }
+        return it->second;
 	}
 
     return NULL_STR;
+}
+
+void NFPropertyConfigModule::ClearInitPropertyData()
+{
+    std::map<NFGUID, std::string>& propertyData = GetData();
+    propertyData.clear();
+}
+
+void NFPropertyConfigModule::AddInitPropertyID(const int nJob, const int nLevel, const std::string& data)
+{
+    std::map<NFGUID, std::string>& propertyData = GetData();
+
+	auto it = propertyData.find(NFGUID(nJob, nLevel));
+	if (it != propertyData.end())
+	{
+        propertyData.insert(std::make_pair(NFGUID(nJob, nLevel), data));
+	}
+}
+
+void NFPropertyConfigModule::SetEx(const bool b)
+{
+    mbExtra = b;
 }
 
 void NFPropertyConfigModule::Load()
@@ -83,35 +102,34 @@ void NFPropertyConfigModule::Load()
                 const int nJob = m_pElementModule->GetPropertyInt32(strId, NFrame::InitProperty::Job());
                 const int nLevel = m_pElementModule->GetPropertyInt32(strId, NFrame::InitProperty::Level());
 
-				auto xPropertyMap = mhtCoefficienData.find(nJob);
-				if (xPropertyMap == mhtCoefficienData.end())
-				{
-					std::map<int, std::string> propertyMap;
-					mhtCoefficienData.insert(std::make_pair(nJob, propertyMap));
-				}
-				
-				xPropertyMap = mhtCoefficienData.find(nJob);
+                std::map<NFGUID, std::string>& propertyData = GetData();
 
-				auto xRefPropertyIDName = xPropertyMap->second.find(nLevel);
-				if (xRefPropertyIDName == xPropertyMap->second.end())
+				auto it = propertyData.find(NFGUID(nJob, nLevel));
+				if (it == propertyData.end())
 				{
-					xPropertyMap->second.insert(std::make_pair(nLevel, strId));
+                    propertyData.insert(std::make_pair(NFGUID(nJob, nLevel), strId));
 				}
             }
         }
     }
 }
 
+std::map<NFGUID, std::string>& NFPropertyConfigModule::GetData()
+{
+    if (mbExtra)
+    {
+        return mhtCoefficienDataEx;
+    }
+
+    return mhtCoefficienData;
+}
+
 bool NFPropertyConfigModule::LegalLevel(const int nJob, const int nLevel)
 {
-	auto it = mhtCoefficienData.find(nJob);
+	auto it = mhtCoefficienData.find(NFGUID(nJob, nLevel));
 	if (it != mhtCoefficienData.end())
 	{
-		auto refPropertyIDName = it->second.find(nLevel);
-		if (refPropertyIDName != it->second.end())
-		{
-			return true;
-		}
+		return true;
 	}
 
 

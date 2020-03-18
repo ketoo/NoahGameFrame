@@ -105,7 +105,7 @@ private:
 	void PinRenderForRecordAddModifier(NFNodePin* pin);
 	void PinRenderForRecordRemModifier(NFNodePin* pin);
 
-	void PinRenderForLogger(NFNodePin* pin);
+	void PinRenderForDebugger(NFNodePin* pin);
 	void PinRenderForExecuter(NFNodePin* pin);
 
 	void CreateLogicBlock();

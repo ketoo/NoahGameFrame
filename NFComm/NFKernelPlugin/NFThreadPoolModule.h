@@ -25,7 +25,7 @@
 
 
 #ifndef NF_THREAD_POOL_MODULE_H
-#define NF_THREAD_POOL_NF_THREAD_POOL_MODULE_HMANAGER_H
+#define NF_THREAD_POOL_MODULE_H
 
 #include <map>
 #include <string>
@@ -85,6 +85,8 @@ public:
 	NFThreadPoolModule(NFIPluginManager* p);
     virtual ~NFThreadPoolModule();
 
+	virtual void SetCpu(const int cpuCount);
+
     virtual bool Init();
 
     virtual bool AfterInit();
@@ -103,11 +105,10 @@ protected:
 	void ExecuteTaskResult();
 
 private:
+	int mCPUCount = 1;
 
 	NFQueue<NFThreadTask> mTaskResult;
-	
 	std::vector<NF_SHARE_PTR<NFThreadCell>> mThreadPool;
-	//NFConsistentHashMapEx<int, NFThreadCell> mThreadPool;
 };
 
 #endif
