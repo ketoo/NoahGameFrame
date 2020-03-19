@@ -364,8 +364,17 @@ NF_SHARE_PTR<NFIExecuter> NFBluePrintModule::AddExecuter(const NFGUID& logicBloc
 		case NFExecuterType::DestroyObject:
 			executer = NF_SHARE_PTR<NFIExecuter>(NF_NEW NFDestroyObjectExecuter(this->pPluginManager, logicBlockId, id, name));
 			break;
+		case NFExecuterType::GameEvent:
+			executer = NF_SHARE_PTR<NFIExecuter>(NF_NEW NFGameEventExecuter(this->pPluginManager, logicBlockId, id, name));
+			break;
 		case NFExecuterType::MoveObject:
 			executer = NF_SHARE_PTR<NFIExecuter>(NF_NEW NFMoveObjectExecuter(this->pPluginManager, logicBlockId, id, name));
+			break;
+		case NFExecuterType::Sleep:
+			executer = NF_SHARE_PTR<NFIExecuter>(NF_NEW NFSleepExecuter(this->pPluginManager, logicBlockId, id, name));
+			break;
+		case NFExecuterType::SendMessage:
+			executer = NF_SHARE_PTR<NFIExecuter>(NF_NEW NFSendMessageExecuter(this->pPluginManager, logicBlockId, id, name));
 			break;
 		case NFExecuterType::EnterScene:
 			executer = NF_SHARE_PTR<NFIExecuter>(NF_NEW NFEnterSceneExecuter(this->pPluginManager, logicBlockId, id, name));

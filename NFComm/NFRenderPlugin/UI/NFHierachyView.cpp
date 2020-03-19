@@ -383,21 +383,41 @@ void NFHierachyView::BluePrintViewSubRenderForArithmetic()
 
 void NFHierachyView::BluePrintViewSubRenderForMonitorHead(NF_SHARE_PTR<NFIMonitor> monitor)
 {
-	static int objectID = 0;
-	static int eventID = 0;
+	static char objectID[128] = { 0 };
+	static char eventID[128] = {0};
 	 
-	if (ImGui::Button("DoEvent"))
+	
+	NFGUID id(objectID);
+	switch (monitor->monitorType)
 	{
-		m_pEventModule->DoEvent(monitor->id, eventID, NFDataList::Empty());
+	case NFMonitorType::GameEvent:
+		if (ImGui::Button("DoGameEvent"))
+		{
+			m_pEventModule->DoEvent(id, std::atoi(eventID), NFDataList::Empty());
+		}
+		break;
+	case NFMonitorType::NetworkEvent:
+		if (ImGui::Button("DoNetworkEvent"))
+		{
+			m_pEventModule->DoEvent(id, std::atoi(eventID), NFDataList::Empty());
+		}
+		break;
+	case NFMonitorType::NetworkMsgEvent:
+		if (ImGui::Button("DoNetworkMsgEvent"))
+		{
+			m_pEventModule->DoEvent(id, std::atoi(eventID), NFDataList::Empty());
+		}
+		break;
+	default:
+		break;
 	}
 
 	ImGui::SameLine();
-	ImGui::InputInt("", &eventID);
+	ImGui::InputText("", eventID, IM_ARRAYSIZE(eventID));
 
 	ImGui::Text("NFGUID");
 	ImGui::SameLine();
-	ImGui::InputInt("", &objectID);
-
+	ImGui::InputText("", objectID, IM_ARRAYSIZE(objectID));
 }
 
 void NFHierachyView::BluePrintViewSubRenderForMonitorBody(NF_SHARE_PTR<NFIMonitor> monitor)
@@ -459,7 +479,6 @@ void NFHierachyView::BluePrintViewSubRenderForMonitorBody(NF_SHARE_PTR<NFIMonito
 
 			ImGui::EndPopup();
 		}
-
 
 		//arg: class name
 		ImGui::Text("ClassName");

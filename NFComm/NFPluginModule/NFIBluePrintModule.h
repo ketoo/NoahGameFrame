@@ -165,6 +165,15 @@ NF_SMART_ENUM(NFMonitorType,
 	SkillEvent,
 	BuffEvent,
 	)
+
+NF_SMART_ENUM(NFClassEventType,
+	OBJECT_NO_DATA,
+	OBJECT_HAS_DATA,
+	OBJECT_FINISHED,
+	BEFORE_DESTROY,
+	DESTROY,
+	)
+
 	//------------------------------
 	NF_SMART_ENUM(NFGameEventMonitorInputArg,
 		EventID,
@@ -223,8 +232,6 @@ NF_SMART_ENUM(NFMonitorType,
 		NextNode,
 		ObjectID,
 		PropName,
-		OldValue,
-		NewValue,
 		)
 
 	//------------------------------
@@ -295,6 +302,13 @@ NF_SMART_ENUM(NFDebuggerLevel,
 NF_SMART_ENUM(NFDebuggerInputArg,
 	LastNode,
 	LogLevel,
+	LogObject,
+	LogString,
+	LogInt,
+	LogFloat,
+	LogVector2,
+	LogVector3,
+	LogDictionary,
 	LogData,
 )
 
@@ -354,6 +368,7 @@ NF_SMART_ENUM(NFExecuterType,
 	GameEvent,
 	MoveObject,
 	Sleep,
+	SendMessage,
 	EnterScene,
 	AddHeartBeat,
 	AttackObject,
@@ -385,11 +400,24 @@ NF_SMART_ENUM(NFExecuterDestroyObjectOutputputArg,
 NF_SMART_ENUM(NFExecuterGameEventInputArg,
 	LastNode,
 	ObjectID,
+	EventID,
 	)
 
 NF_SMART_ENUM(NFExecuterGameEventOutputArg,
 	NextNode,
 	)
+
+NF_SMART_ENUM(NFExecuterSendMessageInputArg,
+	LastNode,
+	ObjectID,
+	MessageID,
+	Data,
+	)
+
+NF_SMART_ENUM(NFExecuterSendMessageOutputArg,
+	NextNode,
+	)
+
 
 NF_SMART_ENUM(NFExecuterMoveObjectInputArg,
 	LastNode,

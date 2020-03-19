@@ -90,7 +90,8 @@ void NFNetworkMsgEventMonitor::UpdateOutputData(const NFGUID& runTimeOnwer, cons
 
 	outputObjectID->varData.SetObject(runTimeOnwer);
 	outputMsgID->varData.SetInt(inputMsgID->varData.GetInt());
-	//outputDictionary->varData.SetInt(inputMsgID->varData.GetInt());
+	//fake data now
+	//outputDictionary->dictionaryData = std::map<>;
 }
 
 NF_SHARE_PTR<NFIOData> NFNetworkMsgEventMonitor::FindOutputNodeIOData()
@@ -147,22 +148,9 @@ void NFPropertyEventMonitor::UpdateOutputData(const NFGUID& runTimeOnwer, const 
 
 	NF_SHARE_PTR<NFIOData> outputSelf = GetOutputArg(NFMonitorPropertyEventOutputArg::ObjectID);
 	NF_SHARE_PTR<NFIOData> outputPropertyName = GetOutputArg(NFMonitorPropertyEventOutputArg::PropName);
-	NF_SHARE_PTR<NFIOData> outputPropertyOldValue = GetOutputArg(NFMonitorPropertyEventOutputArg::OldValue);
-	NF_SHARE_PTR<NFIOData> outputPropertyNewValue = GetOutputArg(NFMonitorPropertyEventOutputArg::NewValue);
 
 	outputSelf->varData.SetObject(runTimeOnwer);
 	outputPropertyName->varData = propertyName->varData;
-
-	if (className->varData.GetString().empty() || propertyName->varData.GetString().empty())
-	{
-		return;
-	}
-
-	auto elementModule = this->pPluginManager->FindModule<NFIElementModule>();
-	auto classModule = this->pPluginManager->FindModule<NFIClassModule>();
-	{
-		
-	}
 }
 
 NF_SHARE_PTR<NFIOData> NFPropertyEventMonitor::FindOutputNodeIOData()
