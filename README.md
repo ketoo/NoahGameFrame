@@ -69,8 +69,8 @@ Thie repo show people how to use NF and NF's MidWare as submodule.
 
 ## IF YOU CAN NOT BUILD THE DEPENDENCIES THEN PLEASE RUN THE CMDS BELOW TO SET UP THE ENVIRONMENT:
 
-* sudo apt-get g++
-* sudo apt-get cmake
+* sudo apt-get install g++
+* sudo apt-get install cmake
 * sudo apt-get install automake
 * sudo apt-get install zip unzip
 
@@ -96,19 +96,16 @@ Thie repo show people how to use NF and NF's MidWare as submodule.
 
 ### IF YOU LIVING IN A COUNTRY CANNOT ACCESS GITHUB FASTLY PLZ BUILD NF WITH VPN
 
-### JAVA Project
-WebSite:  https://github.com/NFGameTeam/NFrame-java
+### HOW TO RUN HELLO WORLD
+https://github.com/ketoo/NoahGameFrame/wiki/How-to-run-the-Helloworld
+
+### HOW TO DEBUG WITH UNITY3D
+https://github.com/ketoo/NoahGameFrame/wiki/How-to-debug-with-unity3d
 
 ### Unity Multiplayer Demo
 WebSite:  https://github.com/ketoo/NFUnitySDK
 ![Showcase](https://github.com/ketoo/NoahGameFrame/wiki/images/showcase/1.jpg)
 ![Showcase](https://github.com/ketoo/NoahGameFrame/wiki/images/showcase/unity3d.gif)
-
-### HOW TO DEBUG WITH UNITY3D
-https://github.com/ketoo/NoahGameFrame/wiki/How-to-debug-with-unity3d
-
-### HOW TO RUN HELLO WORLD
-https://github.com/ketoo/NoahGameFrame/wiki/How-to-run-the-Helloworld
 
 
 
