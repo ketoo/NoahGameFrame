@@ -104,8 +104,12 @@ WebSite:  https://github.com/ketoo/NFUnitySDK
 ![Showcase](https://github.com/ketoo/NoahGameFrame/wiki/images/showcase/1.jpg)
 ![Showcase](https://github.com/ketoo/NoahGameFrame/wiki/images/showcase/unity3d.gif)
 
-### Client(cocos2d & unity)
-WebSite:  https://github.com/ketoo/NFClient
+### HOW TO DEBUG WITH UNITY3D
+![Showcase](https://github.com/ketoo/NoahGameFrame/wiki/How-to-debug-with-unity3d)
+
+### HOW TO RUN HELLO WORLD
+![Showcase](https://github.com/ketoo/NoahGameFrame/wiki/How-to-run-the-Helloworld)
+
 
 
 ## License
