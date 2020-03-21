@@ -35,7 +35,7 @@ if [ $sysOS == "Darwin" ];then
 	if [ $? -ne 0 ]; then
 		echo "[ERROR] Please install gcc@7 first."
         echo "[mac] brew install gcc@7"
-        exit 1
+        #exit 1
 	fi
 elif [ $sysOS == "Linux" ];then
     if [ $DISTRO == "Ubuntu" ]; then

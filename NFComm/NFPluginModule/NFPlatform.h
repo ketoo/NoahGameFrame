@@ -353,7 +353,7 @@ typedef int64_t NFSOCK;
 //using tcmalloc
 #if NF_PLATFORM != NF_PLATFORM_WIN
 #ifndef NF_USE_TCMALLOC
-#define NF_USE_TCMALLOC 1
+//#define NF_USE_TCMALLOC 1
 #endif
 #endif
 
