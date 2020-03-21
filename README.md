@@ -47,12 +47,6 @@ or
 
 svn checkout https://github.com/ketoo/NoahGameFrame
 
-## MidWare
-The projects in midware repo are usefull to develop a business game.
-
-## Game Example
-Thie repo show people how to use NF and NF's MidWare as submodule.
-
 
 ## Dependencies
 
@@ -77,7 +71,7 @@ Thie repo show people how to use NF and NF's MidWare as submodule.
 ## Supported Compilers
 
 * GCC >= 7 (**Tested in Ubuntu 16.04**)
-* MSVC >= VS2017 (**Tested in Win10**)
+* MSVC >= VS2019 (**Tested in Win10**)
 
 ## Build and Install
 ### FOR WINDOWS, MSVC >= 2019
@@ -104,7 +98,6 @@ https://github.com/ketoo/NoahGameFrame/wiki/How-to-debug-with-unity3d
 
 ### Unity Multiplayer Demo
 WebSite:  https://github.com/ketoo/NFUnitySDK
-![Showcase](https://github.com/ketoo/NoahGameFrame/wiki/images/showcase/1.jpg)
 ![Showcase](https://github.com/ketoo/NoahGameFrame/wiki/images/showcase/unity3d.gif)
 
 
