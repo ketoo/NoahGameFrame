@@ -105,10 +105,10 @@ WebSite:  https://github.com/ketoo/NFUnitySDK
 ![Showcase](https://github.com/ketoo/NoahGameFrame/wiki/images/showcase/unity3d.gif)
 
 ### HOW TO DEBUG WITH UNITY3D
-![Showcase](https://github.com/ketoo/NoahGameFrame/wiki/How-to-debug-with-unity3d)
+https://github.com/ketoo/NoahGameFrame/wiki/How-to-debug-with-unity3d
 
 ### HOW TO RUN HELLO WORLD
-![Showcase](https://github.com/ketoo/NoahGameFrame/wiki/How-to-run-the-Helloworld)
+https://github.com/ketoo/NoahGameFrame/wiki/How-to-run-the-Helloworld
 
 
 
