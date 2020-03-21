@@ -99,11 +99,17 @@ Thie repo show people how to use NF and NF's MidWare as submodule.
 ### JAVA Project
 WebSite:  https://github.com/NFGameTeam/NFrame-java
 
-### Unity Demo
+### Unity Multiplayer Demo
 WebSite:  https://github.com/ketoo/NFUnitySDK
+![Showcase](https://github.com/ketoo/NoahGameFrame/wiki/images/showcase/1.jpg)
+![Showcase](https://github.com/ketoo/NoahGameFrame/wiki/images/showcase/unity3d.gif)
 
-### Client(cocos2d & unity)
-WebSite:  https://github.com/ketoo/NFClient
+### HOW TO DEBUG WITH UNITY3D
+https://github.com/ketoo/NoahGameFrame/wiki/How-to-debug-with-unity3d
+
+### HOW TO RUN HELLO WORLD
+https://github.com/ketoo/NoahGameFrame/wiki/How-to-run-the-Helloworld
+
 
 
 ## License
