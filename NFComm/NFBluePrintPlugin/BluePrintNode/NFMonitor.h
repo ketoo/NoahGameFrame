@@ -422,22 +422,6 @@ public:
 
 			outputArgs.push_back(var);
 		}
-		{
-			NF_SHARE_PTR<NFIOData> var = NF_SHARE_PTR<NFIOData>(NF_NEW NFIOData());
-			var->id = this->pPluginManager->FindModule<NFIKernelModule>()->CreateGUID();
-			var->name = NFMonitorPropertyEventOutputArg::toString(NFMonitorPropertyEventOutputArg::OldValue);
-			var->valueType = NFValueType::UNKNOW;//depend the property's type
-
-			outputArgs.push_back(var);
-		}
-		{
-			NF_SHARE_PTR<NFIOData> var = NF_SHARE_PTR<NFIOData>(NF_NEW NFIOData());
-			var->id = this->pPluginManager->FindModule<NFIKernelModule>()->CreateGUID();
-			var->name = NFMonitorPropertyEventOutputArg::toString(NFMonitorPropertyEventOutputArg::NewValue);
-			var->valueType = NFValueType::UNKNOW;//depend the property's type
-
-			outputArgs.push_back(var);
-		}
 	}
 
 

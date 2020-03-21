@@ -31,6 +31,7 @@
 #include "NFComm/NFPluginModule/NFIClassModule.h"
 #include "NFComm/NFPluginModule/NFIBluePrintModule.h"
 #include "NFComm/NFPluginModule/NFIBPVMEventModule.h"
+#include "NFComm/NFPluginModule/NFINetModule.h"
 
 #include "BluePrintVM/NFBPVirtualMachine.h"
 
@@ -91,6 +92,8 @@ private:
     int OnPropertyCommonEvent(const NFGUID& self, const std::string& strPropertyName, const NFData& oldVar, const NFData& newVar);
     int OnRecordCommonEvent(const NFGUID& self, const RECORD_EVENT_DATA& xEventData, const NFData& oldVar, const NFData& newVar);
 
+    void OnMessageEvent(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+
 private:
     //block id ->
 	NFMapEx<NFGUID, BluePrintBlockAction> mBluePrintBlockAction;
@@ -100,6 +103,7 @@ private:
     NFIBluePrintModule* m_pBluePrintModule;
     NFIKernelModule* m_pKernelModule;
     NFIEventModule* m_pEventModule;
+    NFINetModule* m_pNetModule;
 
 };
 

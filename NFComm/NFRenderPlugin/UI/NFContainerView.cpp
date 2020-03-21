@@ -92,19 +92,25 @@ void NFContainerView::PrefabMenu()
       // Disabling fullscreen would allow the window to be moved to the front of other windows,
       // which we can't undo at the moment without finer window depth/z control.
       //ImGui::MenuItem("Fullscreen", NULL, &opt_fullscreen_persistant);
+       auto classObject = m_pClassModule->First();
+       while (classObject)
+       {
+           if (ImGui::BeginMenu(classObject->GetClassName().c_str()))
+           {
+               if (ImGui::MenuItem("Design", ""))
+               {
 
-      if (ImGui::MenuItem("Open", ""))
-      {
+               }
+               if (ImGui::MenuItem("Add a new Element", ""))
+               {
 
-      }
-      if (ImGui::MenuItem("Save", ""))
-      {
-                  
-      }
-      if (ImGui::MenuItem("Close", ""))
-      {
-                  
-      }
+               }
+               ImGui::EndMenu();
+           }
+
+           classObject = m_pClassModule->Next();
+       }
+
       //ImGui::Separator();
       ImGui::EndMenu();
    }
@@ -281,15 +287,11 @@ void NFContainerView::ToolsMenu()
       // which we can't undo at the moment without finer window depth/z control.
       //ImGui::MenuItem("Fullscreen", NULL, &opt_fullscreen_persistant);
 
-      if (ImGui::MenuItem("Open", ""))
+      if (ImGui::MenuItem("Transfer meta-class as c++ and c# code", ""))
       {
 
       }
-      if (ImGui::MenuItem("Save", ""))
-      {
-                  
-      }
-      if (ImGui::MenuItem("Close", ""))
+      if (ImGui::MenuItem("Generate protocol buf as c++ and c# code", ""))
       {
                   
       }
@@ -332,17 +334,21 @@ void NFContainerView::HelpMenu()
       // which we can't undo at the moment without finer window depth/z control.
       //ImGui::MenuItem("Fullscreen", NULL, &opt_fullscreen_persistant);
 
-      if (ImGui::MenuItem("Open", ""))
+      if (ImGui::MenuItem("About NoahGameFrame", ""))
       {
 
       }
-      if (ImGui::MenuItem("Save", ""))
+      if (ImGui::MenuItem("About element system", ""))
       {
                   
       }
-      if (ImGui::MenuItem("Close", ""))
+      if (ImGui::MenuItem("About meta-class(prefab) system", ""))
       {
-                  
+
+      }
+      if (ImGui::MenuItem("About blue print editor", ""))
+      {
+
       }
       //ImGui::Separator();
       ImGui::EndMenu();
@@ -397,14 +403,14 @@ bool NFContainerView::Execute()
       if (ImGui::BeginMenuBar())
       {
          FileMenu();
-         EditMenu();
+         //EditMenu();
          PrefabMenu();
          ElementMenu();
          BluePrintMenu();
          ToolsMenu();
-         WindowsMenu();
+         //WindowsMenu();
          HelpMenu();
-
+         /*
          if (ImGui::BeginMenu("Docking"))
          {
                // Disabling fullscreen would allow the window to be moved to the front of other windows,
@@ -417,12 +423,13 @@ bool NFContainerView::Execute()
                if (ImGui::MenuItem("Flag: PassthruCentralNode",    "", (dockspace_flags & ImGuiDockNodeFlags_PassthruCentralNode) != 0))     dockspace_flags ^= ImGuiDockNodeFlags_PassthruCentralNode;
                if (ImGui::MenuItem("Flag: AutoHideTabBar",         "", (dockspace_flags & ImGuiDockNodeFlags_AutoHideTabBar) != 0))          dockspace_flags ^= ImGuiDockNodeFlags_AutoHideTabBar;
                ImGui::Separator();
-               /*
-               if (ImGui::MenuItem("Close DockSpace", NULL, false, p_open != NULL))
-                  *p_open = false;
-               */
+
+               //if (ImGui::MenuItem("Close DockSpace", NULL, false, p_open != NULL)) *p_open = false;
+               
                ImGui::EndMenu();
          }
+        */
+
          ImGui::EndMenuBar();
       }
     

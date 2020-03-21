@@ -1,0 +1,22 @@
+<XML>
+	<GameServer>
+		<Plugin Name="NFNetPlugin" />
+		<Plugin Name="NFKernelPlugin" />
+		<Plugin Name="NFConfigPlugin" />
+		<Plugin Name="NFGameServerPlugin" />
+		<Plugin Name="NFGameServerNet_ServerPlugin" />
+		<Plugin Name="NFGameServerNet_ClientPlugin" />
+		<Plugin Name="NFLogPlugin" />	
+		<Plugin Name="NFLuaScriptPlugin" />
+		<Plugin Name="NFActorPlugin" />
+		<Plugin Name="NFNavigationPlugin" />
+		<Plugin Name="Tutorial1" />
+		<Plugin Name="Tutorial2" />
+		<Plugin Name="Tutorial3" />
+		<Plugin Name="Tutorial4" />
+		<Plugin Name="Tutorial5" />
+		<Plugin Name="Tutorial6" />
+		<Plugin Name="Tutorial7" />
+
+	</GameServer>
+</XML>

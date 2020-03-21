@@ -52,7 +52,7 @@ void NFDestroyObjectExecuter::UpdateOutputData(const NFGUID& runTimeOnwer, const
 
 NF_SHARE_PTR<NFIOData> NFDestroyObjectExecuter::FindOutputNodeIOData()
 {
-	return NF_SHARE_PTR<NFIOData>();
+    return GetOutputArg(NFExecuterDestroyObjectOutputputArg::NextNode);
 }
 
 void NFGameEventExecuter::PrepareInputData(const NFGUID& runTimeOnwer, const bool iteration)
@@ -65,7 +65,7 @@ void NFGameEventExecuter::UpdateOutputData(const NFGUID& runTimeOnwer, const boo
 
 NF_SHARE_PTR<NFIOData> NFGameEventExecuter::FindOutputNodeIOData()
 {
-    return NF_SHARE_PTR<NFIOData>();
+    return GetOutputArg(NFExecuterGameEventOutputArg::NextNode);
 }
 
 void NFMoveObjectExecuter::PrepareInputData(const NFGUID& runTimeOnwer, const bool iteration)
@@ -78,7 +78,7 @@ void NFMoveObjectExecuter::UpdateOutputData(const NFGUID& runTimeOnwer, const bo
 
 NF_SHARE_PTR<NFIOData> NFMoveObjectExecuter::FindOutputNodeIOData()
 {
-	return NF_SHARE_PTR<NFIOData>();
+    return GetOutputArg(NFExecuterMoveObjectOutputArg::NextNode);
 }
 
 void NFEnterSceneExecuter::PrepareInputData(const NFGUID& runTimeOnwer, const bool iteration)
@@ -91,7 +91,7 @@ void NFEnterSceneExecuter::UpdateOutputData(const NFGUID& runTimeOnwer, const bo
 
 NF_SHARE_PTR<NFIOData> NFEnterSceneExecuter::FindOutputNodeIOData()
 {
-	return NF_SHARE_PTR<NFIOData>();
+    return GetOutputArg(NFExecuterEnterSceneOutputArg::NextNode);
 }
 
 void NFAddHeartBeatExecuter::PrepareInputData(const NFGUID& runTimeOnwer, const bool iteration)
@@ -104,7 +104,7 @@ void NFAddHeartBeatExecuter::UpdateOutputData(const NFGUID& runTimeOnwer, const 
 
 NF_SHARE_PTR<NFIOData> NFAddHeartBeatExecuter::FindOutputNodeIOData()
 {
-	return NF_SHARE_PTR<NFIOData>();
+    return GetOutputArg(NFExecuterAddHeartBeatOutputArg::NextNode);
 }
 
 void NFAttackObjectExecuter::PrepareInputData(const NFGUID& runTimeOnwer, const bool iteration)
@@ -117,7 +117,8 @@ void NFAttackObjectExecuter::UpdateOutputData(const NFGUID& runTimeOnwer, const 
 
 NF_SHARE_PTR<NFIOData> NFAttackObjectExecuter::FindOutputNodeIOData()
 {
-	return NF_SHARE_PTR<NFIOData>();
+   // return GetOutputArg(NFExecuterAddHeartBeatOutputArg::NextNode);
+    return NF_SHARE_PTR<NFIOData>();
 }
 
 void NFUseSkillExecuter::PrepareInputData(const NFGUID& runTimeOnwer, const bool iteration)
@@ -157,4 +158,17 @@ void NFSleepExecuter::UpdateOutputData(const NFGUID& runTimeOnwer, const bool it
 NF_SHARE_PTR<NFIOData> NFSleepExecuter::FindOutputNodeIOData()
 {
     return NF_SHARE_PTR<NFIOData>();
+}
+
+void NFSendMessageExecuter::PrepareInputData(const NFGUID& runTimeOnwer, const bool iteration)
+{
+}
+
+void NFSendMessageExecuter::UpdateOutputData(const NFGUID& runTimeOnwer, const bool iteration)
+{
+}
+
+NF_SHARE_PTR<NFIOData> NFSendMessageExecuter::FindOutputNodeIOData()
+{
+    return GetOutputArg(NFExecuterSendMessageOutputArg::NextNode);
 }

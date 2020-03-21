@@ -218,7 +218,7 @@ public:
 			var->id = this->pPluginManager->FindModule<NFIKernelModule>()->CreateGUID();
 			var->name = NFPropertyVariableInputArg::toString(NFPropertyVariableInputArg::PropName);
 			var->valueType = NFValueType::String;
-			var->fromType = NFIODataComFromType::INTERNAL;
+			var->fromType = NFIODataComFromType::BOTH;
 
 			inputArgs.push_back(var);
 		}

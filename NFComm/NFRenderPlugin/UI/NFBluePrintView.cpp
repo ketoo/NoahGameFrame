@@ -46,7 +46,7 @@ char* nodeExecuterImage = "..//NFDataCfg//Fonts//Icon//Node//executer.png";
 char* nodeVariableImage = "..//NFDataCfg//Fonts//Icon//Node//variable.png";
 char* nodeModifierImage = "..//NFDataCfg//Fonts//Icon//Node//modifier.png";
 char* nodeArithmeticImage = "..//NFDataCfg//Fonts//Icon//Node//arithmetic.png";
-char* nodeDebugerImage = "..//NFDataCfg//Fonts//Icon//Node//debuger.png";
+char* nodeDebugerImage = "..//NFDataCfg//Fonts//Icon//Node//debug.png";
 char* nodeCustomImage = "..//NFDataCfg//Fonts//Icon//Node//custom.png";
 char* nodeUnknowImage = "..//NFDataCfg//Fonts//Icon//Node//unknow.png";
 
@@ -390,9 +390,9 @@ bool NFBluePrintView::TryNewLinkEvent(const NFGUID& startNode, const NFGUID& end
 			auto outputArg = startNodeObject->GetOutputArg(i);
 			if (outputArg->id == startPin)
 			{
-				for (int i = 0; i < endNodeObject->GetInputArgCount(); ++i)
+				for (int j = 0; j < endNodeObject->GetInputArgCount(); ++j)
 				{
-					auto inputArg = endNodeObject->GetInputArg(i);
+					auto inputArg = endNodeObject->GetInputArg(j);
 					if (inputArg->id == endPin)
 					{
 						if (inputArg->fromType != NFIODataComFromType::INTERNAL)
@@ -1188,20 +1188,16 @@ void NFBluePrintView::PinRenderForObjectEventMonitor(NFNodePin* pin)
 			auto inputArg = monitor->GetInputArg(NFMonitorObjectEventInputArg::ClassEvent);
 
 			ImGui::SameLine();
-			if (ImGui::BeginCombo("", inputArg->varData.GetString().c_str()))
+			NFClassEventType lastEventType = inputArg->varData.GetInt();
+			if (ImGui::BeginCombo("", lastEventType.toString().c_str()))
 			{
-				auto classObject = m_pClassModule->First();
-				while (classObject)
+				auto classEvents = NFClassEventType::allValues();
+				for (int i = 0; i < classEvents.size(); ++i)
 				{
-					if (classObject->GetIDList().size() > 0)
+					if (ImGui::Selectable(classEvents[i].toString().c_str()))
 					{
-						if (ImGui::Selectable(classObject->GetClassName().c_str()))
-						{
-							//inputArg->varData.SetInt();
-						}
+						inputArg->varData.SetInt(classEvents[i]);
 					}
-
-					classObject = m_pClassModule->Next();
 				}
 
 				ImGui::EndCombo();
