@@ -69,8 +69,8 @@ Thie repo show people how to use NF and NF's MidWare as submodule.
 
 ## IF YOU CAN NOT BUILD THE DEPENDENCIES THEN PLEASE RUN THE CMDS BELOW TO SET UP THE ENVIRONMENT:
 
-* sudo apt-get g++
-* sudo apt-get cmake
+* sudo apt-get install g++
+* sudo apt-get install cmake
 * sudo apt-get install automake
 * sudo apt-get install zip unzip
 
