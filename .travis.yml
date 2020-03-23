@@ -1,5 +1,21 @@
 sudo: true
 language: cpp
+
+matrix:
+  include:
+    # works on Precise and Trusty
+    - os: linux
+      addons:
+        apt:
+          sources:
+            - ubuntu-toolchain-r-test
+          packages:
+            - g++-7
+      env:
+        - MATRIX_EVAL="CC=gcc-7 && CXX=g++-7"
+
+before_install:
+    - eval "${MATRIX_EVAL}"
  
 compiler:
   - g++
@@ -8,8 +24,6 @@ os:
 
 install:
   - if [ "${TRAVIS_OS_NAME}" = "linux" ]; then  sudo apt-get install -qq cmake; fi
-  - if [ "${TRAVIS_OS_NAME}" = "linux" ]; then sudo apt-get install -qq g++-4.8; fi
-  - if [ "${TRAVIS_OS_NAME}" = "linux" ]; then export CXX="g++-4.8"; fi
    
 script:
   - sudo chmod 777 *.sh
