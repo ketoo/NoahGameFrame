@@ -12,11 +12,11 @@
 		<Property Id="SceneName" Cache="0" Desc="" Force="0" Private="0" Public="0" Ref="0" Save="0" Type="string" Upload="0" />
 		<Property Id="SceneShowName" Cache="0" Desc="" Force="0" Private="0" Public="0" Ref="0" Save="0" Type="string" Upload="0" />
 		<Property Id="SoundList" Cache="0" Desc="场景背景音乐列表" Force="0" Private="0" Public="0" Ref="0" Save="0" Type="string" Upload="0" />
-		<Property Id="Type" Cache="0" Desc="	NORMAL_SCENE 			= 0;
-	SINGLE_CLONE_SCENE 		= 1;
-	MULTI_CLONE_SCENE 		= 2;
-	PVP_MODE_SCENE 			= 10;
-	MVM_MODE_SCENE, 		= 11;
+		<Property Id="Type" Cache="0" Desc="	NORMAL_SCENE 			= 0;
+	SINGLE_CLONE_SCENE 		= 1;
+	MULTI_CLONE_SCENE 		= 2;
+	PVP_MODE_SCENE 			= 10;
+	MVM_MODE_SCENE, 		= 11;
 	SURVIVAL_MODE_SCENE, 	= 12;" Force="0" Private="0" Public="0" Ref="0" Save="0" Type="int" Upload="0" />
 		<Property Id="Width" Cache="0" Desc="场景宽度" Force="0" Private="0" Public="0" Ref="0" Save="0" Type="int" Upload="0" />
 	</Propertys>
