@@ -555,7 +555,5 @@ int NFGodView::OnClassCommonEvent(const NFGUID& self, const std::string& strClas
 
 NFVector2 NFGodView::ToMapGridPos(const NFVector3& pos)
 {
-	NFVector2 displayOffset(mNodeSystem.GetNodeSize() / 2, mNodeSystem.GetNodeSize() / 2);
-
-	return NFVector2(pos.X() * mNodeSystem.GetNodeSize() - displayOffset.X(), pos.Z() * -mNodeSystem.GetNodeSize() - displayOffset.Y());
+	return NFVector2(pos.X() * mNodeSystem.GetNodeSize(), pos.Z() * -mNodeSystem.GetNodeSize());
 }

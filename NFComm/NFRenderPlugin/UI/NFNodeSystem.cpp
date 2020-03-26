@@ -33,12 +33,12 @@ namespace NodeSystem
     void NFNode::Execute(const NFVector2& offset)
     {
         ImVec2 disPlayPos(pos.X() + offset.X(), pos.Y() + offset.Y());
-        ImGui::GetWindowDrawList()->AddRectFilled(disPlayPos, ImVec2(disPlayPos.x + this->size, disPlayPos.y + this->size), color);
-        ImGui::GetWindowDrawList()->AddRectFilled(ImVec2(disPlayPos.x - this->size, disPlayPos.y - this->size), ImVec2(disPlayPos.x + this->size * 2, disPlayPos.y), ImColor(0, 0, 0, 150));
+        ImGui::GetWindowDrawList()->AddCircleFilled(disPlayPos,5, color);
+
         ImGui::GetWindowDrawList()->AddText(ImVec2(disPlayPos.x - this->size, disPlayPos.y - this->size), ImColor(200, 0, 0, 255), name.c_str());
         if (selected)
         {
-            ImGui::GetWindowDrawList()->AddRect(disPlayPos, ImVec2(disPlayPos.x + this->size, disPlayPos.y + this->size), ImColor(255, 255, 0, 255));
+			ImGui::GetWindowDrawList()->AddCircle(disPlayPos, 6, ImColor(255, 255, 0, 255));
         }
     }
 

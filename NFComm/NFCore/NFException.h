@@ -172,14 +172,14 @@ NFException::ExceptStack().flag = sigsetjmp(NFException::ExceptStack().env,1);\
 if(!NFException::ExceptStack().isDef()) \
 { \
 signal(SIGSEGV, NFException::CrashHandler); \
-printf("start use TRY\n");
+//printf("start use TRY\n");
 #define NF_CRASH_END_TRY \
 }\
 else\
 {\
 NFException::ExceptStack().clear();\
 }\
-printf("stop use TRY\n");
+//printf("stop use TRY\n");
 
 #endif
 #endif
