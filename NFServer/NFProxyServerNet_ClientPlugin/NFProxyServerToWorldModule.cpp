@@ -319,5 +319,5 @@ void NFProxyServerToWorldModule::LogServerInfo(const std::string& strServerInfo)
 
 void NFProxyServerToWorldModule::OnOtherMessage(const NFSOCK nSockIndex, const int nMsgID, const char * msg, const uint32_t nLen)
 {
-	m_pProxyServerNet_ServerModule->Transpond(nSockIndex, nMsgID, msg, nLen);
+	m_pProxyServerNet_ServerModule->Transport(nSockIndex, nMsgID, msg, nLen);
 }

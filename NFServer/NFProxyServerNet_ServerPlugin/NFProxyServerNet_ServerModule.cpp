@@ -432,7 +432,7 @@ void NFProxyServerNet_ServerModule::OnReqServerListProcess(const NFSOCK nSockInd
     }
 }
 
-int NFProxyServerNet_ServerModule::Transpond(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
+int NFProxyServerNet_ServerModule::Transport(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
 {
     NFMsg::MsgBase xMsg;
     if (!xMsg.ParseFromArray(msg, nLen))
