@@ -53,6 +53,7 @@ public:
 
     virtual const std::string& GetDefaultMapData(const int scene);
 
+	virtual const NF_SHARE_PTR<GroupNavigationData> GetMapData(const int scene);
     virtual const NF_SHARE_PTR<GroupNavigationData> GetMapData(const int scene, const int group);
     virtual const NF_SHARE_PTR<NFVoxel> GetMapData(const int scene, const int group, const int x, int z);
 

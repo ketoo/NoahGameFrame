@@ -124,7 +124,8 @@ public:
         return groupData;
     }
 
-    virtual const NF_SHARE_PTR<GroupNavigationData> GetMapData(const int scene, const int group) = 0;
+	virtual const NF_SHARE_PTR<GroupNavigationData> GetMapData(const int scene) = 0;
+	virtual const NF_SHARE_PTR<GroupNavigationData> GetMapData(const int scene, const int group) = 0;
     virtual const NF_SHARE_PTR<NFVoxel> GetMapData(const int scene, const int group, const int x, int z) = 0;
 
     //modify map data in run time
