@@ -306,8 +306,6 @@ bool NFSceneProcessModule::LoadSceneResource(const std::string& strSceneIDName)
 bool NFSceneProcessModule::CreateSceneBaseGroup(const std::string & strSceneIDName)
 {
 	const int nSceneID = lexical_cast<int>(strSceneIDName);
-	m_pKernelModule->RequestGroupScene(nSceneID);
-
 	NFMsg::ESceneType eSceneType = (NFMsg::ESceneType)m_pElementModule->GetPropertyInt32(std::to_string(nSceneID), NFrame::Scene::Type());
 	const int nMaxGroup = m_pElementModule->GetPropertyInt32(std::to_string(nSceneID), NFrame::Scene::MaxGroup());
 	if (eSceneType == NFMsg::ESceneType::NORMAL_SCENE)

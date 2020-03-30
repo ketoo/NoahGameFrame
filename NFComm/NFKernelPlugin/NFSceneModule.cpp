@@ -497,9 +497,6 @@ bool NFSceneModule::CreateSceneNPC(const int nSceneID, const int nGroupID, const
 		return false;
 	}
 
-	//prepare monster for player
-	//create monster before the player enter the scene, then we can send monster's data by one message pack
-	//if you create monster after player enter scene, then send monster's data one by one
 	NF_SHARE_PTR<SceneSeedResource> pResource = pSceneInfo->mtSceneResourceConfig.First();
 	for (; pResource; pResource = pSceneInfo->mtSceneResourceConfig.Next())
 	{

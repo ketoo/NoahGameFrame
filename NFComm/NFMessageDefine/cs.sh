@@ -1,3 +1,4 @@
+chmod 777 protoc
 
 ./protoc --csharp_out="./" --proto_path="./" NFDefine.proto
 ./protoc --csharp_out="./" --proto_path="./" NFMsgBase.proto

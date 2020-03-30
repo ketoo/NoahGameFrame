@@ -123,7 +123,7 @@ int NFNPCRefreshModule::OnObjectHPEvent( const NFGUID& self, const std::string& 
 		{
 			OnObjectBeKilled(self, identAttacker);
 
-			m_pScheduleModule->AddSchedule( self, "OnNPCDeadDestroyHeart", this, &NFNPCRefreshModule::OnNPCDeadDestroyHeart, 5.0f, 1 );
+			m_pScheduleModule->AddSchedule( self, "OnNPCDeadDestroyHeart", this, &NFNPCRefreshModule::OnNPCDeadDestroyHeart, 1.0f, 1 );
         }
     }
 

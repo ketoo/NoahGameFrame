@@ -63,7 +63,7 @@ protected:
     void OnAckEnterGame(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
     void LogServerInfo(const std::string& strServerInfo);
 
-	void Transpond(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+	void Transport(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
 
 private:
 

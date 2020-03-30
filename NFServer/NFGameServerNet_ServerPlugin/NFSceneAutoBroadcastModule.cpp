@@ -210,7 +210,7 @@ int NFSceneAutoBroadcastModule::OnRecordEvent(const NFGUID & self, const RECORD_
 		pAddRowData->set_row(xEventData.nRow);
 
 
-		NF_SHARE_PTR<NFIRecord> xRecord = m_pKernelModule->FindRecord(self, xEventData.strRecordName);
+		NF_SHARE_PTR<NFIRecord> xRecord = m_pSceneModule->FindRecord(self.nHead64, self.nData64, xEventData.strRecordName);
 		if (xRecord)
 		{
 			NFDataList xRowDataList;

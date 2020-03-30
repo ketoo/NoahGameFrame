@@ -184,3 +184,8 @@ bool NFNavigationDataModule::Execute()
 {
 	return true;
 }
+
+const NF_SHARE_PTR<GroupNavigationData> NFNavigationDataModule::GetMapData(const int scene)
+{
+	return GetMapData(scene, 0);
+}

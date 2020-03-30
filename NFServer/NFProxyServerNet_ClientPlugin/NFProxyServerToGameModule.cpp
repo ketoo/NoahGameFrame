@@ -54,7 +54,7 @@ bool NFProxyServerToGameModule::Execute()
 bool NFProxyServerToGameModule::AfterInit()
 {
 	m_pNetClientModule->AddReceiveCallBack(NF_SERVER_TYPES::NF_ST_GAME, NFMsg::ACK_ENTER_GAME, this, &NFProxyServerToGameModule::OnAckEnterGame);
-	m_pNetClientModule->AddReceiveCallBack(NF_SERVER_TYPES::NF_ST_GAME, this, &NFProxyServerToGameModule::Transpond);
+	m_pNetClientModule->AddReceiveCallBack(NF_SERVER_TYPES::NF_ST_GAME, this, &NFProxyServerToGameModule::Transport);
 
 	m_pNetClientModule->AddEventCallBack(NF_SERVER_TYPES::NF_ST_GAME, this, &NFProxyServerToGameModule::OnSocketGSEvent);
 	m_pNetClientModule->ExpandBufferSize();
@@ -138,7 +138,7 @@ void NFProxyServerToGameModule::OnAckEnterGame(const NFSOCK nSockIndex, const in
 	const NFGUID& xPlayer = NFINetModule::PBToNF(xData.event_object());
 
 	m_pProxyServerNet_ServerModule->EnterGameSuccessEvent(xClient, xPlayer);
-	m_pProxyServerNet_ServerModule->Transpond(nSockIndex, nMsgID, msg, nLen);
+	m_pProxyServerNet_ServerModule->Transport(nSockIndex, nMsgID, msg, nLen);
 }
 
 void NFProxyServerToGameModule::LogServerInfo(const std::string& strServerInfo)
@@ -146,7 +146,7 @@ void NFProxyServerToGameModule::LogServerInfo(const std::string& strServerInfo)
     m_pLogModule->LogInfo(NFGUID(), strServerInfo, "");
 }
 
-void NFProxyServerToGameModule::Transpond(const NFSOCK nSockIndex, const int nMsgID, const char * msg, const uint32_t nLen)
+void NFProxyServerToGameModule::Transport(const NFSOCK nSockIndex, const int nMsgID, const char * msg, const uint32_t nLen)
 {
-	m_pProxyServerNet_ServerModule->Transpond(nSockIndex, nMsgID, msg, nLen);
+	m_pProxyServerNet_ServerModule->Transport(nSockIndex, nMsgID, msg, nLen);
 }

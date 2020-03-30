@@ -76,6 +76,7 @@ bool NFScheduleModule::Execute()
 	*/
 	
 	NFPerformance performanceObject;
+	NFINT64 nNow = NFGetTimeMS();
 
 	//execute all tasks
 	NF_SHARE_PTR<NFMapEx <std::string, NFScheduleElement >> xObjectSchedule = mObjectScheduleMap.First();
@@ -85,7 +86,6 @@ bool NFScheduleModule::Execute()
 		NF_SHARE_PTR<NFScheduleElement> pSchedule = xObjectSchedule->First();
 		while (pSchedule)
 		{
-			NFINT64 nNow = NFGetTimeMS();
 			if (nNow > pSchedule->mnNextTriggerTime)
 			{
 				if (pSchedule->mnRemainCount > 0 || pSchedule->mbForever == true)

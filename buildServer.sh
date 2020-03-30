@@ -40,7 +40,7 @@ chmod -R 755 ./BuildNF.CMake.Release.sh
 
 #time ./BuildNF.CMake.Debug.sh  BUILD_MID_WARE
 time ./BuildNF.CMake.Debug.sh  $1
-#time ./BuildNF.CMake.Release.sh  $1
+time ./BuildNF.CMake.Release.sh  $1
 cd ../../
 
 cd _Out/
