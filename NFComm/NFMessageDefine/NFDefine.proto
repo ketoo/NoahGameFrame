@@ -33,7 +33,7 @@ enum EGameMsgID
 {
 	UNKNOW						= 0;         //
 	EVENT_RESULT				= 1;         // for events
-	EVENT_TRANSPOND				= 2;         // for events
+	EVENT_TRANSPORT				= 2;         // for events
 	CLOSE_SOCKET				= 3;         // want to close some one
 
 	WTM_WORLD_REGISTERED		= 10;
