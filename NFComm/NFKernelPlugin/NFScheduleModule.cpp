@@ -25,27 +25,17 @@
 
 #include "NFScheduleModule.h"
 
-void NFScheduleElement::DoHeartBeatEvent()
+void NFScheduleElement::DoHeartBeatEvent(NFINT64 nowTime)
 {
-	if (self.IsNull())
+	mnRemainCount--;
+	mnTriggerTime = nowTime + (NFINT64)(mfIntervalTime * 1000);
+
+	OBJECT_SCHEDULE_FUNCTOR_PTR cb;
+	bool bRet = this->mxObjectFunctor.First(cb);
+	while (bRet)
 	{
-		MODULE_SCHEDULE_FUNCTOR_PTR cb;
-		bool bRet = this->mxModuleFunctor.First(cb);
-		while (bRet)
-		{
-			cb.get()->operator()(mstrScheduleName, mfIntervalTime, mnRemainCount);
-			bRet = this->mxModuleFunctor.Next(cb);
-		}
-	}
-	else
-	{
-		OBJECT_SCHEDULE_FUNCTOR_PTR cb;
-		bool bRet = this->mxObjectFunctor.First(cb);
-		while (bRet)
-		{
-			cb.get()->operator()(self, mstrScheduleName, mfIntervalTime, mnRemainCount);
-			bRet = this->mxObjectFunctor.Next(cb);
-		}
+		cb.get()->operator()(self, mstrScheduleName, mfIntervalTime, mnRemainCount);
+		bRet = this->mxObjectFunctor.Next(cb);
 	}
 }
 
@@ -65,266 +55,114 @@ bool NFScheduleModule::Init()
 	m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>();
 	
 	m_pKernelModule->RegisterCommonClassEvent(this, &NFScheduleModule::OnClassCommonEvent);
+
 	return true;
 }
 
 bool NFScheduleModule::Execute()
 {
-	/*
-	we would optimize this function by saving a schedule element list by time sorting, then
-	we can pick the toppest schedule element to check the time to save the costs of CPU.
-	*/
-	
 	NFPerformance performanceObject;
-	NFINT64 nNow = NFGetTimeMS();
+	NFINT64 nowTime = NFGetTimeMS();
 
-	//execute all tasks
-	NF_SHARE_PTR<NFMapEx <std::string, NFScheduleElement >> xObjectSchedule = mObjectScheduleMap.First();
-	while (xObjectSchedule)
+	std::list<TickElement> elements;
+
+	for (auto it = mScheduleMap.begin(); it != mScheduleMap.end();)
 	{
-		std::string str;
-		NF_SHARE_PTR<NFScheduleElement> pSchedule = xObjectSchedule->First();
-		while (pSchedule)
+		if (nowTime >= it->triggerTime)
 		{
-			if (nNow > pSchedule->mnNextTriggerTime)
+			//std::cout << nowTime << it->scheduleName << ">>>>>" << it->triggerTime << std::endl;
+
+			auto objectMap = mObjectScheduleMap.GetElement(it->self);
+			if (objectMap)
 			{
-				if (pSchedule->mnRemainCount > 0 || pSchedule->mbForever == true)
+				auto scheduleElement = objectMap->GetElement(it->scheduleName);
+				if (scheduleElement)
 				{
-					if (!pSchedule->mbForever)
-					{
-						pSchedule->mnRemainCount--;
-					}
+					scheduleElement->DoHeartBeatEvent(nowTime);
 
-					pSchedule->DoHeartBeatEvent();
+					if (scheduleElement->mnRemainCount != 0)
+					{
+						TickElement element;
+						element.scheduleName = scheduleElement->mstrScheduleName;
+						element.triggerTime = scheduleElement->mnTriggerTime;
+						element.self = scheduleElement->self;
 
-					if (pSchedule->mnRemainCount <= 0 && pSchedule->mbForever == false)
-					{
-						mObjectRemoveList.push_back(pSchedule);
-					}
-					else
-					{
-						NFINT64 nNextCostTime = NFINT64(pSchedule->mfIntervalTime * 1000);
-						pSchedule->mnNextTriggerTime = nNow + nNextCostTime;
+						elements.push_back(element);
 					}
 				}
 			}
 
-			pSchedule = xObjectSchedule->Next();
+			it = mScheduleMap.erase(it);
 		}
-
-		xObjectSchedule = mObjectScheduleMap.Next();
-	}
-
-	//remove schedule
-	for (auto it = mObjectRemoveList.begin(); it != mObjectRemoveList.end(); ++it)
-	{
-		NF_SHARE_PTR<NFScheduleElement> scheduleElement = *it;
-		if (scheduleElement)
+		else
 		{
-			NFGUID self = scheduleElement->self;
-			const std::string& scheduleName = scheduleElement->mstrScheduleName;
-
-			auto findIter = mObjectScheduleMap.GetElement(self);
-			if (NULL != findIter)
-			{
-				findIter->RemoveElement(scheduleName);
-				if (findIter->Count() <= 0)
-				{
-					mObjectScheduleMap.RemoveElement(self);
-				}
-			}
+			break;
 		}
 	}
 
-	mObjectRemoveList.clear();
-
-	//add schedule
-	for (std::list<NFScheduleElement>::iterator iter = mObjectAddList.begin(); iter != mObjectAddList.end(); ++iter)
+	for (auto& item : elements)
 	{
-		NF_SHARE_PTR< NFMapEx <std::string, NFScheduleElement >> xObjectScheduleMap = mObjectScheduleMap.GetElement(iter->self);
-		if (NULL == xObjectScheduleMap)
-		{
-			xObjectScheduleMap = NF_SHARE_PTR< NFMapEx <std::string, NFScheduleElement >>(NF_NEW NFMapEx <std::string, NFScheduleElement >());
-			mObjectScheduleMap.AddElement(iter->self, xObjectScheduleMap);
-		}
-
-		NF_SHARE_PTR<NFScheduleElement> xScheduleElement = xObjectScheduleMap->GetElement(iter->mstrScheduleName);
-		if (NULL == xScheduleElement)
-		{
-			xScheduleElement = NF_SHARE_PTR<NFScheduleElement>(NF_NEW NFScheduleElement());
-			*xScheduleElement = *iter;
-
-			xObjectScheduleMap->AddElement(iter->mstrScheduleName, xScheduleElement);
-		}
+		mScheduleMap.insert(item);
 	}
 
-	mObjectAddList.clear();
-
-	if (performanceObject.CheckTimePoint(5))
-	{
-		std::ostringstream os;
-		os << "---------------object schedule  performance problem ";
-		os << performanceObject.TimeScope();
-		os << "---------- ";
-		//m_pLogModule->LogWarning(NFGUID(), os, __FUNCTION__, __LINE__);
-	}
-
-	////////////////////////////////////////////
-	//execute all tasks
-
-	NFPerformance performanceModule;
-
-	NF_SHARE_PTR< NFScheduleElement > xModuleSchedule = mModuleScheduleMap.First();
-	while (xModuleSchedule)
-	{
-		NFINT64 nNow = NFGetTimeMS();
-		if (nNow > xModuleSchedule->mnNextTriggerTime)
-		{
-			if (xModuleSchedule->mnRemainCount > 0 || xModuleSchedule->mbForever == true)
-			{
-				if (!xModuleSchedule->mbForever)
-				{
-					xModuleSchedule->mnRemainCount--;
-				}
-
-				xModuleSchedule->DoHeartBeatEvent();
-
-				if (xModuleSchedule->mnRemainCount <= 0 && xModuleSchedule->mbForever == false)
-				{
-					mModuleRemoveList.push_back(xModuleSchedule->mstrScheduleName);
-				}
-				else
-				{
-					NFINT64 nNextCostTime = NFINT64(xModuleSchedule->mfIntervalTime * 1000);
-					xModuleSchedule->mnNextTriggerTime = nNow + nNextCostTime;
-				}
-			}
-		}
-
-		xModuleSchedule = mModuleScheduleMap.Next();
-	}
-
-	//remove schedule
-	for (std::list<std::string>::iterator it = mModuleRemoveList.begin(); it != mModuleRemoveList.end(); ++it)
-	{
-		const std::string& strSheduleName = *it;;
-		auto findIter = mModuleScheduleMap.GetElement(strSheduleName);
-		if (NULL != findIter)
-		{
-			mModuleScheduleMap.RemoveElement(strSheduleName);
-		}
-	}
-
-	mModuleRemoveList.clear();
-
-	//add schedule
-	for (std::list<NFScheduleElement>::iterator iter = mModuleAddList.begin(); iter != mModuleAddList.end(); ++iter)
-	{
-		NF_SHARE_PTR< NFScheduleElement > xModuleScheduleMap = mModuleScheduleMap.GetElement(iter->mstrScheduleName);
-		if (NULL == xModuleScheduleMap)
-		{
-			xModuleScheduleMap = NF_SHARE_PTR< NFScheduleElement >(NF_NEW NFScheduleElement());
-			mModuleScheduleMap.AddElement(iter->mstrScheduleName, xModuleScheduleMap);
-		}
-
-		*xModuleScheduleMap = *iter;
-	}
-
-	mModuleAddList.clear();
-
-	if (performanceModule.CheckTimePoint(5))
+	if (performanceObject.CheckTimePoint(1))
 	{
 		std::ostringstream os;
 		os << "---------------module schedule performance problem ";
-		os << performanceModule.TimeScope();
+		os << performanceObject.TimeScope();
 		os << "---------- ";
-		//m_pLogModule->LogWarning(NFGUID(), os, __FUNCTION__, __LINE__);
+		m_pLogModule->LogWarning(NFGUID(), os, __FUNCTION__, __LINE__);
 	}
 
 	return true;
-}
-
-bool NFScheduleModule::AddSchedule(const std::string & strScheduleName, const MODULE_SCHEDULE_FUNCTOR_PTR & cb, const float fTime, const int nCount)
-{
-	NFScheduleElement xSchedule;
-	xSchedule.mstrScheduleName = strScheduleName;
-	xSchedule.mfIntervalTime = fTime;
-	xSchedule.mnNextTriggerTime = NFGetTimeMS() + (NFINT64)(fTime * 1000);
-	xSchedule.mnStartTime = NFGetTimeMS();
-	xSchedule.mnRemainCount = nCount;
-	xSchedule.mnAllCount = nCount;
-	xSchedule.self = NFGUID();
-	if (nCount < 0)
-	{
-		xSchedule.mbForever = true;
-	}
-
-	xSchedule.mxModuleFunctor.Add(cb);
-
-	mModuleAddList.push_back(xSchedule);
-
-	return true;
-}
-
-bool NFScheduleModule::AddSchedule(const std::string & strScheduleName, const MODULE_SCHEDULE_FUNCTOR_PTR & cb, const int nCount, const NFDateTime & date)
-{
-	return false;
-}
-
-bool NFScheduleModule::RemoveSchedule(const std::string & strScheduleName)
-{
-	mModuleRemoveList.push_back(strScheduleName);
-
-	return true;
-}
-
-bool NFScheduleModule::ExistSchedule(const std::string & strScheduleName)
-{
-	return mModuleScheduleMap.ExistElement(strScheduleName);
 }
 
 bool NFScheduleModule::AddSchedule(const NFGUID self, const std::string& strScheduleName, const OBJECT_SCHEDULE_FUNCTOR_PTR& cb, const float fTime, const int nCount)
 {
-	NFScheduleElement xSchedule;
-	xSchedule.mstrScheduleName = strScheduleName;
-	xSchedule.mfIntervalTime = fTime;
-	xSchedule.mnNextTriggerTime = NFGetTimeMS() + (NFINT64)(fTime * 1000);
-	xSchedule.mnStartTime = NFGetTimeMS();
-	xSchedule.mnRemainCount = nCount;
-	xSchedule.mnAllCount = nCount;
-	xSchedule.self = self;
-	if (nCount < 0)
+	auto objectMap = mObjectScheduleMap.GetElement(self);
+	if (!objectMap)
 	{
-		xSchedule.mbForever = true;
+		objectMap = NF_SHARE_PTR< NFMapEx <std::string, NFScheduleElement >>(NF_NEW NFMapEx <std::string, NFScheduleElement >());
+		mObjectScheduleMap.AddElement(self, objectMap);
 	}
 
-	xSchedule.mxObjectFunctor.Add(cb);
+	auto scheduleObject = objectMap->GetElement(strScheduleName);
+	if (!scheduleObject)
+	{
+		scheduleObject = NF_SHARE_PTR<NFScheduleElement>(NF_NEW NFScheduleElement());
+		scheduleObject->mstrScheduleName = strScheduleName;
+		scheduleObject->mfIntervalTime = fTime;
+		scheduleObject->mnTriggerTime = NFGetTimeMS() + (NFINT64)(fTime * 1000);
+		scheduleObject->mnRemainCount = nCount;
+		scheduleObject->self = self;
 
-	mObjectAddList.push_back(xSchedule);
+
+		scheduleObject->mxObjectFunctor.Add(cb);
+
+		objectMap->AddElement(strScheduleName, scheduleObject);
+
+		TickElement tickElement;
+		tickElement.scheduleName = scheduleObject->mstrScheduleName;
+		tickElement.triggerTime = scheduleObject->mnTriggerTime;
+		tickElement.self = scheduleObject->self;
+
+		mScheduleMap.insert(tickElement);
+	}
 
 	return true;
 }
 
-bool NFScheduleModule::AddSchedule(const NFGUID self, const std::string & strScheduleName, const OBJECT_SCHEDULE_FUNCTOR_PTR & cb, const int nCount, const NFDateTime & date)
-{
-	//we would store this kind of schedule in database
-	return false;
-}
-
 bool NFScheduleModule::RemoveSchedule(const NFGUID self)
 {
-	//is there will be deleted when using?
 	return mObjectScheduleMap.RemoveElement(self);
 }
 
 bool NFScheduleModule::RemoveSchedule(const NFGUID self, const std::string& strScheduleName)
 {
-	NF_SHARE_PTR<NFScheduleElement> pScheduleElement = GetSchedule(self, strScheduleName);
-	if (pScheduleElement)
+	auto objectMap = mObjectScheduleMap.GetElement(self);
+	if (objectMap)
 	{
-		mObjectRemoveList.push_back(pScheduleElement);
-
-		return true;
+		return objectMap->RemoveElement(strScheduleName);
 	}
 
 	return false;
@@ -332,13 +170,13 @@ bool NFScheduleModule::RemoveSchedule(const NFGUID self, const std::string& strS
 
 bool NFScheduleModule::ExistSchedule(const NFGUID self, const std::string& strScheduleName)
 {
-	NF_SHARE_PTR< NFMapEx <std::string, NFScheduleElement >> xObjectScheduleMap = mObjectScheduleMap.GetElement(self);
-	if (NULL == xObjectScheduleMap)
+	auto objectScheduleMap = mObjectScheduleMap.GetElement(self);
+	if (NULL == objectScheduleMap)
 	{
 		return false;
 	}
 
-	return xObjectScheduleMap->ExistElement(strScheduleName);
+	return objectScheduleMap->ExistElement(strScheduleName);
 }
 
 NF_SHARE_PTR<NFScheduleElement> NFScheduleModule::GetSchedule(const NFGUID self, const std::string & strScheduleName)

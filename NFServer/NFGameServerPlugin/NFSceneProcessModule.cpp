@@ -138,13 +138,17 @@ int NFSceneProcessModule::BeforeLeaveSceneGroupEvent(const NFGUID & self, const 
 int NFSceneProcessModule::AfterLeaveSceneGroupEvent(const NFGUID & self, const int nSceneID, const int nGroupID, const int nType, const NFDataList & argList)
 {
 	NFMsg::ESceneType eSceneType = (NFMsg::ESceneType)m_pElementModule->GetPropertyInt32(std::to_string(nSceneID), NFrame::Scene::Type());
-	if (eSceneType == NFMsg::ESceneType::SINGLE_CLONE_SCENE)
+	if (eSceneType == NFMsg::ESceneType::NORMAL_SCENE)
+	{
+
+	}
+	else if (eSceneType == NFMsg::ESceneType::SINGLE_CLONE_SCENE)
 	{
 		m_pKernelModule->ReleaseGroupScene(nSceneID, nGroupID);
 
 		return 0;
 	}
-	else if (eSceneType == NFMsg::ESceneType::MULTI_CLONE_SCENE)
+	else
 	{
 		NFDataList varObjectList;
 		if (m_pKernelModule->GetGroupObjectList(nSceneID, nGroupID, varObjectList, true) && varObjectList.GetCount() <= 0)

@@ -26,6 +26,9 @@
 #ifndef NF_SCHEDULE_MODULE_H
 #define NF_SCHEDULE_MODULE_H
 
+#include <iostream>
+#include <set>
+#include <algorithm>
 #include "NFComm/NFCore/NFMap.hpp"
 #include "NFComm/NFCore/NFList.hpp"
 #include "NFComm/NFCore/NFPerformance.hpp"
@@ -34,6 +37,20 @@
 #include "NFComm/NFPluginModule/NFIScheduleModule.h"
 #include "NFComm/NFPluginModule/NFILogModule.h"
 #include "NFComm/NFPluginModule/NFIKernelModule.h"
+
+class TickElement
+{
+public:
+
+	bool operator< (const TickElement& b) const
+	{
+		return triggerTime < b.triggerTime;
+	}
+
+	std::string scheduleName;
+	NFINT64 triggerTime;
+	NFGUID self;
+};
 
 class NFScheduleModule : public NFIScheduleModule
 {
@@ -45,14 +62,7 @@ public:
 	virtual bool Init();
 	virtual bool Execute();
 
-	virtual bool AddSchedule(const std::string& strScheduleName, const MODULE_SCHEDULE_FUNCTOR_PTR& cb, const float fTime, const int nCount);
-	virtual bool AddSchedule(const std::string& strScheduleName, const MODULE_SCHEDULE_FUNCTOR_PTR& cb, const int nCount, const NFDateTime& date);
-	virtual bool RemoveSchedule(const std::string& strScheduleName);
-	virtual bool ExistSchedule(const std::string& strScheduleName);
-	
-	
 	virtual bool AddSchedule(const NFGUID self, const std::string& strScheduleName, const OBJECT_SCHEDULE_FUNCTOR_PTR& cb, const float fTime, const int nCount);
-	virtual bool AddSchedule(const NFGUID self, const std::string& strScheduleName, const OBJECT_SCHEDULE_FUNCTOR_PTR& cb, const int nCount, const NFDateTime& date);
 	virtual bool RemoveSchedule(const NFGUID self);
 	virtual bool RemoveSchedule(const NFGUID self, const std::string& strScheduleName);
 	virtual bool ExistSchedule(const NFGUID self, const std::string& strScheduleName);
@@ -62,13 +72,9 @@ protected:
 	int OnClassCommonEvent(const NFGUID & self, const std::string & strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFDataList & var);
 
 protected:
-	NFMapEx<NFGUID, NFMapEx <std::string, NFScheduleElement >> mObjectScheduleMap;//guid_scheduleName_element
-	std::list<NFScheduleElement> mObjectAddList;
-	std::list< NF_SHARE_PTR<NFScheduleElement> > mObjectRemoveList;
+	NFMapEx<NFGUID, NFMapEx<std::string, NFScheduleElement >> mObjectScheduleMap;
 
-	NFMapEx <std::string, NFScheduleElement > mModuleScheduleMap;//guid_scheduleName_element
-	std::list<NFScheduleElement> mModuleAddList;
-	std::list<std::string> mModuleRemoveList;
+	std::multiset<TickElement> mScheduleMap;
 
 	NFILogModule* m_pLogModule;
 	NFIKernelModule* m_pKernelModule;

@@ -392,7 +392,7 @@ bool NFLuaScriptModule::AddModuleSchedule(std::string& strHeartBeatName, const L
 	{
 		if (AddLuaFuncToMap(mxLuaHeartBeatCallBackFuncMap, strHeartBeatName, luaFuncName))
 		{
-			return m_pScheduleModule->AddSchedule(strHeartBeatName, this, &NFLuaScriptModule::OnLuaHeartBeatCB, fTime, nCount);
+			return m_pScheduleModule->AddSchedule(NFGUID(), strHeartBeatName, this, &NFLuaScriptModule::OnLuaHeartBeatCB, fTime, nCount);
 		}
 	}
 
