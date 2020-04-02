@@ -70,7 +70,6 @@ public:
 
 protected:
 	int OnClassCommonEvent(const NFGUID & self, const std::string & strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFDataList & var);
-	int ScheduleFunction(const NFGUID& self, const std::string& name, const float time, const int count);
 
 protected:
 	NFMapEx<NFGUID, NFMapEx<std::string, NFScheduleElement >> mObjectScheduleMap;

@@ -56,32 +56,6 @@ bool NFScheduleModule::Init()
 	
 	m_pKernelModule->RegisterCommonClassEvent(this, &NFScheduleModule::OnClassCommonEvent);
 
-/*
-	for (int i = 0; i < 10; ++i)
-	{
-		auto scheduleObject = NF_SHARE_PTR<NFScheduleElement>(NF_NEW NFScheduleElement());
-		scheduleObject->mstrScheduleName = std::to_string(i);
-		scheduleObject->mfIntervalTime = m_pKernelModule->Random();
-		scheduleObject->mnTriggerTime = NFGetTimeMS() + (NFINT64)(scheduleObject->mfIntervalTime * 1000);
-		scheduleObject->mnStartTime = NFGetTimeMS();
-		scheduleObject->mnRemainCount = 1;
-		scheduleObject->mnAllCount = 1;
-		scheduleObject->self = NFGUID(1, i);
-
-		TickElement tickElement;
-		tickElement.scheduleName = std::to_string(i);
-		tickElement.intervalTime = 5.0f;
-		tickElement.remainCount = 15;
-		tickElement.triggerTime = NFGetTimeMS() + (NFINT64)(scheduleObject->mfIntervalTime * 1000);
-		mScheduleMap.insert(tickElement);
-	}
-
-	for (auto it = mScheduleMap.begin(); it != mScheduleMap.end(); ++it)
-	{
-		std::cout << it->scheduleName << " " << it->triggerTime << std::endl;
-	}
-*/
-	//NFIScheduleModule::AddSchedule(NFGUID(), "test", this, &NFScheduleModule::ScheduleFunction, 5.0f, 3);
 	return true;
 }
 
@@ -224,11 +198,5 @@ int NFScheduleModule::OnClassCommonEvent(const NFGUID & self, const std::string 
 		this->RemoveSchedule(self);
 	}
 
-	return 0;
-}
-
-int NFScheduleModule::ScheduleFunction(const NFGUID &self, const std::string &name, const float time, const int count)
-{
-	std::cout << name << " -------------------------------time:" << time << " count:" << count << std::endl;
 	return 0;
 }
