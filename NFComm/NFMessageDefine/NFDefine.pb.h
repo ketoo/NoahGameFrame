@@ -103,7 +103,7 @@ inline bool EGameEventCode_Parse(
 enum EGameMsgID : int {
   UNKNOW = 0,
   EVENT_RESULT = 1,
-  EVENT_TRANSPOND = 2,
+  EVENT_TRANSPORT = 2,
   CLOSE_SOCKET = 3,
   WTM_WORLD_REGISTERED = 10,
   WTM_WORLD_UNREGISTERED = 11,

@@ -29,15 +29,14 @@
 
 bool NFHelloWorld3Module::Init()
 {
-	
 	std::cout << "Hello, world3, Init" << std::endl;
+	m_pScheduleModule->AddSchedule(NFGUID(), "OnHeartBe22222", this, &NFHelloWorld3Module::OnHeartBeat, 6.0f, 10 );
 
 	return true;
 }
 
 int NFHelloWorld3Module::OnEvent(const NFGUID& self, const int event, const NFDataList& arg)
 {
-	
 	std::cout << "OnEvent EventID: " << event << " self: " << self.nData64 << " argList: " << arg.Int(0) << " " << " " << arg.String(1) << std::endl;
 
 	m_pKernelModule->SetPropertyInt(self, "Hello", arg.Int(0));
@@ -51,7 +50,7 @@ int NFHelloWorld3Module::OnHeartBeat(const NFGUID& self, const std::string& strH
 
 	int64_t unNowTime = NFGetTimeMS();
 
-	std::cout << "strHeartBeat: " << fTime << " Count: " << nCount << "  TimeDis: " << unNowTime - mLastTime << std::endl;
+	std::cout << self.ToString() + " strHeartBeat: " << fTime << " Count: " << nCount << "  TimeDis: " << unNowTime - mLastTime << std::endl;
 
 	mLastTime = unNowTime;
 
