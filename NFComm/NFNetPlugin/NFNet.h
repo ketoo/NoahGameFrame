@@ -26,6 +26,8 @@
 #ifndef NF_NET_H
 #define NF_NET_H
 
+#include <set>
+#include <algorithm>
 #include "NFINet.h"
 #include <thread>
 #include <event2/bufferevent.h>
@@ -137,7 +139,9 @@ protected:
 private:
     //<fd,object>
 
+	//std::multiset<NetObject*> mLiveBeatMap;
 
+	//Use share pointer replace C-style pointer
     std::map<NFSOCK, NetObject*> mmObject;
     std::vector<NFSOCK> mvRemoveObject;
 

@@ -82,7 +82,7 @@ void NFCrashHandler(int sig)
     //el::Helpers::logCrashReason(sig, true);
 
 
-    LOG(FATAL) << "crash sig:" << sig;
+    LOG(FATAL) << "NFCrashHandler => crash sig:" << sig;
 
     int size = 16;
     void* array[16];

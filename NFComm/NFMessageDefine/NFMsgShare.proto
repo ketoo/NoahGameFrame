@@ -88,6 +88,7 @@ message EffectData
 		EET_REFUSE = 2;
 		EET_MISS = 3;	
 		EET_CRIT = 4;	
+		EET_ULTI = 5;	
 	}
 	Ident 			effect_ident = 1;
 	int32  		effect_value = 2;
