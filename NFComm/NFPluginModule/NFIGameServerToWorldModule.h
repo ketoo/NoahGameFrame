@@ -23,8 +23,8 @@
    limitations under the License.
 */
 
-#ifndef NFI_GAMESERVERTOWORLDMODULE_H
-#define NFI_GAMESERVERTOWORLDMODULE_H
+#ifndef NFI_GAME_SERVER_TO_WORLD_MODULE_H
+#define NFI_GAME_SERVER_TO_WORLD_MODULE_H
 
 #include <iostream>
 #include "NFIModule.h"
@@ -35,7 +35,8 @@ class NFIGameServerToWorldModule
 {
 public:
 	virtual void TransmitToWorld(const int nHashKey, const int nMsgID, const google::protobuf::Message& xData) = 0;
-
+	virtual void SendOnline(const NFGUID& self) = 0;
+	virtual void SendOffline(const NFGUID& self) = 0;
 };
 
 #endif

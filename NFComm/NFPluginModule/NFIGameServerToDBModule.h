@@ -23,8 +23,8 @@
    limitations under the License.
 */
 
-#ifndef NFI_GAMESERVERTO_DB_MODULE_H
-#define NFI_GAMESERVERTO_DB_MODULE_H
+#ifndef NFI_GAME_SERVER_TO_DB_MODULE_H
+#define NFI_GAME_SERVER_TO_DB_MODULE_H
 
 #include <iostream>
 #include "NFIModule.h"
