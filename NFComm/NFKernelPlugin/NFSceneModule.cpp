@@ -1491,7 +1491,7 @@ int NFSceneModule::GetBroadCastObject(const NFGUID & self, const std::string & s
 	if (bTable)
 	{
 		//upload property can not board to itself
-		if (!pRecord->GetUpload())
+		//if (pRecord->GetUpload())
 		{
 			if (pRecord->GetPublic())
 			{
@@ -1507,7 +1507,7 @@ int NFSceneModule::GetBroadCastObject(const NFGUID & self, const std::string & s
 	else
 	{
 		//upload property can not board to itself
-		if (!pProperty->GetUpload())
+		//if (pProperty->GetUpload())
 		{
 			if (pProperty->GetPublic())
 			{
