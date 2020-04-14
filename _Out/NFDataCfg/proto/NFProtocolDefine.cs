@@ -19,6 +19,7 @@ namespace NFrame
 		public static readonly String CampID = "CampID";// object
 		public static readonly String ClassName = "ClassName";// string
 		public static readonly String ConfigID = "ConfigID";// string
+		public static readonly String Connection = "Connection";// int
 		public static readonly String Disable = "Disable";// int
 		public static readonly String GMMoveTo = "GMMoveTo";// vector3
 		public static readonly String GroupID = "GroupID";// int
@@ -111,6 +112,7 @@ namespace NFrame
 		public static readonly String CampID = "CampID";// object
 		public static readonly String ClassName = "ClassName";// string
 		public static readonly String ConfigID = "ConfigID";// string
+		public static readonly String Connection = "Connection";// int
 		public static readonly String Disable = "Disable";// int
 		public static readonly String GMMoveTo = "GMMoveTo";// vector3
 		public static readonly String GroupID = "GroupID";// int
@@ -134,6 +136,7 @@ namespace NFrame
 		public static readonly String CampID = "CampID";// object
 		public static readonly String ClassName = "ClassName";// string
 		public static readonly String ConfigID = "ConfigID";// string
+		public static readonly String Connection = "Connection";// int
 		public static readonly String Disable = "Disable";// int
 		public static readonly String GMMoveTo = "GMMoveTo";// vector3
 		public static readonly String GroupID = "GroupID";// int
@@ -156,6 +159,7 @@ namespace NFrame
 		public static readonly String CampID = "CampID";// object
 		public static readonly String ClassName = "ClassName";// string
 		public static readonly String ConfigID = "ConfigID";// string
+		public static readonly String Connection = "Connection";// int
 		public static readonly String Disable = "Disable";// int
 		public static readonly String GMMoveTo = "GMMoveTo";// vector3
 		public static readonly String GroupID = "GroupID";// int
@@ -177,6 +181,7 @@ namespace NFrame
 		public static readonly String CampID = "CampID";// object
 		public static readonly String ClassName = "ClassName";// string
 		public static readonly String ConfigID = "ConfigID";// string
+		public static readonly String Connection = "Connection";// int
 		public static readonly String Disable = "Disable";// int
 		public static readonly String GMMoveTo = "GMMoveTo";// vector3
 		public static readonly String GroupID = "GroupID";// int
@@ -203,6 +208,7 @@ namespace NFrame
 		public static readonly String CampID = "CampID";// object
 		public static readonly String ClassName = "ClassName";// string
 		public static readonly String ConfigID = "ConfigID";// string
+		public static readonly String Connection = "Connection";// int
 		public static readonly String Disable = "Disable";// int
 		public static readonly String GMMoveTo = "GMMoveTo";// vector3
 		public static readonly String GroupID = "GroupID";// int
@@ -229,6 +235,7 @@ namespace NFrame
 		public static readonly String CampID = "CampID";// object
 		public static readonly String ClassName = "ClassName";// string
 		public static readonly String ConfigID = "ConfigID";// string
+		public static readonly String Connection = "Connection";// int
 		public static readonly String Disable = "Disable";// int
 		public static readonly String GMMoveTo = "GMMoveTo";// vector3
 		public static readonly String GroupID = "GroupID";// int
@@ -349,6 +356,7 @@ namespace NFrame
 		public static readonly String CampID = "CampID";// object
 		public static readonly String ClassName = "ClassName";// string
 		public static readonly String ConfigID = "ConfigID";// string
+		public static readonly String Connection = "Connection";// int
 		public static readonly String Disable = "Disable";// int
 		public static readonly String GMMoveTo = "GMMoveTo";// vector3
 		public static readonly String GroupID = "GroupID";// int
@@ -375,6 +383,7 @@ namespace NFrame
 		public static readonly String CampID = "CampID";// object
 		public static readonly String ClassName = "ClassName";// string
 		public static readonly String ConfigID = "ConfigID";// string
+		public static readonly String Connection = "Connection";// int
 		public static readonly String Disable = "Disable";// int
 		public static readonly String GMMoveTo = "GMMoveTo";// vector3
 		public static readonly String GroupID = "GroupID";// int
@@ -493,6 +502,7 @@ namespace NFrame
 		public static readonly String CampID = "CampID";// object
 		public static readonly String ClassName = "ClassName";// string
 		public static readonly String ConfigID = "ConfigID";// string
+		public static readonly String Connection = "Connection";// int
 		public static readonly String Disable = "Disable";// int
 		public static readonly String GMMoveTo = "GMMoveTo";// vector3
 		public static readonly String GroupID = "GroupID";// int
@@ -528,6 +538,7 @@ namespace NFrame
 		public static readonly String CampID = "CampID";// object
 		public static readonly String ClassName = "ClassName";// string
 		public static readonly String ConfigID = "ConfigID";// string
+		public static readonly String Connection = "Connection";// int
 		public static readonly String Disable = "Disable";// int
 		public static readonly String GMMoveTo = "GMMoveTo";// vector3
 		public static readonly String GroupID = "GroupID";// int
@@ -551,6 +562,7 @@ namespace NFrame
 		public static readonly String CampID = "CampID";// object
 		public static readonly String ClassName = "ClassName";// string
 		public static readonly String ConfigID = "ConfigID";// string
+		public static readonly String Connection = "Connection";// int
 		public static readonly String Disable = "Disable";// int
 		public static readonly String GMMoveTo = "GMMoveTo";// vector3
 		public static readonly String GroupID = "GroupID";// int
@@ -563,13 +575,13 @@ namespace NFrame
 		public static readonly String State = "State";// int
 		// Property
 		public static readonly String Area = "Area";// int
-		public static readonly String Cell = "Cell";// int
 		public static readonly String CpuCount = "CpuCount";// int
 		public static readonly String IP = "IP";// string
 		public static readonly String MaxOnline = "MaxOnline";// int
 		public static readonly String Port = "Port";// int
 		public static readonly String ServerID = "ServerID";// int
 		public static readonly String Type = "Type";// int
+		public static readonly String UDPPort = "UDPPort";// int
 		public static readonly String WSPort = "WSPort";// int
 		public static readonly String WebPort = "WebPort";// int
 		// Record
@@ -583,6 +595,7 @@ namespace NFrame
 		public static readonly String CampID = "CampID";// object
 		public static readonly String ClassName = "ClassName";// string
 		public static readonly String ConfigID = "ConfigID";// string
+		public static readonly String Connection = "Connection";// int
 		public static readonly String Disable = "Disable";// int
 		public static readonly String GMMoveTo = "GMMoveTo";// vector3
 		public static readonly String GroupID = "GroupID";// int

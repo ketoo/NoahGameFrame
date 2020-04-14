@@ -198,6 +198,9 @@ void NFCreateRoleModule::OnDBLoadRoleDataProcess(const NFSOCK nSockIndex, const 
 		var.AddString(NFrame::Player::GameID());
 		var.AddInt(pPluginManager->GetAppID());
 
+		var.AddString(NFrame::Player::Connection());
+		var.AddInt(1);
+
 		/*
 		var.AddString(NFrame::Player::HomeSceneID());
 		var.AddInt(1);

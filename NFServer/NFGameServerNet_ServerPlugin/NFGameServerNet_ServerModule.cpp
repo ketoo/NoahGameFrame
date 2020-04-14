@@ -52,7 +52,6 @@ bool NFGameServerNet_ServerModule::AfterInit()
 	m_pNetModule->AddReceiveCallBack(NFMsg::PTWG_PROXY_REFRESH, this, &NFGameServerNet_ServerModule::OnRefreshProxyServerInfoProcess);
 	m_pNetModule->AddReceiveCallBack(NFMsg::PTWG_PROXY_REGISTERED, this, &NFGameServerNet_ServerModule::OnProxyServerRegisteredProcess);
 	m_pNetModule->AddReceiveCallBack(NFMsg::PTWG_PROXY_UNREGISTERED, this, &NFGameServerNet_ServerModule::OnProxyServerUnRegisteredProcess);
-	m_pNetModule->AddReceiveCallBack(NFMsg::REQ_ENTER_GAME, this, &NFGameServerNet_ServerModule::OnClientEnterGameProcess);
 	m_pNetModule->AddReceiveCallBack(NFMsg::REQ_LEAVE_GAME, this, &NFGameServerNet_ServerModule::OnClientLeaveGameProcess);
 
 	m_pNetModule->AddReceiveCallBack(NFMsg::REQ_SWAP_SCENE, this, &NFGameServerNet_ServerModule::OnClientSwapSceneProcess);
@@ -186,87 +185,7 @@ void NFGameServerNet_ServerModule::OnClientConnected(const NFSOCK nAddress)
 
 }
 
-void NFGameServerNet_ServerModule::OnClientEnterGameProcess(const NFSOCK nSockIndex, const int nMsgID, const char *msg,
-                                                             const uint32_t nLen)
-{
-	NFGUID nClientID;
-	NFMsg::ReqEnterGameServer xMsg;
-	if (!m_pNetModule->ReceivePB( nMsgID, msg, nLen, xMsg, nClientID))
-	{
-		return;
-	}
-
-	NFGUID nRoleID = NFINetModule::PBToNF(xMsg.id());
-
-	if (m_pKernelModule->GetObject(nRoleID))
-	{
-		//it should be rebind with proxy's netobject
-		m_pKernelModule->DestroyObject(nRoleID);
-	}
-
-	//////////////////////////////////////////////////////////////////////////
-
-	NF_SHARE_PTR<NFIGameServerNet_ServerModule::GateBaseInfo>  pGateInfo = GetPlayerGateInfo(nRoleID);
-	if (nullptr != pGateInfo)
-	{
-		RemovePlayerGateInfo(nRoleID);
-	}
-
-	NF_SHARE_PTR<NFIGameServerNet_ServerModule::GateServerInfo> pGateServerinfo = GetGateServerInfoBySockIndex(nSockIndex);
-	if (nullptr == pGateServerinfo)
-	{
-		return;
-	}
-
-	int nGateID = -1;
-	if (pGateServerinfo->xServerData.pData)
-	{
-		nGateID = pGateServerinfo->xServerData.pData->server_id();
-	}
-
-	if (nGateID < 0)
-	{
-		return;
-	}
-
-	if (!AddPlayerGateInfo(nRoleID, nClientID, nGateID))
-	{
-		return;
-	}
-
-	int nSceneID = 1;
-	NFDataList var;
-	var.AddString(NFrame::Player::Name());
-	var.AddString(xMsg.name());
-
-	var.AddString(NFrame::Player::GateID());
-	var.AddInt(nGateID);
-
-	var.AddString(NFrame::Player::GameID());
-	var.AddInt(pPluginManager->GetAppID());
-
-	NF_SHARE_PTR<NFIObject> pObject = m_pKernelModule->CreateObject(nRoleID, nSceneID, 0, NFrame::Player::ThisName(), "", var);
-	if (NULL == pObject)
-	{
-		//mRoleBaseData
-		//mRoleFDData
-		return;
-	}
-
-	const NFVector3& pos = pObject->GetPropertyVector3(NFrame::IObject::Position());
-	if (!pos.IsZero())
-	{
-		m_pSceneModule->RequestEnterScene(pObject->Self(), nSceneID, 1, 0, pos, NFDataList());
-	}
-	else
-	{
-		const NFVector3& pos = m_pSceneModule->GetRelivePosition(nSceneID, 0);
-		m_pSceneModule->RequestEnterScene(pObject->Self(), nSceneID, 1, 0, pos, NFDataList());
-	}
-}
-
-void NFGameServerNet_ServerModule::OnClientLeaveGameProcess(const NFSOCK nSockIndex, const int nMsgID, const char *msg,
-                                                             const uint32_t nLen)
+void NFGameServerNet_ServerModule::OnClientLeaveGameProcess(const NFSOCK nSockIndex, const int nMsgID, const char *msg, const uint32_t nLen)
 {
 	NFGUID nPlayerID;
 	NFMsg::ReqLeaveGameServer xMsg;
@@ -280,6 +199,8 @@ void NFGameServerNet_ServerModule::OnClientLeaveGameProcess(const NFSOCK nSockIn
 		return;
 	}
 
+	m_pKernelModule->SetPropertyInt(nPlayerID, NFrame::IObject::Connection(), 0);
+
 	m_pKernelModule->DestroyObject(nPlayerID);
 
 	RemovePlayerGateInfo(nPlayerID);
@@ -288,7 +209,7 @@ void NFGameServerNet_ServerModule::OnClientLeaveGameProcess(const NFSOCK nSockIn
 void NFGameServerNet_ServerModule::OnClientEnterGameFinishProcess(const NFSOCK nSockIndex, const int nMsgID, const char *msg, const uint32_t nLen)
 {
 	CLIENT_MSG_PROCESS( nMsgID, msg, nLen, NFMsg::ReqAckEnterGameSuccess);
-	m_pKernelModule->DoEvent(nPlayerID, NFrame::Player::ThisName(), CLASS_OBJECT_EVENT::COE_CREATE_CLIENT_FINISH, NFDataList());
+	m_pKernelModule->DoEvent(nPlayerID, NFrame::Player::ThisName(), CLASS_OBJECT_EVENT::COE_CREATE_CLIENT_FINISH, NFDataList::Empty());
 	
 	m_pNetModule->SendMsgPB(NFMsg::ACK_ENTER_GAME_FINISH, xMsg, nSockIndex, nPlayerID);
 }
@@ -312,7 +233,7 @@ void NFGameServerNet_ServerModule::OnClientSwapSceneProcess(const NFSOCK nSockIn
 	if (sceneType == NFMsg::ESceneType::NORMAL_SCENE)
 	{
 		const NFVector3& pos = m_pSceneModule->GetRelivePosition(xMsg.scene_id(), 0);
-		m_pSceneProcessModule->RequestEnterScene(pObject->Self(), xMsg.scene_id(), 1, 0, pos, NFDataList());
+		m_pSceneProcessModule->RequestEnterScene(pObject->Self(), xMsg.scene_id(), 1, 0, pos, NFDataList::Empty());
 	}
 }
 
@@ -442,7 +363,7 @@ void NFGameServerNet_ServerModule::OnClientPropertyIntProcess(const NFSOCK nSock
 			if (pProperty->GetUpload() || nGMLevel > 0)
 			{
 				m_pLogModule->LogInfo(nPlayerID, "Upload From Client int set " + xPropertyInt.property_name() + std::to_string(xPropertyInt.data()), __FUNCTION__, __LINE__);
-				pProperty->SetInt(xPropertyInt.data());
+				m_pKernelModule->SetPropertyInt(nPlayerID, xPropertyInt.property_name(), xPropertyInt.data());
 			}
 			else
 			{
@@ -473,7 +394,7 @@ void NFGameServerNet_ServerModule::OnClientPropertyFloatProcess(const NFSOCK nSo
 			if (pProperty->GetUpload() || nGMLevel > 0)
 			{
 				m_pLogModule->LogInfo(nPlayerID, "Upload From Client float set " + xPropertyFloat.property_name() + std::to_string(xPropertyFloat.data()), __FUNCTION__, __LINE__);
-				pProperty->SetFloat(xPropertyFloat.data());
+				m_pKernelModule->SetPropertyFloat(nPlayerID, xPropertyFloat.property_name(), xPropertyFloat.data());
 			}
 			else
 			{
@@ -504,7 +425,7 @@ void NFGameServerNet_ServerModule::OnClientPropertyStringProcess(const NFSOCK nS
 			if (pProperty->GetUpload() || nGMLevel > 0)
 			{
 				m_pLogModule->LogInfo(nPlayerID, "Upload From Client string set " + xPropertyString.property_name() + " " + xPropertyString.data(), __FUNCTION__, __LINE__);
-				pProperty->SetString(xPropertyString.data());
+				m_pKernelModule->SetPropertyString(nPlayerID, xPropertyString.property_name(), xPropertyString.data());
 			}
 			else
 			{
@@ -536,7 +457,7 @@ void NFGameServerNet_ServerModule::OnClientPropertyObjectProcess(const NFSOCK nS
 			{
 				NFGUID xID = NFINetModule::PBToNF(xPropertyObject.data());
 				m_pLogModule->LogInfo(nPlayerID, "Upload From Client object set " + xPropertyObject.property_name() + " " + xID.ToString(), __FUNCTION__, __LINE__);
-				pProperty->SetObject(xID);
+				m_pKernelModule->SetPropertyObject(nPlayerID, xPropertyObject.property_name(), xID);
 			}
 			else
 			{
@@ -569,7 +490,7 @@ void NFGameServerNet_ServerModule::OnClientPropertyVector2Process(const NFSOCK n
 			{
 				NFVector2 vVec2 = NFINetModule::PBToNF(xProperty.data());
 				m_pLogModule->LogInfo(nPlayerID, "Upload From Client object set " + xProperty.property_name() + " " + vVec2.ToString(), __FUNCTION__, __LINE__);
-				pProperty->SetVector2(vVec2);
+				m_pKernelModule->SetPropertyVector2(nPlayerID, xProperty.property_name(), vVec2);
 			}
 			else
 			{
@@ -601,7 +522,7 @@ void NFGameServerNet_ServerModule::OnClientPropertyVector3Process(const NFSOCK n
 			{
 				NFVector3 vVec3 = NFINetModule::PBToNF(xProperty.data());
 				m_pLogModule->LogInfo(nPlayerID, "Upload From Client object set " + xProperty.property_name() + " " + vVec3.ToString(), __FUNCTION__, __LINE__);
-				pProperty->SetVector3(vVec3);
+				m_pKernelModule->SetPropertyVector3(nPlayerID, xProperty.property_name(), vVec3);
 			}
 			else
 			{
