@@ -93,7 +93,7 @@ int main(int argc, char* argv[])
 
 	for (auto item : serverList)
 	{
-		item->SeMidWareLoader(MidWareLoader);
+		item->SetMidwareLoader(MidWareLoader);
 		item->Init();
 	}
 
