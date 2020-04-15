@@ -163,7 +163,7 @@ void NFPluginServer::PrintfLogo()
 #endif
 }
 
-void NFPluginServer::SeMidWareLoader(std::function<void(NFIPluginManager * p)> fun)
+void NFPluginServer::SetMidwareLoader(std::function<void(NFIPluginManager * p)> fun)
 {
     externalPluginLoader = fun;
 }
