@@ -85,7 +85,7 @@ svn checkout https://github.com/ketoo/NoahGameFrame
 
 ### FOR LUNUX(UBUNTU, CENTOS) ---- please use administrator(or sudo) to do these:
 1. Git pull all source
-2. Run **install4cmake.sh** to build NF (or run /Depenndencies/build_dep.sh then run buildServer.sh)
+2. Run **install4cmake.sh** to build NF (or run cd /Dependencies  ./build_dep.sh then run buildServer.sh)
 3. Run the binary file by **_Out/rund.sh**
 
 ### IF YOU LIVING IN A COUNTRY CANNOT ACCESS GITHUB FASTLY PLZ BUILD NF WITH VPN
