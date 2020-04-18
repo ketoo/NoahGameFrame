@@ -28,9 +28,6 @@ NoahGameFrame (NF) is a lightweight, fast, scalable, distributed plugin framewor
 
 https://github.com/ketoo/NoahGameFrame/wiki
 
-### Client (Unity3D && Cocos2d)
-[Client](https://github.com/ketoo/NFClient)
-
 ## Architecture
 
 ### App Architecture:
