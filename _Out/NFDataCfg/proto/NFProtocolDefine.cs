@@ -397,6 +397,7 @@ namespace NFrame
 		// Property
 		public static readonly String Account = "Account";// string
 		public static readonly String ConnectKey = "ConnectKey";// string
+		public static readonly String Cup = "Cup";// int
 		public static readonly String Diamond = "Diamond";// int
 		public static readonly String EXP = "EXP";// int
 		public static readonly String GMLevel = "GMLevel";// int
@@ -404,7 +405,6 @@ namespace NFrame
 		public static readonly String GateID = "GateID";// int
 		public static readonly String Gold = "Gold";// int
 		public static readonly String HP = "HP";// int
-		public static readonly String Head = "Head";// string
 		public static readonly String Job = "Job";// int
 		public static readonly String LastOfflineTime = "LastOfflineTime";// object
 		public static readonly String Level = "Level";// int

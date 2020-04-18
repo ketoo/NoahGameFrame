@@ -190,6 +190,7 @@ bool NFGodView::Execute()
 				NFVector2 offset = mNodeSystem.GetOffset();
 				ImGuiIO& io = ImGui::GetIO();
 
+
 				NFVector2 displayOffset(mNodeSystem.GetNodeSize() / 2, mNodeSystem.GetNodeSize() / 2);
 				NFVector2 vec(io.MousePos.x - wPos.x - offset.X() - displayOffset.X(), io.MousePos.y - offset.Y() - displayOffset.Y());
 

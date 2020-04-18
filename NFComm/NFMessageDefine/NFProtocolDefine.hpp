@@ -398,6 +398,7 @@ namespace NFrame
 		// Property
 		static const std::string& Account(){ static std::string x = "Account"; return x; };// string
 		static const std::string& ConnectKey(){ static std::string x = "ConnectKey"; return x; };// string
+		static const std::string& Cup(){ static std::string x = "Cup"; return x; };// int
 		static const std::string& Diamond(){ static std::string x = "Diamond"; return x; };// int
 		static const std::string& EXP(){ static std::string x = "EXP"; return x; };// int
 		static const std::string& GMLevel(){ static std::string x = "GMLevel"; return x; };// int
@@ -405,7 +406,6 @@ namespace NFrame
 		static const std::string& GateID(){ static std::string x = "GateID"; return x; };// int
 		static const std::string& Gold(){ static std::string x = "Gold"; return x; };// int
 		static const std::string& HP(){ static std::string x = "HP"; return x; };// int
-		static const std::string& Head(){ static std::string x = "Head"; return x; };// string
 		static const std::string& Job(){ static std::string x = "Job"; return x; };// int
 		static const std::string& LastOfflineTime(){ static std::string x = "LastOfflineTime"; return x; };// object
 		static const std::string& Level(){ static std::string x = "Level"; return x; };// int

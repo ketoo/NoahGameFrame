@@ -320,6 +320,7 @@ package nframe;
 		// Property
 		public static final String Account = "Account";// string
 		public static final String ConnectKey = "ConnectKey";// string
+		public static final String Cup = "Cup";// int
 		public static final String Diamond = "Diamond";// int
 		public static final String EXP = "EXP";// int
 		public static final String GMLevel = "GMLevel";// int
@@ -327,7 +328,6 @@ package nframe;
 		public static final String GateID = "GateID";// int
 		public static final String Gold = "Gold";// int
 		public static final String HP = "HP";// int
-		public static final String Head = "Head";// string
 		public static final String Job = "Job";// int
 		public static final String LastOfflineTime = "LastOfflineTime";// object
 		public static final String Level = "Level";// int
