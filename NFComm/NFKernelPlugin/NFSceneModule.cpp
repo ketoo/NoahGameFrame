@@ -1306,16 +1306,19 @@ int NFSceneModule::OnClassCommonEvent(const NFGUID & self, const std::string & s
 	}
 	else if (CLASS_OBJECT_EVENT::COE_CREATE_HASDATA == eClassEvent)
 	{
+		NFDataList selfVar;
+		selfVar << self;
+
 		if (strClassName == NFrame::Player::ThisName())
 		{
 			//tell youself<client>, u want to enter this scene or this group
-			OnObjectListEnter(NFDataList() << self, NFDataList() << self);
+			OnObjectListEnter(selfVar, selfVar);
 
 			//tell youself<client>, u want to broad your properties and records to youself
-			OnPropertyEnter(NFDataList() << self, self);
-			OnRecordEnter(NFDataList() << self, self);
+			OnPropertyEnter(selfVar, self);
+			OnRecordEnter(selfVar, self);
 
-			OnObjectListEnterFinished(NFDataList() << self, NFDataList() << self);
+			OnObjectListEnterFinished(selfVar, selfVar);
 		}
 		else
 		{
@@ -1331,11 +1334,11 @@ int NFSceneModule::OnClassCommonEvent(const NFGUID & self, const std::string & s
 			m_pCellModule->GetCellObjectList(nObjectSceneID, nObjectGroupID, pos, valueAllPlayrObjectList, true);
 
 			//monster or others need to tell all player
-			OnObjectListEnter(valueAllPlayrObjectList, NFDataList() << self);
+			OnObjectListEnter(valueAllPlayrObjectList, selfVar);
 			OnPropertyEnter(valueAllPlayrObjectList, self);
 			OnRecordEnter(valueAllPlayrObjectList, self);
 
-			OnObjectListEnterFinished(valueAllPlayrObjectList, NFDataList() << self);
+			OnObjectListEnterFinished(valueAllPlayrObjectList, selfVar);
 
 		}
 	}
@@ -1358,6 +1361,11 @@ int NFSceneModule::OnPlayerGroupEvent(const NFGUID & self, const std::string & s
 	//example1: 0 -> 1 ==> new_group > 0 && old_group <= 0
 	//example2: 1 -> 2 ==> new_group > 0 && old_group > 0
 	//example3: 5 -> 0 ==> new_group <= 0 && old_group > 0
+
+
+	NFDataList selfVar;
+	selfVar << self;
+
 	if (nNewGroupID > 0)
 	{
 		if (nOldGroupID > 0)
@@ -1369,9 +1377,9 @@ int NFSceneModule::OnPlayerGroupEvent(const NFGUID & self, const std::string & s
 			m_pCellModule->GetCellObjectList(nSceneID, nOldGroupID, position, valueAllOldNPCListNoSelf, false, self);
 			m_pCellModule->GetCellObjectList(nSceneID, nOldGroupID, position, valueAllOldPlayerListNoSelf, true, self);
 
-			OnObjectListLeave(valueAllOldPlayerListNoSelf, NFDataList() << self);
-			OnObjectListLeave(NFDataList() << self, valueAllOldPlayerListNoSelf);
-			OnObjectListLeave(NFDataList() << self, valueAllOldNPCListNoSelf);
+			OnObjectListLeave(valueAllOldPlayerListNoSelf, selfVar);
+			OnObjectListLeave(selfVar, valueAllOldPlayerListNoSelf);
+			OnObjectListLeave(selfVar, valueAllOldNPCListNoSelf);
 		}
 		else
 		{
@@ -1386,37 +1394,42 @@ int NFSceneModule::OnPlayerGroupEvent(const NFGUID & self, const std::string & s
 		m_pCellModule->GetCellObjectList(nSceneID, nNewGroupID, position, valueAllNewNPCListNoSelf, false, self);
 		m_pCellModule->GetCellObjectList(nSceneID, nNewGroupID, position, valueAllNewPlayerListNoSelf, true, self);
 
-		OnObjectListEnter(valueAllNewPlayerListNoSelf, NFDataList() << self);
-		OnObjectListEnter(NFDataList() << self, valueAllNewPlayerListNoSelf);
-		OnObjectListEnter(NFDataList() << self, valueAllNewNPCListNoSelf);
+		OnObjectListEnter(valueAllNewPlayerListNoSelf, selfVar);
+		OnObjectListEnter(selfVar, valueAllNewPlayerListNoSelf);
+		OnObjectListEnter(selfVar, valueAllNewNPCListNoSelf);
 
 		//bc others data to u
+		NFDataList identOldVar;
+		identOldVar.Add(NFGUID());
+
 		for (int i = 0; i < valueAllNewNPCListNoSelf.GetCount(); i++)
 		{
 			NFGUID identOld = valueAllNewNPCListNoSelf.Object(i);
+			identOldVar.SetObject(0, identOld);
 
-			OnPropertyEnter(NFDataList() << self, identOld);
-			OnRecordEnter(NFDataList() << self, identOld);
+			OnPropertyEnter(selfVar, identOld);
+			OnRecordEnter(selfVar, identOld);
 
-			OnObjectListEnterFinished(NFDataList() << self, NFDataList() << identOld);
+			OnObjectListEnterFinished(selfVar, identOldVar);
 		}
 
 		//bc others data to u
 		for (int i = 0; i < valueAllNewPlayerListNoSelf.GetCount(); i++)
 		{
 			NFGUID identOld = valueAllNewPlayerListNoSelf.Object(i);
+			identOldVar.SetObject(0, identOld);
 
-			OnPropertyEnter(NFDataList() << self, identOld);
-			OnRecordEnter(NFDataList() << self, identOld);
+			OnPropertyEnter(selfVar, identOld);
+			OnRecordEnter(selfVar, identOld);
 
-			OnObjectListEnterFinished(NFDataList() << self, NFDataList() << identOld);
+			OnObjectListEnterFinished(selfVar, identOldVar);
 		}
 
 		//bc u data to others
 		OnPropertyEnter(valueAllNewPlayerListNoSelf, self);
 		OnRecordEnter(valueAllNewPlayerListNoSelf, self);
 
-		OnObjectListEnterFinished(valueAllNewPlayerListNoSelf, NFDataList() << self);
+		OnObjectListEnterFinished(valueAllNewPlayerListNoSelf, selfVar);
 	}
 	else
 	{
@@ -1429,9 +1442,9 @@ int NFSceneModule::OnPlayerGroupEvent(const NFGUID & self, const std::string & s
 			m_pCellModule->GetCellObjectList(nSceneID, nOldGroupID, position, valueAllOldNPCListNoSelf, false, self);
 			m_pCellModule->GetCellObjectList(nSceneID, nOldGroupID, position, valueAllOldPlayerListNoSelf, true, self);
 
-			OnObjectListLeave(valueAllOldPlayerListNoSelf, NFDataList() << self);
-			OnObjectListLeave(NFDataList() << self, valueAllOldPlayerListNoSelf);
-			OnObjectListLeave(NFDataList() << self, valueAllOldNPCListNoSelf);
+			OnObjectListLeave(valueAllOldPlayerListNoSelf, selfVar);
+			OnObjectListLeave(selfVar, valueAllOldPlayerListNoSelf);
+			OnObjectListLeave(selfVar, valueAllOldNPCListNoSelf);
 		}
 	}
 
@@ -1491,7 +1504,7 @@ int NFSceneModule::GetBroadCastObject(const NFGUID & self, const std::string & s
 	if (bTable)
 	{
 		//upload property can not board to itself
-		if (!pRecord->GetUpload())
+		//if (pRecord->GetUpload())
 		{
 			if (pRecord->GetPublic())
 			{
@@ -1507,7 +1520,7 @@ int NFSceneModule::GetBroadCastObject(const NFGUID & self, const std::string & s
 	else
 	{
 		//upload property can not board to itself
-		if (!pProperty->GetUpload())
+		//if (pProperty->GetUpload())
 		{
 			if (pProperty->GetPublic())
 			{

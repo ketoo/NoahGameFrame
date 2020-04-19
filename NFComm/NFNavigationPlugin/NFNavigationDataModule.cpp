@@ -71,10 +71,9 @@ bool NFNavigationDataModule::AfterInit()
             continue;
         }
 
-        auto groupData = ParseDefaultMapData(scene, jsonData);
+        auto groupData = ParseDefaultMapData(scene, jsonData, true);
         mGroupNavigationData.AddElement(NFGUID(scene, 0), groupData);
     }
-
 
 	return true;
 }

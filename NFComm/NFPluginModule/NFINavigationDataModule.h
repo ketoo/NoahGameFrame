@@ -90,7 +90,7 @@ class NFINavigationDataModule : public NFIModule
 public:
     virtual const std::string& GetDefaultMapData(const int scene) = 0;
 
-    static NF_SHARE_PTR<GroupNavigationData> ParseDefaultMapData(const int scene, const std::string& sceneMapData)
+    static NF_SHARE_PTR<GroupNavigationData> ParseDefaultMapData(const int scene, const std::string& sceneMapData, const bool saveOriginalData = false)
     {
         auto groupData = NF_SHARE_PTR<GroupNavigationData>(NF_NEW GroupNavigationData(scene, 0));
         if (!sceneMapData.empty())
@@ -99,7 +99,10 @@ public:
             auto tileConfig = map["tileConfig"];
             auto data = map["data"];
 
-            groupData->originalData = sceneMapData;
+            if (saveOriginalData)
+			{
+				groupData->originalData = sceneMapData;
+			}
 
             std::string tileConfigValue = tileConfig.dump();
             ajson::load_from_buff(groupData->tileConfig, tileConfigValue.c_str(), tileConfigValue.length());

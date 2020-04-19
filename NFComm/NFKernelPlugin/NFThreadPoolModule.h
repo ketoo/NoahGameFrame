@@ -33,11 +33,11 @@
 #include "NFComm/NFPluginModule/NFIThreadPoolModule.h"
 #include "NFComm/NFCore/NFQueue.hpp"
 
-
-class NFThreadCell
+class NFThreadCell : NFMemoryCounter
 {
 public:
 	NFThreadCell(NFIThreadPoolModule* p)
+			: NFMemoryCounter(GET_CLASS_NAME(NFThreadCell), 1)
 	{
 		m_pThreadPoolModule = p;
 		mThread = NF_SHARE_PTR<std::thread>(NF_NEW std::thread(&NFThreadCell::Execute, this));
@@ -48,6 +48,10 @@ public:
 		mTaskList.Push(task);
 	}
 
+	virtual void ToMemoryCounterString(std::string& info) override
+	{
+
+	}
 protected:
 
 	void Execute()

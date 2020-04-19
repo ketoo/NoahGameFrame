@@ -23,18 +23,37 @@
    limitations under the License.
 */
 
-#ifndef NFI_GAME_SERVER_TO_DB_MODULE_H
-#define NFI_GAME_SERVER_TO_DB_MODULE_H
+#ifndef NF_ELO_MODULE_H
+#define NF_ELO_MODULE_H
 
-#include <iostream>
-#include "NFIModule.h"
-#include "NFINetClientModule.h"
+#include "NFComm/NFPluginModule/NFIELOModule.h"
 
-class NFIGameServerToDBModule
-	: public NFIModule
+class NFELOModule
+    : public NFIELOModule
 {
 public:
+	NFELOModule(NFIPluginManager* p)
+    {
+        pPluginManager = p;
+    }
+    virtual ~NFELOModule() {};
 
+    virtual bool Init();
+    virtual bool Shut();
+    virtual bool Execute();
+    virtual bool AfterInit();
+
+
+	virtual float Probability(int ratingA, int ratingB) override;
+
+	virtual void EloRating(int ratingA, int ratingB, bool aWin, int& resultA, int& resultB) override;
+
+private:
+	int EloK();
+
+private:
+	int K = 50;
 };
+
 
 #endif

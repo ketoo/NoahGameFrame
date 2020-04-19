@@ -13,6 +13,7 @@ package nframe;
 		public static final String CampID = "CampID";// object
 		public static final String ClassName = "ClassName";// string
 		public static final String ConfigID = "ConfigID";// string
+		public static final String Connection = "Connection";// int
 		public static final String Disable = "Disable";// int
 		public static final String GMMoveTo = "GMMoveTo";// vector3
 		public static final String GroupID = "GroupID";// int
@@ -105,6 +106,7 @@ package nframe;
 		public static final String CampID = "CampID";// object
 		public static final String ClassName = "ClassName";// string
 		public static final String ConfigID = "ConfigID";// string
+		public static final String Connection = "Connection";// int
 		public static final String Disable = "Disable";// int
 		public static final String GMMoveTo = "GMMoveTo";// vector3
 		public static final String GroupID = "GroupID";// int
@@ -128,6 +130,7 @@ package nframe;
 		public static final String CampID = "CampID";// object
 		public static final String ClassName = "ClassName";// string
 		public static final String ConfigID = "ConfigID";// string
+		public static final String Connection = "Connection";// int
 		public static final String Disable = "Disable";// int
 		public static final String GMMoveTo = "GMMoveTo";// vector3
 		public static final String GroupID = "GroupID";// int
@@ -150,6 +153,7 @@ package nframe;
 		public static final String CampID = "CampID";// object
 		public static final String ClassName = "ClassName";// string
 		public static final String ConfigID = "ConfigID";// string
+		public static final String Connection = "Connection";// int
 		public static final String Disable = "Disable";// int
 		public static final String GMMoveTo = "GMMoveTo";// vector3
 		public static final String GroupID = "GroupID";// int
@@ -171,6 +175,7 @@ package nframe;
 		public static final String CampID = "CampID";// object
 		public static final String ClassName = "ClassName";// string
 		public static final String ConfigID = "ConfigID";// string
+		public static final String Connection = "Connection";// int
 		public static final String Disable = "Disable";// int
 		public static final String GMMoveTo = "GMMoveTo";// vector3
 		public static final String GroupID = "GroupID";// int
@@ -197,6 +202,7 @@ package nframe;
 		public static final String CampID = "CampID";// object
 		public static final String ClassName = "ClassName";// string
 		public static final String ConfigID = "ConfigID";// string
+		public static final String Connection = "Connection";// int
 		public static final String Disable = "Disable";// int
 		public static final String GMMoveTo = "GMMoveTo";// vector3
 		public static final String GroupID = "GroupID";// int
@@ -223,6 +229,7 @@ package nframe;
 		public static final String CampID = "CampID";// object
 		public static final String ClassName = "ClassName";// string
 		public static final String ConfigID = "ConfigID";// string
+		public static final String Connection = "Connection";// int
 		public static final String Disable = "Disable";// int
 		public static final String GMMoveTo = "GMMoveTo";// vector3
 		public static final String GroupID = "GroupID";// int
@@ -272,6 +279,7 @@ package nframe;
 		public static final String CampID = "CampID";// object
 		public static final String ClassName = "ClassName";// string
 		public static final String ConfigID = "ConfigID";// string
+		public static final String Connection = "Connection";// int
 		public static final String Disable = "Disable";// int
 		public static final String GMMoveTo = "GMMoveTo";// vector3
 		public static final String GroupID = "GroupID";// int
@@ -298,6 +306,7 @@ package nframe;
 		public static final String CampID = "CampID";// object
 		public static final String ClassName = "ClassName";// string
 		public static final String ConfigID = "ConfigID";// string
+		public static final String Connection = "Connection";// int
 		public static final String Disable = "Disable";// int
 		public static final String GMMoveTo = "GMMoveTo";// vector3
 		public static final String GroupID = "GroupID";// int
@@ -311,6 +320,7 @@ package nframe;
 		// Property
 		public static final String Account = "Account";// string
 		public static final String ConnectKey = "ConnectKey";// string
+		public static final String Cup = "Cup";// int
 		public static final String Diamond = "Diamond";// int
 		public static final String EXP = "EXP";// int
 		public static final String GMLevel = "GMLevel";// int
@@ -318,7 +328,6 @@ package nframe;
 		public static final String GateID = "GateID";// int
 		public static final String Gold = "Gold";// int
 		public static final String HP = "HP";// int
-		public static final String Head = "Head";// string
 		public static final String Job = "Job";// int
 		public static final String LastOfflineTime = "LastOfflineTime";// object
 		public static final String Level = "Level";// int
@@ -345,6 +354,7 @@ package nframe;
 		public static final String CampID = "CampID";// object
 		public static final String ClassName = "ClassName";// string
 		public static final String ConfigID = "ConfigID";// string
+		public static final String Connection = "Connection";// int
 		public static final String Disable = "Disable";// int
 		public static final String GMMoveTo = "GMMoveTo";// vector3
 		public static final String GroupID = "GroupID";// int
@@ -380,6 +390,7 @@ package nframe;
 		public static final String CampID = "CampID";// object
 		public static final String ClassName = "ClassName";// string
 		public static final String ConfigID = "ConfigID";// string
+		public static final String Connection = "Connection";// int
 		public static final String Disable = "Disable";// int
 		public static final String GMMoveTo = "GMMoveTo";// vector3
 		public static final String GroupID = "GroupID";// int
@@ -403,6 +414,7 @@ package nframe;
 		public static final String CampID = "CampID";// object
 		public static final String ClassName = "ClassName";// string
 		public static final String ConfigID = "ConfigID";// string
+		public static final String Connection = "Connection";// int
 		public static final String Disable = "Disable";// int
 		public static final String GMMoveTo = "GMMoveTo";// vector3
 		public static final String GroupID = "GroupID";// int
@@ -415,13 +427,13 @@ package nframe;
 		public static final String State = "State";// int
 		// Property
 		public static final String Area = "Area";// int
-		public static final String Cell = "Cell";// int
 		public static final String CpuCount = "CpuCount";// int
 		public static final String IP = "IP";// string
 		public static final String MaxOnline = "MaxOnline";// int
 		public static final String Port = "Port";// int
 		public static final String ServerID = "ServerID";// int
 		public static final String Type = "Type";// int
+		public static final String UDPPort = "UDPPort";// int
 		public static final String WSPort = "WSPort";// int
 		public static final String WebPort = "WebPort";// int
 		// Record
@@ -435,6 +447,7 @@ package nframe;
 		public static final String CampID = "CampID";// object
 		public static final String ClassName = "ClassName";// string
 		public static final String ConfigID = "ConfigID";// string
+		public static final String Connection = "Connection";// int
 		public static final String Disable = "Disable";// int
 		public static final String GMMoveTo = "GMMoveTo";// vector3
 		public static final String GroupID = "GroupID";// int

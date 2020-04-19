@@ -56,6 +56,20 @@ bool NFScheduleModule::Init()
 	
 	m_pKernelModule->RegisterCommonClassEvent(this, &NFScheduleModule::OnClassCommonEvent);
 
+/*
+	std::set<TickElement> test;
+	for (int i = 0 ; i < 100;  ++i)
+	{
+		TickElement element;
+		element.triggerTime = m_pKernelModule->Random(1, 50);
+		test.insert(element);
+	}
+
+	for (auto it = test.begin(); it != test.end(); ++it)
+	{
+		std::cout << it->triggerTime << std::endl;
+	}
+ */
 	return true;
 }
 

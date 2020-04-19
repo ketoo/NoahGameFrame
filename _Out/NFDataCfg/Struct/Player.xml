@@ -3,6 +3,7 @@
 	<Propertys>
 		<Property Id="Account" Cache="1" Desc="玩家的帐号" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="string" Upload="0" />
 		<Property Id="ConnectKey" Cache="1" Desc="玩家连接服务器的KEY" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="string" Upload="0" />
+		<Property Id="Cup" Cache="1" Desc="battlepoint" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="int" Upload="0" />
 		<Property Id="Diamond" Cache="1" Desc="钻石" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="int" Upload="0" />
 		<Property Id="EXP" Cache="1" Desc="经验获得,如果是怪物，则是掉落经验" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="int" Upload="0" />
 		<Property Id="GMLevel" Cache="1" Desc="GM等级" Force="0" Private="1" Public="1" Ref="0" Save="0" Type="int" Upload="0" />
@@ -10,7 +11,6 @@
 		<Property Id="GateID" Cache="0" Desc="登陆的网关ID" Force="0" Private="0" Public="0" Ref="0" Save="0" Type="int" Upload="0" />
 		<Property Id="Gold" Cache="1" Desc="玩家游戏金币" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="int" Upload="0" />
 		<Property Id="HP" Cache="0" Desc="生命值" Force="0" Private="1" Public="1" Ref="0" Save="0" Type="int" Upload="0" />
-		<Property Id="Head" Cache="1" Desc="headicon--guild" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="string" Upload="0" />
 		<Property Id="Job" Cache="1" Desc="职业" Force="0" Private="1" Public="1" Ref="0" Save="0" Type="int" Upload="0" />
 		<Property Id="LastOfflineTime" Cache="1" Desc="上次下线时间" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="object" Upload="0" />
 		<Property Id="Level" Cache="1" Desc="等级" Force="0" Private="1" Public="1" Ref="0" Save="0" Type="int" Upload="0" />

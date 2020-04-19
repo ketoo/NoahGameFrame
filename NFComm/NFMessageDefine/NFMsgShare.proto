@@ -54,27 +54,18 @@ message AckPlayerLeaveList//对象离去列表
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-message ReqAckPlayerMove
+
+message PosSyncUnit
 {
-	Ident 	mover = 1;
-	int32  moveType = 2;//future_state
-	float speed = 3;
-	int32 time = 4;
-	int32 lastState = 5;
-	repeated Vector3 target_pos = 6;
-	repeated Vector3 source_pos = 7;
-	repeated Vector3 move_direction = 8;
+    Vector3 pos = 1;
+    Vector3 direction = 2;
+    int32 status = 3;
 }
 
 message ReqAckPlayerPosSync
 {
 	Ident 	mover = 1;
-	int32 time = 2;
-	float InterpolationTime = 3;
-	Vector3 position = 4;
-    Vector3 direction = 5;
-    int32 status = 6;
-    int32 frame = 7;
+	repeated PosSyncUnit sync_unit = 2;
 }
 
 ////////////////////////////
@@ -88,6 +79,7 @@ message EffectData
 		EET_REFUSE = 2;
 		EET_MISS = 3;	
 		EET_CRIT = 4;	
+		EET_ULTI = 5;	
 	}
 	Ident 			effect_ident = 1;
 	int32  		effect_value = 2;

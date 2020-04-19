@@ -59,7 +59,21 @@
 #endif
 
 #endif
+#if NF_PLATFORM == NF_PLATFORM_WIN
 
+#pragma comment( lib, "DbgHelp" )
+
+bool ApplicationCtrlHandler(DWORD fdwctrltype);
+
+void CreateDumpFile(const std::string& strDumpFilePathName, EXCEPTION_POINTERS* pException);
+
+long ApplicationCrashHandler(EXCEPTION_POINTERS* pException);
+
+#else
+
+void NFCrashHandler(int sig);
+
+#endif
 #if NF_PLATFORM != NF_PLATFORM_WIN
 class NFExceptFrame
 {

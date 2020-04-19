@@ -107,6 +107,7 @@
   <ItemGroup>
     <ClInclude Include="NFCellModule.h" />
     <ClInclude Include="NFDataTailModule.h" />
+    <ClInclude Include="NFELOModule.h" />
     <ClInclude Include="NFErrorBusModule.h" />
     <ClInclude Include="NFEventModule.h" />
     <ClInclude Include="NFKernelModule.h" />
@@ -126,6 +127,7 @@
     </ClCompile>
     <ClCompile Include="NFCellModule.cpp" />
     <ClCompile Include="NFDataTailModule.cpp" />
+    <ClCompile Include="NFELOModule.cpp" />
     <ClCompile Include="NFErrorBusModule.cpp" />
     <ClCompile Include="NFEventModule.cpp" />
     <ClCompile Include="NFKernelModule.cpp" />

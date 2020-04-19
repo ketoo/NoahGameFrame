@@ -31,6 +31,7 @@
 #include "NFDataTailModule.h"
 #include "NFCellModule.h"
 #include "NFThreadPoolModule.h"
+#include "NFELOModule.h"
 
 #ifdef NF_DYNAMIC_PLUGIN
 
@@ -68,6 +69,7 @@ void NFKernelPlugin::Install()
 	REGISTER_MODULE(pPluginManager, NFIDataTailModule, NFDataTailModule)
 	REGISTER_MODULE(pPluginManager, NFICellModule, NFCellModule)
 	REGISTER_MODULE(pPluginManager, NFIThreadPoolModule, NFThreadPoolModule)
+	REGISTER_MODULE(pPluginManager, NFIELOModule, NFELOModule)
 
 	/*
 	REGISTER_TEST_MODULE(pPluginManager, NFIKernelModule, NFKernelTestModule)
@@ -83,6 +85,7 @@ void NFKernelPlugin::Uninstall()
 	UNREGISTER_TEST_MODULE(pPluginManager, NFIKernelModule, NFKernelTestModule)
 	UNREGISTER_TEST_MODULE(pPluginManager, NFIScheduleModule, NFScheduleTestModule)
 */
+	UNREGISTER_MODULE(pPluginManager, NFIELOModule, NFELOModule)
 	UNREGISTER_MODULE(pPluginManager, NFIThreadPoolModule, NFThreadPoolModule)
 	UNREGISTER_MODULE(pPluginManager, NFICellModule, NFCellModule)
 	UNREGISTER_MODULE(pPluginManager, NFIDataTailModule, NFDataTailModule)

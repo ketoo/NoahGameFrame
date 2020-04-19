@@ -44,7 +44,7 @@ public:
 
 	bool operator< (const TickElement& b) const
 	{
-		return triggerTime < b.triggerTime;
+		return this->triggerTime < b.triggerTime;
 	}
 
 	std::string scheduleName;

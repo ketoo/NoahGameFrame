@@ -24,8 +24,8 @@
 */
 
 
-#ifndef NF_GAMESERVER_TO_DB_NETCLIENT_MODULE_H
-#define NF_GAMESERVER_TO_DB_NETCLIENT_MODULE_H
+#ifndef NF_GAME_SERVER_TO_DB_MODULE_H
+#define NF_GAME_SERVER_TO_DB_MODULE_H
 
 #include "NFComm/NFMessageDefine/NFMsgDefine.h"
 #include "NFComm/NFPluginModule/NFINetModule.h"

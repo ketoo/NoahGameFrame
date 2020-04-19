@@ -10,6 +10,7 @@
     <ClInclude Include="NFCellModule.h" />
     <ClInclude Include="NFSceneModule.h" />
     <ClInclude Include="NFThreadPoolModule.h" />
+    <ClInclude Include="NFELOModule.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="NFKernelPlugin.cpp" />
@@ -22,5 +23,6 @@
     <ClCompile Include="NFCellModule.cpp" />
     <ClCompile Include="NFSceneModule.cpp" />
     <ClCompile Include="NFThreadPoolModule.cpp" />
+    <ClCompile Include="NFELOModule.cpp" />
   </ItemGroup>
 </Project>
