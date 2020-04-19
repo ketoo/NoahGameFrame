@@ -82,7 +82,7 @@ public:
 	
 	void PrintfLogo();
 
-	void SeMidWareLoader(std::function<void(NFIPluginManager * p)> fun);
+	void SetMidwareLoader(std::function<void(NFIPluginManager * p)> fun);
 
 private:
 

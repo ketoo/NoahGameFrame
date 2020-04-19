@@ -28,9 +28,6 @@ NoahGameFrame (NF) is a lightweight, fast, scalable, distributed plugin framewor
 
 https://github.com/ketoo/NoahGameFrame/wiki
 
-### Client (Unity3D && Cocos2d)
-[Client](https://github.com/ketoo/NFClient)
-
 ## Architecture
 
 ### App Architecture:
@@ -46,12 +43,6 @@ git clone https://github.com/ketoo/NoahGameFrame.git
 or
 
 svn checkout https://github.com/ketoo/NoahGameFrame
-
-## MidWare
-The projects in midware repo are usefull to develop a business game.
-
-## Game Example
-Thie repo show people how to use NF and NF's MidWare as submodule.
 
 
 ## Dependencies
@@ -77,7 +68,7 @@ Thie repo show people how to use NF and NF's MidWare as submodule.
 ## Supported Compilers
 
 * GCC >= 7 (**Tested in Ubuntu 16.04**)
-* MSVC >= VS2017 (**Tested in Win10**)
+* MSVC >= VS2019 (**Tested in Win10**)
 
 ## Build and Install
 ### FOR WINDOWS, MSVC >= 2019
@@ -91,7 +82,7 @@ Thie repo show people how to use NF and NF's MidWare as submodule.
 
 ### FOR LUNUX(UBUNTU, CENTOS) ---- please use administrator(or sudo) to do these:
 1. Git pull all source
-2. Run **install4cmake.sh** to build NF (or run /Depenndencies/build_dep.sh then run buildServer.sh)
+2. Run **install4cmake.sh** to build NF (or run cd /Dependencies  ./build_dep.sh then run buildServer.sh)
 3. Run the binary file by **_Out/rund.sh**
 
 ### IF YOU LIVING IN A COUNTRY CANNOT ACCESS GITHUB FASTLY PLZ BUILD NF WITH VPN
@@ -104,7 +95,6 @@ https://github.com/ketoo/NoahGameFrame/wiki/How-to-debug-with-unity3d
 
 ### Unity Multiplayer Demo
 WebSite:  https://github.com/ketoo/NFUnitySDK
-![Showcase](https://github.com/ketoo/NoahGameFrame/wiki/images/showcase/1.jpg)
 ![Showcase](https://github.com/ketoo/NoahGameFrame/wiki/images/showcase/unity3d.gif)
 
 
