@@ -26,7 +26,6 @@
 #include "NFHttpClient.h"
 
 #if NF_PLATFORM == NF_PLATFORM_WIN
-INITIALIZE_EASYLOGGINGPP
 #define snprintf _snprintf
 #endif
 
