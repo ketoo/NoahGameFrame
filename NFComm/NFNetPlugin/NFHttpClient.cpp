@@ -24,6 +24,7 @@
 */
 
 #include "NFHttpClient.h"
+#include "NFNetModule.h"
 
 #if NF_PLATFORM == NF_PLATFORM_WIN
 #define snprintf _snprintf

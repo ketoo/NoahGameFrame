@@ -29,6 +29,7 @@
 
 #include "NFIHttpClient.h"
 #include "NFIHttpServer.h"
+#include "NFIHttpServer.h"
 
 #if NF_PLATFORM == NF_PLATFORM_WIN
 #include <winsock2.h>
