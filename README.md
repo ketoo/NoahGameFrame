@@ -95,6 +95,7 @@ https://github.com/ketoo/NoahGameFrame/wiki/How-to-debug-with-unity3d
 
 ### Unity Multiplayer Demo
 WebSite:  https://github.com/ketoo/NFUnitySDK
+# <Password for REDIS:NoahGameFrame>
 ![Showcase](https://github.com/ketoo/NoahGameFrame/wiki/images/showcase/unity3d.gif)
 
 
