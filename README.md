@@ -314,5 +314,10 @@ Add your lua script file name on here [script_reload.lua](https://github.com/ket
 * Description: A  cross-platform,lightweight,scalable game server framework  written in C++, and suport Lua Script.
 
 
+## Tutorial && Documents
+
+https://github.com/ketoo/NoahGameFrame/wiki
+
+
 
 
