@@ -1,5 +1,6 @@
 # NoahGameFrame
 
+
 - develop
 [![Build Status](https://travis-ci.org/ketoo/NoahGameFrame.svg?branch=develop)](https://travis-ci.org/ketoo/NoahGameFrame)
 - master
@@ -8,6 +9,11 @@
 [![Join the chat at https://gitter.im/ketoo/NoahGameFrame](https://badges.gitter.im/ketoo/NoahGameFrame.svg)](https://gitter.im/ketoo/NoahGameFrame?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 #####QQ群：330241037 [![NF开源服务器引擎2群](https://pub.idqqimg.com/wpa/images/group.png)](https://shang.qq.com/wpa/qunwpa?idkey=17ce92a5aacdec7b1c5ef0ff99bc84ca39c927fbd4ec7a3a83449e96afa63899)
+
+## Tutorial && Documents
+
+https://github.com/ketoo/NoahGameFrame/wiki
+
 
 ## What is NoahGameFrame?
 
@@ -58,6 +64,10 @@ svn checkout https://github.com/ketoo/NoahGameFrame
 - navigation
 - lua
 
+## Tutorial && Documents
+
+https://github.com/ketoo/NoahGameFrame/wiki
+
 ## IF YOU CAN NOT BUILD THE DEPENDENCIES THEN PLEASE RUN THE CMDS BELOW TO SET UP THE ENVIRONMENT:
 
 * sudo apt-get install g++
@@ -99,6 +109,9 @@ WebSite:  https://github.com/ketoo/NFUnitySDK
 ![Showcase](https://github.com/ketoo/NoahGameFrame/wiki/images/showcase/unity3d.gif)
 
 
+## Tutorial && Documents
+
+https://github.com/ketoo/NoahGameFrame/wiki
 
 ## License
 The NFrame project is currently available under the [Apache License](https://github.com/ketoo/NoahGameFrame/blob/develop/LICENSE).
