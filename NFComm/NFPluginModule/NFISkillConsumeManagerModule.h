@@ -24,26 +24,30 @@
 */
 
 
-#ifndef NFI_SKILLCONSUME_MANAGER_MODULE_H
-#define NFI_SKILLCONSUME_MANAGER_MODULE_H
+#ifndef NFI_SKILL_CONSUME_MANAGER_MODULE_H
+#define NFI_SKILL_CONSUME_MANAGER_MODULE_H
 
 #include <iostream>
 #include "NFIModule.h"
-#include "NFISkillConsumeProcessModule.h"
 
-enum SKILL_CONSUME_TYPE
+class NFISkillConsumeProcessModule
+		: public NFIModule
 {
-	SKILL_BRIEF,
-	SKILL_BULLET,
+public:
+
+	virtual int ConsumeLegal(const NFGUID& self, const std::string& skillID,  const NFDataList& other) = 0;
+	virtual int ConsumeProcess(const NFGUID& self, const std::string& strSkillName, const NFDataList& other, NFDataList& damageListValue, NFDataList& damageResultList) = 0;
 };
 
 class NFISkillConsumeManagerModule
     : public NFIModule
 {
 public:
-    virtual bool ResgisterConsumeModule(const int nModuleType, NF_SHARE_PTR<NFISkillConsumeProcessModule> pModule) = 0;
+	virtual bool SetConsumeModule(const int skillType, NFISkillConsumeProcessModule* pModule) = 0;
+	virtual bool SetConsumeModule(const int skillType, const int skillSubType, NFISkillConsumeProcessModule* pModule) = 0;
 
-    virtual NF_SHARE_PTR<NFISkillConsumeProcessModule> GetConsumeModule(const int nModuleType) = 0;
+	virtual NFISkillConsumeProcessModule* GetConsumeModule(const int skillType) = 0;
+	virtual NFISkillConsumeProcessModule* GetConsumeModule(const int skillType, const int skillSubType) = 0;
 
 };
 

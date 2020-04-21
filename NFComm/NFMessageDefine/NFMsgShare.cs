@@ -51,7 +51,15 @@ namespace NFMsg {
             "BCADKAsyES5ORk1zZy5FZmZlY3REYXRhInoKD1JlcUFja1N3YXBTY2VuZRIV",
             "Cg10cmFuc2Zlcl90eXBlGAEgASgFEhAKCHNjZW5lX2lkGAIgASgFEg8KB2xp",
             "bmVfaWQYAyABKAUSCQoBeBgEIAEoAhIJCgF5GAUgASgCEgkKAXoYBiABKAIS",
-            "DAoEZGF0YRgHIAEoDGIGcHJvdG8z"));
+            "DAoEZGF0YRgHIAEoDCLnAgoQUmVxQWNrUGxheWVyQ2hhdBIfCglwbGF5ZXJf",
+            "aWQYASABKAsyDC5ORk1zZy5JZGVudBITCgtwbGF5ZXJfbmFtZRgCIAEoDBI+",
+            "CgxjaGF0X2NoYW5uZWwYAyABKA4yKC5ORk1zZy5SZXFBY2tQbGF5ZXJDaGF0",
+            "LkVHYW1lQ2hhdENoYW5uZWwSOAoJY2hhdF90eXBlGAQgASgOMiUuTkZNc2cu",
+            "UmVxQWNrUGxheWVyQ2hhdC5FR2FtZUNoYXRUeXBlEhEKCWNoYXRfaW5mbxgF",
+            "IAEoDCJQChBFR2FtZUNoYXRDaGFubmVsEg8KC0VHQ0NfR0xPQkFMEAASDQoJ",
+            "RUdDQ19DTEFOEAESDQoJRUdDQ19ST09NEAISDQoJRUdDQ19URUFNEAMiPgoN",
+            "RUdhbWVDaGF0VHlwZRINCglFR0NUX1RFWFQQABIOCgpFR0NUX1ZPSUNFEAES",
+            "DgoKRUdDVF9FTU9KSRACYgZwcm90bzM="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { global::NFMsg.NFDefineReflection.Descriptor, global::NFMsg.NFMsgBaseReflection.Descriptor, },
           new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
@@ -66,7 +74,8 @@ namespace NFMsg {
             new pbr::GeneratedClrTypeInfo(typeof(global::NFMsg.ReqAckPlayerPosSync), global::NFMsg.ReqAckPlayerPosSync.Parser, new[]{ "Mover", "SyncUnit" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::NFMsg.EffectData), global::NFMsg.EffectData.Parser, new[]{ "EffectIdent", "EffectValue", "EffectRlt" }, null, new[]{ typeof(global::NFMsg.EffectData.Types.EResultType) }, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::NFMsg.ReqAckUseSkill), global::NFMsg.ReqAckUseSkill.Parser, new[]{ "User", "SkillId", "UseIndex", "EffectData" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::NFMsg.ReqAckSwapScene), global::NFMsg.ReqAckSwapScene.Parser, new[]{ "TransferType", "SceneId", "LineId", "X", "Y", "Z", "Data" }, null, null, null, null)
+            new pbr::GeneratedClrTypeInfo(typeof(global::NFMsg.ReqAckSwapScene), global::NFMsg.ReqAckSwapScene.Parser, new[]{ "TransferType", "SceneId", "LineId", "X", "Y", "Z", "Data" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::NFMsg.ReqAckPlayerChat), global::NFMsg.ReqAckPlayerChat.Parser, new[]{ "PlayerId", "PlayerName", "ChatChannel", "ChatType", "ChatInfo" }, null, new[]{ typeof(global::NFMsg.ReqAckPlayerChat.Types.EGameChatChannel), typeof(global::NFMsg.ReqAckPlayerChat.Types.EGameChatType) }, null, null)
           }));
     }
     #endregion
@@ -2056,9 +2065,6 @@ namespace NFMsg {
 
   }
 
-  /// <summary>
-  //////////////////////////////////////////
-  /// </summary>
   public sealed partial class ReqAckSwapScene : pb::IMessage<ReqAckSwapScene> {
     private static readonly pb::MessageParser<ReqAckSwapScene> _parser = new pb::MessageParser<ReqAckSwapScene>(() => new ReqAckSwapScene());
     private pb::UnknownFieldSet _unknownFields;
@@ -2353,6 +2359,276 @@ namespace NFMsg {
         }
       }
     }
+
+  }
+
+  /// <summary>
+  //////////////////////////////////////////
+  /// </summary>
+  public sealed partial class ReqAckPlayerChat : pb::IMessage<ReqAckPlayerChat> {
+    private static readonly pb::MessageParser<ReqAckPlayerChat> _parser = new pb::MessageParser<ReqAckPlayerChat>(() => new ReqAckPlayerChat());
+    private pb::UnknownFieldSet _unknownFields;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::MessageParser<ReqAckPlayerChat> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::NFMsg.NFMsgShareReflection.Descriptor.MessageTypes[12]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public ReqAckPlayerChat() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public ReqAckPlayerChat(ReqAckPlayerChat other) : this() {
+      playerId_ = other.playerId_ != null ? other.playerId_.Clone() : null;
+      playerName_ = other.playerName_;
+      chatChannel_ = other.chatChannel_;
+      chatType_ = other.chatType_;
+      chatInfo_ = other.chatInfo_;
+      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public ReqAckPlayerChat Clone() {
+      return new ReqAckPlayerChat(this);
+    }
+
+    /// <summary>Field number for the "player_id" field.</summary>
+    public const int PlayerIdFieldNumber = 1;
+    private global::NFMsg.Ident playerId_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public global::NFMsg.Ident PlayerId {
+      get { return playerId_; }
+      set {
+        playerId_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "player_name" field.</summary>
+    public const int PlayerNameFieldNumber = 2;
+    private pb::ByteString playerName_ = pb::ByteString.Empty;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public pb::ByteString PlayerName {
+      get { return playerName_; }
+      set {
+        playerName_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    /// <summary>Field number for the "chat_channel" field.</summary>
+    public const int ChatChannelFieldNumber = 3;
+    private global::NFMsg.ReqAckPlayerChat.Types.EGameChatChannel chatChannel_ = global::NFMsg.ReqAckPlayerChat.Types.EGameChatChannel.EgccGlobal;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public global::NFMsg.ReqAckPlayerChat.Types.EGameChatChannel ChatChannel {
+      get { return chatChannel_; }
+      set {
+        chatChannel_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "chat_type" field.</summary>
+    public const int ChatTypeFieldNumber = 4;
+    private global::NFMsg.ReqAckPlayerChat.Types.EGameChatType chatType_ = global::NFMsg.ReqAckPlayerChat.Types.EGameChatType.EgctText;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public global::NFMsg.ReqAckPlayerChat.Types.EGameChatType ChatType {
+      get { return chatType_; }
+      set {
+        chatType_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "chat_info" field.</summary>
+    public const int ChatInfoFieldNumber = 5;
+    private pb::ByteString chatInfo_ = pb::ByteString.Empty;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public pb::ByteString ChatInfo {
+      get { return chatInfo_; }
+      set {
+        chatInfo_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override bool Equals(object other) {
+      return Equals(other as ReqAckPlayerChat);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Equals(ReqAckPlayerChat other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (!object.Equals(PlayerId, other.PlayerId)) return false;
+      if (PlayerName != other.PlayerName) return false;
+      if (ChatChannel != other.ChatChannel) return false;
+      if (ChatType != other.ChatType) return false;
+      if (ChatInfo != other.ChatInfo) return false;
+      return Equals(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (playerId_ != null) hash ^= PlayerId.GetHashCode();
+      if (PlayerName.Length != 0) hash ^= PlayerName.GetHashCode();
+      if (ChatChannel != global::NFMsg.ReqAckPlayerChat.Types.EGameChatChannel.EgccGlobal) hash ^= ChatChannel.GetHashCode();
+      if (ChatType != global::NFMsg.ReqAckPlayerChat.Types.EGameChatType.EgctText) hash ^= ChatType.GetHashCode();
+      if (ChatInfo.Length != 0) hash ^= ChatInfo.GetHashCode();
+      if (_unknownFields != null) {
+        hash ^= _unknownFields.GetHashCode();
+      }
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void WriteTo(pb::CodedOutputStream output) {
+      if (playerId_ != null) {
+        output.WriteRawTag(10);
+        output.WriteMessage(PlayerId);
+      }
+      if (PlayerName.Length != 0) {
+        output.WriteRawTag(18);
+        output.WriteBytes(PlayerName);
+      }
+      if (ChatChannel != global::NFMsg.ReqAckPlayerChat.Types.EGameChatChannel.EgccGlobal) {
+        output.WriteRawTag(24);
+        output.WriteEnum((int) ChatChannel);
+      }
+      if (ChatType != global::NFMsg.ReqAckPlayerChat.Types.EGameChatType.EgctText) {
+        output.WriteRawTag(32);
+        output.WriteEnum((int) ChatType);
+      }
+      if (ChatInfo.Length != 0) {
+        output.WriteRawTag(42);
+        output.WriteBytes(ChatInfo);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(output);
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int CalculateSize() {
+      int size = 0;
+      if (playerId_ != null) {
+        size += 1 + pb::CodedOutputStream.ComputeMessageSize(PlayerId);
+      }
+      if (PlayerName.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeBytesSize(PlayerName);
+      }
+      if (ChatChannel != global::NFMsg.ReqAckPlayerChat.Types.EGameChatChannel.EgccGlobal) {
+        size += 1 + pb::CodedOutputStream.ComputeEnumSize((int) ChatChannel);
+      }
+      if (ChatType != global::NFMsg.ReqAckPlayerChat.Types.EGameChatType.EgctText) {
+        size += 1 + pb::CodedOutputStream.ComputeEnumSize((int) ChatType);
+      }
+      if (ChatInfo.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeBytesSize(ChatInfo);
+      }
+      if (_unknownFields != null) {
+        size += _unknownFields.CalculateSize();
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(ReqAckPlayerChat other) {
+      if (other == null) {
+        return;
+      }
+      if (other.playerId_ != null) {
+        if (playerId_ == null) {
+          PlayerId = new global::NFMsg.Ident();
+        }
+        PlayerId.MergeFrom(other.PlayerId);
+      }
+      if (other.PlayerName.Length != 0) {
+        PlayerName = other.PlayerName;
+      }
+      if (other.ChatChannel != global::NFMsg.ReqAckPlayerChat.Types.EGameChatChannel.EgccGlobal) {
+        ChatChannel = other.ChatChannel;
+      }
+      if (other.ChatType != global::NFMsg.ReqAckPlayerChat.Types.EGameChatType.EgctText) {
+        ChatType = other.ChatType;
+      }
+      if (other.ChatInfo.Length != 0) {
+        ChatInfo = other.ChatInfo;
+      }
+      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(pb::CodedInputStream input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            break;
+          case 10: {
+            if (playerId_ == null) {
+              PlayerId = new global::NFMsg.Ident();
+            }
+            input.ReadMessage(PlayerId);
+            break;
+          }
+          case 18: {
+            PlayerName = input.ReadBytes();
+            break;
+          }
+          case 24: {
+            ChatChannel = (global::NFMsg.ReqAckPlayerChat.Types.EGameChatChannel) input.ReadEnum();
+            break;
+          }
+          case 32: {
+            ChatType = (global::NFMsg.ReqAckPlayerChat.Types.EGameChatType) input.ReadEnum();
+            break;
+          }
+          case 42: {
+            ChatInfo = input.ReadBytes();
+            break;
+          }
+        }
+      }
+    }
+
+    #region Nested types
+    /// <summary>Container for nested types declared in the ReqAckPlayerChat message type.</summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static partial class Types {
+      public enum EGameChatChannel {
+        [pbr::OriginalName("EGCC_GLOBAL")] EgccGlobal = 0,
+        [pbr::OriginalName("EGCC_CLAN")] EgccClan = 1,
+        [pbr::OriginalName("EGCC_ROOM")] EgccRoom = 2,
+        [pbr::OriginalName("EGCC_TEAM")] EgccTeam = 3,
+      }
+
+      public enum EGameChatType {
+        [pbr::OriginalName("EGCT_TEXT")] EgctText = 0,
+        [pbr::OriginalName("EGCT_VOICE")] EgctVoice = 1,
+        [pbr::OriginalName("EGCT_EMOJI")] EgctEmoji = 2,
+      }
+
+    }
+    #endregion
 
   }
 

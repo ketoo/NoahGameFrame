@@ -68,6 +68,10 @@ class ReqAckSwapSceneDefaultTypeInternal {
  public:
   ::PROTOBUF_NAMESPACE_ID::internal::ExplicitlyConstructed<ReqAckSwapScene> _instance;
 } _ReqAckSwapScene_default_instance_;
+class ReqAckPlayerChatDefaultTypeInternal {
+ public:
+  ::PROTOBUF_NAMESPACE_ID::internal::ExplicitlyConstructed<ReqAckPlayerChat> _instance;
+} _ReqAckPlayerChat_default_instance_;
 }  // namespace NFMsg
 static void InitDefaultsscc_info_AckPlayerEntryList_NFMsgShare_2eproto() {
   GOOGLE_PROTOBUF_VERIFY_VERSION;
@@ -158,6 +162,21 @@ static void InitDefaultsscc_info_ReqAckEnterGameSuccess_NFMsgShare_2eproto() {
 ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_ReqAckEnterGameSuccess_NFMsgShare_2eproto =
     {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 0, 0, InitDefaultsscc_info_ReqAckEnterGameSuccess_NFMsgShare_2eproto}, {}};
 
+static void InitDefaultsscc_info_ReqAckPlayerChat_NFMsgShare_2eproto() {
+  GOOGLE_PROTOBUF_VERIFY_VERSION;
+
+  {
+    void* ptr = &::NFMsg::_ReqAckPlayerChat_default_instance_;
+    new (ptr) ::NFMsg::ReqAckPlayerChat();
+    ::PROTOBUF_NAMESPACE_ID::internal::OnShutdownDestroyMessage(ptr);
+  }
+  ::NFMsg::ReqAckPlayerChat::InitAsDefaultInstance();
+}
+
+::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_ReqAckPlayerChat_NFMsgShare_2eproto =
+    {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 1, 0, InitDefaultsscc_info_ReqAckPlayerChat_NFMsgShare_2eproto}, {
+      &scc_info_Ident_NFMsgBase_2eproto.base,}};
+
 static void InitDefaultsscc_info_ReqAckPlayerPosSync_NFMsgShare_2eproto() {
   GOOGLE_PROTOBUF_VERIFY_VERSION;
 
@@ -247,8 +266,8 @@ static void InitDefaultsscc_info_ReqLeaveGameServer_NFMsgShare_2eproto() {
 ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_ReqLeaveGameServer_NFMsgShare_2eproto =
     {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 0, 0, InitDefaultsscc_info_ReqLeaveGameServer_NFMsgShare_2eproto}, {}};
 
-static ::PROTOBUF_NAMESPACE_ID::Metadata file_level_metadata_NFMsgShare_2eproto[12];
-static const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor* file_level_enum_descriptors_NFMsgShare_2eproto[1];
+static ::PROTOBUF_NAMESPACE_ID::Metadata file_level_metadata_NFMsgShare_2eproto[13];
+static const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor* file_level_enum_descriptors_NFMsgShare_2eproto[3];
 static constexpr ::PROTOBUF_NAMESPACE_ID::ServiceDescriptor const** file_level_service_descriptors_NFMsgShare_2eproto = nullptr;
 
 const ::PROTOBUF_NAMESPACE_ID::uint32 TableStruct_NFMsgShare_2eproto::offsets[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) = {
@@ -349,6 +368,16 @@ const ::PROTOBUF_NAMESPACE_ID::uint32 TableStruct_NFMsgShare_2eproto::offsets[] 
   PROTOBUF_FIELD_OFFSET(::NFMsg::ReqAckSwapScene, y_),
   PROTOBUF_FIELD_OFFSET(::NFMsg::ReqAckSwapScene, z_),
   PROTOBUF_FIELD_OFFSET(::NFMsg::ReqAckSwapScene, data_),
+  ~0u,  // no _has_bits_
+  PROTOBUF_FIELD_OFFSET(::NFMsg::ReqAckPlayerChat, _internal_metadata_),
+  ~0u,  // no _extensions_
+  ~0u,  // no _oneof_case_
+  ~0u,  // no _weak_field_map_
+  PROTOBUF_FIELD_OFFSET(::NFMsg::ReqAckPlayerChat, player_id_),
+  PROTOBUF_FIELD_OFFSET(::NFMsg::ReqAckPlayerChat, player_name_),
+  PROTOBUF_FIELD_OFFSET(::NFMsg::ReqAckPlayerChat, chat_channel_),
+  PROTOBUF_FIELD_OFFSET(::NFMsg::ReqAckPlayerChat, chat_type_),
+  PROTOBUF_FIELD_OFFSET(::NFMsg::ReqAckPlayerChat, chat_info_),
 };
 static const ::PROTOBUF_NAMESPACE_ID::internal::MigrationSchema schemas[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) = {
   { 0, -1, sizeof(::NFMsg::ReqEnterGameServer)},
@@ -363,6 +392,7 @@ static const ::PROTOBUF_NAMESPACE_ID::internal::MigrationSchema schemas[] PROTOB
   { 68, -1, sizeof(::NFMsg::EffectData)},
   { 76, -1, sizeof(::NFMsg::ReqAckUseSkill)},
   { 85, -1, sizeof(::NFMsg::ReqAckSwapScene)},
+  { 97, -1, sizeof(::NFMsg::ReqAckPlayerChat)},
 };
 
 static ::PROTOBUF_NAMESPACE_ID::Message const * const file_default_instances[] = {
@@ -378,6 +408,7 @@ static ::PROTOBUF_NAMESPACE_ID::Message const * const file_default_instances[] =
   reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::NFMsg::_EffectData_default_instance_),
   reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::NFMsg::_ReqAckUseSkill_default_instance_),
   reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::NFMsg::_ReqAckSwapScene_default_instance_),
+  reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::NFMsg::_ReqAckPlayerChat_default_instance_),
 };
 
 const char descriptor_table_protodef_NFMsgShare_2eproto[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) =
@@ -411,19 +442,29 @@ const char descriptor_table_protodef_NFMsgShare_2eproto[] PROTOBUF_SECTION_VARIA
   "\004 \003(\0132\021.NFMsg.EffectData\"z\n\017ReqAckSwapSc"
   "ene\022\025\n\rtransfer_type\030\001 \001(\005\022\020\n\010scene_id\030\002"
   " \001(\005\022\017\n\007line_id\030\003 \001(\005\022\t\n\001x\030\004 \001(\002\022\t\n\001y\030\005 "
-  "\001(\002\022\t\n\001z\030\006 \001(\002\022\014\n\004data\030\007 \001(\014b\006proto3"
+  "\001(\002\022\t\n\001z\030\006 \001(\002\022\014\n\004data\030\007 \001(\014\"\347\002\n\020ReqAckP"
+  "layerChat\022\037\n\tplayer_id\030\001 \001(\0132\014.NFMsg.Ide"
+  "nt\022\023\n\013player_name\030\002 \001(\014\022>\n\014chat_channel\030"
+  "\003 \001(\0162(.NFMsg.ReqAckPlayerChat.EGameChat"
+  "Channel\0228\n\tchat_type\030\004 \001(\0162%.NFMsg.ReqAc"
+  "kPlayerChat.EGameChatType\022\021\n\tchat_info\030\005"
+  " \001(\014\"P\n\020EGameChatChannel\022\017\n\013EGCC_GLOBAL\020"
+  "\000\022\r\n\tEGCC_CLAN\020\001\022\r\n\tEGCC_ROOM\020\002\022\r\n\tEGCC_"
+  "TEAM\020\003\">\n\rEGameChatType\022\r\n\tEGCT_TEXT\020\000\022\016"
+  "\n\nEGCT_VOICE\020\001\022\016\n\nEGCT_EMOJI\020\002b\006proto3"
   ;
 static const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable*const descriptor_table_NFMsgShare_2eproto_deps[2] = {
   &::descriptor_table_NFDefine_2eproto,
   &::descriptor_table_NFMsgBase_2eproto,
 };
-static ::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase*const descriptor_table_NFMsgShare_2eproto_sccs[12] = {
+static ::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase*const descriptor_table_NFMsgShare_2eproto_sccs[13] = {
   &scc_info_AckPlayerEntryList_NFMsgShare_2eproto.base,
   &scc_info_AckPlayerLeaveList_NFMsgShare_2eproto.base,
   &scc_info_EffectData_NFMsgShare_2eproto.base,
   &scc_info_PlayerEntryInfo_NFMsgShare_2eproto.base,
   &scc_info_PosSyncUnit_NFMsgShare_2eproto.base,
   &scc_info_ReqAckEnterGameSuccess_NFMsgShare_2eproto.base,
+  &scc_info_ReqAckPlayerChat_NFMsgShare_2eproto.base,
   &scc_info_ReqAckPlayerPosSync_NFMsgShare_2eproto.base,
   &scc_info_ReqAckSwapScene_NFMsgShare_2eproto.base,
   &scc_info_ReqAckUseSkill_NFMsgShare_2eproto.base,
@@ -434,10 +475,10 @@ static ::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase*const descriptor_table_NFM
 static ::PROTOBUF_NAMESPACE_ID::internal::once_flag descriptor_table_NFMsgShare_2eproto_once;
 static bool descriptor_table_NFMsgShare_2eproto_initialized = false;
 const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable descriptor_table_NFMsgShare_2eproto = {
-  &descriptor_table_NFMsgShare_2eproto_initialized, descriptor_table_protodef_NFMsgShare_2eproto, "NFMsgShare.proto", 1236,
-  &descriptor_table_NFMsgShare_2eproto_once, descriptor_table_NFMsgShare_2eproto_sccs, descriptor_table_NFMsgShare_2eproto_deps, 12, 2,
+  &descriptor_table_NFMsgShare_2eproto_initialized, descriptor_table_protodef_NFMsgShare_2eproto, "NFMsgShare.proto", 1598,
+  &descriptor_table_NFMsgShare_2eproto_once, descriptor_table_NFMsgShare_2eproto_sccs, descriptor_table_NFMsgShare_2eproto_deps, 13, 2,
   schemas, file_default_instances, TableStruct_NFMsgShare_2eproto::offsets,
-  file_level_metadata_NFMsgShare_2eproto, 12, file_level_enum_descriptors_NFMsgShare_2eproto, file_level_service_descriptors_NFMsgShare_2eproto,
+  file_level_metadata_NFMsgShare_2eproto, 13, file_level_enum_descriptors_NFMsgShare_2eproto, file_level_service_descriptors_NFMsgShare_2eproto,
 };
 
 // Force running AddDescriptors() at dynamic initialization time.
@@ -471,6 +512,54 @@ constexpr EffectData_EResultType EffectData::EET_ULTI;
 constexpr EffectData_EResultType EffectData::EResultType_MIN;
 constexpr EffectData_EResultType EffectData::EResultType_MAX;
 constexpr int EffectData::EResultType_ARRAYSIZE;
+#endif  // (__cplusplus < 201703) && (!defined(_MSC_VER) || _MSC_VER >= 1900)
+const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor* ReqAckPlayerChat_EGameChatChannel_descriptor() {
+  ::PROTOBUF_NAMESPACE_ID::internal::AssignDescriptors(&descriptor_table_NFMsgShare_2eproto);
+  return file_level_enum_descriptors_NFMsgShare_2eproto[1];
+}
+bool ReqAckPlayerChat_EGameChatChannel_IsValid(int value) {
+  switch (value) {
+    case 0:
+    case 1:
+    case 2:
+    case 3:
+      return true;
+    default:
+      return false;
+  }
+}
+
+#if (__cplusplus < 201703) && (!defined(_MSC_VER) || _MSC_VER >= 1900)
+constexpr ReqAckPlayerChat_EGameChatChannel ReqAckPlayerChat::EGCC_GLOBAL;
+constexpr ReqAckPlayerChat_EGameChatChannel ReqAckPlayerChat::EGCC_CLAN;
+constexpr ReqAckPlayerChat_EGameChatChannel ReqAckPlayerChat::EGCC_ROOM;
+constexpr ReqAckPlayerChat_EGameChatChannel ReqAckPlayerChat::EGCC_TEAM;
+constexpr ReqAckPlayerChat_EGameChatChannel ReqAckPlayerChat::EGameChatChannel_MIN;
+constexpr ReqAckPlayerChat_EGameChatChannel ReqAckPlayerChat::EGameChatChannel_MAX;
+constexpr int ReqAckPlayerChat::EGameChatChannel_ARRAYSIZE;
+#endif  // (__cplusplus < 201703) && (!defined(_MSC_VER) || _MSC_VER >= 1900)
+const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor* ReqAckPlayerChat_EGameChatType_descriptor() {
+  ::PROTOBUF_NAMESPACE_ID::internal::AssignDescriptors(&descriptor_table_NFMsgShare_2eproto);
+  return file_level_enum_descriptors_NFMsgShare_2eproto[2];
+}
+bool ReqAckPlayerChat_EGameChatType_IsValid(int value) {
+  switch (value) {
+    case 0:
+    case 1:
+    case 2:
+      return true;
+    default:
+      return false;
+  }
+}
+
+#if (__cplusplus < 201703) && (!defined(_MSC_VER) || _MSC_VER >= 1900)
+constexpr ReqAckPlayerChat_EGameChatType ReqAckPlayerChat::EGCT_TEXT;
+constexpr ReqAckPlayerChat_EGameChatType ReqAckPlayerChat::EGCT_VOICE;
+constexpr ReqAckPlayerChat_EGameChatType ReqAckPlayerChat::EGCT_EMOJI;
+constexpr ReqAckPlayerChat_EGameChatType ReqAckPlayerChat::EGameChatType_MIN;
+constexpr ReqAckPlayerChat_EGameChatType ReqAckPlayerChat::EGameChatType_MAX;
+constexpr int ReqAckPlayerChat::EGameChatType_ARRAYSIZE;
 #endif  // (__cplusplus < 201703) && (!defined(_MSC_VER) || _MSC_VER >= 1900)
 
 // ===================================================================
@@ -3585,6 +3674,342 @@ void ReqAckSwapScene::InternalSwap(ReqAckSwapScene* other) {
 }
 
 
+// ===================================================================
+
+void ReqAckPlayerChat::InitAsDefaultInstance() {
+  ::NFMsg::_ReqAckPlayerChat_default_instance_._instance.get_mutable()->player_id_ = const_cast< ::NFMsg::Ident*>(
+      ::NFMsg::Ident::internal_default_instance());
+}
+class ReqAckPlayerChat::_Internal {
+ public:
+  static const ::NFMsg::Ident& player_id(const ReqAckPlayerChat* msg);
+};
+
+const ::NFMsg::Ident&
+ReqAckPlayerChat::_Internal::player_id(const ReqAckPlayerChat* msg) {
+  return *msg->player_id_;
+}
+void ReqAckPlayerChat::clear_player_id() {
+  if (GetArenaNoVirtual() == nullptr && player_id_ != nullptr) {
+    delete player_id_;
+  }
+  player_id_ = nullptr;
+}
+ReqAckPlayerChat::ReqAckPlayerChat()
+  : ::PROTOBUF_NAMESPACE_ID::Message(), _internal_metadata_(nullptr) {
+  SharedCtor();
+  // @@protoc_insertion_point(constructor:NFMsg.ReqAckPlayerChat)
+}
+ReqAckPlayerChat::ReqAckPlayerChat(const ReqAckPlayerChat& from)
+  : ::PROTOBUF_NAMESPACE_ID::Message(),
+      _internal_metadata_(nullptr) {
+  _internal_metadata_.MergeFrom(from._internal_metadata_);
+  player_name_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  if (!from._internal_player_name().empty()) {
+    player_name_.AssignWithDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), from.player_name_);
+  }
+  chat_info_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  if (!from._internal_chat_info().empty()) {
+    chat_info_.AssignWithDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), from.chat_info_);
+  }
+  if (from._internal_has_player_id()) {
+    player_id_ = new ::NFMsg::Ident(*from.player_id_);
+  } else {
+    player_id_ = nullptr;
+  }
+  ::memcpy(&chat_channel_, &from.chat_channel_,
+    static_cast<size_t>(reinterpret_cast<char*>(&chat_type_) -
+    reinterpret_cast<char*>(&chat_channel_)) + sizeof(chat_type_));
+  // @@protoc_insertion_point(copy_constructor:NFMsg.ReqAckPlayerChat)
+}
+
+void ReqAckPlayerChat::SharedCtor() {
+  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&scc_info_ReqAckPlayerChat_NFMsgShare_2eproto.base);
+  player_name_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  chat_info_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  ::memset(&player_id_, 0, static_cast<size_t>(
+      reinterpret_cast<char*>(&chat_type_) -
+      reinterpret_cast<char*>(&player_id_)) + sizeof(chat_type_));
+}
+
+ReqAckPlayerChat::~ReqAckPlayerChat() {
+  // @@protoc_insertion_point(destructor:NFMsg.ReqAckPlayerChat)
+  SharedDtor();
+}
+
+void ReqAckPlayerChat::SharedDtor() {
+  player_name_.DestroyNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  chat_info_.DestroyNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  if (this != internal_default_instance()) delete player_id_;
+}
+
+void ReqAckPlayerChat::SetCachedSize(int size) const {
+  _cached_size_.Set(size);
+}
+const ReqAckPlayerChat& ReqAckPlayerChat::default_instance() {
+  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&::scc_info_ReqAckPlayerChat_NFMsgShare_2eproto.base);
+  return *internal_default_instance();
+}
+
+
+void ReqAckPlayerChat::Clear() {
+// @@protoc_insertion_point(message_clear_start:NFMsg.ReqAckPlayerChat)
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  player_name_.ClearToEmptyNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  chat_info_.ClearToEmptyNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  if (GetArenaNoVirtual() == nullptr && player_id_ != nullptr) {
+    delete player_id_;
+  }
+  player_id_ = nullptr;
+  ::memset(&chat_channel_, 0, static_cast<size_t>(
+      reinterpret_cast<char*>(&chat_type_) -
+      reinterpret_cast<char*>(&chat_channel_)) + sizeof(chat_type_));
+  _internal_metadata_.Clear();
+}
+
+const char* ReqAckPlayerChat::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) {
+#define CHK_(x) if (PROTOBUF_PREDICT_FALSE(!(x))) goto failure
+  while (!ctx->Done(&ptr)) {
+    ::PROTOBUF_NAMESPACE_ID::uint32 tag;
+    ptr = ::PROTOBUF_NAMESPACE_ID::internal::ReadTag(ptr, &tag);
+    CHK_(ptr);
+    switch (tag >> 3) {
+      // .NFMsg.Ident player_id = 1;
+      case 1:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 10)) {
+          ptr = ctx->ParseMessage(_internal_mutable_player_id(), ptr);
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
+      // bytes player_name = 2;
+      case 2:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 18)) {
+          auto str = _internal_mutable_player_name();
+          ptr = ::PROTOBUF_NAMESPACE_ID::internal::InlineGreedyStringParser(str, ptr, ctx);
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
+      // .NFMsg.ReqAckPlayerChat.EGameChatChannel chat_channel = 3;
+      case 3:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 24)) {
+          ::PROTOBUF_NAMESPACE_ID::uint64 val = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint(&ptr);
+          CHK_(ptr);
+          _internal_set_chat_channel(static_cast<::NFMsg::ReqAckPlayerChat_EGameChatChannel>(val));
+        } else goto handle_unusual;
+        continue;
+      // .NFMsg.ReqAckPlayerChat.EGameChatType chat_type = 4;
+      case 4:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 32)) {
+          ::PROTOBUF_NAMESPACE_ID::uint64 val = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint(&ptr);
+          CHK_(ptr);
+          _internal_set_chat_type(static_cast<::NFMsg::ReqAckPlayerChat_EGameChatType>(val));
+        } else goto handle_unusual;
+        continue;
+      // bytes chat_info = 5;
+      case 5:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 42)) {
+          auto str = _internal_mutable_chat_info();
+          ptr = ::PROTOBUF_NAMESPACE_ID::internal::InlineGreedyStringParser(str, ptr, ctx);
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
+      default: {
+      handle_unusual:
+        if ((tag & 7) == 4 || tag == 0) {
+          ctx->SetLastTag(tag);
+          goto success;
+        }
+        ptr = UnknownFieldParse(tag, &_internal_metadata_, ptr, ctx);
+        CHK_(ptr != nullptr);
+        continue;
+      }
+    }  // switch
+  }  // while
+success:
+  return ptr;
+failure:
+  ptr = nullptr;
+  goto success;
+#undef CHK_
+}
+
+::PROTOBUF_NAMESPACE_ID::uint8* ReqAckPlayerChat::_InternalSerialize(
+    ::PROTOBUF_NAMESPACE_ID::uint8* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const {
+  // @@protoc_insertion_point(serialize_to_array_start:NFMsg.ReqAckPlayerChat)
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  // .NFMsg.Ident player_id = 1;
+  if (this->has_player_id()) {
+    target = stream->EnsureSpace(target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
+      InternalWriteMessage(
+        1, _Internal::player_id(this), target, stream);
+  }
+
+  // bytes player_name = 2;
+  if (this->player_name().size() > 0) {
+    target = stream->WriteBytesMaybeAliased(
+        2, this->_internal_player_name(), target);
+  }
+
+  // .NFMsg.ReqAckPlayerChat.EGameChatChannel chat_channel = 3;
+  if (this->chat_channel() != 0) {
+    target = stream->EnsureSpace(target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteEnumToArray(
+      3, this->_internal_chat_channel(), target);
+  }
+
+  // .NFMsg.ReqAckPlayerChat.EGameChatType chat_type = 4;
+  if (this->chat_type() != 0) {
+    target = stream->EnsureSpace(target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteEnumToArray(
+      4, this->_internal_chat_type(), target);
+  }
+
+  // bytes chat_info = 5;
+  if (this->chat_info().size() > 0) {
+    target = stream->WriteBytesMaybeAliased(
+        5, this->_internal_chat_info(), target);
+  }
+
+  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::InternalSerializeUnknownFieldsToArray(
+        _internal_metadata_.unknown_fields(), target, stream);
+  }
+  // @@protoc_insertion_point(serialize_to_array_end:NFMsg.ReqAckPlayerChat)
+  return target;
+}
+
+size_t ReqAckPlayerChat::ByteSizeLong() const {
+// @@protoc_insertion_point(message_byte_size_start:NFMsg.ReqAckPlayerChat)
+  size_t total_size = 0;
+
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  // bytes player_name = 2;
+  if (this->player_name().size() > 0) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::BytesSize(
+        this->_internal_player_name());
+  }
+
+  // bytes chat_info = 5;
+  if (this->chat_info().size() > 0) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::BytesSize(
+        this->_internal_chat_info());
+  }
+
+  // .NFMsg.Ident player_id = 1;
+  if (this->has_player_id()) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
+        *player_id_);
+  }
+
+  // .NFMsg.ReqAckPlayerChat.EGameChatChannel chat_channel = 3;
+  if (this->chat_channel() != 0) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::EnumSize(this->_internal_chat_channel());
+  }
+
+  // .NFMsg.ReqAckPlayerChat.EGameChatType chat_type = 4;
+  if (this->chat_type() != 0) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::EnumSize(this->_internal_chat_type());
+  }
+
+  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
+    return ::PROTOBUF_NAMESPACE_ID::internal::ComputeUnknownFieldsSize(
+        _internal_metadata_, total_size, &_cached_size_);
+  }
+  int cached_size = ::PROTOBUF_NAMESPACE_ID::internal::ToCachedSize(total_size);
+  SetCachedSize(cached_size);
+  return total_size;
+}
+
+void ReqAckPlayerChat::MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
+// @@protoc_insertion_point(generalized_merge_from_start:NFMsg.ReqAckPlayerChat)
+  GOOGLE_DCHECK_NE(&from, this);
+  const ReqAckPlayerChat* source =
+      ::PROTOBUF_NAMESPACE_ID::DynamicCastToGenerated<ReqAckPlayerChat>(
+          &from);
+  if (source == nullptr) {
+  // @@protoc_insertion_point(generalized_merge_from_cast_fail:NFMsg.ReqAckPlayerChat)
+    ::PROTOBUF_NAMESPACE_ID::internal::ReflectionOps::Merge(from, this);
+  } else {
+  // @@protoc_insertion_point(generalized_merge_from_cast_success:NFMsg.ReqAckPlayerChat)
+    MergeFrom(*source);
+  }
+}
+
+void ReqAckPlayerChat::MergeFrom(const ReqAckPlayerChat& from) {
+// @@protoc_insertion_point(class_specific_merge_from_start:NFMsg.ReqAckPlayerChat)
+  GOOGLE_DCHECK_NE(&from, this);
+  _internal_metadata_.MergeFrom(from._internal_metadata_);
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  if (from.player_name().size() > 0) {
+
+    player_name_.AssignWithDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), from.player_name_);
+  }
+  if (from.chat_info().size() > 0) {
+
+    chat_info_.AssignWithDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), from.chat_info_);
+  }
+  if (from.has_player_id()) {
+    _internal_mutable_player_id()->::NFMsg::Ident::MergeFrom(from._internal_player_id());
+  }
+  if (from.chat_channel() != 0) {
+    _internal_set_chat_channel(from._internal_chat_channel());
+  }
+  if (from.chat_type() != 0) {
+    _internal_set_chat_type(from._internal_chat_type());
+  }
+}
+
+void ReqAckPlayerChat::CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
+// @@protoc_insertion_point(generalized_copy_from_start:NFMsg.ReqAckPlayerChat)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+void ReqAckPlayerChat::CopyFrom(const ReqAckPlayerChat& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:NFMsg.ReqAckPlayerChat)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool ReqAckPlayerChat::IsInitialized() const {
+  return true;
+}
+
+void ReqAckPlayerChat::InternalSwap(ReqAckPlayerChat* other) {
+  using std::swap;
+  _internal_metadata_.Swap(&other->_internal_metadata_);
+  player_name_.Swap(&other->player_name_, &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(),
+    GetArenaNoVirtual());
+  chat_info_.Swap(&other->chat_info_, &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(),
+    GetArenaNoVirtual());
+  swap(player_id_, other->player_id_);
+  swap(chat_channel_, other->chat_channel_);
+  swap(chat_type_, other->chat_type_);
+}
+
+::PROTOBUF_NAMESPACE_ID::Metadata ReqAckPlayerChat::GetMetadata() const {
+  return GetMetadataStatic();
+}
+
+
 // @@protoc_insertion_point(namespace_scope)
 }  // namespace NFMsg
 PROTOBUF_NAMESPACE_OPEN
@@ -3623,6 +4048,9 @@ template<> PROTOBUF_NOINLINE ::NFMsg::ReqAckUseSkill* Arena::CreateMaybeMessage<
 }
 template<> PROTOBUF_NOINLINE ::NFMsg::ReqAckSwapScene* Arena::CreateMaybeMessage< ::NFMsg::ReqAckSwapScene >(Arena* arena) {
   return Arena::CreateInternal< ::NFMsg::ReqAckSwapScene >(arena);
+}
+template<> PROTOBUF_NOINLINE ::NFMsg::ReqAckPlayerChat* Arena::CreateMaybeMessage< ::NFMsg::ReqAckPlayerChat >(Arena* arena) {
+  return Arena::CreateInternal< ::NFMsg::ReqAckPlayerChat >(arena);
 }
 PROTOBUF_NAMESPACE_CLOSE
 

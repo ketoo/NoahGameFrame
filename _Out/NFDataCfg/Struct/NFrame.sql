@@ -2,6 +2,7 @@ CREATE TABLE IF NOT EXISTS EffectData  ( `ID` varchar(128) NOT NULL, PRIMARY KEY
 CREATE TABLE IF NOT EXISTS GM  ( `ID` varchar(128) NOT NULL, PRIMARY KEY (`ID`) ) ENGINE=InnoDB DEFAULT CHARSET=utf8; 
 CREATE TABLE IF NOT EXISTS Group  ( `ID` varchar(128) NOT NULL, PRIMARY KEY (`ID`) ) ENGINE=InnoDB DEFAULT CHARSET=utf8; 
 CREATE TABLE IF NOT EXISTS InitProperty  ( `ID` varchar(128) NOT NULL, PRIMARY KEY (`ID`) ) ENGINE=InnoDB DEFAULT CHARSET=utf8; 
+CREATE TABLE IF NOT EXISTS Item  ( `ID` varchar(128) NOT NULL, PRIMARY KEY (`ID`) ) ENGINE=InnoDB DEFAULT CHARSET=utf8; 
 CREATE TABLE IF NOT EXISTS Language  ( `ID` varchar(128) NOT NULL, PRIMARY KEY (`ID`) ) ENGINE=InnoDB DEFAULT CHARSET=utf8; 
 CREATE TABLE IF NOT EXISTS NPC  ( `ID` varchar(128) NOT NULL, PRIMARY KEY (`ID`) ) ENGINE=InnoDB DEFAULT CHARSET=utf8; 
 CREATE TABLE IF NOT EXISTS NoSqlServer  ( `ID` varchar(128) NOT NULL, PRIMARY KEY (`ID`) ) ENGINE=InnoDB DEFAULT CHARSET=utf8; 
@@ -20,11 +21,11 @@ ALTER TABLE `NPC` ADD `MP` bigint(11) DEFAULT '0' COMMENT '法力值';
 ALTER TABLE `NPC` ADD `SP` bigint(11) DEFAULT '0' COMMENT '体力';
 ALTER TABLE `Player` ADD `Account` text COLLATE utf8mb4_unicode_ci  DEFAULT '' COMMENT '玩家的帐号';
 ALTER TABLE `Player` ADD `ConnectKey` text COLLATE utf8mb4_unicode_ci  DEFAULT '' COMMENT '玩家连接服务器的KEY';
-ALTER TABLE `Player` ADD `Cup` bigint(11) DEFAULT '0' COMMENT 'battlepoint';
 ALTER TABLE `Player` ADD `Diamond` bigint(11) DEFAULT '0' COMMENT '钻石';
 ALTER TABLE `Player` ADD `EXP` bigint(11) DEFAULT '0' COMMENT '经验获得,如果是怪物，则是掉落经验';
 ALTER TABLE `Player` ADD `GMLevel` bigint(11) DEFAULT '0' COMMENT 'GM等级';
 ALTER TABLE `Player` ADD `Gold` bigint(11) DEFAULT '0' COMMENT '玩家游戏金币';
+ALTER TABLE `Player` ADD `Head` text COLLATE utf8mb4_unicode_ci  DEFAULT '' COMMENT 'headicon--guild';
 ALTER TABLE `Player` ADD `Job` bigint(11) DEFAULT '0' COMMENT '职业';
 ALTER TABLE `Player` ADD `LastOfflineTime` varchar(64) COLLATE utf8mb4_unicode_ci DEFAULT '' COMMENT '上次下线时间';
 ALTER TABLE `Player` ADD `Level` bigint(11) DEFAULT '0' COMMENT '等级';
@@ -38,3 +39,7 @@ ALTER TABLE `Player` ADD `SkillSpecial1` text COLLATE utf8mb4_unicode_ci  DEFAUL
 ALTER TABLE `Player` ADD `SkillSpecial2` text COLLATE utf8mb4_unicode_ci  DEFAULT '' COMMENT 'Skill2';
 ALTER TABLE `Player` ADD `SkillTHUMP` text COLLATE utf8mb4_unicode_ci  DEFAULT '' COMMENT 'Skill3';
 ALTER TABLE `Player` ADD `TotalTime` bigint(11) DEFAULT '0' COMMENT '在线时间';
+ALTER TABLE `Player` ADD `EquipmentList` text COLLATE utf8mb4_unicode_ci  DEFAULT '' COMMENT '';
+ALTER TABLE `Player` ADD `HeroList` text COLLATE utf8mb4_unicode_ci  DEFAULT '' COMMENT '';
+ALTER TABLE `Player` ADD `Inventory` text COLLATE utf8mb4_unicode_ci  DEFAULT '' COMMENT '';
+ALTER TABLE `Player` ADD `InventoryEquipment` text COLLATE utf8mb4_unicode_ci  DEFAULT '' COMMENT '';

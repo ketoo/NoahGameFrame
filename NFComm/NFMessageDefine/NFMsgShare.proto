@@ -94,7 +94,6 @@ message ReqAckUseSkill
 	repeated EffectData 	effect_data = 4;
 }
 
-/////////////////////////////////////////
 message ReqAckSwapScene
 {
 	int32 		transfer_type = 1;
@@ -104,4 +103,28 @@ message ReqAckSwapScene
 	float 		y = 5;
 	float 		z = 6;
 	bytes 	data = 7;
+}
+
+/////////////////////////////////////////
+message ReqAckPlayerChat
+{
+	enum EGameChatChannel
+	{
+		EGCC_GLOBAL = 0;
+		EGCC_CLAN = 1;
+		EGCC_ROOM = 2;
+		EGCC_TEAM = 3;
+	}
+	enum EGameChatType
+	{
+		EGCT_TEXT= 0;
+		EGCT_VOICE = 1;
+		EGCT_EMOJI = 2;
+	}
+
+	Ident	player_id = 1;
+	bytes 	player_name = 2;
+	EGameChatChannel  chat_channel = 3;
+	EGameChatType  chat_type = 4;
+	bytes chat_info = 5;
 }

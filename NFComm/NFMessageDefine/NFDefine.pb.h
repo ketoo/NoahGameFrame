@@ -188,6 +188,8 @@ enum EGameMsgID : int {
   ACK_MOVE_IMMUNE = 303,
   REQ_POS_SYNC = 306,
   ACK_POS_SYNC = 307,
+  REQ_CHAT = 350,
+  ACK_CHAT = 351,
   REQ_SKILL_OBJECTX = 400,
   ACK_SKILL_OBJECTX = 401,
   REQ_SKILL_POS = 402,
@@ -219,6 +221,33 @@ inline bool EGameMsgID_Parse(
     const std::string& name, EGameMsgID* value) {
   return ::PROTOBUF_NAMESPACE_ID::internal::ParseNamedEnum<EGameMsgID>(
     EGameMsgID_descriptor(), name, value);
+}
+enum EItemType : int {
+  EIT_EQUIP = 0,
+  EIT_GEM = 1,
+  EIT_SUPPLY = 2,
+  EIT_SCROLL = 3,
+  EItemType_INT_MIN_SENTINEL_DO_NOT_USE_ = std::numeric_limits<::PROTOBUF_NAMESPACE_ID::int32>::min(),
+  EItemType_INT_MAX_SENTINEL_DO_NOT_USE_ = std::numeric_limits<::PROTOBUF_NAMESPACE_ID::int32>::max()
+};
+bool EItemType_IsValid(int value);
+constexpr EItemType EItemType_MIN = EIT_EQUIP;
+constexpr EItemType EItemType_MAX = EIT_SCROLL;
+constexpr int EItemType_ARRAYSIZE = EItemType_MAX + 1;
+
+const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor* EItemType_descriptor();
+template<typename T>
+inline const std::string& EItemType_Name(T enum_t_value) {
+  static_assert(::std::is_same<T, EItemType>::value ||
+    ::std::is_integral<T>::value,
+    "Incorrect type passed to function EItemType_Name.");
+  return ::PROTOBUF_NAMESPACE_ID::internal::NameOfEnum(
+    EItemType_descriptor(), enum_t_value);
+}
+inline bool EItemType_Parse(
+    const std::string& name, EItemType* value) {
+  return ::PROTOBUF_NAMESPACE_ID::internal::ParseNamedEnum<EItemType>(
+    EItemType_descriptor(), name, value);
 }
 enum ESkillType : int {
   BRIEF_SINGLE_SKILL = 0,
@@ -335,6 +364,11 @@ template <> struct is_proto_enum< ::NFMsg::EGameMsgID> : ::std::true_type {};
 template <>
 inline const EnumDescriptor* GetEnumDescriptor< ::NFMsg::EGameMsgID>() {
   return ::NFMsg::EGameMsgID_descriptor();
+}
+template <> struct is_proto_enum< ::NFMsg::EItemType> : ::std::true_type {};
+template <>
+inline const EnumDescriptor* GetEnumDescriptor< ::NFMsg::EItemType>() {
+  return ::NFMsg::EItemType_descriptor();
 }
 template <> struct is_proto_enum< ::NFMsg::ESkillType> : ::std::true_type {};
 template <>
