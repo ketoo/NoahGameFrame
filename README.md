@@ -90,7 +90,7 @@ https://github.com/ketoo/NoahGameFrame/wiki
 5. Build the solution(if u build failed, please build again(**not rebuild all**))
 6. Run the binary file by **_Out/rund.bat**
 
-### FOR LUNUX(UBUNTU, CENTOS) ---- please use administrator(or sudo) to do these:
+### FOR LINUX(UBUNTU, CENTOS) ---- please use administrator(or sudo) to do these:
 1. Git pull all source
 2. Run **install4cmake.sh** to build NF (or run cd /Dependencies  ./build_dep.sh then run buildServer.sh)
 3. Run the binary file by **_Out/rund.sh**
