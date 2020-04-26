@@ -200,6 +200,47 @@ namespace NFrame
 		// Record
 
 	};
+	class Item
+	{
+	public:
+		//Class name
+		static const std::string& ThisName(){ static std::string x = "Item"; return x; };		// IObject
+		static const std::string& CampID(){ static std::string x = "CampID"; return x; };// object
+		static const std::string& ClassName(){ static std::string x = "ClassName"; return x; };// string
+		static const std::string& ConfigID(){ static std::string x = "ConfigID"; return x; };// string
+		static const std::string& Connection(){ static std::string x = "Connection"; return x; };// int
+		static const std::string& Disable(){ static std::string x = "Disable"; return x; };// int
+		static const std::string& GMMoveTo(){ static std::string x = "GMMoveTo"; return x; };// vector3
+		static const std::string& GroupID(){ static std::string x = "GroupID"; return x; };// int
+		static const std::string& ID(){ static std::string x = "ID"; return x; };// string
+		static const std::string& MasterID(){ static std::string x = "MasterID"; return x; };// object
+		static const std::string& MoveTo(){ static std::string x = "MoveTo"; return x; };// vector3
+		static const std::string& Name(){ static std::string x = "Name"; return x; };// string
+		static const std::string& Position(){ static std::string x = "Position"; return x; };// vector3
+		static const std::string& SceneID(){ static std::string x = "SceneID"; return x; };// int
+		static const std::string& State(){ static std::string x = "State"; return x; };// int
+		// Property
+		static const std::string& AwardData(){ static std::string x = "AwardData"; return x; };// string
+		static const std::string& AwardProperty(){ static std::string x = "AwardProperty"; return x; };// int
+		static const std::string& BuyPrice(){ static std::string x = "BuyPrice"; return x; };// int
+		static const std::string& ConsumeData(){ static std::string x = "ConsumeData"; return x; };// string
+		static const std::string& CoolDownTime(){ static std::string x = "CoolDownTime"; return x; };// float
+		static const std::string& DescID(){ static std::string x = "DescID"; return x; };// string
+		static const std::string& EffectData(){ static std::string x = "EffectData"; return x; };// string
+		static const std::string& Extend(){ static std::string x = "Extend"; return x; };// string
+		static const std::string& Icon(){ static std::string x = "Icon"; return x; };// string
+		static const std::string& ItemSubType(){ static std::string x = "ItemSubType"; return x; };// int
+		static const std::string& ItemType(){ static std::string x = "ItemType"; return x; };// int
+		static const std::string& Job(){ static std::string x = "Job"; return x; };// string
+		static const std::string& Level(){ static std::string x = "Level"; return x; };// int
+		static const std::string& Quality(){ static std::string x = "Quality"; return x; };// int
+		static const std::string& SalePrice(){ static std::string x = "SalePrice"; return x; };// int
+		static const std::string& Script(){ static std::string x = "Script"; return x; };// string
+		static const std::string& ShowName(){ static std::string x = "ShowName"; return x; };// string
+		static const std::string& SpriteFile(){ static std::string x = "SpriteFile"; return x; };// string
+		// Record
+
+	};
 	class Language
 	{
 	public:
@@ -398,7 +439,6 @@ namespace NFrame
 		// Property
 		static const std::string& Account(){ static std::string x = "Account"; return x; };// string
 		static const std::string& ConnectKey(){ static std::string x = "ConnectKey"; return x; };// string
-		static const std::string& Cup(){ static std::string x = "Cup"; return x; };// int
 		static const std::string& Diamond(){ static std::string x = "Diamond"; return x; };// int
 		static const std::string& EXP(){ static std::string x = "EXP"; return x; };// int
 		static const std::string& GMLevel(){ static std::string x = "GMLevel"; return x; };// int
@@ -406,6 +446,7 @@ namespace NFrame
 		static const std::string& GateID(){ static std::string x = "GateID"; return x; };// int
 		static const std::string& Gold(){ static std::string x = "Gold"; return x; };// int
 		static const std::string& HP(){ static std::string x = "HP"; return x; };// int
+		static const std::string& Head(){ static std::string x = "Head"; return x; };// string
 		static const std::string& Job(){ static std::string x = "Job"; return x; };// int
 		static const std::string& LastOfflineTime(){ static std::string x = "LastOfflineTime"; return x; };// object
 		static const std::string& Level(){ static std::string x = "Level"; return x; };// int
@@ -455,6 +496,53 @@ namespace NFrame
 		static const std::string& SPREGEN(){ static std::string x = "SPREGEN"; return x; };// int
 		static const std::string& SUCKBLOOD(){ static std::string x = "SUCKBLOOD"; return x; };// int
 		// Record
+		class EquipmentList
+		{
+		public:
+			//Class name
+			static const std::string& ThisName(){ static std::string x = "EquipmentList"; return x; };
+			static const int HeroID = 0;//object
+			static const int EquipmentID = 1;//object
+			static const int SlotIndex = 2;//int
+
+		};
+		class HeroList
+		{
+		public:
+			//Class name
+			static const std::string& ThisName(){ static std::string x = "HeroList"; return x; };
+			static const int GUID = 0;//object
+			static const int ItemConfigID = 1;//string
+			static const int ConfigID = 2;//string
+			static const int Activated = 3;//int
+			static const int Level = 4;//int
+			static const int Exp = 5;//int
+			static const int Star = 6;//int
+			static const int HP = 7;//int
+
+		};
+		class Inventory
+		{
+		public:
+			//Class name
+			static const std::string& ThisName(){ static std::string x = "Inventory"; return x; };
+			static const int ConfigID = 0;//string
+			static const int ItemCount = 1;//int
+
+		};
+		class InventoryEquipment
+		{
+		public:
+			//Class name
+			static const std::string& ThisName(){ static std::string x = "InventoryEquipment"; return x; };
+			static const int GUID = 0;//object
+			static const int ConfigID = 1;//string
+			static const int RandPropertyID = 2;//string
+			static const int RandPropertyValue = 3;//int
+			static const int IntensifyLevel = 4;//int
+			static const int Date = 5;//int
+
+		};
 		class CommValue
 		{
 		public:

@@ -17,7 +17,7 @@
 extern PROTOBUF_INTERNAL_EXPORT_NFMsgShare_2eproto ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_EffectData_NFMsgShare_2eproto;
 extern PROTOBUF_INTERNAL_EXPORT_NFMsgBase_2eproto ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_Ident_NFMsgBase_2eproto;
 extern PROTOBUF_INTERNAL_EXPORT_NFMsgShare_2eproto ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_PlayerEntryInfo_NFMsgShare_2eproto;
-extern PROTOBUF_INTERNAL_EXPORT_NFMsgShare_2eproto ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_PosSyncUnit_NFMsgShare_2eproto;
+extern PROTOBUF_INTERNAL_EXPORT_NFMsgShare_2eproto ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<2> scc_info_PosSyncUnit_NFMsgShare_2eproto;
 extern PROTOBUF_INTERNAL_EXPORT_NFMsgBase_2eproto ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_Vector3_NFMsgBase_2eproto;
 namespace NFMsg {
 class ReqEnterGameServerDefaultTypeInternal {
@@ -144,8 +144,9 @@ static void InitDefaultsscc_info_PosSyncUnit_NFMsgShare_2eproto() {
   ::NFMsg::PosSyncUnit::InitAsDefaultInstance();
 }
 
-::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_PosSyncUnit_NFMsgShare_2eproto =
-    {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 1, 0, InitDefaultsscc_info_PosSyncUnit_NFMsgShare_2eproto}, {
+::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<2> scc_info_PosSyncUnit_NFMsgShare_2eproto =
+    {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 2, 0, InitDefaultsscc_info_PosSyncUnit_NFMsgShare_2eproto}, {
+      &scc_info_Ident_NFMsgBase_2eproto.base,
       &scc_info_Vector3_NFMsgBase_2eproto.base,}};
 
 static void InitDefaultsscc_info_ReqAckEnterGameSuccess_NFMsgShare_2eproto() {
@@ -188,9 +189,8 @@ static void InitDefaultsscc_info_ReqAckPlayerPosSync_NFMsgShare_2eproto() {
   ::NFMsg::ReqAckPlayerPosSync::InitAsDefaultInstance();
 }
 
-::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<2> scc_info_ReqAckPlayerPosSync_NFMsgShare_2eproto =
-    {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 2, 0, InitDefaultsscc_info_ReqAckPlayerPosSync_NFMsgShare_2eproto}, {
-      &scc_info_Ident_NFMsgBase_2eproto.base,
+::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_ReqAckPlayerPosSync_NFMsgShare_2eproto =
+    {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 1, 0, InitDefaultsscc_info_ReqAckPlayerPosSync_NFMsgShare_2eproto}, {
       &scc_info_PosSyncUnit_NFMsgShare_2eproto.base,}};
 
 static void InitDefaultsscc_info_ReqAckSwapScene_NFMsgShare_2eproto() {
@@ -329,15 +329,17 @@ const ::PROTOBUF_NAMESPACE_ID::uint32 TableStruct_NFMsgShare_2eproto::offsets[] 
   ~0u,  // no _extensions_
   ~0u,  // no _oneof_case_
   ~0u,  // no _weak_field_map_
+  PROTOBUF_FIELD_OFFSET(::NFMsg::PosSyncUnit, mover_),
+  PROTOBUF_FIELD_OFFSET(::NFMsg::PosSyncUnit, now_),
   PROTOBUF_FIELD_OFFSET(::NFMsg::PosSyncUnit, pos_),
   PROTOBUF_FIELD_OFFSET(::NFMsg::PosSyncUnit, direction_),
   PROTOBUF_FIELD_OFFSET(::NFMsg::PosSyncUnit, status_),
+  PROTOBUF_FIELD_OFFSET(::NFMsg::PosSyncUnit, time_),
   ~0u,  // no _has_bits_
   PROTOBUF_FIELD_OFFSET(::NFMsg::ReqAckPlayerPosSync, _internal_metadata_),
   ~0u,  // no _extensions_
   ~0u,  // no _oneof_case_
   ~0u,  // no _weak_field_map_
-  PROTOBUF_FIELD_OFFSET(::NFMsg::ReqAckPlayerPosSync, mover_),
   PROTOBUF_FIELD_OFFSET(::NFMsg::ReqAckPlayerPosSync, sync_unit_),
   ~0u,  // no _has_bits_
   PROTOBUF_FIELD_OFFSET(::NFMsg::EffectData, _internal_metadata_),
@@ -388,11 +390,11 @@ static const ::PROTOBUF_NAMESPACE_ID::internal::MigrationSchema schemas[] PROTOB
   { 41, -1, sizeof(::NFMsg::AckPlayerEntryList)},
   { 47, -1, sizeof(::NFMsg::AckPlayerLeaveList)},
   { 53, -1, sizeof(::NFMsg::PosSyncUnit)},
-  { 61, -1, sizeof(::NFMsg::ReqAckPlayerPosSync)},
-  { 68, -1, sizeof(::NFMsg::EffectData)},
-  { 76, -1, sizeof(::NFMsg::ReqAckUseSkill)},
-  { 85, -1, sizeof(::NFMsg::ReqAckSwapScene)},
-  { 97, -1, sizeof(::NFMsg::ReqAckPlayerChat)},
+  { 64, -1, sizeof(::NFMsg::ReqAckPlayerPosSync)},
+  { 70, -1, sizeof(::NFMsg::EffectData)},
+  { 78, -1, sizeof(::NFMsg::ReqAckUseSkill)},
+  { 87, -1, sizeof(::NFMsg::ReqAckSwapScene)},
+  { 99, -1, sizeof(::NFMsg::ReqAckPlayerChat)},
 };
 
 static ::PROTOBUF_NAMESPACE_ID::Message const * const file_default_instances[] = {
@@ -426,32 +428,34 @@ const char descriptor_table_protodef_NFMsgShare_2eproto[] PROTOBUF_SECTION_VARIA
   "\001(\014\"A\n\022AckPlayerEntryList\022+\n\013object_list"
   "\030\001 \003(\0132\026.NFMsg.PlayerEntryInfo\"7\n\022AckPla"
   "yerLeaveList\022!\n\013object_list\030\001 \003(\0132\014.NFMs"
-  "g.Ident\"]\n\013PosSyncUnit\022\033\n\003pos\030\001 \001(\0132\016.NF"
-  "Msg.Vector3\022!\n\tdirection\030\002 \001(\0132\016.NFMsg.V"
-  "ector3\022\016\n\006status\030\003 \001(\005\"Y\n\023ReqAckPlayerPo"
-  "sSync\022\033\n\005mover\030\001 \001(\0132\014.NFMsg.Ident\022%\n\tsy"
-  "nc_unit\030\002 \003(\0132\022.NFMsg.PosSyncUnit\"\341\001\n\nEf"
-  "fectData\022\"\n\014effect_ident\030\001 \001(\0132\014.NFMsg.I"
-  "dent\022\024\n\014effect_value\030\002 \001(\005\0221\n\neffect_rlt"
-  "\030\003 \001(\0162\035.NFMsg.EffectData.EResultType\"f\n"
-  "\013EResultType\022\014\n\010EET_FAIL\020\000\022\017\n\013EET_SUCCES"
-  "S\020\001\022\016\n\nEET_REFUSE\020\002\022\014\n\010EET_MISS\020\003\022\014\n\010EET"
-  "_CRIT\020\004\022\014\n\010EET_ULTI\020\005\"y\n\016ReqAckUseSkill\022"
-  "\032\n\004user\030\001 \001(\0132\014.NFMsg.Ident\022\020\n\010skill_id\030"
-  "\002 \001(\014\022\021\n\tuse_index\030\003 \001(\005\022&\n\013effect_data\030"
-  "\004 \003(\0132\021.NFMsg.EffectData\"z\n\017ReqAckSwapSc"
-  "ene\022\025\n\rtransfer_type\030\001 \001(\005\022\020\n\010scene_id\030\002"
-  " \001(\005\022\017\n\007line_id\030\003 \001(\005\022\t\n\001x\030\004 \001(\002\022\t\n\001y\030\005 "
-  "\001(\002\022\t\n\001z\030\006 \001(\002\022\014\n\004data\030\007 \001(\014\"\347\002\n\020ReqAckP"
-  "layerChat\022\037\n\tplayer_id\030\001 \001(\0132\014.NFMsg.Ide"
-  "nt\022\023\n\013player_name\030\002 \001(\014\022>\n\014chat_channel\030"
-  "\003 \001(\0162(.NFMsg.ReqAckPlayerChat.EGameChat"
-  "Channel\0228\n\tchat_type\030\004 \001(\0162%.NFMsg.ReqAc"
-  "kPlayerChat.EGameChatType\022\021\n\tchat_info\030\005"
-  " \001(\014\"P\n\020EGameChatChannel\022\017\n\013EGCC_GLOBAL\020"
-  "\000\022\r\n\tEGCC_CLAN\020\001\022\r\n\tEGCC_ROOM\020\002\022\r\n\tEGCC_"
-  "TEAM\020\003\">\n\rEGameChatType\022\r\n\tEGCT_TEXT\020\000\022\016"
-  "\n\nEGCT_VOICE\020\001\022\016\n\nEGCT_EMOJI\020\002b\006proto3"
+  "g.Ident\"\245\001\n\013PosSyncUnit\022\033\n\005mover\030\001 \001(\0132\014"
+  ".NFMsg.Ident\022\033\n\003now\030\002 \001(\0132\016.NFMsg.Vector"
+  "3\022\033\n\003pos\030\003 \001(\0132\016.NFMsg.Vector3\022!\n\tdirect"
+  "ion\030\004 \001(\0132\016.NFMsg.Vector3\022\016\n\006status\030\005 \001("
+  "\005\022\014\n\004time\030\006 \001(\002\"<\n\023ReqAckPlayerPosSync\022%"
+  "\n\tsync_unit\030\001 \003(\0132\022.NFMsg.PosSyncUnit\"\341\001"
+  "\n\nEffectData\022\"\n\014effect_ident\030\001 \001(\0132\014.NFM"
+  "sg.Ident\022\024\n\014effect_value\030\002 \001(\005\0221\n\neffect"
+  "_rlt\030\003 \001(\0162\035.NFMsg.EffectData.EResultTyp"
+  "e\"f\n\013EResultType\022\014\n\010EET_FAIL\020\000\022\017\n\013EET_SU"
+  "CCESS\020\001\022\016\n\nEET_REFUSE\020\002\022\014\n\010EET_MISS\020\003\022\014\n"
+  "\010EET_CRIT\020\004\022\014\n\010EET_ULTI\020\005\"y\n\016ReqAckUseSk"
+  "ill\022\032\n\004user\030\001 \001(\0132\014.NFMsg.Ident\022\020\n\010skill"
+  "_id\030\002 \001(\014\022\021\n\tuse_index\030\003 \001(\005\022&\n\013effect_d"
+  "ata\030\004 \003(\0132\021.NFMsg.EffectData\"z\n\017ReqAckSw"
+  "apScene\022\025\n\rtransfer_type\030\001 \001(\005\022\020\n\010scene_"
+  "id\030\002 \001(\005\022\017\n\007line_id\030\003 \001(\005\022\t\n\001x\030\004 \001(\002\022\t\n\001"
+  "y\030\005 \001(\002\022\t\n\001z\030\006 \001(\002\022\014\n\004data\030\007 \001(\014\"\347\002\n\020Req"
+  "AckPlayerChat\022\037\n\tplayer_id\030\001 \001(\0132\014.NFMsg"
+  ".Ident\022\023\n\013player_name\030\002 \001(\014\022>\n\014chat_chan"
+  "nel\030\003 \001(\0162(.NFMsg.ReqAckPlayerChat.EGame"
+  "ChatChannel\0228\n\tchat_type\030\004 \001(\0162%.NFMsg.R"
+  "eqAckPlayerChat.EGameChatType\022\021\n\tchat_in"
+  "fo\030\005 \001(\014\"P\n\020EGameChatChannel\022\017\n\013EGCC_GLO"
+  "BAL\020\000\022\r\n\tEGCC_CLAN\020\001\022\r\n\tEGCC_ROOM\020\002\022\r\n\tE"
+  "GCC_TEAM\020\003\">\n\rEGameChatType\022\r\n\tEGCT_TEXT"
+  "\020\000\022\016\n\nEGCT_VOICE\020\001\022\016\n\nEGCT_EMOJI\020\002b\006prot"
+  "o3"
   ;
 static const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable*const descriptor_table_NFMsgShare_2eproto_deps[2] = {
   &::descriptor_table_NFDefine_2eproto,
@@ -475,7 +479,7 @@ static ::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase*const descriptor_table_NFM
 static ::PROTOBUF_NAMESPACE_ID::internal::once_flag descriptor_table_NFMsgShare_2eproto_once;
 static bool descriptor_table_NFMsgShare_2eproto_initialized = false;
 const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable descriptor_table_NFMsgShare_2eproto = {
-  &descriptor_table_NFMsgShare_2eproto_initialized, descriptor_table_protodef_NFMsgShare_2eproto, "NFMsgShare.proto", 1598,
+  &descriptor_table_NFMsgShare_2eproto_initialized, descriptor_table_protodef_NFMsgShare_2eproto, "NFMsgShare.proto", 1642,
   &descriptor_table_NFMsgShare_2eproto_once, descriptor_table_NFMsgShare_2eproto_sccs, descriptor_table_NFMsgShare_2eproto_deps, 13, 2,
   schemas, file_default_instances, TableStruct_NFMsgShare_2eproto::offsets,
   file_level_metadata_NFMsgShare_2eproto, 13, file_level_enum_descriptors_NFMsgShare_2eproto, file_level_service_descriptors_NFMsgShare_2eproto,
@@ -2238,6 +2242,10 @@ void AckPlayerLeaveList::InternalSwap(AckPlayerLeaveList* other) {
 // ===================================================================
 
 void PosSyncUnit::InitAsDefaultInstance() {
+  ::NFMsg::_PosSyncUnit_default_instance_._instance.get_mutable()->mover_ = const_cast< ::NFMsg::Ident*>(
+      ::NFMsg::Ident::internal_default_instance());
+  ::NFMsg::_PosSyncUnit_default_instance_._instance.get_mutable()->now_ = const_cast< ::NFMsg::Vector3*>(
+      ::NFMsg::Vector3::internal_default_instance());
   ::NFMsg::_PosSyncUnit_default_instance_._instance.get_mutable()->pos_ = const_cast< ::NFMsg::Vector3*>(
       ::NFMsg::Vector3::internal_default_instance());
   ::NFMsg::_PosSyncUnit_default_instance_._instance.get_mutable()->direction_ = const_cast< ::NFMsg::Vector3*>(
@@ -2245,10 +2253,20 @@ void PosSyncUnit::InitAsDefaultInstance() {
 }
 class PosSyncUnit::_Internal {
  public:
+  static const ::NFMsg::Ident& mover(const PosSyncUnit* msg);
+  static const ::NFMsg::Vector3& now(const PosSyncUnit* msg);
   static const ::NFMsg::Vector3& pos(const PosSyncUnit* msg);
   static const ::NFMsg::Vector3& direction(const PosSyncUnit* msg);
 };
 
+const ::NFMsg::Ident&
+PosSyncUnit::_Internal::mover(const PosSyncUnit* msg) {
+  return *msg->mover_;
+}
+const ::NFMsg::Vector3&
+PosSyncUnit::_Internal::now(const PosSyncUnit* msg) {
+  return *msg->now_;
+}
 const ::NFMsg::Vector3&
 PosSyncUnit::_Internal::pos(const PosSyncUnit* msg) {
   return *msg->pos_;
@@ -2256,6 +2274,18 @@ PosSyncUnit::_Internal::pos(const PosSyncUnit* msg) {
 const ::NFMsg::Vector3&
 PosSyncUnit::_Internal::direction(const PosSyncUnit* msg) {
   return *msg->direction_;
+}
+void PosSyncUnit::clear_mover() {
+  if (GetArenaNoVirtual() == nullptr && mover_ != nullptr) {
+    delete mover_;
+  }
+  mover_ = nullptr;
+}
+void PosSyncUnit::clear_now() {
+  if (GetArenaNoVirtual() == nullptr && now_ != nullptr) {
+    delete now_;
+  }
+  now_ = nullptr;
 }
 void PosSyncUnit::clear_pos() {
   if (GetArenaNoVirtual() == nullptr && pos_ != nullptr) {
@@ -2278,6 +2308,16 @@ PosSyncUnit::PosSyncUnit(const PosSyncUnit& from)
   : ::PROTOBUF_NAMESPACE_ID::Message(),
       _internal_metadata_(nullptr) {
   _internal_metadata_.MergeFrom(from._internal_metadata_);
+  if (from._internal_has_mover()) {
+    mover_ = new ::NFMsg::Ident(*from.mover_);
+  } else {
+    mover_ = nullptr;
+  }
+  if (from._internal_has_now()) {
+    now_ = new ::NFMsg::Vector3(*from.now_);
+  } else {
+    now_ = nullptr;
+  }
   if (from._internal_has_pos()) {
     pos_ = new ::NFMsg::Vector3(*from.pos_);
   } else {
@@ -2288,15 +2328,17 @@ PosSyncUnit::PosSyncUnit(const PosSyncUnit& from)
   } else {
     direction_ = nullptr;
   }
-  status_ = from.status_;
+  ::memcpy(&status_, &from.status_,
+    static_cast<size_t>(reinterpret_cast<char*>(&time_) -
+    reinterpret_cast<char*>(&status_)) + sizeof(time_));
   // @@protoc_insertion_point(copy_constructor:NFMsg.PosSyncUnit)
 }
 
 void PosSyncUnit::SharedCtor() {
   ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&scc_info_PosSyncUnit_NFMsgShare_2eproto.base);
-  ::memset(&pos_, 0, static_cast<size_t>(
-      reinterpret_cast<char*>(&status_) -
-      reinterpret_cast<char*>(&pos_)) + sizeof(status_));
+  ::memset(&mover_, 0, static_cast<size_t>(
+      reinterpret_cast<char*>(&time_) -
+      reinterpret_cast<char*>(&mover_)) + sizeof(time_));
 }
 
 PosSyncUnit::~PosSyncUnit() {
@@ -2305,6 +2347,8 @@ PosSyncUnit::~PosSyncUnit() {
 }
 
 void PosSyncUnit::SharedDtor() {
+  if (this != internal_default_instance()) delete mover_;
+  if (this != internal_default_instance()) delete now_;
   if (this != internal_default_instance()) delete pos_;
   if (this != internal_default_instance()) delete direction_;
 }
@@ -2324,6 +2368,14 @@ void PosSyncUnit::Clear() {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
+  if (GetArenaNoVirtual() == nullptr && mover_ != nullptr) {
+    delete mover_;
+  }
+  mover_ = nullptr;
+  if (GetArenaNoVirtual() == nullptr && now_ != nullptr) {
+    delete now_;
+  }
+  now_ = nullptr;
   if (GetArenaNoVirtual() == nullptr && pos_ != nullptr) {
     delete pos_;
   }
@@ -2332,7 +2384,9 @@ void PosSyncUnit::Clear() {
     delete direction_;
   }
   direction_ = nullptr;
-  status_ = 0;
+  ::memset(&status_, 0, static_cast<size_t>(
+      reinterpret_cast<char*>(&time_) -
+      reinterpret_cast<char*>(&status_)) + sizeof(time_));
   _internal_metadata_.Clear();
 }
 
@@ -2343,25 +2397,46 @@ const char* PosSyncUnit::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID
     ptr = ::PROTOBUF_NAMESPACE_ID::internal::ReadTag(ptr, &tag);
     CHK_(ptr);
     switch (tag >> 3) {
-      // .NFMsg.Vector3 pos = 1;
+      // .NFMsg.Ident mover = 1;
       case 1:
         if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 10)) {
+          ptr = ctx->ParseMessage(_internal_mutable_mover(), ptr);
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
+      // .NFMsg.Vector3 now = 2;
+      case 2:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 18)) {
+          ptr = ctx->ParseMessage(_internal_mutable_now(), ptr);
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
+      // .NFMsg.Vector3 pos = 3;
+      case 3:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 26)) {
           ptr = ctx->ParseMessage(_internal_mutable_pos(), ptr);
           CHK_(ptr);
         } else goto handle_unusual;
         continue;
-      // .NFMsg.Vector3 direction = 2;
-      case 2:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 18)) {
+      // .NFMsg.Vector3 direction = 4;
+      case 4:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 34)) {
           ptr = ctx->ParseMessage(_internal_mutable_direction(), ptr);
           CHK_(ptr);
         } else goto handle_unusual;
         continue;
-      // int32 status = 3;
-      case 3:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 24)) {
+      // int32 status = 5;
+      case 5:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 40)) {
           status_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint(&ptr);
           CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
+      // float time = 6;
+      case 6:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 53)) {
+          time_ = ::PROTOBUF_NAMESPACE_ID::internal::UnalignedLoad<float>(ptr);
+          ptr += sizeof(float);
         } else goto handle_unusual;
         continue;
       default: {
@@ -2390,26 +2465,48 @@ failure:
   ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
-  // .NFMsg.Vector3 pos = 1;
+  // .NFMsg.Ident mover = 1;
+  if (this->has_mover()) {
+    target = stream->EnsureSpace(target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
+      InternalWriteMessage(
+        1, _Internal::mover(this), target, stream);
+  }
+
+  // .NFMsg.Vector3 now = 2;
+  if (this->has_now()) {
+    target = stream->EnsureSpace(target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
+      InternalWriteMessage(
+        2, _Internal::now(this), target, stream);
+  }
+
+  // .NFMsg.Vector3 pos = 3;
   if (this->has_pos()) {
     target = stream->EnsureSpace(target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
       InternalWriteMessage(
-        1, _Internal::pos(this), target, stream);
+        3, _Internal::pos(this), target, stream);
   }
 
-  // .NFMsg.Vector3 direction = 2;
+  // .NFMsg.Vector3 direction = 4;
   if (this->has_direction()) {
     target = stream->EnsureSpace(target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
       InternalWriteMessage(
-        2, _Internal::direction(this), target, stream);
+        4, _Internal::direction(this), target, stream);
   }
 
-  // int32 status = 3;
+  // int32 status = 5;
   if (this->status() != 0) {
     target = stream->EnsureSpace(target);
-    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt32ToArray(3, this->_internal_status(), target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt32ToArray(5, this->_internal_status(), target);
+  }
+
+  // float time = 6;
+  if (!(this->time() <= 0 && this->time() >= 0)) {
+    target = stream->EnsureSpace(target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteFloatToArray(6, this->_internal_time(), target);
   }
 
   if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
@@ -2428,25 +2525,44 @@ size_t PosSyncUnit::ByteSizeLong() const {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  // .NFMsg.Vector3 pos = 1;
+  // .NFMsg.Ident mover = 1;
+  if (this->has_mover()) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
+        *mover_);
+  }
+
+  // .NFMsg.Vector3 now = 2;
+  if (this->has_now()) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
+        *now_);
+  }
+
+  // .NFMsg.Vector3 pos = 3;
   if (this->has_pos()) {
     total_size += 1 +
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
         *pos_);
   }
 
-  // .NFMsg.Vector3 direction = 2;
+  // .NFMsg.Vector3 direction = 4;
   if (this->has_direction()) {
     total_size += 1 +
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
         *direction_);
   }
 
-  // int32 status = 3;
+  // int32 status = 5;
   if (this->status() != 0) {
     total_size += 1 +
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::Int32Size(
         this->_internal_status());
+  }
+
+  // float time = 6;
+  if (!(this->time() <= 0 && this->time() >= 0)) {
+    total_size += 1 + 4;
   }
 
   if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
@@ -2480,6 +2596,12 @@ void PosSyncUnit::MergeFrom(const PosSyncUnit& from) {
   ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
+  if (from.has_mover()) {
+    _internal_mutable_mover()->::NFMsg::Ident::MergeFrom(from._internal_mover());
+  }
+  if (from.has_now()) {
+    _internal_mutable_now()->::NFMsg::Vector3::MergeFrom(from._internal_now());
+  }
   if (from.has_pos()) {
     _internal_mutable_pos()->::NFMsg::Vector3::MergeFrom(from._internal_pos());
   }
@@ -2488,6 +2610,9 @@ void PosSyncUnit::MergeFrom(const PosSyncUnit& from) {
   }
   if (from.status() != 0) {
     _internal_set_status(from._internal_status());
+  }
+  if (!(from.time() <= 0 && from.time() >= 0)) {
+    _internal_set_time(from._internal_time());
   }
 }
 
@@ -2512,9 +2637,12 @@ bool PosSyncUnit::IsInitialized() const {
 void PosSyncUnit::InternalSwap(PosSyncUnit* other) {
   using std::swap;
   _internal_metadata_.Swap(&other->_internal_metadata_);
+  swap(mover_, other->mover_);
+  swap(now_, other->now_);
   swap(pos_, other->pos_);
   swap(direction_, other->direction_);
   swap(status_, other->status_);
+  swap(time_, other->time_);
 }
 
 ::PROTOBUF_NAMESPACE_ID::Metadata PosSyncUnit::GetMetadata() const {
@@ -2525,24 +2653,11 @@ void PosSyncUnit::InternalSwap(PosSyncUnit* other) {
 // ===================================================================
 
 void ReqAckPlayerPosSync::InitAsDefaultInstance() {
-  ::NFMsg::_ReqAckPlayerPosSync_default_instance_._instance.get_mutable()->mover_ = const_cast< ::NFMsg::Ident*>(
-      ::NFMsg::Ident::internal_default_instance());
 }
 class ReqAckPlayerPosSync::_Internal {
  public:
-  static const ::NFMsg::Ident& mover(const ReqAckPlayerPosSync* msg);
 };
 
-const ::NFMsg::Ident&
-ReqAckPlayerPosSync::_Internal::mover(const ReqAckPlayerPosSync* msg) {
-  return *msg->mover_;
-}
-void ReqAckPlayerPosSync::clear_mover() {
-  if (GetArenaNoVirtual() == nullptr && mover_ != nullptr) {
-    delete mover_;
-  }
-  mover_ = nullptr;
-}
 ReqAckPlayerPosSync::ReqAckPlayerPosSync()
   : ::PROTOBUF_NAMESPACE_ID::Message(), _internal_metadata_(nullptr) {
   SharedCtor();
@@ -2553,17 +2668,11 @@ ReqAckPlayerPosSync::ReqAckPlayerPosSync(const ReqAckPlayerPosSync& from)
       _internal_metadata_(nullptr),
       sync_unit_(from.sync_unit_) {
   _internal_metadata_.MergeFrom(from._internal_metadata_);
-  if (from._internal_has_mover()) {
-    mover_ = new ::NFMsg::Ident(*from.mover_);
-  } else {
-    mover_ = nullptr;
-  }
   // @@protoc_insertion_point(copy_constructor:NFMsg.ReqAckPlayerPosSync)
 }
 
 void ReqAckPlayerPosSync::SharedCtor() {
   ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&scc_info_ReqAckPlayerPosSync_NFMsgShare_2eproto.base);
-  mover_ = nullptr;
 }
 
 ReqAckPlayerPosSync::~ReqAckPlayerPosSync() {
@@ -2572,7 +2681,6 @@ ReqAckPlayerPosSync::~ReqAckPlayerPosSync() {
 }
 
 void ReqAckPlayerPosSync::SharedDtor() {
-  if (this != internal_default_instance()) delete mover_;
 }
 
 void ReqAckPlayerPosSync::SetCachedSize(int size) const {
@@ -2591,10 +2699,6 @@ void ReqAckPlayerPosSync::Clear() {
   (void) cached_has_bits;
 
   sync_unit_.Clear();
-  if (GetArenaNoVirtual() == nullptr && mover_ != nullptr) {
-    delete mover_;
-  }
-  mover_ = nullptr;
   _internal_metadata_.Clear();
 }
 
@@ -2605,23 +2709,16 @@ const char* ReqAckPlayerPosSync::_InternalParse(const char* ptr, ::PROTOBUF_NAME
     ptr = ::PROTOBUF_NAMESPACE_ID::internal::ReadTag(ptr, &tag);
     CHK_(ptr);
     switch (tag >> 3) {
-      // .NFMsg.Ident mover = 1;
+      // repeated .NFMsg.PosSyncUnit sync_unit = 1;
       case 1:
         if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 10)) {
-          ptr = ctx->ParseMessage(_internal_mutable_mover(), ptr);
-          CHK_(ptr);
-        } else goto handle_unusual;
-        continue;
-      // repeated .NFMsg.PosSyncUnit sync_unit = 2;
-      case 2:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 18)) {
           ptr -= 1;
           do {
             ptr += 1;
             ptr = ctx->ParseMessage(_internal_add_sync_unit(), ptr);
             CHK_(ptr);
             if (!ctx->DataAvailable(ptr)) break;
-          } while (::PROTOBUF_NAMESPACE_ID::internal::ExpectTag<18>(ptr));
+          } while (::PROTOBUF_NAMESPACE_ID::internal::ExpectTag<10>(ptr));
         } else goto handle_unusual;
         continue;
       default: {
@@ -2650,20 +2747,12 @@ failure:
   ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
-  // .NFMsg.Ident mover = 1;
-  if (this->has_mover()) {
-    target = stream->EnsureSpace(target);
-    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
-      InternalWriteMessage(
-        1, _Internal::mover(this), target, stream);
-  }
-
-  // repeated .NFMsg.PosSyncUnit sync_unit = 2;
+  // repeated .NFMsg.PosSyncUnit sync_unit = 1;
   for (unsigned int i = 0,
       n = static_cast<unsigned int>(this->_internal_sync_unit_size()); i < n; i++) {
     target = stream->EnsureSpace(target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
-      InternalWriteMessage(2, this->_internal_sync_unit(i), target, stream);
+      InternalWriteMessage(1, this->_internal_sync_unit(i), target, stream);
   }
 
   if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
@@ -2682,18 +2771,11 @@ size_t ReqAckPlayerPosSync::ByteSizeLong() const {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  // repeated .NFMsg.PosSyncUnit sync_unit = 2;
+  // repeated .NFMsg.PosSyncUnit sync_unit = 1;
   total_size += 1UL * this->_internal_sync_unit_size();
   for (const auto& msg : this->sync_unit_) {
     total_size +=
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(msg);
-  }
-
-  // .NFMsg.Ident mover = 1;
-  if (this->has_mover()) {
-    total_size += 1 +
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
-        *mover_);
   }
 
   if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
@@ -2728,9 +2810,6 @@ void ReqAckPlayerPosSync::MergeFrom(const ReqAckPlayerPosSync& from) {
   (void) cached_has_bits;
 
   sync_unit_.MergeFrom(from.sync_unit_);
-  if (from.has_mover()) {
-    _internal_mutable_mover()->::NFMsg::Ident::MergeFrom(from._internal_mover());
-  }
 }
 
 void ReqAckPlayerPosSync::CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
@@ -2755,7 +2834,6 @@ void ReqAckPlayerPosSync::InternalSwap(ReqAckPlayerPosSync* other) {
   using std::swap;
   _internal_metadata_.Swap(&other->_internal_metadata_);
   sync_unit_.InternalSwap(&other->sync_unit_);
-  swap(mover_, other->mover_);
 }
 
 ::PROTOBUF_NAMESPACE_ID::Metadata ReqAckPlayerPosSync::GetMetadata() const {

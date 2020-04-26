@@ -194,6 +194,47 @@ package nframe;
 		// Record
 
 	}
+	public class Item
+	{
+		//Class name
+		public static final String ThisName = "Item";
+		// IObject
+		public static final String CampID = "CampID";// object
+		public static final String ClassName = "ClassName";// string
+		public static final String ConfigID = "ConfigID";// string
+		public static final String Connection = "Connection";// int
+		public static final String Disable = "Disable";// int
+		public static final String GMMoveTo = "GMMoveTo";// vector3
+		public static final String GroupID = "GroupID";// int
+		public static final String ID = "ID";// string
+		public static final String MasterID = "MasterID";// object
+		public static final String MoveTo = "MoveTo";// vector3
+		public static final String Name = "Name";// string
+		public static final String Position = "Position";// vector3
+		public static final String SceneID = "SceneID";// int
+		public static final String State = "State";// int
+		// Property
+		public static final String AwardData = "AwardData";// string
+		public static final String AwardProperty = "AwardProperty";// int
+		public static final String BuyPrice = "BuyPrice";// int
+		public static final String ConsumeData = "ConsumeData";// string
+		public static final String CoolDownTime = "CoolDownTime";// float
+		public static final String DescID = "DescID";// string
+		public static final String EffectData = "EffectData";// string
+		public static final String Extend = "Extend";// string
+		public static final String Icon = "Icon";// string
+		public static final String ItemSubType = "ItemSubType";// int
+		public static final String ItemType = "ItemType";// int
+		public static final String Job = "Job";// string
+		public static final String Level = "Level";// int
+		public static final String Quality = "Quality";// int
+		public static final String SalePrice = "SalePrice";// int
+		public static final String Script = "Script";// string
+		public static final String ShowName = "ShowName";// string
+		public static final String SpriteFile = "SpriteFile";// string
+		// Record
+
+	}
 	public class Language
 	{
 		//Class name
@@ -320,7 +361,6 @@ package nframe;
 		// Property
 		public static final String Account = "Account";// string
 		public static final String ConnectKey = "ConnectKey";// string
-		public static final String Cup = "Cup";// int
 		public static final String Diamond = "Diamond";// int
 		public static final String EXP = "EXP";// int
 		public static final String GMLevel = "GMLevel";// int
@@ -328,6 +368,7 @@ package nframe;
 		public static final String GateID = "GateID";// int
 		public static final String Gold = "Gold";// int
 		public static final String HP = "HP";// int
+		public static final String Head = "Head";// string
 		public static final String Job = "Job";// int
 		public static final String LastOfflineTime = "LastOfflineTime";// object
 		public static final String Level = "Level";// int
@@ -344,6 +385,49 @@ package nframe;
 		public static final String SkillTHUMP = "SkillTHUMP";// string
 		public static final String TotalTime = "TotalTime";// int
 		// Record
+		public class EquipmentList
+		{
+			//Class name
+			public static final String ThisName = "EquipmentList";
+			public static final int HeroID = 0;//object
+			public static final int EquipmentID = 1;//object
+			public static final int SlotIndex = 2;//int
+
+		}
+		public class HeroList
+		{
+			//Class name
+			public static final String ThisName = "HeroList";
+			public static final int GUID = 0;//object
+			public static final int ItemConfigID = 1;//string
+			public static final int ConfigID = 2;//string
+			public static final int Activated = 3;//int
+			public static final int Level = 4;//int
+			public static final int Exp = 5;//int
+			public static final int Star = 6;//int
+			public static final int HP = 7;//int
+
+		}
+		public class Inventory
+		{
+			//Class name
+			public static final String ThisName = "Inventory";
+			public static final int ConfigID = 0;//string
+			public static final int ItemCount = 1;//int
+
+		}
+		public class InventoryEquipment
+		{
+			//Class name
+			public static final String ThisName = "InventoryEquipment";
+			public static final int GUID = 0;//object
+			public static final int ConfigID = 1;//string
+			public static final int RandPropertyID = 2;//string
+			public static final int RandPropertyValue = 3;//int
+			public static final int IntensifyLevel = 4;//int
+			public static final int Date = 5;//int
+
+		}
 
 	}
 	public class Scene
