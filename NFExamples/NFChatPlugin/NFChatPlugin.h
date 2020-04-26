@@ -23,20 +23,26 @@
    limitations under the License.
 */
 
+#ifndef NF_CHAT_PLUGIN_H
+#define NF_CHAT_PLUGIN_H
 
-#ifndef NFI_SKILL_MODULE_H
-#define NFI_SKILL_MODULE_H
+///
+#include "NFComm/NFPluginModule/NFIPlugin.h"
+#include "NFComm/NFPluginModule/NFIPluginManager.h"
 
-#include <iostream>
-#include "NFIModule.h"
-
-class NFISkillModule
-    : public NFIModule
+class NFChatPlugin : public NFIPlugin
 {
-
 public:
-	virtual int UseSkill(const NFGUID& self, const std::string& strSkillName, const NFGUID& target, const int index = -1) = 0;
-	virtual int UseSkill(const NFGUID& self, const std::string& strSkillName, const NFDataList& target, const int index = -1) = 0;
-};
+	NFChatPlugin(NFIPluginManager* p)
+    {
+        pPluginManager = p;
+    }
+    virtual const int GetPluginVersion();
 
+    virtual const std::string GetPluginName();
+
+    virtual void Install();
+
+    virtual void Uninstall();
+};
 #endif

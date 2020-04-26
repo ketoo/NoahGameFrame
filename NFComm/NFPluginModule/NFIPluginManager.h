@@ -189,6 +189,7 @@ public:
     virtual NFIModule* FindTestModule(const std::string& strModuleName) = 0;
 
 	virtual std::list<NFIModule*> Modules() = 0;
+	virtual std::list<NFIModule*> TestModules() = 0;
 
     virtual int GetAppID() const = 0;
     virtual void SetAppID(const int nAppID) = 0;
@@ -214,10 +215,10 @@ public:
 	virtual void SetLogConfigName(const std::string& strName) = 0;
 
 	virtual NFIPlugin* GetCurrentPlugin() = 0;
-	virtual NFIModule* GetCurrenModule() = 0;
+	virtual NFIModule* GetCurrentModule() = 0;
 
 	virtual void SetCurrentPlugin(NFIPlugin* pPlugin) = 0;
-	virtual void SetCurrenModule(NFIModule* pModule) = 0;
+	virtual void SetCurrentModule(NFIModule* pModule) = 0;
 
 
 	virtual void SetGetFileContentFunctor(GET_FILECONTENT_FUNCTOR fun) = 0;

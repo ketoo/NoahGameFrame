@@ -23,20 +23,30 @@
    limitations under the License.
 */
 
+#include "NFComm/NFPluginModule/NFPlatform.h"
 
-#ifndef NFI_SKILL_MODULE_H
-#define NFI_SKILL_MODULE_H
+#ifdef NF_DEBUG_MODE
 
-#include <iostream>
-#include "NFIModule.h"
+#if NF_PLATFORM == NF_PLATFORM_WIN
+#pragma comment( lib, "ws2_32" )
+#pragma comment( lib, "NFCore.lib" )
+#pragma comment( lib, "NFMessageDefine.lib" )
 
-class NFISkillModule
-    : public NFIModule
-{
 
-public:
-	virtual int UseSkill(const NFGUID& self, const std::string& strSkillName, const NFGUID& target, const int index = -1) = 0;
-	virtual int UseSkill(const NFGUID& self, const std::string& strSkillName, const NFDataList& target, const int index = -1) = 0;
-};
+#elif NF_PLATFORM == NF_PLATFORM_LINUX || NF_PLATFORM == NF_PLATFORM_ANDROID
+
+#elif NF_PLATFORM == NF_PLATFORM_APPLE || NF_PLATFORM == NF_PLATFORM_APPLE_IOS
+#endif
+
+#else
+
+#if NF_PLATFORM == NF_PLATFORM_WIN
+#pragma comment( lib, "ws2_32" )
+#pragma comment( lib, "NFCore.lib" )
+#pragma comment( lib, "NFMessageDefine.lib" )
+
+#elif NF_PLATFORM == NF_PLATFORM_LINUX || NF_PLATFORM == NF_PLATFORM_ANDROID
+#elif NF_PLATFORM == NF_PLATFORM_APPLE || NF_PLATFORM == NF_PLATFORM_APPLE_IOS
+#endif
 
 #endif

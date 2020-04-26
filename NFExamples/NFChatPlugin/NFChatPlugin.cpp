@@ -23,20 +23,45 @@
    limitations under the License.
 */
 
+#include "NFChatModule.h"
+#include "NFChatPlugin.h"
 
-#ifndef NFI_SKILL_MODULE_H
-#define NFI_SKILL_MODULE_H
+//
+//
+#ifdef NF_DYNAMIC_PLUGIN
 
-#include <iostream>
-#include "NFIModule.h"
-
-class NFISkillModule
-    : public NFIModule
+NF_EXPORT void DllStartPlugin(NFIPluginManager* pm)
 {
 
-public:
-	virtual int UseSkill(const NFGUID& self, const std::string& strSkillName, const NFGUID& target, const int index = -1) = 0;
-	virtual int UseSkill(const NFGUID& self, const std::string& strSkillName, const NFDataList& target, const int index = -1) = 0;
+    CREATE_PLUGIN(pm, NFChatPlugin)
+
+};
+
+NF_EXPORT void DllStopPlugin(NFIPluginManager* pm)
+{
+    DESTROY_PLUGIN(pm, NFChatPlugin)
 };
 
 #endif
+//////////////////////////////////////////////////////////////////////////
+
+const int NFChatPlugin::GetPluginVersion()
+{
+    return 0;
+}
+
+const std::string NFChatPlugin::GetPluginName()
+{
+	return GET_CLASS_NAME(NFChatPlugin);
+}
+
+void NFChatPlugin::Install()
+{
+    REGISTER_MODULE(pPluginManager, NFIChatModule, NFChatModule)
+
+}
+
+void NFChatPlugin::Uninstall()
+{
+    UNREGISTER_MODULE(pPluginManager, NFIChatModule, NFChatModule)
+}

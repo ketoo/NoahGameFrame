@@ -24,19 +24,19 @@
 */
 
 
-#ifndef NFI_SKILL_MODULE_H
-#define NFI_SKILL_MODULE_H
+#ifndef NFI_COOLDOWN_MODULE_H
+#define NFI_COOLDOWN_MODULE_H
 
 #include <iostream>
 #include "NFIModule.h"
 
-class NFISkillModule
+class NFICooldownModule
     : public NFIModule
 {
-
 public:
-	virtual int UseSkill(const NFGUID& self, const std::string& strSkillName, const NFGUID& target, const int index = -1) = 0;
-	virtual int UseSkill(const NFGUID& self, const std::string& strSkillName, const NFDataList& target, const int index = -1) = 0;
+
+    virtual void AddCooldown(const NFGUID& self, const std::string& configID) = 0;
+    virtual bool ExistCooldown(const NFGUID& self, const std::string& configID) = 0;
 };
 
 #endif

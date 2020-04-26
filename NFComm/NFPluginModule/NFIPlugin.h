@@ -97,7 +97,7 @@ public:
 		NFIModule* pModule = First();
 		while (pModule)
 		{
-			pPluginManager->SetCurrenModule(pModule);
+			pPluginManager->SetCurrentModule(pModule);
 
 			bool bRet = pModule->Awake();
 			if (!bRet)
@@ -116,7 +116,7 @@ public:
         NFIModule* pModule = First();
         while (pModule)
         {
-			pPluginManager->SetCurrenModule(pModule);
+			pPluginManager->SetCurrentModule(pModule);
             bool bRet = pModule->Init();
             if (!bRet)
             {
@@ -134,7 +134,7 @@ public:
         NFIModule* pModule = First();
         while (pModule)
         {
-			pPluginManager->SetCurrenModule(pModule);
+			pPluginManager->SetCurrentModule(pModule);
             bool bRet = pModule->AfterInit();
             if (!bRet)
             {
@@ -152,7 +152,7 @@ public:
         NFIModule* pModule = First();
         while (pModule)
         {
-			pPluginManager->SetCurrenModule(pModule);
+			pPluginManager->SetCurrentModule(pModule);
             pModule->CheckConfig();
 
             pModule = Next();
@@ -166,7 +166,7 @@ public:
 		NFIModule* pModule = First();
 		while (pModule)
 		{
-			pPluginManager->SetCurrenModule(pModule);
+			pPluginManager->SetCurrentModule(pModule);
 			pModule->ReadyExecute();
 
 			pModule = Next();
@@ -180,7 +180,7 @@ public:
         NFIModule* pModule = First();
         while (pModule)
         {
-			pPluginManager->SetCurrenModule(pModule);
+			pPluginManager->SetCurrentModule(pModule);
             pModule->Execute();
 
             pModule = Next();
@@ -194,7 +194,7 @@ public:
         NFIModule* pModule = First();
         while (pModule)
         {
-			pPluginManager->SetCurrenModule(pModule);
+			pPluginManager->SetCurrentModule(pModule);
             pModule->BeforeShut();
 
             pModule = Next();
@@ -207,7 +207,7 @@ public:
         NFIModule* pModule = First();
         while (pModule)
         {
-			pPluginManager->SetCurrenModule(pModule);
+			pPluginManager->SetCurrentModule(pModule);
             pModule->Shut();
 
             pModule = Next();
@@ -221,7 +221,7 @@ public:
         NFIModule* pModule = First();
         while (pModule)
         {
-			pPluginManager->SetCurrenModule(pModule);
+			pPluginManager->SetCurrentModule(pModule);
             pModule->Finalize();
 
             pModule = Next();
@@ -235,7 +235,7 @@ public:
 		NFIModule* pModule = First();
 		while (pModule)
 		{
-			pPluginManager->SetCurrenModule(pModule);
+			pPluginManager->SetCurrentModule(pModule);
 			pModule->OnReloadPlugin();
 
 			pModule = Next();

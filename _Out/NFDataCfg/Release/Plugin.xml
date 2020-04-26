@@ -8,10 +8,14 @@
 		<Plugin Name="NFGameServerNet_ClientPlugin" />
 		<Plugin Name="NFLogPlugin" />	
 		<Plugin Name="NFLuaScriptPlugin" />
-		<Plugin Name="NFRenderPlugin" />
-		<Plugin Name="NFBluePrintPlugin" />
+		<!--<Plugin Name="NFRenderPlugin" />-->
+		<!--<Plugin Name="NFBluePrintPlugin" />-->
 		<Plugin Name="NFActorPlugin" />
 		<Plugin Name="NFNavigationPlugin" />
+        
+        <Plugin Name="NFInventoryPlugin" />
+        <Plugin Name="NFConsumeManagerPlugin" />
+        <Plugin Name="NFChatPlugin" />
 
 	</GameServer>
 

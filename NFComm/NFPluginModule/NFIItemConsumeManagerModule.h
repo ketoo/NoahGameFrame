@@ -23,20 +23,34 @@
    limitations under the License.
 */
 
-
-#ifndef NFI_SKILL_MODULE_H
-#define NFI_SKILL_MODULE_H
+#ifndef NFI_ITEM_CONSUME_MANAGER_MODULE_H
+#define NFI_ITEM_CONSUME_MANAGER_MODULE_H
 
 #include <iostream>
 #include "NFIModule.h"
 
-class NFISkillModule
+class NFIItemConsumeProcessModule
+		: public NFIModule
+{
+public:
+
+	// > 0, error code
+	virtual int ConsumeLegal(const NFGUID& self, const std::string& strItemID, const NFDataList& targetID, const NFVector3& vector) = 0;
+
+	//> 0, error code
+	virtual int ConsumeProcess(const NFGUID& self, const std::string& strItemID, const NFDataList& targetID, const NFVector3& vector) = 0;
+
+};
+
+class NFIItemConsumeManagerModule
     : public NFIModule
 {
-
 public:
-	virtual int UseSkill(const NFGUID& self, const std::string& strSkillName, const NFGUID& target, const int index = -1) = 0;
-	virtual int UseSkill(const NFGUID& self, const std::string& strSkillName, const NFDataList& target, const int index = -1) = 0;
+	virtual bool SetConsumeModule(const int itemType, NFIItemConsumeProcessModule* pModule) = 0;
+    virtual bool SetConsumeModule(const int itemType, const int itemSubType, NFIItemConsumeProcessModule* pModule) = 0;
+
+    virtual NFIItemConsumeProcessModule* GetConsumeModule(const int itemType) = 0;
+	virtual NFIItemConsumeProcessModule* GetConsumeModule(const int itemType, const int itemSubType) = 0;
 };
 
 #endif

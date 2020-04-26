@@ -407,10 +407,5 @@ inline int64_t NFGetTimeS()
     return NFGetTimeMS() / 1000;
 }
 
-//Protobuf Using Dlls
-#if NF_PLATFORM == NF_PLATFORM_WIN
-
-
-#endif
 
 #endif

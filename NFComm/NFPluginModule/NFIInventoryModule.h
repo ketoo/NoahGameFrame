@@ -24,19 +24,21 @@
 */
 
 
-#ifndef NFI_SKILL_MODULE_H
-#define NFI_SKILL_MODULE_H
+#ifndef NFI_INVENTORY_MODULE_H
+#define NFI_INVENTORY_MODULE_H
 
 #include <iostream>
 #include "NFIModule.h"
 
-class NFISkillModule
-    : public NFIModule
+class NFIInventoryModule : public NFIModule
 {
-
 public:
-	virtual int UseSkill(const NFGUID& self, const std::string& strSkillName, const NFGUID& target, const int index = -1) = 0;
-	virtual int UseSkill(const NFGUID& self, const std::string& strSkillName, const NFDataList& target, const int index = -1) = 0;
+    virtual NFGUID CreateEquip(const NFGUID& self, const std::string& strConfigName) = 0;
+    virtual bool CreateItem(const NFGUID& self, const std::string& strConfigName, const int nCount) = 0;
+
+    virtual bool DeleteEquip(const NFGUID& self, const NFGUID& id) = 0;
+    virtual bool DeleteItem(const NFGUID& self, const std::string& strItemConfigID, const int nCount) = 0;
+    virtual bool EnoughItem(const NFGUID& self, const std::string& strItemConfigID, const int nCount) = 0;
 };
 
 #endif
