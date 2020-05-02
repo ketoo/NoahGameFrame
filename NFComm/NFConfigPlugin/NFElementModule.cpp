@@ -62,6 +62,9 @@ NFElementModule::~NFElementModule()
 bool NFElementModule::Awake()
 {
 	m_pClassModule = pPluginManager->FindModule<NFIClassModule>();
+	m_pLogModule = pPluginManager->FindModule<NFILogModule>();
+
+
     if (this->mbBackup)
     {
         m_pClassModule = m_pClassModule->GetBackupClassModule();
@@ -152,8 +155,10 @@ bool NFElementModule::CheckRef()
 						if (!strRefValue.empty() && !this->GetElement(strRefValue))
 						{
 							std::string msg;
-							msg.append("check ref failed id: ").append(strRefValue).append(" in ").append(pLogicClass->GetClassName());
+							msg.append("check ref failed id:").append(strRefValue).append(", in ").append(pLogicClass->GetClassName());
 							NFASSERT(nRet, msg.c_str(), __FILE__, __FUNCTION__);
+
+							m_pLogModule->LogError(msg, __FUNCTION__, __LINE__);
 							exit(0);
 						}
 					}

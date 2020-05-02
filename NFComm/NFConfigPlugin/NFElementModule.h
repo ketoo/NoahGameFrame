@@ -42,6 +42,7 @@
 #include "NFComm/NFCore/NFRecordManager.h"
 #include "NFComm/NFPluginModule/NFIElementModule.h"
 #include "NFComm/NFPluginModule/NFIClassModule.h"
+#include "NFComm/NFPluginModule/NFILogModule.h"
 
 class NFClass;
 
@@ -128,7 +129,8 @@ protected:
 
 protected:
     NFIClassModule* m_pClassModule;
-    NFElementModule* m_pBackupElementModule;
+	NFElementModule* m_pBackupElementModule;
+	NFILogModule* m_pLogModule;
 
     bool mbLoaded;
     bool mbBackup = false;
