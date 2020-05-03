@@ -30,6 +30,7 @@
 #include <string>
 #include <map>
 #include <iostream>
+#include <thread>
 #include "NFElementModule.h"
 #include "Dependencies/RapidXML/rapidxml.hpp"
 #include "NFComm/NFCore/NFMap.hpp"
@@ -162,13 +163,15 @@ public:
 	
 	virtual bool Awake();
     virtual bool Init();
-    virtual bool Shut();
+    virtual bool AfterInit();
+
+	virtual bool Shut();
 
     virtual bool Load();
     virtual bool Save();
     virtual bool Clear();
 
-    virtual NFIClassModule* GetBackupClassModule() override;
+    virtual NFIClassModule* GetThreadClassModule() override;
 
     virtual bool AddClassCallBack(const std::string& strClassName, const CLASS_EVENT_FUNCTOR_PTR& cb);
     virtual bool DoEvent(const NFGUID& objectID, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFDataList& valueList);
@@ -190,8 +193,17 @@ protected:
     virtual bool Load(rapidxml::xml_node<>* attrNode, NF_SHARE_PTR<NFIClass> pParentClass);
 
 protected:
+	struct ThreadClassModule
+	{
+		bool used;
+		std::thread::id threadID;
+		NFClassModule* classModule;
+	};
+
+	std::vector<ThreadClassModule> mThreadClasses;
+
+protected:
     NFIElementModule* m_pElementModule;
-    NFClassModule* m_pBackupClassModule;
 
     std::string msConfigFileName;
     bool mbBackup = false;

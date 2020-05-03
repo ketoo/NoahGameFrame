@@ -119,3 +119,8 @@ void NFThreadPoolModule::TaskResult(const NFThreadTask& task)
 	mTaskResult.Push(task);
 }
 
+int NFThreadPoolModule::GetThreadCount()
+{
+	return mThreadPool.size();
+}
+

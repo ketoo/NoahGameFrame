@@ -30,6 +30,7 @@
 #include <map>
 #include <string>
 #include <iostream>
+#include <thread>
 #include "Dependencies/RapidXML/rapidxml.hpp"
 #include "Dependencies/RapidXML/rapidxml_iterators.hpp"
 #include "Dependencies/RapidXML/rapidxml_print.hpp"
@@ -99,7 +100,7 @@ public:
     virtual bool Save();
     virtual bool Clear();
 
-     NFIElementModule* GetBackupElementModule() override;
+     NFIElementModule* GetThreadElementModule() override;
 
     virtual bool LoadSceneInfo(const std::string& strFileName, const std::string& strClassName);
 
@@ -128,8 +129,17 @@ protected:
 	virtual bool LegalFloat(const char* str);
 
 protected:
+	struct ThreadElementModule
+	{
+		bool used;
+		std::thread::id threadID;
+		NFElementModule* elementModule;
+	};
+
+	std::vector<ThreadElementModule> mThreadElements;
+
+protected:
     NFIClassModule* m_pClassModule;
-	NFElementModule* m_pBackupElementModule;
 	NFILogModule* m_pLogModule;
 
     bool mbLoaded;

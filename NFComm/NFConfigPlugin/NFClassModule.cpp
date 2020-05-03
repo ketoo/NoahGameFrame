@@ -28,51 +28,36 @@
 #include <algorithm>
 #include "NFConfigPlugin.h"
 #include "NFClassModule.h"
+#include "NFComm/NFPluginModule/NFIThreadPoolModule.h"
 #include "Dependencies/RapidXML/rapidxml.hpp"
 #include "Dependencies/RapidXML/rapidxml_print.hpp"
 
 NFClassModule::NFClassModule()
 {
-    m_pBackupClassModule = nullptr;
     msConfigFileName = "NFDataCfg/Struct/LogicClass.xml";
 }
 
 NFClassModule::NFClassModule(NFIPluginManager* p)
 {
-    m_pBackupClassModule = nullptr;
     pPluginManager = p;
     msConfigFileName = "NFDataCfg/Struct/LogicClass.xml";
 
     std::cout << "Using [" << pPluginManager->GetConfigPath() + msConfigFileName << "]" << std::endl;
-
-    if (!this->mbBackup)
-    {
-        m_pBackupClassModule = new NFClassModule();
-        m_pBackupClassModule->pPluginManager = pPluginManager;
-        m_pBackupClassModule->mbBackup = true;
-    }
 }
 
 NFClassModule::~NFClassModule()
 {
     ClearAll();
-
-    if (!this->mbBackup)
-    {
-        delete m_pBackupClassModule;
-        m_pBackupClassModule = nullptr;
-    }
 }
 
 bool NFClassModule::Awake()
 {
     m_pElementModule = pPluginManager->FindModule<NFIElementModule>();
+
     if (this->mbBackup)
     {
-        m_pElementModule = m_pElementModule->GetBackupElementModule();
+        m_pElementModule = m_pElementModule->GetThreadElementModule();
     }
-
-    if (m_pBackupClassModule) m_pBackupClassModule->Awake();
 
     Load();
 
@@ -82,7 +67,6 @@ bool NFClassModule::Awake()
 
 bool NFClassModule::Init()
 {
-    if (m_pBackupClassModule) m_pBackupClassModule->Init();
     return true;
 }
 
@@ -90,8 +74,31 @@ bool NFClassModule::Shut()
 {
     ClearAll();
 
-    if (m_pBackupClassModule) m_pBackupClassModule->Shut();
     return true;
+}
+
+NFIClassModule* NFClassModule::GetThreadClassModule()
+{
+	std::thread::id threadID = std::this_thread::get_id();
+
+	for (int i = 0; i < mThreadClasses.size(); ++i)
+	{
+		if (mThreadClasses[i].used)
+		{
+			if (mThreadClasses[i].threadID == threadID)
+			{
+				return mThreadClasses[i].classModule;
+			}
+		}
+		else
+		{
+			mThreadClasses[i].used = true;
+			mThreadClasses[i].threadID = threadID;
+			return mThreadClasses[i].classModule;
+		}
+	}
+
+	return nullptr;
 }
 
 NFDATA_TYPE NFClassModule::ComputerType(const char* pstrTypeName, NFData& var)
@@ -460,14 +467,16 @@ bool NFClassModule::Load()
         Load(attrNode, NULL);
     }
 
-    if (m_pBackupClassModule) m_pBackupClassModule->Load();
+	for (int i = 0; i < mThreadClasses.size(); ++i)
+	{
+		mThreadClasses[i].classModule->Load();
+	}
 
     return true;
 }
 
 bool NFClassModule::Save()
 {
-    if (m_pBackupClassModule) m_pBackupClassModule->Save();
     return true;
 }
 
@@ -495,13 +504,7 @@ NF_SHARE_PTR<NFIRecordManager> NFClassModule::GetClassRecordManager(const std::s
 
 bool NFClassModule::Clear()
 {
-    if (m_pBackupClassModule) m_pBackupClassModule->Clear();
     return true;
-}
-
-NFIClassModule* NFClassModule::GetBackupClassModule()
-{
-	return m_pBackupClassModule;
 }
 
 bool NFClassModule::AddClassCallBack(const std::string& strClassName, const CLASS_EVENT_FUNCTOR_PTR& cb)
@@ -524,4 +527,29 @@ bool NFClassModule::DoEvent(const NFGUID& objectID, const std::string& strClassN
     }
 
     return pClass->DoEvent(objectID, eClassEvent, valueList);
+}
+
+bool NFClassModule::AfterInit()
+{
+	if (!this->mbBackup)
+	{
+		NFIThreadPoolModule *threadPoolModule = pPluginManager->FindModule<NFIThreadPoolModule>();
+		const int threadCount = threadPoolModule->GetThreadCount();
+		for (int i = 0; i < threadCount; ++i)
+		{
+			ThreadClassModule threadElement;
+			threadElement.used = false;
+			threadElement.classModule = new NFClassModule();
+			threadElement.classModule->mbBackup = true;
+			threadElement.classModule->pPluginManager = pPluginManager;
+
+			threadElement.classModule->Awake();
+			threadElement.classModule->Init();
+			threadElement.classModule->AfterInit();
+
+			mThreadClasses.push_back(threadElement);
+		}
+	}
+
+	return true;
 }
