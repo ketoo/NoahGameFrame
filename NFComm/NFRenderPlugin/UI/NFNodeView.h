@@ -54,7 +54,8 @@ enum NFColor
 
 enum NFPinShape
 {
-    PinShape_Circle = 0,
+	PinShape_NONE = 0,
+    PinShape_Circle,
     PinShape_CircleFilled,
     PinShape_Triangle,
     PinShape_TriangleFilled,

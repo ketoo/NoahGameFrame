@@ -521,7 +521,7 @@ NF_SHARE_PTR<NFNode> NFNodeView::AddNode(const NFGUID guid, const std::string& n
    {
        auto node = NF_SHARE_PTR<NFNode>(NF_NEW NFNode(NFIView::GenerateNodeId(), name, guid, vec, color));
        node->nodeView = this;
-       mNodes.insert(std::pair<NFGUID, NF_SHARE_PTR<NFNode>>(guid, node));
+       mNodes.insert(std::make_pair(guid, node));
 
        return node;
    }

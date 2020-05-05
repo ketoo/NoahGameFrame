@@ -195,7 +195,7 @@ void NFTreeView::AddTreeNode(const NFGUID guid, const std::string& name)
 {
 	if (mTrees.find(guid) == mTrees.end())
 	{
-		mTrees.insert(std::pair<NFGUID, NF_SHARE_PTR<NFTreeNode>>(guid, NF_SHARE_PTR<NFTreeNode>(NF_NEW NFTreeNode(this, NFIView::GenerateNodeId(), name, guid))));
+		mTrees.insert(std::make_pair(guid, NF_SHARE_PTR<NFTreeNode>(NF_NEW NFTreeNode(this, NFIView::GenerateNodeId(), name, guid))));
 	}
 }
 
