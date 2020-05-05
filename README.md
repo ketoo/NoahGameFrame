@@ -84,11 +84,9 @@ https://github.com/ketoo/NoahGameFrame/wiki
 ### FOR WINDOWS, MSVC >= 2019
 
 1. Git pull all source
-2. Open the solution: **NoahFrame.sln**, build FileProcessTool project
-3. Run **GenerateConfigXML.bat** to generate configuration files
-4. Run the script file named **build_dep.bat** where located /Dependencies
-5. Build the solution(if u build failed, please build again(**not rebuild all**))
-6. Run the binary file by **_Out/rund.bat**
+2. un the script file named **build_dep.bat** where located /Dependencies
+3. Build the solution(if u build failed, please build again(**not rebuild all**))
+4. Run the binary file by **_Out/rund.bat**
 
 ### FOR LINUX(UBUNTU, CENTOS) ---- please use administrator(or sudo) to do these:
 1. Git pull all source
