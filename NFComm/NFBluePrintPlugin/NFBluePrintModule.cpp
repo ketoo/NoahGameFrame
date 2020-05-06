@@ -270,7 +270,7 @@ NF_SHARE_PTR<NFIVariable> NFBluePrintModule::AddVariable(const NFGUID& logicBloc
 		NF_SHARE_PTR<NFIVariable> variable;
 		switch (type)
 		{
-		case NFVariableType::Input:
+		case NFVariableType::BasicVariable:
 			variable = NF_SHARE_PTR<NFIVariable>(NF_NEW NFInputVariable(this->pPluginManager, logicBlockId, id, name));
 			break;
 		case NFVariableType::ElementSystem:
@@ -650,6 +650,30 @@ bool NFBluePrintModule::DeleteLink(const NFGUID& id)
 
 				block->dataLinks.erase(it);
 				return true;
+			}
+		}
+	}
+
+	return false;
+}
+
+bool NFBluePrintModule::CheckLink(const NFGUID &id)
+{
+	auto linkData = GetLink(id);
+	if (linkData && !linkData->startNode.IsNull() && !linkData->endNode.IsNull())
+	{
+		auto startNode = FindNode(linkData->startNode);
+		auto endNode = FindNode(linkData->endNode);
+		if (startNode && endNode)
+		{
+			auto startAttr = startNode->GetOutputArg(linkData->startAttr);
+			auto endAttr = endNode->GetInputArg(linkData->endAttr);
+			if (startAttr && endAttr)
+			{
+				if (startAttr->GetValueType() == endAttr->GetValueType())
+				{
+					return true;
+				}
 			}
 		}
 	}

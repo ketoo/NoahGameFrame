@@ -77,6 +77,7 @@ public:
     virtual bool DeleteLink(const NFGUID& logicBlockId, const NFGUID& startNode, const NFGUID& endNode, const NFGUID& startPin, const NFGUID& endPin);
     virtual bool DeleteLink(const NFGUID& logicBlockId, const NFGUID& id);
     virtual bool DeleteLink(const NFGUID& id);
+	virtual bool CheckLink(const NFGUID& id);
     virtual std::list<NF_SHARE_PTR<NFDataLink>> GetLinks(const NFGUID& logicBlockId);
 
 	virtual bool DeleteMonitor(const NFGUID& id);
