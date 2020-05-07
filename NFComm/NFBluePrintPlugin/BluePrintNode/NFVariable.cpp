@@ -25,28 +25,21 @@
 
 #include "NFVariable.h"
 
-void NFInputVariable::PrepareInputData(const NFGUID& runTimeOnwer, const bool iteration)
-{
-}
-
-void NFInputVariable::UpdateOutputData(const NFGUID& runTimeOnwer, const bool iteration)
+void NFInputVariable::UpdateOutputData(const NFGUID& runTimeOwner)
 {
 	NF_SHARE_PTR<NFIOData> inputData = GetInputArg(0);
 	NF_SHARE_PTR<NFIOData> outputData = GetOutputArg(0);
-	outputData->valueType = inputData->valueType;
-	outputData->varData = inputData->varData;
+
+	outputData->SetValueType(inputData->GetValueType());
+	outputData->SetData(inputData->GetData());
 }
 
 NF_SHARE_PTR<NFIOData> NFInputVariable::FindOutputNodeIOData()
 {
-	return NF_SHARE_PTR<NFIOData>();
+	return GetOutputArg(0);
 }
 
-void NFRecordVariable::PrepareInputData(const NFGUID& runTimeOnwer, const bool iteration)
-{
-}
-
-void NFRecordVariable::UpdateOutputData(const NFGUID& runTimeOnwer, const bool iteration)
+void NFRecordVariable::UpdateOutputData(const NFGUID& runTimeOwner)
 {
 }
 
@@ -55,71 +48,67 @@ NF_SHARE_PTR<NFIOData> NFRecordVariable::FindOutputNodeIOData()
 	return NF_SHARE_PTR<NFIOData>();
 }
 
-void NFElementVariable::PrepareInputData(const NFGUID& runTimeOnwer, const bool iteration)
+void NFElementVariable::UpdateOutputData(const NFGUID& runTimeOwner)
 {
-}
+	NF_SHARE_PTR<NFIOData> className = GetInputArg(NFElementVariableInputArg::ClassName);
+	NF_SHARE_PTR<NFIOData> configID = GetInputArg(NFElementVariableInputArg::ConfigID);
+	NF_SHARE_PTR<NFIOData> propertyName = GetInputArg(NFElementVariableInputArg::PropName);
 
-void NFElementVariable::UpdateOutputData(const NFGUID& runTimeOnwer, const bool iteration)
-{
-	NF_SHARE_PTR<NFIOData> className = GetInputArg(NFElementVariableInputArg::toString(NFElementVariableInputArg::ClassName));
-	NF_SHARE_PTR<NFIOData> configID = GetInputArg(NFElementVariableInputArg::toString(NFElementVariableInputArg::ConfigID));
-	NF_SHARE_PTR<NFIOData> propertyName = GetInputArg(NFElementVariableInputArg::toString(NFElementVariableInputArg::PropName));
+	NF_SHARE_PTR<NFIOData> outputClassName = GetOutputArg(NFElementVariableOutputArg::ClassName);
+	NF_SHARE_PTR<NFIOData> outputConfigID = GetOutputArg(NFElementVariableOutputArg::ConfigID);
+	NF_SHARE_PTR<NFIOData> outputPropName = GetOutputArg(NFElementVariableOutputArg::PropName);
+	NF_SHARE_PTR<NFIOData> outputPropValue = GetOutputArg(NFElementVariableOutputArg::PropValue);
 
-	NF_SHARE_PTR<NFIOData> outputClassName = GetOutputArg(NFElementVariableInputArg::toString(NFElementVariableOutputArg::ClassName));
-	NF_SHARE_PTR<NFIOData> outputConfigID = GetOutputArg(NFElementVariableInputArg::toString(NFElementVariableOutputArg::ConfigID));
-	NF_SHARE_PTR<NFIOData> outputPropName = GetOutputArg(NFElementVariableInputArg::toString(NFElementVariableOutputArg::PropName));
-	NF_SHARE_PTR<NFIOData> outputPropValue = GetOutputArg(NFElementVariableInputArg::toString(NFElementVariableOutputArg::PropValue));
-
-	if (className->varData.GetString().empty() || configID->varData.GetString().empty() || propertyName->varData.GetString().empty())
+	if (className->GetString().empty() || configID->GetString().empty() || propertyName->GetString().empty())
 	{
 		return;
 	}
 
 	auto elementModule = this->pPluginManager->FindModule<NFIElementModule>();
 	auto classModule = this->pPluginManager->FindModule<NFIClassModule>();
-	if (elementModule->ExistElement(configID->varData.GetString()))
+	if (elementModule->ExistElement(configID->GetString()))
 	{
-		auto classObject = classModule->GetElement(className->varData.GetString());
+		auto classObject = classModule->GetElement(className->GetString());
 		if (classObject)
 		{
-			auto classProperty = classObject->GetPropertyManager()->GetElement(propertyName->varData.GetString());
+			auto classProperty = classObject->GetPropertyManager()->GetElement(propertyName->GetString());
 			if (classProperty)
 			{
 				switch (classProperty->GetType())
 				{
 				case NFDATA_TYPE::TDATA_INT:
 				{
-					outputPropValue->valueType = NFValueType::Int;
-					int64_t value = elementModule->GetPropertyInt(configID->varData.GetString(), propertyName->varData.GetString());
-					outputPropValue->varData.SetInt(value);
+					outputPropValue->SetValueType(NFValueType::Int);
+					int64_t value = elementModule->GetPropertyInt(configID->GetString(), propertyName->GetString());
+					outputPropValue->SetInt(value);
 				}
 				break;
 				case NFDATA_TYPE::TDATA_FLOAT:
 				{
-					outputPropValue->valueType = NFValueType::Float;
-					double value = elementModule->GetPropertyFloat(configID->varData.GetString(), propertyName->varData.GetString());
-					outputPropValue->varData.SetFloat(value);
+					outputPropValue->SetValueType(NFValueType::Float);
+					double value = elementModule->GetPropertyFloat(configID->GetString(), propertyName->GetString());
+					outputPropValue->SetFloat(value);
 				}
 				break;
 				case NFDATA_TYPE::TDATA_STRING:
 				{
-					outputPropValue->valueType = NFValueType::String;
-					std::string value = elementModule->GetPropertyString(configID->varData.GetString(), propertyName->varData.GetString());
-					outputPropValue->varData.SetString(value);
+					outputPropValue->SetValueType(NFValueType::String);
+					std::string value = elementModule->GetPropertyString(configID->GetString(), propertyName->GetString());
+					outputPropValue->SetString(value);
 				}
 				break;
 				case NFDATA_TYPE::TDATA_VECTOR2:
 				{
-					outputPropValue->valueType = NFValueType::Vector2;
-					NFVector2 value = elementModule->GetPropertyVector2(configID->varData.GetString(), propertyName->varData.GetString());
-					outputPropValue->varData.SetVector2(value);
+					outputPropValue->SetValueType(NFValueType::Vector2);
+					NFVector2 value = elementModule->GetPropertyVector2(configID->GetString(), propertyName->GetString());
+					outputPropValue->SetVector2(value);
 				}
 				break;
 				case NFDATA_TYPE::TDATA_VECTOR3:
 				{
-					outputPropValue->valueType = NFValueType::Vector3;
-					NFVector3 value = elementModule->GetPropertyVector3(configID->varData.GetString(), propertyName->varData.GetString());
-					outputPropValue->varData.SetVector3(value);
+					outputPropValue->SetValueType(NFValueType::Vector3);
+					NFVector3 value = elementModule->GetPropertyVector3(configID->GetString(), propertyName->GetString());
+					outputPropValue->SetVector3(value);
 				}
 				break;
 				default:
@@ -136,74 +125,88 @@ NF_SHARE_PTR<NFIOData> NFElementVariable::FindOutputNodeIOData()
 	return NF_SHARE_PTR<NFIOData>();
 }
 
-void NFPropertyVariable::PrepareInputData(const NFGUID& runTimeOnwer, const bool iteration)
+void NFPropertyVariable::UpdateOutputData(const NFGUID& runTimeOwner)
 {
-}
+	NF_SHARE_PTR<NFIOData> objectID = GetInputArg(NFPropertyVariableInputArg::ObjectID);
+	NF_SHARE_PTR<NFIOData> className = GetInputArg(NFPropertyVariableInputArg::ClassName);
+	NF_SHARE_PTR<NFIOData> propertyName = GetInputArg(NFPropertyVariableInputArg::PropName);
 
-void NFPropertyVariable::UpdateOutputData(const NFGUID& runTimeOnwer, const bool iteration)
-{
-	NF_SHARE_PTR<NFIOData> className = GetInputArg(NFPropertyVariableInputArg::toString(NFPropertyVariableInputArg::ClassName));
-	NF_SHARE_PTR<NFIOData> propertyName = GetInputArg(NFPropertyVariableInputArg::toString(NFPropertyVariableInputArg::PropName));
-
-	NF_SHARE_PTR<NFIOData> outputData = GetOutputArg(0);
-	outputData->varData.SetString("");
-
-	if (className->varData.GetString().empty() || propertyName->varData.GetString().empty())
+	if (className->GetString().empty() || propertyName->GetString().empty())
 	{
 		return;
 	}
 
+	NF_SHARE_PTR<NFIOData> outputClassName = GetOutputArg(NFPropertyVariableOutputArg::ClassName);
+	NF_SHARE_PTR<NFIOData> outputPropertyName = GetOutputArg(NFPropertyVariableOutputArg::PropName);
+	NF_SHARE_PTR<NFIOData> outputPropertyValue = GetOutputArg(NFPropertyVariableOutputArg::PropValue);
+
+	outputClassName->SetString(className->GetString());
+	outputPropertyName->SetString(propertyName->GetString());
+
 	auto elementModule = this->pPluginManager->FindModule<NFIElementModule>();
 	auto classModule = this->pPluginManager->FindModule<NFIClassModule>();
+	auto kernelModule = this->pPluginManager->FindModule<NFIKernelModule>();
 	{
-		auto classObject = classModule->GetElement(className->varData.GetString());
+		auto classObject = classModule->GetElement(className->GetString());
 		if (classObject)
 		{
-			auto classProperty = classObject->GetPropertyManager()->GetElement(propertyName->varData.GetString());
+			auto classProperty = classObject->GetPropertyManager()->GetElement(propertyName->GetString());
 			if (classProperty)
 			{
 				switch (classProperty->GetType())
 				{
 				case NFDATA_TYPE::TDATA_INT:
 				{
-					outputData->valueType = NFValueType::Int;
-					outputData->varData.Reset();
-					outputData->varData.SetInt(0);
+					outputPropertyValue->SetValueType(NFValueType::Int);
+					if (!objectID->GetObject().IsNull())
+					{
+						outputPropertyValue->SetInt(kernelModule->GetPropertyInt(objectID->GetObject(), propertyName->GetString()));
+					}
 				}
 				break;
 				case NFDATA_TYPE::TDATA_FLOAT:
 				{
-					outputData->valueType = NFValueType::Float;
-					outputData->varData.Reset();
-					outputData->varData.SetFloat(0);
+					outputPropertyValue->SetValueType(NFValueType::Float);
+					if (!objectID->GetObject().IsNull())
+					{
+						outputPropertyValue->SetFloat(kernelModule->GetPropertyFloat(objectID->GetObject(), propertyName->GetString()));
+					}
 				}
 				break;
 				case NFDATA_TYPE::TDATA_OBJECT:
 				{
-					outputData->valueType = NFValueType::Object;
-					outputData->varData.Reset();
-					outputData->varData.SetObject(NFGUID());
+					outputPropertyValue->SetValueType(NFValueType::Object);
+					if (!objectID->GetObject().IsNull())
+					{
+						outputPropertyValue->SetObject(kernelModule->GetPropertyObject(objectID->GetObject(), propertyName->GetString()));
+					}
 				}
 				break;
 				case NFDATA_TYPE::TDATA_STRING:
 				{
-					outputData->valueType = NFValueType::String;
-					outputData->varData.Reset();
-					outputData->varData.SetString("");
+					outputPropertyValue->SetValueType(NFValueType::String);
+					if (!objectID->GetObject().IsNull())
+					{
+						outputPropertyValue->SetString(kernelModule->GetPropertyString(objectID->GetObject(), propertyName->GetString()));
+					}
 				}
 				break;
 				case NFDATA_TYPE::TDATA_VECTOR2:
 				{
-					outputData->valueType = NFValueType::Vector2;
-					outputData->varData.Reset();
-					outputData->varData.SetVector2(NFVector2());
+					outputPropertyValue->SetValueType(NFValueType::Vector2);
+					if (!objectID->GetObject().IsNull())
+					{
+						outputPropertyValue->SetVector2(kernelModule->GetPropertyVector2(objectID->GetObject(), propertyName->GetString()));
+					}
 				}
 				break;
 				case NFDATA_TYPE::TDATA_VECTOR3:
 				{
-					outputData->valueType = NFValueType::Vector3;
-					outputData->varData.Reset();
-					outputData->varData.SetVector3(NFVector3());
+					outputPropertyValue->SetValueType(NFValueType::Vector3);
+					if (!objectID->GetObject().IsNull())
+					{
+						outputPropertyValue->SetVector3(kernelModule->GetPropertyVector3(objectID->GetObject(), propertyName->GetString()));
+					}
 				}
 				break;
 				default:
@@ -220,21 +223,12 @@ NF_SHARE_PTR<NFIOData> NFPropertyVariable::FindOutputNodeIOData()
 	return NF_SHARE_PTR<NFIOData>();
 }
 
-void NFPropertyListVariable::PrepareInputData(const NFGUID& runTimeOnwer, const bool iteration)
+void NFPropertyListVariable::UpdateOutputData(const NFGUID& runTimeOwner)
 {
-}
-
-void NFPropertyListVariable::UpdateOutputData(const NFGUID& runTimeOnwer, const bool iteration)
-{
-
-	NF_SHARE_PTR<NFIOData> className = GetInputArg(NFPropertyListVariableInputArg::toString(NFPropertyListVariableInputArg::ClassName));
-
 	NF_SHARE_PTR<NFIOData> intputObjectID = GetOutputArg(NFPropertyListVariableInputArg::ObjectID);
-	NF_SHARE_PTR<NFIOData> intputClassName = GetOutputArg(NFPropertyListVariableInputArg::ClassName);
 
 	NF_SHARE_PTR<NFIOData> outputObjectID = GetOutputArg(NFPropertyListVariableOutputArg::ObjectID);
 	NF_SHARE_PTR<NFIOData> outputClassName = GetOutputArg(NFPropertyListVariableOutputArg::ClassName);
-
 	NF_SHARE_PTR<NFIOData> outputConfigID = GetOutputArg(NFPropertyListVariableOutputArg::ConfigID);
 	NF_SHARE_PTR<NFIOData> outputSceneID = GetOutputArg(NFPropertyListVariableOutputArg::SceneID);
 	NF_SHARE_PTR<NFIOData> outputGroupID = GetOutputArg(NFPropertyListVariableOutputArg::GroupID);
@@ -255,11 +249,7 @@ NF_SHARE_PTR<NFIOData> NFPropertyListVariable::FindOutputNodeIOData()
 	return NF_SHARE_PTR<NFIOData>();
 }
 
-void NFArrayVariable::PrepareInputData(const NFGUID& runTimeOnwer, const bool iteration)
-{
-}
-
-void NFArrayVariable::UpdateOutputData(const NFGUID& runTimeOnwer, const bool iteration)
+void NFArrayVariable::UpdateOutputData(const NFGUID& runTimeOwner)
 {
 }
 
@@ -268,11 +258,7 @@ NF_SHARE_PTR<NFIOData> NFArrayVariable::FindOutputNodeIOData()
 	return NF_SHARE_PTR<NFIOData>();
 }
 
-void NFDictionaryVariable::PrepareInputData(const NFGUID& runTimeOnwer, const bool iteration)
-{
-}
-
-void NFDictionaryVariable::UpdateOutputData(const NFGUID& runTimeOnwer, const bool iteration)
+void NFDictionaryVariable::UpdateOutputData(const NFGUID& runTimeOwner)
 {
 }
 

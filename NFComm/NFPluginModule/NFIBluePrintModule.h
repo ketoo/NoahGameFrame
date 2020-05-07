@@ -83,6 +83,7 @@ public:
 	virtual bool DeleteLink(const NFGUID& logicBlockId, const NFGUID& startNode, const NFGUID& endNode, const NFGUID& startPin, const NFGUID& endPin) = 0;
 	virtual bool DeleteLink(const NFGUID& logicBlockId, const NFGUID& id) = 0;
 	virtual bool DeleteLink(const NFGUID& id) = 0;
+	virtual bool CheckLink(const NFGUID& id) = 0;
 	virtual std::list<NF_SHARE_PTR<NFDataLink>> GetLinks(const NFGUID& logicBlockId) = 0;
 
 	virtual bool DeleteMonitor(const NFGUID& id) = 0;
@@ -130,7 +131,6 @@ NF_SMART_ENUM(NFElementVariableInputArg,
 
 	NF_SMART_ENUM(NFPropertyListVariableInputArg,
 		ObjectID,
-		ClassName,
 		)
 
 	NF_SMART_ENUM(NFPropertyListVariableOutputArg,
@@ -161,9 +161,6 @@ NF_SMART_ENUM(NFMonitorType,
 	PropertyEvent,
 	RecordEvent,
 	SceneEvent,
-	ItemEvent,
-	SkillEvent,
-	BuffEvent,
 	)
 
 NF_SMART_ENUM(NFClassEventType,
@@ -512,8 +509,8 @@ NF_SMART_ENUM(NFArithmeticInputArg,
 )
 
 NF_SMART_ENUM(NFArithmeticOutputArg,
-	Output,
 	NextNode,
+	Output,
 )
 ///////////////////////////////////////////////////////////////////////////////////
 class NFLogicBlock;
@@ -863,8 +860,9 @@ public:
 
 	void Execute(const NFGUID& runTimeOwner)
 	{
-		PrepareInputData(runTimeOwner, false);
-		UpdateOutputData(runTimeOwner, false);
+		PrepareInputData(runTimeOwner);
+		UpdateOutputData(runTimeOwner);
+
 		auto nextNode = FindNextNode();
 		if (nextNode)
 		{
@@ -872,59 +870,100 @@ public:
 		}
 	}
 
-	//if iteration == true, only update the input and output data, dont create object or do things like that
-	virtual void PrepareInputData(const NFGUID& runTimeOwner, const bool iteration) = 0;
-	virtual void UpdateOutputData(const NFGUID& runTimeOwner, const bool iteration) = 0;
+	virtual void UpdateOutputData(const NFGUID& runTimeOwner) = 0;
 
-	virtual void PrepareInputParameterData(NF_SHARE_PTR<NFIOData> inputParameter, const NFGUID& runTimeOwner, const bool iteration = true)
+	//should for node to boost the runtime speed
+	//maybe parent node not only one node, maybe two or three, collect all nodes and let it PrepareInputData && UpdateOutputData
+	void PrepareInputData(const NFGUID& runTimeOwner)
 	{
-		if (inputParameter)
+		std::vector<NFGUID> parentNodes;
+		for (int i = 0; i < inputArgs.size(); ++i)
 		{
-			NFGUID linkID = inputParameter->GetLinkID();
-			if (!linkID.IsNull())
+			auto inputArg = inputArgs[i];
+			if (inputArg && !inputArg->GetLinkID().IsNull() && inputArg->GetValueType() != NFValueType::Node && inputArg->GetValueType() != NFValueType::UNKNOW)
 			{
-				auto linkData = this->pBluePrintModule->GetLink(linkID);
+				auto linkData = this->pBluePrintModule->GetLink(inputArg->GetLinkID());
 				if (linkData && !linkData->startNode.IsNull())
+				{
+					bool find = false;
+					for (int j = 0; j < parentNodes.size(); ++j)
+					{
+						if (parentNodes[j] == linkData->startNode)
+						{
+							find = true;
+							break;
+						}
+					}
+
+					if (!find)
+					{
+						parentNodes.push_back(linkData->startNode);
+					}
+				}
+			}
+		}
+
+		for (int j = 0; j < parentNodes.size(); ++j)
+		{
+			auto node = this->pBluePrintModule->FindNode(parentNodes[j]);
+			if (node)
+			{
+				node->PrepareInputData(runTimeOwner);
+				node->UpdateOutputData(runTimeOwner);
+			}
+		}
+
+		//get value from parent node's output
+		for (int i = 0; i < inputArgs.size(); ++i)
+		{
+			auto inputArg = inputArgs[i];
+			if (inputArg && !inputArg->GetLinkID().IsNull() && inputArg->GetValueType() != NFValueType::Node && inputArg->GetValueType() != NFValueType::UNKNOW)
+			{
+				auto linkData = this->pBluePrintModule->GetLink(inputArg->GetLinkID());
+				if (linkData && !linkData->startAttr.IsNull())
 				{
 					auto startNode = this->pBluePrintModule->FindNode(linkData->startNode);
 					if (startNode)
 					{
 						auto startAttr = startNode->GetOutputArg(linkData->startAttr);
-						if (startAttr && startAttr->GetValueType() == inputParameter->GetValueType())
+						if (startAttr && startAttr->GetValueType() == inputArg->GetValueType())
 						{
-							startNode->PrepareInputData(runTimeOwner, iteration);
-							startNode->UpdateOutputData(runTimeOwner, iteration);
-
-
-							switch (inputParameter->GetValueType())
+							switch (inputArg->GetValueType())
 							{
-							case NFValueType::Int:
-								inputParameter->SetInt(startAttr->GetInt());
-							case NFValueType::Float:
-								inputParameter->SetFloat(startAttr->GetFloat());
-							case NFValueType::String:
-								inputParameter->SetString(startAttr->GetString());
-							case NFValueType::Object:
-								inputParameter->SetObject(startAttr->GetObject());
-							case NFValueType::Vector2:
-								inputParameter->SetVector2(startAttr->GetVector2());
-							case NFValueType::Vector3:
-								inputParameter->SetVector3(startAttr->GetVector3());
-							case NFValueType::Array:
-							case NFValueType::Dictionary:
-								inputParameter->dictionaryData = startAttr->dictionaryData;
-								break;
-							default:
-								break;
+								case NFValueType::Int:
+									inputArg->SetInt(startAttr->GetInt());
+									break;
+								case NFValueType::Float:
+									inputArg->SetFloat(startAttr->GetFloat());
+									break;
+								case NFValueType::String:
+									inputArg->SetString(startAttr->GetString());
+									break;
+								case NFValueType::Object:
+									inputArg->SetObject(startAttr->GetObject());
+									break;
+								case NFValueType::Vector2:
+									inputArg->SetVector2(startAttr->GetVector2());
+									break;
+								case NFValueType::Vector3:
+									inputArg->SetVector3(startAttr->GetVector3());
+									break;
+								case NFValueType::Array:
+								case NFValueType::Dictionary:
+									inputArg->dictionaryData = startAttr->dictionaryData;
+									break;
+								default:
+									break;
 							}
+							break;
 						}
 						else
 						{
 							std::ostringstream os;
 							os << "Start Node ID" << startNode->id.ToString() << " ";
 							os << "Start Node Name " << startNode->name << " ";
-							os << "End Node ID " << inputParameter->id.ToString() << " ";
-							os << "End Node Name " << inputParameter->name << " ";
+							os << "End Node ID " << inputArg->id.ToString() << " ";
+							os << "End Node Name " << inputArg->name << " ";
 
 							m_pLogModule->LogError(os, __FUNCTION__, __LINE__);
 						}
@@ -942,7 +981,7 @@ public:
 		}
 
 		std::ostringstream os;
-		os << "Start yo Print Node:";
+		os << "Start Print Node:";
 		os << " ID" << this->id.ToString();
 		os << " Name " << this->name;
 		os << std::endl;
@@ -954,6 +993,7 @@ public:
 			os << " ID:" << input->id.ToString();
 			os << " Name:" << input->name;
 			os << " LinkID:" << input->GetLinkID().ToString();
+			os << " FromType:" << input->fromType;
 
 			os << " ValueType:" << input->GetValueType().toString();
 			os << " Value:" << input->ToString();
@@ -969,6 +1009,7 @@ public:
 			os << " ID " << output->id.ToString();
 			os << " Name " << output->name;
 			os << " LinkID:" << output->GetLinkID().ToString();
+			os << " FromType:" << output->fromType;
 
 			os << " ValueType:" << output->GetValueType().toString();
 			os << " Value:" << output->ToString();
@@ -996,8 +1037,6 @@ public:
 	{
 		blueprintType = NFBlueprintType::ARITHMETIC;
 	}
-
-	NFArithmeticInputArg arithmeticType;
 };
 
 class NFIBranch : public NFBluePrintNodeBase
@@ -1110,12 +1149,8 @@ public:
 
 	}
 
-	virtual void PrepareInputData(const NFGUID& runTimeOwner, const bool iteration)
-	{
 
-	}
-
-	virtual void UpdateOutputData(const NFGUID& runTimeOwner, const bool iteration)
+	virtual void UpdateOutputData(const NFGUID& runTimeOwner)
 	{
 
 	}
