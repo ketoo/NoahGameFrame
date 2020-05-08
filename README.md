@@ -85,6 +85,7 @@ https://github.com/ketoo/NoahGameFrame/wiki
 
 1. Git pull all source
 2. Run the script file named **build_dep.bat** where located /Dependencies
+(墙内上网的同学请点击：墙内下载依赖库.bat)
 3. Build the solution(if u build failed, please build again(**not rebuild all**))
 4. Run the binary file by **_Out/rund.bat**
 
