@@ -63,7 +63,7 @@ enum NFPinShape
     PinShape_QuadFilled
 };
 
-void ShowImage(const char* filename, int width, int height);
+void* ShowImage(const char* filename, int width, int height);
 
 class NFNodeView;
 
@@ -93,7 +93,8 @@ public:
    int color;
    bool inputPin;
    std::string name;
-   std::string image;
+	std::string newImage;
+	std::string image;
    NFVector2 imageSize;
    void* iconTextureId;
 

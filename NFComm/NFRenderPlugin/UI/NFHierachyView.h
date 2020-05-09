@@ -50,7 +50,7 @@ private:
    void BluePrintViewSubRenderForLogicBlock();
    void BluePrintViewSubRenderForMonitor();
    void BluePrintViewSubRenderForBranch();
-   void BluePrintViewSubRenderForExecuter();
+   void BluePrintViewSubRenderForExecutor();
    void BluePrintViewSubRenderForVariable();
    void BluePrintViewSubRenderForModifier();
    void BluePrintViewSubRenderForLogger();
@@ -66,7 +66,7 @@ private:
 
    void InitBluePrintMonitorArgs(NF_SHARE_PTR<NFIMonitor> monitor);
    void InitBluePrintJudgementArgs(NF_SHARE_PTR<NFIBranch> branch);
-   void InitBluePrintExecuterArgs(NF_SHARE_PTR<NFIExecuter> executer);
+   void InitBluePrintExecutorArgs(NF_SHARE_PTR<NFIExecutor> executer);
 
    void RenderForModifyProperty();
 
