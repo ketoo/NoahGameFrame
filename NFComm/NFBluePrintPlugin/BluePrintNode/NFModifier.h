@@ -48,8 +48,8 @@ public:
 		{
 			NF_SHARE_PTR<NFIOData> var = NF_SHARE_PTR<NFIOData>(NF_NEW NFIOData());
 			var->id = this->pPluginManager->FindModule<NFIKernelModule>()->CreateGUID();
-			var->name = NFPropertyModifierInputArg::toString(NFPropertyModifierInputArg::LastNode);
-			var->valueType = NFValueType::Node;
+			var->name = NFPropertyModifierInputArg::toString(NFPropertyModifierInputArg::PreNode);
+			var->SetValueType(NFValueType::Node);
 
 			inputArgs.push_back(var);
 		}
@@ -57,7 +57,7 @@ public:
 			NF_SHARE_PTR<NFIOData> var = NF_SHARE_PTR<NFIOData>(NF_NEW NFIOData());
 			var->id = this->pPluginManager->FindModule<NFIKernelModule>()->CreateGUID();
 			var->name = NFPropertyModifierInputArg::toString(NFPropertyModifierInputArg::ObjectID);
-			var->valueType = NFValueType::Object;
+			var->SetValueType(NFValueType::Object);
 			var->fromType = NFIODataComFromType::EXTERNAL;
 
 			inputArgs.push_back(var);
@@ -66,7 +66,7 @@ public:
 			NF_SHARE_PTR<NFIOData> var = NF_SHARE_PTR<NFIOData>(NF_NEW NFIOData());
 			var->id = this->pPluginManager->FindModule<NFIKernelModule>()->CreateGUID();
 			var->name = NFPropertyModifierInputArg::toString(NFPropertyModifierInputArg::ClassName);
-			var->valueType = NFValueType::String;
+			var->SetValueType(NFValueType::String);
 			var->fromType = NFIODataComFromType::INTERNAL;
 
 			inputArgs.push_back(var);
@@ -75,7 +75,7 @@ public:
 			NF_SHARE_PTR<NFIOData> var = NF_SHARE_PTR<NFIOData>(NF_NEW NFIOData());
 			var->id = this->pPluginManager->FindModule<NFIKernelModule>()->CreateGUID();
 			var->name = NFPropertyModifierInputArg::toString(NFPropertyModifierInputArg::PropName);
-			var->valueType = NFValueType::String;
+			var->SetValueType(NFValueType::String);
 			var->fromType = NFIODataComFromType::INTERNAL;
 
 			inputArgs.push_back(var);
@@ -84,7 +84,7 @@ public:
 			NF_SHARE_PTR<NFIOData> var = NF_SHARE_PTR<NFIOData>(NF_NEW NFIOData());
 			var->id = this->pPluginManager->FindModule<NFIKernelModule>()->CreateGUID();
 			var->name = NFPropertyModifierInputArg::toString(NFPropertyModifierInputArg::PropValue);
-			var->valueType = NFValueType::UNKNOW;
+			var->SetValueType(NFValueType::UNKNOW);
 			var->fromType = NFIODataComFromType::EXTERNAL;
 
 			inputArgs.push_back(var);
@@ -97,20 +97,24 @@ public:
 			NF_SHARE_PTR<NFIOData> var = NF_SHARE_PTR<NFIOData>(NF_NEW NFIOData());
 			var->id = this->pPluginManager->FindModule<NFIKernelModule>()->CreateGUID();
 			var->name = NFPropertyModifierOutputArg::toString(NFPropertyModifierOutputArg::NextNode);
-			var->valueType = NFValueType::Node;
+			var->SetValueType(NFValueType::Node);
 
 			outputArgs.push_back(var);
 		}
 	}
 
-	virtual void UpdateOutputData(const NFGUID& runTimeOnwer, const bool iteration)
+	virtual void UpdateOutputData(const NFGUID& runTimeOwner)
 	{
 		NF_SHARE_PTR<NFIOData> inputClassName = GetInputArg(NFPropertyModifierInputArg::ClassName);
 		NF_SHARE_PTR<NFIOData> inputPropName = GetInputArg(NFPropertyModifierInputArg::PropName);
 		NF_SHARE_PTR<NFIOData> inputPropValue = GetInputArg(NFPropertyModifierInputArg::PropValue);
 
-		std::string className = inputClassName->varData.GetString();
-		std::string propName = inputPropName->varData.GetString();
+		std::string className = inputClassName->GetString();
+		std::string propName = inputPropName->GetString();
+		if (className.empty() || propName.empty())
+		{
+			return;
+		}
 
 		NFIClassModule* classModule = this->pPluginManager->FindModule<NFIClassModule>();
 		auto classObject = classModule->GetElement(className);
@@ -119,32 +123,28 @@ public:
 		switch (propObject->GetType())
 		{
 		case NFDATA_TYPE::TDATA_INT:
-			inputPropValue->valueType = NFValueType::Int;
+			inputPropValue->SetValueType(NFValueType::Int);
 			break;
 		case NFDATA_TYPE::TDATA_FLOAT:
-			inputPropValue->valueType = NFValueType::Float;
+			inputPropValue->SetValueType(NFValueType::Float);
 			break;
 		case NFDATA_TYPE::TDATA_STRING:
-			inputPropValue->valueType = NFValueType::String;
+			inputPropValue->SetValueType(NFValueType::String);
 			break;
 		case NFDATA_TYPE::TDATA_OBJECT:
-			inputPropValue->valueType = NFValueType::Object;
+			inputPropValue->SetValueType(NFValueType::Object);
 			break;
 		case NFDATA_TYPE::TDATA_VECTOR2:
-			inputPropValue->valueType = NFValueType::Vector2;
+			inputPropValue->SetValueType(NFValueType::Vector2);
 			break;
 		case NFDATA_TYPE::TDATA_VECTOR3:
-			inputPropValue->valueType = NFValueType::Vector3;
+			inputPropValue->SetValueType(NFValueType::Vector3);
 			break;
 		default:
 			break;
 		}
 	}
 
-	// Inherited via NFIModifier
-	virtual void PrepareInputData(const NFGUID& runTimeOnwer, const bool iteration) override;
-
-	// Inherited via NFIModifier
 	virtual NF_SHARE_PTR<NFIOData> FindOutputNodeIOData() override;
 };
 
@@ -171,8 +171,8 @@ public:
 		{
 			NF_SHARE_PTR<NFIOData> var = NF_SHARE_PTR<NFIOData>(NF_NEW NFIOData());
 			var->id = this->pPluginManager->FindModule<NFIKernelModule>()->CreateGUID();
-			var->name = NFRecordModifierInputArg::toString(NFRecordModifierInputArg::LastNode);
-			var->valueType = NFValueType::Node;
+			var->name = NFRecordModifierInputArg::toString(NFRecordModifierInputArg::PreNode);
+			var->SetValueType(NFValueType::Node);
 
 			inputArgs.push_back(var);
 		}
@@ -180,7 +180,7 @@ public:
 			NF_SHARE_PTR<NFIOData> var = NF_SHARE_PTR<NFIOData>(NF_NEW NFIOData());
 			var->id = this->pPluginManager->FindModule<NFIKernelModule>()->CreateGUID();
 			var->name = NFRecordModifierInputArg::toString(NFRecordModifierInputArg::ObjectID);
-			var->valueType = NFValueType::Object;
+			var->SetValueType(NFValueType::Object);
 			var->fromType = NFIODataComFromType::EXTERNAL;
 
 			inputArgs.push_back(var);
@@ -189,7 +189,7 @@ public:
 			NF_SHARE_PTR<NFIOData> var = NF_SHARE_PTR<NFIOData>(NF_NEW NFIOData());
 			var->id = this->pPluginManager->FindModule<NFIKernelModule>()->CreateGUID();
 			var->name = NFRecordModifierInputArg::toString(NFRecordModifierInputArg::RecordName);
-			var->valueType = NFValueType::String;
+			var->SetValueType(NFValueType::String);
 			var->fromType = NFIODataComFromType::INTERNAL;
 
 			inputArgs.push_back(var);
@@ -198,7 +198,7 @@ public:
 			NF_SHARE_PTR<NFIOData> var = NF_SHARE_PTR<NFIOData>(NF_NEW NFIOData());
 			var->id = this->pPluginManager->FindModule<NFIKernelModule>()->CreateGUID();
 			var->name = NFRecordModifierInputArg::toString(NFRecordModifierInputArg::RecordRow);
-			var->valueType = NFValueType::Int;
+			var->SetValueType(NFValueType::Int);
 			var->fromType = NFIODataComFromType::BOTH;
 
 			inputArgs.push_back(var);
@@ -207,7 +207,7 @@ public:
 			NF_SHARE_PTR<NFIOData> var = NF_SHARE_PTR<NFIOData>(NF_NEW NFIOData());
 			var->id = this->pPluginManager->FindModule<NFIKernelModule>()->CreateGUID();
 			var->name = NFRecordModifierInputArg::toString(NFRecordModifierInputArg::RecordCol);
-			var->valueType = NFValueType::Int;
+			var->SetValueType(NFValueType::Int);
 			var->fromType = NFIODataComFromType::INTERNAL;
 
 			inputArgs.push_back(var);
@@ -216,7 +216,7 @@ public:
 			NF_SHARE_PTR<NFIOData> var = NF_SHARE_PTR<NFIOData>(NF_NEW NFIOData());
 			var->id = this->pPluginManager->FindModule<NFIKernelModule>()->CreateGUID();
 			var->name = NFRecordModifierInputArg::toString(NFRecordModifierInputArg::RecordValue);
-			var->valueType = NFValueType::UNKNOW;
+			var->SetValueType(NFValueType::UNKNOW);
 			var->fromType = NFIODataComFromType::EXTERNAL;
 
 			inputArgs.push_back(var);
@@ -229,17 +229,14 @@ public:
 			NF_SHARE_PTR<NFIOData> var = NF_SHARE_PTR<NFIOData>(NF_NEW NFIOData());
 			var->id = this->pPluginManager->FindModule<NFIKernelModule>()->CreateGUID();
 			var->name = NFRecordModifierOutputArg::toString(NFRecordModifierOutputArg::NextNode);
-			var->valueType = NFValueType::Node;
+			var->SetValueType(NFValueType::Node);
 
 			outputArgs.push_back(var);
 		}
 	}
 
-	// Inherited via NFIModifier
-	virtual void PrepareInputData(const NFGUID& runTimeOnwer, const bool iteration) override;
-	virtual void UpdateOutputData(const NFGUID& runTimeOnwer, const bool iteration) override;
+	virtual void UpdateOutputData(const NFGUID& runTimeOwner) override;
 
-	// Inherited via NFIModifier
 	virtual NF_SHARE_PTR<NFIOData> FindOutputNodeIOData() override;
 };
 
@@ -273,8 +270,8 @@ public:
 		{
 			NF_SHARE_PTR<NFIOData> var = NF_SHARE_PTR<NFIOData>(NF_NEW NFIOData());
 			var->id = this->pPluginManager->FindModule<NFIKernelModule>()->CreateGUID();
-			var->name = NFRecordRemoverrInputArg::toString(NFRecordRemoverrInputArg::LastNode);
-			var->valueType = NFValueType::Node;
+			var->name = NFRecordRemoverrInputArg::toString(NFRecordRemoverrInputArg::PreNode);
+			var->SetValueType(NFValueType::Node);
 
 			inputArgs.push_back(var);
 		}
@@ -282,7 +279,7 @@ public:
 			NF_SHARE_PTR<NFIOData> var = NF_SHARE_PTR<NFIOData>(NF_NEW NFIOData());
 			var->id = this->pPluginManager->FindModule<NFIKernelModule>()->CreateGUID();
 			var->name = NFRecordRemoverrInputArg::toString(NFRecordRemoverrInputArg::ObjectID);
-			var->valueType = NFValueType::Object;
+			var->SetValueType(NFValueType::Object);
 			var->fromType = NFIODataComFromType::EXTERNAL;
 
 			inputArgs.push_back(var);
@@ -291,7 +288,7 @@ public:
 			NF_SHARE_PTR<NFIOData> var = NF_SHARE_PTR<NFIOData>(NF_NEW NFIOData());
 			var->id = this->pPluginManager->FindModule<NFIKernelModule>()->CreateGUID();
 			var->name = NFRecordRemoverrInputArg::toString(NFRecordRemoverrInputArg::RecordName);
-			var->valueType = NFValueType::String;
+			var->SetValueType(NFValueType::String);
 			var->fromType = NFIODataComFromType::INTERNAL;
 
 			inputArgs.push_back(var);
@@ -300,7 +297,7 @@ public:
 			NF_SHARE_PTR<NFIOData> var = NF_SHARE_PTR<NFIOData>(NF_NEW NFIOData());
 			var->id = this->pPluginManager->FindModule<NFIKernelModule>()->CreateGUID();
 			var->name = NFRecordRemoverrInputArg::toString(NFRecordRemoverrInputArg::RecordRow);
-			var->valueType = NFValueType::Int;
+			var->SetValueType(NFValueType::Int);
 			var->fromType = NFIODataComFromType::BOTH;
 
 			inputArgs.push_back(var);
@@ -313,15 +310,13 @@ public:
 			NF_SHARE_PTR<NFIOData> var = NF_SHARE_PTR<NFIOData>(NF_NEW NFIOData());
 			var->id = this->pPluginManager->FindModule<NFIKernelModule>()->CreateGUID();
 			var->name = NFRecordRemoverOutputArg::toString(NFRecordRemoverOutputArg::NextNode);
-			var->valueType = NFValueType::Node;
+			var->SetValueType(NFValueType::Node);
 
 			outputArgs.push_back(var);
 		}
 	}
 
-	// Inherited via NFIModifier
-	virtual void PrepareInputData(const NFGUID& runTimeOnwer, const bool iteration) override;
-	virtual void UpdateOutputData(const NFGUID& runTimeOnwer, const bool iteration) override;
+	virtual void UpdateOutputData(const NFGUID& runTimeOwner) override;
 };
 
 class NFRecordRemover : public NFIModifier
@@ -347,8 +342,8 @@ public:
 		{
 			NF_SHARE_PTR<NFIOData> var = NF_SHARE_PTR<NFIOData>(NF_NEW NFIOData());
 			var->id = this->pPluginManager->FindModule<NFIKernelModule>()->CreateGUID();
-			var->name = NFRecordRemoverrInputArg::toString(NFRecordRemoverrInputArg::LastNode);
-			var->valueType = NFValueType::Node;
+			var->name = NFRecordRemoverrInputArg::toString(NFRecordRemoverrInputArg::PreNode);
+			var->SetValueType(NFValueType::Node);
 
 			inputArgs.push_back(var);
 		}
@@ -356,7 +351,7 @@ public:
 			NF_SHARE_PTR<NFIOData> var = NF_SHARE_PTR<NFIOData>(NF_NEW NFIOData());
 			var->id = this->pPluginManager->FindModule<NFIKernelModule>()->CreateGUID();
 			var->name = NFRecordRemoverrInputArg::toString(NFRecordRemoverrInputArg::ObjectID);
-			var->valueType = NFValueType::Object;
+			var->SetValueType(NFValueType::Object);
 			var->fromType = NFIODataComFromType::EXTERNAL;
 
 			inputArgs.push_back(var);
@@ -365,7 +360,7 @@ public:
 			NF_SHARE_PTR<NFIOData> var = NF_SHARE_PTR<NFIOData>(NF_NEW NFIOData());
 			var->id = this->pPluginManager->FindModule<NFIKernelModule>()->CreateGUID();
 			var->name = NFRecordRemoverrInputArg::toString(NFRecordRemoverrInputArg::RecordName);
-			var->valueType = NFValueType::String;
+			var->SetValueType(NFValueType::String);
 			var->fromType = NFIODataComFromType::INTERNAL;
 
 			inputArgs.push_back(var);
@@ -374,7 +369,7 @@ public:
 			NF_SHARE_PTR<NFIOData> var = NF_SHARE_PTR<NFIOData>(NF_NEW NFIOData());
 			var->id = this->pPluginManager->FindModule<NFIKernelModule>()->CreateGUID();
 			var->name = NFRecordRemoverrInputArg::toString(NFRecordRemoverrInputArg::RecordRow);
-			var->valueType = NFValueType::Int;
+			var->SetValueType(NFValueType::Int);
 			var->fromType = NFIODataComFromType::BOTH;
 
 			inputArgs.push_back(var);
@@ -387,16 +382,13 @@ public:
 			NF_SHARE_PTR<NFIOData> var = NF_SHARE_PTR<NFIOData>(NF_NEW NFIOData());
 			var->id = this->pPluginManager->FindModule<NFIKernelModule>()->CreateGUID();
 			var->name = NFRecordRemoverOutputArg::toString(NFRecordRemoverOutputArg::NextNode);
-			var->valueType = NFValueType::Node;
+			var->SetValueType(NFValueType::Node);
 
 			outputArgs.push_back(var);
 		}
 	}
 
-	// Inherited via NFIModifier
-	virtual void PrepareInputData(const NFGUID& runTimeOnwer, const bool iteration) override;
-	virtual void UpdateOutputData(const NFGUID& runTimeOnwer, const bool iteration) override;
+	virtual void UpdateOutputData(const NFGUID& runTimeOwner) override;
 
-	// Inherited via NFIModifier
 	virtual NF_SHARE_PTR<NFIOData> FindOutputNodeIOData() override;
 };

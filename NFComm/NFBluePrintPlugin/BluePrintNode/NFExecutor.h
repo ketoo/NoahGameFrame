@@ -37,7 +37,7 @@ public:
 		this->logicBlockId = blockID;
 		this->pPluginManager = p;
 
-		executerType = NFExecuterType::CreateObject;
+		executerType = NFExecutorType::CreateObject;
 
 		Init();
 	}
@@ -47,7 +47,7 @@ public:
 		{
 			NF_SHARE_PTR<NFIOData> var = NF_SHARE_PTR<NFIOData>(NF_NEW NFIOData());
 			var->id = this->pPluginManager->FindModule<NFIKernelModule>()->CreateGUID();
-			var->name = NFExecuterCreateObjectInputArg::toString(NFExecuterCreateObjectInputArg::LastNode);
+			var->name = NFExecutorCreateObjectInputArg::toString(NFExecutorCreateObjectInputArg::PreNode);
 			var->SetValueType(NFValueType::Node);
 
 			inputArgs.push_back(var);
@@ -55,7 +55,7 @@ public:
 		{
 			NF_SHARE_PTR<NFIOData> var = NF_SHARE_PTR<NFIOData>(NF_NEW NFIOData());
 			var->id = this->pPluginManager->FindModule<NFIKernelModule>()->CreateGUID();
-			var->name = NFExecuterCreateObjectInputArg::toString(NFExecuterCreateObjectInputArg::ClassName);
+			var->name = NFExecutorCreateObjectInputArg::toString(NFExecutorCreateObjectInputArg::ClassName);
 			var->SetValueType(NFValueType::String);
 			var->fromType = NFIODataComFromType::EXTERNAL;
 
@@ -64,7 +64,7 @@ public:
 		{
 			NF_SHARE_PTR<NFIOData> var = NF_SHARE_PTR<NFIOData>(NF_NEW NFIOData());
 			var->id = this->pPluginManager->FindModule<NFIKernelModule>()->CreateGUID();
-			var->name = NFExecuterCreateObjectInputArg::toString(NFExecuterCreateObjectInputArg::ConfigID);
+			var->name = NFExecutorCreateObjectInputArg::toString(NFExecutorCreateObjectInputArg::ConfigID);
 			var->SetValueType(NFValueType::String);
 			var->fromType = NFIODataComFromType::EXTERNAL;
 
@@ -73,7 +73,7 @@ public:
 		{
 			NF_SHARE_PTR<NFIOData> var = NF_SHARE_PTR<NFIOData>(NF_NEW NFIOData());
 			var->id = this->pPluginManager->FindModule<NFIKernelModule>()->CreateGUID();
-			var->name = NFExecuterCreateObjectInputArg::toString(NFExecuterCreateObjectInputArg::SceneID);
+			var->name = NFExecutorCreateObjectInputArg::toString(NFExecutorCreateObjectInputArg::SceneID);
 			var->SetValueType(NFValueType::Int);
 			var->fromType = NFIODataComFromType::EXTERNAL;
 
@@ -82,7 +82,7 @@ public:
 		{
 			NF_SHARE_PTR<NFIOData> var = NF_SHARE_PTR<NFIOData>(NF_NEW NFIOData());
 			var->id = this->pPluginManager->FindModule<NFIKernelModule>()->CreateGUID();
-			var->name = NFExecuterCreateObjectInputArg::toString(NFExecuterCreateObjectInputArg::GroupID);
+			var->name = NFExecutorCreateObjectInputArg::toString(NFExecutorCreateObjectInputArg::GroupID);
 			var->SetValueType(NFValueType::Int);
 			var->fromType = NFIODataComFromType::EXTERNAL;
 
@@ -91,7 +91,7 @@ public:
 		{
 			NF_SHARE_PTR<NFIOData> var = NF_SHARE_PTR<NFIOData>(NF_NEW NFIOData());
 			var->id = this->pPluginManager->FindModule<NFIKernelModule>()->CreateGUID();
-			var->name = NFExecuterCreateObjectInputArg::toString(NFExecuterCreateObjectInputArg::Position);
+			var->name = NFExecutorCreateObjectInputArg::toString(NFExecutorCreateObjectInputArg::Position);
 			var->SetValueType(NFValueType::Vector3);
 			var->fromType = NFIODataComFromType::EXTERNAL;
 
@@ -104,7 +104,7 @@ public:
 		{
 			NF_SHARE_PTR<NFIOData> var = NF_SHARE_PTR<NFIOData>(NF_NEW NFIOData());
 			var->id = this->pPluginManager->FindModule<NFIKernelModule>()->CreateGUID();
-			var->name = NFExecuterCreateObjectOutputputArg::toString(NFExecuterCreateObjectOutputputArg::NextNode);
+			var->name = NFExecutorCreateObjectOutputputArg::toString(NFExecutorCreateObjectOutputputArg::NextNode);
 			var->SetValueType(NFValueType::Node);
 
 			outputArgs.push_back(var);
@@ -112,7 +112,7 @@ public:
 		{
 			NF_SHARE_PTR<NFIOData> var = NF_SHARE_PTR<NFIOData>(NF_NEW NFIOData());
 			var->id = this->pPluginManager->FindModule<NFIKernelModule>()->CreateGUID();
-			var->name = NFExecuterCreateObjectOutputputArg::toString(NFExecuterCreateObjectOutputputArg::ObjectID);
+			var->name = NFExecutorCreateObjectOutputputArg::toString(NFExecutorCreateObjectOutputputArg::ObjectID);
 			var->SetValueType(NFValueType::Object);
 
 			outputArgs.push_back(var);
@@ -138,7 +138,7 @@ public:
 		this->logicBlockId = blockID;
 		this->pPluginManager = p;
 
-		executerType = NFExecuterType::DestroyObject;
+		executerType = NFExecutorType::DestroyObject;
 
 		Init();
 
@@ -150,7 +150,7 @@ public:
 		{
 			NF_SHARE_PTR<NFIOData> var = NF_SHARE_PTR<NFIOData>(NF_NEW NFIOData());
 			var->id = this->pPluginManager->FindModule<NFIKernelModule>()->CreateGUID();
-			var->name = NFExecuterDestroyObjectInputArg::toString(NFExecuterDestroyObjectInputArg::LastNode);
+			var->name = NFExecutorDestroyObjectInputArg::toString(NFExecutorDestroyObjectInputArg::PreNode);
 			var->SetValueType(NFValueType::Node);
 
 			inputArgs.push_back(var);
@@ -158,7 +158,16 @@ public:
 		{
 			NF_SHARE_PTR<NFIOData> var = NF_SHARE_PTR<NFIOData>(NF_NEW NFIOData());
 			var->id = this->pPluginManager->FindModule<NFIKernelModule>()->CreateGUID();
-			var->name = NFExecuterDestroyObjectInputArg::toString(NFExecuterDestroyObjectInputArg::ObjectID);
+			var->name = NFExecutorDestroyObjectInputArg::toString(NFExecutorDestroyObjectInputArg::ObjectID);
+			var->SetValueType(NFValueType::Float);
+			var->fromType = NFIODataComFromType::INTERNAL;
+
+			inputArgs.push_back(var);
+		}
+		{
+			NF_SHARE_PTR<NFIOData> var = NF_SHARE_PTR<NFIOData>(NF_NEW NFIOData());
+			var->id = this->pPluginManager->FindModule<NFIKernelModule>()->CreateGUID();
+			var->name = NFExecutorDestroyObjectInputArg::toString(NFExecutorDestroyObjectInputArg::ObjectID);
 			var->SetValueType(NFValueType::Object);
 			var->fromType = NFIODataComFromType::EXTERNAL;
 
@@ -172,7 +181,7 @@ public:
 		{
 			NF_SHARE_PTR<NFIOData> var = NF_SHARE_PTR<NFIOData>(NF_NEW NFIOData());
 			var->id = this->pPluginManager->FindModule<NFIKernelModule>()->CreateGUID();
-			var->name = NFExecuterDestroyObjectOutputputArg::toString(NFExecuterDestroyObjectOutputputArg::NextNode);
+			var->name = NFExecutorDestroyObjectOutputputArg::toString(NFExecutorDestroyObjectOutputputArg::NextNode);
 			var->SetValueType(NFValueType::Node);
 
 			outputArgs.push_back(var);
@@ -197,7 +206,7 @@ public:
 		this->logicBlockId = blockID;
 		this->pPluginManager = p;
 
-		executerType = NFExecuterType::GameEvent;
+		executerType = NFExecutorType::GameEvent;
 
 		Init();
 	}
@@ -207,7 +216,7 @@ public:
 		{
 			NF_SHARE_PTR<NFIOData> var = NF_SHARE_PTR<NFIOData>(NF_NEW NFIOData());
 			var->id = this->pPluginManager->FindModule<NFIKernelModule>()->CreateGUID();
-			var->name = NFExecuterGameEventInputArg::toString(NFExecuterGameEventInputArg::LastNode);
+			var->name = NFExecutorGameEventInputArg::toString(NFExecutorGameEventInputArg::PreNode);
 			var->SetValueType(NFValueType::Node);
 
 			inputArgs.push_back(var);
@@ -215,7 +224,7 @@ public:
 		{
 			NF_SHARE_PTR<NFIOData> var = NF_SHARE_PTR<NFIOData>(NF_NEW NFIOData());
 			var->id = this->pPluginManager->FindModule<NFIKernelModule>()->CreateGUID();
-			var->name = NFExecuterGameEventInputArg::toString(NFExecuterGameEventInputArg::ObjectID);
+			var->name = NFExecutorGameEventInputArg::toString(NFExecutorGameEventInputArg::ObjectID);
 			var->SetValueType(NFValueType::Object);
 			var->fromType = NFIODataComFromType::EXTERNAL;
 
@@ -224,7 +233,7 @@ public:
 		{
 			NF_SHARE_PTR<NFIOData> var = NF_SHARE_PTR<NFIOData>(NF_NEW NFIOData());
 			var->id = this->pPluginManager->FindModule<NFIKernelModule>()->CreateGUID();
-			var->name = NFExecuterGameEventInputArg::toString(NFExecuterGameEventInputArg::EventID);
+			var->name = NFExecutorGameEventInputArg::toString(NFExecutorGameEventInputArg::EventID);
 			var->SetValueType(NFValueType::Int);
 			var->fromType = NFIODataComFromType::EXTERNAL;
 
@@ -233,7 +242,7 @@ public:
 		{
 			NF_SHARE_PTR<NFIOData> var = NF_SHARE_PTR<NFIOData>(NF_NEW NFIOData());
 			var->id = this->pPluginManager->FindModule<NFIKernelModule>()->CreateGUID();
-			var->name = NFExecuterGameEventInputArg::toString(NFExecuterGameEventInputArg::Dctionary);
+			var->name = NFExecutorGameEventInputArg::toString(NFExecutorGameEventInputArg::Dctionary);
 			var->SetValueType(NFValueType::Dictionary);
 			var->fromType = NFIODataComFromType::EXTERNAL;
 
@@ -246,7 +255,7 @@ public:
 		{
 			NF_SHARE_PTR<NFIOData> var = NF_SHARE_PTR<NFIOData>(NF_NEW NFIOData());
 			var->id = this->pPluginManager->FindModule<NFIKernelModule>()->CreateGUID();
-			var->name = NFExecuterGameEventOutputArg::toString(NFExecuterGameEventOutputArg::NextNode);
+			var->name = NFExecutorGameEventOutputArg::toString(NFExecutorGameEventOutputArg::NextNode);
 			var->SetValueType(NFValueType::Node);
 
 			outputArgs.push_back(var);
@@ -269,7 +278,7 @@ public:
 		this->logicBlockId = blockID;
 		this->pPluginManager = p;
 
-		executerType = NFExecuterType::MoveObject;
+		executerType = NFExecutorType::MoveObject;
 
 		Init();
 	}
@@ -279,7 +288,7 @@ public:
 		{
 			NF_SHARE_PTR<NFIOData> var = NF_SHARE_PTR<NFIOData>(NF_NEW NFIOData());
 			var->id = this->pPluginManager->FindModule<NFIKernelModule>()->CreateGUID();
-			var->name = NFExecuterMoveObjectInputArg::toString(NFExecuterMoveObjectInputArg::LastNode);
+			var->name = NFExecutorMoveObjectInputArg::toString(NFExecutorMoveObjectInputArg::PreNode);
 			var->SetValueType(NFValueType::Node);
 
 			inputArgs.push_back(var);
@@ -287,7 +296,7 @@ public:
 		{
 			NF_SHARE_PTR<NFIOData> var = NF_SHARE_PTR<NFIOData>(NF_NEW NFIOData());
 			var->id = this->pPluginManager->FindModule<NFIKernelModule>()->CreateGUID();
-			var->name = NFExecuterMoveObjectInputArg::toString(NFExecuterMoveObjectInputArg::ObjectID);
+			var->name = NFExecutorMoveObjectInputArg::toString(NFExecutorMoveObjectInputArg::ObjectID);
 			var->SetValueType(NFValueType::Object);
 			var->fromType = NFIODataComFromType::EXTERNAL;
 
@@ -296,7 +305,7 @@ public:
 		{
 			NF_SHARE_PTR<NFIOData> var = NF_SHARE_PTR<NFIOData>(NF_NEW NFIOData());
 			var->id = this->pPluginManager->FindModule<NFIKernelModule>()->CreateGUID();
-			var->name = NFExecuterMoveObjectInputArg::toString(NFExecuterMoveObjectInputArg::Position);
+			var->name = NFExecutorMoveObjectInputArg::toString(NFExecutorMoveObjectInputArg::Position);
 			var->SetValueType(NFValueType::Vector3);
 			var->fromType = NFIODataComFromType::EXTERNAL;
 
@@ -305,7 +314,7 @@ public:
 		{
 			NF_SHARE_PTR<NFIOData> var = NF_SHARE_PTR<NFIOData>(NF_NEW NFIOData());
 			var->id = this->pPluginManager->FindModule<NFIKernelModule>()->CreateGUID();
-			var->name = NFExecuterMoveObjectInputArg::toString(NFExecuterMoveObjectInputArg::MoveType);
+			var->name = NFExecutorMoveObjectInputArg::toString(NFExecutorMoveObjectInputArg::MoveType);
 			var->SetValueType(NFValueType::Int);
 			var->fromType = NFIODataComFromType::EXTERNAL;
 
@@ -318,7 +327,7 @@ public:
 		{
 			NF_SHARE_PTR<NFIOData> var = NF_SHARE_PTR<NFIOData>(NF_NEW NFIOData());
 			var->id = this->pPluginManager->FindModule<NFIKernelModule>()->CreateGUID();
-			var->name = NFExecuterMoveObjectOutputArg::toString(NFExecuterMoveObjectOutputArg::NextNode);
+			var->name = NFExecutorMoveObjectOutputArg::toString(NFExecutorMoveObjectOutputArg::NextNode);
 			var->SetValueType(NFValueType::Node);
 
 			outputArgs.push_back(var);
@@ -341,7 +350,7 @@ public:
 		this->logicBlockId = blockID;
 		this->pPluginManager = p;
 
-		executerType = NFExecuterType::SendMessage;
+		executerType = NFExecutorType::SendMessage;
 
 		Init();
 	}
@@ -351,7 +360,7 @@ public:
 		{
 			NF_SHARE_PTR<NFIOData> var = NF_SHARE_PTR<NFIOData>(NF_NEW NFIOData());
 			var->id = this->pPluginManager->FindModule<NFIKernelModule>()->CreateGUID();
-			var->name = NFExecuterSendMessageInputArg::toString(NFExecuterSendMessageInputArg::LastNode);
+			var->name = NFExecutorSendMessageInputArg::toString(NFExecutorSendMessageInputArg::PreNode);
 			var->SetValueType(NFValueType::Node);
 
 			inputArgs.push_back(var);
@@ -359,7 +368,7 @@ public:
 		{
 			NF_SHARE_PTR<NFIOData> var = NF_SHARE_PTR<NFIOData>(NF_NEW NFIOData());
 			var->id = this->pPluginManager->FindModule<NFIKernelModule>()->CreateGUID();
-			var->name = NFExecuterSendMessageInputArg::toString(NFExecuterSendMessageInputArg::ObjectID);
+			var->name = NFExecutorSendMessageInputArg::toString(NFExecutorSendMessageInputArg::ObjectID);
 			var->SetValueType(NFValueType::Object);
 			var->fromType = NFIODataComFromType::BOTH;
 
@@ -368,7 +377,7 @@ public:
 		{
 			NF_SHARE_PTR<NFIOData> var = NF_SHARE_PTR<NFIOData>(NF_NEW NFIOData());
 			var->id = this->pPluginManager->FindModule<NFIKernelModule>()->CreateGUID();
-			var->name = NFExecuterSendMessageInputArg::toString(NFExecuterSendMessageInputArg::MessageID);
+			var->name = NFExecutorSendMessageInputArg::toString(NFExecutorSendMessageInputArg::MessageID);
 			var->SetValueType(NFValueType::Int);
 			var->fromType = NFIODataComFromType::BOTH;
 
@@ -377,7 +386,7 @@ public:
 		{
 			NF_SHARE_PTR<NFIOData> var = NF_SHARE_PTR<NFIOData>(NF_NEW NFIOData());
 			var->id = this->pPluginManager->FindModule<NFIKernelModule>()->CreateGUID();
-			var->name = NFExecuterSendMessageInputArg::toString(NFExecuterSendMessageInputArg::Data);
+			var->name = NFExecutorSendMessageInputArg::toString(NFExecutorSendMessageInputArg::Data);
 			var->SetValueType(NFValueType::Dictionary);
 			var->fromType = NFIODataComFromType::BOTH;
 
@@ -390,7 +399,7 @@ public:
 		{
 			NF_SHARE_PTR<NFIOData> var = NF_SHARE_PTR<NFIOData>(NF_NEW NFIOData());
 			var->id = this->pPluginManager->FindModule<NFIKernelModule>()->CreateGUID();
-			var->name = NFExecuterMoveObjectOutputArg::toString(NFExecuterMoveObjectOutputArg::NextNode);
+			var->name = NFExecutorMoveObjectOutputArg::toString(NFExecutorMoveObjectOutputArg::NextNode);
 			var->SetValueType(NFValueType::Node);
 
 			outputArgs.push_back(var);
@@ -413,7 +422,7 @@ public:
 		this->logicBlockId = blockID;
 		this->pPluginManager = p;
 
-		executerType = NFExecuterType::EnterScene;
+		executerType = NFExecutorType::EnterScene;
 
 		Init();
 	}
@@ -423,7 +432,7 @@ public:
 		{
 			NF_SHARE_PTR<NFIOData> var = NF_SHARE_PTR<NFIOData>(NF_NEW NFIOData());
 			var->id = this->pPluginManager->FindModule<NFIKernelModule>()->CreateGUID();
-			var->name = NFExecuterEnterSceneInputArg::toString(NFExecuterEnterSceneInputArg::LastNode);
+			var->name = NFExecutorEnterSceneInputArg::toString(NFExecutorEnterSceneInputArg::PreNode);
 			var->SetValueType(NFValueType::Node);
 
 			inputArgs.push_back(var);
@@ -431,7 +440,7 @@ public:
 		{
 			NF_SHARE_PTR<NFIOData> var = NF_SHARE_PTR<NFIOData>(NF_NEW NFIOData());
 			var->id = this->pPluginManager->FindModule<NFIKernelModule>()->CreateGUID();
-			var->name = NFExecuterEnterSceneInputArg::toString(NFExecuterEnterSceneInputArg::ObjectID);
+			var->name = NFExecutorEnterSceneInputArg::toString(NFExecutorEnterSceneInputArg::ObjectID);
 			var->SetValueType(NFValueType::Object);
 			var->fromType = NFIODataComFromType::EXTERNAL;
 
@@ -441,7 +450,7 @@ public:
 		{
 			NF_SHARE_PTR<NFIOData> var = NF_SHARE_PTR<NFIOData>(NF_NEW NFIOData());
 			var->id = this->pPluginManager->FindModule<NFIKernelModule>()->CreateGUID();
-			var->name = NFExecuterEnterSceneInputArg::toString(NFExecuterEnterSceneInputArg::SceneID);
+			var->name = NFExecutorEnterSceneInputArg::toString(NFExecutorEnterSceneInputArg::SceneID);
 			var->SetValueType(NFValueType::Int);
 			var->fromType = NFIODataComFromType::EXTERNAL;
 
@@ -451,7 +460,7 @@ public:
 		{
 			NF_SHARE_PTR<NFIOData> var = NF_SHARE_PTR<NFIOData>(NF_NEW NFIOData());
 			var->id = this->pPluginManager->FindModule<NFIKernelModule>()->CreateGUID();
-			var->name = NFExecuterEnterSceneInputArg::toString(NFExecuterEnterSceneInputArg::GroupID);
+			var->name = NFExecutorEnterSceneInputArg::toString(NFExecutorEnterSceneInputArg::GroupID);
 			var->SetValueType(NFValueType::Int);
 			var->fromType = NFIODataComFromType::EXTERNAL;
 
@@ -460,7 +469,7 @@ public:
 		{
 			NF_SHARE_PTR<NFIOData> var = NF_SHARE_PTR<NFIOData>(NF_NEW NFIOData());
 			var->id = this->pPluginManager->FindModule<NFIKernelModule>()->CreateGUID();
-			var->name = NFExecuterEnterSceneInputArg::toString(NFExecuterEnterSceneInputArg::Position);
+			var->name = NFExecutorEnterSceneInputArg::toString(NFExecutorEnterSceneInputArg::Position);
 			var->SetValueType(NFValueType::Vector3);
 			var->fromType = NFIODataComFromType::EXTERNAL;
 
@@ -473,7 +482,7 @@ public:
 		{
 			NF_SHARE_PTR<NFIOData> var = NF_SHARE_PTR<NFIOData>(NF_NEW NFIOData());
 			var->id = this->pPluginManager->FindModule<NFIKernelModule>()->CreateGUID();
-			var->name = NFExecuterEnterSceneOutputArg::toString(NFExecuterEnterSceneOutputArg::NextNode);
+			var->name = NFExecutorEnterSceneOutputArg::toString(NFExecutorEnterSceneOutputArg::NextNode);
 			var->SetValueType(NFValueType::Node);
 
 			outputArgs.push_back(var);
@@ -497,7 +506,7 @@ public:
 		this->logicBlockId = blockID;
 		this->pPluginManager = p;
 
-		executerType = NFExecuterType::Sleep;
+		executerType = NFExecutorType::Sleep;
 
 		Init();
 	}
@@ -507,7 +516,7 @@ public:
 		{
 			NF_SHARE_PTR<NFIOData> var = NF_SHARE_PTR<NFIOData>(NF_NEW NFIOData());
 			var->id = this->pPluginManager->FindModule<NFIKernelModule>()->CreateGUID();
-			var->name = NFExecuterSleepInputArg::toString(NFExecuterSleepInputArg::LastNode);
+			var->name = NFExecutorSleepInputArg::toString(NFExecutorSleepInputArg::PreNode);
 			var->SetValueType(NFValueType::Node);
 
 			inputArgs.push_back(var);
@@ -515,7 +524,7 @@ public:
 		{
 			NF_SHARE_PTR<NFIOData> var = NF_SHARE_PTR<NFIOData>(NF_NEW NFIOData());
 			var->id = this->pPluginManager->FindModule<NFIKernelModule>()->CreateGUID();
-			var->name = NFExecuterSleepInputArg::toString(NFExecuterSleepInputArg::ObjectID);
+			var->name = NFExecutorSleepInputArg::toString(NFExecutorSleepInputArg::ObjectID);
 			var->SetValueType(NFValueType::Object);
 			var->fromType = NFIODataComFromType::EXTERNAL;
 
@@ -525,7 +534,7 @@ public:
 		{
 			NF_SHARE_PTR<NFIOData> var = NF_SHARE_PTR<NFIOData>(NF_NEW NFIOData());
 			var->id = this->pPluginManager->FindModule<NFIKernelModule>()->CreateGUID();
-			var->name = NFExecuterSleepInputArg::toString(NFExecuterSleepInputArg::SleepTime);
+			var->name = NFExecutorSleepInputArg::toString(NFExecutorSleepInputArg::SleepTime);
 			var->SetValueType(NFValueType::Float);
 			var->fromType = NFIODataComFromType::BOTH;
 
@@ -538,7 +547,7 @@ public:
 		{
 			NF_SHARE_PTR<NFIOData> var = NF_SHARE_PTR<NFIOData>(NF_NEW NFIOData());
 			var->id = this->pPluginManager->FindModule<NFIKernelModule>()->CreateGUID();
-			var->name = NFExecuterSleepOutputArg::toString(NFExecuterSleepOutputArg::NextNode);
+			var->name = NFExecutorSleepOutputArg::toString(NFExecutorSleepOutputArg::NextNode);
 			var->SetValueType(NFValueType::Node);
 
 			outputArgs.push_back(var);
@@ -546,7 +555,7 @@ public:
 		{
 			NF_SHARE_PTR<NFIOData> var = NF_SHARE_PTR<NFIOData>(NF_NEW NFIOData());
 			var->id = this->pPluginManager->FindModule<NFIKernelModule>()->CreateGUID();
-			var->name = NFExecuterSleepOutputArg::toString(NFExecuterSleepOutputArg::ObjectID);
+			var->name = NFExecutorSleepOutputArg::toString(NFExecutorSleepOutputArg::ObjectID);
 			var->SetValueType(NFValueType::Object);
 
 			outputArgs.push_back(var);
@@ -570,7 +579,7 @@ public:
 		this->logicBlockId = blockID;
 		this->pPluginManager = p;
 
-		executerType = NFExecuterType::AddHeartBeat;
+		executerType = NFExecutorType::AddHeartBeat;
 
 		Init();
 	}
@@ -580,7 +589,7 @@ public:
 		{
 			NF_SHARE_PTR<NFIOData> var = NF_SHARE_PTR<NFIOData>(NF_NEW NFIOData());
 			var->id = this->pPluginManager->FindModule<NFIKernelModule>()->CreateGUID();
-			var->name = NFExecuterAddHeartBeatInputArg::toString(NFExecuterAddHeartBeatInputArg::LastNode);
+			var->name = NFExecutorAddHeartBeatInputArg::toString(NFExecutorAddHeartBeatInputArg::PreNode);
 			var->SetValueType(NFValueType::Node);
 
 			inputArgs.push_back(var);
@@ -588,7 +597,7 @@ public:
 		{
 			NF_SHARE_PTR<NFIOData> var = NF_SHARE_PTR<NFIOData>(NF_NEW NFIOData());
 			var->id = this->pPluginManager->FindModule<NFIKernelModule>()->CreateGUID();
-			var->name = NFExecuterAddHeartBeatInputArg::toString(NFExecuterAddHeartBeatInputArg::ObjectID);
+			var->name = NFExecutorAddHeartBeatInputArg::toString(NFExecutorAddHeartBeatInputArg::ObjectID);
 			var->SetValueType(NFValueType::Object);
 			var->fromType = NFIODataComFromType::EXTERNAL;
 
@@ -598,7 +607,7 @@ public:
 		{
 			NF_SHARE_PTR<NFIOData> var = NF_SHARE_PTR<NFIOData>(NF_NEW NFIOData());
 			var->id = this->pPluginManager->FindModule<NFIKernelModule>()->CreateGUID();
-			var->name = NFExecuterAddHeartBeatInputArg::toString(NFExecuterAddHeartBeatInputArg::BeatName);
+			var->name = NFExecutorAddHeartBeatInputArg::toString(NFExecutorAddHeartBeatInputArg::BeatName);
 			var->SetValueType(NFValueType::String);
 			var->fromType = NFIODataComFromType::INTERNAL;
 
@@ -608,7 +617,7 @@ public:
 		{
 			NF_SHARE_PTR<NFIOData> var = NF_SHARE_PTR<NFIOData>(NF_NEW NFIOData());
 			var->id = this->pPluginManager->FindModule<NFIKernelModule>()->CreateGUID();
-			var->name = NFExecuterAddHeartBeatInputArg::toString(NFExecuterAddHeartBeatInputArg::BeatTime);
+			var->name = NFExecutorAddHeartBeatInputArg::toString(NFExecutorAddHeartBeatInputArg::BeatTime);
 			var->SetValueType(NFValueType::Int);
 			var->fromType = NFIODataComFromType::INTERNAL;
 
@@ -617,7 +626,7 @@ public:
 		{
 			NF_SHARE_PTR<NFIOData> var = NF_SHARE_PTR<NFIOData>(NF_NEW NFIOData());
 			var->id = this->pPluginManager->FindModule<NFIKernelModule>()->CreateGUID();
-			var->name = NFExecuterAddHeartBeatInputArg::toString(NFExecuterAddHeartBeatInputArg::BeatCount);
+			var->name = NFExecutorAddHeartBeatInputArg::toString(NFExecutorAddHeartBeatInputArg::BeatCount);
 			var->SetValueType(NFValueType::Int);
 			var->fromType = NFIODataComFromType::INTERNAL;
 
@@ -630,7 +639,7 @@ public:
 		{
 			NF_SHARE_PTR<NFIOData> var = NF_SHARE_PTR<NFIOData>(NF_NEW NFIOData());
 			var->id = this->pPluginManager->FindModule<NFIKernelModule>()->CreateGUID();
-			var->name = NFExecuterAddHeartBeatOutputArg::toString(NFExecuterAddHeartBeatOutputArg::NextNode);
+			var->name = NFExecutorAddHeartBeatOutputArg::toString(NFExecutorAddHeartBeatOutputArg::NextNode);
 			var->SetValueType(NFValueType::Node);
 
 			outputArgs.push_back(var);
@@ -655,7 +664,7 @@ public:
 		this->logicBlockId = blockID;
 		this->pPluginManager = p;
 
-		executerType = NFExecuterType::AttackObject;
+		executerType = NFExecutorType::AttackObject;
 
 		Init();
 	}

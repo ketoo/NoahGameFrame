@@ -25,20 +25,12 @@
 
 #include "NFModifier.h"
 
-void NFPropertyModifier::PrepareInputData(const NFGUID& runTimeOnwer, const bool iteration)
-{
-}
-
 NF_SHARE_PTR<NFIOData> NFPropertyModifier::FindOutputNodeIOData()
 {
 	return NF_SHARE_PTR<NFIOData>();
 }
 
-void NFRecordModifier::PrepareInputData(const NFGUID& runTimeOnwer, const bool iteration)
-{
-}
-
-void NFRecordModifier::UpdateOutputData(const NFGUID& runTimeOnwer, const bool iteration)
+void NFRecordModifier::UpdateOutputData(const NFGUID& runTimeOwner)
 {
 }
 
@@ -47,19 +39,11 @@ NF_SHARE_PTR<NFIOData> NFRecordModifier::FindOutputNodeIOData()
 	return NF_SHARE_PTR<NFIOData>();
 }
 
-void NFRecordAdder::PrepareInputData(const NFGUID& runTimeOnwer, const bool iteration)
+void NFRecordAdder::UpdateOutputData(const NFGUID& runTimeOwner)
 {
 }
 
-void NFRecordAdder::UpdateOutputData(const NFGUID& runTimeOnwer, const bool iteration)
-{
-}
-
-void NFRecordRemover::PrepareInputData(const NFGUID& runTimeOnwer, const bool iteration)
-{
-}
-
-void NFRecordRemover::UpdateOutputData(const NFGUID& runTimeOnwer, const bool iteration)
+void NFRecordRemover::UpdateOutputData(const NFGUID& runTimeOwner)
 {
 }
 

@@ -26,12 +26,7 @@
 #include "NFMonitor.h"
 #include "NFComm/NFMessageDefine/NFProtocolDefine.hpp"
 
-void NFGameEventMonitor::PrepareInputData(const NFGUID& runTimeOnwer, const bool iteration)
-{
-	PrepareInputParameterData(GetInputArg(NFGameEventMonitorInputArg::EventID), runTimeOnwer);
-}
-
-void NFGameEventMonitor::UpdateOutputData(const NFGUID& runTimeOnwer, const bool iteration)
+void NFGameEventMonitor::UpdateOutputData(const NFGUID& runTimeOwner)
 {
 	NF_SHARE_PTR<NFIOData> inputEventID = GetInputArg(NFGameEventMonitorInputArg::EventID);
 	//NF_SHARE_PTR<NFIOData> inputEventParameter = GetInputArg(NFGameEventMonitorInputArg::Dictionary);
@@ -41,8 +36,8 @@ void NFGameEventMonitor::UpdateOutputData(const NFGUID& runTimeOnwer, const bool
 	NF_SHARE_PTR<NFIOData> outputObject = GetOutputArg(NFGameEventMonitorOutputArg::ObjectID);
 	//NF_SHARE_PTR<NFIOData> outputDictionary = GetOutputArg(NFGameEventMonitorOutputArg::Dictionary);
 
-	outputEventID->varData.SetInt(inputEventID->varData.GetInt());
-	outputObject->varData.SetObject(runTimeOnwer);
+	outputEventID->SetInt(inputEventID->GetInt());
+	outputObject->SetObject(runTimeOwner);
 	//outputDictionary->dictionaryData = inputEventParameter->dictionaryData;
 
 }
@@ -52,12 +47,7 @@ NF_SHARE_PTR<NFIOData> NFGameEventMonitor::FindOutputNodeIOData()
 	return GetOutputArg(NFGameEventMonitorOutputArg::NextNode);
 }
 
-void NFNetworkEventMonitor::PrepareInputData(const NFGUID& runTimeOnwer, const bool iteration)
-{
-	PrepareInputParameterData(GetInputArg(NFNetworkEventMonitorInputArg::EventID), runTimeOnwer);
-}
-
-void NFNetworkEventMonitor::UpdateOutputData(const NFGUID& runTimeOnwer, const bool iteration)
+void NFNetworkEventMonitor::UpdateOutputData(const NFGUID& runTimeOwner)
 {
 	NF_SHARE_PTR<NFIOData> inputEventID = GetInputArg(NFNetworkEventMonitorInputArg::EventID);
 
@@ -65,8 +55,8 @@ void NFNetworkEventMonitor::UpdateOutputData(const NFGUID& runTimeOnwer, const b
 	NF_SHARE_PTR<NFIOData> outputObjectID = GetOutputArg(NFNetworkEventMonitorOutputArg::ObjectID);
 	NF_SHARE_PTR<NFIOData> outputEventID = GetOutputArg(NFNetworkEventMonitorOutputArg::EventID);
 
-	outputEventID->varData.SetInt(inputEventID->varData.GetInt());
-	outputObjectID->varData.SetObject(runTimeOnwer);
+	outputEventID->SetInt(inputEventID->GetInt());
+	outputObjectID->SetObject(runTimeOwner);
 }
 
 NF_SHARE_PTR<NFIOData> NFNetworkEventMonitor::FindOutputNodeIOData()
@@ -74,12 +64,7 @@ NF_SHARE_PTR<NFIOData> NFNetworkEventMonitor::FindOutputNodeIOData()
 	return GetOutputArg(NFNetworkEventMonitorOutputArg::NextNode);
 }
 
-void NFNetworkMsgEventMonitor::PrepareInputData(const NFGUID& runTimeOnwer, const bool iteration)
-{
-	PrepareInputParameterData(GetInputArg(NFNetworkMsgMonitorInputArg::NetMsgID), runTimeOnwer);
-}
-
-void NFNetworkMsgEventMonitor::UpdateOutputData(const NFGUID& runTimeOnwer, const bool iteration)
+void NFNetworkMsgEventMonitor::UpdateOutputData(const NFGUID& runTimeOwner)
 {
 	NF_SHARE_PTR<NFIOData> inputMsgID = GetInputArg(NFNetworkMsgMonitorInputArg::NetMsgID);
 
@@ -88,8 +73,8 @@ void NFNetworkMsgEventMonitor::UpdateOutputData(const NFGUID& runTimeOnwer, cons
 	NF_SHARE_PTR<NFIOData> outputMsgID = GetOutputArg(NFNetworkkMsgMonitorOutputArg::NetMsgID);
 	NF_SHARE_PTR<NFIOData> outputDictionary = GetOutputArg(NFNetworkkMsgMonitorOutputArg::Dictionary);
 
-	outputObjectID->varData.SetObject(runTimeOnwer);
-	outputMsgID->varData.SetInt(inputMsgID->varData.GetInt());
+	outputObjectID->SetObject(runTimeOwner);
+	outputMsgID->SetInt(inputMsgID->GetInt());
 	//fake data now
 	//outputDictionary->dictionaryData = std::map<>;
 }
@@ -99,13 +84,7 @@ NF_SHARE_PTR<NFIOData> NFNetworkMsgEventMonitor::FindOutputNodeIOData()
 	return GetOutputArg(NFNetworkkMsgMonitorOutputArg::NextNode);
 }
 
-void NFObjectEventMonitor::PrepareInputData(const NFGUID& runTimeOnwer, const bool iteration)
-{
-	PrepareInputParameterData(GetInputArg(NFMonitorObjectEventInputArg::ClassName), runTimeOnwer);
-	PrepareInputParameterData(GetInputArg(NFMonitorObjectEventInputArg::ClassEvent), runTimeOnwer);
-}
-
-void NFObjectEventMonitor::UpdateOutputData(const NFGUID& runTimeOnwer, const bool iteration)
+void NFObjectEventMonitor::UpdateOutputData(const NFGUID& runTimeOwner)
 {
 	NF_SHARE_PTR<NFIOData> outputNextNode = GetOutputArg(NFMonitorObjectEventOutputArg::NextNode);
 
@@ -116,18 +95,18 @@ void NFObjectEventMonitor::UpdateOutputData(const NFGUID& runTimeOnwer, const bo
 	NF_SHARE_PTR<NFIOData> outputGroupID = GetOutputArg(NFMonitorObjectEventOutputArg::GroupID);
 	NF_SHARE_PTR<NFIOData> outputPosition = GetOutputArg(NFMonitorObjectEventOutputArg::Position);
 
-	const std::string& className = m_pKernelModule->GetPropertyString(runTimeOnwer, NFrame::IObject::ClassName());
-	const std::string& configID = m_pKernelModule->GetPropertyString(runTimeOnwer, NFrame::IObject::ConfigID());
-	const int sceneID = m_pKernelModule->GetPropertyInt(runTimeOnwer, NFrame::IObject::SceneID());
-	const int groupID = m_pKernelModule->GetPropertyInt(runTimeOnwer, NFrame::IObject::GroupID());
-	const NFVector3& position = m_pKernelModule->GetPropertyVector3(runTimeOnwer, NFrame::IObject::Position());
+	const std::string& className = m_pKernelModule->GetPropertyString(runTimeOwner, NFrame::IObject::ClassName());
+	const std::string& configID = m_pKernelModule->GetPropertyString(runTimeOwner, NFrame::IObject::ConfigID());
+	const int sceneID = m_pKernelModule->GetPropertyInt(runTimeOwner, NFrame::IObject::SceneID());
+	const int groupID = m_pKernelModule->GetPropertyInt(runTimeOwner, NFrame::IObject::GroupID());
+	const NFVector3& position = m_pKernelModule->GetPropertyVector3(runTimeOwner, NFrame::IObject::Position());
 
-	outputObjectID->varData.SetObject(runTimeOnwer);
-	outputClassName->varData.SetString(className);
-	outputConfigID->varData.SetString(configID);
-	outputSceneID->varData.SetInt(sceneID);
-	outputGroupID->varData.SetInt(groupID);
-	outputPosition->varData.SetVector3(position);
+	outputObjectID->SetObject(runTimeOwner);
+	outputClassName->SetString(className);
+	outputConfigID->SetString(configID);
+	outputSceneID->SetInt(sceneID);
+	outputGroupID->SetInt(groupID);
+	outputPosition->SetVector3(position);
 }
 
 NF_SHARE_PTR<NFIOData> NFObjectEventMonitor::FindOutputNodeIOData()
@@ -135,13 +114,7 @@ NF_SHARE_PTR<NFIOData> NFObjectEventMonitor::FindOutputNodeIOData()
 	return GetOutputArg(NFMonitorObjectEventOutputArg::NextNode);
 }
 
-void NFPropertyEventMonitor::PrepareInputData(const NFGUID& runTimeOnwer, const bool iteration)
-{
-	PrepareInputParameterData(GetInputArg(NFMonitorPropertyEventInputArg::ClassName), runTimeOnwer);
-	PrepareInputParameterData(GetInputArg(NFMonitorPropertyEventInputArg::PropName), runTimeOnwer);
-}
-
-void NFPropertyEventMonitor::UpdateOutputData(const NFGUID& runTimeOnwer, const bool iteration)
+void NFPropertyEventMonitor::UpdateOutputData(const NFGUID& runTimeOwner)
 {
 	NF_SHARE_PTR<NFIOData> className = GetInputArg(NFMonitorPropertyEventInputArg::ClassName);
 	NF_SHARE_PTR<NFIOData> propertyName = GetInputArg(NFMonitorPropertyEventInputArg::PropName);
@@ -149,8 +122,8 @@ void NFPropertyEventMonitor::UpdateOutputData(const NFGUID& runTimeOnwer, const 
 	NF_SHARE_PTR<NFIOData> outputSelf = GetOutputArg(NFMonitorPropertyEventOutputArg::ObjectID);
 	NF_SHARE_PTR<NFIOData> outputPropertyName = GetOutputArg(NFMonitorPropertyEventOutputArg::PropName);
 
-	outputSelf->varData.SetObject(runTimeOnwer);
-	outputPropertyName->varData = propertyName->varData;
+	outputSelf->SetObject(runTimeOwner);
+	outputPropertyName->SetData(propertyName->GetData());
 }
 
 NF_SHARE_PTR<NFIOData> NFPropertyEventMonitor::FindOutputNodeIOData()
@@ -158,14 +131,7 @@ NF_SHARE_PTR<NFIOData> NFPropertyEventMonitor::FindOutputNodeIOData()
 	return GetOutputArg(NFMonitorPropertyEventOutputArg::NextNode);
 }
 
-void NFRecordEventMonitor::PrepareInputData(const NFGUID& runTimeOnwer, const bool iteration)
-{
-	PrepareInputParameterData(GetInputArg(NFMonitorRecordEventInputArg::ClassName), runTimeOnwer);
-	PrepareInputParameterData(GetInputArg(NFMonitorRecordEventInputArg::RecordName), runTimeOnwer);
-	PrepareInputParameterData(GetInputArg(NFMonitorRecordEventInputArg::OperateType), runTimeOnwer);
-}
-
-void NFRecordEventMonitor::UpdateOutputData(const NFGUID& runTimeOnwer, const bool iteration)
+void NFRecordEventMonitor::UpdateOutputData(const NFGUID& runTimeOwner)
 {
 	/*
 	get the parameteres from VM (row and col)
@@ -185,14 +151,7 @@ NF_SHARE_PTR<NFIOData> NFRecordEventMonitor::FindOutputNodeIOData()
 	return GetOutputArg(NFMonitorRecordEventOutArg::NextNode);
 }
 
-void NFSceneEventMonitor::PrepareInputData(const NFGUID& runTimeOnwer, const bool iteration)
-{
-	PrepareInputParameterData(GetInputArg(NFMonitorSceneEventInputArg::ClassName), runTimeOnwer);
-	PrepareInputParameterData(GetInputArg(NFMonitorSceneEventInputArg::SceneID), runTimeOnwer);
-	PrepareInputParameterData(GetInputArg(NFMonitorSceneEventInputArg::OperateType), runTimeOnwer);
-}
-
-void NFSceneEventMonitor::UpdateOutputData(const NFGUID& runTimeOnwer, const bool iteration)
+void NFSceneEventMonitor::UpdateOutputData(const NFGUID& runTimeOwner)
 {
 	NF_SHARE_PTR<NFIOData> intputClassName = GetOutputArg(NFMonitorSceneEventInputArg::ClassName);
 	NF_SHARE_PTR<NFIOData> intputSceneID = GetOutputArg(NFMonitorSceneEventInputArg::SceneID);
@@ -203,10 +162,10 @@ void NFSceneEventMonitor::UpdateOutputData(const NFGUID& runTimeOnwer, const boo
 	NF_SHARE_PTR<NFIOData> outputGroupID = GetOutputArg(NFMonitorSceneEventOutArg::GroupID);
 	NF_SHARE_PTR<NFIOData> outputObjectID = GetOutputArg(NFMonitorSceneEventOutArg::ObjectID);
 
-	outputClassName->varData.SetString(intputClassName->varData.GetString());
-	outputSceneID->varData.SetInt(intputSceneID->varData.GetInt());
-	outputGroupID->varData.SetInt(m_pKernelModule->GetPropertyInt(runTimeOnwer, NFrame::IObject::GroupID()));
-	outputObjectID->varData.SetObject(runTimeOnwer);
+	outputClassName->SetString(intputClassName->GetString());
+	outputSceneID->SetInt(intputSceneID->GetInt());
+	outputGroupID->SetInt(m_pKernelModule->GetPropertyInt(runTimeOwner, NFrame::IObject::GroupID()));
+	outputObjectID->SetObject(runTimeOwner);
 }
 
 NF_SHARE_PTR<NFIOData> NFSceneEventMonitor::FindOutputNodeIOData()
