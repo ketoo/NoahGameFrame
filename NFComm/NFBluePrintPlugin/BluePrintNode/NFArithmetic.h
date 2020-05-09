@@ -115,8 +115,6 @@ public:
 	}
 
 	virtual void UpdateOutputData(const NFGUID& runTimeOwner) override;
-	virtual void PrepareInputData(const NFGUID& runTimeOwner) override;
 
-	// Inherited via NFIArithmetic
 	virtual NF_SHARE_PTR<NFIOData> FindOutputNodeIOData() override;
 };

@@ -25,50 +25,26 @@
 
 #include "NFBranch.h"
 
-void NFIntBranch::PrepareInputData(const NFGUID& runTimeOnwer, const bool iteration)
+void NFIntBranch::UpdateOutputData(const NFGUID& runTimeOwner)
 {
 }
 
-void NFIntBranch::UpdateOutputData(const NFGUID& runTimeOnwer, const bool iteration)
+void NFStringBranch::UpdateOutputData(const NFGUID& runTimeOwner)
 {
 }
 
-void NFStringBranch::PrepareInputData(const NFGUID& runTimeOnwer, const bool iteration)
+void NFFloatBranch::UpdateOutputData(const NFGUID& runTimeOwner)
 {
 }
 
-void NFStringBranch::UpdateOutputData(const NFGUID& runTimeOnwer, const bool iteration)
+void NFObjectBranch::UpdateOutputData(const NFGUID& runTimeOwner)
 {
 }
 
-void NFFloatBranch::PrepareInputData(const NFGUID& runTimeOnwer, const bool iteration)
+void NFVector2Branch::UpdateOutputData(const NFGUID& runTimeOwner)
 {
 }
 
-void NFFloatBranch::UpdateOutputData(const NFGUID& runTimeOnwer, const bool iteration)
-{
-}
-
-void NFObjectBranch::PrepareInputData(const NFGUID& runTimeOnwer, const bool iteration)
-{
-}
-
-void NFObjectBranch::UpdateOutputData(const NFGUID& runTimeOnwer, const bool iteration)
-{
-}
-
-void NFVector2Branch::PrepareInputData(const NFGUID& runTimeOnwer, const bool iteration)
-{
-}
-
-void NFVector2Branch::UpdateOutputData(const NFGUID& runTimeOnwer, const bool iteration)
-{
-}
-
-void NFVector3Branch::PrepareInputData(const NFGUID& runTimeOnwer, const bool iteration)
-{
-}
-
-void NFVector3Branch::UpdateOutputData(const NFGUID& runTimeOnwer, const bool iteration)
+void NFVector3Branch::UpdateOutputData(const NFGUID& runTimeOwner)
 {
 }

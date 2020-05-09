@@ -25,20 +25,9 @@
 
 #include "NFDebugger.h"
 
-void NFDebugger::PrepareInputData(const NFGUID& runTimeOnwer, const bool iteration)
+void NFDebugger::UpdateOutputData(const NFGUID& runTimeOwner)
 {
-    PrepareInputParameterData(GetInputArg(NFDebuggerInputArg::LogFloat), runTimeOnwer);
-    PrepareInputParameterData(GetInputArg(NFDebuggerInputArg::LogInt), runTimeOnwer);
-    PrepareInputParameterData(GetInputArg(NFDebuggerInputArg::LogString), runTimeOnwer);
-    PrepareInputParameterData(GetInputArg(NFDebuggerInputArg::LogObject), runTimeOnwer);
-    PrepareInputParameterData(GetInputArg(NFDebuggerInputArg::LogVector2), runTimeOnwer);
-    PrepareInputParameterData(GetInputArg(NFDebuggerInputArg::LogVector3), runTimeOnwer);
-    PrepareInputParameterData(GetInputArg(NFDebuggerInputArg::LogDictionary), runTimeOnwer);
-}
-
-void NFDebugger::UpdateOutputData(const NFGUID& runTimeOnwer, const bool iteration)
-{
-    if (!runTimeOnwer.IsNull())
+    if (!runTimeOwner.IsNull())
     {
         auto lvl = GetInputArg(NFDebuggerInputArg::LogLevel);
         auto data = GetInputArg(NFDebuggerInputArg::LogData);
@@ -53,14 +42,14 @@ void NFDebugger::UpdateOutputData(const NFGUID& runTimeOnwer, const bool iterati
 
         std::ostringstream os;
 
-        os << data->varData.GetString();
+        os << data->GetString();
 
-        os << " float:" << dataFloat->varData.ToString();
-        os << " int:" << dataInt->varData.ToString();
-        os << " string:" << dataString->varData.ToString();
-        os << " object:" << dataObject->varData.ToString();
-        os << " vector2:" << dataVector2->varData.ToString();
-        os << " vector3:" << dataVector3->varData.ToString();
+        os << " float:" << dataFloat->ToString();
+        os << " int:" << dataInt->ToString();
+        os << " string:" << dataString->ToString();
+        os << " object:" << dataObject->ToString();
+        os << " vector2:" << dataVector2->ToString();
+        os << " vector3:" << dataVector3->ToString();
         os << " dictionary:";
 
         for (auto it : dataDictionary->dictionaryData)
@@ -68,19 +57,19 @@ void NFDebugger::UpdateOutputData(const NFGUID& runTimeOnwer, const bool iterati
             os << it.first << ":" << it.second.ToString();
         }
 
-        switch (lvl->varData.GetInt())
+        switch (lvl->GetInt())
         {
             case NFILogModule::NF_LOG_LEVEL::NLL_DEBUG_NORMAL:
-                m_pLogModule->LogDebug(runTimeOnwer, os);
+                m_pLogModule->LogDebug(runTimeOwner, os);
                 break;
             case NFILogModule::NF_LOG_LEVEL::NLL_INFO_NORMAL:
-                m_pLogModule->LogInfo(runTimeOnwer, os);
+                m_pLogModule->LogInfo(runTimeOwner, os);
                 break;
             case NFILogModule::NF_LOG_LEVEL::NLL_WARING_NORMAL:
-                m_pLogModule->LogWarning(runTimeOnwer, os);
+                m_pLogModule->LogWarning(runTimeOwner, os);
                 break;
             case NFILogModule::NF_LOG_LEVEL::NLL_ERROR_NORMAL:
-                m_pLogModule->LogError(runTimeOnwer, os);
+                m_pLogModule->LogError(runTimeOwner, os);
                 break;
         default:
             break;

@@ -25,12 +25,6 @@
 
 #include "NFArithmetic.h"
 
-void NFArithmetic::PrepareInputData(const NFGUID& runTimeOwner)
-{
-    PrepareInputParameterData(GetInputArg(NFArithmeticInputArg::LeftInput), runTimeOwner);
-    PrepareInputParameterData(GetInputArg(NFArithmeticInputArg::RightInput), runTimeOwner);
-}
-
 NF_SHARE_PTR<NFIOData> NFArithmetic::FindOutputNodeIOData()
 {
     return GetOutputArg(NFArithmeticOutputArg::NextNode);
