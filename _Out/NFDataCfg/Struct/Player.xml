@@ -58,5 +58,6 @@
 	</Records>
 	<Includes>
 		<Include Id="NFDataCfg/Struct/Comm/EffectData.xml" />
+		<Include Id="NFDataCfg/Struct/Comm/CooldownRecord.xml" />
 	</Includes>
 </XML>

@@ -158,8 +158,9 @@ void NFLoginNet_ServerModule::OnLoginProcess(const NFSOCK nSockIndex, const int 
 	{
 		if (pNetObject->GetConnectKeyState() == 0)
 		{
-			int nState = 0;//successful
-			if (0 != nState)
+			//Normally, you could check the account and password is correct or not, but for our situation, it will correct by default as here is the tutorial code.
+			int loginResult = 0;//0 means successful, else means error code from account platform.
+			if (0 != loginResult)
 			{
 				std::ostringstream strLog;
 				strLog << "Check password failed, Account = " << xMsg.account() << " Password = " << xMsg.password();
@@ -178,9 +179,10 @@ void NFLoginNet_ServerModule::OnLoginProcess(const NFSOCK nSockIndex, const int 
 			NFMsg::AckEventResult xData;
 			xData.set_event_code(NFMsg::ACCOUNT_SUCCESS);
 
+			//The login server responds the login result to the player by sock id.
 			m_pNetModule->SendMsgPB(NFMsg::EGameMsgID::ACK_LOGIN, xData, nSockIndex);
 
-			m_pLogModule->LogInfo(NFGUID(0, nSockIndex), "Login successed :", xMsg.account().c_str());
+			m_pLogModule->LogInfo(NFGUID(0, nSockIndex), "Login succeeded :", xMsg.account().c_str());
 		}
 	}
 }

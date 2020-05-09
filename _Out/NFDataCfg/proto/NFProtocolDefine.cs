@@ -11,6 +11,37 @@ using System.Text;
 using System.Threading;
 namespace NFrame
 {
+	public class CooldownRecord
+	{
+		//Class name
+		public static readonly String ThisName = "CooldownRecord";
+		// IObject
+		public static readonly String CampID = "CampID";// object
+		public static readonly String ClassName = "ClassName";// string
+		public static readonly String ConfigID = "ConfigID";// string
+		public static readonly String Connection = "Connection";// int
+		public static readonly String Disable = "Disable";// int
+		public static readonly String GMMoveTo = "GMMoveTo";// vector3
+		public static readonly String GroupID = "GroupID";// int
+		public static readonly String ID = "ID";// string
+		public static readonly String MasterID = "MasterID";// object
+		public static readonly String MoveTo = "MoveTo";// vector3
+		public static readonly String Name = "Name";// string
+		public static readonly String Position = "Position";// vector3
+		public static readonly String SceneID = "SceneID";// int
+		public static readonly String State = "State";// int
+		// Property
+		// Record
+		public class Cooldown
+		{
+			//Class name
+			public static readonly String ThisName = "Cooldown";
+			public const int ConfigID = 0;//string
+			public const int Time = 1;//int
+
+		}
+
+	}
 	public class EffectData
 	{
 		//Class name
@@ -288,7 +319,7 @@ namespace NFrame
 		public static readonly String SceneID = "SceneID";// int
 		public static readonly String State = "State";// int
 		// Property
-		public static readonly String Climb = "Climb";// int
+		public static readonly String CommonCD = "CommonCD";// float
 		public static readonly String DescID = "DescID";// string
 		public static readonly String DropPackList = "DropPackList";// string
 		public static readonly String DropProbability = "DropProbability";// int
@@ -348,6 +379,7 @@ namespace NFrame
 		public static readonly String SKILL_GATE = "SKILL_GATE";// int
 		public static readonly String SPREGEN = "SPREGEN";// int
 		public static readonly String SUCKBLOOD = "SUCKBLOOD";// int
+		// Include Property, come from CooldownRecord 
 		// Record
 		public class CommValue
 		{
@@ -385,6 +417,14 @@ namespace NFrame
 			public const int MAGIC_GATE = 29;//int
 			public const int BUFF_GATE = 30;//int
 			public const int LUCK = 31;//int
+
+		}
+		public class Cooldown
+		{
+			//Class name
+			public static readonly String ThisName = "Cooldown";
+			public const int ConfigID = 0;//string
+			public const int Time = 1;//int
 
 		}
 
@@ -494,6 +534,7 @@ namespace NFrame
 		public static readonly String SKILL_GATE = "SKILL_GATE";// int
 		public static readonly String SPREGEN = "SPREGEN";// int
 		public static readonly String SUCKBLOOD = "SUCKBLOOD";// int
+		// Include Property, come from CooldownRecord 
 		// Record
 		public class EquipmentList
 		{
@@ -574,6 +615,14 @@ namespace NFrame
 			public const int MAGIC_GATE = 29;//int
 			public const int BUFF_GATE = 30;//int
 			public const int LUCK = 31;//int
+
+		}
+		public class Cooldown
+		{
+			//Class name
+			public static readonly String ThisName = "Cooldown";
+			public const int ConfigID = 0;//string
+			public const int Time = 1;//int
 
 		}
 
@@ -697,23 +746,17 @@ namespace NFrame
 		public static readonly String ConsumeType = "ConsumeType";// int
 		public static readonly String ConsumeValue = "ConsumeValue";// string
 		public static readonly String CoolDownTime = "CoolDownTime";// float
-		public static readonly String DamageCount = "DamageCount";// int
-		public static readonly String DamageDistance = "DamageDistance";// float
-		public static readonly String DamageIntervalTime = "DamageIntervalTime";// float
 		public static readonly String DamageProperty = "DamageProperty";// string
-		public static readonly String DamageType = "DamageType";// int
 		public static readonly String DamageValue = "DamageValue";// int
 		public static readonly String DefaultHitTime = "DefaultHitTime";// string
 		public static readonly String Desc = "Desc";// string
 		public static readonly String EffectObjType = "EffectObjType";// int
 		public static readonly String GetBuffList = "GetBuffList";// string
 		public static readonly String Icon = "Icon";// string
-		public static readonly String Melee = "Melee";// int
 		public static readonly String NewObject = "NewObject";// string
-		public static readonly String NextID = "NextID";// string
-		public static readonly String PlayerSkill = "PlayerSkill";// int
 		public static readonly String SendBuffList = "SendBuffList";// string
 		public static readonly String ShowName = "ShowName";// string
+		public static readonly String SkillSubType = "SkillSubType";// int
 		public static readonly String SkillType = "SkillType";// int
 		public static readonly String SpriteFile = "SpriteFile";// string
 		// Record

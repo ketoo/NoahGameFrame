@@ -98,7 +98,7 @@
     <ClCompile Include="BluePrintNode\NFArithmetic.cpp" />
     <ClCompile Include="BluePrintNode\NFBranch.cpp" />
     <ClCompile Include="BluePrintNode\NFDebugger.cpp" />
-    <ClCompile Include="BluePrintNode\NFExecuter.cpp" />
+    <ClCompile Include="BluePrintNode\NFExecutor.cpp" />
     <ClCompile Include="BluePrintNode\NFModifier.cpp" />
     <ClCompile Include="BluePrintNode\NFMonitor.cpp" />
     <ClCompile Include="BluePrintNode\NFVariable.cpp" />
@@ -120,7 +120,7 @@
     <ClInclude Include="BluePrintNode\NFArithmetic.h" />
     <ClInclude Include="BluePrintNode\NFBranch.h" />
     <ClInclude Include="BluePrintNode\NFDebugger.h" />
-    <ClInclude Include="BluePrintNode\NFExecuter.h" />
+    <ClInclude Include="BluePrintNode\NFExecutor.h" />
     <ClInclude Include="BluePrintNode\NFModifier.h" />
     <ClInclude Include="BluePrintNode\NFMonitor.h" />
     <ClInclude Include="BluePrintNode\NFVariable.h" />

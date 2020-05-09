@@ -49,7 +49,7 @@ public:
 		{
 			NF_SHARE_PTR<NFIOData> var = NF_SHARE_PTR<NFIOData>(NF_NEW NFIOData());
 			var->id = this->pPluginManager->FindModule<NFIKernelModule>()->CreateGUID();
-			var->name = NFBranchInputArg::toString(NFBranchInputArg::LastNode);
+			var->name = NFBranchInputArg::toString(NFBranchInputArg::PreNode);
 			var->SetValueType(NFValueType::Node);
 
 			inputArgs.push_back(var);
@@ -133,7 +133,7 @@ public:
 		{
 			NF_SHARE_PTR<NFIOData> var = NF_SHARE_PTR<NFIOData>(NF_NEW NFIOData());
 			var->id = this->pPluginManager->FindModule<NFIKernelModule>()->CreateGUID();
-			var->name = NFBranchInputArg::toString(NFBranchInputArg::LastNode);
+			var->name = NFBranchInputArg::toString(NFBranchInputArg::PreNode);
 			var->SetValueType(NFValueType::Node);
 
 			inputArgs.push_back(var);
@@ -216,7 +216,7 @@ public:
 		{
 			NF_SHARE_PTR<NFIOData> var = NF_SHARE_PTR<NFIOData>(NF_NEW NFIOData());
 			var->id = this->pPluginManager->FindModule<NFIKernelModule>()->CreateGUID();
-			var->name = NFBranchInputArg::toString(NFBranchInputArg::LastNode);
+			var->name = NFBranchInputArg::toString(NFBranchInputArg::PreNode);
 			var->SetValueType(NFValueType::Node);
 
 			inputArgs.push_back(var);
@@ -299,7 +299,7 @@ public:
 		{
 			NF_SHARE_PTR<NFIOData> var = NF_SHARE_PTR<NFIOData>(NF_NEW NFIOData());
 			var->id = this->pPluginManager->FindModule<NFIKernelModule>()->CreateGUID();
-			var->name = NFBranchInputArg::toString(NFBranchInputArg::LastNode);
+			var->name = NFBranchInputArg::toString(NFBranchInputArg::PreNode);
 			var->SetValueType(NFValueType::Node);
 
 			inputArgs.push_back(var);
@@ -383,7 +383,7 @@ public:
 		{
 			NF_SHARE_PTR<NFIOData> var = NF_SHARE_PTR<NFIOData>(NF_NEW NFIOData());
 			var->id = this->pPluginManager->FindModule<NFIKernelModule>()->CreateGUID();
-			var->name = NFBranchInputArg::toString(NFBranchInputArg::LastNode);
+			var->name = NFBranchInputArg::toString(NFBranchInputArg::PreNode);
 			var->SetValueType(NFValueType::Node);
 
 			inputArgs.push_back(var);
@@ -465,7 +465,7 @@ public:
 		{
 			NF_SHARE_PTR<NFIOData> var = NF_SHARE_PTR<NFIOData>(NF_NEW NFIOData());
 			var->id = this->pPluginManager->FindModule<NFIKernelModule>()->CreateGUID();
-			var->name = NFBranchInputArg::toString(NFBranchInputArg::LastNode);
+			var->name = NFBranchInputArg::toString(NFBranchInputArg::PreNode);
 			var->SetValueType(NFValueType::Node);
 
 			inputArgs.push_back(var);

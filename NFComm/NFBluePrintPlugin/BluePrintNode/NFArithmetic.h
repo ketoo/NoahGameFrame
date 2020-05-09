@@ -48,7 +48,7 @@ public:
 		{
 			NF_SHARE_PTR<NFIOData> var = NF_SHARE_PTR<NFIOData>(NF_NEW NFIOData());
 			var->id = this->pPluginManager->FindModule<NFIKernelModule>()->CreateGUID();
-			var->name = NFArithmeticInputArg::toString(NFArithmeticInputArg::LastNode);
+			var->name = NFArithmeticInputArg::toString(NFArithmeticInputArg::PreNode);
 			var->SetValueType(NFValueType::Node);
 			var->fromType = NFIODataComFromType::EXTERNAL;
 

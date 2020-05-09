@@ -5,6 +5,37 @@
 // -------------------------------------------------------------------------
 
 package nframe;
+	public class CooldownRecord
+	{
+		//Class name
+		public static final String ThisName = "CooldownRecord";
+		// IObject
+		public static final String CampID = "CampID";// object
+		public static final String ClassName = "ClassName";// string
+		public static final String ConfigID = "ConfigID";// string
+		public static final String Connection = "Connection";// int
+		public static final String Disable = "Disable";// int
+		public static final String GMMoveTo = "GMMoveTo";// vector3
+		public static final String GroupID = "GroupID";// int
+		public static final String ID = "ID";// string
+		public static final String MasterID = "MasterID";// object
+		public static final String MoveTo = "MoveTo";// vector3
+		public static final String Name = "Name";// string
+		public static final String Position = "Position";// vector3
+		public static final String SceneID = "SceneID";// int
+		public static final String State = "State";// int
+		// Property
+		// Record
+		public class Cooldown
+		{
+			//Class name
+			public static final String ThisName = "Cooldown";
+			public static final int ConfigID = 0;//string
+			public static final int Time = 1;//int
+
+		}
+
+	}
 	public class EffectData
 	{
 		//Class name
@@ -282,7 +313,7 @@ package nframe;
 		public static final String SceneID = "SceneID";// int
 		public static final String State = "State";// int
 		// Property
-		public static final String Climb = "Climb";// int
+		public static final String CommonCD = "CommonCD";// float
 		public static final String DescID = "DescID";// string
 		public static final String DropPackList = "DropPackList";// string
 		public static final String DropProbability = "DropProbability";// int
@@ -549,23 +580,17 @@ package nframe;
 		public static final String ConsumeType = "ConsumeType";// int
 		public static final String ConsumeValue = "ConsumeValue";// string
 		public static final String CoolDownTime = "CoolDownTime";// float
-		public static final String DamageCount = "DamageCount";// int
-		public static final String DamageDistance = "DamageDistance";// float
-		public static final String DamageIntervalTime = "DamageIntervalTime";// float
 		public static final String DamageProperty = "DamageProperty";// string
-		public static final String DamageType = "DamageType";// int
 		public static final String DamageValue = "DamageValue";// int
 		public static final String DefaultHitTime = "DefaultHitTime";// string
 		public static final String Desc = "Desc";// string
 		public static final String EffectObjType = "EffectObjType";// int
 		public static final String GetBuffList = "GetBuffList";// string
 		public static final String Icon = "Icon";// string
-		public static final String Melee = "Melee";// int
 		public static final String NewObject = "NewObject";// string
-		public static final String NextID = "NextID";// string
-		public static final String PlayerSkill = "PlayerSkill";// int
 		public static final String SendBuffList = "SendBuffList";// string
 		public static final String ShowName = "ShowName";// string
+		public static final String SkillSubType = "SkillSubType";// int
 		public static final String SkillType = "SkillType";// int
 		public static final String SpriteFile = "SpriteFile";// string
 		// Record

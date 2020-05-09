@@ -279,9 +279,6 @@ NF_SHARE_PTR<NFIVariable> NFBluePrintModule::AddVariable(const NFGUID& logicBloc
 		case NFVariableType::PropertySystem:
 			variable = NF_SHARE_PTR<NFIVariable>(NF_NEW NFPropertyVariable(this->pPluginManager, logicBlockId, id, name));
 			break;
-		case NFVariableType::PropertyList:
-			variable = NF_SHARE_PTR<NFIVariable>(NF_NEW NFPropertyListVariable(this->pPluginManager, logicBlockId, id, name));
-			break;
 		case NFVariableType::RecordSystem:
 			variable = NF_SHARE_PTR<NFIVariable>(NF_NEW NFRecordVariable(this->pPluginManager, logicBlockId, id, name));
 			break;
@@ -349,7 +346,7 @@ NF_SHARE_PTR<NFIBranch> NFBluePrintModule::AddBranch(const NFGUID& logicBlockId,
 	return nullptr;
 }
 
-NF_SHARE_PTR<NFIExecutor> NFBluePrintModule::AddExecuter(const NFGUID& logicBlockId, const NFExecuterType type, const NFGUID& id, const std::string& name)
+NF_SHARE_PTR<NFIExecutor> NFBluePrintModule::AddExecutor(const NFGUID& logicBlockId, const NFExecutorType type, const NFGUID& id, const std::string& name)
 {	
 	auto baseNode = FindNode(logicBlockId);
 	if (baseNode && baseNode->blueprintType == NFBlueprintType::LOGICBLOCK)
@@ -358,31 +355,31 @@ NF_SHARE_PTR<NFIExecutor> NFBluePrintModule::AddExecuter(const NFGUID& logicBloc
 		NF_SHARE_PTR<NFIExecutor> executer;
 		switch (type)
 		{
-		case NFExecuterType::CreateObject:
+		case NFExecutorType::CreateObject:
 			executer = NF_SHARE_PTR<NFIExecutor>(NF_NEW NFCreateObjectExecutor(this->pPluginManager, logicBlockId, id, name));
 			break;
-		case NFExecuterType::DestroyObject:
+		case NFExecutorType::DestroyObject:
 			executer = NF_SHARE_PTR<NFIExecutor>(NF_NEW NFDestroyObjectExecutor(this->pPluginManager, logicBlockId, id, name));
 			break;
-		case NFExecuterType::GameEvent:
+		case NFExecutorType::GameEvent:
 			executer = NF_SHARE_PTR<NFIExecutor>(NF_NEW NFGameEventExecutor(this->pPluginManager, logicBlockId, id, name));
 			break;
-		case NFExecuterType::MoveObject:
+		case NFExecutorType::MoveObject:
 			executer = NF_SHARE_PTR<NFIExecutor>(NF_NEW NFMoveObjectExecutor(this->pPluginManager, logicBlockId, id, name));
 			break;
-		case NFExecuterType::Sleep:
+		case NFExecutorType::Sleep:
 			executer = NF_SHARE_PTR<NFIExecutor>(NF_NEW NFSleepExecutor(this->pPluginManager, logicBlockId, id, name));
 			break;
-		case NFExecuterType::SendMessage:
+		case NFExecutorType::SendMessage:
 			executer = NF_SHARE_PTR<NFIExecutor>(NF_NEW NFSendMessageExecutor(this->pPluginManager, logicBlockId, id, name));
 			break;
-		case NFExecuterType::EnterScene:
+		case NFExecutorType::EnterScene:
 			executer = NF_SHARE_PTR<NFIExecutor>(NF_NEW NFEnterSceneExecutor(this->pPluginManager, logicBlockId, id, name));
 			break;
-		case NFExecuterType::AddHeartBeat:
+		case NFExecutorType::AddHeartBeat:
 			executer = NF_SHARE_PTR<NFIExecutor>(NF_NEW NFAddHeartBeatExecutor(this->pPluginManager, logicBlockId, id, name));
 			break;
-		case NFExecuterType::AttackObject:
+		case NFExecutorType::AttackObject:
 			executer = NF_SHARE_PTR<NFIExecutor>(NF_NEW NFAttackObjectExecutor(this->pPluginManager, logicBlockId, id, name));
 			break;
 		default:
@@ -696,7 +693,7 @@ bool NFBluePrintModule::DeleteJudgement(const NFGUID& id)
 	return false;
 }
 
-bool NFBluePrintModule::DeleteExecuter(const NFGUID& id)
+bool NFBluePrintModule::DeleteExecutor(const NFGUID& id)
 {
 	return false;
 }

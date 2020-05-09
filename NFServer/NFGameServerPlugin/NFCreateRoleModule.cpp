@@ -39,7 +39,8 @@ bool NFCreateRoleModule::Init()
 	m_pScheduleModule = pPluginManager->FindModule<NFIScheduleModule>();
 	m_pDataTailModule = pPluginManager->FindModule<NFIDataTailModule>();
 	m_pSceneModule = pPluginManager->FindModule<NFISceneModule>();
-	
+	m_pEventModule = pPluginManager->FindModule<NFIEventModule>();
+
     return true;
 }
 
@@ -218,10 +219,21 @@ void NFCreateRoleModule::OnDBLoadRoleDataProcess(const NFSOCK nSockIndex, const 
 			return;
 		}
 
-		//get data first then create player
-		const int nHomeSceneID = 1;
-		const NFVector3& pos = m_pSceneModule->GetRelivePosition(nHomeSceneID, 0);
-		m_pSceneProcessModule->RequestEnterScene(pObject->Self(), nHomeSceneID, -1, 0, pos, NFDataList::Empty());
+		/////////////////////////////
+		const int group = m_pKernelModule->GetPropertyInt(pObject->Self(), NFrame::IObject::GroupID());
+		if (group <= 0)
+		{
+			/////////////////////////////
+			//sometimes, the player might disconnected from game server and want to reconnect.
+			//Basic on this reason, developer could move this kinds of players into the specific scene or group to avoid players move to the default scene.
+			//If developers move that kinds of players into the specific scene or group, which means the group value will NOT ZERO!
+			//COE_CREATE_FINISH
+
+			/////////////////////////////
+			const int nHomeSceneID = 1;
+			const NFVector3& pos = m_pSceneModule->GetRelivePosition(nHomeSceneID, 0);
+			m_pSceneProcessModule->RequestEnterScene(pObject->Self(), nHomeSceneID, -1, 0, pos, NFDataList::Empty());
+		}
 	}
 }
 

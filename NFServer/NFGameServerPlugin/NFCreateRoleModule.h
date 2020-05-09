@@ -36,6 +36,7 @@
 #include "NFComm/NFPluginModule/NFIScheduleModule.h"
 #include "NFComm/NFPluginModule/NFIDataTailModule.h"
 #include "NFComm/NFPluginModule/NFISceneModule.h"
+#include "NFComm/NFPluginModule/NFIEventModule.h"
 
 class NFICreateRoleModule : public NFIModule
 {
@@ -103,6 +104,7 @@ private:
 	NFINetClientModule* m_pNetClientModule;
 	NFIScheduleModule* m_pScheduleModule;
 	NFIDataTailModule* m_pDataTailModule;
+	NFIEventModule* m_pEventModule;
 };
 
 #endif

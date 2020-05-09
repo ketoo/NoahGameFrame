@@ -62,6 +62,7 @@ void NFChatModule::OnClientChatProcess(const NFSOCK nSockIndex, const int nMsgID
 	{
 	case NFMsg::ReqAckPlayerChat::EGCC_GLOBAL:
 	{
+		//this code means the game server will sends a message to all players who playing game
 		m_pNetModule->SendMsgPBToAllClient(NFMsg::ACK_CHAT, xMsg);
 	}
 	break;
@@ -70,10 +71,15 @@ void NFChatModule::OnClientChatProcess(const NFSOCK nSockIndex, const int nMsgID
 		const int sceneID = m_pKernelModule->GetPropertyInt(nPlayerID, NFrame::Player::SceneID());
 		const int groupID = m_pKernelModule->GetPropertyInt(nPlayerID, NFrame::Player::GroupID());
 
+		//this code means the game server will sends a message to all players who in the same room
 		m_pGameServerNet_ServerModule->SendGroupMsgPBToGate(NFMsg::ACK_CHAT, xMsg, sceneID, groupID);
 	}
 	break;
 	default:
-		break;;
+	{
+		//this code means the game server will sends a message yourself(nPlayerID)
+		m_pGameServerNet_ServerModule->SendMsgPBToGate(NFMsg::ACK_CHAT, xMsg, nPlayerID);
+	}
+	break;;
 	}
 }
