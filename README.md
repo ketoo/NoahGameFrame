@@ -77,8 +77,8 @@ https://github.com/ketoo/NoahGameFrame/wiki
 
 ## Supported Compilers
 
-* GCC >= 7 (**Tested in Ubuntu 16.04**)
-* MSVC >= VS2019 (**Tested in Win10**)
+* GCC >= 7 (**Tested on Ubuntu 16.04**)
+* MSVC >= VS2019 (**Tested on Win10**)
 
 ## Build and Install
 ### FOR WINDOWS, MSVC >= 2019
