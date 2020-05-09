@@ -49,7 +49,7 @@ public:
 	void TryToCreateBranch(NFBranchType type);
 	void TryToCreateArithmetic(NFArithmeticType type);
 	void TryToCreateMonitor(NFMonitorType type);
-	void TryToCreateExecuter(NFExecuterType type);
+	void TryToCreateExecutor(NFExecutorType type);
 	void TryToCreateModifier(NFModifierType type);
 	void TryToCreateVariable(NFVariableType type);
 	void TryToCreateDebuger();
@@ -93,9 +93,6 @@ private:
 	void PinRenderForPropertyEventMonitor(NFNodePin* pin);
 	void PinRenderForRecordEventMonitor(NFNodePin* pin);
 	void PinRenderForSceneEventMonitor(NFNodePin* pin);
-	void PinRenderForItemEventMonitor(NFNodePin* pin);
-	void PinRenderForSkillEventMonitor(NFNodePin* pin);
-	void PinRenderForBuffEventMonitor(NFNodePin* pin);
 
 	void PinRenderForBranch(NFNodePin* pin);
 
@@ -105,23 +102,25 @@ private:
 	void PinRenderForRecordAddModifier(NFNodePin* pin);
 	void PinRenderForRecordRemModifier(NFNodePin* pin);
 
+	void PinRenderForArithmetic(NFNodePin* pin);
+
 	void PinRenderForDebugger(NFNodePin* pin);
-	void PinRenderForExecuter(NFNodePin* pin);
+	void PinRenderForExecutor(NFNodePin* pin);
 
 	void CreateLogicBlock();
 	void CreateMonitor();
 	void CreateBranch();
-	void CreateExecuter();
+	void CreateExecutor();
 	void CreateModifier();
 	void CreateVariable();
 	void CreateArithmetic();
-	void CreateDebuger();
+	void CreateDebugger();
 
 
 private:
 	NFColor GetBackGroundColor(NFBlueprintType type);
 	std::string GetPinIcon(NFValueType type);
-	NFPinShape GetPinShape(NFValueType type);
+	NFPinShape GetPinShape(NFValueType type, NFIODataComFromType comeFromType);
 	std::string GetNodeIcon(NFBlueprintType type);
 	NFColor GetPinColor(NFValueType type);
 	//NFColor GetLinkColor(NF_SHARE_PTR<NFBluePrintNodeBase> node);
@@ -143,8 +142,8 @@ private:
 	NFBranchType branchType;
 	bool bCreatingBranch = false;
 
-	NFExecuterType executerType;
-	bool bCreatingExecuter = false;
+	NFExecutorType executerType;
+	bool bCreatingExecutor = false;
 
 	NFModifierType modifierType;
 	bool bCreatingModifier = false;
@@ -162,6 +161,7 @@ private:
 	NFIUIModule* m_pUIModule;
 	NFIKernelModule* m_pKernelModule;
 	NFIClassModule* m_pClassModule;
+	NFILogModule* m_pLogModule;
 	NFIElementModule* m_pElementModule;
 };
 
