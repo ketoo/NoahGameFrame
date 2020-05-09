@@ -33,11 +33,12 @@
 #include "NFIClassModule.h"
 #include "NFIElementModule.h"
 #include "NFILogModule.h"
+#include "NFIEventModule.h"
 
 class NFBranchType;
 class NFMonitorType;
 class NFVariableType;
-class NFExecuterType;
+class NFExecutorType;
 class NFModifierType;
 class NFArithmeticType;
 
@@ -46,7 +47,7 @@ class NFLogicBlock;
 class NFIBranch;
 class NFIMonitor;
 class NFIVariable;
-class NFIExecuter;
+class NFIExecutor;
 class NFIModifier;
 class NFIArithmetic;
 class NFIDebugger;
@@ -71,7 +72,7 @@ public:
 	virtual NF_SHARE_PTR<NFIBranch> AddBranch(const NFGUID& logicBlockId, const NFBranchType type, const NFGUID& id, const std::string& name) = 0;
 	virtual NF_SHARE_PTR<NFIMonitor> AddMonitor(const NFGUID& logicBlockId, const NFMonitorType type, const NFGUID& id, const std::string& name) = 0;
 	virtual NF_SHARE_PTR<NFIVariable> AddVariable(const NFGUID& logicBlockId, const NFVariableType type, const NFGUID& id, const std::string& name) = 0;
-	virtual NF_SHARE_PTR<NFIExecuter> AddExecuter(const NFGUID& logicBlockId, const NFExecuterType TYPE, const NFGUID& id, const std::string& name) = 0;
+	virtual NF_SHARE_PTR<NFIExecutor> AddExecutor(const NFGUID& logicBlockId, const NFExecutorType TYPE, const NFGUID& id, const std::string& name) = 0;
 	virtual NF_SHARE_PTR<NFIModifier> AddModifier(const NFGUID& logicBlockId, const NFModifierType type, const NFGUID& id, const std::string& name) = 0;
 	virtual NF_SHARE_PTR<NFIArithmetic> AddArithmetic(const NFGUID& logicBlockId, const NFArithmeticType type, const NFGUID& id, const std::string& name) = 0;
 	virtual NF_SHARE_PTR<NFIDebugger> AddDebugger(const NFGUID& logicBlockId, const NFGUID& id, const std::string& name) = 0;
@@ -88,7 +89,7 @@ public:
 
 	virtual bool DeleteMonitor(const NFGUID& id) = 0;
 	virtual bool DeleteJudgement(const NFGUID& id) = 0;
-	virtual bool DeleteExecuter(const NFGUID& id) = 0;
+	virtual bool DeleteExecutor(const NFGUID& id) = 0;
 };
 
 NF_SMART_ENUM(NFBlueprintType,
@@ -124,22 +125,13 @@ NF_SMART_ENUM(NFElementVariableInputArg,
 		)
 
 	NF_SMART_ENUM(NFPropertyVariableOutputArg,
-		ClassName,
-		PropName,
-		PropValue,
-		)
-
-	NF_SMART_ENUM(NFPropertyListVariableInputArg,
-		ObjectID,
-		)
-
-	NF_SMART_ENUM(NFPropertyListVariableOutputArg,
 		ObjectID,
 		ClassName,
 		ConfigID,
 		SceneID,
 		GroupID,
 		Position,
+		PropValue,
 		)
 
 	NF_SMART_ENUM(NFRecordVariableInputArg,
@@ -174,12 +166,14 @@ NF_SMART_ENUM(NFClassEventType,
 	//------------------------------
 	NF_SMART_ENUM(NFGameEventMonitorInputArg,
 		EventID,
+		Dictionary,
 		)
 
 	NF_SMART_ENUM(NFGameEventMonitorOutputArg,
 		NextNode,
 		EventID,
 		ObjectID,
+		Dictionary,
 		)
 	//------------------------------
 	NF_SMART_ENUM(NFNetworkEventMonitorInputArg,
@@ -297,7 +291,7 @@ NF_SMART_ENUM(NFDebuggerLevel,
 	)
 
 NF_SMART_ENUM(NFDebuggerInputArg,
-	LastNode,
+	PreNode,
 	LogLevel,
 	LogObject,
 	LogString,
@@ -323,7 +317,7 @@ NF_SMART_ENUM(NFModifierType,
 )
 
 NF_SMART_ENUM(NFPropertyModifierInputArg,
-	LastNode,
+	PreNode,
 	ObjectID,
 	ClassName,
 	PropName,
@@ -335,7 +329,7 @@ NF_SMART_ENUM(NFPropertyModifierOutputArg,
 		)
 
 NF_SMART_ENUM(NFRecordModifierInputArg,
-	LastNode,
+	PreNode,
 	ObjectID,
 	RecordName,
 	RecordRow,
@@ -347,7 +341,7 @@ NF_SMART_ENUM(NFRecordModifierOutputArg,
 	)
 
 NF_SMART_ENUM(NFRecordRemoverrInputArg,
-	LastNode,
+	PreNode,
 	ObjectID,
 	RecordName,
 	RecordRow,
@@ -359,7 +353,7 @@ NF_SMART_ENUM(NFRecordRemoverOutputArg,
 
 
 ///////////FOR EXECUTER BEGIN///////////////////////////
-NF_SMART_ENUM(NFExecuterType,
+NF_SMART_ENUM(NFExecutorType,
 	CreateObject,
 	DestroyObject,
 	GameEvent,
@@ -369,96 +363,97 @@ NF_SMART_ENUM(NFExecuterType,
 	EnterScene,
 	AddHeartBeat,
 	AttackObject,
-	UseSkill,
-	UseItem
 )
 
-NF_SMART_ENUM(NFExecuterCreateObjectInputArg,
-	LastNode,
+NF_SMART_ENUM(NFExecutorCreateObjectInputArg,
+	PreNode,
+	ClassName,
 	ConfigID,
 	SceneID,
 	GroupID,
 	Position,
 )
-NF_SMART_ENUM(NFExecuterCreateObjectOutputputArg,
+NF_SMART_ENUM(NFExecutorCreateObjectOutputputArg,
 	NextNode,
 	ObjectID,
 	)
 
-NF_SMART_ENUM(NFExecuterDestroyObjectInputArg,
-	LastNode,
+NF_SMART_ENUM(NFExecutorDestroyObjectInputArg,
+	PreNode,
+	DelayTime,
 	ObjectID,
 	)
 
-NF_SMART_ENUM(NFExecuterDestroyObjectOutputputArg,
+NF_SMART_ENUM(NFExecutorDestroyObjectOutputputArg,
 	NextNode,
 	)
 
-NF_SMART_ENUM(NFExecuterGameEventInputArg,
-	LastNode,
+NF_SMART_ENUM(NFExecutorGameEventInputArg,
+	PreNode,
 	ObjectID,
 	EventID,
+	Dctionary,
 	)
 
-NF_SMART_ENUM(NFExecuterGameEventOutputArg,
+NF_SMART_ENUM(NFExecutorGameEventOutputArg,
 	NextNode,
 	)
 
-NF_SMART_ENUM(NFExecuterSendMessageInputArg,
-	LastNode,
+NF_SMART_ENUM(NFExecutorSendMessageInputArg,
+	PreNode,
 	ObjectID,
 	MessageID,
 	Data,
 	)
 
-NF_SMART_ENUM(NFExecuterSendMessageOutputArg,
+NF_SMART_ENUM(NFExecutorSendMessageOutputArg,
 	NextNode,
 	)
 
 
-NF_SMART_ENUM(NFExecuterMoveObjectInputArg,
-	LastNode,
+NF_SMART_ENUM(NFExecutorMoveObjectInputArg,
+	PreNode,
 	ObjectID,
 	Position,
 	MoveType,
 	)
 
-NF_SMART_ENUM(NFExecuterMoveObjectOutputArg,
+NF_SMART_ENUM(NFExecutorMoveObjectOutputArg,
 	NextNode,
 	)
 
-NF_SMART_ENUM(NFExecuterSleepInputArg,
-	LastNode,
+NF_SMART_ENUM(NFExecutorSleepInputArg,
+	PreNode,
 	ObjectID,
 	SleepTime,
 	)
 
-NF_SMART_ENUM(NFExecuterSleepOutputArg,
+NF_SMART_ENUM(NFExecutorSleepOutputArg,
 	NextNode,
 	ObjectID,
 	)
 
-NF_SMART_ENUM(NFExecuterEnterSceneInputArg,
-	LastNode,
+NF_SMART_ENUM(NFExecutorEnterSceneInputArg,
+	PreNode,
 	ObjectID,
 	SceneID,
 	GroupID,
 	Position,
 	)
 
-NF_SMART_ENUM(NFExecuterEnterSceneOutputArg,
+NF_SMART_ENUM(NFExecutorEnterSceneOutputArg,
 	NextNode,
 	)
 
-NF_SMART_ENUM(NFExecuterAddHeartBeatInputArg,
-	LastNode,
+NF_SMART_ENUM(NFExecutorAddHeartBeatInputArg,
+	PreNode,
 	ObjectID,
 	BeatName,
 	BeatTime,
 	BeatCount,
 	)
 
-NF_SMART_ENUM(NFExecuterAddHeartBeatOutputArg,
+NF_SMART_ENUM(NFExecutorAddHeartBeatOutputArg,
 	NextNode,
 	)
 
@@ -480,7 +475,7 @@ NF_SMART_ENUM(NFComparatorType,
 	)
 
 NF_SMART_ENUM(NFBranchInputArg,
-	LastNode,
+	PreNode,
 	LeftInput,
 	Comparator,
 	RightInput
@@ -501,7 +496,7 @@ NF_SMART_ENUM(NFArithmeticType,
 	)
 
 NF_SMART_ENUM(NFArithmeticInputArg,
-	LastNode,
+	PreNode,
 	ValueType,
 	LeftInput,
 	ArithmeticType,
@@ -516,7 +511,7 @@ NF_SMART_ENUM(NFArithmeticOutputArg,
 class NFLogicBlock;
 class NFIMonitor;
 class NFIBranch;
-class NFIExecuter;
+class NFIExecutor;
 class NFIVariable;
 class NFIOData;
 class NFDataLink;
@@ -722,6 +717,7 @@ protected:
 	NFIClassModule* pClassModule;
 	NFIKernelModule* m_pKernelModule;
 	NFILogModule* m_pLogModule;
+	NFIEventModule* m_pEventModule;
 
 public:
 	NFBluePrintNodeBase()
@@ -737,6 +733,7 @@ public:
 		pClassModule = this->pPluginManager->FindModule<NFIClassModule>();
 		m_pKernelModule = this->pPluginManager->FindModule<NFIKernelModule>();
 		m_pLogModule = this->pPluginManager->FindModule<NFILogModule>();
+		m_pEventModule = this->pPluginManager->FindModule<NFIEventModule>();
 
 		InitInputArgs();
 		InitOutputArgs();
@@ -955,7 +952,6 @@ public:
 								default:
 									break;
 							}
-							break;
 						}
 						else
 						{
@@ -1102,14 +1098,14 @@ public:
 	NFModifierType modifierType;
 };
 
-class NFIExecuter : public NFBluePrintNodeBase
+class NFIExecutor : public NFBluePrintNodeBase
 {
 public:
-	NFIExecuter()
+	NFIExecutor()
 	{
 		blueprintType = NFBlueprintType::EXECUTER;
 	}
-	NFExecuterType executerType;
+	NFExecutorType executerType;
 };
 
 class NFIDebugger : public NFBluePrintNodeBase
@@ -1119,7 +1115,7 @@ public:
 	{
 		blueprintType = NFBlueprintType::DEBUGER;
 	}
-	//NFExecuterType executerType;
+	//NFExecutorType executerType;
 };
 
 class NFLogicBlock : public NFBluePrintNodeBase
@@ -1160,7 +1156,7 @@ public:
 		return nullptr;
 	}
 
-	std::list<NF_SHARE_PTR<NFIExecuter>> executers;
+	std::list<NF_SHARE_PTR<NFIExecutor>> executers;
 	std::list<NF_SHARE_PTR<NFIBranch>> branches;
 	std::list<NF_SHARE_PTR<NFIMonitor>> monitors;
 	std::list<NF_SHARE_PTR<NFIVariable>> variables;

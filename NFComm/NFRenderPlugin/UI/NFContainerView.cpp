@@ -157,6 +157,7 @@ void NFContainerView::BluePrintMenu()
 			{
 				pBluePrintView->TryToCreateBluePrintBlock();
 			}
+
 			if (ImGui::BeginMenu("New Monitor"))
 			{
                 for (auto x : NFMonitorType::allValues())
@@ -183,13 +184,13 @@ void NFContainerView::BluePrintMenu()
                 ImGui::EndMenu();
 			}
 
-            if (ImGui::BeginMenu("New Executer"))
+            if (ImGui::BeginMenu("New Executor"))
             {
-                for (auto x : NFExecuterType::allValues())
+                for (auto x : NFExecutorType::allValues())
                 {
                     if (ImGui::MenuItem(x.toString().c_str(), ""))
                     {
-                        pBluePrintView->TryToCreateExecuter(x);
+                        pBluePrintView->TryToCreateExecutor(x);
                     }
                 }
 
@@ -198,13 +199,10 @@ void NFContainerView::BluePrintMenu()
 
             if (ImGui::BeginMenu("New Arithmetic"))
             {
-                for (auto x : NFArithmeticType::allValues())
-                {
-                    if (ImGui::MenuItem(x.toString().c_str(), ""))
-                    {
-                        pBluePrintView->TryToCreateArithmetic(x);
-                    }
-                }
+				if (ImGui::MenuItem("Arithmetic", ""))
+				{
+					pBluePrintView->TryToCreateArithmetic(NFArithmeticType::Add);
+				}
 
                 ImGui::EndMenu();
             }
@@ -243,7 +241,6 @@ void NFContainerView::BluePrintMenu()
                 }
 
                 ImGui::EndMenu();
-
             }
             
             if (ImGui::BeginMenu("Custom Variable"))

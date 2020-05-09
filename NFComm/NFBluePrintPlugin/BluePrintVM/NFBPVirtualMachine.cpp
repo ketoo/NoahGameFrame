@@ -94,8 +94,6 @@ void NFBPVirtualMachine::StartMonitor(NF_SHARE_PTR<NFIMonitor> monitor)
     {
     case NFMonitorType::GameEvent:
     {
-        monitor->PrepareInputData(NFGUID());
-
         auto inputEventID = monitor->GetInputArg(NFGameEventMonitorInputArg::toString(NFGameEventMonitorInputArg::EventID));
         if (inputEventID->GetInt() <= 0)
         {
