@@ -1,0 +1,13 @@
+<?xml version='1.0' encoding='utf-8' ?>
+<XML>
+	<Propertys>
+	</Propertys>
+	<Records>
+		<Record Id="Cooldown" Cache="1"	 Col="2"	 Force="0"	 Private="1"	 Public="1"	 Ref="0"	 Row="8"	 Save="0"	 Upload="0"	 >
+			<Col Type ="string"	Tag="ConfigID"/><!--- Desc-->
+			<Col Type ="int"	Tag="Time"/><!--- Desc-->
+		</Record>
+	</Records>
+	<Includes>
+	</Includes>
+</XML>
