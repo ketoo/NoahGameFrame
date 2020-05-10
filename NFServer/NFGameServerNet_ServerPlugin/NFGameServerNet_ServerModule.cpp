@@ -240,42 +240,47 @@ void NFGameServerNet_ServerModule::OnClientReqMoveProcess(const NFSOCK nSockInde
 {
 	CLIENT_MSG_PROCESS_NO_OBJECT(nMsgID, msg, nLen, NFMsg::ReqAckPlayerPosSync)
 
-
-	const NFGUID& xMover = NFINetModule::PBToNF(xMsg.mover());
-	if (xMover == nPlayerID)
+	if (xMsg.sync_unit_size() > 0)
 	{
-		const int nSceneID = m_pKernelModule->GetPropertyInt32(xMover, NFrame::Player::SceneID());
-		const int nGroupID = m_pKernelModule->GetPropertyInt32(xMover, NFrame::Player::GroupID());
+		NFMsg::PosSyncUnit* syncUnit = xMsg.mutable_sync_unit(0);
+		if (syncUnit)
+		{
+			const NFGUID& xMover = NFINetModule::PBToNF(syncUnit->mover());
+			if (xMover == nPlayerID)
+			{
+				const int nSceneID = m_pKernelModule->GetPropertyInt32(xMover, NFrame::Player::SceneID());
+				const int nGroupID = m_pKernelModule->GetPropertyInt32(xMover, NFrame::Player::GroupID());
 
-		this->SendGroupMsgPBToGate(NFMsg::ACK_MOVE, xMsg, nSceneID, nGroupID);
+				this->SendGroupMsgPBToGate(NFMsg::ACK_MOVE, xMsg, nSceneID, nGroupID);
+			}
+		}
 	}
 }
 
-void NFGameServerNet_ServerModule::OnClientReqMoveImmuneProcess(const NFSOCK nSockIndex, const int nMsgID,
-                                                                 const char *msg, const uint32_t nLen)
+void NFGameServerNet_ServerModule::OnClientReqMoveImmuneProcess(const NFSOCK nSockIndex, const int nMsgID, const char *msg, const uint32_t nLen)
 {
 	CLIENT_MSG_PROCESS(nMsgID, msg, nLen, NFMsg::ReqAckPlayerPosSync)
 
-	const NFGUID& self = NFINetModule::PBToNF(xMsg.mover());
-	if (self == nPlayerID)
+	if (xMsg.sync_unit_size() > 0)
 	{
-		const int nSceneID = m_pKernelModule->GetPropertyInt32(self, NFrame::Player::SceneID());
-		const int nGroupID = m_pKernelModule->GetPropertyInt32(self, NFrame::Player::GroupID());
-
-		if (xMsg.sync_unit_size() > 0)
+		NFMsg::PosSyncUnit *syncUnit = xMsg.mutable_sync_unit(0);
+		if (syncUnit)
 		{
-			NFMsg::PosSyncUnit syncUnit = xMsg.sync_unit(0);
+			const NFGUID &xMover = NFINetModule::PBToNF(syncUnit->mover());
+			if (xMover == nPlayerID)
+			{
+				NFVector3 v;
+				v.SetX(syncUnit->pos().x());
+				v.SetY(syncUnit->pos().y());
+				v.SetZ(syncUnit->pos().z());
 
-			NFVector3 v;
-			v.SetX(syncUnit.pos().x());
-			v.SetY(syncUnit.pos().y());
-			v.SetZ(syncUnit.pos().z());
+				m_pKernelModule->SetPropertyVector3(nPlayerID, NFrame::IObject::Position(), v);
+			}
 
-			m_pKernelModule->SetPropertyVector3(self, NFrame::IObject::Position(), v);
+			const int nSceneID = m_pKernelModule->GetPropertyInt32(nPlayerID, NFrame::Player::SceneID());
+			const int nGroupID = m_pKernelModule->GetPropertyInt32(nPlayerID, NFrame::Player::GroupID());
+			this->SendGroupMsgPBToGate(NFMsg::ACK_MOVE_IMMUNE, xMsg, nSceneID, nGroupID);
 		}
-
-
-		this->SendGroupMsgPBToGate(NFMsg::ACK_MOVE_IMMUNE, xMsg, nSceneID, nGroupID);
 	}
 }
 
@@ -283,21 +288,21 @@ void NFGameServerNet_ServerModule::OnClientReqPosSyncProcess(const NFSOCK nSockI
 {
 	CLIENT_MSG_PROCESS(nMsgID, msg, nLen, NFMsg::ReqAckPlayerPosSync)
 	//only the player can send this message to the back-end
-	const NFGUID& xMover = NFINetModule::PBToNF(xMsg.mover());
-	if (xMover != nPlayerID)
-	{
-		const NFGUID xMasterID = m_pKernelModule->GetPropertyObject(xMover, NFrame::NPC::MasterID());
-		if (xMasterID != nPlayerID)
-		{
-			m_pLogModule->LogError(xMover, "Message come from player " + nPlayerID.ToString());
-			return;
-		}
-		return;
-	}
 
 	if (xMsg.sync_unit_size() > 0)
 	{
-		NFMsg::PosSyncUnit syncUnit = xMsg.sync_unit(0);
+		const NFMsg::PosSyncUnit& syncUnit = xMsg.sync_unit(0);
+		const NFGUID& xMover = NFINetModule::PBToNF(syncUnit.mover());
+		if (xMover != nPlayerID)
+		{
+			const NFGUID xMasterID = m_pKernelModule->GetPropertyObject(xMover, NFrame::NPC::MasterID());
+			if (xMasterID != nPlayerID)
+			{
+				m_pLogModule->LogError(xMover, "Message come from player " + nPlayerID.ToString());
+				return;
+			}
+			return;
+		}
 
 		NFVector3 v;
 		v.SetX(syncUnit.pos().x());
@@ -317,7 +322,11 @@ void NFGameServerNet_ServerModule::OnClientPropertyIntProcess(const NFSOCK nSock
 	CLIENT_MSG_PROCESS( nMsgID, msg, nLen, NFMsg::ObjectPropertyInt)
 
 	const std::string& strAccount = pObject->GetPropertyString(NFrame::Player::Account());
-	const int nGMLevel = m_pElementModule->GetPropertyInt(strAccount, NFrame::GM::Level());
+	int nGMLevel = m_pElementModule->GetPropertyInt(strAccount, NFrame::GM::Level());
+#ifdef NF_DEBUG_MODE
+	nGMLevel = 1;
+#endif
+
 
 	for (int i = 0; i < xMsg.property_list_size(); i++)
 	{
@@ -325,12 +334,10 @@ void NFGameServerNet_ServerModule::OnClientPropertyIntProcess(const NFSOCK nSock
 		NF_SHARE_PTR<NFIProperty> pProperty = pObject->GetPropertyManager()->GetElement(xPropertyInt.property_name());
 		if (pProperty)
 		{
-			//judge upload then set value
-			//GM
 			if (pProperty->GetUpload() || nGMLevel > 0)
 			{
-				m_pLogModule->LogInfo(nPlayerID, "Upload From Client int set " + xPropertyInt.property_name() + std::to_string(xPropertyInt.data()), __FUNCTION__, __LINE__);
-				m_pKernelModule->SetPropertyInt(nPlayerID, xPropertyInt.property_name(), xPropertyInt.data());
+				m_pLogModule->LogInfo(NFINetModule::PBToNF(xMsg.player_id()), "Upload From Client int set " + xPropertyInt.property_name() + std::to_string(xPropertyInt.data()), __FUNCTION__, __LINE__);
+				m_pKernelModule->SetPropertyInt(NFINetModule::PBToNF(xMsg.player_id()), xPropertyInt.property_name(), xPropertyInt.data());
 			}
 			else
 			{
@@ -349,7 +356,11 @@ void NFGameServerNet_ServerModule::OnClientPropertyFloatProcess(const NFSOCK nSo
 	CLIENT_MSG_PROCESS( nMsgID, msg, nLen, NFMsg::ObjectPropertyFloat)
 
 	const std::string& strAccount = pObject->GetPropertyString(NFrame::Player::Account());
-	const int nGMLevel = m_pElementModule->GetPropertyInt(strAccount, NFrame::GM::Level());
+	int nGMLevel = m_pElementModule->GetPropertyInt(strAccount, NFrame::GM::Level());
+#ifdef NF_DEBUG_MODE
+	nGMLevel = 1;
+#endif
+
 
 	for (int i = 0; i < xMsg.property_list_size(); i++)
 	{
@@ -360,8 +371,8 @@ void NFGameServerNet_ServerModule::OnClientPropertyFloatProcess(const NFSOCK nSo
 			//judge upload then set value
 			if (pProperty->GetUpload() || nGMLevel > 0)
 			{
-				m_pLogModule->LogInfo(nPlayerID, "Upload From Client float set " + xPropertyFloat.property_name() + std::to_string(xPropertyFloat.data()), __FUNCTION__, __LINE__);
-				m_pKernelModule->SetPropertyFloat(nPlayerID, xPropertyFloat.property_name(), xPropertyFloat.data());
+				m_pLogModule->LogInfo(NFINetModule::PBToNF(xMsg.player_id()), "Upload From Client float set " + xPropertyFloat.property_name() + std::to_string(xPropertyFloat.data()), __FUNCTION__, __LINE__);
+				m_pKernelModule->SetPropertyFloat(NFINetModule::PBToNF(xMsg.player_id()), xPropertyFloat.property_name(), xPropertyFloat.data());
 			}
 			else
 			{
@@ -380,7 +391,11 @@ void NFGameServerNet_ServerModule::OnClientPropertyStringProcess(const NFSOCK nS
 	CLIENT_MSG_PROCESS( nMsgID, msg, nLen, NFMsg::ObjectPropertyString)
 
 	const std::string& strAccount = pObject->GetPropertyString(NFrame::Player::Account());
-	const int nGMLevel = m_pElementModule->GetPropertyInt(strAccount, NFrame::GM::Level());
+	int nGMLevel = m_pElementModule->GetPropertyInt(strAccount, NFrame::GM::Level());
+#ifdef NF_DEBUG_MODE
+	nGMLevel = 1;
+#endif
+
 
 	for (int i = 0; i < xMsg.property_list_size(); i++)
 	{
@@ -391,8 +406,8 @@ void NFGameServerNet_ServerModule::OnClientPropertyStringProcess(const NFSOCK nS
 			//judge upload then set value
 			if (pProperty->GetUpload() || nGMLevel > 0)
 			{
-				m_pLogModule->LogInfo(nPlayerID, "Upload From Client string set " + xPropertyString.property_name() + " " + xPropertyString.data(), __FUNCTION__, __LINE__);
-				m_pKernelModule->SetPropertyString(nPlayerID, xPropertyString.property_name(), xPropertyString.data());
+				m_pLogModule->LogInfo(NFINetModule::PBToNF(xMsg.player_id()), "Upload From Client string set " + xPropertyString.property_name() + " " + xPropertyString.data(), __FUNCTION__, __LINE__);
+				m_pKernelModule->SetPropertyString(NFINetModule::PBToNF(xMsg.player_id()), xPropertyString.property_name(), xPropertyString.data());
 			}
 			else
 			{
@@ -411,7 +426,11 @@ void NFGameServerNet_ServerModule::OnClientPropertyObjectProcess(const NFSOCK nS
 	CLIENT_MSG_PROCESS( nMsgID, msg, nLen, NFMsg::ObjectPropertyObject)
 
 	const std::string& strAccount = pObject->GetPropertyString(NFrame::Player::Account());
-	const int nGMLevel = m_pElementModule->GetPropertyInt(strAccount, NFrame::GM::Level());
+	int nGMLevel = m_pElementModule->GetPropertyInt(strAccount, NFrame::GM::Level());
+#ifdef NF_DEBUG_MODE
+	nGMLevel = 1;
+#endif
+
 
 	for (int i = 0; i < xMsg.property_list_size(); i++)
 	{
@@ -423,8 +442,8 @@ void NFGameServerNet_ServerModule::OnClientPropertyObjectProcess(const NFSOCK nS
 			if (pProperty->GetUpload() || nGMLevel > 0)
 			{
 				NFGUID xID = NFINetModule::PBToNF(xPropertyObject.data());
-				m_pLogModule->LogInfo(nPlayerID, "Upload From Client object set " + xPropertyObject.property_name() + " " + xID.ToString(), __FUNCTION__, __LINE__);
-				m_pKernelModule->SetPropertyObject(nPlayerID, xPropertyObject.property_name(), xID);
+				m_pLogModule->LogInfo(NFINetModule::PBToNF(xMsg.player_id()), "Upload From Client object set " + xPropertyObject.property_name() + " " + xID.ToString(), __FUNCTION__, __LINE__);
+				m_pKernelModule->SetPropertyObject(NFINetModule::PBToNF(xMsg.player_id()), xPropertyObject.property_name(), xID);
 			}
 			else
 			{
@@ -444,7 +463,10 @@ void NFGameServerNet_ServerModule::OnClientPropertyVector2Process(const NFSOCK n
 	CLIENT_MSG_PROCESS( nMsgID, msg, nLen, NFMsg::ObjectPropertyVector2)
 
 	const std::string& strAccount = pObject->GetPropertyString(NFrame::Player::Account());
-	const int nGMLevel = m_pElementModule->GetPropertyInt(strAccount, NFrame::GM::Level());
+	int nGMLevel = m_pElementModule->GetPropertyInt(strAccount, NFrame::GM::Level());
+#ifdef NF_DEBUG_MODE
+	nGMLevel = 1;
+#endif
 
 	for (int i = 0; i < xMsg.property_list_size(); i++)
 	{
@@ -456,8 +478,8 @@ void NFGameServerNet_ServerModule::OnClientPropertyVector2Process(const NFSOCK n
 			if (pProperty->GetUpload() || nGMLevel > 0)
 			{
 				NFVector2 vVec2 = NFINetModule::PBToNF(xProperty.data());
-				m_pLogModule->LogInfo(nPlayerID, "Upload From Client object set " + xProperty.property_name() + " " + vVec2.ToString(), __FUNCTION__, __LINE__);
-				m_pKernelModule->SetPropertyVector2(nPlayerID, xProperty.property_name(), vVec2);
+				m_pLogModule->LogInfo(NFINetModule::PBToNF(xMsg.player_id()), "Upload From Client object set " + xProperty.property_name() + " " + vVec2.ToString(), __FUNCTION__, __LINE__);
+				m_pKernelModule->SetPropertyVector2(NFINetModule::PBToNF(xMsg.player_id()), xProperty.property_name(), vVec2);
 			}
 			else
 			{
@@ -476,7 +498,10 @@ void NFGameServerNet_ServerModule::OnClientPropertyVector3Process(const NFSOCK n
 	CLIENT_MSG_PROCESS( nMsgID, msg, nLen, NFMsg::ObjectPropertyVector3)
 
 	const std::string& strAccount = pObject->GetPropertyString(NFrame::Player::Account());
-	const int nGMLevel = m_pElementModule->GetPropertyInt(strAccount, NFrame::GM::Level());
+	int nGMLevel = m_pElementModule->GetPropertyInt(strAccount, NFrame::GM::Level());
+#ifdef NF_DEBUG_MODE
+	nGMLevel = 1;
+#endif
 
 	for (int i = 0; i < xMsg.property_list_size(); i++)
 	{
@@ -488,8 +513,8 @@ void NFGameServerNet_ServerModule::OnClientPropertyVector3Process(const NFSOCK n
 			if (pProperty->GetUpload() || nGMLevel > 0)
 			{
 				NFVector3 vVec3 = NFINetModule::PBToNF(xProperty.data());
-				m_pLogModule->LogInfo(nPlayerID, "Upload From Client object set " + xProperty.property_name() + " " + vVec3.ToString(), __FUNCTION__, __LINE__);
-				m_pKernelModule->SetPropertyVector3(nPlayerID, xProperty.property_name(), vVec3);
+				m_pLogModule->LogInfo(NFINetModule::PBToNF(xMsg.player_id()), "Upload From Client object set " + xProperty.property_name() + " " + vVec3.ToString(), __FUNCTION__, __LINE__);
+				m_pKernelModule->SetPropertyVector3(NFINetModule::PBToNF(xMsg.player_id()), xProperty.property_name(), vVec3);
 			}
 			else
 			{
@@ -509,7 +534,11 @@ void NFGameServerNet_ServerModule::OnClientAddRowProcess(const NFSOCK nSockIndex
 	CLIENT_MSG_PROCESS( nMsgID, msg, nLen, NFMsg::ObjectRecordAddRow)
 
 	const std::string& strAccount = pObject->GetPropertyString(NFrame::Player::Account());
-	const int nGMLevel = m_pElementModule->GetPropertyInt(strAccount, NFrame::GM::Level());
+	int nGMLevel = m_pElementModule->GetPropertyInt(strAccount, NFrame::GM::Level());
+#ifdef NF_DEBUG_MODE
+	nGMLevel = 1;
+#endif
+
 
 	NF_SHARE_PTR<NFIRecord> pRecord = pObject->GetRecordManager()->GetElement(xMsg.record_name());
 	if (!pRecord)
@@ -585,7 +614,11 @@ void NFGameServerNet_ServerModule::OnClientRemoveRowProcess(const NFSOCK nSockIn
 	CLIENT_MSG_PROCESS( nMsgID, msg, nLen, NFMsg::ObjectRecordRemove)
 
 	const std::string& strAccount = pObject->GetPropertyString(NFrame::Player::Account());
-	const int nGMLevel = m_pElementModule->GetPropertyInt(strAccount, NFrame::GM::Level());
+	int nGMLevel = m_pElementModule->GetPropertyInt(strAccount, NFrame::GM::Level());
+#ifdef NF_DEBUG_MODE
+	nGMLevel = 1;
+#endif
+
 
 	NF_SHARE_PTR<NFIRecord> pRecord = pObject->GetRecordManager()->GetElement(xMsg.record_name());
 	if (!pRecord)
@@ -616,7 +649,11 @@ void NFGameServerNet_ServerModule::OnClientSwapRowProcess(const NFSOCK nSockInde
 
 
 	const std::string& strAccount = pObject->GetPropertyString(NFrame::Player::Account());
-	const int nGMLevel = m_pElementModule->GetPropertyInt(strAccount, NFrame::GM::Level());
+	int nGMLevel = m_pElementModule->GetPropertyInt(strAccount, NFrame::GM::Level());
+#ifdef NF_DEBUG_MODE
+	nGMLevel = 1;
+#endif
+
 
 
 	NF_SHARE_PTR<NFIRecord> pRecord = pObject->GetRecordManager()->GetElement(xMsg.origin_record_name());
@@ -651,7 +688,11 @@ void NFGameServerNet_ServerModule::OnClientRecordIntProcess(const NFSOCK nSockIn
 	}
 
 	const std::string& strAccount = pObject->GetPropertyString(NFrame::Player::Account());
-	const int nGMLevel = m_pElementModule->GetPropertyInt(strAccount, NFrame::GM::Level());
+	int nGMLevel = m_pElementModule->GetPropertyInt(strAccount, NFrame::GM::Level());
+#ifdef NF_DEBUG_MODE
+	nGMLevel = 1;
+#endif
+
 
 
 	if (pRecord->GetUpload() || nGMLevel > 0)
@@ -700,7 +741,11 @@ void NFGameServerNet_ServerModule::OnClientRecordStringProcess(const NFSOCK nSoc
 	CLIENT_MSG_PROCESS( nMsgID, msg, nLen, NFMsg::ObjectRecordString)
 
 	const std::string& strAccount = pObject->GetPropertyString(NFrame::Player::Account());
-	const int nGMLevel = m_pElementModule->GetPropertyInt(strAccount, NFrame::GM::Level());
+	int nGMLevel = m_pElementModule->GetPropertyInt(strAccount, NFrame::GM::Level());
+#ifdef NF_DEBUG_MODE
+	nGMLevel = 1;
+#endif
+
 
 	NF_SHARE_PTR<NFIRecord> pRecord = pObject->GetRecordManager()->GetElement(xMsg.record_name());
 	if (!pRecord)
@@ -728,7 +773,11 @@ void NFGameServerNet_ServerModule::OnClientRecordObjectProcess(const NFSOCK nSoc
 
 
 	const std::string& strAccount = pObject->GetPropertyString(NFrame::Player::Account());
-	const int nGMLevel = m_pElementModule->GetPropertyInt(strAccount, NFrame::GM::Level());
+	int nGMLevel = m_pElementModule->GetPropertyInt(strAccount, NFrame::GM::Level());
+#ifdef NF_DEBUG_MODE
+	nGMLevel = 1;
+#endif
+
 
 	NF_SHARE_PTR<NFIRecord> pRecord = pObject->GetRecordManager()->GetElement(xMsg.record_name());
 	if (!pRecord)
@@ -754,7 +803,11 @@ void NFGameServerNet_ServerModule::OnClientRecordVector2Process(const NFSOCK nSo
 	CLIENT_MSG_PROCESS( nMsgID, msg, nLen, NFMsg::ObjectRecordVector2)
 
 	const std::string& strAccount = pObject->GetPropertyString(NFrame::Player::Account());
-	const int nGMLevel = m_pElementModule->GetPropertyInt(strAccount, NFrame::GM::Level());
+	int nGMLevel = m_pElementModule->GetPropertyInt(strAccount, NFrame::GM::Level());
+#ifdef NF_DEBUG_MODE
+	nGMLevel = 1;
+#endif
+
 
 	NF_SHARE_PTR<NFIRecord> pRecord = pObject->GetRecordManager()->GetElement(xMsg.record_name());
 	if (!pRecord)
@@ -785,7 +838,11 @@ void NFGameServerNet_ServerModule::OnClientRecordVector3Process(const NFSOCK nSo
 	}
 
 	const std::string& strAccount = pObject->GetPropertyString(NFrame::Player::Account());
-	const int nGMLevel = m_pElementModule->GetPropertyInt(strAccount, NFrame::GM::Level());
+	int nGMLevel = m_pElementModule->GetPropertyInt(strAccount, NFrame::GM::Level());
+#ifdef NF_DEBUG_MODE
+	nGMLevel = 1;
+#endif
+
 
 	if (pRecord->GetUpload() || nGMLevel > 0)
 	{

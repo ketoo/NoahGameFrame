@@ -65,7 +65,7 @@ public:
     virtual NF_SHARE_PTR<NFIMonitor> AddMonitor(const NFGUID& logicBlockId, const NFMonitorType type, const NFGUID& id, const std::string& name);
     virtual NF_SHARE_PTR<NFIVariable> AddVariable(const NFGUID& logicBlockId, const NFVariableType type, const NFGUID& id, const std::string& name);
     virtual NF_SHARE_PTR<NFIBranch> AddBranch(const NFGUID& logicBlockId, const NFBranchType type, const NFGUID& id, const std::string& name);
-    virtual NF_SHARE_PTR<NFIExecuter> AddExecuter(const NFGUID& logicBlockId, const NFExecuterType type, const NFGUID& id, const std::string& name);
+    virtual NF_SHARE_PTR<NFIExecutor> AddExecutor(const NFGUID& logicBlockId, const NFExecutorType type, const NFGUID& id, const std::string& name);
     virtual NF_SHARE_PTR<NFIModifier> AddModifier(const NFGUID& logicBlockId, const NFModifierType type, const NFGUID& id, const std::string& name);
     virtual NF_SHARE_PTR<NFIArithmetic> AddArithmetic(const NFGUID& logicBlockId, const NFArithmeticType type, const NFGUID& id, const std::string& name);
     virtual NF_SHARE_PTR<NFIDebugger> AddDebugger(const NFGUID& logicBlockId, const NFGUID& id, const std::string& name);
@@ -77,11 +77,12 @@ public:
     virtual bool DeleteLink(const NFGUID& logicBlockId, const NFGUID& startNode, const NFGUID& endNode, const NFGUID& startPin, const NFGUID& endPin);
     virtual bool DeleteLink(const NFGUID& logicBlockId, const NFGUID& id);
     virtual bool DeleteLink(const NFGUID& id);
+	virtual bool CheckLink(const NFGUID& id);
     virtual std::list<NF_SHARE_PTR<NFDataLink>> GetLinks(const NFGUID& logicBlockId);
 
 	virtual bool DeleteMonitor(const NFGUID& id);
 	virtual bool DeleteJudgement(const NFGUID& id);
-	virtual bool DeleteExecuter(const NFGUID& id);
+	virtual bool DeleteExecutor(const NFGUID& id);
 
 protected:
     void NodeModifyEvent(const NFGUID& id, const bool create);

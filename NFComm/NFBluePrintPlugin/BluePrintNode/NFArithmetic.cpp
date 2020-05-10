@@ -25,31 +25,118 @@
 
 #include "NFArithmetic.h"
 
-void NFArithmetic::PrepareInputData(const NFGUID& runTimeOnwer, const bool iteration)
-{
-}
-
 NF_SHARE_PTR<NFIOData> NFArithmetic::FindOutputNodeIOData()
 {
-	return NF_SHARE_PTR<NFIOData>();
+    return GetOutputArg(NFArithmeticOutputArg::NextNode);
 }
 
-void NFArithmetic::UpdateOutputData(const NFGUID& runTimeOnwer, const bool iteration)
+void NFArithmetic::UpdateOutputData(const NFGUID& runTimeOwner)
 {
-    if (this->arithmeticType == NFArithmeticType::Add)
-    {
+    NF_SHARE_PTR<NFIOData> arithmeticType = GetInputArg(NFArithmeticInputArg::ArithmeticType);
+    NF_SHARE_PTR<NFIOData> valueType = GetInputArg(NFArithmeticInputArg::ValueType);
+    NF_SHARE_PTR<NFIOData> leftData = GetInputArg(NFArithmeticInputArg::LeftInput);
+    NF_SHARE_PTR<NFIOData> rightData = GetInputArg(NFArithmeticInputArg::RightInput);
 
+    NF_SHARE_PTR<NFIOData> outputData = GetOutputArg(NFArithmeticOutputArg::Output);
+    if (valueType->GetValueType() == NFValueType::Int)
+    {
+        if (arithmeticType->GetInt() == NFArithmeticType::Add)
+        {
+            outputData->SetInt(leftData->GetInt() + rightData->GetInt());
+        }
+        else if (arithmeticType->GetInt() == NFArithmeticType::Sub)
+        {
+            outputData->SetInt(leftData->GetInt() - rightData->GetInt());
+        }
+        else if (arithmeticType->GetInt() == NFArithmeticType::Multiply)
+        {
+            outputData->SetInt(leftData->GetInt() * rightData->GetInt());
+        }
+        else if (arithmeticType->GetInt() == NFArithmeticType::Division)
+        {
+            if (rightData->GetInt() != 0)
+            {
+                outputData->SetInt(leftData->GetInt() / rightData->GetInt());
+            }
+            else
+            {
+                m_pLogModule->LogError("Denominator can't be 0!");
+            }
+        }
     }
-    else if (this->arithmeticType == NFArithmeticType::Sub)
+    else if (leftData->GetValueType() == NFValueType::Float)
     {
-
+        if (arithmeticType->GetInt() == NFArithmeticType::Add)
+        {
+            outputData->SetFloat(leftData->GetFloat() + rightData->GetFloat());
+        }
+        else if (arithmeticType->GetInt() == NFArithmeticType::Sub)
+        {
+            outputData->SetFloat(leftData->GetFloat() - rightData->GetFloat());
+        }
+        else if (arithmeticType->GetInt() == NFArithmeticType::Multiply)
+        {
+            outputData->SetFloat(leftData->GetFloat() * rightData->GetFloat());
+        }
+        else if (arithmeticType->GetInt() == NFArithmeticType::Division)
+        {
+            if (rightData->GetFloat() != 0)
+            {
+                outputData->SetFloat(leftData->GetFloat() / rightData->GetFloat());
+            }
+            else
+            {
+                //debug log
+            }
+        }
     }
-    else if (this->arithmeticType == NFArithmeticType::Multiply)
+    else if (leftData->GetValueType() == NFValueType::String)
     {
-
+        if (arithmeticType->GetInt() == NFArithmeticType::Add)
+        {
+            outputData->SetString(leftData->GetString() + rightData->GetString());
+        }
+        else if (arithmeticType->GetInt() == NFArithmeticType::Sub)
+        {
+            //outputData->SetFloat(leftData->GetFloat() - rightData->GetFloat());
+        }
     }
-    else if (this->arithmeticType == NFArithmeticType::Division)
+    else if (leftData->GetValueType() == NFValueType::Vector2)
     {
+        if (arithmeticType->GetInt() == NFArithmeticType::Add)
+        {
 
+        }
+        else if (arithmeticType->GetInt() == NFArithmeticType::Sub)
+        {
+
+        }
+        else if (arithmeticType->GetInt() == NFArithmeticType::Multiply)
+        {
+
+        }
+        else if (arithmeticType->GetInt() == NFArithmeticType::Division)
+        {
+
+        }
+    }
+    else if (leftData->GetValueType() == NFValueType::Vector3)
+    {
+        if (arithmeticType->GetInt() == NFArithmeticType::Add)
+        {
+
+        }
+        else if (arithmeticType->GetInt() == NFArithmeticType::Sub)
+        {
+
+        }
+        else if (arithmeticType->GetInt() == NFArithmeticType::Multiply)
+        {
+
+        }
+        else if (arithmeticType->GetInt() == NFArithmeticType::Division)
+        {
+
+        }
     }
 }

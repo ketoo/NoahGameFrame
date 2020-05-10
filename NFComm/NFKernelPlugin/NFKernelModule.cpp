@@ -82,9 +82,7 @@ bool NFKernelModule::Init()
 	m_pEventModule = pPluginManager->FindModule<NFIEventModule>();
 	m_pCellModule = pPluginManager->FindModule<NFICellModule>();
 	m_pThreadPoolModule = pPluginManager->FindModule<NFIThreadPoolModule>();
-	
-	m_pBackupClassModule = m_pClassModule->GetBackupClassModule();
-	m_pBackupElementModule = m_pElementModule->GetBackupElementModule();
+
 
 	return true;
 }
@@ -175,8 +173,8 @@ NF_SHARE_PTR<NFIObject> NFKernelModule::CreateObject(const NFGUID& self, const i
 			{
 				//backup thread for async task
 				{
-					NF_SHARE_PTR<NFIPropertyManager> pStaticClassPropertyManager = m_pClassModule->GetBackupClassModule()->GetClassPropertyManager(strClassName);
-					NF_SHARE_PTR<NFIRecordManager> pStaticClassRecordManager = m_pClassModule->GetBackupClassModule()->GetClassRecordManager(strClassName);
+					NF_SHARE_PTR<NFIPropertyManager> pStaticClassPropertyManager = m_pClassModule->GetThreadClassModule()->GetClassPropertyManager(strClassName);
+					NF_SHARE_PTR<NFIRecordManager> pStaticClassRecordManager = m_pClassModule->GetThreadClassModule()->GetClassRecordManager(strClassName);
 					if (pStaticClassPropertyManager && pStaticClassRecordManager)
 					{
 						NF_SHARE_PTR<NFIPropertyManager> pPropertyManager = pObject->GetPropertyManager();
@@ -246,8 +244,8 @@ NF_SHARE_PTR<NFIObject> NFKernelModule::CreateObject(const NFGUID& self, const i
 						//backup thread
 						{
 							NF_SHARE_PTR<NFIPropertyManager> pPropertyManager = pObject->GetPropertyManager();
-							NF_SHARE_PTR<NFIPropertyManager> pConfigPropertyManager = m_pElementModule->GetBackupElementModule()->GetPropertyManager(strConfigIndex);
-							NF_SHARE_PTR<NFIRecordManager> pConfigRecordManager = m_pElementModule->GetBackupElementModule()->GetRecordManager(strConfigIndex);
+							NF_SHARE_PTR<NFIPropertyManager> pConfigPropertyManager = m_pElementModule->GetThreadElementModule()->GetPropertyManager(strConfigIndex);
+							NF_SHARE_PTR<NFIRecordManager> pConfigRecordManager = m_pElementModule->GetThreadElementModule()->GetRecordManager(strConfigIndex);
 
 							if (pConfigPropertyManager && pConfigRecordManager)
 							{
@@ -1492,14 +1490,6 @@ bool NFKernelModule::LogInfo(const NFGUID ident)
 		int nGroupID = GetPropertyInt32(ident, NFrame::IObject::GroupID());
 
 		m_pLogModule->LogInfo(ident, "//----------child object list-------- SceneID = " + std::to_string(nSceneID));
-
-		NFDataList valObjectList;
-		GetGroupObjectList(nSceneID, nGroupID, valObjectList);
-		for (int i = 0; i < valObjectList.GetCount(); i++)
-		{
-			NFGUID targetIdent = valObjectList.Object(i);
-			LogInfo(targetIdent);
-		}
 	}
 	else
 	{

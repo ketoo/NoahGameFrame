@@ -135,6 +135,10 @@
 #include "NFComm/NFSecurityPlugin/NFSecurityPlugin.h"
 #include "NFComm/NFTestPlugin/NFTestPlugin.h"
 
+#include "NFExamples/NFChatPlugin/NFChatPlugin.h"
+#include "NFExamples/NFConsumeManagerPlugin/NFConsumeManagerPlugin.h"
+#include "NFExamples/NFInventoryPlugin/NFInventoryPlugin.h"
+
 #if NF_PLATFORM != NF_PLATFORM_LINUX
 #include "NFComm/NFRenderPlugin/NFRenderPlugin.h"
 #include "NFComm/NFBluePrintPlugin/NFBluePrintPlugin.h"
@@ -309,6 +313,10 @@ bool NFPluginManager::LoadStaticPlugin()
 	CREATE_PLUGIN(this, NFSecurityPlugin)
 	CREATE_PLUGIN(this, NFTestPlugin)
 
+	CREATE_PLUGIN(this, NFChatPlugin)
+	CREATE_PLUGIN(this, NFConsumeManagerPlugin)
+	CREATE_PLUGIN(this, NFInventoryPlugin)
+
 #if NF_PLATFORM == NF_PLATFORM_APPLE || NF_PLATFORM == NF_PLATFORM_WIN
 	CREATE_PLUGIN(this, NFRenderPlugin)
 	CREATE_PLUGIN(this, NFBluePrintPlugin)
@@ -476,15 +484,9 @@ bool NFPluginManager::ReLoadPlugin(const std::string & strPluginDLLName)
 	}
 	//1
 	NFIPlugin* pPlugin = itInstance->second;
-	NFIModule* pModule = pPlugin->First();
-	while (pModule)
-	{
-		pModule->BeforeShut();
-		pModule->Shut();
-		pModule->Finalize();
-
-		pModule = pPlugin->Next();
-	}
+	pPlugin->BeforeShut();
+	pPlugin->Shut();
+	pPlugin->Finalize();
 
 	//2
 	PluginLibMap::iterator it = mPluginLibMap.find(strPluginDLLName);
@@ -679,7 +681,7 @@ NFIPlugin * NFPluginManager::GetCurrentPlugin()
 	return mCurrentPlugin;
 }
 
-NFIModule * NFPluginManager::GetCurrenModule()
+NFIModule * NFPluginManager::GetCurrentModule()
 {
 	return mCurrenModule;
 }
@@ -689,7 +691,7 @@ void NFPluginManager::SetCurrentPlugin(NFIPlugin * pPlugin)
 	 mCurrentPlugin = pPlugin;
 }
 
-void NFPluginManager::SetCurrenModule(NFIModule * pModule)
+void NFPluginManager::SetCurrentModule(NFIModule * pModule)
 {
 	mCurrenModule = pModule;
 }
@@ -777,9 +779,9 @@ NFIModule* NFPluginManager::FindModule(const std::string& strModuleName)
 		return it->second;
 	}
 	
-	if (this->GetCurrenModule())
+	if (this->GetCurrentModule())
 	{
-		std::cout << this->GetCurrenModule()->strName << " want to find module: " << strModuleName << " but got null_ptr!!!" << std::endl;
+		std::cout << this->GetCurrentModule()->strName << " want to find module: " << strModuleName << " but got null_ptr!!!" << std::endl;
 	}
 
     return NULL;
@@ -1011,7 +1013,7 @@ void NFPluginManager::AddFileReplaceContent(const std::string& fileName, const s
 		std::vector<NFReplaceContent> v;
 		v.push_back(NFReplaceContent(content, newValue));
 
-		mReplaceContent.insert(std::pair<std::string, std::vector<NFReplaceContent> >(fileName, v));
+		mReplaceContent.insert(std::make_pair(fileName, v));
 	}
 	else
 	{
@@ -1028,4 +1030,17 @@ std::vector<NFReplaceContent> NFPluginManager::GetFileReplaceContents(const std:
 	}
 
 	return std::vector<NFReplaceContent>();
+}
+
+std::list<NFIModule *> NFPluginManager::TestModules()
+{
+	std::list<NFIModule*> xModules;
+
+	TestModuleInstanceMap::iterator itCheckInstance = mTestModuleInstanceMap.begin();
+	for (; itCheckInstance != mTestModuleInstanceMap.end(); itCheckInstance++)
+	{
+		xModules.push_back(itCheckInstance->second);
+	}
+
+	return xModules;
 }

@@ -57,15 +57,17 @@ message AckPlayerLeaveList//对象离去列表
 
 message PosSyncUnit
 {
-    Vector3 pos = 1;
-    Vector3 direction = 2;
-    int32 status = 3;
+	Ident 	mover = 1;
+    Vector3 now = 2;
+    Vector3 pos = 3;
+    Vector3 direction = 4;
+    int32 status = 5;
+    float time = 6;
 }
 
 message ReqAckPlayerPosSync
 {
-	Ident 	mover = 1;
-	repeated PosSyncUnit sync_unit = 2;
+	repeated PosSyncUnit sync_unit = 1;
 }
 
 ////////////////////////////
@@ -94,7 +96,6 @@ message ReqAckUseSkill
 	repeated EffectData 	effect_data = 4;
 }
 
-/////////////////////////////////////////
 message ReqAckSwapScene
 {
 	int32 		transfer_type = 1;
@@ -104,4 +105,28 @@ message ReqAckSwapScene
 	float 		y = 5;
 	float 		z = 6;
 	bytes 	data = 7;
+}
+
+/////////////////////////////////////////
+message ReqAckPlayerChat
+{
+	enum EGameChatChannel
+	{
+		EGCC_GLOBAL = 0;
+		EGCC_CLAN = 1;
+		EGCC_ROOM = 2;
+		EGCC_TEAM = 3;
+	}
+	enum EGameChatType
+	{
+		EGCT_TEXT= 0;
+		EGCT_VOICE = 1;
+		EGCT_EMOJI = 2;
+	}
+
+	Ident	player_id = 1;
+	bytes 	player_name = 2;
+	EGameChatChannel  chat_channel = 3;
+	EGameChatType  chat_type = 4;
+	bytes chat_info = 5;
 }

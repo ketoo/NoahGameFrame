@@ -17,7 +17,7 @@
 namespace NFMsg {
 }  // namespace NFMsg
 static constexpr ::PROTOBUF_NAMESPACE_ID::Metadata* file_level_metadata_NFDefine_2eproto = nullptr;
-static const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor* file_level_enum_descriptors_NFDefine_2eproto[5];
+static const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor* file_level_enum_descriptors_NFDefine_2eproto[6];
 static constexpr ::PROTOBUF_NAMESPACE_ID::ServiceDescriptor const** file_level_service_descriptors_NFDefine_2eproto = nullptr;
 const ::PROTOBUF_NAMESPACE_ID::uint32 TableStruct_NFDefine_2eproto::offsets[1] = {};
 static constexpr ::PROTOBUF_NAMESPACE_ID::internal::MigrationSchema* schemas = nullptr;
@@ -35,7 +35,7 @@ const char descriptor_table_protodef_NFDefine_2eproto[] PROTOBUF_SECTION_VARIABL
   "ARACTER_NUMOUT\020p\022\025\n\021CHARACTER_INVALID\020q\022"
   "\026\n\022CHARACTER_NOTEXIST\020r\022\023\n\017CHARACTER_USI"
   "NG\020s\022\024\n\020CHARACTER_LOCKED\020t\022\021\n\rZONE_OVERL"
-  "OAD\020u\022\016\n\nNOT_ONLINE\020v*\230\021\n\nEGameMsgID\022\n\n\006"
+  "OAD\020u\022\016\n\nNOT_ONLINE\020v*\266\021\n\nEGameMsgID\022\n\n\006"
   "UNKNOW\020\000\022\020\n\014EVENT_RESULT\020\001\022\023\n\017EVENT_TRAN"
   "SPORT\020\002\022\020\n\014CLOSE_SOCKET\020\003\022\030\n\024WTM_WORLD_R"
   "EGISTERED\020\n\022\032\n\026WTM_WORLD_UNREGISTERED\020\013\022"
@@ -85,22 +85,24 @@ const char descriptor_table_protodef_NFDefine_2eproto[] PROTOBUF_SECTION_VARIABL
   "Q_AI_ONWER\020\216\002\022\r\n\010REQ_MOVE\020\254\002\022\r\n\010ACK_MOVE"
   "\020\255\002\022\024\n\017REQ_MOVE_IMMUNE\020\256\002\022\024\n\017ACK_MOVE_IM"
   "MUNE\020\257\002\022\021\n\014REQ_POS_SYNC\020\262\002\022\021\n\014ACK_POS_SY"
-  "NC\020\263\002\022\026\n\021REQ_SKILL_OBJECTX\020\220\003\022\026\n\021ACK_SKI"
-  "LL_OBJECTX\020\221\003\022\022\n\rREQ_SKILL_POS\020\222\003\022\022\n\rACK"
-  "_SKILL_POS\020\223\003\022\024\n\017REQ_ITEM_OBJECT\020\364\003\022\024\n\017A"
-  "CK_ITEM_OBJECT\020\365\003\022\021\n\014REQ_ITEM_POS\020\366\003\022\021\n\014"
-  "ACK_ITEM_POS\020\367\003\022\026\n\021ACK_ONLINE_NOTIFY\020\330\004\022"
-  "\027\n\022ACK_OFFLINE_NOTIFY\020\331\004*\247\001\n\nESkillType\022"
-  "\026\n\022BRIEF_SINGLE_SKILL\020\000\022\025\n\021BRIEF_GROUP_S"
-  "KILL\020\001\022\027\n\023BULLET_SINGLE_SKILL\020\002\022\030\n\024BULLE"
-  "T_REBOUND_SKILL\020\003\022\034\n\030BULLET_TARGET_BOMB_"
-  "SKILL\020\004\022\031\n\025BULLET_POS_BOMB_SKILL\020\005*\216\001\n\nE"
-  "SceneType\022\020\n\014NORMAL_SCENE\020\000\022\026\n\022SINGLE_CL"
-  "ONE_SCENE\020\001\022\025\n\021MULTI_CLONE_SCENE\020\002\022\022\n\016PV"
-  "P_MODE_SCENE\020\n\022\022\n\016MVM_MODE_SCENE\020\013\022\027\n\023SU"
-  "RVIVAL_MODE_SCENE\020\014*8\n\010ENPCType\022\016\n\nNORMA"
-  "L_NPC\020\000\022\014\n\010HERO_NPC\020\001\022\016\n\nTURRET_NPC\020\002b\006p"
-  "roto3"
+  "NC\020\263\002\022\r\n\010REQ_CHAT\020\336\002\022\r\n\010ACK_CHAT\020\337\002\022\026\n\021R"
+  "EQ_SKILL_OBJECTX\020\220\003\022\026\n\021ACK_SKILL_OBJECTX"
+  "\020\221\003\022\022\n\rREQ_SKILL_POS\020\222\003\022\022\n\rACK_SKILL_POS"
+  "\020\223\003\022\024\n\017REQ_ITEM_OBJECT\020\364\003\022\024\n\017ACK_ITEM_OB"
+  "JECT\020\365\003\022\021\n\014REQ_ITEM_POS\020\366\003\022\021\n\014ACK_ITEM_P"
+  "OS\020\367\003\022\026\n\021ACK_ONLINE_NOTIFY\020\330\004\022\027\n\022ACK_OFF"
+  "LINE_NOTIFY\020\331\004*G\n\tEItemType\022\r\n\tEIT_EQUIP"
+  "\020\000\022\013\n\007EIT_GEM\020\001\022\016\n\nEIT_SUPPLY\020\002\022\016\n\nEIT_S"
+  "CROLL\020\003*\247\001\n\nESkillType\022\026\n\022BRIEF_SINGLE_S"
+  "KILL\020\000\022\025\n\021BRIEF_GROUP_SKILL\020\001\022\027\n\023BULLET_"
+  "SINGLE_SKILL\020\002\022\030\n\024BULLET_REBOUND_SKILL\020\003"
+  "\022\034\n\030BULLET_TARGET_BOMB_SKILL\020\004\022\031\n\025BULLET"
+  "_POS_BOMB_SKILL\020\005*\216\001\n\nESceneType\022\020\n\014NORM"
+  "AL_SCENE\020\000\022\026\n\022SINGLE_CLONE_SCENE\020\001\022\025\n\021MU"
+  "LTI_CLONE_SCENE\020\002\022\022\n\016PVP_MODE_SCENE\020\n\022\022\n"
+  "\016MVM_MODE_SCENE\020\013\022\027\n\023SURVIVAL_MODE_SCENE"
+  "\020\014*8\n\010ENPCType\022\016\n\nNORMAL_NPC\020\000\022\014\n\010HERO_N"
+  "PC\020\001\022\016\n\nTURRET_NPC\020\002b\006proto3"
   ;
 static const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable*const descriptor_table_NFDefine_2eproto_deps[1] = {
 };
@@ -109,7 +111,7 @@ static ::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase*const descriptor_table_NFD
 static ::PROTOBUF_NAMESPACE_ID::internal::once_flag descriptor_table_NFDefine_2eproto_once;
 static bool descriptor_table_NFDefine_2eproto_initialized = false;
 const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable descriptor_table_NFDefine_2eproto = {
-  &descriptor_table_NFDefine_2eproto_initialized, descriptor_table_protodef_NFDefine_2eproto, "NFDefine.proto", 3045,
+  &descriptor_table_NFDefine_2eproto_initialized, descriptor_table_protodef_NFDefine_2eproto, "NFDefine.proto", 3148,
   &descriptor_table_NFDefine_2eproto_once, descriptor_table_NFDefine_2eproto_sccs, descriptor_table_NFDefine_2eproto_deps, 0, 0,
   schemas, file_default_instances, TableStruct_NFDefine_2eproto::offsets,
   file_level_metadata_NFDefine_2eproto, 0, file_level_enum_descriptors_NFDefine_2eproto, file_level_service_descriptors_NFDefine_2eproto,
@@ -243,6 +245,8 @@ bool EGameMsgID_IsValid(int value) {
     case 303:
     case 306:
     case 307:
+    case 350:
+    case 351:
     case 400:
     case 401:
     case 402:
@@ -259,9 +263,25 @@ bool EGameMsgID_IsValid(int value) {
   }
 }
 
-const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor* ESkillType_descriptor() {
+const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor* EItemType_descriptor() {
   ::PROTOBUF_NAMESPACE_ID::internal::AssignDescriptors(&descriptor_table_NFDefine_2eproto);
   return file_level_enum_descriptors_NFDefine_2eproto[2];
+}
+bool EItemType_IsValid(int value) {
+  switch (value) {
+    case 0:
+    case 1:
+    case 2:
+    case 3:
+      return true;
+    default:
+      return false;
+  }
+}
+
+const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor* ESkillType_descriptor() {
+  ::PROTOBUF_NAMESPACE_ID::internal::AssignDescriptors(&descriptor_table_NFDefine_2eproto);
+  return file_level_enum_descriptors_NFDefine_2eproto[3];
 }
 bool ESkillType_IsValid(int value) {
   switch (value) {
@@ -279,7 +299,7 @@ bool ESkillType_IsValid(int value) {
 
 const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor* ESceneType_descriptor() {
   ::PROTOBUF_NAMESPACE_ID::internal::AssignDescriptors(&descriptor_table_NFDefine_2eproto);
-  return file_level_enum_descriptors_NFDefine_2eproto[3];
+  return file_level_enum_descriptors_NFDefine_2eproto[4];
 }
 bool ESceneType_IsValid(int value) {
   switch (value) {
@@ -297,7 +317,7 @@ bool ESceneType_IsValid(int value) {
 
 const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor* ENPCType_descriptor() {
   ::PROTOBUF_NAMESPACE_ID::internal::AssignDescriptors(&descriptor_table_NFDefine_2eproto);
-  return file_level_enum_descriptors_NFDefine_2eproto[4];
+  return file_level_enum_descriptors_NFDefine_2eproto[5];
 }
 bool ENPCType_IsValid(int value) {
   switch (value) {

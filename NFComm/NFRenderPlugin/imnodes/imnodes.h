@@ -42,14 +42,58 @@ enum StyleFlags
     StyleFlags_GridLines = 1 << 2
 };
 
+// This enum controls the way attribute pins look.
 enum PinShape
 {
-    PinShape_Circle = 0,
+	PinShape_None,
+	PinShape_Circle,
     PinShape_CircleFilled,
     PinShape_Triangle,
     PinShape_TriangleFilled,
     PinShape_Quad,
     PinShape_QuadFilled
+};
+
+// This enum controls the way the attribute pins behave.
+enum AttributeFlags
+{
+    AttributeFlags_None = 0,
+    // Allow detaching a link by left-clicking and dragging the link at a pin it
+    // is connected to. NOTE: the user has to actually delete the link for this
+    // to work. A deleted link can be detected by calling IsLinkDestroyed()
+    // after EndNodeEditor().
+    AttributeFlags_EnableLinkDetachWithDragClick = 1 << 0
+};
+
+struct IO
+{
+    struct EmulateThreeButtonMouse
+    {
+        EmulateThreeButtonMouse();
+
+        // Controls whether this feature is enabled or not.
+        bool enabled;
+        const bool* modifier; // The keyboard modifier to use with the mouse
+                              // left click. Set to &ImGuiIO::KeyAlt by default.
+    } emulate_three_button_mouse;
+
+    struct LinkDetachWithModifierClick
+    {
+        LinkDetachWithModifierClick();
+
+        // Pointer to a boolean value indicating when the desired modifier is
+        // pressed. Set to NULL by default (i.e. this feature is disabled). To
+        // enable the feature, set the link to point to, for example,
+        // &ImGuiIO::KeyCtrl.
+        //
+        // Left-clicking a link with this modifier pressed will detach that
+        // link. NOTE: the user has to actually delete the link for this to
+        // work. A deleted link can be detected by calling IsLinkDestroyed()
+        // after EndNodeEditor().
+        const bool* modifier;
+    } link_detach_with_modifier_click;
+
+    IO();
 };
 
 struct Style
@@ -106,6 +150,7 @@ struct EditorContext;
 EditorContext* EditorContextCreate();
 void EditorContextFree(EditorContext*);
 void EditorContextSet(EditorContext*);
+ImVec2 EditorContextGetPanning();
 void EditorContextResetPanning(const ImVec2& pos);
 void EditorContextMoveToNode(const int node_id);
 
@@ -113,10 +158,11 @@ void EditorContextMoveToNode(const int node_id);
 void Initialize();
 void Shutdown();
 
+IO& GetIO();
+
 // Returns the global style struct. See the struct declaration for default
 // values.
 Style& GetStyle();
-ImVec2 GeContextPanning();
 // Style presets matching the dear imgui styles of the same name.
 void StyleColorsDark(); // on by default
 void StyleColorsClassic();
@@ -144,22 +190,27 @@ void BeginNodeTitleBar();
 void EndNodeTitleBar();
 
 // Attributes are ImGui UI elements embedded within the node. Attributes have
-// circular pins rendered next to them. Links are created between pins.
+// pin shapes rendered next to them. Links are created between pins.
 //
-// Input and output attributes are otherwise the same, except that pins are
-// rendered on the left of the node for input attributes, and on the right side
-// for output attributes.
+// Input and output attributes are otherwise identical, except that pins are
+// rendered on the left side of the node for input attributes, and on the right
+// side for output attributes.
 //
 // The attribute ids must be unique.
 void BeginInputAttribute(int id, PinShape shape = PinShape_CircleFilled);
 void BeginOutputAttribute(int id, PinShape shape = PinShape_CircleFilled);
 void EndAttribute();
 
+// Push a single AttributeFlags value. By default, only AttributeFlags_None is
+// set.
+void PushAttributeFlag(AttributeFlags flag);
+void PopAttributeFlag();
+
 // Render a link between attributes.
 // The attributes ids used here must match the ids used in
 // Begin(Input|Output)Attribute function calls. The order of start_attr and
 // end_attr doesn't make a difference for rendering the link.
-void Link(int id, int start_attr, int end_attr);
+void Link(int id, int start_attribute_id, int end_attribute_id);
 
 // Set's the node's position corresponding to the node id, either using screen
 // space coordinates, or node editor grid coordinates. You can even set the
@@ -170,6 +221,9 @@ void SetNodeGridSpacePos(int node_id, const ImVec2& grid_pos);
 // Enable or disable the ability to click and drag a specific node.
 void SetNodeDraggable(int node_id, const bool draggable);
 
+// Returns true if the current node editor canvas is being hovered over by the
+// mouse, and is not blocked by any other windows.
+bool IsEditorHovered();
 // The following functions return true if a UI element is being hovered over by
 // the mouse cursor. Assigns the id of the UI element being hovered over to the
 // function argument. Use these functions after EndNodeEditor() has been called.
@@ -194,14 +248,18 @@ bool IsAttributeActive();
 // function argument.
 bool IsAnyAttributeActive(int* attribute_id = 0);
 
-// The following functions should be used after calling EndNodeEditor().
-//
-// Is the user dragging a new link?
-bool IsLinkStarted(int* started_at_attr);
-// Did the user drop the new link before connecting it to a second attribute?
+// Use the following functions to query a change of state for an existing link,
+// or new link. Call these after EndNodeEditor().
+
+// Did the user start dragging a new link from a pin?
+bool IsLinkStarted(int* started_at_attribute_id);
+// Did the user drop the dragged link before attaching it to a pin?
 bool IsLinkDropped();
-// Did the user create a new link?
-bool IsLinkCreated(int* started_at_attr, int* ended_at_attr);
+// Did the user finish creating a new link?
+bool IsLinkCreated(int* started_at_attribute_id, int* ended_at_attribute_id);
+// Was an existing link detached from a pin by the user? The detached link's id
+// is assigned to the output argument link_id.
+bool IsLinkDestroyed(int* link_id);
 
 // Use the following functions to write the editor context's state to a string,
 // or directly to a file. The editor context is serialized in the INI file

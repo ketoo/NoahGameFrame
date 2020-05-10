@@ -85,14 +85,14 @@ std::string NFLogModule::GetConfigPath(const std::string & fileName)
 NFLogModule::NFLogModule(NFIPluginManager* p)
 {
     pPluginManager = p;
+
+	el::Loggers::addFlag(el::LoggingFlag::StrictLogFileSizeCheck);
+	el::Loggers::addFlag(el::LoggingFlag::DisableApplicationAbortOnFatalLog);
 }
 
 bool NFLogModule::Awake()
 {
 	mnLogCountTotal = 0;
-
-	el::Loggers::addFlag(el::LoggingFlag::StrictLogFileSizeCheck);
-	el::Loggers::addFlag(el::LoggingFlag::DisableApplicationAbortOnFatalLog);
 
 	std::string strLogConfigName = pPluginManager->GetLogConfigName();
 	if (strLogConfigName.empty())

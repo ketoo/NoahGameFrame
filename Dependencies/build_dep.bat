@@ -1,7 +1,7 @@
 
 git submodule update --init --recursive
 
-rm -rf vcpkg
+rd /s /q vcpkg
 
 git clone https://github.com/Microsoft/vcpkg.git
 

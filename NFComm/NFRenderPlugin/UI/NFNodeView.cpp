@@ -168,19 +168,20 @@ bool LoadTextureFromFile(const char* filename, GLuint* out_texture, int* out_wid
     return true;
 }
 
-void ShowImage(const char* filename, int width, int height)
+void* ShowImage(const char* filename, int width, int height)
 {
     int my_image_width = 0;
     int my_image_height = 0;
     GLuint my_image_texture = 0;
     bool ret = LoadTextureFromFile(filename, &my_image_texture, &my_image_width, &my_image_height);
     ImGui::Image((void*)(intptr_t)my_image_texture, ImVec2(width, height));
+
+    return (void*)(intptr_t)my_image_texture;
 }
 
 void NFNodePin::Execute()
 {
-	if (this->iconTextureId == nullptr
-	&& !this->image.empty())
+	if (this->iconTextureId == nullptr && !this->image.empty())
 	{
 		int my_image_width = 0;
 		int my_image_height = 0;
@@ -189,33 +190,49 @@ void NFNodePin::Execute()
 
 		this->iconTextureId = (void*)(intptr_t)my_image_texture;
 	}
+	else
+	{
+		if (!this->newImage.empty() && this->newImage != this->image)
+		{
+			this->image = this->newImage;
+			this->newImage = "";
+
+			int my_image_width = 0;
+			int my_image_height = 0;
+			GLuint my_image_texture = 0;
+			bool ret = LoadTextureFromFile(this->image.c_str(), &my_image_texture, &my_image_width, &my_image_height);
+
+			this->iconTextureId = (void*)(intptr_t)my_image_texture;
+		}
+	}
+
 
    if (this->inputPin)
    {
         PUSH_COLOR(imnodes::ColorStyle::ColorStyle_Pin, color);
-
-        BEGIN_INPUT_PIN(id, shape);
+		if (shape != NFPinShape::PinShape_NONE)
+		{
+			BEGIN_INPUT_PIN(id, shape);
+		}
 
         POP_COLOR();
 
-        if (this->name.length() > 0)
-        {
-            //ShowImage(this->image.c_str(), 20, 20);
-			ImGui::Image(this->iconTextureId, ImVec2(this->imageSize.X(), this->imageSize.Y()));
+	   //ImGui::Text(this->name.c_str());
 
-            ImGui::SameLine();
-            ImGui::PushItemWidth(60);
-            ImGui::Text(this->name.c_str());
-            ImGui::PopItemWidth();
-        }
-        else
-        {
-            ImGui::Text(this->name.c_str());
-        }
+        //ShowImage(this->image.c_str(), 20, 20);
+		ImGui::Image(this->iconTextureId, ImVec2(this->imageSize.X(), this->imageSize.Y()));
+
+        ImGui::SameLine();
+        ImGui::PushItemWidth(60);
+        ImGui::Text(this->name.c_str());
+        ImGui::PopItemWidth();
+
 
         this->nodeView->RenderForPin(this);
-
-        END_INPUT_PIN();
+	   if (shape != NFPinShape::PinShape_NONE)
+	   {
+		   END_INPUT_PIN();
+	   }
    }
    else
    {
@@ -236,7 +253,11 @@ void NFNodePin::Execute()
 
         ImGui::SameLine();
         ImGui::Indent(70);
-        ShowImage(this->image.c_str(), 20, 20);
+
+
+	   ImGui::Image(this->iconTextureId, ImVec2(this->imageSize.X(), this->imageSize.Y()));
+        //this->iconTextureId = ShowImage(this->image.c_str(), 20, 20);
+
         ImGui::SameLine();
 
         this->nodeView->RenderForPin(this);
@@ -521,7 +542,7 @@ NF_SHARE_PTR<NFNode> NFNodeView::AddNode(const NFGUID guid, const std::string& n
    {
        auto node = NF_SHARE_PTR<NFNode>(NF_NEW NFNode(NFIView::GenerateNodeId(), name, guid, vec, color));
        node->nodeView = this;
-       mNodes.insert(std::pair<NFGUID, NF_SHARE_PTR<NFNode>>(guid, node));
+       mNodes.insert(std::make_pair(guid, node));
 
        return node;
    }

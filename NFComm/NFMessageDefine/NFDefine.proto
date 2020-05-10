@@ -147,6 +147,9 @@ enum EGameMsgID
 	REQ_POS_SYNC							= 306;
 	ACK_POS_SYNC							= 307;
 
+	REQ_CHAT								= 350;
+	ACK_CHAT								= 351;
+
 	REQ_SKILL_OBJECTX						= 400;
 	ACK_SKILL_OBJECTX						= 401;
 	REQ_SKILL_POS							= 402;
@@ -164,7 +167,15 @@ enum EGameMsgID
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
-//PropertyType
+
+enum EItemType
+{
+    EIT_EQUIP   			= 0; //the equipment which can add props
+	EIT_GEM   				= 1; //the gem ca be embed to the equipment
+	EIT_SUPPLY   			= 2; //expendable items for player, such as a medicine that cures
+	EIT_SCROLL   			= 3; //special items that can call a hero or others, special items can do what you want to do
+}
+
 enum ESkillType
 {
 	BRIEF_SINGLE_SKILL 			= 0;//this kind of skill just can damage one object

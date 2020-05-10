@@ -12,6 +12,10 @@
 		<!--<Plugin Name="NFBluePrintPlugin" />-->
 		<Plugin Name="NFActorPlugin" />
 		<Plugin Name="NFNavigationPlugin" />
+        
+        <Plugin Name="NFInventoryPlugin" />
+        <Plugin Name="NFConsumeManagerPlugin" />
+        <Plugin Name="NFChatPlugin" />
 
 	</GameServer>
 

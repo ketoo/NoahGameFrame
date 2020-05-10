@@ -113,7 +113,7 @@ namespace NodeSystem
         if (mNodes.find(nodeId) == mNodes.end())
         {
             auto node = std::shared_ptr<NFNode>(new NFNode(nodeId, nodeSize, name, vec, color));
-            mNodes.insert(std::pair<NFGUID, std::shared_ptr<NFNode>>(nodeId, node));
+            mNodes.insert(std::make_pair(nodeId, node));
 
             return node;
         }

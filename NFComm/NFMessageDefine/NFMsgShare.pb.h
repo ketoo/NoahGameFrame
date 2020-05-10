@@ -50,7 +50,7 @@ struct TableStruct_NFMsgShare_2eproto {
     PROTOBUF_SECTION_VARIABLE(protodesc_cold);
   static const ::PROTOBUF_NAMESPACE_ID::internal::AuxillaryParseTableField aux[]
     PROTOBUF_SECTION_VARIABLE(protodesc_cold);
-  static const ::PROTOBUF_NAMESPACE_ID::internal::ParseTable schema[12]
+  static const ::PROTOBUF_NAMESPACE_ID::internal::ParseTable schema[13]
     PROTOBUF_SECTION_VARIABLE(protodesc_cold);
   static const ::PROTOBUF_NAMESPACE_ID::internal::FieldMetadata field_metadata[];
   static const ::PROTOBUF_NAMESPACE_ID::internal::SerializationTable serialization_table[];
@@ -76,6 +76,9 @@ extern PosSyncUnitDefaultTypeInternal _PosSyncUnit_default_instance_;
 class ReqAckEnterGameSuccess;
 class ReqAckEnterGameSuccessDefaultTypeInternal;
 extern ReqAckEnterGameSuccessDefaultTypeInternal _ReqAckEnterGameSuccess_default_instance_;
+class ReqAckPlayerChat;
+class ReqAckPlayerChatDefaultTypeInternal;
+extern ReqAckPlayerChatDefaultTypeInternal _ReqAckPlayerChat_default_instance_;
 class ReqAckPlayerPosSync;
 class ReqAckPlayerPosSyncDefaultTypeInternal;
 extern ReqAckPlayerPosSyncDefaultTypeInternal _ReqAckPlayerPosSync_default_instance_;
@@ -102,6 +105,7 @@ template<> ::NFMsg::EffectData* Arena::CreateMaybeMessage<::NFMsg::EffectData>(A
 template<> ::NFMsg::PlayerEntryInfo* Arena::CreateMaybeMessage<::NFMsg::PlayerEntryInfo>(Arena*);
 template<> ::NFMsg::PosSyncUnit* Arena::CreateMaybeMessage<::NFMsg::PosSyncUnit>(Arena*);
 template<> ::NFMsg::ReqAckEnterGameSuccess* Arena::CreateMaybeMessage<::NFMsg::ReqAckEnterGameSuccess>(Arena*);
+template<> ::NFMsg::ReqAckPlayerChat* Arena::CreateMaybeMessage<::NFMsg::ReqAckPlayerChat>(Arena*);
 template<> ::NFMsg::ReqAckPlayerPosSync* Arena::CreateMaybeMessage<::NFMsg::ReqAckPlayerPosSync>(Arena*);
 template<> ::NFMsg::ReqAckSwapScene* Arena::CreateMaybeMessage<::NFMsg::ReqAckSwapScene>(Arena*);
 template<> ::NFMsg::ReqAckUseSkill* Arena::CreateMaybeMessage<::NFMsg::ReqAckUseSkill>(Arena*);
@@ -139,6 +143,59 @@ inline bool EffectData_EResultType_Parse(
     const std::string& name, EffectData_EResultType* value) {
   return ::PROTOBUF_NAMESPACE_ID::internal::ParseNamedEnum<EffectData_EResultType>(
     EffectData_EResultType_descriptor(), name, value);
+}
+enum ReqAckPlayerChat_EGameChatChannel : int {
+  ReqAckPlayerChat_EGameChatChannel_EGCC_GLOBAL = 0,
+  ReqAckPlayerChat_EGameChatChannel_EGCC_CLAN = 1,
+  ReqAckPlayerChat_EGameChatChannel_EGCC_ROOM = 2,
+  ReqAckPlayerChat_EGameChatChannel_EGCC_TEAM = 3,
+  ReqAckPlayerChat_EGameChatChannel_ReqAckPlayerChat_EGameChatChannel_INT_MIN_SENTINEL_DO_NOT_USE_ = std::numeric_limits<::PROTOBUF_NAMESPACE_ID::int32>::min(),
+  ReqAckPlayerChat_EGameChatChannel_ReqAckPlayerChat_EGameChatChannel_INT_MAX_SENTINEL_DO_NOT_USE_ = std::numeric_limits<::PROTOBUF_NAMESPACE_ID::int32>::max()
+};
+bool ReqAckPlayerChat_EGameChatChannel_IsValid(int value);
+constexpr ReqAckPlayerChat_EGameChatChannel ReqAckPlayerChat_EGameChatChannel_EGameChatChannel_MIN = ReqAckPlayerChat_EGameChatChannel_EGCC_GLOBAL;
+constexpr ReqAckPlayerChat_EGameChatChannel ReqAckPlayerChat_EGameChatChannel_EGameChatChannel_MAX = ReqAckPlayerChat_EGameChatChannel_EGCC_TEAM;
+constexpr int ReqAckPlayerChat_EGameChatChannel_EGameChatChannel_ARRAYSIZE = ReqAckPlayerChat_EGameChatChannel_EGameChatChannel_MAX + 1;
+
+const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor* ReqAckPlayerChat_EGameChatChannel_descriptor();
+template<typename T>
+inline const std::string& ReqAckPlayerChat_EGameChatChannel_Name(T enum_t_value) {
+  static_assert(::std::is_same<T, ReqAckPlayerChat_EGameChatChannel>::value ||
+    ::std::is_integral<T>::value,
+    "Incorrect type passed to function ReqAckPlayerChat_EGameChatChannel_Name.");
+  return ::PROTOBUF_NAMESPACE_ID::internal::NameOfEnum(
+    ReqAckPlayerChat_EGameChatChannel_descriptor(), enum_t_value);
+}
+inline bool ReqAckPlayerChat_EGameChatChannel_Parse(
+    const std::string& name, ReqAckPlayerChat_EGameChatChannel* value) {
+  return ::PROTOBUF_NAMESPACE_ID::internal::ParseNamedEnum<ReqAckPlayerChat_EGameChatChannel>(
+    ReqAckPlayerChat_EGameChatChannel_descriptor(), name, value);
+}
+enum ReqAckPlayerChat_EGameChatType : int {
+  ReqAckPlayerChat_EGameChatType_EGCT_TEXT = 0,
+  ReqAckPlayerChat_EGameChatType_EGCT_VOICE = 1,
+  ReqAckPlayerChat_EGameChatType_EGCT_EMOJI = 2,
+  ReqAckPlayerChat_EGameChatType_ReqAckPlayerChat_EGameChatType_INT_MIN_SENTINEL_DO_NOT_USE_ = std::numeric_limits<::PROTOBUF_NAMESPACE_ID::int32>::min(),
+  ReqAckPlayerChat_EGameChatType_ReqAckPlayerChat_EGameChatType_INT_MAX_SENTINEL_DO_NOT_USE_ = std::numeric_limits<::PROTOBUF_NAMESPACE_ID::int32>::max()
+};
+bool ReqAckPlayerChat_EGameChatType_IsValid(int value);
+constexpr ReqAckPlayerChat_EGameChatType ReqAckPlayerChat_EGameChatType_EGameChatType_MIN = ReqAckPlayerChat_EGameChatType_EGCT_TEXT;
+constexpr ReqAckPlayerChat_EGameChatType ReqAckPlayerChat_EGameChatType_EGameChatType_MAX = ReqAckPlayerChat_EGameChatType_EGCT_EMOJI;
+constexpr int ReqAckPlayerChat_EGameChatType_EGameChatType_ARRAYSIZE = ReqAckPlayerChat_EGameChatType_EGameChatType_MAX + 1;
+
+const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor* ReqAckPlayerChat_EGameChatType_descriptor();
+template<typename T>
+inline const std::string& ReqAckPlayerChat_EGameChatType_Name(T enum_t_value) {
+  static_assert(::std::is_same<T, ReqAckPlayerChat_EGameChatType>::value ||
+    ::std::is_integral<T>::value,
+    "Incorrect type passed to function ReqAckPlayerChat_EGameChatType_Name.");
+  return ::PROTOBUF_NAMESPACE_ID::internal::NameOfEnum(
+    ReqAckPlayerChat_EGameChatType_descriptor(), enum_t_value);
+}
+inline bool ReqAckPlayerChat_EGameChatType_Parse(
+    const std::string& name, ReqAckPlayerChat_EGameChatType* value) {
+  return ::PROTOBUF_NAMESPACE_ID::internal::ParseNamedEnum<ReqAckPlayerChat_EGameChatType>(
+    ReqAckPlayerChat_EGameChatType_descriptor(), name, value);
 }
 // ===================================================================
 
@@ -1323,11 +1380,44 @@ class PosSyncUnit :
   // accessors -------------------------------------------------------
 
   enum : int {
-    kPosFieldNumber = 1,
-    kDirectionFieldNumber = 2,
-    kStatusFieldNumber = 3,
+    kMoverFieldNumber = 1,
+    kNowFieldNumber = 2,
+    kPosFieldNumber = 3,
+    kDirectionFieldNumber = 4,
+    kStatusFieldNumber = 5,
+    kTimeFieldNumber = 6,
   };
-  // .NFMsg.Vector3 pos = 1;
+  // .NFMsg.Ident mover = 1;
+  bool has_mover() const;
+  private:
+  bool _internal_has_mover() const;
+  public:
+  void clear_mover();
+  const ::NFMsg::Ident& mover() const;
+  ::NFMsg::Ident* release_mover();
+  ::NFMsg::Ident* mutable_mover();
+  void set_allocated_mover(::NFMsg::Ident* mover);
+  private:
+  const ::NFMsg::Ident& _internal_mover() const;
+  ::NFMsg::Ident* _internal_mutable_mover();
+  public:
+
+  // .NFMsg.Vector3 now = 2;
+  bool has_now() const;
+  private:
+  bool _internal_has_now() const;
+  public:
+  void clear_now();
+  const ::NFMsg::Vector3& now() const;
+  ::NFMsg::Vector3* release_now();
+  ::NFMsg::Vector3* mutable_now();
+  void set_allocated_now(::NFMsg::Vector3* now);
+  private:
+  const ::NFMsg::Vector3& _internal_now() const;
+  ::NFMsg::Vector3* _internal_mutable_now();
+  public:
+
+  // .NFMsg.Vector3 pos = 3;
   bool has_pos() const;
   private:
   bool _internal_has_pos() const;
@@ -1342,7 +1432,7 @@ class PosSyncUnit :
   ::NFMsg::Vector3* _internal_mutable_pos();
   public:
 
-  // .NFMsg.Vector3 direction = 2;
+  // .NFMsg.Vector3 direction = 4;
   bool has_direction() const;
   private:
   bool _internal_has_direction() const;
@@ -1357,7 +1447,7 @@ class PosSyncUnit :
   ::NFMsg::Vector3* _internal_mutable_direction();
   public:
 
-  // int32 status = 3;
+  // int32 status = 5;
   void clear_status();
   ::PROTOBUF_NAMESPACE_ID::int32 status() const;
   void set_status(::PROTOBUF_NAMESPACE_ID::int32 value);
@@ -1366,14 +1456,26 @@ class PosSyncUnit :
   void _internal_set_status(::PROTOBUF_NAMESPACE_ID::int32 value);
   public:
 
+  // float time = 6;
+  void clear_time();
+  float time() const;
+  void set_time(float value);
+  private:
+  float _internal_time() const;
+  void _internal_set_time(float value);
+  public:
+
   // @@protoc_insertion_point(class_scope:NFMsg.PosSyncUnit)
  private:
   class _Internal;
 
   ::PROTOBUF_NAMESPACE_ID::internal::InternalMetadataWithArena _internal_metadata_;
+  ::NFMsg::Ident* mover_;
+  ::NFMsg::Vector3* now_;
   ::NFMsg::Vector3* pos_;
   ::NFMsg::Vector3* direction_;
   ::PROTOBUF_NAMESPACE_ID::int32 status_;
+  float time_;
   mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   friend struct ::TableStruct_NFMsgShare_2eproto;
 };
@@ -1485,10 +1587,9 @@ class ReqAckPlayerPosSync :
   // accessors -------------------------------------------------------
 
   enum : int {
-    kSyncUnitFieldNumber = 2,
-    kMoverFieldNumber = 1,
+    kSyncUnitFieldNumber = 1,
   };
-  // repeated .NFMsg.PosSyncUnit sync_unit = 2;
+  // repeated .NFMsg.PosSyncUnit sync_unit = 1;
   int sync_unit_size() const;
   private:
   int _internal_sync_unit_size() const;
@@ -1506,28 +1607,12 @@ class ReqAckPlayerPosSync :
   const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::NFMsg::PosSyncUnit >&
       sync_unit() const;
 
-  // .NFMsg.Ident mover = 1;
-  bool has_mover() const;
-  private:
-  bool _internal_has_mover() const;
-  public:
-  void clear_mover();
-  const ::NFMsg::Ident& mover() const;
-  ::NFMsg::Ident* release_mover();
-  ::NFMsg::Ident* mutable_mover();
-  void set_allocated_mover(::NFMsg::Ident* mover);
-  private:
-  const ::NFMsg::Ident& _internal_mover() const;
-  ::NFMsg::Ident* _internal_mutable_mover();
-  public:
-
   // @@protoc_insertion_point(class_scope:NFMsg.ReqAckPlayerPosSync)
  private:
   class _Internal;
 
   ::PROTOBUF_NAMESPACE_ID::internal::InternalMetadataWithArena _internal_metadata_;
   ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::NFMsg::PosSyncUnit > sync_unit_;
-  ::NFMsg::Ident* mover_;
   mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   friend struct ::TableStruct_NFMsgShare_2eproto;
 };
@@ -2106,6 +2191,264 @@ class ReqAckSwapScene :
   float x_;
   float y_;
   float z_;
+  mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
+  friend struct ::TableStruct_NFMsgShare_2eproto;
+};
+// -------------------------------------------------------------------
+
+class ReqAckPlayerChat :
+    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:NFMsg.ReqAckPlayerChat) */ {
+ public:
+  ReqAckPlayerChat();
+  virtual ~ReqAckPlayerChat();
+
+  ReqAckPlayerChat(const ReqAckPlayerChat& from);
+  ReqAckPlayerChat(ReqAckPlayerChat&& from) noexcept
+    : ReqAckPlayerChat() {
+    *this = ::std::move(from);
+  }
+
+  inline ReqAckPlayerChat& operator=(const ReqAckPlayerChat& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  inline ReqAckPlayerChat& operator=(ReqAckPlayerChat&& from) noexcept {
+    if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
+      if (this != &from) InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* descriptor() {
+    return GetDescriptor();
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* GetDescriptor() {
+    return GetMetadataStatic().descriptor;
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Reflection* GetReflection() {
+    return GetMetadataStatic().reflection;
+  }
+  static const ReqAckPlayerChat& default_instance();
+
+  static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
+  static inline const ReqAckPlayerChat* internal_default_instance() {
+    return reinterpret_cast<const ReqAckPlayerChat*>(
+               &_ReqAckPlayerChat_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages =
+    12;
+
+  friend void swap(ReqAckPlayerChat& a, ReqAckPlayerChat& b) {
+    a.Swap(&b);
+  }
+  inline void Swap(ReqAckPlayerChat* other) {
+    if (other == this) return;
+    InternalSwap(other);
+  }
+
+  // implements Message ----------------------------------------------
+
+  inline ReqAckPlayerChat* New() const final {
+    return CreateMaybeMessage<ReqAckPlayerChat>(nullptr);
+  }
+
+  ReqAckPlayerChat* New(::PROTOBUF_NAMESPACE_ID::Arena* arena) const final {
+    return CreateMaybeMessage<ReqAckPlayerChat>(arena);
+  }
+  void CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
+  void MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
+  void CopyFrom(const ReqAckPlayerChat& from);
+  void MergeFrom(const ReqAckPlayerChat& from);
+  PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
+  bool IsInitialized() const final;
+
+  size_t ByteSizeLong() const final;
+  const char* _InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) final;
+  ::PROTOBUF_NAMESPACE_ID::uint8* _InternalSerialize(
+      ::PROTOBUF_NAMESPACE_ID::uint8* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const final;
+  int GetCachedSize() const final { return _cached_size_.Get(); }
+
+  private:
+  inline void SharedCtor();
+  inline void SharedDtor();
+  void SetCachedSize(int size) const final;
+  void InternalSwap(ReqAckPlayerChat* other);
+  friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
+  static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
+    return "NFMsg.ReqAckPlayerChat";
+  }
+  private:
+  inline ::PROTOBUF_NAMESPACE_ID::Arena* GetArenaNoVirtual() const {
+    return nullptr;
+  }
+  inline void* MaybeArenaPtr() const {
+    return nullptr;
+  }
+  public:
+
+  ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadata() const final;
+  private:
+  static ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadataStatic() {
+    ::PROTOBUF_NAMESPACE_ID::internal::AssignDescriptors(&::descriptor_table_NFMsgShare_2eproto);
+    return ::descriptor_table_NFMsgShare_2eproto.file_level_metadata[kIndexInFileMessages];
+  }
+
+  public:
+
+  // nested types ----------------------------------------------------
+
+  typedef ReqAckPlayerChat_EGameChatChannel EGameChatChannel;
+  static constexpr EGameChatChannel EGCC_GLOBAL =
+    ReqAckPlayerChat_EGameChatChannel_EGCC_GLOBAL;
+  static constexpr EGameChatChannel EGCC_CLAN =
+    ReqAckPlayerChat_EGameChatChannel_EGCC_CLAN;
+  static constexpr EGameChatChannel EGCC_ROOM =
+    ReqAckPlayerChat_EGameChatChannel_EGCC_ROOM;
+  static constexpr EGameChatChannel EGCC_TEAM =
+    ReqAckPlayerChat_EGameChatChannel_EGCC_TEAM;
+  static inline bool EGameChatChannel_IsValid(int value) {
+    return ReqAckPlayerChat_EGameChatChannel_IsValid(value);
+  }
+  static constexpr EGameChatChannel EGameChatChannel_MIN =
+    ReqAckPlayerChat_EGameChatChannel_EGameChatChannel_MIN;
+  static constexpr EGameChatChannel EGameChatChannel_MAX =
+    ReqAckPlayerChat_EGameChatChannel_EGameChatChannel_MAX;
+  static constexpr int EGameChatChannel_ARRAYSIZE =
+    ReqAckPlayerChat_EGameChatChannel_EGameChatChannel_ARRAYSIZE;
+  static inline const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor*
+  EGameChatChannel_descriptor() {
+    return ReqAckPlayerChat_EGameChatChannel_descriptor();
+  }
+  template<typename T>
+  static inline const std::string& EGameChatChannel_Name(T enum_t_value) {
+    static_assert(::std::is_same<T, EGameChatChannel>::value ||
+      ::std::is_integral<T>::value,
+      "Incorrect type passed to function EGameChatChannel_Name.");
+    return ReqAckPlayerChat_EGameChatChannel_Name(enum_t_value);
+  }
+  static inline bool EGameChatChannel_Parse(const std::string& name,
+      EGameChatChannel* value) {
+    return ReqAckPlayerChat_EGameChatChannel_Parse(name, value);
+  }
+
+  typedef ReqAckPlayerChat_EGameChatType EGameChatType;
+  static constexpr EGameChatType EGCT_TEXT =
+    ReqAckPlayerChat_EGameChatType_EGCT_TEXT;
+  static constexpr EGameChatType EGCT_VOICE =
+    ReqAckPlayerChat_EGameChatType_EGCT_VOICE;
+  static constexpr EGameChatType EGCT_EMOJI =
+    ReqAckPlayerChat_EGameChatType_EGCT_EMOJI;
+  static inline bool EGameChatType_IsValid(int value) {
+    return ReqAckPlayerChat_EGameChatType_IsValid(value);
+  }
+  static constexpr EGameChatType EGameChatType_MIN =
+    ReqAckPlayerChat_EGameChatType_EGameChatType_MIN;
+  static constexpr EGameChatType EGameChatType_MAX =
+    ReqAckPlayerChat_EGameChatType_EGameChatType_MAX;
+  static constexpr int EGameChatType_ARRAYSIZE =
+    ReqAckPlayerChat_EGameChatType_EGameChatType_ARRAYSIZE;
+  static inline const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor*
+  EGameChatType_descriptor() {
+    return ReqAckPlayerChat_EGameChatType_descriptor();
+  }
+  template<typename T>
+  static inline const std::string& EGameChatType_Name(T enum_t_value) {
+    static_assert(::std::is_same<T, EGameChatType>::value ||
+      ::std::is_integral<T>::value,
+      "Incorrect type passed to function EGameChatType_Name.");
+    return ReqAckPlayerChat_EGameChatType_Name(enum_t_value);
+  }
+  static inline bool EGameChatType_Parse(const std::string& name,
+      EGameChatType* value) {
+    return ReqAckPlayerChat_EGameChatType_Parse(name, value);
+  }
+
+  // accessors -------------------------------------------------------
+
+  enum : int {
+    kPlayerNameFieldNumber = 2,
+    kChatInfoFieldNumber = 5,
+    kPlayerIdFieldNumber = 1,
+    kChatChannelFieldNumber = 3,
+    kChatTypeFieldNumber = 4,
+  };
+  // bytes player_name = 2;
+  void clear_player_name();
+  const std::string& player_name() const;
+  void set_player_name(const std::string& value);
+  void set_player_name(std::string&& value);
+  void set_player_name(const char* value);
+  void set_player_name(const void* value, size_t size);
+  std::string* mutable_player_name();
+  std::string* release_player_name();
+  void set_allocated_player_name(std::string* player_name);
+  private:
+  const std::string& _internal_player_name() const;
+  void _internal_set_player_name(const std::string& value);
+  std::string* _internal_mutable_player_name();
+  public:
+
+  // bytes chat_info = 5;
+  void clear_chat_info();
+  const std::string& chat_info() const;
+  void set_chat_info(const std::string& value);
+  void set_chat_info(std::string&& value);
+  void set_chat_info(const char* value);
+  void set_chat_info(const void* value, size_t size);
+  std::string* mutable_chat_info();
+  std::string* release_chat_info();
+  void set_allocated_chat_info(std::string* chat_info);
+  private:
+  const std::string& _internal_chat_info() const;
+  void _internal_set_chat_info(const std::string& value);
+  std::string* _internal_mutable_chat_info();
+  public:
+
+  // .NFMsg.Ident player_id = 1;
+  bool has_player_id() const;
+  private:
+  bool _internal_has_player_id() const;
+  public:
+  void clear_player_id();
+  const ::NFMsg::Ident& player_id() const;
+  ::NFMsg::Ident* release_player_id();
+  ::NFMsg::Ident* mutable_player_id();
+  void set_allocated_player_id(::NFMsg::Ident* player_id);
+  private:
+  const ::NFMsg::Ident& _internal_player_id() const;
+  ::NFMsg::Ident* _internal_mutable_player_id();
+  public:
+
+  // .NFMsg.ReqAckPlayerChat.EGameChatChannel chat_channel = 3;
+  void clear_chat_channel();
+  ::NFMsg::ReqAckPlayerChat_EGameChatChannel chat_channel() const;
+  void set_chat_channel(::NFMsg::ReqAckPlayerChat_EGameChatChannel value);
+  private:
+  ::NFMsg::ReqAckPlayerChat_EGameChatChannel _internal_chat_channel() const;
+  void _internal_set_chat_channel(::NFMsg::ReqAckPlayerChat_EGameChatChannel value);
+  public:
+
+  // .NFMsg.ReqAckPlayerChat.EGameChatType chat_type = 4;
+  void clear_chat_type();
+  ::NFMsg::ReqAckPlayerChat_EGameChatType chat_type() const;
+  void set_chat_type(::NFMsg::ReqAckPlayerChat_EGameChatType value);
+  private:
+  ::NFMsg::ReqAckPlayerChat_EGameChatType _internal_chat_type() const;
+  void _internal_set_chat_type(::NFMsg::ReqAckPlayerChat_EGameChatType value);
+  public:
+
+  // @@protoc_insertion_point(class_scope:NFMsg.ReqAckPlayerChat)
+ private:
+  class _Internal;
+
+  ::PROTOBUF_NAMESPACE_ID::internal::InternalMetadataWithArena _internal_metadata_;
+  ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr player_name_;
+  ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr chat_info_;
+  ::NFMsg::Ident* player_id_;
+  int chat_channel_;
+  int chat_type_;
   mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   friend struct ::TableStruct_NFMsgShare_2eproto;
 };
@@ -2771,7 +3114,115 @@ AckPlayerLeaveList::object_list() const {
 
 // PosSyncUnit
 
-// .NFMsg.Vector3 pos = 1;
+// .NFMsg.Ident mover = 1;
+inline bool PosSyncUnit::_internal_has_mover() const {
+  return this != internal_default_instance() && mover_ != nullptr;
+}
+inline bool PosSyncUnit::has_mover() const {
+  return _internal_has_mover();
+}
+inline const ::NFMsg::Ident& PosSyncUnit::_internal_mover() const {
+  const ::NFMsg::Ident* p = mover_;
+  return p != nullptr ? *p : *reinterpret_cast<const ::NFMsg::Ident*>(
+      &::NFMsg::_Ident_default_instance_);
+}
+inline const ::NFMsg::Ident& PosSyncUnit::mover() const {
+  // @@protoc_insertion_point(field_get:NFMsg.PosSyncUnit.mover)
+  return _internal_mover();
+}
+inline ::NFMsg::Ident* PosSyncUnit::release_mover() {
+  // @@protoc_insertion_point(field_release:NFMsg.PosSyncUnit.mover)
+  
+  ::NFMsg::Ident* temp = mover_;
+  mover_ = nullptr;
+  return temp;
+}
+inline ::NFMsg::Ident* PosSyncUnit::_internal_mutable_mover() {
+  
+  if (mover_ == nullptr) {
+    auto* p = CreateMaybeMessage<::NFMsg::Ident>(GetArenaNoVirtual());
+    mover_ = p;
+  }
+  return mover_;
+}
+inline ::NFMsg::Ident* PosSyncUnit::mutable_mover() {
+  // @@protoc_insertion_point(field_mutable:NFMsg.PosSyncUnit.mover)
+  return _internal_mutable_mover();
+}
+inline void PosSyncUnit::set_allocated_mover(::NFMsg::Ident* mover) {
+  ::PROTOBUF_NAMESPACE_ID::Arena* message_arena = GetArenaNoVirtual();
+  if (message_arena == nullptr) {
+    delete reinterpret_cast< ::PROTOBUF_NAMESPACE_ID::MessageLite*>(mover_);
+  }
+  if (mover) {
+    ::PROTOBUF_NAMESPACE_ID::Arena* submessage_arena = nullptr;
+    if (message_arena != submessage_arena) {
+      mover = ::PROTOBUF_NAMESPACE_ID::internal::GetOwnedMessage(
+          message_arena, mover, submessage_arena);
+    }
+    
+  } else {
+    
+  }
+  mover_ = mover;
+  // @@protoc_insertion_point(field_set_allocated:NFMsg.PosSyncUnit.mover)
+}
+
+// .NFMsg.Vector3 now = 2;
+inline bool PosSyncUnit::_internal_has_now() const {
+  return this != internal_default_instance() && now_ != nullptr;
+}
+inline bool PosSyncUnit::has_now() const {
+  return _internal_has_now();
+}
+inline const ::NFMsg::Vector3& PosSyncUnit::_internal_now() const {
+  const ::NFMsg::Vector3* p = now_;
+  return p != nullptr ? *p : *reinterpret_cast<const ::NFMsg::Vector3*>(
+      &::NFMsg::_Vector3_default_instance_);
+}
+inline const ::NFMsg::Vector3& PosSyncUnit::now() const {
+  // @@protoc_insertion_point(field_get:NFMsg.PosSyncUnit.now)
+  return _internal_now();
+}
+inline ::NFMsg::Vector3* PosSyncUnit::release_now() {
+  // @@protoc_insertion_point(field_release:NFMsg.PosSyncUnit.now)
+  
+  ::NFMsg::Vector3* temp = now_;
+  now_ = nullptr;
+  return temp;
+}
+inline ::NFMsg::Vector3* PosSyncUnit::_internal_mutable_now() {
+  
+  if (now_ == nullptr) {
+    auto* p = CreateMaybeMessage<::NFMsg::Vector3>(GetArenaNoVirtual());
+    now_ = p;
+  }
+  return now_;
+}
+inline ::NFMsg::Vector3* PosSyncUnit::mutable_now() {
+  // @@protoc_insertion_point(field_mutable:NFMsg.PosSyncUnit.now)
+  return _internal_mutable_now();
+}
+inline void PosSyncUnit::set_allocated_now(::NFMsg::Vector3* now) {
+  ::PROTOBUF_NAMESPACE_ID::Arena* message_arena = GetArenaNoVirtual();
+  if (message_arena == nullptr) {
+    delete reinterpret_cast< ::PROTOBUF_NAMESPACE_ID::MessageLite*>(now_);
+  }
+  if (now) {
+    ::PROTOBUF_NAMESPACE_ID::Arena* submessage_arena = nullptr;
+    if (message_arena != submessage_arena) {
+      now = ::PROTOBUF_NAMESPACE_ID::internal::GetOwnedMessage(
+          message_arena, now, submessage_arena);
+    }
+    
+  } else {
+    
+  }
+  now_ = now;
+  // @@protoc_insertion_point(field_set_allocated:NFMsg.PosSyncUnit.now)
+}
+
+// .NFMsg.Vector3 pos = 3;
 inline bool PosSyncUnit::_internal_has_pos() const {
   return this != internal_default_instance() && pos_ != nullptr;
 }
@@ -2825,7 +3276,7 @@ inline void PosSyncUnit::set_allocated_pos(::NFMsg::Vector3* pos) {
   // @@protoc_insertion_point(field_set_allocated:NFMsg.PosSyncUnit.pos)
 }
 
-// .NFMsg.Vector3 direction = 2;
+// .NFMsg.Vector3 direction = 4;
 inline bool PosSyncUnit::_internal_has_direction() const {
   return this != internal_default_instance() && direction_ != nullptr;
 }
@@ -2879,7 +3330,7 @@ inline void PosSyncUnit::set_allocated_direction(::NFMsg::Vector3* direction) {
   // @@protoc_insertion_point(field_set_allocated:NFMsg.PosSyncUnit.direction)
 }
 
-// int32 status = 3;
+// int32 status = 5;
 inline void PosSyncUnit::clear_status() {
   status_ = 0;
 }
@@ -2899,65 +3350,31 @@ inline void PosSyncUnit::set_status(::PROTOBUF_NAMESPACE_ID::int32 value) {
   // @@protoc_insertion_point(field_set:NFMsg.PosSyncUnit.status)
 }
 
+// float time = 6;
+inline void PosSyncUnit::clear_time() {
+  time_ = 0;
+}
+inline float PosSyncUnit::_internal_time() const {
+  return time_;
+}
+inline float PosSyncUnit::time() const {
+  // @@protoc_insertion_point(field_get:NFMsg.PosSyncUnit.time)
+  return _internal_time();
+}
+inline void PosSyncUnit::_internal_set_time(float value) {
+  
+  time_ = value;
+}
+inline void PosSyncUnit::set_time(float value) {
+  _internal_set_time(value);
+  // @@protoc_insertion_point(field_set:NFMsg.PosSyncUnit.time)
+}
+
 // -------------------------------------------------------------------
 
 // ReqAckPlayerPosSync
 
-// .NFMsg.Ident mover = 1;
-inline bool ReqAckPlayerPosSync::_internal_has_mover() const {
-  return this != internal_default_instance() && mover_ != nullptr;
-}
-inline bool ReqAckPlayerPosSync::has_mover() const {
-  return _internal_has_mover();
-}
-inline const ::NFMsg::Ident& ReqAckPlayerPosSync::_internal_mover() const {
-  const ::NFMsg::Ident* p = mover_;
-  return p != nullptr ? *p : *reinterpret_cast<const ::NFMsg::Ident*>(
-      &::NFMsg::_Ident_default_instance_);
-}
-inline const ::NFMsg::Ident& ReqAckPlayerPosSync::mover() const {
-  // @@protoc_insertion_point(field_get:NFMsg.ReqAckPlayerPosSync.mover)
-  return _internal_mover();
-}
-inline ::NFMsg::Ident* ReqAckPlayerPosSync::release_mover() {
-  // @@protoc_insertion_point(field_release:NFMsg.ReqAckPlayerPosSync.mover)
-  
-  ::NFMsg::Ident* temp = mover_;
-  mover_ = nullptr;
-  return temp;
-}
-inline ::NFMsg::Ident* ReqAckPlayerPosSync::_internal_mutable_mover() {
-  
-  if (mover_ == nullptr) {
-    auto* p = CreateMaybeMessage<::NFMsg::Ident>(GetArenaNoVirtual());
-    mover_ = p;
-  }
-  return mover_;
-}
-inline ::NFMsg::Ident* ReqAckPlayerPosSync::mutable_mover() {
-  // @@protoc_insertion_point(field_mutable:NFMsg.ReqAckPlayerPosSync.mover)
-  return _internal_mutable_mover();
-}
-inline void ReqAckPlayerPosSync::set_allocated_mover(::NFMsg::Ident* mover) {
-  ::PROTOBUF_NAMESPACE_ID::Arena* message_arena = GetArenaNoVirtual();
-  if (message_arena == nullptr) {
-    delete reinterpret_cast< ::PROTOBUF_NAMESPACE_ID::MessageLite*>(mover_);
-  }
-  if (mover) {
-    ::PROTOBUF_NAMESPACE_ID::Arena* submessage_arena = nullptr;
-    if (message_arena != submessage_arena) {
-      mover = ::PROTOBUF_NAMESPACE_ID::internal::GetOwnedMessage(
-          message_arena, mover, submessage_arena);
-    }
-    
-  } else {
-    
-  }
-  mover_ = mover;
-  // @@protoc_insertion_point(field_set_allocated:NFMsg.ReqAckPlayerPosSync.mover)
-}
-
-// repeated .NFMsg.PosSyncUnit sync_unit = 2;
+// repeated .NFMsg.PosSyncUnit sync_unit = 1;
 inline int ReqAckPlayerPosSync::_internal_sync_unit_size() const {
   return sync_unit_.size();
 }
@@ -3455,9 +3872,229 @@ inline void ReqAckSwapScene::set_allocated_data(std::string* data) {
   // @@protoc_insertion_point(field_set_allocated:NFMsg.ReqAckSwapScene.data)
 }
 
+// -------------------------------------------------------------------
+
+// ReqAckPlayerChat
+
+// .NFMsg.Ident player_id = 1;
+inline bool ReqAckPlayerChat::_internal_has_player_id() const {
+  return this != internal_default_instance() && player_id_ != nullptr;
+}
+inline bool ReqAckPlayerChat::has_player_id() const {
+  return _internal_has_player_id();
+}
+inline const ::NFMsg::Ident& ReqAckPlayerChat::_internal_player_id() const {
+  const ::NFMsg::Ident* p = player_id_;
+  return p != nullptr ? *p : *reinterpret_cast<const ::NFMsg::Ident*>(
+      &::NFMsg::_Ident_default_instance_);
+}
+inline const ::NFMsg::Ident& ReqAckPlayerChat::player_id() const {
+  // @@protoc_insertion_point(field_get:NFMsg.ReqAckPlayerChat.player_id)
+  return _internal_player_id();
+}
+inline ::NFMsg::Ident* ReqAckPlayerChat::release_player_id() {
+  // @@protoc_insertion_point(field_release:NFMsg.ReqAckPlayerChat.player_id)
+  
+  ::NFMsg::Ident* temp = player_id_;
+  player_id_ = nullptr;
+  return temp;
+}
+inline ::NFMsg::Ident* ReqAckPlayerChat::_internal_mutable_player_id() {
+  
+  if (player_id_ == nullptr) {
+    auto* p = CreateMaybeMessage<::NFMsg::Ident>(GetArenaNoVirtual());
+    player_id_ = p;
+  }
+  return player_id_;
+}
+inline ::NFMsg::Ident* ReqAckPlayerChat::mutable_player_id() {
+  // @@protoc_insertion_point(field_mutable:NFMsg.ReqAckPlayerChat.player_id)
+  return _internal_mutable_player_id();
+}
+inline void ReqAckPlayerChat::set_allocated_player_id(::NFMsg::Ident* player_id) {
+  ::PROTOBUF_NAMESPACE_ID::Arena* message_arena = GetArenaNoVirtual();
+  if (message_arena == nullptr) {
+    delete reinterpret_cast< ::PROTOBUF_NAMESPACE_ID::MessageLite*>(player_id_);
+  }
+  if (player_id) {
+    ::PROTOBUF_NAMESPACE_ID::Arena* submessage_arena = nullptr;
+    if (message_arena != submessage_arena) {
+      player_id = ::PROTOBUF_NAMESPACE_ID::internal::GetOwnedMessage(
+          message_arena, player_id, submessage_arena);
+    }
+    
+  } else {
+    
+  }
+  player_id_ = player_id;
+  // @@protoc_insertion_point(field_set_allocated:NFMsg.ReqAckPlayerChat.player_id)
+}
+
+// bytes player_name = 2;
+inline void ReqAckPlayerChat::clear_player_name() {
+  player_name_.ClearToEmptyNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+}
+inline const std::string& ReqAckPlayerChat::player_name() const {
+  // @@protoc_insertion_point(field_get:NFMsg.ReqAckPlayerChat.player_name)
+  return _internal_player_name();
+}
+inline void ReqAckPlayerChat::set_player_name(const std::string& value) {
+  _internal_set_player_name(value);
+  // @@protoc_insertion_point(field_set:NFMsg.ReqAckPlayerChat.player_name)
+}
+inline std::string* ReqAckPlayerChat::mutable_player_name() {
+  // @@protoc_insertion_point(field_mutable:NFMsg.ReqAckPlayerChat.player_name)
+  return _internal_mutable_player_name();
+}
+inline const std::string& ReqAckPlayerChat::_internal_player_name() const {
+  return player_name_.GetNoArena();
+}
+inline void ReqAckPlayerChat::_internal_set_player_name(const std::string& value) {
+  
+  player_name_.SetNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), value);
+}
+inline void ReqAckPlayerChat::set_player_name(std::string&& value) {
+  
+  player_name_.SetNoArena(
+    &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
+  // @@protoc_insertion_point(field_set_rvalue:NFMsg.ReqAckPlayerChat.player_name)
+}
+inline void ReqAckPlayerChat::set_player_name(const char* value) {
+  GOOGLE_DCHECK(value != nullptr);
+  
+  player_name_.SetNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:NFMsg.ReqAckPlayerChat.player_name)
+}
+inline void ReqAckPlayerChat::set_player_name(const void* value, size_t size) {
+  
+  player_name_.SetNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(),
+      ::std::string(reinterpret_cast<const char*>(value), size));
+  // @@protoc_insertion_point(field_set_pointer:NFMsg.ReqAckPlayerChat.player_name)
+}
+inline std::string* ReqAckPlayerChat::_internal_mutable_player_name() {
+  
+  return player_name_.MutableNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+}
+inline std::string* ReqAckPlayerChat::release_player_name() {
+  // @@protoc_insertion_point(field_release:NFMsg.ReqAckPlayerChat.player_name)
+  
+  return player_name_.ReleaseNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+}
+inline void ReqAckPlayerChat::set_allocated_player_name(std::string* player_name) {
+  if (player_name != nullptr) {
+    
+  } else {
+    
+  }
+  player_name_.SetAllocatedNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), player_name);
+  // @@protoc_insertion_point(field_set_allocated:NFMsg.ReqAckPlayerChat.player_name)
+}
+
+// .NFMsg.ReqAckPlayerChat.EGameChatChannel chat_channel = 3;
+inline void ReqAckPlayerChat::clear_chat_channel() {
+  chat_channel_ = 0;
+}
+inline ::NFMsg::ReqAckPlayerChat_EGameChatChannel ReqAckPlayerChat::_internal_chat_channel() const {
+  return static_cast< ::NFMsg::ReqAckPlayerChat_EGameChatChannel >(chat_channel_);
+}
+inline ::NFMsg::ReqAckPlayerChat_EGameChatChannel ReqAckPlayerChat::chat_channel() const {
+  // @@protoc_insertion_point(field_get:NFMsg.ReqAckPlayerChat.chat_channel)
+  return _internal_chat_channel();
+}
+inline void ReqAckPlayerChat::_internal_set_chat_channel(::NFMsg::ReqAckPlayerChat_EGameChatChannel value) {
+  
+  chat_channel_ = value;
+}
+inline void ReqAckPlayerChat::set_chat_channel(::NFMsg::ReqAckPlayerChat_EGameChatChannel value) {
+  _internal_set_chat_channel(value);
+  // @@protoc_insertion_point(field_set:NFMsg.ReqAckPlayerChat.chat_channel)
+}
+
+// .NFMsg.ReqAckPlayerChat.EGameChatType chat_type = 4;
+inline void ReqAckPlayerChat::clear_chat_type() {
+  chat_type_ = 0;
+}
+inline ::NFMsg::ReqAckPlayerChat_EGameChatType ReqAckPlayerChat::_internal_chat_type() const {
+  return static_cast< ::NFMsg::ReqAckPlayerChat_EGameChatType >(chat_type_);
+}
+inline ::NFMsg::ReqAckPlayerChat_EGameChatType ReqAckPlayerChat::chat_type() const {
+  // @@protoc_insertion_point(field_get:NFMsg.ReqAckPlayerChat.chat_type)
+  return _internal_chat_type();
+}
+inline void ReqAckPlayerChat::_internal_set_chat_type(::NFMsg::ReqAckPlayerChat_EGameChatType value) {
+  
+  chat_type_ = value;
+}
+inline void ReqAckPlayerChat::set_chat_type(::NFMsg::ReqAckPlayerChat_EGameChatType value) {
+  _internal_set_chat_type(value);
+  // @@protoc_insertion_point(field_set:NFMsg.ReqAckPlayerChat.chat_type)
+}
+
+// bytes chat_info = 5;
+inline void ReqAckPlayerChat::clear_chat_info() {
+  chat_info_.ClearToEmptyNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+}
+inline const std::string& ReqAckPlayerChat::chat_info() const {
+  // @@protoc_insertion_point(field_get:NFMsg.ReqAckPlayerChat.chat_info)
+  return _internal_chat_info();
+}
+inline void ReqAckPlayerChat::set_chat_info(const std::string& value) {
+  _internal_set_chat_info(value);
+  // @@protoc_insertion_point(field_set:NFMsg.ReqAckPlayerChat.chat_info)
+}
+inline std::string* ReqAckPlayerChat::mutable_chat_info() {
+  // @@protoc_insertion_point(field_mutable:NFMsg.ReqAckPlayerChat.chat_info)
+  return _internal_mutable_chat_info();
+}
+inline const std::string& ReqAckPlayerChat::_internal_chat_info() const {
+  return chat_info_.GetNoArena();
+}
+inline void ReqAckPlayerChat::_internal_set_chat_info(const std::string& value) {
+  
+  chat_info_.SetNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), value);
+}
+inline void ReqAckPlayerChat::set_chat_info(std::string&& value) {
+  
+  chat_info_.SetNoArena(
+    &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
+  // @@protoc_insertion_point(field_set_rvalue:NFMsg.ReqAckPlayerChat.chat_info)
+}
+inline void ReqAckPlayerChat::set_chat_info(const char* value) {
+  GOOGLE_DCHECK(value != nullptr);
+  
+  chat_info_.SetNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:NFMsg.ReqAckPlayerChat.chat_info)
+}
+inline void ReqAckPlayerChat::set_chat_info(const void* value, size_t size) {
+  
+  chat_info_.SetNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(),
+      ::std::string(reinterpret_cast<const char*>(value), size));
+  // @@protoc_insertion_point(field_set_pointer:NFMsg.ReqAckPlayerChat.chat_info)
+}
+inline std::string* ReqAckPlayerChat::_internal_mutable_chat_info() {
+  
+  return chat_info_.MutableNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+}
+inline std::string* ReqAckPlayerChat::release_chat_info() {
+  // @@protoc_insertion_point(field_release:NFMsg.ReqAckPlayerChat.chat_info)
+  
+  return chat_info_.ReleaseNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+}
+inline void ReqAckPlayerChat::set_allocated_chat_info(std::string* chat_info) {
+  if (chat_info != nullptr) {
+    
+  } else {
+    
+  }
+  chat_info_.SetAllocatedNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), chat_info);
+  // @@protoc_insertion_point(field_set_allocated:NFMsg.ReqAckPlayerChat.chat_info)
+}
+
 #ifdef __GNUC__
   #pragma GCC diagnostic pop
 #endif  // __GNUC__
+// -------------------------------------------------------------------
+
 // -------------------------------------------------------------------
 
 // -------------------------------------------------------------------
@@ -3491,6 +4128,16 @@ template <> struct is_proto_enum< ::NFMsg::EffectData_EResultType> : ::std::true
 template <>
 inline const EnumDescriptor* GetEnumDescriptor< ::NFMsg::EffectData_EResultType>() {
   return ::NFMsg::EffectData_EResultType_descriptor();
+}
+template <> struct is_proto_enum< ::NFMsg::ReqAckPlayerChat_EGameChatChannel> : ::std::true_type {};
+template <>
+inline const EnumDescriptor* GetEnumDescriptor< ::NFMsg::ReqAckPlayerChat_EGameChatChannel>() {
+  return ::NFMsg::ReqAckPlayerChat_EGameChatChannel_descriptor();
+}
+template <> struct is_proto_enum< ::NFMsg::ReqAckPlayerChat_EGameChatType> : ::std::true_type {};
+template <>
+inline const EnumDescriptor* GetEnumDescriptor< ::NFMsg::ReqAckPlayerChat_EGameChatType>() {
+  return ::NFMsg::ReqAckPlayerChat_EGameChatType_descriptor();
 }
 
 PROTOBUF_NAMESPACE_CLOSE

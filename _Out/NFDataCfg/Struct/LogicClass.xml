@@ -1,10 +1,12 @@
 <?xml version='1.0' encoding='utf-8' ?>
 <XML>
 	<Class Id="IObject"	Path="NFDataCfg/Struct/Comm/IObject.xml"	InstancePath="NFDataCfg/Ini/Comm/IObject.xml"	>
+		<Class Id="CooldownRecord"	Path="NFDataCfg/Struct/Comm/CooldownRecord.xml"	InstancePath="NFDataCfg/Ini/Comm/CooldownRecord.xml"	/>
 		<Class Id="EffectData"	Path="NFDataCfg/Struct/Comm/EffectData.xml"	InstancePath="NFDataCfg/Ini/Comm/EffectData.xml"	/>
 		<Class Id="GM"	Path="NFDataCfg/Struct/Side/GM.xml"	InstancePath="NFDataCfg/Ini/Side/GM.xml"	/>
 		<Class Id="Group"	Path="NFDataCfg/Struct/Group.xml"	InstancePath="NFDataCfg/Ini/Group.xml"	/>
 		<Class Id="InitProperty"	Path="NFDataCfg/Struct/InitProperty.xml"	InstancePath="NFDataCfg/Ini/InitProperty.xml"	/>
+		<Class Id="Item"	Path="NFDataCfg/Struct/Item.xml"	InstancePath="NFDataCfg/Ini/Item.xml"	/>
 		<Class Id="Language"	Path="NFDataCfg/Struct/Side/Language.xml"	InstancePath="NFDataCfg/Ini/Side/Language.xml"	/>
 		<Class Id="NPC"	Path="NFDataCfg/Struct/NPC.xml"	InstancePath="NFDataCfg/Ini/NPC.xml"	/>
 		<Class Id="NoSqlServer"	Path="NFDataCfg/Struct/Side/NoSqlServer.xml"	InstancePath="NFDataCfg/Ini/Side/NoSqlServer.xml"	/>

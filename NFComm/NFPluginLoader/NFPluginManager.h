@@ -84,7 +84,8 @@ public:
 
     virtual NFIModule* FindTestModule(const std::string& strModuleName) override;
 
-    virtual std::list<NFIModule*> Modules() override;
+	virtual std::list<NFIModule*> Modules() override;
+	virtual std::list<NFIModule*> TestModules() override;
 
     virtual bool Execute() override;
 
@@ -117,10 +118,10 @@ public:
     virtual void SetLogConfigName(const std::string& strName) override;
 
     virtual NFIPlugin* GetCurrentPlugin() override;
-    virtual NFIModule* GetCurrenModule() override;
+    virtual NFIModule* GetCurrentModule() override;
 
     virtual void SetCurrentPlugin(NFIPlugin* pPlugin) override;
-    virtual void SetCurrenModule(NFIModule* pModule) override;
+    virtual void SetCurrentModule(NFIModule* pModule) override;
 
     virtual void SetGetFileContentFunctor(GET_FILECONTENT_FUNCTOR fun) override;
 

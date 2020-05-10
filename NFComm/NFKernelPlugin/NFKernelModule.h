@@ -214,9 +214,6 @@ private:
     NFICellModule* m_pCellModule;
     NFIThreadPoolModule* m_pThreadPoolModule;
 
-    //for async task
-    NFIClassModule* m_pBackupClassModule;
-    NFIElementModule* m_pBackupElementModule;
 };
 
 #endif

@@ -48,7 +48,7 @@ bool NFNavigationDataModule::AfterInit()
     document.Parse(jsonData.c_str());
 
     rapidjson::Value& tielConfigData = document["tileConfig"];
-    rapidjson::Value& mapData = document["data"];
+    rapidjson::Value& navigationData = document["data"];
     for (auto itr = document.MemberBegin(); itr != document.MemberEnd(); ++itr)
     {
         printf("Type of member %s is %d\n", itr->name.GetString(), itr->value.GetType());

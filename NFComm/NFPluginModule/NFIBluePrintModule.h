@@ -33,11 +33,12 @@
 #include "NFIClassModule.h"
 #include "NFIElementModule.h"
 #include "NFILogModule.h"
+#include "NFIEventModule.h"
 
 class NFBranchType;
 class NFMonitorType;
 class NFVariableType;
-class NFExecuterType;
+class NFExecutorType;
 class NFModifierType;
 class NFArithmeticType;
 
@@ -46,7 +47,7 @@ class NFLogicBlock;
 class NFIBranch;
 class NFIMonitor;
 class NFIVariable;
-class NFIExecuter;
+class NFIExecutor;
 class NFIModifier;
 class NFIArithmetic;
 class NFIDebugger;
@@ -71,7 +72,7 @@ public:
 	virtual NF_SHARE_PTR<NFIBranch> AddBranch(const NFGUID& logicBlockId, const NFBranchType type, const NFGUID& id, const std::string& name) = 0;
 	virtual NF_SHARE_PTR<NFIMonitor> AddMonitor(const NFGUID& logicBlockId, const NFMonitorType type, const NFGUID& id, const std::string& name) = 0;
 	virtual NF_SHARE_PTR<NFIVariable> AddVariable(const NFGUID& logicBlockId, const NFVariableType type, const NFGUID& id, const std::string& name) = 0;
-	virtual NF_SHARE_PTR<NFIExecuter> AddExecuter(const NFGUID& logicBlockId, const NFExecuterType TYPE, const NFGUID& id, const std::string& name) = 0;
+	virtual NF_SHARE_PTR<NFIExecutor> AddExecutor(const NFGUID& logicBlockId, const NFExecutorType TYPE, const NFGUID& id, const std::string& name) = 0;
 	virtual NF_SHARE_PTR<NFIModifier> AddModifier(const NFGUID& logicBlockId, const NFModifierType type, const NFGUID& id, const std::string& name) = 0;
 	virtual NF_SHARE_PTR<NFIArithmetic> AddArithmetic(const NFGUID& logicBlockId, const NFArithmeticType type, const NFGUID& id, const std::string& name) = 0;
 	virtual NF_SHARE_PTR<NFIDebugger> AddDebugger(const NFGUID& logicBlockId, const NFGUID& id, const std::string& name) = 0;
@@ -83,11 +84,12 @@ public:
 	virtual bool DeleteLink(const NFGUID& logicBlockId, const NFGUID& startNode, const NFGUID& endNode, const NFGUID& startPin, const NFGUID& endPin) = 0;
 	virtual bool DeleteLink(const NFGUID& logicBlockId, const NFGUID& id) = 0;
 	virtual bool DeleteLink(const NFGUID& id) = 0;
+	virtual bool CheckLink(const NFGUID& id) = 0;
 	virtual std::list<NF_SHARE_PTR<NFDataLink>> GetLinks(const NFGUID& logicBlockId) = 0;
 
 	virtual bool DeleteMonitor(const NFGUID& id) = 0;
 	virtual bool DeleteJudgement(const NFGUID& id) = 0;
-	virtual bool DeleteExecuter(const NFGUID& id) = 0;
+	virtual bool DeleteExecutor(const NFGUID& id) = 0;
 };
 
 NF_SMART_ENUM(NFBlueprintType,
@@ -123,23 +125,13 @@ NF_SMART_ENUM(NFElementVariableInputArg,
 		)
 
 	NF_SMART_ENUM(NFPropertyVariableOutputArg,
-		ClassName,
-		PropName,
-		PropValue,
-		)
-
-	NF_SMART_ENUM(NFPropertyListVariableInputArg,
-		ObjectID,
-		ClassName,
-		)
-
-	NF_SMART_ENUM(NFPropertyListVariableOutputArg,
 		ObjectID,
 		ClassName,
 		ConfigID,
 		SceneID,
 		GroupID,
 		Position,
+		PropValue,
 		)
 
 	NF_SMART_ENUM(NFRecordVariableInputArg,
@@ -161,9 +153,6 @@ NF_SMART_ENUM(NFMonitorType,
 	PropertyEvent,
 	RecordEvent,
 	SceneEvent,
-	ItemEvent,
-	SkillEvent,
-	BuffEvent,
 	)
 
 NF_SMART_ENUM(NFClassEventType,
@@ -177,12 +166,14 @@ NF_SMART_ENUM(NFClassEventType,
 	//------------------------------
 	NF_SMART_ENUM(NFGameEventMonitorInputArg,
 		EventID,
+		Dictionary,
 		)
 
 	NF_SMART_ENUM(NFGameEventMonitorOutputArg,
 		NextNode,
 		EventID,
 		ObjectID,
+		Dictionary,
 		)
 	//------------------------------
 	NF_SMART_ENUM(NFNetworkEventMonitorInputArg,
@@ -281,7 +272,7 @@ NF_SMART_ENUM(NFValueType,
 	)
 
 NF_SMART_ENUM(NFVariableType,
-	Input,
+	BasicVariable,
 	ElementSystem,
 	PropertySystem,
 	PropertyList,
@@ -300,7 +291,7 @@ NF_SMART_ENUM(NFDebuggerLevel,
 	)
 
 NF_SMART_ENUM(NFDebuggerInputArg,
-	LastNode,
+	PreNode,
 	LogLevel,
 	LogObject,
 	LogString,
@@ -326,7 +317,7 @@ NF_SMART_ENUM(NFModifierType,
 )
 
 NF_SMART_ENUM(NFPropertyModifierInputArg,
-	LastNode,
+	PreNode,
 	ObjectID,
 	ClassName,
 	PropName,
@@ -338,7 +329,7 @@ NF_SMART_ENUM(NFPropertyModifierOutputArg,
 		)
 
 NF_SMART_ENUM(NFRecordModifierInputArg,
-	LastNode,
+	PreNode,
 	ObjectID,
 	RecordName,
 	RecordRow,
@@ -350,7 +341,7 @@ NF_SMART_ENUM(NFRecordModifierOutputArg,
 	)
 
 NF_SMART_ENUM(NFRecordRemoverrInputArg,
-	LastNode,
+	PreNode,
 	ObjectID,
 	RecordName,
 	RecordRow,
@@ -362,7 +353,7 @@ NF_SMART_ENUM(NFRecordRemoverOutputArg,
 
 
 ///////////FOR EXECUTER BEGIN///////////////////////////
-NF_SMART_ENUM(NFExecuterType,
+NF_SMART_ENUM(NFExecutorType,
 	CreateObject,
 	DestroyObject,
 	GameEvent,
@@ -372,96 +363,97 @@ NF_SMART_ENUM(NFExecuterType,
 	EnterScene,
 	AddHeartBeat,
 	AttackObject,
-	UseSkill,
-	UseItem
 )
 
-NF_SMART_ENUM(NFExecuterCreateObjectInputArg,
-	LastNode,
+NF_SMART_ENUM(NFExecutorCreateObjectInputArg,
+	PreNode,
+	ClassName,
 	ConfigID,
 	SceneID,
 	GroupID,
 	Position,
 )
-NF_SMART_ENUM(NFExecuterCreateObjectOutputputArg,
+NF_SMART_ENUM(NFExecutorCreateObjectOutputputArg,
 	NextNode,
 	ObjectID,
 	)
 
-NF_SMART_ENUM(NFExecuterDestroyObjectInputArg,
-	LastNode,
+NF_SMART_ENUM(NFExecutorDestroyObjectInputArg,
+	PreNode,
+	DelayTime,
 	ObjectID,
 	)
 
-NF_SMART_ENUM(NFExecuterDestroyObjectOutputputArg,
+NF_SMART_ENUM(NFExecutorDestroyObjectOutputputArg,
 	NextNode,
 	)
 
-NF_SMART_ENUM(NFExecuterGameEventInputArg,
-	LastNode,
+NF_SMART_ENUM(NFExecutorGameEventInputArg,
+	PreNode,
 	ObjectID,
 	EventID,
+	Dctionary,
 	)
 
-NF_SMART_ENUM(NFExecuterGameEventOutputArg,
+NF_SMART_ENUM(NFExecutorGameEventOutputArg,
 	NextNode,
 	)
 
-NF_SMART_ENUM(NFExecuterSendMessageInputArg,
-	LastNode,
+NF_SMART_ENUM(NFExecutorSendMessageInputArg,
+	PreNode,
 	ObjectID,
 	MessageID,
 	Data,
 	)
 
-NF_SMART_ENUM(NFExecuterSendMessageOutputArg,
+NF_SMART_ENUM(NFExecutorSendMessageOutputArg,
 	NextNode,
 	)
 
 
-NF_SMART_ENUM(NFExecuterMoveObjectInputArg,
-	LastNode,
+NF_SMART_ENUM(NFExecutorMoveObjectInputArg,
+	PreNode,
 	ObjectID,
 	Position,
 	MoveType,
 	)
 
-NF_SMART_ENUM(NFExecuterMoveObjectOutputArg,
+NF_SMART_ENUM(NFExecutorMoveObjectOutputArg,
 	NextNode,
 	)
 
-NF_SMART_ENUM(NFExecuterSleepInputArg,
-	LastNode,
+NF_SMART_ENUM(NFExecutorSleepInputArg,
+	PreNode,
 	ObjectID,
 	SleepTime,
 	)
 
-NF_SMART_ENUM(NFExecuterSleepOutputArg,
+NF_SMART_ENUM(NFExecutorSleepOutputArg,
 	NextNode,
 	ObjectID,
 	)
 
-NF_SMART_ENUM(NFExecuterEnterSceneInputArg,
-	LastNode,
+NF_SMART_ENUM(NFExecutorEnterSceneInputArg,
+	PreNode,
 	ObjectID,
 	SceneID,
 	GroupID,
 	Position,
 	)
 
-NF_SMART_ENUM(NFExecuterEnterSceneOutputArg,
+NF_SMART_ENUM(NFExecutorEnterSceneOutputArg,
 	NextNode,
 	)
 
-NF_SMART_ENUM(NFExecuterAddHeartBeatInputArg,
-	LastNode,
+NF_SMART_ENUM(NFExecutorAddHeartBeatInputArg,
+	PreNode,
 	ObjectID,
 	BeatName,
 	BeatTime,
 	BeatCount,
 	)
 
-NF_SMART_ENUM(NFExecuterAddHeartBeatOutputArg,
+NF_SMART_ENUM(NFExecutorAddHeartBeatOutputArg,
 	NextNode,
 	)
 
@@ -483,7 +475,7 @@ NF_SMART_ENUM(NFComparatorType,
 	)
 
 NF_SMART_ENUM(NFBranchInputArg,
-	LastNode,
+	PreNode,
 	LeftInput,
 	Comparator,
 	RightInput
@@ -504,15 +496,22 @@ NF_SMART_ENUM(NFArithmeticType,
 	)
 
 NF_SMART_ENUM(NFArithmeticInputArg,
+	PreNode,
+	ValueType,
 	LeftInput,
-	ALU,
-	RightInput
+	ArithmeticType,
+	RightInput,
+)
+
+NF_SMART_ENUM(NFArithmeticOutputArg,
+	NextNode,
+	Output,
 )
 ///////////////////////////////////////////////////////////////////////////////////
 class NFLogicBlock;
 class NFIMonitor;
 class NFIBranch;
-class NFIExecuter;
+class NFIExecutor;
 class NFIVariable;
 class NFIOData;
 class NFDataLink;
@@ -530,11 +529,8 @@ class NFIOData
 public:
 	NFGUID id;
 	std::string name;//arg name
-	NFValueType valueType;
-	NFData varData;
 
 	std::map<std::string, NFData> dictionaryData;
-
 	NFIODataComFromType fromType = NFIODataComFromType::EXTERNAL;
 
 	NFGUID GetLinkID()
@@ -547,7 +543,139 @@ public:
 		linkID = id;
 	}
 
+	void SetValueType(NFValueType type)
+	{
+		if (valueType != type)
+		{
+			valueType = type;
+			varData.Reset();
+
+			switch (valueType)
+			{
+				case NFValueType::Int:
+					varData.SetInt(0);
+					break;
+				case NFValueType::Float:
+					varData.SetFloat(0.0f);
+					break;
+				case NFValueType::String:
+					varData.SetString("");
+					break;
+				case NFValueType::Object:
+					varData.SetObject(NFGUID());
+					break;
+				case NFValueType::Vector2:
+					varData.SetVector2(NFVector2::Zero());
+					break;
+				case NFValueType::Vector3:
+					varData.SetVector3(NFVector3::Zero());
+					break;
+				default:
+					break;
+			}
+		}
+	}
+
+	NFValueType GetValueType()
+	{
+		return valueType;
+	}
+
+	void SetData(const NFData& var)
+	{
+		varData = var;
+	}
+
+	const NFData& GetData()
+	{
+		return varData;
+	}
+
+	void FromString(const std::string& var)
+	{
+		varData.FromString(var);
+	}
+
+	void SetInt(const NFINT64 var)
+	{
+		SetValueType(NFValueType::Int);
+		varData.SetInt(var);
+	}
+
+	void SetFloat(const double var)
+	{
+		SetValueType(NFValueType::Float);
+		varData.SetFloat(var);
+	}
+
+	void SetString(const std::string& var)
+	{
+		SetValueType(NFValueType::String);
+		varData.SetString(var);
+	}
+
+	void SetObject(const NFGUID var)
+	{
+		SetValueType(NFValueType::Object);
+		varData.SetObject(var);
+	}
+
+	void SetVector2(const NFVector2 var)
+	{
+		SetValueType(NFValueType::Vector2);
+		varData.SetVector2(var);
+	}
+
+	void SetVector3(const NFVector3 var)
+	{
+		SetValueType(NFValueType::Vector3);
+		varData.SetVector3(var);
+	}
+
+	NFINT64 GetInt() const
+	{
+		return varData.GetInt();
+	}
+
+	int GetInt32() const
+	{
+		return varData.GetInt32();
+	}
+
+	double GetFloat() const
+	{
+		return varData.GetFloat();
+	}
+
+	const std::string& GetString() const
+	{
+		return varData.GetString();
+	}
+
+
+	const NFGUID& GetObject() const
+	{
+		return varData.GetObject();
+	}
+
+	const NFVector2& GetVector2() const
+	{
+		return varData.GetVector2();
+	}
+
+	const NFVector3& GetVector3() const
+	{
+		return varData.GetVector3();
+	}
+
+	std::string ToString() const
+	{
+		return varData.ToString();
+	}
+
 private:
+	NFData varData;
+	NFValueType valueType = NFValueType::UNKNOW;
 	NFGUID linkID;
 };
 
@@ -589,6 +717,7 @@ protected:
 	NFIClassModule* pClassModule;
 	NFIKernelModule* m_pKernelModule;
 	NFILogModule* m_pLogModule;
+	NFIEventModule* m_pEventModule;
 
 public:
 	NFBluePrintNodeBase()
@@ -604,6 +733,7 @@ public:
 		pClassModule = this->pPluginManager->FindModule<NFIClassModule>();
 		m_pKernelModule = this->pPluginManager->FindModule<NFIKernelModule>();
 		m_pLogModule = this->pPluginManager->FindModule<NFILogModule>();
+		m_pEventModule = this->pPluginManager->FindModule<NFIEventModule>();
 
 		InitInputArgs();
 		InitOutputArgs();
@@ -725,62 +855,164 @@ public:
 	virtual void InitInputArgs() = 0;
 	virtual void InitOutputArgs() = 0;
 
-	void Execute(const NFGUID& runTimeOnwer)
+	void Execute(const NFGUID& runTimeOwner)
 	{
-		PrepareInputData(runTimeOnwer, false);
-		UpdateOutputData(runTimeOnwer, false);
+		PrepareInputData(runTimeOwner);
+		UpdateOutputData(runTimeOwner);
+
 		auto nextNode = FindNextNode();
 		if (nextNode)
 		{
-			nextNode->Execute(runTimeOnwer);
+			nextNode->Execute(runTimeOwner);
 		}
 	}
 
-	//if iteration == true, only update the input and output data, dont create object or do things like that
-	virtual void PrepareInputData(const NFGUID& runTimeOnwer, const bool iteration) = 0;
-	virtual void UpdateOutputData(const NFGUID& runTimeOnwer, const bool iteration) = 0;
+	virtual void UpdateOutputData(const NFGUID& runTimeOwner) = 0;
 
-	virtual void PrepareInputParameterData(NF_SHARE_PTR<NFIOData> inputParameter, const NFGUID& runTimeOnwer, const bool iteration = true)
+	//should for node to boost the runtime speed
+	//maybe parent node not only one node, maybe two or three, collect all nodes and let it PrepareInputData && UpdateOutputData
+	void PrepareInputData(const NFGUID& runTimeOwner)
 	{
-		if (inputParameter)
+		std::vector<NFGUID> parentNodes;
+		for (int i = 0; i < inputArgs.size(); ++i)
 		{
-			NFGUID linkID = inputParameter->GetLinkID();
-			if (!linkID.IsNull())
+			auto inputArg = inputArgs[i];
+			if (inputArg && !inputArg->GetLinkID().IsNull() && inputArg->GetValueType() != NFValueType::Node && inputArg->GetValueType() != NFValueType::UNKNOW)
 			{
-				auto linkData = this->pBluePrintModule->GetLink(linkID);
+				auto linkData = this->pBluePrintModule->GetLink(inputArg->GetLinkID());
 				if (linkData && !linkData->startNode.IsNull())
 				{
-					auto lastNode = this->pBluePrintModule->FindNode(linkData->startNode);
-					if (lastNode)
+					bool find = false;
+					for (int j = 0; j < parentNodes.size(); ++j)
 					{
-						auto lastAttr = lastNode->GetOutputArg(linkData->startAttr);
-						if (lastAttr && lastAttr->valueType == inputParameter->valueType)
+						if (parentNodes[j] == linkData->startNode)
 						{
-							lastNode->PrepareInputData(runTimeOnwer, iteration);
-							lastNode->UpdateOutputData(runTimeOnwer, iteration);
+							find = true;
+							break;
+						}
+					}
 
+					if (!find)
+					{
+						parentNodes.push_back(linkData->startNode);
+					}
+				}
+			}
+		}
 
-							switch (inputParameter->valueType)
+		for (int j = 0; j < parentNodes.size(); ++j)
+		{
+			auto node = this->pBluePrintModule->FindNode(parentNodes[j]);
+			if (node)
+			{
+				node->PrepareInputData(runTimeOwner);
+				node->UpdateOutputData(runTimeOwner);
+			}
+		}
+
+		//get value from parent node's output
+		for (int i = 0; i < inputArgs.size(); ++i)
+		{
+			auto inputArg = inputArgs[i];
+			if (inputArg && !inputArg->GetLinkID().IsNull() && inputArg->GetValueType() != NFValueType::Node && inputArg->GetValueType() != NFValueType::UNKNOW)
+			{
+				auto linkData = this->pBluePrintModule->GetLink(inputArg->GetLinkID());
+				if (linkData && !linkData->startAttr.IsNull())
+				{
+					auto startNode = this->pBluePrintModule->FindNode(linkData->startNode);
+					if (startNode)
+					{
+						auto startAttr = startNode->GetOutputArg(linkData->startAttr);
+						if (startAttr && startAttr->GetValueType() == inputArg->GetValueType())
+						{
+							switch (inputArg->GetValueType())
 							{
-							case NFValueType::Int:
-							case NFValueType::Float:
-							case NFValueType::String:
-							case NFValueType::Object:
-							case NFValueType::Vector2:
-							case NFValueType::Vector3:
-							case NFValueType::Array:
-							case NFValueType::Dictionary:
-								inputParameter->varData = lastAttr->varData;
-								inputParameter->dictionaryData = lastAttr->dictionaryData;
-								break;
-							default:
-								break;
+								case NFValueType::Int:
+									inputArg->SetInt(startAttr->GetInt());
+									break;
+								case NFValueType::Float:
+									inputArg->SetFloat(startAttr->GetFloat());
+									break;
+								case NFValueType::String:
+									inputArg->SetString(startAttr->GetString());
+									break;
+								case NFValueType::Object:
+									inputArg->SetObject(startAttr->GetObject());
+									break;
+								case NFValueType::Vector2:
+									inputArg->SetVector2(startAttr->GetVector2());
+									break;
+								case NFValueType::Vector3:
+									inputArg->SetVector3(startAttr->GetVector3());
+									break;
+								case NFValueType::Array:
+								case NFValueType::Dictionary:
+									inputArg->dictionaryData = startAttr->dictionaryData;
+									break;
+								default:
+									break;
 							}
+						}
+						else
+						{
+							std::ostringstream os;
+							os << "Start Node ID" << startNode->id.ToString() << " ";
+							os << "Start Node Name " << startNode->name << " ";
+							os << "End Node ID " << inputArg->id.ToString() << " ";
+							os << "End Node Name " << inputArg->name << " ";
+
+							m_pLogModule->LogError(os, __FUNCTION__, __LINE__);
 						}
 					}
 				}
 			}
 		}
+	}
+
+	void Print()
+	{
+		if (!m_pLogModule)
+		{
+			return;
+		}
+
+		std::ostringstream os;
+		os << "Start Print Node:";
+		os << " ID" << this->id.ToString();
+		os << " Name " << this->name;
+		os << std::endl;
+
+		for (int i = 0; i < inputArgs.size(); ++i)
+		{
+			auto input = inputArgs[i];
+			os << " Input Parameter:" << i;
+			os << " ID:" << input->id.ToString();
+			os << " Name:" << input->name;
+			os << " LinkID:" << input->GetLinkID().ToString();
+			os << " FromType:" << input->fromType;
+
+			os << " ValueType:" << input->GetValueType().toString();
+			os << " Value:" << input->ToString();
+			os << std::endl;
+		}
+
+		os << std::endl;
+
+		for (int i = 0; i < outputArgs.size(); ++i)
+		{
+			auto output = outputArgs[i];
+			os << " output Parameter " << i;
+			os << " ID " << output->id.ToString();
+			os << " Name " << output->name;
+			os << " LinkID:" << output->GetLinkID().ToString();
+			os << " FromType:" << output->fromType;
+
+			os << " ValueType:" << output->GetValueType().toString();
+			os << " Value:" << output->ToString();
+			os << std::endl;
+		}
+
+		m_pLogModule->LogDebug(os, __FUNCTION__, __LINE__);
 	}
 
 	bool enable = true;//only for logic block
@@ -801,8 +1033,6 @@ public:
 	{
 		blueprintType = NFBlueprintType::ARITHMETIC;
 	}
-
-	NFArithmeticType arithmeticType;
 };
 
 class NFIBranch : public NFBluePrintNodeBase
@@ -868,14 +1098,14 @@ public:
 	NFModifierType modifierType;
 };
 
-class NFIExecuter : public NFBluePrintNodeBase
+class NFIExecutor : public NFBluePrintNodeBase
 {
 public:
-	NFIExecuter()
+	NFIExecutor()
 	{
 		blueprintType = NFBlueprintType::EXECUTER;
 	}
-	NFExecuterType executerType;
+	NFExecutorType executerType;
 };
 
 class NFIDebugger : public NFBluePrintNodeBase
@@ -885,7 +1115,7 @@ public:
 	{
 		blueprintType = NFBlueprintType::DEBUGER;
 	}
-	//NFExecuterType executerType;
+	//NFExecutorType executerType;
 };
 
 class NFLogicBlock : public NFBluePrintNodeBase
@@ -915,12 +1145,8 @@ public:
 
 	}
 
-	virtual void PrepareInputData(const NFGUID& runTimeOnwer, const bool iteration)
-	{
 
-	}
-
-	virtual void UpdateOutputData(const NFGUID& runTimeOnwer, const bool iteration)
+	virtual void UpdateOutputData(const NFGUID& runTimeOwner)
 	{
 
 	}
@@ -930,7 +1156,7 @@ public:
 		return nullptr;
 	}
 
-	std::list<NF_SHARE_PTR<NFIExecuter>> executers;
+	std::list<NF_SHARE_PTR<NFIExecutor>> executers;
 	std::list<NF_SHARE_PTR<NFIBranch>> branches;
 	std::list<NF_SHARE_PTR<NFIMonitor>> monitors;
 	std::list<NF_SHARE_PTR<NFIVariable>> variables;

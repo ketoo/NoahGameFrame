@@ -210,14 +210,14 @@ void NFHierachyView::BluePrintViewSubRender()
       auto blueprintNode = m_pBluePrintModule->FindNode(objectID);
       if (blueprintNode)
       {
-         ImGui::BeginGroup();
+      		ImGui::BeginGroup();
          
 	      ImGui::Checkbox("", &selected);
           ImGui::SameLine();
 
          char blueprintName[128] = {0};
          strcpy(blueprintName, blueprintNode->name .c_str());
-			if (ImGui::InputText("", blueprintName, IM_ARRAYSIZE(blueprintName)))
+		 if (ImGui::InputText("", blueprintName, IM_ARRAYSIZE(blueprintName)))
          {
             blueprintNode->name = blueprintName;
          }
@@ -231,6 +231,11 @@ void NFHierachyView::BluePrintViewSubRender()
          ImGui::Text("Type");
          ImGui::SameLine();
          ImGui::Text(blueprintNode->blueprintType.toString().c_str());
+
+		  if (ImGui::Button("Print All Data"))
+		  {
+			  blueprintNode->Print();
+		  }
 
          ImGui::BeginGroup();
 
@@ -248,7 +253,7 @@ void NFHierachyView::BluePrintViewSubRender()
          }
          else if (blueprintNode->blueprintType == NFBlueprintType::EXECUTER)
          {
-			   BluePrintViewSubRenderForExecuter();
+			   BluePrintViewSubRenderForExecutor();
          }
 		 else if (blueprintNode->blueprintType == NFBlueprintType::VARIABLE)
 		 {
@@ -340,7 +345,7 @@ void NFHierachyView::BluePrintViewSubRenderForBranch()
 	}
 }
 
-void NFHierachyView::BluePrintViewSubRenderForExecuter()
+void NFHierachyView::BluePrintViewSubRenderForExecutor()
 {
 	NF_SHARE_PTR<NFBluePrintView> pBluePrintView = std::dynamic_pointer_cast<NFBluePrintView>(m_pUIModule->GetView(NFViewType::BluePrintView));
 	NFGUID objectID = pBluePrintView->GetCurrentObjectID();
@@ -383,41 +388,39 @@ void NFHierachyView::BluePrintViewSubRenderForArithmetic()
 
 void NFHierachyView::BluePrintViewSubRenderForMonitorHead(NF_SHARE_PTR<NFIMonitor> monitor)
 {
-	static char objectID[128] = { 0 };
-	static char eventID[128] = {0};
-	 
-	
-	NFGUID id(objectID);
 	switch (monitor->monitorType)
 	{
 	case NFMonitorType::GameEvent:
+	{
+		auto inputEventID = monitor->GetInputArg(NFGameEventMonitorInputArg::EventID);
+		int localEventID = inputEventID->GetInt();
+		if (ImGui::InputInt("input int", &localEventID))
+		{
+			inputEventID->SetInt(localEventID);
+		}
+
 		if (ImGui::Button("DoGameEvent"))
 		{
-			m_pEventModule->DoEvent(id, std::atoi(eventID), NFDataList::Empty());
+			m_pEventModule->DoEvent(monitor->id, localEventID, NFDataList::Empty());
 		}
+	}
+
 		break;
 	case NFMonitorType::NetworkEvent:
 		if (ImGui::Button("DoNetworkEvent"))
 		{
-			m_pEventModule->DoEvent(id, std::atoi(eventID), NFDataList::Empty());
+			//m_pEventModule->DoEvent(id, std::atoi(eventID), NFDataList::Empty());
 		}
 		break;
 	case NFMonitorType::NetworkMsgEvent:
 		if (ImGui::Button("DoNetworkMsgEvent"))
 		{
-			m_pEventModule->DoEvent(id, std::atoi(eventID), NFDataList::Empty());
+			//m_pEventModule->DoEvent(id, std::atoi(eventID), NFDataList::Empty());
 		}
 		break;
 	default:
 		break;
 	}
-
-	ImGui::SameLine();
-	ImGui::InputText("", eventID, IM_ARRAYSIZE(eventID));
-
-	ImGui::Text("NFGUID");
-	ImGui::SameLine();
-	ImGui::InputText("", objectID, IM_ARRAYSIZE(objectID));
 }
 
 void NFHierachyView::BluePrintViewSubRenderForMonitorBody(NF_SHARE_PTR<NFIMonitor> monitor)
@@ -727,7 +730,7 @@ void NFHierachyView::InitBluePrintJudgementArgs(NF_SHARE_PTR<NFIBranch> judgemen
 
 }
 
-void NFHierachyView::InitBluePrintExecuterArgs(NF_SHARE_PTR<NFIExecuter> executer)
+void NFHierachyView::InitBluePrintExecutorArgs(NF_SHARE_PTR<NFIExecutor> executer)
 {
 
 }

@@ -34,7 +34,7 @@ namespace NFMsg {
             "FAoQQ0hBUkFDVEVSX05VTU9VVBBwEhUKEUNIQVJBQ1RFUl9JTlZBTElEEHES",
             "FgoSQ0hBUkFDVEVSX05PVEVYSVNUEHISEwoPQ0hBUkFDVEVSX1VTSU5HEHMS",
             "FAoQQ0hBUkFDVEVSX0xPQ0tFRBB0EhEKDVpPTkVfT1ZFUkxPQUQQdRIOCgpO",
-            "T1RfT05MSU5FEHYqmBEKCkVHYW1lTXNnSUQSCgoGVU5LTk9XEAASEAoMRVZF",
+            "T1RfT05MSU5FEHYqthEKCkVHYW1lTXNnSUQSCgoGVU5LTk9XEAASEAoMRVZF",
             "TlRfUkVTVUxUEAESEwoPRVZFTlRfVFJBTlNQT1JUEAISEAoMQ0xPU0VfU09D",
             "S0VUEAMSGAoUV1RNX1dPUkxEX1JFR0lTVEVSRUQQChIaChZXVE1fV09STERf",
             "VU5SRUdJU1RFUkVEEAsSFQoRV1RNX1dPUkxEX1JFRlJFU0gQDBIYChRMVE1f",
@@ -78,23 +78,25 @@ namespace NFMsg {
             "Q0tfREFUQV9GSU5JU0hFRBCEAhIRCgxSRVFfQUlfT05XRVIQjgISDQoIUkVR",
             "X01PVkUQrAISDQoIQUNLX01PVkUQrQISFAoPUkVRX01PVkVfSU1NVU5FEK4C",
             "EhQKD0FDS19NT1ZFX0lNTVVORRCvAhIRCgxSRVFfUE9TX1NZTkMQsgISEQoM",
-            "QUNLX1BPU19TWU5DELMCEhYKEVJFUV9TS0lMTF9PQkpFQ1RYEJADEhYKEUFD",
-            "S19TS0lMTF9PQkpFQ1RYEJEDEhIKDVJFUV9TS0lMTF9QT1MQkgMSEgoNQUNL",
-            "X1NLSUxMX1BPUxCTAxIUCg9SRVFfSVRFTV9PQkpFQ1QQ9AMSFAoPQUNLX0lU",
-            "RU1fT0JKRUNUEPUDEhEKDFJFUV9JVEVNX1BPUxD2AxIRCgxBQ0tfSVRFTV9Q",
-            "T1MQ9wMSFgoRQUNLX09OTElORV9OT1RJRlkQ2AQSFwoSQUNLX09GRkxJTkVf",
-            "Tk9USUZZENkEKqcBCgpFU2tpbGxUeXBlEhYKEkJSSUVGX1NJTkdMRV9TS0lM",
-            "TBAAEhUKEUJSSUVGX0dST1VQX1NLSUxMEAESFwoTQlVMTEVUX1NJTkdMRV9T",
-            "S0lMTBACEhgKFEJVTExFVF9SRUJPVU5EX1NLSUxMEAMSHAoYQlVMTEVUX1RB",
-            "UkdFVF9CT01CX1NLSUxMEAQSGQoVQlVMTEVUX1BPU19CT01CX1NLSUxMEAUq",
-            "jgEKCkVTY2VuZVR5cGUSEAoMTk9STUFMX1NDRU5FEAASFgoSU0lOR0xFX0NM",
-            "T05FX1NDRU5FEAESFQoRTVVMVElfQ0xPTkVfU0NFTkUQAhISCg5QVlBfTU9E",
-            "RV9TQ0VORRAKEhIKDk1WTV9NT0RFX1NDRU5FEAsSFwoTU1VSVklWQUxfTU9E",
-            "RV9TQ0VORRAMKjgKCEVOUENUeXBlEg4KCk5PUk1BTF9OUEMQABIMCghIRVJP",
-            "X05QQxABEg4KClRVUlJFVF9OUEMQAmIGcHJvdG8z"));
+            "QUNLX1BPU19TWU5DELMCEg0KCFJFUV9DSEFUEN4CEg0KCEFDS19DSEFUEN8C",
+            "EhYKEVJFUV9TS0lMTF9PQkpFQ1RYEJADEhYKEUFDS19TS0lMTF9PQkpFQ1RY",
+            "EJEDEhIKDVJFUV9TS0lMTF9QT1MQkgMSEgoNQUNLX1NLSUxMX1BPUxCTAxIU",
+            "Cg9SRVFfSVRFTV9PQkpFQ1QQ9AMSFAoPQUNLX0lURU1fT0JKRUNUEPUDEhEK",
+            "DFJFUV9JVEVNX1BPUxD2AxIRCgxBQ0tfSVRFTV9QT1MQ9wMSFgoRQUNLX09O",
+            "TElORV9OT1RJRlkQ2AQSFwoSQUNLX09GRkxJTkVfTk9USUZZENkEKkcKCUVJ",
+            "dGVtVHlwZRINCglFSVRfRVFVSVAQABILCgdFSVRfR0VNEAESDgoKRUlUX1NV",
+            "UFBMWRACEg4KCkVJVF9TQ1JPTEwQAyqnAQoKRVNraWxsVHlwZRIWChJCUklF",
+            "Rl9TSU5HTEVfU0tJTEwQABIVChFCUklFRl9HUk9VUF9TS0lMTBABEhcKE0JV",
+            "TExFVF9TSU5HTEVfU0tJTEwQAhIYChRCVUxMRVRfUkVCT1VORF9TS0lMTBAD",
+            "EhwKGEJVTExFVF9UQVJHRVRfQk9NQl9TS0lMTBAEEhkKFUJVTExFVF9QT1Nf",
+            "Qk9NQl9TS0lMTBAFKo4BCgpFU2NlbmVUeXBlEhAKDE5PUk1BTF9TQ0VORRAA",
+            "EhYKElNJTkdMRV9DTE9ORV9TQ0VORRABEhUKEU1VTFRJX0NMT05FX1NDRU5F",
+            "EAISEgoOUFZQX01PREVfU0NFTkUQChISCg5NVk1fTU9ERV9TQ0VORRALEhcK",
+            "E1NVUlZJVkFMX01PREVfU0NFTkUQDCo4CghFTlBDVHlwZRIOCgpOT1JNQUxf",
+            "TlBDEAASDAoISEVST19OUEMQARIOCgpUVVJSRVRfTlBDEAJiBnByb3RvMw=="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
-          new pbr::GeneratedClrTypeInfo(new[] {typeof(global::NFMsg.EGameEventCode), typeof(global::NFMsg.EGameMsgID), typeof(global::NFMsg.ESkillType), typeof(global::NFMsg.ESceneType), typeof(global::NFMsg.ENPCType), }, null, null));
+          new pbr::GeneratedClrTypeInfo(new[] {typeof(global::NFMsg.EGameEventCode), typeof(global::NFMsg.EGameMsgID), typeof(global::NFMsg.EItemType), typeof(global::NFMsg.ESkillType), typeof(global::NFMsg.ESceneType), typeof(global::NFMsg.ENPCType), }, null, null));
     }
     #endregion
 
@@ -348,6 +350,8 @@ namespace NFMsg {
     [pbr::OriginalName("ACK_MOVE_IMMUNE")] AckMoveImmune = 303,
     [pbr::OriginalName("REQ_POS_SYNC")] ReqPosSync = 306,
     [pbr::OriginalName("ACK_POS_SYNC")] AckPosSync = 307,
+    [pbr::OriginalName("REQ_CHAT")] ReqChat = 350,
+    [pbr::OriginalName("ACK_CHAT")] AckChat = 351,
     [pbr::OriginalName("REQ_SKILL_OBJECTX")] ReqSkillObjectx = 400,
     [pbr::OriginalName("ACK_SKILL_OBJECTX")] AckSkillObjectx = 401,
     [pbr::OriginalName("REQ_SKILL_POS")] ReqSkillPos = 402,
@@ -360,10 +364,25 @@ namespace NFMsg {
     [pbr::OriginalName("ACK_OFFLINE_NOTIFY")] AckOfflineNotify = 601,
   }
 
-  /// <summary>
-  ////////////////////////////////////////////////////////////////////////////////////////////////////
-  ///PropertyType
-  /// </summary>
+  public enum EItemType {
+    /// <summary>
+    ///the equipment which can add props
+    /// </summary>
+    [pbr::OriginalName("EIT_EQUIP")] EitEquip = 0,
+    /// <summary>
+    ///the gem ca be embed to the equipment
+    /// </summary>
+    [pbr::OriginalName("EIT_GEM")] EitGem = 1,
+    /// <summary>
+    ///expendable items for player, such as a medicine that cures
+    /// </summary>
+    [pbr::OriginalName("EIT_SUPPLY")] EitSupply = 2,
+    /// <summary>
+    ///special items that can call a hero or others, special items can do what you want to do
+    /// </summary>
+    [pbr::OriginalName("EIT_SCROLL")] EitScroll = 3,
+  }
+
   public enum ESkillType {
     /// <summary>
     ///this kind of skill just can damage one object

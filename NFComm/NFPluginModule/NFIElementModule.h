@@ -40,7 +40,8 @@ public:
     virtual bool Save() = 0;
     virtual bool Clear() = 0;
 
-    virtual NFIElementModule* GetBackupElementModule() = 0;
+	virtual NFIElementModule* GetThreadElementModule() = 0;
+	virtual NFIElementModule* GetThreadElementModule(const int index) = 0;
 
     //special
     virtual bool LoadSceneInfo(const std::string& strFileName, const std::string& strClassName) = 0;

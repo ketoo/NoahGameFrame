@@ -24,19 +24,25 @@
 */
 
 
-#ifndef NFI_SKILL_COOLDOWN_MODULE_H
-#define NFI_SKILL_COOLDOWN_MODULE_H
+#ifndef NF_INVENTORY_PLUGIN_H
+#define NF_INVENTORY_PLUGIN_H
 
-#include <iostream>
-#include "NFIModule.h"
+#include "NFComm/NFPluginModule/NFIPlugin.h"
+#include "NFComm/NFPluginModule/NFIPluginManager.h"
 
-class NFISkillCooldownModule
-    : public NFIModule
+class NFInventoryPlugin : public NFIPlugin
 {
 public:
+	NFInventoryPlugin(NFIPluginManager* p)
+    {
+        pPluginManager = p;
+    }
+    virtual const int GetPluginVersion();
 
-    virtual void AddSkillCD( const NFGUID& self, const std::string& strSkillName ) = 0;
-    virtual bool ExistSkillCD( const NFGUID& self, const std::string& strSkillName ) = 0;
+    virtual const std::string GetPluginName();
+
+    virtual void Install();
+
+    virtual void Uninstall();
 };
-
 #endif

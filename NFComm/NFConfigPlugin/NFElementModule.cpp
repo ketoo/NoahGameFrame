@@ -29,64 +29,126 @@
 #include "NFConfigPlugin.h"
 #include "NFElementModule.h"
 #include "NFClassModule.h"
+#include "NFIThreadPoolModule.h"
 
-NFElementModule::NFElementModule()
+NFElementModule::NFElementModule(NFElementModule* p)
 {
-    m_pBackupElementModule = nullptr;
     mbLoaded = false;
+	originalElementModule = p;
 }
 
 NFElementModule::NFElementModule(NFIPluginManager* p)
 {
-    m_pBackupElementModule = nullptr;
+	originalElementModule = this;
     pPluginManager = p;
     mbLoaded = false;
 
-    if (!this->mbBackup)
-    {
-        m_pBackupElementModule = new NFElementModule();
-        m_pBackupElementModule->mbBackup = true;
-        m_pBackupElementModule->pPluginManager = pPluginManager;
-    }
+	if (!this->mbBackup)
+	{
+		for (int i = 0; i < 10; ++i)
+		{
+			ThreadElementModule threadElement;
+			threadElement.used = false;
+			threadElement.elementModule = new NFElementModule(this);
+			threadElement.elementModule->mbBackup = true;
+			threadElement.elementModule->pPluginManager = pPluginManager;
+
+			mThreadElements.push_back(threadElement);
+		}
+	}
 }
 
 NFElementModule::~NFElementModule()
 {
     if (!this->mbBackup)
     {
-        delete m_pBackupElementModule;
-        m_pBackupElementModule = nullptr;
+		for (int i = 0; i < mThreadElements.size(); ++i)
+		{
+			delete mThreadElements[i].elementModule;
+		}
+
+		mThreadElements.clear();
     }
 }
 
 bool NFElementModule::Awake()
 {
 	m_pClassModule = pPluginManager->FindModule<NFIClassModule>();
-    if (this->mbBackup)
-    {
-        m_pClassModule = m_pClassModule->GetBackupClassModule();
-    }
+	m_pLogModule = pPluginManager->FindModule<NFILogModule>();
 
-    if (m_pBackupElementModule) m_pBackupElementModule->Awake();
+	if (this->mbBackup)
+	{
+		for (int i = 0; i < originalElementModule->mThreadElements.size(); ++i)
+		{
+			if (originalElementModule->mThreadElements[i].elementModule == this)
+			{
+				m_pClassModule = m_pClassModule->GetThreadClassModule(i);
+				break;
+			}
+		}
+	}
+
+	for (int i = 0; i < mThreadElements.size(); ++i)
+	{
+		mThreadElements[i].elementModule->Awake();
+	}
 
 	Load();
-
 
 	return true;
 }
 
 bool NFElementModule::Init()
 {
-    if (m_pBackupElementModule)  m_pBackupElementModule->Init();
+	for (int i = 0; i < mThreadElements.size(); ++i)
+	{
+		mThreadElements[i].elementModule->Init();
+	}
+
     return true;
+}
+
+bool NFElementModule::AfterInit()
+{
+	CheckRef();
+
+	for (int i = 0; i < mThreadElements.size(); ++i)
+	{
+		mThreadElements[i].elementModule->AfterInit();
+	}
+
+	return true;
 }
 
 bool NFElementModule::Shut()
 {
     Clear();
 
-    if (m_pBackupElementModule) m_pBackupElementModule->Shut();
     return true;
+}
+
+NFIElementModule* NFElementModule::GetThreadElementModule()
+{
+	std::thread::id threadID = std::this_thread::get_id();
+
+	for (int i = 0; i < mThreadElements.size(); ++i)
+	{
+		if (mThreadElements[i].used)
+		{
+			if (mThreadElements[i].threadID == threadID)
+			{
+				return mThreadElements[i].elementModule;
+			}
+		}
+		else
+		{
+			mThreadElements[i].used = true;
+			mThreadElements[i].threadID = threadID;
+			return mThreadElements[i].elementModule;
+		}
+	}
+
+	return nullptr;
 }
 
 bool NFElementModule::Load()
@@ -124,7 +186,10 @@ bool NFElementModule::Load()
         pLogicClass = m_pClassModule->Next();
     }
 
-    if (m_pBackupElementModule) m_pBackupElementModule->Load();
+	for (int i = 0; i < mThreadElements.size(); ++i)
+	{
+		mThreadElements[i].elementModule->Load();
+	}
 
     return true;
 }
@@ -152,8 +217,10 @@ bool NFElementModule::CheckRef()
 						if (!strRefValue.empty() && !this->GetElement(strRefValue))
 						{
 							std::string msg;
-							msg.append("check ref failed id: ").append(strRefValue).append(" in ").append(pLogicClass->GetClassName());
+							msg.append("check ref failed id:").append(strRefValue).append(", in ").append(pLogicClass->GetClassName());
 							NFASSERT(nRet, msg.c_str(), __FILE__, __FUNCTION__);
+
+							m_pLogModule->LogError(msg, __FUNCTION__, __LINE__);
 							exit(0);
 						}
 					}
@@ -606,13 +673,6 @@ bool NFElementModule::LegalFloat(const char * str)
 	return true;
 }
 
-bool NFElementModule::AfterInit()
-{
-    CheckRef();
-    return true;
-
-}
-
 bool NFElementModule::BeforeShut()
 {
     return true;
@@ -633,7 +693,7 @@ bool NFElementModule::Clear()
     return true;
 }
 
-NFIElementModule* NFElementModule::GetBackupElementModule()
+NFIElementModule *NFElementModule::GetThreadElementModule(const int index)
 {
-	return m_pBackupElementModule;
+	return mThreadElements[index].elementModule;
 }

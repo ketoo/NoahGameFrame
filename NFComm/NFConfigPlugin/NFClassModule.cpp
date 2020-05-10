@@ -28,51 +28,54 @@
 #include <algorithm>
 #include "NFConfigPlugin.h"
 #include "NFClassModule.h"
+#include "NFComm/NFPluginModule/NFIThreadPoolModule.h"
 #include "Dependencies/RapidXML/rapidxml.hpp"
 #include "Dependencies/RapidXML/rapidxml_print.hpp"
 
 NFClassModule::NFClassModule()
 {
-    m_pBackupClassModule = nullptr;
     msConfigFileName = "NFDataCfg/Struct/LogicClass.xml";
 }
 
 NFClassModule::NFClassModule(NFIPluginManager* p)
 {
-    m_pBackupClassModule = nullptr;
     pPluginManager = p;
     msConfigFileName = "NFDataCfg/Struct/LogicClass.xml";
 
     std::cout << "Using [" << pPluginManager->GetConfigPath() + msConfigFileName << "]" << std::endl;
 
-    if (!this->mbBackup)
-    {
-        m_pBackupClassModule = new NFClassModule();
-        m_pBackupClassModule->pPluginManager = pPluginManager;
-        m_pBackupClassModule->mbBackup = true;
-    }
+	if (!this->mbBackup)
+	{
+		//NFIThreadPoolModule *threadPoolModule = pPluginManager->FindModule<NFIThreadPoolModule>();
+		//const int threadCount = threadPoolModule->GetThreadCount();
+		for (int i = 0; i < 10; ++i)
+		{
+			ThreadClassModule threadElement;
+			threadElement.used = false;
+			threadElement.classModule = new NFClassModule();
+			threadElement.classModule->mbBackup = true;
+			threadElement.classModule->pPluginManager = pPluginManager;
+
+			threadElement.classModule->Awake();
+			threadElement.classModule->Init();
+			threadElement.classModule->AfterInit();
+
+			mThreadClasses.push_back(threadElement);
+		}
+	}
 }
 
 NFClassModule::~NFClassModule()
 {
     ClearAll();
-
-    if (!this->mbBackup)
-    {
-        delete m_pBackupClassModule;
-        m_pBackupClassModule = nullptr;
-    }
 }
 
 bool NFClassModule::Awake()
 {
-    m_pElementModule = pPluginManager->FindModule<NFIElementModule>();
-    if (this->mbBackup)
-    {
-        m_pElementModule = m_pElementModule->GetBackupElementModule();
-    }
-
-    if (m_pBackupClassModule) m_pBackupClassModule->Awake();
+    for (int i = 0; i < mThreadClasses.size(); ++i)
+	{
+		mThreadClasses[i].classModule->Awake();
+	}
 
     Load();
 
@@ -82,16 +85,47 @@ bool NFClassModule::Awake()
 
 bool NFClassModule::Init()
 {
-    if (m_pBackupClassModule) m_pBackupClassModule->Init();
+	for (int i = 0; i < mThreadClasses.size(); ++i)
+	{
+		mThreadClasses[i].classModule->Awake();
+	}
     return true;
 }
 
 bool NFClassModule::Shut()
 {
+	for (int i = 0; i < mThreadClasses.size(); ++i)
+	{
+		mThreadClasses[i].classModule->Awake();
+	}
+
     ClearAll();
 
-    if (m_pBackupClassModule) m_pBackupClassModule->Shut();
     return true;
+}
+
+NFIClassModule* NFClassModule::GetThreadClassModule()
+{
+	std::thread::id threadID = std::this_thread::get_id();
+
+	for (int i = 0; i < mThreadClasses.size(); ++i)
+	{
+		if (mThreadClasses[i].used)
+		{
+			if (mThreadClasses[i].threadID == threadID)
+			{
+				return mThreadClasses[i].classModule;
+			}
+		}
+		else
+		{
+			mThreadClasses[i].used = true;
+			mThreadClasses[i].threadID = threadID;
+			return mThreadClasses[i].classModule;
+		}
+	}
+
+	return nullptr;
 }
 
 NFDATA_TYPE NFClassModule::ComputerType(const char* pstrTypeName, NFData& var)
@@ -130,7 +164,7 @@ NFDATA_TYPE NFClassModule::ComputerType(const char* pstrTypeName, NFData& var)
     return TDATA_UNKNOWN;
 }
 
-bool NFClassModule::AddPropertys(rapidxml::xml_node<>* pPropertyRootNode, NF_SHARE_PTR<NFIClass> pClass)
+bool NFClassModule::AddProperties(rapidxml::xml_node<>* pPropertyRootNode, NF_SHARE_PTR<NFIClass> pClass)
 {
     for (rapidxml::xml_node<>* pPropertyNode = pPropertyRootNode->first_node(); pPropertyNode; pPropertyNode = pPropertyNode->next_sibling())
     {
@@ -320,7 +354,7 @@ bool NFClassModule::AddClassInclude(const char* pstrClassFilePath, NF_SHARE_PTR<
     rapidxml::xml_node<>* pRropertyRootNode = root->first_node("Propertys");
     if (pRropertyRootNode)
     {
-        AddPropertys(pRropertyRootNode, pClass);
+		AddProperties(pRropertyRootNode, pClass);
     }
 
     //////////////////////////////////////////////////////////////////////////
@@ -460,14 +494,16 @@ bool NFClassModule::Load()
         Load(attrNode, NULL);
     }
 
-    if (m_pBackupClassModule) m_pBackupClassModule->Load();
+	for (int i = 0; i < mThreadClasses.size(); ++i)
+	{
+		mThreadClasses[i].classModule->Load();
+	}
 
     return true;
 }
 
 bool NFClassModule::Save()
 {
-    if (m_pBackupClassModule) m_pBackupClassModule->Save();
     return true;
 }
 
@@ -495,13 +531,7 @@ NF_SHARE_PTR<NFIRecordManager> NFClassModule::GetClassRecordManager(const std::s
 
 bool NFClassModule::Clear()
 {
-    if (m_pBackupClassModule) m_pBackupClassModule->Clear();
     return true;
-}
-
-NFIClassModule* NFClassModule::GetBackupClassModule()
-{
-	return m_pBackupClassModule;
 }
 
 bool NFClassModule::AddClassCallBack(const std::string& strClassName, const CLASS_EVENT_FUNCTOR_PTR& cb)
@@ -524,4 +554,16 @@ bool NFClassModule::DoEvent(const NFGUID& objectID, const std::string& strClassN
     }
 
     return pClass->DoEvent(objectID, eClassEvent, valueList);
+}
+
+bool NFClassModule::AfterInit()
+{
+
+
+	return true;
+}
+
+NFIClassModule *NFClassModule::GetThreadClassModule(const int index)
+{
+	return mThreadClasses[index].classModule;
 }

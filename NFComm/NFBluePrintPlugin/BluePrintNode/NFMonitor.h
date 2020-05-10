@@ -50,8 +50,17 @@ public:
 			NF_SHARE_PTR<NFIOData> var = NF_SHARE_PTR<NFIOData>(NF_NEW NFIOData());
 			var->id = this->pPluginManager->FindModule<NFIKernelModule>()->CreateGUID();
 			var->name = NFGameEventMonitorInputArg::toString(NFGameEventMonitorInputArg::EventID);
-			var->valueType = NFValueType::Int;
+			var->SetValueType(NFValueType::Int);
 			var->fromType = NFIODataComFromType::BOTH;
+
+			inputArgs.push_back(var);
+		}
+		{
+			NF_SHARE_PTR<NFIOData> var = NF_SHARE_PTR<NFIOData>(NF_NEW NFIOData());
+			var->id = this->pPluginManager->FindModule<NFIKernelModule>()->CreateGUID();
+			var->name = NFGameEventMonitorInputArg::toString(NFGameEventMonitorInputArg::Dictionary);
+			var->SetValueType(NFValueType::Dictionary);
+			var->fromType = NFIODataComFromType::EXTERNAL;
 
 			inputArgs.push_back(var);
 		}
@@ -63,7 +72,7 @@ public:
 			NF_SHARE_PTR<NFIOData> var = NF_SHARE_PTR<NFIOData>(NF_NEW NFIOData());
 			var->id = this->pPluginManager->FindModule<NFIKernelModule>()->CreateGUID();
 			var->name = NFGameEventMonitorOutputArg::toString(NFGameEventMonitorOutputArg::NextNode);
-			var->valueType = NFValueType::Node;
+			var->SetValueType(NFValueType::Node);
 
 			outputArgs.push_back(var);
 		}
@@ -71,7 +80,7 @@ public:
 			NF_SHARE_PTR<NFIOData> var = NF_SHARE_PTR<NFIOData>(NF_NEW NFIOData());
 			var->id = this->pPluginManager->FindModule<NFIKernelModule>()->CreateGUID();
 			var->name = NFGameEventMonitorOutputArg::toString(NFGameEventMonitorOutputArg::EventID);
-			var->valueType = NFValueType::Int;
+			var->SetValueType(NFValueType::Int);
 
 			outputArgs.push_back(var);
 		}
@@ -79,17 +88,22 @@ public:
 			NF_SHARE_PTR<NFIOData> var = NF_SHARE_PTR<NFIOData>(NF_NEW NFIOData());
 			var->id = this->pPluginManager->FindModule<NFIKernelModule>()->CreateGUID();
 			var->name = NFGameEventMonitorOutputArg::toString(NFGameEventMonitorOutputArg::ObjectID);
-			var->valueType = NFValueType::Object;
+			var->SetValueType(NFValueType::Object);
+
+			outputArgs.push_back(var);
+		}
+		{
+			NF_SHARE_PTR<NFIOData> var = NF_SHARE_PTR<NFIOData>(NF_NEW NFIOData());
+			var->id = this->pPluginManager->FindModule<NFIKernelModule>()->CreateGUID();
+			var->name = NFGameEventMonitorOutputArg::toString(NFGameEventMonitorOutputArg::Dictionary);
+			var->SetValueType(NFValueType::Dictionary);
 
 			outputArgs.push_back(var);
 		}
 	}
 
-	// Inherited via NFIMonitor
-	virtual void PrepareInputData(const NFGUID& runTimeOnwer, const bool iteration) override;
-	virtual void UpdateOutputData(const NFGUID& runTimeOnwer, const bool iteration) override;
+	virtual void UpdateOutputData(const NFGUID& runTimeOwner) override;
 
-	// Inherited via NFIMonitor
 	virtual NF_SHARE_PTR<NFIOData> FindOutputNodeIOData() override;
 };
 
@@ -117,7 +131,7 @@ public:
 			NF_SHARE_PTR<NFIOData> var = NF_SHARE_PTR<NFIOData>(NF_NEW NFIOData());
 			var->id = this->pPluginManager->FindModule<NFIKernelModule>()->CreateGUID();
 			var->name = NFNetworkEventMonitorInputArg::toString(NFNetworkEventMonitorInputArg::EventID);
-			var->valueType = NFValueType::Int;
+			var->SetValueType(NFValueType::Int);
 			var->fromType = NFIODataComFromType::BOTH;
 
 			inputArgs.push_back(var);
@@ -130,7 +144,7 @@ public:
 			NF_SHARE_PTR<NFIOData> var = NF_SHARE_PTR<NFIOData>(NF_NEW NFIOData());
 			var->id = this->pPluginManager->FindModule<NFIKernelModule>()->CreateGUID();
 			var->name = NFNetworkEventMonitorOutputArg::toString(NFNetworkEventMonitorOutputArg::NextNode);
-			var->valueType = NFValueType::Node;
+			var->SetValueType(NFValueType::Node);
 
 			outputArgs.push_back(var);
 		}
@@ -138,7 +152,7 @@ public:
 			NF_SHARE_PTR<NFIOData> var = NF_SHARE_PTR<NFIOData>(NF_NEW NFIOData());
 			var->id = this->pPluginManager->FindModule<NFIKernelModule>()->CreateGUID();
 			var->name = NFNetworkEventMonitorOutputArg::toString(NFNetworkEventMonitorOutputArg::EventID);
-			var->valueType = NFValueType::Int;
+			var->SetValueType(NFValueType::Int);
 
 			outputArgs.push_back(var);
 		}
@@ -146,17 +160,14 @@ public:
 			NF_SHARE_PTR<NFIOData> var = NF_SHARE_PTR<NFIOData>(NF_NEW NFIOData());
 			var->id = this->pPluginManager->FindModule<NFIKernelModule>()->CreateGUID();
 			var->name = NFNetworkEventMonitorOutputArg::toString(NFNetworkEventMonitorOutputArg::ObjectID);
-			var->valueType = NFValueType::Object;
+			var->SetValueType(NFValueType::Object);
 
 			outputArgs.push_back(var);
 		}
 	}
 
 
-	// Inherited via NFIMonitor
-	virtual void PrepareInputData(const NFGUID& runTimeOnwer, const bool iteration) override;
-
-	virtual void UpdateOutputData(const NFGUID& runTimeOnwer, const bool iteration) override;
+	virtual void UpdateOutputData(const NFGUID& runTimeOwner) override;
 
 
 	// Inherited via NFIMonitor
@@ -188,7 +199,7 @@ public:
 			NF_SHARE_PTR<NFIOData> var = NF_SHARE_PTR<NFIOData>(NF_NEW NFIOData());
 			var->id = this->pPluginManager->FindModule<NFIKernelModule>()->CreateGUID();
 			var->name = NFNetworkMsgMonitorInputArg::toString(NFNetworkMsgMonitorInputArg::NetMsgID);
-			var->valueType = NFValueType::Int;
+			var->SetValueType(NFValueType::Int);
 			var->fromType = NFIODataComFromType::BOTH;
 
 			inputArgs.push_back(var);
@@ -201,7 +212,7 @@ public:
 			NF_SHARE_PTR<NFIOData> var = NF_SHARE_PTR<NFIOData>(NF_NEW NFIOData());
 			var->id = this->pPluginManager->FindModule<NFIKernelModule>()->CreateGUID();
 			var->name = NFNetworkkMsgMonitorOutputArg::toString(NFNetworkkMsgMonitorOutputArg::NextNode);
-			var->valueType = NFValueType::Node;
+			var->SetValueType(NFValueType::Node);
 
 			outputArgs.push_back(var);
 		}
@@ -209,7 +220,7 @@ public:
 			NF_SHARE_PTR<NFIOData> var = NF_SHARE_PTR<NFIOData>(NF_NEW NFIOData());
 			var->id = this->pPluginManager->FindModule<NFIKernelModule>()->CreateGUID();
 			var->name = NFNetworkkMsgMonitorOutputArg::toString(NFNetworkkMsgMonitorOutputArg::ObjectID);
-			var->valueType = NFValueType::Object;
+			var->SetValueType(NFValueType::Object);
 
 			outputArgs.push_back(var);
 		}
@@ -217,7 +228,7 @@ public:
 			NF_SHARE_PTR<NFIOData> var = NF_SHARE_PTR<NFIOData>(NF_NEW NFIOData());
 			var->id = this->pPluginManager->FindModule<NFIKernelModule>()->CreateGUID();
 			var->name = NFNetworkkMsgMonitorOutputArg::toString(NFNetworkkMsgMonitorOutputArg::NetMsgID);
-			var->valueType = NFValueType::Int;
+			var->SetValueType(NFValueType::Int);
 
 			outputArgs.push_back(var);
 		}
@@ -225,15 +236,13 @@ public:
 			NF_SHARE_PTR<NFIOData> var = NF_SHARE_PTR<NFIOData>(NF_NEW NFIOData());
 			var->id = this->pPluginManager->FindModule<NFIKernelModule>()->CreateGUID();
 			var->name = NFNetworkkMsgMonitorOutputArg::toString(NFNetworkkMsgMonitorOutputArg::Dictionary);
-			var->valueType = NFValueType::Dictionary;
+			var->SetValueType(NFValueType::Dictionary);
 
 			outputArgs.push_back(var);
 		}
 	}
 
-	// Inherited via NFIMonitor
-	virtual void PrepareInputData(const NFGUID& runTimeOnwer, const bool iteration) override;
-	virtual void UpdateOutputData(const NFGUID& runTimeOnwer, const bool iteration) override;
+	virtual void UpdateOutputData(const NFGUID& runTimeOwner) override;
 
 	// Inherited via NFIMonitor
 	virtual NF_SHARE_PTR<NFIOData> FindOutputNodeIOData() override;
@@ -266,7 +275,7 @@ public:
 			NF_SHARE_PTR<NFIOData> var = NF_SHARE_PTR<NFIOData>(NF_NEW NFIOData());
 			var->id = this->pPluginManager->FindModule<NFIKernelModule>()->CreateGUID();
 			var->name = NFMonitorObjectEventInputArg::toString(NFMonitorObjectEventInputArg::ClassName);
-			var->valueType = NFValueType::String;
+			var->SetValueType(NFValueType::String);
 			var->fromType = NFIODataComFromType::INTERNAL;
 
 			inputArgs.push_back(var);
@@ -275,7 +284,7 @@ public:
 			NF_SHARE_PTR<NFIOData> var = NF_SHARE_PTR<NFIOData>(NF_NEW NFIOData());
 			var->id = this->pPluginManager->FindModule<NFIKernelModule>()->CreateGUID();
 			var->name = NFMonitorObjectEventInputArg::toString(NFMonitorObjectEventInputArg::ClassEvent);
-			var->valueType = NFValueType::Int;
+			var->SetValueType(NFValueType::Int);
 			var->fromType = NFIODataComFromType::INTERNAL;
 
 			inputArgs.push_back(var);
@@ -288,7 +297,7 @@ public:
 			NF_SHARE_PTR<NFIOData> var = NF_SHARE_PTR<NFIOData>(NF_NEW NFIOData());
 			var->id = this->pPluginManager->FindModule<NFIKernelModule>()->CreateGUID();
 			var->name = NFMonitorObjectEventOutputArg::toString(NFMonitorObjectEventOutputArg::NextNode);
-			var->valueType = NFValueType::Node;
+			var->SetValueType(NFValueType::Node);
 
 			outputArgs.push_back(var);
 		}
@@ -296,7 +305,7 @@ public:
 			NF_SHARE_PTR<NFIOData> var = NF_SHARE_PTR<NFIOData>(NF_NEW NFIOData());
 			var->id = this->pPluginManager->FindModule<NFIKernelModule>()->CreateGUID();
 			var->name = NFMonitorObjectEventOutputArg::toString(NFMonitorObjectEventOutputArg::ObjectID);
-			var->valueType = NFValueType::Object;
+			var->SetValueType(NFValueType::Object);
 
 			outputArgs.push_back(var);
 		}
@@ -304,7 +313,7 @@ public:
 			NF_SHARE_PTR<NFIOData> var = NF_SHARE_PTR<NFIOData>(NF_NEW NFIOData());
 			var->id = this->pPluginManager->FindModule<NFIKernelModule>()->CreateGUID();
 			var->name = NFMonitorObjectEventOutputArg::toString(NFMonitorObjectEventOutputArg::ClassName);
-			var->valueType = NFValueType::String;
+			var->SetValueType(NFValueType::String);
 
 			outputArgs.push_back(var);
 		}
@@ -312,7 +321,7 @@ public:
 			NF_SHARE_PTR<NFIOData> var = NF_SHARE_PTR<NFIOData>(NF_NEW NFIOData());
 			var->id = this->pPluginManager->FindModule<NFIKernelModule>()->CreateGUID();
 			var->name = NFMonitorObjectEventOutputArg::toString(NFMonitorObjectEventOutputArg::ConfigID);
-			var->valueType = NFValueType::String;
+			var->SetValueType(NFValueType::String);
 
 			outputArgs.push_back(var);
 		}
@@ -321,7 +330,7 @@ public:
 			NF_SHARE_PTR<NFIOData> var = NF_SHARE_PTR<NFIOData>(NF_NEW NFIOData());
 			var->id = this->pPluginManager->FindModule<NFIKernelModule>()->CreateGUID();
 			var->name = NFMonitorObjectEventOutputArg::toString(NFMonitorObjectEventOutputArg::SceneID);
-			var->valueType = NFValueType::Int;
+			var->SetValueType(NFValueType::Int);
 
 			outputArgs.push_back(var);
 		}
@@ -330,7 +339,7 @@ public:
 			NF_SHARE_PTR<NFIOData> var = NF_SHARE_PTR<NFIOData>(NF_NEW NFIOData());
 			var->id = this->pPluginManager->FindModule<NFIKernelModule>()->CreateGUID();
 			var->name = NFMonitorObjectEventOutputArg::toString(NFMonitorObjectEventOutputArg::GroupID);
-			var->valueType = NFValueType::Int;
+			var->SetValueType(NFValueType::Int);
 
 			outputArgs.push_back(var);
 		}
@@ -338,20 +347,15 @@ public:
 			NF_SHARE_PTR<NFIOData> var = NF_SHARE_PTR<NFIOData>(NF_NEW NFIOData());
 			var->id = this->pPluginManager->FindModule<NFIKernelModule>()->CreateGUID();
 			var->name = NFMonitorObjectEventOutputArg::toString(NFMonitorObjectEventOutputArg::Position);
-			var->valueType = NFValueType::Vector3;
+			var->SetValueType(NFValueType::Vector3);
 
 			outputArgs.push_back(var);
 		}
 	}
 
 
-	// Inherited via NFIMonitor
-	virtual void PrepareInputData(const NFGUID& runTimeOnwer, const bool iteration) override;
+	virtual void UpdateOutputData(const NFGUID& runTimeOwner) override;
 
-	virtual void UpdateOutputData(const NFGUID& runTimeOnwer, const bool iteration) override;
-
-
-	// Inherited via NFIMonitor
 	virtual NF_SHARE_PTR<NFIOData> FindOutputNodeIOData() override;
 
 };
@@ -380,7 +384,7 @@ public:
 			NF_SHARE_PTR<NFIOData> var = NF_SHARE_PTR<NFIOData>(NF_NEW NFIOData());
 			var->id = this->pPluginManager->FindModule<NFIKernelModule>()->CreateGUID();
 			var->name = NFMonitorPropertyEventInputArg::toString(NFMonitorPropertyEventInputArg::ClassName);
-			var->valueType = NFValueType::String;
+			var->SetValueType(NFValueType::String);
 			var->fromType = NFIODataComFromType::INTERNAL;
 
 			inputArgs.push_back(var);
@@ -389,7 +393,7 @@ public:
 			NF_SHARE_PTR<NFIOData> var = NF_SHARE_PTR<NFIOData>(NF_NEW NFIOData());
 			var->id = this->pPluginManager->FindModule<NFIKernelModule>()->CreateGUID();
 			var->name = NFMonitorPropertyEventInputArg::toString(NFMonitorPropertyEventInputArg::PropName);
-			var->valueType = NFValueType::String;
+			var->SetValueType(NFValueType::String);
 			var->fromType = NFIODataComFromType::INTERNAL;
 
 			inputArgs.push_back(var);
@@ -402,7 +406,7 @@ public:
 			NF_SHARE_PTR<NFIOData> var = NF_SHARE_PTR<NFIOData>(NF_NEW NFIOData());
 			var->id = this->pPluginManager->FindModule<NFIKernelModule>()->CreateGUID();
 			var->name = NFMonitorPropertyEventOutputArg::toString(NFMonitorPropertyEventOutputArg::NextNode);
-			var->valueType = NFValueType::Node;
+			var->SetValueType(NFValueType::Node);
 
 			outputArgs.push_back(var);
 		}
@@ -410,7 +414,7 @@ public:
 			NF_SHARE_PTR<NFIOData> var = NF_SHARE_PTR<NFIOData>(NF_NEW NFIOData());
 			var->id = this->pPluginManager->FindModule<NFIKernelModule>()->CreateGUID();
 			var->name = NFMonitorPropertyEventOutputArg::toString(NFMonitorPropertyEventOutputArg::ObjectID);
-			var->valueType = NFValueType::Object;
+			var->SetValueType(NFValueType::Object);
 
 			outputArgs.push_back(var);
 		}
@@ -418,17 +422,14 @@ public:
 			NF_SHARE_PTR<NFIOData> var = NF_SHARE_PTR<NFIOData>(NF_NEW NFIOData());
 			var->id = this->pPluginManager->FindModule<NFIKernelModule>()->CreateGUID();
 			var->name = NFMonitorPropertyEventOutputArg::toString(NFMonitorPropertyEventOutputArg::PropName);
-			var->valueType = NFValueType::String;
+			var->SetValueType(NFValueType::String);
 
 			outputArgs.push_back(var);
 		}
 	}
 
 
-	// Inherited via NFIMonitor
-	virtual void PrepareInputData(const NFGUID& runTimeOnwer, const bool iteration) override;
-
-	virtual void UpdateOutputData(const NFGUID& runTimeOnwer, const bool iteration) override;
+	virtual void UpdateOutputData(const NFGUID& runTimeOwner) override;
 
 
 	// Inherited via NFIMonitor
@@ -461,7 +462,7 @@ public:
 			NF_SHARE_PTR<NFIOData> var = NF_SHARE_PTR<NFIOData>(NF_NEW NFIOData());
 			var->id = this->pPluginManager->FindModule<NFIKernelModule>()->CreateGUID();
 			var->name = NFMonitorRecordEventInputArg::toString(NFMonitorRecordEventInputArg::ClassName);
-			var->valueType = NFValueType::String;
+			var->SetValueType(NFValueType::String);
 			var->fromType = NFIODataComFromType::INTERNAL;
 
 			inputArgs.push_back(var);
@@ -470,7 +471,7 @@ public:
 			NF_SHARE_PTR<NFIOData> var = NF_SHARE_PTR<NFIOData>(NF_NEW NFIOData());
 			var->id = this->pPluginManager->FindModule<NFIKernelModule>()->CreateGUID();
 			var->name = NFMonitorRecordEventInputArg::toString(NFMonitorRecordEventInputArg::RecordName);
-			var->valueType = NFValueType::String;
+			var->SetValueType(NFValueType::String);
 			var->fromType = NFIODataComFromType::INTERNAL;
 
 			inputArgs.push_back(var);
@@ -479,7 +480,7 @@ public:
 			NF_SHARE_PTR<NFIOData> var = NF_SHARE_PTR<NFIOData>(NF_NEW NFIOData());
 			var->id = this->pPluginManager->FindModule<NFIKernelModule>()->CreateGUID();
 			var->name = NFMonitorRecordEventInputArg::toString(NFMonitorRecordEventInputArg::OperateType);
-			var->valueType = NFValueType::Int;
+			var->SetValueType(NFValueType::Int);
 			var->fromType = NFIODataComFromType::INTERNAL;
 
 			inputArgs.push_back(var);
@@ -492,7 +493,7 @@ public:
 			NF_SHARE_PTR<NFIOData> var = NF_SHARE_PTR<NFIOData>(NF_NEW NFIOData());
 			var->id = this->pPluginManager->FindModule<NFIKernelModule>()->CreateGUID();
 			var->name = NFMonitorRecordEventOutArg::toString(NFMonitorRecordEventOutArg::NextNode);
-			var->valueType = NFValueType::Node;
+			var->SetValueType(NFValueType::Node);
 
 			outputArgs.push_back(var);
 		}
@@ -500,7 +501,7 @@ public:
 			NF_SHARE_PTR<NFIOData> var = NF_SHARE_PTR<NFIOData>(NF_NEW NFIOData());
 			var->id = this->pPluginManager->FindModule<NFIKernelModule>()->CreateGUID();
 			var->name = NFMonitorRecordEventOutArg::toString(NFMonitorRecordEventOutArg::ClassName);
-			var->valueType = NFValueType::Object;
+			var->SetValueType(NFValueType::Object);
 
 			outputArgs.push_back(var);
 		}
@@ -508,7 +509,7 @@ public:
 			NF_SHARE_PTR<NFIOData> var = NF_SHARE_PTR<NFIOData>(NF_NEW NFIOData());
 			var->id = this->pPluginManager->FindModule<NFIKernelModule>()->CreateGUID();
 			var->name = NFMonitorRecordEventOutArg::toString(NFMonitorRecordEventOutArg::RecordName);
-			var->valueType = NFValueType::String;
+			var->SetValueType(NFValueType::String);
 
 			outputArgs.push_back(var);
 		}
@@ -517,7 +518,7 @@ public:
 			NF_SHARE_PTR<NFIOData> var = NF_SHARE_PTR<NFIOData>(NF_NEW NFIOData());
 			var->id = this->pPluginManager->FindModule<NFIKernelModule>()->CreateGUID();
 			var->name = NFMonitorRecordEventOutArg::toString(NFMonitorRecordEventOutArg::Row);
-			var->valueType = NFValueType::Int;//depend the property's type
+			var->SetValueType(NFValueType::Int);//depend the property's type
 
 			outputArgs.push_back(var);
 		}
@@ -526,17 +527,14 @@ public:
 			NF_SHARE_PTR<NFIOData> var = NF_SHARE_PTR<NFIOData>(NF_NEW NFIOData());
 			var->id = this->pPluginManager->FindModule<NFIKernelModule>()->CreateGUID();
 			var->name = NFMonitorRecordEventOutArg::toString(NFMonitorRecordEventOutArg::Col);
-			var->valueType = NFValueType::Int;//depend the property's type
+			var->SetValueType(NFValueType::Int);//depend the property's type
 
 			outputArgs.push_back(var);
 		}
 	}
 
 
-	// Inherited via NFIMonitor
-	virtual void PrepareInputData(const NFGUID& runTimeOnwer, const bool iteration) override;
-
-	virtual void UpdateOutputData(const NFGUID& runTimeOnwer, const bool iteration) override;
+	virtual void UpdateOutputData(const NFGUID& runTimeOwner) override;
 
 
 	// Inherited via NFIMonitor
@@ -569,7 +567,7 @@ public:
 			NF_SHARE_PTR<NFIOData> var = NF_SHARE_PTR<NFIOData>(NF_NEW NFIOData());
 			var->id = this->pPluginManager->FindModule<NFIKernelModule>()->CreateGUID();
 			var->name = NFMonitorSceneEventInputArg::toString(NFMonitorSceneEventInputArg::ClassName);
-			var->valueType = NFValueType::String;
+			var->SetValueType(NFValueType::String);
 			var->fromType = NFIODataComFromType::INTERNAL;
 
 			inputArgs.push_back(var);
@@ -578,7 +576,7 @@ public:
 			NF_SHARE_PTR<NFIOData> var = NF_SHARE_PTR<NFIOData>(NF_NEW NFIOData());
 			var->id = this->pPluginManager->FindModule<NFIKernelModule>()->CreateGUID();
 			var->name = NFMonitorSceneEventInputArg::toString(NFMonitorSceneEventInputArg::SceneID);
-			var->valueType = NFValueType::Int;
+			var->SetValueType(NFValueType::Int);
 			var->fromType = NFIODataComFromType::INTERNAL;
 
 			inputArgs.push_back(var);
@@ -587,7 +585,7 @@ public:
 			NF_SHARE_PTR<NFIOData> var = NF_SHARE_PTR<NFIOData>(NF_NEW NFIOData());
 			var->id = this->pPluginManager->FindModule<NFIKernelModule>()->CreateGUID();
 			var->name = NFMonitorSceneEventInputArg::toString(NFMonitorSceneEventInputArg::OperateType);
-			var->valueType = NFValueType::Int;
+			var->SetValueType(NFValueType::Int);
 			var->fromType = NFIODataComFromType::INTERNAL;
 
 			inputArgs.push_back(var);
@@ -600,7 +598,7 @@ public:
 			NF_SHARE_PTR<NFIOData> var = NF_SHARE_PTR<NFIOData>(NF_NEW NFIOData());
 			var->id = this->pPluginManager->FindModule<NFIKernelModule>()->CreateGUID();
 			var->name = NFMonitorSceneEventOutArg::toString(NFMonitorSceneEventOutArg::NextNode);
-			var->valueType = NFValueType::Node;
+			var->SetValueType(NFValueType::Node);
 
 			outputArgs.push_back(var);
 		}
@@ -608,7 +606,7 @@ public:
 			NF_SHARE_PTR<NFIOData> var = NF_SHARE_PTR<NFIOData>(NF_NEW NFIOData());
 			var->id = this->pPluginManager->FindModule<NFIKernelModule>()->CreateGUID();
 			var->name = NFMonitorSceneEventOutArg::toString(NFMonitorSceneEventOutArg::ClassName);
-			var->valueType = NFValueType::Object;
+			var->SetValueType(NFValueType::Object);
 
 			outputArgs.push_back(var);
 		}
@@ -616,7 +614,7 @@ public:
 			NF_SHARE_PTR<NFIOData> var = NF_SHARE_PTR<NFIOData>(NF_NEW NFIOData());
 			var->id = this->pPluginManager->FindModule<NFIKernelModule>()->CreateGUID();
 			var->name = NFMonitorSceneEventOutArg::toString(NFMonitorSceneEventOutArg::SceneID);
-			var->valueType = NFValueType::String;
+			var->SetValueType(NFValueType::String);
 
 			outputArgs.push_back(var);
 		}
@@ -625,7 +623,7 @@ public:
 			NF_SHARE_PTR<NFIOData> var = NF_SHARE_PTR<NFIOData>(NF_NEW NFIOData());
 			var->id = this->pPluginManager->FindModule<NFIKernelModule>()->CreateGUID();
 			var->name = NFMonitorSceneEventOutArg::toString(NFMonitorSceneEventOutArg::GroupID);
-			var->valueType = NFValueType::Int;
+			var->SetValueType(NFValueType::Int);
 
 			outputArgs.push_back(var);
 		}
@@ -634,20 +632,15 @@ public:
 			NF_SHARE_PTR<NFIOData> var = NF_SHARE_PTR<NFIOData>(NF_NEW NFIOData());
 			var->id = this->pPluginManager->FindModule<NFIKernelModule>()->CreateGUID();
 			var->name = NFMonitorSceneEventOutArg::toString(NFMonitorSceneEventOutArg::ObjectID);
-			var->valueType = NFValueType::Object;
+			var->SetValueType(NFValueType::Object);
 
 			outputArgs.push_back(var);
 		}
 	}
 
 
-	// Inherited via NFIMonitor
-	virtual void PrepareInputData(const NFGUID& runTimeOnwer, const bool iteration) override;
+	virtual void UpdateOutputData(const NFGUID& runTimeOwner) override;
 
-	virtual void UpdateOutputData(const NFGUID& runTimeOnwer, const bool iteration) override;
-
-
-	// Inherited via NFIMonitor
 	virtual NF_SHARE_PTR<NFIOData> FindOutputNodeIOData() override;
 
 };
