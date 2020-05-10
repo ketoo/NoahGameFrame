@@ -87,6 +87,17 @@ public:
         }
     }
 
+	virtual bool ExistElement(const T& name)
+	{
+		typename NFMapOBJECT::iterator itr = mObjectList.find(name);
+		if (itr != mObjectList.end())
+		{
+			return true;
+		}
+
+		return false;
+	}
+
     virtual TD* First()
     {
         if (mObjectList.size() <= 0)

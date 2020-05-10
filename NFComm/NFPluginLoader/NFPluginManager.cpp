@@ -484,15 +484,9 @@ bool NFPluginManager::ReLoadPlugin(const std::string & strPluginDLLName)
 	}
 	//1
 	NFIPlugin* pPlugin = itInstance->second;
-	NFIModule* pModule = pPlugin->First();
-	while (pModule)
-	{
-		pModule->BeforeShut();
-		pModule->Shut();
-		pModule->Finalize();
-
-		pModule = pPlugin->Next();
-	}
+	pPlugin->BeforeShut();
+	pPlugin->Shut();
+	pPlugin->Finalize();
 
 	//2
 	PluginLibMap::iterator it = mPluginLibMap.find(strPluginDLLName);
@@ -1019,7 +1013,7 @@ void NFPluginManager::AddFileReplaceContent(const std::string& fileName, const s
 		std::vector<NFReplaceContent> v;
 		v.push_back(NFReplaceContent(content, newValue));
 
-		mReplaceContent.insert(std::pair<std::string, std::vector<NFReplaceContent> >(fileName, v));
+		mReplaceContent.insert(std::make_pair(fileName, v));
 	}
 	else
 	{

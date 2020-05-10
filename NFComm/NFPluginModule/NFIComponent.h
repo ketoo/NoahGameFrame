@@ -142,7 +142,7 @@ private:
 
 public:
     NFIComponent(const std::string& strName)
-		: NFMemoryCounter(GET_CLASS_NAME(NFIComponent), 1)
+		: NFMemoryCounter(strName, 1)
     {
         mbEnable = true;
         mstrName = strName;
