@@ -1490,14 +1490,6 @@ bool NFKernelModule::LogInfo(const NFGUID ident)
 		int nGroupID = GetPropertyInt32(ident, NFrame::IObject::GroupID());
 
 		m_pLogModule->LogInfo(ident, "//----------child object list-------- SceneID = " + std::to_string(nSceneID));
-
-		NFDataList valObjectList;
-		GetGroupObjectList(nSceneID, nGroupID, valObjectList);
-		for (int i = 0; i < valObjectList.GetCount(); i++)
-		{
-			NFGUID targetIdent = valObjectList.Object(i);
-			LogInfo(targetIdent);
-		}
 	}
 	else
 	{
