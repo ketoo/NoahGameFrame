@@ -43,6 +43,26 @@ NFClassModule::NFClassModule(NFIPluginManager* p)
     msConfigFileName = "NFDataCfg/Struct/LogicClass.xml";
 
     std::cout << "Using [" << pPluginManager->GetConfigPath() + msConfigFileName << "]" << std::endl;
+
+	if (!this->mbBackup)
+	{
+		//NFIThreadPoolModule *threadPoolModule = pPluginManager->FindModule<NFIThreadPoolModule>();
+		//const int threadCount = threadPoolModule->GetThreadCount();
+		for (int i = 0; i < 10; ++i)
+		{
+			ThreadClassModule threadElement;
+			threadElement.used = false;
+			threadElement.classModule = new NFClassModule();
+			threadElement.classModule->mbBackup = true;
+			threadElement.classModule->pPluginManager = pPluginManager;
+
+			threadElement.classModule->Awake();
+			threadElement.classModule->Init();
+			threadElement.classModule->AfterInit();
+
+			mThreadClasses.push_back(threadElement);
+		}
+	}
 }
 
 NFClassModule::~NFClassModule()
@@ -52,12 +72,10 @@ NFClassModule::~NFClassModule()
 
 bool NFClassModule::Awake()
 {
-    m_pElementModule = pPluginManager->FindModule<NFIElementModule>();
-
-    if (this->mbBackup)
-    {
-        m_pElementModule = m_pElementModule->GetThreadElementModule();
-    }
+    for (int i = 0; i < mThreadClasses.size(); ++i)
+	{
+		mThreadClasses[i].classModule->Awake();
+	}
 
     Load();
 
@@ -67,11 +85,20 @@ bool NFClassModule::Awake()
 
 bool NFClassModule::Init()
 {
+	for (int i = 0; i < mThreadClasses.size(); ++i)
+	{
+		mThreadClasses[i].classModule->Awake();
+	}
     return true;
 }
 
 bool NFClassModule::Shut()
 {
+	for (int i = 0; i < mThreadClasses.size(); ++i)
+	{
+		mThreadClasses[i].classModule->Awake();
+	}
+
     ClearAll();
 
     return true;
@@ -137,7 +164,7 @@ NFDATA_TYPE NFClassModule::ComputerType(const char* pstrTypeName, NFData& var)
     return TDATA_UNKNOWN;
 }
 
-bool NFClassModule::AddPropertys(rapidxml::xml_node<>* pPropertyRootNode, NF_SHARE_PTR<NFIClass> pClass)
+bool NFClassModule::AddProperties(rapidxml::xml_node<>* pPropertyRootNode, NF_SHARE_PTR<NFIClass> pClass)
 {
     for (rapidxml::xml_node<>* pPropertyNode = pPropertyRootNode->first_node(); pPropertyNode; pPropertyNode = pPropertyNode->next_sibling())
     {
@@ -327,7 +354,7 @@ bool NFClassModule::AddClassInclude(const char* pstrClassFilePath, NF_SHARE_PTR<
     rapidxml::xml_node<>* pRropertyRootNode = root->first_node("Propertys");
     if (pRropertyRootNode)
     {
-        AddPropertys(pRropertyRootNode, pClass);
+		AddProperties(pRropertyRootNode, pClass);
     }
 
     //////////////////////////////////////////////////////////////////////////
@@ -531,25 +558,12 @@ bool NFClassModule::DoEvent(const NFGUID& objectID, const std::string& strClassN
 
 bool NFClassModule::AfterInit()
 {
-	if (!this->mbBackup)
-	{
-		NFIThreadPoolModule *threadPoolModule = pPluginManager->FindModule<NFIThreadPoolModule>();
-		const int threadCount = threadPoolModule->GetThreadCount();
-		for (int i = 0; i < threadCount; ++i)
-		{
-			ThreadClassModule threadElement;
-			threadElement.used = false;
-			threadElement.classModule = new NFClassModule();
-			threadElement.classModule->mbBackup = true;
-			threadElement.classModule->pPluginManager = pPluginManager;
 
-			threadElement.classModule->Awake();
-			threadElement.classModule->Init();
-			threadElement.classModule->AfterInit();
-
-			mThreadClasses.push_back(threadElement);
-		}
-	}
 
 	return true;
+}
+
+NFIClassModule *NFClassModule::GetThreadClassModule(const int index)
+{
+	return mThreadClasses[index].classModule;
 }

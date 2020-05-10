@@ -172,6 +172,7 @@ public:
     virtual bool Clear();
 
     virtual NFIClassModule* GetThreadClassModule() override;
+	virtual NFIClassModule* GetThreadClassModule(const int index) override;
 
     virtual bool AddClassCallBack(const std::string& strClassName, const CLASS_EVENT_FUNCTOR_PTR& cb);
     virtual bool DoEvent(const NFGUID& objectID, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFDataList& valueList);
@@ -183,7 +184,7 @@ public:
 
 protected:
     virtual NFDATA_TYPE ComputerType(const char* pstrTypeName, NFData& var);
-    virtual bool AddPropertys(rapidxml::xml_node<>* pPropertyRootNode, NF_SHARE_PTR<NFIClass> pClass);
+    virtual bool AddProperties(rapidxml::xml_node<>* pPropertyRootNode, NF_SHARE_PTR<NFIClass> pClass);
     virtual bool AddRecords(rapidxml::xml_node<>* pRecordRootNode, NF_SHARE_PTR<NFIClass> pClass);
     virtual bool AddComponents(rapidxml::xml_node<>* pRecordRootNode, NF_SHARE_PTR<NFIClass> pClass);
     virtual bool AddClassInclude(const char* pstrClassFilePath, NF_SHARE_PTR<NFIClass> pClass);
@@ -203,8 +204,6 @@ protected:
 	std::vector<ThreadClassModule> mThreadClasses;
 
 protected:
-    NFIElementModule* m_pElementModule;
-
     std::string msConfigFileName;
     bool mbBackup = false;
 };

@@ -31,15 +31,31 @@
 #include "NFClassModule.h"
 #include "NFIThreadPoolModule.h"
 
-NFElementModule::NFElementModule()
+NFElementModule::NFElementModule(NFElementModule* p)
 {
     mbLoaded = false;
+	originalElementModule = p;
 }
 
 NFElementModule::NFElementModule(NFIPluginManager* p)
 {
+	originalElementModule = this;
     pPluginManager = p;
     mbLoaded = false;
+
+	if (!this->mbBackup)
+	{
+		for (int i = 0; i < 10; ++i)
+		{
+			ThreadElementModule threadElement;
+			threadElement.used = false;
+			threadElement.elementModule = new NFElementModule(this);
+			threadElement.elementModule->mbBackup = true;
+			threadElement.elementModule->pPluginManager = pPluginManager;
+
+			mThreadElements.push_back(threadElement);
+		}
+	}
 }
 
 NFElementModule::~NFElementModule()
@@ -60,40 +76,34 @@ bool NFElementModule::Awake()
 	m_pClassModule = pPluginManager->FindModule<NFIClassModule>();
 	m_pLogModule = pPluginManager->FindModule<NFILogModule>();
 
-    if (this->mbBackup)
-    {
-        m_pClassModule = m_pClassModule->GetThreadClassModule();
-    }
-
-	Load();
-
-
-	if (!this->mbBackup)
+	if (this->mbBackup)
 	{
-		NFIThreadPoolModule *threadPoolModule = pPluginManager->FindModule<NFIThreadPoolModule>();
-		const int threadCount = threadPoolModule->GetThreadCount();
-		for (int i = 0; i < threadCount; ++i)
+		for (int i = 0; i < originalElementModule->mThreadElements.size(); ++i)
 		{
-			ThreadElementModule threadElement;
-			threadElement.used = false;
-			threadElement.elementModule = new NFElementModule();
-			threadElement.elementModule->mbBackup = true;
-			threadElement.elementModule->pPluginManager = pPluginManager;
-
-			threadElement.elementModule->Awake();
-			threadElement.elementModule->Init();
-			threadElement.elementModule->AfterInit();
-
-			mThreadElements.push_back(threadElement);
+			if (originalElementModule->mThreadElements[i].elementModule == this)
+			{
+				m_pClassModule = m_pClassModule->GetThreadClassModule(i);
+				break;
+			}
 		}
 	}
+
+	for (int i = 0; i < mThreadElements.size(); ++i)
+	{
+		mThreadElements[i].elementModule->Awake();
+	}
+
+	Load();
 
 	return true;
 }
 
 bool NFElementModule::Init()
 {
-
+	for (int i = 0; i < mThreadElements.size(); ++i)
+	{
+		mThreadElements[i].elementModule->Init();
+	}
 
     return true;
 }
@@ -101,6 +111,11 @@ bool NFElementModule::Init()
 bool NFElementModule::AfterInit()
 {
 	CheckRef();
+
+	for (int i = 0; i < mThreadElements.size(); ++i)
+	{
+		mThreadElements[i].elementModule->AfterInit();
+	}
 
 	return true;
 }
@@ -676,4 +691,9 @@ bool NFElementModule::Clear()
 
     mbLoaded = false;
     return true;
+}
+
+NFIElementModule *NFElementModule::GetThreadElementModule(const int index)
+{
+	return mThreadElements[index].elementModule;
 }

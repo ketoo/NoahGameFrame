@@ -83,7 +83,7 @@ class NFElementModule
       NFMapEx<std::string, ElementConfigInfo>
 {
 private:
-    NFElementModule();
+    NFElementModule(NFElementModule* p);
 public:
     NFElementModule(NFIPluginManager* p);
     virtual ~NFElementModule();
@@ -100,7 +100,8 @@ public:
     virtual bool Save();
     virtual bool Clear();
 
-     NFIElementModule* GetThreadElementModule() override;
+    NFIElementModule* GetThreadElementModule() override;
+	NFIElementModule* GetThreadElementModule(const int index) override;
 
     virtual bool LoadSceneInfo(const std::string& strFileName, const std::string& strClassName);
 
@@ -137,6 +138,7 @@ protected:
 	};
 
 	std::vector<ThreadElementModule> mThreadElements;
+	NFElementModule* originalElementModule;
 
 protected:
     NFIClassModule* m_pClassModule;
