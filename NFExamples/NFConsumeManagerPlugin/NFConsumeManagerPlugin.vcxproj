@@ -102,28 +102,16 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
       </PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="NFEquipModule.cpp" />
-    <ClCompile Include="NFEquipPropertyModule.cpp" />
+    <ClCompile Include="NFConsumeManagerPlugin.cpp" />
+    <ClCompile Include="NFCooldownModule.cpp" />
     <ClCompile Include="NFItemConsumeManagerModule.cpp" />
-    <ClCompile Include="NFItemEquipConsumeProcessModule.cpp" />
-    <ClCompile Include="NFItemGemConsumeProcessModule.cpp" />
-    <ClCompile Include="NFItemModule.cpp" />
-    <ClCompile Include="NFItemScrollConsumeProcessModule.cpp" />
-    <ClCompile Include="NFItemSupplyConsumeProcessModule.cpp" />
-    <ClCompile Include="NFTutorialInventoryModule.cpp" />
-    <ClCompile Include="NFItemPlugin.cpp" />
+    <ClCompile Include="NFSkillConsumeManagerModule.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="NFEquipModule.h" />
-    <ClInclude Include="NFEquipPropertyModule.h" />
+    <ClInclude Include="NFConsumeManagerPlugin.h" />
+    <ClInclude Include="NFCooldownModule.h" />
     <ClInclude Include="NFItemConsumeManagerModule.h" />
-    <ClInclude Include="NFItemEquipConsumeProcessModule.h" />
-    <ClInclude Include="NFItemGemConsumeProcessModule.h" />
-    <ClInclude Include="NFItemModule.h" />
-    <ClInclude Include="NFItemScrollConsumeProcessModule.h" />
-    <ClInclude Include="NFItemSupplyConsumeProcessModule.h" />
-    <ClInclude Include="NFTutorialInventoryModule.h" />
-    <ClInclude Include="NFItemPlugin.h" />
+    <ClInclude Include="NFSkillConsumeManagerModule.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
