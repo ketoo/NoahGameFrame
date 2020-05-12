@@ -11,7 +11,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{AE53470C-E0C6-4583-996D-011A7269C4AA}</ProjectGuid>
+    <ProjectGuid>{9F22EC18-4A57-4607-B281-EFE494765787}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>NFItemPlugin</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
@@ -102,28 +102,12 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
       </PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="NFEquipModule.cpp" />
-    <ClCompile Include="NFEquipPropertyModule.cpp" />
-    <ClCompile Include="NFItemConsumeManagerModule.cpp" />
-    <ClCompile Include="NFItemEquipConsumeProcessModule.cpp" />
-    <ClCompile Include="NFItemGemConsumeProcessModule.cpp" />
-    <ClCompile Include="NFItemModule.cpp" />
-    <ClCompile Include="NFItemScrollConsumeProcessModule.cpp" />
-    <ClCompile Include="NFItemSupplyConsumeProcessModule.cpp" />
-    <ClCompile Include="NFTutorialInventoryModule.cpp" />
-    <ClCompile Include="NFItemPlugin.cpp" />
+    <ClCompile Include="NFInventoryModule.cpp" />
+    <ClCompile Include="NFInventoryPlugin.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="NFEquipModule.h" />
-    <ClInclude Include="NFEquipPropertyModule.h" />
-    <ClInclude Include="NFItemConsumeManagerModule.h" />
-    <ClInclude Include="NFItemEquipConsumeProcessModule.h" />
-    <ClInclude Include="NFItemGemConsumeProcessModule.h" />
-    <ClInclude Include="NFItemModule.h" />
-    <ClInclude Include="NFItemScrollConsumeProcessModule.h" />
-    <ClInclude Include="NFItemSupplyConsumeProcessModule.h" />
-    <ClInclude Include="NFTutorialInventoryModule.h" />
-    <ClInclude Include="NFItemPlugin.h" />
+    <ClInclude Include="NFInventoryModule.h" />
+    <ClInclude Include="NFInventoryPlugin.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

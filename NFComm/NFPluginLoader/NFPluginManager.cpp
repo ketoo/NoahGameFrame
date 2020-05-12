@@ -99,6 +99,18 @@
 #pragma comment( lib, "NFWorldNet_ClientPlugin.lib" )
 #pragma comment( lib, "NFWorldNet_ServerPlugin.lib" )
 
+#pragma comment( lib, "NFChatPlugin.lib" )
+#pragma comment( lib, "NFInventoryPlugin.lib" )
+#pragma comment( lib, "NFConsumeManagerPlugin.lib" )
+
+#pragma comment( lib, "Tutorial1.lib" )
+#pragma comment( lib, "Tutorial2.lib" )
+#pragma comment( lib, "Tutorial3.lib" )
+#pragma comment( lib, "Tutorial4.lib" )
+#pragma comment( lib, "Tutorial5.lib" )
+#pragma comment( lib, "Tutorial6.lib" )
+#pragma comment( lib, "Tutorial7.lib" )
+
 #endif
 
 #endif
