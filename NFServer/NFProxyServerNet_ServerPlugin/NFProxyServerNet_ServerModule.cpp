@@ -176,7 +176,7 @@ void NFProxyServerNet_ServerModule::OnConnectKeyProcessWS(const NFSOCK nSockInde
     {
         return;
     }
-	bool bRet = m_pSecurityModule->VirifySecurityKey(xMsg.account(), xMsg.security_code());
+	bool bRet = m_pSecurityModule->VerifySecurityKey(xMsg.account(), xMsg.security_code());
     //bool bRet = m_pProxyToWorldModule->VerifyConnectData(xMsg.account(), xMsg.security_code());
     if (bRet)
     {
@@ -212,7 +212,7 @@ void NFProxyServerNet_ServerModule::OnConnectKeyProcess(const NFSOCK nSockIndex,
         return;
     }
 
-	bool bRet = m_pSecurityModule->VirifySecurityKey(xMsg.account(), xMsg.security_code());
+	bool bRet = m_pSecurityModule->VerifySecurityKey(xMsg.account(), xMsg.security_code());
     //bool bRet = m_pProxyToWorldModule->VerifyConnectData(xMsg.account(), xMsg.security_code());
     if (bRet)
     {
