@@ -135,7 +135,7 @@ public:
 	virtual int FindRowByColValue(const int nCol, const NFData& var) = 0;
 	virtual int FindInt(const int nCol, const NFINT64 value) = 0;
 	virtual int FindFloat(const int nCol, const double value) = 0;
-	virtual int FindString(const int nCol, const std::string& valuet) = 0;
+	virtual int FindString(const int nCol, const std::string& value) = 0;
 	virtual int FindObject(const int nCol, const NFGUID& value) = 0;
 	virtual int FindVector2(const int nCol, const NFVector2& value) = 0;
 	virtual int FindVector3(const int nCol, const NFVector3& value) = 0;

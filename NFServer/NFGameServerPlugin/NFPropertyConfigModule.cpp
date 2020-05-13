@@ -116,18 +116,13 @@ void NFPropertyConfigModule::Load()
 
 std::map<NFGUID, std::string>& NFPropertyConfigModule::GetData()
 {
-    if (mbExtra)
-    {
-        return mhtCoefficienDataEx;
-    }
-
-    return mhtCoefficienData;
+    return mhtCoefficientData;
 }
 
 bool NFPropertyConfigModule::LegalLevel(const int nJob, const int nLevel)
 {
-	auto it = mhtCoefficienData.find(NFGUID(nJob, nLevel));
-	if (it != mhtCoefficienData.end())
+	auto it = mhtCoefficientData.find(NFGUID(nJob, nLevel));
+	if (it != mhtCoefficientData.end())
 	{
 		return true;
 	}

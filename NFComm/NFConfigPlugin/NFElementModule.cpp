@@ -595,7 +595,7 @@ bool NFElementModule::ExistElement(const std::string& strClassName, const std::s
     const std::string& strClass = pElementInfo->GetPropertyManager()->GetPropertyString("ClassName");
     if (strClass != strClassName)
     {
-        return false;
+        return ExistElement(strConfigName);
     }
 
     return true;
