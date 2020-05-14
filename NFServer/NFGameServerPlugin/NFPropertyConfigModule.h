@@ -70,8 +70,7 @@ private:
     bool mbExtra = false;
 
 	//[job,Level]->ConfigID
-    std::map<NFGUID, std::string> mhtCoefficienData;
-    std::map<NFGUID, std::string> mhtCoefficienDataEx;
+    std::map<NFGUID, std::string> mhtCoefficientData;
 
     NFIClassModule* m_pClassModule;
     NFIElementModule* m_pElementModule;

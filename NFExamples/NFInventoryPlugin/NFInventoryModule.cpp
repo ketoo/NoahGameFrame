@@ -69,12 +69,14 @@ NFGUID NFInventoryModule::CreateEquip(const NFGUID& self, const std::string& str
 	bool bExist = m_pElementModule->ExistElement( strConfigName );
 	if ( !bExist )
 	{
+		m_pLogModule->LogError(self, "has no this element:" + strConfigName);
 		return NULL_OBJECT;
 	}
 
 	int nItemType = m_pElementModule->GetPropertyInt32(strConfigName, NFrame::Item::ItemType());
 	if ( NFMsg::EItemType::EIT_EQUIP != nItemType )
 	{
+		m_pLogModule->LogError(self, strConfigName + " has no this item type:" + std::to_string(nItemType));
 		return NULL_OBJECT;
 	}
 
@@ -119,6 +121,7 @@ bool NFInventoryModule::CreateItem(const NFGUID& self, const std::string& strCon
 	bool bExist = m_pElementModule->ExistElement(NFrame::Item::ThisName(), strConfigName );
 	if ( !bExist )
 	{
+		m_pLogModule->LogError(self, "has no this element:" + strConfigName);
 		return false;
 	}
 
@@ -187,6 +190,7 @@ bool NFInventoryModule::DeleteItem(const NFGUID& self, const std::string& strIte
 
 	if (!m_pElementModule->ExistElement(NFrame::Item::ThisName(), strItemConfigID))
 	{
+		m_pLogModule->LogError(self, "has no this element:" + strItemConfigID);
 		return false;
 	}
 
@@ -196,35 +200,22 @@ bool NFInventoryModule::DeleteItem(const NFGUID& self, const std::string& strIte
 		return false;
 	}
 
-	NFDataList varFindResult;
-	int nFindRowCount = pRecord->FindString(NFrame::Player::Inventory::ConfigID, strItemConfigID, varFindResult);
-	if (nFindRowCount > 0)
+	int nFindRow = pRecord->FindString(NFrame::Player::Inventory::ConfigID, strItemConfigID);
+	if (nFindRow > 0)
 	{
-		int nNeedDelCount = nCount;
-		for (int i = 0; i < varFindResult.GetCount(); ++i)
+		int nOldCount = pRecord->GetInt32(nFindRow, NFrame::Player::Inventory::ItemCount);
+		if (nOldCount > nCount)
 		{
-			int nFindRow = varFindResult.Int32(i);
-			int nOldCount = pRecord->GetInt32(nFindRow, NFrame::Player::Inventory::ItemCount);
-			if (nOldCount > nNeedDelCount)
-			{
-				int nNewCount = nOldCount - nNeedDelCount;
-				pRecord->SetInt(nFindRow, NFrame::Player::Inventory::ItemCount, nNewCount);
-				nNeedDelCount = 0;
-			}
-			else if (nOldCount == nNeedDelCount)
-			{
-				pRecord->Remove(nFindRow);
-				nNeedDelCount = 0;
-			}
-			else if (nOldCount < nNeedDelCount)
-			{
-				pRecord->Remove(nFindRow);
-				nNeedDelCount -= nOldCount;
-			}
-		}
+			int nNewCount = nOldCount - nCount;
+			pRecord->SetInt(nFindRow, NFrame::Player::Inventory::ItemCount, nNewCount);
 
-		if (nNeedDelCount <= 0)
+			m_pLogModule->LogInfo(self, " DeleteItem:" + strItemConfigID + ", from " + std::to_string(nOldCount) + " to " + std::to_string(nNewCount));
+			return true;
+		}
+		else if (nOldCount == nCount)
 		{
+			pRecord->Remove(nFindRow);
+			m_pLogModule->LogInfo(self, " DeleteItem:" + strItemConfigID + ", from " + std::to_string(nOldCount) + " to 0");
 			return true;
 		}
 	}
@@ -251,6 +242,7 @@ bool NFInventoryModule::EnoughItem(const NFGUID& self, const std::string& strIte
     bool bExist = m_pElementModule->ExistElement(NFrame::Item::ThisName(), strItemConfigID );
     if ( !bExist )
     {
+		m_pLogModule->LogError(self, "has no this element:" + strItemConfigID);
         return false;
     }
 
@@ -302,6 +294,9 @@ bool NFInventoryModule::CreateItemInNormalBag(const NFGUID & self, const std::st
 		int count = pRecord->GetInt32(row, NFrame::Player::Inventory::ItemCount) + nCount;
 		pRecord->SetInt(row, NFrame::Player::Inventory::ItemCount, count);
 	}
+
+
+	m_pLogModule->LogInfo(self, "add item to bag:" + strConfigName + ", count:" + std::to_string(nCount));
 
 	return true;
 }
