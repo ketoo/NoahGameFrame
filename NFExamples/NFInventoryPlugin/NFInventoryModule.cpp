@@ -210,11 +210,13 @@ bool NFInventoryModule::DeleteItem(const NFGUID& self, const std::string& strIte
 			pRecord->SetInt(nFindRow, NFrame::Player::Inventory::ItemCount, nNewCount);
 
 			m_pLogModule->LogInfo(self, " DeleteItem:" + strItemConfigID + ", from " + std::to_string(nOldCount) + " to " + std::to_string(nNewCount));
+			return true;
 		}
 		else if (nOldCount == nCount)
 		{
 			pRecord->Remove(nFindRow);
 			m_pLogModule->LogInfo(self, " DeleteItem:" + strItemConfigID + ", from " + std::to_string(nOldCount) + " to 0");
+			return true;
 		}
 	}
 
