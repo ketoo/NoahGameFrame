@@ -69,11 +69,6 @@
 		<Plugin Name="NFNoSqlPlugin" />
         
         <Plugin Name="NFWorldLogicPlugin" />
-        <Plugin Name="NFClanPlugin" />
-        <Plugin Name="NFFriendPlugin" />
-        <Plugin Name="NFMailPlugin" />
-        <Plugin Name="NFRankPlugin" />
-        <Plugin Name="NFTeamPlugin" />
 	</WorldServer>
 	<DBServer>
 		<Plugin Name="NFNetPlugin" />
