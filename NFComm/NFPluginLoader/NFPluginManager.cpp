@@ -390,6 +390,10 @@ bool NFPluginManager::CheckStaticPlugin()
 
 		if (!bFind)
 		{
+			it->second->Uninstall();
+			delete it->second;
+			it->second = NULL;
+
 			it = mPluginInstanceMap.erase(it);  
 		}
 		else
@@ -401,40 +405,6 @@ bool NFPluginManager::CheckStaticPlugin()
 	for (auto it = mPluginInstanceMap.begin(); it != mPluginInstanceMap.end(); ++it)
 	{
 		std::cout << it->first << std::endl;
-	}
-
-	std::cout << "-------------" << std::endl;
-
-	//////module
-	for (auto it = mModuleInstanceMap.begin(); it != mModuleInstanceMap.end();)
-	{
-		bool bFind = false;
-		const std::string& strModuleName = it->first;
-
-		for (int i = 0; i < mStaticPlugin.size(); ++i)
-		{
-			const std::string& strPluginName = mStaticPlugin[i];
-				
-			NFIPlugin* pPlugin = this->FindPlugin(strPluginName);
-			if (pPlugin)
-			{
-				NFIModule* pModule = pPlugin->GetElement(strModuleName);
-				if (pModule)
-				{
-					bFind = true;
-					break;
-				}
-			}
-		}
-
-		if (!bFind)
-		{
-			it = mModuleInstanceMap.erase(it);  
-		}
-		else
-		{
-			it++;
-		}
 	}
 
 	std::cout << "-------------" << std::endl;
@@ -764,26 +734,19 @@ void NFPluginManager::RemoveModule(const std::string& strModuleName)
 
 NFIModule* NFPluginManager::FindModule(const std::string& strModuleName)
 {
-	std::string strSubModuleName = strModuleName;
+	std::string strSubModuleName;
 
-#if NF_PLATFORM == NF_PLATFORM_WIN
-	std::size_t position = strSubModuleName.find(" ");
-	if (string::npos != position)
+	string::size_type position = strModuleName.find("NF");
+	if (position != string::npos)
 	{
-		strSubModuleName = strSubModuleName.substr(position + 1, strSubModuleName.length());
+		strSubModuleName = strModuleName.substr(position, strModuleName.length() - position);
 	}
-#else
-	for (int i = 0; i < strSubModuleName.length(); i++)
+
+	if (strSubModuleName.empty())
 	{
-		std::string s = strSubModuleName.substr(0, i + 1);
-		int n = atof(s.c_str());
-		if (strSubModuleName.length() == i + 1 + n)
-		{
-			strSubModuleName = strSubModuleName.substr(i + 1, strSubModuleName.length());
-			break;
-		}
+		std::cout << "" << std::endl;
+		return NULL;
 	}
-#endif
 
 	ModuleInstanceMap::iterator it = mModuleInstanceMap.find(strSubModuleName);
 	if (it != mModuleInstanceMap.end())
@@ -801,26 +764,19 @@ NFIModule* NFPluginManager::FindModule(const std::string& strModuleName)
 
 NFIModule* NFPluginManager::FindTestModule(const std::string& strModuleName)
 {
-	std::string strSubModuleName = strModuleName;
+	std::string strSubModuleName;
 
-#if NF_PLATFORM == NF_PLATFORM_WIN
-	std::size_t position = strSubModuleName.find(" ");
-	if (string::npos != position)
+	string::size_type position = strModuleName.find("NF");
+	if (position != string::npos)
 	{
-		strSubModuleName = strSubModuleName.substr(position + 1, strSubModuleName.length());
+		strSubModuleName = strModuleName.substr(position, strModuleName.length() - position);
 	}
-#else
-	for (int i = 0; i < strSubModuleName.length(); i++)
+
+	if (strSubModuleName.empty())
 	{
-		std::string s = strSubModuleName.substr(0, i + 1);
-		int n = atof(s.c_str());
-		if (strSubModuleName.length() == i + 1 + n)
-		{
-			strSubModuleName = strSubModuleName.substr(i + 1, strSubModuleName.length());
-			break;
-		}
+		std::cout << "" << std::endl;
+		return NULL;
 	}
-#endif
 
     TestModuleInstanceMap::iterator it = mTestModuleInstanceMap.find(strSubModuleName);
 	if (it != mTestModuleInstanceMap.end())
