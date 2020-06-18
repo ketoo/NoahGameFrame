@@ -122,9 +122,9 @@ int NFNPCRefreshModule::OnObjectHPEvent( const NFGUID& self, const std::string& 
         if (!identAttacker.IsNull())
 		{
 			OnObjectBeKilled(self, identAttacker);
-
-			m_pScheduleModule->AddSchedule( self, "OnNPCDeadDestroyHeart", this, &NFNPCRefreshModule::OnNPCDeadDestroyHeart, 1.0f, 1 );
         }
+
+		m_pScheduleModule->AddSchedule( self, "OnNPCDeadDestroyHeart", this, &NFNPCRefreshModule::OnNPCDeadDestroyHeart, 1.0f, 1 );
     }
 
     return 0;
@@ -133,22 +133,23 @@ int NFNPCRefreshModule::OnObjectHPEvent( const NFGUID& self, const std::string& 
 int NFNPCRefreshModule::OnNPCDeadDestroyHeart( const NFGUID& self, const std::string& strHeartBeat, const float fTime, const int nCount)
 {
     //and create new object
-    const std::string& strClassName = m_pKernelModule->GetPropertyString( self, NFrame::NPC::ClassName());
-	const std::string& strSeedID = m_pKernelModule->GetPropertyString( self, NFrame::NPC::SeedID());
-	const std::string& strConfigID = m_pKernelModule->GetPropertyString( self, NFrame::NPC::ConfigID());
-	const NFGUID xMasterID = m_pKernelModule->GetPropertyObject(self, NFrame::NPC::MasterID());
-	const NFGUID camp = m_pKernelModule->GetPropertyObject(self, NFrame::NPC::CampID());
-	int nNPCType = m_pKernelModule->GetPropertyInt(self, NFrame::NPC::NPCType());
-    int nSceneID = m_pKernelModule->GetPropertyInt32( self, NFrame::NPC::SceneID());
+	int nSceneID = m_pKernelModule->GetPropertyInt32( self, NFrame::NPC::SceneID());
 	int nGroupID = m_pKernelModule->GetPropertyInt32(self, NFrame::NPC::GroupID());
-	int refresh = m_pKernelModule->GetPropertyInt32(self, NFrame::NPC::Refresh());
-
-	const NFVector3& seedPos = m_pSceneModule->GetSeedPos(nSceneID, strSeedID);
+	int nNPCType = m_pKernelModule->GetPropertyInt(self, NFrame::NPC::NPCType());
 
 	if (nNPCType == NFMsg::ENPCType::NORMAL_NPC)
 	{
+
+		const std::string& strClassName = m_pKernelModule->GetPropertyString( self, NFrame::NPC::ClassName());
+		const std::string& strSeedID = m_pKernelModule->GetPropertyString( self, NFrame::NPC::SeedID());
+		const std::string& strConfigID = m_pKernelModule->GetPropertyString( self, NFrame::NPC::ConfigID());
+		const NFGUID xMasterID = m_pKernelModule->GetPropertyObject(self, NFrame::NPC::MasterID());
+		const NFGUID camp = m_pKernelModule->GetPropertyObject(self, NFrame::NPC::CampID());
+		int refresh = m_pKernelModule->GetPropertyInt32(self, NFrame::NPC::Refresh());
+
 		m_pKernelModule->DestroySelf(self);
 
+		const NFVector3& seedPos = m_pSceneModule->GetSeedPos(nSceneID, strSeedID);
 		if (refresh > 0)
 		{
 			NFDataList arg;
@@ -161,24 +162,7 @@ int NFNPCRefreshModule::OnNPCDeadDestroyHeart( const NFGUID& self, const std::st
 			m_pKernelModule->CreateObject(NFGUID(), nSceneID, nGroupID, strClassName, strConfigID, arg);
 		}
 	}
-	else if (nNPCType == NFMsg::ENPCType::TURRET_NPC)
-	{
-		//change it as a different status to show others players that this building has been destroyed
-		//m_pKernelModule->DestroySelf(self);
-		int time = 60 * 10 * 3;
-		m_pScheduleModule->AddSchedule(self, "OnBuildingDeadDestroyHeart", this, &NFNPCRefreshModule::OnBuildingDeadDestroyHeart, time, 1);
-		/*
-		NFDataList arg;
-		arg << NFrame::NPC::Position() << fSeedPos;
-		arg << NFrame::NPC::SeedID() << strSeedID;
-		arg << NFrame::NPC::MasterID() << xMasterID;
-		arg << NFrame::NPC::AIOwnerID() << xAIOwnerID;
-
-		m_pKernelModule->CreateObject(NFGUID(), nSceneID, nGroupID, strClassName, strConfigID, arg);
-		*/
-
-	}
-	else if (nNPCType == NFMsg::ENPCType::HERO_NPC)
+	else
 	{
 		m_pKernelModule->DestroySelf(self);
 	}

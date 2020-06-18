@@ -216,8 +216,7 @@ bool NFElementModule::CheckRef()
 						const std::string& strRefValue= this->GetPropertyString(strId, pProperty->GetKey());
 						if (!strRefValue.empty() && !this->GetElement(strRefValue))
 						{
-							std::string msg;
-							msg.append("check ref failed id:").append(strRefValue).append(", in ").append(pLogicClass->GetClassName());
+							std::string msg = "check ref failed id:" + strRefValue + ", in " + pLogicClass->GetClassName() + "=>" + strId;
 							NFASSERT(nRet, msg.c_str(), __FILE__, __FUNCTION__);
 
 							m_pLogModule->LogError(msg, __FUNCTION__, __LINE__);
