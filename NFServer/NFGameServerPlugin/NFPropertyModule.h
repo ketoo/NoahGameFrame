@@ -79,6 +79,8 @@ public:
     virtual bool ConsumeDiamond(const NFGUID& self, const int nValue);
     virtual bool EnoughDiamond(const NFGUID& self, const int nValue);
 
+	virtual void ActiveExtraController();
+
 protected:
     void RefreshBaseProperty(const NFGUID& self);
 
@@ -92,6 +94,8 @@ protected:
     int OnRecordEvent(const NFGUID& self, const RECORD_EVENT_DATA& xEventData, const NFData& oldVar, const NFData& newVar);
 
 private:
+	bool activeExtraController = false;
+
     NFIKernelModule* m_pKernelModule;
     NFIPropertyConfigModule* m_pPropertyConfigModule;
     NFIElementModule* m_pElementModule;
