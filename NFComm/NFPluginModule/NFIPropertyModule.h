@@ -73,7 +73,9 @@ public:
 
     virtual bool AddDiamond(const NFGUID& self, const int nValue) = 0;
     virtual bool ConsumeDiamond(const NFGUID& self, const int nValue) = 0;
-    virtual bool EnoughDiamond(const NFGUID& self, const int nValue) = 0;
+	virtual bool EnoughDiamond(const NFGUID& self, const int nValue) = 0;
+
+	virtual void ActiveExtraController() = 0;
 };
 
 #endif
