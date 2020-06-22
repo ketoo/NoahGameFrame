@@ -96,7 +96,7 @@ NFGUID NFInventoryModule::CreateEquip(const NFGUID& self, const std::string& str
 
 
 	int nAddRow = pRecord->AddRow(-1, *var);
-	if (nAddRow > 0)
+	if (nAddRow >= 0)
 	{
 		return pRecord->GetObject(nAddRow, NFrame::Player::InventoryEquipment::GUID);
 	}
@@ -201,7 +201,7 @@ bool NFInventoryModule::DeleteItem(const NFGUID& self, const std::string& strIte
 	}
 
 	int nFindRow = pRecord->FindString(NFrame::Player::Inventory::ConfigID, strItemConfigID);
-	if (nFindRow > 0)
+	if (nFindRow >= 0)
 	{
 		int nOldCount = pRecord->GetInt32(nFindRow, NFrame::Player::Inventory::ItemCount);
 		if (nOldCount > nCount)
