@@ -578,7 +578,7 @@ package nframe;
 		public static final String AtkDis = "AtkDis";// float
 		public static final String ConsumeProperty = "ConsumeProperty";// string
 		public static final String ConsumeType = "ConsumeType";// int
-		public static final String ConsumeValue = "ConsumeValue";// string
+		public static final String ConsumeValue = "ConsumeValue";// int
 		public static final String CoolDownTime = "CoolDownTime";// float
 		public static final String DamageProperty = "DamageProperty";// string
 		public static final String DamageValue = "DamageValue";// int
@@ -588,6 +588,7 @@ package nframe;
 		public static final String GetBuffList = "GetBuffList";// string
 		public static final String Icon = "Icon";// string
 		public static final String NewObject = "NewObject";// string
+		public static final String ScriptObject = "ScriptObject";// string
 		public static final String SendBuffList = "SendBuffList";// string
 		public static final String ShowName = "ShowName";// string
 		public static final String SkillSubType = "SkillSubType";// int
