@@ -89,7 +89,6 @@ public:
 	NFThreadPoolModule(NFIPluginManager* p);
     virtual ~NFThreadPoolModule();
 
-	virtual void SetCpu(const int cpuCount);
 	virtual int GetThreadCount();
 
     virtual bool Init();

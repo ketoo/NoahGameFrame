@@ -713,28 +713,33 @@ void NFNetClientModule::ProcessExecute()
 
 void NFNetClientModule::LogServerInfo()
 {
-	m_pLogModule->LogInfo("This is a client, begin to print Server Info-------------------");
+	bool error = false;
+	std::ostringstream stream;
+	stream << "This is a client, begin to print Server Info-------------------" << std::endl;
 
     ConnectData* pServerData = mxServerMap.FirstNude();
     while (nullptr != pServerData)
     {
-        std::ostringstream stream;
-        stream << "Type: " << pServerData->eServerType << " Server ID: " << pServerData->nGameID << " State: "
-               << pServerData->eState << " IP: " << pServerData->strIP << " Port: " << pServerData->nPort;
+        stream << "Type: " << pServerData->eServerType << " Server ID: " << pServerData->nGameID << " State: " << pServerData->eState << " IP: " << pServerData->strIP << " Port: " << pServerData->nPort;
 
-		if (pServerData->eState == ConnectDataState::NORMAL)
+		if (pServerData->eState != ConnectDataState::NORMAL)
 		{
-			m_pLogModule->LogInfo(stream.str());
-		}
-		else
-		{
-			m_pLogModule->LogError(stream.str());
+			error = true;
 		}
 
         pServerData = mxServerMap.NextNude();
     }
 
-	m_pLogModule->LogInfo("This is a client, end to print Server Info---------------------");
+	stream << "This is a client, end to print Server Info---------------------" << std::endl;
+
+    if (error)
+	{
+		m_pLogModule->LogError(stream.str());
+	}
+	else
+	{
+		m_pLogModule->LogInfo(stream.str());
+	}
 }
 
 void NFNetClientModule::KeepState(NF_SHARE_PTR<ConnectData> pServerData)

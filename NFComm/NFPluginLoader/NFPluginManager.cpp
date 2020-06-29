@@ -1012,3 +1012,13 @@ std::list<NFIModule *> NFPluginManager::TestModules()
 
 	return xModules;
 }
+
+int NFPluginManager::GetAppCPUCount() const
+{
+	return mnCPUCount;
+}
+
+void NFPluginManager::SetAppCPUCount(const int count)
+{
+	mnCPUCount = count;
+}

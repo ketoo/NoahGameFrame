@@ -75,10 +75,6 @@ bool NFProxyServerNet_ServerModule::AfterInit()
                 const int nCpus = m_pElementModule->GetPropertyInt32(strId, NFrame::Server::CpuCount());
                 //const std::string& strName = m_pElementModule->GetPropertyString(strId, NFrame::Server::ID());
                 //const std::string& strIP = m_pElementModule->GetPropertyString(strId, NFrame::Server::IP());
-                if (nCpus > 0)
-                {
-                    m_pThreadPoolModule->SetCpu(nCpus);
-                }
 
                 int nRet = m_pNetModule->Initialization(nMaxConnect, nPort, nCpus);
                 if (nRet < 0)

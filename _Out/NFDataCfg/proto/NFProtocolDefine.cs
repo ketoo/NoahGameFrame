@@ -744,7 +744,7 @@ namespace NFrame
 		public static readonly String AtkDis = "AtkDis";// float
 		public static readonly String ConsumeProperty = "ConsumeProperty";// string
 		public static readonly String ConsumeType = "ConsumeType";// int
-		public static readonly String ConsumeValue = "ConsumeValue";// string
+		public static readonly String ConsumeValue = "ConsumeValue";// int
 		public static readonly String CoolDownTime = "CoolDownTime";// float
 		public static readonly String DamageProperty = "DamageProperty";// string
 		public static readonly String DamageValue = "DamageValue";// int
@@ -754,6 +754,7 @@ namespace NFrame
 		public static readonly String GetBuffList = "GetBuffList";// string
 		public static readonly String Icon = "Icon";// string
 		public static readonly String NewObject = "NewObject";// string
+		public static readonly String ScriptObject = "ScriptObject";// string
 		public static readonly String SendBuffList = "SendBuffList";// string
 		public static readonly String ShowName = "ShowName";// string
 		public static readonly String SkillSubType = "SkillSubType";// int

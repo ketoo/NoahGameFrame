@@ -222,7 +222,7 @@ int NFRecord::AddRow(const int nRow, const NFDataList& var)
 	xEventData.strRecordName = mstrRecordName;
 
 	NFData tData;
-    OnEventHandler(mSelf, xEventData, tData, tData); //FIXME:RECORD
+    OnEventHandler(mSelf, xEventData, tData, tData);
 
     return nFindRow;
 }

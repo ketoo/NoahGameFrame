@@ -47,6 +47,26 @@ public:
         NPG_ALL ,
     };
 
+	//返回100以内的百分比数值(比如10，就应该是10%), 用来计算armor值代来代伤害减免，幸运值代来代幸运概率等
+	static int Cal(int value)
+	{
+		float x = value / 10.0f;
+		float f = 0.06f * x / (1.0f + (0.06f * x));
+		return (int)(f * 100);
+	}
+
+	//高斯求和, 返回等级带来代数值结果,比如  + 10等级, 应该就是55,
+	static int CalLevelValue(int level)
+	{
+		int result = 0;
+		if (level > 0)
+		{
+			result = (1 + level) * level / 2;
+		}
+
+		return result;
+	}
+
     virtual int64_t GetPropertyValue(const NFGUID& self, const std::string& strPropertyName, const NFPropertyGroup eGroupType) = 0;
     virtual int SetPropertyValue(const NFGUID& self, const std::string& strPropertyName, const NFPropertyGroup eGroupType, const int64_t nValue) = 0;
 

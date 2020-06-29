@@ -8,7 +8,7 @@
 0为绝对值1
 为当前值百分比
 2为最大值百分比" Force="0" Private="0" Public="0" Ref="0" Save="0" Type="int" Upload="0" />
-		<Property Id="ConsumeValue" Cache="0" Desc="消耗值" Force="0" Private="0" Public="0" Ref="0" Save="0" Type="string" Upload="0" />
+		<Property Id="ConsumeValue" Cache="0" Desc="消耗值" Force="0" Private="0" Public="0" Ref="0" Save="0" Type="int" Upload="0" />
 		<Property Id="CoolDownTime" Cache="0" Desc="使用冷却CD" Force="0" Private="0" Public="0" Ref="0" Save="0" Type="float" Upload="0" />
 		<Property Id="DamageProperty" Cache="0" Desc="伤害属性" Force="0" Private="0" Public="0" Ref="0" Save="0" Type="string" Upload="0" />
 		<Property Id="DamageValue" Cache="0" Desc="伤害值" Force="0" Private="0" Public="0" Ref="0" Save="0" Type="int" Upload="0" />
@@ -26,6 +26,7 @@
 		<Property Id="GetBuffList" Cache="0" Desc="使用后获得的BUFF" Force="0" Private="0" Public="0" Ref="0" Save="0" Type="string" Upload="0" />
 		<Property Id="Icon" Cache="0" Desc="ICON" Force="0" Private="0" Public="0" Ref="0" Save="0" Type="string" Upload="0" />
 		<Property Id="NewObject" Cache="0" Desc="产生新的对象--召唤" Force="0" Private="0" Public="0" Ref="0" Save="0" Type="string" Upload="0" />
+		<Property Id="ScriptObject" Cache="0" Desc="script file" Force="0" Private="0" Public="0" Ref="0" Save="0" Type="string" Upload="0" />
 		<Property Id="SendBuffList" Cache="0" Desc="使用后对方获得的BUFF" Force="0" Private="0" Public="0" Ref="0" Save="0" Type="string" Upload="0" />
 		<Property Id="ShowName" Cache="0" Desc="名字字符串索引" Force="0" Private="0" Public="0" Ref="0" Save="0" Type="string" Upload="0" />
 		<Property Id="SkillSubType" Cache="0" Desc=" EST_BRIEF_SINGLE   = 0;//普通0短刃类

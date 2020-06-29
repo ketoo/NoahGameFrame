@@ -45,7 +45,7 @@ NFElementModule::NFElementModule(NFIPluginManager* p)
 
 	if (!this->mbBackup)
 	{
-		for (int i = 0; i < 10; ++i)
+		for (int i = 0; i < pPluginManager->GetAppCPUCount(); ++i)
 		{
 			ThreadElementModule threadElement;
 			threadElement.used = false;
@@ -466,7 +466,6 @@ const NFVector3 NFElementModule::GetPropertyVector3(const std::string & strConfi
 		return pProperty->GetVector3();
 	}
 
-
 	return NFVector3();
 }
 
@@ -690,9 +689,4 @@ bool NFElementModule::Clear()
 
     mbLoaded = false;
     return true;
-}
-
-NFIElementModule *NFElementModule::GetThreadElementModule(const int index)
-{
-	return mThreadElements[index].elementModule;
 }

@@ -753,7 +753,7 @@ namespace NFrame
 		static const std::string& AtkDis(){ static std::string x = "AtkDis"; return x; };// float
 		static const std::string& ConsumeProperty(){ static std::string x = "ConsumeProperty"; return x; };// string
 		static const std::string& ConsumeType(){ static std::string x = "ConsumeType"; return x; };// int
-		static const std::string& ConsumeValue(){ static std::string x = "ConsumeValue"; return x; };// string
+		static const std::string& ConsumeValue(){ static std::string x = "ConsumeValue"; return x; };// int
 		static const std::string& CoolDownTime(){ static std::string x = "CoolDownTime"; return x; };// float
 		static const std::string& DamageProperty(){ static std::string x = "DamageProperty"; return x; };// string
 		static const std::string& DamageValue(){ static std::string x = "DamageValue"; return x; };// int
@@ -763,6 +763,7 @@ namespace NFrame
 		static const std::string& GetBuffList(){ static std::string x = "GetBuffList"; return x; };// string
 		static const std::string& Icon(){ static std::string x = "Icon"; return x; };// string
 		static const std::string& NewObject(){ static std::string x = "NewObject"; return x; };// string
+		static const std::string& ScriptObject(){ static std::string x = "ScriptObject"; return x; };// string
 		static const std::string& SendBuffList(){ static std::string x = "SendBuffList"; return x; };// string
 		static const std::string& ShowName(){ static std::string x = "ShowName"; return x; };// string
 		static const std::string& SkillSubType(){ static std::string x = "SkillSubType"; return x; };// int

@@ -123,6 +123,9 @@ public:
     virtual void SetCurrentPlugin(NFIPlugin* pPlugin) override;
     virtual void SetCurrentModule(NFIModule* pModule) override;
 
+	virtual int GetAppCPUCount() const override;
+	virtual void SetAppCPUCount(const int count) override;
+
     virtual void SetGetFileContentFunctor(GET_FILECONTENT_FUNCTOR fun) override;
 
     virtual bool GetFileContent(const std::string &strFileName, std::string &strContent) override;
@@ -145,7 +148,8 @@ private:
     bool mbIsDocker;
     bool mbStaticPlugin;
     NFINT64 mnInitTime;
-    NFINT64 mnNowTime;
+	NFINT64 mnNowTime;
+	NFINT64 mnCPUCount = 1;
     std::string mstrConfigPath;
     std::string mstrConfigName;
     std::string mstrAppName;

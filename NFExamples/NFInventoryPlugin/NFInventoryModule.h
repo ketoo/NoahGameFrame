@@ -52,8 +52,10 @@ public:
     virtual bool AfterInit() override;
 
 	///////////
-	virtual NFGUID CreateEquip( const NFGUID& self, const std::string& strConfigName);
+	virtual NFGUID CreateEquip( const NFGUID& self, const std::string& strConfigName, const int nCount = 1);
 	virtual bool CreateItem(const NFGUID& self, const std::string& strConfigName, const int nCount);
+
+	virtual int ItemCount(const NFGUID& self, const std::string& strItemConfigID);
 
 	virtual bool DeleteEquip(const NFGUID& self, const NFGUID& id);
     virtual bool DeleteItem(const NFGUID& self, const std::string& strItemConfigID, const int nCount);

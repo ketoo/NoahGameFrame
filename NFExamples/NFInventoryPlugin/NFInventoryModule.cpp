@@ -57,7 +57,7 @@ bool NFInventoryModule::AfterInit()
 }
 
 
-NFGUID NFInventoryModule::CreateEquip(const NFGUID& self, const std::string& strConfigName )
+NFGUID NFInventoryModule::CreateEquip(const NFGUID& self, const std::string& strConfigName, const int nCount)
 {
 	NF_SHARE_PTR<NFIObject> pObject = m_pKernelModule->GetObject( self );
 	if ( NULL == pObject )
@@ -94,11 +94,23 @@ NFGUID NFInventoryModule::CreateEquip(const NFGUID& self, const std::string& str
 	var->SetString(NFrame::Player::InventoryEquipment::ConfigID, strConfigName.c_str());
 	var->SetInt(NFrame::Player::InventoryEquipment::Date, pPluginManager->GetNowTime());
 
-
-	int nAddRow = pRecord->AddRow(-1, *var);
-	if (nAddRow >= 0)
+	if (nCount > 1)
 	{
-		return pRecord->GetObject(nAddRow, NFrame::Player::InventoryEquipment::GUID);
+		for (int i = 0; i < nCount; ++i)
+		{
+			var->SetObject(NFrame::Player::InventoryEquipment::GUID, m_pKernelModule->CreateGUID());
+			pRecord->AddRow(-1, *var);
+		}
+
+		return NULL_OBJECT;
+	}
+	else if (nCount == 1)
+	{
+		int nAddRow = pRecord->AddRow(-1, *var);
+		if (nAddRow >= 0)
+		{
+			return pRecord->GetObject(nAddRow, NFrame::Player::InventoryEquipment::GUID);
+		}
 	}
 
 	return NULL_OBJECT;
@@ -128,7 +140,7 @@ bool NFInventoryModule::CreateItem(const NFGUID& self, const std::string& strCon
 	int nItemType = m_pElementModule->GetPropertyInt32(strConfigName, NFrame::Item::ItemType());
 	if ( NFMsg::EItemType::EIT_EQUIP == nItemType )
 	{
-		CreateEquip(self, strConfigName);
+		CreateEquip(self, strConfigName, nCount);
 
 		return false;
 	}
@@ -299,4 +311,35 @@ bool NFInventoryModule::CreateItemInNormalBag(const NFGUID & self, const std::st
 	m_pLogModule->LogInfo(self, "add item to bag:" + strConfigName + ", count:" + std::to_string(nCount));
 
 	return true;
+}
+
+int NFInventoryModule::ItemCount(const NFGUID &self, const std::string &strItemConfigID)
+{
+
+	NF_SHARE_PTR<NFIObject> pObject = m_pKernelModule->GetObject( self );
+	if ( NULL == pObject )
+	{
+		return 0;
+	}
+
+
+	if (!m_pElementModule->ExistElement(NFrame::Item::ThisName(), strItemConfigID))
+	{
+		m_pLogModule->LogError(self, "has no this element:" + strItemConfigID);
+		return 0;
+	}
+
+	NF_SHARE_PTR<NFIRecord> pRecord = pObject->GetRecordManager()->GetElement( NFrame::Player::Inventory::ThisName() );
+	if (!pRecord)
+	{
+		return 0;
+	}
+
+	int nFindRow = pRecord->FindString(NFrame::Player::Inventory::ConfigID, strItemConfigID);
+	if (nFindRow >= 0)
+	{
+		return pRecord->GetInt32(nFindRow, NFrame::Player::Inventory::ItemCount);
+	}
+
+	return 0;
 }
