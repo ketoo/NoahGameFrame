@@ -92,6 +92,7 @@ public:
     NFHelloWorld4Module(NFIPluginManager* p)
     {
         pPluginManager = p;
+        m_bIsExecute = false;
     }
 
     virtual bool Init();
