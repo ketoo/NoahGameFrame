@@ -193,10 +193,6 @@ void NFPluginServer::ProcessParameter()
 			strTitleName.replace(pos, 6, "");
 			strTitleName = "NF" + strTitleName;
 		}
-		else
-		{
-			strTitleName = "NFIDE";
-		}
     }
     else
     {
