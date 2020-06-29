@@ -101,7 +101,6 @@ public:
     virtual bool Clear();
 
     NFIElementModule* GetThreadElementModule() override;
-	NFIElementModule* GetThreadElementModule(const int index) override;
 
     virtual bool LoadSceneInfo(const std::string& strFileName, const std::string& strClassName);
 

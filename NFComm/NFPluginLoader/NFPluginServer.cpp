@@ -90,7 +90,7 @@ void NFPluginServer::PrintfLogo()
 #endif
 }
 
-void NFPluginServer::SetMidwareLoader(std::function<void(NFIPluginManager * p)> fun)
+void NFPluginServer::SetMidWareLoader(std::function<void(NFIPluginManager * p)> fun)
 {
     externalPluginLoader = fun;
 }
@@ -148,51 +148,22 @@ void NFPluginServer::ProcessParameter()
     NFDataList argList;
     argList.Split(this->strArgvList, " ");
 
-    for (int i = 0; i < argList.GetCount(); i++)
-    {
-        strPluginName = argList.String(i);
-        if (strPluginName.find("Plugin=") != string::npos)
-        {
-            strPluginName.erase(0, 7);
-            break;
-        }
+    pPluginManager->SetConfigName(FindParameterValue(argList, "Plugin="));
+	pPluginManager->SetAppName(FindParameterValue(argList, "Server="));
 
-        strPluginName = "";
-    }
-
-    pPluginManager->SetConfigName(strPluginName);
-
-    for (int i = 0; i < argList.GetCount(); i++)
-    {
-        strAppName = argList.String(i);
-        if (strAppName.find("Server=") != string::npos)
-        {
-            strAppName.erase(0, 7);
-            break;
-        }
-
-        strAppName = "";
-    }
-
-    pPluginManager->SetAppName(strAppName);
-
-    for (int i = 0; i < argList.GetCount(); i++)
-    {
-        strAppID = argList.String(i);
-        if (strAppID.find("ID=") != string::npos)
-        {
-            strAppID.erase(0, 3);
-            break;
-        }
-
-        strAppID = "";
-    }
-
+	strAppID = FindParameterValue(argList, "ID=");
     int nAppID = 0;
     if (NF_StrTo(strAppID, nAppID))
     {
         pPluginManager->SetAppID(nAppID);
     }
+
+	std::string strDockerFlag = FindParameterValue(argList, "Docker=");
+	int nDockerFlag = 0;
+	if (NF_StrTo(strDockerFlag, nDockerFlag))
+	{
+		pPluginManager->SetRunningDocker(nDockerFlag);
+	}
 
     // NoSqlServer.xml:IP=\"127.0.0.1\"==IP=\"192.168.1.1\"
     if (strArgvList.find(".xml:") != string::npos)
@@ -213,30 +184,19 @@ void NFPluginServer::ProcessParameter()
         }
     }
 
-    std::string strDockerFlag = "0";
-    for (int i = 0; i < argList.GetCount(); i++)
-    {
-        strDockerFlag = argList.String(i);
-        if (strDockerFlag.find("Docker=") != string::npos)
-        {
-            strDockerFlag.erase(0, 7);
-            break;
-        }
-
-        strDockerFlag = "";
-    }
-
-    int nDockerFlag = 0;
-    if (NF_StrTo(strDockerFlag, nDockerFlag))
-    {
-        pPluginManager->SetRunningDocker(nDockerFlag);
-    }
-
     strTitleName = strAppName + strAppID;// +" PID" + NFGetPID();
     if (!strTitleName.empty())
     {
-        strTitleName.replace(strTitleName.find("Server"), 6, "");
-        strTitleName = "NF" + strTitleName;
+		int pos = strTitleName.find("Server");
+		if (pos != string::npos)
+		{
+			strTitleName.replace(pos, 6, "");
+			strTitleName = "NF" + strTitleName;
+		}
+		else
+		{
+			strTitleName = "NFIDE";
+		}
     }
     else
     {
@@ -297,4 +257,20 @@ bool NFPluginServer::GetFileContent(NFIPluginManager* p, const std::string& strF
     }
 
     return true;
+}
+
+std::string NFPluginServer::FindParameterValue(const NFDataList& argList, const std::string& header)
+{
+	for (int i = 0; i < argList.GetCount(); i++)
+	{
+		std::string name = argList.String(i);
+		if (name.find(header) != string::npos)
+		{
+			name.erase(0, header.length());
+			return name;
+		}
+
+	}
+
+	return "";
 }

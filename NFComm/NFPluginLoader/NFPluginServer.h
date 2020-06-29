@@ -68,7 +68,6 @@ public:
 
 	NF_SHARE_PTR<NFIPluginManager> pPluginManager;
 	std::string strArgvList;
-	std::string strPluginName;
 	std::string strAppName;
 	std::string strAppID;
 	std::string strTitleName;
@@ -82,11 +81,13 @@ public:
 	
 	void PrintfLogo();
 
-	void SetMidwareLoader(std::function<void(NFIPluginManager * p)> fun);
+	void SetMidWareLoader(std::function<void(NFIPluginManager * p)> fun);
 
 private:
 
 	void ProcessParameter();
+
+	std::string FindParameterValue(const NFDataList& argList, const std::string& header);
 
 	void InitDaemon();
 

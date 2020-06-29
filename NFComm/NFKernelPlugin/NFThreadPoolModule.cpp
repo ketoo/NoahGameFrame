@@ -35,27 +35,12 @@ NFThreadPoolModule::~NFThreadPoolModule()
 {
 }
 
-void NFThreadPoolModule::SetCpu(const int cpuCount)
-{
-    if (cpuCount > mCPUCount)
-    {
-        mCPUCount = cpuCount;
-        for (int i = mThreadPool.size(); i < mCPUCount * 2; ++i)
-        {
-            mThreadPool.push_back(NF_SHARE_PTR<NFThreadCell>(NF_NEW NFThreadCell(this)));
-        }
-    }
-}
-
 bool NFThreadPoolModule::Init()
 {
-    if (mCPUCount > 0)
-    {
-        for (int i = 0; i < mCPUCount * 2; ++i)
-        {
-            mThreadPool.push_back(NF_SHARE_PTR<NFThreadCell>(NF_NEW NFThreadCell(this)));
-        }
-    }
+	for (int i = 0; i < pPluginManager->GetAppCPUCount(); ++i)
+	{
+		mThreadPool.push_back(NF_SHARE_PTR<NFThreadCell>(NF_NEW NFThreadCell(this)));
+	}
 
     return true;
 }

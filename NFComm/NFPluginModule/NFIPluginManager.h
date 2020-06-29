@@ -220,6 +220,8 @@ public:
 	virtual void SetCurrentPlugin(NFIPlugin* pPlugin) = 0;
 	virtual void SetCurrentModule(NFIModule* pModule) = 0;
 
+	virtual int GetAppCPUCount() const = 0;
+	virtual void SetAppCPUCount(const int count) = 0;
 
 	virtual void SetGetFileContentFunctor(GET_FILECONTENT_FUNCTOR fun) = 0;
 	virtual bool GetFileContent(const std::string &strFileName, std::string &strContent) = 0;
