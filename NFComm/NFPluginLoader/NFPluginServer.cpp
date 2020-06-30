@@ -151,7 +151,7 @@ void NFPluginServer::ProcessParameter()
     pPluginManager->SetConfigName(FindParameterValue(argList, "Plugin="));
 	pPluginManager->SetAppName(FindParameterValue(argList, "Server="));
 
-	strAppID = FindParameterValue(argList, "ID=");
+	std::string strAppID = FindParameterValue(argList, "ID=");
     int nAppID = 0;
     if (NF_StrTo(strAppID, nAppID))
     {
@@ -184,7 +184,7 @@ void NFPluginServer::ProcessParameter()
         }
     }
 
-    strTitleName = strAppName + strAppID;// +" PID" + NFGetPID();
+    std::string strTitleName = pPluginManager->GetAppName() + std::to_string(pPluginManager->GetAppID());// +" PID" + NFGetPID();
     if (!strTitleName.empty())
     {
 		int pos = strTitleName.find("Server");

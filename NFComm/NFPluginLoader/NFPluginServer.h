@@ -68,9 +68,6 @@ public:
 
 	NF_SHARE_PTR<NFIPluginManager> pPluginManager;
 	std::string strArgvList;
-	std::string strAppName;
-	std::string strAppID;
-	std::string strTitleName;
 	std::function<void(NFIPluginManager * p)> externalPluginLoader;
 
 	void Init();
