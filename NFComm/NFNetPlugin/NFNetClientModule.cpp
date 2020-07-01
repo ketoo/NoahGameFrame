@@ -28,6 +28,7 @@
 
 NFNetClientModule::NFNetClientModule(NFIPluginManager* p)
 {
+    m_bIsExecute = true;
     mnBufferSize = 0;
     pPluginManager = p;
 

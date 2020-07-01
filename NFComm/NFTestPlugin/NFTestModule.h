@@ -41,6 +41,7 @@ class NFTestModule
 public:
     NFTestModule( NFIPluginManager* p )
     {
+        m_bIsExecute = true;
         pPluginManager = p;
     }
 

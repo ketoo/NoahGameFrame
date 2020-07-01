@@ -37,7 +37,7 @@ class NFIModule
 {
 
 public:
-    NFIModule() : m_bIsExecute(true), pPluginManager(NULL)
+    NFIModule() : m_bIsExecute(false), pPluginManager(NULL)
     {
     }
 

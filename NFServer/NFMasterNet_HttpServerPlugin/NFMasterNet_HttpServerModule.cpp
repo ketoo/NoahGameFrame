@@ -77,7 +77,7 @@ bool NFMasterNet_HttpServerModule::AfterInit()
 
 bool NFMasterNet_HttpServerModule::Execute()
 {
-    m_pHttpNetModule->Execute();
+    //m_pHttpNetModule->Execute();
 	return true;
 }
 

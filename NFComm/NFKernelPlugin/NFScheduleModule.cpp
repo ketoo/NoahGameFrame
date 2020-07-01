@@ -42,6 +42,7 @@ void NFScheduleElement::DoHeartBeatEvent(NFINT64 nowTime)
 NFScheduleModule::NFScheduleModule(NFIPluginManager* p)
 {
 	pPluginManager = p;
+    m_bIsExecute = true;
 }
 
 NFScheduleModule::~NFScheduleModule()

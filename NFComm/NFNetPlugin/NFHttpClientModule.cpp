@@ -30,6 +30,7 @@
 
 NFHttpClientModule::NFHttpClientModule(NFIPluginManager* p)
 {
+    m_bIsExecute = true;
     pPluginManager = p;
     m_pHttpClient = new NFHttpClient();
     m_xDefaultHttpHeaders["Connection"] = "close";
@@ -61,7 +62,7 @@ bool NFHttpClientModule::AfterInit()
 
 bool NFHttpClientModule::Execute()
 {
-    m_pHttpClient->Execute();
+    m_pHttpClient->Execute();//TODO
     return true;
 }
 
