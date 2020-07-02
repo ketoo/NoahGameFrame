@@ -59,18 +59,24 @@ protected:
 		while (true)
 		{
 			std::this_thread::sleep_for(std::chrono::milliseconds(1));
-			
-			//pick the first task and do it
-			NFThreadTask task;
-			if (mTaskList.TryPop(task))
 			{
-				task.xThreadFunc->operator()(task);
-
-				//repush the result to the main thread
-				//and, do we must to tell the result?
-				if (task.xEndFunc)
+				//pick the first task and do it
+				NFThreadTask task;
+				while (mTaskList.TryPop(task))
 				{
-					m_pThreadPoolModule->TaskResult(task);
+					if (task.xThreadFunc)
+					{
+						task.xThreadFunc.operator()(task);
+					}
+
+					//repush the result to the main thread
+					//and, do we must to tell the result?
+					if (task.xEndFunc)
+					{
+						m_pThreadPoolModule->TaskResult(task);
+					}
+
+					task.Reset();
 				}
 			}
 		}
@@ -101,7 +107,7 @@ public:
 
     virtual bool Execute();
 
-	virtual void DoAsyncTask(const NFGUID taskID, const std::string& data, TASK_PROCESS_FUNCTOR_PTR asyncFunctor, TASK_PROCESS_FUNCTOR_PTR functor_end);
+	virtual void DoAsyncTask(const NFGUID taskID, const std::string& data, TASK_PROCESS_FUNCTOR asyncFunctor, TASK_PROCESS_FUNCTOR functor_end);
 
 	virtual void TaskResult(const NFThreadTask& task);
 

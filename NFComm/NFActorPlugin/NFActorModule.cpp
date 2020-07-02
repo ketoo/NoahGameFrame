@@ -98,6 +98,15 @@ bool NFActorModule::AddResult(const NFActorMessage & message)
 
 bool NFActorModule::ExecuteEvent()
 {
+	static int64_t lastTime = 0;
+	int64_t nowTime = NFGetTimeMS();
+	if (nowTime < lastTime + 10)
+	{
+		return false;
+	}
+
+	lastTime = nowTime;
+
 	for (auto it : mxActorMap)
 	{
 		NF_SHARE_PTR<NFIActor> pActor = it.second;
@@ -117,7 +126,7 @@ bool NFActorModule::ExecuteEvent()
 			}
 		}
 	}
-	
+
 	return true;
 }
 

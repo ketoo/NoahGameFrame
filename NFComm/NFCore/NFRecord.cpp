@@ -1485,7 +1485,7 @@ void NFRecord::OnEventHandler(const NFGUID& self, const RECORD_EVENT_DATA& xEven
     {
         
         RECORD_EVENT_FUNCTOR_PTR functorPtr = *itr;
-        functorPtr.get()->operator()(self, xEventData, oldVar, newVar);
+        functorPtr->operator()(self, xEventData, oldVar, newVar);
     }
 }
 
