@@ -53,6 +53,7 @@ class NFLuaScriptModule
 public:
     NFLuaScriptModule(NFIPluginManager* p)
     {
+        m_bIsExecute = true;
         pPluginManager = p;
     }
 

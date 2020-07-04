@@ -45,6 +45,7 @@ public:
 
     NFProxyServerToWorldModule(NFIPluginManager* p)
     {
+        m_bIsExecute = true;
         pPluginManager = p;
 		mLastReportTime = 0;
     }

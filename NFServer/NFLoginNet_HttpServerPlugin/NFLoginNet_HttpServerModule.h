@@ -49,6 +49,7 @@ public:
 	NFLoginNet_HttpServerModule(NFIPluginManager* p)
 	{
 		pPluginManager = p;
+        m_bIsExecute = true;
 	}
 
 	virtual bool Init();

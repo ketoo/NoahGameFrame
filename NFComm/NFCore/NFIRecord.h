@@ -34,7 +34,8 @@ struct RECORD_EVENT_DATA
 	enum RecordOptype
 	{
 		Add = 0,
-		Del,
+		Del,//before del
+		AfterDel,
 		Swap,
 		Create,
 		Update,

@@ -37,7 +37,7 @@ class NFIModule
 {
 
 public:
-    NFIModule()
+    NFIModule() : m_bIsExecute(false), pPluginManager(NULL)
     {
     }
 
@@ -100,8 +100,8 @@ public:
     }
 
     std::string strName;
-
+    bool m_bIsExecute;
 protected:
-	NFIPluginManager* pPluginManager = NULL;
+	NFIPluginManager* pPluginManager;
 };
 #endif

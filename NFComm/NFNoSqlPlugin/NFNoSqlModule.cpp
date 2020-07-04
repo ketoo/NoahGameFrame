@@ -30,6 +30,7 @@
 NFIPluginManager* xPluginManager;
 NFNoSqlModule::NFNoSqlModule(NFIPluginManager* p)
 {
+    m_bIsExecute = true;
 	xPluginManager = p;
 	pPluginManager = p;
 }

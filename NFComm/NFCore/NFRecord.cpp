@@ -1358,6 +1358,10 @@ bool NFRecord::Remove(const int nRow)
 
 			mVecUsedState[nRow] = 0;
 
+			xEventData.nOpType = RECORD_EVENT_DATA::AfterDel;
+
+			OnEventHandler(mSelf, xEventData, NFData(), NFData());
+
 			return true;
         }
     }
@@ -1481,7 +1485,7 @@ void NFRecord::OnEventHandler(const NFGUID& self, const RECORD_EVENT_DATA& xEven
     {
         
         RECORD_EVENT_FUNCTOR_PTR functorPtr = *itr;
-        functorPtr.get()->operator()(self, xEventData, oldVar, newVar);
+        functorPtr->operator()(self, xEventData, oldVar, newVar);
     }
 }
 

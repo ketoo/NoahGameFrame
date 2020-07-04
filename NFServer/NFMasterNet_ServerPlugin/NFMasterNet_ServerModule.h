@@ -40,6 +40,7 @@ class NFMasterNet_ServerModule
 public:
     NFMasterNet_ServerModule(NFIPluginManager* p)
     {
+        m_bIsExecute = true;
 		pPluginManager = p;
         mnLastLogTime = pPluginManager->GetNowTime();
     }
