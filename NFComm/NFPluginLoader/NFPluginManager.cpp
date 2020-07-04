@@ -554,10 +554,9 @@ bool NFPluginManager::Execute()
 
     bool bRet = true;
 
-    PluginInstanceMap::iterator it = mPluginInstanceMap.begin();
-    for (; it != mPluginInstanceMap.end(); ++it)
+    for (auto& xPair : mNeedExecuteModuleVec)
     {
-        bool tembRet = it->second->Execute();
+        bool tembRet = xPair.second->Execute();
         bRet = bRet && tembRet;
     }
 
@@ -711,6 +710,9 @@ void NFPluginManager::AddModule(const std::string& strModuleName, NFIModule* pMo
     if (!FindModule(strModuleName))
     {
         mModuleInstanceMap.insert(ModuleInstanceMap::value_type(strModuleName, pModule));
+
+        if (pModule->m_bIsExecute)
+            mNeedExecuteModuleVec.push_back(std::make_pair(strModuleName, pModule));
     }
 }
 
@@ -728,6 +730,15 @@ void NFPluginManager::RemoveModule(const std::string& strModuleName)
     if (it != mModuleInstanceMap.end())
     {
         mModuleInstanceMap.erase(it);
+
+        auto iter = std::find_if(mNeedExecuteModuleVec.begin(),
+            mNeedExecuteModuleVec.end(),
+            [&strModuleName](const std::pair<std::string, NFIModule*>& xPair) ->bool{
+            return xPair.first == strModuleName;
+        });
+        
+        if(iter != mNeedExecuteModuleVec.end())
+            mNeedExecuteModuleVec.erase(iter);
     }
 }
 

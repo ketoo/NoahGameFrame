@@ -27,8 +27,9 @@
 
 NFNetModule::NFNetModule(NFIPluginManager* p)
 {
+    m_bIsExecute = true;
     pPluginManager = p;
-
+    
     mnBufferSize = 0;
     nLastTime = GetPluginManager()->GetNowTime();
     m_pNet = NULL;

@@ -42,6 +42,7 @@ class NFGameServerModule
 public:
     NFGameServerModule(NFIPluginManager* p)
     {
+        m_bIsExecute = true;
         pPluginManager = p;
     }
     virtual ~NFGameServerModule() {};

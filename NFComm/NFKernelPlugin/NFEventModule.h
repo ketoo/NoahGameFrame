@@ -38,6 +38,7 @@ class NFEventModule
 public:
     NFEventModule(NFIPluginManager* p)
     {
+        m_bIsExecute = true;
         pPluginManager = p;
     }
 

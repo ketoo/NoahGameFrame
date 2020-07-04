@@ -28,6 +28,7 @@
 
 NFThreadPoolModule::NFThreadPoolModule(NFIPluginManager* p)
 {
+    m_bIsExecute = true;
 	pPluginManager = p;
 }
 
