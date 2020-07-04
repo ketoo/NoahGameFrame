@@ -44,6 +44,10 @@ public:
 		if (xThreadFunc)
 		{
 			xThreadFunc = TASK_PROCESS_FUNCTOR();
+		}
+
+		if (xEndFunc)
+		{
 			xEndFunc = TASK_PROCESS_FUNCTOR();
 		}
 	}
