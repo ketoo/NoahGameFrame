@@ -81,7 +81,7 @@ bool NFLoginNet_HttpServerModule::AfterInit()
 
 bool NFLoginNet_HttpServerModule::Execute()
 {
-    m_pHttpNetModule->Execute();
+    //m_pHttpNetModule->Execute();
 	return true;
 }
 

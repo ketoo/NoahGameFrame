@@ -37,6 +37,7 @@
 
 NFKernelModule::NFKernelModule(NFIPluginManager* p)
 {
+    m_bIsExecute = true;
 	nGUIDIndex = 0;
 	nLastTime = 0;
 

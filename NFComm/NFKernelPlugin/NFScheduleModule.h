@@ -55,7 +55,7 @@ public:
 class NFScheduleModule : public NFIScheduleModule
 {
 public:
-	NFScheduleModule(NFIPluginManager* p);
+    NFScheduleModule(NFIPluginManager* p);
 
 	virtual ~NFScheduleModule();
 

@@ -28,6 +28,7 @@
 
 NFActorModule::NFActorModule(NFIPluginManager* p)
 {
+    m_bIsExecute = true;
 	pPluginManager = p;
 
     srand((unsigned)time(NULL));
