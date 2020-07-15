@@ -19,6 +19,7 @@
 		<Property Id="DEF_VALUE" Cache="0" Desc="LPID_DEF_VALUE" Force="0" Private="1" Public="1" Ref="0" Save="0" Type="int" Upload="0" />
 		<Property Id="DEF_WIND" Cache="0" Desc="LPID_DEF_WIND" Force="0" Private="1" Public="1" Ref="0" Save="0" Type="int" Upload="0" />
 		<Property Id="DIZZY_GATE" Cache="0" Desc="眩晕开关" Force="0" Private="1" Public="1" Ref="0" Save="0" Type="int" Upload="0" />
+		<Property Id="EVASION" Cache="0" Desc="LPID_SPREGEN" Force="0" Private="1" Public="1" Ref="0" Save="0" Type="int" Upload="0" />
 		<Property Id="HPREGEN" Cache="0" Desc="LPID_HPREGEN" Force="0" Private="1" Public="1" Ref="0" Save="0" Type="int" Upload="0" />
 		<Property Id="LUCK" Cache="0" Desc="" Force="0" Private="1" Public="1" Ref="0" Save="0" Type="int" Upload="0" />
 		<Property Id="MAGIC_GATE" Cache="0" Desc="LPID_MAGIC_GATE" Force="0" Private="1" Public="1" Ref="0" Save="0" Type="int" Upload="0" />
@@ -31,7 +32,6 @@
 		<Property Id="PHYSICAL_GATE" Cache="0" Desc="LPID_PHYSICAL_GATE" Force="0" Private="1" Public="1" Ref="0" Save="0" Type="int" Upload="0" />
 		<Property Id="REFLECTDAMAGE" Cache="0" Desc="LPID_REFLECTDAMAGE" Force="0" Private="1" Public="1" Ref="0" Save="0" Type="int" Upload="0" />
 		<Property Id="SKILL_GATE" Cache="0" Desc="LPID_SKILL_GATE" Force="0" Private="1" Public="1" Ref="0" Save="0" Type="int" Upload="0" />
-		<Property Id="SPREGEN" Cache="0" Desc="LPID_SPREGEN" Force="0" Private="1" Public="1" Ref="0" Save="0" Type="int" Upload="0" />
 		<Property Id="SUCKBLOOD" Cache="0" Desc="LPID_SUCKBLOOD" Force="0" Private="1" Public="1" Ref="0" Save="0" Type="int" Upload="0" />
 	</Propertys>
 	<Records>
@@ -43,7 +43,7 @@
 			<Col Type ="int"	Tag="MAXMP"/>
 			<Col Type ="int"	Tag="MAXSP"/>
 			<Col Type ="int"	Tag="HPREGEN"/>
-			<Col Type ="int"	Tag="SPREGEN"/>
+			<Col Type ="int"	Tag="EVASION"/>
 			<Col Type ="int"	Tag="MPREGEN"/>
 			<Col Type ="int"	Tag="ATK_VALUE"/>
 			<Col Type ="int"	Tag="DEF_VALUE"/>
