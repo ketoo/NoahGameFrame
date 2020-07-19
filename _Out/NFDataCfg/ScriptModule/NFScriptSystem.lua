@@ -118,39 +118,51 @@ function find_module(name)
 end
 ---------------------------------------------
 function module_awake(...)
-	for i=1, #(ScriptList) do
-		ScriptList[i].tbl:awake(...);
+	if ScriptList then
+		for i=1, #(ScriptList) do
+			ScriptList[i].tbl:awake(...);
+		end
 	end
 end
 
 
 function module_init(...)
-	for i=1, #(ScriptList) do
-		ScriptList[i].tbl:init(...);
+	if ScriptList then
+		for i=1, #(ScriptList) do
+			ScriptList[i].tbl:init(...);
+		end
 	end
 end
 
 function module_after_init(...)
-	for i=1, #(ScriptList) do
-		ScriptList[i].tbl:after_init(...);
+	if ScriptList then
+		for i=1, #(ScriptList) do
+			ScriptList[i].tbl:after_init(...);
+		end
 	end
 end
 
-function module_ready_execute(...)	
-	for i=1, #(ScriptList) do
-	ScriptList[i].tbl:ready_execute(...);
+function module_ready_execute(...)
+	if ScriptList then
+		for i=1, #(ScriptList) do
+		ScriptList[i].tbl:ready_execute(...);
+		end
 	end
 end
 
 function module_before_shut(...)
-	for i=1, #(ScriptList) do
-		ScriptList[i].tbl:before_shut(...);
+	if ScriptList then
+		for i=1, #(ScriptList) do
+			ScriptList[i].tbl:before_shut(...);
+		end
 	end
 end
 
 function module_shut(...)
-	for i=1, #(ScriptList) do
-		ScriptList[i].tbl:shut(...);
+	if ScriptList then
+		for i=1, #(ScriptList) do
+			ScriptList[i].tbl:shut(...);
+		end
 	end
 end
 
