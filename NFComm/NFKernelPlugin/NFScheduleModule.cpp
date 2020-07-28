@@ -79,8 +79,6 @@ bool NFScheduleModule::Execute()
 	NFPerformance performanceObject;
 	NFINT64 nowTime = NFGetTimeMS();
 
-	std::list<TickElement> elements;
-
 	for (auto it = mScheduleMap.begin(); it != mScheduleMap.end();)
 	{
 		if (nowTime >= it->triggerTime)
@@ -88,36 +86,28 @@ bool NFScheduleModule::Execute()
 			//std::cout << nowTime << it->scheduleName << ">>>>>" << it->triggerTime << std::endl;
 
 			auto objectMap = mObjectScheduleMap.GetElement(it->self);
-			if (objectMap)
+            if(!objectMap)
+                it = mScheduleMap.erase(it);//when player is not exist
+            else
 			{
 				auto scheduleElement = objectMap->GetElement(it->scheduleName);
-				if (scheduleElement)
+				if (!scheduleElement)
+                    it = mScheduleMap.erase(it);//when schedule is not exist
+                else
 				{
 					scheduleElement->DoHeartBeatEvent(nowTime);
 
-					if (scheduleElement->mnRemainCount != 0)
-					{
-						TickElement element;
-						element.scheduleName = scheduleElement->mstrScheduleName;
-						element.triggerTime = scheduleElement->mnTriggerTime;
-						element.self = scheduleElement->self;
-
-						elements.push_back(element);
-					}
+                    if (scheduleElement->mnRemainCount == 0)
+                        it = mScheduleMap.erase(it);//complete of task
+                    else
+                        ++it;
 				}
 			}
-
-			it = mScheduleMap.erase(it);
 		}
 		else
 		{
 			break;
 		}
-	}
-
-	for (auto& item : elements)
-	{
-		mScheduleMap.insert(item);
 	}
 
 	if (performanceObject.CheckTimePoint(1))
