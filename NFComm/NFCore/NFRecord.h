@@ -166,7 +166,7 @@ public:
 
     virtual void SetName(const std::string& strName);
 
-    virtual const NF_SHARE_PTR<NFDataList> GetInitData() const;
+    virtual NF_SHARE_PTR<NFDataList> GetInitData() const;
     virtual const NF_SHARE_PTR<NFDataList> GetTag() const;
 
     virtual const TRECORDVEC& GetRecordVec() const;

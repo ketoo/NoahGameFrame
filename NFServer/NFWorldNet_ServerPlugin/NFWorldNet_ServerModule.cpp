@@ -834,6 +834,12 @@ void NFWorldNet_ServerModule::OnOnlineProcess(const NFSOCK nSockIndex, const int
 	}
 
 	playerData->OnLine(xMsg.game(), xMsg.proxy());
+
+	for (int i = 0; i < mPlayerOnLineCallBackFunc.size(); ++i)
+	{
+		auto callback = mPlayerOnLineCallBackFunc[i];
+		callback->operator()(selfId);
+	}
 }
 
 void NFWorldNet_ServerModule::OnOfflineProcess(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
@@ -845,9 +851,15 @@ void NFWorldNet_ServerModule::OnOfflineProcess(const NFSOCK nSockIndex, const in
 	NF_SHARE_PTR<PlayerData> playerData = mPlayersData.GetElement(self);
 	if (playerData)
 	{
+		for (int i = 0; i < mPlayerOffLineCallBackFunc.size(); ++i)
+		{
+			auto callback = mPlayerOffLineCallBackFunc[i];
+			callback->operator()(self);
+		}
+
+
 		playerData->OffLine();
 	}
-
 }
 
 void NFWorldNet_ServerModule::OnTransmitServerReport(const NFSOCK nFd, const int msgId, const char *buffer, const uint32_t nLen)
@@ -999,4 +1011,16 @@ void NFWorldNet_ServerModule::ServerReport(int reportServerId, NFMsg::EServerSta
 			}
 		}
 	}
+}
+
+bool NFWorldNet_ServerModule::AddOnLineReceiveCallBack(std::shared_ptr<std::function<void(const NFGUID)>> cb)
+{
+	mPlayerOnLineCallBackFunc.push_back(cb);
+	return true;
+}
+
+bool NFWorldNet_ServerModule::AddOffLineReceiveCallBack(std::shared_ptr<std::function<void(const NFGUID)>> cb)
+{
+	mPlayerOffLineCallBackFunc.push_back(cb);
+	return true;
 }

@@ -29,7 +29,6 @@
 
 #include <iostream>
 #include <assert.h>
-#include "NFComm/NFCore/NFMap.hpp"
 #include "NFComm/NFPluginModule/NFIModule.h"
 #include "NFComm/NFPluginModule/NFIPluginManager.h"
 
@@ -38,26 +37,15 @@
 	assert((TIsDerived<className, classBaseName>::Result));	\
 	NFIModule* pRegisterModule##className= new className(pManager); \
     pRegisterModule##className->strName = (#className); \
-    pManager->AddModule( #classBaseName, pRegisterModule##className );\
-    this->AddElement( #classBaseName, pRegisterModule##className );
-
-#define REGISTER_TEST_MODULE(pManager, classBaseName, className)  \
-	assert((TIsDerived<classBaseName, NFIModule>::Result));	\
-	assert((TIsDerived<className, NFIModule>::Result));	\
-	NFIModule* pRegisterModule##className= new className(pManager); \
-    pRegisterModule##className->strName = (#className); \
-    pManager->AddTestModule( #classBaseName, pRegisterModule##className );
+    pManager->AddModule( typeid(classBaseName).name(), pRegisterModule##className );\
+    this->AddElement( typeid(classBaseName).name(), pRegisterModule##className );
 
 #define UNREGISTER_MODULE(pManager, classBaseName, className) \
     NFIModule* pUnRegisterModule##className = dynamic_cast<NFIModule*>( pManager->FindModule( #classBaseName )); \
-	pManager->RemoveModule( #classBaseName ); \
-    this->RemoveElement( #classBaseName ); \
+	pManager->RemoveModule( typeid(classBaseName).name() ); \
+    this->RemoveElement( typeid(classBaseName).name() ); \
     delete pUnRegisterModule##className;
 
-#define UNREGISTER_TEST_MODULE(pManager, classBaseName, className) \
-    NFIModule* pUnRegisterModule##className = dynamic_cast<NFIModule*>( pManager->FindtESTModule( #classBaseName )); \
-	pManager->RemoveTestModule( #classBaseName ); \
-    delete pUnRegisterModule##className;
 
 #define CREATE_PLUGIN(pManager, className)  NFIPlugin* pCreatePlugin##className = new className(pManager); pManager->Registered( pCreatePlugin##className );
 

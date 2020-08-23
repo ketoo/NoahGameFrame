@@ -170,6 +170,19 @@ public:
 		return NULL;
 	}
 
+	template <typename T>
+	void ReplaceModule(NFIModule* pModule)
+	{
+		NFIModule* pLogicModule = FindModule(typeid(T).name());
+		if (pLogicModule)
+		{
+			RemoveModule(typeid(T).name());
+		}
+
+
+		AddModule(typeid(T).name(), pModule);
+	};
+
 	virtual bool ReLoadPlugin(const std::string& strPluginDLLName) = 0;
 
     virtual void Registered(NFIPlugin* plugin) = 0;

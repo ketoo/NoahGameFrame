@@ -145,8 +145,13 @@ void NFPluginServer::ProcessParameter()
     signal(SIGCHLD, SIG_IGN);
 #endif
 
-    NFDataList argList;
-    argList.Split(this->strArgvList, " ");
+    std::vector<std::string> argList;
+	std::string token;
+	std::istringstream tokenStream(this->strArgvList);
+	while (std::getline(tokenStream, token, ' '))
+	{
+		argList.push_back(token);
+	}
 
     pPluginManager->SetConfigName(FindParameterValue(argList, "Plugin="));
 	pPluginManager->SetAppName(FindParameterValue(argList, "Server="));
@@ -168,9 +173,9 @@ void NFPluginServer::ProcessParameter()
     // NoSqlServer.xml:IP=\"127.0.0.1\"==IP=\"192.168.1.1\"
     if (strArgvList.find(".xml:") != string::npos)
     {
-        for (int i = 0; i < argList.GetCount(); i++)
+        for (int i = 0; i < argList.size(); i++)
         {
-            std::string strPipeline = argList.String(i);
+            std::string strPipeline = argList[i];
             int posFile = strPipeline.find(".xml:");
             int posContent = strPipeline.find("==");
             if (posFile != string::npos && posContent != string::npos)
@@ -255,11 +260,11 @@ bool NFPluginServer::GetFileContent(NFIPluginManager* p, const std::string& strF
     return true;
 }
 
-std::string NFPluginServer::FindParameterValue(const NFDataList& argList, const std::string& header)
+std::string NFPluginServer::FindParameterValue(const std::vector<std::string>& argList, const std::string& header)
 {
-	for (int i = 0; i < argList.GetCount(); i++)
+	for (int i = 0; i < argList.size(); i++)
 	{
-		std::string name = argList.String(i);
+		std::string name = argList[i];
 		if (name.find(header) != string::npos)
 		{
 			name.erase(0, header.length());

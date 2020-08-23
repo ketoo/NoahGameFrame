@@ -76,10 +76,10 @@ public:
     }
 
     template<typename BaseType>
-    NFHttpServer(BaseType* pBaseType, bool (BaseType::*handleRecieve)(NF_SHARE_PTR<NFHttpRequest> req), NFWebStatus (BaseType::*handleFilter)(NF_SHARE_PTR<NFHttpRequest> req))
+    NFHttpServer(BaseType* pBaseType, bool (BaseType::*handleReceiver)(NF_SHARE_PTR<NFHttpRequest> req), NFWebStatus (BaseType::*handleFilter)(NF_SHARE_PTR<NFHttpRequest> req))
     {
         mxBase = NULL;
-		mReceiveCB = std::bind(handleRecieve, pBaseType, std::placeholders::_1);
+		mReceiveCB = std::bind(handleReceiver, pBaseType, std::placeholders::_1);
 		mFilter = std::bind(handleFilter, pBaseType, std::placeholders::_1);
     }
 

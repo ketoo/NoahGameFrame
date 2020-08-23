@@ -1469,7 +1469,7 @@ void NFRecord::SetName(const std::string& strName)
     mstrRecordName = strName;
 }
 
-const NF_SHARE_PTR<NFDataList> NFRecord::GetInitData() const
+NF_SHARE_PTR<NFDataList> NFRecord::GetInitData() const
 {
     NF_SHARE_PTR<NFDataList> pIniData = NF_SHARE_PTR<NFDataList>( NF_NEW NFDataList());
     pIniData->Append(*mVarRecordType);

@@ -84,7 +84,7 @@ private:
 
 	void ProcessParameter();
 
-	std::string FindParameterValue(const NFDataList& argList, const std::string& header);
+	std::string FindParameterValue(const std::vector<std::string>& argList, const std::string& header);
 
 	void InitDaemon();
 

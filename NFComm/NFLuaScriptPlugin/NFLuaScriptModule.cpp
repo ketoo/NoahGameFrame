@@ -291,27 +291,27 @@ void NFLuaScriptModule::OnScriptReload()
     {
         case NF_SERVER_TYPES::NF_ST_GAME:
         {
-            strRootFileh = pPluginManager->GetConfigPath() + "NFDataCfg/ScriptModule/game/script_reload.lua";
+            strRootFileh = pPluginManager->GetConfigPath() + "NFDataCfg/ScriptModule/game/game_script_reload.lua";
         }
         break;
         case NF_SERVER_TYPES::NF_ST_LOGIN:
         {
-            strRootFileh = pPluginManager->GetConfigPath() + "NFDataCfg/ScriptModule/login/script_reload.lua";
+            strRootFileh = pPluginManager->GetConfigPath() + "NFDataCfg/ScriptModule/login/login_script_reload.lua";
         }
         break;
         case NF_SERVER_TYPES::NF_ST_WORLD:
         {
-            strRootFileh = pPluginManager->GetConfigPath() + "NFDataCfg/ScriptModule/world/script_reload.lua";
+            strRootFileh = pPluginManager->GetConfigPath() + "NFDataCfg/ScriptModule/world/world_script_reload.lua";
         }
         break;
         case NF_SERVER_TYPES::NF_ST_PROXY:
         {
-            strRootFileh = pPluginManager->GetConfigPath() + "NFDataCfg/ScriptModule/proxy/script_reload.lua";
+            strRootFileh = pPluginManager->GetConfigPath() + "NFDataCfg/ScriptModule/proxy/proxy_script_reload.lua";
         }
         break;
         case NF_SERVER_TYPES::NF_ST_MASTER:
         {
-            strRootFileh = pPluginManager->GetConfigPath() + "NFDataCfg/ScriptModule/master/script_reload.lua";
+            strRootFileh = pPluginManager->GetConfigPath() + "NFDataCfg/ScriptModule/master/master_script_reload.lua";
         }
         break;
         default:

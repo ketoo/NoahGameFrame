@@ -90,6 +90,23 @@ public:
     virtual NF_SHARE_PTR<PlayerData> GetPlayerData(const NFGUID& id) = 0;
 
 
+	template<typename BaseType>
+	bool AddCallBackForPlayerOnline(BaseType* pBase, void (BaseType::*handleReceiver)(const NFGUID self))
+	{
+		auto functor = std::bind(handleReceiver, pBase, std::placeholders::_1);
+		std::shared_ptr<std::function<void(const NFGUID)>> cb(NF_NEW std::function<void(const NFGUID)>(functor));
+		return AddOnLineReceiveCallBack(cb);
+	}
+	template<typename BaseType>
+	bool AddCallBackForPlayerOffline(BaseType* pBase, void (BaseType::*handleReceiver)(const NFGUID self))
+	{
+		auto functor = std::bind(handleReceiver, pBase, std::placeholders::_1);
+		std::shared_ptr<std::function<void(const NFGUID)>> cb(NF_NEW std::function<void(const NFGUID)>(functor));
+		return AddOffLineReceiveCallBack(cb);
+	}
+protected:
+	virtual bool AddOnLineReceiveCallBack(std::shared_ptr<std::function<void(const NFGUID)>> cb) = 0;
+	virtual bool AddOffLineReceiveCallBack(std::shared_ptr<std::function<void(const NFGUID)>> cb) = 0;
 };
 
 #endif

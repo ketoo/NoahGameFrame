@@ -75,9 +75,9 @@ public:
     };
 
 	template<typename BaseType>
-	bool AddReceiveCallBack(const NF_SERVER_TYPES eType, const uint16_t nMsgID, BaseType* pBase, void (BaseType::*handleRecieve)(const NFSOCK, const int, const char*, const uint32_t))
+	bool AddReceiveCallBack(const NF_SERVER_TYPES eType, const uint16_t nMsgID, BaseType* pBase, void (BaseType::*handleReceiver)(const NFSOCK, const int, const char*, const uint32_t))
 	{
-		NET_RECEIVE_FUNCTOR functor = std::bind(handleRecieve, pBase, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3, std::placeholders::_4);
+		NET_RECEIVE_FUNCTOR functor = std::bind(handleReceiver, pBase, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3, std::placeholders::_4);
 		NET_RECEIVE_FUNCTOR_PTR functorPtr(new NET_RECEIVE_FUNCTOR(functor));
 
 		AddReceiveCallBack(eType, nMsgID, functorPtr);
@@ -86,9 +86,9 @@ public:
 	}
 
 	template<typename BaseType>
-	int AddReceiveCallBack(const NF_SERVER_TYPES eType, BaseType* pBase, void (BaseType::*handleRecieve)(const NFSOCK, const int, const char*, const uint32_t))
+	int AddReceiveCallBack(const NF_SERVER_TYPES eType, BaseType* pBase, void (BaseType::*handleReceiver)(const NFSOCK, const int, const char*, const uint32_t))
 	{
-		NET_RECEIVE_FUNCTOR functor = std::bind(handleRecieve, pBase, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3, std::placeholders::_4);
+		NET_RECEIVE_FUNCTOR functor = std::bind(handleReceiver, pBase, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3, std::placeholders::_4);
 		NET_RECEIVE_FUNCTOR_PTR functorPtr(new NET_RECEIVE_FUNCTOR(functor));
 
 		AddReceiveCallBack(eType, functorPtr);

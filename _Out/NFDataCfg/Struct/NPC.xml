@@ -1,10 +1,10 @@
 <?xml version='1.0' encoding='utf-8' ?>
 <XML>
 	<Propertys>
-		<Property Id="CommonCD" Cache="0" Desc="" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="float" Upload="0" />
+		<Property Id="CommonCD" Cache="0" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="float" Upload="0" />
 		<Property Id="DescID" Cache="0" Desc="desc" Force="0" Private="1" Public="1" Ref="0" Save="0" Type="string" Upload="0" />
 		<Property Id="DropPackList" Cache="0" Desc="掉落列表" Force="0" Private="1" Public="0" Ref="1" Save="0" Type="string" Upload="0" />
-		<Property Id="DropProbability" Cache="0" Desc="掉落概率%" Force="0" Private="1" Public="0" Ref="1" Save="0" Type="int" Upload="0" />
+		<Property Id="DropProbability" Cache="0" Desc="掉落概率%" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="int" Upload="0" />
 		<Property Id="EXP" Cache="0" Desc="经验获得,如果是怪物，则是掉落经验" Force="0" Private="1" Public="1" Ref="0" Save="1" Type="int" Upload="0" />
 		<Property Id="EffectData" Cache="0" Desc="绝对值属性包索引" Force="0" Private="1" Public="0" Ref="1" Save="0" Type="string" Upload="0" />
 		<Property Id="Gold" Cache="0" Desc="玩家游戏金币" Force="0" Private="1" Public="1" Ref="0" Save="1" Type="int" Upload="0" />

@@ -109,7 +109,7 @@ int NFDataTailModule::OnClassObjectEvent(const NFGUID& self, const std::string& 
         break;
     }
 
-    //m_pLogModule->LogDebug(self, stream.str());
+    m_pLogModule->LogDebug(self, stream.str());
     return 0;
 }
 

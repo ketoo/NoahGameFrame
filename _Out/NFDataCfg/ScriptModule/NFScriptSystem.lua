@@ -13,15 +13,19 @@ function init_script_system(xLuaScriptModule)
 
 	if NF_SERVER_TYPES.NF_ST_GAME == app_type then
 		print("Hello NF_ST_GAME");
-		require("./game/script_list");
+		require("./game/game_script_list");
 	elseif NF_SERVER_TYPES.NF_ST_WORLD == app_type then
 		print("Hello NF_ST_WORLD");
+		require("./world/world_script_list");
 	elseif NF_SERVER_TYPES.NF_ST_PROXY == app_type then
 		print("Hello NF_ST_PROXY");
+		require("./proxy/proxy_script_list");
 	elseif NF_SERVER_TYPES.NF_ST_LOGIN == app_type then
 		print("Hello NF_ST_LOGIN");
+		require("./login/login_script_list");
 	elseif NF_SERVER_TYPES.NF_ST_MASTER == app_type then
 		print("Hello NF_ST_MASTER");
+		require("./master/master_script_list");
 	else
 	end
 
@@ -118,39 +122,51 @@ function find_module(name)
 end
 ---------------------------------------------
 function module_awake(...)
-	for i=1, #(ScriptList) do
-		ScriptList[i].tbl:awake(...);
+	if ScriptList then
+		for i=1, #(ScriptList) do
+			ScriptList[i].tbl:awake(...);
+		end
 	end
 end
 
 
 function module_init(...)
-	for i=1, #(ScriptList) do
-		ScriptList[i].tbl:init(...);
+	if ScriptList then
+		for i=1, #(ScriptList) do
+			ScriptList[i].tbl:init(...);
+		end
 	end
 end
 
 function module_after_init(...)
-	for i=1, #(ScriptList) do
-		ScriptList[i].tbl:after_init(...);
+	if ScriptList then
+		for i=1, #(ScriptList) do
+			ScriptList[i].tbl:after_init(...);
+		end
 	end
 end
 
-function module_ready_execute(...)	
-	for i=1, #(ScriptList) do
-	ScriptList[i].tbl:ready_execute(...);
+function module_ready_execute(...)
+	if ScriptList then
+		for i=1, #(ScriptList) do
+		ScriptList[i].tbl:ready_execute(...);
+		end
 	end
 end
 
 function module_before_shut(...)
-	for i=1, #(ScriptList) do
-		ScriptList[i].tbl:before_shut(...);
+	if ScriptList then
+		for i=1, #(ScriptList) do
+			ScriptList[i].tbl:before_shut(...);
+		end
 	end
 end
 
 function module_shut(...)
-	for i=1, #(ScriptList) do
-		ScriptList[i].tbl:shut(...);
+	if ScriptList then
+		for i=1, #(ScriptList) do
+			ScriptList[i].tbl:shut(...);
+		end
 	end
 end
 
@@ -181,7 +197,7 @@ function print_table(table, level)
 		print_table(v, level + 1)
 	else
 		local content = string.format("%s%s = %s", indent .. "  ",tostring(k), tostring(v))
-		print(content..";")  
+		print(content..";")
 		end
 	end
 	print(indent .. "}")

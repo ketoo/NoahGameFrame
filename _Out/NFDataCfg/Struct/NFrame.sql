@@ -41,7 +41,7 @@ ALTER TABLE `Player` ADD `SkillSpecial1` text COLLATE utf8mb4_unicode_ci  DEFAUL
 ALTER TABLE `Player` ADD `SkillSpecial2` text COLLATE utf8mb4_unicode_ci  DEFAULT '' COMMENT 'Skill2';
 ALTER TABLE `Player` ADD `SkillTHUMP` text COLLATE utf8mb4_unicode_ci  DEFAULT '' COMMENT 'Skill3';
 ALTER TABLE `Player` ADD `TotalTime` bigint(11) DEFAULT '0' COMMENT '在线时间';
-ALTER TABLE `Player` ADD `EquipmentList` text COLLATE utf8mb4_unicode_ci  DEFAULT '' COMMENT '';
+ALTER TABLE `Player` ADD `HeroEquipmentList` text COLLATE utf8mb4_unicode_ci  DEFAULT '' COMMENT '';
 ALTER TABLE `Player` ADD `HeroList` text COLLATE utf8mb4_unicode_ci  DEFAULT '' COMMENT '';
 ALTER TABLE `Player` ADD `Inventory` text COLLATE utf8mb4_unicode_ci  DEFAULT '' COMMENT '';
 ALTER TABLE `Player` ADD `InventoryEquipment` text COLLATE utf8mb4_unicode_ci  DEFAULT '' COMMENT '';

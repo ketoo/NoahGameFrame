@@ -182,7 +182,7 @@ public:
 	virtual const bool GetUpload() = 0;
     virtual const std::string& GetName() const = 0;
 
-    virtual const NF_SHARE_PTR<NFDataList> GetInitData() const = 0;
+    virtual NF_SHARE_PTR<NFDataList> GetInitData() const = 0;
     virtual const NF_SHARE_PTR<NFDataList> GetTag() const = 0;
 
     virtual void SetSave(const bool bSave) = 0;

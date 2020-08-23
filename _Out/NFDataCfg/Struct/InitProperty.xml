@@ -2,7 +2,6 @@
 <XML>
 	<Propertys>
 		<Property Id="HeroConfigID" Cache="0" Desc="主角模型" Force="0" Private="0" Public="0" Ref="1" Save="0" Type="string" Upload="0" />
-		<Property Id="HeroConfigIDEx" Cache="0" Desc="主角模型" Force="0" Private="0" Public="0" Ref="0" Save="0" Type="string" Upload="0" />
 		<Property Id="Job" Cache="0" Desc="" Force="0" Private="0" Public="0" Ref="0" Save="0" Type="int" Upload="0" />
 		<Property Id="Level" Cache="0" Desc="" Force="0" Private="0" Public="0" Ref="0" Save="0" Type="int" Upload="0" />
 	</Propertys>
