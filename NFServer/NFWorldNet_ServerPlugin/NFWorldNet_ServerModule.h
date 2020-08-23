@@ -67,6 +67,10 @@ public:
     virtual const std::vector<NFGUID>& GetOnlinePlayers();
 
     virtual NF_SHARE_PTR<NFIWorldNet_ServerModule::PlayerData> GetPlayerData(const NFGUID& id);
+
+protected:
+	virtual bool AddOnLineReceiveCallBack(std::shared_ptr<std::function<void(const NFGUID)>> cb);
+	virtual bool AddOffLineReceiveCallBack(std::shared_ptr<std::function<void(const NFGUID)>> cb);
 protected:
 
     void OnSocketEvent(const NFSOCK nSockIndex, const NF_NET_EVENT eEvent, NFINet* pNet);
@@ -113,7 +117,8 @@ protected:
     void LogGameServer();
 
 private:
-
+	std::vector<std::shared_ptr<std::function<void(const NFGUID)>>> mPlayerOnLineCallBackFunc;
+	std::vector<std::shared_ptr<std::function<void(const NFGUID)>>> mPlayerOffLineCallBackFunc;
 
 	NFMapEx<NFGUID, PlayerData> mPlayersData;
     NFINT64 mnLastCheckTime;

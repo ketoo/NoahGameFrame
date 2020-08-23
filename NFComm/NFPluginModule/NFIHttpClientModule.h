@@ -37,9 +37,9 @@ public:
 
     template<typename BaseType>
     bool DoGet ( const std::string& strUri, BaseType* pBase,
-						void ( BaseType::*handleRecieve ) (const NFGUID id, const int state_code, const std::string& strRespData ) )
+						void ( BaseType::*handleReceiver ) (const NFGUID id, const int state_code, const std::string& strRespData ) )
     {
-        HTTP_RESP_FUNCTOR_PTR pd ( new HTTP_RESP_FUNCTOR ( std::bind ( handleRecieve, pBase, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3) ) );
+        HTTP_RESP_FUNCTOR_PTR pd ( new HTTP_RESP_FUNCTOR ( std::bind ( handleReceiver, pBase, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3) ) );
         return DoGet ( strUri, std::map<std::string, std::string>(), pd );
     }
 
@@ -52,9 +52,9 @@ public:
     template<typename BaseType>
     bool DoGet ( const std::string& strUri, const std::map<std::string, std::string>& xHeaders,
                       BaseType* pBase,
-                      void ( BaseType::*handleRecieve ) (const NFGUID id, const int state_code, const std::string& strRespData) )
+                      void ( BaseType::*handleReceiver ) (const NFGUID id, const int state_code, const std::string& strRespData) )
     {
-        HTTP_RESP_FUNCTOR_PTR pd ( new HTTP_RESP_FUNCTOR ( std::bind ( handleRecieve, pBase, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3) ) );
+        HTTP_RESP_FUNCTOR_PTR pd ( new HTTP_RESP_FUNCTOR ( std::bind ( handleReceiver, pBase, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3) ) );
         return DoGet( strUri, xHeaders, pd );
     }
 
@@ -69,9 +69,9 @@ public:
     template<typename BaseType>
     bool DoPost ( const std::string& strUri, const std::string& strPostData,
                        BaseType* pBase,
-                       void ( BaseType::*handleRecieve ) (const NFGUID id, const int state_code, const std::string& strRespData, const std::string& strMemo), const std::string& strMemo = "")
+                       void ( BaseType::*handleReceiver ) (const NFGUID id, const int state_code, const std::string& strRespData, const std::string& strMemo), const std::string& strMemo = "")
     {
-        HTTP_RESP_FUNCTOR_PTR pd ( new HTTP_RESP_FUNCTOR ( std::bind ( handleRecieve, pBase, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3, std::placeholders::_4) ) );
+        HTTP_RESP_FUNCTOR_PTR pd ( new HTTP_RESP_FUNCTOR ( std::bind ( handleReceiver, pBase, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3, std::placeholders::_4) ) );
         return DoPost( strUri, std::map<std::string, std::string>(), strPostData, pd ,strMemo);
     }
 
@@ -85,9 +85,9 @@ public:
     template<typename BaseType>
     bool DoPost( const std::string& strUri, const std::string& strPostData, const std::map<std::string, std::string>& xHeaders,
                        BaseType* pBase,
-                       void ( BaseType::*handleRecieve ) (const NFGUID id, const int state_code, const std::string& strRespData ), const std::string& strMemo="")
+                       void ( BaseType::*handleReceiver ) (const NFGUID id, const int state_code, const std::string& strRespData ), const std::string& strMemo="")
     {
-        HTTP_RESP_FUNCTOR_PTR pd ( new HTTP_RESP_FUNCTOR ( std::bind ( handleRecieve, pBase, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3) ) );
+        HTTP_RESP_FUNCTOR_PTR pd ( new HTTP_RESP_FUNCTOR ( std::bind ( handleReceiver, pBase, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3) ) );
         return DoPost( strUri, xHeaders, strPostData, pd,strMemo );
     }
 

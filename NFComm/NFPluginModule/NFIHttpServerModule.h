@@ -38,9 +38,9 @@ public:
 
 	// register msg callback
 	template<typename BaseType>
-	bool AddRequestHandler(const std::string& strPath, const NFHttpType eRequestType, BaseType* pBase, bool (BaseType::*handleRecieve)(NF_SHARE_PTR<NFHttpRequest> req))
+	bool AddRequestHandler(const std::string& strPath, const NFHttpType eRequestType, BaseType* pBase, bool (BaseType::*handleReceiver)(NF_SHARE_PTR<NFHttpRequest> req))
 	{
-		HTTP_RECEIVE_FUNCTOR functor = std::bind(handleRecieve, pBase, std::placeholders::_1);
+		HTTP_RECEIVE_FUNCTOR functor = std::bind(handleReceiver, pBase, std::placeholders::_1);
 		HTTP_RECEIVE_FUNCTOR_PTR functorPtr(new HTTP_RECEIVE_FUNCTOR(functor));
 		return AddMsgCB(strPath, eRequestType, functorPtr);
 	}
