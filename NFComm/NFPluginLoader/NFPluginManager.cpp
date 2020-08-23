@@ -745,21 +745,12 @@ void NFPluginManager::RemoveModule(const std::string& strModuleName)
 
 NFIModule* NFPluginManager::FindModule(const std::string& strModuleName)
 {
-	std::string strSubModuleName;
-
-	string::size_type position = strModuleName.find("NF");
-	if (position != string::npos)
+	if (strModuleName.empty())
 	{
-		strSubModuleName = strModuleName.substr(position, strModuleName.length() - position);
-	}
-
-	if (strSubModuleName.empty())
-	{
-		std::cout << "" << std::endl;
 		return NULL;
 	}
 
-	ModuleInstanceMap::iterator it = mModuleInstanceMap.find(strSubModuleName);
+	ModuleInstanceMap::iterator it = mModuleInstanceMap.find(strModuleName);
 	if (it != mModuleInstanceMap.end())
 	{
 		return it->second;
@@ -775,21 +766,12 @@ NFIModule* NFPluginManager::FindModule(const std::string& strModuleName)
 
 NFIModule* NFPluginManager::FindTestModule(const std::string& strModuleName)
 {
-	std::string strSubModuleName;
-
-	string::size_type position = strModuleName.find("NF");
-	if (position != string::npos)
+	if (strModuleName.empty())
 	{
-		strSubModuleName = strModuleName.substr(position, strModuleName.length() - position);
-	}
-
-	if (strSubModuleName.empty())
-	{
-		std::cout << "" << std::endl;
 		return NULL;
 	}
 
-    TestModuleInstanceMap::iterator it = mTestModuleInstanceMap.find(strSubModuleName);
+    TestModuleInstanceMap::iterator it = mTestModuleInstanceMap.find(strModuleName);
 	if (it != mTestModuleInstanceMap.end())
 	{
 		return it->second;

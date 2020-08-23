@@ -5,11 +5,10 @@
 #unzip sudo apt-get install unzip
 
 #compile dep libraries
-rm -rf ./_Out/Debug/NFServer
-rm -rf ./_Out/Debug/*.a
 
-rm -rf ./_Out/Release/NFServer
-rm -rf ./_Out/Release/*.a
+#example 1: ./buildServer
+#example 2: ./buildServer BUILD_MID_WARE DEBUG
+#example 3: ./buildServer BUILD_MID_WARE
 
 if [ "$1" == "BUILD_MID_WARE" ]; then
    echo "we dont need to compile message and tools again"
@@ -33,14 +32,24 @@ else
     cd ..
 fi
 
+if [ "$2" == "DEBUG" ]; then
+rm -rf ./_Out/Debug/NFServer
+rm -rf ./_Out/Debug/*.a
 
 cd BuildScript/linux/
 chmod -R 755 ./BuildNF.CMake.Debug.sh
-chmod -R 755 ./BuildNF.CMake.Release.sh
-
-#time ./BuildNF.CMake.Debug.sh  BUILD_MID_WARE
 time ./BuildNF.CMake.Debug.sh  $1
+
+else
+
+rm -rf ./_Out/Release/NFServer
+rm -rf ./_Out/Release/*.a
+
+cd BuildScript/linux/
+chmod -R 755 ./BuildNF.CMake.Release.sh
 time ./BuildNF.CMake.Release.sh  $1
+fi
+
 cd ../../
 
 cd _Out/

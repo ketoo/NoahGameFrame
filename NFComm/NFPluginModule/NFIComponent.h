@@ -55,11 +55,11 @@ protected:
 private:
 };
 
-class NFIActor : NFMemoryCounter
+class NFIActor// : NFMemoryCounter
 {
 public:
 	NFIActor()
-		: NFMemoryCounter(GET_CLASS_NAME(NFIActor), 1)
+		//: NFMemoryCounter(GET_CLASS_NAME(NFIActor), 1)
 	{
 
 	}
