@@ -57,6 +57,9 @@ public:
     virtual bool AfterInit();
 	virtual void OnServerInfoProcess(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
 
+	virtual bool IsPrimaryWorldServer();
+	virtual int GetWorldAreaID();
+
     virtual bool SendMsgToGame(const NFGUID nPlayer, const int msgID, const std::string& xData);
     virtual bool SendMsgToGame(const NFGUID nPlayer, const int msgID, google::protobuf::Message& xData);
     virtual bool SendMsgToGame(const NFDataList& argObjectVar, const int msgID, google::protobuf::Message& xData);
@@ -117,6 +120,8 @@ protected:
     void LogGameServer();
 
 private:
+	int mAreaID = 0;
+
 	std::vector<std::shared_ptr<std::function<void(const NFGUID)>>> mPlayerOnLineCallBackFunc;
 	std::vector<std::shared_ptr<std::function<void(const NFGUID)>>> mPlayerOffLineCallBackFunc;
 

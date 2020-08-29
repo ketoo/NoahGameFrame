@@ -75,7 +75,9 @@ bool NFWorldNet_ServerModule::AfterInit()
             {
                 const int nPort = m_pElementModule->GetPropertyInt32(strId, NFrame::Server::Port());
                 const int nMaxConnect = m_pElementModule->GetPropertyInt32(strId, NFrame::Server::MaxOnline());
-                const int nCpus = m_pElementModule->GetPropertyInt32(strId, NFrame::Server::CpuCount());
+				const int nCpus = m_pElementModule->GetPropertyInt32(strId, NFrame::Server::CpuCount());
+
+				mAreaID = m_pElementModule->GetPropertyInt32(strId, NFrame::Server::Area());
                 //const std::string& strName = m_pElementModule->GetPropertyString(strId, NFrame::Server::ID());
                 //const std::string& strIP = m_pElementModule->GetPropertyString(strId, NFrame::Server::IP());
 
@@ -126,6 +128,8 @@ void NFWorldNet_ServerModule::OnServerInfoProcess(const NFSOCK nSockIndex, const
 		{
 			return;
 		}
+
+		mWorldMap.ClearAll();
 
 		for (int i = 0; i < xMsg.server_list_size(); ++i)
 		{
@@ -1023,4 +1027,20 @@ bool NFWorldNet_ServerModule::AddOffLineReceiveCallBack(std::shared_ptr<std::fun
 {
 	mPlayerOffLineCallBackFunc.push_back(cb);
 	return true;
+}
+
+bool NFWorldNet_ServerModule::IsPrimaryWorldServer()
+{
+	auto serverData = mWorldMap.GetElementBySuitConsistent();
+	if (serverData && serverData->pData->server_id() == GetPluginManager()->GetAppID())
+	{
+		return true;
+	}
+
+	return false;
+}
+
+int NFWorldNet_ServerModule::GetWorldAreaID()
+{
+	return mAreaID;
 }
