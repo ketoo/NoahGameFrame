@@ -41,7 +41,7 @@
     this->AddElement( typeid(classBaseName).name(), pRegisterModule##className );
 
 #define UNREGISTER_MODULE(pManager, classBaseName, className) \
-    NFIModule* pUnRegisterModule##className = dynamic_cast<NFIModule*>( pManager->FindModule( #classBaseName )); \
+    NFIModule* pUnRegisterModule##className = dynamic_cast<NFIModule*>( pManager->FindModule( typeid(classBaseName).name() )); \
 	pManager->RemoveModule( typeid(classBaseName).name() ); \
     this->RemoveElement( typeid(classBaseName).name() ); \
     delete pUnRegisterModule##className;
