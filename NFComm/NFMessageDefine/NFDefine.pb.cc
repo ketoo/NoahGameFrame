@@ -99,8 +99,8 @@ const char descriptor_table_protodef_NFDefine_2eproto[] PROTOBUF_SECTION_VARIABL
   "_SCENE\020\000\022\026\n\022SINGLE_CLONE_SCENE\020\001\022\025\n\021MULT"
   "I_CLONE_SCENE\020\002\022\022\n\016PVP_MODE_SCENE\020\n\022\022\n\016M"
   "VM_MODE_SCENE\020\013\022\027\n\023SURVIVAL_MODE_SCENE\020\014"
-  "*8\n\010ENPCType\022\016\n\nNORMAL_NPC\020\000\022\014\n\010HERO_NPC"
-  "\020\001\022\016\n\nTURRET_NPC\020\002b\006proto3"
+  "*F\n\010ENPCType\022\016\n\nNORMAL_NPC\020\000\022\014\n\010HERO_NPC"
+  "\020\001\022\016\n\nTURRET_NPC\020\002\022\014\n\010FUNC_NPC\020\003b\006proto3"
   ;
 static const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable*const descriptor_table_NFDefine_2eproto_deps[1] = {
 };
@@ -109,7 +109,7 @@ static ::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase*const descriptor_table_NFD
 static ::PROTOBUF_NAMESPACE_ID::internal::once_flag descriptor_table_NFDefine_2eproto_once;
 static bool descriptor_table_NFDefine_2eproto_initialized = false;
 const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable descriptor_table_NFDefine_2eproto = {
-  &descriptor_table_NFDefine_2eproto_initialized, descriptor_table_protodef_NFDefine_2eproto, "NFDefine.proto", 3066,
+  &descriptor_table_NFDefine_2eproto_initialized, descriptor_table_protodef_NFDefine_2eproto, "NFDefine.proto", 3080,
   &descriptor_table_NFDefine_2eproto_once, descriptor_table_NFDefine_2eproto_sccs, descriptor_table_NFDefine_2eproto_deps, 0, 0,
   schemas, file_default_instances, TableStruct_NFDefine_2eproto::offsets,
   file_level_metadata_NFDefine_2eproto, 0, file_level_enum_descriptors_NFDefine_2eproto, file_level_service_descriptors_NFDefine_2eproto,
@@ -318,6 +318,7 @@ bool ENPCType_IsValid(int value) {
     case 0:
     case 1:
     case 2:
+    case 3:
       return true;
     default:
       return false;

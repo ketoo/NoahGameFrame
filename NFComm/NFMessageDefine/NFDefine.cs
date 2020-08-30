@@ -90,9 +90,9 @@ namespace NFMsg {
             "TEVUX1BPU19CT01CX1NLSUxMEAUqjgEKCkVTY2VuZVR5cGUSEAoMTk9STUFM",
             "X1NDRU5FEAASFgoSU0lOR0xFX0NMT05FX1NDRU5FEAESFQoRTVVMVElfQ0xP",
             "TkVfU0NFTkUQAhISCg5QVlBfTU9ERV9TQ0VORRAKEhIKDk1WTV9NT0RFX1ND",
-            "RU5FEAsSFwoTU1VSVklWQUxfTU9ERV9TQ0VORRAMKjgKCEVOUENUeXBlEg4K",
-            "Ck5PUk1BTF9OUEMQABIMCghIRVJPX05QQxABEg4KClRVUlJFVF9OUEMQAmIG",
-            "cHJvdG8z"));
+            "RU5FEAsSFwoTU1VSVklWQUxfTU9ERV9TQ0VORRAMKkYKCEVOUENUeXBlEg4K",
+            "Ck5PUk1BTF9OUEMQABIMCghIRVJPX05QQxABEg4KClRVUlJFVF9OUEMQAhIM",
+            "CghGVU5DX05QQxADYgZwcm90bzM="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(new[] {typeof(global::NFMsg.EGameEventCode), typeof(global::NFMsg.EGameMsgID), typeof(global::NFMsg.EItemType), typeof(global::NFMsg.ESkillType), typeof(global::NFMsg.ESceneType), typeof(global::NFMsg.ENPCType), }, null, null));
@@ -433,6 +433,9 @@ namespace NFMsg {
     /// <summary>
     /// </summary>
     [pbr::OriginalName("TURRET_NPC")] TurretNpc = 2,
+    /// <summary>
+    /// </summary>
+    [pbr::OriginalName("FUNC_NPC")] FuncNpc = 3,
   }
 
   #endregion

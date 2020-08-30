@@ -196,4 +196,5 @@ enum ENPCType
     NORMAL_NPC	= 0;			  //
     HERO_NPC 	= 1;              //
     TURRET_NPC 	= 2;              //
+    FUNC_NPC 	= 3;              //
 };

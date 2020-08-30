@@ -132,17 +132,17 @@ protected:
 
 };
 
-class NFIComponent : NFMemoryCounter
+class NFIComponent// : NFMemoryCounter
 {
 private:
     NFIComponent()
-		: NFMemoryCounter(GET_CLASS_NAME(NFIComponent), 1)
+		//: NFMemoryCounter(GET_CLASS_NAME(NFIComponent), 1)
     {
     }
 
 public:
     NFIComponent(const std::string& strName)
-		: NFMemoryCounter(strName, 1)
+		//: NFMemoryCounter(strName, 1)
     {
         mbEnable = true;
         mstrName = strName;

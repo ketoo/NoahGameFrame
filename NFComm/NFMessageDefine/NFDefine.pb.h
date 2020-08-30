@@ -307,12 +307,13 @@ enum ENPCType : int {
   NORMAL_NPC = 0,
   HERO_NPC = 1,
   TURRET_NPC = 2,
+  FUNC_NPC = 3,
   ENPCType_INT_MIN_SENTINEL_DO_NOT_USE_ = std::numeric_limits<::PROTOBUF_NAMESPACE_ID::int32>::min(),
   ENPCType_INT_MAX_SENTINEL_DO_NOT_USE_ = std::numeric_limits<::PROTOBUF_NAMESPACE_ID::int32>::max()
 };
 bool ENPCType_IsValid(int value);
 constexpr ENPCType ENPCType_MIN = NORMAL_NPC;
-constexpr ENPCType ENPCType_MAX = TURRET_NPC;
+constexpr ENPCType ENPCType_MAX = FUNC_NPC;
 constexpr int ENPCType_ARRAYSIZE = ENPCType_MAX + 1;
 
 const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor* ENPCType_descriptor();
