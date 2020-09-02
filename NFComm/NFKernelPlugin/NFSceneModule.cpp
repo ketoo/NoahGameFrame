@@ -1545,6 +1545,7 @@ int NFSceneModule::EnterSceneCondition(const NFGUID & self, const int nSceneID, 
 		SCENE_EVENT_FUNCTOR_PTR& pFunPtr = *it;
 		SCENE_EVENT_FUNCTOR* pFunc = pFunPtr.get();
 		const int nReason = pFunc->operator()(self, nSceneID, nGroupID, nType, argList);
+		if(nReason != 0) return nReason;
 	}
 	return 0;
 }
