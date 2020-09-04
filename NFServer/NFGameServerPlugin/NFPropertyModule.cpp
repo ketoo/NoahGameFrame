@@ -104,18 +104,19 @@ int NFPropertyModule::OnObjectLevelEvent(const NFGUID& self, const std::string& 
 		m_pKernelModule->SetPropertyString(self, NFrame::Player::ConfigID(), configID);
 	}
 
+    RefreshBaseProperty(self);
+
     FullHPMP(self);
     FullSP(self);
 
     return 0;
 }
 
- int NFPropertyModule::OnObjectConfigIDEvent(const NFGUID& self, const std::string& strPropertyName, const NFData& oldVar, const NFData& newVar)
- {
-    RefreshBaseProperty(self);
-
+int NFPropertyModule::OnObjectConfigIDEvent(const NFGUID& self, const std::string& strPropertyName, const NFData& oldVar, const NFData& newVar)
+{
+	//for appearance
 	return 0;
- }
+}
 
 int NFPropertyModule::OnRecordEvent(const NFGUID& self, const RECORD_EVENT_DATA& xEventData, const NFData& oldVar, const NFData& newVar)
 {
@@ -208,7 +209,11 @@ int NFPropertyModule::OnObjectClassEvent(const NFGUID& self, const std::string& 
 
 void NFPropertyModule::RefreshBaseProperty(const NFGUID& self)
 {
-    const std::string& configID = m_pKernelModule->GetPropertyString(self, NFrame::Player::ConfigID());
+	const int job = m_pKernelModule->GetPropertyInt32(self, NFrame::Player::Job());
+	const int level = m_pKernelModule->GetPropertyInt32(self, NFrame::Player::Level());
+	const std::string& initPropertyID = m_pPropertyConfigModule->GetInitPropertyID(job, level);
+	const std::string& configID = m_pElementModule->GetPropertyString(initPropertyID, NFrame::InitProperty::HeroConfigID());
+
     const std::string& effectData = m_pElementModule->GetPropertyString(configID, NFrame::NPC::EffectData());
     if (effectData.empty() || !m_pElementModule->ExistElement(effectData))
     {
