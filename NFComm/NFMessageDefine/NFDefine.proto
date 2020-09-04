@@ -179,7 +179,7 @@ enum ESkillType
 	BULLET_REBOUND_SKILL		= 3;//this kind of bullet can damage multiple objects via rebound
 	BULLET_TARGET_BOMB_SKILL	= 4;//this kind of bullet can damage multiple objects who around the target when the bullet touched the target object
 	BULLET_POS_BOMB_SKILL		= 5;//this kind of bullet can damage multiple objects  who around the target when the bullet arrived the position
-	FUNC_SKILL							= 6;
+	FUNC_SKILL					= 6;
 };
 
 enum ESceneType

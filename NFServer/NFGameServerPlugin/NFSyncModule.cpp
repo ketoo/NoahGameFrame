@@ -129,13 +129,15 @@ int NFSyncModule::OnPlayerGMPositionEvent(const NFGUID & self, const std::string
 	{
 		NFVector3 v = newVar.GetVector3();
 		*syncUnit->mutable_pos() = NFINetModule::NFToPB(v);
+		*syncUnit->mutable_mover() = NFINetModule::NFToPB(self);
+		syncUnit->set_move_type(NFMsg::PosSyncUnit_EMoveType::PosSyncUnit_EMoveType_EET_TELEPORT);
 
 		m_pKernelModule->SetPropertyVector3(self, NFrame::IObject::Position(), v);
 
 		const int nSceneID = m_pKernelModule->GetPropertyInt32(self, NFrame::Player::SceneID());
 		const int nGroupID = m_pKernelModule->GetPropertyInt32(self, NFrame::Player::GroupID());
 
-		m_pGameServerNet_ServerModule->SendGroupMsgPBToGate(NFMsg::ACK_MOVE, xMsg, nSceneID, nGroupID);
+		m_pGameServerNet_ServerModule->SendGroupMsgPBToGate(NFMsg::ACK_MOVE_IMMUNE, xMsg, nSceneID, nGroupID);
 	}
 
 	return 0;
