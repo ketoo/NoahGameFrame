@@ -110,6 +110,11 @@ bool NFObject::ObjectReady()
     return false;
 }
 
+inline NF_SHARE_PTR<NFIProperty> NFObject::AddProperty(const std::string& strPropertyName, const NFDATA_TYPE varType) 
+{
+   return this->GetPropertyManager()->AddProperty(this->Self(), strPropertyName, varType);
+}
+
 bool NFObject::FindProperty(const std::string& strPropertyName)
 {
     if (GetPropertyManager()->GetElement(strPropertyName))

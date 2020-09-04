@@ -64,6 +64,7 @@ public:
     virtual bool ObjectReady();
 
     virtual bool FindProperty(const std::string& strPropertyName);
+    virtual NF_SHARE_PTR<NFIProperty> AddProperty(const std::string& strPropertyName, const NFDATA_TYPE varType) override;
 
     virtual bool SetPropertyInt(const std::string& strPropertyName, const NFINT64 nValue);
     virtual bool SetPropertyFloat(const std::string& strPropertyName, const double dwValue);
