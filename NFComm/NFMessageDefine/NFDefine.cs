@@ -83,16 +83,16 @@ namespace NFMsg {
             "EJEDEhIKDVJFUV9TS0lMTF9QT1MQkgMSEgoNQUNLX1NLSUxMX1BPUxCTAxIW",
             "ChFBQ0tfT05MSU5FX05PVElGWRDYBBIXChJBQ0tfT0ZGTElORV9OT1RJRlkQ",
             "2QQqRwoJRUl0ZW1UeXBlEg0KCUVJVF9FUVVJUBAAEgsKB0VJVF9HRU0QARIO",
-            "CgpFSVRfU1VQUExZEAISDgoKRUlUX1NDUk9MTBADKqcBCgpFU2tpbGxUeXBl",
+            "CgpFSVRfU1VQUExZEAISDgoKRUlUX1NDUk9MTBADKrcBCgpFU2tpbGxUeXBl",
             "EhYKEkJSSUVGX1NJTkdMRV9TS0lMTBAAEhUKEUJSSUVGX0dST1VQX1NLSUxM",
             "EAESFwoTQlVMTEVUX1NJTkdMRV9TS0lMTBACEhgKFEJVTExFVF9SRUJPVU5E",
             "X1NLSUxMEAMSHAoYQlVMTEVUX1RBUkdFVF9CT01CX1NLSUxMEAQSGQoVQlVM",
-            "TEVUX1BPU19CT01CX1NLSUxMEAUqjgEKCkVTY2VuZVR5cGUSEAoMTk9STUFM",
-            "X1NDRU5FEAASFgoSU0lOR0xFX0NMT05FX1NDRU5FEAESFQoRTVVMVElfQ0xP",
-            "TkVfU0NFTkUQAhISCg5QVlBfTU9ERV9TQ0VORRAKEhIKDk1WTV9NT0RFX1ND",
-            "RU5FEAsSFwoTU1VSVklWQUxfTU9ERV9TQ0VORRAMKkYKCEVOUENUeXBlEg4K",
-            "Ck5PUk1BTF9OUEMQABIMCghIRVJPX05QQxABEg4KClRVUlJFVF9OUEMQAhIM",
-            "CghGVU5DX05QQxADYgZwcm90bzM="));
+            "TEVUX1BPU19CT01CX1NLSUxMEAUSDgoKRlVOQ19TS0lMTBAGKo4BCgpFU2Nl",
+            "bmVUeXBlEhAKDE5PUk1BTF9TQ0VORRAAEhYKElNJTkdMRV9DTE9ORV9TQ0VO",
+            "RRABEhUKEU1VTFRJX0NMT05FX1NDRU5FEAISEgoOUFZQX01PREVfU0NFTkUQ",
+            "ChISCg5NVk1fTU9ERV9TQ0VORRALEhcKE1NVUlZJVkFMX01PREVfU0NFTkUQ",
+            "DCpGCghFTlBDVHlwZRIOCgpOT1JNQUxfTlBDEAASDAoISEVST19OUEMQARIO",
+            "CgpUVVJSRVRfTlBDEAISDAoIRlVOQ19OUEMQA2IGcHJvdG8z"));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(new[] {typeof(global::NFMsg.EGameEventCode), typeof(global::NFMsg.EGameMsgID), typeof(global::NFMsg.EItemType), typeof(global::NFMsg.ESkillType), typeof(global::NFMsg.ESceneType), typeof(global::NFMsg.ENPCType), }, null, null));
@@ -403,6 +403,7 @@ namespace NFMsg {
     ///this kind of bullet can damage multiple objects  who around the target when the bullet arrived the position
     /// </summary>
     [pbr::OriginalName("BULLET_POS_BOMB_SKILL")] BulletPosBombSkill = 5,
+    [pbr::OriginalName("FUNC_SKILL")] FuncSkill = 6,
   }
 
   public enum ESceneType {

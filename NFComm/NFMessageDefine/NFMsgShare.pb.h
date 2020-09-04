@@ -115,6 +115,32 @@ template<> ::NFMsg::ReqLeaveGameServer* Arena::CreateMaybeMessage<::NFMsg::ReqLe
 PROTOBUF_NAMESPACE_CLOSE
 namespace NFMsg {
 
+enum PosSyncUnit_EMoveType : int {
+  PosSyncUnit_EMoveType_EMT_WALK = 0,
+  PosSyncUnit_EMoveType_EET_SPEEDY = 1,
+  PosSyncUnit_EMoveType_EET_TELEPORT = 2,
+  PosSyncUnit_EMoveType_PosSyncUnit_EMoveType_INT_MIN_SENTINEL_DO_NOT_USE_ = std::numeric_limits<::PROTOBUF_NAMESPACE_ID::int32>::min(),
+  PosSyncUnit_EMoveType_PosSyncUnit_EMoveType_INT_MAX_SENTINEL_DO_NOT_USE_ = std::numeric_limits<::PROTOBUF_NAMESPACE_ID::int32>::max()
+};
+bool PosSyncUnit_EMoveType_IsValid(int value);
+constexpr PosSyncUnit_EMoveType PosSyncUnit_EMoveType_EMoveType_MIN = PosSyncUnit_EMoveType_EMT_WALK;
+constexpr PosSyncUnit_EMoveType PosSyncUnit_EMoveType_EMoveType_MAX = PosSyncUnit_EMoveType_EET_TELEPORT;
+constexpr int PosSyncUnit_EMoveType_EMoveType_ARRAYSIZE = PosSyncUnit_EMoveType_EMoveType_MAX + 1;
+
+const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor* PosSyncUnit_EMoveType_descriptor();
+template<typename T>
+inline const std::string& PosSyncUnit_EMoveType_Name(T enum_t_value) {
+  static_assert(::std::is_same<T, PosSyncUnit_EMoveType>::value ||
+    ::std::is_integral<T>::value,
+    "Incorrect type passed to function PosSyncUnit_EMoveType_Name.");
+  return ::PROTOBUF_NAMESPACE_ID::internal::NameOfEnum(
+    PosSyncUnit_EMoveType_descriptor(), enum_t_value);
+}
+inline bool PosSyncUnit_EMoveType_Parse(
+    const std::string& name, PosSyncUnit_EMoveType* value) {
+  return ::PROTOBUF_NAMESPACE_ID::internal::ParseNamedEnum<PosSyncUnit_EMoveType>(
+    PosSyncUnit_EMoveType_descriptor(), name, value);
+}
 enum EffectData_EResultType : int {
   EffectData_EResultType_EET_FAIL = 0,
   EffectData_EResultType_EET_SUCCESS = 1,
@@ -1377,6 +1403,38 @@ class PosSyncUnit :
 
   // nested types ----------------------------------------------------
 
+  typedef PosSyncUnit_EMoveType EMoveType;
+  static constexpr EMoveType EMT_WALK =
+    PosSyncUnit_EMoveType_EMT_WALK;
+  static constexpr EMoveType EET_SPEEDY =
+    PosSyncUnit_EMoveType_EET_SPEEDY;
+  static constexpr EMoveType EET_TELEPORT =
+    PosSyncUnit_EMoveType_EET_TELEPORT;
+  static inline bool EMoveType_IsValid(int value) {
+    return PosSyncUnit_EMoveType_IsValid(value);
+  }
+  static constexpr EMoveType EMoveType_MIN =
+    PosSyncUnit_EMoveType_EMoveType_MIN;
+  static constexpr EMoveType EMoveType_MAX =
+    PosSyncUnit_EMoveType_EMoveType_MAX;
+  static constexpr int EMoveType_ARRAYSIZE =
+    PosSyncUnit_EMoveType_EMoveType_ARRAYSIZE;
+  static inline const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor*
+  EMoveType_descriptor() {
+    return PosSyncUnit_EMoveType_descriptor();
+  }
+  template<typename T>
+  static inline const std::string& EMoveType_Name(T enum_t_value) {
+    static_assert(::std::is_same<T, EMoveType>::value ||
+      ::std::is_integral<T>::value,
+      "Incorrect type passed to function EMoveType_Name.");
+    return PosSyncUnit_EMoveType_Name(enum_t_value);
+  }
+  static inline bool EMoveType_Parse(const std::string& name,
+      EMoveType* value) {
+    return PosSyncUnit_EMoveType_Parse(name, value);
+  }
+
   // accessors -------------------------------------------------------
 
   enum : int {
@@ -1386,6 +1444,7 @@ class PosSyncUnit :
     kDirectionFieldNumber = 4,
     kStatusFieldNumber = 5,
     kTimeFieldNumber = 6,
+    kMoveTypeFieldNumber = 7,
   };
   // .NFMsg.Ident mover = 1;
   bool has_mover() const;
@@ -1465,6 +1524,15 @@ class PosSyncUnit :
   void _internal_set_time(float value);
   public:
 
+  // .NFMsg.PosSyncUnit.EMoveType move_type = 7;
+  void clear_move_type();
+  ::NFMsg::PosSyncUnit_EMoveType move_type() const;
+  void set_move_type(::NFMsg::PosSyncUnit_EMoveType value);
+  private:
+  ::NFMsg::PosSyncUnit_EMoveType _internal_move_type() const;
+  void _internal_set_move_type(::NFMsg::PosSyncUnit_EMoveType value);
+  public:
+
   // @@protoc_insertion_point(class_scope:NFMsg.PosSyncUnit)
  private:
   class _Internal;
@@ -1476,6 +1544,7 @@ class PosSyncUnit :
   ::NFMsg::Vector3* direction_;
   ::PROTOBUF_NAMESPACE_ID::int32 status_;
   float time_;
+  int move_type_;
   mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   friend struct ::TableStruct_NFMsgShare_2eproto;
 };
@@ -3370,6 +3439,26 @@ inline void PosSyncUnit::set_time(float value) {
   // @@protoc_insertion_point(field_set:NFMsg.PosSyncUnit.time)
 }
 
+// .NFMsg.PosSyncUnit.EMoveType move_type = 7;
+inline void PosSyncUnit::clear_move_type() {
+  move_type_ = 0;
+}
+inline ::NFMsg::PosSyncUnit_EMoveType PosSyncUnit::_internal_move_type() const {
+  return static_cast< ::NFMsg::PosSyncUnit_EMoveType >(move_type_);
+}
+inline ::NFMsg::PosSyncUnit_EMoveType PosSyncUnit::move_type() const {
+  // @@protoc_insertion_point(field_get:NFMsg.PosSyncUnit.move_type)
+  return _internal_move_type();
+}
+inline void PosSyncUnit::_internal_set_move_type(::NFMsg::PosSyncUnit_EMoveType value) {
+  
+  move_type_ = value;
+}
+inline void PosSyncUnit::set_move_type(::NFMsg::PosSyncUnit_EMoveType value) {
+  _internal_set_move_type(value);
+  // @@protoc_insertion_point(field_set:NFMsg.PosSyncUnit.move_type)
+}
+
 // -------------------------------------------------------------------
 
 // ReqAckPlayerPosSync
@@ -4124,6 +4213,11 @@ inline void ReqAckPlayerChat::set_allocated_chat_info(std::string* chat_info) {
 
 PROTOBUF_NAMESPACE_OPEN
 
+template <> struct is_proto_enum< ::NFMsg::PosSyncUnit_EMoveType> : ::std::true_type {};
+template <>
+inline const EnumDescriptor* GetEnumDescriptor< ::NFMsg::PosSyncUnit_EMoveType>() {
+  return ::NFMsg::PosSyncUnit_EMoveType_descriptor();
+}
 template <> struct is_proto_enum< ::NFMsg::EffectData_EResultType> : ::std::true_type {};
 template <>
 inline const EnumDescriptor* GetEnumDescriptor< ::NFMsg::EffectData_EResultType>() {
