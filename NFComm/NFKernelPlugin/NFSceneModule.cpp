@@ -154,7 +154,7 @@ int NFSceneModule::RequestGroupScene(const int nSceneID)
 
 				pSceneInfo->AddElement(nNewGroupID, pGroupInfo);
 
-				int sceneType = m_pElementModule->GetPropertyInt(std::to_string(nSceneID), NFrame::Scene::Type());
+				int sceneType = m_pElementModule->GetPropertyInt32(std::to_string(nSceneID), NFrame::Scene::Type());
 				SceneGroupCreatedEvent(NFGUID(), nSceneID, nNewGroupID, sceneType, NFDataList::Empty());
 
 				m_pCellModule->CreateGroupCell(nSceneID, nNewGroupID);
@@ -225,7 +225,7 @@ bool NFSceneModule::ReleaseGroupScene(const int nSceneID, const int nGroupID)
 
 			m_pCellModule->DestroyGroupCell(nSceneID, nGroupID);
 
-			int sceneType = m_pElementModule->GetPropertyInt(std::to_string(nSceneID), NFrame::Scene::Type());
+			int sceneType = m_pElementModule->GetPropertyInt32(std::to_string(nSceneID), NFrame::Scene::Type());
 			SceneGroupDestroyedEvent(NFGUID(), nSceneID, nGroupID, sceneType, NFDataList::Empty());
 
 			pSceneInfo->RemoveElement(nGroupID);
@@ -655,7 +655,7 @@ NFINT64 NFSceneModule::GetPropertyInt(const int scene, const int group, const st
 
 int NFSceneModule::GetPropertyInt32(const int scene, const int group, const std::string & strPropertyName)
 {
-	return GetPropertyInt(scene, group, strPropertyName);
+	return (int)GetPropertyInt(scene, group, strPropertyName);
 }
 
 double NFSceneModule::GetPropertyFloat(const int scene, const int group, const std::string & strPropertyName)
@@ -686,7 +686,8 @@ const std::string & NFSceneModule::GetPropertyString(const int scene, const int 
 		}
 	}
 
-	return "";
+	static std::string emptyString("");
+	return emptyString;
 }
 
 const NFGUID & NFSceneModule::GetPropertyObject(const int scene, const int group, const std::string & strPropertyName)

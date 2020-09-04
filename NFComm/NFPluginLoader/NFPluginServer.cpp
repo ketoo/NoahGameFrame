@@ -176,8 +176,8 @@ void NFPluginServer::ProcessParameter()
         for (int i = 0; i < argList.size(); i++)
         {
             std::string strPipeline = argList[i];
-            int posFile = strPipeline.find(".xml:");
-            int posContent = strPipeline.find("==");
+            size_t posFile = strPipeline.find(".xml:");
+            size_t posContent = strPipeline.find("==");
             if (posFile != string::npos && posContent != string::npos)
             {
                 std::string fileName = strPipeline.substr(0, posFile + 4);
@@ -192,7 +192,7 @@ void NFPluginServer::ProcessParameter()
     std::string strTitleName = pPluginManager->GetAppName() + std::to_string(pPluginManager->GetAppID());// +" PID" + NFGetPID();
     if (!strTitleName.empty())
     {
-		int pos = strTitleName.find("Server");
+        size_t pos = strTitleName.find("Server");
 		if (pos != string::npos)
 		{
 			strTitleName.replace(pos, 6, "");

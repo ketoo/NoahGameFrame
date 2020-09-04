@@ -301,7 +301,7 @@ public:
 
 	////////////////////////////////////////////////////////////////
 protected:
-	//for scne && group
+	//for scene && group
 	virtual bool AddGroupRecordCallBack(const std::string& strName, const RECORD_EVENT_FUNCTOR_PTR& cb) = 0;
 	virtual bool AddGroupPropertyCallBack(const std::string& strName, const PROPERTY_EVENT_FUNCTOR_PTR& cb) = 0;
 	virtual bool AddGroupRecordCommCallBack(const RECORD_EVENT_FUNCTOR_PTR& cb) = 0;

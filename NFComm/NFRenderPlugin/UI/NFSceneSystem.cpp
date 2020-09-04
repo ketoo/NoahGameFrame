@@ -45,7 +45,7 @@ void NFSceneSystem::Execute()
 NFVector2 NFSceneSystem::ToSceneGridPos(const NFVector3& pos)
 {
 
-    NFVector2 displayOffset(mNodeSystem.GetNodeSize() / 2, mNodeSystem.GetNodeSize() / 2);
+    NFVector2 displayOffset((float)(mNodeSystem.GetNodeSize() / 2), (float)(mNodeSystem.GetNodeSize() / 2));
 
     return NFVector2(pos.X() * mNodeSystem.GetNodeSize() - displayOffset.X(), pos.Z() * -mNodeSystem.GetNodeSize() - displayOffset.Y());
 }

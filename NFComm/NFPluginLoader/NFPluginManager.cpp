@@ -1008,7 +1008,7 @@ std::list<NFIModule *> NFPluginManager::TestModules()
 
 int NFPluginManager::GetAppCPUCount() const
 {
-	return mnCPUCount;
+	return (int)mnCPUCount;
 }
 
 void NFPluginManager::SetAppCPUCount(const int count)

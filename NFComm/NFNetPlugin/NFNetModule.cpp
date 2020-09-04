@@ -72,7 +72,7 @@ int NFNetModule::Initialization(const unsigned int nMaxClient, const unsigned sh
     return m_pNet->Initialization(nMaxClient, nPort, nCpuCount);
 }
 
-int NFNetModule::ExpandBufferSize(const unsigned int size)
+unsigned int NFNetModule::ExpandBufferSize(const unsigned int size)
 {
     if (size > 0)
     {

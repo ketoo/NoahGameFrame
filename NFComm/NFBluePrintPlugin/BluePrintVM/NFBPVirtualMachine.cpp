@@ -34,7 +34,7 @@ void NFBPVirtualMachine::StartToProcessMonitor()
     }
 }
 
-int NFBPVirtualMachine::GameEventIDCallBack(const NFGUID& objectID, const  NFGUID& monitorID, const int eventID, const const NFMapEx<std::string, NFData>& data)
+int NFBPVirtualMachine::GameEventIDCallBack(const NFGUID& objectID, const  NFGUID& monitorID, const int eventID, const NFMapEx<std::string, NFData>& data)
 {
     auto node = m_pBluePrintModule->FindNode(monitorID);
     if (node && node->blueprintType == NFBlueprintType::MONITOR)
@@ -45,7 +45,7 @@ int NFBPVirtualMachine::GameEventIDCallBack(const NFGUID& objectID, const  NFGUI
     return 0;
 }
 
-int NFBPVirtualMachine::NetEventIDCallBack(const NFGUID& objectID, const NFGUID& monitorID, const int eventID, const const NFMapEx<std::string, NFData>& data)
+int NFBPVirtualMachine::NetEventIDCallBack(const NFGUID& objectID, const NFGUID& monitorID, const int eventID, const NFMapEx<std::string, NFData>& data)
 {
 	auto node = m_pBluePrintModule->FindNode(monitorID);
 	if (node->blueprintType == NFBlueprintType::MONITOR)
@@ -56,7 +56,7 @@ int NFBPVirtualMachine::NetEventIDCallBack(const NFGUID& objectID, const NFGUID&
 	return 0;
 }
 
-int NFBPVirtualMachine::NetMsgCallBack(const NFGUID& objectID, const NFGUID& monitorID, const int eventID, const const NFMapEx<std::string, NFData>& data)
+int NFBPVirtualMachine::NetMsgCallBack(const NFGUID& objectID, const NFGUID& monitorID, const int eventID, const NFMapEx<std::string, NFData>& data)
 {
 	auto node = m_pBluePrintModule->FindNode(monitorID);
 	if (node->blueprintType == NFBlueprintType::MONITOR)
@@ -67,23 +67,23 @@ int NFBPVirtualMachine::NetMsgCallBack(const NFGUID& objectID, const NFGUID& mon
 	return 0;
 }
 
-int NFBPVirtualMachine::GameObjectCallBack(const NFGUID& objectID, const NFGUID& monitorID, const int eventID, const const NFMapEx<std::string, NFData>& data)
+int NFBPVirtualMachine::GameObjectCallBack(const NFGUID& objectID, const NFGUID& monitorID, const int eventID, const NFMapEx<std::string, NFData>& data)
 {
 
     return 0;
 }
 
-int NFBPVirtualMachine::ObjectPropCallBack(const NFGUID& objectID, const NFGUID& monitorID, const int eventID, const const NFMapEx<std::string, NFData>& data)
+int NFBPVirtualMachine::ObjectPropCallBack(const NFGUID& objectID, const NFGUID& monitorID, const int eventID, const NFMapEx<std::string, NFData>& data)
 {
     return 0;
 }
 
-int NFBPVirtualMachine::ObjectRecordCallBack(const NFGUID& objectID, const NFGUID& monitorID, const int eventID, const const NFMapEx<std::string, NFData>& data)
+int NFBPVirtualMachine::ObjectRecordCallBack(const NFGUID& objectID, const NFGUID& monitorID, const int eventID, const NFMapEx<std::string, NFData>& data)
 {
     return 0;
 }
 
-int NFBPVirtualMachine::ObjectSceneEventCallBack(const NFGUID& objectID, const NFGUID& monitorID, const int eventID, const const NFMapEx<std::string, NFData>& data)
+int NFBPVirtualMachine::ObjectSceneEventCallBack(const NFGUID& objectID, const NFGUID& monitorID, const int eventID, const NFMapEx<std::string, NFData>& data)
 {
     return 0;
 }
@@ -103,7 +103,7 @@ void NFBPVirtualMachine::StartMonitor(NF_SHARE_PTR<NFIMonitor> monitor)
 
         try
         {
-            int eventID = inputEventID->GetInt();
+            int eventID = inputEventID->GetInt32();
             m_pBPVMEventModule->RegisterGameEventCallBack(monitor->logicBlockId, eventID, monitor->id, this, &NFBPVirtualMachine::GameEventIDCallBack);
         }
         catch (const std::exception&)
@@ -124,7 +124,7 @@ void NFBPVirtualMachine::StartMonitor(NF_SHARE_PTR<NFIMonitor> monitor)
 
 		try
 		{
-			int eventID = inputEventID->GetInt();
+			int eventID = inputEventID->GetInt32();
 			m_pBPVMEventModule->RegisterNetEventCallBack(monitor->logicBlockId, eventID, monitor->id, this, &NFBPVirtualMachine::NetEventIDCallBack);
 		}
 		catch (const std::exception&)
@@ -145,7 +145,7 @@ void NFBPVirtualMachine::StartMonitor(NF_SHARE_PTR<NFIMonitor> monitor)
 
 		try
 		{
-			int eventID = inputEventID->GetInt();
+			int eventID = inputEventID->GetInt32();
 			m_pBPVMEventModule->RegisterNetMsgEventCallBack(monitor->logicBlockId, eventID, monitor->id, this, &NFBPVirtualMachine::NetMsgCallBack);
 		}
 		catch (const std::exception&)

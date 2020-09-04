@@ -99,7 +99,7 @@ void NFNetClientModule::AddServer(const ConnectData& xInfo)
     mxTempNetList.push_back(xInfo);
 }
 
-int NFNetClientModule::ExpandBufferSize(const unsigned int size)
+unsigned int NFNetClientModule::ExpandBufferSize(const unsigned int size)
 {
     if (size > 0)
     {
@@ -838,7 +838,7 @@ void NFNetClientModule::ProcessAddNetConnect()
 			xServerData->mxNetModule->ReadyExecute();
 
             xServerData->mxNetModule->Initialization(xServerData->strIP.c_str(), xServerData->nPort);
-            xServerData->mxNetModule->ExpandBufferSize(mnBufferSize);
+            xServerData->mxNetModule->ExpandBufferSize((unsigned int)mnBufferSize);
 
             InitCallBacks(xServerData);
 

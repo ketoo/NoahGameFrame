@@ -76,12 +76,12 @@ namespace NodeSystem
         //draw grid line
         for (int i = 0 + ((int)this->offset.X() % this->nodeSize); i < io.DisplaySize.x; i += this->nodeSize)
         {
-            ImGui::GetWindowDrawList()->AddLine(ImVec2(i, 0), ImVec2(i, io.DisplaySize.y), ImColor(200, 200, 200, 20));
+            ImGui::GetWindowDrawList()->AddLine(ImVec2((float)i, 0), ImVec2((float)i, io.DisplaySize.y), ImColor(200, 200, 200, 20));
         }
 
         for (int j = 0 + ((int)this->offset.Y() % this->nodeSize); j < io.DisplaySize.y; j += this->nodeSize)
         {
-            ImGui::GetWindowDrawList()->AddLine(ImVec2(0, j), ImVec2(io.DisplaySize.x, j), ImColor(200, 200, 200, 20));
+            ImGui::GetWindowDrawList()->AddLine(ImVec2(0, (float)j), ImVec2(io.DisplaySize.x, (float)j), ImColor(200, 200, 200, 20));
         }
 
         if (mBeginRenderFunctor)
@@ -130,7 +130,7 @@ namespace NodeSystem
         }
     }
 
-    NF_SHARE_PTR<NFNode> NFNodeSystem::FindNode(const const NFGUID nodeId)
+    NF_SHARE_PTR<NFNode> NFNodeSystem::FindNode(const NFGUID nodeId)
     {
         auto it = mNodes.find(nodeId);
         if (it != mNodes.end())

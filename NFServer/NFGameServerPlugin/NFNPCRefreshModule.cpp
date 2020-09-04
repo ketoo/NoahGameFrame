@@ -135,7 +135,7 @@ int NFNPCRefreshModule::OnNPCDeadDestroyHeart( const NFGUID& self, const std::st
     //and create new object
 	int nSceneID = m_pKernelModule->GetPropertyInt32( self, NFrame::NPC::SceneID());
 	int nGroupID = m_pKernelModule->GetPropertyInt32(self, NFrame::NPC::GroupID());
-	int nNPCType = m_pKernelModule->GetPropertyInt(self, NFrame::NPC::NPCType());
+	int nNPCType = m_pKernelModule->GetPropertyInt32(self, NFrame::NPC::NPCType());
 
 	if (nNPCType == NFMsg::ENPCType::NORMAL_NPC)
 	{
@@ -177,7 +177,7 @@ int NFNPCRefreshModule::OnBuildingDeadDestroyHeart(const NFGUID & self, const st
 	const std::string& strSeedID = m_pKernelModule->GetPropertyString(self, NFrame::NPC::SeedID());
 	const std::string& strConfigID = m_pKernelModule->GetPropertyString(self, NFrame::NPC::ConfigID());
 	const NFGUID xMasterID = m_pKernelModule->GetPropertyObject(self, NFrame::NPC::MasterID());
-	int nNPCType = m_pKernelModule->GetPropertyInt(self, NFrame::NPC::NPCType());
+	int nNPCType = m_pKernelModule->GetPropertyInt32(self, NFrame::NPC::NPCType());
 	int nSceneID = m_pKernelModule->GetPropertyInt32(self, NFrame::NPC::SceneID());
 	int nGroupID = m_pKernelModule->GetPropertyInt32(self, NFrame::NPC::GroupID());
 

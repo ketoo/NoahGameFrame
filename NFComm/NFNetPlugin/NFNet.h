@@ -88,7 +88,7 @@ public:
 
     virtual void Initialization(const char* strIP, const unsigned short nPort);
     virtual int Initialization(const unsigned int nMaxClient, const unsigned short nPort, const int nCpuCount = 4);
-	virtual int ExpandBufferSize(const unsigned int size);
+	virtual unsigned int ExpandBufferSize(const unsigned int size) override;
 
     virtual bool Final();
 
@@ -151,7 +151,7 @@ private:
     int mnCpuCount;
 	bool mbServer;
 
-	int mnBufferSize;
+    unsigned int mnBufferSize;
 
     bool mbWorking;
     bool mbTCPStream;

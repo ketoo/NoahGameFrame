@@ -145,7 +145,7 @@ bool NFInventoryModule::CreateItem(const NFGUID& self, const std::string& strCon
 		return false;
 	}
 
-	const int nSceneID = m_pKernelModule->GetPropertyInt(self, NFrame::Player::SceneID());
+	const int nSceneID = m_pKernelModule->GetPropertyInt32(self, NFrame::Player::SceneID());
 	NFMsg::ESceneType eSceneType = (NFMsg::ESceneType)m_pElementModule->GetPropertyInt32(std::to_string(nSceneID), NFrame::Scene::Type());
 
 	return CreateItemInNormalBag(self, strConfigName, nCount);
