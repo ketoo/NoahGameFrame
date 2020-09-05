@@ -304,7 +304,7 @@ const NFGUID NFCellModule::ComputeCellID(const int nX, const int nY, const int n
 
 const NFGUID NFCellModule::ComputeCellID(const NFVector3 & vec)
 {
-	return ComputeCellID(vec.X(), vec.Y(), vec.Z());
+	return ComputeCellID((int)vec.X(), (int)vec.Y(), (int)vec.Z());
 }
 
 const NFGUID NFCellModule::ComputeCellID(const NFGUID & selfGrid, ECELL_DIRECTION eDirection)
@@ -464,8 +464,8 @@ int NFCellModule::OnObjectEvent(const NFGUID & self, const std::string & strClas
 
 int NFCellModule::OnPositionEvent(const NFGUID & self, const std::string & strPropertyName, const NFData & oldVar, const NFData & newVar)
 {
-	const int sceneID = m_pKernelModule->GetPropertyInt(self, NFrame::IObject::SceneID());
-	const int groupID = m_pKernelModule->GetPropertyInt(self, NFrame::IObject::GroupID());
+	const int sceneID = m_pKernelModule->GetPropertyInt32(self, NFrame::IObject::SceneID());
+	const int groupID = m_pKernelModule->GetPropertyInt32(self, NFrame::IObject::GroupID());
 	const NFVector3& oldVec = oldVar.GetVector3();
 	const NFVector3& newVec = newVar.GetVector3();
 

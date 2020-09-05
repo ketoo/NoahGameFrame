@@ -72,7 +72,7 @@ namespace NodeSystem
 
         std::shared_ptr<NFNode> AddNode(const NFGUID nodeId, const std::string& name, const NFVector2 vec = NFVector2(), const int color = -100000);
         void DeleteNode(const NFGUID nodeId);
-        std::shared_ptr<NFNode> FindNode(const const NFGUID nodeId);
+        std::shared_ptr<NFNode> FindNode(const NFGUID nodeId);
 
         void ResetToCenter();
         void MoveToNode(const NFGUID nodeId);

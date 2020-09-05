@@ -91,7 +91,7 @@ bool NFCooldownModule::ExistCooldown(const NFGUID& self, const std::string& conf
     if (nRow >= 0)
     {
         //compare the time with the cooldown time
-        float fCDTime = m_pElementModule->GetPropertyFloat(configID, NFrame::Skill::CoolDownTime());
+        double fCDTime = m_pElementModule->GetPropertyFloat(configID, NFrame::Skill::CoolDownTime());
         int64_t nLastTime = xRecord->GetInt(nRow, NFrame::NPC::Cooldown::Time);
         if ((NFGetTimeMS() - nLastTime) < fCDTime * 1000)
         {

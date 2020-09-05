@@ -140,7 +140,7 @@ int NFUDPModule::Initialization(const unsigned int nMaxClient, const unsigned sh
 	return 0;
 }
 
-int NFUDPModule::ExpandBufferSize(const unsigned int size)
+unsigned int NFUDPModule::ExpandBufferSize(const unsigned int size)
 {
 	return 0;
 }

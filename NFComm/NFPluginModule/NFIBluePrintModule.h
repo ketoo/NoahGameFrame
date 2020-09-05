@@ -741,12 +741,12 @@ public:
 		//check input args count and out args count
 	}
 
-	const int GetInputArgCount()
+	const size_t GetInputArgCount()
 	{
 		return inputArgs.size();
 	}
 
-	const int GetOutputArgCount()
+	const size_t GetOutputArgCount()
 	{
 		return outputArgs.size();
 	}

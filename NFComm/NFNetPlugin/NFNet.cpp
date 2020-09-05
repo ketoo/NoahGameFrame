@@ -245,7 +245,7 @@ int NFNet::Initialization(const unsigned int nMaxClient, const unsigned short nP
     return InitServerNet();
 }
 
-int NFNet::ExpandBufferSize(const unsigned int size)
+unsigned int NFNet::ExpandBufferSize(const unsigned int size)
 {
 	if (size > 0)
 	{

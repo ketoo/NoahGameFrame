@@ -174,7 +174,7 @@ void* ShowImage(const char* filename, int width, int height)
     int my_image_height = 0;
     GLuint my_image_texture = 0;
     bool ret = LoadTextureFromFile(filename, &my_image_texture, &my_image_width, &my_image_height);
-    ImGui::Image((void*)(intptr_t)my_image_texture, ImVec2(width, height));
+    ImGui::Image((void*)(intptr_t)my_image_texture, ImVec2((float)width, (float)height));
 
     return (void*)(intptr_t)my_image_texture;
 }

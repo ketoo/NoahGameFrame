@@ -213,7 +213,9 @@ void NFRedisClientSocket::log_cb(int severity, const char * msg)
 string NFRedisClientSocket::GetIP(const std::string& url)
 {
 	std::vector<std::string> ips;
+#pragma warning(disable: 4996)
 	struct hostent* host = gethostbyname(url.c_str());
+#pragma warning(default: 4996)
 	if (!host)
 	{
 		return "";
@@ -231,7 +233,9 @@ string NFRedisClientSocket::GetIP(const std::string& url)
 	//ip address
 	for (int i = 0; host->h_addr_list[i]; i++)
 	{
+#pragma warning(disable: 4996)
 		char* ip = inet_ntoa(*(struct in_addr*)host->h_addr_list[i]);
+#pragma warning(default: 4996)
 		printf("IP addr %d: %s\n", i, ip);
 
 		ips.push_back(ip);

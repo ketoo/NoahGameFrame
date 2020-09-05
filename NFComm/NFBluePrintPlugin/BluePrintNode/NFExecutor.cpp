@@ -27,8 +27,8 @@
 
 void NFCreateObjectExecutor::UpdateOutputData(const NFGUID& runTimeOwner)
 {
-	const int sceneID = GetInputArg(NFExecutorCreateObjectInputArg::SceneID)->GetInt();
-	const int groupID = GetInputArg(NFExecutorCreateObjectInputArg::GroupID)->GetInt();
+	const int sceneID = GetInputArg(NFExecutorCreateObjectInputArg::SceneID)->GetInt32();
+	const int groupID = GetInputArg(NFExecutorCreateObjectInputArg::GroupID)->GetInt32();
 	const std::string& className = GetInputArg(NFExecutorCreateObjectInputArg::ClassName)->GetString();
 	const std::string& configID = GetInputArg(NFExecutorCreateObjectInputArg::ConfigID)->GetString();
 	const NFVector3 pos = GetInputArg(NFExecutorCreateObjectInputArg::Position)->GetVector3();
@@ -72,7 +72,7 @@ NF_SHARE_PTR<NFIOData> NFDestroyObjectExecutor::FindOutputNodeIOData()
 void NFGameEventExecutor::UpdateOutputData(const NFGUID& runTimeOwner)
 {
 	const NFGUID objectID = GetInputArg(NFExecutorGameEventInputArg::ObjectID)->GetObject();
-	const int eventID = GetInputArg(NFExecutorGameEventInputArg::EventID)->GetInt();
+	const int eventID = GetInputArg(NFExecutorGameEventInputArg::EventID)->GetInt32();
 	//const int eventID = GetInputArg(NFExecutorGameEventInputArg::Dctionary)->getd();
 
 	m_pEventModule->DoEvent(objectID, eventID, NFDataList::Empty());

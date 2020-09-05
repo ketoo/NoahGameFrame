@@ -58,7 +58,7 @@ public:
 	//as server
 	virtual int Initialization(const unsigned int nMaxClient, const unsigned short nPort, const int nCpuCount = 4);
 
-	virtual int ExpandBufferSize(const unsigned int size = 1024 * 1024 * 20);
+	virtual unsigned int ExpandBufferSize(const unsigned int size = 1024 * 1024 * 20) override;
 
 	virtual void RemoveReceiveCallBack(const int nMsgID);
 
@@ -95,7 +95,7 @@ protected:
 private:
 	struct event_base* mxBase = nullptr;
 	struct event udp_event;
-	int mnBufferSize;
+	unsigned int mnBufferSize;
 	std::map<int, std::list<NET_RECEIVE_FUNCTOR_PTR>> mxReceiveCallBack;
 	std::list<NET_EVENT_FUNCTOR_PTR> mxEventCallBackList;
 	std::list<NET_RECEIVE_FUNCTOR_PTR> mxCallBackList;

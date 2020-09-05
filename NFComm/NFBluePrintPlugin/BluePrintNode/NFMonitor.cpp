@@ -97,8 +97,8 @@ void NFObjectEventMonitor::UpdateOutputData(const NFGUID& runTimeOwner)
 
 	const std::string& className = m_pKernelModule->GetPropertyString(runTimeOwner, NFrame::IObject::ClassName());
 	const std::string& configID = m_pKernelModule->GetPropertyString(runTimeOwner, NFrame::IObject::ConfigID());
-	const int sceneID = m_pKernelModule->GetPropertyInt(runTimeOwner, NFrame::IObject::SceneID());
-	const int groupID = m_pKernelModule->GetPropertyInt(runTimeOwner, NFrame::IObject::GroupID());
+	const int sceneID = m_pKernelModule->GetPropertyInt32(runTimeOwner, NFrame::IObject::SceneID());
+	const int groupID = m_pKernelModule->GetPropertyInt32(runTimeOwner, NFrame::IObject::GroupID());
 	const NFVector3& position = m_pKernelModule->GetPropertyVector3(runTimeOwner, NFrame::IObject::Position());
 
 	outputObjectID->SetObject(runTimeOwner);

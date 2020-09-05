@@ -82,8 +82,8 @@ void NFHierachyView::GodViewSubRender()
    ImGui::Text(name.c_str());
    if (ImGui::Button("Create"))
    {
-	   const int scene = m_pKernelModule->GetPropertyInt(objectID, NFrame::IObject::SceneID());
-	   const int group = m_pKernelModule->GetPropertyInt(objectID, NFrame::IObject::GroupID());
+	   const int scene = m_pKernelModule->GetPropertyInt32(objectID, NFrame::IObject::SceneID());
+	   const int group = m_pKernelModule->GetPropertyInt32(objectID, NFrame::IObject::GroupID());
 	   const std::string& className = m_pKernelModule->GetPropertyString(objectID, NFrame::IObject::ClassName());
 	   const std::string& configID = m_pKernelModule->GetPropertyString(objectID, NFrame::IObject::ConfigID());
 	   const NFVector3& position = m_pKernelModule->GetPropertyVector3(objectID, NFrame::IObject::Position());
@@ -107,7 +107,7 @@ void NFHierachyView::GodViewSubRender()
 	   if (ImGui::Button("Disable AI"))
 	   {
 		   NFDataList data;
-		   m_pKernelModule->GetGroupObjectList(objectID.nHead64, objectID.nData64, data);
+		   m_pKernelModule->GetGroupObjectList((int)objectID.nHead64, (int)objectID.nData64, data);
 		   for (int i = 0; i < data.GetCount(); ++i)
 		   {
 			   m_pKernelModule->SetPropertyInt(data.Object(i), NFrame::NPC::Disable(), 1);
@@ -393,7 +393,7 @@ void NFHierachyView::BluePrintViewSubRenderForMonitorHead(NF_SHARE_PTR<NFIMonito
 	case NFMonitorType::GameEvent:
 	{
 		auto inputEventID = monitor->GetInputArg(NFGameEventMonitorInputArg::EventID);
-		int localEventID = inputEventID->GetInt();
+		int localEventID = inputEventID->GetInt32();
 		if (ImGui::InputInt("input int", &localEventID))
 		{
 			inputEventID->SetInt(localEventID);

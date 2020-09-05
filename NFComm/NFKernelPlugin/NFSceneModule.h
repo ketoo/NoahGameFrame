@@ -225,7 +225,7 @@ public:
 		return mtTagPos.AddElement(nIndex, NF_SHARE_PTR<NFVector3>(NF_NEW NFVector3(vPos)));
 	}
 
-	NFVector3 GetTagInfo(const int nIndex, const bool bRoll)
+	const NFVector3& GetTagInfo(const int nIndex, const bool bRoll)
 	{
 		NF_SHARE_PTR<NFVector3> vPos = mtTagPos.GetElement(nIndex);
 		if (vPos)
@@ -238,7 +238,7 @@ public:
 			return *(mtTagPos.GetElement(0));
 		}
 
-		return NFVector3();
+		return NFVector3::Zero();
 	}
 
 	int mnGroupIndex;
