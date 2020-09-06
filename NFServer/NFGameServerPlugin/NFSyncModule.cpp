@@ -106,7 +106,7 @@ int NFSyncModule::OnNPCClassEvent(const NFGUID & self, const std::string & strCl
 	return 0;
 }
 
-int NFSyncModule::OnNPCPositionEvent(const NFGUID & self, const std::string & strPropertyName, const NFData & oldVar, const NFData & newVar)
+int NFSyncModule::OnNPCGMPositionEvent(const NFGUID & self, const std::string & strPropertyName, const NFData & oldVar, const NFData & newVar)
 {
 	return 0;
 }
@@ -115,12 +115,30 @@ int NFSyncModule::OnPlayerClassEvent(const NFGUID & self, const std::string & st
 {
 	if (CLASS_OBJECT_EVENT::COE_CREATE_FINISH == eClassEvent)
 	{
+		m_pKernelModule->AddPropertyCallBack(self, NFrame::Player::GMMoveTo(), this, &NFSyncModule::OnPlayerGMPositionEvent);
 	}
 
 	return 0;
 }
 
-int NFSyncModule::OnPlayePositionEvent(const NFGUID & self, const std::string & strPropertyName, const NFData & oldVar, const NFData & newVar)
+int NFSyncModule::OnPlayerGMPositionEvent(const NFGUID & self, const std::string & strPropertyName, const NFData & oldVar, const NFData & newVar)
 {
+	NFMsg::ReqAckPlayerPosSync xMsg;
+	NFMsg::PosSyncUnit* syncUnit = xMsg.add_sync_unit();
+	if (syncUnit)
+	{
+		NFVector3 v = newVar.GetVector3();
+		*syncUnit->mutable_pos() = NFINetModule::NFToPB(v);
+		*syncUnit->mutable_mover() = NFINetModule::NFToPB(self);
+		syncUnit->set_move_type(NFMsg::PosSyncUnit_EMoveType::PosSyncUnit_EMoveType_EET_TELEPORT);
+
+		m_pKernelModule->SetPropertyVector3(self, NFrame::IObject::Position(), v);
+
+		const int nSceneID = m_pKernelModule->GetPropertyInt32(self, NFrame::Player::SceneID());
+		const int nGroupID = m_pKernelModule->GetPropertyInt32(self, NFrame::Player::GroupID());
+
+		m_pGameServerNet_ServerModule->SendGroupMsgPBToGate(NFMsg::ACK_MOVE_IMMUNE, xMsg, nSceneID, nGroupID);
+	}
+
 	return 0;
 }

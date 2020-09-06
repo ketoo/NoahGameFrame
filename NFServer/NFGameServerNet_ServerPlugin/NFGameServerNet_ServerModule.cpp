@@ -243,6 +243,13 @@ void NFGameServerNet_ServerModule::OnClientReqMoveProcess(const NFSOCK nSockInde
 			const NFGUID& xMover = NFINetModule::PBToNF(syncUnit->mover());
 			if (xMover == nPlayerID)
 			{
+				NFVector3 v;
+				v.SetX(syncUnit->pos().x());
+				v.SetY(syncUnit->pos().y());
+				v.SetZ(syncUnit->pos().z());
+
+				m_pKernelModule->SetPropertyVector3(nPlayerID, NFrame::IObject::Position(), v);
+
 				const int nSceneID = m_pKernelModule->GetPropertyInt32(xMover, NFrame::Player::SceneID());
 				const int nGroupID = m_pKernelModule->GetPropertyInt32(xMover, NFrame::Player::GroupID());
 

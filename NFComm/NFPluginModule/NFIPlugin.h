@@ -51,15 +51,6 @@
 
 #define DESTROY_PLUGIN(pManager, className) pManager->UnRegistered( pManager->FindPlugin((#className)) );
 
-/*
-#define REGISTER_COMPONENT(pManager, className)  NFIComponent* pRegisterComponent##className= new className(pManager); \
-    pRegisterComponent##className->strName = (#className); \
-    pManager->AddComponent( (#className), pRegisterComponent##className );
-
-#define UNREGISTER_COMPONENT(pManager, className) NFIComponent* pRegisterComponent##className =  \
-        dynamic_cast<NFIComponent*>( pManager->FindComponent( (#className) ) ); pManager->RemoveComponent( (#className) ); delete pRegisterComponent##className;
-*/
-
 class NFIPluginManager;
 
 class NFIPlugin : public NFIModule

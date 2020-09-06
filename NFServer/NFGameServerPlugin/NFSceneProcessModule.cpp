@@ -207,7 +207,10 @@ int NFSceneProcessModule::BeforeEnterSceneGroupEvent(const NFGUID & self, const 
 	{
 		m_pSceneModule->CreateSceneNPC(nSceneID, nGroupID, NFDataList::Empty());
 	}
-	else if (eSceneType  == NFMsg::ESceneType::MULTI_CLONE_SCENE)
+	else if (eSceneType == NFMsg::ESceneType::MULTI_CLONE_SCENE
+		|| eSceneType == NFMsg::ESceneType::PVP_MODE_SCENE
+	   	|| eSceneType == NFMsg::ESceneType::MVM_MODE_SCENE
+	   	|| eSceneType == NFMsg::ESceneType::SURVIVAL_MODE_SCENE)
 	{
 		NFDataList varObjectList;
 		if (m_pKernelModule->GetGroupObjectList(nSceneID, nGroupID, varObjectList, true) && varObjectList.GetCount() <= 0)

@@ -165,7 +165,7 @@ enum EGameMsgID
 
 enum EItemType
 {
-    EIT_EQUIP   			= 0; //the equipment which can add props
+	EIT_EQUIP   			= 0; //the equipment which can add props
 	EIT_GEM   				= 1; //the gem ca be embed to the equipment
 	EIT_SUPPLY   			= 2; //expendable items for player, such as a medicine that cures
 	EIT_SCROLL   			= 3; //special items that can call a hero or others, special items can do what you want to do
@@ -179,6 +179,7 @@ enum ESkillType
 	BULLET_REBOUND_SKILL		= 3;//this kind of bullet can damage multiple objects via rebound
 	BULLET_TARGET_BOMB_SKILL	= 4;//this kind of bullet can damage multiple objects who around the target when the bullet touched the target object
 	BULLET_POS_BOMB_SKILL		= 5;//this kind of bullet can damage multiple objects  who around the target when the bullet arrived the position
+	FUNC_SKILL					= 6;
 };
 
 enum ESceneType
@@ -196,4 +197,5 @@ enum ENPCType
     NORMAL_NPC	= 0;			  //
     HERO_NPC 	= 1;              //
     TURRET_NPC 	= 2;              //
+    FUNC_NPC 	= 3;              //
 };

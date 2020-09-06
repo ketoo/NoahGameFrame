@@ -36,6 +36,11 @@ class NFIWorldNet_ServerModule
     : public NFIModule
 {
 public:
+	class IPlayerWorldCache
+	{
+
+	};
+
 	class PlayerData
 	{
 	public:
@@ -69,14 +74,23 @@ public:
 		}
 
 		bool onLine;
-		int gameID;
-		int gateID;
+		int gameID = 0;
+		int gateID = 0;
 		NFGUID self;
 		NFGUID team;
-		int bp;
-        std::string name;
+		int bp = 0;
+		std::string name;
+		std::string headIcon;
 
+		int level = 0;
+		int gold = 0;
+		int diamond = 0;
+
+        NFMapEx<int, IPlayerWorldCache> playerWorldCache;
 	};
+
+	virtual bool IsPrimaryWorldServer() = 0;
+	virtual int GetWorldAreaID() = 0;
 
 	virtual void OnServerInfoProcess(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen) = 0;
 
