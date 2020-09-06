@@ -116,8 +116,8 @@ public:
                 {
                     voxelData = NF_SHARE_PTR<NFVoxel>(NF_NEW NFVoxel());
                     ajson::load_from_buff(*voxelData, cellData.c_str(), cellData.length());
-                    voxelData->x = posID.GetHead();
-                    voxelData->z = posID.GetData();
+                    voxelData->x = (int)posID.GetHead();
+                    voxelData->z = (int)posID.GetData();
 
                     groupData->data.AddElement(posID, voxelData);
                 }

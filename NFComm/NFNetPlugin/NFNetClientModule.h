@@ -53,7 +53,7 @@ public:
 
     virtual void AddServer(const ConnectData& xInfo);
 
-    virtual int ExpandBufferSize(const unsigned int size = 1024 * 1024 * 20);
+    virtual unsigned int ExpandBufferSize(const unsigned int size = 1024 * 1024 * 20) override;
 
     virtual int AddReceiveCallBack(const NF_SERVER_TYPES eType, NET_RECEIVE_FUNCTOR_PTR functorPtr);
 
@@ -135,7 +135,7 @@ private:
 
 private:
 	int64_t mnLastActionTime;
-	int64_t mnBufferSize;
+	unsigned int mnBufferSize;
     //server_id, server_data
     NFConsistentHashMapEx<int, ConnectData> mxServerMap;
     //server_type, server_id, server_data

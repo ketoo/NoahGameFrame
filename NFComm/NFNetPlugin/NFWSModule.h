@@ -46,7 +46,7 @@ public:
     //as server
     virtual int Initialization(const unsigned int nMaxClient, const unsigned short nPort, const int nCpuCount = 4);
 
-    virtual int ExpandBufferSize(const unsigned int size = 1024 * 1024 * 20);
+    virtual unsigned int ExpandBufferSize(const unsigned int size = 1024 * 1024 * 20) override;
 
     virtual void RemoveReceiveCallBack(const int nMsgID);
 
@@ -86,7 +86,7 @@ protected:
     std::string HashKey(const char* key, size_t len);
 private:
 
-    int mnBufferSize;
+    unsigned int mnBufferSize;
     NFINet* m_pNet;
     NFINT64 nLastTime;
 	std::map<int, std::list<NET_RECEIVE_FUNCTOR_PTR>> mxReceiveCallBack;

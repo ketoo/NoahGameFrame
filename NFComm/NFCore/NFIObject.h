@@ -50,8 +50,10 @@ enum CLASS_OBJECT_EVENT
 	COE_DESTROY,
 };
 
+#pragma warning(disable: 4275)
 class _NFExport NFIObject :public NFMemoryCounter
 {
+#pragma warning(default: 4275)
 private:
 	NFIObject() : NFMemoryCounter(GET_CLASS_NAME(NFIObject), 1)
 	{
@@ -92,6 +94,7 @@ public:
     virtual bool ObjectReady() = 0;
 
     virtual bool FindProperty(const std::string& strPropertyName) = 0;
+    virtual NF_SHARE_PTR<NFIProperty> AddProperty(const std::string& strPropertyName, const NFDATA_TYPE varType) = 0;
 
     virtual bool SetPropertyInt(const std::string& strPropertyName, const NFINT64 nValue) = 0;
     virtual bool SetPropertyFloat(const std::string& strPropertyName, const double dwValue) = 0;

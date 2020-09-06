@@ -62,7 +62,7 @@ bool NFELOModule::AfterInit()
 // Function to calculate the Probability
 float NFELOModule::Probability(int ratingA, int ratingB)
 {
-	return 1.0 * 1.0 / (1 + 1.0 * pow(10, 1.0 * (ratingA - ratingB) / 400));
+	return (float)(1.0 * 1.0 / (1 + 1.0 * pow(10, 1.0 * (ratingA - ratingB) / 400)));
 }
 
 // Function to calculate Elo rating
@@ -85,16 +85,16 @@ void NFELOModule::EloRating(int ratingA, int ratingB, bool aWin, int& resultA, i
 	// Updating the Elo Ratings
 	if (aWin == 1)
 	{
-		resultA = EloK() * (1 - Pa);
-		resultB = EloK() * (0 - Pb);
+		resultA = (int)(EloK() * (1 - Pa));
+		resultB = (int)(EloK() * (0 - Pb));
 	}
 	else
 	{
 		// Case -2 When Player B wins
 		// Updating the Elo Ratings
 
-		resultA = EloK() * (0 - Pa);
-		resultB = EloK() * (1 - Pb);
+		resultA = (int)(EloK() * (0 - Pa));
+		resultB = (int)(EloK() * (1 - Pb));
 	}
 }
 

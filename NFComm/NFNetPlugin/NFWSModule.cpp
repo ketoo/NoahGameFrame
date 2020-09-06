@@ -123,7 +123,7 @@ int NFWSModule::Initialization(const unsigned int nMaxClient, const unsigned sho
     return m_pNet->Initialization(nMaxClient, nPort, nCpuCount);
 }
 
-int NFWSModule::ExpandBufferSize(const unsigned int size)
+unsigned int NFWSModule::ExpandBufferSize(const unsigned int size)
 {
     if (size > 0)
     {

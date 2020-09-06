@@ -116,14 +116,14 @@ public:
 private:
 	void StartToProcessMonitor();
 
-	int GameEventIDCallBack(const NFGUID& objectID, const  NFGUID& monitorID, const int eventID, const const NFMapEx<std::string, NFData>& data);
-	int NetEventIDCallBack(const NFGUID& objectID, const  NFGUID& monitorID, const int eventID, const const NFMapEx<std::string, NFData>& data);
-    int NetMsgCallBack(const NFGUID& objectID, const  NFGUID& monitorID, const int eventID, const const NFMapEx<std::string, NFData>& data);
+	int GameEventIDCallBack(const NFGUID& objectID, const  NFGUID& monitorID, const int eventID, const NFMapEx<std::string, NFData>& data);
+	int NetEventIDCallBack(const NFGUID& objectID, const  NFGUID& monitorID, const int eventID, const NFMapEx<std::string, NFData>& data);
+    int NetMsgCallBack(const NFGUID& objectID, const  NFGUID& monitorID, const int eventID, const NFMapEx<std::string, NFData>& data);
     
-    int GameObjectCallBack(const NFGUID& objectID, const  NFGUID& monitorID, const int eventID, const const NFMapEx<std::string, NFData>& data);
-    int ObjectPropCallBack(const NFGUID& objectID, const  NFGUID& monitorID, const int eventID, const const NFMapEx<std::string, NFData>& data);
-    int ObjectRecordCallBack(const NFGUID& objectID, const  NFGUID& monitorID, const int eventID, const const NFMapEx<std::string, NFData>& data);
-    int ObjectSceneEventCallBack(const NFGUID& objectID, const  NFGUID& monitorID, const int eventID, const const NFMapEx<std::string, NFData>& data);
+    int GameObjectCallBack(const NFGUID& objectID, const  NFGUID& monitorID, const int eventID, const NFMapEx<std::string, NFData>& data);
+    int ObjectPropCallBack(const NFGUID& objectID, const  NFGUID& monitorID, const int eventID, const NFMapEx<std::string, NFData>& data);
+    int ObjectRecordCallBack(const NFGUID& objectID, const  NFGUID& monitorID, const int eventID, const NFMapEx<std::string, NFData>& data);
+    int ObjectSceneEventCallBack(const NFGUID& objectID, const  NFGUID& monitorID, const int eventID, const NFMapEx<std::string, NFData>& data);
 
 private:
     void StartMonitor(NF_SHARE_PTR<NFIMonitor> monitor);
