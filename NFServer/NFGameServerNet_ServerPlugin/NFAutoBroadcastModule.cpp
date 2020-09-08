@@ -91,10 +91,6 @@ int NFAutoBroadcastModule::OnObjectClassEvent(const NFGUID& self, const std::str
 			m_pGameServerNet_ServerModule->SendMsgPBToGate(NFMsg::ACK_ENTER_GAME, xMsg, self);
 		}
 	}
-	else if (CLASS_OBJECT_EVENT::COE_CREATE_HASDATA == eClassEvent)
-	{
-		//m_pKernelModule->AddPropertyCallBack(self, NFrame::Scene::SceneID, this, &NFGameServerNet_ServerModule::OnSceneEvent);
-	}
 
 	return 0;
 }
