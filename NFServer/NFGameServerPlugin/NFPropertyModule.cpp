@@ -61,7 +61,7 @@ int64_t NFPropertyModule::GetPropertyValue(const NFGUID& self, const std::string
         return m_pKernelModule->GetRecordInt(self, NFrame::Player::CommValue::ThisName(), eGroupType, strPropertyName);
     }
 
-    return m_pKernelModule->GetPropertyInt(self, strPropertyName);
+    return 0;
 }
 
 int NFPropertyModule::SetPropertyValue(const NFGUID& self, const std::string& strPropertyName, const NFPropertyGroup eGroupType, const int64_t nValue)
@@ -118,11 +118,6 @@ int NFPropertyModule::OnObjectConfigIDEvent(const NFGUID& self, const std::strin
 
 int NFPropertyModule::OnRecordEvent(const NFGUID& self, const RECORD_EVENT_DATA& xEventData, const NFData& oldVar, const NFData& newVar)
 {
-	if (activeExtraController)
-	{
-		return 0;
-	}
-
 	const std::string& strRecordName = xEventData.strRecordName;
     const int nOpType = xEventData.nOpType;
     const int nRow = xEventData.nRow;
@@ -132,7 +127,12 @@ int NFPropertyModule::OnRecordEvent(const NFGUID& self, const RECORD_EVENT_DATA&
     NF_SHARE_PTR<NFIRecord> pRecord = m_pKernelModule->FindRecord(self, NFrame::Player::CommValue::ThisName());
     for (int i = 0; i < (int)(NFPropertyGroup::NPG_ALL); i++)
     {
-        if (i < pRecord->GetRows())
+		if (activeExtraController && i == NFPropertyGroup::NPG_JOBLEVEL)
+		{
+			continue;
+		}
+
+		if (i < pRecord->GetRows())
         {
             int nValue = pRecord->GetInt32(i, nCol);
             nAllValue += nValue;
@@ -163,7 +163,7 @@ int NFPropertyModule::OnObjectClassEvent(const NFGUID& self, const std::string& 
 		else if (CLASS_OBJECT_EVENT::COE_CREATE_BEFORE_ATTACHDATA == eClassEvent)
         {
            //cant attach the level event here as we will reset the property configID and Level by sequence
-           //as a result, the level event will be triggered first, then configID event triggered late, or the triggerr sequence in reverse
+           //as a result, the level event will be triggered first, then configID event triggered late, or the trigger sequence in reverse
            //that means if we added attach the level event here, we cant get the correct result
         }
 		else if (CLASS_OBJECT_EVENT::COE_CREATE_LOADDATA == eClassEvent)
@@ -190,18 +190,23 @@ int NFPropertyModule::OnObjectClassEvent(const NFGUID& self, const std::string& 
 		}
         else if (CLASS_OBJECT_EVENT::COE_CREATE_AFTER_EFFECT == eClassEvent)
         {
-            RefreshAllProperty(self);
-            if (!activeExtraController)
-			{
-				FullHPMP(self);
-			}
         }
-        else if (CLASS_OBJECT_EVENT::COE_CREATE_HASDATA == eClassEvent)
+        else if (CLASS_OBJECT_EVENT::COE_CREATE_READY == eClassEvent)
         {
+			RefreshAllProperty(self);
+			FullHPMP(self);
+
+			m_pKernelModule->AddPropertyCallBack(self, NFrame::Player::Level(), this, &NFPropertyModule::OnObjectLevelEvent);
+			m_pKernelModule->AddPropertyCallBack(self, NFrame::Player::ConfigID(), this, &NFPropertyModule::OnObjectConfigIDEvent);
+			m_pKernelModule->AddRecordCallBack(self, NFrame::Player::CommValue::ThisName(), this, &NFPropertyModule::OnRecordEvent);
+
 			m_pKernelModule->AddPropertyCallBack(self, NFrame::Player::Level(), this, &NFPropertyModule::OnObjectLevelEvent);
 			m_pKernelModule->AddPropertyCallBack(self, NFrame::Player::ConfigID(), this, &NFPropertyModule::OnObjectConfigIDEvent);
 			m_pKernelModule->AddRecordCallBack(self, NFrame::Player::CommValue::ThisName(), this, &NFPropertyModule::OnRecordEvent);
         }
+		else if (CLASS_OBJECT_EVENT::COE_CREATE_HASDATA == eClassEvent)
+		{
+		}
         else if (CLASS_OBJECT_EVENT::COE_CREATE_FINISH == eClassEvent)
         {
         }
@@ -242,11 +247,6 @@ void NFPropertyModule::RefreshBaseProperty(const NFGUID& self)
 
 void NFPropertyModule::RefreshAllProperty(const NFGUID& self)
 {
-	if (activeExtraController)
-	{
-		return;
-	}
-
     NF_SHARE_PTR<NFIRecord> pRecord = m_pKernelModule->FindRecord(self, NFrame::Player::CommValue::ThisName());
     for (int col = 0; col < pRecord->GetCols(); col++)
     {
@@ -254,6 +254,11 @@ void NFPropertyModule::RefreshAllProperty(const NFGUID& self)
 
         for (int i = 0; i < (int)(NFPropertyGroup::NPG_ALL); i++)
         {
+        	if (activeExtraController && i == NFPropertyGroup::NPG_JOBLEVEL)
+			{
+				continue;
+			}
+
             if (i < pRecord->GetRows())
             {
                 int64_t nValue = pRecord->GetInt(i, col);

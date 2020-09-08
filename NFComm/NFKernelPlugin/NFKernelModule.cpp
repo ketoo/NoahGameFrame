@@ -347,6 +347,9 @@ NF_SHARE_PTR<NFIObject> NFKernelModule::CreateObject(const NFGUID& self, const i
 									pObject->SetState(COE_CREATE_AFTER_EFFECT);
 									DoEvent(ident, strClassName, pObject->GetState(), arg);
 
+									pObject->SetState(COE_CREATE_READY);
+									DoEvent(ident, strClassName, pObject->GetState(), arg);
+
 									pObject->SetState(COE_CREATE_HASDATA);
 									DoEvent(ident, strClassName, pObject->GetState(), arg);
 
@@ -522,6 +525,9 @@ NF_SHARE_PTR<NFIObject> NFKernelModule::CreateObject(const NFGUID& self, const i
 			DoEvent(ident, strClassName, pObject->GetState(), arg);
 
 			pObject->SetState(COE_CREATE_AFTER_EFFECT);
+			DoEvent(ident, strClassName, pObject->GetState(), arg);
+
+			pObject->SetState(COE_CREATE_READY);
 			DoEvent(ident, strClassName, pObject->GetState(), arg);
 
 			pObject->SetState(COE_CREATE_HASDATA);
