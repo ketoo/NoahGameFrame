@@ -1265,19 +1265,19 @@ bool NFFileProcess::SaveForSQL()
 				const std::string& value = itDesc->second;
 				if (strKey=="Type")
 				{
-					strType = strValue;
+					strType = value;
 				}
 				else if (strKey=="Save")
 				{
-					strSave = strValue;
+					strSave = value;
 				} 
 				else if (strKey=="Cache")
 				{
-					strCache = strValue;
+					strCache = value;
 				}
 				else if (strKey=="Desc")
 				{
-					strDesc = strValue;
+					strDesc = value;
 				}
 			}
 
@@ -1334,19 +1334,19 @@ bool NFFileProcess::SaveForSQL()
 				const std::string& value = itDesc->second;
 				if (strKey=="Type")
 				{
-					strType = strValue;
+					strType = value;
 				}
 				else if (strKey=="Save")
 				{
-					strSave = strValue;
+					strSave = value;
 				} 
 				else if (strKey=="Cache")
 				{
-					strCache = strValue;
+					strCache = value;
 				}
 				else if (strKey=="Desc")
 				{
-					strDesc = strValue;
+					strDesc = value;
 				}
 			}
 
@@ -1421,7 +1421,7 @@ bool NFFileProcess::SaveForStruct()
 				{
 					const std::string& strKey = itDesc->first;
 					const std::string& value = itDesc->second;
-					strElementData += strKey + "=\"" + strValue + "\" ";
+					strElementData += strKey + "=\"" + value + "\" ";
 				}
 				strElementData += "/>\n";
 				fwrite(strElementData.c_str(), strElementData.length(), 1, structWriter);
@@ -1447,7 +1447,7 @@ bool NFFileProcess::SaveForStruct()
 				{
 					const std::string& strKey = itDesc->first;
 					const std::string& value = itDesc->second;
-					strElementData += strKey + "=\"" + strValue + "\"\t ";
+					strElementData += strKey + "=\"" + value + "\"\t ";
 				}
 				strElementData += ">\n";
 
@@ -1574,7 +1574,7 @@ bool NFFileProcess::SaveForIni()
 				{
 					const std::string& strKey = itProperty->first;
 					const std::string& value = itProperty->second;
-					strElementData += strKey + "=\"" + strValue + "\" ";
+					strElementData += strKey + "=\"" + value + "\" ";
 				}
 				strElementData += "/>\n";
 
