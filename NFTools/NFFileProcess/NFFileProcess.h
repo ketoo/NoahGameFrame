@@ -89,7 +89,7 @@ public:
 	void SetUTF8(const bool b);
 
 private:
-	bool LoadDataFromExcel(const std::string& strFile, const std::string& fileName);
+	bool LoadDataFromExcel(const std::string& filePath, const std::string& fileName);
 	bool LoadIncludeExcel(ClassData* pClassData, const std::string& strFile, const std::string& fileName);
 
 	bool LoadDataFromExcel(MiniExcelReader::Sheet& sheet, ClassData* pClassData);

@@ -35,29 +35,29 @@ bool NFFileProcess::LoadDataFromExcel()
 
 	///////////////////////////////////
 
-	for (auto fileName : fileList)
+	for (auto filePath : fileList)
 	{
-		StringReplace(fileName, "\\", "/");
-		StringReplace(fileName, "//", "/");
+		StringReplace(filePath, "\\", "/");
+		StringReplace(filePath, "//", "/");
 
-		if ((int)(fileName.find("$")) != -1)
+		if ((int)(filePath.find("$")) != -1)
 		{
 			continue;
 		}
 
-		auto strExt = GetFileNameExtByPath(fileName);
+		auto strExt = GetFileNameExtByPath(filePath);
 		if (strExt != ".xlsx")
 		{
 			continue;
 		}
 
-		auto fileName = GetFileNameByPath(fileName);
+		auto fileName = GetFileNameByPath(filePath);
 		if (fileName == "IObject")
 		{
 			continue;
 		}
 
-		if (!LoadDataFromExcel(fileName, fileName))
+		if (!LoadDataFromExcel(filePath, fileName))
 		{
 			std::cout << "Create " + fileName + " failed!" << std::endl;
 			continue;
@@ -128,22 +128,22 @@ bool NFFileProcess::LoadDataFromExcel()
 	return true;
 }
 
-bool NFFileProcess::LoadDataFromExcel(const std::string & strFile, const std::string & fileName)
+bool NFFileProcess::LoadDataFromExcel(const std::string & filePath, const std::string & fileName)
 {
 	if (mxClassData.find(fileName) != mxClassData.end())
 	{
-		std::cout << strFile << " exist!!!" << std::endl;
+		std::cout << filePath << " exist!!!" << std::endl;
 		return false;
 	}
 
-	std::cout << strFile << std::endl;
+	std::cout << filePath << std::endl;
 
 	ClassData* pClassData = new ClassData();
 	mxClassData[fileName] = pClassData;
 	pClassData->xStructData.className = fileName;
 
-	pClassData->filePath = strFile;
-	StringReplace(pClassData->filePath, GetFileNameExtByPath(strFile), "");
+	pClassData->filePath = filePath;
+	StringReplace(pClassData->filePath, GetFileNameExtByPath(filePath), "");
 
 	pClassData->fileFolder = pClassData->filePath;
 	StringReplace(pClassData->fileFolder, fileName, "");
@@ -151,9 +151,9 @@ bool NFFileProcess::LoadDataFromExcel(const std::string & strFile, const std::st
 	//load
 
 	MiniExcelReader::ExcelFile* xExcel = new MiniExcelReader::ExcelFile();
-	if (!xExcel->open(strFile.c_str()))
+	if (!xExcel->open(filePath.c_str()))
 	{
-		std::cout << "can't open" << strFile << std::endl;
+		std::cout << "can't open" << filePath << std::endl;
 		return false;
 	}
 
