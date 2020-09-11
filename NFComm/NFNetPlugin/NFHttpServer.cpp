@@ -305,7 +305,7 @@ NF_SHARE_PTR<NFHttpRequest> NFHttpServer::AllocHttpRequest()
 	return pRequest;
 }
 
-bool NFHttpServer::ResponseMsg(NF_SHARE_PTR<NFHttpRequest> req, const std::string& strMsg, NFWebStatus code, const std::string& strReason)
+bool NFHttpServer::ResponseMsg(NF_SHARE_PTR<NFHttpRequest> req, const std::string& msg, NFWebStatus code, const std::string& strReason)
 {
 	if (req == nullptr)
 	{
@@ -317,7 +317,7 @@ bool NFHttpServer::ResponseMsg(NF_SHARE_PTR<NFHttpRequest> req, const std::strin
     struct evbuffer* eventBuffer = evbuffer_new();
 
     //send data
-    evbuffer_add_printf(eventBuffer, "%s", strMsg.c_str());
+    evbuffer_add_printf(eventBuffer, "%s", msg.c_str());
 
     evhttp_add_header(evhttp_request_get_output_headers(pHttpReq), "Content-Type", "application/json");
 	

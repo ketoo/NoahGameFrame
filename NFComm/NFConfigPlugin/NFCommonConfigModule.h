@@ -38,9 +38,9 @@ public:
 	class CAttributeList : public NFMapEx<std::string, std::string>
 	{
 	public:
-		const int GetInt(const std::string& strName)
+		const int GetInt(const std::string& name)
 		{
-			NF_SHARE_PTR<std::string> pStr = GetElement(strName);
+			NF_SHARE_PTR<std::string> pStr = GetElement(name);
 			if (pStr && !pStr->empty())
 			{
 				int nData = 0;
@@ -51,9 +51,9 @@ public:
 			return 0;
 		}
 
-		const std::string& GetString(const std::string& strName)
+		const std::string& GetString(const std::string& name)
 		{
-			NF_SHARE_PTR<std::string> pStr = GetElement(strName);
+			NF_SHARE_PTR<std::string> pStr = GetElement(name);
 			if (pStr)
 			{
 				return *pStr;

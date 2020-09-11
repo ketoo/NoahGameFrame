@@ -48,13 +48,13 @@ public:
     virtual void SetTypeName(const char* strType) = 0;
     virtual const std::string& GetTypeName() = 0;
     virtual const std::string& GetClassName() = 0;
-    virtual const bool AddId(std::string& strConfigName) = 0;
+    virtual const bool AddId(std::string& configName) = 0;
     virtual const std::vector<std::string>& GetIDList() = 0;
     virtual const std::string& GetInstancePath() = 0;
 	virtual void SetInstancePath(const std::string& strPath) = 0;
 
     virtual bool AddClassCallBack(const CLASS_EVENT_FUNCTOR_PTR& cb) = 0;
-    virtual bool DoEvent(const NFGUID& objectID, const CLASS_OBJECT_EVENT eClassEvent, const NFDataList& valueList) = 0;
+    virtual bool DoEvent(const NFGUID& objectID, const CLASS_OBJECT_EVENT classEvent, const NFDataList& valueList) = 0;
 };
 
 class NFIClassModule
@@ -71,20 +71,20 @@ public:
     virtual NFIClassModule* GetThreadClassModule(const int index) = 0;
 
     template<typename BaseType>
-    bool AddClassCallBack(const std::string& strClassName, BaseType* pBase, int (BaseType::*handler)(const NFGUID&, const std::string&, const CLASS_OBJECT_EVENT, const NFDataList&))
+    bool AddClassCallBack(const std::string& className, BaseType* pBase, int (BaseType::*handler)(const NFGUID&, const std::string&, const CLASS_OBJECT_EVENT, const NFDataList&))
     {
         CLASS_EVENT_FUNCTOR functor = std::bind(handler, pBase, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3, std::placeholders::_4);
         CLASS_EVENT_FUNCTOR_PTR functorPtr(new CLASS_EVENT_FUNCTOR(functor));
-        return AddClassCallBack(strClassName, functorPtr);
+        return AddClassCallBack(className, functorPtr);
     }
 
-    virtual bool DoEvent(const NFGUID& objectID, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFDataList& valueList) = 0;
+    virtual bool DoEvent(const NFGUID& objectID, const std::string& className, const CLASS_OBJECT_EVENT classEvent, const NFDataList& valueList) = 0;
 
-    virtual bool AddClassCallBack(const std::string& strClassName, const CLASS_EVENT_FUNCTOR_PTR& cb) = 0;
+    virtual bool AddClassCallBack(const std::string& className, const CLASS_EVENT_FUNCTOR_PTR& cb) = 0;
 
-    virtual NF_SHARE_PTR<NFIPropertyManager> GetClassPropertyManager(const std::string& strClassName) = 0;
+    virtual NF_SHARE_PTR<NFIPropertyManager> GetClassPropertyManager(const std::string& className) = 0;
 
-    virtual NF_SHARE_PTR<NFIRecordManager> GetClassRecordManager(const std::string& strClassName) = 0;
+    virtual NF_SHARE_PTR<NFIRecordManager> GetClassRecordManager(const std::string& className) = 0;
 
 };
 

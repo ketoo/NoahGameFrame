@@ -46,7 +46,7 @@ int NFRedisClient::SADD(const std::string& key, const std::string& member)
 	return add_new_num;
 }
 
-bool NFRedisClient::SCARD(const std::string& key, int& nCount)
+bool NFRedisClient::SCARD(const std::string& key, int& count)
 {
 	NFRedisCommand cmd(GET_NAME(SCARD));
 	cmd << key;
@@ -59,7 +59,7 @@ bool NFRedisClient::SCARD(const std::string& key, int& nCount)
 
 	if (pReply->type == REDIS_REPLY_INTEGER)
 	{
-		nCount = (int)pReply->integer;
+		count = (int)pReply->integer;
 	}
 
 	return true;

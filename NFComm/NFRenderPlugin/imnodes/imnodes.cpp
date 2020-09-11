@@ -295,14 +295,14 @@ struct LinkBezierData
     int num_segments;
 };
 
-enum ClickInteractionType
+enum ClickInteractiotype
 {
-    ClickInteractionType_Node,
-    ClickInteractionType_Link,
-    ClickInteractionType_LinkCreation,
-    ClickInteractionType_Panning,
-    ClickInteractionType_BoxSelection,
-    ClickInteractionType_None
+    ClickInteractiotype_Node,
+    ClickInteractiotype_Link,
+    ClickInteractiotype_LinkCreation,
+    ClickInteractiotype_Panning,
+    ClickInteractiotype_BoxSelection,
+    ClickInteractiotype_None
 };
 
 struct ClickInteractionState
@@ -659,13 +659,13 @@ struct EditorContext
     ImVector<int> selected_node_indices;
     ImVector<int> selected_link_indices;
 
-    ClickInteractionType click_interaction_type;
+    ClickInteractiotype click_interaction_type;
     ClickInteractionState click_interaction_state;
 
     EditorContext()
         : nodes(), pins(), links(), panning(0.f, 0.f), selected_node_indices(),
           selected_link_indices(),
-          click_interaction_type(ClickInteractionType_None),
+          click_interaction_type(ClickInteractiotype_None),
           click_interaction_state()
     {
     }
@@ -708,12 +708,12 @@ void begin_node_selection(EditorContext& editor, const int node_idx)
     // Don't start selecting a node if we are e.g. already creating and dragging
     // a new link! New link creation can happen when the mouse is clicked over
     // a node, but within the hover radius of a pin.
-    if (editor.click_interaction_type != ClickInteractionType_None)
+    if (editor.click_interaction_type != ClickInteractiotype_None)
     {
         return;
     }
 
-    editor.click_interaction_type = ClickInteractionType_Node;
+    editor.click_interaction_type = ClickInteractiotype_Node;
     // If the node is not already contained in the selection, then we want only
     // the interaction node to be selected, effective immediately.
     //
@@ -729,7 +729,7 @@ void begin_node_selection(EditorContext& editor, const int node_idx)
 
 void begin_link_selection(EditorContext& editor, const int link_idx)
 {
-    editor.click_interaction_type = ClickInteractionType_Link;
+    editor.click_interaction_type = ClickInteractiotype_Link;
     // When a link is selected, clear all other selections, and insert the link
     // as the sole selection.
     editor.selected_node_indices.clear();
@@ -754,7 +754,7 @@ void begin_link_interaction(EditorContext& editor, const int link_idx)
 {
     // First check if we are clicking a link in the vicinity of a pin.
     // This may result in a link detach via click and drag.
-    if (editor.click_interaction_type == ClickInteractionType_LinkCreation)
+    if (editor.click_interaction_type == ClickInteractiotype_LinkCreation)
     {
         if ((g.hovered_pin_flags &
              AttributeFlags_EnableLinkDetachWithDragClick) != 0)
@@ -783,7 +783,7 @@ void begin_link_interaction(EditorContext& editor, const int link_idx)
                                             ? link.start_pin_idx
                                             : link.end_pin_idx;
 
-            editor.click_interaction_type = ClickInteractionType_LinkCreation;
+            editor.click_interaction_type = ClickInteractiotype_LinkCreation;
             begin_link_detach(editor, link_idx, closest_pin_idx);
         }
         else
@@ -795,7 +795,7 @@ void begin_link_interaction(EditorContext& editor, const int link_idx)
 
 void begin_link_creation(EditorContext& editor, const int hovered_pin_idx)
 {
-    editor.click_interaction_type = ClickInteractionType_LinkCreation;
+    editor.click_interaction_type = ClickInteractiotype_LinkCreation;
     editor.click_interaction_state.link_creation.start_pin_idx =
         hovered_pin_idx;
     g.element_state_change |= ElementStateChange_LinkStarted;
@@ -825,10 +825,10 @@ void begin_canvas_interaction(EditorContext& editor)
             : middle_mouse_clicked;
 
     editor.click_interaction_type = started_panning
-                                        ? ClickInteractionType_Panning
-                                        : ClickInteractionType_BoxSelection;
+                                        ? ClickInteractiotype_Panning
+                                        : ClickInteractiotype_BoxSelection;
 
-    if (editor.click_interaction_type == ClickInteractionType_BoxSelection)
+    if (editor.click_interaction_type == ClickInteractiotype_BoxSelection)
     {
         editor.click_interaction_state.box_selector.rect.Min =
             ImGui::GetIO().MousePos;
@@ -955,7 +955,7 @@ void click_interaction_update(EditorContext& editor)
 
     switch (editor.click_interaction_type)
     {
-    case ClickInteractionType_BoxSelection:
+    case ClickInteractiotype_BoxSelection:
     {
         ImRect& box_rect = editor.click_interaction_state.box_selector.rect;
         box_rect.Max = ImGui::GetIO().MousePos;
@@ -972,29 +972,29 @@ void click_interaction_update(EditorContext& editor)
 
         if (left_mouse_released)
         {
-            editor.click_interaction_type = ClickInteractionType_None;
+            editor.click_interaction_type = ClickInteractiotype_None;
         }
     }
     break;
-    case ClickInteractionType_Node:
+    case ClickInteractiotype_Node:
     {
         translate_selected_nodes(editor);
 
         if (left_mouse_released)
         {
-            editor.click_interaction_type = ClickInteractionType_None;
+            editor.click_interaction_type = ClickInteractiotype_None;
         }
     }
     break;
-    case ClickInteractionType_Link:
+    case ClickInteractiotype_Link:
     {
         if (left_mouse_released)
         {
-            editor.click_interaction_type = ClickInteractionType_None;
+            editor.click_interaction_type = ClickInteractiotype_None;
         }
     }
     break;
-    case ClickInteractionType_LinkCreation:
+    case ClickInteractiotype_LinkCreation:
     {
         const PinData& pin = editor.pins.pool[editor.click_interaction_state
                                                   .link_creation.start_pin_idx];
@@ -1033,11 +1033,11 @@ void click_interaction_update(EditorContext& editor)
                 g.element_state_change |= ElementStateChange_LinkCreated;
             }
 
-            editor.click_interaction_type = ClickInteractionType_None;
+            editor.click_interaction_type = ClickInteractiotype_None;
         }
     }
     break;
-    case ClickInteractionType_Panning:
+    case ClickInteractiotype_Panning:
     {
         const bool dragging =
             g.io.emulate_three_button_mouse.enabled
@@ -1051,11 +1051,11 @@ void click_interaction_update(EditorContext& editor)
         }
         else
         {
-            editor.click_interaction_type = ClickInteractionType_None;
+            editor.click_interaction_type = ClickInteractiotype_None;
         }
     }
     break;
-    case ClickInteractionType_None:
+    case ClickInteractiotype_None:
         break;
     default:
         assert(!"Unreachable code!");

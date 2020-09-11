@@ -57,11 +57,11 @@ public:
 
 protected:
     int OnEvent(const NFGUID& self, const int event, const NFDataList& arg);
-    int OnClassCallBackEvent(const NFGUID& self, const std::string& strClassName, const CLASS_OBJECT_EVENT event, const NFDataList& arg);
-    int OnPropertyCallBackEvent( const NFGUID& self, const std::string& strProperty, const NFData& oldVarList, const NFData& newVarList);
-    int OnPropertyStrCallBackEvent( const NFGUID& self, const std::string& strProperty, const NFData& oldVarList, const NFData& newVarList);
+    int OnClassCallBackEvent(const NFGUID& self, const std::string& className, const CLASS_OBJECT_EVENT event, const NFDataList& arg);
+    int OnPropertyCallBackEvent( const NFGUID& self, const std::string& propertyName, const NFData& oldVarList, const NFData& newVarList);
+    int OnPropertyStrCallBackEvent( const NFGUID& self, const std::string& propertyName, const NFData& oldVarList, const NFData& newVarList);
 
-    int OnHeartBeat(const NFGUID& self, const std::string& strHeartBeat, const float fTime, const int nCount);
+    int OnHeartBeat(const NFGUID& self, const std::string& heartBeat, const float time, const int count);
 
 protected:
     int64_t mLastTime;

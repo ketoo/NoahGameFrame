@@ -365,11 +365,11 @@ typedef int64_t NFSOCK;
 
 
 template<typename DTYPE>
-bool NF_StrTo(const std::string& strValue, DTYPE& nValue)
+bool NF_StrTo(const std::string& value, DTYPE& nValue)
 {
     try
     {
-        nValue = lexical_cast<DTYPE>(strValue);
+        nValue = lexical_cast<DTYPE>(value);
         return true;
     }
     catch (...)

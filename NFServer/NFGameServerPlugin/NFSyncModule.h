@@ -57,13 +57,13 @@ public:
     virtual bool RequireStop(const NFGUID self) override;
 
 protected:
-	int SyncHeart(const std::string& strHeartName, const float fTime, const int nCount);
+	int SyncHeart(const std::string& strHeartName, const float time, const int count);
 
-	int OnNPCClassEvent(const NFGUID& self, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFDataList& var);
-	int OnNPCGMPositionEvent(const NFGUID& self, const std::string& strPropertyName, const NFData& oldVar, const NFData& newVar);
+	int OnNPCClassEvent(const NFGUID& self, const std::string& className, const CLASS_OBJECT_EVENT classEvent, const NFDataList& var);
+	int OnNPCGMPositionEvent(const NFGUID& self, const std::string& propertyName, const NFData& oldVar, const NFData& newVar);
 
-	int OnPlayerClassEvent(const NFGUID& self, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFDataList& var);
-	int OnPlayerGMPositionEvent(const NFGUID& self, const std::string& strPropertyName, const NFData& oldVar, const NFData& newVar);
+	int OnPlayerClassEvent(const NFGUID& self, const std::string& className, const CLASS_OBJECT_EVENT classEvent, const NFDataList& var);
+	int OnPlayerGMPositionEvent(const NFGUID& self, const std::string& propertyName, const NFData& oldVar, const NFData& newVar);
 
 private:
     //<PlayerID, Position>

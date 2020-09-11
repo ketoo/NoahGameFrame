@@ -35,7 +35,7 @@ class NFIProxyServerToWorldModule
     : public  NFIModule
 {
 public:
-    virtual bool VerifyConnectData(const std::string& strAccount, const std::string& strKey) = 0;
+    virtual bool VerifyConnectData(const std::string& account, const std::string& strKey) = 0;
 };
 
 #endif

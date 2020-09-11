@@ -26,7 +26,7 @@
 //
 //   Mikko Mononen: compound shape support, more cmap formats
 //   Tor Andersson: kerning, subpixel rendering
-//   Dougall Johnson: OpenType / Type 2 font handling
+//   Dougall Johnson: Opetype / Type 2 font handling
 //   Daniel Ribeiro Maciel: basic GPOS-based kerning
 //
 //   Misc other:
@@ -61,7 +61,7 @@
 //   1.16 (2017-07-12) SDF support
 //   1.15 (2017-03-03) make more arguments const
 //   1.14 (2017-01-16) num-fonts-in-TTC function
-//   1.13 (2017-01-02) support OpenType fonts, certain Apple fonts
+//   1.13 (2017-01-02) support Opetype fonts, certain Apple fonts
 //   1.12 (2016-10-25) suppress warnings about casting away const with -Wcast-qual
 //   1.11 (2016-04-02) fix unused-variable warning
 //   1.10 (2016-04-02) user-defined fabs(); rare memory leak; remove duplicate typedef
@@ -1279,8 +1279,8 @@ static int stbtt__isfont(stbtt_uint8 *font)
    // check the version number
    if (stbtt_tag4(font, '1',0,0,0))  return 1; // TrueType 1
    if (stbtt_tag(font, "typ1"))   return 1; // TrueType with type 1 font -- we don't support this!
-   if (stbtt_tag(font, "OTTO"))   return 1; // OpenType with CFF
-   if (stbtt_tag4(font, 0,1,0,0)) return 1; // OpenType 1.0
+   if (stbtt_tag(font, "OTTO"))   return 1; // Opetype with CFF
+   if (stbtt_tag4(font, 0,1,0,0)) return 1; // Opetype 1.0
    if (stbtt_tag(font, "true"))   return 1; // Apple specification for TrueType fonts
    return 0;
 }
@@ -4805,13 +4805,13 @@ STBTT_DEF int stbtt_CompareUTF8toUTF16_bigendian(const char *s1, int len1, const
 
 // FULL VERSION HISTORY
 //
-//   1.19 (2018-02-11) OpenType GPOS kerning (horizontal only), STBTT_fmod
+//   1.19 (2018-02-11) Opetype GPOS kerning (horizontal only), STBTT_fmod
 //   1.18 (2018-01-29) add missing function
 //   1.17 (2017-07-23) make more arguments const; doc fix
 //   1.16 (2017-07-12) SDF support
 //   1.15 (2017-03-03) make more arguments const
 //   1.14 (2017-01-16) num-fonts-in-TTC function
-//   1.13 (2017-01-02) support OpenType fonts, certain Apple fonts
+//   1.13 (2017-01-02) support Opetype fonts, certain Apple fonts
 //   1.12 (2016-10-25) suppress warnings about casting away const with -Wcast-qual
 //   1.11 (2016-04-02) fix unused-variable warning
 //   1.10 (2016-04-02) allow user-defined fabs() replacement

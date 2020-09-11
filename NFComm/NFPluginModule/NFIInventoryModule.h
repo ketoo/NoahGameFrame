@@ -33,13 +33,13 @@
 class NFIInventoryModule : public NFIModule
 {
 public:
-    virtual NFGUID CreateEquip(const NFGUID& self, const std::string& strConfigName, const int nCount = 1) = 0;
-    virtual bool CreateItem(const NFGUID& self, const std::string& strConfigName, const int nCount) = 0;
+    virtual NFGUID CreateEquip(const NFGUID& self, const std::string& configName, const int count = 1) = 0;
+    virtual bool CreateItem(const NFGUID& self, const std::string& configName, const int count) = 0;
 	virtual int ItemCount(const NFGUID& self, const std::string& strItemConfigID) = 0;
 
     virtual bool DeleteEquip(const NFGUID& self, const NFGUID& id) = 0;
-	virtual bool DeleteItem(const NFGUID& self, const std::string& strItemConfigID, const int nCount) = 0;
-    virtual bool EnoughItem(const NFGUID& self, const std::string& strItemConfigID, const int nCount) = 0;
+	virtual bool DeleteItem(const NFGUID& self, const std::string& strItemConfigID, const int count) = 0;
+    virtual bool EnoughItem(const NFGUID& self, const std::string& strItemConfigID, const int count) = 0;
 };
 
 #endif

@@ -154,8 +154,8 @@ bool NFHttpServerModule::AddFilterCB(const std::string& strCommand, const HTTP_F
     return true;
 }
 
-bool NFHttpServerModule::ResponseMsg(NF_SHARE_PTR<NFHttpRequest> req, const std::string& strMsg, NFWebStatus code,
+bool NFHttpServerModule::ResponseMsg(NF_SHARE_PTR<NFHttpRequest> req, const std::string& msg, NFWebStatus code,
                                       const std::string& strReason)
 {
-    return m_pHttpServer->ResponseMsg(req, strMsg, code, strReason);
+    return m_pHttpServer->ResponseMsg(req, msg, code, strReason);
 }

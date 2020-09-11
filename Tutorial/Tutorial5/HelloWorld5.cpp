@@ -120,9 +120,9 @@ NFWebStatus NFHelloWorld5::OnFilter(NF_SHARE_PTR<NFHttpRequest> req)
 	return NFWebStatus::WEB_OK;
 }
 
-int NFHelloWorld5::OnHeartBeat(const NFGUID & self, const std::string & strHeartBeat, const float fTime, const int nCount)
+int NFHelloWorld5::OnHeartBeat(const NFGUID & self, const std::string & heartBeat, const float time, const int count)
 {
-	std::cout << strHeartBeat << std::endl;
+	std::cout << heartBeat << std::endl;
 
 	m_pHttpClientModule->DoGet("http://127.0.0.1:8080/json", this, &NFHelloWorld5::OnGetCallBack);
 	m_pHttpClientModule->DoGet("http://127.0.0.1:8080/json", [](const NFGUID id, const int state_code, const std::string & strRespData, const std::string & strMemoData) -> void
@@ -153,11 +153,11 @@ void NFHelloWorld5::OnPostCallBack(const NFGUID id, const int state_code, const 
 
 ///////////////////////////////////////web socket ////////////////////////////////////////
 
-void NFHelloWorld5::OnWebSocketTestProcess(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
+void NFHelloWorld5::OnWebSocketTestProcess(const NFSOCK sockIndex, const int msgID, const char* msg, const uint32_t len)
 {
-	std::string s(msg, nLen);
+	std::string s(msg, len);
     std::cout << s << std::endl;
-    m_pWSModule->SendMsg(s, nSockIndex);
+    m_pWSModule->SendMsg(s, sockIndex);
 }
 
 void NFHelloWorld5::OnTCPEvent(const NFSOCK fd, const NF_NET_EVENT event, NFINet * pNet)
@@ -165,11 +165,11 @@ void NFHelloWorld5::OnTCPEvent(const NFSOCK fd, const NF_NET_EVENT event, NFINet
 	std::cout << "fd:" << fd << " event " << event << std::endl;
 }
 
-void NFHelloWorld5::OnLoginProcess(const NFSOCK nSockIndex, const int nMsgID, const char * msg, const uint32_t nLen)
+void NFHelloWorld5::OnLoginProcess(const NFSOCK sockIndex, const int msgID, const char * msg, const uint32_t len)
 {
 	NFGUID nPlayerID;
 	NFMsg::ReqAccountLogin xMsg;
-	if (!m_pNetModule->ReceivePB(nMsgID, msg, nLen, xMsg, nPlayerID))
+	if (!m_pNetModule->ReceivePB(msgID, msg, len, xMsg, nPlayerID))
 	{
 		return;
 	}

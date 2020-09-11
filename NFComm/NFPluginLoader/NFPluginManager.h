@@ -70,19 +70,19 @@ public:
 
     //////////////////////////////////////////////////////////////////////////
 
-    virtual bool ReLoadPlugin(const std::string& strPluginDLLName) override;
+    virtual bool ReLoadPlugin(const std::string& pluginDLLName) override;
 
-    virtual NFIPlugin* FindPlugin(const std::string& strPluginName) override;
+    virtual NFIPlugin* FindPlugin(const std::string& pluginName) override;
 
-    virtual void AddModule(const std::string& strModuleName, NFIModule* pModule) override;
+    virtual void AddModule(const std::string& moduleName, NFIModule* pModule) override;
 
-    virtual void AddTestModule(const std::string& strModuleName, NFIModule* pModule) override;
+    virtual void AddTestModule(const std::string& moduleName, NFIModule* pModule) override;
 
-    virtual void RemoveModule(const std::string& strModuleName) override;
+    virtual void RemoveModule(const std::string& moduleName) override;
 
-    virtual NFIModule* FindModule(const std::string& strModuleName) override;
+    virtual NFIModule* FindModule(const std::string& moduleName) override;
 
-    virtual NFIModule* FindTestModule(const std::string& strModuleName) override;
+    virtual NFIModule* FindTestModule(const std::string& moduleName) override;
 
 	virtual std::list<NFIModule*> Modules() override;
 	virtual std::list<NFIModule*> TestModules() override;
@@ -91,7 +91,7 @@ public:
 
     virtual int GetAppID() const override;
 
-    virtual void SetAppID(const int nAppID) override;
+    virtual void SetAppID(const int appID) override;
 
     virtual bool IsRunningDocker() const override;
 
@@ -106,16 +106,16 @@ public:
     virtual const std::string& GetConfigPath() const override;
     virtual void SetConfigPath(const std::string & strPath) override;
 
-    virtual void SetConfigName(const std::string& strFileName) override;
+    virtual void SetConfigName(const std::string& fileName) override;
     virtual const std::string& GetConfigName() const override;
 
     virtual const std::string& GetAppName() const override;
 
-    virtual void SetAppName(const std::string& strAppName) override;
+    virtual void SetAppName(const std::string& appName) override;
 
     virtual const std::string& GetLogConfigName() const override;
 
-    virtual void SetLogConfigName(const std::string& strName) override;
+    virtual void SetLogConfigName(const std::string& name) override;
 
     virtual NFIPlugin* GetCurrentPlugin() override;
     virtual NFIModule* GetCurrentModule() override;
@@ -128,7 +128,7 @@ public:
 
     virtual void SetGetFileContentFunctor(GET_FILECONTENT_FUNCTOR fun) override;
 
-    virtual bool GetFileContent(const std::string &strFileName, std::string &strContent) override;
+    virtual bool GetFileContent(const std::string &fileName, std::string &content) override;
 
 	virtual void AddFileReplaceContent(const std::string& fileName, const std::string& content, const std::string& newValue);
 	virtual std::vector<NFReplaceContent> GetFileReplaceContents(const std::string& fileName);
@@ -138,10 +138,10 @@ protected:
     bool LoadStaticPlugin();
     bool CheckStaticPlugin();
 
-    bool LoadStaticPlugin(const std::string& strPluginDLLName);
-    bool LoadPluginLibrary(const std::string& strPluginDLLName);
-    bool UnLoadPluginLibrary(const std::string& strPluginDLLName);
-    bool UnLoadStaticPlugin(const std::string& strPluginDLLName);
+    bool LoadStaticPlugin(const std::string& pluginDLLName);
+    bool LoadPluginLibrary(const std::string& pluginDLLName);
+    bool UnLoadPluginLibrary(const std::string& pluginDLLName);
+    bool UnLoadStaticPlugin(const std::string& pluginDLLName);
 
 private:
     int mnAppID;

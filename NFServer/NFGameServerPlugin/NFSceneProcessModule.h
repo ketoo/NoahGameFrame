@@ -65,7 +65,7 @@ public:
     virtual bool AfterInit();
 	virtual bool ReadyExecute();
 
-	virtual bool RequestEnterScene(const NFGUID& self, const int nSceneID, const int nGroupID, const int nType, const NFVector3& pos, const NFDataList& argList);
+	virtual bool RequestEnterScene(const NFGUID& self, const int sceneID, const int groupID, const int type, const NFVector3& pos, const NFDataList& argList);
 
 protected:
 	bool LoadSceneResource(const std::string& strSceneIDName);
@@ -73,14 +73,14 @@ protected:
 
 protected:
 
-    int OnObjectClassEvent(const NFGUID& self, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFDataList& var);
+    int OnObjectClassEvent(const NFGUID& self, const std::string& className, const CLASS_OBJECT_EVENT classEvent, const NFDataList& var);
 	
-	int EnterSceneConditionEvent(const NFGUID& self, const int nSceneID, const int nGroupID, const int nType, const NFDataList& argList);
+	int EnterSceneConditionEvent(const NFGUID& self, const int sceneID, const int groupID, const int type, const NFDataList& argList);
 	
-	int BeforeEnterSceneGroupEvent(const NFGUID& self, const int nSceneID, const int nGroupID, const int nType, const NFDataList& argList);
-	int AfterEnterSceneGroupEvent(const NFGUID& self, const int nSceneID, const int nGroupID, const int nType, const NFDataList& argList);
-	int BeforeLeaveSceneGroupEvent(const NFGUID& self, const int nSceneID, const int nGroupID, const int nType, const NFDataList& argList);
-	int AfterLeaveSceneGroupEvent(const NFGUID& self, const int nSceneID, const int nGroupID, const int nType, const NFDataList& argList);
+	int BeforeEnterSceneGroupEvent(const NFGUID& self, const int sceneID, const int groupID, const int type, const NFDataList& argList);
+	int AfterEnterSceneGroupEvent(const NFGUID& self, const int sceneID, const int groupID, const int type, const NFDataList& argList);
+	int BeforeLeaveSceneGroupEvent(const NFGUID& self, const int sceneID, const int groupID, const int type, const NFDataList& argList);
+	int AfterLeaveSceneGroupEvent(const NFGUID& self, const int sceneID, const int groupID, const int type, const NFDataList& argList);
 
 private:
 

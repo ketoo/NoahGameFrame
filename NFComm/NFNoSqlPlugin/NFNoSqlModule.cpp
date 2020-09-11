@@ -67,22 +67,22 @@ bool NFNoSqlModule::AfterInit()
 		{
 			const std::string& strId = strIdList[i];
 
-			const int nServerID = m_pElementModule->GetPropertyInt32(strId, NFrame::NoSqlServer::ServerID());
+			const int serverID = m_pElementModule->GetPropertyInt32(strId, NFrame::NoSqlServer::ServerID());
 			const int nPort = m_pElementModule->GetPropertyInt32(strId, NFrame::NoSqlServer::Port());
-			const std::string& strIP = m_pElementModule->GetPropertyString(strId, NFrame::NoSqlServer::IP());
+			const std::string& ip = m_pElementModule->GetPropertyString(strId, NFrame::NoSqlServer::IP());
 			const std::string& strAuth = m_pElementModule->GetPropertyString(strId, NFrame::NoSqlServer::Auth());
 
-			if (this->AddConnectSql(strId, strIP, nPort, strAuth))
+			if (this->AddConnectSql(strId, ip, nPort, strAuth))
 			{
 				std::ostringstream strLog;
-				strLog << "Connected NoSqlServer[" << strIP << "], Port = [" << nPort << "], Passsword = [" << strAuth << "]";
+				strLog << "Connected NoSqlServer[" << ip << "], Port = [" << nPort << "], Passsword = [" << strAuth << "]";
 				m_pLogModule->LogInfo(strLog, __FUNCTION__, __LINE__);
 
 			}
 			else
 			{
 				std::ostringstream strLog;
-				strLog << "Cannot connect NoSqlServer[" << strIP << "], Port = " << nPort << "], Passsword = [" << strAuth << "]";
+				strLog << "Cannot connect NoSqlServer[" << ip << "], Port = " << nPort << "], Passsword = [" << strAuth << "]";
 				m_pLogModule->LogInfo(strLog, __FUNCTION__, __LINE__);
 			}
 		}
@@ -165,36 +165,36 @@ NF_SHARE_PTR<NFIRedisClient> NFNoSqlModule::GetDriverBySuit(const int nHash)
 return mxNoSqlDriver.GetElementBySuit(nHash);
 }
 */
-bool NFNoSqlModule::AddConnectSql(const std::string& strID, const std::string& strIP)
+bool NFNoSqlModule::AddConnectSql(const std::string& strID, const std::string& ip)
 {
 	if (!mxNoSqlDriver.ExistElement(strID))
 	{
 		NF_SHARE_PTR<NFRedisClient> pNoSqlDriver(new NFRedisClient());
-		pNoSqlDriver->Connect(strIP, 6379, "");
+		pNoSqlDriver->Connect(ip, 6379, "");
 		return mxNoSqlDriver.AddElement(strID, pNoSqlDriver);
 	}
 
 	return false;
 }
 
-bool NFNoSqlModule::AddConnectSql(const std::string& strID, const std::string& strIP, const int nPort)
+bool NFNoSqlModule::AddConnectSql(const std::string& strID, const std::string& ip, const int nPort)
 {
 	if (!mxNoSqlDriver.ExistElement(strID))
 	{
 		NF_SHARE_PTR<NFIRedisClient> pNoSqlDriver(new NFRedisClient());
-		pNoSqlDriver->Connect(strIP, nPort, "");
+		pNoSqlDriver->Connect(ip, nPort, "");
 		return mxNoSqlDriver.AddElement(strID, pNoSqlDriver);
 	}
 
 	return false;
 }
 
-bool NFNoSqlModule::AddConnectSql(const std::string& strID, const std::string& strIP, const int nPort, const std::string& strPass)
+bool NFNoSqlModule::AddConnectSql(const std::string& strID, const std::string& ip, const int nPort, const std::string& strPass)
 {
 	if (!mxNoSqlDriver.ExistElement(strID))
 	{
 		NF_SHARE_PTR<NFIRedisClient> pNoSqlDriver(NF_NEW NFRedisClient());
-		pNoSqlDriver->Connect(strIP, nPort, strPass);
+		pNoSqlDriver->Connect(ip, nPort, strPass);
 		return mxNoSqlDriver.AddElement(strID, pNoSqlDriver);
 	}
 

@@ -52,17 +52,17 @@ public:
 	virtual std::string GetTeamCacheKey(const NFGUID& self);
 	virtual std::string GetTeamInviteCacheKey(const NFGUID& self);
 
-	virtual std::string GetAccountCacheKey(const std::string& strAccount);
-	virtual std::string GetTileCacheKey(const int& nSceneID);
-	virtual std::string GetSceneCacheKey(const int& nSceneID);
+	virtual std::string GetAccountCacheKey(const std::string& account);
+	virtual std::string GetTileCacheKey(const int& sceneID);
+	virtual std::string GetSceneCacheKey(const int& sceneID);
 	virtual std::string GetCellCacheKey(const std::string& strCellID);
 
-    virtual NF_SHARE_PTR<NFIPropertyManager> NewPropertyManager(const std::string& strClassName);
-    virtual NF_SHARE_PTR<NFIRecordManager> NewRecordManager(const std::string& strClassName);
+    virtual NF_SHARE_PTR<NFIPropertyManager> NewPropertyManager(const std::string& className);
+    virtual NF_SHARE_PTR<NFIRecordManager> NewRecordManager(const std::string& className);
 
-	virtual NF_SHARE_PTR<NFIPropertyManager> GetPropertyInfo(const NFGUID& self, const std::string& strClassName);
-	virtual NF_SHARE_PTR<NFIRecordManager> GetRecordInfo(const NFGUID& self, const std::string& strClassName);
-	virtual bool GetRecordInfo(const NFGUID& self, const std::string& strClassName, NFMsg::ObjectRecordList* pRecordData);
+	virtual NF_SHARE_PTR<NFIPropertyManager> GetPropertyInfo(const NFGUID& self, const std::string& className);
+	virtual NF_SHARE_PTR<NFIRecordManager> GetRecordInfo(const NFGUID& self, const std::string& className);
+	virtual bool GetRecordInfo(const NFGUID& self, const std::string& className, NFMsg::ObjectRecordList* pRecordData);
 
 	//support hmset
     virtual bool SavePropertyInfo(const NFGUID& self, NF_SHARE_PTR<NFIPropertyManager> pPropertyManager, const int nExpireSecond = 0);
@@ -88,8 +88,8 @@ protected:
 	virtual bool ConvertPropertyManagerToVector(NF_SHARE_PTR<NFIPropertyManager> pPropertyManager, std::vector<std::string>& vKeyList, std::vector<std::string>& vValueList);
 	virtual bool ConvertRecordManagerToVector(NF_SHARE_PTR<NFIRecordManager> pRecordManager, std::vector<std::string>& vKeyList, std::vector<std::string>& vValueList);
 
-	virtual NF_SHARE_PTR<NFIPropertyManager> GetPropertyInfo(const NFGUID& self, const std::string& strClassName, std::vector<std::string>& vKeyList, std::vector<std::string>& vValueList);
-	virtual NF_SHARE_PTR<NFIRecordManager> GetRecordInfo(const NFGUID& self, const std::string& strClassName, std::vector<std::string>& vKeyList, std::vector<std::string>& vValueList);
+	virtual NF_SHARE_PTR<NFIPropertyManager> GetPropertyInfo(const NFGUID& self, const std::string& className, std::vector<std::string>& vKeyList, std::vector<std::string>& vValueList);
+	virtual NF_SHARE_PTR<NFIRecordManager> GetRecordInfo(const NFGUID& self, const std::string& className, std::vector<std::string>& vKeyList, std::vector<std::string>& vValueList);
 
 protected:
 	NFIKernelModule* m_pKernelModule;

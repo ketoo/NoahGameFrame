@@ -89,7 +89,7 @@ bool NFSyncModule::RequireStop(const NFGUID self)
 }
 
 
-int NFSyncModule::SyncHeart(const std::string & strHeartName, const float fTime, const int nCount)
+int NFSyncModule::SyncHeart(const std::string & strHeartName, const float time, const int count)
 {
 	//0.1s
 
@@ -97,23 +97,23 @@ int NFSyncModule::SyncHeart(const std::string & strHeartName, const float fTime,
 	return 0;
 }
 
-int NFSyncModule::OnNPCClassEvent(const NFGUID & self, const std::string & strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFDataList & var)
+int NFSyncModule::OnNPCClassEvent(const NFGUID & self, const std::string & className, const CLASS_OBJECT_EVENT classEvent, const NFDataList & var)
 {
-	if (CLASS_OBJECT_EVENT::COE_CREATE_FINISH == eClassEvent)
+	if (CLASS_OBJECT_EVENT::COE_CREATE_FINISH == classEvent)
 	{
 	}
 
 	return 0;
 }
 
-int NFSyncModule::OnNPCGMPositionEvent(const NFGUID & self, const std::string & strPropertyName, const NFData & oldVar, const NFData & newVar)
+int NFSyncModule::OnNPCGMPositionEvent(const NFGUID & self, const std::string & propertyName, const NFData & oldVar, const NFData & newVar)
 {
 	return 0;
 }
 
-int NFSyncModule::OnPlayerClassEvent(const NFGUID & self, const std::string & strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFDataList & var)
+int NFSyncModule::OnPlayerClassEvent(const NFGUID & self, const std::string & className, const CLASS_OBJECT_EVENT classEvent, const NFDataList & var)
 {
-	if (CLASS_OBJECT_EVENT::COE_CREATE_FINISH == eClassEvent)
+	if (CLASS_OBJECT_EVENT::COE_CREATE_FINISH == classEvent)
 	{
 		m_pKernelModule->AddPropertyCallBack(self, NFrame::Player::GMMoveTo(), this, &NFSyncModule::OnPlayerGMPositionEvent);
 	}
@@ -121,7 +121,7 @@ int NFSyncModule::OnPlayerClassEvent(const NFGUID & self, const std::string & st
 	return 0;
 }
 
-int NFSyncModule::OnPlayerGMPositionEvent(const NFGUID & self, const std::string & strPropertyName, const NFData & oldVar, const NFData & newVar)
+int NFSyncModule::OnPlayerGMPositionEvent(const NFGUID & self, const std::string & propertyName, const NFData & oldVar, const NFData & newVar)
 {
 	NFMsg::ReqAckPlayerPosSync xMsg;
 	NFMsg::PosSyncUnit* syncUnit = xMsg.add_sync_unit();
@@ -134,10 +134,10 @@ int NFSyncModule::OnPlayerGMPositionEvent(const NFGUID & self, const std::string
 
 		m_pKernelModule->SetPropertyVector3(self, NFrame::IObject::Position(), v);
 
-		const int nSceneID = m_pKernelModule->GetPropertyInt32(self, NFrame::Player::SceneID());
-		const int nGroupID = m_pKernelModule->GetPropertyInt32(self, NFrame::Player::GroupID());
+		const int sceneID = m_pKernelModule->GetPropertyInt32(self, NFrame::Player::SceneID());
+		const int groupID = m_pKernelModule->GetPropertyInt32(self, NFrame::Player::GroupID());
 
-		m_pGameServerNet_ServerModule->SendGroupMsgPBToGate(NFMsg::ACK_MOVE_IMMUNE, xMsg, nSceneID, nGroupID);
+		m_pGameServerNet_ServerModule->SendGroupMsgPBToGate(NFMsg::ACK_MOVE_IMMUNE, xMsg, sceneID, groupID);
 	}
 
 	return 0;

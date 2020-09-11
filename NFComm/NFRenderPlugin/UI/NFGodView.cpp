@@ -406,8 +406,8 @@ void NFGodView::RenderScene(const int sceneID, const int groupID)
 			for (int k = 0; k < list.GetCount(); ++k)
 			{
 				const NFGUID& guid = list.Object(k);
-				const std::string& strClassName = m_pKernelModule->GetPropertyString(guid, NFrame::IObject::ClassName());
-				std::string buttonName = strClassName + "<" + guid.ToString() + ">";
+				const std::string& className = m_pKernelModule->GetPropertyString(guid, NFrame::IObject::ClassName());
+				std::string buttonName = className + "<" + guid.ToString() + ">";
 
 				mTreeView.AddSubTreeNode(nodeId, guid, buttonName.c_str());
 			}
@@ -424,8 +424,8 @@ void NFGodView::RenderScene(const int sceneID, const int groupID)
 		for (int k = 0; k < list.GetCount(); ++k)
 		{
 			const NFGUID& guid = list.Object(k);
-			const std::string& strClassName = m_pKernelModule->GetPropertyString(guid, NFrame::IObject::ClassName());
-			std::string buttonName = strClassName + "<" + guid.ToString() + ">";
+			const std::string& className = m_pKernelModule->GetPropertyString(guid, NFrame::IObject::ClassName());
+			std::string buttonName = className + "<" + guid.ToString() + ">";
 
 			mTreeView.AddSubTreeNode(nodeId, guid, buttonName.c_str());
 		}
@@ -505,9 +505,9 @@ void NFGodView::UpdateSceneObjectNodePosition(const int sceneID, const int group
 	}
 }
 
-int NFGodView::OnClassCommonEvent(const NFGUID& self, const std::string& strClassNames, const CLASS_OBJECT_EVENT eClassEvent, const NFDataList& var)
+int NFGodView::OnClassCommonEvent(const NFGUID& self, const std::string& classNames, const CLASS_OBJECT_EVENT classEvent, const NFDataList& var)
 {
-	if (eClassEvent == CLASS_OBJECT_EVENT::COE_DESTROY)
+	if (classEvent == CLASS_OBJECT_EVENT::COE_DESTROY)
 	{
 		const int scene = m_pKernelModule->GetPropertyInt32(self, NFrame::IObject::SceneID());
 		const int group = m_pKernelModule->GetPropertyInt32(self, NFrame::IObject::GroupID());
@@ -526,7 +526,7 @@ int NFGodView::OnClassCommonEvent(const NFGUID& self, const std::string& strClas
 			}
 		}
 	}
-	else if (eClassEvent == CLASS_OBJECT_EVENT::COE_CREATE_FINISH)
+	else if (classEvent == CLASS_OBJECT_EVENT::COE_CREATE_FINISH)
 	{
 		int scene = m_pKernelModule->GetPropertyInt32(self, NFrame::IObject::SceneID());
 		int group = m_pKernelModule->GetPropertyInt32(self, NFrame::IObject::GroupID());

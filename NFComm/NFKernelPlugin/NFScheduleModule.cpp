@@ -54,9 +54,10 @@ bool NFScheduleModule::Init()
 {
 	m_pLogModule = pPluginManager->FindModule<NFILogModule>();
 	m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>();
-	
-	m_pKernelModule->RegisterCommonClassEvent(this, &NFScheduleModule::OnClassCommonEvent);
+	m_pSceneModule = pPluginManager->FindModule<NFISceneModule>();
 
+	m_pKernelModule->RegisterCommonClassEvent(this, &NFScheduleModule::OnClassCommonEvent);
+	m_pSceneModule->AddSceneGroupDestroyedCallBack(this, &NFScheduleModule::OnGroupCommonEvent);
 /*
 	std::set<TickElement> test;
 	for (int i = 0 ; i < 100;  ++i)
@@ -132,7 +133,7 @@ bool NFScheduleModule::Execute()
 	return true;
 }
 
-bool NFScheduleModule::AddSchedule(const NFGUID self, const std::string& strScheduleName, const OBJECT_SCHEDULE_FUNCTOR_PTR& cb, const float fTime, const int nCount)
+bool NFScheduleModule::AddSchedule(const NFGUID self, const std::string& scheduleName, const OBJECT_SCHEDULE_FUNCTOR_PTR& cb, const float time, const int count)
 {
 	auto objectMap = mObjectScheduleMap.GetElement(self);
 	if (!objectMap)
@@ -141,20 +142,20 @@ bool NFScheduleModule::AddSchedule(const NFGUID self, const std::string& strSche
 		mObjectScheduleMap.AddElement(self, objectMap);
 	}
 
-	auto scheduleObject = objectMap->GetElement(strScheduleName);
+	auto scheduleObject = objectMap->GetElement(scheduleName);
 	if (!scheduleObject)
 	{
 		scheduleObject = NF_SHARE_PTR<NFScheduleElement>(NF_NEW NFScheduleElement());
-		scheduleObject->mstrScheduleName = strScheduleName;
-		scheduleObject->mfIntervalTime = fTime;
-		scheduleObject->mnTriggerTime = NFGetTimeMS() + (NFINT64)(fTime * 1000);
-		scheduleObject->mnRemainCount = nCount;
+		scheduleObject->mstrScheduleName = scheduleName;
+		scheduleObject->mfIntervalTime = time;
+		scheduleObject->mnTriggerTime = NFGetTimeMS() + (NFINT64)(time * 1000);
+		scheduleObject->mnRemainCount = count;
 		scheduleObject->self = self;
 
 
 		scheduleObject->mxObjectFunctor.Add(cb);
 
-		objectMap->AddElement(strScheduleName, scheduleObject);
+		objectMap->AddElement(scheduleName, scheduleObject);
 
 		TickElement tickElement;
 		tickElement.scheduleName = scheduleObject->mstrScheduleName;
@@ -172,18 +173,18 @@ bool NFScheduleModule::RemoveSchedule(const NFGUID self)
 	return mObjectScheduleMap.RemoveElement(self);
 }
 
-bool NFScheduleModule::RemoveSchedule(const NFGUID self, const std::string& strScheduleName)
+bool NFScheduleModule::RemoveSchedule(const NFGUID self, const std::string& scheduleName)
 {
 	auto objectMap = mObjectScheduleMap.GetElement(self);
 	if (objectMap)
 	{
-		return objectMap->RemoveElement(strScheduleName);
+		return objectMap->RemoveElement(scheduleName);
 	}
 
 	return false;
 }
 
-bool NFScheduleModule::ExistSchedule(const NFGUID self, const std::string& strScheduleName)
+bool NFScheduleModule::ExistSchedule(const NFGUID self, const std::string& scheduleName)
 {
 	auto objectScheduleMap = mObjectScheduleMap.GetElement(self);
 	if (NULL == objectScheduleMap)
@@ -191,10 +192,10 @@ bool NFScheduleModule::ExistSchedule(const NFGUID self, const std::string& strSc
 		return false;
 	}
 
-	return objectScheduleMap->ExistElement(strScheduleName);
+	return objectScheduleMap->ExistElement(scheduleName);
 }
 
-NF_SHARE_PTR<NFScheduleElement> NFScheduleModule::GetSchedule(const NFGUID self, const std::string & strScheduleName)
+NF_SHARE_PTR<NFScheduleElement> NFScheduleModule::GetSchedule(const NFGUID self, const std::string & scheduleName)
 {
 	NF_SHARE_PTR< NFMapEx <std::string, NFScheduleElement >> xObjectScheduleMap = mObjectScheduleMap.GetElement(self);
 	if (NULL == xObjectScheduleMap)
@@ -202,16 +203,22 @@ NF_SHARE_PTR<NFScheduleElement> NFScheduleModule::GetSchedule(const NFGUID self,
 		return nullptr;
 	}
 
-	return xObjectScheduleMap->GetElement(strScheduleName);
+	return xObjectScheduleMap->GetElement(scheduleName);
 }
 
 
-int NFScheduleModule::OnClassCommonEvent(const NFGUID & self, const std::string & strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFDataList & var)
+int NFScheduleModule::OnClassCommonEvent(const NFGUID & self, const std::string & className, const CLASS_OBJECT_EVENT classEvent, const NFDataList & var)
 {
-	if (CLASS_OBJECT_EVENT::COE_DESTROY == eClassEvent)
+	if (CLASS_OBJECT_EVENT::COE_DESTROY == classEvent)
 	{
 		this->RemoveSchedule(self);
 	}
 
+	return 0;
+}
+
+int NFScheduleModule::OnGroupCommonEvent(const NFGUID &self, const int scene, const int group, const int type, const NFDataList &arg)
+{
+	this->RemoveSchedule(NFGUID(scene, group));
 	return 0;
 }

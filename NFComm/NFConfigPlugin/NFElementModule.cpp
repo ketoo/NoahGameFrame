@@ -169,11 +169,11 @@ bool NFElementModule::Load()
         }
         //////////////////////////////////////////////////////////////////////////
 		std::string strFile = pPluginManager->GetConfigPath() + strInstancePath;
-		std::string strContent;
-		pPluginManager->GetFileContent(strFile, strContent);
+		std::string content;
+		pPluginManager->GetFileContent(strFile, content);
 
 		rapidxml::xml_document<> xDoc;
-		xDoc.parse<0>((char*)strContent.c_str());
+		xDoc.parse<0>((char*)content.c_str());
         //////////////////////////////////////////////////////////////////////////
         //support for unlimited layer class inherits
         rapidxml::xml_node<>* root = xDoc.first_node();
@@ -237,26 +237,26 @@ bool NFElementModule::CheckRef()
 bool NFElementModule::Load(rapidxml::xml_node<>* attrNode, NF_SHARE_PTR<NFIClass> pLogicClass)
 {
     //attrNode is the node of a object
-    std::string strConfigID = attrNode->first_attribute("Id")->value();
-    if (strConfigID.empty())
+    std::string configID = attrNode->first_attribute("Id")->value();
+    if (configID.empty())
     {
-        NFASSERT(0, strConfigID, __FILE__, __FUNCTION__);
+        NFASSERT(0, configID, __FILE__, __FUNCTION__);
         return false;
     }
 
-    if (ExistElement(strConfigID))
+    if (ExistElement(configID))
     {
-        NFASSERT(0, strConfigID, __FILE__, __FUNCTION__);
+        NFASSERT(0, configID, __FILE__, __FUNCTION__);
         return false;
     }
 
     NF_SHARE_PTR<ElementConfigInfo> pElementInfo(NF_NEW ElementConfigInfo());
-    AddElement(strConfigID, pElementInfo);
+    AddElement(configID, pElementInfo);
 
     //can find all configid by class name
-    pLogicClass->AddId(strConfigID);
+    pLogicClass->AddId(configID);
 
-    //ElementConfigInfo* pElementInfo = CreateElement( strConfigID, pElementInfo );
+    //ElementConfigInfo* pElementInfo = CreateElement( configID, pElementInfo );
     NF_SHARE_PTR<NFIPropertyManager> pElementPropertyManager = pElementInfo->GetPropertyManager();
     NF_SHARE_PTR<NFIRecordManager> pElementRecordManager = pElementInfo->GetRecordManager();
 
@@ -391,7 +391,7 @@ bool NFElementModule::Load(rapidxml::xml_node<>* attrNode, NF_SHARE_PTR<NFIClass
 
 
     NFData xDataID;
-    xDataID.SetString(strConfigID);
+    xDataID.SetString(configID);
     pElementPropertyManager->SetProperty("ID", xDataID);
     pElementPropertyManager->SetProperty("ConfigID", xDataID);
 
@@ -403,9 +403,9 @@ bool NFElementModule::Save()
     return true;
 }
 
-NFINT64 NFElementModule::GetPropertyInt(const std::string& strConfigName, const std::string& strPropertyName)
+NFINT64 NFElementModule::GetPropertyInt(const std::string& configName, const std::string& propertyName)
 {
-    NF_SHARE_PTR<NFIProperty> pProperty = GetProperty(strConfigName, strPropertyName);
+    NF_SHARE_PTR<NFIProperty> pProperty = GetProperty(configName, propertyName);
     if (pProperty)
     {
         return pProperty->GetInt();
@@ -414,9 +414,9 @@ NFINT64 NFElementModule::GetPropertyInt(const std::string& strConfigName, const 
     return 0;
 }
 
-int NFElementModule::GetPropertyInt32(const std::string& strConfigName, const std::string& strPropertyName)
+int NFElementModule::GetPropertyInt32(const std::string& configName, const std::string& propertyName)
 {
-	NF_SHARE_PTR<NFIProperty> pProperty = GetProperty(strConfigName, strPropertyName);
+	NF_SHARE_PTR<NFIProperty> pProperty = GetProperty(configName, propertyName);
 	if (pProperty)
 	{
 		return pProperty->GetInt32();
@@ -425,9 +425,9 @@ int NFElementModule::GetPropertyInt32(const std::string& strConfigName, const st
 	return 0;
 }
 
-double NFElementModule::GetPropertyFloat(const std::string& strConfigName, const std::string& strPropertyName)
+double NFElementModule::GetPropertyFloat(const std::string& configName, const std::string& propertyName)
 {
-    NF_SHARE_PTR<NFIProperty> pProperty = GetProperty(strConfigName, strPropertyName);
+    NF_SHARE_PTR<NFIProperty> pProperty = GetProperty(configName, propertyName);
     if (pProperty)
     {
         return pProperty->GetFloat();
@@ -436,9 +436,9 @@ double NFElementModule::GetPropertyFloat(const std::string& strConfigName, const
     return 0.0;
 }
 
-const std::string& NFElementModule::GetPropertyString(const std::string& strConfigName, const std::string& strPropertyName)
+const std::string& NFElementModule::GetPropertyString(const std::string& configName, const std::string& propertyName)
 {
-    NF_SHARE_PTR<NFIProperty> pProperty = GetProperty(strConfigName, strPropertyName);
+    NF_SHARE_PTR<NFIProperty> pProperty = GetProperty(configName, propertyName);
     if (pProperty)
     {
         return pProperty->GetString();
@@ -447,9 +447,9 @@ const std::string& NFElementModule::GetPropertyString(const std::string& strConf
     return  NULL_STR;
 }
 
-const NFVector2 NFElementModule::GetPropertyVector2(const std::string & strConfigName, const std::string & strPropertyName)
+const NFVector2 NFElementModule::GetPropertyVector2(const std::string & configName, const std::string & propertyName)
 {
-	NF_SHARE_PTR<NFIProperty> pProperty = GetProperty(strConfigName, strPropertyName);
+	NF_SHARE_PTR<NFIProperty> pProperty = GetProperty(configName, propertyName);
 	if (pProperty)
 	{
 		return pProperty->GetVector2();
@@ -458,9 +458,9 @@ const NFVector2 NFElementModule::GetPropertyVector2(const std::string & strConfi
 	return NFVector2();
 }
 
-const NFVector3 NFElementModule::GetPropertyVector3(const std::string & strConfigName, const std::string & strPropertyName)
+const NFVector3 NFElementModule::GetPropertyVector3(const std::string & configName, const std::string & propertyName)
 {
-	NF_SHARE_PTR<NFIProperty> pProperty = GetProperty(strConfigName, strPropertyName);
+	NF_SHARE_PTR<NFIProperty> pProperty = GetProperty(configName, propertyName);
 	if (pProperty)
 	{
 		return pProperty->GetVector3();
@@ -469,21 +469,21 @@ const NFVector3 NFElementModule::GetPropertyVector3(const std::string & strConfi
 	return NFVector3();
 }
 
-const std::vector<std::string> NFElementModule::GetListByProperty(const std::string & strClassName, const std::string & strPropertyName, NFINT64 nValue)
+const std::vector<std::string> NFElementModule::GetListByProperty(const std::string & className, const std::string & propertyName, NFINT64 nValue)
 {
 	std::vector<std::string> xList;
 
-	NF_SHARE_PTR<NFIClass> xClass = m_pClassModule->GetElement(strClassName);
+	NF_SHARE_PTR<NFIClass> xClass = m_pClassModule->GetElement(className);
 	if (nullptr != xClass)
 	{
 		const std::vector<std::string>& xElementList = xClass->GetIDList();
 		for (int i = 0; i < xElementList.size(); ++i)
 		{
-			const std::string& strConfigID = xElementList[i];
-			NFINT64 nElementValue = GetPropertyInt(strConfigID, strPropertyName);
+			const std::string& configID = xElementList[i];
+			NFINT64 nElementValue = GetPropertyInt(configID, propertyName);
 			if (nValue == nElementValue)
 			{
-				xList.push_back(strConfigID);
+				xList.push_back(configID);
 			}
 		}
 	}
@@ -491,21 +491,21 @@ const std::vector<std::string> NFElementModule::GetListByProperty(const std::str
 	return xList;
 }
 
-const std::vector<std::string> NFElementModule::GetListByProperty(const std::string & strClassName, const std::string & strPropertyName, const std::string & nValue)
+const std::vector<std::string> NFElementModule::GetListByProperty(const std::string & className, const std::string & propertyName, const std::string & nValue)
 {
 	std::vector<std::string> xList;
 
-	NF_SHARE_PTR<NFIClass> xClass = m_pClassModule->GetElement(strClassName);
+	NF_SHARE_PTR<NFIClass> xClass = m_pClassModule->GetElement(className);
 	if (nullptr != xClass)
 	{
 		const std::vector<std::string>& xElementList = xClass->GetIDList();
 		for (int i = 0; i < xElementList.size(); ++i)
 		{
-			const std::string& strConfigID = xElementList[i];
-			const std::string& strElementValue = GetPropertyString(strConfigID, strPropertyName);
+			const std::string& configID = xElementList[i];
+			const std::string& strElementValue = GetPropertyString(configID, propertyName);
 			if (nValue == strElementValue)
 			{
-				xList.push_back(strConfigID);
+				xList.push_back(configID);
 			}
 		}
 	}
@@ -513,20 +513,20 @@ const std::vector<std::string> NFElementModule::GetListByProperty(const std::str
 	return xList;
 }
 
-NF_SHARE_PTR<NFIProperty> NFElementModule::GetProperty(const std::string& strConfigName, const std::string& strPropertyName)
+NF_SHARE_PTR<NFIProperty> NFElementModule::GetProperty(const std::string& configName, const std::string& propertyName)
 {
-    NF_SHARE_PTR<ElementConfigInfo> pElementInfo = GetElement(strConfigName);
+    NF_SHARE_PTR<ElementConfigInfo> pElementInfo = GetElement(configName);
     if (pElementInfo)
     {
-        return pElementInfo->GetPropertyManager()->GetElement(strPropertyName);
+        return pElementInfo->GetPropertyManager()->GetElement(propertyName);
     }
 
     return NULL;
 }
 
-NF_SHARE_PTR<NFIPropertyManager> NFElementModule::GetPropertyManager(const std::string& strConfigName)
+NF_SHARE_PTR<NFIPropertyManager> NFElementModule::GetPropertyManager(const std::string& configName)
 {
-    NF_SHARE_PTR<ElementConfigInfo> pElementInfo = GetElement(strConfigName);
+    NF_SHARE_PTR<ElementConfigInfo> pElementInfo = GetElement(configName);
     if (pElementInfo)
     {
         return pElementInfo->GetPropertyManager();
@@ -535,9 +535,9 @@ NF_SHARE_PTR<NFIPropertyManager> NFElementModule::GetPropertyManager(const std::
     return NULL;
 }
 
-NF_SHARE_PTR<NFIRecordManager> NFElementModule::GetRecordManager(const std::string& strConfigName)
+NF_SHARE_PTR<NFIRecordManager> NFElementModule::GetRecordManager(const std::string& configName)
 {
-    NF_SHARE_PTR<ElementConfigInfo> pElementInfo = GetElement(strConfigName);
+    NF_SHARE_PTR<ElementConfigInfo> pElementInfo = GetElement(configName);
     if (pElementInfo)
     {
         return pElementInfo->GetRecordManager();
@@ -545,15 +545,15 @@ NF_SHARE_PTR<NFIRecordManager> NFElementModule::GetRecordManager(const std::stri
     return NULL;
 }
 
-bool NFElementModule::LoadSceneInfo(const std::string& strFileName, const std::string& strClassName)
+bool NFElementModule::LoadSceneInfo(const std::string& fileName, const std::string& className)
 {
-	std::string strContent;
-	pPluginManager->GetFileContent(strFileName, strContent);
+	std::string content;
+	pPluginManager->GetFileContent(fileName, content);
 
 	rapidxml::xml_document<> xDoc;
-	xDoc.parse<0>((char*)strContent.c_str());
+	xDoc.parse<0>((char*)content.c_str());
 	
-    NF_SHARE_PTR<NFIClass> pLogicClass = m_pClassModule->GetElement(strClassName.c_str());
+    NF_SHARE_PTR<NFIClass> pLogicClass = m_pClassModule->GetElement(className.c_str());
     if (pLogicClass)
     {
         //support for unlimited layer class inherits
@@ -565,15 +565,15 @@ bool NFElementModule::LoadSceneInfo(const std::string& strFileName, const std::s
     }
     else
     {
-        std::cout << "error load scene info failed, name is:" << strClassName << " file name is :" << strFileName << std::endl;
+        std::cout << "error load scene info failed, name is:" << className << " file name is :" << fileName << std::endl;
     }
 
     return true;
 }
 
-bool NFElementModule::ExistElement(const std::string& strConfigName)
+bool NFElementModule::ExistElement(const std::string& configName)
 {
-    NF_SHARE_PTR<ElementConfigInfo> pElementInfo = GetElement(strConfigName);
+    NF_SHARE_PTR<ElementConfigInfo> pElementInfo = GetElement(configName);
     if (pElementInfo)
     {
         return true;
@@ -582,18 +582,18 @@ bool NFElementModule::ExistElement(const std::string& strConfigName)
     return false;
 }
 
-bool NFElementModule::ExistElement(const std::string& strClassName, const std::string& strConfigName)
+bool NFElementModule::ExistElement(const std::string& className, const std::string& configName)
 {
-    NF_SHARE_PTR<ElementConfigInfo> pElementInfo = GetElement(strConfigName);
+    NF_SHARE_PTR<ElementConfigInfo> pElementInfo = GetElement(configName);
     if (!pElementInfo)
     {
         return false;
     }
 
     const std::string& strClass = pElementInfo->GetPropertyManager()->GetPropertyString("ClassName");
-    if (strClass != strClassName)
+    if (strClass != className)
     {
-        return ExistElement(strConfigName);
+        return ExistElement(configName);
     }
 
     return true;
@@ -601,8 +601,8 @@ bool NFElementModule::ExistElement(const std::string& strClassName, const std::s
 
 bool NFElementModule::LegalNumber(const char* str)
 {
-    int nLen = int(strlen(str));
-    if (nLen <= 0)
+    int len = int(strlen(str));
+    if (len <= 0)
     {
         return false;
     }
@@ -613,7 +613,7 @@ bool NFElementModule::LegalNumber(const char* str)
         nStart = 1;
     }
 
-    for (int i = nStart; i < nLen; ++i)
+    for (int i = nStart; i < len; ++i)
     {
         if (!isdigit(str[i]))
         {
@@ -627,14 +627,14 @@ bool NFElementModule::LegalNumber(const char* str)
 bool NFElementModule::LegalFloat(const char * str)
 {
 
-	int nLen = int(strlen(str));
-	if (nLen <= 0)
+	int len = int(strlen(str));
+	if (len <= 0)
 	{
 		return false;
 	}
 
 	int nStart = 0;
-	int nEnd = nLen;
+	int nEnd = len;
 	if ('-' == str[0])
 	{
 		nStart = 1;

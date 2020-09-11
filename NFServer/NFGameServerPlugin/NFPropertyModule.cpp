@@ -54,17 +54,17 @@ bool NFPropertyModule::AfterInit()
     return true;
 }
 
-int64_t NFPropertyModule::GetPropertyValue(const NFGUID& self, const std::string& strPropertyName, const NFPropertyGroup eGroupType)
+int64_t NFPropertyModule::GetPropertyValue(const NFGUID& self, const std::string& propertyName, const NFPropertyGroup eGroupType)
 {
     if (NFPropertyGroup::NPG_ALL != eGroupType)
     {
-        return m_pKernelModule->GetRecordInt(self, NFrame::Player::CommValue::ThisName(), eGroupType, strPropertyName);
+        return m_pKernelModule->GetRecordInt(self, NFrame::Player::CommValue::ThisName(), eGroupType, propertyName);
     }
 
     return 0;
 }
 
-int NFPropertyModule::SetPropertyValue(const NFGUID& self, const std::string& strPropertyName, const NFPropertyGroup eGroupType, const int64_t nValue)
+int NFPropertyModule::SetPropertyValue(const NFGUID& self, const std::string& propertyName, const NFPropertyGroup eGroupType, const int64_t nValue)
 {
     if (NFPropertyGroup::NPG_ALL != eGroupType)
     {
@@ -75,7 +75,7 @@ int NFPropertyModule::SetPropertyValue(const NFGUID& self, const std::string& st
             if (pRecord)
             {
                 pRecord->SetUsed(eGroupType, true);
-                return pRecord->SetInt(eGroupType, strPropertyName, nValue);
+                return pRecord->SetInt(eGroupType, propertyName, nValue);
             }
         }
     }
@@ -83,7 +83,7 @@ int NFPropertyModule::SetPropertyValue(const NFGUID& self, const std::string& st
     return 0;
 }
 
-int NFPropertyModule::OnObjectLevelEvent(const NFGUID& self, const std::string& strPropertyName, const NFData& oldVar, const NFData& newVar)
+int NFPropertyModule::OnObjectLevelEvent(const NFGUID& self, const std::string& propertyName, const NFData& oldVar, const NFData& newVar)
 {
     const int job = m_pKernelModule->GetPropertyInt32(self, NFrame::Player::Job());
     const int level = m_pKernelModule->GetPropertyInt32(self, NFrame::Player::Level());
@@ -110,7 +110,7 @@ int NFPropertyModule::OnObjectLevelEvent(const NFGUID& self, const std::string& 
     return 0;
 }
 
-int NFPropertyModule::OnObjectConfigIDEvent(const NFGUID& self, const std::string& strPropertyName, const NFData& oldVar, const NFData& newVar)
+int NFPropertyModule::OnObjectConfigIDEvent(const NFGUID& self, const std::string& propertyName, const NFData& oldVar, const NFData& newVar)
 {
 	//for appearance
 	return 0;
@@ -118,10 +118,10 @@ int NFPropertyModule::OnObjectConfigIDEvent(const NFGUID& self, const std::strin
 
 int NFPropertyModule::OnRecordEvent(const NFGUID& self, const RECORD_EVENT_DATA& xEventData, const NFData& oldVar, const NFData& newVar)
 {
-	const std::string& strRecordName = xEventData.strRecordName;
+	const std::string& recordName = xEventData.recordName;
     const int nOpType = xEventData.nOpType;
-    const int nRow = xEventData.nRow;
-    const int nCol = xEventData.nCol;
+    const int row = xEventData.row;
+    const int col = xEventData.col;
 
     int nAllValue = 0;
     NF_SHARE_PTR<NFIRecord> pRecord = m_pKernelModule->FindRecord(self, NFrame::Player::CommValue::ThisName());
@@ -134,21 +134,21 @@ int NFPropertyModule::OnRecordEvent(const NFGUID& self, const RECORD_EVENT_DATA&
 
 		if (i < pRecord->GetRows())
         {
-            int nValue = pRecord->GetInt32(i, nCol);
+            int nValue = pRecord->GetInt32(i, col);
             nAllValue += nValue;
         }
     }
 
-    m_pKernelModule->SetPropertyInt(self, pRecord->GetColTag(nCol), nAllValue);
+    m_pKernelModule->SetPropertyInt(self, pRecord->GetColTag(col), nAllValue);
 
     return 0;
 }
 
-int NFPropertyModule::OnObjectClassEvent(const NFGUID& self, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFDataList& var)
+int NFPropertyModule::OnObjectClassEvent(const NFGUID& self, const std::string& className, const CLASS_OBJECT_EVENT classEvent, const NFDataList& var)
 {
-    if (strClassName == NFrame::Player::ThisName())
+    if (className == NFrame::Player::ThisName())
     {
-		if (CLASS_OBJECT_EVENT::COE_CREATE_NODATA == eClassEvent)
+		if (CLASS_OBJECT_EVENT::COE_CREATE_NODATA == classEvent)
 		{
 			NF_SHARE_PTR<NFIRecord> pRecord = m_pKernelModule->FindRecord(self, NFrame::Player::CommValue::ThisName());
 			if (pRecord)
@@ -160,18 +160,18 @@ int NFPropertyModule::OnObjectClassEvent(const NFGUID& self, const std::string& 
 			}
 
 		}
-		else if (CLASS_OBJECT_EVENT::COE_CREATE_BEFORE_ATTACHDATA == eClassEvent)
+		else if (CLASS_OBJECT_EVENT::COE_CREATE_BEFORE_ATTACHDATA == classEvent)
         {
            //cant attach the level event here as we will reset the property configID and Level by sequence
            //as a result, the level event will be triggered first, then configID event triggered late, or the trigger sequence in reverse
            //that means if we added attach the level event here, we cant get the correct result
         }
-		else if (CLASS_OBJECT_EVENT::COE_CREATE_LOADDATA == eClassEvent)
+		else if (CLASS_OBJECT_EVENT::COE_CREATE_LOADDATA == classEvent)
         {
            
 
         }
-		else if (CLASS_OBJECT_EVENT::COE_CREATE_AFTER_ATTACHDATA == eClassEvent)
+		else if (CLASS_OBJECT_EVENT::COE_CREATE_AFTER_ATTACHDATA == classEvent)
         {
             int onlineCount = m_pKernelModule->GetPropertyInt32(self, NFrame::Player::OnlineCount());
             m_pKernelModule->SetPropertyInt(self, NFrame::Player::OnlineCount(), (onlineCount + 1));
@@ -188,10 +188,10 @@ int NFPropertyModule::OnObjectClassEvent(const NFGUID& self, const std::string& 
                 OnObjectLevelEvent(self, NFrame::Player::Level(), level, level);
             }
 		}
-        else if (CLASS_OBJECT_EVENT::COE_CREATE_AFTER_EFFECT == eClassEvent)
+        else if (CLASS_OBJECT_EVENT::COE_CREATE_AFTER_EFFECT == classEvent)
         {
         }
-        else if (CLASS_OBJECT_EVENT::COE_CREATE_READY == eClassEvent)
+        else if (CLASS_OBJECT_EVENT::COE_CREATE_READY == classEvent)
         {
 			RefreshAllProperty(self);
 			FullHPMP(self);
@@ -204,10 +204,10 @@ int NFPropertyModule::OnObjectClassEvent(const NFGUID& self, const std::string& 
 			m_pKernelModule->AddPropertyCallBack(self, NFrame::Player::ConfigID(), this, &NFPropertyModule::OnObjectConfigIDEvent);
 			m_pKernelModule->AddRecordCallBack(self, NFrame::Player::CommValue::ThisName(), this, &NFPropertyModule::OnRecordEvent);
         }
-		else if (CLASS_OBJECT_EVENT::COE_CREATE_HASDATA == eClassEvent)
+		else if (CLASS_OBJECT_EVENT::COE_CREATE_HASDATA == classEvent)
 		{
 		}
-        else if (CLASS_OBJECT_EVENT::COE_CREATE_FINISH == eClassEvent)
+        else if (CLASS_OBJECT_EVENT::COE_CREATE_FINISH == classEvent)
         {
         }
     }
@@ -237,11 +237,11 @@ void NFPropertyModule::RefreshBaseProperty(const NFGUID& self)
 
     for (int i = 0; i < pRecord->GetCols(); ++i)
     {
-        const std::string& strColTag = pRecord->GetColTag(i);
-        NFINT64 nValue = m_pElementModule->GetPropertyInt(effectData, strColTag);
+        const std::string& colTag = pRecord->GetColTag(i);
+        NFINT64 nValue = m_pElementModule->GetPropertyInt(effectData, colTag);
 
 		pRecord->SetUsed(NFPropertyGroup::NPG_JOBLEVEL, true);
-		pRecord->SetInt(NFPropertyGroup::NPG_JOBLEVEL, strColTag, nValue);
+		pRecord->SetInt(NFPropertyGroup::NPG_JOBLEVEL, colTag, nValue);
     }
 }
 
@@ -270,7 +270,7 @@ void NFPropertyModule::RefreshAllProperty(const NFGUID& self)
     }
 }
 
-bool NFPropertyModule::AddExp(const NFGUID& self, const int64_t nExp)
+bool NFPropertyModule::AddExp(const NFGUID& self, const int64_t exp)
 {
     int eJobType = m_pKernelModule->GetPropertyInt32(self, NFrame::Player::Job());
     int64_t nCurExp = m_pKernelModule->GetPropertyInt(self, NFrame::Player::EXP());
@@ -278,7 +278,7 @@ bool NFPropertyModule::AddExp(const NFGUID& self, const int64_t nExp)
     const std::string& heroConfigID = m_pElementModule->GetPropertyString(m_pPropertyConfigModule->GetInitPropertyID(eJobType, nLevel), NFrame::InitProperty::HeroConfigID());
     int64_t nMaxExp = m_pElementModule->GetPropertyInt(heroConfigID, NFrame::Player::MAXHP());
 
-    nCurExp += nExp;
+    nCurExp += exp;
 
     int64_t nRemainExp = nCurExp - nMaxExp;
     while (nRemainExp >= 0)

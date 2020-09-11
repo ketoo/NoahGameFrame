@@ -69,19 +69,19 @@ bool NFActor::Execute()
 	return true;
 }
 
-bool NFActor::AddComponent(NF_SHARE_PTR<NFIComponent> pComponent)
+bool NFActor::AddComponent(NF_SHARE_PTR<NFIComponent> component)
 {
 	//if you want to add more components for the actor, please don't clear the component
 	//mComponent.ClearAll();
-	if (!mComponent.ExistElement(pComponent->GetComponentName()))
+	if (!mComponent.ExistElement(component->GetComponentName()))
 	{
-		mComponent.AddElement(pComponent->GetComponentName(), pComponent);
-		pComponent->SetActor(NF_SHARE_PTR<NFIActor>(this));
+		mComponent.AddElement(component->GetComponentName(), component);
+		component->SetActor(NF_SHARE_PTR<NFIActor>(this));
 
-		pComponent->Awake();
-		pComponent->Init();
-		pComponent->AfterInit();
-		pComponent->ReadyExecute();
+		component->Awake();
+		component->Init();
+		component->AfterInit();
+		component->ReadyExecute();
 
 		return true;
 	}
@@ -89,14 +89,14 @@ bool NFActor::AddComponent(NF_SHARE_PTR<NFIComponent> pComponent)
 	return false;
 }
 
-bool NFActor::RemoveComponent(const std::string& strComponentName)
+bool NFActor::RemoveComponent(const std::string& componentName)
 {
 	return false;
 }
 
-NF_SHARE_PTR<NFIComponent> NFActor::FindComponent(const std::string & strComponentName)
+NF_SHARE_PTR<NFIComponent> NFActor::FindComponent(const std::string & componentName)
 {
-	return mComponent.GetElement(strComponentName);
+	return mComponent.GetElement(componentName);
 }
 
 bool NFActor::AddMessageHandler(const int nSubMsgID, ACTOR_PROCESS_FUNCTOR_PTR xBeginFunctor)

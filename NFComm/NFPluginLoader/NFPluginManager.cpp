@@ -270,12 +270,12 @@ inline bool NFPluginManager::Init()
 
 bool NFPluginManager::LoadPluginConfig()
 {
-	std::string strContent;
+	std::string content;
 	std::string strFilePath = GetConfigPath() + mstrConfigName;
-	GetFileContent(strFilePath, strContent);
+	GetFileContent(strFilePath, content);
 
 	rapidxml::xml_document<> xDoc;
-	xDoc.parse<0>((char*)strContent.c_str());
+	xDoc.parse<0>((char*)content.c_str());
 
     rapidxml::xml_node<>* pRoot = xDoc.first_node();
     rapidxml::xml_node<>* pAppNameNode = pRoot->first_node(mstrAppName.c_str());
@@ -283,11 +283,11 @@ bool NFPluginManager::LoadPluginConfig()
     {
 		for (rapidxml::xml_node<>* pPluginNode = pAppNameNode->first_node("Plugin"); pPluginNode; pPluginNode = pPluginNode->next_sibling("Plugin"))
 		{
-			const char* strPluginName = pPluginNode->first_attribute("Name")->value();
+			const char* pluginName = pPluginNode->first_attribute("Name")->value();
 
-			mPluginNameMap.insert(PluginNameMap::value_type(strPluginName, true));
+			mPluginNameMap.insert(PluginNameMap::value_type(pluginName, true));
 
-			//std::cout << strPluginName << std::endl;
+			//std::cout << pluginName << std::endl;
 		}
     }
 	else
@@ -296,10 +296,10 @@ bool NFPluginManager::LoadPluginConfig()
 		{
 			for (rapidxml::xml_node<>* pPluginNode = pServerNode->first_node("Plugin"); pPluginNode; pPluginNode = pPluginNode->next_sibling("Plugin"))
 			{
-				const char* strPluginName = pPluginNode->first_attribute("Name")->value();
-				if (mPluginNameMap.find(strPluginName) == mPluginNameMap.end())
+				const char* pluginName = pPluginNode->first_attribute("Name")->value();
+				if (mPluginNameMap.find(pluginName) == mPluginNameMap.end())
 				{
-					mPluginNameMap.insert(PluginNameMap::value_type(strPluginName, true));
+					mPluginNameMap.insert(PluginNameMap::value_type(pluginName, true));
 				}
 			}
 		}
@@ -377,11 +377,11 @@ bool NFPluginManager::CheckStaticPlugin()
 	for (auto it = mPluginInstanceMap.begin(); it != mPluginInstanceMap.end();)
 	{
 		bool bFind = false;
-		const std::string& strPluginName = it->first;
+		const std::string& pluginName = it->first;
 		for (int i = 0; i < mStaticPlugin.size(); ++i)
 		{
 			const std::string& tempPluginName = mStaticPlugin[i];
-			if (tempPluginName == strPluginName)
+			if (tempPluginName == pluginName)
 			{
 				bFind = true;
 				break;
@@ -418,24 +418,24 @@ bool NFPluginManager::CheckStaticPlugin()
     return true;
 }
 
-bool NFPluginManager::LoadStaticPlugin(const std::string& strPluginDLLName)
+bool NFPluginManager::LoadStaticPlugin(const std::string& pluginDLLName)
 {
-	mStaticPlugin.push_back(strPluginDLLName);
+	mStaticPlugin.push_back(pluginDLLName);
 
 	return true;
 }
 
 void NFPluginManager::Registered(NFIPlugin* plugin)
 {
-    const std::string& strPluginName = plugin->GetPluginName();
-    if (!FindPlugin(strPluginName))
+    const std::string& pluginName = plugin->GetPluginName();
+    if (!FindPlugin(pluginName))
 	{
-		mPluginInstanceMap.insert(PluginInstanceMap::value_type(strPluginName, plugin));
+		mPluginInstanceMap.insert(PluginInstanceMap::value_type(pluginName, plugin));
         plugin->Install();
     }
 	else
 	{
-		std::cout << strPluginName << std::endl;
+		std::cout << pluginName << std::endl;
 		assert(0);
 	}
 }
@@ -452,14 +452,14 @@ void NFPluginManager::UnRegistered(NFIPlugin* plugin)
     }
 }
 
-bool NFPluginManager::ReLoadPlugin(const std::string & strPluginDLLName)
+bool NFPluginManager::ReLoadPlugin(const std::string & pluginDLLName)
 {
 	//1.shut all module of this plugin
 	//2.unload this plugin
 	//3.load new plugin
 	//4.init new module
 	//5.tell others who has been reloaded
-	PluginInstanceMap::iterator itInstance = mPluginInstanceMap.find(strPluginDLLName);
+	PluginInstanceMap::iterator itInstance = mPluginInstanceMap.find(pluginDLLName);
 	if (itInstance == mPluginInstanceMap.end())
 	{
 		return false;
@@ -471,7 +471,7 @@ bool NFPluginManager::ReLoadPlugin(const std::string & strPluginDLLName)
 	pPlugin->Finalize();
 
 	//2
-	PluginLibMap::iterator it = mPluginLibMap.find(strPluginDLLName);
+	PluginLibMap::iterator it = mPluginLibMap.find(pluginDLLName);
 	if (it != mPluginLibMap.end())
 	{
 		NFDynLib* pLib = it->second;
@@ -490,11 +490,11 @@ bool NFPluginManager::ReLoadPlugin(const std::string & strPluginDLLName)
 	}
 
 	//3
-	NFDynLib* pLib = new NFDynLib(strPluginDLLName);
+	NFDynLib* pLib = new NFDynLib(pluginDLLName);
 	bool bLoad = pLib->Load();
 	if (bLoad)
 	{
-		mPluginLibMap.insert(PluginLibMap::value_type(strPluginDLLName, pLib));
+		mPluginLibMap.insert(PluginLibMap::value_type(pluginDLLName, pLib));
 
 		DLL_START_PLUGIN_FUNC pFunc = (DLL_START_PLUGIN_FUNC)pLib->GetSymbol("DllStartPlugin");
 		if (!pFunc)
@@ -529,7 +529,7 @@ bool NFPluginManager::ReLoadPlugin(const std::string & strPluginDLLName)
 	PluginInstanceMap::iterator itReloadInstance = mPluginInstanceMap.begin();
 	for (; itReloadInstance != mPluginInstanceMap.end(); itReloadInstance++)
 	{
-		if (strPluginDLLName != itReloadInstance->first)
+		if (pluginDLLName != itReloadInstance->first)
 		{
 			itReloadInstance->second->OnReloadPlugin();
 		}
@@ -537,9 +537,9 @@ bool NFPluginManager::ReLoadPlugin(const std::string & strPluginDLLName)
 	return true;
 }
 
-NFIPlugin* NFPluginManager::FindPlugin(const std::string& strPluginName)
+NFIPlugin* NFPluginManager::FindPlugin(const std::string& pluginName)
 {
-    PluginInstanceMap::iterator it = mPluginInstanceMap.find(strPluginName);
+    PluginInstanceMap::iterator it = mPluginInstanceMap.find(pluginName);
     if (it != mPluginInstanceMap.end())
     {
         return it->second;
@@ -568,9 +568,9 @@ inline int NFPluginManager::GetAppID() const
 	return mnAppID;
 }
 
-inline void NFPluginManager::SetAppID(const int nAppID)
+inline void NFPluginManager::SetAppID(const int appID)
 {
-    mnAppID = nAppID;
+    mnAppID = appID;
 }
 
 bool NFPluginManager::IsRunningDocker() const
@@ -608,22 +608,22 @@ inline void NFPluginManager::SetConfigPath(const std::string & strPath)
 	mstrConfigPath = strPath;
 }
 
-void NFPluginManager::SetConfigName(const std::string & strFileName)
+void NFPluginManager::SetConfigName(const std::string & fileName)
 {
-	if (strFileName.empty())
+	if (fileName.empty())
 	{
 		return;
 	}
 
-	if (strFileName.find(".xml") == string::npos)
+	if (fileName.find(".xml") == string::npos)
 	{
 		return;
 	}
 
 #ifdef NF_DEBUG_MODE
-	mstrConfigName = "NFDataCfg/Debug/" + strFileName;
+	mstrConfigName = "NFDataCfg/Debug/" + fileName;
 #else
-	mstrConfigName = "NFDataCfg/Release/" + strFileName;
+	mstrConfigName = "NFDataCfg/Release/" + fileName;
 #endif
 }
 
@@ -637,14 +637,14 @@ const std::string& NFPluginManager::GetAppName() const
 	return mstrAppName;
 }
 
-void NFPluginManager::SetAppName(const std::string& strAppName)
+void NFPluginManager::SetAppName(const std::string& appName)
 {
 	if (!mstrAppName.empty())
 	{
 		return;
 	}
 
-	mstrAppName = strAppName;
+	mstrAppName = appName;
 }
 
 const std::string & NFPluginManager::GetLogConfigName() const
@@ -652,9 +652,9 @@ const std::string & NFPluginManager::GetLogConfigName() const
 	return mstrLogConfigName;
 }
 
-void NFPluginManager::SetLogConfigName(const std::string & strName)
+void NFPluginManager::SetLogConfigName(const std::string & name)
 {
-	mstrLogConfigName = strName;
+	mstrLogConfigName = name;
 }
 
 NFIPlugin * NFPluginManager::GetCurrentPlugin()
@@ -682,14 +682,14 @@ void NFPluginManager::SetGetFileContentFunctor(GET_FILECONTENT_FUNCTOR fun)
 	mGetFileContentFunctor = fun;
 }
 
-bool NFPluginManager::GetFileContent(const std::string &strFileName, std::string &strContent)
+bool NFPluginManager::GetFileContent(const std::string &fileName, std::string &content)
 {
 	if (mGetFileContentFunctor)
 	{
-		return mGetFileContentFunctor(this, strFileName, strContent);
+		return mGetFileContentFunctor(this, fileName, content);
 	}
 
-	FILE *fp = fopen(strFileName.c_str(), "rb");
+	FILE *fp = fopen(fileName.c_str(), "rb");
 	if (!fp)
 	{
 		return false;
@@ -698,43 +698,43 @@ bool NFPluginManager::GetFileContent(const std::string &strFileName, std::string
 	fseek(fp, 0, SEEK_END);
 	const long filelength = ftell(fp);
 	fseek(fp, 0, SEEK_SET);
-	strContent.resize(filelength);
-	fread((void*)strContent.data(), filelength, 1, fp);
+	content.resize(filelength);
+	fread((void*)content.data(), filelength, 1, fp);
 	fclose(fp);
 
 	return true;
 }
 
-void NFPluginManager::AddModule(const std::string& strModuleName, NFIModule* pModule)
+void NFPluginManager::AddModule(const std::string& moduleName, NFIModule* pModule)
 {
-    if (!FindModule(strModuleName))
+    if (!FindModule(moduleName))
     {
-        mModuleInstanceMap.insert(ModuleInstanceMap::value_type(strModuleName, pModule));
+        mModuleInstanceMap.insert(ModuleInstanceMap::value_type(moduleName, pModule));
 
         if (pModule->m_bIsExecute)
-            mNeedExecuteModuleVec.push_back(std::make_pair(strModuleName, pModule));
+            mNeedExecuteModuleVec.push_back(std::make_pair(moduleName, pModule));
     }
 }
 
-void NFPluginManager::AddTestModule(const std::string& strModuleName, NFIModule* pModule)
+void NFPluginManager::AddTestModule(const std::string& moduleName, NFIModule* pModule)
 {
-	if (!FindTestModule(strModuleName))
+	if (!FindTestModule(moduleName))
 	{
-		mTestModuleInstanceMap.insert(TestModuleInstanceMap::value_type(strModuleName, pModule));
+		mTestModuleInstanceMap.insert(TestModuleInstanceMap::value_type(moduleName, pModule));
 	}
 }
 
-void NFPluginManager::RemoveModule(const std::string& strModuleName)
+void NFPluginManager::RemoveModule(const std::string& moduleName)
 {
-    ModuleInstanceMap::iterator it = mModuleInstanceMap.find(strModuleName);
+    ModuleInstanceMap::iterator it = mModuleInstanceMap.find(moduleName);
     if (it != mModuleInstanceMap.end())
     {
         mModuleInstanceMap.erase(it);
 
         auto iter = std::find_if(mNeedExecuteModuleVec.begin(),
             mNeedExecuteModuleVec.end(),
-            [&strModuleName](const std::pair<std::string, NFIModule*>& xPair) ->bool{
-            return xPair.first == strModuleName;
+            [&moduleName](const std::pair<std::string, NFIModule*>& xPair) ->bool{
+            return xPair.first == moduleName;
         });
         
         if(iter != mNeedExecuteModuleVec.end())
@@ -743,14 +743,14 @@ void NFPluginManager::RemoveModule(const std::string& strModuleName)
 }
 
 
-NFIModule* NFPluginManager::FindModule(const std::string& strModuleName)
+NFIModule* NFPluginManager::FindModule(const std::string& moduleName)
 {
-	if (strModuleName.empty())
+	if (moduleName.empty())
 	{
 		return NULL;
 	}
 
-	ModuleInstanceMap::iterator it = mModuleInstanceMap.find(strModuleName);
+	ModuleInstanceMap::iterator it = mModuleInstanceMap.find(moduleName);
 	if (it != mModuleInstanceMap.end())
 	{
 		return it->second;
@@ -758,20 +758,20 @@ NFIModule* NFPluginManager::FindModule(const std::string& strModuleName)
 	
 	if (this->GetCurrentModule())
 	{
-		std::cout << this->GetCurrentModule()->strName << " want to find module: " << strModuleName << " but got null_ptr!!!" << std::endl;
+		std::cout << this->GetCurrentModule()->name << " want to find module: " << moduleName << " but got null_ptr!!!" << std::endl;
 	}
 
     return NULL;
 }
 
-NFIModule* NFPluginManager::FindTestModule(const std::string& strModuleName)
+NFIModule* NFPluginManager::FindTestModule(const std::string& moduleName)
 {
-	if (strModuleName.empty())
+	if (moduleName.empty())
 	{
 		return NULL;
 	}
 
-    TestModuleInstanceMap::iterator it = mTestModuleInstanceMap.find(strModuleName);
+    TestModuleInstanceMap::iterator it = mTestModuleInstanceMap.find(moduleName);
 	if (it != mTestModuleInstanceMap.end())
 	{
 		return it->second;
@@ -886,17 +886,17 @@ bool NFPluginManager::Finalize()
 	return true;
 }
 
-bool NFPluginManager::LoadPluginLibrary(const std::string& strPluginDLLName)
+bool NFPluginManager::LoadPluginLibrary(const std::string& pluginDLLName)
 {
-    PluginLibMap::iterator it = mPluginLibMap.find(strPluginDLLName);
+    PluginLibMap::iterator it = mPluginLibMap.find(pluginDLLName);
     if (it == mPluginLibMap.end())
     {
-        NFDynLib* pLib = new NFDynLib(strPluginDLLName);
+        NFDynLib* pLib = new NFDynLib(pluginDLLName);
         bool bLoad = pLib->Load();
 
         if (bLoad)
         {
-            mPluginLibMap.insert(PluginLibMap::value_type(strPluginDLLName, pLib));
+            mPluginLibMap.insert(PluginLibMap::value_type(pluginDLLName, pLib));
 
             DLL_START_PLUGIN_FUNC pFunc = (DLL_START_PLUGIN_FUNC)pLib->GetSymbol("DllStartPlugin");
             if (!pFunc)
@@ -933,9 +933,9 @@ bool NFPluginManager::LoadPluginLibrary(const std::string& strPluginDLLName)
     return false;
 }
 
-bool NFPluginManager::UnLoadPluginLibrary(const std::string& strPluginDLLName)
+bool NFPluginManager::UnLoadPluginLibrary(const std::string& pluginDLLName)
 {
-    PluginLibMap::iterator it = mPluginLibMap.find(strPluginDLLName);
+    PluginLibMap::iterator it = mPluginLibMap.find(pluginDLLName);
     if (it != mPluginLibMap.end())
     {
         NFDynLib* pLib = it->second;
@@ -958,7 +958,7 @@ bool NFPluginManager::UnLoadPluginLibrary(const std::string& strPluginDLLName)
     return false;
 }
 
-bool NFPluginManager::UnLoadStaticPlugin(const std::string & strPluginDLLName)
+bool NFPluginManager::UnLoadStaticPlugin(const std::string & pluginDLLName)
 {
 	//     DESTROY_PLUGIN(this, NFConfigPlugin)
 	//     DESTROY_PLUGIN(this, NFEventProcessPlugin)
