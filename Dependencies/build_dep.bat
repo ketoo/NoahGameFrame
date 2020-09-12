@@ -17,10 +17,6 @@ vcpkg install lua:x64-windows-static
 
 vcpkg install sdl2:x64-windows-static
 
-vcpkg install gtest:x64-windows-static
-
-vcpkg install glm:x64-windows-static
-
 cd..
 
 xcopy vcpkg\installed\x64-windows-static\lib lib\Release\ /s /e /Y
