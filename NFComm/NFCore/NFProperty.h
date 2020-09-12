@@ -40,12 +40,12 @@ private:
     NFProperty();
 
 public:
-    NFProperty(const NFGUID& self, const std::string& strPropertyName, const NFDATA_TYPE varType);
+    NFProperty(const NFGUID& self, const std::string& propertyName, const NFDATA_TYPE varType);
 
     virtual ~NFProperty();
 
     virtual void SetValue(const NFData& TData);
-    virtual void SetValue(const NFIProperty* pProperty);
+    virtual void SetValue(const NFIProperty* property);
 
     virtual bool SetInt(const NFINT64 value);
     virtual bool SetFloat(const double value);

@@ -46,7 +46,7 @@ public:
 	virtual ~NFIProperty() {}
 
 	virtual void SetValue(const NFData& TData) = 0;
-	virtual void SetValue(const NFIProperty* pProperty) = 0;
+	virtual void SetValue(const NFIProperty* property) = 0;
 
 	virtual bool SetInt(const NFINT64 value) = 0;
 	virtual bool SetFloat(const double value) = 0;

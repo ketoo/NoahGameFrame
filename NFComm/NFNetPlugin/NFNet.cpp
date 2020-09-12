@@ -193,7 +193,7 @@ void NFNet::conn_readcb(struct bufferevent* bev, void* user_data)
         {
             if (pNet->mRecvCB)
             {
-                pNet->mRecvCB(pObject->GetRealFD(), 0, pObject->GetBuff(), len);
+                pNet->mRecvCB(pObject->GetRealFD(), -1, pObject->GetBuff(), len);
 
                 pNet->mnReceiveMsgTotal++;
             }
@@ -228,9 +228,9 @@ bool NFNet::Execute()
 }
 
 
-void NFNet::Initialization(const char* strIP, const unsigned short nPort)
+void NFNet::Initialization(const char* ip, const unsigned short nPort)
 {
-    mstrIP = strIP;
+    mstrIP = ip;
     mnPort = nPort;
 
     InitClientNet();
@@ -274,9 +274,9 @@ bool NFNet::Final()
     return true;
 }
 
-bool NFNet::SendMsgToAllClient(const char* msg, const size_t nLen)
+bool NFNet::SendMsgToAllClient(const char* msg, const size_t len)
 {
-    if (nLen <= 0)
+    if (len <= 0)
     {
         return false;
     }
@@ -295,7 +295,7 @@ bool NFNet::SendMsgToAllClient(const char* msg, const size_t nLen)
             bufferevent* bev = (bufferevent*)pNetObject->GetUserData();
             if (NULL != bev)
             {
-                bufferevent_write(bev, msg, nLen);
+                bufferevent_write(bev, msg, len);
 
                 mnSendMsgTotal++;
             }
@@ -306,9 +306,9 @@ bool NFNet::SendMsgToAllClient(const char* msg, const size_t nLen)
 }
 
 
-bool NFNet::SendMsg(const char* msg, const size_t nLen, const NFSOCK nSockIndex)
+bool NFNet::SendMsg(const char* msg, const size_t len, const NFSOCK sockIndex)
 {
-    if (nLen <= 0)
+    if (len <= 0)
     {
         return false;
     }
@@ -318,7 +318,7 @@ bool NFNet::SendMsg(const char* msg, const size_t nLen, const NFSOCK nSockIndex)
 		return false;
 	}
 
-    std::map<NFSOCK, NetObject*>::iterator it = mmObject.find(nSockIndex);
+    std::map<NFSOCK, NetObject*>::iterator it = mmObject.find(sockIndex);
     if (it != mmObject.end())
     {
         NetObject* pNetObject = (NetObject*)it->second;
@@ -327,7 +327,7 @@ bool NFNet::SendMsg(const char* msg, const size_t nLen, const NFSOCK nSockIndex)
             bufferevent* bev = (bufferevent*)pNetObject->GetUserData();
             if (NULL != bev)
             {
-                bufferevent_write(bev, msg, nLen);
+                bufferevent_write(bev, msg, len);
 
                 mnSendMsgTotal++;
                 return true;
@@ -338,26 +338,26 @@ bool NFNet::SendMsg(const char* msg, const size_t nLen, const NFSOCK nSockIndex)
     return false;
 }
 
-bool NFNet::SendMsg(const char* msg, const size_t nLen, const std::list<NFSOCK>& fdList)
+bool NFNet::SendMsg(const char* msg, const size_t len, const std::list<NFSOCK>& fdList)
 {
     std::list<NFSOCK>::const_iterator it = fdList.begin();
     for (; it != fdList.end(); ++it)
     {
-        SendMsg(msg, nLen, *it);
+        SendMsg(msg, len, *it);
     }
 
     return true;
 }
 
-bool NFNet::CloseNetObject(const NFSOCK nSockIndex)
+bool NFNet::CloseNetObject(const NFSOCK sockIndex)
 {
-    std::map<NFSOCK, NetObject*>::iterator it = mmObject.find(nSockIndex);
+    std::map<NFSOCK, NetObject*>::iterator it = mmObject.find(sockIndex);
     if (it != mmObject.end())
     {
         NetObject* pObject = it->second;
 
         pObject->SetNeedRemove(true);
-        mvRemoveObject.push_back(nSockIndex);
+        mvRemoveObject.push_back(sockIndex);
 
         return true;
     }
@@ -428,15 +428,15 @@ bool NFNet::Dismantle(NetObject* pObject)
     return bNeedDismantle;
 }
 
-bool NFNet::AddNetObject(const NFSOCK nSockIndex, NetObject* pObject)
+bool NFNet::AddNetObject(const NFSOCK sockIndex, NetObject* pObject)
 {
     //lock
-    return mmObject.insert(std::map<NFSOCK, NetObject*>::value_type(nSockIndex, pObject)).second;
+    return mmObject.insert(std::map<NFSOCK, NetObject*>::value_type(sockIndex, pObject)).second;
 }
 
 int NFNet::InitClientNet()
 {
-    std::string strIP = mstrIP;
+    std::string ip = mstrIP;
     int nPort = mnPort;
 
     struct sockaddr_in addr;
@@ -451,7 +451,7 @@ int NFNet::InitClientNet()
     addr.sin_family = AF_INET;
     addr.sin_port = htons(nPort);
 
-    if (evutil_inet_pton(AF_INET, strIP.c_str(), &addr.sin_addr) <= 0)
+    if (evutil_inet_pton(AF_INET, ip.c_str(), &addr.sin_addr) <= 0)
     {
         printf("inet_pton");
         return -1;
@@ -609,9 +609,9 @@ bool NFNet::CloseSocketAll()
     return true;
 }
 
-NetObject* NFNet::GetNetObject(const NFSOCK nSockIndex)
+NetObject* NFNet::GetNetObject(const NFSOCK sockIndex)
 {
-    std::map<NFSOCK, NetObject*>::iterator it = mmObject.find(nSockIndex);
+    std::map<NFSOCK, NetObject*>::iterator it = mmObject.find(sockIndex);
     if (it != mmObject.end())
     {
         return it->second;
@@ -620,9 +620,9 @@ NetObject* NFNet::GetNetObject(const NFSOCK nSockIndex)
     return NULL;
 }
 
-void NFNet::CloseObject(const NFSOCK nSockIndex)
+void NFNet::CloseObject(const NFSOCK sockIndex)
 {
-    std::map<NFSOCK, NetObject*>::iterator it = mmObject.find(nSockIndex);
+    std::map<NFSOCK, NetObject*>::iterator it = mmObject.find(sockIndex);
     if (it != mmObject.end())
     {
         NetObject* pObject = it->second;
@@ -665,24 +665,24 @@ bool NFNet::Log(int severity, const char* msg)
     return true;
 }
 
-bool NFNet::SendMsgWithOutHead(const int16_t nMsgID, const char* msg, const size_t nLen, const NFSOCK nSockIndex /*= 0*/)
+bool NFNet::SendMsgWithOutHead(const int16_t msgID, const char* msg, const size_t len, const NFSOCK sockIndex /*= 0*/)
 {
     std::string strOutData;
-    int nAllLen = EnCode(nMsgID, msg, nLen, strOutData);
-    if (nAllLen == nLen + NFIMsgHead::NF_Head::NF_HEAD_LENGTH)
+    int nAllLen = EnCode(msgID, msg, len, strOutData);
+    if (nAllLen == len + NFIMsgHead::NF_Head::NF_HEAD_LENGTH)
     {
         
-        return SendMsg(strOutData.c_str(), strOutData.length(), nSockIndex);
+        return SendMsg(strOutData.c_str(), strOutData.length(), sockIndex);
     }
 
     return false;
 }
 
-bool NFNet::SendMsgWithOutHead(const int16_t nMsgID, const char* msg, const size_t nLen, const std::list<NFSOCK>& fdList)
+bool NFNet::SendMsgWithOutHead(const int16_t msgID, const char* msg, const size_t len, const std::list<NFSOCK>& fdList)
 {
     std::string strOutData;
-    int nAllLen = EnCode(nMsgID, msg, nLen, strOutData);
-    if (nAllLen == nLen + NFIMsgHead::NF_Head::NF_HEAD_LENGTH)
+    int nAllLen = EnCode(msgID, msg, len, strOutData);
+    if (nAllLen == len + NFIMsgHead::NF_Head::NF_HEAD_LENGTH)
     {
         return SendMsg(strOutData.c_str(), strOutData.length(), fdList);
     }
@@ -690,11 +690,11 @@ bool NFNet::SendMsgWithOutHead(const int16_t nMsgID, const char* msg, const size
     return false;
 }
 
-bool NFNet::SendMsgToAllClientWithOutHead(const int16_t nMsgID, const char* msg, const size_t nLen)
+bool NFNet::SendMsgToAllClientWithOutHead(const int16_t msgID, const char* msg, const size_t len)
 {
     std::string strOutData;
-    int nAllLen = EnCode(nMsgID, msg, nLen, strOutData);
-    if (nAllLen == nLen + NFIMsgHead::NF_Head::NF_HEAD_LENGTH)
+    int nAllLen = EnCode(msgID, msg, len, strOutData);
+    if (nAllLen == len + NFIMsgHead::NF_Head::NF_HEAD_LENGTH)
     {
         return SendMsgToAllClient(strOutData.c_str(), (uint32_t) strOutData.length());
     }
@@ -702,10 +702,10 @@ bool NFNet::SendMsgToAllClientWithOutHead(const int16_t nMsgID, const char* msg,
     return false;
 }
 
-int NFNet::EnCode(const uint16_t unMsgID, const char* strData, const uint32_t unDataLen, std::string& strOutData)
+int NFNet::EnCode(const uint16_t umsgID, const char* strData, const uint32_t unDataLen, std::string& strOutData)
 {
     NFMsgHead xHead;
-    xHead.SetMsgID(unMsgID);
+    xHead.SetMsgID(umsgID);
     xHead.SetBodyLength(unDataLen);
 
     char szHead[NFIMsgHead::NF_Head::NF_HEAD_LENGTH] = { 0 };

@@ -47,15 +47,15 @@ public:
 	virtual bool Execute();
 	virtual bool AfterInit();
 	
-	virtual bool Connect(const std::string& strIP, const int nPort, const std::string& strPass) { return false; };
+	virtual bool Connect(const std::string& ip, const int nPort, const std::string& strPass) { return false; };
 	virtual bool Enable();
 	virtual bool Busy();
 	virtual bool KeepLive();
 
 
-	virtual bool AddConnectSql(const std::string& strID, const std::string& strIP);
-	virtual bool AddConnectSql(const std::string& strID, const std::string& strIP, const int nPort);
-	virtual bool AddConnectSql(const std::string& strID, const std::string& strIP, const int nPort, const std::string& strPass);
+	virtual bool AddConnectSql(const std::string& strID, const std::string& ip);
+	virtual bool AddConnectSql(const std::string& strID, const std::string& ip, const int nPort);
+	virtual bool AddConnectSql(const std::string& strID, const std::string& ip, const int nPort, const std::string& strPass);
 
 	virtual NFList<std::string> GetDriverIdList();
 	virtual NF_SHARE_PTR<NFIRedisClient> GetDriver(const std::string& strID);

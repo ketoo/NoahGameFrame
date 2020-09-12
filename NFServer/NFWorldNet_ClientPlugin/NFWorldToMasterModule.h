@@ -55,7 +55,7 @@ public:
 
 protected:
 
-	void OnSocketMSEvent(const NFSOCK nSockIndex, const NF_NET_EVENT eEvent, NFINet* pNet);
+	void OnSocketMSEvent(const NFSOCK sockIndex, const NF_NET_EVENT eEvent, NFINet* pNet);
 	
 	void OnClientDisconnect(const NFSOCK nAddress);
 	
@@ -67,12 +67,12 @@ protected:
 	void Register(NFINet* pNet);
 	void ServerReport();
 	void RefreshWorldInfo();
-	void OnServerInfoProcess(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+	void OnServerInfoProcess(const NFSOCK sockIndex, const int msgID, const char* msg, const uint32_t len);
 
-	void OnSelectServerProcess(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
-	void OnKickClientProcess(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+	void OnSelectServerProcess(const NFSOCK sockIndex, const int msgID, const char* msg, const uint32_t len);
+	void OnKickClientProcess(const NFSOCK sockIndex, const int msgID, const char* msg, const uint32_t len);
 
-	void InvalidMessage(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+	void InvalidMessage(const NFSOCK sockIndex, const int msgID, const char* msg, const uint32_t len);
 private:
 	NFINT64 mLastReportTime;
 

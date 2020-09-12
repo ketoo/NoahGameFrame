@@ -41,16 +41,16 @@ public:
 	virtual std::string GetTeamCacheKey(const NFGUID& self) = 0;
 	virtual std::string GetTeamInviteCacheKey(const NFGUID& self) = 0;
 
-	virtual std::string GetAccountCacheKey(const std::string& strAccount) = 0;
-	virtual std::string GetTileCacheKey(const int& nSceneID) = 0;
-	virtual std::string GetSceneCacheKey(const int& nSceneID) = 0;
+	virtual std::string GetAccountCacheKey(const std::string& account) = 0;
+	virtual std::string GetTileCacheKey(const int& sceneID) = 0;
+	virtual std::string GetSceneCacheKey(const int& sceneID) = 0;
 	virtual std::string GetCellCacheKey(const std::string& strCellID) = 0;
 
-	virtual NF_SHARE_PTR<NFIPropertyManager> NewPropertyManager(const std::string& strClassName) = 0;
-	virtual NF_SHARE_PTR<NFIRecordManager> NewRecordManager(const std::string& strClassName) = 0;
+	virtual NF_SHARE_PTR<NFIPropertyManager> NewPropertyManager(const std::string& className) = 0;
+	virtual NF_SHARE_PTR<NFIRecordManager> NewRecordManager(const std::string& className) = 0;
 
-	virtual NF_SHARE_PTR<NFIPropertyManager> GetPropertyInfo(const NFGUID& self, const std::string& strClassName) = 0;
-	virtual NF_SHARE_PTR<NFIRecordManager> GetRecordInfo(const NFGUID& self, const std::string& strClassName) = 0;
+	virtual NF_SHARE_PTR<NFIPropertyManager> GetPropertyInfo(const NFGUID& self, const std::string& className) = 0;
+	virtual NF_SHARE_PTR<NFIRecordManager> GetRecordInfo(const NFGUID& self, const std::string& className) = 0;
 
 	virtual bool SavePropertyInfo(const NFGUID& self, NF_SHARE_PTR<NFIPropertyManager> pPropertyManager, const int nExpireSecond = 0) = 0;
 	virtual bool SaveRecordInfo(const NFGUID& self, NF_SHARE_PTR<NFIRecordManager> pRecordManager, const int nExpireSecond = 0) = 0;

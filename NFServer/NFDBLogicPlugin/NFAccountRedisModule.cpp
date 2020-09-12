@@ -51,15 +51,15 @@ bool NFAccountRedisModule::AfterInit()
 	return true;
 }
 
-bool NFAccountRedisModule::VerifyAccount(const std::string& strAccount, const std::string& strPwd)
+bool NFAccountRedisModule::VerifyAccount(const std::string& account, const std::string& strPwd)
 {
-	if (strAccount.empty() || strPwd.empty())
+	if (account.empty() || strPwd.empty())
 	{
 		return false;
 	}
 
-	std::string strAccountKey = m_pCommonRedisModule->GetAccountCacheKey(strAccount);
-	NF_SHARE_PTR<NFIRedisClient> xNoSqlDriver = m_pNoSqlModule->GetDriverBySuit(strAccount);
+	std::string strAccountKey = m_pCommonRedisModule->GetAccountCacheKey(account);
+	NF_SHARE_PTR<NFIRedisClient> xNoSqlDriver = m_pNoSqlModule->GetDriverBySuit(account);
 	if (xNoSqlDriver)
 	{
 		std::string strPassword;
@@ -72,10 +72,10 @@ bool NFAccountRedisModule::VerifyAccount(const std::string& strAccount, const st
 	return false;
 }
 
-bool NFAccountRedisModule::AddAccount(const std::string & strAccount, const std::string & strPwd)
+bool NFAccountRedisModule::AddAccount(const std::string & account, const std::string & strPwd)
 {
-	std::string strAccountKey = m_pCommonRedisModule->GetAccountCacheKey(strAccount);
-	NF_SHARE_PTR<NFIRedisClient> xNoSqlDriver = m_pNoSqlModule->GetDriverBySuit(strAccount);
+	std::string strAccountKey = m_pCommonRedisModule->GetAccountCacheKey(account);
+	NF_SHARE_PTR<NFIRedisClient> xNoSqlDriver = m_pNoSqlModule->GetDriverBySuit(account);
 	if (xNoSqlDriver)
 	{
 		return xNoSqlDriver->HSET(strAccountKey, "Password", strPwd);
@@ -83,10 +83,10 @@ bool NFAccountRedisModule::AddAccount(const std::string & strAccount, const std:
 	return false;
 }
 
-bool NFAccountRedisModule::ExistAccount(const std::string & strAccount)
+bool NFAccountRedisModule::ExistAccount(const std::string & account)
 {
-	std::string strAccountKey = m_pCommonRedisModule->GetAccountCacheKey(strAccount);
-	NF_SHARE_PTR<NFIRedisClient> xNoSqlDriver = m_pNoSqlModule->GetDriverBySuit(strAccount);
+	std::string strAccountKey = m_pCommonRedisModule->GetAccountCacheKey(account);
+	NF_SHARE_PTR<NFIRedisClient> xNoSqlDriver = m_pNoSqlModule->GetDriverBySuit(account);
 	if (xNoSqlDriver)
 	{
 		return xNoSqlDriver->EXISTS(strAccountKey);

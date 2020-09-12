@@ -48,13 +48,13 @@ class NFClass : public NFIClass
 {
 public:
 
-    NFClass(const std::string& strClassName)
+    NFClass(const std::string& className)
     {
-        m_pParentClass = NULL;
-        mstrClassName = strClassName;
+        mParentClass = NULL;
+        mClassName = className;
 
-        m_pPropertyManager = NF_SHARE_PTR<NFIPropertyManager>(NF_NEW NFPropertyManager(NFGUID()));
-        m_pRecordManager = NF_SHARE_PTR<NFIRecordManager>(NF_NEW NFRecordManager(NFGUID()));
+        mPropertyManager = NF_SHARE_PTR<NFIPropertyManager>(NF_NEW NFPropertyManager(NFGUID()));
+        mRecordManager = NF_SHARE_PTR<NFIRecordManager>(NF_NEW NFRecordManager(NFGUID()));
     }
 
     virtual ~NFClass()
@@ -64,28 +64,28 @@ public:
 
     virtual NF_SHARE_PTR<NFIPropertyManager> GetPropertyManager()
     {
-        return m_pPropertyManager;
+        return mPropertyManager;
     }
 
     virtual NF_SHARE_PTR<NFIRecordManager> GetRecordManager()
     {
-        return m_pRecordManager;
+        return mRecordManager;
     }
 
     virtual bool AddClassCallBack(const CLASS_EVENT_FUNCTOR_PTR& cb)
     {
-        return mxClassEventInfo.Add(cb);
+        return mClassEventInfo.Add(cb);
     }
 
-    virtual bool DoEvent(const NFGUID& objectID, const CLASS_OBJECT_EVENT eClassEvent, const NFDataList& valueList)
+    virtual bool DoEvent(const NFGUID& objectID, const CLASS_OBJECT_EVENT classEvent, const NFDataList& valueList)
     {
         CLASS_EVENT_FUNCTOR_PTR cb;
-        bool bRet = mxClassEventInfo.First(cb);
+        bool bRet = mClassEventInfo.First(cb);
         while (bRet)
         {
-            cb->operator()(objectID, mstrClassName, eClassEvent,  valueList);
+            cb->operator()(objectID, mClassName, classEvent, valueList);
 
-            bRet = mxClassEventInfo.Next(cb);
+            bRet = mClassEventInfo.Next(cb);
         }
 
         return true;
@@ -93,27 +93,27 @@ public:
 
     void SetParent(NF_SHARE_PTR<NFIClass> pClass)
     {
-        m_pParentClass = pClass;
+        mParentClass = pClass;
     }
 
     NF_SHARE_PTR<NFIClass> GetParent()
     {
-        return m_pParentClass;
+        return mParentClass;
     }
 
     void SetTypeName(const char* strType)
     {
-        mstrType = strType;
+        mType = strType;
     }
 
     const std::string& GetTypeName()
     {
-        return mstrType;
+        return mType;
     }
 
     const std::string& GetClassName()
     {
-        return mstrClassName;
+        return mClassName;
     }
 
     const bool AddId(std::string& strId)
@@ -129,26 +129,26 @@ public:
 
     void SetInstancePath(const std::string& strPath)
     {
-        mstrClassInstancePath = strPath;
+        mClassInstancePath = strPath;
     }
 
     const std::string& GetInstancePath()
     {
-        return mstrClassInstancePath;
+        return mClassInstancePath;
     }
 
 private:
-    NF_SHARE_PTR<NFIPropertyManager> m_pPropertyManager;
-    NF_SHARE_PTR<NFIRecordManager> m_pRecordManager;
+    NF_SHARE_PTR<NFIPropertyManager> mPropertyManager;
+    NF_SHARE_PTR<NFIRecordManager> mRecordManager;
 
-    NF_SHARE_PTR<NFIClass> m_pParentClass;
-    std::string mstrType;
-    std::string mstrClassName;
-    std::string mstrClassInstancePath;
+    NF_SHARE_PTR<NFIClass> mParentClass;
+    std::string mType;
+    std::string mClassName;
+    std::string mClassInstancePath;
 
     std::vector<std::string> mIdList;
 
-    NFList<CLASS_EVENT_FUNCTOR_PTR> mxClassEventInfo;
+    NFList<CLASS_EVENT_FUNCTOR_PTR> mClassEventInfo;
 };
 
 class NFClassModule
@@ -174,13 +174,13 @@ public:
     virtual NFIClassModule* GetThreadClassModule() override;
 	virtual NFIClassModule* GetThreadClassModule(const int index) override;
 
-    virtual bool AddClassCallBack(const std::string& strClassName, const CLASS_EVENT_FUNCTOR_PTR& cb);
-    virtual bool DoEvent(const NFGUID& objectID, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFDataList& valueList);
+    virtual bool AddClassCallBack(const std::string& className, const CLASS_EVENT_FUNCTOR_PTR& cb);
+    virtual bool DoEvent(const NFGUID& objectID, const std::string& className, const CLASS_OBJECT_EVENT classEvent, const NFDataList& valueList);
 
-    virtual NF_SHARE_PTR<NFIPropertyManager> GetClassPropertyManager(const std::string& strClassName);
-    virtual NF_SHARE_PTR<NFIRecordManager> GetClassRecordManager(const std::string& strClassName);
+    virtual NF_SHARE_PTR<NFIPropertyManager> GetClassPropertyManager(const std::string& className);
+    virtual NF_SHARE_PTR<NFIRecordManager> GetClassRecordManager(const std::string& className);
 
-    virtual bool AddClass(const std::string& strClassName, const std::string& strParentName);
+    virtual bool AddClass(const std::string& className, const std::string& strParentName);
 
 protected:
     virtual NFDATA_TYPE ComputerType(const char* pstrTypeName, NFData& var);
@@ -204,7 +204,7 @@ protected:
 	std::vector<ThreadClassModule> mThreadClasses;
 
 protected:
-    std::string msConfigFileName;
+    std::string mConfigFileName;
     bool mbBackup = false;
 };
 

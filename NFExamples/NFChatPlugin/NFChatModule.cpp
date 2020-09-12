@@ -54,9 +54,9 @@ bool NFChatModule::Execute()
 	return true;
 }
 
-void NFChatModule::OnClientChatProcess(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
+void NFChatModule::OnClientChatProcess(const NFSOCK sockIndex, const int msgID, const char* msg, const uint32_t len)
 {
-	CLIENT_MSG_PROCESS( nMsgID, msg, nLen, NFMsg::ReqAckPlayerChat);
+	CLIENT_MSG_PROCESS( msgID, msg, len, NFMsg::ReqAckPlayerChat);
 
 	switch (xMsg.chat_channel())
 	{

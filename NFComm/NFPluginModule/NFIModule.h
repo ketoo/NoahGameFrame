@@ -99,7 +99,7 @@ public:
         return pPluginManager;
     }
 
-    std::string strName;
+    std::string name;
     bool m_bIsExecute;
 protected:
 	NFIPluginManager* pPluginManager;

@@ -56,14 +56,14 @@ public:
 
 protected:
 
-    void OnSocketGSEvent(const NFSOCK nSockIndex, const NF_NET_EVENT eEvent, NFINet* pNet);
+    void OnSocketGSEvent(const NFSOCK sockIndex, const NF_NET_EVENT eEvent, NFINet* pNet);
 
     void Register(NFINet* pNet);
 
-    void OnAckEnterGame(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+    void OnAckEnterGame(const NFSOCK sockIndex, const int msgID, const char* msg, const uint32_t len);
     void LogServerInfo(const std::string& strServerInfo);
 
-	void Transport(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+	void Transport(const NFSOCK sockIndex, const int msgID, const char* msg, const uint32_t len);
 
 private:
 

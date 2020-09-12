@@ -61,9 +61,9 @@ bool NFCellModule::AfterInit()
 		{
 			const std::string& strId = strIdList[i];
 
-			const int nServerID = m_pElementModule->GetPropertyInt32(strId, NFrame::Server::ServerID());
+			const int serverID = m_pElementModule->GetPropertyInt32(strId, NFrame::Server::ServerID());
 			const int nCell = 1;//m_pElementModule->GetPropertyInt32(strId, NFrame::Server::Cell());
-			if (pPluginManager->GetAppID() == nServerID && nCell == 1)
+			if (pPluginManager->GetAppID() == serverID && nCell == 1)
 			{
 				bCell = true;
 				break;
@@ -88,13 +88,13 @@ bool NFCellModule::AfterInit()
 		{
 			const std::string& strId = strIdList[i];
 
-			int nSceneID = lexical_cast<int>(strId);
-			TMAP_SCENE_INFO::iterator it = mtCellInfoMap.find(nSceneID);
+			int sceneID = lexical_cast<int>(strId);
+			TMAP_SCENE_INFO::iterator it = mtCellInfoMap.find(sceneID);
 			if (it == mtCellInfoMap.end())
 			{
 				TMAP_GROUP_INFO groupInfo;
 				groupInfo.insert(TMAP_GROUP_INFO::value_type(0, std::map<NFGUID, NF_SHARE_PTR<NFSceneCellInfo>>()));
-				mtCellInfoMap.insert(TMAP_SCENE_INFO::value_type(nSceneID, groupInfo));
+				mtCellInfoMap.insert(TMAP_SCENE_INFO::value_type(sceneID, groupInfo));
 			}
 		}
 
@@ -103,9 +103,9 @@ bool NFCellModule::AfterInit()
 		{
 			//init all cell, start from position 0
 			//the default group's id is 0
-			int nSceneID = it->first;
-			NFVector2 vLeftBot = m_pElementModule->GetPropertyVector2(std::to_string(nSceneID), NFrame::Scene::LeftBot());
-			NFVector2 vRightTop = m_pElementModule->GetPropertyVector2(std::to_string(nSceneID), NFrame::Scene::RightTop());
+			int sceneID = it->first;
+			NFVector2 vLeftBot = m_pElementModule->GetPropertyVector2(std::to_string(sceneID), NFrame::Scene::LeftBot());
+			NFVector2 vRightTop = m_pElementModule->GetPropertyVector2(std::to_string(sceneID), NFrame::Scene::RightTop());
 
 			TMAP_GROUP_INFO::iterator itGroup = it->second.find(0);
 
@@ -264,34 +264,34 @@ const NFGUID NFCellModule::OnObjectLeave(const NFGUID& self, const int& sceneID,
     return NFGUID();
 }
 
-bool NFCellModule::GetCellObjectList(const int nSceneID, const int nGroupID, const NFVector3 & pos, NFDataList & list, ECELL_AROUND eAround)
+bool NFCellModule::GetCellObjectList(const int sceneID, const int groupID, const NFVector3 & pos, NFDataList & list, ECELL_AROUND around)
 {
-	return m_pKernelModule->GetGroupObjectList(nSceneID, nGroupID, list);
+	return m_pKernelModule->GetGroupObjectList(sceneID, groupID, list);
 }
 
-bool NFCellModule::GetCellObjectList(const int nSceneID, const int nGroupID, const NFVector3 & pos, NFDataList & list, const NFGUID & noSelf, ECELL_AROUND eAround)
+bool NFCellModule::GetCellObjectList(const int sceneID, const int groupID, const NFVector3 & pos, NFDataList & list, const NFGUID & noSelf, ECELL_AROUND around)
 {
-	return m_pKernelModule->GetGroupObjectList(nSceneID, nGroupID, list, noSelf);
+	return m_pKernelModule->GetGroupObjectList(sceneID, groupID, list, noSelf);
 }
 
-bool NFCellModule::GetCellObjectList(const int nSceneID, const int nGroupID, const NFVector3 & pos, NFDataList & list, const bool bPlayer, ECELL_AROUND eAround)
+bool NFCellModule::GetCellObjectList(const int sceneID, const int groupID, const NFVector3 & pos, NFDataList & list, const bool bPlayer, ECELL_AROUND around)
 {
-	return m_pKernelModule->GetGroupObjectList(nSceneID, nGroupID, list, bPlayer);
+	return m_pKernelModule->GetGroupObjectList(sceneID, groupID, list, bPlayer);
 }
 
-bool NFCellModule::GetCellObjectList(const int nSceneID, const int nGroupID, const NFVector3 & pos, NFDataList & list, const bool bPlayer, const NFGUID & noSelf, ECELL_AROUND eAround)
+bool NFCellModule::GetCellObjectList(const int sceneID, const int groupID, const NFVector3 & pos, NFDataList & list, const bool bPlayer, const NFGUID & noSelf, ECELL_AROUND around)
 {
-	return m_pKernelModule->GetGroupObjectList(nSceneID, nGroupID, list, bPlayer, noSelf);
+	return m_pKernelModule->GetGroupObjectList(sceneID, groupID, list, bPlayer, noSelf);
 }
 
-bool NFCellModule::GetCellObjectList(const int nSceneID, const int nGroupID, const NFVector3 & pos, const std::string & strClassName, NFDataList & list, ECELL_AROUND eAround)
+bool NFCellModule::GetCellObjectList(const int sceneID, const int groupID, const NFVector3 & pos, const std::string & className, NFDataList & list, ECELL_AROUND around)
 {
-	return m_pKernelModule->GetGroupObjectList(nSceneID, nGroupID, strClassName, list);
+	return m_pKernelModule->GetGroupObjectList(sceneID, groupID, className, list);
 }
 
-bool NFCellModule::GetCellObjectList(const int nSceneID, const int nGroupID, const NFVector3 & pos, const std::string & strClassName, NFDataList & list, const NFGUID & noSelf, ECELL_AROUND eAround)
+bool NFCellModule::GetCellObjectList(const int sceneID, const int groupID, const NFVector3 & pos, const std::string & className, NFDataList & list, const NFGUID & noSelf, ECELL_AROUND around)
 {
-	return m_pKernelModule->GetGroupObjectList(nSceneID, nGroupID, strClassName, list, noSelf);
+	return m_pKernelModule->GetGroupObjectList(sceneID, groupID, className, list, noSelf);
 }
 
 const NFGUID NFCellModule::ComputeCellID(const int nX, const int nY, const int nZ)
@@ -346,13 +346,13 @@ const NFGUID NFCellModule::GetStepLenth(const NFGUID& selfGrid, const NFGUID& ot
     return NFGUID(std::abs(otherGrid.nHead64 - selfGrid.nHead64), std::abs(otherGrid.nData64 - selfGrid.nData64));
 }
 
-const int NFCellModule::GetAroundCell(const int& sceneID, const int& groupID, const NFGUID& selfGrid, NF_SHARE_PTR<NFSceneCellInfo>* gridList, ECELL_AROUND eAround /*= ECELL_AROUND_9 */)
+const int NFCellModule::GetAroundCell(const int& sceneID, const int& groupID, const NFGUID& selfGrid, NF_SHARE_PTR<NFSceneCellInfo>* gridList, ECELL_AROUND around /*= ECELL_AROUND_9 */)
 {
 	NF_SHARE_PTR<NFSceneCellInfo> pGridInfo = GetCellInfo(sceneID, groupID, selfGrid);
-    return GetAroundCell(pGridInfo, gridList, eAround);
+    return GetAroundCell(pGridInfo, gridList, around);
 }
 
-const int NFCellModule::GetAroundCell(NF_SHARE_PTR<NFSceneCellInfo> pGridInfo, NF_SHARE_PTR<NFSceneCellInfo>* gridList, ECELL_AROUND eAround /*= ECELL_AROUND_9 */)
+const int NFCellModule::GetAroundCell(NF_SHARE_PTR<NFSceneCellInfo> pGridInfo, NF_SHARE_PTR<NFSceneCellInfo>* gridList, ECELL_AROUND around /*= ECELL_AROUND_9 */)
 {
     int nObjectCount = 0;
 
@@ -365,7 +365,7 @@ const int NFCellModule::GetAroundCell(NF_SHARE_PTR<NFSceneCellInfo> pGridInfo, N
 
     nObjectCount += pGridInfo->Count();
 
-    switch (eAround)
+    switch (around)
     {
         case ECELL_AROUND_9:
         {
@@ -393,17 +393,17 @@ const int NFCellModule::GetAroundCell(NF_SHARE_PTR<NFSceneCellInfo> pGridInfo, N
     return nObjectCount;
 }
 
-const int NFCellModule::GetAroundObject(const int& sceneID, const int& groupID, const NFGUID& selfCell, NFDataList& objectList, ECELL_AROUND eAround /*= ECELL_AROUND_9 */)
+const int NFCellModule::GetAroundObject(const int& sceneID, const int& groupID, const NFGUID& selfCell, NFDataList& objectList, ECELL_AROUND around /*= ECELL_AROUND_9 */)
 {
     NF_SHARE_PTR<NFSceneCellInfo> pCellInfo = GetCellInfo(sceneID, groupID, selfCell);
     if (pCellInfo)
     {
-        return GetAroundObject(pCellInfo, objectList, eAround);
+        return GetAroundObject(pCellInfo, objectList, around);
     }
     return 0;
 }
 
-const int NFCellModule::GetAroundObject(NF_SHARE_PTR<NFSceneCellInfo> pCellInfo, NFDataList& objectList, ECELL_AROUND eAround /*= ECELL_AROUND_9 */)
+const int NFCellModule::GetAroundObject(NF_SHARE_PTR<NFSceneCellInfo> pCellInfo, NFDataList& objectList, ECELL_AROUND around /*= ECELL_AROUND_9 */)
 {
     if (!pCellInfo)
     {
@@ -412,7 +412,7 @@ const int NFCellModule::GetAroundObject(NF_SHARE_PTR<NFSceneCellInfo> pCellInfo,
 
 
 	NF_SHARE_PTR<NFSceneCellInfo> aroundCell[ECELL_DIRECTION_MAXCOUNT];
-    if (GetAroundCell(pCellInfo, aroundCell, eAround) > 0)
+    if (GetAroundCell(pCellInfo, aroundCell, around) > 0)
     {
         for (int i = 0; i < ECELL_DIRECTION_MAXCOUNT; i++)
         {
@@ -452,9 +452,9 @@ int NFCellModule::AddMoveOutEventCallBack(CELL_MOVE_EVENT_FUNCTOR_PTR functorPtr
 	return 0;
 }
 
-int NFCellModule::OnObjectEvent(const NFGUID & self, const std::string & strClassNames, const CLASS_OBJECT_EVENT eClassEvent, const NFDataList & var)
+int NFCellModule::OnObjectEvent(const NFGUID & self, const std::string & classNames, const CLASS_OBJECT_EVENT classEvent, const NFDataList & var)
 {
-	if (CLASS_OBJECT_EVENT::COE_CREATE_FINISH == eClassEvent)
+	if (CLASS_OBJECT_EVENT::COE_CREATE_FINISH == classEvent)
 	{
 		m_pKernelModule->AddPropertyCallBack(self, NFrame::IObject::Position(), this, &NFCellModule::OnPositionEvent);
 	}
@@ -462,7 +462,7 @@ int NFCellModule::OnObjectEvent(const NFGUID & self, const std::string & strClas
 	return 0;
 }
 
-int NFCellModule::OnPositionEvent(const NFGUID & self, const std::string & strPropertyName, const NFData & oldVar, const NFData & newVar)
+int NFCellModule::OnPositionEvent(const NFGUID & self, const std::string & propertyName, const NFData & oldVar, const NFData & newVar)
 {
 	const int sceneID = m_pKernelModule->GetPropertyInt32(self, NFrame::IObject::SceneID());
 	const int groupID = m_pKernelModule->GetPropertyInt32(self, NFrame::IObject::GroupID());
@@ -595,12 +595,12 @@ bool NFCellModule::OnMoveOutEvent(const NFGUID & self, const int & sceneID, cons
 	return true;
 }
 
-int NFCellModule::BeforeLeaveSceneGroup(const NFGUID & self, const int nSceneID, const int nGroupID, const int nType, const NFDataList & argList)
+int NFCellModule::BeforeLeaveSceneGroup(const NFGUID & self, const int sceneID, const int groupID, const int type, const NFDataList & argList)
 {
 	return 0;
 }
 
-int NFCellModule::AfterEnterSceneGroup(const NFGUID & self, const int nSceneID, const int nGroupID, const int nType, const NFDataList & argList)
+int NFCellModule::AfterEnterSceneGroup(const NFGUID & self, const int sceneID, const int groupID, const int type, const NFDataList & argList)
 {
 	return 0;
 }

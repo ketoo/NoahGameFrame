@@ -36,7 +36,7 @@
 	assert((TIsDerived<classBaseName, NFIModule>::Result));	\
 	assert((TIsDerived<className, classBaseName>::Result));	\
 	NFIModule* pRegisterModule##className= new className(pManager); \
-    pRegisterModule##className->strName = (#className); \
+    pRegisterModule##className->name = (#className); \
     pManager->AddModule( typeid(classBaseName).name(), pRegisterModule##className );\
     this->AddElement( typeid(classBaseName).name(), pRegisterModule##className );
 
@@ -107,7 +107,7 @@ public:
 			bool bRet = pModule->Awake();
 			if (!bRet)
 			{
-				std::cout << pModule->strName << std::endl;
+				std::cout << pModule->name << std::endl;
 				assert(0);
 			}
 		}
@@ -125,7 +125,7 @@ public:
 			bool bRet = pModule->Init();
 			if (!bRet)
 			{
-				std::cout << pModule->strName << std::endl;
+				std::cout << pModule->name << std::endl;
 				assert(0);
 			}
 		}
@@ -143,7 +143,7 @@ public:
             bool bRet = pModule->AfterInit();
             if (!bRet)
             {
-				std::cout << pModule->strName << std::endl;
+				std::cout << pModule->name << std::endl;
                 assert(0);
             }
         }

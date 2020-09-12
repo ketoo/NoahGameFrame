@@ -71,56 +71,56 @@ bool NFCreateRoleModule::ReadyExecute()
 	return true;
 }
 
-void NFCreateRoleModule::OnRequireRoleListProcess(const NFSOCK nSockIndex, const int nMsgID, const char * msg, const uint32_t nLen)
+void NFCreateRoleModule::OnRequireRoleListProcess(const NFSOCK sockIndex, const int msgID, const char * msg, const uint32_t len)
 {
-	m_pNetClientModule->SendBySuitWithOutHead(NF_SERVER_TYPES::NF_ST_DB, nSockIndex, nMsgID, std::string(msg, nLen));
+	m_pNetClientModule->SendBySuitWithOutHead(NF_SERVER_TYPES::NF_ST_DB, sockIndex, msgID, std::string(msg, len));
 }
 
-void NFCreateRoleModule::OnResponseRoleListProcess(const NFSOCK nSockIndex, const int nMsgID, const char * msg, const uint32_t nLen)
+void NFCreateRoleModule::OnResponseRoleListProcess(const NFSOCK sockIndex, const int msgID, const char * msg, const uint32_t len)
 {
-	NFGUID nClientID;
+	NFGUID clientID;
 	NFMsg::AckRoleLiteInfoList xData;
-	if (!m_pNetModule->ReceivePB(nMsgID, msg, nLen, xData, nClientID))
+	if (!m_pNetModule->ReceivePB(msgID, msg, len, xData, clientID))
 	{
 		return;
 	}
 
-	NF_SHARE_PTR<NFIGameServerNet_ServerModule::GateServerInfo> xGateInfo = m_pGameServerNet_ServerModule->GetGateServerInfo(nClientID.GetHead());
+	NF_SHARE_PTR<NFIGameServerNet_ServerModule::GateServerInfo> xGateInfo = m_pGameServerNet_ServerModule->GetGateServerInfo(clientID.GetHead());
 	if (xGateInfo)
 	{
-		m_pNetModule->SendMsgWithOutHead (nMsgID, std::string(msg, nLen), xGateInfo->xServerData.nFD);
+		m_pNetModule->SendMsgWithOutHead (msgID, std::string(msg, len), xGateInfo->xServerData.nFD);
 	}
 }
 
-void NFCreateRoleModule::OnCreateRoleGameProcess(const NFSOCK nSockIndex, const int nMsgID, const char * msg, const uint32_t nLen)
+void NFCreateRoleModule::OnCreateRoleGameProcess(const NFSOCK sockIndex, const int msgID, const char * msg, const uint32_t len)
 {
-	m_pNetClientModule->SendBySuitWithOutHead(NF_SERVER_TYPES::NF_ST_DB, nSockIndex, nMsgID, std::string(msg, nLen));
+	m_pNetClientModule->SendBySuitWithOutHead(NF_SERVER_TYPES::NF_ST_DB, sockIndex, msgID, std::string(msg, len));
 }
 
-void NFCreateRoleModule::OnDeleteRoleGameProcess(const NFSOCK nSockIndex, const int nMsgID, const char * msg, const uint32_t nLen)
+void NFCreateRoleModule::OnDeleteRoleGameProcess(const NFSOCK sockIndex, const int msgID, const char * msg, const uint32_t len)
 {
-	m_pNetClientModule->SendBySuitWithOutHead(NF_SERVER_TYPES::NF_ST_DB, nSockIndex, nMsgID, std::string(msg, nLen));
+	m_pNetClientModule->SendBySuitWithOutHead(NF_SERVER_TYPES::NF_ST_DB, sockIndex, msgID, std::string(msg, len));
 }
 
-void NFCreateRoleModule::OnClientEnterGameProcess(const NFSOCK nSockIndex, const int nMsgID, const char * msg, const uint32_t nLen)
+void NFCreateRoleModule::OnClientEnterGameProcess(const NFSOCK sockIndex, const int msgID, const char * msg, const uint32_t len)
 {
-	NFGUID nClientID;
+	NFGUID clientID;
 	NFMsg::ReqEnterGameServer xMsg;
-	if (!m_pNetModule->ReceivePB( nMsgID, msg, nLen, xMsg, nClientID))
+	if (!m_pNetModule->ReceivePB( msgID, msg, len, xMsg, clientID))
 	{
 		return;
 	}
 
-	NFGUID nRoleID = NFINetModule::PBToNF(xMsg.id());
+	NFGUID roleID = NFINetModule::PBToNF(xMsg.id());
 
-	if (m_pKernelModule->GetObject(nRoleID))
+	if (m_pKernelModule->GetObject(roleID))
 	{
-		m_pKernelModule->DestroyObject(nRoleID);
+		m_pKernelModule->DestroyObject(roleID);
 	}
 
 	//////////////////////////////////////////////////////////////////////////
 
-	NF_SHARE_PTR<NFIGameServerNet_ServerModule::GateBaseInfo>  pGateInfo = m_pGameServerNet_ServerModule->GetPlayerGateInfo(nRoleID);
+	NF_SHARE_PTR<NFIGameServerNet_ServerModule::GateBaseInfo>  pGateInfo = m_pGameServerNet_ServerModule->GetPlayerGateInfo(roleID);
 	if (nullptr != pGateInfo)
 	{
 		if (pGateInfo->eStatus == NFIGameServerNet_ServerModule::GateBaseInfo::E_LOADING)
@@ -128,40 +128,40 @@ void NFCreateRoleModule::OnClientEnterGameProcess(const NFSOCK nSockIndex, const
 			return;
 		}
 
-		m_pGameServerNet_ServerModule->RemovePlayerGateInfo(nRoleID);
+		m_pGameServerNet_ServerModule->RemovePlayerGateInfo(roleID);
 	}
 
-	NF_SHARE_PTR<NFIGameServerNet_ServerModule::GateServerInfo> pGateServerinfo = m_pGameServerNet_ServerModule->GetGateServerInfoBySockIndex(nSockIndex);
+	NF_SHARE_PTR<NFIGameServerNet_ServerModule::GateServerInfo> pGateServerinfo = m_pGameServerNet_ServerModule->GetGateServerInfoBySockIndex(sockIndex);
 	if (nullptr == pGateServerinfo)
 	{
 		return;
 	}
 
-	int nGateID = -1;
+	int gateID = -1;
 	if (pGateServerinfo->xServerData.pData)
 	{
-		nGateID = pGateServerinfo->xServerData.pData->server_id();
+		gateID = pGateServerinfo->xServerData.pData->server_id();
 	}
 
-	if (nGateID < 0)
+	if (gateID < 0)
 	{
 		return;
 	}
 
-	if (!m_pGameServerNet_ServerModule->AddPlayerGateInfo(nRoleID, nClientID, nGateID))
+	if (!m_pGameServerNet_ServerModule->AddPlayerGateInfo(roleID, clientID, gateID))
 	{
 		return;
 	}
 
-	m_pNetClientModule->SendBySuitWithOutHead(NF_SERVER_TYPES::NF_ST_DB, nSockIndex, NFMsg::REQ_LOAD_ROLE_DATA, std::string(msg, nLen));
+	m_pNetClientModule->SendBySuitWithOutHead(NF_SERVER_TYPES::NF_ST_DB, sockIndex, NFMsg::REQ_LOAD_ROLE_DATA, std::string(msg, len));
 
 }
 
-void NFCreateRoleModule::OnDBLoadRoleDataProcess(const NFSOCK nSockIndex, const int nMsgID, const char * msg, const uint32_t nLen)
+void NFCreateRoleModule::OnDBLoadRoleDataProcess(const NFSOCK sockIndex, const int msgID, const char * msg, const uint32_t len)
 {
-	NFGUID nClientID;
+	NFGUID clientID;
 	NFMsg::RoleDataPack xMsg;
-	if (!m_pNetModule->ReceivePB(nMsgID, msg, nLen, xMsg, nClientID))
+	if (!m_pNetModule->ReceivePB(msgID, msg, len, xMsg, clientID))
 	{
 		//releasing all the resource that allow when the user login, then kick off the user
 		// TODO
@@ -174,16 +174,16 @@ void NFCreateRoleModule::OnDBLoadRoleDataProcess(const NFSOCK nSockIndex, const 
 		return;
 	}
 
-	NFGUID nRoleID = NFINetModule::PBToNF(xMsg.id());
-	if (m_pKernelModule->GetObject(nRoleID))
+	NFGUID roleID = NFINetModule::PBToNF(xMsg.id());
+	if (m_pKernelModule->GetObject(roleID))
 	{
 		//it should be rebind with proxy's netobject
-		m_pKernelModule->DestroyObject(nRoleID);
+		m_pKernelModule->DestroyObject(roleID);
 	}
 
-	mxObjectDataCache[nRoleID] = xMsg;
+	mxObjectDataCache[roleID] = xMsg;
 
-	NF_SHARE_PTR<NFIGameServerNet_ServerModule::GateBaseInfo>  pGateInfo = m_pGameServerNet_ServerModule->GetPlayerGateInfo(nRoleID);
+	NF_SHARE_PTR<NFIGameServerNet_ServerModule::GateBaseInfo>  pGateInfo = m_pGameServerNet_ServerModule->GetPlayerGateInfo(roleID);
 	if (nullptr != pGateInfo)
 	{
 		if (pGateInfo->eStatus == NFIGameServerNet_ServerModule::GateBaseInfo::E_LOADING)
@@ -195,7 +195,7 @@ void NFCreateRoleModule::OnDBLoadRoleDataProcess(const NFSOCK nSockIndex, const 
 		NFDataList var;
 
 		var.AddString(NFrame::Player::GateID());
-		var.AddInt(pGateInfo->nGateID);
+		var.AddInt(pGateInfo->gateID);
 
 		var.AddString(NFrame::Player::GameID());
 		var.AddInt(pPluginManager->GetAppID());
@@ -211,12 +211,12 @@ void NFCreateRoleModule::OnDBLoadRoleDataProcess(const NFSOCK nSockIndex, const 
 		var.AddInt(1);
 		*/
 
-		NF_SHARE_PTR<NFIObject> pObject = m_pKernelModule->CreateObject(nRoleID, 1, 0, NFrame::Player::ThisName(), "", var);
+		NF_SHARE_PTR<NFIObject> pObject = m_pKernelModule->CreateObject(roleID, 1, 0, NFrame::Player::ThisName(), "", var);
 		if (nullptr == pObject)
 		{
 			//mRoleBaseData
 			//mRoleFDData
-			mxObjectDataCache.erase(nRoleID);
+			mxObjectDataCache.erase(roleID);
 			return;
 		}
 
@@ -238,22 +238,22 @@ void NFCreateRoleModule::OnDBLoadRoleDataProcess(const NFSOCK nSockIndex, const 
 	}
 }
 
-int NFCreateRoleModule::OnObjectPlayerEvent(const NFGUID & self, const std::string & strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFDataList & var)
+int NFCreateRoleModule::OnObjectPlayerEvent(const NFGUID & self, const std::string & className, const CLASS_OBJECT_EVENT classEvent, const NFDataList & var)
 {
-	if (CLASS_OBJECT_EVENT::COE_DESTROY == eClassEvent)
+	if (CLASS_OBJECT_EVENT::COE_DESTROY == classEvent)
 	{
 		//m_pDataTailModule->LogObjectData(self);
 
 		SaveData(self);
 	}
-	else if (CLASS_OBJECT_EVENT::COE_CREATE_LOADDATA == eClassEvent)
+	else if (CLASS_OBJECT_EVENT::COE_CREATE_LOADDATA == classEvent)
 	{
 		//m_pDataTailModule->StartTrail(self);
 		//m_pDataTailModule->LogObjectData(self);
 
 		AttachData(self);
 	}
-	else if (CLASS_OBJECT_EVENT::COE_CREATE_FINISH == eClassEvent)
+	else if (CLASS_OBJECT_EVENT::COE_CREATE_FINISH == classEvent)
 	{
 		auto it = mxObjectDataCache.find(self);
 		if (it != mxObjectDataCache.end())
@@ -323,7 +323,7 @@ void NFCreateRoleModule::SaveData(const NFGUID & self)
 	}
 }
 
-int NFCreateRoleModule::SaveDataOnTime(const NFGUID & self, const std::string & name, const float fIntervalTime, const int nCount)
+int NFCreateRoleModule::SaveDataOnTime(const NFGUID & self, const std::string & name, const float fIntervalTime, const int count)
 {
 	SaveData(self);
 	return 0;

@@ -54,15 +54,15 @@ bool NFSecurityModule::AfterInit()
 	return true;
 }
 
-const std::string NFSecurityModule::GetSecurityKey(const std::string & strAccount)
+const std::string NFSecurityModule::GetSecurityKey(const std::string & account)
 {
-	return strAccount;
+	return account;
 }
 
-bool NFSecurityModule::VerifySecurityKey(const std::string & strAccount, const std::string & strSecurityKey)
+bool NFSecurityModule::VerifySecurityKey(const std::string & account, const std::string & strSecurityKey)
 {
 	//you would implement this function by yourself
-	//if (strAccount == strSecurityKey)
+	//if (account == strSecurityKey)
 	{
 		return true;
 	}
@@ -70,22 +70,22 @@ bool NFSecurityModule::VerifySecurityKey(const std::string & strAccount, const s
 	return false;
 }
 
-std::string NFSecurityModule::EncodeMsg(const std::string & strAccount, const std::string & strSecurityKey, const int nMessageID, const char * strMessageData, const int nLen)
+std::string NFSecurityModule::EncodeMsg(const std::string & account, const std::string & strSecurityKey, const int nMessageID, const char * strMessageData, const int len)
 {
-	return std::string(strMessageData, nLen);
+	return std::string(strMessageData, len);
 }
 
-std::string NFSecurityModule::EncodeMsg(const std::string & strAccount, const std::string & strSecurityKey, const int nMessageID, const std::string & strMessageData)
+std::string NFSecurityModule::EncodeMsg(const std::string & account, const std::string & strSecurityKey, const int nMessageID, const std::string & strMessageData)
 {
 	return strMessageData;
 }
 
-std::string NFSecurityModule::DecodeMsg(const std::string & strAccount, const std::string & strSecurityKey, const int nMessageID, const char * strMessageData, const int nLen)
+std::string NFSecurityModule::DecodeMsg(const std::string & account, const std::string & strSecurityKey, const int nMessageID, const char * strMessageData, const int len)
 {
-	return std::string(strMessageData, nLen);
+	return std::string(strMessageData, len);
 }
 
-std::string NFSecurityModule::DecodeMsg(const std::string & strAccount, const std::string & strSecurityKey, const int nMessageID, const std::string & strMessageData)
+std::string NFSecurityModule::DecodeMsg(const std::string & account, const std::string & strSecurityKey, const int nMessageID, const std::string & strMessageData)
 {
 	return strMessageData;
 }

@@ -60,10 +60,10 @@ class NFDynLib
 
 public:
 
-    NFDynLib(const std::string& strName)
+    NFDynLib(const std::string& name)
     {
         mbMain = false;
-        mstrName = strName;
+        mstrName = name;
 #ifdef NF_DEBUG_MODE
         //mstrName.append("");
 #endif

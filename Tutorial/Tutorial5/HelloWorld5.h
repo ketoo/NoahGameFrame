@@ -76,16 +76,16 @@ protected:
 
 	NFWebStatus OnFilter(NF_SHARE_PTR<NFHttpRequest> req);
 
-	int OnHeartBeat(const NFGUID& self, const std::string& strHeartBeat, const float fTime, const int nCount);
+	int OnHeartBeat(const NFGUID& self, const std::string& heartBeat, const float time, const int count);
 
 	void OnGetCallBack(const NFGUID id, const int state_code, const std::string& strRespData);
 	void OnPostCallBack(const NFGUID id, const int state_code, const std::string& strRespData, const std::string& strMemoData);
 
-    void OnWebSocketTestProcess(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+    void OnWebSocketTestProcess(const NFSOCK sockIndex, const int msgID, const char* msg, const uint32_t len);
 
 	void OnTCPEvent(const NFSOCK fd, const NF_NET_EVENT event, NFINet* pNet);
 
-	void OnLoginProcess(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+	void OnLoginProcess(const NFSOCK sockIndex, const int msgID, const char* msg, const uint32_t len);
 
 private:
 

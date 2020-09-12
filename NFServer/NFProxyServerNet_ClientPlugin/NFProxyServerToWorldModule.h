@@ -60,31 +60,31 @@ public:
     virtual void LogSend(const char* str) {}
 
 	virtual NFINetClientModule* GetClusterModule();
-    virtual bool VerifyConnectData(const std::string& strAccount, const std::string& strKey);
+    virtual bool VerifyConnectData(const std::string& account, const std::string& strKey);
 
 protected:
 
-    void OnSocketWSEvent(const NFSOCK nSockIndex, const NF_NET_EVENT eEvent, NFINet* pNet);
+    void OnSocketWSEvent(const NFSOCK sockIndex, const NF_NET_EVENT eEvent, NFINet* pNet);
 
     void Register(NFINet* pNet);
 	void ServerReport();
 
-    void OnSelectServerResultProcess(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
-    void OnServerInfoProcess(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+    void OnSelectServerResultProcess(const NFSOCK sockIndex, const int msgID, const char* msg, const uint32_t len);
+    void OnServerInfoProcess(const NFSOCK sockIndex, const int msgID, const char* msg, const uint32_t len);
 
     void LogServerInfo(const std::string& strServerInfo);
 
-	void OnOtherMessage(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+	void OnOtherMessage(const NFSOCK sockIndex, const int msgID, const char* msg, const uint32_t len);
 private:
     struct ClientConnectData
     {
         ClientConnectData()
         {
-            strAccount = "";
+            account = "";
             strConnectKey = "";
         }
 
-        std::string strAccount;
+        std::string account;
         std::string strConnectKey;
     };
 

@@ -37,7 +37,6 @@
 
 NFKernelModule::NFKernelModule(NFIPluginManager* p)
 {
-    m_bIsExecute = true;
 	nGUIDIndex = 0;
 	nLastTime = 0;
 
@@ -162,6 +161,8 @@ NF_SHARE_PTR<NFIObject> NFKernelModule::CreateObject(const NFGUID& self, const i
 		m_pLogModule->LogObject(NFILogModule::NLL_ERROR_NORMAL, ident, "The object has Exists", __FUNCTION__, __LINE__);
 		return pObject;
 	}
+
+	m_pLogModule->LogInfo(ident, "Start to create object with config id:" + className + "=>" + configIndex + " and scene group:" + std::to_string(sceneID) + "," + std::to_string(groupID));
 
 	pObject = NF_SHARE_PTR<NFIObject>(NF_NEW NFObject(ident, pPluginManager));
 	AddElement(ident, pObject);
@@ -322,6 +323,27 @@ NF_SHARE_PTR<NFIObject> NFKernelModule::CreateObject(const NFGUID& self, const i
 
 						}
 
+						pObject->SetState(COE_CREATE_LOADDATA);
+						DoEvent(ident, className, pObject->GetState(), arg);
+
+						pObject->SetState(COE_CREATE_AFTER_ATTACHDATA);
+						DoEvent(ident, className, pObject->GetState(), arg);
+
+						pObject->SetState(COE_CREATE_BEFORE_EFFECT);
+						DoEvent(ident, className, pObject->GetState(), arg);
+
+						pObject->SetState(COE_CREATE_EFFECTDATA);
+						DoEvent(ident, className, pObject->GetState(), arg);
+
+						pObject->SetState(COE_CREATE_AFTER_EFFECT);
+						DoEvent(ident, className, pObject->GetState(), arg);
+
+						pObject->SetState(COE_CREATE_HASDATA);
+						DoEvent(ident, className, pObject->GetState(), arg);
+
+						pObject->SetState(COE_CREATE_FINISH);
+						DoEvent(ident, className, pObject->GetState(), arg);
+						/*
 						m_pThreadPoolModule->DoAsyncTask(NFGUID(), "",
 							[=](NFThreadTask& task) -> void
 							{
@@ -347,9 +369,6 @@ NF_SHARE_PTR<NFIObject> NFKernelModule::CreateObject(const NFGUID& self, const i
 									pObject->SetState(COE_CREATE_AFTER_EFFECT);
 									DoEvent(ident, className, pObject->GetState(), arg);
 
-									pObject->SetState(COE_CREATE_READY);
-									DoEvent(ident, className, pObject->GetState(), arg);
-
 									pObject->SetState(COE_CREATE_HASDATA);
 									DoEvent(ident, className, pObject->GetState(), arg);
 
@@ -357,14 +376,26 @@ NF_SHARE_PTR<NFIObject> NFKernelModule::CreateObject(const NFGUID& self, const i
 									DoEvent(ident, className, pObject->GetState(), arg);
 								}
 							});
-
+						*/
 					});
 			});
 
 	}
 	else
 	{
+		int64_t start = NFGetTimeMSEx();
+		int64_t begin = start;
+		int64_t now = start;
+		int64_t time1 = 0;
+		int64_t time2 = 0;
+		int64_t time3 = 0;
+		int64_t time4 = 0;
+		int64_t time5 = 0;
+		int64_t time6 = 0;
+
 		//backup thread for async task
+		//The code below costs tooooo much CPU time right now, need to improve!!
+		//TODO
 		{
 			NF_SHARE_PTR<NFIPropertyManager> pStaticClassPropertyManager = m_pClassModule->GetClassPropertyManager(className);
 			NF_SHARE_PTR<NFIRecordManager> pStaticClassRecordManager = m_pClassModule->GetClassRecordManager(className);
@@ -413,6 +444,9 @@ NF_SHARE_PTR<NFIObject> NFKernelModule::CreateObject(const NFGUID& self, const i
 			}
 		}
 
+		now = NFGetTimeMSEx();
+		time1 = now - start;
+		start = now;
 		//no data--main thread
 		{
 			NFVector3 vRelivePos = m_pSceneModule->GetRelivePosition(sceneID, 0);
@@ -428,6 +462,10 @@ NF_SHARE_PTR<NFIObject> NFKernelModule::CreateObject(const NFGUID& self, const i
 
 			DoEvent(ident, className, pObject->GetState(), arg);
 		}
+
+		now = NFGetTimeMSEx();
+		time2 = now - start;
+		start = now;
 
 		//////////////////////////////////////////////////////////////////////////
 		//backup thread
@@ -451,6 +489,9 @@ NF_SHARE_PTR<NFIObject> NFKernelModule::CreateObject(const NFGUID& self, const i
 			}
 		}
 
+		now = NFGetTimeMSEx();
+		time3 = now - start;
+		start = now;
 		//main thread
 		{
 			NF_SHARE_PTR<NFIPropertyManager> pPropertyManager = pObject->GetPropertyManager();
@@ -507,35 +548,78 @@ NF_SHARE_PTR<NFIObject> NFKernelModule::CreateObject(const NFGUID& self, const i
 
 		}
 
+		now = NFGetTimeMSEx();
+		time4 = now - start;
+		start = now;
 		//back up thread
 		{
 			pObject->SetState(COE_CREATE_LOADDATA);
 			DoEvent(ident, className, pObject->GetState(), arg);
 		}
 
+		now = NFGetTimeMSEx();
+		time5 = now - start;
+		start = now;
+
+		int64_t time6_1 = 0;
+		int64_t time6_2 = 0;
+		int64_t time6_3 = 0;
+		int64_t time6_4 = 0;
+		int64_t time6_5 = 0;
+		int64_t time6_6 = 0;
 		//below are main thread
 		{
 			pObject->SetState(COE_CREATE_AFTER_ATTACHDATA);
 			DoEvent(ident, className, pObject->GetState(), arg);
 
+			now = NFGetTimeMSEx();
+			time6_1 = now - start;
+			start = now;
+
 			pObject->SetState(COE_CREATE_BEFORE_EFFECT);
 			DoEvent(ident, className, pObject->GetState(), arg);
+
+			now = NFGetTimeMSEx();
+			time6_2 = now - start;
+			start = now;
 
 			pObject->SetState(COE_CREATE_EFFECTDATA);
 			DoEvent(ident, className, pObject->GetState(), arg);
 
+			now = NFGetTimeMSEx();
+			time6_3 = now - start;
+			start = now;
+
+			//The code below will costs tooooo much CPU time when the player first time to login as we have a gift system to add massive items to players's inventory.
+			//TODO
 			pObject->SetState(COE_CREATE_AFTER_EFFECT);
 			DoEvent(ident, className, pObject->GetState(), arg);
 
-			pObject->SetState(COE_CREATE_READY);
-			DoEvent(ident, className, pObject->GetState(), arg);
+			now = NFGetTimeMSEx();
+			time6_4 = now - start;
+			start = now;
 
+			//The code below costs tooooo much CPU time right now, need to improve!!
+			//TODO
 			pObject->SetState(COE_CREATE_HASDATA);
 			DoEvent(ident, className, pObject->GetState(), arg);
 
+			now = NFGetTimeMSEx();
+			time6_5 = now - start;
+			start = now;
+
 			pObject->SetState(COE_CREATE_FINISH);
 			DoEvent(ident, className, pObject->GetState(), arg);
+
+			now = NFGetTimeMSEx();
+			time6_6 = now - start;
+			start = now;
 		}
+
+		time6 = now - begin;
+
+		m_pLogModule->LogInfo(ident, "finished to create object, time cost list, totally time is:" + std::to_string(time6)  +", time1:" + std::to_string(time1) + " time2:" + std::to_string(time2) + " time3:" + std::to_string(time3) + " time4:" + std::to_string(time4) + " time5:" + std::to_string(time5)
+		+ " time6_1:" + std::to_string(time6_1) + " time6_2:" + std::to_string(time6_2) + " time6_3:" + std::to_string(time6_3) + " time6_4:" + std::to_string(time6_4) + " time6_5:" + std::to_string(time6_5) + " time6_6:" + std::to_string(time6_6));
 	}
 
 	return pObject;
@@ -628,7 +712,7 @@ bool NFKernelModule::SetPropertyString(const NFGUID& self, const std::string& pr
 	NF_SHARE_PTR<NFIObject> pObject = GetElement(self);
 	if (pObject)
 	{
-		return pObject->SetPropertyString(propertyName, value);
+		return pObject->SetPropertyString(propertyName, strValue);
 	}
 
 	m_pLogModule->LogObject(NFILogModule::NLL_ERROR_NORMAL, self, propertyName + "| There is no object", __FUNCTION__, __LINE__);
@@ -877,7 +961,7 @@ bool NFKernelModule::SetRecordString(const NFGUID& self, const std::string& reco
 	NF_SHARE_PTR<NFIObject> pObject = GetElement(self);
 	if (pObject)
 	{
-		if (!pObject->SetRecordString(recordName, row, col, value))
+		if (!pObject->SetRecordString(recordName, row, col, strValue))
 		{
 			m_pLogModule->LogError(self, recordName + " error SetRecordString for row  or col", __FUNCTION__, __LINE__);
 		}

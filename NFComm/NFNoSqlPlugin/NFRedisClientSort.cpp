@@ -47,7 +47,7 @@ int NFRedisClient::ZADD(const std::string & key, const std::string & member, con
 	return add_new_num;
 }
 
-bool NFRedisClient::ZCARD(const std::string & key, int &nCount)
+bool NFRedisClient::ZCARD(const std::string & key, int &count)
 {
 	NFRedisCommand cmd(GET_NAME(ZCARD));
 	cmd << key;
@@ -60,13 +60,13 @@ bool NFRedisClient::ZCARD(const std::string & key, int &nCount)
 
 	if (pReply->type == REDIS_REPLY_INTEGER)
 	{
-		nCount = (int)pReply->integer;
+		count = (int)pReply->integer;
 	}
 
 	return true;
 }
 
-bool NFRedisClient::ZCOUNT(const std::string & key, const double start, const double end, int &nCount)
+bool NFRedisClient::ZCOUNT(const std::string & key, const double start, const double end, int &count)
 {
 	NFRedisCommand cmd(GET_NAME(ZCOUNT));
 	cmd << key;
@@ -81,7 +81,7 @@ bool NFRedisClient::ZCOUNT(const std::string & key, const double start, const do
 
 	if (pReply->type == REDIS_REPLY_INTEGER)
 	{
-		nCount = (int)pReply->integer;
+		count = (int)pReply->integer;
 	}
 
 	return true;

@@ -51,23 +51,23 @@ public:
     virtual bool Execute();
     virtual bool AfterInit();
 
-    virtual void TransmitToWorld(const int nHashKey, const int nMsgID, const google::protobuf::Message& xData);
+    virtual void TransmitToWorld(const int nHashKey, const int msgID, const google::protobuf::Message& xData);
 
 	virtual void SendOnline(const NFGUID& self);
 	virtual void SendOffline(const NFGUID& self);
 
 protected:
 
-    void OnSocketWSEvent(const NFSOCK nSockIndex, const NF_NET_EVENT eEvent, NFINet* pNet);
+    void OnSocketWSEvent(const NFSOCK sockIndex, const NF_NET_EVENT eEvent, NFINet* pNet);
 
 protected:
     void Register(NFINet* pNet);
 	void ServerReport();
-    void TransPBToProxy(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+    void TransPBToProxy(const NFSOCK sockIndex, const int msgID, const char* msg, const uint32_t len);
 
-    int OnObjectClassEvent(const NFGUID& self, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFDataList& var);
+    int OnObjectClassEvent(const NFGUID& self, const std::string& className, const CLASS_OBJECT_EVENT classEvent, const NFDataList& var);
 	
-	void OnServerInfoProcess(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+	void OnServerInfoProcess(const NFSOCK sockIndex, const int msgID, const char* msg, const uint32_t len);
 
 private:
 	NFINT64 mLastReportTime;

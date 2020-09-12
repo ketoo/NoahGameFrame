@@ -62,7 +62,7 @@ bool NFProxyServerToGameModule::AfterInit()
     return true;
 }
 
-void NFProxyServerToGameModule::OnSocketGSEvent(const NFSOCK nSockIndex, const NF_NET_EVENT eEvent, NFINet* pNet)
+void NFProxyServerToGameModule::OnSocketGSEvent(const NFSOCK sockIndex, const NF_NET_EVENT eEvent, NFINet* pNet)
 {
     if (eEvent & NF_NET_EVENT_EOF)
     {
@@ -75,7 +75,7 @@ void NFProxyServerToGameModule::OnSocketGSEvent(const NFSOCK nSockIndex, const N
     }
     else  if (eEvent & NF_NET_EVENT_CONNECTED)
     {
-        m_pLogModule->LogInfo(NFGUID(0, nSockIndex), "NF_NET_EVENT_CONNECTED connected success", __FUNCTION__, __LINE__);
+        m_pLogModule->LogInfo(NFGUID(0, sockIndex), "NF_NET_EVENT_CONNECTED connected success", __FUNCTION__, __LINE__);
         Register(pNet);
     }
 }
@@ -90,27 +90,27 @@ void NFProxyServerToGameModule::Register(NFINet* pNet)
 		{
 			const std::string& strId = strIdList[i];
 
-            const int nServerType = m_pElementModule->GetPropertyInt32(strId, NFrame::Server::Type());
-            const int nServerID = m_pElementModule->GetPropertyInt32(strId, NFrame::Server::ServerID());
-            if (nServerType == NF_SERVER_TYPES::NF_ST_PROXY && pPluginManager->GetAppID() == nServerID)
+            const int serverType = m_pElementModule->GetPropertyInt32(strId, NFrame::Server::Type());
+            const int serverID = m_pElementModule->GetPropertyInt32(strId, NFrame::Server::ServerID());
+            if (serverType == NF_SERVER_TYPES::NF_ST_PROXY && pPluginManager->GetAppID() == serverID)
             {
                 const int nPort = m_pElementModule->GetPropertyInt32(strId, NFrame::Server::Port());
-                const int nMaxConnect = m_pElementModule->GetPropertyInt32(strId, NFrame::Server::MaxOnline());
+                const int maxConnect = m_pElementModule->GetPropertyInt32(strId, NFrame::Server::MaxOnline());
                 //const int nCpus = m_pElementModule->GetPropertyInt32(strId, NFrame::Server::CpuCount());
-                const std::string& strName = m_pElementModule->GetPropertyString(strId, NFrame::Server::ID());
-                const std::string& strIP = m_pElementModule->GetPropertyString(strId, NFrame::Server::IP());
+                const std::string& name = m_pElementModule->GetPropertyString(strId, NFrame::Server::ID());
+                const std::string& ip = m_pElementModule->GetPropertyString(strId, NFrame::Server::IP());
 
                 NFMsg::ServerInfoReportList xMsg;
                 NFMsg::ServerInfoReport* pData = xMsg.add_server_list();
 
-                pData->set_server_id(nServerID);
+                pData->set_server_id(serverID);
                 pData->set_server_name(strId);
                 pData->set_server_cur_count(0);
-                pData->set_server_ip(strIP);
+                pData->set_server_ip(ip);
                 pData->set_server_port(nPort);
-                pData->set_server_max_online(nMaxConnect);
+                pData->set_server_max_online(maxConnect);
                 pData->set_server_state(NFMsg::EST_NARMAL);
-                pData->set_server_type(nServerType);
+                pData->set_server_type(serverType);
 
                 NF_SHARE_PTR<ConnectData> pServerData = m_pNetClientModule->GetServerNetInfo(pNet);
                 if (pServerData)
@@ -125,11 +125,11 @@ void NFProxyServerToGameModule::Register(NFINet* pNet)
     }
 }
 
-void NFProxyServerToGameModule::OnAckEnterGame(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
+void NFProxyServerToGameModule::OnAckEnterGame(const NFSOCK sockIndex, const int msgID, const char* msg, const uint32_t len)
 {
     NFGUID nPlayerID;
     NFMsg::AckEventResult xData;
-    if (!NFINetModule::ReceivePB( nMsgID, msg, nLen, xData, nPlayerID))
+    if (!NFINetModule::ReceivePB( msgID, msg, len, xData, nPlayerID))
     {
         return;
     }
@@ -138,7 +138,7 @@ void NFProxyServerToGameModule::OnAckEnterGame(const NFSOCK nSockIndex, const in
 	const NFGUID& xPlayer = NFINetModule::PBToNF(xData.event_object());
 
 	m_pProxyServerNet_ServerModule->EnterGameSuccessEvent(xClient, xPlayer);
-	m_pProxyServerNet_ServerModule->Transport(nSockIndex, nMsgID, msg, nLen);
+	m_pProxyServerNet_ServerModule->Transport(sockIndex, msgID, msg, len);
 }
 
 void NFProxyServerToGameModule::LogServerInfo(const std::string& strServerInfo)
@@ -146,7 +146,7 @@ void NFProxyServerToGameModule::LogServerInfo(const std::string& strServerInfo)
     m_pLogModule->LogInfo(NFGUID(), strServerInfo, "");
 }
 
-void NFProxyServerToGameModule::Transport(const NFSOCK nSockIndex, const int nMsgID, const char * msg, const uint32_t nLen)
+void NFProxyServerToGameModule::Transport(const NFSOCK sockIndex, const int msgID, const char * msg, const uint32_t len)
 {
-	m_pProxyServerNet_ServerModule->Transport(nSockIndex, nMsgID, msg, nLen);
+	m_pProxyServerNet_ServerModule->Transport(sockIndex, msgID, msg, len);
 }
