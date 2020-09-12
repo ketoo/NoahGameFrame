@@ -50,7 +50,7 @@ int NFHelloWorld3Module::OnHeartBeat(const NFGUID& self, const std::string& hear
 
 	int64_t unNowTime = NFGetTimeMS();
 
-	std::cout << self.ToString() + " heartBeat: " << fTime << " Count: " << count << "  TimeDis: " << unNowTime - mLastTime << std::endl;
+	std::cout << self.ToString() + " heartBeat: " << time << " Count: " << count << "  TimeDis: " << unNowTime - mLastTime << std::endl;
 
 	mLastTime = unNowTime;
 

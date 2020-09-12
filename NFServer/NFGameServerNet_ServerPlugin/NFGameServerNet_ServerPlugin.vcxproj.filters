@@ -5,6 +5,7 @@
     <ClInclude Include="NFGameServerNet_ServerModule.h" />
     <ClInclude Include="NFAutoBroadcastModule.h" />
     <ClInclude Include="NFSceneAutoBroadcastModule.h" />
+    <ClInclude Include="NFGameManagerModule.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="dllmain.cpp" />
@@ -12,5 +13,6 @@
     <ClCompile Include="NFGameServerNet_ServerModule.cpp" />
     <ClCompile Include="NFAutoBroadcastModule.cpp" />
     <ClCompile Include="NFSceneAutoBroadcastModule.cpp" />
+    <ClCompile Include="NFGameManagerModule.cpp" />
   </ItemGroup>
 </Project>
