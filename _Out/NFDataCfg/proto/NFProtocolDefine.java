@@ -391,6 +391,7 @@ package nframe;
 		public static final String State = "State";// int
 		// Property
 		public static final String Account = "Account";// string
+		public static final String BattlePoint = "BattlePoint";// int
 		public static final String ConnectKey = "ConnectKey";// string
 		public static final String Diamond = "Diamond";// int
 		public static final String EXP = "EXP";// int

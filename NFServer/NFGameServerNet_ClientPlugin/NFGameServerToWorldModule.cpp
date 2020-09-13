@@ -286,7 +286,7 @@ void NFGameServerToWorldModule::SendOnline(const NFGUID& self)
 		//const NFGUID& xClan = m_pKernelModule->GetPropertyObject(self, NFrame::Player::Clan_ID());
 		const int& gateID = m_pKernelModule->GetPropertyInt(self, NFrame::Player::GateID());
 		const std::string& playerName = m_pKernelModule->GetPropertyString(self, NFrame::Player::Name());
-		const int bp = 0;//m_pKernelModule->GetPropertyInt(self, NFrame::Player::Cup());
+		const int bp = m_pKernelModule->GetPropertyInt(self, NFrame::Player::BattlePoint());
 
 		*xMsg.mutable_self() = NFINetModule::NFToPB(self);
 		*xMsg.mutable_clan() = NFINetModule::NFToPB(NFGUID());

@@ -477,6 +477,7 @@ namespace NFrame
 		public static readonly String State = "State";// int
 		// Property
 		public static readonly String Account = "Account";// string
+		public static readonly String BattlePoint = "BattlePoint";// int
 		public static readonly String ConnectKey = "ConnectKey";// string
 		public static readonly String Diamond = "Diamond";// int
 		public static readonly String EXP = "EXP";// int

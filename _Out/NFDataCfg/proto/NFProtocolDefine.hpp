@@ -480,6 +480,7 @@ namespace NFrame
 		static const std::string& State(){ static std::string x = "State"; return x; };// int
 		// Property
 		static const std::string& Account(){ static std::string x = "Account"; return x; };// string
+		static const std::string& BattlePoint(){ static std::string x = "BattlePoint"; return x; };// int
 		static const std::string& ConnectKey(){ static std::string x = "ConnectKey"; return x; };// string
 		static const std::string& Diamond(){ static std::string x = "Diamond"; return x; };// int
 		static const std::string& EXP(){ static std::string x = "EXP"; return x; };// int
