@@ -97,11 +97,11 @@ void NFGameManagerModule::OnClientPropertyIntProcess(const NFSOCK sockIndex, con
 
 				if (!objectID.IsNull() && objectID == pObject->Self())
 				{
-					m_pSceneModule->SetPropertyInt(scene, group, xProperty.property_name(), xProperty.data());
+					m_pKernelModule->SetPropertyInt(objectID, xProperty.property_name(), xProperty.data());
 				}
 				else
 				{
-					m_pKernelModule->SetPropertyInt(objectID, xProperty.property_name(), xProperty.data());
+					m_pSceneModule->SetPropertyInt(scene, group, xProperty.property_name(), xProperty.data());
 				}
 			}
 			else
@@ -137,11 +137,11 @@ void NFGameManagerModule::OnClientPropertyFloatProcess(const NFSOCK sockIndex, c
 			{
 				if (!objectID.IsNull() && objectID == pObject->Self())
 				{
-					m_pSceneModule->SetPropertyFloat(scene, group, xProperty.property_name(), xProperty.data());
+					m_pKernelModule->SetPropertyInt(objectID, xProperty.property_name(), xProperty.data());
 				}
 				else
 				{
-					m_pKernelModule->SetPropertyFloat(objectID, xProperty.property_name(), xProperty.data());
+					m_pSceneModule->SetPropertyInt(scene, group, xProperty.property_name(), xProperty.data());
 				}
 			}
 			else
@@ -177,11 +177,11 @@ void NFGameManagerModule::OnClientPropertyStringProcess(const NFSOCK sockIndex, 
 			{
 				if (!objectID.IsNull() && objectID == pObject->Self())
 				{
-					m_pSceneModule->SetPropertyString(scene, group, xProperty.property_name(), xProperty.data());
+					m_pKernelModule->SetPropertyString(objectID, xProperty.property_name(), xProperty.data());
 				}
 				else
 				{
-					m_pKernelModule->SetPropertyString(objectID, xProperty.property_name(), xProperty.data());
+					m_pSceneModule->SetPropertyString(scene, group, xProperty.property_name(), xProperty.data());
 				}
 			}
 			else
@@ -217,11 +217,11 @@ void NFGameManagerModule::OnClientPropertyObjectProcess(const NFSOCK sockIndex, 
 			{
 				if (!objectID.IsNull() && objectID == pObject->Self())
 				{
-					m_pSceneModule->SetPropertyObject(scene, group, xProperty.property_name(), NFINetModule::PBToNF(xProperty.data()));
+					m_pKernelModule->SetPropertyObject(objectID, xProperty.property_name(), NFINetModule::PBToNF(xProperty.data()));
 				}
 				else
 				{
-					m_pKernelModule->SetPropertyObject(objectID, xProperty.property_name(), NFINetModule::PBToNF(xProperty.data()));
+					m_pSceneModule->SetPropertyObject(scene, group, xProperty.property_name(), NFINetModule::PBToNF(xProperty.data()));
 				}
 			}
 			else
@@ -258,11 +258,11 @@ void NFGameManagerModule::OnClientPropertyVector2Process(const NFSOCK sockIndex,
 			{
 				if (!objectID.IsNull() && objectID == pObject->Self())
 				{
-					m_pSceneModule->SetPropertyVector2(scene, group, xProperty.property_name(), NFINetModule::PBToNF(xProperty.data()));
+					m_pKernelModule->SetPropertyVector2(objectID, xProperty.property_name(), NFINetModule::PBToNF(xProperty.data()));
 				}
 				else
 				{
-					m_pKernelModule->SetPropertyVector2(objectID, xProperty.property_name(), NFINetModule::PBToNF(xProperty.data()));
+					m_pSceneModule->SetPropertyVector2(scene, group, xProperty.property_name(), NFINetModule::PBToNF(xProperty.data()));
 				}
 			}
 			else
@@ -298,11 +298,11 @@ void NFGameManagerModule::OnClientPropertyVector3Process(const NFSOCK sockIndex,
 			{
 				if (!objectID.IsNull() && objectID == pObject->Self())
 				{
-					m_pSceneModule->SetPropertyVector3(scene, group, xProperty.property_name(), NFINetModule::PBToNF(xProperty.data()));
+					m_pKernelModule->SetPropertyVector3(objectID, xProperty.property_name(), NFINetModule::PBToNF(xProperty.data()));
 				}
 				else
 				{
-					m_pKernelModule->SetPropertyVector3(objectID, xProperty.property_name(), NFINetModule::PBToNF(xProperty.data()));
+					m_pSceneModule->SetPropertyVector3(scene, group, xProperty.property_name(), NFINetModule::PBToNF(xProperty.data()));
 				}
 			}
 			else
@@ -316,7 +316,6 @@ void NFGameManagerModule::OnClientPropertyVector3Process(const NFSOCK sockIndex,
 		}
 	}
 }
-
 
 void NFGameManagerModule::OnClientAddRowProcess(const NFSOCK sockIndex, const int msgID, const char* msg, const uint32_t len)
 {
