@@ -176,5 +176,10 @@ void NFProxyServerNet_WSModule::OnClientConnected(const NFSOCK nAddress)
 		NFGUID xClientIdent = m_pKernelModule->CreateGUID();
         pNetObject->SetClientID(xClientIdent);
 		mxClientIdent.AddElement(xClientIdent, NF_SHARE_PTR<NFSOCK>(new NFSOCK(nAddress)));
+
+
+		// 1. create a tcp client to connect to the TCP service provided by proxy server.
+		// 2. transfer the ws data come from websocket to the TCP service provided by proxy server.
+		// 3.transfer the tcp data come from proxy server to the websocket service to send to clients.
     }
 }

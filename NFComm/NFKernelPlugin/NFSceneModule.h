@@ -365,6 +365,7 @@ protected:
 
 	virtual bool AddBeforeEnterSceneGroupCallBack(const SCENE_EVENT_FUNCTOR_PTR& cb);
 	virtual bool AddAfterEnterSceneGroupCallBack(const SCENE_EVENT_FUNCTOR_PTR& cb);
+	virtual bool AddAfterEnterAndReadySceneGroupCallBack(const SCENE_EVENT_FUNCTOR_PTR& cb);
 	virtual bool AddSwapSceneEventCallBack(const SCENE_EVENT_FUNCTOR_PTR& cb);
 	virtual bool AddBeforeLeaveSceneGroupCallBack(const SCENE_EVENT_FUNCTOR_PTR& cb);
 	virtual bool AddAfterLeaveSceneGroupCallBack(const SCENE_EVENT_FUNCTOR_PTR& cb);
@@ -397,6 +398,7 @@ protected:
 	int OnSwapSceneEvent(const NFGUID& self, const int sceneID, const int groupID, const int type, const NFDataList& argList);
 	int BeforeEnterSceneGroup(const NFGUID& self, const int sceneID, const int groupID, const int type, const NFDataList& argList);
 	int AfterEnterSceneGroup(const NFGUID& self, const int sceneID, const int groupID, const int type, const NFDataList& argList);
+	int AfterEnterAndReadySceneGroup(const NFGUID& self, const int sceneID, const int groupID, const int type, const NFDataList& argList);
 
 	int SceneGroupCreatedEvent(const NFGUID& self, const int sceneID, const int groupID, const int type, const NFDataList& argList);
 	int SceneGroupDestroyedEvent(const NFGUID& self, const int sceneID, const int groupID, const int type, const NFDataList& argList);
@@ -444,6 +446,7 @@ private:
 	std::vector<SCENE_EVENT_FUNCTOR_PTR> mvEnterSceneConditionCallback;
 	std::vector<SCENE_EVENT_FUNCTOR_PTR> mvBeforeEnterSceneCallback;
 	std::vector<SCENE_EVENT_FUNCTOR_PTR> mvAfterEnterSceneCallback;
+	std::vector<SCENE_EVENT_FUNCTOR_PTR> mvAfterEnterAndReadySceneCallback;
 	std::vector<SCENE_EVENT_FUNCTOR_PTR> mvOnSwapSceneCallback;
 	std::vector<SCENE_EVENT_FUNCTOR_PTR> mvBeforeLeaveSceneCallback;
 	std::vector<SCENE_EVENT_FUNCTOR_PTR> mvAfterLeaveSceneCallback;

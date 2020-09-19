@@ -37,23 +37,8 @@ public:
 	virtual bool ExistRoleName(const std::string& strRoleName) = 0;
 	virtual bool CreateRole(const std::string& account, const std::string& strRoleName, const NFGUID& id, const int nHomeSceneID) = 0;
 	virtual bool GetRoleInfo(const std::string& account, std::string& strRoleName, NFGUID& id) = 0;
-	
-	//virtual bool LoadPlayerData(const NFGUID& self, NFMsg::RoleDataPack& roleData) = 0;
-	//virtual bool LoadPlayerData(const NFGUID& self, NFMsg::PVPPlayerInfo& roleData) = 0;
-	virtual bool SavePlayerTile(const int sceneID, const NFGUID& self, const std::string& strTileData) = 0;
 
-	virtual bool LoadPlayerTile(const int sceneID, const NFGUID& self, std::string& strTileData) = 0;
-	virtual bool LoadPlayerTileRandom(const int sceneID, NFGUID& xPlayer, std::string& strTileData) = 0;
 
-	virtual bool GetPropertyList(const NFGUID& self, const std::vector<std::string>& fields, std::vector<std::string>& values) = 0;
-
-	virtual NFINT64 GetPropertyInt(const NFGUID& self, const std::string& propertyName) = 0;
-	virtual int GetPropertyInt32(const NFGUID& self, const std::string& propertyName) = 0;
-	virtual double GetPropertyFloat(const NFGUID& self, const std::string& propertyName) = 0;
-	virtual std::string GetPropertyString(const NFGUID& self, const std::string& propertyName) = 0;
-	virtual NFGUID GetPropertyObject(const NFGUID& self, const std::string& propertyName) = 0;
-	virtual NFVector2 GetPropertyVector2(const NFGUID& self, const std::string& propertyName) = 0;
-	virtual NFVector3 GetPropertyVector3(const NFGUID& self, const std::string& propertyName) = 0;
 };
 
 #endif

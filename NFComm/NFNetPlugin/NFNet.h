@@ -84,31 +84,32 @@ public:
     virtual ~NFNet() {};
 
 public:
-    virtual bool Execute();
+    virtual bool Execute() override ;
 
-    virtual void Initialization(const char* ip, const unsigned short nPort);
-    virtual int Initialization(const unsigned int nMaxClient, const unsigned short nPort, const int nCpuCount = 4);
+    virtual void Initialization(const char* ip, const unsigned short nPort) override ;
+    virtual int Initialization(const unsigned int nMaxClient, const unsigned short nPort, const int nCpuCount = 4) override ;
 	virtual unsigned int ExpandBufferSize(const unsigned int size) override;
 
-    virtual bool Final();
+    virtual bool Final() override ;
 
-    virtual bool SendMsg(const char* msg, const size_t len, const NFSOCK sockIndex);
+    virtual bool SendMsg(const char* msg, const size_t len, const NFSOCK sockIndex) override ;
 
-    virtual bool SendMsgWithOutHead(const int16_t msgID, const char* msg, const size_t len, const NFSOCK sockIndex);
-
-    virtual bool SendMsgWithOutHead(const int16_t msgID, const char* msg, const size_t len, const std::list<NFSOCK>& fdList);
-
-    virtual bool SendMsgToAllClientWithOutHead(const int16_t msgID, const char* msg, const size_t len);
+    virtual bool SendMsgWithOutHead(const int16_t msgID, const char* msg, const size_t len, const NFSOCK sockIndex) override ;
 
 
-    virtual bool CloseNetObject(const NFSOCK sockIndex);
-    virtual bool AddNetObject(const NFSOCK sockIndex, NetObject* pObject);
-    virtual NetObject* GetNetObject(const NFSOCK sockIndex);
+    virtual bool SendMsgToAllClientWithOutHead(const int16_t msgID, const char* msg, const size_t len) override ;
 
-    virtual bool IsServer();
-    virtual bool Log(int severity, const char* msg);
 
-private:    
+    virtual bool CloseNetObject(const NFSOCK sockIndex) override ;
+    virtual bool AddNetObject(const NFSOCK sockIndex, NetObject* pObject) override ;
+    virtual NetObject* GetNetObject(const NFSOCK sockIndex) override ;
+
+    virtual bool IsServer() override ;
+    virtual bool Log(int severity, const char* msg) override ;
+
+private:
+	bool SendMsgWithOutHead(const int16_t msgID, const char* msg, const size_t len, const std::list<NFSOCK>& fdList);
+
     bool SendMsgToAllClient(const char* msg, const size_t len);
     
     bool SendMsg(const char* msg, const size_t len, const std::list<NFSOCK>& fdList);

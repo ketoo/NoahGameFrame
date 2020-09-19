@@ -53,6 +53,7 @@ public:
     virtual int GetCols() const;
 
     virtual int GetRows() const;
+	virtual int GetUsedRows() const;
 
     virtual NFDATA_TYPE GetColType(const int col) const;
     virtual const std::string& GetColTag(const int col) const;

@@ -78,6 +78,7 @@ public:
 		int gateID = 0;
 		NFGUID self;
 		NFGUID team;
+		NFGUID clan;
 		int bp = 0;
 		std::string name;
 		std::string headIcon;

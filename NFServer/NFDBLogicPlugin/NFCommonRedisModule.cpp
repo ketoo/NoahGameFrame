@@ -167,14 +167,18 @@ NF_SHARE_PTR<NFIRecordManager> NFCommonRedisModule::NewRecordManager(const std::
     return NF_SHARE_PTR<NFIRecordManager>(NULL);
 }
 
-NF_SHARE_PTR<NFIPropertyManager> NFCommonRedisModule::GetPropertyInfo(const NFGUID& self, const std::string& className, std::vector<std::string>& vKeyCacheList, std::vector<std::string>& vValueCacheList)
+NF_SHARE_PTR<NFIPropertyManager> NFCommonRedisModule::GetPropertyInfo(const NFGUID& self, const std::string& className, std::vector<std::string>& vKeyCacheList, std::vector<std::string>& vValueCacheList, NF_SHARE_PTR<NFIPropertyManager> propertyManager)
 {
 	//TODO optimize
-    NF_SHARE_PTR<NFIPropertyManager> pPropertyManager = NewPropertyManager(className);
-    if (!pPropertyManager)
-    {
-        return nullptr;
-    }
+	NF_SHARE_PTR<NFIPropertyManager> pPropertyManager = propertyManager;
+	if (pPropertyManager == nullptr)
+	{
+		pPropertyManager = NewPropertyManager(className);
+		if (!pPropertyManager)
+		{
+			return nullptr;
+		}
+	}
 
 	NF_SHARE_PTR<NFIRedisClient> pDriver = m_pNoSqlModule->GetDriverBySuit(self.ToString());
     if (!pDriver)
@@ -212,20 +216,23 @@ NF_SHARE_PTR<NFIPropertyManager> NFCommonRedisModule::GetPropertyInfo(const NFGU
 	return nullptr;
 }
 
-NF_SHARE_PTR<NFIRecordManager> NFCommonRedisModule::GetRecordInfo(const NFGUID& self, const std::string& className, std::vector<std::string>& vKeyCacheList, std::vector<std::string>& vValueCacheList)
+NF_SHARE_PTR<NFIRecordManager> NFCommonRedisModule::GetRecordInfo(const NFGUID& self, const std::string& className, std::vector<std::string>& vKeyCacheList, std::vector<std::string>& vValueCacheList, NF_SHARE_PTR<NFIRecordManager> recordManager)
 {
-    NF_SHARE_PTR<NFIRecordManager> pRecordManager = NewRecordManager(className);
-    if (!pRecordManager.get())
-    {
-        return nullptr;
-    }
+	NF_SHARE_PTR<NFIRecordManager> pRecordManager = recordManager;
+	if (pRecordManager == nullptr)
+	{
+		pRecordManager = NewRecordManager(className);
+		if (!pRecordManager)
+		{
+			return nullptr;
+		}
+	}
 
 	NF_SHARE_PTR<NFIRedisClient> pDriver = m_pNoSqlModule->GetDriverBySuit(self.ToString());
     if (!pDriver)
     {
         return nullptr;
     }
-
 
 	//TODO
 	//just run this function one time
@@ -256,20 +263,20 @@ NF_SHARE_PTR<NFIRecordManager> NFCommonRedisModule::GetRecordInfo(const NFGUID& 
 	return nullptr;
 }
 
-NF_SHARE_PTR<NFIPropertyManager> NFCommonRedisModule::GetPropertyInfo(const NFGUID & self, const std::string & className)
+NF_SHARE_PTR<NFIPropertyManager> NFCommonRedisModule::GetPropertyInfo(const NFGUID & self, const std::string & className, NF_SHARE_PTR<NFIPropertyManager> propertyManager)
 {
 	std::vector<std::string> vKeyCacheList;
 	std::vector<std::string> vValueCacheList;
 
-	return GetPropertyInfo(self, className, vKeyCacheList, vValueCacheList);
+	return GetPropertyInfo(self, className, vKeyCacheList, vValueCacheList, propertyManager);
 }
 
-NF_SHARE_PTR<NFIRecordManager> NFCommonRedisModule::GetRecordInfo(const NFGUID & self, const std::string & className)
+NF_SHARE_PTR<NFIRecordManager> NFCommonRedisModule::GetRecordInfo(const NFGUID & self, const std::string & className, NF_SHARE_PTR<NFIRecordManager> recordManager)
 {
 	std::vector<std::string> vKeyCacheList;
 	std::vector<std::string> vValueCacheList;
 
-	return GetRecordInfo(self, className, vKeyCacheList, vValueCacheList);
+	return GetRecordInfo(self, className, vKeyCacheList, vValueCacheList, recordManager);
 }
 
 bool NFCommonRedisModule::GetRecordInfo(const NFGUID & self, const std::string & className, NFMsg::ObjectRecordList * pRecordDataList)
@@ -406,6 +413,155 @@ bool NFCommonRedisModule::SaveRecordInfo(const NFGUID & self, const NFMsg::Objec
 	return true;
 }
 
+bool NFCommonRedisModule::GetPropertyList(const NFGUID& self, const std::vector<std::string>& fields, std::vector<std::string>& values)
+{
+	NF_SHARE_PTR<NFIRedisClient> pDriver = m_pNoSqlModule->GetDriverBySuit(self.ToString());
+	if (!pDriver)
+	{
+		return false;
+	}
+
+	std::string strCacheKey = GetPropertyCacheKey(self);
+	if (pDriver->HMGET(strCacheKey, fields, values))
+	{
+		return true;
+	}
+
+
+	return false;
+}
+
+NFINT64 NFCommonRedisModule::GetPropertyInt(const NFGUID & self, const std::string & propertyName)
+{
+	NF_SHARE_PTR<NFIRedisClient> pDriver = m_pNoSqlModule->GetDriverBySuit(self.ToString());
+	if (!pDriver)
+	{
+		return 0;
+	}
+
+	std::string strValue;
+	std::string strCacheKey = GetPropertyCacheKey(self);
+	if (!pDriver->HGET(strCacheKey, propertyName, strValue))
+	{
+		return 0;
+	}
+
+	return lexical_cast<NFINT64>(strValue);
+}
+
+int NFCommonRedisModule::GetPropertyInt32(const NFGUID & self, const std::string & propertyName)
+{
+	NF_SHARE_PTR<NFIRedisClient> pDriver = m_pNoSqlModule->GetDriverBySuit(self.ToString());
+	if (!pDriver)
+	{
+		return 0;
+	}
+
+	std::string strValue;
+	std::string strCacheKey = GetPropertyCacheKey(self);
+	if (!pDriver->HGET(strCacheKey, propertyName, strValue))
+	{
+		return 0;
+	}
+
+	return lexical_cast<NFINT64>(strValue);
+}
+
+double NFCommonRedisModule::GetPropertyFloat(const NFGUID & self, const std::string & propertyName)
+{
+	NF_SHARE_PTR<NFIRedisClient> pDriver = m_pNoSqlModule->GetDriverBySuit(self.ToString());
+	if (!pDriver)
+	{
+		return 0;
+	}
+
+	std::string strValue;
+	std::string strCacheKey = GetPropertyCacheKey(self);
+	if (!pDriver->HGET(strCacheKey, propertyName, strValue))
+	{
+		return 0;
+	}
+
+	return lexical_cast<double>(strValue);
+}
+
+std::string NFCommonRedisModule::GetPropertyString(const NFGUID & self, const std::string & propertyName)
+{
+	NF_SHARE_PTR<NFIRedisClient> pDriver = m_pNoSqlModule->GetDriverBySuit(self.ToString());
+	if (!pDriver)
+	{
+		return "";
+	}
+
+	std::string strValue;
+	std::string strCacheKey = GetPropertyCacheKey(self);
+	if (!pDriver->HGET(strCacheKey, propertyName, strValue))
+	{
+		return "";
+	}
+
+	return strValue;
+}
+
+NFGUID NFCommonRedisModule::GetPropertyObject(const NFGUID & self, const std::string & propertyName)
+{
+	NF_SHARE_PTR<NFIRedisClient> pDriver = m_pNoSqlModule->GetDriverBySuit(self.ToString());
+	if (!pDriver)
+	{
+		return NFGUID();
+	}
+
+	std::string strValue;
+	std::string strCacheKey = GetPropertyCacheKey(self);
+	if (!pDriver->HGET(strCacheKey, propertyName, strValue))
+	{
+		return NFGUID();
+	}
+	NFGUID xID;
+	xID.FromString(strValue);
+	return xID;
+}
+
+NFVector2 NFCommonRedisModule::GetPropertyVector2(const NFGUID & self, const std::string & propertyName)
+{
+	NF_SHARE_PTR<NFIRedisClient> pDriver = m_pNoSqlModule->GetDriverBySuit(self.ToString());
+	if (!pDriver)
+	{
+		return NFVector2();
+	}
+
+	std::string strValue;
+	std::string strCacheKey = GetPropertyCacheKey(self);
+	if (!pDriver->HGET(strCacheKey, propertyName, strValue))
+	{
+		return NFVector2();
+	}
+
+	NFVector2 xValue;
+	xValue.FromString(strValue);
+	return xValue;
+}
+
+NFVector3 NFCommonRedisModule::GetPropertyVector3(const NFGUID & self, const std::string & propertyName)
+{
+	NF_SHARE_PTR<NFIRedisClient> pDriver = m_pNoSqlModule->GetDriverBySuit(self.ToString());
+	if (!pDriver)
+	{
+		return NFVector3();
+	}
+
+	std::string strValue;
+	std::string strCacheKey = GetPropertyCacheKey(self);
+	if (!pDriver->HGET(strCacheKey, propertyName, strValue))
+	{
+		return NFVector3();
+	}
+
+	NFVector3 xValue;
+	xValue.FromString(strValue);
+	return xValue;
+}
+
 bool NFCommonRedisModule::ConvertVectorToPropertyManager(std::vector<std::string>& vKeyList, std::vector<std::string>& vValueList, NF_SHARE_PTR<NFIPropertyManager> pPropertyManager)
 {
 	if (vKeyList.size() == vValueList.size())
@@ -522,7 +678,7 @@ bool NFCommonRedisModule::ConvertRecordManagerToVector(NF_SHARE_PTR<NFIRecordMan
 	return true;
 }
 
-bool NFCommonRedisModule::ConvertRecordToPB(const NF_SHARE_PTR<NFIRecord>& pRecord, NFMsg::ObjectRecordBase * pRecordData)
+bool NFCommonRedisModule::ConvertRecordToPB(const NF_SHARE_PTR<NFIRecord> pRecord, NFMsg::ObjectRecordBase * pRecordData)
 {
 	pRecordData->set_record_name(pRecord->GetName());
 
@@ -715,7 +871,7 @@ bool NFCommonRedisModule::ConvertPBToRecord(const NFMsg::ObjectRecordBase& pReco
 	return false;
 }
 
-bool NFCommonRedisModule::ConvertRecordManagerToPB(const NF_SHARE_PTR<NFIRecordManager>& pRecordManager, NFMsg::ObjectRecordList * pRecordDataList)
+bool NFCommonRedisModule::ConvertRecordManagerToPB(const NF_SHARE_PTR<NFIRecordManager> pRecordManager, NFMsg::ObjectRecordList * pRecordDataList)
 {
 	if (pRecordDataList == nullptr )
 	{
@@ -761,7 +917,7 @@ bool NFCommonRedisModule::ConvertPBToRecordManager(const NFMsg::ObjectRecordList
 	return true;
 }
 
-bool NFCommonRedisModule::ConvertPropertyManagerToPB(const NF_SHARE_PTR<NFIPropertyManager>& pProps, NFMsg::ObjectPropertyList * pPropertyData)
+bool NFCommonRedisModule::ConvertPropertyManagerToPB(const NF_SHARE_PTR<NFIPropertyManager> pProps, NFMsg::ObjectPropertyList * pPropertyData)
 {
 	if (pProps)
 	{
@@ -909,4 +1065,38 @@ bool NFCommonRedisModule::ConvertPBToPropertyManager(const NFMsg::ObjectProperty
 	}
 
 	return true;
+}
+
+bool NFCommonRedisModule::SavePropertyInfo(const NFGUID &self, const std::string &propertyName, const std::string &propertyValue)
+{
+	if (self.IsNull())
+	{
+		return false;
+	}
+
+	NF_SHARE_PTR<NFIRedisClient> pDriver = m_pNoSqlModule->GetDriverBySuit(self.ToString());
+	if (!pDriver)
+	{
+		return false;
+	}
+
+	std::vector<std::string> vKeyList;
+	std::vector<std::string> vValueList;
+
+	vKeyList.push_back(propertyName);
+	vValueList.push_back(propertyValue);
+
+	if (vKeyList.size() != vValueList.size())
+	{
+		return false;
+	}
+
+	std::string strKey= GetPropertyCacheKey(self);
+
+	if (!pDriver->HMSET(strKey, vKeyList, vValueList))
+	{
+		return false;
+	}
+
+	return false;
 }

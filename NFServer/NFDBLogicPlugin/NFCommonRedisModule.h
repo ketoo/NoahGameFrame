@@ -60,23 +60,35 @@ public:
     virtual NF_SHARE_PTR<NFIPropertyManager> NewPropertyManager(const std::string& className);
     virtual NF_SHARE_PTR<NFIRecordManager> NewRecordManager(const std::string& className);
 
-	virtual NF_SHARE_PTR<NFIPropertyManager> GetPropertyInfo(const NFGUID& self, const std::string& className);
-	virtual NF_SHARE_PTR<NFIRecordManager> GetRecordInfo(const NFGUID& self, const std::string& className);
+	virtual NF_SHARE_PTR<NFIPropertyManager> GetPropertyInfo(const NFGUID& self, const std::string& className, NF_SHARE_PTR<NFIPropertyManager> propertyManager = nullptr);
+	virtual NF_SHARE_PTR<NFIRecordManager> GetRecordInfo(const NFGUID& self, const std::string& className, NF_SHARE_PTR<NFIRecordManager> recordManager = nullptr);
 	virtual bool GetRecordInfo(const NFGUID& self, const std::string& className, NFMsg::ObjectRecordList* pRecordData);
 
 	//support hmset
-    virtual bool SavePropertyInfo(const NFGUID& self, NF_SHARE_PTR<NFIPropertyManager> pPropertyManager, const int nExpireSecond = 0);
-	virtual bool SaveRecordInfo(const NFGUID& self, NF_SHARE_PTR<NFIRecordManager> pRecordManager, const int nExpireSecond = 0);
-	virtual bool SaveRecordInfo(const NFGUID& self, const NFMsg::ObjectRecordList& xRecordData, const int nExpireSecond = 0);
+	virtual bool SavePropertyInfo(const NFGUID& self, const std::string& propertyName, const std::string& propertyValue);
+
+	virtual bool SavePropertyInfo(const NFGUID& self, NF_SHARE_PTR<NFIPropertyManager> pPropertyManager, const int nExpireSecond = -1);
+	virtual bool SaveRecordInfo(const NFGUID& self, NF_SHARE_PTR<NFIRecordManager> pRecordManager, const int nExpireSecond = -1);
+	virtual bool SaveRecordInfo(const NFGUID& self, const NFMsg::ObjectRecordList& xRecordData, const int nExpireSecond = -1);
+	virtual bool GetPropertyList(const NFGUID& self, const std::vector<std::string>& fields, std::vector<std::string>& values);
+
+
+	virtual NFINT64 GetPropertyInt(const NFGUID& self, const std::string& propertyName);
+	virtual int GetPropertyInt32(const NFGUID& self, const std::string& propertyName);
+	virtual double GetPropertyFloat(const NFGUID& self, const std::string& propertyName);
+	virtual std::string GetPropertyString(const NFGUID& self, const std::string& propertyName);
+	virtual NFGUID GetPropertyObject(const NFGUID& self, const std::string& propertyName);
+	virtual NFVector2 GetPropertyVector2(const NFGUID& self, const std::string& propertyName);
+	virtual NFVector3 GetPropertyVector3(const NFGUID& self, const std::string& propertyName);
 
 
 	////
-	static bool ConvertRecordToPB(const NF_SHARE_PTR<NFIRecord>& pRecord, NFMsg::ObjectRecordBase* pRecordData);
+	static bool ConvertRecordToPB(const NF_SHARE_PTR<NFIRecord> pRecord, NFMsg::ObjectRecordBase* pRecordData);
 	static bool ConvertPBToRecord(const NFMsg::ObjectRecordBase& pRecordData, NF_SHARE_PTR<NFIRecord> pRecord);
-	static bool ConvertRecordManagerToPB(const NF_SHARE_PTR<NFIRecordManager>& pRecord, NFMsg::ObjectRecordList* pRecordData);
+	static bool ConvertRecordManagerToPB(const NF_SHARE_PTR<NFIRecordManager> pRecord, NFMsg::ObjectRecordList* pRecordData);
 	static bool ConvertPBToRecordManager(const NFMsg::ObjectRecordList& pRecordData, NF_SHARE_PTR<NFIRecordManager> pRecord);
 
-	static bool ConvertPropertyManagerToPB(const NF_SHARE_PTR<NFIPropertyManager>& pProps, NFMsg::ObjectPropertyList* pPropertyData);
+	static bool ConvertPropertyManagerToPB(const NF_SHARE_PTR<NFIPropertyManager> pProps, NFMsg::ObjectPropertyList* pPropertyData);
 	static bool ConvertPBToPropertyManager(const NFMsg::ObjectPropertyList& pPropertyData, NF_SHARE_PTR<NFIPropertyManager> pProps);
 
 protected:
@@ -88,8 +100,8 @@ protected:
 	virtual bool ConvertPropertyManagerToVector(NF_SHARE_PTR<NFIPropertyManager> pPropertyManager, std::vector<std::string>& vKeyList, std::vector<std::string>& vValueList);
 	virtual bool ConvertRecordManagerToVector(NF_SHARE_PTR<NFIRecordManager> pRecordManager, std::vector<std::string>& vKeyList, std::vector<std::string>& vValueList);
 
-	virtual NF_SHARE_PTR<NFIPropertyManager> GetPropertyInfo(const NFGUID& self, const std::string& className, std::vector<std::string>& vKeyList, std::vector<std::string>& vValueList);
-	virtual NF_SHARE_PTR<NFIRecordManager> GetRecordInfo(const NFGUID& self, const std::string& className, std::vector<std::string>& vKeyList, std::vector<std::string>& vValueList);
+	virtual NF_SHARE_PTR<NFIPropertyManager> GetPropertyInfo(const NFGUID& self, const std::string& className, std::vector<std::string>& vKeyList, std::vector<std::string>& vValueList, NF_SHARE_PTR<NFIPropertyManager> propertyManager = nullptr);
+	virtual NF_SHARE_PTR<NFIRecordManager> GetRecordInfo(const NFGUID& self, const std::string& className, std::vector<std::string>& vKeyList, std::vector<std::string>& vValueList, NF_SHARE_PTR<NFIRecordManager> recordManager = nullptr);
 
 protected:
 	NFIKernelModule* m_pKernelModule;

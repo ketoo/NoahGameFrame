@@ -140,6 +140,20 @@ int NFRecord::GetRows() const
     return mnMaxRow;
 }
 
+int NFRecord::GetUsedRows() const
+{
+	int usedCount = 0;
+	for (int i = 0; i < mVecUsedState.size(); ++i)
+	{
+		if (mVecUsedState[i] > 0)
+		{
+			usedCount++;
+		}
+	}
+
+	return usedCount;
+}
+
 NFDATA_TYPE NFRecord::GetColType(const int col) const
 {
     return mVarRecordType->Type(col);

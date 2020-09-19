@@ -29,6 +29,7 @@
 #include "NFComm/NFMessageDefine/NFMsgDefine.h"
 #include "NFComm/NFPluginModule/NFINetClientModule.h"
 #include "NFComm/NFMessageDefine/NFProtocolDefine.hpp"
+#include "NFServer/NFDBLogicPlugin/NFCommonRedisModule.h"
 
 bool NFGameServerToWorldModule::Init()
 {
@@ -144,6 +145,24 @@ void NFGameServerToWorldModule::ServerReport()
 
 bool NFGameServerToWorldModule::AfterInit()
 {
+	m_pNetClientModule->AddReceiveCallBack(NF_SERVER_TYPES::NF_ST_WORLD, NFMsg::ACK_PROPERTY_INT, this, &NFGameServerToWorldModule::OnWorldPropertyIntProcess);
+	m_pNetClientModule->AddReceiveCallBack(NF_SERVER_TYPES::NF_ST_WORLD, NFMsg::ACK_PROPERTY_FLOAT, this, &NFGameServerToWorldModule::OnWorldPropertyFloatProcess);
+	m_pNetClientModule->AddReceiveCallBack(NF_SERVER_TYPES::NF_ST_WORLD, NFMsg::ACK_PROPERTY_STRING, this, &NFGameServerToWorldModule::OnWorldPropertyStringProcess);
+	m_pNetClientModule->AddReceiveCallBack(NF_SERVER_TYPES::NF_ST_WORLD, NFMsg::ACK_PROPERTY_OBJECT, this, &NFGameServerToWorldModule::OnWorldPropertyObjectProcess);
+	m_pNetClientModule->AddReceiveCallBack(NF_SERVER_TYPES::NF_ST_WORLD, NFMsg::ACK_PROPERTY_VECTOR2, this, &NFGameServerToWorldModule::OnWorldPropertyVector2Process);
+	m_pNetClientModule->AddReceiveCallBack(NF_SERVER_TYPES::NF_ST_WORLD, NFMsg::ACK_PROPERTY_VECTOR3, this, &NFGameServerToWorldModule::OnWorldPropertyVector3Process);
+
+	m_pNetClientModule->AddReceiveCallBack(NF_SERVER_TYPES::NF_ST_WORLD, NFMsg::ACK_OBJECT_RECORD_ENTRY, this, &NFGameServerToWorldModule::OnWorldRecordEnterProcess);
+	m_pNetClientModule->AddReceiveCallBack(NF_SERVER_TYPES::NF_ST_WORLD, NFMsg::ACK_ADD_ROW, this, &NFGameServerToWorldModule::OnWorldAddRowProcess);
+	m_pNetClientModule->AddReceiveCallBack(NF_SERVER_TYPES::NF_ST_WORLD, NFMsg::ACK_REMOVE_ROW, this, &NFGameServerToWorldModule::OnWorldRemoveRowProcess);
+	m_pNetClientModule->AddReceiveCallBack(NF_SERVER_TYPES::NF_ST_WORLD, NFMsg::ACK_SWAP_ROW, this, &NFGameServerToWorldModule::OnWorldSwapRowProcess);
+	m_pNetClientModule->AddReceiveCallBack(NF_SERVER_TYPES::NF_ST_WORLD, NFMsg::ACK_RECORD_INT, this, &NFGameServerToWorldModule::OnWorldRecordIntProcess);
+	m_pNetClientModule->AddReceiveCallBack(NF_SERVER_TYPES::NF_ST_WORLD, NFMsg::ACK_RECORD_FLOAT, this, &NFGameServerToWorldModule::OnWorldRecordFloatProcess);
+	m_pNetClientModule->AddReceiveCallBack(NF_SERVER_TYPES::NF_ST_WORLD, NFMsg::ACK_RECORD_STRING, this, &NFGameServerToWorldModule::OnWorldRecordStringProcess);
+	m_pNetClientModule->AddReceiveCallBack(NF_SERVER_TYPES::NF_ST_WORLD, NFMsg::ACK_RECORD_OBJECT, this, &NFGameServerToWorldModule::OnWorldRecordObjectProcess);
+	m_pNetClientModule->AddReceiveCallBack(NF_SERVER_TYPES::NF_ST_WORLD, NFMsg::ACK_RECORD_VECTOR2, this, &NFGameServerToWorldModule::OnWorldRecordVector2Process);
+	m_pNetClientModule->AddReceiveCallBack(NF_SERVER_TYPES::NF_ST_WORLD, NFMsg::ACK_RECORD_VECTOR3, this, &NFGameServerToWorldModule::OnWorldRecordVector3Process);
+
 	m_pNetClientModule->AddReceiveCallBack(NF_SERVER_TYPES::NF_ST_WORLD, NFMsg::STS_NET_INFO, this, &NFGameServerToWorldModule::OnServerInfoProcess);
 
 	m_pNetClientModule->AddReceiveCallBack(NF_SERVER_TYPES::NF_ST_WORLD, this, &NFGameServerToWorldModule::TransPBToProxy);
@@ -272,8 +291,19 @@ int NFGameServerToWorldModule::OnObjectClassEvent(const NFGUID& self, const std:
 		else if (CLASS_OBJECT_EVENT::COE_CREATE_FINISH == classEvent)
 		{
 			SendOnline(self);
+
+			m_pKernelModule->AddPropertyCallBack(self, NFrame::Player::ClanID(), this, &NFGameServerToWorldModule::OnObjectPropertyEvent );
+			m_pKernelModule->AddPropertyCallBack(self, NFrame::Player::TeamID(), this, &NFGameServerToWorldModule::OnObjectPropertyEvent );
+			m_pKernelModule->AddPropertyCallBack(self, NFrame::Player::BattlePoint(), this, &NFGameServerToWorldModule::OnObjectPropertyEvent );
 		}
 	}
+
+	return 0;
+}
+
+int NFGameServerToWorldModule::OnObjectPropertyEvent( const NFGUID& self, const std::string& propertyName, const NFData& oldVar, const NFData& newVar)
+{
+	SendOnline(self);
 
 	return 0;
 }
@@ -286,10 +316,11 @@ void NFGameServerToWorldModule::SendOnline(const NFGUID& self)
 		//const NFGUID& xClan = m_pKernelModule->GetPropertyObject(self, NFrame::Player::Clan_ID());
 		const int& gateID = m_pKernelModule->GetPropertyInt(self, NFrame::Player::GateID());
 		const std::string& playerName = m_pKernelModule->GetPropertyString(self, NFrame::Player::Name());
-		const int bp = 0;//m_pKernelModule->GetPropertyInt(self, NFrame::Player::Cup());
+		const int bp = m_pKernelModule->GetPropertyInt(self, NFrame::Player::BattlePoint());
+		const NFGUID clan = m_pKernelModule->GetPropertyObject(self, NFrame::Player::ClanID());
 
 		*xMsg.mutable_self() = NFINetModule::NFToPB(self);
-		*xMsg.mutable_clan() = NFINetModule::NFToPB(NFGUID());
+		*xMsg.mutable_clan() = NFINetModule::NFToPB(clan);
 		xMsg.set_game(pPluginManager->GetAppID());
 		xMsg.set_proxy(gateID);
 		xMsg.set_name(playerName);
@@ -333,4 +364,352 @@ void NFGameServerToWorldModule::TransPBToProxy(const NFSOCK sockIndex, const int
 void NFGameServerToWorldModule::TransmitToWorld(const int nHashKey, const int msgID, const google::protobuf::Message& xData)
 {
 	m_pNetClientModule->SendSuitByPB(NF_SERVER_TYPES::NF_ST_WORLD, nHashKey, msgID, xData);
+}
+
+void NFGameServerToWorldModule::OnWorldPropertyIntProcess(const NFSOCK sockIndex, const int msgID, const char *msg, const uint32_t len)
+{
+	CLIENT_MSG_PROCESS( msgID, msg, len, NFMsg::ObjectPropertyInt)
+
+	for (int i = 0; i < xMsg.property_list_size(); i++)
+	{
+		const NFMsg::PropertyInt &xProperty = xMsg.property_list().Get(i);
+		m_pKernelModule->SetPropertyInt(nPlayerID, xProperty.property_name(), xProperty.data());
+	}
+}
+
+void NFGameServerToWorldModule::OnWorldPropertyFloatProcess(const NFSOCK sockIndex, const int msgID, const char *msg, const uint32_t len)
+{
+	CLIENT_MSG_PROCESS( msgID, msg, len, NFMsg::ObjectPropertyFloat)
+
+	for (int i = 0; i < xMsg.property_list_size(); i++)
+	{
+		const NFMsg::PropertyFloat &xProperty = xMsg.property_list().Get(i);
+		m_pKernelModule->SetPropertyFloat(nPlayerID, xProperty.property_name(), xProperty.data());
+	}
+}
+
+void NFGameServerToWorldModule::OnWorldPropertyStringProcess(const NFSOCK sockIndex, const int msgID, const char *msg, const uint32_t len)
+{
+	CLIENT_MSG_PROCESS( msgID, msg, len, NFMsg::ObjectPropertyString)
+
+	for (int i = 0; i < xMsg.property_list_size(); i++)
+	{
+		const NFMsg::PropertyString &xProperty = xMsg.property_list().Get(i);
+		m_pKernelModule->SetPropertyString(nPlayerID, xProperty.property_name(), xProperty.data());
+	}
+}
+
+void NFGameServerToWorldModule::OnWorldPropertyObjectProcess(const NFSOCK sockIndex, const int msgID, const char *msg, const uint32_t len)
+{
+	CLIENT_MSG_PROCESS( msgID, msg, len, NFMsg::ObjectPropertyObject)
+
+	for (int i = 0; i < xMsg.property_list_size(); i++)
+	{
+		const NFMsg::PropertyObject &xProperty = xMsg.property_list().Get(i);
+		m_pKernelModule->SetPropertyObject(nPlayerID, xProperty.property_name(), NFINetModule::PBToNF(xProperty.data()));
+	}
+}
+
+void NFGameServerToWorldModule::OnWorldPropertyVector2Process(const NFSOCK sockIndex, const int msgID, const char *msg, const uint32_t len)
+{
+	CLIENT_MSG_PROCESS( msgID, msg, len, NFMsg::ObjectPropertyVector2)
+
+	for (int i = 0; i < xMsg.property_list_size(); i++)
+	{
+		const NFMsg::PropertyVector2 &xProperty = xMsg.property_list().Get(i);
+		m_pKernelModule->SetPropertyVector2(nPlayerID, xProperty.property_name(),  NFINetModule::PBToNF(xProperty.data()));
+	}
+}
+
+void NFGameServerToWorldModule::OnWorldPropertyVector3Process(const NFSOCK sockIndex, const int msgID, const char *msg, const uint32_t len)
+{
+	CLIENT_MSG_PROCESS( msgID, msg, len, NFMsg::ObjectPropertyVector3)
+
+	for (int i = 0; i < xMsg.property_list_size(); i++)
+	{
+		const NFMsg::PropertyVector3 &xProperty = xMsg.property_list().Get(i);
+		m_pKernelModule->SetPropertyVector3(nPlayerID, xProperty.property_name(),  NFINetModule::PBToNF(xProperty.data()));
+	}
+}
+
+void NFGameServerToWorldModule::OnWorldRecordEnterProcess(const NFSOCK sockIndex, const int msgID, const char *msg, const uint32_t len)
+{
+	CLIENT_MSG_PROCESS( msgID, msg, len, NFMsg::MultiObjectRecordList)
+
+
+	for (int playerIndex = 0; playerIndex < xMsg.multi_player_record_size(); playerIndex++)
+	{
+		const NFMsg::ObjectRecordList& objectRecordList = xMsg.multi_player_record(playerIndex);
+		for (int j = 0; j < objectRecordList.record_list_size(); ++j)
+		{
+			const NFMsg::ObjectRecordBase& recordBase = objectRecordList.record_list(j);
+			auto record = m_pKernelModule->FindRecord(nPlayerID, recordBase.record_name());
+			if (record)
+			{
+				//NFCommonRedisModule::ConvertPBToRecord(recordBase, record);
+				for (int i = 0; i < recordBase.row_struct_size(); i++)
+				{
+					const NFMsg::RecordAddRowStruct &xAddRowStruct = recordBase.row_struct().Get(i);
+					int row = xAddRowStruct.row();
+
+					std::map<int, NFData> colDataMap;
+					for (int j = 0; j < xAddRowStruct.record_int_list_size(); j++)
+					{
+						const NFMsg::RecordInt &xRecordInt = xAddRowStruct.record_int_list().Get(j);
+						NFData data;
+						data.SetInt(xRecordInt.data());
+						colDataMap.insert(std::map<int, NFData>::value_type(xRecordInt.col(), data));
+					}
+					for (int j = 0; j < xAddRowStruct.record_float_list_size(); j++)
+					{
+						const NFMsg::RecordFloat &xRecordFloat = xAddRowStruct.record_float_list().Get(j);
+						NFData data;
+						data.SetFloat(xRecordFloat.data());
+						colDataMap.insert(std::map<int, NFData>::value_type(xRecordFloat.col(), data));
+					}
+					for (int j = 0; j < xAddRowStruct.record_string_list_size(); j++)
+					{
+						const NFMsg::RecordString &xRecordString = xAddRowStruct.record_string_list().Get(j);
+						NFData data;
+						data.SetString(xRecordString.data());
+						colDataMap.insert(std::map<int, NFData>::value_type(xRecordString.col(), data));
+					}
+					for (int j = 0; j < xAddRowStruct.record_object_list_size(); j++)
+					{
+						const NFMsg::RecordObject &xRecordObject = xAddRowStruct.record_object_list().Get(j);
+						NFData data;
+						data.SetObject(NFINetModule::PBToNF(xRecordObject.data()));
+						colDataMap.insert(std::map<int, NFData>::value_type(xRecordObject.col(), data));
+					}
+
+					NFDataList xDataList;
+					for (int j = 0; j < colDataMap.size(); j++)
+					{
+						if (colDataMap.find(j) != colDataMap.end())
+						{
+							xDataList.Append(colDataMap[j]);
+						}
+					}
+
+					if (record->AddRow(row, xDataList) >= 0)
+					{
+						m_pLogModule->LogInfo(nPlayerID, "Upload From Client add row record " + record->GetName(), __FUNCTION__, __LINE__);
+					}
+					else
+					{
+						m_pLogModule->LogInfo(nPlayerID, "Upload From Client add row record error " + record->GetName(), __FUNCTION__, __LINE__);
+					}
+				}
+			}
+		}
+	}
+}
+
+void NFGameServerToWorldModule::OnWorldAddRowProcess(const NFSOCK sockIndex, const int msgID, const char *msg, const uint32_t len)
+{
+
+	CLIENT_MSG_PROCESS( msgID, msg, len, NFMsg::ObjectRecordAddRow)
+
+	auto pRecord = m_pKernelModule->FindRecord(nPlayerID, xMsg.record_name());
+	if (pRecord)
+	{
+		for (int i = 0; i < xMsg.row_data_size(); i++)
+		{
+			const NFMsg::RecordAddRowStruct &xAddRowStruct = xMsg.row_data().Get(i);
+			int row = xAddRowStruct.row();
+
+			std::map<int, NFData> colDataMap;
+			for (int j = 0; j < xAddRowStruct.record_int_list_size(); j++)
+			{
+				const NFMsg::RecordInt &xRecordInt = xAddRowStruct.record_int_list().Get(j);
+				NFData data;
+				data.SetInt(xRecordInt.data());
+				colDataMap.insert(std::map<int, NFData>::value_type(xRecordInt.col(), data));
+			}
+			for (int j = 0; j < xAddRowStruct.record_float_list_size(); j++)
+			{
+				const NFMsg::RecordFloat &xRecordFloat = xAddRowStruct.record_float_list().Get(j);
+				NFData data;
+				data.SetFloat(xRecordFloat.data());
+				colDataMap.insert(std::map<int, NFData>::value_type(xRecordFloat.col(), data));
+			}
+			for (int j = 0; j < xAddRowStruct.record_string_list_size(); j++)
+			{
+				const NFMsg::RecordString &xRecordString = xAddRowStruct.record_string_list().Get(j);
+				NFData data;
+				data.SetString(xRecordString.data());
+				colDataMap.insert(std::map<int, NFData>::value_type(xRecordString.col(), data));
+			}
+			for (int j = 0; j < xAddRowStruct.record_object_list_size(); j++)
+			{
+				const NFMsg::RecordObject &xRecordObject = xAddRowStruct.record_object_list().Get(j);
+				NFData data;
+				data.SetObject(NFINetModule::PBToNF(xRecordObject.data()));
+				colDataMap.insert(std::map<int, NFData>::value_type(xRecordObject.col(), data));
+			}
+
+			NFDataList xDataList;
+			for (int j = 0; j < colDataMap.size(); j++)
+			{
+				if (colDataMap.find(j) != colDataMap.end())
+				{
+					xDataList.Append(colDataMap[j]);
+				}
+				else
+				{
+					m_pLogModule->LogInfo(nPlayerID, "Upload From Client add row record error " + xMsg.record_name(), __FUNCTION__, __LINE__);
+					return;
+				}
+			}
+
+			if (pRecord->AddRow(row, xDataList) >= 0)
+			{
+				m_pLogModule->LogInfo(nPlayerID, "Upload From Client add row record " + xMsg.record_name(), __FUNCTION__, __LINE__);
+			}
+			else
+			{
+				m_pLogModule->LogInfo(nPlayerID, "Upload From Client add row record error " + xMsg.record_name(), __FUNCTION__, __LINE__);
+			}
+		}
+	}
+}
+
+void NFGameServerToWorldModule::OnWorldRemoveRowProcess(const NFSOCK sockIndex, const int msgID, const char *msg, const uint32_t len)
+{
+	CLIENT_MSG_PROCESS( msgID, msg, len, NFMsg::ObjectRecordRemove)
+
+	auto pRecord = m_pKernelModule->FindRecord(nPlayerID, xMsg.record_name());
+	if (pRecord)
+	{
+		for (int i = 0; i < xMsg.remove_row_size(); i++)
+		{
+			if (pRecord->Remove(xMsg.remove_row().Get(i)))
+			{
+				m_pLogModule->LogInfo(nPlayerID, "Upload From Client remove row record " + xMsg.record_name(), __FUNCTION__, __LINE__);
+			}
+			else
+			{
+				m_pLogModule->LogInfo(nPlayerID, "Upload From Client remove row record error " + xMsg.record_name(), __FUNCTION__, __LINE__);
+			}
+		}
+	}
+}
+
+void NFGameServerToWorldModule::OnWorldSwapRowProcess(const NFSOCK sockIndex, const int msgID, const char *msg, const uint32_t len)
+{
+
+}
+
+void NFGameServerToWorldModule::OnWorldRecordIntProcess(const NFSOCK sockIndex, const int msgID, const char *msg, const uint32_t len)
+{
+	CLIENT_MSG_PROCESS( msgID, msg, len, NFMsg::ObjectRecordInt)
+
+	auto pRecord = m_pKernelModule->FindRecord(nPlayerID, xMsg.record_name());
+	if (!pRecord)
+	{
+		m_pLogModule->LogError(nPlayerID, "Upload From Client int set record error " + xMsg.record_name(), __FUNCTION__, __LINE__);
+		return;
+	}
+
+	for (int i = 0; i < xMsg.property_list_size(); i++)
+	{
+		const NFMsg::RecordInt &xRecordInt = xMsg.property_list().Get(i);
+		pRecord->SetInt(xRecordInt.row(), xRecordInt.col(), xRecordInt.data());
+		m_pLogModule->LogInfo(nPlayerID, "Upload From Client int set record " + xMsg.record_name(), __FUNCTION__, __LINE__);
+	}
+}
+
+void NFGameServerToWorldModule::OnWorldRecordFloatProcess(const NFSOCK sockIndex, const int msgID, const char *msg, const uint32_t len)
+{
+	CLIENT_MSG_PROCESS( msgID, msg, len, NFMsg::ObjectRecordFloat)
+
+	auto pRecord = m_pKernelModule->FindRecord(nPlayerID, xMsg.record_name());
+	if (!pRecord)
+	{
+		m_pLogModule->LogError(nPlayerID, "Upload From Client float set record error " + xMsg.record_name(), __FUNCTION__, __LINE__);
+		return;
+	}
+
+	for (int i = 0; i < xMsg.property_list_size(); i++)
+	{
+		const NFMsg::RecordFloat &xRecordFloat = xMsg.property_list().Get(i);
+		pRecord->SetFloat(xRecordFloat.row(), xRecordFloat.col(), xRecordFloat.data());
+		m_pLogModule->LogInfo(nPlayerID, "Upload From Client float set record " + xMsg.record_name(), __FUNCTION__, __LINE__);
+	}
+}
+
+void NFGameServerToWorldModule::OnWorldRecordStringProcess(const NFSOCK sockIndex, const int msgID, const char *msg, const uint32_t len)
+{
+	CLIENT_MSG_PROCESS( msgID, msg, len, NFMsg::ObjectRecordString)
+
+	auto pRecord = m_pKernelModule->FindRecord(nPlayerID, xMsg.record_name());
+	if (!pRecord)
+	{
+		m_pLogModule->LogError(nPlayerID, "Upload From Client String set record error " + xMsg.record_name(), __FUNCTION__, __LINE__);
+		return;
+	}
+
+	for (int i = 0; i < xMsg.property_list_size(); i++)
+	{
+		const NFMsg::RecordString &xRecordString = xMsg.property_list().Get(i);
+		pRecord->SetString(xRecordString.row(), xRecordString.col(), xRecordString.data());
+		m_pLogModule->LogInfo(nPlayerID, "Upload From Client String set record " + xMsg.record_name(), __FUNCTION__, __LINE__);
+	}
+}
+
+void NFGameServerToWorldModule::OnWorldRecordObjectProcess(const NFSOCK sockIndex, const int msgID, const char *msg, const uint32_t len)
+{
+	CLIENT_MSG_PROCESS( msgID, msg, len, NFMsg::ObjectRecordObject)
+
+	auto pRecord = m_pKernelModule->FindRecord(nPlayerID, xMsg.record_name());
+	if (!pRecord)
+	{
+		m_pLogModule->LogError(nPlayerID, "Upload From Client Object set record error " + xMsg.record_name(), __FUNCTION__, __LINE__);
+		return;
+	}
+
+	for (int i = 0; i < xMsg.property_list_size(); i++)
+	{
+		const NFMsg::RecordObject &xRecordObject = xMsg.property_list().Get(i);
+		pRecord->SetObject(xRecordObject.row(), xRecordObject.col(), NFINetModule::PBToNF(xRecordObject.data()));
+		m_pLogModule->LogInfo(nPlayerID, "Upload From Client Object set record " + xMsg.record_name(), __FUNCTION__, __LINE__);
+	}
+}
+
+void NFGameServerToWorldModule::OnWorldRecordVector2Process(const NFSOCK sockIndex, const int msgID, const char *msg, const uint32_t len)
+{
+	CLIENT_MSG_PROCESS( msgID, msg, len, NFMsg::ObjectRecordVector2)
+
+	auto pRecord = m_pKernelModule->FindRecord(nPlayerID, xMsg.record_name());
+	if (!pRecord)
+	{
+		m_pLogModule->LogError(nPlayerID, "Upload From Client vector2 set record error " + xMsg.record_name(), __FUNCTION__, __LINE__);
+		return;
+	}
+
+	for (int i = 0; i < xMsg.property_list_size(); i++)
+	{
+		const NFMsg::RecordVector2 &xRecordVector2 = xMsg.property_list().Get(i);
+		pRecord->SetVector2(xRecordVector2.row(), xRecordVector2.col(), NFINetModule::PBToNF(xRecordVector2.data()));
+		m_pLogModule->LogInfo(nPlayerID, "Upload From Client vector2 set record " + xMsg.record_name(), __FUNCTION__, __LINE__);
+	}
+}
+
+void NFGameServerToWorldModule::OnWorldRecordVector3Process(const NFSOCK sockIndex, const int msgID, const char *msg, const uint32_t len)
+{
+	CLIENT_MSG_PROCESS( msgID, msg, len, NFMsg::ObjectRecordVector3)
+
+	auto pRecord = m_pKernelModule->FindRecord(nPlayerID, xMsg.record_name());
+	if (!pRecord)
+	{
+		m_pLogModule->LogError(nPlayerID, "Upload From Client vector3 set record error " + xMsg.record_name(), __FUNCTION__, __LINE__);
+		return;
+	}
+
+	for (int i = 0; i < xMsg.property_list_size(); i++)
+	{
+		const NFMsg::RecordVector3 &xRecordVector3 = xMsg.property_list().Get(i);
+		pRecord->SetVector3(xRecordVector3.row(), xRecordVector3.col(), NFINetModule::PBToNF(xRecordVector3.data()));
+		m_pLogModule->LogInfo(nPlayerID, "Upload From Client vector3 set record " + xMsg.record_name(), __FUNCTION__, __LINE__);
+	}
 }
