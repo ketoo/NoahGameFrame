@@ -40,7 +40,7 @@
 #include "event2/bufferevent_struct.h"
 
 /*
-if any one want to upgrade the networking library(libEvent), please change the size of evbuffer as below:
+Any one who want to upgrade the networking library(libEvent), please change the size of evbuffer showed below:
 *MODIFY--libevent/buffer.c
 #define EVBUFFER_MAX_READ	4096
 TO

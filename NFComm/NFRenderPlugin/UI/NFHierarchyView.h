@@ -33,46 +33,52 @@
 #include "NFComm/NFPluginModule/NFIEventModule.h"
 #include "NFComm/NFPluginModule/NFIBPVirtualMachineModule.h"
 
-class NFHierachyView : public NFIView
+class NFHierarchyView : public NFIView
 {
 public:
-	NFHierachyView(NFIPluginManager* p, NFViewType vt);
+	NFHierarchyView(NFIPluginManager* p, NFViewType vt);
 	virtual bool Execute();
 
    virtual void SubRender();
 
 private:
-   void GodViewSubRender();
-   void GameViewSubRender();
-   void ProjectViewSubRender();
-   void BluePrintViewSubRender();
+	void GodViewSubRender();
+	void GameViewSubRender();
+	void ProjectViewSubRender();
+	void BluePrintViewSubRender();
 
-   void BluePrintViewSubRenderForLogicBlock();
-   void BluePrintViewSubRenderForMonitor();
-   void BluePrintViewSubRenderForBranch();
-   void BluePrintViewSubRenderForExecutor();
-   void BluePrintViewSubRenderForVariable();
-   void BluePrintViewSubRenderForModifier();
-   void BluePrintViewSubRenderForLogger();
-   void BluePrintViewSubRenderForArithmetic();
+	void BluePrintViewSubRenderForLogicBlock();
+	void BluePrintViewSubRenderForMonitor();
+	void BluePrintViewSubRenderForBranch();
+	void BluePrintViewSubRenderForExecutor();
+	void BluePrintViewSubRenderForVariable();
+	void BluePrintViewSubRenderForModifier();
+	void BluePrintViewSubRenderForLogger();
+	void BluePrintViewSubRenderForArithmetic();
 
-   void BluePrintViewSubRenderForMonitorHead(NF_SHARE_PTR<NFIMonitor> monitor);
-   void BluePrintViewSubRenderForMonitorBody(NF_SHARE_PTR<NFIMonitor> monitor);
-   void BluePrintViewSubRenderForMonitorBot(NF_SHARE_PTR<NFIMonitor> monitor);
+	void BluePrintViewSubRenderForMonitorHead(NF_SHARE_PTR<NFIMonitor> monitor);
+	void BluePrintViewSubRenderForMonitorBody(NF_SHARE_PTR<NFIMonitor> monitor);
+	void BluePrintViewSubRenderForMonitorBot(NF_SHARE_PTR<NFIMonitor> monitor);
 
-   void BluePrintViewSubRenderForBranchHead(NF_SHARE_PTR<NFIBranch> branch);
-   void BluePrintViewSubRenderForBranchBody(NF_SHARE_PTR<NFIBranch> branch);
-   void BluePrintViewSubRenderForBranchBot(NF_SHARE_PTR<NFIBranch> branch);
+	void BluePrintViewSubRenderForBranchHead(NF_SHARE_PTR<NFIBranch> branch);
+	void BluePrintViewSubRenderForBranchBody(NF_SHARE_PTR<NFIBranch> branch);
+	void BluePrintViewSubRenderForBranchBot(NF_SHARE_PTR<NFIBranch> branch);
 
-   void InitBluePrintMonitorArgs(NF_SHARE_PTR<NFIMonitor> monitor);
-   void InitBluePrintJudgementArgs(NF_SHARE_PTR<NFIBranch> branch);
-   void InitBluePrintExecutorArgs(NF_SHARE_PTR<NFIExecutor> executer);
+	void InitBluePrintMonitorArgs(NF_SHARE_PTR<NFIMonitor> monitor);
+	void InitBluePrintJudgementArgs(NF_SHARE_PTR<NFIBranch> branch);
+	void InitBluePrintExecutorArgs(NF_SHARE_PTR<NFIExecutor> executer);
 
-   void RenderForModifyProperty();
+	void RenderForModifyProperty();
+	void RenderForModifyRecord();
 
 private:
-   std::string modifyPropertyName;
-   char modifyPropertyValue[128] = "";
+   	std::string modifyPropertyName;
+	char modifyPropertyValue[128] = "";
+
+	std::string modifyRecordName;
+	int modifyRecordRow = 0;
+	int modifyRecordCol = 0;
+	char modifyRecordValue[128] = "";
 
 private:
 	NFIClassModule* m_pClassModule;

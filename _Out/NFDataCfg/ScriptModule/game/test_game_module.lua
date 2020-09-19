@@ -129,7 +129,7 @@ function test_game_module:schedule(id, heartBeat, time, count)
 end
 
 function test_game_module:module_schedule(heartBeat, time, count)
-	print("Hello Lua Module HeartCallBack666:".. heartBeat .. " Time:" .. fTime .. "");
+	print("Hello Lua Module HeartCallBack666:".. heartBeat .. " Time:" .. time .. "");
 	
 end
 

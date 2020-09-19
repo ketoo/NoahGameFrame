@@ -506,6 +506,7 @@ namespace NFrame
 		static const std::string& SkillSpecial1(){ static std::string x = "SkillSpecial1"; return x; };// string
 		static const std::string& SkillSpecial2(){ static std::string x = "SkillSpecial2"; return x; };// string
 		static const std::string& SkillTHUMP(){ static std::string x = "SkillTHUMP"; return x; };// string
+		static const std::string& TeamID(){ static std::string x = "TeamID"; return x; };// object
 		static const std::string& TotalTime(){ static std::string x = "TotalTime"; return x; };// int
 		// Include Property, come from EffectData 
 		static const std::string& ATK_DARK(){ static std::string x = "ATK_DARK"; return x; };// int

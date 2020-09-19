@@ -268,15 +268,9 @@ const NFVector3& NFObject::GetPropertyVector3(const std::string& propertyName)
 	return NULL_VECTOR3;
 }
 
-bool NFObject::FindRecord(const std::string& recordName)
+NF_SHARE_PTR<NFIRecord> NFObject::FindRecord(const std::string& recordName)
 {
-    NF_SHARE_PTR<NFIRecord> pRecord = GetRecordManager()->GetElement(recordName);
-    if (pRecord)
-    {
-        return true;
-    }
-
-    return false;
+	return GetRecordManager()->GetElement(recordName);
 }
 
 bool NFObject::SetRecordInt(const std::string& recordName, const int row, const int col, const NFINT64 nValue)

@@ -35,8 +35,6 @@ bool NFNavigationDataModule::Init()
 	m_pLogModule = pPluginManager->FindModule<NFILogModule>();
 	m_pEventModule = pPluginManager->FindModule<NFIEventModule>();
 	m_pSceneModule = pPluginManager->FindModule<NFISceneModule>();
-	m_pGameServerNet_ServerModule = pPluginManager->FindModule<NFIGameServerNet_ServerModule>();
-	m_pNetClientModule = pPluginManager->FindModule<NFIGameServerToWorldModule>();
 
 	return true;
 }
