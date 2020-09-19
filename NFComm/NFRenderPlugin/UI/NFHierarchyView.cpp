@@ -196,7 +196,14 @@ void NFHierarchyView::GodViewSubRender()
 			std::string recordName = "++ " + recordNameList[i];
 			if (ImGui::Button(recordName.c_str()))
 			{
-				currentRecord = recordNameList[i];
+				if (currentRecord == recordNameList[i])
+				{
+					currentRecord = "";
+				}
+				else
+				{
+					currentRecord = recordNameList[i];
+				}
 			}
 
 			if (!currentRecord.empty())
