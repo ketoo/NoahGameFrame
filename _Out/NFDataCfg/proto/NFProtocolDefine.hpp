@@ -481,6 +481,7 @@ namespace NFrame
 		// Property
 		static const std::string& Account(){ static std::string x = "Account"; return x; };// string
 		static const std::string& BattlePoint(){ static std::string x = "BattlePoint"; return x; };// int
+		static const std::string& ClanID(){ static std::string x = "ClanID"; return x; };// object
 		static const std::string& ConnectKey(){ static std::string x = "ConnectKey"; return x; };// string
 		static const std::string& Diamond(){ static std::string x = "Diamond"; return x; };// int
 		static const std::string& EXP(){ static std::string x = "EXP"; return x; };// int
@@ -591,7 +592,9 @@ namespace NFrame
 			static const int Stone2 = 8;//string
 			static const int Stone3 = 9;//string
 			static const int Stone4 = 10;//string
-			static const int UserData = 11;//string
+			static const int Lock = 11;//int
+			static const int Future = 12;//int
+			static const int UserData = 13;//string
 
 		};
 		class CommValue

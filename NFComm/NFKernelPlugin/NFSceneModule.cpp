@@ -75,6 +75,7 @@ bool NFSceneModule::BeforeShut()
 	mvRecordSingleCallback.clear();
 
 	mvAfterEnterSceneCallback.clear();
+	mvAfterEnterAndReadySceneCallback.clear();
 	mvBeforeLeaveSceneCallback.clear();
 
     return true;
@@ -1170,6 +1171,8 @@ bool NFSceneModule::SwitchScene(const NFGUID& self, const int nTargetSceneID, co
 		/////////
 		AfterEnterSceneGroup(self, nTargetSceneID, nTargetGroupID, type, arg);
 
+		AfterEnterAndReadySceneGroup(self, nTargetSceneID, nTargetGroupID, type, arg);
+
 		return true;
 	}
 
@@ -1748,6 +1751,25 @@ int NFSceneModule::OnMoveCellEvent(const NFGUID & self, const int & scene, const
 	{
 		//move between two groups
 		m_pCellModule->OnObjectMove(self, scene, group, fromCell, toCell);
+	}
+
+	return 0;
+}
+
+bool NFSceneModule::AddAfterEnterAndReadySceneGroupCallBack(const SCENE_EVENT_FUNCTOR_PTR &cb)
+{
+	mvAfterEnterAndReadySceneCallback.push_back(cb);
+	return true;
+}
+
+int NFSceneModule::AfterEnterAndReadySceneGroup(const NFGUID &self, const int sceneID, const int groupID, const int type, const NFDataList &argList)
+{
+	std::vector<SCENE_EVENT_FUNCTOR_PTR>::iterator it = mvAfterEnterAndReadySceneCallback.begin();
+	for (; it != mvAfterEnterAndReadySceneCallback.end(); it++)
+	{
+		SCENE_EVENT_FUNCTOR_PTR& pFunPtr = *it;
+		SCENE_EVENT_FUNCTOR* pFunc = pFunPtr.get();
+		pFunc->operator()(self, sceneID, groupID, type, argList);
 	}
 
 	return 0;

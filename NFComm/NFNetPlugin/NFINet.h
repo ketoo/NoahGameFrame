@@ -418,6 +418,7 @@ public:
 private:
     sockaddr_in sin;
     void* m_pUserData;
+    //ringbuff
     std::string mstrBuff;
     std::string mstrUserData;
     std::string mstrSecurityKey;

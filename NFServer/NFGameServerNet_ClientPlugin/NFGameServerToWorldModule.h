@@ -69,6 +69,26 @@ protected:
 	
 	void OnServerInfoProcess(const NFSOCK sockIndex, const int msgID, const char* msg, const uint32_t len);
 
+	int OnObjectPropertyEvent( const NFGUID& self, const std::string& propertyName, const NFData& oldVar, const NFData& newVar);
+
+protected:
+	void OnWorldPropertyIntProcess(const NFSOCK sockIndex, const int msgID, const char* msg, const uint32_t len);
+	void OnWorldPropertyFloatProcess(const NFSOCK sockIndex, const int msgID, const char* msg, const uint32_t len);
+	void OnWorldPropertyStringProcess(const NFSOCK sockIndex, const int msgID, const char* msg, const uint32_t len);
+	void OnWorldPropertyObjectProcess(const NFSOCK sockIndex, const int msgID, const char* msg, const uint32_t len);
+	void OnWorldPropertyVector2Process(const NFSOCK sockIndex, const int msgID, const char* msg, const uint32_t len);
+	void OnWorldPropertyVector3Process(const NFSOCK sockIndex, const int msgID, const char* msg, const uint32_t len);
+
+	void OnWorldRecordEnterProcess(const NFSOCK sockIndex, const int msgID, const char *msg, const uint32_t len);
+	void OnWorldAddRowProcess(const NFSOCK sockIndex, const int msgID, const char* msg, const uint32_t len);
+	void OnWorldRemoveRowProcess(const NFSOCK sockIndex, const int msgID, const char* msg, const uint32_t len);
+	void OnWorldSwapRowProcess(const NFSOCK sockIndex, const int msgID, const char* msg, const uint32_t len);
+	void OnWorldRecordIntProcess(const NFSOCK sockIndex, const int msgID, const char* msg, const uint32_t len);
+	void OnWorldRecordFloatProcess(const NFSOCK sockIndex, const int msgID, const char* msg, const uint32_t len);
+	void OnWorldRecordStringProcess(const NFSOCK sockIndex, const int msgID, const char* msg, const uint32_t len);
+	void OnWorldRecordObjectProcess(const NFSOCK sockIndex, const int msgID, const char* msg, const uint32_t len);
+	void OnWorldRecordVector2Process(const NFSOCK sockIndex, const int msgID, const char* msg, const uint32_t len);
+	void OnWorldRecordVector3Process(const NFSOCK sockIndex, const int msgID, const char* msg, const uint32_t len);
 private:
 	NFINT64 mLastReportTime;
 

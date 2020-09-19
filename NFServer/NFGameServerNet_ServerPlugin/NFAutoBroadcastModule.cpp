@@ -27,6 +27,7 @@
 #include "NFAutoBroadcastModule.h"
 #include "NFComm/NFMessageDefine/NFProtocolDefine.hpp"
 #include "NFComm/NFPluginModule/NFIEventModule.h"
+#include "NFServer/NFDBLogicPlugin/NFCommonRedisModule.h"
 
 bool NFAutoBroadcastModule::Init()
 {
@@ -114,6 +115,7 @@ int NFAutoBroadcastModule::OnSceneEvent(const NFGUID & self, const int sceneID, 
 
 	return 0;
 }
+
 int NFAutoBroadcastModule::OnPropertyEnter(const NFDataList& argVar, const NFGUID& self)
 {
 	if (argVar.GetCount() <= 0 || self.IsNull())
@@ -274,111 +276,6 @@ int NFAutoBroadcastModule::OnPropertyEnter(const NFDataList& argVar, const NFGUI
 	return 0;
 }
 
-bool OnRecordEnterPack(NF_SHARE_PTR<NFIRecord> pRecord, NFMsg::ObjectRecordBase* pObjectRecordBase)
-{
-	if (!pRecord || !pObjectRecordBase)
-	{
-		return false;
-	}
-
-	for (int i = 0; i < pRecord->GetRows(); i++)
-	{
-		if (pRecord->IsUsed(i))
-		{
-
-			NFMsg::RecordAddRowStruct* pAddRowStruct = pObjectRecordBase->add_row_struct();
-			pAddRowStruct->set_row(i);
-
-			for (int j = 0; j < pRecord->GetCols(); j++)
-			{
-
-				NFDataList valueList;
-				NFDATA_TYPE eType = pRecord->GetColType(j);
-				switch (eType)
-				{
-				case NFDATA_TYPE::TDATA_INT:
-				{
-					NFINT64 nValue = pRecord->GetInt(i, j);
-					//if ( 0 != nValue )
-					{
-						NFMsg::RecordInt* pAddData = pAddRowStruct->add_record_int_list();
-						pAddData->set_row(i);
-						pAddData->set_col(j);
-						pAddData->set_data(nValue);
-					}
-				}
-				break;
-				case NFDATA_TYPE::TDATA_FLOAT:
-				{
-					double dwValue = pRecord->GetFloat(i, j);
-					//if ( dwValue < -0.01f || dwValue > 0.01f )
-					{
-						NFMsg::RecordFloat* pAddData = pAddRowStruct->add_record_float_list();
-						pAddData->set_row(i);
-						pAddData->set_col(j);
-						pAddData->set_data(dwValue);
-					}
-				}
-				break;
-				case NFDATA_TYPE::TDATA_STRING:
-				{
-					const std::string& strData = pRecord->GetString(i, j);
-					//if ( !strData.empty() )
-					{
-						NFMsg::RecordString* pAddData = pAddRowStruct->add_record_string_list();
-						pAddData->set_row(i);
-						pAddData->set_col(j);
-						pAddData->set_data(strData);
-					}
-				}
-				break;
-				case NFDATA_TYPE::TDATA_OBJECT:
-				{
-					NFGUID ident = pRecord->GetObject(i, j);
-					//if ( !ident.IsNull() )
-					{
-						NFMsg::RecordObject* pAddData = pAddRowStruct->add_record_object_list();
-						pAddData->set_row(i);
-						pAddData->set_col(j);
-						*(pAddData->mutable_data()) = NFINetModule::NFToPB(ident);
-					}
-				}
-				break;
-				case NFDATA_TYPE::TDATA_VECTOR2:
-				{
-					NFVector2 vPos = pRecord->GetVector2(i, j);
-					//if ( !ident.IsNull() )
-					{
-						NFMsg::RecordVector2* pAddData = pAddRowStruct->add_record_vector2_list();
-						pAddData->set_row(i);
-						pAddData->set_col(j);
-						*(pAddData->mutable_data()) = NFINetModule::NFToPB(vPos);
-					}
-				}
-				break;
-				case NFDATA_TYPE::TDATA_VECTOR3:
-				{
-					NFVector3 vPos = pRecord->GetVector3(i, j);
-					//if ( !ident.IsNull() )
-					{
-						NFMsg::RecordVector3* pAddData = pAddRowStruct->add_record_vector3_list();
-						pAddData->set_row(i);
-						pAddData->set_col(j);
-						*(pAddData->mutable_data()) = NFINetModule::NFToPB(vPos);
-					}
-				}
-				break;
-
-				default:
-					break;
-				}
-			}
-		}
-	}
-
-	return true;
-}
-
 int NFAutoBroadcastModule::OnRecordEnter(const NFDataList& argVar, const NFGUID& self)
 {
 	if (argVar.GetCount() <= 0 || self.IsNull())
@@ -417,7 +314,7 @@ int NFAutoBroadcastModule::OnRecordEnter(const NFDataList& argVar, const NFGUID&
 				pPublicRecordBase = pPublicData->add_record_list();
 				pPublicRecordBase->set_record_name(pRecord->GetName());
 
-				OnRecordEnterPack(pRecord, pPublicRecordBase);
+				NFCommonRedisModule::ConvertRecordToPB(pRecord, pPublicRecordBase);
 			}
 
 			if (pRecord->GetPrivate())
@@ -430,7 +327,7 @@ int NFAutoBroadcastModule::OnRecordEnter(const NFDataList& argVar, const NFGUID&
 				pPrivateRecordBase = pPrivateData->add_record_list();
 				pPrivateRecordBase->set_record_name(pRecord->GetName());
 
-				OnRecordEnterPack(pRecord, pPrivateRecordBase);
+				NFCommonRedisModule::ConvertRecordToPB(pRecord, pPrivateRecordBase);
 			}
 
 			pRecord = pRecordManager->Next();

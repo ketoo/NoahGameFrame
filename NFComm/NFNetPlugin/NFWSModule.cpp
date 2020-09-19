@@ -366,7 +366,7 @@ void NFWSModule::OnReceiveNetPack(const NFSOCK sockIndex, const int msgID, const
             }
         }
     }
-    else if (msgID == 0)
+    else
     {
         m_pLogModule->LogInfo("OnReceiveNetPack " + std::to_string(msgID), __FUNCTION__, __LINE__);
 

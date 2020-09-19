@@ -141,12 +141,15 @@ void NFNet::listener_cb(struct evconnlistener* listener, evutil_socket_t fd, str
     {
         std::cout << "setsockopt TCP_NODELAY ERROR !!!" << std::endl;
     }
+
+    int nRecvBufLen = NF_BUFFER_MAX_READ;
+	setsockopt( fd, SOL_SOCKET, SO_RCVBUF, ( const char* )&nRecvBufLen, sizeof( int ) );
 #endif
 
     bufferevent_setcb(bev, conn_readcb, conn_writecb, conn_eventcb, (void*)pObject);
 
     bufferevent_enable(bev, EV_READ | EV_WRITE | EV_CLOSED | EV_TIMEOUT | EV_PERSIST);
-    
+
     event_set_fatal_callback(event_fatal_cb);
     
     conn_eventcb(bev, BEV_EVENT_CONNECTED, (void*)pObject);
@@ -173,7 +176,7 @@ void NFNet::conn_readcb(struct bufferevent* bev, void* user_data)
     if (pObject->NeedRemove())
     {
         return;
-}
+	}
 
     struct evbuffer* input = bufferevent_get_input(bev);
     if (!input)
@@ -497,6 +500,8 @@ int NFNet::InitClientNet()
     {
         std::cout << "setsockopt TCP_NODELAY ERROR !!!" << std::endl;
     }
+	int nRecvBufLen = NF_BUFFER_MAX_READ;
+	setsockopt( sockfd, SOL_SOCKET, SO_RCVBUF, ( const char* )&nRecvBufLen, sizeof( int ) );
 #endif
 
     bufferevent_setcb(bev, conn_readcb, conn_writecb, conn_eventcb, (void*)pObject);

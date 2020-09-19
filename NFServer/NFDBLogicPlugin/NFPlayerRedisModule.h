@@ -60,19 +60,6 @@ public:
 	virtual bool LoadPlayerData(const NFGUID& self, NFMsg::RoleDataPack& roleData);
 	virtual bool SavePlayerData(const NFGUID& self, const NFMsg::RoleDataPack& roleData);
 
-	virtual bool SavePlayerTile(const int sceneID, const NFGUID& self, const std::string& strTileData);
-	virtual bool LoadPlayerTile(const int sceneID, const NFGUID& self, std::string& strTileData);
-	virtual bool LoadPlayerTileRandom(const int sceneID, NFGUID& xPlayer, std::string& strTileData);
-
-	virtual bool GetPropertyList(const NFGUID& self, const std::vector<std::string>& fields, std::vector<std::string>& values);
-
-	virtual NFINT64 GetPropertyInt(const NFGUID& self, const std::string& propertyName);
-	virtual int GetPropertyInt32(const NFGUID& self, const std::string& propertyName);
-	virtual double GetPropertyFloat(const NFGUID& self, const std::string& propertyName);
-	virtual std::string GetPropertyString(const NFGUID& self, const std::string& propertyName);
-	virtual NFGUID GetPropertyObject(const NFGUID& self, const std::string& propertyName);
-	virtual NFVector2 GetPropertyVector2(const NFGUID& self, const std::string& propertyName);
-	virtual NFVector3 GetPropertyVector3(const NFGUID& self, const std::string& propertyName);
 
 protected:
 	std::string GetOnlineGameServerKey();

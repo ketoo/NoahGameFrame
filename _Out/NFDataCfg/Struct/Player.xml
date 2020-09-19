@@ -3,6 +3,7 @@
 	<Propertys>
 		<Property Id="Account" Cache="1" Desc="玩家的帐号" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="string" Upload="0" />
 		<Property Id="BattlePoint" Cache="1" Desc="" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="int" Upload="0" />
+		<Property Id="ClanID" Cache="1" Desc="登陆的服ID" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="object" Upload="0" />
 		<Property Id="ConnectKey" Cache="1" Desc="玩家连接服务器的KEY" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="string" Upload="0" />
 		<Property Id="Diamond" Cache="1" Desc="钻石" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="int" Upload="0" />
 		<Property Id="EXP" Cache="1" Desc="经验获得,如果是怪物，则是掉落经验" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="int" Upload="0" />
@@ -17,7 +18,7 @@
 		<Property Id="Level" Cache="1" Desc="等级" Force="0" Private="1" Public="1" Ref="0" Save="0" Type="int" Upload="0" />
 		<Property Id="MAXEXP" Cache="1" Desc="升级需要的经验" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="int" Upload="0" />
 		<Property Id="MP" Cache="0" Desc="法力值" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="int" Upload="0" />
-		<Property Id="NoticeID" Cache="0" Desc="登陆的服ID" Force="0" Private="0" Public="0" Ref="0" Save="0" Type="int" Upload="0" />
+		<Property Id="NoticeID" Cache="0" Desc="登陆的服ID" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="int" Upload="0" />
 		<Property Id="OnlineCount" Cache="1" Desc="上线次数" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="int" Upload="0" />
 		<Property Id="OnlineTime" Cache="1" Desc="本次上线时间" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="object" Upload="0" />
 		<Property Id="Race" Cache="1" Desc="种族" Force="0" Private="1" Public="1" Ref="0" Save="0" Type="int" Upload="0" />
@@ -49,7 +50,7 @@
 			<Col Type ="string"	Tag="ConfigID"/><!--- Desc-->
 			<Col Type ="int"	Tag="ItemCount"/>
 		</Record>
-		<Record Id="InventoryEquipment" Cache="1"	 Col="12"	 Force="0"	 Private="1"	 Public="0"	 Ref="0"	 Row="256"	 Save="0"	 Upload="0"	 >
+		<Record Id="InventoryEquipment" Cache="1"	 Col="14"	 Force="0"	 Private="1"	 Public="0"	 Ref="0"	 Row="256"	 Save="0"	 Upload="0"	 >
 			<Col Type ="object"	Tag="GUID"/><!--- Desc-->
 			<Col Type ="string"	Tag="ConfigID"/>
 			<Col Type ="string"	Tag="RandPropertyID"/>
@@ -61,6 +62,8 @@
 			<Col Type ="string"	Tag="Stone2"/>
 			<Col Type ="string"	Tag="Stone3"/>
 			<Col Type ="string"	Tag="Stone4"/>
+			<Col Type ="int"	Tag="Lock"/>
+			<Col Type ="int"	Tag="Future"/>
 			<Col Type ="string"	Tag="UserData"/>
 		</Record>
 	</Records>

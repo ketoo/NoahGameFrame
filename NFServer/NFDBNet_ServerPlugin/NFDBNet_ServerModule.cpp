@@ -188,8 +188,6 @@ void NFDBNet_ServerModule::OnCreateRoleGameProcess(const NFSOCK sockIndex, const
 
 	if (m_pPlayerRedisModule->CreateRole(account, name, xID, nHomeSceneID))
 	{
-		m_pPlayerRedisModule->SavePlayerTile(nHomeSceneID, xID, "");
-
 		NFMsg::AckRoleLiteInfoList xAckRoleLiteInfoList;
 		xAckRoleLiteInfoList.set_account(account);
 
@@ -259,7 +257,5 @@ void NFDBNet_ServerModule::OnSaveRoleDataProcess(const NFSOCK sockIndex, const i
 
 	NFPlayerRedisModule* pPlayerRedisModule = (NFPlayerRedisModule*)m_pPlayerRedisModule;
 	pPlayerRedisModule->SavePlayerData(roleID, xMsg);
-
-	//m_pNetModule->SendMsgPB(NFMsg::ACK_LOAD_ROLE_DATA, xMsg, sockIndex);
 }
 
