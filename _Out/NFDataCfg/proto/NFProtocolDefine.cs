@@ -503,6 +503,7 @@ namespace NFrame
 		public static readonly String SkillSpecial1 = "SkillSpecial1";// string
 		public static readonly String SkillSpecial2 = "SkillSpecial2";// string
 		public static readonly String SkillTHUMP = "SkillTHUMP";// string
+		public static readonly String TeamID = "TeamID";// object
 		public static readonly String TotalTime = "TotalTime";// int
 		// Include Property, come from EffectData 
 		public static readonly String ATK_DARK = "ATK_DARK";// int

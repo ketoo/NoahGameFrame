@@ -833,6 +833,7 @@ void NFWorldNet_ServerModule::OnOnlineProcess(const NFSOCK sockIndex, const int 
 
 		playerData->name = xMsg.name();
 		playerData->bp = xMsg.bp();
+		playerData->clan = NFINetModule::PBToNF(xMsg.clan());
 
 		mPlayersData.AddElement(selfId, playerData);
 	}
@@ -977,6 +978,8 @@ const std::vector<NFGUID>& NFWorldNet_ServerModule::GetOnlinePlayers()
 
 NF_SHARE_PTR<NFIWorldNet_ServerModule::PlayerData> NFWorldNet_ServerModule::GetPlayerData(const NFGUID& id)
 {
+	//如果没有，就从redis load
+
 	return mPlayersData.GetElement(id);
 }
 

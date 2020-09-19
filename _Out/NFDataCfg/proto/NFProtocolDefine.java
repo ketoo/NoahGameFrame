@@ -417,6 +417,7 @@ package nframe;
 		public static final String SkillSpecial1 = "SkillSpecial1";// string
 		public static final String SkillSpecial2 = "SkillSpecial2";// string
 		public static final String SkillTHUMP = "SkillTHUMP";// string
+		public static final String TeamID = "TeamID";// object
 		public static final String TotalTime = "TotalTime";// int
 		// Record
 		public class HeroEquipmentList
