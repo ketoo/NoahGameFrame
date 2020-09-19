@@ -206,58 +206,82 @@ void NFHierarchyView::GodViewSubRender()
 				}
 			}
 
-			if (!currentRecord.empty())
+			if (!currentRecord.empty() && currentRecord == recordNameList[i])
 			{
 				NF_SHARE_PTR<NFIRecord> recordObject = pObject->FindRecord(currentRecord);
 				if (recordObject)
 				{
-
-
-					ImGui::Columns(recordObject->GetCols(), NULL);
 					ImGui::Separator();
-					for (int col = 0; col < recordObject->GetCols(); ++col)
+
+					ImGui::Columns(recordObject->GetCols() +1, NULL);
+
+					ImGui::Button("Row");
+					if (ImGui::Button("Rem"))
 					{
-						const std::string&  colTag = recordObject->GetColTag(col);
-						ImGui::Button(colTag.c_str());
+
 					}
 
 					ImGui::NextColumn();
 
+					for (int col = 0; col < recordObject->GetCols(); ++col)
+					{
+						const std::string&  colTag = recordObject->GetColTag(col);
+						ImGui::Button(colTag.c_str());
+
+						ImGui::NextColumn();
+					}
+
 					for (int row = 0; row < recordObject->GetRows(); ++row)
 					{
-						for (int col = 0; col < recordObject->GetCols(); ++col)
+						if (recordObject->IsUsed(row))
 						{
-							std::string data;
+							ImGui::Separator();
 
-							switch (recordObject->GetColType(col))
-							{
-								case NFDATA_TYPE::TDATA_INT:
-									data = std::to_string(recordObject->GetInt(row, col));
-									break;
-								case NFDATA_TYPE::TDATA_STRING:
-									data = recordObject->GetString(row, col);
-									break;
-								case NFDATA_TYPE::TDATA_FLOAT:
-									data = std::to_string(recordObject->GetFloat(row, col));
-									break;
-								case NFDATA_TYPE::TDATA_OBJECT:
-									data = recordObject->GetObject(row, col).ToString();
-									break;
-								case NFDATA_TYPE::TDATA_VECTOR2:
-									data = recordObject->GetVector2(row, col).ToString();
-									break;
-								case NFDATA_TYPE::TDATA_VECTOR3:
-									data = recordObject->GetVector3(row, col).ToString();
-									break;
-								default:
-									break;
-							}
-
-							ImGui::Button(data.c_str());
-
+							std::string rowindex = " " + std::to_string(row);
+							ImGui::Button(rowindex.c_str());
 							ImGui::NextColumn();
+
+							for (int col = 0; col < recordObject->GetCols(); ++col)
+							{
+								std::string data;
+
+								switch (recordObject->GetColType(col))
+								{
+									case NFDATA_TYPE::TDATA_INT:
+										data = std::to_string(recordObject->GetInt(row, col));
+										break;
+									case NFDATA_TYPE::TDATA_STRING:
+										data = recordObject->GetString(row, col);
+										break;
+									case NFDATA_TYPE::TDATA_FLOAT:
+										data = std::to_string(recordObject->GetFloat(row, col));
+										break;
+									case NFDATA_TYPE::TDATA_OBJECT:
+										data = recordObject->GetObject(row, col).ToString();
+										break;
+									case NFDATA_TYPE::TDATA_VECTOR2:
+										data = recordObject->GetVector2(row, col).ToString();
+										break;
+									case NFDATA_TYPE::TDATA_VECTOR3:
+										data = recordObject->GetVector3(row, col).ToString();
+										break;
+									default:
+										break;
+								}
+
+								if (ImGui::Button(data.c_str()))
+								{
+									modifyRecordName = currentRecord;
+									modifyRecordRow = row;
+									modifyRecordCol = col;
+								}
+
+								ImGui::NextColumn();
+							}
 						}
 					}
+
+					ImGui::Columns(1);
 				}
 			}
 		}
@@ -266,7 +290,8 @@ void NFHierarchyView::GodViewSubRender()
 
 	ImGui::EndGroup();
 
-   RenderForModifyProperty();
+	RenderForModifyProperty();
+	RenderForModifyRecord();
 }
 
 void NFHierarchyView::GameViewSubRender()
@@ -906,6 +931,91 @@ void NFHierarchyView::RenderForModifyProperty()
 					}
 					ImGui::CloseCurrentPopup();
 				}		
+				ImGui::EndPopup();
+			}
+		}
+	}
+}
+
+void NFHierarchyView::RenderForModifyRecord()
+{
+	if (modifyRecordName.length() > 0)
+	{
+		NFGUID objectID = ((NFGodView*)m_pOccupyView)->GetCurrentObjectID();
+		NF_SHARE_PTR<NFIObject> pObject = m_pKernelModule->GetObject(objectID);
+		if (pObject)
+		{
+			NF_SHARE_PTR<NFIRecord> pRecord = pObject->GetRecordManager()->GetElement(modifyRecordName);
+
+			ImGui::OpenPopup("Modify Record Value");
+			ImGui::SetNextWindowSize(ImVec2(230, 150));
+			if (ImGui::BeginPopupModal("Modify Record Value"))
+			{
+				ImGui::Text(modifyRecordName.c_str());
+				ImGui::InputText("New Value", modifyRecordValue, IM_ARRAYSIZE(modifyRecordValue));
+				ImGui::Separator();
+				ImGui::Text("If you modified the value then the framework will trigger the record event!\n\n");
+				ImGui::Separator();
+				if (ImGui::Button("Cancel", ImVec2(100, 30)))
+				{
+					modifyRecordName = "";
+					ImGui::CloseCurrentPopup();
+				}
+				ImGui::SameLine();
+				if (ImGui::Button("OK", ImVec2(100, 30)))
+				{
+					modifyRecordName = "";
+
+					switch (pRecord->GetColType(modifyRecordCol))
+					{
+						case NFDATA_TYPE::TDATA_INT:
+						{
+							pRecord->SetInt(modifyRecordRow, modifyRecordCol, lexical_cast<int>(modifyRecordValue));
+						}
+							break;
+						case NFDATA_TYPE::TDATA_FLOAT:
+						{
+							pRecord->SetFloat(modifyRecordRow, modifyRecordCol, lexical_cast<float>(modifyRecordValue));
+						}
+							break;
+						case NFDATA_TYPE::TDATA_STRING:
+						{
+							pRecord->SetString(modifyRecordRow, modifyRecordCol, modifyRecordValue);
+						}
+							break;
+						case NFDATA_TYPE::TDATA_OBJECT:
+						{
+							NFGUID id;
+							if (id.FromString(modifyRecordValue))
+							{
+								pRecord->SetObject(modifyRecordRow, modifyRecordCol, id);
+							}
+						}
+							break;
+						case NFDATA_TYPE::TDATA_VECTOR2:
+						{
+							NFVector2 vec;
+							if (vec.FromString(modifyRecordValue))
+							{
+								pRecord->SetVector2(modifyRecordRow, modifyRecordCol, vec);
+							}
+						}
+							break;
+						case NFDATA_TYPE::TDATA_VECTOR3:
+						{
+							NFVector3 vec;
+							if (vec.FromString(modifyRecordValue))
+							{
+								pRecord->SetVector3(modifyRecordRow, modifyRecordCol, vec);
+							}
+						}
+							break;
+
+						default:
+							break;
+					}
+					ImGui::CloseCurrentPopup();
+				}
 				ImGui::EndPopup();
 			}
 		}
