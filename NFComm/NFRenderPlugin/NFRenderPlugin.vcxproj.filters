@@ -18,7 +18,7 @@
     <ClCompile Include="UI\NFGodView.cpp">
       <Filter>UI</Filter>
     </ClCompile>
-    <ClCompile Include="UI\NFHierachyView.cpp">
+    <ClCompile Include="UI\NFHierarchyView.cpp">
       <Filter>UI</Filter>
     </ClCompile>
     <ClCompile Include="UI\NFInspectorView.cpp">
@@ -92,7 +92,7 @@
     <ClInclude Include="UI\NFGodView.h">
       <Filter>UI</Filter>
     </ClInclude>
-    <ClInclude Include="UI\NFHierachyView.h">
+    <ClInclude Include="UI\NFHierarchyView.h">
       <Filter>UI</Filter>
     </ClInclude>
     <ClInclude Include="UI\NFInspectorView.h">

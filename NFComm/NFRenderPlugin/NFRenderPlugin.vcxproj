@@ -114,7 +114,7 @@
     <ClInclude Include="UI\NFContainerView.h" />
     <ClInclude Include="UI\NFGameView.h" />
     <ClInclude Include="UI\NFGodView.h" />
-    <ClInclude Include="UI\NFHierachyView.h" />
+    <ClInclude Include="UI\NFHierarchyView.h" />
     <ClInclude Include="UI\NFInspectorView.h" />
     <ClInclude Include="UI\NFNodeSystem.h" />
     <ClInclude Include="UI\NFNodeView.h" />
@@ -150,7 +150,7 @@
     <ClCompile Include="UI\NFContainerView.cpp" />
     <ClCompile Include="UI\NFGameView.cpp" />
     <ClCompile Include="UI\NFGodView.cpp" />
-    <ClCompile Include="UI\NFHierachyView.cpp" />
+    <ClCompile Include="UI\NFHierarchyView.cpp" />
     <ClCompile Include="UI\NFInspectorView.cpp" />
     <ClCompile Include="UI\NFNodeSystem.cpp" />
     <ClCompile Include="UI\NFNodeView.cpp" />

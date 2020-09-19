@@ -26,7 +26,7 @@
 #include "NFUIModule.h"
 #include "UI/NFGodView.h"
 #include "UI/NFSceneView.h"
-#include "UI/NFHierachyView.h"
+#include "UI/NFHierarchyView.h"
 #include "UI/NFConsoleView.h"
 #include "UI/NFProfileView.h"
 #include "UI/NFBluePrintView.h"
@@ -54,7 +54,7 @@ bool NFUIModule::Init()
 
     mViewList.push_back(NF_SHARE_PTR<NFIView>(NF_NEW NFGodView(pPluginManager, NFViewType::GodView)));
     mViewList.push_back(NF_SHARE_PTR<NFIView>(NF_NEW NFSceneView(pPluginManager, NFViewType::SceneView)));
-    mViewList.push_back(NF_SHARE_PTR<NFIView>(NF_NEW NFHierachyView(pPluginManager, NFViewType::HierachyView)));
+    mViewList.push_back(NF_SHARE_PTR<NFIView>(NF_NEW NFHierarchyView(pPluginManager, NFViewType::HierachyView)));
     mViewList.push_back(NF_SHARE_PTR<NFIView>(NF_NEW NFConsoleView(pPluginManager, NFViewType::ConsoleView)));
     mViewList.push_back(NF_SHARE_PTR<NFIView>(NF_NEW NFProfileView(pPluginManager, NFViewType::ProfileView)));
     mViewList.push_back(NF_SHARE_PTR<NFIView>(NF_NEW NFInspectorView(pPluginManager, NFViewType::InspectorView)));

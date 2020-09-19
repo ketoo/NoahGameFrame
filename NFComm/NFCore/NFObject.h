@@ -81,7 +81,7 @@ public:
 	virtual const NFVector2& GetPropertyVector2(const std::string& propertyName);
 	virtual const NFVector3& GetPropertyVector3(const std::string& propertyName);
 
-    virtual bool FindRecord(const std::string& recordName);
+    virtual NF_SHARE_PTR<NFIRecord> FindRecord(const std::string& recordName);
 
     virtual bool SetRecordInt(const std::string& recordName, const int row, const int col, const NFINT64 nValue);
     virtual bool SetRecordFloat(const std::string& recordName, const int row, const int col, const double dwValue);

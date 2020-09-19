@@ -75,7 +75,5 @@ protected:
 	NFINetModule* m_pNetModule;
 	NFIEventModule* m_pEventModule;
 	NFISceneModule* m_pSceneModule;
-	NFIGameServerNet_ServerModule* m_pGameServerNet_ServerModule;
-	NFIGameServerToWorldModule* m_pNetClientModule;
 };
 #endif
