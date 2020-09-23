@@ -110,8 +110,6 @@ bool NFKernelModule::Execute()
 		mtDeleteSelfList.clear();
 	}
 
-	m_pSceneModule->Execute();
-
 	NF_SHARE_PTR<NFIObject> pObject = First();
 	while (pObject)
 	{
