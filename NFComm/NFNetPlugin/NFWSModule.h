@@ -41,16 +41,16 @@ public:
 	virtual bool AfterInit();
 
     //as client
-    virtual void Initialization(const char* strIP, const unsigned short nPort);
+    virtual void Initialization(const char* ip, const unsigned short nPort);
 
     //as server
     virtual int Initialization(const unsigned int nMaxClient, const unsigned short nPort, const int nCpuCount = 4);
 
-    virtual int ExpandBufferSize(const unsigned int size = 1024 * 1024 * 20);
+    virtual unsigned int ExpandBufferSize(const unsigned int size = 1024 * 1024 * 20) override;
 
-    virtual void RemoveReceiveCallBack(const int nMsgID);
+    virtual void RemoveReceiveCallBack(const int msgID);
 
-    virtual bool AddReceiveCallBack(const int nMsgID, const NET_RECEIVE_FUNCTOR_PTR& cb);
+    virtual bool AddReceiveCallBack(const int msgID, const NET_RECEIVE_FUNCTOR_PTR& cb);
 
     virtual bool AddReceiveCallBack(const NET_RECEIVE_FUNCTOR_PTR& cb);
 
@@ -58,26 +58,26 @@ public:
 
     virtual bool Execute();
 
-    virtual bool SendMsg(const std::string& msg, const NFSOCK nSockIndex, const bool text = true);
+    virtual bool SendMsg(const std::string& msg, const NFSOCK sockIndex, const bool text = true);
     virtual bool SendMsgToAllClient(const std::string& msg, const bool text = true);
-    virtual bool SendMsgWithOutHead(const int16_t nMsgID, const char* msg, const size_t nLen, const NFSOCK nSockIndex /*= 0*/);
-    virtual bool SendMsgPB(const uint16_t nMsgID, const google::protobuf::Message& xData, const NFSOCK nSockIndex);
-    int EnCode(const uint16_t unMsgID, const char* strData, const uint32_t unDataLen, std::string& strOutData);
+    virtual bool SendMsgWithOutHead(const int16_t msgID, const char* msg, const size_t len, const NFSOCK sockIndex /*= 0*/);
+    virtual bool SendMsgPB(const uint16_t msgID, const google::protobuf::Message& xData, const NFSOCK sockIndex);
+    int EnCode(const uint16_t umsgID, const char* strData, const uint32_t unDataLen, std::string& strOutData);
     virtual NFINet* GetNet();
 
-    virtual void OnError(const NFSOCK nSockIndex, const std::error_code& e);
+    virtual void OnError(const NFSOCK sockIndex, const std::error_code& e);
 protected:
-    bool SendRawMsg(const std::string& msg, const NFSOCK nSockIndex);
+    bool SendRawMsg(const std::string& msg, const NFSOCK sockIndex);
 
-    void OnReceiveNetPack(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+    void OnReceiveNetPack(const NFSOCK sockIndex, const int msgID, const char* msg, const uint32_t len);
 
-    void OnSocketNetEvent(const NFSOCK nSockIndex, const NF_NET_EVENT eEvent, NFINet* pNet);
+    void OnSocketNetEvent(const NFSOCK sockIndex, const NF_NET_EVENT eEvent, NFINet* pNet);
 
     void KeepAlive();
 
-    std::error_code HandShake(const NFSOCK nSockIndex, const char* msg, const uint32_t nLen);
+    std::error_code HandShake(const NFSOCK sockIndex, const char* msg, const uint32_t len);
 
-    std::error_code DecodeFrame(const NFSOCK nSockIndex,NetObject* pNetObject);
+    std::error_code DecodeFrame(const NFSOCK sockIndex,NetObject* pNetObject);
     int DeCode(const char* strData, const uint32_t unAllLen, NFMsgHead& xHead);
 
     std::string EncodeFrame(const char* data, size_t size, bool text);
@@ -86,9 +86,9 @@ protected:
     std::string HashKey(const char* key, size_t len);
 private:
 
-    int mnBufferSize;
+    unsigned int mnBufferSize;
     NFINet* m_pNet;
-    NFINT64 nLastTime;
+    NFINT64 mLastTime;
 	std::map<int, std::list<NET_RECEIVE_FUNCTOR_PTR>> mxReceiveCallBack;
     std::list<NET_EVENT_FUNCTOR_PTR> mxEventCallBackList;
     std::list<NET_RECEIVE_FUNCTOR_PTR> mxCallBackList;

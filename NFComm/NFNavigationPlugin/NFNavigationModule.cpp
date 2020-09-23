@@ -54,7 +54,7 @@ bool NFNavigationModule::Init()
 			//strLog << "strId: (" << strId.c_str() << ") is destroyed!\n";
 			//m_pLogModule->LogInfo(NULL_OBJECT, strLog, __FUNCTION__, __LINE__);
 			/*elementModule->
-			int nSceneID = lexical_cast<int>(strIdList[i]);*/
+			int sceneID = lexical_cast<int>(strIdList[i]);*/
 		}
 	}
     return true;

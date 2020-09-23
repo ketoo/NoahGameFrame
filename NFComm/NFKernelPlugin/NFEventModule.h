@@ -53,29 +53,29 @@ public:
 	virtual bool Shut();
 	virtual bool Execute();
 
-	virtual bool DoEvent(const int nEventID, const NFDataList& valueList);
+	virtual bool DoEvent(const int eventID, const NFDataList& valueList);
 
-	virtual bool ExistEventCallBack(const int nEventID);
+	virtual bool ExistEventCallBack(const int eventID);
 
-	virtual bool RemoveEventCallBack(const int nEventID);
+	virtual bool RemoveEventCallBack(const int eventID);
 
 	//////////////////////////////////////////////////////////
-	virtual bool DoEvent(const NFGUID self, const int nEventID, const NFDataList& valueList);
+	virtual bool DoEvent(const NFGUID self, const int eventID, const NFDataList& valueList);
 
-	virtual bool ExistEventCallBack(const NFGUID self, const int nEventID);
+	virtual bool ExistEventCallBack(const NFGUID self, const int eventID);
 
-	virtual bool RemoveEventCallBack(const NFGUID self, const int nEventID);
+	virtual bool RemoveEventCallBack(const NFGUID self, const int eventID);
 	virtual bool RemoveEventCallBack(const NFGUID self);
 
 protected:
 
-	virtual bool AddEventCallBack(const int nEventID, const MODULE_EVENT_FUNCTOR cb);
-    virtual bool AddEventCallBack(const NFGUID self, const int nEventID, const OBJECT_EVENT_FUNCTOR cb);
+	virtual bool AddEventCallBack(const int eventID, const MODULE_EVENT_FUNCTOR cb);
+    virtual bool AddEventCallBack(const NFGUID self, const int eventID, const OBJECT_EVENT_FUNCTOR cb);
     virtual bool AddCommonEventCallBack(const OBJECT_EVENT_FUNCTOR cb);
 
 private:
 
-	NFIKernelModule* m_pKernelodule;
+	NFIKernelModule* m_pKernelModule;
 
 private:
 	// for module

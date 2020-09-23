@@ -119,7 +119,7 @@ int NFBPVMEventModule::OnEventCommonEvent(const NFGUID& self, const int eventID,
     return 0;
 }
 
-int NFBPVMEventModule::OnClassCommonEvent(const NFGUID& self, const std::string& strClassNames, const CLASS_OBJECT_EVENT eClassEvent, const NFDataList& var)
+int NFBPVMEventModule::OnClassCommonEvent(const NFGUID& self, const std::string& classNames, const CLASS_OBJECT_EVENT classEvent, const NFDataList& var)
 {
     for (auto it = mBluePrintBlockAction.First(); it; it = mBluePrintBlockAction.Next())
     {
@@ -131,7 +131,7 @@ int NFBPVMEventModule::OnClassCommonEvent(const NFGUID& self, const std::string&
     return 0;
 }
 
-int NFBPVMEventModule::OnPropertyCommonEvent(const NFGUID& self, const std::string& strPropertyName, const NFData& oldVar, const NFData& newVar)
+int NFBPVMEventModule::OnPropertyCommonEvent(const NFGUID& self, const std::string& propertyName, const NFData& oldVar, const NFData& newVar)
 {
     return 0;
 }
@@ -141,7 +141,7 @@ int NFBPVMEventModule::OnRecordCommonEvent(const NFGUID& self, const RECORD_EVEN
     return 0;
 }
 
-void NFBPVMEventModule::OnMessageEvent(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
+void NFBPVMEventModule::OnMessageEvent(const NFSOCK sockIndex, const int msgID, const char* msg, const uint32_t len)
 {
     // unpack
     NFGUID playerID(1, 1);
@@ -150,7 +150,7 @@ void NFBPVMEventModule::OnMessageEvent(const NFSOCK nSockIndex, const int nMsgID
     auto item = mBluePrintBlockAction.First();
     while (item)
     {
-        auto eventData = item->mNetMsgEvent.GetElement(nMsgID);
+        auto eventData = item->mNetMsgEvent.GetElement(msgID);
         if (eventData)
         {
             NFGUID monitorID;
@@ -158,7 +158,7 @@ void NFBPVMEventModule::OnMessageEvent(const NFSOCK nSockIndex, const int nMsgID
             while (monitorData && !monitorID.IsNull())
             {
                 //const NFGUID& objectID, const  NFGUID& monitorID, const int eventID
-                monitorData->operator()(playerID, monitorID, nMsgID, emptyMap);
+                monitorData->operator()(playerID, monitorID, msgID, emptyMap);
 
                 monitorID.SetHead(0);
                 monitorID.SetData(0);

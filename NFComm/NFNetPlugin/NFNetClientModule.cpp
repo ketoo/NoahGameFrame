@@ -81,12 +81,12 @@ bool NFNetClientModule::Execute()
     return true;
 }
 
-void NFNetClientModule::RemoveReceiveCallBack(const NF_SERVER_TYPES eType, const uint16_t nMsgID)
+void NFNetClientModule::RemoveReceiveCallBack(const NF_SERVER_TYPES eType, const uint16_t msgID)
 {
     NF_SHARE_PTR<CallBack> xCallBack = mxCallBack.GetElement(eType);
     if (xCallBack)
     {
-        std::map<int, std::list<NET_RECEIVE_FUNCTOR_PTR>>::iterator it = xCallBack->mxReceiveCallBack.find(nMsgID);
+        std::map<int, std::list<NET_RECEIVE_FUNCTOR_PTR>>::iterator it = xCallBack->mxReceiveCallBack.find(msgID);
         if (xCallBack->mxReceiveCallBack.end() == it)
         {
             xCallBack->mxReceiveCallBack.erase(it);
@@ -99,7 +99,7 @@ void NFNetClientModule::AddServer(const ConnectData& xInfo)
     mxTempNetList.push_back(xInfo);
 }
 
-int NFNetClientModule::ExpandBufferSize(const unsigned int size)
+unsigned int NFNetClientModule::ExpandBufferSize(const unsigned int size)
 {
     if (size > 0)
     {
@@ -108,7 +108,7 @@ int NFNetClientModule::ExpandBufferSize(const unsigned int size)
     return mnBufferSize;
 }
 
-int NFNetClientModule::AddReceiveCallBack(const NF_SERVER_TYPES eType, const uint16_t nMsgID,
+int NFNetClientModule::AddReceiveCallBack(const NF_SERVER_TYPES eType, const uint16_t msgID,
                                            NET_RECEIVE_FUNCTOR_PTR functorPtr)
 {
     NF_SHARE_PTR<CallBack> xCallBack = mxCallBack.GetElement(eType);
@@ -121,7 +121,7 @@ int NFNetClientModule::AddReceiveCallBack(const NF_SERVER_TYPES eType, const uin
 	std::list<NET_RECEIVE_FUNCTOR_PTR> xList;
 	xList.push_back(functorPtr);
 
-    xCallBack->mxReceiveCallBack.insert(std::map<int, std::list<NET_RECEIVE_FUNCTOR_PTR>>::value_type(nMsgID, xList));
+    xCallBack->mxReceiveCallBack.insert(std::map<int, std::list<NET_RECEIVE_FUNCTOR_PTR>>::value_type(msgID, xList));
 
     return 0;
 }
@@ -154,19 +154,19 @@ int NFNetClientModule::AddEventCallBack(const NF_SERVER_TYPES eType, NET_EVENT_F
     return 0;
 }
 
-void NFNetClientModule::SendByServerIDWithOutHead(const int nServerID, const uint16_t nMsgID, const std::string & strData)
+void NFNetClientModule::SendByServerIDWithOutHead(const int serverID, const uint16_t msgID, const std::string & strData)
 {
-	NF_SHARE_PTR<ConnectData> pServer = mxServerMap.GetElement(nServerID);
+	NF_SHARE_PTR<ConnectData> pServer = mxServerMap.GetElement(serverID);
 	if (pServer)
 	{
 		NF_SHARE_PTR<NFINetModule> pNetModule = pServer->mxNetModule;
 		if (pNetModule.get())
 		{
-			if (!pNetModule->SendMsgWithOutHead(nMsgID, strData, 0))
+			if (!pNetModule->SendMsgWithOutHead(msgID, strData, 0))
 			{
 				std::ostringstream stream;
-				stream << " SendMsgWithOutHead failed " << nServerID;
-				stream << " msg id " << nMsgID;
+				stream << " SendMsgWithOutHead failed " << serverID;
+				stream << " msg id " << msgID;
 				m_pLogModule->LogError(stream, __FUNCTION__, __LINE__);
 			}
 		}
@@ -174,25 +174,25 @@ void NFNetClientModule::SendByServerIDWithOutHead(const int nServerID, const uin
 	else
 	{
 		std::ostringstream stream;
-		stream << " can't find the server " << nServerID;
-		stream << " msg id " << nMsgID;
+		stream << " can't find the server " << serverID;
+		stream << " msg id " << msgID;
 		m_pLogModule->LogError(stream, __FUNCTION__, __LINE__);
 	}
 }
 
-void NFNetClientModule::SendByServerID(const int nServerID, const uint16_t nMsgID, const std::string& strData)
+void NFNetClientModule::SendByServerID(const int serverID, const uint16_t msgID, const std::string& strData)
 {
-	NF_SHARE_PTR<ConnectData> pServer = mxServerMap.GetElement(nServerID);
+	NF_SHARE_PTR<ConnectData> pServer = mxServerMap.GetElement(serverID);
 	if (pServer)
 	{
 		NF_SHARE_PTR<NFINetModule> pNetModule = pServer->mxNetModule;
 		if (pNetModule.get())
 		{
-			if (!pNetModule->SendMsg(nMsgID, strData, 0))
+			if (!pNetModule->SendMsg(msgID, strData, 0))
 			{
 				std::ostringstream stream;
-				stream << " SendMsgWithOutHead failed " << nServerID;
-				stream << " msg id " << nMsgID;
+				stream << " SendMsgWithOutHead failed " << serverID;
+				stream << " msg id " << msgID;
 				m_pLogModule->LogError(stream, __FUNCTION__, __LINE__);
 			}
 		}
@@ -200,25 +200,25 @@ void NFNetClientModule::SendByServerID(const int nServerID, const uint16_t nMsgI
 	else
 	{
 		std::ostringstream stream;
-		stream << " can't find the server " << nServerID;
-		stream << " msg id " << nMsgID;
+		stream << " can't find the server " << serverID;
+		stream << " msg id " << msgID;
 		m_pLogModule->LogError(stream, __FUNCTION__, __LINE__);
 	}
 }
 
-void NFNetClientModule::SendByServerID(const int nServerID, const uint16_t nMsgID, const std::string & strData, const NFGUID id)
+void NFNetClientModule::SendByServerID(const int serverID, const uint16_t msgID, const std::string & strData, const NFGUID id)
 {
-	NF_SHARE_PTR<ConnectData> pServer = mxServerMap.GetElement(nServerID);
+	NF_SHARE_PTR<ConnectData> pServer = mxServerMap.GetElement(serverID);
 	if (pServer)
 	{
 		NF_SHARE_PTR<NFINetModule> pNetModule = pServer->mxNetModule;
 		if (pNetModule.get())
 		{
-			if (!pNetModule->SendMsg(nMsgID, strData, 0, id))
+			if (!pNetModule->SendMsg(msgID, strData, 0, id))
 			{
 				std::ostringstream stream;
-				stream << " SendMsgWithOutHead failed " << nServerID;
-				stream << " msg id " << nMsgID;
+				stream << " SendMsgWithOutHead failed " << serverID;
+				stream << " msg id " << msgID;
 				m_pLogModule->LogError(stream, __FUNCTION__, __LINE__);
 			}
 		}
@@ -226,13 +226,13 @@ void NFNetClientModule::SendByServerID(const int nServerID, const uint16_t nMsgI
 	else
 	{
 		std::ostringstream stream;
-		stream << " can't find the server " << nServerID;
-		stream << " msg id " << nMsgID;
+		stream << " can't find the server " << serverID;
+		stream << " msg id " << msgID;
 		m_pLogModule->LogError(stream, __FUNCTION__, __LINE__);
 	}
 }
 
-void NFNetClientModule::SendToAllServerWithOutHead(const uint16_t nMsgID, const std::string & strData)
+void NFNetClientModule::SendToAllServerWithOutHead(const uint16_t msgID, const std::string & strData)
 {
 	NF_SHARE_PTR<ConnectData> pServer = mxServerMap.First();
 	while (pServer)
@@ -240,11 +240,11 @@ void NFNetClientModule::SendToAllServerWithOutHead(const uint16_t nMsgID, const 
 		NF_SHARE_PTR<NFINetModule> pNetModule = pServer->mxNetModule;
 		if (pNetModule)
 		{
-			if (!pNetModule->SendMsgWithOutHead(nMsgID, strData, 0))
+			if (!pNetModule->SendMsgWithOutHead(msgID, strData, 0))
 			{
 				std::ostringstream stream;
 				stream << " SendMsgWithOutHead failed " << pServer->nGameID;
-				stream << " msg id " << nMsgID;
+				stream << " msg id " << msgID;
 				m_pLogModule->LogError(stream, __FUNCTION__, __LINE__);
 			}
 		}
@@ -253,7 +253,7 @@ void NFNetClientModule::SendToAllServerWithOutHead(const uint16_t nMsgID, const 
 	}
 }
 
-void NFNetClientModule::SendToAllServer(const uint16_t nMsgID, const std::string& strData)
+void NFNetClientModule::SendToAllServer(const uint16_t msgID, const std::string& strData)
 {
     NF_SHARE_PTR<ConnectData> pServer = mxServerMap.First();
     while (pServer)
@@ -261,11 +261,11 @@ void NFNetClientModule::SendToAllServer(const uint16_t nMsgID, const std::string
         NF_SHARE_PTR<NFINetModule> pNetModule = pServer->mxNetModule;
         if (pNetModule)
         {
-			if (!pNetModule->SendMsg(nMsgID, strData, 0))
+			if (!pNetModule->SendMsg(msgID, strData, 0))
 			{
 				std::ostringstream stream;
 				stream << " SendMsgWithOutHead failed " << pServer->nGameID;
-				stream << " msg id " << nMsgID;
+				stream << " msg id " << msgID;
 				m_pLogModule->LogError(stream, __FUNCTION__, __LINE__);
 			}
         }
@@ -274,7 +274,7 @@ void NFNetClientModule::SendToAllServer(const uint16_t nMsgID, const std::string
     }
 }
 
-void NFNetClientModule::SendToAllServer(const uint16_t nMsgID, const std::string & strData, const NFGUID id)
+void NFNetClientModule::SendToAllServer(const uint16_t msgID, const std::string & strData, const NFGUID id)
 {
 	NF_SHARE_PTR<ConnectData> pServer = mxServerMap.First();
 	while (pServer)
@@ -282,11 +282,11 @@ void NFNetClientModule::SendToAllServer(const uint16_t nMsgID, const std::string
 		NF_SHARE_PTR<NFINetModule> pNetModule = pServer->mxNetModule;
 		if (pNetModule)
 		{
-			if (!pNetModule->SendMsg(nMsgID, strData, 0, id))
+			if (!pNetModule->SendMsg(msgID, strData, 0, id))
 			{
 				std::ostringstream stream;
 				stream << " SendMsgWithOutHead failed " << pServer->nGameID;
-				stream << " msg id " << nMsgID;
+				stream << " msg id " << msgID;
 				m_pLogModule->LogError(stream, __FUNCTION__, __LINE__);
 			}
 		}
@@ -295,7 +295,7 @@ void NFNetClientModule::SendToAllServer(const uint16_t nMsgID, const std::string
 	}
 }
 
-void NFNetClientModule::SendToAllServerWithOutHead(const NF_SERVER_TYPES eType, const uint16_t nMsgID, const std::string & strData)
+void NFNetClientModule::SendToAllServerWithOutHead(const NF_SERVER_TYPES eType, const uint16_t msgID, const std::string & strData)
 {
 	NF_SHARE_PTR<ConnectData> pServer = mxServerMap.First();
 	while (pServer)
@@ -303,11 +303,11 @@ void NFNetClientModule::SendToAllServerWithOutHead(const NF_SERVER_TYPES eType, 
 		NF_SHARE_PTR<NFINetModule> pNetModule = pServer->mxNetModule;
 		if (pNetModule && eType == pServer->eServerType)
 		{
-			if (!pNetModule->SendMsgWithOutHead(nMsgID, strData, 0))
+			if (!pNetModule->SendMsgWithOutHead(msgID, strData, 0))
 			{
 				std::ostringstream stream;
 				stream << " SendMsgWithOutHead failed " << pServer->nGameID;
-				stream << " msg id " << nMsgID;
+				stream << " msg id " << msgID;
 				m_pLogModule->LogError(stream, __FUNCTION__, __LINE__);
 			}
 		}
@@ -316,7 +316,7 @@ void NFNetClientModule::SendToAllServerWithOutHead(const NF_SERVER_TYPES eType, 
 	}
 }
 
-void NFNetClientModule::SendToAllServer(const NF_SERVER_TYPES eType, const uint16_t nMsgID, const std::string& strData)
+void NFNetClientModule::SendToAllServer(const NF_SERVER_TYPES eType, const uint16_t msgID, const std::string& strData)
 {
     NF_SHARE_PTR<ConnectData> pServer = mxServerMap.First();
     while (pServer)
@@ -324,11 +324,11 @@ void NFNetClientModule::SendToAllServer(const NF_SERVER_TYPES eType, const uint1
         NF_SHARE_PTR<NFINetModule> pNetModule = pServer->mxNetModule;
         if (pNetModule && eType == pServer->eServerType)
         {
-			if (!pNetModule->SendMsg(nMsgID, strData, 0))
+			if (!pNetModule->SendMsg(msgID, strData, 0))
 			{
 				std::ostringstream stream;
 				stream << " SendMsgWithOutHead failed " << pServer->nGameID;
-				stream << " msg id " << nMsgID;
+				stream << " msg id " << msgID;
 				m_pLogModule->LogError(stream, __FUNCTION__, __LINE__);
 			}
         }
@@ -337,7 +337,7 @@ void NFNetClientModule::SendToAllServer(const NF_SERVER_TYPES eType, const uint1
     }
 }
 
-void NFNetClientModule::SendToAllServer(const NF_SERVER_TYPES eType, const uint16_t nMsgID, const std::string & strData, const NFGUID id)
+void NFNetClientModule::SendToAllServer(const NF_SERVER_TYPES eType, const uint16_t msgID, const std::string & strData, const NFGUID id)
 {
 	NF_SHARE_PTR<ConnectData> pServer = mxServerMap.First();
 	while (pServer)
@@ -345,11 +345,11 @@ void NFNetClientModule::SendToAllServer(const NF_SERVER_TYPES eType, const uint1
 		NF_SHARE_PTR<NFINetModule> pNetModule = pServer->mxNetModule;
 		if (pNetModule && eType == pServer->eServerType)
 		{
-			if (!pNetModule->SendMsg(nMsgID, strData, 0, id))
+			if (!pNetModule->SendMsg(msgID, strData, 0, id))
 			{
 				std::ostringstream stream;
 				stream << " SendMsgWithOutHead failed " << pServer->nGameID;
-				stream << " msg id " << nMsgID;
+				stream << " msg id " << msgID;
 				m_pLogModule->LogError(stream, __FUNCTION__, __LINE__);
 			}
 		}
@@ -358,19 +358,19 @@ void NFNetClientModule::SendToAllServer(const NF_SERVER_TYPES eType, const uint1
 	}
 }
 
-void NFNetClientModule::SendToServerByPB(const int nServerID, const uint16_t nMsgID, const google::protobuf::Message& xData)
+void NFNetClientModule::SendToServerByPB(const int serverID, const uint16_t msgID, const google::protobuf::Message& xData)
 {
-    NF_SHARE_PTR<ConnectData> pServer = mxServerMap.GetElement(nServerID);
+    NF_SHARE_PTR<ConnectData> pServer = mxServerMap.GetElement(serverID);
     if (pServer)
     {
         NF_SHARE_PTR<NFINetModule> pNetModule = pServer->mxNetModule;
         if (pNetModule)
         {
-			if (!pNetModule->SendMsgPB(nMsgID, xData, 0))
+			if (!pNetModule->SendMsgPB(msgID, xData, 0))
 			{
 				std::ostringstream stream;
 				stream << " SendMsgPB failed " << pServer->nGameID;
-				stream << " msg id " << nMsgID;
+				stream << " msg id " << msgID;
 				m_pLogModule->LogError(stream, __FUNCTION__, __LINE__);
 		   }
         }
@@ -378,25 +378,25 @@ void NFNetClientModule::SendToServerByPB(const int nServerID, const uint16_t nMs
 	else
 	{
 		std::ostringstream stream;
-		stream << " can't find the server " << nServerID;
-		stream << " msg id " << nMsgID;
+		stream << " can't find the server " << serverID;
+		stream << " msg id " << msgID;
 		m_pLogModule->LogError(stream, __FUNCTION__, __LINE__);
 	}
 }
 
-void NFNetClientModule::SendToServerByPB(const int nServerID, const uint16_t nMsgID, const google::protobuf::Message & xData, const NFGUID id)
+void NFNetClientModule::SendToServerByPB(const int serverID, const uint16_t msgID, const google::protobuf::Message & xData, const NFGUID id)
 {
-	NF_SHARE_PTR<ConnectData> pServer = mxServerMap.GetElement(nServerID);
+	NF_SHARE_PTR<ConnectData> pServer = mxServerMap.GetElement(serverID);
 	if (pServer)
 	{
 		NF_SHARE_PTR<NFINetModule> pNetModule = pServer->mxNetModule;
 		if (pNetModule)
 		{
-			if (!pNetModule->SendMsgPB(nMsgID, xData, 0, id))
+			if (!pNetModule->SendMsgPB(msgID, xData, 0, id))
 			{
 				std::ostringstream stream;
 				stream << " SendMsgPB failed " << pServer->nGameID;
-				stream << " msg id " << nMsgID;
+				stream << " msg id " << msgID;
 				m_pLogModule->LogError(stream, __FUNCTION__, __LINE__);
 			}
 		}
@@ -404,13 +404,13 @@ void NFNetClientModule::SendToServerByPB(const int nServerID, const uint16_t nMs
 	else
 	{
 		std::ostringstream stream;
-		stream << " can't find the server " << nServerID;
-		stream << " msg id " << nMsgID;
+		stream << " can't find the server " << serverID;
+		stream << " msg id " << msgID;
 		m_pLogModule->LogError(stream, __FUNCTION__, __LINE__);
 	}
 }
 
-void NFNetClientModule::SendToAllServerByPB(const uint16_t nMsgID, const google::protobuf::Message& xData, const NFGUID id)
+void NFNetClientModule::SendToAllServerByPB(const uint16_t msgID, const google::protobuf::Message& xData, const NFGUID id)
 {
     NF_SHARE_PTR<ConnectData> pServer = mxServerMap.First();
     while (pServer)
@@ -418,11 +418,11 @@ void NFNetClientModule::SendToAllServerByPB(const uint16_t nMsgID, const google:
         NF_SHARE_PTR<NFINetModule> pNetModule = pServer->mxNetModule;
         if (pNetModule)
         {
-			if (!pNetModule->SendMsgPB(nMsgID, xData, 0, id))
+			if (!pNetModule->SendMsgPB(msgID, xData, 0, id))
 			{
 				std::ostringstream stream;
 				stream << " SendMsgPB failed " << pServer->nGameID;
-				stream << " msg id " << nMsgID;
+				stream << " msg id " << msgID;
 				m_pLogModule->LogError(stream, __FUNCTION__, __LINE__);
 			}
         }
@@ -431,7 +431,7 @@ void NFNetClientModule::SendToAllServerByPB(const uint16_t nMsgID, const google:
     }
 }
 
-void NFNetClientModule::SendToAllServerByPB(const NF_SERVER_TYPES eType, const uint16_t nMsgID, const google::protobuf::Message& xData, const NFGUID id)
+void NFNetClientModule::SendToAllServerByPB(const NF_SERVER_TYPES eType, const uint16_t msgID, const google::protobuf::Message& xData, const NFGUID id)
 {
     NF_SHARE_PTR<ConnectData> pServer = mxServerMap.First();
     while (pServer)
@@ -439,11 +439,11 @@ void NFNetClientModule::SendToAllServerByPB(const NF_SERVER_TYPES eType, const u
         NF_SHARE_PTR<NFINetModule> pNetModule = pServer->mxNetModule;
         if (pNetModule && eType == pServer->eServerType && pServer->eState == ConnectDataState::NORMAL)
         {
-            if (!pNetModule->SendMsgPB(nMsgID, xData, 0, id))
+            if (!pNetModule->SendMsgPB(msgID, xData, 0, id))
 			{
 				std::ostringstream stream;
 				stream << " SendMsgPB failed " << pServer->nGameID;
-				stream << " msg id " << nMsgID;
+				stream << " msg id " << msgID;
 				m_pLogModule->LogError(stream, __FUNCTION__, __LINE__);
 			}
         }
@@ -452,26 +452,26 @@ void NFNetClientModule::SendToAllServerByPB(const NF_SERVER_TYPES eType, const u
     }
 }
 
-void NFNetClientModule::SendBySuitWithOutHead(const NF_SERVER_TYPES eType, const std::string & strHashKey, const uint16_t nMsgID, const std::string & strData)
+void NFNetClientModule::SendBySuitWithOutHead(const NF_SERVER_TYPES eType, const std::string & strHashKey, const uint16_t msgID, const std::string & strData)
 {
 	uint32_t nCRC32 = NFrame::CRC32(strHashKey);
-	SendBySuitWithOutHead(eType, nCRC32, nMsgID, strData);
+	SendBySuitWithOutHead(eType, nCRC32, msgID, strData);
 }
 
-void NFNetClientModule::SendBySuit(const NF_SERVER_TYPES eType, const std::string& strHashKey, const uint16_t nMsgID,
+void NFNetClientModule::SendBySuit(const NF_SERVER_TYPES eType, const std::string& strHashKey, const uint16_t msgID,
                                     const std::string& strData)
 {
     uint32_t nCRC32 = NFrame::CRC32(strHashKey);
-    SendBySuit(eType, nCRC32, nMsgID, strData);
+    SendBySuit(eType, nCRC32, msgID, strData);
 }
 
-void NFNetClientModule::SendBySuit(const NF_SERVER_TYPES eType, const std::string & strHashKey, const uint16_t nMsgID, const std::string & strData, const NFGUID id)
+void NFNetClientModule::SendBySuit(const NF_SERVER_TYPES eType, const std::string & strHashKey, const uint16_t msgID, const std::string & strData, const NFGUID id)
 {
 	uint32_t nCRC32 = NFrame::CRC32(strHashKey);
-	SendBySuit(eType, nCRC32, nMsgID, strData, id);
+	SendBySuit(eType, nCRC32, msgID, strData, id);
 }
 
-void NFNetClientModule::SendBySuitWithOutHead(const NF_SERVER_TYPES eType, const int nHashKey32, const uint16_t nMsgID, const std::string & strData)
+void NFNetClientModule::SendBySuitWithOutHead(const NF_SERVER_TYPES eType, const int nHashKey32, const uint16_t msgID, const std::string & strData)
 {
 	NF_SHARE_PTR<NFConsistentHashMapEx<int, ConnectData>> xConnectDataMap = mxServerTypeMap.GetElement(eType);
 	if (xConnectDataMap)
@@ -479,19 +479,19 @@ void NFNetClientModule::SendBySuitWithOutHead(const NF_SERVER_TYPES eType, const
 		NF_SHARE_PTR<ConnectData> pConnectData = xConnectDataMap->GetElementBySuit(nHashKey32);
 		if (pConnectData)
 		{
-			SendByServerIDWithOutHead(pConnectData->nGameID, nMsgID, strData);
+			SendByServerIDWithOutHead(pConnectData->nGameID, msgID, strData);
 		}
 	}
 	else
 	{
 		std::ostringstream stream;
 		stream << " can't find the server type " << eType;
-		stream << " msg id " << nMsgID;
+		stream << " msg id " << msgID;
 		m_pLogModule->LogError(stream, __FUNCTION__, __LINE__);
 	}
 }
 
-void NFNetClientModule::SendBySuit(const NF_SERVER_TYPES eType, const int nHashKey, const uint16_t nMsgID, const std::string& strData)
+void NFNetClientModule::SendBySuit(const NF_SERVER_TYPES eType, const int nHashKey, const uint16_t msgID, const std::string& strData)
 {
 	NF_SHARE_PTR<NFConsistentHashMapEx<int, ConnectData>> xConnectDataMap = mxServerTypeMap.GetElement(eType);
 	if (xConnectDataMap)
@@ -499,19 +499,19 @@ void NFNetClientModule::SendBySuit(const NF_SERVER_TYPES eType, const int nHashK
 		NF_SHARE_PTR<ConnectData> pConnectData = xConnectDataMap->GetElementBySuit(nHashKey);
 		if (pConnectData)
 		{
-			SendByServerID(pConnectData->nGameID, nMsgID, strData);
+			SendByServerID(pConnectData->nGameID, msgID, strData);
 		}
 	}
 	else
 	{
 		std::ostringstream stream;
 		stream << " can't find the server type " << eType;
-		stream << " msg id " << nMsgID;
+		stream << " msg id " << msgID;
 		m_pLogModule->LogError(stream, __FUNCTION__, __LINE__);
 	}
 }
 
-void NFNetClientModule::SendBySuit(const NF_SERVER_TYPES eType, const int nHashKey32, const uint16_t nMsgID, const std::string & strData, const NFGUID id)
+void NFNetClientModule::SendBySuit(const NF_SERVER_TYPES eType, const int nHashKey32, const uint16_t msgID, const std::string & strData, const NFGUID id)
 {
 	NF_SHARE_PTR<NFConsistentHashMapEx<int, ConnectData>> xConnectDataMap = mxServerTypeMap.GetElement(eType);
 	if (xConnectDataMap)
@@ -519,31 +519,31 @@ void NFNetClientModule::SendBySuit(const NF_SERVER_TYPES eType, const int nHashK
 		NF_SHARE_PTR<ConnectData> pConnectData = xConnectDataMap->GetElementBySuit(nHashKey32);
 		if (pConnectData)
 		{
-			SendByServerID(pConnectData->nGameID, nMsgID, strData, id);
+			SendByServerID(pConnectData->nGameID, msgID, strData, id);
 		}
 	}
 	else
 	{
 		std::ostringstream stream;
 		stream << " can't find the server type " << eType;
-		stream << " msg id " << nMsgID;
+		stream << " msg id " << msgID;
 		m_pLogModule->LogError(stream, __FUNCTION__, __LINE__);
 	}
 }
 
-void NFNetClientModule::SendSuitByPB(const NF_SERVER_TYPES eType, const std::string& strHashKey, const uint16_t nMsgID, const google::protobuf::Message& xData)
+void NFNetClientModule::SendSuitByPB(const NF_SERVER_TYPES eType, const std::string& strHashKey, const uint16_t msgID, const google::protobuf::Message& xData)
 {
     uint32_t nCRC32 = NFrame::CRC32(strHashKey);
-    SendSuitByPB(eType, nCRC32, nMsgID, xData);
+    SendSuitByPB(eType, nCRC32, msgID, xData);
 }
 
-void NFNetClientModule::SendSuitByPB(const NF_SERVER_TYPES eType, const std::string & strHashKey, const uint16_t nMsgID, const google::protobuf::Message & xData, const NFGUID id)
+void NFNetClientModule::SendSuitByPB(const NF_SERVER_TYPES eType, const std::string & strHashKey, const uint16_t msgID, const google::protobuf::Message & xData, const NFGUID id)
 {
 	uint32_t nCRC32 = NFrame::CRC32(strHashKey);
-	SendSuitByPB(eType, nCRC32, nMsgID, xData, id);
+	SendSuitByPB(eType, nCRC32, msgID, xData, id);
 }
 
-void NFNetClientModule::SendSuitByPB(const NF_SERVER_TYPES eType, const int nHashKey, const uint16_t nMsgID, const google::protobuf::Message& xData)
+void NFNetClientModule::SendSuitByPB(const NF_SERVER_TYPES eType, const int nHashKey, const uint16_t msgID, const google::protobuf::Message& xData)
 {
     NF_SHARE_PTR<NFConsistentHashMapEx<int, ConnectData>> xConnectDataMap = mxServerTypeMap.GetElement(eType);
     if (xConnectDataMap)
@@ -551,12 +551,12 @@ void NFNetClientModule::SendSuitByPB(const NF_SERVER_TYPES eType, const int nHas
         NF_SHARE_PTR<ConnectData> pConnectData = xConnectDataMap->GetElementBySuit(nHashKey);
         if (pConnectData)
         {
-            SendToServerByPB(pConnectData->nGameID, nMsgID, xData);
+            SendToServerByPB(pConnectData->nGameID, msgID, xData);
         }
     }
 }
 
-void NFNetClientModule::SendSuitByPB(const NF_SERVER_TYPES eType, const int nHashKey32, const uint16_t nMsgID, const google::protobuf::Message & xData, const NFGUID id)
+void NFNetClientModule::SendSuitByPB(const NF_SERVER_TYPES eType, const int nHashKey32, const uint16_t msgID, const google::protobuf::Message & xData, const NFGUID id)
 {
 	NF_SHARE_PTR<NFConsistentHashMapEx<int, ConnectData>> xConnectDataMap = mxServerTypeMap.GetElement(eType);
 	if (xConnectDataMap)
@@ -564,7 +564,7 @@ void NFNetClientModule::SendSuitByPB(const NF_SERVER_TYPES eType, const int nHas
 		NF_SHARE_PTR<ConnectData> pConnectData = xConnectDataMap->GetElementBySuit(nHashKey32);
 		if (pConnectData)
 		{
-			SendToServerByPB(pConnectData->nGameID, nMsgID, xData, id);
+			SendToServerByPB(pConnectData->nGameID, msgID, xData, id);
 		}
 	}
 }
@@ -580,9 +580,9 @@ NF_SHARE_PTR<ConnectData> NFNetClientModule::GetServerNetInfo(const NF_SERVER_TY
     return nullptr;
 }
 
-NF_SHARE_PTR<ConnectData> NFNetClientModule::GetServerNetInfo(const int nServerID)
+NF_SHARE_PTR<ConnectData> NFNetClientModule::GetServerNetInfo(const int serverID)
 {
-    return mxServerMap.GetElement(nServerID);
+    return mxServerMap.GetElement(serverID);
 }
 
 NFMapEx<int, ConnectData>& NFNetClientModule::GetServerList()
@@ -592,9 +592,9 @@ NFMapEx<int, ConnectData>& NFNetClientModule::GetServerList()
 
 NF_SHARE_PTR<ConnectData> NFNetClientModule::GetServerNetInfo(const NFINet* pNet)
 {
-    int nServerID = 0;
-    for (NF_SHARE_PTR<ConnectData> pData = mxServerMap.First(nServerID);
-         pData != NULL; pData = mxServerMap.Next(nServerID))
+    int serverID = 0;
+    for (NF_SHARE_PTR<ConnectData> pData = mxServerMap.First(serverID);
+         pData != NULL; pData = mxServerMap.Next(serverID))
     {
         if (pData->mxNetModule && pNet == pData->mxNetModule->GetNet())
         {
@@ -609,7 +609,7 @@ void NFNetClientModule::InitCallBacks(NF_SHARE_PTR<ConnectData> pServerData)
 {
 	std::ostringstream stream;
 	stream << "AddServer Type: " << pServerData->eServerType << " Server ID: " << pServerData->nGameID << " State: "
-		<< pServerData->eState << " IP: " << pServerData->strIP << " Port: " << pServerData->nPort;
+		<< pServerData->eState << " IP: " << pServerData->ip << " Port: " << pServerData->nPort;
 
 	m_pLogModule->LogInfo(stream.str());
 
@@ -699,7 +699,7 @@ void NFNetClientModule::ProcessExecute()
 				pServerData->mxNetModule->AfterInit();
 				pServerData->mxNetModule->ReadyExecute();
 
-                pServerData->mxNetModule->Initialization(pServerData->strIP.c_str(), pServerData->nPort);
+                pServerData->mxNetModule->Initialization(pServerData->ip.c_str(), pServerData->nPort);
 
                 InitCallBacks(pServerData);
             }
@@ -721,7 +721,7 @@ void NFNetClientModule::LogServerInfo()
     ConnectData* pServerData = mxServerMap.FirstNude();
     while (nullptr != pServerData)
     {
-        stream << "Type: " << pServerData->eServerType << " Server ID: " << pServerData->nGameID << " State: " << pServerData->eState << " IP: " << pServerData->strIP << " Port: " << pServerData->nPort;
+        stream << "Type: " << pServerData->eServerType << " Server ID: " << pServerData->nGameID << " State: " << pServerData->eState << " IP: " << pServerData->ip << " Port: " << pServerData->nPort;
 
 		if (pServerData->eState != ConnectDataState::NORMAL)
 		{
@@ -824,8 +824,8 @@ void NFNetClientModule::ProcessAddNetConnect()
 
             xServerData->nGameID = xInfo.nGameID;
             xServerData->eServerType = xInfo.eServerType;
-            xServerData->strIP = xInfo.strIP;
-            xServerData->strName = xInfo.strName;
+            xServerData->ip = xInfo.ip;
+            xServerData->name = xInfo.name;
             xServerData->eState = ConnectDataState::CONNECTING;
             xServerData->nPort = xInfo.nPort;
             xServerData->mnLastActionTime = GetPluginManager()->GetNowTime();
@@ -837,8 +837,8 @@ void NFNetClientModule::ProcessAddNetConnect()
 			xServerData->mxNetModule->AfterInit();
 			xServerData->mxNetModule->ReadyExecute();
 
-            xServerData->mxNetModule->Initialization(xServerData->strIP.c_str(), xServerData->nPort);
-            xServerData->mxNetModule->ExpandBufferSize(mnBufferSize);
+            xServerData->mxNetModule->Initialization(xServerData->ip.c_str(), xServerData->nPort);
+            xServerData->mxNetModule->ExpandBufferSize((unsigned int)mnBufferSize);
 
             InitCallBacks(xServerData);
 

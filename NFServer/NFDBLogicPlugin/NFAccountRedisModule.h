@@ -54,9 +54,9 @@ public:
 
 	virtual bool AfterInit();
 
-	virtual bool VerifyAccount(const std::string& strAccount, const std::string& strPwd);
-	virtual bool AddAccount(const std::string& strAccount, const std::string& strPwd);
-	virtual bool ExistAccount(const std::string& strAccount);
+	virtual bool VerifyAccount(const std::string& account, const std::string& strPwd);
+	virtual bool AddAccount(const std::string& account, const std::string& strPwd);
+	virtual bool ExistAccount(const std::string& account);
 
 
 protected:

@@ -42,32 +42,32 @@ public:
 
     virtual ~NFPropertyManager();
 
-    virtual bool RegisterCallback(const std::string& strProperty, const PROPERTY_EVENT_FUNCTOR_PTR& cb);
+    virtual bool RegisterCallback(const std::string& propertyName, const PROPERTY_EVENT_FUNCTOR_PTR& cb);
 
     virtual NF_SHARE_PTR<NFIProperty> AddProperty(const NFGUID& self, NF_SHARE_PTR<NFIProperty> pProperty);
 
-    virtual NF_SHARE_PTR<NFIProperty> AddProperty(const NFGUID& self, const std::string& strPropertyName, const NFDATA_TYPE varType);
+    virtual NF_SHARE_PTR<NFIProperty> AddProperty(const NFGUID& self, const std::string& propertyName, const NFDATA_TYPE varType);
 
     virtual const NFGUID& Self();
 
 	virtual std::string ToString();
 
-    virtual bool SetProperty(const std::string& strPropertyName, const NFData& TData);
+    virtual bool SetProperty(const std::string& propertyName, const NFData& TData);
 
-    virtual bool SetPropertyInt(const std::string& strPropertyName, const NFINT64 nValue);
-    virtual bool SetPropertyFloat(const std::string& strPropertyName, const double dwValue);
-    virtual bool SetPropertyString(const std::string& strPropertyName, const std::string& strValue);
-    virtual bool SetPropertyObject(const std::string& strPropertyName, const NFGUID& obj);
-	virtual bool SetPropertyVector2(const std::string& strPropertyName, const NFVector2& value);
-	virtual bool SetPropertyVector3(const std::string& strPropertyName, const NFVector3& value);
+    virtual bool SetPropertyInt(const std::string& propertyName, const NFINT64 nValue);
+    virtual bool SetPropertyFloat(const std::string& propertyName, const double dwValue);
+    virtual bool SetPropertyString(const std::string& propertyName, const std::string& value);
+    virtual bool SetPropertyObject(const std::string& propertyName, const NFGUID& obj);
+	virtual bool SetPropertyVector2(const std::string& propertyName, const NFVector2& value);
+	virtual bool SetPropertyVector3(const std::string& propertyName, const NFVector3& value);
 
-    virtual NFINT64 GetPropertyInt(const std::string& strPropertyName);
-	virtual int GetPropertyInt32(const std::string& strPropertyName);
-    virtual double GetPropertyFloat(const std::string& strPropertyName);
-    virtual const std::string& GetPropertyString(const std::string& strPropertyName);
-    virtual const NFGUID& GetPropertyObject(const std::string& strPropertyName);
-	virtual const NFVector2& GetPropertyVector2(const std::string& strPropertyName);
-	virtual const NFVector3& GetPropertyVector3(const std::string& strPropertyName);
+    virtual NFINT64 GetPropertyInt(const std::string& propertyName);
+	virtual int GetPropertyInt32(const std::string& propertyName);
+    virtual double GetPropertyFloat(const std::string& propertyName);
+    virtual const std::string& GetPropertyString(const std::string& propertyName);
+    virtual const NFGUID& GetPropertyObject(const std::string& propertyName);
+	virtual const NFVector2& GetPropertyVector2(const std::string& propertyName);
+	virtual const NFVector3& GetPropertyVector3(const std::string& propertyName);
 
 private:
     NFGUID mSelf;

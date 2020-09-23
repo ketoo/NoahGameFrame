@@ -60,12 +60,12 @@ public:
     virtual bool AfterInit();
 
 protected:
-    int OnObjectClassEvent( const NFGUID& self, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFDataList& var );
+    int OnObjectClassEvent( const NFGUID& self, const std::string& className, const CLASS_OBJECT_EVENT classEvent, const NFDataList& var );
 
-    int OnObjectHPEvent( const NFGUID& self, const std::string& strPropertyName, const NFData& oldVar, const NFData& newVar);
+    int OnObjectHPEvent( const NFGUID& self, const std::string& propertyName, const NFData& oldVar, const NFData& newVar);
 
-	int OnNPCDeadDestroyHeart(const NFGUID& self, const std::string& strHeartBeat, const float fTime, const int nCount);
-	int OnBuildingDeadDestroyHeart( const NFGUID& self, const std::string& strHeartBeat, const float fTime, const int nCount);
+	int OnNPCDeadDestroyHeart(const NFGUID& self, const std::string& heartBeat, const float time, const int count);
+	int OnBuildingDeadDestroyHeart( const NFGUID& self, const std::string& heartBeat, const float time, const int count);
 
 protected:
 	int OnObjectBeKilled( const NFGUID& self, const NFGUID& killer );

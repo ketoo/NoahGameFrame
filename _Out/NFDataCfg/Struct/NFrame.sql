@@ -22,6 +22,8 @@ ALTER TABLE `NPC` ADD `Level` bigint(11) DEFAULT '0' COMMENT '';
 ALTER TABLE `NPC` ADD `MP` bigint(11) DEFAULT '0' COMMENT '法力值';
 ALTER TABLE `NPC` ADD `SP` bigint(11) DEFAULT '0' COMMENT '体力';
 ALTER TABLE `Player` ADD `Account` text COLLATE utf8mb4_unicode_ci  DEFAULT '' COMMENT '玩家的帐号';
+ALTER TABLE `Player` ADD `BattlePoint` bigint(11) DEFAULT '0' COMMENT '';
+ALTER TABLE `Player` ADD `ClanID` varchar(64) COLLATE utf8mb4_unicode_ci DEFAULT '' COMMENT '登陆的服ID';
 ALTER TABLE `Player` ADD `ConnectKey` text COLLATE utf8mb4_unicode_ci  DEFAULT '' COMMENT '玩家连接服务器的KEY';
 ALTER TABLE `Player` ADD `Diamond` bigint(11) DEFAULT '0' COMMENT '钻石';
 ALTER TABLE `Player` ADD `EXP` bigint(11) DEFAULT '0' COMMENT '经验获得,如果是怪物，则是掉落经验';
@@ -40,6 +42,7 @@ ALTER TABLE `Player` ADD `SkillNormal` text COLLATE utf8mb4_unicode_ci  DEFAULT 
 ALTER TABLE `Player` ADD `SkillSpecial1` text COLLATE utf8mb4_unicode_ci  DEFAULT '' COMMENT 'Skill1';
 ALTER TABLE `Player` ADD `SkillSpecial2` text COLLATE utf8mb4_unicode_ci  DEFAULT '' COMMENT 'Skill2';
 ALTER TABLE `Player` ADD `SkillTHUMP` text COLLATE utf8mb4_unicode_ci  DEFAULT '' COMMENT 'Skill3';
+ALTER TABLE `Player` ADD `TeamID` varchar(64) COLLATE utf8mb4_unicode_ci DEFAULT '' COMMENT '登陆的服ID';
 ALTER TABLE `Player` ADD `TotalTime` bigint(11) DEFAULT '0' COMMENT '在线时间';
 ALTER TABLE `Player` ADD `HeroEquipmentList` text COLLATE utf8mb4_unicode_ci  DEFAULT '' COMMENT '';
 ALTER TABLE `Player` ADD `HeroList` text COLLATE utf8mb4_unicode_ci  DEFAULT '' COMMENT '';

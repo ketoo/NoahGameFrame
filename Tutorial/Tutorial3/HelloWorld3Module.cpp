@@ -45,22 +45,22 @@ int NFHelloWorld3Module::OnEvent(const NFGUID& self, const int event, const NFDa
 	return 0;
 }
 
-int NFHelloWorld3Module::OnHeartBeat(const NFGUID& self, const std::string& strHeartBeat, const float fTime, const int nCount)
+int NFHelloWorld3Module::OnHeartBeat(const NFGUID& self, const std::string& heartBeat, const float time, const int count)
 {
 
 	int64_t unNowTime = NFGetTimeMS();
 
-	std::cout << self.ToString() + " strHeartBeat: " << fTime << " Count: " << nCount << "  TimeDis: " << unNowTime - mLastTime << std::endl;
+	std::cout << self.ToString() + " heartBeat: " << time << " Count: " << count << "  TimeDis: " << unNowTime - mLastTime << std::endl;
 
 	mLastTime = unNowTime;
 
 	return 0;
 }
 
-int NFHelloWorld3Module::OnClassCallBackEvent(const NFGUID& self, const std::string& strClassName, const CLASS_OBJECT_EVENT event, const NFDataList& arg)
+int NFHelloWorld3Module::OnClassCallBackEvent(const NFGUID& self, const std::string& className, const CLASS_OBJECT_EVENT event, const NFDataList& arg)
 {
 	
-	std::cout << "OnClassCallBackEvent ClassName: " << strClassName << " ID: " << self.nData64 << " Event: " << event << std::endl;
+	std::cout << "OnClassCallBackEvent ClassName: " << className << " ID: " << self.nData64 << " Event: " << event << std::endl;
 
 	if (event == COE_CREATE_HASDATA)
 	{
@@ -74,18 +74,18 @@ int NFHelloWorld3Module::OnClassCallBackEvent(const NFGUID& self, const std::str
 	return 0;
 }
 
-int NFHelloWorld3Module::OnPropertyCallBackEvent( const NFGUID& self, const std::string& strProperty, const NFData& oldVar, const NFData& newVar)
+int NFHelloWorld3Module::OnPropertyCallBackEvent( const NFGUID& self, const std::string& propertyName, const NFData& oldVar, const NFData& newVar)
 {
 	
-	std::cout << "OnPropertyCallBackEvent Property: " << strProperty << " OldValue: " << oldVar.GetInt() << " NewValue: " << newVar.GetInt() << std::endl;
+	std::cout << "OnPropertyCallBackEvent Property: " << propertyName << " OldValue: " << oldVar.GetInt() << " NewValue: " << newVar.GetInt() << std::endl;
 
 	return 0;
 }
 
-int NFHelloWorld3Module::OnPropertyStrCallBackEvent( const NFGUID& self, const std::string& strProperty, const NFData& oldVar, const NFData& newVar)
+int NFHelloWorld3Module::OnPropertyStrCallBackEvent( const NFGUID& self, const std::string& propertyName, const NFData& oldVar, const NFData& newVar)
 {
 	
-	std::cout << "OnPropertyCallBackEvent Property: " << strProperty << " OldValue: " << oldVar.GetString() << " NewValue: " << newVar.GetString() << std::endl;
+	std::cout << "OnPropertyCallBackEvent Property: " << propertyName << " OldValue: " << oldVar.GetString() << " NewValue: " << newVar.GetString() << std::endl;
 
 	return 0;
 }

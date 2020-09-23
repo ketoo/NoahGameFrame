@@ -140,17 +140,17 @@ int NFUDPModule::Initialization(const unsigned int nMaxClient, const unsigned sh
 	return 0;
 }
 
-int NFUDPModule::ExpandBufferSize(const unsigned int size)
+unsigned int NFUDPModule::ExpandBufferSize(const unsigned int size)
 {
 	return 0;
 }
 
-void NFUDPModule::RemoveReceiveCallBack(const int nMsgID)
+void NFUDPModule::RemoveReceiveCallBack(const int msgID)
 {
 
 }
 
-bool NFUDPModule::AddReceiveCallBack(const int nMsgID, const NET_RECEIVE_FUNCTOR_PTR &cb)
+bool NFUDPModule::AddReceiveCallBack(const int msgID, const NET_RECEIVE_FUNCTOR_PTR &cb)
 {
 	return true;
 }
@@ -175,48 +175,48 @@ bool NFUDPModule::Execute()
 	return true;
 }
 
-bool NFUDPModule::SendMsgWithOutHead(const int nMsgID, const std::string &msg, const NFSOCK nSockIndex)
+bool NFUDPModule::SendMsgWithOutHead(const int msgID, const std::string &msg, const NFSOCK sockIndex)
 {
 	return true;
 }
 
-bool NFUDPModule::SendMsgToAllClientWithOutHead(const int nMsgID, const std::string &msg)
+bool NFUDPModule::SendMsgToAllClientWithOutHead(const int msgID, const std::string &msg)
 {
 	return true;
 }
 
-bool NFUDPModule::SendMsgPB(const uint16_t nMsgID, const google::protobuf::Message &xData, const NFSOCK nSockIndex)
+bool NFUDPModule::SendMsgPB(const uint16_t msgID, const google::protobuf::Message &xData, const NFSOCK sockIndex)
 {
 	return true;
 }
 
-bool NFUDPModule::SendMsgPB(const uint16_t nMsgID, const google::protobuf::Message &xData, const NFSOCK nSockIndex,
+bool NFUDPModule::SendMsgPB(const uint16_t msgID, const google::protobuf::Message &xData, const NFSOCK sockIndex,
 							const NFGUID id)
 {
 	return true;
 }
 
-bool NFUDPModule::SendMsg(const uint16_t nMsgID, const std::string &xData, const NFSOCK nSockIndex)
+bool NFUDPModule::SendMsg(const uint16_t msgID, const std::string &xData, const NFSOCK sockIndex)
 {
 	return true;
 }
 
-bool NFUDPModule::SendMsg(const uint16_t nMsgID, const std::string &xData, const NFSOCK nSockIndex, const NFGUID id)
+bool NFUDPModule::SendMsg(const uint16_t msgID, const std::string &xData, const NFSOCK sockIndex, const NFGUID id)
 {
 	return true;
 }
 
-bool NFUDPModule::SendMsgPBToAllClient(const uint16_t nMsgID, const google::protobuf::Message &xData)
+bool NFUDPModule::SendMsgPBToAllClient(const uint16_t msgID, const google::protobuf::Message &xData)
 {
 	return true;
 }
 
-bool NFUDPModule::SendMsgPB(const uint16_t nMsgID, const google::protobuf::Message &xData, const NFSOCK nSockIndex, const std::vector<NFGUID> *pClientIDList)
+bool NFUDPModule::SendMsgPB(const uint16_t msgID, const google::protobuf::Message &xData, const NFSOCK sockIndex, const std::vector<NFGUID> *pClientIDList)
 {
 	return true;
 }
 
-bool NFUDPModule::SendMsgPB(const uint16_t nMsgID, const std::string &strData, const NFSOCK nSockIndex, const std::vector<NFGUID> *pClientIDList)
+bool NFUDPModule::SendMsgPB(const uint16_t msgID, const std::string &strData, const NFSOCK sockIndex, const std::vector<NFGUID> *pClientIDList)
 {
 	return true;
 }
@@ -226,12 +226,12 @@ NFINet *NFUDPModule::GetNet()
 	return nullptr;
 }
 
-void NFUDPModule::OnReceiveNetPack(const NFSOCK nSockIndex, const int nMsgID, const char *msg, const uint32_t nLen)
+void NFUDPModule::OnReceiveNetPack(const NFSOCK sockIndex, const int msgID, const char *msg, const uint32_t len)
 {
 
 }
 
-void NFUDPModule::OnSocketNetEvent(const NFSOCK nSockIndex, const NF_NET_EVENT eEvent, NFINet *pNet)
+void NFUDPModule::OnSocketNetEvent(const NFSOCK sockIndex, const NF_NET_EVENT eEvent, NFINet *pNet)
 {
 
 }

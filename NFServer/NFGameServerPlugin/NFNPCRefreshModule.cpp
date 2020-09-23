@@ -60,7 +60,7 @@ bool NFNPCRefreshModule::AfterInit()
     return true;
 }
 
-int NFNPCRefreshModule::OnObjectClassEvent( const NFGUID& self, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFDataList& var )
+int NFNPCRefreshModule::OnObjectClassEvent( const NFGUID& self, const std::string& className, const CLASS_OBJECT_EVENT classEvent, const NFDataList& var )
 {
     NF_SHARE_PTR<NFIObject> pSelf = m_pKernelModule->GetObject(self);
     if (nullptr == pSelf)
@@ -68,13 +68,13 @@ int NFNPCRefreshModule::OnObjectClassEvent( const NFGUID& self, const std::strin
         return 1;
     }
 
-    if (strClassName == NFrame::NPC::ThisName())
+    if (className == NFrame::NPC::ThisName())
     {
-        if ( CLASS_OBJECT_EVENT::COE_CREATE_LOADDATA == eClassEvent )
+        if ( CLASS_OBJECT_EVENT::COE_CREATE_LOADDATA == classEvent )
         {
-            const std::string& strConfigIndex = m_pKernelModule->GetPropertyString(self, NFrame::NPC::ConfigID());
-			const std::string& strEffectPropertyID = m_pElementModule->GetPropertyString(strConfigIndex, NFrame::NPC::EffectData());
-			const int nNPCType = m_pElementModule->GetPropertyInt32(strConfigIndex, NFrame::NPC::NPCType());
+            const std::string& configIndex = m_pKernelModule->GetPropertyString(self, NFrame::NPC::ConfigID());
+			const std::string& strEffectPropertyID = m_pElementModule->GetPropertyString(configIndex, NFrame::NPC::EffectData());
+			const int npcType = m_pElementModule->GetPropertyInt32(configIndex, NFrame::NPC::NPCType());
 			NF_SHARE_PTR<NFIPropertyManager> pSelfPropertyManager = pSelf->GetPropertyManager();
 
 			//effect data
@@ -83,26 +83,26 @@ int NFNPCRefreshModule::OnObjectClassEvent( const NFGUID& self, const std::strin
 			if (pConfigPropertyManager)
 			{
 				std::string strProperName;
-				for (NFIProperty* pProperty = pConfigPropertyManager->FirstNude(strProperName); pProperty != NULL; pProperty = pConfigPropertyManager->NextNude(strProperName))
+				for (NFIProperty* property = pConfigPropertyManager->FirstNude(strProperName); property != NULL; property = pConfigPropertyManager->NextNude(strProperName))
 				{
-					if (pSelfPropertyManager && pProperty->Changed()
+					if (pSelfPropertyManager && property->Changed()
 						&& strProperName != NFrame::IObject::ID()
 						&& strProperName != NFrame::IObject::ConfigID()
 						&& strProperName != NFrame::IObject::ClassName()
 						&& strProperName != NFrame::IObject::SceneID()
 						&& strProperName != NFrame::IObject::GroupID())
 					{
-						pSelfPropertyManager->SetProperty(pProperty->GetKey(), pProperty->GetValue());
+						pSelfPropertyManager->SetProperty(property->GetKey(), property->GetValue());
 					}
 				}
 			}
 
-			if (nNPCType == NFMsg::ENPCType::HERO_NPC)
+			if (npcType == NFMsg::ENPCType::HERO_NPC)
 			{
 				//star & level
 			}
         }
-        else if ( CLASS_OBJECT_EVENT::COE_CREATE_HASDATA == eClassEvent )
+        else if ( CLASS_OBJECT_EVENT::COE_CREATE_HASDATA == classEvent )
         {
 			int nHPMax = m_pKernelModule->GetPropertyInt32(self, NFrame::NPC::MAXHP());
             m_pKernelModule->SetPropertyInt(self, NFrame::NPC::HP(), nHPMax);
@@ -114,7 +114,7 @@ int NFNPCRefreshModule::OnObjectClassEvent( const NFGUID& self, const std::strin
     return 0;
 }
 
-int NFNPCRefreshModule::OnObjectHPEvent( const NFGUID& self, const std::string& strPropertyName, const NFData& oldVar, const NFData& newVar)
+int NFNPCRefreshModule::OnObjectHPEvent( const NFGUID& self, const std::string& propertyName, const NFData& oldVar, const NFData& newVar)
 {
     if ( newVar.GetInt() <= 0 )
     {
@@ -130,36 +130,36 @@ int NFNPCRefreshModule::OnObjectHPEvent( const NFGUID& self, const std::string& 
     return 0;
 }
 
-int NFNPCRefreshModule::OnNPCDeadDestroyHeart( const NFGUID& self, const std::string& strHeartBeat, const float fTime, const int nCount)
+int NFNPCRefreshModule::OnNPCDeadDestroyHeart( const NFGUID& self, const std::string& heartBeat, const float time, const int count)
 {
     //and create new object
-	int nSceneID = m_pKernelModule->GetPropertyInt32( self, NFrame::NPC::SceneID());
-	int nGroupID = m_pKernelModule->GetPropertyInt32(self, NFrame::NPC::GroupID());
-	int nNPCType = m_pKernelModule->GetPropertyInt(self, NFrame::NPC::NPCType());
+	int sceneID = m_pKernelModule->GetPropertyInt32( self, NFrame::NPC::SceneID());
+	int groupID = m_pKernelModule->GetPropertyInt32(self, NFrame::NPC::GroupID());
+	int npcType = m_pKernelModule->GetPropertyInt32(self, NFrame::NPC::NPCType());
 
-	if (nNPCType == NFMsg::ENPCType::NORMAL_NPC)
+	if (npcType == NFMsg::ENPCType::NORMAL_NPC)
 	{
 
-		const std::string& strClassName = m_pKernelModule->GetPropertyString( self, NFrame::NPC::ClassName());
-		const std::string& strSeedID = m_pKernelModule->GetPropertyString( self, NFrame::NPC::SeedID());
-		const std::string& strConfigID = m_pKernelModule->GetPropertyString( self, NFrame::NPC::ConfigID());
-		const NFGUID xMasterID = m_pKernelModule->GetPropertyObject(self, NFrame::NPC::MasterID());
+		const std::string& className = m_pKernelModule->GetPropertyString( self, NFrame::NPC::ClassName());
+		const std::string& seedID = m_pKernelModule->GetPropertyString( self, NFrame::NPC::SeedID());
+		const std::string& configID = m_pKernelModule->GetPropertyString( self, NFrame::NPC::ConfigID());
+		const NFGUID masterID = m_pKernelModule->GetPropertyObject(self, NFrame::NPC::MasterID());
 		const NFGUID camp = m_pKernelModule->GetPropertyObject(self, NFrame::NPC::CampID());
 		int refresh = m_pKernelModule->GetPropertyInt32(self, NFrame::NPC::Refresh());
 
 		m_pKernelModule->DestroySelf(self);
 
-		const NFVector3& seedPos = m_pSceneModule->GetSeedPos(nSceneID, strSeedID);
+		const NFVector3& seedPos = m_pSceneModule->GetSeedPos(sceneID, seedID);
 		if (refresh > 0)
 		{
 			NFDataList arg;
 			arg << NFrame::NPC::Position() << seedPos;
-			arg << NFrame::NPC::SeedID() << strSeedID;
-			arg << NFrame::NPC::MasterID() << xMasterID;
+			arg << NFrame::NPC::SeedID() << seedID;
+			arg << NFrame::NPC::MasterID() << masterID;
 			arg << NFrame::NPC::CampID() << camp;
 			arg << NFrame::NPC::Refresh() << refresh;
 
-			m_pKernelModule->CreateObject(NFGUID(), nSceneID, nGroupID, strClassName, strConfigID, arg);
+			m_pKernelModule->CreateObject(NFGUID(), sceneID, groupID, className, configID, arg);
 		}
 	}
 	else
@@ -170,29 +170,29 @@ int NFNPCRefreshModule::OnNPCDeadDestroyHeart( const NFGUID& self, const std::st
     return 0;
 }
 
-int NFNPCRefreshModule::OnBuildingDeadDestroyHeart(const NFGUID & self, const std::string & strHeartBeat, const float fTime, const int nCount)
+int NFNPCRefreshModule::OnBuildingDeadDestroyHeart(const NFGUID & self, const std::string & heartBeat, const float time, const int count)
 {
 	//and create new object
-	const std::string& strClassName = m_pKernelModule->GetPropertyString(self, NFrame::NPC::ClassName());
-	const std::string& strSeedID = m_pKernelModule->GetPropertyString(self, NFrame::NPC::SeedID());
-	const std::string& strConfigID = m_pKernelModule->GetPropertyString(self, NFrame::NPC::ConfigID());
-	const NFGUID xMasterID = m_pKernelModule->GetPropertyObject(self, NFrame::NPC::MasterID());
-	int nNPCType = m_pKernelModule->GetPropertyInt(self, NFrame::NPC::NPCType());
-	int nSceneID = m_pKernelModule->GetPropertyInt32(self, NFrame::NPC::SceneID());
-	int nGroupID = m_pKernelModule->GetPropertyInt32(self, NFrame::NPC::GroupID());
+	const std::string& className = m_pKernelModule->GetPropertyString(self, NFrame::NPC::ClassName());
+	const std::string& seedID = m_pKernelModule->GetPropertyString(self, NFrame::NPC::SeedID());
+	const std::string& configID = m_pKernelModule->GetPropertyString(self, NFrame::NPC::ConfigID());
+	const NFGUID masterID = m_pKernelModule->GetPropertyObject(self, NFrame::NPC::MasterID());
+	int npcType = m_pKernelModule->GetPropertyInt32(self, NFrame::NPC::NPCType());
+	int sceneID = m_pKernelModule->GetPropertyInt32(self, NFrame::NPC::SceneID());
+	int groupID = m_pKernelModule->GetPropertyInt32(self, NFrame::NPC::GroupID());
 
 	NFVector3 fSeedPos = m_pKernelModule->GetPropertyVector3(self, NFrame::NPC::Position());
 
-	if (nNPCType == NFMsg::ENPCType::TURRET_NPC)
+	if (npcType == NFMsg::ENPCType::TURRET_NPC)
 	{
 		m_pKernelModule->DestroySelf(self);
 
 		NFDataList arg;
 		arg << NFrame::NPC::Position() << fSeedPos;
-		arg << NFrame::NPC::SeedID() << strSeedID;
-		arg << NFrame::NPC::MasterID() << xMasterID;
+		arg << NFrame::NPC::SeedID() << seedID;
+		arg << NFrame::NPC::MasterID() << masterID;
 
-		m_pKernelModule->CreateObject(NFGUID(), nSceneID, nGroupID, strClassName, strConfigID, arg);
+		m_pKernelModule->CreateObject(NFGUID(), sceneID, groupID, className, configID, arg);
 	}
 	
 	return 0;
@@ -202,11 +202,11 @@ int NFNPCRefreshModule::OnObjectBeKilled( const NFGUID& self, const NFGUID& kill
 {
 	if ( m_pKernelModule->GetObject(killer) )
 	{
-		const int64_t nExp = m_pKernelModule->GetPropertyInt(self, NFrame::NPC::EXP());
-		const int64_t nGold = m_pKernelModule->GetPropertyInt(self, NFrame::NPC::Gold());
+		const int64_t exp = m_pKernelModule->GetPropertyInt(self, NFrame::NPC::EXP());
+		const int64_t gold = m_pKernelModule->GetPropertyInt(self, NFrame::NPC::Gold());
 
-		m_pPropertyModule->AddExp(killer, nExp);
-		m_pPropertyModule->AddGold(killer, nGold);
+		m_pPropertyModule->AddExp(killer, exp);
+		m_pPropertyModule->AddGold(killer, gold);
 	}
 
 	return 0;

@@ -191,7 +191,7 @@ bool NFGodView::Execute()
 				ImGuiIO& io = ImGui::GetIO();
 
 
-				NFVector2 displayOffset(mNodeSystem.GetNodeSize() / 2, mNodeSystem.GetNodeSize() / 2);
+				NFVector2 displayOffset((float)(mNodeSystem.GetNodeSize() / 2), (float)(mNodeSystem.GetNodeSize() / 2));
 				NFVector2 vec(io.MousePos.x - wPos.x - offset.X() - displayOffset.X(), io.MousePos.y - offset.Y() - displayOffset.Y());
 
 				mClickedPos = NFVector2(vec.X() / mNodeSystem.GetNodeSize(), vec.Y() / mNodeSystem.GetNodeSize());
@@ -258,7 +258,7 @@ void NFGodView::DrawMapData()
 					auto voxel = data->data.GetElement(NFGUID(i, j));
 					if (voxel)
 					{
-						NFVector2 v1(i * nodeSize * data->tileConfig.cellSizeX, j * -nodeSize * data->tileConfig.cellSizeZ);
+						NFVector2 v1((float)(i * nodeSize * data->tileConfig.cellSizeX), (float)(j * -nodeSize * data->tileConfig.cellSizeZ));
 						NFVector2 v2(v1.X() + nodeSize * data->tileConfig.cellSizeX, v1.Y() - nodeSize * data->tileConfig.cellSizeX);
 
 						if (voxel->layer > 1)
@@ -271,7 +271,7 @@ void NFGodView::DrawMapData()
 							//DrawRectFilled(v1, v2, color);
 							if (voxel->movable <= 0)
 							{
-								mNodeSystem.DrawCircle((v1 + v2) / 2, mNodeSystem.GetNodeSize() * 0.75, mImmovable);
+								mNodeSystem.DrawCircle((v1 + v2) / 2, mNodeSystem.GetNodeSize() * 0.75f, mImmovable);
 							}
 							if (voxel->stair_h > 0)
 							{
@@ -299,7 +299,7 @@ void NFGodView::DrawMapData()
 			{
 				if (i % 5 == 0)
 				{
-					NFVector2 v1(i * nodeSize * data->tileConfig.cellSizeX, 0);
+					NFVector2 v1((float)(i * nodeSize * data->tileConfig.cellSizeX), 0);
 					std::string text = std::to_string(i * data->tileConfig.cellSizeX);
 					mNodeSystem.DrawText(v1, mTextColor, text.c_str());
 				}
@@ -308,7 +308,7 @@ void NFGodView::DrawMapData()
 			{
 				if (j % 5 == 0)
 				{
-					NFVector2 v1(-nodeSize *2, j * nodeSize * -data->tileConfig.cellSizeX);
+					NFVector2 v1((float)(-nodeSize *2), (float)(j * nodeSize * -data->tileConfig.cellSizeX));
 					std::string text = std::to_string(j * data->tileConfig.cellSizeX);
 					mNodeSystem.DrawText(v1, mTextColor, text.c_str());
 				}
@@ -316,7 +316,7 @@ void NFGodView::DrawMapData()
 
 			//draw background
 			NFVector2 v1(0, 0);
-			NFVector2 v2(nodeSize * data->tileConfig.mapSize * data->tileConfig.cellSizeX, nodeSize * -data->tileConfig.mapSize * data->tileConfig.cellSizeZ);
+			NFVector2 v2((float)(nodeSize * data->tileConfig.mapSize * data->tileConfig.cellSizeX), (float)(nodeSize * -data->tileConfig.mapSize * data->tileConfig.cellSizeZ));
 
 			mNodeSystem.DrawRect(v1, v2, mImmovable);
 		}
@@ -406,8 +406,8 @@ void NFGodView::RenderScene(const int sceneID, const int groupID)
 			for (int k = 0; k < list.GetCount(); ++k)
 			{
 				const NFGUID& guid = list.Object(k);
-				const std::string& strClassName = m_pKernelModule->GetPropertyString(guid, NFrame::IObject::ClassName());
-				std::string buttonName = strClassName + "<" + guid.ToString() + ">";
+				const std::string& className = m_pKernelModule->GetPropertyString(guid, NFrame::IObject::ClassName());
+				std::string buttonName = className + "<" + guid.ToString() + ">";
 
 				mTreeView.AddSubTreeNode(nodeId, guid, buttonName.c_str());
 			}
@@ -424,8 +424,8 @@ void NFGodView::RenderScene(const int sceneID, const int groupID)
 		for (int k = 0; k < list.GetCount(); ++k)
 		{
 			const NFGUID& guid = list.Object(k);
-			const std::string& strClassName = m_pKernelModule->GetPropertyString(guid, NFrame::IObject::ClassName());
-			std::string buttonName = strClassName + "<" + guid.ToString() + ">";
+			const std::string& className = m_pKernelModule->GetPropertyString(guid, NFrame::IObject::ClassName());
+			std::string buttonName = className + "<" + guid.ToString() + ">";
 
 			mTreeView.AddSubTreeNode(nodeId, guid, buttonName.c_str());
 		}
@@ -505,12 +505,12 @@ void NFGodView::UpdateSceneObjectNodePosition(const int sceneID, const int group
 	}
 }
 
-int NFGodView::OnClassCommonEvent(const NFGUID& self, const std::string& strClassNames, const CLASS_OBJECT_EVENT eClassEvent, const NFDataList& var)
+int NFGodView::OnClassCommonEvent(const NFGUID& self, const std::string& classNames, const CLASS_OBJECT_EVENT classEvent, const NFDataList& var)
 {
-	if (eClassEvent == CLASS_OBJECT_EVENT::COE_DESTROY)
+	if (classEvent == CLASS_OBJECT_EVENT::COE_DESTROY)
 	{
-		const int scene = m_pKernelModule->GetPropertyInt(self, NFrame::IObject::SceneID());
-		const int group = m_pKernelModule->GetPropertyInt(self, NFrame::IObject::GroupID());
+		const int scene = m_pKernelModule->GetPropertyInt32(self, NFrame::IObject::SceneID());
+		const int group = m_pKernelModule->GetPropertyInt32(self, NFrame::IObject::GroupID());
 
 		if (scene == mSceneID)
 		{
@@ -526,10 +526,10 @@ int NFGodView::OnClassCommonEvent(const NFGUID& self, const std::string& strClas
 			}
 		}
 	}
-	else if (eClassEvent == CLASS_OBJECT_EVENT::COE_CREATE_FINISH)
+	else if (classEvent == CLASS_OBJECT_EVENT::COE_CREATE_FINISH)
 	{
-		int scene = m_pKernelModule->GetPropertyInt(self, NFrame::IObject::SceneID());
-		int group = m_pKernelModule->GetPropertyInt(self, NFrame::IObject::GroupID());
+		int scene = m_pKernelModule->GetPropertyInt32(self, NFrame::IObject::SceneID());
+		int group = m_pKernelModule->GetPropertyInt32(self, NFrame::IObject::GroupID());
 
 		if (scene == mSceneID && group == mGroupID)
 		{

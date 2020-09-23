@@ -157,10 +157,10 @@ void NFPluginServer::ProcessParameter()
 	pPluginManager->SetAppName(FindParameterValue(argList, "Server="));
 
 	std::string strAppID = FindParameterValue(argList, "ID=");
-    int nAppID = 0;
-    if (NF_StrTo(strAppID, nAppID))
+    int appID = 0;
+    if (NF_StrTo(strAppID, appID))
     {
-        pPluginManager->SetAppID(nAppID);
+        pPluginManager->SetAppID(appID);
     }
 
 	std::string strDockerFlag = FindParameterValue(argList, "Docker=");
@@ -176,8 +176,8 @@ void NFPluginServer::ProcessParameter()
         for (int i = 0; i < argList.size(); i++)
         {
             std::string strPipeline = argList[i];
-            int posFile = strPipeline.find(".xml:");
-            int posContent = strPipeline.find("==");
+            size_t posFile = strPipeline.find(".xml:");
+            size_t posContent = strPipeline.find("==");
             if (posFile != string::npos && posContent != string::npos)
             {
                 std::string fileName = strPipeline.substr(0, posFile + 4);
@@ -192,7 +192,7 @@ void NFPluginServer::ProcessParameter()
     std::string strTitleName = pPluginManager->GetAppName() + std::to_string(pPluginManager->GetAppID());// +" PID" + NFGetPID();
     if (!strTitleName.empty())
     {
-		int pos = strTitleName.find("Server");
+        size_t pos = strTitleName.find("Server");
 		if (pos != string::npos)
 		{
 			strTitleName.replace(pos, 6, "");
@@ -228,7 +228,7 @@ void NFPluginServer::InitDaemon()
 #endif
 }
 
-bool NFPluginServer::GetFileContent(NFIPluginManager* p, const std::string& strFilePath, std::string& strContent)
+bool NFPluginServer::GetFileContent(NFIPluginManager* p, const std::string& strFilePath, std::string& content)
 {
     FILE* fp = fopen(strFilePath.c_str(), "rb");
     if (!fp)
@@ -239,20 +239,20 @@ bool NFPluginServer::GetFileContent(NFIPluginManager* p, const std::string& strF
     fseek(fp, 0, SEEK_END);
     const long filelength = ftell(fp);
     fseek(fp, 0, SEEK_SET);
-    strContent.resize(filelength);
-    fread((void*)strContent.data(), filelength, 1, fp);
+    content.resize(filelength);
+    fread((void*)content.data(), filelength, 1, fp);
     fclose(fp);
 
-    std::string strFileName = strFilePath.substr(strFilePath.find_last_of("/\\") + 1);
-    std::vector<NFReplaceContent> contents = p->GetFileReplaceContents(strFileName);
+    std::string fileName = strFilePath.substr(strFilePath.find_last_of("/\\") + 1);
+    std::vector<NFReplaceContent> contents = p->GetFileReplaceContents(fileName);
     if (!contents.empty())
     {
         for (auto it : contents)
         {
-            std::size_t pos = strContent.find(it.content);
+            std::size_t pos = content.find(it.content);
             if (pos != string::npos)
             {
-                strContent.replace(pos, it.content.length(), it.newValue.c_str());
+                content.replace(pos, it.content.length(), it.newValue.c_str());
             }
         }
     }

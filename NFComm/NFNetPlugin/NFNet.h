@@ -84,34 +84,35 @@ public:
     virtual ~NFNet() {};
 
 public:
-    virtual bool Execute();
+    virtual bool Execute() override ;
 
-    virtual void Initialization(const char* strIP, const unsigned short nPort);
-    virtual int Initialization(const unsigned int nMaxClient, const unsigned short nPort, const int nCpuCount = 4);
-	virtual int ExpandBufferSize(const unsigned int size);
+    virtual void Initialization(const char* ip, const unsigned short nPort) override ;
+    virtual int Initialization(const unsigned int nMaxClient, const unsigned short nPort, const int nCpuCount = 4) override ;
+	virtual unsigned int ExpandBufferSize(const unsigned int size) override;
 
-    virtual bool Final();
+    virtual bool Final() override ;
 
-    virtual bool SendMsg(const char* msg, const size_t nLen, const NFSOCK nSockIndex);
+    virtual bool SendMsg(const char* msg, const size_t len, const NFSOCK sockIndex) override ;
 
-    virtual bool SendMsgWithOutHead(const int16_t nMsgID, const char* msg, const size_t nLen, const NFSOCK nSockIndex);
-
-    virtual bool SendMsgWithOutHead(const int16_t nMsgID, const char* msg, const size_t nLen, const std::list<NFSOCK>& fdList);
-
-    virtual bool SendMsgToAllClientWithOutHead(const int16_t nMsgID, const char* msg, const size_t nLen);
+    virtual bool SendMsgWithOutHead(const int16_t msgID, const char* msg, const size_t len, const NFSOCK sockIndex) override ;
 
 
-    virtual bool CloseNetObject(const NFSOCK nSockIndex);
-    virtual bool AddNetObject(const NFSOCK nSockIndex, NetObject* pObject);
-    virtual NetObject* GetNetObject(const NFSOCK nSockIndex);
+    virtual bool SendMsgToAllClientWithOutHead(const int16_t msgID, const char* msg, const size_t len) override ;
 
-    virtual bool IsServer();
-    virtual bool Log(int severity, const char* msg);
 
-private:    
-    bool SendMsgToAllClient(const char* msg, const size_t nLen);
+    virtual bool CloseNetObject(const NFSOCK sockIndex) override ;
+    virtual bool AddNetObject(const NFSOCK sockIndex, NetObject* pObject) override ;
+    virtual NetObject* GetNetObject(const NFSOCK sockIndex) override ;
+
+    virtual bool IsServer() override ;
+    virtual bool Log(int severity, const char* msg) override ;
+
+private:
+	bool SendMsgWithOutHead(const int16_t msgID, const char* msg, const size_t len, const std::list<NFSOCK>& fdList);
+
+    bool SendMsgToAllClient(const char* msg, const size_t len);
     
-    bool SendMsg(const char* msg, const size_t nLen, const std::list<NFSOCK>& fdList);
+    bool SendMsg(const char* msg, const size_t len, const std::list<NFSOCK>& fdList);
 
 
 private:
@@ -123,7 +124,7 @@ private:
 
     int InitClientNet();
     int InitServerNet();
-    void CloseObject(const NFSOCK nSockIndex);
+    void CloseObject(const NFSOCK sockIndex);
 
     static void listener_cb(struct evconnlistener* listener, evutil_socket_t fd, struct sockaddr* sa, int socklen, void* user_data);
     static void conn_readcb(struct bufferevent* bev, void* user_data);
@@ -133,8 +134,8 @@ private:
     static void event_fatal_cb(int err);
 
 protected:
-    int DeCode(const char* strData, const uint32_t unLen, NFMsgHead& xHead);
-    int EnCode(const uint16_t unMsgID, const char* strData, const uint32_t unDataLen, std::string& strOutData);
+    int DeCode(const char* strData, const uint32_t ulen, NFMsgHead& xHead);
+    int EnCode(const uint16_t umsgID, const char* strData, const uint32_t unDataLen, std::string& strOutData);
 
 private:
     //<fd,object>
@@ -151,7 +152,7 @@ private:
     int mnCpuCount;
 	bool mbServer;
 
-	int mnBufferSize;
+    unsigned int mnBufferSize;
 
     bool mbWorking;
     bool mbTCPStream;

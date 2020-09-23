@@ -67,10 +67,10 @@ public:
 		return result;
 	}
 
-    virtual int64_t GetPropertyValue(const NFGUID& self, const std::string& strPropertyName, const NFPropertyGroup eGroupType) = 0;
-    virtual int SetPropertyValue(const NFGUID& self, const std::string& strPropertyName, const NFPropertyGroup eGroupType, const int64_t nValue) = 0;
+    virtual int64_t GetPropertyValue(const NFGUID& self, const std::string& propertyName, const NFPropertyGroup eGroupType) = 0;
+    virtual int SetPropertyValue(const NFGUID& self, const std::string& propertyName, const NFPropertyGroup eGroupType, const int64_t nValue) = 0;
 
-    virtual bool AddExp(const NFGUID& self, const int64_t nExp) = 0;
+    virtual bool AddExp(const NFGUID& self, const int64_t exp) = 0;
     virtual bool FullHPMP(const NFGUID& self) = 0;
     virtual bool AddHP(const NFGUID& self, const int nValue) = 0;
     virtual bool ConsumeHP(const NFGUID& self, const int nValue) = 0;

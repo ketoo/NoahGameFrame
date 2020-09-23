@@ -55,18 +55,18 @@ public:
     virtual bool AfterInit();
 
 private:
-	int ClearProperty(const NFGUID& self, const int nSceneID, const int nGroupID);
-	int ClearRecord(const NFGUID& self, const int nSceneID, const int nGroupID);
+	int ClearProperty(const NFGUID& self, const int sceneID, const int groupID);
+	int ClearRecord(const NFGUID& self, const int sceneID, const int groupID);
 
-	int OnPropertyEvent(const NFGUID& self, const std::string& strProperty, const NFData& oldVar, const NFData& newVar);
+	int OnPropertyEvent(const NFGUID& self, const std::string& propertyName, const NFData& oldVar, const NFData& newVar);
 	int OnRecordEvent(const NFGUID& self, const RECORD_EVENT_DATA& xEventData, const NFData& oldVar, const NFData& newVar);
 
-	int OnBeforeLeaveSceneEvent(const NFGUID & self, const int nSceneID, const int nGroupID, const int nType, const NFDataList& argList);
-	int OnAfterEntrySceneEvent(const NFGUID & self, const int nSceneID, const int nGroupID, const int nType, const NFDataList& argList);
+	int OnBeforeLeaveSceneEvent(const NFGUID & self, const int sceneID, const int groupID, const int type, const NFDataList& argList);
+	int OnAfterEntrySceneEvent(const NFGUID & self, const int sceneID, const int groupID, const int type, const NFDataList& argList);
 	
 	//broad the data of self to argvar 
-	int OnPropertyEnter(const NFDataList& argVar, const int nSceneID, const int nGroupID);
-	int OnRecordEnter(const NFDataList& argVar, const int nSceneID, const int nGroupID);
+	int OnPropertyEnter(const NFDataList& argVar, const int sceneID, const int groupID);
+	int OnRecordEnter(const NFDataList& argVar, const int sceneID, const int groupID);
 
 private:
 

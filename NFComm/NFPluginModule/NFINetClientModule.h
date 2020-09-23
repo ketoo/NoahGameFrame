@@ -46,8 +46,8 @@ struct ConnectData
 	{
 		nGameID = 0;
 		nPort = 0;
-		strName = "";
-		strIP = "";
+		name = "";
+		ip = "";
 		eServerType = NF_ST_NONE;
 		eState = ConnectDataState::DISCONNECT;
 		mnLastActionTime = 0;
@@ -56,10 +56,10 @@ struct ConnectData
 
 	int nGameID;
 	NF_SERVER_TYPES eServerType;
-	std::string strIP;
+	std::string ip;
 	int nPort;
 	int nWorkLoad;
-	std::string strName;
+	std::string name;
 	ConnectDataState eState;
 	NFINT64 mnLastActionTime;
 
@@ -75,12 +75,12 @@ public:
     };
 
 	template<typename BaseType>
-	bool AddReceiveCallBack(const NF_SERVER_TYPES eType, const uint16_t nMsgID, BaseType* pBase, void (BaseType::*handleReceiver)(const NFSOCK, const int, const char*, const uint32_t))
+	bool AddReceiveCallBack(const NF_SERVER_TYPES eType, const uint16_t msgID, BaseType* pBase, void (BaseType::*handleReceiver)(const NFSOCK, const int, const char*, const uint32_t))
 	{
 		NET_RECEIVE_FUNCTOR functor = std::bind(handleReceiver, pBase, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3, std::placeholders::_4);
 		NET_RECEIVE_FUNCTOR_PTR functorPtr(new NET_RECEIVE_FUNCTOR(functor));
 
-		AddReceiveCallBack(eType, nMsgID, functorPtr);
+		AddReceiveCallBack(eType, msgID, functorPtr);
 
 		return true;
 	}
@@ -108,60 +108,60 @@ public:
 	}
 
 	virtual int AddReceiveCallBack(const NF_SERVER_TYPES eType, NET_RECEIVE_FUNCTOR_PTR functorPtr) = 0;
-	virtual int AddReceiveCallBack(const NF_SERVER_TYPES eType, const uint16_t nMsgID, NET_RECEIVE_FUNCTOR_PTR functorPtr) = 0;
+	virtual int AddReceiveCallBack(const NF_SERVER_TYPES eType, const uint16_t msgID, NET_RECEIVE_FUNCTOR_PTR functorPtr) = 0;
 	virtual int AddEventCallBack(const NF_SERVER_TYPES eType, NET_EVENT_FUNCTOR_PTR functorPtr) = 0;
 
-	virtual void RemoveReceiveCallBack(const NF_SERVER_TYPES eType, const uint16_t nMsgID) = 0;
+	virtual void RemoveReceiveCallBack(const NF_SERVER_TYPES eType, const uint16_t msgID) = 0;
 	////////////////////////////////////////////////////////////////////////////////
 
 	virtual void AddServer(const ConnectData& xInfo) = 0;
-	virtual int ExpandBufferSize(const unsigned int size = 1024 * 1024 * 20) = 0;
+	virtual unsigned int ExpandBufferSize(const unsigned int size = 1024 * 1024 * 20) = 0;
 
 	////////////////////////////////////////////////////////////////////////////////
-	virtual void SendByServerIDWithOutHead(const int nServerID, const uint16_t nMsgID, const std::string& strData) = 0;
+	virtual void SendByServerIDWithOutHead(const int serverID, const uint16_t msgID, const std::string& strData) = 0;
 
-	virtual void SendByServerID(const int nServerID, const uint16_t nMsgID, const std::string& strData) = 0;
-	virtual void SendByServerID(const int nServerID, const uint16_t nMsgID, const std::string& strData, const NFGUID id) = 0;
+	virtual void SendByServerID(const int serverID, const uint16_t msgID, const std::string& strData) = 0;
+	virtual void SendByServerID(const int serverID, const uint16_t msgID, const std::string& strData, const NFGUID id) = 0;
 
-	virtual void SendToAllServerWithOutHead(const uint16_t nMsgID, const std::string& strData) = 0;
+	virtual void SendToAllServerWithOutHead(const uint16_t msgID, const std::string& strData) = 0;
 
-	virtual void SendToAllServer(const uint16_t nMsgID, const std::string& strData) = 0;
-	virtual void SendToAllServer(const uint16_t nMsgID, const std::string& strData, const NFGUID id) = 0;
+	virtual void SendToAllServer(const uint16_t msgID, const std::string& strData) = 0;
+	virtual void SendToAllServer(const uint16_t msgID, const std::string& strData, const NFGUID id) = 0;
 
-	virtual void SendToAllServerWithOutHead(const NF_SERVER_TYPES eType, const uint16_t nMsgID, const std::string& strData) = 0;
+	virtual void SendToAllServerWithOutHead(const NF_SERVER_TYPES eType, const uint16_t msgID, const std::string& strData) = 0;
 
-	virtual void SendToAllServer(const NF_SERVER_TYPES eType, const uint16_t nMsgID, const std::string& strData) = 0;
-	virtual void SendToAllServer(const NF_SERVER_TYPES eType, const uint16_t nMsgID, const std::string& strData, const NFGUID id) = 0;
+	virtual void SendToAllServer(const NF_SERVER_TYPES eType, const uint16_t msgID, const std::string& strData) = 0;
+	virtual void SendToAllServer(const NF_SERVER_TYPES eType, const uint16_t msgID, const std::string& strData, const NFGUID id) = 0;
 
-	virtual void SendToServerByPB(const int nServerID, const uint16_t nMsgID, const google::protobuf::Message& xData) = 0;
-	virtual void SendToServerByPB(const int nServerID, const uint16_t nMsgID, const google::protobuf::Message& xData, const NFGUID id) = 0;
+	virtual void SendToServerByPB(const int serverID, const uint16_t msgID, const google::protobuf::Message& xData) = 0;
+	virtual void SendToServerByPB(const int serverID, const uint16_t msgID, const google::protobuf::Message& xData, const NFGUID id) = 0;
 
-	virtual void SendToAllServerByPB(const uint16_t nMsgID, const google::protobuf::Message& xData, const NFGUID id) = 0;
-	virtual void SendToAllServerByPB(const NF_SERVER_TYPES eType, const uint16_t nMsgID, const google::protobuf::Message& xData, const NFGUID id) = 0;
+	virtual void SendToAllServerByPB(const uint16_t msgID, const google::protobuf::Message& xData, const NFGUID id) = 0;
+	virtual void SendToAllServerByPB(const NF_SERVER_TYPES eType, const uint16_t msgID, const google::protobuf::Message& xData, const NFGUID id) = 0;
 
 	////////////////////////////////////////////////////////////////////////////////
 
-	virtual void SendBySuitWithOutHead(const NF_SERVER_TYPES eType, const std::string& strHashKey, const uint16_t nMsgID, const std::string& strData) = 0;
+	virtual void SendBySuitWithOutHead(const NF_SERVER_TYPES eType, const std::string& strHashKey, const uint16_t msgID, const std::string& strData) = 0;
 
-	virtual void SendBySuit(const NF_SERVER_TYPES eType, const std::string& strHashKey, const uint16_t nMsgID, const std::string& strData) = 0;
-	virtual void SendBySuit(const NF_SERVER_TYPES eType, const std::string& strHashKey, const uint16_t nMsgID, const std::string& strData, const NFGUID id) = 0;
+	virtual void SendBySuit(const NF_SERVER_TYPES eType, const std::string& strHashKey, const uint16_t msgID, const std::string& strData) = 0;
+	virtual void SendBySuit(const NF_SERVER_TYPES eType, const std::string& strHashKey, const uint16_t msgID, const std::string& strData, const NFGUID id) = 0;
 
-	virtual void SendBySuitWithOutHead(const NF_SERVER_TYPES eType, const int nHashKey32, const uint16_t nMsgID, const std::string& strData) = 0;
+	virtual void SendBySuitWithOutHead(const NF_SERVER_TYPES eType, const int nHashKey32, const uint16_t msgID, const std::string& strData) = 0;
 
-	virtual void SendBySuit(const NF_SERVER_TYPES eType, const int nHashKey32, const uint16_t nMsgID, const std::string& strData) = 0;
-	virtual void SendBySuit(const NF_SERVER_TYPES eType, const int nHashKey32, const uint16_t nMsgID, const std::string& strData, const NFGUID id) = 0;
+	virtual void SendBySuit(const NF_SERVER_TYPES eType, const int nHashKey32, const uint16_t msgID, const std::string& strData) = 0;
+	virtual void SendBySuit(const NF_SERVER_TYPES eType, const int nHashKey32, const uint16_t msgID, const std::string& strData, const NFGUID id) = 0;
 
-	virtual void SendSuitByPB(const NF_SERVER_TYPES eType, const std::string& strHashKey, const uint16_t nMsgID, const google::protobuf::Message& xData) = 0;
-	virtual void SendSuitByPB(const NF_SERVER_TYPES eType, const std::string& strHashKey, const uint16_t nMsgID, const google::protobuf::Message& xData, const NFGUID id) = 0;
+	virtual void SendSuitByPB(const NF_SERVER_TYPES eType, const std::string& strHashKey, const uint16_t msgID, const google::protobuf::Message& xData) = 0;
+	virtual void SendSuitByPB(const NF_SERVER_TYPES eType, const std::string& strHashKey, const uint16_t msgID, const google::protobuf::Message& xData, const NFGUID id) = 0;
 
-	virtual void SendSuitByPB(const NF_SERVER_TYPES eType, const int nHashKey32, const uint16_t nMsgID, const google::protobuf::Message& xData) = 0;
-	virtual void SendSuitByPB(const NF_SERVER_TYPES eType, const int nHashKey32, const uint16_t nMsgID, const google::protobuf::Message& xData, const NFGUID id) = 0;
+	virtual void SendSuitByPB(const NF_SERVER_TYPES eType, const int nHashKey32, const uint16_t msgID, const google::protobuf::Message& xData) = 0;
+	virtual void SendSuitByPB(const NF_SERVER_TYPES eType, const int nHashKey32, const uint16_t msgID, const google::protobuf::Message& xData, const NFGUID id) = 0;
 
 	////////////////////////////////////////////////////////////////////////////////
 
 	virtual NFMapEx<int, ConnectData>& GetServerList() = 0;
 	virtual NF_SHARE_PTR<ConnectData> GetServerNetInfo(const NF_SERVER_TYPES eType) = 0;
-	virtual NF_SHARE_PTR<ConnectData> GetServerNetInfo(const int nServerID) = 0;
+	virtual NF_SHARE_PTR<ConnectData> GetServerNetInfo(const int serverID) = 0;
 	virtual NF_SHARE_PTR<ConnectData> GetServerNetInfo(const NFINet* pNet) = 0;
 };
 #endif

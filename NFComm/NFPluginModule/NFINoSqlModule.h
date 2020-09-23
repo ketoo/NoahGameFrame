@@ -504,10 +504,10 @@ public:
 	/**
 	* @brief cmd SCARD
 	* @param key [in] name of key
-	* @param nCount [out] the size of set
+	* @param count [out] the size of set
 	* @return return true when cmd success.
 	*/
-	virtual bool SCARD(const std::string& key, int& nCount) = 0;
+	virtual bool SCARD(const std::string& key, int& count) = 0;
 
 	/**
 	* @brief cmd SDIFF
@@ -630,7 +630,7 @@ public:
 	* @param key [in] name of key
 	* @return return the number( of elements) of the sorted set, or 0 if key does not exist or not a z key
 	*/
-	virtual bool ZCARD(const std::string& key, int &nCount) = 0;
+	virtual bool ZCARD(const std::string& key, int &count) = 0;
 
 	/**
 	* @brief Returns the number of elements in the sorted set at key with a score between min and max.
@@ -639,7 +639,7 @@ public:
 	* @param end [in]
 	* @return the number of elements in the specified score range, or 0 if key does not exist or not a z key
 	*/
-	virtual bool ZCOUNT(const std::string& key, const double start, const double end, int &nCount) = 0;
+	virtual bool ZCOUNT(const std::string& key, const double start, const double end, int &count) = 0;
 
 	/**
 	* @brief Increments the score of member in the sorted set stored at key by increment
@@ -795,9 +795,9 @@ class NFINoSqlModule
 {
 public:
 
-	virtual bool AddConnectSql(const std::string& strID, const std::string& strIP) = 0;
-	virtual bool AddConnectSql(const std::string& strID, const std::string& strIP, const int nPort) = 0;
-	virtual bool AddConnectSql(const std::string& strID, const std::string& strIP, const int nPort, const std::string& strPass) = 0;
+	virtual bool AddConnectSql(const std::string& strID, const std::string& ip) = 0;
+	virtual bool AddConnectSql(const std::string& strID, const std::string& ip, const int nPort) = 0;
+	virtual bool AddConnectSql(const std::string& strID, const std::string& ip, const int nPort, const std::string& strPass) = 0;
 
 	virtual NFList<std::string> GetDriverIdList() = 0;
 	virtual NF_SHARE_PTR<NFIRedisClient>  GetDriver(const std::string& strID) = 0;

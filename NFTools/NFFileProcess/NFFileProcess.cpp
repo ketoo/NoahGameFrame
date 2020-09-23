@@ -35,29 +35,29 @@ bool NFFileProcess::LoadDataFromExcel()
 
 	///////////////////////////////////
 
-	for (auto fileName : fileList)
+	for (auto filePath : fileList)
 	{
-		StringReplace(fileName, "\\", "/");
-		StringReplace(fileName, "//", "/");
+		StringReplace(filePath, "\\", "/");
+		StringReplace(filePath, "//", "/");
 
-		if ((int)(fileName.find("$")) != -1)
+		if ((int)(filePath.find("$")) != -1)
 		{
 			continue;
 		}
 
-		auto strExt = GetFileNameExtByPath(fileName);
+		auto strExt = GetFileNameExtByPath(filePath);
 		if (strExt != ".xlsx")
 		{
 			continue;
 		}
 
-		auto strFileName = GetFileNameByPath(fileName);
-		if (strFileName == "IObject")
+		auto fileName = GetFileNameByPath(filePath);
+		if (fileName == "IObject")
 		{
 			continue;
 		}
 
-		if (!LoadDataFromExcel(fileName, strFileName))
+		if (!LoadDataFromExcel(filePath, fileName))
 		{
 			std::cout << "Create " + fileName + " failed!" << std::endl;
 			continue;
@@ -128,32 +128,32 @@ bool NFFileProcess::LoadDataFromExcel()
 	return true;
 }
 
-bool NFFileProcess::LoadDataFromExcel(const std::string & strFile, const std::string & strFileName)
+bool NFFileProcess::LoadDataFromExcel(const std::string & filePath, const std::string & fileName)
 {
-	if (mxClassData.find(strFileName) != mxClassData.end())
+	if (mxClassData.find(fileName) != mxClassData.end())
 	{
-		std::cout << strFile << " exist!!!" << std::endl;
+		std::cout << filePath << " exist!!!" << std::endl;
 		return false;
 	}
 
-	std::cout << strFile << std::endl;
+	std::cout << filePath << std::endl;
 
 	ClassData* pClassData = new ClassData();
-	mxClassData[strFileName] = pClassData;
-	pClassData->xStructData.strClassName = strFileName;
+	mxClassData[fileName] = pClassData;
+	pClassData->xStructData.className = fileName;
 
-	pClassData->filePath = strFile;
-	StringReplace(pClassData->filePath, GetFileNameExtByPath(strFile), "");
+	pClassData->filePath = filePath;
+	StringReplace(pClassData->filePath, GetFileNameExtByPath(filePath), "");
 
 	pClassData->fileFolder = pClassData->filePath;
-	StringReplace(pClassData->fileFolder, strFileName, "");
+	StringReplace(pClassData->fileFolder, fileName, "");
 	///////////////////////////////////////
 	//load
 
 	MiniExcelReader::ExcelFile* xExcel = new MiniExcelReader::ExcelFile();
-	if (!xExcel->open(strFile.c_str()))
+	if (!xExcel->open(filePath.c_str()))
 	{
-		std::cout << "can't open" << strFile << std::endl;
+		std::cout << "can't open" << filePath << std::endl;
 		return false;
 	}
 
@@ -174,10 +174,10 @@ bool NFFileProcess::LoadDataFromExcel(const std::string & strFile, const std::st
 		std::string fileName = GetFileNameByPath(filePath);
 		if (!fileName.empty())
 		{
-			std::string strFileName = fileName;
-			transform(strFileName.begin(), strFileName.end(), strFileName.begin(), ::tolower);
+			std::string fileName = fileName;
+			transform(fileName.begin(), fileName.end(), fileName.begin(), ::tolower);
 
-			if (strFileName == "include")
+			if (fileName == "include")
 			{
 				LoadIncludeExcel(pClassData, filePath, fileName);
 			}
@@ -192,7 +192,7 @@ bool NFFileProcess::LoadDataFromExcel(const std::string & strFile, const std::st
 	return true;
 }
 
-bool NFFileProcess::LoadIncludeExcel(ClassData* pClassData, const std::string& strFile, const std::string& strFileName)
+bool NFFileProcess::LoadIncludeExcel(ClassData* pClassData, const std::string& strFile, const std::string& fileName)
 {
 	MiniExcelReader::ExcelFile* xExcel = new MiniExcelReader::ExcelFile();
 	if (!xExcel->open(strFile.c_str()))
@@ -236,7 +236,7 @@ bool NFFileProcess::LoadDataFromExcel(MiniExcelReader::Sheet & sheet, ClassData 
 	}
 	else
 	{
-		std::cout << pClassData->xStructData.strClassName << " " << strSheetName << std::endl;
+		std::cout << pClassData->xStructData.className << " " << strSheetName << std::endl;
 		assert(0);
 	}
 
@@ -269,17 +269,17 @@ bool NFFileProcess::LoadIniData(MiniExcelReader::Sheet & sheet, ClassData * pCla
 
 			for (std::map<std::string, int>::iterator itProperty = PropertyIndex.begin(); itProperty != PropertyIndex.end(); ++itProperty)
 			{
-				std::string strPropertyName = itProperty->first;
-				int nCol = itProperty->second;
+				std::string propertyName = itProperty->first;
+				int col = itProperty->second;
 
-				MiniExcelReader::Cell* cell = sheet.getCell(r, nCol);
+				MiniExcelReader::Cell* cell = sheet.getCell(r, col);
 				if (cell)
 				{
-					pIniObject->xPropertyList[strPropertyName] = cell->value;
+					pIniObject->xPropertyList[propertyName] = cell->value;
 				}
 				else
 				{
-					pIniObject->xPropertyList[strPropertyName] = "";
+					pIniObject->xPropertyList[propertyName] = "";
 				}
 			}
 		}
@@ -317,21 +317,21 @@ bool NFFileProcess::LoadDataAndProcessProperty(MiniExcelReader::Sheet & sheet, C
 	
 	for (std::map<std::string, int>::iterator itProperty = PropertyIndex.begin(); itProperty != PropertyIndex.end(); ++itProperty)
 	{
-		std::string strPropertyName = itProperty->first;
-		int nCol = itProperty->second;
+		std::string propertyName = itProperty->first;
+		int col = itProperty->second;
 
 		////////////
 		NFClassProperty* pClassProperty = new NFClassProperty();
-		pClassData->xStructData.xPropertyList[strPropertyName] = pClassProperty;
+		pClassData->xStructData.xPropertyList[propertyName] = pClassProperty;
 
 		////////////
 		for (std::map<std::string, int>::iterator itDesc = descIndex.begin(); itDesc != descIndex.end(); ++itDesc)
 		{
 			std::string descName = itDesc->first;
-			int nRow = itDesc->second;
+			int row = itDesc->second;
 
 			
-			MiniExcelReader::Cell* pCell = sheet.getCell(nRow, nCol);
+			MiniExcelReader::Cell* pCell = sheet.getCell(row, col);
 			if (pCell)
 			{
 				std::string descValue = pCell->value;
@@ -420,12 +420,12 @@ bool NFFileProcess::LoadDataAndProcessRecord(MiniExcelReader::Sheet & sheet, Cla
 		if (pTestCell)
 		{
 			MiniExcelReader::Cell* pNameCell = sheet.getCell(nStartRow, dim.firstCol + 1);
-			std::string strRecordName = pNameCell->value;
+			std::string recordName = pNameCell->value;
 			
 			////////////
 
 			NFClassRecord* pClassRecord = new NFClassRecord();
-			pClassData->xStructData.xRecordList[strRecordName] = pClassRecord;
+			pClassData->xStructData.xRecordList[recordName] = pClassRecord;
 			////////////
 
 			for (int r = nStartRow + 1; r <= nStartRow + nRecordDescHeight; r++)
@@ -544,18 +544,18 @@ bool NFFileProcess::SaveForCPP()
 			continue;
 		}
 
-		const std::string& strClassName = it->first;
+		const std::string& className = it->first;
 		ClassData* pClassDta = it->second;
 		// cpp
 		std::string strPropertyInfo;
 		
-		strPropertyInfo += "\tclass " + strClassName + "\n\t{\n\tpublic:\n";
+		strPropertyInfo += "\tclass " + className + "\n\t{\n\tpublic:\n";
 		strPropertyInfo += "\t\t//Class name\n\t";
-		strPropertyInfo += "\tstatic const std::string& ThisName(){ static std::string x = \"" + strClassName + "\"; return x; };";
+		strPropertyInfo += "\tstatic const std::string& ThisName(){ static std::string x = \"" + className + "\"; return x; };";
 
-		instanceField += "\tconst std::string " + strClassName + "::ThisName = \"" + strClassName + "\";\n";
+		instanceField += "\tconst std::string " + className + "::ThisName = \"" + className + "\";\n";
 
-		if (strClassName != "IObject")
+		if (className != "IObject")
 		{
 			//add base class properties
 			strPropertyInfo += "\t\t// IObject\n";
@@ -563,13 +563,13 @@ bool NFFileProcess::SaveForCPP()
 			for (std::map<std::string, NFClassProperty*>::iterator itProperty = pBaseObject->xStructData.xPropertyList.begin();
 					itProperty != pBaseObject->xStructData.xPropertyList.end(); ++itProperty)
 			{
-				const std::string& strPropertyName = itProperty->first;
+				const std::string& propertyName = itProperty->first;
 				NFClassProperty* pClassProperty = itProperty->second;
 
-				strPropertyInfo += "\t\tstatic const std::string& " + strPropertyName + "(){ static std::string x = \"" + strPropertyName + "\"; return x; };";
+				strPropertyInfo += "\t\tstatic const std::string& " + propertyName + "(){ static std::string x = \"" + propertyName + "\"; return x; };";
 				strPropertyInfo += "// " + pClassProperty->descList["Type"] + "\n";
 
-				instanceField += "\tconst std::string " + strClassName + "::" + strPropertyName + " = \"" + strPropertyName + "\";\n";
+				instanceField += "\tconst std::string " + className + "::" + propertyName + " = \"" + propertyName + "\";\n";
 			}
 		}
 
@@ -577,13 +577,13 @@ bool NFFileProcess::SaveForCPP()
 		for (std::map<std::string, NFClassProperty*>::iterator itProperty = pClassDta->xStructData.xPropertyList.begin();
 			itProperty != pClassDta->xStructData.xPropertyList.end(); ++itProperty)
 		{
-			const std::string& strPropertyName = itProperty->first;
+			const std::string& propertyName = itProperty->first;
 			NFClassProperty* pClassProperty = itProperty->second;
 
-			strPropertyInfo += "\t\tstatic const std::string& " + strPropertyName + "(){ static std::string x = \"" + strPropertyName + "\"; return x; };";
+			strPropertyInfo += "\t\tstatic const std::string& " + propertyName + "(){ static std::string x = \"" + propertyName + "\"; return x; };";
 			strPropertyInfo += "// " + pClassProperty->descList["Type"] + "\n";
 
-			instanceField += "\tconst std::string " + strClassName + "::" + strPropertyName + " = \"" + strPropertyName + "\";\n";
+			instanceField += "\tconst std::string " + className + "::" + propertyName + " = \"" + propertyName + "\";\n";
 		}
 
 
@@ -594,18 +594,18 @@ bool NFFileProcess::SaveForCPP()
 		{
 			auto includeClass = mxClassData[item];
 
-			strPropertyInfo += "\t\t// Include Property, come from " + includeClass->xStructData.strClassName + " \n";
+			strPropertyInfo += "\t\t// Include Property, come from " + includeClass->xStructData.className + " \n";
 
 			for (std::map<std::string, NFClassProperty*>::iterator itProperty = includeClass->xStructData.xPropertyList.begin();
 				itProperty != includeClass->xStructData.xPropertyList.end(); ++itProperty)
 			{
-				const std::string& strPropertyName = itProperty->first;
+				const std::string& propertyName = itProperty->first;
 				NFClassProperty* pClassProperty = itProperty->second;
 
-				strPropertyInfo += "\t\tstatic const std::string& " + strPropertyName + "(){ static std::string x = \"" + strPropertyName + "\"; return x; };";
+				strPropertyInfo += "\t\tstatic const std::string& " + propertyName + "(){ static std::string x = \"" + propertyName + "\"; return x; };";
 				strPropertyInfo += "// " + pClassProperty->descList["Type"] + "\n";
 
-				instanceField += "\tconst std::string " + strClassName + "::" + strPropertyName + " = \"" + strPropertyName + "\";\n";
+				instanceField += "\tconst std::string " + className + "::" + propertyName + " = \"" + propertyName + "\";\n";
 			}
 		}
 
@@ -618,16 +618,16 @@ bool NFFileProcess::SaveForCPP()
 		for (std::map<std::string, NFClassRecord*>::iterator itRecord = pClassDta->xStructData.xRecordList.begin();
 			itRecord != pClassDta->xStructData.xRecordList.end(); ++itRecord)
 		{
-			const std::string& strRecordName = itRecord->first;
+			const std::string& recordName = itRecord->first;
 			NFClassRecord* pClassRecord = itRecord->second;
 
-			std::cout << "save for cpppppp ---> " << strClassName  << "::" << strRecordName << std::endl;
+			std::cout << "save for cpppppp ---> " << className  << "::" << recordName << std::endl;
 
-			strRecordInfo += "\t\tclass " + strRecordName + "\n\t\t{\n\t\tpublic:\n";
+			strRecordInfo += "\t\tclass " + recordName + "\n\t\t{\n\t\tpublic:\n";
 			strRecordInfo += "\t\t\t//Class name\n\t";
-			strRecordInfo += "\t\tstatic const std::string& ThisName(){ static std::string x = \"" + strRecordName + "\"; return x; };\n";
+			strRecordInfo += "\t\tstatic const std::string& ThisName(){ static std::string x = \"" + recordName + "\"; return x; };\n";
 
-			instanceField += "\tconst std::string " + strClassName + "::" + strRecordName + "::ThisName = \"" + strRecordName + "\";\n";
+			instanceField += "\tconst std::string " + className + "::" + recordName + "::ThisName = \"" + recordName + "\";\n";
 
 			//col
 			for (int i = 0; i < pClassRecord->colList.size(); ++i)
@@ -655,19 +655,19 @@ bool NFFileProcess::SaveForCPP()
 		{
 			auto includeClass = mxClassData[item];
 
-			strPropertyInfo += "\t\t// Include Record, come from " + includeClass->xStructData.strClassName + " \n";
+			strPropertyInfo += "\t\t// Include Record, come from " + includeClass->xStructData.className + " \n";
 			
 			for (std::map<std::string, NFClassRecord*>::iterator itRecord = includeClass->xStructData.xRecordList.begin();
 				itRecord != includeClass->xStructData.xRecordList.end(); ++itRecord)
 			{
-				const std::string& strRecordName = itRecord->first;
+				const std::string& recordName = itRecord->first;
 				NFClassRecord* pClassRecord = itRecord->second;
 
-				strRecordInfo += "\t\tclass " + strRecordName + "\n\t\t{\n\t\tpublic:\n";
+				strRecordInfo += "\t\tclass " + recordName + "\n\t\t{\n\t\tpublic:\n";
 				strRecordInfo += "\t\t\t//Class name\n\t";
-				strRecordInfo += "\t\tstatic const std::string& ThisName(){ static std::string x = \"" + strRecordName + "\"; return x; };\n";
+				strRecordInfo += "\t\tstatic const std::string& ThisName(){ static std::string x = \"" + recordName + "\"; return x; };\n";
 
-				instanceField += "\tconst std::string " + strClassName + "::" + strRecordName + "::ThisName = \"" + strRecordName + "\";\n";
+				instanceField += "\tconst std::string " + className + "::" + recordName + "::ThisName = \"" + recordName + "\";\n";
 
 				//col
 				for (int i = 0; i < pClassRecord->colList.size(); ++i)
@@ -746,16 +746,16 @@ bool NFFileProcess::SaveForCS()
 			continue;
 		}
 
-		const std::string& strClassName = it->first;
+		const std::string& className = it->first;
 		ClassData* pClassDta = it->second;
 		// cpp
 		std::string strPropertyInfo;
 
-		strPropertyInfo += "\tpublic class " + strClassName + "\n\t{\n";
+		strPropertyInfo += "\tpublic class " + className + "\n\t{\n";
 		strPropertyInfo += "\t\t//Class name\n\t";
-		strPropertyInfo += "\tpublic static readonly String ThisName = \"" + strClassName + "\";\n";
+		strPropertyInfo += "\tpublic static readonly String ThisName = \"" + className + "\";\n";
 
-		if (strClassName != "IObject")
+		if (className != "IObject")
 		{
 			//add base class properties
 			strPropertyInfo += "\t\t// IObject\n";
@@ -763,10 +763,10 @@ bool NFFileProcess::SaveForCS()
 			for (std::map<std::string, NFClassProperty*>::iterator itProperty = pBaseObject->xStructData.xPropertyList.begin();
 				itProperty != pBaseObject->xStructData.xPropertyList.end(); ++itProperty)
 			{
-				const std::string& strPropertyName = itProperty->first;
+				const std::string& propertyName = itProperty->first;
 				NFClassProperty* pClassProperty = itProperty->second;
 
-				strPropertyInfo += "\t\tpublic static readonly String " + strPropertyName + " = \"" + strPropertyName + "\";";
+				strPropertyInfo += "\t\tpublic static readonly String " + propertyName + " = \"" + propertyName + "\";";
 				strPropertyInfo += "// " + pClassProperty->descList["Type"] + "\n";
 			}
 		}
@@ -776,10 +776,10 @@ bool NFFileProcess::SaveForCS()
 		for (std::map<std::string, NFClassProperty*>::iterator itProperty = pClassDta->xStructData.xPropertyList.begin();
 			itProperty != pClassDta->xStructData.xPropertyList.end(); ++itProperty)
 		{
-			const std::string& strPropertyName = itProperty->first;
+			const std::string& propertyName = itProperty->first;
 			NFClassProperty* pClassProperty = itProperty->second;
 
-			strPropertyInfo += "\t\tpublic static readonly String " + strPropertyName + " = \"" + strPropertyName + "\";";
+			strPropertyInfo += "\t\tpublic static readonly String " + propertyName + " = \"" + propertyName + "\";";
 			strPropertyInfo += "// " + pClassProperty->descList["Type"] + "\n";
 		}
 
@@ -790,15 +790,15 @@ bool NFFileProcess::SaveForCS()
 		{
 			auto includeClass = mxClassData[item];
 
-			strPropertyInfo += "\t\t// Include Property, come from " + includeClass->xStructData.strClassName + " \n";
+			strPropertyInfo += "\t\t// Include Property, come from " + includeClass->xStructData.className + " \n";
 
 			for (std::map<std::string, NFClassProperty*>::iterator itProperty = includeClass->xStructData.xPropertyList.begin();
 				itProperty != includeClass->xStructData.xPropertyList.end(); ++itProperty)
 			{
-				const std::string& strPropertyName = itProperty->first;
+				const std::string& propertyName = itProperty->first;
 				NFClassProperty* pClassProperty = itProperty->second;
 
-				strPropertyInfo += "\t\tpublic static readonly String " + strPropertyName + " = \"" + strPropertyName + "\";";
+				strPropertyInfo += "\t\tpublic static readonly String " + propertyName + " = \"" + propertyName + "\";";
 				strPropertyInfo += "// " + pClassProperty->descList["Type"] + "\n";
 			}
 
@@ -813,14 +813,14 @@ bool NFFileProcess::SaveForCS()
 		for (std::map<std::string, NFClassRecord*>::iterator itRecord = pClassDta->xStructData.xRecordList.begin();
 			itRecord != pClassDta->xStructData.xRecordList.end(); ++itRecord)
 		{
-			const std::string& strRecordName = itRecord->first;
+			const std::string& recordName = itRecord->first;
 			NFClassRecord* pClassRecord = itRecord->second;
 
-			std::cout << "save for cs ---> " << strClassName << "::" << strRecordName << std::endl;
+			std::cout << "save for cs ---> " << className << "::" << recordName << std::endl;
 
-			strRecordInfo += "\t\tpublic class " + strRecordName + "\n\t\t{\n";
+			strRecordInfo += "\t\tpublic class " + recordName + "\n\t\t{\n";
 			strRecordInfo += "\t\t\t//Class name\n\t";
-			strRecordInfo += "\t\tpublic static readonly String ThisName = \"" + strRecordName + "\";\n";
+			strRecordInfo += "\t\tpublic static readonly String ThisName = \"" + recordName + "\";\n";
 
 			//col
 			for (int i = 0; i < pClassRecord->colList.size(); ++i)
@@ -848,19 +848,19 @@ bool NFFileProcess::SaveForCS()
 		{
 			auto includeClass = mxClassData[item];
 
-			strPropertyInfo += "\t\t// Include Record, come from " + includeClass->xStructData.strClassName + " \n";
+			strPropertyInfo += "\t\t// Include Record, come from " + includeClass->xStructData.className + " \n";
 
 			for (std::map<std::string, NFClassRecord*>::iterator itRecord = includeClass->xStructData.xRecordList.begin();
 				itRecord != includeClass->xStructData.xRecordList.end(); ++itRecord)
 			{
-				const std::string& strRecordName = itRecord->first;
+				const std::string& recordName = itRecord->first;
 				NFClassRecord* pClassRecord = itRecord->second;
 
-				std::cout << "save for cs ---> " << strClassName << "::" << strRecordName << std::endl;
+				std::cout << "save for cs ---> " << className << "::" << recordName << std::endl;
 
-				strRecordInfo += "\t\tpublic class " + strRecordName + "\n\t\t{\n";
+				strRecordInfo += "\t\tpublic class " + recordName + "\n\t\t{\n";
 				strRecordInfo += "\t\t\t//Class name\n\t";
-				strRecordInfo += "\t\tpublic static readonly String ThisName = \"" + strRecordName + "\";\n";
+				strRecordInfo += "\t\tpublic static readonly String ThisName = \"" + recordName + "\";\n";
 
 				//col
 				for (int i = 0; i < pClassRecord->colList.size(); ++i)
@@ -926,19 +926,19 @@ bool NFFileProcess::SaveForTS()
 			continue;
 		}
 
-		const std::string& strClassName = it->first;
+		const std::string& className = it->first;
 		ClassData* pClassDta = it->second;
 		// cpp
 		std::string strPropertyInfo;
 		if(it != mxClassData.begin()){
 			allClassNames+=',';
 		}
-		allClassNames+=strClassName;
+		allClassNames+=className;
 
-		strPropertyInfo += "\tclass " + strClassName + "\n\t{\n";
+		strPropertyInfo += "\tclass " + className + "\n\t{\n";
 		strPropertyInfo += "\t\t//Class name\n\t";
-		strPropertyInfo += "\tpublic static  ThisName = \"" + strClassName + "\";\n";
-		if (strClassName != "IObject")
+		strPropertyInfo += "\tpublic static  ThisName = \"" + className + "\";\n";
+		if (className != "IObject")
 		{
 			//add base class properties
 			strPropertyInfo += "\t\t// IObject\n";
@@ -946,10 +946,10 @@ bool NFFileProcess::SaveForTS()
 			for (std::map<std::string, NFClassProperty*>::iterator itProperty = pBaseObject->xStructData.xPropertyList.begin();
 				itProperty != pBaseObject->xStructData.xPropertyList.end(); ++itProperty)
 			{
-				const std::string& strPropertyName = itProperty->first;
+				const std::string& propertyName = itProperty->first;
 				NFClassProperty* pClassProperty = itProperty->second;
 
-				strPropertyInfo += "\t\tpublic static " + strPropertyName + " = \"" + strPropertyName + "\";";
+				strPropertyInfo += "\t\tpublic static " + propertyName + " = \"" + propertyName + "\";";
 				strPropertyInfo += "// " + pClassProperty->descList["Type"] + "\n";
 			}
 		}
@@ -959,10 +959,10 @@ bool NFFileProcess::SaveForTS()
 		for (std::map<std::string, NFClassProperty*>::iterator itProperty = pClassDta->xStructData.xPropertyList.begin();
 			itProperty != pClassDta->xStructData.xPropertyList.end(); ++itProperty)
 		{
-			const std::string& strPropertyName = itProperty->first;
+			const std::string& propertyName = itProperty->first;
 			NFClassProperty* pClassProperty = itProperty->second;
 
-			strPropertyInfo += "\t\tpublic static " + strPropertyName + " = \"" + strPropertyName + "\";";
+			strPropertyInfo += "\t\tpublic static " + propertyName + " = \"" + propertyName + "\";";
 			strPropertyInfo += "// " + pClassProperty->descList["Type"] + "\n";
 		}
 
@@ -974,15 +974,15 @@ bool NFFileProcess::SaveForTS()
 		{
 			auto includeClass = mxClassData[item];
 
-			strPropertyInfo += "\t\t// Include Property, come from " + includeClass->xStructData.strClassName + " \n";
+			strPropertyInfo += "\t\t// Include Property, come from " + includeClass->xStructData.className + " \n";
 
 			for (std::map<std::string, NFClassProperty*>::iterator itProperty = includeClass->xStructData.xPropertyList.begin();
 				itProperty != includeClass->xStructData.xPropertyList.end(); ++itProperty)
 			{
-				const std::string& strPropertyName = itProperty->first;
+				const std::string& propertyName = itProperty->first;
 				NFClassProperty* pClassProperty = itProperty->second;
 
-				strPropertyInfo += "\t\tpublic static " + strPropertyName + " = \"" + strPropertyName + "\";";
+				strPropertyInfo += "\t\tpublic static " + propertyName + " = \"" + propertyName + "\";";
 				strPropertyInfo += "// " + pClassProperty->descList["Type"] + "\n";
 			}
 		}
@@ -996,14 +996,14 @@ bool NFFileProcess::SaveForTS()
 		for (std::map<std::string, NFClassRecord*>::iterator itRecord = pClassDta->xStructData.xRecordList.begin();
 			itRecord != pClassDta->xStructData.xRecordList.end(); ++itRecord)
 		{
-			const std::string& strRecordName = itRecord->first;
+			const std::string& recordName = itRecord->first;
 			NFClassRecord* pClassRecord = itRecord->second;
 
-			std::cout << "save for cs ---> " << strClassName << "::" << strRecordName << std::endl;
+			std::cout << "save for cs ---> " << className << "::" << recordName << std::endl;
 
-			strRecordInfo += "\t\tpublic static " + strRecordName + " = \n\t\t{\n";
+			strRecordInfo += "\t\tpublic static " + recordName + " = \n\t\t{\n";
 			strRecordInfo += "\t\t\t//Class name\n\t";
-			strRecordInfo += "\t\t\"ThisName\":\"" + strRecordName + "\",\n";
+			strRecordInfo += "\t\t\"ThisName\":\"" + recordName + "\",\n";
 
 			//col
 			for (int i = 0; i < pClassRecord->colList.size(); ++i)
@@ -1034,19 +1034,19 @@ bool NFFileProcess::SaveForTS()
 		{
 			auto includeClass = mxClassData[item];
 
-			strRecordInfo += "\t\t// Include Record, come from " + includeClass->xStructData.strClassName + " \n";
+			strRecordInfo += "\t\t// Include Record, come from " + includeClass->xStructData.className + " \n";
 
 			for (std::map<std::string, NFClassRecord*>::iterator itRecord = includeClass->xStructData.xRecordList.begin();
 				itRecord != includeClass->xStructData.xRecordList.end(); ++itRecord)
 			{
-				const std::string& strRecordName = itRecord->first;
+				const std::string& recordName = itRecord->first;
 				NFClassRecord* pClassRecord = itRecord->second;
 
-				std::cout << "save for cs ---> " << strClassName << "::" << strRecordName << std::endl;
+				std::cout << "save for cs ---> " << className << "::" << recordName << std::endl;
 
-				strRecordInfo += "\t\tpublic static " + strRecordName + " = \n\t\t{\n";
+				strRecordInfo += "\t\tpublic static " + recordName + " = \n\t\t{\n";
 				strRecordInfo += "\t\t\t//Class name\n\t";
-				strRecordInfo += "\t\t\"ThisName\":\"" + strRecordName + "\",\n";
+				strRecordInfo += "\t\t\"ThisName\":\"" + recordName + "\",\n";
 
 				//col
 				for (int i = 0; i < pClassRecord->colList.size(); ++i)
@@ -1116,16 +1116,16 @@ bool NFFileProcess::SaveForJAVA()
 			continue;
 		}
 
-		const std::string& strClassName = it->first;
+		const std::string& className = it->first;
 		ClassData* pClassDta = it->second;
 		// cpp
 		std::string strPropertyInfo;
 
-		strPropertyInfo += "\tpublic class " + strClassName + "\n\t{\n";
+		strPropertyInfo += "\tpublic class " + className + "\n\t{\n";
 		strPropertyInfo += "\t\t//Class name\n\t";
-		strPropertyInfo += "\tpublic static final String ThisName = \"" + strClassName + "\";\n";
+		strPropertyInfo += "\tpublic static final String ThisName = \"" + className + "\";\n";
 
-		if (strClassName != "IObject")
+		if (className != "IObject")
 		{
 			//add base class properties
 			strPropertyInfo += "\t\t// IObject\n";
@@ -1133,10 +1133,10 @@ bool NFFileProcess::SaveForJAVA()
 			for (std::map<std::string, NFClassProperty*>::iterator itProperty = pBaseObject->xStructData.xPropertyList.begin();
 				itProperty != pBaseObject->xStructData.xPropertyList.end(); ++itProperty)
 			{
-				const std::string& strPropertyName = itProperty->first;
+				const std::string& propertyName = itProperty->first;
 				NFClassProperty* pClassProperty = itProperty->second;
 
-				strPropertyInfo += "\t\tpublic static final String " + strPropertyName + " = \"" + strPropertyName + "\";";
+				strPropertyInfo += "\t\tpublic static final String " + propertyName + " = \"" + propertyName + "\";";
 				strPropertyInfo += "// " + pClassProperty->descList["Type"] + "\n";
 			}
 		}
@@ -1145,10 +1145,10 @@ bool NFFileProcess::SaveForJAVA()
 		for (std::map<std::string, NFClassProperty*>::iterator itProperty = pClassDta->xStructData.xPropertyList.begin();
 			itProperty != pClassDta->xStructData.xPropertyList.end(); ++itProperty)
 		{
-			const std::string& strPropertyName = itProperty->first;
+			const std::string& propertyName = itProperty->first;
 			NFClassProperty* pClassProperty = itProperty->second;
 
-			strPropertyInfo += "\t\tpublic static final String " + strPropertyName + " = \"" + strPropertyName + "\";";
+			strPropertyInfo += "\t\tpublic static final String " + propertyName + " = \"" + propertyName + "\";";
 			strPropertyInfo += "// " + pClassProperty->descList["Type"] + "\n";
 		}
 
@@ -1161,14 +1161,14 @@ bool NFFileProcess::SaveForJAVA()
 		for (std::map<std::string, NFClassRecord*>::iterator itRecord = pClassDta->xStructData.xRecordList.begin();
 			itRecord != pClassDta->xStructData.xRecordList.end(); ++itRecord)
 		{
-			const std::string& strRecordName = itRecord->first;
+			const std::string& recordName = itRecord->first;
 			NFClassRecord* pClassRecord = itRecord->second;
 
-			std::cout << "save for java ---> " << strClassName << "::" << strRecordName << std::endl;
+			std::cout << "save for java ---> " << className << "::" << recordName << std::endl;
 
-			strRecordInfo += "\t\tpublic class " + strRecordName + "\n\t\t{\n";
+			strRecordInfo += "\t\tpublic class " + recordName + "\n\t\t{\n";
 			strRecordInfo += "\t\t\t//Class name\n\t";
-			strRecordInfo += "\t\tpublic static final String ThisName = \"" + strRecordName + "\";\n";
+			strRecordInfo += "\t\tpublic static final String ThisName = \"" + recordName + "\";\n";
 
 			//col
 			for (int i = 0; i < pClassRecord->colList.size(); ++i)
@@ -1215,16 +1215,16 @@ bool NFFileProcess::SaveForPB()
 bool NFFileProcess::SaveForSQL()
 {
 	//1 class.sql
-	std::string strFileName = strXMLStructPath + "NFrame.sql";
+	std::string fileName = strXMLStructPath + "NFrame.sql";
 
-	FILE* iniWriter = fopen(strFileName.c_str(), "w");
+	FILE* iniWriter = fopen(fileName.c_str(), "w");
 
 	std::string strElementData;
 	for (std::map<std::string, ClassData*>::iterator it = mxClassData.begin(); it != mxClassData.end(); ++it)
 	{
-		const std::string& strClassName = it->first;
+		const std::string& className = it->first;
 		ClassData* pClassDta = it->second;
-		if (strClassName == "IObject")
+		if (className == "IObject")
 		{
 			continue;
 		}
@@ -1233,7 +1233,7 @@ bool NFFileProcess::SaveForSQL()
 			//continue;
 		}
 
-		strElementData += "CREATE TABLE IF NOT EXISTS " + pClassDta->xStructData.strClassName + "  (";
+		strElementData += "CREATE TABLE IF NOT EXISTS " + pClassDta->xStructData.className + "  (";
 		strElementData += " `ID` varchar(128) NOT NULL,";
 		strElementData += " PRIMARY KEY (`ID`)";
 		strElementData += " ) ENGINE=InnoDB DEFAULT CHARSET=utf8; \n";
@@ -1245,13 +1245,13 @@ bool NFFileProcess::SaveForSQL()
 	// 2.1) property
 	for (std::map<std::string, ClassData*>::iterator it = mxClassData.begin(); it != mxClassData.end(); ++it)
 	{
-		const std::string& strClassName = it->first;
+		const std::string& className = it->first;
 		ClassData* pClassDta = it->second;
 
 		for (std::map<std::string, NFClassProperty*>::iterator itProperty = pClassDta->xStructData.xPropertyList.begin();
 			itProperty != pClassDta->xStructData.xPropertyList.end(); ++itProperty)
 		{
-			const std::string& strPropertyName = itProperty->first;
+			const std::string& propertyName = itProperty->first;
 			NFClassProperty* xPropertyData = itProperty->second;
 
 			std::string strType;
@@ -1262,28 +1262,28 @@ bool NFFileProcess::SaveForSQL()
 				itDesc != xPropertyData->descList.end(); ++itDesc)
 			{
 				const std::string& strKey = itDesc->first;
-				const std::string& strValue = itDesc->second;
+				const std::string& value = itDesc->second;
 				if (strKey=="Type")
 				{
-					strType = strValue;
+					strType = value;
 				}
 				else if (strKey=="Save")
 				{
-					strSave = strValue;
+					strSave = value;
 				} 
 				else if (strKey=="Cache")
 				{
-					strCache = strValue;
+					strCache = value;
 				}
 				else if (strKey=="Desc")
 				{
-					strDesc = strValue;
+					strDesc = value;
 				}
 			}
 
 			if (strSave=="1" || strCache=="1")
 			{
-				std::string strAlter = "\nALTER TABLE `" + strClassName + "` ADD `" + strPropertyName + "`";
+				std::string strAlter = "\nALTER TABLE `" + className + "` ADD `" + propertyName + "`";
 				//ALTER TABLE `Buff` ADD `EffectType` bigint(11) DEFAULT '0' COMMENT '影响属性类型(效果类型)  生命，法力(可组合,叠加)';
 				if (strType=="int")
 				{
@@ -1320,7 +1320,7 @@ bool NFFileProcess::SaveForSQL()
 		for (std::map<std::string, NFClassRecord*>::iterator itRecord = pClassDta->xStructData.xRecordList.begin();
 			itRecord != pClassDta->xStructData.xRecordList.end(); ++itRecord)
 		{
-			const std::string& strRecordName = itRecord->first;
+			const std::string& recordName = itRecord->first;
 			NFClassRecord* xRecordData = itRecord->second;
 
 			std::string strType;
@@ -1331,28 +1331,28 @@ bool NFFileProcess::SaveForSQL()
 				itDesc != xRecordData->descList.end(); ++itDesc)
 			{
 				const std::string& strKey = itDesc->first;
-				const std::string& strValue = itDesc->second;
+				const std::string& value = itDesc->second;
 				if (strKey=="Type")
 				{
-					strType = strValue;
+					strType = value;
 				}
 				else if (strKey=="Save")
 				{
-					strSave = strValue;
+					strSave = value;
 				} 
 				else if (strKey=="Cache")
 				{
-					strCache = strValue;
+					strCache = value;
 				}
 				else if (strKey=="Desc")
 				{
-					strDesc = strValue;
+					strDesc = value;
 				}
 			}
 
 			if (strSave=="1" || strCache=="1")
 			{
-				std::string strAlter = "\nALTER TABLE `" + strClassName + "` ADD `" + strRecordName + "`";
+				std::string strAlter = "\nALTER TABLE `" + className + "` ADD `" + recordName + "`";
 				strAlter += " text COLLATE utf8mb4_unicode_ci  DEFAULT ''";
 				strAlter += " COMMENT '" + strDesc + "';";
 
@@ -1377,15 +1377,15 @@ bool NFFileProcess::SaveForStruct()
 			continue;
 		}
 
-		const std::string& strClassName = it->first;
+		const std::string& className = it->first;
 		ClassData* pClassDta = it->second;
 
-		std::cout << "save for struct ---> " << strClassName << std::endl;
+		std::cout << "save for struct ---> " << className << std::endl;
 		std::string path = pClassDta->filePath;
 		StringReplace(path, strExcelIniPath, "");
-		std::string strFileName = strXMLStructPath + path + ".xml";
+		std::string fileName = strXMLStructPath + path + ".xml";
 
-		FILE* structWriter = fopen(strFileName.c_str(), "w+");
+		FILE* structWriter = fopen(fileName.c_str(), "w+");
 		if (structWriter == nullptr)
 		{
 			std::string folder = pClassDta->fileFolder;
@@ -1398,7 +1398,7 @@ bool NFFileProcess::SaveForStruct()
 			mkdir(fileFolder.c_str(), 0777);
 #endif
 
-			structWriter = fopen(strFileName.c_str(), "w+");
+			structWriter = fopen(fileName.c_str(), "w+");
 		}
 
 		if (structWriter)
@@ -1412,16 +1412,16 @@ bool NFFileProcess::SaveForStruct()
 			for (std::map<std::string, NFClassProperty*>::iterator itProperty = pClassDta->xStructData.xPropertyList.begin();
 				itProperty != pClassDta->xStructData.xPropertyList.end(); ++itProperty)
 			{
-				const std::string& strPropertyName = itProperty->first;
+				const std::string& propertyName = itProperty->first;
 				NFClassProperty* xPropertyData = itProperty->second;
 
-				std::string strElementData = "\t\t<Property Id=\"" + strPropertyName + "\" ";
+				std::string strElementData = "\t\t<Property Id=\"" + propertyName + "\" ";
 				for (std::map<std::string, std::string>::iterator itDesc = xPropertyData->descList.begin();
 					itDesc != xPropertyData->descList.end(); ++itDesc)
 				{
 					const std::string& strKey = itDesc->first;
-					const std::string& strValue = itDesc->second;
-					strElementData += strKey + "=\"" + strValue + "\" ";
+					const std::string& value = itDesc->second;
+					strElementData += strKey + "=\"" + value + "\" ";
 				}
 				strElementData += "/>\n";
 				fwrite(strElementData.c_str(), strElementData.length(), 1, structWriter);
@@ -1437,17 +1437,17 @@ bool NFFileProcess::SaveForStruct()
 			for (std::map<std::string, NFClassRecord*>::iterator itRecord = pClassDta->xStructData.xRecordList.begin();
 				itRecord != pClassDta->xStructData.xRecordList.end(); ++itRecord)
 			{
-				const std::string& strRecordName = itRecord->first;
+				const std::string& recordName = itRecord->first;
 				NFClassRecord* xRecordData = itRecord->second;
 
 				//for desc
-				std::string strElementData = "\t\t<Record Id=\"" + strRecordName + "\" ";
+				std::string strElementData = "\t\t<Record Id=\"" + recordName + "\" ";
 				for (std::map<std::string, std::string>::iterator itDesc = xRecordData->descList.begin();
 					itDesc != xRecordData->descList.end(); ++itDesc)
 				{
 					const std::string& strKey = itDesc->first;
-					const std::string& strValue = itDesc->second;
-					strElementData += strKey + "=\"" + strValue + "\"\t ";
+					const std::string& value = itDesc->second;
+					strElementData += strKey + "=\"" + value + "\"\t ";
 				}
 				strElementData += ">\n";
 
@@ -1496,9 +1496,9 @@ bool NFFileProcess::SaveForStruct()
 
 				std::string path = includeClass->filePath;
 				StringReplace(path, strExcelIniPath, "");
-				std::string strFileName = "NFDataCfg/Struct/" + path + ".xml";
+				std::string fileName = "NFDataCfg/Struct/" + path + ".xml";
 
-				strFileIncludeBody += "\t\t<Include Id=\"" + strFileName + "\" />";
+				strFileIncludeBody += "\t\t<Include Id=\"" + fileName + "\" />";
 				strFileIncludeBody += "\n";
 			}
 
@@ -1514,7 +1514,7 @@ bool NFFileProcess::SaveForStruct()
 		}
 		else
 		{
-			std::cout << "save for struct error!!!!!---> " << strFileName << std::endl;
+			std::cout << "save for struct error!!!!!---> " << fileName << std::endl;
 		}
 	}
 
@@ -1532,16 +1532,16 @@ bool NFFileProcess::SaveForIni()
 			continue;
 		}
 
-		const std::string& strClassName = it->first;
+		const std::string& className = it->first;
 		ClassData* pClassDta = it->second;
 
-		std::cout << "save for ini ---> " << strClassName << std::endl;
+		std::cout << "save for ini ---> " << className << std::endl;
 
 		std::string path = pClassDta->filePath;
 		StringReplace(path, strExcelIniPath, "");
-		std::string strFileName = strXMLIniPath + path + ".xml";
+		std::string fileName = strXMLIniPath + path + ".xml";
 
-		FILE* iniWriter = fopen(strFileName.c_str(), "w+");
+		FILE* iniWriter = fopen(fileName.c_str(), "w+");
 		if (iniWriter == nullptr)
 		{
 			std::string folder = pClassDta->fileFolder;
@@ -1554,7 +1554,7 @@ bool NFFileProcess::SaveForIni()
 			mkdir(fileFolder.c_str(), 0777);
 #endif
 
-			iniWriter = fopen(strFileName.c_str(), "w+");
+			iniWriter = fopen(fileName.c_str(), "w+");
 		}
 		if (iniWriter)
 		{
@@ -1573,8 +1573,8 @@ bool NFFileProcess::SaveForIni()
 					itProperty != pIniData->xPropertyList.end(); ++itProperty)
 				{
 					const std::string& strKey = itProperty->first;
-					const std::string& strValue = itProperty->second;
-					strElementData += strKey + "=\"" + strValue + "\" ";
+					const std::string& value = itProperty->second;
+					strElementData += strKey + "=\"" + value + "\" ";
 				}
 				strElementData += "/>\n";
 
@@ -1590,7 +1590,7 @@ bool NFFileProcess::SaveForIni()
 		}
 		else
 		{
-			std::cout << "save for ini error!!!!!---> " << strFileName << std::endl;
+			std::cout << "save for ini error!!!!!---> " << fileName << std::endl;
 		}
 	}
 
@@ -1599,9 +1599,9 @@ bool NFFileProcess::SaveForIni()
 
 bool NFFileProcess::SaveForLogicClass()
 {
-	std::string strFileName = strXMLStructPath + "LogicClass.xml";
+	std::string fileName = strXMLStructPath + "LogicClass.xml";
 
-	FILE* iniWriter = fopen(strFileName.c_str(), "w");
+	FILE* iniWriter = fopen(fileName.c_str(), "w");
 
 	std::string strFileHead = "<?xml version='1.0' encoding='utf-8' ?>\n<XML>\n";
 	fwrite(strFileHead.c_str(), strFileHead.length(), 1, iniWriter);
@@ -1609,7 +1609,7 @@ bool NFFileProcess::SaveForLogicClass()
 	ClassData* pBaseObject = mxClassData["IObject"];
 
 	std::string strElementData;
-	strElementData += "\t<Class Id=\"" + pBaseObject->xStructData.strClassName + "\"\t";
+	strElementData += "\t<Class Id=\"" + pBaseObject->xStructData.className + "\"\t";
 
 	std::string path = pBaseObject->filePath;
 	StringReplace(path, strExcelIniPath, "");
@@ -1618,14 +1618,14 @@ bool NFFileProcess::SaveForLogicClass()
 	strElementData += "InstancePath=\"NFDataCfg/Ini/" + path + ".xml\"\t>\n";
 
 
-	//strElementData += "Path=\"NFDataCfg/Struct/" + pBaseObject->xStructData.strClassName + ".xml\"\t";
-	//strElementData += "InstancePath=\"NFDataCfg/Ini/" + pBaseObject->xStructData.strClassName + ".xml\"\t>\n";
+	//strElementData += "Path=\"NFDataCfg/Struct/" + pBaseObject->xStructData.className + ".xml\"\t";
+	//strElementData += "InstancePath=\"NFDataCfg/Ini/" + pBaseObject->xStructData.className + ".xml\"\t>\n";
 
 	for (std::map<std::string, ClassData*>::iterator it = mxClassData.begin(); it != mxClassData.end(); ++it)
 	{
-		const std::string& strClassName = it->first;
+		const std::string& className = it->first;
 		ClassData* pClassDta = it->second;
-		if (strClassName == "IObject")
+		if (className == "IObject")
 		{
 			continue;
 		}
@@ -1635,7 +1635,7 @@ bool NFFileProcess::SaveForLogicClass()
 			continue;
 		}
 
-		strElementData += "\t\t<Class Id=\"" + pClassDta->xStructData.strClassName + "\"\t";
+		strElementData += "\t\t<Class Id=\"" + pClassDta->xStructData.className + "\"\t";
 
 		std::string path = pClassDta->filePath;
 		StringReplace(path, strExcelIniPath, "");
@@ -1643,8 +1643,8 @@ bool NFFileProcess::SaveForLogicClass()
 		strElementData += "Path=\"NFDataCfg/Struct/" + path + ".xml\"\t";
 		strElementData += "InstancePath=\"NFDataCfg/Ini/" + path + ".xml\"\t/>\n";
 
-		//strElementData += "Path=\"NFDataCfg/Struct/" + pClassDta->xStructData.strClassName + ".xml\"\t";
-		//strElementData += "InstancePath=\"NFDataCfg/Ini/" + pClassDta->xStructData.strClassName + ".xml\"\t/>\n";
+		//strElementData += "Path=\"NFDataCfg/Struct/" + pClassDta->xStructData.className + ".xml\"\t";
+		//strElementData += "InstancePath=\"NFDataCfg/Ini/" + pClassDta->xStructData.className + ".xml\"\t/>\n";
 
 	}
 

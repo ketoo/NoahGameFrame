@@ -47,9 +47,9 @@ public:
 	
     virtual bool Execute();
 
-    virtual bool AddComponent(NF_SHARE_PTR<NFIComponent> pComponent);
-	virtual bool RemoveComponent(const std::string& strComponentName);
-	virtual NF_SHARE_PTR<NFIComponent> FindComponent(const std::string& strComponentName);
+    virtual bool AddComponent(NF_SHARE_PTR<NFIComponent> component);
+	virtual bool RemoveComponent(const std::string& componentName);
+	virtual NF_SHARE_PTR<NFIComponent> FindComponent(const std::string& componentName);
 
     virtual bool SendMsg(const NFActorMessage& message);
     virtual bool SendMsg(const int eventID, const std::string& data, const std::string& arg);

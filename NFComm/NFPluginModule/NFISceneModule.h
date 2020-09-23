@@ -76,19 +76,19 @@ public:
 
 	/////////////these interfaces below are for scene & group//////////////////
 	template<typename BaseType>
-	bool AddGroupPropertyCallBack(const std::string& strPropertyName, BaseType* pBase, int (BaseType::*handler)(const NFGUID&, const std::string&, const NFData&, const NFData&))
+	bool AddGroupPropertyCallBack(const std::string& propertyName, BaseType* pBase, int (BaseType::*handler)(const NFGUID&, const std::string&, const NFData&, const NFData&))
 	{
 		PROPERTY_EVENT_FUNCTOR functor = std::bind(handler, pBase, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3, std::placeholders::_4);
 		PROPERTY_EVENT_FUNCTOR_PTR functorPtr(NF_NEW PROPERTY_EVENT_FUNCTOR(functor));
-		return AddGroupPropertyCallBack(strPropertyName, functorPtr);
+		return AddGroupPropertyCallBack(propertyName, functorPtr);
 	}
 
 	template<typename BaseType>
-	bool AddGroupRecordCallBack(const std::string& strRecordName, BaseType* pBase, int (BaseType::*handler)(const NFGUID&, const RECORD_EVENT_DATA&, const NFData&, const NFData&))
+	bool AddGroupRecordCallBack(const std::string& recordName, BaseType* pBase, int (BaseType::*handler)(const NFGUID&, const RECORD_EVENT_DATA&, const NFData&, const NFData&))
 	{
 		RECORD_EVENT_FUNCTOR functor = std::bind(handler, pBase, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3, std::placeholders::_4);
 		RECORD_EVENT_FUNCTOR_PTR functorPtr(NF_NEW RECORD_EVENT_FUNCTOR(functor));
-		return AddGroupRecordCallBack(strRecordName, functorPtr);
+		return AddGroupRecordCallBack(recordName, functorPtr);
 	}
 
 	template<typename BaseType>
@@ -187,6 +187,13 @@ public:
 		return AddAfterEnterSceneGroupCallBack(functorPtr);
 	}
 
+	template<typename BaseType>
+	bool AddAfterEnterAndReadySceneGroupCallBack(BaseType* pBase, int (BaseType::*handler)(const NFGUID&, const int, const int, const int, const NFDataList&))
+	{
+		SCENE_EVENT_FUNCTOR functor = std::bind(handler, pBase, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3, std::placeholders::_4, std::placeholders::_5);
+		SCENE_EVENT_FUNCTOR_PTR functorPtr(new SCENE_EVENT_FUNCTOR(functor));
+		return AddAfterEnterAndReadySceneGroupCallBack(functorPtr);
+	}
 
 	template<typename BaseType>
 	bool AddSwapSceneEventCallBack(BaseType* pBase, int (BaseType::*handler)(const NFGUID&, const int, const int, const int, const NFDataList&))
@@ -231,79 +238,79 @@ public:
 	}
 
 
-	virtual int RequestGroupScene(const int nSceneID) = 0;
-	virtual bool RequestEnterScene(const NFGUID& self, const int nSceneID, const int nGroupID, const int nType, const NFVector3& pos, const NFDataList& argList) = 0;
-	virtual bool ReleaseGroupScene(const int nSceneID, const int nGroupID) = 0;
+	virtual int RequestGroupScene(const int sceneID) = 0;
+	virtual bool RequestEnterScene(const NFGUID& self, const int sceneID, const int groupID, const int type, const NFVector3& pos, const NFDataList& argList) = 0;
+	virtual bool ReleaseGroupScene(const int sceneID, const int groupID) = 0;
 	virtual bool LeaveSceneGroup(const NFGUID& self) = 0;
-	virtual const std::vector<int>& GetGroups(const int nSceneID) = 0;
+	virtual const std::vector<int>& GetGroups(const int sceneID) = 0;
 
-	virtual bool AddSeedData(const int nSceneID, const std::string& strSeedID, const std::string& strConfigID, const NFVector3& vPos, const int nHeight) = 0;
-	virtual const NFVector3& GetSeedPos(const int nSceneID, const std::string& strSeedID) = 0;
-	virtual const int GetSeedPWeight(const int nSceneID, const std::string& strSeedID) = 0;
+	virtual bool AddSeedData(const int sceneID, const std::string& seedID, const std::string& configID, const NFVector3& vPos, const int nHeight) = 0;
+	virtual const NFVector3& GetSeedPos(const int sceneID, const std::string& seedID) = 0;
+	virtual const int GetSeedPWeight(const int sceneID, const std::string& seedID) = 0;
 
-	virtual bool AddRelivePosition(const int nSceneID, const int nIndex, const NFVector3& vPos) = 0;
-	virtual const NFVector3& GetRelivePosition(const int nSceneID, const int nIndex, const bool bRoll = true) = 0;
-	virtual bool AddTagPosition(const int nSceneID, const int nIndex, const NFVector3& vPos) = 0;
-	virtual const NFVector3& GetTagPosition(const int nSceneID, const int nIndex, const bool bRoll = true) = 0;
+	virtual bool AddRelivePosition(const int sceneID, const int nIndex, const NFVector3& vPos) = 0;
+	virtual const NFVector3& GetRelivePosition(const int sceneID, const int nIndex, const bool bRoll = true) = 0;
+	virtual bool AddTagPosition(const int sceneID, const int nIndex, const NFVector3& vPos) = 0;
+	virtual const NFVector3& GetTagPosition(const int sceneID, const int nIndex, const bool bRoll = true) = 0;
 
-	virtual bool CreateSceneNPC(const int nSceneID, const int nGroupID) = 0;
-	virtual bool CreateSceneNPC(const int nSceneID, const int nGroupID, const NFDataList& argList) = 0;
-	virtual bool DestroySceneNPC(const int nSceneID, const int nGroupID) = 0;
+	virtual bool CreateSceneNPC(const int sceneID, const int groupID) = 0;
+	virtual bool CreateSceneNPC(const int sceneID, const int groupID, const NFDataList& argList) = 0;
+	virtual bool DestroySceneNPC(const int sceneID, const int groupID) = 0;
 
 	/////////////the interfaces below are for scene & group/////////////////////////////
-	virtual bool SetPropertyInt(const int scene, const int group, const std::string& strPropertyName, const NFINT64 nValue) = 0;
-	virtual bool SetPropertyFloat(const int scene, const int group, const std::string& strPropertyName, const double dValue) = 0;
-	virtual bool SetPropertyString(const int scene, const int group, const std::string& strPropertyName, const std::string& strValue) = 0;
-	virtual bool SetPropertyObject(const int scene, const int group, const std::string& strPropertyName, const NFGUID& objectValue) = 0;
-	virtual bool SetPropertyVector2(const int scene, const int group, const std::string& strPropertyName, const NFVector2& value) = 0;
-	virtual bool SetPropertyVector3(const int scene, const int group, const std::string& strPropertyName, const NFVector3& value) = 0;
+	virtual bool SetPropertyInt(const int scene, const int group, const std::string& propertyName, const NFINT64 nValue) = 0;
+	virtual bool SetPropertyFloat(const int scene, const int group, const std::string& propertyName, const double dValue) = 0;
+	virtual bool SetPropertyString(const int scene, const int group, const std::string& propertyName, const std::string& value) = 0;
+	virtual bool SetPropertyObject(const int scene, const int group, const std::string& propertyName, const NFGUID& objectValue) = 0;
+	virtual bool SetPropertyVector2(const int scene, const int group, const std::string& propertyName, const NFVector2& value) = 0;
+	virtual bool SetPropertyVector3(const int scene, const int group, const std::string& propertyName, const NFVector3& value) = 0;
 
-	virtual NFINT64 GetPropertyInt(const int scene, const int group, const std::string& strPropertyName) = 0;
-	virtual int GetPropertyInt32(const int scene, const int group, const std::string& strPropertyName) = 0;	//equal to (int)GetPropertyInt(...), to remove C4244 warning
-	virtual double GetPropertyFloat(const int scene, const int group, const std::string& strPropertyName) = 0;
-	virtual const std::string& GetPropertyString(const int scene, const int group, const std::string& strPropertyName) = 0;
-	virtual const NFGUID& GetPropertyObject(const int scene, const int group, const std::string& strPropertyName) = 0;
-	virtual const NFVector2& GetPropertyVector2(const int scene, const int group, const std::string& strPropertyName) = 0;
-	virtual const NFVector3& GetPropertyVector3(const int scene, const int group, const std::string& strPropertyName) = 0;
+	virtual NFINT64 GetPropertyInt(const int scene, const int group, const std::string& propertyName) = 0;
+	virtual int GetPropertyInt32(const int scene, const int group, const std::string& propertyName) = 0;	//equal to (int)GetPropertyInt(...), to remove C4244 warning
+	virtual double GetPropertyFloat(const int scene, const int group, const std::string& propertyName) = 0;
+	virtual const std::string& GetPropertyString(const int scene, const int group, const std::string& propertyName) = 0;
+	virtual const NFGUID& GetPropertyObject(const int scene, const int group, const std::string& propertyName) = 0;
+	virtual const NFVector2& GetPropertyVector2(const int scene, const int group, const std::string& propertyName) = 0;
+	virtual const NFVector3& GetPropertyVector3(const int scene, const int group, const std::string& propertyName) = 0;
 
 	virtual NF_SHARE_PTR<NFIPropertyManager> FindPropertyManager(const int scene, const int group) = 0;
 	virtual NF_SHARE_PTR<NFIRecordManager> FindRecordManager(const int scene, const int group) = 0;
-	virtual NF_SHARE_PTR<NFIRecord> FindRecord(const int scene, const int group, const std::string& strRecordName) = 0;
-	virtual bool ClearRecord(const int scene, const int group, const std::string& strRecordName) = 0;
+	virtual NF_SHARE_PTR<NFIRecord> FindRecord(const int scene, const int group, const std::string& recordName) = 0;
+	virtual bool ClearRecord(const int scene, const int group, const std::string& recordName) = 0;
 
-	virtual bool SetRecordInt(const int scene, const int group, const std::string& strRecordName, const int nRow, const int nCol, const NFINT64 nValue) = 0;
-	virtual bool SetRecordFloat(const int scene, const int group, const std::string& strRecordName, const int nRow, const int nCol, const double dwValue) = 0;
-	virtual bool SetRecordString(const int scene, const int group, const std::string& strRecordName, const int nRow, const int nCol, const std::string& strValue) = 0;
-	virtual bool SetRecordObject(const int scene, const int group, const std::string& strRecordName, const int nRow, const int nCol, const NFGUID& objectValue) = 0;
-	virtual bool SetRecordVector2(const int scene, const int group, const std::string& strRecordName, const int nRow, const int nCol, const NFVector2& value) = 0;
-	virtual bool SetRecordVector3(const int scene, const int group, const std::string& strRecordName, const int nRow, const int nCol, const NFVector3& value) = 0;
+	virtual bool SetRecordInt(const int scene, const int group, const std::string& recordName, const int row, const int col, const NFINT64 nValue) = 0;
+	virtual bool SetRecordFloat(const int scene, const int group, const std::string& recordName, const int row, const int col, const double dwValue) = 0;
+	virtual bool SetRecordString(const int scene, const int group, const std::string& recordName, const int row, const int col, const std::string& value) = 0;
+	virtual bool SetRecordObject(const int scene, const int group, const std::string& recordName, const int row, const int col, const NFGUID& objectValue) = 0;
+	virtual bool SetRecordVector2(const int scene, const int group, const std::string& recordName, const int row, const int col, const NFVector2& value) = 0;
+	virtual bool SetRecordVector3(const int scene, const int group, const std::string& recordName, const int row, const int col, const NFVector3& value) = 0;
 
-	virtual bool SetRecordInt(const int scene, const int group, const std::string& strRecordName, const int nRow, const std::string& strColTag, const NFINT64 value) = 0;
-	virtual bool SetRecordFloat(const int scene, const int group, const std::string& strRecordName, const int nRow, const std::string& strColTag, const double value) = 0;
-	virtual bool SetRecordString(const int scene, const int group, const std::string& strRecordName, const int nRow, const std::string& strColTag, const std::string& value) = 0;
-	virtual bool SetRecordObject(const int scene, const int group, const std::string& strRecordName, const int nRow, const std::string& strColTag, const NFGUID& value) = 0;
-	virtual bool SetRecordVector2(const int scene, const int group, const std::string& strRecordName, const int nRow, const std::string& strColTag, const NFVector2& value) = 0;
-	virtual bool SetRecordVector3(const int scene, const int group, const std::string& strRecordName, const int nRow, const std::string& strColTag, const NFVector3& value) = 0;
+	virtual bool SetRecordInt(const int scene, const int group, const std::string& recordName, const int row, const std::string& colTag, const NFINT64 value) = 0;
+	virtual bool SetRecordFloat(const int scene, const int group, const std::string& recordName, const int row, const std::string& colTag, const double value) = 0;
+	virtual bool SetRecordString(const int scene, const int group, const std::string& recordName, const int row, const std::string& colTag, const std::string& value) = 0;
+	virtual bool SetRecordObject(const int scene, const int group, const std::string& recordName, const int row, const std::string& colTag, const NFGUID& value) = 0;
+	virtual bool SetRecordVector2(const int scene, const int group, const std::string& recordName, const int row, const std::string& colTag, const NFVector2& value) = 0;
+	virtual bool SetRecordVector3(const int scene, const int group, const std::string& recordName, const int row, const std::string& colTag, const NFVector3& value) = 0;
 
-	virtual NFINT64 GetRecordInt(const int scene, const int group, const std::string& strRecordName, const int nRow, const int nCol) = 0;
-	virtual double GetRecordFloat(const int scene, const int group, const std::string& strRecordName, const int nRow, const int nCol) = 0;
-	virtual const std::string& GetRecordString(const int scene, const int group, const std::string& strRecordName, const int nRow, const int nCol) = 0;
-	virtual const NFGUID& GetRecordObject(const int scene, const int group, const std::string& strRecordName, const int nRow, const int nCol) = 0;
-	virtual const NFVector2& GetRecordVector2(const int scene, const int group, const std::string& strRecordName, const int nRow, const int nCol) = 0;
-	virtual const NFVector3& GetRecordVector3(const int scene, const int group, const std::string& strRecordName, const int nRow, const int nCol) = 0;
+	virtual NFINT64 GetRecordInt(const int scene, const int group, const std::string& recordName, const int row, const int col) = 0;
+	virtual double GetRecordFloat(const int scene, const int group, const std::string& recordName, const int row, const int col) = 0;
+	virtual const std::string& GetRecordString(const int scene, const int group, const std::string& recordName, const int row, const int col) = 0;
+	virtual const NFGUID& GetRecordObject(const int scene, const int group, const std::string& recordName, const int row, const int col) = 0;
+	virtual const NFVector2& GetRecordVector2(const int scene, const int group, const std::string& recordName, const int row, const int col) = 0;
+	virtual const NFVector3& GetRecordVector3(const int scene, const int group, const std::string& recordName, const int row, const int col) = 0;
 
-	virtual NFINT64 GetRecordInt(const int scene, const int group, const std::string& strRecordName, const int nRow, const std::string& strColTag) = 0;
-	virtual double GetRecordFloat(const int scene, const int group, const std::string& strRecordName, const int nRow, const std::string& strColTag) = 0;
-	virtual const std::string& GetRecordString(const int scene, const int group, const std::string& strRecordName, const int nRow, const std::string& strColTag) = 0;
-	virtual const NFGUID& GetRecordObject(const int scene, const int group, const std::string& strRecordName, const int nRow, const std::string& strColTag) = 0;
-	virtual const NFVector2& GetRecordVector2(const int scene, const int group, const std::string& strRecordName, const int nRow, const std::string& strColTag) = 0;
-	virtual const NFVector3& GetRecordVector3(const int scene, const int group, const std::string& strRecordName, const int nRow, const std::string& strColTag) = 0;
+	virtual NFINT64 GetRecordInt(const int scene, const int group, const std::string& recordName, const int row, const std::string& colTag) = 0;
+	virtual double GetRecordFloat(const int scene, const int group, const std::string& recordName, const int row, const std::string& colTag) = 0;
+	virtual const std::string& GetRecordString(const int scene, const int group, const std::string& recordName, const int row, const std::string& colTag) = 0;
+	virtual const NFGUID& GetRecordObject(const int scene, const int group, const std::string& recordName, const int row, const std::string& colTag) = 0;
+	virtual const NFVector2& GetRecordVector2(const int scene, const int group, const std::string& recordName, const int row, const std::string& colTag) = 0;
+	virtual const NFVector3& GetRecordVector3(const int scene, const int group, const std::string& recordName, const int row, const std::string& colTag) = 0;
 
 	////////////////////////////////////////////////////////////////
 protected:
-	//for scne && group
-	virtual bool AddGroupRecordCallBack(const std::string& strName, const RECORD_EVENT_FUNCTOR_PTR& cb) = 0;
-	virtual bool AddGroupPropertyCallBack(const std::string& strName, const PROPERTY_EVENT_FUNCTOR_PTR& cb) = 0;
+	//for scene && group
+	virtual bool AddGroupRecordCallBack(const std::string& name, const RECORD_EVENT_FUNCTOR_PTR& cb) = 0;
+	virtual bool AddGroupPropertyCallBack(const std::string& name, const PROPERTY_EVENT_FUNCTOR_PTR& cb) = 0;
 	virtual bool AddGroupRecordCommCallBack(const RECORD_EVENT_FUNCTOR_PTR& cb) = 0;
 	virtual bool AddGroupPropertyCommCallBack(const PROPERTY_EVENT_FUNCTOR_PTR& cb) = 0;
 
@@ -320,6 +327,7 @@ protected:
 
 	virtual bool AddBeforeEnterSceneGroupCallBack(const SCENE_EVENT_FUNCTOR_PTR& cb) = 0;
 	virtual bool AddAfterEnterSceneGroupCallBack(const SCENE_EVENT_FUNCTOR_PTR& cb) = 0;
+	virtual bool AddAfterEnterAndReadySceneGroupCallBack(const SCENE_EVENT_FUNCTOR_PTR& cb) = 0;
 	virtual bool AddSwapSceneEventCallBack(const SCENE_EVENT_FUNCTOR_PTR& cb) = 0;
 	virtual bool AddBeforeLeaveSceneGroupCallBack(const SCENE_EVENT_FUNCTOR_PTR& cb) = 0;
 	virtual bool AddAfterLeaveSceneGroupCallBack(const SCENE_EVENT_FUNCTOR_PTR& cb) = 0;

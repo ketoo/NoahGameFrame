@@ -88,7 +88,7 @@ private:
 
 	void InitDaemon();
 
-	static bool GetFileContent(NFIPluginManager* p, const std::string& strFilePath, std::string& strContent);
+	static bool GetFileContent(NFIPluginManager* p, const std::string& strFilePath, std::string& content);
 };
 
 #endif

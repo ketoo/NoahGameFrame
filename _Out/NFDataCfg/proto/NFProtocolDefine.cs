@@ -477,6 +477,8 @@ namespace NFrame
 		public static readonly String State = "State";// int
 		// Property
 		public static readonly String Account = "Account";// string
+		public static readonly String BattlePoint = "BattlePoint";// int
+		public static readonly String ClanID = "ClanID";// object
 		public static readonly String ConnectKey = "ConnectKey";// string
 		public static readonly String Diamond = "Diamond";// int
 		public static readonly String EXP = "EXP";// int
@@ -501,6 +503,7 @@ namespace NFrame
 		public static readonly String SkillSpecial1 = "SkillSpecial1";// string
 		public static readonly String SkillSpecial2 = "SkillSpecial2";// string
 		public static readonly String SkillTHUMP = "SkillTHUMP";// string
+		public static readonly String TeamID = "TeamID";// object
 		public static readonly String TotalTime = "TotalTime";// int
 		// Include Property, come from EffectData 
 		public static readonly String ATK_DARK = "ATK_DARK";// int
@@ -583,7 +586,9 @@ namespace NFrame
 			public const int Stone2 = 8;//string
 			public const int Stone3 = 9;//string
 			public const int Stone4 = 10;//string
-			public const int UserData = 11;//string
+			public const int Lock = 11;//int
+			public const int Future = 12;//int
+			public const int UserData = 13;//string
 
 		}
 		public class CommValue

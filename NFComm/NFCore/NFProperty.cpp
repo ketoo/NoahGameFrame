@@ -44,7 +44,7 @@ NFProperty::NFProperty()
 	msPropertyName = "";
 }
 
-NFProperty::NFProperty(const NFGUID& self, const std::string& strPropertyName, const NFDATA_TYPE varType)
+NFProperty::NFProperty(const NFGUID& self, const std::string& propertyName, const NFDATA_TYPE varType)
 {
 	mbPublic = false;
 	mbPrivate = false;
@@ -55,7 +55,7 @@ NFProperty::NFProperty(const NFGUID& self, const std::string& strPropertyName, c
 
 	mSelf = self;
 
-	msPropertyName = strPropertyName;
+	msPropertyName = propertyName;
 	eType = varType;
 }
 
@@ -107,9 +107,9 @@ void NFProperty::SetValue(const NFData& xData)
 
 }
 
-void NFProperty::SetValue(const NFIProperty* pProperty)
+void NFProperty::SetValue(const NFIProperty* property)
 {
-	SetValue(pProperty->GetValue());
+	SetValue(property->GetValue());
 }
 
 const NFData& NFProperty::GetValue() const
@@ -729,14 +729,14 @@ bool NFProperty::DeSerialization()
 				}
 
 				const std::string& strKey = xTemDataList.String(0);
-				const std::string& strValue = xTemDataList.String(1);
+				const std::string& value = xTemDataList.String(1);
 
-				if (strKey.empty() || strValue.empty())
+				if (strKey.empty() || value.empty())
 				{
 					NFASSERT(0, strTemData, __FILE__, __FUNCTION__);
 				}
 
-				mxEmbeddedMap->AddElement(strKey, NF_SHARE_PTR<std::string>(NF_NEW std::string(strValue)));
+				mxEmbeddedMap->AddElement(strKey, NF_SHARE_PTR<std::string>(NF_NEW std::string(value)));
 			}
 		}
 

@@ -96,202 +96,6 @@ bool NFPlayerRedisModule::SavePlayerData(const NFGUID & self, const NFMsg::RoleD
 	return true;
 }
 
-bool NFPlayerRedisModule::SavePlayerTile(const int nSceneID, const NFGUID & self, const std::string & strTileData)
-{
-	std::string strTileKey = m_pCommonRedisModule->GetTileCacheKey(nSceneID);
-	NF_SHARE_PTR<NFIRedisClient> xNoSqlDriver = m_pNoSqlModule->GetDriverBySuit(self.ToString());
-	if (xNoSqlDriver)
-	{
-		return xNoSqlDriver->HSET(strTileKey, self.ToString(), strTileData);
-	}
-
-	return false;
-}
-
-bool NFPlayerRedisModule::LoadPlayerTile(const int nSceneID, const NFGUID & self, std::string & strTileData)
-{
-	std::string strTileKey = m_pCommonRedisModule->GetTileCacheKey(nSceneID);
-	NF_SHARE_PTR<NFIRedisClient> xNoSqlDriver = m_pNoSqlModule->GetDriverBySuit(self.ToString());
-	if (xNoSqlDriver && xNoSqlDriver->EXISTS(strTileKey))
-	{
-		return xNoSqlDriver->HGET(strTileKey, self.ToString(), strTileData);
-	}
-
-	return false;
-}
-
-bool NFPlayerRedisModule::LoadPlayerTileRandom(const int nSceneID, NFGUID& xPlayer, std::string & strTileData)
-{
-	std::string strTileKey = m_pCommonRedisModule->GetTileCacheKey(nSceneID);
-	NF_SHARE_PTR<NFIRedisClient> xNoSqlDriver = m_pNoSqlModule->GetDriverBySuit(xPlayer.ToString());
-	if (xNoSqlDriver && xNoSqlDriver->EXISTS(strTileKey))
-	{
-		//its a good way to cache these keys to boost the performance
-		std::vector<std::string> vKeys;
-		if (xNoSqlDriver->HKEYS(strTileKey, vKeys))
-		{
-			int nKeyIndex = m_pKernelModule->Random(0, (int)vKeys.size());
-			std::string strKey = vKeys[nKeyIndex];
-			if (xPlayer.FromString(strKey) && xNoSqlDriver->HGET(strTileKey, strKey, strTileData))
-			{
-
-				return true;
-			}
-		}
-	}
-
-	return false;
-}
-
-bool NFPlayerRedisModule::GetPropertyList(const NFGUID& self, const std::vector<std::string>& fields, std::vector<std::string>& values)
-{
-	NF_SHARE_PTR<NFIRedisClient> pDriver = m_pNoSqlModule->GetDriverBySuit(self.ToString());
-	if (!pDriver)
-	{
-		return false;
-	}
-
-	std::string strCacheKey = m_pCommonRedisModule->GetPropertyCacheKey(self);
-	if (pDriver->HMGET(strCacheKey, fields, values))
-	{
-		return true;
-	}
-
-
-	return false;
-}
-
-NFINT64 NFPlayerRedisModule::GetPropertyInt(const NFGUID & self, const std::string & strPropertyName)
-{
-	NF_SHARE_PTR<NFIRedisClient> pDriver = m_pNoSqlModule->GetDriverBySuit(self.ToString());
-	if (!pDriver)
-	{
-		return 0;
-	}
-
-	std::string strValue;
-	std::string strCacheKey = m_pCommonRedisModule->GetPropertyCacheKey(self);
-	if (!pDriver->HGET(strCacheKey, strPropertyName, strValue))
-	{
-		return 0;
-	}
-
-	return lexical_cast<NFINT64>(strValue);
-}
-
-int NFPlayerRedisModule::GetPropertyInt32(const NFGUID & self, const std::string & strPropertyName)
-{
-	NF_SHARE_PTR<NFIRedisClient> pDriver = m_pNoSqlModule->GetDriverBySuit(self.ToString());
-	if (!pDriver)
-	{
-		return 0;
-	}
-
-	std::string strValue;
-	std::string strCacheKey = m_pCommonRedisModule->GetPropertyCacheKey(self);
-	if (!pDriver->HGET(strCacheKey, strPropertyName, strValue))
-	{
-		return 0;
-	}
-
-	return lexical_cast<NFINT64>(strValue);
-}
-
-double NFPlayerRedisModule::GetPropertyFloat(const NFGUID & self, const std::string & strPropertyName)
-{
-	NF_SHARE_PTR<NFIRedisClient> pDriver = m_pNoSqlModule->GetDriverBySuit(self.ToString());
-	if (!pDriver)
-	{
-		return 0;
-	}
-
-	std::string strValue;
-	std::string strCacheKey = m_pCommonRedisModule->GetPropertyCacheKey(self);
-	if (!pDriver->HGET(strCacheKey, strPropertyName, strValue))
-	{
-		return 0;
-	}
-
-	return lexical_cast<double>(strValue);
-}
-
-std::string NFPlayerRedisModule::GetPropertyString(const NFGUID & self, const std::string & strPropertyName)
-{
-	NF_SHARE_PTR<NFIRedisClient> pDriver = m_pNoSqlModule->GetDriverBySuit(self.ToString());
-	if (!pDriver)
-	{
-		return "";
-	}
-
-	std::string strValue;
-	std::string strCacheKey = m_pCommonRedisModule->GetPropertyCacheKey(self);
-	if (!pDriver->HGET(strCacheKey, strPropertyName, strValue))
-	{
-		return "";
-	}
-
-	return strValue;
-}
-
-NFGUID NFPlayerRedisModule::GetPropertyObject(const NFGUID & self, const std::string & strPropertyName)
-{
-	NF_SHARE_PTR<NFIRedisClient> pDriver = m_pNoSqlModule->GetDriverBySuit(self.ToString());
-	if (!pDriver)
-	{
-		return NFGUID();
-	}
-
-	std::string strValue;
-	std::string strCacheKey = m_pCommonRedisModule->GetPropertyCacheKey(self);
-	if (!pDriver->HGET(strCacheKey, strPropertyName, strValue))
-	{
-		return NFGUID();
-	}
-	NFGUID xID;
-	xID.FromString(strValue);
-	return xID;
-}
-
-NFVector2 NFPlayerRedisModule::GetPropertyVector2(const NFGUID & self, const std::string & strPropertyName)
-{
-	NF_SHARE_PTR<NFIRedisClient> pDriver = m_pNoSqlModule->GetDriverBySuit(self.ToString());
-	if (!pDriver)
-	{
-		return NFVector2();
-	}
-
-	std::string strValue;
-	std::string strCacheKey = m_pCommonRedisModule->GetPropertyCacheKey(self);
-	if (!pDriver->HGET(strCacheKey, strPropertyName, strValue))
-	{
-		return NFVector2();
-	}
-
-	NFVector2 xValue;
-	xValue.FromString(strValue);
-	return xValue;
-}
-
-NFVector3 NFPlayerRedisModule::GetPropertyVector3(const NFGUID & self, const std::string & strPropertyName)
-{
-	NF_SHARE_PTR<NFIRedisClient> pDriver = m_pNoSqlModule->GetDriverBySuit(self.ToString());
-	if (!pDriver)
-	{
-		return NFVector3();
-	}
-
-	std::string strValue;
-	std::string strCacheKey = m_pCommonRedisModule->GetPropertyCacheKey(self);
-	if (!pDriver->HGET(strCacheKey, strPropertyName, strValue))
-	{
-		return NFVector3();
-	}
-
-	NFVector3 xValue;
-	xValue.FromString(strValue);
-	return xValue;
-}
-
 std::string NFPlayerRedisModule::GetOnlineGameServerKey()
 {
 	//if (strValue == "**nonexistent-key**")
@@ -315,15 +119,15 @@ bool NFPlayerRedisModule::ExistRoleName(const std::string & strRoleName)
 	return false;
 }
 
-bool NFPlayerRedisModule::CreateRole(const std::string & strAccount, const std::string & strRoleName, const NFGUID & id, const int nHomeSceneID)
+bool NFPlayerRedisModule::CreateRole(const std::string & account, const std::string & strRoleName, const NFGUID & id, const int nHomeSceneID)
 {
-	const std::string strAccountKey = m_pCommonRedisModule->GetAccountCacheKey(strAccount);
-	NF_SHARE_PTR<NFIRedisClient> xNoSqlDriver = m_pNoSqlModule->GetDriverBySuit(strAccount);
+	const std::string strAccountKey = m_pCommonRedisModule->GetAccountCacheKey(account);
+	NF_SHARE_PTR<NFIRedisClient> xNoSqlDriver = m_pNoSqlModule->GetDriverBySuit(account);
 	if (xNoSqlDriver)
 	{
 		if (!xNoSqlDriver->EXISTS(strAccountKey))
 		{
-			m_pAccountRedisModule->AddAccount(strAccount, strAccount);
+			m_pAccountRedisModule->AddAccount(account, account);
 		}
 
 		if (xNoSqlDriver->EXISTS(strAccountKey) && !xNoSqlDriver->EXISTS(strRoleName))
@@ -352,7 +156,7 @@ bool NFPlayerRedisModule::CreateRole(const std::string & strAccount, const std::
 				NF_SHARE_PTR<NFIProperty> xProperty = xPropertyManager->GetElement(NFrame::Player::Account());
 				if (xProperty)
 				{
-					xProperty->SetString(strAccount);
+					xProperty->SetString(account);
 				}
 
 				xProperty = xPropertyManager->GetElement(NFrame::Player::Level());
@@ -377,10 +181,10 @@ bool NFPlayerRedisModule::CreateRole(const std::string & strAccount, const std::
 	return false;
 }
 
-bool NFPlayerRedisModule::GetRoleInfo(const std::string & strAccount, std::string & strRoleName, NFGUID & id)
+bool NFPlayerRedisModule::GetRoleInfo(const std::string & account, std::string & strRoleName, NFGUID & id)
 {
-	std::string strAccountKey = m_pCommonRedisModule->GetAccountCacheKey(strAccount);
-	NF_SHARE_PTR<NFIRedisClient> xNoSqlDriver = m_pNoSqlModule->GetDriverBySuit(strAccount);
+	std::string strAccountKey = m_pCommonRedisModule->GetAccountCacheKey(account);
+	NF_SHARE_PTR<NFIRedisClient> xNoSqlDriver = m_pNoSqlModule->GetDriverBySuit(account);
 	if (xNoSqlDriver)
 	{
 		if (xNoSqlDriver->EXISTS(strAccountKey))

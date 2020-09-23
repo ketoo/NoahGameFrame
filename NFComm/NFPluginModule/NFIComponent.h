@@ -83,13 +83,13 @@ public:
 				return NULL;
 			}
 
-			NF_SHARE_PTR<T> pComponent = NF_SHARE_PTR<T>(NF_NEW T());
+			NF_SHARE_PTR<T> component = NF_SHARE_PTR<T>(NF_NEW T());
 
-			assert(NULL != pComponent);
+			assert(NULL != component);
 
-			AddComponent(pComponent);
+			AddComponent(component);
 
-			return pComponent;
+			return component;
 		}
 
 		return nullptr;
@@ -126,26 +126,26 @@ public:
 	virtual bool AddMessageHandler(const int nSubMsgID, ACTOR_PROCESS_FUNCTOR_PTR xBeginFunctor) = 0;
 
 protected:
-	virtual bool AddComponent(NF_SHARE_PTR<NFIComponent> pComponent) = 0;
-	virtual bool RemoveComponent(const std::string& strComponentName) = 0;
-	virtual NF_SHARE_PTR<NFIComponent> FindComponent(const std::string& strComponentName) = 0;
+	virtual bool AddComponent(NF_SHARE_PTR<NFIComponent> component) = 0;
+	virtual bool RemoveComponent(const std::string& componentName) = 0;
+	virtual NF_SHARE_PTR<NFIComponent> FindComponent(const std::string& componentName) = 0;
 
 };
 
-class NFIComponent : NFMemoryCounter
+class NFIComponent// : NFMemoryCounter
 {
 private:
     NFIComponent()
-		: NFMemoryCounter(GET_CLASS_NAME(NFIComponent), 1)
+		//: NFMemoryCounter(GET_CLASS_NAME(NFIComponent), 1)
     {
     }
 
 public:
-    NFIComponent(const std::string& strName)
-		: NFMemoryCounter(strName, 1)
+    NFIComponent(const std::string& name)
+		//: NFMemoryCounter(name, 1)
     {
         mbEnable = true;
-        mstrName = strName;
+        mstrName = name;
     }
 
     virtual ~NFIComponent() {}

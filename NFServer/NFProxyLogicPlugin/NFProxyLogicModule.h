@@ -50,7 +50,7 @@ public:
 
 protected:
 
-	void OnLagTestProcess(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+	void OnLagTestProcess(const NFSOCK sockIndex, const int msgID, const char* msg, const uint32_t len);
 
 protected:
     NFIClassModule* m_pClassModule;

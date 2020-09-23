@@ -36,7 +36,7 @@ class NFMemoryCounter
 private:
 	NFMemoryCounter() {}
 
-    std::string mstrClassName;
+    std::string mclassName;
 
     struct Data
     {
@@ -54,19 +54,19 @@ private:
 public:
 	static std::map<std::string, Data>* mxCounter;
 
-	NFMemoryCounter(const std::string& strClassName, const int deep = 0)
+	NFMemoryCounter(const std::string& className, const int deep = 0)
 	{
-		mstrClassName = strClassName;
+		mclassName = className;
 
         if (!mxCounter)
         {
             mxCounter = NF_NEW std::map<std::string, Data>();
         }
 		
-        auto it = mxCounter->find(mstrClassName);
+        auto it = mxCounter->find(mclassName);
         if (it == mxCounter->end())
         {
-            mxCounter->insert(std::map<std::string, Data>::value_type(mstrClassName, Data(this, deep)));
+            mxCounter->insert(std::map<std::string, Data>::value_type(mclassName, Data(this, deep)));
         }
         else
         {
@@ -76,7 +76,7 @@ public:
 
 	virtual ~NFMemoryCounter()
 	{
-        auto it = mxCounter->find(mstrClassName);
+        auto it = mxCounter->find(mclassName);
         if (it != mxCounter->end())
         {
             auto it2 = it->second.data.find(this);

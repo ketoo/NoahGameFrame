@@ -3,14 +3,14 @@
 #pragma warning ( push )
 #pragma warning ( disable : 4267 )
 
-int Encrypt(unsigned char* data, unsigned int nLen, const char* key, unsigned int key_len)   
+int Encrypt(unsigned char* data, unsigned int len, const char* key, unsigned int key_len)
 {
     if (data == NULL || key == NULL)
     {
         return -1;
     }
 
-    int nResult = RC4(data, nLen, (unsigned char*)key, key_len);
+    int nResult = RC4(data, len, (unsigned char*)key, key_len);
     if (nResult == -1)
     {
         return -1;
@@ -23,7 +23,7 @@ int Encrypt(unsigned char* data, unsigned int nLen, const char* key, unsigned in
     return nResult;
 }
 
-int Decrypt(unsigned char* data, unsigned int nLen, const char* key, unsigned int key_len)  
+int Decrypt(unsigned char* data, unsigned int len, const char* key, unsigned int key_len)
 {
     if (data == NULL || key == NULL)
     {
@@ -35,7 +35,7 @@ int Decrypt(unsigned char* data, unsigned int nLen, const char* key, unsigned in
     // int ret_len = 0;
     // memset(ret, strlen(szSource) / 2 + 1,0);
 
-    int nResult = RC4(data, nLen, (unsigned char*)key, key_len);
+    int nResult = RC4(data, len, (unsigned char*)key, key_len);
     if (nResult == -1)
     {
         return -1;
@@ -43,10 +43,10 @@ int Decrypt(unsigned char* data, unsigned int nLen, const char* key, unsigned in
 
     //ret[ret_len] = '\0';
 
-    return nLen;
+    return len;
 }
 
-int RC4(unsigned char* data, unsigned int nLen, const unsigned char* key, unsigned int key_len)
+int RC4(unsigned char* data, unsigned int len, const unsigned char* key, unsigned int key_len)
 {
     if (data == NULL || key == NULL)
     {
@@ -60,7 +60,7 @@ int RC4(unsigned char* data, unsigned int nLen, const unsigned char* key, unsign
     int x = 0;
     int y = 0;
 
-    for (unsigned int k = 0; k < nLen; ++k)
+    for (unsigned int k = 0; k < len; ++k)
     {
         x = (x + 1) % BOX_LEN;
         y = (mBox[x] + y) % BOX_LEN;
@@ -68,7 +68,7 @@ int RC4(unsigned char* data, unsigned int nLen, const unsigned char* key, unsign
         data[k] = data[k] ^ mBox[(mBox[x] + mBox[y]) % BOX_LEN];
     }
 
-    return nLen;
+    return len;
 }
 
 int GetKey(const unsigned char* pass, int pass_len, unsigned char* out)

@@ -56,7 +56,7 @@ public:
 public:
 	virtual int InitServer(const unsigned short nPort) = 0;
 
-	virtual bool ResponseMsg(NF_SHARE_PTR<NFHttpRequest> req, const std::string& strMsg, NFWebStatus code = NFWebStatus::WEB_OK, const std::string& reason = "OK") = 0;
+	virtual bool ResponseMsg(NF_SHARE_PTR<NFHttpRequest> req, const std::string& msg, NFWebStatus code = NFWebStatus::WEB_OK, const std::string& reason = "OK") = 0;
 
 private:
 	virtual bool AddMsgCB(const std::string& strPath, const NFHttpType eRequestType, const HTTP_RECEIVE_FUNCTOR_PTR& cb) = 0;

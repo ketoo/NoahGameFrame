@@ -38,11 +38,11 @@ void NFCooldownModule::AddCooldown(const NFGUID& self, const std::string& config
 {
     //skillCnfID, usedTime
     NF_SHARE_PTR<NFIRecord> xRecord = m_pKernelModule->FindRecord(self, NFrame::NPC::Cooldown::ThisName());
-    const int nRow = xRecord->FindString(NFrame::NPC::Cooldown::ConfigID, configID);
-    if (nRow >= 0)
+    const int row = xRecord->FindString(NFrame::NPC::Cooldown::ConfigID, configID);
+    if (row >= 0)
     {
         //reset the time
-        xRecord->SetInt(nRow, NFrame::NPC::Cooldown::ConfigID, NFGetTimeMS());
+        xRecord->SetInt(row, NFrame::NPC::Cooldown::ConfigID, NFGetTimeMS());
     }
     else
     {
@@ -50,7 +50,7 @@ void NFCooldownModule::AddCooldown(const NFGUID& self, const std::string& config
         xDataList->SetString(NFrame::NPC::Cooldown::ConfigID, configID);
         xDataList->SetInt(NFrame::NPC::Cooldown::Time, NFGetTimeMS());
 
-        xRecord->AddRow(nRow, *xDataList);
+        xRecord->AddRow(row, *xDataList);
     }
 
 	//for common skill cd, if you dont have a common skill CD, the monster will use multiple skills in one sec when meet players
@@ -87,12 +87,12 @@ bool NFCooldownModule::ExistCooldown(const NFGUID& self, const std::string& conf
 		}
 	}
 
-    const int nRow = xRecord->FindString(NFrame::NPC::Cooldown::ConfigID, configID);
-    if (nRow >= 0)
+    const int row = xRecord->FindString(NFrame::NPC::Cooldown::ConfigID, configID);
+    if (row >= 0)
     {
         //compare the time with the cooldown time
-        float fCDTime = m_pElementModule->GetPropertyFloat(configID, NFrame::Skill::CoolDownTime());
-        int64_t nLastTime = xRecord->GetInt(nRow, NFrame::NPC::Cooldown::Time);
+        double fCDTime = m_pElementModule->GetPropertyFloat(configID, NFrame::Skill::CoolDownTime());
+        int64_t nLastTime = xRecord->GetInt(row, NFrame::NPC::Cooldown::Time);
         if ((NFGetTimeMS() - nLastTime) < fCDTime * 1000)
         {
             return true;

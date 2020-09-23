@@ -184,7 +184,7 @@ void NFHelloWorld7::TestHash()
 	assert(strHGET == strValue1);
 	
 	assert(mxRedisClient.HEXISTS(strKey, strField1) == true);
-	assert(mxRedisClient.HDEL(strKey, strField1) == true);
+	assert(mxRedisClient.HDEL(strKey, strField1) != 0);
 	assert(mxRedisClient.HEXISTS(strKey, strField1) == false);
 	assert(mxRedisClient.HMSET(strKey, pair_values) == true);
 	
@@ -291,7 +291,7 @@ void NFHelloWorld7::TestList()
 
 
 	assert(mxRedisClient.LSET("12122121", 1, "12212") == false);
-	assert(mxRedisClient.LPUSH("12122121", "12212") == true);
+	assert(mxRedisClient.LPUSH("12122121", "12212") != 0);
 	std::string lpop;
 	assert(mxRedisClient.LPOP("12122121", lpop) == true);
 	assert("12212" == lpop);
@@ -314,7 +314,7 @@ void NFHelloWorld7::TestList()
 	assert(mxRedisClient.LLEN(strKey, nLLEN) == true);
 	assert(nLLEN == strList.size());
 
-	for (int i = strList.size() - 1; i >= 0; --i)
+	for (size_t i = strList.size() - 1; i >= 0; --i)
 	{
 		std::string strRPOP;
 		assert(mxRedisClient.RPOP(strKey, strRPOP) == true);
@@ -324,22 +324,22 @@ void NFHelloWorld7::TestList()
 	assert(mxRedisClient.LLEN(strKey, nLLEN) == true);
 	assert(nLLEN == 0);
 	//////
-	for (int i = strList.size() - 1; i >= 0; --i)
+	for (size_t i = strList.size() - 1; i >= 0; --i)
 	{
 		assert(mxRedisClient.LPUSH(strKey, strList[i]) == (strList.size()-i));
 	}
 
-	for (int i = 0; i < strList.size(); ++i)
+	for (size_t i = 0; i < strList.size(); ++i)
 	{
 		std::string strLINDEX;
-		assert(mxRedisClient.LINDEX(strKey, i, strLINDEX) == true);
+		assert(mxRedisClient.LINDEX(strKey, (int)i, strLINDEX) == true);
 		assert(strLINDEX == strList[i]);
 	}
 
 	assert(mxRedisClient.LLEN(strKey, nLLEN) == true);
 	assert(nLLEN == strList.size());
 
-	for (int i = 0; i < strList.size(); ++i)
+	for (size_t i = 0; i < strList.size(); ++i)
 	{
 		std::string strLPOP;
 		assert(mxRedisClient.LPOP(strKey, strLPOP) == true);
@@ -361,7 +361,7 @@ void NFHelloWorld7::TestList()
 	}
 
 	string_vector values;
-	assert(mxRedisClient.LRANGE(strKey, 0, strList.size(), values) == true);
+	assert(mxRedisClient.LRANGE(strKey, 0, (int)strList.size(), values) == true);
 	assert(values.size() == strList.size() + 1);
 }
 

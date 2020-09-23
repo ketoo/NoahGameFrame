@@ -51,17 +51,17 @@ public:
 
     virtual bool AfterInit() override;
 
-    virtual const std::string& GetDefaultMapData(const int scene);
+    virtual const std::string& GetDefaultMapData(const int scene) override ;
 
-	virtual const NF_SHARE_PTR<GroupNavigationData> GetMapData(const int scene);
-    virtual const NF_SHARE_PTR<GroupNavigationData> GetMapData(const int scene, const int group);
-    virtual const NF_SHARE_PTR<NFVoxel> GetMapData(const int scene, const int group, const int x, int z);
+	virtual const NF_SHARE_PTR<GroupNavigationData> GetMapData(const int scene) override ;
+    virtual const NF_SHARE_PTR<GroupNavigationData> GetMapData(const int scene, const int group) override ;
+    virtual const NF_SHARE_PTR<NFVoxel> GetMapData(const int scene, const int group, const int x, int z) override ;
 
     //modify map data in run time
-    virtual bool SetMapDataOccupyItem(const int scene, const int group, const int x, const int z, const std::string& item);
-    virtual bool SetMapDataMovable(const int scene, const int group, const int x, int z, const int movable);
-    virtual bool SetMapDataOccupy(const int scene, const int group, const int x, int z, const NFGUID occupy);
-    virtual bool SetMapDataLayer(const int scene, const int group, const int x, int z, const int layer);
+    virtual bool SetMapDataOccupyItem(const int scene, const int group, const int x, const int z, const std::string& item) override ;
+    virtual bool SetMapDataMovable(const int scene, const int group, const int x, int z, const int movable) override ;
+    virtual bool SetMapDataOccupy(const int scene, const int group, const int x, int z, const NFGUID occupy) override ;
+    virtual bool SetMapDataLayer(const int scene, const int group, const int x, int z, const int layer) override ;
 protected:
     //<scene,group> ==>data
     NFMapEx<NFGUID, GroupNavigationData> mGroupNavigationData;
@@ -75,7 +75,5 @@ protected:
 	NFINetModule* m_pNetModule;
 	NFIEventModule* m_pEventModule;
 	NFISceneModule* m_pSceneModule;
-	NFIGameServerNet_ServerModule* m_pGameServerNet_ServerModule;
-	NFIGameServerToWorldModule* m_pNetClientModule;
 };
 #endif

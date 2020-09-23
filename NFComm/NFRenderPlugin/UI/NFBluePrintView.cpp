@@ -615,7 +615,7 @@ void NFBluePrintView::PinRenderForVariable(NFNodePin* pin)
 
 void NFBluePrintView::PinRenderForInputVariable(NFNodePin* pin)
 {
-	int itemWidth = 70;
+	float itemWidth = 70;
 	auto variable = std::dynamic_pointer_cast<NFIVariable>(m_pBluePrintModule->FindNode(pin->nodeId));
 
 
@@ -675,7 +675,7 @@ void NFBluePrintView::PinRenderForInputVariable(NFNodePin* pin)
 
 void NFBluePrintView::PinRenderForElementVariable(NFNodePin* pin)
 {
-	int itemWidth = 80;
+	float itemWidth = 80;
 
 	auto variable = std::dynamic_pointer_cast<NFIVariable>(m_pBluePrintModule->FindNode(pin->nodeId));
 
@@ -776,7 +776,7 @@ void NFBluePrintView::PinRenderForElementVariable(NFNodePin* pin)
 
 void NFBluePrintView::PinRenderForPropertyVariable(NFNodePin* pin)
 {
-	int itemWidth = 80;
+	float itemWidth = 80;
 
 	auto variable = std::dynamic_pointer_cast<NFIVariable>(m_pBluePrintModule->FindNode(pin->nodeId));
 
@@ -846,7 +846,7 @@ void NFBluePrintView::PinRenderForPropertyVariable(NFNodePin* pin)
 
 void NFBluePrintView::PinRenderForRecordVariable(NFNodePin* pin)
 {
-	int itemWidth = 80;
+	float itemWidth = 80;
 
 	auto variable = std::dynamic_pointer_cast<NFIVariable>(m_pBluePrintModule->FindNode(pin->nodeId));
 
@@ -1006,7 +1006,7 @@ void NFBluePrintView::PinRenderForMonitor(NFNodePin* pin)
 
 void NFBluePrintView::PinRenderForGameEventMonitor(NFNodePin* pin)
 {
-	int itemWidth = 50;
+	float itemWidth = 50;
 	auto monitor = std::dynamic_pointer_cast<NFIMonitor>(m_pBluePrintModule->FindNode(pin->nodeId));
 	if (pin->inputPin)
 	{
@@ -1018,7 +1018,7 @@ void NFBluePrintView::PinRenderForGameEventMonitor(NFNodePin* pin)
 
 			ImGui::SameLine();
 
-			int eventID = inputArg->GetInt();
+			int eventID = inputArg->GetInt32();
 			if (ImGui::InputInt("", &eventID))
 			{
 				inputArg->SetInt(eventID);
@@ -1035,7 +1035,7 @@ void NFBluePrintView::PinRenderForGameEventMonitor(NFNodePin* pin)
 
 void NFBluePrintView::PinRenderForNetworkEventMonitor(NFNodePin* pin)
 {
-	int itemWidth = 50;
+	float itemWidth = 50;
 	auto monitor = std::dynamic_pointer_cast<NFIMonitor>(m_pBluePrintModule->FindNode(pin->nodeId));
 
 	if (pin->inputPin)
@@ -1048,7 +1048,7 @@ void NFBluePrintView::PinRenderForNetworkEventMonitor(NFNodePin* pin)
 
 			ImGui::SameLine();
 
-			int eventID = inputArg->GetInt();
+			int eventID = inputArg->GetInt32();
 			if (ImGui::InputInt("", &eventID))
 			{
 				inputArg->SetInt(eventID);
@@ -1063,7 +1063,7 @@ void NFBluePrintView::PinRenderForNetworkEventMonitor(NFNodePin* pin)
 
 void NFBluePrintView::PinRenderForNetworkMsgMonitor(NFNodePin* pin)
 {
-	int itemWidth = 50;
+	float itemWidth = 50;
 	auto monitor = std::dynamic_pointer_cast<NFIMonitor>(m_pBluePrintModule->FindNode(pin->nodeId));
 
 	if (pin->inputPin)
@@ -1076,7 +1076,7 @@ void NFBluePrintView::PinRenderForNetworkMsgMonitor(NFNodePin* pin)
 
 			ImGui::SameLine();
 
-			int eventID = inputArg->GetInt();
+			int eventID = inputArg->GetInt32();
 			if (ImGui::InputInt("", &eventID))
 			{
 				inputArg->SetInt(eventID);
@@ -1096,7 +1096,7 @@ void NFBluePrintView::PinRenderForNetworkMsgMonitor(NFNodePin* pin)
 
 void NFBluePrintView::PinRenderForObjectEventMonitor(NFNodePin* pin)
 {
-	int itemWidth = 80;
+	float itemWidth = 80;
 	auto monitor = std::dynamic_pointer_cast<NFIMonitor>(m_pBluePrintModule->FindNode(pin->nodeId));
 
 	if (pin->inputPin)
@@ -1135,11 +1135,11 @@ void NFBluePrintView::PinRenderForObjectEventMonitor(NFNodePin* pin)
 			auto inputArg = monitor->GetInputArg(NFMonitorObjectEventInputArg::ClassEvent);
 
 			ImGui::SameLine();
-			NFClassEventType lastEventType = inputArg->GetInt();
+			NFClassEventType lastEventType = inputArg->GetInt32();
 			if (ImGui::BeginCombo("", lastEventType.toString().c_str()))
 			{
 				auto classEvents = NFClassEventType::allValues();
-				for (int i = 0; i < classEvents.size(); ++i)
+				for (size_t i = 0; i < classEvents.size(); ++i)
 				{
 					if (ImGui::Selectable(classEvents[i].toString().c_str()))
 					{
@@ -1157,7 +1157,7 @@ void NFBluePrintView::PinRenderForObjectEventMonitor(NFNodePin* pin)
 
 void NFBluePrintView::PinRenderForPropertyEventMonitor(NFNodePin* pin)
 {
-	int itemWidth = 80;
+	float itemWidth = 80;
 	auto monitor = std::dynamic_pointer_cast<NFIMonitor>(m_pBluePrintModule->FindNode(pin->nodeId));
 
 	static char str0[128] = "";
@@ -1240,7 +1240,7 @@ void NFBluePrintView::PinRenderForSceneEventMonitor(NFNodePin* pin)
 
 void NFBluePrintView::PinRenderForBranch(NFNodePin* pin)
 {
-	int itemWidth = 80;
+	float itemWidth = 80;
 
 	ImGui::PushItemWidth(itemWidth);
 	auto branch = std::dynamic_pointer_cast<NFIBranch>(m_pBluePrintModule->FindNode(pin->nodeId));
@@ -1303,7 +1303,7 @@ void NFBluePrintView::PinRenderForModifier(NFNodePin* pin)
 
 void NFBluePrintView::PinRenderForPropertyModifier(NFNodePin* pin)
 {
-	int itemWidth = 80;
+	float itemWidth = 80;
 
 	auto variable = std::dynamic_pointer_cast<NFIModifier>(m_pBluePrintModule->FindNode(pin->nodeId));
 
@@ -1421,7 +1421,7 @@ void NFBluePrintView::PinRenderForRecordRemModifier(NFNodePin* pin)
 
 void NFBluePrintView::PinRenderForArithmetic(NFNodePin* pin)
 {
-	int itemWidth = 80;
+	float itemWidth = 80;
 
 	ImGui::PushItemWidth(itemWidth);
 	auto arithmetic = std::dynamic_pointer_cast<NFIArithmetic>(m_pBluePrintModule->FindNode(pin->nodeId));
@@ -1432,7 +1432,7 @@ void NFBluePrintView::PinRenderForArithmetic(NFNodePin* pin)
 			auto comparatorArg = arithmetic->GetInputArg(NFArithmeticInputArg::ArithmeticType);
 			ImGui::SameLine();
 
-			NFArithmeticType type = (NFArithmeticType)comparatorArg->GetInt();
+			NFArithmeticType type = comparatorArg->GetInt32();
 
 			if (ImGui::BeginCombo("", type.toString().c_str()))
 			{
@@ -1455,7 +1455,7 @@ void NFBluePrintView::PinRenderForArithmetic(NFNodePin* pin)
 
 			auto outData = arithmetic->GetOutputArg(NFArithmeticOutputArg::Output);
 
-			NFValueType nowType = comparatorArg->GetInt();
+			NFValueType nowType = comparatorArg->GetInt32();
 
 			ImGui::SameLine();
 			if (ImGui::BeginCombo("", nowType.toString().c_str()))
@@ -1491,7 +1491,7 @@ void NFBluePrintView::PinRenderForArithmetic(NFNodePin* pin)
 
 void NFBluePrintView::PinRenderForDebugger(NFNodePin* pin)
 {
-	int itemWidth = 80;
+	float itemWidth = 80;
 
 	ImGui::PushItemWidth(itemWidth);
 	auto debugger = std::dynamic_pointer_cast<NFIDebugger>(m_pBluePrintModule->FindNode(pin->nodeId));
@@ -1501,7 +1501,7 @@ void NFBluePrintView::PinRenderForDebugger(NFNodePin* pin)
 		{
 			auto logLevel = debugger->GetInputArg(NFDebuggerInputArg::LogLevel);
 
-			NFDebuggerLevel lvl = logLevel->GetInt();
+			NFDebuggerLevel lvl = logLevel->GetInt32();
 
 			ImGui::SameLine();
 			if (ImGui::BeginCombo("", lvl.toString().c_str()))

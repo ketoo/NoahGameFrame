@@ -53,16 +53,16 @@ public:
 	virtual bool AfterInit();
 
 	//as client
-	virtual void Initialization(const char* strIP, const unsigned short nPort) {};
+	virtual void Initialization(const char* ip, const unsigned short nPort) {};
 
 	//as server
 	virtual int Initialization(const unsigned int nMaxClient, const unsigned short nPort, const int nCpuCount = 4);
 
-	virtual int ExpandBufferSize(const unsigned int size = 1024 * 1024 * 20);
+	virtual unsigned int ExpandBufferSize(const unsigned int size = 1024 * 1024 * 20) override;
 
-	virtual void RemoveReceiveCallBack(const int nMsgID);
+	virtual void RemoveReceiveCallBack(const int msgID);
 
-	virtual bool AddReceiveCallBack(const int nMsgID, const NET_RECEIVE_FUNCTOR_PTR& cb);
+	virtual bool AddReceiveCallBack(const int msgID, const NET_RECEIVE_FUNCTOR_PTR& cb);
 
 	virtual bool AddReceiveCallBack(const NET_RECEIVE_FUNCTOR_PTR& cb);
 
@@ -71,31 +71,31 @@ public:
 	virtual bool Execute();
 
 
-	virtual bool SendMsgWithOutHead(const int nMsgID, const std::string& msg, const NFSOCK nSockIndex);
-	virtual bool SendMsgToAllClientWithOutHead(const int nMsgID, const std::string& msg);
+	virtual bool SendMsgWithOutHead(const int msgID, const std::string& msg, const NFSOCK sockIndex);
+	virtual bool SendMsgToAllClientWithOutHead(const int msgID, const std::string& msg);
 
-	virtual bool SendMsgPB(const uint16_t nMsgID, const google::protobuf::Message& xData, const NFSOCK nSockIndex);
-	virtual bool SendMsgPB(const uint16_t nMsgID, const google::protobuf::Message& xData, const NFSOCK nSockIndex, const NFGUID id);
-	virtual bool SendMsg(const uint16_t nMsgID, const std::string& xData, const NFSOCK nSockIndex);
-	virtual bool SendMsg(const uint16_t nMsgID, const std::string& xData, const NFSOCK nSockIndex, const NFGUID id);
+	virtual bool SendMsgPB(const uint16_t msgID, const google::protobuf::Message& xData, const NFSOCK sockIndex);
+	virtual bool SendMsgPB(const uint16_t msgID, const google::protobuf::Message& xData, const NFSOCK sockIndex, const NFGUID id);
+	virtual bool SendMsg(const uint16_t msgID, const std::string& xData, const NFSOCK sockIndex);
+	virtual bool SendMsg(const uint16_t msgID, const std::string& xData, const NFSOCK sockIndex, const NFGUID id);
 
-	virtual bool SendMsgPBToAllClient(const uint16_t nMsgID, const google::protobuf::Message& xData);
+	virtual bool SendMsgPBToAllClient(const uint16_t msgID, const google::protobuf::Message& xData);
 
-	virtual bool SendMsgPB(const uint16_t nMsgID, const google::protobuf::Message& xData, const NFSOCK nSockIndex, const std::vector<NFGUID>* pClientIDList);
-	virtual bool SendMsgPB(const uint16_t nMsgID, const std::string& strData, const NFSOCK nSockIndex,  const std::vector<NFGUID>* pClientIDList);
+	virtual bool SendMsgPB(const uint16_t msgID, const google::protobuf::Message& xData, const NFSOCK sockIndex, const std::vector<NFGUID>* pClientIDList);
+	virtual bool SendMsgPB(const uint16_t msgID, const std::string& strData, const NFSOCK sockIndex,  const std::vector<NFGUID>* pClientIDList);
 
 	virtual NFINet* GetNet();
 
 protected:
-	void OnReceiveNetPack(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+	void OnReceiveNetPack(const NFSOCK sockIndex, const int msgID, const char* msg, const uint32_t len);
 
-	void OnSocketNetEvent(const NFSOCK nSockIndex, const NF_NET_EVENT eEvent, NFINet* pNet);
+	void OnSocketNetEvent(const NFSOCK sockIndex, const NF_NET_EVENT eEvent, NFINet* pNet);
 
 
 private:
 	struct event_base* mxBase = nullptr;
 	struct event udp_event;
-	int mnBufferSize;
+	unsigned int mnBufferSize;
 	std::map<int, std::list<NET_RECEIVE_FUNCTOR_PTR>> mxReceiveCallBack;
 	std::list<NET_EVENT_FUNCTOR_PTR> mxEventCallBackList;
 	std::list<NET_RECEIVE_FUNCTOR_PTR> mxCallBackList;

@@ -391,6 +391,8 @@ package nframe;
 		public static final String State = "State";// int
 		// Property
 		public static final String Account = "Account";// string
+		public static final String BattlePoint = "BattlePoint";// int
+		public static final String ClanID = "ClanID";// object
 		public static final String ConnectKey = "ConnectKey";// string
 		public static final String Diamond = "Diamond";// int
 		public static final String EXP = "EXP";// int
@@ -415,6 +417,7 @@ package nframe;
 		public static final String SkillSpecial1 = "SkillSpecial1";// string
 		public static final String SkillSpecial2 = "SkillSpecial2";// string
 		public static final String SkillTHUMP = "SkillTHUMP";// string
+		public static final String TeamID = "TeamID";// object
 		public static final String TotalTime = "TotalTime";// int
 		// Record
 		public class HeroEquipmentList
@@ -463,7 +466,9 @@ package nframe;
 			public static final int Stone2 = 8;//string
 			public static final int Stone3 = 9;//string
 			public static final int Stone4 = 10;//string
-			public static final int UserData = 11;//string
+			public static final int Lock = 11;//int
+			public static final int Future = 12;//int
+			public static final int UserData = 13;//string
 
 		}
 

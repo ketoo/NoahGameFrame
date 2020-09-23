@@ -24,13 +24,13 @@
 */
 
 #include "NFUIModule.h"
-#include "NFHierachyView.h"
+#include "NFHierarchyView.h"
 #include "NFGodView.h"
 #include "NFBluePrintView.h"
 #include "NFProjectView.h"
 #include "NFGameView.h"
 
-NFHierachyView::NFHierachyView(NFIPluginManager* p, NFViewType vt) : NFIView(p, vt, GET_CLASS_NAME(NFHierachyView))
+NFHierarchyView::NFHierarchyView(NFIPluginManager* p, NFViewType vt) : NFIView(p, vt, GET_CLASS_NAME(NFHierarchyView))
 {
 	m_pClassModule = pPluginManager->FindModule<NFIClassModule>();
 	m_pElementModule = pPluginManager->FindModule<NFIElementModule>();
@@ -41,7 +41,7 @@ NFHierachyView::NFHierachyView(NFIPluginManager* p, NFViewType vt) : NFIView(p, 
 	m_pBluePrintModule = pPluginManager->FindModule<NFIBluePrintModule>();
 }
 
-bool NFHierachyView::Execute()
+bool NFHierarchyView::Execute()
 {
 	//1. the project root folder is NFDataCfg
 
@@ -49,7 +49,7 @@ bool NFHierachyView::Execute()
 }
 
 
-void NFHierachyView::SubRender()
+void NFHierarchyView::SubRender()
 {
    if (m_pOccupyView)
    {
@@ -74,7 +74,7 @@ void NFHierachyView::SubRender()
    }
 }
 
-void NFHierachyView::GodViewSubRender()
+void NFHierarchyView::GodViewSubRender()
 {
    NFGUID objectID = ((NFGodView*)m_pOccupyView)->GetCurrentObjectID();
    NF_SHARE_PTR<NFIObject> pObject = m_pKernelModule->GetObject(objectID);
@@ -82,8 +82,8 @@ void NFHierachyView::GodViewSubRender()
    ImGui::Text(name.c_str());
    if (ImGui::Button("Create"))
    {
-	   const int scene = m_pKernelModule->GetPropertyInt(objectID, NFrame::IObject::SceneID());
-	   const int group = m_pKernelModule->GetPropertyInt(objectID, NFrame::IObject::GroupID());
+	   const int scene = m_pKernelModule->GetPropertyInt32(objectID, NFrame::IObject::SceneID());
+	   const int group = m_pKernelModule->GetPropertyInt32(objectID, NFrame::IObject::GroupID());
 	   const std::string& className = m_pKernelModule->GetPropertyString(objectID, NFrame::IObject::ClassName());
 	   const std::string& configID = m_pKernelModule->GetPropertyString(objectID, NFrame::IObject::ConfigID());
 	   const NFVector3& position = m_pKernelModule->GetPropertyVector3(objectID, NFrame::IObject::Position());
@@ -107,7 +107,7 @@ void NFHierachyView::GodViewSubRender()
 	   if (ImGui::Button("Disable AI"))
 	   {
 		   NFDataList data;
-		   m_pKernelModule->GetGroupObjectList(objectID.nHead64, objectID.nData64, data);
+		   m_pKernelModule->GetGroupObjectList((int)objectID.nHead64, (int)objectID.nData64, data);
 		   for (int i = 0; i < data.GetCount(); ++i)
 		   {
 			   m_pKernelModule->SetPropertyInt(data.Object(i), NFrame::NPC::Disable(), 1);
@@ -174,20 +174,137 @@ void NFHierachyView::GodViewSubRender()
 
    ImGui::EndGroup();
 
-   RenderForModifyProperty();
+	ImGui::Separator();
+
+	ImGui::BeginGroup();
+
+	if (pObject)
+	{
+		std::vector<std::string> recordNameList;
+		NF_SHARE_PTR<NFIRecord> pRecord = pObject->GetRecordManager()->First();
+		while(pRecord)
+		{
+			recordNameList.push_back(pRecord->GetName());
+
+			pRecord = pObject->GetRecordManager()->Next();
+		}
+
+		static std::string currentRecord = "";
+		for (int i = 0; i < recordNameList.size(); ++i)
+		{
+			ImGui::Separator();
+			std::string recordName = "++ " + recordNameList[i];
+			if (ImGui::Button(recordName.c_str()))
+			{
+				if (currentRecord == recordNameList[i])
+				{
+					currentRecord = "";
+				}
+				else
+				{
+					currentRecord = recordNameList[i];
+				}
+			}
+
+			if (!currentRecord.empty() && currentRecord == recordNameList[i])
+			{
+				NF_SHARE_PTR<NFIRecord> recordObject = pObject->FindRecord(currentRecord);
+				if (recordObject)
+				{
+					ImGui::Separator();
+
+					ImGui::Columns(recordObject->GetCols() +1, NULL);
+
+					ImGui::Button("Row");
+					if (ImGui::Button("Rem"))
+					{
+
+					}
+
+					ImGui::NextColumn();
+
+					for (int col = 0; col < recordObject->GetCols(); ++col)
+					{
+						const std::string&  colTag = recordObject->GetColTag(col);
+						ImGui::Button(colTag.c_str());
+
+						ImGui::NextColumn();
+					}
+
+					for (int row = 0; row < recordObject->GetRows(); ++row)
+					{
+						if (recordObject->IsUsed(row))
+						{
+							ImGui::Separator();
+
+							std::string rowindex = " " + std::to_string(row);
+							ImGui::Button(rowindex.c_str());
+							ImGui::NextColumn();
+
+							for (int col = 0; col < recordObject->GetCols(); ++col)
+							{
+								std::string data;
+
+								switch (recordObject->GetColType(col))
+								{
+									case NFDATA_TYPE::TDATA_INT:
+										data = std::to_string(recordObject->GetInt(row, col));
+										break;
+									case NFDATA_TYPE::TDATA_STRING:
+										data = recordObject->GetString(row, col);
+										break;
+									case NFDATA_TYPE::TDATA_FLOAT:
+										data = std::to_string(recordObject->GetFloat(row, col));
+										break;
+									case NFDATA_TYPE::TDATA_OBJECT:
+										data = recordObject->GetObject(row, col).ToString();
+										break;
+									case NFDATA_TYPE::TDATA_VECTOR2:
+										data = recordObject->GetVector2(row, col).ToString();
+										break;
+									case NFDATA_TYPE::TDATA_VECTOR3:
+										data = recordObject->GetVector3(row, col).ToString();
+										break;
+									default:
+										break;
+								}
+
+								if (ImGui::Button(data.c_str()))
+								{
+									modifyRecordName = currentRecord;
+									modifyRecordRow = row;
+									modifyRecordCol = col;
+								}
+
+								ImGui::NextColumn();
+							}
+						}
+					}
+
+					ImGui::Columns(1);
+				}
+			}
+		}
+	}
+
+
+	ImGui::EndGroup();
+
+	RenderForModifyProperty();
+	RenderForModifyRecord();
 }
 
-void NFHierachyView::GameViewSubRender()
+void NFHierarchyView::GameViewSubRender()
 {
    ImGui::Text("GameView");
 }
 
-void NFHierachyView::ProjectViewSubRender()
+void NFHierarchyView::ProjectViewSubRender()
 {
    ImGui::Text("ProjectView");
 }
 
-void NFHierachyView::BluePrintViewSubRender()
+void NFHierarchyView::BluePrintViewSubRender()
 {
    NF_SHARE_PTR<NFBluePrintView> pBluePrintView = std::dynamic_pointer_cast<NFBluePrintView>(m_pUIModule->GetView(NFViewType::BluePrintView));
    NFGUID objectID = pBluePrintView->GetCurrentObjectID();
@@ -276,7 +393,7 @@ void NFHierachyView::BluePrintViewSubRender()
    }
 }
 
-void NFHierachyView::BluePrintViewSubRenderForLogicBlock()
+void NFHierarchyView::BluePrintViewSubRenderForLogicBlock()
 {
 	NF_SHARE_PTR<NFBluePrintView> pBluePrintView = std::dynamic_pointer_cast<NFBluePrintView>(m_pUIModule->GetView(NFViewType::BluePrintView));
 	NFGUID objectID = pBluePrintView->GetCurrentLogicBlockID();
@@ -303,7 +420,7 @@ void NFHierachyView::BluePrintViewSubRenderForLogicBlock()
 	}
 }
 
-void NFHierachyView::BluePrintViewSubRenderForMonitor()
+void NFHierarchyView::BluePrintViewSubRenderForMonitor()
 {
 	NF_SHARE_PTR<NFBluePrintView> pBluePrintView = std::dynamic_pointer_cast<NFBluePrintView>(m_pUIModule->GetView(NFViewType::BluePrintView));
 	NFGUID objectID = pBluePrintView->GetCurrentObjectID();
@@ -324,7 +441,7 @@ void NFHierachyView::BluePrintViewSubRenderForMonitor()
 	}
 }
 
-void NFHierachyView::BluePrintViewSubRenderForBranch()
+void NFHierarchyView::BluePrintViewSubRenderForBranch()
 {
 	NF_SHARE_PTR<NFBluePrintView> pBluePrintView = std::dynamic_pointer_cast<NFBluePrintView>(m_pUIModule->GetView(NFViewType::BluePrintView));
 	NFGUID objectID = pBluePrintView->GetCurrentObjectID();
@@ -345,7 +462,7 @@ void NFHierachyView::BluePrintViewSubRenderForBranch()
 	}
 }
 
-void NFHierachyView::BluePrintViewSubRenderForExecutor()
+void NFHierarchyView::BluePrintViewSubRenderForExecutor()
 {
 	NF_SHARE_PTR<NFBluePrintView> pBluePrintView = std::dynamic_pointer_cast<NFBluePrintView>(m_pUIModule->GetView(NFViewType::BluePrintView));
 	NFGUID objectID = pBluePrintView->GetCurrentObjectID();
@@ -358,7 +475,7 @@ void NFHierachyView::BluePrintViewSubRenderForExecutor()
 	}
 }
 
-void NFHierachyView::BluePrintViewSubRenderForVariable()
+void NFHierarchyView::BluePrintViewSubRenderForVariable()
 {
 	NF_SHARE_PTR<NFBluePrintView> pBluePrintView = std::dynamic_pointer_cast<NFBluePrintView>(m_pUIModule->GetView(NFViewType::BluePrintView));
 	NFGUID objectID = pBluePrintView->GetCurrentObjectID();
@@ -371,29 +488,29 @@ void NFHierachyView::BluePrintViewSubRenderForVariable()
 	}
 }
 
-void NFHierachyView::BluePrintViewSubRenderForModifier()
+void NFHierarchyView::BluePrintViewSubRenderForModifier()
 {
 
 }
 
-void NFHierachyView::BluePrintViewSubRenderForLogger()
+void NFHierarchyView::BluePrintViewSubRenderForLogger()
 {
 
 }
 
-void NFHierachyView::BluePrintViewSubRenderForArithmetic()
+void NFHierarchyView::BluePrintViewSubRenderForArithmetic()
 {
 
 }
 
-void NFHierachyView::BluePrintViewSubRenderForMonitorHead(NF_SHARE_PTR<NFIMonitor> monitor)
+void NFHierarchyView::BluePrintViewSubRenderForMonitorHead(NF_SHARE_PTR<NFIMonitor> monitor)
 {
 	switch (monitor->monitorType)
 	{
 	case NFMonitorType::GameEvent:
 	{
 		auto inputEventID = monitor->GetInputArg(NFGameEventMonitorInputArg::EventID);
-		int localEventID = inputEventID->GetInt();
+		int localEventID = inputEventID->GetInt32();
 		if (ImGui::InputInt("input int", &localEventID))
 		{
 			inputEventID->SetInt(localEventID);
@@ -423,7 +540,7 @@ void NFHierachyView::BluePrintViewSubRenderForMonitorHead(NF_SHARE_PTR<NFIMonito
 	}
 }
 
-void NFHierachyView::BluePrintViewSubRenderForMonitorBody(NF_SHARE_PTR<NFIMonitor> monitor)
+void NFHierarchyView::BluePrintViewSubRenderForMonitorBody(NF_SHARE_PTR<NFIMonitor> monitor)
 {
 	/*
 	ImGui::Text("MonitorType");
@@ -699,43 +816,43 @@ void NFHierachyView::BluePrintViewSubRenderForMonitorBody(NF_SHARE_PTR<NFIMonito
 	*/
 }
 
-void NFHierachyView::BluePrintViewSubRenderForMonitorBot(NF_SHARE_PTR<NFIMonitor> monitor)
+void NFHierarchyView::BluePrintViewSubRenderForMonitorBot(NF_SHARE_PTR<NFIMonitor> monitor)
 {
 
 }
 
-void NFHierachyView::BluePrintViewSubRenderForBranchHead(NF_SHARE_PTR<NFIBranch> judgement)
+void NFHierarchyView::BluePrintViewSubRenderForBranchHead(NF_SHARE_PTR<NFIBranch> judgement)
 {
 
 }
 
-void NFHierachyView::BluePrintViewSubRenderForBranchBody(NF_SHARE_PTR<NFIBranch> judgement)
+void NFHierarchyView::BluePrintViewSubRenderForBranchBody(NF_SHARE_PTR<NFIBranch> judgement)
 {
 	ImGui::Text("Judgement Type");
 }
 
-void NFHierachyView::BluePrintViewSubRenderForBranchBot(NF_SHARE_PTR<NFIBranch> judgement)
+void NFHierarchyView::BluePrintViewSubRenderForBranchBot(NF_SHARE_PTR<NFIBranch> judgement)
 {
 
 }
 
 
-void NFHierachyView::InitBluePrintMonitorArgs(NF_SHARE_PTR<NFIMonitor> monitor)
+void NFHierarchyView::InitBluePrintMonitorArgs(NF_SHARE_PTR<NFIMonitor> monitor)
 {
 
 }
 
-void NFHierachyView::InitBluePrintJudgementArgs(NF_SHARE_PTR<NFIBranch> judgement)
+void NFHierarchyView::InitBluePrintJudgementArgs(NF_SHARE_PTR<NFIBranch> judgement)
 {
 
 }
 
-void NFHierachyView::InitBluePrintExecutorArgs(NF_SHARE_PTR<NFIExecutor> executer)
+void NFHierarchyView::InitBluePrintExecutorArgs(NF_SHARE_PTR<NFIExecutor> executer)
 {
 
 }
 
-void NFHierachyView::RenderForModifyProperty()
+void NFHierarchyView::RenderForModifyProperty()
 {
 	if (modifyPropertyName.length() > 0)
 	{
@@ -814,6 +931,91 @@ void NFHierachyView::RenderForModifyProperty()
 					}
 					ImGui::CloseCurrentPopup();
 				}		
+				ImGui::EndPopup();
+			}
+		}
+	}
+}
+
+void NFHierarchyView::RenderForModifyRecord()
+{
+	if (modifyRecordName.length() > 0)
+	{
+		NFGUID objectID = ((NFGodView*)m_pOccupyView)->GetCurrentObjectID();
+		NF_SHARE_PTR<NFIObject> pObject = m_pKernelModule->GetObject(objectID);
+		if (pObject)
+		{
+			NF_SHARE_PTR<NFIRecord> pRecord = pObject->GetRecordManager()->GetElement(modifyRecordName);
+
+			ImGui::OpenPopup("Modify Record Value");
+			ImGui::SetNextWindowSize(ImVec2(230, 150));
+			if (ImGui::BeginPopupModal("Modify Record Value"))
+			{
+				ImGui::Text(modifyRecordName.c_str());
+				ImGui::InputText("New Value", modifyRecordValue, IM_ARRAYSIZE(modifyRecordValue));
+				ImGui::Separator();
+				ImGui::Text("If you modified the value then the framework will trigger the record event!\n\n");
+				ImGui::Separator();
+				if (ImGui::Button("Cancel", ImVec2(100, 30)))
+				{
+					modifyRecordName = "";
+					ImGui::CloseCurrentPopup();
+				}
+				ImGui::SameLine();
+				if (ImGui::Button("OK", ImVec2(100, 30)))
+				{
+					modifyRecordName = "";
+
+					switch (pRecord->GetColType(modifyRecordCol))
+					{
+						case NFDATA_TYPE::TDATA_INT:
+						{
+							pRecord->SetInt(modifyRecordRow, modifyRecordCol, lexical_cast<int>(modifyRecordValue));
+						}
+							break;
+						case NFDATA_TYPE::TDATA_FLOAT:
+						{
+							pRecord->SetFloat(modifyRecordRow, modifyRecordCol, lexical_cast<float>(modifyRecordValue));
+						}
+							break;
+						case NFDATA_TYPE::TDATA_STRING:
+						{
+							pRecord->SetString(modifyRecordRow, modifyRecordCol, modifyRecordValue);
+						}
+							break;
+						case NFDATA_TYPE::TDATA_OBJECT:
+						{
+							NFGUID id;
+							if (id.FromString(modifyRecordValue))
+							{
+								pRecord->SetObject(modifyRecordRow, modifyRecordCol, id);
+							}
+						}
+							break;
+						case NFDATA_TYPE::TDATA_VECTOR2:
+						{
+							NFVector2 vec;
+							if (vec.FromString(modifyRecordValue))
+							{
+								pRecord->SetVector2(modifyRecordRow, modifyRecordCol, vec);
+							}
+						}
+							break;
+						case NFDATA_TYPE::TDATA_VECTOR3:
+						{
+							NFVector3 vec;
+							if (vec.FromString(modifyRecordValue))
+							{
+								pRecord->SetVector3(modifyRecordRow, modifyRecordCol, vec);
+							}
+						}
+							break;
+
+						default:
+							break;
+					}
+					ImGui::CloseCurrentPopup();
+				}
 				ImGui::EndPopup();
 			}
 		}

@@ -39,7 +39,7 @@ class NFVector3;
 class NFLine
 {
 public:
-    NFLine(const NFVector3& vPointStart, const NFVector3& vDirection, const int nLength)
+    NFLine(const NFVector3& vPointStart, const NFVector3& vDirection, const int length)
     {
     }
     
@@ -47,7 +47,7 @@ public:
     {
     }
    
-    NFLine(const NFVector3& vPoint, const NFVector3& vDirection, const int nLength)
+    NFLine(const NFVector3& vPoint, const NFVector3& vDirection, const int length)
     {
     }
 

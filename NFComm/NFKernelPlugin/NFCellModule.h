@@ -47,8 +47,8 @@ class NFSceneCellInfo
 public:
 	NFSceneCellInfo(const NFSceneCellInfo& cell)
 	{
-		mnSceneID = cell.mnSceneID;
-		mnGroupID = cell.mnGroupID;
+		msceneID = cell.msceneID;
+		mgroupID = cell.mgroupID;
 		mCellID = cell.mCellID;
 
 		for (int i = ECELL_TOP; i < ECELL_DIRECTION_MAXCOUNT; i++)
@@ -59,8 +59,8 @@ public:
 
     NFSceneCellInfo(const int& sceneID, const int& groupID, const NFGUID& cellID)
     {
-		mnSceneID = sceneID;
-		mnGroupID = groupID;
+		msceneID = sceneID;
+		mgroupID = groupID;
 		mCellID = cellID;
 
         for (int i = ECELL_TOP; i < ECELL_DIRECTION_MAXCOUNT; i++)
@@ -93,12 +93,12 @@ public:
 
 	const int GetSceneID()
 	{
-		return mnSceneID;
+		return msceneID;
 	}
 
 	const int GetGroupID()
 	{
-		return mnGroupID;
+		return mgroupID;
 	}
 	const NFGUID GetID()
 	{
@@ -113,8 +113,8 @@ protected:
 private:
     NF_SHARE_PTR<NFSceneCellInfo> mAroundCell[ECELL_DIRECTION_MAXCOUNT];
 	NFGUID mCellID;
-	int mnSceneID;
-	int mnGroupID;
+	int msceneID;
+	int mgroupID;
 };
 
 class NFCellModule
@@ -143,12 +143,12 @@ public:
     // the event that a object has leaved
     virtual const NFGUID OnObjectLeave(const NFGUID& self, const int& sceneID, const int& groupID, const NFGUID& fromCell);
 
-	virtual bool GetCellObjectList(const int nSceneID, const int nGroupID, const NFVector3& pos, NFDataList& list, ECELL_AROUND eAround = ECELL_AROUND_9);
-	virtual bool GetCellObjectList(const int nSceneID, const int nGroupID, const NFVector3& pos, NFDataList& list, const NFGUID& noSelf, ECELL_AROUND eAround = ECELL_AROUND_9);
-	virtual bool GetCellObjectList(const int nSceneID, const int nGroupID, const NFVector3& pos, NFDataList& list, const bool bPlayer, ECELL_AROUND eAround = ECELL_AROUND_9);
-	virtual bool GetCellObjectList(const int nSceneID, const int nGroupID, const NFVector3& pos, NFDataList& list, const bool bPlayer, const NFGUID& noSelf, ECELL_AROUND eAround = ECELL_AROUND_9);
-	virtual bool GetCellObjectList(const int nSceneID, const int nGroupID, const NFVector3& pos, const std::string& strClassName, NFDataList& list, ECELL_AROUND eAround = ECELL_AROUND_9);
-	virtual bool GetCellObjectList(const int nSceneID, const int nGroupID, const NFVector3& pos, const std::string& strClassName, NFDataList& list, const NFGUID& noSelf, ECELL_AROUND eAround = ECELL_AROUND_9);
+	virtual bool GetCellObjectList(const int sceneID, const int groupID, const NFVector3& pos, NFDataList& list, ECELL_AROUND around = ECELL_AROUND_9);
+	virtual bool GetCellObjectList(const int sceneID, const int groupID, const NFVector3& pos, NFDataList& list, const NFGUID& noSelf, ECELL_AROUND around = ECELL_AROUND_9);
+	virtual bool GetCellObjectList(const int sceneID, const int groupID, const NFVector3& pos, NFDataList& list, const bool bPlayer, ECELL_AROUND around = ECELL_AROUND_9);
+	virtual bool GetCellObjectList(const int sceneID, const int groupID, const NFVector3& pos, NFDataList& list, const bool bPlayer, const NFGUID& noSelf, ECELL_AROUND around = ECELL_AROUND_9);
+	virtual bool GetCellObjectList(const int sceneID, const int groupID, const NFVector3& pos, const std::string& className, NFDataList& list, ECELL_AROUND around = ECELL_AROUND_9);
+	virtual bool GetCellObjectList(const int sceneID, const int groupID, const NFVector3& pos, const std::string& className, NFDataList& list, const NFGUID& noSelf, ECELL_AROUND around = ECELL_AROUND_9);
     
 	//////////////////////////////////////////////////////////////////////////
     // computer a id of this grid by position
@@ -163,12 +163,12 @@ public:
 
     // get some grids that around this grid(not include self)
     virtual const int GetAroundCell(const int& sceneID, const int& groupID, const NFGUID& selfGrid, NF_SHARE_PTR<NFSceneCellInfo>* gridList,
-                                    ECELL_AROUND eAround = ECELL_AROUND_9);
+                                    ECELL_AROUND around = ECELL_AROUND_9);
 
 
     // get some objects that around this grid(not include self)
     virtual const int GetAroundObject(const int& sceneID, const int& groupID, const NFGUID& selfGrid, NFDataList& objectList,
-                                      ECELL_AROUND eAround = ECELL_AROUND_9);
+                                      ECELL_AROUND around = ECELL_AROUND_9);
 
 
     // get a grid who connected it by direction
@@ -181,19 +181,19 @@ protected:
 
 	// get some grids that around this grid(not include self)
 	virtual const int GetAroundCell(NF_SHARE_PTR<NFSceneCellInfo> pGridInfo, NF_SHARE_PTR<NFSceneCellInfo>* gridList,
-		ECELL_AROUND eAround = ECELL_AROUND_9);
+		ECELL_AROUND around = ECELL_AROUND_9);
 
 	// get some objects that around this grid(not include self)
 	virtual const int GetAroundObject(NF_SHARE_PTR<NFSceneCellInfo> pGridInfo, NFDataList& objectList,
-		ECELL_AROUND eAround = ECELL_AROUND_9);
+		ECELL_AROUND around = ECELL_AROUND_9);
 
 
 	virtual int AddMoveEventCallBack(CELL_MOVE_EVENT_FUNCTOR_PTR functorPtr);
 	virtual int AddMoveInEventCallBack(CELL_MOVE_EVENT_FUNCTOR_PTR functorPtr);
 	virtual int AddMoveOutEventCallBack(CELL_MOVE_EVENT_FUNCTOR_PTR functorPtr);
 
-	int OnObjectEvent(const NFGUID& self, const std::string& strClassNames, const CLASS_OBJECT_EVENT eClassEvent, const NFDataList& var);
-	int OnPositionEvent(const NFGUID & self, const std::string & strPropertyName, const NFData & oldVar, const NFData & newVar);
+	int OnObjectEvent(const NFGUID& self, const std::string& classNames, const CLASS_OBJECT_EVENT classEvent, const NFDataList& var);
+	int OnPositionEvent(const NFGUID & self, const std::string & propertyName, const NFData & oldVar, const NFData & newVar);
 
 private:
 
@@ -201,8 +201,8 @@ private:
 	bool OnMoveInEvent(const NFGUID& self, const int& sceneID, const int& groupID, const NFGUID& toCell);
 	bool OnMoveOutEvent(const NFGUID& self, const int& sceneID, const int& groupID, const NFGUID& fromCell);
 	
-	int BeforeLeaveSceneGroup(const NFGUID& self, const int nSceneID, const int nGroupID, const int nType, const NFDataList& argList);
-	int AfterEnterSceneGroup(const NFGUID& self, const int nSceneID, const int nGroupID, const int nType, const NFDataList& argList);
+	int BeforeLeaveSceneGroup(const NFGUID& self, const int sceneID, const int groupID, const int type, const NFDataList& argList);
+	int AfterEnterSceneGroup(const NFGUID& self, const int sceneID, const int groupID, const int type, const NFDataList& argList);
 
 private:
 	const static int nCellWidth = 10;

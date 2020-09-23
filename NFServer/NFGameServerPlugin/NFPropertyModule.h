@@ -50,10 +50,10 @@ public:
     virtual bool Execute();
     virtual bool AfterInit();
 
-    virtual int64_t GetPropertyValue(const NFGUID& self, const std::string& strPropertyName, const NFPropertyGroup eGroupType);
-    virtual int SetPropertyValue(const NFGUID& self, const std::string& strPropertyName, const NFPropertyGroup eGroupType, const int64_t nValue);
+    virtual int64_t GetPropertyValue(const NFGUID& self, const std::string& propertyName, const NFPropertyGroup eGroupType);
+    virtual int SetPropertyValue(const NFGUID& self, const std::string& propertyName, const NFPropertyGroup eGroupType, const int64_t nValue);
 
-    virtual bool AddExp(const NFGUID& self, const int64_t nExp);
+    virtual bool AddExp(const NFGUID& self, const int64_t exp);
 
     virtual bool FullHPMP(const NFGUID& self);
     virtual bool AddHP(const NFGUID& self, const int nValue);
@@ -86,10 +86,10 @@ protected:
 
     void RefreshAllProperty(const NFGUID& self);
 
-    int OnObjectClassEvent(const NFGUID& self, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFDataList& var);
+    int OnObjectClassEvent(const NFGUID& self, const std::string& className, const CLASS_OBJECT_EVENT classEvent, const NFDataList& var);
 
-    int OnObjectLevelEvent(const NFGUID& self, const std::string& strPropertyName, const NFData& oldVar, const NFData& newVar);
-    int OnObjectConfigIDEvent(const NFGUID& self, const std::string& strPropertyName, const NFData& oldVar, const NFData& newVar);
+    int OnObjectLevelEvent(const NFGUID& self, const std::string& propertyName, const NFData& oldVar, const NFData& newVar);
+    int OnObjectConfigIDEvent(const NFGUID& self, const std::string& propertyName, const NFData& oldVar, const NFData& newVar);
 
     int OnRecordEvent(const NFGUID& self, const RECORD_EVENT_DATA& xEventData, const NFData& oldVar, const NFData& newVar);
 

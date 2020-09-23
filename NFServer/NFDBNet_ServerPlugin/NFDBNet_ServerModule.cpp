@@ -56,17 +56,17 @@ bool NFDBNet_ServerModule::AfterInit()
 		{
 			const std::string& strId = strIdList[i];
 
-            const int nServerType = m_pElementModule->GetPropertyInt32(strId, NFrame::Server::Type());
-            const int nServerID = m_pElementModule->GetPropertyInt32(strId, NFrame::Server::ServerID());
-            if (nServerType == NF_SERVER_TYPES::NF_ST_DB && pPluginManager->GetAppID() == nServerID)
+            const int serverType = m_pElementModule->GetPropertyInt32(strId, NFrame::Server::Type());
+            const int serverID = m_pElementModule->GetPropertyInt32(strId, NFrame::Server::ServerID());
+            if (serverType == NF_SERVER_TYPES::NF_ST_DB && pPluginManager->GetAppID() == serverID)
             {
                 const int nPort = m_pElementModule->GetPropertyInt32(strId, NFrame::Server::Port());
-                const int nMaxConnect = m_pElementModule->GetPropertyInt32(strId, NFrame::Server::MaxOnline());
+                const int maxConnect = m_pElementModule->GetPropertyInt32(strId, NFrame::Server::MaxOnline());
                 const int nCpus = m_pElementModule->GetPropertyInt32(strId, NFrame::Server::CpuCount());
-                //const std::string& strName = m_pElementModule->GetPropertyString(strId, NFrame::Server::ID());
-                //const std::string& strIP = m_pElementModule->GetPropertyString(strId, NFrame::Server::IP());
+                //const std::string& name = m_pElementModule->GetPropertyString(strId, NFrame::Server::ID());
+                //const std::string& ip = m_pElementModule->GetPropertyString(strId, NFrame::Server::IP());
 
-                int nRet = m_pNetModule->Initialization(nMaxConnect, nPort, nCpus);
+                int nRet = m_pNetModule->Initialization(maxConnect, nPort, nCpus);
                 if (nRet < 0)
                 {
                     std::ostringstream strLog;
@@ -100,27 +100,27 @@ bool NFDBNet_ServerModule::Execute()
 	return true;
 }
 
-void NFDBNet_ServerModule::OnSocketEvent(const NFSOCK nSockIndex, const NF_NET_EVENT eEvent, NFINet* pNet)
+void NFDBNet_ServerModule::OnSocketEvent(const NFSOCK sockIndex, const NF_NET_EVENT eEvent, NFINet* pNet)
 {
     if (eEvent & NF_NET_EVENT_EOF)
     {
-        m_pLogModule->LogInfo(NFGUID(0, nSockIndex), "NF_NET_EVENT_EOF Connection closed", __FUNCTION__, __LINE__);
-        OnClientDisconnect(nSockIndex);
+        m_pLogModule->LogInfo(NFGUID(0, sockIndex), "NF_NET_EVENT_EOF Connection closed", __FUNCTION__, __LINE__);
+        OnClientDisconnect(sockIndex);
     }
     else if (eEvent & NF_NET_EVENT_ERROR)
     {
-        m_pLogModule->LogInfo(NFGUID(0, nSockIndex), "NF_NET_EVENT_ERROR Got an error on the connection", __FUNCTION__, __LINE__);
-        OnClientDisconnect(nSockIndex);
+        m_pLogModule->LogInfo(NFGUID(0, sockIndex), "NF_NET_EVENT_ERROR Got an error on the connection", __FUNCTION__, __LINE__);
+        OnClientDisconnect(sockIndex);
     }
     else if (eEvent & NF_NET_EVENT_TIMEOUT)
     {
-        m_pLogModule->LogInfo(NFGUID(0, nSockIndex), "NF_NET_EVENT_TIMEOUT read timeout", __FUNCTION__, __LINE__);
-        OnClientDisconnect(nSockIndex);
+        m_pLogModule->LogInfo(NFGUID(0, sockIndex), "NF_NET_EVENT_TIMEOUT read timeout", __FUNCTION__, __LINE__);
+        OnClientDisconnect(sockIndex);
     }
     else  if (eEvent & NF_NET_EVENT_CONNECTED)
     {
-        m_pLogModule->LogInfo(NFGUID(0, nSockIndex), "NF_NET_EVENT_CONNECTED connected success", __FUNCTION__, __LINE__);
-        OnClientConnected(nSockIndex);
+        m_pLogModule->LogInfo(NFGUID(0, sockIndex), "NF_NET_EVENT_CONNECTED connected success", __FUNCTION__, __LINE__);
+        OnClientConnected(sockIndex);
     }
 }
 
@@ -132,12 +132,12 @@ void NFDBNet_ServerModule::OnClientConnected(const NFSOCK nAddress)
 {
 }
 
-void NFDBNet_ServerModule::OnRequireRoleListProcess(const NFSOCK nSockIndex, const int nMsgID, const char * msg, const uint32_t nLen)
+void NFDBNet_ServerModule::OnRequireRoleListProcess(const NFSOCK sockIndex, const int msgID, const char * msg, const uint32_t len)
 {
 
-	NFGUID nClientID;
+	NFGUID clientID;
 	NFMsg::ReqRoleList xMsg;
-	if (!m_pNetModule->ReceivePB(nMsgID, msg, nLen, xMsg, nClientID))
+	if (!m_pNetModule->ReceivePB(msgID, msg, len, xMsg, clientID))
 	{
 		return;
 	}
@@ -148,7 +148,7 @@ void NFDBNet_ServerModule::OnRequireRoleListProcess(const NFSOCK nSockIndex, con
 	{
 		NFMsg::AckRoleLiteInfoList xAckRoleLiteInfoList;
 		xAckRoleLiteInfoList.set_account(xMsg.account());
-		m_pNetModule->SendMsgPB(NFMsg::ACK_ROLE_LIST, xAckRoleLiteInfoList, nSockIndex, nClientID);
+		m_pNetModule->SendMsgPB(NFMsg::ACK_ROLE_LIST, xAckRoleLiteInfoList, sockIndex, clientID);
 		return;
 	}
 
@@ -169,29 +169,27 @@ void NFDBNet_ServerModule::OnRequireRoleListProcess(const NFSOCK nSockIndex, con
 	pData->set_last_offline_ip(0);
 	pData->set_view_record("");
 
-	m_pNetModule->SendMsgPB(NFMsg::ACK_ROLE_LIST, xAckRoleLiteInfoList, nSockIndex, nClientID);
+	m_pNetModule->SendMsgPB(NFMsg::ACK_ROLE_LIST, xAckRoleLiteInfoList, sockIndex, clientID);
 }
 
-void NFDBNet_ServerModule::OnCreateRoleGameProcess(const NFSOCK nSockIndex, const int nMsgID, const char * msg, const uint32_t nLen)
+void NFDBNet_ServerModule::OnCreateRoleGameProcess(const NFSOCK sockIndex, const int msgID, const char * msg, const uint32_t len)
 {
-	NFGUID nClientID;
+	NFGUID clientID;
 	NFMsg::ReqCreateRole xMsg;
-	if (!m_pNetModule->ReceivePB(nMsgID, msg, nLen, xMsg, nClientID))
+	if (!m_pNetModule->ReceivePB(msgID, msg, len, xMsg, clientID))
 	{
 		return;
 	}
 
-	const std::string& strAccount = xMsg.account();
-	const std::string& strName = xMsg.noob_name();
+	const std::string& account = xMsg.account();
+	const std::string& name = xMsg.noob_name();
 	const int nHomeSceneID = 1;
 	NFGUID xID = m_pKernelModule->CreateGUID();
 
-	if (m_pPlayerRedisModule->CreateRole(strAccount, strName, xID, nHomeSceneID))
+	if (m_pPlayerRedisModule->CreateRole(account, name, xID, nHomeSceneID))
 	{
-		m_pPlayerRedisModule->SavePlayerTile(nHomeSceneID, xID, "");
-
 		NFMsg::AckRoleLiteInfoList xAckRoleLiteInfoList;
-		xAckRoleLiteInfoList.set_account(strAccount);
+		xAckRoleLiteInfoList.set_account(account);
 
 		NFMsg::RoleLiteInfo* pData = xAckRoleLiteInfoList.add_char_data();
 		pData->mutable_id()->CopyFrom(NFINetModule::NFToPB(xID));
@@ -207,15 +205,15 @@ void NFDBNet_ServerModule::OnCreateRoleGameProcess(const NFSOCK nSockIndex, cons
 		pData->set_last_offline_ip(0);
 		pData->set_view_record("");
 
-		m_pNetModule->SendMsgPB(NFMsg::ACK_ROLE_LIST, xAckRoleLiteInfoList, nSockIndex, nClientID);
+		m_pNetModule->SendMsgPB(NFMsg::ACK_ROLE_LIST, xAckRoleLiteInfoList, sockIndex, clientID);
 	}
 }
 
-void NFDBNet_ServerModule::OnDeleteRoleGameProcess(const NFSOCK nSockIndex, const int nMsgID, const char * msg, const uint32_t nLen)
+void NFDBNet_ServerModule::OnDeleteRoleGameProcess(const NFSOCK sockIndex, const int msgID, const char * msg, const uint32_t len)
 {
-	NFGUID nClientID;
+	NFGUID clientID;
 	NFMsg::ReqDeleteRole xMsg;
-	if (!m_pNetModule->ReceivePB(nMsgID, msg, nLen, xMsg, nClientID))
+	if (!m_pNetModule->ReceivePB(msgID, msg, len, xMsg, clientID))
 	{
 		return;
 	}
@@ -223,43 +221,41 @@ void NFDBNet_ServerModule::OnDeleteRoleGameProcess(const NFSOCK nSockIndex, cons
 	NFMsg::AckRoleLiteInfoList xAckRoleLiteInfoList;
 	xAckRoleLiteInfoList.set_account(xMsg.account());
 
-	m_pNetModule->SendMsgPB(NFMsg::ACK_ROLE_LIST, xAckRoleLiteInfoList, nSockIndex, nClientID);
+	m_pNetModule->SendMsgPB(NFMsg::ACK_ROLE_LIST, xAckRoleLiteInfoList, sockIndex, clientID);
 }
 
-void NFDBNet_ServerModule::OnLoadRoleDataProcess(const NFSOCK nSockIndex, const int nMsgID, const char * msg, const uint32_t nLen)
+void NFDBNet_ServerModule::OnLoadRoleDataProcess(const NFSOCK sockIndex, const int msgID, const char * msg, const uint32_t len)
 {
-	NFGUID nClientID;
+	NFGUID clientID;
 	NFMsg::ReqEnterGameServer xMsg;
-	if (!m_pNetModule->ReceivePB(nMsgID, msg, nLen, xMsg, nClientID))
+	if (!m_pNetModule->ReceivePB(msgID, msg, len, xMsg, clientID))
 	{
 		return;
 	}
 
-	NFGUID nRoleID = NFINetModule::PBToNF(xMsg.id());
+	NFGUID roleID = NFINetModule::PBToNF(xMsg.id());
 
 	NFMsg::RoleDataPack xRoleDataxMsg;
 	xRoleDataxMsg.mutable_id()->CopyFrom(xMsg.id());
 
 	NFPlayerRedisModule* pPlayerRedisModule = (NFPlayerRedisModule*)m_pPlayerRedisModule;
-	pPlayerRedisModule->LoadPlayerData(nRoleID, xRoleDataxMsg);
+	pPlayerRedisModule->LoadPlayerData(roleID, xRoleDataxMsg);
 
-	m_pNetModule->SendMsgPB(NFMsg::ACK_LOAD_ROLE_DATA, xRoleDataxMsg, nSockIndex);
+	m_pNetModule->SendMsgPB(NFMsg::ACK_LOAD_ROLE_DATA, xRoleDataxMsg, sockIndex);
 }
 
-void NFDBNet_ServerModule::OnSaveRoleDataProcess(const NFSOCK nSockIndex, const int nMsgID, const char * msg, const uint32_t nLen)
+void NFDBNet_ServerModule::OnSaveRoleDataProcess(const NFSOCK sockIndex, const int msgID, const char * msg, const uint32_t len)
 {
-	NFGUID nClientID;
+	NFGUID clientID;
 	NFMsg::RoleDataPack xMsg;
-	if (!m_pNetModule->ReceivePB(nMsgID, msg, nLen, xMsg, nClientID))
+	if (!m_pNetModule->ReceivePB(msgID, msg, len, xMsg, clientID))
 	{
 		return;
 	}
 
-	NFGUID nRoleID = NFINetModule::PBToNF(xMsg.id());
+	NFGUID roleID = NFINetModule::PBToNF(xMsg.id());
 
 	NFPlayerRedisModule* pPlayerRedisModule = (NFPlayerRedisModule*)m_pPlayerRedisModule;
-	pPlayerRedisModule->SavePlayerData(nRoleID, xMsg);
-
-	//m_pNetModule->SendMsgPB(NFMsg::ACK_LOAD_ROLE_DATA, xMsg, nSockIndex);
+	pPlayerRedisModule->SavePlayerData(roleID, xMsg);
 }
 

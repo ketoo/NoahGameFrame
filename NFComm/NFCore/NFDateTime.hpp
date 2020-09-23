@@ -135,37 +135,37 @@ public:
 
 	inline int TotalHours() const
 	{
-		return TickCount<hours>();
+		return (int)TickCount<hours>();
 	}
 
 	inline int TotalDays()  const
 	{
-		return TickCount<days>();
+		return (int)TickCount<days>();
 	}
 
 	inline int Seconds() const
 	{
-		return TickCount<seconds>() % 60;
+		return (int)(TickCount<seconds>() % 60);
 	}
 
 	inline int Minutes() const
 	{
-		return TickCount<minutes>() % 60;
+		return (int)(TickCount<minutes>() % 60);
 	}
 
 	inline int Milliseconds() const
 	{
-		return TickCount<milliseconds>() % 1000;
+		return (int)(TickCount<milliseconds>() % 1000);
 	}
 
 	inline int Hours() const
 	{
-		return TickCount<hours>() % 24;
+		return (int)(TickCount<hours>() % 24);
 	}
 
 	inline int Days() const
 	{
-		return TickCount<days>();
+		return (int)TickCount<days>();
 	}
 
 	inline tick_t Ticks() const

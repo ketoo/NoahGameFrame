@@ -51,24 +51,44 @@ public:
     virtual bool Execute();
     virtual bool AfterInit();
 
-    virtual void TransmitToWorld(const int nHashKey, const int nMsgID, const google::protobuf::Message& xData);
+    virtual void TransmitToWorld(const int nHashKey, const int msgID, const google::protobuf::Message& xData);
 
 	virtual void SendOnline(const NFGUID& self);
 	virtual void SendOffline(const NFGUID& self);
 
 protected:
 
-    void OnSocketWSEvent(const NFSOCK nSockIndex, const NF_NET_EVENT eEvent, NFINet* pNet);
+    void OnSocketWSEvent(const NFSOCK sockIndex, const NF_NET_EVENT eEvent, NFINet* pNet);
 
 protected:
     void Register(NFINet* pNet);
 	void ServerReport();
-    void TransPBToProxy(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+    void TransPBToProxy(const NFSOCK sockIndex, const int msgID, const char* msg, const uint32_t len);
 
-    int OnObjectClassEvent(const NFGUID& self, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFDataList& var);
+    int OnObjectClassEvent(const NFGUID& self, const std::string& className, const CLASS_OBJECT_EVENT classEvent, const NFDataList& var);
 	
-	void OnServerInfoProcess(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+	void OnServerInfoProcess(const NFSOCK sockIndex, const int msgID, const char* msg, const uint32_t len);
 
+	int OnObjectPropertyEvent( const NFGUID& self, const std::string& propertyName, const NFData& oldVar, const NFData& newVar);
+
+protected:
+	void OnWorldPropertyIntProcess(const NFSOCK sockIndex, const int msgID, const char* msg, const uint32_t len);
+	void OnWorldPropertyFloatProcess(const NFSOCK sockIndex, const int msgID, const char* msg, const uint32_t len);
+	void OnWorldPropertyStringProcess(const NFSOCK sockIndex, const int msgID, const char* msg, const uint32_t len);
+	void OnWorldPropertyObjectProcess(const NFSOCK sockIndex, const int msgID, const char* msg, const uint32_t len);
+	void OnWorldPropertyVector2Process(const NFSOCK sockIndex, const int msgID, const char* msg, const uint32_t len);
+	void OnWorldPropertyVector3Process(const NFSOCK sockIndex, const int msgID, const char* msg, const uint32_t len);
+
+	void OnWorldRecordEnterProcess(const NFSOCK sockIndex, const int msgID, const char *msg, const uint32_t len);
+	void OnWorldAddRowProcess(const NFSOCK sockIndex, const int msgID, const char* msg, const uint32_t len);
+	void OnWorldRemoveRowProcess(const NFSOCK sockIndex, const int msgID, const char* msg, const uint32_t len);
+	void OnWorldSwapRowProcess(const NFSOCK sockIndex, const int msgID, const char* msg, const uint32_t len);
+	void OnWorldRecordIntProcess(const NFSOCK sockIndex, const int msgID, const char* msg, const uint32_t len);
+	void OnWorldRecordFloatProcess(const NFSOCK sockIndex, const int msgID, const char* msg, const uint32_t len);
+	void OnWorldRecordStringProcess(const NFSOCK sockIndex, const int msgID, const char* msg, const uint32_t len);
+	void OnWorldRecordObjectProcess(const NFSOCK sockIndex, const int msgID, const char* msg, const uint32_t len);
+	void OnWorldRecordVector2Process(const NFSOCK sockIndex, const int msgID, const char* msg, const uint32_t len);
+	void OnWorldRecordVector3Process(const NFSOCK sockIndex, const int msgID, const char* msg, const uint32_t len);
 private:
 	NFINT64 mLastReportTime;
 

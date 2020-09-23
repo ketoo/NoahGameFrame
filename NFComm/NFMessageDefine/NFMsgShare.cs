@@ -36,31 +36,33 @@ namespace NFMsg {
             "KAwSEAoIc2NlbmVfaWQYCCABKAUSEAoIY2xhc3NfaWQYCSABKAwiQQoSQWNr",
             "UGxheWVyRW50cnlMaXN0EisKC29iamVjdF9saXN0GAEgAygLMhYuTkZNc2cu",
             "UGxheWVyRW50cnlJbmZvIjcKEkFja1BsYXllckxlYXZlTGlzdBIhCgtvYmpl",
-            "Y3RfbGlzdBgBIAMoCzIMLk5GTXNnLklkZW50IqUBCgtQb3NTeW5jVW5pdBIb",
+            "Y3RfbGlzdBgBIAMoCzIMLk5GTXNnLklkZW50IpMCCgtQb3NTeW5jVW5pdBIb",
             "CgVtb3ZlchgBIAEoCzIMLk5GTXNnLklkZW50EhsKA25vdxgCIAEoCzIOLk5G",
             "TXNnLlZlY3RvcjMSGwoDcG9zGAMgASgLMg4uTkZNc2cuVmVjdG9yMxIhCglk",
             "aXJlY3Rpb24YBCABKAsyDi5ORk1zZy5WZWN0b3IzEg4KBnN0YXR1cxgFIAEo",
-            "BRIMCgR0aW1lGAYgASgCIjwKE1JlcUFja1BsYXllclBvc1N5bmMSJQoJc3lu",
-            "Y191bml0GAEgAygLMhIuTkZNc2cuUG9zU3luY1VuaXQi4QEKCkVmZmVjdERh",
-            "dGESIgoMZWZmZWN0X2lkZW50GAEgASgLMgwuTkZNc2cuSWRlbnQSFAoMZWZm",
-            "ZWN0X3ZhbHVlGAIgASgFEjEKCmVmZmVjdF9ybHQYAyABKA4yHS5ORk1zZy5F",
-            "ZmZlY3REYXRhLkVSZXN1bHRUeXBlImYKC0VSZXN1bHRUeXBlEgwKCEVFVF9G",
-            "QUlMEAASDwoLRUVUX1NVQ0NFU1MQARIOCgpFRVRfUkVGVVNFEAISDAoIRUVU",
-            "X01JU1MQAxIMCghFRVRfQ1JJVBAEEgwKCEVFVF9VTFRJEAUieQoOUmVxQWNr",
-            "VXNlU2tpbGwSGgoEdXNlchgBIAEoCzIMLk5GTXNnLklkZW50EhAKCHNraWxs",
-            "X2lkGAIgASgMEhEKCXVzZV9pbmRleBgDIAEoBRImCgtlZmZlY3RfZGF0YRgE",
-            "IAMoCzIRLk5GTXNnLkVmZmVjdERhdGEiegoPUmVxQWNrU3dhcFNjZW5lEhUK",
-            "DXRyYW5zZmVyX3R5cGUYASABKAUSEAoIc2NlbmVfaWQYAiABKAUSDwoHbGlu",
-            "ZV9pZBgDIAEoBRIJCgF4GAQgASgCEgkKAXkYBSABKAISCQoBehgGIAEoAhIM",
-            "CgRkYXRhGAcgASgMIucCChBSZXFBY2tQbGF5ZXJDaGF0Eh8KCXBsYXllcl9p",
-            "ZBgBIAEoCzIMLk5GTXNnLklkZW50EhMKC3BsYXllcl9uYW1lGAIgASgMEj4K",
-            "DGNoYXRfY2hhbm5lbBgDIAEoDjIoLk5GTXNnLlJlcUFja1BsYXllckNoYXQu",
-            "RUdhbWVDaGF0Q2hhbm5lbBI4CgljaGF0X3R5cGUYBCABKA4yJS5ORk1zZy5S",
-            "ZXFBY2tQbGF5ZXJDaGF0LkVHYW1lQ2hhdFR5cGUSEQoJY2hhdF9pbmZvGAUg",
-            "ASgMIlAKEEVHYW1lQ2hhdENoYW5uZWwSDwoLRUdDQ19HTE9CQUwQABINCglF",
-            "R0NDX0NMQU4QARINCglFR0NDX1JPT00QAhINCglFR0NDX1RFQU0QAyI+Cg1F",
-            "R2FtZUNoYXRUeXBlEg0KCUVHQ1RfVEVYVBAAEg4KCkVHQ1RfVk9JQ0UQARIO",
-            "CgpFR0NUX0VNT0pJEAJiBnByb3RvMw=="));
+            "BRIMCgR0aW1lGAYgASgCEi8KCW1vdmVfdHlwZRgHIAEoDjIcLk5GTXNnLlBv",
+            "c1N5bmNVbml0LkVNb3ZlVHlwZSI7CglFTW92ZVR5cGUSDAoIRU1UX1dBTEsQ",
+            "ABIOCgpFRVRfU1BFRURZEAESEAoMRUVUX1RFTEVQT1JUEAIiPAoTUmVxQWNr",
+            "UGxheWVyUG9zU3luYxIlCglzeW5jX3VuaXQYASADKAsyEi5ORk1zZy5Qb3NT",
+            "eW5jVW5pdCLhAQoKRWZmZWN0RGF0YRIiCgxlZmZlY3RfaWRlbnQYASABKAsy",
+            "DC5ORk1zZy5JZGVudBIUCgxlZmZlY3RfdmFsdWUYAiABKAUSMQoKZWZmZWN0",
+            "X3JsdBgDIAEoDjIdLk5GTXNnLkVmZmVjdERhdGEuRVJlc3VsdFR5cGUiZgoL",
+            "RVJlc3VsdFR5cGUSDAoIRUVUX0ZBSUwQABIPCgtFRVRfU1VDQ0VTUxABEg4K",
+            "CkVFVF9SRUZVU0UQAhIMCghFRVRfTUlTUxADEgwKCEVFVF9DUklUEAQSDAoI",
+            "RUVUX1VMVEkQBSJ5Cg5SZXFBY2tVc2VTa2lsbBIaCgR1c2VyGAEgASgLMgwu",
+            "TkZNc2cuSWRlbnQSEAoIc2tpbGxfaWQYAiABKAwSEQoJdXNlX2luZGV4GAMg",
+            "ASgFEiYKC2VmZmVjdF9kYXRhGAQgAygLMhEuTkZNc2cuRWZmZWN0RGF0YSJ6",
+            "Cg9SZXFBY2tTd2FwU2NlbmUSFQoNdHJhbnNmZXJfdHlwZRgBIAEoBRIQCghz",
+            "Y2VuZV9pZBgCIAEoBRIPCgdsaW5lX2lkGAMgASgFEgkKAXgYBCABKAISCQoB",
+            "eRgFIAEoAhIJCgF6GAYgASgCEgwKBGRhdGEYByABKAwi5wIKEFJlcUFja1Bs",
+            "YXllckNoYXQSHwoJcGxheWVyX2lkGAEgASgLMgwuTkZNc2cuSWRlbnQSEwoL",
+            "cGxheWVyX25hbWUYAiABKAwSPgoMY2hhdF9jaGFubmVsGAMgASgOMiguTkZN",
+            "c2cuUmVxQWNrUGxheWVyQ2hhdC5FR2FtZUNoYXRDaGFubmVsEjgKCWNoYXRf",
+            "dHlwZRgEIAEoDjIlLk5GTXNnLlJlcUFja1BsYXllckNoYXQuRUdhbWVDaGF0",
+            "VHlwZRIRCgljaGF0X2luZm8YBSABKAwiUAoQRUdhbWVDaGF0Q2hhbm5lbBIP",
+            "CgtFR0NDX0dMT0JBTBAAEg0KCUVHQ0NfQ0xBThABEg0KCUVHQ0NfUk9PTRAC",
+            "Eg0KCUVHQ0NfVEVBTRADIj4KDUVHYW1lQ2hhdFR5cGUSDQoJRUdDVF9URVhU",
+            "EAASDgoKRUdDVF9WT0lDRRABEg4KCkVHQ1RfRU1PSkkQAmIGcHJvdG8z"));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { global::NFMsg.NFDefineReflection.Descriptor, global::NFMsg.NFMsgBaseReflection.Descriptor, },
           new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
@@ -71,7 +73,7 @@ namespace NFMsg {
             new pbr::GeneratedClrTypeInfo(typeof(global::NFMsg.PlayerEntryInfo), global::NFMsg.PlayerEntryInfo.Parser, new[]{ "ObjectGuid", "X", "Y", "Z", "CareerType", "PlayerState", "ConfigId", "SceneId", "ClassId" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::NFMsg.AckPlayerEntryList), global::NFMsg.AckPlayerEntryList.Parser, new[]{ "ObjectList" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::NFMsg.AckPlayerLeaveList), global::NFMsg.AckPlayerLeaveList.Parser, new[]{ "ObjectList" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::NFMsg.PosSyncUnit), global::NFMsg.PosSyncUnit.Parser, new[]{ "Mover", "Now", "Pos", "Direction", "Status", "Time" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::NFMsg.PosSyncUnit), global::NFMsg.PosSyncUnit.Parser, new[]{ "Mover", "Now", "Pos", "Direction", "Status", "Time", "MoveType" }, null, new[]{ typeof(global::NFMsg.PosSyncUnit.Types.EMoveType) }, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::NFMsg.ReqAckPlayerPosSync), global::NFMsg.ReqAckPlayerPosSync.Parser, new[]{ "SyncUnit" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::NFMsg.EffectData), global::NFMsg.EffectData.Parser, new[]{ "EffectIdent", "EffectValue", "EffectRlt" }, null, new[]{ typeof(global::NFMsg.EffectData.Types.EResultType) }, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::NFMsg.ReqAckUseSkill), global::NFMsg.ReqAckUseSkill.Parser, new[]{ "User", "SkillId", "UseIndex", "EffectData" }, null, null, null, null),
@@ -1324,6 +1326,7 @@ namespace NFMsg {
       direction_ = other.direction_ != null ? other.direction_.Clone() : null;
       status_ = other.status_;
       time_ = other.time_;
+      moveType_ = other.moveType_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -1398,6 +1401,17 @@ namespace NFMsg {
       }
     }
 
+    /// <summary>Field number for the "move_type" field.</summary>
+    public const int MoveTypeFieldNumber = 7;
+    private global::NFMsg.PosSyncUnit.Types.EMoveType moveType_ = global::NFMsg.PosSyncUnit.Types.EMoveType.EmtWalk;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public global::NFMsg.PosSyncUnit.Types.EMoveType MoveType {
+      get { return moveType_; }
+      set {
+        moveType_ = value;
+      }
+    }
+
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override bool Equals(object other) {
       return Equals(other as PosSyncUnit);
@@ -1417,6 +1431,7 @@ namespace NFMsg {
       if (!object.Equals(Direction, other.Direction)) return false;
       if (Status != other.Status) return false;
       if (!pbc::ProtobufEqualityComparers.BitwiseSingleEqualityComparer.Equals(Time, other.Time)) return false;
+      if (MoveType != other.MoveType) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -1429,6 +1444,7 @@ namespace NFMsg {
       if (direction_ != null) hash ^= Direction.GetHashCode();
       if (Status != 0) hash ^= Status.GetHashCode();
       if (Time != 0F) hash ^= pbc::ProtobufEqualityComparers.BitwiseSingleEqualityComparer.GetHashCode(Time);
+      if (MoveType != global::NFMsg.PosSyncUnit.Types.EMoveType.EmtWalk) hash ^= MoveType.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -1466,6 +1482,10 @@ namespace NFMsg {
         output.WriteRawTag(53);
         output.WriteFloat(Time);
       }
+      if (MoveType != global::NFMsg.PosSyncUnit.Types.EMoveType.EmtWalk) {
+        output.WriteRawTag(56);
+        output.WriteEnum((int) MoveType);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
@@ -1491,6 +1511,9 @@ namespace NFMsg {
       }
       if (Time != 0F) {
         size += 1 + 4;
+      }
+      if (MoveType != global::NFMsg.PosSyncUnit.Types.EMoveType.EmtWalk) {
+        size += 1 + pb::CodedOutputStream.ComputeEnumSize((int) MoveType);
       }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
@@ -1532,6 +1555,9 @@ namespace NFMsg {
       }
       if (other.Time != 0F) {
         Time = other.Time;
+      }
+      if (other.MoveType != global::NFMsg.PosSyncUnit.Types.EMoveType.EmtWalk) {
+        MoveType = other.MoveType;
       }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
@@ -1580,9 +1606,26 @@ namespace NFMsg {
             Time = input.ReadFloat();
             break;
           }
+          case 56: {
+            MoveType = (global::NFMsg.PosSyncUnit.Types.EMoveType) input.ReadEnum();
+            break;
+          }
         }
       }
     }
+
+    #region Nested types
+    /// <summary>Container for nested types declared in the PosSyncUnit message type.</summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static partial class Types {
+      public enum EMoveType {
+        [pbr::OriginalName("EMT_WALK")] EmtWalk = 0,
+        [pbr::OriginalName("EET_SPEEDY")] EetSpeedy = 1,
+        [pbr::OriginalName("EET_TELEPORT")] EetTeleport = 2,
+      }
+
+    }
+    #endregion
 
   }
 

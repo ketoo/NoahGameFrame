@@ -89,7 +89,7 @@ bool NFSyncModule::RequireStop(const NFGUID self)
 }
 
 
-int NFSyncModule::SyncHeart(const std::string & strHeartName, const float fTime, const int nCount)
+int NFSyncModule::SyncHeart(const std::string & strHeartName, const float time, const int count)
 {
 	//0.1s
 
@@ -97,30 +97,48 @@ int NFSyncModule::SyncHeart(const std::string & strHeartName, const float fTime,
 	return 0;
 }
 
-int NFSyncModule::OnNPCClassEvent(const NFGUID & self, const std::string & strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFDataList & var)
+int NFSyncModule::OnNPCClassEvent(const NFGUID & self, const std::string & className, const CLASS_OBJECT_EVENT classEvent, const NFDataList & var)
 {
-	if (CLASS_OBJECT_EVENT::COE_CREATE_FINISH == eClassEvent)
+	if (CLASS_OBJECT_EVENT::COE_CREATE_FINISH == classEvent)
 	{
 	}
 
 	return 0;
 }
 
-int NFSyncModule::OnNPCPositionEvent(const NFGUID & self, const std::string & strPropertyName, const NFData & oldVar, const NFData & newVar)
+int NFSyncModule::OnNPCGMPositionEvent(const NFGUID & self, const std::string & propertyName, const NFData & oldVar, const NFData & newVar)
 {
 	return 0;
 }
 
-int NFSyncModule::OnPlayerClassEvent(const NFGUID & self, const std::string & strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFDataList & var)
+int NFSyncModule::OnPlayerClassEvent(const NFGUID & self, const std::string & className, const CLASS_OBJECT_EVENT classEvent, const NFDataList & var)
 {
-	if (CLASS_OBJECT_EVENT::COE_CREATE_FINISH == eClassEvent)
+	if (CLASS_OBJECT_EVENT::COE_CREATE_FINISH == classEvent)
 	{
+		m_pKernelModule->AddPropertyCallBack(self, NFrame::Player::GMMoveTo(), this, &NFSyncModule::OnPlayerGMPositionEvent);
 	}
 
 	return 0;
 }
 
-int NFSyncModule::OnPlayePositionEvent(const NFGUID & self, const std::string & strPropertyName, const NFData & oldVar, const NFData & newVar)
+int NFSyncModule::OnPlayerGMPositionEvent(const NFGUID & self, const std::string & propertyName, const NFData & oldVar, const NFData & newVar)
 {
+	NFMsg::ReqAckPlayerPosSync xMsg;
+	NFMsg::PosSyncUnit* syncUnit = xMsg.add_sync_unit();
+	if (syncUnit)
+	{
+		NFVector3 v = newVar.GetVector3();
+		*syncUnit->mutable_pos() = NFINetModule::NFToPB(v);
+		*syncUnit->mutable_mover() = NFINetModule::NFToPB(self);
+		syncUnit->set_move_type(NFMsg::PosSyncUnit_EMoveType::PosSyncUnit_EMoveType_EET_TELEPORT);
+
+		m_pKernelModule->SetPropertyVector3(self, NFrame::IObject::Position(), v);
+
+		const int sceneID = m_pKernelModule->GetPropertyInt32(self, NFrame::Player::SceneID());
+		const int groupID = m_pKernelModule->GetPropertyInt32(self, NFrame::Player::GroupID());
+
+		m_pGameServerNet_ServerModule->SendGroupMsgPBToGate(NFMsg::ACK_MOVE_IMMUNE, xMsg, sceneID, groupID);
+	}
+
 	return 0;
 }

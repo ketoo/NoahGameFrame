@@ -63,15 +63,15 @@ bool NFHelloWorld4Module::AfterInit()
 			[&]() 
 			{
 
-				int timeStart = NFGetTimeMS();
+				int64_t timeStart = NFGetTimeMS();
 
 				for (int j = 0; j != messageCount; ++j)
 				{
 					q.enqueue(j);
 				}
 
-				int timeEnd = NFGetTimeMS();
-				int timeCost = timeEnd - timeStart;
+				int64_t timeEnd = NFGetTimeMS();
+				int64_t timeCost = timeEnd - timeStart;
 				if (timeCost > 0)
 				{
 					std::cout << "end Benchmarks, cost: " << timeCost << "ms for " << messageCount << ", qps: " << (messageCount / timeCost) * 1000 << std::endl;
@@ -122,15 +122,15 @@ bool NFHelloWorld4Module::AfterInit()
 				[&]()
 			{
 
-				int timeStart = NFGetTimeMS();
+				int64_t timeStart = NFGetTimeMS();
 
 				for (int j = 0; j != messageCount; ++j)
 				{
 					q.Push(j);
 				}
 
-				int timeEnd = NFGetTimeMS();
-				int timeCost = timeEnd - timeStart;
+				int64_t timeEnd = NFGetTimeMS();
+				int64_t timeCost = timeEnd - timeStart;
 				if (timeCost > 0)
 				{
 					std::cout << "end Benchmarks, cost: " << timeCost << "ms for " << messageCount << ", qps: " << (messageCount / timeCost) * 1000 << std::endl;
@@ -157,15 +157,15 @@ bool NFHelloWorld4Module::AfterInit()
 				[&]()
 			{
 
-				int timeStart = NFGetTimeMS();
+				int64_t timeStart = NFGetTimeMS();
 
 				for (int j = 0; j != messageCount; ++j)
 				{
 					q.Push(std::to_string(j * j));
 				}
 
-				int timeEnd = NFGetTimeMS();
-				int timeCost = timeEnd - timeStart;
+				int64_t timeEnd = NFGetTimeMS();
+				int64_t timeCost = timeEnd - timeStart;
 				if (timeCost > 0)
 				{
 					std::cout << "end Benchmarks, cost: " << timeCost << "ms for " << messageCount << ", qps: " << (messageCount / timeCost) * 1000 << std::endl;
@@ -181,7 +181,7 @@ bool NFHelloWorld4Module::AfterInit()
 	}
 	{
 		std::cout << "Test for Task NO RESULT!" << std::endl;
-		int timeStart = NFGetTimeMS();
+		int64_t timeStart = NFGetTimeMS();
 		//example 4
 		for (int i = 0; i < messageCount; ++i)
 		{
@@ -193,8 +193,8 @@ bool NFHelloWorld4Module::AfterInit()
 			});
 		}
 
-		int timeEnd = NFGetTimeMS();
-		int timeCost = timeEnd - timeStart;
+		int64_t timeEnd = NFGetTimeMS();
+		int64_t timeCost = timeEnd - timeStart;
 		if (timeCost > 0)
 		{
 			std::cout << "end Benchmarks, cost: " << timeCost << "ms for " << messageCount << ", qps: " << (messageCount / timeCost) * 1000 << std::endl;
@@ -202,7 +202,7 @@ bool NFHelloWorld4Module::AfterInit()
 	}
 	{
 		std::cout << "Test for Task WITH RESULT!" << std::endl;
-		int timeStart = NFGetTimeMS();
+		int64_t timeStart = NFGetTimeMS();
 		//100M
 		//example 4
 		for (int i = 0; i < messageCount; ++i)
@@ -219,8 +219,8 @@ bool NFHelloWorld4Module::AfterInit()
 			});
 		}
 
-		int timeEnd = NFGetTimeMS();
-		int timeCost = timeEnd - timeStart;
+		int64_t timeEnd = NFGetTimeMS();
+		int64_t timeCost = timeEnd - timeStart;
 		if (timeCost > 0)
 		{
 			std::cout << "end Benchmarks, cost: " << timeCost << "ms for " << messageCount << ", qps: " << (messageCount / timeCost) * 1000 << std::endl;
@@ -230,7 +230,7 @@ bool NFHelloWorld4Module::AfterInit()
 	//actor test
 	{
 		std::cout << "Test for actor mode" << std::endl;
-		int timeStart = NFGetTimeMS();
+		int64_t timeStart = NFGetTimeMS();
 
 		auto actorID1 = m_pActorModule->RequireActor();
 		m_pActorModule->AddComponent<NFHttpComponent>(actorID1->ID());
@@ -254,8 +254,8 @@ bool NFHelloWorld4Module::AfterInit()
 			//m_pActorModule->SendMsgToActor(actorID1, i, std::to_string(i*i));
 		}
 
-		int timeEnd = NFGetTimeMS();
-		int timeCost = timeEnd - timeStart;
+		int64_t timeEnd = NFGetTimeMS();
+		int64_t timeCost = timeEnd - timeStart;
 		if (timeCost > 0)
 		{
 			std::cout << "end Benchmarks, cost: " << timeCost << "ms for " << messageCount << ", qps: " << (messageCount / timeCost) * 1000 << std::endl;
