@@ -1080,3 +1080,20 @@ bool NFCommonRedisModule::SavePropertyInfo(const std::string &self, const std::s
 
 	return false;
 }
+
+bool NFCommonRedisModule::GetPropertyList(const std::string &self, std::vector<std::pair<std::string, std::string>> &values)
+{
+	NF_SHARE_PTR<NFIRedisClient> pDriver = m_pNoSqlModule->GetDriverBySuit(self);
+	if (!pDriver)
+	{
+		return false;
+	}
+
+	std::string strCacheKey = GetPropertyCacheKey(self);
+	if (pDriver->HGETALL(strCacheKey, values))
+	{
+		return true;
+	}
+
+	return false;
+}

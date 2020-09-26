@@ -58,6 +58,7 @@ public:
 
 
 	virtual bool GetPropertyList(const std::string& self, const std::vector<std::string>& fields, std::vector<std::string>& values) = 0;
+	virtual bool GetPropertyList(const std::string& self, std::vector<std::pair<std::string, std::string>>& values) = 0;
 
 	virtual NFINT64 GetPropertyInt(const std::string& self, const std::string& propertyName) = 0;
 	virtual int GetPropertyInt32(const std::string& self, const std::string& propertyName) = 0;

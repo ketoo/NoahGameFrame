@@ -71,7 +71,7 @@ public:
 	virtual bool SaveRecordInfo(const std::string& self, NF_SHARE_PTR<NFIRecordManager> pRecordManager, const int nExpireSecond = -1);
 	virtual bool SaveRecordInfo(const std::string& self, const NFMsg::ObjectRecordList& xRecordData, const int nExpireSecond = -1);
 	virtual bool GetPropertyList(const std::string& self, const std::vector<std::string>& fields, std::vector<std::string>& values);
-
+	virtual bool GetPropertyList(const std::string& self, std::vector<std::pair<std::string, std::string>>& values);
 
 	virtual NFINT64 GetPropertyInt(const std::string& self, const std::string& propertyName);
 	virtual int GetPropertyInt32(const std::string& self, const std::string& propertyName);
