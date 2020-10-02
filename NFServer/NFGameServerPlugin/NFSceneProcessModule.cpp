@@ -174,12 +174,14 @@ int NFSceneProcessModule::OnObjectClassEvent(const NFGUID& self, const std::stri
 
             if (eSceneType == NFMsg::ESceneType::SINGLE_CLONE_SCENE)
             {
+            	//wa need to wait for this player for a moment if the player disconnected from server.
                 m_pKernelModule->ReleaseGroupScene(sceneID, groupID);
 
                 m_pLogModule->LogInfo(self, "DestroyCloneSceneGroup " + std::to_string(groupID), __FUNCTION__ , __LINE__);
             }
 			else if (eSceneType == NFMsg::ESceneType::MULTI_CLONE_SCENE)
 			{
+				//wa need to wait for this player if the player disconnected from server.
 				NFDataList varObjectList;
 				if (m_pKernelModule->GetGroupObjectList(sceneID, groupID, varObjectList, true) && varObjectList.GetCount() <= 0)
 				{
@@ -207,19 +209,13 @@ int NFSceneProcessModule::BeforeEnterSceneGroupEvent(const NFGUID & self, const 
 	{
 		m_pSceneModule->CreateSceneNPC(sceneID, groupID, NFDataList::Empty());
 	}
-	else if (eSceneType == NFMsg::ESceneType::MULTI_CLONE_SCENE
-		|| eSceneType == NFMsg::ESceneType::PVP_MODE_SCENE
-	   	|| eSceneType == NFMsg::ESceneType::MVM_MODE_SCENE
-	   	|| eSceneType == NFMsg::ESceneType::SURVIVAL_MODE_SCENE)
+	else if (eSceneType == NFMsg::ESceneType::MULTI_CLONE_SCENE)
 	{
 		NFDataList varObjectList;
 		if (m_pKernelModule->GetGroupObjectList(sceneID, groupID, varObjectList, true) && varObjectList.GetCount() <= 0)
 		{
 			m_pSceneModule->CreateSceneNPC(sceneID, groupID, NFDataList::Empty());
 		}
-	}
-	else if (eSceneType == NFMsg::ESceneType::NORMAL_SCENE)
-	{
 	}
 
 	return 0;

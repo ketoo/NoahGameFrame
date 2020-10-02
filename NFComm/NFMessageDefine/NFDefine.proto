@@ -184,12 +184,9 @@ enum ESkillType
 
 enum ESceneType
 {
-	NORMAL_SCENE 			= 0;//public town
-	SINGLE_CLONE_SCENE 		= 1;//single boss underground city
-	MULTI_CLONE_SCENE 		= 2;//world boss underground city
-	PVP_MODE_SCENE 			= 10;
-	MVM_MODE_SCENE	 		= 11;
-	SURVIVAL_MODE_SCENE 	= 12;
+	NORMAL_SCENE 			= 0; //public town, only has one group available for players is 1
+	SINGLE_CLONE_SCENE 		= 1; //private room, only has one player per group and it will be destroyed if the player leaved from group.
+	MULTI_CLONE_SCENE 		= 2; //private room, only has more than one player per group and it will be destroyed if all players leaved from group.
 }
 
 enum ENPCType

@@ -87,12 +87,11 @@ namespace NFMsg {
             "EhYKEkJSSUVGX1NJTkdMRV9TS0lMTBAAEhUKEUJSSUVGX0dST1VQX1NLSUxM",
             "EAESFwoTQlVMTEVUX1NJTkdMRV9TS0lMTBACEhgKFEJVTExFVF9SRUJPVU5E",
             "X1NLSUxMEAMSHAoYQlVMTEVUX1RBUkdFVF9CT01CX1NLSUxMEAQSGQoVQlVM",
-            "TEVUX1BPU19CT01CX1NLSUxMEAUSDgoKRlVOQ19TS0lMTBAGKo4BCgpFU2Nl",
-            "bmVUeXBlEhAKDE5PUk1BTF9TQ0VORRAAEhYKElNJTkdMRV9DTE9ORV9TQ0VO",
-            "RRABEhUKEU1VTFRJX0NMT05FX1NDRU5FEAISEgoOUFZQX01PREVfU0NFTkUQ",
-            "ChISCg5NVk1fTU9ERV9TQ0VORRALEhcKE1NVUlZJVkFMX01PREVfU0NFTkUQ",
-            "DCpGCghFTlBDVHlwZRIOCgpOT1JNQUxfTlBDEAASDAoISEVST19OUEMQARIO",
-            "CgpUVVJSRVRfTlBDEAISDAoIRlVOQ19OUEMQA2IGcHJvdG8z"));
+            "TEVUX1BPU19CT01CX1NLSUxMEAUSDgoKRlVOQ19TS0lMTBAGKk0KCkVTY2Vu",
+            "ZVR5cGUSEAoMTk9STUFMX1NDRU5FEAASFgoSU0lOR0xFX0NMT05FX1NDRU5F",
+            "EAESFQoRTVVMVElfQ0xPTkVfU0NFTkUQAipGCghFTlBDVHlwZRIOCgpOT1JN",
+            "QUxfTlBDEAASDAoISEVST19OUEMQARIOCgpUVVJSRVRfTlBDEAISDAoIRlVO",
+            "Q19OUEMQA2IGcHJvdG8z"));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(new[] {typeof(global::NFMsg.EGameEventCode), typeof(global::NFMsg.EGameMsgID), typeof(global::NFMsg.EItemType), typeof(global::NFMsg.ESkillType), typeof(global::NFMsg.ESceneType), typeof(global::NFMsg.ENPCType), }, null, null));
@@ -408,20 +407,17 @@ namespace NFMsg {
 
   public enum ESceneType {
     /// <summary>
-    ///public town
+    ///public town, only has one group available for players is 1
     /// </summary>
     [pbr::OriginalName("NORMAL_SCENE")] NormalScene = 0,
     /// <summary>
-    ///single boss underground city
+    ///private room, only has one player per group and it will be destroyed if the player leaved from group.
     /// </summary>
     [pbr::OriginalName("SINGLE_CLONE_SCENE")] SingleCloneScene = 1,
     /// <summary>
-    ///world boss underground city
+    ///private room, only has more than one player per group and it will be destroyed if all players leaved from group.
     /// </summary>
     [pbr::OriginalName("MULTI_CLONE_SCENE")] MultiCloneScene = 2,
-    [pbr::OriginalName("PVP_MODE_SCENE")] PvpModeScene = 10,
-    [pbr::OriginalName("MVM_MODE_SCENE")] MvmModeScene = 11,
-    [pbr::OriginalName("SURVIVAL_MODE_SCENE")] SurvivalModeScene = 12,
   }
 
   public enum ENPCType {

@@ -63,14 +63,14 @@ bool NFPlayerRedisModule::LoadPlayerData(const NFGUID & self, NFMsg::RoleDataPac
 {
 	NFCommonRedisModule* pCommonRedisModule = (NFCommonRedisModule*)(m_pCommonRedisModule);
 
-	NF_SHARE_PTR<NFIPropertyManager> xPropertyManager = m_pCommonRedisModule->GetPropertyInfo(self.ToString(), NFrame::Player::ThisName());
+	NF_SHARE_PTR<NFIPropertyManager> xPropertyManager = m_pCommonRedisModule->GetPropertyInfo(self.ToString(), NFrame::Player::ThisName(), false, true);
 	if (xPropertyManager)
 	{
 		*(roleData.mutable_property()->mutable_player_id()) = NFINetModule::NFToPB(self);
 
-		pCommonRedisModule->ConvertPropertyManagerToPB(xPropertyManager, roleData.mutable_property());
+		pCommonRedisModule->ConvertPropertyManagerToPB(xPropertyManager, roleData.mutable_property(), false, true);
 
-		pCommonRedisModule->GetRecordInfo(self.ToString(), NFrame::Player::ThisName(), roleData.mutable_record());
+		pCommonRedisModule->GetRecordInfo(self.ToString(), NFrame::Player::ThisName(), roleData.mutable_record(), false, true);
 		
 		return true;
 	}
@@ -88,7 +88,7 @@ bool NFPlayerRedisModule::SavePlayerData(const NFGUID & self, const NFMsg::RoleD
 	NF_SHARE_PTR<NFIPropertyManager> xPropManager = pCommonRedisModule->NewPropertyManager(NFrame::Player::ThisName());
 	if (pCommonRedisModule->ConvertPBToPropertyManager(roleData.property(), xPropManager))
 	{
-		m_pCommonRedisModule->SavePropertyInfo(self.ToString(), xPropManager);
+		m_pCommonRedisModule->SavePropertyInfo(self.ToString(), xPropManager, false, true);
 	}
 
 	pCommonRedisModule->SaveRecordInfo(self.ToString(), roleData.record(), -1);
@@ -171,7 +171,7 @@ bool NFPlayerRedisModule::CreateRole(const std::string & account, const std::str
 					xProperty->SetString(strRoleName);
 				}
 
-				m_pCommonRedisModule->SavePropertyInfo(id.ToString(), xPropertyManager);
+				m_pCommonRedisModule->SavePropertyInfo(id.ToString(), xPropertyManager, false, true);
 			}
 
 			return true;

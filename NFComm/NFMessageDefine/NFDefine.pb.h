@@ -279,15 +279,12 @@ enum ESceneType : int {
   NORMAL_SCENE = 0,
   SINGLE_CLONE_SCENE = 1,
   MULTI_CLONE_SCENE = 2,
-  PVP_MODE_SCENE = 10,
-  MVM_MODE_SCENE = 11,
-  SURVIVAL_MODE_SCENE = 12,
   ESceneType_INT_MIN_SENTINEL_DO_NOT_USE_ = std::numeric_limits<::PROTOBUF_NAMESPACE_ID::int32>::min(),
   ESceneType_INT_MAX_SENTINEL_DO_NOT_USE_ = std::numeric_limits<::PROTOBUF_NAMESPACE_ID::int32>::max()
 };
 bool ESceneType_IsValid(int value);
 constexpr ESceneType ESceneType_MIN = NORMAL_SCENE;
-constexpr ESceneType ESceneType_MAX = SURVIVAL_MODE_SCENE;
+constexpr ESceneType ESceneType_MAX = MULTI_CLONE_SCENE;
 constexpr int ESceneType_ARRAYSIZE = ESceneType_MAX + 1;
 
 const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor* ESceneType_descriptor();

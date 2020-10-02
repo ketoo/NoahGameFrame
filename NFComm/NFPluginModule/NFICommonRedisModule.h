@@ -49,12 +49,12 @@ public:
 	virtual NF_SHARE_PTR<NFIPropertyManager> NewPropertyManager(const std::string& className) = 0;
 	virtual NF_SHARE_PTR<NFIRecordManager> NewRecordManager(const std::string& className) = 0;
 
-	virtual NF_SHARE_PTR<NFIPropertyManager> GetPropertyInfo(const std::string& self, const std::string& className, NF_SHARE_PTR<NFIPropertyManager> propertyManager = nullptr) = 0;
-	virtual NF_SHARE_PTR<NFIRecordManager> GetRecordInfo(const std::string& self, const std::string& className, NF_SHARE_PTR<NFIRecordManager> recordManager = nullptr) = 0;
+	virtual NF_SHARE_PTR<NFIPropertyManager> GetPropertyInfo(const std::string& self, const std::string& className, const bool cache, const bool save, NF_SHARE_PTR<NFIPropertyManager> propertyManager = nullptr) = 0;
+	virtual NF_SHARE_PTR<NFIRecordManager> GetRecordInfo(const std::string& self, const std::string& className, const bool cache, const bool save, NF_SHARE_PTR<NFIRecordManager> recordManager = nullptr) = 0;
 
 	virtual bool SavePropertyInfo(const std::string& self, const std::string& propertyName, const std::string& propertyValue) = 0;
-	virtual bool SavePropertyInfo(const std::string& self, NF_SHARE_PTR<NFIPropertyManager> pPropertyManager, const int nExpireSecond = -1) = 0;
-	virtual bool SaveRecordInfo(const std::string& self, NF_SHARE_PTR<NFIRecordManager> pRecordManager, const int nExpireSecond = -1) = 0;
+	virtual bool SavePropertyInfo(const std::string& self, NF_SHARE_PTR<NFIPropertyManager> pPropertyManager, const bool cache, const bool save, const int nExpireSecond = -1) = 0;
+	virtual bool SaveRecordInfo(const std::string& self, NF_SHARE_PTR<NFIRecordManager> pRecordManager, const bool cache, const bool save, const int nExpireSecond = -1) = 0;
 
 
 	virtual bool GetPropertyList(const std::string& self, const std::vector<std::string>& fields, std::vector<std::string>& values) = 0;

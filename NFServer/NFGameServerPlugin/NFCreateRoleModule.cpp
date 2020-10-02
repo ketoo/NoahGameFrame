@@ -311,12 +311,12 @@ void NFCreateRoleModule::SaveData(const NFGUID & self)
 
 		if (xPropManager)
 		{
-			NFCommonRedisModule::ConvertPropertyManagerToPB(xPropManager, xDataPack.mutable_property());
+			NFCommonRedisModule::ConvertPropertyManagerToPB(xPropManager, xDataPack.mutable_property(), false, true);
 		}
 
 		if (xRecordManager)
 		{
-			NFCommonRedisModule::ConvertRecordManagerToPB(xRecordManager, xDataPack.mutable_record());
+			NFCommonRedisModule::ConvertRecordManagerToPB(xRecordManager, xDataPack.mutable_record(), false, true);
 		}
 
 		m_pNetClientModule->SendSuitByPB(NF_SERVER_TYPES::NF_ST_DB, self.GetData(), NFMsg::REQ_SAVE_ROLE_DATA, xDataPack);
