@@ -244,6 +244,7 @@ int NFCreateRoleModule::OnObjectPlayerEvent(const NFGUID & self, const std::stri
 	{
 		//m_pDataTailModule->LogObjectData(self);
 
+		m_pKernelModule->SetPropertyInt(self, NFrame::Player::LastOfflineTime(), NFGetTimeS());
 		SaveData(self);
 	}
 	else if (CLASS_OBJECT_EVENT::COE_CREATE_LOADDATA == classEvent)
@@ -252,6 +253,8 @@ int NFCreateRoleModule::OnObjectPlayerEvent(const NFGUID & self, const std::stri
 		//m_pDataTailModule->LogObjectData(self);
 
 		AttachData(self);
+
+		m_pKernelModule->SetPropertyInt(self, NFrame::Player::OnlineTime(), NFGetTimeS());
 	}
 	else if (CLASS_OBJECT_EVENT::COE_CREATE_FINISH == classEvent)
 	{
