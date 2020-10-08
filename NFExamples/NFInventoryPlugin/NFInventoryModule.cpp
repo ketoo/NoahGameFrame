@@ -300,8 +300,8 @@ bool NFInventoryModule::CreateItemInNormalBag(const NFGUID & self, const std::st
 	}
 	else
 	{
-		int count = pRecord->GetInt32(row, NFrame::Player::Inventory::ItemCount) + count;
-		pRecord->SetInt(row, NFrame::Player::Inventory::ItemCount, count);
+		int totalCount = pRecord->GetInt32(row, NFrame::Player::Inventory::ItemCount) + count;
+		pRecord->SetInt(row, NFrame::Player::Inventory::ItemCount, totalCount);
 	}
 
 
