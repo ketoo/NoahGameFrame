@@ -276,7 +276,7 @@ NF_SHARE_PTR<NFIRecordManager> NFCommonRedisModule::GetRecordInfo(const std::str
 	std::vector<std::string> vKeyCacheList;
 	std::vector<std::string> vValueCacheList;
 
-	return GetRecordInfo(self, className, vKeyCacheList, vValueCacheList, cache, save), recordManager;
+	return GetRecordInfo(self, className, vKeyCacheList, vValueCacheList, cache, save, recordManager);
 }
 
 bool NFCommonRedisModule::GetRecordInfo(const std::string & self, const std::string & className, NFMsg::ObjectRecordList * pRecordDataList, const bool cache, const bool save)
