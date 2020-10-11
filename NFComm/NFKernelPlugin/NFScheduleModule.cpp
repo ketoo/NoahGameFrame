@@ -105,7 +105,7 @@ bool NFScheduleModule::Execute()
 				auto scheduleElement = objectMap->GetElement(it->scheduleName);
 				if (scheduleElement)
 				{
-					m_pLogModule->LogFatal("");
+					m_pLogModule->LogFatal(it->scheduleName);
 
 					scheduleElement->DoHeartBeatEvent(nowTime);
 
