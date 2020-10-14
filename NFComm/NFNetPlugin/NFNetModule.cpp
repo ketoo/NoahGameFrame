@@ -422,7 +422,7 @@ void NFNetModule::OnReceiveNetPack(const NFSOCK sockIndex, const int msgID, cons
     }
 
 #if NF_PLATFORM != NF_PLATFORM_WIN
-	NF_CRASH_END_TRY
+	NF_CRASH_END
 #endif
 
 	if (performance.CheckTimePoint(1))

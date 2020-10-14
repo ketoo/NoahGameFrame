@@ -27,13 +27,17 @@
 #include <atomic>
 
 #include "NFNet.h"
-#include "NFComm/NFCore/NFException.h"
 
 #if NF_PLATFORM == NF_PLATFORM_WIN
 #include <WS2tcpip.h>
 #include <winsock2.h>
-#elif NF_PLATFORM == NF_PLATFORM_APPLE
+#else
+#include "NFComm/NFCore/NFException.hpp"
+
+#if NF_PLATFORM == NF_PLATFORM_APPLE
 #include <arpa/inet.h>
+#endif
+
 #endif
 
 #include "event2/event.h"

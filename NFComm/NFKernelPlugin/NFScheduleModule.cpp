@@ -33,7 +33,6 @@ void NFScheduleElement::DoHeartBeatEvent(NFINT64 nowTime)
 #if NF_PLATFORM != NF_PLATFORM_WIN
 	NF_CRASH_TRY
 #endif
-
 	OBJECT_SCHEDULE_FUNCTOR_PTR cb;
 	bool bRet = this->mxObjectFunctor.First(cb);
 	while (bRet)
@@ -43,9 +42,8 @@ void NFScheduleElement::DoHeartBeatEvent(NFINT64 nowTime)
 
 		bRet = this->mxObjectFunctor.Next(cb);
 	}
-
 #if NF_PLATFORM != NF_PLATFORM_WIN
-	NF_CRASH_END_TRY
+	NF_CRASH_END
 #endif
 }
 
@@ -105,8 +103,6 @@ bool NFScheduleModule::Execute()
 				auto scheduleElement = objectMap->GetElement(it->scheduleName);
 				if (scheduleElement)
 				{
-					m_pLogModule->LogFatal(it->scheduleName);
-
 					scheduleElement->DoHeartBeatEvent(nowTime);
 
 					if (scheduleElement->mnRemainCount != 0)

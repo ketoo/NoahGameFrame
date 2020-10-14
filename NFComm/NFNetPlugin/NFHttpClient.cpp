@@ -489,7 +489,7 @@ void NFHttpClient::OnHttpReqDone(struct evhttp_request* req, void* ctx)
     }
 
 #if NF_PLATFORM != NF_PLATFORM_WIN
-			NF_CRASH_END_TRY
+			NF_CRASH_END
 #endif
     
 

@@ -27,8 +27,8 @@
 #define NF_HTTP_SERVER_H
 
 #include "NFIHttpServer.h"
-#include "NFComm/NFCore/NFException.h"
 #include "NFComm/NFCore/NFMapEx.hpp"
+#include "NFComm/NFCore/easylogging++.h"
 
 #if NF_PLATFORM == NF_PLATFORM_WIN
 #include <winsock2.h>
@@ -41,6 +41,7 @@
 
 #else
 
+#include "NFComm/NFCore/NFException.hpp"
 #include <fcntl.h>
 #include <sys/stat.h>
 #include <sys/socket.h>

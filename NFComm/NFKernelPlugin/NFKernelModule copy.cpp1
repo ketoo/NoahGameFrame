@@ -383,7 +383,7 @@ NF_SHARE_PTR<NFIObject> NFKernelModule::CreateObject(const NFGUID& self, const i
 	}
 	else
 	{
-		int64_t start = NFGetTimeMSEx();
+		int64_t start = std::chrono::duration_cast<std::chrono::microseconds>(std::chrono::system_clock::now().time_since_epoch()).count();
 		int64_t begin = start;
 		int64_t now = start;
 		int64_t time1 = 0;
@@ -444,7 +444,7 @@ NF_SHARE_PTR<NFIObject> NFKernelModule::CreateObject(const NFGUID& self, const i
 			}
 		}
 
-		now = NFGetTimeMSEx();
+		now = std::chrono::duration_cast<std::chrono::microseconds>(std::chrono::system_clock::now().time_since_epoch()).count();
 		time1 = now - start;
 		start = now;
 		//no data--main thread
@@ -463,7 +463,7 @@ NF_SHARE_PTR<NFIObject> NFKernelModule::CreateObject(const NFGUID& self, const i
 			DoEvent(ident, className, pObject->GetState(), arg);
 		}
 
-		now = NFGetTimeMSEx();
+		now = std::chrono::duration_cast<std::chrono::microseconds>(std::chrono::system_clock::now().time_since_epoch()).count();
 		time2 = now - start;
 		start = now;
 
@@ -489,7 +489,7 @@ NF_SHARE_PTR<NFIObject> NFKernelModule::CreateObject(const NFGUID& self, const i
 			}
 		}
 
-		now = NFGetTimeMSEx();
+		now = std::chrono::duration_cast<std::chrono::microseconds>(std::chrono::system_clock::now().time_since_epoch()).count();
 		time3 = now - start;
 		start = now;
 		//main thread
@@ -548,7 +548,7 @@ NF_SHARE_PTR<NFIObject> NFKernelModule::CreateObject(const NFGUID& self, const i
 
 		}
 
-		now = NFGetTimeMSEx();
+		now = std::chrono::duration_cast<std::chrono::microseconds>(std::chrono::system_clock::now().time_since_epoch()).count();
 		time4 = now - start;
 		start = now;
 		//back up thread
@@ -557,7 +557,7 @@ NF_SHARE_PTR<NFIObject> NFKernelModule::CreateObject(const NFGUID& self, const i
 			DoEvent(ident, className, pObject->GetState(), arg);
 		}
 
-		now = NFGetTimeMSEx();
+		now = std::chrono::duration_cast<std::chrono::microseconds>(std::chrono::system_clock::now().time_since_epoch()).count();
 		time5 = now - start;
 		start = now;
 
@@ -572,21 +572,21 @@ NF_SHARE_PTR<NFIObject> NFKernelModule::CreateObject(const NFGUID& self, const i
 			pObject->SetState(COE_CREATE_AFTER_ATTACHDATA);
 			DoEvent(ident, className, pObject->GetState(), arg);
 
-			now = NFGetTimeMSEx();
+			now = std::chrono::duration_cast<std::chrono::microseconds>(std::chrono::system_clock::now().time_since_epoch()).count();
 			time6_1 = now - start;
 			start = now;
 
 			pObject->SetState(COE_CREATE_BEFORE_EFFECT);
 			DoEvent(ident, className, pObject->GetState(), arg);
 
-			now = NFGetTimeMSEx();
+			now = std::chrono::duration_cast<std::chrono::microseconds>(std::chrono::system_clock::now().time_since_epoch()).count();
 			time6_2 = now - start;
 			start = now;
 
 			pObject->SetState(COE_CREATE_EFFECTDATA);
 			DoEvent(ident, className, pObject->GetState(), arg);
 
-			now = NFGetTimeMSEx();
+			now = std::chrono::duration_cast<std::chrono::microseconds>(std::chrono::system_clock::now().time_since_epoch()).count();
 			time6_3 = now - start;
 			start = now;
 
@@ -595,7 +595,7 @@ NF_SHARE_PTR<NFIObject> NFKernelModule::CreateObject(const NFGUID& self, const i
 			pObject->SetState(COE_CREATE_AFTER_EFFECT);
 			DoEvent(ident, className, pObject->GetState(), arg);
 
-			now = NFGetTimeMSEx();
+			now = std::chrono::duration_cast<std::chrono::microseconds>(std::chrono::system_clock::now().time_since_epoch()).count();
 			time6_4 = now - start;
 			start = now;
 
@@ -604,14 +604,14 @@ NF_SHARE_PTR<NFIObject> NFKernelModule::CreateObject(const NFGUID& self, const i
 			pObject->SetState(COE_CREATE_HASDATA);
 			DoEvent(ident, className, pObject->GetState(), arg);
 
-			now = NFGetTimeMSEx();
+			now = std::chrono::duration_cast<std::chrono::microseconds>(std::chrono::system_clock::now().time_since_epoch()).count();
 			time6_5 = now - start;
 			start = now;
 
 			pObject->SetState(COE_CREATE_FINISH);
 			DoEvent(ident, className, pObject->GetState(), arg);
 
-			now = NFGetTimeMSEx();
+			now = std::chrono::duration_cast<std::chrono::microseconds>(std::chrono::system_clock::now().time_since_epoch()).count();
 			time6_6 = now - start;
 			start = now;
 		}

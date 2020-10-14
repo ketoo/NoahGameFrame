@@ -39,6 +39,10 @@
 #include "NFComm/NFPluginModule/NFIKernelModule.h"
 #include "NFComm/NFPluginModule/NFISceneModule.h"
 
+#if NF_PLATFORM != NF_PLATFORM_WIN
+#include "NFComm/NFCore/NFException.hpp"
+#endif
+
 class TickElement
 {
 public:

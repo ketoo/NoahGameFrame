@@ -32,7 +32,6 @@ limitations under the License.
 #include <iomanip>
 #include <string>
 #include <chrono>
-#include "NFException.h"
 
 #define STR_CASE(_Enum, _Str) case _Enum::_Str : return # _Str
 #define MONTH_CASE(_Month) STR_CASE(::Month, _Month)

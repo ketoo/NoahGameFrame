@@ -74,9 +74,9 @@ public:
 class NFException
 {
 private:
-    NFException(){}
+	NFException(){}
 
-    static std::string FileName()
+	static std::string FileName()
 	{
 		time_t now = time(0);
 		tm *ltm = localtime(&now);
@@ -92,15 +92,12 @@ public:
 
 	static void StackTrace(int sig)
 	{
-		//LOG(FATAL) << "crash sig:" << sig;
-		printf("crash sig %d\n", sig);
-
-
 		std::ofstream outfile;
 		outfile.open(FileName(), std::ios::app);
 
 		outfile << std::endl;
 		outfile << "******************************************************************************" << std::endl;
+		outfile << "crash sig:" << sig << std::endl;
 
 		int size = 16;
 		void * array[16];
@@ -108,8 +105,6 @@ public:
 		char ** stacktrace = backtrace_symbols(array, stack_num);
 		for (int i = 0; i < stack_num; ++i)
 		{
-			printf("%s\n", stacktrace[i]);
-			//LOG(FATAL) << stacktrace[i];
 			outfile << stacktrace[i] << std::endl;
 		}
 
@@ -120,50 +115,83 @@ public:
 
 	static void CrashHandler(int sig)
 	{
-		printf("received signal %d !!!\n", sig);
+		//std::cout << "CrashHandler" << std::endl;
+
 		NFException::StackTrace(sig);
-		longjmp(NFException::ExceptStack().Jump_Buffer, 1);
+		if (sig > 0)
+		{
+			if (signal(SIGILL, NFException::CrashHandler) != NFException::CrashHandler) signal(SIGILL, NFException::CrashHandler);
+			if (signal(SIGABRT, NFException::CrashHandler) != NFException::CrashHandler) signal(SIGABRT, NFException::CrashHandler);
+			if (signal(SIGFPE, NFException::CrashHandler) != NFException::CrashHandler) signal(SIGFPE, NFException::CrashHandler);
+			if (signal(SIGSEGV, NFException::CrashHandler) != NFException::CrashHandler) signal(SIGSEGV, NFException::CrashHandler);
+
+			siglongjmp(NFException::ExceptStack().Jump_Buffer, 1);
+		}
 	}
 
 	static NFExceptFrame& ExceptStack();
 };
-
-#define NF_TRY_ROOT \
-setjmp(NFException::ExceptStack().Jump_Buffer);
-
-#define NF_CRASH_TRY \
+#define NF_CRASH_TRY_ROOT \
 if (signal(SIGILL, NFException::CrashHandler) != NFException::CrashHandler) signal(SIGILL, NFException::CrashHandler); \
 if (signal(SIGABRT, NFException::CrashHandler) != NFException::CrashHandler) signal(SIGABRT, NFException::CrashHandler); \
 if (signal(SIGFPE, NFException::CrashHandler) != NFException::CrashHandler) signal(SIGFPE, NFException::CrashHandler); \
 if (signal(SIGSEGV, NFException::CrashHandler) != NFException::CrashHandler) signal(SIGSEGV, NFException::CrashHandler); \
-try\
+
+#define NF_CRASH_TRY \
 {\
+if(sigsetjmp(NFException::ExceptStack().Jump_Buffer, 1) == 0)\
+{\
+try\
+{
 
 #define NF_CRASH_END \
 }\
 catch (...)\
 {\
-	NFException::CrashHandler(0);\
+    NFException::CrashHandler(0);\
+}\
+}\
 }
 
 /*
 void fun()
 {
+	std::cout << "fun" << std::endl;
+
 	std::string * p = nullptr;
 	std::cout << p->length();
 }
 
 int main()
 {
-	NF_TRY_ROOT
+	NF_CRASH_TRY_ROOT
 
-	std::cout << "after: setjmp(Jump_Buffer)" << std::endl;
 
 	NF_CRASH_TRY
-
-	fun();
-
+		fun();
 	NF_CRASH_END
+
+	std::cout << "fun1" << std::endl;
+	NF_CRASH_TRY
+		fun();
+	NF_CRASH_END
+	std::cout << "fun2" << std::endl;
+	NF_CRASH_TRY
+				fun();
+	NF_CRASH_END
+	std::cout << "fun3" << std::endl;
+	NF_CRASH_TRY
+				fun();
+	NF_CRASH_END
+	std::cout << "fun4" << std::endl;
+	NF_CRASH_TRY
+				fun();
+	NF_CRASH_END
+	std::cout << "fun5" << std::endl;
+	NF_CRASH_TRY
+				fun();
+	NF_CRASH_END
+	std::cout << "fun6" << std::endl;
 
 	return 0;
 }
