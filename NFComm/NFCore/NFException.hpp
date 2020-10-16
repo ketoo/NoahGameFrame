@@ -49,6 +49,8 @@
 #include <iomanip>
 #include <sstream>
 
+#include <NFComm/NFPluginModule/NFPlatform.h>
+
 #if NF_PLATFORM != NF_PLATFORM_WIN
 #include <unistd.h>
 #include <netdb.h>
