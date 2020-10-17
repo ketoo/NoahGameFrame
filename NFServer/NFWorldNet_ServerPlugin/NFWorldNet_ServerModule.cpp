@@ -899,7 +899,7 @@ bool NFWorldNet_ServerModule::SendMsgToGame(const NFGUID nPlayer, const int msgI
     return false;
 }
 
-bool NFWorldNet_ServerModule::SendMsgToGame(const NFGUID nPlayer, const int msgID, google::protobuf::Message& xData)
+bool NFWorldNet_ServerModule::SendMsgToGame(const NFGUID nPlayer, const int msgID, const google::protobuf::Message& xData)
 {
 	NF_SHARE_PTR<PlayerData> playerData = mPlayersData.GetElement(nPlayer);
 	if (playerData)
