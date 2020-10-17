@@ -548,6 +548,21 @@ void NFGameServerToWorldModule::OnWorldAddRowProcess(const NFSOCK sockIndex, con
 				colDataMap.insert(std::map<int, NFData>::value_type(xRecordObject.col(), data));
 			}
 
+			for (int j = 0; j < xAddRowStruct.record_vector2_list_size(); j++)
+			{
+				const NFMsg::RecordVector2 &xRecordObject = xAddRowStruct.record_vector2_list().Get(j);
+				NFData data;
+				data.SetVector2(NFINetModule::PBToNF(xRecordObject.data()));
+				colDataMap.insert(std::map<int, NFData>::value_type(xRecordObject.col(), data));
+			}
+
+			for (int j = 0; j < xAddRowStruct.record_vector3_list_size(); j++)
+			{
+				const NFMsg::RecordVector3 &xRecordObject = xAddRowStruct.record_vector3_list().Get(j);
+				NFData data;
+				data.SetVector3(NFINetModule::PBToNF(xRecordObject.data()));
+				colDataMap.insert(std::map<int, NFData>::value_type(xRecordObject.col(), data));
+			}
 			NFDataList xDataList;
 			for (int j = 0; j < colDataMap.size(); j++)
 			{

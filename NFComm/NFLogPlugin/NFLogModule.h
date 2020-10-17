@@ -83,7 +83,6 @@ public:
     virtual bool ChangeLogLevel(const std::string& strLevel);
     
     virtual void SetHooker(LOG_HOOKER_FUNCTOR_PTR hooker);
-    virtual void StackTrace();
 
 protected:
     virtual bool Log(const NF_LOG_LEVEL nll, const char* format, ...);

@@ -76,8 +76,6 @@ public:
     virtual bool LogError(const NFGUID ident, const std::ostringstream& stream, const char* func = "", int line = 0) = 0;
     virtual bool LogFatal(const NFGUID ident, const std::ostringstream& stream, const char* func = "", int line = 0) = 0;
 
-	virtual void StackTrace() = 0;
-
     template<typename BaseType>
     void SetHooker(BaseType* pBase, void (BaseType::*handler)(const NFILogModule::NF_LOG_LEVEL, const std::string&))
     {

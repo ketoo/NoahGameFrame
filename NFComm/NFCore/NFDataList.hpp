@@ -577,6 +577,18 @@ public:
         }
     }
 
+	NFDataList(const std::string& data, const std::string& strSplit) : NFMemoryCounter(GET_CLASS_NAME(NFDataList))
+	{
+		mnUseSize = 0;
+		mvList.reserve(STACK_SIZE);
+		for (int i = 0; i < STACK_SIZE; ++i)
+		{
+			mvList.push_back(NF_SHARE_PTR<NFData>(NF_NEW NFData()));
+		}
+
+		this->Split(data, strSplit);
+	}
+
 	virtual ~NFDataList()
 	{
 	}
@@ -829,7 +841,6 @@ public:
     
 	virtual bool Split(const std::string& str, const std::string& strSplit)
 	{
-
 		Clear();
 
 		std::string strData(str);

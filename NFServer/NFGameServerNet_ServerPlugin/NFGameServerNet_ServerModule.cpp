@@ -205,9 +205,7 @@ void NFGameServerNet_ServerModule::OnClientSwapSceneProcess(const NFSOCK sockInd
 	const NFMsg::ESceneType sceneType = (NFMsg::ESceneType)m_pElementModule->GetPropertyInt(std::to_string(xMsg.scene_id()), NFrame::Scene::Type());
 	const int nowSceneID = m_pKernelModule->GetPropertyInt(nPlayerID, NFrame::Player::SceneID());
 	const int nowGroupID = m_pKernelModule->GetPropertyInt(nPlayerID, NFrame::Player::GroupID());
-	const NFMsg::ESceneType nowSceneType = (NFMsg::ESceneType)m_pElementModule->GetPropertyInt(std::to_string(nowSceneID), NFrame::Scene::Type());
 
-		
 	if (sceneType == NFMsg::ESceneType::NORMAL_SCENE)
 	{
 		const NFVector3& pos = m_pSceneModule->GetRelivePosition(xMsg.scene_id(), 0);

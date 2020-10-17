@@ -244,6 +244,7 @@ int NFCreateRoleModule::OnObjectPlayerEvent(const NFGUID & self, const std::stri
 	{
 		//m_pDataTailModule->LogObjectData(self);
 
+		m_pKernelModule->SetPropertyInt(self, NFrame::Player::LastOfflineTime(), NFGetTimeS());
 		SaveData(self);
 	}
 	else if (CLASS_OBJECT_EVENT::COE_CREATE_LOADDATA == classEvent)
@@ -252,6 +253,8 @@ int NFCreateRoleModule::OnObjectPlayerEvent(const NFGUID & self, const std::stri
 		//m_pDataTailModule->LogObjectData(self);
 
 		AttachData(self);
+
+		m_pKernelModule->SetPropertyInt(self, NFrame::Player::OnlineTime(), NFGetTimeS());
 	}
 	else if (CLASS_OBJECT_EVENT::COE_CREATE_FINISH == classEvent)
 	{
@@ -311,12 +314,12 @@ void NFCreateRoleModule::SaveData(const NFGUID & self)
 
 		if (xPropManager)
 		{
-			NFCommonRedisModule::ConvertPropertyManagerToPB(xPropManager, xDataPack.mutable_property());
+			NFCommonRedisModule::ConvertPropertyManagerToPB(xPropManager, xDataPack.mutable_property(), false, true);
 		}
 
 		if (xRecordManager)
 		{
-			NFCommonRedisModule::ConvertRecordManagerToPB(xRecordManager, xDataPack.mutable_record());
+			NFCommonRedisModule::ConvertRecordManagerToPB(xRecordManager, xDataPack.mutable_record(), false, true);
 		}
 
 		m_pNetClientModule->SendSuitByPB(NF_SERVER_TYPES::NF_ST_DB, self.GetData(), NFMsg::REQ_SAVE_ROLE_DATA, xDataPack);
