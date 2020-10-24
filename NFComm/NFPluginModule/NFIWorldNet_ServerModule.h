@@ -99,7 +99,8 @@ public:
     virtual bool SendMsgToGame(const NFGUID nPlayer, const int msgID, const google::protobuf::Message& xData) = 0;
 	virtual bool SendMsgToGame(const NFDataList& argObjectVar, const int msgID, google::protobuf::Message& xData) = 0;
 
-	virtual NF_SHARE_PTR<ServerData> GetSuitProxyForEnter() = 0;
+	virtual NF_SHARE_PTR<ServerData> GetSuitProxyToEnter() = 0;
+	virtual NF_SHARE_PTR<ServerData> GetSuitGameToEnter(const int arg) = 0;
     virtual const std::vector<NFGUID>& GetOnlinePlayers() = 0;
 
     virtual NF_SHARE_PTR<PlayerData> GetPlayerData(const NFGUID& id) = 0;

@@ -92,10 +92,17 @@ bool NFSceneProcessModule::RequestEnterScene(const NFGUID & self, const int scen
 	NFMsg::ESceneType eSceneType = (NFMsg::ESceneType)m_pElementModule->GetPropertyInt32(std::to_string(sceneID), NFrame::Scene::Type());
 	if (eSceneType == NFMsg::ESceneType::SINGLE_CLONE_SCENE)
 	{
-		int nNewGroupID = m_pKernelModule->RequestGroupScene(sceneID);
-		if (nNewGroupID > 0)
+		if (groupID < 0)
 		{
-			return m_pSceneModule->RequestEnterScene(self, sceneID, nNewGroupID, type, pos, argList);
+			int nNewGroupID = m_pKernelModule->RequestGroupScene(sceneID);
+			if (nNewGroupID > 0)
+			{
+				return m_pSceneModule->RequestEnterScene(self, sceneID, nNewGroupID, type, pos, argList);
+			}
+		}
+		else if (groupID > 0)
+		{
+			return m_pSceneModule->RequestEnterScene(self, sceneID, groupID, type, pos, argList);
 		}
 	}
 	else if (eSceneType == NFMsg::ESceneType::NORMAL_SCENE)

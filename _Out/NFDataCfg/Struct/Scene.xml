@@ -8,16 +8,14 @@
 		<Property Id="MaxGroupPlayers" Cache="0" Desc="每组最大人数" Force="0" Private="0" Public="0" Ref="0" Save="0" Type="int" Upload="0" />
 		<Property Id="NavigationResPath" Cache="0" Desc="导航数据路径" Force="0" Private="0" Public="0" Ref="0" Save="0" Type="string" Upload="0" />
 		<Property Id="RelivePos" Cache="0" Desc="复活坐标列表" Force="0" Private="0" Public="0" Ref="0" Save="0" Type="string" Upload="0" />
+		<Property Id="RelivePosEx" Cache="0" Desc="复活坐标列表" Force="0" Private="0" Public="0" Ref="0" Save="0" Type="string" Upload="0" />
 		<Property Id="ResPath" Cache="0" Desc="导航数据路径" Force="0" Private="0" Public="0" Ref="0" Save="0" Type="string" Upload="0" />
+		<Property Id="ResourcePos" Cache="0" Desc="" Force="0" Private="0" Public="0" Ref="0" Save="0" Type="string" Upload="0" />
 		<Property Id="SceneName" Cache="0" Desc="" Force="0" Private="0" Public="0" Ref="0" Save="0" Type="string" Upload="0" />
 		<Property Id="SceneShowName" Cache="0" Desc="" Force="0" Private="0" Public="0" Ref="0" Save="0" Type="string" Upload="0" />
 		<Property Id="SoundList" Cache="0" Desc="场景背景音乐列表" Force="0" Private="0" Public="0" Ref="0" Save="0" Type="string" Upload="0" />
-		<Property Id="Type" Cache="0" Desc="	NORMAL_SCENE 			= 0;
-	SINGLE_CLONE_SCENE 		= 1;
-	MULTI_CLONE_SCENE 		= 2;
-	PVP_MODE_SCENE 			= 10;
-	MVM_MODE_SCENE, 		= 11;
-	SURVIVAL_MODE_SCENE, 	= 12;" Force="0" Private="0" Public="0" Ref="0" Save="0" Type="int" Upload="0" />
+		<Property Id="SubType" Cache="0" Desc="" Force="0" Private="0" Public="0" Ref="0" Save="0" Type="int" Upload="0" />
+		<Property Id="Type" Cache="0" Desc="" Force="0" Private="0" Public="0" Ref="0" Save="0" Type="int" Upload="0" />
 		<Property Id="Width" Cache="0" Desc="场景宽度" Force="0" Private="0" Public="0" Ref="0" Save="0" Type="int" Upload="0" />
 	</Propertys>
 	<Records>

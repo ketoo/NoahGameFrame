@@ -125,7 +125,8 @@ bool NFLogModule::Awake()
 
 bool NFLogModule::Init()
 {
-   
+	m_pKernelModule = this->pPluginManager->FindModule<NFIKernelModule>();
+
     return true;
 }
 
@@ -224,60 +225,23 @@ bool NFLogModule::Log(const NF_LOG_LEVEL nll, const char* format, ...)
     return true;
 }
 
-bool NFLogModule::LogElement(const NF_LOG_LEVEL nll, const NFGUID ident, const std::string& strElement, const std::string& strDesc, const char* func, int line)
-{
-    if (line > 0)
-    {
-        Log(nll, "[ELEMENT] Indent[%s] Element[%s] %s %s %d", ident.ToString().c_str(), strElement.c_str(), strDesc.c_str(), func, line);
-    }
-    else
-    {
-        Log(nll, "[ELEMENT] Indent[%s] Element[%s] %s", ident.ToString().c_str(), strElement.c_str(), strDesc.c_str());
-    }
-
-    return true;
-}
-
-bool NFLogModule::LogProperty(const NF_LOG_LEVEL nll, const NFGUID ident, const std::string& propertyName, const std::string& strDesc, const char* func, int line)
-{
-    if (line > 0)
-    {
-        Log(nll, "[PROPERTY] Indent[%s] Property[%s] %s %s %d", ident.ToString().c_str(), propertyName.c_str(), strDesc.c_str(), func, line);
-    }
-    else
-    {
-        Log(nll, "[PROPERTY] Indent[%s] Property[%s] %s", ident.ToString().c_str(), propertyName.c_str(), strDesc.c_str());
-    }
-
-    return true;
-
-}
-
-bool NFLogModule::LogRecord(const NF_LOG_LEVEL nll, const NFGUID ident, const std::string& recordName, const std::string& strDesc, const int row, const int col, const char* func, int line)
-{
-    if (line > 0)
-    {
-        Log(nll, "[RECORD] Indent[%s] Record[%s] Row[%d] Col[%d] %s %s %d", ident.ToString().c_str(), recordName.c_str(), row, col, strDesc.c_str(), func, line);
-    }
-    else
-    {
-        Log(nll, "[RECORD] Indent[%s] Record[%s] Row[%d] Col[%d] %s", ident.ToString().c_str(), recordName.c_str(), row, col, strDesc.c_str());
-    }
-
-    return true;
-
-}
-
 bool NFLogModule::LogRecord(const NF_LOG_LEVEL nll, const NFGUID ident, const std::string& recordName, const std::string& strDesc, const char* func, int line)
 {
-    if (line > 0)
-    {
-        Log(nll, "[RECORD] Indent[%s] Record[%s] %s %s %d", ident.ToString().c_str(), recordName.c_str(), strDesc.c_str(), func, line);
-    }
-    else
-    {
-        Log(nll, "[RECORD] Indent[%s] Record[%s] %s", ident.ToString().c_str(), recordName.c_str(), strDesc.c_str());
-    }
+	std::ostringstream os;
+	auto record = m_pKernelModule->FindRecord(ident, recordName);
+	if (record)
+	{
+
+		if (line > 0)
+		{
+			Log(nll, "[RECORD] Indent[%s] Record[%s] %s %s %d", ident.ToString().c_str(), recordName.c_str(), record->ToString().c_str(), func, line);
+		}
+		else
+		{
+			Log(nll, "[RECORD] Indent[%s] Record[%s] %s", ident.ToString().c_str(), recordName.c_str(), record->ToString().c_str());
+		}
+	}
+
 
     return true;
 }

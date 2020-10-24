@@ -220,7 +220,8 @@ void NFCreateRoleModule::OnDBLoadRoleDataProcess(const NFSOCK sockIndex, const i
 			return;
 		}
 
-		/////////////////////////////
+		/////other modules may move the player to other scene or group at ON_FINISHED event by require
+		/////if other modules moved the player, the group id > 0
 		const int group = m_pKernelModule->GetPropertyInt(pObject->Self(), NFrame::IObject::GroupID());
 		if (group <= 0)
 		{
