@@ -189,7 +189,7 @@ bool NFGameServerToWorldModule::AfterInit()
 		{
 			std::ostringstream strLog;
 			strLog << "Cannot find current server, AppID = " << nCurAppID;
-			m_pLogModule->LogError(NULL_OBJECT, strLog, __FUNCTION__, __LINE__);
+			m_pLogModule->LogError(NULL_OBJECT, strLog, __FILE__, __LINE__);
 			NFASSERT(-1, "Cannot find current server", __FILE__, __FUNCTION__);
 			exit(0);
 		}
@@ -481,6 +481,20 @@ void NFGameServerToWorldModule::OnWorldRecordEnterProcess(const NFSOCK sockIndex
 						data.SetObject(NFINetModule::PBToNF(xRecordObject.data()));
 						colDataMap.insert(std::map<int, NFData>::value_type(xRecordObject.col(), data));
 					}
+					for (int j = 0; j < xAddRowStruct.record_vector3_list_size(); j++)
+					{
+						const NFMsg::RecordVector3 &xRecordVector3 = xAddRowStruct.record_vector3_list().Get(j);
+						NFData data;
+						data.SetVector3(NFINetModule::PBToNF(xRecordVector3.data()));
+						colDataMap.insert(std::map<int, NFData>::value_type(xRecordVector3.col(), data));
+					}
+					for (int j = 0; j < xAddRowStruct.record_vector2_list_size(); j++)
+					{
+						const NFMsg::RecordVector2 &xRecordVector2 = xAddRowStruct.record_vector2_list().Get(j);
+						NFData data;
+						data.SetVector2(NFINetModule::PBToNF(xRecordVector2.data()));
+						colDataMap.insert(std::map<int, NFData>::value_type(xRecordVector2.col(), data));
+					}
 
 					NFDataList xDataList;
 					for (int j = 0; j < colDataMap.size(); j++)
@@ -497,7 +511,7 @@ void NFGameServerToWorldModule::OnWorldRecordEnterProcess(const NFSOCK sockIndex
 					}
 					else
 					{
-						m_pLogModule->LogInfo(nPlayerID, "Upload From Client add row record error " + record->GetName(), __FUNCTION__, __LINE__);
+						m_pLogModule->LogError(nPlayerID, "Upload From Client add row record error " + record->GetName(), __FUNCTION__, __LINE__);
 					}
 				}
 			}

@@ -36,28 +36,28 @@
 #include "NFComm/NFPluginModule/NFISceneModule.h"
 #include "NFComm/NFPluginModule/NFIClassModule.h"
 #include "NFComm/NFPluginModule/NFILogModule.h"
-#include "NFComm/NFPluginModule/NFISyncModule.h"
+#include "NFComm/NFPluginModule/NFISyncPosModule.h"
 
-class NFSyncModule
-    : public NFISyncModule
+class NFSyncPosModule
+    : public NFISyncPosModule
 {
 public:
-	NFSyncModule(NFIPluginManager* p)
+	NFSyncPosModule(NFIPluginManager* p)
 	{
 		pPluginManager = p;
+		m_bIsExecute = true;
 	}
-	virtual ~NFSyncModule() {};
+
+	virtual ~NFSyncPosModule() {};
 
     virtual bool Init();
     virtual bool Shut();
     virtual bool Execute();
     virtual bool AfterInit();
 
-    virtual bool RequireMove(const NFGUID self, const NFVector3& pos, const int type) override;
-    virtual bool RequireStop(const NFGUID self) override;
+    virtual bool RequireMove(const NFGUID scene_group, const PosSyncUnit& syncUnit) override;
 
 protected:
-	int SyncHeart(const std::string& strHeartName, const float time, const int count);
 
 	int OnNPCClassEvent(const NFGUID& self, const std::string& className, const CLASS_OBJECT_EVENT classEvent, const NFDataList& var);
 	int OnNPCGMPositionEvent(const NFGUID& self, const std::string& propertyName, const NFData& oldVar, const NFData& newVar);
@@ -66,9 +66,6 @@ protected:
 	int OnPlayerGMPositionEvent(const NFGUID& self, const std::string& propertyName, const NFData& oldVar, const NFData& newVar);
 
 private:
-    //<PlayerID, Position>
-    //speed?
-    std::map<NFGUID, NFVector3> mPlayerPosition;
 
 private:
 	NFIScheduleModule* m_pScheduleModule;

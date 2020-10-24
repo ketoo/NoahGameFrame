@@ -51,14 +51,24 @@ struct SceneSeedResource
 	int nWeight;
 };
 
+struct PosSyncUnit
+{
+	NFGUID 	mover;
+	NFVector3 pos;
+	NFVector3 direction;
+	NFVector3 orientation;
+	int32_t status;
+	int32_t type;
+};
+
 class NFSceneGroupInfo
 {
 public:
-	NFSceneGroupInfo(int sceneID, int groupID, NF_SHARE_PTR<NFIPropertyManager> xPropertyManager, NF_SHARE_PTR<NFIRecordManager> xRecordManager)
+	NFSceneGroupInfo(const int sceneID, const int groupID, NF_SHARE_PTR<NFIPropertyManager> xPropertyManager, NF_SHARE_PTR<NFIRecordManager> xRecordManager)
 	{
-		mgroupID = groupID;
-		mxPropertyManager = xPropertyManager;
-		mxRecordManager = xRecordManager;
+		this->groupID = groupID;
+		this->mxPropertyManager = xPropertyManager;
+		this->mxRecordManager = xRecordManager;
 	}
 
 	virtual ~NFSceneGroupInfo()
@@ -72,8 +82,10 @@ public:
 
 	NFMapEx<NFGUID, int> mxPlayerList;
 	NFMapEx<NFGUID, int> mxOtherList;
-	int mgroupID;
+	int groupID;
 
+	int sequence = 0;
+	std::map<NFGUID, PosSyncUnit> mPlayerPosition;
 	NF_SHARE_PTR<NFIPropertyManager> mxPropertyManager;
 	NF_SHARE_PTR<NFIRecordManager> mxRecordManager;
 };
@@ -84,18 +96,18 @@ class NFSceneInfo
 {
 public:
 
-	NFSceneInfo(int sceneID)
+	NFSceneInfo(const int sceneID)
 	{
-		mnGroupIndex = -1;
-		msceneID = sceneID;
-		mnWidth = 512;
+		this->groupIndex = -1;
+		this->sceneID = sceneID;
+		this->width = 512;
 	}
 
-	NFSceneInfo(int sceneID, int nWidth)
+	NFSceneInfo(const int sceneID, const int nWidth)
 	{
-		mnGroupIndex = -1;
-		msceneID = sceneID;
-		mnWidth = nWidth;
+		this->groupIndex = -1;
+		this->sceneID = sceneID;
+		this->width = nWidth;
 	}
 
 	virtual ~NFSceneInfo()
@@ -105,13 +117,13 @@ public:
 
 	int NewGroupID()
 	{
-		mnGroupIndex += 1;
-		return mnGroupIndex;
+		groupIndex += 1;
+		return groupIndex;
 	}
 
 	int GetWidth()
 	{
-		return mnWidth;
+		return width;
 	}
 
 	bool AddObjectToGroup(const int groupID, const NFGUID& ident, bool bPlayer)
@@ -241,9 +253,9 @@ public:
 		return NFVector3::Zero();
 	}
 
-	int mnGroupIndex;
-	int msceneID;
-	int mnWidth;
+	int groupIndex;
+	int sceneID;
+	int width;
 	//seedID, seedInfo
 	NFMapEx<std::string, SceneSeedResource > mtSceneResourceConfig;
 	NFMapEx<int, NFVector3 > mtSceneRelivePos;

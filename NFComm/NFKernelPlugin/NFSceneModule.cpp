@@ -300,7 +300,7 @@ const std::vector<int>& NFSceneModule::GetGroups(const int sceneID)
 		NF_SHARE_PTR<NFSceneGroupInfo> pGroupInfo =  pSceneInfo->First();
 		while (pGroupInfo)
 		{
-			vec.push_back(pGroupInfo->mgroupID);
+			vec.push_back(pGroupInfo->groupID);
 
 			pGroupInfo =  pSceneInfo->Next();
 		}
