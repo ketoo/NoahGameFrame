@@ -345,28 +345,44 @@ void NFGameManagerModule::OnClientAddRowProcess(const NFSOCK sockIndex, const in
 				const NFMsg::RecordInt &xRecordInt = xAddRowStruct.record_int_list().Get(j);
 				NFData data;
 				data.SetInt(xRecordInt.data());
-				colDataMap.insert(std::map<int, NFData>::value_type(xRecordInt.col(), data));
+				colDataMap[xRecordInt.col()] = data;
 			}
 			for (int j = 0; j < xAddRowStruct.record_float_list_size(); j++)
 			{
 				const NFMsg::RecordFloat &xRecordFloat = xAddRowStruct.record_float_list().Get(j);
 				NFData data;
 				data.SetFloat(xRecordFloat.data());
-				colDataMap.insert(std::map<int, NFData>::value_type(xRecordFloat.col(), data));
+				colDataMap[xRecordFloat.col()] = data;
 			}
 			for (int j = 0; j < xAddRowStruct.record_string_list_size(); j++)
 			{
 				const NFMsg::RecordString &xRecordString = xAddRowStruct.record_string_list().Get(j);
 				NFData data;
 				data.SetString(xRecordString.data());
-				colDataMap.insert(std::map<int, NFData>::value_type(xRecordString.col(), data));
+				colDataMap[xRecordString.col()] = data;
 			}
 			for (int j = 0; j < xAddRowStruct.record_object_list_size(); j++)
 			{
 				const NFMsg::RecordObject &xRecordObject = xAddRowStruct.record_object_list().Get(j);
 				NFData data;
 				data.SetObject(NFINetModule::PBToNF(xRecordObject.data()));
-				colDataMap.insert(std::map<int, NFData>::value_type(xRecordObject.col(), data));
+				colDataMap[xRecordObject.col()] = data;
+			}
+
+			for (int j = 0; j < xAddRowStruct.record_vector2_list_size(); j++)
+			{
+				const NFMsg::RecordVector2 &xRecordObject = xAddRowStruct.record_vector2_list().Get(j);
+				NFData data;
+				data.SetVector2(NFINetModule::PBToNF(xRecordObject.data()));
+				colDataMap[xRecordObject.col()] = data;
+			}
+
+			for (int j = 0; j < xAddRowStruct.record_vector3_list_size(); j++)
+			{
+				const NFMsg::RecordVector3 &xRecordObject = xAddRowStruct.record_vector3_list().Get(j);
+				NFData data;
+				data.SetVector3(NFINetModule::PBToNF(xRecordObject.data()));
+				colDataMap[xRecordObject.col()] = data;
 			}
 
 			NFDataList xDataList;

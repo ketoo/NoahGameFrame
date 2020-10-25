@@ -115,7 +115,7 @@ void NFWorldNet_ServerModule::OnServerInfoProcess(const NFSOCK sockIndex, const 
 		{
 			std::ostringstream strLog;
 			strLog << "Cannot find current server, AppID = " << nCurAppID;
-			m_pLogModule->LogError(NULL_OBJECT, strLog, __FUNCTION__, __LINE__);
+			m_pLogModule->LogError(NULL_OBJECT, strLog, __FILE__, __LINE__);
 
 			return;
 		}
@@ -205,7 +205,7 @@ void NFWorldNet_ServerModule::OnGameServerRegisteredProcess(const NFSOCK sockInd
 		{
 			std::ostringstream strLog;
 			strLog << "Cannot find current server, AppID = " << nCurAppID;
-			m_pLogModule->LogError(NULL_OBJECT, strLog, __FUNCTION__, __LINE__);
+			m_pLogModule->LogError(NULL_OBJECT, strLog, __FILE__, __LINE__);
 
 			return;
 		}
@@ -313,7 +313,7 @@ void NFWorldNet_ServerModule::OnProxyServerRegisteredProcess(const NFSOCK sockIn
 		{
 			std::ostringstream strLog;
 			strLog << "Cannot find current server, AppID = " << nCurAppID;
-			m_pLogModule->LogError(NULL_OBJECT, strLog, __FUNCTION__, __LINE__);
+			m_pLogModule->LogError(NULL_OBJECT, strLog, __FILE__, __LINE__);
 
 			return;
 		}
@@ -421,7 +421,7 @@ void NFWorldNet_ServerModule::OnDBServerRegisteredProcess(const NFSOCK sockIndex
 		{
 			std::ostringstream strLog;
 			strLog << "Cannot find current server, AppID = " << nCurAppID;
-			m_pLogModule->LogError(NULL_OBJECT, strLog, __FUNCTION__, __LINE__);
+			m_pLogModule->LogError(NULL_OBJECT, strLog, __FILE__, __LINE__);
 
 			return;
 		}
@@ -881,7 +881,35 @@ void NFWorldNet_ServerModule::OnTransmitServerReport(const NFSOCK nFd, const int
 
 }
 
-bool NFWorldNet_ServerModule::SendMsgToGame(const NFGUID nPlayer, const int msgID, const std::string& xData)
+bool NFWorldNet_ServerModule::SendMsgToGame(const int gameID, const int msgID, const std::string &xData)
+{
+	NF_SHARE_PTR<ServerData> pData = mGameMap.GetElement(gameID);
+	if (pData)
+	{
+		const NFSOCK nFD = pData->nFD;
+		m_pNetModule->SendMsg(msgID, xData, nFD, NFGUID());
+
+		return true;
+	}
+
+	return false;
+}
+
+bool NFWorldNet_ServerModule::SendMsgToGame(const int gameID, const int msgID, const google::protobuf::Message &xData)
+{
+	NF_SHARE_PTR<ServerData> pData = mGameMap.GetElement(gameID);
+	if (pData)
+	{
+		const NFSOCK nFD = pData->nFD;
+		m_pNetModule->SendMsgPB(msgID, xData, nFD, NFGUID());
+
+		return true;
+	}
+
+	return false;
+}
+
+bool NFWorldNet_ServerModule::SendMsgToGamePlayer(const NFGUID nPlayer, const int msgID, const std::string& xData)
 {
     NF_SHARE_PTR<PlayerData> playerData = mPlayersData.GetElement(nPlayer);
     if (playerData)
@@ -899,7 +927,7 @@ bool NFWorldNet_ServerModule::SendMsgToGame(const NFGUID nPlayer, const int msgI
     return false;
 }
 
-bool NFWorldNet_ServerModule::SendMsgToGame(const NFGUID nPlayer, const int msgID, const google::protobuf::Message& xData)
+bool NFWorldNet_ServerModule::SendMsgToGamePlayer(const NFGUID nPlayer, const int msgID, const google::protobuf::Message& xData)
 {
 	NF_SHARE_PTR<PlayerData> playerData = mPlayersData.GetElement(nPlayer);
 	if (playerData)
@@ -917,18 +945,18 @@ bool NFWorldNet_ServerModule::SendMsgToGame(const NFGUID nPlayer, const int msgI
 	return false;
 }
 
-bool NFWorldNet_ServerModule::SendMsgToGame(const NFDataList& argObjectVar, const int msgID, google::protobuf::Message& xData)
+bool NFWorldNet_ServerModule::SendMsgToGamePlayer(const NFDataList& argObjectVar, const int msgID, google::protobuf::Message& xData)
 {
     for (int i = 0; i < argObjectVar.GetCount(); i++)
     {
         const NFGUID& nPlayer = argObjectVar.Object(i);
-		SendMsgToGame(nPlayer, msgID, xData);
+		SendMsgToGamePlayer(nPlayer, msgID, xData);
     }
 
     return true;
 }
 
-NF_SHARE_PTR<ServerData> NFWorldNet_ServerModule::GetSuitProxyForEnter()
+NF_SHARE_PTR<ServerData> NFWorldNet_ServerModule::GetSuitProxyToEnter()
 {
 	int nConnectNum = 99999;
 	NF_SHARE_PTR<ServerData> pReturnServerData;
@@ -946,6 +974,11 @@ NF_SHARE_PTR<ServerData> NFWorldNet_ServerModule::GetSuitProxyForEnter()
 	}
 
 	return pReturnServerData;
+}
+
+NF_SHARE_PTR<ServerData> NFWorldNet_ServerModule::GetSuitGameToEnter(const int arg)
+{
+	return mGameMap.GetElementBySuit(arg);
 }
 
 int NFWorldNet_ServerModule::GetPlayerGameID(const NFGUID self)

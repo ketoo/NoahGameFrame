@@ -51,7 +51,7 @@ bool NFWorldToMasterModule::Shut()
 bool NFWorldToMasterModule::AfterInit()
 {
 	m_pNetClientModule->AddReceiveCallBack(NF_SERVER_TYPES::NF_ST_MASTER, NFMsg::REQ_CONNECT_WORLD, this, &NFWorldToMasterModule::OnSelectServerProcess);
-	m_pNetClientModule->AddReceiveCallBack(NF_SERVER_TYPES::NF_ST_MASTER, NFMsg::REQ_KICK_CLIENT_INWORLD, this, &NFWorldToMasterModule::OnKickClientProcess);
+	m_pNetClientModule->AddReceiveCallBack(NF_SERVER_TYPES::NF_ST_MASTER, NFMsg::REQ_KICKED_FROM_WORLD, this, &NFWorldToMasterModule::OnKickClientProcess);
 	m_pNetClientModule->AddReceiveCallBack(NF_SERVER_TYPES::NF_ST_MASTER, this, &NFWorldToMasterModule::InvalidMessage);
 
 	m_pNetClientModule->AddReceiveCallBack(NF_SERVER_TYPES::NF_ST_MASTER, NFMsg::STS_NET_INFO, this, &NFWorldToMasterModule::OnServerInfoProcess);
@@ -200,7 +200,7 @@ void NFWorldToMasterModule::OnSelectServerProcess(const NFSOCK sockIndex, const 
 		return;
 	}
 
-	NF_SHARE_PTR<ServerData> xServerData = m_pWorldNet_ServerModule->GetSuitProxyForEnter();
+	NF_SHARE_PTR<ServerData> xServerData = m_pWorldNet_ServerModule->GetSuitProxyToEnter();
 	if (xServerData)
 	{
 		const std::string& strSecurityKey = m_pSecurityModule->GetSecurityKey(xMsg.account());

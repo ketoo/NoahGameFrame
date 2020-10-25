@@ -37,6 +37,8 @@ ALTER TABLE `Player` ADD `MAXEXP` bigint(11) DEFAULT '0' COMMENT '升级需要�
 ALTER TABLE `Player` ADD `OnlineCount` bigint(11) DEFAULT '0' COMMENT '上线次数';
 ALTER TABLE `Player` ADD `OnlineTime` varchar(64) COLLATE utf8mb4_unicode_ci DEFAULT '' COMMENT '本次上线时间';
 ALTER TABLE `Player` ADD `Race` bigint(11) DEFAULT '0' COMMENT '种族';
+ALTER TABLE `Player` ADD `ReconnectReason` bigint(11) DEFAULT '0' COMMENT '这个是切换服务器重连标志, 每次登陆后清空，需要重连时设置';
+ALTER TABLE `Player` ADD `ScenarioProgress` bigint(11) DEFAULT '0' COMMENT '剧情进度';
 ALTER TABLE `Player` ADD `Sex` bigint(11) DEFAULT '0' COMMENT '性别';
 ALTER TABLE `Player` ADD `SkillNormal` text COLLATE utf8mb4_unicode_ci  DEFAULT '' COMMENT 'Skill1';
 ALTER TABLE `Player` ADD `SkillSpecial1` text COLLATE utf8mb4_unicode_ci  DEFAULT '' COMMENT 'Skill1';

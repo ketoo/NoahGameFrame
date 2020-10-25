@@ -245,7 +245,7 @@ package nframe;
 		public static final String State = "State";// int
 		// Property
 		public static final String AwardData = "AwardData";// string
-		public static final String AwardProperty = "AwardProperty";// int
+		public static final String AwardProperty = "AwardProperty";// string
 		public static final String AwardPropertyValue = "AwardPropertyValue";// int
 		public static final String BuyPrice = "BuyPrice";// int
 		public static final String ConsumeData = "ConsumeData";// string
@@ -411,7 +411,9 @@ package nframe;
 		public static final String OnlineCount = "OnlineCount";// int
 		public static final String OnlineTime = "OnlineTime";// object
 		public static final String Race = "Race";// int
+		public static final String ReconnectReason = "ReconnectReason";// int
 		public static final String SP = "SP";// int
+		public static final String ScenarioProgress = "ScenarioProgress";// int
 		public static final String Sex = "Sex";// int
 		public static final String SkillNormal = "SkillNormal";// string
 		public static final String SkillSpecial1 = "SkillSpecial1";// string
@@ -500,10 +502,13 @@ package nframe;
 		public static final String MaxGroupPlayers = "MaxGroupPlayers";// int
 		public static final String NavigationResPath = "NavigationResPath";// string
 		public static final String RelivePos = "RelivePos";// string
+		public static final String RelivePosEx = "RelivePosEx";// string
 		public static final String ResPath = "ResPath";// string
+		public static final String ResourcePos = "ResourcePos";// string
 		public static final String SceneName = "SceneName";// string
 		public static final String SceneShowName = "SceneShowName";// string
 		public static final String SoundList = "SoundList";// string
+		public static final String SubType = "SubType";// int
 		public static final String Type = "Type";// int
 		public static final String Width = "Width";// int
 		// Record

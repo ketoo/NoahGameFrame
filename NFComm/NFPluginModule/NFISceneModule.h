@@ -249,9 +249,9 @@ public:
 	virtual const int GetSeedPWeight(const int sceneID, const std::string& seedID) = 0;
 
 	virtual bool AddRelivePosition(const int sceneID, const int nIndex, const NFVector3& vPos) = 0;
-	virtual const NFVector3& GetRelivePosition(const int sceneID, const int nIndex, const bool bRoll = true) = 0;
+	virtual const NFVector3& GetRelivePosition(const int sceneID, const int nIndex = -1) = 0;
 	virtual bool AddTagPosition(const int sceneID, const int nIndex, const NFVector3& vPos) = 0;
-	virtual const NFVector3& GetTagPosition(const int sceneID, const int nIndex, const bool bRoll = true) = 0;
+	virtual const NFVector3& GetTagPosition(const int sceneID, const int nIndex) = 0;
 
 	virtual bool CreateSceneNPC(const int sceneID, const int groupID) = 0;
 	virtual bool CreateSceneNPC(const int sceneID, const int groupID, const NFDataList& argList) = 0;

@@ -69,8 +69,6 @@ protected:
 	
 	void OnServerInfoProcess(const NFSOCK sockIndex, const int msgID, const char* msg, const uint32_t len);
 
-	int OnObjectPropertyEvent( const NFGUID& self, const std::string& propertyName, const NFData& oldVar, const NFData& newVar);
-
 protected:
 	void OnWorldPropertyIntProcess(const NFSOCK sockIndex, const int msgID, const char* msg, const uint32_t len);
 	void OnWorldPropertyFloatProcess(const NFSOCK sockIndex, const int msgID, const char* msg, const uint32_t len);

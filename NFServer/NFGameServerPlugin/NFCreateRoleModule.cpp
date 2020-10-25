@@ -211,7 +211,7 @@ void NFCreateRoleModule::OnDBLoadRoleDataProcess(const NFSOCK sockIndex, const i
 		var.AddInt(1);
 		*/
 
-		NF_SHARE_PTR<NFIObject> pObject = m_pKernelModule->CreateObject(roleID, 1, 0, NFrame::Player::ThisName(), "", var);
+		NF_SHARE_PTR<NFIObject> pObject = m_pKernelModule->CreateObject(roleID, defaultSceneID, 0, NFrame::Player::ThisName(), "", var);
 		if (nullptr == pObject)
 		{
 			//mRoleBaseData
@@ -220,7 +220,8 @@ void NFCreateRoleModule::OnDBLoadRoleDataProcess(const NFSOCK sockIndex, const i
 			return;
 		}
 
-		/////////////////////////////
+		/////other modules may move the player to other scene or group at ON_FINISHED event by require
+		/////if other modules moved the player, the group id > 0
 		const int group = m_pKernelModule->GetPropertyInt(pObject->Self(), NFrame::IObject::GroupID());
 		if (group <= 0)
 		{
@@ -231,9 +232,19 @@ void NFCreateRoleModule::OnDBLoadRoleDataProcess(const NFSOCK sockIndex, const i
 			//COE_CREATE_FINISH
 
 			/////////////////////////////
-			const int nHomeSceneID = 1;
-			const NFVector3& pos = m_pSceneModule->GetRelivePosition(nHomeSceneID, 0);
-			m_pSceneProcessModule->RequestEnterScene(pObject->Self(), nHomeSceneID, -1, 0, pos, NFDataList::Empty());
+			const NFVector3& pos = m_pSceneModule->GetRelivePosition(defaultSceneID, 0);
+			const int sceneType = m_pElementModule->GetPropertyInt(std::to_string(defaultSceneID), NFrame::Scene::Type());
+			if (sceneType == NFMsg::SINGLE_CLONE_SCENE)
+			{
+				const int groupID = m_pKernelModule->RequestGroupScene(defaultSceneID);
+				m_pSceneModule->SetPropertyObject(defaultSceneID, groupID, NFrame::Group::MasterID(), pObject->Self());
+
+				m_pSceneProcessModule->RequestEnterScene(pObject->Self(), defaultSceneID, groupID, 0, pos, NFDataList::Empty());
+			}
+			else if (sceneType == NFMsg::NORMAL_SCENE)
+			{
+				m_pSceneProcessModule->RequestEnterScene(pObject->Self(), defaultSceneID, 1, 0, pos, NFDataList::Empty());
+			}
 		}
 	}
 }
@@ -294,6 +305,13 @@ void NFCreateRoleModule::AttachData(const NFGUID & self)
 
 			mxObjectDataCache.erase(it);
 
+			xObject->SetPropertyInt(NFrame::Player::GateID(), pPluginManager->GetAppID());
+
+			auto playerGateInfo = m_pGameServerNet_ServerModule->GetPlayerGateInfo(self);
+			if (playerGateInfo)
+			{
+				xObject->SetPropertyInt(NFrame::Player::GateID(), playerGateInfo->gateID);
+			}
 		}
 	}
 }
@@ -340,5 +358,10 @@ bool NFCreateRoleModule::Shut()
 bool NFCreateRoleModule::Execute()
 {
     return true;
+}
+
+void NFCreateRoleModule::SetDefaultSceneID(const int sceneID)
+{
+	defaultSceneID = sceneID;
 }
 

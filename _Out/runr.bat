@@ -23,7 +23,7 @@ start "NFDBServer" "NFServer.exe" "Server=DBServer" "ID=8" "Plugin=Plugin.xml"
 choice /t 2 /d y /n >nul
 
 echo Starting NFGameServer...
-start "NFGameServer" "NFServer.exe" "Server=GameServer" "ID=6" "Plugin=Plugin.xml"
+start "NFGameServer" "NFServer.exe" "Server=GameServer" "ID=16001" "Plugin=Plugin.xml"
 
 choice /t 2 /d y /n >nul
 

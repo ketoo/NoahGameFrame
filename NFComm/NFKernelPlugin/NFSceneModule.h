@@ -51,14 +51,24 @@ struct SceneSeedResource
 	int nWeight;
 };
 
+struct PosSyncUnit
+{
+	NFGUID 	mover;
+	NFVector3 pos;
+	NFVector3 direction;
+	NFVector3 orientation;
+	int32_t status;
+	int32_t type;
+};
+
 class NFSceneGroupInfo
 {
 public:
-	NFSceneGroupInfo(int sceneID, int groupID, NF_SHARE_PTR<NFIPropertyManager> xPropertyManager, NF_SHARE_PTR<NFIRecordManager> xRecordManager)
+	NFSceneGroupInfo(const int sceneID, const int groupID, NF_SHARE_PTR<NFIPropertyManager> xPropertyManager, NF_SHARE_PTR<NFIRecordManager> xRecordManager)
 	{
-		mgroupID = groupID;
-		mxPropertyManager = xPropertyManager;
-		mxRecordManager = xRecordManager;
+		this->groupID = groupID;
+		this->mxPropertyManager = xPropertyManager;
+		this->mxRecordManager = xRecordManager;
 	}
 
 	virtual ~NFSceneGroupInfo()
@@ -72,8 +82,10 @@ public:
 
 	NFMapEx<NFGUID, int> mxPlayerList;
 	NFMapEx<NFGUID, int> mxOtherList;
-	int mgroupID;
+	int groupID;
 
+	int sequence = 0;
+	std::map<NFGUID, PosSyncUnit> mPlayerPosition;
 	NF_SHARE_PTR<NFIPropertyManager> mxPropertyManager;
 	NF_SHARE_PTR<NFIRecordManager> mxRecordManager;
 };
@@ -84,18 +96,18 @@ class NFSceneInfo
 {
 public:
 
-	NFSceneInfo(int sceneID)
+	NFSceneInfo(const int sceneID)
 	{
-		mnGroupIndex = -1;
-		msceneID = sceneID;
-		mnWidth = 512;
+		this->groupIndex = -1;
+		this->sceneID = sceneID;
+		this->width = 512;
 	}
 
-	NFSceneInfo(int sceneID, int nWidth)
+	NFSceneInfo(const int sceneID, const int nWidth)
 	{
-		mnGroupIndex = -1;
-		msceneID = sceneID;
-		mnWidth = nWidth;
+		this->groupIndex = -1;
+		this->sceneID = sceneID;
+		this->width = nWidth;
 	}
 
 	virtual ~NFSceneInfo()
@@ -105,13 +117,13 @@ public:
 
 	int NewGroupID()
 	{
-		mnGroupIndex += 1;
-		return mnGroupIndex;
+		groupIndex += 1;
+		return groupIndex;
 	}
 
 	int GetWidth()
 	{
-		return mnWidth;
+		return width;
 	}
 
 	bool AddObjectToGroup(const int groupID, const NFGUID& ident, bool bPlayer)
@@ -204,17 +216,24 @@ public:
 		return mtSceneRelivePos.AddElement(nIndex, NF_SHARE_PTR<NFVector3>(NF_NEW NFVector3(vPos)));
 	}
 
-	const NFVector3& GetReliveInfo(const int nIndex, const bool bRoll)
+	const NFVector3& GetReliveInfo(const int nIndex)
 	{
-		NF_SHARE_PTR<NFVector3> vPos = mtSceneRelivePos.GetElement(nIndex);
-		if (vPos)
+		if (mtSceneRelivePos.Count() > 0)
 		{
-			return *vPos;
-		}
+			if (nIndex < 0)
+			{
+				int rd = rand() % mtSceneRelivePos.Count();
+				return *(mtSceneRelivePos.GetElement(rd));
+			}
 
-		if (bRoll && mtSceneRelivePos.Count() > 0)
-		{
-			return *(mtSceneRelivePos.GetElement(0));
+			if (nIndex < mtSceneRelivePos.Count())
+			{
+				NF_SHARE_PTR<NFVector3> vPos = mtSceneRelivePos.GetElement(nIndex);
+				if (vPos)
+				{
+					return *vPos;
+				}
+			}
 		}
 
 		return NFVector3::Zero();
@@ -225,25 +244,32 @@ public:
 		return mtTagPos.AddElement(nIndex, NF_SHARE_PTR<NFVector3>(NF_NEW NFVector3(vPos)));
 	}
 
-	const NFVector3& GetTagInfo(const int nIndex, const bool bRoll)
+	const NFVector3& GetTagInfo(const int nIndex)
 	{
-		NF_SHARE_PTR<NFVector3> vPos = mtTagPos.GetElement(nIndex);
-		if (vPos)
+		if (mtTagPos.Count() > 0)
 		{
-			return *vPos;
-		}
+			if (nIndex < 0)
+			{
+				int rd = rand() % mtTagPos.Count();
+				return *(mtTagPos.GetElement(rd));
+			}
 
-		if (bRoll)
-		{
-			return *(mtTagPos.GetElement(0));
+			if (nIndex < mtTagPos.Count())
+			{
+				NF_SHARE_PTR<NFVector3> vPos = mtTagPos.GetElement(nIndex);
+				if (vPos)
+				{
+					return *vPos;
+				}
+			}
 		}
 
 		return NFVector3::Zero();
 	}
 
-	int mnGroupIndex;
-	int msceneID;
-	int mnWidth;
+	int groupIndex;
+	int sceneID;
+	int width;
 	//seedID, seedInfo
 	NFMapEx<std::string, SceneSeedResource > mtSceneResourceConfig;
 	NFMapEx<int, NFVector3 > mtSceneRelivePos;
@@ -282,10 +308,10 @@ public:
 	virtual const int GetSeedPWeight(const int sceneID, const std::string& seedID);
 
 	virtual bool AddRelivePosition(const int sceneID, const int nIndex, const NFVector3& vPos);
-	virtual const NFVector3& GetRelivePosition(const int sceneID, const int nIndex, const bool bRoll = true);
+	virtual const NFVector3& GetRelivePosition(const int sceneID, const int nIndex = -1);
 
 	virtual bool AddTagPosition(const int sceneID, const int nIndex, const NFVector3& vPos);
-	virtual const NFVector3& GetTagPosition(const int sceneID, const int nIndex, const bool bRoll = true);
+	virtual const NFVector3& GetTagPosition(const int sceneID, const int nIndex);
 
 	virtual bool CreateSceneNPC(const int sceneID, const int groupID);
 	virtual bool CreateSceneNPC(const int sceneID, const int groupID, const NFDataList& argList);
