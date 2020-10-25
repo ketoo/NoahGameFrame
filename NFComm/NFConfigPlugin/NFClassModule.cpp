@@ -87,7 +87,7 @@ bool NFClassModule::Init()
 {
 	for (int i = 0; i < mThreadClasses.size(); ++i)
 	{
-		mThreadClasses[i].classModule->Init();
+		mThreadClasses[i].classModule->Awake();
 	}
     return true;
 }
@@ -96,7 +96,7 @@ bool NFClassModule::Shut()
 {
 	for (int i = 0; i < mThreadClasses.size(); ++i)
 	{
-		mThreadClasses[i].classModule->Shut();
+		mThreadClasses[i].classModule->Awake();
 	}
 
     ClearAll();

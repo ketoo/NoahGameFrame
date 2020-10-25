@@ -137,9 +137,11 @@ void NFDataTailModule::LogObjectData(const NFGUID& self)
             std::ostringstream stream;
 
             stream << " Start trail ";
+			stream << xProperty->GetKey();
+			stream << "==>";
             stream << xProperty->ToString();
 
-            m_pLogModule->LogProperty(NFILogModule::NF_LOG_LEVEL::NLL_DEBUG_NORMAL, self, xProperty->GetKey(), stream.str(),  __FUNCTION__, __LINE__);
+            m_pLogModule->LogDebug(self, stream.str(),  __FUNCTION__, __LINE__);
 
             xProperty = xPropertyManager->Next();
         }
@@ -301,19 +303,5 @@ int NFDataTailModule::TrailObjectData(const NFGUID& self)
 void NFDataTailModule::PrintStackTrace()
 {
     return;
-#if NF_PLATFORM != NF_PLATFORM_WIN
-
-	int size = 16;
-	void * array[16];
-	int stack_num = backtrace(array, size);
-	char ** stacktrace = backtrace_symbols(array, stack_num);
-	for (int i = 0; i < stack_num; ++i)
-	{
-		//printf("%s\n", stacktrace[i]);
-		m_pLogModule->LogProperty(NFILogModule::NF_LOG_LEVEL::NLL_DEBUG_NORMAL, NFGUID(), "", stacktrace[i], __FUNCTION__, __LINE__);
-	}
-
-	free(stacktrace);
-#endif
 
 }

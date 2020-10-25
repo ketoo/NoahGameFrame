@@ -252,7 +252,7 @@ namespace NFrame
 		static const std::string& State(){ static std::string x = "State"; return x; };// int
 		// Property
 		static const std::string& AwardData(){ static std::string x = "AwardData"; return x; };// string
-		static const std::string& AwardProperty(){ static std::string x = "AwardProperty"; return x; };// int
+		static const std::string& AwardProperty(){ static std::string x = "AwardProperty"; return x; };// string
 		static const std::string& AwardPropertyValue(){ static std::string x = "AwardPropertyValue"; return x; };// int
 		static const std::string& BuyPrice(){ static std::string x = "BuyPrice"; return x; };// int
 		static const std::string& ConsumeData(){ static std::string x = "ConsumeData"; return x; };// string
@@ -500,7 +500,9 @@ namespace NFrame
 		static const std::string& OnlineCount(){ static std::string x = "OnlineCount"; return x; };// int
 		static const std::string& OnlineTime(){ static std::string x = "OnlineTime"; return x; };// object
 		static const std::string& Race(){ static std::string x = "Race"; return x; };// int
+		static const std::string& ReconnectReason(){ static std::string x = "ReconnectReason"; return x; };// int
 		static const std::string& SP(){ static std::string x = "SP"; return x; };// int
+		static const std::string& ScenarioProgress(){ static std::string x = "ScenarioProgress"; return x; };// int
 		static const std::string& Sex(){ static std::string x = "Sex"; return x; };// int
 		static const std::string& SkillNormal(){ static std::string x = "SkillNormal"; return x; };// string
 		static const std::string& SkillSpecial1(){ static std::string x = "SkillSpecial1"; return x; };// string
@@ -675,10 +677,13 @@ namespace NFrame
 		static const std::string& MaxGroupPlayers(){ static std::string x = "MaxGroupPlayers"; return x; };// int
 		static const std::string& NavigationResPath(){ static std::string x = "NavigationResPath"; return x; };// string
 		static const std::string& RelivePos(){ static std::string x = "RelivePos"; return x; };// string
+		static const std::string& RelivePosEx(){ static std::string x = "RelivePosEx"; return x; };// string
 		static const std::string& ResPath(){ static std::string x = "ResPath"; return x; };// string
+		static const std::string& ResourcePos(){ static std::string x = "ResourcePos"; return x; };// string
 		static const std::string& SceneName(){ static std::string x = "SceneName"; return x; };// string
 		static const std::string& SceneShowName(){ static std::string x = "SceneShowName"; return x; };// string
 		static const std::string& SoundList(){ static std::string x = "SoundList"; return x; };// string
+		static const std::string& SubType(){ static std::string x = "SubType"; return x; };// int
 		static const std::string& Type(){ static std::string x = "Type"; return x; };// int
 		static const std::string& Width(){ static std::string x = "Width"; return x; };// int
 		// Record

@@ -24,44 +24,20 @@
 */
 
 #include "NFPluginServer.h"
-
+#include "NFComm/NFCore/NFException.hpp"
 
 NFPluginServer::NFPluginServer(const std::string& strArgv)
 {
     this->strArgvList = strArgv;
 
-#if NF_PLATFORM == NF_PLATFORM_WIN
-    SetUnhandledExceptionFilter((LPTOP_LEVEL_EXCEPTION_FILTER)ApplicationCrashHandler);
-#else
-    signal(SIGSEGV, NFCrashHandler);
-    //el::Helpers::setCrashHandler(CrashHandler);
+#if NF_PLATFORM != NF_PLATFORM_WIN
+	NF_CRASH_TRY_ROOT
 #endif
 }
 
 void NFPluginServer::Execute()
 {
-#if NF_PLATFORM == NF_PLATFORM_WIN
-    __try
-#else
-    try
-#endif
-    {
-        pPluginManager->Execute();
-    }
-#if NF_PLATFORM == NF_PLATFORM_WIN
-    __except (ApplicationCrashHandler(GetExceptionInformation()))
-    {
-    }
-#else
-    catch (const std::exception & e)
-    {
-        NFException::StackTrace(11);
-    }
-    catch (...)
-    {
-        NFException::StackTrace(11);
-    }
-#endif
+	pPluginManager->Execute();
 }
 
 void NFPluginServer::PrintfLogo()
@@ -133,7 +109,7 @@ void NFPluginServer::Final()
 void NFPluginServer::ProcessParameter()
 {
 #if NF_PLATFORM == NF_PLATFORM_WIN
-    SetConsoleCtrlHandler((PHANDLER_ROUTINE)ApplicationCtrlHandler, true);
+    
 #else
     //run it as a daemon process
     if (strArgvList.find("-d") != string::npos)

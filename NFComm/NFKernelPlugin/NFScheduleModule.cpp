@@ -30,13 +30,21 @@ void NFScheduleElement::DoHeartBeatEvent(NFINT64 nowTime)
 	mnRemainCount--;
 	mnTriggerTime = nowTime + (NFINT64)(mfIntervalTime * 1000);
 
+#if NF_PLATFORM != NF_PLATFORM_WIN
+	NF_CRASH_TRY
+#endif
 	OBJECT_SCHEDULE_FUNCTOR_PTR cb;
 	bool bRet = this->mxObjectFunctor.First(cb);
 	while (bRet)
 	{
+
 		cb.get()->operator()(self, mstrScheduleName, mfIntervalTime, mnRemainCount);
+
 		bRet = this->mxObjectFunctor.Next(cb);
 	}
+#if NF_PLATFORM != NF_PLATFORM_WIN
+	NF_CRASH_END
+#endif
 }
 
 NFScheduleModule::NFScheduleModule(NFIPluginManager* p)
@@ -80,7 +88,8 @@ bool NFScheduleModule::Execute()
 	NFPerformance performanceObject;
 	NFINT64 nowTime = NFGetTimeMS();
 
-	std::list<TickElement> elements;
+	static std::vector<TickElement> elements;
+	elements.clear();
 
 	for (auto it = mScheduleMap.begin(); it != mScheduleMap.end();)
 	{

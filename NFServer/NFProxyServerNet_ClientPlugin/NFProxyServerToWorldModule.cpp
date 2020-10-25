@@ -232,7 +232,7 @@ bool NFProxyServerToWorldModule::AfterInit()
 		{
 			std::ostringstream strLog;
 			strLog << "Cannot find current server, AppID = " << nCurAppID;
-			m_pLogModule->LogError(NULL_OBJECT, strLog, __FUNCTION__, __LINE__);
+			m_pLogModule->LogError(NULL_OBJECT, strLog, __FILE__, __LINE__);
 			NFASSERT(-1, "Cannot find current server", __FILE__, __FUNCTION__);
 			exit(0);
 		}

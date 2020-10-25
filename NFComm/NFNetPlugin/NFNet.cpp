@@ -27,13 +27,17 @@
 #include <atomic>
 
 #include "NFNet.h"
-#include "NFComm/NFCore/NFException.h"
 
 #if NF_PLATFORM == NF_PLATFORM_WIN
 #include <WS2tcpip.h>
 #include <winsock2.h>
-#elif NF_PLATFORM == NF_PLATFORM_APPLE
+#else
+#include "NFComm/NFCore/NFException.hpp"
+
+#if NF_PLATFORM == NF_PLATFORM_APPLE
 #include <arpa/inet.h>
+#endif
+
 #endif
 
 #include "event2/event.h"
@@ -382,20 +386,15 @@ bool NFNet::Dismantle(NetObject* pObject)
             if (mRecvCB)
             {
 
-#if NF_PLATFORM == NF_PLATFORM_WIN
-                __try
-#else
+#if NF_PLATFORM != NF_PLATFORM_WIN     
                 try
-#endif
                 {
+#endif
+
                     mRecvCB(pObject->GetRealFD(), xHead.GetMsgID(), pObject->GetBuff() + NFIMsgHead::NF_Head::NF_HEAD_LENGTH, nMsgBodyLength);
-                }
-#if NF_PLATFORM == NF_PLATFORM_WIN
-                    __except (ApplicationCrashHandler(GetExceptionInformation()))
-    {
-    }
-#else
-                catch (const std::exception & e)
+
+#if NF_PLATFORM != NF_PLATFORM_WIN     
+            }catch (const std::exception & e)
                 {
                     NFException::StackTrace(xHead.GetMsgID());
                 }

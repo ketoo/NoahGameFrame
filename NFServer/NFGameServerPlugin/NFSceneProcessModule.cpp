@@ -92,10 +92,17 @@ bool NFSceneProcessModule::RequestEnterScene(const NFGUID & self, const int scen
 	NFMsg::ESceneType eSceneType = (NFMsg::ESceneType)m_pElementModule->GetPropertyInt32(std::to_string(sceneID), NFrame::Scene::Type());
 	if (eSceneType == NFMsg::ESceneType::SINGLE_CLONE_SCENE)
 	{
-		int nNewGroupID = m_pKernelModule->RequestGroupScene(sceneID);
-		if (nNewGroupID > 0)
+		if (groupID < 0)
 		{
-			return m_pSceneModule->RequestEnterScene(self, sceneID, nNewGroupID, type, pos, argList);
+			int nNewGroupID = m_pKernelModule->RequestGroupScene(sceneID);
+			if (nNewGroupID > 0)
+			{
+				return m_pSceneModule->RequestEnterScene(self, sceneID, nNewGroupID, type, pos, argList);
+			}
+		}
+		else if (groupID > 0)
+		{
+			return m_pSceneModule->RequestEnterScene(self, sceneID, groupID, type, pos, argList);
 		}
 	}
 	else if (eSceneType == NFMsg::ESceneType::NORMAL_SCENE)
@@ -174,12 +181,14 @@ int NFSceneProcessModule::OnObjectClassEvent(const NFGUID& self, const std::stri
 
             if (eSceneType == NFMsg::ESceneType::SINGLE_CLONE_SCENE)
             {
+            	//wa need to wait for this player for a moment if the player disconnected from server.
                 m_pKernelModule->ReleaseGroupScene(sceneID, groupID);
 
                 m_pLogModule->LogInfo(self, "DestroyCloneSceneGroup " + std::to_string(groupID), __FUNCTION__ , __LINE__);
             }
 			else if (eSceneType == NFMsg::ESceneType::MULTI_CLONE_SCENE)
 			{
+				//wa need to wait for this player if the player disconnected from server.
 				NFDataList varObjectList;
 				if (m_pKernelModule->GetGroupObjectList(sceneID, groupID, varObjectList, true) && varObjectList.GetCount() <= 0)
 				{
@@ -207,19 +216,13 @@ int NFSceneProcessModule::BeforeEnterSceneGroupEvent(const NFGUID & self, const 
 	{
 		m_pSceneModule->CreateSceneNPC(sceneID, groupID, NFDataList::Empty());
 	}
-	else if (eSceneType == NFMsg::ESceneType::MULTI_CLONE_SCENE
-		|| eSceneType == NFMsg::ESceneType::PVP_MODE_SCENE
-	   	|| eSceneType == NFMsg::ESceneType::MVM_MODE_SCENE
-	   	|| eSceneType == NFMsg::ESceneType::SURVIVAL_MODE_SCENE)
+	else if (eSceneType == NFMsg::ESceneType::MULTI_CLONE_SCENE)
 	{
 		NFDataList varObjectList;
 		if (m_pKernelModule->GetGroupObjectList(sceneID, groupID, varObjectList, true) && varObjectList.GetCount() <= 0)
 		{
 			m_pSceneModule->CreateSceneNPC(sceneID, groupID, NFDataList::Empty());
 		}
-	}
-	else if (eSceneType == NFMsg::ESceneType::NORMAL_SCENE)
-	{
 	}
 
 	return 0;
@@ -284,8 +287,8 @@ bool NFSceneProcessModule::LoadSceneResource(const std::string& strSceneIDName)
 			}
 		}
 	}
-	/*
-	const std::string& strTagPosition = m_pElementModule->GetPropertyString(strSceneIDName, NFrame::Scene::TagPos());
+
+	const std::string& strTagPosition = m_pElementModule->GetPropertyString(strSceneIDName, NFrame::Scene::RelivePosEx());
 	NFDataList xTagPositionList;
 	xTagPositionList.Split(strTagPosition, ";");
 	for (int i = 0; i < xTagPositionList.GetCount(); ++i)
@@ -304,8 +307,7 @@ bool NFSceneProcessModule::LoadSceneResource(const std::string& strSceneIDName)
 			}
 		}
 	}
-	
-	*/
+
 
     return true;
 }

@@ -110,7 +110,7 @@
     <ClInclude Include="NFPropertyModule.h" />
     <ClInclude Include="NFSceneProcessModule.h" />
     <ClInclude Include="NFGameServerPlugin.h" />
-    <ClInclude Include="NFSyncModule.h" />
+    <ClInclude Include="NFSyncPosModule.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="dllmain.cpp">
@@ -128,7 +128,7 @@
     <ClCompile Include="NFPropertyModule.cpp" />
     <ClCompile Include="NFSceneProcessModule.cpp" />
     <ClCompile Include="NFGameServerPlugin.cpp" />
-    <ClCompile Include="NFSyncModule.cpp" />
+    <ClCompile Include="NFSyncPosModule.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

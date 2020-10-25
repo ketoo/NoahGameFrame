@@ -8,8 +8,7 @@
    File creator: lvsheng.huang
    
    NoahFrame is open-source software and you can redistribute it and/or modify
-   it under the terms of the License; besides, anyone who use this file/software must include this copyright announcement; besides, anyone who use this file/software
-   must include this copyright announcement.
+   it under the terms of the License; besides, anyone who use this file/software must include this copyright announcement.
 
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.
@@ -24,13 +23,20 @@
    limitations under the License.
 */
 
-#include "NFException.hpp"
 
-#if NF_PLATFORM != NF_PLATFORM_WIN
+#ifndef NFI_SYNC_POS_MODULE_H
+#define NFI_SYNC_POS_MODULE_H
 
-static NFExceptFrame pExceptStack;
-NFExceptFrame& NFException::ExceptStack()
+#include <iostream>
+#include "NFIModule.h"
+
+class PosSyncUnit;
+
+class NFISyncPosModule
+    : public NFIModule
 {
-	return pExceptStack;
-}
+public:
+    virtual bool RequireMove(const NFGUID scene_group, const PosSyncUnit& syncUnit) = 0;
+};
+
 #endif

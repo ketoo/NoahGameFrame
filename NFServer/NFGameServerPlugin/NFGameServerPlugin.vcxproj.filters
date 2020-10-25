@@ -13,7 +13,7 @@
     <Filter Include="NFRoleModule">
       <UniqueIdentifier>{1431a766-328f-4a0b-b09b-fb7314439da7}</UniqueIdentifier>
     </Filter>
-    <Filter Include="NFSyncModule">
+    <Filter Include="NFSyncPosModule">
       <UniqueIdentifier>{e50b7301-9914-4009-8fbb-686e76d838a6}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
@@ -35,8 +35,8 @@
     <ClInclude Include="NFCreateRoleModule.h">
       <Filter>NFRoleModule</Filter>
     </ClInclude>
-    <ClInclude Include="NFSyncModule.h">
-      <Filter>NFSyncModule</Filter>
+    <ClInclude Include="NFSyncPosModule.h">
+      <Filter>NFSyncPosModule</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -58,8 +58,8 @@
     <ClCompile Include="NFCreateRoleModule.cpp">
       <Filter>NFRoleModule</Filter>
     </ClCompile>
-    <ClCompile Include="NFSyncModule.cpp">
-      <Filter>NFSyncModule</Filter>
+    <ClCompile Include="NFSyncPosModule.cpp">
+      <Filter>NFSyncPosModule</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

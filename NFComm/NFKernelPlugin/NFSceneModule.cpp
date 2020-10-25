@@ -300,7 +300,7 @@ const std::vector<int>& NFSceneModule::GetGroups(const int sceneID)
 		NF_SHARE_PTR<NFSceneGroupInfo> pGroupInfo =  pSceneInfo->First();
 		while (pGroupInfo)
 		{
-			vec.push_back(pGroupInfo->mgroupID);
+			vec.push_back(pGroupInfo->groupID);
 
 			pGroupInfo =  pSceneInfo->Next();
 		}
@@ -361,12 +361,12 @@ bool NFSceneModule::AddRelivePosition(const int sceneID, const int nIndex, const
 	return false;
 }
 
-const NFVector3& NFSceneModule::GetRelivePosition(const int sceneID, const int nIndex, const bool bRoll)
+const NFVector3& NFSceneModule::GetRelivePosition(const int sceneID, const int nIndex)
 {
 	NF_SHARE_PTR<NFSceneInfo> pSceneInfo = GetElement(sceneID);
 	if (pSceneInfo)
 	{
-		return pSceneInfo->GetReliveInfo(nIndex, bRoll);
+		return pSceneInfo->GetReliveInfo(nIndex);
 	}
 
 	return NFVector3::Zero();
@@ -383,12 +383,12 @@ bool NFSceneModule::AddTagPosition(const int sceneID, const int nIndex, const NF
 	return false;
 }
 
-const NFVector3& NFSceneModule::GetTagPosition(const int sceneID, const int nIndex, const bool bRoll)
+const NFVector3& NFSceneModule::GetTagPosition(const int sceneID, const int nIndex)
 {
 	NF_SHARE_PTR<NFSceneInfo> pSceneInfo = GetElement(sceneID);
 	if (pSceneInfo)
 	{
-		return pSceneInfo->GetTagInfo(nIndex, bRoll);
+		return pSceneInfo->GetTagInfo(nIndex);
 	}
 
 	return NFVector3::Zero();

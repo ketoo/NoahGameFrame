@@ -36,7 +36,7 @@
 	assert((TIsDerived<classBaseName, NFIModule>::Result));	\
 	assert((TIsDerived<className, classBaseName>::Result));	\
 	NFIModule* pRegisterModule##className= new className(pManager); \
-    pRegisterModule##className->name = (#className); \
+    pRegisterModule##className->name = (#classBaseName); \
     pManager->AddModule( typeid(classBaseName).name(), pRegisterModule##className );\
     this->AddElement( typeid(classBaseName).name(), pRegisterModule##className );
 

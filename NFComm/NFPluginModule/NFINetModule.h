@@ -194,6 +194,25 @@ public:
 		return AddEventCallBack(functorPtr);
 	}
 
+	static bool ReceivePB(const int msgID, const char * msg, const uint32_t len, NFGUID & nPlayer)
+	{
+		NFMsg::MsgBase xMsg;
+		if (!xMsg.ParseFromArray(msg, len))
+		{
+			char szData[MAX_PATH] = { 0 };
+			NFSPRINTF(szData, MAX_PATH, "Parse Message Failed from Packet to MsgBase, MessageID: %d\n", msgID);
+#ifdef DEBUG
+			std::cout << "--------------------" << szData << __FUNCTION__ << " " << __LINE__ << std::endl;
+#endif // DEBUG
+
+			return false;
+		}
+
+		nPlayer = PBToNF(xMsg.player_id());
+
+		return true;
+	}
+
 	static bool ReceivePB(const int msgID, const char * msg, const uint32_t len, std::string & msgData, NFGUID & nPlayer)
 	{
 		NFMsg::MsgBase xMsg;

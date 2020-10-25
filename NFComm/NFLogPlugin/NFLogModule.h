@@ -27,6 +27,7 @@
 #define NF_LOG_MODULE_H
 
 #include "NFComm/NFPluginModule/NFILogModule.h"
+#include "NFComm/NFPluginModule/NFIKernelModule.h"
 #include "NFComm/NFCore/NFPerformance.hpp"
 
 class NFLogModule
@@ -49,10 +50,7 @@ public:
     ///////////////////////////////////////////////////////////////////////
     virtual void LogStack();
 
-    virtual bool LogElement(const NF_LOG_LEVEL nll, const NFGUID ident, const std::string& strElement, const std::string& strDesc, const char* func = "", int line = 0);
-    virtual bool LogProperty(const NF_LOG_LEVEL nll, const NFGUID ident, const std::string& propertyName, const std::string& strDesc, const char* func = "", int line = 0);
-    virtual bool LogRecord(const NF_LOG_LEVEL nll, const NFGUID ident, const std::string& recordName, const std::string& strDesc, const int row, const int col, const char* func = "", int line = 0);
-    virtual bool LogRecord(const NF_LOG_LEVEL nll, const NFGUID ident, const std::string& recordName, const std::string& strDesc, const char* func = "", int line = 0);
+    virtual bool LogRecord(const NF_LOG_LEVEL nll, const NFGUID ident, const std::string& recordName, const std::string& strDesc = "", const char* func = "", int line = 0);
     virtual bool LogObject(const NF_LOG_LEVEL nll, const NFGUID ident, const std::string& strDesc, const char* func = "", int line = 0);
 
     virtual bool LogDebug(const std::string& strLog, const char* func = "", int line = 0);
@@ -83,7 +81,6 @@ public:
     virtual bool ChangeLogLevel(const std::string& strLevel);
     
     virtual void SetHooker(LOG_HOOKER_FUNCTOR_PTR hooker);
-    virtual void StackTrace();
 
 protected:
     virtual bool Log(const NF_LOG_LEVEL nll, const char* format, ...);
@@ -94,6 +91,9 @@ protected:
 	std::string GetConfigPath(const std::string& fileName);
 
 private:
+
+	NFIKernelModule* m_pKernelModule;
+
     std::string mstrLocalStream;
     LOG_HOOKER_FUNCTOR_PTR mLogHooker;
     static unsigned int idx;

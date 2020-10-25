@@ -46,11 +46,8 @@ public:
     typedef std::function<void(const NFILogModule::NF_LOG_LEVEL, const std::string&)> LOG_HOOKER_FUNCTOR;
     typedef NF_SHARE_PTR<LOG_HOOKER_FUNCTOR> LOG_HOOKER_FUNCTOR_PTR;
 
-    virtual bool LogElement(const NF_LOG_LEVEL nll, const NFGUID ident, const std::string& strElement, const std::string& strDesc, const char* func = "", int line = 0) = 0;
-    virtual bool LogProperty(const NF_LOG_LEVEL nll, const NFGUID ident, const std::string& propertyName, const std::string& strDesc, const char* func = "", int line = 0) = 0;
     virtual bool LogObject(const NF_LOG_LEVEL nll, const NFGUID ident, const std::string& strDesc, const char* func = "", int line = 0) = 0;
-    virtual bool LogRecord(const NF_LOG_LEVEL nll, const NFGUID ident, const std::string& recordName, const std::string& strDesc, const int row, const int col, const char* func = "", int line = 0) = 0;
-    virtual bool LogRecord(const NF_LOG_LEVEL nll, const NFGUID ident, const std::string& recordName, const std::string& strDesc, const char* func = "", int line = 0) = 0;
+    virtual bool LogRecord(const NF_LOG_LEVEL nll, const NFGUID ident, const std::string& recordName, const std::string& strDesc = "", const char* func = "", int line = 0) = 0;
 
     virtual bool LogDebug(const std::string& strLog, const char* func = "", int line = 0) = 0;
     virtual bool LogInfo(const std::string& strLog, const  char* func = "", int line = 0) = 0;
@@ -75,8 +72,6 @@ public:
     virtual bool LogWarning(const NFGUID ident, const std::ostringstream& stream, const char* func = "", int line = 0) = 0;
     virtual bool LogError(const NFGUID ident, const std::ostringstream& stream, const char* func = "", int line = 0) = 0;
     virtual bool LogFatal(const NFGUID ident, const std::ostringstream& stream, const char* func = "", int line = 0) = 0;
-
-	virtual void StackTrace() = 0;
 
     template<typename BaseType>
     void SetHooker(BaseType* pBase, void (BaseType::*handler)(const NFILogModule::NF_LOG_LEVEL, const std::string&))

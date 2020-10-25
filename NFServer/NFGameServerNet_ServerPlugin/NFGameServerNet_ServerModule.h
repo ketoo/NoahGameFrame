@@ -41,6 +41,7 @@
 #include "NFComm/NFPluginModule/NFIGameServerNet_ServerModule.h"
 #include "NFComm/NFPluginModule/NFIScheduleModule.h"
 #include "NFComm/NFPluginModule/NFIThreadPoolModule.h"
+#include "NFComm/NFPluginModule/NFISyncPosModule.h"
 ////////////////////////////////////////////////////////////////////////////
 
 
@@ -88,8 +89,6 @@ protected:
     void OnClientLeaveGameProcess(const NFSOCK sockIndex, const int msgID, const char *msg, const uint32_t len);
 	void OnClientSwapSceneProcess(const NFSOCK sockIndex, const int msgID, const char *msg, const uint32_t len);
 	void OnClientReqMoveProcess(const NFSOCK sockIndex, const int msgID, const char *msg, const uint32_t len);
-	void OnClientReqMoveImmuneProcess(const NFSOCK sockIndex, const int msgID, const char *msg, const uint32_t len);
-	void OnClientReqPosSyncProcess(const NFSOCK sockIndex, const int msgID, const char *msg, const uint32_t len);
 	void OnClientEnterGameFinishProcess(const NFSOCK sockIndex, const int msgID, const char *msg, const uint32_t len);
 
 	void OnLagTestProcess(const NFSOCK sockIndex, const int msgID, const char* msg, const uint32_t len);
@@ -105,7 +104,8 @@ private:
     NFMapEx<int, GateServerInfo> mProxyMap;
 
     //////////////////////////////////////////////////////////////////////////
-    NFIKernelModule* m_pKernelModule;
+	NFISyncPosModule* m_pSyncPosModule;
+	NFIKernelModule* m_pKernelModule;
     NFIClassModule* m_pClassModule;
     NFILogModule* m_pLogModule;
     NFISceneProcessModule* m_pSceneProcessModule;

@@ -30,7 +30,7 @@
 #include "NFPropertyModule.h"
 #include "NFPropertyConfigModule.h"
 #include "NFNPCRefreshModule.h"
-#include "NFSyncModule.h"
+#include "NFSyncPosModule.h"
 #include "NFCreateRoleModule.h"
 
 
@@ -67,14 +67,14 @@ void NFGameServerPlugin::Install()
     REGISTER_MODULE(pPluginManager, NFIPropertyModule, NFPropertyModule)
     REGISTER_MODULE(pPluginManager, NFIPropertyConfigModule, NFPropertyConfigModule)
 	REGISTER_MODULE(pPluginManager, NFINPCRefreshModule, NFNPCRefreshModule)
-	REGISTER_MODULE(pPluginManager, NFISyncModule, NFSyncModule)
+	REGISTER_MODULE(pPluginManager, NFISyncPosModule, NFSyncPosModule)
 	REGISTER_MODULE(pPluginManager, NFICreateRoleModule, NFCreateRoleModule)
 }
 
 void NFGameServerPlugin::Uninstall()
 {
 	UNREGISTER_MODULE(pPluginManager, NFICreateRoleModule, NFCreateRoleModule)
-	UNREGISTER_MODULE(pPluginManager, NFISyncModule, NFSyncModule)
+	UNREGISTER_MODULE(pPluginManager, NFISyncPosModule, NFSyncModule)
 	UNREGISTER_MODULE(pPluginManager, NFINPCRefreshModule, NFNPCRefreshModule)
 	UNREGISTER_MODULE(pPluginManager, NFIPropertyConfigModule, NFPropertyConfigModule)
     UNREGISTER_MODULE(pPluginManager, NFIPropertyModule, NFPropertyModule)

@@ -37,11 +37,7 @@
 #include "NFComm/NFPluginModule/NFIDataTailModule.h"
 #include "NFComm/NFPluginModule/NFISceneModule.h"
 #include "NFComm/NFPluginModule/NFIEventModule.h"
-
-class NFICreateRoleModule : public NFIModule
-{
-
-};
+#include "NFComm/NFPluginModule/NFICreateRoleModule.h"
 
 class NFCreateRoleModule
     : public NFICreateRoleModule
@@ -58,6 +54,8 @@ public:
 	virtual bool ReadyExecute();
     virtual bool Execute();
     virtual bool AfterInit();
+
+	virtual void SetDefaultSceneID(const int sceneID);
 
 protected:
 	void OnRequireRoleListProcess(const NFSOCK sockIndex, const int msgID, const char* msg, const uint32_t len);
@@ -81,6 +79,7 @@ private:
 
 private:
 
+	int defaultSceneID = 1;
 	std::map<NFGUID, NFMsg::RoleDataPack> mxObjectDataCache;
 
 private:
