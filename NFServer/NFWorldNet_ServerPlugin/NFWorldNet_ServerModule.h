@@ -60,9 +60,12 @@ public:
 	virtual bool IsPrimaryWorldServer();
 	virtual int GetWorldAreaID();
 
-    virtual bool SendMsgToGame(const NFGUID nPlayer, const int msgID, const std::string& xData);
-    virtual bool SendMsgToGame(const NFGUID nPlayer, const int msgID, const google::protobuf::Message& xData);
-    virtual bool SendMsgToGame(const NFDataList& argObjectVar, const int msgID, google::protobuf::Message& xData);
+	virtual bool SendMsgToGame(const int gameID, const int msgID, const std::string& xData);
+	virtual bool SendMsgToGame(const int gameID, const int msgID, const google::protobuf::Message& xData);
+
+    virtual bool SendMsgToGamePlayer(const NFGUID nPlayer, const int msgID, const std::string& xData);
+    virtual bool SendMsgToGamePlayer(const NFGUID nPlayer, const int msgID, const google::protobuf::Message& xData);
+    virtual bool SendMsgToGamePlayer(const NFDataList& argObjectVar, const int msgID, google::protobuf::Message& xData);
 
     virtual NF_SHARE_PTR<ServerData> GetSuitProxyToEnter();
 	virtual NF_SHARE_PTR<ServerData> GetSuitGameToEnter(const int arg);

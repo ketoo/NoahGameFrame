@@ -216,17 +216,24 @@ public:
 		return mtSceneRelivePos.AddElement(nIndex, NF_SHARE_PTR<NFVector3>(NF_NEW NFVector3(vPos)));
 	}
 
-	const NFVector3& GetReliveInfo(const int nIndex, const bool bRoll)
+	const NFVector3& GetReliveInfo(const int nIndex)
 	{
-		NF_SHARE_PTR<NFVector3> vPos = mtSceneRelivePos.GetElement(nIndex);
-		if (vPos)
+		if (mtSceneRelivePos.Count() > 0)
 		{
-			return *vPos;
-		}
+			if (nIndex < 0)
+			{
+				int rd = rand() % mtSceneRelivePos.Count();
+				return *(mtSceneRelivePos.GetElement(rd));
+			}
 
-		if (bRoll && mtSceneRelivePos.Count() > 0)
-		{
-			return *(mtSceneRelivePos.GetElement(0));
+			if (nIndex < mtSceneRelivePos.Count())
+			{
+				NF_SHARE_PTR<NFVector3> vPos = mtSceneRelivePos.GetElement(nIndex);
+				if (vPos)
+				{
+					return *vPos;
+				}
+			}
 		}
 
 		return NFVector3::Zero();
@@ -237,17 +244,24 @@ public:
 		return mtTagPos.AddElement(nIndex, NF_SHARE_PTR<NFVector3>(NF_NEW NFVector3(vPos)));
 	}
 
-	const NFVector3& GetTagInfo(const int nIndex, const bool bRoll)
+	const NFVector3& GetTagInfo(const int nIndex)
 	{
-		NF_SHARE_PTR<NFVector3> vPos = mtTagPos.GetElement(nIndex);
-		if (vPos)
+		if (mtTagPos.Count() > 0)
 		{
-			return *vPos;
-		}
+			if (nIndex < 0)
+			{
+				int rd = rand() % mtTagPos.Count();
+				return *(mtTagPos.GetElement(rd));
+			}
 
-		if (bRoll)
-		{
-			return *(mtTagPos.GetElement(0));
+			if (nIndex < mtTagPos.Count())
+			{
+				NF_SHARE_PTR<NFVector3> vPos = mtTagPos.GetElement(nIndex);
+				if (vPos)
+				{
+					return *vPos;
+				}
+			}
 		}
 
 		return NFVector3::Zero();
@@ -294,10 +308,10 @@ public:
 	virtual const int GetSeedPWeight(const int sceneID, const std::string& seedID);
 
 	virtual bool AddRelivePosition(const int sceneID, const int nIndex, const NFVector3& vPos);
-	virtual const NFVector3& GetRelivePosition(const int sceneID, const int nIndex, const bool bRoll = true);
+	virtual const NFVector3& GetRelivePosition(const int sceneID, const int nIndex = -1);
 
 	virtual bool AddTagPosition(const int sceneID, const int nIndex, const NFVector3& vPos);
-	virtual const NFVector3& GetTagPosition(const int sceneID, const int nIndex, const bool bRoll = true);
+	virtual const NFVector3& GetTagPosition(const int sceneID, const int nIndex);
 
 	virtual bool CreateSceneNPC(const int sceneID, const int groupID);
 	virtual bool CreateSceneNPC(const int sceneID, const int groupID, const NFDataList& argList);

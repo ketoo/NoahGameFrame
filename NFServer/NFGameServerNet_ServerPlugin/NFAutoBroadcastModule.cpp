@@ -98,7 +98,7 @@ int NFAutoBroadcastModule::OnObjectClassEvent(const NFGUID& self, const std::str
 
 int NFAutoBroadcastModule::OnSceneEvent(const NFGUID & self, const int sceneID, const int groupID, const int type, const NFDataList& argList)
 {
-	NFVector3 vRelivePos = m_pSceneModule->GetRelivePosition(sceneID, 0);
+	NFVector3 vRelivePos = m_pSceneModule->GetRelivePosition(sceneID);
 
 	NFMsg::ReqAckSwapScene xAckSwapScene;
 	xAckSwapScene.set_scene_id(sceneID);

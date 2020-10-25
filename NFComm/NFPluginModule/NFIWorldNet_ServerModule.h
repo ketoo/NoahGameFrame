@@ -95,9 +95,12 @@ public:
 
 	virtual void OnServerInfoProcess(const NFSOCK sockIndex, const int msgID, const char* msg, const uint32_t len) = 0;
 
-    virtual bool SendMsgToGame(const NFGUID nPlayer, const int msgID, const std::string& xData) = 0;
-    virtual bool SendMsgToGame(const NFGUID nPlayer, const int msgID, const google::protobuf::Message& xData) = 0;
-	virtual bool SendMsgToGame(const NFDataList& argObjectVar, const int msgID, google::protobuf::Message& xData) = 0;
+	virtual bool SendMsgToGame(const int gameID, const int msgID, const std::string& xData) = 0;
+	virtual bool SendMsgToGame(const int gameID, const int msgID, const google::protobuf::Message& xData) = 0;
+
+    virtual bool SendMsgToGamePlayer(const NFGUID nPlayer, const int msgID, const std::string& xData) = 0;
+    virtual bool SendMsgToGamePlayer(const NFGUID nPlayer, const int msgID, const google::protobuf::Message& xData) = 0;
+	virtual bool SendMsgToGamePlayer(const NFDataList& argObjectVar, const int msgID, google::protobuf::Message& xData) = 0;
 
 	virtual NF_SHARE_PTR<ServerData> GetSuitProxyToEnter() = 0;
 	virtual NF_SHARE_PTR<ServerData> GetSuitGameToEnter(const int arg) = 0;

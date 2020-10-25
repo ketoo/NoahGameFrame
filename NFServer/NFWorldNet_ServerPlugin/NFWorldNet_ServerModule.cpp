@@ -881,7 +881,35 @@ void NFWorldNet_ServerModule::OnTransmitServerReport(const NFSOCK nFd, const int
 
 }
 
-bool NFWorldNet_ServerModule::SendMsgToGame(const NFGUID nPlayer, const int msgID, const std::string& xData)
+bool NFWorldNet_ServerModule::SendMsgToGame(const int gameID, const int msgID, const std::string &xData)
+{
+	NF_SHARE_PTR<ServerData> pData = mGameMap.GetElement(gameID);
+	if (pData)
+	{
+		const NFSOCK nFD = pData->nFD;
+		m_pNetModule->SendMsg(msgID, xData, nFD, NFGUID());
+
+		return true;
+	}
+
+	return false;
+}
+
+bool NFWorldNet_ServerModule::SendMsgToGame(const int gameID, const int msgID, const google::protobuf::Message &xData)
+{
+	NF_SHARE_PTR<ServerData> pData = mGameMap.GetElement(gameID);
+	if (pData)
+	{
+		const NFSOCK nFD = pData->nFD;
+		m_pNetModule->SendMsgPB(msgID, xData, nFD, NFGUID());
+
+		return true;
+	}
+
+	return false;
+}
+
+bool NFWorldNet_ServerModule::SendMsgToGamePlayer(const NFGUID nPlayer, const int msgID, const std::string& xData)
 {
     NF_SHARE_PTR<PlayerData> playerData = mPlayersData.GetElement(nPlayer);
     if (playerData)
@@ -899,7 +927,7 @@ bool NFWorldNet_ServerModule::SendMsgToGame(const NFGUID nPlayer, const int msgI
     return false;
 }
 
-bool NFWorldNet_ServerModule::SendMsgToGame(const NFGUID nPlayer, const int msgID, const google::protobuf::Message& xData)
+bool NFWorldNet_ServerModule::SendMsgToGamePlayer(const NFGUID nPlayer, const int msgID, const google::protobuf::Message& xData)
 {
 	NF_SHARE_PTR<PlayerData> playerData = mPlayersData.GetElement(nPlayer);
 	if (playerData)
@@ -917,12 +945,12 @@ bool NFWorldNet_ServerModule::SendMsgToGame(const NFGUID nPlayer, const int msgI
 	return false;
 }
 
-bool NFWorldNet_ServerModule::SendMsgToGame(const NFDataList& argObjectVar, const int msgID, google::protobuf::Message& xData)
+bool NFWorldNet_ServerModule::SendMsgToGamePlayer(const NFDataList& argObjectVar, const int msgID, google::protobuf::Message& xData)
 {
     for (int i = 0; i < argObjectVar.GetCount(); i++)
     {
         const NFGUID& nPlayer = argObjectVar.Object(i);
-		SendMsgToGame(nPlayer, msgID, xData);
+		SendMsgToGamePlayer(nPlayer, msgID, xData);
     }
 
     return true;

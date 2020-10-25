@@ -287,8 +287,8 @@ bool NFSceneProcessModule::LoadSceneResource(const std::string& strSceneIDName)
 			}
 		}
 	}
-	/*
-	const std::string& strTagPosition = m_pElementModule->GetPropertyString(strSceneIDName, NFrame::Scene::TagPos());
+
+	const std::string& strTagPosition = m_pElementModule->GetPropertyString(strSceneIDName, NFrame::Scene::RelivePosEx());
 	NFDataList xTagPositionList;
 	xTagPositionList.Split(strTagPosition, ";");
 	for (int i = 0; i < xTagPositionList.GetCount(); ++i)
@@ -307,8 +307,7 @@ bool NFSceneProcessModule::LoadSceneResource(const std::string& strSceneIDName)
 			}
 		}
 	}
-	
-	*/
+
 
     return true;
 }

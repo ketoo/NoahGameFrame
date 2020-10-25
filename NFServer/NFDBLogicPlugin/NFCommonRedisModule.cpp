@@ -776,72 +776,70 @@ bool NFCommonRedisModule::ConvertRecordToPB(const NF_SHARE_PTR<NFIRecord> pRecor
 
 bool NFCommonRedisModule::ConvertPBToRecord(const NFMsg::ObjectRecordBase& pRecordData, NF_SHARE_PTR<NFIRecord> pRecord)
 {
-	for (int iStuct = 0; iStuct < pRecordData.row_struct_size(); iStuct++)
+	pRecord->Clear();
+
+	for (int row = 0; row < pRecordData.row_struct_size(); row++)
 	{
-		const NFMsg::RecordAddRowStruct& xAddRowStruct = pRecordData.row_struct(iStuct);
+		const NFMsg::RecordAddRowStruct& xAddRowStruct = pRecordData.row_struct(row);
 
-		const int nCommonRow = xAddRowStruct.row();
-		pRecord->SetUsed(nCommonRow, true);
-		pRecord->PreAllocMemoryForRow(nCommonRow);
-
-		for (int i = 0; i < xAddRowStruct.record_int_list_size(); i++)
+		auto initData = pRecord->GetInitData();
+		if (initData)
 		{
-			const NFMsg::RecordInt& xPropertyData = xAddRowStruct.record_int_list(i);
-			const int row = xPropertyData.row();
-			const int col = xPropertyData.col();
-			const NFINT64 xPropertyValue = xPropertyData.data();
+			for (int i = 0; i < xAddRowStruct.record_int_list_size(); i++)
+			{
+				const NFMsg::RecordInt& xPropertyData = xAddRowStruct.record_int_list(i);
+				const int col = xPropertyData.col();
+				const NFINT64 xPropertyValue = xPropertyData.data();
 
-			pRecord->SetInt(row, col, xPropertyValue);
-		}
+				initData->SetInt(col, xPropertyValue);
+			}
 
-		for (int i = 0; i < xAddRowStruct.record_float_list_size(); i++)
-		{
-			const NFMsg::RecordFloat& xPropertyData = xAddRowStruct.record_float_list(i);
-			const int row = xPropertyData.row();
-			const int col = xPropertyData.col();
-			const float xPropertyValue = xPropertyData.data();
+			for (int i = 0; i < xAddRowStruct.record_float_list_size(); i++)
+			{
+				const NFMsg::RecordFloat& xPropertyData = xAddRowStruct.record_float_list(i);
+				const int col = xPropertyData.col();
+				const float xPropertyValue = xPropertyData.data();
 
-			pRecord->SetFloat(row, col, xPropertyValue);
-		}
+				initData->SetFloat(col, xPropertyValue);
+			}
 
-		for (int i = 0; i < xAddRowStruct.record_string_list_size(); i++)
-		{
-			const NFMsg::RecordString& xPropertyData = xAddRowStruct.record_string_list(i);
-			const int row = xPropertyData.row();
-			const int col = xPropertyData.col();
-			const std::string& xPropertyValue = xPropertyData.data();
+			for (int i = 0; i < xAddRowStruct.record_string_list_size(); i++)
+			{
+				const NFMsg::RecordString& xPropertyData = xAddRowStruct.record_string_list(i);
+				const int col = xPropertyData.col();
+				const std::string& xPropertyValue = xPropertyData.data();
 
-			pRecord->SetString(row, col, xPropertyValue.c_str());
-		}
+				initData->SetString(col, xPropertyValue);
+			}
 
-		for (int i = 0; i < xAddRowStruct.record_object_list_size(); i++)
-		{
-			const NFMsg::RecordObject& xPropertyData = xAddRowStruct.record_object_list(i);
-			const int row = xPropertyData.row();
-			const int col = xPropertyData.col();
-			const NFGUID xPropertyValue = NFINetModule::PBToNF(xPropertyData.data());
+			for (int i = 0; i < xAddRowStruct.record_object_list_size(); i++)
+			{
+				const NFMsg::RecordObject& xPropertyData = xAddRowStruct.record_object_list(i);
+				const int col = xPropertyData.col();
+				const NFGUID xPropertyValue = NFINetModule::PBToNF(xPropertyData.data());
 
-			pRecord->SetObject(row, col, xPropertyValue);
-		}
+				initData->SetObject(col, xPropertyValue);
+			}
 
-		for (int i = 0; i < xAddRowStruct.record_vector2_list_size(); i++)
-		{
-			const NFMsg::RecordVector2& xPropertyData = xAddRowStruct.record_vector2_list(i);
-			const int row = xPropertyData.row();
-			const int col = xPropertyData.col();
-			const NFVector2 v = NFINetModule::PBToNF(xPropertyData.data());
+			for (int i = 0; i < xAddRowStruct.record_vector2_list_size(); i++)
+			{
+				const NFMsg::RecordVector2& xPropertyData = xAddRowStruct.record_vector2_list(i);
+				const int col = xPropertyData.col();
+				const NFVector2 v = NFINetModule::PBToNF(xPropertyData.data());
 
-			pRecord->SetVector2(row, col, v);
-		}
+				initData->SetVector2(col, v);
+			}
 
-		for (int i = 0; i < xAddRowStruct.record_vector3_list_size(); i++)
-		{
-			const NFMsg::RecordVector3& xPropertyData = xAddRowStruct.record_vector3_list(i);
-			const int row = xPropertyData.row();
-			const int col = xPropertyData.col();
-			const NFVector3 v = NFINetModule::PBToNF(xPropertyData.data());
+			for (int i = 0; i < xAddRowStruct.record_vector3_list_size(); i++)
+			{
+				const NFMsg::RecordVector3& xPropertyData = xAddRowStruct.record_vector3_list(i);
+				const int col = xPropertyData.col();
+				const NFVector3 v = NFINetModule::PBToNF(xPropertyData.data());
 
-			pRecord->SetVector3(row, col, v);
+				initData->SetVector3(col, v);
+			}
+
+			pRecord->AddRow(row, *initData);
 		}
 	}
 
