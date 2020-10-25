@@ -38,7 +38,7 @@ sleep 1
 
 sleep 1
 
-./NFServer -d Plugin=Plugin.xml Server=GameServer ID=6
+./NFServer -d Plugin=Plugin.xml Server=GameServer ID=16001
 
 sleep 1
 

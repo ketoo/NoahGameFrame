@@ -291,19 +291,8 @@ int NFGameServerToWorldModule::OnObjectClassEvent(const NFGUID& self, const std:
 		else if (CLASS_OBJECT_EVENT::COE_CREATE_FINISH == classEvent)
 		{
 			SendOnline(self);
-
-			m_pKernelModule->AddPropertyCallBack(self, NFrame::Player::ClanID(), this, &NFGameServerToWorldModule::OnObjectPropertyEvent );
-			m_pKernelModule->AddPropertyCallBack(self, NFrame::Player::TeamID(), this, &NFGameServerToWorldModule::OnObjectPropertyEvent );
-			m_pKernelModule->AddPropertyCallBack(self, NFrame::Player::BattlePoint(), this, &NFGameServerToWorldModule::OnObjectPropertyEvent );
 		}
 	}
-
-	return 0;
-}
-
-int NFGameServerToWorldModule::OnObjectPropertyEvent( const NFGUID& self, const std::string& propertyName, const NFData& oldVar, const NFData& newVar)
-{
-	SendOnline(self);
 
 	return 0;
 }
@@ -519,22 +508,18 @@ void NFGameServerToWorldModule::OnWorldAddRowProcess(const NFSOCK sockIndex, con
 				}
 				else
 				{
-					m_pLogModule->LogInfo(nPlayerID,
-										  "Upload From Client add row record error " + xMsg.record_name(),
-										  __FUNCTION__, __LINE__);
+					m_pLogModule->LogInfo(nPlayerID, "Upload From Client add row record error " + xMsg.record_name(), __FUNCTION__, __LINE__);
 					return;
 				}
 			}
 
 			if (pRecord->AddRow(row, xDataList) >= 0)
 			{
-				m_pLogModule->LogInfo(nPlayerID, "Upload From Client add row record " + xMsg.record_name(),
-									  __FUNCTION__, __LINE__);
+				m_pLogModule->LogInfo(nPlayerID, "Upload From Client add row record " + xMsg.record_name(), __FUNCTION__, __LINE__);
 			}
 			else
 			{
-				m_pLogModule->LogInfo(nPlayerID, "Upload From Client add row record error " + xMsg.record_name(),
-									  __FUNCTION__, __LINE__);
+				m_pLogModule->LogInfo(nPlayerID, "Upload From Client add row record error " + xMsg.record_name(), __FUNCTION__, __LINE__);
 			}
 		}
 	}
